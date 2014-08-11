@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using DevComponents.DotNetBar.Metro;
 using DevExpress.XtraEditors.Controls;
 using SalesDepot.Services.QBuilderService;
 
 namespace SalesDepot.ToolForms.QBuilderForms
 {
-	public partial class FormDeletePages : Form
+	public partial class FormDeletePages : MetroForm
 	{
 		public IEnumerable<string> SelectedPageIds
 		{

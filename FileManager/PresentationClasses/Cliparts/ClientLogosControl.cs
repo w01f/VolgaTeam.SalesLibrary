@@ -31,25 +31,20 @@ namespace FileManager.PresentationClasses.Cliparts
 		{
 			treeListFiles.SuspendLayout();
 			treeListFiles.Nodes.Clear();
-			laTreeViewProgressLable.Text = "Loading Tree View...";
+			laTreeViewProgressLabel.Text = "Loading Tree View...";
 			pnTreeViewProgress.Visible = true;
 			TreeListNode rootNode = null;
-			var thread = new Thread(delegate()
-										{
-											FormMain.Instance.Invoke((MethodInvoker)delegate
-																						{
-																							if (Directory.Exists(SettingsManager.Instance.ClientLogosRootPath))
-																							{
-																								var rootFolder = new DirectoryInfo(SettingsManager.Instance.ClientLogosRootPath);
-																								rootNode = treeListFiles.AppendNode(new object[] { rootFolder.Name }, null, rootFolder);
-																								rootNode.StateImageIndex = 0;
-																								Application.DoEvents();
-																								FillNode(rootNode, true);
-																								rootNode.Expanded = true;
-																								Application.DoEvents();
-																							}
-																						});
-										});
+			var thread = new Thread(() => FormMain.Instance.Invoke((MethodInvoker)delegate
+			{
+				if (!Directory.Exists(SettingsManager.Instance.ClientLogosRootPath)) return;
+				var rootFolder = new DirectoryInfo(SettingsManager.Instance.ClientLogosRootPath);
+				rootNode = treeListFiles.AppendNode(new object[] { rootFolder.Name }, null, rootFolder);
+				rootNode.StateImageIndex = 0;
+				Application.DoEvents();
+				FillNode(rootNode, true);
+				rootNode.Expanded = true;
+				Application.DoEvents();
+			}));
 			thread.Start();
 
 			while (thread.IsAlive)
@@ -69,46 +64,38 @@ namespace FileManager.PresentationClasses.Cliparts
 
 		private void FillNode(TreeListNode node, bool showFiles)
 		{
-			TreeListNode childNode;
-			if (node.Tag != null)
+			if (node.Tag == null) return;
+			if (node.Tag.GetType() != typeof(DirectoryInfo)) return;
+			if (node.Nodes.Count != 0) return;
+			var folder = (DirectoryInfo)node.Tag;
+			try
 			{
-				if (node.Tag.GetType() == typeof(DirectoryInfo))
+				TreeListNode childNode;
+				foreach (DirectoryInfo subFolder in folder.GetDirectories())
 				{
-					if (node.Nodes.Count == 0)
+					if (SettingsManager.Instance.HiddenObjects.Any(x => subFolder.FullName.ToLower().Contains(x.ToLower()))) continue;
+					childNode = treeListFiles.AppendNode(new object[] { subFolder.Name }, node, subFolder);
+					childNode.StateImageIndex = 0;
+					FillNode(childNode, true);
+				}
+				if (!showFiles) return;
+				foreach (FileInfo file in folder.GetFiles())
+				{
+					switch (file.Extension.ToLower())
 					{
-						var folder = (DirectoryInfo)node.Tag;
-						try
-						{
-							foreach (DirectoryInfo subFolder in folder.GetDirectories())
-							{
-								if (SettingsManager.Instance.HiddenObjects.Where(x => subFolder.FullName.ToLower().Contains(x.ToLower())).Count() == 0)
-								{
-									childNode = treeListFiles.AppendNode(new object[] { subFolder.Name }, node, subFolder);
-									childNode.StateImageIndex = 0;
-									FillNode(childNode, true);
-								}
-							}
-							if (showFiles)
-								foreach (FileInfo file in folder.GetFiles())
-								{
-									switch (file.Extension.ToLower())
-									{
-										case ".png":
-										case ".jpg":
-										case ".bmp":
-										case ".gif":
-										case ".tif":
-										case ".wmf":
-											childNode = treeListFiles.AppendNode(new object[] { file.Name }, node, file);
-											childNode.StateImageIndex = 2;
-											break;
-									}
-								}
-						}
-						catch { }
+						case ".png":
+						case ".jpg":
+						case ".bmp":
+						case ".gif":
+						case ".tif":
+						case ".wmf":
+							childNode = treeListFiles.AppendNode(new object[] { file.Name }, node, file);
+							childNode.StateImageIndex = 2;
+							break;
 					}
 				}
 			}
+			catch { }
 		}
 		#endregion
 
@@ -201,7 +188,7 @@ namespace FileManager.PresentationClasses.Cliparts
 		private void treeListFiles_HiddenEditor(object sender, EventArgs e)
 		{
 			treeListFiles.OptionsBehavior.Editable = false;
-			TreeListNode node = treeListFiles.FocusedNode;
+			var node = treeListFiles.FocusedNode;
 			node.Selected = false;
 			treeListFiles.FocusedNode = null;
 			ClearViewArea();
@@ -280,25 +267,23 @@ namespace FileManager.PresentationClasses.Cliparts
 		private void treeListFiles_AfterFocusNode(object sender, NodeEventArgs e)
 		{
 			TreeListNode node = treeListFiles.FocusedNode;
-			if (_allowToPreviewImages && node != null)
+			if (!_allowToPreviewImages || node == null) return;
+			ClearViewArea();
+			imageListView.Visible = false;
+			pbPicture.Visible = false;
+			if (node.Tag != null)
 			{
-				ClearViewArea();
-				imageListView.Visible = false;
-				pbPicture.Visible = false;
-				if (node.Tag != null)
+				if (node.Tag.GetType() == typeof(DirectoryInfo))
 				{
-					if (node.Tag.GetType() == typeof(DirectoryInfo))
-					{
-						imageListView.Visible = true;
-						if (!(node.Nodes.Count > 0))
-							FillNode(node, true);
-						ShowThumbnails(node);
-					}
-					else if (node.Tag.GetType() == typeof(FileInfo))
-					{
-						pbPicture.Visible = true;
-						ShowPicture(node);
-					}
+					imageListView.Visible = true;
+					if (!(node.Nodes.Count > 0))
+						FillNode(node, true);
+					ShowThumbnails(node);
+				}
+				else if (node.Tag.GetType() == typeof(FileInfo))
+				{
+					pbPicture.Visible = true;
+					ShowPicture(node);
 				}
 			}
 		}
@@ -324,7 +309,7 @@ namespace FileManager.PresentationClasses.Cliparts
 
 		private void treeListFiles_DragOver(object sender, DragEventArgs e)
 		{
-			TreeListNode node = treeListFiles.CalcHitInfo(treeListFiles.PointToClient(new Point(e.X, e.Y))).Node;
+			var node = treeListFiles.CalcHitInfo(treeListFiles.PointToClient(new Point(e.X, e.Y))).Node;
 			if (node != null && e.Data.GetDataPresent(DataFormats.Serializable, true))
 			{
 				e.Effect = DragDropEffects.Copy;
@@ -348,29 +333,25 @@ namespace FileManager.PresentationClasses.Cliparts
 
 		private void treeListFiles_DragDrop(object sender, DragEventArgs e)
 		{
-			TreeListNode node = treeListFiles.CalcHitInfo(treeListFiles.PointToClient(new Point(e.X, e.Y))).Node;
-			if (node != null && e.Data.GetDataPresent(DataFormats.Serializable, true))
+			var node = treeListFiles.CalcHitInfo(treeListFiles.PointToClient(new Point(e.X, e.Y))).Node;
+			if (node == null || !e.Data.GetDataPresent(DataFormats.Serializable, true)) return;
+			if (node.Tag.GetType() != typeof(DirectoryInfo))
+				node = node.ParentNode;
+			var parentFolder = node.Tag as DirectoryInfo;
+			object data = e.Data.GetData(DataFormats.Serializable, true);
+			if (data == null || parentFolder == null) return;
+			foreach (object dragItem in (object[])data)
 			{
-				if (node.Tag.GetType() != typeof(DirectoryInfo))
-					node = node.ParentNode;
-				var parentFolder = node.Tag as DirectoryInfo;
-				object data = e.Data.GetData(DataFormats.Serializable, true);
-				if (data != null && parentFolder != null)
+				var sourceFile = dragItem as FileInfo;
+				if (sourceFile != null)
 				{
-					foreach (object dragItem in (object[])data)
-					{
-						var sourceFile = dragItem as FileInfo;
-						if (sourceFile != null)
-						{
-							sourceFile = sourceFile.CopyTo(Path.Combine(parentFolder.FullName, sourceFile.Name), true);
-							TreeListNode childNode = treeListFiles.AppendNode(new object[] { sourceFile.Name }, node, sourceFile);
-							childNode.StateImageIndex = 2;
-							node.Expanded = true;
-							_allowToPreviewImages = true;
-							childNode.Selected = true;
-							treeListFiles.FocusedNode = childNode;
-						}
-					}
+					sourceFile = sourceFile.CopyTo(Path.Combine(parentFolder.FullName, sourceFile.Name), true);
+					TreeListNode childNode = treeListFiles.AppendNode(new object[] { sourceFile.Name }, node, sourceFile);
+					childNode.StateImageIndex = 2;
+					node.Expanded = true;
+					_allowToPreviewImages = true;
+					childNode.Selected = true;
+					treeListFiles.FocusedNode = childNode;
 				}
 			}
 		}
@@ -379,63 +360,51 @@ namespace FileManager.PresentationClasses.Cliparts
 		#region Tool Buttons Clicks
 		private void barButtonItemAddNode_ItemClick(object sender, ItemClickEventArgs e)
 		{
-			if (treeListFiles.Selection.Count > 0)
-			{
-				TreeListNode node = treeListFiles.Selection[0];
-				if (treeListFiles.Selection[0].Tag.GetType() == typeof(DirectoryInfo))
-				{
-					var parentFolder = treeListFiles.Selection[0].Tag as DirectoryInfo;
-					int newFolderIndex = parentFolder.GetDirectories("New Folder*").Length + 1;
-					string newFoldeName = "New Folder" + (newFolderIndex > 1 ? newFolderIndex.ToString() : string.Empty);
-					if (!Directory.Exists(Path.Combine(parentFolder.FullName, newFoldeName)))
-						Directory.CreateDirectory(Path.Combine(parentFolder.FullName, newFoldeName));
-					var childFolder = new DirectoryInfo(Path.Combine(parentFolder.FullName, newFoldeName));
-					TreeListNode childNode = treeListFiles.AppendNode(new object[] { childFolder.Name }, node, childFolder);
-					childNode.StateImageIndex = 0;
-					node.Expanded = true;
-					childNode.Selected = true;
-					treeListFiles.FocusedNode = childNode;
-				}
-			}
+			if (treeListFiles.Selection.Count <= 0) return;
+			var node = treeListFiles.Selection[0];
+			if (treeListFiles.Selection[0].Tag.GetType() != typeof(DirectoryInfo)) return;
+			var parentFolder = treeListFiles.Selection[0].Tag as DirectoryInfo;
+			int newFolderIndex = parentFolder.GetDirectories("New Folder*").Length + 1;
+			string newFoldeName = "New Folder" + (newFolderIndex > 1 ? newFolderIndex.ToString() : string.Empty);
+			if (!Directory.Exists(Path.Combine(parentFolder.FullName, newFoldeName)))
+				Directory.CreateDirectory(Path.Combine(parentFolder.FullName, newFoldeName));
+			var childFolder = new DirectoryInfo(Path.Combine(parentFolder.FullName, newFoldeName));
+			TreeListNode childNode = treeListFiles.AppendNode(new object[] { childFolder.Name }, node, childFolder);
+			childNode.StateImageIndex = 0;
+			node.Expanded = true;
+			childNode.Selected = true;
+			treeListFiles.FocusedNode = childNode;
 		}
 
 		private void barButtonItemChangeNodeName_ItemClick(object sender, ItemClickEventArgs e)
 		{
-			TreeListNode node = treeListFiles.FocusedNode;
-			if (node != null)
-			{
-				var file = node.Tag as FileInfo;
-				if (file != null)
-					node.SetValue(treeListColumnName, Path.GetFileNameWithoutExtension(file.FullName));
-				treeListFiles.OptionsBehavior.Editable = true;
-				treeListFiles.ShowEditor();
-			}
+			var node = treeListFiles.FocusedNode;
+			if (node == null) return;
+			var file = node.Tag as FileInfo;
+			if (file != null)
+				node.SetValue(treeListColumnName, Path.GetFileNameWithoutExtension(file.FullName));
+			treeListFiles.OptionsBehavior.Editable = true;
+			treeListFiles.ShowEditor();
 		}
 
 		private void barButtonItemDeleteNode_ItemClick(object sender, ItemClickEventArgs e)
 		{
-			if (treeListFiles.Selection.Count > 0)
+			if (treeListFiles.Selection.Count <= 0) return;
+			var node = treeListFiles.Selection[0];
+			if (node.Tag is DirectoryInfo)
 			{
-				TreeListNode node = treeListFiles.Selection[0];
-				if (node.Tag.GetType() == typeof(DirectoryInfo))
-				{
-					if (AppManager.Instance.ShowWarningQuestion("Are you sure you want to delete selected folder?") == DialogResult.Yes)
-					{
-						ClearViewArea();
-						SyncManager.DeleteFolder(node.Tag as DirectoryInfo);
-						node.ParentNode.Nodes.Remove(node);
-					}
-				}
-				else if (node.Tag.GetType() == typeof(FileInfo))
-				{
-					if (AppManager.Instance.ShowWarningQuestion("Are you sure you want to delete selected file?") == DialogResult.Yes)
-					{
-						ClearViewArea();
-						(node.Tag as FileInfo).Attributes = FileAttributes.Normal;
-						(node.Tag as FileInfo).Delete();
-						node.ParentNode.Nodes.Remove(node);
-					}
-				}
+				if (AppManager.Instance.ShowWarningQuestion("Are you sure you want to delete selected folder?") != DialogResult.Yes) return;
+				ClearViewArea();
+				SyncManager.DeleteFolder(node.Tag as DirectoryInfo);
+				node.ParentNode.Nodes.Remove(node);
+			}
+			else if (node.Tag is FileInfo)
+			{
+				if (AppManager.Instance.ShowWarningQuestion("Are you sure you want to delete selected file?") != DialogResult.Yes) return;
+				ClearViewArea();
+				(node.Tag as FileInfo).Attributes = FileAttributes.Normal;
+				(node.Tag as FileInfo).Delete();
+				node.ParentNode.Nodes.Remove(node);
 			}
 		}
 		#endregion
@@ -443,20 +412,16 @@ namespace FileManager.PresentationClasses.Cliparts
 		#region Common Event Handlers
 		private void imageListView_ItemDoubleClick(object sender, Manina.Windows.Forms.ItemClickEventArgs e)
 		{
-			string filePath = Path.Combine(e.Item.FilePath, e.Item.FileName);
-			TreeListNode node = treeListFiles.FocusedNode;
-			if (node != null && node.Tag.GetType() == typeof(DirectoryInfo) && File.Exists(filePath))
+			var filePath = Path.Combine(e.Item.FilePath, e.Item.FileName);
+			var node = treeListFiles.FocusedNode;
+			if (node == null || node.Tag.GetType() != typeof(DirectoryInfo) || !File.Exists(filePath)) return;
+			foreach (TreeListNode childNode in node.Nodes)
 			{
-				foreach (TreeListNode childNode in node.Nodes)
-				{
-					var file = childNode.Tag as FileInfo;
-					if (file != null && file.FullName.Equals(filePath))
-					{
-						childNode.Selected = true;
-						treeListFiles.FocusedNode = childNode;
-						break;
-					}
-				}
+				var file = childNode.Tag as FileInfo;
+				if (file == null || !file.FullName.Equals(filePath)) continue;
+				childNode.Selected = true;
+				treeListFiles.FocusedNode = childNode;
+				break;
 			}
 		}
 

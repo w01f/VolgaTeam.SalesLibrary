@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using DevComponents.DotNetBar.Metro;
 using SalesDepot.Services.IPadAdminService;
 
 namespace FileManager.ToolForms.IPad
 {
-	public partial class FormEditPage : Form
+	public partial class FormEditPage : MetroForm
 	{
-		private List<UserModel> _users = new List<UserModel>();
-		private List<GroupModel> _groups = new List<GroupModel>();
+		private readonly List<UserModel> _users = new List<UserModel>();
+		private readonly List<GroupModel> _groups = new List<GroupModel>();
 		
 		public UserModel[] AssignedUsers
 		{

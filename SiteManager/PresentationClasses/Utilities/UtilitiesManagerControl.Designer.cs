@@ -29,27 +29,22 @@
         private void InitializeComponent()
         {
 			this.components = new System.ComponentModel.Container();
-			this.styleManager = new DevComponents.DotNetBar.StyleManager(this.components);
 			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
 			this.splitContainerControl = new DevExpress.XtraEditors.SplitContainerControl();
 			this.pnUtilityOperations = new System.Windows.Forms.Panel();
-			this.simpleButtonProcessDeadLinks = new DevExpress.XtraEditors.SimpleButton();
-			this.simpleButtonCleanExpiredEmails = new DevExpress.XtraEditors.SimpleButton();
 			this.simpleButtonUpdateShorcuts = new DevExpress.XtraEditors.SimpleButton();
-			this.simpleButtonUpdateContent = new DevExpress.XtraEditors.SimpleButton();
 			this.memoEditResult = new DevExpress.XtraEditors.MemoEdit();
-			this.simpleButtonUpdateQuizzes = new DevExpress.XtraEditors.SimpleButton();
+			this.buttonXUpdateContent = new DevComponents.DotNetBar.ButtonX();
+			this.buttonXUpdateShorcuts = new DevComponents.DotNetBar.ButtonX();
+			this.buttonXCleanExpiredEmails = new DevComponents.DotNetBar.ButtonX();
+			this.buttonXProcessDeadLinks = new DevComponents.DotNetBar.ButtonX();
+			this.buttonXUpdateQuizzes = new DevComponents.DotNetBar.ButtonX();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainerControl)).BeginInit();
 			this.splitContainerControl.SuspendLayout();
 			this.pnUtilityOperations.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.memoEditResult.Properties)).BeginInit();
 			this.SuspendLayout();
-			// 
-			// styleManager
-			// 
-			this.styleManager.ManagerStyle = DevComponents.DotNetBar.eStyle.Office2010Blue;
-			this.styleManager.MetroColorParameters = new DevComponents.DotNetBar.Metro.ColorTables.MetroColorGeneratorParameters(System.Drawing.Color.White, System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(163)))), ((int)(((byte)(26))))));
 			// 
 			// styleController
 			// 
@@ -83,42 +78,17 @@
 			// 
 			// pnUtilityOperations
 			// 
-			this.pnUtilityOperations.Controls.Add(this.simpleButtonUpdateQuizzes);
-			this.pnUtilityOperations.Controls.Add(this.simpleButtonProcessDeadLinks);
-			this.pnUtilityOperations.Controls.Add(this.simpleButtonCleanExpiredEmails);
+			this.pnUtilityOperations.Controls.Add(this.buttonXUpdateContent);
+			this.pnUtilityOperations.Controls.Add(this.buttonXUpdateShorcuts);
 			this.pnUtilityOperations.Controls.Add(this.simpleButtonUpdateShorcuts);
-			this.pnUtilityOperations.Controls.Add(this.simpleButtonUpdateContent);
+			this.pnUtilityOperations.Controls.Add(this.buttonXCleanExpiredEmails);
+			this.pnUtilityOperations.Controls.Add(this.buttonXProcessDeadLinks);
+			this.pnUtilityOperations.Controls.Add(this.buttonXUpdateQuizzes);
 			this.pnUtilityOperations.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.pnUtilityOperations.Location = new System.Drawing.Point(0, 0);
 			this.pnUtilityOperations.Name = "pnUtilityOperations";
 			this.pnUtilityOperations.Size = new System.Drawing.Size(230, 483);
 			this.pnUtilityOperations.TabIndex = 21;
-			// 
-			// simpleButtonProcessDeadLinks
-			// 
-			this.simpleButtonProcessDeadLinks.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.simpleButtonProcessDeadLinks.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.simpleButtonProcessDeadLinks.Appearance.Options.UseFont = true;
-			this.simpleButtonProcessDeadLinks.Location = new System.Drawing.Point(12, 238);
-			this.simpleButtonProcessDeadLinks.Name = "simpleButtonProcessDeadLinks";
-			this.simpleButtonProcessDeadLinks.Size = new System.Drawing.Size(205, 41);
-			this.simpleButtonProcessDeadLinks.TabIndex = 3;
-			this.simpleButtonProcessDeadLinks.Text = "Dead Links Notifiers";
-			this.simpleButtonProcessDeadLinks.Click += new System.EventHandler(this.simpleButtonProcessDeadLinks_Click);
-			// 
-			// simpleButtonCleanExpiredEmails
-			// 
-			this.simpleButtonCleanExpiredEmails.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.simpleButtonCleanExpiredEmails.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.simpleButtonCleanExpiredEmails.Appearance.Options.UseFont = true;
-			this.simpleButtonCleanExpiredEmails.Location = new System.Drawing.Point(12, 163);
-			this.simpleButtonCleanExpiredEmails.Name = "simpleButtonCleanExpiredEmails";
-			this.simpleButtonCleanExpiredEmails.Size = new System.Drawing.Size(205, 41);
-			this.simpleButtonCleanExpiredEmails.TabIndex = 2;
-			this.simpleButtonCleanExpiredEmails.Text = "Clean Expired Emails";
-			this.simpleButtonCleanExpiredEmails.Click += new System.EventHandler(this.simpleButtonCleanExpiredEmails_Click);
 			// 
 			// simpleButtonUpdateShorcuts
 			// 
@@ -133,19 +103,6 @@
 			this.simpleButtonUpdateShorcuts.Text = "Update Shortcuts";
 			this.simpleButtonUpdateShorcuts.Click += new System.EventHandler(this.simpleButtonUpdateShorcuts_Click);
 			// 
-			// simpleButtonUpdateContent
-			// 
-			this.simpleButtonUpdateContent.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.simpleButtonUpdateContent.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.simpleButtonUpdateContent.Appearance.Options.UseFont = true;
-			this.simpleButtonUpdateContent.Location = new System.Drawing.Point(12, 13);
-			this.simpleButtonUpdateContent.Name = "simpleButtonUpdateContent";
-			this.simpleButtonUpdateContent.Size = new System.Drawing.Size(205, 41);
-			this.simpleButtonUpdateContent.TabIndex = 0;
-			this.simpleButtonUpdateContent.Text = "Update Data";
-			this.simpleButtonUpdateContent.Click += new System.EventHandler(this.simpleButtonUpdateContent_Click);
-			// 
 			// memoEditResult
 			// 
 			this.memoEditResult.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -157,26 +114,84 @@
 			this.memoEditResult.Properties.Appearance.Options.UseBackColor = true;
 			this.memoEditResult.Properties.Appearance.Options.UseFont = true;
 			this.memoEditResult.Properties.ReadOnly = true;
-			this.memoEditResult.Size = new System.Drawing.Size(675, 483);
+			this.memoEditResult.Size = new System.Drawing.Size(669, 483);
 			this.memoEditResult.TabIndex = 0;
+			this.memoEditResult.UseOptimizedRendering = true;
 			// 
-			// simpleButtonUpdateQuizzes
+			// buttonXUpdateContent
 			// 
-			this.simpleButtonUpdateQuizzes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+			this.buttonXUpdateContent.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXUpdateContent.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.simpleButtonUpdateQuizzes.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.simpleButtonUpdateQuizzes.Appearance.Options.UseFont = true;
-			this.simpleButtonUpdateQuizzes.Location = new System.Drawing.Point(12, 313);
-			this.simpleButtonUpdateQuizzes.Name = "simpleButtonUpdateQuizzes";
-			this.simpleButtonUpdateQuizzes.Size = new System.Drawing.Size(205, 41);
-			this.simpleButtonUpdateQuizzes.TabIndex = 4;
-			this.simpleButtonUpdateQuizzes.Text = "Update Quizzes";
-			this.simpleButtonUpdateQuizzes.Click += new System.EventHandler(this.simpleButtonUpdateQuizzes_Click);
+			this.buttonXUpdateContent.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXUpdateContent.Location = new System.Drawing.Point(12, 13);
+			this.buttonXUpdateContent.Name = "buttonXUpdateContent";
+			this.buttonXUpdateContent.Size = new System.Drawing.Size(205, 41);
+			this.buttonXUpdateContent.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXUpdateContent.TabIndex = 5;
+			this.buttonXUpdateContent.Text = "Update Data";
+			this.buttonXUpdateContent.Click += new System.EventHandler(this.simpleButtonUpdateContent_Click);
+			// 
+			// buttonXUpdateShorcuts
+			// 
+			this.buttonXUpdateShorcuts.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXUpdateShorcuts.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonXUpdateShorcuts.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXUpdateShorcuts.Location = new System.Drawing.Point(12, 88);
+			this.buttonXUpdateShorcuts.Name = "buttonXUpdateShorcuts";
+			this.buttonXUpdateShorcuts.Size = new System.Drawing.Size(205, 41);
+			this.buttonXUpdateShorcuts.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXUpdateShorcuts.TabIndex = 6;
+			this.buttonXUpdateShorcuts.Text = "Update Shortcuts";
+			this.buttonXUpdateShorcuts.Click += new System.EventHandler(this.simpleButtonUpdateShorcuts_Click);
+			// 
+			// buttonXCleanExpiredEmails
+			// 
+			this.buttonXCleanExpiredEmails.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXCleanExpiredEmails.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonXCleanExpiredEmails.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXCleanExpiredEmails.Location = new System.Drawing.Point(12, 163);
+			this.buttonXCleanExpiredEmails.Name = "buttonXCleanExpiredEmails";
+			this.buttonXCleanExpiredEmails.Size = new System.Drawing.Size(205, 41);
+			this.buttonXCleanExpiredEmails.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXCleanExpiredEmails.TabIndex = 7;
+			this.buttonXCleanExpiredEmails.Text = "Clean Expired Emails";
+			this.buttonXCleanExpiredEmails.Click += new System.EventHandler(this.simpleButtonCleanExpiredEmails_Click);
+			// 
+			// buttonXProcessDeadLinks
+			// 
+			this.buttonXProcessDeadLinks.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXProcessDeadLinks.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonXProcessDeadLinks.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXProcessDeadLinks.Location = new System.Drawing.Point(12, 238);
+			this.buttonXProcessDeadLinks.Name = "buttonXProcessDeadLinks";
+			this.buttonXProcessDeadLinks.Size = new System.Drawing.Size(205, 41);
+			this.buttonXProcessDeadLinks.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXProcessDeadLinks.TabIndex = 8;
+			this.buttonXProcessDeadLinks.Text = "Dead Links Notifiers";
+			this.buttonXProcessDeadLinks.Click += new System.EventHandler(this.simpleButtonProcessDeadLinks_Click);
+			// 
+			// buttonXUpdateQuizzes
+			// 
+			this.buttonXUpdateQuizzes.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXUpdateQuizzes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonXUpdateQuizzes.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXUpdateQuizzes.Location = new System.Drawing.Point(12, 313);
+			this.buttonXUpdateQuizzes.Name = "buttonXUpdateQuizzes";
+			this.buttonXUpdateQuizzes.Size = new System.Drawing.Size(205, 41);
+			this.buttonXUpdateQuizzes.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXUpdateQuizzes.TabIndex = 9;
+			this.buttonXUpdateQuizzes.Text = "Update Quizzes";
+			this.buttonXUpdateQuizzes.Click += new System.EventHandler(this.simpleButtonUpdateQuizzes_Click);
 			// 
 			// UtilitiesManagerControl
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+			this.BackColor = System.Drawing.Color.White;
 			this.Controls.Add(this.splitContainerControl);
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -193,15 +208,15 @@
 
         #endregion
 
-		private DevComponents.DotNetBar.StyleManager styleManager;
 		private DevExpress.XtraEditors.StyleController styleController;
 		private DevExpress.XtraEditors.SplitContainerControl splitContainerControl;
 		private System.Windows.Forms.Panel pnUtilityOperations;
 		private DevExpress.XtraEditors.MemoEdit memoEditResult;
-		private DevExpress.XtraEditors.SimpleButton simpleButtonUpdateContent;
-		private DevExpress.XtraEditors.SimpleButton simpleButtonProcessDeadLinks;
-		private DevExpress.XtraEditors.SimpleButton simpleButtonCleanExpiredEmails;
 		private DevExpress.XtraEditors.SimpleButton simpleButtonUpdateShorcuts;
-		private DevExpress.XtraEditors.SimpleButton simpleButtonUpdateQuizzes;
+		private DevComponents.DotNetBar.ButtonX buttonXUpdateContent;
+		private DevComponents.DotNetBar.ButtonX buttonXUpdateShorcuts;
+		private DevComponents.DotNetBar.ButtonX buttonXCleanExpiredEmails;
+		private DevComponents.DotNetBar.ButtonX buttonXProcessDeadLinks;
+		private DevComponents.DotNetBar.ButtonX buttonXUpdateQuizzes;
     }
 }

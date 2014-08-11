@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Web.Security;
 using System.Windows.Forms;
+using DevComponents.DotNetBar.Metro;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
@@ -11,15 +12,15 @@ using SalesDepot.Services.IPadAdminService;
 
 namespace SalesDepot.SiteManager.ToolForms
 {
-	public partial class FormEditUser : Form
+	public partial class FormEditUser : MetroForm
 	{
-		private bool _newUser;
-		private bool _complexPassword = true;
-		private List<string> _existedUsers = new List<string>();
+		private readonly bool _newUser;
+		private readonly bool _complexPassword = true;
+		private readonly List<string> _existedUsers = new List<string>();
 
-		private List<GroupModel> _groups = new List<GroupModel>();
-		private List<Library> _libraries = new List<Library>();
-		private List<LibraryPage> _pages = new List<LibraryPage>();
+		private readonly List<GroupModel> _groups = new List<GroupModel>();
+		private readonly List<Library> _libraries = new List<Library>();
+		private readonly List<LibraryPage> _pages = new List<LibraryPage>();
 
 		public GroupModel[] AssignedGroups
 		{

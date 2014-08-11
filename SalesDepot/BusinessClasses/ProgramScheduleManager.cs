@@ -35,6 +35,11 @@ namespace SalesDepot.BusinessClasses
 			get { return Path.Combine(Parent.Folder.FullName, Constants.ProgramManagerRootFolderName); }
 		}
 
+		public bool HasStations
+		{
+			get { return Directory.Exists(StationsFolderPath) && Directory.GetDirectories(StationsFolderPath).Any(); }
+		}
+
 		public bool Enabled
 		{
 			get { return _stations.Count > 0; }
@@ -59,17 +64,15 @@ namespace SalesDepot.BusinessClasses
 
 		public void LoadData()
 		{
-			foreach (Station station in _stations)
+			foreach (var station in _stations)
 				station.ReleaseResources();
 			_stations.Clear();
-			if (Directory.Exists(StationsFolderPath))
+			if (!HasStations) return;
+			var rootFolder = new DirectoryInfo(StationsFolderPath);
+			foreach (var stationFolder in rootFolder.GetDirectories())
 			{
-				var rootFolder = new DirectoryInfo(StationsFolderPath);
-				foreach (DirectoryInfo stationFolder in rootFolder.GetDirectories())
-				{
-					var station = new Station(stationFolder);
-					_stations.Add(station);
-				}
+				var station = new Station(stationFolder);
+				_stations.Add(station);
 			}
 		}
 

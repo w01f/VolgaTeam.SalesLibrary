@@ -4,34 +4,28 @@ using System.ComponentModel;
 using System.Linq;
 using System.Web.Security;
 using System.Windows.Forms;
+using DevComponents.DotNetBar.Metro;
 using DevExpress.XtraEditors;
+using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraTab;
+using FileManager.ToolClasses;
 using SalesDepot.Services.IPadAdminService;
 
 namespace FileManager.ToolForms.IPad
 {
-	public partial class FormEditUser : Form
+	public partial class FormEditUser : MetroForm
 	{
-		private bool _newUser = false;
-		private bool _complexPassword = true;
-		private List<string> _existedUsers = new List<string>();
+		private readonly bool _complexPassword = true;
+		private readonly List<string> _existedUsers = new List<string>();
 
-		private List<GroupModel> _groups = new List<GroupModel>();
-		private List<Library> _libraries = new List<Library>();
-		private List<LibraryPage> _pages = new List<LibraryPage>();
+		private readonly List<GroupModel> _groups = new List<GroupModel>();
+		private readonly List<Library> _libraries = new List<Library>();
+		private readonly bool _newUser;
+		private readonly List<LibraryPage> _pages = new List<LibraryPage>();
 
-		public GroupModel[] AssignedGroups
-		{
-			get { return _groups.Where(x => x.selected).ToArray(); }
-		}
-
-		public LibraryPage[] AssignedPages
-		{
-			get { return _pages.Where(x => x.selected).ToArray(); }
-		}
-
-		public FormEditUser(bool newUser, bool complexPassword, string[] existedUsers, GroupModel[] groups, Library[] libraries)
+		public FormEditUser(bool newUser, bool complexPassword, string[] existedUsers, IEnumerable<GroupModel> groups, Library[] libraries)
 		{
 			InitializeComponent();
 
@@ -77,7 +71,7 @@ namespace FileManager.ToolForms.IPad
 
 			if (_newUser)
 			{
-				this.Text = "Add User";
+				Text = "Add User";
 				checkEditPassword.Visible = false;
 				laPassword.Visible = true;
 				textEditLogin.Enabled = true;
@@ -85,7 +79,7 @@ namespace FileManager.ToolForms.IPad
 			}
 			else
 			{
-				this.Text = "Edit User";
+				Text = "Edit User";
 				checkEditPassword.Visible = true;
 				checkEditPassword.Checked = false;
 				laPassword.Visible = false;
@@ -93,9 +87,19 @@ namespace FileManager.ToolForms.IPad
 			}
 		}
 
+		public GroupModel[] AssignedGroups
+		{
+			get { return _groups.Where(x => x.selected).ToArray(); }
+		}
+
+		public LibraryPage[] AssignedPages
+		{
+			get { return _pages.Where(x => x.selected).ToArray(); }
+		}
+
 		private void FormEditUser_FormClosing(object sender, FormClosingEventArgs e)
 		{
-			if (this.DialogResult == DialogResult.OK)
+			if (DialogResult == DialogResult.OK)
 			{
 				gridViewGroups.PostEditor();
 				gridViewLibraries.PostEditor();
@@ -107,11 +111,11 @@ namespace FileManager.ToolForms.IPad
 				textEditEmail.Focus();
 				textEditEmailConfirm.Focus();
 				buttonEditPassword.Focus();
-				if (!this.ValidateChildren())
+				if (!ValidateChildren())
 					e.Cancel = true;
 				else if (_newUser && textEditLogin.EditValue != null && _existedUsers.Contains(textEditLogin.EditValue.ToString()))
 				{
-					if (AppManager.Instance.ShowWarningQuestion("User with given login already exist.\nDo you want to update his data?") == System.Windows.Forms.DialogResult.No)
+					if (AppManager.Instance.ShowWarningQuestion("User with given login already exist.\nDo you want to update his data?") == DialogResult.No)
 						e.Cancel = true;
 				}
 			}
@@ -146,18 +150,18 @@ namespace FileManager.ToolForms.IPad
 			}
 		}
 
-		private void buttonEditPassword_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+		private void buttonEditPassword_ButtonClick(object sender, ButtonPressedEventArgs e)
 		{
-			buttonEditPassword.EditValue = _complexPassword ? Membership.GeneratePassword(10, 3) : new ToolClasses.PasswordGenerator().Generate();
+			buttonEditPassword.EditValue = _complexPassword ? Membership.GeneratePassword(10, 3) : new PasswordGenerator().Generate();
 		}
 		#endregion
 
 		#region Libraraies
 		private void buttonXLibrariesSelectAll_Click(object sender, EventArgs e)
 		{
-			foreach (var library in _libraries)
+			foreach (Library library in _libraries)
 				library.selected = true;
-			foreach (var page in _pages)
+			foreach (LibraryPage page in _pages)
 				page.selected = true;
 			gridViewLibraries.RefreshData();
 			if (gridViewLibraries.FocusedRowHandle != GridControl.InvalidRowHandle && gridViewLibraries.GetDetailView(gridViewLibraries.FocusedRowHandle, 0) != null)
@@ -166,9 +170,9 @@ namespace FileManager.ToolForms.IPad
 
 		private void buttonXLibrariesClearAll_Click(object sender, EventArgs e)
 		{
-			foreach (var library in _libraries)
+			foreach (Library library in _libraries)
 				library.selected = false;
-			foreach (var page in _pages)
+			foreach (LibraryPage page in _pages)
 				page.selected = false;
 			gridViewLibraries.RefreshData();
 			if (gridViewLibraries.FocusedRowHandle != GridControl.InvalidRowHandle && gridViewLibraries.GetDetailView(gridViewLibraries.FocusedRowHandle, 0) != null)
@@ -210,7 +214,7 @@ namespace FileManager.ToolForms.IPad
 						var libraray = focussedView.GetFocusedRow() as Library;
 						if (libraray != null)
 						{
-							foreach (var page in _pages.Where(x => x.libraryId == libraray.id))
+							foreach (LibraryPage page in _pages.Where(x => x.libraryId == libraray.id))
 								page.selected = libraray.selected;
 							var pagesView = focussedView.GetDetailView(focussedView.FocusedRowHandle, 0) as GridView;
 							if (pagesView != null)
@@ -231,30 +235,31 @@ namespace FileManager.ToolForms.IPad
 			}
 		}
 		#endregion
+
 		#endregion
 
 		#region Groups
 		private void buttonXGroupsSelectAll_Click(object sender, EventArgs e)
 		{
-			foreach (var group in _groups)
+			foreach (GroupModel group in _groups)
 				group.selected = true;
 			gridViewGroups.RefreshData();
 		}
 
 		private void buttonXGroupsClearAll_Click(object sender, EventArgs e)
 		{
-			foreach (var group in _groups)
+			foreach (GroupModel group in _groups)
 				group.selected = false;
 			gridViewGroups.RefreshData();
 		}
 		#endregion
 	}
 
-	public class ValidatableTabControl : DevExpress.XtraTab.XtraTabControl
+	public class ValidatableTabControl : XtraTabControl
 	{
 		public ValidatableTabControl()
 		{
-			this.SetStyle(ControlStyles.ContainerControl, true);
+			SetStyle(ControlStyles.ContainerControl, true);
 		}
 	}
 }

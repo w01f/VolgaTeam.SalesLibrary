@@ -34,14 +34,14 @@
 			// 
 			// checkedListBoxControl
 			// 
-			this.checkedListBoxControl.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
+			this.checkedListBoxControl.Appearance.BackColor = System.Drawing.Color.White;
 			this.checkedListBoxControl.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.checkedListBoxControl.Appearance.Options.UseBackColor = true;
 			this.checkedListBoxControl.Appearance.Options.UseFont = true;
 			this.checkedListBoxControl.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
 			this.checkedListBoxControl.CheckOnClick = true;
 			this.checkedListBoxControl.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.checkedListBoxControl.ItemHeight = 21;
+			this.checkedListBoxControl.ItemHeight = 23;
 			this.checkedListBoxControl.Items.AddRange(new DevExpress.XtraEditors.Controls.CheckedListBoxItem[] {
             new DevExpress.XtraEditors.Controls.CheckedListBoxItem(null, "STAR"),
             new DevExpress.XtraEditors.Controls.CheckedListBoxItem(null, "SOLD"),
@@ -58,7 +58,7 @@
 			// SuperFilterControl
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
+			this.BackColor = System.Drawing.Color.White;
 			this.Controls.Add(this.checkedListBoxControl);
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.Name = "SuperFilterControl";

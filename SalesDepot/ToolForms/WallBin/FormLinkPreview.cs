@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Windows.Forms;
+using DevComponents.DotNetBar.Metro;
 using DevExpress.XtraBars;
 using SalesDepot.BusinessClasses;
 using SalesDepot.ConfigurationClasses;
@@ -9,7 +10,7 @@ using SalesDepot.PresentationClasses.Viewers;
 
 namespace SalesDepot.ToolForms.WallBin
 {
-	public partial class FormLinkPreview : Form
+	public partial class FormLinkPreview : MetroForm
 	{
 		private IFileViewer _selectedFileViewer;
 

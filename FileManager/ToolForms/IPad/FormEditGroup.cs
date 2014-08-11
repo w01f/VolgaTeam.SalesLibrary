@@ -3,20 +3,21 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
+using DevComponents.DotNetBar.Metro;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
 using SalesDepot.Services.IPadAdminService;
 
 namespace FileManager.ToolForms.IPad
 {
-	public partial class FormEditGroup : Form
+	public partial class FormEditGroup : MetroForm
 	{
 		private bool _newGroup = false;
-		private List<string> _existedGroups = new List<string>();
+		private readonly List<string> _existedGroups = new List<string>();
 
-		private List<UserModel> _users = new List<UserModel>();
-		private List<Library> _libraries = new List<Library>();
-		private List<LibraryPage> _pages = new List<LibraryPage>();
+		private readonly List<UserModel> _users = new List<UserModel>();
+		private readonly List<Library> _libraries = new List<Library>();
+		private readonly List<LibraryPage> _pages = new List<LibraryPage>();
 
 		public UserModel[] AssignedUsers
 		{
@@ -28,7 +29,7 @@ namespace FileManager.ToolForms.IPad
 			get { return _pages.Where(x => x.selected).ToArray(); }
 		}
 
-		public FormEditGroup(bool newGroup, string[] groupTemplates, string[] existedGroups, UserModel[] users, Library[] libraries)
+		public FormEditGroup(bool newGroup, string[] groupTemplates, string[] existedGroups, IEnumerable<UserModel> users, Library[] libraries)
 		{
 			InitializeComponent();
 

@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
 			this.components = new System.ComponentModel.Container();
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InactiveUsersManagerControl));
-			this.styleManager = new DevComponents.DotNetBar.StyleManager(this.components);
 			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
 			this.gridControlRecords = new DevExpress.XtraGrid.GridControl();
 			this.gridViewRecords = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -81,9 +79,9 @@
 			this.splitContainerControlData.SuspendLayout();
 			this.pnFilterButtons.SuspendLayout();
 			this.gbDate.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.dateEditEnd.Properties.VistaTimeProperties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.dateEditEnd.Properties.CalendarTimeProperties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.dateEditEnd.Properties)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.dateEditStart.Properties.VistaTimeProperties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.dateEditStart.Properties.CalendarTimeProperties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.dateEditStart.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControlEmail)).BeginInit();
 			this.xtraTabControlEmail.SuspendLayout();
@@ -99,11 +97,6 @@
 			((System.ComponentModel.ISupportInitialize)(this.textEditEmailDeleteSender.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.printingSystem)).BeginInit();
 			this.SuspendLayout();
-			// 
-			// styleManager
-			// 
-			this.styleManager.ManagerStyle = DevComponents.DotNetBar.eStyle.Office2010Blue;
-			this.styleManager.MetroColorParameters = new DevComponents.DotNetBar.Metro.ColorTables.MetroColorGeneratorParameters(System.Drawing.Color.White, System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(163)))), ((int)(((byte)(26))))));
 			// 
 			// styleController
 			// 
@@ -128,7 +121,7 @@
 			this.gridControlRecords.Name = "gridControlRecords";
 			this.gridControlRecords.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemCheckEditUsers});
-			this.gridControlRecords.Size = new System.Drawing.Size(265, 483);
+			this.gridControlRecords.Size = new System.Drawing.Size(257, 483);
 			this.gridControlRecords.TabIndex = 3;
 			this.gridControlRecords.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewRecords});
@@ -191,6 +184,7 @@
 			// repositoryItemCheckEditUsers
 			// 
 			this.repositoryItemCheckEditUsers.AutoHeight = false;
+			this.repositoryItemCheckEditUsers.Caption = "Check";
 			this.repositoryItemCheckEditUsers.Name = "repositoryItemCheckEditUsers";
 			this.repositoryItemCheckEditUsers.CheckedChanged += new System.EventHandler(this.repositoryItemCheckEditUsers_CheckedChanged);
 			// 
@@ -241,7 +235,7 @@
 			this.splitContainerControlData.Panel1.Text = "Panel1";
 			this.splitContainerControlData.Panel2.Controls.Add(this.gridControlRecords);
 			this.splitContainerControlData.Panel2.Text = "Panel2";
-			this.splitContainerControlData.Size = new System.Drawing.Size(523, 483);
+			this.splitContainerControlData.Size = new System.Drawing.Size(519, 483);
 			this.splitContainerControlData.TabIndex = 0;
 			this.splitContainerControlData.Text = "splitContainerControl1";
 			// 
@@ -309,12 +303,12 @@
 			this.dateEditEnd.Name = "dateEditEnd";
 			this.dateEditEnd.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+			this.dateEditEnd.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
 			this.dateEditEnd.Properties.DisplayFormat.FormatString = "MM/dd/yyyy";
 			this.dateEditEnd.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
 			this.dateEditEnd.Properties.EditFormat.FormatString = "MM/dd/yyyy";
 			this.dateEditEnd.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Custom;
-			this.dateEditEnd.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton()});
 			this.dateEditEnd.Size = new System.Drawing.Size(132, 22);
 			this.dateEditEnd.StyleController = this.styleController;
 			this.dateEditEnd.TabIndex = 2;
@@ -335,12 +329,12 @@
 			this.dateEditStart.Name = "dateEditStart";
 			this.dateEditStart.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+			this.dateEditStart.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
 			this.dateEditStart.Properties.DisplayFormat.FormatString = "MM/dd/yyyy";
 			this.dateEditStart.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
 			this.dateEditStart.Properties.EditFormat.FormatString = "MM/dd/yyyy";
 			this.dateEditStart.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Custom;
-			this.dateEditStart.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton()});
 			this.dateEditStart.Size = new System.Drawing.Size(132, 22);
 			this.dateEditStart.StyleController = this.styleController;
 			this.dateEditStart.TabIndex = 0;
@@ -371,12 +365,11 @@
 			// 
 			this.xtraTabPageEmailReset.Controls.Add(this.panelEmailReset);
 			this.xtraTabPageEmailReset.Name = "xtraTabPageEmailReset";
-			this.xtraTabPageEmailReset.Size = new System.Drawing.Size(372, 451);
+			this.xtraTabPageEmailReset.Size = new System.Drawing.Size(378, 455);
 			this.xtraTabPageEmailReset.Text = "Password Reset Email";
 			// 
 			// panelEmailReset
 			// 
-			this.panelEmailReset.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
 			this.panelEmailReset.Controls.Add(this.buttonXEmailResetSend);
 			this.panelEmailReset.Controls.Add(this.labelControlEmailResetUserCount);
 			this.panelEmailReset.Controls.Add(this.memoEditEmailResetBody);
@@ -388,7 +381,7 @@
 			this.panelEmailReset.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panelEmailReset.Location = new System.Drawing.Point(0, 0);
 			this.panelEmailReset.Name = "panelEmailReset";
-			this.panelEmailReset.Size = new System.Drawing.Size(372, 451);
+			this.panelEmailReset.Size = new System.Drawing.Size(378, 455);
 			this.panelEmailReset.TabIndex = 0;
 			// 
 			// buttonXEmailResetSend
@@ -398,9 +391,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXEmailResetSend.CausesValidation = false;
 			this.buttonXEmailResetSend.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-			this.buttonXEmailResetSend.Location = new System.Drawing.Point(8, 401);
+			this.buttonXEmailResetSend.Location = new System.Drawing.Point(8, 405);
 			this.buttonXEmailResetSend.Name = "buttonXEmailResetSend";
-			this.buttonXEmailResetSend.Size = new System.Drawing.Size(358, 38);
+			this.buttonXEmailResetSend.Size = new System.Drawing.Size(364, 38);
 			this.buttonXEmailResetSend.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXEmailResetSend.TabIndex = 17;
 			this.buttonXEmailResetSend.Text = "Send Email";
@@ -411,7 +404,7 @@
 			// 
 			this.labelControlEmailResetUserCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.labelControlEmailResetUserCount.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.labelControlEmailResetUserCount.Location = new System.Drawing.Point(8, 376);
+			this.labelControlEmailResetUserCount.Location = new System.Drawing.Point(8, 380);
 			this.labelControlEmailResetUserCount.Name = "labelControlEmailResetUserCount";
 			this.labelControlEmailResetUserCount.Size = new System.Drawing.Size(321, 16);
 			this.labelControlEmailResetUserCount.StyleController = this.styleController;
@@ -425,9 +418,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.memoEditEmailResetBody.Location = new System.Drawing.Point(8, 166);
 			this.memoEditEmailResetBody.Name = "memoEditEmailResetBody";
-			this.memoEditEmailResetBody.Size = new System.Drawing.Size(358, 193);
+			this.memoEditEmailResetBody.Size = new System.Drawing.Size(364, 197);
 			this.memoEditEmailResetBody.StyleController = this.styleController;
 			this.memoEditEmailResetBody.TabIndex = 7;
+			this.memoEditEmailResetBody.UseOptimizedRendering = true;
 			// 
 			// labelControlEmailResetBody
 			// 
@@ -444,7 +438,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.textEditEmailResetSubject.Location = new System.Drawing.Point(8, 94);
 			this.textEditEmailResetSubject.Name = "textEditEmailResetSubject";
-			this.textEditEmailResetSubject.Size = new System.Drawing.Size(358, 22);
+			this.textEditEmailResetSubject.Size = new System.Drawing.Size(364, 22);
 			this.textEditEmailResetSubject.StyleController = this.styleController;
 			this.textEditEmailResetSubject.TabIndex = 5;
 			// 
@@ -463,7 +457,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.textEditEmailResetSender.Location = new System.Drawing.Point(8, 28);
 			this.textEditEmailResetSender.Name = "textEditEmailResetSender";
-			this.textEditEmailResetSender.Size = new System.Drawing.Size(358, 22);
+			this.textEditEmailResetSender.Size = new System.Drawing.Size(364, 22);
 			this.textEditEmailResetSender.StyleController = this.styleController;
 			this.textEditEmailResetSender.TabIndex = 3;
 			// 
@@ -481,12 +475,11 @@
 			this.xtraTabPageEmailDelete.Controls.Add(this.panelEmailDelete);
 			this.xtraTabPageEmailDelete.Name = "xtraTabPageEmailDelete";
 			this.xtraTabPageEmailDelete.PageEnabled = false;
-			this.xtraTabPageEmailDelete.Size = new System.Drawing.Size(372, 451);
+			this.xtraTabPageEmailDelete.Size = new System.Drawing.Size(378, 455);
 			this.xtraTabPageEmailDelete.Text = "Account Termination Email";
 			// 
 			// panelEmailDelete
 			// 
-			this.panelEmailDelete.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
 			this.panelEmailDelete.Controls.Add(this.buttonXEmailDeleteSend);
 			this.panelEmailDelete.Controls.Add(this.labelControlEmailDeleteUserCount);
 			this.panelEmailDelete.Controls.Add(this.memoEditEmailDeleteBody);
@@ -498,7 +491,7 @@
 			this.panelEmailDelete.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panelEmailDelete.Location = new System.Drawing.Point(0, 0);
 			this.panelEmailDelete.Name = "panelEmailDelete";
-			this.panelEmailDelete.Size = new System.Drawing.Size(372, 451);
+			this.panelEmailDelete.Size = new System.Drawing.Size(378, 455);
 			this.panelEmailDelete.TabIndex = 1;
 			// 
 			// buttonXEmailDeleteSend
@@ -508,9 +501,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXEmailDeleteSend.CausesValidation = false;
 			this.buttonXEmailDeleteSend.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-			this.buttonXEmailDeleteSend.Location = new System.Drawing.Point(8, 401);
+			this.buttonXEmailDeleteSend.Location = new System.Drawing.Point(8, 405);
 			this.buttonXEmailDeleteSend.Name = "buttonXEmailDeleteSend";
-			this.buttonXEmailDeleteSend.Size = new System.Drawing.Size(358, 38);
+			this.buttonXEmailDeleteSend.Size = new System.Drawing.Size(364, 38);
 			this.buttonXEmailDeleteSend.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXEmailDeleteSend.TabIndex = 17;
 			this.buttonXEmailDeleteSend.Text = "Send Email";
@@ -521,7 +514,7 @@
 			// 
 			this.labelControlEmailDeleteUserCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.labelControlEmailDeleteUserCount.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.labelControlEmailDeleteUserCount.Location = new System.Drawing.Point(8, 376);
+			this.labelControlEmailDeleteUserCount.Location = new System.Drawing.Point(8, 380);
 			this.labelControlEmailDeleteUserCount.Name = "labelControlEmailDeleteUserCount";
 			this.labelControlEmailDeleteUserCount.Size = new System.Drawing.Size(321, 16);
 			this.labelControlEmailDeleteUserCount.StyleController = this.styleController;
@@ -535,9 +528,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.memoEditEmailDeleteBody.Location = new System.Drawing.Point(8, 166);
 			this.memoEditEmailDeleteBody.Name = "memoEditEmailDeleteBody";
-			this.memoEditEmailDeleteBody.Size = new System.Drawing.Size(358, 193);
+			this.memoEditEmailDeleteBody.Size = new System.Drawing.Size(364, 197);
 			this.memoEditEmailDeleteBody.StyleController = this.styleController;
 			this.memoEditEmailDeleteBody.TabIndex = 7;
+			this.memoEditEmailDeleteBody.UseOptimizedRendering = true;
 			// 
 			// labelControlEmailDeleteBody
 			// 
@@ -554,7 +548,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.textEditEmailDeleteSubject.Location = new System.Drawing.Point(8, 94);
 			this.textEditEmailDeleteSubject.Name = "textEditEmailDeleteSubject";
-			this.textEditEmailDeleteSubject.Size = new System.Drawing.Size(358, 22);
+			this.textEditEmailDeleteSubject.Size = new System.Drawing.Size(364, 22);
 			this.textEditEmailDeleteSubject.StyleController = this.styleController;
 			this.textEditEmailDeleteSubject.TabIndex = 5;
 			// 
@@ -573,7 +567,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.textEditEmailDeleteSender.Location = new System.Drawing.Point(8, 28);
 			this.textEditEmailDeleteSender.Name = "textEditEmailDeleteSender";
-			this.textEditEmailDeleteSender.Size = new System.Drawing.Size(358, 22);
+			this.textEditEmailDeleteSender.Size = new System.Drawing.Size(364, 22);
 			this.textEditEmailDeleteSender.StyleController = this.styleController;
 			this.textEditEmailDeleteSender.TabIndex = 3;
 			// 
@@ -594,19 +588,14 @@
 			// printableComponentLink
 			// 
 			this.printableComponentLink.Component = this.gridControlRecords;
-			// 
-			// 
-			// 
-			this.printableComponentLink.ImageCollection.ImageStream = ((DevExpress.Utils.ImageCollectionStreamer)(resources.GetObject("printableComponentLink1.ImageCollection.ImageStream")));
 			this.printableComponentLink.PaperKind = System.Drawing.Printing.PaperKind.A4;
-			this.printableComponentLink.PrintingSystem = this.printingSystem;
 			this.printableComponentLink.PrintingSystemBase = this.printingSystem;
 			this.printableComponentLink.CreateReportHeaderArea += new DevExpress.XtraPrinting.CreateAreaEventHandler(this.printableComponentLink_CreateReportHeaderArea);
 			// 
 			// InactiveUsersManagerControl
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+			this.BackColor = System.Drawing.Color.White;
 			this.Controls.Add(this.splitContainerControlMain);
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -623,9 +612,9 @@
 			this.pnFilterButtons.ResumeLayout(false);
 			this.gbDate.ResumeLayout(false);
 			this.gbDate.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.dateEditEnd.Properties.VistaTimeProperties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.dateEditEnd.Properties.CalendarTimeProperties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.dateEditEnd.Properties)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.dateEditStart.Properties.VistaTimeProperties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.dateEditStart.Properties.CalendarTimeProperties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.dateEditStart.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControlEmail)).EndInit();
 			this.xtraTabControlEmail.ResumeLayout(false);
@@ -648,7 +637,6 @@
 
         #endregion
 
-		private DevComponents.DotNetBar.StyleManager styleManager;
 		private DevExpress.XtraEditors.StyleController styleController;
 		private DevExpress.XtraGrid.GridControl gridControlRecords;
 		private DevExpress.XtraGrid.Views.Grid.GridView gridViewRecords;

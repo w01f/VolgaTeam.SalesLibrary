@@ -30,9 +30,9 @@
 		{
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PageContentControl));
-			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
-			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
-			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
+			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject7 = new DevExpress.Utils.SerializableAppearanceObject();
+			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject8 = new DevExpress.Utils.SerializableAppearanceObject();
+			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject9 = new DevExpress.Utils.SerializableAppearanceObject();
 			this.pnPageHeader = new System.Windows.Forms.Panel();
 			this.hyperLinkEditUrl = new DevExpress.XtraEditors.HyperLinkEdit();
 			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
@@ -118,7 +118,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.checkEditDisableBanners.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditDisableWidgets.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditRestricted.Properties)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.dateEditExpirationDate.Properties.VistaTimeProperties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.dateEditExpirationDate.Properties.CalendarTimeProperties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.dateEditExpirationDate.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditExpirationDate.Properties)).BeginInit();
 			this.xtraTabPageLogo.SuspendLayout();
@@ -149,7 +149,7 @@
 			this.hyperLinkEditUrl.Location = new System.Drawing.Point(37, 38);
 			this.hyperLinkEditUrl.Name = "hyperLinkEditUrl";
 			this.hyperLinkEditUrl.Properties.AllowFocused = false;
-			this.hyperLinkEditUrl.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
+			this.hyperLinkEditUrl.Properties.Appearance.BackColor = System.Drawing.Color.White;
 			this.hyperLinkEditUrl.Properties.Appearance.Options.UseBackColor = true;
 			this.hyperLinkEditUrl.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
 			this.hyperLinkEditUrl.Size = new System.Drawing.Size(530, 20);
@@ -244,7 +244,7 @@
 			this.xtraTabPageLinks.Controls.Add(this.labelControlLinksCount);
 			this.xtraTabPageLinks.Controls.Add(this.labelControlLinksHeader);
 			this.xtraTabPageLinks.Name = "xtraTabPageLinks";
-			this.xtraTabPageLinks.Size = new System.Drawing.Size(568, 384);
+			this.xtraTabPageLinks.Size = new System.Drawing.Size(564, 379);
 			this.xtraTabPageLinks.Text = "Links";
 			// 
 			// gridControlLinks
@@ -257,7 +257,7 @@
 			this.gridControlLinks.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemButtonEditLinksActions,
             this.repositoryItemPictureEditLinksType});
-			this.gridControlLinks.Size = new System.Drawing.Size(568, 331);
+			this.gridControlLinks.Size = new System.Drawing.Size(564, 326);
 			this.gridControlLinks.TabIndex = 2;
 			this.gridControlLinks.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.advBandedGridViewLinks});
@@ -318,6 +318,7 @@
 			this.gridBandType.Columns.Add(this.bandedGridColumnLinksType);
 			this.gridBandType.Name = "gridBandType";
 			this.gridBandType.OptionsBand.FixedWidth = true;
+			this.gridBandType.VisibleIndex = 0;
 			this.gridBandType.Width = 42;
 			// 
 			// bandedGridColumnLinksType
@@ -343,6 +344,7 @@
 			this.gridBandLink.Caption = "Link";
 			this.gridBandLink.Columns.Add(this.bandedGridColumnLinksName);
 			this.gridBandLink.Name = "gridBandLink";
+			this.gridBandLink.VisibleIndex = 1;
 			this.gridBandLink.Width = 422;
 			// 
 			// bandedGridColumnLinksName
@@ -364,6 +366,7 @@
 			this.gridBandActions.Name = "gridBandActions";
 			this.gridBandActions.OptionsBand.FixedWidth = true;
 			this.gridBandActions.OptionsBand.ShowCaption = false;
+			this.gridBandActions.VisibleIndex = 2;
 			this.gridBandActions.Width = 110;
 			// 
 			// bandedGridColumnLinksActions
@@ -380,36 +383,36 @@
 			// 
 			this.repositoryItemButtonEditLinksActions.AutoHeight = false;
 			this.repositoryItemButtonEditLinksActions.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("repositoryItemButtonEditLinksActions.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true),
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("repositoryItemButtonEditLinksActions.Buttons1"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "", null, null, true),
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("repositoryItemButtonEditLinksActions.Buttons2"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject3, "Delete this file", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("repositoryItemButtonEditLinksActions.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject7, "", null, null, true),
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("repositoryItemButtonEditLinksActions.Buttons1"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject8, "", null, null, true),
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("repositoryItemButtonEditLinksActions.Buttons2"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject9, "Delete this file", null, null, true)});
 			this.repositoryItemButtonEditLinksActions.Name = "repositoryItemButtonEditLinksActions";
 			this.repositoryItemButtonEditLinksActions.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
 			this.repositoryItemButtonEditLinksActions.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.repositoryItemButtonEditLinksActions_ButtonClick);
 			// 
 			// labelControlLinksCount
 			// 
-			this.labelControlLinksCount.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
+			this.labelControlLinksCount.Appearance.BackColor = System.Drawing.Color.White;
 			this.labelControlLinksCount.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
 			this.labelControlLinksCount.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
 			this.labelControlLinksCount.Dock = System.Windows.Forms.DockStyle.Top;
 			this.labelControlLinksCount.Location = new System.Drawing.Point(0, 24);
 			this.labelControlLinksCount.Name = "labelControlLinksCount";
 			this.labelControlLinksCount.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-			this.labelControlLinksCount.Size = new System.Drawing.Size(568, 29);
+			this.labelControlLinksCount.Size = new System.Drawing.Size(564, 29);
 			this.labelControlLinksCount.StyleController = this.styleController;
 			this.labelControlLinksCount.TabIndex = 5;
 			// 
 			// labelControlLinksHeader
 			// 
-			this.labelControlLinksHeader.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
+			this.labelControlLinksHeader.Appearance.BackColor = System.Drawing.Color.White;
 			this.labelControlLinksHeader.Appearance.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelControlLinksHeader.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.Vertical;
 			this.labelControlLinksHeader.Dock = System.Windows.Forms.DockStyle.Top;
 			this.labelControlLinksHeader.Location = new System.Drawing.Point(0, 0);
 			this.labelControlLinksHeader.Name = "labelControlLinksHeader";
 			this.labelControlLinksHeader.Padding = new System.Windows.Forms.Padding(5, 5, 0, 0);
-			this.labelControlLinksHeader.Size = new System.Drawing.Size(568, 24);
+			this.labelControlLinksHeader.Size = new System.Drawing.Size(564, 24);
 			this.labelControlLinksHeader.StyleController = this.styleController;
 			this.labelControlLinksHeader.TabIndex = 2;
 			this.labelControlLinksHeader.Text = "DRAG your Links from the Cart & DROP them into the list below:";
@@ -420,7 +423,7 @@
 			this.xtraTabPageTitle.Controls.Add(this.htmlEditorControlTitle);
 			this.xtraTabPageTitle.Controls.Add(this.pnTitle);
 			this.xtraTabPageTitle.Name = "xtraTabPageTitle";
-			this.xtraTabPageTitle.Size = new System.Drawing.Size(568, 384);
+			this.xtraTabPageTitle.Size = new System.Drawing.Size(564, 379);
 			this.xtraTabPageTitle.Text = "Title";
 			// 
 			// htmlEditorControlTitle
@@ -430,17 +433,17 @@
 			this.htmlEditorControlTitle.HtmlText = resources.GetString("htmlEditorControlTitle.HtmlText");
 			this.htmlEditorControlTitle.Location = new System.Drawing.Point(0, 31);
 			this.htmlEditorControlTitle.Name = "htmlEditorControlTitle";
-			this.htmlEditorControlTitle.Size = new System.Drawing.Size(568, 353);
+			this.htmlEditorControlTitle.Size = new System.Drawing.Size(564, 348);
 			this.htmlEditorControlTitle.TabIndex = 0;
 			// 
 			// pnTitle
 			// 
-			this.pnTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
+			this.pnTitle.BackColor = System.Drawing.Color.White;
 			this.pnTitle.Controls.Add(this.checkEditTitleEnabled);
 			this.pnTitle.Dock = System.Windows.Forms.DockStyle.Top;
 			this.pnTitle.Location = new System.Drawing.Point(0, 0);
 			this.pnTitle.Name = "pnTitle";
-			this.pnTitle.Size = new System.Drawing.Size(568, 31);
+			this.pnTitle.Size = new System.Drawing.Size(564, 31);
 			this.pnTitle.TabIndex = 1;
 			// 
 			// checkEditTitleEnabled
@@ -451,7 +454,7 @@
 			this.checkEditTitleEnabled.Properties.Appearance.Options.UseFont = true;
 			this.checkEditTitleEnabled.Properties.AutoWidth = true;
 			this.checkEditTitleEnabled.Properties.Caption = "This statement will be placed at the TOP of your quickSITE... ";
-			this.checkEditTitleEnabled.Size = new System.Drawing.Size(380, 21);
+			this.checkEditTitleEnabled.Size = new System.Drawing.Size(379, 20);
 			this.checkEditTitleEnabled.TabIndex = 3;
 			this.checkEditTitleEnabled.CheckedChanged += new System.EventHandler(this.checkEditTitleEnabled_CheckedChanged);
 			// 
@@ -460,7 +463,7 @@
 			this.xtraTabPageHeader.Controls.Add(this.htmlEditorControlHeader);
 			this.xtraTabPageHeader.Controls.Add(this.pnHeaderHeader);
 			this.xtraTabPageHeader.Name = "xtraTabPageHeader";
-			this.xtraTabPageHeader.Size = new System.Drawing.Size(568, 384);
+			this.xtraTabPageHeader.Size = new System.Drawing.Size(564, 379);
 			this.xtraTabPageHeader.Text = "Header";
 			// 
 			// htmlEditorControlHeader
@@ -470,17 +473,17 @@
 			this.htmlEditorControlHeader.HtmlText = resources.GetString("htmlEditorControlHeader.HtmlText");
 			this.htmlEditorControlHeader.Location = new System.Drawing.Point(0, 31);
 			this.htmlEditorControlHeader.Name = "htmlEditorControlHeader";
-			this.htmlEditorControlHeader.Size = new System.Drawing.Size(568, 353);
+			this.htmlEditorControlHeader.Size = new System.Drawing.Size(564, 348);
 			this.htmlEditorControlHeader.TabIndex = 3;
 			// 
 			// pnHeaderHeader
 			// 
-			this.pnHeaderHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
+			this.pnHeaderHeader.BackColor = System.Drawing.Color.White;
 			this.pnHeaderHeader.Controls.Add(this.checkEditHeaderEnabled);
 			this.pnHeaderHeader.Dock = System.Windows.Forms.DockStyle.Top;
 			this.pnHeaderHeader.Location = new System.Drawing.Point(0, 0);
 			this.pnHeaderHeader.Name = "pnHeaderHeader";
-			this.pnHeaderHeader.Size = new System.Drawing.Size(568, 31);
+			this.pnHeaderHeader.Size = new System.Drawing.Size(564, 31);
 			this.pnHeaderHeader.TabIndex = 2;
 			// 
 			// checkEditHeaderEnabled
@@ -491,7 +494,7 @@
 			this.checkEditHeaderEnabled.Properties.Appearance.Options.UseFont = true;
 			this.checkEditHeaderEnabled.Properties.AutoWidth = true;
 			this.checkEditHeaderEnabled.Properties.Caption = "The Header Text will be JUST ABOVE the links you are sharing… ";
-			this.checkEditHeaderEnabled.Size = new System.Drawing.Size(404, 21);
+			this.checkEditHeaderEnabled.Size = new System.Drawing.Size(405, 20);
 			this.checkEditHeaderEnabled.TabIndex = 3;
 			this.checkEditHeaderEnabled.CheckedChanged += new System.EventHandler(this.checkEditHeaderEnabled_CheckedChanged);
 			// 
@@ -500,7 +503,7 @@
 			this.xtraTabPageFooter.Controls.Add(this.htmlEditorControlFooter);
 			this.xtraTabPageFooter.Controls.Add(this.pnFooterHeader);
 			this.xtraTabPageFooter.Name = "xtraTabPageFooter";
-			this.xtraTabPageFooter.Size = new System.Drawing.Size(568, 384);
+			this.xtraTabPageFooter.Size = new System.Drawing.Size(564, 379);
 			this.xtraTabPageFooter.Text = "Footer";
 			// 
 			// htmlEditorControlFooter
@@ -510,17 +513,17 @@
 			this.htmlEditorControlFooter.HtmlText = resources.GetString("htmlEditorControlFooter.HtmlText");
 			this.htmlEditorControlFooter.Location = new System.Drawing.Point(0, 31);
 			this.htmlEditorControlFooter.Name = "htmlEditorControlFooter";
-			this.htmlEditorControlFooter.Size = new System.Drawing.Size(568, 353);
+			this.htmlEditorControlFooter.Size = new System.Drawing.Size(564, 348);
 			this.htmlEditorControlFooter.TabIndex = 3;
 			// 
 			// pnFooterHeader
 			// 
-			this.pnFooterHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
+			this.pnFooterHeader.BackColor = System.Drawing.Color.White;
 			this.pnFooterHeader.Controls.Add(this.checkEditFooterEnabled);
 			this.pnFooterHeader.Dock = System.Windows.Forms.DockStyle.Top;
 			this.pnFooterHeader.Location = new System.Drawing.Point(0, 0);
 			this.pnFooterHeader.Name = "pnFooterHeader";
-			this.pnFooterHeader.Size = new System.Drawing.Size(568, 31);
+			this.pnFooterHeader.Size = new System.Drawing.Size(564, 31);
 			this.pnFooterHeader.TabIndex = 2;
 			// 
 			// checkEditFooterEnabled
@@ -531,7 +534,7 @@
 			this.checkEditFooterEnabled.Properties.Appearance.Options.UseFont = true;
 			this.checkEditFooterEnabled.Properties.AutoWidth = true;
 			this.checkEditFooterEnabled.Properties.Caption = "The Footer Text will be at the VERY BOTTOM of your quickSITE…";
-			this.checkEditFooterEnabled.Size = new System.Drawing.Size(407, 21);
+			this.checkEditFooterEnabled.Size = new System.Drawing.Size(407, 20);
 			this.checkEditFooterEnabled.TabIndex = 3;
 			this.checkEditFooterEnabled.CheckedChanged += new System.EventHandler(this.checkEditFooterEnabled_CheckedChanged);
 			// 
@@ -539,12 +542,12 @@
 			// 
 			this.xtraTabPageSecurity.Controls.Add(this.pnSecurity);
 			this.xtraTabPageSecurity.Name = "xtraTabPageSecurity";
-			this.xtraTabPageSecurity.Size = new System.Drawing.Size(568, 384);
+			this.xtraTabPageSecurity.Size = new System.Drawing.Size(564, 379);
 			this.xtraTabPageSecurity.Text = "Settings";
 			// 
 			// pnSecurity
 			// 
-			this.pnSecurity.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
+			this.pnSecurity.BackColor = System.Drawing.Color.White;
 			this.pnSecurity.Controls.Add(this.textEditActivityEmailCopy);
 			this.pnSecurity.Controls.Add(this.labelControlActivityEmailCopy);
 			this.pnSecurity.Controls.Add(this.checkEditShowLinksAsUrl);
@@ -560,7 +563,7 @@
 			this.pnSecurity.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.pnSecurity.Location = new System.Drawing.Point(0, 0);
 			this.pnSecurity.Name = "pnSecurity";
-			this.pnSecurity.Size = new System.Drawing.Size(568, 384);
+			this.pnSecurity.Size = new System.Drawing.Size(564, 379);
 			this.pnSecurity.TabIndex = 6;
 			// 
 			// textEditActivityEmailCopy
@@ -572,7 +575,7 @@
 			this.textEditActivityEmailCopy.Name = "textEditActivityEmailCopy";
 			this.textEditActivityEmailCopy.Properties.Mask.EditMask = "(\\w|[\\.\\-])+@(\\w|[\\-]+\\.)*(\\w|[\\-]){2,63}\\.[a-zA-Z]{2,4}";
 			this.textEditActivityEmailCopy.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
-			this.textEditActivityEmailCopy.Size = new System.Drawing.Size(450, 22);
+			this.textEditActivityEmailCopy.Size = new System.Drawing.Size(446, 22);
 			this.textEditActivityEmailCopy.StyleController = this.styleController;
 			this.textEditActivityEmailCopy.TabIndex = 15;
 			// 
@@ -593,7 +596,7 @@
 			this.checkEditShowLinksAsUrl.Properties.Appearance.Options.UseFont = true;
 			this.checkEditShowLinksAsUrl.Properties.AutoWidth = true;
 			this.checkEditShowLinksAsUrl.Properties.Caption = "F. Display all Links as Blue Hyperlinks";
-			this.checkEditShowLinksAsUrl.Size = new System.Drawing.Size(247, 21);
+			this.checkEditShowLinksAsUrl.Size = new System.Drawing.Size(246, 20);
 			this.checkEditShowLinksAsUrl.StyleController = this.styleController;
 			this.checkEditShowLinksAsUrl.TabIndex = 13;
 			// 
@@ -606,7 +609,7 @@
 			this.labelControlSettingsHeader.Location = new System.Drawing.Point(0, 0);
 			this.labelControlSettingsHeader.Name = "labelControlSettingsHeader";
 			this.labelControlSettingsHeader.Padding = new System.Windows.Forms.Padding(5, 5, 0, 0);
-			this.labelControlSettingsHeader.Size = new System.Drawing.Size(568, 24);
+			this.labelControlSettingsHeader.Size = new System.Drawing.Size(564, 24);
 			this.labelControlSettingsHeader.StyleController = this.styleController;
 			this.labelControlSettingsHeader.TabIndex = 12;
 			this.labelControlSettingsHeader.Text = "Customize your quickSITE with the settings below:";
@@ -633,7 +636,7 @@
 			this.checkEditPinCode.Properties.Appearance.Options.UseFont = true;
 			this.checkEditPinCode.Properties.AutoWidth = true;
 			this.checkEditPinCode.Properties.Caption = "C. Create a SECURE ACCESS Pin";
-			this.checkEditPinCode.Size = new System.Drawing.Size(228, 21);
+			this.checkEditPinCode.Size = new System.Drawing.Size(227, 20);
 			this.checkEditPinCode.StyleController = this.styleController;
 			this.checkEditPinCode.TabIndex = 10;
 			this.checkEditPinCode.CheckedChanged += new System.EventHandler(this.checkEditPinCode_CheckedChanged);
@@ -646,7 +649,7 @@
 			this.checkEditRecordActivity.Properties.Appearance.Options.UseFont = true;
 			this.checkEditRecordActivity.Properties.AutoWidth = true;
 			this.checkEditRecordActivity.Properties.Caption = "G. Email me each time someone clicks a link on this quickSITE";
-			this.checkEditRecordActivity.Size = new System.Drawing.Size(393, 21);
+			this.checkEditRecordActivity.Size = new System.Drawing.Size(392, 20);
 			this.checkEditRecordActivity.StyleController = this.styleController;
 			this.checkEditRecordActivity.TabIndex = 9;
 			this.checkEditRecordActivity.CheckedChanged += new System.EventHandler(this.checkEditRecordActivity_CheckedChanged);
@@ -659,7 +662,7 @@
 			this.checkEditDisableBanners.Properties.Appearance.Options.UseFont = true;
 			this.checkEditDisableBanners.Properties.AutoWidth = true;
 			this.checkEditDisableBanners.Properties.Caption = "E. Disable all Link Banner Images";
-			this.checkEditDisableBanners.Size = new System.Drawing.Size(219, 21);
+			this.checkEditDisableBanners.Size = new System.Drawing.Size(218, 20);
 			this.checkEditDisableBanners.StyleController = this.styleController;
 			this.checkEditDisableBanners.TabIndex = 8;
 			// 
@@ -671,7 +674,7 @@
 			this.checkEditDisableWidgets.Properties.Appearance.Options.UseFont = true;
 			this.checkEditDisableWidgets.Properties.AutoWidth = true;
 			this.checkEditDisableWidgets.Properties.Caption = "D. Disable all Link Widget Icons";
-			this.checkEditDisableWidgets.Size = new System.Drawing.Size(208, 21);
+			this.checkEditDisableWidgets.Size = new System.Drawing.Size(207, 20);
 			this.checkEditDisableWidgets.StyleController = this.styleController;
 			this.checkEditDisableWidgets.TabIndex = 7;
 			// 
@@ -683,7 +686,7 @@
 			this.checkEditRestricted.Properties.Appearance.Options.UseFont = true;
 			this.checkEditRestricted.Properties.AutoWidth = true;
 			this.checkEditRestricted.Properties.Caption = "B. Require Authorized User login and password to view site";
-			this.checkEditRestricted.Size = new System.Drawing.Size(364, 21);
+			this.checkEditRestricted.Size = new System.Drawing.Size(363, 20);
 			this.checkEditRestricted.StyleController = this.styleController;
 			this.checkEditRestricted.TabIndex = 2;
 			// 
@@ -695,13 +698,13 @@
 			this.dateEditExpirationDate.Name = "dateEditExpirationDate";
 			this.dateEditExpirationDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+			this.dateEditExpirationDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
 			this.dateEditExpirationDate.Properties.DisplayFormat.FormatString = "MM/dd/yyyy";
 			this.dateEditExpirationDate.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
 			this.dateEditExpirationDate.Properties.EditFormat.FormatString = "MM/dd/yyyy";
 			this.dateEditExpirationDate.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Custom;
 			this.dateEditExpirationDate.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-			this.dateEditExpirationDate.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton()});
 			this.dateEditExpirationDate.Size = new System.Drawing.Size(99, 22);
 			this.dateEditExpirationDate.StyleController = this.styleController;
 			this.dateEditExpirationDate.TabIndex = 1;
@@ -715,7 +718,7 @@
 			this.checkEditExpirationDate.Properties.Appearance.Options.UseFont = true;
 			this.checkEditExpirationDate.Properties.AutoWidth = true;
 			this.checkEditExpirationDate.Properties.Caption = "A. Set Expiration Date";
-			this.checkEditExpirationDate.Size = new System.Drawing.Size(153, 21);
+			this.checkEditExpirationDate.Size = new System.Drawing.Size(152, 20);
 			this.checkEditExpirationDate.StyleController = this.styleController;
 			this.checkEditExpirationDate.TabIndex = 0;
 			this.checkEditExpirationDate.CheckedChanged += new System.EventHandler(this.checkEditExpirationDate_CheckedChanged);
@@ -725,18 +728,19 @@
 			this.xtraTabPageLogo.Controls.Add(this.gridControlLogoGallery);
 			this.xtraTabPageLogo.Controls.Add(this.labelControlLogoHeader);
 			this.xtraTabPageLogo.Name = "xtraTabPageLogo";
-			this.xtraTabPageLogo.Size = new System.Drawing.Size(568, 384);
+			this.xtraTabPageLogo.Size = new System.Drawing.Size(564, 379);
 			this.xtraTabPageLogo.Text = "Logo";
 			// 
 			// gridControlLogoGallery
 			// 
+			this.gridControlLogoGallery.Cursor = System.Windows.Forms.Cursors.Default;
 			this.gridControlLogoGallery.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.gridControlLogoGallery.Location = new System.Drawing.Point(0, 29);
 			this.gridControlLogoGallery.MainView = this.layoutViewLogoGallery;
 			this.gridControlLogoGallery.Name = "gridControlLogoGallery";
 			this.gridControlLogoGallery.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemPictureEdit});
-			this.gridControlLogoGallery.Size = new System.Drawing.Size(568, 355);
+			this.gridControlLogoGallery.Size = new System.Drawing.Size(564, 350);
 			this.gridControlLogoGallery.TabIndex = 36;
 			this.gridControlLogoGallery.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.layoutViewLogoGallery});
@@ -792,6 +796,7 @@
 			this.layoutViewLogoGallery.OptionsItemText.TextToControlDistance = 2;
 			this.layoutViewLogoGallery.OptionsMultiRecordMode.MultiColumnScrollBarOrientation = DevExpress.XtraGrid.Views.Layout.ScrollBarOrientation.Vertical;
 			this.layoutViewLogoGallery.OptionsMultiRecordMode.MultiRowScrollBarOrientation = DevExpress.XtraGrid.Views.Layout.ScrollBarOrientation.Vertical;
+			this.layoutViewLogoGallery.OptionsView.ContentAlignment = System.Drawing.ContentAlignment.TopLeft;
 			this.layoutViewLogoGallery.OptionsView.ShowCardBorderIfCaptionHidden = false;
 			this.layoutViewLogoGallery.OptionsView.ShowCardCaption = false;
 			this.layoutViewLogoGallery.OptionsView.ShowCardExpandButton = false;
@@ -841,14 +846,14 @@
 			// 
 			// labelControlLogoHeader
 			// 
-			this.labelControlLogoHeader.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
+			this.labelControlLogoHeader.Appearance.BackColor = System.Drawing.Color.White;
 			this.labelControlLogoHeader.Appearance.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelControlLogoHeader.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.Vertical;
 			this.labelControlLogoHeader.Dock = System.Windows.Forms.DockStyle.Top;
 			this.labelControlLogoHeader.Location = new System.Drawing.Point(0, 0);
 			this.labelControlLogoHeader.Name = "labelControlLogoHeader";
 			this.labelControlLogoHeader.Padding = new System.Windows.Forms.Padding(5, 5, 0, 5);
-			this.labelControlLogoHeader.Size = new System.Drawing.Size(568, 29);
+			this.labelControlLogoHeader.Size = new System.Drawing.Size(564, 29);
 			this.labelControlLogoHeader.StyleController = this.styleController;
 			this.labelControlLogoHeader.TabIndex = 37;
 			this.labelControlLogoHeader.Text = "Select a Logo that will appear at the VERY top of this quickSITE:";
@@ -857,7 +862,7 @@
 			// PageContentControl
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
+			this.BackColor = System.Drawing.Color.White;
 			this.Controls.Add(this.xtraTabControl);
 			this.Controls.Add(this.pnPageHeader);
 			this.Enabled = false;
@@ -896,7 +901,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.checkEditDisableBanners.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditDisableWidgets.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditRestricted.Properties)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.dateEditExpirationDate.Properties.VistaTimeProperties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.dateEditExpirationDate.Properties.CalendarTimeProperties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.dateEditExpirationDate.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditExpirationDate.Properties)).EndInit();
 			this.xtraTabPageLogo.ResumeLayout(false);

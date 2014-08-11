@@ -9,7 +9,7 @@ namespace SalesDepot.ToolForms
 		public FormProgress()
 		{
 			InitializeComponent();
-			if ((CreateGraphics()).DpiX > 96)
+			if ((base.CreateGraphics()).DpiX > 96)
 			{
 				laProgress.Font = new Font(laProgress.Font.FontFamily, laProgress.Font.Size - 2, laProgress.Font.Style);
 			}

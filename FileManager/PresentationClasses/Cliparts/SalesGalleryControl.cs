@@ -31,25 +31,19 @@ namespace FileManager.PresentationClasses.Cliparts
 		{
 			treeListFiles.SuspendLayout();
 			treeListFiles.Nodes.Clear();
-			laTreeViewProgressLable.Text = "Loading Tree View...";
 			pnTreeViewProgress.Visible = true;
 			TreeListNode rootNode = null;
-			var thread = new Thread(delegate()
-										{
-											FormMain.Instance.Invoke((MethodInvoker)delegate
-																						{
-																							if (Directory.Exists(SettingsManager.Instance.SalesGalleryRootPath))
-																							{
-																								var rootFolder = new DirectoryInfo(SettingsManager.Instance.SalesGalleryRootPath);
-																								rootNode = treeListFiles.AppendNode(new object[] { rootFolder.Name }, null, rootFolder);
-																								rootNode.StateImageIndex = 0;
-																								Application.DoEvents();
-																								FillNode(rootNode, true);
-																								rootNode.Expanded = true;
-																								Application.DoEvents();
-																							}
-																						});
-										});
+			var thread = new Thread(() => FormMain.Instance.Invoke((MethodInvoker)delegate
+			{
+				if (!Directory.Exists(SettingsManager.Instance.SalesGalleryRootPath)) return;
+				var rootFolder = new DirectoryInfo(SettingsManager.Instance.SalesGalleryRootPath);
+				rootNode = treeListFiles.AppendNode(new object[] { rootFolder.Name }, null, rootFolder);
+				rootNode.StateImageIndex = 0;
+				Application.DoEvents();
+				FillNode(rootNode, true);
+				rootNode.Expanded = true;
+				Application.DoEvents();
+			}));
 			thread.Start();
 
 			while (thread.IsAlive)

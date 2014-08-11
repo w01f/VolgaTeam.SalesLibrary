@@ -18,8 +18,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.MainData
 		private readonly DateTime _startDate;
 		private readonly DateTime _endDate;
 		public List<MainGroupReportModel> Records { get; private set; }
-		public PrintableComponentLink PrintLink { get; private set; }
-
+		
 		public string GroupName
 		{
 			get { return Text; }
@@ -39,16 +38,20 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.MainData
 			_endDate = endDate;
 
 			gridControlData.DataSource = Records;
-
-			PrintLink = new PrintableComponentLink()
+		}
+		
+		public PrintableComponentLink GetPrintLink()
+		{
+			advBandedGridViewData.CheckLoaded();
+			var printLink = new PrintableComponentLink()
 			{
 				Landscape = true,
 				PaperKind = PaperKind.A4,
 				Component = gridControlData
 			};
-			PrintLink.CreateReportHeaderArea += OnCreateReportHeaderArea;
+			printLink.CreateReportHeaderArea += OnCreateReportHeaderArea;
+			return printLink;
 		}
-
 
 		public void ApplyColumns(GroupFilter filter)
 		{

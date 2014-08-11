@@ -28,13 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-			this.components = new System.ComponentModel.Container();
 			this.buttonXClose = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXAddToPresentation = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXReview = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXQuickSiteAdd = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXQuickSiteEmail = new DevComponents.DotNetBar.ButtonX();
-			this.toolTipController = new DevExpress.Utils.ToolTipController(this.components);
+			this.toolTipController = new DevExpress.Utils.ToolTipController();
 			this.SuspendLayout();
 			// 
 			// buttonXClose
@@ -47,6 +46,7 @@
 			this.buttonXClose.Location = new System.Drawing.Point(12, 272);
 			this.buttonXClose.Name = "buttonXClose";
 			this.buttonXClose.Size = new System.Drawing.Size(317, 55);
+			this.buttonXClose.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXClose.TabIndex = 7;
 			this.buttonXClose.Text = "   Close this Window";
 			this.buttonXClose.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
@@ -65,6 +65,7 @@
 			this.buttonXAddToPresentation.Location = new System.Drawing.Point(12, 12);
 			this.buttonXAddToPresentation.Name = "buttonXAddToPresentation";
 			this.buttonXAddToPresentation.Size = new System.Drawing.Size(317, 55);
+			this.buttonXAddToPresentation.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXAddToPresentation.TabIndex = 6;
 			this.buttonXAddToPresentation.Text = "   Add to presentation";
 			this.buttonXAddToPresentation.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
@@ -83,6 +84,7 @@
 			this.buttonXReview.Location = new System.Drawing.Point(12, 77);
 			this.buttonXReview.Name = "buttonXReview";
 			this.buttonXReview.Size = new System.Drawing.Size(317, 55);
+			this.buttonXReview.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXReview.TabIndex = 5;
 			this.buttonXReview.Text = "   Review video clip";
 			this.buttonXReview.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
@@ -101,6 +103,7 @@
 			this.buttonXQuickSiteAdd.Location = new System.Drawing.Point(12, 207);
 			this.buttonXQuickSiteAdd.Name = "buttonXQuickSiteAdd";
 			this.buttonXQuickSiteAdd.Size = new System.Drawing.Size(317, 55);
+			this.buttonXQuickSiteAdd.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXQuickSiteAdd.TabIndex = 9;
 			this.buttonXQuickSiteAdd.Text = "   Add to quickSITE";
 			this.buttonXQuickSiteAdd.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
@@ -119,6 +122,7 @@
 			this.buttonXQuickSiteEmail.Location = new System.Drawing.Point(12, 142);
 			this.buttonXQuickSiteEmail.Name = "buttonXQuickSiteEmail";
 			this.buttonXQuickSiteEmail.Size = new System.Drawing.Size(317, 55);
+			this.buttonXQuickSiteEmail.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXQuickSiteEmail.TabIndex = 8;
 			this.buttonXQuickSiteEmail.Text = "   Email as Web Link";
 			this.buttonXQuickSiteEmail.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
@@ -135,13 +139,14 @@
 			// FormVideoViewOptions
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
+			this.BackColor = System.Drawing.Color.White;
 			this.ClientSize = new System.Drawing.Size(341, 336);
 			this.Controls.Add(this.buttonXQuickSiteAdd);
 			this.Controls.Add(this.buttonXQuickSiteEmail);
 			this.Controls.Add(this.buttonXClose);
 			this.Controls.Add(this.buttonXAddToPresentation);
 			this.Controls.Add(this.buttonXReview);
+			this.DoubleBuffered = true;
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.MaximizeBox = false;

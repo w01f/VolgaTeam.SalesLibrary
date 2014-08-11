@@ -79,6 +79,7 @@
 			this.buttonXCancel.Location = new System.Drawing.Point(151, 235);
 			this.buttonXCancel.Name = "buttonXCancel";
 			this.buttonXCancel.Size = new System.Drawing.Size(93, 32);
+			this.buttonXCancel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXCancel.TabIndex = 15;
 			this.buttonXCancel.Text = "Cancel";
 			this.buttonXCancel.TextColor = System.Drawing.Color.Black;
@@ -92,6 +93,7 @@
 			this.buttonXOK.Location = new System.Drawing.Point(44, 235);
 			this.buttonXOK.Name = "buttonXOK";
 			this.buttonXOK.Size = new System.Drawing.Size(93, 32);
+			this.buttonXOK.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXOK.TabIndex = 14;
 			this.buttonXOK.Text = "OK";
 			this.buttonXOK.TextColor = System.Drawing.Color.Black;
@@ -121,7 +123,7 @@
 			// FormSync
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
+			this.BackColor = System.Drawing.Color.White;
 			this.ClientSize = new System.Drawing.Size(279, 279);
 			this.Controls.Add(this.ckVideoConversionWarning);
 			this.Controls.Add(this.ckFullSync);

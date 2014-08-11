@@ -36,7 +36,9 @@
 			// 
 			// laTitle
 			// 
+			this.laTitle.BackColor = System.Drawing.Color.White;
 			this.laTitle.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.laTitle.ForeColor = System.Drawing.Color.Black;
 			this.laTitle.Location = new System.Drawing.Point(115, 2);
 			this.laTitle.Name = "laTitle";
 			this.laTitle.Size = new System.Drawing.Size(391, 97);
@@ -53,12 +55,15 @@
 			this.buttonXClose.Location = new System.Drawing.Point(405, 102);
 			this.buttonXClose.Name = "buttonXClose";
 			this.buttonXClose.Size = new System.Drawing.Size(101, 32);
+			this.buttonXClose.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXClose.TabIndex = 11;
 			this.buttonXClose.Text = "Close";
 			this.buttonXClose.TextColor = System.Drawing.Color.Black;
 			// 
 			// pbLogo
 			// 
+			this.pbLogo.BackColor = System.Drawing.Color.White;
+			this.pbLogo.ForeColor = System.Drawing.Color.Black;
 			this.pbLogo.Image = global::SalesDepot.Properties.Resources.AuthorizeWarning;
 			this.pbLogo.Location = new System.Drawing.Point(3, 2);
 			this.pbLogo.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -71,11 +76,12 @@
 			// FormAuthorizeWarning
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
+			this.BackColor = System.Drawing.Color.White;
 			this.ClientSize = new System.Drawing.Size(518, 143);
 			this.Controls.Add(this.buttonXClose);
 			this.Controls.Add(this.laTitle);
 			this.Controls.Add(this.pbLogo);
+			this.DoubleBuffered = true;
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);

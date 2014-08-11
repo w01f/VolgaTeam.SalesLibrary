@@ -30,11 +30,7 @@
 		{
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormEmailWebLink));
-			this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
 			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
-			this.simpleButtonAddLink = new DevExpress.XtraEditors.SimpleButton();
-			this.simpleButtonCancel = new DevExpress.XtraEditors.SimpleButton();
-			this.simpleButtonLogin = new DevExpress.XtraEditors.SimpleButton();
 			this.labelControlSiteValue = new DevExpress.XtraEditors.LabelControl();
 			this.labelControlSiteTitle = new DevExpress.XtraEditors.LabelControl();
 			this.labelControlLinkName = new DevExpress.XtraEditors.LabelControl();
@@ -68,6 +64,9 @@
 			this.xtraTabPageOptionsPin = new DevExpress.XtraTab.XtraTabPage();
 			this.checkEditPinCode = new DevExpress.XtraEditors.CheckEdit();
 			this.textEditPinCode = new DevExpress.XtraEditors.TextEdit();
+			this.buttonXCancel = new DevComponents.DotNetBar.ButtonX();
+			this.buttonXLogin = new DevComponents.DotNetBar.ButtonX();
+			this.buttonXAddLink = new DevComponents.DotNetBar.ButtonX();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControlOptions)).BeginInit();
 			this.xtraTabControlOptions.SuspendLayout();
@@ -93,10 +92,6 @@
 			((System.ComponentModel.ISupportInitialize)(this.textEditPinCode.Properties)).BeginInit();
 			this.SuspendLayout();
 			// 
-			// defaultLookAndFeel
-			// 
-			this.defaultLookAndFeel.LookAndFeel.SkinName = "Money Twins";
-			// 
 			// styleController
 			// 
 			this.styleController.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -112,52 +107,12 @@
 			this.styleController.AppearanceReadOnly.Font = new System.Drawing.Font("Arial", 9.75F);
 			this.styleController.AppearanceReadOnly.Options.UseFont = true;
 			// 
-			// simpleButtonAddLink
-			// 
-			this.simpleButtonAddLink.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.simpleButtonAddLink.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.simpleButtonAddLink.Appearance.ForeColor = System.Drawing.Color.Black;
-			this.simpleButtonAddLink.Appearance.Options.UseFont = true;
-			this.simpleButtonAddLink.Appearance.Options.UseForeColor = true;
-			this.simpleButtonAddLink.Location = new System.Drawing.Point(393, 4);
-			this.simpleButtonAddLink.Name = "simpleButtonAddLink";
-			this.simpleButtonAddLink.Size = new System.Drawing.Size(97, 37);
-			this.simpleButtonAddLink.TabIndex = 1;
-			this.simpleButtonAddLink.Text = "Create Link";
-			this.simpleButtonAddLink.Click += new System.EventHandler(this.simpleButtonAddLink_Click);
-			// 
-			// simpleButtonCancel
-			// 
-			this.simpleButtonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.simpleButtonCancel.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.simpleButtonCancel.Appearance.ForeColor = System.Drawing.Color.Black;
-			this.simpleButtonCancel.Appearance.Options.UseFont = true;
-			this.simpleButtonCancel.Appearance.Options.UseForeColor = true;
-			this.simpleButtonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.simpleButtonCancel.Location = new System.Drawing.Point(393, 90);
-			this.simpleButtonCancel.Name = "simpleButtonCancel";
-			this.simpleButtonCancel.Size = new System.Drawing.Size(97, 37);
-			this.simpleButtonCancel.TabIndex = 2;
-			this.simpleButtonCancel.Text = "Cancel";
-			// 
-			// simpleButtonLogin
-			// 
-			this.simpleButtonLogin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.simpleButtonLogin.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.simpleButtonLogin.Appearance.ForeColor = System.Drawing.Color.Black;
-			this.simpleButtonLogin.Appearance.Options.UseFont = true;
-			this.simpleButtonLogin.Appearance.Options.UseForeColor = true;
-			this.simpleButtonLogin.Location = new System.Drawing.Point(393, 47);
-			this.simpleButtonLogin.Name = "simpleButtonLogin";
-			this.simpleButtonLogin.Size = new System.Drawing.Size(97, 37);
-			this.simpleButtonLogin.TabIndex = 5;
-			this.simpleButtonLogin.Text = "Select Site";
-			this.simpleButtonLogin.Click += new System.EventHandler(this.simpleButtonLogin_Click);
-			// 
 			// labelControlSiteValue
 			// 
 			this.labelControlSiteValue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+			this.labelControlSiteValue.Appearance.BackColor = System.Drawing.Color.White;
+			this.labelControlSiteValue.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.labelControlSiteValue.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.Vertical;
 			this.labelControlSiteValue.Location = new System.Drawing.Point(7, 46);
 			this.labelControlSiteValue.Name = "labelControlSiteValue";
@@ -168,6 +123,8 @@
 			// 
 			// labelControlSiteTitle
 			// 
+			this.labelControlSiteTitle.Appearance.BackColor = System.Drawing.Color.White;
+			this.labelControlSiteTitle.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.labelControlSiteTitle.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
 			this.labelControlSiteTitle.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
 			this.labelControlSiteTitle.Location = new System.Drawing.Point(6, 4);
@@ -181,6 +138,8 @@
 			// 
 			this.labelControlLinkName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+			this.labelControlLinkName.Appearance.BackColor = System.Drawing.Color.White;
+			this.labelControlLinkName.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.labelControlLinkName.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.Vertical;
 			this.labelControlLinkName.Location = new System.Drawing.Point(7, 79);
 			this.labelControlLinkName.Name = "labelControlLinkName";
@@ -194,8 +153,12 @@
 			this.xtraTabControlOptions.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+			this.xtraTabControlOptions.Appearance.BackColor = System.Drawing.Color.White;
 			this.xtraTabControlOptions.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.xtraTabControlOptions.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.xtraTabControlOptions.Appearance.Options.UseBackColor = true;
 			this.xtraTabControlOptions.Appearance.Options.UseFont = true;
+			this.xtraTabControlOptions.Appearance.Options.UseForeColor = true;
 			this.xtraTabControlOptions.AppearancePage.Header.Font = new System.Drawing.Font("Arial", 9.75F);
 			this.xtraTabControlOptions.AppearancePage.Header.Options.UseFont = true;
 			this.xtraTabControlOptions.AppearancePage.HeaderActive.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -220,6 +183,8 @@
 			// 
 			// xtraTabPageOptionsInfo
 			// 
+			this.xtraTabPageOptionsInfo.Appearance.PageClient.ForeColor = System.Drawing.Color.Black;
+			this.xtraTabPageOptionsInfo.Appearance.PageClient.Options.UseForeColor = true;
 			this.xtraTabPageOptionsInfo.Controls.Add(this.labelControlInfoWarning);
 			this.xtraTabPageOptionsInfo.Controls.Add(this.buttonXExpiresInNever);
 			this.xtraTabPageOptionsInfo.Controls.Add(this.buttonXExpiresIn30);
@@ -229,7 +194,7 @@
 			this.xtraTabPageOptionsInfo.Controls.Add(this.textEditTitle);
 			this.xtraTabPageOptionsInfo.Controls.Add(this.checkEditTitle);
 			this.xtraTabPageOptionsInfo.Name = "xtraTabPageOptionsInfo";
-			this.xtraTabPageOptionsInfo.Size = new System.Drawing.Size(482, 295);
+			this.xtraTabPageOptionsInfo.Size = new System.Drawing.Size(478, 290);
 			this.xtraTabPageOptionsInfo.Text = "Info";
 			// 
 			// labelControlInfoWarning
@@ -237,7 +202,8 @@
 			this.labelControlInfoWarning.AllowHtmlString = true;
 			this.labelControlInfoWarning.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.labelControlInfoWarning.Appearance.ForeColor = System.Drawing.Color.Red;
+			this.labelControlInfoWarning.Appearance.BackColor = System.Drawing.Color.White;
+			this.labelControlInfoWarning.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.labelControlInfoWarning.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
 			this.labelControlInfoWarning.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
 			this.labelControlInfoWarning.Location = new System.Drawing.Point(7, 205);
@@ -302,7 +268,9 @@
 			// 
 			// labelControlExpiresIn
 			// 
+			this.labelControlExpiresIn.Appearance.BackColor = System.Drawing.Color.White;
 			this.labelControlExpiresIn.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelControlExpiresIn.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.labelControlExpiresIn.Location = new System.Drawing.Point(7, 105);
 			this.labelControlExpiresIn.Name = "labelControlExpiresIn";
 			this.labelControlExpiresIn.Size = new System.Drawing.Size(128, 16);
@@ -316,6 +284,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.textEditTitle.Location = new System.Drawing.Point(7, 40);
 			this.textEditTitle.Name = "textEditTitle";
+			this.textEditTitle.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.textEditTitle.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.textEditTitle.Properties.Appearance.Options.UseBackColor = true;
+			this.textEditTitle.Properties.Appearance.Options.UseForeColor = true;
 			this.textEditTitle.Size = new System.Drawing.Size(471, 22);
 			this.textEditTitle.StyleController = this.styleController;
 			this.textEditTitle.TabIndex = 1;
@@ -326,30 +298,38 @@
 			this.checkEditTitle.Location = new System.Drawing.Point(5, 13);
 			this.checkEditTitle.Name = "checkEditTitle";
 			this.checkEditTitle.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.checkEditTitle.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.checkEditTitle.Properties.Appearance.Options.UseFont = true;
+			this.checkEditTitle.Properties.Appearance.Options.UseForeColor = true;
 			this.checkEditTitle.Properties.AutoWidth = true;
 			this.checkEditTitle.Properties.Caption = "Page Header Text (shown with the link on the page)";
-			this.checkEditTitle.Size = new System.Drawing.Size(353, 21);
+			this.checkEditTitle.Size = new System.Drawing.Size(352, 20);
 			this.checkEditTitle.StyleController = this.styleController;
 			this.checkEditTitle.TabIndex = 0;
 			this.checkEditTitle.CheckedChanged += new System.EventHandler(this.checkEditTitle_CheckedChanged);
 			// 
 			// xtraTabPageOptionsLogo
 			// 
+			this.xtraTabPageOptionsLogo.Appearance.PageClient.ForeColor = System.Drawing.Color.Black;
+			this.xtraTabPageOptionsLogo.Appearance.PageClient.Options.UseForeColor = true;
 			this.xtraTabPageOptionsLogo.Controls.Add(this.gridControlLogoGallery);
 			this.xtraTabPageOptionsLogo.Name = "xtraTabPageOptionsLogo";
-			this.xtraTabPageOptionsLogo.Size = new System.Drawing.Size(482, 295);
+			this.xtraTabPageOptionsLogo.Size = new System.Drawing.Size(478, 290);
 			this.xtraTabPageOptionsLogo.Text = "Logo";
 			// 
 			// gridControlLogoGallery
 			// 
 			this.gridControlLogoGallery.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.gridControlLogoGallery.EmbeddedNavigator.Appearance.BackColor = System.Drawing.Color.White;
+			this.gridControlLogoGallery.EmbeddedNavigator.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.gridControlLogoGallery.EmbeddedNavigator.Appearance.Options.UseBackColor = true;
+			this.gridControlLogoGallery.EmbeddedNavigator.Appearance.Options.UseForeColor = true;
 			this.gridControlLogoGallery.Location = new System.Drawing.Point(0, 0);
 			this.gridControlLogoGallery.MainView = this.layoutViewLogoGallery;
 			this.gridControlLogoGallery.Name = "gridControlLogoGallery";
 			this.gridControlLogoGallery.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemPictureEdit});
-			this.gridControlLogoGallery.Size = new System.Drawing.Size(482, 295);
+			this.gridControlLogoGallery.Size = new System.Drawing.Size(478, 290);
 			this.gridControlLogoGallery.TabIndex = 35;
 			this.gridControlLogoGallery.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.layoutViewLogoGallery});
@@ -454,11 +434,13 @@
 			// 
 			// xtraTabPageOptionsSettings
 			// 
+			this.xtraTabPageOptionsSettings.Appearance.PageClient.ForeColor = System.Drawing.Color.Black;
+			this.xtraTabPageOptionsSettings.Appearance.PageClient.Options.UseForeColor = true;
 			this.xtraTabPageOptionsSettings.Controls.Add(this.checkEditShowLinksAsUrl);
 			this.xtraTabPageOptionsSettings.Controls.Add(this.checkEditDisableBanners);
 			this.xtraTabPageOptionsSettings.Controls.Add(this.checkEditDisableWidgets);
 			this.xtraTabPageOptionsSettings.Name = "xtraTabPageOptionsSettings";
-			this.xtraTabPageOptionsSettings.Size = new System.Drawing.Size(482, 295);
+			this.xtraTabPageOptionsSettings.Size = new System.Drawing.Size(478, 290);
 			this.xtraTabPageOptionsSettings.Text = "Misc";
 			// 
 			// checkEditShowLinksAsUrl
@@ -466,10 +448,12 @@
 			this.checkEditShowLinksAsUrl.Location = new System.Drawing.Point(5, 116);
 			this.checkEditShowLinksAsUrl.Name = "checkEditShowLinksAsUrl";
 			this.checkEditShowLinksAsUrl.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.checkEditShowLinksAsUrl.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.checkEditShowLinksAsUrl.Properties.Appearance.Options.UseFont = true;
+			this.checkEditShowLinksAsUrl.Properties.Appearance.Options.UseForeColor = true;
 			this.checkEditShowLinksAsUrl.Properties.AutoWidth = true;
 			this.checkEditShowLinksAsUrl.Properties.Caption = "F. Display all Links as Blue Hyperlinks";
-			this.checkEditShowLinksAsUrl.Size = new System.Drawing.Size(247, 21);
+			this.checkEditShowLinksAsUrl.Size = new System.Drawing.Size(246, 20);
 			this.checkEditShowLinksAsUrl.StyleController = this.styleController;
 			this.checkEditShowLinksAsUrl.TabIndex = 15;
 			// 
@@ -478,10 +462,12 @@
 			this.checkEditDisableBanners.Location = new System.Drawing.Point(5, 63);
 			this.checkEditDisableBanners.Name = "checkEditDisableBanners";
 			this.checkEditDisableBanners.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.checkEditDisableBanners.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.checkEditDisableBanners.Properties.Appearance.Options.UseFont = true;
+			this.checkEditDisableBanners.Properties.Appearance.Options.UseForeColor = true;
 			this.checkEditDisableBanners.Properties.AutoWidth = true;
 			this.checkEditDisableBanners.Properties.Caption = "Disable all Link Banner Images";
-			this.checkEditDisableBanners.Size = new System.Drawing.Size(202, 21);
+			this.checkEditDisableBanners.Size = new System.Drawing.Size(201, 20);
 			this.checkEditDisableBanners.StyleController = this.styleController;
 			this.checkEditDisableBanners.TabIndex = 14;
 			// 
@@ -490,22 +476,26 @@
 			this.checkEditDisableWidgets.Location = new System.Drawing.Point(5, 12);
 			this.checkEditDisableWidgets.Name = "checkEditDisableWidgets";
 			this.checkEditDisableWidgets.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.checkEditDisableWidgets.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.checkEditDisableWidgets.Properties.Appearance.Options.UseFont = true;
+			this.checkEditDisableWidgets.Properties.Appearance.Options.UseForeColor = true;
 			this.checkEditDisableWidgets.Properties.AutoWidth = true;
 			this.checkEditDisableWidgets.Properties.Caption = "Disable all Link Widget Icons";
-			this.checkEditDisableWidgets.Size = new System.Drawing.Size(191, 21);
+			this.checkEditDisableWidgets.Size = new System.Drawing.Size(190, 20);
 			this.checkEditDisableWidgets.StyleController = this.styleController;
 			this.checkEditDisableWidgets.TabIndex = 13;
 			// 
 			// xtraTabPageOptionsTracking
 			// 
+			this.xtraTabPageOptionsTracking.Appearance.PageClient.ForeColor = System.Drawing.Color.Black;
+			this.xtraTabPageOptionsTracking.Appearance.PageClient.Options.UseForeColor = true;
 			this.xtraTabPageOptionsTracking.Controls.Add(this.textEditActivityEmailCopy);
 			this.xtraTabPageOptionsTracking.Controls.Add(this.labelControlActivityEmailCopy);
 			this.xtraTabPageOptionsTracking.Controls.Add(this.labelControlSecurityWarning);
 			this.xtraTabPageOptionsTracking.Controls.Add(this.checkEditRecordActivity);
 			this.xtraTabPageOptionsTracking.Controls.Add(this.checkEditRestricted);
 			this.xtraTabPageOptionsTracking.Name = "xtraTabPageOptionsTracking";
-			this.xtraTabPageOptionsTracking.Size = new System.Drawing.Size(482, 295);
+			this.xtraTabPageOptionsTracking.Size = new System.Drawing.Size(478, 290);
 			this.xtraTabPageOptionsTracking.Text = "Trackng";
 			// 
 			// textEditActivityEmailCopy
@@ -515,6 +505,10 @@
 			this.textEditActivityEmailCopy.Enabled = false;
 			this.textEditActivityEmailCopy.Location = new System.Drawing.Point(86, 39);
 			this.textEditActivityEmailCopy.Name = "textEditActivityEmailCopy";
+			this.textEditActivityEmailCopy.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.textEditActivityEmailCopy.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.textEditActivityEmailCopy.Properties.Appearance.Options.UseBackColor = true;
+			this.textEditActivityEmailCopy.Properties.Appearance.Options.UseForeColor = true;
 			this.textEditActivityEmailCopy.Properties.Mask.EditMask = "(\\w|[\\.\\-])+@(\\w|[\\-]+\\.)*(\\w|[\\-]){2,63}\\.[a-zA-Z]{2,4}";
 			this.textEditActivityEmailCopy.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
 			this.textEditActivityEmailCopy.Size = new System.Drawing.Size(378, 22);
@@ -523,6 +517,8 @@
 			// 
 			// labelControlActivityEmailCopy
 			// 
+			this.labelControlActivityEmailCopy.Appearance.BackColor = System.Drawing.Color.White;
+			this.labelControlActivityEmailCopy.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.labelControlActivityEmailCopy.Location = new System.Drawing.Point(23, 42);
 			this.labelControlActivityEmailCopy.Name = "labelControlActivityEmailCopy";
 			this.labelControlActivityEmailCopy.Size = new System.Drawing.Size(57, 16);
@@ -535,7 +531,8 @@
 			this.labelControlSecurityWarning.AllowHtmlString = true;
 			this.labelControlSecurityWarning.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.labelControlSecurityWarning.Appearance.ForeColor = System.Drawing.Color.Red;
+			this.labelControlSecurityWarning.Appearance.BackColor = System.Drawing.Color.White;
+			this.labelControlSecurityWarning.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.labelControlSecurityWarning.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
 			this.labelControlSecurityWarning.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
 			this.labelControlSecurityWarning.Location = new System.Drawing.Point(23, 140);
@@ -551,10 +548,12 @@
 			this.checkEditRecordActivity.Location = new System.Drawing.Point(5, 12);
 			this.checkEditRecordActivity.Name = "checkEditRecordActivity";
 			this.checkEditRecordActivity.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.checkEditRecordActivity.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.checkEditRecordActivity.Properties.Appearance.Options.UseFont = true;
+			this.checkEditRecordActivity.Properties.Appearance.Options.UseForeColor = true;
 			this.checkEditRecordActivity.Properties.AutoWidth = true;
 			this.checkEditRecordActivity.Properties.Caption = "Email me each time someone clicks a link on this quickSITE";
-			this.checkEditRecordActivity.Size = new System.Drawing.Size(375, 21);
+			this.checkEditRecordActivity.Size = new System.Drawing.Size(374, 20);
 			this.checkEditRecordActivity.StyleController = this.styleController;
 			this.checkEditRecordActivity.TabIndex = 15;
 			this.checkEditRecordActivity.CheckedChanged += new System.EventHandler(this.checkEditRecordActivity_CheckedChanged);
@@ -563,18 +562,22 @@
 			// 
 			this.checkEditRestricted.Location = new System.Drawing.Point(5, 115);
 			this.checkEditRestricted.Name = "checkEditRestricted";
+			this.checkEditRestricted.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.checkEditRestricted.Properties.Appearance.Options.UseForeColor = true;
 			this.checkEditRestricted.Properties.AutoWidth = true;
 			this.checkEditRestricted.Properties.Caption = "Require User Log-in";
-			this.checkEditRestricted.Size = new System.Drawing.Size(137, 21);
+			this.checkEditRestricted.Size = new System.Drawing.Size(136, 20);
 			this.checkEditRestricted.StyleController = this.styleController;
 			this.checkEditRestricted.TabIndex = 8;
 			// 
 			// xtraTabPageOptionsPin
 			// 
+			this.xtraTabPageOptionsPin.Appearance.PageClient.ForeColor = System.Drawing.Color.Black;
+			this.xtraTabPageOptionsPin.Appearance.PageClient.Options.UseForeColor = true;
 			this.xtraTabPageOptionsPin.Controls.Add(this.checkEditPinCode);
 			this.xtraTabPageOptionsPin.Controls.Add(this.textEditPinCode);
 			this.xtraTabPageOptionsPin.Name = "xtraTabPageOptionsPin";
-			this.xtraTabPageOptionsPin.Size = new System.Drawing.Size(482, 295);
+			this.xtraTabPageOptionsPin.Size = new System.Drawing.Size(478, 290);
 			this.xtraTabPageOptionsPin.Text = "Pin";
 			// 
 			// checkEditPinCode
@@ -582,10 +585,12 @@
 			this.checkEditPinCode.Location = new System.Drawing.Point(5, 12);
 			this.checkEditPinCode.Name = "checkEditPinCode";
 			this.checkEditPinCode.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.checkEditPinCode.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.checkEditPinCode.Properties.Appearance.Options.UseFont = true;
+			this.checkEditPinCode.Properties.Appearance.Options.UseForeColor = true;
 			this.checkEditPinCode.Properties.AutoWidth = true;
 			this.checkEditPinCode.Properties.Caption = "Create a SECURE ACCESS Pin";
-			this.checkEditPinCode.Size = new System.Drawing.Size(211, 21);
+			this.checkEditPinCode.Size = new System.Drawing.Size(210, 20);
 			this.checkEditPinCode.StyleController = this.styleController;
 			this.checkEditPinCode.TabIndex = 16;
 			this.checkEditPinCode.CheckedChanged += new System.EventHandler(this.checkEditPinCode_CheckedChanged);
@@ -595,6 +600,10 @@
 			this.textEditPinCode.Enabled = false;
 			this.textEditPinCode.Location = new System.Drawing.Point(26, 39);
 			this.textEditPinCode.Name = "textEditPinCode";
+			this.textEditPinCode.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.textEditPinCode.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.textEditPinCode.Properties.Appearance.Options.UseBackColor = true;
+			this.textEditPinCode.Properties.Appearance.Options.UseForeColor = true;
 			this.textEditPinCode.Properties.DisplayFormat.FormatString = "d4";
 			this.textEditPinCode.Properties.EditFormat.FormatString = "d4";
 			this.textEditPinCode.Properties.Mask.EditMask = "\\d{4}";
@@ -604,19 +613,60 @@
 			this.textEditPinCode.StyleController = this.styleController;
 			this.textEditPinCode.TabIndex = 17;
 			// 
+			// buttonXCancel
+			// 
+			this.buttonXCancel.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonXCancel.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+			this.buttonXCancel.Location = new System.Drawing.Point(393, 90);
+			this.buttonXCancel.Name = "buttonXCancel";
+			this.buttonXCancel.Size = new System.Drawing.Size(97, 37);
+			this.buttonXCancel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXCancel.TabIndex = 14;
+			this.buttonXCancel.Text = "Cancel";
+			// 
+			// buttonXLogin
+			// 
+			this.buttonXLogin.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXLogin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonXLogin.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXLogin.Location = new System.Drawing.Point(393, 47);
+			this.buttonXLogin.Name = "buttonXLogin";
+			this.buttonXLogin.Size = new System.Drawing.Size(97, 37);
+			this.buttonXLogin.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXLogin.TabIndex = 13;
+			this.buttonXLogin.Text = "Select Site";
+			this.buttonXLogin.Click += new System.EventHandler(this.simpleButtonLogin_Click);
+			// 
+			// buttonXAddLink
+			// 
+			this.buttonXAddLink.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXAddLink.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonXAddLink.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXAddLink.Location = new System.Drawing.Point(393, 4);
+			this.buttonXAddLink.Name = "buttonXAddLink";
+			this.buttonXAddLink.Size = new System.Drawing.Size(97, 37);
+			this.buttonXAddLink.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXAddLink.TabIndex = 12;
+			this.buttonXAddLink.Text = "Create Link";
+			this.buttonXAddLink.Click += new System.EventHandler(this.simpleButtonAddLink_Click);
+			// 
 			// FormEmailWebLink
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
+			this.BackColor = System.Drawing.Color.White;
 			this.ClientSize = new System.Drawing.Size(497, 441);
-			this.Controls.Add(this.simpleButtonCancel);
+			this.Controls.Add(this.buttonXCancel);
 			this.Controls.Add(this.xtraTabControlOptions);
 			this.Controls.Add(this.labelControlLinkName);
-			this.Controls.Add(this.simpleButtonLogin);
 			this.Controls.Add(this.labelControlSiteValue);
 			this.Controls.Add(this.labelControlSiteTitle);
-			this.Controls.Add(this.simpleButtonAddLink);
+			this.Controls.Add(this.buttonXAddLink);
+			this.Controls.Add(this.buttonXLogin);
+			this.DoubleBuffered = true;
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.ForeColor = System.Drawing.Color.Black;
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
@@ -657,11 +707,7 @@
 
 		#endregion
 
-		private DevExpress.LookAndFeel.DefaultLookAndFeel defaultLookAndFeel;
 		private DevExpress.XtraEditors.StyleController styleController;
-		private DevExpress.XtraEditors.SimpleButton simpleButtonAddLink;
-		private DevExpress.XtraEditors.SimpleButton simpleButtonCancel;
-		private DevExpress.XtraEditors.SimpleButton simpleButtonLogin;
 		private DevExpress.XtraEditors.LabelControl labelControlSiteValue;
 		private DevExpress.XtraEditors.LabelControl labelControlSiteTitle;
 		private DevExpress.XtraEditors.LabelControl labelControlLinkName;
@@ -695,5 +741,8 @@
 		private DevExpress.XtraEditors.TextEdit textEditActivityEmailCopy;
 		private DevExpress.XtraEditors.LabelControl labelControlActivityEmailCopy;
 		private DevExpress.XtraEditors.CheckEdit checkEditShowLinksAsUrl;
+		private DevComponents.DotNetBar.ButtonX buttonXCancel;
+		private DevComponents.DotNetBar.ButtonX buttonXLogin;
+		private DevComponents.DotNetBar.ButtonX buttonXAddLink;
 	}
 }

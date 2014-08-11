@@ -1,10 +1,11 @@
 ﻿using System.IO;
 using System.Windows.Forms;
+using DevComponents.DotNetBar.Metro;
 using DevExpress.XtraEditors.Controls;
 
 namespace FileManager.ToolForms.WallBin
 {
-	public partial class FormAddNetworkLink : Form
+	public partial class FormAddNetworkLink : MetroForm
 	{
 		public FormAddNetworkLink()
 		{

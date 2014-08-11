@@ -28,162 +28,171 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pnButtons = new System.Windows.Forms.Panel();
-            this.btCancel = new System.Windows.Forms.Button();
-            this.btExpiredDate = new System.Windows.Forms.Button();
-            this.btOK = new System.Windows.Forms.Button();
-            this.btDelete = new System.Windows.Forms.Button();
-            this.grIncorrectLinks = new System.Windows.Forms.DataGridView();
-            this.colIdentifier = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colWindow = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colLink = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPath = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pnButtons.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.grIncorrectLinks)).BeginInit();
-            this.SuspendLayout();
-            // 
-            // pnButtons
-            // 
-            this.pnButtons.Controls.Add(this.btCancel);
-            this.pnButtons.Controls.Add(this.btExpiredDate);
-            this.pnButtons.Controls.Add(this.btOK);
-            this.pnButtons.Controls.Add(this.btDelete);
-            this.pnButtons.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pnButtons.Location = new System.Drawing.Point(606, 0);
-            this.pnButtons.Name = "pnButtons";
-            this.pnButtons.Size = new System.Drawing.Size(158, 512);
-            this.pnButtons.TabIndex = 0;
-            // 
-            // btCancel
-            // 
-            this.btCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btCancel.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btCancel.Location = new System.Drawing.Point(10, 457);
-            this.btCancel.Name = "btCancel";
-            this.btCancel.Size = new System.Drawing.Size(136, 43);
-            this.btCancel.TabIndex = 4;
-            this.btCancel.Text = "Cancel";
-            this.btCancel.UseVisualStyleBackColor = true;
-            // 
-            // btExpiredDate
-            // 
-            this.btExpiredDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btExpiredDate.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btExpiredDate.Location = new System.Drawing.Point(10, 62);
-            this.btExpiredDate.Name = "btExpiredDate";
-            this.btExpiredDate.Size = new System.Drawing.Size(136, 44);
-            this.btExpiredDate.TabIndex = 3;
-            this.btExpiredDate.Text = "Expired Date\r\nOptions";
-            this.btExpiredDate.UseVisualStyleBackColor = true;
-            this.btExpiredDate.Click += new System.EventHandler(this.btExpiredDate_Click);
-            // 
-            // btOK
-            // 
-            this.btOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btOK.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btOK.Location = new System.Drawing.Point(10, 408);
-            this.btOK.Name = "btOK";
-            this.btOK.Size = new System.Drawing.Size(136, 43);
-            this.btOK.TabIndex = 2;
-            this.btOK.Text = "OK";
-            this.btOK.UseVisualStyleBackColor = true;
-            // 
-            // btDelete
-            // 
-            this.btDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btDelete.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btDelete.Location = new System.Drawing.Point(10, 12);
-            this.btDelete.Name = "btDelete";
-            this.btDelete.Size = new System.Drawing.Size(136, 44);
-            this.btDelete.TabIndex = 0;
-            this.btDelete.Text = "Delete\r\nthis Link";
-            this.btDelete.UseVisualStyleBackColor = true;
-            this.btDelete.Click += new System.EventHandler(this.btDelete_Click);
-            // 
-            // grIncorrectLinks
-            // 
-            this.grIncorrectLinks.AllowUserToAddRows = false;
-            this.grIncorrectLinks.AllowUserToDeleteRows = false;
-            this.grIncorrectLinks.AllowUserToResizeRows = false;
-            this.grIncorrectLinks.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.grIncorrectLinks.BackgroundColor = System.Drawing.Color.White;
-            this.grIncorrectLinks.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.grIncorrectLinks.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+			this.pnButtons = new System.Windows.Forms.Panel();
+			this.buttonXCancel = new DevComponents.DotNetBar.ButtonX();
+			this.buttonXOK = new DevComponents.DotNetBar.ButtonX();
+			this.buttonXExpiredDate = new DevComponents.DotNetBar.ButtonX();
+			this.buttonXDelete = new DevComponents.DotNetBar.ButtonX();
+			this.grIncorrectLinks = new System.Windows.Forms.DataGridView();
+			this.colIdentifier = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.colWindow = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.colLink = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.colPath = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.pnButtons.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.grIncorrectLinks)).BeginInit();
+			this.SuspendLayout();
+			// 
+			// pnButtons
+			// 
+			this.pnButtons.BackColor = System.Drawing.Color.Transparent;
+			this.pnButtons.Controls.Add(this.buttonXCancel);
+			this.pnButtons.Controls.Add(this.buttonXOK);
+			this.pnButtons.Controls.Add(this.buttonXExpiredDate);
+			this.pnButtons.Controls.Add(this.buttonXDelete);
+			this.pnButtons.Dock = System.Windows.Forms.DockStyle.Right;
+			this.pnButtons.ForeColor = System.Drawing.Color.Black;
+			this.pnButtons.Location = new System.Drawing.Point(606, 0);
+			this.pnButtons.Name = "pnButtons";
+			this.pnButtons.Size = new System.Drawing.Size(158, 512);
+			this.pnButtons.TabIndex = 0;
+			// 
+			// buttonXCancel
+			// 
+			this.buttonXCancel.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonXCancel.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+			this.buttonXCancel.Location = new System.Drawing.Point(10, 468);
+			this.buttonXCancel.Name = "buttonXCancel";
+			this.buttonXCancel.Size = new System.Drawing.Size(136, 32);
+			this.buttonXCancel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXCancel.TabIndex = 11;
+			this.buttonXCancel.Text = "Cancel";
+			this.buttonXCancel.TextColor = System.Drawing.Color.Black;
+			// 
+			// buttonXOK
+			// 
+			this.buttonXOK.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonXOK.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXOK.DialogResult = System.Windows.Forms.DialogResult.OK;
+			this.buttonXOK.Location = new System.Drawing.Point(10, 430);
+			this.buttonXOK.Name = "buttonXOK";
+			this.buttonXOK.Size = new System.Drawing.Size(136, 32);
+			this.buttonXOK.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXOK.TabIndex = 10;
+			this.buttonXOK.Text = "OK";
+			this.buttonXOK.TextColor = System.Drawing.Color.Black;
+			// 
+			// buttonXExpiredDate
+			// 
+			this.buttonXExpiredDate.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXExpiredDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonXExpiredDate.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXExpiredDate.Location = new System.Drawing.Point(10, 62);
+			this.buttonXExpiredDate.Name = "buttonXExpiredDate";
+			this.buttonXExpiredDate.Size = new System.Drawing.Size(136, 44);
+			this.buttonXExpiredDate.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXExpiredDate.TabIndex = 6;
+			this.buttonXExpiredDate.Text = "Expired Date\r\nOptions";
+			this.buttonXExpiredDate.Click += new System.EventHandler(this.btExpiredDate_Click);
+			// 
+			// buttonXDelete
+			// 
+			this.buttonXDelete.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonXDelete.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXDelete.Location = new System.Drawing.Point(10, 12);
+			this.buttonXDelete.Name = "buttonXDelete";
+			this.buttonXDelete.Size = new System.Drawing.Size(136, 44);
+			this.buttonXDelete.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXDelete.TabIndex = 5;
+			this.buttonXDelete.Text = "Delete\r\nthis Link";
+			this.buttonXDelete.Click += new System.EventHandler(this.btDelete_Click);
+			// 
+			// grIncorrectLinks
+			// 
+			this.grIncorrectLinks.AllowUserToAddRows = false;
+			this.grIncorrectLinks.AllowUserToDeleteRows = false;
+			this.grIncorrectLinks.AllowUserToResizeRows = false;
+			this.grIncorrectLinks.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+			this.grIncorrectLinks.BackgroundColor = System.Drawing.Color.White;
+			this.grIncorrectLinks.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.grIncorrectLinks.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colIdentifier,
             this.colWindow,
             this.colLink,
             this.colPath});
-            this.grIncorrectLinks.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grIncorrectLinks.Location = new System.Drawing.Point(0, 0);
-            this.grIncorrectLinks.MultiSelect = false;
-            this.grIncorrectLinks.Name = "grIncorrectLinks";
-            this.grIncorrectLinks.ReadOnly = true;
-            this.grIncorrectLinks.RowHeadersVisible = false;
-            this.grIncorrectLinks.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.grIncorrectLinks.Size = new System.Drawing.Size(606, 512);
-            this.grIncorrectLinks.TabIndex = 1;
-            // 
-            // colIdentifier
-            // 
-            this.colIdentifier.HeaderText = "Identifier";
-            this.colIdentifier.Name = "colIdentifier";
-            this.colIdentifier.ReadOnly = true;
-            this.colIdentifier.Visible = false;
-            // 
-            // colWindow
-            // 
-            this.colWindow.HeaderText = "Window";
-            this.colWindow.Name = "colWindow";
-            this.colWindow.ReadOnly = true;
-            this.colWindow.Width = 79;
-            // 
-            // colLink
-            // 
-            this.colLink.HeaderText = "Link";
-            this.colLink.Name = "colLink";
-            this.colLink.ReadOnly = true;
-            this.colLink.Width = 57;
-            // 
-            // colPath
-            // 
-            this.colPath.HeaderText = "Path";
-            this.colPath.Name = "colPath";
-            this.colPath.ReadOnly = true;
-            this.colPath.Width = 60;
-            // 
-            // FormDeleteIncorrectLinks
-            // 
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
-            this.ClientSize = new System.Drawing.Size(764, 512);
-            this.Controls.Add(this.grIncorrectLinks);
-            this.Controls.Add(this.pnButtons);
-            this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.Name = "FormDeleteIncorrectLinks";
-            this.ShowIcon = false;
-            this.ShowInTaskbar = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "{0} Links";
-            this.Load += new System.EventHandler(this.DeadLinksForm_Load);
-            this.pnButtons.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.grIncorrectLinks)).EndInit();
-            this.ResumeLayout(false);
+			this.grIncorrectLinks.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.grIncorrectLinks.Location = new System.Drawing.Point(0, 0);
+			this.grIncorrectLinks.MultiSelect = false;
+			this.grIncorrectLinks.Name = "grIncorrectLinks";
+			this.grIncorrectLinks.ReadOnly = true;
+			this.grIncorrectLinks.RowHeadersVisible = false;
+			this.grIncorrectLinks.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+			this.grIncorrectLinks.Size = new System.Drawing.Size(606, 512);
+			this.grIncorrectLinks.TabIndex = 1;
+			// 
+			// colIdentifier
+			// 
+			this.colIdentifier.HeaderText = "Identifier";
+			this.colIdentifier.Name = "colIdentifier";
+			this.colIdentifier.ReadOnly = true;
+			this.colIdentifier.Visible = false;
+			// 
+			// colWindow
+			// 
+			this.colWindow.HeaderText = "Window";
+			this.colWindow.Name = "colWindow";
+			this.colWindow.ReadOnly = true;
+			this.colWindow.Width = 79;
+			// 
+			// colLink
+			// 
+			this.colLink.HeaderText = "Link";
+			this.colLink.Name = "colLink";
+			this.colLink.ReadOnly = true;
+			this.colLink.Width = 57;
+			// 
+			// colPath
+			// 
+			this.colPath.HeaderText = "Path";
+			this.colPath.Name = "colPath";
+			this.colPath.ReadOnly = true;
+			this.colPath.Width = 60;
+			// 
+			// FormDeleteIncorrectLinks
+			// 
+			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+			this.BackColor = System.Drawing.Color.White;
+			this.ClientSize = new System.Drawing.Size(764, 512);
+			this.Controls.Add(this.grIncorrectLinks);
+			this.Controls.Add(this.pnButtons);
+			this.DoubleBuffered = true;
+			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.Name = "FormDeleteIncorrectLinks";
+			this.ShowIcon = false;
+			this.ShowInTaskbar = false;
+			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+			this.Text = "{0} Links";
+			this.Load += new System.EventHandler(this.DeadLinksForm_Load);
+			this.pnButtons.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.grIncorrectLinks)).EndInit();
+			this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Panel pnButtons;
-        private System.Windows.Forms.Button btDelete;
-        private System.Windows.Forms.DataGridView grIncorrectLinks;
-        private System.Windows.Forms.Button btOK;
+		private System.Windows.Forms.Panel pnButtons;
+		private System.Windows.Forms.DataGridView grIncorrectLinks;
         private System.Windows.Forms.DataGridViewTextBoxColumn colIdentifier;
         private System.Windows.Forms.DataGridViewTextBoxColumn colWindow;
         private System.Windows.Forms.DataGridViewTextBoxColumn colLink;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPath;
-        private System.Windows.Forms.Button btCancel;
-        private System.Windows.Forms.Button btExpiredDate;
+		private System.Windows.Forms.DataGridViewTextBoxColumn colPath;
+		private DevComponents.DotNetBar.ButtonX buttonXExpiredDate;
+		private DevComponents.DotNetBar.ButtonX buttonXDelete;
+		private DevComponents.DotNetBar.ButtonX buttonXCancel;
+		private DevComponents.DotNetBar.ButtonX buttonXOK;
     }
 }

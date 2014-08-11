@@ -29,68 +29,43 @@
         private void InitializeComponent()
         {
 			this.components = new System.ComponentModel.Container();
-			this.gbLinkName = new System.Windows.Forms.GroupBox();
 			this.edLinkName = new System.Windows.Forms.TextBox();
-			this.gbLinkPath = new System.Windows.Forms.GroupBox();
 			this.buttonEditFolderPath = new DevExpress.XtraEditors.ButtonEdit();
 			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
-			this.btSave = new System.Windows.Forms.Button();
 			this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
-			this.btCancel = new System.Windows.Forms.Button();
 			this.laTitle = new System.Windows.Forms.Label();
 			this.pbLogo = new System.Windows.Forms.PictureBox();
-			this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
-			this.gbLinkName.SuspendLayout();
-			this.gbLinkPath.SuspendLayout();
+			this.laLinkName = new System.Windows.Forms.Label();
+			this.laLinkPath = new System.Windows.Forms.Label();
+			this.buttonXCancel = new DevComponents.DotNetBar.ButtonX();
+			this.buttonXSave = new DevComponents.DotNetBar.ButtonX();
 			((System.ComponentModel.ISupportInitialize)(this.buttonEditFolderPath.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pbLogo)).BeginInit();
 			this.SuspendLayout();
 			// 
-			// gbLinkName
-			// 
-			this.gbLinkName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.gbLinkName.Controls.Add(this.edLinkName);
-			this.gbLinkName.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.gbLinkName.ForeColor = System.Drawing.Color.Black;
-			this.gbLinkName.Location = new System.Drawing.Point(7, 59);
-			this.gbLinkName.Name = "gbLinkName";
-			this.gbLinkName.Size = new System.Drawing.Size(380, 52);
-			this.gbLinkName.TabIndex = 2;
-			this.gbLinkName.TabStop = false;
-			this.gbLinkName.Text = "Link Name";
-			// 
 			// edLinkName
 			// 
 			this.edLinkName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.edLinkName.Location = new System.Drawing.Point(6, 21);
+			this.edLinkName.BackColor = System.Drawing.Color.White;
+			this.edLinkName.ForeColor = System.Drawing.Color.Black;
+			this.edLinkName.Location = new System.Drawing.Point(7, 89);
 			this.edLinkName.Name = "edLinkName";
-			this.edLinkName.Size = new System.Drawing.Size(368, 22);
+			this.edLinkName.Size = new System.Drawing.Size(380, 22);
 			this.edLinkName.TabIndex = 0;
-			// 
-			// gbLinkPath
-			// 
-			this.gbLinkPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.gbLinkPath.Controls.Add(this.buttonEditFolderPath);
-			this.gbLinkPath.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.gbLinkPath.ForeColor = System.Drawing.Color.Black;
-			this.gbLinkPath.Location = new System.Drawing.Point(7, 117);
-			this.gbLinkPath.Name = "gbLinkPath";
-			this.gbLinkPath.Size = new System.Drawing.Size(380, 52);
-			this.gbLinkPath.TabIndex = 3;
-			this.gbLinkPath.TabStop = false;
-			this.gbLinkPath.Text = "Link Path";
 			// 
 			// buttonEditFolderPath
 			// 
-			this.buttonEditFolderPath.Location = new System.Drawing.Point(6, 21);
+			this.buttonEditFolderPath.Location = new System.Drawing.Point(7, 147);
 			this.buttonEditFolderPath.Name = "buttonEditFolderPath";
+			this.buttonEditFolderPath.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.buttonEditFolderPath.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.buttonEditFolderPath.Properties.Appearance.Options.UseBackColor = true;
+			this.buttonEditFolderPath.Properties.Appearance.Options.UseForeColor = true;
 			this.buttonEditFolderPath.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
-			this.buttonEditFolderPath.Size = new System.Drawing.Size(368, 22);
+			this.buttonEditFolderPath.Size = new System.Drawing.Size(380, 22);
 			this.buttonEditFolderPath.StyleController = this.styleController;
 			this.buttonEditFolderPath.TabIndex = 0;
 			this.buttonEditFolderPath.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.buttonEditFolderPath_ButtonClick);
@@ -110,37 +85,15 @@
 			this.styleController.AppearanceReadOnly.Font = new System.Drawing.Font("Arial", 9.75F);
 			this.styleController.AppearanceReadOnly.Options.UseFont = true;
 			// 
-			// btSave
-			// 
-			this.btSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btSave.DialogResult = System.Windows.Forms.DialogResult.OK;
-			this.btSave.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.btSave.Location = new System.Drawing.Point(231, 175);
-			this.btSave.Name = "btSave";
-			this.btSave.Size = new System.Drawing.Size(75, 28);
-			this.btSave.TabIndex = 4;
-			this.btSave.Text = "Save";
-			this.btSave.UseVisualStyleBackColor = true;
-			// 
 			// folderBrowserDialog
 			// 
 			this.folderBrowserDialog.Description = "Select the path";
 			// 
-			// btCancel
-			// 
-			this.btCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.btCancel.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.btCancel.Location = new System.Drawing.Point(312, 175);
-			this.btCancel.Name = "btCancel";
-			this.btCancel.Size = new System.Drawing.Size(75, 28);
-			this.btCancel.TabIndex = 5;
-			this.btCancel.Text = "Cancel";
-			this.btCancel.UseVisualStyleBackColor = true;
-			// 
 			// laTitle
 			// 
+			this.laTitle.BackColor = System.Drawing.Color.White;
 			this.laTitle.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.laTitle.ForeColor = System.Drawing.Color.Black;
 			this.laTitle.Location = new System.Drawing.Point(68, 3);
 			this.laTitle.Name = "laTitle";
 			this.laTitle.Size = new System.Drawing.Size(319, 50);
@@ -150,6 +103,8 @@
 			// 
 			// pbLogo
 			// 
+			this.pbLogo.BackColor = System.Drawing.Color.White;
+			this.pbLogo.ForeColor = System.Drawing.Color.Black;
 			this.pbLogo.Image = global::FileManager.Properties.Resources.AddNetworkShare;
 			this.pbLogo.Location = new System.Drawing.Point(7, 3);
 			this.pbLogo.Name = "pbLogo";
@@ -158,22 +113,71 @@
 			this.pbLogo.TabIndex = 6;
 			this.pbLogo.TabStop = false;
 			// 
-			// defaultLookAndFeel
+			// laLinkName
 			// 
-			this.defaultLookAndFeel.LookAndFeel.SkinName = "Money Twins";
+			this.laLinkName.AutoSize = true;
+			this.laLinkName.BackColor = System.Drawing.Color.White;
+			this.laLinkName.ForeColor = System.Drawing.Color.Black;
+			this.laLinkName.Location = new System.Drawing.Point(4, 70);
+			this.laLinkName.Name = "laLinkName";
+			this.laLinkName.Size = new System.Drawing.Size(70, 16);
+			this.laLinkName.TabIndex = 8;
+			this.laLinkName.Text = "Link Name";
+			// 
+			// laLinkPath
+			// 
+			this.laLinkPath.AutoSize = true;
+			this.laLinkPath.BackColor = System.Drawing.Color.White;
+			this.laLinkPath.ForeColor = System.Drawing.Color.Black;
+			this.laLinkPath.Location = new System.Drawing.Point(4, 123);
+			this.laLinkPath.Name = "laLinkPath";
+			this.laLinkPath.Size = new System.Drawing.Size(63, 16);
+			this.laLinkPath.TabIndex = 9;
+			this.laLinkPath.Text = "Link Path";
+			// 
+			// buttonXCancel
+			// 
+			this.buttonXCancel.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonXCancel.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+			this.buttonXCancel.Location = new System.Drawing.Point(294, 182);
+			this.buttonXCancel.Name = "buttonXCancel";
+			this.buttonXCancel.Size = new System.Drawing.Size(93, 32);
+			this.buttonXCancel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXCancel.TabIndex = 11;
+			this.buttonXCancel.Text = "Cancel";
+			this.buttonXCancel.TextColor = System.Drawing.Color.Black;
+			// 
+			// buttonXSave
+			// 
+			this.buttonXSave.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonXSave.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXSave.DialogResult = System.Windows.Forms.DialogResult.OK;
+			this.buttonXSave.Location = new System.Drawing.Point(195, 182);
+			this.buttonXSave.Name = "buttonXSave";
+			this.buttonXSave.Size = new System.Drawing.Size(93, 32);
+			this.buttonXSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXSave.TabIndex = 10;
+			this.buttonXSave.Text = "Save";
+			this.buttonXSave.TextColor = System.Drawing.Color.Black;
 			// 
 			// FormAddNetworkLink
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
-			this.ClientSize = new System.Drawing.Size(394, 208);
+			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+			this.BackColor = System.Drawing.Color.White;
+			this.ClientSize = new System.Drawing.Size(394, 226);
+			this.Controls.Add(this.buttonXCancel);
+			this.Controls.Add(this.buttonXSave);
+			this.Controls.Add(this.laLinkPath);
+			this.Controls.Add(this.laLinkName);
+			this.Controls.Add(this.edLinkName);
+			this.Controls.Add(this.buttonEditFolderPath);
 			this.Controls.Add(this.laTitle);
 			this.Controls.Add(this.pbLogo);
-			this.Controls.Add(this.btCancel);
-			this.Controls.Add(this.btSave);
-			this.Controls.Add(this.gbLinkPath);
-			this.Controls.Add(this.gbLinkName);
+			this.DoubleBuffered = true;
+			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
@@ -183,28 +187,25 @@
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Network Folder Link";
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AddLinkForm_FormClosing);
-			this.gbLinkName.ResumeLayout(false);
-			this.gbLinkName.PerformLayout();
-			this.gbLinkPath.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.buttonEditFolderPath.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pbLogo)).EndInit();
 			this.ResumeLayout(false);
+			this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.GroupBox gbLinkName;
-        private System.Windows.Forms.TextBox edLinkName;
-        private System.Windows.Forms.GroupBox gbLinkPath;
-        private System.Windows.Forms.Button btSave;
-        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog;
-        private System.Windows.Forms.Button btCancel;
+		private System.Windows.Forms.TextBox edLinkName;
+		private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog;
         private System.Windows.Forms.PictureBox pbLogo;
         private System.Windows.Forms.Label laTitle;
         private DevExpress.XtraEditors.ButtonEdit buttonEditFolderPath;
-        private DevExpress.XtraEditors.StyleController styleController;
-        private DevExpress.LookAndFeel.DefaultLookAndFeel defaultLookAndFeel;
+		private DevExpress.XtraEditors.StyleController styleController;
+		private System.Windows.Forms.Label laLinkName;
+		private System.Windows.Forms.Label laLinkPath;
+		private DevComponents.DotNetBar.ButtonX buttonXCancel;
+		private DevComponents.DotNetBar.ButtonX buttonXSave;
     }
 }

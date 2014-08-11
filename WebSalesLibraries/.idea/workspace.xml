@@ -7,38 +7,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="311ca633-43c5-41dd-82ab-ba01ea556142" name="Default" comment="Web Sales Depot: Test version increase&#10;&#10;">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/shortcuts/search-bar/collapse.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/shortcuts/search-bar/expand.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/shortcuts/sub-search-bar/link-off.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/shortcuts/sub-search-bar/link-on.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/shortcuts/sub-search-bar/list-off.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/shortcuts/sub-search-bar/list-on.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/shortcuts/search-bar/search-bar-logo.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/shortcuts/sub-search-bar/search-off.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/shortcuts/sub-search-bar/search-on.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/protected/models/shortcuts/models/SubSearchTemplate.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/protected/views/regular/shortcuts/categorySelector.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/css/regular/base/logo-list.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/css/regular/base/shortcuts-search.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/regular/base/shortcuts-search.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/protected/views/regular/shortcuts/subSearchBar.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/protected/views/regular/shortcuts/subSearchCustomPanel.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/protected/views/regular/shortcuts/subSearchTemplatesPanel.php" />
       <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\FileManager\Resources\ArrowLeftGreen.png" afterPath="" />
       <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\FileManager\Resources\GreenRightArrow.png" afterPath="" />
       <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\FileManager\Resources\Green_Plus.png" afterPath="" />
       <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\FileManager\Resources\Red_Minus.png" afterPath="" />
       <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\SalesDepot\InteropClasses\WinAPIHelper.cs" afterPath="" />
       <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\SiteManager\Resources\CopySmall.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\css\regular\qbuilder\logo-list.css" afterPath="" />
-      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\images\calendar\1.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\images\calendar\2.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\images\calendar\3.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\images\calendar\4.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\images\calendar\ribbon_logo.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\images\shortcuts\collapse.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\images\shortcuts\expand.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\images\shortcuts\search-bar-logo.png" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/Resources/AddUser.png" afterPath="$PROJECT_DIR$/../SiteManager/Resources/AddUser.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/Resources/AddWeek.png" afterPath="$PROJECT_DIR$/../SalesDepot/Resources/AddWeek.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/Resources/DeleteButton.png" afterPath="$PROJECT_DIR$/../SiteManager/Resources/DeleteButton.png" />
@@ -63,7 +37,6 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/icon.ico" afterPath="$PROJECT_DIR$/../FileManager/icon.ico" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../OvernightsCalendarViewer/icon.ico" afterPath="$PROJECT_DIR$/../OvernightsCalendarViewer/icon.ico" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/icon.ico" afterPath="$PROJECT_DIR$/../SalesDepot/icon.ico" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dictionaries/Alexey_Krupnov.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/Alexey_Krupnov.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/AppManager.cs" afterPath="$PROJECT_DIR$/../SalesDepot/AppManager.cs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/Tags/AttachmentsEditor.Designer.cs" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/Tags/AttachmentsEditor.Designer.cs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/Tags/AttachmentsEditor.resx" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/Tags/AttachmentsEditor.resx" />
@@ -84,11 +57,9 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/QuizStatusData/ContainerControl.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/QuizStatusData/ContainerControl.cs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/RawData/ContainerControl.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/RawData/ContainerControl.cs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/WallBin/Decorators/DecoratorManager.cs" afterPath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/WallBin/Decorators/DecoratorManager.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/shortcuts/models/EmptyShortcut.php" afterPath="$PROJECT_DIR$/protected/models/shortcuts/models/EmptyShortcut.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/InteropClasses/ExcelHelper.cs" afterPath="$PROJECT_DIR$/../SalesDepot/InteropClasses/ExcelHelper.cs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/Tags/FileCardsEditor.Designer.cs" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/Tags/FileCardsEditor.Designer.cs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/Tags/FileCardsEditor.resx" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/Tags/FileCardsEditor.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/shortcuts/models/FileShortcut.php" afterPath="$PROJECT_DIR$/protected/models/shortcuts/models/FileShortcut.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../OvernightsCalendarViewer/Floater/FloaterManager.cs" afterPath="$PROJECT_DIR$/../OvernightsCalendarViewer/Floater/FloaterManager.cs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/Floater/FloaterManager.cs" afterPath="$PROJECT_DIR$/../SalesDepot/Floater/FloaterManager.cs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/WallBin/FolderBoxControl.cs" afterPath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/WallBin/FolderBoxControl.cs" />
@@ -198,21 +169,17 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/Tags/KeywordsEditor.Designer.cs" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/Tags/KeywordsEditor.Designer.cs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/Tags/KeywordsEditor.resx" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/Tags/KeywordsEditor.resx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/WallBin/Decorators/LibraryDecorator.cs" afterPath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/WallBin/Decorators/LibraryDecorator.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/shortcuts/models/LibraryLinkShortcut.php" afterPath="$PROJECT_DIR$/protected/models/shortcuts/models/LibraryLinkShortcut.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/wallbin/records/LinkRecord.php" afterPath="$PROJECT_DIR$/protected/models/wallbin/records/LinkRecord.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/WallBin/MultitabLibraryControl.Designer.cs" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/WallBin/MultitabLibraryControl.Designer.cs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/InteropClasses/OutlookHelper.cs" afterPath="$PROJECT_DIR$/../SalesDepot/InteropClasses/OutlookHelper.cs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/OvernightsCalendar/OvernightsCalendarControl.Designer.cs" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/OvernightsCalendar/OvernightsCalendarControl.Designer.cs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../OvernightsCalendarViewer/PresentationClasses/OvernightsCalendar/OvernightsCalendarControl.Designer.cs" afterPath="$PROJECT_DIR$/../OvernightsCalendarViewer/PresentationClasses/OvernightsCalendar/OvernightsCalendarControl.Designer.cs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/WallBin/Decorators/PackageDecorator.cs" afterPath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/WallBin/Decorators/PackageDecorator.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/shortcuts/models/PageShortcut.php" afterPath="$PROJECT_DIR$/protected/models/shortcuts/models/PageShortcut.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Users/PermissionsManagerControl.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Users/PermissionsManagerControl.cs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/InteropClasses/PowerPointHelper.cs" afterPath="$PROJECT_DIR$/../SalesDepot/InteropClasses/PowerPointHelper.cs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/BusinessClasses/PreviewContainer.cs" afterPath="$PROJECT_DIR$/../SalesDepot/BusinessClasses/PreviewContainer.cs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/ProgramManager/ProgramScheduleControl.cs" afterPath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/ProgramManager/ProgramScheduleControl.cs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/BusinessClasses/ProgramScheduleManager.cs" afterPath="$PROJECT_DIR$/../SalesDepot/BusinessClasses/ProgramScheduleManager.cs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/ProgramManager/ProgramSearchControl.cs" afterPath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/ProgramManager/ProgramSearchControl.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/shortcuts/models/QuickListShortcut.php" afterPath="$PROJECT_DIR$/protected/models/shortcuts/models/QuickListShortcut.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/WallBin/RegularLibraryControl.Designer.cs" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/WallBin/RegularLibraryControl.Designer.cs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/Properties/Resources.Designer.cs" afterPath="$PROJECT_DIR$/../FileManager/Properties/Resources.Designer.cs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/Properties/Resources.Designer.cs" afterPath="$PROJECT_DIR$/../SalesDepot/Properties/Resources.Designer.cs" />
@@ -223,17 +190,10 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/Cliparts/SalesGalleryControl.Designer.cs" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/Cliparts/SalesGalleryControl.Designer.cs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/Cliparts/SalesGalleryControl.cs" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/Cliparts/SalesGalleryControl.cs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/Cliparts/SalesGalleryControl.resx" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/Cliparts/SalesGalleryControl.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/shortcuts/models/SearchBar.php" afterPath="$PROJECT_DIR$/protected/models/shortcuts/models/SearchBar.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/shortcuts/models/SearchConditions.php" afterPath="$PROJECT_DIR$/protected/models/shortcuts/models/SearchConditions.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/controllers/SearchController.php" afterPath="$PROJECT_DIR$/protected/controllers/SearchController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/common/SearchHelper.php" afterPath="$PROJECT_DIR$/protected/models/common/SearchHelper.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/shortcuts/models/SearchShortcut.php" afterPath="$PROJECT_DIR$/protected/models/shortcuts/models/SearchShortcut.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/Tags/SecurityEditor.Designer.cs" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/Tags/SecurityEditor.Designer.cs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/Tags/SecurityEditor.resx" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/Tags/SecurityEditor.resx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../OvernightsCalendarViewer/ConfigurationClasses/SettingsManager.cs" afterPath="$PROJECT_DIR$/../OvernightsCalendarViewer/ConfigurationClasses/SettingsManager.cs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/ConfigurationClasses/SettingsManager.cs" afterPath="$PROJECT_DIR$/../SalesDepot/ConfigurationClasses/SettingsManager.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/controllers/ShortcutsController.php" afterPath="$PROJECT_DIR$/protected/controllers/ShortcutsController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/shortcuts/records/ShortcutsPageRecord.php" afterPath="$PROJECT_DIR$/protected/models/shortcuts/records/ShortcutsPageRecord.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/WallBin/SuperFilterControl.Designer.cs" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/WallBin/SuperFilterControl.Designer.cs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/WallBin/SuperFilterControl.cs" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/WallBin/SuperFilterControl.cs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/WallBin/SuperFilterControl.resx" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/WallBin/SuperFilterControl.resx" />
@@ -255,38 +215,20 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/MainData/TotalControl.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/MainData/TotalControl.cs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/NavigationData/TotalControl.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/NavigationData/TotalControl.cs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/QuizPassData/TotalControl.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/QuizPassData/TotalControl.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/shortcuts/models/UrlShortcut.php" afterPath="$PROJECT_DIR$/protected/models/shortcuts/models/UrlShortcut.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/shortcuts/models/VideoShortcut.php" afterPath="$PROJECT_DIR$/protected/models/shortcuts/models/VideoShortcut.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/WallBin/WallBinTreeListControl.Designer.cs" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/WallBin/WallBinTreeListControl.Designer.cs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/WallBin/WallBinTreeListControl.cs" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/WallBin/WallBinTreeListControl.cs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/WallBin/WallBinTreeListControl.resx" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/WallBin/WallBinTreeListControl.resx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/Cliparts/WebArtControl.Designer.cs" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/Cliparts/WebArtControl.Designer.cs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/Cliparts/WebArtControl.cs" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/Cliparts/WebArtControl.cs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/Cliparts/WebArtControl.resx" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/Cliparts/WebArtControl.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/shortcuts/models/WindowShortcut.php" afterPath="$PROJECT_DIR$/protected/models/shortcuts/models/WindowShortcut.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/OvernightsCalendar/YearControl.Designer.cs" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/OvernightsCalendar/YearControl.Designer.cs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../OvernightsCalendarViewer/PresentationClasses/OvernightsCalendar/YearControl.Designer.cs" afterPath="$PROJECT_DIR$/../OvernightsCalendarViewer/PresentationClasses/OvernightsCalendar/YearControl.Designer.cs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/OvernightsCalendar/YearControl.Designer.cs" afterPath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/OvernightsCalendar/YearControl.Designer.cs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/OvernightsCalendar/YearControl.resx" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/OvernightsCalendar/YearControl.resx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../OvernightsCalendarViewer/PresentationClasses/OvernightsCalendar/YearControl.resx" afterPath="$PROJECT_DIR$/../OvernightsCalendarViewer/PresentationClasses/OvernightsCalendar/YearControl.resx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/OvernightsCalendar/YearControl.resx" afterPath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/OvernightsCalendar/YearControl.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/regular/shortcuts/controller.js" afterPath="$PROJECT_DIR$/js/regular/shortcuts/controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/deployment.xml" afterPath="$PROJECT_DIR$/.idea/deployment.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/views/regular/shortcuts/directLink.php" afterPath="$PROJECT_DIR$/protected/views/regular/shortcuts/directLink.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/frameworkRootSettings.xml" afterPath="$PROJECT_DIR$/.idea/frameworkRootSettings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/views/regular/shortcuts/homeBar.php" afterPath="$PROJECT_DIR$/protected/views/regular/shortcuts/homeBar.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/views/regular/qpage/index.php" afterPath="$PROJECT_DIR$/protected/views/regular/qpage/index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/views/regular/site/index.php" afterPath="$PROJECT_DIR$/protected/views/regular/site/index.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/Properties/licenses.licx" afterPath="$PROJECT_DIR$/../FileManager/Properties/licenses.licx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/Properties/licenses.licx" afterPath="$PROJECT_DIR$/../SiteManager/Properties/licenses.licx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/views/regular/shortcuts/linkWrapper.php" afterPath="$PROJECT_DIR$/protected/views/regular/shortcuts/linkWrapper.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/views/regular/qbuilder/pageContent.php" afterPath="$PROJECT_DIR$/protected/views/regular/qbuilder/pageContent.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/config/params.php" afterPath="$PROJECT_DIR$/protected/config/params.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/regular/base/search.css" afterPath="$PROJECT_DIR$/css/regular/base/search.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/views/regular/shortcuts/searchBar.php" afterPath="$PROJECT_DIR$/protected/views/regular/shortcuts/searchBar.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/views/regular/shortcuts/searchResult.php" afterPath="$PROJECT_DIR$/protected/views/regular/shortcuts/searchResult.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/regular/base/shortcuts.css" afterPath="$PROJECT_DIR$/css/regular/base/shortcuts.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/regular/base/shortcuts.js" afterPath="$PROJECT_DIR$/js/regular/base/shortcuts.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MOVED" beforePath="$PROJECT_DIR$/../SalesDepot/ToolForms/Gallery/FormAddFavoriteImage.designer.cs" afterPath="$PROJECT_DIR$/../SalesDepot/ToolForms/Gallery/FormAddFavoriteImage.designer.cs" />
     </list>
@@ -513,93 +455,7 @@
     <favorites_list name="WebSalesLibraries" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="subSearchTemplatesPanel.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/protected/views/regular/shortcuts/subSearchTemplatesPanel.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="185" selection-start="299" selection-end="359" vertical-scroll-proportion="-3.9230769" vertical-offset="34" max-vertical-offset="1224">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="params.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/protected/config/params.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="22" selection-start="273" selection-end="273" vertical-scroll-proportion="-5.8846154" vertical-offset="0" max-vertical-offset="289">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="controller.js" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/js/regular/shortcuts/controller.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="32" column="74" selection-start="962" selection-end="962" vertical-scroll-proportion="0.44945568" vertical-offset="255" max-vertical-offset="1326">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ShortcutsController.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/protected/controllers/ShortcutsController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="170" column="0" selection-start="6738" selection-end="6738" vertical-scroll-proportion="-12.576923" vertical-offset="2563" max-vertical-offset="3876">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="subSearchBar.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/protected/views/regular/shortcuts/subSearchBar.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="0" selection-start="805" selection-end="805" vertical-scroll-proportion="-7.8461537" vertical-offset="0" max-vertical-offset="323">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SearchController.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/protected/controllers/SearchController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="67" column="53" selection-start="2009" selection-end="2009" vertical-scroll-proportion="25.692308" vertical-offset="1807" max-vertical-offset="3774">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="searchControlPanel.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/protected/views/regular/widgets/searchControlPanel.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="190" column="103" selection-start="7546" selection-end="7565" vertical-scroll-proportion="-39.884617" vertical-offset="2142" max-vertical-offset="3876">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="shortcuts.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/regular/base/shortcuts.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="415" column="142" selection-start="13628" selection-end="13628" vertical-scroll-proportion="0.0" vertical-offset="6714" max-vertical-offset="7956">
-              <folding>
-                <marker date="1407768671605" expanded="false" signature="4668:4682" placeholder="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="shortcuts-search.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/regular/base/shortcuts-search.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="639" column="147" selection-start="20848" selection-end="20850" vertical-scroll-proportion="0.0" vertical-offset="9489" max-vertical-offset="11169">
-              <folding>
-                <element signature="e#4816#7098#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -1687,7 +1543,11 @@
       <created>1405256308469</created>
       <updated>1405256308469</updated>
     </task>
-    <option name="localTasksCounter" value="119" />
+    <task id="LOCAL-00119" summary="Web Sales Depot: Shortcuts sub search fix&#10;&#10;">
+      <created>1407769225673</created>
+      <updated>1407769225673</updated>
+    </task>
+    <option name="localTasksCounter" value="120" />
     <servers />
   </component>
   <component name="TodoView" selected-index="3">
@@ -1724,6 +1584,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="1.0" sideWeight="0.48772678" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15848452" sideWeight="0.13024282" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28540066" sideWeight="0.4850587" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32855567" sideWeight="0.49359658" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32491767" sideWeight="0.49573106" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21033014" sideWeight="0.12957746" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20234291" sideWeight="0.87042254" order="0" side_tool="false" content_ui="combo" />
@@ -1733,7 +1594,6 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15314835" sideWeight="0.76237625" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32855567" sideWeight="0.49359658" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="REST Client" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24368826" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="DB Browser" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.59625965" order="2" side_tool="false" content_ui="tabs" />
@@ -1785,7 +1645,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="Web Sales Libraries: Search bar category fix" />
     <MESSAGE value="Web Sales Libraries: Categories and Super Filters loading fix" />
     <MESSAGE value="Web Sales Libraries: Quiz configuration change" />
     <MESSAGE value="Web Sales Libraries: Quizzes functionality added" />
@@ -1810,7 +1669,8 @@
     <MESSAGE value="Web Sales Depot: Bug fixes after re-factoring&#10;&#10;" />
     <MESSAGE value="Web Sales Depot: Star Rating fix&#10;&#10;" />
     <MESSAGE value="Web Sales Depot: Test version increase&#10;&#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="Web Sales Depot: Test version increase&#10;&#10;" />
+    <MESSAGE value="Web Sales Depot: Shortcuts sub search fix&#10;&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Web Sales Depot: Shortcuts sub search fix&#10;&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -2135,13 +1995,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/protected/config/params.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="22" selection-start="273" selection-end="273" vertical-scroll-proportion="-5.8846154" vertical-offset="0" max-vertical-offset="289">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/regular/base/shortcuts-search.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="639" column="147" selection-start="20848" selection-end="20850" vertical-scroll-proportion="0.0" vertical-offset="9489" max-vertical-offset="11169">
@@ -2155,14 +2008,21 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="415" column="142" selection-start="13628" selection-end="13628" vertical-scroll-proportion="0.0" vertical-offset="6714" max-vertical-offset="7956">
           <folding>
-            <marker date="1407768671605" expanded="false" signature="4668:4682" placeholder="..." />
+            <marker date="1407768671605" expanded="false" signature="-1:-1" placeholder="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/regular/shortcuts/controller.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="74" selection-start="962" selection-end="962" vertical-scroll-proportion="0.44945568" vertical-offset="255" max-vertical-offset="1326">
+        <state line="32" column="74" selection-start="962" selection-end="962" vertical-scroll-proportion="0.43524095" vertical-offset="255" max-vertical-offset="1326">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/config/params.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="22" selection-start="273" selection-end="273" vertical-scroll-proportion="0.23981191" vertical-offset="0" max-vertical-offset="638">
           <folding />
         </state>
       </provider>

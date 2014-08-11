@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Windows.Forms;
+using DevComponents.DotNetBar.Metro;
 
 namespace SalesDepot.ToolForms.QBuilderForms
 {
-	public partial class FormAddPage : Form
+	public partial class FormAddPage : MetroForm
 	{
 		public string PageTitle
 		{
@@ -19,7 +20,7 @@ namespace SalesDepot.ToolForms.QBuilderForms
 		{
 			textEditName.EditValue = null;
 			Text = isClone ? "Clone quickSITE" : "Add quickSITE";
-			simpleButtonAddPage.Text = isClone ? "Clone quickSITE" : "Add quickSITE";
+			buttonXAddPage.Text = isClone ? "Clone quickSITE" : "Add quickSITE";
 		}
 
 		private void FormAddPage_FormClosing(object sender, FormClosingEventArgs e)

@@ -31,7 +31,6 @@
 			this.components = new System.ComponentModel.Container();
 			this.checkEditEnableFilter = new DevExpress.XtraEditors.CheckEdit();
 			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
-			this.styleManager = new DevComponents.DotNetBar.StyleManager(this.components);
 			this.checkedListBoxControlGroups = new DevExpress.XtraEditors.CheckedListBoxControl();
 			this.labelControlGroupsTitle = new DevExpress.XtraEditors.LabelControl();
 			this.buttonXGroupsAll = new DevComponents.DotNetBar.ButtonX();
@@ -55,7 +54,7 @@
 			this.checkEditEnableFilter.Location = new System.Drawing.Point(8, 8);
 			this.checkEditEnableFilter.Name = "checkEditEnableFilter";
 			this.checkEditEnableFilter.Properties.Caption = "Enable Filter";
-			this.checkEditEnableFilter.Size = new System.Drawing.Size(222, 21);
+			this.checkEditEnableFilter.Size = new System.Drawing.Size(222, 20);
 			this.checkEditEnableFilter.StyleController = this.styleController;
 			this.checkEditEnableFilter.TabIndex = 0;
 			this.checkEditEnableFilter.CheckedChanged += new System.EventHandler(this.checkEditFilterEnable_CheckedChanged);
@@ -74,11 +73,6 @@
 			this.styleController.AppearanceFocused.Options.UseFont = true;
 			this.styleController.AppearanceReadOnly.Font = new System.Drawing.Font("Arial", 9.75F);
 			this.styleController.AppearanceReadOnly.Options.UseFont = true;
-			// 
-			// styleManager
-			// 
-			this.styleManager.ManagerStyle = DevComponents.DotNetBar.eStyle.Office2010Blue;
-			this.styleManager.MetroColorParameters = new DevComponents.DotNetBar.Metro.ColorTables.MetroColorGeneratorParameters(System.Drawing.Color.White, System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(163)))), ((int)(((byte)(26))))));
 			// 
 			// checkedListBoxControlGroups
 			// 
@@ -150,11 +144,11 @@
 			// 
 			this.checkEditShowNumber.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.checkEditShowNumber.EditValue = true;
-			this.checkEditShowNumber.Location = new System.Drawing.Point(8, 338);
+			this.checkEditShowNumber.Location = new System.Drawing.Point(8, 336);
 			this.checkEditShowNumber.Name = "checkEditShowNumber";
 			this.checkEditShowNumber.Properties.AutoWidth = true;
 			this.checkEditShowNumber.Properties.Caption = "Show #";
-			this.checkEditShowNumber.Size = new System.Drawing.Size(65, 21);
+			this.checkEditShowNumber.Size = new System.Drawing.Size(65, 20);
 			this.checkEditShowNumber.StyleController = this.styleController;
 			this.checkEditShowNumber.TabIndex = 20;
 			this.checkEditShowNumber.CheckedChanged += new System.EventHandler(this.checkEditShowColumns_CheckedChanged);
@@ -163,11 +157,11 @@
 			// 
 			this.checkEditShowPercent.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.checkEditShowPercent.EditValue = true;
-			this.checkEditShowPercent.Location = new System.Drawing.Point(103, 338);
+			this.checkEditShowPercent.Location = new System.Drawing.Point(103, 336);
 			this.checkEditShowPercent.Name = "checkEditShowPercent";
 			this.checkEditShowPercent.Properties.AutoWidth = true;
 			this.checkEditShowPercent.Properties.Caption = "Show %";
-			this.checkEditShowPercent.Size = new System.Drawing.Size(70, 21);
+			this.checkEditShowPercent.Size = new System.Drawing.Size(70, 20);
 			this.checkEditShowPercent.StyleController = this.styleController;
 			this.checkEditShowPercent.TabIndex = 21;
 			this.checkEditShowPercent.CheckedChanged += new System.EventHandler(this.checkEditShowColumns_CheckedChanged);
@@ -176,11 +170,11 @@
 			// 
 			this.checkEditShowUsers.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.checkEditShowUsers.EditValue = true;
-			this.checkEditShowUsers.Location = new System.Drawing.Point(8, 370);
+			this.checkEditShowUsers.Location = new System.Drawing.Point(8, 368);
 			this.checkEditShowUsers.Name = "checkEditShowUsers";
 			this.checkEditShowUsers.Properties.AutoWidth = true;
 			this.checkEditShowUsers.Properties.Caption = "Show Users Row";
-			this.checkEditShowUsers.Size = new System.Drawing.Size(121, 21);
+			this.checkEditShowUsers.Size = new System.Drawing.Size(121, 20);
 			this.checkEditShowUsers.StyleController = this.styleController;
 			this.checkEditShowUsers.TabIndex = 22;
 			this.checkEditShowUsers.CheckedChanged += new System.EventHandler(this.checkEditShowColumns_CheckedChanged);
@@ -189,11 +183,11 @@
 			// 
 			this.checkEditShowGroups.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.checkEditShowGroups.EditValue = true;
-			this.checkEditShowGroups.Location = new System.Drawing.Point(8, 402);
+			this.checkEditShowGroups.Location = new System.Drawing.Point(8, 400);
 			this.checkEditShowGroups.Name = "checkEditShowGroups";
 			this.checkEditShowGroups.Properties.AutoWidth = true;
 			this.checkEditShowGroups.Properties.Caption = "Show Group Row";
-			this.checkEditShowGroups.Size = new System.Drawing.Size(122, 21);
+			this.checkEditShowGroups.Size = new System.Drawing.Size(122, 20);
 			this.checkEditShowGroups.StyleController = this.styleController;
 			this.checkEditShowGroups.TabIndex = 23;
 			this.checkEditShowGroups.CheckedChanged += new System.EventHandler(this.checkEditShowColumns_CheckedChanged);
@@ -201,7 +195,7 @@
 			// UserFilter
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+			this.BackColor = System.Drawing.Color.White;
 			this.Controls.Add(this.checkEditShowGroups);
 			this.Controls.Add(this.checkEditShowUsers);
 			this.Controls.Add(this.checkEditShowPercent);
@@ -230,7 +224,6 @@
 		#endregion
 
 		private DevExpress.XtraEditors.CheckEdit checkEditEnableFilter;
-		private DevComponents.DotNetBar.StyleManager styleManager;
 		private DevExpress.XtraEditors.StyleController styleController;
 		private DevExpress.XtraEditors.CheckedListBoxControl checkedListBoxControlGroups;
 		private DevExpress.XtraEditors.LabelControl labelControlGroupsTitle;

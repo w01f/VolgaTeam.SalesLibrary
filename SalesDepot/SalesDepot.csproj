@@ -56,40 +56,51 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DevComponents.DotNetBar.SuperGrid, Version=11.7.0.10, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04, processorArchitecture=MSIL" />
     <Reference Include="DevComponents.DotNetBar2, Version=11.7.0.10, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
-    <Reference Include="DevExpress.Data.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+    <Reference Include="DevComponents.Instrumentation, Version=11.7.0.10, Culture=neutral, PublicKeyToken=f90dc37c26666a67" />
+    <Reference Include="DevExpress.Printing.v14.1.Core, Version=14.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
-    <Reference Include="DevExpress.RichEdit.v10.2.Core, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+    <Reference Include="DevExpress.Data.v14.1, Version=14.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
-    <Reference Include="DevExpress.Utils.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+    <Reference Include="DevExpress.Office.v14.1.Core, Version=14.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
       <Private>True</Private>
     </Reference>
-    <Reference Include="DevExpress.XtraBars.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+    <Reference Include="DevExpress.RichEdit.v14.1.Core, Version=14.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
       <Private>True</Private>
     </Reference>
-    <Reference Include="DevExpress.XtraEditors.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+    <Reference Include="DevExpress.Utils.v14.1, Version=14.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
-    <Reference Include="DevExpress.XtraGrid.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+    <Reference Include="DevExpress.XtraBars.v14.1, Version=14.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
-    <Reference Include="DevExpress.XtraLayout.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+    <Reference Include="DevExpress.XtraEditors.v14.1, Version=14.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
-    <Reference Include="DevExpress.XtraNavBar.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+    <Reference Include="DevExpress.XtraPrinting.v14.1, Version=14.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
-    <Reference Include="DevExpress.XtraRichEdit.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+    <Reference Include="DevExpress.XtraGrid.v14.1, Version=14.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
-    <Reference Include="DevExpress.XtraRichEdit.v10.2.Extensions, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+    <Reference Include="DevExpress.XtraLayout.v14.1, Version=14.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
-    <Reference Include="DevExpress.XtraTreeList.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+    <Reference Include="DevExpress.XtraNavBar.v14.1, Version=14.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraRichEdit.v14.1, Version=14.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraRichEdit.v14.1.Extensions, Version=14.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraTreeList.v14.1, Version=14.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
     <Reference Include="EO.WebBrowser">
@@ -138,6 +149,12 @@
     </Compile>
     <Compile Include="Floater\FormFloater.designer.cs">
       <DependentUpon>FormFloater.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMain.Designer.cs">
+      <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationClasses\Gallery\FavoriteImagesControl.cs">
       <SubType>UserControl</SubType>
@@ -223,6 +240,36 @@
     <Compile Include="PresentationClasses\QBuilderControls\LinkCartControl.Designer.cs">
       <DependentUpon>LinkCartControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="PresentationClasses\Settings\BaseSettingsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\Settings\BaseSettingsControl.Designer.cs">
+      <DependentUpon>BaseSettingsControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\Settings\QuickViewSettingsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\Settings\QuickViewSettingsControl.Designer.cs">
+      <DependentUpon>QuickViewSettingsControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\Settings\SaveSettingsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\Settings\SaveSettingsControl.Designer.cs">
+      <DependentUpon>SaveSettingsControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\Settings\EmailSettingsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\Settings\EmailSettingsControl.Designer.cs">
+      <DependentUpon>EmailSettingsControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\Settings\LinkSettingsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\Settings\LinkSettingsControl.Designer.cs">
+      <DependentUpon>LinkSettingsControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationClasses\Viewers\FolderViewer.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -251,6 +298,12 @@
     <Compile Include="TabPages\IController.cs" />
     <Compile Include="TabPages\TabGallery1.cs">
       <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TabPages\TabSettings.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TabPages\TabSettings.Designer.cs">
+      <DependentUpon>TabSettings.cs</DependentUpon>
     </Compile>
     <Compile Include="TabPages\TabQBuilder.cs">
       <SubType>UserControl</SubType>
@@ -467,12 +520,6 @@
     <Compile Include="PresentationClasses\WallBin\Decorators\LibraryDecorator.cs" />
     <Compile Include="PresentationClasses\WallBin\Decorators\PageDecorator.cs" />
     <Compile Include="ToolClasses\ExceptionManager.cs" />
-    <Compile Include="FormMain.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormMain.Designer.cs">
-      <DependentUpon>FormMain.cs</DependentUpon>
-    </Compile>
     <Compile Include="ToolForms\WallBin\FormEmailLink.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -500,7 +547,6 @@
     <Compile Include="InteropClasses\OfficeHelper.cs" />
     <Compile Include="InteropClasses\OutlookHelper.cs" />
     <Compile Include="InteropClasses\PowerPointHelper.cs" />
-    <Compile Include="InteropClasses\WinAPIHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ToolForms\WallBin\FormSaveAsPDF.cs">
@@ -529,6 +575,9 @@
     </Compile>
     <EmbeddedResource Include="Floater\FormFloater.resx">
       <DependentUpon>FormFloater.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMain.resx">
+      <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationClasses\Gallery\FavoriteImagesControl.resx">
       <DependentUpon>FavoriteImagesControl.cs</DependentUpon>
@@ -572,6 +621,21 @@
     <EmbeddedResource Include="PresentationClasses\QBuilderControls\LinkCartControl.resx">
       <DependentUpon>LinkCartControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\Settings\BaseSettingsControl.resx">
+      <DependentUpon>BaseSettingsControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\Settings\QuickViewSettingsControl.resx">
+      <DependentUpon>QuickViewSettingsControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\Settings\SaveSettingsControl.resx">
+      <DependentUpon>SaveSettingsControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\Settings\EmailSettingsControl.resx">
+      <DependentUpon>EmailSettingsControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\Settings\LinkSettingsControl.resx">
+      <DependentUpon>LinkSettingsControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationClasses\Viewers\FolderViewer.resx">
       <DependentUpon>FolderViewer.cs</DependentUpon>
     </EmbeddedResource>
@@ -580,6 +644,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationClasses\WallBin\WallBinTreeListControl.resx">
       <DependentUpon>WallBinTreeListControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="TabPages\TabSettings.resx">
+      <DependentUpon>TabSettings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TabPages\TabQBuilder.resx">
       <DependentUpon>TabQBuilder.cs</DependentUpon>
@@ -686,9 +754,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TabPages\TabSearchControl.resx">
       <DependentUpon>TabSearchControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormMain.resx">
-      <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ToolForms\WallBin\FormEmailLink.resx">
       <DependentUpon>FormEmailLink.cs</DependentUpon>
@@ -865,6 +930,16 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\SettingsWord.png" />
+    <None Include="Resources\SettingsVideo.png" />
+    <None Include="Resources\SettingsSave.png" />
+    <None Include="Resources\SettingsQuickView.png" />
+    <None Include="Resources\SettingsPowerPoint.png" />
+    <None Include="Resources\SettingsFolder.png" />
+    <None Include="Resources\SettingsExcel.png" />
+    <None Include="Resources\SettingsEmail.png" />
+    <None Include="Resources\SettingsLogo.png" />
+    <None Include="Resources\SettingsPDF.png" />
     <None Include="Resources\GalleryCopy.png" />
     <None Include="Resources\GalleryZoomOut.png" />
     <None Include="Resources\GalleryZoomIn.png" />

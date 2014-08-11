@@ -6,7 +6,7 @@ using System.Text;
 using System.Xml;
 using SalesDepot.ConfigurationClasses;
 using SalesDepot.CoreObjects.BusinessClasses;
-using SalesDepot.InteropClasses;
+using SalesDepot.CoreObjects.InteropClasses;
 
 namespace SalesDepot.BusinessClasses
 {
@@ -101,7 +101,7 @@ namespace SalesDepot.BusinessClasses
 					}
 				}
 				localPreviewImages.AddRange(Directory.GetFiles(LocalPreviewStorageFolder, "*.png"));
-				localPreviewImages.Sort((x, y) => WinAPIHelper.StrCmpLogicalW(x, y));
+				localPreviewImages.Sort(WinAPIHelper.StrCmpLogicalW);
 				for (int i = 0; i < localPreviewImages.Count; i++)
 				{
 					var slide = new PresentationPreviewSlide();

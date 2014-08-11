@@ -65,9 +65,6 @@
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormPowerPointQuickViewOld));
 			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
 			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
-			DevExpress.Utils.SuperToolTip superToolTip12 = new DevExpress.Utils.SuperToolTip();
-			DevExpress.Utils.ToolTipTitleItem toolTipTitleItem12 = new DevExpress.Utils.ToolTipTitleItem();
-			DevExpress.Utils.ToolTipItem toolTipItem12 = new DevExpress.Utils.ToolTipItem();
 			this.barManager = new DevExpress.XtraBars.BarManager(this.components);
 			this.barOperations = new DevExpress.XtraBars.Bar();
 			this.barLargeButtonItemOpen = new DevExpress.XtraBars.BarLargeButtonItem();
@@ -89,15 +86,14 @@
 			this.laFileInfo = new System.Windows.Forms.Label();
 			this.laSlideNumber = new System.Windows.Forms.Label();
 			this.comboBoxEditSlides = new DevExpress.XtraEditors.ComboBoxEdit();
+			this.buttonXSettings = new DevComponents.DotNetBar.ButtonX();
 			this.pnPreview = new System.Windows.Forms.Panel();
 			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
-			this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
 			this.pnSlideTemplate = new System.Windows.Forms.Panel();
 			this.comboBoxEditSlideTemplate = new DevExpress.XtraEditors.ComboBoxEdit();
 			this.checkEditChangeSlideTemplate = new DevExpress.XtraEditors.CheckEdit();
 			this.checkEditKeepSlideTemplate = new DevExpress.XtraEditors.CheckEdit();
 			this.labelControlSlideTemplate = new DevExpress.XtraEditors.LabelControl();
-			this.simpleButtonSettings = new DevExpress.XtraEditors.SimpleButton();
 			((System.ComponentModel.ISupportInitialize)(this.barManager)).BeginInit();
 			this.pnNavigationArea.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.comboBoxEditSlides.Properties)).BeginInit();
@@ -331,13 +327,15 @@
 			// 
 			this.barDockControlTop.CausesValidation = false;
 			this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
+			this.barDockControlTop.ForeColor = System.Drawing.Color.Black;
 			this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
-			this.barDockControlTop.Size = new System.Drawing.Size(938, 104);
+			this.barDockControlTop.Size = new System.Drawing.Size(938, 109);
 			// 
 			// barDockControlBottom
 			// 
 			this.barDockControlBottom.CausesValidation = false;
 			this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+			this.barDockControlBottom.ForeColor = System.Drawing.Color.Black;
 			this.barDockControlBottom.Location = new System.Drawing.Point(0, 562);
 			this.barDockControlBottom.Size = new System.Drawing.Size(938, 0);
 			// 
@@ -345,24 +343,27 @@
 			// 
 			this.barDockControlLeft.CausesValidation = false;
 			this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
-			this.barDockControlLeft.Location = new System.Drawing.Point(0, 104);
-			this.barDockControlLeft.Size = new System.Drawing.Size(0, 458);
+			this.barDockControlLeft.ForeColor = System.Drawing.Color.Black;
+			this.barDockControlLeft.Location = new System.Drawing.Point(0, 109);
+			this.barDockControlLeft.Size = new System.Drawing.Size(0, 453);
 			// 
 			// barDockControlRight
 			// 
 			this.barDockControlRight.CausesValidation = false;
 			this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-			this.barDockControlRight.Location = new System.Drawing.Point(938, 104);
-			this.barDockControlRight.Size = new System.Drawing.Size(0, 458);
+			this.barDockControlRight.ForeColor = System.Drawing.Color.Black;
+			this.barDockControlRight.Location = new System.Drawing.Point(938, 109);
+			this.barDockControlRight.Size = new System.Drawing.Size(0, 453);
 			// 
 			// pnNavigationArea
 			// 
-			this.pnNavigationArea.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.pnNavigationArea.Controls.Add(this.simpleButtonSettings);
+			this.pnNavigationArea.BackColor = System.Drawing.Color.Transparent;
 			this.pnNavigationArea.Controls.Add(this.laFileInfo);
 			this.pnNavigationArea.Controls.Add(this.laSlideNumber);
 			this.pnNavigationArea.Controls.Add(this.comboBoxEditSlides);
+			this.pnNavigationArea.Controls.Add(this.buttonXSettings);
 			this.pnNavigationArea.Dock = System.Windows.Forms.DockStyle.Bottom;
+			this.pnNavigationArea.ForeColor = System.Drawing.Color.Black;
 			this.pnNavigationArea.Location = new System.Drawing.Point(0, 495);
 			this.pnNavigationArea.Name = "pnNavigationArea";
 			this.pnNavigationArea.Size = new System.Drawing.Size(938, 67);
@@ -371,8 +372,10 @@
 			// laFileInfo
 			// 
 			this.laFileInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.laFileInfo.BackColor = System.Drawing.Color.White;
 			this.laFileInfo.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.laFileInfo.Location = new System.Drawing.Point(702, 39);
+			this.laFileInfo.ForeColor = System.Drawing.Color.Black;
+			this.laFileInfo.Location = new System.Drawing.Point(706, 41);
 			this.laFileInfo.Name = "laFileInfo";
 			this.laFileInfo.Size = new System.Drawing.Size(230, 20);
 			this.laFileInfo.TabIndex = 10;
@@ -382,8 +385,10 @@
 			// laSlideNumber
 			// 
 			this.laSlideNumber.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.laSlideNumber.BackColor = System.Drawing.Color.White;
 			this.laSlideNumber.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.laSlideNumber.Location = new System.Drawing.Point(698, 4);
+			this.laSlideNumber.ForeColor = System.Drawing.Color.Black;
+			this.laSlideNumber.Location = new System.Drawing.Point(702, 6);
 			this.laSlideNumber.Name = "laSlideNumber";
 			this.laSlideNumber.Size = new System.Drawing.Size(234, 35);
 			this.laSlideNumber.TabIndex = 9;
@@ -393,11 +398,15 @@
 			// comboBoxEditSlides
 			// 
 			this.comboBoxEditSlides.EditValue = "";
-			this.comboBoxEditSlides.Location = new System.Drawing.Point(373, 4);
+			this.comboBoxEditSlides.Location = new System.Drawing.Point(373, 6);
 			this.comboBoxEditSlides.MenuManager = this.barManager;
 			this.comboBoxEditSlides.Name = "comboBoxEditSlides";
+			this.comboBoxEditSlides.Properties.Appearance.BackColor = System.Drawing.Color.White;
 			this.comboBoxEditSlides.Properties.Appearance.Font = new System.Drawing.Font("Arial", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.comboBoxEditSlides.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.comboBoxEditSlides.Properties.Appearance.Options.UseBackColor = true;
 			this.comboBoxEditSlides.Properties.Appearance.Options.UseFont = true;
+			this.comboBoxEditSlides.Properties.Appearance.Options.UseForeColor = true;
 			this.comboBoxEditSlides.Properties.Appearance.Options.UseTextOptions = true;
 			this.comboBoxEditSlides.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
 			this.comboBoxEditSlides.Properties.AppearanceDropDown.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -414,13 +423,27 @@
 			this.comboBoxEditSlides.SelectedIndexChanged += new System.EventHandler(this.comboBoxEditSlides_SelectedIndexChanged);
 			this.comboBoxEditSlides.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.comboBoxEditSlides_ButtonClick);
 			// 
+			// buttonXSettings
+			// 
+			this.buttonXSettings.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXSettings.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXSettings.Image = global::SalesDepot.Properties.Resources.QuickViewUserSettings;
+			this.buttonXSettings.Location = new System.Drawing.Point(10, 6);
+			this.buttonXSettings.Name = "buttonXSettings";
+			this.buttonXSettings.Size = new System.Drawing.Size(74, 54);
+			this.buttonXSettings.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXSettings.TabIndex = 12;
+			this.buttonXSettings.Click += new System.EventHandler(this.simpleButtonSettings_Click);
+			// 
 			// pnPreview
 			// 
-			this.pnPreview.BackColor = System.Drawing.Color.Black;
+			this.pnPreview.BackColor = System.Drawing.Color.Transparent;
+			this.pnPreview.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.pnPreview.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.pnPreview.Location = new System.Drawing.Point(0, 143);
+			this.pnPreview.ForeColor = System.Drawing.Color.Black;
+			this.pnPreview.Location = new System.Drawing.Point(0, 148);
 			this.pnPreview.Name = "pnPreview";
-			this.pnPreview.Size = new System.Drawing.Size(938, 352);
+			this.pnPreview.Size = new System.Drawing.Size(938, 347);
 			this.pnPreview.TabIndex = 10;
 			// 
 			// styleController
@@ -438,19 +461,16 @@
 			this.styleController.AppearanceReadOnly.Font = new System.Drawing.Font("Arial", 9.75F);
 			this.styleController.AppearanceReadOnly.Options.UseFont = true;
 			// 
-			// defaultLookAndFeel
-			// 
-			this.defaultLookAndFeel.LookAndFeel.SkinName = "Money Twins";
-			// 
 			// pnSlideTemplate
 			// 
-			this.pnSlideTemplate.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.pnSlideTemplate.BackColor = System.Drawing.Color.Transparent;
 			this.pnSlideTemplate.Controls.Add(this.comboBoxEditSlideTemplate);
 			this.pnSlideTemplate.Controls.Add(this.checkEditChangeSlideTemplate);
 			this.pnSlideTemplate.Controls.Add(this.checkEditKeepSlideTemplate);
 			this.pnSlideTemplate.Controls.Add(this.labelControlSlideTemplate);
 			this.pnSlideTemplate.Dock = System.Windows.Forms.DockStyle.Top;
-			this.pnSlideTemplate.Location = new System.Drawing.Point(0, 104);
+			this.pnSlideTemplate.ForeColor = System.Drawing.Color.Black;
+			this.pnSlideTemplate.Location = new System.Drawing.Point(0, 109);
 			this.pnSlideTemplate.Name = "pnSlideTemplate";
 			this.pnSlideTemplate.Size = new System.Drawing.Size(938, 39);
 			this.pnSlideTemplate.TabIndex = 20;
@@ -459,9 +479,13 @@
 			// 
 			this.comboBoxEditSlideTemplate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.comboBoxEditSlideTemplate.Enabled = false;
-			this.comboBoxEditSlideTemplate.Location = new System.Drawing.Point(712, 6);
+			this.comboBoxEditSlideTemplate.Location = new System.Drawing.Point(716, 6);
 			this.comboBoxEditSlideTemplate.MenuManager = this.barManager;
 			this.comboBoxEditSlideTemplate.Name = "comboBoxEditSlideTemplate";
+			this.comboBoxEditSlideTemplate.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.comboBoxEditSlideTemplate.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.comboBoxEditSlideTemplate.Properties.Appearance.Options.UseBackColor = true;
+			this.comboBoxEditSlideTemplate.Properties.Appearance.Options.UseForeColor = true;
 			this.comboBoxEditSlideTemplate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
 			this.comboBoxEditSlideTemplate.Properties.NullText = "Select";
@@ -473,14 +497,16 @@
 			// checkEditChangeSlideTemplate
 			// 
 			this.checkEditChangeSlideTemplate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.checkEditChangeSlideTemplate.Location = new System.Drawing.Point(425, 7);
+			this.checkEditChangeSlideTemplate.Location = new System.Drawing.Point(429, 7);
 			this.checkEditChangeSlideTemplate.MenuManager = this.barManager;
 			this.checkEditChangeSlideTemplate.Name = "checkEditChangeSlideTemplate";
-			this.checkEditChangeSlideTemplate.Properties.AllowHtmlString = true;
+			this.checkEditChangeSlideTemplate.Properties.AllowHtmlDraw = DevExpress.Utils.DefaultBoolean.True;
+			this.checkEditChangeSlideTemplate.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.checkEditChangeSlideTemplate.Properties.Appearance.Options.UseForeColor = true;
 			this.checkEditChangeSlideTemplate.Properties.Caption = "<b>CHANGE</b> the slide background:";
 			this.checkEditChangeSlideTemplate.Properties.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Radio;
 			this.checkEditChangeSlideTemplate.Properties.RadioGroupIndex = 1;
-			this.checkEditChangeSlideTemplate.Size = new System.Drawing.Size(266, 20);
+			this.checkEditChangeSlideTemplate.Size = new System.Drawing.Size(266, 19);
 			this.checkEditChangeSlideTemplate.StyleController = this.styleController;
 			this.checkEditChangeSlideTemplate.TabIndex = 0;
 			this.checkEditChangeSlideTemplate.TabStop = false;
@@ -492,7 +518,9 @@
 			this.checkEditKeepSlideTemplate.Location = new System.Drawing.Point(3, 7);
 			this.checkEditKeepSlideTemplate.MenuManager = this.barManager;
 			this.checkEditKeepSlideTemplate.Name = "checkEditKeepSlideTemplate";
-			this.checkEditKeepSlideTemplate.Properties.AllowHtmlString = true;
+			this.checkEditKeepSlideTemplate.Properties.AllowHtmlDraw = DevExpress.Utils.DefaultBoolean.True;
+			this.checkEditKeepSlideTemplate.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.checkEditKeepSlideTemplate.Properties.Appearance.Options.UseForeColor = true;
 			this.checkEditKeepSlideTemplate.Properties.Caption = "<b>KEEP</b> the current PowerPoint slide background";
 			this.checkEditKeepSlideTemplate.Properties.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Radio;
 			this.checkEditKeepSlideTemplate.Properties.RadioGroupIndex = 1;
@@ -504,35 +532,21 @@
 			// 
 			this.labelControlSlideTemplate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+			this.labelControlSlideTemplate.Appearance.BackColor = System.Drawing.Color.White;
 			this.labelControlSlideTemplate.Appearance.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelControlSlideTemplate.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.labelControlSlideTemplate.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
 			this.labelControlSlideTemplate.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
 			this.labelControlSlideTemplate.Location = new System.Drawing.Point(316, 3);
 			this.labelControlSlideTemplate.Name = "labelControlSlideTemplate";
-			this.labelControlSlideTemplate.Size = new System.Drawing.Size(85, 27);
+			this.labelControlSlideTemplate.Size = new System.Drawing.Size(89, 27);
 			this.labelControlSlideTemplate.TabIndex = 3;
 			this.labelControlSlideTemplate.Text = "-or-";
-			// 
-			// simpleButtonSettings
-			// 
-			this.simpleButtonSettings.Image = global::SalesDepot.Properties.Resources.QuickViewUserSettings;
-			this.simpleButtonSettings.Location = new System.Drawing.Point(10, 4);
-			this.simpleButtonSettings.Name = "simpleButtonSettings";
-			this.simpleButtonSettings.Size = new System.Drawing.Size(74, 54);
-			toolTipTitleItem12.Text = "Settings";
-			toolTipItem12.LeftIndent = 6;
-			toolTipItem12.Text = "Set Locations for Open File and Save File operations";
-			superToolTip12.Items.Add(toolTipTitleItem12);
-			superToolTip12.Items.Add(toolTipItem12);
-			this.simpleButtonSettings.SuperTip = superToolTip12;
-			this.simpleButtonSettings.TabIndex = 11;
-			this.simpleButtonSettings.Text = "simpleButton1";
-			this.simpleButtonSettings.Click += new System.EventHandler(this.simpleButtonSettings_Click);
 			// 
 			// FormPowerPointQuickViewOld
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
+			this.BackColor = System.Drawing.Color.White;
 			this.ClientSize = new System.Drawing.Size(938, 562);
 			this.Controls.Add(this.pnPreview);
 			this.Controls.Add(this.pnSlideTemplate);
@@ -541,6 +555,7 @@
 			this.Controls.Add(this.barDockControlRight);
 			this.Controls.Add(this.barDockControlBottom);
 			this.Controls.Add(this.barDockControlTop);
+			this.DoubleBuffered = true;
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.Name = "FormPowerPointQuickViewOld";
 			this.ShowIcon = false;
@@ -582,8 +597,7 @@
         private DevExpress.XtraBars.BarLargeButtonItem barLargeButtonItemAddAllSlides;
         private DevExpress.XtraBars.BarLargeButtonItem barLargeButtonItemAddSlide;
         private System.Windows.Forms.Panel pnPreview;
-        private DevExpress.XtraEditors.StyleController styleController;
-        private DevExpress.LookAndFeel.DefaultLookAndFeel defaultLookAndFeel;
+		private DevExpress.XtraEditors.StyleController styleController;
         private System.Windows.Forms.Panel pnSlideTemplate;
         private DevExpress.XtraEditors.LabelControl labelControlSlideTemplate;
         private DevExpress.XtraEditors.CheckEdit checkEditKeepSlideTemplate;
@@ -593,7 +607,7 @@
 		private DevExpress.XtraBars.BarLargeButtonItem barLargeButtonItemQuickSiteAdd;
 		private System.Windows.Forms.Label laFileInfo;
 		private System.Windows.Forms.Label laSlideNumber;
-		private DevExpress.XtraEditors.SimpleButton simpleButtonSettings;
+		private DevComponents.DotNetBar.ButtonX buttonXSettings;
 
     }
 }

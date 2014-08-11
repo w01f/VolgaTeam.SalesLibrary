@@ -33,6 +33,7 @@
 			// 
 			// laMessage
 			// 
+			this.laMessage.Appearance.BackColor = System.Drawing.Color.White;
 			this.laMessage.Appearance.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.laMessage.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(73)))), ((int)(((byte)(125)))));
 			this.laMessage.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;

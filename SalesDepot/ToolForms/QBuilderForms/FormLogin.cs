@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Linq;
-using System.Threading;
 using System.Windows.Forms;
+using DevComponents.DotNetBar.Metro;
 using SalesDepot.BusinessClasses;
 
 namespace SalesDepot.ToolForms.QBuilderForms
 {
-	public partial class FormLogin : Form
+	public partial class FormLogin : MetroForm
 	{
 		private readonly Func<string, string, string, bool, bool> _login;
 

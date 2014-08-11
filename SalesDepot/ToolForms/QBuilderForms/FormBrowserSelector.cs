@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using DevComponents.DotNetBar.Metro;
 
 namespace SalesDepot.ToolForms.QBuilderForms
 {
-	public partial class FormBrowserSelector : Form
+	public partial class FormBrowserSelector : MetroForm
 	{
 		public enum Browser
 		{

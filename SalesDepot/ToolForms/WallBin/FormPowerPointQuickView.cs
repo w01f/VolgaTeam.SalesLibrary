@@ -4,21 +4,21 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
+using DevComponents.DotNetBar.Metro;
 using DevExpress.XtraBars;
 using DevExpress.XtraEditors.Controls;
 using Microsoft.Office.Core;
 using SalesDepot.BusinessClasses;
 using SalesDepot.ConfigurationClasses;
+using SalesDepot.CoreObjects.InteropClasses;
 using SalesDepot.Floater;
-using SalesDepot.InteropClasses;
+using PowerPointHelper = SalesDepot.InteropClasses.PowerPointHelper;
 
 namespace SalesDepot.ToolForms.WallBin
 {
-	public partial class FormPowerPointQuickView : Form
+	public partial class FormPowerPointQuickView : MetroForm
 	{
 		private FileInfo _tempCopy;
-
-		public LibraryLink SelectedFile { get; set; }
 
 		public FormPowerPointQuickView()
 		{
@@ -29,12 +29,14 @@ namespace SalesDepot.ToolForms.WallBin
 			labelControlSlideTemplate.Font = new Font(labelControlSlideTemplate.Font.FontFamily, labelControlSlideTemplate.Font.Size - 2, labelControlSlideTemplate.Font.Style);
 		}
 
+		public LibraryLink SelectedFile { get; set; }
+
 		protected override void OnHandleCreated(EventArgs e)
 		{
 			base.OnHandleCreated(e);
 			if (Environment.OSVersion.Version.Major < 6) return;
 			int attrValue = 1;
-			var res = WinAPIHelper.DwmSetWindowAttribute(Handle, WinAPIHelper.DWMWA_TRANSITIONS_FORCEDISABLED, ref attrValue, sizeof(int));
+			int res = WinAPIHelper.DwmSetWindowAttribute(Handle, WinAPIHelper.DWMWA_TRANSITIONS_FORCEDISABLED, ref attrValue, sizeof(int));
 			if (res < 0)
 				throw new Exception("Can't disable aero animation");
 		}
@@ -46,7 +48,7 @@ namespace SalesDepot.ToolForms.WallBin
 			{
 				if (File.Exists(SelectedFile.LocalPath))
 				{
-					var tempPath = Path.Combine(AppManager.Instance.TempFolder.FullName, DateTime.Now.ToString("yyyyMMdd-hmmsstt") + Path.GetExtension(SelectedFile.LocalPath));
+					string tempPath = Path.Combine(AppManager.Instance.TempFolder.FullName, DateTime.Now.ToString("yyyyMMdd-hmmsstt") + Path.GetExtension(SelectedFile.LocalPath));
 					File.Copy(SelectedFile.LocalPath, tempPath, true);
 					_tempCopy = new FileInfo(tempPath);
 				}
@@ -131,11 +133,11 @@ namespace SalesDepot.ToolForms.WallBin
 			if (SelectedFile == null) return;
 			using (var form = new FormSaveAsPDF())
 			{
-				var result = form.ShowDialog();
-				var wholeFile = form.WholeFile;
+				DialogResult result = form.ShowDialog();
+				bool wholeFile = form.WholeFile;
 
 				if (result == DialogResult.Cancel) return;
-				var destinationFileName = Path.Combine(Path.GetTempPath(), SelectedFile.NameWithoutExtesion + ".pdf");
+				string destinationFileName = Path.Combine(Path.GetTempPath(), SelectedFile.NameWithoutExtesion + ".pdf");
 
 				using (var progressForm = new FormProgress())
 				{
@@ -231,6 +233,7 @@ namespace SalesDepot.ToolForms.WallBin
 				{
 					SelectedFile.PreviewContainer.SelectedIndex = comboBoxEditSlides.SelectedIndex;
 					pictureBoxPreview.Image = SelectedFile.PreviewContainer.SelectedSlide;
+					pictureBoxPreview.BackColor = Color.WhiteSmoke;
 					laSlideNumber.Text = string.Format("Slide {0} of {1}", new object[] { (SelectedFile.PreviewContainer.SelectedIndex + 1).ToString(), SelectedFile.PreviewContainer.Slides.Count.ToString() });
 				}
 			}

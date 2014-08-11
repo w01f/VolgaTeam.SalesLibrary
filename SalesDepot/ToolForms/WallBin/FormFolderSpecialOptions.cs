@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using DevComponents.DotNetBar.Metro;
 
 namespace SalesDepot.ToolForms.WallBin
 {
-	public partial class FormFolderSpecialOptions : Form
+	public partial class FormFolderSpecialOptions : MetroForm
 	{
 		private FormViewOptions.ViewOptions _selectedOption;
 

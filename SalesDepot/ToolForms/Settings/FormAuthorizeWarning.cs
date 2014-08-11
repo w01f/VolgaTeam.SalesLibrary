@@ -1,8 +1,9 @@
 ﻿using System.Windows.Forms;
+using DevComponents.DotNetBar.Metro;
 
 namespace SalesDepot.ToolForms.Settings
 {
-	public partial class FormAuthorizeWarning : Form
+	public partial class FormAuthorizeWarning : MetroForm
 	{
 		public FormAuthorizeWarning()
 		{

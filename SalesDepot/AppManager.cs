@@ -6,8 +6,9 @@ using System.Threading;
 using System.Windows.Forms;
 using ProgramManager.CoreObjects;
 using SalesDepot.ConfigurationClasses;
-using SalesDepot.InteropClasses;
+using SalesDepot.CoreObjects.InteropClasses;
 using SalesDepot.ToolClasses;
+using PowerPointHelper = SalesDepot.InteropClasses.PowerPointHelper;
 
 namespace SalesDepot
 {

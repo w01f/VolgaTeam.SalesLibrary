@@ -29,7 +29,6 @@
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(KeywordsEditor));
 			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
 			this.laHeader = new System.Windows.Forms.Label();
 			this.pnMain = new System.Windows.Forms.Panel();
@@ -53,7 +52,6 @@
 			// 
 			// laHeader
 			// 
-			this.laHeader.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
 			this.laHeader.Dock = System.Windows.Forms.DockStyle.Top;
 			this.laHeader.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.laHeader.Location = new System.Drawing.Point(0, 0);
@@ -65,7 +63,6 @@
 			// 
 			// pnMain
 			// 
-			this.pnMain.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
 			this.pnMain.Controls.Add(this.pnData);
 			this.pnMain.Controls.Add(this.pnButtons);
 			this.pnMain.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -81,7 +78,7 @@
 			this.pnData.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.pnData.Location = new System.Drawing.Point(0, 47);
 			this.pnData.Name = "pnData";
-			this.pnData.Size = new System.Drawing.Size(346, 329);
+			this.pnData.Size = new System.Drawing.Size(350, 333);
 			this.pnData.TabIndex = 1;
 			// 
 			// gridControl
@@ -89,12 +86,13 @@
 			this.gridControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+			this.gridControl.Cursor = System.Windows.Forms.Cursors.Default;
 			this.gridControl.Location = new System.Drawing.Point(5, 46);
 			this.gridControl.MainView = this.gridView;
 			this.gridControl.Name = "gridControl";
 			this.gridControl.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemButtonEditKeyword});
-			this.gridControl.Size = new System.Drawing.Size(336, 280);
+			this.gridControl.Size = new System.Drawing.Size(340, 284);
 			this.gridControl.TabIndex = 8;
 			this.gridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView});
@@ -129,7 +127,7 @@
 			this.gridView.OptionsView.ShowGroupExpandCollapseButtons = false;
 			this.gridView.OptionsView.ShowGroupPanel = false;
 			this.gridView.OptionsView.ShowIndicator = false;
-			this.gridView.OptionsView.ShowPreviewLines = false;
+			this.gridView.OptionsView.ShowPreviewRowLines = DevExpress.Utils.DefaultBoolean.False;
 			this.gridView.RowHeight = 35;
 			// 
 			// gridColumnValue
@@ -154,7 +152,7 @@
 			this.repositoryItemButtonEditKeyword.AppearanceReadOnly.Options.UseFont = true;
 			this.repositoryItemButtonEditKeyword.AutoHeight = false;
 			this.repositoryItemButtonEditKeyword.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("repositoryItemButtonEditKeyword.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::FileManager.Properties.Resources.DeleteButton, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true)});
 			this.repositoryItemButtonEditKeyword.Name = "repositoryItemButtonEditKeyword";
 			this.repositoryItemButtonEditKeyword.NullText = "Type Keyword...";
 			this.repositoryItemButtonEditKeyword.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.repositoryItemButtonEditKeyword_ButtonClick);
@@ -163,7 +161,8 @@
 			// 
 			this.buttonXAdd.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
 			this.buttonXAdd.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-			this.buttonXAdd.Image = global::FileManager.Properties.Resources.Green_Plus;
+			this.buttonXAdd.Image = global::FileManager.Properties.Resources.PlusButton;
+			this.buttonXAdd.ImageFixedSize = new System.Drawing.Size(24, 24);
 			this.buttonXAdd.Location = new System.Drawing.Point(5, 6);
 			this.buttonXAdd.Name = "buttonXAdd";
 			this.buttonXAdd.Size = new System.Drawing.Size(153, 34);
@@ -180,7 +179,7 @@
 			this.pnButtons.Dock = System.Windows.Forms.DockStyle.Top;
 			this.pnButtons.Location = new System.Drawing.Point(0, 0);
 			this.pnButtons.Name = "pnButtons";
-			this.pnButtons.Size = new System.Drawing.Size(346, 47);
+			this.pnButtons.Size = new System.Drawing.Size(350, 47);
 			this.pnButtons.TabIndex = 0;
 			// 
 			// buttonXReset
@@ -191,7 +190,7 @@
 			this.buttonXReset.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXReset.Location = new System.Drawing.Point(5, 8);
 			this.buttonXReset.Name = "buttonXReset";
-			this.buttonXReset.Size = new System.Drawing.Size(336, 30);
+			this.buttonXReset.Size = new System.Drawing.Size(340, 30);
 			this.buttonXReset.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXReset.TabIndex = 0;
 			this.buttonXReset.Text = "RESET ALL KEYWORDS for the Selected Links";
@@ -216,7 +215,7 @@
 			// KeywordsEditor
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
+			this.BackColor = System.Drawing.Color.White;
 			this.Controls.Add(this.pnMain);
 			this.Controls.Add(this.laHeader);
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));

@@ -20,12 +20,10 @@ namespace OvernightsCalendarViewer.ConfigurationClasses
 			_localSettingsFilePath = Path.Combine(settingsFolderPath, "OvernightsSettings.xml");
 			_localLibraryRootFolder = string.Format(@"{0}\newlocaldirect.com\sync\Incoming\libraries", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
 			_localLibraryLogoFolder = string.Format(@"{0}\newlocaldirect.com\Sales Depot\!Artwork\!SD-Graphics\libraries", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
-			IconPath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\sdicon.ico", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
 			LibraryLogoFolder = string.Empty;
 			DisclaimerPath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\Nielsen Permissible Use.pdf", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
 		}
 
-		public string IconPath { get; set; }
 		public string LibraryRootFolder { get; set; }
 		public string LibraryLogoFolder { get; set; }
 		public string DisclaimerPath { get; set; }

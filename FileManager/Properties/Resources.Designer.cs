@@ -93,9 +93,19 @@ namespace FileManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap ArrowLeftGreen {
+        internal static System.Drawing.Bitmap ArrowLeft {
             get {
-                object obj = ResourceManager.GetObject("ArrowLeftGreen", resourceCulture);
+                object obj = ResourceManager.GetObject("ArrowLeft", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ArrowRight {
+            get {
+                object obj = ResourceManager.GetObject("ArrowRight", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -383,26 +393,6 @@ namespace FileManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Green_Plus {
-            get {
-                object obj = ResourceManager.GetObject("Green_Plus", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap GreenRightArrow {
-            get {
-                object obj = ResourceManager.GetObject("GreenRightArrow", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap InActiveLinksWarning {
             get {
                 object obj = ResourceManager.GetObject("InActiveLinksWarning", resourceCulture);
@@ -563,9 +553,9 @@ namespace FileManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap QuickTimeSmall {
+        internal static System.Drawing.Bitmap PlusButton {
             get {
-                object obj = ResourceManager.GetObject("QuickTimeSmall", resourceCulture);
+                object obj = ResourceManager.GetObject("PlusButton", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -573,9 +563,9 @@ namespace FileManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Red_Minus {
+        internal static System.Drawing.Bitmap QuickTimeSmall {
             get {
-                object obj = ResourceManager.GetObject("Red_Minus", resourceCulture);
+                object obj = ResourceManager.GetObject("QuickTimeSmall", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -866,6 +856,16 @@ namespace FileManager.Properties {
         internal static System.Drawing.Bitmap Url {
             get {
                 object obj = ResourceManager.GetObject("Url", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap UrlButton {
+            get {
+                object obj = ResourceManager.GetObject("UrlButton", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

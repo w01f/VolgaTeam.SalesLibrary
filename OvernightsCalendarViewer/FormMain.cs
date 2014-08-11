@@ -3,6 +3,7 @@ using System.Drawing;
 using System.IO;
 using System.Threading;
 using System.Windows.Forms;
+using DevComponents.DotNetBar;
 using OvernightsCalendarViewer.BusinessClasses;
 using OvernightsCalendarViewer.ConfigurationClasses;
 using OvernightsCalendarViewer.Floater;
@@ -14,7 +15,7 @@ using OvernightsCalendarViewer.ToolForms;
 
 namespace OvernightsCalendarViewer
 {
-	public partial class FormMain : Form
+	public partial class FormMain : RibbonForm
 	{
 		private static FormMain _instance;
 
@@ -76,8 +77,6 @@ namespace OvernightsCalendarViewer
 
 		private void LoadApplicationSettings()
 		{
-			if (File.Exists(SettingsManager.Instance.IconPath))
-				Icon = new Icon(SettingsManager.Instance.IconPath);
 			ribbonControl.SelectedRibbonTabChanged += ribbonControl_SelectedRibbonTabChanged;
 		}
 

@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Windows.Forms;
 using DevComponents.DotNetBar;
+using DevComponents.DotNetBar.Metro;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid.Views.Grid;
 using FileManager.Controllers;
@@ -9,7 +10,7 @@ using SalesDepot.CoreObjects.BusinessClasses;
 
 namespace FileManager.ToolForms.Settings
 {
-	public partial class FormAutoSync : Form
+	public partial class FormAutoSync : MetroForm
 	{
 		private FormAutoSyncEdit _formEdit;
 

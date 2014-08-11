@@ -62,19 +62,16 @@
 			this.laEndDate = new System.Windows.Forms.Label();
 			this.laStartDate = new System.Windows.Forms.Label();
 			this.pnTreeViewProgress = new System.Windows.Forms.Panel();
-			this.panelExProgress = new DevComponents.DotNetBar.PanelEx();
 			this.laTreeViewProgressLable = new System.Windows.Forms.Label();
 			this.circularProgress = new DevComponents.DotNetBar.Controls.CircularProgress();
 			this.pnRefresh = new System.Windows.Forms.Panel();
-			this.panelExRefresh = new DevComponents.DotNetBar.PanelEx();
-			this.simpleButtonRefresh = new DevExpress.XtraEditors.SimpleButton();
 			this.laDoubleClick = new System.Windows.Forms.Label();
+			this.buttonXRefresh = new DevComponents.DotNetBar.ButtonX();
 			this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.tmiOpen = new System.Windows.Forms.ToolStripMenuItem();
 			this.xtraTabControlFiles = new DevExpress.XtraTab.XtraTabControl();
 			this.xtraTabPageRegular = new DevExpress.XtraTab.XtraTabPage();
 			this.xtraTabPageSearch = new DevExpress.XtraTab.XtraTabPage();
-			this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
 			this.pnLeft = new System.Windows.Forms.Panel();
 			this.splitContainerControl = new DevExpress.XtraEditors.SplitContainerControl();
 			this.pnRight = new System.Windows.Forms.Panel();
@@ -97,14 +94,12 @@
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditKeyWord.Properties)).BeginInit();
 			this.gbDateRange.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.dateEditEndDate.Properties.VistaTimeProperties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.dateEditEndDate.Properties.CalendarTimeProperties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.dateEditEndDate.Properties)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.dateEditStartDate.Properties.VistaTimeProperties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.dateEditStartDate.Properties.CalendarTimeProperties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.dateEditStartDate.Properties)).BeginInit();
 			this.pnTreeViewProgress.SuspendLayout();
-			this.panelExProgress.SuspendLayout();
 			this.pnRefresh.SuspendLayout();
-			this.panelExRefresh.SuspendLayout();
 			this.contextMenuStrip.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControlFiles)).BeginInit();
 			this.xtraTabControlFiles.SuspendLayout();
@@ -147,7 +142,7 @@
 			this.treeListAllFiles.OptionsView.ShowIndicator = false;
 			this.treeListAllFiles.OptionsView.ShowVertLines = false;
 			this.treeListAllFiles.ShowButtonMode = DevExpress.XtraTreeList.ShowButtonModeEnum.ShowForFocusedRow;
-			this.treeListAllFiles.Size = new System.Drawing.Size(298, 371);
+			this.treeListAllFiles.Size = new System.Drawing.Size(294, 366);
 			this.treeListAllFiles.StateImageList = this.imageListFiles;
 			this.treeListAllFiles.TabIndex = 1;
 			this.treeListAllFiles.SelectionChanged += new System.EventHandler(this.treeList_SelectionChanged);
@@ -158,6 +153,7 @@
 			// 
 			this.treeListColumnName.Caption = "treeListColumn1";
 			this.treeListColumnName.FieldName = "treeListColumn1";
+			this.treeListColumnName.MinWidth = 33;
 			this.treeListColumnName.Name = "treeListColumnName";
 			this.treeListColumnName.Visible = true;
 			this.treeListColumnName.VisibleIndex = 0;
@@ -213,7 +209,7 @@
 			this.treeListSearchFiles.OptionsView.ShowIndicator = false;
 			this.treeListSearchFiles.OptionsView.ShowVertLines = false;
 			this.treeListSearchFiles.ShowButtonMode = DevExpress.XtraTreeList.ShowButtonModeEnum.ShowForFocusedRow;
-			this.treeListSearchFiles.Size = new System.Drawing.Size(298, 225);
+			this.treeListSearchFiles.Size = new System.Drawing.Size(294, 220);
 			this.treeListSearchFiles.StateImageList = this.imageListFiles;
 			this.treeListSearchFiles.TabIndex = 2;
 			this.treeListSearchFiles.SelectionChanged += new System.EventHandler(this.treeList_SelectionChanged);
@@ -224,6 +220,7 @@
 			// 
 			this.treeListColumn1.Caption = "treeListColumn1";
 			this.treeListColumn1.FieldName = "treeListColumn1";
+			this.treeListColumn1.MinWidth = 33;
 			this.treeListColumn1.Name = "treeListColumn1";
 			this.treeListColumn1.Visible = true;
 			this.treeListColumn1.VisibleIndex = 0;
@@ -243,7 +240,7 @@
 			this.pnKeyWord.Dock = System.Windows.Forms.DockStyle.Top;
 			this.pnKeyWord.Location = new System.Drawing.Point(0, 0);
 			this.pnKeyWord.Name = "pnKeyWord";
-			this.pnKeyWord.Size = new System.Drawing.Size(298, 146);
+			this.pnKeyWord.Size = new System.Drawing.Size(294, 146);
 			this.pnKeyWord.TabIndex = 0;
 			// 
 			// simpleButtonSearch
@@ -255,7 +252,7 @@
 			this.simpleButtonSearch.Appearance.Options.UseFont = true;
 			this.simpleButtonSearch.Appearance.Options.UseForeColor = true;
 			this.simpleButtonSearch.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-			this.simpleButtonSearch.Location = new System.Drawing.Point(189, 35);
+			this.simpleButtonSearch.Location = new System.Drawing.Point(185, 35);
 			this.simpleButtonSearch.Name = "simpleButtonSearch";
 			this.simpleButtonSearch.Size = new System.Drawing.Size(100, 27);
 			this.simpleButtonSearch.TabIndex = 5;
@@ -268,7 +265,7 @@
 			this.checkEditDateRange.Name = "checkEditDateRange";
 			this.checkEditDateRange.Properties.AutoWidth = true;
 			this.checkEditDateRange.Properties.Caption = "Set Date Range";
-			this.checkEditDateRange.Size = new System.Drawing.Size(115, 21);
+			this.checkEditDateRange.Size = new System.Drawing.Size(114, 20);
 			this.checkEditDateRange.StyleController = this.styleController;
 			this.checkEditDateRange.TabIndex = 4;
 			this.checkEditDateRange.CheckedChanged += new System.EventHandler(this.ckDateRange_CheckedChanged);
@@ -285,7 +282,7 @@
 			this.textEditKeyWord.Location = new System.Drawing.Point(8, 7);
 			this.textEditKeyWord.Name = "textEditKeyWord";
 			this.textEditKeyWord.Properties.NullText = "Type keyword here...";
-			this.textEditKeyWord.Size = new System.Drawing.Size(281, 22);
+			this.textEditKeyWord.Size = new System.Drawing.Size(277, 22);
 			this.textEditKeyWord.StyleController = this.styleController;
 			this.textEditKeyWord.TabIndex = 3;
 			this.textEditKeyWord.KeyDown += new System.Windows.Forms.KeyEventHandler(this.edKeyWord_KeyDown);
@@ -300,7 +297,7 @@
 			this.gbDateRange.Controls.Add(this.laStartDate);
 			this.gbDateRange.Location = new System.Drawing.Point(8, 64);
 			this.gbDateRange.Name = "gbDateRange";
-			this.gbDateRange.Size = new System.Drawing.Size(281, 71);
+			this.gbDateRange.Size = new System.Drawing.Size(277, 71);
 			this.gbDateRange.TabIndex = 2;
 			this.gbDateRange.TabStop = false;
 			// 
@@ -308,13 +305,15 @@
 			// 
 			this.dateEditEndDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.dateEditEndDate.EditValue = null;
-			this.dateEditEndDate.Location = new System.Drawing.Point(155, 42);
+			this.dateEditEndDate.Location = new System.Drawing.Point(151, 42);
 			this.dateEditEndDate.Name = "dateEditEndDate";
 			this.dateEditEndDate.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
 			this.dateEditEndDate.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.dateEditEndDate.Properties.Appearance.Options.UseFont = true;
 			this.dateEditEndDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("dateEditEndDate.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true)});
+			this.dateEditEndDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
 			this.dateEditEndDate.Properties.DisplayFormat.FormatString = "MM/dd/yyyy";
 			this.dateEditEndDate.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
 			this.dateEditEndDate.Properties.EditFormat.FormatString = "MM/dd/yyyy";
@@ -324,9 +323,6 @@
 			this.dateEditEndDate.Properties.ShowPopupShadow = false;
 			this.dateEditEndDate.Properties.ShowToday = false;
 			this.dateEditEndDate.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-			this.dateEditEndDate.Properties.UseParentBackground = true;
-			this.dateEditEndDate.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton()});
 			this.dateEditEndDate.Size = new System.Drawing.Size(120, 22);
 			this.dateEditEndDate.TabIndex = 7;
 			// 
@@ -334,13 +330,15 @@
 			// 
 			this.dateEditStartDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.dateEditStartDate.EditValue = null;
-			this.dateEditStartDate.Location = new System.Drawing.Point(155, 14);
+			this.dateEditStartDate.Location = new System.Drawing.Point(151, 14);
 			this.dateEditStartDate.Name = "dateEditStartDate";
 			this.dateEditStartDate.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
 			this.dateEditStartDate.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.dateEditStartDate.Properties.Appearance.Options.UseFont = true;
 			this.dateEditStartDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("dateEditStartDate.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "", null, null, true)});
+			this.dateEditStartDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
 			this.dateEditStartDate.Properties.DisplayFormat.FormatString = "MM/dd/yyyy";
 			this.dateEditStartDate.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
 			this.dateEditStartDate.Properties.EditFormat.FormatString = "MM/dd/yyyy";
@@ -350,9 +348,6 @@
 			this.dateEditStartDate.Properties.ShowPopupShadow = false;
 			this.dateEditStartDate.Properties.ShowToday = false;
 			this.dateEditStartDate.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-			this.dateEditStartDate.Properties.UseParentBackground = true;
-			this.dateEditStartDate.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton()});
 			this.dateEditStartDate.Size = new System.Drawing.Size(120, 22);
 			this.dateEditStartDate.TabIndex = 6;
 			// 
@@ -378,7 +373,8 @@
 			// 
 			// pnTreeViewProgress
 			// 
-			this.pnTreeViewProgress.Controls.Add(this.panelExProgress);
+			this.pnTreeViewProgress.Controls.Add(this.laTreeViewProgressLable);
+			this.pnTreeViewProgress.Controls.Add(this.circularProgress);
 			this.pnTreeViewProgress.Dock = System.Windows.Forms.DockStyle.Bottom;
 			this.pnTreeViewProgress.Location = new System.Drawing.Point(0, 447);
 			this.pnTreeViewProgress.Name = "pnTreeViewProgress";
@@ -386,34 +382,14 @@
 			this.pnTreeViewProgress.Size = new System.Drawing.Size(300, 53);
 			this.pnTreeViewProgress.TabIndex = 5;
 			// 
-			// panelExProgress
-			// 
-			this.panelExProgress.CanvasColor = System.Drawing.SystemColors.Control;
-			this.panelExProgress.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.panelExProgress.Controls.Add(this.laTreeViewProgressLable);
-			this.panelExProgress.Controls.Add(this.circularProgress);
-			this.panelExProgress.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.panelExProgress.Location = new System.Drawing.Point(5, 5);
-			this.panelExProgress.Name = "panelExProgress";
-			this.panelExProgress.Padding = new System.Windows.Forms.Padding(5);
-			this.panelExProgress.Size = new System.Drawing.Size(290, 43);
-			this.panelExProgress.Style.Alignment = System.Drawing.StringAlignment.Center;
-			this.panelExProgress.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
-			this.panelExProgress.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
-			this.panelExProgress.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
-			this.panelExProgress.Style.BorderColor.Color = System.Drawing.Color.White;
-			this.panelExProgress.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
-			this.panelExProgress.Style.GradientAngle = 90;
-			this.panelExProgress.TabIndex = 0;
-			// 
 			// laTreeViewProgressLable
 			// 
 			this.laTreeViewProgressLable.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.laTreeViewProgressLable.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.laTreeViewProgressLable.Location = new System.Drawing.Point(68, 5);
 			this.laTreeViewProgressLable.Name = "laTreeViewProgressLable";
-			this.laTreeViewProgressLable.Size = new System.Drawing.Size(217, 33);
-			this.laTreeViewProgressLable.TabIndex = 0;
+			this.laTreeViewProgressLable.Size = new System.Drawing.Size(227, 43);
+			this.laTreeViewProgressLable.TabIndex = 2;
 			this.laTreeViewProgressLable.Text = "label1";
 			this.laTreeViewProgressLable.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
@@ -430,13 +406,14 @@
 			this.circularProgress.Name = "circularProgress";
 			this.circularProgress.ProgressBarType = DevComponents.DotNetBar.eCircularProgressType.Dot;
 			this.circularProgress.ProgressTextFormat = "";
-			this.circularProgress.Size = new System.Drawing.Size(63, 33);
+			this.circularProgress.Size = new System.Drawing.Size(63, 43);
 			this.circularProgress.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP;
-			this.circularProgress.TabIndex = 1;
+			this.circularProgress.TabIndex = 3;
 			// 
 			// pnRefresh
 			// 
-			this.pnRefresh.Controls.Add(this.panelExRefresh);
+			this.pnRefresh.Controls.Add(this.laDoubleClick);
+			this.pnRefresh.Controls.Add(this.buttonXRefresh);
 			this.pnRefresh.Dock = System.Windows.Forms.DockStyle.Top;
 			this.pnRefresh.Location = new System.Drawing.Point(0, 0);
 			this.pnRefresh.Name = "pnRefresh";
@@ -444,51 +421,30 @@
 			this.pnRefresh.Size = new System.Drawing.Size(300, 50);
 			this.pnRefresh.TabIndex = 6;
 			// 
-			// panelExRefresh
-			// 
-			this.panelExRefresh.CanvasColor = System.Drawing.SystemColors.Control;
-			this.panelExRefresh.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.panelExRefresh.Controls.Add(this.simpleButtonRefresh);
-			this.panelExRefresh.Controls.Add(this.laDoubleClick);
-			this.panelExRefresh.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.panelExRefresh.Location = new System.Drawing.Point(5, 5);
-			this.panelExRefresh.Name = "panelExRefresh";
-			this.panelExRefresh.Padding = new System.Windows.Forms.Padding(5);
-			this.panelExRefresh.Size = new System.Drawing.Size(290, 40);
-			this.panelExRefresh.Style.Alignment = System.Drawing.StringAlignment.Center;
-			this.panelExRefresh.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
-			this.panelExRefresh.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
-			this.panelExRefresh.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
-			this.panelExRefresh.Style.BorderColor.Color = System.Drawing.Color.White;
-			this.panelExRefresh.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
-			this.panelExRefresh.Style.GradientAngle = 90;
-			this.panelExRefresh.TabIndex = 1;
-			// 
-			// simpleButtonRefresh
-			// 
-			this.simpleButtonRefresh.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.simpleButtonRefresh.Appearance.ForeColor = System.Drawing.Color.Black;
-			this.simpleButtonRefresh.Appearance.Options.UseFont = true;
-			this.simpleButtonRefresh.Appearance.Options.UseForeColor = true;
-			this.simpleButtonRefresh.Location = new System.Drawing.Point(4, 6);
-			this.simpleButtonRefresh.Name = "simpleButtonRefresh";
-			this.simpleButtonRefresh.Size = new System.Drawing.Size(75, 28);
-			this.simpleButtonRefresh.StyleController = this.styleController;
-			this.simpleButtonRefresh.TabIndex = 6;
-			this.simpleButtonRefresh.Text = "Refresh";
-			this.simpleButtonRefresh.Click += new System.EventHandler(this.Refresh_Click);
-			// 
 			// laDoubleClick
 			// 
 			this.laDoubleClick.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.laDoubleClick.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.laDoubleClick.Location = new System.Drawing.Point(85, 6);
+			this.laDoubleClick.Location = new System.Drawing.Point(92, 11);
 			this.laDoubleClick.Name = "laDoubleClick";
 			this.laDoubleClick.Size = new System.Drawing.Size(197, 28);
-			this.laDoubleClick.TabIndex = 3;
+			this.laDoubleClick.TabIndex = 7;
 			this.laDoubleClick.Text = "Double Click to Open";
 			this.laDoubleClick.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// buttonXRefresh
+			// 
+			this.buttonXRefresh.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXRefresh.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.buttonXRefresh.Location = new System.Drawing.Point(11, 11);
+			this.buttonXRefresh.Name = "buttonXRefresh";
+			this.buttonXRefresh.Size = new System.Drawing.Size(75, 28);
+			this.buttonXRefresh.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXRefresh.TabIndex = 9;
+			this.buttonXRefresh.Text = "Refresh";
+			this.buttonXRefresh.Click += new System.EventHandler(this.Refresh_Click);
 			// 
 			// contextMenuStrip
 			// 
@@ -535,7 +491,7 @@
 			// 
 			this.xtraTabPageRegular.Controls.Add(this.treeListAllFiles);
 			this.xtraTabPageRegular.Name = "xtraTabPageRegular";
-			this.xtraTabPageRegular.Size = new System.Drawing.Size(298, 371);
+			this.xtraTabPageRegular.Size = new System.Drawing.Size(294, 366);
 			this.xtraTabPageRegular.Text = "Tree View";
 			// 
 			// xtraTabPageSearch
@@ -543,12 +499,8 @@
 			this.xtraTabPageSearch.Controls.Add(this.treeListSearchFiles);
 			this.xtraTabPageSearch.Controls.Add(this.pnKeyWord);
 			this.xtraTabPageSearch.Name = "xtraTabPageSearch";
-			this.xtraTabPageSearch.Size = new System.Drawing.Size(298, 371);
+			this.xtraTabPageSearch.Size = new System.Drawing.Size(294, 366);
 			this.xtraTabPageSearch.Text = "Search";
-			// 
-			// defaultLookAndFeel
-			// 
-			this.defaultLookAndFeel.LookAndFeel.SkinName = "Money Twins";
 			// 
 			// pnLeft
 			// 
@@ -586,44 +538,44 @@
 			this.pnRight.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.pnRight.Location = new System.Drawing.Point(0, 0);
 			this.pnRight.Name = "pnRight";
-			this.pnRight.Size = new System.Drawing.Size(491, 500);
+			this.pnRight.Size = new System.Drawing.Size(492, 500);
 			this.pnRight.TabIndex = 8;
 			// 
 			// pnPreview
 			// 
 			this.pnPreview.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.pnPreview.Location = new System.Drawing.Point(0, 58);
+			this.pnPreview.Location = new System.Drawing.Point(0, 63);
 			this.pnPreview.Name = "pnPreview";
-			this.pnPreview.Size = new System.Drawing.Size(491, 442);
+			this.pnPreview.Size = new System.Drawing.Size(492, 437);
 			this.pnPreview.TabIndex = 4;
 			// 
 			// barDockControlLeft
 			// 
 			this.barDockControlLeft.CausesValidation = false;
 			this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
-			this.barDockControlLeft.Location = new System.Drawing.Point(0, 58);
-			this.barDockControlLeft.Size = new System.Drawing.Size(0, 442);
+			this.barDockControlLeft.Location = new System.Drawing.Point(0, 63);
+			this.barDockControlLeft.Size = new System.Drawing.Size(0, 437);
 			// 
 			// barDockControlRight
 			// 
 			this.barDockControlRight.CausesValidation = false;
 			this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-			this.barDockControlRight.Location = new System.Drawing.Point(491, 58);
-			this.barDockControlRight.Size = new System.Drawing.Size(0, 442);
+			this.barDockControlRight.Location = new System.Drawing.Point(492, 63);
+			this.barDockControlRight.Size = new System.Drawing.Size(0, 437);
 			// 
 			// barDockControlBottom
 			// 
 			this.barDockControlBottom.CausesValidation = false;
 			this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
 			this.barDockControlBottom.Location = new System.Drawing.Point(0, 500);
-			this.barDockControlBottom.Size = new System.Drawing.Size(491, 0);
+			this.barDockControlBottom.Size = new System.Drawing.Size(492, 0);
 			// 
 			// barDockControlTop
 			// 
 			this.barDockControlTop.CausesValidation = false;
 			this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
 			this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
-			this.barDockControlTop.Size = new System.Drawing.Size(491, 58);
+			this.barDockControlTop.Size = new System.Drawing.Size(492, 63);
 			// 
 			// barManager
 			// 
@@ -726,7 +678,7 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
+			this.BackColor = System.Drawing.Color.White;
 			this.Controls.Add(this.splitContainerControl);
 			this.Name = "WallBinTreeListControl";
 			this.Size = new System.Drawing.Size(797, 500);
@@ -739,14 +691,12 @@
 			((System.ComponentModel.ISupportInitialize)(this.textEditKeyWord.Properties)).EndInit();
 			this.gbDateRange.ResumeLayout(false);
 			this.gbDateRange.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.dateEditEndDate.Properties.VistaTimeProperties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.dateEditEndDate.Properties.CalendarTimeProperties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.dateEditEndDate.Properties)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.dateEditStartDate.Properties.VistaTimeProperties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.dateEditStartDate.Properties.CalendarTimeProperties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.dateEditStartDate.Properties)).EndInit();
 			this.pnTreeViewProgress.ResumeLayout(false);
-			this.panelExProgress.ResumeLayout(false);
 			this.pnRefresh.ResumeLayout(false);
-			this.panelExRefresh.ResumeLayout(false);
 			this.contextMenuStrip.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControlFiles)).EndInit();
 			this.xtraTabControlFiles.ResumeLayout(false);
@@ -764,12 +714,10 @@
         #endregion
 
         private System.Windows.Forms.Panel pnKeyWord;
-        private System.Windows.Forms.Panel pnTreeViewProgress;
-        private System.Windows.Forms.Label laTreeViewProgressLable;
+		private System.Windows.Forms.Panel pnTreeViewProgress;
         private System.Windows.Forms.Panel pnRefresh;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
-        private System.Windows.Forms.ToolStripMenuItem tmiOpen;
-        private System.Windows.Forms.Label laDoubleClick;
+		private System.Windows.Forms.ToolStripMenuItem tmiOpen;
         private System.Windows.Forms.GroupBox gbDateRange;
         private System.Windows.Forms.Label laEndDate;
         private System.Windows.Forms.Label laStartDate;
@@ -782,19 +730,14 @@
         private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn2;
         private DevExpress.XtraTab.XtraTabControl xtraTabControlFiles;
         private DevExpress.XtraTab.XtraTabPage xtraTabPageRegular;
-        private DevExpress.XtraTab.XtraTabPage xtraTabPageSearch;
-        private DevExpress.LookAndFeel.DefaultLookAndFeel defaultLookAndFeel;
-        private System.Windows.Forms.Panel pnLeft;
-        private DevComponents.DotNetBar.PanelEx panelExProgress;
-        private DevComponents.DotNetBar.Controls.CircularProgress circularProgress;
+		private DevExpress.XtraTab.XtraTabPage xtraTabPageSearch;
+		private System.Windows.Forms.Panel pnLeft;
         private DevExpress.XtraEditors.SimpleButton simpleButtonSearch;
         private DevExpress.XtraEditors.StyleController styleController;
         private DevExpress.XtraEditors.CheckEdit checkEditDateRange;
         private DevExpress.XtraEditors.TextEdit textEditKeyWord;
         private DevExpress.XtraEditors.DateEdit dateEditEndDate;
-        private DevExpress.XtraEditors.DateEdit dateEditStartDate;
-        private DevComponents.DotNetBar.PanelEx panelExRefresh;
-        private DevExpress.XtraEditors.SimpleButton simpleButtonRefresh;
+		private DevExpress.XtraEditors.DateEdit dateEditStartDate;
         private DevExpress.XtraEditors.SplitContainerControl splitContainerControl;
         private System.Windows.Forms.Panel pnRight;
         private DevExpress.XtraBars.BarDockControl barDockControlLeft;
@@ -809,5 +752,9 @@
         private DevExpress.XtraBars.BarButtonItem barButtonItemPrintLink;
         private DevExpress.Utils.ToolTipController toolTipController;
         private System.Windows.Forms.Panel pnPreview;
+		private System.Windows.Forms.Label laTreeViewProgressLable;
+		private DevComponents.DotNetBar.Controls.CircularProgress circularProgress;
+		private System.Windows.Forms.Label laDoubleClick;
+		private DevComponents.DotNetBar.ButtonX buttonXRefresh;
     }
 }

@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using Microsoft.Office.Core;
 using Microsoft.Office.Interop.PowerPoint;
 using SalesDepot.ConfigurationClasses;
+using SalesDepot.CoreObjects.InteropClasses;
 using Application = Microsoft.Office.Interop.PowerPoint.Application;
 using PrintRange = System.Drawing.Printing.PrintRange;
 using Shape = Microsoft.Office.Interop.PowerPoint.Shape;

@@ -28,12 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-			this.components = new System.ComponentModel.Container();
 			this.buttonXOpen = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXClose = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXQuickSiteAdd = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXQuickSiteEmail = new DevComponents.DotNetBar.ButtonX();
-			this.toolTipController = new DevExpress.Utils.ToolTipController(this.components);
+			this.toolTipController = new DevExpress.Utils.ToolTipController();
 			this.SuspendLayout();
 			// 
 			// buttonXOpen
@@ -46,6 +45,7 @@
 			this.buttonXOpen.Location = new System.Drawing.Point(20, 6);
 			this.buttonXOpen.Name = "buttonXOpen";
 			this.buttonXOpen.Size = new System.Drawing.Size(290, 55);
+			this.buttonXOpen.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXOpen.TabIndex = 0;
 			this.buttonXOpen.Text = "   Open this folder";
 			this.buttonXOpen.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
@@ -64,6 +64,7 @@
 			this.buttonXClose.Location = new System.Drawing.Point(20, 201);
 			this.buttonXClose.Name = "buttonXClose";
 			this.buttonXClose.Size = new System.Drawing.Size(290, 55);
+			this.buttonXClose.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXClose.TabIndex = 4;
 			this.buttonXClose.Text = "   Close this Window";
 			this.buttonXClose.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
@@ -82,6 +83,7 @@
 			this.buttonXQuickSiteAdd.Location = new System.Drawing.Point(20, 136);
 			this.buttonXQuickSiteAdd.Name = "buttonXQuickSiteAdd";
 			this.buttonXQuickSiteAdd.Size = new System.Drawing.Size(290, 55);
+			this.buttonXQuickSiteAdd.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXQuickSiteAdd.TabIndex = 8;
 			this.buttonXQuickSiteAdd.Text = "   Add to quickSITE";
 			this.buttonXQuickSiteAdd.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
@@ -100,6 +102,7 @@
 			this.buttonXQuickSiteEmail.Location = new System.Drawing.Point(20, 71);
 			this.buttonXQuickSiteEmail.Name = "buttonXQuickSiteEmail";
 			this.buttonXQuickSiteEmail.Size = new System.Drawing.Size(290, 55);
+			this.buttonXQuickSiteEmail.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXQuickSiteEmail.TabIndex = 7;
 			this.buttonXQuickSiteEmail.Text = "   Email as Web Link";
 			this.buttonXQuickSiteEmail.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
@@ -116,12 +119,13 @@
 			// FormFolderViewOptions
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
+			this.BackColor = System.Drawing.Color.White;
 			this.ClientSize = new System.Drawing.Size(331, 269);
 			this.Controls.Add(this.buttonXQuickSiteAdd);
 			this.Controls.Add(this.buttonXQuickSiteEmail);
 			this.Controls.Add(this.buttonXClose);
 			this.Controls.Add(this.buttonXOpen);
+			this.DoubleBuffered = true;
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;

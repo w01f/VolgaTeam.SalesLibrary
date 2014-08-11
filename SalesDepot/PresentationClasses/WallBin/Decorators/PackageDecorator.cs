@@ -77,15 +77,6 @@ namespace SalesDepot.PresentationClasses.WallBin.Decorators
 			}
 		}
 
-		public void BuildProgramManager()
-		{
-			foreach (var decorator in _decorators)
-			{
-				decorator.BuildProgramManager();
-				Application.DoEvents();
-			}
-		}
-
 		private void ApplyDecorator()
 		{
 			if (SelectedLibrary != null)

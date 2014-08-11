@@ -43,18 +43,21 @@
 			// rbAllSlides
 			// 
 			this.rbAllSlides.AutoSize = true;
+			this.rbAllSlides.BackColor = System.Drawing.Color.White;
 			this.rbAllSlides.Checked = true;
+			this.rbAllSlides.ForeColor = System.Drawing.Color.Black;
 			this.rbAllSlides.Location = new System.Drawing.Point(79, 22);
 			this.rbAllSlides.Name = "rbAllSlides";
 			this.rbAllSlides.Size = new System.Drawing.Size(176, 20);
 			this.rbAllSlides.TabIndex = 1;
 			this.rbAllSlides.TabStop = true;
 			this.rbAllSlides.Text = "Email All Slides in this file";
-			this.rbAllSlides.UseVisualStyleBackColor = true;
+			this.rbAllSlides.UseVisualStyleBackColor = false;
 			// 
 			// rbActiveSlide
 			// 
 			this.rbActiveSlide.AutoSize = true;
+			this.rbActiveSlide.BackColor = System.Drawing.Color.White;
 			this.rbActiveSlide.ForeColor = System.Drawing.Color.Black;
 			this.rbActiveSlide.Location = new System.Drawing.Point(79, 48);
 			this.rbActiveSlide.Name = "rbActiveSlide";
@@ -66,15 +69,19 @@
 			// ckConvertToPDF
 			// 
 			this.ckConvertToPDF.AutoSize = true;
+			this.ckConvertToPDF.BackColor = System.Drawing.Color.White;
+			this.ckConvertToPDF.ForeColor = System.Drawing.Color.Black;
 			this.ckConvertToPDF.Location = new System.Drawing.Point(79, 92);
 			this.ckConvertToPDF.Name = "ckConvertToPDF";
 			this.ckConvertToPDF.Size = new System.Drawing.Size(192, 20);
 			this.ckConvertToPDF.TabIndex = 3;
 			this.ckConvertToPDF.Text = "Convert to PDF then Email it";
-			this.ckConvertToPDF.UseVisualStyleBackColor = true;
+			this.ckConvertToPDF.UseVisualStyleBackColor = false;
 			// 
 			// pbEmail
 			// 
+			this.pbEmail.BackColor = System.Drawing.Color.White;
+			this.pbEmail.ForeColor = System.Drawing.Color.Black;
 			this.pbEmail.Image = global::SalesDepot.Properties.Resources.EmailBin;
 			this.pbEmail.Location = new System.Drawing.Point(1, 12);
 			this.pbEmail.Name = "pbEmail";
@@ -86,12 +93,14 @@
 			// ckChangeEmailName
 			// 
 			this.ckChangeEmailName.AutoSize = true;
+			this.ckChangeEmailName.BackColor = System.Drawing.Color.White;
+			this.ckChangeEmailName.ForeColor = System.Drawing.Color.Black;
 			this.ckChangeEmailName.Location = new System.Drawing.Point(79, 134);
 			this.ckChangeEmailName.Name = "ckChangeEmailName";
 			this.ckChangeEmailName.Size = new System.Drawing.Size(315, 20);
 			this.ckChangeEmailName.TabIndex = 5;
 			this.ckChangeEmailName.Text = "Re-Name this File Before Attaching it to the Email";
-			this.ckChangeEmailName.UseVisualStyleBackColor = true;
+			this.ckChangeEmailName.UseVisualStyleBackColor = false;
 			this.ckChangeEmailName.CheckedChanged += new System.EventHandler(this.ckChangeEmailName_CheckedChanged);
 			// 
 			// textEditEmailName
@@ -99,8 +108,12 @@
 			this.textEditEmailName.Enabled = false;
 			this.textEditEmailName.Location = new System.Drawing.Point(79, 160);
 			this.textEditEmailName.Name = "textEditEmailName";
+			this.textEditEmailName.Properties.Appearance.BackColor = System.Drawing.Color.White;
 			this.textEditEmailName.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.textEditEmailName.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.textEditEmailName.Properties.Appearance.Options.UseBackColor = true;
 			this.textEditEmailName.Properties.Appearance.Options.UseFont = true;
+			this.textEditEmailName.Properties.Appearance.Options.UseForeColor = true;
 			this.textEditEmailName.Properties.AppearanceDisabled.Font = new System.Drawing.Font("Arial", 9.75F);
 			this.textEditEmailName.Properties.AppearanceDisabled.Options.UseFont = true;
 			this.textEditEmailName.Properties.AppearanceFocused.Font = new System.Drawing.Font("Arial", 9.75F);
@@ -119,6 +132,7 @@
 			this.buttonXEmail.Location = new System.Drawing.Point(60, 233);
 			this.buttonXEmail.Name = "buttonXEmail";
 			this.buttonXEmail.Size = new System.Drawing.Size(149, 43);
+			this.buttonXEmail.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXEmail.TabIndex = 7;
 			this.buttonXEmail.Text = "Create Email Now";
 			this.buttonXEmail.TextColor = System.Drawing.Color.Black;
@@ -131,6 +145,7 @@
 			this.buttonXCancel.Location = new System.Drawing.Point(232, 233);
 			this.buttonXCancel.Name = "buttonXCancel";
 			this.buttonXCancel.Size = new System.Drawing.Size(149, 43);
+			this.buttonXCancel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXCancel.TabIndex = 8;
 			this.buttonXCancel.Text = "Cancel";
 			this.buttonXCancel.TextColor = System.Drawing.Color.Black;
@@ -138,7 +153,7 @@
 			// FormEmailPresentation
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
+			this.BackColor = System.Drawing.Color.White;
 			this.ClientSize = new System.Drawing.Size(441, 288);
 			this.Controls.Add(this.buttonXCancel);
 			this.Controls.Add(this.buttonXEmail);
@@ -148,6 +163,7 @@
 			this.Controls.Add(this.rbActiveSlide);
 			this.Controls.Add(this.rbAllSlides);
 			this.Controls.Add(this.pbEmail);
+			this.DoubleBuffered = true;
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.MaximizeBox = false;

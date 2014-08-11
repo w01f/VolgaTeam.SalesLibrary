@@ -120,7 +120,7 @@
 			// LibraryLinkEditor
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+			this.BackColor = System.Drawing.Color.White;
 			this.Controls.Add(this.textEditLinkValue);
 			this.Controls.Add(this.labelControlLinkTitle);
 			this.Controls.Add(this.textEditPageValue);

@@ -23,8 +23,7 @@ namespace FileManager.PresentationClasses.Cliparts
 			Dock = DockStyle.Fill;
 			if ((base.CreateGraphics()).DpiX > 96)
 			{
-				laTreeViewProgressLable.Font = new Font(laTreeViewProgressLable.Font.FontFamily, laTreeViewProgressLable.Font.Size - 3, laTreeViewProgressLable.Font.Style);
-				btRefresh.Font = new Font(btRefresh.Font.FontFamily, btRefresh.Font.Size - 2, btRefresh.Font.Style);
+				buttonXRefresh.Font = new Font(buttonXRefresh.Font.FontFamily, buttonXRefresh.Font.Size - 2, buttonXRefresh.Font.Style);
 			}
 		}
 
@@ -36,82 +35,70 @@ namespace FileManager.PresentationClasses.Cliparts
 
 		private void treeListAllFiles_MouseDoubleClick(object sender, MouseEventArgs e)
 		{
-			if (e.Clicks == 2)
+			if (e.Clicks != 2) return;
+			var treeList = sender as TreeList;
+			if (treeList == null) return;
+			var hitPoint = new Point(e.X, e.Y);
+			TreeListHitInfo hitInfo = treeListAllFiles.CalcHitInfo(hitPoint);
+			if (hitInfo.Node == null) return;
+			treeList.SuspendLayout();
+			if (hitInfo.Node.Tag != null)
 			{
-				var treeList = sender as TreeList;
-				if (treeList != null)
-				{
-					var hitPoint = new Point(e.X, e.Y);
-					TreeListHitInfo hitInfo = treeListAllFiles.CalcHitInfo(hitPoint);
-					if (hitInfo.Node != null)
-					{
-						treeList.SuspendLayout();
-						if (hitInfo.Node.Tag != null)
-						{
-							if (hitInfo.Node.Tag.GetType() == typeof(DirectoryInfo))
-								FillNode(hitInfo.Node, true);
-							else if (hitInfo.Node.Tag.GetType() == typeof(FileInfo))
-								ViewItem(hitInfo.Node.Tag as FileInfo);
-						}
-						treeList.ResumeLayout();
-					}
-				}
+				if (hitInfo.Node.Tag.GetType() == typeof(DirectoryInfo))
+					FillNode(hitInfo.Node, true);
+				else if (hitInfo.Node.Tag.GetType() == typeof(FileInfo))
+					ViewItem(hitInfo.Node.Tag as FileInfo);
 			}
+			treeList.ResumeLayout();
 		}
 
 		private void FillNode(TreeListNode node, bool showFiles)
 		{
 			TreeListNode childNode;
-			if (node.Tag != null)
+			if (node.Tag == null) return;
+			if (node.Tag.GetType() != typeof(DirectoryInfo)) return;
+			if (node.Nodes.Count != 0) return;
+			var folder = (DirectoryInfo)node.Tag;
+			try
 			{
-				if (node.Tag.GetType() == typeof(DirectoryInfo))
 				{
-					if (node.Nodes.Count == 0)
+					var folders = new List<DirectoryInfo>();
+					folders.AddRange(folder.GetDirectories());
+					folders.Sort((x, y) => WinAPIHelper.StrCmpLogicalW(x.Name, y.Name));
+					foreach (DirectoryInfo subFolder in folders)
 					{
-						var folder = (DirectoryInfo)node.Tag;
-						try
+						if (!SettingsManager.Instance.HiddenObjects.Any(x => subFolder.FullName.ToLower().Contains(x.ToLower())))
 						{
-							{
-								var folders = new List<DirectoryInfo>();
-								folders.AddRange(folder.GetDirectories());
-								folders.Sort((x, y) => WinAPIHelper.StrCmpLogicalW(x.Name, y.Name));
-								foreach (DirectoryInfo subFolder in folders)
-								{
-									if (SettingsManager.Instance.HiddenObjects.Where(x => subFolder.FullName.ToLower().Contains(x.ToLower())).Count() == 0)
-									{
-										childNode = treeListAllFiles.AppendNode(new object[] { subFolder.Name }, node, subFolder);
-										childNode.StateImageIndex = 0;
-									}
-								}
-							}
-							if (showFiles)
-							{
-								var files = new List<FileInfo>();
-								files.AddRange(folder.GetFiles());
-								files.Sort((x, y) => WinAPIHelper.StrCmpLogicalW(x.Name, y.Name));
-								foreach (FileInfo file in files)
-								{
-									switch (file.Extension.ToLower())
-									{
-										case ".png":
-										case ".jpg":
-										case ".bmp":
-										case ".gif":
-										case ".tif":
-										case ".wmf":
-											childNode = treeListAllFiles.AppendNode(new object[] { file.Name + " (" + file.LastWriteTime.ToShortDateString() + " " + file.LastWriteTime.ToShortTimeString() + ")" }, node, file);
-											childNode.StateImageIndex = 2;
-											break;
-									}
-								}
-							}
-							node.StateImageIndex = 1;
-							node.Expanded = true;
+							childNode = treeListAllFiles.AppendNode(new object[] { subFolder.Name }, node, subFolder);
+							childNode.StateImageIndex = 0;
 						}
-						catch { }
 					}
 				}
+				if (showFiles)
+				{
+					var files = new List<FileInfo>();
+					files.AddRange(folder.GetFiles());
+					files.Sort((x, y) => WinAPIHelper.StrCmpLogicalW(x.Name, y.Name));
+					foreach (FileInfo file in files)
+					{
+						switch (file.Extension.ToLower())
+						{
+							case ".png":
+							case ".jpg":
+							case ".bmp":
+							case ".gif":
+							case ".tif":
+							case ".wmf":
+								childNode = treeListAllFiles.AppendNode(new object[] { file.Name + " (" + file.LastWriteTime.ToShortDateString() + " " + file.LastWriteTime.ToShortTimeString() + ")" }, node, file);
+								childNode.StateImageIndex = 2;
+								break;
+						}
+					}
+				}
+				node.StateImageIndex = 1;
+				node.Expanded = true;
 			}
+			catch { }
 		}
 
 		private void treeList_MouseDown(object sender, MouseEventArgs e)
@@ -126,31 +113,29 @@ namespace FileManager.PresentationClasses.Cliparts
 		private void treeList_MouseMove(object sender, MouseEventArgs e)
 		{
 			var treeList = sender as TreeList;
-			if (treeList != null)
+			if (treeList == null) return;
+			if (e.Button == MouseButtons.Left && dragStartHitInfo != null && dragStartHitInfo.Node != null)
 			{
-				if (e.Button == MouseButtons.Left && dragStartHitInfo != null && dragStartHitInfo.Node != null)
+				Size dragSize = SystemInformation.DragSize;
+				var dragRect = new Rectangle(new Point(dragStartHitInfo.MousePoint.X - dragSize.Width / 2,
+					dragStartHitInfo.MousePoint.Y - dragSize.Height / 2), dragSize);
+				if (!dragRect.Contains(e.Location))
 				{
-					Size dragSize = SystemInformation.DragSize;
-					var dragRect = new Rectangle(new Point(dragStartHitInfo.MousePoint.X - dragSize.Width / 2,
-														   dragStartHitInfo.MousePoint.Y - dragSize.Height / 2), dragSize);
-					if (!dragRect.Contains(e.Location))
-					{
-						var dragData = new List<object>();
-						foreach (TreeListNode node in treeList.Selection)
-							if (node.Tag.GetType() == typeof(FileInfo))
-								dragData.Add(node.Tag);
-						if (dragData.Count > 0)
-							treeList.DoDragDrop(new DataObject(DataFormats.Serializable, dragData.ToArray()), DragDropEffects.Copy);
-						return;
-					}
+					var dragData = new List<object>();
+					foreach (TreeListNode node in treeList.Selection)
+						if (node.Tag.GetType() == typeof(FileInfo))
+							dragData.Add(node.Tag);
+					if (dragData.Count > 0)
+						treeList.DoDragDrop(new DataObject(DataFormats.Serializable, dragData.ToArray()), DragDropEffects.Copy);
+					return;
 				}
-				var hitPoint = new Point(e.X, e.Y);
-				TreeListHitInfo hitInfo = treeListAllFiles.CalcHitInfo(hitPoint);
-				if (hitInfo.Node != null)
-					treeList.Cursor = Cursors.Hand;
-				else
-					treeList.Cursor = Cursors.Default;
 			}
+			var hitPoint = new Point(e.X, e.Y);
+			TreeListHitInfo hitInfo = treeListAllFiles.CalcHitInfo(hitPoint);
+			if (hitInfo.Node != null)
+				treeList.Cursor = Cursors.Hand;
+			else
+				treeList.Cursor = Cursors.Default;
 		}
 		#endregion
 
@@ -159,7 +144,6 @@ namespace FileManager.PresentationClasses.Cliparts
 		{
 			treeListAllFiles.SuspendLayout();
 			treeListAllFiles.Nodes.Clear();
-			laTreeViewProgressLable.Text = "Loading Tree View...";
 			pnTreeViewProgress.Visible = true;
 			var thread = new Thread(delegate()
 										{

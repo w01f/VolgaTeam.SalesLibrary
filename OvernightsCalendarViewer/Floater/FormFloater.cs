@@ -2,19 +2,19 @@
 using System.Drawing;
 using System.Windows.Forms;
 using OvernightsCalendarViewer.ConfigurationClasses;
+using SalesDepot.CoreObjects.InteropClasses;
 
 namespace OvernightsCalendarViewer.Floater
 {
 	public partial class FormFloater : Form
 	{
-		public FormFloater(int x, int y, Image defaultImage, string defaultText)
+		public FormFloater(int x, int y, Image defaultImage)
 		{
 			InitializeComponent();
 			Top = y;
 			Left = x - Width;
-			Text = "Overnights";
-			buttonItemBack.Image = defaultImage;
-			ribbonBarBack.Text = defaultText;
+			labelCaption.Text = string.Format("{0} - User: {1}", "Overnights", Environment.UserName);
+			buttonXBack.Image = defaultImage;
 			if ((CreateGraphics()).DpiX > 96)
 				Font = new Font(Font.FontFamily, Font.Size - 1, Font.Style);
 		}
@@ -27,6 +27,13 @@ namespace OvernightsCalendarViewer.Floater
 		private void buttonItemHide_Click(object sender, EventArgs e)
 		{
 			DialogResult = DialogResult.No;
+		}
+		
+		private void labelCaption_MouseDown(object sender, MouseEventArgs e)
+		{
+			if (e.Button != MouseButtons.Left) return;
+			WinAPIHelper.ReleaseCapture();
+			WinAPIHelper.SendMessage(Handle, WinAPIHelper.WM_NCLBUTTONDOWN, WinAPIHelper.HTCAPTION, IntPtr.Zero);
 		}
 	}
 }

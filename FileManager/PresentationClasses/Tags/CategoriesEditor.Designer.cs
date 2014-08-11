@@ -84,9 +84,9 @@
 			this.gridViewTags.OptionsSelection.EnableAppearanceHideSelection = false;
 			this.gridViewTags.OptionsView.ShowColumnHeaders = false;
 			this.gridViewTags.OptionsView.ShowGroupPanel = false;
-			this.gridViewTags.OptionsView.ShowHorzLines = false;
+			this.gridViewTags.OptionsView.ShowHorizontalLines = DevExpress.Utils.DefaultBoolean.False;
 			this.gridViewTags.OptionsView.ShowIndicator = false;
-			this.gridViewTags.OptionsView.ShowVertLines = false;
+			this.gridViewTags.OptionsView.ShowVerticalLines = DevExpress.Utils.DefaultBoolean.False;
 			this.gridViewTags.RowHeight = 35;
 			// 
 			// gridColumnPageSelected
@@ -103,6 +103,7 @@
 			// repositoryItemCheckEditLibrary
 			// 
 			this.repositoryItemCheckEditLibrary.AutoHeight = false;
+			this.repositoryItemCheckEditLibrary.Caption = "Check";
 			this.repositoryItemCheckEditLibrary.Name = "repositoryItemCheckEditLibrary";
 			this.repositoryItemCheckEditLibrary.CheckedChanged += new System.EventHandler(this.RepositoryItemCheckEditCheckedChanged);
 			this.repositoryItemCheckEditLibrary.EditValueChanging += new DevExpress.XtraEditors.Controls.ChangingEventHandler(this.repositoryItemCheckEditLibrary_EditValueChanging);
@@ -119,6 +120,7 @@
 			// 
 			// gridControl
 			// 
+			this.gridControl.Cursor = System.Windows.Forms.Cursors.Default;
 			this.gridControl.Dock = System.Windows.Forms.DockStyle.Fill;
 			gridLevelNode1.LevelTemplate = this.gridViewTags;
 			gridLevelNode1.RelationName = "Tags";
@@ -129,7 +131,7 @@
 			this.gridControl.Name = "gridControl";
 			this.gridControl.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemCheckEditLibrary});
-			this.gridControl.Size = new System.Drawing.Size(346, 541);
+			this.gridControl.Size = new System.Drawing.Size(350, 545);
 			this.gridControl.TabIndex = 1;
 			this.gridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewGroups,
@@ -185,7 +187,6 @@
 			// 
 			// laHeader
 			// 
-			this.laHeader.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
 			this.laHeader.Dock = System.Windows.Forms.DockStyle.Top;
 			this.laHeader.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.laHeader.Location = new System.Drawing.Point(0, 0);
@@ -197,7 +198,6 @@
 			// 
 			// pnMain
 			// 
-			this.pnMain.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
 			this.pnMain.Controls.Add(this.pnData);
 			this.pnMain.Controls.Add(this.pnButtons);
 			this.pnMain.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -212,7 +212,7 @@
 			this.pnData.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.pnData.Location = new System.Drawing.Point(0, 87);
 			this.pnData.Name = "pnData";
-			this.pnData.Size = new System.Drawing.Size(346, 541);
+			this.pnData.Size = new System.Drawing.Size(350, 545);
 			this.pnData.TabIndex = 1;
 			// 
 			// pnButtons
@@ -222,7 +222,7 @@
 			this.pnButtons.Dock = System.Windows.Forms.DockStyle.Top;
 			this.pnButtons.Location = new System.Drawing.Point(0, 0);
 			this.pnButtons.Name = "pnButtons";
-			this.pnButtons.Size = new System.Drawing.Size(346, 87);
+			this.pnButtons.Size = new System.Drawing.Size(350, 87);
 			this.pnButtons.TabIndex = 0;
 			// 
 			// labelControlCategoryInfo
@@ -234,7 +234,7 @@
 			this.labelControlCategoryInfo.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
 			this.labelControlCategoryInfo.Location = new System.Drawing.Point(5, 44);
 			this.labelControlCategoryInfo.Name = "labelControlCategoryInfo";
-			this.labelControlCategoryInfo.Size = new System.Drawing.Size(336, 35);
+			this.labelControlCategoryInfo.Size = new System.Drawing.Size(340, 35);
 			this.labelControlCategoryInfo.TabIndex = 1;
 			this.labelControlCategoryInfo.Text = "labelControl1";
 			// 
@@ -246,7 +246,7 @@
 			this.buttonXReset.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXReset.Location = new System.Drawing.Point(5, 8);
 			this.buttonXReset.Name = "buttonXReset";
-			this.buttonXReset.Size = new System.Drawing.Size(336, 30);
+			this.buttonXReset.Size = new System.Drawing.Size(340, 30);
 			this.buttonXReset.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXReset.TabIndex = 0;
 			this.buttonXReset.Text = "RESET ALL TAGS for the Selected Links";
@@ -256,7 +256,7 @@
 			// CategoriesEditor
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
+			this.BackColor = System.Drawing.Color.White;
 			this.Controls.Add(this.pnMain);
 			this.Controls.Add(this.laHeader);
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));

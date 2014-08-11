@@ -5,6 +5,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using DevComponents.DotNetBar.Metro;
 using DevExpress.Utils;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
@@ -16,7 +17,7 @@ using SalesDepot.CoreObjects.BusinessClasses;
 
 namespace FileManager.ToolForms.Settings
 {
-	public partial class FormColumns : Form
+	public partial class FormColumns : MetroForm
 	{
 		private bool _allowToSave;
 		private bool _changesDone;
@@ -705,12 +706,32 @@ namespace FileManager.ToolForms.Settings
 
 		private void SaveColumnTitles()
 		{
-			if (_currentPage != null)
-			{
-				_currentPage.ColumnTitles.Clear();
+			if (_currentPage == null) return;
+			_currentPage.ColumnTitles.Clear();
 
-				var column = new ColumnTitle(_currentPage);
-				column.ColumnOrder = 0;
+			var column = new ColumnTitle(_currentPage);
+			column.ColumnOrder = 0;
+			column.BackgroundColor = colorEditColumn1BackColor.Color;
+			if (rbColumn1AlignmentLeft.Checked)
+				column.HeaderAlignment = Alignment.Left;
+			else if (rbColumn1AlignmentCenter.Checked)
+				column.HeaderAlignment = Alignment.Center;
+			else if (rbColumn1AlignmentRight.Checked)
+				column.HeaderAlignment = Alignment.Right;
+			column.Name = ckColumn1EnableText.Checked & memoEditColumn1Title.EditValue != null ? memoEditColumn1Title.EditValue.ToString() : string.Empty;
+			column.EnableText = ckColumn1EnableText.Checked & !string.IsNullOrEmpty(column.Name);
+			column.ForeColor = colorEditColumn1ForeColor.Color;
+			column.HeaderFont = buttonEditColumn1Font.Tag as Font;
+			column.BannerProperties.Enable = ckColumn1EnableBanner.Checked & pbColumn1SelectedBanner.Image != null;
+			column.BannerProperties.Image = ckColumn1EnableBanner.Checked ? pbColumn1SelectedBanner.Image : null;
+			column.EnableWidget = ckColumn1EnableWidget.Checked & pbColumn1SelectedWidget.Image != null;
+			column.Widget = ckColumn1EnableWidget.Checked ? pbColumn1SelectedWidget.Image : null;
+			_currentPage.ColumnTitles.Add(column);
+
+			if (ckApplyForAllColumnTitles.Checked)
+			{
+				column = new ColumnTitle(_currentPage);
+				column.ColumnOrder = 1;
 				column.BackgroundColor = colorEditColumn1BackColor.Color;
 				if (rbColumn1AlignmentLeft.Checked)
 					column.HeaderAlignment = Alignment.Left;
@@ -728,91 +749,69 @@ namespace FileManager.ToolForms.Settings
 				column.Widget = ckColumn1EnableWidget.Checked ? pbColumn1SelectedWidget.Image : null;
 				_currentPage.ColumnTitles.Add(column);
 
-				if (ckApplyForAllColumnTitles.Checked)
-				{
-					column = new ColumnTitle(_currentPage);
-					column.ColumnOrder = 1;
-					column.BackgroundColor = colorEditColumn1BackColor.Color;
-					if (rbColumn1AlignmentLeft.Checked)
-						column.HeaderAlignment = Alignment.Left;
-					else if (rbColumn1AlignmentCenter.Checked)
-						column.HeaderAlignment = Alignment.Center;
-					else if (rbColumn1AlignmentRight.Checked)
-						column.HeaderAlignment = Alignment.Right;
-					column.Name = ckColumn1EnableText.Checked & memoEditColumn1Title.EditValue != null ? memoEditColumn1Title.EditValue.ToString() : string.Empty;
-					column.EnableText = ckColumn1EnableText.Checked & !string.IsNullOrEmpty(column.Name);
-					column.ForeColor = colorEditColumn1ForeColor.Color;
-					column.HeaderFont = buttonEditColumn1Font.Tag as Font;
-					column.BannerProperties.Enable = ckColumn1EnableBanner.Checked & pbColumn1SelectedBanner.Image != null;
-					column.BannerProperties.Image = ckColumn1EnableBanner.Checked ? pbColumn1SelectedBanner.Image : null;
-					column.EnableWidget = ckColumn1EnableWidget.Checked & pbColumn1SelectedWidget.Image != null;
-					column.Widget = ckColumn1EnableWidget.Checked ? pbColumn1SelectedWidget.Image : null;
-					_currentPage.ColumnTitles.Add(column);
 
-
-					column = new ColumnTitle(_currentPage);
-					column.ColumnOrder = 2;
-					column.BackgroundColor = colorEditColumn1BackColor.Color;
-					if (rbColumn1AlignmentLeft.Checked)
-						column.HeaderAlignment = Alignment.Left;
-					else if (rbColumn1AlignmentCenter.Checked)
-						column.HeaderAlignment = Alignment.Center;
-					else if (rbColumn1AlignmentRight.Checked)
-						column.HeaderAlignment = Alignment.Right;
-					column.Name = ckColumn1EnableText.Checked & memoEditColumn1Title.EditValue != null ? memoEditColumn1Title.EditValue.ToString() : string.Empty;
-					column.EnableText = ckColumn1EnableText.Checked & !string.IsNullOrEmpty(column.Name);
-					column.ForeColor = colorEditColumn1ForeColor.Color;
-					column.HeaderFont = buttonEditColumn1Font.Tag as Font;
-					column.BannerProperties.Enable = ckColumn1EnableBanner.Checked & pbColumn1SelectedBanner.Image != null;
-					column.BannerProperties.Image = ckColumn1EnableBanner.Checked ? pbColumn1SelectedBanner.Image : null;
-					column.EnableWidget = ckColumn1EnableWidget.Checked & pbColumn1SelectedWidget.Image != null;
-					column.Widget = ckColumn1EnableWidget.Checked ? pbColumn1SelectedWidget.Image : null;
-					_currentPage.ColumnTitles.Add(column);
-				}
-				else
-				{
-					column = new ColumnTitle(_currentPage);
-					column.ColumnOrder = 1;
-					column.BackgroundColor = colorEditColumn2BackColor.Color;
-					if (rbColumn2AlignmentLeft.Checked)
-						column.HeaderAlignment = Alignment.Left;
-					else if (rbColumn2AlignmentCenter.Checked)
-						column.HeaderAlignment = Alignment.Center;
-					else if (rbColumn2AlignmentRight.Checked)
-						column.HeaderAlignment = Alignment.Right;
-					column.Name = ckColumn2EnableText.Checked & memoEditColumn2Title.EditValue != null ? memoEditColumn2Title.EditValue.ToString() : string.Empty;
-					column.EnableText = ckColumn2EnableText.Checked & !string.IsNullOrEmpty(column.Name);
-					column.ForeColor = colorEditColumn2ForeColor.Color;
-					column.HeaderFont = buttonEditColumn2Font.Tag as Font;
-					column.BannerProperties.Enable = ckColumn2EnableBanner.Checked & pbColumn2SelectedBanner.Image != null;
-					column.BannerProperties.Image = ckColumn2EnableBanner.Checked ? pbColumn2SelectedBanner.Image : null;
-					column.EnableWidget = ckColumn2EnableWidget.Checked & pbColumn2SelectedWidget.Image != null;
-					column.Widget = ckColumn2EnableWidget.Checked ? pbColumn2SelectedWidget.Image : null;
-					_currentPage.ColumnTitles.Add(column);
-
-					column = new ColumnTitle(_currentPage);
-					column.ColumnOrder = 2;
-					column.BackgroundColor = colorEditColumn3BackColor.Color;
-					if (rbColumn3AlignmentLeft.Checked)
-						column.HeaderAlignment = Alignment.Left;
-					else if (rbColumn3AlignmentCenter.Checked)
-						column.HeaderAlignment = Alignment.Center;
-					else if (rbColumn3AlignmentRight.Checked)
-						column.HeaderAlignment = Alignment.Right;
-					column.Name = ckColumn3EnableText.Checked & memoEditColumn3Title.EditValue != null ? memoEditColumn3Title.EditValue.ToString() : string.Empty;
-					column.EnableText = ckColumn3EnableText.Checked & !string.IsNullOrEmpty(column.Name);
-					column.ForeColor = colorEditColumn3ForeColor.Color;
-					column.HeaderFont = buttonEditColumn3Font.Tag as Font;
-					column.BannerProperties.Enable = ckColumn3EnableBanner.Checked & pbColumn3SelectedBanner.Image != null;
-					column.BannerProperties.Image = ckColumn3EnableBanner.Checked ? pbColumn3SelectedBanner.Image : null;
-					column.EnableWidget = ckColumn3EnableWidget.Checked & pbColumn3SelectedWidget.Image != null;
-					column.Widget = ckColumn3EnableWidget.Checked ? pbColumn3SelectedWidget.Image : null;
-					_currentPage.ColumnTitles.Add(column);
-				}
-
-				_currentPage.EnableColumnTitles = ckEnableColumnTitles.Checked;
-				_currentPage.ApplyForAllColumnTitles = ckApplyForAllColumnTitles.Checked;
+				column = new ColumnTitle(_currentPage);
+				column.ColumnOrder = 2;
+				column.BackgroundColor = colorEditColumn1BackColor.Color;
+				if (rbColumn1AlignmentLeft.Checked)
+					column.HeaderAlignment = Alignment.Left;
+				else if (rbColumn1AlignmentCenter.Checked)
+					column.HeaderAlignment = Alignment.Center;
+				else if (rbColumn1AlignmentRight.Checked)
+					column.HeaderAlignment = Alignment.Right;
+				column.Name = ckColumn1EnableText.Checked & memoEditColumn1Title.EditValue != null ? memoEditColumn1Title.EditValue.ToString() : string.Empty;
+				column.EnableText = ckColumn1EnableText.Checked & !string.IsNullOrEmpty(column.Name);
+				column.ForeColor = colorEditColumn1ForeColor.Color;
+				column.HeaderFont = buttonEditColumn1Font.Tag as Font;
+				column.BannerProperties.Enable = ckColumn1EnableBanner.Checked & pbColumn1SelectedBanner.Image != null;
+				column.BannerProperties.Image = ckColumn1EnableBanner.Checked ? pbColumn1SelectedBanner.Image : null;
+				column.EnableWidget = ckColumn1EnableWidget.Checked & pbColumn1SelectedWidget.Image != null;
+				column.Widget = ckColumn1EnableWidget.Checked ? pbColumn1SelectedWidget.Image : null;
+				_currentPage.ColumnTitles.Add(column);
 			}
+			else
+			{
+				column = new ColumnTitle(_currentPage);
+				column.ColumnOrder = 1;
+				column.BackgroundColor = colorEditColumn2BackColor.Color;
+				if (rbColumn2AlignmentLeft.Checked)
+					column.HeaderAlignment = Alignment.Left;
+				else if (rbColumn2AlignmentCenter.Checked)
+					column.HeaderAlignment = Alignment.Center;
+				else if (rbColumn2AlignmentRight.Checked)
+					column.HeaderAlignment = Alignment.Right;
+				column.Name = ckColumn2EnableText.Checked & memoEditColumn2Title.EditValue != null ? memoEditColumn2Title.EditValue.ToString() : string.Empty;
+				column.EnableText = ckColumn2EnableText.Checked & !string.IsNullOrEmpty(column.Name);
+				column.ForeColor = colorEditColumn2ForeColor.Color;
+				column.HeaderFont = buttonEditColumn2Font.Tag as Font;
+				column.BannerProperties.Enable = ckColumn2EnableBanner.Checked & pbColumn2SelectedBanner.Image != null;
+				column.BannerProperties.Image = ckColumn2EnableBanner.Checked ? pbColumn2SelectedBanner.Image : null;
+				column.EnableWidget = ckColumn2EnableWidget.Checked & pbColumn2SelectedWidget.Image != null;
+				column.Widget = ckColumn2EnableWidget.Checked ? pbColumn2SelectedWidget.Image : null;
+				_currentPage.ColumnTitles.Add(column);
+
+				column = new ColumnTitle(_currentPage);
+				column.ColumnOrder = 2;
+				column.BackgroundColor = colorEditColumn3BackColor.Color;
+				if (rbColumn3AlignmentLeft.Checked)
+					column.HeaderAlignment = Alignment.Left;
+				else if (rbColumn3AlignmentCenter.Checked)
+					column.HeaderAlignment = Alignment.Center;
+				else if (rbColumn3AlignmentRight.Checked)
+					column.HeaderAlignment = Alignment.Right;
+				column.Name = ckColumn3EnableText.Checked & memoEditColumn3Title.EditValue != null ? memoEditColumn3Title.EditValue.ToString() : string.Empty;
+				column.EnableText = ckColumn3EnableText.Checked & !string.IsNullOrEmpty(column.Name);
+				column.ForeColor = colorEditColumn3ForeColor.Color;
+				column.HeaderFont = buttonEditColumn3Font.Tag as Font;
+				column.BannerProperties.Enable = ckColumn3EnableBanner.Checked & pbColumn3SelectedBanner.Image != null;
+				column.BannerProperties.Image = ckColumn3EnableBanner.Checked ? pbColumn3SelectedBanner.Image : null;
+				column.EnableWidget = ckColumn3EnableWidget.Checked & pbColumn3SelectedWidget.Image != null;
+				column.Widget = ckColumn3EnableWidget.Checked ? pbColumn3SelectedWidget.Image : null;
+				_currentPage.ColumnTitles.Add(column);
+			}
+
+			_currentPage.EnableColumnTitles = ckEnableColumnTitles.Checked;
+			_currentPage.ApplyForAllColumnTitles = ckApplyForAllColumnTitles.Checked;
 		}
 
 		private void PopulatePagesList()
@@ -834,13 +833,11 @@ namespace FileManager.ToolForms.Settings
 		{
 			comboBoxEditWindows.Properties.Items.Clear();
 			ClearWindowSettings();
-			if (_currentPage != null)
-			{
-				comboBoxEditWindows.Properties.Items.AddRange(_currentPage.Folders.Select(x => x.Name).ToArray());
-				comboBoxEditWindows.SelectedIndex = -1;
-				if (comboBoxEditWindows.Properties.Items.Count > 0)
-					comboBoxEditWindows.SelectedIndex = 0;
-			}
+			if (_currentPage == null) return;
+			comboBoxEditWindows.Properties.Items.AddRange(_currentPage.Folders.Select(x => x.Name).ToArray());
+			comboBoxEditWindows.SelectedIndex = -1;
+			if (comboBoxEditWindows.Properties.Items.Count > 0)
+				comboBoxEditWindows.SelectedIndex = 0;
 		}
 		#endregion
 
@@ -953,7 +950,7 @@ namespace FileManager.ToolForms.Settings
 				_currentFolder = null;
 				if (comboBoxEditPages.EditValue != null)
 				{
-					_currentPage = Library.Pages.Where(x => x.Name.Equals(comboBoxEditPages.EditValue.ToString())).FirstOrDefault();
+					_currentPage = Library.Pages.FirstOrDefault(x => x.Name.Equals(comboBoxEditPages.EditValue.ToString()));
 					GetColumnSettings();
 					GetColumnTitles();
 					PopulateWindowsList();
@@ -1050,7 +1047,7 @@ namespace FileManager.ToolForms.Settings
 					break;
 			}
 
-			LibraryFolder selectedFolder = _currentPage.Folders.Where(x => x.Identifier.Equals(workingGrid.SelectedRows[0].Cells[1].Value)).FirstOrDefault();
+			LibraryFolder selectedFolder = _currentPage.Folders.FirstOrDefault(x => x.Identifier.Equals(workingGrid.SelectedRows[0].Cells[1].Value));
 			if (selectedFolder != null)
 			{
 				FolderCopier.CopiedFolder = selectedFolder;
@@ -1225,7 +1222,7 @@ namespace FileManager.ToolForms.Settings
 			}
 			if (sourceGrid.SelectedRows.Count > 0)
 			{
-				LibraryFolder selectedFolder = _currentPage.Folders.Where(x => x.Identifier.Equals(sourceGrid.SelectedRows[0].Cells[1].Value)).FirstOrDefault();
+				LibraryFolder selectedFolder = _currentPage.Folders.FirstOrDefault(x => x.Identifier.Equals(sourceGrid.SelectedRows[0].Cells[1].Value));
 				if (selectedFolder != null)
 				{
 					FolderCopier.CopiedFolder = selectedFolder;

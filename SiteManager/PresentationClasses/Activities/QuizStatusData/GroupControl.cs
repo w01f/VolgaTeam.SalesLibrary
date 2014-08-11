@@ -17,7 +17,6 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.QuizStatusData
 		private readonly DateTime _startDate;
 		private readonly DateTime _endDate;
 		public List<QuizPassUserReportModel> Records { get; private set; }
-		public PrintableComponentLink PrintLink { get; private set; }
 
 		private string _groupName;
 		public string GroupName
@@ -25,8 +24,8 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.QuizStatusData
 			get { return _groupName; }
 			set
 			{
-				_groupName = value;
-				Text = String.IsNullOrEmpty(_groupName) ? "No Group" : value;
+				_groupName = String.IsNullOrEmpty(value) ? "No Group" : value;
+				Text = _groupName;
 			}
 		}
 
@@ -42,14 +41,19 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.QuizStatusData
 			_endDate = endDate;
 
 			gridControlData.DataSource = Records;
+		}
 
-			PrintLink = new PrintableComponentLink()
+		public PrintableComponentLink GetPrintLink()
+		{
+			advBandedGridViewData.CheckLoaded();
+			var printLink = new PrintableComponentLink()
 			{
 				Landscape = true,
 				PaperKind = PaperKind.A4,
 				Component = gridControlData
 			};
-			PrintLink.CreateReportHeaderArea += OnCreateReportHeaderArea;
+			printLink.CreateReportHeaderArea += OnCreateReportHeaderArea;
+			return printLink;
 		}
 
 		private void OnCreateReportHeaderArea(object sender, CreateAreaEventArgs e)

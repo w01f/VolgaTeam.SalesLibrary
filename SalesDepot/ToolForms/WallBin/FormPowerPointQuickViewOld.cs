@@ -4,18 +4,20 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
+using DevComponents.DotNetBar.Metro;
 using DevExpress.XtraBars;
 using DevExpress.XtraEditors.Controls;
 using Microsoft.Office.Core;
 using SalesDepot.BusinessClasses;
 using SalesDepot.ConfigurationClasses;
 using SalesDepot.CoreObjects.BusinessClasses;
+using SalesDepot.CoreObjects.InteropClasses;
 using SalesDepot.Floater;
-using SalesDepot.InteropClasses;
+using PowerPointHelper = SalesDepot.InteropClasses.PowerPointHelper;
 
 namespace SalesDepot.ToolForms.WallBin
 {
-	public partial class FormPowerPointQuickViewOld : Form
+	public partial class FormPowerPointQuickViewOld : MetroForm
 	{
 		private FileInfo _originalFile;
 		private double _scaleK;
@@ -32,12 +34,14 @@ namespace SalesDepot.ToolForms.WallBin
 			}
 		}
 
+		public LibraryLink SelectedFile { get; set; }
+
 		protected override void OnHandleCreated(EventArgs e)
 		{
 			base.OnHandleCreated(e);
 			if (Environment.OSVersion.Version.Major < 6) return;
 			int attrValue = 1;
-			var res = WinAPIHelper.DwmSetWindowAttribute(Handle, WinAPIHelper.DWMWA_TRANSITIONS_FORCEDISABLED, ref attrValue, sizeof(int));
+			int res = WinAPIHelper.DwmSetWindowAttribute(Handle, WinAPIHelper.DWMWA_TRANSITIONS_FORCEDISABLED, ref attrValue, sizeof(int));
 			if (res < 0)
 				throw new Exception("Can't disable aero animation");
 		}
@@ -61,9 +65,9 @@ namespace SalesDepot.ToolForms.WallBin
 				{
 					form.laProgress.Text = "Loading the presentation...";
 
-					var containerHandle = pnPreview.Handle;
-					var containerHeight = pnPreview.Height;
-					var containerWidth = pnPreview.Width;
+					IntPtr containerHandle = pnPreview.Handle;
+					int containerHeight = pnPreview.Height;
+					int containerWidth = pnPreview.Width;
 
 					var thread = new Thread(delegate()
 					{
@@ -157,7 +161,7 @@ namespace SalesDepot.ToolForms.WallBin
 			{
 				form.laProgress.Text = "Resizing the presentation...";
 				form.TopMost = true;
-				var containerHandle = pnPreview.Handle;
+				IntPtr containerHandle = pnPreview.Handle;
 				int containerHeight = pnPreview.Height;
 				int containerWidth = pnPreview.Width;
 				var thread = new Thread(delegate() { PowerPointHelper.Instance.ResizeSlideShow(containerHandle, (int)(containerHeight / _scaleK), (int)(containerWidth / _scaleK)); });
@@ -188,12 +192,12 @@ namespace SalesDepot.ToolForms.WallBin
 		{
 			using (var form = new FormSaveAsPDF())
 			{
-				var result = form.ShowDialog();
-				var wholeFile = form.WholeFile;
+				DialogResult result = form.ShowDialog();
+				bool wholeFile = form.WholeFile;
 
 				if (result == DialogResult.Cancel) return;
-				var destinationFileName = Path.Combine(Path.GetTempPath(), Path.GetFileNameWithoutExtension(_originalFile.FullName) + ".pdf");
-				var selectedIndex = comboBoxEditSlides.SelectedIndex + 1;
+				string destinationFileName = Path.Combine(Path.GetTempPath(), Path.GetFileNameWithoutExtension(_originalFile.FullName) + ".pdf");
+				int selectedIndex = comboBoxEditSlides.SelectedIndex + 1;
 				using (var progressForm = new FormProgress())
 				{
 					progressForm.laProgress.Text = "Saving as PDF...";
@@ -312,11 +316,11 @@ namespace SalesDepot.ToolForms.WallBin
 				if (SelectedFile.PresentationProperties != null)
 				{
 					if ((PowerPointHelper.Instance.ActivePresentation.PageSetup.SlideOrientation == MsoOrientation.msoOrientationHorizontal && SelectedFile.PresentationProperties.Orientation.Equals("Portrait")) ||
-					    (PowerPointHelper.Instance.ActivePresentation.PageSetup.SlideOrientation == MsoOrientation.msoOrientationVertical && SelectedFile.PresentationProperties.Orientation.Equals("Landscape")))
+						(PowerPointHelper.Instance.ActivePresentation.PageSetup.SlideOrientation == MsoOrientation.msoOrientationVertical && SelectedFile.PresentationProperties.Orientation.Equals("Landscape")))
 						if (AppManager.Instance.ShowWarningQuestion("This slide is not the same size as your presentation.\nDo you still want to add it?") != DialogResult.Yes)
 							return;
 				}
-				var selectedIndex = comboBoxEditSlides.SelectedIndex + 1;
+				int selectedIndex = comboBoxEditSlides.SelectedIndex + 1;
 				using (var form = new FormProgress())
 				{
 					form.laProgress.Text = "Inserting slides...";
@@ -346,11 +350,9 @@ namespace SalesDepot.ToolForms.WallBin
 
 		private bool IsLargeFont()
 		{
-			var g = base.CreateGraphics();
+			Graphics g = base.CreateGraphics();
 			return g.DpiX > 96;
 		}
 		#endregion
-
-		public LibraryLink SelectedFile { get; set; }
 	}
 }

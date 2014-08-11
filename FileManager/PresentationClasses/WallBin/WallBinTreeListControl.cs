@@ -34,10 +34,10 @@ namespace FileManager.PresentationClasses.WallBin
 				laDoubleClick.Font = new Font(laDoubleClick.Font.FontFamily, laDoubleClick.Font.Size - 3, laDoubleClick.Font.Style);
 				laEndDate.Font = new Font(laEndDate.Font.FontFamily, laEndDate.Font.Size - 2, laEndDate.Font.Style);
 				laStartDate.Font = new Font(laStartDate.Font.FontFamily, laStartDate.Font.Size - 2, laStartDate.Font.Style);
-				laTreeViewTreeViewProgressLable.Font = new Font(laTreeViewTreeViewProgressLable.Font.FontFamily, laTreeViewTreeViewProgressLable.Font.Size - 3, laTreeViewTreeViewProgressLable.Font.Style);
+				laTreeViewProgressLabel.Font = new Font(laTreeViewProgressLabel.Font.FontFamily, laTreeViewProgressLabel.Font.Size - 3, laTreeViewProgressLabel.Font.Style);
 				checkEditDateRange.Font = new Font(checkEditDateRange.Font.FontFamily, checkEditDateRange.Font.Size - 2, checkEditDateRange.Font.Style);
-				simpleButtonRefresh.Font = new Font(simpleButtonRefresh.Font.FontFamily, simpleButtonRefresh.Font.Size - 2, simpleButtonRefresh.Font.Style);
-				simpleButtonSearch.Font = new Font(simpleButtonSearch.Font.FontFamily, simpleButtonSearch.Font.Size - 2, simpleButtonSearch.Font.Style);
+				buttonXRefresh.Font = new Font(buttonXRefresh.Font.FontFamily, buttonXRefresh.Font.Size - 2, buttonXRefresh.Font.Style);
+				buttonXSearch.Font = new Font(buttonXSearch.Font.FontFamily, buttonXSearch.Font.Size - 2, buttonXSearch.Font.Style);
 			}
 		}
 
@@ -45,7 +45,7 @@ namespace FileManager.PresentationClasses.WallBin
 		private void Refresh_Click(object sender, EventArgs e)
 		{
 			treeListAllFiles.SuspendLayout();
-			laTreeViewTreeViewProgressLable.Text = "Loading Tree View...";
+			laTreeViewProgressLabel.Text = "Loading Tree View...";
 			pnTreeViewProgress.Visible = true;
 			circularProgressTreeView.IsRunning = true;
 			xtraTabControlFiles.Enabled = false;
@@ -120,7 +120,7 @@ namespace FileManager.PresentationClasses.WallBin
 							foreach (TreeListNode node in nodesToDelete)
 								treeList.Nodes.Remove(node);
 
-							laTreeViewTreeViewProgressLable.Text = "Loading Tree View...";
+							laTreeViewProgressLabel.Text = "Loading Tree View...";
 							pnTreeViewProgress.Visible = true;
 							circularProgressTreeView.IsRunning = true;
 							treeList.Enabled = false;
@@ -418,7 +418,7 @@ namespace FileManager.PresentationClasses.WallBin
 		{
 			treeListSearchFiles.SuspendLayout();
 			treeListSearchFiles.Nodes.Clear();
-			laTreeViewTreeViewProgressLable.Text = "Searching Files...";
+			laTreeViewProgressLabel.Text = "Searching Files...";
 			pnTreeViewProgress.Visible = true;
 			circularProgressTreeView.IsRunning = true;
 			xtraTabControlFiles.Enabled = false;
@@ -464,9 +464,9 @@ namespace FileManager.PresentationClasses.WallBin
 		private void ckDateRange_CheckedChanged(object sender, EventArgs e)
 		{
 			if (checkEditDateRange.Checked)
-				pnKeyWord.Height = gbDateRange.Bottom + 4;
+				pnKeyWord.Height = groupControlDateRange.Bottom + 4;
 			else
-				pnKeyWord.Height = gbDateRange.Top + 4;
+				pnKeyWord.Height = groupControlDateRange.Top;
 		}
 		#endregion
 
@@ -480,7 +480,7 @@ namespace FileManager.PresentationClasses.WallBin
 					break;
 				case 1:
 					treeListAllFiles.Selection.Clear();
-					simpleButtonSearch.Refresh();
+					buttonXSearch.Refresh();
 					break;
 			}
 		}

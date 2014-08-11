@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Windows.Forms;
+using DevComponents.DotNetBar.Metro;
 using SalesDepot.CoreObjects.BusinessClasses;
 
 namespace FileManager.ToolForms.Settings
 {
-	public partial class FormAutoSyncEdit : Form
+	public partial class FormAutoSyncEdit : MetroForm
 	{
 		private readonly SyncScheduleRecord _syncScheduleRecord;
 

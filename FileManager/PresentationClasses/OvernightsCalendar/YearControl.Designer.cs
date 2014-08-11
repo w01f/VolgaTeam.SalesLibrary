@@ -28,58 +28,61 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pnMain = new System.Windows.Forms.Panel();
-            this.pnEmpty = new System.Windows.Forms.Panel();
-            this.pnWeekDays = new System.Windows.Forms.Panel();
-            this.pnMonths = new System.Windows.Forms.Panel();
-            this.pnMain.SuspendLayout();
-            this.SuspendLayout();
-            // 
-            // pnMain
-            // 
-            this.pnMain.Controls.Add(this.pnMonths);
-            this.pnMain.Controls.Add(this.pnWeekDays);
-            this.pnMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnMain.Location = new System.Drawing.Point(0, 0);
-            this.pnMain.Name = "pnMain";
-            this.pnMain.Size = new System.Drawing.Size(777, 589);
-            this.pnMain.TabIndex = 0;
-            // 
-            // pnEmpty
-            // 
-            this.pnEmpty.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnEmpty.Location = new System.Drawing.Point(0, 0);
-            this.pnEmpty.Name = "pnEmpty";
-            this.pnEmpty.Size = new System.Drawing.Size(777, 589);
-            this.pnEmpty.TabIndex = 1;
-            // 
-            // pnWeekDays
-            // 
-            this.pnWeekDays.BackColor = System.Drawing.Color.Azure;
-            this.pnWeekDays.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnWeekDays.Location = new System.Drawing.Point(0, 0);
-            this.pnWeekDays.Name = "pnWeekDays";
-            this.pnWeekDays.Size = new System.Drawing.Size(777, 35);
-            this.pnWeekDays.TabIndex = 0;
-            // 
-            // pnMonths
-            // 
-            this.pnMonths.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnMonths.Location = new System.Drawing.Point(0, 35);
-            this.pnMonths.Name = "pnMonths";
-            this.pnMonths.Size = new System.Drawing.Size(777, 554);
-            this.pnMonths.TabIndex = 1;
-            // 
-            // YearControl
-            // 
-            this.BackColor = System.Drawing.Color.AliceBlue;
-            this.Controls.Add(this.pnEmpty);
-            this.Controls.Add(this.pnMain);
-            this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.Name = "YearControl";
-            this.Size = new System.Drawing.Size(777, 589);
-            this.pnMain.ResumeLayout(false);
-            this.ResumeLayout(false);
+			this.pnMain = new System.Windows.Forms.Panel();
+			this.pnMonths = new System.Windows.Forms.Panel();
+			this.pnWeekDays = new System.Windows.Forms.Panel();
+			this.pnEmpty = new System.Windows.Forms.Panel();
+			this.pnMain.SuspendLayout();
+			this.SuspendLayout();
+			// 
+			// pnMain
+			// 
+			this.pnMain.BackColor = System.Drawing.Color.Transparent;
+			this.pnMain.Controls.Add(this.pnMonths);
+			this.pnMain.Controls.Add(this.pnWeekDays);
+			this.pnMain.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.pnMain.Location = new System.Drawing.Point(0, 0);
+			this.pnMain.Name = "pnMain";
+			this.pnMain.Size = new System.Drawing.Size(777, 589);
+			this.pnMain.TabIndex = 0;
+			// 
+			// pnMonths
+			// 
+			this.pnMonths.BackColor = System.Drawing.Color.Transparent;
+			this.pnMonths.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.pnMonths.Location = new System.Drawing.Point(0, 35);
+			this.pnMonths.Name = "pnMonths";
+			this.pnMonths.Size = new System.Drawing.Size(777, 554);
+			this.pnMonths.TabIndex = 1;
+			// 
+			// pnWeekDays
+			// 
+			this.pnWeekDays.BackColor = System.Drawing.Color.Azure;
+			this.pnWeekDays.Dock = System.Windows.Forms.DockStyle.Top;
+			this.pnWeekDays.Location = new System.Drawing.Point(0, 0);
+			this.pnWeekDays.Name = "pnWeekDays";
+			this.pnWeekDays.Size = new System.Drawing.Size(777, 35);
+			this.pnWeekDays.TabIndex = 0;
+			// 
+			// pnEmpty
+			// 
+			this.pnEmpty.BackColor = System.Drawing.Color.Transparent;
+			this.pnEmpty.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.pnEmpty.Location = new System.Drawing.Point(0, 0);
+			this.pnEmpty.Name = "pnEmpty";
+			this.pnEmpty.Size = new System.Drawing.Size(777, 589);
+			this.pnEmpty.TabIndex = 1;
+			// 
+			// YearControl
+			// 
+			this.Appearance.PageClient.BackColor = System.Drawing.Color.AliceBlue;
+			this.Appearance.PageClient.Options.UseBackColor = true;
+			this.Controls.Add(this.pnEmpty);
+			this.Controls.Add(this.pnMain);
+			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.Size = new System.Drawing.Size(777, 589);
+			this.pnMain.ResumeLayout(false);
+			this.ResumeLayout(false);
 
         }
 

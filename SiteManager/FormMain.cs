@@ -1,18 +1,19 @@
-﻿using System;
+using System;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using DevComponents.DotNetBar;
 using DevExpress.XtraEditors;
 using SalesDepot.SiteManager.ConfigurationClasses;
 using SalesDepot.SiteManager.Controllers;
 
 namespace SalesDepot.SiteManager
 {
-	public partial class FormMain : Form
+	public partial class FormMain : RibbonForm
 	{
 		private static FormMain _instance;
 
-		private FormMain()
+		public FormMain()
 		{
 			InitializeComponent();
 
@@ -40,11 +41,28 @@ namespace SalesDepot.SiteManager
 			{
 				var image = new Bitmap(SettingsManager.Instance.LogoPath);
 				labelItemUsersLogo.Image = image;
+				ribbonBarUsersLogo.RecalcLayout();
+				ribbonPanelUsers.PerformLayout();
+				
 				labelItemActivitiesLogo.Image = image;
+				ribbonBarActivitiesLogo.RecalcLayout();
+				ribbonPanelActivities.PerformLayout();
+
 				labelItemTickerLogo.Image = image;
+				ribbonBarTickerLogo.RecalcLayout();
+				ribbonPanelTicker.PerformLayout();
+
 				labelItemInactiveUsersLogo.Image = image;
+				ribbonBarInactiveUsersLogo.RecalcLayout();
+				ribbonPanelInactiveUsers.PerformLayout();
+
 				labelItemQBuilderLogo.Image = image;
+				ribbonBarQBuilderLogo.RecalcLayout();
+				ribbonPanelQBuilder.PerformLayout();
+
 				labelItemUtilitiesLogo.Image = image;
+				ribbonBarUtilitiesLogo.RecalcLayout();
+				ribbonPanelUtilities.PerformLayout();
 			}
 
 			MainController.Instance.InitializeControllers();

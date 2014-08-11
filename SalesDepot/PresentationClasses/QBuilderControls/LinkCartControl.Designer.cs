@@ -31,9 +31,9 @@
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LinkCartControl));
 			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
 			this.pnButtons = new System.Windows.Forms.Panel();
-			this.simpleButtonAddAllLinks = new DevExpress.XtraEditors.SimpleButton();
-			this.simpleButtonClear = new DevExpress.XtraEditors.SimpleButton();
-			this.simpleButtonRefresh = new DevExpress.XtraEditors.SimpleButton();
+			this.buttonXClear = new DevComponents.DotNetBar.ButtonX();
+			this.buttonXRefresh = new DevComponents.DotNetBar.ButtonX();
+			this.buttonXAddAllLinks = new DevComponents.DotNetBar.ButtonX();
 			this.gridControl = new DevExpress.XtraGrid.GridControl();
 			this.advBandedGridView = new DevExpress.XtraGrid.Views.BandedGrid.AdvBandedGridView();
 			this.gridBandType = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
@@ -53,62 +53,63 @@
 			// 
 			// pnButtons
 			// 
-			this.pnButtons.Controls.Add(this.simpleButtonAddAllLinks);
-			this.pnButtons.Controls.Add(this.simpleButtonClear);
-			this.pnButtons.Controls.Add(this.simpleButtonRefresh);
+			this.pnButtons.Controls.Add(this.buttonXClear);
+			this.pnButtons.Controls.Add(this.buttonXRefresh);
+			this.pnButtons.Controls.Add(this.buttonXAddAllLinks);
 			this.pnButtons.Dock = System.Windows.Forms.DockStyle.Top;
 			this.pnButtons.Location = new System.Drawing.Point(0, 0);
 			this.pnButtons.Name = "pnButtons";
 			this.pnButtons.Size = new System.Drawing.Size(290, 121);
 			this.pnButtons.TabIndex = 0;
 			// 
-			// simpleButtonAddAllLinks
+			// buttonXClear
 			// 
-			this.simpleButtonAddAllLinks.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+			this.buttonXClear.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXClear.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.simpleButtonAddAllLinks.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.simpleButtonAddAllLinks.Appearance.ForeColor = System.Drawing.Color.Black;
-			this.simpleButtonAddAllLinks.Appearance.Options.UseFont = true;
-			this.simpleButtonAddAllLinks.Appearance.Options.UseForeColor = true;
-			this.simpleButtonAddAllLinks.Location = new System.Drawing.Point(14, 81);
-			this.simpleButtonAddAllLinks.Name = "simpleButtonAddAllLinks";
-			this.simpleButtonAddAllLinks.Size = new System.Drawing.Size(263, 31);
-			this.simpleButtonAddAllLinks.TabIndex = 2;
-			this.simpleButtonAddAllLinks.Text = "Add All Links to quickSITE";
-			this.simpleButtonAddAllLinks.Click += new System.EventHandler(this.simpleButtonAddAllLinks_Click);
+			this.buttonXClear.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXClear.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.buttonXClear.Location = new System.Drawing.Point(14, 44);
+			this.buttonXClear.Name = "buttonXClear";
+			this.buttonXClear.Size = new System.Drawing.Size(263, 31);
+			this.buttonXClear.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXClear.TabIndex = 4;
+			this.buttonXClear.Text = "Empty Link Cart";
+			this.buttonXClear.Click += new System.EventHandler(this.simpleButtonClear_Click);
 			// 
-			// simpleButtonClear
+			// buttonXRefresh
 			// 
-			this.simpleButtonClear.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+			this.buttonXRefresh.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.simpleButtonClear.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.simpleButtonClear.Appearance.ForeColor = System.Drawing.Color.Black;
-			this.simpleButtonClear.Appearance.Options.UseFont = true;
-			this.simpleButtonClear.Appearance.Options.UseForeColor = true;
-			this.simpleButtonClear.Location = new System.Drawing.Point(14, 44);
-			this.simpleButtonClear.Name = "simpleButtonClear";
-			this.simpleButtonClear.Size = new System.Drawing.Size(263, 31);
-			this.simpleButtonClear.TabIndex = 1;
-			this.simpleButtonClear.Text = "Empty Link Cart";
-			this.simpleButtonClear.Click += new System.EventHandler(this.simpleButtonClear_Click);
+			this.buttonXRefresh.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXRefresh.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.buttonXRefresh.Location = new System.Drawing.Point(14, 7);
+			this.buttonXRefresh.Name = "buttonXRefresh";
+			this.buttonXRefresh.Size = new System.Drawing.Size(263, 31);
+			this.buttonXRefresh.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXRefresh.TabIndex = 3;
+			this.buttonXRefresh.Text = "Refresh Link Cart";
+			this.buttonXRefresh.Click += new System.EventHandler(this.simpleButtonRefresh_Click);
 			// 
-			// simpleButtonRefresh
+			// buttonXAddAllLinks
 			// 
-			this.simpleButtonRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+			this.buttonXAddAllLinks.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXAddAllLinks.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.simpleButtonRefresh.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.simpleButtonRefresh.Appearance.ForeColor = System.Drawing.Color.Black;
-			this.simpleButtonRefresh.Appearance.Options.UseFont = true;
-			this.simpleButtonRefresh.Appearance.Options.UseForeColor = true;
-			this.simpleButtonRefresh.Location = new System.Drawing.Point(14, 7);
-			this.simpleButtonRefresh.Name = "simpleButtonRefresh";
-			this.simpleButtonRefresh.Size = new System.Drawing.Size(263, 31);
-			this.simpleButtonRefresh.TabIndex = 0;
-			this.simpleButtonRefresh.Text = "Refresh Link Cart";
-			this.simpleButtonRefresh.Click += new System.EventHandler(this.simpleButtonRefresh_Click);
+			this.buttonXAddAllLinks.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXAddAllLinks.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.buttonXAddAllLinks.Location = new System.Drawing.Point(14, 81);
+			this.buttonXAddAllLinks.Name = "buttonXAddAllLinks";
+			this.buttonXAddAllLinks.Size = new System.Drawing.Size(263, 31);
+			this.buttonXAddAllLinks.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXAddAllLinks.TabIndex = 5;
+			this.buttonXAddAllLinks.Text = "Add All Links to quickSITE";
+			this.buttonXAddAllLinks.Click += new System.EventHandler(this.simpleButtonAddAllLinks_Click);
 			// 
 			// gridControl
 			// 
+			this.gridControl.Cursor = System.Windows.Forms.Cursors.Default;
 			this.gridControl.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.gridControl.Location = new System.Drawing.Point(0, 121);
 			this.gridControl.MainView = this.advBandedGridView;
@@ -171,6 +172,7 @@
 			this.gridBandType.Columns.Add(this.bandedGridColumnType);
 			this.gridBandType.Name = "gridBandType";
 			this.gridBandType.OptionsBand.FixedWidth = true;
+			this.gridBandType.VisibleIndex = 0;
 			this.gridBandType.Width = 42;
 			// 
 			// bandedGridColumnType
@@ -196,6 +198,7 @@
 			this.gridBandLink.Caption = "Link";
 			this.gridBandLink.Columns.Add(this.bandedGridColumnLinkName);
 			this.gridBandLink.Name = "gridBandLink";
+			this.gridBandLink.VisibleIndex = 1;
 			this.gridBandLink.Width = 197;
 			// 
 			// bandedGridColumnLinkName
@@ -217,6 +220,7 @@
 			this.gridBandActions.Name = "gridBandActions";
 			this.gridBandActions.OptionsBand.FixedWidth = true;
 			this.gridBandActions.OptionsBand.ShowCaption = false;
+			this.gridBandActions.VisibleIndex = 2;
 			this.gridBandActions.Width = 47;
 			// 
 			// bandedGridColumnActions
@@ -240,7 +244,7 @@
 			// LinkCartControl
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
+			this.BackColor = System.Drawing.Color.White;
 			this.Controls.Add(this.gridControl);
 			this.Controls.Add(this.pnButtons);
 			this.Enabled = false;
@@ -266,11 +270,11 @@
 		private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumnActions;
 		private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repositoryItemButtonEditActions;
 		private DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit repositoryItemPictureEditType;
-		private DevExpress.XtraEditors.SimpleButton simpleButtonRefresh;
-		private DevExpress.XtraEditors.SimpleButton simpleButtonClear;
 		private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBandType;
 		private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBandLink;
 		private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBandActions;
-		private DevExpress.XtraEditors.SimpleButton simpleButtonAddAllLinks;
+		private DevComponents.DotNetBar.ButtonX buttonXRefresh;
+		private DevComponents.DotNetBar.ButtonX buttonXClear;
+		private DevComponents.DotNetBar.ButtonX buttonXAddAllLinks;
 	}
 }

@@ -41,7 +41,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.gridViewData)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemSpinEditNumeric)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEditDate)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEditDate.VistaTimeProperties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEditDate.CalendarTimeProperties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemSpinEditPercent)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -100,6 +100,7 @@
 			this.gridViewData.Appearance.SelectedRow.Options.UseFont = true;
 			this.gridViewData.AppearancePrint.HeaderPanel.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold);
 			this.gridViewData.AppearancePrint.HeaderPanel.Options.UseFont = true;
+			this.gridViewData.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Default;
 			this.gridViewData.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gridColumnUser,
             this.gridColumnQuiz,
@@ -153,8 +154,8 @@
 			this.gridColumnUser.FieldName = "FullName";
 			this.gridColumnUser.Name = "gridColumnUser";
 			this.gridColumnUser.SortMode = DevExpress.XtraGrid.ColumnSortMode.Value;
-			this.gridColumnUser.SummaryItem.DisplayFormat = "Total Active Quizzes in the system: {0:n0}";
-			this.gridColumnUser.SummaryItem.SummaryType = DevExpress.Data.SummaryItemType.Custom;
+			this.gridColumnUser.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Custom, "FullName", "Total Active Quizzes in the system: {0:n0}")});
 			this.gridColumnUser.Visible = true;
 			this.gridColumnUser.VisibleIndex = 0;
 			this.gridColumnUser.Width = 639;
@@ -175,8 +176,8 @@
 			this.gridColumnTaken.FieldName = "quizTryCount";
 			this.gridColumnTaken.Name = "gridColumnTaken";
 			this.gridColumnTaken.OptionsColumn.FixedWidth = true;
-			this.gridColumnTaken.SummaryItem.DisplayFormat = "Taken: {0:n0}";
-			this.gridColumnTaken.SummaryItem.SummaryType = DevExpress.Data.SummaryItemType.Sum;
+			this.gridColumnTaken.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "quizTryCount", "Taken: {0:n0}")});
 			this.gridColumnTaken.Visible = true;
 			this.gridColumnTaken.VisibleIndex = 1;
 			this.gridColumnTaken.Width = 110;
@@ -200,8 +201,8 @@
 			this.gridColumnPassed.FieldName = "QuizPassDate";
 			this.gridColumnPassed.Name = "gridColumnPassed";
 			this.gridColumnPassed.OptionsColumn.FixedWidth = true;
-			this.gridColumnPassed.SummaryItem.DisplayFormat = "Passed: {0:n0}";
-			this.gridColumnPassed.SummaryItem.SummaryType = DevExpress.Data.SummaryItemType.Count;
+			this.gridColumnPassed.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Count, "QuizPassDate", "Passed: {0:n0}")});
 			this.gridColumnPassed.Visible = true;
 			this.gridColumnPassed.VisibleIndex = 2;
 			this.gridColumnPassed.Width = 150;
@@ -211,13 +212,13 @@
 			this.repositoryItemDateEditDate.AutoHeight = false;
 			this.repositoryItemDateEditDate.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+			this.repositoryItemDateEditDate.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
 			this.repositoryItemDateEditDate.DisplayFormat.FormatString = "MM/dd/yyyy hh:mm tt";
 			this.repositoryItemDateEditDate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
 			this.repositoryItemDateEditDate.EditFormat.FormatString = "MM/dd/yyyy hh:mm tt";
 			this.repositoryItemDateEditDate.EditFormat.FormatType = DevExpress.Utils.FormatType.Custom;
 			this.repositoryItemDateEditDate.Name = "repositoryItemDateEditDate";
-			this.repositoryItemDateEditDate.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton()});
 			// 
 			// repositoryItemSpinEditPercent
 			// 
@@ -240,7 +241,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.gridControlData)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.gridViewData)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemSpinEditNumeric)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEditDate.VistaTimeProperties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEditDate.CalendarTimeProperties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEditDate)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemSpinEditPercent)).EndInit();
 			this.ResumeLayout(false);

@@ -192,6 +192,8 @@ namespace SalesDepot.ConfigurationClasses
 		public string AccordionDescription { get; set; }
 		public KeyWordFileFilters KeyWordFilters { get; private set; }
 
+		public bool ShowStartProgress { get; set; }
+
 		public Guid AppID { get; set; }
 
 		public List<string> HiddenObjects { get; private set; }
@@ -281,6 +283,10 @@ namespace SalesDepot.ConfigurationClasses
 				if (node != null)
 					if (bool.TryParse(node.InnerText, out tempBool))
 						EmailBinSendAsPdf = tempBool;
+				node = document.SelectSingleNode(@"/defaultview/SalesLibrary/progresscircle");
+				if (node != null)
+					if (bool.TryParse(node.InnerText, out tempBool))
+						ShowStartProgress = tempBool;
 
 				HomeView = ClassicView || ListView || AccordionView;
 				SearchView = SolutionTagsView || SolutionDateView || SolutionTitleView;

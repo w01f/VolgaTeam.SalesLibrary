@@ -41,7 +41,6 @@
 			this.gridColumnLibraryId = new DevExpress.XtraGrid.Columns.GridColumn();
 			this.gridColumnLibrarySelected = new DevExpress.XtraGrid.Columns.GridColumn();
 			this.gridColumnLibraryName = new DevExpress.XtraGrid.Columns.GridColumn();
-			this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
 			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
 			this.laLogin = new System.Windows.Forms.Label();
 			this.textEditLogin = new DevExpress.XtraEditors.TextEdit();
@@ -78,7 +77,6 @@
 			this.pnAssignedLibraries = new System.Windows.Forms.Panel();
 			this.buttonXLibrariesClearAll = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXLibrariesSelectAll = new DevComponents.DotNetBar.ButtonX();
-			this.styleManager = new DevComponents.DotNetBar.StyleManager(this.components);
 			((System.ComponentModel.ISupportInitialize)(this.gridViewPages)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEditLibrary)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.gridControlLibraries)).BeginInit();
@@ -140,9 +138,9 @@
 			this.gridViewPages.OptionsSelection.EnableAppearanceHideSelection = false;
 			this.gridViewPages.OptionsView.ShowColumnHeaders = false;
 			this.gridViewPages.OptionsView.ShowGroupPanel = false;
-			this.gridViewPages.OptionsView.ShowHorzLines = false;
+			this.gridViewPages.OptionsView.ShowHorizontalLines = DevExpress.Utils.DefaultBoolean.False;
 			this.gridViewPages.OptionsView.ShowIndicator = false;
-			this.gridViewPages.OptionsView.ShowVertLines = false;
+			this.gridViewPages.OptionsView.ShowVerticalLines = DevExpress.Utils.DefaultBoolean.False;
 			this.gridViewPages.RowHeight = 35;
 			// 
 			// gridColumnPageId
@@ -165,6 +163,7 @@
 			// repositoryItemCheckEditLibrary
 			// 
 			this.repositoryItemCheckEditLibrary.AutoHeight = false;
+			this.repositoryItemCheckEditLibrary.Caption = "Check";
 			this.repositoryItemCheckEditLibrary.Name = "repositoryItemCheckEditLibrary";
 			this.repositoryItemCheckEditLibrary.CheckedChanged += new System.EventHandler(this.RepositoryItemCheckEditCheckedChanged);
 			// 
@@ -190,7 +189,7 @@
 			this.gridControlLibraries.Name = "gridControlLibraries";
 			this.gridControlLibraries.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemCheckEditLibrary});
-			this.gridControlLibraries.Size = new System.Drawing.Size(369, 491);
+			this.gridControlLibraries.Size = new System.Drawing.Size(375, 495);
 			this.gridControlLibraries.TabIndex = 0;
 			this.gridControlLibraries.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewLibraries,
@@ -262,10 +261,6 @@
 			this.gridColumnLibraryName.Visible = true;
 			this.gridColumnLibraryName.VisibleIndex = 1;
 			this.gridColumnLibraryName.Width = 355;
-			// 
-			// defaultLookAndFeel
-			// 
-			this.defaultLookAndFeel.LookAndFeel.SkinName = "Lilian";
 			// 
 			// styleController
 			// 
@@ -525,7 +520,7 @@
 			this.xtraTabPageUser.Controls.Add(this.laEmail);
 			this.xtraTabPageUser.Controls.Add(this.textEditLastName);
 			this.xtraTabPageUser.Name = "xtraTabPageUser";
-			this.xtraTabPageUser.Size = new System.Drawing.Size(369, 537);
+			this.xtraTabPageUser.Size = new System.Drawing.Size(375, 541);
 			this.xtraTabPageUser.Text = "User";
 			// 
 			// laPhone
@@ -551,18 +546,17 @@
 			this.xtraTabPageGroups.Controls.Add(this.pnAssignedGroups);
 			this.xtraTabPageGroups.Controls.Add(this.gridControlGroups);
 			this.xtraTabPageGroups.Name = "xtraTabPageGroups";
-			this.xtraTabPageGroups.Size = new System.Drawing.Size(369, 537);
+			this.xtraTabPageGroups.Size = new System.Drawing.Size(375, 541);
 			this.xtraTabPageGroups.Text = "Groups";
 			// 
 			// pnAssignedGroups
 			// 
-			this.pnAssignedGroups.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
 			this.pnAssignedGroups.Controls.Add(this.buttonXGroupsClearAll);
 			this.pnAssignedGroups.Controls.Add(this.buttonXGroupsSelectAll);
 			this.pnAssignedGroups.Dock = System.Windows.Forms.DockStyle.Top;
 			this.pnAssignedGroups.Location = new System.Drawing.Point(0, 0);
 			this.pnAssignedGroups.Name = "pnAssignedGroups";
-			this.pnAssignedGroups.Size = new System.Drawing.Size(369, 46);
+			this.pnAssignedGroups.Size = new System.Drawing.Size(375, 46);
 			this.pnAssignedGroups.TabIndex = 2;
 			// 
 			// buttonXGroupsClearAll
@@ -571,7 +565,7 @@
 			this.buttonXGroupsClearAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXGroupsClearAll.CausesValidation = false;
 			this.buttonXGroupsClearAll.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-			this.buttonXGroupsClearAll.Location = new System.Drawing.Point(250, 7);
+			this.buttonXGroupsClearAll.Location = new System.Drawing.Point(256, 7);
 			this.buttonXGroupsClearAll.Name = "buttonXGroupsClearAll";
 			this.buttonXGroupsClearAll.Size = new System.Drawing.Size(90, 33);
 			this.buttonXGroupsClearAll.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -597,12 +591,12 @@
 			// gridControlGroups
 			// 
 			this.gridControlGroups.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.gridControlGroups.Location = new System.Drawing.Point(0, 40);
+			this.gridControlGroups.Location = new System.Drawing.Point(0, 44);
 			this.gridControlGroups.MainView = this.gridViewGroups;
 			this.gridControlGroups.Name = "gridControlGroups";
 			this.gridControlGroups.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemCheckEditGroup});
-			this.gridControlGroups.Size = new System.Drawing.Size(369, 497);
+			this.gridControlGroups.Size = new System.Drawing.Size(375, 497);
 			this.gridControlGroups.TabIndex = 1;
 			this.gridControlGroups.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewGroups});
@@ -666,6 +660,7 @@
 			// repositoryItemCheckEditGroup
 			// 
 			this.repositoryItemCheckEditGroup.AutoHeight = false;
+			this.repositoryItemCheckEditGroup.Caption = "Check";
 			this.repositoryItemCheckEditGroup.Name = "repositoryItemCheckEditGroup";
 			// 
 			// gridColumnGroupName
@@ -684,18 +679,17 @@
 			this.xtraTabPageLibraries.Controls.Add(this.gridControlLibraries);
 			this.xtraTabPageLibraries.Controls.Add(this.pnAssignedLibraries);
 			this.xtraTabPageLibraries.Name = "xtraTabPageLibraries";
-			this.xtraTabPageLibraries.Size = new System.Drawing.Size(369, 537);
+			this.xtraTabPageLibraries.Size = new System.Drawing.Size(375, 541);
 			this.xtraTabPageLibraries.Text = "Assigned Libraries";
 			// 
 			// pnAssignedLibraries
 			// 
-			this.pnAssignedLibraries.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
 			this.pnAssignedLibraries.Controls.Add(this.buttonXLibrariesClearAll);
 			this.pnAssignedLibraries.Controls.Add(this.buttonXLibrariesSelectAll);
 			this.pnAssignedLibraries.Dock = System.Windows.Forms.DockStyle.Top;
 			this.pnAssignedLibraries.Location = new System.Drawing.Point(0, 0);
 			this.pnAssignedLibraries.Name = "pnAssignedLibraries";
-			this.pnAssignedLibraries.Size = new System.Drawing.Size(369, 46);
+			this.pnAssignedLibraries.Size = new System.Drawing.Size(375, 46);
 			this.pnAssignedLibraries.TabIndex = 1;
 			// 
 			// buttonXLibrariesClearAll
@@ -704,7 +698,7 @@
 			this.buttonXLibrariesClearAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXLibrariesClearAll.CausesValidation = false;
 			this.buttonXLibrariesClearAll.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-			this.buttonXLibrariesClearAll.Location = new System.Drawing.Point(250, 7);
+			this.buttonXLibrariesClearAll.Location = new System.Drawing.Point(256, 7);
 			this.buttonXLibrariesClearAll.Name = "buttonXLibrariesClearAll";
 			this.buttonXLibrariesClearAll.Size = new System.Drawing.Size(90, 33);
 			this.buttonXLibrariesClearAll.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -727,16 +721,10 @@
 			this.buttonXLibrariesSelectAll.TextColor = System.Drawing.Color.Black;
 			this.buttonXLibrariesSelectAll.Click += new System.EventHandler(this.buttonXLibrariesSelectAll_Click);
 			// 
-			// styleManager
-			// 
-			this.styleManager.ManagerStyle = DevComponents.DotNetBar.eStyle.Office2010Blue;
-			this.styleManager.MetroColorParameters = new DevComponents.DotNetBar.Metro.ColorTables.MetroColorGeneratorParameters(System.Drawing.Color.White, System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(163)))), ((int)(((byte)(26))))));
-			// 
 			// FormEditUser
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
 			this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
-			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
 			this.ClientSize = new System.Drawing.Size(381, 617);
 			this.Controls.Add(this.xtraTabControl);
 			this.Controls.Add(this.buttonXCancel);
@@ -782,8 +770,7 @@
 
         #endregion
 
-        private DevExpress.LookAndFeel.DefaultLookAndFeel defaultLookAndFeel;
-        private DevExpress.XtraEditors.StyleController styleController;
+		private DevExpress.XtraEditors.StyleController styleController;
         private System.Windows.Forms.Label laLogin;
         private System.Windows.Forms.Label laFirstName;
         private System.Windows.Forms.Label laLastName;
@@ -827,7 +814,6 @@
 		private DevComponents.DotNetBar.ButtonX buttonXGroupsSelectAll;
 		public DevExpress.XtraEditors.TextEdit textEditEmailConfirm;
 		private System.Windows.Forms.Label laEmailConfirm;
-		private DevComponents.DotNetBar.StyleManager styleManager;
 		private System.Windows.Forms.Label laPhone;
 		public DevExpress.XtraEditors.TextEdit textEditPhone;
     }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -14,19 +14,27 @@ using SalesDepot.PresentationClasses.WallBin.Decorators;
 using SalesDepot.Properties;
 using SalesDepot.TabPages;
 using SalesDepot.ToolClasses;
+using SalesDepot.ToolForms;
+using PowerPointHelper = SalesDepot.InteropClasses.PowerPointHelper;
+using WinAPIHelper = SalesDepot.CoreObjects.InteropClasses.WinAPIHelper;
 
 namespace SalesDepot
 {
-	public partial class FormMain : Form
+	public partial class FormMain : RibbonForm
 	{
 		private static FormMain _instance;
+		private readonly TabPageManager _tabPageManager = new TabPageManager(SettingsManager.Instance.TabPageConfigPath);
 
 		private bool _alowToSave;
 
 		private int _floaterPositionX = int.MinValue;
 		private int _floaterPositionY = int.MinValue;
 
-		private readonly TabPageManager _tabPageManager = new TabPageManager(SettingsManager.Instance.TabPageConfigPath);
+		public FormMain()
+		{
+			InitializeComponent();
+			FormStateHelper.Init(this, Path.GetDirectoryName(typeof(FormMain).Assembly.Location), true);
+		}
 
 		public TabHomeControl TabHome { get; set; }
 		public TabSearchControl TabSearch { get; set; }
@@ -36,7 +44,8 @@ namespace SalesDepot
 		public TabQBuilder TabQBuilder { get; set; }
 		public TabGallery1 TabGallery1 { get; set; }
 		public TabGallery2 TabGallery2 { get; set; }
-		public TabFavorites TabFavorites{ get; set; }
+		public TabFavorites TabFavorites { get; set; }
+		public TabSettings TabSettings { get; set; }
 
 		public static FormMain Instance
 		{
@@ -60,6 +69,8 @@ namespace SalesDepot
 					floaterLogo = labelItemPackageLogo.Image;
 				if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemSearch)
 					floaterLogo = labelItemSearchLogo.Image;
+				if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemSettings)
+					floaterLogo = labelItemSettingsLogo.Image;
 				else if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemCalendar)
 				{
 					if (File.Exists(SettingsManager.Instance.CalendarLogoPath))
@@ -78,18 +89,12 @@ namespace SalesDepot
 			get { return ribbonBarStations.Text; }
 		}
 
-		private FormMain()
-		{
-			InitializeComponent();
-			FormStateHelper.Init(this, Path.GetDirectoryName(typeof(FormMain).Assembly.Location), true);
-		}
-
 		protected override void OnHandleCreated(EventArgs e)
 		{
 			base.OnHandleCreated(e);
 			if (Environment.OSVersion.Version.Major < 6) return;
 			int attrValue = 1;
-			var res = WinAPIHelper.DwmSetWindowAttribute(Handle, WinAPIHelper.DWMWA_TRANSITIONS_FORCEDISABLED, ref attrValue, sizeof(int));
+			int res = WinAPIHelper.DwmSetWindowAttribute(Handle, WinAPIHelper.DWMWA_TRANSITIONS_FORCEDISABLED, ref attrValue, sizeof(int));
 			if (res < 0)
 				throw new Exception("Can't disable aero animation");
 		}
@@ -122,6 +127,9 @@ namespace SalesDepot
 
 			TabFavorites = new TabFavorites();
 			TabFavorites.InitController();
+
+			TabSettings = new TabSettings();
+			TabSettings.InitController();
 		}
 
 		private void LoadApplicationSettings()
@@ -142,7 +150,7 @@ namespace SalesDepot
 		{
 			ribbonControl.Items.Clear();
 			var tabPages = new List<BaseItem>();
-			foreach (var tabPageConfig in _tabPageManager.TabPageSettings)
+			foreach (TabPageConfig tabPageConfig in _tabPageManager.TabPageSettings)
 			{
 				switch (tabPageConfig.Id)
 				{
@@ -211,6 +219,7 @@ namespace SalesDepot
 			TabGallery1.IsActive = false;
 			TabGallery2.IsActive = false;
 			TabFavorites.IsActive = false;
+			TabSettings.IsActive = false;
 
 			SettingsManager.Instance.HomeView = false;
 			SettingsManager.Instance.SearchView = false;
@@ -219,7 +228,7 @@ namespace SalesDepot
 
 			if (!_alowToSave) return;
 
-			if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemHome || ribbonControl.SelectedRibbonTabItem == ribbonTabItemSettings)
+			if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemHome)
 			{
 				if (!pnContainer.Controls.Contains(TabHome))
 					pnContainer.Controls.Add(TabHome);
@@ -240,13 +249,17 @@ namespace SalesDepot
 			else if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemProgramSchedule)
 			{
 				if (!pnContainer.Controls.Contains(TabProgramSchedule))
+				{
 					pnContainer.Controls.Add(TabProgramSchedule);
+				}
 				TabProgramSchedule.ShowTab();
 			}
 			else if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemProgramSearch)
 			{
 				if (!pnContainer.Controls.Contains(TabProgramSearch))
+				{
 					pnContainer.Controls.Add(TabProgramSearch);
+				}
 				TabProgramSearch.ShowTab();
 			}
 			else if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemQBuilder)
@@ -282,6 +295,12 @@ namespace SalesDepot
 				}
 				TabFavorites.ShowTab();
 			}
+			else if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemSettings)
+			{
+				if (!pnContainer.Controls.Contains(TabSettings))
+					pnContainer.Controls.Add(TabSettings);
+				TabSettings.ShowTab();
+			}
 		}
 
 		#region Form Event Handlers
@@ -297,39 +316,47 @@ namespace SalesDepot
 			AppManager.Instance.ActivityManager.StartQueue();
 			ribbonControl.Visible = false;
 			pnEmpty.BringToFront();
-			var thread = new Thread(delegate()
-										{
-											LibraryManager.Instance.LoadLibraryPackages(new DirectoryInfo(SettingsManager.Instance.LibraryRootFolder));
-											if (LibraryManager.Instance.LibraryPackageCollection.Count > 0)
-											{
-												Invoke((MethodInvoker)delegate
-																		  {
-																			  DecoratorManager.Instance.BuildPackageViewers();
-																			  Application.DoEvents();
-																			  DecoratorManager.Instance.BuildOvernightsCalendars();
-																			  Application.DoEvents();
-																			  DecoratorManager.Instance.BuildProgramManagers();
-																			  Application.DoEvents();
-																		  });
-											}
-										});
-			Application.DoEvents();
-			thread.Start();
-			while (thread.IsAlive)
-				Application.DoEvents();
-
-			if (LibraryManager.Instance.LibraryPackageCollection.Count > 0)
+			
+			using (var form = new FormProgress())
 			{
-				thread = new Thread(() => Invoke((MethodInvoker)delegate
+				form.TopMost = true;
+				form.laProgress.Text = "Loading...";
+				if (SettingsManager.Instance.ShowStartProgress)
+					form.Show();
+				var thread = new Thread(delegate()
 				{
-					TabHome.LoadTab();
-					Application.DoEvents();
-					_alowToSave = true;
-					Application.DoEvents();
-				}));
+					LibraryManager.Instance.LoadLibraryPackages(new DirectoryInfo(SettingsManager.Instance.LibraryRootFolder));
+					if (LibraryManager.Instance.LibraryPackageCollection.Count > 0)
+					{
+						Invoke((MethodInvoker)delegate
+						{
+							DecoratorManager.Instance.BuildPackageViewers();
+							Application.DoEvents();
+							DecoratorManager.Instance.BuildOvernightsCalendars();
+							Application.DoEvents();
+						});
+					}
+				});
+				Application.DoEvents();
 				thread.Start();
 				while (thread.IsAlive)
 					Application.DoEvents();
+
+				if (LibraryManager.Instance.LibraryPackageCollection.Count > 0)
+				{
+					thread = new Thread(() => Invoke((MethodInvoker)delegate
+					{
+						TabHome.LoadTab();
+						Application.DoEvents();
+						_alowToSave = true;
+						Application.DoEvents();
+					}));
+					thread.Start();
+					while (thread.IsAlive)
+						Application.DoEvents();
+				}
+				if (SettingsManager.Instance.ShowStartProgress)
+					form.Close();
 			}
 
 			if (SettingsManager.Instance.SearchView)

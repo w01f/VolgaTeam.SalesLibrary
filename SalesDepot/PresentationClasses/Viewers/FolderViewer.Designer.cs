@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
 			this.components = new System.ComponentModel.Container();
-			this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
 			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
 			this.toolTipController = new DevExpress.Utils.ToolTipController(this.components);
 			this.gridControlFiles = new DevExpress.XtraGrid.GridControl();
@@ -42,10 +41,6 @@
 			((System.ComponentModel.ISupportInitialize)(this.gridViewFiles)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit)).BeginInit();
 			this.SuspendLayout();
-			// 
-			// defaultLookAndFeel
-			// 
-			this.defaultLookAndFeel.LookAndFeel.SkinName = "Money Twins";
 			// 
 			// styleController
 			// 
@@ -116,7 +111,7 @@
 			this.gridViewFiles.OptionsView.ShowDetailButtons = false;
 			this.gridViewFiles.OptionsView.ShowGroupPanel = false;
 			this.gridViewFiles.OptionsView.ShowIndicator = false;
-			this.gridViewFiles.OptionsView.ShowVertLines = false;
+			this.gridViewFiles.OptionsView.ShowVerticalLines = DevExpress.Utils.DefaultBoolean.False;
 			this.gridViewFiles.RowHeight = 25;
 			this.gridViewFiles.RowCellClick += new DevExpress.XtraGrid.Views.Grid.RowCellClickEventHandler(this.gridViewFiles_RowCellClick);
 			this.gridViewFiles.MouseMove += new System.Windows.Forms.MouseEventHandler(this.gridViewFiles_MouseMove);
@@ -150,7 +145,7 @@
 			// FolderViewer
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
+			this.BackColor = System.Drawing.Color.White;
 			this.Controls.Add(this.gridControlFiles);
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -166,7 +161,6 @@
 
         #endregion
 
-		private DevExpress.LookAndFeel.DefaultLookAndFeel defaultLookAndFeel;
 		private DevExpress.XtraEditors.StyleController styleController;
 		private DevExpress.Utils.ToolTipController toolTipController;
 		public DevExpress.XtraGrid.GridControl gridControlFiles;

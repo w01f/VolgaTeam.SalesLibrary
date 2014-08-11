@@ -41,7 +41,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.gridControlData)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.advBandedGridViewData)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEditDate)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEditDate.VistaTimeProperties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEditDate.CalendarTimeProperties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemSpinEditNumeric)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemSpinEditPercent)).BeginInit();
 			this.SuspendLayout();
@@ -91,6 +91,8 @@
 			this.advBandedGridViewData.Appearance.SelectedRow.Options.UseFont = true;
 			this.advBandedGridViewData.AppearancePrint.HeaderPanel.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.advBandedGridViewData.AppearancePrint.HeaderPanel.Options.UseFont = true;
+			this.advBandedGridViewData.AppearancePrint.Preview.Options.UseTextOptions = true;
+			this.advBandedGridViewData.AppearancePrint.Preview.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
 			this.advBandedGridViewData.Bands.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] {
             this.gridBandUser,
             this.gridBandGroup});
@@ -138,6 +140,7 @@
 			this.gridBandUser.Columns.Add(this.gridColumnTestPassed);
 			this.gridBandUser.MinWidth = 20;
 			this.gridBandUser.Name = "gridBandUser";
+			this.gridBandUser.VisibleIndex = 0;
 			this.gridBandUser.Width = 255;
 			// 
 			// gridColumnUser
@@ -169,6 +172,7 @@
 			this.gridBandGroup.Caption = "Group:";
 			this.gridBandGroup.Columns.Add(this.gridColumnGroup);
 			this.gridBandGroup.Name = "gridBandGroup";
+			this.gridBandGroup.VisibleIndex = 1;
 			this.gridBandGroup.Width = 172;
 			// 
 			// gridColumnGroup
@@ -184,13 +188,13 @@
 			this.repositoryItemDateEditDate.AutoHeight = false;
 			this.repositoryItemDateEditDate.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+			this.repositoryItemDateEditDate.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
 			this.repositoryItemDateEditDate.DisplayFormat.FormatString = "MM/dd/yyyy hh:mm tt";
 			this.repositoryItemDateEditDate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
 			this.repositoryItemDateEditDate.EditFormat.FormatString = "MM/dd/yyyy hh:mm tt";
 			this.repositoryItemDateEditDate.EditFormat.FormatType = DevExpress.Utils.FormatType.Custom;
 			this.repositoryItemDateEditDate.Name = "repositoryItemDateEditDate";
-			this.repositoryItemDateEditDate.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton()});
 			// 
 			// repositoryItemSpinEditNumeric
 			// 
@@ -224,7 +228,7 @@
 			this.Size = new System.Drawing.Size(898, 483);
 			((System.ComponentModel.ISupportInitialize)(this.gridControlData)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.advBandedGridViewData)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEditDate.VistaTimeProperties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEditDate.CalendarTimeProperties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEditDate)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemSpinEditNumeric)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemSpinEditPercent)).EndInit();

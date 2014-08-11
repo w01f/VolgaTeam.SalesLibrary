@@ -28,125 +28,114 @@
         /// </summary>
         private void InitializeComponent()
         {
-			this.components = new System.ComponentModel.Container();
-			this.styleManager = new DevComponents.DotNetBar.StyleManager(this.components);
-			this.ribbonBarBack = new DevComponents.DotNetBar.RibbonBar();
-			this.buttonItemBack = new DevComponents.DotNetBar.ButtonItem();
-			this.ribbonBarHide = new DevComponents.DotNetBar.RibbonBar();
-			this.buttonItemHide = new DevComponents.DotNetBar.ButtonItem();
+			this.superTooltip = new DevComponents.DotNetBar.SuperTooltip();
+			this.buttonXHide = new DevComponents.DotNetBar.ButtonX();
+			this.buttonXBack = new DevComponents.DotNetBar.ButtonX();
+			this.pnMain = new System.Windows.Forms.Panel();
+			this.pnBorder = new System.Windows.Forms.Panel();
+			this.labelCaption = new System.Windows.Forms.Label();
+			this.pnMain.SuspendLayout();
+			this.pnBorder.SuspendLayout();
 			this.SuspendLayout();
 			// 
-			// styleManager
+			// superTooltip
 			// 
-			this.styleManager.ManagerStyle = DevComponents.DotNetBar.eStyle.Office2007Blue;
-			this.styleManager.MetroColorParameters = new DevComponents.DotNetBar.Metro.ColorTables.MetroColorGeneratorParameters(System.Drawing.Color.White, System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(163)))), ((int)(((byte)(26))))));
+			this.superTooltip.DefaultTooltipSettings = new DevComponents.DotNetBar.SuperTooltipInfo("", "", "", null, null, DevComponents.DotNetBar.eTooltipColor.Gray);
+			this.superTooltip.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			// 
-			// ribbonBarBack
+			// buttonXHide
 			// 
-			this.ribbonBarBack.AutoOverflowEnabled = true;
+			this.buttonXHide.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXHide.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXHide.FocusCuesEnabled = false;
+			this.buttonXHide.Image = global::OvernightsCalendarViewer.Properties.Resources.FloaterHide;
+			this.buttonXHide.Location = new System.Drawing.Point(267, 5);
+			this.buttonXHide.Name = "buttonXHide";
+			this.buttonXHide.Size = new System.Drawing.Size(68, 106);
+			this.buttonXHide.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.superTooltip.SetSuperTooltip(this.buttonXHide, new DevComponents.DotNetBar.SuperTooltipInfo("Hide", "", "Hide Application", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
+			this.buttonXHide.TabIndex = 1;
+			this.buttonXHide.Click += new System.EventHandler(this.buttonItemHide_Click);
 			// 
+			// buttonXBack
 			// 
+			this.buttonXBack.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXBack.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXBack.FocusCuesEnabled = false;
+			this.buttonXBack.Location = new System.Drawing.Point(5, 5);
+			this.buttonXBack.Name = "buttonXBack";
+			this.buttonXBack.Size = new System.Drawing.Size(255, 106);
+			this.buttonXBack.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXBack.TabIndex = 0;
+			this.buttonXBack.Click += new System.EventHandler(this.buttonItemBack_Click);
 			// 
-			this.ribbonBarBack.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			// pnMain
 			// 
+			this.pnMain.BackColor = System.Drawing.Color.White;
+			this.pnMain.Controls.Add(this.buttonXBack);
+			this.pnMain.Controls.Add(this.buttonXHide);
+			this.pnMain.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.pnMain.Location = new System.Drawing.Point(1, 24);
+			this.pnMain.Name = "pnMain";
+			this.pnMain.Size = new System.Drawing.Size(341, 117);
+			this.pnMain.TabIndex = 2;
 			// 
+			// pnBorder
 			// 
-			this.ribbonBarBack.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			this.ribbonBarBack.ContainerControlProcessDialogKey = true;
-			this.ribbonBarBack.Dock = System.Windows.Forms.DockStyle.Left;
-			this.ribbonBarBack.HorizontalItemAlignment = DevComponents.DotNetBar.eHorizontalItemsAlignment.Center;
-			this.ribbonBarBack.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.buttonItemBack});
-			this.ribbonBarBack.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-			this.ribbonBarBack.Location = new System.Drawing.Point(0, 0);
-			this.ribbonBarBack.Name = "ribbonBarBack";
-			this.ribbonBarBack.Size = new System.Drawing.Size(223, 107);
-			this.ribbonBarBack.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.ribbonBarBack.TabIndex = 1;
-			this.ribbonBarBack.Text = "Back";
+			this.pnBorder.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(87)))), ((int)(((byte)(154)))));
+			this.pnBorder.Controls.Add(this.pnMain);
+			this.pnBorder.Controls.Add(this.labelCaption);
+			this.pnBorder.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.pnBorder.Location = new System.Drawing.Point(0, 0);
+			this.pnBorder.Name = "pnBorder";
+			this.pnBorder.Padding = new System.Windows.Forms.Padding(1);
+			this.pnBorder.Size = new System.Drawing.Size(343, 142);
+			this.pnBorder.TabIndex = 3;
 			// 
+			// labelCaption
 			// 
-			// 
-			this.ribbonBarBack.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// 
-			// 
-			this.ribbonBarBack.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			this.ribbonBarBack.VerticalItemAlignment = DevComponents.DotNetBar.eVerticalItemsAlignment.Middle;
-			// 
-			// buttonItemBack
-			// 
-			this.buttonItemBack.Name = "buttonItemBack";
-			this.buttonItemBack.SubItemsExpandWidth = 14;
-			this.buttonItemBack.Text = "buttonItem1";
-			this.buttonItemBack.Click += new System.EventHandler(this.buttonItemBack_Click);
-			// 
-			// ribbonBarHide
-			// 
-			this.ribbonBarHide.AutoOverflowEnabled = true;
-			// 
-			// 
-			// 
-			this.ribbonBarHide.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// 
-			// 
-			this.ribbonBarHide.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			this.ribbonBarHide.ContainerControlProcessDialogKey = true;
-			this.ribbonBarHide.Dock = System.Windows.Forms.DockStyle.Right;
-			this.ribbonBarHide.HorizontalItemAlignment = DevComponents.DotNetBar.eHorizontalItemsAlignment.Center;
-			this.ribbonBarHide.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.buttonItemHide});
-			this.ribbonBarHide.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-			this.ribbonBarHide.Location = new System.Drawing.Point(223, 0);
-			this.ribbonBarHide.Name = "ribbonBarHide";
-			this.ribbonBarHide.Size = new System.Drawing.Size(91, 107);
-			this.ribbonBarHide.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.ribbonBarHide.TabIndex = 2;
-			this.ribbonBarHide.Text = "Hide";
-			// 
-			// 
-			// 
-			this.ribbonBarHide.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// 
-			// 
-			this.ribbonBarHide.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			this.ribbonBarHide.VerticalItemAlignment = DevComponents.DotNetBar.eVerticalItemsAlignment.Middle;
-			// 
-			// buttonItemHide
-			// 
-			this.buttonItemHide.Image = global::OvernightsCalendarViewer.Properties.Resources.FloaterHide;
-			this.buttonItemHide.Name = "buttonItemHide";
-			this.buttonItemHide.SubItemsExpandWidth = 14;
-			this.buttonItemHide.Text = "buttonItem1";
-			this.buttonItemHide.Click += new System.EventHandler(this.buttonItemHide_Click);
+			this.labelCaption.BackColor = System.Drawing.Color.White;
+			this.labelCaption.Dock = System.Windows.Forms.DockStyle.Top;
+			this.labelCaption.ForeColor = System.Drawing.Color.DimGray;
+			this.labelCaption.Location = new System.Drawing.Point(1, 1);
+			this.labelCaption.Name = "labelCaption";
+			this.labelCaption.Size = new System.Drawing.Size(341, 23);
+			this.labelCaption.TabIndex = 3;
+			this.labelCaption.Text = "labelCaption";
+			this.labelCaption.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.labelCaption.MouseDown += new System.Windows.Forms.MouseEventHandler(this.labelCaption_MouseDown);
 			// 
 			// FormFloater
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-			this.ClientSize = new System.Drawing.Size(314, 107);
-			this.Controls.Add(this.ribbonBarHide);
-			this.Controls.Add(this.ribbonBarBack);
-			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+			this.ClientSize = new System.Drawing.Size(343, 142);
+			this.ControlBox = false;
+			this.Controls.Add(this.pnBorder);
+			this.DoubleBuffered = true;
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+			this.MaximizeBox = false;
+			this.MinimizeBox = false;
 			this.Name = "FormFloater";
 			this.Opacity = 0.85D;
 			this.ShowIcon = false;
 			this.ShowInTaskbar = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-			this.Text = "FormFloater";
+			this.Text = "adSALESapps.com";
 			this.TopMost = true;
+			this.pnMain.ResumeLayout(false);
+			this.pnBorder.ResumeLayout(false);
 			this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private DevComponents.DotNetBar.StyleManager styleManager;
-        private DevComponents.DotNetBar.RibbonBar ribbonBarBack;
-		private DevComponents.DotNetBar.ButtonItem buttonItemBack;
-        private DevComponents.DotNetBar.RibbonBar ribbonBarHide;
-        private DevComponents.DotNetBar.ButtonItem buttonItemHide;
+		public DevComponents.DotNetBar.SuperTooltip superTooltip;
+		private DevComponents.DotNetBar.ButtonX buttonXBack;
+		private DevComponents.DotNetBar.ButtonX buttonXHide;
+		private System.Windows.Forms.Panel pnMain;
+		private System.Windows.Forms.Panel pnBorder;
+		private System.Windows.Forms.Label labelCaption;
 
     }
 }

@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using DevComponents.DotNetBar.Metro;
 
 namespace SalesDepot.ToolForms.Gallery
 {
-	public partial class FormAddFavoriteImage : Form
+	public partial class FormAddFavoriteImage : MetroForm
 	{
 		private readonly List<string> _existedNames = new List<string>();
 

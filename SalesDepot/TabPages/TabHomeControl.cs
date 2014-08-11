@@ -19,7 +19,6 @@ using SalesDepot.CoreObjects.ToolClasses;
 using SalesDepot.InteropClasses;
 using SalesDepot.PresentationClasses.WallBin.Decorators;
 using SalesDepot.ToolForms;
-using SalesDepot.ToolForms.Settings;
 using SalesDepot.ToolForms.WallBin;
 
 namespace SalesDepot.TabPages
@@ -71,49 +70,6 @@ namespace SalesDepot.TabPages
 			FormMain.Instance.buttonItemHomeHelp.Click += buttonItemHomeHelp_Click;
 
 			barCheckItemViewTabs.CheckedChanged += buttonItemSettingsMultitab_CheckedChanged;
-			FormMain.Instance.buttonItemSettingsPowerPointLaunch.Click += buttonItemSettingsPowerPointSettings_Click;
-			FormMain.Instance.buttonItemSettingsPowerPointMenu.Click += buttonItemSettingsPowerPointSettings_Click;
-			FormMain.Instance.buttonItemSettingsPowerPointViewer.Click += buttonItemSettingsPowerPointSettings_Click;
-			FormMain.Instance.buttonItemSettingsPowerPointLaunch.CheckedChanged += buttonItemSettingsPowerPointSettings_CheckedChanged;
-			FormMain.Instance.buttonItemSettingsPowerPointMenu.CheckedChanged += buttonItemSettingsPowerPointSettings_CheckedChanged;
-			FormMain.Instance.buttonItemSettingsPowerPointViewer.CheckedChanged += buttonItemSettingsPowerPointSettings_CheckedChanged;
-			FormMain.Instance.buttonItemSettingsPDFLaunch.Click += buttonItemSettingsPDFSettings_Click;
-			FormMain.Instance.buttonItemSettingsPDFMenu.Click += buttonItemSettingsPDFSettings_Click;
-			FormMain.Instance.buttonItemSettingsPDFViewer.Click += buttonItemSettingsPDFSettings_Click;
-			FormMain.Instance.buttonItemSettingsPDFLaunch.CheckedChanged += buttonItemSettingsPDFSettings_CheckedChanged;
-			FormMain.Instance.buttonItemSettingsPDFMenu.CheckedChanged += buttonItemSettingsPDFSettings_CheckedChanged;
-			FormMain.Instance.buttonItemSettingsPDFViewer.CheckedChanged += buttonItemSettingsPDFSettings_CheckedChanged;
-			FormMain.Instance.buttonItemSettingsWordLaunch.Click += buttonItemSettingsWordSettings_Click;
-			FormMain.Instance.buttonItemSettingsWordMenu.Click += buttonItemSettingsWordSettings_Click;
-			FormMain.Instance.buttonItemSettingsWordViewer.Click += buttonItemSettingsWordSettings_Click;
-			FormMain.Instance.buttonItemSettingsWordLaunch.CheckedChanged += buttonItemSettingsWordSettings_CheckedChanged;
-			FormMain.Instance.buttonItemSettingsWordMenu.CheckedChanged += buttonItemSettingsWordSettings_CheckedChanged;
-			FormMain.Instance.buttonItemSettingsWordViewer.CheckedChanged += buttonItemSettingsWordSettings_CheckedChanged;
-			FormMain.Instance.buttonItemSettingsExcelLaunch.Click += buttonItemSettingsExcelSettings_Click;
-			FormMain.Instance.buttonItemSettingsExcelMenu.Click += buttonItemSettingsExcelSettings_Click;
-			FormMain.Instance.buttonItemSettingsExcelViewer.Click += buttonItemSettingsExcelSettings_Click;
-			FormMain.Instance.buttonItemSettingsExcelLaunch.CheckedChanged += buttonItemSettingsExcelSettings_CheckedChanged;
-			FormMain.Instance.buttonItemSettingsExcelMenu.CheckedChanged += buttonItemSettingsExcelSettings_CheckedChanged;
-			FormMain.Instance.buttonItemSettingsExcelViewer.CheckedChanged += buttonItemSettingsExcelSettings_CheckedChanged;
-			FormMain.Instance.buttonItemSettingsVideoLaunch.Click += buttonItemSettingsVideoSettings_Click;
-			FormMain.Instance.buttonItemSettingsVideoMenu.Click += buttonItemSettingsVideoSettings_Click;
-			FormMain.Instance.buttonItemSettingsVideoViewer.Click += buttonItemSettingsVideoSettings_Click;
-			FormMain.Instance.buttonItemSettingsVideoLaunch.CheckedChanged += buttonItemSettingsVideoSettings_CheckedChanged;
-			FormMain.Instance.buttonItemSettingsVideoMenu.CheckedChanged += buttonItemSettingsVideoSettings_CheckedChanged;
-			FormMain.Instance.buttonItemSettingsVideoViewer.CheckedChanged += buttonItemSettingsVideoSettings_CheckedChanged;
-			FormMain.Instance.buttonItemSettingsFolderLaunch.Click += buttonItemSettingsFolderSettings_Click;
-			FormMain.Instance.buttonItemSettingsFolderMenu.Click += buttonItemSettingsFolderSettings_Click;
-			FormMain.Instance.buttonItemSettingsFolderViewer.Click += buttonItemSettingsFolderSettings_Click;
-			FormMain.Instance.buttonItemSettingsFolderLaunch.CheckedChanged += buttonItemSettingsFolderSettings_CheckedChanged;
-			FormMain.Instance.buttonItemSettingsFolderMenu.CheckedChanged += buttonItemSettingsFolderSettings_CheckedChanged;
-			FormMain.Instance.buttonItemSettingsFolderViewer.CheckedChanged += buttonItemSettingsFolderSettings_CheckedChanged;
-			FormMain.Instance.buttonItemSettingsQuickViewImages.Click += buttonItemSettingsQuickView_Click;
-			FormMain.Instance.buttonItemSettingsQuickViewSlides.Click += buttonItemSettingsQuickView_Click;
-			FormMain.Instance.buttonItemSettingsQuickViewImages.CheckedChanged += buttonItemSettingsQuickViewSettings_CheckedChanged;
-			FormMain.Instance.buttonItemSettingsQuickViewSlides.CheckedChanged += buttonItemSettingsQuickViewSettings_CheckedChanged;
-			FormMain.Instance.buttonItemSettingsFile.Click += buttonItemSettingsFile_Click;
-			FormMain.Instance.buttonItemSettingsEmail.Click += buttonItemSettingsEmail_Click;
-			FormMain.Instance.buttonItemSettingsHelp.Click += buttonItemSettingsHelp_Click;
 
 			LoadWallBinSettings();
 			UpdateFontButtonStatus();
@@ -122,6 +78,7 @@ namespace SalesDepot.TabPages
 
 		public void ShowTab()
 		{
+			LoadEmailBinOptions();
 			IsActive = true;
 			BringToFront();
 			AppManager.Instance.ActivityManager.AddUserActivity("Wall Bin selected");
@@ -159,80 +116,6 @@ namespace SalesDepot.TabPages
 
 			#region Wall Bin Configuration
 			barCheckItemViewTabs.Checked = SettingsManager.Instance.MultitabView;
-			switch (SettingsManager.Instance.PowerPointLaunchOptions)
-			{
-				case LinkLaunchOptions.Viewer:
-					FormMain.Instance.buttonItemSettingsPowerPointViewer.Checked = true;
-					break;
-				case LinkLaunchOptions.Menu:
-					FormMain.Instance.buttonItemSettingsPowerPointMenu.Checked = true;
-					break;
-				case LinkLaunchOptions.Launch:
-					FormMain.Instance.buttonItemSettingsPowerPointLaunch.Checked = true;
-					break;
-			}
-			switch (SettingsManager.Instance.PDFLaunchOptions)
-			{
-				case LinkLaunchOptions.Viewer:
-					FormMain.Instance.buttonItemSettingsPDFViewer.Checked = true;
-					break;
-				case LinkLaunchOptions.Menu:
-					FormMain.Instance.buttonItemSettingsPDFMenu.Checked = true;
-					break;
-				case LinkLaunchOptions.Launch:
-					FormMain.Instance.buttonItemSettingsPDFLaunch.Checked = true;
-					break;
-			}
-			switch (SettingsManager.Instance.WordLaunchOptions)
-			{
-				case LinkLaunchOptions.Viewer:
-					FormMain.Instance.buttonItemSettingsWordViewer.Checked = true;
-					break;
-				case LinkLaunchOptions.Menu:
-					FormMain.Instance.buttonItemSettingsWordMenu.Checked = true;
-					break;
-				case LinkLaunchOptions.Launch:
-					FormMain.Instance.buttonItemSettingsWordLaunch.Checked = true;
-					break;
-			}
-			switch (SettingsManager.Instance.ExcelLaunchOptions)
-			{
-				case LinkLaunchOptions.Viewer:
-					FormMain.Instance.buttonItemSettingsExcelViewer.Checked = true;
-					break;
-				case LinkLaunchOptions.Menu:
-					FormMain.Instance.buttonItemSettingsExcelMenu.Checked = true;
-					break;
-				case LinkLaunchOptions.Launch:
-					FormMain.Instance.buttonItemSettingsExcelLaunch.Checked = true;
-					break;
-			}
-			switch (SettingsManager.Instance.VideoLaunchOptions)
-			{
-				case LinkLaunchOptions.Viewer:
-					FormMain.Instance.buttonItemSettingsVideoViewer.Checked = true;
-					break;
-				case LinkLaunchOptions.Menu:
-					FormMain.Instance.buttonItemSettingsVideoMenu.Checked = true;
-					break;
-				case LinkLaunchOptions.Launch:
-					FormMain.Instance.buttonItemSettingsVideoLaunch.Checked = true;
-					break;
-			}
-			switch (SettingsManager.Instance.FolderLaunchOptions)
-			{
-				case LinkLaunchOptions.Viewer:
-					FormMain.Instance.buttonItemSettingsFolderViewer.Checked = true;
-					break;
-				case LinkLaunchOptions.Menu:
-					FormMain.Instance.buttonItemSettingsFolderMenu.Checked = true;
-					break;
-				case LinkLaunchOptions.Launch:
-					FormMain.Instance.buttonItemSettingsFolderLaunch.Checked = true;
-					break;
-			}
-			FormMain.Instance.buttonItemSettingsQuickViewImages.Checked = !SettingsManager.Instance.OldStyleQuickView;
-			FormMain.Instance.buttonItemSettingsQuickViewSlides.Checked = SettingsManager.Instance.OldStyleQuickView;
 			#endregion
 		}
 
@@ -335,8 +218,6 @@ namespace SalesDepot.TabPages
 				if (DecoratorManager.Instance.ActivePackageViewer.SelectedLibrary != null && !DecoratorManager.Instance.ActivePackageViewer.SelectedLibrary.Library.UseDirectAccess)
 				{
 					FormMain.Instance.TabHome.barCheckItemViewTabs.Enabled = true;
-					FormMain.Instance.buttonItemSettingsQuickViewImages.Enabled = true;
-
 					FormMain.Instance.comboBoxItemStations.Visible = FormMain.Instance.comboBoxItemStations.Items.Count > 1;
 					FormMain.Instance.comboBoxItemPages.Visible = true;
 					FormMain.Instance.ribbonBarStations.RecalcLayout();
@@ -345,9 +226,6 @@ namespace SalesDepot.TabPages
 				{
 					FormMain.Instance.TabHome.barCheckItemViewTabs.Enabled = false;
 					FormMain.Instance.TabHome.barCheckItemViewTabs.Enabled = false;
-					FormMain.Instance.buttonItemSettingsQuickViewImages.Enabled = false;
-					FormMain.Instance.buttonItemSettingsQuickViewImages.Checked = false;
-					FormMain.Instance.buttonItemSettingsQuickViewSlides.Checked = true;
 					SettingsManager.Instance.OldStyleQuickView = true;
 					SettingsManager.Instance.SaveSettings();
 
@@ -414,195 +292,12 @@ namespace SalesDepot.TabPages
 		#region Settings Button's Click Event Handlers
 		public void buttonItemSettingsMultitab_CheckedChanged(object sender, EventArgs e)
 		{
-			if (_allowToSave)
-			{
-				SettingsManager.Instance.MultitabView = barCheckItemViewTabs.Checked;
-				SettingsManager.Instance.SaveSettings();
-				pnEmpty.BringToFront();
-				StationChanged(FormMain.Instance.comboBoxItemStations);
-				pnMain.BringToFront();
-			}
-		}
-
-		public void buttonItemSettingsPowerPointSettings_Click(object sender, EventArgs e)
-		{
-			_allowToSave = false;
-			FormMain.Instance.buttonItemSettingsPowerPointViewer.Checked = false;
-			FormMain.Instance.buttonItemSettingsPowerPointMenu.Checked = false;
-			FormMain.Instance.buttonItemSettingsPowerPointLaunch.Checked = false;
-			_allowToSave = true;
-			(sender as ButtonItem).Checked = true;
-		}
-
-		public void buttonItemSettingsPowerPointSettings_CheckedChanged(object sender, EventArgs e)
-		{
-			if (_allowToSave)
-			{
-				if (FormMain.Instance.buttonItemSettingsPowerPointViewer.Checked)
-					SettingsManager.Instance.PowerPointLaunchOptions = LinkLaunchOptions.Viewer;
-				else if (FormMain.Instance.buttonItemSettingsPowerPointMenu.Checked)
-					SettingsManager.Instance.PowerPointLaunchOptions = LinkLaunchOptions.Menu;
-				else if (FormMain.Instance.buttonItemSettingsPowerPointLaunch.Checked)
-					SettingsManager.Instance.PowerPointLaunchOptions = LinkLaunchOptions.Launch;
-				SettingsManager.Instance.SaveSettings();
-			}
-		}
-
-		public void buttonItemSettingsPDFSettings_Click(object sender, EventArgs e)
-		{
-			_allowToSave = false;
-			FormMain.Instance.buttonItemSettingsPDFViewer.Checked = false;
-			FormMain.Instance.buttonItemSettingsPDFMenu.Checked = false;
-			FormMain.Instance.buttonItemSettingsPDFLaunch.Checked = false;
-			_allowToSave = true;
-			(sender as ButtonItem).Checked = true;
-		}
-
-		public void buttonItemSettingsPDFSettings_CheckedChanged(object sender, EventArgs e)
-		{
-			if (_allowToSave)
-			{
-				if (FormMain.Instance.buttonItemSettingsPDFViewer.Checked)
-					SettingsManager.Instance.PDFLaunchOptions = LinkLaunchOptions.Viewer;
-				else if (FormMain.Instance.buttonItemSettingsPDFMenu.Checked)
-					SettingsManager.Instance.PDFLaunchOptions = LinkLaunchOptions.Menu;
-				else if (FormMain.Instance.buttonItemSettingsPDFLaunch.Checked)
-					SettingsManager.Instance.PDFLaunchOptions = LinkLaunchOptions.Launch;
-				SettingsManager.Instance.SaveSettings();
-			}
-		}
-
-		public void buttonItemSettingsWordSettings_Click(object sender, EventArgs e)
-		{
-			_allowToSave = false;
-			FormMain.Instance.buttonItemSettingsWordViewer.Checked = false;
-			FormMain.Instance.buttonItemSettingsWordMenu.Checked = false;
-			FormMain.Instance.buttonItemSettingsWordLaunch.Checked = false;
-			_allowToSave = true;
-			(sender as ButtonItem).Checked = true;
-		}
-
-		public void buttonItemSettingsWordSettings_CheckedChanged(object sender, EventArgs e)
-		{
-			if (_allowToSave)
-			{
-				if (FormMain.Instance.buttonItemSettingsWordViewer.Checked)
-					SettingsManager.Instance.WordLaunchOptions = LinkLaunchOptions.Viewer;
-				else if (FormMain.Instance.buttonItemSettingsWordMenu.Checked)
-					SettingsManager.Instance.WordLaunchOptions = LinkLaunchOptions.Menu;
-				else if (FormMain.Instance.buttonItemSettingsWordLaunch.Checked)
-					SettingsManager.Instance.WordLaunchOptions = LinkLaunchOptions.Launch;
-				SettingsManager.Instance.SaveSettings();
-			}
-		}
-
-		public void buttonItemSettingsExcelSettings_Click(object sender, EventArgs e)
-		{
-			_allowToSave = false;
-			FormMain.Instance.buttonItemSettingsExcelViewer.Checked = false;
-			FormMain.Instance.buttonItemSettingsExcelMenu.Checked = false;
-			FormMain.Instance.buttonItemSettingsExcelLaunch.Checked = false;
-			_allowToSave = true;
-			(sender as ButtonItem).Checked = true;
-		}
-
-		public void buttonItemSettingsExcelSettings_CheckedChanged(object sender, EventArgs e)
-		{
-			if (_allowToSave)
-			{
-				if (FormMain.Instance.buttonItemSettingsExcelViewer.Checked)
-					SettingsManager.Instance.ExcelLaunchOptions = LinkLaunchOptions.Viewer;
-				else if (FormMain.Instance.buttonItemSettingsExcelMenu.Checked)
-					SettingsManager.Instance.ExcelLaunchOptions = LinkLaunchOptions.Menu;
-				else if (FormMain.Instance.buttonItemSettingsExcelLaunch.Checked)
-					SettingsManager.Instance.ExcelLaunchOptions = LinkLaunchOptions.Launch;
-				SettingsManager.Instance.SaveSettings();
-			}
-		}
-
-		public void buttonItemSettingsVideoSettings_Click(object sender, EventArgs e)
-		{
-			_allowToSave = false;
-			FormMain.Instance.buttonItemSettingsVideoViewer.Checked = false;
-			FormMain.Instance.buttonItemSettingsVideoMenu.Checked = false;
-			FormMain.Instance.buttonItemSettingsVideoLaunch.Checked = false;
-			_allowToSave = true;
-			(sender as ButtonItem).Checked = true;
-		}
-
-		public void buttonItemSettingsVideoSettings_CheckedChanged(object sender, EventArgs e)
-		{
-			if (_allowToSave)
-			{
-				if (FormMain.Instance.buttonItemSettingsVideoViewer.Checked)
-					SettingsManager.Instance.VideoLaunchOptions = LinkLaunchOptions.Viewer;
-				else if (FormMain.Instance.buttonItemSettingsVideoMenu.Checked)
-					SettingsManager.Instance.VideoLaunchOptions = LinkLaunchOptions.Menu;
-				else if (FormMain.Instance.buttonItemSettingsVideoLaunch.Checked)
-					SettingsManager.Instance.VideoLaunchOptions = LinkLaunchOptions.Launch;
-				SettingsManager.Instance.SaveSettings();
-			}
-		}
-
-		public void buttonItemSettingsFolderSettings_Click(object sender, EventArgs e)
-		{
-			_allowToSave = false;
-			FormMain.Instance.buttonItemSettingsFolderViewer.Checked = false;
-			FormMain.Instance.buttonItemSettingsFolderMenu.Checked = false;
-			FormMain.Instance.buttonItemSettingsFolderLaunch.Checked = false;
-			_allowToSave = true;
-			(sender as ButtonItem).Checked = true;
-		}
-
-		public void buttonItemSettingsFolderSettings_CheckedChanged(object sender, EventArgs e)
-		{
-			if (_allowToSave)
-			{
-				if (FormMain.Instance.buttonItemSettingsFolderViewer.Checked)
-					SettingsManager.Instance.FolderLaunchOptions = LinkLaunchOptions.Viewer;
-				else if (FormMain.Instance.buttonItemSettingsFolderMenu.Checked)
-					SettingsManager.Instance.FolderLaunchOptions = LinkLaunchOptions.Menu;
-				else if (FormMain.Instance.buttonItemSettingsFolderLaunch.Checked)
-					SettingsManager.Instance.FolderLaunchOptions = LinkLaunchOptions.Launch;
-				SettingsManager.Instance.SaveSettings();
-			}
-		}
-
-		public void buttonItemSettingsQuickView_Click(object sender, EventArgs e)
-		{
-			_allowToSave = false;
-			FormMain.Instance.buttonItemSettingsQuickViewImages.Checked = false;
-			FormMain.Instance.buttonItemSettingsQuickViewSlides.Checked = false;
-			_allowToSave = true;
-			(sender as ButtonItem).Checked = true;
-		}
-
-		public void buttonItemSettingsQuickViewSettings_CheckedChanged(object sender, EventArgs e)
-		{
-			if (_allowToSave)
-			{
-				SettingsManager.Instance.OldStyleQuickView = FormMain.Instance.buttonItemSettingsQuickViewSlides.Checked;
-				SettingsManager.Instance.SaveSettings();
-			}
-		}
-
-		public void buttonItemSettingsFile_Click(object sender, EventArgs e)
-		{
-			SettingsManager.Instance.FileLocationSettings();
-		}
-
-		public void buttonItemSettingsEmail_Click(object sender, EventArgs e)
-		{
-			using (var form = new FormEmailSettings())
-			{
-				form.ShowDialog();
-				LoadEmailBinOptions();
-			}
-		}
-
-		public void buttonItemSettingsHelp_Click(object sender, EventArgs e)
-		{
-			HelpManager.Instance.OpenHelpLink("settings");
+			if (!_allowToSave) return;
+			SettingsManager.Instance.MultitabView = barCheckItemViewTabs.Checked;
+			SettingsManager.Instance.SaveSettings();
+			pnEmpty.BringToFront();
+			StationChanged(FormMain.Instance.comboBoxItemStations);
+			pnMain.BringToFront();
 		}
 		#endregion
 		#endregion
@@ -714,10 +409,10 @@ namespace SalesDepot.TabPages
 		private void LoadEmailBinOptions()
 		{
 			FormMain.Instance.ribbonBarEmailBin.Enabled = (SettingsManager.Instance.EmailButtons & EmailButtonsDisplayOptions.DisplayEmailBin) == EmailButtonsDisplayOptions.DisplayEmailBin;
-			FormMain.Instance.buttonItemEmailBin.Checked = (SettingsManager.Instance.EmailButtons & EmailButtonsDisplayOptions.DisplayEmailBin) == EmailButtonsDisplayOptions.DisplayEmailBin ? SettingsManager.Instance.ShowEmailBin : false;
-			buttonXPDF.Enabled = PowerPointHelper.Instance.PowerPointObject != null ? SettingsManager.Instance.EnablePdfConverting : false;
+			FormMain.Instance.buttonItemEmailBin.Checked = (SettingsManager.Instance.EmailButtons & EmailButtonsDisplayOptions.DisplayEmailBin) == EmailButtonsDisplayOptions.DisplayEmailBin && SettingsManager.Instance.ShowEmailBin;
+			buttonXPDF.Enabled = PowerPointHelper.Instance.PowerPointObject != null && SettingsManager.Instance.EnablePdfConverting;
 			buttonXPDF.CheckedChanged -= ckConvertPDF_CheckedChanged;
-			buttonXPDF.Checked = SettingsManager.Instance.EnablePdfConverting ? SettingsManager.Instance.EmailBinSendAsPdf : false;
+			buttonXPDF.Checked = SettingsManager.Instance.EnablePdfConverting && SettingsManager.Instance.EmailBinSendAsPdf;
 			buttonXPDF.CheckedChanged += ckConvertPDF_CheckedChanged;
 			buttonXZip.CheckedChanged -= ckZip_CheckedChanged;
 			buttonXZip.Checked = SettingsManager.Instance.EmailBinSendAsZip;
@@ -897,16 +592,13 @@ namespace SalesDepot.TabPages
 					{
 						form.laProgress.Text = string.Format("Loading {0}...", DecoratorManager.Instance.ActivePackageViewer != null ? DecoratorManager.Instance.ActivePackageViewer.Name : "Library");
 						form.TopMost = true;
-						var thread = new Thread(delegate()
-													{
-														FormMain.Instance.Invoke((MethodInvoker)delegate()
-																									{
-																										FormMain.Instance.TabSearch.ClearSolutionControl();
-																										Application.DoEvents();
-																										ApplySelectedDecorator();
-																										Application.DoEvents();
-																									});
-													});
+						var thread = new Thread(() => FormMain.Instance.Invoke((MethodInvoker)delegate()
+						{
+							FormMain.Instance.TabSearch.ClearSolutionControl();
+							Application.DoEvents();
+							ApplySelectedDecorator();
+							Application.DoEvents();
+						}));
 						form.Show();
 						Application.DoEvents();
 						thread.Start();
@@ -929,18 +621,15 @@ namespace SalesDepot.TabPages
 				{
 					form.laProgress.Text = string.Format("Loading {0}...", DecoratorManager.Instance.ActivePackageViewer != null ? DecoratorManager.Instance.ActivePackageViewer.Name : "Library");
 					form.TopMost = true;
-					var thread = new Thread(delegate()
-												{
-													FormMain.Instance.Invoke((MethodInvoker)delegate()
-																								{
-																									pnEmpty.BringToFront();
-																									Application.DoEvents();
-																									StationChanged(sender);
-																									Application.DoEvents();
-																									pnMain.BringToFront();
-																									Application.DoEvents();
-																								});
-												});
+					var thread = new Thread(() => FormMain.Instance.Invoke((MethodInvoker)delegate()
+					{
+						pnEmpty.BringToFront();
+						Application.DoEvents();
+						StationChanged(sender);
+						Application.DoEvents();
+						pnMain.BringToFront();
+						Application.DoEvents();
+					}));
 					form.Show();
 					Application.DoEvents();
 					thread.Start();
@@ -957,18 +646,15 @@ namespace SalesDepot.TabPages
 			{
 				form.laProgress.Text = "Loading Page...";
 				form.TopMost = true;
-				var thread = new Thread(delegate()
-											{
-												FormMain.Instance.Invoke((MethodInvoker)delegate()
-																							{
-																								pnEmpty.BringToFront();
-																								Application.DoEvents();
-																								PageChanged(sender);
-																								Application.DoEvents();
-																								pnMain.BringToFront();
-																								Application.DoEvents();
-																							});
-											});
+				var thread = new Thread(() => FormMain.Instance.Invoke((MethodInvoker)delegate()
+				{
+					pnEmpty.BringToFront();
+					Application.DoEvents();
+					PageChanged(sender);
+					Application.DoEvents();
+					pnMain.BringToFront();
+					Application.DoEvents();
+				}));
 				form.Show();
 				Application.DoEvents();
 				thread.Start();

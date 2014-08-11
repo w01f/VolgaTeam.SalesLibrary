@@ -41,6 +41,8 @@
 			// 
 			this.laTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+			this.laTitle.BackColor = System.Drawing.Color.White;
+			this.laTitle.ForeColor = System.Drawing.Color.Black;
 			this.laTitle.Location = new System.Drawing.Point(12, 12);
 			this.laTitle.Name = "laTitle";
 			this.laTitle.Size = new System.Drawing.Size(360, 41);
@@ -56,6 +58,7 @@
 			this.buttonXOK.Location = new System.Drawing.Point(90, 373);
 			this.buttonXOK.Name = "buttonXOK";
 			this.buttonXOK.Size = new System.Drawing.Size(92, 32);
+			this.buttonXOK.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXOK.TabIndex = 1;
 			this.buttonXOK.Text = "OK";
 			this.buttonXOK.TextColor = System.Drawing.Color.Black;
@@ -69,6 +72,7 @@
 			this.buttonXCancel.Location = new System.Drawing.Point(202, 373);
 			this.buttonXCancel.Name = "buttonXCancel";
 			this.buttonXCancel.Size = new System.Drawing.Size(92, 32);
+			this.buttonXCancel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXCancel.TabIndex = 2;
 			this.buttonXCancel.Text = "Cancel";
 			this.buttonXCancel.TextColor = System.Drawing.Color.Black;
@@ -79,8 +83,12 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.textEditImageName.Location = new System.Drawing.Point(15, 56);
 			this.textEditImageName.Name = "textEditImageName";
+			this.textEditImageName.Properties.Appearance.BackColor = System.Drawing.Color.White;
 			this.textEditImageName.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.textEditImageName.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.textEditImageName.Properties.Appearance.Options.UseBackColor = true;
 			this.textEditImageName.Properties.Appearance.Options.UseFont = true;
+			this.textEditImageName.Properties.Appearance.Options.UseForeColor = true;
 			this.textEditImageName.Properties.NullText = "Type name here..";
 			this.textEditImageName.Size = new System.Drawing.Size(357, 22);
 			this.textEditImageName.TabIndex = 0;
@@ -92,6 +100,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.pictureBoxImage.BackColor = System.Drawing.Color.White;
+			this.pictureBoxImage.ForeColor = System.Drawing.Color.Black;
 			this.pictureBoxImage.Location = new System.Drawing.Point(15, 84);
 			this.pictureBoxImage.Name = "pictureBoxImage";
 			this.pictureBoxImage.Size = new System.Drawing.Size(357, 269);
@@ -102,13 +111,14 @@
 			// FormAddFavoriteImage
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
+			this.BackColor = System.Drawing.Color.White;
 			this.ClientSize = new System.Drawing.Size(384, 411);
 			this.Controls.Add(this.pictureBoxImage);
 			this.Controls.Add(this.textEditImageName);
 			this.Controls.Add(this.buttonXCancel);
 			this.Controls.Add(this.buttonXOK);
 			this.Controls.Add(this.laTitle);
+			this.DoubleBuffered = true;
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.MaximizeBox = false;

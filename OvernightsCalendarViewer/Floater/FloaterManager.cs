@@ -20,13 +20,13 @@ namespace OvernightsCalendarViewer.Floater
 			get { return _instance; }
 		}
 
-		public void ShowFloater(Form sender, string ribbonText, Image logo, Action afterShow)
+		public void ShowFloater(Form sender, Image logo, Action afterShow)
 		{
 			var x = _floaterPositionX == Int32.MinValue ? FormMain.Instance.Left + FormMain.Instance.Width - 50 : _floaterPositionX;
 			var y = _floaterPositionY == Int32.MinValue ? FormMain.Instance.Top + 50 : _floaterPositionY;
 			foreach (var openForm in Application.OpenForms.OfType<Form>())
 				openForm.Opacity = 0;
-			using (var form = new FormFloater(x, y, logo, ribbonText))
+			using (var form = new FormFloater(x, y, logo))
 			{
 				form.Shown += (o, e) =>
 				{
@@ -39,9 +39,7 @@ namespace OvernightsCalendarViewer.Floater
 				if (result == DialogResult.Yes)
 					AppManager.Instance.ActivateMainForm();
 				else
-				{
 					sender.WindowState = FormWindowState.Minimized;
-				}
 			}
 			foreach (Form openForm in Application.OpenForms)
 				openForm.Opacity = 1;
@@ -49,7 +47,7 @@ namespace OvernightsCalendarViewer.Floater
 
 		public void ShowFloater(Form sender, Action afterShow)
 		{
-			ShowFloater(sender, FormMain.Instance.FloaterText, FormMain.Instance.FloaterLogo, afterShow);
+			ShowFloater(sender, FormMain.Instance.FloaterLogo, afterShow);
 		}
 	}
 }

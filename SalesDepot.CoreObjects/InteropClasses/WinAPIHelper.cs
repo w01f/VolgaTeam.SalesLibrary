@@ -110,7 +110,6 @@ namespace SalesDepot.CoreObjects.InteropClasses
 	public class WinAPIHelper
 	{
 		#region Public constants
-
 		public const Byte BSF_IGNORECURRENTTASK = 2; //this ignores the current app Hex 2
 		public const Byte BSF_POSTMESSAGE = 16; //This posts the message Hex 10
 		public const Byte BSM_APPLICATIONS = 8; //This tells the windows message to just go to applications Hex 8
@@ -118,17 +117,10 @@ namespace SalesDepot.CoreObjects.InteropClasses
 
 		private const UInt32 SWP_NOSIZE = 0x0001;
 		private const UInt32 SWP_NOMOVE = 0x0002;
-		private const UInt32 SWP_NOZORDER = 0x0004;
-		private const UInt32 SWP_NOREDRAW = 0x0008;
-		private const UInt32 SWP_NOACTIVATE = 0x0010;
-		private const UInt32 SWP_FRAMECHANGED = 0x0020; /* The frame changed: send WM_NCCALCSIZE */
-		private const UInt32 SWP_SHOWWINDOW = 0x0040;
-		private const UInt32 SWP_HIDEWINDOW = 0x0080;
-		private const UInt32 SWP_NOCOPYBITS = 0x0100;
-		private const UInt32 SWP_NOOWNERZORDER = 0x0200; /* Don't do owner Z ordering */
-		private const UInt32 SWP_NOSENDCHANGING = 0x0400; /* Don't send WM_WINDOWPOSCHANGING */
 
 		public const UInt32 TOPMOST_FLAGS = SWP_NOMOVE | SWP_NOSIZE;
+
+		public const int DWMWA_TRANSITIONS_FORCEDISABLED = 3; /* Don't send WM_WINDOWPOSCHANGING */
 
 		public const int MAX_PATH = 260;
 		private static readonly IntPtr HWND_TOPMOST = new IntPtr(-1);
@@ -136,10 +128,11 @@ namespace SalesDepot.CoreObjects.InteropClasses
 		private static readonly IntPtr HWND_TOP = new IntPtr(0);
 		private static readonly IntPtr HWND_BOTTOM = new IntPtr(1);
 
+		public static readonly UInt32 WM_NCLBUTTONDOWN = 0xA1;
+		public static readonly IntPtr HTCAPTION = new IntPtr(0x2);
 		#endregion
 
 		#region API imports
-
 		[DllImport("USER32.DLL", EntryPoint = "BroadcastSystemMessageA", SetLastError = true,
 			CharSet = CharSet.Unicode, ExactSpelling = true,
 			CallingConvention = CallingConvention.StdCall)]
@@ -206,6 +199,18 @@ namespace SalesDepot.CoreObjects.InteropClasses
 
 		[DllImport("shlwapi.dll", CharSet = CharSet.Unicode, ExactSpelling = true)]
 		public static extern int StrCmpLogicalW(String x, String y);
+
+		[DllImport("dwmapi.dll")]
+		public static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, ref int attrValue, int attrSize);
+
+		[DllImport("user32.dll", CharSet = CharSet.Auto)]
+		public static extern int SendMessage(IntPtr hWnd, UInt32 Msg, IntPtr wParam, IntPtr lParam);
+
+		[DllImport("User32.dll")]
+		public static extern bool ReleaseCapture();
+
+		[DllImport("user32.dll")]
+		public static extern int SetParent(IntPtr wndChild, IntPtr wndNewParent);
 		#endregion
 
 		public static void MakeTopMost(IntPtr handle)

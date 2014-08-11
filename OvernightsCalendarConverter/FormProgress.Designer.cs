@@ -82,7 +82,6 @@
             this.panelEx.Padding = new System.Windows.Forms.Padding(0, 0, 0, 10);
             this.panelEx.Size = new System.Drawing.Size(305, 98);
             this.panelEx.Style.Alignment = System.Drawing.StringAlignment.Center;
-            this.panelEx.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
             this.panelEx.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
             this.panelEx.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
             this.panelEx.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;

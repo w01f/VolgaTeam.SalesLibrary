@@ -1,10 +1,11 @@
 ﻿using System.Windows.Forms;
+using DevComponents.DotNetBar.Metro;
 using SalesDepot.Services.TickerService;
 using SalesDepot.SiteManager.PresentationClasses.Ticker.LinkEditors;
 
 namespace SalesDepot.SiteManager.ToolForms
 {
-	public partial class FormEditTickerLink : Form
+	public partial class FormEditTickerLink : MetroForm
 	{
 		private ITickerEditor _editor;
 		public TickerLink Link { get; set; }

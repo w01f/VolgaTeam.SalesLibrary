@@ -29,15 +29,15 @@
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FileCardsEditor));
 			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FileCardsEditor));
 			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
 			this.laHeader = new System.Windows.Forms.Label();
 			this.pnMain = new System.Windows.Forms.Panel();
 			this.pnData = new System.Windows.Forms.Panel();
 			this.textEditFileCardTitle = new DevExpress.XtraEditors.TextEdit();
 			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
-			this.groupBoxFileCard = new System.Windows.Forms.GroupBox();
+			this.groupBoxFileCard = new DevExpress.XtraEditors.GroupControl();
 			this.checkBoxFileCardImportantInfo = new System.Windows.Forms.CheckBox();
 			this.buttonXImportantInfoAdd = new DevComponents.DotNetBar.ButtonX();
 			this.gridControlFileCardImportantInfo = new DevExpress.XtraGrid.GridControl();
@@ -68,6 +68,7 @@
 			this.pnData.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.textEditFileCardTitle.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.groupBoxFileCard)).BeginInit();
 			this.groupBoxFileCard.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.gridControlFileCardImportantInfo)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.gridViewFileCardImportantInfo)).BeginInit();
@@ -80,7 +81,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.spinEditFileCardPublishingClosed.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.spinEditFileCardDigitalClosed.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.spinEditFileCardBroadcastClosed.Properties)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.dateEditFileCardDateSold.Properties.VistaTimeProperties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.dateEditFileCardDateSold.Properties.CalendarTimeProperties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.dateEditFileCardDateSold.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditFileCardAdvertiser.Properties)).BeginInit();
 			this.pnButtons.SuspendLayout();
@@ -88,7 +89,6 @@
 			// 
 			// laHeader
 			// 
-			this.laHeader.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
 			this.laHeader.Dock = System.Windows.Forms.DockStyle.Top;
 			this.laHeader.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.laHeader.Location = new System.Drawing.Point(0, 0);
@@ -100,7 +100,6 @@
 			// 
 			// pnMain
 			// 
-			this.pnMain.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
 			this.pnMain.Controls.Add(this.pnData);
 			this.pnMain.Controls.Add(this.pnButtons);
 			this.pnMain.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -117,7 +116,7 @@
 			this.pnData.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.pnData.Location = new System.Drawing.Point(0, 47);
 			this.pnData.Name = "pnData";
-			this.pnData.Size = new System.Drawing.Size(346, 667);
+			this.pnData.Size = new System.Drawing.Size(350, 671);
 			this.pnData.TabIndex = 1;
 			// 
 			// textEditFileCardTitle
@@ -127,8 +126,10 @@
 			this.textEditFileCardTitle.Enabled = false;
 			this.textEditFileCardTitle.Location = new System.Drawing.Point(26, 10);
 			this.textEditFileCardTitle.Name = "textEditFileCardTitle";
+			this.textEditFileCardTitle.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
+			this.textEditFileCardTitle.Properties.Appearance.Options.UseBackColor = true;
 			this.textEditFileCardTitle.Properties.NullText = "Type here...";
-			this.textEditFileCardTitle.Size = new System.Drawing.Size(315, 22);
+			this.textEditFileCardTitle.Size = new System.Drawing.Size(319, 22);
 			this.textEditFileCardTitle.StyleController = this.styleController;
 			this.textEditFileCardTitle.TabIndex = 16;
 			this.textEditFileCardTitle.EditValueChanged += new System.EventHandler(this.EditValueChanged);
@@ -174,20 +175,21 @@
 			this.groupBoxFileCard.Enabled = false;
 			this.groupBoxFileCard.Location = new System.Drawing.Point(5, 38);
 			this.groupBoxFileCard.Name = "groupBoxFileCard";
-			this.groupBoxFileCard.Size = new System.Drawing.Size(335, 620);
+			this.groupBoxFileCard.ShowCaption = false;
+			this.groupBoxFileCard.Size = new System.Drawing.Size(339, 624);
 			this.groupBoxFileCard.TabIndex = 15;
-			this.groupBoxFileCard.TabStop = false;
 			// 
 			// checkBoxFileCardImportantInfo
 			// 
 			this.checkBoxFileCardImportantInfo.AutoSize = true;
+			this.checkBoxFileCardImportantInfo.BackColor = System.Drawing.Color.Transparent;
 			this.checkBoxFileCardImportantInfo.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.checkBoxFileCardImportantInfo.Location = new System.Drawing.Point(6, 341);
 			this.checkBoxFileCardImportantInfo.Name = "checkBoxFileCardImportantInfo";
 			this.checkBoxFileCardImportantInfo.Size = new System.Drawing.Size(135, 20);
 			this.checkBoxFileCardImportantInfo.TabIndex = 30;
 			this.checkBoxFileCardImportantInfo.Text = "G. Important Info...";
-			this.checkBoxFileCardImportantInfo.UseVisualStyleBackColor = true;
+			this.checkBoxFileCardImportantInfo.UseVisualStyleBackColor = false;
 			this.checkBoxFileCardImportantInfo.CheckedChanged += new System.EventHandler(this.checkBoxFileCardImportantInfo_CheckedChanged);
 			// 
 			// buttonXImportantInfoAdd
@@ -195,7 +197,8 @@
 			this.buttonXImportantInfoAdd.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
 			this.buttonXImportantInfoAdd.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXImportantInfoAdd.Enabled = false;
-			this.buttonXImportantInfoAdd.Image = global::FileManager.Properties.Resources.Green_Plus;
+			this.buttonXImportantInfoAdd.Image = global::FileManager.Properties.Resources.PlusButton;
+			this.buttonXImportantInfoAdd.ImageFixedSize = new System.Drawing.Size(24, 24);
 			this.buttonXImportantInfoAdd.Location = new System.Drawing.Point(6, 367);
 			this.buttonXImportantInfoAdd.Name = "buttonXImportantInfoAdd";
 			this.buttonXImportantInfoAdd.Size = new System.Drawing.Size(184, 35);
@@ -218,7 +221,7 @@
 			this.gridControlFileCardImportantInfo.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemMemoEditFileCardImportantInfo,
             this.repositoryItemButtonEditFileCardImportantInfo});
-			this.gridControlFileCardImportantInfo.Size = new System.Drawing.Size(323, 206);
+			this.gridControlFileCardImportantInfo.Size = new System.Drawing.Size(327, 210);
 			this.gridControlFileCardImportantInfo.TabIndex = 28;
 			this.gridControlFileCardImportantInfo.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewFileCardImportantInfo});
@@ -254,7 +257,7 @@
 			this.gridViewFileCardImportantInfo.OptionsView.ShowGroupExpandCollapseButtons = false;
 			this.gridViewFileCardImportantInfo.OptionsView.ShowGroupPanel = false;
 			this.gridViewFileCardImportantInfo.OptionsView.ShowIndicator = false;
-			this.gridViewFileCardImportantInfo.OptionsView.ShowPreviewLines = false;
+			this.gridViewFileCardImportantInfo.OptionsView.ShowPreviewRowLines = DevExpress.Utils.DefaultBoolean.False;
 			this.gridViewFileCardImportantInfo.RowHeight = 60;
 			// 
 			// gridColumnFileCardImportantInfoValue
@@ -297,7 +300,7 @@
 			// 
 			this.repositoryItemButtonEditFileCardImportantInfo.AutoHeight = false;
 			this.repositoryItemButtonEditFileCardImportantInfo.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("repositoryItemButtonEditFileCardImportantInfo.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::FileManager.Properties.Resources.DeleteButton, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true)});
 			this.repositoryItemButtonEditFileCardImportantInfo.Name = "repositoryItemButtonEditFileCardImportantInfo";
 			this.repositoryItemButtonEditFileCardImportantInfo.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
 			this.repositoryItemButtonEditFileCardImportantInfo.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.repositoryItemButtonEditFileCardImportantInfo_ButtonClick);
@@ -309,8 +312,10 @@
 			this.textEditFileCardSalesStation.Enabled = false;
 			this.textEditFileCardSalesStation.Location = new System.Drawing.Point(6, 302);
 			this.textEditFileCardSalesStation.Name = "textEditFileCardSalesStation";
+			this.textEditFileCardSalesStation.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
+			this.textEditFileCardSalesStation.Properties.Appearance.Options.UseBackColor = true;
 			this.textEditFileCardSalesStation.Properties.NullText = "Station or Newspaper...";
-			this.textEditFileCardSalesStation.Size = new System.Drawing.Size(323, 22);
+			this.textEditFileCardSalesStation.Size = new System.Drawing.Size(327, 22);
 			this.textEditFileCardSalesStation.StyleController = this.styleController;
 			this.textEditFileCardSalesStation.TabIndex = 27;
 			this.textEditFileCardSalesStation.EditValueChanged += new System.EventHandler(this.EditValueChanged);
@@ -322,8 +327,10 @@
 			this.textEditFileCardSalesPhone.Enabled = false;
 			this.textEditFileCardSalesPhone.Location = new System.Drawing.Point(6, 274);
 			this.textEditFileCardSalesPhone.Name = "textEditFileCardSalesPhone";
+			this.textEditFileCardSalesPhone.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
+			this.textEditFileCardSalesPhone.Properties.Appearance.Options.UseBackColor = true;
 			this.textEditFileCardSalesPhone.Properties.NullText = "Phone #";
-			this.textEditFileCardSalesPhone.Size = new System.Drawing.Size(323, 22);
+			this.textEditFileCardSalesPhone.Size = new System.Drawing.Size(327, 22);
 			this.textEditFileCardSalesPhone.StyleController = this.styleController;
 			this.textEditFileCardSalesPhone.TabIndex = 26;
 			this.textEditFileCardSalesPhone.EditValueChanged += new System.EventHandler(this.EditValueChanged);
@@ -335,10 +342,12 @@
 			this.textEditFileCardSalesEmail.Enabled = false;
 			this.textEditFileCardSalesEmail.Location = new System.Drawing.Point(6, 246);
 			this.textEditFileCardSalesEmail.Name = "textEditFileCardSalesEmail";
+			this.textEditFileCardSalesEmail.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
+			this.textEditFileCardSalesEmail.Properties.Appearance.Options.UseBackColor = true;
 			this.textEditFileCardSalesEmail.Properties.Mask.EditMask = "(\\w|[\\.\\-])+@(\\w|[\\-]+\\.)*(\\w|[\\-]){2,63}\\.[a-zA-Z]{2,4}";
 			this.textEditFileCardSalesEmail.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
 			this.textEditFileCardSalesEmail.Properties.NullText = "Email Address";
-			this.textEditFileCardSalesEmail.Size = new System.Drawing.Size(323, 22);
+			this.textEditFileCardSalesEmail.Size = new System.Drawing.Size(327, 22);
 			this.textEditFileCardSalesEmail.StyleController = this.styleController;
 			this.textEditFileCardSalesEmail.TabIndex = 25;
 			this.textEditFileCardSalesEmail.EditValueChanged += new System.EventHandler(this.EditValueChanged);
@@ -350,8 +359,10 @@
 			this.textEditFileCardSalesName.Enabled = false;
 			this.textEditFileCardSalesName.Location = new System.Drawing.Point(6, 218);
 			this.textEditFileCardSalesName.Name = "textEditFileCardSalesName";
+			this.textEditFileCardSalesName.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
+			this.textEditFileCardSalesName.Properties.Appearance.Options.UseBackColor = true;
 			this.textEditFileCardSalesName.Properties.NullText = "Name";
-			this.textEditFileCardSalesName.Size = new System.Drawing.Size(323, 22);
+			this.textEditFileCardSalesName.Size = new System.Drawing.Size(327, 22);
 			this.textEditFileCardSalesName.StyleController = this.styleController;
 			this.textEditFileCardSalesName.TabIndex = 24;
 			this.textEditFileCardSalesName.EditValueChanged += new System.EventHandler(this.EditValueChanged);
@@ -359,13 +370,14 @@
 			// checkBoxFileCardSalesInfo
 			// 
 			this.checkBoxFileCardSalesInfo.AutoSize = true;
+			this.checkBoxFileCardSalesInfo.BackColor = System.Drawing.Color.Transparent;
 			this.checkBoxFileCardSalesInfo.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.checkBoxFileCardSalesInfo.Location = new System.Drawing.Point(6, 192);
 			this.checkBoxFileCardSalesInfo.Name = "checkBoxFileCardSalesInfo";
 			this.checkBoxFileCardSalesInfo.Size = new System.Drawing.Size(326, 20);
 			this.checkBoxFileCardSalesInfo.TabIndex = 23;
 			this.checkBoxFileCardSalesInfo.Text = "F. Sales Contact Info to learn more about this File...";
-			this.checkBoxFileCardSalesInfo.UseVisualStyleBackColor = true;
+			this.checkBoxFileCardSalesInfo.UseVisualStyleBackColor = false;
 			this.checkBoxFileCardSalesInfo.CheckedChanged += new System.EventHandler(this.checkBoxFileCardSalesInfo_CheckedChanged);
 			// 
 			// spinEditFileCardPublishingClosed
@@ -377,9 +389,11 @@
             0,
             0});
 			this.spinEditFileCardPublishingClosed.Enabled = false;
-			this.spinEditFileCardPublishingClosed.Location = new System.Drawing.Point(166, 155);
+			this.spinEditFileCardPublishingClosed.Location = new System.Drawing.Point(170, 155);
 			this.spinEditFileCardPublishingClosed.Name = "spinEditFileCardPublishingClosed";
 			this.spinEditFileCardPublishingClosed.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.True;
+			this.spinEditFileCardPublishingClosed.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
+			this.spinEditFileCardPublishingClosed.Properties.Appearance.Options.UseBackColor = true;
 			this.spinEditFileCardPublishingClosed.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
 			this.spinEditFileCardPublishingClosed.Properties.DisplayFormat.FormatString = "$#,##0.00";
@@ -401,13 +415,14 @@
 			// 
 			this.checkBoxFileCardPublishingClosed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.checkBoxFileCardPublishingClosed.AutoSize = true;
+			this.checkBoxFileCardPublishingClosed.BackColor = System.Drawing.Color.Transparent;
 			this.checkBoxFileCardPublishingClosed.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.checkBoxFileCardPublishingClosed.Location = new System.Drawing.Point(166, 129);
+			this.checkBoxFileCardPublishingClosed.Location = new System.Drawing.Point(170, 129);
 			this.checkBoxFileCardPublishingClosed.Name = "checkBoxFileCardPublishingClosed";
 			this.checkBoxFileCardPublishingClosed.Size = new System.Drawing.Size(163, 20);
 			this.checkBoxFileCardPublishingClosed.TabIndex = 21;
 			this.checkBoxFileCardPublishingClosed.Text = "E. Publishing $ Closed:";
-			this.checkBoxFileCardPublishingClosed.UseVisualStyleBackColor = true;
+			this.checkBoxFileCardPublishingClosed.UseVisualStyleBackColor = false;
 			this.checkBoxFileCardPublishingClosed.CheckedChanged += new System.EventHandler(this.checkBoxFileCardPublishingClosed_CheckedChanged);
 			// 
 			// spinEditFileCardDigitalClosed
@@ -421,6 +436,8 @@
 			this.spinEditFileCardDigitalClosed.Location = new System.Drawing.Point(6, 155);
 			this.spinEditFileCardDigitalClosed.Name = "spinEditFileCardDigitalClosed";
 			this.spinEditFileCardDigitalClosed.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.True;
+			this.spinEditFileCardDigitalClosed.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
+			this.spinEditFileCardDigitalClosed.Properties.Appearance.Options.UseBackColor = true;
 			this.spinEditFileCardDigitalClosed.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
 			this.spinEditFileCardDigitalClosed.Properties.DisplayFormat.FormatString = "$#,##0.00";
@@ -441,13 +458,14 @@
 			// checkBoxFileCardDigitalClosed
 			// 
 			this.checkBoxFileCardDigitalClosed.AutoSize = true;
+			this.checkBoxFileCardDigitalClosed.BackColor = System.Drawing.Color.Transparent;
 			this.checkBoxFileCardDigitalClosed.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.checkBoxFileCardDigitalClosed.Location = new System.Drawing.Point(6, 129);
 			this.checkBoxFileCardDigitalClosed.Name = "checkBoxFileCardDigitalClosed";
 			this.checkBoxFileCardDigitalClosed.Size = new System.Drawing.Size(139, 20);
 			this.checkBoxFileCardDigitalClosed.TabIndex = 19;
 			this.checkBoxFileCardDigitalClosed.Text = "D. Digital $ Closed:";
-			this.checkBoxFileCardDigitalClosed.UseVisualStyleBackColor = true;
+			this.checkBoxFileCardDigitalClosed.UseVisualStyleBackColor = false;
 			this.checkBoxFileCardDigitalClosed.CheckedChanged += new System.EventHandler(this.checkBoxFileCardDigitalClosed_CheckedChanged);
 			// 
 			// spinEditFileCardBroadcastClosed
@@ -459,9 +477,11 @@
             0,
             0});
 			this.spinEditFileCardBroadcastClosed.Enabled = false;
-			this.spinEditFileCardBroadcastClosed.Location = new System.Drawing.Point(166, 98);
+			this.spinEditFileCardBroadcastClosed.Location = new System.Drawing.Point(170, 98);
 			this.spinEditFileCardBroadcastClosed.Name = "spinEditFileCardBroadcastClosed";
 			this.spinEditFileCardBroadcastClosed.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.True;
+			this.spinEditFileCardBroadcastClosed.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
+			this.spinEditFileCardBroadcastClosed.Properties.Appearance.Options.UseBackColor = true;
 			this.spinEditFileCardBroadcastClosed.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
 			this.spinEditFileCardBroadcastClosed.Properties.DisplayFormat.FormatString = "$#,##0.00";
@@ -483,13 +503,14 @@
 			// 
 			this.checkBoxFileCardBroadcastClosed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.checkBoxFileCardBroadcastClosed.AutoSize = true;
+			this.checkBoxFileCardBroadcastClosed.BackColor = System.Drawing.Color.Transparent;
 			this.checkBoxFileCardBroadcastClosed.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.checkBoxFileCardBroadcastClosed.Location = new System.Drawing.Point(166, 72);
+			this.checkBoxFileCardBroadcastClosed.Location = new System.Drawing.Point(170, 72);
 			this.checkBoxFileCardBroadcastClosed.Name = "checkBoxFileCardBroadcastClosed";
 			this.checkBoxFileCardBroadcastClosed.Size = new System.Drawing.Size(162, 20);
 			this.checkBoxFileCardBroadcastClosed.TabIndex = 17;
 			this.checkBoxFileCardBroadcastClosed.Text = "C. Broadcast $ Closed:";
-			this.checkBoxFileCardBroadcastClosed.UseVisualStyleBackColor = true;
+			this.checkBoxFileCardBroadcastClosed.UseVisualStyleBackColor = false;
 			this.checkBoxFileCardBroadcastClosed.CheckedChanged += new System.EventHandler(this.checkBoxFileCardBroadcastClosed_CheckedChanged);
 			// 
 			// dateEditFileCardDateSold
@@ -499,10 +520,14 @@
 			this.dateEditFileCardDateSold.Location = new System.Drawing.Point(6, 98);
 			this.dateEditFileCardDateSold.Name = "dateEditFileCardDateSold";
 			this.dateEditFileCardDateSold.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
+			this.dateEditFileCardDateSold.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
 			this.dateEditFileCardDateSold.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.dateEditFileCardDateSold.Properties.Appearance.Options.UseBackColor = true;
 			this.dateEditFileCardDateSold.Properties.Appearance.Options.UseFont = true;
 			this.dateEditFileCardDateSold.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("dateEditFileCardDateSold.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "", null, null, true)});
+			this.dateEditFileCardDateSold.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
 			this.dateEditFileCardDateSold.Properties.DisplayFormat.FormatString = "MM/dd/yyyy";
 			this.dateEditFileCardDateSold.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
 			this.dateEditFileCardDateSold.Properties.EditFormat.FormatString = "MM/dd/yyyy";
@@ -512,9 +537,6 @@
 			this.dateEditFileCardDateSold.Properties.ShowPopupShadow = false;
 			this.dateEditFileCardDateSold.Properties.ShowToday = false;
 			this.dateEditFileCardDateSold.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-			this.dateEditFileCardDateSold.Properties.UseParentBackground = true;
-			this.dateEditFileCardDateSold.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton()});
 			this.dateEditFileCardDateSold.Size = new System.Drawing.Size(147, 22);
 			this.dateEditFileCardDateSold.TabIndex = 16;
 			this.dateEditFileCardDateSold.EditValueChanged += new System.EventHandler(this.EditValueChanged);
@@ -522,25 +544,27 @@
 			// checkBoxFileCardDateSold
 			// 
 			this.checkBoxFileCardDateSold.AutoSize = true;
+			this.checkBoxFileCardDateSold.BackColor = System.Drawing.Color.Transparent;
 			this.checkBoxFileCardDateSold.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.checkBoxFileCardDateSold.Location = new System.Drawing.Point(6, 72);
 			this.checkBoxFileCardDateSold.Name = "checkBoxFileCardDateSold";
 			this.checkBoxFileCardDateSold.Size = new System.Drawing.Size(105, 20);
 			this.checkBoxFileCardDateSold.TabIndex = 15;
 			this.checkBoxFileCardDateSold.Text = "B. Date Sold:";
-			this.checkBoxFileCardDateSold.UseVisualStyleBackColor = true;
+			this.checkBoxFileCardDateSold.UseVisualStyleBackColor = false;
 			this.checkBoxFileCardDateSold.CheckedChanged += new System.EventHandler(this.checkBoxFileCardDateSold_CheckedChanged);
 			// 
 			// checkBoxFileCardAdvertiser
 			// 
 			this.checkBoxFileCardAdvertiser.AutoSize = true;
+			this.checkBoxFileCardAdvertiser.BackColor = System.Drawing.Color.Transparent;
 			this.checkBoxFileCardAdvertiser.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.checkBoxFileCardAdvertiser.Location = new System.Drawing.Point(8, 14);
 			this.checkBoxFileCardAdvertiser.Name = "checkBoxFileCardAdvertiser";
 			this.checkBoxFileCardAdvertiser.Size = new System.Drawing.Size(104, 20);
 			this.checkBoxFileCardAdvertiser.TabIndex = 13;
 			this.checkBoxFileCardAdvertiser.Text = "A. Advertiser:";
-			this.checkBoxFileCardAdvertiser.UseVisualStyleBackColor = true;
+			this.checkBoxFileCardAdvertiser.UseVisualStyleBackColor = false;
 			this.checkBoxFileCardAdvertiser.CheckedChanged += new System.EventHandler(this.checkBoxFileCardAdvertiser_CheckedChanged);
 			// 
 			// textEditFileCardAdvertiser
@@ -550,8 +574,10 @@
 			this.textEditFileCardAdvertiser.Enabled = false;
 			this.textEditFileCardAdvertiser.Location = new System.Drawing.Point(6, 40);
 			this.textEditFileCardAdvertiser.Name = "textEditFileCardAdvertiser";
+			this.textEditFileCardAdvertiser.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
+			this.textEditFileCardAdvertiser.Properties.Appearance.Options.UseBackColor = true;
 			this.textEditFileCardAdvertiser.Properties.NullText = "Type here...";
-			this.textEditFileCardAdvertiser.Size = new System.Drawing.Size(323, 22);
+			this.textEditFileCardAdvertiser.Size = new System.Drawing.Size(327, 22);
 			this.textEditFileCardAdvertiser.StyleController = this.styleController;
 			this.textEditFileCardAdvertiser.TabIndex = 12;
 			this.textEditFileCardAdvertiser.EditValueChanged += new System.EventHandler(this.EditValueChanged);
@@ -559,12 +585,13 @@
 			// checkBoxEnableFileCard
 			// 
 			this.checkBoxEnableFileCard.AutoSize = true;
+			this.checkBoxEnableFileCard.BackColor = System.Drawing.Color.Transparent;
 			this.checkBoxEnableFileCard.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.checkBoxEnableFileCard.Location = new System.Drawing.Point(5, 15);
 			this.checkBoxEnableFileCard.Name = "checkBoxEnableFileCard";
 			this.checkBoxEnableFileCard.Size = new System.Drawing.Size(15, 14);
 			this.checkBoxEnableFileCard.TabIndex = 14;
-			this.checkBoxEnableFileCard.UseVisualStyleBackColor = true;
+			this.checkBoxEnableFileCard.UseVisualStyleBackColor = false;
 			this.checkBoxEnableFileCard.CheckedChanged += new System.EventHandler(this.checkBoxEnableFileCard_CheckedChanged);
 			// 
 			// pnButtons
@@ -573,7 +600,7 @@
 			this.pnButtons.Dock = System.Windows.Forms.DockStyle.Top;
 			this.pnButtons.Location = new System.Drawing.Point(0, 0);
 			this.pnButtons.Name = "pnButtons";
-			this.pnButtons.Size = new System.Drawing.Size(346, 47);
+			this.pnButtons.Size = new System.Drawing.Size(350, 47);
 			this.pnButtons.TabIndex = 0;
 			// 
 			// buttonXReset
@@ -584,7 +611,7 @@
 			this.buttonXReset.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXReset.Location = new System.Drawing.Point(5, 8);
 			this.buttonXReset.Name = "buttonXReset";
-			this.buttonXReset.Size = new System.Drawing.Size(336, 30);
+			this.buttonXReset.Size = new System.Drawing.Size(340, 30);
 			this.buttonXReset.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXReset.TabIndex = 0;
 			this.buttonXReset.Text = "RESET ALL FILECARDS for the Selected Links";
@@ -594,7 +621,7 @@
 			// FileCardsEditor
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
+			this.BackColor = System.Drawing.Color.White;
 			this.Controls.Add(this.pnMain);
 			this.Controls.Add(this.laHeader);
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -605,6 +632,7 @@
 			this.pnData.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.textEditFileCardTitle.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.groupBoxFileCard)).EndInit();
 			this.groupBoxFileCard.ResumeLayout(false);
 			this.groupBoxFileCard.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.gridControlFileCardImportantInfo)).EndInit();
@@ -618,7 +646,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.spinEditFileCardPublishingClosed.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.spinEditFileCardDigitalClosed.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.spinEditFileCardBroadcastClosed.Properties)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.dateEditFileCardDateSold.Properties.VistaTimeProperties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.dateEditFileCardDateSold.Properties.CalendarTimeProperties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.dateEditFileCardDateSold.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditFileCardAdvertiser.Properties)).EndInit();
 			this.pnButtons.ResumeLayout(false);
@@ -635,7 +663,7 @@
 		private DevComponents.DotNetBar.ButtonX buttonXReset;
 		private DevExpress.XtraEditors.StyleController styleController;
 		private DevExpress.XtraEditors.TextEdit textEditFileCardTitle;
-		private System.Windows.Forms.GroupBox groupBoxFileCard;
+		private DevExpress.XtraEditors.GroupControl groupBoxFileCard;
 		private System.Windows.Forms.CheckBox checkBoxFileCardImportantInfo;
 		private DevComponents.DotNetBar.ButtonX buttonXImportantInfoAdd;
 		private DevExpress.XtraGrid.GridControl gridControlFileCardImportantInfo;

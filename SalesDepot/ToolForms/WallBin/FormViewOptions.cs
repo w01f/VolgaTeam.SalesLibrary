@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using DevComponents.DotNetBar.Metro;
 using SalesDepot.ConfigurationClasses;
 
 namespace SalesDepot.ToolForms.WallBin
 {
-	public partial class FormViewOptions : Form
+	public partial class FormViewOptions : MetroForm
 	{
 		public enum ViewOptions
 		{

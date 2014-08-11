@@ -136,18 +136,18 @@
 			// 
 			this.xtraTabPageVideo.Controls.Add(this.pnVideo);
 			this.xtraTabPageVideo.Name = "xtraTabPageVideo";
-			this.xtraTabPageVideo.Size = new System.Drawing.Size(1229, 457);
+			this.xtraTabPageVideo.Size = new System.Drawing.Size(1229, 455);
 			this.xtraTabPageVideo.Text = "iPad Video";
 			// 
 			// pnVideo
 			// 
-			this.pnVideo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
+			this.pnVideo.BackColor = System.Drawing.Color.White;
 			this.pnVideo.Controls.Add(this.pnVideoMain);
 			this.pnVideo.Controls.Add(this.pnVideoTop);
 			this.pnVideo.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.pnVideo.Location = new System.Drawing.Point(0, 0);
 			this.pnVideo.Name = "pnVideo";
-			this.pnVideo.Size = new System.Drawing.Size(1229, 457);
+			this.pnVideo.Size = new System.Drawing.Size(1229, 455);
 			this.pnVideo.TabIndex = 1;
 			// 
 			// pnVideoMain
@@ -156,11 +156,12 @@
 			this.pnVideoMain.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.pnVideoMain.Location = new System.Drawing.Point(0, 55);
 			this.pnVideoMain.Name = "pnVideoMain";
-			this.pnVideoMain.Size = new System.Drawing.Size(1229, 402);
+			this.pnVideoMain.Size = new System.Drawing.Size(1229, 400);
 			this.pnVideoMain.TabIndex = 1;
 			// 
 			// gridControlVideo
 			// 
+			this.gridControlVideo.Cursor = System.Windows.Forms.Cursors.Default;
 			this.gridControlVideo.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.gridControlVideo.Location = new System.Drawing.Point(0, 0);
 			this.gridControlVideo.MainView = this.gridViewVideo;
@@ -174,7 +175,7 @@
             this.repositoryItemButtonEditVideoConvertDisabled,
             this.repositoryItemButtonEditVideoConvertEnabled,
             this.repositoryItemButtonEditVideoFolderDisabled});
-			this.gridControlVideo.Size = new System.Drawing.Size(1229, 402);
+			this.gridControlVideo.Size = new System.Drawing.Size(1229, 400);
 			this.gridControlVideo.TabIndex = 0;
 			this.gridControlVideo.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewVideo});
@@ -350,6 +351,7 @@
 			// 
 			this.repositoryItemCheckEdit.AllowFocused = false;
 			this.repositoryItemCheckEdit.AutoHeight = false;
+			this.repositoryItemCheckEdit.Caption = "Check";
 			this.repositoryItemCheckEdit.Name = "repositoryItemCheckEdit";
 			this.repositoryItemCheckEdit.EditValueChanged += new System.EventHandler(this.repositoryItemButtonEditVideoWmv_EditValueChanged);
 			// 
@@ -460,12 +462,12 @@
 			// 
 			this.xtraTabPageSite.Controls.Add(this.pnSite);
 			this.xtraTabPageSite.Name = "xtraTabPageSite";
-			this.xtraTabPageSite.Size = new System.Drawing.Size(1229, 457);
+			this.xtraTabPageSite.Size = new System.Drawing.Size(1229, 455);
 			this.xtraTabPageSite.Text = "Check Site";
 			// 
 			// pnSite
 			// 
-			this.pnSite.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
+			this.pnSite.BackColor = System.Drawing.Color.White;
 			this.pnSite.Controls.Add(this.pbOpera);
 			this.pnSite.Controls.Add(this.pbSafari);
 			this.pnSite.Controls.Add(this.pbFirefox);
@@ -475,7 +477,7 @@
 			this.pnSite.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.pnSite.Location = new System.Drawing.Point(0, 0);
 			this.pnSite.Name = "pnSite";
-			this.pnSite.Size = new System.Drawing.Size(1229, 457);
+			this.pnSite.Size = new System.Drawing.Size(1229, 455);
 			this.pnSite.TabIndex = 0;
 			// 
 			// pbOpera
@@ -560,7 +562,7 @@
 			// IPadContentManagerControl
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
+			this.BackColor = System.Drawing.Color.White;
 			this.Controls.Add(this.xtraTabControl);
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);

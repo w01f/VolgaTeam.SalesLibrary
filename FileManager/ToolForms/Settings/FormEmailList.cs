@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using DevComponents.DotNetBar.Metro;
 using FileManager.Controllers;
 
 namespace FileManager.ToolForms.Settings
 {
-	public partial class FormEmailList : Form
+	public partial class FormEmailList : MetroForm
 	{
 		public FormEmailList()
 		{

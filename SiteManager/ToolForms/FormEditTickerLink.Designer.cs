@@ -29,11 +29,9 @@
         private void InitializeComponent()
         {
 			this.components = new System.ComponentModel.Container();
-			this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
 			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
 			this.buttonXSave = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXCancel = new DevComponents.DotNetBar.ButtonX();
-			this.styleManager = new DevComponents.DotNetBar.StyleManager(this.components);
 			this.labelControlTextTitle = new DevExpress.XtraEditors.LabelControl();
 			this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
 			this.memoEditText = new DevExpress.XtraEditors.MemoEdit();
@@ -43,10 +41,6 @@
 			((System.ComponentModel.ISupportInitialize)(this.memoEditText.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.comboBoxEditType.Properties)).BeginInit();
 			this.SuspendLayout();
-			// 
-			// defaultLookAndFeel
-			// 
-			this.defaultLookAndFeel.LookAndFeel.SkinName = "Lilian";
 			// 
 			// styleController
 			// 
@@ -92,13 +86,10 @@
 			this.buttonXCancel.Text = "Cancel";
 			this.buttonXCancel.TextColor = System.Drawing.Color.Black;
 			// 
-			// styleManager
-			// 
-			this.styleManager.ManagerStyle = DevComponents.DotNetBar.eStyle.Office2010Blue;
-			this.styleManager.MetroColorParameters = new DevComponents.DotNetBar.Metro.ColorTables.MetroColorGeneratorParameters(System.Drawing.Color.White, System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(163)))), ((int)(((byte)(26))))));
-			// 
 			// labelControlTextTitle
 			// 
+			this.labelControlTextTitle.Appearance.BackColor = System.Drawing.Color.White;
+			this.labelControlTextTitle.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.labelControlTextTitle.Location = new System.Drawing.Point(12, 66);
 			this.labelControlTextTitle.Name = "labelControlTextTitle";
 			this.labelControlTextTitle.Size = new System.Drawing.Size(29, 16);
@@ -108,6 +99,8 @@
 			// 
 			// labelControl1
 			// 
+			this.labelControl1.Appearance.BackColor = System.Drawing.Color.White;
+			this.labelControl1.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.labelControl1.Location = new System.Drawing.Point(10, 12);
 			this.labelControl1.Name = "labelControl1";
 			this.labelControl1.Size = new System.Drawing.Size(71, 16);
@@ -119,15 +112,24 @@
 			// 
 			this.memoEditText.Location = new System.Drawing.Point(8, 88);
 			this.memoEditText.Name = "memoEditText";
+			this.memoEditText.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.memoEditText.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.memoEditText.Properties.Appearance.Options.UseBackColor = true;
+			this.memoEditText.Properties.Appearance.Options.UseForeColor = true;
 			this.memoEditText.Properties.NullText = "Type Link Text...";
 			this.memoEditText.Size = new System.Drawing.Size(290, 71);
 			this.memoEditText.StyleController = this.styleController;
 			this.memoEditText.TabIndex = 17;
+			this.memoEditText.UseOptimizedRendering = true;
 			// 
 			// comboBoxEditType
 			// 
 			this.comboBoxEditType.Location = new System.Drawing.Point(8, 34);
 			this.comboBoxEditType.Name = "comboBoxEditType";
+			this.comboBoxEditType.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.comboBoxEditType.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.comboBoxEditType.Properties.Appearance.Options.UseBackColor = true;
+			this.comboBoxEditType.Properties.Appearance.Options.UseForeColor = true;
 			this.comboBoxEditType.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
 			this.comboBoxEditType.Properties.NullText = "Select Ticker Type...";
@@ -141,6 +143,8 @@
 			this.pnDetails.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+			this.pnDetails.BackColor = System.Drawing.Color.Transparent;
+			this.pnDetails.ForeColor = System.Drawing.Color.Black;
 			this.pnDetails.Location = new System.Drawing.Point(8, 165);
 			this.pnDetails.Name = "pnDetails";
 			this.pnDetails.Size = new System.Drawing.Size(290, 154);
@@ -150,7 +154,6 @@
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
 			this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
-			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
 			this.ClientSize = new System.Drawing.Size(310, 365);
 			this.Controls.Add(this.pnDetails);
 			this.Controls.Add(this.comboBoxEditType);
@@ -159,6 +162,7 @@
 			this.Controls.Add(this.labelControlTextTitle);
 			this.Controls.Add(this.buttonXCancel);
 			this.Controls.Add(this.buttonXSave);
+			this.DoubleBuffered = true;
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.MaximizeBox = false;
@@ -178,11 +182,9 @@
 
         #endregion
 
-        private DevExpress.LookAndFeel.DefaultLookAndFeel defaultLookAndFeel;
 		private DevExpress.XtraEditors.StyleController styleController;
         private DevComponents.DotNetBar.ButtonX buttonXSave;
 		private DevComponents.DotNetBar.ButtonX buttonXCancel;
-		private DevComponents.DotNetBar.StyleManager styleManager;
 		private DevExpress.XtraEditors.LabelControl labelControlTextTitle;
 		private DevExpress.XtraEditors.LabelControl labelControl1;
 		private DevExpress.XtraEditors.MemoEdit memoEditText;

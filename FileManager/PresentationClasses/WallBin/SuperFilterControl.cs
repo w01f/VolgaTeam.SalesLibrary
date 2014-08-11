@@ -40,12 +40,10 @@ namespace FileManager.PresentationClasses.WallBin
 
 		private void checkedListBoxControl_ItemCheck(object sender, DevExpress.XtraEditors.Controls.ItemCheckEventArgs e)
 		{
-			if (!_loading)
-			{
-				SelectedLink.SuperFilters.Clear();
-				SelectedLink.SuperFilters.AddRange(checkedListBoxControl.Items.OfType<CheckedListBoxItem>().Where(it => it.CheckState == CheckState.Checked).Select(it => new SuperFilter { Name = it.Value.ToString() }));
-				MainController.Instance.ActiveDecorator.StateChanged = true;
-			}
+			if (_loading) return;
+			SelectedLink.SuperFilters.Clear();
+			SelectedLink.SuperFilters.AddRange(checkedListBoxControl.Items.OfType<CheckedListBoxItem>().Where(it => it.CheckState == CheckState.Checked).Select(it => new SuperFilter { Name = it.Value.ToString() }));
+			MainController.Instance.ActiveDecorator.StateChanged = true;
 		}
 	}
 }

@@ -1,9 +1,11 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Threading;
 using System.Windows.Forms;
 using SalesDepot.BusinessClasses;
 using SalesDepot.ConfigurationClasses;
 using SalesDepot.PresentationClasses.WallBin.Decorators;
+using SalesDepot.ToolForms;
 
 namespace SalesDepot.TabPages
 {
@@ -39,6 +41,26 @@ namespace SalesDepot.TabPages
 			BringToFront();
 			Focus();
 			AppManager.Instance.ActivityManager.AddUserActivity("Program Search selected");
+
+			if (DecoratorManager.Instance.ActivePackageViewer.SelectedLibrary == null) return;
+			if (DecoratorManager.Instance.ActivePackageViewer.SelectedLibrary.Library.ProgramManager.Enabled) return;
+
+			using (var progressForm = new FormProgress())
+			{
+				progressForm.laProgress.Text = "Loading Program Schedule...";
+				progressForm.TopMost = true;
+				progressForm.Show();
+				Application.DoEvents();
+				var thread = new Thread(() =>
+				{
+					DecoratorManager.Instance.ActivePackageViewer.SelectedLibrary.BuildProgramManager();
+					Invoke((MethodInvoker)(() => DecoratorManager.Instance.ActivePackageViewer.SelectedLibrary.ApplyProgramManager()));
+				});
+				thread.Start();
+				while (thread.IsAlive)
+					Application.DoEvents();
+				progressForm.Close();
+			}
 		}
 		#endregion
 

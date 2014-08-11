@@ -52,7 +52,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemSpinEditNumeric)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemSpinEditPercent)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEditDate)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEditDate.VistaTimeProperties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEditDate.CalendarTimeProperties)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// gridControlData
@@ -110,6 +110,7 @@
             this.gridBandDocs,
             this.gridBandVideos,
             this.gridBandTotal});
+			this.advBandedGridViewData.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Default;
 			this.advBandedGridViewData.Columns.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn[] {
             this.gridColumnName,
             this.gridColumnGroupLoginNumber,
@@ -158,6 +159,7 @@
 			// 
 			this.gridBandMain.Columns.Add(this.gridColumnName);
 			this.gridBandMain.Name = "gridBandMain";
+			this.gridBandMain.VisibleIndex = 0;
 			this.gridBandMain.Width = 1166;
 			// 
 			// gridColumnName
@@ -169,8 +171,8 @@
 			this.gridColumnName.Caption = "Name";
 			this.gridColumnName.FieldName = "name";
 			this.gridColumnName.Name = "gridColumnName";
-			this.gridColumnName.SummaryItem.DisplayFormat = "All Groups:";
-			this.gridColumnName.SummaryItem.SummaryType = DevExpress.Data.SummaryItemType.Max;
+			this.gridColumnName.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Max, "name", "All Groups:")});
 			this.gridColumnName.Visible = true;
 			this.gridColumnName.Width = 1166;
 			// 
@@ -181,6 +183,7 @@
 			this.gridBandLogin.Columns.Add(this.gridColumnGroupLoginPercent);
 			this.gridBandLogin.Name = "gridBandLogin";
 			this.gridBandLogin.OptionsBand.FixedWidth = true;
+			this.gridBandLogin.VisibleIndex = 1;
 			this.gridBandLogin.Width = 145;
 			// 
 			// gridColumnGroupLoginNumber
@@ -191,8 +194,8 @@
 			this.gridColumnGroupLoginNumber.ColumnEdit = this.repositoryItemSpinEditNumeric;
 			this.gridColumnGroupLoginNumber.FieldName = "logins";
 			this.gridColumnGroupLoginNumber.Name = "gridColumnGroupLoginNumber";
-			this.gridColumnGroupLoginNumber.SummaryItem.DisplayFormat = "{0:#,##0}";
-			this.gridColumnGroupLoginNumber.SummaryItem.SummaryType = DevExpress.Data.SummaryItemType.Sum;
+			this.gridColumnGroupLoginNumber.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "logins", "{0:#,##0}")});
 			this.gridColumnGroupLoginNumber.Visible = true;
 			this.gridColumnGroupLoginNumber.Width = 68;
 			// 
@@ -236,6 +239,7 @@
 			this.gridBandDocs.Columns.Add(this.gridColumnGroupDocsPercent);
 			this.gridBandDocs.Name = "gridBandDocs";
 			this.gridBandDocs.OptionsBand.FixedWidth = true;
+			this.gridBandDocs.VisibleIndex = 2;
 			this.gridBandDocs.Width = 145;
 			// 
 			// gridColumnGroupDocsNumber
@@ -246,8 +250,8 @@
 			this.gridColumnGroupDocsNumber.ColumnEdit = this.repositoryItemSpinEditNumeric;
 			this.gridColumnGroupDocsNumber.FieldName = "docs";
 			this.gridColumnGroupDocsNumber.Name = "gridColumnGroupDocsNumber";
-			this.gridColumnGroupDocsNumber.SummaryItem.DisplayFormat = "{0:#,##0}";
-			this.gridColumnGroupDocsNumber.SummaryItem.SummaryType = DevExpress.Data.SummaryItemType.Sum;
+			this.gridColumnGroupDocsNumber.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "docs", "{0:#,##0}")});
 			this.gridColumnGroupDocsNumber.Visible = true;
 			this.gridColumnGroupDocsNumber.Width = 72;
 			// 
@@ -267,6 +271,7 @@
 			this.gridBandVideos.Columns.Add(this.gridColumnGroupVideosPercent);
 			this.gridBandVideos.Name = "gridBandVideos";
 			this.gridBandVideos.OptionsBand.FixedWidth = true;
+			this.gridBandVideos.VisibleIndex = 3;
 			this.gridBandVideos.Width = 145;
 			// 
 			// gridColumnGroupVideosNumber
@@ -277,8 +282,8 @@
 			this.gridColumnGroupVideosNumber.ColumnEdit = this.repositoryItemSpinEditNumeric;
 			this.gridColumnGroupVideosNumber.FieldName = "videos";
 			this.gridColumnGroupVideosNumber.Name = "gridColumnGroupVideosNumber";
-			this.gridColumnGroupVideosNumber.SummaryItem.DisplayFormat = "{0:#,##0}";
-			this.gridColumnGroupVideosNumber.SummaryItem.SummaryType = DevExpress.Data.SummaryItemType.Sum;
+			this.gridColumnGroupVideosNumber.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "videos", "{0:#,##0}")});
 			this.gridColumnGroupVideosNumber.Visible = true;
 			this.gridColumnGroupVideosNumber.Width = 70;
 			// 
@@ -297,6 +302,7 @@
 			this.gridBandTotal.Columns.Add(this.gridColumnGroupTotalPercent);
 			this.gridBandTotal.Name = "gridBandTotal";
 			this.gridBandTotal.OptionsBand.FixedWidth = true;
+			this.gridBandTotal.VisibleIndex = 4;
 			this.gridBandTotal.Width = 145;
 			// 
 			// gridColumnGroupTotalNumber
@@ -307,8 +313,8 @@
 			this.gridColumnGroupTotalNumber.ColumnEdit = this.repositoryItemSpinEditNumeric;
 			this.gridColumnGroupTotalNumber.FieldName = "totals";
 			this.gridColumnGroupTotalNumber.Name = "gridColumnGroupTotalNumber";
-			this.gridColumnGroupTotalNumber.SummaryItem.DisplayFormat = "{0:#,##0}";
-			this.gridColumnGroupTotalNumber.SummaryItem.SummaryType = DevExpress.Data.SummaryItemType.Sum;
+			this.gridColumnGroupTotalNumber.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "totals", "{0:#,##0}")});
 			this.gridColumnGroupTotalNumber.Visible = true;
 			this.gridColumnGroupTotalNumber.Width = 71;
 			// 
@@ -326,17 +332,16 @@
 			this.repositoryItemDateEditDate.AutoHeight = false;
 			this.repositoryItemDateEditDate.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+			this.repositoryItemDateEditDate.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
 			this.repositoryItemDateEditDate.DisplayFormat.FormatString = "MM/dd/yyyy hh:mm tt";
 			this.repositoryItemDateEditDate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
 			this.repositoryItemDateEditDate.EditFormat.FormatString = "MM/dd/yyyy hh:mm tt";
 			this.repositoryItemDateEditDate.EditFormat.FormatType = DevExpress.Utils.FormatType.Custom;
 			this.repositoryItemDateEditDate.Name = "repositoryItemDateEditDate";
-			this.repositoryItemDateEditDate.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton()});
 			// 
 			// TotalControl
 			// 
-			this.Appearance.PageClient.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
 			this.Appearance.PageClient.Options.UseBackColor = true;
 			this.Controls.Add(this.gridControlData);
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -346,7 +351,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.advBandedGridViewData)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemSpinEditNumeric)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemSpinEditPercent)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEditDate.VistaTimeProperties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEditDate.CalendarTimeProperties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEditDate)).EndInit();
 			this.ResumeLayout(false);
 

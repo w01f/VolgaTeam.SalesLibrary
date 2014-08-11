@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
 			this.components = new System.ComponentModel.Container();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.grColumn1 = new System.Windows.Forms.DataGridView();
 			this.colDWBColumn1WindowName = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.colDWBColumn1OldWindowName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -67,7 +67,7 @@
 			this.laWindowHeaderForeColor = new System.Windows.Forms.Label();
 			this.xtraTabPageWindowPropertiesWidget = new DevExpress.XtraTab.XtraTabPage();
 			this.ckApllyForAllWindowsWidget = new System.Windows.Forms.CheckBox();
-			this.gbWindowWidgets = new System.Windows.Forms.GroupBox();
+			this.gbWindowWidgets = new DevExpress.XtraEditors.GroupControl();
 			this.gridControlWindowWidgets = new DevExpress.XtraGrid.GridControl();
 			this.layoutViewWindowWidgets = new DevExpress.XtraGrid.Views.Layout.LayoutView();
 			this.gridColumnWindowWidget = new DevExpress.XtraGrid.Columns.LayoutViewColumn();
@@ -80,7 +80,7 @@
 			this.ckWindowEnableWidget = new System.Windows.Forms.CheckBox();
 			this.xtraTabPageWindowPropertiesBanner = new DevExpress.XtraTab.XtraTabPage();
 			this.ckApllyForAllWindowsBanner = new System.Windows.Forms.CheckBox();
-			this.gbWindowBanners = new System.Windows.Forms.GroupBox();
+			this.gbWindowBanners = new DevExpress.XtraEditors.GroupControl();
 			this.colorEditWindowBannerTextColor = new DevExpress.XtraEditors.ColorEdit();
 			this.buttonEditWindowBannerTextFont = new DevExpress.XtraEditors.ButtonEdit();
 			this.memoEditWindowBannerText = new DevExpress.XtraEditors.MemoEdit();
@@ -206,7 +206,6 @@
 			this.colorEditColumn3BackColor = new DevExpress.XtraEditors.ColorEdit();
 			this.ckApplyForAllColumnTitles = new System.Windows.Forms.CheckBox();
 			this.ckEnableColumnTitles = new System.Windows.Forms.CheckBox();
-			this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
 			this.pnPages = new System.Windows.Forms.Panel();
 			this.comboBoxEditPages = new DevExpress.XtraEditors.ComboBoxEdit();
 			this.laPages = new System.Windows.Forms.Label();
@@ -227,6 +226,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.colorEditWindowHeaderBackColor.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.colorEditWindowHeaderForeColor.Properties)).BeginInit();
 			this.xtraTabPageWindowPropertiesWidget.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.gbWindowWidgets)).BeginInit();
 			this.gbWindowWidgets.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.gridControlWindowWidgets)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutViewWindowWidgets)).BeginInit();
@@ -235,6 +235,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.layoutViewCard1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pbWindowSelectedWidget)).BeginInit();
 			this.xtraTabPageWindowPropertiesBanner.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.gbWindowBanners)).BeginInit();
 			this.gbWindowBanners.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.colorEditWindowBannerTextColor.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.buttonEditWindowBannerTextFont.Properties)).BeginInit();
@@ -324,14 +325,14 @@
 			this.grColumn1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colDWBColumn1WindowName,
             this.colDWBColumn1OldWindowName});
-			dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
-			dataGridViewCellStyle8.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			dataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black;
-			dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.Black;
-			dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-			this.grColumn1.DefaultCellStyle = dataGridViewCellStyle8;
+			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+			dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
+			dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
+			dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+			this.grColumn1.DefaultCellStyle = dataGridViewCellStyle2;
 			this.grColumn1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.grColumn1.Location = new System.Drawing.Point(0, 0);
 			this.grColumn1.MultiSelect = false;
@@ -339,7 +340,7 @@
 			this.grColumn1.RowHeadersVisible = false;
 			this.grColumn1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
 			this.grColumn1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.grColumn1.Size = new System.Drawing.Size(544, 433);
+			this.grColumn1.Size = new System.Drawing.Size(544, 429);
 			this.grColumn1.TabIndex = 1;
 			this.grColumn1.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.grColumn_CellMouseClick);
 			this.grColumn1.SelectionChanged += new System.EventHandler(this.grColumn1_SelectionChanged);
@@ -349,8 +350,8 @@
 			// colDWBColumn1WindowName
 			// 
 			this.colDWBColumn1WindowName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			this.colDWBColumn1WindowName.DefaultCellStyle = dataGridViewCellStyle7;
+			dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			this.colDWBColumn1WindowName.DefaultCellStyle = dataGridViewCellStyle1;
 			this.colDWBColumn1WindowName.HeaderText = "Window Name";
 			this.colDWBColumn1WindowName.Name = "colDWBColumn1WindowName";
 			// 
@@ -377,14 +378,14 @@
 			this.grColumn2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colDWBColumn2WindowName,
             this.colDWBColumn2OldWindowName});
-			dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
-			dataGridViewCellStyle10.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			dataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black;
-			dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.Black;
-			dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-			this.grColumn2.DefaultCellStyle = dataGridViewCellStyle10;
+			dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+			dataGridViewCellStyle4.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black;
+			dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
+			dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+			this.grColumn2.DefaultCellStyle = dataGridViewCellStyle4;
 			this.grColumn2.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.grColumn2.Location = new System.Drawing.Point(0, 0);
 			this.grColumn2.MultiSelect = false;
@@ -392,7 +393,7 @@
 			this.grColumn2.RowHeadersVisible = false;
 			this.grColumn2.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
 			this.grColumn2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.grColumn2.Size = new System.Drawing.Size(544, 433);
+			this.grColumn2.Size = new System.Drawing.Size(544, 429);
 			this.grColumn2.TabIndex = 2;
 			this.grColumn2.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.grColumn_CellMouseClick);
 			this.grColumn2.SelectionChanged += new System.EventHandler(this.grColumn2_SelectionChanged);
@@ -402,8 +403,8 @@
 			// colDWBColumn2WindowName
 			// 
 			this.colDWBColumn2WindowName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			this.colDWBColumn2WindowName.DefaultCellStyle = dataGridViewCellStyle9;
+			dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			this.colDWBColumn2WindowName.DefaultCellStyle = dataGridViewCellStyle3;
 			this.colDWBColumn2WindowName.HeaderText = "Window Name";
 			this.colDWBColumn2WindowName.Name = "colDWBColumn2WindowName";
 			// 
@@ -430,14 +431,14 @@
 			this.grColumn3.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colDWBColumn3WindowName,
             this.colDWBColumn3OldWindowName});
-			dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window;
-			dataGridViewCellStyle12.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			dataGridViewCellStyle12.ForeColor = System.Drawing.Color.Black;
-			dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle12.SelectionForeColor = System.Drawing.Color.Black;
-			dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-			this.grColumn3.DefaultCellStyle = dataGridViewCellStyle12;
+			dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+			dataGridViewCellStyle6.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black;
+			dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Black;
+			dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+			this.grColumn3.DefaultCellStyle = dataGridViewCellStyle6;
 			this.grColumn3.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.grColumn3.Location = new System.Drawing.Point(0, 0);
 			this.grColumn3.MultiSelect = false;
@@ -445,7 +446,7 @@
 			this.grColumn3.RowHeadersVisible = false;
 			this.grColumn3.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
 			this.grColumn3.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.grColumn3.Size = new System.Drawing.Size(544, 433);
+			this.grColumn3.Size = new System.Drawing.Size(544, 429);
 			this.grColumn3.TabIndex = 2;
 			this.grColumn3.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.grColumn_CellMouseClick);
 			this.grColumn3.SelectionChanged += new System.EventHandler(this.grColumn3_SelectionChanged);
@@ -455,8 +456,8 @@
 			// colDWBColumn3WindowName
 			// 
 			this.colDWBColumn3WindowName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			this.colDWBColumn3WindowName.DefaultCellStyle = dataGridViewCellStyle11;
+			dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			this.colDWBColumn3WindowName.DefaultCellStyle = dataGridViewCellStyle5;
 			this.colDWBColumn3WindowName.HeaderText = "Window Name";
 			this.colDWBColumn3WindowName.Name = "colDWBColumn3WindowName";
 			// 
@@ -474,9 +475,10 @@
 			this.pnWindows.Controls.Add(this.laWindow);
 			this.pnWindows.Controls.Add(this.laLocationHeader);
 			this.pnWindows.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.pnWindows.ForeColor = System.Drawing.Color.Black;
 			this.pnWindows.Location = new System.Drawing.Point(0, 0);
 			this.pnWindows.Name = "pnWindows";
-			this.pnWindows.Size = new System.Drawing.Size(605, 473);
+			this.pnWindows.Size = new System.Drawing.Size(605, 471);
 			this.pnWindows.TabIndex = 19;
 			// 
 			// xtraTabControlWindowProperties
@@ -484,8 +486,12 @@
 			this.xtraTabControlWindowProperties.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+			this.xtraTabControlWindowProperties.Appearance.BackColor = System.Drawing.Color.White;
 			this.xtraTabControlWindowProperties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.xtraTabControlWindowProperties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.xtraTabControlWindowProperties.Appearance.Options.UseBackColor = true;
 			this.xtraTabControlWindowProperties.Appearance.Options.UseFont = true;
+			this.xtraTabControlWindowProperties.Appearance.Options.UseForeColor = true;
 			this.xtraTabControlWindowProperties.AppearancePage.Header.Font = new System.Drawing.Font("Arial", 9.75F);
 			this.xtraTabControlWindowProperties.AppearancePage.Header.Options.UseFont = true;
 			this.xtraTabControlWindowProperties.AppearancePage.HeaderActive.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -496,10 +502,10 @@
 			this.xtraTabControlWindowProperties.AppearancePage.HeaderHotTracked.Options.UseFont = true;
 			this.xtraTabControlWindowProperties.AppearancePage.PageClient.Font = new System.Drawing.Font("Arial", 9.75F);
 			this.xtraTabControlWindowProperties.AppearancePage.PageClient.Options.UseFont = true;
-			this.xtraTabControlWindowProperties.Location = new System.Drawing.Point(10, 94);
+			this.xtraTabControlWindowProperties.Location = new System.Drawing.Point(10, 92);
 			this.xtraTabControlWindowProperties.Name = "xtraTabControlWindowProperties";
 			this.xtraTabControlWindowProperties.SelectedTabPage = this.xtraTabPageWindowPropertiesAppearance;
-			this.xtraTabControlWindowProperties.Size = new System.Drawing.Size(584, 365);
+			this.xtraTabControlWindowProperties.Size = new System.Drawing.Size(584, 367);
 			this.xtraTabControlWindowProperties.TabIndex = 24;
 			this.xtraTabControlWindowProperties.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.xtraTabPageWindowPropertiesAppearance,
@@ -508,6 +514,8 @@
 			// 
 			// xtraTabPageWindowPropertiesAppearance
 			// 
+			this.xtraTabPageWindowPropertiesAppearance.Appearance.PageClient.ForeColor = System.Drawing.Color.Black;
+			this.xtraTabPageWindowPropertiesAppearance.Appearance.PageClient.Options.UseForeColor = true;
 			this.xtraTabPageWindowPropertiesAppearance.Controls.Add(this.colorEditWindowBorderColor);
 			this.xtraTabPageWindowPropertiesAppearance.Controls.Add(this.laWindowBorderColor);
 			this.xtraTabPageWindowPropertiesAppearance.Controls.Add(this.rbWindowHeaderAlignmentRight);
@@ -534,6 +542,10 @@
 			this.colorEditWindowBorderColor.EditValue = System.Drawing.Color.Empty;
 			this.colorEditWindowBorderColor.Location = new System.Drawing.Point(153, 82);
 			this.colorEditWindowBorderColor.Name = "colorEditWindowBorderColor";
+			this.colorEditWindowBorderColor.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.colorEditWindowBorderColor.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.colorEditWindowBorderColor.Properties.Appearance.Options.UseBackColor = true;
+			this.colorEditWindowBorderColor.Properties.Appearance.Options.UseForeColor = true;
 			this.colorEditWindowBorderColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
 			this.colorEditWindowBorderColor.Properties.ColorAlignment = DevExpress.Utils.HorzAlignment.Center;
@@ -560,6 +572,7 @@
 			// 
 			this.laWindowBorderColor.AutoSize = true;
 			this.laWindowBorderColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.laWindowBorderColor.ForeColor = System.Drawing.Color.Black;
 			this.laWindowBorderColor.Location = new System.Drawing.Point(3, 85);
 			this.laWindowBorderColor.Name = "laWindowBorderColor";
 			this.laWindowBorderColor.Size = new System.Drawing.Size(84, 16);
@@ -569,6 +582,7 @@
 			// rbWindowHeaderAlignmentRight
 			// 
 			this.rbWindowHeaderAlignmentRight.AutoSize = true;
+			this.rbWindowHeaderAlignmentRight.ForeColor = System.Drawing.Color.Black;
 			this.rbWindowHeaderAlignmentRight.Location = new System.Drawing.Point(365, 157);
 			this.rbWindowHeaderAlignmentRight.Name = "rbWindowHeaderAlignmentRight";
 			this.rbWindowHeaderAlignmentRight.Size = new System.Drawing.Size(56, 20);
@@ -581,6 +595,7 @@
 			// rbWindowHeaderAlignmentCenter
 			// 
 			this.rbWindowHeaderAlignmentCenter.AutoSize = true;
+			this.rbWindowHeaderAlignmentCenter.ForeColor = System.Drawing.Color.Black;
 			this.rbWindowHeaderAlignmentCenter.Location = new System.Drawing.Point(260, 157);
 			this.rbWindowHeaderAlignmentCenter.Name = "rbWindowHeaderAlignmentCenter";
 			this.rbWindowHeaderAlignmentCenter.Size = new System.Drawing.Size(64, 20);
@@ -593,6 +608,7 @@
 			// rbWindowHeaderAlignmentLeft
 			// 
 			this.rbWindowHeaderAlignmentLeft.AutoSize = true;
+			this.rbWindowHeaderAlignmentLeft.ForeColor = System.Drawing.Color.Black;
 			this.rbWindowHeaderAlignmentLeft.Location = new System.Drawing.Point(153, 157);
 			this.rbWindowHeaderAlignmentLeft.Name = "rbWindowHeaderAlignmentLeft";
 			this.rbWindowHeaderAlignmentLeft.Size = new System.Drawing.Size(47, 20);
@@ -606,6 +622,7 @@
 			// 
 			this.laWindowHeaderAlignment.AutoSize = true;
 			this.laWindowHeaderAlignment.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.laWindowHeaderAlignment.ForeColor = System.Drawing.Color.Black;
 			this.laWindowHeaderAlignment.Location = new System.Drawing.Point(3, 159);
 			this.laWindowHeaderAlignment.Name = "laWindowHeaderAlignment";
 			this.laWindowHeaderAlignment.Size = new System.Drawing.Size(109, 16);
@@ -618,6 +635,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonEditWindowHeaderFont.Location = new System.Drawing.Point(153, 120);
 			this.buttonEditWindowHeaderFont.Name = "buttonEditWindowHeaderFont";
+			this.buttonEditWindowHeaderFont.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.buttonEditWindowHeaderFont.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.buttonEditWindowHeaderFont.Properties.Appearance.Options.UseBackColor = true;
+			this.buttonEditWindowHeaderFont.Properties.Appearance.Options.UseForeColor = true;
 			this.buttonEditWindowHeaderFont.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
 			this.buttonEditWindowHeaderFont.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
@@ -632,6 +653,7 @@
 			// 
 			this.laWindowHeaderFont.AutoSize = true;
 			this.laWindowHeaderFont.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.laWindowHeaderFont.ForeColor = System.Drawing.Color.Black;
 			this.laWindowHeaderFont.Location = new System.Drawing.Point(3, 123);
 			this.laWindowHeaderFont.Name = "laWindowHeaderFont";
 			this.laWindowHeaderFont.Size = new System.Drawing.Size(83, 16);
@@ -644,6 +666,10 @@
 			this.colorEditWindowForeColor.EditValue = System.Drawing.Color.Empty;
 			this.colorEditWindowForeColor.Location = new System.Drawing.Point(469, 45);
 			this.colorEditWindowForeColor.Name = "colorEditWindowForeColor";
+			this.colorEditWindowForeColor.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.colorEditWindowForeColor.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.colorEditWindowForeColor.Properties.Appearance.Options.UseBackColor = true;
+			this.colorEditWindowForeColor.Properties.Appearance.Options.UseForeColor = true;
 			this.colorEditWindowForeColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
 			this.colorEditWindowForeColor.Properties.ColorAlignment = DevExpress.Utils.HorzAlignment.Center;
@@ -656,6 +682,7 @@
 			// 
 			this.laWindowHeaderBackColor.AutoSize = true;
 			this.laWindowHeaderBackColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.laWindowHeaderBackColor.ForeColor = System.Drawing.Color.Black;
 			this.laWindowHeaderBackColor.Location = new System.Drawing.Point(3, 14);
 			this.laWindowHeaderBackColor.Name = "laWindowHeaderBackColor";
 			this.laWindowHeaderBackColor.Size = new System.Drawing.Size(123, 16);
@@ -668,6 +695,10 @@
 			this.colorEditWindowBackColor.EditValue = System.Drawing.Color.Empty;
 			this.colorEditWindowBackColor.Location = new System.Drawing.Point(469, 11);
 			this.colorEditWindowBackColor.Name = "colorEditWindowBackColor";
+			this.colorEditWindowBackColor.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.colorEditWindowBackColor.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.colorEditWindowBackColor.Properties.Appearance.Options.UseBackColor = true;
+			this.colorEditWindowBackColor.Properties.Appearance.Options.UseForeColor = true;
 			this.colorEditWindowBackColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
 			this.colorEditWindowBackColor.Properties.ColorAlignment = DevExpress.Utils.HorzAlignment.Center;
@@ -681,6 +712,7 @@
 			this.ckApllyForAllWindowsAppearance.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.ckApllyForAllWindowsAppearance.AutoSize = true;
 			this.ckApllyForAllWindowsAppearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
+			this.ckApllyForAllWindowsAppearance.ForeColor = System.Drawing.Color.Black;
 			this.ckApllyForAllWindowsAppearance.Location = new System.Drawing.Point(6, 316);
 			this.ckApllyForAllWindowsAppearance.Name = "ckApllyForAllWindowsAppearance";
 			this.ckApllyForAllWindowsAppearance.Size = new System.Drawing.Size(230, 20);
@@ -694,6 +726,7 @@
 			this.laWindowForeColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.laWindowForeColor.AutoSize = true;
 			this.laWindowForeColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.laWindowForeColor.ForeColor = System.Drawing.Color.Black;
 			this.laWindowForeColor.Location = new System.Drawing.Point(323, 48);
 			this.laWindowForeColor.Name = "laWindowForeColor";
 			this.laWindowForeColor.Size = new System.Drawing.Size(120, 16);
@@ -705,6 +738,10 @@
 			this.colorEditWindowHeaderBackColor.EditValue = System.Drawing.Color.Empty;
 			this.colorEditWindowHeaderBackColor.Location = new System.Drawing.Point(153, 11);
 			this.colorEditWindowHeaderBackColor.Name = "colorEditWindowHeaderBackColor";
+			this.colorEditWindowHeaderBackColor.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.colorEditWindowHeaderBackColor.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.colorEditWindowHeaderBackColor.Properties.Appearance.Options.UseBackColor = true;
+			this.colorEditWindowHeaderBackColor.Properties.Appearance.Options.UseForeColor = true;
 			this.colorEditWindowHeaderBackColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
 			this.colorEditWindowHeaderBackColor.Properties.ColorAlignment = DevExpress.Utils.HorzAlignment.Center;
@@ -718,6 +755,7 @@
 			this.laWindowBackColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.laWindowBackColor.AutoSize = true;
 			this.laWindowBackColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.laWindowBackColor.ForeColor = System.Drawing.Color.Black;
 			this.laWindowBackColor.Location = new System.Drawing.Point(323, 14);
 			this.laWindowBackColor.Name = "laWindowBackColor";
 			this.laWindowBackColor.Size = new System.Drawing.Size(125, 16);
@@ -729,6 +767,10 @@
 			this.colorEditWindowHeaderForeColor.EditValue = System.Drawing.Color.Empty;
 			this.colorEditWindowHeaderForeColor.Location = new System.Drawing.Point(153, 45);
 			this.colorEditWindowHeaderForeColor.Name = "colorEditWindowHeaderForeColor";
+			this.colorEditWindowHeaderForeColor.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.colorEditWindowHeaderForeColor.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.colorEditWindowHeaderForeColor.Properties.Appearance.Options.UseBackColor = true;
+			this.colorEditWindowHeaderForeColor.Properties.Appearance.Options.UseForeColor = true;
 			this.colorEditWindowHeaderForeColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
 			this.colorEditWindowHeaderForeColor.Properties.ColorAlignment = DevExpress.Utils.HorzAlignment.Center;
@@ -741,6 +783,7 @@
 			// 
 			this.laWindowHeaderForeColor.AutoSize = true;
 			this.laWindowHeaderForeColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.laWindowHeaderForeColor.ForeColor = System.Drawing.Color.Black;
 			this.laWindowHeaderForeColor.Location = new System.Drawing.Point(3, 48);
 			this.laWindowHeaderForeColor.Name = "laWindowHeaderForeColor";
 			this.laWindowHeaderForeColor.Size = new System.Drawing.Size(118, 16);
@@ -749,6 +792,8 @@
 			// 
 			// xtraTabPageWindowPropertiesWidget
 			// 
+			this.xtraTabPageWindowPropertiesWidget.Appearance.PageClient.ForeColor = System.Drawing.Color.Black;
+			this.xtraTabPageWindowPropertiesWidget.Appearance.PageClient.Options.UseForeColor = true;
 			this.xtraTabPageWindowPropertiesWidget.Controls.Add(this.ckApllyForAllWindowsWidget);
 			this.xtraTabPageWindowPropertiesWidget.Controls.Add(this.gbWindowWidgets);
 			this.xtraTabPageWindowPropertiesWidget.Controls.Add(this.ckWindowEnableWidget);
@@ -761,6 +806,7 @@
 			this.ckApllyForAllWindowsWidget.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.ckApllyForAllWindowsWidget.AutoSize = true;
 			this.ckApllyForAllWindowsWidget.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
+			this.ckApllyForAllWindowsWidget.ForeColor = System.Drawing.Color.Black;
 			this.ckApllyForAllWindowsWidget.Location = new System.Drawing.Point(3, 316);
 			this.ckApllyForAllWindowsWidget.Name = "ckApllyForAllWindowsWidget";
 			this.ckApllyForAllWindowsWidget.Size = new System.Drawing.Size(198, 20);
@@ -774,28 +820,36 @@
 			this.gbWindowWidgets.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+			this.gbWindowWidgets.Appearance.BackColor = System.Drawing.Color.White;
+			this.gbWindowWidgets.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.gbWindowWidgets.Appearance.Options.UseBackColor = true;
+			this.gbWindowWidgets.Appearance.Options.UseForeColor = true;
 			this.gbWindowWidgets.Controls.Add(this.gridControlWindowWidgets);
 			this.gbWindowWidgets.Controls.Add(this.pbWindowSelectedWidget);
 			this.gbWindowWidgets.Controls.Add(this.laWindowAvailableWidgets);
 			this.gbWindowWidgets.Controls.Add(this.laWindowSelectedWidget);
 			this.gbWindowWidgets.Enabled = false;
-			this.gbWindowWidgets.Location = new System.Drawing.Point(3, 23);
+			this.gbWindowWidgets.Location = new System.Drawing.Point(5, 26);
 			this.gbWindowWidgets.Name = "gbWindowWidgets";
-			this.gbWindowWidgets.Size = new System.Drawing.Size(576, 287);
+			this.gbWindowWidgets.ShowCaption = false;
+			this.gbWindowWidgets.Size = new System.Drawing.Size(572, 283);
 			this.gbWindowWidgets.TabIndex = 5;
-			this.gbWindowWidgets.TabStop = false;
 			// 
 			// gridControlWindowWidgets
 			// 
 			this.gridControlWindowWidgets.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+			this.gridControlWindowWidgets.EmbeddedNavigator.Appearance.BackColor = System.Drawing.Color.White;
+			this.gridControlWindowWidgets.EmbeddedNavigator.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.gridControlWindowWidgets.EmbeddedNavigator.Appearance.Options.UseBackColor = true;
+			this.gridControlWindowWidgets.EmbeddedNavigator.Appearance.Options.UseForeColor = true;
 			this.gridControlWindowWidgets.Location = new System.Drawing.Point(9, 79);
 			this.gridControlWindowWidgets.MainView = this.layoutViewWindowWidgets;
 			this.gridControlWindowWidgets.Name = "gridControlWindowWidgets";
 			this.gridControlWindowWidgets.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemPictureEditWindowWidget});
-			this.gridControlWindowWidgets.Size = new System.Drawing.Size(561, 202);
+			this.gridControlWindowWidgets.Size = new System.Drawing.Size(557, 198);
 			this.gridControlWindowWidgets.TabIndex = 4;
 			this.gridControlWindowWidgets.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.layoutViewWindowWidgets});
@@ -896,6 +950,8 @@
 			// 
 			// pbWindowSelectedWidget
 			// 
+			this.pbWindowSelectedWidget.BackColor = System.Drawing.Color.Transparent;
+			this.pbWindowSelectedWidget.ForeColor = System.Drawing.Color.Black;
 			this.pbWindowSelectedWidget.Location = new System.Drawing.Point(129, 9);
 			this.pbWindowSelectedWidget.Name = "pbWindowSelectedWidget";
 			this.pbWindowSelectedWidget.Size = new System.Drawing.Size(36, 36);
@@ -906,7 +962,9 @@
 			// laWindowAvailableWidgets
 			// 
 			this.laWindowAvailableWidgets.AutoSize = true;
+			this.laWindowAvailableWidgets.BackColor = System.Drawing.Color.Transparent;
 			this.laWindowAvailableWidgets.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.laWindowAvailableWidgets.ForeColor = System.Drawing.Color.Black;
 			this.laWindowAvailableWidgets.Location = new System.Drawing.Point(6, 60);
 			this.laWindowAvailableWidgets.Name = "laWindowAvailableWidgets";
 			this.laWindowAvailableWidgets.Size = new System.Drawing.Size(254, 16);
@@ -916,7 +974,9 @@
 			// laWindowSelectedWidget
 			// 
 			this.laWindowSelectedWidget.AutoSize = true;
+			this.laWindowSelectedWidget.BackColor = System.Drawing.Color.Transparent;
 			this.laWindowSelectedWidget.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.laWindowSelectedWidget.ForeColor = System.Drawing.Color.Black;
 			this.laWindowSelectedWidget.Location = new System.Drawing.Point(6, 19);
 			this.laWindowSelectedWidget.Name = "laWindowSelectedWidget";
 			this.laWindowSelectedWidget.Size = new System.Drawing.Size(117, 16);
@@ -927,6 +987,7 @@
 			// 
 			this.ckWindowEnableWidget.AutoSize = true;
 			this.ckWindowEnableWidget.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.ckWindowEnableWidget.ForeColor = System.Drawing.Color.Black;
 			this.ckWindowEnableWidget.Location = new System.Drawing.Point(3, 6);
 			this.ckWindowEnableWidget.Name = "ckWindowEnableWidget";
 			this.ckWindowEnableWidget.Size = new System.Drawing.Size(120, 20);
@@ -937,6 +998,8 @@
 			// 
 			// xtraTabPageWindowPropertiesBanner
 			// 
+			this.xtraTabPageWindowPropertiesBanner.Appearance.PageClient.ForeColor = System.Drawing.Color.Black;
+			this.xtraTabPageWindowPropertiesBanner.Appearance.PageClient.Options.UseForeColor = true;
 			this.xtraTabPageWindowPropertiesBanner.Controls.Add(this.ckApllyForAllWindowsBanner);
 			this.xtraTabPageWindowPropertiesBanner.Controls.Add(this.gbWindowBanners);
 			this.xtraTabPageWindowPropertiesBanner.Controls.Add(this.ckWindowEnableBanner);
@@ -949,6 +1012,7 @@
 			this.ckApllyForAllWindowsBanner.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.ckApllyForAllWindowsBanner.AutoSize = true;
 			this.ckApllyForAllWindowsBanner.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
+			this.ckApllyForAllWindowsBanner.ForeColor = System.Drawing.Color.Black;
 			this.ckApllyForAllWindowsBanner.Location = new System.Drawing.Point(3, 316);
 			this.ckApllyForAllWindowsBanner.Name = "ckApllyForAllWindowsBanner";
 			this.ckApllyForAllWindowsBanner.Size = new System.Drawing.Size(198, 20);
@@ -962,6 +1026,10 @@
 			this.gbWindowBanners.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+			this.gbWindowBanners.Appearance.BackColor = System.Drawing.Color.White;
+			this.gbWindowBanners.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.gbWindowBanners.Appearance.Options.UseBackColor = true;
+			this.gbWindowBanners.Appearance.Options.UseForeColor = true;
 			this.gbWindowBanners.Controls.Add(this.colorEditWindowBannerTextColor);
 			this.gbWindowBanners.Controls.Add(this.buttonEditWindowBannerTextFont);
 			this.gbWindowBanners.Controls.Add(this.memoEditWindowBannerText);
@@ -975,19 +1043,23 @@
 			this.gbWindowBanners.Controls.Add(this.laWindowAvailableBanners);
 			this.gbWindowBanners.Controls.Add(this.laWindowSelectedBanner);
 			this.gbWindowBanners.Enabled = false;
-			this.gbWindowBanners.Location = new System.Drawing.Point(3, 23);
+			this.gbWindowBanners.Location = new System.Drawing.Point(5, 26);
 			this.gbWindowBanners.Name = "gbWindowBanners";
-			this.gbWindowBanners.Size = new System.Drawing.Size(576, 287);
+			this.gbWindowBanners.ShowCaption = false;
+			this.gbWindowBanners.Size = new System.Drawing.Size(572, 283);
 			this.gbWindowBanners.TabIndex = 7;
-			this.gbWindowBanners.TabStop = false;
 			// 
 			// colorEditWindowBannerTextColor
 			// 
 			this.colorEditWindowBannerTextColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.colorEditWindowBannerTextColor.EditValue = System.Drawing.Color.Empty;
 			this.colorEditWindowBannerTextColor.Enabled = false;
-			this.colorEditWindowBannerTextColor.Location = new System.Drawing.Point(347, 259);
+			this.colorEditWindowBannerTextColor.Location = new System.Drawing.Point(343, 255);
 			this.colorEditWindowBannerTextColor.Name = "colorEditWindowBannerTextColor";
+			this.colorEditWindowBannerTextColor.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
+			this.colorEditWindowBannerTextColor.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.colorEditWindowBannerTextColor.Properties.Appearance.Options.UseBackColor = true;
+			this.colorEditWindowBannerTextColor.Properties.Appearance.Options.UseForeColor = true;
 			this.colorEditWindowBannerTextColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
 			this.colorEditWindowBannerTextColor.Properties.ColorAlignment = DevExpress.Utils.HorzAlignment.Center;
@@ -1000,8 +1072,12 @@
 			// 
 			this.buttonEditWindowBannerTextFont.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonEditWindowBannerTextFont.Enabled = false;
-			this.buttonEditWindowBannerTextFont.Location = new System.Drawing.Point(347, 231);
+			this.buttonEditWindowBannerTextFont.Location = new System.Drawing.Point(343, 227);
 			this.buttonEditWindowBannerTextFont.Name = "buttonEditWindowBannerTextFont";
+			this.buttonEditWindowBannerTextFont.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
+			this.buttonEditWindowBannerTextFont.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.buttonEditWindowBannerTextFont.Properties.Appearance.Options.UseBackColor = true;
+			this.buttonEditWindowBannerTextFont.Properties.Appearance.Options.UseForeColor = true;
 			this.buttonEditWindowBannerTextFont.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
 			this.buttonEditWindowBannerTextFont.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
@@ -1017,66 +1093,81 @@
 			this.memoEditWindowBannerText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.memoEditWindowBannerText.Enabled = false;
-			this.memoEditWindowBannerText.Location = new System.Drawing.Point(347, 115);
+			this.memoEditWindowBannerText.Location = new System.Drawing.Point(343, 115);
 			this.memoEditWindowBannerText.Name = "memoEditWindowBannerText";
-			this.memoEditWindowBannerText.Size = new System.Drawing.Size(223, 110);
+			this.memoEditWindowBannerText.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
+			this.memoEditWindowBannerText.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.memoEditWindowBannerText.Properties.Appearance.Options.UseBackColor = true;
+			this.memoEditWindowBannerText.Properties.Appearance.Options.UseForeColor = true;
+			this.memoEditWindowBannerText.Size = new System.Drawing.Size(223, 106);
 			this.memoEditWindowBannerText.StyleController = this.styleController;
 			this.memoEditWindowBannerText.TabIndex = 10;
+			this.memoEditWindowBannerText.UseOptimizedRendering = true;
 			this.memoEditWindowBannerText.EditValueChanged += new System.EventHandler(this.StateChanges_TextChanged);
 			// 
 			// ckWindowBannerShowText
 			// 
 			this.ckWindowBannerShowText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.ckWindowBannerShowText.BackColor = System.Drawing.Color.Transparent;
 			this.ckWindowBannerShowText.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold);
-			this.ckWindowBannerShowText.Location = new System.Drawing.Point(347, 94);
+			this.ckWindowBannerShowText.ForeColor = System.Drawing.Color.Black;
+			this.ckWindowBannerShowText.Location = new System.Drawing.Point(343, 94);
 			this.ckWindowBannerShowText.Name = "ckWindowBannerShowText";
 			this.ckWindowBannerShowText.Size = new System.Drawing.Size(223, 20);
 			this.ckWindowBannerShowText.TabIndex = 9;
 			this.ckWindowBannerShowText.Text = "Show Label";
-			this.ckWindowBannerShowText.UseVisualStyleBackColor = true;
+			this.ckWindowBannerShowText.UseVisualStyleBackColor = false;
 			this.ckWindowBannerShowText.CheckedChanged += new System.EventHandler(this.ckWindowBannerShowText_CheckedChanged);
 			// 
 			// rbWindowBannerAlignmentRight
 			// 
 			this.rbWindowBannerAlignmentRight.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.rbWindowBannerAlignmentRight.Location = new System.Drawing.Point(499, 38);
+			this.rbWindowBannerAlignmentRight.BackColor = System.Drawing.Color.Transparent;
+			this.rbWindowBannerAlignmentRight.ForeColor = System.Drawing.Color.Black;
+			this.rbWindowBannerAlignmentRight.Location = new System.Drawing.Point(495, 38);
 			this.rbWindowBannerAlignmentRight.Name = "rbWindowBannerAlignmentRight";
 			this.rbWindowBannerAlignmentRight.Size = new System.Drawing.Size(77, 20);
 			this.rbWindowBannerAlignmentRight.TabIndex = 8;
 			this.rbWindowBannerAlignmentRight.TabStop = true;
 			this.rbWindowBannerAlignmentRight.Text = "Right";
-			this.rbWindowBannerAlignmentRight.UseVisualStyleBackColor = true;
+			this.rbWindowBannerAlignmentRight.UseVisualStyleBackColor = false;
 			this.rbWindowBannerAlignmentRight.CheckedChanged += new System.EventHandler(this.StateChanges_CheckedChanged);
 			// 
 			// rbWindowBannerAlignmentCenter
 			// 
 			this.rbWindowBannerAlignmentCenter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.rbWindowBannerAlignmentCenter.Location = new System.Drawing.Point(418, 38);
+			this.rbWindowBannerAlignmentCenter.BackColor = System.Drawing.Color.Transparent;
+			this.rbWindowBannerAlignmentCenter.ForeColor = System.Drawing.Color.Black;
+			this.rbWindowBannerAlignmentCenter.Location = new System.Drawing.Point(414, 38);
 			this.rbWindowBannerAlignmentCenter.Name = "rbWindowBannerAlignmentCenter";
 			this.rbWindowBannerAlignmentCenter.Size = new System.Drawing.Size(70, 20);
 			this.rbWindowBannerAlignmentCenter.TabIndex = 7;
 			this.rbWindowBannerAlignmentCenter.TabStop = true;
 			this.rbWindowBannerAlignmentCenter.Text = "Center";
-			this.rbWindowBannerAlignmentCenter.UseVisualStyleBackColor = true;
+			this.rbWindowBannerAlignmentCenter.UseVisualStyleBackColor = false;
 			this.rbWindowBannerAlignmentCenter.CheckedChanged += new System.EventHandler(this.StateChanges_CheckedChanged);
 			// 
 			// rbWindowBannerAlignmentLeft
 			// 
 			this.rbWindowBannerAlignmentLeft.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.rbWindowBannerAlignmentLeft.Location = new System.Drawing.Point(347, 38);
+			this.rbWindowBannerAlignmentLeft.BackColor = System.Drawing.Color.Transparent;
+			this.rbWindowBannerAlignmentLeft.ForeColor = System.Drawing.Color.Black;
+			this.rbWindowBannerAlignmentLeft.Location = new System.Drawing.Point(343, 38);
 			this.rbWindowBannerAlignmentLeft.Name = "rbWindowBannerAlignmentLeft";
 			this.rbWindowBannerAlignmentLeft.Size = new System.Drawing.Size(55, 20);
 			this.rbWindowBannerAlignmentLeft.TabIndex = 6;
 			this.rbWindowBannerAlignmentLeft.TabStop = true;
 			this.rbWindowBannerAlignmentLeft.Text = "Left";
-			this.rbWindowBannerAlignmentLeft.UseVisualStyleBackColor = true;
+			this.rbWindowBannerAlignmentLeft.UseVisualStyleBackColor = false;
 			this.rbWindowBannerAlignmentLeft.CheckedChanged += new System.EventHandler(this.StateChanges_CheckedChanged);
 			// 
 			// laWindowBannerAligment
 			// 
 			this.laWindowBannerAligment.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.laWindowBannerAligment.BackColor = System.Drawing.Color.Transparent;
 			this.laWindowBannerAligment.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.laWindowBannerAligment.Location = new System.Drawing.Point(344, 19);
+			this.laWindowBannerAligment.ForeColor = System.Drawing.Color.Black;
+			this.laWindowBannerAligment.Location = new System.Drawing.Point(340, 19);
 			this.laWindowBannerAligment.Name = "laWindowBannerAligment";
 			this.laWindowBannerAligment.Size = new System.Drawing.Size(226, 16);
 			this.laWindowBannerAligment.TabIndex = 5;
@@ -1087,12 +1178,16 @@
 			this.gridControlWindowBanners.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+			this.gridControlWindowBanners.EmbeddedNavigator.Appearance.BackColor = System.Drawing.Color.White;
+			this.gridControlWindowBanners.EmbeddedNavigator.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.gridControlWindowBanners.EmbeddedNavigator.Appearance.Options.UseBackColor = true;
+			this.gridControlWindowBanners.EmbeddedNavigator.Appearance.Options.UseForeColor = true;
 			this.gridControlWindowBanners.Location = new System.Drawing.Point(9, 117);
 			this.gridControlWindowBanners.MainView = this.gridViewWindowBanners;
 			this.gridControlWindowBanners.Name = "gridControlWindowBanners";
 			this.gridControlWindowBanners.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemPictureEditWindowBanner});
-			this.gridControlWindowBanners.Size = new System.Drawing.Size(320, 164);
+			this.gridControlWindowBanners.Size = new System.Drawing.Size(316, 160);
 			this.gridControlWindowBanners.TabIndex = 4;
 			this.gridControlWindowBanners.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewWindowBanners});
@@ -1131,7 +1226,7 @@
 			this.gridViewWindowBanners.OptionsView.ShowGroupExpandCollapseButtons = false;
 			this.gridViewWindowBanners.OptionsView.ShowGroupPanel = false;
 			this.gridViewWindowBanners.OptionsView.ShowIndicator = false;
-			this.gridViewWindowBanners.OptionsView.ShowPreviewLines = false;
+			this.gridViewWindowBanners.OptionsView.ShowPreviewRowLines = DevExpress.Utils.DefaultBoolean.False;
 			this.gridViewWindowBanners.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gridViewBanners_FocusedRowChanged);
 			this.gridViewWindowBanners.Click += new System.EventHandler(this.gridViewBanners_Click);
 			// 
@@ -1155,9 +1250,11 @@
 			// 
 			this.pbWindowSelectedBanner.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+			this.pbWindowSelectedBanner.BackColor = System.Drawing.Color.Transparent;
+			this.pbWindowSelectedBanner.ForeColor = System.Drawing.Color.Black;
 			this.pbWindowSelectedBanner.Location = new System.Drawing.Point(129, 19);
 			this.pbWindowSelectedBanner.Name = "pbWindowSelectedBanner";
-			this.pbWindowSelectedBanner.Size = new System.Drawing.Size(200, 59);
+			this.pbWindowSelectedBanner.Size = new System.Drawing.Size(196, 59);
 			this.pbWindowSelectedBanner.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 			this.pbWindowSelectedBanner.TabIndex = 3;
 			this.pbWindowSelectedBanner.TabStop = false;
@@ -1165,7 +1262,9 @@
 			// laWindowAvailableBanners
 			// 
 			this.laWindowAvailableBanners.AutoSize = true;
+			this.laWindowAvailableBanners.BackColor = System.Drawing.Color.Transparent;
 			this.laWindowAvailableBanners.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.laWindowAvailableBanners.ForeColor = System.Drawing.Color.Black;
 			this.laWindowAvailableBanners.Location = new System.Drawing.Point(6, 94);
 			this.laWindowAvailableBanners.Name = "laWindowAvailableBanners";
 			this.laWindowAvailableBanners.Size = new System.Drawing.Size(256, 16);
@@ -1175,7 +1274,9 @@
 			// laWindowSelectedBanner
 			// 
 			this.laWindowSelectedBanner.AutoSize = true;
+			this.laWindowSelectedBanner.BackColor = System.Drawing.Color.Transparent;
 			this.laWindowSelectedBanner.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.laWindowSelectedBanner.ForeColor = System.Drawing.Color.Black;
 			this.laWindowSelectedBanner.Location = new System.Drawing.Point(6, 19);
 			this.laWindowSelectedBanner.Name = "laWindowSelectedBanner";
 			this.laWindowSelectedBanner.Size = new System.Drawing.Size(118, 16);
@@ -1186,6 +1287,7 @@
 			// 
 			this.ckWindowEnableBanner.AutoSize = true;
 			this.ckWindowEnableBanner.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.ckWindowEnableBanner.ForeColor = System.Drawing.Color.Black;
 			this.ckWindowEnableBanner.Location = new System.Drawing.Point(3, 6);
 			this.ckWindowEnableBanner.Name = "ckWindowEnableBanner";
 			this.ckWindowEnableBanner.Size = new System.Drawing.Size(121, 20);
@@ -1200,6 +1302,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.comboBoxEditWindows.Location = new System.Drawing.Point(10, 31);
 			this.comboBoxEditWindows.Name = "comboBoxEditWindows";
+			this.comboBoxEditWindows.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.comboBoxEditWindows.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.comboBoxEditWindows.Properties.Appearance.Options.UseBackColor = true;
+			this.comboBoxEditWindows.Properties.Appearance.Options.UseForeColor = true;
 			this.comboBoxEditWindows.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
 			this.comboBoxEditWindows.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
@@ -1212,6 +1318,7 @@
 			// 
 			this.laLocationValue.AutoSize = true;
 			this.laLocationValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.laLocationValue.ForeColor = System.Drawing.Color.Black;
 			this.laLocationValue.Location = new System.Drawing.Point(69, 67);
 			this.laLocationValue.Name = "laLocationValue";
 			this.laLocationValue.Size = new System.Drawing.Size(0, 16);
@@ -1221,6 +1328,7 @@
 			// 
 			this.laWindow.AutoSize = true;
 			this.laWindow.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.laWindow.ForeColor = System.Drawing.Color.Black;
 			this.laWindow.Location = new System.Drawing.Point(7, 12);
 			this.laWindow.Name = "laWindow";
 			this.laWindow.Size = new System.Drawing.Size(257, 16);
@@ -1231,6 +1339,7 @@
 			// 
 			this.laLocationHeader.AutoSize = true;
 			this.laLocationHeader.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
+			this.laLocationHeader.ForeColor = System.Drawing.Color.Black;
 			this.laLocationHeader.Location = new System.Drawing.Point(7, 67);
 			this.laLocationHeader.Name = "laLocationHeader";
 			this.laLocationHeader.Size = new System.Drawing.Size(62, 16);
@@ -1275,8 +1384,12 @@
 			this.xtraTabControlSettings.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+			this.xtraTabControlSettings.Appearance.BackColor = System.Drawing.Color.White;
 			this.xtraTabControlSettings.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.xtraTabControlSettings.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.xtraTabControlSettings.Appearance.Options.UseBackColor = true;
 			this.xtraTabControlSettings.Appearance.Options.UseFont = true;
+			this.xtraTabControlSettings.Appearance.Options.UseForeColor = true;
 			this.xtraTabControlSettings.AppearancePage.Header.Font = new System.Drawing.Font("Arial", 9.75F);
 			this.xtraTabControlSettings.AppearancePage.Header.Options.UseFont = true;
 			this.xtraTabControlSettings.AppearancePage.HeaderActive.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -1300,9 +1413,11 @@
 			// 
 			// xtraTabPageColumns
 			// 
+			this.xtraTabPageColumns.Appearance.PageClient.ForeColor = System.Drawing.Color.Black;
+			this.xtraTabPageColumns.Appearance.PageClient.Options.UseForeColor = true;
 			this.xtraTabPageColumns.Controls.Add(this.pnColumns);
 			this.xtraTabPageColumns.Name = "xtraTabPageColumns";
-			this.xtraTabPageColumns.Size = new System.Drawing.Size(605, 473);
+			this.xtraTabPageColumns.Size = new System.Drawing.Size(605, 471);
 			this.xtraTabPageColumns.Text = "Columns";
 			// 
 			// pnColumns
@@ -1316,9 +1431,10 @@
 			this.pnColumns.Controls.Add(this.buttonXAdd);
 			this.pnColumns.Controls.Add(this.xtraTabControlWindows);
 			this.pnColumns.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.pnColumns.ForeColor = System.Drawing.Color.Black;
 			this.pnColumns.Location = new System.Drawing.Point(0, 0);
 			this.pnColumns.Name = "pnColumns";
-			this.pnColumns.Size = new System.Drawing.Size(605, 473);
+			this.pnColumns.Size = new System.Drawing.Size(605, 471);
 			this.pnColumns.TabIndex = 16;
 			// 
 			// buttonXSort
@@ -1332,6 +1448,7 @@
 			this.buttonXSort.Location = new System.Drawing.Point(558, 301);
 			this.buttonXSort.Name = "buttonXSort";
 			this.buttonXSort.Size = new System.Drawing.Size(37, 37);
+			this.buttonXSort.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXSort.TabIndex = 26;
 			this.buttonXSort.Click += new System.EventHandler(this.buttonXSort_Click);
 			// 
@@ -1341,11 +1458,12 @@
 			this.buttonXLeft.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXLeft.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXLeft.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.buttonXLeft.Image = global::FileManager.Properties.Resources.ArrowLeftGreen;
+			this.buttonXLeft.Image = global::FileManager.Properties.Resources.ArrowLeft;
 			this.buttonXLeft.ImageFixedSize = new System.Drawing.Size(24, 24);
 			this.buttonXLeft.Location = new System.Drawing.Point(558, 256);
 			this.buttonXLeft.Name = "buttonXLeft";
 			this.buttonXLeft.Size = new System.Drawing.Size(37, 37);
+			this.buttonXLeft.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXLeft.TabIndex = 25;
 			this.buttonXLeft.Click += new System.EventHandler(this.btLeft_Click);
 			// 
@@ -1360,6 +1478,7 @@
 			this.buttonXDown.Location = new System.Drawing.Point(558, 166);
 			this.buttonXDown.Name = "buttonXDown";
 			this.buttonXDown.Size = new System.Drawing.Size(37, 37);
+			this.buttonXDown.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXDown.TabIndex = 23;
 			this.buttonXDown.Click += new System.EventHandler(this.btDown_Click);
 			// 
@@ -1369,11 +1488,12 @@
 			this.buttonXRight.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXRight.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXRight.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.buttonXRight.Image = global::FileManager.Properties.Resources.GreenRightArrow;
+			this.buttonXRight.Image = global::FileManager.Properties.Resources.ArrowRight;
 			this.buttonXRight.ImageFixedSize = new System.Drawing.Size(24, 24);
 			this.buttonXRight.Location = new System.Drawing.Point(558, 211);
 			this.buttonXRight.Name = "buttonXRight";
 			this.buttonXRight.Size = new System.Drawing.Size(37, 37);
+			this.buttonXRight.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXRight.TabIndex = 24;
 			this.buttonXRight.Click += new System.EventHandler(this.btRight_Click);
 			// 
@@ -1383,11 +1503,12 @@
 			this.buttonXRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXRemove.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXRemove.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.buttonXRemove.Image = global::FileManager.Properties.Resources.Red_Minus;
+			this.buttonXRemove.Image = global::FileManager.Properties.Resources.DeleteButton;
 			this.buttonXRemove.ImageFixedSize = new System.Drawing.Size(24, 24);
 			this.buttonXRemove.Location = new System.Drawing.Point(558, 76);
 			this.buttonXRemove.Name = "buttonXRemove";
 			this.buttonXRemove.Size = new System.Drawing.Size(37, 37);
+			this.buttonXRemove.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXRemove.TabIndex = 21;
 			this.buttonXRemove.Click += new System.EventHandler(this.btRemoveWindow_Click);
 			// 
@@ -1402,6 +1523,7 @@
 			this.buttonXUp.Location = new System.Drawing.Point(558, 121);
 			this.buttonXUp.Name = "buttonXUp";
 			this.buttonXUp.Size = new System.Drawing.Size(37, 37);
+			this.buttonXUp.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXUp.TabIndex = 22;
 			this.buttonXUp.Click += new System.EventHandler(this.btUp_Click);
 			// 
@@ -1411,10 +1533,11 @@
 			this.buttonXAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXAdd.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXAdd.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.buttonXAdd.Image = global::FileManager.Properties.Resources.Green_Plus;
+			this.buttonXAdd.Image = global::FileManager.Properties.Resources.PlusButton;
 			this.buttonXAdd.Location = new System.Drawing.Point(558, 31);
 			this.buttonXAdd.Name = "buttonXAdd";
 			this.buttonXAdd.Size = new System.Drawing.Size(37, 37);
+			this.buttonXAdd.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXAdd.TabIndex = 19;
 			this.buttonXAdd.Click += new System.EventHandler(this.btAddWindow_Click);
 			// 
@@ -1423,8 +1546,12 @@
 			this.xtraTabControlWindows.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+			this.xtraTabControlWindows.Appearance.BackColor = System.Drawing.Color.White;
 			this.xtraTabControlWindows.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.xtraTabControlWindows.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.xtraTabControlWindows.Appearance.Options.UseBackColor = true;
 			this.xtraTabControlWindows.Appearance.Options.UseFont = true;
+			this.xtraTabControlWindows.Appearance.Options.UseForeColor = true;
 			this.xtraTabControlWindows.AppearancePage.Header.Font = new System.Drawing.Font("Arial", 9.75F);
 			this.xtraTabControlWindows.AppearancePage.Header.Options.UseFont = true;
 			this.xtraTabControlWindows.AppearancePage.HeaderActive.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -1438,7 +1565,7 @@
 			this.xtraTabControlWindows.Location = new System.Drawing.Point(6, 6);
 			this.xtraTabControlWindows.Name = "xtraTabControlWindows";
 			this.xtraTabControlWindows.SelectedTabPage = this.xtraTabPageColumn1;
-			this.xtraTabControlWindows.Size = new System.Drawing.Size(546, 459);
+			this.xtraTabControlWindows.Size = new System.Drawing.Size(546, 457);
 			this.xtraTabControlWindows.TabIndex = 4;
 			this.xtraTabControlWindows.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.xtraTabPageColumn1,
@@ -1448,47 +1575,61 @@
 			// 
 			// xtraTabPageColumn1
 			// 
+			this.xtraTabPageColumn1.Appearance.PageClient.ForeColor = System.Drawing.Color.Black;
+			this.xtraTabPageColumn1.Appearance.PageClient.Options.UseForeColor = true;
 			this.xtraTabPageColumn1.Controls.Add(this.grColumn1);
 			this.xtraTabPageColumn1.Name = "xtraTabPageColumn1";
-			this.xtraTabPageColumn1.Size = new System.Drawing.Size(544, 433);
+			this.xtraTabPageColumn1.Size = new System.Drawing.Size(544, 429);
 			this.xtraTabPageColumn1.Text = "Column 1";
 			// 
 			// xtraTabPageColumn2
 			// 
+			this.xtraTabPageColumn2.Appearance.PageClient.ForeColor = System.Drawing.Color.Black;
+			this.xtraTabPageColumn2.Appearance.PageClient.Options.UseForeColor = true;
 			this.xtraTabPageColumn2.Controls.Add(this.grColumn2);
 			this.xtraTabPageColumn2.Name = "xtraTabPageColumn2";
-			this.xtraTabPageColumn2.Size = new System.Drawing.Size(544, 433);
+			this.xtraTabPageColumn2.Size = new System.Drawing.Size(544, 429);
 			this.xtraTabPageColumn2.Text = "Column 2";
 			// 
 			// xtraTabPageColumn3
 			// 
+			this.xtraTabPageColumn3.Appearance.PageClient.ForeColor = System.Drawing.Color.Black;
+			this.xtraTabPageColumn3.Appearance.PageClient.Options.UseForeColor = true;
 			this.xtraTabPageColumn3.Controls.Add(this.grColumn3);
 			this.xtraTabPageColumn3.Name = "xtraTabPageColumn3";
-			this.xtraTabPageColumn3.Size = new System.Drawing.Size(544, 433);
+			this.xtraTabPageColumn3.Size = new System.Drawing.Size(544, 429);
 			this.xtraTabPageColumn3.Text = "Column 3";
 			// 
 			// xtraTabPageWindows
 			// 
+			this.xtraTabPageWindows.Appearance.PageClient.ForeColor = System.Drawing.Color.Black;
+			this.xtraTabPageWindows.Appearance.PageClient.Options.UseForeColor = true;
 			this.xtraTabPageWindows.Controls.Add(this.pnWindows);
 			this.xtraTabPageWindows.Name = "xtraTabPageWindows";
-			this.xtraTabPageWindows.Size = new System.Drawing.Size(605, 473);
+			this.xtraTabPageWindows.Size = new System.Drawing.Size(605, 471);
 			this.xtraTabPageWindows.Text = "Windows";
 			// 
 			// xtraTabPageColumnTitles
 			// 
+			this.xtraTabPageColumnTitles.Appearance.PageClient.ForeColor = System.Drawing.Color.Black;
+			this.xtraTabPageColumnTitles.Appearance.PageClient.Options.UseForeColor = true;
 			this.xtraTabPageColumnTitles.Controls.Add(this.xtraTabControlColumnTitles);
 			this.xtraTabPageColumnTitles.Controls.Add(this.ckApplyForAllColumnTitles);
 			this.xtraTabPageColumnTitles.Controls.Add(this.ckEnableColumnTitles);
 			this.xtraTabPageColumnTitles.Name = "xtraTabPageColumnTitles";
-			this.xtraTabPageColumnTitles.Size = new System.Drawing.Size(605, 473);
+			this.xtraTabPageColumnTitles.Size = new System.Drawing.Size(605, 471);
 			this.xtraTabPageColumnTitles.Text = "Column Titles";
 			// 
 			// xtraTabControlColumnTitles
 			// 
 			this.xtraTabControlColumnTitles.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+			this.xtraTabControlColumnTitles.Appearance.BackColor = System.Drawing.Color.White;
 			this.xtraTabControlColumnTitles.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.xtraTabControlColumnTitles.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.xtraTabControlColumnTitles.Appearance.Options.UseBackColor = true;
 			this.xtraTabControlColumnTitles.Appearance.Options.UseFont = true;
+			this.xtraTabControlColumnTitles.Appearance.Options.UseForeColor = true;
 			this.xtraTabControlColumnTitles.AppearancePage.Header.Font = new System.Drawing.Font("Arial", 9.75F);
 			this.xtraTabControlColumnTitles.AppearancePage.Header.Options.UseFont = true;
 			this.xtraTabControlColumnTitles.AppearancePage.HeaderActive.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -1512,6 +1653,8 @@
 			// 
 			// xtraTabPageColumnTitles1
 			// 
+			this.xtraTabPageColumnTitles1.Appearance.PageClient.ForeColor = System.Drawing.Color.Black;
+			this.xtraTabPageColumnTitles1.Appearance.PageClient.Options.UseForeColor = true;
 			this.xtraTabPageColumnTitles1.Controls.Add(this.gridControlColumn1Widgets);
 			this.xtraTabPageColumnTitles1.Controls.Add(this.ckColumn1EnableWidget);
 			this.xtraTabPageColumnTitles1.Controls.Add(this.pbColumn1SelectedWidget);
@@ -1531,20 +1674,24 @@
 			this.xtraTabPageColumnTitles1.Controls.Add(this.colorEditColumn1BackColor);
 			this.xtraTabPageColumnTitles1.Controls.Add(this.ckColumn1EnableText);
 			this.xtraTabPageColumnTitles1.Name = "xtraTabPageColumnTitles1";
-			this.xtraTabPageColumnTitles1.Size = new System.Drawing.Size(582, 411);
+			this.xtraTabPageColumnTitles1.Size = new System.Drawing.Size(582, 409);
 			this.xtraTabPageColumnTitles1.Text = "Column 1";
 			// 
 			// gridControlColumn1Widgets
 			// 
 			this.gridControlColumn1Widgets.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+			this.gridControlColumn1Widgets.EmbeddedNavigator.Appearance.BackColor = System.Drawing.Color.White;
+			this.gridControlColumn1Widgets.EmbeddedNavigator.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.gridControlColumn1Widgets.EmbeddedNavigator.Appearance.Options.UseBackColor = true;
+			this.gridControlColumn1Widgets.EmbeddedNavigator.Appearance.Options.UseForeColor = true;
 			this.gridControlColumn1Widgets.Enabled = false;
 			this.gridControlColumn1Widgets.Location = new System.Drawing.Point(312, 250);
 			this.gridControlColumn1Widgets.MainView = this.layoutViewColumn1Widgets;
 			this.gridControlColumn1Widgets.Name = "gridControlColumn1Widgets";
 			this.gridControlColumn1Widgets.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemPictureEditColumn1Widget});
-			this.gridControlColumn1Widgets.Size = new System.Drawing.Size(259, 158);
+			this.gridControlColumn1Widgets.Size = new System.Drawing.Size(259, 156);
 			this.gridControlColumn1Widgets.TabIndex = 46;
 			this.gridControlColumn1Widgets.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.layoutViewColumn1Widgets});
@@ -1647,6 +1794,7 @@
 			// 
 			this.ckColumn1EnableWidget.AutoSize = true;
 			this.ckColumn1EnableWidget.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.ckColumn1EnableWidget.ForeColor = System.Drawing.Color.Black;
 			this.ckColumn1EnableWidget.Location = new System.Drawing.Point(312, 185);
 			this.ckColumn1EnableWidget.Name = "ckColumn1EnableWidget";
 			this.ckColumn1EnableWidget.Size = new System.Drawing.Size(120, 20);
@@ -1658,6 +1806,7 @@
 			// pbColumn1SelectedWidget
 			// 
 			this.pbColumn1SelectedWidget.Enabled = false;
+			this.pbColumn1SelectedWidget.ForeColor = System.Drawing.Color.Black;
 			this.pbColumn1SelectedWidget.Location = new System.Drawing.Point(438, 185);
 			this.pbColumn1SelectedWidget.Name = "pbColumn1SelectedWidget";
 			this.pbColumn1SelectedWidget.Size = new System.Drawing.Size(56, 58);
@@ -1668,6 +1817,7 @@
 			// 
 			this.ckColumn1EnableBanner.AutoSize = true;
 			this.ckColumn1EnableBanner.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.ckColumn1EnableBanner.ForeColor = System.Drawing.Color.Black;
 			this.ckColumn1EnableBanner.Location = new System.Drawing.Point(8, 185);
 			this.ckColumn1EnableBanner.Name = "ckColumn1EnableBanner";
 			this.ckColumn1EnableBanner.Size = new System.Drawing.Size(121, 20);
@@ -1680,13 +1830,17 @@
 			// 
 			this.gridControlColumn1Banners.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+			this.gridControlColumn1Banners.EmbeddedNavigator.Appearance.BackColor = System.Drawing.Color.White;
+			this.gridControlColumn1Banners.EmbeddedNavigator.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.gridControlColumn1Banners.EmbeddedNavigator.Appearance.Options.UseBackColor = true;
+			this.gridControlColumn1Banners.EmbeddedNavigator.Appearance.Options.UseForeColor = true;
 			this.gridControlColumn1Banners.Enabled = false;
 			this.gridControlColumn1Banners.Location = new System.Drawing.Point(10, 250);
 			this.gridControlColumn1Banners.MainView = this.gridViewColumn1Banners;
 			this.gridControlColumn1Banners.Name = "gridControlColumn1Banners";
 			this.gridControlColumn1Banners.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemPictureEditColumn1Banner});
-			this.gridControlColumn1Banners.Size = new System.Drawing.Size(265, 158);
+			this.gridControlColumn1Banners.Size = new System.Drawing.Size(265, 156);
 			this.gridControlColumn1Banners.TabIndex = 42;
 			this.gridControlColumn1Banners.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewColumn1Banners});
@@ -1725,7 +1879,7 @@
 			this.gridViewColumn1Banners.OptionsView.ShowGroupExpandCollapseButtons = false;
 			this.gridViewColumn1Banners.OptionsView.ShowGroupPanel = false;
 			this.gridViewColumn1Banners.OptionsView.ShowIndicator = false;
-			this.gridViewColumn1Banners.OptionsView.ShowPreviewLines = false;
+			this.gridViewColumn1Banners.OptionsView.ShowPreviewRowLines = DevExpress.Utils.DefaultBoolean.False;
 			this.gridViewColumn1Banners.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gridViewBanners_FocusedRowChanged);
 			this.gridViewColumn1Banners.Click += new System.EventHandler(this.gridViewColumn1Banners_Click);
 			// 
@@ -1748,6 +1902,7 @@
 			// pbColumn1SelectedBanner
 			// 
 			this.pbColumn1SelectedBanner.Enabled = false;
+			this.pbColumn1SelectedBanner.ForeColor = System.Drawing.Color.Black;
 			this.pbColumn1SelectedBanner.Location = new System.Drawing.Point(135, 185);
 			this.pbColumn1SelectedBanner.Name = "pbColumn1SelectedBanner";
 			this.pbColumn1SelectedBanner.Size = new System.Drawing.Size(140, 59);
@@ -1759,6 +1914,7 @@
 			// 
 			this.laColumn1Alignment.AutoSize = true;
 			this.laColumn1Alignment.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.laColumn1Alignment.ForeColor = System.Drawing.Color.Black;
 			this.laColumn1Alignment.Location = new System.Drawing.Point(223, 12);
 			this.laColumn1Alignment.Name = "laColumn1Alignment";
 			this.laColumn1Alignment.Size = new System.Drawing.Size(67, 16);
@@ -1767,6 +1923,7 @@
 			// 
 			// rbColumn1AlignmentRight
 			// 
+			this.rbColumn1AlignmentRight.ForeColor = System.Drawing.Color.Black;
 			this.rbColumn1AlignmentRight.Location = new System.Drawing.Point(446, 10);
 			this.rbColumn1AlignmentRight.Name = "rbColumn1AlignmentRight";
 			this.rbColumn1AlignmentRight.Size = new System.Drawing.Size(77, 20);
@@ -1778,6 +1935,7 @@
 			// 
 			// rbColumn1AlignmentCenter
 			// 
+			this.rbColumn1AlignmentCenter.ForeColor = System.Drawing.Color.Black;
 			this.rbColumn1AlignmentCenter.Location = new System.Drawing.Point(370, 10);
 			this.rbColumn1AlignmentCenter.Name = "rbColumn1AlignmentCenter";
 			this.rbColumn1AlignmentCenter.Size = new System.Drawing.Size(70, 20);
@@ -1789,6 +1947,7 @@
 			// 
 			// rbColumn1AlignmentLeft
 			// 
+			this.rbColumn1AlignmentLeft.ForeColor = System.Drawing.Color.Black;
 			this.rbColumn1AlignmentLeft.Location = new System.Drawing.Point(312, 10);
 			this.rbColumn1AlignmentLeft.Name = "rbColumn1AlignmentLeft";
 			this.rbColumn1AlignmentLeft.Size = new System.Drawing.Size(55, 20);
@@ -1805,6 +1964,10 @@
 			this.buttonEditColumn1Font.Enabled = false;
 			this.buttonEditColumn1Font.Location = new System.Drawing.Point(312, 132);
 			this.buttonEditColumn1Font.Name = "buttonEditColumn1Font";
+			this.buttonEditColumn1Font.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.buttonEditColumn1Font.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.buttonEditColumn1Font.Properties.Appearance.Options.UseBackColor = true;
+			this.buttonEditColumn1Font.Properties.Appearance.Options.UseForeColor = true;
 			this.buttonEditColumn1Font.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
 			this.buttonEditColumn1Font.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
@@ -1820,6 +1983,7 @@
 			this.laColumn1Font.AutoSize = true;
 			this.laColumn1Font.Enabled = false;
 			this.laColumn1Font.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.laColumn1Font.ForeColor = System.Drawing.Color.Black;
 			this.laColumn1Font.Location = new System.Drawing.Point(223, 135);
 			this.laColumn1Font.Name = "laColumn1Font";
 			this.laColumn1Font.Size = new System.Drawing.Size(83, 16);
@@ -1832,6 +1996,10 @@
 			this.colorEditColumn1ForeColor.Enabled = false;
 			this.colorEditColumn1ForeColor.Location = new System.Drawing.Point(85, 132);
 			this.colorEditColumn1ForeColor.Name = "colorEditColumn1ForeColor";
+			this.colorEditColumn1ForeColor.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.colorEditColumn1ForeColor.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.colorEditColumn1ForeColor.Properties.Appearance.Options.UseBackColor = true;
+			this.colorEditColumn1ForeColor.Properties.Appearance.Options.UseForeColor = true;
 			this.colorEditColumn1ForeColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
 			this.colorEditColumn1ForeColor.Properties.ColorAlignment = DevExpress.Utils.HorzAlignment.Center;
@@ -1847,9 +2015,14 @@
 			this.memoEditColumn1Title.Enabled = false;
 			this.memoEditColumn1Title.Location = new System.Drawing.Point(8, 72);
 			this.memoEditColumn1Title.Name = "memoEditColumn1Title";
+			this.memoEditColumn1Title.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.memoEditColumn1Title.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.memoEditColumn1Title.Properties.Appearance.Options.UseBackColor = true;
+			this.memoEditColumn1Title.Properties.Appearance.Options.UseForeColor = true;
 			this.memoEditColumn1Title.Size = new System.Drawing.Size(563, 54);
 			this.memoEditColumn1Title.StyleController = this.styleController;
 			this.memoEditColumn1Title.TabIndex = 0;
+			this.memoEditColumn1Title.UseOptimizedRendering = true;
 			this.memoEditColumn1Title.EditValueChanged += new System.EventHandler(this.StateChanges_TextChanged);
 			// 
 			// laColumn1ForeColor
@@ -1857,6 +2030,7 @@
 			this.laColumn1ForeColor.AutoSize = true;
 			this.laColumn1ForeColor.Enabled = false;
 			this.laColumn1ForeColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.laColumn1ForeColor.ForeColor = System.Drawing.Color.Black;
 			this.laColumn1ForeColor.Location = new System.Drawing.Point(5, 135);
 			this.laColumn1ForeColor.Name = "laColumn1ForeColor";
 			this.laColumn1ForeColor.Size = new System.Drawing.Size(69, 16);
@@ -1867,6 +2041,7 @@
 			// 
 			this.laColumn1BackColor.AutoSize = true;
 			this.laColumn1BackColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.laColumn1BackColor.ForeColor = System.Drawing.Color.Black;
 			this.laColumn1BackColor.Location = new System.Drawing.Point(5, 12);
 			this.laColumn1BackColor.Name = "laColumn1BackColor";
 			this.laColumn1BackColor.Size = new System.Drawing.Size(74, 16);
@@ -1878,6 +2053,10 @@
 			this.colorEditColumn1BackColor.EditValue = System.Drawing.Color.Empty;
 			this.colorEditColumn1BackColor.Location = new System.Drawing.Point(85, 9);
 			this.colorEditColumn1BackColor.Name = "colorEditColumn1BackColor";
+			this.colorEditColumn1BackColor.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.colorEditColumn1BackColor.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.colorEditColumn1BackColor.Properties.Appearance.Options.UseBackColor = true;
+			this.colorEditColumn1BackColor.Properties.Appearance.Options.UseForeColor = true;
 			this.colorEditColumn1BackColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
 			this.colorEditColumn1BackColor.Properties.ColorAlignment = DevExpress.Utils.HorzAlignment.Center;
@@ -1890,6 +2069,7 @@
 			// 
 			this.ckColumn1EnableText.AutoSize = true;
 			this.ckColumn1EnableText.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.ckColumn1EnableText.ForeColor = System.Drawing.Color.Black;
 			this.ckColumn1EnableText.Location = new System.Drawing.Point(8, 46);
 			this.ckColumn1EnableText.Name = "ckColumn1EnableText";
 			this.ckColumn1EnableText.Size = new System.Drawing.Size(102, 20);
@@ -1900,6 +2080,8 @@
 			// 
 			// xtraTabPageColumnTitles2
 			// 
+			this.xtraTabPageColumnTitles2.Appearance.PageClient.ForeColor = System.Drawing.Color.Black;
+			this.xtraTabPageColumnTitles2.Appearance.PageClient.Options.UseForeColor = true;
 			this.xtraTabPageColumnTitles2.Controls.Add(this.ckColumn2EnableText);
 			this.xtraTabPageColumnTitles2.Controls.Add(this.gridControlColumn2Widgets);
 			this.xtraTabPageColumnTitles2.Controls.Add(this.ckColumn2EnableWidget);
@@ -1919,13 +2101,14 @@
 			this.xtraTabPageColumnTitles2.Controls.Add(this.laColumn2BackColor);
 			this.xtraTabPageColumnTitles2.Controls.Add(this.colorEditColumn2BackColor);
 			this.xtraTabPageColumnTitles2.Name = "xtraTabPageColumnTitles2";
-			this.xtraTabPageColumnTitles2.Size = new System.Drawing.Size(582, 411);
+			this.xtraTabPageColumnTitles2.Size = new System.Drawing.Size(582, 409);
 			this.xtraTabPageColumnTitles2.Text = "Column 2";
 			// 
 			// ckColumn2EnableText
 			// 
 			this.ckColumn2EnableText.AutoSize = true;
 			this.ckColumn2EnableText.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.ckColumn2EnableText.ForeColor = System.Drawing.Color.Black;
 			this.ckColumn2EnableText.Location = new System.Drawing.Point(8, 46);
 			this.ckColumn2EnableText.Name = "ckColumn2EnableText";
 			this.ckColumn2EnableText.Size = new System.Drawing.Size(102, 20);
@@ -1938,13 +2121,17 @@
 			// 
 			this.gridControlColumn2Widgets.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+			this.gridControlColumn2Widgets.EmbeddedNavigator.Appearance.BackColor = System.Drawing.Color.White;
+			this.gridControlColumn2Widgets.EmbeddedNavigator.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.gridControlColumn2Widgets.EmbeddedNavigator.Appearance.Options.UseBackColor = true;
+			this.gridControlColumn2Widgets.EmbeddedNavigator.Appearance.Options.UseForeColor = true;
 			this.gridControlColumn2Widgets.Enabled = false;
 			this.gridControlColumn2Widgets.Location = new System.Drawing.Point(312, 250);
 			this.gridControlColumn2Widgets.MainView = this.layoutViewColumn2Widgets;
 			this.gridControlColumn2Widgets.Name = "gridControlColumn2Widgets";
 			this.gridControlColumn2Widgets.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemPictureEditColumn2Widget});
-			this.gridControlColumn2Widgets.Size = new System.Drawing.Size(259, 158);
+			this.gridControlColumn2Widgets.Size = new System.Drawing.Size(259, 156);
 			this.gridControlColumn2Widgets.TabIndex = 64;
 			this.gridControlColumn2Widgets.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.layoutViewColumn2Widgets});
@@ -2047,6 +2234,7 @@
 			// 
 			this.ckColumn2EnableWidget.AutoSize = true;
 			this.ckColumn2EnableWidget.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.ckColumn2EnableWidget.ForeColor = System.Drawing.Color.Black;
 			this.ckColumn2EnableWidget.Location = new System.Drawing.Point(312, 185);
 			this.ckColumn2EnableWidget.Name = "ckColumn2EnableWidget";
 			this.ckColumn2EnableWidget.Size = new System.Drawing.Size(120, 20);
@@ -2058,6 +2246,7 @@
 			// pbColumn2SelectedWidget
 			// 
 			this.pbColumn2SelectedWidget.Enabled = false;
+			this.pbColumn2SelectedWidget.ForeColor = System.Drawing.Color.Black;
 			this.pbColumn2SelectedWidget.Location = new System.Drawing.Point(438, 185);
 			this.pbColumn2SelectedWidget.Name = "pbColumn2SelectedWidget";
 			this.pbColumn2SelectedWidget.Size = new System.Drawing.Size(56, 58);
@@ -2068,6 +2257,7 @@
 			// 
 			this.ckColumn2EnableBanner.AutoSize = true;
 			this.ckColumn2EnableBanner.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.ckColumn2EnableBanner.ForeColor = System.Drawing.Color.Black;
 			this.ckColumn2EnableBanner.Location = new System.Drawing.Point(8, 185);
 			this.ckColumn2EnableBanner.Name = "ckColumn2EnableBanner";
 			this.ckColumn2EnableBanner.Size = new System.Drawing.Size(121, 20);
@@ -2080,13 +2270,17 @@
 			// 
 			this.gridControlColumn2Banners.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+			this.gridControlColumn2Banners.EmbeddedNavigator.Appearance.BackColor = System.Drawing.Color.White;
+			this.gridControlColumn2Banners.EmbeddedNavigator.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.gridControlColumn2Banners.EmbeddedNavigator.Appearance.Options.UseBackColor = true;
+			this.gridControlColumn2Banners.EmbeddedNavigator.Appearance.Options.UseForeColor = true;
 			this.gridControlColumn2Banners.Enabled = false;
 			this.gridControlColumn2Banners.Location = new System.Drawing.Point(10, 250);
 			this.gridControlColumn2Banners.MainView = this.gridViewColumn2Banners;
 			this.gridControlColumn2Banners.Name = "gridControlColumn2Banners";
 			this.gridControlColumn2Banners.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemPictureEditColumn2Banner});
-			this.gridControlColumn2Banners.Size = new System.Drawing.Size(265, 158);
+			this.gridControlColumn2Banners.Size = new System.Drawing.Size(265, 156);
 			this.gridControlColumn2Banners.TabIndex = 61;
 			this.gridControlColumn2Banners.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewColumn2Banners});
@@ -2125,7 +2319,7 @@
 			this.gridViewColumn2Banners.OptionsView.ShowGroupExpandCollapseButtons = false;
 			this.gridViewColumn2Banners.OptionsView.ShowGroupPanel = false;
 			this.gridViewColumn2Banners.OptionsView.ShowIndicator = false;
-			this.gridViewColumn2Banners.OptionsView.ShowPreviewLines = false;
+			this.gridViewColumn2Banners.OptionsView.ShowPreviewRowLines = DevExpress.Utils.DefaultBoolean.False;
 			this.gridViewColumn2Banners.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gridViewColumn2Banners_FocusedRowChanged);
 			this.gridViewColumn2Banners.Click += new System.EventHandler(this.gridViewColumn2Banners_Click);
 			// 
@@ -2148,6 +2342,7 @@
 			// pbColumn2SelectedBanner
 			// 
 			this.pbColumn2SelectedBanner.Enabled = false;
+			this.pbColumn2SelectedBanner.ForeColor = System.Drawing.Color.Black;
 			this.pbColumn2SelectedBanner.Location = new System.Drawing.Point(135, 185);
 			this.pbColumn2SelectedBanner.Name = "pbColumn2SelectedBanner";
 			this.pbColumn2SelectedBanner.Size = new System.Drawing.Size(140, 59);
@@ -2159,6 +2354,7 @@
 			// 
 			this.laColumn2Alignment.AutoSize = true;
 			this.laColumn2Alignment.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.laColumn2Alignment.ForeColor = System.Drawing.Color.Black;
 			this.laColumn2Alignment.Location = new System.Drawing.Point(223, 12);
 			this.laColumn2Alignment.Name = "laColumn2Alignment";
 			this.laColumn2Alignment.Size = new System.Drawing.Size(67, 16);
@@ -2167,6 +2363,7 @@
 			// 
 			// rbColumn2AlignmentRight
 			// 
+			this.rbColumn2AlignmentRight.ForeColor = System.Drawing.Color.Black;
 			this.rbColumn2AlignmentRight.Location = new System.Drawing.Point(446, 10);
 			this.rbColumn2AlignmentRight.Name = "rbColumn2AlignmentRight";
 			this.rbColumn2AlignmentRight.Size = new System.Drawing.Size(77, 20);
@@ -2178,6 +2375,7 @@
 			// 
 			// rbColumn2AlignmentCenter
 			// 
+			this.rbColumn2AlignmentCenter.ForeColor = System.Drawing.Color.Black;
 			this.rbColumn2AlignmentCenter.Location = new System.Drawing.Point(370, 10);
 			this.rbColumn2AlignmentCenter.Name = "rbColumn2AlignmentCenter";
 			this.rbColumn2AlignmentCenter.Size = new System.Drawing.Size(70, 20);
@@ -2189,6 +2387,7 @@
 			// 
 			// rbColumn2AlignmentLeft
 			// 
+			this.rbColumn2AlignmentLeft.ForeColor = System.Drawing.Color.Black;
 			this.rbColumn2AlignmentLeft.Location = new System.Drawing.Point(312, 10);
 			this.rbColumn2AlignmentLeft.Name = "rbColumn2AlignmentLeft";
 			this.rbColumn2AlignmentLeft.Size = new System.Drawing.Size(55, 20);
@@ -2205,6 +2404,10 @@
 			this.buttonEditColumn2Font.Enabled = false;
 			this.buttonEditColumn2Font.Location = new System.Drawing.Point(312, 132);
 			this.buttonEditColumn2Font.Name = "buttonEditColumn2Font";
+			this.buttonEditColumn2Font.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.buttonEditColumn2Font.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.buttonEditColumn2Font.Properties.Appearance.Options.UseBackColor = true;
+			this.buttonEditColumn2Font.Properties.Appearance.Options.UseForeColor = true;
 			this.buttonEditColumn2Font.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
 			this.buttonEditColumn2Font.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
@@ -2220,6 +2423,7 @@
 			this.laColumn2Font.AutoSize = true;
 			this.laColumn2Font.Enabled = false;
 			this.laColumn2Font.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.laColumn2Font.ForeColor = System.Drawing.Color.Black;
 			this.laColumn2Font.Location = new System.Drawing.Point(223, 135);
 			this.laColumn2Font.Name = "laColumn2Font";
 			this.laColumn2Font.Size = new System.Drawing.Size(83, 16);
@@ -2232,6 +2436,10 @@
 			this.colorEditColumn2ForeColor.Enabled = false;
 			this.colorEditColumn2ForeColor.Location = new System.Drawing.Point(85, 132);
 			this.colorEditColumn2ForeColor.Name = "colorEditColumn2ForeColor";
+			this.colorEditColumn2ForeColor.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.colorEditColumn2ForeColor.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.colorEditColumn2ForeColor.Properties.Appearance.Options.UseBackColor = true;
+			this.colorEditColumn2ForeColor.Properties.Appearance.Options.UseForeColor = true;
 			this.colorEditColumn2ForeColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
 			this.colorEditColumn2ForeColor.Properties.ColorAlignment = DevExpress.Utils.HorzAlignment.Center;
@@ -2247,9 +2455,14 @@
 			this.memoEditColumn2Title.Enabled = false;
 			this.memoEditColumn2Title.Location = new System.Drawing.Point(8, 72);
 			this.memoEditColumn2Title.Name = "memoEditColumn2Title";
+			this.memoEditColumn2Title.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.memoEditColumn2Title.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.memoEditColumn2Title.Properties.Appearance.Options.UseBackColor = true;
+			this.memoEditColumn2Title.Properties.Appearance.Options.UseForeColor = true;
 			this.memoEditColumn2Title.Size = new System.Drawing.Size(563, 54);
 			this.memoEditColumn2Title.StyleController = this.styleController;
 			this.memoEditColumn2Title.TabIndex = 48;
+			this.memoEditColumn2Title.UseOptimizedRendering = true;
 			this.memoEditColumn2Title.EditValueChanged += new System.EventHandler(this.StateChanges_TextChanged);
 			// 
 			// laColumn2ForeColor
@@ -2257,6 +2470,7 @@
 			this.laColumn2ForeColor.AutoSize = true;
 			this.laColumn2ForeColor.Enabled = false;
 			this.laColumn2ForeColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.laColumn2ForeColor.ForeColor = System.Drawing.Color.Black;
 			this.laColumn2ForeColor.Location = new System.Drawing.Point(5, 135);
 			this.laColumn2ForeColor.Name = "laColumn2ForeColor";
 			this.laColumn2ForeColor.Size = new System.Drawing.Size(69, 16);
@@ -2267,6 +2481,7 @@
 			// 
 			this.laColumn2BackColor.AutoSize = true;
 			this.laColumn2BackColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.laColumn2BackColor.ForeColor = System.Drawing.Color.Black;
 			this.laColumn2BackColor.Location = new System.Drawing.Point(5, 12);
 			this.laColumn2BackColor.Name = "laColumn2BackColor";
 			this.laColumn2BackColor.Size = new System.Drawing.Size(74, 16);
@@ -2278,6 +2493,10 @@
 			this.colorEditColumn2BackColor.EditValue = System.Drawing.Color.Empty;
 			this.colorEditColumn2BackColor.Location = new System.Drawing.Point(85, 9);
 			this.colorEditColumn2BackColor.Name = "colorEditColumn2BackColor";
+			this.colorEditColumn2BackColor.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.colorEditColumn2BackColor.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.colorEditColumn2BackColor.Properties.Appearance.Options.UseBackColor = true;
+			this.colorEditColumn2BackColor.Properties.Appearance.Options.UseForeColor = true;
 			this.colorEditColumn2BackColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
 			this.colorEditColumn2BackColor.Properties.ColorAlignment = DevExpress.Utils.HorzAlignment.Center;
@@ -2288,6 +2507,8 @@
 			// 
 			// xtraTabPageColumnTitles3
 			// 
+			this.xtraTabPageColumnTitles3.Appearance.PageClient.ForeColor = System.Drawing.Color.Black;
+			this.xtraTabPageColumnTitles3.Appearance.PageClient.Options.UseForeColor = true;
 			this.xtraTabPageColumnTitles3.Controls.Add(this.ckColumn3EnableText);
 			this.xtraTabPageColumnTitles3.Controls.Add(this.gridControlColumn3Widgets);
 			this.xtraTabPageColumnTitles3.Controls.Add(this.ckColumn3EnableWidget);
@@ -2307,13 +2528,14 @@
 			this.xtraTabPageColumnTitles3.Controls.Add(this.laColumn3BackColor);
 			this.xtraTabPageColumnTitles3.Controls.Add(this.colorEditColumn3BackColor);
 			this.xtraTabPageColumnTitles3.Name = "xtraTabPageColumnTitles3";
-			this.xtraTabPageColumnTitles3.Size = new System.Drawing.Size(582, 411);
+			this.xtraTabPageColumnTitles3.Size = new System.Drawing.Size(582, 409);
 			this.xtraTabPageColumnTitles3.Text = "Column 3";
 			// 
 			// ckColumn3EnableText
 			// 
 			this.ckColumn3EnableText.AutoSize = true;
 			this.ckColumn3EnableText.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.ckColumn3EnableText.ForeColor = System.Drawing.Color.Black;
 			this.ckColumn3EnableText.Location = new System.Drawing.Point(8, 46);
 			this.ckColumn3EnableText.Name = "ckColumn3EnableText";
 			this.ckColumn3EnableText.Size = new System.Drawing.Size(102, 20);
@@ -2326,13 +2548,17 @@
 			// 
 			this.gridControlColumn3Widgets.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+			this.gridControlColumn3Widgets.EmbeddedNavigator.Appearance.BackColor = System.Drawing.Color.White;
+			this.gridControlColumn3Widgets.EmbeddedNavigator.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.gridControlColumn3Widgets.EmbeddedNavigator.Appearance.Options.UseBackColor = true;
+			this.gridControlColumn3Widgets.EmbeddedNavigator.Appearance.Options.UseForeColor = true;
 			this.gridControlColumn3Widgets.Enabled = false;
 			this.gridControlColumn3Widgets.Location = new System.Drawing.Point(312, 250);
 			this.gridControlColumn3Widgets.MainView = this.layoutViewColumn3Widgets;
 			this.gridControlColumn3Widgets.Name = "gridControlColumn3Widgets";
 			this.gridControlColumn3Widgets.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemPictureEditColumn3Widget});
-			this.gridControlColumn3Widgets.Size = new System.Drawing.Size(259, 158);
+			this.gridControlColumn3Widgets.Size = new System.Drawing.Size(259, 156);
 			this.gridControlColumn3Widgets.TabIndex = 82;
 			this.gridControlColumn3Widgets.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.layoutViewColumn3Widgets});
@@ -2435,6 +2661,7 @@
 			// 
 			this.ckColumn3EnableWidget.AutoSize = true;
 			this.ckColumn3EnableWidget.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.ckColumn3EnableWidget.ForeColor = System.Drawing.Color.Black;
 			this.ckColumn3EnableWidget.Location = new System.Drawing.Point(312, 185);
 			this.ckColumn3EnableWidget.Name = "ckColumn3EnableWidget";
 			this.ckColumn3EnableWidget.Size = new System.Drawing.Size(120, 20);
@@ -2446,6 +2673,7 @@
 			// pbColumn3SelectedWidget
 			// 
 			this.pbColumn3SelectedWidget.Enabled = false;
+			this.pbColumn3SelectedWidget.ForeColor = System.Drawing.Color.Black;
 			this.pbColumn3SelectedWidget.Location = new System.Drawing.Point(438, 185);
 			this.pbColumn3SelectedWidget.Name = "pbColumn3SelectedWidget";
 			this.pbColumn3SelectedWidget.Size = new System.Drawing.Size(56, 58);
@@ -2456,6 +2684,7 @@
 			// 
 			this.ckColumn3EnableBanner.AutoSize = true;
 			this.ckColumn3EnableBanner.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.ckColumn3EnableBanner.ForeColor = System.Drawing.Color.Black;
 			this.ckColumn3EnableBanner.Location = new System.Drawing.Point(8, 185);
 			this.ckColumn3EnableBanner.Name = "ckColumn3EnableBanner";
 			this.ckColumn3EnableBanner.Size = new System.Drawing.Size(121, 20);
@@ -2468,13 +2697,17 @@
 			// 
 			this.gridControlColumn3Banners.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+			this.gridControlColumn3Banners.EmbeddedNavigator.Appearance.BackColor = System.Drawing.Color.White;
+			this.gridControlColumn3Banners.EmbeddedNavigator.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.gridControlColumn3Banners.EmbeddedNavigator.Appearance.Options.UseBackColor = true;
+			this.gridControlColumn3Banners.EmbeddedNavigator.Appearance.Options.UseForeColor = true;
 			this.gridControlColumn3Banners.Enabled = false;
 			this.gridControlColumn3Banners.Location = new System.Drawing.Point(10, 250);
 			this.gridControlColumn3Banners.MainView = this.gridViewColumn3Banners;
 			this.gridControlColumn3Banners.Name = "gridControlColumn3Banners";
 			this.gridControlColumn3Banners.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemPictureEditColumn3Banner});
-			this.gridControlColumn3Banners.Size = new System.Drawing.Size(265, 158);
+			this.gridControlColumn3Banners.Size = new System.Drawing.Size(265, 156);
 			this.gridControlColumn3Banners.TabIndex = 79;
 			this.gridControlColumn3Banners.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewColumn3Banners});
@@ -2513,7 +2746,7 @@
 			this.gridViewColumn3Banners.OptionsView.ShowGroupExpandCollapseButtons = false;
 			this.gridViewColumn3Banners.OptionsView.ShowGroupPanel = false;
 			this.gridViewColumn3Banners.OptionsView.ShowIndicator = false;
-			this.gridViewColumn3Banners.OptionsView.ShowPreviewLines = false;
+			this.gridViewColumn3Banners.OptionsView.ShowPreviewRowLines = DevExpress.Utils.DefaultBoolean.False;
 			this.gridViewColumn3Banners.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gridViewColumn3Banners_FocusedRowChanged);
 			this.gridViewColumn3Banners.Click += new System.EventHandler(this.gridViewColumn3Banners_Click);
 			// 
@@ -2536,6 +2769,7 @@
 			// pbColumn3SelectedBanner
 			// 
 			this.pbColumn3SelectedBanner.Enabled = false;
+			this.pbColumn3SelectedBanner.ForeColor = System.Drawing.Color.Black;
 			this.pbColumn3SelectedBanner.Location = new System.Drawing.Point(135, 185);
 			this.pbColumn3SelectedBanner.Name = "pbColumn3SelectedBanner";
 			this.pbColumn3SelectedBanner.Size = new System.Drawing.Size(140, 59);
@@ -2547,6 +2781,7 @@
 			// 
 			this.laColumn3Alignment.AutoSize = true;
 			this.laColumn3Alignment.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.laColumn3Alignment.ForeColor = System.Drawing.Color.Black;
 			this.laColumn3Alignment.Location = new System.Drawing.Point(223, 12);
 			this.laColumn3Alignment.Name = "laColumn3Alignment";
 			this.laColumn3Alignment.Size = new System.Drawing.Size(67, 16);
@@ -2555,6 +2790,7 @@
 			// 
 			// rbColumn3AlignmentRight
 			// 
+			this.rbColumn3AlignmentRight.ForeColor = System.Drawing.Color.Black;
 			this.rbColumn3AlignmentRight.Location = new System.Drawing.Point(446, 10);
 			this.rbColumn3AlignmentRight.Name = "rbColumn3AlignmentRight";
 			this.rbColumn3AlignmentRight.Size = new System.Drawing.Size(77, 20);
@@ -2566,6 +2802,7 @@
 			// 
 			// rbColumn3AlignmentCenter
 			// 
+			this.rbColumn3AlignmentCenter.ForeColor = System.Drawing.Color.Black;
 			this.rbColumn3AlignmentCenter.Location = new System.Drawing.Point(370, 10);
 			this.rbColumn3AlignmentCenter.Name = "rbColumn3AlignmentCenter";
 			this.rbColumn3AlignmentCenter.Size = new System.Drawing.Size(70, 20);
@@ -2577,6 +2814,7 @@
 			// 
 			// rbColumn3AlignmentLeft
 			// 
+			this.rbColumn3AlignmentLeft.ForeColor = System.Drawing.Color.Black;
 			this.rbColumn3AlignmentLeft.Location = new System.Drawing.Point(312, 10);
 			this.rbColumn3AlignmentLeft.Name = "rbColumn3AlignmentLeft";
 			this.rbColumn3AlignmentLeft.Size = new System.Drawing.Size(55, 20);
@@ -2593,6 +2831,10 @@
 			this.buttonEditColumn3Font.Enabled = false;
 			this.buttonEditColumn3Font.Location = new System.Drawing.Point(312, 132);
 			this.buttonEditColumn3Font.Name = "buttonEditColumn3Font";
+			this.buttonEditColumn3Font.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.buttonEditColumn3Font.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.buttonEditColumn3Font.Properties.Appearance.Options.UseBackColor = true;
+			this.buttonEditColumn3Font.Properties.Appearance.Options.UseForeColor = true;
 			this.buttonEditColumn3Font.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
 			this.buttonEditColumn3Font.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
@@ -2608,6 +2850,7 @@
 			this.laColumn3Font.AutoSize = true;
 			this.laColumn3Font.Enabled = false;
 			this.laColumn3Font.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.laColumn3Font.ForeColor = System.Drawing.Color.Black;
 			this.laColumn3Font.Location = new System.Drawing.Point(223, 135);
 			this.laColumn3Font.Name = "laColumn3Font";
 			this.laColumn3Font.Size = new System.Drawing.Size(83, 16);
@@ -2620,6 +2863,10 @@
 			this.colorEditColumn3ForeColor.Enabled = false;
 			this.colorEditColumn3ForeColor.Location = new System.Drawing.Point(85, 132);
 			this.colorEditColumn3ForeColor.Name = "colorEditColumn3ForeColor";
+			this.colorEditColumn3ForeColor.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.colorEditColumn3ForeColor.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.colorEditColumn3ForeColor.Properties.Appearance.Options.UseBackColor = true;
+			this.colorEditColumn3ForeColor.Properties.Appearance.Options.UseForeColor = true;
 			this.colorEditColumn3ForeColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
 			this.colorEditColumn3ForeColor.Properties.ColorAlignment = DevExpress.Utils.HorzAlignment.Center;
@@ -2635,9 +2882,14 @@
 			this.memoEditColumn3Title.Enabled = false;
 			this.memoEditColumn3Title.Location = new System.Drawing.Point(8, 72);
 			this.memoEditColumn3Title.Name = "memoEditColumn3Title";
+			this.memoEditColumn3Title.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.memoEditColumn3Title.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.memoEditColumn3Title.Properties.Appearance.Options.UseBackColor = true;
+			this.memoEditColumn3Title.Properties.Appearance.Options.UseForeColor = true;
 			this.memoEditColumn3Title.Size = new System.Drawing.Size(563, 54);
 			this.memoEditColumn3Title.StyleController = this.styleController;
 			this.memoEditColumn3Title.TabIndex = 66;
+			this.memoEditColumn3Title.UseOptimizedRendering = true;
 			this.memoEditColumn3Title.EditValueChanged += new System.EventHandler(this.StateChanges_TextChanged);
 			// 
 			// laColumn3ForeColor
@@ -2645,6 +2897,7 @@
 			this.laColumn3ForeColor.AutoSize = true;
 			this.laColumn3ForeColor.Enabled = false;
 			this.laColumn3ForeColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.laColumn3ForeColor.ForeColor = System.Drawing.Color.Black;
 			this.laColumn3ForeColor.Location = new System.Drawing.Point(5, 135);
 			this.laColumn3ForeColor.Name = "laColumn3ForeColor";
 			this.laColumn3ForeColor.Size = new System.Drawing.Size(69, 16);
@@ -2655,6 +2908,7 @@
 			// 
 			this.laColumn3BackColor.AutoSize = true;
 			this.laColumn3BackColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.laColumn3BackColor.ForeColor = System.Drawing.Color.Black;
 			this.laColumn3BackColor.Location = new System.Drawing.Point(5, 12);
 			this.laColumn3BackColor.Name = "laColumn3BackColor";
 			this.laColumn3BackColor.Size = new System.Drawing.Size(74, 16);
@@ -2666,6 +2920,10 @@
 			this.colorEditColumn3BackColor.EditValue = System.Drawing.Color.Empty;
 			this.colorEditColumn3BackColor.Location = new System.Drawing.Point(85, 9);
 			this.colorEditColumn3BackColor.Name = "colorEditColumn3BackColor";
+			this.colorEditColumn3BackColor.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.colorEditColumn3BackColor.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.colorEditColumn3BackColor.Properties.Appearance.Options.UseBackColor = true;
+			this.colorEditColumn3BackColor.Properties.Appearance.Options.UseForeColor = true;
 			this.colorEditColumn3BackColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
 			this.colorEditColumn3BackColor.Properties.ColorAlignment = DevExpress.Utils.HorzAlignment.Center;
@@ -2679,6 +2937,7 @@
 			this.ckApplyForAllColumnTitles.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.ckApplyForAllColumnTitles.AutoSize = true;
 			this.ckApplyForAllColumnTitles.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
+			this.ckApplyForAllColumnTitles.ForeColor = System.Drawing.Color.Black;
 			this.ckApplyForAllColumnTitles.Location = new System.Drawing.Point(448, 7);
 			this.ckApplyForAllColumnTitles.Name = "ckApplyForAllColumnTitles";
 			this.ckApplyForAllColumnTitles.Size = new System.Drawing.Size(149, 20);
@@ -2693,6 +2952,7 @@
 			this.ckEnableColumnTitles.Checked = true;
 			this.ckEnableColumnTitles.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.ckEnableColumnTitles.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
+			this.ckEnableColumnTitles.ForeColor = System.Drawing.Color.Black;
 			this.ckEnableColumnTitles.Location = new System.Drawing.Point(10, 7);
 			this.ckEnableColumnTitles.Name = "ckEnableColumnTitles";
 			this.ckEnableColumnTitles.Size = new System.Drawing.Size(154, 20);
@@ -2701,15 +2961,13 @@
 			this.ckEnableColumnTitles.UseVisualStyleBackColor = true;
 			this.ckEnableColumnTitles.CheckedChanged += new System.EventHandler(this.ckEnableColumnTitles_CheckedChanged);
 			// 
-			// defaultLookAndFeel
-			// 
-			this.defaultLookAndFeel.LookAndFeel.SkinName = "Money Twins";
-			// 
 			// pnPages
 			// 
+			this.pnPages.BackColor = System.Drawing.Color.Transparent;
 			this.pnPages.Controls.Add(this.comboBoxEditPages);
 			this.pnPages.Controls.Add(this.laPages);
 			this.pnPages.Dock = System.Windows.Forms.DockStyle.Top;
+			this.pnPages.ForeColor = System.Drawing.Color.Black;
 			this.pnPages.Location = new System.Drawing.Point(0, 0);
 			this.pnPages.Name = "pnPages";
 			this.pnPages.Size = new System.Drawing.Size(607, 46);
@@ -2721,6 +2979,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.comboBoxEditPages.Location = new System.Drawing.Point(133, 12);
 			this.comboBoxEditPages.Name = "comboBoxEditPages";
+			this.comboBoxEditPages.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.comboBoxEditPages.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.comboBoxEditPages.Properties.Appearance.Options.UseBackColor = true;
+			this.comboBoxEditPages.Properties.Appearance.Options.UseForeColor = true;
 			this.comboBoxEditPages.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
 			this.comboBoxEditPages.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
@@ -2732,7 +2994,9 @@
 			// laPages
 			// 
 			this.laPages.AutoSize = true;
+			this.laPages.BackColor = System.Drawing.Color.White;
 			this.laPages.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.laPages.ForeColor = System.Drawing.Color.Black;
 			this.laPages.Location = new System.Drawing.Point(8, 15);
 			this.laPages.Name = "laPages";
 			this.laPages.Size = new System.Drawing.Size(85, 16);
@@ -2747,6 +3011,7 @@
 			this.buttonXClose.Location = new System.Drawing.Point(325, 553);
 			this.buttonXClose.Name = "buttonXClose";
 			this.buttonXClose.Size = new System.Drawing.Size(93, 32);
+			this.buttonXClose.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXClose.TabIndex = 18;
 			this.buttonXClose.Text = "Close";
 			this.buttonXClose.TextColor = System.Drawing.Color.Black;
@@ -2760,6 +3025,7 @@
 			this.buttonXSave.Location = new System.Drawing.Point(188, 553);
 			this.buttonXSave.Name = "buttonXSave";
 			this.buttonXSave.Size = new System.Drawing.Size(93, 32);
+			this.buttonXSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXSave.TabIndex = 17;
 			this.buttonXSave.Text = "Save";
 			this.buttonXSave.TextColor = System.Drawing.Color.Black;
@@ -2768,12 +3034,13 @@
 			// FormColumns
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
+			this.BackColor = System.Drawing.Color.White;
 			this.ClientSize = new System.Drawing.Size(607, 592);
 			this.Controls.Add(this.buttonXClose);
 			this.Controls.Add(this.buttonXSave);
 			this.Controls.Add(this.xtraTabControlSettings);
 			this.Controls.Add(this.pnPages);
+			this.DoubleBuffered = true;
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -2803,6 +3070,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.colorEditWindowHeaderForeColor.Properties)).EndInit();
 			this.xtraTabPageWindowPropertiesWidget.ResumeLayout(false);
 			this.xtraTabPageWindowPropertiesWidget.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.gbWindowWidgets)).EndInit();
 			this.gbWindowWidgets.ResumeLayout(false);
 			this.gbWindowWidgets.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.gridControlWindowWidgets)).EndInit();
@@ -2813,6 +3081,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.pbWindowSelectedWidget)).EndInit();
 			this.xtraTabPageWindowPropertiesBanner.ResumeLayout(false);
 			this.xtraTabPageWindowPropertiesBanner.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.gbWindowBanners)).EndInit();
 			this.gbWindowBanners.ResumeLayout(false);
 			this.gbWindowBanners.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.colorEditWindowBannerTextColor.Properties)).EndInit();
@@ -2921,8 +3190,7 @@
         private System.Windows.Forms.Label laWindowHeaderBackColor;
         private DevExpress.XtraTab.XtraTabControl xtraTabControlSettings;
         private DevExpress.XtraTab.XtraTabPage xtraTabPageColumns;
-        private DevExpress.XtraTab.XtraTabPage xtraTabPageWindows;
-        private DevExpress.LookAndFeel.DefaultLookAndFeel defaultLookAndFeel;
+		private DevExpress.XtraTab.XtraTabPage xtraTabPageWindows;
         private DevExpress.XtraEditors.StyleController styleController;
         private System.Windows.Forms.Panel pnColumns;
         private DevExpress.XtraTab.XtraTabControl xtraTabControlWindows;
@@ -2963,7 +3231,7 @@
         private System.Windows.Forms.RadioButton rbWindowHeaderAlignmentRight;
         private System.Windows.Forms.RadioButton rbWindowHeaderAlignmentCenter;
         private DevExpress.XtraTab.XtraTabPage xtraTabPageWindowPropertiesBanner;
-        private System.Windows.Forms.GroupBox gbWindowBanners;
+        private DevExpress.XtraEditors.GroupControl gbWindowBanners;
         private DevExpress.XtraEditors.ColorEdit colorEditWindowBannerTextColor;
         private DevExpress.XtraEditors.ButtonEdit buttonEditWindowBannerTextFont;
         private DevExpress.XtraEditors.MemoEdit memoEditWindowBannerText;
@@ -2982,7 +3250,7 @@
         private System.Windows.Forms.CheckBox ckWindowEnableBanner;
         private System.Windows.Forms.CheckBox ckApllyForAllWindowsBanner;
         private System.Windows.Forms.CheckBox ckApllyForAllWindowsWidget;
-        private System.Windows.Forms.GroupBox gbWindowWidgets;
+		private DevExpress.XtraEditors.GroupControl gbWindowWidgets;
         private DevExpress.XtraGrid.GridControl gridControlWindowWidgets;
         private DevExpress.XtraGrid.Views.Layout.LayoutView layoutViewWindowWidgets;
         private DevExpress.XtraGrid.Columns.LayoutViewColumn gridColumnWindowWidget;

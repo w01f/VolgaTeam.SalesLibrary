@@ -89,7 +89,6 @@
 			// 
 			// laHeader
 			// 
-			this.laHeader.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
 			this.laHeader.Dock = System.Windows.Forms.DockStyle.Top;
 			this.laHeader.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.laHeader.Location = new System.Drawing.Point(0, 0);
@@ -101,7 +100,6 @@
 			// 
 			// pnMain
 			// 
-			this.pnMain.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
 			this.pnMain.Controls.Add(this.pnData);
 			this.pnMain.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.pnMain.Location = new System.Drawing.Point(0, 24);
@@ -142,7 +140,7 @@
 			this.pnData.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.pnData.Location = new System.Drawing.Point(0, 0);
 			this.pnData.Name = "pnData";
-			this.pnData.Size = new System.Drawing.Size(346, 653);
+			this.pnData.Size = new System.Drawing.Size(350, 657);
 			this.pnData.TabIndex = 1;
 			// 
 			// hyperLinkEditSecurityAllPages
@@ -185,7 +183,7 @@
 			this.labelControlSecurity.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
 			this.labelControlSecurity.Location = new System.Drawing.Point(44, 361);
 			this.labelControlSecurity.Name = "labelControlSecurity";
-			this.labelControlSecurity.Size = new System.Drawing.Size(299, 26);
+			this.labelControlSecurity.Size = new System.Drawing.Size(303, 26);
 			this.labelControlSecurity.TabIndex = 25;
 			this.labelControlSecurity.Text = "Link Security";
 			// 
@@ -238,7 +236,7 @@
 			this.labelControlWebAttachments.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
 			this.labelControlWebAttachments.Location = new System.Drawing.Point(44, 303);
 			this.labelControlWebAttachments.Name = "labelControlWebAttachments";
-			this.labelControlWebAttachments.Size = new System.Drawing.Size(299, 26);
+			this.labelControlWebAttachments.Size = new System.Drawing.Size(303, 26);
 			this.labelControlWebAttachments.TabIndex = 21;
 			this.labelControlWebAttachments.Text = "URL Attachments";
 			// 
@@ -291,7 +289,7 @@
 			this.labelControlFileAttachments.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
 			this.labelControlFileAttachments.Location = new System.Drawing.Point(44, 245);
 			this.labelControlFileAttachments.Name = "labelControlFileAttachments";
-			this.labelControlFileAttachments.Size = new System.Drawing.Size(299, 26);
+			this.labelControlFileAttachments.Size = new System.Drawing.Size(303, 26);
 			this.labelControlFileAttachments.TabIndex = 17;
 			this.labelControlFileAttachments.Text = "File Attachments";
 			// 
@@ -344,7 +342,7 @@
 			this.labelControlFileCards.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
 			this.labelControlFileCards.Location = new System.Drawing.Point(44, 187);
 			this.labelControlFileCards.Name = "labelControlFileCards";
-			this.labelControlFileCards.Size = new System.Drawing.Size(299, 26);
+			this.labelControlFileCards.Size = new System.Drawing.Size(303, 26);
 			this.labelControlFileCards.TabIndex = 13;
 			this.labelControlFileCards.Text = "File Cards";
 			// 
@@ -397,7 +395,7 @@
 			this.labelControlKeywords.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
 			this.labelControlKeywords.Location = new System.Drawing.Point(44, 129);
 			this.labelControlKeywords.Name = "labelControlKeywords";
-			this.labelControlKeywords.Size = new System.Drawing.Size(299, 26);
+			this.labelControlKeywords.Size = new System.Drawing.Size(303, 26);
 			this.labelControlKeywords.TabIndex = 9;
 			this.labelControlKeywords.Text = "Keywords";
 			// 
@@ -450,7 +448,7 @@
 			this.labelControlSuperFilters.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
 			this.labelControlSuperFilters.Location = new System.Drawing.Point(44, 71);
 			this.labelControlSuperFilters.Name = "labelControlSuperFilters";
-			this.labelControlSuperFilters.Size = new System.Drawing.Size(299, 26);
+			this.labelControlSuperFilters.Size = new System.Drawing.Size(303, 26);
 			this.labelControlSuperFilters.TabIndex = 5;
 			this.labelControlSuperFilters.Text = "Super Filters";
 			// 
@@ -503,7 +501,7 @@
 			this.labelControlCategories.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
 			this.labelControlCategories.Location = new System.Drawing.Point(44, 13);
 			this.labelControlCategories.Name = "labelControlCategories";
-			this.labelControlCategories.Size = new System.Drawing.Size(299, 26);
+			this.labelControlCategories.Size = new System.Drawing.Size(303, 26);
 			this.labelControlCategories.TabIndex = 1;
 			this.labelControlCategories.Text = "Category Tags";
 			// 
@@ -534,7 +532,7 @@
 			// TagsCleaner
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
+			this.BackColor = System.Drawing.Color.White;
 			this.Controls.Add(this.pnMain);
 			this.Controls.Add(this.laHeader);
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));

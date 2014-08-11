@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Windows.Forms;
+using DevComponents.DotNetBar.Metro;
 using SalesDepot.BusinessClasses;
 using SalesDepot.CoreObjects.BusinessClasses;
 
 namespace SalesDepot.ToolForms.QBuilderForms
 {
-	public partial class FormAddLink : Form
+	public partial class FormAddLink : MetroForm
 	{
 		private LibraryLink _sourceLink;
-		private FormLogin _formLogin;
+		private readonly FormLogin _formLogin;
 
 		public FormAddLink()
 		{

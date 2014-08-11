@@ -28,11 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-			this.components = new System.ComponentModel.Container();
 			this.laProgress = new System.Windows.Forms.Label();
 			this.circularProgress = new DevComponents.DotNetBar.Controls.CircularProgress();
 			this.panelEx = new DevComponents.DotNetBar.PanelEx();
-			this.styleManager = new DevComponents.DotNetBar.StyleManager(this.components);
 			this.panelEx.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -72,33 +70,29 @@
 			// 
 			// panelEx
 			// 
-			this.panelEx.CanvasColor = System.Drawing.SystemColors.Control;
+			this.panelEx.CanvasColor = System.Drawing.Color.Empty;
 			this.panelEx.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.panelEx.Controls.Add(this.laProgress);
 			this.panelEx.Controls.Add(this.circularProgress);
+			this.panelEx.DisabledBackColor = System.Drawing.Color.Empty;
 			this.panelEx.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panelEx.Location = new System.Drawing.Point(2, 2);
 			this.panelEx.Name = "panelEx";
 			this.panelEx.Padding = new System.Windows.Forms.Padding(0, 0, 0, 10);
 			this.panelEx.Size = new System.Drawing.Size(314, 98);
 			this.panelEx.Style.Alignment = System.Drawing.StringAlignment.Center;
-			this.panelEx.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-			this.panelEx.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+			this.panelEx.Style.BackColor1.Color = System.Drawing.Color.White;
+			this.panelEx.Style.BackColor2.Color = System.Drawing.Color.White;
 			this.panelEx.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
-			this.panelEx.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
+			this.panelEx.Style.BorderColor.Color = System.Drawing.Color.LightGray;
 			this.panelEx.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
 			this.panelEx.Style.GradientAngle = 90;
-			this.panelEx.TabIndex = 4;
-			// 
-			// styleManager
-			// 
-			this.styleManager.ManagerStyle = DevComponents.DotNetBar.eStyle.Office2010Blue;
-			this.styleManager.MetroColorParameters = new DevComponents.DotNetBar.Metro.ColorTables.MetroColorGeneratorParameters(System.Drawing.Color.White, System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(163)))), ((int)(((byte)(26))))));
+			this.panelEx.TabIndex = 5;
 			// 
 			// FormProgress
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+			this.BackColor = System.Drawing.Color.White;
 			this.ClientSize = new System.Drawing.Size(318, 102);
 			this.ControlBox = false;
 			this.Controls.Add(this.panelEx);
@@ -118,9 +112,9 @@
 
         #endregion
 
-        public System.Windows.Forms.Label laProgress;
-        private DevComponents.DotNetBar.Controls.CircularProgress circularProgress;
-        private DevComponents.DotNetBar.PanelEx panelEx;
-		private DevComponents.DotNetBar.StyleManager styleManager;
-    }
+		public System.Windows.Forms.Label laProgress;
+		private DevComponents.DotNetBar.Controls.CircularProgress circularProgress;
+		private DevComponents.DotNetBar.PanelEx panelEx;
+
+	}
 }

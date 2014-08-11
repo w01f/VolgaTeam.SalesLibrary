@@ -30,12 +30,12 @@
         {
 			this.SuspendLayout();
 			// 
-			// TabTickerControl
+			// TabUtilitiesControl
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+			this.BackColor = System.Drawing.Color.White;
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.Name = "TabTickerControl";
+			this.Name = "TabUtilitiesControl";
 			this.Size = new System.Drawing.Size(977, 603);
 			this.ResumeLayout(false);
 

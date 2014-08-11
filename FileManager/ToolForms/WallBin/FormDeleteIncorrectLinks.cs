@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using DevComponents.DotNetBar.Metro;
 using SalesDepot.CoreObjects.BusinessClasses;
 
 namespace FileManager.ToolForms.WallBin
 {
-	public partial class FormDeleteIncorrectLinks : Form
+	public partial class FormDeleteIncorrectLinks : MetroForm
 	{
 		public FormDeleteIncorrectLinks()
 		{
@@ -21,7 +22,7 @@ namespace FileManager.ToolForms.WallBin
 
 		private void DeadLinksForm_Load(object sender, EventArgs e)
 		{
-			btExpiredDate.Visible = ExpiredLinks;
+			buttonXExpiredDate.Visible = ExpiredLinks;
 			grIncorrectLinks.Rows.Clear();
 			foreach (LibraryLink incorrectLink in IncorrectLinks)
 			{

@@ -28,35 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-			this.btSave = new System.Windows.Forms.Button();
-			this.btCancel = new System.Windows.Forms.Button();
 			this.gbPDFConvert = new System.Windows.Forms.GroupBox();
 			this.rbSlide = new System.Windows.Forms.RadioButton();
 			this.rbFile = new System.Windows.Forms.RadioButton();
 			this.picLogo = new System.Windows.Forms.PictureBox();
+			this.buttonXCancel = new DevComponents.DotNetBar.ButtonX();
+			this.buttonXSave = new DevComponents.DotNetBar.ButtonX();
 			this.gbPDFConvert.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
 			this.SuspendLayout();
-			// 
-			// btSave
-			// 
-			this.btSave.DialogResult = System.Windows.Forms.DialogResult.OK;
-			this.btSave.Location = new System.Drawing.Point(89, 96);
-			this.btSave.Name = "btSave";
-			this.btSave.Size = new System.Drawing.Size(83, 43);
-			this.btSave.TabIndex = 0;
-			this.btSave.Text = "Save";
-			this.btSave.UseVisualStyleBackColor = true;
-			// 
-			// btCancel
-			// 
-			this.btCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.btCancel.Location = new System.Drawing.Point(190, 96);
-			this.btCancel.Name = "btCancel";
-			this.btCancel.Size = new System.Drawing.Size(83, 43);
-			this.btCancel.TabIndex = 1;
-			this.btCancel.Text = "Cancel";
-			this.btCancel.UseVisualStyleBackColor = true;
 			// 
 			// gbPDFConvert
 			// 
@@ -75,7 +55,7 @@
 			this.rbSlide.AutoSize = true;
 			this.rbSlide.Location = new System.Drawing.Point(11, 52);
 			this.rbSlide.Name = "rbSlide";
-			this.rbSlide.Size = new System.Drawing.Size(191, 17);
+			this.rbSlide.Size = new System.Drawing.Size(229, 20);
 			this.rbSlide.TabIndex = 1;
 			this.rbSlide.Text = "Convert just the active slide to PDF";
 			this.rbSlide.UseVisualStyleBackColor = true;
@@ -86,7 +66,7 @@
 			this.rbFile.Checked = true;
 			this.rbFile.Location = new System.Drawing.Point(11, 16);
 			this.rbFile.Name = "rbFile";
-			this.rbFile.Size = new System.Drawing.Size(200, 17);
+			this.rbFile.Size = new System.Drawing.Size(240, 20);
 			this.rbFile.TabIndex = 0;
 			this.rbFile.TabStop = true;
 			this.rbFile.Text = "Convert entire PowerPoint file to PDF";
@@ -102,14 +82,43 @@
 			this.picLogo.TabIndex = 3;
 			this.picLogo.TabStop = false;
 			// 
+			// buttonXCancel
+			// 
+			this.buttonXCancel.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.buttonXCancel.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+			this.buttonXCancel.Location = new System.Drawing.Point(195, 103);
+			this.buttonXCancel.Name = "buttonXCancel";
+			this.buttonXCancel.Size = new System.Drawing.Size(98, 40);
+			this.buttonXCancel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXCancel.TabIndex = 10;
+			this.buttonXCancel.Text = "Cancel";
+			this.buttonXCancel.TextColor = System.Drawing.Color.Black;
+			// 
+			// buttonXSave
+			// 
+			this.buttonXSave.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.buttonXSave.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXSave.DialogResult = System.Windows.Forms.DialogResult.OK;
+			this.buttonXSave.Location = new System.Drawing.Point(70, 103);
+			this.buttonXSave.Name = "buttonXSave";
+			this.buttonXSave.Size = new System.Drawing.Size(98, 40);
+			this.buttonXSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXSave.TabIndex = 9;
+			this.buttonXSave.Text = "Save";
+			this.buttonXSave.TextColor = System.Drawing.Color.Black;
+			// 
 			// FormSaveAsPDF
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
 			this.ClientSize = new System.Drawing.Size(362, 151);
+			this.Controls.Add(this.buttonXCancel);
+			this.Controls.Add(this.buttonXSave);
 			this.Controls.Add(this.picLogo);
 			this.Controls.Add(this.gbPDFConvert);
-			this.Controls.Add(this.btCancel);
-			this.Controls.Add(this.btSave);
+			this.DoubleBuffered = true;
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.MaximizeBox = false;
@@ -127,11 +136,11 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btSave;
-        private System.Windows.Forms.Button btCancel;
-        private System.Windows.Forms.GroupBox gbPDFConvert;
+		private System.Windows.Forms.GroupBox gbPDFConvert;
         private System.Windows.Forms.RadioButton rbSlide;
         private System.Windows.Forms.RadioButton rbFile;
         private System.Windows.Forms.PictureBox picLogo;
+		private DevComponents.DotNetBar.ButtonX buttonXCancel;
+		private DevComponents.DotNetBar.ButtonX buttonXSave;
     }
 }

@@ -57,7 +57,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemSpinEditNumeric)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemSpinEditPercent)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEditDate)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEditDate.VistaTimeProperties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEditDate.CalendarTimeProperties)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// gridControlData
@@ -111,6 +111,7 @@
             this.gridBandDocs,
             this.gridBandVideos,
             this.gridBandTotal});
+			this.advBandedGridViewData.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Default;
 			this.advBandedGridViewData.Columns.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn[] {
             this.gridColumnName,
             this.gridColumnGroup,
@@ -164,6 +165,7 @@
 			this.gridBandMain.Columns.Add(this.gridColumnName);
 			this.gridBandMain.Columns.Add(this.gridColumnGroup);
 			this.gridBandMain.Name = "gridBandMain";
+			this.gridBandMain.VisibleIndex = 0;
 			this.gridBandMain.Width = 336;
 			// 
 			// gridColumnName
@@ -199,6 +201,7 @@
 			this.gridBandLogin.Columns.Add(this.gridColumnGroupLoginNumber);
 			this.gridBandLogin.Name = "gridBandLogin";
 			this.gridBandLogin.OptionsBand.FixedWidth = true;
+			this.gridBandLogin.VisibleIndex = 1;
 			this.gridBandLogin.Width = 143;
 			// 
 			// gridColumnUserLoginNumber
@@ -264,6 +267,7 @@
 			this.gridBandDocs.Columns.Add(this.gridColumnGroupDocsNumber);
 			this.gridBandDocs.Name = "gridBandDocs";
 			this.gridBandDocs.OptionsBand.FixedWidth = true;
+			this.gridBandDocs.VisibleIndex = 2;
 			this.gridBandDocs.Width = 136;
 			// 
 			// gridColumnUserDocsNumber
@@ -305,6 +309,7 @@
 			this.gridBandVideos.Columns.Add(this.gridColumnGroupVideosNumber);
 			this.gridBandVideos.Name = "gridBandVideos";
 			this.gridBandVideos.OptionsBand.FixedWidth = true;
+			this.gridBandVideos.VisibleIndex = 3;
 			this.gridBandVideos.Width = 144;
 			// 
 			// gridColumnUserVideosNumber
@@ -346,6 +351,7 @@
 			this.gridBandTotal.Columns.Add(this.gridColumnGroupTotalNumber);
 			this.gridBandTotal.Name = "gridBandTotal";
 			this.gridBandTotal.OptionsBand.FixedWidth = true;
+			this.gridBandTotal.VisibleIndex = 4;
 			this.gridBandTotal.Width = 135;
 			// 
 			// gridColumnUserTotalNumber
@@ -384,27 +390,25 @@
 			this.repositoryItemDateEditDate.AutoHeight = false;
 			this.repositoryItemDateEditDate.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+			this.repositoryItemDateEditDate.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
 			this.repositoryItemDateEditDate.DisplayFormat.FormatString = "MM/dd/yyyy hh:mm tt";
 			this.repositoryItemDateEditDate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
 			this.repositoryItemDateEditDate.EditFormat.FormatString = "MM/dd/yyyy hh:mm tt";
 			this.repositoryItemDateEditDate.EditFormat.FormatType = DevExpress.Utils.FormatType.Custom;
 			this.repositoryItemDateEditDate.Name = "repositoryItemDateEditDate";
-			this.repositoryItemDateEditDate.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton()});
 			// 
 			// GroupControl
 			// 
-			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
 			this.Controls.Add(this.gridControlData);
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-			this.Name = "GroupControl";
 			this.Size = new System.Drawing.Size(898, 483);
 			((System.ComponentModel.ISupportInitialize)(this.gridControlData)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.advBandedGridViewData)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemSpinEditNumeric)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemSpinEditPercent)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEditDate.VistaTimeProperties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEditDate.CalendarTimeProperties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEditDate)).EndInit();
 			this.ResumeLayout(false);
 

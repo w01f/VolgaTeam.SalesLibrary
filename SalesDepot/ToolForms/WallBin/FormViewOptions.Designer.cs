@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-			this.components = new System.ComponentModel.Container();
 			this.buttonXQuickSiteAdd = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXQuickSiteEmail = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXClose = new DevComponents.DotNetBar.ButtonX();
@@ -36,7 +35,7 @@
 			this.buttonXPrint = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXSave = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXOpen = new DevComponents.DotNetBar.ButtonX();
-			this.toolTipController = new DevExpress.Utils.ToolTipController(this.components);
+			this.toolTipController = new DevExpress.Utils.ToolTipController();
 			this.SuspendLayout();
 			// 
 			// buttonXQuickSiteAdd
@@ -48,6 +47,7 @@
 			this.buttonXQuickSiteAdd.Location = new System.Drawing.Point(20, 339);
 			this.buttonXQuickSiteAdd.Name = "buttonXQuickSiteAdd";
 			this.buttonXQuickSiteAdd.Size = new System.Drawing.Size(290, 55);
+			this.buttonXQuickSiteAdd.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXQuickSiteAdd.TabIndex = 6;
 			this.buttonXQuickSiteAdd.Text = "   Add to quickSITE";
 			this.buttonXQuickSiteAdd.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
@@ -65,6 +65,7 @@
 			this.buttonXQuickSiteEmail.Location = new System.Drawing.Point(20, 274);
 			this.buttonXQuickSiteEmail.Name = "buttonXQuickSiteEmail";
 			this.buttonXQuickSiteEmail.Size = new System.Drawing.Size(290, 55);
+			this.buttonXQuickSiteEmail.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXQuickSiteEmail.TabIndex = 5;
 			this.buttonXQuickSiteEmail.Text = "   Email as Web Link";
 			this.buttonXQuickSiteEmail.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
@@ -83,6 +84,7 @@
 			this.buttonXClose.Location = new System.Drawing.Point(20, 404);
 			this.buttonXClose.Name = "buttonXClose";
 			this.buttonXClose.Size = new System.Drawing.Size(290, 55);
+			this.buttonXClose.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXClose.TabIndex = 4;
 			this.buttonXClose.Text = "   Close this Window";
 			this.buttonXClose.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
@@ -100,6 +102,7 @@
 			this.buttonXEmail.Location = new System.Drawing.Point(20, 209);
 			this.buttonXEmail.Name = "buttonXEmail";
 			this.buttonXEmail.Size = new System.Drawing.Size(290, 55);
+			this.buttonXEmail.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXEmail.TabIndex = 3;
 			this.buttonXEmail.Text = "   Attach to email";
 			this.buttonXEmail.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
@@ -117,6 +120,7 @@
 			this.buttonXPrint.Location = new System.Drawing.Point(20, 144);
 			this.buttonXPrint.Name = "buttonXPrint";
 			this.buttonXPrint.Size = new System.Drawing.Size(290, 55);
+			this.buttonXPrint.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXPrint.TabIndex = 2;
 			this.buttonXPrint.Text = "   Send to Printer";
 			this.buttonXPrint.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
@@ -134,6 +138,7 @@
 			this.buttonXSave.Location = new System.Drawing.Point(20, 79);
 			this.buttonXSave.Name = "buttonXSave";
 			this.buttonXSave.Size = new System.Drawing.Size(290, 55);
+			this.buttonXSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXSave.TabIndex = 1;
 			this.buttonXSave.Text = "   Save a copy";
 			this.buttonXSave.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
@@ -151,6 +156,7 @@
 			this.buttonXOpen.Location = new System.Drawing.Point(20, 14);
 			this.buttonXOpen.Name = "buttonXOpen";
 			this.buttonXOpen.Size = new System.Drawing.Size(290, 55);
+			this.buttonXOpen.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXOpen.TabIndex = 0;
 			this.buttonXOpen.Text = "   Open this file";
 			this.buttonXOpen.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
@@ -167,7 +173,7 @@
 			// FormViewOptions
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
+			this.BackColor = System.Drawing.Color.White;
 			this.ClientSize = new System.Drawing.Size(331, 472);
 			this.Controls.Add(this.buttonXQuickSiteAdd);
 			this.Controls.Add(this.buttonXQuickSiteEmail);
@@ -176,6 +182,7 @@
 			this.Controls.Add(this.buttonXPrint);
 			this.Controls.Add(this.buttonXSave);
 			this.Controls.Add(this.buttonXOpen);
+			this.DoubleBuffered = true;
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;

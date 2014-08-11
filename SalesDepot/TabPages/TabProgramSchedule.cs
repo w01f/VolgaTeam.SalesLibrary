@@ -1,16 +1,21 @@
 ﻿using System;
+using System.ComponentModel;
+using System.IO;
+using System.Threading;
 using System.Windows.Forms;
 using DevComponents.DotNetBar;
+using SalesDepot.BusinessClasses;
 using SalesDepot.ConfigurationClasses;
+using SalesDepot.InteropClasses;
 using SalesDepot.PresentationClasses.WallBin.Decorators;
+using SalesDepot.ToolForms;
+using SalesDepot.ToolForms.ProgramManager;
 
 namespace SalesDepot.TabPages
 {
-	[System.ComponentModel.ToolboxItem(false)]
+	[ToolboxItem(false)]
 	public partial class TabProgramSchedule : UserControl, IController
 	{
-		public bool AllowToSave { get; set; }
-
 		public TabProgramSchedule()
 		{
 			InitializeComponent();
@@ -46,6 +51,26 @@ namespace SalesDepot.TabPages
 			BringToFront();
 			Focus();
 			AppManager.Instance.ActivityManager.AddUserActivity("Program Schedule selected");
+
+			if (DecoratorManager.Instance.ActivePackageViewer.SelectedLibrary == null) return;
+			if (DecoratorManager.Instance.ActivePackageViewer.SelectedLibrary.Library.ProgramManager.Enabled) return;
+
+			using (var progressForm = new FormProgress())
+			{
+				progressForm.laProgress.Text = "Loading Program Schedule...";
+				progressForm.TopMost = true;
+				progressForm.Show();
+				Application.DoEvents();
+				var thread = new Thread(() =>
+				{
+					DecoratorManager.Instance.ActivePackageViewer.SelectedLibrary.BuildProgramManager();
+					Invoke((MethodInvoker)(() => DecoratorManager.Instance.ActivePackageViewer.SelectedLibrary.ApplyProgramManager()));
+				});
+				thread.Start();
+				while (thread.IsAlive)
+					Application.DoEvents();
+				progressForm.Close();
+			}
 		}
 		#endregion
 
@@ -128,46 +153,46 @@ namespace SalesDepot.TabPages
 		#region Ribbon Buttons Clicks
 		public void buttonItemScheduleInfo_CheckedChanged(object sender, EventArgs e)
 		{
-			if (this.AllowToSave)
-			{
-				ConfigurationClasses.SettingsManager.Instance.ProgramScheduleShowInfo = FormMain.Instance.buttonItemProgramScheduleInfo.Checked;
-				ConfigurationClasses.SettingsManager.Instance.SaveSettings();
+			if (!AllowToSave) return;
+			SettingsManager.Instance.ProgramScheduleShowInfo = FormMain.Instance.buttonItemProgramScheduleInfo.Checked;
+			SettingsManager.Instance.SaveSettings();
 
-				PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer.SelectedLibrary.ProgramSchedule.gridViewPrograms.OptionsView.ShowPreview = ConfigurationClasses.SettingsManager.Instance.ProgramScheduleShowInfo;
+			DecoratorManager.Instance.ActivePackageViewer.SelectedLibrary.ProgramSchedule.gridViewPrograms.OptionsView.ShowPreview = SettingsManager.Instance.ProgramScheduleShowInfo;
 
-				PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer.SelectedLibrary.ProgramSchedule.gridViewPrograms.Focus();
-			}
+			DecoratorManager.Instance.ActivePackageViewer.SelectedLibrary.ProgramSchedule.gridViewPrograms.Focus();
 		}
 
 
 		public void buttonItemScheduleOutputExcel_Click(object sender, EventArgs e)
 		{
-			using (ToolForms.ProgramManager.FormOutputParameters form = new ToolForms.ProgramManager.FormOutputParameters())
+			using (var form = new FormOutputParameters())
 			{
 				form.Text = "Output to Excel";
 				if (form.ShowDialog() == DialogResult.OK)
 				{
-					PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer.SelectedLibrary.Library.ProgramManager.ReportWeekSchedule(form.Station, form.Weeks, false, form.Landscape);
+					DecoratorManager.Instance.ActivePackageViewer.SelectedLibrary.Library.ProgramManager.ReportWeekSchedule(form.Station, form.Weeks, false, form.Landscape);
 				}
 			}
 		}
 
 		public void buttonItemScheduleOutputPDF_Click(object sender, EventArgs e)
 		{
-			using (ToolForms.ProgramManager.FormOutputParameters form = new ToolForms.ProgramManager.FormOutputParameters())
+			using (var form = new FormOutputParameters())
 			{
 				form.Text = "Output to PDF";
 				if (form.ShowDialog() == DialogResult.OK)
 				{
-					PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer.SelectedLibrary.Library.ProgramManager.ReportWeekSchedule(form.Station, form.Weeks, true, form.Landscape);
+					DecoratorManager.Instance.ActivePackageViewer.SelectedLibrary.Library.ProgramManager.ReportWeekSchedule(form.Station, form.Weeks, true, form.Landscape);
 				}
 			}
 		}
 
 		public void buttonItemHelp_Click(object sender, EventArgs e)
 		{
-			BusinessClasses.HelpManager.Instance.OpenHelpLink("programschedule");
+			HelpManager.Instance.OpenHelpLink("programschedule");
 		}
 		#endregion
+
+		public bool AllowToSave { get; set; }
 	}
 }

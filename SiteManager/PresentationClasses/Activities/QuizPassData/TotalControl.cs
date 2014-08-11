@@ -17,7 +17,6 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.QuizPassData
 		private readonly DateTime _startDate;
 		private readonly DateTime _endDate;
 		public List<QuizPassGroupReportModel> Records { get; private set; }
-		public PrintableComponentLink PrintLink { get; private set; }
 
 		public string GroupName
 		{
@@ -36,14 +35,19 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.QuizPassData
 			_endDate = endDate;
 
 			gridControlData.DataSource = Records;
+		}
 
-			PrintLink = new PrintableComponentLink()
+		public PrintableComponentLink GetPrintLink()
+		{
+			advBandedGridViewData.CheckLoaded();
+			var printLink = new PrintableComponentLink()
 			{
 				Landscape = true,
 				PaperKind = PaperKind.A4,
 				Component = gridControlData
 			};
-			PrintLink.CreateReportHeaderArea += OnCreateReportHeaderArea;
+			printLink.CreateReportHeaderArea += OnCreateReportHeaderArea;
+			return printLink;
 		}
 
 		private void OnCreateReportHeaderArea(object sender, CreateAreaEventArgs e)

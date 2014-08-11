@@ -156,7 +156,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.AccessData
 				{
 					using (var printingSystem = new PrintingSystem())
 					{
-						groupControl.PrintLink.CreateDocument(printingSystem);
+						groupControl.GetPrintLink().CreateDocument(printingSystem);
 						var tempFile = Path.Combine(Path.GetTempPath(), String.Format("{0}.xlsx", Guid.NewGuid()));
 						printingSystem.ExportToXlsx(tempFile, options);
 						parts.Add(groupControl.GroupName, tempFile);

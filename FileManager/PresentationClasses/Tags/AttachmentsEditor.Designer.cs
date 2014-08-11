@@ -29,7 +29,6 @@
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AttachmentsEditor));
 			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
 			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
 			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
@@ -69,7 +68,6 @@
 			// 
 			// laHeader
 			// 
-			this.laHeader.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
 			this.laHeader.Dock = System.Windows.Forms.DockStyle.Top;
 			this.laHeader.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.laHeader.Location = new System.Drawing.Point(0, 0);
@@ -81,7 +79,6 @@
 			// 
 			// pnMain
 			// 
-			this.pnMain.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
 			this.pnMain.Controls.Add(this.pnData);
 			this.pnMain.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.pnMain.Location = new System.Drawing.Point(0, 24);
@@ -96,7 +93,7 @@
 			this.pnData.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.pnData.Location = new System.Drawing.Point(0, 0);
 			this.pnData.Name = "pnData";
-			this.pnData.Size = new System.Drawing.Size(346, 545);
+			this.pnData.Size = new System.Drawing.Size(350, 549);
 			this.pnData.TabIndex = 1;
 			// 
 			// xtraTabControl
@@ -118,7 +115,7 @@
 			this.xtraTabControl.Location = new System.Drawing.Point(3, 51);
 			this.xtraTabControl.Name = "xtraTabControl";
 			this.xtraTabControl.SelectedTabPage = this.xtraTabPageFiles;
-			this.xtraTabControl.Size = new System.Drawing.Size(340, 491);
+			this.xtraTabControl.Size = new System.Drawing.Size(344, 495);
 			this.xtraTabControl.TabIndex = 6;
 			this.xtraTabControl.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.xtraTabPageFiles,
@@ -129,7 +126,7 @@
 			this.xtraTabPageFiles.Controls.Add(this.gridControlAttachmentsFiles);
 			this.xtraTabPageFiles.Controls.Add(this.buttonXAttachmentsFilesAdd);
 			this.xtraTabPageFiles.Name = "xtraTabPageFiles";
-			this.xtraTabPageFiles.Size = new System.Drawing.Size(338, 465);
+			this.xtraTabPageFiles.Size = new System.Drawing.Size(342, 467);
 			this.xtraTabPageFiles.Text = "File Attachments";
 			// 
 			// gridControlAttachmentsFiles
@@ -137,12 +134,13 @@
 			this.gridControlAttachmentsFiles.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+			this.gridControlAttachmentsFiles.Cursor = System.Windows.Forms.Cursors.Default;
 			this.gridControlAttachmentsFiles.Location = new System.Drawing.Point(3, 49);
 			this.gridControlAttachmentsFiles.MainView = this.gridViewAttachmentsFiles;
 			this.gridControlAttachmentsFiles.Name = "gridControlAttachmentsFiles";
 			this.gridControlAttachmentsFiles.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemButtonEditAttachmentsFiles});
-			this.gridControlAttachmentsFiles.Size = new System.Drawing.Size(332, 413);
+			this.gridControlAttachmentsFiles.Size = new System.Drawing.Size(336, 417);
 			this.gridControlAttachmentsFiles.TabIndex = 10;
 			this.gridControlAttachmentsFiles.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewAttachmentsFiles});
@@ -177,7 +175,7 @@
 			this.gridViewAttachmentsFiles.OptionsView.ShowGroupExpandCollapseButtons = false;
 			this.gridViewAttachmentsFiles.OptionsView.ShowGroupPanel = false;
 			this.gridViewAttachmentsFiles.OptionsView.ShowIndicator = false;
-			this.gridViewAttachmentsFiles.OptionsView.ShowPreviewLines = false;
+			this.gridViewAttachmentsFiles.OptionsView.ShowPreviewRowLines = DevExpress.Utils.DefaultBoolean.False;
 			this.gridViewAttachmentsFiles.RowHeight = 35;
 			this.gridViewAttachmentsFiles.RowCellStyle += new DevExpress.XtraGrid.Views.Grid.RowCellStyleEventHandler(this.gridViewAttachmentsFiles_RowCellStyle);
 			// 
@@ -203,8 +201,8 @@
 			this.repositoryItemButtonEditAttachmentsFiles.AppearanceReadOnly.Options.UseFont = true;
 			this.repositoryItemButtonEditAttachmentsFiles.AutoHeight = false;
 			this.repositoryItemButtonEditAttachmentsFiles.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("repositoryItemButtonEditAttachmentsFiles.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true),
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("repositoryItemButtonEditAttachmentsFiles.Buttons1"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::FileManager.Properties.Resources.OpenVideoSmall, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true),
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::FileManager.Properties.Resources.DeleteButton, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "", null, null, true)});
 			this.repositoryItemButtonEditAttachmentsFiles.Name = "repositoryItemButtonEditAttachmentsFiles";
 			this.repositoryItemButtonEditAttachmentsFiles.NullText = "Select File...";
 			this.repositoryItemButtonEditAttachmentsFiles.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
@@ -214,7 +212,8 @@
 			// 
 			this.buttonXAttachmentsFilesAdd.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
 			this.buttonXAttachmentsFilesAdd.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-			this.buttonXAttachmentsFilesAdd.Image = global::FileManager.Properties.Resources.Green_Plus;
+			this.buttonXAttachmentsFilesAdd.Image = global::FileManager.Properties.Resources.PlusButton;
+			this.buttonXAttachmentsFilesAdd.ImageFixedSize = new System.Drawing.Size(24, 24);
 			this.buttonXAttachmentsFilesAdd.Location = new System.Drawing.Point(3, 9);
 			this.buttonXAttachmentsFilesAdd.Name = "buttonXAttachmentsFilesAdd";
 			this.buttonXAttachmentsFilesAdd.Size = new System.Drawing.Size(151, 34);
@@ -230,7 +229,7 @@
 			this.xtraTabPage2.Controls.Add(this.gridControlAttachmentsWeb);
 			this.xtraTabPage2.Controls.Add(this.buttonXAttachmentsWebAdd);
 			this.xtraTabPage2.Name = "xtraTabPage2";
-			this.xtraTabPage2.Size = new System.Drawing.Size(338, 465);
+			this.xtraTabPage2.Size = new System.Drawing.Size(342, 467);
 			this.xtraTabPage2.Text = "URL Attachments";
 			// 
 			// gridControlAttachmentsWeb
@@ -243,7 +242,7 @@
 			this.gridControlAttachmentsWeb.Name = "gridControlAttachmentsWeb";
 			this.gridControlAttachmentsWeb.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemButtonEditAttachmentsWeb});
-			this.gridControlAttachmentsWeb.Size = new System.Drawing.Size(332, 413);
+			this.gridControlAttachmentsWeb.Size = new System.Drawing.Size(336, 417);
 			this.gridControlAttachmentsWeb.TabIndex = 12;
 			this.gridControlAttachmentsWeb.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewAttachmentsWeb});
@@ -278,7 +277,7 @@
 			this.gridViewAttachmentsWeb.OptionsView.ShowGroupExpandCollapseButtons = false;
 			this.gridViewAttachmentsWeb.OptionsView.ShowGroupPanel = false;
 			this.gridViewAttachmentsWeb.OptionsView.ShowIndicator = false;
-			this.gridViewAttachmentsWeb.OptionsView.ShowPreviewLines = false;
+			this.gridViewAttachmentsWeb.OptionsView.ShowPreviewRowLines = DevExpress.Utils.DefaultBoolean.False;
 			this.gridViewAttachmentsWeb.RowHeight = 35;
 			// 
 			// gridColumnAttachmentsWebSourcePath
@@ -303,8 +302,8 @@
 			this.repositoryItemButtonEditAttachmentsWeb.AppearanceReadOnly.Options.UseFont = true;
 			this.repositoryItemButtonEditAttachmentsWeb.AutoHeight = false;
 			this.repositoryItemButtonEditAttachmentsWeb.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("repositoryItemButtonEditAttachmentsWeb.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject3, "", null, null, true),
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("repositoryItemButtonEditAttachmentsWeb.Buttons1"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject4, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::FileManager.Properties.Resources.UrlButton, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject3, "", null, null, true),
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::FileManager.Properties.Resources.DeleteButton, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject4, "", null, null, true)});
 			this.repositoryItemButtonEditAttachmentsWeb.Mask.AutoComplete = DevExpress.XtraEditors.Mask.AutoCompleteType.Optimistic;
 			this.repositoryItemButtonEditAttachmentsWeb.Mask.EditMask = "http://([a-zA-Z0-9.]|%[0-9A-Za-z]|/|:[0-9]?)*";
 			this.repositoryItemButtonEditAttachmentsWeb.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
@@ -316,7 +315,8 @@
 			// 
 			this.buttonXAttachmentsWebAdd.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
 			this.buttonXAttachmentsWebAdd.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-			this.buttonXAttachmentsWebAdd.Image = global::FileManager.Properties.Resources.Green_Plus;
+			this.buttonXAttachmentsWebAdd.Image = global::FileManager.Properties.Resources.PlusButton;
+			this.buttonXAttachmentsWebAdd.ImageFixedSize = new System.Drawing.Size(24, 24);
 			this.buttonXAttachmentsWebAdd.Location = new System.Drawing.Point(3, 9);
 			this.buttonXAttachmentsWebAdd.Name = "buttonXAttachmentsWebAdd";
 			this.buttonXAttachmentsWebAdd.Size = new System.Drawing.Size(151, 34);
@@ -334,7 +334,7 @@
 			this.checkBoxEnableAttachmnets.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.checkBoxEnableAttachmnets.Location = new System.Drawing.Point(3, 3);
 			this.checkBoxEnableAttachmnets.Name = "checkBoxEnableAttachmnets";
-			this.checkBoxEnableAttachmnets.Size = new System.Drawing.Size(340, 40);
+			this.checkBoxEnableAttachmnets.Size = new System.Drawing.Size(344, 40);
 			this.checkBoxEnableAttachmnets.TabIndex = 5;
 			this.checkBoxEnableAttachmnets.Text = "Link other important files or Websites to this specific file...";
 			this.checkBoxEnableAttachmnets.UseVisualStyleBackColor = true;
@@ -358,7 +358,7 @@
 			// AttachmentsEditor
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
+			this.BackColor = System.Drawing.Color.White;
 			this.Controls.Add(this.pnMain);
 			this.Controls.Add(this.laHeader);
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));

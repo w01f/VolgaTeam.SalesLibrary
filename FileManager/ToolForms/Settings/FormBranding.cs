@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Windows.Forms;
+using DevComponents.DotNetBar.Metro;
 using FileManager.Controllers;
 
 namespace FileManager.ToolForms.Settings
 {
-	public partial class FormBranding : Form
+	public partial class FormBranding : MetroForm
 	{
 		public FormBranding()
 		{

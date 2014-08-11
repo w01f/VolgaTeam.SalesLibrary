@@ -38,18 +38,9 @@ namespace SalesDepot.PresentationClasses.WallBin.Decorators
 
 		public void BuildOvernightsCalendars()
 		{
-			foreach (PackageDecorator packageViwer in PackageViewers)
+			foreach (var packageViwer in PackageViewers)
 			{
 				packageViwer.BuildOvernightsCalendar();
-				Application.DoEvents();
-			}
-		}
-
-		public void BuildProgramManagers()
-		{
-			foreach (PackageDecorator packageViwer in PackageViewers)
-			{
-				packageViwer.BuildProgramManager();
 				Application.DoEvents();
 			}
 		}

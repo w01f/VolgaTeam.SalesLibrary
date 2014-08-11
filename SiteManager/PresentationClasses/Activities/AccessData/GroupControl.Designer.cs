@@ -30,23 +30,23 @@
         {
 			this.gridControlData = new DevExpress.XtraGrid.GridControl();
 			this.advBandedGridViewData = new DevExpress.XtraGrid.Views.BandedGrid.AdvBandedGridView();
+			this.gridBandMain = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
 			this.gridColumnUsersNumber = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
 			this.repositoryItemSpinEditNumeric = new DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit();
+			this.gridBandActive = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
 			this.gridColumnActiveNumber = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
 			this.gridColumnActivePercent = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
 			this.repositoryItemSpinEditPercent = new DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit();
+			this.gridBandInactive = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
 			this.gridColumnInactiveNumber = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
 			this.gridColumnInactivePercent = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
 			this.repositoryItemDateEditDate = new DevExpress.XtraEditors.Repository.RepositoryItemDateEdit();
-			this.gridBandMain = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
-			this.gridBandActive = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
-			this.gridBandInactive = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
 			((System.ComponentModel.ISupportInitialize)(this.gridControlData)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.advBandedGridViewData)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemSpinEditNumeric)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemSpinEditPercent)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEditDate)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEditDate.VistaTimeProperties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEditDate.CalendarTimeProperties)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// gridControlData
@@ -98,6 +98,7 @@
             this.gridBandMain,
             this.gridBandActive,
             this.gridBandInactive});
+			this.advBandedGridViewData.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Default;
 			this.advBandedGridViewData.Columns.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn[] {
             this.gridColumnUsersNumber,
             this.gridColumnActiveNumber,
@@ -141,6 +142,14 @@
 			this.advBandedGridViewData.RowSeparatorHeight = 10;
 			this.advBandedGridViewData.CalcPreviewText += new DevExpress.XtraGrid.Views.Grid.CalcPreviewTextEventHandler(this.advBandedGridViewData_CalcPreviewText);
 			// 
+			// gridBandMain
+			// 
+			this.gridBandMain.Columns.Add(this.gridColumnUsersNumber);
+			this.gridBandMain.MinWidth = 20;
+			this.gridBandMain.Name = "gridBandMain";
+			this.gridBandMain.VisibleIndex = 0;
+			this.gridBandMain.Width = 129;
+			// 
 			// gridColumnUsersNumber
 			// 
 			this.gridColumnUsersNumber.AppearanceCell.Options.UseTextOptions = true;
@@ -163,6 +172,16 @@
 			this.repositoryItemSpinEditNumeric.EditFormat.FormatType = DevExpress.Utils.FormatType.Custom;
 			this.repositoryItemSpinEditNumeric.Name = "repositoryItemSpinEditNumeric";
 			this.repositoryItemSpinEditNumeric.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+			// 
+			// gridBandActive
+			// 
+			this.gridBandActive.Caption = "Active";
+			this.gridBandActive.Columns.Add(this.gridColumnActiveNumber);
+			this.gridBandActive.Columns.Add(this.gridColumnActivePercent);
+			this.gridBandActive.MinWidth = 20;
+			this.gridBandActive.Name = "gridBandActive";
+			this.gridBandActive.VisibleIndex = 1;
+			this.gridBandActive.Width = 221;
 			// 
 			// gridColumnActiveNumber
 			// 
@@ -194,6 +213,16 @@
 			this.repositoryItemSpinEditPercent.Name = "repositoryItemSpinEditPercent";
 			this.repositoryItemSpinEditPercent.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
 			// 
+			// gridBandInactive
+			// 
+			this.gridBandInactive.Caption = "Inactive";
+			this.gridBandInactive.Columns.Add(this.gridColumnInactiveNumber);
+			this.gridBandInactive.Columns.Add(this.gridColumnInactivePercent);
+			this.gridBandInactive.MinWidth = 20;
+			this.gridBandInactive.Name = "gridBandInactive";
+			this.gridBandInactive.VisibleIndex = 2;
+			this.gridBandInactive.Width = 237;
+			// 
 			// gridColumnInactiveNumber
 			// 
 			this.gridColumnInactiveNumber.AppearanceCell.Options.UseTextOptions = true;
@@ -219,42 +248,16 @@
 			this.repositoryItemDateEditDate.AutoHeight = false;
 			this.repositoryItemDateEditDate.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+			this.repositoryItemDateEditDate.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
 			this.repositoryItemDateEditDate.DisplayFormat.FormatString = "MM/dd/yyyy hh:mm tt";
 			this.repositoryItemDateEditDate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
 			this.repositoryItemDateEditDate.EditFormat.FormatString = "MM/dd/yyyy hh:mm tt";
 			this.repositoryItemDateEditDate.EditFormat.FormatType = DevExpress.Utils.FormatType.Custom;
 			this.repositoryItemDateEditDate.Name = "repositoryItemDateEditDate";
-			this.repositoryItemDateEditDate.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton()});
 			// 
-			// gridBandMain
+			// GroupControl
 			// 
-			this.gridBandMain.Columns.Add(this.gridColumnUsersNumber);
-			this.gridBandMain.MinWidth = 20;
-			this.gridBandMain.Name = "gridBandMain";
-			this.gridBandMain.Width = 129;
-			// 
-			// gridBandActive
-			// 
-			this.gridBandActive.Caption = "Active";
-			this.gridBandActive.Columns.Add(this.gridColumnActiveNumber);
-			this.gridBandActive.Columns.Add(this.gridColumnActivePercent);
-			this.gridBandActive.MinWidth = 20;
-			this.gridBandActive.Name = "gridBandActive";
-			this.gridBandActive.Width = 221;
-			// 
-			// gridBandInactive
-			// 
-			this.gridBandInactive.Caption = "Inactive";
-			this.gridBandInactive.Columns.Add(this.gridColumnInactiveNumber);
-			this.gridBandInactive.Columns.Add(this.gridColumnInactivePercent);
-			this.gridBandInactive.MinWidth = 20;
-			this.gridBandInactive.Name = "gridBandInactive";
-			this.gridBandInactive.Width = 237;
-			// 
-			// AccessGroupReportControl
-			// 
-			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
 			this.Controls.Add(this.gridControlData);
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -264,7 +267,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.advBandedGridViewData)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemSpinEditNumeric)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemSpinEditPercent)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEditDate.VistaTimeProperties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEditDate.CalendarTimeProperties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEditDate)).EndInit();
 			this.ResumeLayout(false);
 

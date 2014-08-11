@@ -46,7 +46,6 @@
 			// 
 			// laHeader
 			// 
-			this.laHeader.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
 			this.laHeader.Dock = System.Windows.Forms.DockStyle.Top;
 			this.laHeader.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.laHeader.Location = new System.Drawing.Point(0, 0);
@@ -58,7 +57,6 @@
 			// 
 			// pnMain
 			// 
-			this.pnMain.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
 			this.pnMain.Controls.Add(this.pnData);
 			this.pnMain.Controls.Add(this.pnButtons);
 			this.pnMain.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -74,7 +72,7 @@
 			this.pnData.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.pnData.Location = new System.Drawing.Point(0, 47);
 			this.pnData.Name = "pnData";
-			this.pnData.Size = new System.Drawing.Size(346, 329);
+			this.pnData.Size = new System.Drawing.Size(350, 333);
 			this.pnData.TabIndex = 1;
 			// 
 			// checkedListBoxControl
@@ -85,7 +83,7 @@
 			this.checkedListBoxControl.Location = new System.Drawing.Point(0, 28);
 			this.checkedListBoxControl.Name = "checkedListBoxControl";
 			this.checkedListBoxControl.SelectionMode = System.Windows.Forms.SelectionMode.None;
-			this.checkedListBoxControl.Size = new System.Drawing.Size(346, 301);
+			this.checkedListBoxControl.Size = new System.Drawing.Size(350, 305);
 			this.checkedListBoxControl.StyleController = this.styleController;
 			this.checkedListBoxControl.TabIndex = 1;
 			this.checkedListBoxControl.ItemCheck += new DevExpress.XtraEditors.Controls.ItemCheckEventHandler(this.checkedListBoxControl_ItemCheck);
@@ -112,7 +110,7 @@
 			this.labelControlRestrictionInfo.Dock = System.Windows.Forms.DockStyle.Top;
 			this.labelControlRestrictionInfo.Location = new System.Drawing.Point(0, 0);
 			this.labelControlRestrictionInfo.Name = "labelControlRestrictionInfo";
-			this.labelControlRestrictionInfo.Size = new System.Drawing.Size(346, 28);
+			this.labelControlRestrictionInfo.Size = new System.Drawing.Size(350, 28);
 			this.labelControlRestrictionInfo.StyleController = this.styleController;
 			this.labelControlRestrictionInfo.TabIndex = 0;
 			this.labelControlRestrictionInfo.Text = "Max 4 Super Filters are allowed…";
@@ -123,7 +121,7 @@
 			this.pnButtons.Dock = System.Windows.Forms.DockStyle.Top;
 			this.pnButtons.Location = new System.Drawing.Point(0, 0);
 			this.pnButtons.Name = "pnButtons";
-			this.pnButtons.Size = new System.Drawing.Size(346, 47);
+			this.pnButtons.Size = new System.Drawing.Size(350, 47);
 			this.pnButtons.TabIndex = 0;
 			// 
 			// buttonXReset
@@ -134,7 +132,7 @@
 			this.buttonXReset.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXReset.Location = new System.Drawing.Point(5, 8);
 			this.buttonXReset.Name = "buttonXReset";
-			this.buttonXReset.Size = new System.Drawing.Size(336, 30);
+			this.buttonXReset.Size = new System.Drawing.Size(340, 30);
 			this.buttonXReset.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXReset.TabIndex = 0;
 			this.buttonXReset.Text = "RESET ALL Super Filters for the Selected Links";
@@ -144,7 +142,7 @@
 			// SuperFiltersEditor
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
+			this.BackColor = System.Drawing.Color.White;
 			this.Controls.Add(this.pnMain);
 			this.Controls.Add(this.laHeader);
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));

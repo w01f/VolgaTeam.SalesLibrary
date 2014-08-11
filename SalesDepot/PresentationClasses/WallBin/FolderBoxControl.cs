@@ -6,7 +6,6 @@ using System.Linq;
 using System.Windows.Forms;
 using DevExpress.Utils;
 using SalesDepot.BusinessClasses;
-using SalesDepot.ConfigurationClasses;
 using SalesDepot.CoreObjects.BusinessClasses;
 using SalesDepot.PresentationClasses.WallBin.Decorators;
 
@@ -21,13 +20,11 @@ namespace SalesDepot.PresentationClasses.WallBin
 		private const int DefaultImageHeight = 26;
 		private readonly RichTextBox _richTextControl = new RichTextBox();
 		private bool _containsWidgets;
-		private Rectangle _dragBox;
 
 		private LibraryFolder _folder;
-		private DataGridView.HitTestInfo _hitTest;
 		private Font _noteFont;
 		private Font _textFont;
-		private Cursor storedCursor;
+		private Cursor _storedCursor;
 		private int _contantHeight;
 
 		#region Public Properties
@@ -98,7 +95,6 @@ namespace SalesDepot.PresentationClasses.WallBin
 								pbImage.SizeMode = PictureBoxSizeMode.Normal;
 								break;
 						}
-						pnHeaderBorder.Height = _folder.BannerProperties.Image.Height;
 						buttonXHeader.Text = _folder.Name + linksText;
 					}
 				}
@@ -199,7 +195,7 @@ namespace SalesDepot.PresentationClasses.WallBin
 
 		private void laFolderName_Click(object sender, EventArgs e)
 		{
-			grFiles.Focus();
+			Parent.Parent.Parent.Focus();
 		}
 
 		private void grFiles_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
@@ -212,7 +208,7 @@ namespace SalesDepot.PresentationClasses.WallBin
 
 		private void grFiles_CellMouseLeave(object sender, DataGridViewCellEventArgs e)
 		{
-			Cursor = storedCursor;
+			Cursor = _storedCursor;
 		}
 
 		private void ControlBorders_Paint(object sender, PaintEventArgs e)
@@ -278,88 +274,96 @@ namespace SalesDepot.PresentationClasses.WallBin
 
 		private void grFiles_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
 		{
-			if (e.ColumnIndex == 0)
+			if (e.ColumnIndex != 0) return;
+			var file = grFiles.Rows[e.RowIndex].Tag as LibraryLink;
+			if (file != null)
 			{
-				var file = grFiles.Rows[e.RowIndex].Tag as LibraryLink;
-				if (file != null)
+				e.PaintBackground(e.CellBounds, true);
+
+				#region Calculate Options
+				Image image = null;
+				int imageLeft = 0;
+				int imageTop = 0;
+				int imageWidth = 0;
+				int imageHeight = 0;
+				string text = string.Empty;
+				int textLeft = 0;
+				int textTop = 0;
+				int textWidth = 0;
+				int textHeight = 0;
+				int columnWidth = 0;
+				int rowHeight = 0;
+				Color foreColor = Color.Black;
+				Font font = null;
+
+				GetLinkGUIValues(file
+					, ref image
+					, ref imageLeft
+					, ref imageTop
+					, ref imageWidth
+					, ref imageHeight
+					, ref text
+					, ref textLeft
+					, ref textTop
+					, ref textWidth
+					, ref textHeight
+					, ref columnWidth
+					, ref rowHeight
+					, ref foreColor
+					, ref font);
+
+				if (columnWidth > colDisplayName.Width)
+					colDisplayName.Width = columnWidth;
+
+				if (rowHeight > grFiles.Rows[e.RowIndex].Height)
 				{
-					e.PaintBackground(e.CellBounds, true);
-
-					#region Calculate Options
-					Image image = null;
-					int imageLeft = 0;
-					int imageTop = 0;
-					int imageWidth = 0;
-					int imageHeight = 0;
-					string text = string.Empty;
-					int textLeft = 0;
-					int textTop = 0;
-					int textWidth = 0;
-					int textHeight = 0;
-					int columnWidth = 0;
-					int rowHeight = 0;
-					Color foreColor = Color.Black;
-					Font font = null;
-
-					GetLinkGUIValues(file
-									 , ref image
-									 , ref imageLeft
-									 , ref imageTop
-									 , ref imageWidth
-									 , ref imageHeight
-									 , ref text
-									 , ref textLeft
-									 , ref textTop
-									 , ref textWidth
-									 , ref textHeight
-									 , ref columnWidth
-									 , ref rowHeight
-									 , ref foreColor
-									 , ref font);
-
-					if (columnWidth > colDisplayName.Width)
-						colDisplayName.Width = columnWidth;
-
-					if (rowHeight > grFiles.Rows[e.RowIndex].Height)
-					{
-						grFiles.Rows[e.RowIndex].Height = rowHeight;
-						SetGridSize();
-						if (Parent != null)
-							((ColumnPanel)Parent).ResizePanel();
-					}
-					#endregion
-
-					#region Build RichTextControl
-					_richTextControl.Text = text;
-					_richTextControl.Font = font;
-					_richTextControl.Height = textHeight;
-					_richTextControl.Width = textWidth;
-
-					if (!string.IsNullOrEmpty(file.Note))
-					{
-						_richTextControl.SelectionStart = file.DisplayName.Length;
-						_richTextControl.SelectionLength = file.Note.Length;
-						_richTextControl.SelectionFont = _noteFont;
-					}
-					_richTextControl.BackColor = grFiles.DefaultCellStyle.BackColor;
-					_richTextControl.ForeColor = foreColor;
-					#endregion
-
-					#region Custom Draw
-					if (image != null)
-						e.Graphics.DrawImage(image, new Rectangle(e.CellBounds.X + imageLeft, e.CellBounds.Y + imageTop, imageWidth, imageHeight));
-					if (!string.IsNullOrEmpty(text))
-						e.Graphics.DrawImage(RichTextBoxPrinter.Print(_richTextControl, textWidth, textHeight), new Rectangle(e.CellBounds.X + textLeft, e.CellBounds.Y + textTop, textWidth, textHeight));
-					#endregion
+					grFiles.Rows[e.RowIndex].Height = rowHeight;
+					SetGridSize();
+					if (Parent != null)
+						((ColumnPanel)Parent).ResizePanel();
 				}
-				e.Handled = true;
+				#endregion
+
+				#region Build RichTextControl
+				_richTextControl.Text = text;
+				_richTextControl.Font = font;
+				_richTextControl.Height = textHeight;
+				_richTextControl.Width = textWidth;
+
+				if (!string.IsNullOrEmpty(file.Note))
+				{
+					_richTextControl.SelectionStart = file.DisplayName.Length;
+					_richTextControl.SelectionLength = file.Note.Length;
+					_richTextControl.SelectionFont = _noteFont;
+				}
+				_richTextControl.BackColor = grFiles.DefaultCellStyle.BackColor;
+				_richTextControl.ForeColor = foreColor;
+				#endregion
+
+				#region Custom Draw
+				if (image != null)
+					e.Graphics.DrawImage(image, new Rectangle(e.CellBounds.X + imageLeft, e.CellBounds.Y + imageTop, imageWidth, imageHeight));
+				if (!string.IsNullOrEmpty(text))
+					e.Graphics.DrawImage(RichTextBoxPrinter.Print(_richTextControl, textWidth, textHeight), new Rectangle(e.CellBounds.X + textLeft, e.CellBounds.Y + textTop, textWidth, textHeight));
+				#endregion
 			}
+			e.Handled = true;
 		}
 
 		private void buttonXHeader_Click(object sender, EventArgs e)
 		{
 			ContentExpanded = !ContentExpanded;
 			UpdateContent();
+		}
+
+		private void xtraScrollableControlGrid_Resize(object sender, EventArgs e)
+		{
+			SetGridSize();
+		}
+
+		void FolderBoxControl_MouseMove(object sender, MouseEventArgs e)
+		{
+			Parent.Parent.Parent.Focus();
 		}
 		#endregion
 
@@ -370,9 +374,14 @@ namespace SalesDepot.PresentationClasses.WallBin
 			grFiles.CellMouseLeave += grFiles_CellMouseLeave;
 			grFiles.CellPainting += grFiles_CellPainting;
 			grFiles.CellFormatting += grFiles_CellFormatting;
-			storedCursor = Cursor;
+			_storedCursor = Cursor;
 			grFiles.DragOver += (s, eParameter) => eParameter.Effect = DragDropEffects.All;
-			grFiles.ScrollBars = ScrollBars.Horizontal;
+			grFiles.ScrollBars = ScrollBars.None;
+			xtraScrollableControlGrid.Resize += xtraScrollableControlGrid_Resize;
+			grFiles.MouseMove += FolderBoxControl_MouseMove;
+			labelControlText.MouseMove += FolderBoxControl_MouseMove;
+			pbImage.MouseMove += FolderBoxControl_MouseMove;
+			MouseMove += FolderBoxControl_MouseMove;
 		}
 
 		private void GetLinkGUIValues(LibraryLink file
@@ -415,12 +424,12 @@ namespace SalesDepot.PresentationClasses.WallBin
 							imageLeft = 0;
 							break;
 						case Alignment.Center:
-							imageLeft = (grFiles.Width - file.BannerProperties.Image.Width) / 2;
+							imageLeft = (xtraScrollableControlGrid.Width - file.BannerProperties.Image.Width) / 2;
 							if (imageLeft < 0)
 								imageLeft = 0;
 							break;
 						case Alignment.Right:
-							imageLeft = grFiles.Width - file.BannerProperties.Image.Width;
+							imageLeft = xtraScrollableControlGrid.Width - file.BannerProperties.Image.Width;
 							if (imageLeft < 0)
 								imageLeft = 0;
 							break;
@@ -478,7 +487,7 @@ namespace SalesDepot.PresentationClasses.WallBin
 
 			#region Text Size and Coordinates
 			SizeF textSize;
-			if (file.BannerProperties.Enable && file.BannerProperties.ShowText && !string.IsNullOrEmpty(file.BannerProperties.Text))
+			if (file.BannerProperties.Enable && file.BannerProperties.ShowText && !String.IsNullOrEmpty(file.BannerProperties.Text))
 				using (var g = labelControlText.CreateGraphics())
 					textSize = g.MeasureString(text, fontForSizeCalculation, Int32.MaxValue);
 			else
@@ -542,7 +551,12 @@ namespace SalesDepot.PresentationClasses.WallBin
 		private void SetHeaderSize()
 		{
 			int textHeight;
-			if (_folder.BannerProperties.Enable && _folder.BannerProperties.Image != null)
+			if (Decorator == null) return;
+			if (Decorator.State.AccordionView)
+			{
+				pnHeaderBorder.Height = 55;
+			}
+			else if (_folder.BannerProperties.Enable && _folder.BannerProperties.Image != null)
 			{
 				pbImage.Width = _folder.BannerProperties.Image.Width;
 				if (_folder.BannerProperties.ShowText && !string.IsNullOrEmpty(_folder.BannerProperties.Text))
@@ -575,6 +589,7 @@ namespace SalesDepot.PresentationClasses.WallBin
 
 		private void SetGridSize()
 		{
+			if (_textFont == null) return;
 			_contantHeight = 0;
 			int maxColumnWidth = 0;
 			foreach (DataGridViewRow row in grFiles.Rows)
@@ -633,7 +648,8 @@ namespace SalesDepot.PresentationClasses.WallBin
 			if (_contantHeight < 90)
 				_contantHeight = 90;
 
-			colDisplayName.Width = maxColumnWidth > (grFiles.Width - 10) ? maxColumnWidth : (grFiles.Width - 10);
+			colDisplayName.Width = maxColumnWidth > xtraScrollableControlGrid.Width ? maxColumnWidth : xtraScrollableControlGrid.Width;
+			grFiles.Width = colDisplayName.Width;
 
 			Height = (_contentExpanded || !Decorator.State.AccordionView ? _contantHeight : 0) + pnHeaderBorder.Height + (Decorator.State.ListView || Decorator.State.AccordionView ? (pnBottom.Height + pnTop.Height) : 0);
 		}

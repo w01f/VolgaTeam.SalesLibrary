@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Windows.Forms;
+using DevComponents.DotNetBar;
 using FileManager.Controllers;
 using FileManager.PresentationClasses.TabPages;
 
 namespace FileManager
 {
-	public partial class FormMain : Form
+	public partial class FormMain : RibbonForm
 	{
 		private static FormMain _instance = null;
 

@@ -276,7 +276,7 @@ namespace FileManager.PresentationClasses.IPad
 											   id = y.id,
 											   name = y.name,
 											   libraryId = y.libraryId,
-											   selected = (userRecord.libraries != null && userRecord.libraries.SelectMany(library => library.pages).Select(userPage => userPage.id).Contains(y.id))
+											   selected = (userRecord.libraries != null && userRecord.libraries.Where(library => library.pages != null).SelectMany(library => library.pages).Select(userPage => userPage.id).Contains(y.id))
 										   }).ToArray()
 									   }).ToArray()))
 				{

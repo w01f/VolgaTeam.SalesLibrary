@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TabHomeControl));
 			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
 			DevExpress.Utils.SuperToolTip superToolTip10 = new DevExpress.Utils.SuperToolTip();
@@ -67,7 +66,7 @@
 			this.buttonXEmptyEmailBin = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXCreateEmail = new DevComponents.DotNetBar.ButtonX();
 			this.pnRemoteLibraryContainer = new System.Windows.Forms.Panel();
-			this.barManager = new DevExpress.XtraBars.BarManager(this.components);
+			this.barManager = new DevExpress.XtraBars.BarManager();
 			this.barMinibar = new DevExpress.XtraBars.Bar();
 			this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
 			this.barCheckItemViewClassic = new DevExpress.XtraBars.BarCheckItem();
@@ -79,12 +78,12 @@
 			this.barButtonItemRowSpaceUp = new DevExpress.XtraBars.BarButtonItem();
 			this.barButtonItemRowSpaceDown = new DevExpress.XtraBars.BarButtonItem();
 			this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
-			this.barAndDockingController = new DevExpress.XtraBars.BarAndDockingController(this.components);
+			this.barAndDockingController = new DevExpress.XtraBars.BarAndDockingController();
 			this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
 			this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
 			this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
 			this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
-			this.toolTipController = new DevExpress.Utils.ToolTipController(this.components);
+			this.toolTipController = new DevExpress.Utils.ToolTipController();
 			this.pnMain.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainerControl)).BeginInit();
 			this.splitContainerControl.SuspendLayout();
@@ -103,7 +102,7 @@
 			this.pnEmpty.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.pnEmpty.Location = new System.Drawing.Point(0, 0);
 			this.pnEmpty.Name = "pnEmpty";
-			this.pnEmpty.Size = new System.Drawing.Size(758, 457);
+			this.pnEmpty.Size = new System.Drawing.Size(758, 450);
 			this.pnEmpty.TabIndex = 3;
 			// 
 			// pnMain
@@ -112,7 +111,7 @@
 			this.pnMain.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.pnMain.Location = new System.Drawing.Point(0, 0);
 			this.pnMain.Name = "pnMain";
-			this.pnMain.Size = new System.Drawing.Size(758, 457);
+			this.pnMain.Size = new System.Drawing.Size(758, 450);
 			this.pnMain.TabIndex = 4;
 			// 
 			// splitContainerControl
@@ -124,23 +123,27 @@
 			this.splitContainerControl.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.splitContainerControl.Location = new System.Drawing.Point(0, 0);
 			this.splitContainerControl.Name = "splitContainerControl";
+			this.splitContainerControl.Panel1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Default;
 			this.splitContainerControl.Panel1.Controls.Add(this.gridControlFiles);
 			this.splitContainerControl.Panel1.Controls.Add(this.pnTop);
 			this.splitContainerControl.Panel1.Controls.Add(this.pnBottom);
+			this.splitContainerControl.Panel1.MinSize = 300;
 			this.splitContainerControl.Panel1.Text = "Panel1";
 			this.splitContainerControl.Panel2.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(241)))), ((int)(((byte)(254)))));
 			this.splitContainerControl.Panel2.Appearance.Options.UseBackColor = true;
+			this.splitContainerControl.Panel2.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Default;
 			this.splitContainerControl.Panel2.Controls.Add(this.pnRemoteLibraryContainer);
 			this.splitContainerControl.Panel2.Text = "Panel2";
 			this.splitContainerControl.PanelVisibility = DevExpress.XtraEditors.SplitPanelVisibility.Panel2;
-			this.splitContainerControl.Size = new System.Drawing.Size(758, 457);
-			this.splitContainerControl.SplitterPosition = 257;
+			this.splitContainerControl.Size = new System.Drawing.Size(758, 450);
+			this.splitContainerControl.SplitterPosition = 300;
 			this.splitContainerControl.TabIndex = 5;
 			this.splitContainerControl.Text = "splitContainerControl1";
 			// 
 			// gridControlFiles
 			// 
 			this.gridControlFiles.AllowDrop = true;
+			this.gridControlFiles.Cursor = System.Windows.Forms.Cursors.Default;
 			this.gridControlFiles.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.gridControlFiles.Location = new System.Drawing.Point(0, 56);
 			this.gridControlFiles.MainView = this.gridViewFiles;
@@ -212,13 +215,11 @@
 			// 
 			// laTitle
 			// 
-			this.laTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
 			this.laTitle.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.laTitle.ForeColor = System.Drawing.Color.White;
+			this.laTitle.ForeColor = System.Drawing.Color.DimGray;
 			this.laTitle.Location = new System.Drawing.Point(63, 0);
 			this.laTitle.Name = "laTitle";
-			this.laTitle.Size = new System.Drawing.Size(194, 56);
+			this.laTitle.Size = new System.Drawing.Size(222, 56);
 			this.laTitle.TabIndex = 4;
 			this.laTitle.Text = "Email Attachments Panel";
 			this.laTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -244,7 +245,6 @@
 			// 
 			// pnBottom
 			// 
-			this.pnBottom.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
 			this.pnBottom.Controls.Add(this.laEmailBinDescription);
 			this.pnBottom.Controls.Add(this.buttonXPDF);
 			this.pnBottom.Controls.Add(this.buttonXZip);
@@ -260,11 +260,13 @@
 			// 
 			// laEmailBinDescription
 			// 
+			this.laEmailBinDescription.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
 			this.laEmailBinDescription.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.laEmailBinDescription.ForeColor = System.Drawing.Color.White;
-			this.laEmailBinDescription.Location = new System.Drawing.Point(1, 0);
+			this.laEmailBinDescription.ForeColor = System.Drawing.Color.DimGray;
+			this.laEmailBinDescription.Location = new System.Drawing.Point(12, 3);
 			this.laEmailBinDescription.Name = "laEmailBinDescription";
-			this.laEmailBinDescription.Size = new System.Drawing.Size(254, 101);
+			this.laEmailBinDescription.Size = new System.Drawing.Size(273, 98);
 			this.laEmailBinDescription.TabIndex = 6;
 			this.laEmailBinDescription.Text = "You can Email some files to clients  with Outlook.\r\n\r\nRight Click on the file  if" +
     " you want to ATTACH IT to an  email.";
@@ -278,9 +280,10 @@
 			this.buttonXPDF.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.buttonXPDF.Image = global::SalesDepot.Properties.Resources.EmailBinPdf;
 			this.buttonXPDF.ImageFixedSize = new System.Drawing.Size(40, 40);
-			this.buttonXPDF.Location = new System.Drawing.Point(10, 104);
+			this.buttonXPDF.Location = new System.Drawing.Point(13, 104);
 			this.buttonXPDF.Name = "buttonXPDF";
-			this.buttonXPDF.Size = new System.Drawing.Size(233, 47);
+			this.buttonXPDF.Size = new System.Drawing.Size(271, 47);
+			this.buttonXPDF.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXPDF.TabIndex = 5;
 			this.buttonXPDF.Text = "   PowerPoint to PDF";
 			this.buttonXPDF.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
@@ -295,9 +298,10 @@
 			this.buttonXZip.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.buttonXZip.Image = global::SalesDepot.Properties.Resources.zip;
 			this.buttonXZip.ImageFixedSize = new System.Drawing.Size(40, 40);
-			this.buttonXZip.Location = new System.Drawing.Point(10, 157);
+			this.buttonXZip.Location = new System.Drawing.Point(13, 157);
 			this.buttonXZip.Name = "buttonXZip";
-			this.buttonXZip.Size = new System.Drawing.Size(233, 47);
+			this.buttonXZip.Size = new System.Drawing.Size(271, 47);
+			this.buttonXZip.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXZip.TabIndex = 4;
 			this.buttonXZip.Text = "   Zip Attachment";
 			this.buttonXZip.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
@@ -311,9 +315,10 @@
 			this.buttonXEmptyEmailBin.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.buttonXEmptyEmailBin.Image = global::SalesDepot.Properties.Resources.EmailBinEmpty;
 			this.buttonXEmptyEmailBin.ImageFixedSize = new System.Drawing.Size(40, 40);
-			this.buttonXEmptyEmailBin.Location = new System.Drawing.Point(10, 210);
+			this.buttonXEmptyEmailBin.Location = new System.Drawing.Point(13, 210);
 			this.buttonXEmptyEmailBin.Name = "buttonXEmptyEmailBin";
-			this.buttonXEmptyEmailBin.Size = new System.Drawing.Size(233, 47);
+			this.buttonXEmptyEmailBin.Size = new System.Drawing.Size(271, 47);
+			this.buttonXEmptyEmailBin.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXEmptyEmailBin.TabIndex = 3;
 			this.buttonXEmptyEmailBin.Text = "   Empty Email Bin";
 			this.buttonXEmptyEmailBin.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
@@ -327,9 +332,10 @@
 			this.buttonXCreateEmail.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.buttonXCreateEmail.Image = global::SalesDepot.Properties.Resources.EmailBinSend;
 			this.buttonXCreateEmail.ImageFixedSize = new System.Drawing.Size(42, 40);
-			this.buttonXCreateEmail.Location = new System.Drawing.Point(10, 263);
+			this.buttonXCreateEmail.Location = new System.Drawing.Point(13, 263);
 			this.buttonXCreateEmail.Name = "buttonXCreateEmail";
-			this.buttonXCreateEmail.Size = new System.Drawing.Size(233, 47);
+			this.buttonXCreateEmail.Size = new System.Drawing.Size(271, 47);
+			this.buttonXCreateEmail.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXCreateEmail.TabIndex = 0;
 			this.buttonXCreateEmail.Text = "  Create Email";
 			this.buttonXCreateEmail.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
@@ -338,10 +344,11 @@
 			// 
 			// pnRemoteLibraryContainer
 			// 
+			this.pnRemoteLibraryContainer.BackColor = System.Drawing.Color.White;
 			this.pnRemoteLibraryContainer.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.pnRemoteLibraryContainer.Location = new System.Drawing.Point(0, 0);
 			this.pnRemoteLibraryContainer.Name = "pnRemoteLibraryContainer";
-			this.pnRemoteLibraryContainer.Size = new System.Drawing.Size(758, 457);
+			this.pnRemoteLibraryContainer.Size = new System.Drawing.Size(754, 446);
 			this.pnRemoteLibraryContainer.TabIndex = 3;
 			// 
 			// barManager
@@ -364,17 +371,15 @@
             this.barCheckItemViewList,
             this.barCheckItemViewAccordion,
             this.barCheckItemViewTabs,
-            this.barButtonItem1,
             this.barButtonItem2,
             this.barButtonItemRowSpaceUp,
-            this.barButtonItemRowSpaceDown});
-			this.barManager.MaxItemId = 17;
+            this.barButtonItemRowSpaceDown,
+            this.barButtonItem1});
+			this.barManager.MaxItemId = 18;
 			this.barManager.ToolTipController = this.toolTipController;
 			// 
 			// barMinibar
 			// 
-			this.barMinibar.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
-			this.barMinibar.Appearance.Options.UseBackColor = true;
 			this.barMinibar.BarName = "Tools";
 			this.barMinibar.CanDockStyle = DevExpress.XtraBars.BarCanDockStyle.Bottom;
 			this.barMinibar.DockCol = 0;
@@ -405,12 +410,12 @@
 			// 
 			// barCheckItemViewClassic
 			// 
-			this.barCheckItemViewClassic.Appearance.ForeColor = System.Drawing.Color.Black;
-			this.barCheckItemViewClassic.Appearance.Options.UseForeColor = true;
 			this.barCheckItemViewClassic.Caption = "Columns";
 			this.barCheckItemViewClassic.Glyph = global::SalesDepot.Properties.Resources.ClassicView;
 			this.barCheckItemViewClassic.GroupIndex = 1;
 			this.barCheckItemViewClassic.Id = 8;
+			this.barCheckItemViewClassic.ItemAppearance.Normal.ForeColor = System.Drawing.Color.Black;
+			this.barCheckItemViewClassic.ItemAppearance.Normal.Options.UseForeColor = true;
 			this.barCheckItemViewClassic.Name = "barCheckItemViewClassic";
 			toolTipItem13.Text = "Columns View";
 			superToolTip13.Items.Add(toolTipItem13);
@@ -418,12 +423,12 @@
 			// 
 			// barCheckItemViewList
 			// 
-			this.barCheckItemViewList.Appearance.ForeColor = System.Drawing.Color.Black;
-			this.barCheckItemViewList.Appearance.Options.UseForeColor = true;
 			this.barCheckItemViewList.Caption = "List";
 			this.barCheckItemViewList.Glyph = global::SalesDepot.Properties.Resources.ListView;
 			this.barCheckItemViewList.GroupIndex = 1;
 			this.barCheckItemViewList.Id = 9;
+			this.barCheckItemViewList.ItemAppearance.Normal.ForeColor = System.Drawing.Color.Black;
+			this.barCheckItemViewList.ItemAppearance.Normal.Options.UseForeColor = true;
 			this.barCheckItemViewList.Name = "barCheckItemViewList";
 			toolTipItem14.Text = "List View";
 			superToolTip14.Items.Add(toolTipItem14);
@@ -431,12 +436,12 @@
 			// 
 			// barCheckItemViewAccordion
 			// 
-			this.barCheckItemViewAccordion.Appearance.ForeColor = System.Drawing.Color.Black;
-			this.barCheckItemViewAccordion.Appearance.Options.UseForeColor = true;
 			this.barCheckItemViewAccordion.Caption = "Accordion";
 			this.barCheckItemViewAccordion.Glyph = global::SalesDepot.Properties.Resources.AccordionView;
 			this.barCheckItemViewAccordion.GroupIndex = 1;
 			this.barCheckItemViewAccordion.Id = 10;
+			this.barCheckItemViewAccordion.ItemAppearance.Normal.ForeColor = System.Drawing.Color.Black;
+			this.barCheckItemViewAccordion.ItemAppearance.Normal.Options.UseForeColor = true;
 			this.barCheckItemViewAccordion.Name = "barCheckItemViewAccordion";
 			toolTipItem15.Text = "Accordion View";
 			superToolTip15.Items.Add(toolTipItem15);
@@ -454,11 +459,11 @@
 			// 
 			// barButtonItemFontUp
 			// 
-			this.barButtonItemFontUp.Appearance.ForeColor = System.Drawing.Color.Black;
-			this.barButtonItemFontUp.Appearance.Options.UseForeColor = true;
 			this.barButtonItemFontUp.Caption = "Up";
 			this.barButtonItemFontUp.Glyph = global::SalesDepot.Properties.Resources.MinibarFontLarger;
 			this.barButtonItemFontUp.Id = 4;
+			this.barButtonItemFontUp.ItemAppearance.Normal.ForeColor = System.Drawing.Color.Black;
+			this.barButtonItemFontUp.ItemAppearance.Normal.Options.UseForeColor = true;
 			this.barButtonItemFontUp.Name = "barButtonItemFontUp";
 			toolTipItem11.Text = "Increase Text Size";
 			superToolTip11.Items.Add(toolTipItem11);
@@ -466,11 +471,11 @@
 			// 
 			// barButtonItemFontDown
 			// 
-			this.barButtonItemFontDown.Appearance.ForeColor = System.Drawing.Color.Black;
-			this.barButtonItemFontDown.Appearance.Options.UseForeColor = true;
 			this.barButtonItemFontDown.Caption = "Down";
 			this.barButtonItemFontDown.Glyph = global::SalesDepot.Properties.Resources.MinibarFontSmaller;
 			this.barButtonItemFontDown.Id = 5;
+			this.barButtonItemFontDown.ItemAppearance.Normal.ForeColor = System.Drawing.Color.Black;
+			this.barButtonItemFontDown.ItemAppearance.Normal.Options.UseForeColor = true;
 			this.barButtonItemFontDown.Name = "barButtonItemFontDown";
 			toolTipItem12.Text = "Decrease Text Size";
 			superToolTip12.Items.Add(toolTipItem12);
@@ -499,13 +504,14 @@
 			// barButtonItem1
 			// 
 			this.barButtonItem1.Enabled = false;
-			this.barButtonItem1.Id = 13;
+			this.barButtonItem1.Id = 17;
 			this.barButtonItem1.Name = "barButtonItem1";
 			// 
 			// barAndDockingController
 			// 
-			this.barAndDockingController.PaintStyleName = "Office2003";
 			this.barAndDockingController.PropertiesBar.AllowLinkLighting = false;
+			this.barAndDockingController.PropertiesBar.DefaultGlyphSize = new System.Drawing.Size(16, 16);
+			this.barAndDockingController.PropertiesBar.DefaultLargeGlyphSize = new System.Drawing.Size(32, 32);
 			// 
 			// barDockControlTop
 			// 
@@ -516,26 +522,24 @@
 			// 
 			// barDockControlBottom
 			// 
-			this.barDockControlBottom.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
-			this.barDockControlBottom.Appearance.Options.UseBackColor = true;
 			this.barDockControlBottom.CausesValidation = false;
 			this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.barDockControlBottom.Location = new System.Drawing.Point(0, 457);
-			this.barDockControlBottom.Size = new System.Drawing.Size(758, 27);
+			this.barDockControlBottom.Location = new System.Drawing.Point(0, 450);
+			this.barDockControlBottom.Size = new System.Drawing.Size(758, 34);
 			// 
 			// barDockControlLeft
 			// 
 			this.barDockControlLeft.CausesValidation = false;
 			this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
 			this.barDockControlLeft.Location = new System.Drawing.Point(0, 0);
-			this.barDockControlLeft.Size = new System.Drawing.Size(0, 457);
+			this.barDockControlLeft.Size = new System.Drawing.Size(0, 450);
 			// 
 			// barDockControlRight
 			// 
 			this.barDockControlRight.CausesValidation = false;
 			this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
 			this.barDockControlRight.Location = new System.Drawing.Point(758, 0);
-			this.barDockControlRight.Size = new System.Drawing.Size(0, 457);
+			this.barDockControlRight.Size = new System.Drawing.Size(0, 450);
 			// 
 			// toolTipController
 			// 
@@ -546,7 +550,7 @@
 			// TabHomeControl
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
+			this.BackColor = System.Drawing.Color.White;
 			this.Controls.Add(this.pnMain);
 			this.Controls.Add(this.pnEmpty);
 			this.Controls.Add(this.barDockControlLeft);
@@ -603,11 +607,11 @@
 		private DevExpress.XtraBars.BarCheckItem barCheckItemViewTabs;
 		private DevExpress.XtraBars.BarCheckItem barCheckItemViewClassic;
 		private DevExpress.XtraBars.BarButtonItem barButtonItem2;
-		private DevExpress.XtraBars.BarButtonItem barButtonItem1;
 		private DevExpress.XtraBars.BarButtonItem barButtonItemRowSpaceUp;
 		private DevExpress.XtraBars.BarButtonItem barButtonItemRowSpaceDown;
 		private DevExpress.Utils.ToolTipController toolTipController;
 		private System.Windows.Forms.Label laEmailBinDescription;
 		private System.Windows.Forms.PictureBox pictureBoxHelp;
+		private DevExpress.XtraBars.BarButtonItem barButtonItem1;
     }
 }

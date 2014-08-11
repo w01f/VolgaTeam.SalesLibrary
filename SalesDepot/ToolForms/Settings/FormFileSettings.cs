@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Windows.Forms;
+using DevComponents.DotNetBar.Metro;
 using SalesDepot.ConfigurationClasses;
 
 namespace SalesDepot.ToolForms.Settings
 {
-	public partial class FormFileSettings : Form
+	public partial class FormFileSettings : MetroForm
 	{
 		public FormFileSettings()
 		{

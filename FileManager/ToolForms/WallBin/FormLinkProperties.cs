@@ -6,6 +6,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using DevComponents.DotNetBar.Metro;
 using DevExpress.Utils;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
@@ -20,7 +21,7 @@ using SalesDepot.CoreObjects.BusinessClasses;
 
 namespace FileManager.ToolForms.WallBin
 {
-	public partial class FormLinkProperties : Form
+	public partial class FormLinkProperties : MetroForm
 	{
 		private bool _closeEventAssigned;
 		private bool _isBold;

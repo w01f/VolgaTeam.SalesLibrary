@@ -30,7 +30,6 @@
         {
 			this.components = new System.ComponentModel.Container();
 			this.buttonXLoadData = new DevComponents.DotNetBar.ButtonX();
-			this.styleManager = new DevComponents.DotNetBar.StyleManager(this.components);
 			this.splitContainerControl = new DevExpress.XtraEditors.SplitContainerControl();
 			this.pnCustomFilter = new System.Windows.Forms.Panel();
 			this.pnFilterButtons = new System.Windows.Forms.Panel();
@@ -45,9 +44,9 @@
 			this.pnFilterButtons.SuspendLayout();
 			this.gbDate.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.dateEditEnd.Properties.VistaTimeProperties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.dateEditEnd.Properties.CalendarTimeProperties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.dateEditEnd.Properties)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.dateEditStart.Properties.VistaTimeProperties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.dateEditStart.Properties.CalendarTimeProperties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.dateEditStart.Properties)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -67,11 +66,6 @@
 			this.buttonXLoadData.Text = "Load Data";
 			this.buttonXLoadData.TextColor = System.Drawing.Color.Black;
 			this.buttonXLoadData.Click += new System.EventHandler(this.buttonXLoadData_Click);
-			// 
-			// styleManager
-			// 
-			this.styleManager.ManagerStyle = DevComponents.DotNetBar.eStyle.Office2010Blue;
-			this.styleManager.MetroColorParameters = new DevComponents.DotNetBar.Metro.ColorTables.MetroColorGeneratorParameters(System.Drawing.Color.White, System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(163)))), ((int)(((byte)(26))))));
 			// 
 			// splitContainerControl
 			// 
@@ -152,12 +146,12 @@
 			this.dateEditEnd.Name = "dateEditEnd";
 			this.dateEditEnd.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+			this.dateEditEnd.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
 			this.dateEditEnd.Properties.DisplayFormat.FormatString = "MM/dd/yyyy";
 			this.dateEditEnd.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
 			this.dateEditEnd.Properties.EditFormat.FormatString = "MM/dd/yyyy";
 			this.dateEditEnd.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Custom;
-			this.dateEditEnd.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton()});
 			this.dateEditEnd.Size = new System.Drawing.Size(132, 22);
 			this.dateEditEnd.StyleController = this.styleController;
 			this.dateEditEnd.TabIndex = 2;
@@ -178,12 +172,12 @@
 			this.dateEditStart.Name = "dateEditStart";
 			this.dateEditStart.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+			this.dateEditStart.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
 			this.dateEditStart.Properties.DisplayFormat.FormatString = "MM/dd/yyyy";
 			this.dateEditStart.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
 			this.dateEditStart.Properties.EditFormat.FormatString = "MM/dd/yyyy";
 			this.dateEditStart.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Custom;
-			this.dateEditStart.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton()});
 			this.dateEditStart.Size = new System.Drawing.Size(132, 22);
 			this.dateEditStart.StyleController = this.styleController;
 			this.dateEditStart.TabIndex = 0;
@@ -191,7 +185,7 @@
 			// ActivitiesManagerControl
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+			this.BackColor = System.Drawing.Color.White;
 			this.Controls.Add(this.splitContainerControl);
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -203,9 +197,9 @@
 			this.gbDate.ResumeLayout(false);
 			this.gbDate.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.dateEditEnd.Properties.VistaTimeProperties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.dateEditEnd.Properties.CalendarTimeProperties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.dateEditEnd.Properties)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.dateEditStart.Properties.VistaTimeProperties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.dateEditStart.Properties.CalendarTimeProperties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.dateEditStart.Properties)).EndInit();
 			this.ResumeLayout(false);
 
@@ -214,7 +208,6 @@
         #endregion
 
 		private DevComponents.DotNetBar.ButtonX buttonXLoadData;
-		private DevComponents.DotNetBar.StyleManager styleManager;
 		private DevExpress.XtraEditors.SplitContainerControl splitContainerControl;
 		private System.Windows.Forms.GroupBox gbDate;
 		private DevExpress.XtraEditors.DateEdit dateEditStart;

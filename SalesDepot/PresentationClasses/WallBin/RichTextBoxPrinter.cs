@@ -6,132 +6,131 @@ using System.Windows.Forms;
 
 namespace SalesDepot.PresentationClasses.WallBin
 {
-    /// <summary>
-    /// http://support.microsoft.com/default.aspx?scid=kb;en-us;812425
-    /// The RichTextBox control does not provide any method to print the content of the RichTextBox. 
-    /// You can extend the RichTextBox class to use EM_FORMATRANGE message 
-    /// to send the content of a RichTextBox control to an output device such as printer.
-    /// </summary>
-    public class RichTextBoxPrinter
-    {
-        //Convert the unit used by the .NET framework (1/100 inch) 
-        //and the unit used by Win32 API calls (twips 1/1440 inch)
-        private const double anInch = 14.4;
+	/// <summary>
+	///     http://support.microsoft.com/default.aspx?scid=kb;en-us;812425
+	///     The RichTextBox control does not provide any method to print the content of the RichTextBox.
+	///     You can extend the RichTextBox class to use EM_FORMATRANGE message
+	///     to send the content of a RichTextBox control to an output device such as printer.
+	/// </summary>
+	public class RichTextBoxPrinter
+	{
+		//Convert the unit used by the .NET framework (1/100 inch) 
+		//and the unit used by Win32 API calls (twips 1/1440 inch)
+		private const double anInch = 14.4;
 
-        [StructLayout(LayoutKind.Sequential)]
-        private struct RECT
-        {
-            public int Left;
-            public int Top;
-            public int Right;
-            public int Bottom;
-        }
+		private const int WM_USER = 0x0400;
+		private const int EM_FORMATRANGE = WM_USER + 57;
 
-        [StructLayout(LayoutKind.Sequential)]
-        private struct CHARRANGE
-        {
-            public int cpMin;         //First character of range (0 for start of doc)
-            public int cpMax;           //Last character of range (-1 for end of doc)
-        }
+		[DllImport("USER32.dll")]
+		private static extern IntPtr SendMessage(IntPtr hWnd, int msg, IntPtr wp, IntPtr lp);
 
-        [StructLayout(LayoutKind.Sequential)]
-        private struct FORMATRANGE
-        {
-            public IntPtr hdc;             //Actual DC to draw on
-            public IntPtr hdcTarget;       //Target DC for determining text formatting
-            public RECT rc;                //Region of the DC to draw to (in twips)
-            public RECT rcPage;            //Region of the whole DC (page size) (in twips)
-            public CHARRANGE chrg;         //Range of text to draw (see earlier declaration)
-        }
+		// Render the contents of the RichTextBox for printing
+		//	Return the last character printed + 1 (printing start from this point for next page)
+		public static int Print(IntPtr richTextBoxHandle, int charFrom, int charTo, PrintPageEventArgs e)
+		{
+			//Calculate the area to render and print
+			RECT rectToPrint;
+			rectToPrint.Top = (int)(e.MarginBounds.Top * anInch);
+			rectToPrint.Bottom = (int)(e.MarginBounds.Bottom * anInch);
+			rectToPrint.Left = (int)(e.MarginBounds.Left * anInch);
+			rectToPrint.Right = (int)(e.MarginBounds.Right * anInch);
 
-        private const int WM_USER = 0x0400;
-        private const int EM_FORMATRANGE = WM_USER + 57;
+			//Calculate the size of the page
+			RECT rectPage;
+			rectPage.Top = (int)(e.PageBounds.Top * anInch);
+			rectPage.Bottom = (int)(e.PageBounds.Bottom * anInch);
+			rectPage.Left = (int)(e.PageBounds.Left * anInch);
+			rectPage.Right = (int)(e.PageBounds.Right * anInch);
 
-        [DllImport("USER32.dll")]
-        private static extern IntPtr SendMessage(IntPtr hWnd, int msg, IntPtr wp, IntPtr lp);
+			IntPtr hdc = e.Graphics.GetHdc();
 
-        // Render the contents of the RichTextBox for printing
-        //	Return the last character printed + 1 (printing start from this point for next page)
-        public static int Print(IntPtr richTextBoxHandle, int charFrom, int charTo, PrintPageEventArgs e)
-        {
-            //Calculate the area to render and print
-            RECT rectToPrint;
-            rectToPrint.Top = (int)(e.MarginBounds.Top * anInch);
-            rectToPrint.Bottom = (int)(e.MarginBounds.Bottom * anInch);
-            rectToPrint.Left = (int)(e.MarginBounds.Left * anInch);
-            rectToPrint.Right = (int)(e.MarginBounds.Right * anInch);
+			FORMATRANGE fmtRange;
+			fmtRange.chrg.cpMax = charTo; //Indicate character from to character to 
+			fmtRange.chrg.cpMin = charFrom;
+			fmtRange.hdc = hdc; //Use the same DC for measuring and rendering
+			fmtRange.hdcTarget = hdc; //Point at printer hDC
+			fmtRange.rc = rectToPrint; //Indicate the area on page to print
+			fmtRange.rcPage = rectPage; //Indicate size of page
 
-            //Calculate the size of the page
-            RECT rectPage;
-            rectPage.Top = (int)(e.PageBounds.Top * anInch);
-            rectPage.Bottom = (int)(e.PageBounds.Bottom * anInch);
-            rectPage.Left = (int)(e.PageBounds.Left * anInch);
-            rectPage.Right = (int)(e.PageBounds.Right * anInch);
+			IntPtr res = IntPtr.Zero;
 
-            IntPtr hdc = e.Graphics.GetHdc();
+			IntPtr wparam = IntPtr.Zero;
+			wparam = new IntPtr(1);
 
-            FORMATRANGE fmtRange;
-            fmtRange.chrg.cpMax = charTo;				//Indicate character from to character to 
-            fmtRange.chrg.cpMin = charFrom;
-            fmtRange.hdc = hdc;                    //Use the same DC for measuring and rendering
-            fmtRange.hdcTarget = hdc;              //Point at printer hDC
-            fmtRange.rc = rectToPrint;             //Indicate the area on page to print
-            fmtRange.rcPage = rectPage;            //Indicate size of page
+			//Get the pointer to the FORMATRANGE structure in memory
+			IntPtr lparam = IntPtr.Zero;
+			lparam = Marshal.AllocCoTaskMem(Marshal.SizeOf(fmtRange));
+			Marshal.StructureToPtr(fmtRange, lparam, false);
 
-            IntPtr res = IntPtr.Zero;
+			//Send the rendered data for printing 
+			res = SendMessage(richTextBoxHandle, EM_FORMATRANGE, wparam, lparam);
 
-            IntPtr wparam = IntPtr.Zero;
-            wparam = new IntPtr(1);
+			//Free the block of memory allocated
+			Marshal.FreeCoTaskMem(lparam);
 
-            //Get the pointer to the FORMATRANGE structure in memory
-            IntPtr lparam = IntPtr.Zero;
-            lparam = Marshal.AllocCoTaskMem(Marshal.SizeOf(fmtRange));
-            Marshal.StructureToPtr(fmtRange, lparam, false);
+			//Release the device context handle obtained by a previous call
+			e.Graphics.ReleaseHdc(hdc);
 
-            //Send the rendered data for printing 
-            res = SendMessage(richTextBoxHandle, EM_FORMATRANGE, wparam, lparam);
+			// Release and cached info
+			SendMessage(richTextBoxHandle, EM_FORMATRANGE, (IntPtr)0, (IntPtr)0);
 
-            //Free the block of memory allocated
-            Marshal.FreeCoTaskMem(lparam);
+			//Return last + 1 character printer
+			return res.ToInt32();
+		}
 
-            //Release the device context handle obtained by a previous call
-            e.Graphics.ReleaseHdc(hdc);
+		public static Image Print(RichTextBox ctl, int width, int height)
+		{
+			Image img = new Bitmap(width, height);
+			float scale;
 
-            // Release and cached info
-            SendMessage(richTextBoxHandle, EM_FORMATRANGE, (IntPtr)0, (IntPtr)0);
+			using (Graphics g = Graphics.FromImage(img))
+			{
+				// --- Begin code addition D_Kondrad
 
-            //Return last + 1 character printer
-            return res.ToInt32();
-        }
+				// HorizontalResolution is measured in pix/inch         
+				scale = width * 100 / img.HorizontalResolution;
+				width = (int)scale;
 
-        public static Image Print(RichTextBox ctl, int width, int height)
-        {
-            Image img = new Bitmap(width, height);
-            float scale;
+				// VerticalResolution is measured in pix/inch
+				scale = height * 100 / img.VerticalResolution;
+				height = (int)scale;
 
-            using (Graphics g = Graphics.FromImage(img))
-            {
-                // --- Begin code addition D_Kondrad
+				// --- End code addition D_Kondrad
 
-                // HorizontalResolution is measured in pix/inch         
-                scale = (float)(width * 100) / img.HorizontalResolution;
-                width = (int)scale;
+				var marginBounds = new Rectangle(0, 0, width, height);
+				var pageBounds = new Rectangle(0, 0, width, height);
+				var args = new PrintPageEventArgs(g, marginBounds, pageBounds, null);
 
-                // VerticalResolution is measured in pix/inch
-                scale = (float)(height * 100) / img.VerticalResolution;
-                height = (int)scale;
+				Print(ctl.Handle, 0, ctl.Text.Length, args);
+			}
 
-                // --- End code addition D_Kondrad
+			return img;
+		}
 
-                Rectangle marginBounds = new Rectangle(0, 0, width, height);
-                Rectangle pageBounds = new Rectangle(0, 0, width, height);
-                PrintPageEventArgs args = new PrintPageEventArgs(g, marginBounds, pageBounds, null);
+		[StructLayout(LayoutKind.Sequential)]
+		private struct CHARRANGE
+		{
+			public int cpMin; //First character of range (0 for start of doc)
+			public int cpMax; //Last character of range (-1 for end of doc)
+		}
 
-                Print(ctl.Handle, 0, ctl.Text.Length, args);
-            }
+		[StructLayout(LayoutKind.Sequential)]
+		private struct FORMATRANGE
+		{
+			public IntPtr hdc; //Actual DC to draw on
+			public IntPtr hdcTarget; //Target DC for determining text formatting
+			public RECT rc; //Region of the DC to draw to (in twips)
+			public RECT rcPage; //Region of the whole DC (page size) (in twips)
+			public CHARRANGE chrg; //Range of text to draw (see earlier declaration)
+		}
 
-            return img;
-        }
-
-    }
+		[StructLayout(LayoutKind.Sequential)]
+		private struct RECT
+		{
+			public int Left;
+			public int Top;
+			public int Right;
+			public int Bottom;
+		}
+	}
 }

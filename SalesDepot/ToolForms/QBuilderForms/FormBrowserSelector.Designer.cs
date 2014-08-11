@@ -28,8 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-			this.components = new System.ComponentModel.Container();
-			this.toolTipController = new DevExpress.Utils.ToolTipController(this.components);
+			this.toolTipController = new DevExpress.Utils.ToolTipController();
 			this.buttonXClose = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXOpera = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXIE = new DevComponents.DotNetBar.ButtonX();
@@ -52,6 +51,7 @@
 			this.buttonXClose.Location = new System.Drawing.Point(20, 276);
 			this.buttonXClose.Name = "buttonXClose";
 			this.buttonXClose.Size = new System.Drawing.Size(290, 55);
+			this.buttonXClose.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXClose.TabIndex = 4;
 			this.buttonXClose.Text = "   Close this Window";
 			this.buttonXClose.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
@@ -69,6 +69,7 @@
 			this.buttonXOpera.Location = new System.Drawing.Point(20, 209);
 			this.buttonXOpera.Name = "buttonXOpera";
 			this.buttonXOpera.Size = new System.Drawing.Size(290, 55);
+			this.buttonXOpera.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXOpera.TabIndex = 3;
 			this.buttonXOpera.Text = "   Opera";
 			this.buttonXOpera.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
@@ -86,6 +87,7 @@
 			this.buttonXIE.Location = new System.Drawing.Point(20, 144);
 			this.buttonXIE.Name = "buttonXIE";
 			this.buttonXIE.Size = new System.Drawing.Size(290, 55);
+			this.buttonXIE.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXIE.TabIndex = 2;
 			this.buttonXIE.Text = "   Internet Explorer";
 			this.buttonXIE.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
@@ -103,6 +105,7 @@
 			this.buttonXFirefox.Location = new System.Drawing.Point(20, 79);
 			this.buttonXFirefox.Name = "buttonXFirefox";
 			this.buttonXFirefox.Size = new System.Drawing.Size(290, 55);
+			this.buttonXFirefox.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXFirefox.TabIndex = 1;
 			this.buttonXFirefox.Text = "   Firefox";
 			this.buttonXFirefox.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
@@ -120,6 +123,7 @@
 			this.buttonXChrome.Location = new System.Drawing.Point(20, 14);
 			this.buttonXChrome.Name = "buttonXChrome";
 			this.buttonXChrome.Size = new System.Drawing.Size(290, 55);
+			this.buttonXChrome.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXChrome.TabIndex = 0;
 			this.buttonXChrome.Text = "   Google Chrome";
 			this.buttonXChrome.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
@@ -131,13 +135,14 @@
 			// FormBrowserSelector
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
+			this.BackColor = System.Drawing.Color.White;
 			this.ClientSize = new System.Drawing.Size(331, 345);
 			this.Controls.Add(this.buttonXClose);
 			this.Controls.Add(this.buttonXOpera);
 			this.Controls.Add(this.buttonXIE);
 			this.Controls.Add(this.buttonXFirefox);
 			this.Controls.Add(this.buttonXChrome);
+			this.DoubleBuffered = true;
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;

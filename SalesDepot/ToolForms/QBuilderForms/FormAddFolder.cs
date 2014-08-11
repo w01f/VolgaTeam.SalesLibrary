@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Windows.Forms;
+using DevComponents.DotNetBar.Metro;
 using SalesDepot.CoreObjects.BusinessClasses;
 
 namespace SalesDepot.ToolForms.QBuilderForms
 {
-	public partial class FormAddFolder : Form
+	public partial class FormAddFolder : MetroForm
 	{
 		private LibraryFolder _sourceFolder;
-		private FormLogin _formLogin;
+		private readonly FormLogin _formLogin;
 
 		public FormAddFolder()
 		{

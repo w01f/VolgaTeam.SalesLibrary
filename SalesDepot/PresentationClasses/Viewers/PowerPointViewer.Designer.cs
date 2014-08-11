@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PowerPointViewer));
-			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
-			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
+			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
+			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
 			this.pnNavigationArea = new System.Windows.Forms.Panel();
-			this.comboBoxEditSlides = new DevExpress.XtraEditors.ComboBoxEdit();
-			this.pictureBoxPreview = new System.Windows.Forms.PictureBox();
 			this.laFileInfo = new System.Windows.Forms.Label();
 			this.laSlideNumber = new System.Windows.Forms.Label();
+			this.comboBoxEditSlides = new DevExpress.XtraEditors.ComboBoxEdit();
+			this.pictureBoxPreview = new System.Windows.Forms.PictureBox();
 			this.pnNavigationArea.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.comboBoxEditSlides.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreview)).BeginInit();
@@ -43,7 +43,7 @@
 			// 
 			// pnNavigationArea
 			// 
-			this.pnNavigationArea.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.pnNavigationArea.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.pnNavigationArea.Controls.Add(this.laFileInfo);
 			this.pnNavigationArea.Controls.Add(this.laSlideNumber);
 			this.pnNavigationArea.Controls.Add(this.comboBoxEditSlides);
@@ -52,6 +52,28 @@
 			this.pnNavigationArea.Name = "pnNavigationArea";
 			this.pnNavigationArea.Size = new System.Drawing.Size(705, 67);
 			this.pnNavigationArea.TabIndex = 1;
+			// 
+			// laFileInfo
+			// 
+			this.laFileInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.laFileInfo.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.laFileInfo.Location = new System.Drawing.Point(472, 41);
+			this.laFileInfo.Name = "laFileInfo";
+			this.laFileInfo.Size = new System.Drawing.Size(230, 20);
+			this.laFileInfo.TabIndex = 10;
+			this.laFileInfo.Text = " ";
+			this.laFileInfo.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			// 
+			// laSlideNumber
+			// 
+			this.laSlideNumber.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.laSlideNumber.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.laSlideNumber.Location = new System.Drawing.Point(468, 6);
+			this.laSlideNumber.Name = "laSlideNumber";
+			this.laSlideNumber.Size = new System.Drawing.Size(234, 35);
+			this.laSlideNumber.TabIndex = 9;
+			this.laSlideNumber.Text = " ";
+			this.laSlideNumber.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
 			// comboBoxEditSlides
 			// 
@@ -68,8 +90,8 @@
 			this.comboBoxEditSlides.Properties.AppearanceDropDown.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
 			this.comboBoxEditSlides.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo),
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("comboBoxEditSlides.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true),
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, true, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("comboBoxEditSlides.Properties.Buttons1"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("comboBoxEditSlides.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject3, "", null, null, true),
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, true, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("comboBoxEditSlides.Properties.Buttons1"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject4, "", null, null, true)});
 			this.comboBoxEditSlides.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
 			this.comboBoxEditSlides.Size = new System.Drawing.Size(184, 54);
 			this.comboBoxEditSlides.TabIndex = 5;
@@ -78,7 +100,7 @@
 			// 
 			// pictureBoxPreview
 			// 
-			this.pictureBoxPreview.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.pictureBoxPreview.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.pictureBoxPreview.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.pictureBoxPreview.Location = new System.Drawing.Point(0, 0);
 			this.pictureBoxPreview.Name = "pictureBoxPreview";
@@ -88,32 +110,10 @@
 			this.pictureBoxPreview.TabStop = false;
 			this.pictureBoxPreview.DoubleClick += new System.EventHandler(this.pictureBoxPreview_DoubleClick);
 			// 
-			// laFileInfo
-			// 
-			this.laFileInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.laFileInfo.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.laFileInfo.Location = new System.Drawing.Point(470, 39);
-			this.laFileInfo.Name = "laFileInfo";
-			this.laFileInfo.Size = new System.Drawing.Size(230, 20);
-			this.laFileInfo.TabIndex = 10;
-			this.laFileInfo.Text = " ";
-			this.laFileInfo.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-			// 
-			// laSlideNumber
-			// 
-			this.laSlideNumber.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.laSlideNumber.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.laSlideNumber.Location = new System.Drawing.Point(466, 4);
-			this.laSlideNumber.Name = "laSlideNumber";
-			this.laSlideNumber.Size = new System.Drawing.Size(234, 35);
-			this.laSlideNumber.TabIndex = 9;
-			this.laSlideNumber.Text = " ";
-			this.laSlideNumber.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-			// 
 			// PowerPointViewer
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
+			this.BackColor = System.Drawing.Color.White;
 			this.Controls.Add(this.pictureBoxPreview);
 			this.Controls.Add(this.pnNavigationArea);
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));

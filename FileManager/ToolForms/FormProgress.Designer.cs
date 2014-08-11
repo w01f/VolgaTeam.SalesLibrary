@@ -28,91 +28,93 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.laProgress = new System.Windows.Forms.Label();
-            this.circularProgress = new DevComponents.DotNetBar.Controls.CircularProgress();
-            this.panelEx = new DevComponents.DotNetBar.PanelEx();
-            this.panelEx.SuspendLayout();
-            this.SuspendLayout();
-            // 
-            // laProgress
-            // 
-            this.laProgress.BackColor = System.Drawing.Color.Transparent;
-            this.laProgress.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.laProgress.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.laProgress.ForeColor = System.Drawing.Color.Black;
-            this.laProgress.Location = new System.Drawing.Point(0, 0);
-            this.laProgress.Name = "laProgress";
-            this.laProgress.Size = new System.Drawing.Size(314, 49);
-            this.laProgress.TabIndex = 2;
-            this.laProgress.Text = "Loading data...";
-            this.laProgress.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.laProgress.UseMnemonic = false;
-            this.laProgress.UseWaitCursor = true;
-            // 
-            // circularProgress
-            // 
-            this.circularProgress.AnimationSpeed = 50;
-            this.circularProgress.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.circularProgress.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.circularProgress.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.circularProgress.Enabled = false;
-            this.circularProgress.Location = new System.Drawing.Point(0, 49);
-            this.circularProgress.Name = "circularProgress";
-            this.circularProgress.ProgressBarType = DevComponents.DotNetBar.eCircularProgressType.Dot;
-            this.circularProgress.ProgressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.circularProgress.ProgressTextFormat = "";
-            this.circularProgress.Size = new System.Drawing.Size(314, 39);
-            this.circularProgress.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP;
-            this.circularProgress.TabIndex = 3;
-            // 
-            // panelEx
-            // 
-            this.panelEx.CanvasColor = System.Drawing.SystemColors.Control;
-            this.panelEx.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.panelEx.Controls.Add(this.laProgress);
-            this.panelEx.Controls.Add(this.circularProgress);
-            this.panelEx.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelEx.Location = new System.Drawing.Point(2, 2);
-            this.panelEx.Name = "panelEx";
-            this.panelEx.Padding = new System.Windows.Forms.Padding(0, 0, 0, 10);
-            this.panelEx.Size = new System.Drawing.Size(314, 98);
-            this.panelEx.Style.Alignment = System.Drawing.StringAlignment.Center;
-            this.panelEx.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
-            this.panelEx.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
-            this.panelEx.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
-            this.panelEx.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
-            this.panelEx.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
-            this.panelEx.Style.GradientAngle = 90;
-            this.panelEx.TabIndex = 4;
-            // 
-            // FormProgress
-            // 
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
-            this.ClientSize = new System.Drawing.Size(318, 102);
-            this.ControlBox = false;
-            this.Controls.Add(this.panelEx);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "FormProgress";
-            this.Opacity = 0.85D;
-            this.Padding = new System.Windows.Forms.Padding(2);
-            this.ShowIcon = false;
-            this.ShowInTaskbar = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "ProgressForm";
-            this.Shown += new System.EventHandler(this.FormProgress_Shown);
-            this.panelEx.ResumeLayout(false);
-            this.ResumeLayout(false);
+			this.laProgress = new System.Windows.Forms.Label();
+			this.circularProgress = new DevComponents.DotNetBar.Controls.CircularProgress();
+			this.panelEx = new DevComponents.DotNetBar.PanelEx();
+			this.panelEx.SuspendLayout();
+			this.SuspendLayout();
+			// 
+			// laProgress
+			// 
+			this.laProgress.BackColor = System.Drawing.Color.Transparent;
+			this.laProgress.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.laProgress.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.laProgress.ForeColor = System.Drawing.Color.Black;
+			this.laProgress.Location = new System.Drawing.Point(0, 0);
+			this.laProgress.Name = "laProgress";
+			this.laProgress.Size = new System.Drawing.Size(314, 49);
+			this.laProgress.TabIndex = 2;
+			this.laProgress.Text = "Loading data...";
+			this.laProgress.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.laProgress.UseMnemonic = false;
+			this.laProgress.UseWaitCursor = true;
+			// 
+			// circularProgress
+			// 
+			this.circularProgress.AnimationSpeed = 50;
+			this.circularProgress.BackColor = System.Drawing.Color.Transparent;
+			// 
+			// 
+			// 
+			this.circularProgress.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			this.circularProgress.Dock = System.Windows.Forms.DockStyle.Bottom;
+			this.circularProgress.Enabled = false;
+			this.circularProgress.Location = new System.Drawing.Point(0, 49);
+			this.circularProgress.Name = "circularProgress";
+			this.circularProgress.ProgressBarType = DevComponents.DotNetBar.eCircularProgressType.Dot;
+			this.circularProgress.ProgressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+			this.circularProgress.ProgressTextFormat = "";
+			this.circularProgress.Size = new System.Drawing.Size(314, 39);
+			this.circularProgress.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP;
+			this.circularProgress.TabIndex = 3;
+			// 
+			// panelEx
+			// 
+			this.panelEx.CanvasColor = System.Drawing.Color.Empty;
+			this.panelEx.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.panelEx.Controls.Add(this.laProgress);
+			this.panelEx.Controls.Add(this.circularProgress);
+			this.panelEx.DisabledBackColor = System.Drawing.Color.Empty;
+			this.panelEx.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.panelEx.Location = new System.Drawing.Point(2, 2);
+			this.panelEx.Name = "panelEx";
+			this.panelEx.Padding = new System.Windows.Forms.Padding(0, 0, 0, 10);
+			this.panelEx.Size = new System.Drawing.Size(314, 98);
+			this.panelEx.Style.Alignment = System.Drawing.StringAlignment.Center;
+			this.panelEx.Style.BackColor1.Color = System.Drawing.Color.White;
+			this.panelEx.Style.BackColor2.Color = System.Drawing.Color.White;
+			this.panelEx.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+			this.panelEx.Style.BorderColor.Color = System.Drawing.Color.LightGray;
+			this.panelEx.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
+			this.panelEx.Style.GradientAngle = 90;
+			this.panelEx.TabIndex = 5;
+			// 
+			// FormProgress
+			// 
+			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+			this.BackColor = System.Drawing.Color.White;
+			this.ClientSize = new System.Drawing.Size(318, 102);
+			this.ControlBox = false;
+			this.Controls.Add(this.panelEx);
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+			this.Name = "FormProgress";
+			this.Opacity = 0.85D;
+			this.Padding = new System.Windows.Forms.Padding(2);
+			this.ShowIcon = false;
+			this.ShowInTaskbar = false;
+			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+			this.Text = "ProgressForm";
+			this.Shown += new System.EventHandler(this.FormProgress_Shown);
+			this.panelEx.ResumeLayout(false);
+			this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        public System.Windows.Forms.Label laProgress;
-        private DevComponents.DotNetBar.Controls.CircularProgress circularProgress;
-        private DevComponents.DotNetBar.PanelEx panelEx;
-    }
+		public System.Windows.Forms.Label laProgress;
+		private DevComponents.DotNetBar.Controls.CircularProgress circularProgress;
+		private DevComponents.DotNetBar.PanelEx panelEx;
+
+	}
 }

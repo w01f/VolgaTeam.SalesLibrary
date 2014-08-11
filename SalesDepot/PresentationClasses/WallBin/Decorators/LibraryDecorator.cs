@@ -159,7 +159,7 @@ namespace SalesDepot.PresentationClasses.WallBin.Decorators
 
 		public void UpdateView()
 		{
-			foreach (var page in Pages.Where(p=>p.ReadyToShow))
+			foreach (var page in Pages.Where(p => p.ReadyToShow))
 				page.UpdatePage();
 		}
 
@@ -206,72 +206,74 @@ namespace SalesDepot.PresentationClasses.WallBin.Decorators
 			Application.DoEvents();
 		}
 
-		private void ApplyProgramManager()
+		public void ApplyProgramManager()
 		{
-			if (Library.ProgramManager.Enabled)
+			if (Library.ProgramManager.HasStations)
 			{
-				FormMain.Instance.TabProgramSchedule.AllowToSave = false;
-				FormMain.Instance.TabProgramSearch.AllowToSave = false;
-
-				FormMain.Instance.comboBoxEditProgramScheduleStation.Properties.Items.Clear();
-				FormMain.Instance.comboBoxEditProgramSearchStation.Properties.Items.Clear();
-				FormMain.Instance.comboBoxEditProgramScheduleStation.Properties.Items.AddRange(Library.ProgramManager.GetStationList());
-				FormMain.Instance.comboBoxEditProgramSearchStation.Properties.Items.AddRange(Library.ProgramManager.GetStationList());
-				if (FormMain.Instance.comboBoxEditProgramScheduleStation.Properties.Items.Contains(SettingsManager.Instance.ProgramScheduleSelectedStation))
-				{
-					FormMain.Instance.comboBoxEditProgramScheduleStation.SelectedIndex = FormMain.Instance.comboBoxEditProgramScheduleStation.Properties.Items.IndexOf(SettingsManager.Instance.ProgramScheduleSelectedStation);
-					FormMain.Instance.comboBoxEditProgramSearchStation.SelectedIndex = FormMain.Instance.comboBoxEditProgramScheduleStation.SelectedIndex;
-				}
-				else if (FormMain.Instance.comboBoxEditProgramScheduleStation.Properties.Items.Count > 0)
-				{
-					FormMain.Instance.comboBoxEditProgramScheduleStation.SelectedIndex = 0;
-					FormMain.Instance.comboBoxEditProgramSearchStation.SelectedIndex = 0;
-				}
-
-				DateTime nowDate = DateTime.Now;
-				FormMain.Instance.dateEditProgramScheduleDay.DateTime = new DateTime(nowDate.Year, nowDate.Month, nowDate.Day);
-
-				FormMain.Instance.buttonItemProgramScheduleInfo.Checked = SettingsManager.Instance.ProgramScheduleShowInfo;
-
-				ProgramSchedule.gridViewPrograms.OptionsView.ShowPreview = SettingsManager.Instance.ProgramScheduleShowInfo;
-
-				switch (SettingsManager.Instance.ProgramScheduleBrowseType)
-				{
-					case BrowseType.Day:
-						FormMain.Instance.TabProgramSchedule.buttonItemScheduleBrowseType_Click(FormMain.Instance.buttonItemProgramScheduleBrowseDay, null);
-						break;
-					case BrowseType.Week:
-						FormMain.Instance.TabProgramSchedule.buttonItemScheduleBrowseType_Click(FormMain.Instance.buttonItemProgramScheduleBrowseWeek, null);
-						break;
-					case BrowseType.Month:
-						FormMain.Instance.TabProgramSchedule.buttonItemScheduleBrowseType_Click(FormMain.Instance.buttonItemProgramScheduleBrowseMonth, null);
-						break;
-				}
-
-				ProgramSchedule.LoadStation();
-				ProgramSchedule.LoadDay();
-
-				ProgramSearch.ClearSearchParameters();
-				ProgramSearch.LoadStation();
-				ProgramSearch.LoadProgramsList();
-
-				FormMain.Instance.TabProgramSchedule.AllowToSave = true;
-				FormMain.Instance.TabProgramSearch.AllowToSave = true;
-
-				if (!FormMain.Instance.TabProgramSchedule.Controls.Contains(ProgramSchedule))
-					FormMain.Instance.TabProgramSchedule.Controls.Add(ProgramSchedule);
-				ProgramSchedule.BringToFront();
-
-				if (!FormMain.Instance.TabProgramSearch.Controls.Contains(ProgramSearch))
-					FormMain.Instance.TabProgramSearch.Controls.Add(ProgramSearch);
-				ProgramSearch.BringToFront();
+				FormMain.Instance.ribbonTabItemProgramSchedule.Visible = true;
+				FormMain.Instance.ribbonTabItemProgramSearch.Visible = true;
 			}
 			else
 			{
 				FormMain.Instance.ribbonTabItemProgramSchedule.Visible = false;
 				FormMain.Instance.ribbonTabItemProgramSearch.Visible = false;
 			}
-			FormMain.Instance.ribbonControl.RecalcLayout();
+			if (!Library.ProgramManager.Enabled) return;
+			FormMain.Instance.TabProgramSchedule.AllowToSave = false;
+			FormMain.Instance.TabProgramSearch.AllowToSave = false;
+
+			FormMain.Instance.comboBoxEditProgramScheduleStation.Properties.Items.Clear();
+			FormMain.Instance.comboBoxEditProgramSearchStation.Properties.Items.Clear();
+			FormMain.Instance.comboBoxEditProgramScheduleStation.Properties.Items.AddRange(Library.ProgramManager.GetStationList());
+			FormMain.Instance.comboBoxEditProgramSearchStation.Properties.Items.AddRange(Library.ProgramManager.GetStationList());
+			if (FormMain.Instance.comboBoxEditProgramScheduleStation.Properties.Items.Contains(SettingsManager.Instance.ProgramScheduleSelectedStation))
+			{
+				FormMain.Instance.comboBoxEditProgramScheduleStation.SelectedIndex = FormMain.Instance.comboBoxEditProgramScheduleStation.Properties.Items.IndexOf(SettingsManager.Instance.ProgramScheduleSelectedStation);
+				FormMain.Instance.comboBoxEditProgramSearchStation.SelectedIndex = FormMain.Instance.comboBoxEditProgramScheduleStation.SelectedIndex;
+			}
+			else if (FormMain.Instance.comboBoxEditProgramScheduleStation.Properties.Items.Count > 0)
+			{
+				FormMain.Instance.comboBoxEditProgramScheduleStation.SelectedIndex = 0;
+				FormMain.Instance.comboBoxEditProgramSearchStation.SelectedIndex = 0;
+			}
+
+			DateTime nowDate = DateTime.Now;
+			FormMain.Instance.dateEditProgramScheduleDay.DateTime = new DateTime(nowDate.Year, nowDate.Month, nowDate.Day);
+
+			FormMain.Instance.buttonItemProgramScheduleInfo.Checked = SettingsManager.Instance.ProgramScheduleShowInfo;
+
+			ProgramSchedule.gridViewPrograms.OptionsView.ShowPreview = SettingsManager.Instance.ProgramScheduleShowInfo;
+
+			switch (SettingsManager.Instance.ProgramScheduleBrowseType)
+			{
+				case BrowseType.Day:
+					FormMain.Instance.TabProgramSchedule.buttonItemScheduleBrowseType_Click(FormMain.Instance.buttonItemProgramScheduleBrowseDay, null);
+					break;
+				case BrowseType.Week:
+					FormMain.Instance.TabProgramSchedule.buttonItemScheduleBrowseType_Click(FormMain.Instance.buttonItemProgramScheduleBrowseWeek, null);
+					break;
+				case BrowseType.Month:
+					FormMain.Instance.TabProgramSchedule.buttonItemScheduleBrowseType_Click(FormMain.Instance.buttonItemProgramScheduleBrowseMonth, null);
+					break;
+			}
+
+			ProgramSchedule.LoadStation();
+			ProgramSchedule.LoadDay();
+
+			ProgramSearch.ClearSearchParameters();
+			ProgramSearch.LoadStation();
+			ProgramSearch.LoadProgramsList();
+
+			FormMain.Instance.TabProgramSchedule.AllowToSave = true;
+			FormMain.Instance.TabProgramSearch.AllowToSave = true;
+
+			if (!FormMain.Instance.TabProgramSchedule.Controls.Contains(ProgramSchedule))
+				FormMain.Instance.TabProgramSchedule.Controls.Add(ProgramSchedule);
+			ProgramSchedule.BringToFront();
+
+			if (!FormMain.Instance.TabProgramSearch.Controls.Contains(ProgramSearch))
+				FormMain.Instance.TabProgramSearch.Controls.Add(ProgramSearch);
+			ProgramSearch.BringToFront();
 		}
 		#endregion
 	}

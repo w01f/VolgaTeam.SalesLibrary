@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using DevComponents.DotNetBar.Metro;
 using FileManager.Controllers;
 
 namespace FileManager.ToolForms.Settings
 {
-	public partial class FormCalendarSettings : Form
+	public partial class FormCalendarSettings : MetroForm
 	{
 		public FormCalendarSettings()
 		{

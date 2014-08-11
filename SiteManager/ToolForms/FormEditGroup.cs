@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Windows.Forms;
+using DevComponents.DotNetBar.Metro;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
 using SalesDepot.CoreObjects.InteropClasses;
@@ -11,7 +12,7 @@ using SalesDepot.Services.IPadAdminService;
 
 namespace SalesDepot.SiteManager.ToolForms
 {
-	public partial class FormEditGroup : Form
+	public partial class FormEditGroup : MetroForm
 	{
 		private readonly List<string> _existedGroups = new List<string>();
 

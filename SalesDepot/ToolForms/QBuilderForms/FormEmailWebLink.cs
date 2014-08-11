@@ -5,16 +5,17 @@ using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using DevComponents.DotNetBar;
+using DevComponents.DotNetBar.Metro;
 using DevExpress.XtraGrid.Views.Layout;
 using SalesDepot.BusinessClasses;
 using SalesDepot.CoreObjects.BusinessClasses;
 
 namespace SalesDepot.ToolForms.QBuilderForms
 {
-	public partial class FormEmailWebLink : Form
+	public partial class FormEmailWebLink : MetroForm
 	{
 		private LibraryLink _sourceLink;
-		private FormLogin _formLogin;
+		private readonly FormLogin _formLogin;
 
 		public FormEmailWebLink()
 		{
@@ -71,10 +72,7 @@ namespace SalesDepot.ToolForms.QBuilderForms
 				{
 					form.laProgress.Text = "Loading Page Logos...";
 					form.TopMost = true;
-					var thread = new Thread(delegate()
-					{
-						QBuilder.Instance.LoadLogos();
-					});
+					var thread = new Thread(() => QBuilder.Instance.LoadLogos());
 					form.Show();
 					Application.DoEvents();
 					thread.Start();

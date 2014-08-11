@@ -28,13 +28,11 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.components = new System.ComponentModel.Container();
 			this.buttonXCancel = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXEmail = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXResetToDefault = new DevComponents.DotNetBar.ButtonX();
 			this.labelControlFormTitle = new DevExpress.XtraEditors.LabelControl();
-			this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
-			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
+			this.styleController = new DevExpress.XtraEditors.StyleController();
 			this.labelControlOpenFileTitle = new DevExpress.XtraEditors.LabelControl();
 			this.buttonEditOpenFile = new DevExpress.XtraEditors.ButtonEdit();
 			this.buttonEditSaveFile = new DevExpress.XtraEditors.ButtonEdit();
@@ -57,6 +55,7 @@
 			this.buttonXCancel.Location = new System.Drawing.Point(322, 215);
 			this.buttonXCancel.Name = "buttonXCancel";
 			this.buttonXCancel.Size = new System.Drawing.Size(119, 37);
+			this.buttonXCancel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXCancel.TabIndex = 10;
 			this.buttonXCancel.Text = "Cancel";
 			this.buttonXCancel.TextColor = System.Drawing.Color.Black;
@@ -70,6 +69,7 @@
 			this.buttonXEmail.Location = new System.Drawing.Point(185, 215);
 			this.buttonXEmail.Name = "buttonXEmail";
 			this.buttonXEmail.Size = new System.Drawing.Size(119, 37);
+			this.buttonXEmail.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXEmail.TabIndex = 9;
 			this.buttonXEmail.Text = "OK";
 			this.buttonXEmail.TextColor = System.Drawing.Color.Black;
@@ -82,6 +82,7 @@
 			this.buttonXResetToDefault.Location = new System.Drawing.Point(12, 215);
 			this.buttonXResetToDefault.Name = "buttonXResetToDefault";
 			this.buttonXResetToDefault.Size = new System.Drawing.Size(119, 37);
+			this.buttonXResetToDefault.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXResetToDefault.TabIndex = 11;
 			this.buttonXResetToDefault.Text = "Reset to Default";
 			this.buttonXResetToDefault.TextColor = System.Drawing.Color.Black;
@@ -89,16 +90,14 @@
 			// 
 			// labelControlFormTitle
 			// 
+			this.labelControlFormTitle.Appearance.BackColor = System.Drawing.Color.White;
+			this.labelControlFormTitle.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.labelControlFormTitle.Location = new System.Drawing.Point(12, 12);
 			this.labelControlFormTitle.Name = "labelControlFormTitle";
 			this.labelControlFormTitle.Size = new System.Drawing.Size(198, 16);
 			this.labelControlFormTitle.StyleController = this.styleController;
 			this.labelControlFormTitle.TabIndex = 12;
 			this.labelControlFormTitle.Text = "File Save and File Open Locations";
-			// 
-			// defaultLookAndFeel
-			// 
-			this.defaultLookAndFeel.LookAndFeel.SkinName = "Money Twins";
 			// 
 			// styleController
 			// 
@@ -117,7 +116,9 @@
 			// 
 			// labelControlOpenFileTitle
 			// 
+			this.labelControlOpenFileTitle.Appearance.BackColor = System.Drawing.Color.White;
 			this.labelControlOpenFileTitle.Appearance.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelControlOpenFileTitle.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.labelControlOpenFileTitle.Location = new System.Drawing.Point(77, 47);
 			this.labelControlOpenFileTitle.Name = "labelControlOpenFileTitle";
 			this.labelControlOpenFileTitle.Size = new System.Drawing.Size(79, 18);
@@ -131,6 +132,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonEditOpenFile.Location = new System.Drawing.Point(77, 75);
 			this.buttonEditOpenFile.Name = "buttonEditOpenFile";
+			this.buttonEditOpenFile.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.buttonEditOpenFile.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.buttonEditOpenFile.Properties.Appearance.Options.UseBackColor = true;
+			this.buttonEditOpenFile.Properties.Appearance.Options.UseForeColor = true;
 			this.buttonEditOpenFile.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
 			this.buttonEditOpenFile.Size = new System.Drawing.Size(364, 22);
@@ -144,6 +149,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonEditSaveFile.Location = new System.Drawing.Point(77, 153);
 			this.buttonEditSaveFile.Name = "buttonEditSaveFile";
+			this.buttonEditSaveFile.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.buttonEditSaveFile.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.buttonEditSaveFile.Properties.Appearance.Options.UseBackColor = true;
+			this.buttonEditSaveFile.Properties.Appearance.Options.UseForeColor = true;
 			this.buttonEditSaveFile.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
 			this.buttonEditSaveFile.Size = new System.Drawing.Size(364, 22);
@@ -153,7 +162,9 @@
 			// 
 			// labelControlSaveFileTitle
 			// 
+			this.labelControlSaveFileTitle.Appearance.BackColor = System.Drawing.Color.White;
 			this.labelControlSaveFileTitle.Appearance.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelControlSaveFileTitle.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.labelControlSaveFileTitle.Location = new System.Drawing.Point(77, 125);
 			this.labelControlSaveFileTitle.Name = "labelControlSaveFileTitle";
 			this.labelControlSaveFileTitle.Size = new System.Drawing.Size(74, 18);
@@ -163,6 +174,8 @@
 			// 
 			// pbSaveFile
 			// 
+			this.pbSaveFile.BackColor = System.Drawing.Color.White;
+			this.pbSaveFile.ForeColor = System.Drawing.Color.Black;
 			this.pbSaveFile.Image = global::SalesDepot.Properties.Resources.SearchBarSave;
 			this.pbSaveFile.Location = new System.Drawing.Point(12, 125);
 			this.pbSaveFile.Name = "pbSaveFile";
@@ -172,6 +185,8 @@
 			// 
 			// pbOpenFile
 			// 
+			this.pbOpenFile.BackColor = System.Drawing.Color.White;
+			this.pbOpenFile.ForeColor = System.Drawing.Color.Black;
 			this.pbOpenFile.Image = global::SalesDepot.Properties.Resources.SearchBarOpen;
 			this.pbOpenFile.Location = new System.Drawing.Point(12, 47);
 			this.pbOpenFile.Name = "pbOpenFile";
@@ -182,7 +197,7 @@
 			// FormFileSettings
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
+			this.BackColor = System.Drawing.Color.White;
 			this.ClientSize = new System.Drawing.Size(453, 264);
 			this.Controls.Add(this.buttonEditSaveFile);
 			this.Controls.Add(this.labelControlSaveFileTitle);
@@ -194,6 +209,7 @@
 			this.Controls.Add(this.buttonXResetToDefault);
 			this.Controls.Add(this.buttonXCancel);
 			this.Controls.Add(this.buttonXEmail);
+			this.DoubleBuffered = true;
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.MaximizeBox = false;
@@ -221,7 +237,6 @@
 		private DevComponents.DotNetBar.ButtonX buttonXResetToDefault;
 		private DevExpress.XtraEditors.LabelControl labelControlFormTitle;
 		private DevExpress.XtraEditors.StyleController styleController;
-		private DevExpress.LookAndFeel.DefaultLookAndFeel defaultLookAndFeel;
 		private System.Windows.Forms.PictureBox pbOpenFile;
 		private DevExpress.XtraEditors.LabelControl labelControlOpenFileTitle;
 		private DevExpress.XtraEditors.ButtonEdit buttonEditOpenFile;
