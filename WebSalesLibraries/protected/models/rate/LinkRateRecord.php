@@ -140,7 +140,7 @@
 				case 5:
 					return "You gave this file 5 Stars. HOLY #$@%#^!  THIS ROCKS!";
 				default:
-					return "What do you THINK about this file?";
+					return "What do you THINK about this file or link?";
 			}
 		}
 	}

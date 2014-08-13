@@ -38,18 +38,24 @@
 		{
 			var content = $(dialogData.html);
 			var formatItems = content.find('.format-item');
-			var warning = content.find('.warning');
+			var alwaysShow = content.hasClass('always-show');
 			var fullScreenSelector = content.find('.use-fullscreen');
-			if (formatItems.length > 1 || warning.length)
+			if (alwaysShow)
 			{
 				var selectedLinkId = $(formatItems[0]).find('.service-data .link-id').html();
 				var selectedFileFormat = $(formatItems[0]).find('.service-data .file-type').html();
 				var tags = $(formatItems[0]).find('.service-data .tags').html();
 				formatItems.tooltip({animation: false, trigger: 'hover', delay: { show: 500, hide: 100 }});
-				formatItems.off('click').on('click', function ()
+				formatItems.off('click').on('click', function (e)
 				{
-					$(this).tooltip('hide');
-					that.viewSelectedFormat($(this), fullScreenSelector.is(':checked'), false);
+					if ($(this).attr('href') == '#')
+					{
+						e.preventDefault();
+						$(this).tooltip('hide');
+						that.viewSelectedFormat($(this), fullScreenSelector.is(':checked'), false);
+					}
+					else
+						$.fancybox.close();
 				});
 
 				var modalTitle = 'How Do you want to Open this File?';
@@ -73,7 +79,7 @@
 				});
 
 				content.find('.tooltip').remove();
-				$.SalesPortal.ViewDialogBar.backToConent = content;
+				$.SalesPortal.ViewDialogBar.backToConent = dialogData;
 
 			}
 			else

@@ -47,6 +47,7 @@
 		this.clear = function ()
 		{
 			$('#page-content').html('');
+			$('#page-preview-button').attr('href', '#');
 			destroyEditors();
 		};
 
@@ -189,11 +190,13 @@
 		};
 		var afterLoad = function ()
 		{
-			$('#page-content-url').off('click').on('click', function (even)
+			var pageUrl = $('#page-content-url');
+			$('#page-preview-button').attr('href', pageUrl.attr('href'));
+			pageUrl.off('click').on('click', function ()
 			{
-				even.stopPropagation();
-				even.preventDefault();
-				$.SalesPortal.QBuilder.PageList.savePage($.SalesPortal.QBuilder.PageList.previewPage);
+				$.SalesPortal.QBuilder.PageList.savePage(function ()
+				{
+				});
 			});
 			$("#page-content-tabs").tabs({
 				activate: that.updateContentSize

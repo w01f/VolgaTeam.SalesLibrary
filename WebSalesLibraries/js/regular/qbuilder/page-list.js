@@ -36,7 +36,9 @@
 			});
 			$('#page-preview-button').off('click').on('click', function ()
 			{
-				that.savePage(that.previewPage);
+				that.savePage(function ()
+				{
+				});
 			});
 			$('#page-email-outlook-button').off('click').on('click', function ()
 			{
@@ -45,6 +47,11 @@
 			var pageList = $('#page-list-container');
 			if (pageList.find('tr').length > 0)
 				openPage(pageList.find('tr.selected').find('.link-id-column').html());
+			else
+			{
+				$('#page-preview-button').attr('href', '#');
+				$('#page-content').html('');
+			}
 			pageList.find('tr').off('click').on('click', function (event)
 			{
 				if (!$(this).hasClass('selected'))
@@ -384,11 +391,6 @@
 				async: true,
 				dataType: 'html'
 			});
-		};
-
-		this.previewPage = function ()
-		{
-			window.open($('#page-content-url').html(), '_blank');
 		};
 
 		this.updateContentSize = function ()

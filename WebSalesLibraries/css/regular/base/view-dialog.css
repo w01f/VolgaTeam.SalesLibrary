@@ -78,8 +78,9 @@
 	width: auto;
 }
 
-.view-dialog-body div.format-list .format-item
+.view-dialog-body div.format-list a.format-item
 {
+	display: inline-block;
 	text-align: center;
 	margin-top: 5px;
 	margin-bottom: 5px;
@@ -91,7 +92,7 @@
 	cursor: pointer;
 }
 
-.view-dialog-body div.format-list .format-item img
+.view-dialog-body div.format-list a.format-item img
 {
 	height: 84px;
 }

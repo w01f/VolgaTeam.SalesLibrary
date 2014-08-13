@@ -529,10 +529,7 @@
 						break;
 					case 'url':
 						$this->availableFormats[] = 'url';
-						if (!$this->forcePreview)
-						{
-							$this->availableFormats[] = 'outlook';
-						}
+						$this->availableFormats[] = 'outlook';
 						break;
 					case 'key':
 						$this->availableFormats[] = 'key';

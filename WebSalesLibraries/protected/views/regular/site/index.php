@@ -110,28 +110,6 @@
 
 	$showPageList = isset(Yii::app()->request->cookies['showQPageList']->value) ? Yii::app()->request->cookies['showQPageList']->value == "true" : true;
 	$showLinlCart = isset(Yii::app()->request->cookies['showLinkCart']->value) ? Yii::app()->request->cookies['showLinkCart']->value == "true" : true;
-	$popupLink = '';
-	if ($isMobile)
-		$popupLink = 'ipad_popups.pdf';
-	else
-	{
-		$browser = Yii::app()->browser->getBrowser();
-		switch ($browser)
-		{
-			case 'Internet Explorer':
-				$popupLink = 'ie_popups.pdf';
-				break;
-			case 'Chrome':
-				$popupLink = 'chrome_popups.pdf';
-				break;
-			case 'Safari':
-				$popupLink = 'ipad_popups.pdf';
-				break;
-			case 'Firefox':
-				$popupLink = 'firefox_popups.pdf';
-				break;
-		}
-	}
 ?>
 <div id="ribbon">
 <div class="ribbon-window-title"></div>
@@ -335,26 +313,18 @@
 						<img class="ribbon-icon ribbon-disabled" src="<?php echo Yii::app()->getBaseUrl(true) . '/images/qpages/ribbon/page-save.png' ?>"/>
 						<span>Save</span>
 					</div>
-					<div class="ribbon-button ribbon-button-large" id="page-preview-button" rel="tooltip" title="PREVIEW this quickSITE">
+					<a class="ribbon-button ribbon-button-large" id="page-preview-button" rel="tooltip" title="PREVIEW this quickSITE" href="#" target="_blank">
 						<img class="ribbon-icon ribbon-normal" src="<?php echo Yii::app()->getBaseUrl(true) . '/images/qpages/ribbon/page-preview.png' ?>"/>
 						<img class="ribbon-icon ribbon-hot" src="<?php echo Yii::app()->getBaseUrl(true) . '/images/qpages/ribbon/page-preview.png' ?>"/>
 						<img class="ribbon-icon ribbon-disabled" src="<?php echo Yii::app()->getBaseUrl(true) . '/images/qpages/ribbon/page-preview.png' ?>"/>
 						<span>Preview</span>
-					</div>
+					</a>
 					<div class="ribbon-button ribbon-button-large" id="page-email-outlook-button" rel="tooltip" title="Send URL with Outlook">
 						<img class="ribbon-icon ribbon-normal" src="<?php echo Yii::app()->getBaseUrl(true) . '/images/qpages/ribbon/page-email.png' ?>"/>
 						<img class="ribbon-icon ribbon-hot" src="<?php echo Yii::app()->getBaseUrl(true) . '/images/qpages/ribbon/page-email.png' ?>"/>
 						<img class="ribbon-icon ribbon-disabled" src="<?php echo Yii::app()->getBaseUrl(true) . '/images/qpages/ribbon/page-email.png' ?>"/>
 						<span>Email</span>
 					</div>
-				</div>
-				<div class="ribbon-section">
-					<span class="section-title">Enable Popups</span>
-					<a class="ribbon-button ribbon-button-large" href="<?php echo Yii::app()->getBaseUrl(true) . '/sd_cache/popups/' . $popupLink; ?>" target="_blanck" rel="tooltip" title="Popups MUST be Enabled for this site">
-						<img class="ribbon-icon ribbon-normal" src="<?php echo Yii::app()->getBaseUrl(true) . '/images/qpages/ribbon/popup-help.png' ?>"/>
-						<img class="ribbon-icon ribbon-hot" src="<?php echo Yii::app()->getBaseUrl(true) . '/images/qpages/ribbon/popup-help.png' ?>"/>
-						<img class="ribbon-icon ribbon-disabled" src="<?php echo Yii::app()->getBaseUrl(true) . '/images/qpages/ribbon/popup-help.png' ?>"/>
-					</a>
 				</div>
 				<? if (isset(Yii::app()->user->firstName) && isset(Yii::app()->user->lastName)): ?>
 					<div class="ribbon-section">

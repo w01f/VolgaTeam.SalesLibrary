@@ -2,7 +2,7 @@
 {
 }
 
-#page-content>div
+#page-content > div
 {
 	overflow-x: hidden;
 	overflow-y: auto;
@@ -108,8 +108,15 @@ input[readonly]
 	border: 0;
 }
 
-#page-content-tab-security .form-horizontal>div
+#page-content-tab-security .form-horizontal > div
 {
 	margin-bottom: 5px;
 	min-height: 30px;
+}
+
+#page-preview-button:link, #page-preview-button:visited, #page-preview-button:hover, #page-preview-button:active
+{
+	text-decoration: none;
+	color: #000000;
+	outline: none;
 }
