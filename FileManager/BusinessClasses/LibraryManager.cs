@@ -37,7 +37,7 @@ namespace FileManager.BusinessClasses
 				else
 				{
 					foreach (DirectoryInfo subFolder in rootFolder.GetDirectories())
-						LibraryCollection.Add(new Library(subFolder.Name, subFolder, SettingsManager.Instance.UseDirectAccessToFiles, SettingsManager.Instance.DirectAccessFileAgeLimit));
+						LibraryCollection.Add(new Library(subFolder.Name, subFolder, false, SettingsManager.Instance.DirectAccessFileAgeLimit));
 				}
 			}
 		}
@@ -93,230 +93,228 @@ namespace FileManager.BusinessClasses
 
 				syncLog.AppendLine(string.Format("Sync started: {0}", new[] { DateTime.Now.ToString("MM/dd/yy h:mm tt") }));
 
-				foreach (Library salesDepot in LibraryCollection)
+				foreach (var salesDepot in LibraryCollection)
 				{
-					if (salesDepot.IsConfigured)
+					if (!salesDepot.IsConfigured) continue;
+					if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
+						salesDepot.PrepareForRegularSynchronize();
+
+					if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
 					{
-						if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
-							salesDepot.PrepareForRegularSynchronize();
+						syncLog.AppendLine(string.Format("Sync {0}", new[] { salesDepot.Name }));
+
+						string salesDepotFolderName = salesDepot.Folder.FullName.Equals(salesDepot.Folder.Root.FullName) ? Constants.WholeDriveFilesStorage : salesDepot.Folder.Name;
+						existedLibraryFolderNames.Add(salesDepotFolderName);
+
+						var destinationFolder = new DirectoryInfo(Path.Combine(folderb, salesDepotFolderName));
+						if (!destinationFolder.Exists)
+						{
+							destinationFolder.Create();
+							syncLog.AppendLine(string.Format("Folder created: {0}", new[] { destinationFolder.FullName }));
+							foldersCreated++;
+						}
+						filesWhiteList.Clear();
+
+						AddFolderForSync(new DirectoryInfo(Path.Combine(salesDepot.Folder.FullName, Constants.LibraryLogoFolder)), filesWhiteList);
+						filesWhiteList.Add(new FileInfo(Path.Combine(salesDepot.Folder.FullName, Constants.StorageFileName)).FullName);
+
+						var sourceSubFolders = new List<DirectoryInfo>();
+						var destinationSubFolders = new List<DirectoryInfo>();
 
 						if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
 						{
-							syncLog.AppendLine(string.Format("Sync {0}", new[] { salesDepot.Name }));
-
-							string salesDepotFolderName = salesDepot.Folder.FullName.Equals(salesDepot.Folder.Root.FullName) ? Constants.WholeDriveFilesStorage : salesDepot.Folder.Name;
-							existedLibraryFolderNames.Add(salesDepotFolderName);
-
-							var destinationFolder = new DirectoryInfo(Path.Combine(folderb, salesDepotFolderName));
-							if (!destinationFolder.Exists)
+							if (!salesDepot.UseDirectAccess)
 							{
-								destinationFolder.Create();
-								syncLog.AppendLine(string.Format("Folder created: {0}", new[] { destinationFolder.FullName }));
-								foldersCreated++;
-							}
-							filesWhiteList.Clear();
-
-							AddFolderForSync(new DirectoryInfo(Path.Combine(salesDepot.Folder.FullName, Constants.LibraryLogoFolder)), filesWhiteList);
-							filesWhiteList.Add(new FileInfo(Path.Combine(salesDepot.Folder.FullName, Constants.StorageFileName)).FullName);
-
-							var sourceSubFolders = new List<DirectoryInfo>();
-							var destinationSubFolders = new List<DirectoryInfo>();
-
-							if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
-							{
-								if (!salesDepot.UseDirectAccess)
+								foreach (LibraryPage page in salesDepot.Pages)
 								{
-									foreach (LibraryPage page in salesDepot.Pages)
+									foreach (LibraryFolder folder in page.Folders)
 									{
-										foreach (LibraryFolder folder in page.Folders)
+										foreach (LibraryLink file in folder.Files)
 										{
-											foreach (LibraryLink file in folder.Files)
+											if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
 											{
-												if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
+												switch (file.Type)
 												{
-													switch (file.Type)
-													{
-														case FileTypes.Folder:
-															AddFolderForSync(new DirectoryInfo(file.OriginalPath), filesWhiteList);
-															(file as LibraryFolderLink).GetWholeContent().Where(x => (x.Type == FileTypes.FriendlyPresentation || x.Type == FileTypes.BuggyPresentation || x.Type == FileTypes.Presentation) && x.PreviewContainer != null).ToList().ForEach(x => AddFolderForSync(new DirectoryInfo(x.PreviewContainer.ContainerPath), filesWhiteList));
-															break;
-														case FileTypes.BuggyPresentation:
-														case FileTypes.FriendlyPresentation:
-														case FileTypes.Presentation:
-															if (File.Exists(file.OriginalPath))
-															{
-																if (!filesWhiteList.Contains(file.OriginalPath))
-																	filesWhiteList.Add(file.OriginalPath);
-																if (file.PreviewContainer != null)
-																	AddFolderForSync(new DirectoryInfo(file.PreviewContainer.ContainerPath), filesWhiteList);
-															}
-															break;
-														case FileTypes.MediaPlayerVideo:
-														case FileTypes.QuickTimeVideo:
-														case FileTypes.Other:
-															if (File.Exists(file.OriginalPath))
-															{
-																if (!filesWhiteList.Contains(file.OriginalPath))
-																	filesWhiteList.Add(file.OriginalPath);
-															}
-															break;
-														case FileTypes.LineBreak:
-															break;
-													}
-													if (file.AttachmentProperties.Enable)
-													{
-														foreach (LinkAttachment attachment in file.AttachmentProperties.FilesAttachments)
+													case FileTypes.Folder:
+														AddFolderForSync(new DirectoryInfo(file.OriginalPath), filesWhiteList);
+														(file as LibraryFolderLink).GetWholeContent().Where(x => (x.Type == FileTypes.FriendlyPresentation || x.Type == FileTypes.BuggyPresentation || x.Type == FileTypes.Presentation) && x.PreviewContainer != null).ToList().ForEach(x => AddFolderForSync(new DirectoryInfo(x.PreviewContainer.ContainerPath), filesWhiteList));
+														break;
+													case FileTypes.BuggyPresentation:
+													case FileTypes.FriendlyPresentation:
+													case FileTypes.Presentation:
+														if (File.Exists(file.OriginalPath))
 														{
-															if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
-															{
-																if (attachment.IsSourceAvailable)
-																	filesWhiteList.Add(attachment.DestinationPath);
-															}
-															else
-																break;
+															if (!filesWhiteList.Contains(file.OriginalPath))
+																filesWhiteList.Add(file.OriginalPath);
+															if (file.PreviewContainer != null)
+																AddFolderForSync(new DirectoryInfo(file.PreviewContainer.ContainerPath), filesWhiteList);
 														}
+														break;
+													case FileTypes.MediaPlayerVideo:
+													case FileTypes.QuickTimeVideo:
+													case FileTypes.Other:
+														if (File.Exists(file.OriginalPath))
+														{
+															if (!filesWhiteList.Contains(file.OriginalPath))
+																filesWhiteList.Add(file.OriginalPath);
+														}
+														break;
+													case FileTypes.LineBreak:
+														break;
+												}
+												if (file.AttachmentProperties.Enable)
+												{
+													foreach (LinkAttachment attachment in file.AttachmentProperties.FilesAttachments)
+													{
+														if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
+														{
+															if (attachment.IsSourceAvailable)
+																filesWhiteList.Add(attachment.DestinationPath);
+														}
+														else
+															break;
 													}
 												}
-												else
-													break;
 											}
-											if (!((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive))
+											else
 												break;
 										}
 										if (!((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive))
 											break;
 									}
+									if (!((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive))
+										break;
+								}
 
-									#region Sync Primary Root
-									if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
-										syncManager.SynchronizeFolders(salesDepot.Folder, destinationFolder, filesWhiteList, false);
-									if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
+								#region Sync Primary Root
+								if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
+									syncManager.SynchronizeFolders(salesDepot.Folder, destinationFolder, filesWhiteList, false);
+								if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
+								{
+									sourceSubFolders.Clear();
+									sourceSubFolders.AddRange(salesDepot.Folder.GetDirectories().Where(x => filesWhiteList.Where(y => Path.GetDirectoryName(y).Contains(x.FullName)).Count() > 0));
+									foreach (DirectoryInfo subFolder in sourceSubFolders)
 									{
-										sourceSubFolders.Clear();
-										sourceSubFolders.AddRange(salesDepot.Folder.GetDirectories().Where(x => filesWhiteList.Where(y => Path.GetDirectoryName(y).Contains(x.FullName)).Count() > 0));
-										foreach (DirectoryInfo subFolder in sourceSubFolders)
+										if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
 										{
-											if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
+											string destinationSubFolderPath = Path.Combine(destinationFolder.FullName, subFolder.Name);
+											if (!Directory.Exists(destinationSubFolderPath))
 											{
-												string destinationSubFolderPath = Path.Combine(destinationFolder.FullName, subFolder.Name);
-												if (!Directory.Exists(destinationSubFolderPath))
-												{
-													Directory.CreateDirectory(destinationSubFolderPath);
-													syncLog.AppendLine(string.Format("Folder created: {0}", new[] { destinationSubFolderPath }));
-													foldersCreated++;
-												}
-												var destinationSubFolder = new DirectoryInfo(destinationSubFolderPath);
-												destinationSubFolders.Add(destinationSubFolder);
-												syncManager.SynchronizeFolders(subFolder, destinationSubFolder, filesWhiteList);
-											}
-											else
-												break;
-										}
-									}
-									#endregion
-
-									#region Sync Extra Roots
-									if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
-									{
-										if (salesDepot.ExtraFolders.Count > 0)
-										{
-											string extraFoldersDestinationRootPath = Path.Combine(destinationFolder.FullName, Constants.ExtraFoldersRootFolderName);
-											if (!Directory.Exists(extraFoldersDestinationRootPath))
-											{
-												Directory.CreateDirectory(extraFoldersDestinationRootPath);
-												syncLog.AppendLine(string.Format("Folder created: {0}", new[] { extraFoldersDestinationRootPath }));
+												Directory.CreateDirectory(destinationSubFolderPath);
+												syncLog.AppendLine(string.Format("Folder created: {0}", new[] { destinationSubFolderPath }));
 												foldersCreated++;
 											}
-											var extraFoldersDestinationRoot = new DirectoryInfo(extraFoldersDestinationRootPath);
-											destinationSubFolders.Add(extraFoldersDestinationRoot);
-											var extraFolderDestinations = new List<DirectoryInfo>();
-											foreach (var extraRootFolder in salesDepot.ExtraFolders)
-											{
-												if ((!Globals.ThreadActive || Globals.ThreadAborted) && Globals.ThreadActive) break;
-												sourceSubFolders.Clear();
-												sourceSubFolders.AddRange(extraRootFolder.Folder.GetDirectories().Where(x => filesWhiteList.Where(y => Path.GetDirectoryName(y).Contains(x.FullName)).Count() > 0));
-												var extraFolderDestinationPath = Path.Combine(extraFoldersDestinationRoot.FullName, extraRootFolder.RootId.ToString());
-												if (!Directory.Exists(extraFolderDestinationPath))
-												{
-													Directory.CreateDirectory(extraFolderDestinationPath);
-													syncLog.AppendLine(string.Format("Folder created: {0}", new[] { extraFolderDestinationPath }));
-													foldersCreated++;
-												}
-												var extraFolderDestination = new DirectoryInfo(extraFolderDestinationPath);
-												syncManager.SynchronizeFolders(extraRootFolder.Folder, extraFolderDestination, filesWhiteList);
-												if (extraFolderDestination.GetFiles().Length > 0 || extraFolderDestination.GetDirectories().Length > 0)
-													extraFolderDestinations.Add(extraFolderDestination);
-											}
-											if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
-											{
-												foreach (DirectoryInfo subFolder in extraFoldersDestinationRoot.GetDirectories().Where(x => !extraFolderDestinations.Select(y => y.FullName).Contains(x.FullName)))
-												{
-													if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
-													{
-														SyncManager.DeleteFolder(subFolder);
-														syncLog.AppendLine(string.Format("Folder deleted: {0}", new[] { subFolder.FullName }));
-														foldersDeleted++;
-													}
-													else
-														break;
-												}
-											}
+											var destinationSubFolder = new DirectoryInfo(destinationSubFolderPath);
+											destinationSubFolders.Add(destinationSubFolder);
+											syncManager.SynchronizeFolders(subFolder, destinationSubFolder, filesWhiteList);
 										}
-									}
-									#endregion
-								}
-								else
-								{
-									syncManager.SynchronizeFolders(salesDepot.Folder, destinationFolder, filesWhiteList, false);
-								}
-
-								#region Sync Overnights Calendar
-								if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
-								{
-									if (salesDepot.OvernightsCalendar.Enabled && SettingsManager.Instance.EnableOvernightsCalendarTab)
-									{
-										string overnightsCalendarDestinationFolderPath = Path.Combine(destinationFolder.FullName, Constants.OvernightsCalendarRootFolderName);
-										if (!Directory.Exists(overnightsCalendarDestinationFolderPath))
-										{
-											Directory.CreateDirectory(overnightsCalendarDestinationFolderPath);
-											syncLog.AppendLine(string.Format("Folder created: {0}", new[] { overnightsCalendarDestinationFolderPath }));
-											foldersCreated++;
-										}
-										var overnightsCalendarDestinationFolder = new DirectoryInfo(overnightsCalendarDestinationFolderPath);
-										destinationSubFolders.Add(overnightsCalendarDestinationFolder);
-										syncManager.SynchronizeFolders(salesDepot.OvernightsCalendar.RootFolder, overnightsCalendarDestinationFolder, new HashSet<string>());
+										else
+											break;
 									}
 								}
 								#endregion
 
-								#region Sync Program Manager
+								#region Sync Extra Roots
 								if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
 								{
-									if (salesDepot.EnableProgramManagerSync && !string.IsNullOrEmpty(salesDepot.ProgramManagerLocation) && Directory.Exists(salesDepot.ProgramManagerLocation))
+									if (salesDepot.ExtraFolders.Count > 0)
 									{
-										string programManagerDestinationFolderPath = Path.Combine(destinationFolder.FullName, Constants.ProgramManagerRootFolderName);
-										if (!Directory.Exists(programManagerDestinationFolderPath))
+										string extraFoldersDestinationRootPath = Path.Combine(destinationFolder.FullName, Constants.ExtraFoldersRootFolderName);
+										if (!Directory.Exists(extraFoldersDestinationRootPath))
 										{
-											Directory.CreateDirectory(programManagerDestinationFolderPath);
-											syncLog.AppendLine(string.Format("Folder created: {0}", new[] { programManagerDestinationFolderPath }));
+											Directory.CreateDirectory(extraFoldersDestinationRootPath);
+											syncLog.AppendLine(string.Format("Folder created: {0}", new[] { extraFoldersDestinationRootPath }));
 											foldersCreated++;
 										}
-										var programManagerSourceFolder = new DirectoryInfo(salesDepot.ProgramManagerLocation);
-										var programManagerDestinationFolder = new DirectoryInfo(programManagerDestinationFolderPath);
-										destinationSubFolders.Add(programManagerDestinationFolder);
-										syncManager.SynchronizeFolders(programManagerSourceFolder, programManagerDestinationFolder, new HashSet<string>());
+										var extraFoldersDestinationRoot = new DirectoryInfo(extraFoldersDestinationRootPath);
+										destinationSubFolders.Add(extraFoldersDestinationRoot);
+										var extraFolderDestinations = new List<DirectoryInfo>();
+										foreach (var extraRootFolder in salesDepot.ExtraFolders)
+										{
+											if ((!Globals.ThreadActive || Globals.ThreadAborted) && Globals.ThreadActive) break;
+											sourceSubFolders.Clear();
+											sourceSubFolders.AddRange(extraRootFolder.Folder.GetDirectories().Where(x => filesWhiteList.Where(y => Path.GetDirectoryName(y).Contains(x.FullName)).Count() > 0));
+											var extraFolderDestinationPath = Path.Combine(extraFoldersDestinationRoot.FullName, extraRootFolder.RootId.ToString());
+											if (!Directory.Exists(extraFolderDestinationPath))
+											{
+												Directory.CreateDirectory(extraFolderDestinationPath);
+												syncLog.AppendLine(string.Format("Folder created: {0}", new[] { extraFolderDestinationPath }));
+												foldersCreated++;
+											}
+											var extraFolderDestination = new DirectoryInfo(extraFolderDestinationPath);
+											syncManager.SynchronizeFolders(extraRootFolder.Folder, extraFolderDestination, filesWhiteList);
+											if (extraFolderDestination.GetFiles().Length > 0 || extraFolderDestination.GetDirectories().Length > 0)
+												extraFolderDestinations.Add(extraFolderDestination);
+										}
+										if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
+										{
+											foreach (DirectoryInfo subFolder in extraFoldersDestinationRoot.GetDirectories().Where(x => !extraFolderDestinations.Select(y => y.FullName).Contains(x.FullName)))
+											{
+												if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
+												{
+													SyncManager.DeleteFolder(subFolder);
+													syncLog.AppendLine(string.Format("Folder deleted: {0}", new[] { subFolder.FullName }));
+													foldersDeleted++;
+												}
+												else
+													break;
+											}
+										}
 									}
 								}
 								#endregion
+							}
+							else
+							{
+								syncManager.SynchronizeFolders(salesDepot.Folder, destinationFolder, filesWhiteList, false);
+							}
 
-								if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
+							#region Sync Overnights Calendar
+							if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
+							{
+								if (salesDepot.OvernightsCalendar.Enabled && SettingsManager.Instance.EnableOvernightsCalendarTab)
 								{
-									foreach (DirectoryInfo subFolder in destinationFolder.GetDirectories().Where(x => !destinationSubFolders.Select(y => y.FullName).Contains(x.FullName)))
+									string overnightsCalendarDestinationFolderPath = Path.Combine(destinationFolder.FullName, Constants.OvernightsCalendarRootFolderName);
+									if (!Directory.Exists(overnightsCalendarDestinationFolderPath))
 									{
-										SyncManager.DeleteFolder(subFolder);
-										syncLog.AppendLine(string.Format("Folder deleted: {0}", new[] { subFolder.FullName }));
-										foldersDeleted++;
+										Directory.CreateDirectory(overnightsCalendarDestinationFolderPath);
+										syncLog.AppendLine(string.Format("Folder created: {0}", new[] { overnightsCalendarDestinationFolderPath }));
+										foldersCreated++;
 									}
+									var overnightsCalendarDestinationFolder = new DirectoryInfo(overnightsCalendarDestinationFolderPath);
+									destinationSubFolders.Add(overnightsCalendarDestinationFolder);
+									syncManager.SynchronizeFolders(salesDepot.OvernightsCalendar.RootFolder, overnightsCalendarDestinationFolder, new HashSet<string>());
+								}
+							}
+							#endregion
+
+							#region Sync Program Manager
+							if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
+							{
+								if (salesDepot.EnableProgramManagerSync && !string.IsNullOrEmpty(salesDepot.ProgramManagerLocation) && Directory.Exists(salesDepot.ProgramManagerLocation))
+								{
+									string programManagerDestinationFolderPath = Path.Combine(destinationFolder.FullName, Constants.ProgramManagerRootFolderName);
+									if (!Directory.Exists(programManagerDestinationFolderPath))
+									{
+										Directory.CreateDirectory(programManagerDestinationFolderPath);
+										syncLog.AppendLine(string.Format("Folder created: {0}", new[] { programManagerDestinationFolderPath }));
+										foldersCreated++;
+									}
+									var programManagerSourceFolder = new DirectoryInfo(salesDepot.ProgramManagerLocation);
+									var programManagerDestinationFolder = new DirectoryInfo(programManagerDestinationFolderPath);
+									destinationSubFolders.Add(programManagerDestinationFolder);
+									syncManager.SynchronizeFolders(programManagerSourceFolder, programManagerDestinationFolder, new HashSet<string>());
+								}
+							}
+							#endregion
+
+							if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
+							{
+								foreach (DirectoryInfo subFolder in destinationFolder.GetDirectories().Where(x => !destinationSubFolders.Select(y => y.FullName).Contains(x.FullName)))
+								{
+									SyncManager.DeleteFolder(subFolder);
+									syncLog.AppendLine(string.Format("Folder deleted: {0}", new[] { subFolder.FullName }));
+									foldersDeleted++;
 								}
 							}
 						}

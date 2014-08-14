@@ -8,6 +8,7 @@ using DevExpress.XtraEditors.Controls;
 using FileManager.BusinessClasses;
 using FileManager.PresentationClasses.TabPages;
 using FileManager.PresentationClasses.WallBin.Decorators;
+using FileManager.ToolClasses;
 using FileManager.ToolForms;
 using FileManager.ToolForms.IPad;
 using SalesDepot.CoreObjects.ToolClasses;
@@ -100,12 +101,9 @@ namespace FileManager.Controllers
 
 		private void ShowVideoWarning()
 		{
-			if (MainController.Instance.ActiveDecorator.Library.VideoConversionWarning
-				&& MainController.Instance.ActiveDecorator.Library.PreviewContainers.Any(x => !x.Ready))
-			{
-				var form = new FormVideoWarning();
-				form.Show();
-			}
+			if (!MainController.Instance.ActiveDecorator.Library.VideoConversionWarning || MainController.Instance.ActiveDecorator.Library.PreviewContainers.All(x => x.Ready)) return;
+			var form = new FormVideoWarning();
+			form.Show();
 		}
 
 		private void buttonItemIPadSyncStatus_Click(object sender, EventArgs e)
@@ -170,9 +168,7 @@ namespace FileManager.Controllers
 		private void buttonItemIPadSyncFiles_Click(object sender, EventArgs e)
 		{
 			if (MainController.Instance.ActiveDecorator == null) return;
-			if (MainController.Instance.ActiveDecorator.Library.VideoConversionWarning
-				&& MainController.Instance.ActiveDecorator.Library.PreviewContainers.Any(x => !x.Ready))
-				AppManager.Instance.ShowWarning("You still have Videos that are not converted");
+			if (MainController.Instance.ActiveDecorator.Library.IsSyncLocked()) return;
 			using (var form = new FormProgressSyncFilesIPad())
 			{
 				form.CloseAfterSync = MainController.Instance.ActiveDecorator.Library.CloseAfterSync;

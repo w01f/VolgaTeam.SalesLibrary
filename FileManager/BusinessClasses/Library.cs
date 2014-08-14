@@ -645,7 +645,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			}
 		}
 
-		private void ProcessDeadLinks()
+		public void ProcessDeadLinks()
 		{
 			DeadLinks.Clear();
 			foreach (var folder in Pages.SelectMany(page => page.Folders))

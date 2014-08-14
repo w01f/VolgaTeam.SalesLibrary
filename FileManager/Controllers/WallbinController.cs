@@ -12,6 +12,7 @@ using FileManager.ConfigurationClasses;
 using FileManager.PresentationClasses.TabPages;
 using FileManager.PresentationClasses.WallBin.Decorators;
 using FileManager.Properties;
+using FileManager.ToolClasses;
 using FileManager.ToolForms;
 using FileManager.ToolForms.Settings;
 using FileManager.ToolForms.WallBin;
@@ -468,16 +469,11 @@ namespace FileManager.Controllers
 		{
 			if (MainController.Instance.ActiveDecorator == null) return;
 			MainController.Instance.ActiveDecorator.Save();
-
-			if (MainController.Instance.ActiveDecorator.Library.VideoConversionWarning
-				&& MainController.Instance.ActiveDecorator.Library.PreviewContainers.Any(x => !x.Ready))
-				AppManager.Instance.ShowWarning("You still have Videos that are not converted");
-
+			if (MainController.Instance.ActiveDecorator.Library.IsSyncLocked()) return;
 			FormMain.Instance.ribbonControl.Enabled = false;
 			_tabPage.Enabled = false;
 			Application.DoEvents();
 
-			var savedState = FormMain.Instance.WindowState;
 			if (MainController.Instance.ActiveDecorator.Library.MinimizeOnSync)
 				FormMain.Instance.WindowState = FormWindowState.Minimized;
 

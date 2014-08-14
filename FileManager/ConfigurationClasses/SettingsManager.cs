@@ -15,11 +15,12 @@ namespace FileManager.ConfigurationClasses
 		private readonly string _categoryRequestSettingsPath = string.Empty;
 		private readonly string _ribbonSettingsFilePath = string.Empty;
 		private readonly string _settingsFilePath = string.Empty;
-		private readonly string _syncSettingsFilePath = string.Empty;
+		private readonly string _dashboardSyncSettingsFilePath = string.Empty;
+		private readonly string _salesDepotSyncSettingsFilePath = string.Empty;
 
 		private SettingsManager()
 		{
-			ApplicationRootsPath = Path.GetDirectoryName(typeof(SettingsManager).Assembly.Location);
+			ApplicationRootPath = Path.GetDirectoryName(typeof(SettingsManager).Assembly.Location);
 
 			DestinationPathLength = string.Format(@"{0}\newlocaldirect.com\sync\Incoming\libraries\Primary Root", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles)).Length;
 
@@ -28,12 +29,14 @@ namespace FileManager.ConfigurationClasses
 				Directory.CreateDirectory(settingsFolderPath);
 			_settingsFilePath = Path.Combine(settingsFolderPath, "LocalSettings.xml");
 			_autoSyncSettingsPath = Path.Combine(settingsFolderPath, "AutoSyncSchedule.xml");
-			_categoryRequestSettingsPath = Path.Combine(ApplicationRootsPath, "category_request.xml");
+			_categoryRequestSettingsPath = Path.Combine(ApplicationRootPath, "category_request.xml");
 
 			ArhivePath = Path.Combine(settingsFolderPath, "Archives");
 			if (Directory.Exists(ArhivePath))
 				Directory.CreateDirectory(ArhivePath);
-			_syncSettingsFilePath = string.Format(@"{0}\newlocaldirect.com\!Update_Settings\syncfile.xml", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
+			_dashboardSyncSettingsFilePath = string.Format(@"{0}\newlocaldirect.com\!Update_Settings\syncfile.xml", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
+
+			_salesDepotSyncSettingsFilePath = Path.Combine(ApplicationRootPath, "synclock.xml");
 
 			LogRootPath = Path.Combine(settingsFolderPath, "Log");
 			if (!Directory.Exists(LogRootPath))
@@ -46,7 +49,7 @@ namespace FileManager.ConfigurationClasses
 			ScreenshotLibraryRootPath = string.Empty;
 
 			AutoFMSyncShorcutPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Startup), "AutoFMSync.exe - Shortcut.lnk");
-			VideoConverterPath = Path.Combine(ApplicationRootsPath, "video converter");
+			VideoConverterPath = Path.Combine(ApplicationRootPath, "video converter");
 
 			#region FM Settings
 			BackupPath = string.Empty;
@@ -63,7 +66,7 @@ namespace FileManager.ConfigurationClasses
 			#endregion
 
 			#region Ribbon Settings
-			_ribbonSettingsFilePath = Path.Combine(ApplicationRootsPath, "ribbontabs.xml");
+			_ribbonSettingsFilePath = Path.Combine(ApplicationRootPath, "ribbontabs.xml");
 			EnableOvernightsCalendarTab = true;
 			EnableClipartTab = true;
 			EnableProgramManagerTab = true;
@@ -75,6 +78,7 @@ namespace FileManager.ConfigurationClasses
 			#endregion
 
 			LoadCategoryRequestSettings();
+			LoadSalesDepotSyncSettings();
 
 			HiddenObjects = new List<string>();
 			HiddenObjects.Add("!Old");
@@ -91,7 +95,7 @@ namespace FileManager.ConfigurationClasses
 			HiddenObjects.Add("SalesDepotReferences.json");
 		}
 
-		public string ApplicationRootsPath { get; private set; }
+		public string ApplicationRootPath { get; private set; }
 		public string ArhivePath { get; set; }
 		public string LogRootPath { get; set; }
 		public string ClientLogosRootPath { get; set; }
@@ -148,6 +152,13 @@ namespace FileManager.ConfigurationClasses
 		public string CategoryRequestRecipients { get; set; }
 		public string CategoryRequestSubject { get; set; }
 		public string CategoryRequestBody { get; set; }
+		#endregion
+
+		#region Sales Depot Sync Settings
+		public bool SyncLockByUntaggedLinks { get; private set; }
+		public bool SyncLockByInactiveLinks { get; private set; }
+		public bool SyncLockByUnconvertedVideo { get; private set; }
+		public string SyncSupportEmail { get; private set; }
 		#endregion
 
 		public void Load()
@@ -309,22 +320,46 @@ namespace FileManager.ConfigurationClasses
 
 		private void LoadClipartPath()
 		{
-			if (File.Exists(_syncSettingsFilePath))
-			{
-				var document = new XmlDocument();
-				document.Load(_syncSettingsFilePath);
+			if (!File.Exists(_dashboardSyncSettingsFilePath)) return;
+			var document = new XmlDocument();
+			document.Load(_dashboardSyncSettingsFilePath);
 
-				XmlNode node = document.SelectSingleNode(@"/Settings/MediaProperty/Path");
-				if (node != null)
-				{
-					string path = node.InnerText.Replace("\"", string.Empty).Trim();
-					ClientLogosRootPath = Path.Combine(path, @"outgoing\gallery\client logos");
-					SalesGalleryRootPath = Path.Combine(path, @"outgoing\gallery\sales gallery");
-					WebArtRootPath = Path.Combine(path, @"outgoing\gallery\web art");
-					AdSpecsSamplesRootPath = Path.Combine(path, @"outgoing\gallery\web art\Ad Specs-Samples");
-					ScreenshotLibraryRootPath = Path.Combine(path, @"outgoing\gallery\web art\Screenshot Library");
-				}
+			var node = document.SelectSingleNode(@"/Settings/MediaProperty/Path");
+			if (node == null) return;
+			string path = node.InnerText.Replace("\"", string.Empty).Trim();
+			ClientLogosRootPath = Path.Combine(path, @"outgoing\gallery\client logos");
+			SalesGalleryRootPath = Path.Combine(path, @"outgoing\gallery\sales gallery");
+			WebArtRootPath = Path.Combine(path, @"outgoing\gallery\web art");
+			AdSpecsSamplesRootPath = Path.Combine(path, @"outgoing\gallery\web art\Ad Specs-Samples");
+			ScreenshotLibraryRootPath = Path.Combine(path, @"outgoing\gallery\web art\Screenshot Library");
+		}
+
+		private void LoadSalesDepotSyncSettings()
+		{
+			if (!File.Exists(_salesDepotSyncSettingsFilePath)) return;
+			var document = new XmlDocument();
+			document.Load(_salesDepotSyncSettingsFilePath);
+			var node = document.SelectSingleNode(@"/synclock/untaggedlink");
+			{
+				bool temp;
+				if (node != null && Boolean.TryParse(node.InnerText, out temp))
+					SyncLockByUntaggedLinks = temp;
 			}
+			node = document.SelectSingleNode(@"/synclock/inactivelink");
+			{
+				bool temp;
+				if (node != null && Boolean.TryParse(node.InnerText, out temp))
+					SyncLockByInactiveLinks = temp;
+			}
+			node = document.SelectSingleNode(@"/synclock/unconvertedvideo");
+			{
+				bool temp;
+				if (node != null && Boolean.TryParse(node.InnerText, out temp))
+					SyncLockByUnconvertedVideo = temp;
+			}
+			node = document.SelectSingleNode(@"/synclock/email");
+			if (node != null)
+				SyncSupportEmail = node.InnerText;
 		}
 
 		public void SaveAutoSyncSettings(string settings)

@@ -132,7 +132,7 @@ namespace FileManager.PresentationClasses.WallBin.Decorators
 		{
 			if (!_isDisposed)
 			{
-				foreach (PageDecorator page in Pages)
+				foreach (var page in Pages)
 					page.Save();
 				Library.Save();
 				StateChanged = false;
