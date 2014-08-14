@@ -6,22 +6,28 @@
 	{
 		var that = this;
 		var baseDatasetKey = undefined;
-		var baseSearchConditions = content.find('.search-conditions');
-		var homeBar = content.parent().find('.shortcuts-home-bar');
-		var hideResults = baseSearchConditions.find('.hide-results').length > 0;
+
 		var shortcutTitle = content.find('.shortcut-title').html();
 		var sortColumn = content.find('.sort-column').html();
 		var sortDirection = content.find('.sort-direction').html();
 
+		var baseSearchConditionsHtml = content.find('.search-conditions')[0].outerHTML;
+		var homeBarHtml = content.parent().find('.shortcuts-home-bar')[0].outerHTML;
+		content.parent().find('.shortcuts-home-bar').remove();
 		content.html('');
-		content.append(homeBar);
+		content.append($(baseSearchConditionsHtml));
+		content.append($(homeBarHtml));
 		content.append($('<table id="search-container"><tr>' +
 			'<td id="right-navbar" style="display: none; width: 15%; min-width: 240px;"></td>' +
 			'<td id="search-result"><div></div></td>' +
 			'</tr></table>'));
+		var baseSearchConditions = content.find('.search-conditions');
+		var homeBar = content.find('.shortcuts-home-bar');
 
+		var hideResults = baseSearchConditions.find('.hide-results').length > 0;
 		var enableSubSearch = baseSearchConditions.find('.enable-sub-search').length > 0;
 		var defaultSubSearch = baseSearchConditions.find('.sub-search-default-view').html();
+
 		if (enableSubSearch)
 		{
 			$.ajax({
