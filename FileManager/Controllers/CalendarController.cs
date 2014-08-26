@@ -16,6 +16,7 @@ namespace FileManager.Controllers
 	{
 		private FormCalendarSettings _formSettings;
 
+		private bool _activated;
 		private bool _initialization;
 		private TabOvernightsCalendarControl _tabPage;
 
@@ -38,7 +39,6 @@ namespace FileManager.Controllers
 			_initialization = true;
 
 			_tabPage = new TabOvernightsCalendarControl();
-			ApplyOvernightsCalendar();
 			if (!FormMain.Instance.pnMain.Controls.Contains(_tabPage))
 				FormMain.Instance.pnMain.Controls.Add(_tabPage);
 
@@ -46,9 +46,12 @@ namespace FileManager.Controllers
 
 			MainController.Instance.LibraryChanged += (sender, args) =>
 														  {
-															  _initialization = true;
-															  ApplyOvernightsCalendar();
-															  _initialization = false;
+															  if (_activated)
+															  {
+																  _initialization = true;
+																  ApplyOvernightsCalendar();
+																  _initialization = false;
+															  }
 														  };
 
 			_initialization = false;
@@ -62,6 +65,7 @@ namespace FileManager.Controllers
 			ApplyOvernightsCalendar();
 			_initialization = false;
 			_tabPage.BringToFront();
+			_activated = true;
 		}
 		#endregion
 
@@ -82,7 +86,7 @@ namespace FileManager.Controllers
 
 			FormMain.Instance.ribbonBarCalendarParts.Items.Clear();
 			FormMain.Instance.ribbonBarCalendarParts.Items.AddRange(activeDecorator.OvernightsCalendar.PartToggles.ToArray());
-		
+
 			if (!_tabPage.Controls.Contains(activeDecorator.OvernightsCalendar))
 				_tabPage.Controls.Add(activeDecorator.OvernightsCalendar);
 			activeDecorator.OvernightsCalendar.BringToFront();
@@ -100,7 +104,6 @@ namespace FileManager.Controllers
 			FormMain.Instance.buttonItemCalendarSyncStatusEnabled.Checked = false;
 			(sender as ButtonItem).Checked = true;
 		}
-
 		private void buttonItemCalendarSyncStatus_CheckedChanged(object sender, EventArgs e)
 		{
 			if (MainController.Instance.ActiveDecorator == null || _initialization) return;

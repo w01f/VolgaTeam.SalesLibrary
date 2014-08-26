@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
 using DevComponents.DotNetBar.Metro;
 using DevExpress.Utils;
@@ -18,6 +19,11 @@ using DevExpress.XtraGrid.Views.Layout.ViewInfo;
 using DevExpress.XtraNavBar;
 using FileManager.ConfigurationClasses;
 using SalesDepot.CoreObjects.BusinessClasses;
+using SalesDepot.Services.IPadAdminService;
+using Banner = FileManager.ConfigurationClasses.Banner;
+using FileCard = SalesDepot.CoreObjects.BusinessClasses.FileCard;
+using Font = System.Drawing.Font;
+using Library = SalesDepot.CoreObjects.BusinessClasses.Library;
 
 namespace FileManager.ToolForms.WallBin
 {
@@ -27,13 +33,15 @@ namespace FileManager.ToolForms.WallBin
 		private bool _isBold;
 		private string _note = string.Empty;
 		private LayoutViewHitInfo _hitInfo;
+		private readonly List<GroupModel> _securityGroups = new List<GroupModel>();
+		private readonly Library _library;
 
 		public bool IsLoading { get; set; }
 
-		public FormLinkProperties()
+		public FormLinkProperties(Library library)
 		{
 			InitializeComponent();
-
+			_library = library;
 			if ((base.CreateGraphics()).DpiX > 96)
 			{
 				var styleControllerFont = new Font(styleController.Appearance.Font.FontFamily, styleController.Appearance.Font.Size - 2, styleController.Appearance.Font.Style);
@@ -90,54 +98,56 @@ namespace FileManager.ToolForms.WallBin
 				rbSecurityAllowed.Font = new Font(rbSecurityAllowed.Font.FontFamily, rbSecurityAllowed.Font.Size - 2, rbSecurityAllowed.Font.Style);
 				rbSecurityForbidden.Font = new Font(rbSecurityForbidden.Font.FontFamily, rbSecurityForbidden.Font.Size - 2, rbSecurityForbidden.Font.Style);
 				rbSecurityDenied.Font = new Font(rbSecurityDenied.Font.FontFamily, rbSecurityDenied.Font.Size - 2, rbSecurityDenied.Font.Style);
-				rbSecurityRestricted.Font = new Font(rbSecurityRestricted.Font.FontFamily, rbSecurityRestricted.Font.Size - 2, rbSecurityRestricted.Font.Style);
+				rbSecurityWhiteList.Font = new Font(rbSecurityWhiteList.Font.FontFamily, rbSecurityWhiteList.Font.Size - 2, rbSecurityWhiteList.Font.Style);
+				rbSecurityBlackList.Font = new Font(rbSecurityBlackList.Font.FontFamily, rbSecurityBlackList.Font.Size - 2, rbSecurityBlackList.Font.Style);
 				ckSecurityShareLink.Font = new Font(ckSecurityShareLink.Font.FontFamily, ckSecurityShareLink.Font.Size - 2, ckSecurityShareLink.Font.Style);
-
-				repositoryItemButtonEditKeyword.Enter += FormMain.Instance.EditorEnter;
-				repositoryItemButtonEditKeyword.MouseUp += FormMain.Instance.EditorMouseUp;
-				repositoryItemButtonEditKeyword.MouseDown += FormMain.Instance.EditorMouseUp;
-				repositoryItemButtonEditAttachmentsFiles.Enter += FormMain.Instance.EditorEnter;
-				repositoryItemButtonEditAttachmentsFiles.MouseUp += FormMain.Instance.EditorMouseUp;
-				repositoryItemButtonEditAttachmentsFiles.MouseDown += FormMain.Instance.EditorMouseUp;
-				repositoryItemButtonEditAttachmentsWeb.Enter += FormMain.Instance.EditorEnter;
-				repositoryItemButtonEditAttachmentsWeb.MouseUp += FormMain.Instance.EditorMouseUp;
-				repositoryItemButtonEditAttachmentsWeb.MouseDown += FormMain.Instance.EditorMouseUp;
-
-				textEditFileCardAdvertiser.Enter += FormMain.Instance.EditorEnter;
-				textEditFileCardAdvertiser.MouseUp += FormMain.Instance.EditorMouseUp;
-				textEditFileCardAdvertiser.MouseDown += FormMain.Instance.EditorMouseUp;
-				dateEditFileCardDateSold.Enter += FormMain.Instance.EditorEnter;
-				dateEditFileCardDateSold.MouseUp += FormMain.Instance.EditorMouseUp;
-				dateEditFileCardDateSold.MouseDown += FormMain.Instance.EditorMouseUp;
-				spinEditFileCardBroadcastClosed.Enter += FormMain.Instance.EditorEnter;
-				spinEditFileCardBroadcastClosed.MouseUp += FormMain.Instance.EditorMouseUp;
-				spinEditFileCardBroadcastClosed.MouseDown += FormMain.Instance.EditorMouseUp;
-				spinEditFileCardDigitalClosed.Enter += FormMain.Instance.EditorEnter;
-				spinEditFileCardDigitalClosed.MouseUp += FormMain.Instance.EditorMouseUp;
-				spinEditFileCardDigitalClosed.MouseDown += FormMain.Instance.EditorMouseUp;
-				spinEditFileCardPublishingClosed.Enter += FormMain.Instance.EditorEnter;
-				spinEditFileCardPublishingClosed.MouseUp += FormMain.Instance.EditorMouseUp;
-				spinEditFileCardPublishingClosed.MouseDown += FormMain.Instance.EditorMouseUp;
-				textEditFileCardSalesName.Enter += FormMain.Instance.EditorEnter;
-				textEditFileCardSalesName.MouseUp += FormMain.Instance.EditorMouseUp;
-				textEditFileCardSalesName.MouseDown += FormMain.Instance.EditorMouseUp;
-				textEditFileCardSalesEmail.Enter += FormMain.Instance.EditorEnter;
-				textEditFileCardSalesEmail.MouseUp += FormMain.Instance.EditorMouseUp;
-				textEditFileCardSalesEmail.MouseDown += FormMain.Instance.EditorMouseUp;
-				textEditFileCardSalesPhone.Enter += FormMain.Instance.EditorEnter;
-				textEditFileCardSalesPhone.MouseUp += FormMain.Instance.EditorMouseUp;
-				textEditFileCardSalesPhone.MouseDown += FormMain.Instance.EditorMouseUp;
-				textEditFileCardSalesStation.Enter += FormMain.Instance.EditorEnter;
-				textEditFileCardSalesStation.MouseUp += FormMain.Instance.EditorMouseUp;
-				textEditFileCardSalesStation.MouseDown += FormMain.Instance.EditorMouseUp;
-				repositoryItemMemoEditFileCardImportantInfo.Enter += FormMain.Instance.EditorEnter;
-				repositoryItemMemoEditFileCardImportantInfo.MouseUp += FormMain.Instance.EditorMouseUp;
-				repositoryItemMemoEditFileCardImportantInfo.MouseDown += FormMain.Instance.EditorMouseUp;
-
-				memoEditSecurityUsers.Enter += FormMain.Instance.EditorEnter;
-				memoEditSecurityUsers.MouseUp += FormMain.Instance.EditorMouseUp;
-				memoEditSecurityUsers.MouseDown += FormMain.Instance.EditorMouseUp;
 			}
+
+			repositoryItemButtonEditKeyword.Enter += FormMain.Instance.EditorEnter;
+			repositoryItemButtonEditKeyword.MouseUp += FormMain.Instance.EditorMouseUp;
+			repositoryItemButtonEditKeyword.MouseDown += FormMain.Instance.EditorMouseUp;
+			repositoryItemButtonEditAttachmentsFiles.Enter += FormMain.Instance.EditorEnter;
+			repositoryItemButtonEditAttachmentsFiles.MouseUp += FormMain.Instance.EditorMouseUp;
+			repositoryItemButtonEditAttachmentsFiles.MouseDown += FormMain.Instance.EditorMouseUp;
+			repositoryItemButtonEditAttachmentsWeb.Enter += FormMain.Instance.EditorEnter;
+			repositoryItemButtonEditAttachmentsWeb.MouseUp += FormMain.Instance.EditorMouseUp;
+			repositoryItemButtonEditAttachmentsWeb.MouseDown += FormMain.Instance.EditorMouseUp;
+
+			textEditFileCardAdvertiser.Enter += FormMain.Instance.EditorEnter;
+			textEditFileCardAdvertiser.MouseUp += FormMain.Instance.EditorMouseUp;
+			textEditFileCardAdvertiser.MouseDown += FormMain.Instance.EditorMouseUp;
+			dateEditFileCardDateSold.Enter += FormMain.Instance.EditorEnter;
+			dateEditFileCardDateSold.MouseUp += FormMain.Instance.EditorMouseUp;
+			dateEditFileCardDateSold.MouseDown += FormMain.Instance.EditorMouseUp;
+			spinEditFileCardBroadcastClosed.Enter += FormMain.Instance.EditorEnter;
+			spinEditFileCardBroadcastClosed.MouseUp += FormMain.Instance.EditorMouseUp;
+			spinEditFileCardBroadcastClosed.MouseDown += FormMain.Instance.EditorMouseUp;
+			spinEditFileCardDigitalClosed.Enter += FormMain.Instance.EditorEnter;
+			spinEditFileCardDigitalClosed.MouseUp += FormMain.Instance.EditorMouseUp;
+			spinEditFileCardDigitalClosed.MouseDown += FormMain.Instance.EditorMouseUp;
+			spinEditFileCardPublishingClosed.Enter += FormMain.Instance.EditorEnter;
+			spinEditFileCardPublishingClosed.MouseUp += FormMain.Instance.EditorMouseUp;
+			spinEditFileCardPublishingClosed.MouseDown += FormMain.Instance.EditorMouseUp;
+			textEditFileCardSalesName.Enter += FormMain.Instance.EditorEnter;
+			textEditFileCardSalesName.MouseUp += FormMain.Instance.EditorMouseUp;
+			textEditFileCardSalesName.MouseDown += FormMain.Instance.EditorMouseUp;
+			textEditFileCardSalesEmail.Enter += FormMain.Instance.EditorEnter;
+			textEditFileCardSalesEmail.MouseUp += FormMain.Instance.EditorMouseUp;
+			textEditFileCardSalesEmail.MouseDown += FormMain.Instance.EditorMouseUp;
+			textEditFileCardSalesPhone.Enter += FormMain.Instance.EditorEnter;
+			textEditFileCardSalesPhone.MouseUp += FormMain.Instance.EditorMouseUp;
+			textEditFileCardSalesPhone.MouseDown += FormMain.Instance.EditorMouseUp;
+			textEditFileCardSalesStation.Enter += FormMain.Instance.EditorEnter;
+			textEditFileCardSalesStation.MouseUp += FormMain.Instance.EditorMouseUp;
+			textEditFileCardSalesStation.MouseDown += FormMain.Instance.EditorMouseUp;
+			repositoryItemMemoEditFileCardImportantInfo.Enter += FormMain.Instance.EditorEnter;
+			repositoryItemMemoEditFileCardImportantInfo.MouseUp += FormMain.Instance.EditorMouseUp;
+			repositoryItemMemoEditFileCardImportantInfo.MouseDown += FormMain.Instance.EditorMouseUp;
+
+			gridViewSecurityGroups.MasterRowEmpty += OnGroupChildListIsEmpty;
+			gridViewSecurityGroups.MasterRowGetRelationCount += OnGetGroupRelationCount;
+			gridViewSecurityGroups.MasterRowGetRelationName += OnGetGroupRelationName;
+			gridViewSecurityGroups.MasterRowGetChildList += OnGetGroupChildList;
 
 			SearchTags = new LibraryFileSearchTags();
 			ExpirationDateOptions = new ExpirationDateOptions();
@@ -157,6 +167,8 @@ namespace FileManager.ToolForms.WallBin
 			gridControlBannersFavs.DataSource = new BindingList<Banner>(ListManager.Instance.BannersFavs);
 			layoutViewBannersGallery.FocusedRowChanged += layoutViewBannersGalery_FocusedRowChanged;
 			layoutViewBannersFavs.FocusedRowChanged += layoutViewBannersFavs_FocusedRowChanged;
+
+			LoadSecurityGroups();
 		}
 
 		public bool IsLineBreak { get; set; }
@@ -175,6 +187,44 @@ namespace FileManager.ToolForms.WallBin
 		public Func<object> OpenQV { get; set; }
 		public Func<object> OpenWV { get; set; }
 		public Func<object> RefreshPreview { get; set; }
+
+		private readonly List<string> _assignedUsers = new List<string>();
+		public string AssignedUsers
+		{
+			get
+			{
+				_assignedUsers.Clear();
+				if (rbSecurityWhiteList.Checked)
+					_assignedUsers.AddRange(_securityGroups.Where(g => g.users != null).SelectMany(g => g.users).Where(u => u.selected).Select(u => u.login));
+				return String.Join(",", _assignedUsers);
+			}
+			set
+			{
+				_assignedUsers.Clear();
+				if (!String.IsNullOrEmpty(value))
+					_assignedUsers.AddRange(value.Split(',').Select(item => item.Trim()));
+				ApplyAssignedUsers();
+			}
+		}
+
+		private readonly List<string> _deniedUsers = new List<string>();
+		public string DeniedUsers
+		{
+			get
+			{
+				_deniedUsers.Clear();
+				if (rbSecurityBlackList.Checked)
+					_deniedUsers.AddRange(_securityGroups.Where(g => g.users != null).SelectMany(g => g.users).Where(u => u.selected).Select(u => u.login));
+				return String.Join(",", _deniedUsers);
+			}
+			set
+			{
+				_deniedUsers.Clear();
+				if (!String.IsNullOrEmpty(value))
+					_deniedUsers.AddRange(value.Split(',').Select(item => item.Trim()));
+				ApplyDeniedUsers();
+			}
+		}
 
 		public string CaptionName
 		{
@@ -287,7 +337,7 @@ namespace FileManager.ToolForms.WallBin
 				searchGroup.ListBox.BringToFront();
 			}
 
-			ListManager.Instance.SearchTags.SearchGroups.ForEach(g=>g.ListBox.UnCheckAll());
+			ListManager.Instance.SearchTags.SearchGroups.ForEach(g => g.ListBox.UnCheckAll());
 			foreach (var searchGroup in ListManager.Instance.SearchTags.SearchGroups)
 			{
 				var group = SearchTags.SearchGroups.FirstOrDefault(x => x.Name.Equals(searchGroup.Name));
@@ -1025,9 +1075,152 @@ namespace FileManager.ToolForms.WallBin
 		#endregion
 
 		#region Security Processing
+		private void LoadSecurityGroups()
+		{
+			rbSecurityWhiteList.Enabled = false;
+			pnSecurityUserListGrid.Visible = false;
+			gridControlSecurityUserList.DataSource = null;
+			_securityGroups.Clear();
+			laSecurityUserListInfo.Visible = true;
+			laSecurityUserListInfo.BringToFront();
+			if (!SettingsManager.Instance.WebServiceConnected)
+				laSecurityUserListInfo.Text = String.Format("Service coonection is not configured");
+			circularSecurityUserListProgress.Visible = true;
+			circularSecurityUserListProgress.BringToFront();
+			laSecurityUserListInfo.Text = String.Format("Loading user list from {0}...", SettingsManager.Instance.WebServiceSite);
+			var message = String.Empty;
+			var thread = new Thread(() =>
+			{
+				_securityGroups.AddRange(_library.IPadManager.GetGroupsByLibrary(out message));
+				Invoke((MethodInvoker)delegate
+				{
+					circularSecurityUserListProgress.Visible = false;
+					if (!String.IsNullOrEmpty(message))
+						laSecurityUserListInfo.Text = String.Format("Couldn't load user list from {0}", SettingsManager.Instance.WebServiceSite);
+					else if (!_securityGroups.Any())
+						laSecurityUserListInfo.Text = String.Format("There is no users on {0}", SettingsManager.Instance.WebServiceSite);
+					else
+					{
+						laSecurityUserListInfo.Visible = false;
+						pnSecurityUserListGrid.Visible = true;
+						gridControlSecurityUserList.DataSource = _securityGroups.Where(g => g.users != null).ToList();
+						ApplyAssignedUsers();
+						ApplyDeniedUsers();
+						rbSecurityWhiteList.Enabled = true;
+					}
+				});
+			});
+			thread.Start();
+		}
+
+		private void ApplyAssignedUsers()
+		{
+			if (rbSecurityWhiteList.Checked)
+			{
+				foreach (var groupModel in _securityGroups.Where(g => g.users != null))
+				{
+					foreach (var userModel in groupModel.users)
+						userModel.selected = _assignedUsers.Contains(userModel.login);
+					groupModel.selected = groupModel.users.Any(u => u.selected);
+				}
+				gridControlSecurityUserList.RefreshDataSource();
+			}
+		}
+
+		private void ApplyDeniedUsers()
+		{
+			if (rbSecurityBlackList.Checked)
+			{
+				foreach (var groupModel in _securityGroups.Where(g => g.users != null))
+				{
+					foreach (var userModel in groupModel.users)
+						userModel.selected = _deniedUsers.Contains(userModel.login);
+					groupModel.selected = groupModel.users.Any(u => u.selected);
+				}
+				gridControlSecurityUserList.RefreshDataSource();
+			}
+		}
+
 		private void rbSecurityRestricted_CheckedChanged(object sender, EventArgs e)
 		{
-			memoEditSecurityUsers.Enabled = rbSecurityRestricted.Checked;
+			pnSecurityUserListGrid.Enabled = rbSecurityWhiteList.Checked || rbSecurityBlackList.Checked;
+			if (IsLoading) return;
+			if (!rbSecurityWhiteList.Checked)
+				_assignedUsers.Clear();
+			if (!rbSecurityBlackList.Checked)
+				_assignedUsers.Clear();
+			ApplyAssignedUsers();
+			ApplyDeniedUsers();
+		}
+
+		private void buttonXSecurityUserListSelectAll_Click(object sender, EventArgs e)
+		{
+			foreach (var groupModel in _securityGroups.Where(g => g.users != null))
+			{
+				foreach (var userModel in groupModel.users)
+					userModel.selected = true;
+				groupModel.selected = groupModel.users.Any(u => u.selected);
+			}
+			gridControlSecurityUserList.RefreshDataSource();
+		}
+
+		private void buttonXSecurityUserListClearAll_Click(object sender, EventArgs e)
+		{
+			foreach (var groupModel in _securityGroups.Where(g => g.users != null))
+			{
+				foreach (var userModel in groupModel.users)
+					userModel.selected = false;
+				groupModel.selected = groupModel.users.Any(u => u.selected);
+			}
+			gridControlSecurityUserList.RefreshDataSource();
+		}
+
+		private void OnGroupChildListIsEmpty(object sender, MasterRowEmptyEventArgs e)
+		{
+			e.IsEmpty = !(e.RowHandle != GridControl.InvalidRowHandle && _securityGroups[e.RowHandle].users != null && _securityGroups[e.RowHandle].users.Any());
+		}
+
+		private void OnGetGroupRelationCount(object sender, MasterRowGetRelationCountEventArgs e)
+		{
+			e.RelationCount = 1;
+		}
+
+		private void OnGetGroupRelationName(object sender, MasterRowGetRelationNameEventArgs e)
+		{
+			e.RelationName = "Users";
+		}
+
+		private void OnGetGroupChildList(object sender, MasterRowGetChildListEventArgs e)
+		{
+			if (e.RowHandle != GridControl.InvalidRowHandle && _securityGroups[e.RowHandle].users != null)
+				e.ChildList = _securityGroups[e.RowHandle].users.ToArray();
+		}
+
+		private void RepositoryItemCheckEditCheckedChanged(object sender, EventArgs e)
+		{
+			var focussedView = gridControlSecurityUserList.FocusedView as GridView;
+			if (focussedView == null) return;
+			focussedView.CloseEditor();
+			if (focussedView == gridViewSecurityGroups)
+			{
+				if (focussedView.FocusedRowHandle == GridControl.InvalidRowHandle) return;
+				var groupModel = focussedView.GetFocusedRow() as GroupModel;
+				if (groupModel == null) return;
+				if (groupModel.users == null) return;
+				foreach (var userModel in groupModel.users)
+					userModel.selected = groupModel.selected;
+				var usersView = focussedView.GetDetailView(focussedView.FocusedRowHandle, 0) as GridView;
+				if (usersView != null)
+					usersView.RefreshData();
+			}
+			else
+			{
+				var groupModel = focussedView.SourceRow as GroupModel;
+				var userModel = focussedView.GetFocusedRow() as UserModel;
+				if (groupModel == null || userModel == null || !userModel.selected) return;
+				groupModel.selected = userModel.selected;
+				gridControlSecurityUserList.MainView.RefreshData();
+			}
 		}
 		#endregion
 

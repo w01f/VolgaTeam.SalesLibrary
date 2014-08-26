@@ -16,6 +16,7 @@ namespace SalesDepot.BusinessClasses
 	public class LibraryLink : ILibraryLink
 	{
 		private string _assignedUsers;
+		private string _deniedUsers;
 		private bool _isForbidden;
 		private bool _isRestricted;
 		private bool _noShare;
@@ -380,6 +381,17 @@ namespace SalesDepot.BusinessClasses
 			}
 		}
 
+		public string DeniedUsers
+		{
+			get { return _deniedUsers; }
+			set
+			{
+				if (_deniedUsers != value)
+					LastChanged = DateTime.Now;
+				_deniedUsers = value;
+			}
+		}
+
 		public bool DoNotGeneratePreview
 		{
 			get { return _doNotGeneratePreview; }
@@ -420,6 +432,7 @@ namespace SalesDepot.BusinessClasses
 			file.IsRestricted = IsRestricted;
 			file.NoShare = NoShare;
 			file.AssignedUsers = AssignedUsers;
+			file.DeniedUsers = DeniedUsers;
 			file.DoNotGeneratePreview = DoNotGeneratePreview;
 			file.ForcePreview = ForcePreview;
 			file.SearchTags = SearchTags;
@@ -454,6 +467,7 @@ namespace SalesDepot.BusinessClasses
 			result.AppendLine(@"<DoNotGeneratePreview>" + _doNotGeneratePreview + @"</DoNotGeneratePreview>");
 			result.AppendLine(@"<ForcePreview>" + _forcePreview + @"</ForcePreview>");
 			result.AppendLine(@"<AssignedUsers>" + (AssignedUsers ?? string.Empty).Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</AssignedUsers>");
+			result.AppendLine(@"<DeniedUsers>" + (DeniedUsers ?? string.Empty).Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</DeniedUsers>");
 			result.Append(@"<Widget>" + Convert.ToBase64String((byte[])converter.ConvertTo(_widget, typeof(byte[]))).Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</Widget>");
 			result.AppendLine(SearchTags.Serialize());
 			result.AppendLine(@"<SuperFilters>");
@@ -552,6 +566,9 @@ namespace SalesDepot.BusinessClasses
 						break;
 					case "AssignedUsers":
 						_assignedUsers = childNode.InnerText;
+						break;
+					case "DeniedUsers":
+						_deniedUsers = childNode.InnerText;
 						break;
 					case "LastChanged":
 						if (DateTime.TryParse(childNode.InnerText, out tempDate))

@@ -7,10 +7,15 @@ namespace FileManager.Controllers
 	public class IPadUsersController : IPageController
 	{
 		private TabIPadUsersControl _tabPage;
+		private bool _activated;
 
 		public IPadUsersController()
 		{
-			MainController.Instance.LibraryChanged += (sender, args) => ApplyPermissionsManager();
+			MainController.Instance.LibraryChanged += (sender, args) =>
+			{
+				if (_activated)
+					ApplyPermissionsManager();
+			};
 			FormMain.Instance.buttonItemIPadUsersAdd.Click += buttonItemIPadUsersAdd_Click;
 			FormMain.Instance.buttonItemIPadUsersEdit.Click += buttonItemIPadUsersEdit_Click;
 			FormMain.Instance.buttonItemIPadUsersDelete.Click += buttonItemIPadUsersDelete_Click;
@@ -21,7 +26,6 @@ namespace FileManager.Controllers
 		public void InitController()
 		{
 			_tabPage = new TabIPadUsersControl();
-			ApplyPermissionsManager();
 			if (!FormMain.Instance.pnMain.Controls.Contains(_tabPage))
 				FormMain.Instance.pnMain.Controls.Add(_tabPage);
 		}
@@ -31,14 +35,17 @@ namespace FileManager.Controllers
 		public void ShowTab()
 		{
 			_tabPage.BringToFront();
+			if (!_activated)
+				ApplyPermissionsManager();
+			_activated = true;
 		}
 		#endregion
 
 		private void ApplyPermissionsManager()
 		{
 			var activeDecorator = MainController.Instance.ActiveDecorator;
-			if (activeDecorator == null || !activeDecorator.Library.IsConfigured || !activeDecorator.Library.IPadManager.Enabled || !ConfigurationClasses.SettingsManager.Instance.EnableIPadUsersTab || string.IsNullOrEmpty(activeDecorator.Library.IPadManager.Website) || string.IsNullOrEmpty(activeDecorator.Library.IPadManager.Login) || string.IsNullOrEmpty(activeDecorator.Library.IPadManager.Password)) return;
-			activeDecorator.IPadPermissionsManager.RefreshData(false);
+			if (activeDecorator == null || !activeDecorator.Library.IsConfigured || !ConfigurationClasses.SettingsManager.Instance.EnableIPadUsersTab || !ConfigurationClasses.SettingsManager.Instance.WebServiceConnected) return;
+			activeDecorator.IPadPermissionsManager.RefreshData(true);
 			if (!_tabPage.Controls.Contains(activeDecorator.IPadPermissionsManager))
 				_tabPage.Controls.Add(activeDecorator.IPadPermissionsManager);
 			activeDecorator.IPadContentManager.BringToFront();

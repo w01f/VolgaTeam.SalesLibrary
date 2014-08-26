@@ -196,7 +196,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 					{
 						foreach (LibraryLink file in folder.Files)
 						{
-							if (file.IsForbidden || !(!file.IsRestricted || (file.IsRestricted && !string.IsNullOrEmpty(file.AssignedUsers))))
+							if (file.IsForbidden || !(!file.IsRestricted || (file.IsRestricted && (!string.IsNullOrEmpty(file.AssignedUsers) || !string.IsNullOrEmpty(file.DeniedUsers)))))
 								continue;
 							if (file is LibraryFolderLink)
 								alive = (file as LibraryFolderLink).IsPreviewContainerAlive(previewContainer);
@@ -694,7 +694,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 								{
 									File.Copy(attachment.OriginalPath, attachment.DestinationPath, true);
 								}
-								catch {}
+								catch { }
 							actualAttachmentIds.Add(attachment.Identifier);
 						}
 					}
@@ -773,7 +773,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 				foreach (FileInfo file in Folder.GetFiles("*.json"))
 					file.CopyTo(Path.Combine(archiveFolder, file.Name), true);
 			}
-			catch {}
+			catch { }
 		}
 	}
 }

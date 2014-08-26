@@ -750,7 +750,7 @@ namespace FileManager.PresentationClasses.WallBin
 			if (grFiles.SelectedRows.Count <= 0) return;
 			var file = grFiles.SelectedRows[0].Tag as LibraryLink;
 			if (file == null) return;
-			if (_formLinkProperties == null) _formLinkProperties = new FormLinkProperties();
+			if (_formLinkProperties == null) _formLinkProperties = new FormLinkProperties(file.Parent.Parent.Parent as Library);
 			_formLinkProperties.IsLoading = true;
 			_formLinkProperties.CaptionName = string.IsNullOrEmpty(file.PropertiesName) && file.Type == FileTypes.LineBreak ? "Line Break" : file.PropertiesName;
 			_formLinkProperties.IsBold = file.IsBold;
@@ -780,10 +780,12 @@ namespace FileManager.PresentationClasses.WallBin
 			}
 
 			_formLinkProperties.rbSecurityAllowed.Checked = !file.IsRestricted;
-			_formLinkProperties.rbSecurityDenied.Checked = file.IsRestricted && string.IsNullOrEmpty(file.AssignedUsers);
-			_formLinkProperties.rbSecurityRestricted.Checked = file.IsRestricted && !string.IsNullOrEmpty(file.AssignedUsers);
+			_formLinkProperties.rbSecurityDenied.Checked = file.IsRestricted && string.IsNullOrEmpty(file.AssignedUsers) && string.IsNullOrEmpty(file.DeniedUsers);
+			_formLinkProperties.rbSecurityWhiteList.Checked = file.IsRestricted && !string.IsNullOrEmpty(file.AssignedUsers);
+			_formLinkProperties.rbSecurityBlackList.Checked = file.IsRestricted && !string.IsNullOrEmpty(file.DeniedUsers);
 			_formLinkProperties.rbSecurityForbidden.Checked = file.IsForbidden;
-			_formLinkProperties.memoEditSecurityUsers.EditValue = file.IsRestricted && !string.IsNullOrEmpty(file.AssignedUsers) ? file.AssignedUsers : (!string.IsNullOrEmpty(SettingsManager.Instance.DefaultLinkUsers) ? SettingsManager.Instance.DefaultLinkUsers : null);
+			_formLinkProperties.AssignedUsers = file.IsRestricted && !string.IsNullOrEmpty(file.AssignedUsers) ? file.AssignedUsers : null;
+			_formLinkProperties.DeniedUsers = file.IsRestricted && !string.IsNullOrEmpty(file.DeniedUsers) ? file.DeniedUsers : null;
 			_formLinkProperties.ckSecurityShareLink.Checked = !file.NoShare;
 
 			if (file.Type != FileTypes.LineBreak && file.Type != FileTypes.Network && file.Type != FileTypes.Url && file.Type != FileTypes.Excel && file.Type != FileTypes.MediaPlayerVideo && file.Type != FileTypes.QuickTimeVideo && file.Format != "key")
@@ -852,17 +854,18 @@ namespace FileManager.PresentationClasses.WallBin
 			file.EnableWidget = _formLinkProperties.EnableWidget;
 			file.BannerProperties = _formLinkProperties.BannerProperties;
 
-			file.IsRestricted = _formLinkProperties.rbSecurityDenied.Checked || _formLinkProperties.rbSecurityRestricted.Checked;
+			file.IsRestricted = _formLinkProperties.rbSecurityDenied.Checked || _formLinkProperties.rbSecurityWhiteList.Checked || _formLinkProperties.rbSecurityBlackList.Checked;
 			file.IsForbidden = _formLinkProperties.rbSecurityForbidden.Checked;
 			file.NoShare = !_formLinkProperties.ckSecurityShareLink.Checked;
-			if (_formLinkProperties.rbSecurityRestricted.Checked && _formLinkProperties.memoEditSecurityUsers.EditValue != null && !string.IsNullOrEmpty(_formLinkProperties.memoEditSecurityUsers.EditValue.ToString().Trim()))
-			{
-				file.AssignedUsers = _formLinkProperties.memoEditSecurityUsers.EditValue.ToString().Trim();
-				SettingsManager.Instance.DefaultLinkUsers = file.AssignedUsers;
-				SettingsManager.Instance.Save();
-			}
+			if (_formLinkProperties.rbSecurityWhiteList.Checked && !String.IsNullOrEmpty(_formLinkProperties.AssignedUsers))
+				file.AssignedUsers = _formLinkProperties.AssignedUsers;
 			else
 				file.AssignedUsers = null;
+			if (_formLinkProperties.rbSecurityBlackList.Checked && !String.IsNullOrEmpty(_formLinkProperties.DeniedUsers))
+				file.DeniedUsers = _formLinkProperties.DeniedUsers;
+			else
+				file.DeniedUsers = null;
+
 
 			if (file.Type != FileTypes.LineBreak)
 			{

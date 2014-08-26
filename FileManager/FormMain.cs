@@ -22,15 +22,6 @@ namespace FileManager
 			buttonEditIPadLocation.Enter += EditorEnter;
 			buttonEditIPadLocation.MouseUp += EditorMouseUp;
 			buttonEditIPadLocation.MouseDown += EditorMouseDown;
-			buttonEditIPadSite.Enter += EditorEnter;
-			buttonEditIPadSite.MouseUp += EditorMouseUp;
-			buttonEditIPadSite.MouseDown += EditorMouseDown;
-			buttonEditIPadLogin.Enter += EditorEnter;
-			buttonEditIPadLogin.MouseUp += EditorMouseUp;
-			buttonEditIPadLogin.MouseDown += EditorMouseDown;
-			buttonEditIPadPassword.Enter += EditorEnter;
-			buttonEditIPadPassword.MouseUp += EditorMouseUp;
-			buttonEditIPadPassword.MouseDown += EditorMouseDown;
 		}
 
 		public static FormMain Instance
@@ -49,8 +40,8 @@ namespace FileManager
 			ribbonTabItemCalendar.Enabled = ConfigurationClasses.SettingsManager.Instance.EnableOvernightsCalendarTab;
 			ribbonTabItemClipart.Enabled = ConfigurationClasses.SettingsManager.Instance.EnableClipartTab && (System.IO.Directory.Exists(ConfigurationClasses.SettingsManager.Instance.ClientLogosRootPath) || System.IO.Directory.Exists(ConfigurationClasses.SettingsManager.Instance.SalesGalleryRootPath) || System.IO.Directory.Exists(ConfigurationClasses.SettingsManager.Instance.WebArtRootPath));
 			ribbonTabItemProgramManager.Enabled = ConfigurationClasses.SettingsManager.Instance.EnableProgramManagerTab;
-			ribbonTabItemIPad.Enabled = ConfigurationClasses.SettingsManager.Instance.EnableIPadSettingsTab;
-			ribbonTabItemIPadUsers.Enabled = ConfigurationClasses.SettingsManager.Instance.EnableIPadUsersTab;
+			ribbonTabItemIPad.Enabled = ConfigurationClasses.SettingsManager.Instance.EnableIPadSettingsTab && ConfigurationClasses.SettingsManager.Instance.WebServiceConnected;
+			ribbonTabItemIPadUsers.Enabled = ConfigurationClasses.SettingsManager.Instance.EnableIPadUsersTab && ConfigurationClasses.SettingsManager.Instance.WebServiceConnected; ;
 			ribbonTabItemTags.Enabled = ConfigurationClasses.SettingsManager.Instance.EnableTagsTab;
 
 			MainController.Instance.InitializeControllers();

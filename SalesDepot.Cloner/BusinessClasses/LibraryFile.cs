@@ -25,6 +25,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		private bool _isRestricted;
 		private bool _noShare;
 		private string _assignedUsers;
+		private string _deniedUsers;
 		private bool _doNotGeneratePreview;
 		private bool _forcePreview;
 
@@ -433,6 +434,17 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			}
 		}
 
+		public string DeniedUsers
+		{
+			get { return _deniedUsers; }
+			set
+			{
+				if (_deniedUsers != value)
+					LastChanged = DateTime.Now;
+				_deniedUsers = value;
+			}
+		}
+
 		public bool DoNotGeneratePreview
 		{
 			get { return _doNotGeneratePreview; }
@@ -473,6 +485,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			file.IsRestricted = IsRestricted;
 			file.NoShare = NoShare;
 			file.AssignedUsers = AssignedUsers;
+			file.DeniedUsers = DeniedUsers;
 			file.DoNotGeneratePreview = DoNotGeneratePreview;
 			file.ForcePreview = ForcePreview;
 			file.SearchTags = SearchTags;
@@ -510,6 +523,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			result.AppendLine(@"<IsRestricted>" + IsRestricted + @"</IsRestricted>");
 			result.AppendLine(@"<NoShare>" + NoShare + @"</NoShare>");
 			result.AppendLine(@"<AssignedUsers>" + (AssignedUsers ?? string.Empty).Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</AssignedUsers>");
+			result.AppendLine(@"<DeniedUsers>" + (DeniedUsers ?? string.Empty).Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</DeniedUsers>");
 			result.AppendLine(@"<DoNotGeneratePreview>" + _doNotGeneratePreview + @"</DoNotGeneratePreview>");
 			result.AppendLine(@"<ForcePreview>" + _forcePreview + @"</ForcePreview>");
 			result.AppendLine(@"<LastChanged>" + (_lastChanged != DateTime.MinValue ? _lastChanged.ToString() : DateTime.Now.ToString()) + @"</LastChanged>");
@@ -628,6 +642,9 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 						break;
 					case "AssignedUsers":
 						_assignedUsers = childNode.InnerText;
+						break;
+					case "DeniedUsers":
+						_deniedUsers = childNode.InnerText;
 						break;
 					case "LastChanged":
 						if (DateTime.TryParse(childNode.InnerText, out tempDate))
@@ -835,6 +852,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			file.IsRestricted = IsRestricted;
 			file.NoShare = NoShare;
 			file.AssignedUsers = AssignedUsers;
+			file.DeniedUsers = DeniedUsers;
 			file.DoNotGeneratePreview = DoNotGeneratePreview;
 			file.SearchTags = SearchTags;
 			file.CustomKeywords = CustomKeywords;

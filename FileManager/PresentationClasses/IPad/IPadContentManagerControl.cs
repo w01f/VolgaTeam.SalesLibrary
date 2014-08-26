@@ -36,7 +36,7 @@ namespace FileManager.PresentationClasses.IPad
 
 		public void UpdateControlsState()
 		{
-			xtraTabControl.Enabled = ParentDecorator.Library.IPadManager.Enabled && !string.IsNullOrEmpty(ParentDecorator.Library.IPadManager.SyncDestinationPath) && !string.IsNullOrEmpty(ParentDecorator.Library.IPadManager.Website.Replace("http://", string.Empty)) && !string.IsNullOrEmpty(ParentDecorator.Library.IPadManager.Login) && !string.IsNullOrEmpty(ParentDecorator.Library.IPadManager.Password);
+			xtraTabControl.Enabled = ConfigurationClasses.SettingsManager.Instance.WebServiceConnected;
 		}
 
 		#region Video Tab
@@ -232,13 +232,13 @@ namespace FileManager.PresentationClasses.IPad
 		#region Site Tab
 		private void pbIE_Click(object sender, EventArgs e)
 		{
-			if (!string.IsNullOrEmpty(ParentDecorator.Library.IPadManager.Website))
+			if (ConfigurationClasses.SettingsManager.Instance.WebServiceConnected)
 			{
 				try
 				{
 					var process = new Process();
 					process.StartInfo.FileName = "iexplore.exe";
-					process.StartInfo.Arguments = ParentDecorator.Library.IPadManager.Website;
+					process.StartInfo.Arguments = ConfigurationClasses.SettingsManager.Instance.WebServiceSite;
 					process.Start();
 				}
 				catch
@@ -252,13 +252,13 @@ namespace FileManager.PresentationClasses.IPad
 
 		private void pbChrome_Click(object sender, EventArgs e)
 		{
-			if (!string.IsNullOrEmpty(ParentDecorator.Library.IPadManager.Website))
+			if (ConfigurationClasses.SettingsManager.Instance.WebServiceConnected)
 			{
 				try
 				{
 					var process = new Process();
 					process.StartInfo.FileName = "chrome.exe";
-					process.StartInfo.Arguments = ParentDecorator.Library.IPadManager.Website;
+					process.StartInfo.Arguments = ConfigurationClasses.SettingsManager.Instance.WebServiceSite;
 					process.Start();
 				}
 				catch
@@ -272,13 +272,13 @@ namespace FileManager.PresentationClasses.IPad
 
 		private void pbFirefox_Click(object sender, EventArgs e)
 		{
-			if (!string.IsNullOrEmpty(ParentDecorator.Library.IPadManager.Website))
+			if (ConfigurationClasses.SettingsManager.Instance.WebServiceConnected)
 			{
 				try
 				{
 					var process = new Process();
 					process.StartInfo.FileName = "firefox.exe";
-					process.StartInfo.Arguments = ParentDecorator.Library.IPadManager.Website;
+					process.StartInfo.Arguments = ConfigurationClasses.SettingsManager.Instance.WebServiceSite;
 					process.Start();
 				}
 				catch
@@ -292,13 +292,13 @@ namespace FileManager.PresentationClasses.IPad
 
 		private void pbSafari_Click(object sender, EventArgs e)
 		{
-			if (!string.IsNullOrEmpty(ParentDecorator.Library.IPadManager.Website))
+			if (ConfigurationClasses.SettingsManager.Instance.WebServiceConnected)
 			{
 				try
 				{
 					var process = new Process();
 					process.StartInfo.FileName = "safari.exe";
-					process.StartInfo.Arguments = ParentDecorator.Library.IPadManager.Website;
+					process.StartInfo.Arguments = ConfigurationClasses.SettingsManager.Instance.WebServiceSite;
 					process.Start();
 				}
 				catch
@@ -312,13 +312,13 @@ namespace FileManager.PresentationClasses.IPad
 
 		private void pbOpera_Click(object sender, EventArgs e)
 		{
-			if (!string.IsNullOrEmpty(ParentDecorator.Library.IPadManager.Website))
+			if (ConfigurationClasses.SettingsManager.Instance.WebServiceConnected)
 			{
 				try
 				{
 					var process = new Process();
 					process.StartInfo.FileName = "opera.exe";
-					process.StartInfo.Arguments = ParentDecorator.Library.IPadManager.Website;
+					process.StartInfo.Arguments = ConfigurationClasses.SettingsManager.Instance.WebServiceSite;
 					process.Start();
 				}
 				catch

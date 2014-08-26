@@ -52,46 +52,42 @@ namespace FileManager.ToolForms.WallBin
 			if (grIncorrectLinks.SelectedRows.Count > 0)
 			{
 				var file = grIncorrectLinks.SelectedRows[0].Tag as LibraryLink;
-				if (file != null)
+				if (file == null) return;
+				using (var form = new FormLinkProperties(file.Parent.Parent.Parent as Library))
 				{
-					using (var form = new FormLinkProperties())
-					{
-						form.CaptionName = file.PropertiesName;
-						form.Note = file.Note;
-						form.IsBold = file.IsBold;
-						form.EnableWidget = file.EnableWidget;
-						form.Widget = file.EnableWidget ? file.Widget : null;
-						form.BannerProperties = file.BannerProperties;
-						form.AddDate = file.AddDate;
-						form.ExpirationDateOptions = file.ExpirationDateOptions;
-						form.xtraTabPageNotes.PageVisible = false;
-						form.xtraTabPageSearchTags.PageVisible = false;
-						form.SearchTags = file.SearchTags;
-						form.Keywords.AddRange(file.CustomKeywords.Tags.Select(x => new StringDataSourceWrapper(x.Name)));
-						form.FileCard = file.FileCard;
-						form.FileCardImportantInfo.Clear();
-						form.FileCardImportantInfo.AddRange(file.FileCard.Notes.Select(x => new StringDataSourceWrapper(x)));
-						form.AttachmentProperties = file.AttachmentProperties;
-						form.StartPosition = FormStartPosition.CenterScreen;
+					form.CaptionName = file.PropertiesName;
+					form.Note = file.Note;
+					form.IsBold = file.IsBold;
+					form.EnableWidget = file.EnableWidget;
+					form.Widget = file.EnableWidget ? file.Widget : null;
+					form.BannerProperties = file.BannerProperties;
+					form.AddDate = file.AddDate;
+					form.ExpirationDateOptions = file.ExpirationDateOptions;
+					form.xtraTabPageNotes.PageVisible = false;
+					form.xtraTabPageSearchTags.PageVisible = false;
+					form.SearchTags = file.SearchTags;
+					form.Keywords.AddRange(file.CustomKeywords.Tags.Select(x => new StringDataSourceWrapper(x.Name)));
+					form.FileCard = file.FileCard;
+					form.FileCardImportantInfo.Clear();
+					form.FileCardImportantInfo.AddRange(file.FileCard.Notes.Select(x => new StringDataSourceWrapper(x)));
+					form.AttachmentProperties = file.AttachmentProperties;
+					form.StartPosition = FormStartPosition.CenterScreen;
 
-						if (form.ShowDialog() == DialogResult.OK)
-						{
-							file.LastChanged = DateTime.Now;
-							file.Widget = form.EnableWidget ? form.Widget : null;
-							file.EnableWidget = form.EnableWidget;
-							file.BannerProperties = form.BannerProperties;
-							file.Note = form.Note;
-							file.IsBold = form.IsBold;
-							file.SearchTags = form.SearchTags;
-							file.ExpirationDateOptions = form.ExpirationDateOptions;
-							file.FileCard = form.FileCard;
-							file.FileCard.Notes.Clear();
-							file.FileCard.Notes.AddRange(form.FileCardImportantInfo.Where(x => !string.IsNullOrEmpty(x.Value)).Select(x => x.Value));
-							file.AttachmentProperties = form.AttachmentProperties;
-							file.CustomKeywords.Tags.Clear();
-							file.CustomKeywords.Tags.AddRange(form.Keywords.Where(x => !string.IsNullOrEmpty(x.Value)).Select(x => new SearchTag(file.CustomKeywords.Name) { Name = x.Value }));
-						}
-					}
+					if (form.ShowDialog() != DialogResult.OK) return;
+					file.LastChanged = DateTime.Now;
+					file.Widget = form.EnableWidget ? form.Widget : null;
+					file.EnableWidget = form.EnableWidget;
+					file.BannerProperties = form.BannerProperties;
+					file.Note = form.Note;
+					file.IsBold = form.IsBold;
+					file.SearchTags = form.SearchTags;
+					file.ExpirationDateOptions = form.ExpirationDateOptions;
+					file.FileCard = form.FileCard;
+					file.FileCard.Notes.Clear();
+					file.FileCard.Notes.AddRange(form.FileCardImportantInfo.Where(x => !string.IsNullOrEmpty(x.Value)).Select(x => x.Value));
+					file.AttachmentProperties = form.AttachmentProperties;
+					file.CustomKeywords.Tags.Clear();
+					file.CustomKeywords.Tags.AddRange(form.Keywords.Where(x => !string.IsNullOrEmpty(x.Value)).Select(x => new SearchTag(file.CustomKeywords.Name) { Name = x.Value }));
 				}
 			}
 			else

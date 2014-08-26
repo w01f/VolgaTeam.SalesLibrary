@@ -2246,6 +2246,8 @@ namespace SalesDepot.Services.ContentManagmentService {
         
         private string assignedUsersField;
         
+        private string deniedUsersField;
+        
         private bool isDeadField;
         
         private bool isPreviewNotReadyField;
@@ -2579,6 +2581,16 @@ namespace SalesDepot.Services.ContentManagmentService {
             }
             set {
                 this.assignedUsersField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string deniedUsers {
+            get {
+                return this.deniedUsersField;
+            }
+            set {
+                this.deniedUsersField = value;
             }
         }
         

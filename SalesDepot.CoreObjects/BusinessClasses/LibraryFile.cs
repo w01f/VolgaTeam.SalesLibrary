@@ -35,6 +35,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		bool DoNotGeneratePreview { get; set; }
 		bool ForcePreview { get; set; }
 		string AssignedUsers { get; set; }
+		string DeniedUsers { get; set; }
 		Image Widget { get; set; }
 
 		LibraryFileSearchTags SearchTags { get; set; }

@@ -57,6 +57,8 @@ namespace SalesDepot.Services.IPadAdminService {
         
         private System.Threading.SendOrPostCallback getGroupsOperationCompleted;
         
+        private System.Threading.SendOrPostCallback getGroupsByLibraryOperationCompleted;
+        
         private System.Threading.SendOrPostCallback setPageOperationCompleted;
         
         private System.Threading.SendOrPostCallback getLibrariesOperationCompleted;
@@ -124,6 +126,9 @@ namespace SalesDepot.Services.IPadAdminService {
         
         /// <remarks/>
         public event getGroupsCompletedEventHandler getGroupsCompleted;
+        
+        /// <remarks/>
+        public event getGroupsByLibraryCompletedEventHandler getGroupsByLibraryCompleted;
         
         /// <remarks/>
         public event setPageCompletedEventHandler setPageCompleted;
@@ -395,6 +400,38 @@ namespace SalesDepot.Services.IPadAdminService {
             if ((this.getGroupsCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.getGroupsCompleted(this, new getGroupsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:AdminControllerwsdl#getGroupsByLibrary", RequestNamespace="urn:AdminControllerwsdl", ResponseNamespace="urn:AdminControllerwsdl")]
+        [return: System.Xml.Serialization.SoapElementAttribute("return")]
+        public GroupModel[] getGroupsByLibrary(string sessionKey, string libraryId) {
+            object[] results = this.Invoke("getGroupsByLibrary", new object[] {
+                        sessionKey,
+                        libraryId});
+            return ((GroupModel[])(results[0]));
+        }
+        
+        /// <remarks/>
+        public void getGroupsByLibraryAsync(string sessionKey, string libraryId) {
+            this.getGroupsByLibraryAsync(sessionKey, libraryId, null);
+        }
+        
+        /// <remarks/>
+        public void getGroupsByLibraryAsync(string sessionKey, string libraryId, object userState) {
+            if ((this.getGroupsByLibraryOperationCompleted == null)) {
+                this.getGroupsByLibraryOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetGroupsByLibraryOperationCompleted);
+            }
+            this.InvokeAsync("getGroupsByLibrary", new object[] {
+                        sessionKey,
+                        libraryId}, this.getGroupsByLibraryOperationCompleted, userState);
+        }
+        
+        private void OngetGroupsByLibraryOperationCompleted(object arg) {
+            if ((this.getGroupsByLibraryCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.getGroupsByLibraryCompleted(this, new getGroupsByLibraryCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -2505,6 +2542,8 @@ namespace SalesDepot.Services.IPadAdminService {
         
         private string assignedUsersField;
         
+        private string deniedUsersField;
+        
         private bool isDeadField;
         
         private bool isPreviewNotReadyField;
@@ -2842,6 +2881,16 @@ namespace SalesDepot.Services.IPadAdminService {
         }
         
         /// <remarks/>
+        public string deniedUsers {
+            get {
+                return this.deniedUsersField;
+            }
+            set {
+                this.deniedUsersField = value;
+            }
+        }
+        
+        /// <remarks/>
         public bool isDead {
             get {
                 return this.isDeadField;
@@ -2979,6 +3028,32 @@ namespace SalesDepot.Services.IPadAdminService {
         private object[] results;
         
         internal getGroupsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public GroupModel[] Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((GroupModel[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.18408")]
+    public delegate void getGroupsByLibraryCompletedEventHandler(object sender, getGroupsByLibraryCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.18408")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class getGroupsByLibraryCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal getGroupsByLibraryCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }

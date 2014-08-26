@@ -11,6 +11,7 @@ namespace OvernightsCalendarViewer.BusinessClasses
 	public class LibraryLink : ILibraryLink
 	{
 		private string _assignedUsers;
+		private string _deniedUsers;
 		private bool _isForbidden;
 		private bool _isRestricted;
 		private bool _noShare;
@@ -351,6 +352,17 @@ namespace OvernightsCalendarViewer.BusinessClasses
 			}
 		}
 
+		public string DeniedUsers
+		{
+			get { return _deniedUsers; }
+			set
+			{
+				if (_deniedUsers != value)
+					LastChanged = DateTime.Now;
+				_deniedUsers = value;
+			}
+		}
+
 		public bool DoNotGeneratePreview
 		{
 			get { return _doNotGeneratePreview; }
@@ -390,7 +402,6 @@ namespace OvernightsCalendarViewer.BusinessClasses
 			file.IsForbidden = IsForbidden;
 			file.IsRestricted = IsRestricted;
 			file.NoShare = NoShare;
-			file.AssignedUsers = AssignedUsers;
 			file.DoNotGeneratePreview = DoNotGeneratePreview;
 			file.ForcePreview = ForcePreview;
 			file.SearchTags = SearchTags;

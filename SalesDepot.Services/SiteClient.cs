@@ -283,6 +283,31 @@ namespace SalesDepot.Services
 			return groups.ToArray();
 		}
 
+		public GroupModel[] GetGroupsByLibrary(string libraryId, out string message)
+		{
+			message = string.Empty;
+			var groups = new List<GroupModel>();
+			AdminControllerService client = GetAdminClient();
+			if (client != null)
+			{
+				try
+				{
+					string sessionKey = client.getSessionKey(_login, _password);
+					if (!string.IsNullOrEmpty(sessionKey))
+						groups.AddRange(client.getGroupsByLibrary(sessionKey, libraryId) ?? new GroupModel[] { });
+					else
+						message = "Couldn't complete operation.\nLogin or password are not correct.";
+				}
+				catch (Exception ex)
+				{
+					message = string.Format("Couldn't complete operation.\n{0}.", ex.Message);
+				}
+			}
+			else
+				message = "Couldn't complete operation.\nServer is unavailable.";
+			return groups.ToArray();
+		}
+
 		public void SetGroup(string id, string name, UserModel[] users, LibraryPage[] pages, out string message)
 		{
 			message = string.Empty;

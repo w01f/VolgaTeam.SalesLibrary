@@ -32,12 +32,12 @@ namespace AutoSynchronizer.BusinessClasses
 				var syncDate = new DateTime(now.Year, now.Month, now.Day, sheduleRecord.Time.Hour, sheduleRecord.Time.Minute, 0);
 
 				while (!((syncDate.DayOfWeek == DayOfWeek.Monday & sheduleRecord.Monday) ||
-				         (syncDate.DayOfWeek == DayOfWeek.Tuesday & sheduleRecord.Tuesday) ||
-				         (syncDate.DayOfWeek == DayOfWeek.Wednesday & sheduleRecord.Wednesday) ||
-				         (syncDate.DayOfWeek == DayOfWeek.Thursday & sheduleRecord.Thursday) ||
-				         (syncDate.DayOfWeek == DayOfWeek.Friday & sheduleRecord.Friday) ||
-				         (syncDate.DayOfWeek == DayOfWeek.Saturday & sheduleRecord.Saturday) ||
-				         (syncDate.DayOfWeek == DayOfWeek.Sunday & sheduleRecord.Sunday)))
+						 (syncDate.DayOfWeek == DayOfWeek.Tuesday & sheduleRecord.Tuesday) ||
+						 (syncDate.DayOfWeek == DayOfWeek.Wednesday & sheduleRecord.Wednesday) ||
+						 (syncDate.DayOfWeek == DayOfWeek.Thursday & sheduleRecord.Thursday) ||
+						 (syncDate.DayOfWeek == DayOfWeek.Friday & sheduleRecord.Friday) ||
+						 (syncDate.DayOfWeek == DayOfWeek.Saturday & sheduleRecord.Saturday) ||
+						 (syncDate.DayOfWeek == DayOfWeek.Sunday & sheduleRecord.Sunday)))
 					syncDate = syncDate.AddDays(1);
 
 				if (syncDate < now)
@@ -83,7 +83,7 @@ namespace AutoSynchronizer.BusinessClasses
 						SynchronizeRegular();
 						FormHidden.Instance.Invoke((MethodInvoker)delegate { FormHidden.Instance.HideSyncProgressRegular(); });
 
-						if (Manager.Library.IPadManager.Enabled && ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive))
+						if (!String.IsNullOrEmpty(Manager.Library.IPadManager.SyncDestinationPath) && ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive))
 						{
 							FormHidden.Instance.Invoke((MethodInvoker)delegate { FormHidden.Instance.ShowSyncProgressIpad(); });
 							SynchronizeForIpad();
@@ -400,7 +400,7 @@ namespace AutoSynchronizer.BusinessClasses
 								sw.Close();
 							}
 						}
-						catch {}
+						catch { }
 					}
 				}
 				else
@@ -409,12 +409,12 @@ namespace AutoSynchronizer.BusinessClasses
 					Globals.ThreadAborted = true;
 				}
 			}
-			finally {}
+			finally { }
 		}
 
 		public void SynchronizeForIpad()
 		{
-			if (Manager.Library.IsConfigured && Manager.Library.IPadManager.Enabled && !string.IsNullOrEmpty(Manager.Library.IPadManager.SyncDestinationPath) && Directory.Exists(Manager.Library.IPadManager.SyncDestinationPath))
+			if (!String.IsNullOrEmpty(Manager.Library.IPadManager.SyncDestinationPath) && Directory.Exists(Manager.Library.IPadManager.SyncDestinationPath))
 			{
 				var filesWhiteList = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
 				var existedLibraryFolderNames = new List<string>();
@@ -666,7 +666,7 @@ namespace AutoSynchronizer.BusinessClasses
 							sw.Close();
 						}
 					}
-					catch {}
+					catch { }
 				}
 			}
 			else

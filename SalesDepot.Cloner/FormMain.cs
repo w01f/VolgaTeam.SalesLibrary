@@ -88,7 +88,7 @@ namespace SalesDepot.Cloner
 					destinationLibrary.SaveLight();
 					this.Invoke((MethodInvoker)HideSyncProgressSource);
 
-					if (destinationLibrary.IPadManager.Enabled && ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive))
+					if (!String.IsNullOrEmpty(destinationLibrary.IPadManager.SyncDestinationPath) && ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive))
 					{
 						this.Invoke((MethodInvoker)ShowSyncProgressIpad);
 						SynchronizeForIpad(destinationLibrary);
@@ -137,15 +137,15 @@ namespace SalesDepot.Cloner
 
 		private void SynchronizeForIpad(Library library)
 		{
-			if (library.IsConfigured && library.IPadManager.Enabled && !string.IsNullOrEmpty(library.IPadManager.SyncDestinationPath) && Directory.Exists(library.IPadManager.SyncDestinationPath))
+			if (!String.IsNullOrEmpty(library.IPadManager.SyncDestinationPath) && Directory.Exists(library.IPadManager.SyncDestinationPath))
 			{
-				HashSet<string> filesWhiteList = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-				List<string> existedLibraryFolderNames = new List<string>();
+				var filesWhiteList = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+				var existedLibraryFolderNames = new List<string>();
 
 				if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
 					library.PrepareForIPadSynchronize();
 
-				SyncManager syncManager = new SyncManager();
+				var syncManager = new SyncManager();
 				if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
 					library.PrepareForRegularSynchronize();
 

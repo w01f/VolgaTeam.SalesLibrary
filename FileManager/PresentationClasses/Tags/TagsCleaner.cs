@@ -20,6 +20,7 @@ namespace FileManager.PresentationClasses.Tags
 		private readonly Dictionary<Guid, bool> _securityRestrictedCopy = new Dictionary<Guid, bool>();
 		private readonly Dictionary<Guid, bool> _securityNoShareCopy = new Dictionary<Guid, bool>();
 		private readonly Dictionary<Guid, string> _securityAssignedUsersCopy = new Dictionary<Guid, string>();
+		private readonly Dictionary<Guid, string> _securityDeniedUsersCopy = new Dictionary<Guid, string>();
 
 		private bool _categoriesChanged;
 		private bool _superFiltersChanged;
@@ -65,6 +66,7 @@ namespace FileManager.PresentationClasses.Tags
 			_securityRestrictedCopy.Clear();
 			_securityNoShareCopy.Clear();
 			_securityAssignedUsersCopy.Clear();
+			_securityDeniedUsersCopy.Clear();
 			foreach (var link in MainController.Instance.ActiveDecorator.Library.Pages.SelectMany(p => p.Folders.SelectMany(folder => folder.Files)))
 			{
 				var categoryCopy = new SearchTags();
@@ -84,6 +86,7 @@ namespace FileManager.PresentationClasses.Tags
 				_securityRestrictedCopy.Add(link.Identifier, link.IsRestricted);
 				_securityNoShareCopy.Add(link.Identifier, link.NoShare);
 				_securityAssignedUsersCopy.Add(link.Identifier, link.AssignedUsers);
+				_securityDeniedUsersCopy.Add(link.Identifier, link.DeniedUsers);
 			}
 		}
 		public void ApplyData()
@@ -119,6 +122,7 @@ namespace FileManager.PresentationClasses.Tags
 					link.IsRestricted = _securityRestrictedCopy[link.Identifier];
 					link.NoShare = _securityNoShareCopy[link.Identifier];
 					link.AssignedUsers = _securityAssignedUsersCopy[link.Identifier];
+					link.DeniedUsers = _securityDeniedUsersCopy[link.Identifier];
 				}
 			}
 			UpdateData();

@@ -39,7 +39,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			#endregion
 
 			OvernightsCalendar = new OvernightsCalendar(this);
-			IPadManager = new IPadManager(this);
+			IPadManager = new IPadManager(this, SettingsManager.Instance.WebServiceSite, SettingsManager.Instance.WebServiceLogin, SettingsManager.Instance.WebServicePassword);
 
 			Init();
 		}
@@ -195,7 +195,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 					{
 						foreach (LibraryLink file in folder.Files)
 						{
-							if (file.IsForbidden || !(!file.IsRestricted || (file.IsRestricted && !string.IsNullOrEmpty(file.AssignedUsers))))
+							if (file.IsForbidden || !(!file.IsRestricted || (file.IsRestricted && (!string.IsNullOrEmpty(file.AssignedUsers) || !string.IsNullOrEmpty(file.DeniedUsers)))))
 								continue;
 							if (file is LibraryFolderLink)
 								alive = (file as LibraryFolderLink).IsPreviewContainerAlive(previewContainer);

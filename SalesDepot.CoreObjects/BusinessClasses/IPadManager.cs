@@ -26,42 +26,39 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 	public class IPadManager
 	{
 		private SiteClient _siteClient;
+		private readonly string _website;
+		private readonly string _login;
+		private readonly string _password;
+
+		public IPadManager(ILibrary parent, string website, string login, string password)
+		{
+			Parent = parent;
+			SyncDestinationPath = String.Empty;
+			_website = website;
+			_login = login;
+			_password = password;
+		}
 
 		public IPadManager(ILibrary parent)
 		{
 			Parent = parent;
-			SyncDestinationPath = string.Empty;
-			Website = string.Empty;
-			Login = string.Empty;
-			Password = string.Empty;
+			SyncDestinationPath = String.Empty;
 		}
 
 		public ILibrary Parent { get; private set; }
-		public bool Enabled { get; set; }
 		public string SyncDestinationPath { get; set; }
-		public string Website { get; set; }
-		public string Login { get; set; }
-		public string Password { get; set; }
 
 		public IPadManager Clone(ILibrary parent)
 		{
-			var ipadManager = new IPadManager(parent);
-			ipadManager.Enabled = Enabled;
+			var ipadManager = new IPadManager(parent, _website, _login, _password);
 			ipadManager.SyncDestinationPath = SyncDestinationPath;
-			ipadManager.Website = Website;
-			ipadManager.Login = Login;
-			ipadManager.Password = Password;
 			return ipadManager;
 		}
 
 		public string Serialize()
 		{
 			var result = new StringBuilder();
-			result.AppendLine(@"<Enabled>" + Enabled.ToString() + @"</Enabled>");
 			result.AppendLine(@"<SyncDestinationPath>" + SyncDestinationPath.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</SyncDestinationPath>");
-			result.AppendLine(@"<Website>" + Website.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</Website>");
-			result.AppendLine(@"<User>" + Login.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</User>");
-			result.AppendLine(@"<Password>" + Password.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</Password>");
 			return result.ToString();
 		}
 
@@ -72,25 +69,12 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			{
 				switch (childNode.Name)
 				{
-					case "Enabled":
-						if (bool.TryParse(childNode.InnerText, out tempBool))
-							Enabled = tempBool;
-						break;
 					case "SyncDestinationPath":
 						SyncDestinationPath = childNode.InnerText;
 						break;
-					case "Website":
-						Website = childNode.InnerText;
-						break;
-					case "User":
-						Login = childNode.InnerText;
-						break;
-					case "Password":
-						Password = childNode.InnerText;
-						break;
 				}
 			}
-			_siteClient = new SiteClient(Website, Login, Password);
+			_siteClient = new SiteClient(_website, _login, _password);
 		}
 
 		#region Content Manager
@@ -236,7 +220,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
 					#region Files
 					var links = new List<LibraryLink>();
-					foreach (var libraryFile in libraryFolder.Files.Where(x => x.Type != FileTypes.Network && !x.IsForbidden && (!x.IsRestricted || (x.IsRestricted && !(string.IsNullOrEmpty(x.AssignedUsers))))))
+					foreach (var libraryFile in libraryFolder.Files.Where(x => x.Type != FileTypes.Network && !x.IsForbidden && (!x.IsRestricted || (x.IsRestricted && (!string.IsNullOrEmpty(x.AssignedUsers) || !string.IsNullOrEmpty(x.DeniedUsers))))))
 					{
 						var link = new LibraryLink();
 						link.id = libraryFile.Identifier.ToString();
@@ -368,6 +352,8 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			destinationLink.noShare = topLevelFile.NoShare;
 			if (!string.IsNullOrEmpty(topLevelFile.AssignedUsers))
 				destinationLink.assignedUsers = topLevelFile.AssignedUsers;
+			if (!string.IsNullOrEmpty(topLevelFile.DeniedUsers))
+				destinationLink.deniedUsers = topLevelFile.DeniedUsers;
 			destinationLink.isDead = libraryFile.IsDead;
 			destinationLink.forcePreview = libraryFile.ForcePreview;
 			destinationLink.dateAdd = libraryFile.AddDate.ToString("MM/dd/yyyy hh:mm:ss tt");
@@ -586,6 +572,11 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		public GroupModel[] GetGroups(out string message)
 		{
 			return _siteClient.GetGroups(out message);
+		}
+
+		public GroupModel[] GetGroupsByLibrary(out string message)
+		{
+			return _siteClient.GetGroupsByLibrary(Parent.Identifier.ToString(), out message);
 		}
 
 		public void SetGroup(string id, string name, UserModel[] users, Services.IPadAdminService.LibraryPage[] pages, out string message)

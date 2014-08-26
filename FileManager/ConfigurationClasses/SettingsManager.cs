@@ -17,6 +17,7 @@ namespace FileManager.ConfigurationClasses
 		private readonly string _settingsFilePath = string.Empty;
 		private readonly string _dashboardSyncSettingsFilePath = string.Empty;
 		private readonly string _salesDepotSyncSettingsFilePath = string.Empty;
+		private readonly string _serviceConnectionSettingsFilePath = string.Empty;
 
 		private SettingsManager()
 		{
@@ -37,6 +38,8 @@ namespace FileManager.ConfigurationClasses
 			_dashboardSyncSettingsFilePath = string.Format(@"{0}\newlocaldirect.com\!Update_Settings\syncfile.xml", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
 
 			_salesDepotSyncSettingsFilePath = Path.Combine(ApplicationRootPath, "synclock.xml");
+
+			_serviceConnectionSettingsFilePath = Path.Combine(ApplicationRootPath, "credentials.xml");
 
 			LogRootPath = Path.Combine(settingsFolderPath, "Log");
 			if (!Directory.Exists(LogRootPath))
@@ -79,6 +82,7 @@ namespace FileManager.ConfigurationClasses
 
 			LoadCategoryRequestSettings();
 			LoadSalesDepotSyncSettings();
+			LoadServiceConnectionSettings();
 
 			HiddenObjects = new List<string>();
 			HiddenObjects.Add("!Old");
@@ -129,7 +133,6 @@ namespace FileManager.ConfigurationClasses
 		public bool TreeViewVisible { get; set; }
 		public bool TreeViewDocked { get; set; }
 		public bool MultitabView { get; set; }
-		public string DefaultLinkUsers { get; set; }
 		#endregion
 
 		#region Ribbon Settings
@@ -159,6 +162,16 @@ namespace FileManager.ConfigurationClasses
 		public bool SyncLockByInactiveLinks { get; private set; }
 		public bool SyncLockByUnconvertedVideo { get; private set; }
 		public string SyncSupportEmail { get; private set; }
+		#endregion
+
+		#region Service Connection Settings
+		public string WebServiceSite { get; private set; }
+		public string WebServiceLogin { get; private set; }
+		public string WebServicePassword { get; private set; }
+		public bool WebServiceConnected
+		{
+			get { return !String.IsNullOrEmpty(WebServiceSite) && !String.IsNullOrEmpty(WebServiceLogin) && !String.IsNullOrEmpty(WebServicePassword); }
+		}
 		#endregion
 
 		public void Load()
@@ -218,9 +231,6 @@ namespace FileManager.ConfigurationClasses
 				if (node != null)
 					if (bool.TryParse(node.InnerText, out tempBool))
 						MultitabView = tempBool;
-				node = document.SelectSingleNode(@"/LocalSettings/DefaultLinkUsers");
-				if (node != null)
-					DefaultLinkUsers = node.InnerText;
 				#endregion
 			}
 			LoadClipartPath();
@@ -246,7 +256,6 @@ namespace FileManager.ConfigurationClasses
 			xml.AppendLine(@"<TreeViewVisible>" + TreeViewVisible + @"</TreeViewVisible>");
 			xml.AppendLine(@"<TreeViewDocked>" + TreeViewDocked + @"</TreeViewDocked>");
 			xml.AppendLine(@"<MultitabView>" + MultitabView + @"</MultitabView>");
-			xml.AppendLine(@"<DefaultLinkUsers>" + (DefaultLinkUsers ?? string.Empty).Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</DefaultLinkUsers>");
 			#endregion
 
 			xml.AppendLine(@"</LocalSettings>");
@@ -360,6 +369,22 @@ namespace FileManager.ConfigurationClasses
 			node = document.SelectSingleNode(@"/synclock/email");
 			if (node != null)
 				SyncSupportEmail = node.InnerText;
+		}
+
+		private void LoadServiceConnectionSettings()
+		{
+			if (!File.Exists(_serviceConnectionSettingsFilePath)) return;
+			var document = new XmlDocument();
+			document.Load(_serviceConnectionSettingsFilePath);
+			var node = document.SelectSingleNode(@"/ipadsite/site");
+			if (node != null)
+				WebServiceSite = node.InnerText;
+			node = document.SelectSingleNode(@"/ipadsite/login");
+			if (node != null)
+				WebServiceLogin = node.InnerText;
+			node = document.SelectSingleNode(@"/ipadsite/password");
+			if (node != null)
+				WebServicePassword = node.InnerText;
 		}
 
 		public void SaveAutoSyncSettings(string settings)
