@@ -23,6 +23,7 @@
     <file url="file://$PROJECT_DIR$/protected/data/tables/tbl_link_category.sql" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/protected/data/tables/tbl_link_rate.sql" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/protected/data/tables/tbl_link_super_filter.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/protected/data/tables/tbl_link_white_list.sql" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/protected/data/tables/tbl_page.sql" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/protected/data/tables/tbl_preview.sql" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/protected/data/tables/tbl_qpage.sql" dialect="MySQL" />
@@ -41,9 +42,7 @@
     <file url="file://$PROJECT_DIR$/protected/data/tables/tbl_user.sql" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/protected/data/tables/tbl_user_group.sql" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/protected/data/tables/tbl_user_library.sql" dialect="MySQL" />
-    <file url="file://$PROJECT_DIR$/protected/data/tables/tbl_user_link.sql" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/protected/data/tables/tbl_user_link_cart.sql" dialect="MySQL" />
-    <file url="file://$PROJECT_DIR$/protected/data/tables/tbl_user_page_cache.sql" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/protected/data/tables/tbl_user_recipient.sql" dialect="MySQL" />
   </component>
 </project>

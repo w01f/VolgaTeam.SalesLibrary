@@ -19,7 +19,7 @@
                             else
                                 $isAdmin = true;
                         }
-                        $linksNumber = $folder->getRealLinksNumber($isAdmin,$userId);
+                        $linksNumber = $folder->getRealLinksNumber();
                         $linksCaption = '';
                         if ($linksNumber == 1)
                             $linksCaption = '(1 Link)';

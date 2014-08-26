@@ -208,7 +208,7 @@
 		public function setLinkOrder($linkInPageId, $order)
 		{
 			$this->rebuildLinkList($order);
-			/** @var $linkInPageRecord UserLinkRecord */
+			/** @var $linkInPageRecord QPageLinkRecord */
 			$linkInPageRecord = QPageLinkRecord::model()->findByPk($linkInPageId);
 			$linkInPageRecord->list_order = $order;
 			$linkInPageRecord->save();

@@ -99,8 +99,8 @@
 			LinkSuperFilterRecord::clearData($libraryId);
 			LinkCategoryRecord::clearData($libraryId);
 			ColumnRecord::clearData($libraryId);
-			UserLinkRecord::clearData($libraryId);
-			UserPageCacheRecord::clearData($libraryId);
+			LinkWhiteListRecord::clearData($libraryId);
+			LinkBlackListRecord::clearData($libraryId);
 			LibraryConfigRecord::clearData($libraryId);
 		}
 	}

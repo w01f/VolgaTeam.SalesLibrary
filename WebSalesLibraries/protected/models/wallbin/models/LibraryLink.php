@@ -172,6 +172,11 @@
 		 */
 		public $assignedUsers;
 		/**
+		 * @var string
+		 * @soap
+		 */
+		public $deniedUsers;
+		/**
 		 * @var boolean
 		 * @soap
 		 */
@@ -207,7 +212,7 @@
 		}
 
 		/**
-		 * @param $linkRecord
+		 * @param $linkRecord LinkRecord
 		 */
 		public function load($linkRecord)
 		{
@@ -230,6 +235,7 @@
 			$this->isPreviewNotReady = $linkRecord->is_preview_not_ready;
 			$this->forcePreview = $linkRecord->force_preview;
 			$this->noShare = $linkRecord->no_share;
+			$this->isRestricted = $linkRecord->is_restricted;
 			$this->originalFormat = $linkRecord->format;
 
 			$lineBreakRecord = LineBreakRecord::model()->findByPk($linkRecord->id_line_break);

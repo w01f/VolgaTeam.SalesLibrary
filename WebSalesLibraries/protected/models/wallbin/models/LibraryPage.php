@@ -135,98 +135,84 @@
 				usort($this->columns, "Column::columnComparer");
 		}
 
-		/**
-		 * @param $allLinks
-		 * @param $userId
-		 */
-		public function loadFolders($allLinks, $userId)
+		public function loadFolders()
 		{
 			if (isset($this->folders))
 				foreach ($this->folders as $folder)
-					$folder->loadFiles($allLinks, $userId);
+					$folder->loadFiles(false);
 		}
 
 		/**
-		 * @param $controller
+		 * @param $controller IsdController
 		 */
 		public function buildCache($controller)
 		{
-			$this->buildCacheForUser($controller, null, false);
-
-			$adminIds = UserRecord::getAdminUserIds();
-			if (isset($adminIds))
-				foreach ($adminIds as $userId)
-				{
-					UserPageCacheRecord::updateData($userId, $this->id, $this->libraryId);
-					$this->buildCacheForUser($controller, $userId, true);
-				}
-
-			$restrictedUserIds = UserLinkRecord::getRestrictedUsersIds($this->libraryId);
-			if (isset($restrictedUserIds))
-				foreach ($restrictedUserIds as $userId)
-				{
-					if (!isset($adminIds) || (isset($adminIds) && !in_array($userId, $adminIds)))
-					{
-						UserPageCacheRecord::updateData($userId, $this->id, $this->libraryId);
-						$this->buildCacheForUser($controller, $userId, false);
-					}
-				}
-		}
-
-		/**
-		 * @param $controller CController
-		 * @param $userId
-		 * @param $isAdmin
-		 * @return bool
-		 */
-		private function buildCacheForUser($controller, $userId, $isAdmin)
-		{
 			$this->loadData();
-			$this->loadFolders($isAdmin, $userId);
-
+			$this->loadFolders();
 			$path = Yii::getPathOfAlias('application.views.regular.wallbin') . '/columnsPage.php';
 			$content = $controller->renderFile($path, array('libraryPage' => $this), true);
-
-			if (isset($content))
+			if (isset($content) && $content != '')
 			{
-				if ($content != '')
+				/** @var $cacheRecord LibraryPageRecord */
+				$cacheRecord = LibraryPageRecord::model()->findByPk($this->id);
+				if (isset($cacheRecord))
 				{
-					if (isset($userId))
-					{
-						$cacheRecord = UserPageCacheRecord::getPageCache($userId, $this->id);
-					}
-					else
-					{
-						$cacheRecord = LibraryPageRecord::model()->findByPk($this->id);
-					}
-					if (isset($cacheRecord))
-					{
-						$cacheRecord->cached_col_view = $content;
-						$cacheRecord->save();
-						unset($content);
-						return true;
-					}
+					$cacheRecord->cached_col_view = $content;
+					$cacheRecord->save();
+					unset($content);
 				}
 			}
-			return false;
 		}
 
 		/**
-		 * @return mixed|null
+		 * @return string
 		 */
 		public function getCache()
 		{
+			$isAdmin = false;
+			$userId = null;
 			if (isset(Yii::app()->user))
 			{
 				$userId = Yii::app()->user->getId();
-				if (isset($userId))
-					$cacheRecord = UserPageCacheRecord::getPageCache($userId, $this->id);
+				if (isset(Yii::app()->user->role))
+					$isAdmin = Yii::app()->user->role == 2;
+				else
+					$isAdmin = true;
 			}
-			if (!isset($cacheRecord))
-				$cacheRecord = LibraryPageRecord::model()->findByPk($this->id);
-			if (isset($cacheRecord))
-				return $cacheRecord->cached_col_view;
-			return null;
+			/** @var  $cacheRecord LibraryPageRecord */
+			$cacheRecord = LibraryPageRecord::model()->findByPk($this->id);
+			$cachedPageContent = $cacheRecord->cached_col_view;
+			$cachedPage = phpQuery::newDocument($cachedPageContent);
+			$linkTags = $cachedPage['.link-container.restricted'];
+			if (!$isAdmin)
+			{
+				foreach ($linkTags as $linkTag)
+				{
+					$linkId = str_replace('link', '', pq($linkTag)->attr('id'));
+					$allowLink = false;
+					if (isset($userId))
+					{
+						$isWhiteListEnabled = count(LinkWhiteListRecord::getUserIds($linkId)) > 0;
+						if ($isWhiteListEnabled)
+						{
+							$availableLinkIds = LinkWhiteListRecord::getAvailableLinks($userId);
+							$allowLink = in_array($linkId, $availableLinkIds);
+						}
+						$isBlackListEnabled = count(LinkBlackListRecord::getUserIds($linkId)) > 0;
+						if ($isBlackListEnabled)
+						{
+							$availableLinkIds = LinkBlackListRecord::getDeniedLinks($userId);
+							$allowLink = !in_array($linkId, $availableLinkIds);
+						}
+					}
+					if ($allowLink)
+						pq($linkTag)->removeClass('restricted');
+				}
+			}
+			else
+				pq($linkTags)->removeClass('restricted');
+			$filteredContent = $cachedPage->htmlOuter();
+			return $filteredContent;
 		}
 
 		/**

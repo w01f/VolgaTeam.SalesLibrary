@@ -164,7 +164,10 @@
 						LinkCategoryRecord::updateData($category);
 
 			if (array_key_exists('assignedUsers', $link) && isset($link['assignedUsers']))
-				UserLinkRecord::updateData($link['id'], $link['libraryId'], $link['assignedUsers']);
+				LinkWhiteListRecord::updateData($link['id'], $link['libraryId'], $link['assignedUsers']);
+
+			if (array_key_exists('deniedUsers', $link) && isset($link['deniedUsers']))
+				LinkBlackListRecord::updateData($link['id'], $link['libraryId'], $link['deniedUsers']);
 
 			$linkRecord->save();
 		}
@@ -216,11 +219,11 @@
 			$baseLinksCondition = '1=1';
 			if (isset($baseLinks))
 			{
-				$linkIds = array();
+				$availableLinkIds = array();
 				foreach ($baseLinks as $baseLink)
-					$linkIds[] = $baseLink['id'];
-				if (count($linkIds) > 0)
-					$baseLinksCondition = "link.id in ('" . implode("','", $linkIds) . "')";
+					$availableLinkIds[] = $baseLink['id'];
+				if (count($availableLinkIds) > 0)
+					$baseLinksCondition = "link.id in ('" . implode("','", $availableLinkIds) . "')";
 			}
 			$links = Yii::app()->session[$datasetKey];
 			if (!isset($links))
@@ -361,11 +364,18 @@
 					$linkCondition = '1 = 1';
 				else if (isset($userId))
 				{
-					$linkIds = UserLinkRecord::getAvailableLinks($userId);
-					if (isset($linkIds))
-						$linkCondition = "link.is_restricted <> 1 or link.id in ('" . implode("', '", $linkIds) . "')";
-					else
-						$linkCondition = "link.is_restricted <> 1";
+					$restrictedLinkConditions = array();
+					$availableLinkIds = LinkWhiteListRecord::getAvailableLinks($userId);
+					if (count($availableLinkIds) > 0)
+						$restrictedLinkConditions[] = "link.id in ('" . implode("', '", $availableLinkIds) . "')";
+
+					$deniedLinkIds = LinkBlackListRecord::getDeniedLinks($userId);
+					if (count($deniedLinkIds) > 0)
+						$restrictedLinkConditions[] = "link.id not in ('" . implode("', '", $deniedLinkIds) . "')";
+
+					$linkCondition = "link.is_restricted <> 1";
+					if (count($restrictedLinkConditions) > 0)
+						$linkCondition = "link.is_restricted <> 1 or (" . implode(" and ", $restrictedLinkConditions) . ")";
 				}
 
 				$matchCondition = 'link.name,link.file_name,link.tags,link.content';
@@ -514,31 +524,11 @@
 
 		/**
 		 * @param $folderId
-		 * @param $allLinks
-		 * @param $userId
-		 * @return array|null
+		 * @return LinkRecord[]
 		 */
-		public static function getLinksByFolder($folderId, $allLinks, $userId)
+		public static function getLinksByFolder($folderId)
 		{
-			if ($allLinks)
-				$linkRecords = self::model()->findAll('id_folder=? and id_parent_link is null and is_dead=0 and is_preview_not_ready=0', array($folderId));
-			else
-			{
-				$linkRecords = self::model()->findAll('id_folder=? and is_restricted <> 1 and id_parent_link is null and is_dead=0 and is_preview_not_ready=0', array($folderId));
-				if (isset($userId))
-				{
-					$availableLinks = UserLinkRecord::getAvailableLinks($userId);
-					if (isset($availableLinks))
-					{
-						$restrictedLinkRecords = self::model()->findAll('id in ("' . implode('","', $availableLinks) . '")', array($folderId));
-						if (isset($restrictedLinkRecords))
-							$linkRecords = isset($linkRecords) ? array_merge($linkRecords, $restrictedLinkRecords) : $restrictedLinkRecords;
-					}
-				}
-			}
-			if (isset($linkRecords))
-				return $linkRecords;
-			return null;
+			return self::model()->findAll('id_folder=? and id_parent_link is null and is_dead=0 and is_preview_not_ready=0', array($folderId));
 		}
 
 		/**
@@ -554,10 +544,53 @@
 		}
 
 		/**
+		 * @param $libraryId
+		 * @return LinkRecord[]
+		 */
+		public static function getRestrictedLinks($libraryId)
+		{
+			return self::model()->findAll('id_library=? and is_restricted = 1', array($libraryId));
+		}
+
+		/**
+		 * @param $links LinkRecord[]
+		 * @return LinkRecord[]
+		 */
+		public static function applyPermissionsFilter($links)
+		{
+			$filteredLinks = array();
+			$isAdmin = false;
+			$userId = null;
+			if (isset(Yii::app()->user))
+			{
+				$userId = Yii::app()->user->getId();
+				if (isset(Yii::app()->user->role))
+					$isAdmin = Yii::app()->user->role == 2;
+				else
+					$isAdmin = true;
+			}
+			if (!$isAdmin && isset($userId))
+			{
+				foreach ($links as $link)
+				{
+					$availableLinkIds = LinkWhiteListRecord::getAvailableLinks($userId);
+					if (in_array($link->id, $availableLinkIds))
+						$filteredLinks[] = $link;
+					$deniedLinkIds = LinkBlackListRecord::getDeniedLinks($userId);
+					if (!in_array($link->id, $deniedLinkIds))
+						$filteredLinks[] = $link;
+				}
+				return $filteredLinks;
+			}
+			else
+				return $links;
+		}
+
+		/**
 		 * @param $linkId
 		 * @return int
 		 */
-		public static function EnumFolderContent($linkId)
+		public static function enumFolderContent($linkId)
 		{
 			$linksNumber = 0;
 			$childLinks = self::getLinksByParent($linkId);
@@ -568,7 +601,7 @@
 						case 6:
 							break;
 						case 5:
-							$linksNumber += self::EnumFolderContent($linkRecord->id);
+							$linksNumber += self::enumFolderContent($linkRecord->id);
 							break;
 						default:
 							$linksNumber++;

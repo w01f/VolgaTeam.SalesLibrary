@@ -15,6 +15,8 @@
 			$linkContainerClass = isset($link->originalFormat) && isset($link->availableFormats) ? 'link-container clickable' : 'link-container';
 		$tooltip = $link->tooltip;
 	}
+	if ($link->isRestricted)
+		$linkContainerClass .= ' restricted';
 ?>
 <div class="<? echo $linkContainerClass; ?>" id="link<? echo $link->id; ?>">
 	<? if (!(isset($disableBanner) && $disableBanner) && isset($link->banner) && $link->banner->isEnabled): ?>

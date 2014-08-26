@@ -320,6 +320,52 @@
 
 		/**
 		 * @param string $sessionKey
+		 * @param string $libraryId
+		 * @return GroupModel[]
+		 * @soap
+		 */
+		public function getGroupsByLibrary($sessionKey, $libraryId)
+		{
+			$groups = array();
+			if ($this->authenticateBySession($sessionKey))
+			{
+				foreach (GroupRecord::model()->findAll() as $groupRecord)
+				{
+					$group = new GroupModel();
+					$group->id = $groupRecord->id;
+					$group->name = $groupRecord->name;
+
+					$assignedUsers = UserGroupRecord::getUserIdsByGroup($groupRecord->id);
+					$totalUsers = UserRecord::model()->count('role<>2');
+					$group->allUsers = isset($assignedUsers) && $totalUsers == count($assignedUsers);
+					foreach ($assignedUsers as $userId)
+					{
+						/** @var $userRecord UserRecord */
+						$userRecord = UserRecord::model()->findByPk($userId);
+						if (isset($userRecord))
+						{
+							$user = new UserModel();
+							$user->id = $userRecord->id;
+							$user->login = $userRecord->login;
+							$user->firstName = $userRecord->first_name;
+							$user->lastName = $userRecord->last_name;
+							$user->email = $userRecord->email;
+							$group->users[] = $user;
+						}
+					}
+
+					$assignedLibraryIds = GroupLibraryRecord::getLibraryIdsByGroup($groupRecord->id);
+					if (in_array($libraryId, $assignedLibraryIds))
+						$groups[] = $group;
+				}
+			}
+
+			Yii::app()->cacheDB->flush();
+			return $groups;
+		}
+
+		/**
+		 * @param string $sessionKey
 		 * @param string $id
 		 * @param UserModel[] $assignedUsers
 		 * @param GroupModel[] $assignedGroups

@@ -8,6 +8,7 @@
 	 * @property mixed order
 	 * @property mixed has_columns
 	 * @property string date_modify
+	 * @property string cached_col_view
 	 */
 	class LibraryPageRecord extends CActiveRecord
 	{

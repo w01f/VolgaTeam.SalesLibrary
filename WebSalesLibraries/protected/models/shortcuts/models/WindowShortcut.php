@@ -42,7 +42,7 @@
 		}
 
 		/**
-		 * @return LibraryFolder|null
+		 * @return LibraryFolder
 		 */
 		public function getWindow()
 		{
@@ -65,17 +65,7 @@
 			$library = $libraryManager->getLibraryById($windowRecord->id_library);
 			$folder = new LibraryFolder(new LibraryPage($library));
 			$folder->load($windowRecord);
-			$isAdmin = false;
-			$userId = null;
-			if (isset(Yii::app()->user))
-			{
-				$userId = Yii::app()->user->getId();
-				if (isset(Yii::app()->user->role))
-					$isAdmin = Yii::app()->user->role == 2;
-				else
-					$isAdmin = true;
-			}
-			$folder->loadFiles($isAdmin, $userId);
+			$folder->loadFiles(true);
 			return $folder;
 		}
 	}

@@ -1,14 +1,13 @@
 <?php
 
 	/**
-	 * Class UserLinkRecord
+	 * Class LinkWhiteListRecord
 	 * @property mixed id
 	 * @property mixed id_user
-	 * @property mixed id_link
 	 * @property mixed id_library
-	 * @property int list_order
+	 * @property mixed id_link
 	 */
-	class UserLinkRecord extends CActiveRecord
+	class LinkWhiteListRecord extends CActiveRecord
 	{
 		/**
 		 * @param string $className
@@ -24,24 +23,24 @@
 		 */
 		public function tableName()
 		{
-			return '{{user_link}}';
+			return '{{link_white_list}}';
 		}
 
 		/**
 		 * @param $linkId
 		 * @param $libraryId
-		 * @param $assignedUsers
+		 * @param $users
 		 */
-		public static function updateData($linkId, $libraryId, $assignedUsers)
+		public static function updateData($linkId, $libraryId, $users)
 		{
-			$assignedUsers = explode(',', $assignedUsers);
-			foreach ($assignedUsers as $user)
+			$users = explode(',', $users);
+			foreach ($users as $user)
 			{
 				/** @var $userRecord UserRecord */
 				$userRecord = UserRecord::model()->find('LOWER(login)=?', array(strtolower(trim($user))));
 				if (isset($userRecord))
 				{
-					$userLinkRecord = new UserLinkRecord();
+					$userLinkRecord = new LinkWhiteListRecord();
 					$userLinkRecord->id = uniqid();
 					$userLinkRecord->id_user = $userRecord->id;
 					$userLinkRecord->id_link = $linkId;
@@ -53,24 +52,26 @@
 
 		/**
 		 * @param $userId
-		 * @return array|null
+		 * @return array
 		 */
 		public static function getAvailableLinks($userId)
 		{
+			$linkIds = array();
 			foreach (self::model()->findAll('id_user=?', array($userId)) as $userLink)
 				$linkIds[] = $userLink->id_link;
-			return isset($linkIds) ? $linkIds : null;
+			return $linkIds;
 		}
 
 		/**
-		 * @param $libraryId
-		 * @return array|null
+		 * @param $linkId
+		 * @return array
 		 */
-		public static function getRestrictedUsersIds($libraryId)
+		public static function getUserIds($linkId)
 		{
-			foreach (self::model()->findAll('id_library=?', array($libraryId)) as $userLink)
+			$userIds = array();
+			foreach (self::model()->findAll('id_link=?', array($linkId)) as $userLink)
 				$userIds[] = $userLink->id_user;
-			return isset($userIds) ? array_unique($userIds) : null;
+			return array_unique($userIds);
 		}
 
 		/**

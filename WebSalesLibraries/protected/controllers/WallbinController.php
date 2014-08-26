@@ -1,5 +1,5 @@
 <?php
-
+	Yii::import('application.extensions.phpQuery.phpQuery.phpQuery');
 	/**
 	 * Class WallbinController
 	 */
@@ -74,17 +74,7 @@
 				$folder = new LibraryFolder($page);
 				$folder->load($folderRecord);
 				$folder->displayLinkWidgets = true;
-				$isAdmin = false;
-				$userId = null;
-				if (isset(Yii::app()->user))
-				{
-					$userId = Yii::app()->user->getId();
-					if (isset(Yii::app()->user->role))
-						$isAdmin = Yii::app()->user->role == 2;
-					else
-						$isAdmin = true;
-				}
-				$folder->loadFiles($isAdmin, $userId);
+				$folder->loadFiles(true);
 				$this->renderPartial('folderLinks', array('folder' => $folder), false, true);
 			}
 		}

@@ -148,14 +148,16 @@
 			}
 		}
 
+
 		/**
-		 * @param $allLinks
-		 * @param $userId
+		 * @param $usePermissionsFilter boolean
 		 */
-		public function loadFiles($allLinks, $userId)
+		public function loadFiles($usePermissionsFilter)
 		{
 			unset($this->files);
-			$linkRecords = LinkRecord::getLinksByFolder($this->id, $allLinks, $userId);
+			$linkRecords = LinkRecord::getLinksByFolder($this->id);
+			if ($usePermissionsFilter)
+				$linkRecords = LinkRecord::applyPermissionsFilter($linkRecords);
 			if (isset($linkRecords))
 				foreach ($linkRecords as $linkRecord)
 				{
@@ -181,14 +183,13 @@
 		}
 
 		/**
-		 * @param $allLinks
-		 * @param $userId
 		 * @return int
 		 */
-		public function getRealLinksNumber($allLinks, $userId)
+		public function getRealLinksNumber()
 		{
 			$count = 0;
-			$linkRecords = LinkRecord::getLinksByFolder($this->id, $allLinks, $userId);
+			$linkRecords = LinkRecord::getLinksByFolder($this->id);
+			$linkRecords = LinkRecord::applyPermissionsFilter($linkRecords);
 			if (isset($linkRecords))
 				foreach ($linkRecords as $linkRecord)
 					switch ($linkRecord->type)
@@ -196,7 +197,7 @@
 						case 6:
 							break;
 						case 5:
-							$count += LinkRecord::EnumFolderContent($linkRecord->id);
+							$count += LinkRecord::enumFolderContent($linkRecord->id);
 							break;
 						default:
 							$count++;

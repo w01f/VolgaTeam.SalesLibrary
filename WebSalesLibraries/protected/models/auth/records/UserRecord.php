@@ -165,13 +165,14 @@
 		}
 
 		/**
-		 * @return array|null
+		 * @return array
 		 */
 		public static function getAdminUserIds()
 		{
+			$userIds = array();
 			foreach (self::model()->findAll('role=2') as $user)
 				$userIds[] = $user->id;
-			return isset($userIds) ? $userIds : null;
+			return $userIds;
 		}
 
 		/**
