@@ -57,12 +57,15 @@
 			$queryResult = $xpath->query('//SearchBar/SubSearchDefault');
 			$this->subSearchDefaultView = $queryResult->length > 0 ? strtolower(trim($queryResult->item(0)->nodeValue)) : 'all';
 
-			$this->subConditions = array();
-			$subSearchConditions = $xpath->query('//Config/SearchBar/SubSearchCondition/Item');
-			foreach ($subSearchConditions as $conditionNode)
-				$this->subConditions[] = new SubSearchTemplate($xpath, $conditionNode, Yii::app()->getBaseUrl(true) . $page->source_path);
-			foreach ($this->subConditions as $subSearchCondition)
+			$subSearchConditions = array();
+			$subSearchConditionNodes = $xpath->query('//Config/SearchBar/SubSearchCondition/Item');
+			foreach ($subSearchConditionNodes as $conditionNode)
+				$subSearchConditions[] = new SubSearchTemplate($xpath, $conditionNode, Yii::app()->getBaseUrl(true) . $page->source_path);
+			foreach ($subSearchConditions as $subSearchCondition)
 				$subSearchCondition->image_path .= '?' . $page->id;
+			$sortHelper = new ObjectSortHelper('imageName', 'asc');
+			usort($subSearchConditions, array($sortHelper, 'sort'));
+			$this->subConditions = $subSearchConditions;
 
 			$this->categoryManager = new CategoryManager();
 			$this->categoryManager->loadCategories();

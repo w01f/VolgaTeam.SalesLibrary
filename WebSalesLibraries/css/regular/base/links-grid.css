@@ -6,6 +6,7 @@
 .links-grid-body-container
 {
 	overflow-y: auto;
+	text-align: center;
 }
 
 .links-grid-header, .links-grid-body, .link-details

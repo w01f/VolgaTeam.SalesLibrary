@@ -620,6 +620,13 @@
 					searchResults.find('> div').html('').append(msg);
 
 					var resultsBar = content.find('.search-grid-info');
+					var linkIds = [];
+					$.each(content.find(".links-grid-body").find('.link-id-column'), function ()
+					{
+						linkIds.push($(this).html());
+					});
+					if (linkIds.length == 0)
+						content.find(".links-grid-body-container").html('<img src="' + window.BaseUrl + 'images/shortcuts/no_cats.png">');
 					if (hideResults)
 					{
 						var linksFoundTag = resultsBar.find('#search-links-info-count span');
@@ -630,11 +637,6 @@
 					else
 						resultsBar.off('click').on('click', function ()
 						{
-							var linkIds = [];
-							$.each(content.find(".links-grid-body").find('.link-id-column'), function ()
-							{
-								linkIds.push($(this).html());
-							});
 							if (linkIds.length > 0)
 								$.SalesPortal.SearchHelper.requestSearchResultDialog(linkIds);
 						});

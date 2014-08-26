@@ -66,11 +66,14 @@
 			$subSearchDefaultViewTags = $linkConfig->getElementsByTagName("SubSearchDefault");
 			$this->subSearchDefaultView = $subSearchDefaultViewTags->length > 0 ? strtolower(trim($subSearchDefaultViewTags->item(0)->nodeValue)) : 'all';
 
-			$this->subConditions = array();
-			$subSearchConditions = $xpath->query('//Config/SubSearchCondition/Item');
-			foreach ($subSearchConditions as $conditionNode)
-				$this->subConditions[] = new SubSearchTemplate($xpath, $conditionNode, $baseUrl . $linkRecord->source_path);
-			foreach ($this->subConditions as $subSearchCondition)
+			$subSearchConditions = array();
+			$subSearchConditionNodes = $xpath->query('//Config/SubSearchCondition/Item');
+			foreach ($subSearchConditionNodes as $conditionNode)
+				$subSearchConditions[] = new SubSearchTemplate($xpath, $conditionNode, $baseUrl . $linkRecord->source_path);
+			foreach ($subSearchConditions as $subSearchCondition)
 				$subSearchCondition->image_path .= '?' . $linkRecord->id;
+			$sortHelper = new ObjectSortHelper('imageName', 'asc');
+			usort($subSearchConditions, array($sortHelper, 'sort'));
+			$this->subConditions = $subSearchConditions;
 		}
 	}
