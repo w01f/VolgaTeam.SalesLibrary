@@ -335,6 +335,7 @@
 					$group->id = $groupRecord->id;
 					$group->name = $groupRecord->name;
 
+					$userList = array();
 					$assignedUsers = UserGroupRecord::getUserIdsByGroup($groupRecord->id);
 					$totalUsers = UserRecord::model()->count('role<>2');
 					$group->allUsers = isset($assignedUsers) && $totalUsers == count($assignedUsers);
@@ -350,9 +351,12 @@
 							$user->firstName = $userRecord->first_name;
 							$user->lastName = $userRecord->last_name;
 							$user->email = $userRecord->email;
-							$group->users[] = $user;
+							$userList[] = $user;
 						}
 					}
+					$sortHelper = new ObjectSortHelper('firstName','asc');
+					usort($userList, array($sortHelper, 'sort'));
+					$group->users = $userList;
 
 					$assignedLibraryIds = GroupLibraryRecord::getLibraryIdsByGroup($groupRecord->id);
 					if (in_array($libraryId, $assignedLibraryIds))
@@ -361,6 +365,8 @@
 			}
 
 			Yii::app()->cacheDB->flush();
+			$sortHelper = new ObjectSortHelper('name','asc');
+			usort($groups, array($sortHelper, 'sort'));
 			return $groups;
 		}
 

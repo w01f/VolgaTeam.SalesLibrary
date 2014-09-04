@@ -163,6 +163,8 @@
 				{
 					$link = new LibraryLink($this);
 					$link->load($linkRecord);
+					if ($usePermissionsFilter)
+						$link->isRestricted = false;
 					$this->files[] = $link;
 				}
 

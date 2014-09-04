@@ -57,7 +57,7 @@
 		public static function getDeniedLinks($userId)
 		{
 			$linkIds = array();
-			foreach (self::model()->findAll('id_user=?', $userId) as $userLink)
+			foreach (self::model()->findAll('id_user=?', array($userId)) as $userLink)
 				$linkIds[] = $userLink->id_link;
 			return $linkIds;
 		}
