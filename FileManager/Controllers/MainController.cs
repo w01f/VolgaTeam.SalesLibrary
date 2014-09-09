@@ -233,6 +233,7 @@ namespace FileManager.Controllers
 			WallbinController = new WallbinController();
 			_controllers.Add(TabPageEnum.Home, WallbinController);
 			_controllers.Add(TabPageEnum.Tags, WallbinController);
+			_controllers.Add(TabPageEnum.Security, WallbinController);
 			_controllers.Add(TabPageEnum.Preferences, WallbinController);
 			_controllers.Add(TabPageEnum.Settings, WallbinController);
 			_controllers.Add(TabPageEnum.ProgramManager, WallbinController);
@@ -308,6 +309,7 @@ namespace FileManager.Controllers
 		None,
 		Home,
 		Tags,
+		Security,
 		Preferences,
 		Settings,
 		Clipart,

@@ -174,7 +174,7 @@ namespace FileManager.PresentationClasses.IPad
 		private void repositoryItemButtonEditVideoFolder_ButtonClick(object sender, ButtonPressedEventArgs e)
 		{
 			if (gridViewVideo.FocusedRowHandle == GridControl.InvalidRowHandle) return;
-			VideoInfo videoInfo = _videoFiles[gridViewVideo.GetDataSourceRowIndex(gridViewVideo.FocusedRowHandle)];
+			var videoInfo = _videoFiles[gridViewVideo.GetDataSourceRowIndex(gridViewVideo.FocusedRowHandle)];
 			string folderPath = gridViewVideo.FocusedColumn == gridColumnVideoSourceFolder ? videoInfo.SourceFolderPath : videoInfo.IPadFolderPath;
 			if (Directory.Exists(folderPath))
 				Process.Start(folderPath);

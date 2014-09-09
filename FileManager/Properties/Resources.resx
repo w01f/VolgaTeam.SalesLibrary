@@ -130,14 +130,14 @@
   <data name="SyncSettings" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SyncSettings.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="DownArrow" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DownArrow.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Delete" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Delete.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="RefreshUsers" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\RefreshUsers.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="AutoWidgets" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\AutoWidgets.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ArrowLeft" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ArrowLeft.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -157,14 +157,14 @@
   <data name="Branding" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Branding.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="DownArrow" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\DownArrow.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="AddUser" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\AddUser.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Safari" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Safari.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="PlusButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PlusButton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DeleteUser" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DeleteUser.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="MinibarFontLarger" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\MinibarFontLarger.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -190,6 +190,9 @@
   <data name="ToolboxClose" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ToolboxClose.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Firefox" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Firefox.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="ArrowRight" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ArrowRight.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -205,8 +208,8 @@
   <data name="paths" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\paths.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="TabsView" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\TabsView.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="SecurityReset" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SecurityReset.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="TagsFileAttachmentsWidget" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\TagsFileAttachmentsWidget.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -214,17 +217,29 @@
   <data name="LinkProperties" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\LinkProperties.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="AutoSync" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AutoSync.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="EditUser" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\EditUser.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="NetworkShare" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\NetworkShare.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="SecuritySelect" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SecuritySelect.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="ClientLogos" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ClientLogos.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="TagsFileCards" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\TagsFileCards.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SecurityLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SecurityLogo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SecuritySelectMenu" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SecuritySelectMenu.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="InternetExplorer" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\InternetExplorer.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -247,6 +262,9 @@
   <data name="SyncIPad" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SyncIPad.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Safari" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Safari.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="FirefoxSmall" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\FirefoxSmall.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -262,14 +280,8 @@
   <data name="MinibarFontSmaller" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\MinibarFontSmaller.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="TagsKeywordsWidget" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\TagsKeywordsWidget.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="MediaPlayerSmall" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\MediaPlayerSmall.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="TagsSecurity" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\TagsSecurity.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="OpenVideoSmall" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\OpenVideoSmall.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -289,8 +301,8 @@
   <data name="TagsWebAttachmentsWidget" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\TagsWebAttachmentsWidget.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="DeleteUser" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\DeleteUser.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="TabsView" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TabsView.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Favorites" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Favorites.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -322,11 +334,11 @@
   <data name="ConvertVideo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ConvertVideo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Firefox" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Firefox.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="TagsKeywordsWidget" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TagsKeywordsWidget.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="AutoSync" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\AutoSync.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="AutoWidgets" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AutoWidgets.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="FormatFontSmaller" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\FormatFontSmaller.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -361,7 +373,7 @@
   <data name="EmptyImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\EmptyImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="PlusButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\PlusButton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="SecurityResetMenu" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SecurityResetMenu.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

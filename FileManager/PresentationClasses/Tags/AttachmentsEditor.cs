@@ -95,6 +95,8 @@ namespace FileManager.PresentationClasses.Tags
 			if (EditorChanged != null)
 				EditorChanged(this, new EventArgs());
 		}
+
+		public void ResetData() { }
 		#endregion
 
 		private void checkBoxEnableAttachments_CheckedChanged(object sender, EventArgs e)

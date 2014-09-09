@@ -1078,6 +1078,7 @@ namespace FileManager.ToolForms.WallBin
 		private void LoadSecurityGroups()
 		{
 			rbSecurityWhiteList.Enabled = false;
+			rbSecurityBlackList.Enabled = false;
 			pnSecurityUserListGrid.Visible = false;
 			gridControlSecurityUserList.DataSource = null;
 			_securityGroups.Clear();
@@ -1107,6 +1108,7 @@ namespace FileManager.ToolForms.WallBin
 						ApplyAssignedUsers();
 						ApplyDeniedUsers();
 						rbSecurityWhiteList.Enabled = true;
+						rbSecurityBlackList.Enabled = true;
 					}
 				});
 			});

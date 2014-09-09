@@ -665,6 +665,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\SecurityResetMenu.png" />
+    <None Include="Resources\SecuritySelectMenu.png" />
+    <None Include="Resources\SecurityReset.png" />
+    <None Include="Resources\SecuritySelect.png" />
+    <None Include="Resources\SecurityLogo.png" />
     <None Include="Resources\PlusButton.png" />
     <None Include="Resources\ArrowRight.png" />
     <None Include="Resources\ArrowLeft.png" />
@@ -683,7 +688,6 @@
     <None Include="Resources\ExtraRoots.png" />
     <None Include="Resources\ColumnsSort.png" />
     <None Include="Resources\TagsSecurityWidget.png" />
-    <None Include="Resources\TagsSecurity.png" />
     <None Include="Resources\TagsWebAttachmentsWidget.png" />
     <None Include="Resources\TagsKeywordsWidget.png" />
     <None Include="Resources\TagsFileCardsWidget.png" />

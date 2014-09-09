@@ -480,9 +480,18 @@ namespace FileManager.PresentationClasses.WallBin
 
 		private void laFolderName_MouseDown(object sender, MouseEventArgs e)
 		{
-			if (!WallBinOptions.AllowEdit) return;
-			_dragBox = new Rectangle(new Point(e.X - (SystemInformation.DragSize.Width / 2), e.Y - (SystemInformation.DragSize.Height / 2)),
-									 SystemInformation.DragSize);
+			switch (e.Button)
+			{
+				case MouseButtons.Left:
+					if (!WallBinOptions.AllowEdit) return;
+					_dragBox = new Rectangle(new Point(e.X - (SystemInformation.DragSize.Width / 2), e.Y - (SystemInformation.DragSize.Height / 2)),
+						SystemInformation.DragSize);
+					break;
+				case MouseButtons.Right:
+					if (WallBinOptions.ShowSecurityTags)
+						contextMenuStrip.Show(sender as Control, e.Location);
+					break;
+			}
 		}
 
 		private void laFolderName_MouseMove(object sender, MouseEventArgs e)
@@ -583,7 +592,7 @@ namespace FileManager.PresentationClasses.WallBin
 		{
 			var selectedLinks = (from DataGridViewRow row in grFiles.SelectedRows select row.Tag).OfType<LibraryLink>();
 			if (WallBinOptions.AllowMultiSelect)
-				Decorator.SelectLink(_folder.Identifier, selectedLinks.ToArray(), ModifierKeys);
+				Decorator.SelectLink(_folder.Identifier, selectedLinks, ModifierKeys);
 			if (WallBinOptions.AllowEdit)
 				UpdateButtonsStatus();
 			if (!WallBinOptions.AllowMultiSelect)
@@ -994,16 +1003,15 @@ namespace FileManager.PresentationClasses.WallBin
 			grFiles.DragOver += (s, eParameter) => eParameter.Effect = DragDropEffects.All;
 			Decorator.SelectionChanged += (sender, e) =>
 			{
-				if (grFiles.SelectedRows.Count > 0 && !e.SourceFolderId.Equals(_folder.Identifier))
+				if ((grFiles.SelectedRows.Count <= 0 || e.SourceFolderId.Equals(_folder.Identifier)) && !e.SourceFolderId.Equals(Guid.Empty)) return;
+				grFiles.SelectionChanged -= grFiles_SelectionChanged;
+				var rows = e.SourceFolderId.Equals(Guid.Empty) ? grFiles.Rows.OfType<DataGridViewRow>() : grFiles.SelectedRows.OfType<DataGridViewRow>();
+				foreach (var row in rows)
 				{
-					grFiles.SelectionChanged -= grFiles_SelectionChanged;
-					foreach (DataGridViewRow row in grFiles.SelectedRows)
-					{
-						var file = row.Tag as LibraryLink;
-						row.Selected = Decorator.IsLinkSelected(file);
-					}
-					grFiles.SelectionChanged += grFiles_SelectionChanged;
+					var file = row.Tag as LibraryLink;
+					row.Selected = Decorator.IsLinkSelected(file);
 				}
+				grFiles.SelectionChanged += grFiles_SelectionChanged;
 			};
 		}
 
@@ -1572,6 +1580,23 @@ namespace FileManager.PresentationClasses.WallBin
 				MainController.Instance.WallbinController.LineBreakButton = false;
 				MainController.Instance.WallbinController.AddLinkButton = false;
 			}
+		}
+		#endregion
+
+		#region Context Menu
+		private void toolStripMenuItemSelectAll_Click(object sender, EventArgs e)
+		{
+			grFiles.SelectAll();
+			var selectedLinks = (from DataGridViewRow row in grFiles.SelectedRows select row.Tag).OfType<LibraryLink>();
+			Decorator.SelectLink(_folder.Identifier, selectedLinks, Keys.None);
+		}
+
+		private void toolStripMenuItemResetAll_Click(object sender, EventArgs e)
+		{
+			grFiles.SelectAll();
+			var selectedLinks = (from DataGridViewRow row in grFiles.SelectedRows select row.Tag).OfType<LibraryLink>();
+			Decorator.SelectLink(_folder.Identifier, selectedLinks, Keys.None);
+			MainController.Instance.WallbinController.ResetLinksData();
 		}
 		#endregion
 	}

@@ -18,10 +18,12 @@ namespace FileManager.Controllers
 	public class IPadContentController : IPageController
 	{
 		private TabIPadContentControl _tabPage;
+		private bool _allowToSave = false;
 
 		public IPadContentController()
 		{
 			FormMain.Instance.buttonEditIPadLocation.ButtonClick += buttonEditIPadLocation_ButtonClick;
+			FormMain.Instance.buttonEditIPadLocation.EditValueChanged += buttonEditIPadLocation_EditValueChanged;
 			FormMain.Instance.buttonItemIPadVideoConvert.Click += buttonItemIPadVideo_Click;
 			FormMain.Instance.buttonItemIPadSyncFiles.Click += buttonItemIPadSyncFiles_Click;
 		}
@@ -29,6 +31,7 @@ namespace FileManager.Controllers
 		#region IPageController Members
 		public void InitController()
 		{
+			_allowToSave = false;
 			_tabPage = new TabIPadContentControl();
 			ApplyIPadManager();
 			if (!FormMain.Instance.pnMain.Controls.Contains(_tabPage))
@@ -36,6 +39,7 @@ namespace FileManager.Controllers
 
 			MainController.Instance.LibraryChanged += (sender, args) => ApplyIPadManager();
 			ShowVideoWarning();
+			_allowToSave = true;
 		}
 
 		public void PrepareTab(TabPageEnum tabPage) { }
@@ -48,12 +52,12 @@ namespace FileManager.Controllers
 
 		private void ApplyIPadManager()
 		{
-			LibraryDecorator activeDecorator = MainController.Instance.ActiveDecorator;
-			if (activeDecorator == null || !activeDecorator.Library.IsConfigured || !ConfigurationClasses.SettingsManager.Instance.EnableIPadSettingsTab) return;
+			var activeDecorator = MainController.Instance.ActiveDecorator;
+			if (activeDecorator == null || !activeDecorator.Library.IsConfigured || !SettingsManager.Instance.EnableIPadSettingsTab) return;
 
 			activeDecorator.IPadContentManager.UpdateVideoFiles();
 
-			FormMain.Instance.buttonEditIPadLocation.EditValue = !string.IsNullOrEmpty(activeDecorator.Library.IPadManager.SyncDestinationPath) ? activeDecorator.Library.IPadManager.SyncDestinationPath : null;
+			FormMain.Instance.buttonEditIPadLocation.EditValue = !String.IsNullOrEmpty(activeDecorator.Library.IPadManager.SyncDestinationPath) ? activeDecorator.Library.IPadManager.SyncDestinationPath : null;
 
 			UpdateControlsState();
 
@@ -85,12 +89,19 @@ namespace FileManager.Controllers
 			using (var dialog = new FolderBrowserDialog())
 			{
 				dialog.SelectedPath = MainController.Instance.ActiveDecorator.Library.IPadManager.SyncDestinationPath;
-				if (dialog.ShowDialog() == DialogResult.OK)
-				{
-					if (Directory.Exists(dialog.SelectedPath))
-						FormMain.Instance.buttonEditIPadLocation.EditValue = dialog.SelectedPath;
-				}
+				if (dialog.ShowDialog() != DialogResult.OK) return;
+				if (Directory.Exists(dialog.SelectedPath))
+					FormMain.Instance.buttonEditIPadLocation.EditValue = dialog.SelectedPath;
 			}
+		}
+
+		private void buttonEditIPadLocation_EditValueChanged(object sender, EventArgs e)
+		{
+			if (!_allowToSave) return;
+			var path = FormMain.Instance.buttonEditIPadLocation.EditValue as String;
+			if (String.IsNullOrEmpty(path) || !Directory.Exists(path)) return;
+			MainController.Instance.ActiveDecorator.Library.IPadManager.SyncDestinationPath = path;
+			MainController.Instance.ActiveDecorator.StateChanged = true;
 		}
 
 		private void buttonItemIPadSyncFiles_Click(object sender, EventArgs e)

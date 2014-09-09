@@ -32,7 +32,7 @@ namespace FileManager.Controllers
 		private FormExtraRoots _formExtraRoots;
 		private FormPages _formPages;
 		private FormSync _formSync;
-		private WallBinOptions _wallBinOptions = new WallBinOptions();
+		private readonly WallBinOptions _wallBinOptions = new WallBinOptions();
 
 		private bool _initialization;
 		private TabHomeControl _tabPage;
@@ -77,11 +77,13 @@ namespace FileManager.Controllers
 			FormMain.Instance.buttonItemTagsFileCards.CheckedChanged += ButtonItemTagsCheckedChanged;
 			FormMain.Instance.buttonItemTagsAttachments.Click += ButtonItemTagsClick;
 			FormMain.Instance.buttonItemTagsAttachments.CheckedChanged += ButtonItemTagsCheckedChanged;
-			FormMain.Instance.buttonItemTagsSecurity.Click += ButtonItemTagsClick;
-			FormMain.Instance.buttonItemTagsSecurity.CheckedChanged += ButtonItemTagsCheckedChanged;
 			FormMain.Instance.buttonItemTagsClear.Click += ButtonItemTagsClick;
 			FormMain.Instance.buttonItemTagsClear.CheckedChanged += ButtonItemTagsCheckedChanged;
 			FormMain.Instance.buttonItemTagsSave.Click += btTagsSave_Click;
+
+			FormMain.Instance.buttonItemSecuritySelect.Click += SecuritySelect_Click;
+			FormMain.Instance.buttonItemSecurityReset.Click += SecurityReset_Click;
+			FormMain.Instance.buttonItemSecuritySave.Click += SecuritySave_Click;
 		}
 
 		#region IPageController Members
@@ -151,7 +153,19 @@ namespace FileManager.Controllers
 					_wallBinOptions.ShowKeywordTags = SettingsManager.Instance.ShowTagsKeywords;
 					_wallBinOptions.ShowFileCardTags = SettingsManager.Instance.ShowTagsFileCards;
 					_wallBinOptions.ShowAttachmentTags = SettingsManager.Instance.ShowTagsAttachments;
-					_wallBinOptions.ShowSecurityTags = SettingsManager.Instance.ShowTagsSecurity;
+					_wallBinOptions.ShowSecurityTags = false;
+					break;
+				case TabPageEnum.Security:
+					_wallBinOptions.AllowEdit = false;
+					_wallBinOptions.AllowMultiSelect = true;
+					_wallBinOptions.ShowFiles = false;
+					_wallBinOptions.ShowTagsEditor = true;
+					_wallBinOptions.ShowCategoryTags = false;
+					_wallBinOptions.ShowSuperFilterTags = false;
+					_wallBinOptions.ShowKeywordTags = false;
+					_wallBinOptions.ShowFileCardTags = false;
+					_wallBinOptions.ShowAttachmentTags = false;
+					_wallBinOptions.ShowSecurityTags = true;
 					break;
 				default:
 					_tabPage.ActiveTagsEditor = null;
@@ -352,7 +366,6 @@ namespace FileManager.Controllers
 			FormMain.Instance.buttonItemTagsKeywords.Checked = SettingsManager.Instance.ShowTagsKeywords;
 			FormMain.Instance.buttonItemTagsFileCards.Checked = SettingsManager.Instance.ShowTagsFileCards;
 			FormMain.Instance.buttonItemTagsAttachments.Checked = SettingsManager.Instance.ShowTagsAttachments;
-			FormMain.Instance.buttonItemTagsSecurity.Checked = SettingsManager.Instance.ShowTagsSecurity;
 			FormMain.Instance.buttonItemTagsClear.Checked = SettingsManager.Instance.ShowTagsCleaner;
 		}
 
@@ -611,19 +624,17 @@ namespace FileManager.Controllers
 
 		private void BtExtraRootClick(object sender, EventArgs e)
 		{
-			if (MainController.Instance.ActiveDecorator != null)
+			if (MainController.Instance.ActiveDecorator == null) return;
+			if (MainController.Instance.SaveLibraryWarning())
 			{
-				if (MainController.Instance.SaveLibraryWarning())
+				if (_formExtraRoots == null) _formExtraRoots = new FormExtraRoots();
+				_formExtraRoots.Library = new Library(MainController.Instance.ActiveDecorator.Library.Name, MainController.Instance.ActiveDecorator.Library.Folder, MainController.Instance.ActiveDecorator.Library.UseDirectAccess, SettingsManager.Instance.DirectAccessFileAgeLimit);
+				if (_formExtraRoots.ShowDialog() == DialogResult.OK)
 				{
-					if (_formExtraRoots == null) _formExtraRoots = new FormExtraRoots();
-					_formExtraRoots.Library = new Library(MainController.Instance.ActiveDecorator.Library.Name, MainController.Instance.ActiveDecorator.Library.Folder, MainController.Instance.ActiveDecorator.Library.UseDirectAccess, SettingsManager.Instance.DirectAccessFileAgeLimit);
-					if (_formExtraRoots.ShowDialog() == DialogResult.OK)
-					{
-						int libraryIndex = LibraryManager.Instance.LibraryCollection.IndexOf(MainController.Instance.ActiveDecorator.Library);
-						LibraryManager.Instance.LibraryCollection.Remove(MainController.Instance.ActiveDecorator.Library);
-						LibraryManager.Instance.LibraryCollection.Insert(libraryIndex, _formExtraRoots.Library);
-						MainController.Instance.RequestUpdateLibrary(_formExtraRoots.Library);
-					}
+					int libraryIndex = LibraryManager.Instance.LibraryCollection.IndexOf(MainController.Instance.ActiveDecorator.Library);
+					LibraryManager.Instance.LibraryCollection.Remove(MainController.Instance.ActiveDecorator.Library);
+					LibraryManager.Instance.LibraryCollection.Insert(libraryIndex, _formExtraRoots.Library);
+					MainController.Instance.RequestUpdateLibrary(_formExtraRoots.Library);
 				}
 			}
 		}
@@ -644,75 +655,53 @@ namespace FileManager.Controllers
 
 		private void buttonItemSettingsPages_Click(object sender, EventArgs e)
 		{
-			if (MainController.Instance.ActiveDecorator != null)
-			{
-				if (MainController.Instance.SaveLibraryWarning())
-				{
-					if (_formPages == null) _formPages = new FormPages();
-					_formPages.Library = new Library(MainController.Instance.ActiveDecorator.Library.Name, MainController.Instance.ActiveDecorator.Library.Folder, MainController.Instance.ActiveDecorator.Library.UseDirectAccess, SettingsManager.Instance.DirectAccessFileAgeLimit);
-					if (_formPages.ShowDialog() == DialogResult.OK)
-					{
-						int libraryIndex = LibraryManager.Instance.LibraryCollection.IndexOf(MainController.Instance.ActiveDecorator.Library);
-						LibraryManager.Instance.LibraryCollection.Remove(MainController.Instance.ActiveDecorator.Library);
-						LibraryManager.Instance.LibraryCollection.Insert(libraryIndex, _formPages.Library);
-						MainController.Instance.RequestUpdateLibrary(_formPages.Library);
-					}
-				}
-			}
+			if (MainController.Instance.ActiveDecorator == null) return;
+			if (!MainController.Instance.SaveLibraryWarning()) return;
+			if (_formPages == null) _formPages = new FormPages();
+			_formPages.Library = new Library(MainController.Instance.ActiveDecorator.Library.Name, MainController.Instance.ActiveDecorator.Library.Folder, MainController.Instance.ActiveDecorator.Library.UseDirectAccess, SettingsManager.Instance.DirectAccessFileAgeLimit);
+			if (_formPages.ShowDialog() != DialogResult.OK) return;
+			var libraryIndex = LibraryManager.Instance.LibraryCollection.IndexOf(MainController.Instance.ActiveDecorator.Library);
+			LibraryManager.Instance.LibraryCollection.Remove(MainController.Instance.ActiveDecorator.Library);
+			LibraryManager.Instance.LibraryCollection.Insert(libraryIndex, _formPages.Library);
+			MainController.Instance.RequestUpdateLibrary(_formPages.Library);
 		}
 
 		private void buttonItemSettingsColumns_Click(object sender, EventArgs e)
 		{
-			if (MainController.Instance.ActiveDecorator != null)
-			{
-				if (MainController.Instance.SaveLibraryWarning())
-				{
-					if (_formColumns == null) _formColumns = new FormColumns();
-					_formColumns.Library = new Library(MainController.Instance.ActiveDecorator.Library.Name, MainController.Instance.ActiveDecorator.Library.Folder, MainController.Instance.ActiveDecorator.Library.UseDirectAccess, SettingsManager.Instance.DirectAccessFileAgeLimit);
-					if (_formColumns.ShowDialog() == DialogResult.OK)
-					{
-						int libraryIndex = LibraryManager.Instance.LibraryCollection.IndexOf(MainController.Instance.ActiveDecorator.Library);
-						LibraryManager.Instance.LibraryCollection.Remove(MainController.Instance.ActiveDecorator.Library);
-						LibraryManager.Instance.LibraryCollection.Insert(libraryIndex, _formColumns.Library);
-						MainController.Instance.RequestUpdateLibrary(_formColumns.Library);
-					}
-				}
-			}
+			if (MainController.Instance.ActiveDecorator == null) return;
+			if (!MainController.Instance.SaveLibraryWarning()) return;
+			if (_formColumns == null) _formColumns = new FormColumns();
+			_formColumns.Library = new Library(MainController.Instance.ActiveDecorator.Library.Name, MainController.Instance.ActiveDecorator.Library.Folder, MainController.Instance.ActiveDecorator.Library.UseDirectAccess, SettingsManager.Instance.DirectAccessFileAgeLimit);
+			if (_formColumns.ShowDialog() != DialogResult.OK) return;
+			var libraryIndex = LibraryManager.Instance.LibraryCollection.IndexOf(MainController.Instance.ActiveDecorator.Library);
+			LibraryManager.Instance.LibraryCollection.Remove(MainController.Instance.ActiveDecorator.Library);
+			LibraryManager.Instance.LibraryCollection.Insert(libraryIndex, _formColumns.Library);
+			MainController.Instance.RequestUpdateLibrary(_formColumns.Library);
 		}
 
 		private void buttonItemSettingsAutoWidgets_Click(object sender, EventArgs e)
 		{
-			if (MainController.Instance.ActiveDecorator != null)
-			{
-				if (MainController.Instance.SaveLibraryWarning())
-				{
-					if (_formAutoWidgets == null) _formAutoWidgets = new FormAutoWidgets();
-					_formAutoWidgets.Library = new Library(MainController.Instance.ActiveDecorator.Library.Name, MainController.Instance.ActiveDecorator.Library.Folder, MainController.Instance.ActiveDecorator.Library.UseDirectAccess, SettingsManager.Instance.DirectAccessFileAgeLimit);
-					if (_formAutoWidgets.ShowDialog() == DialogResult.OK)
-					{
-						int libraryIndex = LibraryManager.Instance.LibraryCollection.IndexOf(MainController.Instance.ActiveDecorator.Library);
-						LibraryManager.Instance.LibraryCollection.Remove(MainController.Instance.ActiveDecorator.Library);
-						LibraryManager.Instance.LibraryCollection.Insert(libraryIndex, _formAutoWidgets.Library);
-						MainController.Instance.RequestUpdateLibrary(_formAutoWidgets.Library);
-					}
-				}
-			}
+			if (MainController.Instance.ActiveDecorator == null) return;
+			if (!MainController.Instance.SaveLibraryWarning()) return;
+			if (_formAutoWidgets == null) _formAutoWidgets = new FormAutoWidgets();
+			_formAutoWidgets.Library = new Library(MainController.Instance.ActiveDecorator.Library.Name, MainController.Instance.ActiveDecorator.Library.Folder, MainController.Instance.ActiveDecorator.Library.UseDirectAccess, SettingsManager.Instance.DirectAccessFileAgeLimit);
+			if (_formAutoWidgets.ShowDialog() != DialogResult.OK) return;
+			var libraryIndex = LibraryManager.Instance.LibraryCollection.IndexOf(MainController.Instance.ActiveDecorator.Library);
+			LibraryManager.Instance.LibraryCollection.Remove(MainController.Instance.ActiveDecorator.Library);
+			LibraryManager.Instance.LibraryCollection.Insert(libraryIndex, _formAutoWidgets.Library);
+			MainController.Instance.RequestUpdateLibrary(_formAutoWidgets.Library);
 		}
 
 		private void buttonItemSettingsDeadLinks_Click(object sender, EventArgs e)
 		{
-			if (MainController.Instance.SaveLibraryWarning())
-			{
-				if (_formDeadLinks == null) _formDeadLinks = new FormDeadLinks();
-				_formDeadLinks.Library = new Library(MainController.Instance.ActiveDecorator.Library.Name, MainController.Instance.ActiveDecorator.Library.Folder, MainController.Instance.ActiveDecorator.Library.UseDirectAccess, SettingsManager.Instance.DirectAccessFileAgeLimit);
-				if (_formDeadLinks.ShowDialog() == DialogResult.OK)
-				{
-					int libraryIndex = LibraryManager.Instance.LibraryCollection.IndexOf(MainController.Instance.ActiveDecorator.Library);
-					LibraryManager.Instance.LibraryCollection.Remove(MainController.Instance.ActiveDecorator.Library);
-					LibraryManager.Instance.LibraryCollection.Insert(libraryIndex, _formDeadLinks.Library);
-					MainController.Instance.RequestUpdateLibrary(_formDeadLinks.Library);
-				}
-			}
+			if (!MainController.Instance.SaveLibraryWarning()) return;
+			if (_formDeadLinks == null) _formDeadLinks = new FormDeadLinks();
+			_formDeadLinks.Library = new Library(MainController.Instance.ActiveDecorator.Library.Name, MainController.Instance.ActiveDecorator.Library.Folder, MainController.Instance.ActiveDecorator.Library.UseDirectAccess, SettingsManager.Instance.DirectAccessFileAgeLimit);
+			if (_formDeadLinks.ShowDialog() != DialogResult.OK) return;
+			var libraryIndex = LibraryManager.Instance.LibraryCollection.IndexOf(MainController.Instance.ActiveDecorator.Library);
+			LibraryManager.Instance.LibraryCollection.Remove(MainController.Instance.ActiveDecorator.Library);
+			LibraryManager.Instance.LibraryCollection.Insert(libraryIndex, _formDeadLinks.Library);
+			MainController.Instance.RequestUpdateLibrary(_formDeadLinks.Library);
 		}
 
 		private void buttonItemSettingsEmailList_Click(object sender, EventArgs e)
@@ -731,12 +720,10 @@ namespace FileManager.Controllers
 
 		private void buttonItemSettingsMultitab_CheckedChanged(object sender, EventArgs e)
 		{
-			if (MainController.Instance.ActiveDecorator != null && !_initialization)
-			{
-				SettingsManager.Instance.MultitabView = _tabPage.barCheckItemTabs.Checked;
-				SettingsManager.Instance.Save();
-				MainController.Instance.RequestChangeLibrary();
-			}
+			if (MainController.Instance.ActiveDecorator == null || _initialization) return;
+			SettingsManager.Instance.MultitabView = _tabPage.barCheckItemTabs.Checked;
+			SettingsManager.Instance.Save();
+			MainController.Instance.RequestChangeLibrary();
 		}
 		#endregion
 
@@ -752,14 +739,13 @@ namespace FileManager.Controllers
 			SettingsManager.Instance.ShowTagsKeywords = FormMain.Instance.buttonItemTagsKeywords.Checked;
 			SettingsManager.Instance.ShowTagsFileCards = FormMain.Instance.buttonItemTagsFileCards.Checked;
 			SettingsManager.Instance.ShowTagsAttachments = FormMain.Instance.buttonItemTagsAttachments.Checked;
-			SettingsManager.Instance.ShowTagsSecurity = FormMain.Instance.buttonItemTagsSecurity.Checked;
 			SettingsManager.Instance.ShowTagsCleaner = FormMain.Instance.buttonItemTagsClear.Checked;
 			_wallBinOptions.ShowCategoryTags = SettingsManager.Instance.ShowTagsCategories;
 			_wallBinOptions.ShowSuperFilterTags = SettingsManager.Instance.ShowTagsSuperFilters;
 			_wallBinOptions.ShowKeywordTags = SettingsManager.Instance.ShowTagsKeywords;
 			_wallBinOptions.ShowFileCardTags = SettingsManager.Instance.ShowTagsFileCards;
 			_wallBinOptions.ShowAttachmentTags = SettingsManager.Instance.ShowTagsAttachments;
-			_wallBinOptions.ShowSecurityTags = SettingsManager.Instance.ShowTagsSecurity;
+			_wallBinOptions.ShowSecurityTags = false;
 			_tabPage.ApplyWallBinOptions(_wallBinOptions);
 			ApplyWallBinOptions();
 			_tabPage.SwitchTagsEditor();
@@ -784,12 +770,43 @@ namespace FileManager.Controllers
 			FormMain.Instance.buttonItemTagsKeywords.Checked = false;
 			FormMain.Instance.buttonItemTagsFileCards.Checked = false;
 			FormMain.Instance.buttonItemTagsAttachments.Checked = false;
-			FormMain.Instance.buttonItemTagsSecurity.Checked = false;
 			FormMain.Instance.buttonItemTagsClear.Checked = false;
 			button.Checked = true;
 		}
 
 		private void btTagsSave_Click(object sender, EventArgs e)
+		{
+			if (_tabPage.ActiveTagsEditor == null) return;
+			if (MainController.Instance.ActiveDecorator == null) return;
+			_tabPage.ActiveTagsEditor.ApplyData();
+			MainController.Instance.ActiveDecorator.Save();
+			AppManager.Instance.ShowInfo("All Links are saved!");
+		}
+		#endregion
+
+		#region Security
+		public void ResetLinksData()
+		{
+			_tabPage.ActiveTagsEditor.ResetData();
+		}
+
+		private void SecuritySelect_Click(object sender, EventArgs e)
+		{
+			if (MainController.Instance.ActiveDecorator == null) return;
+			if (MainController.Instance.ActiveDecorator.ActivePage == null) return;
+			MainController.Instance.ActiveDecorator.ActivePage.SelectAllLinks();
+		}
+
+		private void SecurityReset_Click(object sender, EventArgs e)
+		{
+			if (_tabPage.ActiveTagsEditor == null) return;
+			if (MainController.Instance.ActiveDecorator == null) return;
+			if (MainController.Instance.ActiveDecorator.ActivePage == null) return;
+			MainController.Instance.ActiveDecorator.ActivePage.SelectAllLinks();
+			ResetLinksData();
+		}
+
+		private void SecuritySave_Click(object sender, EventArgs e)
 		{
 			if (_tabPage.ActiveTagsEditor == null) return;
 			if (MainController.Instance.ActiveDecorator == null) return;

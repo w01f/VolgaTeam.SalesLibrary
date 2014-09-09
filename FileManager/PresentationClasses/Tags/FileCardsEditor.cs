@@ -188,9 +188,8 @@ namespace FileManager.PresentationClasses.Tags
 			if (EditorChanged != null)
 				EditorChanged(this, new EventArgs());
 		}
-		#endregion
 
-		private void buttonXReset_Click(object sender, EventArgs e)
+		public void ResetData()
 		{
 			var activePage = MainController.Instance.ActiveDecorator != null ? MainController.Instance.ActiveDecorator.ActivePage : null;
 			if (activePage == null) return;
@@ -215,7 +214,13 @@ namespace FileManager.PresentationClasses.Tags
 			if (EditorChanged != null)
 				EditorChanged(this, new EventArgs());
 
-			UpdateData();
+			UpdateData();			
+		}
+		#endregion
+
+		private void buttonXReset_Click(object sender, EventArgs e)
+		{
+			ResetData();
 		}
 
 		private void checkBoxEnableFileCard_CheckedChanged(object sender, EventArgs e)

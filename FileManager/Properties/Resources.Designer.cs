@@ -613,6 +613,56 @@ namespace FileManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap SecurityLogo {
+            get {
+                object obj = ResourceManager.GetObject("SecurityLogo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SecurityReset {
+            get {
+                object obj = ResourceManager.GetObject("SecurityReset", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SecurityResetMenu {
+            get {
+                object obj = ResourceManager.GetObject("SecurityResetMenu", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SecuritySelect {
+            get {
+                object obj = ResourceManager.GetObject("SecuritySelect", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SecuritySelectMenu {
+            get {
+                object obj = ResourceManager.GetObject("SecuritySelectMenu", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap settings {
             get {
                 object obj = ResourceManager.GetObject("settings", resourceCulture);
@@ -766,16 +816,6 @@ namespace FileManager.Properties {
         internal static System.Drawing.Bitmap TagsSave {
             get {
                 object obj = ResourceManager.GetObject("TagsSave", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap TagsSecurity {
-            get {
-                object obj = ResourceManager.GetObject("TagsSecurity", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -33,7 +33,7 @@ namespace FileManager
 				return _instance;
 			}
 		}
-
+		
 		#region GUI Event Handlers
 		private void Form_Load(object sender, EventArgs e)
 		{
@@ -43,6 +43,7 @@ namespace FileManager
 			ribbonTabItemIPad.Enabled = ConfigurationClasses.SettingsManager.Instance.EnableIPadSettingsTab && ConfigurationClasses.SettingsManager.Instance.WebServiceConnected;
 			ribbonTabItemIPadUsers.Enabled = ConfigurationClasses.SettingsManager.Instance.EnableIPadUsersTab && ConfigurationClasses.SettingsManager.Instance.WebServiceConnected; ;
 			ribbonTabItemTags.Enabled = ConfigurationClasses.SettingsManager.Instance.EnableTagsTab;
+			ribbonTabItemSecurity.Enabled = ConfigurationClasses.SettingsManager.Instance.EnableSecurityTab;
 
 			MainController.Instance.InitializeControllers();
 			MainController.Instance.LoadDataAndGUI();
@@ -67,6 +68,8 @@ namespace FileManager
 				key = TabPageEnum.Home;
 			if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemTags)
 				key = TabPageEnum.Tags;
+			if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemSecurity)
+				key = TabPageEnum.Security;
 			else if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemPreferences)
 				key = TabPageEnum.Preferences;
 			else if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemSettings)

@@ -40,7 +40,7 @@ namespace FileManager.PresentationClasses.Tags
 			}
 		}
 
-		public string DeniedUsers
+		private string DeniedUsers
 		{
 			get
 			{
@@ -106,6 +106,7 @@ namespace FileManager.PresentationClasses.Tags
 			rbSecurityAllowed.Checked = true;
 			ckSecurityShareLink.Checked = true;
 			AssignedUsers = null;
+			DeniedUsers = null;
 			Enabled = false;
 
 			var activePage = MainController.Instance.ActiveDecorator != null ? MainController.Instance.ActiveDecorator.ActivePage : null;
@@ -129,7 +130,7 @@ namespace FileManager.PresentationClasses.Tags
 				rbSecurityForbidden.Checked = defaultLink.IsForbidden;
 				ckSecurityShareLink.Checked = defaultLink.NoShare;
 				AssignedUsers = defaultLink.IsRestricted && !string.IsNullOrEmpty(defaultLink.AssignedUsers) ? defaultLink.AssignedUsers : null;
-				DeniedUsers = defaultLink.IsRestricted && !string.IsNullOrEmpty(defaultLink.AssignedUsers) ? defaultLink.AssignedUsers : null;
+				DeniedUsers = defaultLink.IsRestricted && !string.IsNullOrEmpty(defaultLink.DeniedUsers) ? defaultLink.DeniedUsers : null;
 			}
 
 			if (!_securityGroupsLoaded)
@@ -168,11 +169,32 @@ namespace FileManager.PresentationClasses.Tags
 			if (EditorChanged != null)
 				EditorChanged(this, new EventArgs());
 		}
+
+		public void ResetData()
+		{
+			var activePage = MainController.Instance.ActiveDecorator != null ? MainController.Instance.ActiveDecorator.ActivePage : null;
+			if (activePage == null) return;
+			if (AppManager.Instance.ShowWarningQuestion("Are you sure You want to DELETE ALL SECURITY SETTINGS for the selected files?") != DialogResult.Yes) return;
+			foreach (var link in activePage.SelectedLinks)
+			{
+				link.NoShare = false;
+				link.IsForbidden = false;
+				link.IsRestricted = false;
+				link.AssignedUsers = null;
+			}
+			activePage.Parent.StateChanged = true;
+			activePage.RefreshSelectedLinks();
+			if (EditorChanged != null)
+				EditorChanged(this, new EventArgs());
+
+			UpdateData();
+		}
 		#endregion
 
 		private void LoadSecurityGroups()
 		{
 			rbSecurityWhiteList.Enabled = false;
+			rbSecurityBlackList.Enabled = false;
 			pnSecurityUserListGrid.Visible = false;
 			gridControlSecurityUserList.DataSource = null;
 			_securityGroups.Clear();
@@ -204,6 +226,7 @@ namespace FileManager.PresentationClasses.Tags
 						ApplyAssignedUsers();
 						ApplyDeniedUsers();
 						rbSecurityWhiteList.Enabled = true;
+						rbSecurityBlackList.Enabled = true;
 					}
 				});
 				_securityGroupsLoaded = true;
@@ -242,27 +265,12 @@ namespace FileManager.PresentationClasses.Tags
 
 		private void buttonXReset_Click(object sender, EventArgs e)
 		{
-			var activePage = MainController.Instance.ActiveDecorator != null ? MainController.Instance.ActiveDecorator.ActivePage : null;
-			if (activePage == null) return;
-			if (AppManager.Instance.ShowWarningQuestion("Are you sure You want to DELETE ALL KEYWORD TAGS for the selected files?") != DialogResult.Yes) return;
-			foreach (var link in activePage.SelectedLinks)
-			{
-				link.NoShare = false;
-				link.IsForbidden = false;
-				link.IsRestricted = false;
-				link.AssignedUsers = null;
-			}
-			activePage.Parent.StateChanged = true;
-			activePage.RefreshSelectedLinks();
-			if (EditorChanged != null)
-				EditorChanged(this, new EventArgs());
-
-			UpdateData();
+			ResetData();
 		}
 
 		private void rbSecurityRestricted_CheckedChanged(object sender, EventArgs e)
 		{
-			pnSecurityUserListGrid.Enabled = rbSecurityWhiteList.Checked;
+			pnSecurityUserListGrid.Enabled = rbSecurityWhiteList.Checked || rbSecurityBlackList.Checked; ;
 			if (_loading) return;
 			NeedToApply = true;
 			if (!rbSecurityWhiteList.Checked)

@@ -76,6 +76,7 @@ namespace FileManager.ConfigurationClasses
 			EnableIPadSettingsTab = true;
 			EnableIPadUsersTab = true;
 			EnableTagsTab = true;
+			EnableSecurityTab = true;
 			ShowTagsCategories = true;
 			LoadRibbonSettings();
 			#endregion
@@ -142,12 +143,12 @@ namespace FileManager.ConfigurationClasses
 		public bool EnableIPadSettingsTab { get; private set; }
 		public bool EnableIPadUsersTab { get; private set; }
 		public bool EnableTagsTab { get; private set; }
+		public bool EnableSecurityTab { get; private set; }
 		public bool ShowTagsCategories { get; set; }
 		public bool ShowTagsSuperFilters { get; set; }
 		public bool ShowTagsKeywords { get; set; }
 		public bool ShowTagsFileCards { get; set; }
 		public bool ShowTagsAttachments { get; set; }
-		public bool ShowTagsSecurity { get; set; }
 		public bool ShowTagsCleaner { get; set; }
 		#endregion
 
@@ -303,6 +304,10 @@ namespace FileManager.ConfigurationClasses
 				if (node != null)
 					if (bool.TryParse(node.InnerText, out tempBool))
 						EnableTagsTab = tempBool;
+				node = document.SelectSingleNode(@"/ribbon/Security");
+				if (node != null)
+					if (bool.TryParse(node.InnerText, out tempBool))
+						EnableSecurityTab = tempBool;
 			}
 		}
 

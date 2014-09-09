@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
 			this.components = new System.ComponentModel.Container();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.ttCellInfo = new System.Windows.Forms.ToolTip(this.components);
 			this.pnGrid = new System.Windows.Forms.Panel();
 			this.grFiles = new System.Windows.Forms.DataGridView();
@@ -39,11 +39,15 @@
 			this.pnHeaderBorder = new System.Windows.Forms.Panel();
 			this.pnHeader = new System.Windows.Forms.Panel();
 			this.labelControlText = new DevExpress.XtraEditors.LabelControl();
+			this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.pbImage = new System.Windows.Forms.PictureBox();
+			this.toolStripMenuItemSelectAll = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItemResetAll = new System.Windows.Forms.ToolStripMenuItem();
 			this.pnGrid.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.grFiles)).BeginInit();
 			this.pnHeaderBorder.SuspendLayout();
 			this.pnHeader.SuspendLayout();
+			this.contextMenuStrip.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pbImage)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -78,20 +82,20 @@
 			this.grFiles.ColumnHeadersVisible = false;
 			this.grFiles.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colDisplayName});
-			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-			dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-			dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-			this.grFiles.DefaultCellStyle = dataGridViewCellStyle2;
+			dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+			dataGridViewCellStyle5.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+			dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+			this.grFiles.DefaultCellStyle = dataGridViewCellStyle5;
 			this.grFiles.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.grFiles.Location = new System.Drawing.Point(1, 40);
 			this.grFiles.Name = "grFiles";
 			this.grFiles.ReadOnly = true;
 			this.grFiles.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-			this.grFiles.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+			this.grFiles.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
 			this.grFiles.RowHeadersVisible = false;
 			this.grFiles.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
 			this.grFiles.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
@@ -116,8 +120,8 @@
 			// 
 			// colDisplayName
 			// 
-			dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.colDisplayName.DefaultCellStyle = dataGridViewCellStyle1;
+			dataGridViewCellStyle4.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.colDisplayName.DefaultCellStyle = dataGridViewCellStyle4;
 			this.colDisplayName.HeaderText = "Display Name and Note";
 			this.colDisplayName.Name = "colDisplayName";
 			this.colDisplayName.ReadOnly = true;
@@ -160,6 +164,15 @@
 			this.labelControlText.MouseDown += new System.Windows.Forms.MouseEventHandler(this.laFolderName_MouseDown);
 			this.labelControlText.MouseMove += new System.Windows.Forms.MouseEventHandler(this.laFolderName_MouseMove);
 			// 
+			// contextMenuStrip
+			// 
+			this.contextMenuStrip.ImageScalingSize = new System.Drawing.Size(24, 24);
+			this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItemSelectAll,
+            this.toolStripMenuItemResetAll});
+			this.contextMenuStrip.Name = "contextMenuStrip";
+			this.contextMenuStrip.Size = new System.Drawing.Size(241, 86);
+			// 
 			// pbImage
 			// 
 			this.pbImage.BackColor = System.Drawing.SystemColors.Control;
@@ -173,6 +186,22 @@
 			this.pbImage.MouseDown += new System.Windows.Forms.MouseEventHandler(this.laFolderName_MouseDown);
 			this.pbImage.MouseMove += new System.Windows.Forms.MouseEventHandler(this.laFolderName_MouseMove);
 			// 
+			// toolStripMenuItemSelectAll
+			// 
+			this.toolStripMenuItemSelectAll.Image = global::FileManager.Properties.Resources.SecuritySelectMenu;
+			this.toolStripMenuItemSelectAll.Name = "toolStripMenuItemSelectAll";
+			this.toolStripMenuItemSelectAll.Size = new System.Drawing.Size(240, 30);
+			this.toolStripMenuItemSelectAll.Text = "Select all Links in this Window";
+			this.toolStripMenuItemSelectAll.Click += new System.EventHandler(this.toolStripMenuItemSelectAll_Click);
+			// 
+			// toolStripMenuItemResetAll
+			// 
+			this.toolStripMenuItemResetAll.Image = global::FileManager.Properties.Resources.SecurityResetMenu;
+			this.toolStripMenuItemResetAll.Name = "toolStripMenuItemResetAll";
+			this.toolStripMenuItemResetAll.Size = new System.Drawing.Size(240, 30);
+			this.toolStripMenuItemResetAll.Text = "Reset all Links in this Window";
+			this.toolStripMenuItemResetAll.Click += new System.EventHandler(this.toolStripMenuItemResetAll_Click);
+			// 
 			// FolderBoxControl
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -183,6 +212,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.grFiles)).EndInit();
 			this.pnHeaderBorder.ResumeLayout(false);
 			this.pnHeader.ResumeLayout(false);
+			this.contextMenuStrip.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.pbImage)).EndInit();
 			this.ResumeLayout(false);
 
@@ -198,5 +228,8 @@
         private System.Windows.Forms.PictureBox pbImage;
         private System.Windows.Forms.Panel pnHeaderBorder;
         private DevExpress.XtraEditors.LabelControl labelControlText;
+		private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
+		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemSelectAll;
+		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemResetAll;
     }
 }

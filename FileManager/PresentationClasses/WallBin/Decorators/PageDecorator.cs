@@ -451,7 +451,7 @@ namespace FileManager.PresentationClasses.WallBin.Decorators
 			return SelectedLinks.Contains(link);
 		}
 
-		public void SelectLink(Guid folderId, LibraryLink[] links, Keys modifierKeys)
+		public void SelectLink(Guid folderId, IEnumerable<LibraryLink> links, Keys modifierKeys)
 		{
 			var ctrlSelect = (modifierKeys & Keys.Control) == Keys.Control;
 			SelectedLinks.RemoveAll(x => x.Parent.Identifier.Equals(folderId) || !ctrlSelect);
@@ -460,6 +460,11 @@ namespace FileManager.PresentationClasses.WallBin.Decorators
 			if (SelectionChanged != null)
 				SelectionChanged(this, new SelectionChangedEventArgs(folderId));
 			MainController.Instance.WallbinController.UpdateTagsEditor();
+		}
+
+		public void SelectAllLinks()
+		{
+			SelectLink(Guid.Empty, Page.Folders.SelectMany(f => f.Files).OfType<LibraryLink>(), Keys.None);
 		}
 
 		public void RefreshSelectedLinks()

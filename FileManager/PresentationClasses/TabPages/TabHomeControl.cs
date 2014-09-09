@@ -101,64 +101,62 @@ namespace FileManager.PresentationClasses.TabPages
 			barCheckItemTabs.Checked = SettingsManager.Instance.MultitabView;
 			FormMain.Instance.buttonItemHomeFileTreeView.Checked = SettingsManager.Instance.TreeViewVisible;
 			var activeLibrary = MainController.Instance.ActiveDecorator != null ? MainController.Instance.ActiveDecorator.Library : null;
-			if (activeLibrary != null)
+			if (activeLibrary == null) return;
+			if (!activeLibrary.UseDirectAccess)
 			{
-				if (!activeLibrary.UseDirectAccess)
-				{
-					btSetupWallBin.Visible = !activeLibrary.IsConfigured;
-					btSetupWallBin.BringToFront();
+				btSetupWallBin.Visible = !activeLibrary.IsConfigured;
+				btSetupWallBin.BringToFront();
 
-					FormMain.Instance.buttonItemHomeFileTreeView.Enabled = true;
-					FormMain.Instance.ribbonBarHomeAddLink.Enabled = true;
-					FormMain.Instance.buttonItemHomeDelete.Enabled = true;
-					FormMain.Instance.ribbonBarHomeFileTreeView.Enabled = true;
-					FormMain.Instance.ribbonBarHomeLibraries.Enabled = true;
-					barButtonItemLinkUp.Enabled = true;
-					barButtonItemLinkDown.Enabled = true;
-					FormMain.Instance.buttonItemHomeOpen.Enabled = true;
-					FormMain.Instance.buttonItemHomeProperties.Enabled = true;
-					FormMain.Instance.ribbonBarHomeSave.Enabled = true;
-					FormMain.Instance.ribbonBarPreferencesAutoWidgets.Enabled = true;
-					FormMain.Instance.ribbonBarSettingsBranding.Enabled = true;
-					FormMain.Instance.ribbonBarPreferencesColumns.Enabled = true;
-					FormMain.Instance.ribbonBarPreferencesDeadLinks.Enabled = true;
-					FormMain.Instance.ribbonBarPreferencesEmailList.Enabled = true;
-					FormMain.Instance.ribbonBarPreferencesPages.Enabled = true;
-					barButtonItemFontUp.Enabled = true;
-					barButtonItemFontDown.Enabled = true;
-					barCheckItemTabs.Enabled = true;
-					barMinibar.Visible = true;
-					ShowDockPanel(_wallBinOptions.ShowFiles && (SettingsManager.Instance.TreeViewVisible || activeLibrary.UseDirectAccess));
+				FormMain.Instance.buttonItemHomeFileTreeView.Enabled = true;
+				FormMain.Instance.ribbonBarHomeAddLink.Enabled = true;
+				FormMain.Instance.buttonItemHomeDelete.Enabled = true;
+				FormMain.Instance.ribbonBarHomeFileTreeView.Enabled = true;
+				FormMain.Instance.ribbonBarHomeLibraries.Enabled = true;
+				barButtonItemLinkUp.Enabled = true;
+				barButtonItemLinkDown.Enabled = true;
+				FormMain.Instance.buttonItemHomeOpen.Enabled = true;
+				FormMain.Instance.buttonItemHomeProperties.Enabled = true;
+				FormMain.Instance.ribbonBarHomeSave.Enabled = true;
+				FormMain.Instance.ribbonBarPreferencesAutoWidgets.Enabled = true;
+				FormMain.Instance.ribbonBarSettingsBranding.Enabled = true;
+				FormMain.Instance.ribbonBarPreferencesColumns.Enabled = true;
+				FormMain.Instance.ribbonBarPreferencesDeadLinks.Enabled = true;
+				FormMain.Instance.ribbonBarPreferencesEmailList.Enabled = true;
+				FormMain.Instance.ribbonBarPreferencesPages.Enabled = true;
+				barButtonItemFontUp.Enabled = true;
+				barButtonItemFontDown.Enabled = true;
+				barCheckItemTabs.Enabled = true;
+				barMinibar.Visible = true;
+				ShowDockPanel(_wallBinOptions.ShowFiles && (SettingsManager.Instance.TreeViewVisible || activeLibrary.UseDirectAccess));
 
-					UpdateFontButtonStatus();
-				}
-				else
-				{
-					btSetupWallBin.Visible = false;
-					FormMain.Instance.buttonItemHomeFileTreeView.Enabled = false;
-					FormMain.Instance.ribbonBarHomeAddLink.Enabled = false;
-					FormMain.Instance.buttonItemHomeDelete.Enabled = false;
-					FormMain.Instance.ribbonBarHomeFileTreeView.Enabled = false;
-					FormMain.Instance.ribbonBarHomeLibraries.Enabled = false;
-					barButtonItemLinkUp.Enabled = false;
-					barButtonItemLinkDown.Enabled = false;
-					FormMain.Instance.buttonItemHomeOpen.Enabled = false;
-					FormMain.Instance.buttonItemHomeProperties.Enabled = false;
-					FormMain.Instance.ribbonBarHomeSave.Enabled = false;
-					FormMain.Instance.ribbonBarPreferencesAutoWidgets.Enabled = false;
-					FormMain.Instance.ribbonBarSettingsBranding.Enabled = false;
-					FormMain.Instance.ribbonBarPreferencesColumns.Enabled = false;
-					FormMain.Instance.ribbonBarPreferencesDeadLinks.Enabled = false;
-					FormMain.Instance.ribbonBarPreferencesEmailList.Enabled = false;
-					FormMain.Instance.ribbonBarPreferencesPages.Enabled = false;
-					ShowDockPanel(false);
-					barButtonItemFontUp.Enabled = false;
-					barButtonItemFontDown.Enabled = false;
-					barCheckItemTabs.Enabled = false;
-					barMinibar.Visible = false;
-				}
-				MainController.Instance.WallbinController.ResizeActivePage();
+				UpdateFontButtonStatus();
 			}
+			else
+			{
+				btSetupWallBin.Visible = false;
+				FormMain.Instance.buttonItemHomeFileTreeView.Enabled = false;
+				FormMain.Instance.ribbonBarHomeAddLink.Enabled = false;
+				FormMain.Instance.buttonItemHomeDelete.Enabled = false;
+				FormMain.Instance.ribbonBarHomeFileTreeView.Enabled = false;
+				FormMain.Instance.ribbonBarHomeLibraries.Enabled = false;
+				barButtonItemLinkUp.Enabled = false;
+				barButtonItemLinkDown.Enabled = false;
+				FormMain.Instance.buttonItemHomeOpen.Enabled = false;
+				FormMain.Instance.buttonItemHomeProperties.Enabled = false;
+				FormMain.Instance.ribbonBarHomeSave.Enabled = false;
+				FormMain.Instance.ribbonBarPreferencesAutoWidgets.Enabled = false;
+				FormMain.Instance.ribbonBarSettingsBranding.Enabled = false;
+				FormMain.Instance.ribbonBarPreferencesColumns.Enabled = false;
+				FormMain.Instance.ribbonBarPreferencesDeadLinks.Enabled = false;
+				FormMain.Instance.ribbonBarPreferencesEmailList.Enabled = false;
+				FormMain.Instance.ribbonBarPreferencesPages.Enabled = false;
+				ShowDockPanel(false);
+				barButtonItemFontUp.Enabled = false;
+				barButtonItemFontDown.Enabled = false;
+				barCheckItemTabs.Enabled = false;
+				barMinibar.Visible = false;
+			}
+			MainController.Instance.WallbinController.ResizeActivePage();
 		}
 
 		public void UpdateFontButtonStatus()
@@ -280,19 +278,19 @@ namespace FileManager.PresentationClasses.TabPages
 
 		public void SwitchTagsEditor()
 		{
-			if (SettingsManager.Instance.ShowTagsCategories)
+			if (_wallBinOptions.ShowCategoryTags)
 				ActiveTagsEditor = _categoriesEditor;
-			else if (SettingsManager.Instance.ShowTagsSuperFilters)
+			else if (_wallBinOptions.ShowSuperFilterTags)
 				ActiveTagsEditor = _superFiltersEditor;
-			else if (SettingsManager.Instance.ShowTagsKeywords)
+			else if (_wallBinOptions.ShowKeywordTags)
 				ActiveTagsEditor = _keywordsEditor;
-			else if (SettingsManager.Instance.ShowTagsFileCards)
+			else if (_wallBinOptions.ShowFileCardTags)
 				ActiveTagsEditor = _fileCardsEditor;
-			else if (SettingsManager.Instance.ShowTagsAttachments)
+			else if (_wallBinOptions.ShowAttachmentTags)
 				ActiveTagsEditor = _attachmentsEditor;
-			else if (SettingsManager.Instance.ShowTagsSecurity)
+			else if (_wallBinOptions.ShowSecurityTags)
 				ActiveTagsEditor = _securityEditor;
-			else if (SettingsManager.Instance.ShowTagsCleaner)
+			else if (_wallBinOptions.ShowTagsEditor)
 				ActiveTagsEditor = _tagsCleaner;
 			else
 				ActiveTagsEditor = null;
@@ -315,7 +313,7 @@ namespace FileManager.PresentationClasses.TabPages
 
 		public void UpdateTagCountInfo(string infoString, Color color = default(Color))
 		{
-			if(String.IsNullOrEmpty(infoString))
+			if (String.IsNullOrEmpty(infoString))
 				labelControlTagCountInfo.Visible = false;
 			else
 			{

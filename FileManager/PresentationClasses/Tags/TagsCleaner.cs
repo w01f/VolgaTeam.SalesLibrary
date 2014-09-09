@@ -131,6 +131,8 @@ namespace FileManager.PresentationClasses.Tags
 				EditorChanged(this, new EventArgs());
 			MainController.Instance.WallbinController.UpdateTagCountInfo();
 		}
+
+		public void ResetData() {}
 		#endregion
 
 		private void ClearCategories(bool allPages)
