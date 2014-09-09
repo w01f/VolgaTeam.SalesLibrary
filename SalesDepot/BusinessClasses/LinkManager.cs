@@ -731,7 +731,7 @@ namespace SalesDepot.BusinessClasses
 					{
 						form.TopMost = true;
 						bool result = false;
-						var thread = new Thread(delegate() { result = PowerPointHelper.Instance.InsertVideoIntoActivePresentation(link.LocalPath, 100, 100, 400, 400); });
+						var thread = new Thread(delegate() { result = PowerPointHelper.Instance.InsertVideoIntoActivePresentation(link.LocalPath); });
 						thread.Start();
 						form.Show();
 						while (thread.IsAlive)

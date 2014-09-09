@@ -5,13 +5,12 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using Microsoft.Office.Core;
 using Microsoft.Office.Interop.PowerPoint;
-using SalesDepot.ConfigurationClasses;
 using SalesDepot.CoreObjects.InteropClasses;
 using Application = Microsoft.Office.Interop.PowerPoint.Application;
 using PrintRange = System.Drawing.Printing.PrintRange;
 using Shape = Microsoft.Office.Interop.PowerPoint.Shape;
 
-namespace SalesDepot.InteropClasses
+namespace OutlookSalesDepotAddIn.BusinessClasses
 {
 	public class PowerPointHelper
 	{
@@ -22,15 +21,12 @@ namespace SalesDepot.InteropClasses
 
 		private bool _isOpened;
 		private Application _powerPointObject;
-		private int _powerPointProcessId;
 		private Presentation _slideSourcePresentationObject;
 
 		private PowerPointHelper()
 		{
 			GetVersion();
 		}
-
-		public bool Is2003 { get; private set; }
 
 		public static PowerPointHelper Instance
 		{
@@ -110,9 +106,7 @@ namespace SalesDepot.InteropClasses
 			{
 				var appVersion = new Microsoft.Office.Interop.Word.Application();
 				appVersion.Visible = false;
-				Is2003 = appVersion.Version.Equals("11.0");
 				(appVersion).Quit();
-				appVersion = null;
 			}
 			catch { }
 		}
@@ -138,11 +132,7 @@ namespace SalesDepot.InteropClasses
 				}
 				uint lpdwProcessId = 0;
 				WinAPIHelper.GetWindowThreadProcessId(new IntPtr(_powerPointObject.HWND), out lpdwProcessId);
-				_powerPointProcessId = (int)lpdwProcessId;
-
 				_powerPointObject.DisplayAlerts = PpAlertLevel.ppAlertsNone;
-
-				SettingsManager.Instance.EnablePdfConverting = !Is2003;
 				_isOpened = true;
 				result = true;
 			}
@@ -161,7 +151,7 @@ namespace SalesDepot.InteropClasses
 		public void Disconnect()
 		{
 			CloseSlideSourcePresentation();
-			AppManager.Instance.ReleaseComObject(_powerPointObject);
+			Utils.ReleaseComObject(_powerPointObject);
 			GC.Collect();
 			_powerPointObject = null;
 		}
@@ -195,7 +185,7 @@ namespace SalesDepot.InteropClasses
 					if (PowerPointObject != null)
 					{
 						MessageFilter.Register();
-						Presentation presentationObject = PowerPointObject.Presentations.Open(originalFileName, MsoTriState.msoFalse, MsoTriState.msoFalse, MsoTriState.msoFalse);
+						var presentationObject = PowerPointObject.Presentations.Open(originalFileName, MsoTriState.msoFalse, MsoTriState.msoFalse, MsoTriState.msoFalse);
 						presentationObject.SaveAs(pdfFileName, PpSaveAsFileType.ppSaveAsPDF, MsoTriState.msoCTrue);
 					}
 				}
@@ -216,11 +206,9 @@ namespace SalesDepot.InteropClasses
 			try
 			{
 				MessageFilter.Register();
-				if (_slideSourcePresentationObject != null)
-				{
-					_slideSourcePresentationObject.Close();
-					AppManager.Instance.ReleaseComObject(_slideSourcePresentationObject);
-				}
+				if (_slideSourcePresentationObject == null) return;
+				_slideSourcePresentationObject.Close();
+				Utils.ReleaseComObject(_slideSourcePresentationObject);
 			}
 			catch { }
 			finally
@@ -270,36 +258,30 @@ namespace SalesDepot.InteropClasses
 
 		public void ResizeSlideShow(IntPtr parentHandle, int parentHeight, int parentWidth)
 		{
-			if ((_currentSlideShowWindow != null) && !parentHandle.Equals(IntPtr.Zero) && (parentHeight != 0) && (parentWidth != 0))
-			{
-				var currentSlideShowHandle = new IntPtr(_currentSlideShowWindow.HWND);
-				if (currentSlideShowHandle != IntPtr.Zero)
-				{
-					WinAPIHelper.ShowWindowAsync(currentSlideShowHandle, 0);
-					WinAPIHelper.SetParent(currentSlideShowHandle, IntPtr.Zero);
-					_currentSlideShowWindow.Height = parentHeight;
-					_currentSlideShowWindow.Width = parentWidth;
-					WinAPIHelper.ShowWindowAsync(currentSlideShowHandle, WindowShowStyle.ShowNormal);
-					WinAPIHelper.SetParent(currentSlideShowHandle, parentHandle);
-				}
-			}
+			if ((_currentSlideShowWindow == null) || parentHandle.Equals(IntPtr.Zero) || (parentHeight == 0) || (parentWidth == 0)) return;
+			var currentSlideShowHandle = new IntPtr(_currentSlideShowWindow.HWND);
+			if (currentSlideShowHandle == IntPtr.Zero) return;
+			WinAPIHelper.ShowWindowAsync(currentSlideShowHandle, 0);
+			WinAPIHelper.SetParent(currentSlideShowHandle, IntPtr.Zero);
+			_currentSlideShowWindow.Height = parentHeight;
+			_currentSlideShowWindow.Width = parentWidth;
+			WinAPIHelper.ShowWindowAsync(currentSlideShowHandle, WindowShowStyle.ShowNormal);
+			WinAPIHelper.SetParent(currentSlideShowHandle, parentHandle);
 		}
 
 		public void ExitSlideShow()
 		{
-			if (_currentSlideShowWindow != null)
+			if (_currentSlideShowWindow == null) return;
+			try
 			{
-				try
-				{
-					MessageFilter.Register();
-					_currentSlideShowWindow.View.Exit();
-				}
-				catch { }
-				finally
-				{
-					MessageFilter.Revoke();
-					_currentSlideShowWindow = null;
-				}
+				MessageFilter.Register();
+				_currentSlideShowWindow.View.Exit();
+			}
+			catch { }
+			finally
+			{
+				MessageFilter.Revoke();
+				_currentSlideShowWindow = null;
 			}
 		}
 
@@ -313,16 +295,11 @@ namespace SalesDepot.InteropClasses
 
 		public Slide GetActiveSlide()
 		{
-			if (PowerPointObject.Windows.Count > 0)
-			{
-				PowerPointObject.Activate();
-				if (PowerPointObject.ActiveWindow != null)
-				{
-					PowerPointObject.ActiveWindow.ViewType = PpViewType.ppViewNormal;
-					return (Slide)PowerPointObject.ActiveWindow.View.Slide;
-				}
-			}
-			return null;
+			if (PowerPointObject.Windows.Count <= 0) return null;
+			PowerPointObject.Activate();
+			if (PowerPointObject.ActiveWindow == null) return null;
+			PowerPointObject.ActiveWindow.ViewType = PpViewType.ppViewNormal;
+			return (Slide)PowerPointObject.ActiveWindow.View.Slide;
 		}
 
 		public int GetActiveSlideIndex()
@@ -340,8 +317,7 @@ namespace SalesDepot.InteropClasses
 				}
 			}
 			catch { }
-			if (!Is2003 || slideIndex != -1) return slideIndex;
-			RefreshContents();
+			if (slideIndex != -1) return slideIndex;
 			PowerPointObject.ActiveWindow.Selection.Unselect();
 			return slideIndex;
 		}
@@ -394,9 +370,9 @@ namespace SalesDepot.InteropClasses
 									(slide.Shapes.Range(1)).Visible = MsoTriState.msoFalse;
 								MsoTriState masterShape = slide.DisplayMasterShapes;
 								slide.DisplayMasterShapes = MsoTriState.msoFalse;
-								slide.Export(Path.Combine(AppManager.Instance.TempFolder.FullName, slide.SlideID + ".png"), "PNG", -1, -1);
-								pastedRange.Background.Fill.UserPicture(Path.Combine(AppManager.Instance.TempFolder.FullName, slide.SlideID + ".png"));
-								var file = new FileInfo(Path.Combine(AppManager.Instance.TempFolder.FullName, slide.SlideID + ".png"));
+								slide.Export(Path.Combine(Utils.Manager.TempFolder.FullName, slide.SlideID + ".png"), "PNG", -1, -1);
+								pastedRange.Background.Fill.UserPicture(Path.Combine(Utils.Manager.TempFolder.FullName, slide.SlideID + ".png"));
+								var file = new FileInfo(Path.Combine(Utils.Manager.TempFolder.FullName, slide.SlideID + ".png"));
 								if (file.Exists)
 									file.Delete();
 								slide.DisplayMasterShapes = masterShape;
@@ -426,11 +402,8 @@ namespace SalesDepot.InteropClasses
 					ActivePresentation.Slides[indexToPaste - 1].Select();
 					currentSlideIndex = indexToPaste - 1;
 				}
-				if (Is2003 && currentSlideIndex != 0)
-				{
-					RefreshContents();
+				if (currentSlideIndex != 0)
 					ActivePresentation.Slides[currentSlideIndex].Select();
-				}
 			}
 			catch { }
 			finally
@@ -447,43 +420,6 @@ namespace SalesDepot.InteropClasses
 			return null;
 		}
 
-		private void RefreshContents()
-		{
-			bool hasContents = false;
-			int contentSlideIndex = 0;
-			int contentSlideIndexCount = 0;
-			int i = 1;
-			foreach (Slide slide in ActivePresentation.Slides)
-			{
-				foreach (Shape shape in slide.Shapes)
-					if (shape.Tags["CONTENT_HEADER"] != "")
-					{
-						hasContents = true;
-						contentSlideIndex = i;
-						break;
-					}
-					else if (contentSlideIndexCount > 0)
-						break;
-				if (hasContents)
-				{
-					contentSlideIndexCount++;
-					hasContents = false;
-				}
-				i++;
-			}
-			if (contentSlideIndexCount > 0 && File.Exists(Path.Combine(SettingsManager.Instance.ContentsSlidePath, SettingsManager.Instance.DefaultWizard, SettingsManager.ContentsSlideName)))
-			{
-				Design design = ActivePresentation.Slides[contentSlideIndex].Design;
-				for (int j = 0; j < contentSlideIndexCount; j++)
-					ActivePresentation.Slides[contentSlideIndex].Delete();
-				for (int j = 0; j < contentSlideIndexCount; j++)
-					ActivePresentation.Slides.InsertFromFile(Path.Combine(SettingsManager.Instance.ContentsSlidePath, SettingsManager.Instance.DefaultWizard, SettingsManager.ContentsSlideName), contentSlideIndex - 1 + j, 1, 1);
-
-				for (int j = 0; j < contentSlideIndexCount; j++)
-					ActivePresentation.Slides[contentSlideIndex + j].Design = design;
-			}
-		}
-
 		private void MakeDesignUnique(Slide slide, Design design)
 		{
 			while (!(design.SlideMaster.Shapes.Count <= slide.Design.SlideMaster.Shapes.Count))
@@ -495,7 +431,7 @@ namespace SalesDepot.InteropClasses
 			}
 		}
 
-		public bool InsertVideoIntoActivePresentation(string videoFile)
+		public bool InsertVideoIntoActivePresentation(string videoFile, float left, float top, float width, float height)
 		{
 			bool result = false;
 			try
@@ -507,17 +443,9 @@ namespace SalesDepot.InteropClasses
 				Slide slide = GetActiveSlide();
 				if (slide != null)
 				{
-					Shape shape = slide.Shapes.AddMediaObject2(newFile);
+					Shape shape = slide.Shapes.AddMediaObject(newFile, left, top, width, height);
 					shape.AnimationSettings.PlaySettings.PlayOnEntry = MsoTriState.msoTrue;
 					shape.AnimationSettings.AdvanceTime = 0;
-					float maxWidth = (ActivePresentation.PageSetup.SlideWidth / 10) * 9; // 5% border
-					if (maxWidth < shape.Width)
-					{
-						shape.LockAspectRatio = MsoTriState.msoTrue;
-						shape.Width = maxWidth;
-					}
-					shape.Left = (ActivePresentation.PageSetup.SlideWidth - shape.Width) / 2;
-					shape.Top = (ActivePresentation.PageSetup.SlideHeight - shape.Height) / 2;
 				}
 				result = true;
 			}
@@ -591,14 +519,14 @@ namespace SalesDepot.InteropClasses
 				MessageFilter.Register();
 				if (slideIndex == -1)
 				{
-					_slideSourcePresentationObject.SaveAs(FileName: destinationFileName, FileFormat: PpSaveAsFileType.ppSaveAsPDF);
+					_slideSourcePresentationObject.SaveAs(destinationFileName, PpSaveAsFileType.ppSaveAsPDF);
 				}
 				else
 				{
 					string presentationName = Path.GetTempFileName();
 					SaveSingleSlide(slideIndex, presentationName);
-					Presentation singleSlidePresentation = PowerPointObject.Presentations.Open(FileName: presentationName, WithWindow: MsoTriState.msoFalse);
-					singleSlidePresentation.SaveAs(FileName: destinationFileName, FileFormat: PpSaveAsFileType.ppSaveAsPDF);
+					Presentation singleSlidePresentation = PowerPointObject.Presentations.Open(presentationName, WithWindow: MsoTriState.msoFalse);
+					singleSlidePresentation.SaveAs(destinationFileName, PpSaveAsFileType.ppSaveAsPDF);
 					singleSlidePresentation.Close();
 				}
 			}
@@ -678,7 +606,7 @@ namespace SalesDepot.InteropClasses
 			}
 			MakeDesignUnique(singleSlide, pastedRange.Design);
 
-			singleSlidePresentation.SaveAs(FileName: destinationFileName);
+			singleSlidePresentation.SaveAs(destinationFileName);
 			singleSlidePresentation.Close();
 		}
 	}

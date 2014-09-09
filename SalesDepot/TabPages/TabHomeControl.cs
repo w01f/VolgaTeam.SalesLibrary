@@ -579,55 +579,23 @@ namespace SalesDepot.TabPages
 		#region Comboboxes Event Handlers
 		public void comboBoxItemPackages_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			if (_allowToSave)
+			if (!_allowToSave) return;
+			if (FormMain.Instance.comboBoxItemPackages.SelectedIndex >= 0 && FormMain.Instance.comboBoxItemPackages.SelectedIndex < DecoratorManager.Instance.PackageViewers.Count)
 			{
-				if (FormMain.Instance.comboBoxItemPackages.SelectedIndex >= 0 && FormMain.Instance.comboBoxItemPackages.SelectedIndex < DecoratorManager.Instance.PackageViewers.Count)
-				{
-					_allowToSave = false;
-					SettingsManager.Instance.SelectedPackage = FormMain.Instance.comboBoxItemPackages.SelectedItem.ToString();
-					SettingsManager.Instance.SaveSettings();
-					DecoratorManager.Instance.ActivePackageViewer = DecoratorManager.Instance.PackageViewers[FormMain.Instance.comboBoxItemPackages.SelectedIndex];
+				_allowToSave = false;
+				SettingsManager.Instance.SelectedPackage = FormMain.Instance.comboBoxItemPackages.SelectedItem.ToString();
+				SettingsManager.Instance.SaveSettings();
+				DecoratorManager.Instance.ActivePackageViewer = DecoratorManager.Instance.PackageViewers[FormMain.Instance.comboBoxItemPackages.SelectedIndex];
 
-					using (var form = new FormProgress())
-					{
-						form.laProgress.Text = string.Format("Loading {0}...", DecoratorManager.Instance.ActivePackageViewer != null ? DecoratorManager.Instance.ActivePackageViewer.Name : "Library");
-						form.TopMost = true;
-						var thread = new Thread(() => FormMain.Instance.Invoke((MethodInvoker)delegate()
-						{
-							FormMain.Instance.TabSearch.ClearSolutionControl();
-							Application.DoEvents();
-							ApplySelectedDecorator();
-							Application.DoEvents();
-						}));
-						form.Show();
-						Application.DoEvents();
-						thread.Start();
-						while (thread.IsAlive)
-							Application.DoEvents();
-						form.Close();
-					}
-					_allowToSave = true;
-				}
-				else
-					DecoratorManager.Instance.ActivePackageViewer = null;
-			}
-		}
-
-		public void comboBoxItemStations_SelectedIndexChanged(object sender, EventArgs e)
-		{
-			if (_allowToSave)
-			{
 				using (var form = new FormProgress())
 				{
 					form.laProgress.Text = string.Format("Loading {0}...", DecoratorManager.Instance.ActivePackageViewer != null ? DecoratorManager.Instance.ActivePackageViewer.Name : "Library");
 					form.TopMost = true;
 					var thread = new Thread(() => FormMain.Instance.Invoke((MethodInvoker)delegate()
 					{
-						pnEmpty.BringToFront();
+						FormMain.Instance.TabSearch.ClearSolutionControl();
 						Application.DoEvents();
-						StationChanged(sender);
-						Application.DoEvents();
-						pnMain.BringToFront();
+						ApplySelectedDecorator();
 						Application.DoEvents();
 					}));
 					form.Show();
@@ -637,6 +605,34 @@ namespace SalesDepot.TabPages
 						Application.DoEvents();
 					form.Close();
 				}
+				_allowToSave = true;
+			}
+			else
+				DecoratorManager.Instance.ActivePackageViewer = null;
+		}
+
+		public void comboBoxItemStations_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			if (!_allowToSave) return;
+			using (var form = new FormProgress())
+			{
+				form.laProgress.Text = string.Format("Loading {0}...", DecoratorManager.Instance.ActivePackageViewer != null ? DecoratorManager.Instance.ActivePackageViewer.Name : "Library");
+				form.TopMost = true;
+				var thread = new Thread(() => FormMain.Instance.Invoke((MethodInvoker)delegate()
+				{
+					pnEmpty.BringToFront();
+					Application.DoEvents();
+					StationChanged(sender);
+					Application.DoEvents();
+					pnMain.BringToFront();
+					Application.DoEvents();
+				}));
+				form.Show();
+				Application.DoEvents();
+				thread.Start();
+				while (thread.IsAlive)
+					Application.DoEvents();
+				form.Close();
 			}
 		}
 

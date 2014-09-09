@@ -5,13 +5,10 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading;
-using System.Windows.Forms;
 using System.Xml;
-using SalesDepot.ConfigurationClasses;
 using SalesDepot.CoreObjects.BusinessClasses;
 
-namespace SalesDepot.BusinessClasses
+namespace OutlookSalesDepotAddIn.BusinessClasses
 {
 	public class LibraryLink : ILibraryLink
 	{
@@ -709,52 +706,7 @@ namespace SalesDepot.BusinessClasses
 
 		private void GetLocalCopy()
 		{
-			if (LinkAvailable)
-			{
-				if (SettingsManager.Instance.UseRemoteConnection)
-				{
-					var thread = new Thread(delegate()
-												{
-													switch (Type)
-													{
-														case FileTypes.BuggyPresentation:
-														case FileTypes.Excel:
-														case FileTypes.FriendlyPresentation:
-														case FileTypes.MediaPlayerVideo:
-														case FileTypes.Other:
-														case FileTypes.Presentation:
-														case FileTypes.PDF:
-														case FileTypes.QuickTimeVideo:
-														case FileTypes.Word:
-														case FileTypes.OvernightsLink:
-															_linkLocalPath = Path.Combine(SettingsManager.Instance.LocalLibraryCacheFolder, NameWithExtension);
-															try
-															{
-																File.Copy(OriginalPath, _linkLocalPath, true);
-															}
-															catch
-															{
-																_linkLocalPath = string.Empty;
-															}
-															break;
-														case FileTypes.Folder:
-															_linkLocalPath = OriginalPath;
-															break;
-														default:
-															_linkLocalPath = string.Empty;
-															break;
-													}
-												});
-					thread.Start();
-					Application.DoEvents();
-					while (thread.IsAlive)
-						Application.DoEvents();
-				}
-				else
-					_linkLocalPath = OriginalPath;
-			}
-			else
-				_linkLocalPath = string.Empty;
+			_linkLocalPath = LinkAvailable ? OriginalPath : string.Empty;
 		}
 	}
 

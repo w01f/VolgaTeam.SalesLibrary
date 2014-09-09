@@ -329,7 +329,7 @@ namespace SalesDepot.TabPages
 				if (xtraTabControlSolutionModes.SelectedTabPage == xtraTabPageSearchTags)
 				{
 					files = DecoratorManager.Instance.ActivePackageViewer.Package.SearchByTags(GetSearhTags());
-					if (files.Where(x => x.Type == FileTypes.BuggyPresentation || x.Type == FileTypes.FriendlyPresentation || x.Type == FileTypes.Presentation).Count() > 25)
+					if (files.Count(x => x.Type == FileTypes.BuggyPresentation || x.Type == FileTypes.FriendlyPresentation || x.Type == FileTypes.Presentation) > 25)
 					{
 						AppManager.Instance.ShowWarning("Only the first 25 Results will be displayed.\nNarrow your Search Criteria to display a more qualified list of files...");
 						files = files.Take(25).ToArray();
@@ -370,7 +370,7 @@ namespace SalesDepot.TabPages
 							filesByName.AddRange(DecoratorManager.Instance.ActivePackageViewer.Package.SearchByName(criteria, checkEditSearchByFilesExactMatch.Checked, FileTypes.Word));
 						files = filesByName.ToArray();
 					}
-					if (files.Where(x => x.Type == FileTypes.BuggyPresentation || x.Type == FileTypes.FriendlyPresentation || x.Type == FileTypes.Presentation).Count() > 25)
+					if (files.Count(x => x.Type == FileTypes.BuggyPresentation || x.Type == FileTypes.FriendlyPresentation || x.Type == FileTypes.Presentation) > 25)
 					{
 						AppManager.Instance.ShowWarning("Only the first 25 Results will be displayed.\nNarrow your Search Criteria to display a more qualified list of files...");
 						files = files.Take(25).ToArray();
@@ -413,7 +413,7 @@ namespace SalesDepot.TabPages
 						messageText = "There are many new files added for this date range.\nOnly the first 25 results will be displayed...";
 					}
 					files = DecoratorManager.Instance.ActivePackageViewer.Package.SearchByDate(startDate, endDate);
-					if (files.Where(x => x.Type == FileTypes.BuggyPresentation || x.Type == FileTypes.FriendlyPresentation || x.Type == FileTypes.Presentation).Count() > 25)
+					if (files.Count(x => x.Type == FileTypes.BuggyPresentation || x.Type == FileTypes.FriendlyPresentation || x.Type == FileTypes.Presentation) > 25)
 					{
 						AppManager.Instance.ShowWarning(messageText);
 						files = files.Take(25).ToArray();
