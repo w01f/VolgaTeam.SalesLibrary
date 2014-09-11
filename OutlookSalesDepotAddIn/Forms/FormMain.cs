@@ -1,4 +1,5 @@
 using System;
+using System.Drawing;
 using System.IO;
 using System.Threading;
 using System.Windows.Forms;
@@ -31,7 +32,10 @@ namespace OutlookSalesDepotAddIn.Forms
 			pnContainer.Dock = DockStyle.Fill;
 			pnEmpty.Dock = DockStyle.Fill;
 			TabHome = new TabHomeControl();
-		}
+			if ((CreateGraphics()).DpiX > 96)
+			{
+				ribbonControl.Font = new Font(ribbonControl.Font.FontFamily, ribbonControl.Font.Size - 1, ribbonControl.Font.Style);
+			}}
 
 		private void FormMain_Load(object sender, EventArgs e)
 		{

@@ -34,6 +34,10 @@ namespace SalesDepot
 		{
 			InitializeComponent();
 			FormStateHelper.Init(this, Path.GetDirectoryName(typeof(FormMain).Assembly.Location), true);
+			if ((CreateGraphics()).DpiX > 96)
+			{
+				ribbonControl.Font = new Font(ribbonControl.Font.FontFamily, ribbonControl.Font.Size - 1, ribbonControl.Font.Style);
+			}
 		}
 
 		public TabHomeControl TabHome { get; set; }

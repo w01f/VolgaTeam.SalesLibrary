@@ -6,9 +6,7 @@
     <option name="ANALYSIS_IN_BACKGROUND" value="true" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="311ca633-43c5-41dd-82ab-ba01ea556142" name="Default" comment="Web Sales Depot: View Dialog refactoring + Old Browser warning fix&#10;&#10;">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/components/behaviors/BehaviorManager.php" afterPath="$PROJECT_DIR$/protected/components/behaviors/BehaviorManager.php" />
-    </list>
+    <list default="true" id="311ca633-43c5-41dd-82ab-ba01ea556142" name="Default" comment="Web Sales Depot: View Dialog refactoring + Old Browser warning fix&#10;&#10;" />
     <list id="6cb86652-0ea2-464a-b0b1-9bbef25a8567" name="C#" comment="" />
     <ignored path="WebSalesLibraries.iws" />
     <ignored path=".idea/workspace.xml" />
