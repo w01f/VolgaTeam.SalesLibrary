@@ -16,6 +16,11 @@
 			$this->render('index', array('tickerRecords' => $tickerRecords));
 		}
 
+		public function actionBadBrowser()
+		{
+			$this->render('badBrowser');
+		}
+
 		public function actionLogin()
 		{
 			$this->redirect($this->createUrl('auth/login'));

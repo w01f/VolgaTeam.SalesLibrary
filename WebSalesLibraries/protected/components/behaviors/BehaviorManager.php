@@ -1,22 +1,42 @@
 <?php
 
 	/**
-	 * Class RequireLogin
+	 * Class BehaviorManager
 	 */
-	class RequireLogin extends CBehavior
+	class BehaviorManager extends CBehavior
 	{
 		/**
 		 * @param CComponent $owner
 		 */
 		public function attach($owner)
 		{
-			$owner->attachEventHandler('onBeginRequest', array($this, 'handleBeginRequest'));
+			$owner->attachEventHandler('onBeginRequest', array($this, 'checkBrowser'));
+			$owner->attachEventHandler('onBeginRequest', array($this, 'checkLoginRequired'));
 		}
 
-		public function handleBeginRequest()
+		public function checkBrowser()
+		{
+			if (!strstr(Yii::app()->request->getUrl(), 'site/badBrowser')
+				&& !strstr(Yii::app()->request->getUrl(), '/quote')
+			)
+			{
+				try
+				{
+					$browser = Yii::app()->browser->getBrowser();
+					$version = intval(Yii::app()->browser->getVersion());
+					if ($browser == Browser::BROWSER_IE && $version <= 8)
+						Yii::app()->request->redirect("site/badBrowser");
+				} catch (Exception $e)
+				{
+				}
+			}
+		}
+
+		public function checkLoginRequired()
 		{
 			if (Yii::app()->user->isGuest &&
 				!strstr(Yii::app()->request->getUrl(), 'auth/') &&
+				!strstr(Yii::app()->request->getUrl(), 'site/badBrowser') &&
 				!strstr(Yii::app()->request->getUrl(), 'site/login') &&
 				!strstr(Yii::app()->request->getUrl(), 'site/emailLinkGet') &&
 				!strstr(Yii::app()->request->getUrl(), 'site/switchVersion') &&

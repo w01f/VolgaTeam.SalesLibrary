@@ -73,9 +73,15 @@
 
 .view-dialog-body div.format-list
 {
+	width: auto;
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.view-dialog-body div.format-list .row
+{
 	margin-left: 20px;
 	margin-right: 20px;
-	width: auto;
 }
 
 .view-dialog-body div.format-list a.format-item
@@ -86,14 +92,10 @@
 	margin-bottom: 5px;
 }
 
-.view-dialog-body .format-list img
+.view-dialog-body div.format-list img
 {
 	border: none;
 	cursor: pointer;
-}
-
-.view-dialog-body div.format-list a.format-item img
-{
 	height: 84px;
 }
 
@@ -116,4 +118,16 @@
 img.total-rate
 {
 	margin-bottom: 10px;
+}
+
+#user-link-rate-container, #user-link-rate-container .row
+{
+	margin-left: 0;
+	margin-right: 0;
+}
+
+#user-link-rate-container>div, #user-link-rate-container .row>div
+{
+	padding-left: 0;
+	padding-right: 0;
 }

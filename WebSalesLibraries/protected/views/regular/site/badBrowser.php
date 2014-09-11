@@ -17,6 +17,6 @@
 </script>
 <table id="container" style="width: 100%; height: 100%; text-align: center;">
 	<tr>
-		<td><img src="<?php echo Yii::app()->baseUrl . '/images/unauthorized.png'; ?>"></td>
+		<td><img src="<?php echo Yii::app()->baseUrl . '/images/bad_browser.png'; ?>"></td>
 	</tr>
 </table>

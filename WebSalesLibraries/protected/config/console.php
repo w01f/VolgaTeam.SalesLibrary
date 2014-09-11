@@ -8,6 +8,7 @@ return array(
 		'application.components.*',
 		'application.components.widgets.*',
 		'application.components.core.*',
+		'application.components.behaviors.*',
 		'application.models.*',
 		'application.models.common.*',
 		'application.models.rate.*',

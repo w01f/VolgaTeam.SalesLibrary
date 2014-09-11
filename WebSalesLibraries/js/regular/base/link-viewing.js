@@ -57,6 +57,11 @@
 					else
 						$.fancybox.close();
 				});
+				content.find('#add-link-to-cart').off('click').on('click',function ()
+				{
+					$.fancybox.close();
+					$.SalesPortal.QBuilder.LinkCart.addLinks([selectedLinkId]);
+				}).tooltip({animation: false, trigger: 'hover', delay: { show: 500, hide: 100 }});
 
 				var modalTitle = 'How Do you want to Open this File?';
 				if (tags != '')

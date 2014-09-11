@@ -4,6 +4,7 @@
 	 * @var $authorized boolean
 	 */
 	$logoFolderPath = realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'fileFormats';
+	$linkCartImageSource = 'data:image/png;base64,' . base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'add-link-cart.png'));
 	$itemsCount = count($link->availableFormats);
 	if (!isset($link->isAttachment) && !$link->forcePreview && $authorized)
 		$itemsCount++;
@@ -183,15 +184,24 @@
 				<? endif; ?>
 				<? if (!$rowClosed) echo '</div>'; ?>
 				<? if (!isset($link->isAttachment)): ?>
-					<div class="row text-center" id="user-link-rate-container">
-						<div class="col-xs-12">
-							<label for="user-link-rate">Do you LIKE this <? echo $link->originalFormat == 'url' ? 'Web link' : 'file' ?>? </label>
+					<div class="row" id="user-link-rate-container">
+						<div class="col-xs-9">
+							<div class="row">
+								<div class="col-xs-12">
+									<label for="user-link-rate">Do you LIKE this <? echo $link->originalFormat == 'url' ? 'Web link' : 'file' ?>? </label>
+								</div>
+								<div class="col-xs-12">
+									<input id="user-link-rate" class="rating">
+								</div>
+								<div class="col-xs-12">
+									<label id="user-link-rate-description"></label>
+								</div>
+							</div>
 						</div>
-						<div class="col-xs-12">
-							<input id="user-link-rate" class="rating">
-						</div>
-						<div class="col-xs-12">
-							<label id="user-link-rate-description"></label>
+						<div class="col-xs-3 text-right">
+							<img id="add-link-to-cart" src="<? echo $linkCartImageSource; ?>"
+								 rel="tooltip"
+								 title="Add this Link to a QuickSite">
 						</div>
 					</div>
 				<? endif; ?>

@@ -15,43 +15,6 @@
 			}
 			event.stopPropagation();
 		});
-		container.find('.clickable, .link-container.line-break').off('mousedown.context').on('mousedown.context', function (eventDown)
-		{
-			if (eventDown.which == 3)
-			{
-				$(this).off('mouseup.context').on('mouseup.context', function (eventUp)
-				{
-					if (eventUp.which == 3)
-					{
-						if (checkEmail())
-						{
-							var linkId = $(this).attr('id').replace('link', '');
-							recordActivity(linkId);
-							$.requestSpecialDialog([linkId], undefined);
-							$(this).off('mouseup.context');
-						}
-						eventUp.stopPropagation();
-						eventUp.preventDefault();
-					}
-				});
-			}
-		});
-		if (( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ))
-		{
-			container.find('.clickable, .link-container.line-break').hammer().on('doubletap', function (event)
-			{
-				if (checkEmail())
-				{
-					var linkId = $(this).attr('id').replace('link', '');
-					recordActivity(linkId);
-					$.requestSpecialDialog([linkId], undefined);
-				}
-				event.gesture.stopPropagation();
-				event.gesture.preventDefault();
-				event.stopPropagation();
-				event.preventDefault();
-			});
-		}
 		container.find('.folder-link').off('click').on('click', function (event)
 		{
 			if (checkEmail())
@@ -60,44 +23,6 @@
 			}
 			event.stopPropagation();
 		});
-		container.find('.folder-link').off('mousedown.context').on('mousedown.context', function (eventDown)
-		{
-			if (eventDown.which == 3)
-			{
-				$(this).off('mouseup.context').on('mouseup.context', function (eventUp)
-				{
-					if (eventUp.which == 3)
-					{
-						if (checkEmail())
-						{
-							var linkId = $(this).attr('id').replace('link', '');
-							recordActivity(linkId);
-							$.requestSpecialDialog([linkId], undefined);
-							$(this).off('mouseup.context');
-						}
-						eventUp.stopPropagation();
-						eventUp.preventDefault();
-					}
-				});
-				eventDown.stopPropagation();
-			}
-		});
-		if (( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ))
-		{
-			container.find('.folder-link').hammer().on('doubletap', function (event)
-			{
-				if (checkEmail())
-				{
-					var linkId = $(this).attr('id').replace('link', '');
-					recordActivity(linkId);
-					$.requestSpecialDialog([linkId], undefined);
-				}
-				event.gesture.stopPropagation();
-				event.gesture.preventDefault();
-				event.stopPropagation();
-				event.preventDefault();
-			});
-		}
 	};
 
 	var loadFolderLinkContent = function (linkObject)

@@ -8,6 +8,7 @@
 			'application.components.*',
 			'application.components.widgets.*',
 			'application.components.core.*',
+			'application.components.behaviors.*',
 			'application.models.*',
 			'application.models.common.*',
 			'application.models.rate.*',
@@ -29,6 +30,11 @@
 			'application.models.ticker.records.*',
 			'application.models.wallbin.models.*',
 			'application.models.wallbin.records.*',
+		),
+		'behaviors' => array(
+			'onBeginRequest' => array(
+				'class' => 'application.components.behaviors.BehaviorManager'
+			)
 		),
 		'components' => array(
 			'session' => array(

@@ -72,12 +72,6 @@
 			$.SalesPortal.LinkManager.requestViewDialog(linkId, false);
 		};
 
-		var specialPreviewLink = function ()
-		{
-			var linkId = $(this).parent().find('.link-id-column').html();
-			$.SalesPortal.LinkManager.requestSpecialDialog([linkId], undefined);
-		};
-
 		var viewFileCard = function ()
 		{
 			var linkId = $(this).parent().find('.link-id-column').html();
@@ -212,22 +206,6 @@
 				{
 					previewLink.call($(this));
 				});
-				regularClickableLinks.off('mousedown.context').on('mousedown.context', function (eventDown)
-				{
-					if (eventDown.which == 3)
-					{
-						$(this).off('mouseup.context').on('mouseup.context', function (eventUp)
-						{
-							if (eventUp.which == 3)
-							{
-								specialPreviewLink.call($(this));
-								$(this).off('mouseup.context');
-								eventUp.stopPropagation();
-								eventUp.preventDefault();
-							}
-						});
-					}
-				});
 				regularClickableLinks.draggable({
 						delay: 100,
 						revert: "invalid",
@@ -246,7 +224,6 @@
 			if (mobileClickableLinks.length > 0)
 			{
 				mobileClickableLinks.off('click').on('click', previewLink);
-				mobileClickableLinks.hammer().on('doubletap', specialPreviewLink);
 			}
 
 			linkGridBody.find("td.details-button").off('click');

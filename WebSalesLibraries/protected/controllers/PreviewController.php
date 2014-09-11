@@ -105,47 +105,7 @@
 				$linkIds = Yii::app()->request->getPost('linkIds');
 				$folderId = Yii::app()->request->getPost('folderId');
 				$isSearchResults = Yii::app()->request->getPost('isSearchResults');
-				if (isset($linkIds) && !isset($isSearchResults))
-				{
-					if (Yii::app()->browser->isMobile())
-						$browser = 'mobile';
-					else
-					{
-						$browser = Yii::app()->browser->getBrowser();
-						switch ($browser)
-						{
-							case 'Internet Explorer':
-								$browser = 'ie';
-								break;
-							case 'Chrome':
-							case 'Safari':
-								$browser = 'webkit';
-								break;
-							case 'Firefox':
-								$browser = 'firefox';
-								break;
-							case 'Opera':
-								$browser = 'opera';
-								break;
-							default:
-								$browser = 'webkit';
-								break;
-						}
-					}
-					$linkRecord = count($linkIds) > 0 ? LinkRecord::getLinkById($linkIds[0]) : null;
-					if (isset($linkRecord))
-					{
-						$libraryManager = new LibraryManager();
-						$library = $libraryManager->getLibraryById($linkRecord->id_library);
-						$link = new LibraryLink(new LibraryFolder(new LibraryPage($library)));
-						$link->browser = $browser;
-						$link->load($linkRecord);
-						StatisticActivityRecord::WriteActivity('Link', 'Special Options', array('Name' => $link->name, 'File' => $link->fileName));
-						$this->renderPartial('specialDialog', array('object' => $link, 'isLink' => true, 'isLineBreak' => $link->getIsLineBreak()), false, true);
-						$rendered = true;
-					}
-				}
-				else if (isset($folderId))
+				if (isset($folderId))
 				{
 					$folderRecord = FolderRecord::model()->findByPk($folderId);
 					if (isset($folderRecord))
