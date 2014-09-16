@@ -29,7 +29,7 @@
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
-			DevExpress.XtraGrid.GridLevelNode gridLevelNode2 = new DevExpress.XtraGrid.GridLevelNode();
+			DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
 			this.gridViewSecurityUsers = new DevExpress.XtraGrid.Views.Grid.GridView();
 			this.gridColumnSecurityUserId = new DevExpress.XtraGrid.Columns.GridColumn();
 			this.gridColumnSecurityUserSelected = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -43,6 +43,7 @@
 			this.laHeader = new System.Windows.Forms.Label();
 			this.pnMain = new System.Windows.Forms.Panel();
 			this.pnData = new System.Windows.Forms.Panel();
+			this.rbSecurityBlackList = new System.Windows.Forms.RadioButton();
 			this.pnSecurityUserList = new System.Windows.Forms.Panel();
 			this.pnSecurityUserListGrid = new System.Windows.Forms.Panel();
 			this.buttonXSecurityUserListClearAll = new DevComponents.DotNetBar.ButtonX();
@@ -57,7 +58,6 @@
 			this.pnButtons = new System.Windows.Forms.Panel();
 			this.buttonXReset = new DevComponents.DotNetBar.ButtonX();
 			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
-			this.rbSecurityBlackList = new System.Windows.Forms.RadioButton();
 			((System.ComponentModel.ISupportInitialize)(this.gridViewSecurityUsers)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEditSecurityUserList)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.gridControlSecurityUserList)).BeginInit();
@@ -156,10 +156,10 @@
 			this.gridControlSecurityUserList.EmbeddedNavigator.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.gridControlSecurityUserList.EmbeddedNavigator.Appearance.Options.UseBackColor = true;
 			this.gridControlSecurityUserList.EmbeddedNavigator.Appearance.Options.UseForeColor = true;
-			gridLevelNode2.LevelTemplate = this.gridViewSecurityUsers;
-			gridLevelNode2.RelationName = "Users";
+			gridLevelNode1.LevelTemplate = this.gridViewSecurityUsers;
+			gridLevelNode1.RelationName = "Users";
 			this.gridControlSecurityUserList.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
-            gridLevelNode2});
+            gridLevelNode1});
 			this.gridControlSecurityUserList.Location = new System.Drawing.Point(0, 82);
 			this.gridControlSecurityUserList.MainView = this.gridViewSecurityGroups;
 			this.gridControlSecurityUserList.Name = "gridControlSecurityUserList";
@@ -277,6 +277,24 @@
 			this.pnData.Size = new System.Drawing.Size(306, 559);
 			this.pnData.TabIndex = 1;
 			// 
+			// rbSecurityBlackList
+			// 
+			this.rbSecurityBlackList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.rbSecurityBlackList.BackColor = System.Drawing.Color.Transparent;
+			this.rbSecurityBlackList.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.rbSecurityBlackList.Image = global::FileManager.Properties.Resources.TagsSecurityBlackListWidget;
+			this.rbSecurityBlackList.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.rbSecurityBlackList.Location = new System.Drawing.Point(5, 203);
+			this.rbSecurityBlackList.Name = "rbSecurityBlackList";
+			this.rbSecurityBlackList.Size = new System.Drawing.Size(296, 53);
+			this.rbSecurityBlackList.TabIndex = 42;
+			this.rbSecurityBlackList.TabStop = true;
+			this.rbSecurityBlackList.Text = "Enable Black list for Groups or Users for this link in the Web Sales Library";
+			this.rbSecurityBlackList.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+			this.rbSecurityBlackList.UseVisualStyleBackColor = false;
+			this.rbSecurityBlackList.CheckedChanged += new System.EventHandler(this.rbSecurityRestricted_CheckedChanged);
+			// 
 			// pnSecurityUserList
 			// 
 			this.pnSecurityUserList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -373,12 +391,15 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.rbSecurityForbidden.BackColor = System.Drawing.Color.Transparent;
 			this.rbSecurityForbidden.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.rbSecurityForbidden.Image = global::FileManager.Properties.Resources.TagsSecurityHiddenWidget;
+			this.rbSecurityForbidden.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.rbSecurityForbidden.Location = new System.Drawing.Point(5, 47);
 			this.rbSecurityForbidden.Name = "rbSecurityForbidden";
 			this.rbSecurityForbidden.Size = new System.Drawing.Size(296, 44);
 			this.rbSecurityForbidden.TabIndex = 40;
 			this.rbSecurityForbidden.TabStop = true;
 			this.rbSecurityForbidden.Text = "This link is HIDDEN in the Local Library and the Web Library";
+			this.rbSecurityForbidden.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
 			this.rbSecurityForbidden.UseVisualStyleBackColor = false;
 			// 
 			// ckSecurityShareLink
@@ -401,12 +422,15 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.rbSecurityAllowed.BackColor = System.Drawing.Color.Transparent;
 			this.rbSecurityAllowed.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.rbSecurityAllowed.Image = global::FileManager.Properties.Resources.TagsSecurityVisibleWidget;
+			this.rbSecurityAllowed.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.rbSecurityAllowed.Location = new System.Drawing.Point(5, 6);
 			this.rbSecurityAllowed.Name = "rbSecurityAllowed";
 			this.rbSecurityAllowed.Size = new System.Drawing.Size(296, 38);
 			this.rbSecurityAllowed.TabIndex = 37;
 			this.rbSecurityAllowed.TabStop = true;
 			this.rbSecurityAllowed.Text = "Everyone sees this Link in the Local Sales Library and Web Sales Library";
+			this.rbSecurityAllowed.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
 			this.rbSecurityAllowed.UseVisualStyleBackColor = false;
 			this.rbSecurityAllowed.CheckedChanged += new System.EventHandler(this.ValueCheckedChanged);
 			// 
@@ -416,12 +440,15 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.rbSecurityWhiteList.BackColor = System.Drawing.Color.Transparent;
 			this.rbSecurityWhiteList.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.rbSecurityWhiteList.Image = global::FileManager.Properties.Resources.TagsSecurityWhiteListWidget;
+			this.rbSecurityWhiteList.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.rbSecurityWhiteList.Location = new System.Drawing.Point(5, 144);
 			this.rbSecurityWhiteList.Name = "rbSecurityWhiteList";
 			this.rbSecurityWhiteList.Size = new System.Drawing.Size(296, 53);
 			this.rbSecurityWhiteList.TabIndex = 36;
 			this.rbSecurityWhiteList.TabStop = true;
 			this.rbSecurityWhiteList.Text = "Enable White list for Groups or Users for this link in the Web Sales Library";
+			this.rbSecurityWhiteList.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
 			this.rbSecurityWhiteList.UseVisualStyleBackColor = false;
 			this.rbSecurityWhiteList.CheckedChanged += new System.EventHandler(this.rbSecurityRestricted_CheckedChanged);
 			// 
@@ -431,6 +458,8 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.rbSecurityDenied.BackColor = System.Drawing.Color.Transparent;
 			this.rbSecurityDenied.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.rbSecurityDenied.Image = global::FileManager.Properties.Resources.TagsSecurityLocalWidget;
+			this.rbSecurityDenied.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.rbSecurityDenied.Location = new System.Drawing.Point(5, 94);
 			this.rbSecurityDenied.Name = "rbSecurityDenied";
 			this.rbSecurityDenied.Size = new System.Drawing.Size(296, 44);
@@ -438,6 +467,7 @@
 			this.rbSecurityDenied.TabStop = true;
 			this.rbSecurityDenied.Text = "This link is ONLY in the Local Sales Library. It is NOT visible in the Web Sales " +
     "Library)";
+			this.rbSecurityDenied.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
 			this.rbSecurityDenied.UseVisualStyleBackColor = false;
 			this.rbSecurityDenied.CheckedChanged += new System.EventHandler(this.ValueCheckedChanged);
 			// 
@@ -479,21 +509,6 @@
 			this.styleController.AppearanceFocused.Options.UseFont = true;
 			this.styleController.AppearanceReadOnly.Font = new System.Drawing.Font("Arial", 9.75F);
 			this.styleController.AppearanceReadOnly.Options.UseFont = true;
-			// 
-			// rbSecurityBlackList
-			// 
-			this.rbSecurityBlackList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.rbSecurityBlackList.BackColor = System.Drawing.Color.Transparent;
-			this.rbSecurityBlackList.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.rbSecurityBlackList.Location = new System.Drawing.Point(5, 203);
-			this.rbSecurityBlackList.Name = "rbSecurityBlackList";
-			this.rbSecurityBlackList.Size = new System.Drawing.Size(296, 53);
-			this.rbSecurityBlackList.TabIndex = 42;
-			this.rbSecurityBlackList.TabStop = true;
-			this.rbSecurityBlackList.Text = "Enable Black list for Groups or Users for this link in the Web Sales Library";
-			this.rbSecurityBlackList.UseVisualStyleBackColor = false;
-			this.rbSecurityBlackList.CheckedChanged += new System.EventHandler(this.rbSecurityRestricted_CheckedChanged);
 			// 
 			// SecurityEditor
 			// 

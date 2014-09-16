@@ -284,19 +284,16 @@ namespace FileManager.Controllers
 
 		public bool SaveLibraryWarning()
 		{
-			if (ActiveDecorator != null && ActiveDecorator.StateChanged)
+			if (ActiveDecorator == null || !ActiveDecorator.StateChanged) return true;
+			if (AppManager.Instance.ShowQuestion("Before you leave, do you want to save the changes you made?") == DialogResult.Yes)
 			{
-				if (AppManager.Instance.ShowQuestion("Before you leave, do you want to save the changes you made?") == DialogResult.Yes)
-				{
-					WallbinController.ApplyTagsEditor();
-					ActiveDecorator.Save();
-					return true;
-				}
-				if (MessageBox.Show("You are about to lose your changes.\nThe changes will be LOST FOREVER & EVER & EVER!", "Warning!", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel)
-				{
-					RequestUpdateLibrary(ActiveDecorator.Library);
-					return true;
-				}
+				WallbinController.ApplyTagsEditor();
+				ActiveDecorator.Save();
+				return true;
+			}
+			if (MessageBox.Show("You are about to lose your changes.\nThe changes will be LOST FOREVER & EVER & EVER!", "Warning!", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel)
+			{
+				RequestUpdateLibrary(ActiveDecorator.Library);
 				return true;
 			}
 			return true;

@@ -665,6 +665,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\TagsSecurityWidget.png" />
+    <None Include="Resources\TagsSecurityWhiteListWidget.png" />
+    <None Include="Resources\TagsSecurityVisibleWidget.png" />
+    <None Include="Resources\TagsSecurityLocalWidget.png" />
+    <None Include="Resources\TagsSecurityHiddenWidget.png" />
+    <None Include="Resources\TagsSecurityBlackListWidget.png" />
     <None Include="Resources\SecurityResetMenu.png" />
     <None Include="Resources\SecuritySelectMenu.png" />
     <None Include="Resources\SecurityReset.png" />
@@ -687,7 +693,6 @@
     <None Include="Resources\Favorites.png" />
     <None Include="Resources\ExtraRoots.png" />
     <None Include="Resources\ColumnsSort.png" />
-    <None Include="Resources\TagsSecurityWidget.png" />
     <None Include="Resources\TagsWebAttachmentsWidget.png" />
     <None Include="Resources\TagsKeywordsWidget.png" />
     <None Include="Resources\TagsFileCardsWidget.png" />

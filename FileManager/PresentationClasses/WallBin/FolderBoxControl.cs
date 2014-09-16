@@ -1059,8 +1059,17 @@ namespace FileManager.PresentationClasses.WallBin
 				image = Properties.Resources.TagsFileAttachmentsWidget;
 			else if (WallBinOptions.ShowAttachmentTags && file.HasWebAttachments)
 				image = Properties.Resources.TagsWebAttachmentsWidget;
-			else if (WallBinOptions.ShowSecurityTags && (file.IsRestricted || file.IsForbidden))
-				image = Properties.Resources.TagsSecurityWidget;
+			else if (WallBinOptions.ShowSecurityTags)
+			{
+				if (file.IsForbidden)
+					image = Properties.Resources.TagsSecurityHiddenWidget;
+				else if (file.IsRestricted && String.IsNullOrEmpty(file.AssignedUsers) && String.IsNullOrEmpty(file.DeniedUsers))
+					image = Properties.Resources.TagsSecurityLocalWidget;
+				else if (file.IsRestricted && !String.IsNullOrEmpty(file.AssignedUsers))
+					image = Properties.Resources.TagsSecurityWhiteListWidget;
+				else if (file.IsRestricted && !String.IsNullOrEmpty(file.DeniedUsers))
+					image = Properties.Resources.TagsSecurityBlackListWidget;
+			}
 			else if (file.Widget != null)
 				image = file.Widget;
 			else

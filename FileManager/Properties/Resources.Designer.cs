@@ -823,6 +823,56 @@ namespace FileManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap TagsSecurityBlackListWidget {
+            get {
+                object obj = ResourceManager.GetObject("TagsSecurityBlackListWidget", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap TagsSecurityHiddenWidget {
+            get {
+                object obj = ResourceManager.GetObject("TagsSecurityHiddenWidget", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap TagsSecurityLocalWidget {
+            get {
+                object obj = ResourceManager.GetObject("TagsSecurityLocalWidget", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap TagsSecurityVisibleWidget {
+            get {
+                object obj = ResourceManager.GetObject("TagsSecurityVisibleWidget", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap TagsSecurityWhiteListWidget {
+            get {
+                object obj = ResourceManager.GetObject("TagsSecurityWhiteListWidget", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap TagsSecurityWidget {
             get {
                 object obj = ResourceManager.GetObject("TagsSecurityWidget", resourceCulture);
