@@ -90,6 +90,7 @@ namespace SalesDepot.PresentationClasses.Viewers
 
 		public void Email()
 		{
+			if (!AppManager.Instance.CheckPowerPointRunning(() => AppManager.Instance.ShowWarningQuestion("PowerPoint is not Running. Do you want to open it now?") == DialogResult.Yes)) return;
 			PowerPointHelper.Instance.OpenSlideSourcePresentation(_tempCopy);
 			using (var form = new FormEmailPresentation())
 			{
@@ -101,6 +102,7 @@ namespace SalesDepot.PresentationClasses.Viewers
 
 		public void Print()
 		{
+			if (!AppManager.Instance.CheckPowerPointRunning(() => AppManager.Instance.ShowWarningQuestion("PowerPoint is not Running. Do you want to open it now?") == DialogResult.Yes)) return;
 			AppManager.Instance.ActivityManager.AddLinkAccessActivity("Print Link", File.Name, File.Type.ToString(), File.OriginalPath, File.Parent.Parent.Parent.Name, File.Parent.Parent.Name);
 			PowerPointHelper.Instance.OpenSlideSourcePresentation(_tempCopy);
 			PowerPointHelper.Instance.PrintPresentation(File.PreviewContainer.SelectedIndex + 1);
@@ -120,6 +122,7 @@ namespace SalesDepot.PresentationClasses.Viewers
 		#region PowerPoint Methods
 		public void InsertSlide()
 		{
+			if (!AppManager.Instance.CheckPowerPointRunning(() => AppManager.Instance.ShowWarningQuestion("PowerPoint is not Running. Do you want to open it now?") == DialogResult.Yes)) return;
 			if (PowerPointHelper.Instance.GetActiveSlideIndex() != -1)
 			{
 				if (File.PresentationProperties != null)
@@ -160,35 +163,34 @@ namespace SalesDepot.PresentationClasses.Viewers
 
 		public void SaveAsPDF()
 		{
+			if (!AppManager.Instance.CheckPowerPointRunning(() => AppManager.Instance.ShowWarningQuestion("PowerPoint is not Running. Do you want to open it now?") == DialogResult.Yes)) return;
 			using (var form = new FormSaveAsPDF())
 			{
-				DialogResult result = form.ShowDialog();
-				bool wholeFile = form.WholeFile;
+				var result = form.ShowDialog();
+				var wholeFile = form.WholeFile;
 
-				if (result != DialogResult.Cancel)
+				if (result == DialogResult.Cancel) return;
+				var destinationFileName = Path.Combine(Path.GetTempPath(), File.NameWithoutExtesion + ".pdf");
+
+				using (var progressForm = new FormProgress())
 				{
-					string destinationFileName = Path.Combine(Path.GetTempPath(), File.NameWithoutExtesion + ".pdf");
-
-					using (var progressForm = new FormProgress())
+					progressForm.laProgress.Text = "Saving as PDF...";
+					progressForm.TopMost = true;
+					var thread = new Thread(delegate()
 					{
-						progressForm.laProgress.Text = "Saving as PDF...";
-						progressForm.TopMost = true;
-						var thread = new Thread(delegate()
-													{
-														PowerPointHelper.Instance.OpenSlideSourcePresentation(_tempCopy);
-														PowerPointHelper.Instance.ExportPresentationAsPDF(wholeFile ? -1 : (File.PreviewContainer.SelectedIndex + 1), destinationFileName);
-													});
-						thread.Start();
-						progressForm.Show();
+						PowerPointHelper.Instance.OpenSlideSourcePresentation(_tempCopy);
+						PowerPointHelper.Instance.ExportPresentationAsPDF(wholeFile ? -1 : (File.PreviewContainer.SelectedIndex + 1), destinationFileName);
+					});
+					thread.Start();
+					progressForm.Show();
 
-						while (thread.IsAlive)
-							Application.DoEvents();
+					while (thread.IsAlive)
+						Application.DoEvents();
 
-						progressForm.Close();
+					progressForm.Close();
 
-						AppManager.Instance.ActivityManager.AddLinkAccessActivity("Save Link as PDF", File.Name, File.Type.ToString(), File.OriginalPath, File.Parent.Parent.Parent.Name, File.Parent.Parent.Name);
-						LinkManager.Instance.SaveFile("Save PDF as", new FileInfo(destinationFileName), false);
-					}
+					AppManager.Instance.ActivityManager.AddLinkAccessActivity("Save Link as PDF", File.Name, File.Type.ToString(), File.OriginalPath, File.Parent.Parent.Parent.Name, File.Parent.Parent.Name);
+					LinkManager.Instance.SaveFile("Save PDF as", new FileInfo(destinationFileName), false);
 				}
 			}
 		}
@@ -205,38 +207,31 @@ namespace SalesDepot.PresentationClasses.Viewers
 		#region GUI Event Handlers
 		private void comboBoxEditSlides_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			if (File != null)
-			{
-				if (File.PreviewContainer != null)
-				{
-					File.PreviewContainer.SelectedIndex = comboBoxEditSlides.SelectedIndex;
-					pictureBoxPreview.Image = File.PreviewContainer.SelectedSlide;
-					laSlideNumber.Text = string.Format("Slide {0} of {1}", new object[] { (File.PreviewContainer.SelectedIndex + 1).ToString(), File.PreviewContainer.Slides.Count.ToString() });
-				}
-			}
+			if (File == null) return;
+			if (File.PreviewContainer == null) return;
+			File.PreviewContainer.SelectedIndex = comboBoxEditSlides.SelectedIndex;
+			pictureBoxPreview.Image = File.PreviewContainer.SelectedSlide;
+			laSlideNumber.Text = string.Format("Slide {0} of {1}", new object[] { (File.PreviewContainer.SelectedIndex + 1).ToString(), File.PreviewContainer.Slides.Count.ToString() });
 		}
 
 		private void comboBoxEditSlides_ButtonClick(object sender, ButtonPressedEventArgs e)
 		{
-			if (File != null)
+			if (File == null) return;
+			if (File.PreviewContainer == null) return;
+			switch (e.Button.Index)
 			{
-				if (File.PreviewContainer != null)
-				{
-					if (e.Button.Index == 1)
-					{
-						File.PreviewContainer.SelectedIndex++;
-						if (File.PreviewContainer.SelectedIndex >= File.PreviewContainer.Slides.Count)
-							File.PreviewContainer.SelectedIndex = 0;
-						comboBoxEditSlides.SelectedIndex = File.PreviewContainer.SelectedIndex;
-					}
-					else if (e.Button.Index == 2)
-					{
-						File.PreviewContainer.SelectedIndex--;
-						if (File.PreviewContainer.SelectedIndex < 0)
-							File.PreviewContainer.SelectedIndex = File.PreviewContainer.Slides.Count - 1;
-						comboBoxEditSlides.SelectedIndex = File.PreviewContainer.SelectedIndex;
-					}
-				}
+				case 1:
+					File.PreviewContainer.SelectedIndex++;
+					if (File.PreviewContainer.SelectedIndex >= File.PreviewContainer.Slides.Count)
+						File.PreviewContainer.SelectedIndex = 0;
+					comboBoxEditSlides.SelectedIndex = File.PreviewContainer.SelectedIndex;
+					break;
+				case 2:
+					File.PreviewContainer.SelectedIndex--;
+					if (File.PreviewContainer.SelectedIndex < 0)
+						File.PreviewContainer.SelectedIndex = File.PreviewContainer.Slides.Count - 1;
+					comboBoxEditSlides.SelectedIndex = File.PreviewContainer.SelectedIndex;
+					break;
 			}
 		}
 

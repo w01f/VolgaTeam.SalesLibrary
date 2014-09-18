@@ -7,7 +7,9 @@ using System.Windows.Forms;
 using ProgramManager.CoreObjects;
 using SalesDepot.ConfigurationClasses;
 using SalesDepot.CoreObjects.InteropClasses;
+using SalesDepot.Floater;
 using SalesDepot.ToolClasses;
+using SalesDepot.ToolForms;
 using PowerPointHelper = SalesDepot.InteropClasses.PowerPointHelper;
 
 namespace SalesDepot
@@ -59,6 +61,11 @@ namespace SalesDepot
 		public void RunForm()
 		{
 			Instance.ActivityManager.AddUserActivity("Application run");
+			if (!PowerPointHelper.Instance.IsLinkedWithApplication &&
+				SettingsManager.Instance.PowerPointLaunchOptions == LinkLaunchOptions.Viewer &&
+				SettingsManager.Instance.RunPowerPointWhenNeeded.HasValue &&
+				SettingsManager.Instance.RunPowerPointWhenNeeded.Value)
+				RunPowerPointLoader();
 			ListManager.Instance.Init();
 			ShowMainForm();
 		}
@@ -120,7 +127,7 @@ namespace SalesDepot
 			WinAPIHelper.AttachThreadInput(WinAPIHelper.GetCurrentThreadId(), WinAPIHelper.GetWindowThreadProcessId(WinAPIHelper.GetForegroundWindow(), out lpdwProcessId), false);
 		}
 
-		public void RunPowerPointLoader()
+		private void RunPowerPointLoader()
 		{
 			if (File.Exists(SettingsManager.Instance.PowerPointLoaderPath))
 			{
@@ -131,6 +138,15 @@ namespace SalesDepot
 			else
 				ShowWarning("Couldn't find PowerPointLoader app");
 		}
+
+		public bool CheckPowerPointRunning(Func<bool> beforeRun = null)
+		{
+			if (PowerPointHelper.Instance.IsLinkedWithApplication) return true;
+			if (beforeRun != null && !beforeRun()) return false;
+			FloaterManager.Instance.ShowFloater(FormMain.Instance, RunPowerPointLoader);
+			return false;
+		}
+
 
 		public void ShowInfo(string text)
 		{

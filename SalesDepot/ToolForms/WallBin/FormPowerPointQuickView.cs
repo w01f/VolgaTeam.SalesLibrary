@@ -30,6 +30,7 @@ namespace SalesDepot.ToolForms.WallBin
 		}
 
 		public LibraryLink SelectedFile { get; set; }
+		public Action AfterClose { get; private set; }
 
 		protected override void OnHandleCreated(EventArgs e)
 		{
@@ -44,6 +45,7 @@ namespace SalesDepot.ToolForms.WallBin
 		#region Form GUI Event Habdlers
 		private void FormQuickView_Shown(object sender, EventArgs e)
 		{
+			AfterClose = null;
 			if (SelectedFile != null)
 			{
 				if (File.Exists(SelectedFile.LocalPath))
@@ -121,16 +123,15 @@ namespace SalesDepot.ToolForms.WallBin
 
 		private void barButtonItemSave_ItemClick(object sender, ItemClickEventArgs e)
 		{
-			if (SelectedFile != null)
-			{
-				AppManager.Instance.ActivityManager.AddLinkAccessActivity("Save Link", SelectedFile.Name, SelectedFile.Type.ToString(), SelectedFile.OriginalPath, SelectedFile.Parent.Parent.Parent.Name, SelectedFile.Parent.Parent.Name);
-				LinkManager.Instance.SaveFile("Save copy of the presentation as", new FileInfo(SelectedFile.LocalPath));
-			}
+			if (SelectedFile == null) return;
+			AppManager.Instance.ActivityManager.AddLinkAccessActivity("Save Link", SelectedFile.Name, SelectedFile.Type.ToString(), SelectedFile.OriginalPath, SelectedFile.Parent.Parent.Parent.Name, SelectedFile.Parent.Parent.Name);
+			LinkManager.Instance.SaveFile("Save copy of the presentation as", new FileInfo(SelectedFile.LocalPath));
 		}
 
 		private void barButtonItemSaveAsPDF_ItemClick(object sender, ItemClickEventArgs e)
 		{
 			if (SelectedFile == null) return;
+			if (!CheckPowerPointRunning()) return;
 			using (var form = new FormSaveAsPDF())
 			{
 				DialogResult result = form.ShowDialog();
@@ -164,26 +165,25 @@ namespace SalesDepot.ToolForms.WallBin
 
 		private void barButtonItemEmailLink_ItemClick(object sender, ItemClickEventArgs e)
 		{
-			if (SelectedFile != null)
+			if (SelectedFile == null) return;
+			if (!CheckPowerPointRunning()) return;
+			PowerPointHelper.Instance.OpenSlideSourcePresentation(_tempCopy);
+			using (var form = new FormEmailPresentation())
 			{
-				PowerPointHelper.Instance.OpenSlideSourcePresentation(_tempCopy);
-				using (var form = new FormEmailPresentation())
-				{
-					form.SelectedFile = SelectedFile;
-					form.ActiveSlide = SelectedFile.PreviewContainer.SelectedIndex + 1;
-					form.ShowDialog();
-				}
+				form.SelectedFile = SelectedFile;
+				form.ActiveSlide = SelectedFile.PreviewContainer.SelectedIndex + 1;
+				form.ShowDialog();
 			}
+
 		}
 
 		private void barButtonItemPrintLink_ItemClick(object sender, ItemClickEventArgs e)
 		{
-			if (SelectedFile != null)
-			{
-				AppManager.Instance.ActivityManager.AddLinkAccessActivity("Print Link", SelectedFile.Name, SelectedFile.Type.ToString(), SelectedFile.OriginalPath, SelectedFile.Parent.Parent.Parent.Name, SelectedFile.Parent.Parent.Name);
-				PowerPointHelper.Instance.OpenSlideSourcePresentation(_tempCopy);
-				PowerPointHelper.Instance.PrintPresentation(SelectedFile.PreviewContainer.SelectedIndex + 1);
-			}
+			if (SelectedFile == null) return;
+			if (!CheckPowerPointRunning()) return;
+			AppManager.Instance.ActivityManager.AddLinkAccessActivity("Print Link", SelectedFile.Name, SelectedFile.Type.ToString(), SelectedFile.OriginalPath, SelectedFile.Parent.Parent.Parent.Name, SelectedFile.Parent.Parent.Name);
+			PowerPointHelper.Instance.OpenSlideSourcePresentation(_tempCopy);
+			PowerPointHelper.Instance.PrintPresentation(SelectedFile.PreviewContainer.SelectedIndex + 1);
 		}
 
 		private void barLargeButtonItemAddAllSlides_ItemClick(object sender, ItemClickEventArgs e)
@@ -227,39 +227,32 @@ namespace SalesDepot.ToolForms.WallBin
 		#region Other Event Handlers
 		private void comboBoxEditSlides_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			if (SelectedFile != null)
-			{
-				if (SelectedFile.PreviewContainer != null)
-				{
-					SelectedFile.PreviewContainer.SelectedIndex = comboBoxEditSlides.SelectedIndex;
-					pictureBoxPreview.Image = SelectedFile.PreviewContainer.SelectedSlide;
-					pictureBoxPreview.BackColor = Color.WhiteSmoke;
-					laSlideNumber.Text = string.Format("Slide {0} of {1}", new object[] { (SelectedFile.PreviewContainer.SelectedIndex + 1).ToString(), SelectedFile.PreviewContainer.Slides.Count.ToString() });
-				}
-			}
+			if (SelectedFile == null) return;
+			if (SelectedFile.PreviewContainer == null) return;
+			SelectedFile.PreviewContainer.SelectedIndex = comboBoxEditSlides.SelectedIndex;
+			pictureBoxPreview.Image = SelectedFile.PreviewContainer.SelectedSlide;
+			pictureBoxPreview.BackColor = Color.WhiteSmoke;
+			laSlideNumber.Text = string.Format("Slide {0} of {1}", new object[] { (SelectedFile.PreviewContainer.SelectedIndex + 1).ToString(), SelectedFile.PreviewContainer.Slides.Count.ToString() });
 		}
 
 		private void comboBoxEditSlides_ButtonClick(object sender, ButtonPressedEventArgs e)
 		{
-			if (SelectedFile != null)
+			if (SelectedFile == null) return;
+			if (SelectedFile.PreviewContainer == null) return;
+			switch (e.Button.Index)
 			{
-				if (SelectedFile.PreviewContainer != null)
-				{
-					if (e.Button.Index == 1)
-					{
-						SelectedFile.PreviewContainer.SelectedIndex++;
-						if (SelectedFile.PreviewContainer.SelectedIndex >= SelectedFile.PreviewContainer.Slides.Count)
-							SelectedFile.PreviewContainer.SelectedIndex = 0;
-						comboBoxEditSlides.SelectedIndex = SelectedFile.PreviewContainer.SelectedIndex;
-					}
-					else if (e.Button.Index == 2)
-					{
-						SelectedFile.PreviewContainer.SelectedIndex--;
-						if (SelectedFile.PreviewContainer.SelectedIndex < 0)
-							SelectedFile.PreviewContainer.SelectedIndex = SelectedFile.PreviewContainer.Slides.Count - 1;
-						comboBoxEditSlides.SelectedIndex = SelectedFile.PreviewContainer.SelectedIndex;
-					}
-				}
+				case 1:
+					SelectedFile.PreviewContainer.SelectedIndex++;
+					if (SelectedFile.PreviewContainer.SelectedIndex >= SelectedFile.PreviewContainer.Slides.Count)
+						SelectedFile.PreviewContainer.SelectedIndex = 0;
+					comboBoxEditSlides.SelectedIndex = SelectedFile.PreviewContainer.SelectedIndex;
+					break;
+				case 2:
+					SelectedFile.PreviewContainer.SelectedIndex--;
+					if (SelectedFile.PreviewContainer.SelectedIndex < 0)
+						SelectedFile.PreviewContainer.SelectedIndex = SelectedFile.PreviewContainer.Slides.Count - 1;
+					comboBoxEditSlides.SelectedIndex = SelectedFile.PreviewContainer.SelectedIndex;
+					break;
 			}
 		}
 
@@ -270,47 +263,58 @@ namespace SalesDepot.ToolForms.WallBin
 		#endregion
 
 		#region Common Methods
-		public void InsertSlide(bool allSlides = false)
+
+		private bool CheckPowerPointRunning()
 		{
-			if (SelectedFile != null)
+			if (PowerPointHelper.Instance.IsLinkedWithApplication) return true;
+			if (AppManager.Instance.ShowWarningQuestion("PowerPoint is not Running. Do you want to open it now?") == DialogResult.Yes)
 			{
-				if (PowerPointHelper.Instance.GetActiveSlideIndex() != -1)
+				AfterClose = new Action(() => AppManager.Instance.CheckPowerPointRunning());
+				Close();
+			}
+			return false;
+		}
+
+		private void InsertSlide(bool allSlides = false)
+		{
+			if (SelectedFile == null) return;
+			if (!CheckPowerPointRunning()) return;
+			if (PowerPointHelper.Instance.GetActiveSlideIndex() != -1)
+			{
+				AppManager.Instance.ActivatePowerPoint();
+				AppManager.Instance.ActivateMainForm();
+				if (SelectedFile.PresentationProperties != null)
 				{
-					AppManager.Instance.ActivatePowerPoint();
-					AppManager.Instance.ActivateMainForm();
-					if (SelectedFile.PresentationProperties != null)
+					if ((PowerPointHelper.Instance.ActivePresentation.PageSetup.SlideOrientation == MsoOrientation.msoOrientationHorizontal && SelectedFile.PresentationProperties.Orientation.Equals("Portrait")) ||
+						(PowerPointHelper.Instance.ActivePresentation.PageSetup.SlideOrientation == MsoOrientation.msoOrientationVertical && SelectedFile.PresentationProperties.Orientation.Equals("Landscape")))
+						if (AppManager.Instance.ShowWarningQuestion("This slide is not the same size as your presentation.\nDo you still want to add it?") != DialogResult.Yes)
+							return;
+				}
+				using (var form = new FormProgress())
+				{
+					form.laProgress.Text = "Inserting slides...";
+					FloaterManager.Instance.ShowFloater(this, () =>
 					{
-						if ((PowerPointHelper.Instance.ActivePresentation.PageSetup.SlideOrientation == MsoOrientation.msoOrientationHorizontal && SelectedFile.PresentationProperties.Orientation.Equals("Portrait")) ||
-							(PowerPointHelper.Instance.ActivePresentation.PageSetup.SlideOrientation == MsoOrientation.msoOrientationVertical && SelectedFile.PresentationProperties.Orientation.Equals("Landscape")))
-							if (AppManager.Instance.ShowWarningQuestion("This slide is not the same size as your presentation.\nDo you still want to add it?") != DialogResult.Yes)
-								return;
-					}
-					using (var form = new FormProgress())
-					{
-						form.laProgress.Text = "Inserting slides...";
-						FloaterManager.Instance.ShowFloater(this, () =>
+						form.TopMost = true;
+						var thread = new Thread(delegate()
 						{
-							form.TopMost = true;
-							var thread = new Thread(delegate()
-							{
-								AppManager.Instance.ActivityManager.AddLinkAccessActivity("Insert Slide", SelectedFile.Name, SelectedFile.Type.ToString(), SelectedFile.OriginalPath, SelectedFile.Parent.Parent.Parent.Name, SelectedFile.Parent.Parent.Name);
-								PowerPointHelper.Instance.OpenSlideSourcePresentation(_tempCopy);
-								var selectedTheme = comboBoxEditSlideTemplate.EditValue as Theme;
-								PowerPointHelper.Instance.AppendSlide(allSlides ? -1 : (SelectedFile.PreviewContainer.SelectedIndex + 1), checkEditChangeSlideTemplate.Checked && selectedTheme != null ? selectedTheme.ThemeFilePath : String.Empty);
-							});
-							thread.Start();
-							form.Show();
-							while (thread.IsAlive)
-								Application.DoEvents();
-							form.Close();
+							AppManager.Instance.ActivityManager.AddLinkAccessActivity("Insert Slide", SelectedFile.Name, SelectedFile.Type.ToString(), SelectedFile.OriginalPath, SelectedFile.Parent.Parent.Parent.Name, SelectedFile.Parent.Parent.Name);
+							PowerPointHelper.Instance.OpenSlideSourcePresentation(_tempCopy);
+							var selectedTheme = comboBoxEditSlideTemplate.EditValue as Theme;
+							PowerPointHelper.Instance.AppendSlide(allSlides ? -1 : (SelectedFile.PreviewContainer.SelectedIndex + 1), checkEditChangeSlideTemplate.Checked && selectedTheme != null ? selectedTheme.ThemeFilePath : String.Empty);
 						});
-					}
+						thread.Start();
+						form.Show();
+						while (thread.IsAlive)
+							Application.DoEvents();
+						form.Close();
+					});
 				}
-				else
-				{
-					using (var warningForm = new FormSelectSlideWarning())
-						warningForm.ShowDialog();
-				}
+			}
+			else
+			{
+				using (var warningForm = new FormSelectSlideWarning())
+					warningForm.ShowDialog();
 			}
 		}
 		#endregion

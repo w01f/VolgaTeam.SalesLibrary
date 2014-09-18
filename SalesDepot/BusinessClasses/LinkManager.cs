@@ -646,12 +646,6 @@ namespace SalesDepot.BusinessClasses
 		public void ViewPresentation(LibraryLink link)
 		{
 			string presentationFile = link.LocalPath;
-			if (!PowerPointHelper.Instance.IsLinkedWithApplication)
-			{
-				AppManager.Instance.RunPowerPointLoader();
-				AppManager.Instance.ActivatePowerPoint();
-				AppManager.Instance.ActivateMainForm();
-			}
 			var file = new FileInfo(presentationFile);
 			if (file.Extension.ToLower().Equals(".pptx") && PowerPointHelper.Instance.Is2003)
 			{
@@ -670,7 +664,7 @@ namespace SalesDepot.BusinessClasses
 			if (file.Exists)
 			{
 				_formPowerPointQuickView.SelectedFile = link;
-				int temp = link.PreviewContainer.SelectedIndex;
+				var temp = link.PreviewContainer.SelectedIndex;
 
 				AppManager.Instance.ActivityManager.AddLinkAccessActivity("Preview Link", link.Name, link.Type.ToString(), link.OriginalPath, link.Parent.Parent.Parent.Name, link.Parent.Parent.Name);
 
@@ -679,16 +673,13 @@ namespace SalesDepot.BusinessClasses
 			}
 			RegistryHelper.SalesDepotHandle = FormMain.Instance.Handle;
 			RegistryHelper.MaximizeSalesDepot = true;
+			if (_formPowerPointQuickView.AfterClose != null)
+				_formPowerPointQuickView.AfterClose();
 		}
 
 		public void ViewPresentationOld(LibraryLink link)
 		{
-			if (!PowerPointHelper.Instance.IsLinkedWithApplication)
-			{
-				AppManager.Instance.RunPowerPointLoader();
-				AppManager.Instance.ActivatePowerPoint();
-				AppManager.Instance.ActivateMainForm();
-			}
+			if (!AppManager.Instance.CheckPowerPointRunning(() => AppManager.Instance.ShowWarningQuestion("PowerPoint is not Running. Do you want to open it now?") == DialogResult.Yes)) return;
 			var file = new FileInfo(link.LocalPath);
 			if (file.Extension.ToLower().Equals(".pptx") && PowerPointHelper.Instance.Is2003)
 			{
@@ -718,6 +709,7 @@ namespace SalesDepot.BusinessClasses
 
 		public void AddVideoIntoPresentation(LibraryLink link)
 		{
+			if (!AppManager.Instance.CheckPowerPointRunning(() => AppManager.Instance.ShowWarningQuestion("PowerPoint is not Running. Do you want to open it now?") == DialogResult.Yes)) return;
 			if (File.Exists(PowerPointHelper.Instance.ActivePresentation.FullName))
 			{
 				AppManager.Instance.ActivityManager.AddLinkAccessActivity("Insert video", link.Name, link.Type.ToString(), link.OriginalPath, link.Parent.Parent.Parent.Name, link.Parent.Parent.Name);

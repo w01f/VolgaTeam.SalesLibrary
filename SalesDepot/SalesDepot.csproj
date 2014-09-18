@@ -526,6 +526,12 @@
     <Compile Include="ToolForms\WallBin\FormEmailLink.Designer.cs">
       <DependentUpon>FormEmailLink.cs</DependentUpon>
     </Compile>
+    <Compile Include="ToolForms\WallBin\FormPowerPointWarning.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToolForms\WallBin\FormPowerPointWarning.Designer.cs">
+      <DependentUpon>FormPowerPointWarning.cs</DependentUpon>
+    </Compile>
     <Compile Include="ToolForms\WallBin\FormZipFileName.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -758,6 +764,9 @@
     <EmbeddedResource Include="ToolForms\WallBin\FormEmailLink.resx">
       <DependentUpon>FormEmailLink.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ToolForms\WallBin\FormPowerPointWarning.resx">
+      <DependentUpon>FormPowerPointWarning.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ToolForms\WallBin\FormZipFileName.resx">
       <DependentUpon>FormZipFileName.cs</DependentUpon>
     </EmbeddedResource>
@@ -930,6 +939,7 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\PowerPointWarning.png" />
     <None Include="Resources\SettingsWord.png" />
     <None Include="Resources\SettingsVideo.png" />
     <None Include="Resources\SettingsSave.png" />

@@ -533,6 +533,16 @@ namespace SalesDepot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap PowerPointWarning {
+            get {
+                object obj = ResourceManager.GetObject("PowerPointWarning", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ProgramBrowseBackward {
             get {
                 object obj = ResourceManager.GetObject("ProgramBrowseBackward", resourceCulture);

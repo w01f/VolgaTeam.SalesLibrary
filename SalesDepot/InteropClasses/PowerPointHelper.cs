@@ -22,7 +22,6 @@ namespace SalesDepot.InteropClasses
 
 		private bool _isOpened;
 		private Application _powerPointObject;
-		private int _powerPointProcessId;
 		private Presentation _slideSourcePresentationObject;
 
 		private PowerPointHelper()
@@ -70,7 +69,7 @@ namespace SalesDepot.InteropClasses
 		{
 			get
 			{
-				Process[] proc = Process.GetProcessesByName("POWERPNT");
+				var proc = Process.GetProcessesByName("POWERPNT");
 				if (!(proc.GetLength(0) > 0))
 				{
 					_powerPointObject = null;
@@ -80,7 +79,7 @@ namespace SalesDepot.InteropClasses
 				{
 					try
 					{
-						string caption = _powerPointObject.Caption;
+						var caption = PowerPointObject.Caption;
 						_isOpened = true;
 					}
 					catch
@@ -138,7 +137,6 @@ namespace SalesDepot.InteropClasses
 				}
 				uint lpdwProcessId = 0;
 				WinAPIHelper.GetWindowThreadProcessId(new IntPtr(_powerPointObject.HWND), out lpdwProcessId);
-				_powerPointProcessId = (int)lpdwProcessId;
 
 				_powerPointObject.DisplayAlerts = PpAlertLevel.ppAlertsNone;
 

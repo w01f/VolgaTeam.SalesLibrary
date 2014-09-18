@@ -5,6 +5,7 @@ using System.IO;
 using System.Threading;
 using System.Windows.Forms;
 using DevComponents.DotNetBar;
+using DevExpress.XtraRichEdit.Model;
 using SalesDepot.BusinessClasses;
 using SalesDepot.ConfigurationClasses;
 using SalesDepot.CoreObjects.ToolClasses;
@@ -15,6 +16,7 @@ using SalesDepot.Properties;
 using SalesDepot.TabPages;
 using SalesDepot.ToolClasses;
 using SalesDepot.ToolForms;
+using SalesDepot.ToolForms.WallBin;
 using PowerPointHelper = SalesDepot.InteropClasses.PowerPointHelper;
 using WinAPIHelper = SalesDepot.CoreObjects.InteropClasses.WinAPIHelper;
 
@@ -68,13 +70,11 @@ namespace SalesDepot
 		{
 			get
 			{
-				Image floaterLogo = null;
-				if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemHome || ribbonControl.SelectedRibbonTabItem == ribbonTabItemSettings || ribbonControl.SelectedRibbonTabItem == ribbonTabItemQBuilder || ribbonControl.SelectedRibbonTabItem == ribbonTabItemSearch)
+				Image floaterLogo = labelItemSettingsLogo.Image;
+				if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemHome || ribbonControl.SelectedRibbonTabItem == ribbonTabItemQBuilder || ribbonControl.SelectedRibbonTabItem == ribbonTabItemSearch)
 					floaterLogo = labelItemPackageLogo.Image;
 				if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemSearch)
 					floaterLogo = labelItemSearchLogo.Image;
-				if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemSettings)
-					floaterLogo = labelItemSettingsLogo.Image;
 				else if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemCalendar)
 				{
 					if (File.Exists(SettingsManager.Instance.CalendarLogoPath))
@@ -320,7 +320,7 @@ namespace SalesDepot
 			AppManager.Instance.ActivityManager.StartQueue();
 			ribbonControl.Visible = false;
 			pnEmpty.BringToFront();
-			
+
 			using (var form = new FormProgress())
 			{
 				form.TopMost = true;
@@ -379,6 +379,17 @@ namespace SalesDepot
 				ribbonBarStations.Enabled = false;
 				ribbonTabItemSettings.Enabled = false;
 				AppManager.Instance.ShowWarning("Library is not available...\nCheck your network connections....");
+			}
+
+			if (!PowerPointHelper.Instance.IsLinkedWithApplication &&
+				SettingsManager.Instance.PowerPointLaunchOptions == LinkLaunchOptions.Viewer &&
+				!SettingsManager.Instance.RunPowerPointWhenNeeded.HasValue)
+			{
+				using (var form = new FormPowerPointWarning())
+				{
+					if (form.ShowDialog() == DialogResult.OK)
+						AppManager.Instance.CheckPowerPointRunning();
+				}
 			}
 		}
 

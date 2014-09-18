@@ -81,7 +81,7 @@ namespace SalesDepot.ConfigurationClasses
 			LibraryLogoFolder = string.Empty;
 			CalendarLogoPath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\oc_logo.png", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
 			DisclaimerPath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\Nielsen Permissible Use.pdf", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
-			PowerPointLoaderPath = string.Format(@"{0}\newlocaldirect.com\app\PowerPointLoader.exe", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
+			PowerPointLoaderPath = string.Format(@"{0}\newlocaldirect.com\app\PPTLAUNCHER\PPTLAUNCH.exe", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
 			LogFilePath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\ApplicationLog.xml", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
 			PermissionsFilePath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\Library_Security.xml", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
 			Gallery1FilePath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\Gallery1.xml", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
@@ -191,8 +191,8 @@ namespace SalesDepot.ConfigurationClasses
 		public string AccordionTitle { get; set; }
 		public string AccordionDescription { get; set; }
 		public KeyWordFileFilters KeyWordFilters { get; private set; }
-
 		public bool ShowStartProgress { get; set; }
+		public bool? RunPowerPointWhenNeeded { get; set; }
 
 		public Guid AppID { get; set; }
 
@@ -472,6 +472,11 @@ namespace SalesDepot.ConfigurationClasses
 				if (node != null)
 					if (bool.TryParse(node.InnerText, out tempBool))
 						CalendarView = tempBool;
+				node = document.SelectSingleNode(@"/LocalSettings/RunPowerPointWhenNeeded");
+				if (node != null)
+					if (bool.TryParse(node.InnerText, out tempBool))
+						RunPowerPointWhenNeeded = tempBool;
+
 
 				#region Program Shedule Settings
 				node = document.SelectSingleNode(@"/LocalSettings/ProgramScheduleSelectedStation");
@@ -617,6 +622,8 @@ namespace SalesDepot.ConfigurationClasses
 			xml.AppendLine(@"<HomeView>" + HomeView + @"</HomeView>");
 			xml.AppendLine(@"<SearchView>" + SearchView + @"</SearchView>");
 			xml.AppendLine(@"<CalendarView>" + CalendarView + @"</CalendarView>");
+			if (RunPowerPointWhenNeeded.HasValue)
+				xml.AppendLine(@"<RunPowerPointWhenNeeded>" + RunPowerPointWhenNeeded.Value + @"</RunPowerPointWhenNeeded>");
 			if (!String.IsNullOrEmpty(_openFilePath))
 				xml.AppendLine(@"<OpenFilePath>" + _openFilePath + @"</OpenFilePath>");
 			if (!String.IsNullOrEmpty(_saveFilePath))
