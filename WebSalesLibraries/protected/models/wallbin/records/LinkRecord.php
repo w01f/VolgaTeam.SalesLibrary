@@ -328,7 +328,6 @@
 						$categoriesJoinSelector[] = '(lcat.id in (select id from tbl_link_category where lower(category) like "%' . $conditionToCompare . '%" or lower(tag) like "%' . $conditionToCompare . '%"))';
 					}
 					$categoryCondition = '(' . implode(($categoriesExactMatch == 'true' ? ' and ' : ' or '), $categoriesSelector) . ')';
-					$categoryJoinCondition = '(' . implode(($categoriesExactMatch == 'true' ? ' and ' : ' or '), $categoriesJoinSelector) . ')';
 					$additionalCategoryCondition = ' or ' . $categoryCondition;
 					$categoryCondition = '1=1';
 				}
@@ -414,8 +413,8 @@
 							max(link.enable_file_card) as enable_file_card,
 							max(link.format) as format,
 							(select (round(avg(lr.value)*2)/2) as value from tbl_link_rate lr where lr.id_link=link.id) as rate,
-							lcat.tag as tag';
-					$joinText = "lcat.id_link=link.id and " . $categoryJoinCondition;
+							glcat.tag as tag';
+					$joinText = "glcat.id_link=link.id";
 					$whereText = $contentCondition .
 						" and (" . $baseLinksCondition .
 						") and (" . $libraryCondition .
@@ -434,9 +433,9 @@
 					$linkRecords = Yii::app()->db->createCommand()
 						->select($selectText)
 						->from('tbl_link link')
-						->leftJoin("tbl_link_category lcat", $joinText)
+						->leftJoin("(select lcat.id_link, group_concat(lcat.tag separator ', ') as tag from tbl_link_category lcat where ".$categoryJoinCondition." group by lcat.id_link) glcat", $joinText)
 						->where($whereText)
-						->group('link.file_name, lcat.tag')
+						->group('link.file_name, glcat.tag')
 						->queryAll();
 				}
 				else
@@ -451,8 +450,8 @@
 							link.enable_file_card,
 							link.format,
 							(select (round(avg(lr.value)*2)/2) as value from tbl_link_rate lr where lr.id_link=link.id) as rate,
-							lcat.tag as tag';
-					$joinText = "lcat.id_link=link.id and " . $categoryJoinCondition;
+							glcat.tag as tag';
+					$joinText = "glcat.id_link=link.id";
 					$whereText = $contentCondition .
 						" and (" . $baseLinksCondition .
 						") and (" . $libraryCondition .
@@ -471,7 +470,7 @@
 					$linkRecords = Yii::app()->db->createCommand()
 						->select($selectText)
 						->from('tbl_link link')
-						->leftJoin("tbl_link_category lcat", $joinText)
+						->leftJoin("(select lcat.id_link, group_concat(lcat.tag separator ', ') as tag from tbl_link_category lcat where ".$categoryJoinCondition." group by lcat.id_link) glcat", $joinText)
 						->where($whereText)
 						->queryAll();
 				}
