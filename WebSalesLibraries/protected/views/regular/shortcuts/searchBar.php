@@ -60,6 +60,21 @@
 					<? if ($searchBar->samePage === true): ?>
 						<div class="same-page">true</div>
 					<? endif; ?>
+					<? if ($searchBar->enableSubSearch): ?>
+						<div class="enable-sub-search">true</div>
+					<? endif; ?>
+					<? if ($searchBar->showSubSearchAll): ?>
+						<div class="show-sub-search-all">true</div>
+					<? endif; ?>
+					<? if ($searchBar->showSubSearchSearch): ?>
+						<div class="show-sub-search-search">true</div>
+					<? endif; ?>
+					<? if ($searchBar->showSubSearchTemplates): ?>
+						<div class="show-sub-search-templates">true</div>
+					<? endif; ?>
+					<? if ($searchBar->subSearchDefaultView): ?>
+						<div class="sub-search-default-view"><? echo $searchBar->subSearchDefaultView; ?></div>
+					<? endif; ?>
 					<? if (isset($searchBar->conditions->sortColumn)): ?>
 						<div class="sort-column"><? echo $searchBar->conditions->sortColumn; ?></div>
 					<? endif; ?>

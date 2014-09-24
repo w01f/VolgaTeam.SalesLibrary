@@ -11,18 +11,20 @@
 		var sortColumn = content.find('.sort-column').html();
 		var sortDirection = content.find('.sort-direction').html();
 
-		var baseSearchConditionsHtml = content.find('.search-conditions')[0].outerHTML;
-		var homeBarHtml = content.parent().find('.shortcuts-home-bar')[0].outerHTML;
+		var baseSearchConditions = content.find('.search-conditions')[0];
+		var homeBar = content.parent().find('.shortcuts-home-bar')[0];
 		content.parent().find('.shortcuts-home-bar').remove();
 		content.html('');
-		content.append($(baseSearchConditionsHtml));
-		content.append($(homeBarHtml));
+		if (baseSearchConditions != undefined)
+			content.append($(baseSearchConditions.outerHTML));
+		if (homeBar != undefined)
+			content.append($(homeBar.outerHTML));
 		content.append($('<table id="search-container"><tr>' +
 			'<td id="right-navbar" style="display: none; width: 15%; min-width: 240px;"></td>' +
 			'<td id="search-result"><div></div></td>' +
 			'</tr></table>'));
-		var baseSearchConditions = content.find('.search-conditions');
-		var homeBar = content.find('.shortcuts-home-bar');
+		baseSearchConditions = content.find('.search-conditions');
+		homeBar = content.find('.shortcuts-home-bar');
 
 		var hideResults = baseSearchConditions.find('.hide-results').length > 0;
 		var enableSubSearch = baseSearchConditions.find('.enable-sub-search').length > 0;
