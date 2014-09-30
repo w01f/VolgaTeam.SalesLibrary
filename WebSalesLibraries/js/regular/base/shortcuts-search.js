@@ -11,14 +11,12 @@
 		var sortColumn = content.find('.sort-column').html();
 		var sortDirection = content.find('.sort-direction').html();
 
-		var baseSearchConditions = content.find('.search-conditions')[0];
-		var homeBar = content.parent().find('.shortcuts-home-bar')[0];
+		var baseSearchConditionsHtml = $('<div></div>').append(content.find('.search-conditions')).html();
+		var homeBarHtml = $('<div></div>').append(content.parent().find('.shortcuts-home-bar')).html();
 		content.parent().find('.shortcuts-home-bar').remove();
 		content.html('');
-		if (baseSearchConditions != undefined)
-			content.append($(baseSearchConditions.outerHTML));
-		if (homeBar != undefined)
-			content.append($(homeBar.outerHTML));
+		content.append($(baseSearchConditionsHtml));
+		content.append($(homeBarHtml));
 		content.append($('<table id="search-container"><tr>' +
 			'<td id="right-navbar" style="display: none; width: 15%; min-width: 240px;"></td>' +
 			'<td id="search-result"><div></div></td>' +
