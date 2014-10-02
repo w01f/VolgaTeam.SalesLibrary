@@ -193,6 +193,48 @@
     <Compile Include="BusinessClasses\PreviewContainer.cs" />
     <Compile Include="BusinessClasses\SettingsManager.cs" />
     <Compile Include="BusinessClasses\Utils.cs" />
+    <Compile Include="Controls\OvernightsCalendar\CalendarPartControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\OvernightsCalendar\CalendarPartControl.Designer.cs">
+      <DependentUpon>CalendarPartControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\OvernightsCalendar\DayControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\OvernightsCalendar\DayControl.Designer.cs">
+      <DependentUpon>DayControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\OvernightsCalendar\MonthControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\OvernightsCalendar\MonthControl.Designer.cs">
+      <DependentUpon>MonthControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\OvernightsCalendar\OvernightsCalendarControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\OvernightsCalendar\OvernightsCalendarControl.Designer.cs">
+      <DependentUpon>OvernightsCalendarControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\OvernightsCalendar\WeekDayHeaderControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\OvernightsCalendar\WeekDayHeaderControl.Designer.cs">
+      <DependentUpon>WeekDayHeaderControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\OvernightsCalendar\YearControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\OvernightsCalendar\YearControl.Designer.cs">
+      <DependentUpon>YearControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TabPages\TabOvernightsCalendarControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\TabPages\TabOvernightsCalendarControl.Designer.cs">
+      <DependentUpon>TabOvernightsCalendarControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Wallbin\ColumnPanel.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -294,6 +336,12 @@
     <Compile Include="Forms\FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FormOvernihtsCalendarAttach.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormOvernihtsCalendarAttach.Designer.cs">
+      <DependentUpon>FormOvernihtsCalendarAttach.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FormProgress.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -306,6 +354,27 @@
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
+    <EmbeddedResource Include="Controls\OvernightsCalendar\CalendarPartControl.resx">
+      <DependentUpon>CalendarPartControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\OvernightsCalendar\DayControl.resx">
+      <DependentUpon>DayControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\OvernightsCalendar\MonthControl.resx">
+      <DependentUpon>MonthControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\OvernightsCalendar\OvernightsCalendarControl.resx">
+      <DependentUpon>OvernightsCalendarControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\OvernightsCalendar\WeekDayHeaderControl.resx">
+      <DependentUpon>WeekDayHeaderControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\OvernightsCalendar\YearControl.resx">
+      <DependentUpon>YearControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\TabPages\TabOvernightsCalendarControl.resx">
+      <DependentUpon>TabOvernightsCalendarControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\Wallbin\ColumnTitleControl.resx">
       <DependentUpon>ColumnTitleControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -354,10 +423,12 @@
     <EmbeddedResource Include="Forms\FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormOvernihtsCalendarAttach.resx">
+      <DependentUpon>FormOvernihtsCalendarAttach.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormProgress.resx">
       <DependentUpon>FormProgress.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -497,7 +568,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <None Include="Resources\OpenCalendarSmall.png" />
     <None Include="Resources\Attach.png" />
+    <None Include="Resources\CalendarDisclaimerLogo.png" />
+    <None Include="Resources\AttachSmall.png" />
     <Content Include="Resources\FolderContentDocx.png" />
     <Content Include="Resources\FolderContentFolder.png" />
     <Content Include="Resources\FolderContentMp4.png" />

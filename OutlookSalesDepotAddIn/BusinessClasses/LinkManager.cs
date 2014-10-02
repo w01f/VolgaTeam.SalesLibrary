@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using Microsoft.Office.Interop.Outlook;
@@ -60,6 +61,9 @@ namespace OutlookSalesDepotAddIn.BusinessClasses
 				case FileTypes.LineBreak:
 					if (!string.IsNullOrEmpty(link.LineBreakProperties.Note))
 						Utils.ShowInfo(link.LineBreakProperties.Note);
+					break;
+				case FileTypes.OvernightsLink:
+					StartProcess(link);
 					break;
 			}
 		}
@@ -124,6 +128,18 @@ namespace OutlookSalesDepotAddIn.BusinessClasses
 				sourceFile = null;
 			}
 			return sourceFile;
+		}
+
+		public void StartProcess(LibraryLink link)
+		{
+			try
+			{
+				Process.Start(link.LocalPath);
+			}
+			catch
+			{
+				Utils.ShowWarning("This Link is not active");
+			}
 		}
 	}
 }

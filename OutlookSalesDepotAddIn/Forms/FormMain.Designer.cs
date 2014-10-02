@@ -33,20 +33,29 @@ namespace OutlookSalesDepotAddIn.Forms
 			this.styleManager = new DevComponents.DotNetBar.StyleManager(this.components);
 			this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
 			this.ribbonControl = new DevComponents.DotNetBar.RibbonControl();
+			this.ribbonPanelCalendar = new DevComponents.DotNetBar.RibbonPanel();
+			this.ribbonBarCalendarExit = new DevComponents.DotNetBar.RibbonBar();
+			this.buttonItemCalendarExit = new DevComponents.DotNetBar.ButtonItem();
+			this.ribbonBarCalendarDisclaimer = new DevComponents.DotNetBar.RibbonBar();
+			this.itemContainerCalendarDisclaimer = new DevComponents.DotNetBar.ItemContainer();
+			this.labelItemCalendarDisclaimerLogo = new DevComponents.DotNetBar.LabelItem();
+			this.ribbonBarCalendarParts = new DevComponents.DotNetBar.RibbonBar();
 			this.ribbonPanelHome = new DevComponents.DotNetBar.RibbonPanel();
 			this.ribbonBarHomeExit = new DevComponents.DotNetBar.RibbonBar();
+			this.buttonItemHomeExit = new DevComponents.DotNetBar.ButtonItem();
+			this.ribbonBarHomeAttach = new DevComponents.DotNetBar.RibbonBar();
+			this.buttonItemHomeAttach = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarHomeStations = new DevComponents.DotNetBar.RibbonBar();
+			this.labelItemHomePackageLogo = new DevComponents.DotNetBar.LabelItem();
 			this.itemContainerHomeStations = new DevComponents.DotNetBar.ItemContainer();
 			this.comboBoxItemPackages = new DevComponents.DotNetBar.ComboBoxItem();
 			this.comboBoxItemStations = new DevComponents.DotNetBar.ComboBoxItem();
 			this.ribbonTabItemHome = new DevComponents.DotNetBar.RibbonTabItem();
+			this.ribbonTabItemCalendar = new DevComponents.DotNetBar.RibbonTabItem();
 			this.pnContainer = new System.Windows.Forms.Panel();
 			this.pnEmpty = new System.Windows.Forms.Panel();
-			this.ribbonBarHomeAttach = new DevComponents.DotNetBar.RibbonBar();
-			this.buttonItemHomeExit = new DevComponents.DotNetBar.ButtonItem();
-			this.buttonItemHomeAttach = new DevComponents.DotNetBar.ButtonItem();
-			this.labelItemHomePackageLogo = new DevComponents.DotNetBar.LabelItem();
 			this.ribbonControl.SuspendLayout();
+			this.ribbonPanelCalendar.SuspendLayout();
 			this.ribbonPanelHome.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -69,11 +78,13 @@ namespace OutlookSalesDepotAddIn.Forms
 			this.ribbonControl.CanCustomize = false;
 			this.ribbonControl.CaptionVisible = true;
 			this.ribbonControl.Controls.Add(this.ribbonPanelHome);
+			this.ribbonControl.Controls.Add(this.ribbonPanelCalendar);
 			this.ribbonControl.Dock = System.Windows.Forms.DockStyle.Top;
 			this.ribbonControl.EnableQatPlacement = false;
 			this.ribbonControl.ForeColor = System.Drawing.Color.Black;
 			this.ribbonControl.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.ribbonTabItemHome});
+            this.ribbonTabItemHome,
+            this.ribbonTabItemCalendar});
 			this.ribbonControl.KeyTipsFont = new System.Drawing.Font("Tahoma", 7F);
 			this.ribbonControl.Location = new System.Drawing.Point(5, 1);
 			this.ribbonControl.Name = "ribbonControl";
@@ -98,6 +109,160 @@ namespace OutlookSalesDepotAddIn.Forms
 			this.ribbonControl.TabIndex = 0;
 			this.ribbonControl.Text = "ribbonControl1";
 			this.ribbonControl.UseCustomizeDialog = false;
+			// 
+			// ribbonPanelCalendar
+			// 
+			this.ribbonPanelCalendar.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.ribbonPanelCalendar.Controls.Add(this.ribbonBarCalendarExit);
+			this.ribbonPanelCalendar.Controls.Add(this.ribbonBarCalendarDisclaimer);
+			this.ribbonPanelCalendar.Controls.Add(this.ribbonBarCalendarParts);
+			this.ribbonPanelCalendar.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.ribbonPanelCalendar.Location = new System.Drawing.Point(0, 53);
+			this.ribbonPanelCalendar.Name = "ribbonPanelCalendar";
+			this.ribbonPanelCalendar.Padding = new System.Windows.Forms.Padding(3, 0, 3, 2);
+			this.ribbonPanelCalendar.Size = new System.Drawing.Size(858, 132);
+			// 
+			// 
+			// 
+			this.ribbonPanelCalendar.Style.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			// 
+			// 
+			// 
+			this.ribbonPanelCalendar.StyleMouseDown.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			// 
+			// 
+			// 
+			this.ribbonPanelCalendar.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			this.ribbonPanelCalendar.TabIndex = 2;
+			this.ribbonPanelCalendar.Visible = false;
+			// 
+			// ribbonBarCalendarExit
+			// 
+			this.ribbonBarCalendarExit.AutoOverflowEnabled = false;
+			this.ribbonBarCalendarExit.AutoSizeItems = false;
+			// 
+			// 
+			// 
+			this.ribbonBarCalendarExit.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			// 
+			// 
+			// 
+			this.ribbonBarCalendarExit.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			this.ribbonBarCalendarExit.ContainerControlProcessDialogKey = true;
+			this.ribbonBarCalendarExit.Dock = System.Windows.Forms.DockStyle.Left;
+			this.ribbonBarCalendarExit.DragDropSupport = true;
+			this.ribbonBarCalendarExit.HorizontalItemAlignment = DevComponents.DotNetBar.eHorizontalItemsAlignment.Center;
+			this.ribbonBarCalendarExit.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.buttonItemCalendarExit});
+			this.ribbonBarCalendarExit.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
+			this.ribbonBarCalendarExit.Location = new System.Drawing.Point(256, 0);
+			this.ribbonBarCalendarExit.Name = "ribbonBarCalendarExit";
+			this.ribbonBarCalendarExit.ResizeItemsToFit = false;
+			this.ribbonBarCalendarExit.Size = new System.Drawing.Size(80, 130);
+			this.ribbonBarCalendarExit.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.ribbonBarCalendarExit.TabIndex = 23;
+			this.ribbonBarCalendarExit.Text = "EXIT";
+			// 
+			// 
+			// 
+			this.ribbonBarCalendarExit.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			// 
+			// 
+			// 
+			this.ribbonBarCalendarExit.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			// 
+			// buttonItemCalendarExit
+			// 
+			this.buttonItemCalendarExit.Image = global::OutlookSalesDepotAddIn.Properties.Resources.Exit;
+			this.buttonItemCalendarExit.Name = "buttonItemCalendarExit";
+			this.buttonItemCalendarExit.SubItemsExpandWidth = 14;
+			this.buttonItemCalendarExit.Click += new System.EventHandler(this.buttonItemHomeExit_Click);
+			// 
+			// ribbonBarCalendarDisclaimer
+			// 
+			this.ribbonBarCalendarDisclaimer.AutoOverflowEnabled = true;
+			// 
+			// 
+			// 
+			this.ribbonBarCalendarDisclaimer.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			// 
+			// 
+			// 
+			this.ribbonBarCalendarDisclaimer.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			this.ribbonBarCalendarDisclaimer.ContainerControlProcessDialogKey = true;
+			this.ribbonBarCalendarDisclaimer.Dock = System.Windows.Forms.DockStyle.Left;
+			this.ribbonBarCalendarDisclaimer.DragDropSupport = true;
+			this.ribbonBarCalendarDisclaimer.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.itemContainerCalendarDisclaimer});
+			this.ribbonBarCalendarDisclaimer.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
+			this.ribbonBarCalendarDisclaimer.Location = new System.Drawing.Point(103, 0);
+			this.ribbonBarCalendarDisclaimer.Name = "ribbonBarCalendarDisclaimer";
+			this.ribbonBarCalendarDisclaimer.Size = new System.Drawing.Size(153, 130);
+			this.ribbonBarCalendarDisclaimer.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.ribbonBarCalendarDisclaimer.TabIndex = 24;
+			this.ribbonBarCalendarDisclaimer.Text = "Disclaimer";
+			// 
+			// 
+			// 
+			this.ribbonBarCalendarDisclaimer.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			// 
+			// 
+			// 
+			this.ribbonBarCalendarDisclaimer.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			// 
+			// itemContainerCalendarDisclaimer
+			// 
+			// 
+			// 
+			// 
+			this.itemContainerCalendarDisclaimer.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			this.itemContainerCalendarDisclaimer.BackgroundStyle.MarginTop = 5;
+			this.itemContainerCalendarDisclaimer.ItemSpacing = 3;
+			this.itemContainerCalendarDisclaimer.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical;
+			this.itemContainerCalendarDisclaimer.Name = "itemContainerCalendarDisclaimer";
+			this.itemContainerCalendarDisclaimer.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.labelItemCalendarDisclaimerLogo});
+			// 
+			// 
+			// 
+			this.itemContainerCalendarDisclaimer.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			// 
+			// labelItemCalendarDisclaimerLogo
+			// 
+			this.labelItemCalendarDisclaimerLogo.Image = global::OutlookSalesDepotAddIn.Properties.Resources.CalendarDisclaimerLogo;
+			this.labelItemCalendarDisclaimerLogo.Name = "labelItemCalendarDisclaimerLogo";
+			// 
+			// ribbonBarCalendarParts
+			// 
+			this.ribbonBarCalendarParts.AutoOverflowEnabled = true;
+			// 
+			// 
+			// 
+			this.ribbonBarCalendarParts.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			// 
+			// 
+			// 
+			this.ribbonBarCalendarParts.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			this.ribbonBarCalendarParts.ContainerControlProcessDialogKey = true;
+			this.ribbonBarCalendarParts.Dock = System.Windows.Forms.DockStyle.Left;
+			this.ribbonBarCalendarParts.DragDropSupport = true;
+			this.ribbonBarCalendarParts.ItemSpacing = 2;
+			this.ribbonBarCalendarParts.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical;
+			this.ribbonBarCalendarParts.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
+			this.ribbonBarCalendarParts.Location = new System.Drawing.Point(3, 0);
+			this.ribbonBarCalendarParts.Name = "ribbonBarCalendarParts";
+			this.ribbonBarCalendarParts.Size = new System.Drawing.Size(100, 130);
+			this.ribbonBarCalendarParts.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.ribbonBarCalendarParts.TabIndex = 25;
+			this.ribbonBarCalendarParts.Text = "Calendar";
+			// 
+			// 
+			// 
+			this.ribbonBarCalendarParts.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			// 
+			// 
+			// 
+			this.ribbonBarCalendarParts.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			// 
 			// ribbonPanelHome
 			// 
@@ -159,6 +324,52 @@ namespace OutlookSalesDepotAddIn.Forms
 			// 
 			this.ribbonBarHomeExit.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			// 
+			// buttonItemHomeExit
+			// 
+			this.buttonItemHomeExit.Image = global::OutlookSalesDepotAddIn.Properties.Resources.Exit;
+			this.buttonItemHomeExit.Name = "buttonItemHomeExit";
+			this.buttonItemHomeExit.SubItemsExpandWidth = 14;
+			this.buttonItemHomeExit.Click += new System.EventHandler(this.buttonItemHomeExit_Click);
+			// 
+			// ribbonBarHomeAttach
+			// 
+			this.ribbonBarHomeAttach.AutoOverflowEnabled = true;
+			// 
+			// 
+			// 
+			this.ribbonBarHomeAttach.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			// 
+			// 
+			// 
+			this.ribbonBarHomeAttach.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			this.ribbonBarHomeAttach.ContainerControlProcessDialogKey = true;
+			this.ribbonBarHomeAttach.Dock = System.Windows.Forms.DockStyle.Left;
+			this.ribbonBarHomeAttach.DragDropSupport = true;
+			this.ribbonBarHomeAttach.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.buttonItemHomeAttach});
+			this.ribbonBarHomeAttach.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
+			this.ribbonBarHomeAttach.Location = new System.Drawing.Point(379, 0);
+			this.ribbonBarHomeAttach.Name = "ribbonBarHomeAttach";
+			this.ribbonBarHomeAttach.Size = new System.Drawing.Size(94, 130);
+			this.ribbonBarHomeAttach.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.ribbonBarHomeAttach.TabIndex = 11;
+			this.ribbonBarHomeAttach.Text = "Attach";
+			// 
+			// 
+			// 
+			this.ribbonBarHomeAttach.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			// 
+			// 
+			// 
+			this.ribbonBarHomeAttach.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			// 
+			// buttonItemHomeAttach
+			// 
+			this.buttonItemHomeAttach.Image = global::OutlookSalesDepotAddIn.Properties.Resources.Attach;
+			this.buttonItemHomeAttach.Name = "buttonItemHomeAttach";
+			this.buttonItemHomeAttach.SubItemsExpandWidth = 14;
+			this.buttonItemHomeAttach.Text = "buttonItem1";
+			// 
 			// ribbonBarHomeStations
 			// 
 			this.ribbonBarHomeStations.AutoOverflowEnabled = true;
@@ -191,6 +402,11 @@ namespace OutlookSalesDepotAddIn.Forms
 			// 
 			// 
 			this.ribbonBarHomeStations.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			// 
+			// labelItemHomePackageLogo
+			// 
+			this.labelItemHomePackageLogo.Image = global::OutlookSalesDepotAddIn.Properties.Resources.PackageLogo;
+			this.labelItemHomePackageLogo.Name = "labelItemHomePackageLogo";
 			// 
 			// itemContainerHomeStations
 			// 
@@ -231,6 +447,12 @@ namespace OutlookSalesDepotAddIn.Forms
 			this.ribbonTabItemHome.Panel = this.ribbonPanelHome;
 			this.ribbonTabItemHome.Text = "Home";
 			// 
+			// ribbonTabItemCalendar
+			// 
+			this.ribbonTabItemCalendar.Name = "ribbonTabItemCalendar";
+			this.ribbonTabItemCalendar.Panel = this.ribbonPanelCalendar;
+			this.ribbonTabItemCalendar.Text = "Overnights";
+			// 
 			// pnContainer
 			// 
 			this.pnContainer.Location = new System.Drawing.Point(17, 202);
@@ -245,57 +467,6 @@ namespace OutlookSalesDepotAddIn.Forms
 			this.pnEmpty.Name = "pnEmpty";
 			this.pnEmpty.Size = new System.Drawing.Size(270, 287);
 			this.pnEmpty.TabIndex = 4;
-			// 
-			// ribbonBarHomeAttach
-			// 
-			this.ribbonBarHomeAttach.AutoOverflowEnabled = true;
-			// 
-			// 
-			// 
-			this.ribbonBarHomeAttach.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// 
-			// 
-			this.ribbonBarHomeAttach.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			this.ribbonBarHomeAttach.ContainerControlProcessDialogKey = true;
-			this.ribbonBarHomeAttach.Dock = System.Windows.Forms.DockStyle.Left;
-			this.ribbonBarHomeAttach.DragDropSupport = true;
-			this.ribbonBarHomeAttach.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.buttonItemHomeAttach});
-			this.ribbonBarHomeAttach.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-			this.ribbonBarHomeAttach.Location = new System.Drawing.Point(379, 0);
-			this.ribbonBarHomeAttach.Name = "ribbonBarHomeAttach";
-			this.ribbonBarHomeAttach.Size = new System.Drawing.Size(94, 130);
-			this.ribbonBarHomeAttach.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.ribbonBarHomeAttach.TabIndex = 11;
-			this.ribbonBarHomeAttach.Text = "Attach";
-			// 
-			// 
-			// 
-			this.ribbonBarHomeAttach.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// 
-			// 
-			this.ribbonBarHomeAttach.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// buttonItemHomeExit
-			// 
-			this.buttonItemHomeExit.Image = global::OutlookSalesDepotAddIn.Properties.Resources.Exit;
-			this.buttonItemHomeExit.Name = "buttonItemHomeExit";
-			this.buttonItemHomeExit.SubItemsExpandWidth = 14;
-			this.buttonItemHomeExit.Click += new System.EventHandler(this.buttonItemHomeExit_Click);
-			// 
-			// buttonItemHomeAttach
-			// 
-			this.buttonItemHomeAttach.Image = global::OutlookSalesDepotAddIn.Properties.Resources.Attach;
-			this.buttonItemHomeAttach.Name = "buttonItemHomeAttach";
-			this.buttonItemHomeAttach.SubItemsExpandWidth = 14;
-			this.buttonItemHomeAttach.Text = "buttonItem1";
-			// 
-			// labelItemHomePackageLogo
-			// 
-			this.labelItemHomePackageLogo.Image = global::OutlookSalesDepotAddIn.Properties.Resources.PackageLogo;
-			this.labelItemHomePackageLogo.Name = "labelItemHomePackageLogo";
 			// 
 			// FormMain
 			// 
@@ -312,6 +483,7 @@ namespace OutlookSalesDepotAddIn.Forms
 			this.Load += new System.EventHandler(this.FormMain_Load);
 			this.ribbonControl.ResumeLayout(false);
 			this.ribbonControl.PerformLayout();
+			this.ribbonPanelCalendar.ResumeLayout(false);
 			this.ribbonPanelHome.ResumeLayout(false);
 			this.ResumeLayout(false);
 
@@ -321,7 +493,7 @@ namespace OutlookSalesDepotAddIn.Forms
 
 		private DevComponents.DotNetBar.StyleManager styleManager;
 		private DevExpress.LookAndFeel.DefaultLookAndFeel defaultLookAndFeel;
-		private DevComponents.DotNetBar.RibbonControl ribbonControl;
+		public DevComponents.DotNetBar.RibbonControl ribbonControl;
 		public DevComponents.DotNetBar.RibbonPanel ribbonPanelHome;
 		private DevComponents.DotNetBar.RibbonTabItem ribbonTabItemHome;
 		public DevComponents.DotNetBar.RibbonBar ribbonBarHomeExit;
@@ -335,5 +507,13 @@ namespace OutlookSalesDepotAddIn.Forms
 		private System.Windows.Forms.Panel pnEmpty;
 		private DevComponents.DotNetBar.RibbonBar ribbonBarHomeAttach;
 		public DevComponents.DotNetBar.ButtonItem buttonItemHomeAttach;
+		public DevComponents.DotNetBar.RibbonPanel ribbonPanelCalendar;
+		public DevComponents.DotNetBar.RibbonTabItem ribbonTabItemCalendar;
+		public DevComponents.DotNetBar.RibbonBar ribbonBarCalendarExit;
+		private DevComponents.DotNetBar.ButtonItem buttonItemCalendarExit;
+		private DevComponents.DotNetBar.RibbonBar ribbonBarCalendarDisclaimer;
+		private DevComponents.DotNetBar.ItemContainer itemContainerCalendarDisclaimer;
+		public DevComponents.DotNetBar.LabelItem labelItemCalendarDisclaimerLogo;
+		public DevComponents.DotNetBar.RibbonBar ribbonBarCalendarParts;
 	}
 }

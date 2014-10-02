@@ -10,6 +10,7 @@ namespace OutlookSalesDepotAddIn.BusinessClasses
 		public const string AppName = "Sales Library Addin for Outlook";
 		public const string NoLogoFileName = @"no_logo.png";
 		public const string PageLogoFileTemplate = @"page{0}.*";
+		public const int CalendarFontSize = 11;
 
 		private static readonly SettingsManager _instance = new SettingsManager();
 		private readonly string _localSettingsFilePath = String.Empty;
@@ -25,10 +26,13 @@ namespace OutlookSalesDepotAddIn.BusinessClasses
 		public string TempPath { get; set; }
 		public string PermissionsFilePath { get; private set; }
 		public string LibraryLogoFolder { get; set; }
+		public string DisclaimerPath { get; set; }
 
 		public string SelectedPackage { get; set; }
 		public string SelectedLibrary { get; set; }
 		public string SelectedPage { get; set; }
+		public string SelectedCalendar { get; set; }
+		public int SelectedCalendarYear { get; set; }
 
 		private SettingsManager()
 		{
@@ -40,6 +44,7 @@ namespace OutlookSalesDepotAddIn.BusinessClasses
 			LibraryLogoFolder = String.Format(@"{0}\newlocaldirect.com\Sales Depot\!Artwork\!SD-Graphics\libraries", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles)); ;
 			TempPath = String.Format(@"{0}\newlocaldirect.com\Sync\Temp", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
 			PermissionsFilePath = String.Format(@"{0}\newlocaldirect.com\Sales Depot\Library_Security.xml", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
+			DisclaimerPath = String.Format(@"{0}\newlocaldirect.com\Sales Depot\Nielsen Permissible Use.pdf", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
 			LoadSettings();
 		}
 
@@ -48,6 +53,7 @@ namespace OutlookSalesDepotAddIn.BusinessClasses
 			SelectedPackage = String.Empty;
 			SelectedLibrary = String.Empty;
 			SelectedPage = String.Empty;
+			SelectedCalendar = String.Empty;
 
 			if (!File.Exists(_localSettingsFilePath)) return;
 			var document = new XmlDocument();
@@ -67,6 +73,15 @@ namespace OutlookSalesDepotAddIn.BusinessClasses
 			node = document.SelectSingleNode(@"/LocalSettings/SelectedPage");
 			if (node != null)
 				SelectedPage = node.InnerText;
+			node = document.SelectSingleNode(@"/LocalSettings/SelectedCalendar");
+			if (node != null)
+				SelectedCalendar = node.InnerText;
+			node = document.SelectSingleNode(@"/LocalSettings/SelectedCalendarYear");
+			{
+				int temp;
+				if (node != null && Int32.TryParse(node.InnerText,out temp))
+					SelectedCalendarYear = temp;
+			}
 		}
 
 		public void SaveSettings()
@@ -80,6 +95,9 @@ namespace OutlookSalesDepotAddIn.BusinessClasses
 				xml.AppendLine(@"<SelectedLibrary>" + SelectedLibrary.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</SelectedLibrary>");
 			if (!String.IsNullOrEmpty(SelectedPage))
 				xml.AppendLine(@"<SelectedPage>" + SelectedPage.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</SelectedPage>");
+			if (!String.IsNullOrEmpty(SelectedCalendar))
+				xml.AppendLine(@"<SelectedCalendar>" + SelectedCalendar.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</SelectedCalendar>");
+			xml.AppendLine(@"<SelectedCalendarYear>" + SelectedCalendarYear + @"</SelectedCalendarYear>");
 			xml.AppendLine(@"</LocalSettings>");
 
 			using (var sw = new StreamWriter(_localSettingsFilePath, false))

@@ -23,6 +23,7 @@ namespace OutlookSalesDepotAddIn.BusinessClasses
 			Pages = new List<LibraryPage>();
 			EmailList = new List<string>();
 			AutoWidgets = new List<AutoWidget>();
+			OvernightsCalendar = new OvernightsCalendar(this);
 			Load();
 		}
 
@@ -54,6 +55,7 @@ namespace OutlookSalesDepotAddIn.BusinessClasses
 		public List<LibraryPage> Pages { get; set; }
 		public List<string> EmailList { get; set; }
 		public List<AutoWidget> AutoWidgets { get; set; }
+		public OvernightsCalendar OvernightsCalendar { get; set; }
 
 		public string Name
 		{
@@ -95,7 +97,7 @@ namespace OutlookSalesDepotAddIn.BusinessClasses
 
 		public RootFolder GetRootFolder(Guid folderId)
 		{
-			RootFolder folder = ExtraFolders.Where(x => x.RootId.Equals(folderId)).FirstOrDefault();
+			RootFolder folder = ExtraFolders.FirstOrDefault(x => x.RootId.Equals(folderId));
 			if (folder != null)
 				return folder;
 			return RootFolder;
@@ -238,6 +240,13 @@ namespace OutlookSalesDepotAddIn.BusinessClasses
 						autoWidget.Deserialize(childNode);
 						AutoWidgets.Add(autoWidget);
 					}
+				node = document.SelectSingleNode(@"/Library/OvernightsCalendar");
+				if (node != null)
+				{
+					OvernightsCalendar.Deserialize(node);
+					OvernightsCalendar.RootFolder = new DirectoryInfo(Path.Combine(Folder.FullName, Constants.OvernightsCalendarRootFolderName));
+					OvernightsCalendar.Enabled &= OvernightsCalendar.Enabled && OvernightsCalendar.RootFolder.Exists;
+				}
 
 				if (UseDirectAccess && !Folder.Exists)
 					IsConfigured = false;

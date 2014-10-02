@@ -24,6 +24,7 @@ namespace OutlookSalesDepotAddIn.Forms
 		}
 
 		public TabHomeControl TabHome { get; set; }
+		public TabOvernightsCalendarControl TabOvernightsCalendar { get; set; }
 
 		private FormMain()
 		{
@@ -32,15 +33,18 @@ namespace OutlookSalesDepotAddIn.Forms
 			pnContainer.Dock = DockStyle.Fill;
 			pnEmpty.Dock = DockStyle.Fill;
 			TabHome = new TabHomeControl();
+			TabOvernightsCalendar = new TabOvernightsCalendarControl();
 			if ((CreateGraphics()).DpiX > 96)
 			{
 				ribbonControl.Font = new Font(ribbonControl.Font.FontFamily, ribbonControl.Font.Size - 1, ribbonControl.Font.Style);
-			}}
+			}
+		}
 
 		private void FormMain_Load(object sender, EventArgs e)
 		{
 			if (LibraryManager.Instance.LibraryPackageCollection.Count != 0) return;
 			TabHome.InitController();
+			TabOvernightsCalendar.InitController();
 			ribbonControl.Enabled = false;
 			pnEmpty.BringToFront();
 			using (var form = new FormProgress())
@@ -78,16 +82,32 @@ namespace OutlookSalesDepotAddIn.Forms
 				}
 				form.Close();
 			}
-
-			if (!pnContainer.Controls.Contains(TabHome))
-				pnContainer.Controls.Add(TabHome);
-			TabHome.ShowTab();
-
+			ribbonControl_SelectedRibbonTabChanged(null, null);
 			ribbonControl.Enabled = true;
 			pnContainer.BringToFront();
+			ribbonControl.SelectedRibbonTabChanged -= ribbonControl_SelectedRibbonTabChanged;
+			ribbonControl.SelectedRibbonTabChanged += ribbonControl_SelectedRibbonTabChanged;
 			if (LibraryManager.Instance.LibraryPackageCollection.Count != 0) return;
 			ribbonBarHomeStations.Enabled = false;
 			Utils.ShowWarning("Library is not available...\nCheck your network connections....");
+		}
+
+		private void ribbonControl_SelectedRibbonTabChanged(object sender, EventArgs e)
+		{
+			TabHome.IsActive = false;
+			TabOvernightsCalendar.IsActive = false;
+			if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemHome)
+			{
+				if (!pnContainer.Controls.Contains(TabHome))
+					pnContainer.Controls.Add(TabHome);
+				TabHome.ShowTab();
+			}
+			else if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemCalendar)
+			{
+				if (!pnContainer.Controls.Contains(TabOvernightsCalendar))
+					pnContainer.Controls.Add(TabOvernightsCalendar);
+				TabOvernightsCalendar.ShowTab();
+			}
 		}
 
 		private void FormMain_FormClosed(object sender, FormClosedEventArgs e)

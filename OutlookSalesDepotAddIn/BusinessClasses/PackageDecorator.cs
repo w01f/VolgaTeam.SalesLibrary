@@ -68,6 +68,15 @@ namespace OutlookSalesDepotAddIn.BusinessClasses
 			}
 		}
 
+		public void BuildOvernightsCalendar()
+		{
+			foreach (var decorator in _decorators)
+			{
+				decorator.BuildOvernightsCalendar();
+				Application.DoEvents();
+			}
+		}
+
 		private void ApplyDecorator()
 		{
 			if (SelectedLibrary != null)
@@ -131,7 +140,7 @@ namespace OutlookSalesDepotAddIn.BusinessClasses
 		{
 			FillLogo();
 			FillStations();
-			//UpdateView();
+			UpdateView();
 		}
 
 		public void ReleaseResources()

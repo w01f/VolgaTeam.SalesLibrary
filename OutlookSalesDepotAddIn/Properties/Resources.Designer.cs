@@ -73,6 +73,26 @@ namespace OutlookSalesDepotAddIn.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap AttachSmall {
+            get {
+                object obj = ResourceManager.GetObject("AttachSmall", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CalendarDisclaimerLogo {
+            get {
+                object obj = ResourceManager.GetObject("CalendarDisclaimerLogo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Exit {
             get {
                 object obj = ResourceManager.GetObject("Exit", resourceCulture);
@@ -146,6 +166,16 @@ namespace OutlookSalesDepotAddIn.Properties {
         internal static System.Drawing.Bitmap FolderContentXlsx {
             get {
                 object obj = ResourceManager.GetObject("FolderContentXlsx", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap OpenCalendarSmall {
+            get {
+                object obj = ResourceManager.GetObject("OpenCalendarSmall", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -9,7 +9,6 @@ using SalesDepot.ConfigurationClasses;
 using SalesDepot.CoreObjects.InteropClasses;
 using SalesDepot.Floater;
 using SalesDepot.ToolClasses;
-using SalesDepot.ToolForms;
 using PowerPointHelper = SalesDepot.InteropClasses.PowerPointHelper;
 
 namespace SalesDepot

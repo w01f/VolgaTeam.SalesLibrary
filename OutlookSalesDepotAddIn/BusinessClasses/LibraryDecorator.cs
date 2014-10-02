@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using OutlookSalesDepotAddIn.Controls.OvernightsCalendar;
 using OutlookSalesDepotAddIn.Controls.Wallbin;
 using OutlookSalesDepotAddIn.Forms;
 
@@ -16,6 +17,7 @@ namespace OutlookSalesDepotAddIn.BusinessClasses
 			Pages = new List<PageDecorator>();
 			Library = library;
 			TabControl = new MultitabLibraryControl();
+			OvernightsCalendar = new OvernightsCalendarControl(this);
 			Container = new Panel();
 			Container.Dock = DockStyle.Fill;
 			EmptyPanel = new Panel();
@@ -36,6 +38,7 @@ namespace OutlookSalesDepotAddIn.BusinessClasses
 		public Panel EmptyPanel { get; private set; }
 
 		public MultitabLibraryControl TabControl { get; private set; }
+		public OvernightsCalendarControl OvernightsCalendar { get; private set; }
 		public bool StateChanged { get; set; }
 
 		private void BuildPages()
@@ -54,6 +57,7 @@ namespace OutlookSalesDepotAddIn.BusinessClasses
 			if (!Parent.Container.Controls.Contains(Container))
 				Parent.Container.Controls.Add(Container);
 			Container.BringToFront();
+			ApplyOvernightsCalendar();
 		}
 
 		private void FillTabControlWithPages()
@@ -74,5 +78,36 @@ namespace OutlookSalesDepotAddIn.BusinessClasses
 			foreach (var page in Pages.Where(p => p.ReadyToShow))
 				page.UpdatePage();
 		}
+
+		#region Overnights Calendar Stuff
+		public void BuildOvernightsCalendar()
+		{
+			Library.OvernightsCalendar.LoadParts();
+			Application.DoEvents();
+			if (!Library.OvernightsCalendar.Enabled) return;
+			OvernightsCalendar.Build();
+			Application.DoEvents();
+		}
+
+		public void ApplyOvernightsCalendar()
+		{
+			if (Library.OvernightsCalendar.Enabled)
+			{
+				FormMain.Instance.ribbonTabItemCalendar.Visible = true;
+				if (!FormMain.Instance.TabOvernightsCalendar.Controls.Contains(OvernightsCalendar))
+					FormMain.Instance.TabOvernightsCalendar.Controls.Add(OvernightsCalendar);
+				FormMain.Instance.ribbonBarCalendarParts.Items.Clear();
+				FormMain.Instance.ribbonBarCalendarParts.Items.AddRange(OvernightsCalendar.PartToggles.ToArray());
+				FormMain.Instance.ribbonBarCalendarParts.RecalcLayout();
+				FormMain.Instance.ribbonPanelCalendar.PerformLayout();
+				OvernightsCalendar.BringToFront();
+			}
+			else
+			{
+				FormMain.Instance.ribbonTabItemCalendar.Visible = false;
+			}
+			FormMain.Instance.ribbonControl.RecalcLayout();
+		}
+		#endregion
 	}
 }

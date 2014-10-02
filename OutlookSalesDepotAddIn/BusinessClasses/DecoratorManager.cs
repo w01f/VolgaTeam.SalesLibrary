@@ -34,5 +34,14 @@ namespace OutlookSalesDepotAddIn.BusinessClasses
 				Application.DoEvents();
 			}
 		}
+
+		public void BuildOvernightsCalendars()
+		{
+			foreach (var packageViwer in PackageViewers)
+			{
+				packageViwer.BuildOvernightsCalendar();
+				Application.DoEvents();
+			}
+		}
 	}
 }
