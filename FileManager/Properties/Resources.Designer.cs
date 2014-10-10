@@ -723,16 +723,6 @@ namespace FileManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap TagsAttachments {
-            get {
-                object obj = ResourceManager.GetObject("TagsAttachments", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap TagsCategories {
             get {
                 object obj = ResourceManager.GetObject("TagsCategories", resourceCulture);
@@ -756,36 +746,6 @@ namespace FileManager.Properties {
         internal static System.Drawing.Bitmap TagsClear {
             get {
                 object obj = ResourceManager.GetObject("TagsClear", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap TagsFileAttachmentsWidget {
-            get {
-                object obj = ResourceManager.GetObject("TagsFileAttachmentsWidget", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap TagsFileCards {
-            get {
-                object obj = ResourceManager.GetObject("TagsFileCards", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap TagsFileCardsWidget {
-            get {
-                object obj = ResourceManager.GetObject("TagsFileCardsWidget", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -896,16 +856,6 @@ namespace FileManager.Properties {
         internal static System.Drawing.Bitmap TagsSuperFIltersWidget {
             get {
                 object obj = ResourceManager.GetObject("TagsSuperFIltersWidget", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap TagsWebAttachmentsWidget {
-            get {
-                object obj = ResourceManager.GetObject("TagsWebAttachmentsWidget", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

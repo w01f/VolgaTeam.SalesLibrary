@@ -73,10 +73,6 @@ namespace FileManager.Controllers
 			FormMain.Instance.buttonItemTagsSuperFilters.CheckedChanged += ButtonItemTagsCheckedChanged;
 			FormMain.Instance.buttonItemTagsKeywords.Click += ButtonItemTagsClick;
 			FormMain.Instance.buttonItemTagsKeywords.CheckedChanged += ButtonItemTagsCheckedChanged;
-			FormMain.Instance.buttonItemTagsFileCards.Click += ButtonItemTagsClick;
-			FormMain.Instance.buttonItemTagsFileCards.CheckedChanged += ButtonItemTagsCheckedChanged;
-			FormMain.Instance.buttonItemTagsAttachments.Click += ButtonItemTagsClick;
-			FormMain.Instance.buttonItemTagsAttachments.CheckedChanged += ButtonItemTagsCheckedChanged;
 			FormMain.Instance.buttonItemTagsClear.Click += ButtonItemTagsClick;
 			FormMain.Instance.buttonItemTagsClear.CheckedChanged += ButtonItemTagsCheckedChanged;
 			FormMain.Instance.buttonItemTagsSave.Click += btTagsSave_Click;
@@ -151,8 +147,6 @@ namespace FileManager.Controllers
 					_wallBinOptions.ShowCategoryTags = SettingsManager.Instance.ShowTagsCategories;
 					_wallBinOptions.ShowSuperFilterTags = SettingsManager.Instance.ShowTagsSuperFilters;
 					_wallBinOptions.ShowKeywordTags = SettingsManager.Instance.ShowTagsKeywords;
-					_wallBinOptions.ShowFileCardTags = SettingsManager.Instance.ShowTagsFileCards;
-					_wallBinOptions.ShowAttachmentTags = SettingsManager.Instance.ShowTagsAttachments;
 					_wallBinOptions.ShowSecurityTags = false;
 					break;
 				case TabPageEnum.Security:
@@ -163,8 +157,6 @@ namespace FileManager.Controllers
 					_wallBinOptions.ShowCategoryTags = false;
 					_wallBinOptions.ShowSuperFilterTags = false;
 					_wallBinOptions.ShowKeywordTags = false;
-					_wallBinOptions.ShowFileCardTags = false;
-					_wallBinOptions.ShowAttachmentTags = false;
 					_wallBinOptions.ShowSecurityTags = true;
 					break;
 				default:
@@ -176,8 +168,6 @@ namespace FileManager.Controllers
 					_wallBinOptions.ShowCategoryTags = false;
 					_wallBinOptions.ShowSuperFilterTags = false;
 					_wallBinOptions.ShowKeywordTags = false;
-					_wallBinOptions.ShowFileCardTags = false;
-					_wallBinOptions.ShowAttachmentTags = false;
 					_wallBinOptions.ShowSecurityTags = false;
 					break;
 			}
@@ -364,8 +354,6 @@ namespace FileManager.Controllers
 			FormMain.Instance.buttonItemTagsCategories.Checked = SettingsManager.Instance.ShowTagsCategories;
 			FormMain.Instance.buttonItemTagsSuperFilters.Checked = SettingsManager.Instance.ShowTagsSuperFilters;
 			FormMain.Instance.buttonItemTagsKeywords.Checked = SettingsManager.Instance.ShowTagsKeywords;
-			FormMain.Instance.buttonItemTagsFileCards.Checked = SettingsManager.Instance.ShowTagsFileCards;
-			FormMain.Instance.buttonItemTagsAttachments.Checked = SettingsManager.Instance.ShowTagsAttachments;
 			FormMain.Instance.buttonItemTagsClear.Checked = SettingsManager.Instance.ShowTagsCleaner;
 		}
 
@@ -737,14 +725,10 @@ namespace FileManager.Controllers
 			SettingsManager.Instance.ShowTagsCategories = FormMain.Instance.buttonItemTagsCategories.Checked;
 			SettingsManager.Instance.ShowTagsSuperFilters = FormMain.Instance.buttonItemTagsSuperFilters.Checked;
 			SettingsManager.Instance.ShowTagsKeywords = FormMain.Instance.buttonItemTagsKeywords.Checked;
-			SettingsManager.Instance.ShowTagsFileCards = FormMain.Instance.buttonItemTagsFileCards.Checked;
-			SettingsManager.Instance.ShowTagsAttachments = FormMain.Instance.buttonItemTagsAttachments.Checked;
 			SettingsManager.Instance.ShowTagsCleaner = FormMain.Instance.buttonItemTagsClear.Checked;
 			_wallBinOptions.ShowCategoryTags = SettingsManager.Instance.ShowTagsCategories;
 			_wallBinOptions.ShowSuperFilterTags = SettingsManager.Instance.ShowTagsSuperFilters;
 			_wallBinOptions.ShowKeywordTags = SettingsManager.Instance.ShowTagsKeywords;
-			_wallBinOptions.ShowFileCardTags = SettingsManager.Instance.ShowTagsFileCards;
-			_wallBinOptions.ShowAttachmentTags = SettingsManager.Instance.ShowTagsAttachments;
 			_wallBinOptions.ShowSecurityTags = false;
 			_tabPage.ApplyWallBinOptions(_wallBinOptions);
 			ApplyWallBinOptions();
@@ -768,8 +752,6 @@ namespace FileManager.Controllers
 			FormMain.Instance.buttonItemTagsCategories.Checked = false;
 			FormMain.Instance.buttonItemTagsSuperFilters.Checked = false;
 			FormMain.Instance.buttonItemTagsKeywords.Checked = false;
-			FormMain.Instance.buttonItemTagsFileCards.Checked = false;
-			FormMain.Instance.buttonItemTagsAttachments.Checked = false;
 			FormMain.Instance.buttonItemTagsClear.Checked = false;
 			button.Checked = true;
 		}

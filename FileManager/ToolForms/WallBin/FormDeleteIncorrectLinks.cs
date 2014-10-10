@@ -67,10 +67,6 @@ namespace FileManager.ToolForms.WallBin
 					form.xtraTabPageSearchTags.PageVisible = false;
 					form.SearchTags = file.SearchTags;
 					form.Keywords.AddRange(file.CustomKeywords.Tags.Select(x => new StringDataSourceWrapper(x.Name)));
-					form.FileCard = file.FileCard;
-					form.FileCardImportantInfo.Clear();
-					form.FileCardImportantInfo.AddRange(file.FileCard.Notes.Select(x => new StringDataSourceWrapper(x)));
-					form.AttachmentProperties = file.AttachmentProperties;
 					form.StartPosition = FormStartPosition.CenterScreen;
 
 					if (form.ShowDialog() != DialogResult.OK) return;
@@ -82,10 +78,6 @@ namespace FileManager.ToolForms.WallBin
 					file.IsBold = form.IsBold;
 					file.SearchTags = form.SearchTags;
 					file.ExpirationDateOptions = form.ExpirationDateOptions;
-					file.FileCard = form.FileCard;
-					file.FileCard.Notes.Clear();
-					file.FileCard.Notes.AddRange(form.FileCardImportantInfo.Where(x => !string.IsNullOrEmpty(x.Value)).Select(x => x.Value));
-					file.AttachmentProperties = form.AttachmentProperties;
 					file.CustomKeywords.Tags.Clear();
 					file.CustomKeywords.Tags.AddRange(form.Keywords.Where(x => !string.IsNullOrEmpty(x.Value)).Select(x => new SearchTag(file.CustomKeywords.Name) { Name = x.Value }));
 				}

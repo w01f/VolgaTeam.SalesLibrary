@@ -162,19 +162,6 @@ namespace FileManager.BusinessClasses
 													case FileTypes.LineBreak:
 														break;
 												}
-												if (file.AttachmentProperties.Enable)
-												{
-													foreach (LinkAttachment attachment in file.AttachmentProperties.FilesAttachments)
-													{
-														if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
-														{
-															if (attachment.IsSourceAvailable)
-																filesWhiteList.Add(attachment.DestinationPath);
-														}
-														else
-															break;
-													}
-												}
 											}
 											else
 												break;
@@ -463,19 +450,6 @@ namespace FileManager.BusinessClasses
 											break;
 										case FileTypes.LineBreak:
 											break;
-									}
-									if (file.AttachmentProperties.Enable)
-									{
-										foreach (LinkAttachment attachment in file.AttachmentProperties.FilesAttachments)
-										{
-											if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
-											{
-												if (attachment.IsSourceAvailable)
-													filesWhiteList.Add(attachment.DestinationPath);
-											}
-											else
-												break;
-										}
 									}
 								}
 								else

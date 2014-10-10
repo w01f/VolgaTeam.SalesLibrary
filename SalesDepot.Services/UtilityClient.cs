@@ -57,25 +57,6 @@ namespace SalesDepot.Services
 				message = "Couldn't complete operation.\nServer is unavailable.";
 		}
 
-		public void CleanExpiredEmails(out string message)
-		{
-			var client = GetUtilityClient();
-			if (client != null)
-			{
-				try
-				{
-					var sessionKey = client.getSessionKey(_login, _password);
-					message = !string.IsNullOrEmpty(sessionKey) ? client.cleanExpiredEmails(sessionKey) : "Couldn't complete operation.\nLogin or password are not correct.";
-				}
-				catch (Exception ex)
-				{
-					message = string.Format("Couldn't complete operation.\n{0}.", ex.Message);
-				}
-			}
-			else
-				message = "Couldn't complete operation.\nServer is unavailable.";
-		}
-
 		public void NotifyDeadLinks(out string message)
 		{
 			var client = GetUtilityClient();

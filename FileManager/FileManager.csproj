@@ -136,12 +136,6 @@
     <Compile Include="PresentationClasses\Tags\CategoriesEditor.Designer.cs">
       <DependentUpon>CategoriesEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationClasses\Tags\AttachmentsEditor.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="PresentationClasses\Tags\AttachmentsEditor.Designer.cs">
-      <DependentUpon>AttachmentsEditor.cs</DependentUpon>
-    </Compile>
     <Compile Include="PresentationClasses\Tags\SuperFiltersEditor.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -160,12 +154,6 @@
     </Compile>
     <Compile Include="PresentationClasses\Tags\TagsCleaner.Designer.cs">
       <DependentUpon>TagsCleaner.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationClasses\Tags\FileCardsEditor.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="PresentationClasses\Tags\FileCardsEditor.Designer.cs">
-      <DependentUpon>FileCardsEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationClasses\Tags\KeywordsEditor.cs">
       <SubType>UserControl</SubType>
@@ -483,9 +471,6 @@
     <EmbeddedResource Include="PresentationClasses\Tags\CategoriesEditor.resx">
       <DependentUpon>CategoriesEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationClasses\Tags\AttachmentsEditor.resx">
-      <DependentUpon>AttachmentsEditor.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="PresentationClasses\Tags\SuperFiltersEditor.resx">
       <DependentUpon>SuperFiltersEditor.cs</DependentUpon>
     </EmbeddedResource>
@@ -494,9 +479,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationClasses\Tags\TagsCleaner.resx">
       <DependentUpon>TagsCleaner.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PresentationClasses\Tags\FileCardsEditor.resx">
-      <DependentUpon>FileCardsEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationClasses\Tags\KeywordsEditor.resx">
       <DependentUpon>KeywordsEditor.cs</DependentUpon>
@@ -693,15 +675,10 @@
     <None Include="Resources\Favorites.png" />
     <None Include="Resources\ExtraRoots.png" />
     <None Include="Resources\ColumnsSort.png" />
-    <None Include="Resources\TagsWebAttachmentsWidget.png" />
     <None Include="Resources\TagsKeywordsWidget.png" />
-    <None Include="Resources\TagsFileCardsWidget.png" />
-    <None Include="Resources\TagsFileAttachmentsWidget.png" />
     <None Include="Resources\TagsCategoriesWidget.png" />
     <None Include="Resources\TagsSave.png" />
     <None Include="Resources\TagsClear.png" />
-    <None Include="Resources\TagsAttachments.png" />
-    <None Include="Resources\TagsFileCards.png" />
     <None Include="Resources\TagsKeywords.png" />
     <None Include="Resources\TagsCategories.png" />
     <None Include="Resources\RefreshUsers.png" />

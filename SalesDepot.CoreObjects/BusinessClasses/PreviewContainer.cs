@@ -29,12 +29,10 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		string Extension { get; }
 		DateTime LastChanged { set; }
 		string ContainerPath { get; }
-		bool OnlyText { get; set; }
 		bool Ready { get; }
 		IPreviewContainer Clone(IPreviewStorage parent);
 		string Serialize();
 		void Deserialize(XmlNode node);
-		string GetTextContent();
 		string[] GetPreviewLinks(string format);
 		void UpdateContent();
 		void ClearContent();
@@ -49,6 +47,11 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		{
 			Parent = parent;
 			Identifier = Guid.NewGuid().ToString();
+		}
+
+		public override string ToString()
+		{
+			return OriginalPath;
 		}
 
 		public string RelativePath
@@ -67,7 +70,6 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		public string Identifier { get; private set; }
 		public string ContainerPath { get; private set; }
 		public FileTypes Type { get; set; }
-		public bool OnlyText { get; set; }
 
 		public string OriginalPath
 		{
@@ -245,63 +247,32 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			return size;
 		}
 
-		public string GetTextContent()
-		{
-			string result = string.Empty;
-			if (!string.IsNullOrEmpty(ContainerPath))
-			{
-				string textContentFolder = Path.Combine(ContainerPath, "txt");
-				if (Directory.Exists(textContentFolder))
-					foreach (string textContentFile in Directory.GetFiles(textContentFolder, "*.txt"))
-					{
-						using (var textContentStream = new StreamReader(textContentFile))
-						{
-							result = textContentStream.ReadToEnd();
-							result = result.Replace(Environment.NewLine, " ");
-							var sb = new StringBuilder();
-							foreach (var c in result.Where(c => (c >= '0' && c <= '9') || (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || c == '.' || c == '_' || c == ' '))
-							{
-								sb.Append(c);
-							}
-							result = sb.ToString();
-							textContentStream.Close();
-							break;
-						}
-					}
-			}
-			return result;
-		}
-
 		public void UpdateContent()
 		{
 			var parentFile = new FileInfo(OriginalPath);
-			if (!string.IsNullOrEmpty(ContainerPath))
+			if (string.IsNullOrEmpty(ContainerPath)) return;
+			var previewFolder = new DirectoryInfo(ContainerPath);
+			bool update;
+			if (!previewFolder.Exists)
+				update = true;
+			else if (!previewFolder.GetDirectories().Any())
+				update = true;
+			else
 			{
-				var previewFolder = new DirectoryInfo(ContainerPath);
-				bool update;
-				if (!previewFolder.Exists)
+				var time = parentFile.LastWriteTime.Subtract(previewFolder.CreationTime);
+				if (time.Minutes > 0)
 					update = true;
-				else if (OnlyText && previewFolder.GetDirectories().Count() > 1)
+				else if (!parentFile.Exists)
 					update = true;
 				else
-				{
-					var time = parentFile.LastWriteTime.Subtract(previewFolder.CreationTime);
-					if (time.Minutes > 0)
-						update = true;
-					else if (!parentFile.Exists)
-						update = true;
-					else
-						update = false;
-				}
-				if (previewFolder.Exists && update)
-					SyncManager.DeleteFolder(previewFolder);
-				if (parentFile.Exists)
-				{
-					var previewGenerator = Parent.GetPreviewGenerator(this);
-					if (previewGenerator != null)
-						previewGenerator.GeneratePreview(OnlyText);
-				}
+					update = false;
 			}
+			if (previewFolder.Exists && update)
+				SyncManager.DeleteFolder(previewFolder);
+			if (!parentFile.Exists) return;
+			var previewGenerator = Parent.GetPreviewGenerator(this);
+			if (previewGenerator != null)
+				previewGenerator.GeneratePreview();
 		}
 
 		public void ClearContent()

@@ -18,7 +18,6 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		public const string LibraryLogoFolder = @"!SD-Graphics";
 		public const string OvernightsCalendarRootFolderName = @"!OC";
 		public const string ProgramManagerRootFolderName = @"!PM";
-		public const string AttachmentsRootFolderName = @"!Attachments";
 		public const string ExtraFoldersRootFolderName = @"!Extra Roots";
 		public const string SweepPeriodsFileName = @"SweepPeriods.xml";
 		public const string CalendarPartConfigFileName = @"config.xml";
@@ -39,7 +38,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		PDF,
 		Excel,
 		Word,
-		OvernightsLink
+		OvernightsLink,
 	}
 
 	public enum Alignment

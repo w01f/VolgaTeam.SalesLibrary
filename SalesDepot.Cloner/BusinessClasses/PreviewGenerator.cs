@@ -15,7 +15,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		#region IPreviewGenerator Members
 		public IPreviewContainer Parent { get; private set; }
 
-		public void GeneratePreview(bool onlyText = false)
+		public void GeneratePreview()
 		{
 			bool update = false;
 			if (!Parent.Extension.ToUpper().Equals(".MP4"))
@@ -28,8 +28,6 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 						Directory.CreateDirectory(mp4Destination);
 					if (updateMp4)
 						VideoHelper.Instance.ExportMp4(Parent.OriginalPath, mp4Destination);
-					if (!((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive))
-						SyncManager.DeleteFolder(new DirectoryInfo(mp4Destination));
 					update |= updateMp4;
 				}
 			}
@@ -44,8 +42,6 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 						Directory.CreateDirectory(wmvDestination);
 					if (updateWmv)
 						VideoHelper.Instance.ExportWmv(Parent.OriginalPath, wmvDestination);
-					if (!((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive))
-						SyncManager.DeleteFolder(new DirectoryInfo(wmvDestination));
 					update |= updateWmv;
 				}
 			}
@@ -58,8 +54,6 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 					Directory.CreateDirectory(ogvDestination);
 				if (updateOgv)
 					VideoHelper.Instance.ExportOgv(Parent.OriginalPath, ogvDestination);
-				if (!((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive))
-					SyncManager.DeleteFolder(new DirectoryInfo(ogvDestination));
 				update |= updateOgv;
 			}
 			if (update)

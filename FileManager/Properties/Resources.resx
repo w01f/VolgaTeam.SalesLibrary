@@ -208,9 +208,6 @@
   <data name="SecurityReset" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SecurityReset.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="TagsFileAttachmentsWidget" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\TagsFileAttachmentsWidget.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="LinkProperties" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\LinkProperties.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -228,9 +225,6 @@
   </data>
   <data name="ClientLogos" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ClientLogos.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="TagsFileCards" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\TagsFileCards.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="SecurityLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SecurityLogo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -250,9 +244,6 @@
   <data name="TagsSuperFIltersWidget" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\TagsSuperFIltersWidget.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="TagsFileCardsWidget" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\TagsFileCardsWidget.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="ExpiredLinks" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ExpiredLinks.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -267,9 +258,6 @@
   </data>
   <data name="UrlButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\UrlButton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="TagsAttachments" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\TagsAttachments.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="LineBreak" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\LineBreak.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -294,9 +282,6 @@
   </data>
   <data name="Exit" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Exit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="TagsWebAttachmentsWidget" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\TagsWebAttachmentsWidget.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="TabsView" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\TabsView.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

@@ -57,11 +57,5 @@ namespace SalesDepot.CoreObjects.ToolClasses
 
 			rasterizer.Dispose();
 		}
-
-		public void ExtractText(string sourceFilePath, string destinationPath)
-		{
-			PDFParser pdfParser = new PDFParser();
-			pdfParser.ExtractText(sourceFilePath, Path.Combine(destinationPath, Path.GetFileName(Path.ChangeExtension(sourceFilePath, "txt"))));
-		}
 	}
 }

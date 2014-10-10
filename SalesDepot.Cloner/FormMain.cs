@@ -204,30 +204,9 @@ namespace SalesDepot.Cloner
 										case FileTypes.LineBreak:
 											break;
 									}
-									if (file.AttachmentProperties.Enable)
-									{
-										foreach (LinkAttachment attachment in file.AttachmentProperties.FilesAttachments)
-										{
-											if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
-											{
-												if (attachment.IsSourceAvailable)
-												{
-													filesWhiteList.Add(attachment.DestinationPath);
-												}
-											}
-											else
-												break;
-										}
-									}
 								}
-								else
-									break;
 							}
-							if (!((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive))
-								break;
 						}
-						if (!((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive))
-							break;
 					}
 				}
 
@@ -251,8 +230,6 @@ namespace SalesDepot.Cloner
 							destinationSubFolders.Add(destinationSubFolder);
 							syncManager.SynchronizeFolders(subFolder, destinationSubFolder, filesWhiteList);
 						}
-						else
-							break;
 					}
 				}
 				#endregion
@@ -267,31 +244,25 @@ namespace SalesDepot.Cloner
 						{
 							Directory.CreateDirectory(extraFoldersDestinationRootPath);
 						}
-						DirectoryInfo extraFoldersDestinationRoot = new DirectoryInfo(extraFoldersDestinationRootPath);
+						var extraFoldersDestinationRoot = new DirectoryInfo(extraFoldersDestinationRootPath);
 						destinationSubFolders.Add(extraFoldersDestinationRoot);
-						List<DirectoryInfo> extraFolderDestinations = new List<DirectoryInfo>();
-						if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
+						var extraFolderDestinations = new List<DirectoryInfo>();
+						foreach (var extraRootFolder in library.ExtraFolders)
 						{
-							foreach (var extraRootFolder in library.ExtraFolders)
-							{
-								if ((!Globals.ThreadActive || Globals.ThreadAborted) && Globals.ThreadActive) break;
-								sourceSubFolders.Clear();
-								sourceSubFolders.AddRange(extraRootFolder.Folder.GetDirectories().Where(x => filesWhiteList.Where(y => Path.GetDirectoryName(y).Contains(x.FullName)).Count() > 0));
-								var extraFolderDestinationPath = Path.Combine(extraFoldersDestinationRoot.FullName, extraRootFolder.RootId.ToString());
-								if (!Directory.Exists(extraFolderDestinationPath))
-									Directory.CreateDirectory(extraFolderDestinationPath);
-								var extraFolderDestination = new DirectoryInfo(extraFolderDestinationPath);
-								syncManager.SynchronizeFolders(extraRootFolder.Folder, extraFolderDestination, filesWhiteList);
-								if (extraFolderDestination.GetFiles().Length > 0 || extraFolderDestination.GetDirectories().Length > 0)
-									extraFolderDestinations.Add(extraFolderDestination);
-							}
+							if ((!Globals.ThreadActive || Globals.ThreadAborted) && Globals.ThreadActive) break;
+							sourceSubFolders.Clear();
+							sourceSubFolders.AddRange(extraRootFolder.Folder.GetDirectories().Where(x => filesWhiteList.Where(y => Path.GetDirectoryName(y).Contains(x.FullName)).Count() > 0));
+							var extraFolderDestinationPath = Path.Combine(extraFoldersDestinationRoot.FullName, extraRootFolder.RootId.ToString());
+							if (!Directory.Exists(extraFolderDestinationPath))
+								Directory.CreateDirectory(extraFolderDestinationPath);
+							var extraFolderDestination = new DirectoryInfo(extraFolderDestinationPath);
+							syncManager.SynchronizeFolders(extraRootFolder.Folder, extraFolderDestination, filesWhiteList);
+							if (extraFolderDestination.GetFiles().Length > 0 || extraFolderDestination.GetDirectories().Length > 0)
+								extraFolderDestinations.Add(extraFolderDestination);
 						}
-						if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
+						foreach (DirectoryInfo subFolder in extraFoldersDestinationRoot.GetDirectories().Where(x => !extraFolderDestinations.Select(y => y.FullName).Contains(x.FullName)))
 						{
-							foreach (DirectoryInfo subFolder in extraFoldersDestinationRoot.GetDirectories().Where(x => !extraFolderDestinations.Select(y => y.FullName).Contains(x.FullName)))
-							{
-								SyncManager.DeleteFolder(subFolder);
-							}
+							SyncManager.DeleteFolder(subFolder);
 						}
 					}
 				}

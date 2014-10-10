@@ -34,6 +34,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		bool NoShare { get; set; }
 		bool DoNotGeneratePreview { get; set; }
 		bool ForcePreview { get; set; }
+		bool IsUrl365 { get; set; }
 		string AssignedUsers { get; set; }
 		string DeniedUsers { get; set; }
 		Image Widget { get; set; }
@@ -45,8 +46,6 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		PresentationProperties PresentationProperties { get; set; }
 		LineBreakProperties LineBreakProperties { get; set; }
 		BannerProperties BannerProperties { get; }
-		FileCard FileCard { get; set; }
-		AttachmentProperties AttachmentProperties { get; set; }
 
 		ILibraryLink Clone(LibraryFolder parent);
 		string Serialize();

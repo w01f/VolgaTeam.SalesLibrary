@@ -177,9 +177,6 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			{
 				if (file.OriginalPath.ToLower().Equals(originalPath.ToLower()))
 					file.LastChanged = lastChanged;
-				var attachment = file.AttachmentProperties.FilesAttachments.FirstOrDefault(x => x.OriginalPath.ToLower().Equals(originalPath.ToLower()));
-				if (attachment != null)
-					attachment.LastChanged = lastChanged;
 			}
 		}
 
@@ -188,37 +185,28 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			foreach (var previewContainer in PreviewContainers)
 			{
 				var alive = false;
-				var onlyText = false;
 				foreach (var page in Pages)
 				{
 					foreach (var folder in page.Folders)
 					{
 						foreach (LibraryLink file in folder.Files)
 						{
-							if (file.IsForbidden || !(!file.IsRestricted || (file.IsRestricted && (!string.IsNullOrEmpty(file.AssignedUsers) || !string.IsNullOrEmpty(file.DeniedUsers)))))
-								continue;
+							if (file.DoNotGeneratePreview || 
+								file.IsForbidden || 
+								!(!file.IsRestricted || 
+									((!String.IsNullOrEmpty(file.AssignedUsers) || 
+									!String.IsNullOrEmpty(file.DeniedUsers))))) continue;
 							if (file is LibraryFolderLink)
-								alive = (file as LibraryFolderLink).IsPreviewContainerAlive(previewContainer);
+								alive = ((LibraryFolderLink)file).IsPreviewContainerAlive(previewContainer);
 							else
 								alive = file.OriginalPath.ToLower().Equals(previewContainer.OriginalPath.ToLower());
-							onlyText |= alive && file.DoNotGeneratePreview;
-							if (!alive)
-								alive = file.AttachmentProperties.FilesAttachments.FirstOrDefault(x => x.OriginalPath.ToLower().Equals(previewContainer.OriginalPath.ToLower())) != null;
-							if (alive)
-								break;
+							if (alive) break;
 						}
-						if (alive)
-							break;
+						if (alive) break;
 					}
-					if (alive)
-						break;
+					if (alive) break;
 				}
-
-				if (alive)
-				{
-					previewContainer.OnlyText = onlyText;
-					continue;
-				}
+				if (alive) continue;
 				previewContainer.ClearContent();
 				previewContainer.OriginalPath = string.Empty;
 			}
@@ -618,7 +606,6 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 				{
 					ProcessPresentationProperties();
 					GeneratePresentationPreviewFiles();
-					ProcessAttachments();
 					if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
 						NotifyAboutExpiredLinks();
 				}
@@ -634,7 +621,6 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 				{
 					UpdatePreviewContainers();
 					GenerateExtendedPreviewFiles();
-					ProcessAttachments();
 				}
 
 			if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
@@ -677,60 +663,6 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			Save();
 		}
 
-		public void ProcessAttachments()
-		{
-			var actualAttachmentIds = new List<Guid>();
-
-			foreach (var page in Pages)
-			{
-				foreach (var folder in page.Folders)
-				{
-					foreach (var file in folder.Files)
-					{
-						var attachmentProperties = file.AttachmentProperties;
-						if ((!Globals.ThreadActive || Globals.ThreadAborted) && Globals.ThreadActive) break;
-						foreach (var attachment in attachmentProperties.FilesAttachments)
-						{
-							if ((!Globals.ThreadActive || Globals.ThreadAborted) && Globals.ThreadActive) break;
-							if (!attachment.IsSourceAvailable) continue;
-							var copy = true;
-							if (attachment.IsDestinationAvailable)
-							{
-								var sourceTimeStamp = File.GetLastWriteTime(attachment.OriginalPath);
-								var destinationTimeStamp = File.GetLastWriteTime(attachment.DestinationPath);
-								if (sourceTimeStamp == destinationTimeStamp)
-									copy = false;
-							}
-							else
-							{
-								if (!Directory.Exists(Path.GetDirectoryName(attachment.DestinationPath)))
-									Directory.CreateDirectory(Path.GetDirectoryName(attachment.DestinationPath));
-							}
-							if (copy)
-								try
-								{
-									File.Copy(attachment.OriginalPath, attachment.DestinationPath, true);
-								}
-								catch { }
-							actualAttachmentIds.Add(attachment.Identifier);
-						}
-					}
-					if (!((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive))
-						break;
-				}
-				if (!((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive))
-					break;
-			}
-			if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
-				Save();
-
-			if ((!Globals.ThreadActive || Globals.ThreadAborted) && Globals.ThreadActive) return;
-			var attachmentRootFolder = new DirectoryInfo(Path.Combine(Folder.FullName, Constants.AttachmentsRootFolderName));
-			if (attachmentRootFolder.Exists)
-				foreach (var subFolder in attachmentRootFolder.GetDirectories().Where(x => !actualAttachmentIds.Select(y => y.ToString()).Contains(x.Name) && !x.FullName.Contains("_gsdata_")))
-					SyncManager.DeleteFolder(subFolder);
-		}
-
 		private void GeneratePresentationPreviewFiles()
 		{
 			var links = new List<LibraryLink>();
@@ -749,7 +681,11 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
 		private void GenerateExtendedPreviewFiles()
 		{
-			foreach (var previewContainer in PreviewContainers.Where(x => x.Type == FileTypes.BuggyPresentation || x.Type == FileTypes.FriendlyPresentation || x.Type == FileTypes.Presentation || x.Type == FileTypes.Other))
+			foreach (var previewContainer in PreviewContainers
+				.Where(x => x.Type == FileTypes.BuggyPresentation || 
+					x.Type == FileTypes.FriendlyPresentation || 
+					x.Type == FileTypes.Presentation || 
+					x.Type == FileTypes.Other))
 			{
 				if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
 				{

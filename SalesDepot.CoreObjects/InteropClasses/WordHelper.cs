@@ -7,7 +7,7 @@ namespace SalesDepot.CoreObjects.InteropClasses
 {
 	class WordHelper
 	{
-		private static WordHelper _instance = new WordHelper();
+		private static readonly WordHelper _instance = new WordHelper();
 
 		private Word.Application _wordObject;
 
@@ -57,51 +57,47 @@ namespace SalesDepot.CoreObjects.InteropClasses
 			GC.WaitForPendingFinalizers();
 		}
 
-		public void ExportDocumentAllFormats(string sourceFilePath, string destinationFolderPath, bool onlyText, out bool update)
+		public void ExportDocumentAllFormats(string sourceFilePath, string destinationFolderPath, out bool update)
 		{
 			var pdfDestination = Path.Combine(destinationFolderPath, "pdf");
-			var updatePdf = !(Directory.Exists(pdfDestination) && Directory.GetFiles(pdfDestination, "*.pdf").Length > 0) && !onlyText;
+			var updatePdf = !(Directory.Exists(pdfDestination) && Directory.GetFiles(pdfDestination, "*.pdf").Length > 0);
 			if (updatePdf && !Directory.Exists(pdfDestination))
 				Directory.CreateDirectory(pdfDestination);
 			var pngDestination = Path.Combine(destinationFolderPath, "png");
-			var updatePng = !(Directory.Exists(pngDestination) && Directory.GetFiles(pngDestination, "*.png").Length > 0) && !onlyText;
+			var updatePng = !(Directory.Exists(pngDestination) && Directory.GetFiles(pngDestination, "*.png").Length > 0);
 			if (updatePng && !Directory.Exists(pngDestination))
 				Directory.CreateDirectory(pngDestination);
 			var pngPhoneDestination = Path.Combine(destinationFolderPath, "png_phone");
-			var updatePngPhone = !(Directory.Exists(pngPhoneDestination) && Directory.GetFiles(pngPhoneDestination, "*.png").Length > 0) && !onlyText;
+			var updatePngPhone = !(Directory.Exists(pngPhoneDestination) && Directory.GetFiles(pngPhoneDestination, "*.png").Length > 0);
 			if (updatePngPhone && !Directory.Exists(pngPhoneDestination))
 				Directory.CreateDirectory(pngPhoneDestination);
 			var jpgDestination = Path.Combine(destinationFolderPath, "jpg");
-			var updateJpg = !(Directory.Exists(jpgDestination) && Directory.GetFiles(jpgDestination, "*.jpg").Length > 0) && !onlyText;
+			var updateJpg = !(Directory.Exists(jpgDestination) && Directory.GetFiles(jpgDestination, "*.jpg").Length > 0);
 			if (updateJpg && !Directory.Exists(jpgDestination))
 				Directory.CreateDirectory(jpgDestination);
 			var jpgPhoneDestination = Path.Combine(destinationFolderPath, "jpg_phone");
-			var updateJpgPhone = !(Directory.Exists(jpgPhoneDestination) && Directory.GetFiles(jpgPhoneDestination, "*.jpg").Length > 0) && !onlyText;
+			var updateJpgPhone = !(Directory.Exists(jpgPhoneDestination) && Directory.GetFiles(jpgPhoneDestination, "*.jpg").Length > 0);
 			if (updateJpgPhone && !Directory.Exists(jpgPhoneDestination))
 				Directory.CreateDirectory(jpgPhoneDestination);
 			var thumbsDestination = Path.Combine(destinationFolderPath, "thumbs");
-			var updateThumbs = !(Directory.Exists(thumbsDestination) && Directory.GetFiles(thumbsDestination, "*.png").Length > 0) && !onlyText;
+			var updateThumbs = !(Directory.Exists(thumbsDestination) && Directory.GetFiles(thumbsDestination, "*.png").Length > 0);
 			if (updateThumbs && !Directory.Exists(thumbsDestination))
 				Directory.CreateDirectory(thumbsDestination);
 			var thumbsPhoneDestination = Path.Combine(destinationFolderPath, "thumbs_phone");
-			var updateThumbsPhone = !(Directory.Exists(thumbsPhoneDestination) && Directory.GetFiles(thumbsPhoneDestination, "*.png").Length > 0) && !onlyText;
+			var updateThumbsPhone = !(Directory.Exists(thumbsPhoneDestination) && Directory.GetFiles(thumbsPhoneDestination, "*.png").Length > 0);
 			if (updateThumbsPhone && !Directory.Exists(thumbsPhoneDestination))
 				Directory.CreateDirectory(thumbsPhoneDestination);
 			var docDestination = Path.Combine(destinationFolderPath, "doc");
-			var updateDoc = !(Directory.Exists(docDestination) && Directory.GetFiles(docDestination, "*.doc").Length > 0) && !onlyText;
+			var updateDoc = !(Directory.Exists(docDestination) && Directory.GetFiles(docDestination, "*.doc").Length > 0);
 			if (updateDoc && !Directory.Exists(docDestination))
 				Directory.CreateDirectory(docDestination);
 			var docxDestination = Path.Combine(destinationFolderPath, "docx");
-			var updateDocx = !(Directory.Exists(docxDestination) && Directory.GetFiles(docxDestination, "*.docx").Length > 0) && !onlyText;
+			var updateDocx = !(Directory.Exists(docxDestination) && Directory.GetFiles(docxDestination, "*.docx").Length > 0);
 			if (updateDocx && !Directory.Exists(docxDestination))
 				Directory.CreateDirectory(docxDestination);
-			var txtDestination = Path.Combine(destinationFolderPath, "txt");
-			var updateTxt = !(Directory.Exists(txtDestination) && Directory.GetFiles(txtDestination, "*.txt").Length > 0);
-			if (!Directory.Exists(txtDestination))
-				Directory.CreateDirectory(txtDestination);
 
 			update = false;
-			if (!updatePdf && !updatePng && !updateJpg && !updateThumbs && !updateDoc && !updateDocx && !updateTxt && !updatePngPhone && !updateJpgPhone && !updateThumbsPhone) return;
+			if (!updatePdf && !updatePng && !updateJpg && !updateThumbs && !updateDoc && !updateDocx && !updatePngPhone && !updateJpgPhone && !updateThumbsPhone) return;
 			update = true;
 			try
 			{
@@ -119,16 +115,6 @@ namespace SalesDepot.CoreObjects.InteropClasses
 						ToolClasses.PdfHelper.Instance.ExportPdf(pdfFileName, pngDestination, jpgDestination, thumbsDestination);
 					if (updateJpgPhone || updatePngPhone || updateThumbsPhone)
 						ToolClasses.PdfHelper.Instance.ExportPdfPhone(pdfFileName, pngPhoneDestination, jpgPhoneDestination, thumbsPhoneDestination);
-
-					var txtFileName = Path.Combine(txtDestination, Path.ChangeExtension(Path.GetFileName(sourceFilePath), "txt"));
-					if (updateTxt)
-					{
-						using (var sw = new StreamWriter(txtFileName, false))
-						{
-							sw.Write(document.Content.Text);
-							sw.Flush();
-						}
-					}
 
 					if (updateDoc || updateDocx)
 					{

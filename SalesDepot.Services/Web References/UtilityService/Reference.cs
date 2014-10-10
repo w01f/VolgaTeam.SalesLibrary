@@ -35,8 +35,6 @@ namespace SalesDepot.Services.UtilityService {
         
         private System.Threading.SendOrPostCallback updateShortcutsOperationCompleted;
         
-        private System.Threading.SendOrPostCallback cleanExpiredEmailsOperationCompleted;
-        
         private System.Threading.SendOrPostCallback notifyDeadLinksOperationCompleted;
         
         private System.Threading.SendOrPostCallback updateQuizzesOperationCompleted;
@@ -87,9 +85,6 @@ namespace SalesDepot.Services.UtilityService {
         
         /// <remarks/>
         public event updateShortcutsCompletedEventHandler updateShortcutsCompleted;
-        
-        /// <remarks/>
-        public event cleanExpiredEmailsCompletedEventHandler cleanExpiredEmailsCompleted;
         
         /// <remarks/>
         public event notifyDeadLinksCompletedEventHandler notifyDeadLinksCompleted;
@@ -186,36 +181,6 @@ namespace SalesDepot.Services.UtilityService {
             if ((this.updateShortcutsCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.updateShortcutsCompleted(this, new updateShortcutsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:UtilityControllerwsdl#cleanExpiredEmails", RequestNamespace="urn:UtilityControllerwsdl", ResponseNamespace="urn:UtilityControllerwsdl")]
-        [return: System.Xml.Serialization.SoapElementAttribute("return")]
-        public string cleanExpiredEmails(string sessionKey) {
-            object[] results = this.Invoke("cleanExpiredEmails", new object[] {
-                        sessionKey});
-            return ((string)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void cleanExpiredEmailsAsync(string sessionKey) {
-            this.cleanExpiredEmailsAsync(sessionKey, null);
-        }
-        
-        /// <remarks/>
-        public void cleanExpiredEmailsAsync(string sessionKey, object userState) {
-            if ((this.cleanExpiredEmailsOperationCompleted == null)) {
-                this.cleanExpiredEmailsOperationCompleted = new System.Threading.SendOrPostCallback(this.OncleanExpiredEmailsOperationCompleted);
-            }
-            this.InvokeAsync("cleanExpiredEmails", new object[] {
-                        sessionKey}, this.cleanExpiredEmailsOperationCompleted, userState);
-        }
-        
-        private void OncleanExpiredEmailsOperationCompleted(object arg) {
-            if ((this.cleanExpiredEmailsCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.cleanExpiredEmailsCompleted(this, new cleanExpiredEmailsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -363,32 +328,6 @@ namespace SalesDepot.Services.UtilityService {
         private object[] results;
         
         internal updateShortcutsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.18408")]
-    public delegate void cleanExpiredEmailsCompletedEventHandler(object sender, cleanExpiredEmailsCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.18408")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class cleanExpiredEmailsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal cleanExpiredEmailsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }

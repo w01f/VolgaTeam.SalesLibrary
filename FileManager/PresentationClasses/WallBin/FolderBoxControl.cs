@@ -616,7 +616,6 @@ namespace FileManager.PresentationClasses.WallBin
 					file.Name = form.LinkName;
 					file.RelativePath = form.LinkPath;
 					file.Type = FileTypes.Url;
-					file.ForcePreview = true;
 					file.InitBannerProperties();
 					if (grFiles.SelectedRows.Count > 0)
 					{
@@ -776,12 +775,6 @@ namespace FileManager.PresentationClasses.WallBin
 
 				_formLinkProperties.Keywords.Clear();
 				_formLinkProperties.Keywords.AddRange(file.CustomKeywords.Tags.Select(x => new StringDataSourceWrapper(x.Name)));
-
-				_formLinkProperties.FileCard = file.FileCard;
-				_formLinkProperties.FileCardImportantInfo.Clear();
-				_formLinkProperties.FileCardImportantInfo.AddRange(file.FileCard.Notes.Select(x => new StringDataSourceWrapper(x)));
-
-				_formLinkProperties.AttachmentProperties = file.AttachmentProperties;
 			}
 			else
 			{
@@ -797,7 +790,12 @@ namespace FileManager.PresentationClasses.WallBin
 			_formLinkProperties.DeniedUsers = file.IsRestricted && !string.IsNullOrEmpty(file.DeniedUsers) ? file.DeniedUsers : null;
 			_formLinkProperties.ckSecurityShareLink.Checked = !file.NoShare;
 
-			if (file.Type != FileTypes.LineBreak && file.Type != FileTypes.Network && file.Type != FileTypes.Url && file.Type != FileTypes.Excel && file.Type != FileTypes.MediaPlayerVideo && file.Type != FileTypes.QuickTimeVideo && file.Format != "key")
+			if (file.Type == FileTypes.BuggyPresentation ||
+				file.Type == FileTypes.FriendlyPresentation ||
+				file.Type == FileTypes.Presentation ||
+				file.Type == FileTypes.PDF ||
+				file.Type == FileTypes.Word ||
+				(file.Type == FileTypes.Other && new[] { "ppt", "doc", "pdf" }.Contains(file.Format)))
 			{
 				_formLinkProperties.ckDoNotGeneratePreview.Checked = file.DoNotGeneratePreview;
 				_formLinkProperties.ckDoNotGeneratePreview.Visible = true;
@@ -808,7 +806,28 @@ namespace FileManager.PresentationClasses.WallBin
 				_formLinkProperties.ckDoNotGeneratePreview.Visible = false;
 			}
 
-			_formLinkProperties.ckForcePreview.Checked = file.ForcePreview;
+			if (file.Type == FileTypes.MediaPlayerVideo ||
+				file.Type == FileTypes.QuickTimeVideo)
+			{
+				_formLinkProperties.ckForcePreview.Checked = file.ForcePreview;
+				_formLinkProperties.ckForcePreview.Visible = true;
+			}
+			else
+			{
+				_formLinkProperties.ckForcePreview.Checked = false;
+				_formLinkProperties.ckForcePreview.Visible = false;
+			}
+
+			if (file.Type == FileTypes.Url)
+			{
+				_formLinkProperties.ckIsUrl365.Checked = file.IsUrl365;
+				_formLinkProperties.ckIsUrl365.Visible = true;
+			}
+			else
+			{
+				_formLinkProperties.ckIsUrl365.Checked = false;
+				_formLinkProperties.ckIsUrl365.Visible = false;
+			}
 
 			if ((file.PreviewContainer != null && Directory.Exists(file.PreviewContainer.ContainerPath)) || (file.UniversalPreviewContainer != null && Directory.Exists(file.UniversalPreviewContainer.ContainerPath)))
 			{
@@ -882,14 +901,6 @@ namespace FileManager.PresentationClasses.WallBin
 				file.Note = _formLinkProperties.Note;
 
 				file.ExpirationDateOptions = _formLinkProperties.ExpirationDateOptions;
-
-				file.FileCard = _formLinkProperties.FileCard;
-				file.FileCard.Notes.Clear();
-				file.FileCard.Notes.AddRange(_formLinkProperties.FileCardImportantInfo.Where(x => !string.IsNullOrEmpty(x.Value)).Select(x => x.Value));
-
-				file.AttachmentProperties = _formLinkProperties.AttachmentProperties;
-				foreach (var attachment in file.AttachmentProperties.FilesAttachments)
-					file.Parent.Parent.Parent.GetPreviewContainer(attachment.OriginalPath);
 			}
 			else
 			{
@@ -903,10 +914,11 @@ namespace FileManager.PresentationClasses.WallBin
 
 			file.DoNotGeneratePreview = _formLinkProperties.ckDoNotGeneratePreview.Checked;
 			file.ForcePreview = _formLinkProperties.ckForcePreview.Checked;
+			file.IsUrl365 = _formLinkProperties.ckIsUrl365.Checked;
 
 			grFiles.SelectedRows[0].Cells[0].Value = file.DisplayName + file.Note;
 
-			bool widgetColumnVisible = (from DataGridViewRow row in grFiles.Rows select row.Tag as LibraryLink).Any(x => x.Widget != null || (WallBinOptions.ShowCategoryTags && x.HasCategories) || (WallBinOptions.ShowSuperFilterTags && x.HasSuperFilters) || (WallBinOptions.ShowKeywordTags && x.HasKeywords) || (WallBinOptions.ShowFileCardTags && x.HasFileCard) || (WallBinOptions.ShowAttachmentTags && (x.HasFileAttachments || x.HasWebAttachments)) || (WallBinOptions.ShowSecurityTags && (x.IsRestricted || x.IsForbidden)));
+			bool widgetColumnVisible = (from DataGridViewRow row in grFiles.Rows select row.Tag as LibraryLink).Any(x => x.Widget != null || (WallBinOptions.ShowCategoryTags && x.HasCategories) || (WallBinOptions.ShowSuperFilterTags && x.HasSuperFilters) || (WallBinOptions.ShowKeywordTags && x.HasKeywords) || (WallBinOptions.ShowSecurityTags && (x.IsRestricted || x.IsForbidden)));
 			_containsWidgets = widgetColumnVisible;
 
 			SetGridSize();
@@ -1053,12 +1065,6 @@ namespace FileManager.PresentationClasses.WallBin
 				image = Properties.Resources.TagsSuperFIltersWidget;
 			else if (WallBinOptions.ShowKeywordTags && file.HasKeywords)
 				image = Properties.Resources.TagsKeywordsWidget;
-			else if (WallBinOptions.ShowFileCardTags && file.HasFileCard)
-				image = Properties.Resources.TagsFileCardsWidget;
-			else if (WallBinOptions.ShowAttachmentTags && file.HasFileAttachments)
-				image = Properties.Resources.TagsFileAttachmentsWidget;
-			else if (WallBinOptions.ShowAttachmentTags && file.HasWebAttachments)
-				image = Properties.Resources.TagsWebAttachmentsWidget;
 			else if (WallBinOptions.ShowSecurityTags)
 			{
 				if (file.IsForbidden)
@@ -1330,7 +1336,7 @@ namespace FileManager.PresentationClasses.WallBin
 					DataGridViewRow row = grFiles.Rows[grFiles.Rows.Add(libraryFile.DisplayName + libraryFile.Note)];
 					row.Tag = libraryFile;
 				}
-				_containsWidgets = _folder.Files.OfType<LibraryLink>().Any(x => x.Widget != null || (WallBinOptions.ShowCategoryTags && x.HasCategories) || (WallBinOptions.ShowSuperFilterTags && x.HasSuperFilters) || (WallBinOptions.ShowKeywordTags && x.HasKeywords) || (WallBinOptions.ShowFileCardTags && x.HasFileCard) || (WallBinOptions.ShowAttachmentTags && (x.HasFileAttachments || x.HasWebAttachments)) || (WallBinOptions.ShowSecurityTags && (x.IsRestricted || x.IsForbidden)));
+				_containsWidgets = _folder.Files.OfType<LibraryLink>().Any(x => x.Widget != null || (WallBinOptions.ShowCategoryTags && x.HasCategories) || (WallBinOptions.ShowSuperFilterTags && x.HasSuperFilters) || (WallBinOptions.ShowKeywordTags && x.HasKeywords) || (WallBinOptions.ShowSecurityTags && (x.IsRestricted || x.IsForbidden)));
 			}
 			else
 				_containFiles = false;
@@ -1378,18 +1384,16 @@ namespace FileManager.PresentationClasses.WallBin
 			WallBinOptions.ShowCategoryTags = options.ShowCategoryTags;
 			WallBinOptions.ShowSuperFilterTags = options.ShowSuperFilterTags;
 			WallBinOptions.ShowKeywordTags = options.ShowKeywordTags;
-			WallBinOptions.ShowFileCardTags = options.ShowFileCardTags;
-			WallBinOptions.ShowAttachmentTags = options.ShowAttachmentTags;
 			WallBinOptions.ShowSecurityTags = options.ShowSecurityTags;
 			ApplyWallBinOptions();
 		}
 
 		public void ApplyWallBinOptions()
 		{
-			grFiles.MultiSelect = WallBinOptions.AllowMultiSelect && (WallBinOptions.ShowCategoryTags || WallBinOptions.ShowSuperFilterTags || WallBinOptions.ShowFileCardTags || WallBinOptions.ShowKeywordTags || WallBinOptions.ShowSecurityTags);
+			grFiles.MultiSelect = WallBinOptions.AllowMultiSelect && (WallBinOptions.ShowCategoryTags || WallBinOptions.ShowSuperFilterTags || WallBinOptions.ShowKeywordTags || WallBinOptions.ShowSecurityTags);
 			grFiles.DefaultCellStyle.SelectionBackColor = WallBinOptions.AllowEdit ? grFiles.DefaultCellStyle.BackColor : Color.Wheat;
 			grFiles.ClearSelection();
-			_containsWidgets = (from DataGridViewRow row in grFiles.Rows select row.Tag as LibraryLink).Any(x => x.Widget != null || (WallBinOptions.ShowCategoryTags && x.HasCategories) || (WallBinOptions.ShowSuperFilterTags && x.HasSuperFilters) || (WallBinOptions.ShowKeywordTags && x.HasKeywords) || (WallBinOptions.ShowFileCardTags && x.HasFileCard) || (WallBinOptions.ShowAttachmentTags && (x.HasFileAttachments || x.HasWebAttachments)) || (WallBinOptions.ShowSecurityTags && (x.IsRestricted || x.IsForbidden)));
+			_containsWidgets = (from DataGridViewRow row in grFiles.Rows select row.Tag as LibraryLink).Any(x => x.Widget != null || (WallBinOptions.ShowCategoryTags && x.HasCategories) || (WallBinOptions.ShowSuperFilterTags && x.HasSuperFilters) || (WallBinOptions.ShowKeywordTags && x.HasKeywords) || (WallBinOptions.ShowSecurityTags && (x.IsRestricted || x.IsForbidden)));
 		}
 
 		private void AddFile(FileLink file, int rowIndex)

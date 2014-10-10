@@ -49,7 +49,6 @@ namespace AutoSynchronizer.ConfigurationClasses
 			HiddenFolders.Add(Constants.OvernightsCalendarRootFolderName);
 			HiddenFolders.Add(Constants.ProgramManagerRootFolderName);
 			HiddenFolders.Add(Constants.ExtraFoldersRootFolderName);
-			HiddenFolders.Add(Constants.AttachmentsRootFolderName);
 		}
 
 		public string ArhivePath { get; set; }

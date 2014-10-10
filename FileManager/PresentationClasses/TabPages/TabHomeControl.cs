@@ -23,8 +23,6 @@ namespace FileManager.PresentationClasses.TabPages
 		private readonly CategoriesEditor _categoriesEditor = new CategoriesEditor();
 		private readonly SuperFiltersEditor _superFiltersEditor = new SuperFiltersEditor();
 		private readonly KeywordsEditor _keywordsEditor = new KeywordsEditor();
-		private readonly FileCardsEditor _fileCardsEditor = new FileCardsEditor();
-		private readonly AttachmentsEditor _attachmentsEditor = new AttachmentsEditor();
 		private readonly SecurityEditor _securityEditor = new SecurityEditor();
 		private readonly TagsCleaner _tagsCleaner = new TagsCleaner();
 
@@ -174,8 +172,6 @@ namespace FileManager.PresentationClasses.TabPages
 			_wallBinOptions.ShowCategoryTags = options.ShowCategoryTags;
 			_wallBinOptions.ShowSuperFilterTags = options.ShowSuperFilterTags;
 			_wallBinOptions.ShowKeywordTags = options.ShowKeywordTags;
-			_wallBinOptions.ShowFileCardTags = options.ShowFileCardTags;
-			_wallBinOptions.ShowAttachmentTags = options.ShowAttachmentTags;
 			_wallBinOptions.ShowSecurityTags = options.ShowSecurityTags;
 
 			var activeLibrary = MainController.Instance.ActiveDecorator != null ? MainController.Instance.ActiveDecorator.Library : null;
@@ -254,10 +250,6 @@ namespace FileManager.PresentationClasses.TabPages
 				splitContainerControl.Panel1.Controls.Add(_superFiltersEditor);
 			if (!splitContainerControl.Panel1.Controls.Contains(_keywordsEditor))
 				splitContainerControl.Panel1.Controls.Add(_keywordsEditor);
-			if (!splitContainerControl.Panel1.Controls.Contains(_fileCardsEditor))
-				splitContainerControl.Panel1.Controls.Add(_fileCardsEditor);
-			if (!splitContainerControl.Panel1.Controls.Contains(_attachmentsEditor))
-				splitContainerControl.Panel1.Controls.Add(_attachmentsEditor);
 			if (!splitContainerControl.Panel1.Controls.Contains(_securityEditor))
 				splitContainerControl.Panel1.Controls.Add(_securityEditor);
 			if (!splitContainerControl.Panel1.Controls.Contains(_tagsCleaner))
@@ -284,10 +276,6 @@ namespace FileManager.PresentationClasses.TabPages
 				ActiveTagsEditor = _superFiltersEditor;
 			else if (_wallBinOptions.ShowKeywordTags)
 				ActiveTagsEditor = _keywordsEditor;
-			else if (_wallBinOptions.ShowFileCardTags)
-				ActiveTagsEditor = _fileCardsEditor;
-			else if (_wallBinOptions.ShowAttachmentTags)
-				ActiveTagsEditor = _attachmentsEditor;
 			else if (_wallBinOptions.ShowSecurityTags)
 				ActiveTagsEditor = _securityEditor;
 			else if (_wallBinOptions.ShowTagsEditor)

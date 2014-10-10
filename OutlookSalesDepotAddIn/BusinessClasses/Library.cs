@@ -106,7 +106,7 @@ namespace OutlookSalesDepotAddIn.BusinessClasses
 		private void Load()
 		{
 			DateTime tempDate = DateTime.Now;
-			bool tempBool = false;
+			bool tempBool;
 			Guid tempGuid;
 
 			BrandingText = string.Empty;
@@ -292,7 +292,7 @@ namespace OutlookSalesDepotAddIn.BusinessClasses
 
 		public IPreviewContainer GetPreviewContainer(string originalPath)
 		{
-			IPreviewContainer previewContainer = PreviewContainers.Where(x => x.OriginalPath.Equals(originalPath)).FirstOrDefault();
+			IPreviewContainer previewContainer = PreviewContainers.FirstOrDefault(x => x.OriginalPath.Equals(originalPath));
 			if (previewContainer == null)
 			{
 				previewContainer = new UniversalPreviewContainer(this);

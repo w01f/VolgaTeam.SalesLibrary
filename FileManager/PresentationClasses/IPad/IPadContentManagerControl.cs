@@ -57,7 +57,7 @@ namespace FileManager.PresentationClasses.IPad
 
 		public void ConvertSelectedVideoFiles()
 		{
-			VideoInfo[] videoFiles = _videoFiles.Where(x => x.Selected).ToArray();
+			var videoFiles = _videoFiles.Where(x => x.Selected).ToArray();
 			if (videoFiles.Length > 0)
 				ConvertVideoFiles(videoFiles);
 			else
@@ -73,21 +73,21 @@ namespace FileManager.PresentationClasses.IPad
 				Enabled = false;
 				MainController.Instance.ActiveDecorator.Save();
 				var thread = new Thread(delegate()
-											{
-												Globals.ThreadActive = true;
-												Globals.ThreadAborted = false;
-												foreach (VideoInfo videoFile in videoFiles)
-												{
-													if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
-														videoFile.Parent.UpdateContent();
-													else
-														break;
-												}
-												if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
-													ParentDecorator.Library.Save();
-											});
+				{
+					Globals.ThreadActive = true;
+					Globals.ThreadAborted = false;
+					foreach (var videoFile in videoFiles)
+					{
+						if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
+							videoFile.Parent.UpdateContent();
+						else
+							break;
+					}
+					if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
+						ParentDecorator.Library.Save();
+				});
 				form.Show();
-				FormWindowState savedState = FormMain.Instance.WindowState;
+				var savedState = FormMain.Instance.WindowState;
 				if (ParentDecorator.Library.MinimizeOnSync)
 					FormMain.Instance.WindowState = FormWindowState.Minimized;
 				thread.Start();

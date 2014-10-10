@@ -153,7 +153,7 @@ namespace OvernightsCalendarViewer.BusinessClasses
 		{
 			throw new NotImplementedException();
 		}
-
+		
 		public void UpdatePreviewableObject(string originalPath, DateTime lastChanged)
 		{
 			throw new NotImplementedException();

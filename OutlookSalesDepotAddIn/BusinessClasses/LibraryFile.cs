@@ -26,6 +26,7 @@ namespace OutlookSalesDepotAddIn.BusinessClasses
 		private Image _widget;
 		private bool _doNotGeneratePreview;
 		private bool _forcePreview;
+		private bool _isUrl365;
 
 		#region Compatibility with old versions
 		private Image _oldBanner;
@@ -46,7 +47,6 @@ namespace OutlookSalesDepotAddIn.BusinessClasses
 			CriteriaOverlap = string.Empty;
 			SearchTags = new LibraryFileSearchTags();
 			ExpirationDateOptions = new ExpirationDateOptions();
-			FileCard = new FileCard(this);
 			SuperFilters = new List<SuperFilter>();
 			PreviewContainer = null;
 			SetProperties();
@@ -121,10 +121,8 @@ namespace OutlookSalesDepotAddIn.BusinessClasses
 		public ExpirationDateOptions ExpirationDateOptions { get; set; }
 		public PresentationProperties PresentationProperties { get; set; }
 		public LineBreakProperties LineBreakProperties { get; set; }
-		public AttachmentProperties AttachmentProperties { get; set; }
 		public BannerProperties BannerProperties { get; set; }
-		public FileCard FileCard { get; set; }
-
+		
 		public string OriginalPath
 		{
 			get
@@ -411,6 +409,17 @@ namespace OutlookSalesDepotAddIn.BusinessClasses
 			}
 		}
 
+		public bool IsUrl365
+		{
+			get { return _isUrl365; }
+			set
+			{
+				if (_isUrl365 != value)
+					LastChanged = DateTime.Now;
+				_isUrl365 = value;
+			}
+		}
+
 		public virtual ILibraryLink Clone(LibraryFolder parent)
 		{
 			var file = new LibraryLink(parent);
@@ -432,14 +441,13 @@ namespace OutlookSalesDepotAddIn.BusinessClasses
 			file.DeniedUsers = DeniedUsers;
 			file.DoNotGeneratePreview = DoNotGeneratePreview;
 			file.ForcePreview = ForcePreview;
+			file.IsUrl365 = IsUrl365;
 			file.SearchTags = SearchTags;
 			file.CustomKeywords = CustomKeywords;
 			file.ExpirationDateOptions = ExpirationDateOptions;
 			file.PresentationProperties = PresentationProperties;
 			file.LineBreakProperties = LineBreakProperties.Clone(file);
-			file.AttachmentProperties = AttachmentProperties.Clone(file);
 			file.BannerProperties = BannerProperties.Clone(file);
-			file.FileCard = FileCard.Clone(file);
 			file.SuperFilters.AddRange(SuperFilters.Select(sf => new SuperFilter() { Name = sf.Name }));
 			return file;
 		}
@@ -463,6 +471,7 @@ namespace OutlookSalesDepotAddIn.BusinessClasses
 			result.AppendLine(@"<NoShare>" + NoShare + @"</NoShare>");
 			result.AppendLine(@"<DoNotGeneratePreview>" + _doNotGeneratePreview + @"</DoNotGeneratePreview>");
 			result.AppendLine(@"<ForcePreview>" + _forcePreview + @"</ForcePreview>");
+			result.AppendLine(@"<IsUrl365>" + _isUrl365 + @"</IsUrl365>");
 			result.AppendLine(@"<AssignedUsers>" + (AssignedUsers ?? string.Empty).Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</AssignedUsers>");
 			result.AppendLine(@"<DeniedUsers>" + (DeniedUsers ?? string.Empty).Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</DeniedUsers>");
 			result.Append(@"<Widget>" + Convert.ToBase64String((byte[])converter.ConvertTo(_widget, typeof(byte[]))).Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</Widget>");
@@ -472,7 +481,6 @@ namespace OutlookSalesDepotAddIn.BusinessClasses
 				result.AppendLine(@"<Filter>" + superFilter.Name.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</Filter>");
 			result.AppendLine(@"</SuperFilters>");
 			result.AppendLine(@"<ExpirationDateOptions>" + ExpirationDateOptions.Serialize() + @"</ExpirationDateOptions>");
-			result.AppendLine(@"<FileCard>" + FileCard.Serialize() + @"</FileCard>");
 			if (PreviewContainer != null)
 				result.AppendLine(@"<PreviewContainer>" + PreviewContainer.Serialize() + @"</PreviewContainer>");
 			if (PresentationProperties != null)
@@ -579,6 +587,10 @@ namespace OutlookSalesDepotAddIn.BusinessClasses
 						if (bool.TryParse(childNode.InnerText, out tempBool))
 							_forcePreview = tempBool;
 						break;
+					case "IsUrl365":
+						if (bool.TryParse(childNode.InnerText, out tempBool))
+							_isUrl365 = tempBool;
+						break;
 					case "SearchTags":
 						SearchTags.Deserialize(childNode);
 						break;
@@ -588,9 +600,6 @@ namespace OutlookSalesDepotAddIn.BusinessClasses
 						break;
 					case "ExpirationDateOptions":
 						ExpirationDateOptions.Deserialize(childNode);
-						break;
-					case "FileCard":
-						FileCard.Deserialize(childNode);
 						break;
 					case "PreviewContainer":
 						PreviewContainer = new PresentationPreviewContainer(this);

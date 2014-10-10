@@ -92,7 +92,6 @@ namespace FileManager.ConfigurationClasses
 			HiddenObjects.Add(Constants.OvernightsCalendarRootFolderName);
 			HiddenObjects.Add(Constants.ProgramManagerRootFolderName);
 			HiddenObjects.Add(Constants.ExtraFoldersRootFolderName);
-			HiddenObjects.Add(Constants.AttachmentsRootFolderName);
 			HiddenObjects.Add("thumbs.db");
 			HiddenObjects.Add("SalesDepotCache.xml");
 			HiddenObjects.Add("SalesDepotCacheLight.xml");
@@ -147,8 +146,6 @@ namespace FileManager.ConfigurationClasses
 		public bool ShowTagsCategories { get; set; }
 		public bool ShowTagsSuperFilters { get; set; }
 		public bool ShowTagsKeywords { get; set; }
-		public bool ShowTagsFileCards { get; set; }
-		public bool ShowTagsAttachments { get; set; }
 		public bool ShowTagsCleaner { get; set; }
 		#endregion
 

@@ -21,7 +21,6 @@ using FileManager.ConfigurationClasses;
 using SalesDepot.CoreObjects.BusinessClasses;
 using SalesDepot.Services.IPadAdminService;
 using Banner = FileManager.ConfigurationClasses.Banner;
-using FileCard = SalesDepot.CoreObjects.BusinessClasses.FileCard;
 using Font = System.Drawing.Font;
 using Library = SalesDepot.CoreObjects.BusinessClasses.Library;
 
@@ -83,17 +82,6 @@ namespace FileManager.ToolForms.WallBin
 				xtraTabControl.AppearancePage.HeaderDisabled.Font = new Font(xtraTabControl.AppearancePage.HeaderDisabled.Font.FontFamily, xtraTabControl.AppearancePage.HeaderDisabled.Font.Size - 2, xtraTabControl.AppearancePage.HeaderDisabled.Font.Style);
 				xtraTabControl.AppearancePage.HeaderHotTracked.Font = new Font(xtraTabControl.AppearancePage.HeaderHotTracked.Font.FontFamily, xtraTabControl.AppearancePage.HeaderHotTracked.Font.Size - 2, xtraTabControl.AppearancePage.HeaderHotTracked.Font.Style);
 				buttonXAddKeyWord.Font = new Font(buttonXAddKeyWord.Font.FontFamily, buttonXAddKeyWord.Font.Size - 2, buttonXAddKeyWord.Font.Style);
-				checkBoxEnableAttachmnets.Font = new Font(checkBoxEnableAttachmnets.Font.FontFamily, checkBoxEnableAttachmnets.Font.Size - 2, checkBoxEnableAttachmnets.Font.Style);
-				buttonXAttachmentsFilesAdd.Font = new Font(buttonXAttachmentsFilesAdd.Font.FontFamily, buttonXAttachmentsFilesAdd.Font.Size - 2, buttonXAttachmentsFilesAdd.Font.Style);
-				checkBoxEnableFileCard.Font = new Font(checkBoxEnableFileCard.Font.FontFamily, checkBoxEnableFileCard.Font.Size - 2, checkBoxEnableFileCard.Font.Style);
-				checkBoxFileCardAdvertiser.Font = new Font(checkBoxFileCardAdvertiser.Font.FontFamily, checkBoxFileCardAdvertiser.Font.Size - 2, checkBoxFileCardAdvertiser.Font.Style);
-				checkBoxFileCardDateSold.Font = new Font(checkBoxFileCardDateSold.Font.FontFamily, checkBoxFileCardDateSold.Font.Size - 2, checkBoxFileCardDateSold.Font.Style);
-				checkBoxFileCardBroadcastClosed.Font = new Font(checkBoxFileCardBroadcastClosed.Font.FontFamily, checkBoxFileCardBroadcastClosed.Font.Size - 2, checkBoxFileCardBroadcastClosed.Font.Style);
-				checkBoxFileCardDigitalClosed.Font = new Font(checkBoxFileCardDigitalClosed.Font.FontFamily, checkBoxFileCardDigitalClosed.Font.Size - 2, checkBoxFileCardDigitalClosed.Font.Style);
-				checkBoxFileCardPublishingClosed.Font = new Font(checkBoxFileCardPublishingClosed.Font.FontFamily, checkBoxFileCardPublishingClosed.Font.Size - 2, checkBoxFileCardPublishingClosed.Font.Style);
-				checkBoxFileCardSalesInfo.Font = new Font(checkBoxFileCardSalesInfo.Font.FontFamily, checkBoxFileCardSalesInfo.Font.Size - 2, checkBoxFileCardSalesInfo.Font.Style);
-				checkBoxFileCardImportantInfo.Font = new Font(checkBoxFileCardImportantInfo.Font.FontFamily, checkBoxFileCardImportantInfo.Font.Size - 2, checkBoxFileCardImportantInfo.Font.Style);
-				buttonXFileCardImportantInfoAdd.Font = new Font(buttonXFileCardImportantInfoAdd.Font.FontFamily, buttonXFileCardImportantInfoAdd.Font.Size - 2, buttonXFileCardImportantInfoAdd.Font.Style);
 
 				rbSecurityAllowed.Font = new Font(rbSecurityAllowed.Font.FontFamily, rbSecurityAllowed.Font.Size - 2, rbSecurityAllowed.Font.Style);
 				rbSecurityForbidden.Font = new Font(rbSecurityForbidden.Font.FontFamily, rbSecurityForbidden.Font.Size - 2, rbSecurityForbidden.Font.Style);
@@ -106,43 +94,6 @@ namespace FileManager.ToolForms.WallBin
 			repositoryItemButtonEditKeyword.Enter += FormMain.Instance.EditorEnter;
 			repositoryItemButtonEditKeyword.MouseUp += FormMain.Instance.EditorMouseUp;
 			repositoryItemButtonEditKeyword.MouseDown += FormMain.Instance.EditorMouseUp;
-			repositoryItemButtonEditAttachmentsFiles.Enter += FormMain.Instance.EditorEnter;
-			repositoryItemButtonEditAttachmentsFiles.MouseUp += FormMain.Instance.EditorMouseUp;
-			repositoryItemButtonEditAttachmentsFiles.MouseDown += FormMain.Instance.EditorMouseUp;
-			repositoryItemButtonEditAttachmentsWeb.Enter += FormMain.Instance.EditorEnter;
-			repositoryItemButtonEditAttachmentsWeb.MouseUp += FormMain.Instance.EditorMouseUp;
-			repositoryItemButtonEditAttachmentsWeb.MouseDown += FormMain.Instance.EditorMouseUp;
-
-			textEditFileCardAdvertiser.Enter += FormMain.Instance.EditorEnter;
-			textEditFileCardAdvertiser.MouseUp += FormMain.Instance.EditorMouseUp;
-			textEditFileCardAdvertiser.MouseDown += FormMain.Instance.EditorMouseUp;
-			dateEditFileCardDateSold.Enter += FormMain.Instance.EditorEnter;
-			dateEditFileCardDateSold.MouseUp += FormMain.Instance.EditorMouseUp;
-			dateEditFileCardDateSold.MouseDown += FormMain.Instance.EditorMouseUp;
-			spinEditFileCardBroadcastClosed.Enter += FormMain.Instance.EditorEnter;
-			spinEditFileCardBroadcastClosed.MouseUp += FormMain.Instance.EditorMouseUp;
-			spinEditFileCardBroadcastClosed.MouseDown += FormMain.Instance.EditorMouseUp;
-			spinEditFileCardDigitalClosed.Enter += FormMain.Instance.EditorEnter;
-			spinEditFileCardDigitalClosed.MouseUp += FormMain.Instance.EditorMouseUp;
-			spinEditFileCardDigitalClosed.MouseDown += FormMain.Instance.EditorMouseUp;
-			spinEditFileCardPublishingClosed.Enter += FormMain.Instance.EditorEnter;
-			spinEditFileCardPublishingClosed.MouseUp += FormMain.Instance.EditorMouseUp;
-			spinEditFileCardPublishingClosed.MouseDown += FormMain.Instance.EditorMouseUp;
-			textEditFileCardSalesName.Enter += FormMain.Instance.EditorEnter;
-			textEditFileCardSalesName.MouseUp += FormMain.Instance.EditorMouseUp;
-			textEditFileCardSalesName.MouseDown += FormMain.Instance.EditorMouseUp;
-			textEditFileCardSalesEmail.Enter += FormMain.Instance.EditorEnter;
-			textEditFileCardSalesEmail.MouseUp += FormMain.Instance.EditorMouseUp;
-			textEditFileCardSalesEmail.MouseDown += FormMain.Instance.EditorMouseUp;
-			textEditFileCardSalesPhone.Enter += FormMain.Instance.EditorEnter;
-			textEditFileCardSalesPhone.MouseUp += FormMain.Instance.EditorMouseUp;
-			textEditFileCardSalesPhone.MouseDown += FormMain.Instance.EditorMouseUp;
-			textEditFileCardSalesStation.Enter += FormMain.Instance.EditorEnter;
-			textEditFileCardSalesStation.MouseUp += FormMain.Instance.EditorMouseUp;
-			textEditFileCardSalesStation.MouseDown += FormMain.Instance.EditorMouseUp;
-			repositoryItemMemoEditFileCardImportantInfo.Enter += FormMain.Instance.EditorEnter;
-			repositoryItemMemoEditFileCardImportantInfo.MouseUp += FormMain.Instance.EditorMouseUp;
-			repositoryItemMemoEditFileCardImportantInfo.MouseDown += FormMain.Instance.EditorMouseUp;
 
 			gridViewSecurityGroups.MasterRowEmpty += OnGroupChildListIsEmpty;
 			gridViewSecurityGroups.MasterRowGetRelationCount += OnGetGroupRelationCount;
@@ -156,8 +107,6 @@ namespace FileManager.ToolForms.WallBin
 			#region Search tags
 			Keywords = new List<StringDataSourceWrapper>();
 			#endregion
-
-			FileCardImportantInfo = new List<StringDataSourceWrapper>();
 
 			gridControlWidgetsGallery.DataSource = new BindingList<Widget>(ListManager.Instance.Widgets);
 			layoutViewWidgetsGallery.FocusedRowChanged += layoutViewWidgetsGallery_FocusedRowChanged;
@@ -179,11 +128,8 @@ namespace FileManager.ToolForms.WallBin
 		public ExpirationDateOptions ExpirationDateOptions { get; set; }
 		public LineBreakProperties LineBreakProperties { get; set; }
 		public BannerProperties BannerProperties { get; set; }
-		public AttachmentProperties AttachmentProperties { get; set; }
 		public bool EnableWidget { get; set; }
 		public Image Widget { get; set; }
-		public FileCard FileCard { get; set; }
-		public List<StringDataSourceWrapper> FileCardImportantInfo { get; private set; }
 		public Func<object> OpenQV { get; set; }
 		public Func<object> OpenWV { get; set; }
 		public Func<object> RefreshPreview { get; set; }
@@ -314,7 +260,6 @@ namespace FileManager.ToolForms.WallBin
 			xtraTabPageExpiredLinks.PageVisible = !IsLineBreak;
 			xtraTabPageNotes.PageVisible = !IsLineBreak;
 			xtraTabPageSearchTags.PageVisible = !IsLineBreak;
-			xtraTabPageAttachments.PageVisible = !IsLineBreak;
 			xtraTabPageLineBrealProperties.PageVisible = IsLineBreak;
 
 			#region Search tags
@@ -365,36 +310,6 @@ namespace FileManager.ToolForms.WallBin
 				checkBoxSendEmailWhenDelete.Checked = ExpirationDateOptions.SendEmailWhenSync;
 				checkBoxLabelLink.Checked = ExpirationDateOptions.LabelLinkWhenExpired;
 				checkBoxEnableExpiredLinks.Checked = ExpirationDateOptions.EnableExpirationDate;
-				#endregion
-
-				#region File Card
-				checkBoxEnableFileCard.Checked = FileCard.Enable;
-				textEditFileCardTitle.EditValue = FileCard.Title;
-				checkBoxFileCardAdvertiser.Checked = !string.IsNullOrEmpty(FileCard.Advertiser);
-				textEditFileCardAdvertiser.EditValue = FileCard.Advertiser;
-				checkBoxFileCardDateSold.Checked = FileCard.DateSold.HasValue;
-				dateEditFileCardDateSold.EditValue = FileCard.DateSold;
-				checkBoxFileCardBroadcastClosed.Checked = FileCard.BroadcastClosed.HasValue;
-				spinEditFileCardBroadcastClosed.EditValue = FileCard.BroadcastClosed;
-				checkBoxFileCardDigitalClosed.Checked = FileCard.DigitalClosed.HasValue;
-				spinEditFileCardDigitalClosed.EditValue = FileCard.DigitalClosed;
-				checkBoxFileCardPublishingClosed.Checked = FileCard.PublishingClosed.HasValue;
-				spinEditFileCardPublishingClosed.EditValue = FileCard.PublishingClosed;
-				checkBoxFileCardSalesInfo.Checked = !string.IsNullOrEmpty(FileCard.SalesName) || !string.IsNullOrEmpty(FileCard.SalesEmail) || !string.IsNullOrEmpty(FileCard.SalesPhone) || !string.IsNullOrEmpty(FileCard.SalesStation);
-				textEditFileCardSalesName.EditValue = FileCard.SalesName;
-				textEditFileCardSalesEmail.EditValue = FileCard.SalesEmail;
-				textEditFileCardSalesPhone.EditValue = FileCard.SalesPhone;
-				textEditFileCardSalesStation.EditValue = FileCard.SalesStation;
-
-				checkBoxFileCardImportantInfo.Checked = FileCardImportantInfo.Count > 0;
-				gridControlFileCardImportantInfo.DataSource = FileCardImportantInfo;
-				gridViewFileCardImportantInfo.RefreshData();
-				#endregion
-
-				#region Attachments
-				checkBoxEnableAttachmnets.Checked = AttachmentProperties.Enable;
-				gridControlAttachmentsFiles.DataSource = AttachmentProperties.FilesAttachments;
-				gridControlAttachmentsWeb.DataSource = AttachmentProperties.WebAttachments;
 				#endregion
 			}
 			else
@@ -506,29 +421,6 @@ namespace FileManager.ToolForms.WallBin
 				ExpirationDateOptions.SendEmailWhenSync = checkBoxSendEmailWhenDelete.Checked;
 				ExpirationDateOptions.LabelLinkWhenExpired = checkBoxLabelLink.Checked;
 				ExpirationDateOptions.EnableExpirationDate = checkBoxEnableExpiredLinks.Checked;
-				#endregion
-
-				#region File Card
-				FileCard.Enable = checkBoxEnableFileCard.Checked;
-				FileCard.Title = textEditFileCardTitle.EditValue != null ? textEditFileCardTitle.EditValue.ToString() : string.Empty;
-				FileCard.Advertiser = FileCard.Enable && checkBoxFileCardAdvertiser.Checked && textEditFileCardAdvertiser.EditValue != null ? textEditFileCardAdvertiser.EditValue.ToString() : null;
-				FileCard.DateSold = FileCard.Enable && checkBoxFileCardDateSold.Checked && dateEditFileCardDateSold.EditValue != null ? (DateTime?)dateEditFileCardDateSold.DateTime : null;
-				FileCard.BroadcastClosed = FileCard.Enable && checkBoxFileCardBroadcastClosed.Checked && spinEditFileCardBroadcastClosed.EditValue != null ? (double?)spinEditFileCardBroadcastClosed.Value : null;
-				FileCard.DigitalClosed = FileCard.Enable && checkBoxFileCardDigitalClosed.Checked && spinEditFileCardDigitalClosed.EditValue != null ? (double?)spinEditFileCardDigitalClosed.Value : null;
-				FileCard.PublishingClosed = FileCard.Enable && checkBoxFileCardPublishingClosed.Checked && spinEditFileCardPublishingClosed.EditValue != null ? (double?)spinEditFileCardPublishingClosed.Value : null;
-				FileCard.SalesName = FileCard.Enable && checkBoxFileCardSalesInfo.Checked && textEditFileCardSalesName.EditValue != null ? textEditFileCardSalesName.EditValue.ToString() : null;
-				FileCard.SalesEmail = FileCard.Enable && checkBoxFileCardSalesInfo.Checked && textEditFileCardSalesEmail.EditValue != null ? textEditFileCardSalesEmail.EditValue.ToString() : null;
-				FileCard.SalesPhone = FileCard.Enable && checkBoxFileCardSalesInfo.Checked && textEditFileCardSalesPhone.EditValue != null ? textEditFileCardSalesPhone.EditValue.ToString() : null;
-				FileCard.SalesStation = FileCard.Enable && checkBoxFileCardSalesInfo.Checked && textEditFileCardSalesStation.EditValue != null ? textEditFileCardSalesStation.EditValue.ToString() : null;
-				#endregion
-
-				#region Attachments
-				AttachmentProperties.Enable = checkBoxEnableAttachmnets.Checked;
-				if (!AttachmentProperties.Enable)
-				{
-					AttachmentProperties.FilesAttachments.Clear();
-					AttachmentProperties.WebAttachments.Clear();
-				}
 				#endregion
 			}
 			else
@@ -848,230 +740,6 @@ namespace FileManager.ToolForms.WallBin
 				gridViewSearchTagsKeywords.MakeRowVisible(gridViewSearchTagsKeywords.FocusedRowHandle, true);
 			}
 		}
-		#endregion
-
-		#region File Card processing
-		private void checkBoxEnableFileCard_CheckedChanged(object sender, EventArgs e)
-		{
-			groupBoxFileCard.Enabled = checkBoxEnableFileCard.Checked;
-			textEditFileCardTitle.Enabled = checkBoxEnableFileCard.Checked;
-			if (!checkBoxEnableFileCard.Checked)
-			{
-				checkBoxFileCardAdvertiser.Checked = false;
-				checkBoxFileCardDateSold.Checked = false;
-				checkBoxFileCardBroadcastClosed.Checked = false;
-				checkBoxFileCardDigitalClosed.Checked = false;
-				checkBoxFileCardPublishingClosed.Checked = false;
-				checkBoxFileCardSalesInfo.Checked = false;
-			}
-		}
-
-		private void checkBoxFileCardAdvertiser_CheckedChanged(object sender, EventArgs e)
-		{
-			textEditFileCardAdvertiser.Enabled = checkBoxFileCardAdvertiser.Checked;
-			if (!checkBoxFileCardAdvertiser.Checked)
-				textEditFileCardAdvertiser.EditValue = null;
-		}
-
-		private void checkBoxFileCardDateSold_CheckedChanged(object sender, EventArgs e)
-		{
-			dateEditFileCardDateSold.Enabled = checkBoxFileCardDateSold.Checked;
-			if (!checkBoxFileCardDateSold.Checked)
-				dateEditFileCardDateSold.EditValue = null;
-		}
-
-		private void checkBoxFileCardBroadcastClosed_CheckedChanged(object sender, EventArgs e)
-		{
-			spinEditFileCardBroadcastClosed.Enabled = checkBoxFileCardBroadcastClosed.Checked;
-			if (!checkBoxFileCardBroadcastClosed.Checked)
-				spinEditFileCardBroadcastClosed.EditValue = null;
-		}
-
-		private void checkBoxFileCardDigitalClosed_CheckedChanged(object sender, EventArgs e)
-		{
-			spinEditFileCardDigitalClosed.Enabled = checkBoxFileCardDigitalClosed.Checked;
-			if (!checkBoxFileCardDigitalClosed.Checked)
-				spinEditFileCardDigitalClosed.EditValue = null;
-		}
-
-		private void checkBoxFileCardPublishingClosed_CheckedChanged(object sender, EventArgs e)
-		{
-			spinEditFileCardPublishingClosed.Enabled = checkBoxFileCardPublishingClosed.Checked;
-			if (!checkBoxFileCardPublishingClosed.Checked)
-				spinEditFileCardPublishingClosed.EditValue = null;
-		}
-
-		private void checkBoxFileCardSalesInfo_CheckedChanged(object sender, EventArgs e)
-		{
-			textEditFileCardSalesName.Enabled = checkBoxFileCardSalesInfo.Checked;
-			textEditFileCardSalesEmail.Enabled = checkBoxFileCardSalesInfo.Checked;
-			textEditFileCardSalesPhone.Enabled = checkBoxFileCardSalesInfo.Checked;
-			textEditFileCardSalesStation.Enabled = checkBoxFileCardSalesInfo.Checked;
-			if (!checkBoxFileCardSalesInfo.Checked)
-			{
-				textEditFileCardSalesName.EditValue = null;
-				textEditFileCardSalesEmail.EditValue = null;
-				textEditFileCardSalesPhone.EditValue = null;
-				textEditFileCardSalesStation.EditValue = null;
-			}
-		}
-
-		private void checkBoxFileCardImportantInfo_CheckedChanged(object sender, EventArgs e)
-		{
-			buttonXFileCardImportantInfoAdd.Enabled = checkBoxFileCardImportantInfo.Checked;
-			gridControlFileCardImportantInfo.Enabled = checkBoxFileCardImportantInfo.Checked;
-			if (!checkBoxFileCardImportantInfo.Checked)
-			{
-				FileCardImportantInfo.Clear();
-				gridViewFileCardImportantInfo.RefreshData();
-			}
-		}
-
-		private void buttonXFileCardImportantInfoAdd_Click(object sender, EventArgs e)
-		{
-			gridViewFileCardImportantInfo.CloseEditor();
-			FileCardImportantInfo.RemoveAll(x => string.IsNullOrEmpty(x.Value));
-			FileCardImportantInfo.Add(new StringDataSourceWrapper());
-			gridViewFileCardImportantInfo.RefreshData();
-			if (gridViewFileCardImportantInfo.RowCount > 0)
-			{
-				gridViewFileCardImportantInfo.FocusedRowHandle = gridViewFileCardImportantInfo.RowCount - 1;
-				gridViewFileCardImportantInfo.MakeRowVisible(gridViewFileCardImportantInfo.FocusedRowHandle, true);
-			}
-		}
-
-		private void repositoryItemButtonEditFileCardImportantInfo_ButtonClick(object sender, ButtonPressedEventArgs e)
-		{
-			gridViewFileCardImportantInfo.CloseEditor();
-			if (gridViewFileCardImportantInfo.FocusedRowHandle >= 0 && gridViewFileCardImportantInfo.FocusedRowHandle < gridViewFileCardImportantInfo.RowCount)
-			{
-				FileCardImportantInfo.RemoveAt(gridViewFileCardImportantInfo.GetDataSourceRowIndex(gridViewFileCardImportantInfo.FocusedRowHandle));
-				gridViewFileCardImportantInfo.RefreshData();
-			}
-		}
-		#endregion
-
-		#region Attachments processing
-		private void checkBoxEnableAttachments_CheckedChanged(object sender, EventArgs e)
-		{
-			groupBoxAttachments.Enabled = checkBoxEnableAttachmnets.Checked;
-		}
-
-		#region Files
-		private void buttonXAttachmentsFilesAdd_Click(object sender, EventArgs e)
-		{
-			using (var dialog = new OpenFileDialog())
-			{
-				dialog.Multiselect = true;
-				dialog.Title = "Attach file";
-				if (dialog.ShowDialog() == DialogResult.OK)
-				{
-					foreach (string fileName in dialog.FileNames)
-					{
-						if (!AttachmentProperties.FilesAttachments.Any(x => x.OriginalPath.ToLower().Equals(fileName.ToLower())))
-						{
-							var attachment = new LinkAttachment(AttachmentProperties);
-							attachment.Type = AttachmentType.File;
-							attachment.OriginalPath = fileName;
-							AttachmentProperties.FilesAttachments.Add(attachment);
-							gridViewAttachmentsFiles.RefreshData();
-							if (gridViewAttachmentsFiles.RowCount > 0)
-							{
-								gridViewAttachmentsFiles.FocusedRowHandle = gridViewAttachmentsFiles.RowCount - 1;
-								gridViewAttachmentsFiles.MakeRowVisible(gridViewAttachmentsFiles.FocusedRowHandle, true);
-							}
-						}
-					}
-				}
-			}
-		}
-
-		private void repositoryItemButtonEditAttachmentsFiles_ButtonClick(object sender, ButtonPressedEventArgs e)
-		{
-			gridViewAttachmentsFiles.CloseEditor();
-			if (gridViewAttachmentsFiles.FocusedRowHandle >= 0 && gridViewAttachmentsFiles.FocusedRowHandle < gridViewAttachmentsFiles.RowCount)
-			{
-				if (e.Button.Index == 0)
-				{
-					LinkAttachment attachment = AttachmentProperties.FilesAttachments[gridViewAttachmentsFiles.GetDataSourceRowIndex(gridViewAttachmentsFiles.FocusedRowHandle)];
-					if (attachment.IsSourceAvailable)
-					{
-						try
-						{
-							Process.Start(attachment.OriginalPath);
-						}
-						catch
-						{
-							AppManager.Instance.ShowWarning("Attachment is not available");
-						}
-					}
-					else
-						AppManager.Instance.ShowWarning("Attachment is not available");
-				}
-				else if (e.Button.Index == 1)
-				{
-					AttachmentProperties.FilesAttachments.RemoveAt(gridViewAttachmentsFiles.GetDataSourceRowIndex(gridViewAttachmentsFiles.FocusedRowHandle));
-					gridViewAttachmentsFiles.RefreshData();
-				}
-			}
-		}
-
-		private void gridViewAttachmentsFiles_RowCellStyle(object sender, RowCellStyleEventArgs e)
-		{
-			int attachmentIndex = gridViewAttachmentsFiles.GetDataSourceRowIndex(e.RowHandle);
-			if (attachmentIndex >= 0 && attachmentIndex < AttachmentProperties.FilesAttachments.Count)
-			{
-				LinkAttachment attachment = AttachmentProperties.FilesAttachments[attachmentIndex];
-				if (attachment.IsSourceAvailable)
-					e.Appearance.ForeColor = Color.Black;
-				else
-					e.Appearance.ForeColor = Color.Red;
-			}
-		}
-		#endregion
-
-		#region Websites
-		private void buttonXAttachmentsWebAdd_Click(object sender, EventArgs e)
-		{
-			gridViewAttachmentsWeb.CloseEditor();
-			AttachmentProperties.WebAttachments.RemoveAll(x => string.IsNullOrEmpty(x.OriginalPath));
-			var attachment = new LinkAttachment(AttachmentProperties);
-			attachment.Type = AttachmentType.Url;
-			AttachmentProperties.WebAttachments.Add(attachment);
-			gridViewAttachmentsWeb.RefreshData();
-			if (gridViewAttachmentsWeb.RowCount > 0)
-			{
-				gridViewAttachmentsWeb.FocusedRowHandle = gridViewAttachmentsWeb.RowCount - 1;
-				gridViewAttachmentsWeb.MakeRowVisible(gridViewAttachmentsWeb.FocusedRowHandle, true);
-			}
-		}
-
-		private void repositoryItemButtonEditAttachmentsWeb_ButtonClick(object sender, ButtonPressedEventArgs e)
-		{
-			gridViewAttachmentsWeb.CloseEditor();
-			if (gridViewAttachmentsWeb.FocusedRowHandle >= 0 && gridViewAttachmentsWeb.FocusedRowHandle < gridViewAttachmentsWeb.RowCount)
-			{
-				if (e.Button.Index == 0)
-				{
-					LinkAttachment attachment = AttachmentProperties.WebAttachments[gridViewAttachmentsWeb.GetDataSourceRowIndex(gridViewAttachmentsWeb.FocusedRowHandle)];
-					try
-					{
-						Process.Start(attachment.OriginalPath);
-					}
-					catch
-					{
-						AppManager.Instance.ShowWarning("Website is not available");
-					}
-				}
-				else if (e.Button.Index == 1)
-				{
-					AttachmentProperties.WebAttachments.RemoveAt(gridViewAttachmentsWeb.GetDataSourceRowIndex(gridViewAttachmentsWeb.FocusedRowHandle));
-					gridViewAttachmentsWeb.RefreshData();
-				}
-			}
-		}
-		#endregion
-
 		#endregion
 
 		#region Security Processing

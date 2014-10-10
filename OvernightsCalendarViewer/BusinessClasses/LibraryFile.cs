@@ -24,6 +24,7 @@ namespace OvernightsCalendarViewer.BusinessClasses
 		private Image _widget;
 		private bool _doNotGeneratePreview;
 		private bool _forcePreview;
+		private bool _isUrl365;
 
 		public LibraryLink(LibraryFolder parent)
 		{
@@ -39,7 +40,6 @@ namespace OvernightsCalendarViewer.BusinessClasses
 			CriteriaOverlap = string.Empty;
 			SearchTags = new LibraryFileSearchTags();
 			ExpirationDateOptions = new ExpirationDateOptions();
-			FileCard = new FileCard(this);
 			SuperFilters = new List<SuperFilter>();
 		}
 
@@ -95,9 +95,7 @@ namespace OvernightsCalendarViewer.BusinessClasses
 		public ExpirationDateOptions ExpirationDateOptions { get; set; }
 		public PresentationProperties PresentationProperties { get; set; }
 		public LineBreakProperties LineBreakProperties { get; set; }
-		public AttachmentProperties AttachmentProperties { get; set; }
 		public BannerProperties BannerProperties { get; set; }
-		public FileCard FileCard { get; set; }
 
 		public string OriginalPath
 		{
@@ -385,6 +383,17 @@ namespace OvernightsCalendarViewer.BusinessClasses
 			}
 		}
 
+		public bool IsUrl365
+		{
+			get { return _isUrl365; }
+			set
+			{
+				if (_isUrl365 != value)
+					LastChanged = DateTime.Now;
+				_isUrl365 = value;
+			}
+		}
+
 		public virtual ILibraryLink Clone(LibraryFolder parent)
 		{
 			var file = new LibraryLink(parent);
@@ -404,14 +413,13 @@ namespace OvernightsCalendarViewer.BusinessClasses
 			file.NoShare = NoShare;
 			file.DoNotGeneratePreview = DoNotGeneratePreview;
 			file.ForcePreview = ForcePreview;
+			file.IsUrl365 = IsUrl365;
 			file.SearchTags = SearchTags;
 			file.CustomKeywords = CustomKeywords;
 			file.ExpirationDateOptions = ExpirationDateOptions;
 			file.PresentationProperties = PresentationProperties;
 			file.LineBreakProperties = LineBreakProperties.Clone(file);
-			file.AttachmentProperties = AttachmentProperties.Clone(file);
 			file.BannerProperties = BannerProperties.Clone(file);
-			file.FileCard = FileCard.Clone(file);
 			file.SuperFilters.AddRange(SuperFilters.Select(sf => new SuperFilter() { Name = sf.Name }));
 			return file;
 		}

@@ -47,38 +47,6 @@ namespace SalesDepot.CoreObjects.InteropClasses
 			GC.WaitForPendingFinalizers();
 		}
 
-		public void ExportBookAllFormats(string sourceFilePath, string destinationFolderPath, out bool update)
-		{
-			string txtDestination = Path.Combine(destinationFolderPath, "txt");
-			bool updateTxt = !(Directory.Exists(txtDestination) && Directory.GetFiles(txtDestination, "*.txt").Length > 0);
-			if (!Directory.Exists(txtDestination))
-				Directory.CreateDirectory(txtDestination);
-
-			update = false;
-			if (updateTxt)
-			{
-				update = true;
-				try
-				{
-					if (Connect())
-					{
-						MessageFilter.Register();
-						Workbook workbook = _excelObject.Workbooks.Open(Filename: sourceFilePath, ReadOnly: true);
-						string txtFileName = Path.Combine(txtDestination, Path.ChangeExtension(Path.GetFileName(sourceFilePath), "txt"));
-						workbook.SaveAs(Filename: txtFileName, FileFormat: XlFileFormat.xlTextWindows);
-						workbook.Close();
-						Utils.ReleaseComObject(workbook);
-					}
-				}
-				catch { }
-				finally
-				{
-					MessageFilter.Revoke();
-					Disconnect();
-				}
-			}
-		}
-
 		public void ExportGroup(string filePath, string groupName, object[,] dataSource)
 		{
 			try

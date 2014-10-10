@@ -15,8 +15,6 @@ namespace FileManager.PresentationClasses.Tags
 		private readonly Dictionary<Guid, SearchTags> _categoriesCopy = new Dictionary<Guid, SearchTags>();
 		private readonly Dictionary<Guid, List<string>> _superFiltersCopy = new Dictionary<Guid, List<string>>();
 		private readonly Dictionary<Guid, CustomKeywords> _keywordsCopy = new Dictionary<Guid, CustomKeywords>();
-		private readonly Dictionary<Guid, FileCard> _fileCardsCopy = new Dictionary<Guid, FileCard>();
-		private readonly Dictionary<Guid, AttachmentProperties> _attachmentsCopy = new Dictionary<Guid, AttachmentProperties>();
 		private readonly Dictionary<Guid, bool> _securityRestrictedCopy = new Dictionary<Guid, bool>();
 		private readonly Dictionary<Guid, bool> _securityNoShareCopy = new Dictionary<Guid, bool>();
 		private readonly Dictionary<Guid, string> _securityAssignedUsersCopy = new Dictionary<Guid, string>();
@@ -61,8 +59,6 @@ namespace FileManager.PresentationClasses.Tags
 			_categoriesCopy.Clear();
 			_superFiltersCopy.Clear();
 			_keywordsCopy.Clear();
-			_fileCardsCopy.Clear();
-			_attachmentsCopy.Clear();
 			_securityRestrictedCopy.Clear();
 			_securityNoShareCopy.Clear();
 			_securityAssignedUsersCopy.Clear();
@@ -78,10 +74,6 @@ namespace FileManager.PresentationClasses.Tags
 				var keywordsCopy = new CustomKeywords();
 				keywordsCopy.Tags.AddRange(link.CustomKeywords.Tags);
 				_keywordsCopy.Add(link.Identifier, keywordsCopy);
-
-				_fileCardsCopy.Add(link.Identifier, link.FileCard.Clone(link));
-
-				_attachmentsCopy.Add(link.Identifier, link.AttachmentProperties.Clone(link));
 
 				_securityRestrictedCopy.Add(link.Identifier, link.IsRestricted);
 				_securityNoShareCopy.Add(link.Identifier, link.NoShare);
@@ -111,11 +103,6 @@ namespace FileManager.PresentationClasses.Tags
 					link.CustomKeywords.Tags.Clear();
 					link.CustomKeywords.Tags.AddRange(_keywordsCopy[link.Identifier].Tags);
 				}
-
-				if (_fileCardsChanged)
-					link.FileCard = _fileCardsCopy[link.Identifier];
-				if (_attachmentsChanged)
-					link.AttachmentProperties = _attachmentsCopy[link.Identifier];
 
 				if (_securityChanged)
 				{
@@ -171,55 +158,6 @@ namespace FileManager.PresentationClasses.Tags
 			NeedToApply = true;
 		}
 
-		private void ClearFileCards(bool allPages)
-		{
-			var activePage = MainController.Instance.ActiveDecorator != null ? MainController.Instance.ActiveDecorator.ActivePage : null;
-			if (activePage == null) return;
-			if (AppManager.Instance.ShowWarningQuestion("Are You Sure ?") != DialogResult.Yes) return;
-			if (AppManager.Instance.ShowWarningQuestion("Are you ABSOLUTELY 100% POSITIVE?") != DialogResult.Yes) return;
-			foreach (var fileCard in _fileCardsCopy.Where(it => allPages || activePage.Page.Folders.SelectMany(f => f.Files.Select(l => l.Identifier)).Contains(it.Key)).Select(it => it.Value))
-			{
-				fileCard.Enable = false;
-				fileCard.Title = string.Empty;
-				fileCard.Advertiser = null;
-				fileCard.DateSold = null;
-				fileCard.BroadcastClosed = null;
-				fileCard.DigitalClosed = null;
-				fileCard.PublishingClosed = null;
-				fileCard.SalesName = null;
-				fileCard.SalesEmail = null;
-				fileCard.SalesPhone = null;
-				fileCard.SalesStation = null;
-				fileCard.Notes.Clear();
-			}
-			_fileCardsChanged = true;
-			NeedToApply = true;
-		}
-
-		private void ClearFileAttachments(bool allPages)
-		{
-			var activePage = MainController.Instance.ActiveDecorator != null ? MainController.Instance.ActiveDecorator.ActivePage : null;
-			if (activePage == null) return;
-			if (AppManager.Instance.ShowWarningQuestion("Are You Sure ?") != DialogResult.Yes) return;
-			if (AppManager.Instance.ShowWarningQuestion("Are you ABSOLUTELY 100% POSITIVE?") != DialogResult.Yes) return;
-			foreach (var attatchment in _attachmentsCopy.Where(it => allPages || activePage.Page.Folders.SelectMany(f => f.Files.Select(l => l.Identifier)).Contains(it.Key)).Select(it => it.Value))
-				attatchment.FilesAttachments.Clear();
-			_attachmentsChanged = true;
-			NeedToApply = true;
-		}
-
-		private void ClearWebAttachments(bool allPages)
-		{
-			var activePage = MainController.Instance.ActiveDecorator != null ? MainController.Instance.ActiveDecorator.ActivePage : null;
-			if (activePage == null) return;
-			if (AppManager.Instance.ShowWarningQuestion("Are You Sure ?") != DialogResult.Yes) return;
-			if (AppManager.Instance.ShowWarningQuestion("Are you ABSOLUTELY 100% POSITIVE?") != DialogResult.Yes) return;
-			foreach (var attatchment in _attachmentsCopy.Where(it => allPages || activePage.Page.Folders.SelectMany(f => f.Files.Select(l => l.Identifier)).Contains(it.Key)).Select(it => it.Value))
-				attatchment.WebAttachments.Clear();
-			_attachmentsChanged = true;
-			NeedToApply = true;
-		}
-
 		private void ClearSecurity(bool allPages)
 		{
 			var activePage = MainController.Instance.ActiveDecorator != null ? MainController.Instance.ActiveDecorator.ActivePage : null;
@@ -269,42 +207,6 @@ namespace FileManager.PresentationClasses.Tags
 		private void hyperLinkEditKeywordsAllPages_OpenLink(object sender, DevExpress.XtraEditors.Controls.OpenLinkEventArgs e)
 		{
 			ClearKeywords(true);
-			e.Handled = true;
-		}
-
-		private void hyperLinkEditFileCardsActivePage_OpenLink(object sender, DevExpress.XtraEditors.Controls.OpenLinkEventArgs e)
-		{
-			ClearFileCards(false);
-			e.Handled = true;
-		}
-
-		private void hyperLinkEditFileCardsAllPages_OpenLink(object sender, DevExpress.XtraEditors.Controls.OpenLinkEventArgs e)
-		{
-			ClearFileCards(true);
-			e.Handled = true;
-		}
-
-		private void hyperLinkEditFileAttachmentsActivePage_OpenLink(object sender, DevExpress.XtraEditors.Controls.OpenLinkEventArgs e)
-		{
-			ClearFileAttachments(false);
-			e.Handled = true;
-		}
-
-		private void hyperLinkEditFileAttachmentsAllPages_OpenLink(object sender, DevExpress.XtraEditors.Controls.OpenLinkEventArgs e)
-		{
-			ClearFileAttachments(true);
-			e.Handled = true;
-		}
-
-		private void hyperLinkEditWebAttachmentsActivePage_OpenLink(object sender, DevExpress.XtraEditors.Controls.OpenLinkEventArgs e)
-		{
-			ClearWebAttachments(false);
-			e.Handled = true;
-		}
-
-		private void hyperLinkEditWebAttachmentsAllPages_OpenLink(object sender, DevExpress.XtraEditors.Controls.OpenLinkEventArgs e)
-		{
-			ClearWebAttachments(true);
 			e.Handled = true;
 		}
 

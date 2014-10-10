@@ -34,7 +34,6 @@ namespace SalesDepot.Services.ContentManagmentService {
     [System.Xml.Serialization.SoapIncludeAttribute(typeof(UserModel))]
     [System.Xml.Serialization.SoapIncludeAttribute(typeof(GroupModel))]
     [System.Xml.Serialization.SoapIncludeAttribute(typeof(Column))]
-    [System.Xml.Serialization.SoapIncludeAttribute(typeof(Attachment))]
     [System.Xml.Serialization.SoapIncludeAttribute(typeof(LinkCategory))]
     [System.Xml.Serialization.SoapIncludeAttribute(typeof(LinkSuperFilter))]
     [System.Xml.Serialization.SoapIncludeAttribute(typeof(LibraryLink))]
@@ -1725,111 +1724,6 @@ namespace SalesDepot.Services.ContentManagmentService {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:ContentControllerwsdl")]
-    public partial class Attachment {
-        
-        private string linkIdField;
-        
-        private string libraryIdField;
-        
-        private string nameField;
-        
-        private string pathField;
-        
-        private string originalFormatField;
-        
-        private string previewIdField;
-        
-        private bool isDeadField;
-        
-        private bool isPreviewNotReadyField;
-        
-        /// <remarks/>
-        public string linkId {
-            get {
-                return this.linkIdField;
-            }
-            set {
-                this.linkIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string libraryId {
-            get {
-                return this.libraryIdField;
-            }
-            set {
-                this.libraryIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string name {
-            get {
-                return this.nameField;
-            }
-            set {
-                this.nameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string path {
-            get {
-                return this.pathField;
-            }
-            set {
-                this.pathField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string originalFormat {
-            get {
-                return this.originalFormatField;
-            }
-            set {
-                this.originalFormatField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string previewId {
-            get {
-                return this.previewIdField;
-            }
-            set {
-                this.previewIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool isDead {
-            get {
-                return this.isDeadField;
-            }
-            set {
-                this.isDeadField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool isPreviewNotReady {
-            get {
-                return this.isPreviewNotReadyField;
-            }
-            set {
-                this.isPreviewNotReadyField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.34234")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:ContentControllerwsdl")]
     public partial class LinkCategory {
         
         private string linkIdField;
@@ -1922,171 +1816,6 @@ namespace SalesDepot.Services.ContentManagmentService {
             }
             set {
                 this.valueField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.34234")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:ContentControllerwsdl")]
-    public partial class FileCard {
-        
-        private string idField;
-        
-        private string libraryIdField;
-        
-        private string titleField;
-        
-        private string advertiserField;
-        
-        private string dateSoldField;
-        
-        private float broadcastClosedField;
-        
-        private float digitalClosedField;
-        
-        private float publishingClosedField;
-        
-        private string salesNameField;
-        
-        private string salesEmailField;
-        
-        private string salesPhoneField;
-        
-        private string salesStationField;
-        
-        private string[] notesField;
-        
-        /// <remarks/>
-        public string id {
-            get {
-                return this.idField;
-            }
-            set {
-                this.idField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string libraryId {
-            get {
-                return this.libraryIdField;
-            }
-            set {
-                this.libraryIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string title {
-            get {
-                return this.titleField;
-            }
-            set {
-                this.titleField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string advertiser {
-            get {
-                return this.advertiserField;
-            }
-            set {
-                this.advertiserField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string dateSold {
-            get {
-                return this.dateSoldField;
-            }
-            set {
-                this.dateSoldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public float broadcastClosed {
-            get {
-                return this.broadcastClosedField;
-            }
-            set {
-                this.broadcastClosedField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public float digitalClosed {
-            get {
-                return this.digitalClosedField;
-            }
-            set {
-                this.digitalClosedField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public float publishingClosed {
-            get {
-                return this.publishingClosedField;
-            }
-            set {
-                this.publishingClosedField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string salesName {
-            get {
-                return this.salesNameField;
-            }
-            set {
-                this.salesNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string salesEmail {
-            get {
-                return this.salesEmailField;
-            }
-            set {
-                this.salesEmailField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string salesPhone {
-            get {
-                return this.salesPhoneField;
-            }
-            set {
-                this.salesPhoneField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string salesStation {
-            get {
-                return this.salesStationField;
-            }
-            set {
-                this.salesStationField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string[] notes {
-            get {
-                return this.notesField;
-            }
-            set {
-                this.notesField = value;
             }
         }
     }
@@ -2218,10 +1947,6 @@ namespace SalesDepot.Services.ContentManagmentService {
         
         private Banner bannerField;
         
-        private bool enableFileCardField;
-        
-        private FileCard fileCardField;
-        
         private string previewIdField;
         
         private LinkSuperFilter[] superFiltersField;
@@ -2233,12 +1958,6 @@ namespace SalesDepot.Services.ContentManagmentService {
         private string dateAddField;
         
         private string dateModifyField;
-        
-        private string contentPathField;
-        
-        private bool enableAttachmentsField;
-        
-        private Attachment[] attachmentsField;
         
         private bool isRestrictedField;
         
@@ -2445,26 +2164,6 @@ namespace SalesDepot.Services.ContentManagmentService {
         }
         
         /// <remarks/>
-        public bool enableFileCard {
-            get {
-                return this.enableFileCardField;
-            }
-            set {
-                this.enableFileCardField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public FileCard fileCard {
-            get {
-                return this.fileCardField;
-            }
-            set {
-                this.fileCardField = value;
-            }
-        }
-        
-        /// <remarks/>
         public string previewId {
             get {
                 return this.previewIdField;
@@ -2521,36 +2220,6 @@ namespace SalesDepot.Services.ContentManagmentService {
             }
             set {
                 this.dateModifyField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string contentPath {
-            get {
-                return this.contentPathField;
-            }
-            set {
-                this.contentPathField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool enableAttachments {
-            get {
-                return this.enableAttachmentsField;
-            }
-            set {
-                this.enableAttachmentsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public Attachment[] attachments {
-            get {
-                return this.attachmentsField;
-            }
-            set {
-                this.attachmentsField = value;
             }
         }
         

@@ -112,7 +112,6 @@ namespace SalesDepot.ConfigurationClasses
 			HiddenObjects.Add(Constants.OvernightsCalendarRootFolderName);
 			HiddenObjects.Add(Constants.ProgramManagerRootFolderName);
 			HiddenObjects.Add(Constants.ExtraFoldersRootFolderName);
-			HiddenObjects.Add(Constants.AttachmentsRootFolderName);
 			HiddenObjects.Add("thumbs.db");
 			HiddenObjects.Add("SalesDepotCache.xml");
 

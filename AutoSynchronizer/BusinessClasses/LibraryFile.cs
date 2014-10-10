@@ -28,6 +28,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		private string _deniedUsers;
 		private bool _doNotGeneratePreview;
 		private bool _forcePreview;
+		private bool _isUrl365;
 
 		#region Compatibility with old versions
 		private Image _oldBanner;
@@ -44,8 +45,6 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			AddDate = DateTime.Now;
 			SearchTags = new LibraryFileSearchTags();
 			ExpirationDateOptions = new ExpirationDateOptions();
-			AttachmentProperties = new AttachmentProperties(this);
-			FileCard = new FileCard(this);
 
 			CustomKeywords = new CustomKeywords();
 			SuperFilters = new List<SuperFilter>();
@@ -59,18 +58,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			{
 				if (Type == FileTypes.Url || Type == FileTypes.Network || Type == FileTypes.Folder || Type == FileTypes.LineBreak)
 					return _name;
-				else
-					return Path.GetFileName(OriginalPath);
-			}
-		}
-		public string Content
-		{
-			get
-			{
-				IPreviewContainer previewContainer = Parent.Parent.Parent.GetPreviewContainer(OriginalPath);
-				if (previewContainer != null)
-					return previewContainer.GetTextContent();
-				return string.Empty;
+				return Path.GetFileName(OriginalPath);
 			}
 		}
 
@@ -95,8 +83,6 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		public PresentationProperties PresentationProperties { get; set; }
 		public LineBreakProperties LineBreakProperties { get; set; }
 		public BannerProperties BannerProperties { get; set; }
-		public virtual AttachmentProperties AttachmentProperties { get; set; }
-		public FileCard FileCard { get; set; }
 
 		public string Name
 		{
@@ -300,7 +286,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
 		public bool HasTags
 		{
-			get { return HasCategories || HasKeywords || HasFileCard || HasFileAttachments || HasWebAttachments; }
+			get { return HasCategories || HasKeywords; }
 		}
 
 		public bool HasCategories
@@ -311,21 +297,6 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		public bool HasKeywords
 		{
 			get { return CustomKeywords.Tags.Count > 0; }
-		}
-
-		public bool HasFileCard
-		{
-			get { return FileCard.Enable; }
-		}
-
-		public bool HasFileAttachments
-		{
-			get { return AttachmentProperties.Enable && AttachmentProperties.FilesAttachments.Count > 0; }
-		}
-
-		public bool HasWebAttachments
-		{
-			get { return AttachmentProperties.Enable && AttachmentProperties.WebAttachments.Count > 0; }
 		}
 
 		public string Format
@@ -467,6 +438,17 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			}
 		}
 
+		public bool IsUrl365
+		{
+			get { return _isUrl365; }
+			set
+			{
+				if (_isUrl365 != value)
+					LastChanged = DateTime.Now;
+				_isUrl365 = value;
+			}
+		}
+
 		public virtual ILibraryLink Clone(LibraryFolder parent)
 		{
 			var file = new LibraryLink(parent);
@@ -488,15 +470,14 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			file.DeniedUsers = DeniedUsers;
 			file.DoNotGeneratePreview = DoNotGeneratePreview;
 			file.ForcePreview = ForcePreview;
+			file.IsUrl365 = IsUrl365;
 			file.SearchTags = SearchTags;
 			file.CustomKeywords = CustomKeywords;
 			file.ExpirationDateOptions = ExpirationDateOptions;
 			file.PresentationProperties = PresentationProperties;
 			if (LineBreakProperties != null)
 				file.LineBreakProperties = LineBreakProperties.Clone(file);
-			file.AttachmentProperties = AttachmentProperties.Clone(file);
 			file.BannerProperties = BannerProperties.Clone(file);
-			file.FileCard = FileCard.Clone(file);
 			file.SuperFilters.AddRange(SuperFilters.Select(sf => new SuperFilter() { Name = sf.Name }));
 			return file;
 		}
@@ -517,7 +498,6 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			result.AppendLine(@"<Order>" + _order + @"</Order>");
 			result.AppendLine(@"<EnableWidget>" + _enableWidget + @"</EnableWidget>");
 			result.Append(@"<Widget>" + Convert.ToBase64String((byte[])converter.ConvertTo(_widget, typeof(byte[]))).Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</Widget>");
-			result.AppendLine(@"<AttachmentProperties>" + AttachmentProperties.Serialize() + @"</AttachmentProperties>");
 			result.AppendLine(@"<AddDate>" + AddDate + @"</AddDate>");
 			result.AppendLine(@"<IsForbidden>" + IsForbidden + @"</IsForbidden>");
 			result.AppendLine(@"<IsRestricted>" + IsRestricted + @"</IsRestricted>");
@@ -526,6 +506,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			result.AppendLine(@"<DeniedUsers>" + (DeniedUsers ?? string.Empty).Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</DeniedUsers>");
 			result.AppendLine(@"<DoNotGeneratePreview>" + _doNotGeneratePreview + @"</DoNotGeneratePreview>");
 			result.AppendLine(@"<ForcePreview>" + _forcePreview + @"</ForcePreview>");
+			result.AppendLine(@"<IsUrl365>" + _isUrl365 + @"</IsUrl365>");
 			result.AppendLine(@"<LastChanged>" + (_lastChanged != DateTime.MinValue ? _lastChanged.ToString() : DateTime.Now.ToString()) + @"</LastChanged>");
 			result.Append(SearchTags.Serialize());
 			result.Append(CustomKeywords.Serialize());
@@ -534,7 +515,6 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 				result.AppendLine(@"<Filter>" + superFilter.Name.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</Filter>");
 			result.AppendLine(@"</SuperFilters>");
 			result.AppendLine(@"<ExpirationDateOptions>" + ExpirationDateOptions.Serialize() + @"</ExpirationDateOptions>");
-			result.AppendLine(@"<FileCard>" + FileCard.Serialize() + @"</FileCard>");
 
 			#region Compatibility with desktop version of Sales Depot
 			if (PreviewContainer != null)
@@ -621,9 +601,6 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 						else if (!string.IsNullOrEmpty(childNode.InnerText))
 							_widget = new Bitmap(new MemoryStream(Convert.FromBase64String(childNode.InnerText)));
 						break;
-					case "AttachmentProperties":
-						AttachmentProperties.Deserialize(childNode);
-						break;
 					case "AddDate":
 						if (DateTime.TryParse(childNode.InnerText, out tempDate))
 							AddDate = tempDate;
@@ -663,9 +640,6 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 					case "ExpirationDateOptions":
 						ExpirationDateOptions.Deserialize(childNode);
 						break;
-					case "FileCard":
-						FileCard.Deserialize(childNode);
-						break;
 					case "DoNotGeneratePreview":
 						if (bool.TryParse(childNode.InnerText, out tempBool))
 							_doNotGeneratePreview = tempBool;
@@ -673,6 +647,10 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 					case "ForcePreview":
 						if (bool.TryParse(childNode.InnerText, out tempBool))
 							_forcePreview = tempBool;
+						break;
+					case "IsUrl365":
+						if (bool.TryParse(childNode.InnerText, out tempBool))
+							_isUrl365 = tempBool;
 						break;
 
 					#region Compatibility with old version of Sales Depot
@@ -721,7 +699,17 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
 			SetProperties();
 
-			if (Type == FileTypes.BuggyPresentation || Type == FileTypes.FriendlyPresentation || Type == FileTypes.Presentation || Type == FileTypes.Other || Type == FileTypes.MediaPlayerVideo || Type == FileTypes.QuickTimeVideo)
+			if ((Type == FileTypes.BuggyPresentation ||
+				Type == FileTypes.FriendlyPresentation ||
+				Type == FileTypes.Presentation ||
+				Type == FileTypes.Other ||
+				Type == FileTypes.MediaPlayerVideo ||
+				Type == FileTypes.QuickTimeVideo) &&
+				!(
+					DoNotGeneratePreview ||
+					IsForbidden ||
+					!(!IsRestricted || ((!String.IsNullOrEmpty(AssignedUsers) || !String.IsNullOrEmpty(DeniedUsers)))))
+				)
 				Parent.Parent.Parent.GetPreviewContainer(OriginalPath);
 		}
 		#endregion
@@ -860,9 +848,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			file.ExpirationDateOptions = ExpirationDateOptions;
 			file.PresentationProperties = PresentationProperties;
 			file.LineBreakProperties = LineBreakProperties.Clone(file);
-			file.AttachmentProperties = AttachmentProperties.Clone(file);
 			file.BannerProperties = BannerProperties.Clone(file);
-			file.FileCard = FileCard.Clone(file);
 			file.FolderContent.AddRange(FolderContent.Select(x => x.Clone(parent)));
 			file.SuperFilters.AddRange(SuperFilters.Select(sf => new SuperFilter() { Name = sf.Name }));
 			return file;

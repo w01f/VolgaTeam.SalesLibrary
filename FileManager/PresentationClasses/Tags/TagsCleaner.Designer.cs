@@ -36,18 +36,6 @@
 			this.hyperLinkEditSecurityActivePage = new DevExpress.XtraEditors.HyperLinkEdit();
 			this.labelControlSecurity = new DevExpress.XtraEditors.LabelControl();
 			this.pbSecurity = new System.Windows.Forms.PictureBox();
-			this.hyperLinkEditWebAttachmentsAllPages = new DevExpress.XtraEditors.HyperLinkEdit();
-			this.hyperLinkEditWebAttachmentsActivePage = new DevExpress.XtraEditors.HyperLinkEdit();
-			this.labelControlWebAttachments = new DevExpress.XtraEditors.LabelControl();
-			this.pbWebAttachments = new System.Windows.Forms.PictureBox();
-			this.hyperLinkEditFileAttachmentsAllPages = new DevExpress.XtraEditors.HyperLinkEdit();
-			this.hyperLinkEditFileAttachmentsActivePage = new DevExpress.XtraEditors.HyperLinkEdit();
-			this.labelControlFileAttachments = new DevExpress.XtraEditors.LabelControl();
-			this.pbFileAttachments = new System.Windows.Forms.PictureBox();
-			this.hyperLinkEditFileCardsAllPages = new DevExpress.XtraEditors.HyperLinkEdit();
-			this.hyperLinkEditFileCardsActivePage = new DevExpress.XtraEditors.HyperLinkEdit();
-			this.labelControlFileCards = new DevExpress.XtraEditors.LabelControl();
-			this.pbFileCards = new System.Windows.Forms.PictureBox();
 			this.hyperLinkEditKeywordsAllPages = new DevExpress.XtraEditors.HyperLinkEdit();
 			this.hyperLinkEditKeywordsActivePage = new DevExpress.XtraEditors.HyperLinkEdit();
 			this.labelControlKeywords = new DevExpress.XtraEditors.LabelControl();
@@ -66,15 +54,6 @@
 			((System.ComponentModel.ISupportInitialize)(this.hyperLinkEditSecurityAllPages.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.hyperLinkEditSecurityActivePage.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pbSecurity)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.hyperLinkEditWebAttachmentsAllPages.Properties)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.hyperLinkEditWebAttachmentsActivePage.Properties)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.pbWebAttachments)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.hyperLinkEditFileAttachmentsAllPages.Properties)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.hyperLinkEditFileAttachmentsActivePage.Properties)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.pbFileAttachments)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.hyperLinkEditFileCardsAllPages.Properties)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.hyperLinkEditFileCardsActivePage.Properties)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.pbFileCards)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.hyperLinkEditKeywordsAllPages.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.hyperLinkEditKeywordsActivePage.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pbKeywords)).BeginInit();
@@ -113,18 +92,6 @@
 			this.pnData.Controls.Add(this.hyperLinkEditSecurityActivePage);
 			this.pnData.Controls.Add(this.labelControlSecurity);
 			this.pnData.Controls.Add(this.pbSecurity);
-			this.pnData.Controls.Add(this.hyperLinkEditWebAttachmentsAllPages);
-			this.pnData.Controls.Add(this.hyperLinkEditWebAttachmentsActivePage);
-			this.pnData.Controls.Add(this.labelControlWebAttachments);
-			this.pnData.Controls.Add(this.pbWebAttachments);
-			this.pnData.Controls.Add(this.hyperLinkEditFileAttachmentsAllPages);
-			this.pnData.Controls.Add(this.hyperLinkEditFileAttachmentsActivePage);
-			this.pnData.Controls.Add(this.labelControlFileAttachments);
-			this.pnData.Controls.Add(this.pbFileAttachments);
-			this.pnData.Controls.Add(this.hyperLinkEditFileCardsAllPages);
-			this.pnData.Controls.Add(this.hyperLinkEditFileCardsActivePage);
-			this.pnData.Controls.Add(this.labelControlFileCards);
-			this.pnData.Controls.Add(this.pbFileCards);
 			this.pnData.Controls.Add(this.hyperLinkEditKeywordsAllPages);
 			this.pnData.Controls.Add(this.hyperLinkEditKeywordsActivePage);
 			this.pnData.Controls.Add(this.labelControlKeywords);
@@ -146,7 +113,7 @@
 			// hyperLinkEditSecurityAllPages
 			// 
 			this.hyperLinkEditSecurityAllPages.EditValue = "Library";
-			this.hyperLinkEditSecurityAllPages.Location = new System.Drawing.Point(256, 365);
+			this.hyperLinkEditSecurityAllPages.Location = new System.Drawing.Point(256, 192);
 			this.hyperLinkEditSecurityAllPages.Name = "hyperLinkEditSecurityAllPages";
 			this.hyperLinkEditSecurityAllPages.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
 			this.hyperLinkEditSecurityAllPages.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -162,7 +129,7 @@
 			// hyperLinkEditSecurityActivePage
 			// 
 			this.hyperLinkEditSecurityActivePage.EditValue = "Page";
-			this.hyperLinkEditSecurityActivePage.Location = new System.Drawing.Point(181, 365);
+			this.hyperLinkEditSecurityActivePage.Location = new System.Drawing.Point(181, 192);
 			this.hyperLinkEditSecurityActivePage.Name = "hyperLinkEditSecurityActivePage";
 			this.hyperLinkEditSecurityActivePage.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
 			this.hyperLinkEditSecurityActivePage.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -181,7 +148,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelControlSecurity.Appearance.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelControlSecurity.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-			this.labelControlSecurity.Location = new System.Drawing.Point(44, 361);
+			this.labelControlSecurity.Location = new System.Drawing.Point(44, 188);
 			this.labelControlSecurity.Name = "labelControlSecurity";
 			this.labelControlSecurity.Size = new System.Drawing.Size(303, 26);
 			this.labelControlSecurity.TabIndex = 25;
@@ -190,170 +157,11 @@
 			// pbSecurity
 			// 
 			this.pbSecurity.Image = global::FileManager.Properties.Resources.TagsSecurityWidget;
-			this.pbSecurity.Location = new System.Drawing.Point(12, 361);
+			this.pbSecurity.Location = new System.Drawing.Point(12, 188);
 			this.pbSecurity.Name = "pbSecurity";
 			this.pbSecurity.Size = new System.Drawing.Size(26, 26);
 			this.pbSecurity.TabIndex = 24;
 			this.pbSecurity.TabStop = false;
-			// 
-			// hyperLinkEditWebAttachmentsAllPages
-			// 
-			this.hyperLinkEditWebAttachmentsAllPages.EditValue = "Library";
-			this.hyperLinkEditWebAttachmentsAllPages.Location = new System.Drawing.Point(256, 309);
-			this.hyperLinkEditWebAttachmentsAllPages.Name = "hyperLinkEditWebAttachmentsAllPages";
-			this.hyperLinkEditWebAttachmentsAllPages.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
-			this.hyperLinkEditWebAttachmentsAllPages.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.hyperLinkEditWebAttachmentsAllPages.Properties.Appearance.ForeColor = System.Drawing.Color.Red;
-			this.hyperLinkEditWebAttachmentsAllPages.Properties.Appearance.Options.UseBackColor = true;
-			this.hyperLinkEditWebAttachmentsAllPages.Properties.Appearance.Options.UseFont = true;
-			this.hyperLinkEditWebAttachmentsAllPages.Properties.Appearance.Options.UseForeColor = true;
-			this.hyperLinkEditWebAttachmentsAllPages.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-			this.hyperLinkEditWebAttachmentsAllPages.Size = new System.Drawing.Size(70, 20);
-			this.hyperLinkEditWebAttachmentsAllPages.TabIndex = 23;
-			this.hyperLinkEditWebAttachmentsAllPages.OpenLink += new DevExpress.XtraEditors.Controls.OpenLinkEventHandler(this.hyperLinkEditWebAttachmentsAllPages_OpenLink);
-			// 
-			// hyperLinkEditWebAttachmentsActivePage
-			// 
-			this.hyperLinkEditWebAttachmentsActivePage.EditValue = "Page";
-			this.hyperLinkEditWebAttachmentsActivePage.Location = new System.Drawing.Point(181, 307);
-			this.hyperLinkEditWebAttachmentsActivePage.Name = "hyperLinkEditWebAttachmentsActivePage";
-			this.hyperLinkEditWebAttachmentsActivePage.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
-			this.hyperLinkEditWebAttachmentsActivePage.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.hyperLinkEditWebAttachmentsActivePage.Properties.Appearance.ForeColor = System.Drawing.Color.DarkBlue;
-			this.hyperLinkEditWebAttachmentsActivePage.Properties.Appearance.Options.UseBackColor = true;
-			this.hyperLinkEditWebAttachmentsActivePage.Properties.Appearance.Options.UseFont = true;
-			this.hyperLinkEditWebAttachmentsActivePage.Properties.Appearance.Options.UseForeColor = true;
-			this.hyperLinkEditWebAttachmentsActivePage.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-			this.hyperLinkEditWebAttachmentsActivePage.Size = new System.Drawing.Size(57, 20);
-			this.hyperLinkEditWebAttachmentsActivePage.TabIndex = 22;
-			this.hyperLinkEditWebAttachmentsActivePage.OpenLink += new DevExpress.XtraEditors.Controls.OpenLinkEventHandler(this.hyperLinkEditWebAttachmentsActivePage_OpenLink);
-			// 
-			// labelControlWebAttachments
-			// 
-			this.labelControlWebAttachments.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.labelControlWebAttachments.Appearance.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.labelControlWebAttachments.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-			this.labelControlWebAttachments.Location = new System.Drawing.Point(44, 303);
-			this.labelControlWebAttachments.Name = "labelControlWebAttachments";
-			this.labelControlWebAttachments.Size = new System.Drawing.Size(303, 26);
-			this.labelControlWebAttachments.TabIndex = 21;
-			this.labelControlWebAttachments.Text = "URL Attachments";
-			// 
-			// pbWebAttachments
-			// 
-			this.pbWebAttachments.Image = global::FileManager.Properties.Resources.TagsWebAttachmentsWidget;
-			this.pbWebAttachments.Location = new System.Drawing.Point(12, 303);
-			this.pbWebAttachments.Name = "pbWebAttachments";
-			this.pbWebAttachments.Size = new System.Drawing.Size(26, 26);
-			this.pbWebAttachments.TabIndex = 20;
-			this.pbWebAttachments.TabStop = false;
-			// 
-			// hyperLinkEditFileAttachmentsAllPages
-			// 
-			this.hyperLinkEditFileAttachmentsAllPages.EditValue = "Library";
-			this.hyperLinkEditFileAttachmentsAllPages.Location = new System.Drawing.Point(256, 249);
-			this.hyperLinkEditFileAttachmentsAllPages.Name = "hyperLinkEditFileAttachmentsAllPages";
-			this.hyperLinkEditFileAttachmentsAllPages.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
-			this.hyperLinkEditFileAttachmentsAllPages.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.hyperLinkEditFileAttachmentsAllPages.Properties.Appearance.ForeColor = System.Drawing.Color.Red;
-			this.hyperLinkEditFileAttachmentsAllPages.Properties.Appearance.Options.UseBackColor = true;
-			this.hyperLinkEditFileAttachmentsAllPages.Properties.Appearance.Options.UseFont = true;
-			this.hyperLinkEditFileAttachmentsAllPages.Properties.Appearance.Options.UseForeColor = true;
-			this.hyperLinkEditFileAttachmentsAllPages.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-			this.hyperLinkEditFileAttachmentsAllPages.Size = new System.Drawing.Size(70, 20);
-			this.hyperLinkEditFileAttachmentsAllPages.TabIndex = 19;
-			this.hyperLinkEditFileAttachmentsAllPages.OpenLink += new DevExpress.XtraEditors.Controls.OpenLinkEventHandler(this.hyperLinkEditFileAttachmentsAllPages_OpenLink);
-			// 
-			// hyperLinkEditFileAttachmentsActivePage
-			// 
-			this.hyperLinkEditFileAttachmentsActivePage.EditValue = "Page";
-			this.hyperLinkEditFileAttachmentsActivePage.Location = new System.Drawing.Point(181, 249);
-			this.hyperLinkEditFileAttachmentsActivePage.Name = "hyperLinkEditFileAttachmentsActivePage";
-			this.hyperLinkEditFileAttachmentsActivePage.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
-			this.hyperLinkEditFileAttachmentsActivePage.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.hyperLinkEditFileAttachmentsActivePage.Properties.Appearance.ForeColor = System.Drawing.Color.DarkBlue;
-			this.hyperLinkEditFileAttachmentsActivePage.Properties.Appearance.Options.UseBackColor = true;
-			this.hyperLinkEditFileAttachmentsActivePage.Properties.Appearance.Options.UseFont = true;
-			this.hyperLinkEditFileAttachmentsActivePage.Properties.Appearance.Options.UseForeColor = true;
-			this.hyperLinkEditFileAttachmentsActivePage.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-			this.hyperLinkEditFileAttachmentsActivePage.Size = new System.Drawing.Size(57, 20);
-			this.hyperLinkEditFileAttachmentsActivePage.TabIndex = 18;
-			this.hyperLinkEditFileAttachmentsActivePage.OpenLink += new DevExpress.XtraEditors.Controls.OpenLinkEventHandler(this.hyperLinkEditFileAttachmentsActivePage_OpenLink);
-			// 
-			// labelControlFileAttachments
-			// 
-			this.labelControlFileAttachments.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.labelControlFileAttachments.Appearance.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.labelControlFileAttachments.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-			this.labelControlFileAttachments.Location = new System.Drawing.Point(44, 245);
-			this.labelControlFileAttachments.Name = "labelControlFileAttachments";
-			this.labelControlFileAttachments.Size = new System.Drawing.Size(303, 26);
-			this.labelControlFileAttachments.TabIndex = 17;
-			this.labelControlFileAttachments.Text = "File Attachments";
-			// 
-			// pbFileAttachments
-			// 
-			this.pbFileAttachments.Image = global::FileManager.Properties.Resources.TagsFileAttachmentsWidget;
-			this.pbFileAttachments.Location = new System.Drawing.Point(12, 245);
-			this.pbFileAttachments.Name = "pbFileAttachments";
-			this.pbFileAttachments.Size = new System.Drawing.Size(26, 26);
-			this.pbFileAttachments.TabIndex = 16;
-			this.pbFileAttachments.TabStop = false;
-			// 
-			// hyperLinkEditFileCardsAllPages
-			// 
-			this.hyperLinkEditFileCardsAllPages.EditValue = "Library";
-			this.hyperLinkEditFileCardsAllPages.Location = new System.Drawing.Point(256, 191);
-			this.hyperLinkEditFileCardsAllPages.Name = "hyperLinkEditFileCardsAllPages";
-			this.hyperLinkEditFileCardsAllPages.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
-			this.hyperLinkEditFileCardsAllPages.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.hyperLinkEditFileCardsAllPages.Properties.Appearance.ForeColor = System.Drawing.Color.Red;
-			this.hyperLinkEditFileCardsAllPages.Properties.Appearance.Options.UseBackColor = true;
-			this.hyperLinkEditFileCardsAllPages.Properties.Appearance.Options.UseFont = true;
-			this.hyperLinkEditFileCardsAllPages.Properties.Appearance.Options.UseForeColor = true;
-			this.hyperLinkEditFileCardsAllPages.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-			this.hyperLinkEditFileCardsAllPages.Size = new System.Drawing.Size(70, 20);
-			this.hyperLinkEditFileCardsAllPages.TabIndex = 15;
-			this.hyperLinkEditFileCardsAllPages.OpenLink += new DevExpress.XtraEditors.Controls.OpenLinkEventHandler(this.hyperLinkEditFileCardsAllPages_OpenLink);
-			// 
-			// hyperLinkEditFileCardsActivePage
-			// 
-			this.hyperLinkEditFileCardsActivePage.EditValue = "Page";
-			this.hyperLinkEditFileCardsActivePage.Location = new System.Drawing.Point(181, 191);
-			this.hyperLinkEditFileCardsActivePage.Name = "hyperLinkEditFileCardsActivePage";
-			this.hyperLinkEditFileCardsActivePage.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
-			this.hyperLinkEditFileCardsActivePage.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.hyperLinkEditFileCardsActivePage.Properties.Appearance.ForeColor = System.Drawing.Color.DarkBlue;
-			this.hyperLinkEditFileCardsActivePage.Properties.Appearance.Options.UseBackColor = true;
-			this.hyperLinkEditFileCardsActivePage.Properties.Appearance.Options.UseFont = true;
-			this.hyperLinkEditFileCardsActivePage.Properties.Appearance.Options.UseForeColor = true;
-			this.hyperLinkEditFileCardsActivePage.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-			this.hyperLinkEditFileCardsActivePage.Size = new System.Drawing.Size(57, 20);
-			this.hyperLinkEditFileCardsActivePage.TabIndex = 14;
-			this.hyperLinkEditFileCardsActivePage.OpenLink += new DevExpress.XtraEditors.Controls.OpenLinkEventHandler(this.hyperLinkEditFileCardsActivePage_OpenLink);
-			// 
-			// labelControlFileCards
-			// 
-			this.labelControlFileCards.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.labelControlFileCards.Appearance.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.labelControlFileCards.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-			this.labelControlFileCards.Location = new System.Drawing.Point(44, 187);
-			this.labelControlFileCards.Name = "labelControlFileCards";
-			this.labelControlFileCards.Size = new System.Drawing.Size(303, 26);
-			this.labelControlFileCards.TabIndex = 13;
-			this.labelControlFileCards.Text = "File Cards";
-			// 
-			// pbFileCards
-			// 
-			this.pbFileCards.Image = global::FileManager.Properties.Resources.TagsFileCardsWidget;
-			this.pbFileCards.Location = new System.Drawing.Point(12, 187);
-			this.pbFileCards.Name = "pbFileCards";
-			this.pbFileCards.Size = new System.Drawing.Size(26, 26);
-			this.pbFileCards.TabIndex = 12;
-			this.pbFileCards.TabStop = false;
 			// 
 			// hyperLinkEditKeywordsAllPages
 			// 
@@ -543,15 +351,6 @@
 			((System.ComponentModel.ISupportInitialize)(this.hyperLinkEditSecurityAllPages.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.hyperLinkEditSecurityActivePage.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pbSecurity)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.hyperLinkEditWebAttachmentsAllPages.Properties)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.hyperLinkEditWebAttachmentsActivePage.Properties)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.pbWebAttachments)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.hyperLinkEditFileAttachmentsAllPages.Properties)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.hyperLinkEditFileAttachmentsActivePage.Properties)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.pbFileAttachments)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.hyperLinkEditFileCardsAllPages.Properties)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.hyperLinkEditFileCardsActivePage.Properties)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.pbFileCards)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.hyperLinkEditKeywordsAllPages.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.hyperLinkEditKeywordsActivePage.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pbKeywords)).EndInit();
@@ -584,18 +383,6 @@
 		private DevExpress.XtraEditors.HyperLinkEdit hyperLinkEditKeywordsActivePage;
 		private DevExpress.XtraEditors.LabelControl labelControlKeywords;
 		private System.Windows.Forms.PictureBox pbKeywords;
-		private DevExpress.XtraEditors.HyperLinkEdit hyperLinkEditFileCardsAllPages;
-		private DevExpress.XtraEditors.HyperLinkEdit hyperLinkEditFileCardsActivePage;
-		private DevExpress.XtraEditors.LabelControl labelControlFileCards;
-		private System.Windows.Forms.PictureBox pbFileCards;
-		private DevExpress.XtraEditors.HyperLinkEdit hyperLinkEditWebAttachmentsAllPages;
-		private DevExpress.XtraEditors.HyperLinkEdit hyperLinkEditWebAttachmentsActivePage;
-		private DevExpress.XtraEditors.LabelControl labelControlWebAttachments;
-		private System.Windows.Forms.PictureBox pbWebAttachments;
-		private DevExpress.XtraEditors.HyperLinkEdit hyperLinkEditFileAttachmentsAllPages;
-		private DevExpress.XtraEditors.HyperLinkEdit hyperLinkEditFileAttachmentsActivePage;
-		private DevExpress.XtraEditors.LabelControl labelControlFileAttachments;
-		private System.Windows.Forms.PictureBox pbFileAttachments;
 		private DevExpress.XtraEditors.HyperLinkEdit hyperLinkEditSecurityAllPages;
 		private DevExpress.XtraEditors.HyperLinkEdit hyperLinkEditSecurityActivePage;
 		private DevExpress.XtraEditors.LabelControl labelControlSecurity;

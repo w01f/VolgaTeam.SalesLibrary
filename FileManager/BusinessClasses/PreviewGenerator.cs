@@ -15,7 +15,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		#region IPreviewGenerator Members
 		public IPreviewContainer Parent { get; private set; }
 
-		public void GeneratePreview(bool onlyText = false)
+		public void GeneratePreview()
 		{
 			var update = false;
 			if (!Parent.Extension.ToUpper().Equals(".MP4"))
