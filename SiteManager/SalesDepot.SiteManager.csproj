@@ -427,12 +427,6 @@
     <Compile Include="ToolForms\FormEditUser.Designer.cs">
       <DependentUpon>FormEditUser.cs</DependentUpon>
     </Compile>
-    <Compile Include="ToolForms\FormProgress.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ToolForms\FormProgress.Designer.cs">
-      <DependentUpon>FormProgress.cs</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
@@ -619,9 +613,6 @@
     <EmbeddedResource Include="ToolForms\FormEditUser.resx">
       <DependentUpon>FormEditUser.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ToolForms\FormProgress.resx">
-      <DependentUpon>FormProgress.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -683,6 +674,10 @@
     <None Include="Resources\RefreshUsers.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SalesDepot.CommonGUI\SalesDepot.CommonGUI.csproj">
+      <Project>{7CE62462-8616-4FC9-81C3-08715DE17058}</Project>
+      <Name>SalesDepot.CommonGUI</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SalesDepot.CoreObjects\SalesDepot.CoreObjects.csproj">
       <Project>{141D1B4B-2FE9-425D-9196-4439FC0CD57D}</Project>
       <Name>SalesDepot.CoreObjects</Name>

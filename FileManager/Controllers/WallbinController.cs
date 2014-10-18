@@ -39,7 +39,6 @@ namespace FileManager.Controllers
 
 		public WallbinController()
 		{
-			FormMain.Instance.buttonItemHomeFileTreeView.CheckedChanged += buttonItemHomeFileTreeView_CheckedChanged;
 			FormMain.Instance.buttonItemSettingsPaths.Click += btPathSettings_Click;
 			FormMain.Instance.buttonItemSettingsExtraRoots.Click += BtExtraRootClick;
 			FormMain.Instance.buttonItemSettingsBranding.Click += buttonItemSettingsBranding_Click;
@@ -51,13 +50,17 @@ namespace FileManager.Controllers
 			FormMain.Instance.buttonItemPreferencesEmailList.Click += buttonItemSettingsEmailList_Click;
 			FormMain.Instance.buttonItemSettingsAutoSync.Click += buttonItemSettingsAutoSync_Click;
 
-			FormMain.Instance.buttonItemHomeFileTreeView.CheckedChanged += buttonItemHomeFileTreeView_CheckedChanged;
 			FormMain.Instance.buttonItemHomeAddLineBreak.Click += btLineBreak_Click;
 			FormMain.Instance.buttonItemHomeAddNetworkShare.Click += btAddNeworkShare_Click;
 			FormMain.Instance.buttonItemHomeAddUrl.Click += btAddUrl_Click;
 			FormMain.Instance.buttonItemHomeDelete.Click += btDeleteLink_Click;
 			FormMain.Instance.buttonItemHomeOpen.Click += btOpenLink_Click;
-			FormMain.Instance.buttonItemHomeProperties.Click += buttonItemHomeProperties_Click;
+			FormMain.Instance.buttonItemHomeLinkPropertiesNotes.Click += buttonItemHomeProperties_Click;
+			FormMain.Instance.buttonItemHomeLinkPropertiesTags.Click += buttonItemHomeProperties_Click;
+			FormMain.Instance.buttonItemHomeLinkPropertiesExpirationDate.Click += buttonItemHomeProperties_Click;
+			FormMain.Instance.buttonItemHomeLinkPropertiesSecurity.Click += buttonItemHomeProperties_Click;
+			FormMain.Instance.buttonItemHomeLinkPropertiesWidget.Click += buttonItemHomeProperties_Click;
+			FormMain.Instance.buttonItemHomeLinkPropertiesBanner.Click += buttonItemHomeProperties_Click;
 			FormMain.Instance.buttonItemHomeSave.Click += btSave_Click;
 			FormMain.Instance.buttonItemHomeSync.Click += btSync_Click;
 
@@ -453,10 +456,13 @@ namespace FileManager.Controllers
 
 		private void buttonItemHomeProperties_Click(object sender, EventArgs e)
 		{
+			var button = sender as ButtonItem;
+			if (button == null || button.Tag == null) return;
+			var propertiesType = (LinkPropertiesType)Enum.Parse(typeof(LinkPropertiesType), (String)button.Tag);
 			if (MainController.Instance.ActiveDecorator != null)
 				if (MainController.Instance.ActiveDecorator.ActivePage != null)
 					if (MainController.Instance.ActiveDecorator.ActivePage.ActiveBox != null)
-						MainController.Instance.ActiveDecorator.ActivePage.ActiveBox.ShowLinkProperties(Point.Empty);
+						MainController.Instance.ActiveDecorator.ActivePage.ActiveBox.ShowLinkProperties(propertiesType);
 		}
 
 		private void btSave_Click(object sender, EventArgs e)
@@ -546,17 +552,6 @@ namespace FileManager.Controllers
 			FormMain.Instance.ribbonControl.Enabled = true;
 			_tabPage.Enabled = true;
 			Application.DoEvents();
-		}
-
-		private void buttonItemHomeFileTreeView_CheckedChanged(object sender, EventArgs e)
-		{
-			if (!_initialization)
-			{
-				SettingsManager.Instance.TreeViewVisible = FormMain.Instance.buttonItemHomeFileTreeView.Checked;
-				SettingsManager.Instance.Save();
-				_tabPage.ShowDockPanel(SettingsManager.Instance.TreeViewVisible);
-				ResizeActivePage();
-			}
 		}
 		#endregion
 
@@ -834,11 +829,51 @@ namespace FileManager.Controllers
 			}
 		}
 
-		public bool LinkPropertiesButton
+		public bool LinkPropertiesNotesButton
 		{
 			set
 			{
-				FormMain.Instance.buttonItemHomeProperties.Enabled = value;
+				FormMain.Instance.buttonItemHomeLinkPropertiesNotes.Enabled = value;
+			}
+		}
+
+		public bool LinkPropertiesTagsButton
+		{
+			set
+			{
+				FormMain.Instance.buttonItemHomeLinkPropertiesTags.Enabled = value;
+			}
+		}
+
+		public bool LinkPropertiesExpirationDateButton
+		{
+			set
+			{
+				FormMain.Instance.buttonItemHomeLinkPropertiesExpirationDate.Enabled = value;
+			}
+		}
+
+		public bool LinkPropertiesSecurityButton
+		{
+			set
+			{
+				FormMain.Instance.buttonItemHomeLinkPropertiesSecurity.Enabled = value;
+			}
+		}
+
+		public bool LinkPropertiesWidgetButton
+		{
+			set
+			{
+				FormMain.Instance.buttonItemHomeLinkPropertiesWidget.Enabled = value;
+			}
+		}
+
+		public bool LinkPropertiesBannerButton
+		{
+			set
+			{
+				FormMain.Instance.buttonItemHomeLinkPropertiesBanner.Enabled = value;
 			}
 		}
 

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
@@ -40,14 +41,13 @@ namespace SalesDepot.PresentationClasses.Viewers
 
 			string tempName = Path.Combine(SettingsManager.Instance.TempPath, Path.GetFileName(File.LocalPath));
 			System.IO.File.Copy(File.LocalPath, tempName, true);
-			axAcroPDF.LoadFile(tempName);
-			axAcroPDF.setView("Fit");
+			pdfViewerControl.LoadDocument(tempName);
 		}
 
 		#region IFileViewer Methods
 		public void ReleaseResources()
 		{
-			axAcroPDF.Dispose();
+			pdfViewerControl.CloseDocument();
 		}
 
 		public void Open()
@@ -84,5 +84,19 @@ namespace SalesDepot.PresentationClasses.Viewers
 			LinkManager.Instance.AddLinkToQuickSite(File);
 		}
 		#endregion
+
+		private void pdfViewerControl_MouseMove(object sender, MouseEventArgs e)
+		{
+			pdfViewerControl.Focus();
+		}
+
+		private void pdfViewerControl_DoubleClick(object sender, System.EventArgs e)
+		{
+			try
+			{
+				Process.Start(pdfViewerControl.DocumentFilePath);
+			}
+			catch { }
+		}
 	}
 }

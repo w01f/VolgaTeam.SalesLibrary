@@ -7,8 +7,8 @@ using System.Windows.Forms;
 using FileManager.BusinessClasses;
 using FileManager.ConfigurationClasses;
 using FileManager.PresentationClasses.WallBin.Decorators;
-using FileManager.ToolForms;
 using FileManager.ToolForms.Settings;
+using SalesDepot.CommonGUI.Forms;
 using SalesDepot.CoreObjects.BusinessClasses;
 
 namespace FileManager.Controllers
@@ -314,9 +314,8 @@ namespace FileManager.Controllers
 		ProgramManager,
 		IPadContent,
 		IPadUsers,
-		Help
 	}
-
+	
 	public interface IPageController
 	{
 		void InitController();

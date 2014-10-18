@@ -26,7 +26,8 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		private bool _noShare;
 		private string _assignedUsers;
 		private string _deniedUsers;
-		private bool _doNotGeneratePreview;
+		private bool _generatePreviewImages;
+		private bool _generateContentText;
 		private bool _forcePreview;
 		private bool _isUrl365;
 
@@ -45,6 +46,8 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			AddDate = DateTime.Now;
 			SearchTags = new LibraryFileSearchTags();
 			ExpirationDateOptions = new ExpirationDateOptions();
+			_generatePreviewImages = true;
+			_generateContentText = true;
 
 			CustomKeywords = new CustomKeywords();
 			SuperFilters = new List<SuperFilter>();
@@ -83,7 +86,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		public string CriteriaOverlap { get; set; }
 
 		public LibraryFileSearchTags SearchTags { get; set; }
-		public SearchGroup CustomKeywords { get; protected set; }
+		public SearchGroup CustomKeywords { get; set; }
 		public List<SuperFilter> SuperFilters { get; protected set; }
 		public ExpirationDateOptions ExpirationDateOptions { get; set; }
 		public PresentationProperties PresentationProperties { get; set; }
@@ -435,15 +438,40 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			}
 		}
 
-		public bool DoNotGeneratePreview
+		public bool GeneratePreviewImages
 		{
-			get { return _doNotGeneratePreview; }
+			get
+			{
+				return _generatePreviewImages &&
+					(Type == FileTypes.BuggyPresentation ||
+					Type == FileTypes.FriendlyPresentation ||
+					Type == FileTypes.Presentation ||
+					Type == FileTypes.Word ||
+					Type == FileTypes.PDF ||
+					((Type == FileTypes.Other && new[] { "ppt", "doc", "pdf" }.Contains(Format))));
+			}
 			set
 			{
-				if (_doNotGeneratePreview != value)
+				if (_generatePreviewImages != value)
 					LastChanged = DateTime.Now;
-				_doNotGeneratePreview = value;
+				_generatePreviewImages = value;
 			}
+		}
+
+		public bool GenerateContentText
+		{
+			get { return _generateContentText; }
+			set
+			{
+				if (_generateContentText != value)
+					LastChanged = DateTime.Now;
+				_generateContentText = value;
+			}
+		}
+
+		public bool DoNotGeneratePreview
+		{
+			get { return !GeneratePreviewImages && !GenerateContentText; }
 		}
 
 		public bool ForcePreview
@@ -496,7 +524,8 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			file.NoShare = NoShare;
 			file.AssignedUsers = AssignedUsers;
 			file.DeniedUsers = DeniedUsers;
-			file.DoNotGeneratePreview = DoNotGeneratePreview;
+			file.GeneratePreviewImages = GeneratePreviewImages;
+			file.GenerateContentText = GenerateContentText;
 			file.ForcePreview = ForcePreview;
 			file.IsUrl365 = IsUrl365;
 			file.SearchTags = SearchTags;
@@ -532,7 +561,8 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			result.AppendLine(@"<NoShare>" + NoShare + @"</NoShare>");
 			result.AppendLine(@"<AssignedUsers>" + (AssignedUsers ?? string.Empty).Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</AssignedUsers>");
 			result.AppendLine(@"<DeniedUsers>" + (DeniedUsers ?? string.Empty).Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</DeniedUsers>");
-			result.AppendLine(@"<DoNotGeneratePreview>" + _doNotGeneratePreview + @"</DoNotGeneratePreview>");
+			result.AppendLine(@"<GeneratePreviewImages>" + _generatePreviewImages + @"</GeneratePreviewImages>");
+			result.AppendLine(@"<GenerateContentText>" + _generateContentText + @"</GenerateContentText>");
 			result.AppendLine(@"<ForcePreview>" + _forcePreview + @"</ForcePreview>");
 			result.AppendLine(@"<IsUrl365>" + _isUrl365 + @"</IsUrl365>");
 			result.AppendLine(@"<LastChanged>" + (_lastChanged != DateTime.MinValue ? _lastChanged.ToString() : DateTime.Now.ToString()) + @"</LastChanged>");
@@ -668,9 +698,13 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 					case "ExpirationDateOptions":
 						ExpirationDateOptions.Deserialize(childNode);
 						break;
-					case "DoNotGeneratePreview":
+					case "GeneratePreviewImages":
 						if (bool.TryParse(childNode.InnerText, out tempBool))
-							_doNotGeneratePreview = tempBool;
+							_generatePreviewImages = tempBool;
+						break;
+					case "GenerateContentText":
+						if (bool.TryParse(childNode.InnerText, out tempBool))
+							_generateContentText = tempBool;
 						break;
 					case "ForcePreview":
 						if (bool.TryParse(childNode.InnerText, out tempBool))
@@ -871,7 +905,8 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			file.NoShare = NoShare;
 			file.AssignedUsers = AssignedUsers;
 			file.DeniedUsers = DeniedUsers;
-			file.DoNotGeneratePreview = DoNotGeneratePreview;
+			file.GeneratePreviewImages = GeneratePreviewImages;
+			file.GenerateContentText = GenerateContentText;
 			file.SearchTags = SearchTags;
 			file.CustomKeywords = CustomKeywords;
 			file.ExpirationDateOptions = ExpirationDateOptions;

@@ -8,10 +8,10 @@ using System.Windows.Forms;
 using DevExpress.XtraEditors.Controls;
 using Microsoft.Office.Core;
 using SalesDepot.BusinessClasses;
+using SalesDepot.CommonGUI.Floater;
+using SalesDepot.CommonGUI.Forms;
 using SalesDepot.ConfigurationClasses;
-using SalesDepot.Floater;
 using SalesDepot.InteropClasses;
-using SalesDepot.ToolForms;
 using SalesDepot.ToolForms.WallBin;
 
 namespace SalesDepot.PresentationClasses.Viewers
@@ -136,7 +136,7 @@ namespace SalesDepot.PresentationClasses.Viewers
 				using (var form = new FormProgress())
 				{
 					form.laProgress.Text = "Inserting selected slide...";
-					FloaterManager.Instance.ShowFloater(FormMain.Instance, () =>
+					FloaterManager.Instance.ShowFloater(FormMain.Instance, SettingsManager.Instance.SalesDepotName, FormMain.Instance.FloaterLogo, () =>
 					{
 						form.TopMost = true;
 						var thread = new Thread(delegate()

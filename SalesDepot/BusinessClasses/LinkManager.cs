@@ -5,9 +5,10 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
+using SalesDepot.CommonGUI.Floater;
+using SalesDepot.CommonGUI.Forms;
 using SalesDepot.ConfigurationClasses;
 using SalesDepot.CoreObjects.BusinessClasses;
-using SalesDepot.Floater;
 using SalesDepot.InteropClasses;
 using SalesDepot.ToolForms;
 using SalesDepot.ToolForms.QBuilderForms;
@@ -401,7 +402,7 @@ namespace SalesDepot.BusinessClasses
 			var lastHandle = new IntPtr(PreviousPreviewHandles.LastOrDefault());
 			RegistryHelper.SalesDepotHandle = lastHandle;
 			PreviousPreviewHandles.Remove(PreviousPreviewHandles.LastOrDefault());
-			RegistryHelper.MaximizeSalesDepot = lastHandle != FormMain.Instance.Handle ? false : true;
+			RegistryHelper.MaximizeSalesDepot = lastHandle == FormMain.Instance.Handle;
 		}
 
 		public void OpenCopyOfFile(LibraryLink link)
@@ -719,7 +720,7 @@ namespace SalesDepot.BusinessClasses
 				using (var form = new FormProgress())
 				{
 					form.laProgress.Text = "Inserting the video...";
-					FloaterManager.Instance.ShowFloater(FormMain.Instance, () =>
+					FloaterManager.Instance.ShowFloater(FormMain.Instance, SettingsManager.Instance.SalesDepotName, FormMain.Instance.FloaterLogo, () =>
 					{
 						form.TopMost = true;
 						bool result = false;

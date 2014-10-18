@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using DevComponents.DotNetBar;
 using OutlookSalesDepotAddIn.BusinessClasses;
 using OutlookSalesDepotAddIn.Forms;
+using SalesDepot.CommonGUI.Forms;
 
 namespace OutlookSalesDepotAddIn.Controls.OvernightsCalendar
 {

@@ -5,7 +5,7 @@ using System.Threading;
 using System.Windows.Forms;
 using DevExpress.XtraTab;
 using OvernightsCalendarViewer.ConfigurationClasses;
-using OvernightsCalendarViewer.ToolForms;
+using SalesDepot.CommonGUI.Forms;
 using SalesDepot.CoreObjects.BusinessClasses;
 
 namespace OvernightsCalendarViewer.PresentationClasses.OvernightsCalendar

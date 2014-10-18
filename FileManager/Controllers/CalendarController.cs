@@ -1,14 +1,13 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using DevComponents.DotNetBar;
 using DevExpress.XtraEditors.Controls;
 using FileManager.ConfigurationClasses;
 using FileManager.PresentationClasses.TabPages;
-using FileManager.ToolForms;
 using FileManager.ToolForms.Settings;
+using SalesDepot.CommonGUI.Forms;
 
 namespace FileManager.Controllers
 {

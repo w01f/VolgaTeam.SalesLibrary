@@ -61,6 +61,12 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="DevComponents.Instrumentation, Version=11.7.0.10, Culture=neutral, PublicKeyToken=f90dc37c26666a67" />
+    <Reference Include="DevExpress.Pdf.v14.1.Core, Version=14.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Pdf.v14.1.Drawing, Version=14.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="DevExpress.Printing.v14.1.Core, Version=14.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
@@ -80,6 +86,9 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="DevExpress.XtraEditors.v14.1, Version=14.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraPdfViewer.v14.1, Version=14.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
     <Reference Include="DevExpress.XtraPrinting.v14.1, Version=14.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
@@ -143,13 +152,6 @@
     <Compile Include="ConfigurationClasses\PermissionsManager.cs" />
     <Compile Include="ConfigurationClasses\ProgramOutputSettings.cs" />
     <Compile Include="ConfigurationClasses\QBuilderSettings.cs" />
-    <Compile Include="Floater\FloaterManager.cs" />
-    <Compile Include="Floater\FormFloater.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Floater\FormFloater.designer.cs">
-      <DependentUpon>FormFloater.cs</DependentUpon>
-    </Compile>
     <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -544,12 +546,6 @@
     <Compile Include="ToolForms\WallBin\FormEmailPresentation.Designer.cs">
       <DependentUpon>FormEmailPresentation.cs</DependentUpon>
     </Compile>
-    <Compile Include="ToolForms\FormProgress.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ToolForms\FormProgress.Designer.cs">
-      <DependentUpon>FormProgress.cs</DependentUpon>
-    </Compile>
     <Compile Include="InteropClasses\OfficeHelper.cs" />
     <Compile Include="InteropClasses\OutlookHelper.cs" />
     <Compile Include="InteropClasses\PowerPointHelper.cs" />
@@ -579,9 +575,6 @@
     <Compile Include="ToolForms\WallBin\FormVideoViewOptions.Designer.cs">
       <DependentUpon>FormVideoViewOptions.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Floater\FormFloater.resx">
-      <DependentUpon>FormFloater.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
@@ -772,9 +765,6 @@
     <EmbeddedResource Include="ToolForms\WallBin\FormEmailPresentation.resx">
       <DependentUpon>FormEmailPresentation.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ToolForms\FormProgress.resx">
-      <DependentUpon>FormProgress.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -833,24 +823,6 @@
     <None Include="Resources\Format Font Larger.png" />
   </ItemGroup>
   <ItemGroup>
-    <COMReference Include="AcroPDFLib">
-      <Guid>{05BFD3F1-6319-4F30-B752-C7A22889BCC4}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
-    <COMReference Include="AxAcroPDFLib">
-      <Guid>{05BFD3F1-6319-4F30-B752-C7A22889BCC4}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>aximp</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>False</EmbedInteropTypes>
-    </COMReference>
     <COMReference Include="AxWMPLib">
       <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
       <VersionMajor>1</VersionMajor>
@@ -957,7 +929,6 @@
     <None Include="Resources\GalleryEdit.png" />
     <None Include="Resources\GalleryView.png" />
     <None Include="Resources\CalendarLogo.png" />
-    <None Include="Resources\FloaterHide.png" />
     <None Include="Resources\NudgeDown.png" />
     <None Include="Resources\NudgeUp.png" />
     <None Include="Resources\QuickViewUserSettings.png" />
@@ -1045,6 +1016,10 @@
     <ProjectReference Include="..\OldFormatLoader\OldFormatLoader.csproj">
       <Project>{07E5E9EC-8E52-4E68-9507-8B4E70EABA0A}</Project>
       <Name>OldFormatLoader</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SalesDepot.CommonGUI\SalesDepot.CommonGUI.csproj">
+      <Project>{7CE62462-8616-4FC9-81C3-08715DE17058}</Project>
+      <Name>SalesDepot.CommonGUI</Name>
     </ProjectReference>
     <ProjectReference Include="..\SalesDepot.CoreObjects\SalesDepot.CoreObjects.csproj">
       <Project>{141D1B4B-2FE9-425D-9196-4439FC0CD57D}</Project>

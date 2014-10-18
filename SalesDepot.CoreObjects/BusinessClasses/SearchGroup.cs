@@ -30,7 +30,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			TagNameObject = TagName;
 		}
 
-		public virtual string TagNameObject { get; set; }
+		public string TagNameObject { get; protected set; }
 
 		public string Name { get; set; }
 		public bool Selected { get; set; }
@@ -119,6 +119,16 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 				}
 			}
 		}
+
+		public SearchGroup Clone()
+		{
+			var result = new SearchGroup();
+			result.Name = Name;
+			result.Description = Description;
+			result.Selected = Selected;
+			result.Tags.AddRange(Tags.Select(t => new SearchTag(result.Name) { Name = t.Name, Selected = t.Selected }));
+			return result;
+		}
 	}
 
 	public class CustomKeywords : SearchGroup
@@ -130,14 +140,12 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			Name = "Custom Keywords";
 			TagNameObject = TagName;
 		}
-
-		public override string TagNameObject { get; set; }
 	}
 
 	public class SearchTag
 	{
 		public string Name { get; set; }
-		public string Parent { get; set; }
+		public string Parent { get; private set; }
 		public bool Selected { get; set; }
 
 		public SearchTag(string parentGroup)

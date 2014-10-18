@@ -11,8 +11,8 @@ using DevExpress.Utils;
 using FileManager.ConfigurationClasses;
 using FileManager.Controllers;
 using FileManager.PresentationClasses.WallBin.Decorators;
-using FileManager.ToolForms;
 using FileManager.ToolForms.WallBin;
+using SalesDepot.CommonGUI.Forms;
 using SalesDepot.CoreObjects.BusinessClasses;
 using SalesDepot.CoreObjects.InteropClasses;
 
@@ -489,7 +489,9 @@ namespace FileManager.PresentationClasses.WallBin
 					break;
 				case MouseButtons.Right:
 					if (WallBinOptions.ShowSecurityTags)
-						contextMenuStrip.Show(sender as Control, e.Location);
+						contextMenuStripSecurity.Show(sender as Control, e.Location);
+					else
+						contextMenuStripFolderProperties.Show(sender as Control, e.Location);
 					break;
 			}
 		}
@@ -580,12 +582,25 @@ namespace FileManager.PresentationClasses.WallBin
 
 		private void grFiles_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
 		{
-			if (WallBinOptions.AllowEdit)
+			if (!WallBinOptions.AllowEdit || !IsActive || e.Button != MouseButtons.Right) return;
+			grFiles.Rows[e.RowIndex].Selected = true;
+			var file = grFiles.Rows[e.RowIndex].Tag as LibraryLink;
+			if (file == null) return;
+			if (file.Type == FileTypes.LineBreak)
 			{
-				if (e.Button != MouseButtons.Right || !IsActive) return;
-				grFiles.Rows[e.RowIndex].Selected = true;
-				ShowLinkProperties(e.Location);
+				toolStripMenuItemLinkPropertiesOpen.Visible = false;
+				toolStripMenuItemLinkPropertiesTags.Visible = false;
+				toolStripMenuItemLinkPropertiesExpirationDate.Visible = false;
+				toolStripMenuItemLinkPropertiesDelete.Text = "Delete this Line Break";
 			}
+			else
+			{
+				toolStripMenuItemLinkPropertiesOpen.Visible = true;
+				toolStripMenuItemLinkPropertiesTags.Visible = true;
+				toolStripMenuItemLinkPropertiesExpirationDate.Visible = true;
+				toolStripMenuItemLinkPropertiesDelete.Text = "Delete this Link";
+			}
+			contextMenuStripLinkProperties.Show(sender as Control, grFiles.PointToClient(Cursor.Position));
 		}
 
 		private void grFiles_SelectionChanged(object sender, EventArgs e)
@@ -753,12 +768,33 @@ namespace FileManager.PresentationClasses.WallBin
 			Decorator.Parent.StateChanged = true;
 		}
 
-		public void ShowLinkProperties(Point cursorPosition)
+		public void ShowLinkProperties(LinkPropertiesType propertiesType)
 		{
 			if (grFiles.SelectedRows.Count <= 0) return;
 			var file = grFiles.SelectedRows[0].Tag as LibraryLink;
 			if (file == null) return;
 			if (_formLinkProperties == null) _formLinkProperties = new FormLinkProperties(file.Parent.Parent.Parent as Library);
+			switch (propertiesType)
+			{
+				case LinkPropertiesType.Notes:
+					_formLinkProperties.xtraTabControl.SelectedTabPage = file.Type == FileTypes.LineBreak ? _formLinkProperties.xtraTabPageLineBrealProperties : _formLinkProperties.xtraTabPageNotes;
+					break;
+				case LinkPropertiesType.Tags:
+					_formLinkProperties.xtraTabControl.SelectedTabPage = _formLinkProperties.xtraTabPageSearchTags;
+					break;
+				case LinkPropertiesType.ExpirationDate:
+					_formLinkProperties.xtraTabControl.SelectedTabPage = _formLinkProperties.xtraTabPageExpiredLinks;
+					break;
+				case LinkPropertiesType.Security:
+					_formLinkProperties.xtraTabControl.SelectedTabPage = _formLinkProperties.xtraTabPageSecurity;
+					break;
+				case LinkPropertiesType.Widget:
+					_formLinkProperties.xtraTabControl.SelectedTabPage = _formLinkProperties.xtraTabPageWidgets;
+					break;
+				case LinkPropertiesType.Banner:
+					_formLinkProperties.xtraTabControl.SelectedTabPage = _formLinkProperties.xtraTabPageBanner;
+					break;
+			}
 			_formLinkProperties.IsLoading = true;
 			_formLinkProperties.CaptionName = string.IsNullOrEmpty(file.PropertiesName) && file.Type == FileTypes.LineBreak ? "Line Break" : file.PropertiesName;
 			_formLinkProperties.IsBold = file.IsBold;
@@ -797,13 +833,29 @@ namespace FileManager.PresentationClasses.WallBin
 				file.Type == FileTypes.Word ||
 				(file.Type == FileTypes.Other && new[] { "ppt", "doc", "pdf" }.Contains(file.Format)))
 			{
-				_formLinkProperties.ckDoNotGeneratePreview.Checked = file.DoNotGeneratePreview;
+				_formLinkProperties.ckDoNotGeneratePreview.Checked = !file.GeneratePreviewImages;
 				_formLinkProperties.ckDoNotGeneratePreview.Visible = true;
 			}
 			else
 			{
 				_formLinkProperties.ckDoNotGeneratePreview.Checked = false;
 				_formLinkProperties.ckDoNotGeneratePreview.Visible = false;
+			}
+
+			if (file.Type == FileTypes.BuggyPresentation ||
+				file.Type == FileTypes.FriendlyPresentation ||
+				file.Type == FileTypes.Presentation ||
+				file.Type == FileTypes.PDF ||
+				file.Type == FileTypes.Word ||
+				(file.Type == FileTypes.Other && new[] { "ppt", "doc", "xls", "pdf" }.Contains(file.Format)))
+			{
+				_formLinkProperties.ckDoNotGenerateText.Checked = !file.GenerateContentText;
+				_formLinkProperties.ckDoNotGenerateText.Visible = true;
+			}
+			else
+			{
+				_formLinkProperties.ckDoNotGenerateText.Checked = false;
+				_formLinkProperties.ckDoNotGenerateText.Visible = false;
 			}
 
 			if (file.Type == FileTypes.MediaPlayerVideo ||
@@ -912,7 +964,8 @@ namespace FileManager.PresentationClasses.WallBin
 			file.CustomKeywords.Tags.AddRange(_formLinkProperties.Keywords.Where(x => !string.IsNullOrEmpty(x.Value)).Select(x => new SearchTag(file.CustomKeywords.Name) { Name = x.Value }));
 
 
-			file.DoNotGeneratePreview = _formLinkProperties.ckDoNotGeneratePreview.Checked;
+			file.GeneratePreviewImages = !_formLinkProperties.ckDoNotGeneratePreview.Checked;
+			file.GenerateContentText = !_formLinkProperties.ckDoNotGenerateText.Checked;
 			file.ForcePreview = _formLinkProperties.ckForcePreview.Checked;
 			file.IsUrl365 = _formLinkProperties.ckIsUrl365.Checked;
 
@@ -935,42 +988,39 @@ namespace FileManager.PresentationClasses.WallBin
 
 		public void OpenLink()
 		{
-			if (grFiles.SelectedRows.Count > 0)
+			if (grFiles.SelectedRows.Count <= 0) return;
+			var file = grFiles.SelectedRows[0].Tag as LibraryLink;
+			if (file == null) return;
+			try
 			{
-				var file = grFiles.SelectedRows[0].Tag as LibraryLink;
-				if (file != null)
-				{
-					try
-					{
-						Process.Start(file.OriginalPath);
-					}
-					catch
-					{
-						AppManager.Instance.ShowWarning("Couldn't open the link");
-					}
-				}
+				Process.Start(file.OriginalPath);
+			}
+			catch
+			{
+				AppManager.Instance.ShowWarning("Couldn't open the link");
 			}
 		}
 
 		public void DeleteLink()
 		{
-			if (AppManager.Instance.ShowQuestion("Are You sure You want to remove this link/line break?") == DialogResult.Yes)
+			if (AppManager.Instance.ShowQuestion("Are You sure You want to remove this link/line break?") != DialogResult.Yes) return;
+			if (grFiles.SelectedRows.Count <= 0) return;
+			DeleteLinkInternal(grFiles.SelectedRows[0]);
+		}
+
+		private void DeleteLinkInternal(DataGridViewRow targetRow)
+		{
+			var file = targetRow.Tag as LibraryLink;
+			if (file != null)
 			{
-				if (grFiles.SelectedRows.Count > 0)
+				if (file.Type == FileTypes.BuggyPresentation || file.Type == FileTypes.FriendlyPresentation || file.Type == FileTypes.Presentation)
 				{
-					var file = grFiles.SelectedRows[0].Tag as LibraryLink;
-					if (file != null)
-					{
-						if (file.Type == FileTypes.BuggyPresentation || file.Type == FileTypes.FriendlyPresentation || file.Type == FileTypes.Presentation)
-						{
-							if (file.PreviewContainer == null)
-								file.PreviewContainer = new PresentationPreviewContainer(file);
-							file.PreviewContainer.ClearContent();
-						}
-					}
-					grFiles.Rows.Remove(grFiles.SelectedRows[0]);
+					if (file.PreviewContainer == null)
+						file.PreviewContainer = new PresentationPreviewContainer(file);
+					file.PreviewContainer.ClearContent();
 				}
 			}
+			grFiles.Rows.Remove(targetRow);
 		}
 
 		public void UpdateAfterDelete()
@@ -1550,53 +1600,193 @@ namespace FileManager.PresentationClasses.WallBin
 
 		private void UpdateButtonsStatus()
 		{
-			if (IsActive)
-			{
-				if (grFiles.SelectedRows.Count > 0)
-				{
-					try
-					{
-						MainController.Instance.WallbinController.DeleteLinkButton = true;
-						MainController.Instance.WallbinController.OpenLinkButton = true;
-						MainController.Instance.WallbinController.LinkPropertiesButton = true;
-						MainController.Instance.WallbinController.LineBreakButton = true;
-						MainController.Instance.WallbinController.UpLinkButton = grFiles.SelectedRows[0].Index > 0;
-						MainController.Instance.WallbinController.DownLinkButton = grFiles.SelectedRows[0].Index < grFiles.Rows.Count - 1;
-					}
-					catch
-					{
-						MainController.Instance.WallbinController.UpLinkButton = false;
-						MainController.Instance.WallbinController.DownLinkButton = false;
-						MainController.Instance.WallbinController.DeleteLinkButton = false;
-						MainController.Instance.WallbinController.OpenLinkButton = false;
-						MainController.Instance.WallbinController.LinkPropertiesButton = false;
-					}
-				}
-				else
-				{
-					MainController.Instance.WallbinController.UpLinkButton = false;
-					MainController.Instance.WallbinController.DownLinkButton = false;
-					MainController.Instance.WallbinController.DeleteLinkButton = false;
-					MainController.Instance.WallbinController.OpenLinkButton = false;
-					MainController.Instance.WallbinController.LinkPropertiesButton = false;
-					MainController.Instance.WallbinController.LineBreakButton = false;
-				}
-				MainController.Instance.WallbinController.AddLinkButton = true;
-			}
-			else
+			MainController.Instance.WallbinController.AddLinkButton = IsActive;
+			var file = grFiles.SelectedRows.Count > 0 ? grFiles.SelectedRows[0].Tag as LibraryLink : null;
+			if (!IsActive || file == null)
 			{
 				MainController.Instance.WallbinController.UpLinkButton = false;
 				MainController.Instance.WallbinController.DownLinkButton = false;
 				MainController.Instance.WallbinController.DeleteLinkButton = false;
 				MainController.Instance.WallbinController.OpenLinkButton = false;
-				MainController.Instance.WallbinController.LinkPropertiesButton = false;
+				MainController.Instance.WallbinController.LinkPropertiesNotesButton = false;
+				MainController.Instance.WallbinController.LinkPropertiesTagsButton = false;
+				MainController.Instance.WallbinController.LinkPropertiesExpirationDateButton = false;
+				MainController.Instance.WallbinController.LinkPropertiesSecurityButton = false;
+				MainController.Instance.WallbinController.LinkPropertiesWidgetButton = false;
+				MainController.Instance.WallbinController.LinkPropertiesBannerButton = false;
 				MainController.Instance.WallbinController.LineBreakButton = false;
-				MainController.Instance.WallbinController.AddLinkButton = false;
+				return;
 			}
+			MainController.Instance.WallbinController.DeleteLinkButton = true;
+			MainController.Instance.WallbinController.OpenLinkButton = true;
+			MainController.Instance.WallbinController.LinkPropertiesNotesButton = true;
+			MainController.Instance.WallbinController.LinkPropertiesTagsButton = file.Type != FileTypes.LineBreak;
+			MainController.Instance.WallbinController.LinkPropertiesExpirationDateButton = file.Type != FileTypes.LineBreak;
+			MainController.Instance.WallbinController.LinkPropertiesSecurityButton = true;
+			MainController.Instance.WallbinController.LinkPropertiesWidgetButton = true;
+			MainController.Instance.WallbinController.LinkPropertiesBannerButton = true;
+			MainController.Instance.WallbinController.LineBreakButton = true;
+			MainController.Instance.WallbinController.UpLinkButton = grFiles.SelectedRows[0].Index > 0;
+			MainController.Instance.WallbinController.DownLinkButton = grFiles.SelectedRows[0].Index < grFiles.Rows.Count - 1;
 		}
 		#endregion
 
 		#region Context Menu
+		#region Link
+		private void toolStripMenuItemLinkPropertiesOpen_Click(object sender, EventArgs e)
+		{
+			OpenLink();
+		}
+
+		private void toolStripMenuItemLinkPropertiesDelete_Click(object sender, EventArgs e)
+		{
+			DeleteLink();
+			Decorator.Parent.StateChanged = true;
+		}
+
+		private void toolStripMenuItemLinkPropertiesNotes_Click(object sender, EventArgs e)
+		{
+			ShowLinkProperties(LinkPropertiesType.Notes);
+		}
+
+		private void toolStripMenuItemLinkPropertiesTags_Click(object sender, EventArgs e)
+		{
+			ShowLinkProperties(LinkPropertiesType.Tags);
+		}
+
+		private void toolStripMenuItemLinkPropertiesExpirationDate_Click(object sender, EventArgs e)
+		{
+			ShowLinkProperties(LinkPropertiesType.ExpirationDate);
+		}
+
+		private void toolStripMenuItemLinkPropertiesSecurity_Click(object sender, EventArgs e)
+		{
+			ShowLinkProperties(LinkPropertiesType.Security);
+		}
+
+		private void toolStripMenuItemLinkPropertiesWidget_Click(object sender, EventArgs e)
+		{
+			ShowLinkProperties(LinkPropertiesType.Widget);
+		}
+
+		private void toolStripMenuItemLinkPropertiesBanner_Click(object sender, EventArgs e)
+		{
+			ShowLinkProperties(LinkPropertiesType.Banner);
+		}
+		#endregion
+
+		#region Folder
+		private void toolStripMenuItemFolderDeleteLinks_Click(object sender, EventArgs e)
+		{
+			if (AppManager.Instance.ShowQuestion("Are You sure You want to remove links?") != DialogResult.Yes) return;
+			var rows = grFiles.Rows.OfType<DataGridViewRow>().ToList();
+			foreach (var row in rows)
+				DeleteLinkInternal(row);
+			Decorator.Parent.StateChanged = true;
+		}
+
+		private void toolStripMenuItemFolderDeleteSecurity_Click(object sender, EventArgs e)
+		{
+			if (AppManager.Instance.ShowQuestion("Are You sure You want to delete security settings?") != DialogResult.Yes) return;
+			var rows = grFiles.Rows.OfType<DataGridViewRow>().ToList();
+			foreach (var row in rows)
+			{
+				var link = row.Tag as LibraryLink;
+				if (link == null) continue;
+				link.IsRestricted = false;
+				link.NoShare = false;
+				link.IsForbidden = false;
+				link.AssignedUsers = null;
+				link.DeniedUsers = null;
+			}
+			Decorator.Parent.StateChanged = true;
+		}
+
+		private void toolStripMenuItemFolderDeleteTags_Click(object sender, EventArgs e)
+		{
+			if (AppManager.Instance.ShowQuestion("Are You sure You want to wipe tags?") != DialogResult.Yes) return;
+			var rows = grFiles.Rows.OfType<DataGridViewRow>().ToList();
+			foreach (var row in rows)
+			{
+				var link = row.Tag as LibraryLink;
+				if (link == null) continue;
+				link.SearchTags.SearchGroups.Clear();
+				link.SuperFilters.Clear();
+				link.CustomKeywords.Tags.Clear();
+			}
+			grFiles_SelectionChanged(sender, EventArgs.Empty);
+			Decorator.Parent.StateChanged = true;
+		}
+
+		private void toolStripMenuItemFolderDeleteWidgets_Click(object sender, EventArgs e)
+		{
+			if (AppManager.Instance.ShowQuestion("Are You sure You want to remove widgets?") != DialogResult.Yes) return;
+			var rows = grFiles.Rows.OfType<DataGridViewRow>().ToList();
+			foreach (var row in rows)
+			{
+				var link = row.Tag as LibraryLink;
+				if (link == null) continue;
+				link.EnableWidget = false;
+				link.Widget = null;
+			}
+			grFiles.Refresh();
+			Decorator.Parent.StateChanged = true;
+		}
+
+		private void toolStripMenuItemFolderDeleteBanners_Click(object sender, EventArgs e)
+		{
+			if (AppManager.Instance.ShowQuestion("Are You sure You want to remove banners?") != DialogResult.Yes) return;
+			var rows = grFiles.Rows.OfType<DataGridViewRow>().ToList();
+			foreach (var row in rows)
+			{
+				var link = row.Tag as LibraryLink;
+				if (link == null) continue;
+				link.BannerProperties.Enable = false;
+				link.BannerProperties.Image = null;
+			}
+			grFiles.Refresh();
+			Decorator.Parent.StateChanged = true;
+		}
+
+		private void toolStripMenuItemFolderApplyTags_Click(object sender, EventArgs e)
+		{
+			var selectedRow = grFiles.SelectedRows.Count > 0 ? grFiles.SelectedRows[0] : null;
+			var selectedLink = selectedRow != null ? selectedRow.Tag as LibraryLink : null;
+			if (selectedLink == null) return;
+			var rows = grFiles.Rows.OfType<DataGridViewRow>().ToList();
+			foreach (var row in rows)
+			{
+				var link = row.Tag as LibraryLink;
+				if (link == null || link == selectedLink) continue;
+				link.SearchTags = selectedLink.SearchTags.Clone();
+				link.CustomKeywords = selectedLink.CustomKeywords.Clone();
+				link.SuperFilters.Clear();
+				link.SuperFilters.AddRange(selectedLink.SuperFilters.Select(sf => new SuperFilter { Name = sf.Name }));
+			}
+			Decorator.Parent.StateChanged = true;
+		}
+
+		private void toolStripMenuItemFolderApplySecurity_Click(object sender, EventArgs e)
+		{
+			var selectedRow = grFiles.SelectedRows.Count > 0 ? grFiles.SelectedRows[0] : null;
+			var selectedLink = selectedRow != null ? selectedRow.Tag as LibraryLink : null;
+			if (selectedLink == null) return;
+			var rows = grFiles.Rows.OfType<DataGridViewRow>().ToList();
+			foreach (var row in rows)
+			{
+				var link = row.Tag as LibraryLink;
+				if (link == null) continue;
+				link.IsRestricted = selectedLink.IsRestricted;
+				link.NoShare = selectedLink.NoShare;
+				link.IsForbidden = selectedLink.IsForbidden;
+				link.AssignedUsers = selectedLink.AssignedUsers;
+				link.DeniedUsers = selectedLink.DeniedUsers;
+			}
+			Decorator.Parent.StateChanged = true;
+		}
+		#endregion
+
+		#region Security
 		private void toolStripMenuItemSelectAll_Click(object sender, EventArgs e)
 		{
 			grFiles.SelectAll();
@@ -1606,11 +1796,20 @@ namespace FileManager.PresentationClasses.WallBin
 
 		private void toolStripMenuItemResetAll_Click(object sender, EventArgs e)
 		{
-			grFiles.SelectAll();
-			var selectedLinks = (from DataGridViewRow row in grFiles.SelectedRows select row.Tag).OfType<LibraryLink>();
-			Decorator.SelectLink(_folder.Identifier, selectedLinks, Keys.None);
-			MainController.Instance.WallbinController.ResetLinksData();
+			var rows = grFiles.Rows.OfType<DataGridViewRow>().ToList();
+			foreach (var row in rows)
+			{
+				var link = row.Tag as LibraryLink;
+				if (link == null) continue;
+				link.IsRestricted = false;
+				link.NoShare = false;
+				link.IsForbidden = false;
+				link.AssignedUsers = null;
+				link.DeniedUsers = null;
+			}
+			Decorator.Parent.StateChanged = true;
 		}
+		#endregion
 		#endregion
 	}
 }

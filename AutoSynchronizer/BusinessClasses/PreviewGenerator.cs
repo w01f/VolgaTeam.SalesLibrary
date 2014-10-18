@@ -6,13 +6,13 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 	{
 		#region IPreviewGenerator Members
 		public IPreviewContainer Parent { get; private set; }
+		public void GeneratePreview(bool generateImages, bool generateText){}
 
 		public VideoPreviewGenerator(IPreviewContainer parent)
 		{
 			Parent = parent;
 		}
 
-		public void GeneratePreview() { }
 		#endregion
 	}
 }

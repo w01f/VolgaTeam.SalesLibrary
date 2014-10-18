@@ -64,7 +64,6 @@ namespace FileManager.ConfigurationClasses
 			FontSize = 12;
 			CalendarFontSize = 10;
 			TreeViewVisible = false;
-			TreeViewDocked = true;
 			MultitabView = true;
 			#endregion
 
@@ -131,7 +130,6 @@ namespace FileManager.ConfigurationClasses
 		public int FontSize { get; set; }
 		public int CalendarFontSize { get; set; }
 		public bool TreeViewVisible { get; set; }
-		public bool TreeViewDocked { get; set; }
 		public bool MultitabView { get; set; }
 		#endregion
 
@@ -221,10 +219,6 @@ namespace FileManager.ConfigurationClasses
 				if (node != null)
 					if (bool.TryParse(node.InnerText, out tempBool))
 						TreeViewVisible = tempBool;
-				node = document.SelectSingleNode(@"/LocalSettings/TreeViewDocked");
-				if (node != null)
-					if (bool.TryParse(node.InnerText, out tempBool))
-						TreeViewDocked = tempBool;
 				node = document.SelectSingleNode(@"/LocalSettings/MultitabView");
 				if (node != null)
 					if (bool.TryParse(node.InnerText, out tempBool))
@@ -252,7 +246,6 @@ namespace FileManager.ConfigurationClasses
 			xml.AppendLine(@"<FontSize>" + FontSize + @"</FontSize>");
 			xml.AppendLine(@"<CalendarFontSize>" + CalendarFontSize + @"</CalendarFontSize>");
 			xml.AppendLine(@"<TreeViewVisible>" + TreeViewVisible + @"</TreeViewVisible>");
-			xml.AppendLine(@"<TreeViewDocked>" + TreeViewDocked + @"</TreeViewDocked>");
 			xml.AppendLine(@"<MultitabView>" + MultitabView + @"</MultitabView>");
 			#endregion
 

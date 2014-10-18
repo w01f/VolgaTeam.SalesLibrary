@@ -29,11 +29,14 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		string Extension { get; }
 		DateTime LastChanged { set; }
 		string ContainerPath { get; }
+		bool GenerateImages { get; set; }
+		bool GenerateText { get; set; }
 		bool Ready { get; }
 		IPreviewContainer Clone(IPreviewStorage parent);
 		string Serialize();
 		void Deserialize(XmlNode node);
 		string[] GetPreviewLinks(string format);
+		string GetTextContent();
 		void UpdateContent();
 		void ClearContent();
 		Size GetThumbSize();
@@ -47,6 +50,8 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		{
 			Parent = parent;
 			Identifier = Guid.NewGuid().ToString();
+			GenerateImages = true;
+			GenerateText = true;
 		}
 
 		public override string ToString()
@@ -69,6 +74,8 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		public IPreviewStorage Parent { get; private set; }
 		public string Identifier { get; private set; }
 		public string ContainerPath { get; private set; }
+		public bool GenerateImages { get; set; }
+		public bool GenerateText { get; set; }
 		public FileTypes Type { get; set; }
 
 		public string OriginalPath
@@ -247,6 +254,31 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			return size;
 		}
 
+		public string GetTextContent()
+		{
+			var result = string.Empty;
+			if (string.IsNullOrEmpty(ContainerPath)) return result;
+			var textContentFolder = Path.Combine(ContainerPath, "txt");
+			if (!Directory.Exists(textContentFolder)) return result;
+			foreach (string textContentFile in Directory.GetFiles(textContentFolder, "*.txt"))
+			{
+				using (var textContentStream = new StreamReader(textContentFile))
+				{
+					result = textContentStream.ReadToEnd();
+					result = result.Replace(Environment.NewLine, " ");
+					var sb = new StringBuilder();
+					foreach (var c in result.Where(c => (c >= '0' && c <= '9') || (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || c == '.' || c == '_' || c == ' '))
+					{
+						sb.Append(c);
+					}
+					result = sb.ToString();
+					textContentStream.Close();
+					break;
+				}
+			}
+			return result;
+		}
+
 		public void UpdateContent()
 		{
 			var parentFile = new FileInfo(OriginalPath);
@@ -255,7 +287,11 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			bool update;
 			if (!previewFolder.Exists)
 				update = true;
-			else if (!previewFolder.GetDirectories().Any())
+			else if ((GenerateImages && previewFolder.GetDirectories().All(d => d.Name.Equals("txt"))) ||
+				(!GenerateImages && previewFolder.GetDirectories().Any(d => !d.Name.Equals("txt"))))
+				update = true;
+			else if ((GenerateText && !previewFolder.GetDirectories().Any(d => d.Name.Equals("txt"))) ||
+				(!GenerateText && previewFolder.GetDirectories().Any(d => d.Name.Equals("txt"))))
 				update = true;
 			else
 			{
@@ -272,7 +308,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			if (!parentFile.Exists) return;
 			var previewGenerator = Parent.GetPreviewGenerator(this);
 			if (previewGenerator != null)
-				previewGenerator.GeneratePreview();
+				previewGenerator.GeneratePreview(GenerateImages, GenerateText);
 		}
 
 		public void ClearContent()

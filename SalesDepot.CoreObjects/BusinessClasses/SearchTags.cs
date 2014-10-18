@@ -137,5 +137,15 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 				}
 			}
 		}
+
+		public LibraryFileSearchTags Clone()
+		{
+			var result = new LibraryFileSearchTags();
+			foreach (var searchGroup in SearchGroups)
+			{
+				result.SearchGroups.Add(searchGroup.Clone());
+			}
+			return result;
+		}
 	}
 }

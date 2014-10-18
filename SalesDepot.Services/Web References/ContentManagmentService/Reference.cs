@@ -1959,6 +1959,8 @@ namespace SalesDepot.Services.ContentManagmentService {
         
         private string dateModifyField;
         
+        private string contentPathField;
+        
         private bool isRestrictedField;
         
         private bool noShareField;
@@ -2220,6 +2222,16 @@ namespace SalesDepot.Services.ContentManagmentService {
             }
             set {
                 this.dateModifyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string contentPath {
+            get {
+                return this.contentPathField;
+            }
+            set {
+                this.contentPathField = value;
             }
         }
         

@@ -9,7 +9,7 @@ using DevComponents.DotNetBar;
 using OvernightsCalendarViewer.BusinessClasses;
 using OvernightsCalendarViewer.ConfigurationClasses;
 using OvernightsCalendarViewer.PresentationClasses.Decorators;
-using OvernightsCalendarViewer.ToolForms;
+using SalesDepot.CommonGUI.Forms;
 
 namespace OvernightsCalendarViewer.TabPages
 {

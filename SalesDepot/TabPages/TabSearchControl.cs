@@ -15,12 +15,12 @@ using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using DevExpress.XtraTab;
 using SalesDepot.BusinessClasses;
+using SalesDepot.CommonGUI.Forms;
 using SalesDepot.ConfigurationClasses;
 using SalesDepot.CoreObjects.BusinessClasses;
 using SalesDepot.InteropClasses;
 using SalesDepot.PresentationClasses.Viewers;
 using SalesDepot.PresentationClasses.WallBin.Decorators;
-using SalesDepot.ToolForms;
 using ItemCheckEventArgs = DevExpress.XtraEditors.Controls.ItemCheckEventArgs;
 
 namespace SalesDepot.TabPages

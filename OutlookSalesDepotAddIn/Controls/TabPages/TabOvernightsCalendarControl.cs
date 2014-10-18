@@ -6,6 +6,7 @@ using System.Threading;
 using System.Windows.Forms;
 using OutlookSalesDepotAddIn.BusinessClasses;
 using OutlookSalesDepotAddIn.Forms;
+using SalesDepot.CommonGUI.Forms;
 
 namespace OutlookSalesDepotAddIn.Controls.TabPages
 {

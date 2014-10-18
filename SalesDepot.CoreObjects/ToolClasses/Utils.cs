@@ -4,6 +4,7 @@ using System.Drawing.Drawing2D;
 using System.IO;
 using System.Runtime.InteropServices;
 using ICSharpCode.SharpZipLib.Zip;
+using SalesDepot.CoreObjects.InteropClasses;
 
 namespace SalesDepot.CoreObjects.ToolClasses
 {
@@ -68,6 +69,31 @@ namespace SalesDepot.CoreObjects.ToolClasses
 				s.Close();
 			}
 		}
+
+		public static void ActivateForm(IntPtr handle, bool maximized, bool topMost)
+		{
+			WinAPIHelper.ShowWindow(handle, maximized ? WindowShowStyle.ShowMaximized : WindowShowStyle.ShowNormal);
+			uint lpdwProcessId = 0;
+			WinAPIHelper.AttachThreadInput(WinAPIHelper.GetCurrentThreadId(), WinAPIHelper.GetWindowThreadProcessId(WinAPIHelper.GetForegroundWindow(), out lpdwProcessId), true);
+			WinAPIHelper.SetForegroundWindow(handle);
+			WinAPIHelper.AttachThreadInput(WinAPIHelper.GetCurrentThreadId(), WinAPIHelper.GetWindowThreadProcessId(WinAPIHelper.GetForegroundWindow(), out lpdwProcessId), false);
+			if (topMost)
+				WinAPIHelper.MakeTopMost(handle);
+			else
+				WinAPIHelper.MakeNormal(handle);
+		}
+
+		public static void ActivateTaskbar()
+		{
+			var taskBarHandle = WinAPIHelper.FindWindow("Shell_traywnd", "");
+			WinAPIHelper.ShowWindow(taskBarHandle, WindowShowStyle.Show);
+			uint lpdwProcessId;
+			WinAPIHelper.AttachThreadInput(WinAPIHelper.GetCurrentThreadId(), WinAPIHelper.GetWindowThreadProcessId(WinAPIHelper.GetForegroundWindow(), out lpdwProcessId), true);
+			WinAPIHelper.SetForegroundWindow(taskBarHandle);
+			WinAPIHelper.AttachThreadInput(WinAPIHelper.GetCurrentThreadId(), WinAPIHelper.GetWindowThreadProcessId(WinAPIHelper.GetForegroundWindow(), out lpdwProcessId), false);
+		}
+
+
 	}
 
 	public static class Extensions

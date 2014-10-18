@@ -3,6 +3,7 @@ using System.Linq;
 using System.Windows.Forms;
 using DevComponents.DotNetBar.Metro;
 using SalesDepot.BusinessClasses;
+using SalesDepot.CommonGUI.Forms;
 
 namespace SalesDepot.ToolForms.QBuilderForms
 {

@@ -13,12 +13,12 @@ using DevExpress.XtraBars;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
 using SalesDepot.BusinessClasses;
+using SalesDepot.CommonGUI.Forms;
 using SalesDepot.ConfigurationClasses;
 using SalesDepot.CoreObjects.BusinessClasses;
 using SalesDepot.CoreObjects.ToolClasses;
 using SalesDepot.InteropClasses;
 using SalesDepot.PresentationClasses.WallBin.Decorators;
-using SalesDepot.ToolForms;
 using SalesDepot.ToolForms.WallBin;
 
 namespace SalesDepot.TabPages

@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using DevComponents.DotNetBar.Metro;
 using SalesDepot.BusinessClasses;
+using SalesDepot.CommonGUI.Forms;
 using SalesDepot.CoreObjects.BusinessClasses;
 
 namespace SalesDepot.ToolForms.QBuilderForms

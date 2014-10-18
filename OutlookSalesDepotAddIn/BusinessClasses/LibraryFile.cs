@@ -24,7 +24,8 @@ namespace OutlookSalesDepotAddIn.BusinessClasses
 		private string _linkRemotePath = string.Empty;
 		private string _note = string.Empty;
 		private Image _widget;
-		private bool _doNotGeneratePreview;
+		private bool _generatePreviewImages;
+		private bool _generateContentText;
 		private bool _forcePreview;
 		private bool _isUrl365;
 
@@ -48,6 +49,8 @@ namespace OutlookSalesDepotAddIn.BusinessClasses
 			SearchTags = new LibraryFileSearchTags();
 			ExpirationDateOptions = new ExpirationDateOptions();
 			SuperFilters = new List<SuperFilter>();
+			_generatePreviewImages = true;
+			_generateContentText = true;
 			PreviewContainer = null;
 			SetProperties();
 		}
@@ -387,15 +390,40 @@ namespace OutlookSalesDepotAddIn.BusinessClasses
 			}
 		}
 
-		public bool DoNotGeneratePreview
+		public bool GeneratePreviewImages
 		{
-			get { return _doNotGeneratePreview; }
+			get
+			{
+				return _generatePreviewImages &&
+					(Type == FileTypes.BuggyPresentation ||
+					Type == FileTypes.FriendlyPresentation ||
+					Type == FileTypes.Presentation ||
+					Type == FileTypes.Word ||
+					Type == FileTypes.PDF ||
+					((Type == FileTypes.Other && new[] { "ppt", "doc", "pdf" }.Contains(Format))));
+			}
 			set
 			{
-				if (_doNotGeneratePreview != value)
+				if (_generatePreviewImages != value)
 					LastChanged = DateTime.Now;
-				_doNotGeneratePreview = value;
+				_generatePreviewImages = value;
 			}
+		}
+
+		public bool GenerateContentText
+		{
+			get { return _generateContentText; }
+			set
+			{
+				if (_generateContentText != value)
+					LastChanged = DateTime.Now;
+				_generateContentText = value;
+			}
+		}
+
+		public bool DoNotGeneratePreview
+		{
+			get { return !GeneratePreviewImages && !GenerateContentText; }
 		}
 
 		public bool ForcePreview
@@ -439,7 +467,8 @@ namespace OutlookSalesDepotAddIn.BusinessClasses
 			file.NoShare = NoShare;
 			file.AssignedUsers = AssignedUsers;
 			file.DeniedUsers = DeniedUsers;
-			file.DoNotGeneratePreview = DoNotGeneratePreview;
+			file.GeneratePreviewImages = GeneratePreviewImages;
+			file.GenerateContentText = GenerateContentText;
 			file.ForcePreview = ForcePreview;
 			file.IsUrl365 = IsUrl365;
 			file.SearchTags = SearchTags;
@@ -469,7 +498,8 @@ namespace OutlookSalesDepotAddIn.BusinessClasses
 			result.AppendLine(@"<IsForbidden>" + IsForbidden + @"</IsForbidden>");
 			result.AppendLine(@"<IsRestricted>" + IsRestricted + @"</IsRestricted>");
 			result.AppendLine(@"<NoShare>" + NoShare + @"</NoShare>");
-			result.AppendLine(@"<DoNotGeneratePreview>" + _doNotGeneratePreview + @"</DoNotGeneratePreview>");
+			result.AppendLine(@"<GeneratePreviewImages>" + _generatePreviewImages + @"</GeneratePreviewImages>");
+			result.AppendLine(@"<GenerateContentText>" + _generateContentText + @"</GenerateContentText>");
 			result.AppendLine(@"<ForcePreview>" + _forcePreview + @"</ForcePreview>");
 			result.AppendLine(@"<IsUrl365>" + _isUrl365 + @"</IsUrl365>");
 			result.AppendLine(@"<AssignedUsers>" + (AssignedUsers ?? string.Empty).Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</AssignedUsers>");
@@ -579,9 +609,13 @@ namespace OutlookSalesDepotAddIn.BusinessClasses
 						if (DateTime.TryParse(childNode.InnerText, out tempDate))
 							LastChanged = tempDate;
 						break;
-					case "DoNotGeneratePreview":
+					case "GeneratePreviewImages":
 						if (bool.TryParse(childNode.InnerText, out tempBool))
-							_doNotGeneratePreview = tempBool;
+							_generatePreviewImages = tempBool;
+						break;
+					case "GenerateContentText":
+						if (bool.TryParse(childNode.InnerText, out tempBool))
+							_generateContentText = tempBool;
 						break;
 					case "ForcePreview":
 						if (bool.TryParse(childNode.InnerText, out tempBool))

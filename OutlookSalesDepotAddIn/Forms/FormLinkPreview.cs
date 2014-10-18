@@ -5,6 +5,7 @@ using DevComponents.DotNetBar.Metro;
 using DevExpress.XtraBars;
 using OutlookSalesDepotAddIn.BusinessClasses;
 using OutlookSalesDepotAddIn.Controls.Viewers;
+using SalesDepot.CommonGUI.Forms;
 using SalesDepot.CoreObjects.BusinessClasses;
 
 namespace OutlookSalesDepotAddIn.Forms

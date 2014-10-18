@@ -243,9 +243,9 @@ namespace FileManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Delete {
+        internal static System.Drawing.Bitmap DeleteButton {
             get {
-                object obj = ResourceManager.GetObject("Delete", resourceCulture);
+                object obj = ResourceManager.GetObject("DeleteButton", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -253,9 +253,9 @@ namespace FileManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap DeleteButton {
+        internal static System.Drawing.Bitmap DeleteLink {
             get {
-                object obj = ResourceManager.GetObject("DeleteButton", resourceCulture);
+                object obj = ResourceManager.GetObject("DeleteLink", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -363,16 +363,6 @@ namespace FileManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap FirefoxSmall {
-            get {
-                object obj = ResourceManager.GetObject("FirefoxSmall", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap FormatFontLarger {
             get {
                 object obj = ResourceManager.GetObject("FormatFontLarger", resourceCulture);
@@ -406,36 +396,6 @@ namespace FileManager.Properties {
         internal static System.Drawing.Bitmap InternetExplorer {
             get {
                 object obj = ResourceManager.GetObject("InternetExplorer", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap LineBreak {
-            get {
-                object obj = ResourceManager.GetObject("LineBreak", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap LinkProperties {
-            get {
-                object obj = ResourceManager.GetObject("LinkProperties", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap MediaPlayerSmall {
-            get {
-                object obj = ResourceManager.GetObject("MediaPlayerSmall", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -483,19 +443,9 @@ namespace FileManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap NetworkShare {
+        internal static System.Drawing.Bitmap OpenLink {
             get {
-                object obj = ResourceManager.GetObject("NetworkShare", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap OpenFile {
-            get {
-                object obj = ResourceManager.GetObject("OpenFile", resourceCulture);
+                object obj = ResourceManager.GetObject("OpenLink", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -563,9 +513,9 @@ namespace FileManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap QuickTimeSmall {
+        internal static System.Drawing.Bitmap RefreshUsers {
             get {
-                object obj = ResourceManager.GetObject("QuickTimeSmall", resourceCulture);
+                object obj = ResourceManager.GetObject("RefreshUsers", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -573,9 +523,29 @@ namespace FileManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap RefreshUsers {
+        internal static System.Drawing.Bitmap RetractableLogoFiles {
             get {
-                object obj = ResourceManager.GetObject("RefreshUsers", resourceCulture);
+                object obj = ResourceManager.GetObject("RetractableLogoFiles", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap RetractableLogoSecurity {
+            get {
+                object obj = ResourceManager.GetObject("RetractableLogoSecurity", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap RetractableLogoTags {
+            get {
+                object obj = ResourceManager.GetObject("RetractableLogoTags", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -873,29 +843,9 @@ namespace FileManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap TreeView {
-            get {
-                object obj = ResourceManager.GetObject("TreeView", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap UpArrow {
             get {
                 object obj = ResourceManager.GetObject("UpArrow", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Url {
-            get {
-                object obj = ResourceManager.GetObject("Url", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

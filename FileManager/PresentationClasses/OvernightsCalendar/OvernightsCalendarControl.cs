@@ -7,7 +7,7 @@ using System.Windows.Forms;
 using DevComponents.DotNetBar;
 using FileManager.ConfigurationClasses;
 using FileManager.PresentationClasses.WallBin.Decorators;
-using FileManager.ToolForms;
+using SalesDepot.CommonGUI.Forms;
 
 namespace FileManager.PresentationClasses.OvernightsCalendar
 {

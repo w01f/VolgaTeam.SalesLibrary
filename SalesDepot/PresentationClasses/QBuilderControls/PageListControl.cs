@@ -5,9 +5,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Windows.Forms;
 using DevExpress.XtraEditors.Controls;
+using SalesDepot.CommonGUI.Forms;
 using SalesDepot.CoreObjects.BusinessClasses;
 using SalesDepot.Services.QBuilderService;
-using SalesDepot.ToolForms;
 using SalesDepot.ToolForms.QBuilderForms;
 
 namespace SalesDepot.PresentationClasses.QBuilderControls

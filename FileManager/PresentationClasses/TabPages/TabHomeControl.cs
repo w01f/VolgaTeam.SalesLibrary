@@ -11,6 +11,8 @@ using FileManager.Controllers;
 using FileManager.PresentationClasses.Tags;
 using FileManager.PresentationClasses.WallBin;
 using FileManager.PresentationClasses.WallBin.Decorators;
+using FileManager.Properties;
+using SalesDepot.CommonGUI.RetractableBar;
 using SalesDepot.CoreObjects.BusinessClasses;
 
 namespace FileManager.PresentationClasses.TabPages
@@ -32,8 +34,8 @@ namespace FileManager.PresentationClasses.TabPages
 			Dock = DockStyle.Fill;
 			pnMain.Dock = DockStyle.Fill;
 			pnEmpty.Dock = DockStyle.Fill;
+			retractableBar.StateChanged += retractableBar_StateChanged;
 		}
-
 		#region Page Initialization
 		public void InitPage()
 		{
@@ -48,7 +50,7 @@ namespace FileManager.PresentationClasses.TabPages
 
 			SuperFilterControl.Init();
 
-			splitContainerControl.Panel2.Resize += (sender, args) => MainController.Instance.WallbinController.ResizeActivePage();
+			pnContainer.Resize += (sender, args) => MainController.Instance.WallbinController.ResizeActivePage();
 		}
 
 		private void InitLibrariesSelector()
@@ -97,23 +99,20 @@ namespace FileManager.PresentationClasses.TabPages
 		private void UpdateControlsState()
 		{
 			barCheckItemTabs.Checked = SettingsManager.Instance.MultitabView;
-			FormMain.Instance.buttonItemHomeFileTreeView.Checked = SettingsManager.Instance.TreeViewVisible;
 			var activeLibrary = MainController.Instance.ActiveDecorator != null ? MainController.Instance.ActiveDecorator.Library : null;
 			if (activeLibrary == null) return;
 			if (!activeLibrary.UseDirectAccess)
 			{
 				btSetupWallBin.Visible = !activeLibrary.IsConfigured;
 				btSetupWallBin.BringToFront();
-
-				FormMain.Instance.buttonItemHomeFileTreeView.Enabled = true;
+				retractableBar.Visible = true;
 				FormMain.Instance.ribbonBarHomeAddLink.Enabled = true;
 				FormMain.Instance.buttonItemHomeDelete.Enabled = true;
-				FormMain.Instance.ribbonBarHomeFileTreeView.Enabled = true;
 				FormMain.Instance.ribbonBarHomeLibraries.Enabled = true;
 				barButtonItemLinkUp.Enabled = true;
 				barButtonItemLinkDown.Enabled = true;
 				FormMain.Instance.buttonItemHomeOpen.Enabled = true;
-				FormMain.Instance.buttonItemHomeProperties.Enabled = true;
+				FormMain.Instance.ribbonBarHomeLinkProperties.Enabled = true;
 				FormMain.Instance.ribbonBarHomeSave.Enabled = true;
 				FormMain.Instance.ribbonBarPreferencesAutoWidgets.Enabled = true;
 				FormMain.Instance.ribbonBarSettingsBranding.Enabled = true;
@@ -125,22 +124,23 @@ namespace FileManager.PresentationClasses.TabPages
 				barButtonItemFontDown.Enabled = true;
 				barCheckItemTabs.Enabled = true;
 				barMinibar.Visible = true;
-				ShowDockPanel(_wallBinOptions.ShowFiles && (SettingsManager.Instance.TreeViewVisible || activeLibrary.UseDirectAccess));
-
+				if (SettingsManager.Instance.TreeViewVisible)
+					retractableBar.Expand(true);
+				else
+					retractableBar.Collapse(true);
 				UpdateFontButtonStatus();
 			}
 			else
 			{
+				retractableBar.Visible = false;
 				btSetupWallBin.Visible = false;
-				FormMain.Instance.buttonItemHomeFileTreeView.Enabled = false;
 				FormMain.Instance.ribbonBarHomeAddLink.Enabled = false;
 				FormMain.Instance.buttonItemHomeDelete.Enabled = false;
-				FormMain.Instance.ribbonBarHomeFileTreeView.Enabled = false;
 				FormMain.Instance.ribbonBarHomeLibraries.Enabled = false;
 				barButtonItemLinkUp.Enabled = false;
 				barButtonItemLinkDown.Enabled = false;
 				FormMain.Instance.buttonItemHomeOpen.Enabled = false;
-				FormMain.Instance.buttonItemHomeProperties.Enabled = false;
+				FormMain.Instance.ribbonBarHomeLinkProperties.Enabled = false;
 				FormMain.Instance.ribbonBarHomeSave.Enabled = false;
 				FormMain.Instance.ribbonBarPreferencesAutoWidgets.Enabled = false;
 				FormMain.Instance.ribbonBarSettingsBranding.Enabled = false;
@@ -148,7 +148,6 @@ namespace FileManager.PresentationClasses.TabPages
 				FormMain.Instance.ribbonBarPreferencesDeadLinks.Enabled = false;
 				FormMain.Instance.ribbonBarPreferencesEmailList.Enabled = false;
 				FormMain.Instance.ribbonBarPreferencesPages.Enabled = false;
-				ShowDockPanel(false);
 				barButtonItemFontUp.Enabled = false;
 				barButtonItemFontDown.Enabled = false;
 				barCheckItemTabs.Enabled = false;
@@ -174,9 +173,20 @@ namespace FileManager.PresentationClasses.TabPages
 			_wallBinOptions.ShowKeywordTags = options.ShowKeywordTags;
 			_wallBinOptions.ShowSecurityTags = options.ShowSecurityTags;
 
-			var activeLibrary = MainController.Instance.ActiveDecorator != null ? MainController.Instance.ActiveDecorator.Library : null;
-			ShowDockPanel(_wallBinOptions.ShowFiles && (SettingsManager.Instance.TreeViewVisible || (activeLibrary != null && activeLibrary.UseDirectAccess)));
-			ShowTagsEditor(_wallBinOptions.ShowTagsEditor);
+			if (_wallBinOptions.ShowTagsEditor)
+			{
+				if (_wallBinOptions.ShowSecurityTags)
+					retractableBar.AddButtons(new[] { new ButtonInfo { Logo = Resources.RetractableLogoSecurity, Tooltip = "Expand security settings" } });
+				else
+					retractableBar.AddButtons(new[] { new ButtonInfo { Logo = Resources.RetractableLogoTags, Tooltip = "Expand tags settings" } });
+				SwitchTagsEditor();
+			}
+			else
+			{
+				retractableBar.AddButtons(new[] { new ButtonInfo { Logo = Resources.RetractableLogoFiles, Tooltip = "Expand file list" } });
+				if (_treeList != null)
+					_treeList.BringToFront();
+			}
 			MainController.Instance.WallbinController.ResizeActivePage();
 		}
 		#endregion
@@ -199,43 +209,14 @@ namespace FileManager.PresentationClasses.TabPages
 				_treeList.BringToFront();
 			}
 			else
-				dockPanelTreeView_Container.Controls.Add(_treeList);
+				retractableBar.Content.Controls.Add(_treeList);
 		}
 
-		public void ShowDockPanel(bool show)
+		private void retractableBar_StateChanged(object sender, StateChangedEventArgs e)
 		{
-			dockPanelTreeView.DockChanged -= dockPanelTreeView_DockChanged;
-			if (show)
-				dockPanelTreeView.Show();
-			else
-				dockPanelTreeView.Hide();
-			dockPanelTreeView.Dock = SettingsManager.Instance.TreeViewDocked ? DockingStyle.Left : DockingStyle.Float;
-			dockPanelTreeView.FloatLocation = new Point(200, 200);
-			if (show)
-				dockPanelTreeView.DockChanged += dockPanelTreeView_DockChanged;
-		}
-
-		private void dockPanelTreeView_DockChanged(object sender, EventArgs e)
-		{
-			MainController.Instance.WallbinController.ResizeActivePage();
-			SettingsManager.Instance.TreeViewDocked = dockPanelTreeView.Dock == DockingStyle.Left;
+			SettingsManager.Instance.TreeViewVisible = e.Expaned;
 			SettingsManager.Instance.Save();
-		}
-
-		private void dockManager_Sizing(object sender, SizingEventArgs e)
-		{
-			if (e.Panel.Name.Equals("dockPanelTreeView") && (e.NewSize.Width < 350 || e.NewSize.Height < 450))
-				e.Cancel = true;
-		}
-
-		private void dockPanelTreeView_ClosedPanel(object sender, DockPanelEventArgs e)
-		{
-			FormMain.Instance.buttonItemHomeFileTreeView.Checked = false;
-		}
-
-		private void dockPanelTreeView_MouseDoubleClick(object sender, MouseEventArgs e)
-		{
-			dockPanelTreeView.Dock = DockingStyle.Left;
+			MainController.Instance.ActiveDecorator.ActivePage.ResizePage();
 		}
 		#endregion
 
@@ -244,28 +225,17 @@ namespace FileManager.PresentationClasses.TabPages
 
 		private void LoadTagsEditors()
 		{
-			if (!splitContainerControl.Panel1.Controls.Contains(_categoriesEditor))
-				splitContainerControl.Panel1.Controls.Add(_categoriesEditor);
-			if (!splitContainerControl.Panel1.Controls.Contains(_superFiltersEditor))
-				splitContainerControl.Panel1.Controls.Add(_superFiltersEditor);
-			if (!splitContainerControl.Panel1.Controls.Contains(_keywordsEditor))
-				splitContainerControl.Panel1.Controls.Add(_keywordsEditor);
-			if (!splitContainerControl.Panel1.Controls.Contains(_securityEditor))
-				splitContainerControl.Panel1.Controls.Add(_securityEditor);
-			if (!splitContainerControl.Panel1.Controls.Contains(_tagsCleaner))
-				splitContainerControl.Panel1.Controls.Add(_tagsCleaner);
+			if (!retractableBar.Content.Controls.Contains(_categoriesEditor))
+				retractableBar.Content.Controls.Add(_categoriesEditor);
+			if (!retractableBar.Content.Controls.Contains(_superFiltersEditor))
+				retractableBar.Content.Controls.Add(_superFiltersEditor);
+			if (!retractableBar.Content.Controls.Contains(_keywordsEditor))
+				retractableBar.Content.Controls.Add(_keywordsEditor);
+			if (!retractableBar.Content.Controls.Contains(_securityEditor))
+				retractableBar.Content.Controls.Add(_securityEditor);
+			if (!retractableBar.Content.Controls.Contains(_tagsCleaner))
+				retractableBar.Content.Controls.Add(_tagsCleaner);
 			SwitchTagsEditor();
-		}
-
-		private void ShowTagsEditor(bool show)
-		{
-			if (show)
-			{
-				SwitchTagsEditor();
-				splitContainerControl.PanelVisibility = SplitPanelVisibility.Both;
-			}
-			else
-				splitContainerControl.PanelVisibility = SplitPanelVisibility.Panel2;
 		}
 
 		public void SwitchTagsEditor()

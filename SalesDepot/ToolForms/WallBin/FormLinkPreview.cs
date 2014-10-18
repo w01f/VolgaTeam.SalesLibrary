@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using DevComponents.DotNetBar.Metro;
 using DevExpress.XtraBars;
 using SalesDepot.BusinessClasses;
+using SalesDepot.CommonGUI.Forms;
 using SalesDepot.ConfigurationClasses;
 using SalesDepot.CoreObjects.BusinessClasses;
 using SalesDepot.PresentationClasses.Viewers;

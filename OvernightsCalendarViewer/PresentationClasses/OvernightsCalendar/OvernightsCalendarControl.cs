@@ -7,7 +7,7 @@ using System.Windows.Forms;
 using DevComponents.DotNetBar;
 using OvernightsCalendarViewer.ConfigurationClasses;
 using OvernightsCalendarViewer.PresentationClasses.Decorators;
-using OvernightsCalendarViewer.ToolForms;
+using SalesDepot.CommonGUI.Forms;
 
 namespace OvernightsCalendarViewer.PresentationClasses.OvernightsCalendar
 {

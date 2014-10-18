@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using Microsoft.Office.Interop.Outlook;
 using SalesDepot.CoreObjects.InteropClasses;
+using SalesDepot.CoreObjects.ToolClasses;
 using Exception = System.Exception;
 
 namespace SalesDepot.InteropClasses
@@ -67,7 +68,7 @@ namespace SalesDepot.InteropClasses
 						break;
 					}
 				}
-				AppManager.Instance.ActivateForm(handle, true, false);
+				Utils.ActivateForm(handle, true, false);
 				var mi = (MailItem)_outlookObject.CreateItem(OlItemType.olMailItem);
 				mi.Attachments.Add(attachmentPath, OlAttachmentType.olByValue, 1, "Attachment");
 				mi.Subject = subject;
@@ -81,7 +82,7 @@ namespace SalesDepot.InteropClasses
 					System.Windows.Forms.Application.DoEvents();
 				}
 				if (handle != IntPtr.Zero)
-					AppManager.Instance.ActivateForm(handle, true, true);
+					Utils.ActivateForm(handle, true, true);
 			}
 			catch (Exception e)
 			{
@@ -103,7 +104,7 @@ namespace SalesDepot.InteropClasses
 						break;
 					}
 				}
-				AppManager.Instance.ActivateForm(handle, true, false);
+				Utils.ActivateForm(handle, true, false);
 				var mi = (MailItem)_outlookObject.CreateItem(OlItemType.olMailItem);
 				foreach (string attachmentPath in attachmentPaths)
 					mi.Attachments.Add(attachmentPath, OlAttachmentType.olByValue, 1, "Attachment");
@@ -118,7 +119,7 @@ namespace SalesDepot.InteropClasses
 					System.Windows.Forms.Application.DoEvents();
 				}
 				if (handle != IntPtr.Zero)
-					AppManager.Instance.ActivateForm(handle, true, true);
+					Utils.ActivateForm(handle, true, true);
 			}
 			catch (Exception e)
 			{

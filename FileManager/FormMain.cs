@@ -37,13 +37,13 @@ namespace FileManager
 		#region GUI Event Handlers
 		private void Form_Load(object sender, EventArgs e)
 		{
-			ribbonTabItemCalendar.Enabled = ConfigurationClasses.SettingsManager.Instance.EnableOvernightsCalendarTab;
-			ribbonTabItemClipart.Enabled = ConfigurationClasses.SettingsManager.Instance.EnableClipartTab && (System.IO.Directory.Exists(ConfigurationClasses.SettingsManager.Instance.ClientLogosRootPath) || System.IO.Directory.Exists(ConfigurationClasses.SettingsManager.Instance.SalesGalleryRootPath) || System.IO.Directory.Exists(ConfigurationClasses.SettingsManager.Instance.WebArtRootPath));
-			ribbonTabItemProgramManager.Enabled = ConfigurationClasses.SettingsManager.Instance.EnableProgramManagerTab;
-			ribbonTabItemIPad.Enabled = ConfigurationClasses.SettingsManager.Instance.EnableIPadSettingsTab && ConfigurationClasses.SettingsManager.Instance.WebServiceConnected;
-			ribbonTabItemIPadUsers.Enabled = ConfigurationClasses.SettingsManager.Instance.EnableIPadUsersTab && ConfigurationClasses.SettingsManager.Instance.WebServiceConnected; ;
-			ribbonTabItemTags.Enabled = ConfigurationClasses.SettingsManager.Instance.EnableTagsTab;
-			ribbonTabItemSecurity.Enabled = ConfigurationClasses.SettingsManager.Instance.EnableSecurityTab;
+			ribbonTabItemCalendar.Visible = ConfigurationClasses.SettingsManager.Instance.EnableOvernightsCalendarTab;
+			ribbonTabItemClipart.Visible = ConfigurationClasses.SettingsManager.Instance.EnableClipartTab && (System.IO.Directory.Exists(ConfigurationClasses.SettingsManager.Instance.ClientLogosRootPath) || System.IO.Directory.Exists(ConfigurationClasses.SettingsManager.Instance.SalesGalleryRootPath) || System.IO.Directory.Exists(ConfigurationClasses.SettingsManager.Instance.WebArtRootPath));
+			ribbonTabItemProgramManager.Visible = ConfigurationClasses.SettingsManager.Instance.EnableProgramManagerTab;
+			ribbonTabItemIPad.Visible = ConfigurationClasses.SettingsManager.Instance.EnableIPadSettingsTab && ConfigurationClasses.SettingsManager.Instance.WebServiceConnected;
+			ribbonTabItemIPadUsers.Visible = ConfigurationClasses.SettingsManager.Instance.EnableIPadUsersTab && ConfigurationClasses.SettingsManager.Instance.WebServiceConnected; ;
+			ribbonTabItemTags.Visible = ConfigurationClasses.SettingsManager.Instance.EnableTagsTab;
+			ribbonTabItemSecurity.Visible = ConfigurationClasses.SettingsManager.Instance.EnableSecurityTab;
 
 			MainController.Instance.InitializeControllers();
 			MainController.Instance.LoadDataAndGUI();
@@ -84,8 +84,6 @@ namespace FileManager
 				key = TabPageEnum.IPadContent;
 			else if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemIPadUsers)
 				key = TabPageEnum.IPadUsers;
-			else if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemHelp)
-				key = TabPageEnum.Help;
 			MainController.Instance.ShowTab(key);
 		}
 		#endregion

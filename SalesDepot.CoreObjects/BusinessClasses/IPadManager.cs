@@ -259,46 +259,48 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 				previewContainer.id = libraryPreviewContainer.Identifier;
 				previewContainer.libraryId = Parent.Identifier.ToString();
 
-				var thumbSize = libraryPreviewContainer.GetThumbSize();
-				previewContainer.thumbsWidth = thumbSize.Width;
-				previewContainer.thumbsHeight = thumbSize.Height;
+				if (libraryPreviewContainer.GenerateImages)
+				{
+					var thumbSize = libraryPreviewContainer.GetThumbSize();
+					previewContainer.thumbsWidth = thumbSize.Width;
+					previewContainer.thumbsHeight = thumbSize.Height;
 
-				var pngLinks = libraryPreviewContainer.GetPreviewLinks("png");
-				if (pngLinks != null && pngLinks.Length > 0)
-					previewContainer.pngLinks = pngLinks;
+					var pngLinks = libraryPreviewContainer.GetPreviewLinks("png");
+					if (pngLinks != null && pngLinks.Length > 0)
+						previewContainer.pngLinks = pngLinks;
 
-				var pngPhoneLinks = libraryPreviewContainer.GetPreviewLinks("png_phone");
-				if (pngPhoneLinks != null && pngPhoneLinks.Length > 0)
-					previewContainer.pngPhoneLinks = pngPhoneLinks;
+					var pngPhoneLinks = libraryPreviewContainer.GetPreviewLinks("png_phone");
+					if (pngPhoneLinks != null && pngPhoneLinks.Length > 0)
+						previewContainer.pngPhoneLinks = pngPhoneLinks;
 
-				var jpegLinks = libraryPreviewContainer.GetPreviewLinks("jpg");
-				if (jpegLinks != null && jpegLinks.Length > 0)
-					previewContainer.jpegLinks = jpegLinks;
+					var jpegLinks = libraryPreviewContainer.GetPreviewLinks("jpg");
+					if (jpegLinks != null && jpegLinks.Length > 0)
+						previewContainer.jpegLinks = jpegLinks;
 
-				var jpegPhoneLinks = libraryPreviewContainer.GetPreviewLinks("jpg_phone");
-				if (jpegPhoneLinks != null && jpegPhoneLinks.Length > 0)
-					previewContainer.jpegPhoneLinks = jpegPhoneLinks;
+					var jpegPhoneLinks = libraryPreviewContainer.GetPreviewLinks("jpg_phone");
+					if (jpegPhoneLinks != null && jpegPhoneLinks.Length > 0)
+						previewContainer.jpegPhoneLinks = jpegPhoneLinks;
 
-				var pdfLinks = libraryPreviewContainer.GetPreviewLinks("pdf");
-				if (pdfLinks != null && pdfLinks.Length > 0)
-					previewContainer.pdfLinks = pdfLinks;
+					var pdfLinks = libraryPreviewContainer.GetPreviewLinks("pdf");
+					if (pdfLinks != null && pdfLinks.Length > 0)
+						previewContainer.pdfLinks = pdfLinks;
 
-				var oldOfficeLinks = libraryPreviewContainer.GetPreviewLinks("old office");
-				if (oldOfficeLinks != null && oldOfficeLinks.Length > 0)
-					previewContainer.oldOfficeFormatLinks = oldOfficeLinks;
+					var oldOfficeLinks = libraryPreviewContainer.GetPreviewLinks("old office");
+					if (oldOfficeLinks != null && oldOfficeLinks.Length > 0)
+						previewContainer.oldOfficeFormatLinks = oldOfficeLinks;
 
-				var newOfficeLinks = libraryPreviewContainer.GetPreviewLinks("new office");
-				if (newOfficeLinks != null && newOfficeLinks.Length > 0)
-					previewContainer.newOfficeFormatLinks = newOfficeLinks;
+					var newOfficeLinks = libraryPreviewContainer.GetPreviewLinks("new office");
+					if (newOfficeLinks != null && newOfficeLinks.Length > 0)
+						previewContainer.newOfficeFormatLinks = newOfficeLinks;
 
-				var thumbsLinks = libraryPreviewContainer.GetPreviewLinks("thumbs");
-				if (thumbsLinks != null && thumbsLinks.Length > 0)
-					previewContainer.thumbsLinks = thumbsLinks;
+					var thumbsLinks = libraryPreviewContainer.GetPreviewLinks("thumbs");
+					if (thumbsLinks != null && thumbsLinks.Length > 0)
+						previewContainer.thumbsLinks = thumbsLinks;
 
-				var thumbsPhoneLinks = libraryPreviewContainer.GetPreviewLinks("thumbs_phone");
-				if (thumbsPhoneLinks != null && thumbsPhoneLinks.Length > 0)
-					previewContainer.thumbsPhoneLinks = thumbsPhoneLinks;
-
+					var thumbsPhoneLinks = libraryPreviewContainer.GetPreviewLinks("thumbs_phone");
+					if (thumbsPhoneLinks != null && thumbsPhoneLinks.Length > 0)
+						previewContainer.thumbsPhoneLinks = thumbsPhoneLinks;
+				}
 				var wmvLinks = libraryPreviewContainer.GetPreviewLinks("wmv");
 				if (wmvLinks != null && wmvLinks.Length > 0)
 					previewContainer.wmvLinks = wmvLinks;
@@ -310,7 +312,6 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 				var ogvLinks = libraryPreviewContainer.GetPreviewLinks("ogv");
 				if (ogvLinks != null && ogvLinks.Length > 0)
 					previewContainer.ogvLinks = ogvLinks;
-
 				previewContainers.Add(previewContainer);
 			}
 			library.previewContainers = previewContainers.ToArray();
@@ -355,13 +356,28 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			destinationLink.dateAdd = libraryFile.AddDate.ToString("MM/dd/yyyy hh:mm:ss tt");
 			destinationLink.dateModify = topLevelFile.LastChanged.ToString("MM/dd/yyyy hh:mm:ss tt");
 
-			if (libraryFile.Type == FileTypes.BuggyPresentation || libraryFile.Type == FileTypes.FriendlyPresentation || libraryFile.Type == FileTypes.Presentation || libraryFile.Type == FileTypes.Other || libraryFile.Type == FileTypes.MediaPlayerVideo || libraryFile.Type == FileTypes.QuickTimeVideo)
+			if (libraryFile.Type == FileTypes.BuggyPresentation ||
+				libraryFile.Type == FileTypes.FriendlyPresentation ||
+				libraryFile.Type == FileTypes.Presentation ||
+				libraryFile.Type == FileTypes.Other ||
+				libraryFile.Type == FileTypes.MediaPlayerVideo ||
+				libraryFile.Type == FileTypes.QuickTimeVideo)
 			{
 				var previewContainer = library.GetPreviewContainer(libraryFile.OriginalPath);
 				if (previewContainer != null)
 				{
-					destinationLink.previewId = previewContainer.Identifier;
+					destinationLink.previewId = libraryFile.GeneratePreviewImages || 
+						libraryFile.Type == FileTypes.MediaPlayerVideo || 
+						libraryFile.Type == FileTypes.QuickTimeVideo ? 
+						previewContainer.Identifier : 
+						null;
 					destinationLink.isPreviewNotReady = !previewContainer.Ready;
+					if (libraryFile.GenerateContentText)
+					{
+						var txtLinks = previewContainer.GetPreviewLinks("txt");
+						if (txtLinks != null && txtLinks.Length > 0)
+							destinationLink.contentPath = txtLinks[0];
+					}
 				}
 			}
 

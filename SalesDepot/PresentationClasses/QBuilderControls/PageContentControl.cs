@@ -9,9 +9,9 @@ using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using DevExpress.XtraGrid.Views.Layout;
 using SalesDepot.BusinessClasses;
+using SalesDepot.CommonGUI.Forms;
 using SalesDepot.CoreObjects.BusinessClasses;
 using SalesDepot.Services.QBuilderService;
-using SalesDepot.ToolForms;
 using SalesDepot.ToolForms.QBuilderForms;
 
 namespace SalesDepot.PresentationClasses.QBuilderControls

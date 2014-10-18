@@ -17,6 +17,7 @@ namespace FileManager.PresentationClasses.Tags
 		private readonly Dictionary<Guid, CustomKeywords> _keywordsCopy = new Dictionary<Guid, CustomKeywords>();
 		private readonly Dictionary<Guid, bool> _securityRestrictedCopy = new Dictionary<Guid, bool>();
 		private readonly Dictionary<Guid, bool> _securityNoShareCopy = new Dictionary<Guid, bool>();
+		private readonly Dictionary<Guid, bool> _securityForbiddenCopy = new Dictionary<Guid, bool>();
 		private readonly Dictionary<Guid, string> _securityAssignedUsersCopy = new Dictionary<Guid, string>();
 		private readonly Dictionary<Guid, string> _securityDeniedUsersCopy = new Dictionary<Guid, string>();
 
@@ -61,6 +62,7 @@ namespace FileManager.PresentationClasses.Tags
 			_keywordsCopy.Clear();
 			_securityRestrictedCopy.Clear();
 			_securityNoShareCopy.Clear();
+			_securityForbiddenCopy.Clear();
 			_securityAssignedUsersCopy.Clear();
 			_securityDeniedUsersCopy.Clear();
 			foreach (var link in MainController.Instance.ActiveDecorator.Library.Pages.SelectMany(p => p.Folders.SelectMany(folder => folder.Files)))
@@ -77,6 +79,7 @@ namespace FileManager.PresentationClasses.Tags
 
 				_securityRestrictedCopy.Add(link.Identifier, link.IsRestricted);
 				_securityNoShareCopy.Add(link.Identifier, link.NoShare);
+				_securityForbiddenCopy.Add(link.Identifier, link.IsForbidden);
 				_securityAssignedUsersCopy.Add(link.Identifier, link.AssignedUsers);
 				_securityDeniedUsersCopy.Add(link.Identifier, link.DeniedUsers);
 			}
@@ -108,6 +111,7 @@ namespace FileManager.PresentationClasses.Tags
 				{
 					link.IsRestricted = _securityRestrictedCopy[link.Identifier];
 					link.NoShare = _securityNoShareCopy[link.Identifier];
+					link.IsForbidden = _securityForbiddenCopy[link.Identifier];
 					link.AssignedUsers = _securityAssignedUsersCopy[link.Identifier];
 					link.DeniedUsers = _securityDeniedUsersCopy[link.Identifier];
 				}
@@ -168,8 +172,12 @@ namespace FileManager.PresentationClasses.Tags
 				_securityRestrictedCopy[restrictedPair.Key] = false;
 			foreach (var noSharePair in _securityNoShareCopy.Where(it => allPages || activePage.Page.Folders.SelectMany(f => f.Files.Select(l => l.Identifier)).Contains(it.Key)))
 				_securityNoShareCopy[noSharePair.Key] = false;
+			foreach (var forbiddenPair in _securityForbiddenCopy.Where(it => allPages || activePage.Page.Folders.SelectMany(f => f.Files.Select(l => l.Identifier)).Contains(it.Key)))
+				_securityForbiddenCopy[forbiddenPair.Key] = false;
 			foreach (var assignedUsersPair in _securityAssignedUsersCopy.Where(it => allPages || activePage.Page.Folders.SelectMany(f => f.Files.Select(l => l.Identifier)).Contains(it.Key)))
 				_securityAssignedUsersCopy[assignedUsersPair.Key] = null;
+			foreach (var deniedUsersPair in _securityDeniedUsersCopy.Where(it => allPages || activePage.Page.Folders.SelectMany(f => f.Files.Select(l => l.Identifier)).Contains(it.Key)))
+				_securityDeniedUsersCopy[deniedUsersPair.Key] = null;
 			_securityChanged = true;
 			NeedToApply = true;
 		}

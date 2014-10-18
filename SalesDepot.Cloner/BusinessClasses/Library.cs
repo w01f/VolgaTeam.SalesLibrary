@@ -183,6 +183,8 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			foreach (var previewContainer in PreviewContainers)
 			{
 				var alive = false;
+				var generatePreviewImages = false;
+				var generateContentText = false;
 				foreach (var page in Pages)
 				{
 					foreach (var folder in page.Folders)
@@ -195,16 +197,29 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 									((!String.IsNullOrEmpty(file.AssignedUsers) ||
 									!String.IsNullOrEmpty(file.DeniedUsers))))) continue;
 							if (file is LibraryFolderLink)
+							{
 								alive = ((LibraryFolderLink)file).IsPreviewContainerAlive(previewContainer);
+								generatePreviewImages |= alive;
+								generateContentText |= alive;
+							}
 							else
+							{
 								alive = file.OriginalPath.ToLower().Equals(previewContainer.OriginalPath.ToLower());
+								generatePreviewImages |= alive && file.GeneratePreviewImages;
+								generateContentText |= alive && file.GenerateContentText;
+							}
 							if (alive) break;
 						}
 						if (alive) break;
 					}
 					if (alive) break;
 				}
-				if (alive) continue;
+				if (alive)
+				{
+					previewContainer.GenerateImages = generatePreviewImages;
+					previewContainer.GenerateText = generateContentText;
+					continue;
+				}
 				previewContainer.ClearContent();
 				previewContainer.OriginalPath = string.Empty;
 			}

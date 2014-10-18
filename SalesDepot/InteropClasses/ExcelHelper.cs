@@ -7,6 +7,7 @@ using Microsoft.Office.Interop.Excel;
 using ProgramManager.CoreObjects;
 using SalesDepot.ConfigurationClasses;
 using SalesDepot.CoreObjects.InteropClasses;
+using SalesDepot.CoreObjects.ToolClasses;
 
 namespace SalesDepot.InteropClasses
 {
@@ -79,7 +80,7 @@ namespace SalesDepot.InteropClasses
 			Process[] processList = Process.GetProcesses();
 			foreach (Process process in processList.Where(x => x.ProcessName.ToLower().Contains("excel")))
 				if (process.MainWindowHandle.ToInt32() != 0)
-					AppManager.Instance.ActivateForm(process.MainWindowHandle, true, false);
+					Utils.ActivateForm(process.MainWindowHandle, true, false);
 			workBook.Application.Dialogs[XlBuiltInDialog.xlDialogPrint].Show();
 		}
 

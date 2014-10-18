@@ -442,12 +442,6 @@
     <Compile Include="ToolForms\WallBin\FormSelectWidget.Designer.cs">
       <DependentUpon>FormSelectWidget.cs</DependentUpon>
     </Compile>
-    <Compile Include="ToolForms\FormProgress.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ToolForms\FormProgress.designer.cs">
-      <DependentUpon>FormProgress.cs</DependentUpon>
-    </Compile>
     <Compile Include="BusinessClasses\LibraryManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -495,7 +489,6 @@
     <EmbeddedResource Include="PresentationClasses\WallBin\SuperFilterControl.resx">
       <DependentUpon>SuperFilterControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="ToolForms\FormProgressSync.resx">
       <DependentUpon>FormProgressSync.cs</DependentUpon>
     </EmbeddedResource>
@@ -595,9 +588,6 @@
     <EmbeddedResource Include="ToolForms\WallBin\FormSelectWidget.resx">
       <DependentUpon>FormSelectWidget.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ToolForms\FormProgress.resx">
-      <DependentUpon>FormProgress.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ToolForms\WallBin\FormAddNetworkLink.resx">
       <DependentUpon>FormAddNetworkLink.cs</DependentUpon>
     </EmbeddedResource>
@@ -647,6 +637,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\RetractableLogoTags.png" />
+    <None Include="Resources\RetractableLogoSecurity.png" />
+    <None Include="Resources\RetractableLogoFiles.png" />
+    <None Include="Resources\DeleteLink.png" />
+    <None Include="Resources\OpenLink.png" />
     <None Include="Resources\TagsSecurityWidget.png" />
     <None Include="Resources\TagsSecurityWhiteListWidget.png" />
     <None Include="Resources\TagsSecurityVisibleWidget.png" />
@@ -667,7 +662,6 @@
     <None Include="Resources\MinibarLinkDown.png" />
     <None Include="Resources\MinibarLinkUp.png" />
     <None Include="Resources\Sync.png" />
-    <None Include="Resources\TreeView.png" />
     <None Include="Resources\MinibarFontSmaller.png" />
     <None Include="Resources\MinibarFontLarger.png" />
     <None Include="Resources\TabsView.png" />
@@ -689,11 +683,8 @@
     <None Include="Resources\EditUser.png" />
     <None Include="Resources\ConvertVideo.png" />
     <None Include="Resources\SyncIPad.png" />
-    <None Include="Resources\QuickTimeSmall.png" />
-    <None Include="Resources\FirefoxSmall.png" />
     <None Include="Resources\OpenVideoSmall.png" />
     <None Include="Resources\ConvertVideoSmall.png" />
-    <None Include="Resources\MediaPlayerSmall.png" />
     <None Include="Resources\InternetExplorer.png" />
     <None Include="Resources\Chrome.png" />
     <None Include="Resources\Firefox.png" />
@@ -708,13 +699,8 @@
     <None Include="Resources\AutoWidgetsSmall.png" />
     <None Include="Resources\AutoWidgets.png" />
     <None Include="Resources\EmptyImage.png" />
-    <None Include="Resources\LinkProperties.png" />
     <None Include="Resources\AddUrl.png" />
     <None Include="Resources\AddNetworkShare.png" />
-    <None Include="Resources\Delete.png" />
-    <None Include="Resources\LineBreak.png" />
-    <None Include="Resources\NetworkShare.png" />
-    <None Include="Resources\Url.png" />
     <None Include="Resources\ExpiredLinks.png" />
     <None Include="Resources\EmailList.png" />
     <None Include="Resources\DeadLinks.png" />
@@ -730,7 +716,6 @@
     <None Include="Resources\DownArrow.png" />
     <None Include="Resources\settings.png" />
     <None Include="Resources\Save.png" />
-    <None Include="Resources\OpenFile.png" />
     <None Include="Resources\InActiveLinksWarning.png" />
     <None Include="Resources\UpArrow.png" />
   </ItemGroup>
@@ -742,6 +727,10 @@
     <ProjectReference Include="..\OldFormatLoader\OldFormatLoader.csproj">
       <Project>{07E5E9EC-8E52-4E68-9507-8B4E70EABA0A}</Project>
       <Name>OldFormatLoader</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SalesDepot.CommonGUI\SalesDepot.CommonGUI.csproj">
+      <Project>{7CE62462-8616-4FC9-81C3-08715DE17058}</Project>
+      <Name>SalesDepot.CommonGUI</Name>
     </ProjectReference>
     <ProjectReference Include="..\SalesDepot.CoreObjects\SalesDepot.CoreObjects.csproj">
       <Project>{141D1B4B-2FE9-425D-9196-4439FC0CD57D}</Project>

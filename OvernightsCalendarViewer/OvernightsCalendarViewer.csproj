@@ -105,13 +105,6 @@
     <Compile Include="BusinessClasses\Library.cs" />
     <Compile Include="BusinessClasses\LibraryFile.cs" />
     <Compile Include="BusinessClasses\LibraryPackage.cs" />
-    <Compile Include="Floater\FloaterManager.cs" />
-    <Compile Include="Floater\FormFloater.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Floater\FormFloater.designer.cs">
-      <DependentUpon>FormFloater.cs</DependentUpon>
-    </Compile>
     <Compile Include="PresentationClasses\OvernightsCalendar\CalendarPartControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -166,18 +159,9 @@
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="ToolForms\FormProgress.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ToolForms\FormProgress.Designer.cs">
-      <DependentUpon>FormProgress.cs</DependentUpon>
-    </Compile>
     <Compile Include="InteropClasses\WinAPIHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Floater\FormFloater.resx">
-      <DependentUpon>FormFloater.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="PresentationClasses\OvernightsCalendar\CalendarPartControl.resx">
       <DependentUpon>CalendarPartControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -201,9 +185,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ToolForms\FormProgress.resx">
-      <DependentUpon>FormProgress.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -235,32 +216,6 @@
     <None Include="Resources\Format Font Larger.png" />
   </ItemGroup>
   <ItemGroup>
-    <COMReference Include="AcroPDFLib">
-      <Guid>{05BFD3F1-6319-4F30-B752-C7A22889BCC4}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
-    <COMReference Include="AxAcroPDFLib">
-      <Guid>{05BFD3F1-6319-4F30-B752-C7A22889BCC4}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>aximp</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>False</EmbedInteropTypes>
-    </COMReference>
-    <COMReference Include="AxWMPLib">
-      <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>aximp</WrapperTool>
-      <Isolated>False</Isolated>
-    </COMReference>
     <COMReference Include="stdole">
       <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
       <VersionMajor>2</VersionMajor>
@@ -281,15 +236,6 @@
       <Private>True</Private>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
-    <COMReference Include="WMPLib">
-      <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Exit.png" />
@@ -301,6 +247,10 @@
     <Content Include="icon.ico" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SalesDepot.CommonGUI\SalesDepot.CommonGUI.csproj">
+      <Project>{7CE62462-8616-4FC9-81C3-08715DE17058}</Project>
+      <Name>SalesDepot.CommonGUI</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SalesDepot.CoreObjects\SalesDepot.CoreObjects.csproj">
       <Project>{141D1B4B-2FE9-425D-9196-4439FC0CD57D}</Project>
       <Name>SalesDepot.CoreObjects</Name>

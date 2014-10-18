@@ -11,11 +11,11 @@ using DevExpress.XtraTab;
 using DevExpress.XtraTreeList;
 using DevExpress.XtraTreeList.Nodes;
 using SalesDepot.BusinessClasses;
+using SalesDepot.CommonGUI.Forms;
 using SalesDepot.ConfigurationClasses;
 using SalesDepot.CoreObjects.BusinessClasses;
 using SalesDepot.CoreObjects.InteropClasses;
 using SalesDepot.PresentationClasses.Viewers;
-using SalesDepot.ToolForms;
 
 namespace SalesDepot.PresentationClasses.WallBin
 {

@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using DevComponents.DotNetBar;
 using OutlookSalesDepotAddIn.BusinessClasses;
 using OutlookSalesDepotAddIn.Controls.TabPages;
+using SalesDepot.CommonGUI.Forms;
 
 namespace OutlookSalesDepotAddIn.Forms
 {

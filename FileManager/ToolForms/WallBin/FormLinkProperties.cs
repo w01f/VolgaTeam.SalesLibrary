@@ -26,6 +26,16 @@ using Library = SalesDepot.CoreObjects.BusinessClasses.Library;
 
 namespace FileManager.ToolForms.WallBin
 {
+	public enum LinkPropertiesType
+	{
+		Notes,
+		Tags,
+		ExpirationDate,
+		Security,
+		Widget,
+		Banner
+	}
+
 	public partial class FormLinkProperties : MetroForm
 	{
 		private bool _closeEventAssigned;
@@ -257,11 +267,6 @@ namespace FileManager.ToolForms.WallBin
 
 		private void FormProperties_Load(object sender, EventArgs e)
 		{
-			xtraTabPageExpiredLinks.PageVisible = !IsLineBreak;
-			xtraTabPageNotes.PageVisible = !IsLineBreak;
-			xtraTabPageSearchTags.PageVisible = !IsLineBreak;
-			xtraTabPageLineBrealProperties.PageVisible = IsLineBreak;
-
 			#region Search tags
 			#region Categories
 			xtraScrollableControlSearchTagsCategories.Controls.Clear();
@@ -292,7 +297,10 @@ namespace FileManager.ToolForms.WallBin
 			}
 			var firstGroup = ListManager.Instance.SearchTags.SearchGroups.FirstOrDefault();
 			if (firstGroup != null)
+			{
+				firstGroup.ToggleButton.Checked = false;
 				CategoriesGroup_Click(firstGroup.ToggleButton, new EventArgs());
+			}
 			UpdateCategoriesHeader();
 			#endregion
 

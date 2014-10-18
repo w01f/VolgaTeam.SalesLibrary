@@ -5,9 +5,9 @@ using System.Linq;
 using System.Windows.Forms;
 using DevExpress.XtraGrid.Views.BandedGrid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
+using SalesDepot.CommonGUI.Forms;
 using SalesDepot.CoreObjects.BusinessClasses;
 using SalesDepot.Services.QBuilderService;
-using SalesDepot.ToolForms;
 
 namespace SalesDepot.PresentationClasses.QBuilderControls
 {

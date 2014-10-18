@@ -8,9 +8,9 @@ using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using DevExpress.XtraPrinting;
+using SalesDepot.CommonGUI.Forms;
 using SalesDepot.Services.InactiveUsersService;
 using SalesDepot.SiteManager.ConfigurationClasses;
-using SalesDepot.SiteManager.ToolForms;
 using Font = System.Drawing.Font;
 
 namespace SalesDepot.SiteManager.PresentationClasses.InactiveUsers

@@ -22,7 +22,12 @@ namespace SalesDepot.Services.StatisticService
 		{
 			get
 			{
-				if ((subType.Equals("Open") || subType.Equals("Play Video")) && details != null)
+				if ((subType.Equals("Open") ||
+					subType.Equals("Open") ||
+					subType.Equals("Preview Options") ||
+					subType.Equals("Preview Page") ||
+					subType.Equals("Play Video")) 
+					&& details != null)
 					return details.Where(d => d.tag.ToLower().Equals("file")).Select(d =>
 																						 {
 																							 if (d.value.Contains("?version="))

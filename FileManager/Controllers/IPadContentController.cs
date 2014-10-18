@@ -73,7 +73,7 @@ namespace FileManager.Controllers
 			var settingsConfigured = SettingsManager.Instance.WebServiceConnected && !string.IsNullOrEmpty(activeDecorator.Library.IPadManager.SyncDestinationPath);
 			FormMain.Instance.buttonItemIPadVideoConvert.Enabled = settingsConfigured;
 			FormMain.Instance.buttonItemIPadSyncFiles.Enabled = settingsConfigured;
-			FormMain.Instance.ribbonTabItemIPadUsers.Enabled = settingsConfigured & SettingsManager.Instance.EnableIPadUsersTab;
+			FormMain.Instance.ribbonTabItemIPadUsers.Visible = settingsConfigured & SettingsManager.Instance.EnableIPadUsersTab;
 			activeDecorator.IPadContentManager.UpdateControlsState();
 		}
 

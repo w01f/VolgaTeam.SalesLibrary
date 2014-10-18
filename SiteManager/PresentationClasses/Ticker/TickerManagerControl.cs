@@ -7,6 +7,7 @@ using System.Threading;
 using System.Windows.Forms;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid;
+using SalesDepot.CommonGUI.Forms;
 using SalesDepot.CoreObjects.InteropClasses;
 using SalesDepot.Services.TickerService;
 using SalesDepot.SiteManager.BusinessClasses;

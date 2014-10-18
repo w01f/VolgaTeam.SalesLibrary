@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
@@ -38,8 +39,7 @@ namespace OutlookSalesDepotAddIn.Controls.Viewers
 
 			string tempName = Path.Combine(SettingsManager.Instance.TempPath, Path.GetFileName(File.LocalPath));
 			System.IO.File.Copy(File.LocalPath, tempName, true);
-			axAcroPDF.LoadFile(tempName);
-			axAcroPDF.setView("Fit");
+			pdfViewerControl.LoadDocument(tempName);
 		}
 
 		#region IFileViewer Methods
@@ -50,8 +50,22 @@ namespace OutlookSalesDepotAddIn.Controls.Viewers
 
 		public void ReleaseResources()
 		{
-			axAcroPDF.Dispose();
+			pdfViewerControl.CloseDocument();
 		}
 		#endregion
+
+		private void pdfViewerControl_MouseMove(object sender, MouseEventArgs e)
+		{
+			pdfViewerControl.Focus();
+		}
+
+		private void pdfViewerControl_DoubleClick(object sender, System.EventArgs e)
+		{
+			try
+			{
+				Process.Start(pdfViewerControl.DocumentFilePath);
+			}
+			catch { }
+		}
 	}
 }

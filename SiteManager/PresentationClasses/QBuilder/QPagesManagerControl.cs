@@ -4,8 +4,8 @@ using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using DevExpress.XtraGrid;
+using SalesDepot.CommonGUI.Forms;
 using SalesDepot.Services.QBuilderService;
-using SalesDepot.SiteManager.ToolForms;
 
 namespace SalesDepot.SiteManager.PresentationClasses.QBuilder
 {

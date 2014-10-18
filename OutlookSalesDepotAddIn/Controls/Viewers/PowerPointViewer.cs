@@ -7,7 +7,7 @@ using System.Threading;
 using System.Windows.Forms;
 using DevExpress.XtraEditors.Controls;
 using OutlookSalesDepotAddIn.BusinessClasses;
-using OutlookSalesDepotAddIn.Forms;
+using SalesDepot.CommonGUI.Forms;
 
 namespace OutlookSalesDepotAddIn.Controls.Viewers
 {

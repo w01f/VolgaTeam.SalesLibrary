@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
+using SalesDepot.CommonGUI.Forms;
 using SalesDepot.Services;
 using SalesDepot.SiteManager.BusinessClasses;
 using SalesDepot.SiteManager.ConfigurationClasses;
-using SalesDepot.SiteManager.ToolForms;
 
 namespace SalesDepot.SiteManager.Controllers
 {

@@ -181,6 +181,7 @@ namespace FileManager.PresentationClasses.Tags
 				link.IsForbidden = false;
 				link.IsRestricted = false;
 				link.AssignedUsers = null;
+				link.DeniedUsers = null;
 			}
 			activePage.Parent.StateChanged = true;
 			activePage.RefreshSelectedLinks();

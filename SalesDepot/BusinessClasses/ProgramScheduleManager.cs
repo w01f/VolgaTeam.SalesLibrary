@@ -6,10 +6,10 @@ using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using ProgramManager.CoreObjects;
+using SalesDepot.CommonGUI.Forms;
 using SalesDepot.ConfigurationClasses;
 using SalesDepot.CoreObjects.BusinessClasses;
 using SalesDepot.InteropClasses;
-using SalesDepot.ToolForms;
 using Day = ProgramManager.CoreObjects.Day;
 
 namespace SalesDepot.BusinessClasses

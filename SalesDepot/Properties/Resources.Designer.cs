@@ -263,16 +263,6 @@ namespace SalesDepot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap FloaterHide {
-            get {
-                object obj = ResourceManager.GetObject("FloaterHide", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap FolderContentDocx {
             get {
                 object obj = ResourceManager.GetObject("FolderContentDocx", resourceCulture);

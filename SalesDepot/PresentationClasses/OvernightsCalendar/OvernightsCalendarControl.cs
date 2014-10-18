@@ -5,9 +5,9 @@ using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using DevComponents.DotNetBar;
+using SalesDepot.CommonGUI.Forms;
 using SalesDepot.ConfigurationClasses;
 using SalesDepot.PresentationClasses.WallBin.Decorators;
-using SalesDepot.ToolForms;
 
 namespace SalesDepot.PresentationClasses.OvernightsCalendar
 {

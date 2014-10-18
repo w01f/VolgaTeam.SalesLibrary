@@ -40,9 +40,6 @@
 			DevExpress.Utils.SuperToolTip superToolTip5 = new DevExpress.Utils.SuperToolTip();
 			DevExpress.Utils.ToolTipItem toolTipItem5 = new DevExpress.Utils.ToolTipItem();
 			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
-			this.dockManager = new DevExpress.XtraBars.Docking.DockManager(this.components);
-			this.dockPanelTreeView = new DevExpress.XtraBars.Docking.DockPanel();
-			this.dockPanelTreeView_Container = new DevExpress.XtraBars.Docking.ControlContainer();
 			this.barManager = new DevExpress.XtraBars.BarManager(this.components);
 			this.barMinibar = new DevExpress.XtraBars.Bar();
 			this.barButtonItemSeparator1 = new DevExpress.XtraBars.BarButtonItem();
@@ -52,7 +49,6 @@
 			this.barButtonItemLinkUp = new DevExpress.XtraBars.BarButtonItem();
 			this.barButtonItemLinkDown = new DevExpress.XtraBars.BarButtonItem();
 			this.barButtonItemSeparator2 = new DevExpress.XtraBars.BarButtonItem();
-			this.barAndDockingController = new DevExpress.XtraBars.BarAndDockingController(this.components);
 			this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
 			this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
 			this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
@@ -61,68 +57,17 @@
 			this.pnEmpty = new System.Windows.Forms.Panel();
 			this.pnMain = new System.Windows.Forms.Panel();
 			this.btSetupWallBin = new System.Windows.Forms.Button();
-			this.splitContainerControl = new DevExpress.XtraEditors.SplitContainerControl();
 			this.pnHeader = new FileManager.PresentationClasses.WallBin.WallbinHeaderPanel();
 			this.labelControlSelectedLink = new DevExpress.XtraEditors.LabelControl();
 			this.SuperFilterControl = new FileManager.PresentationClasses.WallBin.SuperFilterControl();
 			this.labelControlTagCountInfo = new DevExpress.XtraEditors.LabelControl();
+			this.retractableBar = new SalesDepot.CommonGUI.RetractableBar.RetractableBarLeft();
+			this.pnContainer = new System.Windows.Forms.Panel();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.dockManager)).BeginInit();
-			this.dockPanelTreeView.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.barManager)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.barAndDockingController)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.splitContainerControl)).BeginInit();
-			this.splitContainerControl.SuspendLayout();
 			this.pnHeader.SuspendLayout();
+			this.pnContainer.SuspendLayout();
 			this.SuspendLayout();
-			// 
-			// dockManager
-			// 
-			this.dockManager.DockingOptions.FloatOnDblClick = false;
-			this.dockManager.DockingOptions.ShowMaximizeButton = false;
-			this.dockManager.Form = this;
-			this.dockManager.HiddenPanels.AddRange(new DevExpress.XtraBars.Docking.DockPanel[] {
-            this.dockPanelTreeView});
-			this.dockManager.MenuManager = this.barManager;
-			this.dockManager.TopZIndexControls.AddRange(new string[] {
-            "DevExpress.XtraBars.BarDockControl",
-            "DevExpress.XtraBars.StandaloneBarDockControl",
-            "System.Windows.Forms.StatusBar",
-            "DevExpress.XtraBars.Ribbon.RibbonStatusBar",
-            "DevExpress.XtraBars.Ribbon.RibbonControl",
-            "DevComponents.DotNetBar.RibbonControl",
-            "FileManager.PresentationClasses.WallBin.WallbinHeaderPanel"});
-			this.dockManager.ClosedPanel += new DevExpress.XtraBars.Docking.DockPanelEventHandler(this.dockPanelTreeView_ClosedPanel);
-			this.dockManager.Sizing += new DevExpress.XtraBars.Docking.SizingEventHandler(this.dockManager_Sizing);
-			// 
-			// dockPanelTreeView
-			// 
-			this.dockPanelTreeView.Controls.Add(this.dockPanelTreeView_Container);
-			this.dockPanelTreeView.Dock = DevExpress.XtraBars.Docking.DockingStyle.Left;
-			this.dockPanelTreeView.FloatSize = new System.Drawing.Size(350, 450);
-			this.dockPanelTreeView.ID = new System.Guid("0ddf2383-2c01-4ebf-a2d6-02369d6da8ce");
-			this.dockPanelTreeView.Location = new System.Drawing.Point(0, 0);
-			this.dockPanelTreeView.Name = "dockPanelTreeView";
-			this.dockPanelTreeView.Options.AllowDockBottom = false;
-			this.dockPanelTreeView.Options.AllowDockFill = false;
-			this.dockPanelTreeView.Options.AllowDockRight = false;
-			this.dockPanelTreeView.Options.AllowDockTop = false;
-			this.dockPanelTreeView.Options.ShowAutoHideButton = false;
-			this.dockPanelTreeView.Options.ShowMaximizeButton = false;
-			this.dockPanelTreeView.OriginalSize = new System.Drawing.Size(309, 200);
-			this.dockPanelTreeView.SavedDock = DevExpress.XtraBars.Docking.DockingStyle.Left;
-			this.dockPanelTreeView.SavedIndex = 0;
-			this.dockPanelTreeView.Size = new System.Drawing.Size(309, 317);
-			this.dockPanelTreeView.Text = "Drag & Drop!";
-			this.dockPanelTreeView.Visibility = DevExpress.XtraBars.Docking.DockVisibility.Hidden;
-			this.dockPanelTreeView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dockPanelTreeView_MouseDoubleClick);
-			// 
-			// dockPanelTreeView_Container
-			// 
-			this.dockPanelTreeView_Container.Location = new System.Drawing.Point(2, 24);
-			this.dockPanelTreeView_Container.Name = "dockPanelTreeView_Container";
-			this.dockPanelTreeView_Container.Size = new System.Drawing.Size(305, 291);
-			this.dockPanelTreeView_Container.TabIndex = 0;
 			// 
 			// barManager
 			// 
@@ -131,12 +76,10 @@
 			this.barManager.AllowShowToolbarsPopup = false;
 			this.barManager.Bars.AddRange(new DevExpress.XtraBars.Bar[] {
             this.barMinibar});
-			this.barManager.Controller = this.barAndDockingController;
 			this.barManager.DockControls.Add(this.barDockControlTop);
 			this.barManager.DockControls.Add(this.barDockControlBottom);
 			this.barManager.DockControls.Add(this.barDockControlLeft);
 			this.barManager.DockControls.Add(this.barDockControlRight);
-			this.barManager.DockManager = this.dockManager;
 			this.barManager.Form = this;
 			this.barManager.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
             this.barCheckItemTabs,
@@ -234,12 +177,6 @@
 			this.barButtonItemSeparator2.Id = 4;
 			this.barButtonItemSeparator2.Name = "barButtonItemSeparator2";
 			// 
-			// barAndDockingController
-			// 
-			this.barAndDockingController.PropertiesBar.AllowLinkLighting = false;
-			this.barAndDockingController.PropertiesBar.DefaultGlyphSize = new System.Drawing.Size(16, 16);
-			this.barAndDockingController.PropertiesBar.DefaultLargeGlyphSize = new System.Drawing.Size(32, 32);
-			// 
 			// barDockControlTop
 			// 
 			this.barDockControlTop.CausesValidation = false;
@@ -251,7 +188,7 @@
 			// 
 			this.barDockControlBottom.CausesValidation = false;
 			this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.barDockControlBottom.Location = new System.Drawing.Point(0, 286);
+			this.barDockControlBottom.Location = new System.Drawing.Point(0, 544);
 			this.barDockControlBottom.Size = new System.Drawing.Size(900, 31);
 			// 
 			// barDockControlLeft
@@ -259,14 +196,14 @@
 			this.barDockControlLeft.CausesValidation = false;
 			this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
 			this.barDockControlLeft.Location = new System.Drawing.Point(0, 0);
-			this.barDockControlLeft.Size = new System.Drawing.Size(0, 286);
+			this.barDockControlLeft.Size = new System.Drawing.Size(0, 544);
 			// 
 			// barDockControlRight
 			// 
 			this.barDockControlRight.CausesValidation = false;
 			this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
 			this.barDockControlRight.Location = new System.Drawing.Point(900, 0);
-			this.barDockControlRight.Size = new System.Drawing.Size(0, 286);
+			this.barDockControlRight.Size = new System.Drawing.Size(0, 544);
 			// 
 			// toolTipController
 			// 
@@ -277,7 +214,7 @@
 			// pnEmpty
 			// 
 			this.pnEmpty.BackColor = System.Drawing.Color.Transparent;
-			this.pnEmpty.Location = new System.Drawing.Point(16, 18);
+			this.pnEmpty.Location = new System.Drawing.Point(313, 212);
 			this.pnEmpty.Name = "pnEmpty";
 			this.pnEmpty.Size = new System.Drawing.Size(63, 56);
 			this.pnEmpty.TabIndex = 29;
@@ -285,7 +222,7 @@
 			// pnMain
 			// 
 			this.pnMain.BackColor = System.Drawing.Color.Transparent;
-			this.pnMain.Location = new System.Drawing.Point(104, 18);
+			this.pnMain.Location = new System.Drawing.Point(401, 212);
 			this.pnMain.Name = "pnMain";
 			this.pnMain.Size = new System.Drawing.Size(65, 56);
 			this.pnMain.TabIndex = 28;
@@ -308,23 +245,6 @@
 			this.btSetupWallBin.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			this.btSetupWallBin.UseVisualStyleBackColor = false;
 			this.btSetupWallBin.Visible = false;
-			// 
-			// splitContainerControl
-			// 
-			this.splitContainerControl.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.splitContainerControl.Location = new System.Drawing.Point(0, 47);
-			this.splitContainerControl.Name = "splitContainerControl";
-			this.splitContainerControl.Panel1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Default;
-			this.splitContainerControl.Panel1.MinSize = 350;
-			this.splitContainerControl.Panel1.Text = "Panel1";
-			this.splitContainerControl.Panel2.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Default;
-			this.splitContainerControl.Panel2.Controls.Add(this.pnMain);
-			this.splitContainerControl.Panel2.Controls.Add(this.pnEmpty);
-			this.splitContainerControl.Panel2.Text = "Panel2";
-			this.splitContainerControl.Size = new System.Drawing.Size(900, 239);
-			this.splitContainerControl.SplitterPosition = 350;
-			this.splitContainerControl.TabIndex = 32;
-			this.splitContainerControl.Text = "splitContainerControl1";
 			// 
 			// pnHeader
 			// 
@@ -376,11 +296,43 @@
 			this.labelControlTagCountInfo.TabIndex = 1;
 			this.labelControlTagCountInfo.Text = "You need to start TAGGING your Links!";
 			// 
+			// retractableBar
+			// 
+			this.retractableBar.AnimationDelay = 0;
+			this.retractableBar.BackColor = System.Drawing.Color.Transparent;
+			// 
+			// retractableBar.Content
+			// 
+			this.retractableBar.Content.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.retractableBar.Content.Location = new System.Drawing.Point(2, 42);
+			this.retractableBar.Content.Name = "Content";
+			this.retractableBar.Content.Size = new System.Drawing.Size(272, 453);
+			this.retractableBar.Content.TabIndex = 1;
+			this.retractableBar.ContentSize = 350;
+			this.retractableBar.Dock = System.Windows.Forms.DockStyle.Left;
+			this.retractableBar.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.retractableBar.Location = new System.Drawing.Point(0, 47);
+			this.retractableBar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+			this.retractableBar.Name = "retractableBar";
+			this.retractableBar.Size = new System.Drawing.Size(276, 497);
+			this.retractableBar.TabIndex = 42;
+			// 
+			// pnContainer
+			// 
+			this.pnContainer.Controls.Add(this.pnEmpty);
+			this.pnContainer.Controls.Add(this.pnMain);
+			this.pnContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.pnContainer.Location = new System.Drawing.Point(276, 47);
+			this.pnContainer.Name = "pnContainer";
+			this.pnContainer.Size = new System.Drawing.Size(624, 497);
+			this.pnContainer.TabIndex = 43;
+			// 
 			// TabHomeControl
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
 			this.BackColor = System.Drawing.Color.White;
-			this.Controls.Add(this.splitContainerControl);
+			this.Controls.Add(this.pnContainer);
+			this.Controls.Add(this.retractableBar);
 			this.Controls.Add(this.pnHeader);
 			this.Controls.Add(this.btSetupWallBin);
 			this.Controls.Add(this.barDockControlLeft);
@@ -389,16 +341,12 @@
 			this.Controls.Add(this.barDockControlTop);
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.Name = "TabHomeControl";
-			this.Size = new System.Drawing.Size(900, 317);
+			this.Size = new System.Drawing.Size(900, 575);
 			this.Resize += new System.EventHandler(this.TabHomeControl_Resize);
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.dockManager)).EndInit();
-			this.dockPanelTreeView.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.barManager)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.barAndDockingController)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.splitContainerControl)).EndInit();
-			this.splitContainerControl.ResumeLayout(false);
 			this.pnHeader.ResumeLayout(false);
+			this.pnContainer.ResumeLayout(false);
 			this.ResumeLayout(false);
 
         }
@@ -406,13 +354,9 @@
         #endregion
 
 		private DevExpress.XtraEditors.StyleController styleController;
-        private DevExpress.XtraBars.Docking.DockManager dockManager;
         public System.Windows.Forms.Panel pnEmpty;
         public System.Windows.Forms.Panel pnMain;
-        private System.Windows.Forms.Button btSetupWallBin;
-        private DevExpress.XtraBars.Docking.DockPanel dockPanelTreeView;
-		private DevExpress.XtraBars.Docking.ControlContainer dockPanelTreeView_Container;
-		private DevExpress.XtraEditors.SplitContainerControl splitContainerControl;
+		private System.Windows.Forms.Button btSetupWallBin;
 		private DevExpress.XtraBars.BarDockControl barDockControlLeft;
 		private DevExpress.XtraBars.BarDockControl barDockControlRight;
 		private DevExpress.XtraBars.BarDockControl barDockControlBottom;
@@ -422,7 +366,6 @@
 		private DevExpress.XtraBars.BarButtonItem barButtonItemSeparator1;
 		private DevExpress.XtraBars.BarButtonItem barButtonItemSeparator2;
 		private DevExpress.Utils.ToolTipController toolTipController;
-		private DevExpress.XtraBars.BarAndDockingController barAndDockingController;
 		public DevExpress.XtraBars.BarCheckItem barCheckItemTabs;
 		public DevExpress.XtraBars.BarButtonItem barButtonItemFontUp;
 		public DevExpress.XtraBars.BarButtonItem barButtonItemFontDown;
@@ -432,5 +375,7 @@
 		public WallBin.SuperFilterControl SuperFilterControl;
 		public DevExpress.XtraBars.BarButtonItem barButtonItemLinkUp;
 		public DevExpress.XtraBars.BarButtonItem barButtonItemLinkDown;
+		private SalesDepot.CommonGUI.RetractableBar.RetractableBarLeft retractableBar;
+		private System.Windows.Forms.Panel pnContainer;
     }
 }

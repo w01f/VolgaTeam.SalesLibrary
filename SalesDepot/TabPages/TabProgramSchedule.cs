@@ -1,14 +1,12 @@
 ﻿using System;
 using System.ComponentModel;
-using System.IO;
 using System.Threading;
 using System.Windows.Forms;
 using DevComponents.DotNetBar;
 using SalesDepot.BusinessClasses;
+using SalesDepot.CommonGUI.Forms;
 using SalesDepot.ConfigurationClasses;
-using SalesDepot.InteropClasses;
 using SalesDepot.PresentationClasses.WallBin.Decorators;
-using SalesDepot.ToolForms;
 using SalesDepot.ToolForms.ProgramManager;
 
 namespace SalesDepot.TabPages

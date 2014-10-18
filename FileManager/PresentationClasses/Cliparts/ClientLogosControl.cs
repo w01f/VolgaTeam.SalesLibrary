@@ -165,11 +165,13 @@ namespace FileManager.PresentationClasses.Cliparts
 			if (img.Width > pbPicture.Width)
 				img = ImageHelper.GetThumbnail(img, (int)(imageHeight * (imageWidth / img.Width)), (int)imageWidth);
 
-			if (img.Height > xtraScrollableControlPicture.Height)
-				pbPicture.Height = img.Height;
-			else
-				pbPicture.Height = xtraScrollableControlPicture.Height - 10;
-
+			if (img != null)
+			{
+				if (img.Height > xtraScrollableControlPicture.Height)
+					pbPicture.Height = img.Height;
+				else
+					pbPicture.Height = xtraScrollableControlPicture.Height - 10;
+			}
 			pbPicture.Image = img;
 		}
 

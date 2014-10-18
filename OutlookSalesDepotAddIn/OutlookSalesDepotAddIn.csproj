@@ -117,6 +117,12 @@
     <Reference Include="DevExpress.Data.v14.1, Version=14.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
+    <Reference Include="DevExpress.Pdf.v14.1.Core, Version=14.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Pdf.v14.1.Drawing, Version=14.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="DevExpress.Printing.v14.1.Core, Version=14.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
@@ -130,6 +136,9 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="DevExpress.XtraGrid.v14.1, Version=14.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraPdfViewer.v14.1, Version=14.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
     <Reference Include="PresentationCore" />
@@ -342,12 +351,6 @@
     <Compile Include="Forms\FormOvernihtsCalendarAttach.Designer.cs">
       <DependentUpon>FormOvernihtsCalendarAttach.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormProgress.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\FormProgress.Designer.cs">
-      <DependentUpon>FormProgress.cs</DependentUpon>
-    </Compile>
     <Compile Include="InteropClasses\ExcelHelper.cs" />
     <Compile Include="InteropClasses\PowerPointHelper.cs" />
     <Compile Include="InteropClasses\WordHelper.cs" />
@@ -426,9 +429,6 @@
     <EmbeddedResource Include="Forms\FormOvernihtsCalendarAttach.resx">
       <DependentUpon>FormOvernihtsCalendarAttach.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormProgress.resx">
-      <DependentUpon>FormProgress.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -474,6 +474,10 @@
     <None Include="Resources\RibbonMailButtonLogo.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SalesDepot.CommonGUI\SalesDepot.CommonGUI.csproj">
+      <Project>{7CE62462-8616-4FC9-81C3-08715DE17058}</Project>
+      <Name>SalesDepot.CommonGUI</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SalesDepot.CoreObjects\SalesDepot.CoreObjects.csproj">
       <Project>{141d1b4b-2fe9-425d-9196-4439fc0cd57d}</Project>
       <Name>SalesDepot.CoreObjects</Name>
@@ -486,23 +490,6 @@
     <None Include="Resources\PackageLogo.png" />
   </ItemGroup>
   <ItemGroup>
-    <COMReference Include="AcroPDFLib">
-      <Guid>{05BFD3F1-6319-4F30-B752-C7A22889BCC4}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
-    <COMReference Include="AxAcroPDFLib">
-      <Guid>{05BFD3F1-6319-4F30-B752-C7A22889BCC4}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>aximp</WrapperTool>
-      <Isolated>False</Isolated>
-    </COMReference>
     <COMReference Include="AxWMPLib">
       <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
       <VersionMajor>1</VersionMajor>

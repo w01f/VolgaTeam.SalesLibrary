@@ -3,9 +3,9 @@ using System.ComponentModel;
 using System.Threading;
 using System.Windows.Forms;
 using SalesDepot.BusinessClasses;
+using SalesDepot.CommonGUI.Forms;
 using SalesDepot.ConfigurationClasses;
 using SalesDepot.PresentationClasses.WallBin.Decorators;
-using SalesDepot.ToolForms;
 
 namespace SalesDepot.TabPages
 {

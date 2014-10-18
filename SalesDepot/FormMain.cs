@@ -7,9 +7,10 @@ using System.Windows.Forms;
 using DevComponents.DotNetBar;
 using DevExpress.XtraRichEdit.Model;
 using SalesDepot.BusinessClasses;
+using SalesDepot.CommonGUI.Floater;
+using SalesDepot.CommonGUI.Forms;
 using SalesDepot.ConfigurationClasses;
 using SalesDepot.CoreObjects.ToolClasses;
-using SalesDepot.Floater;
 using SalesDepot.InteropClasses;
 using SalesDepot.PresentationClasses.WallBin.Decorators;
 using SalesDepot.Properties;
@@ -205,7 +206,7 @@ namespace SalesDepot
 
 		private void buttonItemFloater_Click(object sender, EventArgs e)
 		{
-			FloaterManager.Instance.ShowFloater(this, null);
+			FloaterManager.Instance.ShowFloater(this, SettingsManager.Instance.SalesDepotName, FloaterLogo, null);
 		}
 
 		private void buttonItemExit_Click(object sender, EventArgs e)

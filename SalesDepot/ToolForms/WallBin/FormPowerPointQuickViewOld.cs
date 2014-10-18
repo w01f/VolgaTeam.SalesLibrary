@@ -9,10 +9,11 @@ using DevExpress.XtraBars;
 using DevExpress.XtraEditors.Controls;
 using Microsoft.Office.Core;
 using SalesDepot.BusinessClasses;
+using SalesDepot.CommonGUI.Floater;
+using SalesDepot.CommonGUI.Forms;
 using SalesDepot.ConfigurationClasses;
 using SalesDepot.CoreObjects.BusinessClasses;
 using SalesDepot.CoreObjects.InteropClasses;
-using SalesDepot.Floater;
 using PowerPointHelper = SalesDepot.InteropClasses.PowerPointHelper;
 
 namespace SalesDepot.ToolForms.WallBin
@@ -324,7 +325,7 @@ namespace SalesDepot.ToolForms.WallBin
 				using (var form = new FormProgress())
 				{
 					form.laProgress.Text = "Inserting slides...";
-					FloaterManager.Instance.ShowFloater(this, () =>
+					FloaterManager.Instance.ShowFloater(this, SettingsManager.Instance.SalesDepotName, FormMain.Instance.FloaterLogo, () =>
 					{
 						form.TopMost = true;
 						var thread = new Thread(delegate()

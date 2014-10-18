@@ -12,6 +12,7 @@ using DevExpress.XtraTab;
 using FileManager.PresentationClasses.WallBin.Decorators;
 using FileManager.ToolForms;
 using FileManager.ToolForms.IPad;
+using SalesDepot.CommonGUI.Forms;
 using SalesDepot.Services.IPadAdminService;
 
 namespace FileManager.PresentationClasses.IPad

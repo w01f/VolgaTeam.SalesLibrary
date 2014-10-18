@@ -3,8 +3,8 @@ using System.ComponentModel;
 using System.Threading;
 using System.Windows.Forms;
 using ProgramManager.CoreObjects;
+using SalesDepot.CommonGUI.Forms;
 using SalesDepot.PresentationClasses.WallBin.Decorators;
-using SalesDepot.ToolForms;
 
 namespace SalesDepot.PresentationClasses.ProgramManager
 {

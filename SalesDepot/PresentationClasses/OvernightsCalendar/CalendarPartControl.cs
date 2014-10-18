@@ -4,9 +4,9 @@ using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using DevExpress.XtraTab;
+using SalesDepot.CommonGUI.Forms;
 using SalesDepot.ConfigurationClasses;
 using SalesDepot.CoreObjects.BusinessClasses;
-using SalesDepot.ToolForms;
 
 namespace SalesDepot.PresentationClasses.OvernightsCalendar
 {

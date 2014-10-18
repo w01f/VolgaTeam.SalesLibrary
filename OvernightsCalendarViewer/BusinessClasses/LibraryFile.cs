@@ -22,7 +22,8 @@ namespace OvernightsCalendarViewer.BusinessClasses
 		private string _linkRemotePath = string.Empty;
 		private string _note = string.Empty;
 		private Image _widget;
-		private bool _doNotGeneratePreview;
+		private bool _generatePreviewImages;
+		private bool _generateContentText;
 		private bool _forcePreview;
 		private bool _isUrl365;
 
@@ -41,6 +42,8 @@ namespace OvernightsCalendarViewer.BusinessClasses
 			SearchTags = new LibraryFileSearchTags();
 			ExpirationDateOptions = new ExpirationDateOptions();
 			SuperFilters = new List<SuperFilter>();
+			_generatePreviewImages = true;
+			_generateContentText = true;
 		}
 
 		public string LocalPath
@@ -361,15 +364,40 @@ namespace OvernightsCalendarViewer.BusinessClasses
 			}
 		}
 
-		public bool DoNotGeneratePreview
+		public bool GeneratePreviewImages
 		{
-			get { return _doNotGeneratePreview; }
+			get
+			{
+				return _generatePreviewImages &&
+					(Type == FileTypes.BuggyPresentation ||
+					Type == FileTypes.FriendlyPresentation ||
+					Type == FileTypes.Presentation ||
+					Type == FileTypes.Word ||
+					Type == FileTypes.PDF ||
+					((Type == FileTypes.Other && new[] { "ppt", "doc", "pdf" }.Contains(Format))));
+			}
 			set
 			{
-				if (_doNotGeneratePreview != value)
+				if (_generatePreviewImages != value)
 					LastChanged = DateTime.Now;
-				_doNotGeneratePreview = value;
+				_generatePreviewImages = value;
 			}
+		}
+
+		public bool GenerateContentText
+		{
+			get { return _generateContentText; }
+			set
+			{
+				if (_generateContentText != value)
+					LastChanged = DateTime.Now;
+				_generateContentText = value;
+			}
+		}
+
+		public bool DoNotGeneratePreview
+		{
+			get { return !GeneratePreviewImages && !GenerateContentText; }
 		}
 
 		public bool ForcePreview
@@ -411,7 +439,8 @@ namespace OvernightsCalendarViewer.BusinessClasses
 			file.IsForbidden = IsForbidden;
 			file.IsRestricted = IsRestricted;
 			file.NoShare = NoShare;
-			file.DoNotGeneratePreview = DoNotGeneratePreview;
+			file.GeneratePreviewImages = GeneratePreviewImages;
+			file.GenerateContentText = GenerateContentText;
 			file.ForcePreview = ForcePreview;
 			file.IsUrl365 = IsUrl365;
 			file.SearchTags = SearchTags;

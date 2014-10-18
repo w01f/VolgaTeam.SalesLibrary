@@ -6,12 +6,12 @@ using System.Windows.Forms;
 using DevComponents.DotNetBar;
 using OvernightsCalendarViewer.BusinessClasses;
 using OvernightsCalendarViewer.ConfigurationClasses;
-using OvernightsCalendarViewer.Floater;
 using OvernightsCalendarViewer.InteropClasses;
 using OvernightsCalendarViewer.PresentationClasses.Decorators;
 using OvernightsCalendarViewer.TabPages;
 using OvernightsCalendarViewer.ToolClasses;
-using OvernightsCalendarViewer.ToolForms;
+using SalesDepot.CommonGUI.Floater;
+using SalesDepot.CommonGUI.Forms;
 
 namespace OvernightsCalendarViewer
 {
@@ -82,7 +82,7 @@ namespace OvernightsCalendarViewer
 
 		private void buttonItemFloater_Click(object sender, EventArgs e)
 		{
-			FloaterManager.Instance.ShowFloater(this, null);
+			FloaterManager.Instance.ShowFloater(this, String.Format("{0} - User: {1}", "Overnights", Environment.UserName), FloaterLogo, null);
 		}
 
 		private void buttonItemExit_Click(object sender, EventArgs e)

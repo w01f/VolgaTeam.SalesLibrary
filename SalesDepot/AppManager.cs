@@ -5,9 +5,10 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
 using ProgramManager.CoreObjects;
+using SalesDepot.CommonGUI.Floater;
 using SalesDepot.ConfigurationClasses;
 using SalesDepot.CoreObjects.InteropClasses;
-using SalesDepot.Floater;
+using SalesDepot.CoreObjects.ToolClasses;
 using SalesDepot.ToolClasses;
 using PowerPointHelper = SalesDepot.InteropClasses.PowerPointHelper;
 
@@ -69,19 +70,6 @@ namespace SalesDepot
 			ShowMainForm();
 		}
 
-		public void ActivateForm(IntPtr handle, bool maximized, bool topMost)
-		{
-			WinAPIHelper.ShowWindow(handle, maximized ? WindowShowStyle.ShowMaximized : WindowShowStyle.ShowNormal);
-			uint lpdwProcessId = 0;
-			WinAPIHelper.AttachThreadInput(WinAPIHelper.GetCurrentThreadId(), WinAPIHelper.GetWindowThreadProcessId(WinAPIHelper.GetForegroundWindow(), out lpdwProcessId), true);
-			WinAPIHelper.SetForegroundWindow(handle);
-			WinAPIHelper.AttachThreadInput(WinAPIHelper.GetCurrentThreadId(), WinAPIHelper.GetWindowThreadProcessId(WinAPIHelper.GetForegroundWindow(), out lpdwProcessId), false);
-			if (topMost)
-				WinAPIHelper.MakeTopMost(handle);
-			else
-				WinAPIHelper.MakeNormal(handle);
-		}
-
 		public void MinimizeForm(IntPtr handle)
 		{
 			WinAPIHelper.ShowWindow(handle, WindowShowStyle.Minimize);
@@ -100,7 +88,7 @@ namespace SalesDepot
 						handle = proc[0].MainWindowHandle;
 				}
 			}
-			ActivateForm(handle, RegistryHelper.MaximizeSalesDepot, false);
+			Utils.ActivateForm(handle, RegistryHelper.MaximizeSalesDepot, false);
 		}
 
 		public void ActivatePowerPoint()
@@ -114,16 +102,6 @@ namespace SalesDepot
 				WinAPIHelper.SetForegroundWindow(powerPointHandle);
 				WinAPIHelper.AttachThreadInput(WinAPIHelper.GetCurrentThreadId(), WinAPIHelper.GetWindowThreadProcessId(WinAPIHelper.GetForegroundWindow(), out lpdwProcessId), false);
 			}
-		}
-
-		public void ActivateTaskbar()
-		{
-			var taskBarHandle = WinAPIHelper.FindWindow("Shell_traywnd", "");
-			WinAPIHelper.ShowWindow(taskBarHandle, WindowShowStyle.Show);
-			uint lpdwProcessId;
-			WinAPIHelper.AttachThreadInput(WinAPIHelper.GetCurrentThreadId(), WinAPIHelper.GetWindowThreadProcessId(WinAPIHelper.GetForegroundWindow(), out lpdwProcessId), true);
-			WinAPIHelper.SetForegroundWindow(taskBarHandle);
-			WinAPIHelper.AttachThreadInput(WinAPIHelper.GetCurrentThreadId(), WinAPIHelper.GetWindowThreadProcessId(WinAPIHelper.GetForegroundWindow(), out lpdwProcessId), false);
 		}
 
 		private void RunPowerPointLoader()
@@ -142,7 +120,7 @@ namespace SalesDepot
 		{
 			if (PowerPointHelper.Instance.IsLinkedWithApplication) return true;
 			if (beforeRun != null && !beforeRun()) return false;
-			FloaterManager.Instance.ShowFloater(FormMain.Instance, RunPowerPointLoader);
+			FloaterManager.Instance.ShowFloater(FormMain.Instance, SettingsManager.Instance.SalesDepotName, FormMain.Instance.FloaterLogo, RunPowerPointLoader);
 			return false;
 		}
 

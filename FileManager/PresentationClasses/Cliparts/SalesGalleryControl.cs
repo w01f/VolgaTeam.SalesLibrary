@@ -63,46 +63,38 @@ namespace FileManager.PresentationClasses.Cliparts
 
 		private void FillNode(TreeListNode node, bool showFiles)
 		{
-			TreeListNode childNode;
-			if (node.Tag != null)
+			if (node.Tag == null) return;
+			if (node.Tag.GetType() != typeof(DirectoryInfo)) return;
+			if (node.Nodes.Count != 0) return;
+			var folder = (DirectoryInfo)node.Tag;
+			try
 			{
-				if (node.Tag.GetType() == typeof(DirectoryInfo))
+				TreeListNode childNode;
+				foreach (var subFolder in folder.GetDirectories())
 				{
-					if (node.Nodes.Count == 0)
+					if (SettingsManager.Instance.HiddenObjects.Any(x => subFolder.FullName.ToLower().Contains(x.ToLower()))) continue;
+					childNode = treeListFiles.AppendNode(new object[] { subFolder.Name }, node, subFolder);
+					childNode.StateImageIndex = 0;
+					FillNode(childNode, true);
+				}
+				if (!showFiles) return;
+				foreach (FileInfo file in folder.GetFiles())
+				{
+					switch (file.Extension.ToLower())
 					{
-						var folder = (DirectoryInfo)node.Tag;
-						try
-						{
-							foreach (DirectoryInfo subFolder in folder.GetDirectories())
-							{
-								if (SettingsManager.Instance.HiddenObjects.Where(x => subFolder.FullName.ToLower().Contains(x.ToLower())).Count() == 0)
-								{
-									childNode = treeListFiles.AppendNode(new object[] { subFolder.Name }, node, subFolder);
-									childNode.StateImageIndex = 0;
-									FillNode(childNode, true);
-								}
-							}
-							if (showFiles)
-								foreach (FileInfo file in folder.GetFiles())
-								{
-									switch (file.Extension.ToLower())
-									{
-										case ".png":
-										case ".jpg":
-										case ".bmp":
-										case ".gif":
-										case ".tif":
-										case ".wmf":
-											childNode = treeListFiles.AppendNode(new object[] { file.Name }, node, file);
-											childNode.StateImageIndex = 2;
-											break;
-									}
-								}
-						}
-						catch { }
+						case ".png":
+						case ".jpg":
+						case ".bmp":
+						case ".gif":
+						case ".tif":
+						case ".wmf":
+							childNode = treeListFiles.AppendNode(new object[] { file.Name }, node, file);
+							childNode.StateImageIndex = 2;
+							break;
 					}
 				}
 			}
+			catch { }
 		}
 		#endregion
 
@@ -171,12 +163,13 @@ namespace FileManager.PresentationClasses.Cliparts
 			double imageWidth = img.Width > pbPicture.Width ? pbPicture.Width : img.Width;
 			if (img.Width > pbPicture.Width)
 				img = ImageHelper.GetThumbnail(img, (int)(imageHeight * (imageWidth / img.Width)), (int)imageWidth);
-
-			if (img.Height > xtraScrollableControlPicture.Height)
-				pbPicture.Height = img.Height;
-			else
-				pbPicture.Height = xtraScrollableControlPicture.Height - 10;
-
+			if (img != null)
+			{
+				if (img.Height > xtraScrollableControlPicture.Height)
+					pbPicture.Height = img.Height;
+				else
+					pbPicture.Height = xtraScrollableControlPicture.Height - 10;
+			}
 			pbPicture.Image = img;
 		}
 
@@ -273,27 +266,23 @@ namespace FileManager.PresentationClasses.Cliparts
 
 		private void treeListFiles_AfterFocusNode(object sender, NodeEventArgs e)
 		{
-			TreeListNode node = treeListFiles.FocusedNode;
-			if (_allowToPreviewImages && node != null)
+			var node = treeListFiles.FocusedNode;
+			if (!_allowToPreviewImages || node == null) return;
+			ClearViewArea();
+			imageListView.Visible = false;
+			pbPicture.Visible = false;
+			if (node.Tag == null) return;
+			if (node.Tag.GetType() == typeof(DirectoryInfo))
 			{
-				ClearViewArea();
-				imageListView.Visible = false;
-				pbPicture.Visible = false;
-				if (node.Tag != null)
-				{
-					if (node.Tag.GetType() == typeof(DirectoryInfo))
-					{
-						imageListView.Visible = true;
-						if (!(node.Nodes.Count > 0))
-							FillNode(node, true);
-						ShowThumbnails(node);
-					}
-					else if (node.Tag.GetType() == typeof(FileInfo))
-					{
-						pbPicture.Visible = true;
-						ShowPicture(node);
-					}
-				}
+				imageListView.Visible = true;
+				if (!(node.Nodes.Count > 0))
+					FillNode(node, true);
+				ShowThumbnails(node);
+			}
+			else if (node.Tag.GetType() == typeof(FileInfo))
+			{
+				pbPicture.Visible = true;
+				ShowPicture(node);
 			}
 		}
 

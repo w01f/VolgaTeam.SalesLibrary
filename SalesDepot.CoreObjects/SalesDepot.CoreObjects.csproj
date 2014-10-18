@@ -53,6 +53,9 @@
     <Reference Include="DevExpress.Data.v14.1, Version=14.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Utils.v14.1, Version=14.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraEditors.v14.1, Version=14.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="itextsharp">
+      <HintPath>..\Assemblies\itextsharp.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>ToolClasses\Json\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -112,6 +115,7 @@
     <Compile Include="ToolClasses\Globals.cs" />
     <Compile Include="ToolClasses\ImageHelper.cs" />
     <Compile Include="ToolClasses\PdfHelper.cs" />
+    <Compile Include="ToolClasses\PDFParser.cs" />
     <Compile Include="ToolClasses\SyncManager.cs" />
     <Compile Include="ToolClasses\TabPageManager.cs" />
     <Compile Include="ToolClasses\Utils.cs" />

@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Threading;
 using System.Windows.Forms;
-using SalesDepot.SiteManager.ToolForms;
+using SalesDepot.CommonGUI.Forms;
 
 namespace SalesDepot.SiteManager.PresentationClasses.Utilities
 {
