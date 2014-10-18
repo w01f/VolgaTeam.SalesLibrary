@@ -124,7 +124,6 @@
 					startDate: conditions.startDate,
 					endDate: conditions.endDate,
 					dateFile: conditions.dateFile,
-					onlyFileCards: conditions.onlyFileCards,
 					libraries: conditions.libraries,
 					superFilters: conditions.superFilters,
 					categories: conditions.categories,
@@ -195,13 +194,7 @@
 					$(".file-link").on('click', function ()
 					{
 						var selectedLink = $.trim($(this).attr("href").replace('#link', ''));
-						$.SalesPortal.Wallbin.loadLink(selectedLink, 'Search', false, '#search-result');
-					});
-					$(".file-link-detail").on('click', function (event)
-					{
-						var selectedLink = $.trim($(this).parent().attr("href").replace('#link', ''));
-						$.SalesPortal.Wallbin.loadLinkDetails(selectedLink, 'Search', '#search-result');
-						event.stopPropagation();
+						$.SalesPortal.Wallbin.loadLink(selectedLink, 'Search', '#search-result', false);
 					});
 				},
 				error: function ()
@@ -563,7 +556,10 @@
 				selectedFileTypes.push("wmv");
 			}
 			if ($('#search-file-type-url').is(':checked'))
+			{
 				selectedFileTypes.push("url");
+				selectedFileTypes.push("url365");
+			}
 			if ($('#search-file-type-image').is(':checked'))
 			{
 				selectedFileTypes.push("png");

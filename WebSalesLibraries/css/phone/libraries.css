@@ -38,11 +38,6 @@
 	word-wrap: break-word;
 }
 
-.link-container .link-details-container
-{
-	padding-right: 16px;
-}
-
 .link-container span.file, .file-size
 {
 	color: #b0b0b0;

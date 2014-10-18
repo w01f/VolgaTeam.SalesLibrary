@@ -98,27 +98,6 @@
 		 * @return string
 		 * @soap
 		 */
-		public function cleanExpiredEmails($sessionKey)
-		{
-			$result = 'Error';
-			if ($this->authenticateBySession($sessionKey))
-			{
-				ob_start();
-
-				$action = Yii::createComponent('application.components.actions.CleanExpiredEmailsAction', $this, 'cleanExpiredEmails');
-				$action->run();
-
-				$result = ob_get_contents();
-				ob_end_clean();
-			}
-			return $result;
-		}
-
-		/**
-		 * @param string $sessionKey
-		 * @return string
-		 * @soap
-		 */
 		public function notifyDeadLinks($sessionKey)
 		{
 			$result = 'Error';

@@ -25,6 +25,6 @@
 			<div class="ribbon-logo-path"><? echo $link->ribbonLogoPath; ?></div>
 		<? endif; ?>
 		<div class="link-id"><? echo $link->id; ?></div>
-		<div class="link-name"><? echo $link->tooltip; ?></div>
+		<div class="link-name"><? echo $link->name . ' - ' . $link->tooltip; ?></div>
 	</div>
 </a>

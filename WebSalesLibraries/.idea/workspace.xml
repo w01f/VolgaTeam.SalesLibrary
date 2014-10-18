@@ -7,19 +7,269 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="311ca633-43c5-41dd-82ab-ba01ea556142" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/search/search-url365.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/fileFormats/url365.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/fileFormats_phone/url365.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/folderWidgets/url365.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/bootstrap/css/bootstrap-theme.css.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/bootstrap/css/bootstrap-theme.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/bootstrap/css/bootstrap-theme.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/bootstrap/css/bootstrap.css.map" />
+      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\css\phone\file-card.css" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\css\regular\base\file-card.css" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\images\search\collapse.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\images\search\expand-phone.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\images\search\expand.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\images\search\search-file-card.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\images\search\search-money.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\images\search\search-url-chrome.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\images\search\search-url-firefox.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\images\search\search-url-ie.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\images\search\search-url-opera.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\images\search\search-url-safari.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\protected\commands\CleanExpiredEmailsCommand.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\protected\components\actions\CleanExpiredEmailsAction.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\protected\data\tables\tbl_attachment.sql" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\protected\data\tables\tbl_emailed_link.sql" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\protected\data\tables\tbl_file_card.sql" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\protected\data\tables\tbl_user_recipient.sql" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\protected\models\auth\records\UserRecipientRecord.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\protected\models\wallbin\models\Attachment.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\protected\models\wallbin\models\FileCard.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\protected\models\wallbin\records\AttachmentRecord.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\protected\models\wallbin\records\EmailedLinkRecord.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\protected\models\wallbin\records\FileCardRecord.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\protected\views\email\sendLink.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\protected\views\phone\preview\fileCard.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\protected\views\regular\preview\fileCard.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\protected\views\regular\preview\linkDetails.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\protected\views\regular\site\emailDialog.php" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\protected\views\regular\site\emailVideo.php" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/bootstrap/fonts/glyphicons-halflings-regular.eot" afterPath="$PROJECT_DIR$/vendor/bootstrap/fonts/glyphicons-halflings-regular.eot" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/bootstrap/fonts/glyphicons-halflings-regular.ttf" afterPath="$PROJECT_DIR$/vendor/bootstrap/fonts/glyphicons-halflings-regular.ttf" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/bootstrap/fonts/glyphicons-halflings-regular.woff" afterPath="$PROJECT_DIR$/vendor/bootstrap/fonts/glyphicons-halflings-regular.woff" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/components/behaviors/BehaviorManager.php" afterPath="$PROJECT_DIR$/protected/components/behaviors/BehaviorManager.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/controllers/ContentController.php" afterPath="$PROJECT_DIR$/protected/controllers/ContentController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/favorites/records/FavoritesLinkRecord.php" afterPath="$PROJECT_DIR$/protected/models/favorites/records/FavoritesLinkRecord.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/wallbin/models/LibraryLink.php" afterPath="$PROJECT_DIR$/protected/models/wallbin/models/LibraryLink.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/wallbin/records/LibraryRecord.php" afterPath="$PROJECT_DIR$/protected/models/wallbin/records/LibraryRecord.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/wallbin/records/LinkRecord.php" afterPath="$PROJECT_DIR$/protected/models/wallbin/records/LinkRecord.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/components/actions/NotifyDeadLinksAction.php" afterPath="$PROJECT_DIR$/protected/components/actions/NotifyDeadLinksAction.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/controllers/PreviewController.php" afterPath="$PROJECT_DIR$/protected/controllers/PreviewController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/controllers/SearchController.php" afterPath="$PROJECT_DIR$/protected/controllers/SearchController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/controllers/SiteController.php" afterPath="$PROJECT_DIR$/protected/controllers/SiteController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/controllers/UtilityController.php" afterPath="$PROJECT_DIR$/protected/controllers/UtilityController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/bootstrap/css/bootstrap.css" afterPath="$PROJECT_DIR$/vendor/bootstrap/css/bootstrap.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/bootstrap/js/bootstrap.js" afterPath="$PROJECT_DIR$/vendor/bootstrap/js/bootstrap.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/bootstrap/css/bootstrap.min.css" afterPath="$PROJECT_DIR$/vendor/bootstrap/css/bootstrap.min.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/bootstrap/js/bootstrap.min.js" afterPath="$PROJECT_DIR$/vendor/bootstrap/js/bootstrap.min.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/configuration.php" afterPath="$PROJECT_DIR$/configuration.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/views/phone/shortcuts/directLink.php" afterPath="$PROJECT_DIR$/protected/views/phone/shortcuts/directLink.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/views/regular/shortcuts/directLink.php" afterPath="$PROJECT_DIR$/protected/views/regular/shortcuts/directLink.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/phone/email.js" afterPath="$PROJECT_DIR$/js/phone/email.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/views/phone/site/emailVideo.php" afterPath="$PROJECT_DIR$/protected/views/phone/site/emailVideo.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/phone/favorites.js" afterPath="$PROJECT_DIR$/js/phone/favorites.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/regular/base/favorites.js" afterPath="$PROJECT_DIR$/js/regular/base/favorites.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/views/phone/favorites/favoritesLinksAndFolders.php" afterPath="$PROJECT_DIR$/protected/views/phone/favorites/favoritesLinksAndFolders.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/regular/base/folder-links.css" afterPath="$PROJECT_DIR$/css/regular/base/folder-links.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/bootstrap/fonts/glyphicons-halflings-regular.svg" afterPath="$PROJECT_DIR$/vendor/bootstrap/fonts/glyphicons-halflings-regular.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/views/phone/qpage/index.php" afterPath="$PROJECT_DIR$/protected/views/phone/qpage/index.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/views/phone/site/index.php" afterPath="$PROJECT_DIR$/protected/views/phone/site/index.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/views/regular/site/index.php" afterPath="$PROJECT_DIR$/protected/views/regular/site/index.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/phone/libraries.css" afterPath="$PROJECT_DIR$/css/phone/libraries.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/phone/link-viewing.js" afterPath="$PROJECT_DIR$/js/phone/link-viewing.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/regular/base/link-viewing.js" afterPath="$PROJECT_DIR$/js/regular/base/link-viewing.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/views/phone/wallbin/link.php" afterPath="$PROJECT_DIR$/protected/views/phone/wallbin/link.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/views/phone/preview/linkDetails.php" afterPath="$PROJECT_DIR$/protected/views/phone/preview/linkDetails.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/views/phone/preview/linkPreview.php" afterPath="$PROJECT_DIR$/protected/views/phone/preview/linkPreview.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/regular/base/links-grid.css" afterPath="$PROJECT_DIR$/css/regular/base/links-grid.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/regular/base/links-grid.js" afterPath="$PROJECT_DIR$/js/regular/base/links-grid.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/regular/base/login.css" afterPath="$PROJECT_DIR$/css/regular/base/login.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/views/regular/auth/login.php" afterPath="$PROJECT_DIR$/protected/views/regular/auth/login.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/regular/qbuilder/page-content.js" afterPath="$PROJECT_DIR$/js/regular/qbuilder/page-content.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/regular/qpage/page-links.js" afterPath="$PROJECT_DIR$/js/regular/qpage/page-links.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/views/regular/qbuilder/pageContent.php" afterPath="$PROJECT_DIR$/protected/views/regular/qbuilder/pageContent.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/config/params.php" afterPath="$PROJECT_DIR$/protected/config/params.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/phone/qpage.css" afterPath="$PROJECT_DIR$/css/phone/qpage.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/phone/qpage.js" afterPath="$PROJECT_DIR$/js/phone/qpage.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/regular/base/quizzes.css" afterPath="$PROJECT_DIR$/css/regular/base/quizzes.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/regular/base/search-view.js" afterPath="$PROJECT_DIR$/js/regular/base/search-view.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/phone/search.js" afterPath="$PROJECT_DIR$/js/phone/search.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/views/regular/shortcuts/searchBar.php" afterPath="$PROJECT_DIR$/protected/views/regular/shortcuts/searchBar.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/views/regular/widgets/searchControlPanel.php" afterPath="$PROJECT_DIR$/protected/views/regular/widgets/searchControlPanel.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/views/phone/search/searchResult.php" afterPath="$PROJECT_DIR$/protected/views/phone/search/searchResult.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/views/regular/shortcuts/searchResult.php" afterPath="$PROJECT_DIR$/protected/views/regular/shortcuts/searchResult.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/views/phone/search/searchView.php" afterPath="$PROJECT_DIR$/protected/views/phone/search/searchView.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/regular/base/shortcuts-search.js" afterPath="$PROJECT_DIR$/js/regular/base/shortcuts-search.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/regular/base/shortcuts.css" afterPath="$PROJECT_DIR$/css/regular/base/shortcuts.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/phone/shortcuts.js" afterPath="$PROJECT_DIR$/js/phone/shortcuts.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/regular/base/shortcuts.js" afterPath="$PROJECT_DIR$/js/regular/base/shortcuts.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/data/tables/tbl_link.sql" afterPath="$PROJECT_DIR$/protected/data/tables/tbl_link.sql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/views/regular/preview/viewDialog.php" afterPath="$PROJECT_DIR$/protected/views/regular/preview/viewDialog.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/phone/wallbin.js" afterPath="$PROJECT_DIR$/js/phone/wallbin.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
-    <list id="6cb86652-0ea2-464a-b0b1-9bbef25a8567" name="C#" comment="" />
+    <list id="6cb86652-0ea2-464a-b0b1-9bbef25a8567" name="C#" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../SalesDepot.CoreObjects/ToolClasses/PDFParser.cs" />
+      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\FileManager\Properties\licenses.licx" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\FileManager\Resources\Delete.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\FileManager\Resources\FirefoxSmall.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\FileManager\Resources\LineBreak.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\FileManager\Resources\LinkProperties.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\FileManager\Resources\MediaPlayerSmall.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\FileManager\Resources\NetworkShare.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\FileManager\Resources\OpenFile.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\FileManager\Resources\QuickTimeSmall.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\FileManager\Resources\TreeView.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\FileManager\Resources\Url.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\FileManager\ToolForms\FormProgress.Designer.cs" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\FileManager\ToolForms\FormProgress.cs" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\FileManager\ToolForms\FormProgress.resx" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\OutlookSalesDepotAddIn\Forms\FormProgress.Designer.cs" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\OutlookSalesDepotAddIn\Forms\FormProgress.cs" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\OutlookSalesDepotAddIn\Forms\FormProgress.resx" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\OvernightsCalendarConverter\FormProgress.Designer.cs" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\OvernightsCalendarConverter\FormProgress.cs" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\OvernightsCalendarConverter\FormProgress.resx" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\OvernightsCalendarSplitter\FormProgress.Designer.cs" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\OvernightsCalendarSplitter\FormProgress.cs" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\OvernightsCalendarSplitter\FormProgress.resx" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\OvernightsCalendarViewer\Floater\FloaterManager.cs" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\OvernightsCalendarViewer\Floater\FormFloater.cs" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\OvernightsCalendarViewer\Floater\FormFloater.designer.cs" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\OvernightsCalendarViewer\Floater\FormFloater.resx" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\OvernightsCalendarViewer\ToolForms\FormProgress.Designer.cs" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\OvernightsCalendarViewer\ToolForms\FormProgress.cs" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\OvernightsCalendarViewer\ToolForms\FormProgress.resx" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\SalesDepot\Floater\FloaterManager.cs" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\SalesDepot\Floater\FormFloater.cs" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\SalesDepot\Floater\FormFloater.designer.cs" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\SalesDepot\Floater\FormFloater.resx" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\SalesDepot\Resources\FloaterHide.png" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\SalesDepot\ToolForms\FormProgress.Designer.cs" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\SalesDepot\ToolForms\FormProgress.cs" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\SalesDepot\ToolForms\FormProgress.resx" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\SiteManager\ToolForms\FormProgress.Designer.cs" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\SiteManager\ToolForms\FormProgress.cs" afterPath="" />
+      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\SiteManager\ToolForms\FormProgress.resx" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/ActivitiesManagerControl.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/ActivitiesManagerControl.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/AppManager.cs" afterPath="$PROJECT_DIR$/../SalesDepot/AppManager.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/Controllers/CalendarController.cs" afterPath="$PROJECT_DIR$/../FileManager/Controllers/CalendarController.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/OvernightsCalendar/CalendarPartControl.cs" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/OvernightsCalendar/CalendarPartControl.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../OutlookSalesDepotAddIn/Controls/OvernightsCalendar/CalendarPartControl.cs" afterPath="$PROJECT_DIR$/../OutlookSalesDepotAddIn/Controls/OvernightsCalendar/CalendarPartControl.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../OvernightsCalendarViewer/PresentationClasses/OvernightsCalendar/CalendarPartControl.cs" afterPath="$PROJECT_DIR$/../OvernightsCalendarViewer/PresentationClasses/OvernightsCalendar/CalendarPartControl.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/OvernightsCalendar/CalendarPartControl.cs" afterPath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/OvernightsCalendar/CalendarPartControl.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/Cliparts/ClientLogosControl.cs" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/Cliparts/ClientLogosControl.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/AccessData/ContainerControl.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/AccessData/ContainerControl.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/MainData/ContainerControl.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/MainData/ContainerControl.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/NavigationData/ContainerControl.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/NavigationData/ContainerControl.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/QuizPassData/ContainerControl.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/QuizPassData/ContainerControl.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/QuizStatusData/ContainerControl.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/QuizStatusData/ContainerControl.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/QuizUnitedData/ContainerControl.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/QuizUnitedData/ContainerControl.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/RawData/ContainerControl.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/RawData/ContainerControl.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot.Services/Web References/ContentManagmentService/ContentController.wsdl" afterPath="$PROJECT_DIR$/../SalesDepot.Services/Web References/ContentManagmentService/ContentController.wsdl" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot.CoreObjects/InteropClasses/ExcelHelper.cs" afterPath="$PROJECT_DIR$/../SalesDepot.CoreObjects/InteropClasses/ExcelHelper.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/InteropClasses/ExcelHelper.cs" afterPath="$PROJECT_DIR$/../SalesDepot/InteropClasses/ExcelHelper.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/FileManager.csproj" afterPath="$PROJECT_DIR$/../FileManager/FileManager.csproj" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/WallBin/FolderBoxControl.Designer.cs" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/WallBin/FolderBoxControl.Designer.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/WallBin/FolderBoxControl.cs" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/WallBin/FolderBoxControl.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/WallBin/FolderBoxControl.resx" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/WallBin/FolderBoxControl.resx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/ToolForms/QBuilderForms/FormAddFolder.cs" afterPath="$PROJECT_DIR$/../SalesDepot/ToolForms/QBuilderForms/FormAddFolder.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/ToolForms/QBuilderForms/FormAddLink.cs" afterPath="$PROJECT_DIR$/../SalesDepot/ToolForms/QBuilderForms/FormAddLink.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/ToolForms/QBuilderForms/FormEmailWebLink.cs" afterPath="$PROJECT_DIR$/../SalesDepot/ToolForms/QBuilderForms/FormEmailWebLink.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../OutlookSalesDepotAddIn/Forms/FormLinkPreview.cs" afterPath="$PROJECT_DIR$/../OutlookSalesDepotAddIn/Forms/FormLinkPreview.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/ToolForms/WallBin/FormLinkPreview.cs" afterPath="$PROJECT_DIR$/../SalesDepot/ToolForms/WallBin/FormLinkPreview.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/ToolForms/WallBin/FormLinkProperties.Designer.cs" afterPath="$PROJECT_DIR$/../FileManager/ToolForms/WallBin/FormLinkProperties.Designer.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/ToolForms/WallBin/FormLinkProperties.cs" afterPath="$PROJECT_DIR$/../FileManager/ToolForms/WallBin/FormLinkProperties.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/ToolForms/QBuilderForms/FormLogin.cs" afterPath="$PROJECT_DIR$/../SalesDepot/ToolForms/QBuilderForms/FormLogin.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/FormMain.Designer.cs" afterPath="$PROJECT_DIR$/../FileManager/FormMain.Designer.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/FormMain.cs" afterPath="$PROJECT_DIR$/../FileManager/FormMain.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../OutlookSalesDepotAddIn/Forms/FormMain.cs" afterPath="$PROJECT_DIR$/../OutlookSalesDepotAddIn/Forms/FormMain.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../OvernightsCalendarConverter/FormMain.cs" afterPath="$PROJECT_DIR$/../OvernightsCalendarConverter/FormMain.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../OvernightsCalendarSplitter/FormMain.cs" afterPath="$PROJECT_DIR$/../OvernightsCalendarSplitter/FormMain.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../OvernightsCalendarViewer/FormMain.cs" afterPath="$PROJECT_DIR$/../OvernightsCalendarViewer/FormMain.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/FormMain.cs" afterPath="$PROJECT_DIR$/../SalesDepot/FormMain.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/ToolForms/WallBin/FormPowerPointQuickView.cs" afterPath="$PROJECT_DIR$/../SalesDepot/ToolForms/WallBin/FormPowerPointQuickView.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/ToolForms/WallBin/FormPowerPointQuickViewOld.cs" afterPath="$PROJECT_DIR$/../SalesDepot/ToolForms/WallBin/FormPowerPointQuickViewOld.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot.CoreObjects/BusinessClasses/IPadManager.cs" afterPath="$PROJECT_DIR$/../SalesDepot.CoreObjects/BusinessClasses/IPadManager.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/IPad/IPadPermissionsManagerControl.cs" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/IPad/IPadPermissionsManagerControl.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot.CoreObjects/ToolClasses/ImageHelper.cs" afterPath="$PROJECT_DIR$/../SalesDepot.CoreObjects/ToolClasses/ImageHelper.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/InactiveUses/InactiveUsersManagerControl.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/InactiveUses/InactiveUsersManagerControl.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AutoSynchronizer/BusinessClasses/Library.cs" afterPath="$PROJECT_DIR$/../AutoSynchronizer/BusinessClasses/Library.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/BusinessClasses/Library.cs" afterPath="$PROJECT_DIR$/../FileManager/BusinessClasses/Library.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot.Cloner/BusinessClasses/Library.cs" afterPath="$PROJECT_DIR$/../SalesDepot.Cloner/BusinessClasses/Library.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AutoSynchronizer/BusinessClasses/LibraryFile.cs" afterPath="$PROJECT_DIR$/../AutoSynchronizer/BusinessClasses/LibraryFile.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/BusinessClasses/LibraryFile.cs" afterPath="$PROJECT_DIR$/../FileManager/BusinessClasses/LibraryFile.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../OutlookSalesDepotAddIn/BusinessClasses/LibraryFile.cs" afterPath="$PROJECT_DIR$/../OutlookSalesDepotAddIn/BusinessClasses/LibraryFile.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../OvernightsCalendarViewer/BusinessClasses/LibraryFile.cs" afterPath="$PROJECT_DIR$/../OvernightsCalendarViewer/BusinessClasses/LibraryFile.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot.Cloner/BusinessClasses/LibraryFile.cs" afterPath="$PROJECT_DIR$/../SalesDepot.Cloner/BusinessClasses/LibraryFile.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot.CoreObjects/BusinessClasses/LibraryFile.cs" afterPath="$PROJECT_DIR$/../SalesDepot.CoreObjects/BusinessClasses/LibraryFile.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/BusinessClasses/LibraryFile.cs" afterPath="$PROJECT_DIR$/../SalesDepot/BusinessClasses/LibraryFile.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/QBuilderControls/LinkCartControl.cs" afterPath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/QBuilderControls/LinkCartControl.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/BusinessClasses/LinkManager.cs" afterPath="$PROJECT_DIR$/../SalesDepot/BusinessClasses/LinkManager.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/Controllers/MainController.cs" afterPath="$PROJECT_DIR$/../FileManager/Controllers/MainController.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/Controllers/MainController.cs" afterPath="$PROJECT_DIR$/../SiteManager/Controllers/MainController.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/InteropClasses/OutlookHelper.cs" afterPath="$PROJECT_DIR$/../SalesDepot/InteropClasses/OutlookHelper.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../OutlookSalesDepotAddIn/OutlookSalesDepotAddIn.csproj" afterPath="$PROJECT_DIR$/../OutlookSalesDepotAddIn/OutlookSalesDepotAddIn.csproj" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/OvernightsCalendar/OvernightsCalendarControl.cs" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/OvernightsCalendar/OvernightsCalendarControl.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../OutlookSalesDepotAddIn/Controls/OvernightsCalendar/OvernightsCalendarControl.cs" afterPath="$PROJECT_DIR$/../OutlookSalesDepotAddIn/Controls/OvernightsCalendar/OvernightsCalendarControl.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../OvernightsCalendarViewer/PresentationClasses/OvernightsCalendar/OvernightsCalendarControl.cs" afterPath="$PROJECT_DIR$/../OvernightsCalendarViewer/PresentationClasses/OvernightsCalendar/OvernightsCalendarControl.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/OvernightsCalendar/OvernightsCalendarControl.cs" afterPath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/OvernightsCalendar/OvernightsCalendarControl.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../OvernightsCalendarConverter/OvernightsCalendarConverter.csproj" afterPath="$PROJECT_DIR$/../OvernightsCalendarConverter/OvernightsCalendarConverter.csproj" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../OvernightsCalendarSplitter/OvernightsCalendarSplitter.csproj" afterPath="$PROJECT_DIR$/../OvernightsCalendarSplitter/OvernightsCalendarSplitter.csproj" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../OvernightsCalendarViewer/OvernightsCalendarViewer.csproj" afterPath="$PROJECT_DIR$/../OvernightsCalendarViewer/OvernightsCalendarViewer.csproj" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../OutlookSalesDepotAddIn/Controls/Viewers/PDFViewer.Designer.cs" afterPath="$PROJECT_DIR$/../OutlookSalesDepotAddIn/Controls/Viewers/PDFViewer.Designer.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/Viewers/PDFViewer.Designer.cs" afterPath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/Viewers/PDFViewer.Designer.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../OutlookSalesDepotAddIn/Controls/Viewers/PDFViewer.cs" afterPath="$PROJECT_DIR$/../OutlookSalesDepotAddIn/Controls/Viewers/PDFViewer.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/Viewers/PDFViewer.cs" afterPath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/Viewers/PDFViewer.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../OutlookSalesDepotAddIn/Controls/Viewers/PDFViewer.resx" afterPath="$PROJECT_DIR$/../OutlookSalesDepotAddIn/Controls/Viewers/PDFViewer.resx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/Viewers/PDFViewer.resx" afterPath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/Viewers/PDFViewer.resx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/QBuilderControls/PageContentControl.cs" afterPath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/QBuilderControls/PageContentControl.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/QBuilderControls/PageListControl.cs" afterPath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/QBuilderControls/PageListControl.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot.CoreObjects/ToolClasses/PdfHelper.cs" afterPath="$PROJECT_DIR$/../SalesDepot.CoreObjects/ToolClasses/PdfHelper.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Users/PermissionsManagerControl.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Users/PermissionsManagerControl.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot.CoreObjects/InteropClasses/PowerPointHelper.cs" afterPath="$PROJECT_DIR$/../SalesDepot.CoreObjects/InteropClasses/PowerPointHelper.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../OutlookSalesDepotAddIn/Controls/Viewers/PowerPointViewer.cs" afterPath="$PROJECT_DIR$/../OutlookSalesDepotAddIn/Controls/Viewers/PowerPointViewer.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/Viewers/PowerPointViewer.cs" afterPath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/Viewers/PowerPointViewer.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot.CoreObjects/BusinessClasses/PreviewContainer.cs" afterPath="$PROJECT_DIR$/../SalesDepot.CoreObjects/BusinessClasses/PreviewContainer.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AutoSynchronizer/BusinessClasses/PreviewGenerator.cs" afterPath="$PROJECT_DIR$/../AutoSynchronizer/BusinessClasses/PreviewGenerator.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/BusinessClasses/PreviewGenerator.cs" afterPath="$PROJECT_DIR$/../FileManager/BusinessClasses/PreviewGenerator.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot.Cloner/BusinessClasses/PreviewGenerator.cs" afterPath="$PROJECT_DIR$/../SalesDepot.Cloner/BusinessClasses/PreviewGenerator.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot.CoreObjects/BusinessClasses/PreviewGenerator.cs" afterPath="$PROJECT_DIR$/../SalesDepot.CoreObjects/BusinessClasses/PreviewGenerator.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/BusinessClasses/ProgramScheduleManager.cs" afterPath="$PROJECT_DIR$/../SalesDepot/BusinessClasses/ProgramScheduleManager.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/ProgramManager/ProgramSearchControl.cs" afterPath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/ProgramManager/ProgramSearchControl.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/QBuilder/QPagesManagerControl.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/QBuilder/QPagesManagerControl.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot.Services/Web References/ContentManagmentService/Reference.cs" afterPath="$PROJECT_DIR$/../SalesDepot.Services/Web References/ContentManagmentService/Reference.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/Properties/Resources.Designer.cs" afterPath="$PROJECT_DIR$/../FileManager/Properties/Resources.Designer.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/Properties/Resources.Designer.cs" afterPath="$PROJECT_DIR$/../SalesDepot/Properties/Resources.Designer.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/Properties/Resources.resx" afterPath="$PROJECT_DIR$/../FileManager/Properties/Resources.resx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/Properties/Resources.resx" afterPath="$PROJECT_DIR$/../SalesDepot/Properties/Resources.resx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot.CoreObjects/SalesDepot.CoreObjects.csproj" afterPath="$PROJECT_DIR$/../SalesDepot.CoreObjects/SalesDepot.CoreObjects.csproj" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot.NET.sln" afterPath="$PROJECT_DIR$/../SalesDepot.NET.sln" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/SalesDepot.SiteManager.csproj" afterPath="$PROJECT_DIR$/../SiteManager/SalesDepot.SiteManager.csproj" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/SalesDepot.csproj" afterPath="$PROJECT_DIR$/../SalesDepot/SalesDepot.csproj" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/Cliparts/SalesGalleryControl.cs" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/Cliparts/SalesGalleryControl.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/ConfigurationClasses/SettingsManager.cs" afterPath="$PROJECT_DIR$/../FileManager/ConfigurationClasses/SettingsManager.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/TabPages/TabHomeControl.Designer.cs" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/TabPages/TabHomeControl.Designer.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/TabPages/TabHomeControl.cs" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/TabPages/TabHomeControl.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../OutlookSalesDepotAddIn/Controls/TabPages/TabHomeControl.cs" afterPath="$PROJECT_DIR$/../OutlookSalesDepotAddIn/Controls/TabPages/TabHomeControl.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/TabPages/TabHomeControl.cs" afterPath="$PROJECT_DIR$/../SalesDepot/TabPages/TabHomeControl.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/TabPages/TabHomeControl.resx" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/TabPages/TabHomeControl.resx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../OutlookSalesDepotAddIn/Controls/TabPages/TabOvernightsCalendarControl.cs" afterPath="$PROJECT_DIR$/../OutlookSalesDepotAddIn/Controls/TabPages/TabOvernightsCalendarControl.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../OvernightsCalendarViewer/TabPages/TabOvernightsCalendarControl.cs" afterPath="$PROJECT_DIR$/../OvernightsCalendarViewer/TabPages/TabOvernightsCalendarControl.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/TabPages/TabProgramSchedule.cs" afterPath="$PROJECT_DIR$/../SalesDepot/TabPages/TabProgramSchedule.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/TabPages/TabProgramSearch.cs" afterPath="$PROJECT_DIR$/../SalesDepot/TabPages/TabProgramSearch.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/TabPages/TabSearchControl.cs" afterPath="$PROJECT_DIR$/../SalesDepot/TabPages/TabSearchControl.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Ticker/TickerManagerControl.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Ticker/TickerManagerControl.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot.Services/StatisticService/UserActivity.cs" afterPath="$PROJECT_DIR$/../SalesDepot.Services/StatisticService/UserActivity.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Utilities/UtilitiesManagerControl.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Utilities/UtilitiesManagerControl.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot.CoreObjects/ToolClasses/Utils.cs" afterPath="$PROJECT_DIR$/../SalesDepot.CoreObjects/ToolClasses/Utils.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/WallBin/WallBinTreeListControl.cs" afterPath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/WallBin/WallBinTreeListControl.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/Controllers/WallbinController.cs" afterPath="$PROJECT_DIR$/../FileManager/Controllers/WallbinController.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/Cliparts/WebArtControl.cs" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/Cliparts/WebArtControl.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot.CoreObjects/InteropClasses/WordHelper.cs" afterPath="$PROJECT_DIR$/../SalesDepot.CoreObjects/InteropClasses/WordHelper.cs" />
+    </list>
     <ignored path="WebSalesLibraries.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -41,10 +291,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="shortcuts-search.js" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/js/regular/base/shortcuts-search.js">
+      <file leaf-file-name="configuration.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/configuration.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="39" selection-start="615" selection-end="672" vertical-scroll-proportion="-0.18732782" vertical-offset="391" max-vertical-offset="12512">
+            <state line="72" column="24" selection-start="2177" selection-end="2177" vertical-scroll-proportion="0.53988606" vertical-offset="845" max-vertical-offset="2516">
               <folding />
             </state>
           </provider>
@@ -70,57 +320,57 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/protected/models/qpages/records/QPageRecord.php" />
-        <option value="$PROJECT_DIR$/protected/models/auth/records/UserRecord.php" />
-        <option value="$PROJECT_DIR$/protected/models/wallbin/records/LibraryPageRecord.php" />
-        <option value="$PROJECT_DIR$/protected/views/regular/wallbin/accordionView.php" />
-        <option value="$PROJECT_DIR$/protected/models/wallbin/records/UserLinkRecord.php" />
-        <option value="$PROJECT_DIR$/protected/models/wallbin/records/LinkWhiteListWhiteListRecord.php" />
-        <option value="$PROJECT_DIR$/protected/data/tables/tbl_user_white_list.sql" />
-        <option value="$PROJECT_DIR$/protected/data/tables/tbl_link_black_list.sql" />
-        <option value="$PROJECT_DIR$/protected/models/shortcuts/models/WindowShortcut.php" />
-        <option value="$PROJECT_DIR$/protected/extensions/phpQuery/demo.php" />
-        <option value="$PROJECT_DIR$/protected/controllers/WallbinController.php" />
-        <option value="$PROJECT_DIR$/protected/extensions/phpQuery/phpQuery-onefile.php" />
-        <option value="$PROJECT_DIR$/configuration.php" />
-        <option value="$PROJECT_DIR$/protected/models/wallbin/records/UserPageCacheRecord.php" />
-        <option value="$PROJECT_DIR$/protected/models/wallbin/models/LibraryLink.php" />
-        <option value="$PROJECT_DIR$/protected/views/regular/wallbin/link.php" />
-        <option value="$PROJECT_DIR$/css/phone/libraries.css" />
-        <option value="$PROJECT_DIR$/css/regular/base/folder-links.css" />
+        <option value="$PROJECT_DIR$/css/regular/base/shortcuts.css" />
+        <option value="$PROJECT_DIR$/protected/views/phone/preview/linkDetails.php" />
+        <option value="$PROJECT_DIR$/js/regular/base/view-dialog-bar.js" />
+        <option value="$PROJECT_DIR$/protected/controllers/ContentController.php" />
+        <option value="$PROJECT_DIR$/protected/models/wallbin/models/Attachment.php" />
+        <option value="$PROJECT_DIR$/protected/models/favorites/records/FavoritesLinkRecord.php" />
         <option value="$PROJECT_DIR$/protected/models/wallbin/records/LibraryRecord.php" />
-        <option value="$PROJECT_DIR$/protected/models/wallbin/records/LinkWhiteListRecord.php" />
-        <option value="$PROJECT_DIR$/protected/models/wallbin/models/LibraryPage.php" />
-        <option value="db-console:/b3b4574f/5f689e70-8d5b-41e3-aaa1-c8c47e976102/" />
-        <option value="$PROJECT_DIR$/protected/data/tables/tbl_link_white_list.sql" />
-        <option value="$PROJECT_DIR$/protected/models/shortcuts/models/SubSearchTemplate.php" />
-        <option value="$PROJECT_DIR$/protected/models/shortcuts/models/SearchShortcut.php" />
-        <option value="$PROJECT_DIR$/protected/models/shortcuts/models/SearchBar.php" />
-        <option value="$PROJECT_DIR$/css/regular/base/links-grid.css" />
-        <option value="$PROJECT_DIR$/protected/models/wallbin/records/LinkBlackListRecord.php" />
-        <option value="$PROJECT_DIR$/protected/controllers/AdminController.php" />
-        <option value="$PROJECT_DIR$/protected/models/wallbin/models/LibraryFolder.php" />
-        <option value="$PROJECT_DIR$/protected/views/regular/shortcuts/searchResult.php" />
-        <option value="$PROJECT_DIR$/js/regular/qpage/page-links.js" />
-        <option value="$PROJECT_DIR$/js/regular/base/wallbin.js" />
-        <option value="$PROJECT_DIR$/protected/controllers/PreviewController.php" />
-        <option value="$PROJECT_DIR$/js/regular/base/links-grid.js" />
-        <option value="$PROJECT_DIR$/css/regular/base/view-dialog.css" />
-        <option value="$PROJECT_DIR$/js/regular/base/link-viewing.js" />
-        <option value="$PROJECT_DIR$/protected/views/regular/preview/viewDialog.php" />
-        <option value="$PROJECT_DIR$/protected/components/behaviors/RequireLogin.php" />
-        <option value="$PROJECT_DIR$/protected/config/production.php" />
-        <option value="$PROJECT_DIR$/protected/config/development.php" />
-        <option value="$PROJECT_DIR$/protected/config/main.php" />
-        <option value="$PROJECT_DIR$/protected/controllers/SiteController.php" />
-        <option value="$PROJECT_DIR$/protected/views/regular/auth/unauthorized.php" />
-        <option value="$PROJECT_DIR$/protected/views/regular/site/badBrowser.php" />
-        <option value="$PROJECT_DIR$/protected/config/console.php" />
+        <option value="$PROJECT_DIR$/protected/views/regular/site/emailVideo.php" />
+        <option value="$PROJECT_DIR$/protected/views/phone/site/emailVideo.php" />
+        <option value="$PROJECT_DIR$/protected/models/wallbin/models/LibraryManager.php" />
+        <option value="$PROJECT_DIR$/protected/models/wallbin/records/EmailedLinkRecord.php" />
         <option value="$PROJECT_DIR$/protected/components/behaviors/BehaviorManager.php" />
-        <option value="$PROJECT_DIR$/protected/models/wallbin/records/LinkRecord.php" />
-        <option value="$PROJECT_DIR$/protected/views/regular/shortcuts/searchBar.php" />
+        <option value="$PROJECT_DIR$/protected/controllers/SiteController.php" />
+        <option value="$PROJECT_DIR$/protected/controllers/UtilityController.php" />
+        <option value="$PROJECT_DIR$/js/phone/email.js" />
+        <option value="$PROJECT_DIR$/protected/views/phone/site/index.php" />
+        <option value="$PROJECT_DIR$/js/regular/qbuilder/page-content.js" />
+        <option value="$PROJECT_DIR$/js/phone/favorites.js" />
+        <option value="$PROJECT_DIR$/js/phone/qpage.js" />
+        <option value="$PROJECT_DIR$/js/phone/wallbin.js" />
+        <option value="$PROJECT_DIR$/protected/views/regular/qpage/login.php" />
+        <option value="$PROJECT_DIR$/protected/views/regular/qpage/index.php" />
+        <option value="$PROJECT_DIR$/protected/views/phone/qpage/login.php" />
+        <option value="$PROJECT_DIR$/protected/views/phone/qpage/index.php" />
+        <option value="$PROJECT_DIR$/js/regular/qpage/page-links.js" />
+        <option value="$PROJECT_DIR$/js/phone/link-viewing.js" />
+        <option value="$PROJECT_DIR$/protected/views/phone/preview/linkPreview.php" />
+        <option value="$PROJECT_DIR$/css/regular/base/login.css" />
+        <option value="$PROJECT_DIR$/protected/views/regular/qbuilder/pageContent.php" />
+        <option value="$PROJECT_DIR$/css/regular/base/quizzes.css" />
+        <option value="$PROJECT_DIR$/js/phone/search.js" />
+        <option value="$PROJECT_DIR$/js/regular/base/search-view.js" />
         <option value="$PROJECT_DIR$/js/regular/base/shortcuts-search.js" />
+        <option value="$PROJECT_DIR$/js/regular/base/shortcuts.js" />
+        <option value="$PROJECT_DIR$/protected/controllers/SearchController.php" />
+        <option value="$PROJECT_DIR$/protected/data/tables/tbl_link.sql" />
+        <option value="$PROJECT_DIR$/protected/models/wallbin/models/LibraryLink.php" />
+        <option value="$PROJECT_DIR$/protected/views/phone/search/searchView.php" />
+        <option value="$PROJECT_DIR$/protected/views/regular/widgets/searchControlPanel.php" />
+        <option value="$PROJECT_DIR$/protected/views/regular/shortcuts/searchBar.php" />
+        <option value="$PROJECT_DIR$/protected/controllers/PreviewController.php" />
+        <option value="$PROJECT_DIR$/protected/views/regular/shortcuts/directLink.php" />
+        <option value="$PROJECT_DIR$/js/phone/shortcuts.js" />
+        <option value="$PROJECT_DIR$/protected/views/phone/shortcuts/directLink.php" />
+        <option value="db-console:/b3b4574f/5f689e70-8d5b-41e3-aaa1-c8c47e976102/" />
+        <option value="$PROJECT_DIR$/configuration.php" />
+        <option value="$PROJECT_DIR$/js/regular/base/link-viewing.js" />
+        <option value="$PROJECT_DIR$/protected/models/wallbin/records/LinkRecord.php" />
         <option value="$PROJECT_DIR$/protected/config/params.php" />
+        <option value="$PROJECT_DIR$/protected/views/regular/auth/login.php" />
+        <option value="$PROJECT_DIR$/protected/views/regular/preview/viewDialog.php" />
       </list>
     </option>
   </component>
@@ -271,7 +521,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="shortcuts" />
+              <option name="myItemId" value="preview" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -306,18 +556,6 @@
               <option name="myItemId" value="protected" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="models" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wallbin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="records" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -329,159 +567,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="protected" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="models" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wallbin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="protected" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="models" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="protected" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="protected" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="controllers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="protected" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="config" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="protected" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="widgets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="protected" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="protected" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="behaviors" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
+              <option name="myItemId" value="css" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -499,7 +585,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
+              <option name="myItemId" value="css" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -521,7 +607,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
+              <option name="myItemId" value="css" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -539,7 +625,7 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
     <property name="recentsLimit" value="5" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../PHP/ShortcutsViewer" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="299" />
     <property name="JdbcConsole.ResultInNewTab" value="false" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="972" />
@@ -601,10 +687,10 @@
     <configuration default="true" type="PhpWebAppRunConfigurationType" factoryName="PHP Web Application">
       <method />
     </configuration>
-    <configuration default="true" type="PhpRemoteDebugRunConfigurationType" factoryName="PHP Remote Debug" server_name="Localhost" session_id="netbeans-xdebug">
+    <configuration default="true" type="PhpHttpRequestRunConfigurationType" factoryName="PHP HTTP Request">
       <method />
     </configuration>
-    <configuration default="true" type="PhpHttpRequestRunConfigurationType" factoryName="PHP HTTP Request">
+    <configuration default="true" type="PhpRemoteDebugRunConfigurationType" factoryName="PHP Remote Debug" server_name="Localhost" session_id="netbeans-xdebug">
       <method />
     </configuration>
     <configuration default="true" type="PhpLocalRunConfigurationType" factoryName="PHP Console">
@@ -1174,7 +1260,11 @@
       <created>1411540283582</created>
       <updated>1411540283582</updated>
     </task>
-    <option name="localTasksCounter" value="128" />
+    <task id="LOCAL-00128" summary="Web Sales Depot: Shortcuts search bug fix">
+      <created>1412094139371</created>
+      <updated>1412094139371</updated>
+    </task>
+    <option name="localTasksCounter" value="129" />
     <servers />
   </component>
   <component name="TodoView" selected-index="3">
@@ -1201,15 +1291,15 @@
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16026345" sideWeight="0.6552828" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="true" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22364217" sideWeight="0.5117396" order="5" side_tool="false" content_ui="tabs" x="20" y="824" width="1874" height="217" />
+      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15806806" sideWeight="0.6552828" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="true" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21246007" sideWeight="0.5117396" order="5" side_tool="false" content_ui="tabs" x="20" y="824" width="1874" height="217" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32968238" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32491767" sideWeight="0.49573106" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.17518637" sideWeight="0.87596047" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21033014" sideWeight="0.12957746" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Framework" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.59625965" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24920128" sideWeight="0.87042254" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2151482" sideWeight="0.85272145" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.28381255" sideWeight="0.87042254" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22283205" sideWeight="0.85272145" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15848452" sideWeight="0.13024282" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="1.0" sideWeight="0.48772678" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24588364" sideWeight="0.44236925" order="2" side_tool="false" content_ui="tabs" />
@@ -1218,20 +1308,20 @@
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15314835" sideWeight="0.76237625" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="REST Client" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24368826" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="DB Browser" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.59625965" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24866879" sideWeight="0.8228823" order="2" side_tool="false" content_ui="combo" />
       <window_info id="DB Execution Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30954996" sideWeight="0.923159" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24866879" sideWeight="0.8228823" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30954996" sideWeight="0.923159" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24424973" sideWeight="0.40288153" order="1" side_tool="false" content_ui="tabs" x="-1278" y="1" width="1271" height="1022" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24478595" sideWeight="0.40288153" order="1" side_tool="false" content_ui="tabs" x="-1278" y="1" width="1271" height="1022" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32855567" sideWeight="0.49359658" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21523179" sideWeight="0.5741729" order="5" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Changes" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22364217" sideWeight="0.5117396" order="5" side_tool="false" content_ui="tabs" x="20" y="824" width="1874" height="217" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.17412141" sideWeight="0.87596047" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.17412141" sideWeight="0.87596047" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15314835" sideWeight="0.76237625" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="1.0" sideWeight="0.48772678" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2777168" sideWeight="0.4850587" order="9" side_tool="false" content_ui="tabs" />
@@ -1239,8 +1329,8 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32491767" sideWeight="0.49573106" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18530351" sideWeight="0.87042254" order="0" side_tool="false" content_ui="combo" />
       <window_info id="DB Browser" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.59625965" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24588364" sideWeight="0.44236925" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="DB Execution Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24588364" sideWeight="0.44236925" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24866879" sideWeight="0.8228823" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30996713" sideWeight="0.923159" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.135816" sideWeight="0.6552828" order="10" side_tool="false" content_ui="tabs" />
@@ -1272,7 +1362,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="Web Sales Depot: Quz pass top level group filter fix&#10;" />
     <MESSAGE value="Web Sales Depot: Quiz pass top level group filter fix&#10;&#10;" />
     <MESSAGE value="Web Sales Depot: Quiz group permissions fix&#10;&#10;" />
     <MESSAGE value="Web Sales Depot: Shortcuts search single page fix" />
@@ -1297,11 +1386,24 @@
     <MESSAGE value="Web Sales Depot: Link White\Black list bug fixes &#10;&#10;" />
     <MESSAGE value="Web Sales Depot: View Dialog refactoring + Old Browser warning fix &#10;&#10;" />
     <MESSAGE value="Web Sales Depot: Search bar bug fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="Web Sales Depot: Search bar bug fix" />
+    <MESSAGE value="Web Sales Depot: Shortcuts search bug fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="Web Sales Depot: Shortcuts search bug fix" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="376" />
+      <breakpoints>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/protected/models/wallbin/models/LibraryManager.php</url>
+          <line>219</line>
+          <option name="timeStamp" value="377" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/js/phone/qpage.js</url>
+          <line>65</line>
+          <option name="timeStamp" value="386" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="406" />
     </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
@@ -1317,269 +1419,265 @@
     </PATH>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/protected/controllers/AdminController.php">
+    <entry file="file://$PROJECT_DIR$/js/phone/link-viewing.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="361" column="20" selection-start="10345" selection-end="10345" vertical-scroll-proportion="0.0" vertical-offset="6137" max-vertical-offset="8415" />
+        <state line="116" column="25" selection-start="3549" selection-end="3549" vertical-scroll-proportion="0.0" vertical-offset="1762" max-vertical-offset="6001" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/phone/wallbin.js">
+    <entry file="file://$PROJECT_DIR$/protected/views/phone/preview/linkPreview.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="100" column="47" selection-start="2648" selection-end="2648" vertical-scroll-proportion="0.72324157" vertical-offset="1227" max-vertical-offset="7140" />
+        <state line="94" column="112" selection-start="3501" selection-end="3501" vertical-scroll-proportion="-11.346154" vertical-offset="1235" max-vertical-offset="3553" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/protected/models/wallbin/models/LibraryLink.php">
+    <entry file="file://$PROJECT_DIR$/protected/views/phone/shortcuts/page.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="237" column="17" selection-start="3717" selection-end="3717" vertical-scroll-proportion="0.50955415" vertical-offset="3709" max-vertical-offset="20706" />
+        <state line="8" column="17" selection-start="163" selection-end="163" vertical-scroll-proportion="-5.230769" vertical-offset="0" max-vertical-offset="629" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/protected/views/regular/wallbin/link.php">
+    <entry file="file://$PROJECT_DIR$/protected/views/regular/shortcuts/page.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="27" selection-start="474" selection-end="488" vertical-scroll-proportion="0.46019107" vertical-offset="0" max-vertical-offset="1173" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/regular/shortcuts/window-loader.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="204" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/models/wallbin/models/LibraryFolder.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="157" column="52" selection-start="3139" selection-end="3139" vertical-scroll-proportion="0.08415147" vertical-offset="2609" max-vertical-offset="4199" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/controllers/WallbinController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="76" column="29" selection-start="2708" selection-end="2708" vertical-scroll-proportion="0.5314286" vertical-offset="920" max-vertical-offset="1870" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/models/wallbin/records/LinkBlackListRecord.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="59" column="86" selection-start="1336" selection-end="1336" vertical-scroll-proportion="0.54698455" vertical-offset="613" max-vertical-offset="1530" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/regular/qpage/page-links.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="0" selection-start="767" selection-end="767" vertical-scroll-proportion="0.0" vertical-offset="51" max-vertical-offset="2516" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/regular/base/wallbin.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="113" column="0" selection-start="2678" selection-end="2678" vertical-scroll-proportion="0.0" vertical-offset="1904" max-vertical-offset="9826" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/regular/base/links-grid.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="51" column="0" selection-start="1323" selection-end="1323" vertical-scroll-proportion="0.8378378" vertical-offset="340" max-vertical-offset="4369" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/regular/base/search-processor.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="49" selection-start="989" selection-end="989" vertical-scroll-proportion="0.54122937" vertical-offset="370" max-vertical-offset="1037" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/controllers/PreviewController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="107" column="16" selection-start="3313" selection-end="3313" vertical-scroll-proportion="-7.1923075" vertical-offset="204" max-vertical-offset="4284" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/css/regular/base/view-dialog.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="122" column="57" selection-start="1858" selection-end="1858" vertical-scroll-proportion="0.0" vertical-offset="1679" max-vertical-offset="2346" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/regular/base/link-viewing.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="60" column="17" selection-start="1663" selection-end="1663" vertical-scroll-proportion="0.0" vertical-offset="510" max-vertical-offset="16813" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/views/regular/preview/specialDialog.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1156" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/views/regular/preview/viewDialog.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="202" column="46" selection-start="9757" selection-end="9757" vertical-scroll-proportion="0.4542536" vertical-offset="3151" max-vertical-offset="3774" />
+        <state line="20" column="29" selection-start="910" selection-end="910" vertical-scroll-proportion="-8.076923" vertical-offset="130" max-vertical-offset="884" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/protected/views/regular/site/index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="124" selection-start="3653" selection-end="3773" vertical-scroll-proportion="-0.65384614" vertical-offset="510" max-vertical-offset="8143" />
+        <state line="152" column="88" selection-start="13065" selection-end="13065" vertical-scroll-proportion="-7.730769" vertical-offset="2383" max-vertical-offset="8126" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/views/regular/ticker/tickerLink.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="25" selection-start="701" selection-end="701" vertical-scroll-proportion="3.9230769" vertical-offset="357" max-vertical-offset="1428" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/models/wallbin/models/LibraryGroup.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="641" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/regular/base/controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="103" column="11" selection-start="2471" selection-end="2471" vertical-scroll-proportion="0.0" vertical-offset="945" max-vertical-offset="1853" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/regular/base/login.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="5389" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/regular/base/quizzes.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="194" column="12" selection-start="2128" selection-end="2128" vertical-scroll-proportion="0.0" vertical-offset="2982" max-vertical-offset="3723" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/views/regular/qbuilder/pageContent.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="66" column="0" selection-start="3198" selection-end="3198" vertical-scroll-proportion="0.0" vertical-offset="248" max-vertical-offset="2754" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/phone/libraries.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1598" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/phone/search.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="616" column="0" selection-start="18322" selection-end="18322" vertical-scroll-proportion="0.43592677" vertical-offset="10091" max-vertical-offset="11016" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/phone/wallbin.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="149" column="35" selection-start="3939" selection-end="3939" vertical-scroll-proportion="0.35851648" vertical-offset="2272" max-vertical-offset="6120" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/regular/base/search-view.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="696" column="15" selection-start="19716" selection-end="19716" vertical-scroll-proportion="13.009615" vertical-offset="2361" max-vertical-offset="12189" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/regular/base/links-grid.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="71" column="37" selection-start="1967" selection-end="1967" vertical-scroll-proportion="0.29807693" vertical-offset="990" max-vertical-offset="2856" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/regular/qbuilder/page-content.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="345" column="72" selection-start="9106" selection-end="9106" vertical-scroll-proportion="0.0" vertical-offset="5648" max-vertical-offset="8653" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/regular/qpage/page-links.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="49" selection-start="436" selection-end="436" vertical-scroll-proportion="0.25686812" vertical-offset="0" max-vertical-offset="2516" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/controllers/ContentController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1037" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/protected/controllers/SiteController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="60" selection-start="511" selection-end="559" vertical-scroll-proportion="-16.346153" vertical-offset="0" max-vertical-offset="6579" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/views/regular/auth/unauthorized.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="47" selection-start="149" selection-end="149" vertical-scroll-proportion="-3.9230769" vertical-offset="0" max-vertical-offset="459" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/views/regular/site/badBrowser.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="29" selection-start="228" selection-end="228" vertical-scroll-proportion="-7.8461537" vertical-offset="0" max-vertical-offset="459" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/components/core/IsdController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="44" selection-start="328" selection-end="351" vertical-scroll-proportion="-8.5" vertical-offset="51" max-vertical-offset="850" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/extensions/phpQuery/jQueryServer/demo/jquery.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2345" column="12" selection-start="63391" selection-end="63391" vertical-scroll-proportion="0.5606509" vertical-offset="39486" max-vertical-offset="50949" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/images/tickerlogo.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/data/procedures/sp_get_access_report.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="33" selection-start="0" selection-end="2057" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="646" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/data/procedures/sp_get_all_qpages.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="18" selection-start="0" selection-end="645" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="408" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/data/procedures/sp_get_inactive_users.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="11" selection-start="0" selection-end="673" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="340" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/data/procedures/sp_get_main_group_report.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="20" selection-start="0" selection-end="2206" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="714" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/data/procedures/sp_get_main_user_report.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="20" selection-start="0" selection-end="4487" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1275" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/data/procedures/sp_get_navigation_group_report.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="19" selection-start="0" selection-end="1610" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="561" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/data/procedures/sp_get_navigation_user_report.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="14" selection-start="0" selection-end="3303" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1037" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/data/procedures/sp_get_quiz_pass_group_report.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="20" selection-start="0" selection-end="1022" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="459" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/data/procedures/sp_get_quiz_pass_user_report.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="32" selection-start="709" selection-end="709" vertical-scroll-proportion="0.3701016" vertical-offset="0" max-vertical-offset="867" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/config/production.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="0" selection-start="6" selection-end="6" vertical-scroll-proportion="0.023842918" vertical-offset="0" max-vertical-offset="713" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/config/development.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="0" selection-start="88" selection-end="88" vertical-scroll-proportion="0.071528755" vertical-offset="0" max-vertical-offset="713" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/components/behaviors/BehaviorManager.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="38" selection-start="367" selection-end="367" vertical-scroll-proportion="7.1923075" vertical-offset="459" max-vertical-offset="1122">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/extensions/browser/Browser.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="452" column="0" selection-start="15821" selection-end="15821" vertical-scroll-proportion="0.3328" vertical-offset="7476" max-vertical-offset="21590" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/models/wallbin/records/LibraryRecord.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1904">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2686" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/protected/controllers/SearchController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="124" column="29" selection-start="3975" selection-end="3975" vertical-scroll-proportion="0.0" vertical-offset="2108" max-vertical-offset="3791">
-          <folding />
-        </state>
+        <state line="124" column="0" selection-start="3918" selection-end="3918" vertical-scroll-proportion="0.8233618" vertical-offset="1530" max-vertical-offset="3757" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/protected/models/wallbin/records/LinkRecord.php">
+    <entry file="file://$PROJECT_DIR$/protected/controllers/UtilityController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="302" column="29" selection-start="10565" selection-end="10565" vertical-scroll-proportion="6.0542455" vertical-offset="0" max-vertical-offset="12189">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2414" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/protected/models/shortcuts/models/SearchBar.php">
+    <entry file="file://$PROJECT_DIR$/protected/models/wallbin/models/LibraryLink.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="57" column="17" selection-start="2642" selection-end="2642" vertical-scroll-proportion="0.0" vertical-offset="675" max-vertical-offset="1326" />
+        <state line="541" column="39" selection-start="15144" selection-end="15144" vertical-scroll-proportion="0.3091168" vertical-offset="8980" max-vertical-offset="19941" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/protected/views/regular/shortcuts/subSearchBar.php">
+    <entry file="file://$PROJECT_DIR$/protected/views/phone/search/searchView.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="651" />
+        <state line="20" column="0" selection-start="1243" selection-end="1243" vertical-scroll-proportion="0.4755245" vertical-offset="0" max-vertical-offset="715" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/protected/views/regular/shortcuts/searchResult.php">
+    <entry file="file://$PROJECT_DIR$/protected/views/regular/widgets/searchControlPanel.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="79" column="16" selection-start="3625" selection-end="4233" vertical-scroll-proportion="0.0" vertical-offset="939" max-vertical-offset="1564" />
+        <state line="162" column="28" selection-start="6456" selection-end="6456" vertical-scroll-proportion="0.41880342" vertical-offset="2460" max-vertical-offset="3927" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/protected/views/regular/shortcuts/searchBar.php">
+    <entry file="file://$PROJECT_DIR$/protected/data/tables/tbl_link.sql">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="78" column="39" selection-start="3487" selection-end="3487" vertical-scroll-proportion="0.0" vertical-offset="1326" max-vertical-offset="2244" />
+        <state line="17" column="38" selection-start="616" selection-end="616" vertical-scroll-proportion="0.39106902" vertical-offset="0" max-vertical-offset="765" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/protected/config/console.php">
+    <entry file="file://$PROJECT_DIR$/protected/data/tables/tbl_reset_password.sql">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="0" selection-start="1202" selection-end="1202" vertical-scroll-proportion="0.0" vertical-offset="561" max-vertical-offset="1224" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/config/main.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="19" selection-start="428" selection-end="428" vertical-scroll-proportion="0.0" vertical-offset="221" max-vertical-offset="1615" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="0" selection-start="402" selection-end="402" vertical-scroll-proportion="-10.461538" vertical-offset="0" max-vertical-offset="374" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/console.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="866" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/configuration.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.3083434" vertical-offset="255" max-vertical-offset="2567" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/config/params.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="22" selection-start="273" selection-end="273" vertical-scroll-proportion="0.21458626" vertical-offset="0" max-vertical-offset="713">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="100" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/regular/base/shortcuts-search.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="39" selection-start="615" selection-end="672" vertical-scroll-proportion="-0.18732782" vertical-offset="391" max-vertical-offset="12512">
+        <state line="243" column="50" selection-start="8310" selection-end="8310" vertical-scroll-proportion="0.24828376" vertical-offset="3914" max-vertical-offset="12427" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/views/regular/shortcuts/searchBar.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="117" column="86" selection-start="5308" selection-end="5330" vertical-scroll-proportion="0.7393868" vertical-offset="1311" max-vertical-offset="2193" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/components/actions/ShortcutsUpdateAction.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="95" column="209" selection-start="5364" selection-end="5364" vertical-scroll-proportion="0.4432" vertical-offset="1338" max-vertical-offset="1989" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/views/phone/shortcuts/emptyLink.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="664" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/views/phone/shortcuts/libraryFileLink.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="643" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/phone/shortcuts.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="135" column="12" selection-start="3246" selection-end="3246" vertical-scroll-proportion="0.0" vertical-offset="1937" max-vertical-offset="2907" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/views/phone/shortcuts/directLink.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="31" selection-start="638" selection-end="638" vertical-scroll-proportion="-5.8846154" vertical-offset="0" max-vertical-offset="306" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/views/regular/shortcuts/directLink.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="28" selection-start="786" selection-end="786" vertical-scroll-proportion="0.42218542" vertical-offset="0" max-vertical-offset="604" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/models/statistic/records/StatisticActivityRecord.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="58" column="31" selection-start="1514" selection-end="1514" vertical-scroll-proportion="-12.653846" vertical-offset="657" max-vertical-offset="1326" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/data/tables/tbl_statistic_user.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="640" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/data/tables/tbl_statistic_group.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="640" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/data/tables/tbl_statistic_detail.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="661" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/data/tables/tbl_statistic_activity.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="603" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/config/params.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="21" selection-start="241" selection-end="241" vertical-scroll-proportion="0.22113821" vertical-offset="0" max-vertical-offset="615" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/controllers/PreviewController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="63" column="87" selection-start="1583" selection-end="1598" vertical-scroll-proportion="0.34385383" vertical-offset="864" max-vertical-offset="3128" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/regular/base/shortcuts.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="190" column="48" selection-start="6450" selection-end="6450" vertical-scroll-proportion="1.1201849" vertical-offset="2503" max-vertical-offset="8024" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/regular/base/link-viewing.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="47" column="99" selection-start="1277" selection-end="1277" vertical-scroll-proportion="0.45300463" vertical-offset="505" max-vertical-offset="12665" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/models/wallbin/records/LinkRecord.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="121" column="0" selection-start="4172" selection-end="4172" vertical-scroll-proportion="0.8186196" vertical-offset="1547" max-vertical-offset="11781" />
+      </provider>
+    </entry>
+    <entry file="dbDummy://db-console:/b3b4574f/5f689e70-8d5b-41e3-aaa1-c8c47e976102/">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="34" selection-start="34" selection-end="34" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="574" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/controllers/StatisticController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-2.0465488" vertical-offset="1275" max-vertical-offset="6477" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/views/regular/auth/login.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="100" column="12" selection-start="3638" selection-end="3638" vertical-scroll-proportion="0.53276354" vertical-offset="1326" max-vertical-offset="2363">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/regular/base/login.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="42" column="1" selection-start="429" selection-end="429" vertical-scroll-proportion="0.9635627" vertical-offset="0" max-vertical-offset="1105">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/views/regular/preview/viewDialog.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="141" column="30" selection-start="6895" selection-end="6895" vertical-scroll-proportion="0.38319087" vertical-offset="2128" max-vertical-offset="3791">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/configuration.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="72" column="24" selection-start="2177" selection-end="2177" vertical-scroll-proportion="0.53988606" vertical-offset="845" max-vertical-offset="2516">
           <folding />
         </state>
       </provider>

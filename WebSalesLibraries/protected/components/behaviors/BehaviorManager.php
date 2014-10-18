@@ -38,7 +38,6 @@
 				!strstr(Yii::app()->request->getUrl(), 'auth/') &&
 				!strstr(Yii::app()->request->getUrl(), 'site/badBrowser') &&
 				!strstr(Yii::app()->request->getUrl(), 'site/login') &&
-				!strstr(Yii::app()->request->getUrl(), 'site/emailLinkGet') &&
 				!strstr(Yii::app()->request->getUrl(), 'site/switchVersion') &&
 				!strstr(Yii::app()->request->getUrl(), 'qbuilder/quote') &&
 				!strstr(Yii::app()->request->getUrl(), 'qpage/show') &&

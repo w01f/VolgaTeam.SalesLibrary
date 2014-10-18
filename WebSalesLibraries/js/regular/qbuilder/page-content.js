@@ -343,7 +343,7 @@
 			{
 				var ids = $(this).parent().find('.link-id-column').html().split('---');
 				var linkId = ids[1].replace('link', '');
-				$.SalesPortal.LinkManager.requestViewDialog(linkId, false);
+				$.SalesPortal.LinkManager.requestViewDialog(linkId, true);
 			});
 
 			pageLinks.find("td.click-mobile").off('touchstart').off('touchmove').off('touchend').on('touchstart',function ()
@@ -358,7 +358,7 @@
 				{
 					var ids = $(this).parent().find('.link-id-column').html().split('---');
 					var linkId = ids[1].replace('link', '');
-					$.SalesPortal.LinkManager.requestViewDialog(linkId, false);
+					$.SalesPortal.LinkManager.requestViewDialog(linkId, true);
 				}
 				e.stopPropagation();
 				e.preventDefault();

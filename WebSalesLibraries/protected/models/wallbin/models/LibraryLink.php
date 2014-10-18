@@ -102,16 +102,6 @@
 		 */
 		public $banner;
 		/**
-		 * @var boolean
-		 * @soap
-		 */
-		public $enableFileCard;
-		/**
-		 * @var FileCard
-		 * @soap
-		 */
-		public $fileCard;
-		/**
 		 * @var string
 		 * @soap
 		 */
@@ -146,16 +136,6 @@
 		 * @soap
 		 */
 		public $contentPath;
-		/**
-		 * @var boolean
-		 * @soap
-		 */
-		public $enableAttachments;
-		/**
-		 * @var Attachment[]
-		 * @soap
-		 */
-		public $attachments;
 		/**
 		 * @var boolean
 		 * @soap
@@ -252,29 +232,6 @@
 				$this->banner->load($bannerRecord);
 			}
 
-			$this->enableFileCard = $linkRecord->enable_file_card;
-			$fileCardRecord = FileCardRecord::model()->findByPk($linkRecord->id_file_card);
-			if (isset($fileCardRecord))
-			{
-				$this->fileCard = new FileCard();
-				$this->fileCard->load($fileCardRecord);
-			}
-
-			$this->enableAttachments = $linkRecord->enable_attachments;
-			$attachmentRecords = AttachmentRecord::model()->findAll('id_link=?', array($linkRecord->id));
-			if ($attachmentRecords !== null)
-			{
-				foreach ($attachmentRecords as $attachmentRecord)
-				{
-					$attachment = new Attachment($this);
-					$attachment->browser = $this->browser;
-					$attachment->load($attachmentRecord);
-					$this->attachments[] = $attachment;
-				}
-			}
-			if (isset($this->attachments))
-				usort($this->attachments, "Attachment::attachmentComparer");
-
 			$linkSuperFiltersRecords = LinkSuperFilterRecord::model()->findAll('id_link=?', array($linkRecord->id));
 			if ($linkSuperFiltersRecords !== null)
 				foreach ($linkSuperFiltersRecords as $linkSuperFiltersRecord)
@@ -317,7 +274,7 @@
 				$this->fileRelativePath = str_replace('\\', '', $this->fileRelativePath);
 				$this->fileName = $this->fileRelativePath;
 				$this->fileLink = $this->fileRelativePath;
-				$this->originalFormat = "url";
+				$this->originalFormat = $this->originalFormat != 'url' && $this->originalFormat != 'url365' ? "url" : $this->originalFormat;
 			}
 			else
 			{
@@ -379,6 +336,8 @@
 							return base64_encode(file_get_contents(realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'folderWidgets' . DIRECTORY_SEPARATOR . 'jpeg.png'));
 						case 'url':
 							return base64_encode(file_get_contents(realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'folderWidgets' . DIRECTORY_SEPARATOR . 'url.png'));
+						case 'url365':
+							return base64_encode(file_get_contents(realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'folderWidgets' . DIRECTORY_SEPARATOR . 'url365.png'));
 						case 'key':
 							return base64_encode(file_get_contents(realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'folderWidgets' . DIRECTORY_SEPARATOR . 'keynote.png'));
 						default:
@@ -537,6 +496,10 @@
 						$this->availableFormats[] = 'url';
 						$this->availableFormats[] = 'outlook';
 						break;
+					case 'url365':
+						$this->availableFormats[] = 'url365';
+						$this->availableFormats[] = 'outlook';
+						break;
 					case 'key':
 						$this->availableFormats[] = 'key';
 						if (!$this->forcePreview)
@@ -577,7 +540,6 @@
 							$viewSources[] = array('href' => $this->fileLink);
 							break;
 						case 'outlook':
-						case 'email':
 						case 'favorites':
 							$viewSources[] = array('title' => $this->fileName, 'href' => $this->filePath);
 							break;
@@ -666,7 +628,6 @@
 							$viewSources[] = array('href' => $this->fileLink);
 							break;
 						case 'outlook':
-						case 'email':
 						case 'favorites':
 							$viewSources[] = array('title' => $this->fileName, 'href' => $this->filePath);
 							break;
@@ -755,7 +716,6 @@
 							$viewSources[] = array('href' => $this->fileLink);
 							break;
 						case 'outlook':
-						case 'email':
 						case 'favorites':
 							$viewSources[] = array('title' => $this->fileName, 'href' => $this->filePath);
 							break;
@@ -769,7 +729,6 @@
 							$viewSources[] = array('href' => $this->fileLink);
 							break;
 						case 'outlook':
-						case 'email':
 						case 'favorites':
 							$viewSources[] = array('title' => $this->fileName, 'href' => $this->filePath);
 							break;
@@ -857,7 +816,6 @@
 							$viewSources[] = array('id' => 'link' . $this->id, 'title' => strtoupper(str_replace('_phone', '', $format)) . ' Viewer - ' . $this->fileName, 'href' => $this->fileLink, 'href_mobile' => $this->fileLink);
 							break;
 						case 'outlook':
-						case 'email':
 						case 'favorites':
 							$viewSources[] = array('title' => $this->fileName, 'href' => $this->filePath);
 							break;
@@ -871,13 +829,13 @@
 							$viewSources[] = array('href' => $this->fileLink);
 							break;
 						case 'outlook':
-						case 'email':
 						case 'favorites':
 							$viewSources[] = array('title' => $this->fileName, 'href' => $this->filePath);
 							break;
 					}
 					break;
 				case 'url':
+				case 'url365':
 				case 'other':
 					$viewSources[] = array('href' => $this->fileLink);
 					break;
@@ -921,7 +879,6 @@
 										$viewSources[] = array('src' => $link, 'href' => $link, 'title' => $this->fileName, 'type' => 'video/ogg', 'swf' => Yii::app()->getBaseUrl(true) . '/vendor/video-js/video-js.swf');
 							break;
 						case 'outlook':
-						case 'email':
 						case 'download':
 						case 'favorites':
 							$viewSources[] = array('title' => $this->fileName, 'href' => $this->filePath);
@@ -959,7 +916,6 @@
 										$viewSources[] = array('src' => $link, 'href' => $link, 'title' => $this->fileName, 'type' => 'video/ogg', 'swf' => Yii::app()->getBaseUrl(true) . '/vendor/video-js/video-js.swf');
 							break;
 						case 'outlook':
-						case 'email':
 						case 'download':
 						case 'favorites':
 							$viewSources[] = array('title' => $this->fileName, 'href' => $this->filePath);
@@ -998,7 +954,6 @@
 										$viewSources[] = array('src' => $link, 'href' => $link, 'title' => $this->fileName, 'type' => 'video/ogg', 'swf' => Yii::app()->getBaseUrl(true) . '/vendor/video-js/video-js.swf');
 							break;
 						case 'outlook':
-						case 'email':
 						case 'download':
 						case 'favorites':
 							$viewSources[] = array('title' => $this->fileName, 'href' => $this->filePath);

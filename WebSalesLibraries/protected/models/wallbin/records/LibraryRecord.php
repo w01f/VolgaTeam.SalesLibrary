@@ -94,8 +94,6 @@
 			PreviewRecord::clearData($libraryId);
 			LineBreakRecord::clearData($libraryId);
 			BannerRecord::clearData($libraryId);
-			FileCardRecord::clearData($libraryId);
-			AttachmentRecord::clearData($libraryId);
 			LinkSuperFilterRecord::clearData($libraryId);
 			LinkCategoryRecord::clearData($libraryId);
 			ColumnRecord::clearData($libraryId);

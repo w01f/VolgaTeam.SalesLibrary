@@ -21,17 +21,9 @@
 				foreach ($deadLinkRecords as $deadLinkRecord)
 					$deadLinks[] = ' - ' . $deadLinkRecord->name . ' (' . basename($deadLinkRecord->file_relative_path) . ')';
 
-				$deadAttachmentRecords = AttachmentRecord::model()->findAll('is_dead=1 and id_library=?', array($libraryRecord->id));
-				foreach ($deadAttachmentRecords as $deadAttachmentRecord)
-					$deadLinks[] = ' - ' . $deadAttachmentRecord->name . ' (' . basename($deadAttachmentRecord->path) . ')';
-
 				$videoLinkRecords = LinkRecord::model()->findAll('is_preview_not_ready=1 and id_library=?', array($libraryRecord->id));
 				foreach ($videoLinkRecords as $videoLinkRecord)
 					$notConvertedVideos[] = ' - ' . $videoLinkRecord->name . ' (' . $videoLinkRecord->file_name . ')';
-
-				$videoAttachmentRecords = AttachmentRecord::model()->findAll('is_preview_not_ready=1 and id_library=?', array($libraryRecord->id));
-				foreach ($videoAttachmentRecords as $videoAttachmentRecord)
-					$notConvertedVideos[] = ' - ' . $videoAttachmentRecord->name . ' (' . basename($videoAttachmentRecord->path) . ')';
 
 				if (isset($deadLinks) || isset($notConvertedVideos))
 				{

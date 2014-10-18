@@ -55,6 +55,6 @@
 .checkbox label
 {
 	vertical-align: top;
-	margin-left: 5px;
+	padding-left: 0;
 	display: inherit;
 }

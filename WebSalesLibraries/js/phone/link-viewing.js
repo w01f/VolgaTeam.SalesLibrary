@@ -57,9 +57,6 @@
 									transition: "slidefade"
 								});
 								break;
-							case 'email':
-								runEmailPage(selectedFileId, selectedLinks);
-								break;
 							case 'outlook':
 								runAddPage(selectedFileId, selectedLinkName, selectedFileName, selectedFileType);
 								break;
@@ -90,9 +87,6 @@
 					case 'xls':
 						switch (selectedViewType)
 						{
-							case 'email':
-								runEmailPage(selectedFileId, selectedLinks);
-								break;
 							case 'outlook':
 								runAddPage(selectedFileId, selectedLinkName, selectedFileName, selectedFileType);
 								break;
@@ -121,12 +115,10 @@
 						break;
 					case 'key':
 					case 'url':
+					case 'url365':
 					case 'other':
 						switch (selectedViewType)
 						{
-							case 'email':
-								runEmailPage(selectedFileId, selectedLinks);
-								break;
 							case 'outlook':
 								runAddPage(selectedFileId, selectedLinkName, selectedFileName, selectedFileType);
 								break;
@@ -157,9 +149,6 @@
 					case 'jpeg':
 						switch (selectedViewType)
 						{
-							case 'email':
-								runEmailPage(selectedFileId, selectedLinks);
-								break;
 							case 'outlook':
 								runAddPage(selectedFileId, selectedLinkName, selectedFileName, selectedFileType);
 								break;
@@ -221,9 +210,6 @@
 								});
 								downloadFile(selectedLinks[0].href);
 								break;
-							case 'email':
-								runEmailPage(selectedFileId, selectedLinks);
-								break;
 							case 'outlook':
 								runAddPage(selectedFileId, selectedLinkName, selectedFileName, selectedFileType);
 								break;
@@ -236,60 +222,9 @@
 			}
 		};
 
-		this.viewFileCard = function (linkId)
-		{
-			$.ajax({
-				type: "POST",
-				url: window.BaseUrl + "preview/getFileCard",
-				data: {
-					linkId: linkId
-				},
-				beforeSend: function ()
-				{
-					$('#preview').find('.page-content').html('');
-					$.mobile.loading('show', {
-						textVisible: false,
-						html: ""
-					});
-				},
-				complete: function ()
-				{
-					$.mobile.loading('hide', {
-						textVisible: false,
-						html: ""
-					});
-				},
-				success: function (msg)
-				{
-					var previewPage = $('#preview');
-					previewPage.find('.page-content').html(msg);
-					previewPage.find('.header-title').html('Important Info');
-					previewPage.find('.link.back').attr('href', '#link-details');
-					$.mobile.changePage("#preview", {
-						transition: "slidefade"
-					});
-					previewPage.find('.page-content').children('ul').listview();
-				},
-				async: true,
-				dataType: 'html'
-			});
-		};
-
 		var downloadFile = function (url)
 		{
 			window.open(url.replace(/&amp;/g, '%26'));
-		};
-
-		var runEmailPage = function (linkId, selectedLinks)
-		{
-			$('.email-tab .link-container .name').html(selectedLinks[0].title);
-			$('#email-send').off('click').on('click', function ()
-			{
-				$.SalesPortal.EmailManager.sendEmail(linkId);
-			});
-			$.mobile.changePage("#email-address", {
-				transition: "slidefade"
-			});
 		};
 
 		var runAddPage = function (linkId, title, fileName, fileType)

@@ -30,9 +30,6 @@
 	 * @property mixed content
 	 * @property mixed id_banner
 	 * @property mixed id_line_break
-	 * @property mixed enable_file_card
-	 * @property mixed id_file_card
-	 * @property mixed enable_attachments
 	 * @property mixed id
 	 */
 	class LinkRecord extends CActiveRecord
@@ -87,7 +84,7 @@
 				$linkRecord->file_relative_path = $link['fileRelativePath'];
 				$linkRecord->file_name = $link['fileName'];
 				$linkRecord->file_extension = $link['fileExtension'];
-				$linkRecord->file_date = $link['originalFormat'] == 'url' ? date(Yii::app()->params['mysqlDateFormat'], strtotime($link['dateAdd'])) : date(Yii::app()->params['mysqlDateFormat'], strtotime($link['fileDate']));
+				$linkRecord->file_date = $link['originalFormat'] == 'url' || $link['originalFormat'] == 'url365' ? date(Yii::app()->params['mysqlDateFormat'], strtotime($link['dateAdd'])) : date(Yii::app()->params['mysqlDateFormat'], strtotime($link['fileDate']));
 				$linkRecord->file_size = $link['fileSize'];
 				$linkRecord->note = $link['note'];
 				$linkRecord->format = $link['originalFormat'];
@@ -113,15 +110,15 @@
 				$linkRecord->date_add = date(Yii::app()->params['mysqlDateFormat'], strtotime($link['dateAdd']));
 				$linkRecord->date_modify = $linkDate;
 
-				if (array_key_exists('previewId', $link) && isset($link['previewId']))
-					$linkRecord->id_preview = $link['previewId'];
-
 				$contentPath = str_replace('\\', '/', $libraryRootPath . DIRECTORY_SEPARATOR . $link['contentPath']);
 				if (file_exists($contentPath) && is_file($contentPath))
 					$linkRecord->content = file_get_contents($contentPath);
 
 				echo 'Link ' . ($needToCreate ? 'created' : 'updated') . ': ' . $link['name'] . ' (' . $link['fileName'] . ')' . "\n";
 			}
+
+			if (array_key_exists('previewId', $link) && isset($link['previewId']))
+				$linkRecord->id_preview = $link['previewId'];
 
 			if (array_key_exists('banner', $link) && isset($link['banner']))
 			{
@@ -134,24 +131,6 @@
 				$linkRecord->id_line_break = $link['lineBreakProperties']['id'];
 				LineBreakRecord::updateData($link['lineBreakProperties']);
 			}
-
-			if (array_key_exists('fileCard', $link) && isset($link['fileCard']))
-			{
-				$linkRecord->enable_file_card = $link['enableFileCard'];
-				$linkRecord->id_file_card = $link['fileCard']['id'];
-				FileCardRecord::updateData($link['fileCard']);
-			}
-			else
-				$linkRecord->enable_file_card = false;
-
-			if (array_key_exists('attachments', $link) && isset($link['attachments']))
-			{
-				$linkRecord->enable_attachments = $link['enableAttachments'];
-				foreach ($link['attachments'] as $attachment)
-					AttachmentRecord::updateData($attachment);
-			}
-			else
-				$linkRecord->enable_attachments = false;
 
 			$linkRecord->tags = $link['tags'];
 			if (array_key_exists('superFilters', $link))
@@ -199,7 +178,6 @@
 		 * @param $endDate string
 		 * @param $dateFile boolean
 		 * @param $checkedLibraryIds string[]
-		 * @param $onlyFileCards int
 		 * @param $superFilters string[]
 		 * @param $categories Category[]
 		 * @param $categoriesExactMatch string
@@ -213,7 +191,23 @@
 		 * @param $sortDirection string
 		 * @return array|null
 		 */
-		public static function searchByContent($contentConditions, $fileTypes, $startDate, $endDate, $dateFile, $checkedLibraryIds, $onlyFileCards, $superFilters, $categories, $categoriesExactMatch, $onlyWithCategories, $hideDuplicated, $onlyByName, $onlyByContent, $datasetKey, $baseDatasetKey, $sortColumn, $sortDirection)
+		public static function searchByContent($contentConditions,
+											   $fileTypes,
+											   $startDate,
+											   $endDate,
+											   $dateFile,
+											   $checkedLibraryIds,
+											   $superFilters,
+											   $categories,
+											   $categoriesExactMatch,
+											   $onlyWithCategories,
+											   $hideDuplicated,
+											   $onlyByName,
+											   $onlyByContent,
+											   $datasetKey,
+											   $baseDatasetKey,
+											   $sortColumn,
+											   $sortDirection)
 		{
 			$baseLinks = Yii::app()->session[$baseDatasetKey];
 			$baseLinksCondition = '1=1';
@@ -272,18 +266,6 @@
 						if (count($contentConditions) == 0)
 							$additionalDateCondition = " or (" . $dateCondition . ")";
 					}
-
-				$fileCardsCondition = '1 = 1';
-				$additionalFileCardsCondition = '';
-				if (isset($onlyFileCards))
-				{
-					if ($onlyFileCards == 1)
-					{
-						$fileCardsCondition = 'link.enable_file_card = true or link.enable_attachments = true ';
-						if (count($contentConditions) == 0)
-							$additionalFileCardsCondition = ' or (link.enable_file_card = true or link.enable_attachments = true)';
-					}
-				}
 
 				$superFilterCondition = '1 = 1';
 				$additionalSuperFilterCondition = '';
@@ -395,7 +377,6 @@
 					$contentCondition = implode(" or ", $conditionParts);
 				}
 				$contentCondition = "(" . $contentCondition .
-					$additionalFileCardsCondition .
 					$additionalDateCondition .
 					$additionalSuperFilterCondition .
 					$additionalCategoryCondition .
@@ -409,8 +390,6 @@
 							max(link.name) as name,
 							link.file_name,
 							' . $dateField . ',
-							max(link.enable_attachments) as enable_attachments,
-							max(link.enable_file_card) as enable_file_card,
 							max(link.format) as format,
 							(select (round(avg(lr.value)*2)/2) as value from tbl_link_rate lr where lr.id_link=link.id) as rate,
 							glcat.tag as tag';
@@ -419,7 +398,6 @@
 						" and (" . $baseLinksCondition .
 						") and (" . $libraryCondition .
 						") and (" . $fileTypeCondition .
-						") and (" . $fileCardsCondition .
 						") and (" . $dateCondition .
 						") and (" . $categoryCondition .
 						") and (" . $superFilterCondition .
@@ -433,7 +411,7 @@
 					$linkRecords = Yii::app()->db->createCommand()
 						->select($selectText)
 						->from('tbl_link link')
-						->leftJoin("(select lcat.id_link, group_concat(lcat.tag separator ', ') as tag from tbl_link_category lcat where ".$categoryJoinCondition." group by lcat.id_link) glcat", $joinText)
+						->leftJoin("(select lcat.id_link, group_concat(lcat.tag separator ', ') as tag from tbl_link_category lcat where " . $categoryJoinCondition . " group by lcat.id_link) glcat", $joinText)
 						->where($whereText)
 						->group('link.file_name, glcat.tag')
 						->queryAll();
@@ -446,8 +424,6 @@
 							link.name,
 							link.file_name,
 							' . $dateField . ',
-							link.enable_attachments,
-							link.enable_file_card,
 							link.format,
 							(select (round(avg(lr.value)*2)/2) as value from tbl_link_rate lr where lr.id_link=link.id) as rate,
 							glcat.tag as tag';
@@ -456,7 +432,6 @@
 						" and (" . $baseLinksCondition .
 						") and (" . $libraryCondition .
 						") and (" . $fileTypeCondition .
-						") and (" . $fileCardsCondition .
 						") and (" . $dateCondition .
 						") and (" . $categoryCondition .
 						") and (" . $superFilterCondition .
@@ -470,7 +445,7 @@
 					$linkRecords = Yii::app()->db->createCommand()
 						->select($selectText)
 						->from('tbl_link link')
-						->leftJoin("(select lcat.id_link, group_concat(lcat.tag separator ', ') as tag from tbl_link_category lcat where ".$categoryJoinCondition." group by lcat.id_link) glcat", $joinText)
+						->leftJoin("(select lcat.id_link, group_concat(lcat.tag separator ', ') as tag from tbl_link_category lcat where " . $categoryJoinCondition . " group by lcat.id_link) glcat", $joinText)
 						->where($whereText)
 						->queryAll();
 				}
@@ -631,8 +606,6 @@
 					$link['file_name'] = $linkRecord['file_name'];
 					if (array_key_exists('link_date', $linkRecord))
 						$link['date_modify'] = $linkRecord['link_date'];
-					if (array_key_exists('enable_attachments', $linkRecord) && array_key_exists('enable_file_card', $linkRecord))
-						$link['hasDetails'] = $linkRecord['enable_attachments'] | $linkRecord['enable_file_card'];
 
 					/** @var $library Library */
 					$library = $libraryManager->getLibraryById($linkRecord['id_library']);
@@ -682,6 +655,9 @@
 							break;
 						case 'url':
 							$link['file_type'] = base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'search-url.png'));
+							break;
+						case 'url365':
+							$link['file_type'] = base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'search-url365.png'));
 							break;
 						case 'png':
 							$link['file_type'] = base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'search-png.png'));

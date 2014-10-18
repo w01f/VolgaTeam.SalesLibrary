@@ -11,7 +11,7 @@
 			{
 				var linkId = $(this).attr('id').replace('link', '');
 				recordActivity(linkId);
-				$.SalesPortal.LinkManager.requestViewDialog(linkId, false);
+				$.SalesPortal.LinkManager.requestViewDialog(linkId, true);
 			}
 			event.stopPropagation();
 		});
@@ -89,7 +89,7 @@
 		var pageId = $('#page-id').html();
 		$.ajax({
 			type: "POST",
-			url: window.BaseUrl + "qpage/recordActivity",
+			url: window.BaseUrl + "recordActivity",
 			data: {
 				pageId: pageId,
 				userEmail: $('#user-email').val(),

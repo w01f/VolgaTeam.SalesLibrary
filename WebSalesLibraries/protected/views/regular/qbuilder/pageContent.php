@@ -48,19 +48,19 @@
 			</div>
 			<div id="page-content-tab-title">
 				<h4 class="checkbox">
-					<label class="sr-only" for="page-content-show-description"></label><input type="checkbox" id="page-content-show-description" value="" <? echo isset($page->subtitle) && $page->subtitle != '' ? 'checked' : '' ?>>This statement will be placed at the TOP of your quickSITE...
+					<label><input type="checkbox" id="page-content-show-description" value="" <? echo isset($page->subtitle) && $page->subtitle != '' ? 'checked' : '' ?>> This statement will be placed at the TOP of your quickSITE...</label>
 				</h4>
 				<label class="sr-only" for="page-content-description"></label><textarea id="page-content-description"><? echo $page->subtitle; ?></textarea>
 			</div>
 			<div id="page-content-tab-header">
 				<h4 class="checkbox">
-					<label class="sr-only" for="page-content-show-header"></label><input type="checkbox" id="page-content-show-header" value="" <? echo isset($page->header) && $page->header != '' ? 'checked' : '' ?>>The Header Text will be JUST ABOVE the links you are sharing…
+					<label><input type="checkbox" id="page-content-show-header" value="" <? echo isset($page->header) && $page->header != '' ? 'checked' : '' ?>>The Header Text will be JUST ABOVE the links you are sharing…</label>
 				</h4>
 				<label class="sr-only" for="page-content-header-text"></label><textarea id="page-content-header-text"><? echo $page->header; ?></textarea>
 			</div>
 			<div id="page-content-tab-footer">
 				<h4 class="checkbox">
-					<label class="sr-only" for="page-content-show-footer"></label><input type="checkbox" id="page-content-show-footer" value="" <? echo isset($page->footer) && $page->footer != '' ? 'checked' : '' ?>>The Footer Text will be at the VERY BOTTOM of your quickSITE…
+					<label><input type="checkbox" id="page-content-show-footer" value="" <? echo isset($page->footer) && $page->footer != '' ? 'checked' : '' ?>>The Footer Text will be at the VERY BOTTOM of your quickSITE…</label>
 				</h4>
 				<label class="sr-only" for="page-content-footer-text"></label><textarea id="page-content-footer-text"><? echo $page->footer; ?></textarea>
 			</div>

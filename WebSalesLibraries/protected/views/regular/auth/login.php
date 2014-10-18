@@ -100,7 +100,7 @@
 		<? endif; ?>
 		<tr>
 			<? if (Yii::app()->params['login']['rememberMeField']): ?>
-				<td>
+				<td style="text-align: left">
 					<div class="checkbox">
 						<?
 							echo $form->checkBox($formData, 'rememberMe');

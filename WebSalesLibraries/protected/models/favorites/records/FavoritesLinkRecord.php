@@ -87,8 +87,6 @@
 						->select('link.id, link.id_library,
 							link.name, link.file_name,
 							' . $dateField . ',
-							link.enable_attachments,
-							link.enable_file_card,
 							(select (round(avg(lr.value)*2)/2) as value from tbl_link_rate lr where lr.id_link=link.id) as rate,
 							link.format')
 						->from('tbl_link link')

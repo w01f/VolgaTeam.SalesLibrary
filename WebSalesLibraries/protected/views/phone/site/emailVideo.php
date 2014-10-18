@@ -1,6 +1,6 @@
 <?
 	/**
-	 * @var $link LibraryLink | Attachment
+	 * @var $link LibraryLink
 	 * @var $senderName string
 	 */
 ?>
@@ -41,7 +41,7 @@
             <span class="service-data" style="display: none;">
                 <div class="link-id"><? echo $link->id; ?></div>
 				<div class="link-name"><? echo $link->name; ?></div>
-				<div class="file-name"><? echo isset($link->isAttachment) ? $link->name : $link->fileName; ?></div>
+				<div class="file-name"><? echo $link->fileName; ?></div>
                 <div class="file-type"><? echo $link->originalFormat; ?></div>
                 <div class="view-type"><? echo 'tab'; ?></div>
 				<? $viewLinks = $link->getViewSource('tab'); ?>

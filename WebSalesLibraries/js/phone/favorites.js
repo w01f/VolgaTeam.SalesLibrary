@@ -135,13 +135,7 @@
 					$(".favorite-file-link").off('click').on('click', function ()
 					{
 						var selectedLink = $.trim($(this).attr("href").replace('#link', ''));
-						$.SalesPortal.Wallbin.loadLink(selectedLink, 'Favorites', false, '#' + $.mobile.activePage.data('url'));
-					});
-					$(".favorite-file-link-detail").off('click').on('click', function (event)
-					{
-						var selectedLink = $.trim($(this).parent().attr("href").replace('#link', ''));
-						$.SalesPortal.Wallbin.loadLinkDetails(selectedLink, 'Favorites', '#' + $.mobile.activePage.data('url'));
-						event.stopPropagation();
+						$.SalesPortal.Wallbin.loadLink(selectedLink, 'Favorites', '#' + $.mobile.activePage.data('url'), false);
 					});
 					$(".favorite-file-link-delete").off('click').on('click', function (event)
 					{

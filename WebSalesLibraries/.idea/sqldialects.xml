@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="SqlDialectMappings">
-    <file url="file://$PROJECT_DIR$/protected/data/tables/tbl_attachment.sql" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/protected/data/tables/tbl_autowidget.sql" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/protected/data/tables/tbl_banner.sql" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/protected/data/tables/tbl_cache.sql" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/protected/data/tables/tbl_category.sql" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/protected/data/tables/tbl_column.sql" dialect="MySQL" />
-    <file url="file://$PROJECT_DIR$/protected/data/tables/tbl_emailed_link.sql" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/protected/data/tables/tbl_favorites_folder.sql" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/protected/data/tables/tbl_favorites_link.sql" dialect="MySQL" />
-    <file url="file://$PROJECT_DIR$/protected/data/tables/tbl_file_card.sql" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/protected/data/tables/tbl_folder.sql" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/protected/data/tables/tbl_group.sql" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/protected/data/tables/tbl_group_library.sql" dialect="MySQL" />
@@ -43,7 +40,6 @@
     <file url="file://$PROJECT_DIR$/protected/data/tables/tbl_user_group.sql" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/protected/data/tables/tbl_user_library.sql" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/protected/data/tables/tbl_user_link_cart.sql" dialect="MySQL" />
-    <file url="file://$PROJECT_DIR$/protected/data/tables/tbl_user_recipient.sql" dialect="MySQL" />
   </component>
 </project>
 

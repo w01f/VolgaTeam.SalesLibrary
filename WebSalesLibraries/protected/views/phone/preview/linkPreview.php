@@ -1,4 +1,10 @@
-<? /** @var $link LibraryLink|Attachment */ ?>
+<?
+	/**
+	 * @var $link LibraryLink
+	 * @var $authorized boolean
+	 * @var $isQuickSite boolean
+	 */
+?>
 <ul data-role="listview" data-theme="c" data-divider-theme="c">
 	<? if (isset($link->originalFormat) && isset($link->availableFormats)): ?>
 		<li data-role="list-divider">
@@ -47,7 +53,7 @@
 		<? else: ?>
 			<?
 			foreach ($link->availableFormats as $format):
-				if (!$authorized && $format == 'email')
+				if ((!$authorized || $isQuickSite) && $format == 'outlook')
 					continue;
 				$imageSource = '';
 				$imageTitle = '';
@@ -85,11 +91,14 @@
 						$imageSource = Yii::app()->request->getBaseUrl(true) . '/images/fileFormats_phone/url.png';
 						$imageTitle = 'Web Url';
 						break;
+					case 'url365':
+						$imageSource = Yii::app()->request->getBaseUrl(true) . '/images/fileFormats_phone/url365.png';
+						$imageTitle = 'Office 365 Url';
+						break;
 					case 'key':
 						$imageSource = Yii::app()->request->getBaseUrl(true) . '/images/fileFormats_phone/keynote.png';
 						$imageTitle = 'Apple Keynote';
 						break;
-					case 'email':
 					case 'outlook':
 						$imageSource = Yii::app()->request->getBaseUrl(true) . '/images/fileFormats_phone/email.png';
 						$imageTitle = 'Email Link';
@@ -116,7 +125,7 @@
 										<div class="item-content">
 											<div class="link-id"><? echo $link->id; ?></div>
 											<div class="link-name"><? echo $link->name; ?></div>
-											<div class="file-name"><? echo isset($link->isAttachment) ? $link->name : $link->fileName; ?></div>
+											<div class="file-name"><? echo $link->fileName; ?></div>
 											<div class="file-type"><? echo $link->originalFormat; ?></div>
 											<div class="view-type"><? echo $format; ?></div>
 											<div class="file-size"><? echo $link->originalFormat; ?></div>
@@ -161,7 +170,7 @@
 					</li>
 				<? endif; ?>
 			<? endforeach; ?>
-			<? if (!isset($link->isAttachment) && !$link->forcePreview && $authorized): ?>
+			<? if (!$link->forcePreview && $authorized): ?>
 				<li>
 					<a class="preview-link" href="#">
 						<table class="link-container">
@@ -175,7 +184,7 @@
 									<div class="item-content">
 										<div class="link-id"><? echo $link->id; ?></div>
 										<div class="link-name"><? echo $link->name; ?></div>
-										<div class="file-name"><? echo isset($link->isAttachment) ? $link->name : $link->fileName; ?></div>
+										<div class="file-name"><? echo $link->fileName; ?></div>
 										<div class="file-type"><? echo $link->originalFormat; ?></div>
 										<div class="view-type">favorites</div>
 										<?

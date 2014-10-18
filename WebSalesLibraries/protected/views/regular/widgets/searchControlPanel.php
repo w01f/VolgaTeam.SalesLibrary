@@ -20,11 +20,11 @@
 	<div class="group-title">What Are You Looking For?</div>
 	<div class="input-group search-input-container group-panel">
 		<input type="text" class="form-control search-bar-text" id="condition-content-value" placeholder="Type Here...">
-      <span class="input-group-btn">
-        <button id="clear-content-value" class="btn btn-default search-bar-run" type="button">
+	  <span class="input-group-btn">
+		<button id="clear-content-value" class="btn btn-default search-bar-run" type="button">
 			<span class="glyphicon glyphicon-remove"></span>
 		</button>
-      </span>
+	  </span>
 	</div>
 	<br> <br>
 	<div class="group-panel">

@@ -5,14 +5,14 @@
 	var LinkManager = function ()
 	{
 		var that = this;
-		this.requestViewDialog = function (linkId, isAttachment)
+		this.requestViewDialog = function (linkId, isQuickSite)
 		{
 			$.ajax({
 				type: "POST",
 				url: window.BaseUrl + "preview/getViewDialog",
 				data: {
 					linkId: linkId,
-					isAttachment: isAttachment
+					isQuickSite: isQuickSite
 				},
 				beforeSend: function ()
 				{
@@ -45,7 +45,7 @@
 				var selectedLinkId = $(formatItems[0]).find('.service-data .link-id').html();
 				var selectedFileFormat = $(formatItems[0]).find('.service-data .file-type').html();
 				var tags = $(formatItems[0]).find('.service-data .tags').html();
-				formatItems.tooltip({animation: false, trigger: 'hover', delay: { show: 500, hide: 100 }});
+				formatItems.tooltip({animation: false, trigger: 'hover', container: '.fancybox-wrap', delay: { show: 500, hide: 100 }});
 				formatItems.off('click').on('click', function (e)
 				{
 					if ($(this).attr('href') == '#')
@@ -66,7 +66,7 @@
 				var modalTitle = 'How Do you want to Open this File?';
 				if (tags != '')
 					modalTitle = tags;
-				else if (selectedFileFormat == 'url')
+				else if (selectedFileFormat == 'url' || selectedFileFormat == 'url365')
 					modalTitle = 'Web Hyperlink Options';
 
 				$.fancybox({
@@ -164,38 +164,6 @@
 			});
 		};
 
-		this.openFileCard = function (linkId)
-		{
-			$.ajax({
-				type: "POST",
-				url: window.BaseUrl + "preview/getFileCard",
-				data: {
-					linkId: linkId
-				},
-				beforeSend: function ()
-				{
-					$.SalesPortal.Overlay.show(false);
-				},
-				complete: function ()
-				{
-					$.SalesPortal.Overlay.hide();
-				},
-				success: function (msg)
-				{
-					var fileCardContent = $(msg);
-					$.fancybox({
-						content: fileCardContent,
-						title: 'File Card',
-						minWidth: 400,
-						openEffect: 'none',
-						closeEffect: 'none'
-					});
-				},
-				async: true,
-				dataType: 'html'
-			});
-		};
-
 		this.viewSelectedFormat = function (target, fullScreen, isHelp)
 		{
 			var selectedFileId = $(target).find('.service-data .link-id').html();
@@ -265,7 +233,7 @@
 													type: 'Link',
 													subType: 'Preview Page',
 													data: $.toJSON({
-														Name: selectedLinkName,
+														Name: selectedFileName,
 														File: selectedFileName,
 														'Original Format': selectedFileType,
 														Format: selectedViewType,
@@ -294,9 +262,6 @@
 										});
 									}
 								}
-								break;
-							case 'email':
-								emailFile(selectedFileId, null, null, selectedLinks[0].title);
 								break;
 							case 'outlook':
 								$.SalesPortal.QBuilder.PageList.addLitePage(selectedFileId, selectedLinkName, selectedFileName, selectedFileType);
@@ -328,9 +293,6 @@
 					case 'xls':
 						switch (selectedViewType)
 						{
-							case 'email':
-								emailFile(selectedFileId, null, null, selectedLinks[0].title);
-								break;
 							case 'outlook':
 								$.SalesPortal.QBuilder.PageList.addLitePage(selectedFileId, selectedLinkName, selectedFileName, selectedFileType);
 								break;
@@ -360,12 +322,10 @@
 						break;
 					case 'key':
 					case 'url':
+					case 'url365':
 					case 'other':
 						switch (selectedViewType)
 						{
-							case 'email':
-								emailFile(selectedFileId, null, null, selectedLinks[0].title);
-								break;
 							case 'outlook':
 								$.SalesPortal.QBuilder.PageList.addLitePage(selectedFileId, selectedLinkName, selectedFileName, selectedFileType);
 								break;
@@ -396,9 +356,6 @@
 					case 'jpeg':
 						switch (selectedViewType)
 						{
-							case 'email':
-								emailFile(selectedFileId, null, null, selectedLinks[0].title);
-								break;
 							case 'outlook':
 								$.SalesPortal.QBuilder.PageList.addLitePage(selectedFileId, selectedLinkName, selectedFileName, selectedFileType);
 								break;
@@ -459,9 +416,6 @@
 									dataType: 'html'
 								});
 								openFile(selectedLinks[0].href);
-								break;
-							case 'email':
-								emailFile(selectedFileId, null, null, selectedLinks[0].title);
 								break;
 							case 'outlook':
 								$.SalesPortal.QBuilder.PageList.addLitePage(selectedFileId, selectedLinkName, selectedFileName, selectedFileType);
@@ -735,204 +689,6 @@
 						height: 270,
 						scrolling: 'no',
 						autoSize: false,
-						openEffect: 'none',
-						closeEffect: 'none'
-					});
-				},
-				error: function ()
-				{
-				},
-				async: true,
-				dataType: 'html'
-			});
-		};
-
-		var emailDialogObject = [];
-		var emailFile = function (linkId, partId, partFormat, title)
-		{
-			$.ajax({
-				type: "POST",
-				url: window.BaseUrl + "site/emailLinkDialog",
-				data: {
-				},
-				beforeSend: function ()
-				{
-					$.SalesPortal.Overlay.show(false);
-				},
-				complete: function ()
-				{
-					$.SalesPortal.Overlay.hide();
-				},
-				success: function (msg)
-				{
-					emailDialogObject.content = $(msg);
-					emailDialogObject.content.find('.dropdown .dropdown-toggle').dropdown();
-
-					emailDialogObject.content.find('.dropdown .dropdown-menu li').on('click', function (event)
-					{
-						event.stopPropagation();
-					});
-					emailDialogObject.content.find('.dropdown .dropdown-menu li').on('touchstart', function (event)
-					{
-						event.stopPropagation();
-					});
-
-					emailDialogObject.content.find('.dropdown .dropdown-toggle').on('click', function (event)
-					{
-						event.stopPropagation();
-					});
-					emailDialogObject.content.find('.dropdown .dropdown-toggle').on('touchstart', function (event)
-					{
-						event.stopPropagation();
-					});
-
-					emailDialogObject.toSelector = emailDialogObject.content.find('#email-to-select');
-					emailDialogObject.toSelector.find('button.apply-selection').on('click', function (event)
-					{
-						var selectedEmails = [];
-						$.each(emailDialogObject.toSelector.find(':checked'), function ()
-						{
-							selectedEmails.push($(this).val());
-						});
-						if (selectedEmails.length > 0)
-							emailDialogObject.content.find('#email-to').val(selectedEmails.join('; '));
-						else
-							emailDialogObject.content.find('#email-to').val('');
-
-						$(this).parent().dropdown('toggle');
-						event.stopPropagation();
-					});
-					emailDialogObject.toSelector.find('button.apply-selection').on('touchstart',function (event)
-					{
-						var selectedEmails = [];
-						$.each(emailDialogObject.toSelector.find(':checked'), function ()
-						{
-							selectedEmails.push($(this).val());
-						});
-						if (selectedEmails.length > 0)
-							emailDialogObject.content.find('#email-to').val(selectedEmails.join('; '));
-						else
-							emailDialogObject.content.find('#email-to').val('');
-
-						$(this).parent().dropdown('toggle');
-						event.stopPropagation();
-						event.preventDefault();
-					}).on('touchend', function (event)
-					{
-						event.stopPropagation();
-						event.preventDefault();
-					});
-
-					emailDialogObject.toCopySelector = emailDialogObject.content.find('#email-to-copy-select');
-					emailDialogObject.toCopySelector.find('button.apply-selection').on('click', function (event)
-					{
-						var selectedEmails = [];
-						$.each(emailDialogObject.toCopySelector.find(':checked'), function ()
-						{
-							selectedEmails.push($(this).val());
-						});
-						if (selectedEmails.length > 0)
-							emailDialogObject.content.find('#email-to-copy').val(selectedEmails.join('; '));
-						else
-							emailDialogObject.content.find('#email-to-copy').val('');
-
-						$(this).parent().dropdown('toggle');
-						event.stopPropagation();
-					});
-					emailDialogObject.toCopySelector.find('button.apply-selection').on('touchstart',function (event)
-					{
-						var selectedEmails = [];
-						$.each(emailDialogObject.toCopySelector.find(':checked'), function ()
-						{
-							selectedEmails.push($(this).val());
-						});
-						if (selectedEmails.length > 0)
-							emailDialogObject.content.find('#email-to-copy').val(selectedEmails.join('; '));
-						else
-							emailDialogObject.content.find('#email-to-copy').val('');
-
-						$(this).parent().dropdown('toggle');
-						event.stopPropagation();
-						event.preventDefault();
-					}).on('touchend', function (event)
-					{
-						event.stopPropagation();
-						event.preventDefault();
-					});
-
-					emailDialogObject.content.find('#accept-button').on('click', function ()
-					{
-						$.ajax({
-							type: "POST",
-							url: window.BaseUrl + "site/emailLinkSend",
-							data: {
-								linkId: linkId,
-								partId: partId,
-								partFormat: partFormat,
-								emailTo: emailDialogObject.content.find('#email-to').val(),
-								emailCopyTo: emailDialogObject.content.find('#email-to-copy').val(),
-								emailFrom: emailDialogObject.content.find('#email-from').val(),
-								emailToMe: emailDialogObject.content.find('#email-to-me').is(':checked'),
-								emailSubject: emailDialogObject.content.find('#email-subject').val(),
-								emailBody: emailDialogObject.content.find('#email-body').val(),
-								expiresIn: emailDialogObject.content.find('#expires-in').val()
-							},
-							success: function ()
-							{
-								$.fancybox.close();
-								$.ajax({
-									type: "POST",
-									url: window.BaseUrl + "site/emailLinkSuccess",
-									data: {},
-									beforeSend: function ()
-									{
-										$.SalesPortal.Overlay.show(false);
-									},
-									complete: function ()
-									{
-										$.SalesPortal.Overlay.hide();
-									},
-									success: function (msg)
-									{
-										var content = $(msg);
-										content.find('#accept-button').off('click');
-										content.find('#accept-button').on('click', function ()
-										{
-											$.fancybox.close();
-										});
-										$.fancybox({
-											content: content,
-											title: title,
-											openEffect: 'none',
-											closeEffect: 'none'
-										});
-									},
-									error: function ()
-									{
-									},
-									async: true,
-									dataType: 'html'
-								});
-							},
-							complete: function ()
-							{
-								$.fancybox.close();
-							},
-							async: true,
-							dataType: 'html'
-						});
-					});
-					emailDialogObject.content.find('#cancel-button').on('click', function ()
-					{
-						$.fancybox.close();
-					});
-					$.fancybox({
-						content: emailDialogObject.content,
-						title: title,
-						width: 470,
-						scrolling: 'no',
-						autoSize: false,
-						autoHeight: true,
 						openEffect: 'none',
 						closeEffect: 'none'
 					});

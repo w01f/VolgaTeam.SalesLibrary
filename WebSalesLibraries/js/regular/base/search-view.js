@@ -73,7 +73,10 @@
 					selectedFileTypes.push("wmv");
 				}
 				if ($('#search-file-type-url').hasClass('active'))
+				{
 					selectedFileTypes.push("url");
+					selectedFileTypes.push("url365");
+				}
 				if ($('#search-file-type-image').hasClass('active'))
 				{
 					selectedFileTypes.push("png");
@@ -89,8 +92,6 @@
 
 				var dateFileButton = $('#condition-date-file');
 				var showDateFile = dateFileButton.length > 0 ? dateFileButton.hasClass('active') : true;
-
-				var onlyFileCards = 0;
 
 				var selectedLibraryIds = [];
 				$('#libraries').find(':checked').each(function ()
@@ -153,7 +154,6 @@
 					startDate: startDate,
 					endDate: endDate,
 					dateFile: showDateFile,
-					onlyFileCards: onlyFileCards,
 					libraries: selectedLibraryIds.length > 0 ? $.toJSON(selectedLibraryIds) : null,
 					superFilters: superFilters.length > 0 ? $.toJSON(superFilters) : null,
 					categories: categories.length > 0 ? $.toJSON(categories) : null,
@@ -687,7 +687,6 @@
 			var linkDateWidth = 100;
 
 			var linkNameHeaderWidth = searchResult.width() -
-				gridHeader.find('td.details-button').width() -
 				gridHeader.find('td.library-column').width() -
 				gridHeader.find('td.link-type-column').width() -
 				gridHeader.find('td.link-tag-column').width() -
@@ -699,7 +698,6 @@
 
 			var gridBody = searchResult.find('.links-grid-body');
 			var linkNameBodyWidth = searchResult.width() -
-				gridBody.find('td.details-button').width() -
 				gridBody.find('td.library-column').width() -
 				gridBody.find('td.link-type-column').width() -
 				gridBody.find('td.link-tag-column').width() -

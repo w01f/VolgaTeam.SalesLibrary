@@ -73,10 +73,11 @@
 						'wmv' => 'WMV Video',
 						'mp4' => 'MP4 Video',
 						'url' => 'Web URL',
+						'url365' => 'Office 365 URL',
 						'key' => 'Apple Keynote',
 					),
 					'preview_dialog' => array(
-						'ppt' => 'PPT Tooltip',
+						'ppt' => 'PPT Tooltip PPT Tooltip PPT Tooltip PPT Tooltip PPT Tooltip PPT Tooltip PPT Tooltip PPT Tooltip PPT Tooltip',
 						'doc' => 'DOC Tooltip',
 						'xls' => 'XLS Tooltip',
 						'png' => 'PNG Tooltip',
@@ -87,8 +88,8 @@
 						'ogv' => 'OGV Tooltip',
 						'tab' => 'TAB Tooltip',
 						'url' => 'URL Tooltip',
+						'url365' => 'Office 365',
 						'key' => 'Open Apple Keynote',
-						'email' => 'Email Tooltip',
 						'outlook' => 'Email Tooltip',
 						'download' => 'Download Tooltip',
 						'favorites' => 'Favorites Tooltip',
@@ -101,10 +102,6 @@
 					'new_user' => array(
 						'subject' => 'RaycomResults.tv',
 						'body' => 'You have a new account at RaycomResults.tv',
-					),
-					'send_link' => array(
-						'subject' => 'Raycom Results File Link',
-						'body' => 'View your file:',
 					),
 					'help_request_address' => 'billy@newlocaldirect.com',
 					'quiz' => array(

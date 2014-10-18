@@ -23,8 +23,6 @@
 						'LibraryFolder' => 'LibraryFolder',
 						'LibraryLink' => 'LibraryLink',
 						'LineBreak' => 'LineBreak',
-						'FileCard' => 'FileCard',
-						'Attachment' => 'Attachment',
 						'LinkCategory' => 'LinkCategory',
 						'LinkSuperFilter' => 'LinkSuperFilter',
 						'UniversalPreviewContainer' => 'UniversalPreviewContainer',

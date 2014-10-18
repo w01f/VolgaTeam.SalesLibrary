@@ -7,7 +7,7 @@
 	<label for="search-match-partial">Partial Match</label>
 </fieldset>
 <? if (Yii::app()->params['search_options']['hide_duplicate']): ?>
-	<input type="checkbox" name="hide-duplicated" id="hide-duplicated" class="custom" data-mini="true"/>
+	<input type="checkbox" name="hide-duplicated" id="hide-duplicated" class="custom" data-mini="true" />
 	<label for="hide-duplicated">Hide Duplicates</label>
 <? endif; ?>
 <fieldset id="search-fields-options-container" data-role="controlgroup" data-mini="true">

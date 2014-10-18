@@ -11,7 +11,6 @@
 				var shortcutsTitle = $('#shortcuts').find('.ui-title').html();
 				$('#folders').find('.header-title').html(shortcutsTitle);
 				$('#links').find('.header-title').html(shortcutsTitle);
-				$('#link-details').find('.header-title').html(shortcutsTitle);
 				$('#gallery-page').find('.header-title').html(shortcutsTitle);
 				return false;
 			});
@@ -129,10 +128,28 @@
 					{
 						e.stopPropagation();
 					});
+					$('.shortcuts-link.direct').off('click').on('click', function (e)
+					{
+						var linkName = $(this).find('.link-name').html();
+						$.ajax({
+							type: "POST",
+							url: window.BaseUrl + "statistic/writeActivity",
+							data: {
+								type: 'Shortcuts',
+								subType: 'Open',
+								data: $.toJSON({
+									File: linkName,
+									'Original Format': 'url'
+								})
+							},
+							async: true,
+							dataType: 'html'
+						});
+					});
 					$('.shortcuts-link.library-file').off('click').on('click', function (e)
 					{
 						e.stopPropagation();
-						$.SalesPortal.Wallbin.loadLink($(this).find('.link-id').html(), shortcutsTitle, false, '#shortcuts');
+						$.SalesPortal.Wallbin.loadLink($(this).find('.link-id').html(), shortcutsTitle, '#shortcuts', false);
 					});
 					$('.shortcuts-link.window').off('click').on('click', function (e)
 					{
@@ -239,8 +256,6 @@
 									if (endDateTag.length > 0)
 										var endDate = endDateTag.html();
 
-									var onlyFileCards = 0;
-
 									var selectedLibraryIds = [];
 									var libraryIds = searchConditions.find('.library');
 									if (libraryIds.length > 0)
@@ -279,7 +294,6 @@
 										startDate: startDate,
 										endDate: endDate,
 										dateFile: searchConditions.find('.use-file-date').length > 0,
-										onlyFileCards: onlyFileCards,
 										libraries: selectedLibraryIds.length > 0 ? $.toJSON(selectedLibraryIds) : null,
 										superFilters: superFilters.length > 0 ? $.toJSON(superFilters) : null,
 										categories: categories.length > 0 ? $.toJSON(categories) : null,

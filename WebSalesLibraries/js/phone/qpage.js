@@ -45,18 +45,12 @@
 				linkFolderContent.find(".file-link").on('click', function ()
 				{
 					var selectedLink = $.trim($(this).attr("href").replace('#link', ''));
-					$.SalesPortal.Wallbin.loadLink(selectedLink, mainPage.find('.header-title').html(), false, ('#link-folder-content-' + linkId));
+					$.SalesPortal.Wallbin.loadLink(selectedLink, mainPage.find('.header-title').html(), ('#link-folder-content-' + linkId), true);
 				});
 				linkFolderContent.find(".folder-content-link").on('click', function ()
 				{
 					var selectedLink = $.trim($(this).attr("href").replace('#link', ''));
 					loadFolderContent(selectedLink, linkId);
-				});
-				linkFolderContent.find(".file-link-detail").on('click', function (event)
-				{
-					var selectedLink = $.trim($(this).parent().attr("href").replace('#link', ''));
-					$.SalesPortal.Wallbin.loadLinkDeatils(selectedLink, mainPage.find('.header-title').html(), ('#link-folder-content-' + linkId));
-					event.stopPropagation();
 				});
 			},
 			async: true,
@@ -109,7 +103,7 @@
 			{
 				var selectedLink = $.trim($(this).attr("href").replace('#link', ''));
 				recordActivity(selectedLink);
-				$.SalesPortal.Wallbin.loadLink(selectedLink, mainPage.find('.header-title').html(), false, '#main');
+				$.SalesPortal.Wallbin.loadLink(selectedLink, mainPage.find('.header-title').html(), '#main', true);
 			}
 		});
 		mainPage.find(".folder-content-link").on('click', function ()
@@ -121,17 +115,6 @@
 				loadFolderContent(selectedLink, null);
 			}
 		});
-		mainPage.find(".file-link-detail").on('click', function (event)
-		{
-			if (checkEmail())
-			{
-				var selectedLink = $.trim($(this).parent().attr("href").replace('#link', ''));
-				recordActivity(selectedLink);
-				$.SalesPortal.Wallbin.loadLinkDeatils(selectedLink, mainPage.find('.header-title').html(), '#main');
-				event.stopPropagation();
-			}
-		});
-
 		$('#gallery-page').on('pageshow',function ()
 		{
 			var options = {

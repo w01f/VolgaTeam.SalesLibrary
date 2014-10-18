@@ -65,7 +65,6 @@
 				$condition = Yii::app()->request->getPost('condition');
 				$startDate = Yii::app()->request->getPost('startDate');
 				$endDate = Yii::app()->request->getPost('endDate');
-				$onlyFileCards = intval(Yii::app()->request->getPost('onlyFileCards'));
 				$onlyWithCategories = filter_var(trim(Yii::app()->request->getPost('onlyWithCategories')), FILTER_VALIDATE_BOOLEAN);
 				$sortColumn = Yii::app()->request->getPost('sortColumn');
 				$sortDirection = Yii::app()->request->getPost('sortDirection');
@@ -119,7 +118,6 @@
 					$endDate,
 					$dateFile,
 					$checkedLibraryIds,
-					$onlyFileCards,
 					$superFilters,
 					$categories,
 					$categoriesExactMatch,

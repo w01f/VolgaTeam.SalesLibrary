@@ -77,7 +77,6 @@
 					var selctedLibraryName = $.cookie("selectedLibraryName");
 					foldersPage.find('.header-title').html(selctedLibraryName);
 					$('#links').find('.header-title').html(selctedLibraryName);
-					$('#link-details').find('.header-title').html(selctedLibraryName);
 					$('#gallery-page').find('.header-title').html(selctedLibraryName);
 					$.mobile.changePage("#folders", {
 						transition: "slidefade"
@@ -129,18 +128,12 @@
 					linksPage.find(".file-link").on('click', function ()
 					{
 						var selectedLink = $.trim($(this).attr("href").replace('#link', ''));
-						that.loadLink(selectedLink, $.cookie("selectedLibraryName"), false, '#links');
+						that.loadLink(selectedLink, $.cookie("selectedLibraryName"), '#links', false);
 					});
 					linksPage.find(".folder-content-link").on('click', function ()
 					{
 						var selectedLink = $.trim($(this).attr("href").replace('#link', ''));
 						loadFolderContent(selectedLink, null);
-					});
-					linksPage.find(".file-link-detail").on('click', function (event)
-					{
-						var selectedLink = $.trim($(this).parent().attr("href").replace('#link', ''));
-						that.loadLinkDetails(selectedLink, $.cookie("selectedLibraryName"), '#links');
-						event.stopPropagation();
 					});
 				},
 				async: true,
@@ -148,13 +141,14 @@
 			});
 		};
 
-		this.loadLink = function (linkId, parentTitle, isAttachment, backLink)
+		this.loadLink = function (linkId, parentTitle, backLink, isQuickSite)
 		{
 			$.ajax({
 				type: "POST",
-				url: window.BaseUrl + (isAttachment ? "preview/getAttachmentPreviewList" : "preview/getLinkPreviewList"),
+				url: window.BaseUrl + "preview/getLinkPreviewList",
 				data: {
-					linkId: linkId
+					linkId: linkId,
+					isQuickSite: isQuickSite
 				},
 				beforeSend: function ()
 				{
@@ -228,54 +222,6 @@
 						}
 
 						$.SalesPortal.LinkManager.viewSelectedFormat(itemContent, resolution);
-					});
-				},
-				async: true,
-				dataType: 'html'
-			});
-		};
-
-		this.loadLinkDetails = function (linkId, parentTitle, backLink)
-		{
-			$.ajax({
-				type: "POST",
-				url: window.BaseUrl + "preview/getLinkDetails",
-				data: {
-					linkId: linkId
-				},
-				beforeSend: function ()
-				{
-					$('#preview').find('.page-content').html('');
-					$.mobile.loading('show', {
-						textVisible: false,
-						html: ""
-					});
-				},
-				complete: function ()
-				{
-					$.mobile.loading('hide', {
-						textVisible: false,
-						html: ""
-					});
-				},
-				success: function (msg)
-				{
-					var linkDetailsPage = $('#link-details');
-					linkDetailsPage.find('.page-content').html(msg);
-					linkDetailsPage.find('.link.back').attr('href', backLink);
-					$.mobile.changePage("#link-details", {
-						transition: "slidefade"
-					});
-					linkDetailsPage.find('.page-content').children('ul').listview();
-					$(".file-card-link").on('click', function ()
-					{
-						var linkId = $.trim($(this).attr("href").replace('#file-card', ''));
-						$.SalesPortal.LinkManager.viewFileCard(linkId);
-					});
-					$(".attachment-link").on('click', function ()
-					{
-						var attachmentId = $.trim($(this).attr("href").replace('#attachment', ''));
-						that.loadLink(attachmentId, parentTitle, true, '#link-details');
 					});
 				},
 				async: true,
@@ -392,18 +338,12 @@
 					linkFolderContent.find(".file-link").on('click', function ()
 					{
 						var selectedLink = $.trim($(this).attr("href").replace('#link', ''));
-						that.loadLink(selectedLink, $.cookie("selectedLibraryName"), false, ('#link-folder-content-' + linkId));
+						that.loadLink(selectedLink, $.cookie("selectedLibraryName"), ('#link-folder-content-' + linkId), false);
 					});
 					linkFolderContent.find(".folder-content-link").on('click', function ()
 					{
 						var selectedLink = $.trim($(this).attr("href").replace('#link', ''));
 						loadFolderContent(selectedLink, linkId);
-					});
-					linkFolderContent.find(".file-link-detail").on('click', function (event)
-					{
-						var selectedLink = $.trim($(this).parent().attr("href").replace('#link', ''));
-						that.loadLinkDetails(selectedLink, $.cookie("selectedLibraryName"), ('#link-folder-content-' + linkId));
-						event.stopPropagation();
 					});
 				},
 				async: true,

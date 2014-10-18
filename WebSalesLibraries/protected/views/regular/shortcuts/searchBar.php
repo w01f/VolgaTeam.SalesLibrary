@@ -115,7 +115,7 @@
 						<label class="file-selector"><input id="search-file-type-other" type="checkbox">all other files</label>
 					</div>
 					<div class="search-option checkbox">
-						<label class="file-selector"><input id="search-file-names-only" type="checkbox">file names only</label>
+						<label class="file-selector"><input id="search-file-names-only" type="checkbox" checked>file names only</label>
 					</div>
 					<div class="search-option checkbox">
 						<label class="file-selector"><input id="search-exact-match" type="checkbox" checked>exact search</label>

@@ -84,8 +84,6 @@
 				if (endDateTag.length > 0)
 					var endDate = endDateTag.html();
 
-				var onlyFileCards = 0;
-
 				var selectedLibraryIds = [];
 				var libraryIds = baseSearchConditions.find('.library');
 				if (libraryIds.length > 0)
@@ -121,7 +119,6 @@
 					startDate: startDate,
 					endDate: endDate,
 					dateFile: baseSearchConditions.find('.use-file-date').length > 0,
-					onlyFileCards: onlyFileCards,
 					libraries: selectedLibraryIds.length > 0 ? $.toJSON(selectedLibraryIds) : null,
 					superFilters: superFilters.length > 0 ? $.toJSON(superFilters) : null,
 					categories: categories.length > 0 ? $.toJSON(categories) : null,
@@ -260,6 +257,7 @@
 						selectedFileTypes.push("xls");
 						selectedFileTypes.push("pdf");
 						selectedFileTypes.push("url");
+						selectedFileTypes.push("url365");
 						selectedFileTypes.push("png");
 						selectedFileTypes.push("jpeg");
 					}
@@ -540,8 +538,6 @@
 					if (templateEndDateTag.length > 0)
 						var templateEndDate = templateEndDateTag.html();
 
-					var templateOnlyFileCards = 0;
-
 					var templateLibraryIds = [];
 					var libraryIds = selectedTemplateConditions.find('.library');
 					if (libraryIds.length > 0)
@@ -577,7 +573,6 @@
 						startDate: templateStartDate,
 						endDate: templateEndDate,
 						dateFile: selectedTemplateConditions.find('.use-file-date').length > 0 || baseSearchConditions.find('.use-file-date').length > 0,
-						onlyFileCards: templateOnlyFileCards,
 						libraries: templateLibraryIds.length > 0 ? $.toJSON(templateLibraryIds) : null,
 						superFilters: templateSuperFilters.length > 0 ? $.toJSON(templateSuperFilters) : null,
 						categories: templateCategories.length > 0 ? $.toJSON(templateCategories) : null,

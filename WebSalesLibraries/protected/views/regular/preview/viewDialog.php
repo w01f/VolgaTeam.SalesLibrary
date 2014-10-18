@@ -2,11 +2,12 @@
 	/**
 	 * @var $link LibraryLink
 	 * @var $authorized boolean
+	 * @var $isQuickSite boolean
 	 */
 	$logoFolderPath = realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'fileFormats';
 	$linkCartImageSource = 'data:image/png;base64,' . base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'add-link-cart.png'));
 	$itemsCount = count($link->availableFormats);
-	if (!isset($link->isAttachment) && !$link->forcePreview && $authorized)
+	if (!$link->forcePreview && $authorized)
 		$itemsCount++;
 	if ($link->browser == 'mobile' && !$link->forcePreview)
 		$itemsCount++;
@@ -20,7 +21,7 @@
 	$itemNum = 0;
 	$rowClosed = true;
 ?>
-<div class="view-dialog-body<? echo $link->originalFormat == 'url' || $itemsCount > 1 ? ' always-show' : ''; ?>">
+<div class="view-dialog-body<? echo $link->originalFormat == 'url' || $link->originalFormat == 'url365' || $itemsCount > 1 ? ' always-show' : ''; ?>">
 	<? if (isset($link->originalFormat) && isset($link->availableFormats)): ?>
 		<div class="title">
 			<div class="link-name">
@@ -31,9 +32,7 @@
 					<? echo $link->fileName; ?>
 				</div>
 			<? endif; ?>
-			<? if (!isset($link->isAttachment)): ?>
-				<img class="total-rate" src=""/>
-			<? endif; ?>
+			<img class="total-rate" src=""/>
 		</div>
 		<? if ((($link->originalFormat == 'ppt' || $link->originalFormat == 'doc' || $link->originalFormat == 'pdf') && isset($link->universalPreview)) || $link->originalFormat == 'jpeg' || $link->originalFormat == 'png'): ?>
 			<div class="checkbox">
@@ -47,13 +46,13 @@
 				This Video is unavailable…<br><br> Ask your Site Administrator to convert this Video to MP4.<br><br> Then the video can be accessed.<br><br>
 			</div>
 		<? else: ?>
-			<? if ($link->originalFormat == 'url'): ?>
-				<p>This is WebSite Link. Click the button below to visit the site.</p>
+			<? if ($link->originalFormat == 'url' || $link->originalFormat == 'url365'): ?>
+				<p>This is <? echo $link->originalFormat == 'url365' ? 'Office 365' : 'WebSite'; ?> Link. Click the button below to visit the site.</p>
 			<? endif; ?>
 			<div class="container format-list">
 				<? foreach ($link->availableFormats as $format): ?>
 					<?
-					if (!$authorized && ($format == 'email' || $format == 'outlook'))
+					if ((!$authorized || $isQuickSite) && $format == 'outlook')
 						continue;
 					$imageSource = '';
 					switch ($format)
@@ -91,11 +90,11 @@
 						case 'url':
 							$imageSource = 'data:image/png;base64,' . base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'url.png'));
 							break;
+						case 'url365':
+							$imageSource = 'data:image/png;base64,' . base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'url365.png'));
+							break;
 						case 'key':
 							$imageSource = 'data:image/png;base64,' . base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'keynote.png'));
-							break;
-						case 'email':
-							$imageSource = 'data:image/png;base64,' . base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'email.png'));
 							break;
 						case 'outlook':
 							$imageSource = 'data:image/png;base64,' . base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'email.png'));
@@ -108,7 +107,7 @@
 					<? if ($imageSource != ''): ?>
 						<? if ($itemNum == 0 || $itemNum % 3 == 0): ?><div class="row"><? $rowClosed = false; ?><? endif; ?>
 						<div class="<? echo $rowClass; ?> text-center">
-							<a href="<? echo $format == 'url' ? $link->fileName : '#'; ?>" target="_blank" class="format-item"
+							<a href="<? echo $format == 'url' || $format == 'url365' ? $link->fileName : '#'; ?>" target="_blank" class="format-item"
 							   <? if ($link->browser != 'mobile'): ?>rel="tooltip"
 							   title="<? echo Yii::app()->params['tooltips']['preview_dialog'][$format]; ?>"
 								<? endif; ?>
@@ -116,10 +115,10 @@
 								<div class="service-data">
 									<div class="link-id"><? echo $link->id; ?></div>
 									<div class="link-name"><? echo $link->name; ?></div>
-									<div class="file-name"><? echo isset($link->isAttachment) ? $link->name : $link->fileName; ?></div>
+									<div class="file-name"><? echo $link->fileName; ?></div>
 									<div class="file-type"><? echo $link->originalFormat; ?></div>
 									<div class="view-type"><? echo $format; ?></div>
-									<div class="tags"><? echo isset($link->isAttachment) ? '' : $link->getTagsString(); ?></div>
+									<div class="tags"><? echo $link->getTagsString(); ?></div>
 									<? $viewLinks = $link->getViewSource($format); ?>
 									<? if (isset($viewLinks)): ?>
 										<div class="links"><? echo json_encode($viewLinks); ?></div>
@@ -137,7 +136,7 @@
 						<? $itemNum++; ?>
 					<? endif; ?>
 				<? endforeach; ?>
-				<? if (!isset($link->isAttachment) && !$link->forcePreview && $authorized): ?>
+				<? if (!$link->forcePreview && $authorized && !$isQuickSite): ?>
 					<? if ($itemNum == 0 || $itemNum % 3 == 0): ?><div class="row"><? $rowClosed = false; ?><? endif; ?>
 					<div class="<? echo $rowClass; ?> text-center">
 						<a href="#" class="format-item"
@@ -183,12 +182,14 @@
 					<? $itemNum++; ?>
 				<? endif; ?>
 				<? if (!$rowClosed) echo '</div>'; ?>
-				<? if (!isset($link->isAttachment)): ?>
+				<? if ($authorized && !$isQuickSite): ?>
 					<div class="row" id="user-link-rate-container">
 						<div class="col-xs-9">
 							<div class="row">
 								<div class="col-xs-12">
-									<label for="user-link-rate">Do you LIKE this <? echo $link->originalFormat == 'url' ? 'Web link' : 'file' ?>? </label>
+									<label for="user-link-rate">Do you LIKE this <? if ($link->originalFormat == 'url') echo 'Web link';
+										else if ($link->originalFormat == 'url365') echo 'Office 365 link';
+										else echo 'file'; ?>? </label>
 								</div>
 								<div class="col-xs-12">
 									<input id="user-link-rate" class="rating">
