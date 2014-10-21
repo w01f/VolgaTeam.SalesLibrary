@@ -34,7 +34,7 @@
 			<? endif; ?>
 			<img class="total-rate" src=""/>
 		</div>
-		<? if ((($link->originalFormat == 'ppt' || $link->originalFormat == 'doc' || $link->originalFormat == 'pdf') && isset($link->universalPreview)) || $link->originalFormat == 'jpeg' || $link->originalFormat == 'png'): ?>
+		<? if (in_array('png', $link->availableFormats) || in_array('jpeg', $link->availableFormats)): ?>
 			<div class="checkbox">
 				<label>
 					<input class="use-fullscreen" type="checkbox" value=""> Open PNG and JPEG images in a new Browser tab
@@ -103,8 +103,9 @@
 							$imageSource = 'data:image/png;base64,' . base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'download.png'));
 							break;
 					}
+					$viewLinks = $link->getViewSource($format);
 					?>
-					<? if ($imageSource != ''): ?>
+					<? if (isset($viewLinks) && $imageSource != ''): ?>
 						<? if ($itemNum == 0 || $itemNum % 3 == 0): ?><div class="row"><? $rowClosed = false; ?><? endif; ?>
 						<div class="<? echo $rowClass; ?> text-center">
 							<a href="<? echo $format == 'url' || $format == 'url365' ? $link->fileName : '#'; ?>" target="_blank" class="format-item"
@@ -119,10 +120,7 @@
 									<div class="file-type"><? echo $link->originalFormat; ?></div>
 									<div class="view-type"><? echo $format; ?></div>
 									<div class="tags"><? echo $link->getTagsString(); ?></div>
-									<? $viewLinks = $link->getViewSource($format); ?>
-									<? if (isset($viewLinks)): ?>
-										<div class="links"><? echo json_encode($viewLinks); ?></div>
-									<? endif; ?>
+									<div class="links"><? echo json_encode($viewLinks); ?></div>
 									<? if ($format == 'png' || $format == 'jpeg'): ?>
 										<? $thumbsLinks = $link->getViewSource('thumbs'); ?>
 										<? if (isset($thumbsLinks)): ?>

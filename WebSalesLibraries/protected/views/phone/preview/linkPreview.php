@@ -106,7 +106,8 @@
 				}
 				$fileSize = $link->getViewSize($format);
 				$fileSizePhone = $link->getViewSize($format . '_phone');
-				if ($imageSource != '' && $imageTitle != ''):
+				$viewLinks = $link->getViewSource($format);
+				if (isset($viewLinks) && $imageSource != '' && $imageTitle != ''):
 					?>
 					<li>
 						<a class="preview-link" href="#">
@@ -130,37 +131,34 @@
 											<div class="view-type"><? echo $format; ?></div>
 											<div class="file-size"><? echo $link->originalFormat; ?></div>
 											<?
-												$viewLinks = $link->getViewSource($format);
-												if (isset($viewLinks)):
-													echo CHtml::openTag('div', array('class' => 'links'));
-													if ($format == 'png' || $format == 'jpeg'):
-														$thumbsLinks = $link->getViewSource('thumbs');
-														$viewPhoneLinks = $format == 'png' ? $link->getViewSource('png_phone') : $link->getViewSource('jpeg_phone');
-														if (isset($thumbsLinks)):
-															$i = 0;
-															foreach ($viewLinks as $viewLink):
-																?>
-																<li class="hi-res">
-																	<a href="<? echo $viewLink['href']; ?>"
-																	   rel="external"><img
-																			src="<? echo !$this->isTabletMobileView ? $thumbsLinks[$i]['href'] : $viewPhoneLinks[$i]['href']; ?>"
-																			alt="<? echo $viewLink['title']; ?>"/></a>
-																</li>
-																<li class="low-res">
-																	<a href="<? echo $viewPhoneLinks[$i]['href']; ?>"
-																	   rel="external"><img
-																			src="<? echo $thumbsLinks[$i]['href']; ?>"
-																			alt="<? echo $viewLink['title']; ?>"/></a>
-																</li>
-																<?
-																$i++;
-															endforeach;
-														endif;
-													else:
-														echo json_encode($viewLinks);
+												echo CHtml::openTag('div', array('class' => 'links'));
+												if ($format == 'png' || $format == 'jpeg'):
+													$thumbsLinks = $link->getViewSource('thumbs');
+													$viewPhoneLinks = $format == 'png' ? $link->getViewSource('png_phone') : $link->getViewSource('jpeg_phone');
+													if (isset($thumbsLinks)):
+														$i = 0;
+														foreach ($viewLinks as $viewLink):
+															?>
+															<li class="hi-res">
+																<a href="<? echo $viewLink['href']; ?>"
+																   rel="external"><img
+																		src="<? echo !$this->isTabletMobileView ? $thumbsLinks[$i]['href'] : $viewPhoneLinks[$i]['href']; ?>"
+																		alt="<? echo $viewLink['title']; ?>"/></a>
+															</li>
+															<li class="low-res">
+																<a href="<? echo $viewPhoneLinks[$i]['href']; ?>"
+																   rel="external"><img
+																		src="<? echo $thumbsLinks[$i]['href']; ?>"
+																		alt="<? echo $viewLink['title']; ?>"/></a>
+															</li>
+															<?
+															$i++;
+														endforeach;
 													endif;
-													echo CHtml::closeTag('div');
+												else:
+													echo json_encode($viewLinks);
 												endif;
+												echo CHtml::closeTag('div');
 											?>
 										</div>
 									</td>

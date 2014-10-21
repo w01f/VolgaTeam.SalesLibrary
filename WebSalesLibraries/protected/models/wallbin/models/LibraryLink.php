@@ -377,8 +377,10 @@
 							if (isset($this->universalPreview))
 							{
 								$this->availableFormats[] = 'pdf';
-								$this->availableFormats[] = 'png';
-								$this->availableFormats[] = 'jpeg';
+								if (isset($this->universalPreview->pngLinks))
+									$this->availableFormats[] = 'png';
+								if (isset($this->universalPreview->jpegLinks))
+									$this->availableFormats[] = 'jpeg';
 							}
 							if (!$this->noShare)
 								$this->availableFormats[] = 'outlook';
@@ -391,8 +393,10 @@
 							if (isset($this->universalPreview))
 							{
 								$this->availableFormats[] = 'pdf';
-								$this->availableFormats[] = 'png';
-								$this->availableFormats[] = 'jpeg';
+								if (isset($this->universalPreview->pngLinks))
+									$this->availableFormats[] = 'png';
+								if (isset($this->universalPreview->jpegLinks))
+									$this->availableFormats[] = 'jpeg';
 							}
 							if (!$this->noShare)
 								$this->availableFormats[] = 'outlook';
@@ -412,8 +416,10 @@
 						{
 							if (isset($this->universalPreview))
 							{
-								$this->availableFormats[] = 'png';
-								$this->availableFormats[] = 'jpeg';
+								if (isset($this->universalPreview->pngLinks))
+									$this->availableFormats[] = 'png';
+								if (isset($this->universalPreview->jpegLinks))
+									$this->availableFormats[] = 'jpeg';
 							}
 							if (!$this->noShare)
 								$this->availableFormats[] = 'outlook';
