@@ -26,7 +26,11 @@ namespace SalesDepot.Services.StatisticService
 					subType.Equals("Open") ||
 					subType.Equals("Preview Options") ||
 					subType.Equals("Preview Page") ||
-					subType.Equals("Play Video")) 
+					subType.Equals("Play Video") ||
+					subType.Equals("Send Email") ||
+					subType.Equals("Email Activity") ||
+					subType.Equals("Create Email")
+					)
 					&& details != null)
 					return details.Where(d => d.tag.ToLower().Equals("file")).Select(d =>
 																						 {

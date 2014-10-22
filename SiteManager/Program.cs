@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace SalesDepot.SiteManager
 {
 	static class Program
 	{
+		private static Mutex _mutex;
 		/// <summary>
 		/// The main entry point for the application.
 		/// </summary>
@@ -13,7 +15,7 @@ namespace SalesDepot.SiteManager
 		{
 			bool firstInstance;
 			const string uniqueIdentifier = "Local\\SiteManagerApplication";
-			new System.Threading.Mutex(false, uniqueIdentifier, out firstInstance);
+			_mutex = new Mutex(false, uniqueIdentifier, out firstInstance);
 			if (firstInstance)
 			{
 				Application.EnableVisualStyles();
