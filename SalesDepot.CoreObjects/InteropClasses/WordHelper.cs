@@ -28,7 +28,7 @@ namespace SalesDepot.CoreObjects.InteropClasses
 			MessageFilter.Register();
 			try
 			{
-				_wordObject = new Microsoft.Office.Interop.Word.Application();
+				_wordObject = new Word.Application();
 				_wordObject.DisplayAlerts = Word.WdAlertLevel.wdAlertsNone;
 				result = true;
 			}
@@ -59,7 +59,7 @@ namespace SalesDepot.CoreObjects.InteropClasses
 		public void ExportDocumentAllFormats(string sourceFilePath, string destinationFolderPath, bool generateImages, bool generateText, out bool update)
 		{
 			var pdfDestination = Path.Combine(destinationFolderPath, "pdf");
-			var updatePdf = !(Directory.Exists(pdfDestination) && Directory.GetFiles(pdfDestination, "*.pdf").Length > 0) && generateImages;
+			var updatePdf = !(Directory.Exists(pdfDestination) && Directory.GetFiles(pdfDestination, "*.pdf").Length > 0);
 			if (updatePdf && !Directory.Exists(pdfDestination))
 				Directory.CreateDirectory(pdfDestination);
 			var pngDestination = Path.Combine(destinationFolderPath, "png");
@@ -87,11 +87,11 @@ namespace SalesDepot.CoreObjects.InteropClasses
 			if (updateThumbsPhone && !Directory.Exists(thumbsPhoneDestination))
 				Directory.CreateDirectory(thumbsPhoneDestination);
 			var docDestination = Path.Combine(destinationFolderPath, "doc");
-			var updateDoc = !(Directory.Exists(docDestination) && Directory.GetFiles(docDestination, "*.doc").Length > 0) && generateImages;
+			var updateDoc = !(Directory.Exists(docDestination) && Directory.GetFiles(docDestination, "*.doc").Length > 0);
 			if (updateDoc && !Directory.Exists(docDestination))
 				Directory.CreateDirectory(docDestination);
 			var docxDestination = Path.Combine(destinationFolderPath, "docx");
-			var updateDocx = !(Directory.Exists(docxDestination) && Directory.GetFiles(docxDestination, "*.docx").Length > 0) && generateImages;
+			var updateDocx = !(Directory.Exists(docxDestination) && Directory.GetFiles(docxDestination, "*.docx").Length > 0);
 			if (updateDocx && !Directory.Exists(docxDestination))
 				Directory.CreateDirectory(docxDestination);
 			var txtDestination = Path.Combine(destinationFolderPath, "txt");
@@ -107,7 +107,7 @@ namespace SalesDepot.CoreObjects.InteropClasses
 				if (!Connect()) return;
 				MessageFilter.Register();
 
-				Word.Document document = _wordObject.Documents.Open(FileName: sourceFilePath);
+				Word.Document document = _wordObject.Documents.Open(sourceFilePath);
 
 				string pdfFileName = Path.Combine(pdfDestination, Path.ChangeExtension(Path.GetFileName(sourceFilePath), "pdf"));
 				if (updatePdf)

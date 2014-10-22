@@ -23,6 +23,7 @@ namespace SalesDepot.CommonGUI.Floater
 
 		public void ShowFloater(Form sender, string caption, Image logo, Action afterShow)
 		{
+			var isSenderMaximazed = sender.WindowState == FormWindowState.Maximized;
 			var x = _floaterPositionX == Int32.MinValue ? sender.Left + sender.Width - 50 : _floaterPositionX;
 			var y = _floaterPositionY == Int32.MinValue ? sender.Top + 50 : _floaterPositionY;
 			foreach (var openForm in Application.OpenForms.OfType<Form>())
@@ -38,7 +39,7 @@ namespace SalesDepot.CommonGUI.Floater
 				_floaterPositionY = form.Top;
 				_floaterPositionX = form.Left + form.Width;
 				if (result == DialogResult.Yes)
-					Utils.ActivateForm(sender.Handle, true, false);
+					Utils.ActivateForm(sender.Handle, isSenderMaximazed, false);
 				else
 				{
 					sender.WindowState = FormWindowState.Minimized;

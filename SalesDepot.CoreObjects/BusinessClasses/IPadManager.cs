@@ -259,6 +259,18 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 				previewContainer.id = libraryPreviewContainer.Identifier;
 				previewContainer.libraryId = Parent.Identifier.ToString();
 
+				var pdfLinks = libraryPreviewContainer.GetPreviewLinks("pdf");
+				if (pdfLinks != null && pdfLinks.Length > 0)
+					previewContainer.pdfLinks = pdfLinks;
+
+				var oldOfficeLinks = libraryPreviewContainer.GetPreviewLinks("old office");
+				if (oldOfficeLinks != null && oldOfficeLinks.Length > 0)
+					previewContainer.oldOfficeFormatLinks = oldOfficeLinks;
+
+				var newOfficeLinks = libraryPreviewContainer.GetPreviewLinks("new office");
+				if (newOfficeLinks != null && newOfficeLinks.Length > 0)
+					previewContainer.newOfficeFormatLinks = newOfficeLinks;
+
 				if (libraryPreviewContainer.GenerateImages)
 				{
 					var thumbSize = libraryPreviewContainer.GetThumbSize();
@@ -280,18 +292,6 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 					var jpegPhoneLinks = libraryPreviewContainer.GetPreviewLinks("jpg_phone");
 					if (jpegPhoneLinks != null && jpegPhoneLinks.Length > 0)
 						previewContainer.jpegPhoneLinks = jpegPhoneLinks;
-
-					var pdfLinks = libraryPreviewContainer.GetPreviewLinks("pdf");
-					if (pdfLinks != null && pdfLinks.Length > 0)
-						previewContainer.pdfLinks = pdfLinks;
-
-					var oldOfficeLinks = libraryPreviewContainer.GetPreviewLinks("old office");
-					if (oldOfficeLinks != null && oldOfficeLinks.Length > 0)
-						previewContainer.oldOfficeFormatLinks = oldOfficeLinks;
-
-					var newOfficeLinks = libraryPreviewContainer.GetPreviewLinks("new office");
-					if (newOfficeLinks != null && newOfficeLinks.Length > 0)
-						previewContainer.newOfficeFormatLinks = newOfficeLinks;
 
 					var thumbsLinks = libraryPreviewContainer.GetPreviewLinks("thumbs");
 					if (thumbsLinks != null && thumbsLinks.Length > 0)
@@ -366,11 +366,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 				var previewContainer = library.GetPreviewContainer(libraryFile.OriginalPath);
 				if (previewContainer != null)
 				{
-					destinationLink.previewId = libraryFile.GeneratePreviewImages || 
-						libraryFile.Type == FileTypes.MediaPlayerVideo || 
-						libraryFile.Type == FileTypes.QuickTimeVideo ? 
-						previewContainer.Identifier : 
-						null;
+					destinationLink.previewId = previewContainer.Identifier;
 					destinationLink.isPreviewNotReady = !previewContainer.Ready;
 					if (libraryFile.GenerateContentText)
 					{
@@ -564,8 +560,9 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 				var videoFiles = new List<VideoInfo>();
 				var i = 1;
 				foreach (var previewContainer in Parent.PreviewContainers
-					.Where(x => !String.IsNullOrEmpty(x.OriginalPath) &&
-						(x.Type == FileTypes.MediaPlayerVideo || x.Type == FileTypes.QuickTimeVideo)))
+					.Where(container => !String.IsNullOrEmpty(container.OriginalPath) &&
+						File.Exists(container.OriginalPath) &&
+						(container.Type == FileTypes.MediaPlayerVideo || container.Type == FileTypes.QuickTimeVideo)))
 				{
 					var videoFile = new VideoInfo(previewContainer);
 					videoFile.Index = i.ToString();

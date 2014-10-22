@@ -7,7 +7,7 @@ namespace SalesDepot
 {
 	static class Program
 	{
-		public static Mutex mutex;
+		private static Mutex _mutex;
 
 		/// <summary>
 		/// The main entry point for the application.
@@ -16,7 +16,7 @@ namespace SalesDepot
 		static void Main(string[] args)
 		{
 			bool firstInstance;
-			mutex = new Mutex(false, "Local\\SalesDepotApplication", out firstInstance);
+			_mutex = new Mutex(false, "Local\\SalesDepotApplication", out firstInstance);
 
 			ConfigurationClasses.SettingsManager.Instance.CheckStaticFolders();
 			if (args != null && args.Length > 0)

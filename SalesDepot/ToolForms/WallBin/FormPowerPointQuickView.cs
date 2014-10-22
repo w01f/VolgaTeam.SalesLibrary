@@ -63,6 +63,7 @@ namespace SalesDepot.ToolForms.WallBin
 				if (themeManager.Themes.Any())
 				{
 					pnSlideTemplate.Visible = true;
+					comboBoxEditSlideTemplate.Properties.Items.Clear();
 					comboBoxEditSlideTemplate.Properties.Items.AddRange(themeManager.Themes);
 					comboBoxEditSlideTemplate.SelectedIndex = 0;
 				}

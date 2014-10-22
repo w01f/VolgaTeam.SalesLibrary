@@ -77,7 +77,7 @@ namespace SalesDepot.CoreObjects.InteropClasses
 		public void ExportPresentationAllFormats(string sourceFilePath, string destinationFolderPath, bool generateImages, bool generateText, out bool update)
 		{
 			var pdfDestination = Path.Combine(destinationFolderPath, "pdf");
-			var updatePdf = !(Directory.Exists(pdfDestination) && Directory.GetFiles(pdfDestination, "*.pdf").Length > 0) && generateImages;
+			var updatePdf = !(Directory.Exists(pdfDestination) && Directory.GetFiles(pdfDestination, "*.pdf").Length > 0);
 			if (updatePdf && !Directory.Exists(pdfDestination))
 				Directory.CreateDirectory(pdfDestination);
 			var pngDestination = Path.Combine(destinationFolderPath, "png");
@@ -105,11 +105,11 @@ namespace SalesDepot.CoreObjects.InteropClasses
 			if (updateThumbsPhone && !Directory.Exists(thumbsPhoneDestination))
 				Directory.CreateDirectory(thumbsPhoneDestination);
 			var pptDestination = Path.Combine(destinationFolderPath, "ppt");
-			var updatePpt = !(Directory.Exists(pptDestination) && Directory.GetFiles(pptDestination, "*.ppt").Length > 0) && generateImages;
+			var updatePpt = !(Directory.Exists(pptDestination) && Directory.GetFiles(pptDestination, "*.ppt").Length > 0);
 			if (updatePpt && !Directory.Exists(pptDestination))
 				Directory.CreateDirectory(pptDestination);
 			var pptxDestination = Path.Combine(destinationFolderPath, "pptx");
-			var updatePptx = !(Directory.Exists(pptxDestination) && Directory.GetFiles(pptxDestination, "*.pptx").Length > 0) && generateImages;
+			var updatePptx = !(Directory.Exists(pptxDestination) && Directory.GetFiles(pptxDestination, "*.pptx").Length > 0);
 			if (updatePptx && !Directory.Exists(pptxDestination))
 				Directory.CreateDirectory(pptxDestination);
 			var txtDestination = Path.Combine(destinationFolderPath, "txt");
@@ -155,7 +155,7 @@ namespace SalesDepot.CoreObjects.InteropClasses
 
 							if (updatePpt || updatePptx)
 							{
-								Presentation singleSlidePresentation = _powerPointObject.Presentations.Add(MsoTriState.msoFalse);
+								var singleSlidePresentation = _powerPointObject.Presentations.Add(MsoTriState.msoFalse);
 								CopyPasteSlide(slide, singleSlidePresentation);
 								if (updatePpt)
 									singleSlidePresentation.SaveCopyAs(Path.Combine(pptDestination, string.Format("Slide{0}.{1}", new[] { i.ToString(), "ppt" })), PpSaveAsFileType.ppSaveAsPresentation);

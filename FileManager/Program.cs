@@ -6,7 +6,7 @@ namespace FileManager
 {
     static class Program
     {
-        public static Mutex mutex;
+        private static Mutex _mutex;
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -14,7 +14,7 @@ namespace FileManager
         static void Main()
         {
             bool firstInstance;
-            mutex = new Mutex(false, "Local\\FileManagerApplication", out firstInstance);
+            _mutex = new Mutex(false, "Local\\FileManagerApplication", out firstInstance);
             if (firstInstance)
             {
                 Application.EnableVisualStyles();

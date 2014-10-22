@@ -287,8 +287,8 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			bool update;
 			if (!previewFolder.Exists)
 				update = true;
-			else if ((GenerateImages && previewFolder.GetDirectories().All(d => d.Name.Equals("txt"))) ||
-				(!GenerateImages && previewFolder.GetDirectories().Any(d => !d.Name.Equals("txt"))))
+			else if ((GenerateImages && !previewFolder.GetDirectories().Any(d => new[] { "png", "jpeg" }.Contains(d.Name))) ||
+				(!GenerateImages && previewFolder.GetDirectories().Any(d => new[] { "png", "jpeg" }.Contains(d.Name))))
 				update = true;
 			else if ((GenerateText && !previewFolder.GetDirectories().Any(d => d.Name.Equals("txt"))) ||
 				(!GenerateText && previewFolder.GetDirectories().Any(d => d.Name.Equals("txt"))))
@@ -384,17 +384,13 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 				needToUpdate = true;
 			else if (parentFile.LastWriteTime > previewFolder.CreationTime)
 				needToUpdate = true;
-			else
-				needToUpdate = false;
-			if (needToUpdate)
-			{
-				if (!Directory.Exists(Path.Combine(Parent.Parent.Parent.Parent.Folder.FullName, Constants.RegularPreviewContainersRootFolderName)))
-					Directory.CreateDirectory(Path.Combine(Parent.Parent.Parent.Parent.Folder.FullName, Constants.RegularPreviewContainersRootFolderName));
-				if (previewFolder.Exists)
-					SyncManager.DeleteFolder(previewFolder);
-				Directory.CreateDirectory(ContainerPath);
-				PowerPointHelper.Instance.ExportPresentationAsImages(Parent.OriginalPath, ContainerPath);
-			}
+			if (!needToUpdate) return;
+			if (!Directory.Exists(Path.Combine(Parent.Parent.Parent.Parent.Folder.FullName, Constants.RegularPreviewContainersRootFolderName)))
+				Directory.CreateDirectory(Path.Combine(Parent.Parent.Parent.Parent.Folder.FullName, Constants.RegularPreviewContainersRootFolderName));
+			if (previewFolder.Exists)
+				SyncManager.DeleteFolder(previewFolder);
+			Directory.CreateDirectory(ContainerPath);
+			PowerPointHelper.Instance.ExportPresentationAsImages(Parent.OriginalPath, ContainerPath);
 		}
 
 		public Size GetThumbSize()

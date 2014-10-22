@@ -469,11 +469,6 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			}
 		}
 
-		public bool DoNotGeneratePreview
-		{
-			get { return !GeneratePreviewImages && !GenerateContentText; }
-		}
-
 		public bool ForcePreview
 		{
 			get { return _forcePreview; }
@@ -500,7 +495,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		{
 			get
 			{
-				if (DoNotGeneratePreview || IsForbidden || !(!IsRestricted || ((!String.IsNullOrEmpty(AssignedUsers) || !String.IsNullOrEmpty(DeniedUsers))))) return null;
+				if (IsForbidden || !(!IsRestricted || ((!String.IsNullOrEmpty(AssignedUsers) || !String.IsNullOrEmpty(DeniedUsers))))) return null;
 				return Parent.Parent.Parent.GetPreviewContainer(OriginalPath);
 			}
 		}
@@ -768,9 +763,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 				Type == FileTypes.Other ||
 				Type == FileTypes.MediaPlayerVideo ||
 				Type == FileTypes.QuickTimeVideo) &&
-				!(
-					DoNotGeneratePreview ||
-					IsForbidden ||
+				!(IsForbidden ||
 					!(!IsRestricted || ((!String.IsNullOrEmpty(AssignedUsers) || !String.IsNullOrEmpty(DeniedUsers)))))
 				)
 				Parent.Parent.Parent.GetPreviewContainer(OriginalPath);

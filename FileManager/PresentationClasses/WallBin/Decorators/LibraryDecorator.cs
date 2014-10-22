@@ -130,14 +130,12 @@ namespace FileManager.PresentationClasses.WallBin.Decorators
 
 		public void Save()
 		{
-			if (!_isDisposed)
-			{
-				foreach (var page in Pages)
-					page.Save();
-				Library.Save();
-				StateChanged = false;
-				IPadContentManager.UpdateVideoFiles();
-			}
+			if (_isDisposed) return;
+			foreach (var page in Pages)
+				page.Save();
+			Library.Save();
+			StateChanged = false;
+			IPadContentManager.UpdateVideoFiles();
 		}
 	}
 }

@@ -430,15 +430,7 @@ namespace FileManager.PresentationClasses.WallBin
 							foreach (var file in files)
 								AddFile(file, ht.RowIndex);
 						}
-						_containFiles = true;
-						SetGridFont(SettingsManager.Instance.FontSize);
-						SetGridSize();
-						if (Parent != null)
-						{
-							((ColumnPanel)Parent).ResizePanel();
-							Decorator.RefreshPanelHeight();
-						}
-						Decorator.Parent.StateChanged = true;
+						UpdateAfterFolderChanged();
 					}
 					else
 						Decorator.ColumnDragDrop(Parent, e);
@@ -611,12 +603,15 @@ namespace FileManager.PresentationClasses.WallBin
 			if (WallBinOptions.AllowEdit)
 				UpdateButtonsStatus();
 			if (!WallBinOptions.AllowMultiSelect)
+			{
 				MainController.Instance.WallbinController.UpdateLinkInfo(selectedLinks.FirstOrDefault());
+				MainController.Instance.WallbinController.UpdateTagCountInfo();
+			}
 		}
 
 		private void grFiles_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
 		{
-			UpdateAfterDelete();
+			UpdateAfterFolderChanged();
 		}
 		#endregion
 
@@ -628,6 +623,7 @@ namespace FileManager.PresentationClasses.WallBin
 				if (form.ShowDialog() == DialogResult.OK)
 				{
 					var file = new LibraryLink(_folder);
+					_folder.Files.Add(file);
 					file.Name = form.LinkName;
 					file.RelativePath = form.LinkPath;
 					file.Type = FileTypes.Url;
@@ -645,16 +641,7 @@ namespace FileManager.PresentationClasses.WallBin
 						DataGridViewRow row = grFiles.Rows[grFiles.Rows.Add(file.DisplayName + file.Note)];
 						row.Tag = file;
 					}
-					_containFiles = true;
-					SetGridFont(SettingsManager.Instance.FontSize);
-					SetGridSize();
-					if (Parent != null)
-					{
-						((ColumnPanel)Parent).ResizePanel();
-						Decorator.RefreshPanelHeight();
-					}
-					Decorator.Parent.StateChanged = true;
-					UpdateButtonsStatus();
+					UpdateAfterFolderChanged();
 				}
 			}
 		}
@@ -666,6 +653,7 @@ namespace FileManager.PresentationClasses.WallBin
 				if (form.ShowDialog() == DialogResult.OK)
 				{
 					var file = new LibraryLink(_folder);
+					_folder.Files.Add(file);
 					file.Name = form.LinkName;
 					file.RelativePath = form.LinkPath;
 					file.Type = FileTypes.Network;
@@ -683,16 +671,7 @@ namespace FileManager.PresentationClasses.WallBin
 						var row = grFiles.Rows[grFiles.Rows.Add(file.DisplayName + file.Note)];
 						row.Tag = file;
 					}
-					_containFiles = true;
-					SetGridFont(SettingsManager.Instance.FontSize);
-					SetGridSize();
-					if (Parent != null)
-					{
-						((ColumnPanel)Parent).ResizePanel();
-						Decorator.RefreshPanelHeight();
-					}
-					Decorator.Parent.StateChanged = true;
-					UpdateButtonsStatus();
+					UpdateAfterFolderChanged();
 				}
 			}
 		}
@@ -702,6 +681,7 @@ namespace FileManager.PresentationClasses.WallBin
 			if (grFiles.SelectedRows.Count > 0)
 			{
 				var file = new LibraryLink(_folder);
+				_folder.Files.Add(file);
 				file.Type = FileTypes.LineBreak;
 				file.LineBreakProperties = new LineBreakProperties(file);
 				file.LineBreakProperties.Font = new Font(_textFont, FontStyle.Regular);
@@ -713,14 +693,7 @@ namespace FileManager.PresentationClasses.WallBin
 				DataGridViewRow row = grFiles.Rows[rowIndex];
 				row.Tag = file;
 				grFiles.ClearSelection();
-				SetGridSize();
-				if (Parent != null)
-				{
-					((ColumnPanel)Parent).ResizePanel();
-					Decorator.RefreshPanelHeight();
-				}
-				Decorator.Parent.StateChanged = true;
-				UpdateButtonsStatus();
+				UpdateAfterFolderChanged();
 			}
 			else
 				AppManager.Instance.ShowInfo("Select link above line break will be added");
@@ -774,6 +747,8 @@ namespace FileManager.PresentationClasses.WallBin
 			var file = grFiles.SelectedRows[0].Tag as LibraryLink;
 			if (file == null) return;
 			if (_formLinkProperties == null) _formLinkProperties = new FormLinkProperties(file.Parent.Parent.Parent as Library);
+			var formWidth = 580;
+			var formHeight = 630;
 			switch (propertiesType)
 			{
 				case LinkPropertiesType.Notes:
@@ -789,12 +764,18 @@ namespace FileManager.PresentationClasses.WallBin
 					_formLinkProperties.xtraTabControl.SelectedTabPage = _formLinkProperties.xtraTabPageSecurity;
 					break;
 				case LinkPropertiesType.Widget:
+					formWidth = 940;
+					formHeight = 750;
 					_formLinkProperties.xtraTabControl.SelectedTabPage = _formLinkProperties.xtraTabPageWidgets;
 					break;
 				case LinkPropertiesType.Banner:
+					formWidth = 940;
+					formHeight = 750;
 					_formLinkProperties.xtraTabControl.SelectedTabPage = _formLinkProperties.xtraTabPageBanner;
 					break;
 			}
+			_formLinkProperties.Width = formWidth;
+			_formLinkProperties.Height = formHeight;
 			_formLinkProperties.IsLoading = true;
 			_formLinkProperties.CaptionName = string.IsNullOrEmpty(file.PropertiesName) && file.Type == FileTypes.LineBreak ? "Line Break" : file.PropertiesName;
 			_formLinkProperties.IsBold = file.IsBold;
@@ -974,15 +955,7 @@ namespace FileManager.PresentationClasses.WallBin
 			bool widgetColumnVisible = (from DataGridViewRow row in grFiles.Rows select row.Tag as LibraryLink).Any(x => x.Widget != null || (WallBinOptions.ShowCategoryTags && x.HasCategories) || (WallBinOptions.ShowSuperFilterTags && x.HasSuperFilters) || (WallBinOptions.ShowKeywordTags && x.HasKeywords) || (WallBinOptions.ShowSecurityTags && (x.IsRestricted || x.IsForbidden)));
 			_containsWidgets = widgetColumnVisible;
 
-			SetGridSize();
-			grFiles.Refresh();
-			MainController.Instance.WallbinController.UpdateLinkInfo(file);
-			MainController.Instance.WallbinController.UpdateTagCountInfo();
-			if (Parent != null)
-			{
-				((ColumnPanel)Parent).ResizePanel();
-				Decorator.RefreshPanelHeight();
-			}
+			UpdateAfterFolderChanged();
 			Decorator.Parent.StateChanged = true;
 		}
 
@@ -1019,15 +992,22 @@ namespace FileManager.PresentationClasses.WallBin
 						file.PreviewContainer = new PresentationPreviewContainer(file);
 					file.PreviewContainer.ClearContent();
 				}
+				_folder.Files.Remove(file);
 			}
 			grFiles.Rows.Remove(targetRow);
 		}
 
-		public void UpdateAfterDelete()
+		private void UpdateAfterFolderChanged()
 		{
-			if (!(grFiles.Rows.Count > 0))
-				_containFiles = false;
-			SetGridSize();
+			_containFiles = grFiles.Rows.Count > 0;
+			bool widgetColumnVisible = (from DataGridViewRow row in grFiles.Rows select row.Tag as LibraryLink).Any(x => x.Widget != null || (WallBinOptions.ShowCategoryTags && x.HasCategories) || (WallBinOptions.ShowSuperFilterTags && x.HasSuperFilters) || (WallBinOptions.ShowKeywordTags && x.HasKeywords) || (WallBinOptions.ShowSecurityTags && (x.IsRestricted || x.IsForbidden)));
+			_containsWidgets = widgetColumnVisible;
+			SetGridFont(SettingsManager.Instance.FontSize);
+			grFiles.Refresh();
+			var selectedFile = grFiles.SelectedRows.Count > 0 ? grFiles.SelectedRows[0].Tag as LibraryLink : null;
+			if (selectedFile != null)
+				MainController.Instance.WallbinController.UpdateLinkInfo(selectedFile);
+			MainController.Instance.WallbinController.UpdateTagCountInfo();
 			if (Parent != null)
 			{
 				((ColumnPanel)Parent).ResizePanel();
@@ -1452,6 +1432,7 @@ namespace FileManager.PresentationClasses.WallBin
 			if (!isExisted)
 			{
 				var libraryFile = new LibraryLink(_folder);
+				_folder.Files.Add(libraryFile);
 				libraryFile.Name = file.File.Name.Replace(file.File.Extension, string.Empty);
 				libraryFile.RootId = file.RootId;
 
@@ -1551,6 +1532,7 @@ namespace FileManager.PresentationClasses.WallBin
 			if (!isExisted)
 			{
 				var libraryFile = new LibraryFolderLink(_folder);
+				_folder.Files.Add(libraryFile);
 				libraryFile.Name = folder.Folder.Name;
 				libraryFile.RootId = folder.RootId;
 
@@ -1682,7 +1664,7 @@ namespace FileManager.PresentationClasses.WallBin
 			var rows = grFiles.Rows.OfType<DataGridViewRow>().ToList();
 			foreach (var row in rows)
 				DeleteLinkInternal(row);
-			Decorator.Parent.StateChanged = true;
+			UpdateAfterFolderChanged();
 		}
 
 		private void toolStripMenuItemFolderDeleteSecurity_Click(object sender, EventArgs e)
@@ -1699,7 +1681,7 @@ namespace FileManager.PresentationClasses.WallBin
 				link.AssignedUsers = null;
 				link.DeniedUsers = null;
 			}
-			Decorator.Parent.StateChanged = true;
+			UpdateAfterFolderChanged();
 		}
 
 		private void toolStripMenuItemFolderDeleteTags_Click(object sender, EventArgs e)
@@ -1714,8 +1696,7 @@ namespace FileManager.PresentationClasses.WallBin
 				link.SuperFilters.Clear();
 				link.CustomKeywords.Tags.Clear();
 			}
-			grFiles_SelectionChanged(sender, EventArgs.Empty);
-			Decorator.Parent.StateChanged = true;
+			UpdateAfterFolderChanged();
 		}
 
 		private void toolStripMenuItemFolderDeleteWidgets_Click(object sender, EventArgs e)
@@ -1729,8 +1710,7 @@ namespace FileManager.PresentationClasses.WallBin
 				link.EnableWidget = false;
 				link.Widget = null;
 			}
-			grFiles.Refresh();
-			Decorator.Parent.StateChanged = true;
+			UpdateAfterFolderChanged();
 		}
 
 		private void toolStripMenuItemFolderDeleteBanners_Click(object sender, EventArgs e)
@@ -1744,45 +1724,7 @@ namespace FileManager.PresentationClasses.WallBin
 				link.BannerProperties.Enable = false;
 				link.BannerProperties.Image = null;
 			}
-			grFiles.Refresh();
-			Decorator.Parent.StateChanged = true;
-		}
-
-		private void toolStripMenuItemFolderApplyTags_Click(object sender, EventArgs e)
-		{
-			var selectedRow = grFiles.SelectedRows.Count > 0 ? grFiles.SelectedRows[0] : null;
-			var selectedLink = selectedRow != null ? selectedRow.Tag as LibraryLink : null;
-			if (selectedLink == null) return;
-			var rows = grFiles.Rows.OfType<DataGridViewRow>().ToList();
-			foreach (var row in rows)
-			{
-				var link = row.Tag as LibraryLink;
-				if (link == null || link == selectedLink) continue;
-				link.SearchTags = selectedLink.SearchTags.Clone();
-				link.CustomKeywords = selectedLink.CustomKeywords.Clone();
-				link.SuperFilters.Clear();
-				link.SuperFilters.AddRange(selectedLink.SuperFilters.Select(sf => new SuperFilter { Name = sf.Name }));
-			}
-			Decorator.Parent.StateChanged = true;
-		}
-
-		private void toolStripMenuItemFolderApplySecurity_Click(object sender, EventArgs e)
-		{
-			var selectedRow = grFiles.SelectedRows.Count > 0 ? grFiles.SelectedRows[0] : null;
-			var selectedLink = selectedRow != null ? selectedRow.Tag as LibraryLink : null;
-			if (selectedLink == null) return;
-			var rows = grFiles.Rows.OfType<DataGridViewRow>().ToList();
-			foreach (var row in rows)
-			{
-				var link = row.Tag as LibraryLink;
-				if (link == null) continue;
-				link.IsRestricted = selectedLink.IsRestricted;
-				link.NoShare = selectedLink.NoShare;
-				link.IsForbidden = selectedLink.IsForbidden;
-				link.AssignedUsers = selectedLink.AssignedUsers;
-				link.DeniedUsers = selectedLink.DeniedUsers;
-			}
-			Decorator.Parent.StateChanged = true;
+			UpdateAfterFolderChanged();
 		}
 		#endregion
 

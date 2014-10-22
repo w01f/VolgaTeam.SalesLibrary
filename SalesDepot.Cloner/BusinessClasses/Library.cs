@@ -191,8 +191,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 					{
 						foreach (LibraryLink file in folder.Files)
 						{
-							if (file.DoNotGeneratePreview ||
-								file.IsForbidden ||
+							if (file.IsForbidden ||
 								!(!file.IsRestricted ||
 									((!String.IsNullOrEmpty(file.AssignedUsers) ||
 									!String.IsNullOrEmpty(file.DeniedUsers))))) continue;

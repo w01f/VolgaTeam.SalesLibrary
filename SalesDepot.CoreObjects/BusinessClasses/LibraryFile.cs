@@ -32,7 +32,6 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		bool IsForbidden { get; set; }
 		bool IsRestricted { get; set; }
 		bool NoShare { get; set; }
-		bool DoNotGeneratePreview { get; }
 		bool GeneratePreviewImages { get; set; }
 		bool GenerateContentText { get; set; }
 		bool ForcePreview { get; set; }

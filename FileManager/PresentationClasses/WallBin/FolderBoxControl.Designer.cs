@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
 			this.components = new System.ComponentModel.Container();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.ttCellInfo = new System.Windows.Forms.ToolTip(this.components);
 			this.pnGrid = new System.Windows.Forms.Panel();
 			this.grFiles = new System.Windows.Forms.DataGridView();
@@ -58,8 +58,6 @@
 			this.toolStripMenuItemFolderDeleteTags = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItemFolderDeleteWidgets = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItemFolderDeleteBanners = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolStripMenuItemFolderApplyTags = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolStripMenuItemFolderApplySecurity = new System.Windows.Forms.ToolStripMenuItem();
 			this.contextMenuStripFolderProperties = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.pnGrid.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.grFiles)).BeginInit();
@@ -102,20 +100,20 @@
 			this.grFiles.ColumnHeadersVisible = false;
 			this.grFiles.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colDisplayName});
-			dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle20.BackColor = System.Drawing.SystemColors.Window;
-			dataGridViewCellStyle20.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			dataGridViewCellStyle20.ForeColor = System.Drawing.SystemColors.ControlText;
-			dataGridViewCellStyle20.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle20.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-			this.grFiles.DefaultCellStyle = dataGridViewCellStyle20;
+			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+			dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+			dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+			this.grFiles.DefaultCellStyle = dataGridViewCellStyle2;
 			this.grFiles.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.grFiles.Location = new System.Drawing.Point(1, 40);
 			this.grFiles.Name = "grFiles";
 			this.grFiles.ReadOnly = true;
 			this.grFiles.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-			this.grFiles.RowHeadersDefaultCellStyle = dataGridViewCellStyle21;
+			this.grFiles.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
 			this.grFiles.RowHeadersVisible = false;
 			this.grFiles.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
 			this.grFiles.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
@@ -140,8 +138,8 @@
 			// 
 			// colDisplayName
 			// 
-			dataGridViewCellStyle19.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.colDisplayName.DefaultCellStyle = dataGridViewCellStyle19;
+			dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.colDisplayName.DefaultCellStyle = dataGridViewCellStyle1;
 			this.colDisplayName.HeaderText = "Display Name and Note";
 			this.colDisplayName.Name = "colDisplayName";
 			this.colDisplayName.ReadOnly = true;
@@ -333,20 +331,6 @@
 			this.toolStripMenuItemFolderDeleteBanners.Text = "Remove all Banners for all links in this window";
 			this.toolStripMenuItemFolderDeleteBanners.Click += new System.EventHandler(this.toolStripMenuItemFolderDeleteBanners_Click);
 			// 
-			// toolStripMenuItemFolderApplyTags
-			// 
-			this.toolStripMenuItemFolderApplyTags.Name = "toolStripMenuItemFolderApplyTags";
-			this.toolStripMenuItemFolderApplyTags.Size = new System.Drawing.Size(348, 22);
-			this.toolStripMenuItemFolderApplyTags.Text = "Apply the same tag to all links in this window";
-			this.toolStripMenuItemFolderApplyTags.Click += new System.EventHandler(this.toolStripMenuItemFolderApplyTags_Click);
-			// 
-			// toolStripMenuItemFolderApplySecurity
-			// 
-			this.toolStripMenuItemFolderApplySecurity.Name = "toolStripMenuItemFolderApplySecurity";
-			this.toolStripMenuItemFolderApplySecurity.Size = new System.Drawing.Size(348, 22);
-			this.toolStripMenuItemFolderApplySecurity.Text = "Apply the same security to all links in this window";
-			this.toolStripMenuItemFolderApplySecurity.Click += new System.EventHandler(this.toolStripMenuItemFolderApplySecurity_Click);
-			// 
 			// contextMenuStripFolderProperties
 			// 
 			this.contextMenuStripFolderProperties.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -354,11 +338,9 @@
             this.toolStripMenuItemFolderDeleteSecurity,
             this.toolStripMenuItemFolderDeleteTags,
             this.toolStripMenuItemFolderDeleteWidgets,
-            this.toolStripMenuItemFolderDeleteBanners,
-            this.toolStripMenuItemFolderApplyTags,
-            this.toolStripMenuItemFolderApplySecurity});
+            this.toolStripMenuItemFolderDeleteBanners});
 			this.contextMenuStripFolderProperties.Name = "contextMenuStripLinkProperties";
-			this.contextMenuStripFolderProperties.Size = new System.Drawing.Size(349, 180);
+			this.contextMenuStripFolderProperties.Size = new System.Drawing.Size(349, 136);
 			// 
 			// FolderBoxControl
 			// 
@@ -406,8 +388,6 @@
 		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemFolderDeleteTags;
 		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemFolderDeleteWidgets;
 		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemFolderDeleteBanners;
-		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemFolderApplyTags;
-		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemFolderApplySecurity;
 		private System.Windows.Forms.ContextMenuStrip contextMenuStripFolderProperties;
     }
 }

@@ -8,6 +8,7 @@ namespace OvernightsCalendarViewer
 {
 	internal static class Program
 	{
+		private static Mutex _mutex;
 		/// <summary>
 		///     The main entry point for the application.
 		/// </summary>
@@ -15,7 +16,7 @@ namespace OvernightsCalendarViewer
 		private static void Main(string[] args)
 		{
 			bool firstInstance;
-			new Mutex(false, "Local\\OvernightsApplication", out firstInstance);
+			_mutex = new Mutex(false, "Local\\OvernightsApplication", out firstInstance);
 
 			SettingsManager.Instance.LoadSettings();
 			if (!SettingsManager.Instance.CheckLibraries())

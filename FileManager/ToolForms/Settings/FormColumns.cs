@@ -857,15 +857,17 @@ namespace FileManager.ToolForms.Settings
 			ckApllyForAllWindowsWidget.Checked = Library.ApplyWidgetForAllWindows;
 			ckApllyForAllWindowsBanner.Checked = Library.ApplyBannerForAllWindows;
 			xtraTabPageWindowPropertiesBanner.PageEnabled = Directory.Exists(ListManager.Instance.BannerFolder);
-			gridControlWindowBanners.DataSource = new BindingList<Banner>(ListManager.Instance.Banners);
 			xtraTabPageWindowPropertiesWidget.PageEnabled = Directory.Exists(ListManager.Instance.WidgetFolder);
-			gridControlWindowWidgets.DataSource = new BindingList<Widget>(ListManager.Instance.Widgets);
-			gridControlColumn1Banners.DataSource = new BindingList<Banner>(ListManager.Instance.Banners);
-			gridControlColumn2Banners.DataSource = new BindingList<Banner>(ListManager.Instance.Banners);
-			gridControlColumn3Banners.DataSource = new BindingList<Banner>(ListManager.Instance.Banners);
-			gridControlColumn1Widgets.DataSource = new BindingList<Widget>(ListManager.Instance.Widgets);
-			gridControlColumn2Widgets.DataSource = new BindingList<Widget>(ListManager.Instance.Widgets);
-			gridControlColumn3Widgets.DataSource = new BindingList<Widget>(ListManager.Instance.Widgets);
+			var banners = ListManager.Instance.Banners.SelectMany(g => g.Images).ToList();
+			var widgets = ListManager.Instance.Widgets.SelectMany(g => g.Images).ToList();
+			gridControlWindowBanners.DataSource = banners;
+			gridControlWindowWidgets.DataSource = widgets;
+			gridControlColumn1Banners.DataSource = banners;
+			gridControlColumn2Banners.DataSource = banners;
+			gridControlColumn3Banners.DataSource = banners;
+			gridControlColumn1Widgets.DataSource = widgets;
+			gridControlColumn2Widgets.DataSource = widgets;
+			gridControlColumn3Widgets.DataSource = widgets;
 			PopulatePagesList();
 			comboBoxEditPages_SelectedIndexChanged(null, null);
 			_stateChanges = false;
@@ -1392,10 +1394,9 @@ namespace FileManager.ToolForms.Settings
 
 		private void gridViewBanners_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
 		{
-			Banner selectedBanner = null;
-			if (gridViewWindowBanners.FocusedRowHandle >= 0)
-				selectedBanner = ListManager.Instance.Banners[gridViewWindowBanners.GetDataSourceRowIndex(gridViewWindowBanners.FocusedRowHandle)];
-			pbWindowSelectedBanner.Image = selectedBanner != null ? selectedBanner.Image : null;
+			var imageSource = gridViewWindowBanners.GetFocusedRow() as LinkImageSource;
+			if (imageSource == null) return;
+			pbWindowSelectedBanner.Image = imageSource.Image;
 		}
 
 		private void gridViewBanners_Click(object sender, EventArgs e)
@@ -1438,12 +1439,9 @@ namespace FileManager.ToolForms.Settings
 
 		private void layoutViewWindowWidgets_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
 		{
-			Widget selectedWidget = null;
-			if (layoutViewWindowWidgets.FocusedRowHandle >= 0)
-			{
-				selectedWidget = ListManager.Instance.Widgets[layoutViewWindowWidgets.GetDataSourceRowIndex(layoutViewWindowWidgets.FocusedRowHandle)];
-			}
-			pbWindowSelectedWidget.Image = selectedWidget != null ? selectedWidget.Image : null;
+			var imageSource = layoutViewWindowWidgets.GetFocusedRow() as LinkImageSource;
+			if (imageSource == null) return;
+			pbWindowSelectedWidget.Image = imageSource.Image;
 			if (_allowToSave)
 				_stateChanges = true;
 		}
@@ -1573,10 +1571,9 @@ namespace FileManager.ToolForms.Settings
 
 		private void gridViewColumn1Banners_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
 		{
-			Banner selectedBanner = null;
-			if (gridViewColumn1Banners.FocusedRowHandle >= 0)
-				selectedBanner = ListManager.Instance.Banners[gridViewColumn1Banners.GetDataSourceRowIndex(gridViewColumn1Banners.FocusedRowHandle)];
-			pbColumn1SelectedBanner.Image = selectedBanner != null ? selectedBanner.Image : null;
+			var imageSource = gridViewColumn1Banners.GetFocusedRow() as LinkImageSource;
+			if (imageSource == null) return;
+			pbColumn1SelectedBanner.Image = imageSource.Image;
 			if (_allowToSave)
 				_stateChanges = true;
 		}
@@ -1601,12 +1598,9 @@ namespace FileManager.ToolForms.Settings
 
 		private void layoutViewColumn1Widgets_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
 		{
-			Widget selectedWidget = null;
-			if (layoutViewColumn1Widgets.FocusedRowHandle >= 0)
-			{
-				selectedWidget = ListManager.Instance.Widgets[layoutViewColumn1Widgets.GetDataSourceRowIndex(layoutViewColumn1Widgets.FocusedRowHandle)];
-			}
-			pbColumn1SelectedWidget.Image = selectedWidget != null ? selectedWidget.Image : null;
+			var imageSource = layoutViewColumn1Widgets.GetFocusedRow() as LinkImageSource;
+			if (imageSource == null) return;
+			pbColumn1SelectedWidget.Image = imageSource.Image;
 			if (_allowToSave)
 				_stateChanges = true;
 		}
@@ -1709,10 +1703,9 @@ namespace FileManager.ToolForms.Settings
 
 		private void gridViewColumn2Banners_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
 		{
-			Banner selectedBanner = null;
-			if (gridViewColumn2Banners.FocusedRowHandle >= 0)
-				selectedBanner = ListManager.Instance.Banners[gridViewColumn2Banners.GetDataSourceRowIndex(gridViewColumn2Banners.FocusedRowHandle)];
-			pbColumn2SelectedBanner.Image = selectedBanner != null ? selectedBanner.Image : null;
+			var imageSource = gridViewColumn2Banners.GetFocusedRow() as LinkImageSource;
+			if (imageSource == null) return;
+			pbColumn2SelectedBanner.Image = imageSource.Image;
 			if (_allowToSave)
 				_stateChanges = true;
 		}
@@ -1737,12 +1730,9 @@ namespace FileManager.ToolForms.Settings
 
 		private void layoutViewColumn2Widgets_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
 		{
-			Widget selectedWidget = null;
-			if (layoutViewColumn2Widgets.FocusedRowHandle >= 0)
-			{
-				selectedWidget = ListManager.Instance.Widgets[layoutViewColumn2Widgets.GetDataSourceRowIndex(layoutViewColumn2Widgets.FocusedRowHandle)];
-			}
-			pbColumn2SelectedWidget.Image = selectedWidget != null ? selectedWidget.Image : null;
+			var imageSource = layoutViewColumn2Widgets.GetFocusedRow() as LinkImageSource;
+			if (imageSource == null) return;
+			pbColumn2SelectedWidget.Image = imageSource.Image;
 			if (_allowToSave)
 				_stateChanges = true;
 		}
@@ -1845,10 +1835,9 @@ namespace FileManager.ToolForms.Settings
 
 		private void gridViewColumn3Banners_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
 		{
-			Banner selectedBanner = null;
-			if (gridViewColumn3Banners.FocusedRowHandle >= 0)
-				selectedBanner = ListManager.Instance.Banners[gridViewColumn3Banners.GetDataSourceRowIndex(gridViewColumn3Banners.FocusedRowHandle)];
-			pbColumn3SelectedBanner.Image = selectedBanner != null ? selectedBanner.Image : null;
+			var imageSource = gridViewColumn3Banners.GetFocusedRow() as LinkImageSource;
+			if (imageSource == null) return;
+			pbColumn3SelectedBanner.Image = imageSource.Image;
 			if (_allowToSave)
 				_stateChanges = true;
 		}
@@ -1873,12 +1862,9 @@ namespace FileManager.ToolForms.Settings
 
 		private void layoutViewColumn3Widgets_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
 		{
-			Widget selectedWidget = null;
-			if (layoutViewColumn3Widgets.FocusedRowHandle >= 0)
-			{
-				selectedWidget = ListManager.Instance.Widgets[layoutViewColumn3Widgets.GetDataSourceRowIndex(layoutViewColumn3Widgets.FocusedRowHandle)];
-			}
-			pbColumn3SelectedWidget.Image = selectedWidget != null ? selectedWidget.Image : null;
+			var imageSource = layoutViewColumn3Widgets.GetFocusedRow() as LinkImageSource;
+			if (imageSource == null) return;
+			pbColumn3SelectedWidget.Image = imageSource.Image;
 			if (_allowToSave)
 				_stateChanges = true;
 		}

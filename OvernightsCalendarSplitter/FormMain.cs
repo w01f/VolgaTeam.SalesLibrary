@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
+using DevExpress.XtraEditors.Controls;
 using SalesDepot.CommonGUI.Forms;
 
 namespace OvernightsCalendarSplitter
@@ -17,7 +18,7 @@ namespace OvernightsCalendarSplitter
 		#region Grab Methods
 		private void ProcessFiles()
 		{
-			List<FileInfo> files = new List<FileInfo>(GetFiles(new DirectoryInfo(SettingsManager.Instance.SourcePath)));
+			var files = new List<FileInfo>(GetFiles(new DirectoryInfo(SettingsManager.Instance.SourcePath)));
 			foreach (FileInfo file in files)
 				SplitFile(file);
 		}
@@ -27,14 +28,14 @@ namespace OvernightsCalendarSplitter
 			string fileExtension = file.Extension;
 			if (fileExtension.Equals(".xls") || fileExtension.Equals(".xlsx"))
 			{
-				ExcelHelper excelHelper = new ExcelHelper();
+				var excelHelper = new ExcelHelper();
 				excelHelper.SplitFile(file.FullName);
 			}
 		}
 
 		private FileInfo[] GetFiles(DirectoryInfo sourceFolder)
 		{
-			List<FileInfo> result = new List<FileInfo>();
+			var result = new List<FileInfo>();
 
 			foreach (DirectoryInfo subFolder in sourceFolder.GetDirectories())
 				result.AddRange(GetFiles(subFolder));
@@ -60,50 +61,47 @@ namespace OvernightsCalendarSplitter
 
 			if (Directory.Exists(SettingsManager.Instance.SourcePath) && Directory.Exists(SettingsManager.Instance.DestinationPath))
 			{
-				using (FormProgress formProgress = new FormProgress())
+				using (var formProgress = new FormProgress())
 				{
 					formProgress.TopMost = true;
 					formProgress.laProgress.Text = "Processing files...";
-					System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(delegate()
-					{
-						ProcessFiles();
-					}));
+					var thread = new Thread(delegate() { ProcessFiles(); });
 
 					formProgress.Show();
-					System.Windows.Forms.Application.DoEvents();
+					Application.DoEvents();
 
 					thread.Start();
 
 					while (thread.IsAlive)
-						System.Windows.Forms.Application.DoEvents();
+						Application.DoEvents();
 					formProgress.Close();
 				}
 			}
 		}
 
-		private void buttonEditSource_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+		private void buttonEditSource_ButtonClick(object sender, ButtonPressedEventArgs e)
 		{
-			using (FolderBrowserDialog dialog = new FolderBrowserDialog())
+			using (var dialog = new FolderBrowserDialog())
 			{
 				if (buttonEditSource.EditValue != null)
 					dialog.SelectedPath = buttonEditSource.EditValue.ToString();
-				if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+				if (dialog.ShowDialog() == DialogResult.OK)
 				{
-					if (System.IO.Directory.Exists(dialog.SelectedPath))
+					if (Directory.Exists(dialog.SelectedPath))
 						buttonEditSource.EditValue = dialog.SelectedPath;
 				}
 			}
 		}
 
-		private void buttonEditDestination_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+		private void buttonEditDestination_ButtonClick(object sender, ButtonPressedEventArgs e)
 		{
-			using (FolderBrowserDialog dialog = new FolderBrowserDialog())
+			using (var dialog = new FolderBrowserDialog())
 			{
 				if (buttonEditDestination.EditValue != null)
 					dialog.SelectedPath = buttonEditDestination.EditValue.ToString();
-				if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+				if (dialog.ShowDialog() == DialogResult.OK)
 				{
-					if (System.IO.Directory.Exists(dialog.SelectedPath))
+					if (Directory.Exists(dialog.SelectedPath))
 						buttonEditDestination.EditValue = dialog.SelectedPath;
 				}
 			}
@@ -111,7 +109,7 @@ namespace OvernightsCalendarSplitter
 
 		private void simpleButtonExit_Click(object sender, EventArgs e)
 		{
-			this.Close();
+			Close();
 		}
 	}
 }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
@@ -8,19 +7,15 @@ using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using DevComponents.DotNetBar.Metro;
-using DevExpress.Utils;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid;
-using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
-using DevExpress.XtraGrid.Views.Layout;
-using DevExpress.XtraGrid.Views.Layout.ViewInfo;
 using DevExpress.XtraNavBar;
 using FileManager.ConfigurationClasses;
+using FileManager.PresentationClasses.WallBin;
 using SalesDepot.CoreObjects.BusinessClasses;
 using SalesDepot.Services.IPadAdminService;
-using Banner = FileManager.ConfigurationClasses.Banner;
 using Font = System.Drawing.Font;
 using Library = SalesDepot.CoreObjects.BusinessClasses.Library;
 
@@ -41,7 +36,6 @@ namespace FileManager.ToolForms.WallBin
 		private bool _closeEventAssigned;
 		private bool _isBold;
 		private string _note = string.Empty;
-		private LayoutViewHitInfo _hitInfo;
 		private readonly List<GroupModel> _securityGroups = new List<GroupModel>();
 		private readonly Library _library;
 
@@ -66,10 +60,8 @@ namespace FileManager.ToolForms.WallBin
 				laExpirationDateTitle.Font = new Font(laExpirationDateTitle.Font.FontFamily, laExpirationDateTitle.Font.Size - 2, laExpirationDateTitle.Font.Style);
 				laExpireddateActions.Font = new Font(laExpireddateActions.Font.FontFamily, laExpireddateActions.Font.Size - 2, laExpireddateActions.Font.Style);
 				laSelectedWidget.Font = new Font(laSelectedWidget.Font.FontFamily, laSelectedWidget.Font.Size - 2, laSelectedWidget.Font.Style);
-				laWidgetHint.Font = new Font(laWidgetHint.Font.FontFamily, laWidgetHint.Font.Size - 4, laWidgetHint.Font.Style);
 				laSelectedBanner.Font = new Font(laSelectedBanner.Font.FontFamily, laSelectedBanner.Font.Size - 2, laSelectedBanner.Font.Style);
 				laBannerAligment.Font = new Font(laBannerAligment.Font.FontFamily, laBannerAligment.Font.Size - 2, laBannerAligment.Font.Style);
-				laBannerHint.Font = new Font(laBannerHint.Font.FontFamily, laBannerHint.Font.Size - 4, laBannerHint.Font.Style);
 				checkBoxEnableExpiredLinks.Font = new Font(checkBoxEnableExpiredLinks.Font.FontFamily, checkBoxEnableExpiredLinks.Font.Size - 2, checkBoxEnableExpiredLinks.Font.Style);
 				checkBoxEnableWidget.Font = new Font(checkBoxEnableWidget.Font.FontFamily, checkBoxEnableWidget.Font.Size - 2, checkBoxEnableWidget.Font.Style);
 				checkBoxEnableBanner.Font = new Font(checkBoxEnableBanner.Font.FontFamily, checkBoxEnableBanner.Font.Size - 2, checkBoxEnableBanner.Font.Style);
@@ -118,14 +110,23 @@ namespace FileManager.ToolForms.WallBin
 			Keywords = new List<StringDataSourceWrapper>();
 			#endregion
 
-			gridControlWidgetsGallery.DataSource = new BindingList<Widget>(ListManager.Instance.Widgets);
-			layoutViewWidgetsGallery.FocusedRowChanged += layoutViewWidgetsGallery_FocusedRowChanged;
-			gridControlWidgetsFavs.DataSource = new BindingList<Widget>(ListManager.Instance.WidgetsFavs);
-			layoutViewWidgetsFavs.FocusedRowChanged += layoutViewWidgetsFavs_FocusedRowChanged;
-			gridControlBannersGallery.DataSource = new BindingList<Banner>(ListManager.Instance.Banners);
-			gridControlBannersFavs.DataSource = new BindingList<Banner>(ListManager.Instance.BannersFavs);
-			layoutViewBannersGallery.FocusedRowChanged += layoutViewBannersGalery_FocusedRowChanged;
-			layoutViewBannersFavs.FocusedRowChanged += layoutViewBannersFavs_FocusedRowChanged;
+			xtraTabControlWidgets.TabPages.Clear();
+			foreach (var imageGroup in ListManager.Instance.Widgets)
+			{
+				var tabPage = new LinkImagesContainer(imageGroup);
+				tabPage.SelectedImageChanged += OnSelectedWidgetChanged;
+				tabPage.OnImageDoubleClick += OnImageDoubleClick;
+				xtraTabControlWidgets.TabPages.Add(tabPage);
+			}
+
+			xtraTabControlBanners.TabPages.Clear();
+			foreach (var imageGroup in ListManager.Instance.Banners)
+			{
+				var tabPage = new LinkImagesContainer(imageGroup);
+				tabPage.SelectedImageChanged += OnSelectedBannerChanged;
+				tabPage.OnImageDoubleClick += OnImageDoubleClick;
+				xtraTabControlBanners.TabPages.Add(tabPage);
+			}
 
 			LoadSecurityGroups();
 		}
@@ -499,64 +500,10 @@ namespace FileManager.ToolForms.WallBin
 			laWidgetFileName.Text = string.Empty;
 		}
 
-		private void layoutViewWidgetsGallery_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
+		private void OnSelectedWidgetChanged(object sender, LinkImageEventArgs e)
 		{
-			Widget selectedWidget = null;
-			if (layoutViewWidgetsGallery.FocusedRowHandle != GridControl.InvalidRowHandle)
-				selectedWidget = ListManager.Instance.Widgets[layoutViewWidgetsGallery.GetDataSourceRowIndex(layoutViewWidgetsGallery.FocusedRowHandle)];
-			pbSelectedWidget.Image = selectedWidget != null ? selectedWidget.Image : null;
-			laWidgetFileName.Text = selectedWidget != null ? selectedWidget.FileName : string.Empty;
-		}
-
-		private void layoutViewWidgetsFavs_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
-		{
-			Widget selectedWidget = null;
-			if (layoutViewWidgetsFavs.FocusedRowHandle != GridControl.InvalidRowHandle)
-				selectedWidget = ListManager.Instance.WidgetsFavs[layoutViewWidgetsFavs.GetDataSourceRowIndex(layoutViewWidgetsFavs.FocusedRowHandle)];
-			pbSelectedWidget.Image = selectedWidget != null ? selectedWidget.Image : null;
-			laWidgetFileName.Text = selectedWidget != null ? selectedWidget.FileName : string.Empty;
-		}
-
-
-		private void layoutViewWidgetsGallery_Click(object sender, EventArgs e)
-		{
-			var pt = gridControlWidgetsGallery.PointToClient(MousePosition);
-			if (layoutViewWidgetsGallery.CalcHitInfo(pt).RowHandle == layoutViewWidgetsGallery.FocusedRowHandle)
-				layoutViewWidgetsGallery_FocusedRowChanged(null, null);
-		}
-
-		private void layoutViewWidgetsFavs_Click(object sender, EventArgs e)
-		{
-			var pt = gridControlWidgetsFavs.PointToClient(MousePosition);
-			if (layoutViewWidgetsFavs.CalcHitInfo(pt).RowHandle == layoutViewWidgetsFavs.FocusedRowHandle)
-				layoutViewWidgetsFavs_FocusedRowChanged(null, null);
-		}
-
-		private void layoutViewWidgetsGallery_DoubleClick(object sender, EventArgs e)
-		{
-			var pt = gridControlWidgetsGallery.PointToClient(MousePosition);
-			if (layoutViewWidgetsGallery.CalcHitInfo(pt).InField)
-			{
-				layoutViewWidgetsGallery_Click(sender, e);
-				btOK_Click(null, null);
-			}
-		}
-
-		private void layoutViewWidgetsFavs_DoubleClick(object sender, EventArgs e)
-		{
-			var pt = gridControlWidgetsFavs.PointToClient(MousePosition);
-			if (layoutViewWidgetsFavs.CalcHitInfo(pt).InField)
-			{
-				layoutViewWidgetsFavs_Click(sender, e);
-				btOK_Click(null, null);
-			}
-		}
-
-		private void gridControlWidgetsGallery_MouseUp(object sender, MouseEventArgs e)
-		{
-			_hitInfo = layoutViewWidgetsGallery.CalcHitInfo(e.Location);
-			if (_hitInfo.InField && e.Button == MouseButtons.Right)
-				contextMenuStrip.Show(MousePosition);
+			pbSelectedWidget.Image = e.Image;
+			laWidgetFileName.Text = string.Empty;
 		}
 		#endregion
 
@@ -573,64 +520,10 @@ namespace FileManager.ToolForms.WallBin
 			laBannerFileName.Text = string.Empty;
 		}
 
-		private void layoutViewBannersGalery_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
+		private void OnSelectedBannerChanged(object sender, LinkImageEventArgs e)
 		{
-			Banner selectedBanner = null;
-			if (layoutViewBannersGallery.FocusedRowHandle != GridControl.InvalidRowHandle)
-				selectedBanner = ListManager.Instance.Banners[layoutViewBannersGallery.GetDataSourceRowIndex(layoutViewBannersGallery.FocusedRowHandle)];
-			pbSelectedBanner.Image = selectedBanner != null ? selectedBanner.Image : null;
-			laBannerFileName.Text = selectedBanner != null ? selectedBanner.FileName : string.Empty;
-		}
-
-		private void layoutViewBannersFavs_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
-		{
-			Banner selectedBanner = null;
-			if (layoutViewBannersFavs.FocusedRowHandle != GridControl.InvalidRowHandle)
-				selectedBanner = ListManager.Instance.BannersFavs[layoutViewBannersFavs.GetDataSourceRowIndex(layoutViewBannersFavs.FocusedRowHandle)];
-			pbSelectedBanner.Image = selectedBanner != null ? selectedBanner.Image : null;
-			laBannerFileName.Text = selectedBanner != null ? selectedBanner.FileName : string.Empty;
-		}
-
-		private void gridViewBannersGallery_Click(object sender, EventArgs e)
-		{
-			var pt = gridControlBannersGallery.PointToClient(MousePosition);
-			if (layoutViewBannersGallery.CalcHitInfo(pt).RowHandle == layoutViewBannersGallery.FocusedRowHandle)
-				layoutViewBannersGalery_FocusedRowChanged(null, null);
-		}
-
-		private void gridViewBannersFavs_Click(object sender, EventArgs e)
-		{
-			var pt = gridControlBannersFavs.PointToClient(MousePosition);
-			if (layoutViewBannersFavs.CalcHitInfo(pt).RowHandle == layoutViewBannersFavs.FocusedRowHandle)
-				layoutViewBannersFavs_FocusedRowChanged(null, null);
-		}
-
-		private void gridViewBannersGallery_DoubleClick(object sender, EventArgs e)
-		{
-			var pt = gridControlBannersGallery.PointToClient(MousePosition);
-			if (layoutViewBannersGallery.CalcHitInfo(pt).InField)
-			{
-				gridViewBannersGallery_Click(sender, e);
-				btOK_Click(null, null);
-			}
-		}
-
-		private void gridViewBannersFavs_DoubleClick(object sender, EventArgs e)
-		{
-			gridViewBannersFavs_Click(sender, e);
-			var pt = gridControlBannersFavs.PointToClient(MousePosition);
-			if (layoutViewBannersFavs.CalcHitInfo(pt).InField)
-			{
-				gridViewBannersFavs_Click(sender, e);
-				btOK_Click(null, null);
-			}
-		}
-
-		private void gridControlBannersGallery_MouseUp(object sender, MouseEventArgs e)
-		{
-			_hitInfo = layoutViewBannersGallery.CalcHitInfo(e.Location);
-			if (_hitInfo.InField && e.Button == MouseButtons.Right)
-				contextMenuStrip.Show(MousePosition);
+			pbSelectedBanner.Image = e.Image;
+			laBannerFileName.Text = e.Text;
 		}
 
 		private void checkBoxBannerShowText_CheckedChanged(object sender, EventArgs e)
@@ -908,73 +801,9 @@ namespace FileManager.ToolForms.WallBin
 			xtraTabControl.Focus();
 		}
 
-		private void toolTipController_GetActiveObjectInfo(object sender, ToolTipControllerGetActiveObjectInfoEventArgs e)
+		private void OnImageDoubleClick(object sender, EventArgs e)
 		{
-			ToolTipControlInfo info = null;
-			if (e.SelectedControl == gridControlWidgetsGallery)
-			{
-				try
-				{
-					var view = gridControlWidgetsGallery.GetViewAt(e.ControlMousePosition) as LayoutView;
-					if (view == null)
-						return;
-					var hi = view.CalcHitInfo(e.ControlMousePosition);
-					if (hi.InFieldValue)
-						info = new ToolTipControlInfo(new CellToolTipInfo(hi.RowHandle, hi.Column, "cell"), ListManager.Instance.Widgets[layoutViewWidgetsGallery.GetDataSourceRowIndex(hi.RowHandle)].FileName);
-				}
-				finally
-				{
-					e.Info = info;
-				}
-			}
-			else if (e.SelectedControl == gridControlWidgetsFavs)
-			{
-				try
-				{
-					var view = gridControlWidgetsFavs.GetViewAt(e.ControlMousePosition) as LayoutView;
-					if (view == null)
-						return;
-					var hi = view.CalcHitInfo(e.ControlMousePosition);
-					if (hi.InFieldValue)
-						info = new ToolTipControlInfo(new CellToolTipInfo(hi.RowHandle, hi.Column, "cell"), ListManager.Instance.WidgetsFavs[layoutViewWidgetsFavs.GetDataSourceRowIndex(hi.RowHandle)].FileName);
-				}
-				finally
-				{
-					e.Info = info;
-				}
-			}
-			else if (e.SelectedControl == gridControlBannersGallery)
-			{
-				try
-				{
-					var view = gridControlBannersGallery.GetViewAt(e.ControlMousePosition) as LayoutView;
-					if (view == null)
-						return;
-					var hi = view.CalcHitInfo(e.ControlMousePosition);
-					if (hi.InField)
-						info = new ToolTipControlInfo(new CellToolTipInfo(hi.RowHandle, hi.Column, "cell"), ListManager.Instance.Banners[layoutViewBannersGallery.GetDataSourceRowIndex(hi.RowHandle)].FileName);
-				}
-				finally
-				{
-					e.Info = info;
-				}
-			}
-			else if (e.SelectedControl == gridControlBannersFavs)
-			{
-				try
-				{
-					var view = gridControlBannersFavs.GetViewAt(e.ControlMousePosition) as LayoutView;
-					if (view == null)
-						return;
-					var hi = view.CalcHitInfo(e.ControlMousePosition);
-					if (hi.InField)
-						info = new ToolTipControlInfo(new CellToolTipInfo(hi.RowHandle, hi.Column, "cell"), ListManager.Instance.BannersFavs[layoutViewBannersFavs.GetDataSourceRowIndex(hi.RowHandle)].FileName);
-				}
-				finally
-				{
-					e.Info = info;
-				}
-			}
+			btOK_Click(sender, e);
 		}
 
 		private void FontEdit_Click(object sender, EventArgs e)
@@ -994,27 +823,6 @@ namespace FileManager.ToolForms.WallBin
 		private void FontEdit_ButtonClick(object sender, ButtonPressedEventArgs e)
 		{
 			FontEdit_Click(this, null);
-		}
-
-		private void addToFavoritesToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			if (_hitInfo == null) return;
-			if (xtraTabControl.SelectedTabPage == xtraTabPageBanner)
-			{
-				var selectedBanner = ListManager.Instance.Banners[layoutViewBannersGallery.GetDataSourceRowIndex(_hitInfo.RowHandle)];
-				selectedBanner.CopyToFavs();
-				layoutViewBannersFavs.FocusedRowChanged -= layoutViewBannersFavs_FocusedRowChanged;
-				gridControlBannersFavs.DataSource = new BindingList<Banner>(ListManager.Instance.BannersFavs);
-				layoutViewBannersFavs.FocusedRowChanged += layoutViewBannersFavs_FocusedRowChanged;
-			}
-			else if (xtraTabControl.SelectedTabPage == xtraTabPageWidgets)
-			{
-				var selectedWidget = ListManager.Instance.Widgets[layoutViewWidgetsGallery.GetDataSourceRowIndex(_hitInfo.RowHandle)];
-				selectedWidget.CopyToFavs();
-				layoutViewWidgetsFavs.FocusedRowChanged -= layoutViewWidgetsFavs_FocusedRowChanged;
-				gridControlWidgetsFavs.DataSource = new BindingList<Widget>(ListManager.Instance.WidgetsFavs);
-				layoutViewWidgetsFavs.FocusedRowChanged += layoutViewWidgetsFavs_FocusedRowChanged;
-			}
 		}
 		#endregion
 

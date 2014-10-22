@@ -162,6 +162,12 @@
       <DependentUpon>KeywordsEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationClasses\WallBin\Decorators\WallBinOptions.cs" />
+    <Compile Include="PresentationClasses\WallBin\LinkImagesContainer.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\WallBin\LinkImagesContainer.Designer.cs">
+      <DependentUpon>LinkImagesContainer.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationClasses\WallBin\RegularLibraryControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -476,6 +482,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationClasses\Tags\KeywordsEditor.resx">
       <DependentUpon>KeywordsEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\WallBin\LinkImagesContainer.resx">
+      <DependentUpon>LinkImagesContainer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationClasses\WallBin\RegularLibraryControl.resx">
       <DependentUpon>RegularLibraryControl.cs</DependentUpon>

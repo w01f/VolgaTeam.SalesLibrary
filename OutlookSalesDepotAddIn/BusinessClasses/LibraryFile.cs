@@ -421,11 +421,6 @@ namespace OutlookSalesDepotAddIn.BusinessClasses
 			}
 		}
 
-		public bool DoNotGeneratePreview
-		{
-			get { return !GeneratePreviewImages && !GenerateContentText; }
-		}
-
 		public bool ForcePreview
 		{
 			get { return _forcePreview; }

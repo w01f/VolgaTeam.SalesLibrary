@@ -644,6 +644,7 @@
     <EmbeddedResource Include="PresentationClasses\WallBin\WallBinTreeListControl.resx">
       <DependentUpon>WallBinTreeListControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="TabPages\TabSettings.resx">
       <DependentUpon>TabSettings.cs</DependentUpon>
     </EmbeddedResource>
