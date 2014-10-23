@@ -108,6 +108,7 @@ namespace SalesDepot.ConfigurationClasses
 
 			HiddenObjects = new List<string>();
 			HiddenObjects.Add("!Old");
+			HiddenObjects.Add("_gsdata_");
 			HiddenObjects.Add(Constants.RegularPreviewContainersRootFolderName);
 			HiddenObjects.Add(Constants.OvernightsCalendarRootFolderName);
 			HiddenObjects.Add(Constants.ProgramManagerRootFolderName);

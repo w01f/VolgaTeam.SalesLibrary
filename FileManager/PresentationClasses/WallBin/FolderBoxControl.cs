@@ -678,25 +678,20 @@ namespace FileManager.PresentationClasses.WallBin
 
 		public void AddLineBreak()
 		{
-			if (grFiles.SelectedRows.Count > 0)
-			{
-				var file = new LibraryLink(_folder);
-				_folder.Files.Add(file);
-				file.Type = FileTypes.LineBreak;
-				file.LineBreakProperties = new LineBreakProperties(file);
-				file.LineBreakProperties.Font = new Font(_textFont, FontStyle.Regular);
-				file.LineBreakProperties.BoldFont = new Font(_textFont, FontStyle.Bold);
-				file.IsBold = true;
-				file.InitBannerProperties();
-				int rowIndex = grFiles.SelectedRows[0].Index;
-				grFiles.Rows.Insert(rowIndex, file.DisplayName + file.Note);
-				DataGridViewRow row = grFiles.Rows[rowIndex];
-				row.Tag = file;
-				grFiles.ClearSelection();
-				UpdateAfterFolderChanged();
-			}
-			else
-				AppManager.Instance.ShowInfo("Select link above line break will be added");
+			var file = new LibraryLink(_folder);
+			_folder.Files.Add(file);
+			file.Type = FileTypes.LineBreak;
+			file.LineBreakProperties = new LineBreakProperties(file);
+			file.LineBreakProperties.Font = new Font(_textFont, FontStyle.Regular);
+			file.LineBreakProperties.BoldFont = new Font(_textFont, FontStyle.Bold);
+			file.IsBold = true;
+			file.InitBannerProperties();
+			int rowIndex = grFiles.SelectedRows.Count > 0 ? grFiles.SelectedRows[0].Index : 0;
+			grFiles.Rows.Insert(rowIndex, file.DisplayName + file.Note);
+			DataGridViewRow row = grFiles.Rows[rowIndex];
+			row.Tag = file;
+			grFiles.ClearSelection();
+			UpdateAfterFolderChanged();
 		}
 
 		public void DownLink()
@@ -1584,6 +1579,7 @@ namespace FileManager.PresentationClasses.WallBin
 		{
 			MainController.Instance.WallbinController.AddLinkButton = IsActive;
 			var file = grFiles.SelectedRows.Count > 0 ? grFiles.SelectedRows[0].Tag as LibraryLink : null;
+			MainController.Instance.WallbinController.LineBreakButton = true;
 			if (!IsActive || file == null)
 			{
 				MainController.Instance.WallbinController.UpLinkButton = false;
@@ -1596,7 +1592,6 @@ namespace FileManager.PresentationClasses.WallBin
 				MainController.Instance.WallbinController.LinkPropertiesSecurityButton = false;
 				MainController.Instance.WallbinController.LinkPropertiesWidgetButton = false;
 				MainController.Instance.WallbinController.LinkPropertiesBannerButton = false;
-				MainController.Instance.WallbinController.LineBreakButton = false;
 				return;
 			}
 			MainController.Instance.WallbinController.DeleteLinkButton = true;
@@ -1607,7 +1602,6 @@ namespace FileManager.PresentationClasses.WallBin
 			MainController.Instance.WallbinController.LinkPropertiesSecurityButton = true;
 			MainController.Instance.WallbinController.LinkPropertiesWidgetButton = true;
 			MainController.Instance.WallbinController.LinkPropertiesBannerButton = true;
-			MainController.Instance.WallbinController.LineBreakButton = true;
 			MainController.Instance.WallbinController.UpLinkButton = grFiles.SelectedRows[0].Index > 0;
 			MainController.Instance.WallbinController.DownLinkButton = grFiles.SelectedRows[0].Index < grFiles.Rows.Count - 1;
 		}

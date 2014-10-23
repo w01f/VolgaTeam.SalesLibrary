@@ -7,12 +7,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="311ca633-43c5-41dd-82ab-ba01ea556142" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/controllers/SiteController.php" afterPath="$PROJECT_DIR$/protected/controllers/SiteController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/controllers/WallbinController.php" afterPath="$PROJECT_DIR$/protected/controllers/WallbinController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/regular/base/link-viewing.js" afterPath="$PROJECT_DIR$/js/regular/base/link-viewing.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/config/params.php" afterPath="$PROJECT_DIR$/protected/config/params.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/views/regular/preview/viewDialogBar.php" afterPath="$PROJECT_DIR$/protected/views/regular/preview/viewDialogBar.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/regular/base/wallbin.js" afterPath="$PROJECT_DIR$/js/regular/base/wallbin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/WallBin/FolderBoxControl.cs" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/WallBin/FolderBoxControl.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/ConfigurationClasses/SettingsManager.cs" afterPath="$PROJECT_DIR$/../FileManager/ConfigurationClasses/SettingsManager.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/ConfigurationClasses/SettingsManager.cs" afterPath="$PROJECT_DIR$/../SalesDepot/ConfigurationClasses/SettingsManager.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/WallBin/WallBinTreeListControl.cs" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/WallBin/WallBinTreeListControl.cs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <list id="6cb86652-0ea2-464a-b0b1-9bbef25a8567" name="C#" comment="">
@@ -39,65 +37,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="link-viewing.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/regular/base/link-viewing.js">
+      <file leaf-file-name="LibraryLink.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/protected/models/wallbin/models/LibraryLink.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="225" column="0" selection-start="6380" selection-end="6380" vertical-scroll-proportion="0.0" vertical-offset="2786" max-vertical-offset="11475">
-              <folding>
-                <element signature="e#2666#3218#0" expanded="false" />
-                <element signature="e#3288#4448#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SiteController.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/protected/controllers/SiteController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="114" column="29" selection-start="3891" selection-end="3891" vertical-scroll-proportion="-9.807693" vertical-offset="1683" max-vertical-offset="2686">
+            <state line="382" column="71" selection-start="10956" selection-end="10956" vertical-scroll-proportion="-132.07692" vertical-offset="3060" max-vertical-offset="20043">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="view-dialog-bar.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/regular/base/view-dialog-bar.js">
+      <file leaf-file-name="link.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/protected/views/regular/wallbin/link.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="27" column="55" selection-start="664" selection-end="664" vertical-scroll-proportion="0.0" vertical-offset="204" max-vertical-offset="2261">
+            <state line="43" column="36" selection-start="2056" selection-end="2056" vertical-scroll-proportion="0.7434988" vertical-offset="102" max-vertical-offset="1173">
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="WallbinController.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/protected/controllers/WallbinController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="29" column="0" selection-start="825" selection-end="825" vertical-scroll-proportion="-8.269231" vertical-offset="278" max-vertical-offset="1870">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PreviewController.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/protected/controllers/PreviewController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="151" column="49" selection-start="4731" selection-end="4731" vertical-scroll-proportion="-3.2307692" vertical-offset="2483" max-vertical-offset="3128">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="viewDialogBar.php" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/protected/views/regular/preview/viewDialogBar.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="18" selection-start="876" selection-end="876" vertical-scroll-proportion="0.4822695" vertical-offset="0" max-vertical-offset="969">
-              <folding>
-                <element signature="n#style#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#2;n#div#0;n#!!top" expanded="true" />
-                <marker date="1414058504939" expanded="true" signature="1730:1786" placeholder="..." />
-                <marker date="1414058504939" expanded="true" signature="1942:1998" placeholder="..." />
-                <marker date="1414058504939" expanded="true" signature="2151:2206" placeholder="..." />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -324,7 +277,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="preview" />
+              <option name="myItemId" value="wallbin" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -359,6 +312,72 @@
               <option name="myItemId" value="protected" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="models" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wallbin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebSalesLibraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebSalesLibraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="protected" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="models" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wallbin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="models" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebSalesLibraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebSalesLibraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="protected" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="models" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebSalesLibraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebSalesLibraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="protected" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -375,46 +394,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="controllers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="regular" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="regular" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="base" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1106,7 +1085,11 @@
       <created>1413874307358</created>
       <updated>1413874307358</updated>
     </task>
-    <option name="localTasksCounter" value="131" />
+    <task id="LOCAL-00131" summary="Web Sales Depot: PDF preview bar fix + Tab pages bug fix">
+      <created>1414069724350</created>
+      <updated>1414069724350</updated>
+    </task>
+    <option name="localTasksCounter" value="132" />
     <servers />
   </component>
   <component name="TodoView" selected-index="3">
@@ -1131,10 +1114,10 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15553121" sideWeight="0.6552828" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="true" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21246007" sideWeight="0.5117396" order="5" side_tool="false" content_ui="tabs" x="20" y="824" width="1874" height="217" />
+      <window_info id="Changes" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21246007" sideWeight="0.5117396" order="5" side_tool="false" content_ui="tabs" x="20" y="824" width="1874" height="217" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32968238" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24863088" sideWeight="0.40288153" order="1" side_tool="false" content_ui="tabs" x="-1278" y="1" width="1271" height="1022" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.17518637" sideWeight="0.87596047" order="3" side_tool="false" content_ui="tabs" />
@@ -1143,6 +1126,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="1.0" sideWeight="0.48772678" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15848452" sideWeight="0.13024282" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28477547" sideWeight="0.4850587" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32855567" sideWeight="0.49359658" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32491767" sideWeight="0.49573106" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21033014" sideWeight="0.12957746" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.29286474" sideWeight="0.87042254" order="0" side_tool="false" content_ui="combo" />
@@ -1156,7 +1140,6 @@
       <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30954996" sideWeight="0.923159" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32855567" sideWeight="0.49359658" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21523179" sideWeight="0.5741729" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -1204,7 +1187,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="Web Sales Depot: Shortcuts search single page fix" />
     <MESSAGE value="Web Sales Depot: Shortcuts search engine fixes (aliases, ignore list). Shortcut page search turning" />
     <MESSAGE value="Web Sales Depot: Shortcuts list fix - new plugin" />
     <MESSAGE value="Web Sales Depot: Remove Links columns from Links grid" />
@@ -1229,7 +1211,8 @@
     <MESSAGE value="Web Sales Depot: Shortcuts search bug fix" />
     <MESSAGE value="Web Sales Depot: Link Model refactoring + Many small GUI fixes + Bootstrap update" />
     <MESSAGE value="Web Sales Depot: Fix preview with disabled images" />
-    <option name="LAST_COMMIT_MESSAGE" value="Web Sales Depot: Fix preview with disabled images" />
+    <MESSAGE value="Web Sales Depot: PDF preview bar fix + Tab pages bug fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="Web Sales Depot: PDF preview bar fix + Tab pages bug fix" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1276,11 +1259,6 @@
     </PATH>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/protected/controllers/UtilityController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2414" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/protected/views/phone/search/searchView.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="20" column="0" selection-start="1243" selection-end="1243" vertical-scroll-proportion="0.4755245" vertical-offset="0" max-vertical-offset="715" />
@@ -1441,13 +1419,6 @@
         <state line="188" column="29" selection-start="4548" selection-end="4557" vertical-scroll-proportion="0.3954481" vertical-offset="2918" max-vertical-offset="3621" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/protected/models/wallbin/models/LibraryLink.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="382" column="71" selection-start="10956" selection-end="10956" vertical-scroll-proportion="-2.224751" vertical-offset="8058" max-vertical-offset="20043">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/images/bad_browser.png">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -1528,16 +1499,48 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/protected/views/regular/preview/viewDialogBar.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="18" selection-start="876" selection-end="876" vertical-scroll-proportion="0.4822695" vertical-offset="0" max-vertical-offset="969">
+          <folding>
+            <marker date="1414058504939" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1414058504939" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1414058504939" expanded="true" signature="-1:-1" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/protected/controllers/PreviewController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="151" column="49" selection-start="4731" selection-end="4731" vertical-scroll-proportion="-3.2307692" vertical-offset="2483" max-vertical-offset="3128">
+        <state line="151" column="49" selection-start="4731" selection-end="4731" vertical-scroll-proportion="0.33687943" vertical-offset="2282" max-vertical-offset="3128">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/controllers/WallbinController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="29" column="0" selection-start="825" selection-end="825" vertical-scroll-proportion="0.25413713" vertical-offset="278" max-vertical-offset="1870">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/regular/base/view-dialog-bar.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="55" selection-start="664" selection-end="664" vertical-scroll-proportion="0.2924312" vertical-offset="204" max-vertical-offset="2261">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/controllers/SiteController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="114" column="29" selection-start="3891" selection-end="3891" vertical-scroll-proportion="0.30141845" vertical-offset="1683" max-vertical-offset="2686">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/regular/base/link-viewing.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="225" column="0" selection-start="6380" selection-end="6380" vertical-scroll-proportion="0.0" vertical-offset="2786" max-vertical-offset="11475">
+        <state line="225" column="0" selection-start="6380" selection-end="6380" vertical-scroll-proportion="-0.07568807" vertical-offset="2786" max-vertical-offset="11475">
           <folding>
             <element signature="e#2666#3218#0" expanded="false" />
             <element signature="e#3288#4448#0" expanded="false" />
@@ -1545,37 +1548,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/regular/base/view-dialog-bar.js">
+    <entry file="file://$PROJECT_DIR$/protected/models/wallbin/models/LibraryLink.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="55" selection-start="664" selection-end="664" vertical-scroll-proportion="0.0" vertical-offset="102" max-vertical-offset="2261">
+        <state line="382" column="71" selection-start="10956" selection-end="10956" vertical-scroll-proportion="-132.07692" vertical-offset="3060" max-vertical-offset="20043">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/protected/controllers/SiteController.php">
+    <entry file="file://$PROJECT_DIR$/protected/views/regular/wallbin/link.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="114" column="29" selection-start="3891" selection-end="3891" vertical-scroll-proportion="-9.807693" vertical-offset="1683" max-vertical-offset="2686">
+        <state line="43" column="36" selection-start="2056" selection-end="2056" vertical-scroll-proportion="0.7434988" vertical-offset="102" max-vertical-offset="1173">
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/controllers/WallbinController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="0" selection-start="825" selection-end="825" vertical-scroll-proportion="-8.269231" vertical-offset="278" max-vertical-offset="1870">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/views/regular/preview/viewDialogBar.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="18" selection-start="876" selection-end="876" vertical-scroll-proportion="0.4822695" vertical-offset="0" max-vertical-offset="969">
-          <folding>
-            <element signature="n#style#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#2;n#div#0;n#!!top" expanded="true" />
-            <marker date="1414058504939" expanded="true" signature="1730:1786" placeholder="..." />
-            <marker date="1414058504939" expanded="true" signature="1942:1998" placeholder="..." />
-            <marker date="1414058504939" expanded="true" signature="2151:2206" placeholder="..." />
-          </folding>
         </state>
       </provider>
     </entry>

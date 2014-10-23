@@ -86,6 +86,7 @@ namespace FileManager.ConfigurationClasses
 
 			HiddenObjects = new List<string>();
 			HiddenObjects.Add("!Old");
+			HiddenObjects.Add("_gsdata_");
 			HiddenObjects.Add(Constants.RegularPreviewContainersRootFolderName);
 			HiddenObjects.Add(Constants.FtpPreviewContainersRootFolderName);
 			HiddenObjects.Add(Constants.OvernightsCalendarRootFolderName);
