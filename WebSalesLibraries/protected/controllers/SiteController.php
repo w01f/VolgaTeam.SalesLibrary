@@ -114,7 +114,7 @@
 								$fileName = str_replace('.' . $link->fileExtension, '', $link->fileName) . "-" . basename($path);
 							}
 						}
-						else if ($format == 'pdf')
+						else if ($linkRecord->format != 'pdf' && $format == 'pdf')
 						{
 							$previewRecord = PreviewRecord::model()->find('id_container =? and type=?', array($linkRecord->id_preview, 'pdf'));
 							if (isset($previewRecord))

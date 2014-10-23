@@ -219,13 +219,11 @@
 										closeEffect: 'none',
 										afterClose: function ()
 										{
-											if (selectedFileType != 'pdf')
-												$.SalesPortal.ViewDialogBar.close();
+											$.SalesPortal.ViewDialogBar.close();
 										},
 										onUpdate: function ()
 										{
-											if (selectedFileType != 'pdf')
-												$.SalesPortal.ViewDialogBar.resize();
+											$.SalesPortal.ViewDialogBar.resize();
 											$.ajax({
 												type: "POST",
 												url: window.BaseUrl + "statistic/writeActivity",
@@ -251,16 +249,13 @@
 											}
 										}
 									});
-									if (selectedFileType != 'pdf')
-									{
-										$.SalesPortal.ViewDialogBar.show({
-											format: selectedFileType,
-											linkId: selectedFileId,
-											linkName: selectedLinkName,
-											fileName: selectedFileName,
-											fileType: selectedFileType
-										});
-									}
+									$.SalesPortal.ViewDialogBar.show({
+										format: selectedFileType,
+										linkId: selectedFileId,
+										linkName: selectedLinkName,
+										fileName: selectedFileName,
+										fileType: selectedFileType
+									});
 								}
 								break;
 							case 'outlook':

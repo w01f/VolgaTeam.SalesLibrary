@@ -436,7 +436,7 @@
 					container.html('<div class="wallbin-content wallbin-tabs">' + msg + '</div>');
 					var tabPages = container.find('.wallbin-tabs');
 					tabPages.tabs({
-						active: $("#select-page")[0].selectedIndex,
+						active: $("#select-page").prop("selectedIndex"),
 						activate: function (event, ui)
 						{
 							var selectedPageName = $(ui.newTab).text();
