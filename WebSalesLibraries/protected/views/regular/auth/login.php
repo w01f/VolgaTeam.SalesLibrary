@@ -32,7 +32,11 @@
 	<table id="form-login">
 		<tr>
 			<td colspan="2">
-				<img id="image-logo" src="<? echo Yii::app()->baseUrl . '/images/logo.png'; ?>"/>
+				<?
+					$logoFolderPath = realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images';
+					$imageSource = 'data:image/png;base64,' . base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'logo.png'));
+				?>
+				<img id="image-logo" src="<? echo $imageSource; ?>"/>
 			</td>
 		</tr>
 		<tr>
