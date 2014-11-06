@@ -440,16 +440,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
 		public bool GeneratePreviewImages
 		{
-			get
-			{
-				return _generatePreviewImages &&
-					(Type == FileTypes.BuggyPresentation ||
-					Type == FileTypes.FriendlyPresentation ||
-					Type == FileTypes.Presentation ||
-					Type == FileTypes.Word ||
-					Type == FileTypes.PDF ||
-					((Type == FileTypes.Other && new[] { "ppt", "doc", "pdf" }.Contains(Format))));
-			}
+			get { return _generatePreviewImages; }
 			set
 			{
 				if (_generatePreviewImages != value)
@@ -848,8 +839,16 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			}
 		}
 
-		public void RemoveFromCollection()
+		public virtual void RemoveFromCollection()
 		{
+			if (Type == FileTypes.BuggyPresentation ||
+				Type == FileTypes.FriendlyPresentation ||
+				Type == FileTypes.Presentation)
+			{
+				if (PreviewContainer == null)
+					PreviewContainer = new PresentationPreviewContainer(this);
+				PreviewContainer.ClearContent();
+			}
 			Parent.Files.Remove(this);
 			Parent.LastChanged = DateTime.Now;
 		}
@@ -988,6 +987,30 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			wholeContent.AddRange(FolderContent.Where(x => x.Type != FileTypes.Folder).OfType<LibraryLink>());
 			wholeContent.AddRange(FolderContent.Where(x => x.Type == FileTypes.Folder).OfType<LibraryFolderLink>().SelectMany(x => x.GetWholeContent()));
 			return wholeContent;
+		}
+
+		public override void RemoveFromCollection()
+		{
+			base.RemoveFromCollection();
+			ClearContent();
+		}
+
+		public void ClearContent()
+		{
+			foreach (var file in FolderContent)
+			{
+				if (file is LibraryLink &&
+					(file.Type == FileTypes.BuggyPresentation ||
+					file.Type == FileTypes.FriendlyPresentation ||
+					file.Type == FileTypes.Presentation))
+				{
+					if (((LibraryLink)file).PreviewContainer == null)
+						((LibraryLink)file).PreviewContainer = new PresentationPreviewContainer(this);
+					((LibraryLink)file).PreviewContainer.ClearContent();
+				}
+				else if (file is LibraryFolderLink)
+					((LibraryFolderLink)file).ClearContent();
+			}
 		}
 	}
 }

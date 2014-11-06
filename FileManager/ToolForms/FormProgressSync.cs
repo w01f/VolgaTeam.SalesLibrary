@@ -94,7 +94,7 @@ namespace FileManager.ToolForms
 		}
 	}
 
-	public class FormProgressSyncFilesIPad : FormProgressSync
+	public class FormProgressSyncFiles : FormProgressSync
 	{
 		protected override void InitForm()
 		{
@@ -103,18 +103,6 @@ namespace FileManager.ToolForms
 			panelEx.Style.BackColor2.Color = Color.Blue;
 			panelExCancel.Style.BackColor1.Color = Color.Blue;
 			panelExCancel.Style.BackColor2.Color = Color.Blue;
-		}
-	}
-
-	public class FormProgressSyncFilesRegular : FormProgressSync
-	{
-		protected override void InitForm()
-		{
-			laProgress.Text = "Syncing Libraries...";
-			panelEx.Style.BackColor1.Color = Color.Green;
-			panelEx.Style.BackColor2.Color = Color.Green;
-			panelExCancel.Style.BackColor1.Color = Color.Green;
-			panelExCancel.Style.BackColor2.Color = Color.Green;
 		}
 	}
 }

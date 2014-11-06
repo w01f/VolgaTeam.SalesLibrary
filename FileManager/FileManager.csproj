@@ -107,6 +107,7 @@
     <Compile Include="BusinessClasses\Library.cs" />
     <Compile Include="BusinessClasses\LibraryFile.cs" />
     <Compile Include="BusinessClasses\PreviewGenerator.cs" />
+    <Compile Include="BusinessClasses\SilentSyncManager.cs" />
     <Compile Include="Controllers\CalendarController.cs" />
     <Compile Include="Controllers\ClipartController.cs" />
     <Compile Include="Controllers\IPadContentController.cs" />
@@ -195,6 +196,7 @@
     <Compile Include="PresentationClasses\WallBin\WallbinHeaderPanel.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="ToolClasses\ArchiveHelper.cs" />
     <Compile Include="ToolClasses\PasswordHelper.cs" />
     <Compile Include="ToolClasses\SyncLockHelper.cs" />
     <Compile Include="ToolClasses\VideoHelper.cs" />
@@ -228,23 +230,11 @@
     <Compile Include="ToolForms\IPad\FormVideoWarning.designer.cs">
       <DependentUpon>FormVideoWarning.cs</DependentUpon>
     </Compile>
-    <Compile Include="ToolForms\Settings\FormAutoSyncEdit.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ToolForms\Settings\FormAutoSyncEdit.Designer.cs">
-      <DependentUpon>FormAutoSyncEdit.cs</DependentUpon>
-    </Compile>
     <Compile Include="ToolForms\Settings\FormExtraRoots.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ToolForms\Settings\FormExtraRoots.Designer.cs">
       <DependentUpon>FormExtraRoots.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ToolForms\Settings\FormAutoSync.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ToolForms\Settings\FormAutoSync.Designer.cs">
-      <DependentUpon>FormAutoSync.cs</DependentUpon>
     </Compile>
     <Compile Include="ToolForms\WallBin\FormAddUrl.cs">
       <SubType>Form</SubType>
@@ -513,14 +503,8 @@
     <EmbeddedResource Include="ToolForms\IPad\FormVideoWarning.resx">
       <DependentUpon>FormVideoWarning.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ToolForms\Settings\FormAutoSyncEdit.resx">
-      <DependentUpon>FormAutoSyncEdit.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ToolForms\Settings\FormExtraRoots.resx">
       <DependentUpon>FormExtraRoots.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ToolForms\Settings\FormAutoSync.resx">
-      <DependentUpon>FormAutoSync.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ToolForms\WallBin\FormAddUrl.resx">
       <DependentUpon>FormAddUrl.cs</DependentUpon>
@@ -700,7 +684,6 @@
     <None Include="Resources\Safari.png" />
     <None Include="Resources\Opera.png" />
     <None Include="Resources\DeleteButton.png" />
-    <None Include="Resources\AutoSync.png" />
     <None Include="Resources\Colors.png" />
     <None Include="Resources\WebArt.png" />
     <None Include="Resources\SalesGallery.png" />

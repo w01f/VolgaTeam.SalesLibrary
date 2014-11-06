@@ -366,16 +366,7 @@ namespace OvernightsCalendarViewer.BusinessClasses
 
 		public bool GeneratePreviewImages
 		{
-			get
-			{
-				return _generatePreviewImages &&
-					(Type == FileTypes.BuggyPresentation ||
-					Type == FileTypes.FriendlyPresentation ||
-					Type == FileTypes.Presentation ||
-					Type == FileTypes.Word ||
-					Type == FileTypes.PDF ||
-					((Type == FileTypes.Other && new[] { "ppt", "doc", "pdf" }.Contains(Format))));
-			}
+			get { return _generatePreviewImages; }
 			set
 			{
 				if (_generatePreviewImages != value)

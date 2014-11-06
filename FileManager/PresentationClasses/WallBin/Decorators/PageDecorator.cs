@@ -477,6 +477,89 @@ namespace FileManager.PresentationClasses.WallBin.Decorators
 			}
 		}
 		#endregion
+
+		#region Group Operations
+
+		public void DeleteLinks()
+		{
+			var existedFiles = Page.Folders.SelectMany(f => f.Files).OfType<LibraryLink>().ToList();
+			foreach (var file in existedFiles)
+				file.RemoveFromCollection();
+			BuildDisplayBoxes();
+			LinkBoxesToColumns();
+			ResizePage();
+			
+			MainController.Instance.WallbinController.UpLinkButton = false;
+			MainController.Instance.WallbinController.DownLinkButton = false;
+			MainController.Instance.WallbinController.DeleteLinkButton = false;
+			MainController.Instance.WallbinController.OpenLinkButton = false;
+			MainController.Instance.WallbinController.LinkPropertiesNotesButton = false;
+			MainController.Instance.WallbinController.LinkPropertiesTagsButton = false;
+			MainController.Instance.WallbinController.LinkPropertiesExpirationDateButton = false;
+			MainController.Instance.WallbinController.LinkPropertiesSecurityButton = false;
+			MainController.Instance.WallbinController.LinkPropertiesWidgetButton = false;
+			MainController.Instance.WallbinController.LinkPropertiesBannerButton = false;
+
+			MainController.Instance.WallbinController.UpdateLinkInfo(null);
+			MainController.Instance.WallbinController.UpdateTagCountInfo();
+			
+			Parent.StateChanged = true;
+		}
+
+		public void DeleteSecurity()
+		{
+			var existedFiles = Page.Folders.SelectMany(f => f.Files).OfType<LibraryLink>().ToList();
+			foreach (var file in existedFiles)
+			{
+				file.IsRestricted = false;
+				file.NoShare = false;
+				file.IsForbidden = false;
+				file.AssignedUsers = null;
+				file.DeniedUsers = null;
+			}
+			ResizePage();
+			Parent.StateChanged = true;
+		}
+
+		public void DeleteTags()
+		{
+			var existedFiles = Page.Folders.SelectMany(f => f.Files).OfType<LibraryLink>().ToList();
+			foreach (var file in existedFiles)
+			{
+				file.SearchTags.SearchGroups.Clear();
+				file.SuperFilters.Clear();
+				file.CustomKeywords.Tags.Clear();
+			}
+			ResizePage();
+			MainController.Instance.WallbinController.UpdateLinkInfo(null);
+			MainController.Instance.WallbinController.UpdateTagCountInfo();
+			Parent.StateChanged = true;
+		}
+
+		public void DeleteWidgets()
+		{
+			var existedFiles = Page.Folders.SelectMany(f => f.Files).OfType<LibraryLink>().ToList();
+			foreach (var file in existedFiles)
+			{
+				file.EnableWidget = false;
+				file.Widget = null;
+			}
+			ResizePage();
+			Parent.StateChanged = true;
+		}
+
+		public void DeleteBanners()
+		{
+			var existedFiles = Page.Folders.SelectMany(f => f.Files).OfType<LibraryLink>().ToList();
+			foreach (var file in existedFiles)
+			{
+				file.BannerProperties.Enable = false;
+				file.BannerProperties.Image = null;
+			}
+			ResizePage();
+			Parent.StateChanged = true;
+		}
+		#endregion
 	}
 
 	public class SelectionChangedEventArgs : EventArgs

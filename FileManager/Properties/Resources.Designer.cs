@@ -113,16 +113,6 @@ namespace FileManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap AutoSync {
-            get {
-                object obj = ResourceManager.GetObject("AutoSync", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap AutoWidgets {
             get {
                 object obj = ResourceManager.GetObject("AutoWidgets", resourceCulture);

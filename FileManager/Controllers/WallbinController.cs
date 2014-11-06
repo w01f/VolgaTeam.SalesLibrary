@@ -23,7 +23,6 @@ namespace FileManager.Controllers
 {
 	public class WallbinController : IPageController
 	{
-		private FormAutoSync _formAutoSync;
 		private FormAutoWidgets _formAutoWidgets;
 		private FormBranding _formBranding;
 		private FormColumns _formColumns;
@@ -48,7 +47,6 @@ namespace FileManager.Controllers
 			FormMain.Instance.buttonItemPreferencesAutoWidgets.Click += buttonItemSettingsAutoWidgets_Click;
 			FormMain.Instance.buttonItemPreferencesDeadLinks.Click += buttonItemSettingsDeadLinks_Click;
 			FormMain.Instance.buttonItemPreferencesEmailList.Click += buttonItemSettingsEmailList_Click;
-			FormMain.Instance.buttonItemSettingsAutoSync.Click += buttonItemSettingsAutoSync_Click;
 
 			FormMain.Instance.buttonItemHomeAddLineBreak.Click += btLineBreak_Click;
 			FormMain.Instance.buttonItemHomeAddNetworkShare.Click += btAddNeworkShare_Click;
@@ -476,7 +474,7 @@ namespace FileManager.Controllers
 		{
 			if (MainController.Instance.ActiveDecorator == null) return;
 			MainController.Instance.ActiveDecorator.Save();
-			if (MainController.Instance.ActiveDecorator.Library.IsSyncLocked()) return;
+			if (MainController.Instance.ActiveDecorator.Library.IsSyncLocked(false)) return;
 			FormMain.Instance.ribbonControl.Enabled = false;
 			_tabPage.Enabled = false;
 			Application.DoEvents();
@@ -489,15 +487,15 @@ namespace FileManager.Controllers
 
 			var closeAfterSync = MainController.Instance.ActiveDecorator.Library.CloseAfterSync;
 
-			using (var form = new FormProgressSyncFilesRegular())
+			using (var form = new FormProgressSyncFiles())
 			{
 				form.CloseAfterSync = closeAfterSync;
 				form.ProcessAborted += (progressSender, progressE) => { Globals.ThreadAborted = true; };
-				var thread = new Thread(delegate()
-											{
-												if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
-													LibraryManager.Instance.SynchronizeLibraries();
-											});
+				var thread = new Thread(() =>
+				{
+					if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
+						LibraryManager.Instance.Synchronize(MainController.Instance.ActiveDecorator.Library);
+				});
 				if (MainController.Instance.ActiveDecorator.Library.ShowProgressDuringSync)
 					form.Show();
 				thread.Start();
@@ -509,41 +507,7 @@ namespace FileManager.Controllers
 				if (MainController.Instance.ActiveDecorator.Library.ShowProgressDuringSync)
 					form.Close();
 				if (form.CloseAfterSync)
-				{
-					if (form.CloseAfterSync && !MainController.Instance.ActiveDecorator.Library.FullSync)
-						Application.Exit();
-					else
-						closeAfterSync = form.CloseAfterSync;
-				}
-			}
-
-			if (MainController.Instance.ActiveDecorator.Library.FullSync && ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive))
-			{
-				using (var form = new FormProgressSyncFilesIPad())
-				{
-					form.CloseAfterSync = closeAfterSync;
-					form.ProcessAborted += (progressSender, progressE) => { Globals.ThreadAborted = true; };
-					var thread = new Thread(delegate()
-												{
-													AppManager.Instance.KillAutoFM();
-													if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
-														MainController.Instance.ActiveDecorator.Library.PrepareForIPadSynchronize();
-													if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
-														LibraryManager.Instance.SynchronizeLibraryForIpad(MainController.Instance.ActiveDecorator.Library);
-													AppManager.Instance.RunAutoFM();
-												});
-					form.Show();
-					thread.Start();
-					while (thread.IsAlive)
-					{
-						Thread.Sleep(100);
-						Application.DoEvents();
-					}
-					form.Close();
-
-					if (form.CloseAfterSync)
-						Application.Exit();
-				}
+					Application.Exit();
 			}
 
 			Globals.ThreadActive = false;
@@ -692,13 +656,6 @@ namespace FileManager.Controllers
 			if (_formEmailList == null) _formEmailList = new FormEmailList();
 			if (MainController.Instance.ActiveDecorator != null)
 				_formEmailList.ShowDialog();
-		}
-
-		private void buttonItemSettingsAutoSync_Click(object sender, EventArgs e)
-		{
-			if (_formAutoSync == null) _formAutoSync = new FormAutoSync();
-			if (MainController.Instance.ActiveDecorator != null)
-				_formAutoSync.ShowDialog();
 		}
 
 		private void buttonItemSettingsMultitab_CheckedChanged(object sender, EventArgs e)

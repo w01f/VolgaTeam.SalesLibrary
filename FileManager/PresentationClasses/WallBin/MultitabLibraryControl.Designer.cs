@@ -28,9 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
+			this.components = new System.ComponentModel.Container();
 			this.xtraTabControl = new DevExpress.XtraTab.XtraTabControl();
 			this.pnEmpty = new System.Windows.Forms.Panel();
+			this.contextMenuStripPageProperties = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.toolStripMenuItemDeleteLinks = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItemDeleteSecurity = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItemDeleteTags = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItemDeleteWidgets = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItemDeleteBanners = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControl)).BeginInit();
+			this.contextMenuStripPageProperties.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// xtraTabControl
@@ -62,6 +70,7 @@
 			this.xtraTabControl.Name = "xtraTabControl";
 			this.xtraTabControl.Size = new System.Drawing.Size(506, 386);
 			this.xtraTabControl.TabIndex = 0;
+			this.xtraTabControl.MouseDown += new System.Windows.Forms.MouseEventHandler(this.xtraTabControl_MouseDown);
 			// 
 			// pnEmpty
 			// 
@@ -70,6 +79,52 @@
 			this.pnEmpty.Name = "pnEmpty";
 			this.pnEmpty.Size = new System.Drawing.Size(506, 386);
 			this.pnEmpty.TabIndex = 1;
+			// 
+			// contextMenuStripPageProperties
+			// 
+			this.contextMenuStripPageProperties.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItemDeleteLinks,
+            this.toolStripMenuItemDeleteSecurity,
+            this.toolStripMenuItemDeleteTags,
+            this.toolStripMenuItemDeleteWidgets,
+            this.toolStripMenuItemDeleteBanners});
+			this.contextMenuStripPageProperties.Name = "contextMenuStripLinkProperties";
+			this.contextMenuStripPageProperties.Size = new System.Drawing.Size(337, 136);
+			// 
+			// toolStripMenuItemDeleteLinks
+			// 
+			this.toolStripMenuItemDeleteLinks.Name = "toolStripMenuItemDeleteLinks";
+			this.toolStripMenuItemDeleteLinks.Size = new System.Drawing.Size(336, 22);
+			this.toolStripMenuItemDeleteLinks.Text = "Delete ALL links on this page";
+			this.toolStripMenuItemDeleteLinks.Click += new System.EventHandler(this.toolStripMenuItemDeleteLinks_Click);
+			// 
+			// toolStripMenuItemDeleteSecurity
+			// 
+			this.toolStripMenuItemDeleteSecurity.Name = "toolStripMenuItemDeleteSecurity";
+			this.toolStripMenuItemDeleteSecurity.Size = new System.Drawing.Size(336, 22);
+			this.toolStripMenuItemDeleteSecurity.Text = "Delete Security Settings for ALL Links on this page";
+			this.toolStripMenuItemDeleteSecurity.Click += new System.EventHandler(this.toolStripMenuItemDeleteSecurity_Click);
+			// 
+			// toolStripMenuItemDeleteTags
+			// 
+			this.toolStripMenuItemDeleteTags.Name = "toolStripMenuItemDeleteTags";
+			this.toolStripMenuItemDeleteTags.Size = new System.Drawing.Size(336, 22);
+			this.toolStripMenuItemDeleteTags.Text = "Wipe ALL Tags for ALL Links on this page";
+			this.toolStripMenuItemDeleteTags.Click += new System.EventHandler(this.toolStripMenuItemDeleteTags_Click);
+			// 
+			// toolStripMenuItemDeleteWidgets
+			// 
+			this.toolStripMenuItemDeleteWidgets.Name = "toolStripMenuItemDeleteWidgets";
+			this.toolStripMenuItemDeleteWidgets.Size = new System.Drawing.Size(336, 22);
+			this.toolStripMenuItemDeleteWidgets.Text = "Remove all Widgets for ALL Links on this page";
+			this.toolStripMenuItemDeleteWidgets.Click += new System.EventHandler(this.toolStripMenuItemDeleteWidgets_Click);
+			// 
+			// toolStripMenuItemDeleteBanners
+			// 
+			this.toolStripMenuItemDeleteBanners.Name = "toolStripMenuItemDeleteBanners";
+			this.toolStripMenuItemDeleteBanners.Size = new System.Drawing.Size(336, 22);
+			this.toolStripMenuItemDeleteBanners.Text = "Remove all Banners for ALL Links on this page";
+			this.toolStripMenuItemDeleteBanners.Click += new System.EventHandler(this.toolStripMenuItemDeleteBanners_Click);
 			// 
 			// MultitabLibraryControl
 			// 
@@ -82,6 +137,7 @@
 			this.Name = "MultitabLibraryControl";
 			this.Size = new System.Drawing.Size(506, 386);
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControl)).EndInit();
+			this.contextMenuStripPageProperties.ResumeLayout(false);
 			this.ResumeLayout(false);
 
         }
@@ -90,5 +146,11 @@
 
 		private System.Windows.Forms.Panel pnEmpty;
 		public DevExpress.XtraTab.XtraTabControl xtraTabControl;
+		private System.Windows.Forms.ContextMenuStrip contextMenuStripPageProperties;
+		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemDeleteLinks;
+		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemDeleteSecurity;
+		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemDeleteTags;
+		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemDeleteWidgets;
+		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemDeleteBanners;
     }
 }

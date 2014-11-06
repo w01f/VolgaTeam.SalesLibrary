@@ -31,13 +31,6 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			AutoWidgets = new List<AutoWidget>();
 			PreviewContainers = new List<IPreviewContainer>();
 
-			#region Auto Sync Settings
-			SyncScheduleRecords = new List<SyncScheduleRecord>();
-
-			//Obsolte, using for compatibility with old versions
-			SyncTimes = new List<TimePoint>();
-			#endregion
-
 			OvernightsCalendar = new OvernightsCalendar(this);
 			IPadManager = new IPadManager(this, SettingsManager.Instance.WebServiceSite, SettingsManager.Instance.WebServiceLogin, SettingsManager.Instance.WebServicePassword);
 
@@ -193,9 +186,9 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 					{
 						foreach (LibraryLink file in folder.Files)
 						{
-							if (file.IsForbidden || 
-								!(!file.IsRestricted || 
-									((!String.IsNullOrEmpty(file.AssignedUsers) || 
+							if (file.IsForbidden ||
+								!(!file.IsRestricted ||
+									((!String.IsNullOrEmpty(file.AssignedUsers) ||
 									!String.IsNullOrEmpty(file.DeniedUsers))))) continue;
 							if (file is LibraryFolderLink)
 							{
@@ -227,14 +220,6 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			PreviewContainers.RemoveAll(x => string.IsNullOrEmpty(x.OriginalPath));
 			Save();
 		}
-		#endregion
-
-		#region Auto Sync Settings
-		public bool EnableAutoSync { get; set; }
-		public List<SyncScheduleRecord> SyncScheduleRecords { get; private set; }
-
-		//Obsolte, using for compatibility with old versions
-		public List<TimePoint> SyncTimes { get; private set; }
 		#endregion
 
 		#region Program Manager Settings
@@ -292,8 +277,6 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			Pages.Clear();
 			EmailList.Clear();
 			AutoWidgets.Clear();
-			EnableAutoSync = false;
-			SyncScheduleRecords.Clear();
 			ExtraFolders.Clear();
 
 			string file = Path.Combine(Folder.FullName, Constants.StorageFileName);
@@ -412,77 +395,6 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 						AutoWidgets.Add(autoWidget);
 					}
 
-				#region Auto Sync Settings
-				node = document.SelectSingleNode(@"/Library/EnableAutoSync");
-				if (node != null)
-					if (bool.TryParse(node.InnerText, out tempBool))
-						EnableAutoSync = tempBool;
-				node = document.SelectSingleNode(@"/Library/SyncSchedule");
-				if (node != null)
-					foreach (XmlNode syncTimeNode in node.ChildNodes)
-					{
-						if (syncTimeNode.Name.Equals("SyncScheduleRecord"))
-						{
-							var synctTime = new SyncScheduleRecord();
-							synctTime.Deserialize(syncTimeNode);
-							SyncScheduleRecords.Add(synctTime);
-						}
-					}
-				//Obsolte, using for compatibility with old versions
-				node = document.SelectSingleNode(@"/Library/AutoSyncTimes");
-				if (node != null)
-				{
-					foreach (XmlNode syncTimeNode in node.ChildNodes)
-					{
-						if (syncTimeNode.Name.Equals("SyncTime"))
-						{
-							var synctTime = new TimePoint();
-							synctTime.Deserialize(syncTimeNode);
-							SyncTimes.Add(synctTime);
-						}
-					}
-					if (SyncTimes.Count > 0)
-					{
-						DateTime[] syncTimes = SyncTimes.Select(x => new DateTime(1, 1, 1, x.Time.Hour, x.Time.Minute, 0)).Distinct().ToArray();
-						foreach (DateTime syncTime in syncTimes)
-						{
-							var syncScheduleRecord = new SyncScheduleRecord();
-							syncScheduleRecord.Time = syncTime;
-
-							DayOfWeek[] days = SyncTimes.Where(x => x.Time.Hour.Equals(syncTime.Hour) && x.Time.Minute.Equals(syncTime.Minute)).Select(x => x.Day).ToArray();
-							foreach (DayOfWeek day in days)
-							{
-								switch (day)
-								{
-									case DayOfWeek.Monday:
-										syncScheduleRecord.Monday = true;
-										break;
-									case DayOfWeek.Tuesday:
-										syncScheduleRecord.Tuesday = true;
-										break;
-									case DayOfWeek.Wednesday:
-										syncScheduleRecord.Wednesday = true;
-										break;
-									case DayOfWeek.Thursday:
-										syncScheduleRecord.Thursday = true;
-										break;
-									case DayOfWeek.Friday:
-										syncScheduleRecord.Friday = true;
-										break;
-									case DayOfWeek.Saturday:
-										syncScheduleRecord.Saturday = true;
-										break;
-									case DayOfWeek.Sunday:
-										syncScheduleRecord.Sunday = true;
-										break;
-								}
-							}
-							SyncScheduleRecords.Add(syncScheduleRecord);
-						}
-					}
-				}
-				#endregion
-
 				node = document.SelectSingleNode(@"/Library/OvernightsCalendar");
 				if (node != null)
 					OvernightsCalendar.Deserialize(node);
@@ -559,24 +471,6 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 				xml.AppendLine(@"<PreviewContainer>" + previewContainer.Serialize() + @"</PreviewContainer>");
 			xml.AppendLine("</PreviewContainers>");
 
-			#region Auto Sync Settings
-			var autoSyncSettings = new StringBuilder();
-			autoSyncSettings.AppendLine("<AutoSyncSettings>");
-			xml.AppendLine(@"<EnableAutoSync>" + EnableAutoSync.ToString() + @"</EnableAutoSync>");
-			autoSyncSettings.AppendLine(@"<EnableAutoSync>" + EnableAutoSync.ToString() + @"</EnableAutoSync>");
-			xml.AppendLine(@"<SyncSchedule>");
-			autoSyncSettings.AppendLine(@"<SyncSchedule>");
-			foreach (var syncTime in SyncScheduleRecords)
-			{
-				xml.AppendLine(@"<SyncScheduleRecord>" + syncTime.Serialize() + @"</SyncScheduleRecord>");
-				autoSyncSettings.AppendLine(@"<SyncScheduleRecord>" + syncTime.Serialize() + @"</SyncScheduleRecord>");
-			}
-			xml.AppendLine(@"</SyncSchedule>");
-			autoSyncSettings.AppendLine(@"</SyncSchedule>");
-			autoSyncSettings.AppendLine("</AutoSyncSettings>");
-			SettingsManager.Instance.SaveAutoSyncSettings(autoSyncSettings.ToString());
-			#endregion
-
 			xml.AppendLine(@"<OvernightsCalendar>" + OvernightsCalendar.Serialize() + @"</OvernightsCalendar>");
 			xml.AppendLine(@"<IPadManager>" + IPadManager.Serialize() + @"</IPadManager>");
 
@@ -624,8 +518,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 						NotifyAboutExpiredLinks();
 				}
 			}
-			if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
-				Archive();
+			if ((!Globals.ThreadActive || Globals.ThreadAborted) && Globals.ThreadActive) return;
 		}
 
 		public void PrepareForIPadSynchronize()
@@ -641,7 +534,6 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			{
 				IPadManager.SaveJson();
 				SaveLight();
-				Archive();
 			}
 		}
 
@@ -696,9 +588,9 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		private void GenerateExtendedPreviewFiles()
 		{
 			foreach (var previewContainer in PreviewContainers
-				.Where(x => x.Type == FileTypes.BuggyPresentation || 
-					x.Type == FileTypes.FriendlyPresentation || 
-					x.Type == FileTypes.Presentation || 
+				.Where(x => x.Type == FileTypes.BuggyPresentation ||
+					x.Type == FileTypes.FriendlyPresentation ||
+					x.Type == FileTypes.Presentation ||
 					x.Type == FileTypes.Other))
 			{
 				if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
@@ -735,24 +627,6 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			}
 			else
 				AppManager.Instance.ShowWarning("Cannot open Outlook");
-		}
-
-		private void Archive()
-		{
-			var archiveDateTime = DateTime.Now;
-			var archiveFolder = Path.Combine(SettingsManager.Instance.ArhivePath, archiveDateTime.ToString("MMddyy") + "-" + archiveDateTime.ToString("hhmmsstt"));
-			try
-			{
-				if (!Directory.Exists(archiveFolder))
-					Directory.CreateDirectory(archiveFolder);
-
-				foreach (FileInfo file in Folder.GetFiles("*.xml"))
-					file.CopyTo(Path.Combine(archiveFolder, file.Name), true);
-
-				foreach (FileInfo file in Folder.GetFiles("*.json"))
-					file.CopyTo(Path.Combine(archiveFolder, file.Name), true);
-			}
-			catch { }
 		}
 
 		public void AddPage()

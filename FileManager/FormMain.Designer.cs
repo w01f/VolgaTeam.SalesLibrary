@@ -66,9 +66,17 @@
 			this.itemContainerHomePage = new DevComponents.DotNetBar.ItemContainer();
 			this.labelItemHomePages = new DevComponents.DotNetBar.LabelItem();
 			this.controlContainerItemHomePages = new DevComponents.DotNetBar.ControlContainerItem();
+			this.ribbonPanelIPad = new DevComponents.DotNetBar.RibbonPanel();
+			this.ribbonBarIPadSyncFiles = new DevComponents.DotNetBar.RibbonBar();
+			this.buttonItemIPadSyncFiles = new DevComponents.DotNetBar.ButtonItem();
+			this.ribbonBarIPadVideoConvert = new DevComponents.DotNetBar.RibbonBar();
+			this.buttonItemIPadVideoConvert = new DevComponents.DotNetBar.ButtonItem();
+			this.ribbonBarIPadLocation = new DevComponents.DotNetBar.RibbonBar();
+			this.buttonEditIPadLocation = new DevExpress.XtraEditors.ButtonEdit();
+			this.labelItemIPadLocationTitle = new DevComponents.DotNetBar.LabelItem();
+			this.itemContainerIPadLocation = new DevComponents.DotNetBar.ItemContainer();
+			this.controlContainerItemIPadLocation = new DevComponents.DotNetBar.ControlContainerItem();
 			this.ribbonPanelSettings = new DevComponents.DotNetBar.RibbonPanel();
-			this.ribbonBarSettingsAutoSync = new DevComponents.DotNetBar.RibbonBar();
-			this.buttonItemSettingsAutoSync = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarSettingsSync = new DevComponents.DotNetBar.RibbonBar();
 			this.buttonItemSettingsSync = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarSettingsBranding = new DevComponents.DotNetBar.RibbonBar();
@@ -106,16 +114,6 @@
 			this.buttonItemIPadUsersEdit = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarIPadUsersAdd = new DevComponents.DotNetBar.RibbonBar();
 			this.buttonItemIPadUsersAdd = new DevComponents.DotNetBar.ButtonItem();
-			this.ribbonPanelIPad = new DevComponents.DotNetBar.RibbonPanel();
-			this.ribbonBarIPadSyncFiles = new DevComponents.DotNetBar.RibbonBar();
-			this.buttonItemIPadSyncFiles = new DevComponents.DotNetBar.ButtonItem();
-			this.ribbonBarIPadVideoConvert = new DevComponents.DotNetBar.RibbonBar();
-			this.buttonItemIPadVideoConvert = new DevComponents.DotNetBar.ButtonItem();
-			this.ribbonBarIPadLocation = new DevComponents.DotNetBar.RibbonBar();
-			this.buttonEditIPadLocation = new DevExpress.XtraEditors.ButtonEdit();
-			this.labelItemIPadLocationTitle = new DevComponents.DotNetBar.LabelItem();
-			this.itemContainerIPadLocation = new DevComponents.DotNetBar.ItemContainer();
-			this.controlContainerItemIPadLocation = new DevComponents.DotNetBar.ControlContainerItem();
 			this.ribbonPanelProgramManager = new DevComponents.DotNetBar.RibbonPanel();
 			this.ribbonBarProgramManagerLocation = new DevComponents.DotNetBar.RibbonBar();
 			this.buttonEditProgramManagerLocation = new DevExpress.XtraEditors.ButtonEdit();
@@ -183,13 +181,13 @@
 			this.ribbonPanelHome.SuspendLayout();
 			this.ribbonBarHomeLibraries.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.comboBoxEditLibraries.Properties)).BeginInit();
+			this.ribbonPanelIPad.SuspendLayout();
+			this.ribbonBarIPadLocation.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.buttonEditIPadLocation.Properties)).BeginInit();
 			this.ribbonPanelSettings.SuspendLayout();
 			this.ribbonPanelSecurity.SuspendLayout();
 			this.ribbonPanelTags.SuspendLayout();
 			this.ribbonPanelIPadUsers.SuspendLayout();
-			this.ribbonPanelIPad.SuspendLayout();
-			this.ribbonBarIPadLocation.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.buttonEditIPadLocation.Properties)).BeginInit();
 			this.ribbonPanelProgramManager.SuspendLayout();
 			this.ribbonBarProgramManagerLocation.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.buttonEditProgramManagerLocation.Properties)).BeginInit();
@@ -223,8 +221,8 @@
 			this.ribbonControl.CanCustomize = false;
 			this.ribbonControl.CaptionVisible = true;
 			this.ribbonControl.Controls.Add(this.ribbonPanelHome);
-			this.ribbonControl.Controls.Add(this.ribbonPanelIPad);
 			this.ribbonControl.Controls.Add(this.ribbonPanelSettings);
+			this.ribbonControl.Controls.Add(this.ribbonPanelIPad);
 			this.ribbonControl.Controls.Add(this.ribbonPanelSecurity);
 			this.ribbonControl.Controls.Add(this.ribbonPanelTags);
 			this.ribbonControl.Controls.Add(this.ribbonPanelIPadUsers);
@@ -815,10 +813,188 @@
 			this.controlContainerItemHomePages.MenuVisibility = DevComponents.DotNetBar.eMenuVisibility.VisibleAlways;
 			this.controlContainerItemHomePages.Name = "controlContainerItemHomePages";
 			// 
+			// ribbonPanelIPad
+			// 
+			this.ribbonPanelIPad.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.ribbonPanelIPad.Controls.Add(this.ribbonBarIPadSyncFiles);
+			this.ribbonPanelIPad.Controls.Add(this.ribbonBarIPadVideoConvert);
+			this.ribbonPanelIPad.Controls.Add(this.ribbonBarIPadLocation);
+			this.ribbonPanelIPad.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.ribbonPanelIPad.Location = new System.Drawing.Point(0, 53);
+			this.ribbonPanelIPad.Name = "ribbonPanelIPad";
+			this.ribbonPanelIPad.Padding = new System.Windows.Forms.Padding(3, 0, 3, 2);
+			this.ribbonPanelIPad.Size = new System.Drawing.Size(1014, 132);
+			// 
+			// 
+			// 
+			this.ribbonPanelIPad.Style.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			// 
+			// 
+			// 
+			this.ribbonPanelIPad.StyleMouseDown.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			// 
+			// 
+			// 
+			this.ribbonPanelIPad.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			this.ribbonPanelIPad.TabIndex = 7;
+			this.ribbonPanelIPad.Visible = false;
+			// 
+			// ribbonBarIPadSyncFiles
+			// 
+			this.ribbonBarIPadSyncFiles.AutoOverflowEnabled = true;
+			// 
+			// 
+			// 
+			this.ribbonBarIPadSyncFiles.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			// 
+			// 
+			// 
+			this.ribbonBarIPadSyncFiles.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			this.ribbonBarIPadSyncFiles.ContainerControlProcessDialogKey = true;
+			this.ribbonBarIPadSyncFiles.Dock = System.Windows.Forms.DockStyle.Left;
+			this.ribbonBarIPadSyncFiles.DragDropSupport = true;
+			this.ribbonBarIPadSyncFiles.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.buttonItemIPadSyncFiles});
+			this.ribbonBarIPadSyncFiles.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
+			this.ribbonBarIPadSyncFiles.Location = new System.Drawing.Point(409, 0);
+			this.ribbonBarIPadSyncFiles.Name = "ribbonBarIPadSyncFiles";
+			this.ribbonBarIPadSyncFiles.Size = new System.Drawing.Size(103, 130);
+			this.ribbonBarIPadSyncFiles.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.ribbonBarIPadSyncFiles.TabIndex = 12;
+			this.ribbonBarIPadSyncFiles.Text = "Sync";
+			// 
+			// 
+			// 
+			this.ribbonBarIPadSyncFiles.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			// 
+			// 
+			// 
+			this.ribbonBarIPadSyncFiles.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			// 
+			// buttonItemIPadSyncFiles
+			// 
+			this.buttonItemIPadSyncFiles.Image = global::FileManager.Properties.Resources.SyncIPad;
+			this.buttonItemIPadSyncFiles.Name = "buttonItemIPadSyncFiles";
+			this.buttonItemIPadSyncFiles.SubItemsExpandWidth = 14;
+			this.buttonItemIPadSyncFiles.Text = "buttonItem1";
+			// 
+			// ribbonBarIPadVideoConvert
+			// 
+			this.ribbonBarIPadVideoConvert.AutoOverflowEnabled = true;
+			// 
+			// 
+			// 
+			this.ribbonBarIPadVideoConvert.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			// 
+			// 
+			// 
+			this.ribbonBarIPadVideoConvert.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			this.ribbonBarIPadVideoConvert.ContainerControlProcessDialogKey = true;
+			this.ribbonBarIPadVideoConvert.Dock = System.Windows.Forms.DockStyle.Left;
+			this.ribbonBarIPadVideoConvert.DragDropSupport = true;
+			this.ribbonBarIPadVideoConvert.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.buttonItemIPadVideoConvert});
+			this.ribbonBarIPadVideoConvert.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
+			this.ribbonBarIPadVideoConvert.Location = new System.Drawing.Point(311, 0);
+			this.ribbonBarIPadVideoConvert.Name = "ribbonBarIPadVideoConvert";
+			this.ribbonBarIPadVideoConvert.Size = new System.Drawing.Size(98, 130);
+			this.ribbonBarIPadVideoConvert.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.ribbonBarIPadVideoConvert.TabIndex = 11;
+			this.ribbonBarIPadVideoConvert.Text = "Convert Video";
+			// 
+			// 
+			// 
+			this.ribbonBarIPadVideoConvert.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			// 
+			// 
+			// 
+			this.ribbonBarIPadVideoConvert.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			// 
+			// buttonItemIPadVideoConvert
+			// 
+			this.buttonItemIPadVideoConvert.Image = global::FileManager.Properties.Resources.ConvertVideo;
+			this.buttonItemIPadVideoConvert.Name = "buttonItemIPadVideoConvert";
+			this.buttonItemIPadVideoConvert.SubItemsExpandWidth = 14;
+			this.buttonItemIPadVideoConvert.Text = "buttonItem1";
+			// 
+			// ribbonBarIPadLocation
+			// 
+			this.ribbonBarIPadLocation.AutoOverflowEnabled = true;
+			// 
+			// 
+			// 
+			this.ribbonBarIPadLocation.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			// 
+			// 
+			// 
+			this.ribbonBarIPadLocation.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			this.ribbonBarIPadLocation.ContainerControlProcessDialogKey = true;
+			this.ribbonBarIPadLocation.Controls.Add(this.buttonEditIPadLocation);
+			this.ribbonBarIPadLocation.Dock = System.Windows.Forms.DockStyle.Left;
+			this.ribbonBarIPadLocation.DragDropSupport = true;
+			this.ribbonBarIPadLocation.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.labelItemIPadLocationTitle,
+            this.itemContainerIPadLocation});
+			this.ribbonBarIPadLocation.ItemSpacing = 20;
+			this.ribbonBarIPadLocation.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical;
+			this.ribbonBarIPadLocation.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
+			this.ribbonBarIPadLocation.Location = new System.Drawing.Point(3, 0);
+			this.ribbonBarIPadLocation.Name = "ribbonBarIPadLocation";
+			this.ribbonBarIPadLocation.Size = new System.Drawing.Size(308, 130);
+			this.ribbonBarIPadLocation.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.ribbonBarIPadLocation.TabIndex = 4;
+			this.ribbonBarIPadLocation.Text = "FTP GoodSync Upload Location";
+			// 
+			// 
+			// 
+			this.ribbonBarIPadLocation.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			// 
+			// 
+			// 
+			this.ribbonBarIPadLocation.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			this.ribbonBarIPadLocation.VerticalItemAlignment = DevComponents.DotNetBar.eVerticalItemsAlignment.Middle;
+			// 
+			// buttonEditIPadLocation
+			// 
+			this.buttonEditIPadLocation.Location = new System.Drawing.Point(4, 65);
+			this.buttonEditIPadLocation.Name = "buttonEditIPadLocation";
+			this.buttonEditIPadLocation.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+			this.buttonEditIPadLocation.Properties.NullText = "Type or Select...";
+			this.buttonEditIPadLocation.Size = new System.Drawing.Size(294, 20);
+			this.buttonEditIPadLocation.StyleController = this.styleController;
+			this.buttonEditIPadLocation.TabIndex = 0;
+			// 
+			// labelItemIPadLocationTitle
+			// 
+			this.labelItemIPadLocationTitle.ForeColor = System.Drawing.Color.Black;
+			this.labelItemIPadLocationTitle.Name = "labelItemIPadLocationTitle";
+			this.labelItemIPadLocationTitle.Text = " Where will Your iPad Files be stored for GoodSync FTP?";
+			// 
+			// itemContainerIPadLocation
+			// 
+			// 
+			// 
+			// 
+			this.itemContainerIPadLocation.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			this.itemContainerIPadLocation.Name = "itemContainerIPadLocation";
+			this.itemContainerIPadLocation.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.controlContainerItemIPadLocation});
+			// 
+			// 
+			// 
+			this.itemContainerIPadLocation.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			// 
+			// controlContainerItemIPadLocation
+			// 
+			this.controlContainerItemIPadLocation.AllowItemResize = false;
+			this.controlContainerItemIPadLocation.Control = this.buttonEditIPadLocation;
+			this.controlContainerItemIPadLocation.MenuVisibility = DevComponents.DotNetBar.eMenuVisibility.VisibleAlways;
+			this.controlContainerItemIPadLocation.Name = "controlContainerItemIPadLocation";
+			// 
 			// ribbonPanelSettings
 			// 
 			this.ribbonPanelSettings.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.ribbonPanelSettings.Controls.Add(this.ribbonBarSettingsAutoSync);
 			this.ribbonPanelSettings.Controls.Add(this.ribbonBarSettingsSync);
 			this.ribbonPanelSettings.Controls.Add(this.ribbonBarSettingsBranding);
 			this.ribbonPanelSettings.Controls.Add(this.ribbonBarSettingsExtraRoots);
@@ -842,45 +1018,6 @@
 			this.ribbonPanelSettings.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			this.ribbonPanelSettings.TabIndex = 10;
 			this.ribbonPanelSettings.Visible = false;
-			// 
-			// ribbonBarSettingsAutoSync
-			// 
-			this.ribbonBarSettingsAutoSync.AutoOverflowEnabled = true;
-			// 
-			// 
-			// 
-			this.ribbonBarSettingsAutoSync.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// 
-			// 
-			this.ribbonBarSettingsAutoSync.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			this.ribbonBarSettingsAutoSync.ContainerControlProcessDialogKey = true;
-			this.ribbonBarSettingsAutoSync.Dock = System.Windows.Forms.DockStyle.Left;
-			this.ribbonBarSettingsAutoSync.DragDropSupport = true;
-			this.ribbonBarSettingsAutoSync.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.buttonItemSettingsAutoSync});
-			this.ribbonBarSettingsAutoSync.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-			this.ribbonBarSettingsAutoSync.Location = new System.Drawing.Point(350, 0);
-			this.ribbonBarSettingsAutoSync.Name = "ribbonBarSettingsAutoSync";
-			this.ribbonBarSettingsAutoSync.Size = new System.Drawing.Size(88, 130);
-			this.ribbonBarSettingsAutoSync.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.ribbonBarSettingsAutoSync.TabIndex = 15;
-			this.ribbonBarSettingsAutoSync.Text = "Auto-Sync";
-			// 
-			// 
-			// 
-			this.ribbonBarSettingsAutoSync.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// 
-			// 
-			this.ribbonBarSettingsAutoSync.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// buttonItemSettingsAutoSync
-			// 
-			this.buttonItemSettingsAutoSync.Image = global::FileManager.Properties.Resources.AutoSync;
-			this.buttonItemSettingsAutoSync.Name = "buttonItemSettingsAutoSync";
-			this.buttonItemSettingsAutoSync.SubItemsExpandWidth = 14;
-			this.buttonItemSettingsAutoSync.Text = "Auto-Sync";
 			// 
 			// ribbonBarSettingsSync
 			// 
@@ -1629,185 +1766,6 @@
 			this.buttonItemIPadUsersAdd.Name = "buttonItemIPadUsersAdd";
 			this.buttonItemIPadUsersAdd.SubItemsExpandWidth = 14;
 			this.buttonItemIPadUsersAdd.Text = "buttonItem1";
-			// 
-			// ribbonPanelIPad
-			// 
-			this.ribbonPanelIPad.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.ribbonPanelIPad.Controls.Add(this.ribbonBarIPadSyncFiles);
-			this.ribbonPanelIPad.Controls.Add(this.ribbonBarIPadVideoConvert);
-			this.ribbonPanelIPad.Controls.Add(this.ribbonBarIPadLocation);
-			this.ribbonPanelIPad.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.ribbonPanelIPad.Location = new System.Drawing.Point(0, 53);
-			this.ribbonPanelIPad.Name = "ribbonPanelIPad";
-			this.ribbonPanelIPad.Padding = new System.Windows.Forms.Padding(3, 0, 3, 2);
-			this.ribbonPanelIPad.Size = new System.Drawing.Size(1014, 132);
-			// 
-			// 
-			// 
-			this.ribbonPanelIPad.Style.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// 
-			// 
-			this.ribbonPanelIPad.StyleMouseDown.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// 
-			// 
-			this.ribbonPanelIPad.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			this.ribbonPanelIPad.TabIndex = 7;
-			this.ribbonPanelIPad.Visible = false;
-			// 
-			// ribbonBarIPadSyncFiles
-			// 
-			this.ribbonBarIPadSyncFiles.AutoOverflowEnabled = true;
-			// 
-			// 
-			// 
-			this.ribbonBarIPadSyncFiles.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// 
-			// 
-			this.ribbonBarIPadSyncFiles.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			this.ribbonBarIPadSyncFiles.ContainerControlProcessDialogKey = true;
-			this.ribbonBarIPadSyncFiles.Dock = System.Windows.Forms.DockStyle.Left;
-			this.ribbonBarIPadSyncFiles.DragDropSupport = true;
-			this.ribbonBarIPadSyncFiles.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.buttonItemIPadSyncFiles});
-			this.ribbonBarIPadSyncFiles.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-			this.ribbonBarIPadSyncFiles.Location = new System.Drawing.Point(409, 0);
-			this.ribbonBarIPadSyncFiles.Name = "ribbonBarIPadSyncFiles";
-			this.ribbonBarIPadSyncFiles.Size = new System.Drawing.Size(103, 130);
-			this.ribbonBarIPadSyncFiles.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.ribbonBarIPadSyncFiles.TabIndex = 12;
-			this.ribbonBarIPadSyncFiles.Text = "Sync";
-			// 
-			// 
-			// 
-			this.ribbonBarIPadSyncFiles.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// 
-			// 
-			this.ribbonBarIPadSyncFiles.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// buttonItemIPadSyncFiles
-			// 
-			this.buttonItemIPadSyncFiles.Image = global::FileManager.Properties.Resources.SyncIPad;
-			this.buttonItemIPadSyncFiles.Name = "buttonItemIPadSyncFiles";
-			this.buttonItemIPadSyncFiles.SubItemsExpandWidth = 14;
-			this.buttonItemIPadSyncFiles.Text = "buttonItem1";
-			// 
-			// ribbonBarIPadVideoConvert
-			// 
-			this.ribbonBarIPadVideoConvert.AutoOverflowEnabled = true;
-			// 
-			// 
-			// 
-			this.ribbonBarIPadVideoConvert.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// 
-			// 
-			this.ribbonBarIPadVideoConvert.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			this.ribbonBarIPadVideoConvert.ContainerControlProcessDialogKey = true;
-			this.ribbonBarIPadVideoConvert.Dock = System.Windows.Forms.DockStyle.Left;
-			this.ribbonBarIPadVideoConvert.DragDropSupport = true;
-			this.ribbonBarIPadVideoConvert.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.buttonItemIPadVideoConvert});
-			this.ribbonBarIPadVideoConvert.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-			this.ribbonBarIPadVideoConvert.Location = new System.Drawing.Point(311, 0);
-			this.ribbonBarIPadVideoConvert.Name = "ribbonBarIPadVideoConvert";
-			this.ribbonBarIPadVideoConvert.Size = new System.Drawing.Size(98, 130);
-			this.ribbonBarIPadVideoConvert.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.ribbonBarIPadVideoConvert.TabIndex = 11;
-			this.ribbonBarIPadVideoConvert.Text = "Convert Video";
-			// 
-			// 
-			// 
-			this.ribbonBarIPadVideoConvert.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// 
-			// 
-			this.ribbonBarIPadVideoConvert.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// buttonItemIPadVideoConvert
-			// 
-			this.buttonItemIPadVideoConvert.Image = global::FileManager.Properties.Resources.ConvertVideo;
-			this.buttonItemIPadVideoConvert.Name = "buttonItemIPadVideoConvert";
-			this.buttonItemIPadVideoConvert.SubItemsExpandWidth = 14;
-			this.buttonItemIPadVideoConvert.Text = "buttonItem1";
-			// 
-			// ribbonBarIPadLocation
-			// 
-			this.ribbonBarIPadLocation.AutoOverflowEnabled = true;
-			// 
-			// 
-			// 
-			this.ribbonBarIPadLocation.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// 
-			// 
-			this.ribbonBarIPadLocation.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			this.ribbonBarIPadLocation.ContainerControlProcessDialogKey = true;
-			this.ribbonBarIPadLocation.Controls.Add(this.buttonEditIPadLocation);
-			this.ribbonBarIPadLocation.Dock = System.Windows.Forms.DockStyle.Left;
-			this.ribbonBarIPadLocation.DragDropSupport = true;
-			this.ribbonBarIPadLocation.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.labelItemIPadLocationTitle,
-            this.itemContainerIPadLocation});
-			this.ribbonBarIPadLocation.ItemSpacing = 20;
-			this.ribbonBarIPadLocation.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical;
-			this.ribbonBarIPadLocation.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-			this.ribbonBarIPadLocation.Location = new System.Drawing.Point(3, 0);
-			this.ribbonBarIPadLocation.Name = "ribbonBarIPadLocation";
-			this.ribbonBarIPadLocation.Size = new System.Drawing.Size(308, 130);
-			this.ribbonBarIPadLocation.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.ribbonBarIPadLocation.TabIndex = 4;
-			this.ribbonBarIPadLocation.Text = "FTP GoodSync Upload Location";
-			// 
-			// 
-			// 
-			this.ribbonBarIPadLocation.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// 
-			// 
-			this.ribbonBarIPadLocation.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			this.ribbonBarIPadLocation.VerticalItemAlignment = DevComponents.DotNetBar.eVerticalItemsAlignment.Middle;
-			// 
-			// buttonEditIPadLocation
-			// 
-			this.buttonEditIPadLocation.Location = new System.Drawing.Point(4, 64);
-			this.buttonEditIPadLocation.Name = "buttonEditIPadLocation";
-			this.buttonEditIPadLocation.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton()});
-			this.buttonEditIPadLocation.Properties.NullText = "Type or Select...";
-			this.buttonEditIPadLocation.Size = new System.Drawing.Size(294, 20);
-			this.buttonEditIPadLocation.StyleController = this.styleController;
-			this.buttonEditIPadLocation.TabIndex = 0;
-			// 
-			// labelItemIPadLocationTitle
-			// 
-			this.labelItemIPadLocationTitle.ForeColor = System.Drawing.Color.Black;
-			this.labelItemIPadLocationTitle.Name = "labelItemIPadLocationTitle";
-			this.labelItemIPadLocationTitle.Text = " Where will Your iPad Files be stored for GoodSync FTP?";
-			// 
-			// itemContainerIPadLocation
-			// 
-			// 
-			// 
-			// 
-			this.itemContainerIPadLocation.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			this.itemContainerIPadLocation.Name = "itemContainerIPadLocation";
-			this.itemContainerIPadLocation.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.controlContainerItemIPadLocation});
-			// 
-			// 
-			// 
-			this.itemContainerIPadLocation.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// controlContainerItemIPadLocation
-			// 
-			this.controlContainerItemIPadLocation.AllowItemResize = false;
-			this.controlContainerItemIPadLocation.Control = this.buttonEditIPadLocation;
-			this.controlContainerItemIPadLocation.MenuVisibility = DevComponents.DotNetBar.eMenuVisibility.VisibleAlways;
-			this.controlContainerItemIPadLocation.Name = "controlContainerItemIPadLocation";
 			// 
 			// ribbonPanelProgramManager
 			// 
@@ -2772,13 +2730,13 @@
 			this.ribbonPanelHome.ResumeLayout(false);
 			this.ribbonBarHomeLibraries.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.comboBoxEditLibraries.Properties)).EndInit();
+			this.ribbonPanelIPad.ResumeLayout(false);
+			this.ribbonBarIPadLocation.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.buttonEditIPadLocation.Properties)).EndInit();
 			this.ribbonPanelSettings.ResumeLayout(false);
 			this.ribbonPanelSecurity.ResumeLayout(false);
 			this.ribbonPanelTags.ResumeLayout(false);
 			this.ribbonPanelIPadUsers.ResumeLayout(false);
-			this.ribbonPanelIPad.ResumeLayout(false);
-			this.ribbonBarIPadLocation.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.buttonEditIPadLocation.Properties)).EndInit();
 			this.ribbonPanelProgramManager.ResumeLayout(false);
 			this.ribbonBarProgramManagerLocation.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.buttonEditProgramManagerLocation.Properties)).EndInit();
@@ -2904,8 +2862,6 @@
 		public System.Windows.Forms.Panel pnContainer;
 		public DevComponents.DotNetBar.RibbonTabItem ribbonTabItemIPad;
 		private DevComponents.DotNetBar.RibbonPanel ribbonPanelSettings;
-		private DevComponents.DotNetBar.RibbonBar ribbonBarSettingsAutoSync;
-		public DevComponents.DotNetBar.ButtonItem buttonItemSettingsAutoSync;
 		private DevComponents.DotNetBar.RibbonBar ribbonBarSettingsSync;
 		public DevComponents.DotNetBar.ButtonItem buttonItemSettingsSync;
 		public DevComponents.DotNetBar.RibbonBar ribbonBarSettingsBranding;

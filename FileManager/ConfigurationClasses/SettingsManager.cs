@@ -11,10 +11,8 @@ namespace FileManager.ConfigurationClasses
 	{
 		private static readonly SettingsManager _instance = new SettingsManager();
 
-		private readonly string _autoSyncSettingsPath = string.Empty;
 		private readonly string _categoryRequestSettingsPath = string.Empty;
 		private readonly string _ribbonSettingsFilePath = string.Empty;
-		private readonly string _settingsFilePath = string.Empty;
 		private readonly string _dashboardSyncSettingsFilePath = string.Empty;
 		private readonly string _salesDepotSyncSettingsFilePath = string.Empty;
 		private readonly string _serviceConnectionSettingsFilePath = string.Empty;
@@ -28,13 +26,9 @@ namespace FileManager.ConfigurationClasses
 			string settingsFolderPath = string.Format(@"{0}\newlocaldirect.com\xml\file_manager", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
 			if (!Directory.Exists(settingsFolderPath))
 				Directory.CreateDirectory(settingsFolderPath);
-			_settingsFilePath = Path.Combine(settingsFolderPath, "LocalSettings.xml");
-			_autoSyncSettingsPath = Path.Combine(settingsFolderPath, "AutoSyncSchedule.xml");
+			SettingsFilePath = Path.Combine(settingsFolderPath, "LocalSettings.xml");
 			_categoryRequestSettingsPath = Path.Combine(ApplicationRootPath, "category_request.xml");
 
-			ArhivePath = Path.Combine(settingsFolderPath, "Archives");
-			if (Directory.Exists(ArhivePath))
-				Directory.CreateDirectory(ArhivePath);
 			_dashboardSyncSettingsFilePath = string.Format(@"{0}\newlocaldirect.com\!Update_Settings\syncfile.xml", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
 
 			_salesDepotSyncSettingsFilePath = Path.Combine(ApplicationRootPath, "synclock.xml");
@@ -51,8 +45,11 @@ namespace FileManager.ConfigurationClasses
 			AdSpecsSamplesRootPath = string.Empty;
 			ScreenshotLibraryRootPath = string.Empty;
 
-			AutoFMSyncShorcutPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Startup), "AutoFMSync.exe - Shortcut.lnk");
 			VideoConverterPath = Path.Combine(ApplicationRootPath, "video converter");
+
+			TempPath = String.Format(@"{0}\newlocaldirect.com\Sync\Temp", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
+			if (!Directory.Exists(TempPath))
+				Directory.CreateDirectory(TempPath);
 
 			#region FM Settings
 			BackupPath = string.Empty;
@@ -100,15 +97,15 @@ namespace FileManager.ConfigurationClasses
 		}
 
 		public string ApplicationRootPath { get; private set; }
-		public string ArhivePath { get; set; }
 		public string LogRootPath { get; set; }
 		public string ClientLogosRootPath { get; set; }
 		public string SalesGalleryRootPath { get; set; }
 		public string WebArtRootPath { get; set; }
 		public string AdSpecsSamplesRootPath { get; set; }
 		public string ScreenshotLibraryRootPath { get; set; }
-		public string AutoFMSyncShorcutPath { get; set; }
 		public string VideoConverterPath { get; set; }
+		public string TempPath { get; set; }
+		public string SettingsFilePath { get; private set; }
 
 		public int DestinationPathLength { get; private set; }
 
@@ -173,10 +170,10 @@ namespace FileManager.ConfigurationClasses
 
 		public void Load()
 		{
-			if (File.Exists(_settingsFilePath))
+			if (File.Exists(SettingsFilePath))
 			{
 				var document = new XmlDocument();
-				document.Load(_settingsFilePath);
+				document.Load(SettingsFilePath);
 
 				#region FM Settings
 				XmlNode node = document.SelectSingleNode(@"/LocalSettings/BackupPath");
@@ -252,7 +249,7 @@ namespace FileManager.ConfigurationClasses
 
 			xml.AppendLine(@"</LocalSettings>");
 
-			using (var sw = new StreamWriter(_settingsFilePath, false))
+			using (var sw = new StreamWriter(SettingsFilePath, false))
 			{
 				sw.Write(xml);
 				sw.Flush();
@@ -381,15 +378,6 @@ namespace FileManager.ConfigurationClasses
 			node = document.SelectSingleNode(@"/ipadsite/password");
 			if (node != null)
 				WebServicePassword = node.InnerText;
-		}
-
-		public void SaveAutoSyncSettings(string settings)
-		{
-			using (var sw = new StreamWriter(_autoSyncSettingsPath, false))
-			{
-				sw.Write(settings);
-				sw.Flush();
-			}
 		}
 	}
 }

@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using FileManager.BusinessClasses;
 using FileManager.ConfigurationClasses;
 using FileManager.ToolForms.Settings;
 using SalesDepot.CoreObjects.InteropClasses;
@@ -45,11 +46,18 @@ namespace FileManager
 
 		public void RunForm()
 		{
-			if (Init())
-			{
-				FormMain.Instance.ShowInTaskbar = true;
-				Application.Run(FormMain.Instance);
-			}
+			if (!Init()) return;
+			FormMain.Instance.ShowInTaskbar = true;
+			Application.Run(FormMain.Instance);
+		}
+
+		public void RunSilent()
+		{
+			SettingsManager.Instance.Load();
+			ListManager.Instance.Init();
+			if (String.IsNullOrEmpty(SettingsManager.Instance.BackupPath) || 
+				!Directory.Exists(SettingsManager.Instance.BackupPath)) return;
+			SilentSyncManager.Run();
 		}
 
 		public void ActivateMainForm()
@@ -94,18 +102,6 @@ namespace FileManager
 		public DialogResult ShowWarningQuestion(string text)
 		{
 			return MessageBox.Show(text, "Digital Wall Bin Administrator", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
-		}
-
-		public void KillAutoFM()
-		{
-			foreach (Process process in Process.GetProcesses().Where(x => x.ProcessName.ToUpper().Contains("AUTOFMSYNC")))
-				process.Kill();
-		}
-
-		public void RunAutoFM()
-		{
-			if (File.Exists(SettingsManager.Instance.AutoFMSyncShorcutPath))
-				Process.Start(SettingsManager.Instance.AutoFMSyncShorcutPath);
 		}
 
 		#region Nested type: NoParamsDelegate

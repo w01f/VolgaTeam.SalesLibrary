@@ -107,8 +107,8 @@ namespace FileManager.Controllers
 		private void buttonItemIPadSyncFiles_Click(object sender, EventArgs e)
 		{
 			if (MainController.Instance.ActiveDecorator == null) return;
-			if (MainController.Instance.ActiveDecorator.Library.IsSyncLocked()) return;
-			using (var form = new FormProgressSyncFilesIPad())
+			if (MainController.Instance.ActiveDecorator.Library.IsSyncLocked(false)) return;
+			using (var form = new FormProgressSyncFiles())
 			{
 				form.CloseAfterSync = MainController.Instance.ActiveDecorator.Library.CloseAfterSync;
 				form.ProcessAborted += (progressSender, progressE) => { Globals.ThreadAborted = true; };
@@ -116,18 +116,14 @@ namespace FileManager.Controllers
 				_tabPage.Enabled = false;
 				MainController.Instance.ActiveDecorator.Library.Save();
 				var thread = new Thread(delegate()
-											{
-												Globals.ThreadActive = true;
-												Globals.ThreadAborted = false;
-												AppManager.Instance.KillAutoFM();
-												if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
-													MainController.Instance.ActiveDecorator.Library.PrepareForIPadSynchronize();
-												if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
-													LibraryManager.Instance.SynchronizeLibraryForIpad(MainController.Instance.ActiveDecorator.Library);
-												AppManager.Instance.RunAutoFM();
-											});
+				{
+					Globals.ThreadActive = true;
+					Globals.ThreadAborted = false;
+					if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
+						LibraryManager.Instance.Synchronize(MainController.Instance.ActiveDecorator.Library, true);
+				});
 				form.Show();
-				FormWindowState savedState = FormMain.Instance.WindowState;
+				var savedState = FormMain.Instance.WindowState;
 				if (MainController.Instance.ActiveDecorator.Library.MinimizeOnSync)
 					FormMain.Instance.WindowState = FormWindowState.Minimized;
 				thread.Start();

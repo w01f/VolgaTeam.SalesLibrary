@@ -8,7 +8,7 @@ namespace FileManager.ToolClasses
 {
 	public static class SyncLockHelper
 	{
-		public static bool IsSyncLocked(this Library library)
+		public static bool IsSyncLocked(this Library library, bool silent)
 		{
 			var uncompletedTags = 0;
 			if (SettingsManager.Instance.SyncLockByUntaggedLinks)
@@ -22,14 +22,14 @@ namespace FileManager.ToolClasses
 				0;
 
 			var inactiveLinks = 0;
-			if (SettingsManager.Instance.SyncLockByUnconvertedVideo)
+			if (SettingsManager.Instance.SyncLockByInactiveLinks)
 			{
 				library.ProcessDeadLinks();
 				inactiveLinks = library.Pages.SelectMany(p => p.Folders.SelectMany(f => f.Files)).Count(l => l.IsDead);
 			}
 
 			var locked = uncompletedTags > 0 || unconvertedVideos > 0 || inactiveLinks > 0;
-			if (locked)
+			if (locked && !silent)
 			{
 				using (var form = new FormSyncLock(uncompletedTags, inactiveLinks, unconvertedVideos))
 				{

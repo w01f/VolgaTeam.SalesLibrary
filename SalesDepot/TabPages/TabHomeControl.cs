@@ -556,7 +556,7 @@ namespace SalesDepot.TabPages
 					if (form.ShowDialog() == DialogResult.OK)
 					{
 						string compressedFilesPath = Path.Combine(SettingsManager.Instance.TempPath, form.FileName + ".zip");
-						Utils.CompressFiles(emailFiles.ToArray(), compressedFilesPath);
+						Utils.CompressFiles(emailFiles, compressedFilesPath);
 						emailFiles.Clear();
 						emailFiles.Add(compressedFilesPath);
 					}

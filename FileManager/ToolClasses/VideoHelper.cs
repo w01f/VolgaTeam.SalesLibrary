@@ -8,7 +8,7 @@ using SalesDepot.CoreObjects.ToolClasses;
 
 namespace FileManager.ToolClasses
 {
-	internal class VideoHelper
+	public class VideoHelper
 	{
 		private static VideoHelper _instance;
 

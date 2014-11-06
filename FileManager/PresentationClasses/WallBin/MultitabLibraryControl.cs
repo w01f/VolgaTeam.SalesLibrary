@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using DevExpress.XtraTab;
+using DevExpress.XtraTab.ViewInfo;
 using FileManager.Controllers;
 using FileManager.PresentationClasses.WallBin.Decorators;
 
@@ -12,6 +14,7 @@ namespace FileManager.PresentationClasses.WallBin
 	public partial class MultitabLibraryControl : UserControl
 	{
 		private readonly List<PageDecorator> _pages = new List<PageDecorator>();
+		private XtraTabHitInfo _menuHitInfo;
 
 		public MultitabLibraryControl()
 		{
@@ -45,6 +48,54 @@ namespace FileManager.PresentationClasses.WallBin
 				if (pageDecorator != null)
 					MainController.Instance.WallbinController.SelectPage(pageDecorator.Page);
 			}
+		}
+
+		private void xtraTabControl_MouseDown(object sender, MouseEventArgs e)
+		{
+			if (e.Button != MouseButtons.Right) return;
+			_menuHitInfo = xtraTabControl.CalcHitInfo(new Point(e.X, e.Y));
+			if (_menuHitInfo.HitTest != XtraTabHitTest.PageHeader) return;
+			contextMenuStripPageProperties.Show((Control)sender, e.Location);
+		}
+
+		private void toolStripMenuItemDeleteLinks_Click(object sender, System.EventArgs e)
+		{
+			var selectedPage = _menuHitInfo.Page.Tag as PageDecorator;
+			if(selectedPage == null) return;
+			if (AppManager.Instance.ShowQuestion("Are You sure You want to remove links?") != DialogResult.Yes) return;
+			selectedPage.DeleteLinks();
+		}
+
+		private void toolStripMenuItemDeleteSecurity_Click(object sender, System.EventArgs e)
+		{
+			var selectedPage = _menuHitInfo.Page.Tag as PageDecorator;
+			if (selectedPage == null) return;
+			if (AppManager.Instance.ShowQuestion("Are You sure You want to delete security settings?") != DialogResult.Yes) return;
+			selectedPage.DeleteSecurity();
+		}
+
+		private void toolStripMenuItemDeleteTags_Click(object sender, System.EventArgs e)
+		{
+			var selectedPage = _menuHitInfo.Page.Tag as PageDecorator;
+			if (selectedPage == null) return;
+			if (AppManager.Instance.ShowQuestion("Are You sure You want to wipe tags?") != DialogResult.Yes) return;
+			selectedPage.DeleteTags();
+		}
+
+		private void toolStripMenuItemDeleteWidgets_Click(object sender, System.EventArgs e)
+		{
+			var selectedPage = _menuHitInfo.Page.Tag as PageDecorator;
+			if (selectedPage == null) return;
+			if (AppManager.Instance.ShowQuestion("Are You sure You want to remove widgets?") != DialogResult.Yes) return;
+			selectedPage.DeleteWidgets();
+		}
+
+		private void toolStripMenuItemDeleteBanners_Click(object sender, System.EventArgs e)
+		{
+			var selectedPage = _menuHitInfo.Page.Tag as PageDecorator;
+			if (selectedPage == null) return;
+			if (AppManager.Instance.ShowQuestion("Are You sure You want to remove banners?") != DialogResult.Yes) return;
+			selectedPage.DeleteBanners();
 		}
 	}
 }

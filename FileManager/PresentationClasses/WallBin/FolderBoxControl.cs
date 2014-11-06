@@ -980,15 +980,7 @@ namespace FileManager.PresentationClasses.WallBin
 		{
 			var file = targetRow.Tag as LibraryLink;
 			if (file != null)
-			{
-				if (file.Type == FileTypes.BuggyPresentation || file.Type == FileTypes.FriendlyPresentation || file.Type == FileTypes.Presentation)
-				{
-					if (file.PreviewContainer == null)
-						file.PreviewContainer = new PresentationPreviewContainer(file);
-					file.PreviewContainer.ClearContent();
-				}
-				_folder.Files.Remove(file);
-			}
+				file.RemoveFromCollection();
 			grFiles.Rows.Remove(targetRow);
 		}
 

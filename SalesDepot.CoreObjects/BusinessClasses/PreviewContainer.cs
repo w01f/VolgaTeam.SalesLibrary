@@ -74,7 +74,22 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		public IPreviewStorage Parent { get; private set; }
 		public string Identifier { get; private set; }
 		public string ContainerPath { get; private set; }
-		public bool GenerateImages { get; set; }
+
+		private bool _generatePreviewImages;
+		public bool GenerateImages
+		{
+			get
+			{
+				return _generatePreviewImages &&
+				  (Type == FileTypes.BuggyPresentation ||
+				  Type == FileTypes.FriendlyPresentation ||
+				  Type == FileTypes.Presentation ||
+				  Type == FileTypes.Word ||
+				  Type == FileTypes.PDF ||
+				  ((Type == FileTypes.Other && new[] { ".ppt", ".pptx", ".doc", ".docx", ".pdf" }.Contains(Extension.ToLower()))));
+			}
+			set { _generatePreviewImages = value; }
+		}
 		public bool GenerateText { get; set; }
 		public FileTypes Type { get; set; }
 
