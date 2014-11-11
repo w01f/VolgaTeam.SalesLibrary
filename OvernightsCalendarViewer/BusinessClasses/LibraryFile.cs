@@ -10,22 +10,12 @@ namespace OvernightsCalendarViewer.BusinessClasses
 {
 	public class LibraryLink : ILibraryLink
 	{
-		private string _assignedUsers;
-		private string _deniedUsers;
-		private bool _isForbidden;
-		private bool _isRestricted;
-		private bool _noShare;
 		private bool _linkAvailabel;
 		private bool _linkAvailabilityChecked;
 
 		protected string _linkLocalPath = string.Empty;
 		private string _linkRemotePath = string.Empty;
-		private string _note = string.Empty;
 		private Image _widget;
-		private bool _generatePreviewImages;
-		private bool _generateContentText;
-		private bool _forcePreview;
-		private bool _isUrl365;
 
 		public LibraryLink(LibraryFolder parent)
 		{
@@ -36,14 +26,12 @@ namespace OvernightsCalendarViewer.BusinessClasses
 			RelativePath = string.Empty;
 			Type = FileTypes.Other;
 			Order = 0;
-			IsBold = false;
 			IsDead = false;
 			CriteriaOverlap = string.Empty;
+			ExtendedProperties = new LinkExtendedProperties(this);
 			SearchTags = new LibraryFileSearchTags();
 			ExpirationDateOptions = new ExpirationDateOptions();
 			SuperFilters = new List<SuperFilter>();
-			_generatePreviewImages = true;
-			_generateContentText = true;
 		}
 
 		public string LocalPath
@@ -85,13 +73,13 @@ namespace OvernightsCalendarViewer.BusinessClasses
 		public string RelativePath { get; set; }
 		public FileTypes Type { get; set; }
 		public int Order { get; set; }
-		public bool IsBold { get; set; }
 		public bool IsDead { get; set; }
 		public bool EnableWidget { get; set; }
 		public string CriteriaOverlap { get; set; }
 		public DateTime AddDate { get; set; }
 		public DateTime LastChanged { get; set; }
-
+		
+		public LinkExtendedProperties ExtendedProperties { get; set; }
 		public LibraryFileSearchTags SearchTags { get; set; }
 		public SearchGroup CustomKeywords { get; protected set; }
 		public List<SuperFilter> SuperFilters { get; protected set; }
@@ -142,7 +130,7 @@ namespace OvernightsCalendarViewer.BusinessClasses
 					else
 						return Name;
 				}
-				else if (ExpirationDateOptions.EnableExpirationDate && ExpirationDateOptions.LabelLinkWhenExpired && IsExpired)
+				else if (ExpirationDateOptions.EnableExpirationDate && ExpirationDateOptions.LabelLinkWhenExpired && ExpirationDateOptions.IsExpired)
 					return "EXPIRED! " + Name;
 				else
 					return Name;
@@ -197,42 +185,6 @@ namespace OvernightsCalendarViewer.BusinessClasses
 					default:
 						return string.Empty;
 				}
-			}
-		}
-
-		public string Note
-		{
-			get
-			{
-				if (IsDead && Parent.Parent.Parent.EnableInactiveLinks && (Parent.Parent.Parent.InactiveLinksBoldWarning || Parent.Parent.Parent.ReplaceInactiveLinksWithLineBreak))
-					return string.Empty;
-				else
-					return _note;
-			}
-			set { _note = value; }
-		}
-
-		public bool DisplayAsBold
-		{
-			get
-			{
-				if (IsDead && Parent.Parent.Parent.EnableInactiveLinks && Parent.Parent.Parent.InactiveLinksBoldWarning)
-					return true;
-				else if (ExpirationDateOptions.EnableExpirationDate && IsExpired && ExpirationDateOptions.LabelLinkWhenExpired)
-					return true;
-				else
-					return IsBold;
-			}
-		}
-
-		public bool IsExpired
-		{
-			get
-			{
-				if (ExpirationDateOptions.EnableExpirationDate && ExpirationDateOptions.ExpirationDate != DateTime.MinValue)
-					return ((long)ExpirationDateOptions.ExpirationDate.Subtract(DateTime.Now).TotalMilliseconds) < 0;
-				else
-					return false;
 			}
 		}
 
@@ -309,142 +261,20 @@ namespace OvernightsCalendarViewer.BusinessClasses
 			}
 		}
 
-		public bool IsForbidden
-		{
-			get { return _isForbidden; }
-			set
-			{
-				if (_isForbidden != value)
-					LastChanged = DateTime.Now;
-				_isForbidden = value;
-			}
-		}
-
-		public bool IsRestricted
-		{
-			get { return _isRestricted; }
-			set
-			{
-				if (_isRestricted != value)
-					LastChanged = DateTime.Now;
-				_isRestricted = value;
-			}
-		}
-
-		public bool NoShare
-		{
-			get { return _noShare; }
-			set
-			{
-				if (_noShare != value)
-					LastChanged = DateTime.Now;
-				_noShare = value;
-			}
-		}
-
-		public string AssignedUsers
-		{
-			get { return _assignedUsers; }
-			set
-			{
-				if (_assignedUsers != value)
-					LastChanged = DateTime.Now;
-				_assignedUsers = value;
-			}
-		}
-
-		public string DeniedUsers
-		{
-			get { return _deniedUsers; }
-			set
-			{
-				if (_deniedUsers != value)
-					LastChanged = DateTime.Now;
-				_deniedUsers = value;
-			}
-		}
-
-		public bool GeneratePreviewImages
-		{
-			get { return _generatePreviewImages; }
-			set
-			{
-				if (_generatePreviewImages != value)
-					LastChanged = DateTime.Now;
-				_generatePreviewImages = value;
-			}
-		}
-
-		public bool GenerateContentText
-		{
-			get { return _generateContentText; }
-			set
-			{
-				if (_generateContentText != value)
-					LastChanged = DateTime.Now;
-				_generateContentText = value;
-			}
-		}
-
-		public bool ForcePreview
-		{
-			get { return _forcePreview; }
-			set
-			{
-				if (_forcePreview != value)
-					LastChanged = DateTime.Now;
-				_forcePreview = value;
-			}
-		}
-
-		public bool IsUrl365
-		{
-			get { return _isUrl365; }
-			set
-			{
-				if (_isUrl365 != value)
-					LastChanged = DateTime.Now;
-				_isUrl365 = value;
-			}
-		}
-
 		public virtual ILibraryLink Clone(LibraryFolder parent)
 		{
-			var file = new LibraryLink(parent);
-			file.OriginalPath = _linkLocalPath;
-			file.Name = Name;
-			file.Note = Note;
-			file.Order = Order;
-			file.IsBold = IsBold;
-			file.EnableWidget = EnableWidget;
-			file.Widget = Widget;
-			file.RootId = RootId;
-			file.RelativePath = RelativePath;
-			file.Type = Type;
-			file.AddDate = AddDate;
-			file.IsForbidden = IsForbidden;
-			file.IsRestricted = IsRestricted;
-			file.NoShare = NoShare;
-			file.GeneratePreviewImages = GeneratePreviewImages;
-			file.GenerateContentText = GenerateContentText;
-			file.ForcePreview = ForcePreview;
-			file.IsUrl365 = IsUrl365;
-			file.SearchTags = SearchTags;
-			file.CustomKeywords = CustomKeywords;
-			file.ExpirationDateOptions = ExpirationDateOptions;
-			file.PresentationProperties = PresentationProperties;
-			file.LineBreakProperties = LineBreakProperties.Clone(file);
-			file.BannerProperties = BannerProperties.Clone(file);
-			file.SuperFilters.AddRange(SuperFilters.Select(sf => new SuperFilter() { Name = sf.Name }));
-			return file;
+			throw new NotImplementedException();
 		}
 
 		public string Serialize()
 		{
-			return String.Empty;
+			throw new NotImplementedException();
 		}
 
-		public virtual void Deserialize(XmlNode node) { }
+		public virtual void Deserialize(XmlNode node)
+		{
+			throw new NotImplementedException();
+		}
 		#endregion
 	}
 }

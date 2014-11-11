@@ -265,7 +265,7 @@ namespace SalesDepot.ToolForms.WallBin
 
 		private void barLargeButtonItemHelp_ItemClick(object sender, ItemClickEventArgs e)
 		{
-			HelpManager.Instance.OpenHelpLink("qv");
+			AppManager.Instance.HelpManager.OpenHelpLink("qv");
 		}
 
 		private void barLargeButtonItemExit_ItemClick(object sender, ItemClickEventArgs e)

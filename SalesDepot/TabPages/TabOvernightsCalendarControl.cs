@@ -64,7 +64,7 @@ namespace SalesDepot.TabPages
 
 		public void buttonItemHelp_Click(object sender, EventArgs e)
 		{
-			HelpManager.Instance.OpenHelpLink("overnights");
+			AppManager.Instance.HelpManager.OpenHelpLink("overnights");
 		}
 	}
 }

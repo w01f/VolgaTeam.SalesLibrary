@@ -17,7 +17,6 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		FileTypes Type { get; set; }
 		string Format { get; }
 		int Order { get; set; }
-		bool IsBold { get; set; }
 		bool IsDead { get; set; }
 		DateTime AddDate { get; set; }
 		bool EnableWidget { get; set; }
@@ -26,20 +25,8 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		string NameWithExtension { get; }
 		string NameWithoutExtesion { get; }
 		string Extension { get; }
-		string Note { get; set; }
-		bool DisplayAsBold { get; }
-		bool IsExpired { get; }
-		bool IsForbidden { get; set; }
-		bool IsRestricted { get; set; }
-		bool NoShare { get; set; }
-		bool GeneratePreviewImages { get; set; }
-		bool GenerateContentText { get; set; }
-		bool ForcePreview { get; set; }
-		bool IsUrl365 { get; set; }
-		string AssignedUsers { get; set; }
-		string DeniedUsers { get; set; }
 		Image Widget { get; set; }
-
+		LinkExtendedProperties ExtendedProperties{ get; }
 		LibraryFileSearchTags SearchTags { get; set; }
 		SearchGroup CustomKeywords { get; }
 		List<SuperFilter> SuperFilters { get; }

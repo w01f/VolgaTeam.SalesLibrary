@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using ProgramManager.CoreObjects;
 using SalesDepot.CommonGUI.Floater;
 using SalesDepot.ConfigurationClasses;
+using SalesDepot.CoreObjects.BusinessClasses;
 using SalesDepot.CoreObjects.InteropClasses;
 using SalesDepot.CoreObjects.ToolClasses;
 using SalesDepot.ToolClasses;
@@ -31,11 +32,13 @@ namespace SalesDepot
 			TempFolder = new DirectoryInfo(SettingsManager.Instance.TempPath);
 			Log = new ApplicationLog(SettingsManager.Instance.LogFilePath);
 			ActivityManager = new ActivityManager();
+			HelpManager = new HelpManager(String.Format(@"{0}\newlocaldirect.com\app\HelpUrls\SalesLibraryHelp.xml", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles)));
 		}
 
 		public ApplicationLog Log { get; private set; }
 		public DirectoryInfo TempFolder { get; set; }
 		public ActivityManager ActivityManager { get; private set; }
+		public HelpManager HelpManager { get; private set; }
 
 		public static AppManager Instance
 		{

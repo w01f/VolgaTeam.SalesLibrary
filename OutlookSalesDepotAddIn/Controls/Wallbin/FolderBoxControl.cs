@@ -210,6 +210,8 @@ namespace OutlookSalesDepotAddIn.Controls.Wallbin
 					var toolTipText = new List<string>();
 					if (file.Type != FileTypes.LineBreak)
 					{
+						if (!String.IsNullOrEmpty(file.ExtendedProperties.HoverNote))
+							toolTipText.Add(file.ExtendedProperties.HoverNote);
 						toolTipText.Add(file.NameWithExtension);
 						toolTipText.Add("Added: " + file.AddDate.ToString("M/dd/yy h:mm:ss tt"));
 						if (file.ExpirationDateOptions.EnableExpirationDate && file.ExpirationDateOptions.ExpirationDate != DateTime.MinValue)
@@ -295,10 +297,10 @@ namespace OutlookSalesDepotAddIn.Controls.Wallbin
 						_richTextControl.Height = textHeight;
 						_richTextControl.Width = textWidth;
 
-						if (!string.IsNullOrEmpty(file.Note))
+						if (!string.IsNullOrEmpty(file.ExtendedProperties.Note))
 						{
 							_richTextControl.SelectionStart = file.DisplayName.Length;
-							_richTextControl.SelectionLength = file.Note.Length;
+							_richTextControl.SelectionLength = file.ExtendedProperties.Note.Length;
 							_richTextControl.SelectionFont = _noteFont;
 						}
 						_richTextControl.BackColor = grFiles.DefaultCellStyle.BackColor;
@@ -423,7 +425,7 @@ namespace OutlookSalesDepotAddIn.Controls.Wallbin
 					text = file.BannerProperties.Text;
 			}
 			else
-				text = file.DisplayName + file.Note;
+				text = file.DisplayName + file.ExtendedProperties.Note;
 			#endregion
 
 			#region Font
@@ -435,12 +437,17 @@ namespace OutlookSalesDepotAddIn.Controls.Wallbin
 			}
 			else if (file.Type == FileTypes.LineBreak)
 			{
-				font = file.DisplayAsBold ? file.LineBreakProperties.BoldFont : file.LineBreakProperties.Font;
-				fontForSizeCalculation = file.LineBreakProperties.BoldFont;
+				font = file.LineBreakProperties.Font;
+				fontForSizeCalculation = file.LineBreakProperties.Font;
+			}
+			else if (file.ExtendedProperties.IsSpecialFormat)
+			{
+				font = file.ExtendedProperties.Font ?? _textFont;
+				fontForSizeCalculation = file.ExtendedProperties.Font ?? _noteFont;
 			}
 			else
 			{
-				font = file.DisplayAsBold ? _noteFont : _textFont;
+				font = file.ExtendedProperties.DisplayAsBold ? _noteFont : _textFont;
 				fontForSizeCalculation = _noteFont;
 			}
 			#endregion
@@ -481,6 +488,8 @@ namespace OutlookSalesDepotAddIn.Controls.Wallbin
 				foreColor = file.BannerProperties.ForeColor;
 			else if (file.Type == FileTypes.LineBreak)
 				foreColor = file.LineBreakProperties.ForeColor;
+			else if (file.ExtendedProperties.IsSpecialFormat)
+				foreColor = file.ExtendedProperties.ForeColor;
 			else
 				foreColor = grFiles.DefaultCellStyle.ForeColor;
 			#endregion
@@ -601,12 +610,12 @@ namespace OutlookSalesDepotAddIn.Controls.Wallbin
 		private void UpdateDataSource()
 		{
 			grFiles.Rows.Clear();
-			foreach (LibraryLink libraryFile in _folder.Files.Where(f => !f.IsForbidden))
+			foreach (LibraryLink libraryFile in _folder.Files.Where(f => !f.ExtendedProperties.IsForbidden))
 			{
-				var row = grFiles.Rows[grFiles.Rows.Add(false, libraryFile.DisplayName + libraryFile.Note)];
+				var row = grFiles.Rows[grFiles.Rows.Add(false, libraryFile.DisplayName + libraryFile.ExtendedProperties.Note)];
 				row.Tag = libraryFile;
 			}
-			_containsWidgets = _folder.Files.Any(x => !x.IsForbidden && x.Widget != null);
+			_containsWidgets = _folder.Files.Any(x => !x.ExtendedProperties.IsForbidden && x.Widget != null);
 			if (Parent != null)
 				((ColumnPanel)Parent).ResizePanel();
 		}
@@ -620,7 +629,7 @@ namespace OutlookSalesDepotAddIn.Controls.Wallbin
 			_noteFont = new Font(_folder.WindowFont.FontFamily, 12, FontStyle.Bold | _folder.WindowFont.Style);
 			grFiles.DefaultCellStyle.Font = _noteFont;
 			colDisplayName.DefaultCellStyle.Font = _noteFont;
-			_containsWidgets = _folder.Files.Any(x => !x.IsForbidden && x.Widget != null);
+			_containsWidgets = _folder.Files.Any(x => !x.ExtendedProperties.IsForbidden && x.Widget != null);
 
 			SetHeaderSize();
 			SetGridSize();

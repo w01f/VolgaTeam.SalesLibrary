@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using FileManager.BusinessClasses;
 using FileManager.ConfigurationClasses;
 using FileManager.ToolForms.Settings;
+using SalesDepot.CoreObjects.BusinessClasses;
 using SalesDepot.CoreObjects.InteropClasses;
 
 namespace FileManager
@@ -14,7 +15,12 @@ namespace FileManager
 	{
 		private static readonly AppManager instance = new AppManager();
 
-		private AppManager() { }
+		public HelpManager HelpManager { get; private set; }
+
+		private AppManager()
+		{
+			HelpManager = new HelpManager(String.Format(@"{0}\newlocaldirect.com\app\HelpUrls\FileManagerHelp.xml", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles)));
+		}
 
 		public static AppManager Instance
 		{

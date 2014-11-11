@@ -7,10 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="311ca633-43c5-41dd-82ab-ba01ea556142" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/wallbin/records/LinkRecord.php" afterPath="$PROJECT_DIR$/protected/models/wallbin/records/LinkRecord.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/data/tables/tbl_link.sql" afterPath="$PROJECT_DIR$/protected/data/tables/tbl_link.sql" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MOVED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\protected\views\regular\site\successDialog.php" afterPath="$PROJECT_DIR$/protected/views/regular/auth/successDialog.php" />
     </list>
     <list id="6cb86652-0ea2-464a-b0b1-9bbef25a8567" name="C#" comment="">
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../FileManager/Resources/Help.png" />
@@ -1276,7 +1273,11 @@
       <created>1415710853426</created>
       <updated>1415710853426</updated>
     </task>
-    <option name="localTasksCounter" value="134" />
+    <task id="LOCAL-00134" summary="Web Sales Depot: Link settings refactoring&#10;&#10;">
+      <created>1415714247085</created>
+      <updated>1415714247086</updated>
+    </task>
+    <option name="localTasksCounter" value="135" />
     <servers />
   </component>
   <component name="TodoView" selected-index="3">
@@ -1374,7 +1375,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="Web Sales Depot: Remove Links columns from Links grid" />
     <MESSAGE value="Web Sales Depot: Small Tablets Shortcuts fixes" />
     <MESSAGE value="Web Sales Depot: iPad Force Preview fix" />
     <MESSAGE value="Web Sales Depot: iPad Force Preview fix&#10;" />
@@ -1399,7 +1399,8 @@
     <MESSAGE value="Web Sales Depot: PDF preview bar fix + Tab pages bug fix" />
     <MESSAGE value="Web Sales Depot: Login form position bug fix" />
     <MESSAGE value="Web Sales Depot: Link settings refactoring" />
-    <option name="LAST_COMMIT_MESSAGE" value="Web Sales Depot: Link settings refactoring" />
+    <MESSAGE value="Web Sales Depot: Link settings refactoring&#10;&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Web Sales Depot: Link settings refactoring&#10;&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

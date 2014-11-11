@@ -83,11 +83,11 @@ namespace FileManager.PresentationClasses.Tags
 			var pages = allPages ? MainController.Instance.ActiveDecorator.Library.Pages : new[] { activePage.Page }.ToList();
 			foreach (var link in pages.SelectMany(p => p.Folders.SelectMany(folder => folder.Files)))
 			{
-				link.IsRestricted = false;
-				link.NoShare = false;
-				link.IsForbidden = false;
-				link.AssignedUsers = null;
-				link.DeniedUsers = null;
+				link.ExtendedProperties.IsRestricted = false;
+				link.ExtendedProperties.NoShare = false;
+				link.ExtendedProperties.IsForbidden = false;
+				link.ExtendedProperties.AssignedUsers = null;
+				link.ExtendedProperties.DeniedUsers = null;
 			}
 			NeedToApply = true;
 		}

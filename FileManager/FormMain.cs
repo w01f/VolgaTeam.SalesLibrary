@@ -61,6 +61,11 @@ namespace FileManager
 			Close();
 		}
 
+		private void btHelp_Click(object sender, EventArgs e)
+		{
+			AppManager.Instance.HelpManager.OpenHelpLink("Ribbon");
+		}
+
 		private void ribbonControl_SelectedRibbonTabChanged(object sender, EventArgs e)
 		{
 			var key = TabPageEnum.Home;

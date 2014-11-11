@@ -187,7 +187,7 @@ namespace SalesDepot.TabPages
 
 		public void buttonItemHelp_Click(object sender, EventArgs e)
 		{
-			HelpManager.Instance.OpenHelpLink("programschedule");
+			AppManager.Instance.HelpManager.OpenHelpLink("programschedule");
 		}
 		#endregion
 

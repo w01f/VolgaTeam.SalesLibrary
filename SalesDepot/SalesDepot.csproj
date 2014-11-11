@@ -442,7 +442,6 @@
     <Compile Include="ToolForms\WallBin\FormPowerPointQuickView.Designer.cs">
       <DependentUpon>FormPowerPointQuickView.cs</DependentUpon>
     </Compile>
-    <Compile Include="BusinessClasses\HelpManager.cs" />
     <Compile Include="ToolForms\Settings\FormEmailSettings.cs">
       <SubType>Form</SubType>
     </Compile>

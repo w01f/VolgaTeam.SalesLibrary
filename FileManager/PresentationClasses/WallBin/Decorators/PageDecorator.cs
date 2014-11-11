@@ -511,11 +511,11 @@ namespace FileManager.PresentationClasses.WallBin.Decorators
 			var existedFiles = Page.Folders.SelectMany(f => f.Files).OfType<LibraryLink>().ToList();
 			foreach (var file in existedFiles)
 			{
-				file.IsRestricted = false;
-				file.NoShare = false;
-				file.IsForbidden = false;
-				file.AssignedUsers = null;
-				file.DeniedUsers = null;
+				file.ExtendedProperties.IsRestricted = false;
+				file.ExtendedProperties.NoShare = false;
+				file.ExtendedProperties.IsForbidden = false;
+				file.ExtendedProperties.AssignedUsers = null;
+				file.ExtendedProperties.DeniedUsers = null;
 			}
 			ResizePage();
 			Parent.StateChanged = true;

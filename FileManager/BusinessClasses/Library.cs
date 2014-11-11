@@ -186,10 +186,10 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 					{
 						foreach (LibraryLink file in folder.Files)
 						{
-							if (file.IsForbidden ||
-								!(!file.IsRestricted ||
-									((!String.IsNullOrEmpty(file.AssignedUsers) ||
-									!String.IsNullOrEmpty(file.DeniedUsers))))) continue;
+							if (file.ExtendedProperties.IsForbidden ||
+								!(!file.ExtendedProperties.IsRestricted ||
+									((!String.IsNullOrEmpty(file.ExtendedProperties.AssignedUsers) ||
+									!String.IsNullOrEmpty(file.ExtendedProperties.DeniedUsers))))) continue;
 							if (file is LibraryFolderLink)
 							{
 								alive = ((LibraryFolderLink)file).IsPreviewContainerAlive(previewContainer);
@@ -199,8 +199,8 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 							else
 							{
 								alive = file.OriginalPath.ToLower().Equals(previewContainer.OriginalPath.ToLower());
-								generatePreviewImages |= alive && file.GeneratePreviewImages;
-								generateContentText |= alive && file.GenerateContentText;
+								generatePreviewImages |= alive && file.ExtendedProperties.GeneratePreviewImages;
+								generateContentText |= alive && file.ExtendedProperties.GenerateContentText;
 							}
 							if (alive) break;
 						}
@@ -552,7 +552,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		{
 			ExpiredLinks.Clear();
 			foreach (var folder in Pages.SelectMany(page => page.Folders))
-				ExpiredLinks.AddRange(folder.Files.Where(x => x.IsExpired));
+				ExpiredLinks.AddRange(folder.Files.Where(x => x.ExpirationDateOptions.IsExpired));
 		}
 
 		public void ProcessPresentationProperties()

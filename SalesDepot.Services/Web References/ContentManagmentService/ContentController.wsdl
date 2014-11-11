@@ -111,10 +111,9 @@
           <xsd:element name="fileDate" type="xsd:string" />
           <xsd:element name="fileSize" type="xsd:int" />
           <xsd:element name="originalFormat" type="xsd:string" />
-          <xsd:element name="note" type="xsd:string" />
-          <xsd:element name="isBold" type="xsd:boolean" />
           <xsd:element name="order" type="xsd:int" />
           <xsd:element name="type" type="xsd:int" />
+          <xsd:element name="extendedProperties" type="tns:LinkSettings" />
           <xsd:element name="lineBreakProperties" type="tns:LineBreak" />
           <xsd:element name="enableWidget" type="xsd:boolean" />
           <xsd:element name="widget" type="xsd:string" />
@@ -126,12 +125,22 @@
           <xsd:element name="dateAdd" type="xsd:string" />
           <xsd:element name="dateModify" type="xsd:string" />
           <xsd:element name="contentPath" type="xsd:string" />
+          <xsd:element name="isDead" type="xsd:boolean" />
+          <xsd:element name="isPreviewNotReady" type="xsd:boolean" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="LinkSettings">
+        <xsd:all>
+          <xsd:element name="note" type="xsd:string" />
+          <xsd:element name="hoverNote" type="xsd:string" />
+          <xsd:element name="isBold" type="xsd:boolean" />
+          <xsd:element name="isSpecialFormat" type="xsd:boolean" />
+          <xsd:element name="font" type="tns:Font" />
+          <xsd:element name="foreColor" type="xsd:string" />
           <xsd:element name="isRestricted" type="xsd:boolean" />
           <xsd:element name="noShare" type="xsd:boolean" />
           <xsd:element name="assignedUsers" type="xsd:string" />
           <xsd:element name="deniedUsers" type="xsd:string" />
-          <xsd:element name="isDead" type="xsd:boolean" />
-          <xsd:element name="isPreviewNotReady" type="xsd:boolean" />
           <xsd:element name="forcePreview" type="xsd:boolean" />
         </xsd:all>
       </xsd:complexType>

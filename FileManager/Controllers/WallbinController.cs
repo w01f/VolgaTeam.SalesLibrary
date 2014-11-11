@@ -473,10 +473,12 @@ namespace FileManager.Controllers
 		private void btSync_Click(object sender, EventArgs e)
 		{
 			if (MainController.Instance.ActiveDecorator == null) return;
-			MainController.Instance.ActiveDecorator.Save();
-			if (MainController.Instance.ActiveDecorator.Library.IsSyncLocked(false)) return;
 			FormMain.Instance.ribbonControl.Enabled = false;
 			_tabPage.Enabled = false;
+	
+			MainController.Instance.ActiveDecorator.Save();
+
+			if (MainController.Instance.ActiveDecorator.Library.IsSyncLocked(false)) return;
 			Application.DoEvents();
 
 			if (MainController.Instance.ActiveDecorator.Library.MinimizeOnSync)

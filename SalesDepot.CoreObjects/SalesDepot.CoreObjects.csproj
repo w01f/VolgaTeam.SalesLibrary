@@ -83,6 +83,7 @@
     <Compile Include="BusinessClasses\FileLink.cs" />
     <Compile Include="BusinessClasses\FolderLink.cs" />
     <Compile Include="BusinessClasses\GalleryManager.cs" />
+    <Compile Include="BusinessClasses\HelpManager.cs" />
     <Compile Include="BusinessClasses\ImageSource.cs" />
     <Compile Include="BusinessClasses\IPadManager.cs" />
     <Compile Include="BusinessClasses\ISyncObject.cs" />
@@ -91,6 +92,7 @@
     <Compile Include="BusinessClasses\LibraryFolder.cs" />
     <Compile Include="BusinessClasses\LibraryPage.cs" />
     <Compile Include="BusinessClasses\LineBreak.cs" />
+    <Compile Include="BusinessClasses\LinkExtendedProperties.cs" />
     <Compile Include="BusinessClasses\OvernightsCalendarObjects.cs" />
     <Compile Include="BusinessClasses\PresentationProperties.cs" />
     <Compile Include="BusinessClasses\PreviewContainer.cs" />

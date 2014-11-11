@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Drawing;
-using System.IO;
 using System.Text;
 using System.Xml;
 
@@ -8,128 +7,93 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 {
 	public class LineBreakProperties
 	{
+		private bool _enableBanner;
+		private Font _font;
+		private Color _foreColor = Color.Black;
 		private DateTime _lastChanged = DateTime.Now;
+		private string _note = string.Empty;
+
+		public LineBreakProperties(ILibraryLink parent)
+		{
+			Parent = parent;
+			Identifier = Guid.NewGuid();
+			Font = new Font(parent.Parent.WindowFont, parent.Parent.WindowFont.Style);
+		}
 
 		public ILibraryLink Parent { get; private set; }
 		public Guid Identifier { get; set; }
-		private Color _foreColor = Color.Black;
-		private Font _font = new Font("Arial", 12, FontStyle.Regular, GraphicsUnit.Pixel);
-		private Font _boldFont = new Font("Arial", 12, FontStyle.Bold, GraphicsUnit.Pixel);
-		private bool _enableBanner = false;
-		private Image _banner = null;
-		private string _note = string.Empty;
 
 		public Color ForeColor
 		{
-			get
-			{
-				return _foreColor;
-			}
+			get { return _foreColor; }
 			set
 			{
 				if (_foreColor != value)
-					this.LastChanged = DateTime.Now;
+					LastChanged = DateTime.Now;
 				_foreColor = value;
 			}
 		}
 
 		public Font Font
 		{
-			get
-			{
-				return _font;
-			}
+			get { return _font; }
 			set
 			{
-				_font = value;
-			}
-		}
-
-		public Font BoldFont
-		{
-			get
-			{
-				return _boldFont;
-			}
-			set
-			{
-				_boldFont = value;
+				_font = value != null ?
+					new Font(value, value.Style | FontStyle.Bold) :
+					null;
 			}
 		}
 
 		public bool EnableBanner
 		{
-			get
-			{
-				return _enableBanner;
-			}
+			get { return _enableBanner; }
 			set
 			{
 				if (_enableBanner != value)
-					this.LastChanged = DateTime.Now;
+					LastChanged = DateTime.Now;
 				_enableBanner = value;
 			}
 		}
 
-		public Image Banner
-		{
-			get
-			{
-				return _banner;
-			}
-			set
-			{
-				_banner = value;
-			}
-		}
+		public Image Banner { get; set; }
 
 		public string Note
 		{
-			get
-			{
-				return _note;
-			}
+			get { return _note; }
 			set
 			{
 				if (_note != value)
-					this.LastChanged = DateTime.Now;
+					LastChanged = DateTime.Now;
 				_note = value;
 			}
 		}
 
 		public DateTime LastChanged
 		{
-			get
-			{
-				return _lastChanged;
-			}
+			get { return _lastChanged; }
 			set
 			{
 				_lastChanged = value;
-				this.Parent.LastChanged = _lastChanged;
+				Parent.LastChanged = _lastChanged;
 			}
-		}
-
-		public LineBreakProperties(ILibraryLink parent)
-		{
-			this.Parent = parent;
-			this.Identifier = Guid.NewGuid();
 		}
 
 		public LineBreakProperties Clone(ILibraryLink parent)
 		{
-			LineBreakProperties lineBreak = new LineBreakProperties(parent);
-			lineBreak.ForeColor = this.ForeColor;
-			lineBreak.Font = this.Font;
-			lineBreak.Note = this.Note;
+			var lineBreak = new LineBreakProperties(parent);
+			lineBreak.ForeColor = ForeColor;
+			if (Font != null)
+				lineBreak.Font = new Font(Font, Font.Style);
+			lineBreak.Note = Note;
 			return lineBreak;
 		}
 
 		public string Serialize()
 		{
-			FontConverter fontConverter = new FontConverter();
-			StringBuilder result = new StringBuilder();
-			result.AppendLine(@"<Identifier>" + this.Identifier.ToString() + @"</Identifier>");
+			var fontConverter = new FontConverter();
+			var result = new StringBuilder();
+			result.AppendLine(@"<Identifier>" + Identifier + @"</Identifier>");
 			result.AppendLine(@"<Font>" + fontConverter.ConvertToString(_font) + @"</Font>");
 			result.AppendLine(@"<ForeColor>" + _foreColor.ToArgb() + @"</ForeColor>");
 			result.AppendLine(@"<Note>" + _note.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</Note>");
@@ -138,48 +102,31 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
 		public void Deserialize(XmlNode node)
 		{
-			FontConverter converter = new FontConverter();
-			int tempInt = 0;
-			bool tempBool = false;
-			Guid tempGuid;
+			var converter = new FontConverter();
 			foreach (XmlNode childNode in node.ChildNodes)
 			{
 				switch (childNode.Name)
 				{
 					case "Identifier":
+						Guid tempGuid;
 						if (Guid.TryParse(childNode.InnerText, out tempGuid))
-							this.Identifier = tempGuid;
+							Identifier = tempGuid;
 						break;
 					case "Font":
 						try
 						{
-							_font = converter.ConvertFromString(childNode.InnerText) as Font;
-							_boldFont = new Font(_font.Name, _font.Size, FontStyle.Bold);
+							Font = (Font)converter.ConvertFromString(childNode.InnerText);
 						}
-						catch
-						{
-						}
+						catch { }
 						break;
 					case "ForeColor":
+						int tempInt;
 						if (int.TryParse(childNode.InnerText, out tempInt))
 							_foreColor = Color.FromArgb(tempInt);
 						break;
 					case "Note":
 						_note = childNode.InnerText;
 						break;
-
-					#region Compatibility with old versions
-					case "EnableBanner":
-						if (bool.TryParse(childNode.InnerText, out tempBool))
-							_enableBanner = tempBool;
-						break;
-					case "Banner":
-						if (string.IsNullOrEmpty(childNode.InnerText))
-							_banner = null;
-						else
-							_banner = new Bitmap(new MemoryStream(Convert.FromBase64String(childNode.InnerText)));
-						break;
-					#endregion
 				}
 			}
 		}

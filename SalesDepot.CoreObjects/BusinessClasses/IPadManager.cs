@@ -5,6 +5,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 using System.Xml;
 using Newtonsoft.Json;
 using SalesDepot.Services;
@@ -219,7 +220,9 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
 					#region Files
 					var links = new List<LibraryLink>();
-					foreach (var libraryFile in libraryFolder.Files.Where(x => x.Type != FileTypes.Network && !x.IsForbidden && (!x.IsRestricted || (x.IsRestricted && (!string.IsNullOrEmpty(x.AssignedUsers) || !string.IsNullOrEmpty(x.DeniedUsers))))))
+					foreach (var libraryFile in libraryFolder.Files.Where(link => link.Type != FileTypes.Network && 
+						!link.ExtendedProperties.IsForbidden &&
+						(!link.ExtendedProperties.IsRestricted || (link.ExtendedProperties.IsRestricted && (!string.IsNullOrEmpty(link.ExtendedProperties.AssignedUsers) || !string.IsNullOrEmpty(link.ExtendedProperties.DeniedUsers))))))
 					{
 						var link = new LibraryLink();
 						link.id = libraryFile.Identifier.ToString();
@@ -336,23 +339,43 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 				destinationLink.fileName = string.Empty;
 				destinationLink.fileExtension = string.Empty;
 			}
-			destinationLink.note = libraryFile.Note;
 			destinationLink.originalFormat = libraryFile.Format;
-			destinationLink.isBold = libraryFile.IsBold;
 			destinationLink.order = libraryFile.Order;
 			destinationLink.type = (int)libraryFile.Type;
 			destinationLink.enableWidget = libraryFile.EnableWidget;
 			destinationLink.widget = libraryFile.EnableWidget ? Convert.ToBase64String((byte[])imageConverter.ConvertTo(libraryFile.Widget, typeof(byte[]))) : null;
 			if (topLevelFile.CustomKeywords.Tags.Count > 0)
 				destinationLink.tags = string.Join(" ", topLevelFile.CustomKeywords.Tags.Select(x => x.Name).ToArray());
-			destinationLink.isRestricted = topLevelFile.IsRestricted;
-			destinationLink.noShare = topLevelFile.NoShare;
-			if (!string.IsNullOrEmpty(topLevelFile.AssignedUsers))
-				destinationLink.assignedUsers = topLevelFile.AssignedUsers;
-			if (!string.IsNullOrEmpty(topLevelFile.DeniedUsers))
-				destinationLink.deniedUsers = topLevelFile.DeniedUsers;
+			destinationLink.extendedProperties = new LinkSettings();
+			destinationLink.extendedProperties.note = libraryFile.ExtendedProperties.Note;
+			destinationLink.extendedProperties.hoverNote = libraryFile.ExtendedProperties.HoverNote;
+			destinationLink.extendedProperties.isBold = libraryFile.ExtendedProperties.IsBold;
+			destinationLink.extendedProperties.isSpecialFormat = libraryFile.ExtendedProperties.IsSpecialFormat;
+			if (libraryFile.ExtendedProperties.IsSpecialFormat)
+			{
+				destinationLink.extendedProperties.foreColor = ColorTranslator.ToHtml(libraryFile.ExtendedProperties.ForeColor);
+				if (libraryFile.ExtendedProperties.Font != null)
+				{
+					destinationLink.extendedProperties.font = new Font();
+					destinationLink.extendedProperties.font.name = libraryFile.ExtendedProperties.Font.Name;
+					destinationLink.extendedProperties.font.size = (int)Math.Round(libraryFile.ExtendedProperties.Font.Size, 0);
+					destinationLink.extendedProperties.font.isBold = libraryFile.ExtendedProperties.Font.Bold;
+					destinationLink.extendedProperties.font.isItalic = libraryFile.ExtendedProperties.Font.Italic;
+				}
+			}
+			else
+			{
+				destinationLink.extendedProperties.foreColor = ColorTranslator.ToHtml(Color.Black);
+				destinationLink.extendedProperties.font = null;
+			}
+			destinationLink.extendedProperties.isRestricted = topLevelFile.ExtendedProperties.IsRestricted;
+			destinationLink.extendedProperties.noShare = topLevelFile.ExtendedProperties.NoShare;
+			if (!string.IsNullOrEmpty(topLevelFile.ExtendedProperties.AssignedUsers))
+				destinationLink.extendedProperties.assignedUsers = topLevelFile.ExtendedProperties.AssignedUsers;
+			if (!string.IsNullOrEmpty(topLevelFile.ExtendedProperties.DeniedUsers))
+				destinationLink.extendedProperties.deniedUsers = topLevelFile.ExtendedProperties.DeniedUsers;
+			destinationLink.extendedProperties.forcePreview = libraryFile.ExtendedProperties.ForcePreview;
 			destinationLink.isDead = libraryFile.IsDead;
-			destinationLink.forcePreview = libraryFile.ForcePreview;
 			destinationLink.dateAdd = libraryFile.AddDate.ToString("MM/dd/yyyy hh:mm:ss tt");
 			destinationLink.dateModify = topLevelFile.LastChanged.ToString("MM/dd/yyyy hh:mm:ss tt");
 
@@ -368,7 +391,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 				{
 					destinationLink.previewId = previewContainer.Identifier;
 					destinationLink.isPreviewNotReady = !previewContainer.Ready;
-					if (libraryFile.GenerateContentText)
+					if (libraryFile.ExtendedProperties.GenerateContentText)
 					{
 						var txtLinks = previewContainer.GetPreviewLinks("txt");
 						if (txtLinks != null && txtLinks.Length > 0)
@@ -611,6 +634,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 					}
 					videoFiles.Add(videoFile);
 					i++;
+					Application.DoEvents();
 				}
 				return videoFiles.ToArray();
 			}

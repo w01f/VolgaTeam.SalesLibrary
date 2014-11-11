@@ -15,6 +15,7 @@ using FileManager.ToolForms.WallBin;
 using SalesDepot.CommonGUI.Forms;
 using SalesDepot.CoreObjects.BusinessClasses;
 using SalesDepot.CoreObjects.InteropClasses;
+using SalesDepot.CoreObjects.ToolClasses;
 
 namespace FileManager.PresentationClasses.WallBin
 {
@@ -60,7 +61,7 @@ namespace FileManager.PresentationClasses.WallBin
 				{
 					pbImage.Visible = true;
 					pbImage.Image = _folder.BannerProperties.Image;
-					if (_folder.BannerProperties.ShowText && !string.IsNullOrEmpty(_folder.BannerProperties.Text))
+					if (_folder.BannerProperties.ShowText && !String.IsNullOrEmpty(_folder.BannerProperties.Text))
 					{
 						labelControlText.Visible = true;
 						pbImage.Dock = DockStyle.Left;
@@ -225,29 +226,31 @@ namespace FileManager.PresentationClasses.WallBin
 			var file = grFiles.Rows[e.RowIndex].Tag as LibraryLink;
 			if (file == null) return;
 			var toolTipText = new List<string>();
-			if (!string.IsNullOrEmpty(file.OriginalPath))
+			if (!String.IsNullOrEmpty(file.OriginalPath))
 			{
+				if(!String.IsNullOrEmpty(file.ExtendedProperties.HoverNote))
+					toolTipText.Add(file.ExtendedProperties.HoverNote);
 				toolTipText.Add("Path: " + file.OriginalPath);
 				if (file.PresentationProperties != null)
-					toolTipText.Add(string.Format("Slide Size: {0} W = {1} H = {2}", new object[] { file.PresentationProperties.Orientation, file.PresentationProperties.Width.ToString("#.##"), file.PresentationProperties.Height.ToString("#.##") }));
+					toolTipText.Add(String.Format("Slide Size: {0} W = {1} H = {2}", new object[] { file.PresentationProperties.Orientation, file.PresentationProperties.Width.ToString("#.##"), file.PresentationProperties.Height.ToString("#.##") }));
 				toolTipText.Add("Added: " + file.AddDate.ToString("M/dd/yy h:mm:ss tt"));
 				if (file.ExpirationDateOptions.EnableExpirationDate && file.ExpirationDateOptions.ExpirationDate != DateTime.MinValue)
 					toolTipText.Add("Expires: " + file.ExpirationDateOptions.ExpirationDate.ToString("M/dd/yy h:mm:ss tt"));
 				else
 					toolTipText.Add("Expires: No Expiration Date");
-				if (!string.IsNullOrEmpty(file.SearchTags.AllTags))
+				if (!String.IsNullOrEmpty(file.SearchTags.AllTags))
 					toolTipText.Add("Category Tags: " + file.SearchTags.AllTags);
 				else
 					toolTipText.Add("No Category Tags Assigned");
-				if (!string.IsNullOrEmpty(file.CustomKeywords.AllTags))
+				if (!String.IsNullOrEmpty(file.CustomKeywords.AllTags))
 					toolTipText.Add("Keyword Tags: " + file.CustomKeywords.AllTags);
 			}
 			else if (file.Type == FileTypes.LineBreak)
 			{
-				if (!string.IsNullOrEmpty(file.LineBreakProperties.Note))
+				if (!String.IsNullOrEmpty(file.LineBreakProperties.Note))
 					toolTipText.Add(file.LineBreakProperties.Note);
 			}
-			grFiles.Rows[e.RowIndex].Cells[e.ColumnIndex].ToolTipText = string.Join(Environment.NewLine, toolTipText.ToArray());
+			grFiles.Rows[e.RowIndex].Cells[e.ColumnIndex].ToolTipText = String.Join(Environment.NewLine, toolTipText.ToArray());
 		}
 
 		private void grFiles_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
@@ -264,7 +267,7 @@ namespace FileManager.PresentationClasses.WallBin
 				int imageTop = 0;
 				int imageWidth = 0;
 				int imageHeight = 0;
-				string text = string.Empty;
+				string text = String.Empty;
 				int textLeft = 0;
 				int textTop = 0;
 				int textWidth = 0;
@@ -311,10 +314,10 @@ namespace FileManager.PresentationClasses.WallBin
 				_richTextControl.Height = textHeight;
 				_richTextControl.Width = textWidth;
 
-				if (!string.IsNullOrEmpty(file.Note))
+				if (!String.IsNullOrEmpty(file.ExtendedProperties.Note))
 				{
 					_richTextControl.SelectionStart = file.DisplayName.Length;
-					_richTextControl.SelectionLength = file.Note.Length;
+					_richTextControl.SelectionLength = file.ExtendedProperties.Note.Length;
 					_richTextControl.SelectionFont = _noteFont;
 				}
 
@@ -331,7 +334,7 @@ namespace FileManager.PresentationClasses.WallBin
 				#region Custom Draw
 				if (image != null)
 					e.Graphics.DrawImage(image, new Rectangle(e.CellBounds.X + imageLeft, e.CellBounds.Y + imageTop, imageWidth, imageHeight));
-				if (!string.IsNullOrEmpty(text))
+				if (!String.IsNullOrEmpty(text))
 					e.Graphics.DrawImage(RichTextBoxPrinter.Print(_richTextControl, textWidth, textHeight), new Rectangle(e.CellBounds.X + textLeft, e.CellBounds.Y + textTop, textWidth, textHeight));
 				#endregion
 			}
@@ -564,10 +567,10 @@ namespace FileManager.PresentationClasses.WallBin
 			}
 			else
 			{
-				file.Name = string.Empty;
+				file.Name = String.Empty;
 				Decorator.Parent.StateChanged = true;
 			}
-			grFiles.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = file.DisplayName + file.Note;
+			grFiles.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = file.DisplayName + file.ExtendedProperties.Note;
 			grFiles.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.Font = _displayCellFont;
 			SetGridSize();
 		}
@@ -631,14 +634,14 @@ namespace FileManager.PresentationClasses.WallBin
 					if (grFiles.SelectedRows.Count > 0)
 					{
 						int rowIndex = grFiles.SelectedRows[0].Index;
-						grFiles.Rows.Insert(rowIndex, file.DisplayName + file.Note);
+						grFiles.Rows.Insert(rowIndex, file.DisplayName + file.ExtendedProperties.Note);
 						DataGridViewRow row = grFiles.Rows[rowIndex];
 						row.Tag = file;
 						grFiles.ClearSelection();
 					}
 					else
 					{
-						DataGridViewRow row = grFiles.Rows[grFiles.Rows.Add(file.DisplayName + file.Note)];
+						DataGridViewRow row = grFiles.Rows[grFiles.Rows.Add(file.DisplayName + file.ExtendedProperties.Note)];
 						row.Tag = file;
 					}
 					UpdateAfterFolderChanged();
@@ -661,14 +664,14 @@ namespace FileManager.PresentationClasses.WallBin
 					if (grFiles.SelectedRows.Count > 0)
 					{
 						var rowIndex = grFiles.SelectedRows[0].Index;
-						grFiles.Rows.Insert(rowIndex, file.DisplayName + file.Note);
+						grFiles.Rows.Insert(rowIndex, file.DisplayName + file.ExtendedProperties.Note);
 						var row = grFiles.Rows[rowIndex];
 						row.Tag = file;
 						grFiles.ClearSelection();
 					}
 					else
 					{
-						var row = grFiles.Rows[grFiles.Rows.Add(file.DisplayName + file.Note)];
+						var row = grFiles.Rows[grFiles.Rows.Add(file.DisplayName + file.ExtendedProperties.Note)];
 						row.Tag = file;
 					}
 					UpdateAfterFolderChanged();
@@ -682,12 +685,10 @@ namespace FileManager.PresentationClasses.WallBin
 			_folder.Files.Add(file);
 			file.Type = FileTypes.LineBreak;
 			file.LineBreakProperties = new LineBreakProperties(file);
-			file.LineBreakProperties.Font = new Font(_textFont, FontStyle.Regular);
-			file.LineBreakProperties.BoldFont = new Font(_textFont, FontStyle.Bold);
-			file.IsBold = true;
+			file.LineBreakProperties.Font = new Font(_textFont, FontStyle.Bold);
 			file.InitBannerProperties();
 			int rowIndex = grFiles.SelectedRows.Count > 0 ? grFiles.SelectedRows[0].Index : 0;
-			grFiles.Rows.Insert(rowIndex, file.DisplayName + file.Note);
+			grFiles.Rows.Insert(rowIndex, file.DisplayName + file.ExtendedProperties.Note);
 			DataGridViewRow row = grFiles.Rows[rowIndex];
 			row.Tag = file;
 			grFiles.ClearSelection();
@@ -742,7 +743,7 @@ namespace FileManager.PresentationClasses.WallBin
 			var file = grFiles.SelectedRows[0].Tag as LibraryLink;
 			if (file == null) return;
 			if (_formLinkProperties == null) _formLinkProperties = new FormLinkProperties(file.Parent.Parent.Parent as Library);
-			var formWidth = 580;
+			var formWidth = 680;
 			var formHeight = 630;
 			switch (propertiesType)
 			{
@@ -772,15 +773,21 @@ namespace FileManager.PresentationClasses.WallBin
 			_formLinkProperties.Width = formWidth;
 			_formLinkProperties.Height = formHeight;
 			_formLinkProperties.IsLoading = true;
-			_formLinkProperties.CaptionName = string.IsNullOrEmpty(file.PropertiesName) && file.Type == FileTypes.LineBreak ? "Line Break" : file.PropertiesName;
-			_formLinkProperties.IsBold = file.IsBold;
+			_formLinkProperties.CaptionName = String.IsNullOrEmpty(file.PropertiesName) && file.Type == FileTypes.LineBreak ? "Line Break" : file.PropertiesName;
 			_formLinkProperties.EnableWidget = file.EnableWidget;
 			_formLinkProperties.Widget = file.EnableWidget ? file.Widget : null;
 			_formLinkProperties.BannerProperties = file.BannerProperties;
 			_formLinkProperties.IsLineBreak = file.Type == FileTypes.LineBreak;
 			if (file.Type != FileTypes.LineBreak)
 			{
-				_formLinkProperties.Note = file.Note;
+				_formLinkProperties.rbLinkRegularFormat.Checked = file.ExtendedProperties.IsRegularFormat;
+				_formLinkProperties.rbLinkBoldFormat.Checked = file.ExtendedProperties.IsBold;
+				_formLinkProperties.rbLinkSpecialFormat.Checked = file.ExtendedProperties.IsSpecialFormat;
+				_formLinkProperties.buttonEditLinkSpecialFont.EditValue = file.ExtendedProperties.Font != null ? Utils.FontToString(file.ExtendedProperties.Font) : null;
+				_formLinkProperties.buttonEditLinkSpecialFont.Tag = file.ExtendedProperties.Font;
+				_formLinkProperties.colorEditLinkSpecialColor.Color = file.ExtendedProperties.ForeColor;
+				_formLinkProperties.Note = file.ExtendedProperties.Note;
+				_formLinkProperties.textEditLinkHoverNote.EditValue = file.ExtendedProperties.HoverNote;
 				_formLinkProperties.AddDate = file.AddDate;
 				_formLinkProperties.ExpirationDateOptions = file.ExpirationDateOptions;
 				_formLinkProperties.SearchTags = file.SearchTags;
@@ -793,14 +800,20 @@ namespace FileManager.PresentationClasses.WallBin
 				_formLinkProperties.LineBreakProperties = file.LineBreakProperties;
 			}
 
-			_formLinkProperties.rbSecurityAllowed.Checked = !file.IsRestricted;
-			_formLinkProperties.rbSecurityDenied.Checked = file.IsRestricted && string.IsNullOrEmpty(file.AssignedUsers) && string.IsNullOrEmpty(file.DeniedUsers);
-			_formLinkProperties.rbSecurityWhiteList.Checked = file.IsRestricted && !string.IsNullOrEmpty(file.AssignedUsers);
-			_formLinkProperties.rbSecurityBlackList.Checked = file.IsRestricted && !string.IsNullOrEmpty(file.DeniedUsers);
-			_formLinkProperties.rbSecurityForbidden.Checked = file.IsForbidden;
-			_formLinkProperties.AssignedUsers = file.IsRestricted && !string.IsNullOrEmpty(file.AssignedUsers) ? file.AssignedUsers : null;
-			_formLinkProperties.DeniedUsers = file.IsRestricted && !string.IsNullOrEmpty(file.DeniedUsers) ? file.DeniedUsers : null;
-			_formLinkProperties.ckSecurityShareLink.Checked = !file.NoShare;
+			_formLinkProperties.rbSecurityAllowed.Checked = !file.ExtendedProperties.IsRestricted;
+			_formLinkProperties.rbSecurityDenied.Checked = file.ExtendedProperties.IsRestricted &&
+				String.IsNullOrEmpty(file.ExtendedProperties.AssignedUsers) &&
+				String.IsNullOrEmpty(file.ExtendedProperties.DeniedUsers);
+			_formLinkProperties.rbSecurityWhiteList.Checked = file.ExtendedProperties.IsRestricted &&
+				!String.IsNullOrEmpty(file.ExtendedProperties.AssignedUsers);
+			_formLinkProperties.rbSecurityBlackList.Checked = file.ExtendedProperties.IsRestricted &&
+				!String.IsNullOrEmpty(file.ExtendedProperties.DeniedUsers);
+			_formLinkProperties.rbSecurityForbidden.Checked = file.ExtendedProperties.IsForbidden;
+			_formLinkProperties.AssignedUsers = file.ExtendedProperties.IsRestricted &&
+				!String.IsNullOrEmpty(file.ExtendedProperties.AssignedUsers) ? file.ExtendedProperties.AssignedUsers : null;
+			_formLinkProperties.DeniedUsers = file.ExtendedProperties.IsRestricted &&
+				!String.IsNullOrEmpty(file.ExtendedProperties.DeniedUsers) ? file.ExtendedProperties.DeniedUsers : null;
+			_formLinkProperties.ckSecurityShareLink.Checked = !file.ExtendedProperties.NoShare;
 
 			if (file.Type == FileTypes.BuggyPresentation ||
 				file.Type == FileTypes.FriendlyPresentation ||
@@ -809,7 +822,7 @@ namespace FileManager.PresentationClasses.WallBin
 				file.Type == FileTypes.Word ||
 				(file.Type == FileTypes.Other && new[] { "ppt", "doc", "pdf" }.Contains(file.Format)))
 			{
-				_formLinkProperties.ckDoNotGeneratePreview.Checked = !file.GeneratePreviewImages;
+				_formLinkProperties.ckDoNotGeneratePreview.Checked = !file.ExtendedProperties.GeneratePreviewImages;
 				_formLinkProperties.ckDoNotGeneratePreview.Visible = true;
 			}
 			else
@@ -825,7 +838,7 @@ namespace FileManager.PresentationClasses.WallBin
 				file.Type == FileTypes.Word ||
 				(file.Type == FileTypes.Other && new[] { "ppt", "doc", "xls", "pdf" }.Contains(file.Format)))
 			{
-				_formLinkProperties.ckDoNotGenerateText.Checked = !file.GenerateContentText;
+				_formLinkProperties.ckDoNotGenerateText.Checked = !file.ExtendedProperties.GenerateContentText;
 				_formLinkProperties.ckDoNotGenerateText.Visible = true;
 			}
 			else
@@ -837,7 +850,7 @@ namespace FileManager.PresentationClasses.WallBin
 			if (file.Type == FileTypes.MediaPlayerVideo ||
 				file.Type == FileTypes.QuickTimeVideo)
 			{
-				_formLinkProperties.ckForcePreview.Checked = file.ForcePreview;
+				_formLinkProperties.ckForcePreview.Checked = file.ExtendedProperties.ForcePreview;
 				_formLinkProperties.ckForcePreview.Visible = true;
 			}
 			else
@@ -848,7 +861,7 @@ namespace FileManager.PresentationClasses.WallBin
 
 			if (file.Type == FileTypes.Url)
 			{
-				_formLinkProperties.ckIsUrl365.Checked = file.IsUrl365;
+				_formLinkProperties.ckIsUrl365.Checked = file.ExtendedProperties.IsUrl365;
 				_formLinkProperties.ckIsUrl365.Visible = true;
 			}
 			else
@@ -910,23 +923,35 @@ namespace FileManager.PresentationClasses.WallBin
 			file.EnableWidget = _formLinkProperties.EnableWidget;
 			file.BannerProperties = _formLinkProperties.BannerProperties;
 
-			file.IsRestricted = _formLinkProperties.rbSecurityDenied.Checked || _formLinkProperties.rbSecurityWhiteList.Checked || _formLinkProperties.rbSecurityBlackList.Checked;
-			file.IsForbidden = _formLinkProperties.rbSecurityForbidden.Checked;
-			file.NoShare = !_formLinkProperties.ckSecurityShareLink.Checked;
+			file.ExtendedProperties.IsRestricted = _formLinkProperties.rbSecurityDenied.Checked || _formLinkProperties.rbSecurityWhiteList.Checked || _formLinkProperties.rbSecurityBlackList.Checked;
+			file.ExtendedProperties.IsForbidden = _formLinkProperties.rbSecurityForbidden.Checked;
+			file.ExtendedProperties.NoShare = !_formLinkProperties.ckSecurityShareLink.Checked;
 			if (_formLinkProperties.rbSecurityWhiteList.Checked && !String.IsNullOrEmpty(_formLinkProperties.AssignedUsers))
-				file.AssignedUsers = _formLinkProperties.AssignedUsers;
+				file.ExtendedProperties.AssignedUsers = _formLinkProperties.AssignedUsers;
 			else
-				file.AssignedUsers = null;
+				file.ExtendedProperties.AssignedUsers = null;
 			if (_formLinkProperties.rbSecurityBlackList.Checked && !String.IsNullOrEmpty(_formLinkProperties.DeniedUsers))
-				file.DeniedUsers = _formLinkProperties.DeniedUsers;
+				file.ExtendedProperties.DeniedUsers = _formLinkProperties.DeniedUsers;
 			else
-				file.DeniedUsers = null;
+				file.ExtendedProperties.DeniedUsers = null;
 
 
 			if (file.Type != FileTypes.LineBreak)
 			{
-				file.IsBold = _formLinkProperties.IsBold;
-				file.Note = _formLinkProperties.Note;
+				file.ExtendedProperties.IsBold = _formLinkProperties.rbLinkBoldFormat.Checked;
+				file.ExtendedProperties.IsSpecialFormat = _formLinkProperties.rbLinkSpecialFormat.Checked;
+				if (file.ExtendedProperties.IsSpecialFormat)
+				{
+					file.ExtendedProperties.Font = _formLinkProperties.buttonEditLinkSpecialFont.Tag as Font;
+					file.ExtendedProperties.ForeColor = _formLinkProperties.colorEditLinkSpecialColor.Color;
+				}
+				else
+				{
+					file.ExtendedProperties.Font = null;
+					file.ExtendedProperties.ForeColor = Color.Black;
+				}
+				file.ExtendedProperties.Note = _formLinkProperties.Note;
+				file.ExtendedProperties.HoverNote = _formLinkProperties.textEditLinkHoverNote.EditValue as String ?? String.Empty;
 
 				file.ExpirationDateOptions = _formLinkProperties.ExpirationDateOptions;
 			}
@@ -937,17 +962,22 @@ namespace FileManager.PresentationClasses.WallBin
 
 			file.SearchTags = _formLinkProperties.SearchTags;
 			file.CustomKeywords.Tags.Clear();
-			file.CustomKeywords.Tags.AddRange(_formLinkProperties.Keywords.Where(x => !string.IsNullOrEmpty(x.Value)).Select(x => new SearchTag(file.CustomKeywords.Name) { Name = x.Value }));
+			file.CustomKeywords.Tags.AddRange(_formLinkProperties.Keywords.Where(x => !String.IsNullOrEmpty(x.Value)).Select(x => new SearchTag(file.CustomKeywords.Name) { Name = x.Value }));
 
 
-			file.GeneratePreviewImages = !_formLinkProperties.ckDoNotGeneratePreview.Checked;
-			file.GenerateContentText = !_formLinkProperties.ckDoNotGenerateText.Checked;
-			file.ForcePreview = _formLinkProperties.ckForcePreview.Checked;
-			file.IsUrl365 = _formLinkProperties.ckIsUrl365.Checked;
+			file.ExtendedProperties.GeneratePreviewImages = !_formLinkProperties.ckDoNotGeneratePreview.Checked;
+			file.ExtendedProperties.GenerateContentText = !_formLinkProperties.ckDoNotGenerateText.Checked;
+			file.ExtendedProperties.ForcePreview = _formLinkProperties.ckForcePreview.Checked;
+			file.ExtendedProperties.IsUrl365 = _formLinkProperties.ckIsUrl365.Checked;
 
-			grFiles.SelectedRows[0].Cells[0].Value = file.DisplayName + file.Note;
+			grFiles.SelectedRows[0].Cells[0].Value = file.DisplayName + file.ExtendedProperties.Note;
 
-			bool widgetColumnVisible = (from DataGridViewRow row in grFiles.Rows select row.Tag as LibraryLink).Any(x => x.Widget != null || (WallBinOptions.ShowCategoryTags && x.HasCategories) || (WallBinOptions.ShowSuperFilterTags && x.HasSuperFilters) || (WallBinOptions.ShowKeywordTags && x.HasKeywords) || (WallBinOptions.ShowSecurityTags && (x.IsRestricted || x.IsForbidden)));
+			bool widgetColumnVisible = (from DataGridViewRow row in grFiles.Rows select row.Tag as LibraryLink)
+				.Any(x => x.Widget != null ||
+					(WallBinOptions.ShowCategoryTags && x.HasCategories) ||
+					(WallBinOptions.ShowSuperFilterTags && x.HasSuperFilters) ||
+					(WallBinOptions.ShowKeywordTags && x.HasKeywords) ||
+					(WallBinOptions.ShowSecurityTags && (x.ExtendedProperties.IsRestricted || x.ExtendedProperties.IsForbidden)));
 			_containsWidgets = widgetColumnVisible;
 
 			UpdateAfterFolderChanged();
@@ -987,7 +1017,11 @@ namespace FileManager.PresentationClasses.WallBin
 		private void UpdateAfterFolderChanged()
 		{
 			_containFiles = grFiles.Rows.Count > 0;
-			bool widgetColumnVisible = (from DataGridViewRow row in grFiles.Rows select row.Tag as LibraryLink).Any(x => x.Widget != null || (WallBinOptions.ShowCategoryTags && x.HasCategories) || (WallBinOptions.ShowSuperFilterTags && x.HasSuperFilters) || (WallBinOptions.ShowKeywordTags && x.HasKeywords) || (WallBinOptions.ShowSecurityTags && (x.IsRestricted || x.IsForbidden)));
+			bool widgetColumnVisible = (from DataGridViewRow row in grFiles.Rows select row.Tag as LibraryLink)
+				.Any(x => x.Widget != null || (WallBinOptions.ShowCategoryTags && x.HasCategories) ||
+					(WallBinOptions.ShowSuperFilterTags && x.HasSuperFilters) ||
+					(WallBinOptions.ShowKeywordTags && x.HasKeywords) ||
+					(WallBinOptions.ShowSecurityTags && (x.ExtendedProperties.IsRestricted || x.ExtendedProperties.IsForbidden)));
 			_containsWidgets = widgetColumnVisible;
 			SetGridFont(SettingsManager.Instance.FontSize);
 			grFiles.Refresh();
@@ -1017,6 +1051,7 @@ namespace FileManager.PresentationClasses.WallBin
 					_folder.LastChanged = DateTime.Now;
 				file.Order = row.Index;
 				_folder.Files.Add(file);
+				Application.DoEvents();
 			}
 		}
 		#endregion
@@ -1084,13 +1119,13 @@ namespace FileManager.PresentationClasses.WallBin
 				image = Properties.Resources.TagsKeywordsWidget;
 			else if (WallBinOptions.ShowSecurityTags)
 			{
-				if (file.IsForbidden)
+				if (file.ExtendedProperties.IsForbidden)
 					image = Properties.Resources.TagsSecurityHiddenWidget;
-				else if (file.IsRestricted && String.IsNullOrEmpty(file.AssignedUsers) && String.IsNullOrEmpty(file.DeniedUsers))
+				else if (file.ExtendedProperties.IsRestricted && String.IsNullOrEmpty(file.ExtendedProperties.AssignedUsers) && String.IsNullOrEmpty(file.ExtendedProperties.DeniedUsers))
 					image = Properties.Resources.TagsSecurityLocalWidget;
-				else if (file.IsRestricted && !String.IsNullOrEmpty(file.AssignedUsers))
+				else if (file.ExtendedProperties.IsRestricted && !String.IsNullOrEmpty(file.ExtendedProperties.AssignedUsers))
 					image = Properties.Resources.TagsSecurityWhiteListWidget;
-				else if (file.IsRestricted && !String.IsNullOrEmpty(file.DeniedUsers))
+				else if (file.ExtendedProperties.IsRestricted && !String.IsNullOrEmpty(file.ExtendedProperties.DeniedUsers))
 					image = Properties.Resources.TagsSecurityBlackListWidget;
 			}
 			else if (file.Widget != null)
@@ -1152,14 +1187,14 @@ namespace FileManager.PresentationClasses.WallBin
 			#endregion
 
 			#region Text
-			text = string.Empty;
+			text = String.Empty;
 			if (file.BannerProperties.Enable)
 			{
-				if (file.BannerProperties.ShowText && !string.IsNullOrEmpty(file.BannerProperties.Text))
+				if (file.BannerProperties.ShowText && !String.IsNullOrEmpty(file.BannerProperties.Text))
 					text = file.BannerProperties.Text;
 			}
 			else
-				text = file.DisplayName + file.Note;
+				text = file.DisplayName + file.ExtendedProperties.Note;
 			#endregion
 
 			#region Font
@@ -1171,19 +1206,24 @@ namespace FileManager.PresentationClasses.WallBin
 			}
 			else if (file.Type == FileTypes.LineBreak)
 			{
-				font = file.DisplayAsBold ? file.LineBreakProperties.BoldFont : file.LineBreakProperties.Font;
-				fontForSizeCalculation = file.LineBreakProperties.BoldFont;
+				font = file.LineBreakProperties.Font;
+				fontForSizeCalculation = file.LineBreakProperties.Font;
+			}
+			else if (file.ExtendedProperties.IsSpecialFormat)
+			{
+				font = file.ExtendedProperties.Font ?? _textFont;
+				fontForSizeCalculation = file.ExtendedProperties.Font ?? _noteFont;
 			}
 			else
 			{
-				font = file.DisplayAsBold ? _noteFont : _textFont;
+				font = file.ExtendedProperties.DisplayAsBold ? _noteFont : _textFont;
 				fontForSizeCalculation = _noteFont;
 			}
 			#endregion
 
 			#region Text Size and Coordinates
 			SizeF textSize;
-			if (file.BannerProperties.Enable && file.BannerProperties.ShowText && !string.IsNullOrEmpty(file.BannerProperties.Text))
+			if (file.BannerProperties.Enable && file.BannerProperties.ShowText && !String.IsNullOrEmpty(file.BannerProperties.Text))
 				using (var g = labelControlText.CreateGraphics())
 					textSize = g.MeasureString(text, fontForSizeCalculation, Int32.MaxValue);
 			else
@@ -1217,6 +1257,8 @@ namespace FileManager.PresentationClasses.WallBin
 				foreColor = file.BannerProperties.ForeColor;
 			else if (file.Type == FileTypes.LineBreak)
 				foreColor = file.LineBreakProperties.ForeColor;
+			else if (file.ExtendedProperties.IsSpecialFormat)
+				foreColor = file.ExtendedProperties.ForeColor;
 			else
 				foreColor = grFiles.DefaultCellStyle.ForeColor;
 			#endregion
@@ -1247,7 +1289,7 @@ namespace FileManager.PresentationClasses.WallBin
 			if (_folder.BannerProperties.Enable && _folder.BannerProperties.Image != null)
 			{
 				pbImage.Width = _folder.BannerProperties.Image.Width;
-				if (_folder.BannerProperties.ShowText && !string.IsNullOrEmpty(_folder.BannerProperties.Text))
+				if (_folder.BannerProperties.ShowText && !String.IsNullOrEmpty(_folder.BannerProperties.Text))
 				{
 					using (Graphics g = labelControlText.CreateGraphics())
 						textHeight = (int)g.MeasureString(labelControlText.Text, labelControlText.Font, new Size(labelControlText.Width, Int32.MaxValue)).Height + 10;
@@ -1289,7 +1331,7 @@ namespace FileManager.PresentationClasses.WallBin
 					int imageTop = 0;
 					int imageWidth = 0;
 					int imageHeight = 0;
-					string text = string.Empty;
+					string text = String.Empty;
 					int textLeft = 0;
 					int textTop = 0;
 					int textWidth = 0;
@@ -1350,10 +1392,11 @@ namespace FileManager.PresentationClasses.WallBin
 				_containFiles = true;
 				foreach (LibraryLink libraryFile in _folder.Files)
 				{
-					DataGridViewRow row = grFiles.Rows[grFiles.Rows.Add(libraryFile.DisplayName + libraryFile.Note)];
+					var row = grFiles.Rows[grFiles.Rows.Add(libraryFile.DisplayName + libraryFile.ExtendedProperties.Note)];
 					row.Tag = libraryFile;
 				}
-				_containsWidgets = _folder.Files.OfType<LibraryLink>().Any(x => x.Widget != null || (WallBinOptions.ShowCategoryTags && x.HasCategories) || (WallBinOptions.ShowSuperFilterTags && x.HasSuperFilters) || (WallBinOptions.ShowKeywordTags && x.HasKeywords) || (WallBinOptions.ShowSecurityTags && (x.IsRestricted || x.IsForbidden)));
+				_containsWidgets = _folder.Files.OfType<LibraryLink>()
+					.Any(x => x.Widget != null || (WallBinOptions.ShowCategoryTags && x.HasCategories) || (WallBinOptions.ShowSuperFilterTags && x.HasSuperFilters) || (WallBinOptions.ShowKeywordTags && x.HasKeywords) || (WallBinOptions.ShowSecurityTags && (x.ExtendedProperties.IsRestricted || x.ExtendedProperties.IsForbidden)));
 			}
 			else
 				_containFiles = false;
@@ -1410,7 +1453,12 @@ namespace FileManager.PresentationClasses.WallBin
 			grFiles.MultiSelect = WallBinOptions.AllowMultiSelect && (WallBinOptions.ShowCategoryTags || WallBinOptions.ShowSuperFilterTags || WallBinOptions.ShowKeywordTags || WallBinOptions.ShowSecurityTags);
 			grFiles.DefaultCellStyle.SelectionBackColor = WallBinOptions.AllowEdit ? grFiles.DefaultCellStyle.BackColor : Color.Wheat;
 			grFiles.ClearSelection();
-			_containsWidgets = (from DataGridViewRow row in grFiles.Rows select row.Tag as LibraryLink).Any(x => x.Widget != null || (WallBinOptions.ShowCategoryTags && x.HasCategories) || (WallBinOptions.ShowSuperFilterTags && x.HasSuperFilters) || (WallBinOptions.ShowKeywordTags && x.HasKeywords) || (WallBinOptions.ShowSecurityTags && (x.IsRestricted || x.IsForbidden)));
+			_containsWidgets = (from DataGridViewRow row in grFiles.Rows select row.Tag as LibraryLink)
+				.Any(x => x.Widget != null || (WallBinOptions.ShowCategoryTags && x.HasCategories) ||
+					(WallBinOptions.ShowSuperFilterTags && x.HasSuperFilters) ||
+					(WallBinOptions.ShowKeywordTags && x.HasKeywords) ||
+					(WallBinOptions.ShowSecurityTags && (x.ExtendedProperties.IsRestricted ||
+					x.ExtendedProperties.IsForbidden)));
 		}
 
 		private void AddFile(FileLink file, int rowIndex)
@@ -1420,11 +1468,11 @@ namespace FileManager.PresentationClasses.WallBin
 			{
 				var libraryFile = new LibraryLink(_folder);
 				_folder.Files.Add(libraryFile);
-				libraryFile.Name = file.File.Name.Replace(file.File.Extension, string.Empty);
+				libraryFile.Name = file.File.Name.Replace(file.File.Extension, String.Empty);
 				libraryFile.RootId = file.RootId;
 
 				var rootFolder = _folder.Parent.Parent.GetRootFolder(file.RootId);
-				libraryFile.RelativePath = (rootFolder.IsDrive ? @"\" : string.Empty) + file.File.FullName.Replace(rootFolder.Folder.FullName, string.Empty);
+				libraryFile.RelativePath = (rootFolder.IsDrive ? @"\" : String.Empty) + file.File.FullName.Replace(rootFolder.Folder.FullName, String.Empty);
 
 				libraryFile.SetProperties();
 				libraryFile.InitBannerProperties();
@@ -1481,14 +1529,14 @@ namespace FileManager.PresentationClasses.WallBin
 				{
 					if (rowIndex >= 0 && rowIndex < grFiles.RowCount)
 					{
-						grFiles.Rows.Insert(rowIndex, libraryFile.DisplayName + libraryFile.Note);
+						grFiles.Rows.Insert(rowIndex, libraryFile.DisplayName + libraryFile.ExtendedProperties.Note);
 						var row = grFiles.Rows[rowIndex];
 						row.Tag = libraryFile;
 						grFiles.Rows[rowIndex].Selected = true;
 					}
 					else
 					{
-						var row = grFiles.Rows[grFiles.Rows.Add(libraryFile.DisplayName + libraryFile.Note)];
+						var row = grFiles.Rows[grFiles.Rows.Add(libraryFile.DisplayName + libraryFile.ExtendedProperties.Note)];
 						row.Tag = libraryFile;
 						grFiles.Rows[grFiles.RowCount - 1].Selected = true;
 					}
@@ -1524,7 +1572,7 @@ namespace FileManager.PresentationClasses.WallBin
 				libraryFile.RootId = folder.RootId;
 
 				RootFolder rootFolder = _folder.Parent.Parent.GetRootFolder(folder.RootId);
-				libraryFile.RelativePath = (rootFolder.IsDrive ? @"\" : string.Empty) + folder.Folder.FullName.Replace(rootFolder.Folder.FullName, string.Empty);
+				libraryFile.RelativePath = (rootFolder.IsDrive ? @"\" : String.Empty) + folder.Folder.FullName.Replace(rootFolder.Folder.FullName, String.Empty);
 
 				libraryFile.Type = FileTypes.Folder;
 				libraryFile.InitBannerProperties();
@@ -1534,14 +1582,14 @@ namespace FileManager.PresentationClasses.WallBin
 				{
 					if (rowIndex >= 0 && rowIndex < grFiles.RowCount)
 					{
-						grFiles.Rows.Insert(rowIndex, libraryFile.DisplayName + libraryFile.Note);
+						grFiles.Rows.Insert(rowIndex, libraryFile.DisplayName + libraryFile.ExtendedProperties.Note);
 						DataGridViewRow row = grFiles.Rows[rowIndex];
 						row.Tag = libraryFile;
 						grFiles.Rows[rowIndex].Selected = true;
 					}
 					else
 					{
-						DataGridViewRow row = grFiles.Rows[grFiles.Rows.Add(libraryFile.DisplayName + libraryFile.Note)];
+						DataGridViewRow row = grFiles.Rows[grFiles.Rows.Add(libraryFile.DisplayName + libraryFile.ExtendedProperties.Note)];
 						row.Tag = libraryFile;
 						grFiles.Rows[grFiles.RowCount - 1].Selected = true;
 					}
@@ -1661,11 +1709,11 @@ namespace FileManager.PresentationClasses.WallBin
 			{
 				var link = row.Tag as LibraryLink;
 				if (link == null) continue;
-				link.IsRestricted = false;
-				link.NoShare = false;
-				link.IsForbidden = false;
-				link.AssignedUsers = null;
-				link.DeniedUsers = null;
+				link.ExtendedProperties.IsRestricted = false;
+				link.ExtendedProperties.NoShare = false;
+				link.ExtendedProperties.IsForbidden = false;
+				link.ExtendedProperties.AssignedUsers = null;
+				link.ExtendedProperties.DeniedUsers = null;
 			}
 			UpdateAfterFolderChanged();
 		}
@@ -1729,11 +1777,11 @@ namespace FileManager.PresentationClasses.WallBin
 			{
 				var link = row.Tag as LibraryLink;
 				if (link == null) continue;
-				link.IsRestricted = false;
-				link.NoShare = false;
-				link.IsForbidden = false;
-				link.AssignedUsers = null;
-				link.DeniedUsers = null;
+				link.ExtendedProperties.IsRestricted = false;
+				link.ExtendedProperties.NoShare = false;
+				link.ExtendedProperties.IsForbidden = false;
+				link.ExtendedProperties.AssignedUsers = null;
+				link.ExtendedProperties.DeniedUsers = null;
 			}
 			Decorator.Parent.StateChanged = true;
 		}

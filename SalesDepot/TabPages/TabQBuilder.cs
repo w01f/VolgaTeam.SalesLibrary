@@ -146,7 +146,7 @@ namespace SalesDepot.TabPages
 
 		public void buttonItemHelp_Click(object sender, EventArgs e)
 		{
-			HelpManager.Instance.OpenHelpLink("quicksites");
+			AppManager.Instance.HelpManager.OpenHelpLink("quicksites");
 		}
 		#endregion
 

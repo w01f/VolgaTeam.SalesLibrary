@@ -1907,6 +1907,147 @@ namespace SalesDepot.Services.ContentManagmentService {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:ContentControllerwsdl")]
+    public partial class LinkSettings {
+        
+        private string noteField;
+        
+        private string hoverNoteField;
+        
+        private bool isBoldField;
+        
+        private bool isSpecialFormatField;
+        
+        private Font fontField;
+        
+        private string foreColorField;
+        
+        private bool isRestrictedField;
+        
+        private bool noShareField;
+        
+        private string assignedUsersField;
+        
+        private string deniedUsersField;
+        
+        private bool forcePreviewField;
+        
+        /// <remarks/>
+        public string note {
+            get {
+                return this.noteField;
+            }
+            set {
+                this.noteField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string hoverNote {
+            get {
+                return this.hoverNoteField;
+            }
+            set {
+                this.hoverNoteField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool isBold {
+            get {
+                return this.isBoldField;
+            }
+            set {
+                this.isBoldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool isSpecialFormat {
+            get {
+                return this.isSpecialFormatField;
+            }
+            set {
+                this.isSpecialFormatField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public Font font {
+            get {
+                return this.fontField;
+            }
+            set {
+                this.fontField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string foreColor {
+            get {
+                return this.foreColorField;
+            }
+            set {
+                this.foreColorField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool isRestricted {
+            get {
+                return this.isRestrictedField;
+            }
+            set {
+                this.isRestrictedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool noShare {
+            get {
+                return this.noShareField;
+            }
+            set {
+                this.noShareField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string assignedUsers {
+            get {
+                return this.assignedUsersField;
+            }
+            set {
+                this.assignedUsersField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string deniedUsers {
+            get {
+                return this.deniedUsersField;
+            }
+            set {
+                this.deniedUsersField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool forcePreview {
+            get {
+                return this.forcePreviewField;
+            }
+            set {
+                this.forcePreviewField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.34234")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:ContentControllerwsdl")]
     public partial class LibraryLink {
         
         private string idField;
@@ -1931,13 +2072,11 @@ namespace SalesDepot.Services.ContentManagmentService {
         
         private string originalFormatField;
         
-        private string noteField;
-        
-        private bool isBoldField;
-        
         private int orderField;
         
         private int typeField;
+        
+        private LinkSettings extendedPropertiesField;
         
         private LineBreak lineBreakPropertiesField;
         
@@ -1961,19 +2100,9 @@ namespace SalesDepot.Services.ContentManagmentService {
         
         private string contentPathField;
         
-        private bool isRestrictedField;
-        
-        private bool noShareField;
-        
-        private string assignedUsersField;
-        
-        private string deniedUsersField;
-        
         private bool isDeadField;
         
         private bool isPreviewNotReadyField;
-        
-        private bool forcePreviewField;
         
         /// <remarks/>
         public string id {
@@ -2086,26 +2215,6 @@ namespace SalesDepot.Services.ContentManagmentService {
         }
         
         /// <remarks/>
-        public string note {
-            get {
-                return this.noteField;
-            }
-            set {
-                this.noteField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool isBold {
-            get {
-                return this.isBoldField;
-            }
-            set {
-                this.isBoldField = value;
-            }
-        }
-        
-        /// <remarks/>
         public int order {
             get {
                 return this.orderField;
@@ -2122,6 +2231,16 @@ namespace SalesDepot.Services.ContentManagmentService {
             }
             set {
                 this.typeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public LinkSettings extendedProperties {
+            get {
+                return this.extendedPropertiesField;
+            }
+            set {
+                this.extendedPropertiesField = value;
             }
         }
         
@@ -2236,46 +2355,6 @@ namespace SalesDepot.Services.ContentManagmentService {
         }
         
         /// <remarks/>
-        public bool isRestricted {
-            get {
-                return this.isRestrictedField;
-            }
-            set {
-                this.isRestrictedField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool noShare {
-            get {
-                return this.noShareField;
-            }
-            set {
-                this.noShareField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string assignedUsers {
-            get {
-                return this.assignedUsersField;
-            }
-            set {
-                this.assignedUsersField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string deniedUsers {
-            get {
-                return this.deniedUsersField;
-            }
-            set {
-                this.deniedUsersField = value;
-            }
-        }
-        
-        /// <remarks/>
         public bool isDead {
             get {
                 return this.isDeadField;
@@ -2292,16 +2371,6 @@ namespace SalesDepot.Services.ContentManagmentService {
             }
             set {
                 this.isPreviewNotReadyField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool forcePreview {
-            get {
-                return this.forcePreviewField;
-            }
-            set {
-                this.forcePreviewField = value;
             }
         }
     }

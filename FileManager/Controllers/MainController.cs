@@ -29,7 +29,7 @@ namespace FileManager.Controllers
 			set
 			{
 				if (_activeDecorator != null && _activeDecorator.StateChanged)
-					_activeDecorator.Save();
+					_activeDecorator.Save(true);
 				if (value != null)
 				{
 					SettingsManager.Instance.SelectedLibrary = value.Library.Name;

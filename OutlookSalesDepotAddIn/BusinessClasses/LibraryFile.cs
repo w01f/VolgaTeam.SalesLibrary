@@ -12,27 +12,12 @@ namespace OutlookSalesDepotAddIn.BusinessClasses
 {
 	public class LibraryLink : ILibraryLink
 	{
-		private string _assignedUsers;
-		private string _deniedUsers;
-		private bool _isForbidden;
-		private bool _isRestricted;
-		private bool _noShare;
 		private bool _linkAvailabel;
 		private bool _linkAvailabilityChecked;
 
 		protected string _linkLocalPath = string.Empty;
 		private string _linkRemotePath = string.Empty;
-		private string _note = string.Empty;
 		private Image _widget;
-		private bool _generatePreviewImages;
-		private bool _generateContentText;
-		private bool _forcePreview;
-		private bool _isUrl365;
-
-		#region Compatibility with old versions
-		private Image _oldBanner;
-		private bool _oldEnableBanner;
-		#endregion
 
 		public LibraryLink(LibraryFolder parent)
 		{
@@ -43,14 +28,12 @@ namespace OutlookSalesDepotAddIn.BusinessClasses
 			RelativePath = string.Empty;
 			Type = FileTypes.Other;
 			Order = 0;
-			IsBold = false;
 			IsDead = false;
 			CriteriaOverlap = string.Empty;
+			ExtendedProperties = new LinkExtendedProperties(this);
 			SearchTags = new LibraryFileSearchTags();
 			ExpirationDateOptions = new ExpirationDateOptions();
 			SuperFilters = new List<SuperFilter>();
-			_generatePreviewImages = true;
-			_generateContentText = true;
 			PreviewContainer = null;
 			SetProperties();
 		}
@@ -111,13 +94,13 @@ namespace OutlookSalesDepotAddIn.BusinessClasses
 		public string RelativePath { get; set; }
 		public FileTypes Type { get; set; }
 		public int Order { get; set; }
-		public bool IsBold { get; set; }
 		public bool IsDead { get; set; }
 		public bool EnableWidget { get; set; }
 		public string CriteriaOverlap { get; set; }
 		public DateTime AddDate { get; set; }
 		public DateTime LastChanged { get; set; }
 
+		public LinkExtendedProperties ExtendedProperties { get; set; }
 		public LibraryFileSearchTags SearchTags { get; set; }
 		public SearchGroup CustomKeywords { get; protected set; }
 		public List<SuperFilter> SuperFilters { get; protected set; }
@@ -168,7 +151,7 @@ namespace OutlookSalesDepotAddIn.BusinessClasses
 					else
 						return Name;
 				}
-				else if (ExpirationDateOptions.EnableExpirationDate && ExpirationDateOptions.LabelLinkWhenExpired && IsExpired)
+				else if (ExpirationDateOptions.EnableExpirationDate && ExpirationDateOptions.LabelLinkWhenExpired && ExpirationDateOptions.IsExpired)
 					return "EXPIRED! " + Name;
 				else
 					return Name;
@@ -223,42 +206,6 @@ namespace OutlookSalesDepotAddIn.BusinessClasses
 					default:
 						return string.Empty;
 				}
-			}
-		}
-
-		public string Note
-		{
-			get
-			{
-				if (IsDead && Parent.Parent.Parent.EnableInactiveLinks && (Parent.Parent.Parent.InactiveLinksBoldWarning || Parent.Parent.Parent.ReplaceInactiveLinksWithLineBreak))
-					return string.Empty;
-				else
-					return _note;
-			}
-			set { _note = value; }
-		}
-
-		public bool DisplayAsBold
-		{
-			get
-			{
-				if (IsDead && Parent.Parent.Parent.EnableInactiveLinks && Parent.Parent.Parent.InactiveLinksBoldWarning)
-					return true;
-				else if (ExpirationDateOptions.EnableExpirationDate && IsExpired && ExpirationDateOptions.LabelLinkWhenExpired)
-					return true;
-				else
-					return IsBold;
-			}
-		}
-
-		public bool IsExpired
-		{
-			get
-			{
-				if (ExpirationDateOptions.EnableExpirationDate && ExpirationDateOptions.ExpirationDate != DateTime.MinValue)
-					return ((long)ExpirationDateOptions.ExpirationDate.Subtract(DateTime.Now).TotalMilliseconds) < 0;
-				else
-					return false;
 			}
 		}
 
@@ -335,188 +282,24 @@ namespace OutlookSalesDepotAddIn.BusinessClasses
 			}
 		}
 
-		public bool IsForbidden
-		{
-			get { return _isForbidden; }
-			set
-			{
-				if (_isForbidden != value)
-					LastChanged = DateTime.Now;
-				_isForbidden = value;
-			}
-		}
-
-		public bool IsRestricted
-		{
-			get { return _isRestricted; }
-			set
-			{
-				if (_isRestricted != value)
-					LastChanged = DateTime.Now;
-				_isRestricted = value;
-			}
-		}
-
-		public bool NoShare
-		{
-			get { return _noShare; }
-			set
-			{
-				if (_noShare != value)
-					LastChanged = DateTime.Now;
-				_noShare = value;
-			}
-		}
-
-		public string AssignedUsers
-		{
-			get { return _assignedUsers; }
-			set
-			{
-				if (_assignedUsers != value)
-					LastChanged = DateTime.Now;
-				_assignedUsers = value;
-			}
-		}
-
-		public string DeniedUsers
-		{
-			get { return _deniedUsers; }
-			set
-			{
-				if (_deniedUsers != value)
-					LastChanged = DateTime.Now;
-				_deniedUsers = value;
-			}
-		}
-
-		public bool GeneratePreviewImages
-		{
-			get { return _generatePreviewImages; }
-			set
-			{
-				if (_generatePreviewImages != value)
-					LastChanged = DateTime.Now;
-				_generatePreviewImages = value;
-			}
-		}
-
-		public bool GenerateContentText
-		{
-			get { return _generateContentText; }
-			set
-			{
-				if (_generateContentText != value)
-					LastChanged = DateTime.Now;
-				_generateContentText = value;
-			}
-		}
-
-		public bool ForcePreview
-		{
-			get { return _forcePreview; }
-			set
-			{
-				if (_forcePreview != value)
-					LastChanged = DateTime.Now;
-				_forcePreview = value;
-			}
-		}
-
-		public bool IsUrl365
-		{
-			get { return _isUrl365; }
-			set
-			{
-				if (_isUrl365 != value)
-					LastChanged = DateTime.Now;
-				_isUrl365 = value;
-			}
-		}
-
 		public virtual ILibraryLink Clone(LibraryFolder parent)
 		{
-			var file = new LibraryLink(parent);
-			file.OriginalPath = _linkLocalPath;
-			file.Name = Name;
-			file.Note = Note;
-			file.Order = Order;
-			file.IsBold = IsBold;
-			file.EnableWidget = EnableWidget;
-			file.Widget = Widget;
-			file.RootId = RootId;
-			file.RelativePath = RelativePath;
-			file.Type = Type;
-			file.AddDate = AddDate;
-			file.IsForbidden = IsForbidden;
-			file.IsRestricted = IsRestricted;
-			file.NoShare = NoShare;
-			file.AssignedUsers = AssignedUsers;
-			file.DeniedUsers = DeniedUsers;
-			file.GeneratePreviewImages = GeneratePreviewImages;
-			file.GenerateContentText = GenerateContentText;
-			file.ForcePreview = ForcePreview;
-			file.IsUrl365 = IsUrl365;
-			file.SearchTags = SearchTags;
-			file.CustomKeywords = CustomKeywords;
-			file.ExpirationDateOptions = ExpirationDateOptions;
-			file.PresentationProperties = PresentationProperties;
-			file.LineBreakProperties = LineBreakProperties.Clone(file);
-			file.BannerProperties = BannerProperties.Clone(file);
-			file.SuperFilters.AddRange(SuperFilters.Select(sf => new SuperFilter() { Name = sf.Name }));
-			return file;
+			throw new NotImplementedException();
 		}
 
 		public virtual string Serialize()
 		{
-			TypeConverter converter = TypeDescriptor.GetConverter(typeof(Bitmap));
-			var result = new StringBuilder();
-			result.AppendLine(@"<DisplayName>" + Name.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</DisplayName>");
-			result.AppendLine(@"<Note>" + _note.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</Note>");
-			result.AppendLine(@"<IsDead>" + IsDead + @"</IsDead>");
-			result.AppendLine(@"<IsBold>" + IsBold + @"</IsBold>");
-			result.AppendLine(@"<RootId>" + RootId.ToString() + @"</RootId>");
-			result.AppendLine(@"<LocalPath>" + _linkRemotePath.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</LocalPath>");
-			result.AppendLine(@"<RelativePath>" + RelativePath.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</RelativePath>");
-			result.AppendLine(@"<Type>" + (int)Type + @"</Type>");
-			result.AppendLine(@"<Order>" + Order + @"</Order>");
-			result.AppendLine(@"<EnableWidget>" + EnableWidget + @"</EnableWidget>");
-			result.AppendLine(@"<IsForbidden>" + IsForbidden + @"</IsForbidden>");
-			result.AppendLine(@"<IsRestricted>" + IsRestricted + @"</IsRestricted>");
-			result.AppendLine(@"<NoShare>" + NoShare + @"</NoShare>");
-			result.AppendLine(@"<GeneratePreviewImages>" + _generatePreviewImages + @"</GeneratePreviewImages>");
-			result.AppendLine(@"<GenerateContentText>" + _generateContentText + @"</GenerateContentText>");
-			result.AppendLine(@"<ForcePreview>" + _forcePreview + @"</ForcePreview>");
-			result.AppendLine(@"<IsUrl365>" + _isUrl365 + @"</IsUrl365>");
-			result.AppendLine(@"<AssignedUsers>" + (AssignedUsers ?? string.Empty).Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</AssignedUsers>");
-			result.AppendLine(@"<DeniedUsers>" + (DeniedUsers ?? string.Empty).Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</DeniedUsers>");
-			result.Append(@"<Widget>" + Convert.ToBase64String((byte[])converter.ConvertTo(_widget, typeof(byte[]))).Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</Widget>");
-			result.AppendLine(SearchTags.Serialize());
-			result.AppendLine(@"<SuperFilters>");
-			foreach (var superFilter in SuperFilters)
-				result.AppendLine(@"<Filter>" + superFilter.Name.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</Filter>");
-			result.AppendLine(@"</SuperFilters>");
-			result.AppendLine(@"<ExpirationDateOptions>" + ExpirationDateOptions.Serialize() + @"</ExpirationDateOptions>");
-			if (PreviewContainer != null)
-				result.AppendLine(@"<PreviewContainer>" + PreviewContainer.Serialize() + @"</PreviewContainer>");
-			if (PresentationProperties != null)
-				result.AppendLine(@"<PresentationProperties>" + PresentationProperties.Serialize() + @"</PresentationProperties>");
-			if (LineBreakProperties != null)
-				result.AppendLine(@"<LineBreakProperties>" + LineBreakProperties.Serialize() + @"</LineBreakProperties>");
-			if (BannerProperties != null && BannerProperties.Configured)
-				result.AppendLine(@"<BannerProperties>" + BannerProperties.Serialize() + @"</BannerProperties>");
-			return result.ToString();
+			throw new NotImplementedException();
 		}
 
 		public virtual void Deserialize(XmlNode node)
 		{
-			bool tempBool = false;
-			int tempInt = 0;
-			DateTime tempDate = DateTime.Now;
-			Guid tempGuid;
-
 			foreach (XmlNode childNode in node.ChildNodes)
 			{
+				bool tempBool = false;
+				int tempInt = 0;
+				DateTime tempDate;
+				Guid tempGuid;
 				switch (childNode.Name)
 				{
 					case "Identifier":
@@ -525,13 +308,6 @@ namespace OutlookSalesDepotAddIn.BusinessClasses
 						break;
 					case "DisplayName":
 						Name = childNode.InnerText;
-						break;
-					case "Note":
-						_note = childNode.InnerText;
-						break;
-					case "IsBold":
-						if (bool.TryParse(childNode.InnerText, out tempBool))
-							IsBold = tempBool;
 						break;
 					case "IsDead":
 						if (bool.TryParse(childNode.InnerText, out tempBool))
@@ -573,44 +349,58 @@ namespace OutlookSalesDepotAddIn.BusinessClasses
 						if (DateTime.TryParse(childNode.InnerText, out tempDate))
 							AddDate = tempDate;
 						break;
-					case "IsForbidden":
-						if (bool.TryParse(childNode.InnerText, out tempBool))
-							_isForbidden = tempBool;
-						break;
-					case "IsRestricted":
-						if (bool.TryParse(childNode.InnerText, out tempBool))
-							_isRestricted = tempBool;
-						break;
-					case "NoShare":
-						if (bool.TryParse(childNode.InnerText, out tempBool))
-							_noShare = tempBool;
-						break;
-					case "AssignedUsers":
-						_assignedUsers = childNode.InnerText;
-						break;
-					case "DeniedUsers":
-						_deniedUsers = childNode.InnerText;
-						break;
 					case "LastChanged":
 						if (DateTime.TryParse(childNode.InnerText, out tempDate))
 							LastChanged = tempDate;
 						break;
-					case "GeneratePreviewImages":
-						if (bool.TryParse(childNode.InnerText, out tempBool))
-							_generatePreviewImages = tempBool;
+
+					case "ExtendedProperties":
+						ExtendedProperties.Deserialize(childNode);
 						break;
-					case "GenerateContentText":
+					#region Compatibility with old version of Sales Depot
+					case "Note":
+						ExtendedProperties.Note = childNode.InnerText;
+						break;
+					case "IsBold":
 						if (bool.TryParse(childNode.InnerText, out tempBool))
-							_generateContentText = tempBool;
+							ExtendedProperties.IsBold = tempBool;
 						break;
 					case "ForcePreview":
 						if (bool.TryParse(childNode.InnerText, out tempBool))
-							_forcePreview = tempBool;
+							ExtendedProperties.ForcePreview = tempBool;
 						break;
 					case "IsUrl365":
 						if (bool.TryParse(childNode.InnerText, out tempBool))
-							_isUrl365 = tempBool;
+							ExtendedProperties.IsUrl365 = tempBool;
 						break;
+					case "IsForbidden":
+						if (bool.TryParse(childNode.InnerText, out tempBool))
+							ExtendedProperties.IsForbidden = tempBool;
+						break;
+					case "IsRestricted":
+						if (bool.TryParse(childNode.InnerText, out tempBool))
+							ExtendedProperties.IsRestricted = tempBool;
+						break;
+					case "NoShare":
+						if (bool.TryParse(childNode.InnerText, out tempBool))
+							ExtendedProperties.NoShare = tempBool;
+						break;
+					case "AssignedUsers":
+						ExtendedProperties.AssignedUsers = childNode.InnerText;
+						break;
+					case "DeniedUsers":
+						ExtendedProperties.DeniedUsers = childNode.InnerText;
+						break;
+					case "GeneratePreviewImages":
+						if (bool.TryParse(childNode.InnerText, out tempBool))
+							ExtendedProperties.GeneratePreviewImages = tempBool;
+						break;
+					case "GenerateContentText":
+						if (bool.TryParse(childNode.InnerText, out tempBool))
+							ExtendedProperties.GenerateContentText = tempBool;
+						break;
+					#endregion
+
 					case "SearchTags":
 						SearchTags.Deserialize(childNode);
 						break;
@@ -631,26 +421,12 @@ namespace OutlookSalesDepotAddIn.BusinessClasses
 						break;
 					case "LineBreakProperties":
 						LineBreakProperties = new LineBreakProperties(this);
-						LineBreakProperties.Font = new Font(Parent.WindowFont, Parent.WindowFont.Style);
 						LineBreakProperties.Deserialize(childNode);
 						break;
 					case "BannerProperties":
 						BannerProperties = new BannerProperties(this);
 						BannerProperties.Deserialize(childNode);
 						break;
-
-					#region Compatibility with old versions
-					case "EnableBanner":
-						if (bool.TryParse(childNode.InnerText, out tempBool))
-							_oldEnableBanner = tempBool;
-						break;
-					case "Banner":
-						if (string.IsNullOrEmpty(childNode.InnerText))
-							_oldBanner = null;
-						else
-							_oldBanner = new Bitmap(new MemoryStream(Convert.FromBase64String(childNode.InnerText)));
-						break;
-					#endregion
 				}
 			}
 
@@ -670,9 +446,6 @@ namespace OutlookSalesDepotAddIn.BusinessClasses
 				BannerProperties.Font = new Font(Parent.WindowFont, Parent.WindowFont.Style);
 				BannerProperties.ForeColor = Parent.ForeWindowColor;
 				BannerProperties.Text = DisplayName;
-
-				BannerProperties.Enable = _oldEnableBanner;
-				BannerProperties.Image = _oldBanner;
 				if (LineBreakProperties != null)
 				{
 					BannerProperties.Enable |= LineBreakProperties.EnableBanner;

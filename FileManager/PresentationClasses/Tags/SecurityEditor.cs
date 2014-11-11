@@ -115,22 +115,35 @@ namespace FileManager.PresentationClasses.Tags
 			Enabled = defaultLink != null;
 			if (defaultLink == null) return;
 
-			var noData = activePage.SelectedLinks.All(x => !x.IsRestricted && !x.NoShare && !x.IsForbidden);
-			var sameData = defaultLink != null && activePage.SelectedLinks.All(x => x.IsRestricted == defaultLink.IsRestricted && x.IsForbidden == defaultLink.IsForbidden && x.AssignedUsers == defaultLink.AssignedUsers && x.DeniedUsers == defaultLink.DeniedUsers && x.NoShare == defaultLink.NoShare);
+			var noData = activePage.SelectedLinks.All(x => !x.ExtendedProperties.IsRestricted && 
+				!x.ExtendedProperties.NoShare && 
+				!x.ExtendedProperties.IsForbidden);
+			var sameData = defaultLink != null && activePage.SelectedLinks
+				.All(x => x.ExtendedProperties.IsRestricted == defaultLink.ExtendedProperties.IsRestricted && 
+					x.ExtendedProperties.IsForbidden == defaultLink.ExtendedProperties.IsForbidden && 
+					x.ExtendedProperties.AssignedUsers == defaultLink.ExtendedProperties.AssignedUsers && 
+					x.ExtendedProperties.DeniedUsers == defaultLink.ExtendedProperties.DeniedUsers && 
+					x.ExtendedProperties.NoShare == defaultLink.ExtendedProperties.NoShare);
 
 			pnButtons.Enabled = !noData;
 			pnData.Enabled = sameData || noData;
 
 			if (sameData)
 			{
-				rbSecurityAllowed.Checked = !defaultLink.IsRestricted;
-				rbSecurityDenied.Checked = defaultLink.IsRestricted && string.IsNullOrEmpty(defaultLink.AssignedUsers) && string.IsNullOrEmpty(defaultLink.DeniedUsers);
-				rbSecurityWhiteList.Checked = defaultLink.IsRestricted && !string.IsNullOrEmpty(defaultLink.AssignedUsers);
-				rbSecurityBlackList.Checked = defaultLink.IsRestricted && !string.IsNullOrEmpty(defaultLink.DeniedUsers);
-				rbSecurityForbidden.Checked = defaultLink.IsForbidden;
-				ckSecurityShareLink.Checked = defaultLink.NoShare;
-				AssignedUsers = defaultLink.IsRestricted && !string.IsNullOrEmpty(defaultLink.AssignedUsers) ? defaultLink.AssignedUsers : null;
-				DeniedUsers = defaultLink.IsRestricted && !string.IsNullOrEmpty(defaultLink.DeniedUsers) ? defaultLink.DeniedUsers : null;
+				rbSecurityAllowed.Checked = !defaultLink.ExtendedProperties.IsRestricted;
+				rbSecurityDenied.Checked = defaultLink.ExtendedProperties.IsRestricted &&
+					String.IsNullOrEmpty(defaultLink.ExtendedProperties.AssignedUsers) &&
+					String.IsNullOrEmpty(defaultLink.ExtendedProperties.DeniedUsers);
+				rbSecurityWhiteList.Checked = defaultLink.ExtendedProperties.IsRestricted && 
+					!String.IsNullOrEmpty(defaultLink.ExtendedProperties.AssignedUsers);
+				rbSecurityBlackList.Checked = defaultLink.ExtendedProperties.IsRestricted && 
+					!String.IsNullOrEmpty(defaultLink.ExtendedProperties.DeniedUsers);
+				rbSecurityForbidden.Checked = defaultLink.ExtendedProperties.IsForbidden;
+				ckSecurityShareLink.Checked = defaultLink.ExtendedProperties.NoShare;
+				AssignedUsers = defaultLink.ExtendedProperties.IsRestricted &&
+					!String.IsNullOrEmpty(defaultLink.ExtendedProperties.AssignedUsers) ? defaultLink.ExtendedProperties.AssignedUsers : null;
+				DeniedUsers = defaultLink.ExtendedProperties.IsRestricted &&
+					!String.IsNullOrEmpty(defaultLink.ExtendedProperties.DeniedUsers) ? defaultLink.ExtendedProperties.DeniedUsers : null;
 			}
 
 			if (!_securityGroupsLoaded)
@@ -152,17 +165,17 @@ namespace FileManager.PresentationClasses.Tags
 			var deniedUsers = DeniedUsers;
 			foreach (var link in activePage.SelectedLinks)
 			{
-				link.IsForbidden = rbSecurityForbidden.Checked;
-				link.IsRestricted = rbSecurityDenied.Checked || rbSecurityWhiteList.Checked || rbSecurityBlackList.Checked;
-				link.NoShare = !ckSecurityShareLink.Checked;
+				link.ExtendedProperties.IsForbidden = rbSecurityForbidden.Checked;
+				link.ExtendedProperties.IsRestricted = rbSecurityDenied.Checked || rbSecurityWhiteList.Checked || rbSecurityBlackList.Checked;
+				link.ExtendedProperties.NoShare = !ckSecurityShareLink.Checked;
 				if (rbSecurityWhiteList.Checked && !String.IsNullOrEmpty(assignedUsers))
-					link.AssignedUsers = assignedUsers;
+					link.ExtendedProperties.AssignedUsers = assignedUsers;
 				else
-					link.AssignedUsers = null;
+					link.ExtendedProperties.AssignedUsers = null;
 				if (rbSecurityBlackList.Checked && !String.IsNullOrEmpty(deniedUsers))
-					link.DeniedUsers = deniedUsers;
+					link.ExtendedProperties.DeniedUsers = deniedUsers;
 				else
-					link.DeniedUsers = null;
+					link.ExtendedProperties.DeniedUsers = null;
 			}
 			activePage.Parent.StateChanged = true;
 			activePage.RefreshSelectedLinks();
@@ -177,11 +190,11 @@ namespace FileManager.PresentationClasses.Tags
 			if (AppManager.Instance.ShowWarningQuestion("Are you sure You want to DELETE ALL SECURITY SETTINGS for the selected files?") != DialogResult.Yes) return;
 			foreach (var link in activePage.SelectedLinks)
 			{
-				link.NoShare = false;
-				link.IsForbidden = false;
-				link.IsRestricted = false;
-				link.AssignedUsers = null;
-				link.DeniedUsers = null;
+				link.ExtendedProperties.NoShare = false;
+				link.ExtendedProperties.IsForbidden = false;
+				link.ExtendedProperties.IsRestricted = false;
+				link.ExtendedProperties.AssignedUsers = null;
+				link.ExtendedProperties.DeniedUsers = null;
 			}
 			activePage.Parent.StateChanged = true;
 			activePage.RefreshSelectedLinks();

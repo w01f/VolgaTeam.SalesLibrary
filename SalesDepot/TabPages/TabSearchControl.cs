@@ -95,11 +95,11 @@ namespace SalesDepot.TabPages
 		public void buttonItemSearchHelp_Click(object sender, EventArgs e)
 		{
 			if (SettingsManager.Instance.SolutionTitleView)
-				HelpManager.Instance.OpenHelpLink("title");
+				AppManager.Instance.HelpManager.OpenHelpLink("title");
 			else if (SettingsManager.Instance.SolutionTagsView)
-				HelpManager.Instance.OpenHelpLink("target");
+				AppManager.Instance.HelpManager.OpenHelpLink("target");
 			else if (SettingsManager.Instance.SolutionDateView)
-				HelpManager.Instance.OpenHelpLink("date");
+				AppManager.Instance.HelpManager.OpenHelpLink("date");
 		}
 		#endregion
 

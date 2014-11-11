@@ -267,24 +267,24 @@ namespace SalesDepot.TabPages
 		{
 			if (SettingsManager.Instance.ClassicView)
 			{
-				HelpManager.Instance.OpenHelpLink("classic");
+				AppManager.Instance.HelpManager.OpenHelpLink("classic");
 			}
 			else if (SettingsManager.Instance.ListView)
 			{
-				HelpManager.Instance.OpenHelpLink("list");
+				AppManager.Instance.HelpManager.OpenHelpLink("list");
 			}
 			else if (SettingsManager.Instance.AccordionView)
 			{
-				HelpManager.Instance.OpenHelpLink("accord");
+				AppManager.Instance.HelpManager.OpenHelpLink("accord");
 			}
 			else
 			{
 				if (SettingsManager.Instance.SolutionTitleView)
-					HelpManager.Instance.OpenHelpLink("title");
+					AppManager.Instance.HelpManager.OpenHelpLink("title");
 				else if (SettingsManager.Instance.SolutionTagsView)
-					HelpManager.Instance.OpenHelpLink("target");
+					AppManager.Instance.HelpManager.OpenHelpLink("target");
 				else if (SettingsManager.Instance.SolutionDateView)
-					HelpManager.Instance.OpenHelpLink("date");
+					AppManager.Instance.HelpManager.OpenHelpLink("date");
 			}
 		}
 		#endregion
@@ -572,7 +572,7 @@ namespace SalesDepot.TabPages
 
 		private void pictureBoxHelp_Click(object sender, EventArgs e)
 		{
-			HelpManager.Instance.OpenHelpLink("email");
+			AppManager.Instance.HelpManager.OpenHelpLink("email");
 		}
 		#endregion
 

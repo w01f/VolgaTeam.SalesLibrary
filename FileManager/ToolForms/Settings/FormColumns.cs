@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -14,6 +13,7 @@ using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraTab;
 using FileManager.ConfigurationClasses;
 using SalesDepot.CoreObjects.BusinessClasses;
+using SalesDepot.CoreObjects.ToolClasses;
 
 namespace FileManager.ToolForms.Settings
 {
@@ -143,20 +143,6 @@ namespace FileManager.ToolForms.Settings
 		private void CloseActiveEditorsonOutSideClick(object sender, EventArgs e)
 		{
 			laPages.Focus();
-		}
-
-		private string FontToString(Font font)
-		{
-			string str = font.Name + ", " + font.Size.ToString("#0");
-			if (font.Bold)
-				str = str + ", Bold";
-			if (font.Italic)
-				str = str + ", Italic";
-			if (font.Underline)
-				str = str + ", Underline";
-			if (font.Strikeout)
-				str = str + ", Strikeout";
-			return str;
 		}
 
 		private void SortPageFolders()
@@ -318,7 +304,7 @@ namespace FileManager.ToolForms.Settings
 						if (currentPageFolder.HeaderFont != null)
 						{
 							buttonEditWindowHeaderFont.Tag = currentPageFolder.HeaderFont;
-							buttonEditWindowHeaderFont.EditValue = FontToString(currentPageFolder.HeaderFont);
+							buttonEditWindowHeaderFont.EditValue = Utils.FontToString(currentPageFolder.HeaderFont);
 						}
 						else
 							buttonEditWindowHeaderFont.EditValue = string.Empty;
@@ -352,7 +338,7 @@ namespace FileManager.ToolForms.Settings
 					if (_currentFolder.HeaderFont != null)
 					{
 						buttonEditWindowHeaderFont.Tag = _currentFolder.HeaderFont;
-						buttonEditWindowHeaderFont.EditValue = FontToString(_currentFolder.HeaderFont);
+						buttonEditWindowHeaderFont.EditValue = Utils.FontToString(_currentFolder.HeaderFont);
 					}
 					else
 						buttonEditWindowHeaderFont.EditValue = string.Empty;
@@ -417,7 +403,7 @@ namespace FileManager.ToolForms.Settings
 						ckWindowBannerShowText.Checked = currentPageFolder.BannerProperties.ShowText;
 						memoEditWindowBannerText.EditValue = currentPageFolder.BannerProperties.Text;
 						buttonEditWindowBannerTextFont.Tag = currentPageFolder.BannerProperties.Font;
-						buttonEditWindowBannerTextFont.EditValue = FontToString(currentPageFolder.BannerProperties.Font);
+						buttonEditWindowBannerTextFont.EditValue = Utils.FontToString(currentPageFolder.BannerProperties.Font);
 						colorEditWindowBannerTextColor.Color = currentPageFolder.BannerProperties.ForeColor;
 					}
 				}
@@ -446,7 +432,7 @@ namespace FileManager.ToolForms.Settings
 					ckWindowBannerShowText.Checked = _currentFolder.BannerProperties.ShowText;
 					memoEditWindowBannerText.EditValue = _currentFolder.BannerProperties.Text;
 					buttonEditWindowBannerTextFont.Tag = _currentFolder.BannerProperties.Font;
-					buttonEditWindowBannerTextFont.EditValue = FontToString(_currentFolder.BannerProperties.Font);
+					buttonEditWindowBannerTextFont.EditValue = Utils.FontToString(_currentFolder.BannerProperties.Font);
 					colorEditWindowBannerTextColor.Color = _currentFolder.BannerProperties.ForeColor;
 				}
 				memoEditWindowBannerText.ForeColor = colorEditWindowBannerTextColor.Color;
@@ -611,7 +597,7 @@ namespace FileManager.ToolForms.Settings
 					memoEditColumn1Title.EditValue = _currentPage.ColumnTitles[0].Name;
 					colorEditColumn1ForeColor.Color = _currentPage.ColumnTitles[0].ForeColor;
 					buttonEditColumn1Font.Tag = _currentPage.ColumnTitles[0].HeaderFont;
-					buttonEditColumn1Font.EditValue = FontToString(_currentPage.ColumnTitles[0].HeaderFont);
+					buttonEditColumn1Font.EditValue = Utils.FontToString(_currentPage.ColumnTitles[0].HeaderFont);
 					memoEditColumn1Title.ForeColor = colorEditColumn1ForeColor.Color;
 					memoEditColumn1Title.BackColor = colorEditColumn1BackColor.Color;
 					memoEditColumn1Title.Font = buttonEditColumn1Font.Tag as Font;
@@ -648,7 +634,7 @@ namespace FileManager.ToolForms.Settings
 					memoEditColumn2Title.EditValue = _currentPage.ColumnTitles[1].Name;
 					colorEditColumn2ForeColor.Color = _currentPage.ColumnTitles[1].ForeColor;
 					buttonEditColumn2Font.Tag = _currentPage.ColumnTitles[1].HeaderFont;
-					buttonEditColumn2Font.EditValue = FontToString(_currentPage.ColumnTitles[1].HeaderFont);
+					buttonEditColumn2Font.EditValue = Utils.FontToString(_currentPage.ColumnTitles[1].HeaderFont);
 					memoEditColumn2Title.ForeColor = colorEditColumn2ForeColor.Color;
 					memoEditColumn2Title.BackColor = colorEditColumn2BackColor.Color;
 					memoEditColumn2Title.Font = buttonEditColumn2Font.Tag as Font;
@@ -685,7 +671,7 @@ namespace FileManager.ToolForms.Settings
 					memoEditColumn3Title.EditValue = _currentPage.ColumnTitles[2].Name;
 					colorEditColumn3ForeColor.Color = _currentPage.ColumnTitles[2].ForeColor;
 					buttonEditColumn3Font.Tag = _currentPage.ColumnTitles[2].HeaderFont;
-					buttonEditColumn3Font.EditValue = FontToString(_currentPage.ColumnTitles[2].HeaderFont);
+					buttonEditColumn3Font.EditValue = Utils.FontToString(_currentPage.ColumnTitles[2].HeaderFont);
 					memoEditColumn3Title.ForeColor = colorEditColumn3ForeColor.Color;
 					memoEditColumn2Title.BackColor = colorEditColumn2BackColor.Color;
 					memoEditColumn3Title.Font = buttonEditColumn3Font.Tag as Font;
@@ -1361,7 +1347,7 @@ namespace FileManager.ToolForms.Settings
 				if (dlgFont.ShowDialog() == DialogResult.OK)
 				{
 					fontEdit.Tag = dlgFont.Font;
-					fontEdit.EditValue = FontToString(dlgFont.Font);
+					fontEdit.EditValue = Utils.FontToString(dlgFont.Font);
 					if (_allowToSave)
 						_stateChanges = true;
 				}

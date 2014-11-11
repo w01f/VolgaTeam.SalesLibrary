@@ -73,7 +73,7 @@ namespace SalesDepot.ToolForms.QBuilderForms
 
 		private void pictureBoxHelp_Click(object sender, EventArgs e)
 		{
-			HelpManager.Instance.OpenHelpLink("qslogin");
+			AppManager.Instance.HelpManager.OpenHelpLink("qslogin");
 		}
 
 		#region Picture Box Clicks Habdlers

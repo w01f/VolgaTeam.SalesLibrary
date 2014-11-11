@@ -1,10 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
 using FileManager.ConfigurationClasses;
 using FileManager.PresentationClasses.IPad;
 using FileManager.PresentationClasses.OvernightsCalendar;
+using SalesDepot.CommonGUI.Forms;
 using SalesDepot.CoreObjects.BusinessClasses;
 
 namespace FileManager.PresentationClasses.WallBin.Decorators
@@ -117,7 +118,7 @@ namespace FileManager.PresentationClasses.WallBin.Decorators
 
 			StateChanged = false;
 		}
-
+		
 		public void BuildOvernightsCalendar(bool forceBuild = false)
 		{
 			OvernightsCalendar = new OvernightsCalendarControl(this);
@@ -128,14 +129,32 @@ namespace FileManager.PresentationClasses.WallBin.Decorators
 			Application.DoEvents();
 		}
 
-		public void Save()
+		public void Save(bool silent = false)
 		{
 			if (_isDisposed) return;
-			foreach (var page in Pages)
-				page.Save();
-			Library.Save();
-			StateChanged = false;
-			IPadContentManager.UpdateVideoFiles();
+			using (var formProgress = new FormProgress())
+			{
+				formProgress.TopMost = true;
+				formProgress.laProgress.Text = "Saving Your AWESOME Sales Library!";
+				var thread = new Thread(() =>
+				{
+					FormMain.Instance.Invoke((MethodInvoker)delegate
+					{
+						foreach (var page in Pages)
+							page.Save();
+					});
+					Library.Save();
+					StateChanged = false;
+					FormMain.Instance.Invoke((MethodInvoker)(() => 
+						IPadContentManager.UpdateVideoFiles()));
+				});
+				formProgress.Show();
+				Application.DoEvents();
+				thread.Start();
+				while (thread.IsAlive)
+					Application.DoEvents();
+				formProgress.Close();
+			}
 		}
 	}
 }

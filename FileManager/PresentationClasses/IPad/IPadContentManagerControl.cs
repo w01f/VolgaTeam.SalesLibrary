@@ -66,12 +66,12 @@ namespace FileManager.PresentationClasses.IPad
 
 		private void ConvertVideoFiles(IEnumerable<VideoInfo> videoFiles)
 		{
+			Enabled = false;
+			MainController.Instance.ActiveDecorator.Save();
 			using (var form = new FormProgressConverVideo())
 			{
 				form.ProcessAborted += (progressSender, progressE) => { Globals.ThreadAborted = true; };
 				FormMain.Instance.ribbonControl.Enabled = false;
-				Enabled = false;
-				MainController.Instance.ActiveDecorator.Save();
 				var thread = new Thread(delegate()
 				{
 					Globals.ThreadActive = true;
@@ -99,7 +99,6 @@ namespace FileManager.PresentationClasses.IPad
 				Globals.ThreadActive = false;
 				Globals.ThreadAborted = false;
 				form.Close();
-				Enabled = true;
 				FormMain.Instance.ribbonControl.Enabled = true;
 
 				if (form.CloseAfterSync)
@@ -107,8 +106,8 @@ namespace FileManager.PresentationClasses.IPad
 				else
 					FormMain.Instance.WindowState = savedState;
 			}
-
 			UpdateVideoFiles();
+			Enabled = true;
 		}
 
 		private void gridViewVideo_RowCellStyle(object sender, RowCellStyleEventArgs e)

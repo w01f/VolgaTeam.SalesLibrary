@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Runtime.InteropServices;
@@ -55,7 +56,121 @@ namespace SalesDepot.CoreObjects.ToolClasses
 			WinAPIHelper.AttachThreadInput(WinAPIHelper.GetCurrentThreadId(), WinAPIHelper.GetWindowThreadProcessId(WinAPIHelper.GetForegroundWindow(), out lpdwProcessId), false);
 		}
 
+		public static string FontToString(Font font)
+		{
+			string str = font.Name + ", " + font.Size.ToString("#0");
+			if (font.Bold)
+				str = str + ", Bold";
+			if (font.Italic)
+				str = str + ", Italic";
+			if (font.Underline)
+				str = str + ", Underline";
+			if (font.Strikeout)
+				str = str + ", Strikeout";
+			return str;
+		}
 
+		#region Internet Browser Support
+		private static bool _chromeDefinded;
+		private static bool _firefoxDefinded;
+		private static bool _operaDefinded;
+		private static bool _chromeInstalled;
+		private static bool _firefoxInstalled;
+		private static bool _operaInstalled;
+
+		public static bool ChromeInstalled
+		{
+			get
+			{
+				if (!_chromeDefinded)
+				{
+					try
+					{
+						var process = new Process
+						{
+							StartInfo =
+							{
+								FileName = "chrome.exe",
+								CreateNoWindow = true,
+								WindowStyle = ProcessWindowStyle.Hidden
+							}
+						};
+						process.Start();
+						process.Kill();
+						_chromeInstalled = true;
+					}
+					catch
+					{
+						_chromeInstalled = false;
+					}
+					_chromeDefinded = true;
+				}
+				return _chromeInstalled;
+			}
+		}
+
+		public static bool FirefoxInstalled
+		{
+			get
+			{
+				if (!_firefoxDefinded)
+				{
+					try
+					{
+						var process = new Process
+						{
+							StartInfo =
+							{
+								FileName = "firefox.exe",
+								CreateNoWindow = true,
+								WindowStyle = ProcessWindowStyle.Hidden
+							}
+						};
+						process.Start();
+						process.Kill();
+						_firefoxInstalled = true;
+					}
+					catch
+					{
+						_firefoxInstalled = false;
+					}
+					_firefoxDefinded = true;
+				}
+				return _firefoxInstalled;
+			}
+		}
+
+		public static bool OperaInstalled
+		{
+			get
+			{
+				if (!_operaDefinded)
+				{
+					try
+					{
+						var process = new Process
+						{
+							StartInfo =
+							{
+								FileName = "opera.exe",
+								CreateNoWindow = true,
+								WindowStyle = ProcessWindowStyle.Hidden
+							}
+						};
+						process.Start();
+						process.Kill();
+						_operaInstalled = true;
+					}
+					catch
+					{
+						_operaInstalled = false;
+					}
+					_operaDefinded = true;
+				}
+				return _operaInstalled;
+			}
+		}
+		#endregion
 	}
 
 	public static class Extensions

@@ -630,6 +630,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\Help.png" />
     <None Include="Resources\RetractableLogoTags.png" />
     <None Include="Resources\RetractableLogoSecurity.png" />
     <None Include="Resources\RetractableLogoFiles.png" />

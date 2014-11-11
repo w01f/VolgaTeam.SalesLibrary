@@ -15,6 +15,7 @@ using DevExpress.XtraNavBar;
 using FileManager.ConfigurationClasses;
 using FileManager.PresentationClasses.WallBin;
 using SalesDepot.CoreObjects.BusinessClasses;
+using SalesDepot.CoreObjects.ToolClasses;
 using SalesDepot.Services.IPadAdminService;
 using Font = System.Drawing.Font;
 using Library = SalesDepot.CoreObjects.BusinessClasses.Library;
@@ -34,7 +35,7 @@ namespace FileManager.ToolForms.WallBin
 	public partial class FormLinkProperties : MetroForm
 	{
 		private bool _closeEventAssigned;
-		private bool _isBold;
+		private bool _securityLoaded;
 		private string _note = string.Empty;
 		private readonly List<GroupModel> _securityGroups = new List<GroupModel>();
 		private readonly Library _library;
@@ -62,6 +63,7 @@ namespace FileManager.ToolForms.WallBin
 				laSelectedWidget.Font = new Font(laSelectedWidget.Font.FontFamily, laSelectedWidget.Font.Size - 2, laSelectedWidget.Font.Style);
 				laSelectedBanner.Font = new Font(laSelectedBanner.Font.FontFamily, laSelectedBanner.Font.Size - 2, laSelectedBanner.Font.Style);
 				laBannerAligment.Font = new Font(laBannerAligment.Font.FontFamily, laBannerAligment.Font.Size - 2, laBannerAligment.Font.Style);
+				laLinkHoverNote.Font = new Font(laLinkHoverNote.Font.FontFamily, laLinkHoverNote.Font.Size - 2, laLinkHoverNote.Font.Style);
 				checkBoxEnableExpiredLinks.Font = new Font(checkBoxEnableExpiredLinks.Font.FontFamily, checkBoxEnableExpiredLinks.Font.Size - 2, checkBoxEnableExpiredLinks.Font.Style);
 				checkBoxEnableWidget.Font = new Font(checkBoxEnableWidget.Font.FontFamily, checkBoxEnableWidget.Font.Size - 2, checkBoxEnableWidget.Font.Style);
 				checkBoxEnableBanner.Font = new Font(checkBoxEnableBanner.Font.FontFamily, checkBoxEnableBanner.Font.Size - 2, checkBoxEnableBanner.Font.Style);
@@ -69,11 +71,12 @@ namespace FileManager.ToolForms.WallBin
 				checkBoxSendEmailWhenDelete.Font = new Font(checkBoxSendEmailWhenDelete.Font.FontFamily, checkBoxSendEmailWhenDelete.Font.Size - 2, checkBoxSendEmailWhenDelete.Font.Style);
 				checkBoxBannerShowText.Font = new Font(checkBoxBannerShowText.Font.FontFamily, checkBoxBannerShowText.Font.Size - 2, checkBoxBannerShowText.Font.Style);
 				rbAttention.Font = new Font(rbAttention.Font.FontFamily, rbAttention.Font.Size - 2, rbAttention.Font.Style);
-				rbBold.Font = new Font(rbBold.Font.FontFamily, rbBold.Font.Size - 2, rbBold.Font.Style);
+				rbLinkRegularFormat.Font = new Font(rbLinkRegularFormat.Font.FontFamily, rbLinkRegularFormat.Font.Size - 2, rbLinkRegularFormat.Font.Style);
+				rbLinkBoldFormat.Font = new Font(rbLinkBoldFormat.Font.FontFamily, rbLinkBoldFormat.Font.Size - 2, rbLinkBoldFormat.Font.Style);
+				rbLinkSpecialFormat.Font = new Font(rbLinkSpecialFormat.Font.FontFamily, rbLinkSpecialFormat.Font.Size - 2, rbLinkSpecialFormat.Font.Style);
 				rbCustomNote.Font = new Font(rbCustomNote.Font.FontFamily, rbCustomNote.Font.Size - 2, rbCustomNote.Font.Style);
 				rbNew.Font = new Font(rbNew.Font.FontFamily, rbNew.Font.Size - 2, rbNew.Font.Style);
 				rbNone.Font = new Font(rbNone.Font.FontFamily, rbNone.Font.Size - 2, rbNone.Font.Style);
-				rbRegular.Font = new Font(rbRegular.Font.FontFamily, rbRegular.Font.Size - 2, rbRegular.Font.Style);
 				rbSell.Font = new Font(rbSell.Font.FontFamily, rbSell.Font.Size - 2, rbSell.Font.Style);
 				rbUpdated.Font = new Font(rbUpdated.Font.FontFamily, rbUpdated.Font.Size - 2, rbUpdated.Font.Style);
 				rbBannerAligmentCenter.Font = new Font(rbBannerAligmentCenter.Font.FontFamily, rbBannerAligmentCenter.Font.Size - 2, rbBannerAligmentCenter.Font.Style);
@@ -92,6 +95,10 @@ namespace FileManager.ToolForms.WallBin
 				rbSecurityBlackList.Font = new Font(rbSecurityBlackList.Font.FontFamily, rbSecurityBlackList.Font.Size - 2, rbSecurityBlackList.Font.Style);
 				ckSecurityShareLink.Font = new Font(ckSecurityShareLink.Font.FontFamily, ckSecurityShareLink.Font.Size - 2, ckSecurityShareLink.Font.Style);
 			}
+
+			textEditLinkHoverNote.Enter += FormMain.Instance.EditorEnter;
+			textEditLinkHoverNote.MouseUp += FormMain.Instance.EditorMouseUp;
+			textEditLinkHoverNote.MouseDown += FormMain.Instance.EditorMouseUp;
 
 			repositoryItemButtonEditKeyword.Enter += FormMain.Instance.EditorEnter;
 			repositoryItemButtonEditKeyword.MouseUp += FormMain.Instance.EditorMouseUp;
@@ -127,8 +134,6 @@ namespace FileManager.ToolForms.WallBin
 				tabPage.OnImageDoubleClick += OnImageDoubleClick;
 				xtraTabControlBanners.TabPages.Add(tabPage);
 			}
-
-			LoadSecurityGroups();
 		}
 
 		public bool IsLineBreak { get; set; }
@@ -210,31 +215,6 @@ namespace FileManager.ToolForms.WallBin
 					edCustomNote.Text = _note;
 				}
 			}
-		}
-
-		public bool IsBold
-		{
-			get { return _isBold; }
-			set
-			{
-				_isBold = value;
-				rbRegular.Checked = !value;
-				rbBold.Checked = value;
-			}
-		}
-
-		private string FontToString(Font font)
-		{
-			string str = font.Name + ", " + font.Size.ToString("#0");
-			if (font.Bold)
-				str = str + ", Bold";
-			if (font.Italic)
-				str = str + ", Italic";
-			if (font.Underline)
-				str = str + ", Underline";
-			if (font.Strikeout)
-				str = str + ", Strikeout";
-			return str;
 		}
 
 		private void AssignCloseActiveEditorsonOutSideClick(Control control)
@@ -325,7 +305,7 @@ namespace FileManager.ToolForms.WallBin
 			{
 				#region Linebreak properties
 				buttonEditLineBreakFont.Tag = LineBreakProperties.Font;
-				buttonEditLineBreakFont.EditValue = FontToString(LineBreakProperties.Font);
+				buttonEditLineBreakFont.EditValue = Utils.FontToString(LineBreakProperties.Font);
 				colorEditLineBreakFontColor.Color = LineBreakProperties.ForeColor;
 				memoEditNote.EditValue = LineBreakProperties.Note;
 				#endregion
@@ -360,7 +340,7 @@ namespace FileManager.ToolForms.WallBin
 			}
 			checkBoxBannerShowText.Checked = BannerProperties.ShowText;
 			buttonEditBannerTextFont.Tag = BannerProperties.Font;
-			buttonEditBannerTextFont.EditValue = FontToString(BannerProperties.Font);
+			buttonEditBannerTextFont.EditValue = Utils.FontToString(BannerProperties.Font);
 			colorEditBannerTextColor.Color = BannerProperties.ForeColor;
 			memoEditBannerText.EditValue = BannerProperties.Text;
 			memoEditBannerText.Font = BannerProperties.Font;
@@ -370,6 +350,9 @@ namespace FileManager.ToolForms.WallBin
 			memoEditBannerText.Properties.AppearanceReadOnly.Font = BannerProperties.Font;
 			memoEditBannerText.ForeColor = BannerProperties.ForeColor;
 			#endregion
+
+			if (xtraTabControl.SelectedTabPage == xtraTabPageSecurity && !_securityLoaded)
+				LoadSecurityGroups();
 
 			if (!_closeEventAssigned)
 			{
@@ -390,8 +373,7 @@ namespace FileManager.ToolForms.WallBin
 		}
 
 		private void btOK_Click(object sender, EventArgs e)
-		{
-			if (!IsLineBreak)
+		{if (!IsLineBreak)
 			{
 				if (rbNew.Checked)
 					_note = rbNew.Text;
@@ -405,8 +387,6 @@ namespace FileManager.ToolForms.WallBin
 					_note = edCustomNote.Text;
 				else
 					_note = string.Empty;
-
-				_isBold = rbBold.Checked;
 
 				#region Search tags
 
@@ -436,7 +416,6 @@ namespace FileManager.ToolForms.WallBin
 			{
 				#region Linebreak properties
 				LineBreakProperties.Font = buttonEditLineBreakFont.Tag as Font;
-				LineBreakProperties.BoldFont = new Font(LineBreakProperties.Font.Name, LineBreakProperties.Font.Size, FontStyle.Bold);
 				LineBreakProperties.ForeColor = colorEditLineBreakFontColor.Color;
 				LineBreakProperties.Note = memoEditNote.EditValue != null ? memoEditNote.EditValue.ToString().Trim() : string.Empty;
 				#endregion
@@ -468,6 +447,18 @@ namespace FileManager.ToolForms.WallBin
 		private void rbNew_CheckedChanged(object sender, EventArgs e)
 		{
 			edCustomNote.Enabled = rbCustomNote.Checked;
+		}
+
+		private void rbLinkSpecialFormat_CheckedChanged(object sender, EventArgs e)
+		{
+			buttonEditLinkSpecialFont.Enabled = rbLinkSpecialFormat.Checked;
+			colorEditLinkSpecialColor.Enabled = rbLinkSpecialFormat.Checked;
+			if (!rbLinkSpecialFormat.Checked)
+			{
+				buttonEditLinkSpecialFont.EditValue = null;
+				buttonEditLinkSpecialFont.Tag = null;
+				colorEditLinkSpecialColor.Color = Color.Black;
+			}
 		}
 
 		#region Expiration date processing
@@ -646,6 +637,7 @@ namespace FileManager.ToolForms.WallBin
 		#region Security Processing
 		private void LoadSecurityGroups()
 		{
+			_securityLoaded = true;
 			rbSecurityWhiteList.Enabled = false;
 			rbSecurityBlackList.Enabled = false;
 			pnSecurityUserListGrid.Visible = false;
@@ -809,15 +801,11 @@ namespace FileManager.ToolForms.WallBin
 		private void FontEdit_Click(object sender, EventArgs e)
 		{
 			var fontEdit = sender as ButtonEdit;
-			if (fontEdit != null)
-			{
-				dlgFont.Font = fontEdit.Tag as Font;
-				if (dlgFont.ShowDialog() == DialogResult.OK)
-				{
-					fontEdit.Tag = dlgFont.Font;
-					fontEdit.EditValue = FontToString(dlgFont.Font);
-				}
-			}
+			if (fontEdit == null) return;
+			dlgFont.Font = fontEdit.Tag as Font;
+			if (dlgFont.ShowDialog() != DialogResult.OK) return;
+			fontEdit.Tag = dlgFont.Font;
+			fontEdit.EditValue = Utils.FontToString(dlgFont.Font);
 		}
 
 		private void FontEdit_ButtonClick(object sender, ButtonPressedEventArgs e)
