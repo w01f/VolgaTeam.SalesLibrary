@@ -22,6 +22,7 @@
 						'NavigationGroupReportModel' => 'NavigationGroupReportModel',
 						'QuizPassUserReportModel' => 'QuizPassUserReportModel',
 						'QuizPassGroupReportModel' => 'QuizPassGroupReportModel',
+						'FileActivityReportModel' => 'FileActivityReportModel',
 					),
 				),
 			);
@@ -346,6 +347,34 @@
 				return $reportRecords;
 			else
 				return null;
+		}
+
+		/**
+		 * @param string $sessionKey
+		 * @param string $dateStart
+		 * @param string $dateEnd
+		 * @return FileActivityReportModel[]
+		 * @soap
+		 */
+		public function getFileActivityReport($sessionKey, $dateStart, $dateEnd)
+		{
+			$reportRecords = array();
+			if ($this->authenticateBySession($sessionKey))
+			{
+				$command = Yii::app()->db->createCommand("call sp_get_file_activity_report(:start_date,:end_date)");
+				$command->bindValue(":start_date", date(Yii::app()->params['mysqlDateFormat'], strtotime($dateStart)), PDO::PARAM_STR);
+				$command->bindValue(":end_date", date(Yii::app()->params['mysqlDateFormat'], strtotime($dateEnd)), PDO::PARAM_STR);
+				$resultRecords = $command->queryAll();
+				foreach ($resultRecords as $resultRecord)
+				{
+					$reportRecord = new FileActivityReportModel();
+					$reportRecord->group = $resultRecord['group_name'];
+					$reportRecord->fileName = $resultRecord['file_name'];
+					$reportRecord->activityCount = $resultRecord['action_count'];
+					$reportRecords[] = $reportRecord;
+				}
+			}
+			return $reportRecords;
 		}
 
 		public function getViewPath()
