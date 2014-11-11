@@ -40,7 +40,7 @@
 			$baseUrl = Yii::app()->getBaseUrl(true);
 			$this->imagePath = $baseUrl . $linkRecord->image_path . '?' . $linkRecord->id;
 			$this->ribbonLogoPath = $baseUrl . $linkRecord->source_path . '/link_logo.png' . '?' . $linkRecord->id;
-			$this->sourceLink = Yii::app()->createAbsoluteUrl('shortcuts/getQuickList', array('linkId' => $linkRecord->id, 'samePage' => Yii::app()->browser->isMobile() ? true : $this->samePage));
+			$this->sourceLink = Yii::app()->createAbsoluteUrl('shortcuts/getQuickList', array('linkId' => $linkRecord->id, 'samePage' => $this->samePage));
 		}
 
 		/**

@@ -251,10 +251,10 @@
 
 									var startDateTag = searchConditions.find('.start-date');
 									if (startDateTag.length > 0)
-										var startDate = startDateTag.html();
+										var startDate = startDateTag.text();
 									var endDateTag = searchConditions.find('.end-date');
 									if (endDateTag.length > 0)
-										var endDate = endDateTag.html();
+										var endDate = endDateTag.text();
 
 									var selectedLibraryIds = [];
 									var libraryIds = searchConditions.find('.library');

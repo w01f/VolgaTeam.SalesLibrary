@@ -15,7 +15,13 @@
 			$linkContainerClass = isset($link->originalFormat) && isset($link->availableFormats) ? 'link-container clickable' : 'link-container';
 		$tooltip = $link->tooltip;
 	}
-	if ($link->isRestricted)
+
+	if (!$isLineBreak && isset($link->extendedProperties->hoverNote) && $link->extendedProperties->hoverNote != '')
+		$tooltip = $link->extendedProperties->hoverNote . ' (' . $tooltip . ')';
+	else if ($isLineBreak && isset($link->lineBreakProperties->note) && $link->lineBreakProperties->note != '')
+		$tooltip = $link->lineBreakProperties->note;
+
+	if ($link->extendedProperties->isRestricted)
 		$linkContainerClass .= ' restricted';
 ?>
 <div class="<? echo $linkContainerClass; ?>" id="link<? echo $link->id; ?>">
@@ -39,12 +45,25 @@
 		{
 			$displayWidget = isset($link->files) ? $link->parent->displayLinkWidgets : (!(isset($disableWidget) && $disableWidget) && isset($widget) && $widget != '');
 			$linkClass = $displayWidget ? ' widget' : '';
-			$font = isset($link->parent) && isset($link->parent->windowFont) ? $link->parent->windowFont : Font::getDefault();
+			if ($link->extendedProperties->isSpecialFormat && isset($link->extendedProperties->font))
+				$font = $link->extendedProperties->font;
+			else if (isset($link->parent) && isset($link->parent->windowFont))
+				$font = $link->parent->windowFont;
+			else
+				$font = Font::getDefault();
+
+			if ($link->extendedProperties->isSpecialFormat && isset($link->extendedProperties->foreColor))
+				$color = $link->extendedProperties->foreColor;
+			else if (isset($link->parent) && isset($link->parent->windowForeColor))
+				$color = $link->parent->windowForeColor;
+			else
+				$color = '#000000';
+
 			$linkFontProperties = 'font-family: ' . $font->name . '; '
 				. 'font-size: ' . $font->size . 'pt; '
-				. 'font-weight: ' . ($link->isBold ? 'bold' : ($font->isBold ? ' bold' : ' normal')) . '; '
+				. 'font-weight: ' . ($link->extendedProperties->isBold ? 'bold' : ($font->isBold ? ' bold' : ' normal')) . '; '
 				. 'font-style: ' . ($font->isItalic ? ' italic' : ' normal') . '; '
-				. 'color: ' . (isset($link->parent) && isset($link->parent->windowForeColor) ? $link->parent->windowForeColor : '#000000') . '; '
+				. 'color: ' . $color . '; '
 				. 'white-space: nowrap;';
 		}
 		?>
@@ -52,8 +71,8 @@
 			 style="background-image: <? echo !(isset($disableWidget) && $disableWidget) && isset($widget) ? "url('data:image/png;base64," . $widget . "')" : ""; ?>; <? echo $linkFontProperties; ?>">
 		<span class="link-text" <? if (isset($tooltip)): ?>rel="tooltip"
 			  title="<? echo $tooltip; ?>"<? endif; ?>><? echo $link->name; ?></span>
-			<? if (isset($link->note) && $link->note != ""): ?>
-				<span class="link-note"><? echo $link->note; ?></span>
+			<? if (isset($link->extendedProperties->note) && $link->extendedProperties->note != ""): ?>
+				<span class="link-note"><? echo $link->extendedProperties->note; ?></span>
 			<? endif; ?>
 		</div>
 	<? endif; ?>

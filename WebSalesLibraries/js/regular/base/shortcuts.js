@@ -163,6 +163,7 @@
 								"&categories=" + $.toJSON(categories));
 						}
 					};
+
 					$('.shortcuts-search-bar .search-bar-text').keypress(function (e)
 					{
 						updateSearchButtonState();

@@ -168,7 +168,7 @@
 					</li>
 				<? endif; ?>
 			<? endforeach; ?>
-			<? if (!$link->forcePreview && $authorized): ?>
+			<? if (!$link->extendedProperties->forcePreview && $authorized): ?>
 				<li>
 					<a class="preview-link" href="#">
 						<table class="link-container">

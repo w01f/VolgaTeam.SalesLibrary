@@ -22,6 +22,7 @@
 						'Column' => 'Column',
 						'LibraryFolder' => 'LibraryFolder',
 						'LibraryLink' => 'LibraryLink',
+						'LinkSettings' => 'LinkSettings',
 						'LineBreak' => 'LineBreak',
 						'LinkCategory' => 'LinkCategory',
 						'LinkSuperFilter' => 'LinkSuperFilter',

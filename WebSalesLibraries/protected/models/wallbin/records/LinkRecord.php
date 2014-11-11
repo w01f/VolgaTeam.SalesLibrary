@@ -11,26 +11,24 @@
 	 * @property mixed file_extension
 	 * @property mixed file_date
 	 * @property mixed file_size
-	 * @property mixed note
 	 * @property mixed format
-	 * @property mixed is_bold
 	 * @property mixed order
 	 * @property mixed type
 	 * @property mixed enable_widget
 	 * @property mixed widget
 	 * @property mixed tags
 	 * @property mixed is_dead
-	 * @property mixed is_preview_not_ready
-	 * @property mixed force_preview
-	 * @property mixed no_share
-	 * @property mixed is_restricted
 	 * @property mixed date_add
-	 * @property bool|string date_modify
+	 * @property mixed date_modify
 	 * @property mixed id_preview
 	 * @property mixed content
+	 * @property mixed properties
 	 * @property mixed id_banner
 	 * @property mixed id_line_break
 	 * @property mixed id
+	 * @property mixed is_preview_not_ready
+	 * @property mixed is_restricted
+	 * @property mixed no_share
 	 */
 	class LinkRecord extends CActiveRecord
 	{
@@ -86,27 +84,15 @@
 				$linkRecord->file_extension = $link['fileExtension'];
 				$linkRecord->file_date = $link['originalFormat'] == 'url' || $link['originalFormat'] == 'url365' ? date(Yii::app()->params['mysqlDateFormat'], strtotime($link['dateAdd'])) : date(Yii::app()->params['mysqlDateFormat'], strtotime($link['fileDate']));
 				$linkRecord->file_size = $link['fileSize'];
-				$linkRecord->note = $link['note'];
 				$linkRecord->format = $link['originalFormat'];
-				$linkRecord->is_bold = $link['isBold'];
 				$linkRecord->order = $link['order'];
 				$linkRecord->type = $link['type'];
 				$linkRecord->enable_widget = $link['enableWidget'];
 				$linkRecord->widget = $link['widget'];
-				if (array_key_exists('isDead', $link))
-					$linkRecord->is_dead = $link['isDead'];
 				if (array_key_exists('isPreviewNotReady', $link))
 					$linkRecord->is_preview_not_ready = $link['isPreviewNotReady'];
-				if (array_key_exists('forcePreview', $link))
-					$linkRecord->force_preview = $link['forcePreview'];
-				if (array_key_exists('isRestricted', $link))
-					$linkRecord->is_restricted = $link['isRestricted'];
-				else
-					$linkRecord->is_restricted = false;
-				if (array_key_exists('noShare', $link))
-					$linkRecord->no_share = $link['noShare'];
-				else
-					$linkRecord->no_share = false;
+				if (array_key_exists('isDead', $link))
+					$linkRecord->is_dead = $link['isDead'];
 				$linkRecord->date_add = date(Yii::app()->params['mysqlDateFormat'], strtotime($link['dateAdd']));
 				$linkRecord->date_modify = $linkDate;
 
@@ -126,6 +112,21 @@
 				BannerRecord::updateData($link['banner']);
 			}
 
+			if (array_key_exists('extendedProperties', $link) && isset($link['extendedProperties']))
+				foreach ($link['extendedProperties'] as $key => $value)
+				{
+					if ($key == 'assignedUsers' && isset($value))
+						LinkWhiteListRecord::updateData($link['id'], $link['libraryId'], $value);
+					else if ($key == 'deniedUsers' && isset($value))
+						LinkBlackListRecord::updateData($link['id'], $link['libraryId'], $value);
+					else if ($key == 'isRestricted')
+						$linkRecord->is_restricted = CJSON::decode($value);
+					else if ($key == 'no_share')
+						$linkRecord->no_share = CJSON::decode($value);
+					else
+						$linkRecord->properties = CJSON::encode($link['extendedProperties']);
+				}
+
 			if (array_key_exists('lineBreakProperties', $link) && isset($link['lineBreakProperties']))
 			{
 				$linkRecord->id_line_break = $link['lineBreakProperties']['id'];
@@ -141,12 +142,6 @@
 				if (isset($link['categories']))
 					foreach ($link['categories'] as $category)
 						LinkCategoryRecord::updateData($category);
-
-			if (array_key_exists('assignedUsers', $link) && isset($link['assignedUsers']))
-				LinkWhiteListRecord::updateData($link['id'], $link['libraryId'], $link['assignedUsers']);
-
-			if (array_key_exists('deniedUsers', $link) && isset($link['deniedUsers']))
-				LinkBlackListRecord::updateData($link['id'], $link['libraryId'], $link['deniedUsers']);
 
 			$linkRecord->save();
 		}

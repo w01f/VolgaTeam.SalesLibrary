@@ -39,10 +39,13 @@
 				},
 				success: function (msg)
 				{
-					var subSearchBar = homeBar.find('.sub-search-bar');
-					subSearchBar.addClass('active').html(msg);
-					homeBar.find('.logo-container').hide();
-					initSubSearchButtons();
+					if (homeBar != null)
+					{
+						var subSearchBar = homeBar.find('.sub-search-bar');
+						subSearchBar.addClass('active').html(msg);
+						homeBar.find('.logo-container').hide();
+						initSubSearchButtons();
+					}
 				},
 				error: function ()
 				{
@@ -79,10 +82,10 @@
 
 				var startDateTag = baseSearchConditions.find('.start-date');
 				if (startDateTag.length > 0)
-					var startDate = startDateTag.html();
+					var startDate = startDateTag.text();
 				var endDateTag = baseSearchConditions.find('.end-date');
 				if (endDateTag.length > 0)
-					var endDate = endDateTag.html();
+					var endDate = endDateTag.text();
 
 				var selectedLibraryIds = [];
 				var libraryIds = baseSearchConditions.find('.library');
@@ -533,10 +536,10 @@
 
 					var templateStartDateTag = selectedTemplateConditions.find('.start-date');
 					if (templateStartDateTag.length > 0)
-						var templateStartDate = templateStartDateTag.html();
+						var templateStartDate = templateStartDateTag.text();
 					var templateEndDateTag = selectedTemplateConditions.find('.end-date');
 					if (templateEndDateTag.length > 0)
-						var templateEndDate = templateEndDateTag.html();
+						var templateEndDate = templateEndDateTag.text();
 
 					var templateLibraryIds = [];
 					var libraryIds = selectedTemplateConditions.find('.library');

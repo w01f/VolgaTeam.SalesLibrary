@@ -62,16 +62,6 @@
 		 */
 		public $originalFormat;
 		/**
-		 * @var string
-		 * @soap
-		 */
-		public $note;
-		/**
-		 * @var boolean
-		 * @soap
-		 */
-		public $isBold;
-		/**
 		 * @var int
 		 * @soap
 		 */
@@ -81,6 +71,11 @@
 		 * @soap
 		 */
 		public $type;
+		/**
+		 * @var LinkSettings
+		 * @soap
+		 */
+		public $extendedProperties;
 		/**
 		 * @var LineBreak
 		 * @soap
@@ -140,37 +135,12 @@
 		 * @var boolean
 		 * @soap
 		 */
-		public $isRestricted;
-		/**
-		 * @var boolean
-		 * @soap
-		 */
-		public $noShare;
-		/**
-		 * @var string
-		 * @soap
-		 */
-		public $assignedUsers;
-		/**
-		 * @var string
-		 * @soap
-		 */
-		public $deniedUsers;
-		/**
-		 * @var boolean
-		 * @soap
-		 */
 		public $isDead;
 		/**
 		 * @var boolean
 		 * @soap
 		 */
 		public $isPreviewNotReady;
-		/**
-		 * @var boolean
-		 * @soap
-		 */
-		public $forcePreview;
 		public $fileLink;
 		public $filePath;
 		public $universalPreview;
@@ -188,7 +158,8 @@
 		{
 			$this->parent = $folder;
 			$this->id = uniqid();
-			$this->forcePreview = false;
+			$this->extendedProperties = new LinkSettings();
+			$this->extendedProperties->forcePreview = false;
 		}
 
 		/**
@@ -205,18 +176,15 @@
 			$this->fileName = $linkRecord->file_name;
 			$this->fileExtension = $linkRecord->file_extension;
 			$this->fileSize = $linkRecord->file_size;
-			$this->note = $linkRecord->note;
-			$this->isBold = $linkRecord->is_bold;
 			$this->order = $linkRecord->order;
 			$this->type = $linkRecord->type;
 			$this->enableWidget = $linkRecord->enable_widget;
 			$this->widget = $linkRecord->widget;
 			$this->isDead = $linkRecord->is_dead;
 			$this->isPreviewNotReady = $linkRecord->is_preview_not_ready;
-			$this->forcePreview = $linkRecord->force_preview;
-			$this->noShare = $linkRecord->no_share;
-			$this->isRestricted = $linkRecord->is_restricted;
 			$this->originalFormat = $linkRecord->format;
+
+			$this->extendedProperties = CJSON::decode($linkRecord->properties, false);
 
 			$lineBreakRecord = LineBreakRecord::model()->findByPk($linkRecord->id_line_break);
 			if ($lineBreakRecord !== null)
@@ -372,7 +340,7 @@
 				{
 					case 'ppt':
 						$this->availableFormats[] = 'ppt';
-						if (!$this->forcePreview)
+						if (!$this->extendedProperties->forcePreview)
 						{
 							if (isset($this->universalPreview))
 							{
@@ -382,13 +350,13 @@
 								if (isset($this->universalPreview->jpegLinks))
 									$this->availableFormats[] = 'jpeg';
 							}
-							if (!$this->noShare)
+							if (!$this->extendedProperties->noShare)
 								$this->availableFormats[] = 'outlook';
 						}
 						break;
 					case 'doc':
 						$this->availableFormats[] = 'doc';
-						if (!$this->forcePreview)
+						if (!$this->extendedProperties->forcePreview)
 						{
 							if (isset($this->universalPreview))
 							{
@@ -398,21 +366,21 @@
 								if (isset($this->universalPreview->jpegLinks))
 									$this->availableFormats[] = 'jpeg';
 							}
-							if (!$this->noShare)
+							if (!$this->extendedProperties->noShare)
 								$this->availableFormats[] = 'outlook';
 						}
 						break;
 					case 'xls':
 						$this->availableFormats[] = 'xls';
-						if (!$this->forcePreview)
+						if (!$this->extendedProperties->forcePreview)
 						{
-							if (!$this->noShare)
+							if (!$this->extendedProperties->noShare)
 								$this->availableFormats[] = 'outlook';
 						}
 						break;
 					case 'pdf':
 						$this->availableFormats[] = 'pdf';
-						if (!$this->forcePreview)
+						if (!$this->extendedProperties->forcePreview)
 						{
 							if (isset($this->universalPreview))
 							{
@@ -421,7 +389,7 @@
 								if (isset($this->universalPreview->jpegLinks))
 									$this->availableFormats[] = 'jpeg';
 							}
-							if (!$this->noShare)
+							if (!$this->extendedProperties->noShare)
 								$this->availableFormats[] = 'outlook';
 						}
 						break;
@@ -436,27 +404,27 @@
 									break;
 								case 'mobile':
 									$this->availableFormats[] = 'mp4';
-									if (!$this->forcePreview)
+									if (!$this->extendedProperties->forcePreview)
 										$this->availableFormats[] = 'tab';
 									break;
 								case 'ie':
 									$this->availableFormats[] = 'mp4';
-									if (!$this->forcePreview)
+									if (!$this->extendedProperties->forcePreview)
 										$this->availableFormats[] = 'video';
 									break;
 								case 'webkit':
 									$this->availableFormats[] = 'mp4';
-									if (!$this->forcePreview)
+									if (!$this->extendedProperties->forcePreview)
 										$this->availableFormats[] = 'tab';
 									break;
 								case 'firefox':
 									$this->availableFormats[] = 'mp4';
-									if (!$this->forcePreview)
+									if (!$this->extendedProperties->forcePreview)
 										$this->availableFormats[] = 'ogv';
 									break;
 								case 'opera':
 									$this->availableFormats[] = 'mp4';
-									if (!$this->forcePreview)
+									if (!$this->extendedProperties->forcePreview)
 									{
 										$this->availableFormats[] = 'tab';
 										$this->availableFormats[] = 'ogv';
@@ -464,7 +432,7 @@
 									break;
 								default:
 									$this->availableFormats[] = 'mp4';
-									if (!$this->forcePreview)
+									if (!$this->extendedProperties->forcePreview)
 									{
 										$this->availableFormats[] = 'video';
 										$this->availableFormats[] = 'ogv';
@@ -472,9 +440,9 @@
 									}
 									break;
 							}
-						if (!$this->forcePreview)
+						if (!$this->extendedProperties->forcePreview)
 						{
-							if (!$this->noShare)
+							if (!$this->extendedProperties->noShare)
 								$this->availableFormats[] = 'outlook';
 							if ($this->browser != 'phone')
 								$this->availableFormats[] = 'download';
@@ -482,18 +450,18 @@
 						break;
 					case 'png':
 						$this->availableFormats[] = 'png';
-						if (!$this->forcePreview)
+						if (!$this->extendedProperties->forcePreview)
 						{
-							if (!$this->noShare)
+							if (!$this->extendedProperties->noShare)
 								$this->availableFormats[] = 'outlook';
 							$this->availableFormats[] = 'download';
 						}
 						break;
 					case 'jpeg':
-						if (!$this->forcePreview)
+						if (!$this->extendedProperties->forcePreview)
 						{
 							$this->availableFormats[] = 'jpeg';
-							if (!$this->noShare)
+							if (!$this->extendedProperties->noShare)
 								$this->availableFormats[] = 'outlook';
 							$this->availableFormats[] = 'download';
 						}
@@ -508,9 +476,9 @@
 						break;
 					case 'key':
 						$this->availableFormats[] = 'key';
-						if (!$this->forcePreview)
+						if (!$this->extendedProperties->forcePreview)
 						{
-							if (!$this->noShare)
+							if (!$this->extendedProperties->noShare)
 								$this->availableFormats[] = 'outlook';
 						}
 						break;

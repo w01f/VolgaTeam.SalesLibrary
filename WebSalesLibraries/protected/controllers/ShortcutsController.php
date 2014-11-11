@@ -102,7 +102,7 @@
 					echo $content;
 				else
 				{
-					if (!$searchShortcut->showResultsBar)
+					if (!$searchShortcut->showResultsBar && !Yii::app()->browser->isMobile())
 					{
 						$homeBar = $pageRecord->getHomeBar();
 						$content = $this->renderPartial('homeBar', array('homeBar' => $homeBar, 'enableSearchBar' => false), true) . $content;

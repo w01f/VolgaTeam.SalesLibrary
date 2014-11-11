@@ -7,9 +7,9 @@
 	$logoFolderPath = realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'fileFormats';
 	$linkCartImageSource = 'data:image/png;base64,' . base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'add-link-cart.png'));
 	$itemsCount = count($link->availableFormats);
-	if (!$link->forcePreview && $authorized)
+	if (!$link->extendedProperties->forcePreview && $authorized)
 		$itemsCount++;
-	if ($link->browser == 'mobile' && !$link->forcePreview)
+	if ($link->browser == 'mobile' && !$link->extendedProperties->forcePreview)
 		$itemsCount++;
 	$rowClass = '';
 	if ($itemsCount == 1)
@@ -134,7 +134,7 @@
 						<? $itemNum++; ?>
 					<? endif; ?>
 				<? endforeach; ?>
-				<? if (!$link->forcePreview && $authorized && !$isQuickSite): ?>
+				<? if (!$link->extendedProperties->forcePreview && $authorized && !$isQuickSite): ?>
 					<? if ($itemNum == 0 || $itemNum % 3 == 0): ?><div class="row"><? $rowClosed = false; ?><? endif; ?>
 					<div class="<? echo $rowClass; ?> text-center">
 						<a href="#" class="format-item"
@@ -158,7 +158,7 @@
 					<? if ($itemNum == 2 || $itemNum % 3 == 2): ?></div><? $rowClosed = true; ?><? endif; ?>
 					<? $itemNum++; ?>
 				<? endif; ?>
-				<? if ($link->browser == 'mobile' && !$link->forcePreview): ?>
+				<? if ($link->browser == 'mobile' && !$link->extendedProperties->forcePreview): ?>
 					<? if ($itemNum == 0 || $itemNum % 3 == 0): ?><div class="row"><? $rowClosed = false; ?><? endif; ?>
 					<div class="<? echo $rowClass; ?> text-center">
 						<a href="#" class="format-item">
