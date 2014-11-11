@@ -27,6 +27,7 @@ namespace SalesDepot.Services.StatisticService {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Web.Services.WebServiceBindingAttribute(Name="StatisticControllerBinding", Namespace="urn:StatisticControllerwsdl")]
+    [System.Xml.Serialization.SoapIncludeAttribute(typeof(FileActivityReportModel))]
     [System.Xml.Serialization.SoapIncludeAttribute(typeof(QuizPassGroupReportModel))]
     [System.Xml.Serialization.SoapIncludeAttribute(typeof(QuizPassUserReportModel))]
     [System.Xml.Serialization.SoapIncludeAttribute(typeof(AccessReportModel))]
@@ -55,6 +56,8 @@ namespace SalesDepot.Services.StatisticService {
         private System.Threading.SendOrPostCallback getQuizPassUserReportOperationCompleted;
         
         private System.Threading.SendOrPostCallback getQuizPassGroupReportOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback getFileActivityReportOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
         
@@ -120,6 +123,9 @@ namespace SalesDepot.Services.StatisticService {
         
         /// <remarks/>
         public event getQuizPassGroupReportCompletedEventHandler getQuizPassGroupReportCompleted;
+        
+        /// <remarks/>
+        public event getFileActivityReportCompletedEventHandler getFileActivityReportCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:StatisticControllerwsdl#getSessionKey", RequestNamespace="urn:StatisticControllerwsdl", ResponseNamespace="urn:StatisticControllerwsdl")]
@@ -426,6 +432,40 @@ namespace SalesDepot.Services.StatisticService {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:StatisticControllerwsdl#getFileActivityReport", RequestNamespace="urn:StatisticControllerwsdl", ResponseNamespace="urn:StatisticControllerwsdl")]
+        [return: System.Xml.Serialization.SoapElementAttribute("return")]
+        public FileActivityReportModel[] getFileActivityReport(string sessionKey, string dateStart, string dateEnd) {
+            object[] results = this.Invoke("getFileActivityReport", new object[] {
+                        sessionKey,
+                        dateStart,
+                        dateEnd});
+            return ((FileActivityReportModel[])(results[0]));
+        }
+        
+        /// <remarks/>
+        public void getFileActivityReportAsync(string sessionKey, string dateStart, string dateEnd) {
+            this.getFileActivityReportAsync(sessionKey, dateStart, dateEnd, null);
+        }
+        
+        /// <remarks/>
+        public void getFileActivityReportAsync(string sessionKey, string dateStart, string dateEnd, object userState) {
+            if ((this.getFileActivityReportOperationCompleted == null)) {
+                this.getFileActivityReportOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetFileActivityReportOperationCompleted);
+            }
+            this.InvokeAsync("getFileActivityReport", new object[] {
+                        sessionKey,
+                        dateStart,
+                        dateEnd}, this.getFileActivityReportOperationCompleted, userState);
+        }
+        
+        private void OngetFileActivityReportOperationCompleted(object arg) {
+            if ((this.getFileActivityReportCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.getFileActivityReportCompleted(this, new getFileActivityReportCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         public new void CancelAsync(object userState) {
             base.CancelAsync(userState);
         }
@@ -445,7 +485,7 @@ namespace SalesDepot.Services.StatisticService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18408")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.34234")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -634,7 +674,7 @@ namespace SalesDepot.Services.StatisticService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18408")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.34234")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -667,7 +707,52 @@ namespace SalesDepot.Services.StatisticService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18408")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.34234")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:StatisticControllerwsdl")]
+    public partial class FileActivityReportModel {
+        
+        private string fileNameField;
+        
+        private int activityCountField;
+        
+        private string groupField;
+        
+        /// <remarks/>
+        public string fileName {
+            get {
+                return this.fileNameField;
+            }
+            set {
+                this.fileNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int activityCount {
+            get {
+                return this.activityCountField;
+            }
+            set {
+                this.activityCountField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string group {
+            get {
+                return this.groupField;
+            }
+            set {
+                this.groupField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.34234")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -724,7 +809,7 @@ namespace SalesDepot.Services.StatisticService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18408")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.34234")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -817,7 +902,7 @@ namespace SalesDepot.Services.StatisticService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18408")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.34234")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -898,7 +983,7 @@ namespace SalesDepot.Services.StatisticService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18408")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.34234")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -955,7 +1040,7 @@ namespace SalesDepot.Services.StatisticService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18408")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.34234")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1084,7 +1169,7 @@ namespace SalesDepot.Services.StatisticService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18408")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.34234")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1153,7 +1238,7 @@ namespace SalesDepot.Services.StatisticService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.18408")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.34234")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1535,6 +1620,32 @@ namespace SalesDepot.Services.StatisticService {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((QuizPassGroupReportModel[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.18408")]
+    public delegate void getFileActivityReportCompletedEventHandler(object sender, getFileActivityReportCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.18408")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class getFileActivityReportCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal getFileActivityReportCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public FileActivityReportModel[] Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((FileActivityReportModel[])(this.results[0]));
             }
         }
     }

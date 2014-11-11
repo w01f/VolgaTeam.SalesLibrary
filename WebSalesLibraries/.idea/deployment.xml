@@ -15,6 +15,13 @@
           </excludedPaths>
         </serverdata>
       </paths>
+      <paths name="apexsalesninja.com">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/public_html" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
       <paths name="bwrep.com">
         <serverdata>
           <mappings>

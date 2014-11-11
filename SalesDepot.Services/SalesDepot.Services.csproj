@@ -275,6 +275,9 @@
     <None Include="Web References\StatisticService\AccessReportModel.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
+    <None Include="Web References\StatisticService\FileActivityReportModel.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
     <None Include="Web References\StatisticService\MainGroupReportModel.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>

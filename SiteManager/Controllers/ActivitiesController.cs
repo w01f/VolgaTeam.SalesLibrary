@@ -44,6 +44,7 @@ namespace SalesDepot.SiteManager.Controllers
 			FormMain.Instance.buttonItemActivitiesViewsReport4.Click += buttonItemActivitiesViews_Click;
 			FormMain.Instance.buttonItemActivitiesViewsReport5.Click += buttonItemActivitiesViews_Click;
 			FormMain.Instance.buttonItemActivitiesViewsReport6.Click += buttonItemActivitiesViews_Click;
+			FormMain.Instance.buttonItemActivitiesViewsReport7.Click += buttonItemActivitiesViews_Click;
 			FormMain.Instance.buttonItemActivitiesViewsRawData.CheckedChanged += buttonItemActivitiesViews_CheckedChanged;
 			FormMain.Instance.buttonItemActivitiesViewsReport1.CheckedChanged += buttonItemActivitiesViews_CheckedChanged;
 			FormMain.Instance.buttonItemActivitiesViewsReport2.CheckedChanged += buttonItemActivitiesViews_CheckedChanged;
@@ -51,17 +52,18 @@ namespace SalesDepot.SiteManager.Controllers
 			FormMain.Instance.buttonItemActivitiesViewsReport4.CheckedChanged += buttonItemActivitiesViews_CheckedChanged;
 			FormMain.Instance.buttonItemActivitiesViewsReport5.CheckedChanged += buttonItemActivitiesViews_CheckedChanged;
 			FormMain.Instance.buttonItemActivitiesViewsReport6.CheckedChanged += buttonItemActivitiesViews_CheckedChanged;
+			FormMain.Instance.buttonItemActivitiesViewsReport7.CheckedChanged += buttonItemActivitiesViews_CheckedChanged;
 			FormMain.Instance.buttonItemActivitiesViewsRawData.Checked = true;
 
 			FormMain.Instance.buttonItemActivitiesExport.Click += buttonItemActivitiesExport_Click;
 
 			MainController.Instance.SiteChanged += (sender, args) =>
-													   {
-														   if (IsActive)
-															   ActivitiesManagerControl.ClearData();
-														   else
-															   NeedToUpdate = true;
-													   };
+			{
+				if (IsActive)
+					ActivitiesManagerControl.ClearData();
+				else
+					NeedToUpdate = true;
+			};
 
 			if (!FormMain.Instance.pnMain.Controls.Contains(_tabPage))
 				FormMain.Instance.pnMain.Controls.Add(_tabPage);
@@ -82,7 +84,7 @@ namespace SalesDepot.SiteManager.Controllers
 		}
 		#endregion
 
-		private void buttonItemActivitiesViews_CheckedChanged(object sender, System.EventArgs e)
+		private void buttonItemActivitiesViews_CheckedChanged(object sender, EventArgs e)
 		{
 			var button = sender as DevComponents.DotNetBar.ButtonItem;
 			if (button == null || !button.Checked || button.Tag == null) return;
@@ -104,10 +106,11 @@ namespace SalesDepot.SiteManager.Controllers
 			FormMain.Instance.buttonItemActivitiesViewsReport4.Checked = false;
 			FormMain.Instance.buttonItemActivitiesViewsReport5.Checked = false;
 			FormMain.Instance.buttonItemActivitiesViewsReport6.Checked = false;
+			FormMain.Instance.buttonItemActivitiesViewsReport7.Checked = false;
 			button.Checked = true;
 		}
 
-		private void buttonItemActivitiesExport_Click(object sender, System.EventArgs e)
+		private void buttonItemActivitiesExport_Click(object sender, EventArgs e)
 		{
 			ActivitiesManagerControl.ExportData();
 		}

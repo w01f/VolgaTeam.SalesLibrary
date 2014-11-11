@@ -166,6 +166,20 @@
           <xsd:element name="userCount" type="xsd:int" />
         </xsd:all>
       </xsd:complexType>
+      <xsd:complexType name="FileActivityReportModelArray">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soap-enc:Array">
+            <xsd:attribute wsdl:arrayType="tns:FileActivityReportModel[]" ref="soap-enc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="FileActivityReportModel">
+        <xsd:all>
+          <xsd:element name="fileName" type="xsd:string" />
+          <xsd:element name="activityCount" type="xsd:int" />
+          <xsd:element name="group" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="getSessionKeyRequest">
@@ -239,6 +253,14 @@
   <wsdl:message name="getQuizPassGroupReportResponse">
     <wsdl:part name="return" type="tns:QuizPassGroupReportModelArray" />
   </wsdl:message>
+  <wsdl:message name="getFileActivityReportRequest">
+    <wsdl:part name="sessionKey" type="xsd:string" />
+    <wsdl:part name="dateStart" type="xsd:string" />
+    <wsdl:part name="dateEnd" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getFileActivityReportResponse">
+    <wsdl:part name="return" type="tns:FileActivityReportModelArray" />
+  </wsdl:message>
   <wsdl:portType name="StatisticControllerPortType">
     <wsdl:operation name="getSessionKey">
       <wsdl:documentation>
@@ -293,6 +315,12 @@
       </wsdl:documentation>
       <wsdl:input message="tns:getQuizPassGroupReportRequest" />
       <wsdl:output message="tns:getQuizPassGroupReportResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getFileActivityReport">
+      <wsdl:documentation>
+      </wsdl:documentation>
+      <wsdl:input message="tns:getFileActivityReportRequest" />
+      <wsdl:output message="tns:getFileActivityReportResponse" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="StatisticControllerBinding" type="tns:StatisticControllerPortType">
@@ -371,6 +399,15 @@
     </wsdl:operation>
     <wsdl:operation name="getQuizPassGroupReport">
       <soap:operation soapAction="urn:StatisticControllerwsdl#getQuizPassGroupReport" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:StatisticControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:StatisticControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getFileActivityReport">
+      <soap:operation soapAction="urn:StatisticControllerwsdl#getFileActivityReport" style="rpc" />
       <wsdl:input>
         <soap:body use="encoded" namespace="urn:StatisticControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
       </wsdl:input>

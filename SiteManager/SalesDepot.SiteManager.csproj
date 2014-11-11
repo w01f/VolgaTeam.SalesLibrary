@@ -160,6 +160,24 @@
     <Compile Include="PresentationClasses\Activities\AccessData\TotalFilter.Designer.cs">
       <DependentUpon>TotalFilter.cs</DependentUpon>
     </Compile>
+    <Compile Include="PresentationClasses\Activities\FileActivityData\ContainerControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\FileActivityData\ContainerControl.Designer.cs">
+      <DependentUpon>ContainerControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\FileActivityData\GroupControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\FileActivityData\GroupControl.Designer.cs">
+      <DependentUpon>GroupControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\FileActivityData\Filter.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\FileActivityData\Filter.Designer.cs">
+      <DependentUpon>Filter.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationClasses\Activities\QuizPassData\ContainerControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -452,6 +470,17 @@
     <EmbeddedResource Include="PresentationClasses\Activities\AccessData\TotalFilter.resx">
       <DependentUpon>TotalFilter.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\Activities\FileActivityData\ContainerControl.resx">
+      <DependentUpon>ContainerControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\Activities\FileActivityData\GroupControl.resx">
+      <DependentUpon>GroupControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\Activities\FileActivityData\Filter.resx">
+      <DependentUpon>Filter.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationClasses\Activities\QuizPassData\ContainerControl.resx">
       <DependentUpon>ContainerControl.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -572,7 +601,6 @@
       <DependentUpon>UtilitiesManagerControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

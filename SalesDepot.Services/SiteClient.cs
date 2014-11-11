@@ -645,6 +645,33 @@ namespace SalesDepot.Services
 				message = "Couldn't complete operation.\nServer is unavailable.";
 			return activities.ToArray();
 		}
+
+		public FileActivityReportModel[] GetFileActivityReport(DateTime startDate, DateTime endDate, out string message)
+		{
+			message = string.Empty;
+			var activities = new List<FileActivityReportModel>();
+			StatisticControllerService client = GetStatisticClient();
+			if (client != null)
+			{
+				try
+				{
+					string sessionKey = client.getSessionKey(_login, _password);
+					if (!string.IsNullOrEmpty(sessionKey))
+					{
+						activities.AddRange(client.getFileActivityReport(sessionKey, startDate.ToString("MM/dd/yyyy hh:mm tt"), endDate.ToString("MM/dd/yyyy hh:mm tt")) ?? new FileActivityReportModel[] { });
+					}
+					else
+						message = "Couldn't complete operation.\nLogin or password are not correct.";
+				}
+				catch (Exception ex)
+				{
+					message = string.Format("Couldn't complete operation.\n{0}.", ex.Message);
+				}
+			}
+			else
+				message = "Couldn't complete operation.\nServer is unavailable.";
+			return activities.ToArray();
+		}
 		#endregion
 
 		#region Ticker
