@@ -115,7 +115,7 @@
 			updateTextSize(storedTextSize);
 			updateTextSpace(storedTextSpace);
 			updateContentSize();
-			container.find('.link-text, .banner-container').tooltip({animation: false, trigger: 'hover', placement: 'top', container: '#content',delay: { show: 500, hide: 100 }});
+			container.find('.link-text, .banner-container').tooltip({animation: false, trigger: 'hover', placement: 'top', container: '#content', delay: { show: 500, hide: 100 }});
 			container.find('.clickable').off('click').on('click', function (event)
 			{
 				var linkId = $(this).attr('id').replace('link', '');
@@ -444,8 +444,10 @@
 								expires: 60 * 60 * 24 * 7
 							});
 							var pageSelector = $("#select-page");
-							pageSelector.selectedIndex = ui.newTab.index();
-							$("#page-logo").attr('src', pageSelector.val());
+							var selectedPageIndex = ui.newTab.index();
+							var selectedListItem = pageSelector.find(':nth-child(' + (selectedPageIndex + 1) + ')');
+							selectedListItem.prop("selected", "selected");
+							$("#page-logo").attr('src', selectedListItem.val());
 							if ($.cookie("wallbinView") == "accordion")
 								loadAccordion($(ui.newPanel));
 							else
@@ -512,15 +514,19 @@
 			}
 		};
 
-		var updateTextSpace = function(textSpace){
-			if(textSpace==1){
-				$('.link-container').css('margin-bottom','5px');
+		var updateTextSpace = function (textSpace)
+		{
+			if (textSpace == 1)
+			{
+				$('.link-container').css('margin-bottom', '5px');
 			}
-			else if(textSpace==2){
-				$('.link-container').css('margin-bottom','9px');
+			else if (textSpace == 2)
+			{
+				$('.link-container').css('margin-bottom', '9px');
 			}
-			else if(textSpace==3){
-				$('.link-container').css('margin-bottom','14px');
+			else if (textSpace == 3)
+			{
+				$('.link-container').css('margin-bottom', '14px');
 			}
 
 			$.cookie("textSpace", textSpace, {
@@ -528,8 +534,9 @@
 			});
 		};
 
-		var updateTextSize = function(textSize){
-			$('.link-text, .link-note').css('font-size',textSize+'pt');
+		var updateTextSize = function (textSize)
+		{
+			$('.link-text, .link-note').css('font-size', textSize + 'pt');
 
 			$.cookie("textSize", textSize, {
 				expires: (60 * 60 * 24 * 7)
