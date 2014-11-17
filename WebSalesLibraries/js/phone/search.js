@@ -554,6 +554,7 @@
 				selectedFileTypes.push("video");
 				selectedFileTypes.push("mp4");
 				selectedFileTypes.push("wmv");
+				selectedFileTypes.push("mp3");
 			}
 			if ($('#search-file-type-url').is(':checked'))
 			{

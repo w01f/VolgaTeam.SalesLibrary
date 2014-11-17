@@ -182,7 +182,10 @@
 			$this->widget = $linkRecord->widget;
 			$this->isDead = $linkRecord->is_dead;
 			$this->isPreviewNotReady = $linkRecord->is_preview_not_ready;
+
 			$this->originalFormat = $linkRecord->format;
+			if ($this->type == 8)
+				$this->originalFormat = $this->originalFormat != 'url' && $this->originalFormat != 'url365' ? "url" : $this->originalFormat;
 
 			$this->extendedProperties = CJSON::decode($linkRecord->properties, false);
 
@@ -242,7 +245,6 @@
 				$this->fileRelativePath = str_replace('\\', '', $this->fileRelativePath);
 				$this->fileName = $this->fileRelativePath;
 				$this->fileLink = $this->fileRelativePath;
-				$this->originalFormat = $this->originalFormat != 'url' && $this->originalFormat != 'url365' ? "url" : $this->originalFormat;
 			}
 			else
 			{
@@ -306,6 +308,8 @@
 							return base64_encode(file_get_contents(realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'folderWidgets' . DIRECTORY_SEPARATOR . 'url.png'));
 						case 'url365':
 							return base64_encode(file_get_contents(realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'folderWidgets' . DIRECTORY_SEPARATOR . 'url365.png'));
+						case 'mp3':
+							return base64_encode(file_get_contents(realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'folderWidgets' . DIRECTORY_SEPARATOR . 'mp3.png'));
 						case 'key':
 							return base64_encode(file_get_contents(realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'folderWidgets' . DIRECTORY_SEPARATOR . 'keynote.png'));
 						default:
@@ -472,6 +476,11 @@
 						break;
 					case 'url365':
 						$this->availableFormats[] = 'url365';
+						$this->availableFormats[] = 'outlook';
+						break;
+					case 'mp3':
+						$this->availableFormats[] = 'mp3';
+						$this->availableFormats[] = 'download';
 						$this->availableFormats[] = 'outlook';
 						break;
 					case 'key':
@@ -807,6 +816,9 @@
 							$viewSources[] = array('title' => $this->fileName, 'href' => $this->filePath);
 							break;
 					}
+					break;
+				case 'mp3':
+					$viewSources[] = array('title' => $this->fileName, 'href' => $this->fileLink);
 					break;
 				case 'url':
 				case 'url365':

@@ -96,6 +96,9 @@
 						case 'key':
 							$imageSource = 'data:image/png;base64,' . base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'keynote.png'));
 							break;
+						case 'mp3':
+							$imageSource = 'data:image/png;base64,' . base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'mp3.png'));
+							break;
 						case 'outlook':
 							$imageSource = 'data:image/png;base64,' . base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'email.png'));
 							break;

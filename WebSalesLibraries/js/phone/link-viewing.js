@@ -116,6 +116,7 @@
 					case 'key':
 					case 'url':
 					case 'url365':
+					case 'mp3':
 					case 'other':
 						switch (selectedViewType)
 						{

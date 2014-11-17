@@ -347,6 +347,60 @@
 								break;
 						}
 						break;
+					case 'mp3':
+						switch (selectedViewType)
+						{
+							case 'mp3':
+								$.ajax({
+									type: "POST",
+									url: window.BaseUrl + "statistic/writeActivity",
+									data: {
+										type: isHelp ? 'Help Link' : 'Link',
+										subType: 'Play Audio',
+										data: $.toJSON({
+											Name: selectedLinkName,
+											File: decodeURI(selectedLinks[0].href.substr(selectedLinks[0].href.lastIndexOf('/') + 1)),
+											'Original Format': selectedFileType,
+											Format: selectedFileType != selectedViewType ? selectedViewType : null
+										})
+									},
+									async: true,
+									dataType: 'html'
+								});
+								playAudio(selectedLinks[0]);
+								break;
+							case 'download':
+								downloadFile(selectedFileId, selectedLinkName, selectedFileType);
+								break;
+							case 'lp':
+								openFile(selectedLinks[0].href);
+								break;
+							case 'outlook':
+								$.SalesPortal.QBuilder.PageList.addLitePage(selectedFileId, selectedLinkName, selectedFileName, selectedFileType);
+								break;
+							case 'favorites':
+								addToFavorites(selectedFileId, selectedLinkName, selectedFileName, selectedFileType);
+								break;
+							default:
+								$.ajax({
+									type: "POST",
+									url: window.BaseUrl + "statistic/writeActivity",
+									data: {
+										type: isHelp ? 'Help Link' : 'Link',
+										subType: 'Open',
+										data: $.toJSON({
+											Name: selectedLinkName,
+											File: selectedFileName,
+											'Original Format': selectedFileType
+										})
+									},
+									async: true,
+									dataType: 'html'
+								});
+								openFile(selectedLinks[0].href);
+								break;
+						}
+						break;
 					case 'png':
 					case 'jpeg':
 						switch (selectedViewType)
@@ -693,6 +747,17 @@
 				},
 				async: true,
 				dataType: 'html'
+			});
+		};
+
+		var playAudio = function (link)
+		{
+			$.fancybox({
+				title: link.title,
+				content: '<audio controls autoplay style="margin-top: 40px;"><source src="' + link.href + '" type="audio/mpeg"/></audio>',
+				width: 250,
+				openEffect: 'none',
+				closeEffect: 'none'
 			});
 		};
 

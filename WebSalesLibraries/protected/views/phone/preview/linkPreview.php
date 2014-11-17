@@ -95,6 +95,10 @@
 						$imageSource = Yii::app()->request->getBaseUrl(true) . '/images/fileFormats_phone/url365.png';
 						$imageTitle = 'Office 365 Url';
 						break;
+					case 'mp3':
+						$imageSource = Yii::app()->request->getBaseUrl(true) . '/images/fileFormats_phone/mp3.png';
+						$imageTitle = 'MP3 Track';
+						break;
 					case 'key':
 						$imageSource = Yii::app()->request->getBaseUrl(true) . '/images/fileFormats_phone/keynote.png';
 						$imageTitle = 'Apple Keynote';

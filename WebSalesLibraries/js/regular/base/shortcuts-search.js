@@ -263,6 +263,7 @@
 						selectedFileTypes.push("url365");
 						selectedFileTypes.push("png");
 						selectedFileTypes.push("jpeg");
+						selectedFileTypes.push("mp3");
 					}
 
 					var superFilters = [];
