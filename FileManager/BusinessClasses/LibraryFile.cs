@@ -306,6 +306,9 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 					case "key":
 						format = "key";
 						break;
+					case "mp3":
+						format = "mp3";
+						break;
 					default:
 						switch (Type)
 						{

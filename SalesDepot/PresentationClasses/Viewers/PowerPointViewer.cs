@@ -80,7 +80,7 @@ namespace SalesDepot.PresentationClasses.Viewers
 
 		public void Open()
 		{
-			LinkManager.Instance.OpenCopyOfFile(File);
+			FloaterManager.Instance.ShowFloater(FormMain.Instance, SettingsManager.Instance.SalesDepotName, FormMain.Instance.FloaterLogo, () => LinkManager.Instance.OpenCopyOfFile(File));
 		}
 
 		public void Save()

@@ -7,40 +7,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="311ca633-43c5-41dd-82ab-ba01ea556142" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/fileFormats/mp3.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/fileFormats_phone/mp3.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/folderWidgets/mp3.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/search/search-mp3.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/fileFormats/docx.png" afterPath="$PROJECT_DIR$/images/fileFormats/docx.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/fileFormats/download.png" afterPath="$PROJECT_DIR$/images/fileFormats/download.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/fileFormats/email.png" afterPath="$PROJECT_DIR$/images/fileFormats/email.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/fileFormats/favorites.png" afterPath="$PROJECT_DIR$/images/fileFormats/favorites.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/fileFormats/jpeg.png" afterPath="$PROJECT_DIR$/images/fileFormats/jpeg.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/fileFormats/keynote.png" afterPath="$PROJECT_DIR$/images/fileFormats/keynote.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/fileFormats/lp.png" afterPath="$PROJECT_DIR$/images/fileFormats/lp.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/fileFormats/mp4-download.png" afterPath="$PROJECT_DIR$/images/fileFormats/mp4-download.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/fileFormats/mp4.png" afterPath="$PROJECT_DIR$/images/fileFormats/mp4.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/fileFormats/ogv.png" afterPath="$PROJECT_DIR$/images/fileFormats/ogv.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/fileFormats/pdf.png" afterPath="$PROJECT_DIR$/images/fileFormats/pdf.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/fileFormats/png.png" afterPath="$PROJECT_DIR$/images/fileFormats/png.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/fileFormats/pptx.png" afterPath="$PROJECT_DIR$/images/fileFormats/pptx.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/fileFormats/tab.png" afterPath="$PROJECT_DIR$/images/fileFormats/tab.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/fileFormats/url.png" afterPath="$PROJECT_DIR$/images/fileFormats/url.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/fileFormats/wmv-download.png" afterPath="$PROJECT_DIR$/images/fileFormats/wmv-download.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/fileFormats/wmv.png" afterPath="$PROJECT_DIR$/images/fileFormats/wmv.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/fileFormats/xlsx.png" afterPath="$PROJECT_DIR$/images/fileFormats/xlsx.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/wallbin/models/LibraryLink.php" afterPath="$PROJECT_DIR$/protected/models/wallbin/models/LibraryLink.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/wallbin/records/LinkRecord.php" afterPath="$PROJECT_DIR$/protected/models/wallbin/records/LinkRecord.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/configuration.php" afterPath="$PROJECT_DIR$/configuration.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/phone/link-viewing.js" afterPath="$PROJECT_DIR$/js/phone/link-viewing.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/regular/base/link-viewing.js" afterPath="$PROJECT_DIR$/js/regular/base/link-viewing.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/views/phone/preview/linkPreview.php" afterPath="$PROJECT_DIR$/protected/views/phone/preview/linkPreview.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/config/params.php" afterPath="$PROJECT_DIR$/protected/config/params.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/regular/base/search-view.js" afterPath="$PROJECT_DIR$/js/regular/base/search-view.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/phone/search.js" afterPath="$PROJECT_DIR$/js/phone/search.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/regular/base/shortcuts-search.js" afterPath="$PROJECT_DIR$/js/regular/base/shortcuts-search.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/regular/base/shortcuts.js" afterPath="$PROJECT_DIR$/js/regular/base/shortcuts.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/views/regular/preview/viewDialog.php" afterPath="$PROJECT_DIR$/protected/views/regular/preview/viewDialog.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <list id="6cb86652-0ea2-464a-b0b1-9bbef25a8567" name="C#" comment="">
@@ -1031,7 +997,11 @@
       <created>1415775966673</created>
       <updated>1415775966673</updated>
     </task>
-    <option name="localTasksCounter" value="137" />
+    <task id="LOCAL-00137" summary="Web Sales Depot: Mp3 links fix&#10;&#10;">
+      <created>1416252829962</created>
+      <updated>1416252829962</updated>
+    </task>
+    <option name="localTasksCounter" value="138" />
     <servers />
   </component>
   <component name="TodoView" selected-index="3">
@@ -1068,6 +1038,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="1.0" sideWeight="0.48772678" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15848452" sideWeight="0.13024282" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28430295" sideWeight="0.4850587" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32855567" sideWeight="0.49359658" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32491767" sideWeight="0.49573106" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21033014" sideWeight="0.12957746" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19542067" sideWeight="0.87042254" order="0" side_tool="false" content_ui="combo" />
@@ -1081,7 +1052,6 @@
       <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30954996" sideWeight="0.923159" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32855567" sideWeight="0.49359658" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21523179" sideWeight="0.5741729" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -1129,7 +1099,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="Web Sales Depot: iPad Force Preview fix&#10;" />
     <MESSAGE value="Web Sales Depot: Keyword and Category Search fix&#10;" />
     <MESSAGE value="Web Sales Depot: Major Site refactoring using latest versions of vendors (JQuery, BS3, etc.)&#10;" />
     <MESSAGE value="Web Sales Depot: Bug fixes after refactoring&#10;" />
@@ -1154,7 +1123,8 @@
     <MESSAGE value="Web Sales Depot: Link settings refactoring&#10;&#10;" />
     <MESSAGE value="Web Sales Depot: File Activity Statistic report fix&#10;&#10;" />
     <MESSAGE value="Web Sales Depot: Wallbin Tab page logo fix&#10;&#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="Web Sales Depot: Wallbin Tab page logo fix&#10;&#10;" />
+    <MESSAGE value="Web Sales Depot: Mp3 links fix&#10;&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Web Sales Depot: Mp3 links fix&#10;&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

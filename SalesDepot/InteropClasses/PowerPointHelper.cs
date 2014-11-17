@@ -338,96 +338,29 @@ namespace SalesDepot.InteropClasses
 				}
 			}
 			catch { }
-			if (!Is2003 || slideIndex != -1) return slideIndex;
-			RefreshContents();
-			PowerPointObject.ActiveWindow.Selection.Unselect();
 			return slideIndex;
 		}
 
 		public void AppendSlide(int slideIndex, string templatePath = "")
 		{
-			int currentSlideIndex = 0;
-
 			try
 			{
 				MessageFilter.Register();
-				var indexToPaste = GetActiveSlideIndex() + 1;
-
+				var indexToPaste = GetActiveSlideIndex();
 				if (!string.IsNullOrEmpty(templatePath))
 					_slideSourcePresentationObject.ApplyTheme(templatePath);
 				for (int i = 1; i <= _slideSourcePresentationObject.Slides.Count; i++)
 				{
 					if ((i != slideIndex) && (slideIndex != -1)) continue;
-					if (indexToPaste <= 1) continue;
 					var slide = _slideSourcePresentationObject.Slides[i];
-					slide.Copy();
-					var pastedRange = ActivePresentation.Slides.Paste(indexToPaste);
+					var activeSlides = ActivePresentation.Slides;
+					activeSlides.InsertFromFile(_slideSourcePresentationObject.FullName, indexToPaste, i, i);
 					indexToPaste++;
+					var insertedSlide = activeSlides[indexToPaste];
 					var design = GetDesignFromSlide(slide, ActivePresentation);
-					pastedRange.Design = design ?? slide.Design;
-					pastedRange.ColorScheme = slide.ColorScheme;
-					if (slide.FollowMasterBackground == MsoTriState.msoFalse)
-					{
-						pastedRange.FollowMasterBackground = MsoTriState.msoFalse;
-						pastedRange.Background.Fill.Visible = slide.Background.Fill.Visible;
-						pastedRange.Background.Fill.ForeColor = slide.Background.Fill.ForeColor;
-						pastedRange.Background.Fill.BackColor = slide.Background.Fill.BackColor;
-
-						switch (slide.Background.Fill.Type)
-						{
-							case MsoFillType.msoFillTextured:
-								switch (slide.Background.Fill.TextureType)
-								{
-									case MsoTextureType.msoTexturePreset:
-										pastedRange.Background.Fill.PresetTextured(slide.Background.Fill.PresetTexture);
-										break;
-								}
-								break;
-							case MsoFillType.msoFillSolid:
-								pastedRange.Background.Fill.Transparency = 0;
-								pastedRange.Background.Fill.Solid();
-								break;
-							case MsoFillType.msoFillPicture:
-								if (slide.Shapes.Count > 0)
-									(slide.Shapes.Range(1)).Visible = MsoTriState.msoFalse;
-								MsoTriState masterShape = slide.DisplayMasterShapes;
-								slide.DisplayMasterShapes = MsoTriState.msoFalse;
-								slide.Export(Path.Combine(AppManager.Instance.TempFolder.FullName, slide.SlideID + ".png"), "PNG", -1, -1);
-								pastedRange.Background.Fill.UserPicture(Path.Combine(AppManager.Instance.TempFolder.FullName, slide.SlideID + ".png"));
-								var file = new FileInfo(Path.Combine(AppManager.Instance.TempFolder.FullName, slide.SlideID + ".png"));
-								if (file.Exists)
-									file.Delete();
-								slide.DisplayMasterShapes = masterShape;
-								if (slide.Shapes.Count > 0)
-									(slide.Shapes.Range(1)).Visible = MsoTriState.msoFalse;
-								break;
-							case MsoFillType.msoFillPatterned:
-								pastedRange.Background.Fill.Patterned(slide.Background.Fill.Pattern);
-								break;
-							case MsoFillType.msoFillGradient:
-								switch (slide.Background.Fill.GradientColorType)
-								{
-									case MsoGradientColorType.msoGradientTwoColors:
-										pastedRange.Background.Fill.TwoColorGradient(slide.Background.Fill.GradientStyle, slide.Background.Fill.GradientVariant);
-										break;
-									case MsoGradientColorType.msoGradientPresetColors:
-										pastedRange.Background.Fill.PresetGradient(slide.Background.Fill.GradientStyle, slide.Background.Fill.GradientVariant, slide.Background.Fill.PresetGradientType);
-										break;
-									case MsoGradientColorType.msoGradientOneColor:
-										pastedRange.Background.Fill.OneColorGradient(slide.Background.Fill.GradientStyle, slide.Background.Fill.GradientVariant, slide.Background.Fill.GradientDegree);
-										break;
-								}
-								break;
-						}
-					}
-					MakeDesignUnique(slide, pastedRange.Design);
-					ActivePresentation.Slides[indexToPaste - 1].Select();
-					currentSlideIndex = indexToPaste - 1;
-				}
-				if (Is2003 && currentSlideIndex != 0)
-				{
-					RefreshContents();
-					ActivePresentation.Slides[currentSlideIndex].Select();
+					insertedSlide.Design = design ?? slide.Design;
+					insertedSlide.ColorScheme = slide.ColorScheme;
+					insertedSlide.Select();
 				}
 			}
 			catch { }
@@ -443,43 +376,6 @@ namespace SalesDepot.InteropClasses
 				if (design.Name == slide.Design.Name)
 					return design;
 			return null;
-		}
-
-		private void RefreshContents()
-		{
-			bool hasContents = false;
-			int contentSlideIndex = 0;
-			int contentSlideIndexCount = 0;
-			int i = 1;
-			foreach (Slide slide in ActivePresentation.Slides)
-			{
-				foreach (Shape shape in slide.Shapes)
-					if (shape.Tags["CONTENT_HEADER"] != "")
-					{
-						hasContents = true;
-						contentSlideIndex = i;
-						break;
-					}
-					else if (contentSlideIndexCount > 0)
-						break;
-				if (hasContents)
-				{
-					contentSlideIndexCount++;
-					hasContents = false;
-				}
-				i++;
-			}
-			if (contentSlideIndexCount > 0 && File.Exists(Path.Combine(SettingsManager.Instance.ContentsSlidePath, SettingsManager.Instance.DefaultWizard, SettingsManager.ContentsSlideName)))
-			{
-				Design design = ActivePresentation.Slides[contentSlideIndex].Design;
-				for (int j = 0; j < contentSlideIndexCount; j++)
-					ActivePresentation.Slides[contentSlideIndex].Delete();
-				for (int j = 0; j < contentSlideIndexCount; j++)
-					ActivePresentation.Slides.InsertFromFile(Path.Combine(SettingsManager.Instance.ContentsSlidePath, SettingsManager.Instance.DefaultWizard, SettingsManager.ContentsSlideName), contentSlideIndex - 1 + j, 1, 1);
-
-				for (int j = 0; j < contentSlideIndexCount; j++)
-					ActivePresentation.Slides[contentSlideIndex + j].Design = design;
-			}
 		}
 
 		private void MakeDesignUnique(Slide slide, Design design)

@@ -120,7 +120,7 @@ namespace SalesDepot.ToolForms.WallBin
 		private void barButtonItemOpenLink_ItemClick(object sender, ItemClickEventArgs e)
 		{
 			if (SelectedFile != null)
-				LinkManager.Instance.OpenCopyOfFile(SelectedFile);
+				FloaterManager.Instance.ShowFloater(FormMain.Instance, SettingsManager.Instance.SalesDepotName, FormMain.Instance.FloaterLogo, () => LinkManager.Instance.OpenCopyOfFile(SelectedFile));
 		}
 
 		private void barButtonItemSave_ItemClick(object sender, ItemClickEventArgs e)

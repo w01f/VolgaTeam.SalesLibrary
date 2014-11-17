@@ -296,8 +296,19 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 					case "key":
 						format = "key";
 						break;
+					case "mp3":
+						format = "mp3";
+						break;
 					default:
-						format = "other";
+						switch (Type)
+						{
+							case FileTypes.Url:
+								format = ExtendedProperties.IsUrl365 ? "url365" : "url";
+								break;
+							default:
+								format = "other";
+								break;
+						}
 						break;
 				}
 				return format;

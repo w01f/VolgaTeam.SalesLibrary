@@ -182,7 +182,7 @@ namespace SalesDepot.ToolForms.WallBin
 		#region Button Clicks
 		private void barButtonItemOpenLink_ItemClick(object sender, ItemClickEventArgs e)
 		{
-			LinkManager.Instance.OpenCopyOfFile(SelectedFile);
+			FloaterManager.Instance.ShowFloater(FormMain.Instance, SettingsManager.Instance.SalesDepotName, FormMain.Instance.FloaterLogo, () => LinkManager.Instance.OpenCopyOfFile(SelectedFile));
 		}
 
 		private void barButtonItemSave_ItemClick(object sender, ItemClickEventArgs e)
