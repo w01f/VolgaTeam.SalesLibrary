@@ -18,7 +18,7 @@
 		{
 			$this->id = $linkRecord->id;
 			$this->type = 'none';
-			$this->imagePath = Yii::app()->getBaseUrl(true) . $linkRecord->image_path . '?' . $linkRecord->id;
+			$this->imagePath = Yii::app()->getBaseUrl(true) . $linkRecord->image_path . '?' . $linkRecord->id_page . $linkRecord->id;
 			$linkConfig = new DOMDocument();
 			$linkConfig->loadXML($linkRecord->config);
 			$nameTags = $linkConfig->getElementsByTagName("line1");

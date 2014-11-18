@@ -36,8 +36,8 @@
 			$tooltipTags = $linkConfig->getElementsByTagName("line2");
 			$this->tooltip = $tooltipTags->length > 0 ? trim($tooltipTags->item(0)->nodeValue) : '';
 			$baseUrl = Yii::app()->getBaseUrl(true);
-			$this->imagePath = $baseUrl . $linkRecord->image_path . '?' . $linkRecord->id;
-			$this->ribbonLogoPath = $baseUrl . $linkRecord->source_path . '/link_logo.png' . '?' . $linkRecord->id;
+			$this->imagePath = $baseUrl . $linkRecord->image_path . '?' . $linkRecord->id_page . $linkRecord->id;
+			$this->ribbonLogoPath = $baseUrl . $linkRecord->source_path . '/link_logo.png' . '?' . $linkRecord->id_page . $linkRecord->id;
 			$this->sourceLink = Yii::app()->createAbsoluteUrl('shortcuts/getWindowShortcut', array('linkId' => $linkRecord->id, 'samePage' => $this->samePage));
 		}
 

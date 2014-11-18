@@ -46,8 +46,8 @@
 			$tooltipTags = $linkConfig->getElementsByTagName("line2");
 			$this->tooltip = $tooltipTags->length > 0 ? trim($tooltipTags->item(0)->nodeValue) : '';
 			$baseUrl = Yii::app()->getBaseUrl(true);
-			$this->imagePath = $baseUrl . $linkRecord->image_path . '?' . $linkRecord->id;
-			$this->ribbonLogoPath = $baseUrl . $linkRecord->source_path . '/link_logo.png' . '?' . $linkRecord->id;
+			$this->imagePath = $baseUrl . $linkRecord->image_path . '?' . $linkRecord->id_page . $linkRecord->id;
+			$this->ribbonLogoPath = $baseUrl . $linkRecord->source_path . '/link_logo.png' . '?' . $linkRecord->id_page . $linkRecord->id;
 			$this->sourceLink = Yii::app()->createAbsoluteUrl('shortcuts/getSearchShortcut', array('linkId' => $linkRecord->id, 'samePage' => $this->samePage));
 			$showResultsBarTags = $linkConfig->getElementsByTagName("ShowResultsBar");
 			$this->showResultsBar = $showResultsBarTags->length > 0 ? filter_var(trim($showResultsBarTags->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : true;
@@ -71,7 +71,7 @@
 			foreach ($subSearchConditionNodes as $conditionNode)
 				$subSearchConditions[] = new SubSearchTemplate($xpath, $conditionNode, $baseUrl . $linkRecord->source_path);
 			foreach ($subSearchConditions as $subSearchCondition)
-				$subSearchCondition->image_path .= '?' . $linkRecord->id;
+				$subSearchCondition->image_path .= '?' . $linkRecord->id_page . $linkRecord->id;
 			$sortHelper = new ObjectSortHelper('imageName', 'asc');
 			usort($subSearchConditions, array($sortHelper, 'sort'));
 			$this->subConditions = $subSearchConditions;

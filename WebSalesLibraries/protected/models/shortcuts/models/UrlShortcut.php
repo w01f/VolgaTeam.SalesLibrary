@@ -25,7 +25,7 @@
 			$this->name = $nameTags->length > 0 ? trim($nameTags->item(0)->nodeValue) : '';
 			$tooltipTags = $linkConfig->getElementsByTagName("line2");
 			$this->tooltip = $tooltipTags->length > 0 ? trim($tooltipTags->item(0)->nodeValue) : '';
-			$this->imagePath = Yii::app()->getBaseUrl(true) . $linkRecord->image_path . '?' . $linkRecord->id;
+			$this->imagePath = Yii::app()->getBaseUrl(true) . $linkRecord->image_path . '?' . $linkRecord->id_page . $linkRecord->id;
 			$this->sourceLink = trim($linkConfig->getElementsByTagName("Source")->item(0)->nodeValue);
 		}
 	}

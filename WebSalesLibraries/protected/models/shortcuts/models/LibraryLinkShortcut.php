@@ -26,7 +26,7 @@
 			$tooltipTags = $linkConfig->getElementsByTagName("line2");
 			$this->tooltip = $tooltipTags->length > 0 ? trim($tooltipTags->item(0)->nodeValue) : '';
 			$baseUrl = Yii::app()->getBaseUrl(true);
-			$this->imagePath = $baseUrl . $linkRecord->image_path . '?' . $linkRecord->id;
+			$this->imagePath = $baseUrl . $linkRecord->image_path . '?' . $linkRecord->id_page . $linkRecord->id;
 
 			$libraryName = trim($linkConfig->getElementsByTagName("Library")->item(0)->nodeValue);
 			$pageName = trim($linkConfig->getElementsByTagName("Page")->item(0)->nodeValue);
