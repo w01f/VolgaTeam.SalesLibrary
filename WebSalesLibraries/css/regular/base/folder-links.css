@@ -9,6 +9,7 @@
 {
 	border-bottom: 1px solid;
 	cursor: pointer;
+	vertical-align: middle;
 }
 
 .folder-widget

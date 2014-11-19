@@ -1,4 +1,4 @@
-<?	/** @var $folder LibraryFolder */?>
+<? /** @var $folder LibraryFolder */ ?>
 <div class="folder-body" style="border-color: <? echo $folder->borderColor; ?>;">
 	<div class="folder-header-container" id="folder<? echo $folder->id; ?>"
 		 style="font-family: <? echo $folder->headerFont->name; ?>,serif;
@@ -8,7 +8,8 @@
 			 text-align: <? echo $folder->headerAlignment; ?>;
 			 background-color: <? echo $folder->headerBackColor; ?>;
 			 color: <? echo $folder->headerForeColor; ?>;
-			 border-bottom-color: <? echo $folder->borderColor; ?>;">
+			 border-bottom-color: <? echo $folder->borderColor; ?>;
+			 min-height: <? echo $folder->headerHeight; ?>px;">
 		<? if (isset($folder->banner) && $folder->banner->isEnabled): ?>
 			<? echo $this->renderFile(Yii::getPathOfAlias('application.views.regular.wallbin') . '/banner.php', array('banner' => $folder->banner, 'isLinkBanner' => false), true); ?>
 		<? else: ?>
@@ -16,7 +17,7 @@
 			<? if (isset($widget)): ?>
 				<img class="folder-widget" src="data:image/png;base64,<? echo $widget; ?>">
 			<? endif; ?>
-			<span class="folder-header"><? echo $folder->name; ?></span>
+			<span class="folder-header" style="line-height: <? echo $folder->headerHeight; ?>px;"><? echo $folder->name; ?></span>
 		<? endif; ?>
 	</div>
 	<? echo $this->renderFile(Yii::getPathOfAlias('application.views.regular.wallbin') . '/folderLinks.php', array('folder' => $folder), true); ?>

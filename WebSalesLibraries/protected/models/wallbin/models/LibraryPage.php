@@ -114,14 +114,21 @@
 		public function loadData()
 		{
 			unset($this->folders);
+			$minFolderHeaderHeight = 0;
 			foreach (FolderRecord::model()->findAll('id_page=?', array($this->id)) as $folderRecord)
 			{
 				$folder = new LibraryFolder($this);
 				$folder->load($folderRecord);
+				if ($folder->headerHeight > $minFolderHeaderHeight)
+					$minFolderHeaderHeight = $folder->headerHeight;
 				$this->folders[] = $folder;
 			}
 			if (isset($this->folders))
+			{
+				foreach ($this->folders as $folder)
+					$folder->headerHeight = $minFolderHeaderHeight;
 				usort($this->folders, "LibraryFolder::libraryFolderComparer");
+			}
 
 			unset($this->columns);
 			foreach (ColumnRecord::model()->findAll('id_page=?', array($this->id)) as $columnRecord)

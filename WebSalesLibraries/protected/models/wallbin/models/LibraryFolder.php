@@ -107,6 +107,7 @@
 		 */
 		public $dateModify;
 		public $displayLinkWidgets;
+		public $headerHeight;
 
 		public function __construct($page)
 		{
@@ -146,6 +147,24 @@
 				$this->banner = new Banner();
 				$this->banner->load($bannerRecord);
 			}
+
+			$headerImage = null;
+			if (isset($this->banner) && $this->banner->isEnabled)
+			{
+				$banner = $this->banner->image;
+				if (isset($banner))
+					$headerImage = imagecreatefromstring(base64_decode($banner));
+			}
+			else
+			{
+				$widget = $this->getWidget();
+				if (isset($widget))
+					$headerImage = imagecreatefromstring(base64_decode($widget));
+			}
+			if (isset($headerImage))
+				$this->headerHeight = imagesy($headerImage) + 2;
+			else
+				$this->headerHeight = 0;
 		}
 
 

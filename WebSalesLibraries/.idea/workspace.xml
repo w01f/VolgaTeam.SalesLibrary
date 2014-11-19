@@ -7,15 +7,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="311ca633-43c5-41dd-82ab-ba01ea556142" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/shortcuts/models/EmptyShortcut.php" afterPath="$PROJECT_DIR$/protected/models/shortcuts/models/EmptyShortcut.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/shortcuts/models/FileShortcut.php" afterPath="$PROJECT_DIR$/protected/models/shortcuts/models/FileShortcut.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/shortcuts/models/LibraryLinkShortcut.php" afterPath="$PROJECT_DIR$/protected/models/shortcuts/models/LibraryLinkShortcut.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/shortcuts/models/PageShortcut.php" afterPath="$PROJECT_DIR$/protected/models/shortcuts/models/PageShortcut.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/shortcuts/models/QuickListShortcut.php" afterPath="$PROJECT_DIR$/protected/models/shortcuts/models/QuickListShortcut.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/shortcuts/models/SearchShortcut.php" afterPath="$PROJECT_DIR$/protected/models/shortcuts/models/SearchShortcut.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/shortcuts/models/UrlShortcut.php" afterPath="$PROJECT_DIR$/protected/models/shortcuts/models/UrlShortcut.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/shortcuts/models/VideoShortcut.php" afterPath="$PROJECT_DIR$/protected/models/shortcuts/models/VideoShortcut.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/shortcuts/models/WindowShortcut.php" afterPath="$PROJECT_DIR$/protected/models/shortcuts/models/WindowShortcut.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/wallbin/models/LibraryFolder.php" afterPath="$PROJECT_DIR$/protected/models/wallbin/models/LibraryFolder.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/wallbin/models/LibraryPage.php" afterPath="$PROJECT_DIR$/protected/models/wallbin/models/LibraryPage.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/regular/base/folder-links.css" afterPath="$PROJECT_DIR$/css/regular/base/folder-links.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/views/regular/wallbin/folderContainer.php" afterPath="$PROJECT_DIR$/protected/views/regular/wallbin/folderContainer.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/config/params.php" afterPath="$PROJECT_DIR$/protected/config/params.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <list id="6cb86652-0ea2-464a-b0b1-9bbef25a8567" name="C#" comment="">
@@ -42,98 +38,7 @@
     <favorites_list name="WebSalesLibraries" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="SearchShortcut.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/protected/models/shortcuts/models/SearchShortcut.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="73" column="95" selection-start="3908" selection-end="3908" vertical-scroll-proportion="-16.76923" vertical-offset="805" max-vertical-offset="1428">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UrlShortcut.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/protected/models/shortcuts/models/UrlShortcut.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="27" column="132" selection-start="872" selection-end="872" vertical-scroll-proportion="-17.653847" vertical-offset="0" max-vertical-offset="612">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="VideoShortcut.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/protected/models/shortcuts/models/VideoShortcut.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="29" column="112" selection-start="922" selection-end="922" vertical-scroll-proportion="-18.423077" vertical-offset="14" max-vertical-offset="663">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="WindowShortcut.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/protected/models/shortcuts/models/WindowShortcut.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="39" column="137" selection-start="1508" selection-end="1508" vertical-scroll-proportion="-7.9615383" vertical-offset="456" max-vertical-offset="1292">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ShortcutsUpdateAction.php" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/protected/components/actions/ShortcutsUpdateAction.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="73" column="44" selection-start="3779" selection-end="3779" vertical-scroll-proportion="0.9370425" vertical-offset="601" max-vertical-offset="1989">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EmptyShortcut.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/protected/models/shortcuts/models/EmptyShortcut.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="132" selection-start="375" selection-end="415" vertical-scroll-proportion="-13.076923" vertical-offset="0" max-vertical-offset="578">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LibraryLinkShortcut.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/protected/models/shortcuts/models/LibraryLinkShortcut.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="28" column="112" selection-start="908" selection-end="908" vertical-scroll-proportion="-8.307693" vertical-offset="260" max-vertical-offset="969">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PageShortcut.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/protected/models/shortcuts/models/PageShortcut.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="29" column="68" selection-start="875" selection-end="875" vertical-scroll-proportion="-17.923077" vertical-offset="27" max-vertical-offset="663">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="QuickListShortcut.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/protected/models/shortcuts/models/QuickListShortcut.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="40" column="68" selection-start="1361" selection-end="1361" vertical-scroll-proportion="-7.9615383" vertical-offset="473" max-vertical-offset="1190">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FileShortcut.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/protected/models/shortcuts/models/FileShortcut.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="28" column="112" selection-start="898" selection-end="898" vertical-scroll-proportion="-18.307692" vertical-offset="0" max-vertical-offset="629">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -153,9 +58,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/protected/views/regular/widgets/searchControlPanel.php" />
-        <option value="$PROJECT_DIR$/protected/views/regular/shortcuts/searchBar.php" />
-        <option value="$PROJECT_DIR$/protected/controllers/PreviewController.php" />
         <option value="$PROJECT_DIR$/protected/views/regular/shortcuts/directLink.php" />
         <option value="$PROJECT_DIR$/protected/views/phone/shortcuts/directLink.php" />
         <option value="$PROJECT_DIR$/protected/controllers/WallbinController.php" />
@@ -170,7 +72,6 @@
         <option value="$PROJECT_DIR$/protected/data/tables/tbl_link_settings.sql" />
         <option value="$PROJECT_DIR$/protected/models/wallbin/records/LinkSettingsRecord.php" />
         <option value="$PROJECT_DIR$/protected/controllers/ContentController.php" />
-        <option value="$PROJECT_DIR$/protected/models/wallbin/models/LibraryFolder.php" />
         <option value="$PROJECT_DIR$/protected/models/wallbin/models/LinkSettings.php" />
         <option value="$PROJECT_DIR$/protected/views/regular/wallbin/link.php" />
         <option value="$PROJECT_DIR$/protected/views/regular/shortcuts/page.php" />
@@ -194,7 +95,6 @@
         <option value="$PROJECT_DIR$/protected/models/wallbin/models/LibraryLink.php" />
         <option value="$PROJECT_DIR$/protected/views/regular/preview/viewDialog.php" />
         <option value="$PROJECT_DIR$/js/regular/base/link-viewing.js" />
-        <option value="$PROJECT_DIR$/protected/config/params.php" />
         <option value="$PROJECT_DIR$/protected/models/shortcuts/models/FileShortcut.php" />
         <option value="$PROJECT_DIR$/protected/models/shortcuts/models/EmptyShortcut.php" />
         <option value="$PROJECT_DIR$/protected/models/shortcuts/models/LibraryLinkShortcut.php" />
@@ -204,6 +104,11 @@
         <option value="$PROJECT_DIR$/protected/models/shortcuts/models/UrlShortcut.php" />
         <option value="$PROJECT_DIR$/protected/models/shortcuts/models/VideoShortcut.php" />
         <option value="$PROJECT_DIR$/protected/models/shortcuts/models/WindowShortcut.php" />
+        <option value="$PROJECT_DIR$/protected/models/wallbin/models/LibraryPage.php" />
+        <option value="$PROJECT_DIR$/css/regular/base/folder-links.css" />
+        <option value="$PROJECT_DIR$/protected/models/wallbin/models/LibraryFolder.php" />
+        <option value="$PROJECT_DIR$/protected/config/params.php" />
+        <option value="$PROJECT_DIR$/protected/views/regular/wallbin/folderContainer.php" />
       </list>
     </option>
   </component>
@@ -288,6 +193,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -338,153 +244,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="models" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="protected" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="models" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="shortcuts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="records" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="protected" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="models" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="shortcuts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="models" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="protected" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="controllers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="protected" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="config" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="protected" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="protected" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="actions" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="protected" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="commands" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -504,7 +264,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -549,7 +308,7 @@
     <property name="JdbcConsole.ResultPageSize" value="1000" />
     <property name="options.searchVisible" value="true" />
     <property name="dynamic.classpath" value="false" />
-    <property name="SearchEverywhereHistory" value="ar&#10;'" />
+    <property name="SearchEverywhereHistory" value="&#10;ar&#10;'" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -578,10 +337,10 @@
     <configuration default="true" type="PhpWebAppRunConfigurationType" factoryName="PHP Web Application">
       <method />
     </configuration>
-    <configuration default="true" type="PhpHttpRequestRunConfigurationType" factoryName="PHP HTTP Request">
+    <configuration default="true" type="PhpRemoteDebugRunConfigurationType" factoryName="PHP Remote Debug" server_name="Localhost" session_id="netbeans-xdebug">
       <method />
     </configuration>
-    <configuration default="true" type="PhpRemoteDebugRunConfigurationType" factoryName="PHP Remote Debug" server_name="Localhost" session_id="netbeans-xdebug">
+    <configuration default="true" type="PhpHttpRequestRunConfigurationType" factoryName="PHP HTTP Request">
       <method />
     </configuration>
     <configuration default="true" type="PhpLocalRunConfigurationType" factoryName="PHP Console">
@@ -1191,7 +950,11 @@
       <created>1416252829962</created>
       <updated>1416252829962</updated>
     </task>
-    <option name="localTasksCounter" value="138" />
+    <task id="LOCAL-00138" summary="Web Sales Depot: Static ID shortcuts images bug fix&#10;&#10;">
+      <created>1416336682882</created>
+      <updated>1416336682883</updated>
+    </task>
+    <option name="localTasksCounter" value="139" />
     <servers />
   </component>
   <component name="TodoView" selected-index="3">
@@ -1218,10 +981,10 @@
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="File Transfer" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15587267" sideWeight="0.6552828" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21299255" sideWeight="0.5117396" order="5" side_tool="false" content_ui="tabs" x="20" y="824" width="1874" height="217" />
+      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15587267" sideWeight="0.6552828" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="true" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21299255" sideWeight="0.5117396" order="5" side_tool="false" content_ui="tabs" x="20" y="824" width="1874" height="217" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32930845" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22343922" sideWeight="0.40288153" order="1" side_tool="false" content_ui="tabs" x="-1278" y="1" width="1271" height="1022" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22283205" sideWeight="0.40288153" order="1" side_tool="false" content_ui="tabs" x="-1278" y="1" width="1271" height="1022" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.17518637" sideWeight="0.87596047" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Framework" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.59625965" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22283205" sideWeight="0.85272145" order="3" side_tool="false" content_ui="tabs" />
@@ -1230,7 +993,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28430295" sideWeight="0.4850587" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32491767" sideWeight="0.49573106" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21033014" sideWeight="0.12957746" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19755058" sideWeight="0.87042254" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1996805" sideWeight="0.87042254" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24478595" sideWeight="0.44236925" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15314835" sideWeight="0.76237625" order="4" side_tool="false" content_ui="tabs" />
@@ -1247,8 +1010,8 @@
     </layout>
     <layout-to-restore>
       <window_info id="Changes" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22364217" sideWeight="0.5117396" order="5" side_tool="false" content_ui="tabs" x="20" y="824" width="1874" height="217" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.17412141" sideWeight="0.87596047" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15314835" sideWeight="0.76237625" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="1.0" sideWeight="0.48772678" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2777168" sideWeight="0.4850587" order="9" side_tool="false" content_ui="tabs" />
@@ -1256,8 +1019,8 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32491767" sideWeight="0.49573106" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18530351" sideWeight="0.87042254" order="0" side_tool="false" content_ui="combo" />
       <window_info id="DB Browser" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.59625965" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="DB Execution Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24588364" sideWeight="0.44236925" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="DB Execution Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24866879" sideWeight="0.8228823" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30996713" sideWeight="0.923159" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.135816" sideWeight="0.6552828" order="10" side_tool="false" content_ui="tabs" />
@@ -1289,7 +1052,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="Web Sales Depot: Keyword and Category Search fix&#10;" />
     <MESSAGE value="Web Sales Depot: Major Site refactoring using latest versions of vendors (JQuery, BS3, etc.)&#10;" />
     <MESSAGE value="Web Sales Depot: Bug fixes after refactoring&#10;" />
     <MESSAGE value="Web Sales Depot: Bug fixes after re-factoring&#10;&#10;" />
@@ -1314,7 +1076,8 @@
     <MESSAGE value="Web Sales Depot: File Activity Statistic report fix&#10;&#10;" />
     <MESSAGE value="Web Sales Depot: Wallbin Tab page logo fix&#10;&#10;" />
     <MESSAGE value="Web Sales Depot: Mp3 links fix&#10;&#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="Web Sales Depot: Mp3 links fix&#10;&#10;" />
+    <MESSAGE value="Web Sales Depot: Static ID shortcuts images bug fix&#10;&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Web Sales Depot: Static ID shortcuts images bug fix&#10;&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1361,51 +1124,6 @@
     </PATH>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/protected/models/statistic/models/UserActivity.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.4586331" vertical-offset="255" max-vertical-offset="1496" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/models/statistic/models/MainGroupReportModel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.119584054" vertical-offset="69" max-vertical-offset="646" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/models/statistic/records/StatisticActivityRecord.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.50830567" vertical-offset="306" max-vertical-offset="1326" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/models/statistic/models/FileActivityReportModel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="30" selection-start="215" selection-end="229" vertical-scroll-proportion="-10.461538" vertical-offset="0" max-vertical-offset="476" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/controllers/StatisticController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="382" column="9" selection-start="13930" selection-end="13930" vertical-scroll-proportion="0.6462264" vertical-offset="6083" max-vertical-offset="6970" />
-      </provider>
-    </entry>
-    <entry file="dbDummy://db-console:/b3b4574f/5f689e70-8d5b-41e3-aaa1-c8c47e976102/">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="26" selection-start="0" selection-end="454" vertical-scroll-proportion="0.29541865" vertical-offset="0" max-vertical-offset="633" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/data/procedures/sp_get_all_qpages.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="34" selection-start="0" selection-end="645" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="408" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/data/procedures/sp_get_inactive_users.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="30" selection-start="0" selection-end="673" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="340" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/data/procedures/sp_get_access_report.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="34" selection-start="0" selection-end="2057" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="646" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/protected/data/procedures/sp_get_main_group_report.sql">
       <provider selected="true" editor-type-id="text-editor">
         <state line="21" column="21" selection-start="1163" selection-end="1163" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="714" />
@@ -1439,11 +1157,6 @@
     <entry file="file://$PROJECT_DIR$/protected/data/procedures/sp_get_file_activity_report.sql">
       <provider selected="true" editor-type-id="text-editor">
         <state line="13" column="7" selection-start="0" selection-end="661" vertical-scroll-proportion="0.33383685" vertical-offset="0" max-vertical-offset="662" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/regular/base/wallbin.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="455" column="45" selection-start="11907" selection-end="11907" vertical-scroll-proportion="0.6082192" vertical-offset="4928" max-vertical-offset="7582" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/protected/models/wallbin/models/Library.php">
@@ -1535,30 +1248,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/js/regular/base/link-viewing.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="375" column="64" selection-start="10974" selection-end="10974" vertical-scroll-proportion="0.0" vertical-offset="5928" max-vertical-offset="13685">
-          <folding>
-            <marker date="1416251303414" expanded="true" signature="-1:-1" placeholder="..." />
-          </folding>
-        </state>
+        <state line="375" column="64" selection-start="10974" selection-end="10974" vertical-scroll-proportion="0.0" vertical-offset="5928" max-vertical-offset="13685" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/protected/views/regular/preview/viewDialog.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="174" column="73" selection-start="8795" selection-end="8799" vertical-scroll-proportion="0.0" vertical-offset="2421" max-vertical-offset="3808">
-          <folding />
-        </state>
+        <state line="174" column="73" selection-start="8795" selection-end="8799" vertical-scroll-proportion="0.0" vertical-offset="2421" max-vertical-offset="3808" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/protected/models/wallbin/models/LibraryLink.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="451" column="60" selection-start="13918" selection-end="13918" vertical-scroll-proportion="0.0" vertical-offset="7453" max-vertical-offset="19703">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/config/params.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="0" selection-start="248" selection-end="248" vertical-scroll-proportion="-6.5384617" vertical-offset="0" max-vertical-offset="272">
           <folding />
         </state>
       </provider>
@@ -1586,71 +1286,151 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/protected/models/shortcuts/models/FileShortcut.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="112" selection-start="898" selection-end="898" vertical-scroll-proportion="-18.307692" vertical-offset="0" max-vertical-offset="629">
+        <state line="28" column="112" selection-start="898" selection-end="898" vertical-scroll-proportion="0.0" vertical-offset="476" max-vertical-offset="629">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/protected/models/shortcuts/models/EmptyShortcut.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="132" selection-start="375" selection-end="415" vertical-scroll-proportion="-13.076923" vertical-offset="0" max-vertical-offset="578">
+        <state line="20" column="132" selection-start="375" selection-end="415" vertical-scroll-proportion="0.0" vertical-offset="340" max-vertical-offset="578">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/protected/models/shortcuts/models/LibraryLinkShortcut.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="112" selection-start="908" selection-end="908" vertical-scroll-proportion="-8.307693" vertical-offset="260" max-vertical-offset="969">
+        <state line="28" column="112" selection-start="908" selection-end="908" vertical-scroll-proportion="0.0" vertical-offset="260" max-vertical-offset="969">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/protected/models/shortcuts/models/PageShortcut.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="68" selection-start="875" selection-end="875" vertical-scroll-proportion="-17.923077" vertical-offset="27" max-vertical-offset="663">
+        <state line="29" column="68" selection-start="875" selection-end="875" vertical-scroll-proportion="0.0" vertical-offset="27" max-vertical-offset="663">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/protected/models/shortcuts/models/QuickListShortcut.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="68" selection-start="1361" selection-end="1361" vertical-scroll-proportion="-7.9615383" vertical-offset="473" max-vertical-offset="1190">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/models/shortcuts/models/SearchShortcut.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="73" column="95" selection-start="3908" selection-end="3908" vertical-scroll-proportion="-16.76923" vertical-offset="805" max-vertical-offset="1428">
+        <state line="40" column="68" selection-start="1361" selection-end="1361" vertical-scroll-proportion="0.0" vertical-offset="473" max-vertical-offset="1190">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/protected/models/shortcuts/models/UrlShortcut.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="132" selection-start="872" selection-end="872" vertical-scroll-proportion="-17.653847" vertical-offset="0" max-vertical-offset="612">
+        <state line="27" column="132" selection-start="872" selection-end="872" vertical-scroll-proportion="0.0" vertical-offset="459" max-vertical-offset="612">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/protected/models/shortcuts/models/VideoShortcut.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="112" selection-start="922" selection-end="922" vertical-scroll-proportion="-18.423077" vertical-offset="14" max-vertical-offset="663">
+        <state line="29" column="112" selection-start="922" selection-end="922" vertical-scroll-proportion="0.0" vertical-offset="14" max-vertical-offset="663">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/protected/models/shortcuts/models/WindowShortcut.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="137" selection-start="1508" selection-end="1508" vertical-scroll-proportion="-7.9615383" vertical-offset="456" max-vertical-offset="1292">
+        <state line="39" column="137" selection-start="1508" selection-end="1508" vertical-scroll-proportion="0.0" vertical-offset="456" max-vertical-offset="1292">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/protected/components/actions/ShortcutsUpdateAction.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="73" column="44" selection-start="3779" selection-end="3779" vertical-scroll-proportion="0.9370425" vertical-offset="601" max-vertical-offset="1989">
+        <state line="73" column="44" selection-start="3779" selection-end="3779" vertical-scroll-proportion="0.634434" vertical-offset="703" max-vertical-offset="1989">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/models/shortcuts/models/SearchShortcut.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="73" column="95" selection-start="3908" selection-end="3908" vertical-scroll-proportion="0.7794811" vertical-offset="580" max-vertical-offset="1428">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/models/wallbin/models/UniversalPreviewContainer.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="133" column="58" selection-start="2735" selection-end="2735" vertical-scroll-proportion="-14.384615" vertical-offset="1887" max-vertical-offset="3621">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/views/regular/wallbin/banner.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="79" selection-start="292" selection-end="306" vertical-scroll-proportion="-3.2692308" vertical-offset="0" max-vertical-offset="680">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/views/regular/wallbin/columnsPage.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="37" column="0" selection-start="1760" selection-end="1760" vertical-scroll-proportion="-20.615385" vertical-offset="93" max-vertical-offset="799">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/regular/base/wallbin.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="455" column="45" selection-start="11907" selection-end="11907" vertical-scroll-proportion="0.91256833" vertical-offset="7067" max-vertical-offset="9945">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/models/wallbin/models/LibraryPage.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="116" column="26" selection-start="1991" selection-end="1991" vertical-scroll-proportion="-7.8461537" vertical-offset="1768" max-vertical-offset="4403">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/com/jetbrains/php/lang/psi/stubs/data/standard_8.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="81" column="27" selection-start="2200" selection-end="2205" vertical-scroll-proportion="-15.799712" vertical-offset="12342" max-vertical-offset="18734">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/models/wallbin/models/LibraryFolder.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="164" column="63" selection-start="3422" selection-end="3422" vertical-scroll-proportion="-19.384615" vertical-offset="2284" max-vertical-offset="4522">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/config/params.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="22" selection-start="242" selection-end="242" vertical-scroll-proportion="-5.230769" vertical-offset="0" max-vertical-offset="272">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/regular/base/folder-links.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="22" selection-start="333" selection-end="333" vertical-scroll-proportion="0.67302054" vertical-offset="0" max-vertical-offset="1598">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/regular/base/accordion.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="34" column="0" selection-start="536" selection-end="536" vertical-scroll-proportion="0.7756598" vertical-offset="49" max-vertical-offset="731">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/views/regular/wallbin/folderContainer.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="91" selection-start="1164" selection-end="1164" vertical-scroll-proportion="0.44945568" vertical-offset="0" max-vertical-offset="643">
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
