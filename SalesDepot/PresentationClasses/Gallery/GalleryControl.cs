@@ -5,6 +5,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Web;
 using System.Windows.Forms;
@@ -29,8 +30,10 @@ namespace SalesDepot.PresentationClasses.Gallery
 		private int _idCommandDownload;
 		private int _idCommandEdit;
 		private int _idCommandAddToFavorites;
+		private int _idCommandAddAllToFavorites;
 		private int _zoomIndex;
 		private readonly List<ButtonItem> _browseModes = new List<ButtonItem>();
+		private readonly List<string> _allImages = new List<string>();
 
 		protected GalleryControl()
 		{
@@ -106,7 +109,7 @@ namespace SalesDepot.PresentationClasses.Gallery
 		private void UpdateBrowseMode()
 		{
 			Navigate(String.Empty);
-			LoadImage(null);
+			LoadImageToEditor(null);
 			_browseModes.ForEach(b => b.Enabled = false);
 			ShowProgress();
 			SectionsList.EditValue = null;
@@ -148,6 +151,7 @@ namespace SalesDepot.PresentationClasses.Gallery
 			_idCommandDownload = CommandIds.RegisterUserCommand("DownloadImage");
 			_idCommandEdit = CommandIds.RegisterUserCommand("EditImage");
 			_idCommandAddToFavorites = CommandIds.RegisterUserCommand("AddToFavorites");
+			_idCommandAddAllToFavorites = CommandIds.RegisterUserCommand("AddAllToFavorites");
 			_browser = new WebControl();
 			Controls.Add(_browser);
 			_browser.WebView = new WebView();
@@ -164,33 +168,34 @@ namespace SalesDepot.PresentationClasses.Gallery
 			_browser.WebView.LoadUrl(url.Replace(" ", "%20"));
 		}
 
-		private void LoadImage(string imageUrl, bool openInEditor)
+		private Dictionary<string, Image> DownloadImages(IEnumerable<string> urls)
 		{
+			var images = new Dictionary<string, Image>();
 			ShowProgress();
 			UseWaitCursor = true;
 			Application.DoEvents();
 			try
 			{
 				Application.DoEvents();
-				Image imageData = null;
-				var thread = new Thread(() => { imageData = Image.FromStream(new MemoryStream(new WebClient().DownloadData(imageUrl))); });
+				var thread = new Thread(() =>
+				{
+					foreach (var url in urls)
+					{
+						var uri = new Uri(url, true);
+						images.Add(Path.GetFileNameWithoutExtension(HttpUtility.UrlDecode(uri.Segments[uri.Segments.Length - 1])), Image.FromStream(new MemoryStream(new WebClient().DownloadData(url))));
+					}
+				});
 				thread.Start();
 				while (thread.IsAlive)
 					Application.DoEvents();
-				if (openInEditor)
-				{
-					LoadImage(imageData);
-					ViewMode_Click(EditMode, EventArgs.Empty);
-				}
-				else
-					Clipboard.SetImage(imageData);
 			}
 			catch { }
 			UseWaitCursor = false;
 			HideProgress();
+			return images;
 		}
 
-		private void LoadImage(Image image)
+		private void LoadImageToEditor(Image image)
 		{
 			_zoomIndex = 100;
 			ChangeTool(null);
@@ -198,6 +203,20 @@ namespace SalesDepot.PresentationClasses.Gallery
 			if (image != null)
 				_imageContainer.Image = new VintasoftImage(image, true);
 			EditMode.Enabled = _imageContainer.Image != null;
+		}
+
+		private void ExtractAllImages(string category = null)
+		{
+			_allImages.Clear();
+			if (String.IsNullOrEmpty(category) || category == "all")
+				category = null;
+			string html = _browser.WebView.GetHtml();
+			var imagesRegex = new Regex("data-foliocat=\"(?<category>.*?)\" data-foliobox=\"(?<url>.*?)\"");
+			foreach (Match c in imagesRegex.Matches(html))
+			{
+				if (category == null || category == c.Groups["category"].Value)
+					_allImages.Add(_browser.WebView.Url + c.Groups["url"].Value.Replace("\\", "/"));
+			}
 		}
 
 		private void ChangeTool(VisualTool tool)
@@ -259,6 +278,7 @@ namespace SalesDepot.PresentationClasses.Gallery
 
 		private void WebView_LoadComplete(object sender, NavigationTaskEventArgs e)
 		{
+			ExtractAllImages();
 			HideProgress();
 			BrowseBar.Enabled = true;
 		}
@@ -286,36 +306,65 @@ namespace SalesDepot.PresentationClasses.Gallery
 		private void WebView_BeforeContextMenu(object sender, BeforeContextMenuEventArgs e)
 		{
 			e.Menu.Items.Clear();
-			if (e.MenuInfo.MediaType != ContextMenuMediaType.Image) return;
-			e.Menu.Items.Add(new EO.WebBrowser.MenuItem("Copy Image to Clipboard", _idCommandDownload));
-			e.Menu.Items.Add(new EO.WebBrowser.MenuItem("Edit this Image first", _idCommandEdit));
-			e.Menu.Items.Add(new EO.WebBrowser.MenuItem("Save to my Favorites", _idCommandAddToFavorites));
+			if (e.MenuInfo.MediaType == ContextMenuMediaType.Image)
+			{
+				e.Menu.Items.Add(new EO.WebBrowser.MenuItem("Copy Image to Clipboard", _idCommandDownload));
+				e.Menu.Items.Add(new EO.WebBrowser.MenuItem("Edit this Image first", _idCommandEdit));
+				e.Menu.Items.Add(new EO.WebBrowser.MenuItem("Save to my Favorites", _idCommandAddToFavorites));
+				e.Menu.Items.Add(new EO.WebBrowser.MenuItem { IsSeparator = true });
+			}
+			if (_allImages.Any())
+				e.Menu.Items.Add(new EO.WebBrowser.MenuItem("Save all these images to my favorites", _idCommandAddAllToFavorites));
 		}
 
 		void WebView_Command(object sender, CommandEventArgs e)
 		{
-			if (e.CommandId == _idCommandAddToFavorites)
+			if (e.CommandId == _idCommandAddAllToFavorites)
 			{
-				var uri = new Uri(e.MenuInfo.SourceUrl, true);
-				LoadImage(e.MenuInfo.SourceUrl, false);
-				var image = Clipboard.GetImage();
-				if (image != null)
-					AddToFavorites(image, Path.GetFileNameWithoutExtension(HttpUtility.UrlDecode(uri.Segments[uri.Segments.Length - 1])));
+				var categoryRegex = new Regex(@"data-filtercat=""(?<category>\w+?)"".*background-color: rgb");
+				var m = categoryRegex.Match(_browser.WebView.GetHtml());
+				ExtractAllImages(m.Success ? m.Groups["category"].Value : null);
+				AddToFavorites(DownloadImages(_allImages));
 			}
-			else
-				LoadImage(e.MenuInfo.SourceUrl, e.CommandId == _idCommandEdit);
+			else if (e.CommandId == _idCommandAddToFavorites)
+			{
+				var images = DownloadImages(new[] { e.MenuInfo.SourceUrl });
+				if (images.Any())
+					AddToFavorites(images.First().Value, images.First().Key);
+			}
+			else if (e.CommandId == _idCommandEdit)
+			{
+				var images = DownloadImages(new[] { e.MenuInfo.SourceUrl });
+				if (!images.Any()) return;
+				LoadImageToEditor(images.First().Value);
+				ViewMode_Click(EditMode, EventArgs.Empty);
+			}
+			else if (e.CommandId == _idCommandDownload)
+			{
+				var images = DownloadImages(new[] { e.MenuInfo.SourceUrl });
+				if (images.Any())
+					Utils.PutImageToClipboard(images.First().Value);
+			}
 		}
 
 		private void AddToFavorites(Image image, string defaultName)
 		{
+			var imageName = defaultName;
 			using (var form = new FormAddFavoriteImage(image, defaultName, FavoriteImagesManager.Instance.Images.Select(i => i.Name.ToLower())))
 			{
 				form.Text = "Add Image to Favorites";
 				form.laTitle.Text = "Save this Image in your Favorites folder for future presentations";
 				if (form.ShowDialog() != DialogResult.OK) return;
-				FavoriteImagesManager.Instance.SaveImage(image, form.ImageName);
-				AppManager.Instance.ShowInfo("Image successfully added to Favorites");
+				imageName = form.ImageName;
 			}
+			FavoriteImagesManager.Instance.SaveImage(image, imageName);
+			AppManager.Instance.ShowInfo("Image successfully added to Favorites");
+		}
+
+		private void AddToFavorites(Dictionary<string, Image> images)
+		{
+			FavoriteImagesManager.Instance.SaveImages(images);
+			AppManager.Instance.ShowInfo("Images successfully added to Favorites");
 		}
 
 		private void ShowProgress()
@@ -354,15 +403,15 @@ namespace SalesDepot.PresentationClasses.Gallery
 
 		private void Copy_Click(object sender, EventArgs e)
 		{
-			_imageContainer.DoCopy();
+			Utils.PutImageToClipboard(_imageContainer.Image.GetAsBitmap());
 		}
 
 		private void Favorites_Click(object sender, EventArgs e)
 		{
-			_imageContainer.DoCopy();
-			var image = Clipboard.GetImage();
-			if (image != null)
-				AddToFavorites(image, null);
+			Utils.PutImageToClipboard(_imageContainer.Image.GetAsBitmap());
+			var clipboardImage = Utils.GetImageFormClipboard();
+			if (clipboardImage != null)
+				AddToFavorites(clipboardImage, null);
 		}
 
 		private void GalleryControl_Resize(object sender, EventArgs e)

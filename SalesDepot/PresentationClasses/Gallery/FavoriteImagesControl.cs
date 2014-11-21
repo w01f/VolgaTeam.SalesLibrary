@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using DevComponents.DotNetBar;
+using DevExpress.Utils;
+using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Layout;
 using DevExpress.XtraGrid.Views.Layout.ViewInfo;
 using SalesDepot.CoreObjects.BusinessClasses;
@@ -284,6 +287,16 @@ namespace SalesDepot.PresentationClasses.Gallery
 			if (AppManager.Instance.ShowWarningQuestion("Are you sure you want to delete image?") != DialogResult.Yes) return;
 			_manager.DeleteImage(imageSource);
 			_menuHitInfo = null;
+		}
+
+		private void toolTipController_GetActiveObjectInfo(object sender, ToolTipControllerGetActiveObjectInfoEventArgs e)
+		{
+			var view = gridControlLogoGallery.GetViewAt(e.ControlMousePosition) as LayoutView;
+			if (view == null) return;
+			var hi = view.CalcHitInfo(e.ControlMousePosition);
+			if (!hi.InFieldValue) return;
+			var imageSource = view.GetRow(hi.RowHandle) as ImageSource;
+			e.Info = new ToolTipControlInfo(new CellToolTipInfo(hi.RowHandle, hi.Column, "cell"), Path.GetFileName(imageSource.FileName));
 		}
 		#endregion
 	}

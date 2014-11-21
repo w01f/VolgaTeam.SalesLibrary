@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Runtime.InteropServices;
+using System.Windows.Forms;
 using Ionic.Zip;
 using SalesDepot.CoreObjects.InteropClasses;
 
@@ -68,6 +71,24 @@ namespace SalesDepot.CoreObjects.ToolClasses
 			if (font.Strikeout)
 				str = str + ", Strikeout";
 			return str;
+		}
+
+		public static void PutImageToClipboard(Image imageData)
+		{
+			if (imageData == null) return;
+			using (var stream = new MemoryStream())
+			{
+				imageData.Save(stream, ImageFormat.Png);
+				var data = new DataObject("PNG", stream);
+				Clipboard.Clear();
+				Clipboard.SetDataObject(data, true);
+			}
+		}
+
+		public static Image GetImageFormClipboard()
+		{
+			if (!Clipboard.ContainsData("PNG")) return null;
+			return Image.FromStream((Stream)Clipboard.GetData("PNG"));
 		}
 
 		#region Internet Browser Support

@@ -55,6 +55,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities
 			var view7 = new QuizUnitedData.ContainerControl();
 			_views.Add(ViewType.QuizUnitedReport, view7);
 			splitContainerControl.Panel2.Controls.Add(view7);
+			pnCustomFilter.Controls.AddRange(view7.FilterControls.ToArray());
 			var view8 = new FileActivityData.ContainerControl();
 			_views.Add(ViewType.FileActivityReport, view8);
 			splitContainerControl.Panel2.Controls.Add(view8);

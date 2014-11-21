@@ -39,11 +39,12 @@
 			this.layoutViewCard1 = new DevExpress.XtraGrid.Views.Layout.LayoutViewCard();
 			this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.toolStripMenuItemCopy = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItemEdit = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItemRename = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
 			this.toolStripMenuItemDelete = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolStripMenuItemEdit = new System.Windows.Forms.ToolStripMenuItem();
 			this.circularProgressWebpage = new DevComponents.DotNetBar.Controls.CircularProgress();
+			this.toolTipController = new DevExpress.Utils.ToolTipController(this.components);
 			((System.ComponentModel.ISupportInitialize)(this.gridControlLogoGallery)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutViewLogoGallery)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit)).BeginInit();
@@ -56,6 +57,7 @@
 			// gridControlLogoGallery
 			// 
 			this.gridControlLogoGallery.AllowDrop = true;
+			this.gridControlLogoGallery.Cursor = System.Windows.Forms.Cursors.Default;
 			this.gridControlLogoGallery.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.gridControlLogoGallery.Location = new System.Drawing.Point(0, 0);
 			this.gridControlLogoGallery.MainView = this.layoutViewLogoGallery;
@@ -64,6 +66,7 @@
             this.repositoryItemPictureEdit});
 			this.gridControlLogoGallery.Size = new System.Drawing.Size(622, 464);
 			this.gridControlLogoGallery.TabIndex = 38;
+			this.gridControlLogoGallery.ToolTipController = this.toolTipController;
 			this.gridControlLogoGallery.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.layoutViewLogoGallery});
 			// 
@@ -72,7 +75,7 @@
 			this.layoutViewLogoGallery.Appearance.SelectionFrame.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
 			this.layoutViewLogoGallery.Appearance.SelectionFrame.BackColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
 			this.layoutViewLogoGallery.Appearance.SelectionFrame.Options.UseBackColor = true;
-			this.layoutViewLogoGallery.CardMinSize = new System.Drawing.Size(110, 125);
+			this.layoutViewLogoGallery.CardMinSize = new System.Drawing.Size(108, 57);
 			this.layoutViewLogoGallery.Columns.AddRange(new DevExpress.XtraGrid.Columns.LayoutViewColumn[] {
             this.gridColumnLogoGallery,
             this.gridColumnName});
@@ -130,11 +133,11 @@
 			// 
 			// layoutViewField_gridColumnLogoGallery_1
 			// 
-			this.layoutViewField_gridColumnLogoGallery_1.EditorPreferredWidth = 107;
+			this.layoutViewField_gridColumnLogoGallery_1.EditorPreferredWidth = 104;
 			this.layoutViewField_gridColumnLogoGallery_1.Location = new System.Drawing.Point(0, 0);
 			this.layoutViewField_gridColumnLogoGallery_1.Name = "layoutViewField_gridColumnLogoGallery_1";
 			this.layoutViewField_gridColumnLogoGallery_1.Padding = new DevExpress.XtraLayout.Utils.Padding(1, 1, 1, 1);
-			this.layoutViewField_gridColumnLogoGallery_1.Size = new System.Drawing.Size(127, 104);
+			this.layoutViewField_gridColumnLogoGallery_1.Size = new System.Drawing.Size(106, 33);
 			this.layoutViewField_gridColumnLogoGallery_1.TextLocation = DevExpress.Utils.Locations.Default;
 			this.layoutViewField_gridColumnLogoGallery_1.TextSize = new System.Drawing.Size(0, 0);
 			this.layoutViewField_gridColumnLogoGallery_1.TextToControlDistance = 0;
@@ -155,13 +158,12 @@
 			// 
 			// layoutViewField_gridColumnName_1
 			// 
-			this.layoutViewField_gridColumnName_1.AllowHotTrack = false;
-			this.layoutViewField_gridColumnName_1.EditorPreferredWidth = 107;
+			this.layoutViewField_gridColumnName_1.EditorPreferredWidth = 104;
 			this.layoutViewField_gridColumnName_1.ImageAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-			this.layoutViewField_gridColumnName_1.Location = new System.Drawing.Point(0, 104);
+			this.layoutViewField_gridColumnName_1.Location = new System.Drawing.Point(0, 33);
 			this.layoutViewField_gridColumnName_1.Name = "layoutViewField_gridColumnName_1";
 			this.layoutViewField_gridColumnName_1.Padding = new DevExpress.XtraLayout.Utils.Padding(1, 1, 1, 1);
-			this.layoutViewField_gridColumnName_1.Size = new System.Drawing.Size(127, 18);
+			this.layoutViewField_gridColumnName_1.Size = new System.Drawing.Size(106, 22);
 			this.layoutViewField_gridColumnName_1.TextLocation = DevExpress.Utils.Locations.Default;
 			this.layoutViewField_gridColumnName_1.TextSize = new System.Drawing.Size(0, 0);
 			this.layoutViewField_gridColumnName_1.TextToControlDistance = 0;
@@ -195,36 +197,36 @@
 			// toolStripMenuItemCopy
 			// 
 			this.toolStripMenuItemCopy.Name = "toolStripMenuItemCopy";
-			this.toolStripMenuItemCopy.Size = new System.Drawing.Size(127, 22);
+			this.toolStripMenuItemCopy.Size = new System.Drawing.Size(101, 22);
 			this.toolStripMenuItemCopy.Text = "Copy";
 			this.toolStripMenuItemCopy.Click += new System.EventHandler(this.toolStripMenuItemCopy_Click);
+			// 
+			// toolStripMenuItemEdit
+			// 
+			this.toolStripMenuItemEdit.Name = "toolStripMenuItemEdit";
+			this.toolStripMenuItemEdit.Size = new System.Drawing.Size(101, 22);
+			this.toolStripMenuItemEdit.Text = "Edit";
+			this.toolStripMenuItemEdit.Click += new System.EventHandler(this.toolStripMenuItemEdit_Click);
 			// 
 			// toolStripMenuItemRename
 			// 
 			this.toolStripMenuItemRename.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
 			this.toolStripMenuItemRename.Name = "toolStripMenuItemRename";
-			this.toolStripMenuItemRename.Size = new System.Drawing.Size(127, 22);
+			this.toolStripMenuItemRename.Size = new System.Drawing.Size(101, 22);
 			this.toolStripMenuItemRename.Text = "Rename...";
 			this.toolStripMenuItemRename.Click += new System.EventHandler(this.toolStripMenuItemRename_Click);
 			// 
 			// toolStripSeparator1
 			// 
 			this.toolStripSeparator1.Name = "toolStripSeparator1";
-			this.toolStripSeparator1.Size = new System.Drawing.Size(124, 6);
+			this.toolStripSeparator1.Size = new System.Drawing.Size(98, 6);
 			// 
 			// toolStripMenuItemDelete
 			// 
 			this.toolStripMenuItemDelete.Name = "toolStripMenuItemDelete";
-			this.toolStripMenuItemDelete.Size = new System.Drawing.Size(127, 22);
+			this.toolStripMenuItemDelete.Size = new System.Drawing.Size(101, 22);
 			this.toolStripMenuItemDelete.Text = "Delete";
 			this.toolStripMenuItemDelete.Click += new System.EventHandler(this.toolStripMenuItemDelete_Click);
-			// 
-			// toolStripMenuItemEdit
-			// 
-			this.toolStripMenuItemEdit.Name = "toolStripMenuItemEdit";
-			this.toolStripMenuItemEdit.Size = new System.Drawing.Size(127, 22);
-			this.toolStripMenuItemEdit.Text = "Edit";
-			this.toolStripMenuItemEdit.Click += new System.EventHandler(this.toolStripMenuItemEdit_Click);
 			// 
 			// circularProgressWebpage
 			// 
@@ -240,6 +242,12 @@
 			this.circularProgressWebpage.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP;
 			this.circularProgressWebpage.TabIndex = 39;
 			this.circularProgressWebpage.TabStop = false;
+			// 
+			// toolTipController
+			// 
+			this.toolTipController.Rounded = true;
+			this.toolTipController.ShowShadow = false;
+			this.toolTipController.GetActiveObjectInfo += new DevExpress.Utils.ToolTipControllerGetActiveObjectInfoEventHandler(this.toolTipController_GetActiveObjectInfo);
 			// 
 			// FavoriteImagesControl
 			// 
@@ -269,9 +277,6 @@
 		private DevExpress.XtraGrid.Columns.LayoutViewColumn gridColumnLogoGallery;
 		private DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit repositoryItemPictureEdit;
 		private DevExpress.XtraGrid.Columns.LayoutViewColumn gridColumnName;
-		private DevExpress.XtraGrid.Views.Layout.LayoutViewField layoutViewField_gridColumnLogoGallery_1;
-		private DevExpress.XtraGrid.Views.Layout.LayoutViewField layoutViewField_gridColumnName_1;
-		private DevExpress.XtraGrid.Views.Layout.LayoutViewCard layoutViewCard1;
 		private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
 		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemRename;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
@@ -279,5 +284,9 @@
 		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemCopy;
 		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemEdit;
 		private DevComponents.DotNetBar.Controls.CircularProgress circularProgressWebpage;
+		private DevExpress.XtraGrid.Views.Layout.LayoutViewField layoutViewField_gridColumnLogoGallery_1;
+		private DevExpress.XtraGrid.Views.Layout.LayoutViewField layoutViewField_gridColumnName_1;
+		private DevExpress.XtraGrid.Views.Layout.LayoutViewCard layoutViewCard1;
+		private DevExpress.Utils.ToolTipController toolTipController;
 	}
 }
