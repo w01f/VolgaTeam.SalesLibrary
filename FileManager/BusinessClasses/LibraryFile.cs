@@ -347,8 +347,8 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			file.Type = Type;
 			file.AddDate = AddDate;
 			file.ExtendedProperties = ExtendedProperties.Clone(file);
-			file.SearchTags = SearchTags;
-			file.CustomKeywords = CustomKeywords;
+			file.SearchTags = SearchTags.Clone();
+			file.CustomKeywords = CustomKeywords.Clone();
 			file.ExpirationDateOptions = ExpirationDateOptions;
 			file.PresentationProperties = PresentationProperties;
 			if (LineBreakProperties != null)
@@ -452,7 +452,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 						if (DateTime.TryParse(childNode.InnerText, out tempDate))
 							_lastChanged = tempDate;
 						break;
-					
+
 					case "ExtendedProperties":
 						ExtendedProperties.Deserialize(childNode);
 						break;
@@ -544,8 +544,8 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 				Type == FileTypes.MediaPlayerVideo ||
 				Type == FileTypes.QuickTimeVideo) &&
 				!(ExtendedProperties.IsForbidden ||
-					!(!ExtendedProperties.IsRestricted || 
-					((!String.IsNullOrEmpty(ExtendedProperties.AssignedUsers) || 
+					!(!ExtendedProperties.IsRestricted ||
+					((!String.IsNullOrEmpty(ExtendedProperties.AssignedUsers) ||
 					!String.IsNullOrEmpty(ExtendedProperties.DeniedUsers)))))
 				)
 				Parent.Parent.Parent.GetPreviewContainer(OriginalPath);
@@ -645,18 +645,9 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 	{
 		public List<ILibraryLink> FolderContent { get; private set; }
 
-		public bool IsPreviewContainerAlive(IPreviewContainer previewContainer)
+		public IEnumerable<ILibraryLink> AllFiles
 		{
-			bool alive = false;
-			foreach (var file in FolderContent)
-			{
-				alive = file.OriginalPath.ToLower().Equals(previewContainer.OriginalPath.ToLower());
-				if (!alive && file is LibraryFolderLink)
-					alive = (file as LibraryFolderLink).IsPreviewContainerAlive(previewContainer);
-				if (alive)
-					break;
-			}
-			return alive;
+			get { return FolderContent.Union(FolderContent.OfType<LibraryFolderLink>().SelectMany(lf => lf.AllFiles)); }
 		}
 
 		public LibraryFolderLink(LibraryFolder parent)
@@ -678,7 +669,8 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			file.Type = Type;
 			file.AddDate = AddDate;
 			file.ExtendedProperties = ExtendedProperties.Clone(file);
-			file.CustomKeywords = CustomKeywords;
+			file.SearchTags = SearchTags.Clone();
+			file.CustomKeywords = CustomKeywords.Clone();
 			file.ExpirationDateOptions = ExpirationDateOptions;
 			file.PresentationProperties = PresentationProperties;
 			file.LineBreakProperties = LineBreakProperties.Clone(file);
@@ -693,7 +685,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			base.Deserialize(node);
 			var contentNode = node.SelectSingleNode("FolderContent");
 			if (contentNode != null)
-				foreach (XmlNode fileNode in contentNode)
+				foreach (XmlNode fileNode in contentNode.ChildNodes)
 				{
 					var file = Parent.Parent.Parent.GetLinkInstance(Parent, fileNode);
 					file.Deserialize(fileNode);
@@ -731,6 +723,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 					var rootFolder = Parent.Parent.Parent.GetRootFolder(RootId);
 					libraryFile.RelativePath = (rootFolder.IsDrive ? @"\" : string.Empty) + folder.FullName.Replace(rootFolder.Folder.FullName, string.Empty);
 					libraryFile.Type = FileTypes.Folder;
+					libraryFile.UpdateFolderContent();
 					libraryFile.InitBannerProperties();
 					FolderContent.Add(libraryFile);
 				}
@@ -757,14 +750,6 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			FolderContent.RemoveAll(x => !existedPaths.Any(y => y.ToLower().Equals(x.OriginalPath.ToLower())));
 			for (int i = 0; i < FolderContent.Count; i++)
 				FolderContent[i].Order = i;
-		}
-
-		public IEnumerable<LibraryLink> GetWholeContent()
-		{
-			var wholeContent = new List<LibraryLink>();
-			wholeContent.AddRange(FolderContent.Where(x => x.Type != FileTypes.Folder).OfType<LibraryLink>());
-			wholeContent.AddRange(FolderContent.Where(x => x.Type == FileTypes.Folder).OfType<LibraryFolderLink>().SelectMany(x => x.GetWholeContent()));
-			return wholeContent;
 		}
 
 		public override void RemoveFromCollection()

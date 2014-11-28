@@ -47,30 +47,28 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
 		public void InitGroupControls()
 		{
-			if (ListBox == null)
-			{
-				ListBox = new CheckedListBoxControl();
-				ListBox.Appearance.Font = new Font("Arial", 9.75F, FontStyle.Regular);
-				ListBox.Appearance.Options.UseFont = true;
-				ListBox.CheckOnClick = true;
-				ListBox.ItemHeight = 30;
-				ListBox.SelectionMode = SelectionMode.None;
-				ListBox.Dock = DockStyle.Fill;
-				ListBox.Items.AddRange(Tags.ToArray());
-			}
+			if (ListBox != null)
+				ListBox.Dispose();
+			ListBox = new CheckedListBoxControl();
+			ListBox.Appearance.Font = new Font("Arial", 9.75F, FontStyle.Regular);
+			ListBox.Appearance.Options.UseFont = true;
+			ListBox.CheckOnClick = true;
+			ListBox.ItemHeight = 30;
+			ListBox.SelectionMode = SelectionMode.None;
+			ListBox.Dock = DockStyle.Fill;
+			ListBox.Items.AddRange(Tags.ToArray());
 
-			if (ToggleButton == null)
-			{
-				ToggleButton = new ButtonX();
-				ToggleButton.AccessibleRole = AccessibleRole.PushButton;
-				ToggleButton.ColorTable = eButtonColor.OrangeWithBackground;
-				ToggleButton.Size = new Size(250, 30);
-				ToggleButton.Style = eDotNetBarStyle.StyleManagerControlled;
-				ToggleButton.Text = Description.Replace("&", "&&");
-				ToggleButton.TextColor = Color.Black;
-				ToggleButton.TextAlignment = eButtonTextAlignment.Left;
-				ToggleButton.Tag = ListBox;
-			}
+			if (ToggleButton != null)
+				ToggleButton.Dispose();
+			ToggleButton = new ButtonX();
+			ToggleButton.AccessibleRole = AccessibleRole.PushButton;
+			ToggleButton.ColorTable = eButtonColor.OrangeWithBackground;
+			ToggleButton.Size = new Size(250, 30);
+			ToggleButton.Style = eDotNetBarStyle.StyleManagerControlled;
+			ToggleButton.Text = Description.Replace("&", "&&");
+			ToggleButton.TextColor = Color.Black;
+			ToggleButton.TextAlignment = eButtonTextAlignment.Left;
+			ToggleButton.Tag = ListBox;
 		}
 
 		public string Serialize()
@@ -120,7 +118,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			}
 		}
 
-		public SearchGroup Clone()
+		public virtual SearchGroup Clone()
 		{
 			var result = new SearchGroup();
 			result.Name = Name;
@@ -139,6 +137,16 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		{
 			Name = "Custom Keywords";
 			TagNameObject = TagName;
+		}
+
+		public override SearchGroup Clone()
+		{
+			var result = new CustomKeywords();
+			result.Name = Name;
+			result.Description = Description;
+			result.Selected = Selected;
+			result.Tags.AddRange(Tags.Select(t => new SearchTag(result.Name) { Name = t.Name, Selected = t.Selected }));
+			return result;
 		}
 	}
 

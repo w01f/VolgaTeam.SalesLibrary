@@ -53,18 +53,7 @@ namespace FileManager.ToolForms.WallBin
 			{
 				var file = grIncorrectLinks.SelectedRows[0].Tag as LibraryLink;
 				if (file == null) return;
-				using (var form = new FormLinkProperties(file.Parent.Parent.Parent as Library))
-				{
-					form.xtraTabControl.SelectedTabPage = form.xtraTabPageExpiredLinks;
-					form.CaptionName = file.PropertiesName;
-					form.AddDate = file.AddDate;
-					form.ExpirationDateOptions = file.ExpirationDateOptions;
-					form.StartPosition = FormStartPosition.CenterScreen;
-
-					if (form.ShowDialog() != DialogResult.OK) return;
-					file.LastChanged = DateTime.Now;
-					file.ExpirationDateOptions = form.ExpirationDateOptions;
-				}
+				FormLinkProperties.ShowProperties(file, LinkPropertiesType.ExpirationDate);
 			}
 			else
 			{

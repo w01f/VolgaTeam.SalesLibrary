@@ -310,10 +310,12 @@ namespace OutlookSalesDepotAddIn.BusinessClasses
 
 		public void UpdatePreviewableObject(string originalPath, DateTime lastChanged)
 		{
+			throw new NotImplementedException();
 		}
 
 		public void UpdatePreviewContainers()
 		{
+			throw new NotImplementedException();
 		}
 
 		#endregion

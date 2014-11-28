@@ -30,7 +30,6 @@ namespace FileManager.PresentationClasses.WallBin
 		private readonly Pen _boxDropHintPen = new Pen(Color.Black, 8);
 		private readonly RichTextBox _richTextControl = new RichTextBox();
 		private readonly Pen _rowDropHintPen = new Pen(Color.Black, 2);
-		private FormLinkProperties _formLinkProperties;
 		private bool _containFiles;
 		private bool _containsWidgets;
 		private int _currentDragOverRow = -1;
@@ -228,7 +227,7 @@ namespace FileManager.PresentationClasses.WallBin
 			var toolTipText = new List<string>();
 			if (!String.IsNullOrEmpty(file.OriginalPath))
 			{
-				if(!String.IsNullOrEmpty(file.ExtendedProperties.HoverNote))
+				if (!String.IsNullOrEmpty(file.ExtendedProperties.HoverNote))
 					toolTipText.Add(file.ExtendedProperties.HoverNote);
 				toolTipText.Add("Path: " + file.OriginalPath);
 				if (file.PresentationProperties != null)
@@ -584,6 +583,7 @@ namespace FileManager.PresentationClasses.WallBin
 			if (file.Type == FileTypes.LineBreak)
 			{
 				toolStripMenuItemLinkPropertiesOpen.Visible = false;
+				toolStripMenuItemLinkPropertiesAdvanced.Visible = false;
 				toolStripMenuItemLinkPropertiesTags.Visible = false;
 				toolStripMenuItemLinkPropertiesExpirationDate.Visible = false;
 				toolStripMenuItemLinkPropertiesDelete.Text = "Delete this Line Break";
@@ -591,6 +591,7 @@ namespace FileManager.PresentationClasses.WallBin
 			else
 			{
 				toolStripMenuItemLinkPropertiesOpen.Visible = true;
+				toolStripMenuItemLinkPropertiesAdvanced.Visible = file is LibraryFolderLink;
 				toolStripMenuItemLinkPropertiesTags.Visible = true;
 				toolStripMenuItemLinkPropertiesExpirationDate.Visible = true;
 				toolStripMenuItemLinkPropertiesDelete.Text = "Delete this Link";
@@ -742,236 +743,8 @@ namespace FileManager.PresentationClasses.WallBin
 			if (grFiles.SelectedRows.Count <= 0) return;
 			var file = grFiles.SelectedRows[0].Tag as LibraryLink;
 			if (file == null) return;
-			if (_formLinkProperties == null) _formLinkProperties = new FormLinkProperties(file.Parent.Parent.Parent as Library);
-			var formWidth = 680;
-			var formHeight = 630;
-			switch (propertiesType)
-			{
-				case LinkPropertiesType.Notes:
-					_formLinkProperties.xtraTabControl.SelectedTabPage = file.Type == FileTypes.LineBreak ? _formLinkProperties.xtraTabPageLineBrealProperties : _formLinkProperties.xtraTabPageNotes;
-					break;
-				case LinkPropertiesType.Tags:
-					_formLinkProperties.xtraTabControl.SelectedTabPage = _formLinkProperties.xtraTabPageSearchTags;
-					break;
-				case LinkPropertiesType.ExpirationDate:
-					_formLinkProperties.xtraTabControl.SelectedTabPage = _formLinkProperties.xtraTabPageExpiredLinks;
-					break;
-				case LinkPropertiesType.Security:
-					_formLinkProperties.xtraTabControl.SelectedTabPage = _formLinkProperties.xtraTabPageSecurity;
-					break;
-				case LinkPropertiesType.Widget:
-					formWidth = 940;
-					formHeight = 750;
-					_formLinkProperties.xtraTabControl.SelectedTabPage = _formLinkProperties.xtraTabPageWidgets;
-					break;
-				case LinkPropertiesType.Banner:
-					formWidth = 940;
-					formHeight = 750;
-					_formLinkProperties.xtraTabControl.SelectedTabPage = _formLinkProperties.xtraTabPageBanner;
-					break;
-			}
-			_formLinkProperties.Width = formWidth;
-			_formLinkProperties.Height = formHeight;
-			_formLinkProperties.IsLoading = true;
-			_formLinkProperties.CaptionName = String.IsNullOrEmpty(file.PropertiesName) && file.Type == FileTypes.LineBreak ? "Line Break" : file.PropertiesName;
-			_formLinkProperties.EnableWidget = file.EnableWidget;
-			_formLinkProperties.Widget = file.EnableWidget ? file.Widget : null;
-			_formLinkProperties.BannerProperties = file.BannerProperties;
-			_formLinkProperties.IsLineBreak = file.Type == FileTypes.LineBreak;
-			if (file.Type != FileTypes.LineBreak)
-			{
-				_formLinkProperties.rbLinkRegularFormat.Checked = file.ExtendedProperties.IsRegularFormat;
-				_formLinkProperties.rbLinkBoldFormat.Checked = file.ExtendedProperties.IsBold;
-				_formLinkProperties.rbLinkSpecialFormat.Checked = file.ExtendedProperties.IsSpecialFormat;
-				_formLinkProperties.buttonEditLinkSpecialFont.EditValue = file.ExtendedProperties.Font != null ? Utils.FontToString(file.ExtendedProperties.Font) : null;
-				_formLinkProperties.buttonEditLinkSpecialFont.Tag = file.ExtendedProperties.Font;
-				_formLinkProperties.colorEditLinkSpecialColor.Color = file.ExtendedProperties.ForeColor;
-				_formLinkProperties.Note = file.ExtendedProperties.Note;
-				_formLinkProperties.textEditLinkHoverNote.EditValue = file.ExtendedProperties.HoverNote;
-				_formLinkProperties.AddDate = file.AddDate;
-				_formLinkProperties.ExpirationDateOptions = file.ExpirationDateOptions;
-				_formLinkProperties.SearchTags = file.SearchTags;
-
-				_formLinkProperties.Keywords.Clear();
-				_formLinkProperties.Keywords.AddRange(file.CustomKeywords.Tags.Select(x => new StringDataSourceWrapper(x.Name)));
-			}
-			else
-			{
-				_formLinkProperties.LineBreakProperties = file.LineBreakProperties;
-			}
-
-			_formLinkProperties.rbSecurityAllowed.Checked = !file.ExtendedProperties.IsRestricted;
-			_formLinkProperties.rbSecurityDenied.Checked = file.ExtendedProperties.IsRestricted &&
-				String.IsNullOrEmpty(file.ExtendedProperties.AssignedUsers) &&
-				String.IsNullOrEmpty(file.ExtendedProperties.DeniedUsers);
-			_formLinkProperties.rbSecurityWhiteList.Checked = file.ExtendedProperties.IsRestricted &&
-				!String.IsNullOrEmpty(file.ExtendedProperties.AssignedUsers);
-			_formLinkProperties.rbSecurityBlackList.Checked = file.ExtendedProperties.IsRestricted &&
-				!String.IsNullOrEmpty(file.ExtendedProperties.DeniedUsers);
-			_formLinkProperties.rbSecurityForbidden.Checked = file.ExtendedProperties.IsForbidden;
-			_formLinkProperties.AssignedUsers = file.ExtendedProperties.IsRestricted &&
-				!String.IsNullOrEmpty(file.ExtendedProperties.AssignedUsers) ? file.ExtendedProperties.AssignedUsers : null;
-			_formLinkProperties.DeniedUsers = file.ExtendedProperties.IsRestricted &&
-				!String.IsNullOrEmpty(file.ExtendedProperties.DeniedUsers) ? file.ExtendedProperties.DeniedUsers : null;
-			_formLinkProperties.ckSecurityShareLink.Checked = !file.ExtendedProperties.NoShare;
-
-			if (file.Type == FileTypes.BuggyPresentation ||
-				file.Type == FileTypes.FriendlyPresentation ||
-				file.Type == FileTypes.Presentation ||
-				file.Type == FileTypes.PDF ||
-				file.Type == FileTypes.Word ||
-				(file.Type == FileTypes.Other && new[] { "ppt", "doc", "pdf" }.Contains(file.Format)))
-			{
-				_formLinkProperties.ckDoNotGeneratePreview.Checked = !file.ExtendedProperties.GeneratePreviewImages;
-				_formLinkProperties.ckDoNotGeneratePreview.Visible = true;
-			}
-			else
-			{
-				_formLinkProperties.ckDoNotGeneratePreview.Checked = false;
-				_formLinkProperties.ckDoNotGeneratePreview.Visible = false;
-			}
-
-			if (file.Type == FileTypes.BuggyPresentation ||
-				file.Type == FileTypes.FriendlyPresentation ||
-				file.Type == FileTypes.Presentation ||
-				file.Type == FileTypes.PDF ||
-				file.Type == FileTypes.Word ||
-				(file.Type == FileTypes.Other && new[] { "ppt", "doc", "xls", "pdf" }.Contains(file.Format)))
-			{
-				_formLinkProperties.ckDoNotGenerateText.Checked = !file.ExtendedProperties.GenerateContentText;
-				_formLinkProperties.ckDoNotGenerateText.Visible = true;
-			}
-			else
-			{
-				_formLinkProperties.ckDoNotGenerateText.Checked = false;
-				_formLinkProperties.ckDoNotGenerateText.Visible = false;
-			}
-
-			if (file.Type == FileTypes.MediaPlayerVideo ||
-				file.Type == FileTypes.QuickTimeVideo)
-			{
-				_formLinkProperties.ckForcePreview.Checked = file.ExtendedProperties.ForcePreview;
-				_formLinkProperties.ckForcePreview.Visible = true;
-			}
-			else
-			{
-				_formLinkProperties.ckForcePreview.Checked = false;
-				_formLinkProperties.ckForcePreview.Visible = false;
-			}
-
-			if (file.Type == FileTypes.Url)
-			{
-				_formLinkProperties.ckIsUrl365.Checked = file.ExtendedProperties.IsUrl365;
-				_formLinkProperties.ckIsUrl365.Visible = true;
-			}
-			else
-			{
-				_formLinkProperties.ckIsUrl365.Checked = false;
-				_formLinkProperties.ckIsUrl365.Visible = false;
-			}
-
-			if ((file.PreviewContainer != null && Directory.Exists(file.PreviewContainer.ContainerPath)) || (file.UniversalPreviewContainer != null && Directory.Exists(file.UniversalPreviewContainer.ContainerPath)))
-			{
-				_formLinkProperties.pnAdminTools.Visible = true;
-				_formLinkProperties.RefreshPreview = () =>
-												 {
-													 if (file.PreviewContainer != null)
-														 file.PreviewContainer.ClearContent();
-													 if (file.UniversalPreviewContainer != null)
-														 file.UniversalPreviewContainer.ClearContent();
-													 return null;
-												 };
-				if (file.PreviewContainer != null && Directory.Exists(file.PreviewContainer.ContainerPath))
-				{
-					_formLinkProperties.buttonXOpenQV.Enabled = true;
-					_formLinkProperties.OpenQV = () =>
-													 {
-														 try
-														 {
-															 Process.Start(file.PreviewContainer.ContainerPath);
-														 }
-														 catch { }
-														 return null;
-													 };
-				}
-				else
-					_formLinkProperties.buttonXOpenQV.Enabled = false;
-				_formLinkProperties.buttonXOpenWV.Enabled = file.UniversalPreviewContainer != null;
-				if (file.UniversalPreviewContainer != null && Directory.Exists(file.UniversalPreviewContainer.ContainerPath))
-				{
-					_formLinkProperties.buttonXOpenWV.Enabled = true;
-					_formLinkProperties.OpenWV = () =>
-													 {
-														 try
-														 {
-															 Process.Start(file.UniversalPreviewContainer.ContainerPath);
-														 }
-														 catch { }
-														 return null;
-													 };
-				}
-				else
-					_formLinkProperties.buttonXOpenWV.Enabled = false;
-			}
-			else
-				_formLinkProperties.pnAdminTools.Visible = false;
-
-			_formLinkProperties.StartPosition = FormStartPosition.CenterScreen;
-			if (_formLinkProperties.ShowDialog() != DialogResult.OK) return;
-			file.LastChanged = DateTime.Now;
-			file.Widget = _formLinkProperties.EnableWidget ? _formLinkProperties.Widget : null;
-			file.EnableWidget = _formLinkProperties.EnableWidget;
-			file.BannerProperties = _formLinkProperties.BannerProperties;
-
-			file.ExtendedProperties.IsRestricted = _formLinkProperties.rbSecurityDenied.Checked || _formLinkProperties.rbSecurityWhiteList.Checked || _formLinkProperties.rbSecurityBlackList.Checked;
-			file.ExtendedProperties.IsForbidden = _formLinkProperties.rbSecurityForbidden.Checked;
-			file.ExtendedProperties.NoShare = !_formLinkProperties.ckSecurityShareLink.Checked;
-			if (_formLinkProperties.rbSecurityWhiteList.Checked && !String.IsNullOrEmpty(_formLinkProperties.AssignedUsers))
-				file.ExtendedProperties.AssignedUsers = _formLinkProperties.AssignedUsers;
-			else
-				file.ExtendedProperties.AssignedUsers = null;
-			if (_formLinkProperties.rbSecurityBlackList.Checked && !String.IsNullOrEmpty(_formLinkProperties.DeniedUsers))
-				file.ExtendedProperties.DeniedUsers = _formLinkProperties.DeniedUsers;
-			else
-				file.ExtendedProperties.DeniedUsers = null;
-
-
-			if (file.Type != FileTypes.LineBreak)
-			{
-				file.ExtendedProperties.IsBold = _formLinkProperties.rbLinkBoldFormat.Checked;
-				file.ExtendedProperties.IsSpecialFormat = _formLinkProperties.rbLinkSpecialFormat.Checked;
-				if (file.ExtendedProperties.IsSpecialFormat)
-				{
-					file.ExtendedProperties.Font = _formLinkProperties.buttonEditLinkSpecialFont.Tag as Font;
-					file.ExtendedProperties.ForeColor = _formLinkProperties.colorEditLinkSpecialColor.Color;
-				}
-				else
-				{
-					file.ExtendedProperties.Font = null;
-					file.ExtendedProperties.ForeColor = Color.Black;
-				}
-				file.ExtendedProperties.Note = _formLinkProperties.Note;
-				file.ExtendedProperties.HoverNote = _formLinkProperties.textEditLinkHoverNote.EditValue as String ?? String.Empty;
-
-				file.ExpirationDateOptions = _formLinkProperties.ExpirationDateOptions;
-			}
-			else
-			{
-				file.LineBreakProperties = _formLinkProperties.LineBreakProperties;
-			}
-
-			file.SearchTags = _formLinkProperties.SearchTags;
-			file.CustomKeywords.Tags.Clear();
-			file.CustomKeywords.Tags.AddRange(_formLinkProperties.Keywords.Where(x => !String.IsNullOrEmpty(x.Value)).Select(x => new SearchTag(file.CustomKeywords.Name) { Name = x.Value }));
-
-
-			file.ExtendedProperties.GeneratePreviewImages = !_formLinkProperties.ckDoNotGeneratePreview.Checked;
-			file.ExtendedProperties.GenerateContentText = !_formLinkProperties.ckDoNotGenerateText.Checked;
-			file.ExtendedProperties.ForcePreview = _formLinkProperties.ckForcePreview.Checked;
-			file.ExtendedProperties.IsUrl365 = _formLinkProperties.ckIsUrl365.Checked;
-
+			if (FormLinkProperties.ShowProperties(file, propertiesType) != DialogResult.OK) return;
 			grFiles.SelectedRows[0].Cells[0].Value = file.DisplayName + file.ExtendedProperties.Note;
-
 			bool widgetColumnVisible = (from DataGridViewRow row in grFiles.Rows select row.Tag as LibraryLink)
 				.Any(x => x.Widget != null ||
 					(WallBinOptions.ShowCategoryTags && x.HasCategories) ||
@@ -979,7 +752,6 @@ namespace FileManager.PresentationClasses.WallBin
 					(WallBinOptions.ShowKeywordTags && x.HasKeywords) ||
 					(WallBinOptions.ShowSecurityTags && (x.ExtendedProperties.IsRestricted || x.ExtendedProperties.IsForbidden)));
 			_containsWidgets = widgetColumnVisible;
-
 			UpdateAfterFolderChanged();
 			Decorator.Parent.StateChanged = true;
 		}
@@ -1081,8 +853,6 @@ namespace FileManager.PresentationClasses.WallBin
 
 		public void Delete()
 		{
-			if (_formLinkProperties != null)
-				_formLinkProperties.Dispose();
 			Dispose();
 		}
 
@@ -1570,12 +1340,11 @@ namespace FileManager.PresentationClasses.WallBin
 				_folder.Files.Add(libraryFile);
 				libraryFile.Name = folder.Folder.Name;
 				libraryFile.RootId = folder.RootId;
-
 				RootFolder rootFolder = _folder.Parent.Parent.GetRootFolder(folder.RootId);
 				libraryFile.RelativePath = (rootFolder.IsDrive ? @"\" : String.Empty) + folder.Folder.FullName.Replace(rootFolder.Folder.FullName, String.Empty);
-
 				libraryFile.Type = FileTypes.Folder;
 				libraryFile.InitBannerProperties();
+				libraryFile.UpdateFolderContent();
 
 				int pathLength = libraryFile.RelativePath.Length;
 				if ((pathLength + SettingsManager.Instance.DestinationPathLength) < WinAPIHelper.MAX_PATH)
@@ -1688,6 +1457,11 @@ namespace FileManager.PresentationClasses.WallBin
 		private void toolStripMenuItemLinkPropertiesBanner_Click(object sender, EventArgs e)
 		{
 			ShowLinkProperties(LinkPropertiesType.Banner);
+		}
+
+		private void toolStripMenuItemLinkPropertiesAdvanced_Click(object sender, EventArgs e)
+		{
+			ShowLinkProperties(LinkPropertiesType.AdvancedSettings);
 		}
 		#endregion
 

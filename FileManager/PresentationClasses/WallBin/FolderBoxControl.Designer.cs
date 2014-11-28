@@ -59,6 +59,7 @@
 			this.toolStripMenuItemFolderDeleteWidgets = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItemFolderDeleteBanners = new System.Windows.Forms.ToolStripMenuItem();
 			this.contextMenuStripFolderProperties = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.toolStripMenuItemLinkPropertiesAdvanced = new System.Windows.Forms.ToolStripMenuItem();
 			this.pnGrid.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.grFiles)).BeginInit();
 			this.pnHeaderBorder.SuspendLayout();
@@ -227,72 +228,73 @@
             this.toolStripMenuItemLinkPropertiesDelete,
             this.toolStripSeparator1,
             this.toolStripMenuItemLinkPropertiesNotes,
+            this.toolStripMenuItemLinkPropertiesAdvanced,
             this.toolStripMenuItemLinkPropertiesTags,
             this.toolStripMenuItemLinkPropertiesExpirationDate,
             this.toolStripMenuItemLinkPropertiesSecurity,
             this.toolStripMenuItemLinkPropertiesWidget,
             this.toolStripMenuItemLinkPropertiesBanner});
 			this.contextMenuStripLinkProperties.Name = "contextMenuStripLinkProperties";
-			this.contextMenuStripLinkProperties.Size = new System.Drawing.Size(154, 186);
+			this.contextMenuStripLinkProperties.Size = new System.Drawing.Size(173, 230);
 			// 
 			// toolStripMenuItemLinkPropertiesOpen
 			// 
 			this.toolStripMenuItemLinkPropertiesOpen.Name = "toolStripMenuItemLinkPropertiesOpen";
-			this.toolStripMenuItemLinkPropertiesOpen.Size = new System.Drawing.Size(153, 22);
+			this.toolStripMenuItemLinkPropertiesOpen.Size = new System.Drawing.Size(172, 22);
 			this.toolStripMenuItemLinkPropertiesOpen.Text = "Open this link";
 			this.toolStripMenuItemLinkPropertiesOpen.Click += new System.EventHandler(this.toolStripMenuItemLinkPropertiesOpen_Click);
 			// 
 			// toolStripMenuItemLinkPropertiesDelete
 			// 
 			this.toolStripMenuItemLinkPropertiesDelete.Name = "toolStripMenuItemLinkPropertiesDelete";
-			this.toolStripMenuItemLinkPropertiesDelete.Size = new System.Drawing.Size(153, 22);
+			this.toolStripMenuItemLinkPropertiesDelete.Size = new System.Drawing.Size(172, 22);
 			this.toolStripMenuItemLinkPropertiesDelete.Text = "Delete this link";
 			this.toolStripMenuItemLinkPropertiesDelete.Click += new System.EventHandler(this.toolStripMenuItemLinkPropertiesDelete_Click);
 			// 
 			// toolStripSeparator1
 			// 
 			this.toolStripSeparator1.Name = "toolStripSeparator1";
-			this.toolStripSeparator1.Size = new System.Drawing.Size(150, 6);
+			this.toolStripSeparator1.Size = new System.Drawing.Size(169, 6);
 			// 
 			// toolStripMenuItemLinkPropertiesNotes
 			// 
 			this.toolStripMenuItemLinkPropertiesNotes.Name = "toolStripMenuItemLinkPropertiesNotes";
-			this.toolStripMenuItemLinkPropertiesNotes.Size = new System.Drawing.Size(153, 22);
+			this.toolStripMenuItemLinkPropertiesNotes.Size = new System.Drawing.Size(172, 22);
 			this.toolStripMenuItemLinkPropertiesNotes.Text = "Link Notes";
 			this.toolStripMenuItemLinkPropertiesNotes.Click += new System.EventHandler(this.toolStripMenuItemLinkPropertiesNotes_Click);
 			// 
 			// toolStripMenuItemLinkPropertiesTags
 			// 
 			this.toolStripMenuItemLinkPropertiesTags.Name = "toolStripMenuItemLinkPropertiesTags";
-			this.toolStripMenuItemLinkPropertiesTags.Size = new System.Drawing.Size(153, 22);
+			this.toolStripMenuItemLinkPropertiesTags.Size = new System.Drawing.Size(172, 22);
 			this.toolStripMenuItemLinkPropertiesTags.Text = "Search Tag";
 			this.toolStripMenuItemLinkPropertiesTags.Click += new System.EventHandler(this.toolStripMenuItemLinkPropertiesTags_Click);
 			// 
 			// toolStripMenuItemLinkPropertiesExpirationDate
 			// 
 			this.toolStripMenuItemLinkPropertiesExpirationDate.Name = "toolStripMenuItemLinkPropertiesExpirationDate";
-			this.toolStripMenuItemLinkPropertiesExpirationDate.Size = new System.Drawing.Size(153, 22);
+			this.toolStripMenuItemLinkPropertiesExpirationDate.Size = new System.Drawing.Size(172, 22);
 			this.toolStripMenuItemLinkPropertiesExpirationDate.Text = "Expiration Date";
 			this.toolStripMenuItemLinkPropertiesExpirationDate.Click += new System.EventHandler(this.toolStripMenuItemLinkPropertiesExpirationDate_Click);
 			// 
 			// toolStripMenuItemLinkPropertiesSecurity
 			// 
 			this.toolStripMenuItemLinkPropertiesSecurity.Name = "toolStripMenuItemLinkPropertiesSecurity";
-			this.toolStripMenuItemLinkPropertiesSecurity.Size = new System.Drawing.Size(153, 22);
+			this.toolStripMenuItemLinkPropertiesSecurity.Size = new System.Drawing.Size(172, 22);
 			this.toolStripMenuItemLinkPropertiesSecurity.Text = "Link Security";
 			this.toolStripMenuItemLinkPropertiesSecurity.Click += new System.EventHandler(this.toolStripMenuItemLinkPropertiesSecurity_Click);
 			// 
 			// toolStripMenuItemLinkPropertiesWidget
 			// 
 			this.toolStripMenuItemLinkPropertiesWidget.Name = "toolStripMenuItemLinkPropertiesWidget";
-			this.toolStripMenuItemLinkPropertiesWidget.Size = new System.Drawing.Size(153, 22);
+			this.toolStripMenuItemLinkPropertiesWidget.Size = new System.Drawing.Size(172, 22);
 			this.toolStripMenuItemLinkPropertiesWidget.Text = "Add Widget";
 			this.toolStripMenuItemLinkPropertiesWidget.Click += new System.EventHandler(this.toolStripMenuItemLinkPropertiesWidget_Click);
 			// 
 			// toolStripMenuItemLinkPropertiesBanner
 			// 
 			this.toolStripMenuItemLinkPropertiesBanner.Name = "toolStripMenuItemLinkPropertiesBanner";
-			this.toolStripMenuItemLinkPropertiesBanner.Size = new System.Drawing.Size(153, 22);
+			this.toolStripMenuItemLinkPropertiesBanner.Size = new System.Drawing.Size(172, 22);
 			this.toolStripMenuItemLinkPropertiesBanner.Text = "Add Banner";
 			this.toolStripMenuItemLinkPropertiesBanner.Click += new System.EventHandler(this.toolStripMenuItemLinkPropertiesBanner_Click);
 			// 
@@ -340,7 +342,14 @@
             this.toolStripMenuItemFolderDeleteWidgets,
             this.toolStripMenuItemFolderDeleteBanners});
 			this.contextMenuStripFolderProperties.Name = "contextMenuStripLinkProperties";
-			this.contextMenuStripFolderProperties.Size = new System.Drawing.Size(349, 136);
+			this.contextMenuStripFolderProperties.Size = new System.Drawing.Size(349, 114);
+			// 
+			// toolStripMenuItemLinkPropertiesAdvanced
+			// 
+			this.toolStripMenuItemLinkPropertiesAdvanced.Name = "toolStripMenuItemLinkPropertiesAdvanced";
+			this.toolStripMenuItemLinkPropertiesAdvanced.Size = new System.Drawing.Size(172, 22);
+			this.toolStripMenuItemLinkPropertiesAdvanced.Text = "Advanced Settings";
+			this.toolStripMenuItemLinkPropertiesAdvanced.Click += new System.EventHandler(this.toolStripMenuItemLinkPropertiesAdvanced_Click);
 			// 
 			// FolderBoxControl
 			// 
@@ -389,5 +398,6 @@
 		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemFolderDeleteWidgets;
 		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemFolderDeleteBanners;
 		private System.Windows.Forms.ContextMenuStrip contextMenuStripFolderProperties;
+		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemLinkPropertiesAdvanced;
     }
 }

@@ -29,6 +29,7 @@
 		private void InitializeComponent()
 		{
 			this.circularProgressWebpage = new DevComponents.DotNetBar.Controls.CircularProgress();
+			this.labelControlHint = new DevExpress.XtraEditors.LabelControl();
 			this.SuspendLayout();
 			// 
 			// circularProgressWebpage
@@ -46,10 +47,26 @@
 			this.circularProgressWebpage.TabIndex = 1;
 			this.circularProgressWebpage.TabStop = false;
 			// 
+			// labelControlHint
+			// 
+			this.labelControlHint.AllowHtmlString = true;
+			this.labelControlHint.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelControlHint.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+			this.labelControlHint.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.NoWrap;
+			this.labelControlHint.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+			this.labelControlHint.Dock = System.Windows.Forms.DockStyle.Top;
+			this.labelControlHint.Location = new System.Drawing.Point(0, 0);
+			this.labelControlHint.Name = "labelControlHint";
+			this.labelControlHint.Size = new System.Drawing.Size(672, 27);
+			this.labelControlHint.TabIndex = 3;
+			this.labelControlHint.Text = "    1. <b>LEFT-CLICK</b> to open the image.         2. Then <b>RIGHT-CLICK</b> to" +
+    " copy the image.";
+			// 
 			// GalleryControl
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
 			this.BackColor = System.Drawing.Color.White;
+			this.Controls.Add(this.labelControlHint);
 			this.Controls.Add(this.circularProgressWebpage);
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -63,6 +80,7 @@
 		#endregion
 
 		private DevComponents.DotNetBar.Controls.CircularProgress circularProgressWebpage;
+		private DevExpress.XtraEditors.LabelControl labelControlHint;
 
 	}
 }

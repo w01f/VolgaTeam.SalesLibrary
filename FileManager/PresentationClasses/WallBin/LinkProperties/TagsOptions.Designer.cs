@@ -1,0 +1,334 @@
+﻿namespace FileManager.PresentationClasses.WallBin.LinkProperties
+{
+	partial class TagsOptions
+	{
+		/// <summary> 
+		/// Required designer variable.
+		/// </summary>
+		private System.ComponentModel.IContainer components = null;
+
+		/// <summary> 
+		/// Clean up any resources being used.
+		/// </summary>
+		/// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+		protected override void Dispose(bool disposing)
+		{
+			if (disposing && (components != null))
+			{
+				components.Dispose();
+			}
+			base.Dispose(disposing);
+		}
+
+		#region Component Designer generated code
+
+		/// <summary> 
+		/// Required method for Designer support - do not modify 
+		/// the contents of this method with the code editor.
+		/// </summary>
+		private void InitializeComponent()
+		{
+			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
+			this.xtraTabControlSearchTags = new DevExpress.XtraTab.XtraTabControl();
+			this.xtraTabPageSearchTagsCategories = new DevExpress.XtraTab.XtraTabPage();
+			this.splitContainerSearchTagsCategories = new DevExpress.XtraEditors.SplitContainerControl();
+			this.xtraScrollableControlSearchTagsCategories = new DevExpress.XtraEditors.XtraScrollableControl();
+			this.pnSearchTagsCategoriesHeader = new System.Windows.Forms.Panel();
+			this.labelControlSearchTagsCategoriesHeader = new DevExpress.XtraEditors.LabelControl();
+			this.styleController = new DevExpress.XtraEditors.StyleController();
+			this.buttonXWipeTags = new DevComponents.DotNetBar.ButtonX();
+			this.xtraTabPageSearchTagsKeywords = new DevExpress.XtraTab.XtraTabPage();
+			this.buttonXAddKeyWord = new DevComponents.DotNetBar.ButtonX();
+			this.gridControlSearchTagsKeywords = new DevExpress.XtraGrid.GridControl();
+			this.gridViewSearchTagsKeywords = new DevExpress.XtraGrid.Views.Grid.GridView();
+			this.gridColumnSearchTagsKeywordsValue = new DevExpress.XtraGrid.Columns.GridColumn();
+			this.repositoryItemButtonEditKeyword = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
+			((System.ComponentModel.ISupportInitialize)(this.xtraTabControlSearchTags)).BeginInit();
+			this.xtraTabControlSearchTags.SuspendLayout();
+			this.xtraTabPageSearchTagsCategories.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.splitContainerSearchTagsCategories)).BeginInit();
+			this.splitContainerSearchTagsCategories.SuspendLayout();
+			this.pnSearchTagsCategoriesHeader.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
+			this.xtraTabPageSearchTagsKeywords.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.gridControlSearchTagsKeywords)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.gridViewSearchTagsKeywords)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditKeyword)).BeginInit();
+			this.SuspendLayout();
+			// 
+			// xtraTabControlSearchTags
+			// 
+			this.xtraTabControlSearchTags.Appearance.BackColor = System.Drawing.Color.White;
+			this.xtraTabControlSearchTags.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.xtraTabControlSearchTags.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.xtraTabControlSearchTags.Appearance.Options.UseBackColor = true;
+			this.xtraTabControlSearchTags.Appearance.Options.UseFont = true;
+			this.xtraTabControlSearchTags.Appearance.Options.UseForeColor = true;
+			this.xtraTabControlSearchTags.AppearancePage.Header.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.xtraTabControlSearchTags.AppearancePage.Header.Options.UseFont = true;
+			this.xtraTabControlSearchTags.AppearancePage.HeaderActive.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.xtraTabControlSearchTags.AppearancePage.HeaderActive.Options.UseFont = true;
+			this.xtraTabControlSearchTags.AppearancePage.HeaderDisabled.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.xtraTabControlSearchTags.AppearancePage.HeaderDisabled.Options.UseFont = true;
+			this.xtraTabControlSearchTags.AppearancePage.HeaderHotTracked.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.xtraTabControlSearchTags.AppearancePage.HeaderHotTracked.Options.UseFont = true;
+			this.xtraTabControlSearchTags.AppearancePage.PageClient.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.xtraTabControlSearchTags.AppearancePage.PageClient.Options.UseFont = true;
+			this.xtraTabControlSearchTags.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.xtraTabControlSearchTags.Location = new System.Drawing.Point(0, 0);
+			this.xtraTabControlSearchTags.Name = "xtraTabControlSearchTags";
+			this.xtraTabControlSearchTags.SelectedTabPage = this.xtraTabPageSearchTagsCategories;
+			this.xtraTabControlSearchTags.Size = new System.Drawing.Size(531, 541);
+			this.xtraTabControlSearchTags.TabIndex = 2;
+			this.xtraTabControlSearchTags.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
+            this.xtraTabPageSearchTagsCategories,
+            this.xtraTabPageSearchTagsKeywords});
+			// 
+			// xtraTabPageSearchTagsCategories
+			// 
+			this.xtraTabPageSearchTagsCategories.Appearance.PageClient.ForeColor = System.Drawing.Color.Black;
+			this.xtraTabPageSearchTagsCategories.Appearance.PageClient.Options.UseForeColor = true;
+			this.xtraTabPageSearchTagsCategories.Controls.Add(this.splitContainerSearchTagsCategories);
+			this.xtraTabPageSearchTagsCategories.Controls.Add(this.pnSearchTagsCategoriesHeader);
+			this.xtraTabPageSearchTagsCategories.Name = "xtraTabPageSearchTagsCategories";
+			this.xtraTabPageSearchTagsCategories.Size = new System.Drawing.Size(525, 510);
+			this.xtraTabPageSearchTagsCategories.Text = "Assign Categories";
+			// 
+			// splitContainerSearchTagsCategories
+			// 
+			this.splitContainerSearchTagsCategories.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.splitContainerSearchTagsCategories.Appearance.Options.UseForeColor = true;
+			this.splitContainerSearchTagsCategories.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.splitContainerSearchTagsCategories.Location = new System.Drawing.Point(0, 49);
+			this.splitContainerSearchTagsCategories.Name = "splitContainerSearchTagsCategories";
+			this.splitContainerSearchTagsCategories.Panel1.Appearance.BackColor = System.Drawing.Color.White;
+			this.splitContainerSearchTagsCategories.Panel1.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.splitContainerSearchTagsCategories.Panel1.Appearance.Options.UseBackColor = true;
+			this.splitContainerSearchTagsCategories.Panel1.Appearance.Options.UseForeColor = true;
+			this.splitContainerSearchTagsCategories.Panel1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Default;
+			this.splitContainerSearchTagsCategories.Panel1.Controls.Add(this.xtraScrollableControlSearchTagsCategories);
+			this.splitContainerSearchTagsCategories.Panel1.MinSize = 250;
+			this.splitContainerSearchTagsCategories.Panel1.Text = "Panel1";
+			this.splitContainerSearchTagsCategories.Panel2.Appearance.BackColor = System.Drawing.Color.White;
+			this.splitContainerSearchTagsCategories.Panel2.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.splitContainerSearchTagsCategories.Panel2.Appearance.Options.UseBackColor = true;
+			this.splitContainerSearchTagsCategories.Panel2.Appearance.Options.UseForeColor = true;
+			this.splitContainerSearchTagsCategories.Panel2.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Default;
+			this.splitContainerSearchTagsCategories.Panel2.Text = "Panel2";
+			this.splitContainerSearchTagsCategories.Size = new System.Drawing.Size(525, 461);
+			this.splitContainerSearchTagsCategories.SplitterPosition = 250;
+			this.splitContainerSearchTagsCategories.TabIndex = 1;
+			this.splitContainerSearchTagsCategories.Text = "splitContainerControl1";
+			// 
+			// xtraScrollableControlSearchTagsCategories
+			// 
+			this.xtraScrollableControlSearchTagsCategories.Appearance.BackColor = System.Drawing.Color.White;
+			this.xtraScrollableControlSearchTagsCategories.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.xtraScrollableControlSearchTagsCategories.Appearance.Options.UseBackColor = true;
+			this.xtraScrollableControlSearchTagsCategories.Appearance.Options.UseForeColor = true;
+			this.xtraScrollableControlSearchTagsCategories.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.xtraScrollableControlSearchTagsCategories.Location = new System.Drawing.Point(0, 0);
+			this.xtraScrollableControlSearchTagsCategories.Name = "xtraScrollableControlSearchTagsCategories";
+			this.xtraScrollableControlSearchTagsCategories.Size = new System.Drawing.Size(246, 457);
+			this.xtraScrollableControlSearchTagsCategories.TabIndex = 0;
+			// 
+			// pnSearchTagsCategoriesHeader
+			// 
+			this.pnSearchTagsCategoriesHeader.Controls.Add(this.labelControlSearchTagsCategoriesHeader);
+			this.pnSearchTagsCategoriesHeader.Controls.Add(this.buttonXWipeTags);
+			this.pnSearchTagsCategoriesHeader.Dock = System.Windows.Forms.DockStyle.Top;
+			this.pnSearchTagsCategoriesHeader.ForeColor = System.Drawing.Color.Black;
+			this.pnSearchTagsCategoriesHeader.Location = new System.Drawing.Point(0, 0);
+			this.pnSearchTagsCategoriesHeader.Name = "pnSearchTagsCategoriesHeader";
+			this.pnSearchTagsCategoriesHeader.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
+			this.pnSearchTagsCategoriesHeader.Size = new System.Drawing.Size(525, 49);
+			this.pnSearchTagsCategoriesHeader.TabIndex = 2;
+			// 
+			// labelControlSearchTagsCategoriesHeader
+			// 
+			this.labelControlSearchTagsCategoriesHeader.Appearance.BackColor = System.Drawing.Color.White;
+			this.labelControlSearchTagsCategoriesHeader.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.labelControlSearchTagsCategoriesHeader.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+			this.labelControlSearchTagsCategoriesHeader.Dock = System.Windows.Forms.DockStyle.Left;
+			this.labelControlSearchTagsCategoriesHeader.Location = new System.Drawing.Point(5, 0);
+			this.labelControlSearchTagsCategoriesHeader.Name = "labelControlSearchTagsCategoriesHeader";
+			this.labelControlSearchTagsCategoriesHeader.Size = new System.Drawing.Size(376, 49);
+			this.labelControlSearchTagsCategoriesHeader.StyleController = this.styleController;
+			this.labelControlSearchTagsCategoriesHeader.TabIndex = 0;
+			this.labelControlSearchTagsCategoriesHeader.Text = "Only 0 Tags are allowed\r\nNo Tags";
+			// 
+			// styleController
+			// 
+			this.styleController.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.styleController.Appearance.Options.UseFont = true;
+			this.styleController.AppearanceDisabled.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.styleController.AppearanceDisabled.Options.UseFont = true;
+			this.styleController.AppearanceDropDown.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.styleController.AppearanceDropDown.Options.UseFont = true;
+			this.styleController.AppearanceDropDownHeader.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.styleController.AppearanceDropDownHeader.Options.UseFont = true;
+			this.styleController.AppearanceFocused.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.styleController.AppearanceFocused.Options.UseFont = true;
+			this.styleController.AppearanceReadOnly.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.styleController.AppearanceReadOnly.Options.UseFont = true;
+			// 
+			// buttonXWipeTags
+			// 
+			this.buttonXWipeTags.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXWipeTags.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonXWipeTags.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXWipeTags.Location = new System.Drawing.Point(402, 7);
+			this.buttonXWipeTags.Name = "buttonXWipeTags";
+			this.buttonXWipeTags.Size = new System.Drawing.Size(120, 34);
+			this.buttonXWipeTags.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXWipeTags.TabIndex = 7;
+			this.buttonXWipeTags.Text = "Clear Tags";
+			this.buttonXWipeTags.TextColor = System.Drawing.Color.Black;
+			this.buttonXWipeTags.Click += new System.EventHandler(this.buttonXWipeTags_Click);
+			// 
+			// xtraTabPageSearchTagsKeywords
+			// 
+			this.xtraTabPageSearchTagsKeywords.Appearance.PageClient.ForeColor = System.Drawing.Color.Black;
+			this.xtraTabPageSearchTagsKeywords.Appearance.PageClient.Options.UseForeColor = true;
+			this.xtraTabPageSearchTagsKeywords.Controls.Add(this.buttonXAddKeyWord);
+			this.xtraTabPageSearchTagsKeywords.Controls.Add(this.gridControlSearchTagsKeywords);
+			this.xtraTabPageSearchTagsKeywords.Name = "xtraTabPageSearchTagsKeywords";
+			this.xtraTabPageSearchTagsKeywords.Size = new System.Drawing.Size(525, 510);
+			this.xtraTabPageSearchTagsKeywords.Text = "Assign Keywords";
+			// 
+			// buttonXAddKeyWord
+			// 
+			this.buttonXAddKeyWord.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXAddKeyWord.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXAddKeyWord.Image = global::FileManager.Properties.Resources.PlusButton;
+			this.buttonXAddKeyWord.ImageFixedSize = new System.Drawing.Size(24, 24);
+			this.buttonXAddKeyWord.Location = new System.Drawing.Point(10, 9);
+			this.buttonXAddKeyWord.Name = "buttonXAddKeyWord";
+			this.buttonXAddKeyWord.Size = new System.Drawing.Size(184, 34);
+			this.buttonXAddKeyWord.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXAddKeyWord.TabIndex = 6;
+			this.buttonXAddKeyWord.Text = "Add New Keyword";
+			this.buttonXAddKeyWord.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
+			this.buttonXAddKeyWord.TextColor = System.Drawing.Color.Black;
+			this.buttonXAddKeyWord.Click += new System.EventHandler(this.buttonXAddKeyWord_Click);
+			// 
+			// gridControlSearchTagsKeywords
+			// 
+			this.gridControlSearchTagsKeywords.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.gridControlSearchTagsKeywords.EmbeddedNavigator.Appearance.BackColor = System.Drawing.Color.White;
+			this.gridControlSearchTagsKeywords.EmbeddedNavigator.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.gridControlSearchTagsKeywords.EmbeddedNavigator.Appearance.Options.UseBackColor = true;
+			this.gridControlSearchTagsKeywords.EmbeddedNavigator.Appearance.Options.UseForeColor = true;
+			this.gridControlSearchTagsKeywords.Location = new System.Drawing.Point(10, 49);
+			this.gridControlSearchTagsKeywords.MainView = this.gridViewSearchTagsKeywords;
+			this.gridControlSearchTagsKeywords.Name = "gridControlSearchTagsKeywords";
+			this.gridControlSearchTagsKeywords.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.repositoryItemButtonEditKeyword});
+			this.gridControlSearchTagsKeywords.Size = new System.Drawing.Size(575, 450);
+			this.gridControlSearchTagsKeywords.TabIndex = 0;
+			this.gridControlSearchTagsKeywords.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridViewSearchTagsKeywords});
+			// 
+			// gridViewSearchTagsKeywords
+			// 
+			this.gridViewSearchTagsKeywords.Appearance.FocusedCell.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.gridViewSearchTagsKeywords.Appearance.FocusedCell.Options.UseFont = true;
+			this.gridViewSearchTagsKeywords.Appearance.FocusedRow.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.gridViewSearchTagsKeywords.Appearance.FocusedRow.Options.UseFont = true;
+			this.gridViewSearchTagsKeywords.Appearance.HeaderPanel.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.gridViewSearchTagsKeywords.Appearance.HeaderPanel.Options.UseFont = true;
+			this.gridViewSearchTagsKeywords.Appearance.Row.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.gridViewSearchTagsKeywords.Appearance.Row.Options.UseFont = true;
+			this.gridViewSearchTagsKeywords.Appearance.SelectedRow.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.gridViewSearchTagsKeywords.Appearance.SelectedRow.Options.UseFont = true;
+			this.gridViewSearchTagsKeywords.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumnSearchTagsKeywordsValue});
+			this.gridViewSearchTagsKeywords.GridControl = this.gridControlSearchTagsKeywords;
+			this.gridViewSearchTagsKeywords.Name = "gridViewSearchTagsKeywords";
+			this.gridViewSearchTagsKeywords.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.False;
+			this.gridViewSearchTagsKeywords.OptionsCustomization.AllowColumnMoving = false;
+			this.gridViewSearchTagsKeywords.OptionsCustomization.AllowColumnResizing = false;
+			this.gridViewSearchTagsKeywords.OptionsCustomization.AllowFilter = false;
+			this.gridViewSearchTagsKeywords.OptionsCustomization.AllowGroup = false;
+			this.gridViewSearchTagsKeywords.OptionsCustomization.AllowQuickHideColumns = false;
+			this.gridViewSearchTagsKeywords.OptionsCustomization.AllowSort = false;
+			this.gridViewSearchTagsKeywords.OptionsSelection.EnableAppearanceFocusedCell = false;
+			this.gridViewSearchTagsKeywords.OptionsSelection.EnableAppearanceFocusedRow = false;
+			this.gridViewSearchTagsKeywords.OptionsSelection.EnableAppearanceHideSelection = false;
+			this.gridViewSearchTagsKeywords.OptionsView.ShowColumnHeaders = false;
+			this.gridViewSearchTagsKeywords.OptionsView.ShowGroupExpandCollapseButtons = false;
+			this.gridViewSearchTagsKeywords.OptionsView.ShowGroupPanel = false;
+			this.gridViewSearchTagsKeywords.OptionsView.ShowIndicator = false;
+			this.gridViewSearchTagsKeywords.OptionsView.ShowPreviewRowLines = DevExpress.Utils.DefaultBoolean.False;
+			this.gridViewSearchTagsKeywords.RowHeight = 35;
+			// 
+			// gridColumnSearchTagsKeywordsValue
+			// 
+			this.gridColumnSearchTagsKeywordsValue.Caption = "Value";
+			this.gridColumnSearchTagsKeywordsValue.ColumnEdit = this.repositoryItemButtonEditKeyword;
+			this.gridColumnSearchTagsKeywordsValue.FieldName = "Value";
+			this.gridColumnSearchTagsKeywordsValue.Name = "gridColumnSearchTagsKeywordsValue";
+			this.gridColumnSearchTagsKeywordsValue.ShowButtonMode = DevExpress.XtraGrid.Views.Base.ShowButtonModeEnum.ShowAlways;
+			this.gridColumnSearchTagsKeywordsValue.Visible = true;
+			this.gridColumnSearchTagsKeywordsValue.VisibleIndex = 0;
+			// 
+			// repositoryItemButtonEditKeyword
+			// 
+			this.repositoryItemButtonEditKeyword.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.repositoryItemButtonEditKeyword.Appearance.Options.UseFont = true;
+			this.repositoryItemButtonEditKeyword.AppearanceDisabled.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.repositoryItemButtonEditKeyword.AppearanceDisabled.Options.UseFont = true;
+			this.repositoryItemButtonEditKeyword.AppearanceFocused.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.repositoryItemButtonEditKeyword.AppearanceFocused.Options.UseFont = true;
+			this.repositoryItemButtonEditKeyword.AppearanceReadOnly.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.repositoryItemButtonEditKeyword.AppearanceReadOnly.Options.UseFont = true;
+			this.repositoryItemButtonEditKeyword.AutoHeight = false;
+			this.repositoryItemButtonEditKeyword.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::FileManager.Properties.Resources.DeleteButton, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true)});
+			this.repositoryItemButtonEditKeyword.Name = "repositoryItemButtonEditKeyword";
+			this.repositoryItemButtonEditKeyword.NullText = "Type Keyword...";
+			this.repositoryItemButtonEditKeyword.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.repositoryItemButtonEditKeyword_ButtonClick);
+			// 
+			// TagsOptions
+			// 
+			this.Appearance.PageClient.BackColor = System.Drawing.Color.White;
+			this.Appearance.PageClient.Options.UseBackColor = true;
+			this.Controls.Add(this.xtraTabControlSearchTags);
+			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.Size = new System.Drawing.Size(531, 541);
+			this.Text = "Search Tags";
+			((System.ComponentModel.ISupportInitialize)(this.xtraTabControlSearchTags)).EndInit();
+			this.xtraTabControlSearchTags.ResumeLayout(false);
+			this.xtraTabPageSearchTagsCategories.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.splitContainerSearchTagsCategories)).EndInit();
+			this.splitContainerSearchTagsCategories.ResumeLayout(false);
+			this.pnSearchTagsCategoriesHeader.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
+			this.xtraTabPageSearchTagsKeywords.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.gridControlSearchTagsKeywords)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.gridViewSearchTagsKeywords)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditKeyword)).EndInit();
+			this.ResumeLayout(false);
+
+		}
+
+		#endregion
+
+		public DevExpress.XtraTab.XtraTabControl xtraTabControlSearchTags;
+		private DevExpress.XtraTab.XtraTabPage xtraTabPageSearchTagsCategories;
+		private DevExpress.XtraEditors.SplitContainerControl splitContainerSearchTagsCategories;
+		private DevExpress.XtraEditors.XtraScrollableControl xtraScrollableControlSearchTagsCategories;
+		private System.Windows.Forms.Panel pnSearchTagsCategoriesHeader;
+		private DevExpress.XtraEditors.LabelControl labelControlSearchTagsCategoriesHeader;
+		private DevComponents.DotNetBar.ButtonX buttonXWipeTags;
+		private DevExpress.XtraTab.XtraTabPage xtraTabPageSearchTagsKeywords;
+		private DevComponents.DotNetBar.ButtonX buttonXAddKeyWord;
+		private DevExpress.XtraGrid.GridControl gridControlSearchTagsKeywords;
+		private DevExpress.XtraGrid.Views.Grid.GridView gridViewSearchTagsKeywords;
+		private DevExpress.XtraGrid.Columns.GridColumn gridColumnSearchTagsKeywordsValue;
+		private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repositoryItemButtonEditKeyword;
+		private DevExpress.XtraEditors.StyleController styleController;
+	}
+}

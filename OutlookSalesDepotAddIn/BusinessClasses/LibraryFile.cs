@@ -529,19 +529,10 @@ namespace OutlookSalesDepotAddIn.BusinessClasses
 	public class LibraryFolderLink : LibraryLink, ILibraryFolderLink
 	{
 		public List<ILibraryLink> FolderContent { get; private set; }
-
-		public bool IsPreviewContainerAlive(IPreviewContainer previewContainer)
+		
+		public IEnumerable<ILibraryLink> AllFiles
 		{
-			var alive = false;
-			foreach (var file in FolderContent)
-			{
-				alive = file.OriginalPath.ToLower().Equals(previewContainer.OriginalPath.ToLower());
-				if (!alive && file is LibraryFolderLink)
-					alive = (file as LibraryFolderLink).IsPreviewContainerAlive(previewContainer);
-				if (alive)
-					break;
-			}
-			return alive;
+			get { return FolderContent.Union(FolderContent.OfType<LibraryFolderLink>().SelectMany(lf => lf.AllFiles)); }
 		}
 
 		public LibraryFolderLink(LibraryFolder parent)

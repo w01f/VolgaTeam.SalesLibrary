@@ -24,6 +24,7 @@ namespace SalesDepot.TabPages
 
 		private void ButtonItemFavoritesHelpOnClick(object sender, EventArgs eventArgs)
 		{
+			AppManager.Instance.HelpManager.OpenHelpLink("favorites");
 		}
 	}
 }

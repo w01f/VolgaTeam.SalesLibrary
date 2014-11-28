@@ -20,6 +20,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		public const decimal XtraTinyWidth = 90;
 
 		public bool IsDefault { get; set; }
+		public Image OriginalImage { get; set; }
 		public Image BigImage { get; set; }
 		public Image SmallImage { get; set; }
 		public Image TinyImage { get; set; }
@@ -50,6 +51,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			var converter = TypeDescriptor.GetConverter(typeof(Bitmap));
 			var result = new StringBuilder();
 			result.Append("<IsDefault>" + IsDefault + "</IsDefault>");
+			result.Append("<OriginalImage>" + Convert.ToBase64String((byte[])converter.ConvertTo(OriginalImage, typeof(byte[]))).Replace(@"&", "&#38;").Replace("\"", "&quot;") + "</OriginalImage>");
 			result.Append("<BigImage>" + Convert.ToBase64String((byte[])converter.ConvertTo(BigImage, typeof(byte[]))).Replace(@"&", "&#38;").Replace("\"", "&quot;") + "</BigImage>");
 			result.Append("<SmallImage>" + Convert.ToBase64String((byte[])converter.ConvertTo(SmallImage, typeof(byte[]))).Replace(@"&", "&#38;").Replace("\"", "&quot;") + "</SmallImage>");
 			result.Append("<TinyImage>" + Convert.ToBase64String((byte[])converter.ConvertTo(TinyImage, typeof(byte[]))).Replace(@"&", "&#38;").Replace("\"", "&quot;") + "</TinyImage>");
@@ -69,6 +71,15 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 						bool tempBool;
 						if (bool.TryParse(childNode.InnerText, out tempBool))
 							IsDefault = tempBool;
+						break;
+					case "OriginalImage":
+						if (string.IsNullOrEmpty(childNode.InnerText))
+							OriginalImage = null;
+						else
+						{
+							OriginalImage = new Bitmap(new MemoryStream(Convert.FromBase64String(childNode.InnerText)));
+							_encodedBigImage = childNode.InnerText;
+						}
 						break;
 					case "BigImage":
 						if (string.IsNullOrEmpty(childNode.InnerText))
@@ -108,8 +119,9 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		{
 			var result = new ImageSource();
 			result.IsDefault = IsDefault;
-			if (BigImage != null && SmallImage != null && TinyImage != null && XtraTinyImage != null)
+			if (OriginalImage != null && BigImage != null && SmallImage != null && TinyImage != null && XtraTinyImage != null)
 			{
+				result.OriginalImage = OriginalImage.Clone() as Image;
 				result.BigImage = BigImage.Clone() as Image;
 				result.SmallImage = SmallImage.Clone() as Image;
 				result.TinyImage = TinyImage.Clone() as Image;
@@ -121,6 +133,9 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
 		public void Dispose()
 		{
+			if (OriginalImage != null)
+				OriginalImage.Dispose();
+			OriginalImage = null;
 			if (BigImage != null)
 				BigImage.Dispose();
 			BigImage = null;
@@ -146,6 +161,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			var imageSource = new ImageSource();
 			if (image != null)
 			{
+				imageSource.OriginalImage = new Bitmap(image);
 				imageSource.BigImage = image.Resize(new Size((Int32)BigWidth, (Int32)BigHeight));
 				imageSource.SmallImage = image.Resize(new Size((Int32)SmallWidth, (Int32)SmallHeight));
 				imageSource.TinyImage = image.Resize(new Size((Int32)TinyWidth, (Int32)TinyHeight));

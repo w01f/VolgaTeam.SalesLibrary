@@ -575,6 +575,10 @@ namespace SalesDepot.BusinessClasses
 	public class LibraryFolderLink : LibraryLink, ILibraryFolderLink
 	{
 		public List<ILibraryLink> FolderContent { get; private set; }
+		public IEnumerable<ILibraryLink> AllFiles
+		{
+			get { return FolderContent.Union(FolderContent.OfType<LibraryFolderLink>().SelectMany(lf => lf.AllFiles)); }
+		}
 
 		public bool IsPreviewContainerAlive(IPreviewContainer previewContainer)
 		{

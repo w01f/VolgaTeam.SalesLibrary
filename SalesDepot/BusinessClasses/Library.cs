@@ -303,7 +303,7 @@ namespace SalesDepot.BusinessClasses
 
 		public IPreviewContainer GetPreviewContainer(string originalPath)
 		{
-			IPreviewContainer previewContainer = PreviewContainers.Where(x => x.OriginalPath.Equals(originalPath)).FirstOrDefault();
+			IPreviewContainer previewContainer = PreviewContainers.FirstOrDefault(x => x.OriginalPath.Equals(originalPath));
 			if (previewContainer == null)
 			{
 				previewContainer = new UniversalPreviewContainer(this);
@@ -321,10 +321,12 @@ namespace SalesDepot.BusinessClasses
 
 		public void UpdatePreviewableObject(string originalPath, DateTime lastChanged)
 		{
+			throw new NotImplementedException();
 		}
 
 		public void UpdatePreviewContainers()
 		{
+			throw new NotImplementedException();
 		}
 
 		#endregion

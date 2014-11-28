@@ -16,7 +16,7 @@
     <OldToolsVersion>3.5</OldToolsVersion>
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <TargetFrameworkProfile />
     <PublishUrl>publish\</PublishUrl>
@@ -43,6 +43,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -53,6 +54,7 @@
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <PlatformTarget>x86</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DevComponents.DotNetBar2, Version=11.7.0.10, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04, processorArchitecture=MSIL">
@@ -169,6 +171,109 @@
     <Compile Include="PresentationClasses\WallBin\LinkImagesContainer.Designer.cs">
       <DependentUpon>LinkImagesContainer.cs</DependentUpon>
     </Compile>
+    <Compile Include="PresentationClasses\WallBin\LinkProperties\BannerOptions.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\WallBin\LinkProperties\BannerOptions.Designer.cs">
+      <DependentUpon>BannerOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\WallBin\LinkProperties\ExcelEmbeddedLinkOptions.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\WallBin\LinkProperties\ExcelEmbeddedLinkOptions.Designer.cs">
+      <DependentUpon>ExcelEmbeddedLinkOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\WallBin\LinkProperties\FolderFilesOptions.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\WallBin\LinkProperties\FolderFilesOptions.Designer.cs">
+      <DependentUpon>FolderFilesOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\WallBin\LinkProperties\LinkEmbeddedOptions.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\WallBin\LinkProperties\LinkEmbeddedOptions.Designer.cs">
+      <DependentUpon>LinkEmbeddedOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\WallBin\LinkProperties\SlideEmbeddedLinkOptions.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\WallBin\LinkProperties\SlideEmbeddedLinkOptions.Designer.cs">
+      <DependentUpon>SlideEmbeddedLinkOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\WallBin\LinkProperties\VideoEmbeddedLinkOptions.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\WallBin\LinkProperties\VideoEmbeddedLinkOptions.Designer.cs">
+      <DependentUpon>VideoEmbeddedLinkOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\WallBin\LinkProperties\WidgetOptions.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\WallBin\LinkProperties\WidgetOptions.Designer.cs">
+      <DependentUpon>WidgetOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\WallBin\LinkProperties\SecurityOptions.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\WallBin\LinkProperties\SecurityOptions.Designer.cs">
+      <DependentUpon>SecurityOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\WallBin\LinkProperties\LineBreakOptions.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\WallBin\LinkProperties\LineBreakOptions.Designer.cs">
+      <DependentUpon>LineBreakOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\WallBin\LinkProperties\ExpiredDateOptions.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\WallBin\LinkProperties\ExpiredDateOptions.Designer.cs">
+      <DependentUpon>ExpiredDateOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\WallBin\LinkProperties\SlideLinkOptions.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\WallBin\LinkProperties\SlideLinkOptions.Designer.cs">
+      <DependentUpon>SlideLinkOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\WallBin\LinkProperties\ExcelLinkOptions.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\WallBin\LinkProperties\ExcelLinkOptions.Designer.cs">
+      <DependentUpon>ExcelLinkOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\WallBin\LinkProperties\ILinkProperties.cs" />
+    <Compile Include="PresentationClasses\WallBin\LinkProperties\LinkBaseOptions.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\WallBin\LinkProperties\LinkBaseOptions.Designer.cs">
+      <DependentUpon>LinkBaseOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\WallBin\LinkProperties\LinkPreviewableOptions.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\WallBin\LinkProperties\LinkPreviewableOptions.Designer.cs">
+      <DependentUpon>LinkPreviewableOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\WallBin\LinkProperties\TagsOptions.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\WallBin\LinkProperties\TagsOptions.Designer.cs">
+      <DependentUpon>TagsOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\WallBin\LinkProperties\VideoLinkOptions.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\WallBin\LinkProperties\VideoLinkOptions.Designer.cs">
+      <DependentUpon>VideoLinkOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\WallBin\LinkProperties\WebLinkOptions.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\WallBin\LinkProperties\WebLinkOptions.Designer.cs">
+      <DependentUpon>WebLinkOptions.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationClasses\WallBin\RegularLibraryControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -235,6 +340,12 @@
     </Compile>
     <Compile Include="ToolForms\Settings\FormExtraRoots.Designer.cs">
       <DependentUpon>FormExtraRoots.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ToolForms\Settings\FormWindowSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToolForms\Settings\FormWindowSettings.Designer.cs">
+      <DependentUpon>FormWindowSettings.cs</DependentUpon>
     </Compile>
     <Compile Include="ToolForms\WallBin\FormAddUrl.cs">
       <SubType>Form</SubType>
@@ -476,6 +587,57 @@
     <EmbeddedResource Include="PresentationClasses\WallBin\LinkImagesContainer.resx">
       <DependentUpon>LinkImagesContainer.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\WallBin\LinkProperties\BannerOptions.resx">
+      <DependentUpon>BannerOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\WallBin\LinkProperties\ExcelEmbeddedLinkOptions.resx">
+      <DependentUpon>ExcelEmbeddedLinkOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\WallBin\LinkProperties\FolderFilesOptions.resx">
+      <DependentUpon>FolderFilesOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\WallBin\LinkProperties\LinkEmbeddedOptions.resx">
+      <DependentUpon>LinkEmbeddedOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\WallBin\LinkProperties\SlideEmbeddedLinkOptions.resx">
+      <DependentUpon>SlideEmbeddedLinkOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\WallBin\LinkProperties\VideoEmbeddedLinkOptions.resx">
+      <DependentUpon>VideoEmbeddedLinkOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\WallBin\LinkProperties\WidgetOptions.resx">
+      <DependentUpon>WidgetOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\WallBin\LinkProperties\SecurityOptions.resx">
+      <DependentUpon>SecurityOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\WallBin\LinkProperties\LineBreakOptions.resx">
+      <DependentUpon>LineBreakOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\WallBin\LinkProperties\ExpiredDateOptions.resx">
+      <DependentUpon>ExpiredDateOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\WallBin\LinkProperties\SlideLinkOptions.resx">
+      <DependentUpon>SlideLinkOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\WallBin\LinkProperties\ExcelLinkOptions.resx">
+      <DependentUpon>ExcelLinkOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\WallBin\LinkProperties\LinkBaseOptions.resx">
+      <DependentUpon>LinkBaseOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\WallBin\LinkProperties\LinkPreviewableOptions.resx">
+      <DependentUpon>LinkPreviewableOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\WallBin\LinkProperties\TagsOptions.resx">
+      <DependentUpon>TagsOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\WallBin\LinkProperties\VideoLinkOptions.resx">
+      <DependentUpon>VideoLinkOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\WallBin\LinkProperties\WebLinkOptions.resx">
+      <DependentUpon>WebLinkOptions.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationClasses\WallBin\RegularLibraryControl.resx">
       <DependentUpon>RegularLibraryControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -488,6 +650,7 @@
     <EmbeddedResource Include="PresentationClasses\WallBin\SuperFilterControl.resx">
       <DependentUpon>SuperFilterControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="ToolForms\FormProgressSync.resx">
       <DependentUpon>FormProgressSync.cs</DependentUpon>
     </EmbeddedResource>
@@ -505,6 +668,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ToolForms\Settings\FormExtraRoots.resx">
       <DependentUpon>FormExtraRoots.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToolForms\Settings\FormWindowSettings.resx">
+      <DependentUpon>FormWindowSettings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ToolForms\WallBin\FormAddUrl.resx">
       <DependentUpon>FormAddUrl.cs</DependentUpon>
@@ -630,6 +796,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\FolderLinkWmv.png" />
+    <None Include="Resources\FolderLinkXlsx.png" />
+    <None Include="Resources\FolderLinkDocx.png" />
+    <None Include="Resources\FolderLinkPdf.png" />
+    <None Include="Resources\FolderLinkPptx.png" />
+    <None Include="Resources\FolderLinkSelectByType.png" />
+    <None Include="Resources\FolderLinkTagsSettings.png" />
+    <None Include="Resources\FolderLinkSyncSettings.png" />
     <None Include="Resources\Help.png" />
     <None Include="Resources\RetractableLogoTags.png" />
     <None Include="Resources\RetractableLogoSecurity.png" />

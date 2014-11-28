@@ -184,7 +184,8 @@ namespace FileManager.BusinessClasses
 														AddFolderForSync(new DirectoryInfo(file.OriginalPath), filesWhiteList);
 														var libraryFolderLink = file as LibraryFolderLink;
 														if (libraryFolderLink != null)
-															libraryFolderLink.GetWholeContent()
+															libraryFolderLink.AllFiles
+																.OfType<LibraryLink>()
 																.Where(f => (f.Type == FileTypes.FriendlyPresentation ||
 																		f.Type == FileTypes.BuggyPresentation ||
 																		f.Type == FileTypes.Presentation) &&
@@ -471,7 +472,8 @@ namespace FileManager.BusinessClasses
 											AddFolderForSync(new DirectoryInfo(file.OriginalPath), filesWhiteList);
 											var libraryFolderLink = file as LibraryFolderLink;
 											if (libraryFolderLink != null)
-												libraryFolderLink.GetWholeContent()
+												libraryFolderLink.AllFiles
+													.OfType<LibraryLink>()
 													.Where(x => (x.Type == FileTypes.FriendlyPresentation ||
 															x.Type == FileTypes.BuggyPresentation ||
 															x.Type == FileTypes.Presentation)

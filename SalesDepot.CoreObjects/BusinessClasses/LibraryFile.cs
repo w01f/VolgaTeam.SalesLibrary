@@ -43,5 +43,6 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 	public interface ILibraryFolderLink : ILibraryLink
 	{
 		List<ILibraryLink> FolderContent { get; }
+		IEnumerable<ILibraryLink> AllFiles { get; }
 	}
 }

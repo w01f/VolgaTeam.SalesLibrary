@@ -152,7 +152,7 @@ namespace SalesDepot.Cloner
 				string salesDepotFolderName = library.Folder.FullName.Equals(library.Folder.Root.FullName) ? Constants.WholeDriveFilesStorage : library.Folder.Name;
 				existedLibraryFolderNames.Add(salesDepotFolderName);
 
-				DirectoryInfo destinationFolder = new DirectoryInfo(library.IPadManager.SyncDestinationPath);
+				var destinationFolder = new DirectoryInfo(library.IPadManager.SyncDestinationPath);
 				if (!destinationFolder.Exists)
 				{
 					destinationFolder.Create();
@@ -164,8 +164,8 @@ namespace SalesDepot.Cloner
 				filesWhiteList.Add(new FileInfo(Path.Combine(library.Folder.FullName, Constants.LibrariesJsonFileName)).FullName);
 				filesWhiteList.Add(new FileInfo(Path.Combine(library.Folder.FullName, Constants.ReferencesJsonFileName)).FullName);
 
-				List<DirectoryInfo> sourceSubFolders = new List<DirectoryInfo>();
-				List<DirectoryInfo> destinationSubFolders = new List<DirectoryInfo>();
+				var sourceSubFolders = new List<DirectoryInfo>();
+				var destinationSubFolders = new List<DirectoryInfo>();
 
 				if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
 				{
@@ -181,7 +181,7 @@ namespace SalesDepot.Cloner
 									{
 										case FileTypes.Folder:
 											AddFolderForSync(new DirectoryInfo(file.OriginalPath), filesWhiteList);
-											(file as LibraryFolderLink).GetWholeContent().Where(x => (x.Type == FileTypes.FriendlyPresentation || x.Type == FileTypes.BuggyPresentation || x.Type == FileTypes.Presentation) && x.PreviewContainer != null).ToList().ForEach(x => AddFolderForSync(new DirectoryInfo(x.PreviewContainer.ContainerPath), filesWhiteList));
+											(file as LibraryFolderLink).AllFiles.OfType<LibraryLink>().Where(x => (x.Type == FileTypes.FriendlyPresentation || x.Type == FileTypes.BuggyPresentation || x.Type == FileTypes.Presentation) && x.PreviewContainer != null).ToList().ForEach(x => AddFolderForSync(new DirectoryInfo(x.PreviewContainer.ContainerPath), filesWhiteList));
 											break;
 										case FileTypes.BuggyPresentation:
 										case FileTypes.FriendlyPresentation:
@@ -216,8 +216,8 @@ namespace SalesDepot.Cloner
 				if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
 				{
 					sourceSubFolders.Clear();
-					sourceSubFolders.AddRange(library.Folder.GetDirectories().Where(x => filesWhiteList.Where(y => Path.GetDirectoryName(y).Contains(x.FullName)).Count() > 0));
-					foreach (DirectoryInfo subFolder in sourceSubFolders)
+					sourceSubFolders.AddRange(library.Folder.GetDirectories().Where(x => filesWhiteList.Any(y => Path.GetDirectoryName(y).Contains(x.FullName))));
+					foreach (var subFolder in sourceSubFolders)
 					{
 						if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
 						{
@@ -226,7 +226,7 @@ namespace SalesDepot.Cloner
 							{
 								Directory.CreateDirectory(destinationSubFolderPath);
 							}
-							DirectoryInfo destinationSubFolder = new DirectoryInfo(destinationSubFolderPath);
+							var destinationSubFolder = new DirectoryInfo(destinationSubFolderPath);
 							destinationSubFolders.Add(destinationSubFolder);
 							syncManager.SynchronizeFolders(subFolder, destinationSubFolder, filesWhiteList);
 						}
@@ -251,7 +251,7 @@ namespace SalesDepot.Cloner
 						{
 							if ((!Globals.ThreadActive || Globals.ThreadAborted) && Globals.ThreadActive) break;
 							sourceSubFolders.Clear();
-							sourceSubFolders.AddRange(extraRootFolder.Folder.GetDirectories().Where(x => filesWhiteList.Where(y => Path.GetDirectoryName(y).Contains(x.FullName)).Count() > 0));
+							sourceSubFolders.AddRange(extraRootFolder.Folder.GetDirectories().Where(x => filesWhiteList.Any(y => Path.GetDirectoryName(y).Contains(x.FullName))));
 							var extraFolderDestinationPath = Path.Combine(extraFoldersDestinationRoot.FullName, extraRootFolder.RootId.ToString());
 							if (!Directory.Exists(extraFolderDestinationPath))
 								Directory.CreateDirectory(extraFolderDestinationPath);
@@ -272,7 +272,7 @@ namespace SalesDepot.Cloner
 				if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
 				{
 					string previewSourceFolderPath = Path.Combine(library.Folder.FullName, Constants.FtpPreviewContainersRootFolderName);
-					DirectoryInfo previewSourceFolder = new DirectoryInfo(previewSourceFolderPath);
+					var previewSourceFolder = new DirectoryInfo(previewSourceFolderPath);
 					if (previewSourceFolder.Exists)
 					{
 						string previewDestinationFolderPath = Path.Combine(destinationFolder.FullName, Constants.FtpPreviewContainersRootFolderName);
@@ -280,7 +280,7 @@ namespace SalesDepot.Cloner
 						{
 							Directory.CreateDirectory(previewDestinationFolderPath);
 						}
-						DirectoryInfo previewDestinationFolder = new DirectoryInfo(previewDestinationFolderPath);
+						var previewDestinationFolder = new DirectoryInfo(previewDestinationFolderPath);
 						destinationSubFolders.Add(previewDestinationFolder);
 						syncManager.SynchronizeFolders(previewSourceFolder, previewDestinationFolder, new HashSet<string>());
 					}
@@ -365,7 +365,7 @@ namespace SalesDepot.Cloner
 
 		private void buttonEditSource_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
 		{
-			using (FolderBrowserDialog dialog = new FolderBrowserDialog())
+			using (var dialog = new FolderBrowserDialog())
 			{
 				if (buttonEditSource.EditValue != null)
 					dialog.SelectedPath = buttonEditSource.EditValue.ToString();
@@ -379,7 +379,7 @@ namespace SalesDepot.Cloner
 
 		private void buttonEditDestination_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
 		{
-			using (FolderBrowserDialog dialog = new FolderBrowserDialog())
+			using (var dialog = new FolderBrowserDialog())
 			{
 				if (buttonEditDestination.EditValue != null)
 					dialog.SelectedPath = buttonEditDestination.EditValue.ToString();
@@ -393,7 +393,7 @@ namespace SalesDepot.Cloner
 
 		private void buttonEditDestinationRegularSync_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
 		{
-			using (FolderBrowserDialog dialog = new FolderBrowserDialog())
+			using (var dialog = new FolderBrowserDialog())
 			{
 				if (buttonEditDestinationRegularSync.EditValue != null)
 					dialog.SelectedPath = buttonEditDestinationRegularSync.EditValue.ToString();
@@ -407,7 +407,7 @@ namespace SalesDepot.Cloner
 
 		private void buttonEditDestinationIPadSync_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
 		{
-			using (FolderBrowserDialog dialog = new FolderBrowserDialog())
+			using (var dialog = new FolderBrowserDialog())
 			{
 				if (buttonEditDestinationIPadSync.EditValue != null)
 					dialog.SelectedPath = buttonEditDestinationIPadSync.EditValue.ToString();

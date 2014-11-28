@@ -220,7 +220,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
 					#region Files
 					var links = new List<LibraryLink>();
-					foreach (var libraryFile in libraryFolder.Files.Where(link => link.Type != FileTypes.Network && 
+					foreach (var libraryFile in libraryFolder.Files.Where(link => link.Type != FileTypes.Network &&
 						!link.ExtendedProperties.IsForbidden &&
 						(!link.ExtendedProperties.IsRestricted || (link.ExtendedProperties.IsRestricted && (!string.IsNullOrEmpty(link.ExtendedProperties.AssignedUsers) || !string.IsNullOrEmpty(link.ExtendedProperties.DeniedUsers))))))
 					{
@@ -344,8 +344,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			destinationLink.type = (int)libraryFile.Type;
 			destinationLink.enableWidget = libraryFile.EnableWidget;
 			destinationLink.widget = libraryFile.EnableWidget ? Convert.ToBase64String((byte[])imageConverter.ConvertTo(libraryFile.Widget, typeof(byte[]))) : null;
-			if (topLevelFile.CustomKeywords.Tags.Count > 0)
-				destinationLink.tags = string.Join(" ", topLevelFile.CustomKeywords.Tags.Select(x => x.Name).ToArray());
+
 			destinationLink.extendedProperties = new LinkSettings();
 			destinationLink.extendedProperties.note = libraryFile.ExtendedProperties.Note;
 			destinationLink.extendedProperties.hoverNote = libraryFile.ExtendedProperties.HoverNote;
@@ -391,7 +390,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 				{
 					destinationLink.previewId = previewContainer.Identifier;
 					destinationLink.isPreviewNotReady = !previewContainer.Ready;
-					if (libraryFile.ExtendedProperties.GenerateContentText)
+					if (previewContainer.GenerateText)
 					{
 						var txtLinks = previewContainer.GetPreviewLinks("txt");
 						if (txtLinks != null && txtLinks.Length > 0)
@@ -399,7 +398,6 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 					}
 				}
 			}
-
 
 			#region Line Break
 			if (libraryFile.LineBreakProperties != null)
@@ -436,7 +434,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			destinationLink.banner.dateModify = libraryFile.BannerProperties.LastChanged.ToString("MM/dd/yyyy hh:mm:ss tt");
 			#endregion
 
-			#region Super Filters
+			#region Tags
 			var fileSuperFilters = new List<LinkSuperFilter>();
 			foreach (var superFilter in topLevelFile.SuperFilters)
 			{
@@ -448,12 +446,11 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			}
 			if (fileSuperFilters.Count > 0)
 				destinationLink.superFilters = fileSuperFilters.ToArray();
-			#endregion
 
-			#region Categories
 			var fileCategories = new List<LinkCategory>();
-			foreach (SearchGroup searchGroup in topLevelFile.SearchTags.SearchGroups)
-				foreach (SearchTag tag in searchGroup.Tags)
+			foreach (var searchGroup in libraryFile.SearchTags.SearchGroups
+				.Union(topLevelFile.SearchTags.SearchGroups))
+				foreach (var tag in searchGroup.Tags)
 				{
 					var category = new LinkCategory();
 					category.libraryId = library.Identifier.ToString();
@@ -464,6 +461,10 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 				}
 			if (fileCategories.Count > 0)
 				destinationLink.categories = fileCategories.ToArray();
+
+			var keywords = libraryFile.CustomKeywords.Tags.Union(topLevelFile.CustomKeywords.Tags);
+			if (keywords.Any())
+				destinationLink.tags = String.Join(" ", keywords.Select(x => x.Name).ToArray());
 			#endregion
 
 			if (libraryFile is ILibraryFolderLink)
@@ -539,9 +540,16 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			return _siteClient.GetGroups(out message);
 		}
 
-		public GroupModel[] GetGroupsByLibrary(out string message)
+		private List<GroupModel> _cachedSecurityGroups;
+		public IEnumerable<GroupModel> GetGroupsByLibrary(out string message)
 		{
-			return _siteClient.GetGroupsByLibrary(Parent.Identifier.ToString(), out message);
+			message = String.Empty;
+			if (_cachedSecurityGroups == null)
+			{
+				_cachedSecurityGroups = new List<GroupModel>();
+				_cachedSecurityGroups.AddRange(_siteClient.GetGroupsByLibrary(Parent.Identifier.ToString(), out message));
+			}
+			return _cachedSecurityGroups;
 		}
 
 		public void SetGroup(string id, string name, UserModel[] users, Services.IPadAdminService.LibraryPage[] pages, out string message)

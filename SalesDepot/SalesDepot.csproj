@@ -112,11 +112,9 @@
     <Reference Include="DevExpress.XtraTreeList.v14.1, Version=14.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
-    <Reference Include="EO.WebBrowser">
+    <Reference Include="EO.WebBrowser, Version=3.0.43.0, Culture=neutral, PublicKeyToken=e92353a6bf73fffc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Assemblies\EO.Web\EO.WebBrowser.dll</HintPath>
-    </Reference>
-    <Reference Include="EO.WebBrowser.WinForm">
-      <HintPath>..\Assemblies\EO.Web\EO.WebBrowser.WinForm.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="ProgramManager.CoreObjects">

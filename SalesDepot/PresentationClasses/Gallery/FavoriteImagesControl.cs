@@ -243,14 +243,14 @@ namespace SalesDepot.PresentationClasses.Gallery
 		{
 			var imageSource = layoutViewLogoGallery.GetRow(_menuHitInfo.RowHandle) as ImageSource;
 			if (imageSource == null || !imageSource.ContainsData) return;
-			Clipboard.SetImage(imageSource.BigImage);
+			Utils.PutImageToClipboard(imageSource.OriginalImage);
 		}
 
 		private void toolStripMenuItemEdit_Click(object sender, EventArgs e)
 		{
 			var imageSource = layoutViewLogoGallery.GetRow(_menuHitInfo.RowHandle) as ImageSource;
 			if (imageSource == null) return;
-			var image = imageSource.BigImage.Clone() as Image;
+			var image = imageSource.OriginalImage.Clone() as Image;
 
 			ShowProgress();
 			var thread = new Thread(() => FormMain.Instance.Invoke((MethodInvoker)(() => LoadImage(image))));
@@ -268,7 +268,7 @@ namespace SalesDepot.PresentationClasses.Gallery
 		{
 			var imageSource = layoutViewLogoGallery.GetRow(_menuHitInfo.RowHandle) as ImageSource;
 			if (imageSource == null) return;
-			var image = imageSource.BigImage.Clone() as Image;
+			var image = imageSource.OriginalImage.Clone() as Image;
 			using (var form = new FormAddFavoriteImage(image, null, _manager.Images.Select(i => i.Name.ToLower())))
 			{
 				form.Text = "Rename Favorite Image";

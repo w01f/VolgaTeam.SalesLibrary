@@ -105,7 +105,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
 		public RootFolder GetRootFolder(Guid folderId)
 		{
-			RootFolder folder = ExtraFolders.Where(x => x.RootId.Equals(folderId)).FirstOrDefault();
+			RootFolder folder = ExtraFolders.FirstOrDefault(x => x.RootId.Equals(folderId));
 			if (folder != null)
 				return folder;
 			else
@@ -120,7 +120,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
 		public IPreviewContainer GetPreviewContainer(string originalPath)
 		{
-			IPreviewContainer previewContainer = PreviewContainers.Where(x => x.OriginalPath.ToLower().Equals(originalPath.ToLower())).FirstOrDefault();
+			IPreviewContainer previewContainer = PreviewContainers.FirstOrDefault(x => x.OriginalPath.ToLower().Equals(originalPath.ToLower()));
 			if (previewContainer == null)
 			{
 				previewContainer = new UniversalPreviewContainer(this);
@@ -185,32 +185,16 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 				var alive = false;
 				var generatePreviewImages = false;
 				var generateContentText = false;
-				foreach (var page in Pages)
+				var files = Pages.SelectMany(p => p.Folders.SelectMany(f => f.Files)).ToList();
+				foreach (var file in files.Union(files.OfType<LibraryFolderLink>().SelectMany(f => f.AllFiles)))
 				{
-					foreach (var folder in page.Folders)
-					{
-						foreach (LibraryLink file in folder.Files)
-						{
-							if (file.ExtendedProperties.IsForbidden ||
-								!(!file.ExtendedProperties.IsRestricted ||
-									((!String.IsNullOrEmpty(file.ExtendedProperties.AssignedUsers) ||
-									!String.IsNullOrEmpty(file.ExtendedProperties.DeniedUsers))))) continue;
-							if (file is LibraryFolderLink)
-							{
-								alive = ((LibraryFolderLink)file).IsPreviewContainerAlive(previewContainer);
-								generatePreviewImages |= alive;
-								generateContentText |= alive;
-							}
-							else
-							{
-								alive = file.OriginalPath.ToLower().Equals(previewContainer.OriginalPath.ToLower());
-								generatePreviewImages |= alive && file.ExtendedProperties.GeneratePreviewImages;
-								generateContentText |= alive && file.ExtendedProperties.GenerateContentText;
-							}
-							if (alive) break;
-						}
-						if (alive) break;
-					}
+					if (file.ExtendedProperties.IsForbidden ||
+						!(!file.ExtendedProperties.IsRestricted ||
+							((!String.IsNullOrEmpty(file.ExtendedProperties.AssignedUsers) ||
+							!String.IsNullOrEmpty(file.ExtendedProperties.DeniedUsers))))) continue;
+					alive = file.OriginalPath.ToLower().Equals(previewContainer.OriginalPath.ToLower());
+					generatePreviewImages |= alive && file.ExtendedProperties.GeneratePreviewImages;
+					generateContentText |= alive && file.ExtendedProperties.GenerateContentText;
 					if (alive) break;
 				}
 				if (alive)
@@ -691,9 +675,13 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		public void ProcessPresentationProperties()
 		{
 			var processFiles = new List<LibraryLink>();
-			var wholeFiles = Pages.SelectMany(page => page.Folders).SelectMany(folder => folder.Files);
-			processFiles.AddRange(wholeFiles.Where(file => (file.Type == FileTypes.BuggyPresentation || file.Type == FileTypes.FriendlyPresentation || file.Type == FileTypes.Presentation) && (file.PresentationProperties == null || File.GetLastWriteTime(file.OriginalPath) > file.PresentationProperties.LastUpdate)).OfType<LibraryLink>());
-			processFiles.AddRange(wholeFiles.OfType<LibraryFolderLink>().SelectMany(x => x.GetWholeContent().Where(file => (file.Type == FileTypes.BuggyPresentation || file.Type == FileTypes.FriendlyPresentation || file.Type == FileTypes.Presentation) && (file.PresentationProperties == null || File.GetLastWriteTime(file.OriginalPath) > file.PresentationProperties.LastUpdate))));
+			var files = Pages.SelectMany(p => p.Folders.SelectMany(f => f.Files)).OfType<LibraryLink>();
+			processFiles.AddRange(files
+				.Where(file => (file.Type == FileTypes.BuggyPresentation || file.Type == FileTypes.FriendlyPresentation || file.Type == FileTypes.Presentation) && (file.PresentationProperties == null || File.GetLastWriteTime(file.OriginalPath) > file.PresentationProperties.LastUpdate))
+				.Union(files.OfType<LibraryFolderLink>().SelectMany(f => f.AllFiles))
+					.Where(file => (file.Type == FileTypes.BuggyPresentation || file.Type == FileTypes.FriendlyPresentation || file.Type == FileTypes.Presentation) && (file.PresentationProperties == null || File.GetLastWriteTime(file.OriginalPath) > file.PresentationProperties.LastUpdate))
+					.OfType<LibraryLink>()
+				);
 			if (!processFiles.Any()) return;
 			if (!PowerPointHelper.Instance.Connect()) return;
 			foreach (var file in processFiles)
@@ -705,8 +693,8 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		private void GeneratePresentationPreviewFiles()
 		{
 			var links = new List<LibraryLink>();
-			links.AddRange(Pages.SelectMany(page => page.Folders.SelectMany(folder => folder.Files)).OfType<LibraryLink>());
-			links.AddRange(links.OfType<LibraryFolderLink>().SelectMany(x => x.GetWholeContent()).ToList());
+			var files = Pages.SelectMany(p => p.Folders.SelectMany(f => f.Files)).Where(file => (file.Type == FileTypes.BuggyPresentation || file.Type == FileTypes.FriendlyPresentation || file.Type == FileTypes.Presentation) && (file.PresentationProperties == null || File.GetLastWriteTime(file.OriginalPath) > file.PresentationProperties.LastUpdate)).OfType<LibraryLink>();
+			links.AddRange(files.Union(files.OfType<LibraryFolderLink>().SelectMany(f => f.AllFiles)).OfType<LibraryLink>());
 			foreach (var file in links.Where(x => x.Type == FileTypes.BuggyPresentation || x.Type == FileTypes.FriendlyPresentation || x.Type == FileTypes.Presentation))
 			{
 				if ((!Globals.ThreadActive || Globals.ThreadAborted) && Globals.ThreadActive) break;

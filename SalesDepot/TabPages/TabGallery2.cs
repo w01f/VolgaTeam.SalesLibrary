@@ -111,6 +111,7 @@ namespace SalesDepot.TabPages
 
 		private void ButtonItemGallery2HelpOnClick(object sender, EventArgs eventArgs)
 		{
+			AppManager.Instance.HelpManager.OpenHelpLink("gallery2");
 		}
 	}
 }
