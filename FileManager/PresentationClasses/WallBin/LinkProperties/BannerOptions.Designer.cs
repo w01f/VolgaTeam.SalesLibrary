@@ -28,9 +28,8 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.persistentRepository = new DevExpress.XtraEditors.Repository.PersistentRepository();
-			this.repositoryItemPictureEdit = new DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit();
-			this.styleController = new DevExpress.XtraEditors.StyleController();
+			this.components = new System.ComponentModel.Container();
+			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
 			this.groupBoxBanners = new DevExpress.XtraEditors.GroupControl();
 			this.xtraTabControlBanners = new DevExpress.XtraTab.XtraTabControl();
 			this.pbSelectedBanner = new DevExpress.XtraEditors.PictureEdit();
@@ -46,7 +45,6 @@
 			this.laAvailableBanners = new System.Windows.Forms.Label();
 			this.laSelectedBanner = new System.Windows.Forms.Label();
 			this.checkBoxEnableBanner = new System.Windows.Forms.CheckBox();
-			((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.groupBoxBanners)).BeginInit();
 			this.groupBoxBanners.SuspendLayout();
@@ -56,17 +54,6 @@
 			((System.ComponentModel.ISupportInitialize)(this.buttonEditBannerTextFont.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.memoEditBannerText.Properties)).BeginInit();
 			this.SuspendLayout();
-			// 
-			// persistentRepository
-			// 
-			this.persistentRepository.Items.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
-            this.repositoryItemPictureEdit});
-			// 
-			// repositoryItemPictureEdit
-			// 
-			this.repositoryItemPictureEdit.Name = "repositoryItemPictureEdit";
-			this.repositoryItemPictureEdit.ReadOnly = true;
-			this.repositoryItemPictureEdit.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Squeeze;
 			// 
 			// styleController
 			// 
@@ -326,14 +313,11 @@
 			// 
 			// BannerOptions
 			// 
-			this.Appearance.PageClient.BackColor = System.Drawing.Color.White;
-			this.Appearance.PageClient.Options.UseBackColor = true;
 			this.Controls.Add(this.groupBoxBanners);
 			this.Controls.Add(this.checkBoxEnableBanner);
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.Name = "BannerOptions";
 			this.Size = new System.Drawing.Size(531, 541);
-			this.Text = "Banner";
-			((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.groupBoxBanners)).EndInit();
 			this.groupBoxBanners.ResumeLayout(false);
@@ -350,8 +334,6 @@
 
 		#endregion
 
-		private DevExpress.XtraEditors.Repository.PersistentRepository persistentRepository;
-		private DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit repositoryItemPictureEdit;
 		private DevExpress.XtraEditors.StyleController styleController;
 		private DevExpress.XtraEditors.GroupControl groupBoxBanners;
 		private DevExpress.XtraTab.XtraTabControl xtraTabControlBanners;

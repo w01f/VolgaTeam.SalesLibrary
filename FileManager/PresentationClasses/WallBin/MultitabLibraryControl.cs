@@ -5,8 +5,11 @@ using System.Linq;
 using System.Windows.Forms;
 using DevExpress.XtraTab;
 using DevExpress.XtraTab.ViewInfo;
+using FileManager.ConfigurationClasses;
 using FileManager.Controllers;
 using FileManager.PresentationClasses.WallBin.Decorators;
+using FileManager.ToolForms.Settings;
+using SalesDepot.CoreObjects.BusinessClasses;
 
 namespace FileManager.PresentationClasses.WallBin
 {
@@ -61,7 +64,7 @@ namespace FileManager.PresentationClasses.WallBin
 		private void toolStripMenuItemDeleteLinks_Click(object sender, System.EventArgs e)
 		{
 			var selectedPage = _menuHitInfo.Page.Tag as PageDecorator;
-			if(selectedPage == null) return;
+			if (selectedPage == null) return;
 			if (AppManager.Instance.ShowQuestion("Are You sure You want to remove links?") != DialogResult.Yes) return;
 			selectedPage.DeleteLinks();
 		}
@@ -96,6 +99,30 @@ namespace FileManager.PresentationClasses.WallBin
 			if (selectedPage == null) return;
 			if (AppManager.Instance.ShowQuestion("Are You sure You want to remove banners?") != DialogResult.Yes) return;
 			selectedPage.DeleteBanners();
+		}
+
+		private void toolStripMenuItemDelete_Click(object sender, System.EventArgs e)
+		{
+			var selectedPage = _menuHitInfo.Page.Tag as PageDecorator;
+			if (selectedPage == null) return;
+			if (AppManager.Instance.ShowQuestion("Are You sure You want to delete this page?") != DialogResult.Yes) return;
+			if (!MainController.Instance.SaveLibraryWarning()) return;
+			selectedPage.Page.Parent.Pages.Remove(selectedPage.Page);
+			MainController.Instance.RequestUpdateLibrary((Library)selectedPage.Page.Parent);
+		}
+
+		private void toolStripMenuItemRename_Click(object sender, System.EventArgs e)
+		{
+			var selectedPage = _menuHitInfo.Page.Tag as PageDecorator;
+			if (selectedPage == null) return;
+			if (!MainController.Instance.SaveLibraryWarning()) return;
+			using (var form = new FormPageName(selectedPage.Page))
+			{
+				if (form.ShowDialog(FormMain.Instance) != DialogResult.OK) return;
+				SettingsManager.Instance.SelectedPage = selectedPage.Page.Name;
+				SettingsManager.Instance.Save();
+				MainController.Instance.RequestUpdateLibrary((Library)selectedPage.Page.Parent);
+			}
 		}
 	}
 }

@@ -6,11 +6,7 @@ using System.Linq;
 using System.Windows.Forms;
 using DevComponents.DotNetBar.Metro;
 using DevExpress.Utils;
-using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
-using DevExpress.XtraGrid;
-using DevExpress.XtraNavBar;
-using DevExpress.XtraPrinting.Export.Pdf;
 using DevExpress.XtraTab;
 using FileManager.ConfigurationClasses;
 using FileManager.PresentationClasses.WallBin.LinkProperties;
@@ -34,8 +30,7 @@ namespace FileManager.ToolForms.WallBin
 		public FormLinkProperties()
 		{
 			InitializeComponent();
-			AssignCloseActiveEditorsonOutSideClick(this);
-			if ((base.CreateGraphics()).DpiX > 96)
+			if ((CreateGraphics()).DpiX > 96)
 			{
 				var styleControllerFont = new Font(styleController.Appearance.Font.FontFamily, styleController.Appearance.Font.Size - 2, styleController.Appearance.Font.Style);
 				styleController.AppearanceDisabled.Font = styleControllerFont;
@@ -160,35 +155,6 @@ namespace FileManager.ToolForms.WallBin
 			Close();
 		}
 
-		private void AssignCloseActiveEditorsonOutSideClick(Control control)
-		{
-			var controlType = control.GetType();
-			if (controlType != typeof(CheckBox)
-				&& controlType != typeof(RadioButton)
-				&& controlType != typeof(TextBox)
-				&& controlType != typeof(DataGridView)
-				&& controlType != typeof(GridControl)
-				&& controlType != typeof(ButtonEdit)
-				&& controlType != typeof(CheckEdit)
-				&& controlType != typeof(CheckedListBoxControl)
-				&& controlType != typeof(ColorEdit)
-				&& controlType != typeof(ComboBoxEdit)
-				&& controlType != typeof(DateEdit)
-				&& controlType != typeof(TimeEdit)
-				&& controlType != typeof(MemoEdit)
-				&& controlType != typeof(SpinEdit)
-				&& controlType != typeof(TextEdit)
-				&& controlType != typeof(NavBarControl))
-			{
-				control.Click += CloseActiveEditorsonOutSideClick;
-				foreach (Control childControl in control.Controls)
-				{
-					Application.DoEvents();
-					AssignCloseActiveEditorsonOutSideClick(childControl);
-				}
-			}
-		}
-
 		private void xtraTabControl_SelectedPageChanged(object sender, TabPageChangedEventArgs e)
 		{
 			hyperLinkEditRequestNewCategories.Visible = e.Page is TagsOptions &&
@@ -207,11 +173,6 @@ namespace FileManager.ToolForms.WallBin
 			try { Process.Start(String.Format("mailto:{0}?subject={1}&body={2}", SettingsManager.Instance.CategoryRequestRecipients, SettingsManager.Instance.CategoryRequestSubject, SettingsManager.Instance.CategoryRequestBody)); }
 			catch { }
 			e.Handled = true;
-		}
-
-		private void CloseActiveEditorsonOutSideClick(object sender, EventArgs e)
-		{
-			xtraTabControl.Focus();
 		}
 	}
 }

@@ -16,6 +16,7 @@ using FileManager.ToolClasses;
 using FileManager.ToolForms;
 using FileManager.ToolForms.Settings;
 using FileManager.ToolForms.WallBin;
+using SalesDepot.CommonGUI.Forms;
 using SalesDepot.CoreObjects.BusinessClasses;
 using SalesDepot.CoreObjects.ToolClasses;
 
@@ -192,7 +193,7 @@ namespace FileManager.Controllers
 
 		private void ApplyActiveLibrary()
 		{
-			LibraryDecorator activeDecorator = MainController.Instance.ActiveDecorator;
+			var activeDecorator = MainController.Instance.ActiveDecorator;
 			if (activeDecorator != null && activeDecorator.Library.IsConfigured)
 			{
 				if (!activeDecorator.Library.UseDirectAccess)
@@ -481,7 +482,7 @@ namespace FileManager.Controllers
 
 			FormMain.Instance.ribbonControl.Enabled = false;
 			_tabPage.Enabled = false;
-	
+
 			if (MainController.Instance.ActiveDecorator.Library.MinimizeOnSync)
 				FormMain.Instance.WindowState = FormWindowState.Minimized;
 
@@ -608,7 +609,23 @@ namespace FileManager.Controllers
 			if (MainController.Instance.ActiveDecorator == null) return;
 			if (!MainController.Instance.SaveLibraryWarning()) return;
 			if (_formPages == null) _formPages = new FormPages();
-			_formPages.Library = new Library(MainController.Instance.ActiveDecorator.Library.Name, MainController.Instance.ActiveDecorator.Library.Folder, MainController.Instance.ActiveDecorator.Library.UseDirectAccess, SettingsManager.Instance.DirectAccessFileAgeLimit);
+			Library library = null;
+			using (var formProgress = new FormProgress())
+			{
+				formProgress.TopMost = true;
+				formProgress.laProgress.Text = String.Format("Just a few seconds…{0}Preparing your Library Admin Settings…", Environment.NewLine);
+				var thread = new Thread(() =>
+				{
+					library = new Library(MainController.Instance.ActiveDecorator.Library.Name, MainController.Instance.ActiveDecorator.Library.Folder, MainController.Instance.ActiveDecorator.Library.UseDirectAccess, SettingsManager.Instance.DirectAccessFileAgeLimit);
+				});
+				formProgress.Show();
+				Application.DoEvents();
+				thread.Start();
+				while (thread.IsAlive)
+					Application.DoEvents();
+				formProgress.Close();
+			}
+			_formPages.Library = library;
 			if (_formPages.ShowDialog() != DialogResult.OK) return;
 			var libraryIndex = LibraryManager.Instance.LibraryCollection.IndexOf(MainController.Instance.ActiveDecorator.Library);
 			LibraryManager.Instance.LibraryCollection.Remove(MainController.Instance.ActiveDecorator.Library);
@@ -621,7 +638,23 @@ namespace FileManager.Controllers
 			if (MainController.Instance.ActiveDecorator == null) return;
 			if (!MainController.Instance.SaveLibraryWarning()) return;
 			if (_formColumns == null) _formColumns = new FormColumns();
-			_formColumns.Library = new Library(MainController.Instance.ActiveDecorator.Library.Name, MainController.Instance.ActiveDecorator.Library.Folder, MainController.Instance.ActiveDecorator.Library.UseDirectAccess, SettingsManager.Instance.DirectAccessFileAgeLimit);
+			Library library = null;
+			using (var formProgress = new FormProgress())
+			{
+				formProgress.TopMost = true;
+				formProgress.laProgress.Text = String.Format("Just a few seconds…{0}Preparing your Library Admin Settings…", Environment.NewLine);
+				var thread = new Thread(() =>
+				{
+					library = new Library(MainController.Instance.ActiveDecorator.Library.Name, MainController.Instance.ActiveDecorator.Library.Folder, MainController.Instance.ActiveDecorator.Library.UseDirectAccess, SettingsManager.Instance.DirectAccessFileAgeLimit);
+				});
+				formProgress.Show();
+				Application.DoEvents();
+				thread.Start();
+				while (thread.IsAlive)
+					Application.DoEvents();
+				formProgress.Close();
+			}
+			_formColumns.Library = library;
 			if (_formColumns.ShowDialog() != DialogResult.OK) return;
 			var libraryIndex = LibraryManager.Instance.LibraryCollection.IndexOf(MainController.Instance.ActiveDecorator.Library);
 			LibraryManager.Instance.LibraryCollection.Remove(MainController.Instance.ActiveDecorator.Library);
@@ -634,7 +667,23 @@ namespace FileManager.Controllers
 			if (MainController.Instance.ActiveDecorator == null) return;
 			if (!MainController.Instance.SaveLibraryWarning()) return;
 			if (_formAutoWidgets == null) _formAutoWidgets = new FormAutoWidgets();
-			_formAutoWidgets.Library = new Library(MainController.Instance.ActiveDecorator.Library.Name, MainController.Instance.ActiveDecorator.Library.Folder, MainController.Instance.ActiveDecorator.Library.UseDirectAccess, SettingsManager.Instance.DirectAccessFileAgeLimit);
+			Library library = null;
+			using (var formProgress = new FormProgress())
+			{
+				formProgress.TopMost = true;
+				formProgress.laProgress.Text = String.Format("Just a few seconds…{0}Preparing your Library Admin Settings…", Environment.NewLine);
+				var thread = new Thread(() =>
+				{
+					library = new Library(MainController.Instance.ActiveDecorator.Library.Name, MainController.Instance.ActiveDecorator.Library.Folder, MainController.Instance.ActiveDecorator.Library.UseDirectAccess, SettingsManager.Instance.DirectAccessFileAgeLimit);
+				});
+				formProgress.Show();
+				Application.DoEvents();
+				thread.Start();
+				while (thread.IsAlive)
+					Application.DoEvents();
+				formProgress.Close();
+			}
+			_formAutoWidgets.Library = library;
 			if (_formAutoWidgets.ShowDialog() != DialogResult.OK) return;
 			var libraryIndex = LibraryManager.Instance.LibraryCollection.IndexOf(MainController.Instance.ActiveDecorator.Library);
 			LibraryManager.Instance.LibraryCollection.Remove(MainController.Instance.ActiveDecorator.Library);
@@ -646,7 +695,23 @@ namespace FileManager.Controllers
 		{
 			if (!MainController.Instance.SaveLibraryWarning()) return;
 			if (_formDeadLinks == null) _formDeadLinks = new FormDeadLinks();
-			_formDeadLinks.Library = new Library(MainController.Instance.ActiveDecorator.Library.Name, MainController.Instance.ActiveDecorator.Library.Folder, MainController.Instance.ActiveDecorator.Library.UseDirectAccess, SettingsManager.Instance.DirectAccessFileAgeLimit);
+			Library library = null;
+			using (var formProgress = new FormProgress())
+			{
+				formProgress.TopMost = true;
+				formProgress.laProgress.Text = String.Format("Just a few seconds…{0}Preparing your Library Admin Settings…", Environment.NewLine);
+				var thread = new Thread(() =>
+				{
+					library = new Library(MainController.Instance.ActiveDecorator.Library.Name, MainController.Instance.ActiveDecorator.Library.Folder, MainController.Instance.ActiveDecorator.Library.UseDirectAccess, SettingsManager.Instance.DirectAccessFileAgeLimit);
+				});
+				formProgress.Show();
+				Application.DoEvents();
+				thread.Start();
+				while (thread.IsAlive)
+					Application.DoEvents();
+				formProgress.Close();
+			}
+			_formDeadLinks.Library = library;
 			if (_formDeadLinks.ShowDialog() != DialogResult.OK) return;
 			var libraryIndex = LibraryManager.Instance.LibraryCollection.IndexOf(MainController.Instance.ActiveDecorator.Library);
 			LibraryManager.Instance.LibraryCollection.Remove(MainController.Instance.ActiveDecorator.Library);

@@ -136,8 +136,7 @@ namespace FileManager.PresentationClasses.WallBin.LinkProperties
 
 		private void buttonEditBannerTextFont_EditValueChanged(object sender, EventArgs e)
 		{
-			memoEditBannerText.Font = buttonEditBannerTextFont.Tag as Font;
-			;
+			memoEditBannerText.Font = (Font)buttonEditBannerTextFont.Tag;
 			memoEditBannerText.Properties.Appearance.Font = memoEditBannerText.Font;
 			memoEditBannerText.Properties.AppearanceDisabled.Font = memoEditBannerText.Font;
 			memoEditBannerText.Properties.AppearanceFocused.Font = memoEditBannerText.Font;
@@ -159,7 +158,7 @@ namespace FileManager.PresentationClasses.WallBin.LinkProperties
 
 		private void FontEdit_ButtonClick(object sender, ButtonPressedEventArgs e)
 		{
-			FontEdit_Click(this, null);
+			FontEdit_Click(sender, null);
 		}
 
 		private void OnImageDoubleClick(object sender, EventArgs e)

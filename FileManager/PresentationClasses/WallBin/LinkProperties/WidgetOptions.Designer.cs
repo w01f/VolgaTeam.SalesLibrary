@@ -28,9 +28,8 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.persistentRepository = new DevExpress.XtraEditors.Repository.PersistentRepository();
-			this.repositoryItemPictureEdit = new DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit();
-			this.styleController = new DevExpress.XtraEditors.StyleController();
+			this.components = new System.ComponentModel.Container();
+			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
 			this.groupBoxWidgets = new DevExpress.XtraEditors.GroupControl();
 			this.xtraTabControlWidgets = new DevExpress.XtraTab.XtraTabControl();
 			this.laWidgetFileName = new System.Windows.Forms.Label();
@@ -38,24 +37,12 @@
 			this.laAvailableWidgets = new System.Windows.Forms.Label();
 			this.laSelectedWidget = new System.Windows.Forms.Label();
 			this.checkBoxEnableWidget = new System.Windows.Forms.CheckBox();
-			((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.groupBoxWidgets)).BeginInit();
 			this.groupBoxWidgets.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControlWidgets)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pbSelectedWidget)).BeginInit();
 			this.SuspendLayout();
-			// 
-			// persistentRepository
-			// 
-			this.persistentRepository.Items.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
-            this.repositoryItemPictureEdit});
-			// 
-			// repositoryItemPictureEdit
-			// 
-			this.repositoryItemPictureEdit.Name = "repositoryItemPictureEdit";
-			this.repositoryItemPictureEdit.ReadOnly = true;
-			this.repositoryItemPictureEdit.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Squeeze;
 			// 
 			// styleController
 			// 
@@ -181,14 +168,11 @@
 			// 
 			// WidgetOptions
 			// 
-			this.Appearance.PageClient.BackColor = System.Drawing.Color.White;
-			this.Appearance.PageClient.Options.UseBackColor = true;
 			this.Controls.Add(this.groupBoxWidgets);
 			this.Controls.Add(this.checkBoxEnableWidget);
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.Size = new System.Drawing.Size(531, 541);
 			this.Text = "Widget";
-			((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.groupBoxWidgets)).EndInit();
 			this.groupBoxWidgets.ResumeLayout(false);
@@ -202,8 +186,6 @@
 
 		#endregion
 
-		private DevExpress.XtraEditors.Repository.PersistentRepository persistentRepository;
-		private DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit repositoryItemPictureEdit;
 		private DevExpress.XtraEditors.StyleController styleController;
 		private DevExpress.XtraEditors.GroupControl groupBoxWidgets;
 		private DevExpress.XtraTab.XtraTabControl xtraTabControlWidgets;

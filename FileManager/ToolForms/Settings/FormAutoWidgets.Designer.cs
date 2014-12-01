@@ -57,7 +57,7 @@
 			this.buttonXOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.buttonXOK.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-			this.buttonXOK.Location = new System.Drawing.Point(67, 321);
+			this.buttonXOK.Location = new System.Drawing.Point(73, 321);
 			this.buttonXOK.Name = "buttonXOK";
 			this.buttonXOK.Size = new System.Drawing.Size(93, 32);
 			this.buttonXOK.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -71,7 +71,7 @@
 			this.buttonXCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.buttonXCancel.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.buttonXCancel.Location = new System.Drawing.Point(204, 321);
+			this.buttonXCancel.Location = new System.Drawing.Point(210, 321);
 			this.buttonXCancel.Name = "buttonXCancel";
 			this.buttonXCancel.Size = new System.Drawing.Size(93, 32);
 			this.buttonXCancel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -97,6 +97,10 @@
 			// gridControlAutoWidgets
 			// 
 			this.gridControlAutoWidgets.AllowDrop = true;
+			this.gridControlAutoWidgets.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.gridControlAutoWidgets.Cursor = System.Windows.Forms.Cursors.Default;
 			this.gridControlAutoWidgets.EmbeddedNavigator.Appearance.BackColor = System.Drawing.Color.White;
 			this.gridControlAutoWidgets.EmbeddedNavigator.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.gridControlAutoWidgets.EmbeddedNavigator.Appearance.Options.UseBackColor = true;
@@ -107,7 +111,7 @@
 			this.gridControlAutoWidgets.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemButtonEdit,
             this.repositoryItemPictureEdit});
-			this.gridControlAutoWidgets.Size = new System.Drawing.Size(341, 259);
+			this.gridControlAutoWidgets.Size = new System.Drawing.Size(353, 259);
 			this.gridControlAutoWidgets.TabIndex = 10;
 			this.gridControlAutoWidgets.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewAutoWidgets});
@@ -194,6 +198,8 @@
 			// 
 			// buttonEditNewExtension
 			// 
+			this.buttonEditNewExtension.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonEditNewExtension.Location = new System.Drawing.Point(12, 9);
 			this.buttonEditNewExtension.Name = "buttonEditNewExtension";
 			this.buttonEditNewExtension.Properties.Appearance.BackColor = System.Drawing.Color.White;
@@ -203,7 +209,7 @@
 			this.buttonEditNewExtension.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::FileManager.Properties.Resources.PlusButton, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject3, "", null, null, true)});
 			this.buttonEditNewExtension.Properties.NullText = "Add new extension here...";
-			this.buttonEditNewExtension.Size = new System.Drawing.Size(341, 38);
+			this.buttonEditNewExtension.Size = new System.Drawing.Size(353, 38);
 			this.buttonEditNewExtension.StyleController = this.styleController;
 			this.buttonEditNewExtension.TabIndex = 11;
 			this.buttonEditNewExtension.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.buttonEditNewExtension_ButtonClick);
@@ -213,7 +219,7 @@
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
 			this.BackColor = System.Drawing.Color.White;
-			this.ClientSize = new System.Drawing.Size(365, 362);
+			this.ClientSize = new System.Drawing.Size(377, 362);
 			this.Controls.Add(this.buttonEditNewExtension);
 			this.Controls.Add(this.gridControlAutoWidgets);
 			this.Controls.Add(this.buttonXCancel);
