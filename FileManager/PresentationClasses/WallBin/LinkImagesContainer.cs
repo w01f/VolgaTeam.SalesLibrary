@@ -18,8 +18,8 @@ namespace FileManager.PresentationClasses.WallBin
 		private LayoutViewHitInfo _hitInfo;
 		private bool _allowToSave;
 
-		public EventHandler<LinkImageEventArgs> SelectedImageChanged;
-		public EventHandler<EventArgs> OnImageDoubleClick;
+		public event EventHandler<LinkImageEventArgs> SelectedImageChanged;
+		public event EventHandler<EventArgs> OnImageDoubleClick;
 
 		public LinkImagesContainer(LinkImageGroup parent)
 		{
@@ -51,13 +51,15 @@ namespace FileManager.PresentationClasses.WallBin
 
 		private void gridControlGallery_MouseMove(object sender, MouseEventArgs e)
 		{
-			layoutViewGallery.Focus();}
+			layoutViewGallery.Focus();
+		}
 
 		private void layoutViewGalery_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
 		{
 			if (!_allowToSave) return;
 			var imageSource = layoutViewGallery.GetFocusedRow() as LinkImageSource;
 			if (imageSource == null) return;
+			if (e.PrevFocusedRowHandle == GridControl.InvalidRowHandle) return;
 			if (SelectedImageChanged != null)
 				SelectedImageChanged(this, new LinkImageEventArgs { Image = imageSource.Image, Text = imageSource.FileName });
 		}
@@ -67,7 +69,7 @@ namespace FileManager.PresentationClasses.WallBin
 			var pt = gridControlGallery.PointToClient(MousePosition);
 			var hitInfo = layoutViewGallery.CalcHitInfo(pt);
 			if (hitInfo.RowHandle == layoutViewGallery.FocusedRowHandle)
-				layoutViewGalery_FocusedRowChanged(sender, new FocusedRowChangedEventArgs(GridControl.InvalidRowHandle, hitInfo.RowHandle));
+				layoutViewGalery_FocusedRowChanged(sender, new FocusedRowChangedEventArgs(hitInfo.RowHandle, hitInfo.RowHandle));
 		}
 
 		private void gridViewGallery_DoubleClick(object sender, EventArgs e)

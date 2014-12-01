@@ -9,179 +9,147 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 {
 	public class BannerProperties
 	{
+		private bool _enable;
+		private Font _font = new Font("Arial", 12, FontStyle.Regular, GraphicsUnit.Pixel);
+		private Color _foreColor = Color.Black;
+		private Image _image;
+		private Alignment _imageAlignement = Alignment.Left;
 		private DateTime _lastChanged = DateTime.Now;
+		private bool _showText;
+		private string _text = string.Empty;
+
+		public BannerProperties(ISyncObject parent)
+		{
+			Parent = parent;
+			Identifier = Guid.NewGuid();
+		}
 
 		public ISyncObject Parent { get; private set; }
 		public bool Configured { get; set; }
 		public Guid Identifier { get; set; }
 
-		private bool _enable = false;
-		private Image _image = null;
-		private bool _showText = false;
-		private Alignment _imageAlignement = Alignment.Left;
-		private string _text = string.Empty;
-		private Color _foreColor = Color.Black;
-		private Font _font = new Font("Arial", 12, FontStyle.Regular, GraphicsUnit.Pixel);
-
 		public bool Enable
 		{
-			get
-			{
-				return _enable;
-			}
+			get { return _enable; }
 			set
 			{
 				if (_enable != value)
-					this.LastChanged = DateTime.Now;
+					LastChanged = DateTime.Now;
 				_enable = value;
 			}
 		}
 
 		public Image Image
 		{
-			get
-			{
-				return _image;
-			}
+			get { return _image; }
 			set
 			{
 				if (_image != value)
-					this.LastChanged = DateTime.Now;
+					LastChanged = DateTime.Now;
 				_image = value;
 			}
 		}
 
 		public bool ShowText
 		{
-			get
-			{
-				return _showText;
-			}
+			get { return _showText; }
 			set
 			{
 				if (_showText != value)
-					this.LastChanged = DateTime.Now;
+					LastChanged = DateTime.Now;
 				_showText = value;
 			}
 		}
 
 		public Alignment ImageAlignement
 		{
-			get
-			{
-				return _imageAlignement;
-			}
+			get { return _imageAlignement; }
 			set
 			{
 				if (_imageAlignement != value)
-					this.LastChanged = DateTime.Now;
+					LastChanged = DateTime.Now;
 				_imageAlignement = value;
 			}
 		}
 
 		public string Text
 		{
-			get
-			{
-				return _text;
-			}
+			get { return _text; }
 			set
 			{
 				if (_text != value)
-					this.LastChanged = DateTime.Now;
+					LastChanged = DateTime.Now;
 				_text = value;
 			}
 		}
 
 		public Color ForeColor
 		{
-			get
-			{
-				return _foreColor;
-			}
+			get { return _foreColor; }
 			set
 			{
 				if (_foreColor != value)
-					this.LastChanged = DateTime.Now;
+					LastChanged = DateTime.Now;
 				_foreColor = value;
 			}
 		}
 
 		public Font Font
 		{
-			get
-			{
-				return _font;
-			}
-			set
-			{
-				_font = value;
-			}
+			get { return _font; }
+			set { _font = value; }
 		}
 
 		public DateTime LastChanged
 		{
-			get
-			{
-				return _lastChanged;
-			}
-			set
-			{
-				_lastChanged = value;
-			}
-		}
-
-		public BannerProperties(ISyncObject parent)
-		{
-			this.Parent = parent;
-			this.Identifier = Guid.NewGuid();
+			get { return _lastChanged; }
+			set { _lastChanged = value; }
 		}
 
 		public BannerProperties Clone(ISyncObject parent)
 		{
-			BannerProperties banner = new BannerProperties(parent);
-			banner.Configured = this.Configured;
-			banner.Enable = this.Enable;
-			banner.Image = this.Image;
-			banner.ShowText = this.ShowText;
-			banner.ImageAlignement = this.ImageAlignement;
-			banner.Text = this.Text;
-			banner.ForeColor = this.ForeColor;
-			banner.Font = this.Font;
+			var banner = new BannerProperties(parent);
+			banner.Configured = Configured;
+			banner.Enable = Enable;
+			banner.Image = Image != null ? (Image)Image.Clone() : null;
+			banner.ShowText = ShowText;
+			banner.ImageAlignement = ImageAlignement;
+			banner.Text = Text;
+			banner.ForeColor = ForeColor;
+			banner.Font = Font != null ? (Font)Font.Clone() : null;
 			return banner;
 		}
 
 		public string Serialize()
 		{
-			FontConverter fontConverter = new FontConverter();
+			var fontConverter = new FontConverter();
 			TypeConverter converter = TypeDescriptor.GetConverter(typeof(Bitmap));
-			StringBuilder result = new StringBuilder();
-			result.AppendLine(@"<Identifier>" + this.Identifier.ToString() + @"</Identifier>");
-			result.AppendLine(@"<Enable>" + _enable.ToString() + @"</Enable>");
+			var result = new StringBuilder();
+			result.AppendLine(@"<Identifier>" + Identifier + @"</Identifier>");
+			result.AppendLine(@"<Enable>" + _enable + @"</Enable>");
 			result.AppendLine(@"<Image>" + Convert.ToBase64String((byte[])converter.ConvertTo(_image, typeof(byte[]))).Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</Image>");
-			result.AppendLine(@"<ImageAligement>" + ((int)_imageAlignement).ToString() + @"</ImageAligement>");
-			result.AppendLine(@"<ShowText>" + _showText.ToString() + @"</ShowText>");
+			result.AppendLine(@"<ImageAligement>" + ((int)_imageAlignement) + @"</ImageAligement>");
+			result.AppendLine(@"<ShowText>" + _showText + @"</ShowText>");
 			result.AppendLine(@"<Text>" + _text.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</Text>");
 			result.AppendLine(@"<Font>" + fontConverter.ConvertToString(_font) + @"</Font>");
 			result.AppendLine(@"<ForeColor>" + _foreColor.ToArgb() + @"</ForeColor>");
-			result.AppendLine(@"<LastChanged>" + _lastChanged.ToString() + @"</LastChanged>");
+			result.AppendLine(@"<LastChanged>" + _lastChanged + @"</LastChanged>");
 			return result.ToString();
 		}
 
 		public void Deserialize(XmlNode node)
 		{
-			FontConverter converter = new FontConverter();
-			int tempInt = 0;
-			bool tempBool = false;
-			Guid tempGuid;
-			DateTime tempDateTime;
+			var converter = new FontConverter();
 			foreach (XmlNode childNode in node.ChildNodes)
 			{
+				int tempInt;
+				bool tempBool;
 				switch (childNode.Name)
 				{
 					case "Identifier":
+						Guid tempGuid;
 						if (Guid.TryParse(childNode.InnerText, out tempGuid))
-							this.Identifier = tempGuid;
+							Identifier = tempGuid;
 						break;
 					case "Enable":
 						if (bool.TryParse(childNode.InnerText, out tempBool))
@@ -209,21 +177,20 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 						{
 							_font = converter.ConvertFromString(childNode.InnerText) as Font;
 						}
-						catch
-						{
-						}
+						catch { }
 						break;
 					case "ForeColor":
 						if (int.TryParse(childNode.InnerText, out tempInt))
 							_foreColor = Color.FromArgb(tempInt);
 						break;
 					case "LastChanged":
+						DateTime tempDateTime;
 						if (DateTime.TryParse(childNode.InnerText, out tempDateTime))
 							_lastChanged = tempDateTime;
 						break;
 				}
 			}
-			this.Configured = true;
+			Configured = true;
 		}
 	}
 }

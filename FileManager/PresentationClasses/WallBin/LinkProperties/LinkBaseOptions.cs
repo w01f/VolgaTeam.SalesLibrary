@@ -138,7 +138,7 @@ namespace FileManager.PresentationClasses.WallBin.LinkProperties
 
 		private void FontEdit_ButtonClick(object sender, ButtonPressedEventArgs e)
 		{
-			FontEdit_Click(this, null);
+			FontEdit_Click(sender, null);
 		}
 	}
 }

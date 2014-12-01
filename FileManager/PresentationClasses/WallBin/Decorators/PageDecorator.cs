@@ -22,6 +22,7 @@ namespace FileManager.PresentationClasses.WallBin.Decorators
 		private Panel _parentPanel;
 		private bool _scroolDown;
 		private Panel _splash = new Panel();
+		private WallBinOptions _wallbinOptions;
 
 		public PageDecorator(LibraryPage page)
 		{
@@ -92,10 +93,12 @@ namespace FileManager.PresentationClasses.WallBin.Decorators
 			_boxes.Clear();
 
 			Page.Folders.Sort((x, y) => x.ColumnOrder.CompareTo(y.ColumnOrder) == 0 ? x.RowOrder.CompareTo(y.RowOrder) : x.ColumnOrder.CompareTo(y.ColumnOrder));
-			foreach (LibraryFolder folder in Page.Folders)
+			foreach (var folder in Page.Folders)
 			{
 				var box = new FolderBoxControl { Folder = folder, Decorator = this };
 				box.Init();
+				if (_wallbinOptions != null)
+					box.ApplyWallBinOptions(_wallbinOptions);
 				_boxes.Add(box);
 				Application.DoEvents();
 			}
@@ -289,6 +292,7 @@ namespace FileManager.PresentationClasses.WallBin.Decorators
 
 		public void ApplyWallBinOptions(WallBinOptions options)
 		{
+			_wallbinOptions = options;
 			if (ActiveBox != null)
 				ActiveBox.MakeInactive();
 			ClearSelection();
@@ -478,7 +482,19 @@ namespace FileManager.PresentationClasses.WallBin.Decorators
 		}
 		#endregion
 
-		#region Group Operations
+		#region Folder Operations
+		public void DeleteFolder(FolderBoxControl folderBox)
+		{
+			if (folderBox == ActiveBox)
+				ActiveBox.MakeInactive();
+			Page.Folders.Remove(folderBox.Folder);
+			BuildDisplayBoxes();
+			LinkBoxesToColumns();
+			ResizePage();
+			MainController.Instance.WallbinController.UpdateLinkInfo(null);
+			MainController.Instance.WallbinController.UpdateTagCountInfo();
+			Parent.StateChanged = true;
+		}
 
 		public void DeleteLinks()
 		{
@@ -488,7 +504,7 @@ namespace FileManager.PresentationClasses.WallBin.Decorators
 			BuildDisplayBoxes();
 			LinkBoxesToColumns();
 			ResizePage();
-			
+
 			MainController.Instance.WallbinController.UpLinkButton = false;
 			MainController.Instance.WallbinController.DownLinkButton = false;
 			MainController.Instance.WallbinController.DeleteLinkButton = false;
@@ -502,7 +518,7 @@ namespace FileManager.PresentationClasses.WallBin.Decorators
 
 			MainController.Instance.WallbinController.UpdateLinkInfo(null);
 			MainController.Instance.WallbinController.UpdateTagCountInfo();
-			
+
 			Parent.StateChanged = true;
 		}
 

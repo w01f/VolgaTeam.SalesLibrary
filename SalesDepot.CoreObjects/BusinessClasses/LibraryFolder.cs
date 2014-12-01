@@ -19,12 +19,12 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		private Color _foreHeaderColor = Color.Black;
 		private Color _foreWindowColor = Color.Black;
 		private Alignment _headerAlignment = Alignment.Center;
-		private Font _headerFont = new Font("Arial", 12, FontStyle.Regular, GraphicsUnit.Pixel);
+		private Font _headerFont = new Font("Arial", 12, FontStyle.Regular);
 		private DateTime _lastChanged = DateTime.MinValue;
 		private string _name = string.Empty;
 		private double _rowOrder;
 		private Image _widget;
-		private Font _windowFont = new Font("Arial", 14, FontStyle.Regular, GraphicsUnit.Pixel);
+		private Font _windowFont = new Font("Arial", 14, FontStyle.Regular);
 
 		public LibraryFolder(LibraryPage parent)
 		{
@@ -191,7 +191,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
 		public double AbsoluteRowOrder
 		{
-			get { return Parent.Folders.Where(x => x.ColumnOrder < ColumnOrder).Count() + Parent.Folders.Where(x => x.ColumnOrder == ColumnOrder).ToList().IndexOf(this); }
+			get { return Parent.Folders.Count(x => x.ColumnOrder < ColumnOrder) + Parent.Folders.Where(x => x.ColumnOrder == ColumnOrder).ToList().IndexOf(this); }
 		}
 
 		#region ISyncObject Members
@@ -260,20 +260,19 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
 		public void Deserialize(XmlNode node)
 		{
-			int tempInt = 0;
-			bool tempBool;
 			var converter = new FontConverter();
-			Guid tempGuid;
-			DateTime tempDateTime;
 
 			foreach (XmlNode childNode in node.ChildNodes)
 			{
+				int tempInt = 0;
+				DateTime tempDateTime;
 				switch (childNode.Name)
 				{
 					case "Name":
 						_name = childNode.InnerText;
 						break;
 					case "Identifier":
+						Guid tempGuid;
 						if (Guid.TryParse(childNode.InnerText, out tempGuid))
 							Identifier = tempGuid;
 						break;
@@ -324,6 +323,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 							_headerAlignment = (Alignment)tempInt;
 						break;
 					case "EnableWidget":
+						bool tempBool;
 						if (bool.TryParse(childNode.InnerText, out tempBool))
 							_enableWidget = tempBool;
 						break;
@@ -389,7 +389,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 				bool partialMatch = false;
 				foreach (SearchGroup group in searchCriteria.SearchGroups)
 				{
-					SearchGroup fileSearchGroup = file.SearchTags.SearchGroups.Where(x => x.Name.Equals(group.Name)).FirstOrDefault();
+					SearchGroup fileSearchGroup = file.SearchTags.SearchGroups.FirstOrDefault(x => x.Name.Equals(@group.Name));
 					if (fileSearchGroup != null)
 					{
 						foreach (SearchTag tag in group.Tags)
@@ -464,10 +464,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			var searchFiles = new List<ILibraryLink>();
 			foreach (ILibraryLink file in Files.Where(x => x.Type != FileTypes.LineBreak))
 			{
-				bool fullMatch = false;
-
-				if (file.AddDate >= startDate && file.AddDate <= endDate)
-					fullMatch = true;
+				var fullMatch = file.AddDate >= startDate && file.AddDate <= endDate;
 
 				if (fullMatch)
 				{

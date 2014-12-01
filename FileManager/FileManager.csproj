@@ -57,7 +57,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DevComponents.DotNetBar2, Version=11.7.0.10, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04, processorArchitecture=MSIL">
+    <Reference Include="DevComponents.DotNetBar2, Version=12.0.0.7, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
     <Reference Include="DevExpress.Printing.v14.1.Core, Version=14.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
@@ -163,6 +163,12 @@
     </Compile>
     <Compile Include="PresentationClasses\Tags\KeywordsEditor.Designer.cs">
       <DependentUpon>KeywordsEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\WallBin\ColumnSettings.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\WallBin\ColumnSettings.Designer.cs">
+      <DependentUpon>ColumnSettings.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationClasses\WallBin\Decorators\WallBinOptions.cs" />
     <Compile Include="PresentationClasses\WallBin\LinkImagesContainer.cs">
@@ -341,11 +347,23 @@
     <Compile Include="ToolForms\Settings\FormExtraRoots.Designer.cs">
       <DependentUpon>FormExtraRoots.cs</DependentUpon>
     </Compile>
-    <Compile Include="ToolForms\Settings\FormWindowSettings.cs">
+    <Compile Include="ToolForms\Settings\FormColumnTitle.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ToolForms\Settings\FormWindowSettings.Designer.cs">
-      <DependentUpon>FormWindowSettings.cs</DependentUpon>
+    <Compile Include="ToolForms\Settings\FormColumnTitle.Designer.cs">
+      <DependentUpon>FormColumnTitle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ToolForms\Settings\FormPageName.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToolForms\Settings\FormPageName.Designer.cs">
+      <DependentUpon>FormPageName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ToolForms\Settings\FormWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToolForms\Settings\FormWindow.Designer.cs">
+      <DependentUpon>FormWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="ToolForms\WallBin\FormAddUrl.cs">
       <SubType>Form</SubType>
@@ -452,7 +470,6 @@
     </Compile>
     <Compile Include="ConfigurationClasses\ListManager.cs" />
     <Compile Include="ConfigurationClasses\SettingsManager.cs" />
-    <Compile Include="BusinessClasses\FolderCopier.cs" />
     <Compile Include="PresentationClasses\WallBin\Decorators\LibraryDecorator.cs" />
     <Compile Include="ToolForms\Settings\FormPages.cs">
       <SubType>Form</SubType>
@@ -584,6 +601,9 @@
     <EmbeddedResource Include="PresentationClasses\Tags\KeywordsEditor.resx">
       <DependentUpon>KeywordsEditor.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\WallBin\ColumnSettings.resx">
+      <DependentUpon>ColumnSettings.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationClasses\WallBin\LinkImagesContainer.resx">
       <DependentUpon>LinkImagesContainer.cs</DependentUpon>
     </EmbeddedResource>
@@ -650,7 +670,6 @@
     <EmbeddedResource Include="PresentationClasses\WallBin\SuperFilterControl.resx">
       <DependentUpon>SuperFilterControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="ToolForms\FormProgressSync.resx">
       <DependentUpon>FormProgressSync.cs</DependentUpon>
     </EmbeddedResource>
@@ -669,8 +688,14 @@
     <EmbeddedResource Include="ToolForms\Settings\FormExtraRoots.resx">
       <DependentUpon>FormExtraRoots.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ToolForms\Settings\FormWindowSettings.resx">
-      <DependentUpon>FormWindowSettings.cs</DependentUpon>
+    <EmbeddedResource Include="ToolForms\Settings\FormColumnTitle.resx">
+      <DependentUpon>FormColumnTitle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToolForms\Settings\FormPageName.resx">
+      <DependentUpon>FormPageName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToolForms\Settings\FormWindow.resx">
+      <DependentUpon>FormWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ToolForms\WallBin\FormAddUrl.resx">
       <DependentUpon>FormAddUrl.cs</DependentUpon>
@@ -796,6 +821,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\ColumnTitleSettings.png" />
+    <None Include="Resources\FolderSettings.png" />
     <None Include="Resources\FolderLinkWmv.png" />
     <None Include="Resources\FolderLinkXlsx.png" />
     <None Include="Resources\FolderLinkDocx.png" />

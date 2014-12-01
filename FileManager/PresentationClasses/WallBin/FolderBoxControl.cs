@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
-using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
@@ -11,11 +10,11 @@ using DevExpress.Utils;
 using FileManager.ConfigurationClasses;
 using FileManager.Controllers;
 using FileManager.PresentationClasses.WallBin.Decorators;
+using FileManager.ToolForms.Settings;
 using FileManager.ToolForms.WallBin;
 using SalesDepot.CommonGUI.Forms;
 using SalesDepot.CoreObjects.BusinessClasses;
 using SalesDepot.CoreObjects.InteropClasses;
-using SalesDepot.CoreObjects.ToolClasses;
 
 namespace FileManager.PresentationClasses.WallBin
 {
@@ -56,87 +55,7 @@ namespace FileManager.PresentationClasses.WallBin
 			{
 				_folder = value;
 
-				if (_folder.BannerProperties.Enable && _folder.BannerProperties.Image != null)
-				{
-					pbImage.Visible = true;
-					pbImage.Image = _folder.BannerProperties.Image;
-					if (_folder.BannerProperties.ShowText && !String.IsNullOrEmpty(_folder.BannerProperties.Text))
-					{
-						labelControlText.Visible = true;
-						pbImage.Dock = DockStyle.Left;
-						pbImage.SizeMode = PictureBoxSizeMode.Normal;
-						labelControlText.Text = _folder.BannerProperties.Text;
-						labelControlText.Font = _folder.BannerProperties.Font;
-						labelControlText.ForeColor = _folder.BannerProperties.ForeColor;
-						switch (_folder.HeaderAlignment)
-						{
-							case Alignment.Left:
-								labelControlText.Appearance.TextOptions.HAlignment = HorzAlignment.Near;
-								break;
-							case Alignment.Center:
-								labelControlText.Appearance.TextOptions.HAlignment = HorzAlignment.Center;
-								break;
-							case Alignment.Right:
-								labelControlText.Appearance.TextOptions.HAlignment = HorzAlignment.Far;
-								break;
-						}
-					}
-					else
-					{
-						labelControlText.Visible = false;
-						switch (_folder.BannerProperties.ImageAlignement)
-						{
-							case Alignment.Left:
-								pbImage.Dock = DockStyle.Left;
-								pbImage.SizeMode = PictureBoxSizeMode.Normal;
-								break;
-							case Alignment.Center:
-								pbImage.Dock = DockStyle.Fill;
-								pbImage.SizeMode = PictureBoxSizeMode.CenterImage;
-								break;
-							case Alignment.Right:
-								pbImage.Dock = DockStyle.Right;
-								pbImage.SizeMode = PictureBoxSizeMode.Normal;
-								break;
-						}
-						pnHeaderBorder.Height = _folder.BannerProperties.Image.Height;
-					}
-				}
-				else
-				{
-					pbImage.Visible = false;
-					if (_folder.EnableWidget && _folder.Widget != null)
-						labelControlText.Appearance.Image = _folder.Widget;
-					labelControlText.Text = _folder.Name;
-					labelControlText.Font = _folder.HeaderFont;
-					labelControlText.ForeColor = _folder.ForeHeaderColor;
-					switch (_folder.HeaderAlignment)
-					{
-						case Alignment.Left:
-							labelControlText.Appearance.TextOptions.HAlignment = HorzAlignment.Near;
-							break;
-						case Alignment.Center:
-							labelControlText.Appearance.TextOptions.HAlignment = HorzAlignment.Center;
-							break;
-						case Alignment.Right:
-							labelControlText.Appearance.TextOptions.HAlignment = HorzAlignment.Far;
-							break;
-					}
-				}
-
-				pnHeader.BackColor = _folder.BackgroundHeaderColor;
-				pnHeaderBorder.BackColor = _folder.BackgroundHeaderColor;
-				pbImage.BackColor = _folder.BackgroundHeaderColor;
-				labelControlText.BackColor = _folder.BackgroundHeaderColor;
-
-				grFiles.BackgroundColor = _folder.BackgroundWindowColor;
-				grFiles.DefaultCellStyle.BackColor = _folder.BackgroundWindowColor;
-				grFiles.DefaultCellStyle.SelectionBackColor = IsActive ? Color.Wheat : _folder.BackgroundWindowColor;
-
-				grFiles.DefaultCellStyle.ForeColor = _folder.ForeWindowColor;
-				grFiles.DefaultCellStyle.SelectionForeColor = _folder.ForeWindowColor;
-
-				SetHeaderSize();
+				SetFolderAppearance();
 
 				UpdateDataSource();
 
@@ -1053,6 +972,92 @@ namespace FileManager.PresentationClasses.WallBin
 			#endregion
 		}
 
+		private void SetFolderAppearance()
+		{
+			if (_folder.BannerProperties.Enable && _folder.BannerProperties.Image != null)
+			{
+				pbImage.Visible = true;
+				pbImage.Image = _folder.BannerProperties.Image;
+				if (_folder.BannerProperties.ShowText && !String.IsNullOrEmpty(_folder.BannerProperties.Text))
+				{
+					labelControlText.Visible = true;
+					pbImage.Dock = DockStyle.Left;
+					pbImage.SizeMode = PictureBoxSizeMode.Normal;
+					labelControlText.Text = _folder.BannerProperties.Text;
+					labelControlText.Font = _folder.BannerProperties.Font;
+					labelControlText.ForeColor = _folder.BannerProperties.ForeColor;
+					switch (_folder.HeaderAlignment)
+					{
+						case Alignment.Left:
+							labelControlText.Appearance.TextOptions.HAlignment = HorzAlignment.Near;
+							break;
+						case Alignment.Center:
+							labelControlText.Appearance.TextOptions.HAlignment = HorzAlignment.Center;
+							break;
+						case Alignment.Right:
+							labelControlText.Appearance.TextOptions.HAlignment = HorzAlignment.Far;
+							break;
+					}
+				}
+				else
+				{
+					labelControlText.Visible = false;
+					switch (_folder.BannerProperties.ImageAlignement)
+					{
+						case Alignment.Left:
+							pbImage.Dock = DockStyle.Left;
+							pbImage.SizeMode = PictureBoxSizeMode.Normal;
+							break;
+						case Alignment.Center:
+							pbImage.Dock = DockStyle.Fill;
+							pbImage.SizeMode = PictureBoxSizeMode.CenterImage;
+							break;
+						case Alignment.Right:
+							pbImage.Dock = DockStyle.Right;
+							pbImage.SizeMode = PictureBoxSizeMode.Normal;
+							break;
+					}
+					pnHeaderBorder.Height = _folder.BannerProperties.Image.Height;
+				}
+			}
+			else
+			{
+				pbImage.Visible = false;
+				labelControlText.Visible = true;
+				if (_folder.EnableWidget && _folder.Widget != null)
+					labelControlText.Appearance.Image = _folder.Widget;
+				labelControlText.Text = _folder.Name;
+				labelControlText.Font = _folder.HeaderFont;
+				labelControlText.ForeColor = _folder.ForeHeaderColor;
+				switch (_folder.HeaderAlignment)
+				{
+					case Alignment.Left:
+						labelControlText.Appearance.TextOptions.HAlignment = HorzAlignment.Near;
+						break;
+					case Alignment.Center:
+						labelControlText.Appearance.TextOptions.HAlignment = HorzAlignment.Center;
+						break;
+					case Alignment.Right:
+						labelControlText.Appearance.TextOptions.HAlignment = HorzAlignment.Far;
+						break;
+				}
+			}
+
+			pnHeader.BackColor = _folder.BackgroundHeaderColor;
+			pnHeaderBorder.BackColor = _folder.BackgroundHeaderColor;
+			pbImage.BackColor = _folder.BackgroundHeaderColor;
+			labelControlText.BackColor = _folder.BackgroundHeaderColor;
+
+			grFiles.BackgroundColor = _folder.BackgroundWindowColor;
+			grFiles.DefaultCellStyle.BackColor = _folder.BackgroundWindowColor;
+			grFiles.DefaultCellStyle.SelectionBackColor = IsActive ? Color.Wheat : _folder.BackgroundWindowColor;
+
+			grFiles.DefaultCellStyle.ForeColor = _folder.ForeWindowColor;
+			grFiles.DefaultCellStyle.SelectionForeColor = _folder.ForeWindowColor;
+
+			SetHeaderSize();
+		}
+
 		private void SetHeaderSize()
 		{
 			int textHeight;
@@ -1089,8 +1094,8 @@ namespace FileManager.PresentationClasses.WallBin
 
 		private void SetGridSize()
 		{
-			int height = 0;
-			int maxColumnWidth = 0;
+			var height = 0;
+			var maxColumnWidth = 0;
 			foreach (DataGridViewRow row in grFiles.Rows)
 			{
 				var file = row.Tag as LibraryLink;
@@ -1533,6 +1538,42 @@ namespace FileManager.PresentationClasses.WallBin
 				link.BannerProperties.Image = null;
 			}
 			UpdateAfterFolderChanged();
+		}
+
+		private void toolStripMenuItemFolderSettings_Click(object sender, EventArgs e)
+		{
+			using (var form = new FormWindow(_folder, WindowPropertiesType.Appearnce))
+			{
+				if (form.ShowDialog(FormMain.Instance) != DialogResult.OK) return;
+				SetFolderAppearance();
+				UpdateAfterFolderChanged();
+			}
+		}
+
+		private void toolStripMenuItemFolderDelete_Click(object sender, EventArgs e)
+		{
+			if (AppManager.Instance.ShowQuestion("Are You sure You want to remove selected window?") != DialogResult.Yes) return;
+			Decorator.DeleteFolder(this);
+		}
+
+		private void toolStripMenuItemFolderWidget_Click(object sender, EventArgs e)
+		{
+			using (var form = new FormWindow(_folder, WindowPropertiesType.Widget))
+			{
+				if (form.ShowDialog(FormMain.Instance) != DialogResult.OK) return;
+				SetFolderAppearance();
+				UpdateAfterFolderChanged();
+			}
+		}
+
+		private void toolStripMenuItemFolderBanner_Click(object sender, EventArgs e)
+		{
+			using (var form = new FormWindow(_folder, WindowPropertiesType.Banner))
+			{
+				if (form.ShowDialog(FormMain.Instance) != DialogResult.OK) return;
+				SetFolderAppearance();
+				UpdateAfterFolderChanged();
+			}
 		}
 		#endregion
 

@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
 			this.components = new System.ComponentModel.Container();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.ttCellInfo = new System.Windows.Forms.ToolTip(this.components);
 			this.pnGrid = new System.Windows.Forms.Panel();
 			this.grFiles = new System.Windows.Forms.DataGridView();
@@ -48,6 +48,7 @@
 			this.toolStripMenuItemLinkPropertiesDelete = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
 			this.toolStripMenuItemLinkPropertiesNotes = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItemLinkPropertiesAdvanced = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItemLinkPropertiesTags = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItemLinkPropertiesExpirationDate = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItemLinkPropertiesSecurity = new System.Windows.Forms.ToolStripMenuItem();
@@ -59,7 +60,10 @@
 			this.toolStripMenuItemFolderDeleteWidgets = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItemFolderDeleteBanners = new System.Windows.Forms.ToolStripMenuItem();
 			this.contextMenuStripFolderProperties = new System.Windows.Forms.ContextMenuStrip(this.components);
-			this.toolStripMenuItemLinkPropertiesAdvanced = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItemFolderSettings = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItemFolderDelete = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItemFolderWidget = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItemFolderBanner = new System.Windows.Forms.ToolStripMenuItem();
 			this.pnGrid.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.grFiles)).BeginInit();
 			this.pnHeaderBorder.SuspendLayout();
@@ -101,20 +105,20 @@
 			this.grFiles.ColumnHeadersVisible = false;
 			this.grFiles.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colDisplayName});
-			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-			dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-			dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-			this.grFiles.DefaultCellStyle = dataGridViewCellStyle2;
+			dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Window;
+			dataGridViewCellStyle14.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.ControlText;
+			dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+			this.grFiles.DefaultCellStyle = dataGridViewCellStyle14;
 			this.grFiles.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.grFiles.Location = new System.Drawing.Point(1, 40);
 			this.grFiles.Name = "grFiles";
 			this.grFiles.ReadOnly = true;
 			this.grFiles.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-			this.grFiles.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+			this.grFiles.RowHeadersDefaultCellStyle = dataGridViewCellStyle15;
 			this.grFiles.RowHeadersVisible = false;
 			this.grFiles.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
 			this.grFiles.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
@@ -139,8 +143,8 @@
 			// 
 			// colDisplayName
 			// 
-			dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.colDisplayName.DefaultCellStyle = dataGridViewCellStyle1;
+			dataGridViewCellStyle13.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.colDisplayName.DefaultCellStyle = dataGridViewCellStyle13;
 			this.colDisplayName.HeaderText = "Display Name and Note";
 			this.colDisplayName.Name = "colDisplayName";
 			this.colDisplayName.ReadOnly = true;
@@ -235,7 +239,7 @@
             this.toolStripMenuItemLinkPropertiesWidget,
             this.toolStripMenuItemLinkPropertiesBanner});
 			this.contextMenuStripLinkProperties.Name = "contextMenuStripLinkProperties";
-			this.contextMenuStripLinkProperties.Size = new System.Drawing.Size(173, 230);
+			this.contextMenuStripLinkProperties.Size = new System.Drawing.Size(173, 208);
 			// 
 			// toolStripMenuItemLinkPropertiesOpen
 			// 
@@ -262,6 +266,13 @@
 			this.toolStripMenuItemLinkPropertiesNotes.Size = new System.Drawing.Size(172, 22);
 			this.toolStripMenuItemLinkPropertiesNotes.Text = "Link Notes";
 			this.toolStripMenuItemLinkPropertiesNotes.Click += new System.EventHandler(this.toolStripMenuItemLinkPropertiesNotes_Click);
+			// 
+			// toolStripMenuItemLinkPropertiesAdvanced
+			// 
+			this.toolStripMenuItemLinkPropertiesAdvanced.Name = "toolStripMenuItemLinkPropertiesAdvanced";
+			this.toolStripMenuItemLinkPropertiesAdvanced.Size = new System.Drawing.Size(172, 22);
+			this.toolStripMenuItemLinkPropertiesAdvanced.Text = "Advanced Settings";
+			this.toolStripMenuItemLinkPropertiesAdvanced.Click += new System.EventHandler(this.toolStripMenuItemLinkPropertiesAdvanced_Click);
 			// 
 			// toolStripMenuItemLinkPropertiesTags
 			// 
@@ -340,16 +351,41 @@
             this.toolStripMenuItemFolderDeleteSecurity,
             this.toolStripMenuItemFolderDeleteTags,
             this.toolStripMenuItemFolderDeleteWidgets,
-            this.toolStripMenuItemFolderDeleteBanners});
+            this.toolStripMenuItemFolderDeleteBanners,
+            this.toolStripMenuItemFolderSettings,
+            this.toolStripMenuItemFolderDelete,
+            this.toolStripMenuItemFolderWidget,
+            this.toolStripMenuItemFolderBanner});
 			this.contextMenuStripFolderProperties.Name = "contextMenuStripLinkProperties";
-			this.contextMenuStripFolderProperties.Size = new System.Drawing.Size(349, 114);
+			this.contextMenuStripFolderProperties.Size = new System.Drawing.Size(349, 224);
 			// 
-			// toolStripMenuItemLinkPropertiesAdvanced
+			// toolStripMenuItemFolderSettings
 			// 
-			this.toolStripMenuItemLinkPropertiesAdvanced.Name = "toolStripMenuItemLinkPropertiesAdvanced";
-			this.toolStripMenuItemLinkPropertiesAdvanced.Size = new System.Drawing.Size(172, 22);
-			this.toolStripMenuItemLinkPropertiesAdvanced.Text = "Advanced Settings";
-			this.toolStripMenuItemLinkPropertiesAdvanced.Click += new System.EventHandler(this.toolStripMenuItemLinkPropertiesAdvanced_Click);
+			this.toolStripMenuItemFolderSettings.Name = "toolStripMenuItemFolderSettings";
+			this.toolStripMenuItemFolderSettings.Size = new System.Drawing.Size(348, 22);
+			this.toolStripMenuItemFolderSettings.Text = "Edit window settings";
+			this.toolStripMenuItemFolderSettings.Click += new System.EventHandler(this.toolStripMenuItemFolderSettings_Click);
+			// 
+			// toolStripMenuItemFolderDelete
+			// 
+			this.toolStripMenuItemFolderDelete.Name = "toolStripMenuItemFolderDelete";
+			this.toolStripMenuItemFolderDelete.Size = new System.Drawing.Size(348, 22);
+			this.toolStripMenuItemFolderDelete.Text = "Delete this window";
+			this.toolStripMenuItemFolderDelete.Click += new System.EventHandler(this.toolStripMenuItemFolderDelete_Click);
+			// 
+			// toolStripMenuItemFolderWidget
+			// 
+			this.toolStripMenuItemFolderWidget.Name = "toolStripMenuItemFolderWidget";
+			this.toolStripMenuItemFolderWidget.Size = new System.Drawing.Size(348, 22);
+			this.toolStripMenuItemFolderWidget.Text = "Add a Widget to this window";
+			this.toolStripMenuItemFolderWidget.Click += new System.EventHandler(this.toolStripMenuItemFolderWidget_Click);
+			// 
+			// toolStripMenuItemFolderBanner
+			// 
+			this.toolStripMenuItemFolderBanner.Name = "toolStripMenuItemFolderBanner";
+			this.toolStripMenuItemFolderBanner.Size = new System.Drawing.Size(348, 22);
+			this.toolStripMenuItemFolderBanner.Text = "Add a Banner to this Window";
+			this.toolStripMenuItemFolderBanner.Click += new System.EventHandler(this.toolStripMenuItemFolderBanner_Click);
 			// 
 			// FolderBoxControl
 			// 
@@ -399,5 +435,9 @@
 		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemFolderDeleteBanners;
 		private System.Windows.Forms.ContextMenuStrip contextMenuStripFolderProperties;
 		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemLinkPropertiesAdvanced;
+		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemFolderSettings;
+		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemFolderDelete;
+		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemFolderWidget;
+		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemFolderBanner;
     }
 }

@@ -203,6 +203,16 @@ namespace FileManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ColumnTitleSettings {
+            get {
+                object obj = ResourceManager.GetObject("ColumnTitleSettings", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ConvertVideo {
             get {
                 object obj = ResourceManager.GetObject("ConvertVideo", resourceCulture);
@@ -426,6 +436,16 @@ namespace FileManager.Properties {
         internal static System.Drawing.Bitmap FolderLinkXlsx {
             get {
                 object obj = ResourceManager.GetObject("FolderLinkXlsx", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap FolderSettings {
+            get {
+                object obj = ResourceManager.GetObject("FolderSettings", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

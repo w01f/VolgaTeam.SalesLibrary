@@ -37,6 +37,8 @@
 			this.toolStripMenuItemDeleteTags = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItemDeleteWidgets = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItemDeleteBanners = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItemRename = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItemDelete = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControl)).BeginInit();
 			this.contextMenuStripPageProperties.SuspendLayout();
 			this.SuspendLayout();
@@ -87,9 +89,11 @@
             this.toolStripMenuItemDeleteSecurity,
             this.toolStripMenuItemDeleteTags,
             this.toolStripMenuItemDeleteWidgets,
-            this.toolStripMenuItemDeleteBanners});
+            this.toolStripMenuItemDeleteBanners,
+            this.toolStripMenuItemRename,
+            this.toolStripMenuItemDelete});
 			this.contextMenuStripPageProperties.Name = "contextMenuStripLinkProperties";
-			this.contextMenuStripPageProperties.Size = new System.Drawing.Size(337, 136);
+			this.contextMenuStripPageProperties.Size = new System.Drawing.Size(337, 180);
 			// 
 			// toolStripMenuItemDeleteLinks
 			// 
@@ -126,6 +130,20 @@
 			this.toolStripMenuItemDeleteBanners.Text = "Remove all Banners for ALL Links on this page";
 			this.toolStripMenuItemDeleteBanners.Click += new System.EventHandler(this.toolStripMenuItemDeleteBanners_Click);
 			// 
+			// toolStripMenuItemRename
+			// 
+			this.toolStripMenuItemRename.Name = "toolStripMenuItemRename";
+			this.toolStripMenuItemRename.Size = new System.Drawing.Size(336, 22);
+			this.toolStripMenuItemRename.Text = "Rename this page";
+			this.toolStripMenuItemRename.Click += new System.EventHandler(this.toolStripMenuItemRename_Click);
+			// 
+			// toolStripMenuItemDelete
+			// 
+			this.toolStripMenuItemDelete.Name = "toolStripMenuItemDelete";
+			this.toolStripMenuItemDelete.Size = new System.Drawing.Size(336, 22);
+			this.toolStripMenuItemDelete.Text = "Delete this page";
+			this.toolStripMenuItemDelete.Click += new System.EventHandler(this.toolStripMenuItemDelete_Click);
+			// 
 			// MultitabLibraryControl
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -152,5 +170,7 @@
 		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemDeleteTags;
 		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemDeleteWidgets;
 		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemDeleteBanners;
+		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemRename;
+		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemDelete;
     }
 }
