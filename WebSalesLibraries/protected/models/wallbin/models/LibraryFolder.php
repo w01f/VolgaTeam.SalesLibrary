@@ -152,13 +152,13 @@
 			if (isset($this->banner) && $this->banner->isEnabled)
 			{
 				$banner = $this->banner->image;
-				if (isset($banner))
+				if (isset($banner) && $banner != '')
 					$headerImage = imagecreatefromstring(base64_decode($banner));
 			}
 			else
 			{
 				$widget = $this->getWidget();
-				if (isset($widget))
+				if (isset($widget) && $widget != '')
 					$headerImage = imagecreatefromstring(base64_decode($widget));
 			}
 			if (isset($headerImage))
