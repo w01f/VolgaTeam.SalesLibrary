@@ -171,8 +171,6 @@ namespace OvernightsCalendarViewer.BusinessClasses
 			{
 				switch (Type)
 				{
-					case FileTypes.BuggyPresentation:
-					case FileTypes.FriendlyPresentation:
 					case FileTypes.MediaPlayerVideo:
 					case FileTypes.Other:
 					case FileTypes.Presentation:

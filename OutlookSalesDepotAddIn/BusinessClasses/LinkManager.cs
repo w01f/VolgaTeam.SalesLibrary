@@ -42,8 +42,6 @@ namespace OutlookSalesDepotAddIn.BusinessClasses
 			}
 			switch (link.Type)
 			{
-				case FileTypes.BuggyPresentation:
-				case FileTypes.FriendlyPresentation:
 				case FileTypes.Presentation:
 				case FileTypes.Word:
 				case FileTypes.Excel:

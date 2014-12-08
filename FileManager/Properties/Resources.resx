@@ -139,6 +139,9 @@
   <data name="RefreshUsers" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\RefreshUsers.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="ColumnTitleSettings" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ColumnTitleSettings.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="ArrowLeft" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ArrowLeft.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -151,8 +154,8 @@
   <data name="WebArt" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\WebArt.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="EditUser" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\EditUser.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="AutoWidgetsSmall" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AutoWidgetsSmall.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Branding" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Branding.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -184,6 +187,9 @@
   <data name="Opera" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Opera.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="EmailList" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\EmailList.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="DeadLinks" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\DeadLinks.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -196,14 +202,14 @@
   <data name="RetractableLogoSecurity" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\RetractableLogoSecurity.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Firefox" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Firefox.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="ArrowRight" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ArrowRight.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="AutoWidgetsSmall" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\AutoWidgetsSmall.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Exit" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Exit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="FolderLinkDocx" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\FolderLinkDocx.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="TagsSuperFIlters" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\TagsSuperFIlters.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -220,11 +226,8 @@
   <data name="FolderLinkSelectByType" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\FolderLinkSelectByType.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="DeleteLink" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\DeleteLink.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="FormatFontLarger" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\FormatFontLarger.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="EditUser" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\EditUser.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="SecuritySelect" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SecuritySelect.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -259,14 +262,17 @@
   <data name="TabsView" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\TabsView.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="FolderLinkDocx" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\FolderLinkDocx.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="UrlButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\UrlButton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="FolderLinkSyncSettings" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\FolderLinkSyncSettings.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="MinibarFontSmaller" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\MinibarFontSmaller.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TagsKeywordsWidget" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TagsKeywordsWidget.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="OpenVideoSmall" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\OpenVideoSmall.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -280,14 +286,8 @@
   <data name="ConvertVideoSmall" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ConvertVideoSmall.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="FolderLinkPdf" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\FolderLinkPdf.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="CancelSync" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CancelSync.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Exit" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Exit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="TagsSecurityBlackListWidget" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\TagsSecurityBlackListWidget.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -310,8 +310,8 @@
   <data name="FolderLinkPptx" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\FolderLinkPptx.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="TagsSecurityHiddenWidget" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\TagsSecurityHiddenWidget.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="DeleteLink" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DeleteLink.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="PackageLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\PackageLogo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -331,8 +331,8 @@
   <data name="FolderLinkTagsSettings" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\FolderLinkTagsSettings.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="TagsKeywordsWidget" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\TagsKeywordsWidget.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Firefox" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Firefox.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="AutoWidgets" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\AutoWidgets.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -340,26 +340,29 @@
   <data name="FormatFontSmaller" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\FormatFontSmaller.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="FolderLinkXlsx" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\FolderLinkXlsx.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Help" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Help.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ShowInfo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ShowInfo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="FolderLinkSyncSettings" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\FolderLinkSyncSettings.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="TagsSecurityHiddenWidget" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TagsSecurityHiddenWidget.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="RetractableLogoFiles" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\RetractableLogoFiles.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="FolderLinkXlsx" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\FolderLinkXlsx.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="FolderLinkPdf" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\FolderLinkPdf.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="settings" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\settings.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="EmailList" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\EmailList.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="FormatFontLarger" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\FormatFontLarger.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="FolderSettings" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\FolderSettings.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -388,7 +391,7 @@
   <data name="EmptyImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\EmptyImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ColumnTitleSettings" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ColumnTitleSettings.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="AdvancedSettings" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AdvancedSettings.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

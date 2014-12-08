@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using DevComponents.DotNetBar.Metro;
@@ -32,12 +33,6 @@ namespace FileManager.ToolForms.WallBin
 			InitializeComponent();
 			if ((CreateGraphics()).DpiX > 96)
 			{
-				var styleControllerFont = new Font(styleController.Appearance.Font.FontFamily, styleController.Appearance.Font.Size - 2, styleController.Appearance.Font.Style);
-				styleController.AppearanceDisabled.Font = styleControllerFont;
-				styleController.AppearanceDropDown.Font = styleControllerFont;
-				styleController.AppearanceDropDownHeader.Font = styleControllerFont;
-				styleController.AppearanceFocused.Font = styleControllerFont;
-				styleController.AppearanceReadOnly.Font = styleControllerFont;
 				xtraTabControl.AppearancePage.HeaderActive.Font = new Font(xtraTabControl.AppearancePage.HeaderActive.Font.FontFamily, xtraTabControl.AppearancePage.HeaderActive.Font.Size - 2, xtraTabControl.AppearancePage.HeaderActive.Font.Style);
 				xtraTabControl.AppearancePage.Header.Font = new Font(xtraTabControl.AppearancePage.Header.Font.FontFamily, xtraTabControl.AppearancePage.Header.Font.Size - 2, xtraTabControl.AppearancePage.Header.Font.Style);
 				xtraTabControl.AppearancePage.HeaderDisabled.Font = new Font(xtraTabControl.AppearancePage.HeaderDisabled.Font.FontFamily, xtraTabControl.AppearancePage.HeaderDisabled.Font.Size - 2, xtraTabControl.AppearancePage.HeaderDisabled.Font.Style);
@@ -57,51 +52,49 @@ namespace FileManager.ToolForms.WallBin
 					data.PropertiesName;
 				form.StartPosition = FormStartPosition.CenterScreen;
 				var optionPages = new List<ILinkProperties>();
+				form.pnTop.Visible = false;
 				switch (propertiesType)
 				{
 					case LinkPropertiesType.Notes:
-						if (isEmbedded)
-							form.Height = 300;
 						if (data.Type == FileTypes.LineBreak)
 							optionPages.Add(new LineBreakOptions(data));
-						else if (data.Type == FileTypes.BuggyPresentation ||
-							 data.Type == FileTypes.FriendlyPresentation ||
-							 data.Type == FileTypes.Presentation ||
-							 data.Type == FileTypes.PDF ||
-							 data.Type == FileTypes.Word ||
-							 (data.Type == FileTypes.Other && new[] { "ppt", "doc", "pdf" }.Contains(data.Format)))
-						{
-							if (isEmbedded)
-								optionPages.Add(new SlideEmbeddedLinkOptions(data));
-							else
-								optionPages.Add(new SlideLinkOptions(data));
-						}
-						else if (data.Type == FileTypes.Other && new[] { "xls" }.Contains(data.Format))
-						{
-							if (isEmbedded)
-								optionPages.Add(new ExcelEmbeddedLinkOptions(data));
-							else
-								optionPages.Add(new ExcelLinkOptions(data));
-						}
-						else if (data.Type == FileTypes.MediaPlayerVideo || data.Type == FileTypes.QuickTimeVideo)
-						{
-							if (isEmbedded)
-								optionPages.Add(new VideoEmbeddedLinkOptions(data));
-							else
-								optionPages.Add(new VideoLinkOptions(data));
-						}
-						else if (data.Type == FileTypes.Url)
-						{
-							optionPages.Add(new WebLinkOptions(data));
-						}
-						else if (data.Type == FileTypes.Folder)
-						{
-							optionPages.Add(new LinkBaseOptions(data));
-						}
-						else if (!isEmbedded)
-							optionPages.Add(new LinkBaseOptions(data));
 						else
-							AppManager.Instance.ShowWarning("Settings are not available for files of this type");
+						{
+							if (!isEmbedded)
+							{
+								form.pnTop.Visible = true;
+								form.laTitle.Text = "Link Settings";
+								optionPages.Add(new LinkBaseOptions(data));
+								optionPages.Add(new LinkTextOptions(data));
+							}
+							else
+								form.Height = 400;
+							if (data.Type == FileTypes.Presentation ||
+								data.Type == FileTypes.PDF ||
+								data.Type == FileTypes.Word ||
+								(data.Type == FileTypes.Other && new[] { "ppt", "doc", "pdf" }.Contains(data.Format)))
+							{
+								optionPages.Add(new LinkSlideOptions(data));
+								if ((data.PreviewContainer != null && Directory.Exists(data.PreviewContainer.ContainerPath)) || (data.UniversalPreviewContainer != null && Directory.Exists(data.UniversalPreviewContainer.ContainerPath)))
+									optionPages.Add(new LinkAdminOptions(data));
+							}
+							else if (data.Type == FileTypes.Other && new[] { "xls" }.Contains(data.Format))
+							{
+								optionPages.Add(new LinkExcelOptions(data));
+								if ((data.PreviewContainer != null && Directory.Exists(data.PreviewContainer.ContainerPath)) || (data.UniversalPreviewContainer != null && Directory.Exists(data.UniversalPreviewContainer.ContainerPath)))
+									optionPages.Add(new LinkAdminOptions(data));
+							}
+							else if (data.Type == FileTypes.MediaPlayerVideo || data.Type == FileTypes.QuickTimeVideo)
+							{
+								optionPages.Add(new LinkVideoOptions(data));
+								if ((data.PreviewContainer != null && Directory.Exists(data.PreviewContainer.ContainerPath)) || (data.UniversalPreviewContainer != null && Directory.Exists(data.UniversalPreviewContainer.ContainerPath)))
+									optionPages.Add(new LinkAdminOptions(data));
+							}
+							else if (data.Type == FileTypes.Url)
+							{
+								optionPages.Add(new LinkWebOptions(data));
+							}
+						}
 						break;
 					case LinkPropertiesType.Tags:
 						optionPages.Add(new TagsOptions(data));
@@ -141,7 +134,6 @@ namespace FileManager.ToolForms.WallBin
 			foreach (var optionPage in optionPages)
 			{
 				optionPage.OnForseClose += (o, e) => ForceClose();
-				//AssignCloseActiveEditorsonOutSideClick((XtraTabPage)optionPage);
 			}
 			xtraTabControl.ShowTabHeader = optionPages.Length > 1 ? DefaultBoolean.True : DefaultBoolean.False;
 			xtraTabControl.TabPages.AddRange(pages.OfType<XtraTabPage>().ToArray());

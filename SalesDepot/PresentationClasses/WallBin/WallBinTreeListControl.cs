@@ -483,8 +483,6 @@ namespace SalesDepot.PresentationClasses.WallBin
 				barButtonItemOpenLink.Enabled = true;
 				switch (file.Type)
 				{
-					case FileTypes.BuggyPresentation:
-					case FileTypes.FriendlyPresentation:
 					case FileTypes.Presentation:
 						barButtonItemSave.Enabled = true;
 						barButtonItemEmailLink.Enabled = true;

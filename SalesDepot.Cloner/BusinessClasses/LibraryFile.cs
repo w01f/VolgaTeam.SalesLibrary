@@ -215,8 +215,6 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 				switch (Type)
 				{
 					case FileTypes.Presentation:
-					case FileTypes.BuggyPresentation:
-					case FileTypes.FriendlyPresentation:
 					case FileTypes.MediaPlayerVideo:
 					case FileTypes.Other:
 					case FileTypes.QuickTimeVideo:
@@ -518,9 +516,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
 			SetProperties();
 
-			if ((Type == FileTypes.BuggyPresentation ||
-				Type == FileTypes.FriendlyPresentation ||
-				Type == FileTypes.Presentation ||
+			if ((Type == FileTypes.Presentation ||
 				Type == FileTypes.Other ||
 				Type == FileTypes.MediaPlayerVideo ||
 				Type == FileTypes.QuickTimeVideo) &&
@@ -593,8 +589,6 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		{
 			switch (Type)
 			{
-				case FileTypes.BuggyPresentation:
-				case FileTypes.FriendlyPresentation:
 				case FileTypes.Presentation:
 				case FileTypes.QuickTimeVideo:
 				case FileTypes.MediaPlayerVideo:

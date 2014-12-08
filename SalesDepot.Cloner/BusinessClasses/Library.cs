@@ -677,9 +677,9 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			var processFiles = new List<LibraryLink>();
 			var files = Pages.SelectMany(p => p.Folders.SelectMany(f => f.Files)).OfType<LibraryLink>();
 			processFiles.AddRange(files
-				.Where(file => (file.Type == FileTypes.BuggyPresentation || file.Type == FileTypes.FriendlyPresentation || file.Type == FileTypes.Presentation) && (file.PresentationProperties == null || File.GetLastWriteTime(file.OriginalPath) > file.PresentationProperties.LastUpdate))
+				.Where(file => file.Type == FileTypes.Presentation && (file.PresentationProperties == null || File.GetLastWriteTime(file.OriginalPath) > file.PresentationProperties.LastUpdate))
 				.Union(files.OfType<LibraryFolderLink>().SelectMany(f => f.AllFiles))
-					.Where(file => (file.Type == FileTypes.BuggyPresentation || file.Type == FileTypes.FriendlyPresentation || file.Type == FileTypes.Presentation) && (file.PresentationProperties == null || File.GetLastWriteTime(file.OriginalPath) > file.PresentationProperties.LastUpdate))
+					.Where(file => file.Type == FileTypes.Presentation && (file.PresentationProperties == null || File.GetLastWriteTime(file.OriginalPath) > file.PresentationProperties.LastUpdate))
 					.OfType<LibraryLink>()
 				);
 			if (!processFiles.Any()) return;
@@ -693,9 +693,9 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		private void GeneratePresentationPreviewFiles()
 		{
 			var links = new List<LibraryLink>();
-			var files = Pages.SelectMany(p => p.Folders.SelectMany(f => f.Files)).Where(file => (file.Type == FileTypes.BuggyPresentation || file.Type == FileTypes.FriendlyPresentation || file.Type == FileTypes.Presentation) && (file.PresentationProperties == null || File.GetLastWriteTime(file.OriginalPath) > file.PresentationProperties.LastUpdate)).OfType<LibraryLink>();
-			links.AddRange(files.Union(files.OfType<LibraryFolderLink>().SelectMany(f => f.AllFiles)).OfType<LibraryLink>());
-			foreach (var file in links.Where(x => x.Type == FileTypes.BuggyPresentation || x.Type == FileTypes.FriendlyPresentation || x.Type == FileTypes.Presentation))
+			var files = Pages.SelectMany(p => p.Folders.SelectMany(f => f.Files)).OfType<LibraryLink>();
+			links.AddRange(files.Where(file => file.Type == FileTypes.Presentation).Union(files.OfType<LibraryFolderLink>().SelectMany(f => f.AllFiles)).Where(file => file.Type == FileTypes.Presentation).OfType<LibraryLink>());
+			foreach (var file in links)
 			{
 				if ((!Globals.ThreadActive || Globals.ThreadAborted) && Globals.ThreadActive) break;
 				if (file.PreviewContainer == null)
@@ -708,7 +708,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
 		private void GenerateExtendedPreviewFiles()
 		{
-			foreach (var previewContainer in PreviewContainers.Where(x => x.Type == FileTypes.BuggyPresentation || x.Type == FileTypes.FriendlyPresentation || x.Type == FileTypes.Presentation || x.Type == FileTypes.Other))
+			foreach (var previewContainer in PreviewContainers.Where(x => x.Type == FileTypes.Presentation || x.Type == FileTypes.Other))
 			{
 				if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
 				{

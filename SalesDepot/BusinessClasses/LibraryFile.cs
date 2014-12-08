@@ -57,9 +57,7 @@ namespace SalesDepot.BusinessClasses
 				{
 					switch (Type)
 					{
-						case FileTypes.BuggyPresentation:
 						case FileTypes.Excel:
-						case FileTypes.FriendlyPresentation:
 						case FileTypes.MediaPlayerVideo:
 						case FileTypes.Other:
 						case FileTypes.Presentation:
@@ -193,8 +191,6 @@ namespace SalesDepot.BusinessClasses
 			{
 				switch (Type)
 				{
-					case FileTypes.BuggyPresentation:
-					case FileTypes.FriendlyPresentation:
 					case FileTypes.MediaPlayerVideo:
 					case FileTypes.Other:
 					case FileTypes.Presentation:
@@ -531,9 +527,7 @@ namespace SalesDepot.BusinessClasses
 												{
 													switch (Type)
 													{
-														case FileTypes.BuggyPresentation:
 														case FileTypes.Excel:
-														case FileTypes.FriendlyPresentation:
 														case FileTypes.MediaPlayerVideo:
 														case FileTypes.Other:
 														case FileTypes.Presentation:
@@ -627,8 +621,6 @@ namespace SalesDepot.BusinessClasses
 					case FileTypes.QuickTimeVideo:
 						link.Widget = Properties.Resources.FolderContentMp4;
 						break;
-					case FileTypes.BuggyPresentation:
-					case FileTypes.FriendlyPresentation:
 					case FileTypes.Presentation:
 						link.Widget = Properties.Resources.FolderContentPptx;
 						break;

@@ -186,15 +186,11 @@ namespace FileManager.BusinessClasses
 														if (libraryFolderLink != null)
 															libraryFolderLink.AllFiles
 																.OfType<LibraryLink>()
-																.Where(f => (f.Type == FileTypes.FriendlyPresentation ||
-																		f.Type == FileTypes.BuggyPresentation ||
-																		f.Type == FileTypes.Presentation) &&
+																.Where(f => f.Type == FileTypes.Presentation &&
 																	f.PreviewContainer != null)
 																.ToList()
 																.ForEach(x => AddFolderForSync(new DirectoryInfo(x.PreviewContainer.ContainerPath), filesWhiteList));
 														break;
-													case FileTypes.BuggyPresentation:
-													case FileTypes.FriendlyPresentation:
 													case FileTypes.Presentation:
 														if (File.Exists(file.OriginalPath))
 														{
@@ -474,15 +470,10 @@ namespace FileManager.BusinessClasses
 											if (libraryFolderLink != null)
 												libraryFolderLink.AllFiles
 													.OfType<LibraryLink>()
-													.Where(x => (x.Type == FileTypes.FriendlyPresentation ||
-															x.Type == FileTypes.BuggyPresentation ||
-															x.Type == FileTypes.Presentation)
-														&& x.PreviewContainer != null)
+													.Where(x => x.Type == FileTypes.Presentation && x.PreviewContainer != null)
 														.ToList()
 														.ForEach(x => AddFolderForSync(new DirectoryInfo(x.PreviewContainer.ContainerPath), filesWhiteList));
 											break;
-										case FileTypes.BuggyPresentation:
-										case FileTypes.FriendlyPresentation:
 										case FileTypes.Presentation:
 											if (File.Exists(file.OriginalPath))
 											{

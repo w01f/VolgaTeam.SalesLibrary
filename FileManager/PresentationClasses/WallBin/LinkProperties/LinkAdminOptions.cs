@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using DevExpress.XtraTab;
@@ -7,35 +8,40 @@ using SalesDepot.CoreObjects.BusinessClasses;
 
 namespace FileManager.PresentationClasses.WallBin.LinkProperties
 {
-	//public partial class LinkEmbeddedOptions : UserControl, ILinkProperties
-	public partial class LinkEmbeddedOptions : XtraTabPage, ILinkProperties
+	//public partial class LinkAdminOptions : UserControl, ILinkProperties
+	public sealed partial class LinkAdminOptions : XtraTabPage, ILinkProperties
 	{
-		protected readonly LibraryLink _data;
+		private readonly LibraryLink _data;
 
 		public event EventHandler OnForseClose;
 
-		public LinkEmbeddedOptions()
+		public LinkAdminOptions(LibraryLink data)
 		{
 			InitializeComponent();
-		}
-
-		public LinkEmbeddedOptions(LibraryLink data)
-		{
-			InitializeComponent();
+			Text = "Admin";
 			_data = data;
 			LoadData();
+			if ((base.CreateGraphics()).DpiX > 96)
+			{
+				var styleControllerFont = new Font(styleController.Appearance.Font.FontFamily, styleController.Appearance.Font.Size - 2, styleController.Appearance.Font.Style);
+				styleController.AppearanceDisabled.Font = styleControllerFont;
+				styleController.AppearanceDropDown.Font = styleControllerFont;
+				styleController.AppearanceDropDownHeader.Font = styleControllerFont;
+				styleController.AppearanceFocused.Font = styleControllerFont;
+				styleController.AppearanceReadOnly.Font = styleControllerFont;
+				labelControlTitle.Font = new Font(labelControlTitle.Font.FontFamily, labelControlTitle.Font.Size - 2, labelControlTitle.Font.Style);
+			}
 		}
 
 		private void LoadData()
 		{
-			pnAdminTools.Visible = (_data.PreviewContainer != null && Directory.Exists(_data.PreviewContainer.ContainerPath)) ||
-				(_data.UniversalPreviewContainer != null && Directory.Exists(_data.UniversalPreviewContainer.ContainerPath));
 			buttonXOpenQV.Enabled = _data.PreviewContainer != null && Directory.Exists(_data.PreviewContainer.ContainerPath);
-			buttonXOpenWV.Enabled = _data.UniversalPreviewContainer != null &&
-				Directory.Exists(_data.UniversalPreviewContainer.ContainerPath);
+			buttonXOpenWV.Enabled = _data.UniversalPreviewContainer != null && Directory.Exists(_data.UniversalPreviewContainer.ContainerPath);
 		}
 
-		public virtual void SaveData() { }
+		public void SaveData()
+		{
+		}
 
 		private void buttonXRefreshPreview_Click(object sender, EventArgs e)
 		{

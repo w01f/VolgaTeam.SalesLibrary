@@ -43,6 +43,7 @@ namespace FileManager.Controllers
 			FormMain.Instance.buttonItemSettingsExtraRoots.Click += BtExtraRootClick;
 			FormMain.Instance.buttonItemSettingsBranding.Click += buttonItemSettingsBranding_Click;
 			FormMain.Instance.buttonItemSettingsSync.Click += buttonItemSettingsSync_Click;
+			FormMain.Instance.buttonItemSettingsAdvanced.Click += buttonItemSettingsAdvanced_Click;
 			FormMain.Instance.buttonItemPreferencesPages.Click += buttonItemSettingsPages_Click;
 			FormMain.Instance.buttonItemPreferencesColumns.Click += buttonItemSettingsColumns_Click;
 			FormMain.Instance.buttonItemPreferencesAutoWidgets.Click += buttonItemSettingsAutoWidgets_Click;
@@ -602,6 +603,16 @@ namespace FileManager.Controllers
 			if (_formSync == null) _formSync = new FormSync();
 			if (MainController.Instance.ActiveDecorator != null)
 				_formSync.ShowDialog();
+		}
+
+		private void buttonItemSettingsAdvanced_Click(object sender, EventArgs e)
+		{
+			if (MainController.Instance.ActiveDecorator == null) return;
+			using (var form = new FormResetCache(MainController.Instance.ActiveDecorator.Library.Folder.FullName))
+			{
+				form.ShowDialog(FormMain.Instance);
+				MainController.Instance.ActiveDecorator.Save();
+			}
 		}
 
 		private void buttonItemSettingsPages_Click(object sender, EventArgs e)

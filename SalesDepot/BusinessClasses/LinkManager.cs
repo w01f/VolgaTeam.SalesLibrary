@@ -106,8 +106,6 @@ namespace SalesDepot.BusinessClasses
 			{
 				switch (link.Type)
 				{
-					case FileTypes.BuggyPresentation:
-					case FileTypes.FriendlyPresentation:
 					case FileTypes.Presentation:
 						switch (SettingsManager.Instance.PowerPointLaunchOptions)
 						{

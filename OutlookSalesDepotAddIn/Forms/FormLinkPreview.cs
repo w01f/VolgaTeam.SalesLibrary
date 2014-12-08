@@ -34,8 +34,6 @@ namespace OutlookSalesDepotAddIn.Forms
 						switch (SelectedFile.Type)
 						{
 							case FileTypes.Presentation:
-							case FileTypes.FriendlyPresentation:
-							case FileTypes.BuggyPresentation:
 								Invoke((MethodInvoker)delegate
 								{
 									try

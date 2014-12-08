@@ -522,8 +522,6 @@ namespace SalesDepot.TabPages
 					Application.DoEvents();
 					switch (item.Key.Type)
 					{
-						case FileTypes.BuggyPresentation:
-						case FileTypes.FriendlyPresentation:
 						case FileTypes.Presentation:
 							string pdfFileName = Path.Combine(AppManager.Instance.TempFolder.FullName, Path.GetFileNameWithoutExtension(item.Value) + ".pdf");
 							if (PowerPointHelper.Instance.ConvertToPDF(item.Value, pdfFileName))

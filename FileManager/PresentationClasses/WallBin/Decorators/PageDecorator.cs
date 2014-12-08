@@ -487,6 +487,7 @@ namespace FileManager.PresentationClasses.WallBin.Decorators
 		{
 			if (folderBox == ActiveBox)
 				ActiveBox.MakeInactive();
+			folderBox.Folder.Files.OfType<LibraryLink>().ToList().ForEach(f=>f.RemoveFromCollection());
 			Page.Folders.Remove(folderBox.Folder);
 			BuildDisplayBoxes();
 			LinkBoxesToColumns();

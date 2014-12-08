@@ -1256,8 +1256,6 @@ namespace FileManager.PresentationClasses.WallBin
 
 				switch (libraryFile.Type)
 				{
-					case FileTypes.BuggyPresentation:
-					case FileTypes.FriendlyPresentation:
 					case FileTypes.Presentation:
 						using (var form = new FormProgress())
 						{

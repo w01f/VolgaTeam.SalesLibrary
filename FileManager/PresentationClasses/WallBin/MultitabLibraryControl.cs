@@ -107,6 +107,7 @@ namespace FileManager.PresentationClasses.WallBin
 			if (selectedPage == null) return;
 			if (AppManager.Instance.ShowQuestion("Are You sure You want to delete this page?") != DialogResult.Yes) return;
 			if (!MainController.Instance.SaveLibraryWarning()) return;
+			selectedPage.Page.Parent.Pages.SelectMany(p=>p.Folders.SelectMany(f=>f.Files)).OfType<LibraryLink>().ToList().ForEach(f=>f.RemoveFromCollection());
 			selectedPage.Page.Parent.Pages.Remove(selectedPage.Page);
 			MainController.Instance.RequestUpdateLibrary((Library)selectedPage.Page.Parent);
 		}

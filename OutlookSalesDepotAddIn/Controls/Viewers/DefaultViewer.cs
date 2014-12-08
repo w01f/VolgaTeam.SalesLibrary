@@ -39,8 +39,6 @@ namespace OutlookSalesDepotAddIn.Controls.Viewers
 
 			switch (File.Type)
 			{
-				case FileTypes.BuggyPresentation:
-				case FileTypes.FriendlyPresentation:
 				case FileTypes.Presentation:
 					laMessage.Text = "Double-Click PowerPoint files to preview";
 					break;

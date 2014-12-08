@@ -264,7 +264,7 @@
 			// 
 			this.toolStripMenuItemLinkPropertiesNotes.Name = "toolStripMenuItemLinkPropertiesNotes";
 			this.toolStripMenuItemLinkPropertiesNotes.Size = new System.Drawing.Size(172, 22);
-			this.toolStripMenuItemLinkPropertiesNotes.Text = "Link Notes";
+			this.toolStripMenuItemLinkPropertiesNotes.Text = "Link Settings";
 			this.toolStripMenuItemLinkPropertiesNotes.Click += new System.EventHandler(this.toolStripMenuItemLinkPropertiesNotes_Click);
 			// 
 			// toolStripMenuItemLinkPropertiesAdvanced

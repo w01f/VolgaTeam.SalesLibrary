@@ -220,8 +220,6 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 				switch (Type)
 				{
 					case FileTypes.Presentation:
-					case FileTypes.BuggyPresentation:
-					case FileTypes.FriendlyPresentation:
 					case FileTypes.MediaPlayerVideo:
 					case FileTypes.Other:
 					case FileTypes.QuickTimeVideo:
@@ -537,9 +535,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
 			SetProperties();
 
-			if ((Type == FileTypes.BuggyPresentation ||
-				Type == FileTypes.FriendlyPresentation ||
-				Type == FileTypes.Presentation ||
+			if ((Type == FileTypes.Presentation ||
 				Type == FileTypes.Other ||
 				Type == FileTypes.MediaPlayerVideo ||
 				Type == FileTypes.QuickTimeVideo) &&
@@ -612,8 +608,6 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		{
 			switch (Type)
 			{
-				case FileTypes.BuggyPresentation:
-				case FileTypes.FriendlyPresentation:
 				case FileTypes.Presentation:
 				case FileTypes.QuickTimeVideo:
 				case FileTypes.MediaPlayerVideo:
@@ -628,9 +622,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
 		public virtual void RemoveFromCollection()
 		{
-			if (Type == FileTypes.BuggyPresentation ||
-				Type == FileTypes.FriendlyPresentation ||
-				Type == FileTypes.Presentation)
+			if (Type == FileTypes.Presentation)
 			{
 				if (PreviewContainer == null)
 					PreviewContainer = new PresentationPreviewContainer(this);
@@ -762,10 +754,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		{
 			foreach (var file in FolderContent)
 			{
-				if (file is LibraryLink &&
-					(file.Type == FileTypes.BuggyPresentation ||
-					file.Type == FileTypes.FriendlyPresentation ||
-					file.Type == FileTypes.Presentation))
+				if (file is LibraryLink && file.Type == FileTypes.Presentation)
 				{
 					if (((LibraryLink)file).PreviewContainer == null)
 						((LibraryLink)file).PreviewContainer = new PresentationPreviewContainer(this);

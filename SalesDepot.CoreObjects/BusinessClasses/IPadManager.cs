@@ -378,9 +378,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			destinationLink.dateAdd = libraryFile.AddDate.ToString("MM/dd/yyyy hh:mm:ss tt");
 			destinationLink.dateModify = topLevelFile.LastChanged.ToString("MM/dd/yyyy hh:mm:ss tt");
 
-			if (libraryFile.Type == FileTypes.BuggyPresentation ||
-				libraryFile.Type == FileTypes.FriendlyPresentation ||
-				libraryFile.Type == FileTypes.Presentation ||
+			if (libraryFile.Type == FileTypes.Presentation ||
 				libraryFile.Type == FileTypes.Other ||
 				libraryFile.Type == FileTypes.MediaPlayerVideo ||
 				libraryFile.Type == FileTypes.QuickTimeVideo)

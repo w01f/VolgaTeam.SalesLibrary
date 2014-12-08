@@ -81,9 +81,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			get
 			{
 				return _generatePreviewImages &&
-				  (Type == FileTypes.BuggyPresentation ||
-				  Type == FileTypes.FriendlyPresentation ||
-				  Type == FileTypes.Presentation ||
+				  (Type == FileTypes.Presentation ||
 				  Type == FileTypes.Word ||
 				  Type == FileTypes.PDF ||
 				  ((Type == FileTypes.Other && new[] { ".ppt", ".pptx", ".doc", ".docx", ".pdf" }.Contains(Extension.ToLower()))));
