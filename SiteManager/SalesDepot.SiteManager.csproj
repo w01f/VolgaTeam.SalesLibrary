@@ -293,6 +293,24 @@
     <Compile Include="PresentationClasses\Activities\RawData\GroupControl.Designer.cs">
       <DependentUpon>GroupControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="PresentationClasses\Activities\VideoLinkData\ContainerControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\VideoLinkData\ContainerControl.Designer.cs">
+      <DependentUpon>ContainerControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\VideoLinkData\Filter.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\VideoLinkData\Filter.Designer.cs">
+      <DependentUpon>Filter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\VideoLinkData\GroupControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\VideoLinkData\GroupControl.Designer.cs">
+      <DependentUpon>GroupControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="ToolClasses\ActivityExportHelper.cs" />
     <Compile Include="ToolClasses\GroupSummaryHelper.cs" />
     <Compile Include="PresentationClasses\Activities\QuizUnitedData\GroupControl.cs">
@@ -566,6 +584,17 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationClasses\Activities\RawData\GroupControl.resx">
+      <DependentUpon>GroupControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\Activities\VideoLinkData\ContainerControl.resx">
+      <DependentUpon>ContainerControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\Activities\VideoLinkData\Filter.resx">
+      <DependentUpon>Filter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\Activities\VideoLinkData\GroupControl.resx">
       <DependentUpon>GroupControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>

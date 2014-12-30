@@ -60,6 +60,10 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities
 			_views.Add(ViewType.FileActivityReport, view8);
 			splitContainerControl.Panel2.Controls.Add(view8);
 			pnCustomFilter.Controls.AddRange(view8.FilterControls.ToArray());
+			var view9 = new VideoLinkData.ContainerControl();
+			_views.Add(ViewType.VideoInfoReport, view9);
+			splitContainerControl.Panel2.Controls.Add(view9);
+			pnCustomFilter.Controls.AddRange(view9.FilterControls.ToArray());
 		}
 
 		public void ChangeView(ViewType viewType)
@@ -69,6 +73,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities
 				view.Active = false;
 			if (_views.ContainsKey(viewType))
 				_views[viewType].ShowView();
+			gbDate.Visible = viewType != ViewType.VideoInfoReport;
 		}
 
 		public void RefreshData(bool showMessages)

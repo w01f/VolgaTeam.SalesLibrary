@@ -28,6 +28,7 @@ namespace SalesDepot.Services.StatisticService {
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Web.Services.WebServiceBindingAttribute(Name="StatisticControllerBinding", Namespace="urn:StatisticControllerwsdl")]
     [System.Xml.Serialization.SoapIncludeAttribute(typeof(FileActivityReportModel))]
+    [System.Xml.Serialization.SoapIncludeAttribute(typeof(VideoLinkInfo))]
     [System.Xml.Serialization.SoapIncludeAttribute(typeof(QuizPassGroupReportModel))]
     [System.Xml.Serialization.SoapIncludeAttribute(typeof(QuizPassUserReportModel))]
     [System.Xml.Serialization.SoapIncludeAttribute(typeof(AccessReportModel))]
@@ -56,6 +57,8 @@ namespace SalesDepot.Services.StatisticService {
         private System.Threading.SendOrPostCallback getQuizPassUserReportOperationCompleted;
         
         private System.Threading.SendOrPostCallback getQuizPassGroupReportOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback getVideoLinkInfoOperationCompleted;
         
         private System.Threading.SendOrPostCallback getFileActivityReportOperationCompleted;
         
@@ -123,6 +126,9 @@ namespace SalesDepot.Services.StatisticService {
         
         /// <remarks/>
         public event getQuizPassGroupReportCompletedEventHandler getQuizPassGroupReportCompleted;
+        
+        /// <remarks/>
+        public event getVideoLinkInfoCompletedEventHandler getVideoLinkInfoCompleted;
         
         /// <remarks/>
         public event getFileActivityReportCompletedEventHandler getFileActivityReportCompleted;
@@ -428,6 +434,36 @@ namespace SalesDepot.Services.StatisticService {
             if ((this.getQuizPassGroupReportCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.getQuizPassGroupReportCompleted(this, new getQuizPassGroupReportCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:StatisticControllerwsdl#getVideoLinkInfo", RequestNamespace="urn:StatisticControllerwsdl", ResponseNamespace="urn:StatisticControllerwsdl")]
+        [return: System.Xml.Serialization.SoapElementAttribute("return")]
+        public VideoLinkInfo[] getVideoLinkInfo(string sessionKey) {
+            object[] results = this.Invoke("getVideoLinkInfo", new object[] {
+                        sessionKey});
+            return ((VideoLinkInfo[])(results[0]));
+        }
+        
+        /// <remarks/>
+        public void getVideoLinkInfoAsync(string sessionKey) {
+            this.getVideoLinkInfoAsync(sessionKey, null);
+        }
+        
+        /// <remarks/>
+        public void getVideoLinkInfoAsync(string sessionKey, object userState) {
+            if ((this.getVideoLinkInfoOperationCompleted == null)) {
+                this.getVideoLinkInfoOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetVideoLinkInfoOperationCompleted);
+            }
+            this.InvokeAsync("getVideoLinkInfo", new object[] {
+                        sessionKey}, this.getVideoLinkInfoOperationCompleted, userState);
+        }
+        
+        private void OngetVideoLinkInfoOperationCompleted(object arg) {
+            if ((this.getVideoLinkInfoCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.getVideoLinkInfoCompleted(this, new getVideoLinkInfoCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -747,6 +783,99 @@ namespace SalesDepot.Services.StatisticService {
             }
             set {
                 this.groupField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.34234")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:StatisticControllerwsdl")]
+    public partial class VideoLinkInfo {
+        
+        private string fileNameField;
+        
+        private string linkNameField;
+        
+        private string categoryGroupsField;
+        
+        private string categoryTagsField;
+        
+        private string keywordsField;
+        
+        private string urlField;
+        
+        private string stationField;
+        
+        /// <remarks/>
+        public string fileName {
+            get {
+                return this.fileNameField;
+            }
+            set {
+                this.fileNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string linkName {
+            get {
+                return this.linkNameField;
+            }
+            set {
+                this.linkNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string categoryGroups {
+            get {
+                return this.categoryGroupsField;
+            }
+            set {
+                this.categoryGroupsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string categoryTags {
+            get {
+                return this.categoryTagsField;
+            }
+            set {
+                this.categoryTagsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string keywords {
+            get {
+                return this.keywordsField;
+            }
+            set {
+                this.keywordsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string url {
+            get {
+                return this.urlField;
+            }
+            set {
+                this.urlField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string station {
+            get {
+                return this.stationField;
+            }
+            set {
+                this.stationField = value;
             }
         }
     }
@@ -1620,6 +1749,32 @@ namespace SalesDepot.Services.StatisticService {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((QuizPassGroupReportModel[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.18408")]
+    public delegate void getVideoLinkInfoCompletedEventHandler(object sender, getVideoLinkInfoCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.18408")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class getVideoLinkInfoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal getVideoLinkInfoCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public VideoLinkInfo[] Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((VideoLinkInfo[])(this.results[0]));
             }
         }
     }

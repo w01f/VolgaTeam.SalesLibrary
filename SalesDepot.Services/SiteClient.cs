@@ -672,6 +672,33 @@ namespace SalesDepot.Services
 				message = "Couldn't complete operation.\nServer is unavailable.";
 			return activities.ToArray();
 		}
+
+		public VideoLinkInfo[] GetVideoLinkInfo(out string message)
+		{
+			message = string.Empty;
+			var activities = new List<VideoLinkInfo>();
+			var client = GetStatisticClient();
+			if (client != null)
+			{
+				try
+				{
+					string sessionKey = client.getSessionKey(_login, _password);
+					if (!string.IsNullOrEmpty(sessionKey))
+					{
+						activities.AddRange(client.getVideoLinkInfo(sessionKey) ?? new VideoLinkInfo[] { });
+					}
+					else
+						message = "Couldn't complete operation.\nLogin or password are not correct.";
+				}
+				catch (Exception ex)
+				{
+					message = string.Format("Couldn't complete operation.\n{0}.", ex.Message);
+				}
+			}
+			else
+				message = "Couldn't complete operation.\nServer is unavailable.";
+			return activities.ToArray();
+		}
 		#endregion
 
 		#region Ticker

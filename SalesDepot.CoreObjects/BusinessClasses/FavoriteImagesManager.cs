@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Xml;
 
 namespace SalesDepot.CoreObjects.BusinessClasses
 {
@@ -21,22 +20,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
 		private FavoriteImagesManager()
 		{
-			var appID = Guid.Empty;
-			var appIDFile = String.Format(@"{0}\newlocaldirect.com\xml\app\AppID.xml", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
-			if (File.Exists(appIDFile))
-			{
-				var document = new XmlDocument();
-				document.Load(appIDFile);
-
-				var node = document.SelectSingleNode(@"/AppID");
-				if (node != null)
-					if (!String.IsNullOrEmpty(node.InnerText))
-						appID = new Guid(node.InnerText);
-			}
-			if (appID.Equals(Guid.Empty))
-				appID = Guid.NewGuid();
-			var folderPath = String.Format(@"{0}\newlocaldirect.com\sync\Outgoing\AppID-" + appID, Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
-			_storageFolderPath = Path.Combine(folderPath, "image_favorites");
+			_storageFolderPath = String.Format(@"{0}\newlocaldirect.com\sync\image_favorites", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
 			if (!Directory.Exists(_storageFolderPath))
 				Directory.CreateDirectory(_storageFolderPath);
 			Images = new List<ImageSource>();

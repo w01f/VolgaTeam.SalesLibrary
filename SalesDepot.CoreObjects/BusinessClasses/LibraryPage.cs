@@ -10,7 +10,6 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 	public class LibraryPage : ISyncObject
 	{
 		private bool _applyForAllColumnTitles;
-		private bool _enable;
 		private bool _enableColumnTitles;
 		private string _name = string.Empty;
 		private int _order;
@@ -19,7 +18,6 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		{
 			Parent = parent;
 			_name = isHome ? "Page 1" : string.Format("Page {0}", Parent.Pages.Count + 1);
-			_enable = isHome;
 			Identifier = Guid.NewGuid();
 			Folders = new List<LibraryFolder>();
 			ColumnTitles = new List<ColumnTitle>();
@@ -51,17 +49,6 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 				if (_name != value)
 					LastChanged = DateTime.Now;
 				_name = value;
-			}
-		}
-
-		public bool Enable
-		{
-			get { return _enable; }
-			set
-			{
-				if (_enable != value)
-					LastChanged = DateTime.Now;
-				_enable = value;
 			}
 		}
 
@@ -145,10 +132,6 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 						if (Guid.TryParse(childNode.InnerText, out tempGuid))
 							Identifier = tempGuid;
 						break;
-					case "Enable":
-						if (bool.TryParse(childNode.InnerText, out tempBool))
-							_enable = tempBool;
-						break;
 					case "Order":
 						int tempInt = 0;
 						if (int.TryParse(childNode.InnerText, out tempInt))
@@ -193,7 +176,6 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		{
 			var page = new LibraryPage(parent);
 			page.Name = Name;
-			page.Enable = Enable;
 			page.Order = Order;
 			page.EnableColumnTitles = EnableColumnTitles;
 			page.ApplyForAllColumnTitles = ApplyForAllColumnTitles;
