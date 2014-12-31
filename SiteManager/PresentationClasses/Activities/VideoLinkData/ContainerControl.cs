@@ -114,7 +114,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.VideoLinkData
 					.OfType<GroupControl>()
 					.First()
 					.Records
-					.Select(r => String.Join(";", new[] { r.fileName, r.linkName, r.categoryGroups, r.categoryTags, r.keywords, r.url, r.station }.Select(s => String.Format("\"{0}\"", s)))));
+					.Select(r => String.Join(";", new[] { r.fileName, r.linkName, r.categoryGroups, r.categoryTags, r.keywords, r.linkNote, r.hoverNote, r.mp4Url, r.thumbUrl, r.station }.Select(s => String.Format("\"{0}\"", s)))));
 				File.WriteAllText(dialog.FileName, content);
 				if (File.Exists(dialog.FileName))
 					Process.Start(dialog.FileName);

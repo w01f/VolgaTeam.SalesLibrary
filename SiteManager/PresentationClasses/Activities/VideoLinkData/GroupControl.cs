@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Windows.Forms;
 using DevExpress.XtraGrid;
 using DevExpress.XtraTab;
@@ -41,7 +40,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.VideoLinkData
 			if (e.Button.Index != 0) return;
 			var videoLinkInfo = advBandedGridViewData.GetFocusedRow() as VideoLinkInfo;
 			if (videoLinkInfo == null) return;
-			Clipboard.SetText(videoLinkInfo.url);
+			Clipboard.SetText(advBandedGridViewData.FocusedColumn == gridColumnMp4Url ? videoLinkInfo.mp4Url : videoLinkInfo.thumbUrl);
 		}
 	}
 }
