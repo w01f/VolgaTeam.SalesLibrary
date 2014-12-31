@@ -18,6 +18,9 @@
 						case 'mp4':
 							$linkContent = $this->renderPartial('videoLink', array('link' => $linkRecord->GetModel()), true);
 							break;
+						case 'download':
+							$linkContent = $this->renderPartial('downloadLink', array('link' => $linkRecord->GetModel()), true);
+							break;
 						case 'url':
 						case 'file':
 						case 'window':

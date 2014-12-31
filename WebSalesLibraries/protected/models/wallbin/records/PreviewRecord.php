@@ -111,6 +111,18 @@
 						$previewRecord->save();
 					}
 
+			if (array_key_exists('mp4ThumbLinks', $previewContainer))
+				if (isset($previewContainer['mp4ThumbLinks']))
+					foreach ($previewContainer['mp4ThumbLinks'] as $link)
+					{
+						$previewRecord = new PreviewRecord();
+						$previewRecord->id_container = $previewContainer['id'];
+						$previewRecord->id_library = $previewContainer['libraryId'];
+						$previewRecord->type = 'mp4 thumb';
+						$previewRecord->relative_path = $link;
+						$previewRecord->save();
+					}
+
 			if (array_key_exists('ogvLinks', $previewContainer))
 				if (isset($previewContainer['ogvLinks']))
 					foreach ($previewContainer['ogvLinks'] as $link)

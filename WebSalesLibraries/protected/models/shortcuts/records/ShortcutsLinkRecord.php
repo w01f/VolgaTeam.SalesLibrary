@@ -32,6 +32,7 @@
 		/**
 		 * @return EmptyShortcut|
 		 * FileShortcut|
+		 * DownloadShortcut|
 		 * LibraryLinkShortcut|
 		 * PageShortcut|
 		 * QuickListShortcut|
@@ -51,6 +52,8 @@
 					return new UrlShortcut($this);
 				case 'file':
 					return new FileShortcut($this);
+				case 'download':
+					return new DownloadShortcut($this);
 				case 'libraryfile':
 					return new LibraryLinkShortcut($this);
 				case 'window':

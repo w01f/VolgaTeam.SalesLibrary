@@ -1,5 +1,6 @@
 <?
 	/** @var $link FileShortcut|
+	 * DownloadShortcut|
 	 * LibraryLinkShortcut|
 	 * PageShortcut|
 	 * QuickListShortcut|

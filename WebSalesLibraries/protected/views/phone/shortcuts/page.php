@@ -8,6 +8,7 @@
 		{
 			case 'url':
 			case 'file':
+			case 'download':
 			case 'mp4':
 			case 'quicklist':
 			case 'search':

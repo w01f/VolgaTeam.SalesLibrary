@@ -200,6 +200,47 @@
 							dataType: 'html'
 						});
 					});
+					$('.shortcuts-link.download').off('click').on('click', function (e)
+					{
+						e.stopPropagation();
+						e.preventDefault();
+						var linkId = $(this).find('.link-id').text();
+						var url = $(this).prop('href');
+						$.ajax({
+							type: "POST",
+							url: window.BaseUrl + "shortcuts/getDownloadDialog",
+							data: {linkId: linkId},
+							beforeSend: function ()
+							{
+								$.SalesPortal.Overlay.show(true);
+							},
+							complete: function ()
+							{
+								$.SalesPortal.Overlay.hide();
+							},
+							success: function (msg)
+							{
+								var content = $(msg);
+								content.find('#accept-button').off('click');
+								content.find('#accept-button').on('click', function ()
+								{
+									$.fancybox.close();
+									window.open(url.replace(/&amp;/g, '%26'), "_self");
+								});
+								$.fancybox({
+									content: content,
+									title: 'Download',
+									width: 300,
+									autoSize: false,
+									autoHeight: true,
+									openEffect: 'none',
+									closeEffect: 'none'
+								});
+							},
+							async: true,
+							dataType: 'html'
+						});
+					});
 					$('.shortcuts-link.preview').off('click').on('click', function ()
 					{
 						$.SalesPortal.LinkManager.viewSelectedFormat($(this), false, true);

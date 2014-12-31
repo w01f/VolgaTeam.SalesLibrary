@@ -23,6 +23,7 @@
 						'QuizPassUserReportModel' => 'QuizPassUserReportModel',
 						'QuizPassGroupReportModel' => 'QuizPassGroupReportModel',
 						'FileActivityReportModel' => 'FileActivityReportModel',
+						'VideoLinkInfo' => 'VideoLinkInfo',
 					),
 				),
 			);
@@ -347,6 +348,46 @@
 				return $reportRecords;
 			else
 				return null;
+		}
+
+		/**
+		 * @param string $sessionKey
+		 * @return VideoLinkInfo[]
+		 * @soap
+		 */
+		public function getVideoLinkInfo($sessionKey)
+		{
+			$reportRecords = array();
+			if ($this->authenticateBySession($sessionKey))
+			{
+				$command = Yii::app()->db->createCommand("call sp_get_video_links()");
+				$resultRecords = $command->queryAll();
+				foreach ($resultRecords as $resultRecord)
+				{
+					$videoLinkInfo = new VideoLinkInfo();
+					$videoLinkInfo->fileName = $resultRecord['file_name'];
+					$videoLinkInfo->linkName = $resultRecord['link_name'];
+					$videoLinkInfo->categoryGroups = $resultRecord['category_groups'];
+					$videoLinkInfo->categoryTags = $resultRecord['category_tags'];
+					$videoLinkInfo->keywords = $resultRecord['keywords'];
+					$videoLinkInfo->station = $resultRecord['station'];
+
+					/** @var $extendedProperties LinkSettings */
+					$extendedProperties = CJSON::decode($resultRecord['properties'], false);
+					$videoLinkInfo->linkNote = $extendedProperties->note;
+					$videoLinkInfo->hoverNote = $extendedProperties->hoverNote;
+
+					$rootPath = Yii::app()->basePath . DIRECTORY_SEPARATOR . '..';
+					$libraryRelativePath = DIRECTORY_SEPARATOR . Yii::app()->params['librariesRoot'] . DIRECTORY_SEPARATOR . 'Libraries' . DIRECTORY_SEPARATOR . $videoLinkInfo->station . DIRECTORY_SEPARATOR . 'Primary Root';
+					$libraryFolderPath = realpath($rootPath . $libraryRelativePath);
+					if (!file_exists($libraryFolderPath))
+						$libraryRelativePath = DIRECTORY_SEPARATOR . Yii::app()->params['librariesRoot'] . DIRECTORY_SEPARATOR . 'Libraries' . DIRECTORY_SEPARATOR . $videoLinkInfo->station;
+					$videoLinkInfo->mp4Url = $resultRecord['mp4_path'] != '' ? Yii::app()->getBaseUrl(true) . htmlspecialchars(str_replace('&', '%26', str_replace(' ', '%20', str_replace('\\', '/', $libraryRelativePath . $resultRecord['mp4_path'])))) : '';
+					$videoLinkInfo->thumbUrl = $resultRecord['thumb_path'] != '' ? Yii::app()->getBaseUrl(true) . htmlspecialchars(str_replace('&', '%26', str_replace(' ', '%20', str_replace('\\', '/', $libraryRelativePath . $resultRecord['thumb_path'])))) : '';
+					$reportRecords[] = $videoLinkInfo;
+				}
+			}
+			return $reportRecords;
 		}
 
 		/**

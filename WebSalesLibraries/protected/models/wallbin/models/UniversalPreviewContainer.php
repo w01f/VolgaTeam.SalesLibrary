@@ -60,6 +60,11 @@
 		 * @var string[]
 		 * @soap
 		 */
+		public $mp4ThumbLinks;
+		/**
+		 * @var string[]
+		 * @soap
+		 */
 		public $ogvLinks;
 		/**
 		 * @var string[]
@@ -161,6 +166,9 @@
 					case 'mp4':
 						$this->mp4Links[] = $previewLink;
 						break;
+					case 'mp4 thumb':
+						$this->mp4ThumbLinks[] = $previewLink;
+						break;
 					case 'ogv':
 						$this->ogvLinks[] = $previewLink;
 						break;
@@ -200,6 +208,8 @@
 				natsort($this->thumbsPhoneLinks);
 			if (isset($this->mp4Links))
 				natsort($this->mp4Links);
+			if (isset($this->mp4ThumbLinks))
+				natsort($this->mp4ThumbLinks);
 			if (isset($this->ogvLinks))
 				natsort($this->ogvLinks);
 		}

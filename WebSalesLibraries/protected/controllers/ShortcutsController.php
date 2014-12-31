@@ -218,5 +218,35 @@
 			}
 			$this->renderPartial('subSearchTemplatesPanel', array('templates' => $templates, 'id' => $id));
 		}
+
+		public function actionGetDownloadDialog()
+		{
+			$linkId = Yii::app()->request->getPost('linkId');
+			if (isset($linkId))
+			{
+				/** @var $linkRecord ShortcutsLinkRecord */
+				$linkRecord = ShortcutsLinkRecord::model()->findByPk($linkId);
+				/**@var $link DownloadShortcut */
+				$link = $linkRecord->GetModel();
+				$this->renderPartial('downloadDialog', array('link' => $link));
+			}
+		}
+
+		public function actionDownload()
+		{
+			$linkId = Yii::app()->request->getQuery('linkId');
+			if (isset($linkId))
+			{
+				/**@var $linkRecord ShortcutsLinkRecord */
+				$linkRecord = ShortcutsLinkRecord::model()->findByPk($linkId);
+				/**@var $link DownloadShortcut */
+				$link = $linkRecord->GetModel();
+				$fileName = $link->fileName;
+				$path = $link->sourcePath;
+				return Yii::app()->getRequest()->sendFile($fileName, @file_get_contents($path));
+			}
+			Yii::app()->end();
+			return null;
+		}
 	}
 
