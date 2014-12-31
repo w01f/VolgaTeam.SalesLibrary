@@ -289,6 +289,7 @@
           <xsd:element name="pdfLinks" type="tns:stringArray" />
           <xsd:element name="wmvLinks" type="tns:stringArray" />
           <xsd:element name="mp4Links" type="tns:stringArray" />
+          <xsd:element name="mp4ThumbLinks" type="tns:stringArray" />
           <xsd:element name="ogvLinks" type="tns:stringArray" />
           <xsd:element name="oldOfficeFormatLinks" type="tns:stringArray" />
           <xsd:element name="newOfficeFormatLinks" type="tns:stringArray" />

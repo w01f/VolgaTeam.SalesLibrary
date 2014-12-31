@@ -312,6 +312,13 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 				if (mp4Links != null && mp4Links.Length > 0)
 					previewContainer.mp4Links = mp4Links;
 
+				if (libraryPreviewContainer is VideoPreviewContainer)
+				{
+					var mp4ThumbLinks = libraryPreviewContainer.GetPreviewLinks("thumb");
+					if (mp4ThumbLinks != null && mp4ThumbLinks.Length > 0)
+						previewContainer.mp4ThumbLinks = mp4ThumbLinks;
+				}
+
 				var ogvLinks = libraryPreviewContainer.GetPreviewLinks("ogv");
 				if (ogvLinks != null && ogvLinks.Length > 0)
 					previewContainer.ogvLinks = ogvLinks;

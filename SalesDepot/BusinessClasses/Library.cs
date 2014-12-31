@@ -306,8 +306,7 @@ namespace SalesDepot.BusinessClasses
 			IPreviewContainer previewContainer = PreviewContainers.FirstOrDefault(x => x.OriginalPath.Equals(originalPath));
 			if (previewContainer == null)
 			{
-				previewContainer = new UniversalPreviewContainer(this);
-				previewContainer.OriginalPath = originalPath;
+				previewContainer = UniversalPreviewContainer.CreateInstance(this, originalPath);
 				PreviewContainers.Add(previewContainer);
 			}
 			return previewContainer;

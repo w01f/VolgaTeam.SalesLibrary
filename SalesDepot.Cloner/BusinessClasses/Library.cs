@@ -123,8 +123,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			IPreviewContainer previewContainer = PreviewContainers.FirstOrDefault(x => x.OriginalPath.ToLower().Equals(originalPath.ToLower()));
 			if (previewContainer == null)
 			{
-				previewContainer = new UniversalPreviewContainer(this);
-				previewContainer.OriginalPath = originalPath;
+				previewContainer = UniversalPreviewContainer.CreateInstance(this, originalPath);
 				PreviewContainers.Add(previewContainer);
 			}
 			return previewContainer;
@@ -386,8 +385,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 						if (node != null)
 							foreach (XmlNode childNode in node.ChildNodes)
 							{
-								var previewContainer = new UniversalPreviewContainer(this);
-								previewContainer.Deserialize(childNode);
+								var previewContainer = UniversalPreviewContainer.CreateInstance(this, childNode);
 								PreviewContainers.Add(previewContainer);
 							}
 

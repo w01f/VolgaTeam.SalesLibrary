@@ -25,7 +25,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		IPreviewStorage Parent { get; }
 		string Identifier { get; }
 		string OriginalPath { get; set; }
-		FileTypes Type { get; set; }
+		FileTypes Type { get; }
 		string Extension { get; }
 		DateTime LastChanged { set; }
 		string ContainerPath { get; }
@@ -44,9 +44,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
 	public class UniversalPreviewContainer : IPreviewContainer
 	{
-		private string _originalPath = string.Empty;
-
-		public UniversalPreviewContainer(IPreviewStorage parent)
+		protected UniversalPreviewContainer(IPreviewStorage parent)
 		{
 			Parent = parent;
 			Identifier = Guid.NewGuid().ToString();
@@ -73,7 +71,10 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		#region IPreviewContainer Members
 		public IPreviewStorage Parent { get; private set; }
 		public string Identifier { get; private set; }
-		public string ContainerPath { get; private set; }
+		public virtual string ContainerPath
+		{
+			get { return Path.Combine(Parent.StoragePath, Constants.FtpPreviewContainersRootFolderName, "files", Identifier); }
+		}
 
 		private bool _generatePreviewImages;
 		public bool GenerateImages
@@ -89,53 +90,32 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			set { _generatePreviewImages = value; }
 		}
 		public bool GenerateText { get; set; }
-		public FileTypes Type { get; set; }
-
-		public string OriginalPath
+		public virtual FileTypes Type
 		{
-			get { return _originalPath; }
-			set
+			get
 			{
-				_originalPath = value;
 				switch (Extension.ToUpper())
 				{
 					case ".PPT":
 					case ".PPTX":
-						ContainerPath = Path.Combine(Parent.StoragePath, Constants.FtpPreviewContainersRootFolderName, "files", Identifier);
-						Type = FileTypes.Presentation;
-						break;
+						return FileTypes.Presentation;
 					case ".DOC":
 					case ".DOCX":
 					case ".XLS":
 					case ".XLSX":
 					case ".PDF":
-						Type = FileTypes.Other;
-						ContainerPath = Path.Combine(Parent.StoragePath, Constants.FtpPreviewContainersRootFolderName, "files", Identifier);
-						break;
-					case ".MPEG":
-					case ".WMV":
-					case ".AVI":
-					case ".WMZ":
-						Type = FileTypes.MediaPlayerVideo;
-						ContainerPath = Path.Combine(Parent.StoragePath, Constants.FtpPreviewContainersRootFolderName, "video", Identifier);
-						break;
-					case ".MPG":
-					case ".ASF":
-					case ".MOV":
-					case ".MP4":
-					case ".M4V":
-					case ".FLV":
-					case ".OGV":
-					case ".OGM":
-					case ".OGX":
-						Type = FileTypes.QuickTimeVideo;
-						ContainerPath = Path.Combine(Parent.StoragePath, Constants.FtpPreviewContainersRootFolderName, "video", Identifier);
-						break;
+						return FileTypes.Other;
 					default:
-						Type = FileTypes.Url;
-						break;
+						return FileTypes.Url;
 				}
 			}
+		}
+
+		private string _originalPath = String.Empty;
+		public string OriginalPath
+		{
+			get { return _originalPath; }
+			set { _originalPath = value; }
 		}
 
 		public string Extension
@@ -174,7 +154,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			}
 		}
 
-		public IPreviewContainer Clone(IPreviewStorage parent)
+		public virtual IPreviewContainer Clone(IPreviewStorage parent)
 		{
 			IPreviewContainer previewContainer = new UniversalPreviewContainer(parent);
 			previewContainer.OriginalPath = Path.Combine(parent.StoragePath, RelativePath);
@@ -292,7 +272,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			return result;
 		}
 
-		public void UpdateContent()
+		public virtual void UpdateContent()
 		{
 			var parentFile = new FileInfo(OriginalPath);
 			if (string.IsNullOrEmpty(ContainerPath)) return;
@@ -334,6 +314,122 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			}
 		}
 		#endregion
+
+		public static UniversalPreviewContainer CreateInstance(IPreviewStorage parent, XmlNode node)
+		{
+			var pathNode = node.SelectSingleNode("OriginalPath");
+			if (pathNode == null) return null;
+			var originalPath = Path.Combine(parent.StoragePath, pathNode.InnerText.ToLower().Replace(parent.StoragePath.ToLower(), String.Empty));
+			var previewContainer = CreateInstance(parent, originalPath);
+			previewContainer.Deserialize(node);
+			return previewContainer;
+		}
+
+		public static UniversalPreviewContainer CreateInstance(IPreviewStorage parent, string originalPath)
+		{
+			UniversalPreviewContainer previewContainer;
+			switch (Path.GetExtension(originalPath).ToUpper())
+			{
+				case ".MPEG":
+				case ".WMV":
+				case ".AVI":
+				case ".WMZ":
+				case ".MPG":
+				case ".ASF":
+				case ".MOV":
+				case ".MP4":
+				case ".M4V":
+				case ".FLV":
+				case ".OGV":
+				case ".OGM":
+				case ".OGX":
+					previewContainer = new VideoPreviewContainer(parent);
+					break;
+				default:
+					previewContainer = new UniversalPreviewContainer(parent);
+					break;
+			}
+			previewContainer.OriginalPath = originalPath;
+			return previewContainer;
+		}
+	}
+
+	public class VideoPreviewContainer : UniversalPreviewContainer
+	{
+		public override string ContainerPath
+		{
+			get { return Path.Combine(Parent.StoragePath, Constants.FtpPreviewContainersRootFolderName, "video", Identifier); }
+		}
+
+		public override FileTypes Type
+		{
+			get
+			{
+				switch (Extension.ToUpper())
+				{
+					case ".MPEG":
+					case ".WMV":
+					case ".AVI":
+					case ".WMZ":
+						return FileTypes.MediaPlayerVideo;
+					case ".MPG":
+					case ".ASF":
+					case ".MOV":
+					case ".MP4":
+					case ".M4V":
+					case ".FLV":
+					case ".OGV":
+					case ".OGM":
+					case ".OGX":
+						return FileTypes.QuickTimeVideo;
+					default:
+						return base.Type;
+				}
+			}
+		}
+
+		public VideoPreviewContainer(IPreviewStorage parent) : base(parent) { }
+
+		public override IPreviewContainer Clone(IPreviewStorage parent)
+		{
+			IPreviewContainer previewContainer = new VideoPreviewContainer(parent);
+			previewContainer.OriginalPath = Path.Combine(parent.StoragePath, RelativePath);
+			return previewContainer;
+		}
+
+		public override void UpdateContent()
+		{
+			GenerateImages = false;
+			GenerateText = true;
+			base.UpdateContent();
+			UpdateThumbnails();
+		}
+
+		public void UpdateThumbnails()
+		{
+			var parentFile = new FileInfo(OriginalPath);
+			if (string.IsNullOrEmpty(ContainerPath)) return;
+			var previewFolder = new DirectoryInfo(Path.Combine(ContainerPath, "thumb"));
+			bool update;
+			if (!previewFolder.Exists)
+				update = true;
+			else
+			{
+				var time = parentFile.LastWriteTime.Subtract(previewFolder.CreationTime);
+				if (time.Minutes > 0)
+					update = true;
+				else if (!parentFile.Exists)
+					update = true;
+				else
+					update = false;
+			}
+			if (previewFolder.Exists && update)
+				SyncManager.DeleteFolder(previewFolder);
+			if (!parentFile.Exists) return;
+			var previewGenerator = Parent.GetPreviewGenerator(this);
+			if (previewGenerator != null)
+				previewGenerator.GeneratePreview(true, false);
+		}
 	}
 
 	#region Compatibility with desktop version of Sales Depot
@@ -349,12 +445,6 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		public ILibraryLink Parent { get; private set; }
 		public string Identifier { get; private set; }
 		public string ContainerPath { get; private set; }
-
-		public IPreviewContainer Clone(IPreviewStorage parent)
-		{
-			IPreviewContainer previewContainer = new UniversalPreviewContainer(parent);
-			return previewContainer;
-		}
 
 		public string Serialize()
 		{

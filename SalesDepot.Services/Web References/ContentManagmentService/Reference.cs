@@ -934,6 +934,8 @@ namespace SalesDepot.Services.ContentManagmentService {
         
         private string[] mp4LinksField;
         
+        private string[] mp4ThumbLinksField;
+        
         private string[] ogvLinksField;
         
         private string[] oldOfficeFormatLinksField;
@@ -1035,6 +1037,16 @@ namespace SalesDepot.Services.ContentManagmentService {
             }
             set {
                 this.mp4LinksField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string[] mp4ThumbLinks {
+            get {
+                return this.mp4ThumbLinksField;
+            }
+            set {
+                this.mp4ThumbLinksField = value;
             }
         }
         

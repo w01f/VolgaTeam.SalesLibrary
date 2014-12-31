@@ -119,8 +119,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		{
 			var previewContainer = PreviewContainers.FirstOrDefault(x => x.OriginalPath.ToLower().Equals(originalPath.ToLower()));
 			if (previewContainer != null) return previewContainer;
-			previewContainer = new UniversalPreviewContainer(this);
-			previewContainer.OriginalPath = originalPath;
+			previewContainer = UniversalPreviewContainer.CreateInstance(this,originalPath);
 			PreviewContainers.Add(previewContainer);
 			return previewContainer;
 		}
@@ -349,8 +348,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 				if (node != null)
 					foreach (XmlNode childNode in node.ChildNodes)
 					{
-						var previewContainer = new UniversalPreviewContainer(this);
-						previewContainer.Deserialize(childNode);
+						var previewContainer = UniversalPreviewContainer.CreateInstance(this, childNode);
 						if (!PreviewContainers.Any(x => x.Identifier.Equals(previewContainer.Identifier)))
 							PreviewContainers.Add(previewContainer);
 					}
@@ -581,6 +579,15 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 				if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
 				{
 					previewContainer.UpdateContent();
+				}
+				else
+					break;
+			}
+			foreach (var previewContainer in PreviewContainers.OfType<VideoPreviewContainer>())
+			{
+				if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
+				{
+					previewContainer.UpdateThumbnails();
 				}
 				else
 					break;

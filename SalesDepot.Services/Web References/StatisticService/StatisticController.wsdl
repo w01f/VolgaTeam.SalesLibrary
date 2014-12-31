@@ -177,10 +177,13 @@
         <xsd:all>
           <xsd:element name="fileName" type="xsd:string" />
           <xsd:element name="linkName" type="xsd:string" />
+          <xsd:element name="linkNote" type="xsd:string" />
+          <xsd:element name="hoverNote" type="xsd:string" />
           <xsd:element name="categoryGroups" type="xsd:string" />
           <xsd:element name="categoryTags" type="xsd:string" />
           <xsd:element name="keywords" type="xsd:string" />
-          <xsd:element name="url" type="xsd:string" />
+          <xsd:element name="mp4Url" type="xsd:string" />
+          <xsd:element name="thumbUrl" type="xsd:string" />
           <xsd:element name="station" type="xsd:string" />
         </xsd:all>
       </xsd:complexType>

@@ -7,7 +7,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="311ca633-43c5-41dd-82ab-ba01ea556142" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/controllers/StatisticController.php" afterPath="$PROJECT_DIR$/protected/controllers/StatisticController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <list id="6cb86652-0ea2-464a-b0b1-9bbef25a8567" name="C#" comment="">
@@ -1095,7 +1094,11 @@
       <created>1420050011200</created>
       <updated>1420050011200</updated>
     </task>
-    <option name="localTasksCounter" value="143" />
+    <task id="LOCAL-00143" summary="Web Sales Depot: Mp4 link thumbnails + Site Manager Video Info Report + Shortcuts Download links fixes">
+      <created>1420050498820</created>
+      <updated>1420050498820</updated>
+    </task>
+    <option name="localTasksCounter" value="144" />
     <servers />
   </component>
   <component name="TodoView" selected-index="3">

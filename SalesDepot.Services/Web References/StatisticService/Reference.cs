@@ -799,13 +799,19 @@ namespace SalesDepot.Services.StatisticService {
         
         private string linkNameField;
         
+        private string linkNoteField;
+        
+        private string hoverNoteField;
+        
         private string categoryGroupsField;
         
         private string categoryTagsField;
         
         private string keywordsField;
         
-        private string urlField;
+        private string mp4UrlField;
+        
+        private string thumbUrlField;
         
         private string stationField;
         
@@ -826,6 +832,26 @@ namespace SalesDepot.Services.StatisticService {
             }
             set {
                 this.linkNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string linkNote {
+            get {
+                return this.linkNoteField;
+            }
+            set {
+                this.linkNoteField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string hoverNote {
+            get {
+                return this.hoverNoteField;
+            }
+            set {
+                this.hoverNoteField = value;
             }
         }
         
@@ -860,12 +886,22 @@ namespace SalesDepot.Services.StatisticService {
         }
         
         /// <remarks/>
-        public string url {
+        public string mp4Url {
             get {
-                return this.urlField;
+                return this.mp4UrlField;
             }
             set {
-                this.urlField = value;
+                this.mp4UrlField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string thumbUrl {
+            get {
+                return this.thumbUrlField;
+            }
+            set {
+                this.thumbUrlField = value;
             }
         }
         
