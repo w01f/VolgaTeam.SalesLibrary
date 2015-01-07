@@ -83,6 +83,7 @@
     <Compile Include="StatisticService\NavigationUserReportModel.cs" />
     <Compile Include="StatisticService\MainUserReportModel.cs" />
     <Compile Include="StatisticService\UserActivity.cs" />
+    <Compile Include="StatisticService\VideoLinkInfo.cs" />
     <Compile Include="TickerService\TickerLinkRecord.cs" />
     <Compile Include="UtilityClient.cs" />
     <Compile Include="Web References\ContentManagmentService\Reference.cs">

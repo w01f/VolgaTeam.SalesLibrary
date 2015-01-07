@@ -815,6 +815,10 @@ namespace SalesDepot.Services.StatisticService {
         
         private string stationField;
         
+        private string linkDateField;
+        
+        private string fileDateField;
+        
         /// <remarks/>
         public string fileName {
             get {
@@ -912,6 +916,26 @@ namespace SalesDepot.Services.StatisticService {
             }
             set {
                 this.stationField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string linkDate {
+            get {
+                return this.linkDateField;
+            }
+            set {
+                this.linkDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string fileDate {
+            get {
+                return this.fileDateField;
+            }
+            set {
+                this.fileDateField = value;
             }
         }
     }

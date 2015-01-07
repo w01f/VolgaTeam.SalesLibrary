@@ -6,7 +6,8 @@ using SalesDepot.CoreObjects.InteropClasses;
 using SalesDepot.CoreObjects.ToolClasses;
 using SalesDepot.Services.StatisticService;
 
-namespace SalesDepot.SiteManager.ToolClasses{
+namespace SalesDepot.SiteManager.ToolClasses
+{
 	public class QuizStatisticExportHelper
 	{
 		public static void ExportQuizStatistic(string filePath,
@@ -24,6 +25,8 @@ namespace SalesDepot.SiteManager.ToolClasses{
 				var workbook = ExcelHelper.Instance.ExcelObject.Workbooks.Add();
 				Worksheet sheet = null;
 				var updated = String.Format("Updated: {0}", DateTime.Now.ToString("MM/dd/yy - hmmtt"));
+				sheet = workbook.Worksheets.Count < 1 ? workbook.Worksheets.Add() : workbook.Worksheets[1];
+				FillSummaryPage(sheet, header, group, totalUsers, totalGroups, updated, totalStatistic);
 				var currentSheetIndex = 2;
 				foreach (var groupRecords in groupStatistic)
 				{
@@ -33,14 +36,12 @@ namespace SalesDepot.SiteManager.ToolClasses{
 					}
 					catch
 					{
-						sheet = workbook.Worksheets.Add(After: sheet);
+						sheet = workbook.Worksheets.Add(After: sheet ?? Type.Missing);
 					}
 					FillGroupPage(sheet, header, group, updated, groupRecords);
 					currentSheetIndex++;
 				}
-				sheet = workbook.Worksheets[1];
-				FillSummaryPage(sheet, header, group, totalUsers, totalGroups, updated, totalStatistic);
-				sheet.Select();
+				workbook.Worksheets[1].Select();
 				workbook.SaveAs(filePath);
 				workbook.Close();
 				Utils.ReleaseComObject(workbook);

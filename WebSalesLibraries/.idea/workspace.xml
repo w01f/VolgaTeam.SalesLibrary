@@ -1240,7 +1240,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="Web Sales Depot: Test version increase&#10;&#10;" />
     <MESSAGE value="Web Sales Depot: Shortcuts sub search fix&#10;&#10;" />
     <MESSAGE value="Web Sales Depot: Sub search bug fixes&#10;&#10;" />
     <MESSAGE value="Web Sales Depot: Urls Open fix&#10;&#10;" />
@@ -1265,7 +1264,8 @@
     <MESSAGE value="Web Sales Depot: Folder images bug fix&#10;" />
     <MESSAGE value="Web Sales Depot: Mp4 link thumbnails + Site Manager Video Info Report + Shortcuts Download links fixes&#10;" />
     <MESSAGE value="Web Sales Depot: Mp4 link thumbnails + Site Manager Video Info Report + Shortcuts Download links fixes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Web Sales Depot: Mp4 link thumbnails + Site Manager Video Info Report + Shortcuts Download links fixes" />
+    <MESSAGE value="Web Sales Depot: Add field into Video Info set" />
+    <option name="LAST_COMMIT_MESSAGE" value="Web Sales Depot: Add field into Video Info set" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

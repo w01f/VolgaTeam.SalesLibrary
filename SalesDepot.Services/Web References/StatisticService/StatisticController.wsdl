@@ -185,6 +185,8 @@
           <xsd:element name="mp4Url" type="xsd:string" />
           <xsd:element name="thumbUrl" type="xsd:string" />
           <xsd:element name="station" type="xsd:string" />
+          <xsd:element name="linkDate" type="xsd:string" />
+          <xsd:element name="fileDate" type="xsd:string" />
         </xsd:all>
       </xsd:complexType>
       <xsd:complexType name="FileActivityReportModelArray">

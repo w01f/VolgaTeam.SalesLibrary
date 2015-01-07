@@ -127,13 +127,15 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.QuizUnitedData
 					Enabled = false;
 					form.laProgress.Text = "Exporting data...";
 					form.TopMost = true;
-					var thread = new Thread(() => QuizStatisticExportHelper.ExportQuizStatistic(dialog.FileName,
+					var thread = new Thread(() =>
+					QuizStatisticExportHelper.ExportQuizStatistic(dialog.FileName,
 						header,
 						topLevelGroup,
 						totalUsers,
 						totalGroups,
 						xtraTabControlGroups.TabPages.OfType<TotalControl>().First().Records,
-						xtraTabControlGroups.TabPages.OfType<GroupControl>().Select(tp => tp.Records)));
+						xtraTabControlGroups.TabPages.OfType<GroupControl>().Select(tp => tp.Records))
+					);
 					form.Show();
 					thread.Start();
 					while (thread.IsAlive)
