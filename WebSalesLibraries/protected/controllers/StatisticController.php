@@ -371,6 +371,8 @@
 					$videoLinkInfo->categoryTags = $resultRecord['category_tags'];
 					$videoLinkInfo->keywords = $resultRecord['keywords'];
 					$videoLinkInfo->station = $resultRecord['station'];
+					$videoLinkInfo->linkDate = $resultRecord['link_date'];
+					$videoLinkInfo->fileDate = $resultRecord['file_date'];
 
 					/** @var $extendedProperties LinkSettings */
 					$extendedProperties = CJSON::decode($resultRecord['properties'], false);

@@ -55,4 +55,14 @@
 		 * @soap
 		 */
 		public $station;
+		/**
+		 * @var string linkDate
+		 * @soap
+		 */
+		public $linkDate;
+		/**
+		 * @var string fileDate
+		 * @soap
+		 */
+		public $fileDate;
 	}

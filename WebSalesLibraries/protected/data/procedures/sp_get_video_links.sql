@@ -9,7 +9,9 @@ select
   l.properties as properties,
   (case when l.format='mp4' then l.file_relative_path else concat('/',prv.relative_path) end) as mp4_path,
   concat('/',thumb.relative_path) as thumb_path,
-  lb.name as station
+  lb.name as station,
+  l.date_modify as link_date,
+  l.file_date as file_date
 from tbl_link l
   join tbl_library lb on lb.id = l.id_library
   left join (select cat.id_link, group_concat(distinct cat.category separator ', ') as group_name, group_concat(cat.tag separator ', ') as tag_name from tbl_link_category cat group by cat.id_link) lcat on lcat.id_link = l.id
