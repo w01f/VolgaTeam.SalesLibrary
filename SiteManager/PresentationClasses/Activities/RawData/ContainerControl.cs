@@ -120,17 +120,43 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.RawData
 
 				var groupControls = xtraTabControlGroups.TabPages.OfType<IGroupControl>().Reverse();
 				var parts = new Dictionary<string, string>();
-				foreach (var groupControl in groupControls)
+				
+				using (var form = new FormProgress())
 				{
-					using (var printingSystem = new PrintingSystem())
+					FormMain.Instance.ribbonControl.Enabled = false;
+					Enabled = false;
+					form.laProgress.Text = "Exporting data...";
+					form.TopMost = true;
+					form.Show();
+					Application.DoEvents();
+					var thread = new Thread(() =>
 					{
-						groupControl.GetPrintLink().CreateDocument(printingSystem);
-						var tempFile = Path.Combine(Path.GetTempPath(), String.Format("{0}.xlsx", Guid.NewGuid()));
-						printingSystem.ExportToXlsx(tempFile, options);
-						parts.Add(groupControl.GroupName, tempFile);
+						foreach (var groupControl in groupControls)
+						{
+							var tempFile = Path.Combine(Path.GetTempPath(), String.Format("{0}.xlsx", Guid.NewGuid()));
+							BeginInvoke(new Action(() =>
+							{
+								using (var printingSystem = new PrintingSystem())
+								{
+									groupControl.GetPrintLink().CreateDocument(printingSystem);
+									printingSystem.ExportToXlsx(tempFile, options);
+								}
+							}));
+							parts.Add(groupControl.GroupName, tempFile);
+						}
+						ActivityExportHelper.ExportCommonData(dialog.FileName, parts);
+					});
+					thread.Start();
+					while (thread.IsAlive)
+					{
+						Thread.Sleep(100);
+						Application.DoEvents();
 					}
+					form.Close();
+					Enabled = true;
+					FormMain.Instance.ribbonControl.Enabled = true;
 				}
-				ActivityExportHelper.ExportCommonData(dialog.FileName, parts);
+
 				if (File.Exists(dialog.FileName))
 					Process.Start(dialog.FileName);
 			}

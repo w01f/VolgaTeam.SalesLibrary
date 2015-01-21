@@ -111,7 +111,7 @@ namespace FileManager.PresentationClasses.WallBin.LinkProperties
 			groupBoxBanners.Enabled = checkBoxEnableBanner.Checked;
 		}
 
-		private void xtraTabControlBanners_SelectedPageChanged(object sender, DevExpress.XtraTab.TabPageChangedEventArgs e)
+		private void xtraTabControlBanners_SelectedPageChanged(object sender, TabPageChangedEventArgs e)
 		{
 			laBannerFileName.Text = String.Empty;
 		}

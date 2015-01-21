@@ -7,7 +7,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="311ca633-43c5-41dd-82ab-ba01ea556142" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/common/SearchHelper.php" afterPath="$PROJECT_DIR$/protected/models/common/SearchHelper.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <list id="6cb86652-0ea2-464a-b0b1-9bbef25a8567" name="C#" comment="" />
@@ -35,7 +34,7 @@
       <file leaf-file-name="LinkRecord.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/protected/models/wallbin/records/LinkRecord.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="188" column="56" selection-start="6404" selection-end="6404" vertical-scroll-proportion="6.5384617" vertical-offset="3366" max-vertical-offset="11747">
+            <state line="188" column="56" selection-start="6404" selection-end="6404" vertical-scroll-proportion="0.0" vertical-offset="3366" max-vertical-offset="11747">
               <folding />
             </state>
           </provider>
@@ -44,13 +43,8 @@
       <file leaf-file-name="shortcuts.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/regular/base/shortcuts.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="25" column="65" selection-start="716" selection-end="716" vertical-scroll-proportion="0.0" vertical-offset="167" max-vertical-offset="5950">
+            <state line="25" column="65" selection-start="716" selection-end="716" vertical-scroll-proportion="0.0" vertical-offset="425" max-vertical-offset="8755">
               <folding>
-                <element signature="e#10381#10535#0" expanded="false" />
-                <element signature="e#10584#11220#0" expanded="false" />
-                <element signature="e#11270#11925#0" expanded="false" />
-                <element signature="e#11967#14547#0" expanded="false" />
-                <element signature="e#14591#16289#0" expanded="false" />
                 <marker date="1418403390593" expanded="false" signature="4747:4761" placeholder="..." />
               </folding>
             </state>
@@ -71,7 +65,7 @@
       <file leaf-file-name="SearchController.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/protected/controllers/SearchController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="114" column="43" selection-start="3711" selection-end="3711" vertical-scroll-proportion="-15.115385" vertical-offset="1545" max-vertical-offset="3757">
+            <state line="114" column="43" selection-start="3711" selection-end="3711" vertical-scroll-proportion="0.0" vertical-offset="1938" max-vertical-offset="3757">
               <folding />
             </state>
           </provider>
@@ -80,7 +74,7 @@
       <file leaf-file-name="SearchHelper.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/protected/models/common/SearchHelper.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="60" column="63" selection-start="2043" selection-end="2043" vertical-scroll-proportion="1.4206128" vertical-offset="0" max-vertical-offset="1241">
+            <state line="6" column="5" selection-start="62" selection-end="62" vertical-scroll-proportion="0.14206128" vertical-offset="0" max-vertical-offset="1360">
               <folding />
             </state>
           </provider>
@@ -241,6 +235,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -417,7 +412,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -491,10 +485,10 @@
     <configuration default="true" type="PhpWebAppRunConfigurationType" factoryName="PHP Web Application">
       <method />
     </configuration>
-    <configuration default="true" type="PhpHttpRequestRunConfigurationType" factoryName="PHP HTTP Request">
+    <configuration default="true" type="PhpRemoteDebugRunConfigurationType" factoryName="PHP Remote Debug" server_name="Localhost" session_id="netbeans-xdebug">
       <method />
     </configuration>
-    <configuration default="true" type="PhpRemoteDebugRunConfigurationType" factoryName="PHP Remote Debug" server_name="Localhost" session_id="netbeans-xdebug">
+    <configuration default="true" type="PhpHttpRequestRunConfigurationType" factoryName="PHP HTTP Request">
       <method />
     </configuration>
     <configuration default="true" type="PhpLocalRunConfigurationType" factoryName="PHP Console">
@@ -1132,7 +1126,15 @@
       <created>1420634350808</created>
       <updated>1420634350808</updated>
     </task>
-    <option name="localTasksCounter" value="145" />
+    <task id="LOCAL-00145" summary="Web Sales Depot: Site search bug fix">
+      <created>1421081711487</created>
+      <updated>1421081711487</updated>
+    </task>
+    <task id="LOCAL-00146" summary="Web Sales Depot: Site search bug fix&#10;&#10;">
+      <created>1421129501093</created>
+      <updated>1421129501093</updated>
+    </task>
+    <option name="localTasksCounter" value="147" />
     <servers />
   </component>
   <component name="TodoView" selected-index="3">
@@ -1162,34 +1164,34 @@
       <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15477498" sideWeight="0.65495205" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="true" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21299255" sideWeight="0.5117396" order="5" side_tool="false" content_ui="tabs" x="20" y="824" width="1874" height="217" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32930845" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22234392" sideWeight="0.40288153" order="1" side_tool="false" content_ui="tabs" x="-1278" y="1" width="1271" height="1022" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.17518637" sideWeight="0.87596047" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Framework" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.59625965" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2316136" sideWeight="0.34451544" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="1.0" sideWeight="0.48772678" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15848452" sideWeight="0.13024282" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28430295" sideWeight="0.4850587" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32855567" sideWeight="0.49359658" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32491767" sideWeight="0.49573106" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21033014" sideWeight="0.12957746" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22310969" sideWeight="0.87042254" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22523962" sideWeight="0.87042254" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24424973" sideWeight="0.44236925" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15314835" sideWeight="0.76237625" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="REST Client" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24368826" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="DB Browser" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.59625965" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24866879" sideWeight="0.8228823" order="2" side_tool="false" content_ui="combo" />
       <window_info id="DB Execution Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24866879" sideWeight="0.8228823" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30777657" sideWeight="0.923159" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32855567" sideWeight="0.49359658" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22234392" sideWeight="0.40288153" order="1" side_tool="false" content_ui="tabs" x="-1278" y="1" width="1271" height="1022" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21523179" sideWeight="0.5741729" order="5" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Changes" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22364217" sideWeight="0.5117396" order="5" side_tool="false" content_ui="tabs" x="20" y="824" width="1874" height="217" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.17412141" sideWeight="0.87596047" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15314835" sideWeight="0.76237625" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="1.0" sideWeight="0.48772678" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2777168" sideWeight="0.4850587" order="9" side_tool="false" content_ui="tabs" />
@@ -1197,8 +1199,8 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32491767" sideWeight="0.49573106" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18530351" sideWeight="0.87042254" order="0" side_tool="false" content_ui="combo" />
       <window_info id="DB Browser" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.59625965" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="DB Execution Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24588364" sideWeight="0.44236925" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="DB Execution Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24866879" sideWeight="0.8228823" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30996713" sideWeight="0.923159" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.135816" sideWeight="0.6552828" order="10" side_tool="false" content_ui="tabs" />
@@ -1230,8 +1232,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="Web Sales Depot: Shortcuts sub search fix&#10;&#10;" />
-    <MESSAGE value="Web Sales Depot: Sub search bug fixes&#10;&#10;" />
     <MESSAGE value="Web Sales Depot: Urls Open fix&#10;&#10;" />
     <MESSAGE value="Web Sales Depot: IE SubSearch fix&#10;&#10;" />
     <MESSAGE value="Web Sales Depot: Link Access White\Black list fix&#10;&#10;" />
@@ -1255,7 +1255,9 @@
     <MESSAGE value="Web Sales Depot: Mp4 link thumbnails + Site Manager Video Info Report + Shortcuts Download links fixes&#10;" />
     <MESSAGE value="Web Sales Depot: Mp4 link thumbnails + Site Manager Video Info Report + Shortcuts Download links fixes" />
     <MESSAGE value="Web Sales Depot: Add field into Video Info set" />
-    <option name="LAST_COMMIT_MESSAGE" value="Web Sales Depot: Add field into Video Info set" />
+    <MESSAGE value="Web Sales Depot: Site search bug fix" />
+    <MESSAGE value="Web Sales Depot: Site search bug fix&#10;&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Web Sales Depot: Site search bug fix&#10;&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1525,16 +1527,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/protected/models/statistic/models/UserActivity.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="21" selection-start="122" selection-end="180" vertical-scroll-proportion="0.0" vertical-offset="272" max-vertical-offset="1496">
-          <folding />
-        </state>
+        <state line="16" column="21" selection-start="122" selection-end="180" vertical-scroll-proportion="0.0" vertical-offset="272" max-vertical-offset="1496" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/protected/models/statistic/models/VideoLinkInfo.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="64" column="16" selection-start="882" selection-end="882" vertical-scroll-proportion="0.0" vertical-offset="437" max-vertical-offset="1241">
-          <folding />
-        </state>
+        <state line="64" column="16" selection-start="882" selection-end="882" vertical-scroll-proportion="0.0" vertical-offset="437" max-vertical-offset="1241" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/protected/data/procedures/sp_get_video_links.sql">
@@ -1556,14 +1554,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/protected/models/wallbin/records/LinkRecord.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="188" column="56" selection-start="6404" selection-end="6404" vertical-scroll-proportion="6.5384617" vertical-offset="3366" max-vertical-offset="11747">
+        <state line="188" column="56" selection-start="6404" selection-end="6404" vertical-scroll-proportion="0.0" vertical-offset="3366" max-vertical-offset="11747">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/protected/controllers/SearchController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="114" column="43" selection-start="3711" selection-end="3711" vertical-scroll-proportion="-15.115385" vertical-offset="1545" max-vertical-offset="3757">
+        <state line="114" column="43" selection-start="3711" selection-end="3711" vertical-scroll-proportion="0.0" vertical-offset="1938" max-vertical-offset="3757">
           <folding />
         </state>
       </provider>
@@ -1572,11 +1570,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="25" column="65" selection-start="716" selection-end="716" vertical-scroll-proportion="0.0" vertical-offset="167" max-vertical-offset="5950">
           <folding>
-            <element signature="e#10381#10535#0" expanded="false" />
-            <element signature="e#10584#11220#0" expanded="false" />
-            <element signature="e#11270#11925#0" expanded="false" />
-            <element signature="e#11967#14547#0" expanded="false" />
-            <element signature="e#14591#16289#0" expanded="false" />
             <marker date="1418403390593" expanded="false" signature="4747:4761" placeholder="..." />
           </folding>
         </state>
@@ -1593,7 +1586,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/protected/models/common/SearchHelper.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="60" column="63" selection-start="2043" selection-end="2043" vertical-scroll-proportion="1.4206128" vertical-offset="0" max-vertical-offset="1241">
+        <state line="6" column="5" selection-start="62" selection-end="62" vertical-scroll-proportion="0.14206128" vertical-offset="0" max-vertical-offset="1360">
           <folding />
         </state>
       </provider>
