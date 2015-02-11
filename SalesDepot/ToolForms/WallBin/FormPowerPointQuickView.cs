@@ -269,11 +269,9 @@ namespace SalesDepot.ToolForms.WallBin
 		private bool CheckPowerPointRunning()
 		{
 			if (PowerPointHelper.Instance.IsLinkedWithApplication) return true;
-			if (AppManager.Instance.ShowWarningQuestion("PowerPoint is not Running. Do you want to open it now?") == DialogResult.Yes)
-			{
-				AfterClose = new Action(() => AppManager.Instance.CheckPowerPointRunning());
-				Close();
-			}
+			if (AppManager.Instance.ShowWarningQuestion("PowerPoint is not Running. Do you want to open it now?") != DialogResult.Yes) return false;
+			AfterClose = () => AppManager.Instance.CheckPowerPointRunning();
+			Close();
 			return false;
 		}
 

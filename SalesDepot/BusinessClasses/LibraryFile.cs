@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using System.Xml;
@@ -97,7 +99,7 @@ namespace SalesDepot.BusinessClasses
 		public string CriteriaOverlap { get; set; }
 		public DateTime AddDate { get; set; }
 		public DateTime LastChanged { get; set; }
-		
+
 		public LinkExtendedProperties ExtendedProperties { get; set; }
 		public LibraryFileSearchTags SearchTags { get; set; }
 		public SearchGroup CustomKeywords { get; protected set; }
@@ -300,15 +302,48 @@ namespace SalesDepot.BusinessClasses
 
 		public virtual string Serialize()
 		{
-			throw new NotImplementedException();
+			var converter = TypeDescriptor.GetConverter(typeof(Bitmap));
+			var result = new StringBuilder();
+			result.AppendLine(@"<Identifier>" + Identifier + @"</Identifier>");
+			result.AppendLine(@"<DisplayName>" + Name.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</DisplayName>");
+			result.AppendLine(@"<IsDead>" + IsDead + @"</IsDead>");
+			result.AppendLine(@"<RootId>" + RootId + @"</RootId>");
+			result.AppendLine(@"<LocalPath>" + _linkLocalPath.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</LocalPath>");
+			result.AppendLine(@"<RelativePath>" + RelativePath.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</RelativePath>");
+			result.AppendLine(@"<Type>" + (int)Type + @"</Type>");
+			result.AppendLine(@"<Order>" + Order + @"</Order>");
+			result.AppendLine(@"<EnableWidget>" + EnableWidget + @"</EnableWidget>");
+			result.Append(@"<Widget>" + Convert.ToBase64String((byte[])converter.ConvertTo(_widget, typeof(byte[]))).Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</Widget>");
+			result.AppendLine(@"<AddDate>" + AddDate + @"</AddDate>");
+			result.AppendLine(@"<LastChanged>" + (LastChanged != DateTime.MinValue ? LastChanged.ToString() : DateTime.Now.ToString()) + @"</LastChanged>");
+			result.AppendLine(@"<ExtendedProperties>" + ExtendedProperties.Serialize() + @"</ExtendedProperties>");
+			result.Append(SearchTags.Serialize());
+			if (CustomKeywords != null)
+				result.Append(CustomKeywords.Serialize());
+			result.AppendLine(@"<SuperFilters>");
+			foreach (var superFilter in SuperFilters)
+				result.AppendLine(@"<Filter>" + superFilter.Name.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</Filter>");
+			result.AppendLine(@"</SuperFilters>");
+			result.AppendLine(@"<ExpirationDateOptions>" + ExpirationDateOptions.Serialize() + @"</ExpirationDateOptions>");
+
+			if (PreviewContainer != null)
+				result.AppendLine(@"<PreviewContainer>" + PreviewContainer.Serialize() + @"</PreviewContainer>");
+
+			if (PresentationProperties != null)
+				result.AppendLine(@"<PresentationProperties>" + PresentationProperties.Serialize() + @"</PresentationProperties>");
+			if (LineBreakProperties != null)
+				result.AppendLine(@"<LineBreakProperties>" + LineBreakProperties.Serialize() + @"</LineBreakProperties>");
+			if (BannerProperties != null && BannerProperties.Configured)
+				result.AppendLine(@"<BannerProperties>" + BannerProperties.Serialize() + @"</BannerProperties>");
+			return result.ToString();
 		}
 
 		public virtual void Deserialize(XmlNode node)
 		{
 			foreach (XmlNode childNode in node.ChildNodes)
 			{
-				bool tempBool = false;
-				int tempInt = 0;
+				bool tempBool;
+				int tempInt;
 				DateTime tempDate;
 				Guid tempGuid;
 				switch (childNode.Name)
@@ -411,7 +446,7 @@ namespace SalesDepot.BusinessClasses
 							ExtendedProperties.GenerateContentText = tempBool;
 						break;
 					#endregion
-					
+
 					case "SearchTags":
 						SearchTags.Deserialize(childNode);
 						break;

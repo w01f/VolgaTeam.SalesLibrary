@@ -180,7 +180,7 @@ namespace FileManager.PresentationClasses.Tags
 
 		private void repositoryItemCheckEditLibrary_EditValueChanging(object sender, DevExpress.XtraEditors.Controls.ChangingEventArgs e)
 		{
-			var newValue = e.NewValue is bool ? (bool)e.NewValue : false;
+			var newValue = e.NewValue is bool && (bool)e.NewValue;
 			if (newValue && ListManager.Instance.SearchTags.MaxTags > 0)
 			{
 				var totalTags = _tagTemplates.Count(t => t.Selected);

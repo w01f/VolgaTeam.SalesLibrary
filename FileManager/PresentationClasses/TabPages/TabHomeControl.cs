@@ -4,8 +4,6 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using DevExpress.XtraBars.Docking;
-using DevExpress.XtraEditors;
 using FileManager.ConfigurationClasses;
 using FileManager.Controllers;
 using FileManager.PresentationClasses.Tags;

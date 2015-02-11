@@ -360,7 +360,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		{
 			var converter = TypeDescriptor.GetConverter(typeof(Bitmap));
 			var result = new StringBuilder();
-			result.AppendLine(@"<Identifier>" + Identifier.ToString() + @"</Identifier>");
+			result.AppendLine(@"<Identifier>" + Identifier + @"</Identifier>");
 			result.AppendLine(@"<DisplayName>" + _name.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</DisplayName>");
 			result.AppendLine(@"<IsDead>" + _isDead + @"</IsDead>");
 			result.AppendLine(@"<RootId>" + RootId + @"</RootId>");

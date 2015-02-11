@@ -855,7 +855,9 @@ namespace FileManager.PresentationClasses.WallBin
 				imageWidth = file.BannerProperties.Image.Width > DefaultImageWidth ? file.BannerProperties.Image.Width : DefaultImageWidth;
 				imageHeight = file.BannerProperties.Image.Height > DefaultImageHeight ? file.BannerProperties.Image.Height : DefaultImageHeight;
 			}
-			else if (WallBinOptions.ShowTagsEditor && file.HasTags && image != null)
+			else if ((WallBinOptions.ShowCategoryTags || WallBinOptions.ShowKeywordTags || WallBinOptions.ShowSuperFilterTags || WallBinOptions.ShowSecurityTags) &&
+				file.HasTags &&
+				image != null)
 			{
 				imageLeft = 0;
 				imageWidth = DefaultImageWidth;
