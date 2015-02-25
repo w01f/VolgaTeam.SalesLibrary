@@ -6,6 +6,7 @@
 	{
 		var that = this;
 		var searchShortcutManager = undefined;
+		this.selectedCarouselCategory = 1;
 
 		this.init = function (tabId)
 		{
@@ -46,284 +47,201 @@
 					$.SalesPortal.Overlay.hide();
 					that.updateContentSize();
 				},
-				success: function (msg)
+				success: function (data)
 				{
 					var content = $('#content');
-					content.html(msg);
-					var pageContent = content.find('.shortcuts-page-content');
-					var tabId = pageContent.attr('id').replace("shortcuts-page-content-", "");
-					var shortcutsTab = $('#shortcuts-tab-' + tabId);
-					var pageLogo = shortcutsTab.find('.ribbon-tab-logo');
-					pageLogo.show();
-					content.find('.shortcuts-home-bar .logo-container img').on('click', function ()
-					{
-						pageLogo.trigger("click");
-					});
-					content.find('.shortcuts-home-bar .buttons-container img').on('click', function (e)
-					{
-						var isExpanded = $(this).hasClass('expanded');
-						if (isExpanded)
-						{
-							$(this).removeClass('expanded');
-							$(this).attr('src', $(this).attr('src').replace('collapse', 'expand'));
-							changeSearchBarVisibility(false);
-						}
-						else
-						{
-							$(this).addClass('expanded');
-							$(this).attr('src', $(this).attr('src').replace('expand', 'collapse'));
-							changeSearchBarVisibility(true);
-						}
-						that.updateContentSize();
-						e.stopPropagation();
-					});
-					var linkLogo = shortcutsTab.find('.ribbon-link-logo');
-					linkLogo.hide();
+					content.html(data.content);
 
-					$('.file-filter-panel .file-selector input').off('change').on('change', function ()
-					{
-						updateSearchButtonState();
-					});
+					initHomeBar(content);
+					initSearchBar(pageId);
 
-					$('.tags-filter-panel-switcher').off('click').on('click', function ()
+					switch (data.type)
 					{
-						setTagsCondition();
-					});
-
-					var search = function ()
-					{
-						if ($('.btn.search-bar-run').hasClass('disabled')) return;
-						var textCondition = $('.shortcuts-search-bar .search-bar-text').val();
-						if ($('#search-exact-match').is(':checked'))
-							textCondition = '"' + textCondition + '"';
-						var searchConditions = $('.shortcuts-search-bar .search-conditions');
-						var onlyFiles = $('#search-file-names-only').is(':checked') ? 1 : 0;
-						var selectedFileTypes = [];
-						if ($('#search-file-type-powerpoint').is(':checked'))
-							selectedFileTypes.push("ppt");
-						if ($('#search-file-type-video').is(':checked'))
-						{
-							selectedFileTypes.push("video");
-							selectedFileTypes.push("mp4");
-							selectedFileTypes.push("wmv");
-						}
-						if ($('#search-file-type-other').is(':checked'))
-						{
-							selectedFileTypes.push("doc");
-							selectedFileTypes.push("xls");
-							selectedFileTypes.push("pdf");
-							selectedFileTypes.push("url");
-							selectedFileTypes.push("url365");
-							selectedFileTypes.push("png");
-							selectedFileTypes.push("jpeg");
-							selectedFileTypes.push("mp3");
-						}
-						if (searchConditions.find('.same-page').html() === 'true')
-						{
-							changeSearchBarVisibility(false);
-							$('.shortcuts-home-bar .buttons-container').remove();
-							searchConditions.remove('.search-text');
-							searchConditions.append('<div class="search-text">' + textCondition + '</div>');
-							var searchByContent = searchConditions.find('.search-by-content');
-							if (searchByContent.length > 0)
-								searchByContent.html(onlyFiles != 1 ? 'true' : false);
-							else
-								searchConditions.append('<div class="search-by-content">' + (onlyFiles != 1) + '</div>');
-							searchConditions.remove('.file-type');
-							$.each(selectedFileTypes, function (index, value)
+						case 'grid':
+							content.find('.shortcuts-links-grid').cubeportfolio(data.displayParameters);
+							$('.shortcuts-link.direct').off('click').on('click', function (e)
 							{
-								searchConditions.append('<div class="file-type">' + value + '</div>');
+								var isEmbedded = $(this).hasClass('embedded');
+								if (isEmbedded)
+									e.preventDefault();
+								var handler = getClickHandler('direct', $(this).find('.service-data').html(), isEmbedded);
+								handler();
 							});
-							var content = $('#content').find('.shortcuts-page-content');
-							content.html('<div class="search-conditions" style="display: none;">' + searchConditions.html() + '</div>');
-							that.processSearchLink(content, pageId, true);
-						}
-						else
-						{
-							var superFilters = [];
-							$.each(searchConditions.find('.super-filter'), function ()
+							$('.shortcuts-link.download').off('click').on('click', function (e)
 							{
-								superFilters.push($(this).html());
+								e.stopPropagation();
+								e.preventDefault();
+								var handler = getClickHandler('download', $(this).find('.service-data').html(), false);
+								handler();
 							});
-
-							var categories = [];
-							$.each(searchConditions.find('.category'), function ()
+							$('.shortcuts-link.preview').off('click').on('click', function ()
 							{
-								var substr = $(this).html().split('------');
-								var category = {
-									category: substr[0],
-									tag: substr[1]
-								};
-								categories.push(category);
+								var handler = getClickHandler('video', $(this).find('.service-data').html(), false);
+								handler();
 							});
-							window.open("shortcuts/GetQuickSearchResult?pageId=" + pageId +
-								"&text=" + textCondition +
-								"&onlyFiles=" + onlyFiles +
-								"&fileTypes=" + $.toJSON(selectedFileTypes) +
-								"&superFilters=" + $.toJSON(superFilters) +
-								"&categories=" + $.toJSON(categories));
-						}
-					};
-
-					$('.shortcuts-search-bar .search-bar-text').keypress(function (e)
-					{
-						updateSearchButtonState();
-						if (e.which == 13)
-							search();
-					});
-					$('.shortcuts-search-bar .search-bar-run').on('click', search);
-					pageContent.find('.shortcuts-links-container').cubeportfolio({
-						defaultFilter: '*',
-						animationType: 'slideDelay',
-						gapHorizontal: 20,
-						gapVertical: 20,
-						gridAdjustment: 'responsive',
-						caption: 'overlayBottomAlong',
-						displayType: 'bottomToTop',
-						displayTypeSpeed: 100
-					});
-					$('.shortcuts-link.direct').off('click').on('click', function ()
-					{
-						var linkName = $(this).find('.link-name').html();
-						$.ajax({
-							type: "POST",
-							url: window.BaseUrl + "statistic/writeActivity",
-							data: {
-								type: 'Shortcuts',
-								subType: 'Open',
-								data: $.toJSON({
-									File: linkName,
-									'Original Format': 'url'
-								})
-							},
-							async: true,
-							dataType: 'html'
-						});
-					});
-					$('.shortcuts-link.download').off('click').on('click', function (e)
-					{
-						e.stopPropagation();
-						e.preventDefault();
-						var linkId = $(this).find('.link-id').text();
-						var url = $(this).prop('href');
-						$.ajax({
-							type: "POST",
-							url: window.BaseUrl + "shortcuts/getDownloadDialog",
-							data: {linkId: linkId},
-							beforeSend: function ()
+							$('.shortcuts-link.library-file').off('click').on('click', function ()
 							{
-								$.SalesPortal.Overlay.show(true);
-							},
-							complete: function ()
+								var handler = getClickHandler('library-file', $(this).find('.service-data').html(), false);
+								handler();
+							});
+							$('.shortcuts-link.library-page').off('click').on('click', function ()
 							{
-								$.SalesPortal.Overlay.hide();
-							},
-							success: function (msg)
+								var handler = getClickHandler('library-page', $(this).find('.service-data').html(), false);
+								handler();
+							});
+							break;
+						case 'carousel':
+							FWDU3DCarUtils.checkIfHasTransforms();
+							data.displayParameters.startAtCategory = that.selectedCarouselCategory;
+							var carousel = new FWDUltimate3DCarousel(data.displayParameters);
+							data.displayParameters.predefinedDataList.forEach(function (category)
 							{
-								var content = $(msg);
-								content.find('#accept-button').off('click');
-								content.find('#accept-button').on('click', function ()
+								category.dataItems.forEach(function (dataItem)
 								{
-									$.fancybox.close();
-									window.open(url.replace(/&amp;/g, '%26'), "_self");
+									if (dataItem.mediaType == 'func')
+										dataItem.onClick = getClickHandler(dataItem.handlerType, dataItem.dataContent, dataItem.samePage);
 								});
-								$.fancybox({
-									content: content,
-									title: 'Download',
-									width: 300,
-									autoSize: false,
-									autoHeight: true,
-									openEffect: 'none',
-									closeEffect: 'none'
-								});
-							},
-							async: true,
-							dataType: 'html'
-						});
-					});
-					$('.shortcuts-link.preview').off('click').on('click', function ()
-					{
-						$.SalesPortal.LinkManager.viewSelectedFormat($(this), false, true);
-					});
-					$('.shortcuts-link.library-file').off('click').on('click', function ()
-					{
-						$.SalesPortal.LinkManager.requestViewDialog($(this).find('.link-id').html(), false);
-					});
-					$('.shortcuts-link.library-page').off('click').on('click', function ()
-					{
-						$.cookie("selectedLibraryName", $(this).find('.library-name').html(), {
-							expires: (60 * 60 * 24 * 7)
-						});
-						$.cookie("selectedPageName", $(this).find('.page-name').html(), {
-							expires: (60 * 60 * 24 * 7)
-						});
-						$.cookie("selectedRibbonTabId", 'home-tab', {
-							expires: (60 * 60 * 24 * 7)
-						});
-						window.location.reload();
-					});
-					$('.shortcuts-link.embedded').off('click').on('click', function (e)
-					{
-						var link = $(this);
-						var linkId = link.find('.link-id').html();
-						e.preventDefault();
-						$.ajax({
-							type: "POST",
-							url: link.attr('href'),
-							beforeSend: function ()
-							{
-								$.SalesPortal.Overlay.show(false);
-							},
-							complete: function ()
+							});
+							carousel.addListener(FWDUltimate3DCarousel.CATEGORY_CHANGE, function (ev)
 							{
 								that.updateContentSize();
-								$.SalesPortal.Overlay.hide();
-							},
-							success: function (msg)
-							{
-								changeSearchBarVisibility(false);
-								$('.shortcuts-home-bar .buttons-container').remove();
-								var pageContent = content.find('.shortcuts-page-content');
-								if (link.hasClass('search'))
-								{
-									pageContent.html(msg);
-									that.processSearchLink(pageContent, linkId, false);
-								}
-								else if (link.hasClass('window'))
-								{
-									pageContent.html("<div class='padding'>" + msg + "</div>");
-									$.SalesPortal.Wallbin.assignLinkEvents($('#content'));
-								}
-								else
-									pageContent.html("<div class='padding'>" + msg + "</div>");
-								content.animate({scrollTop: 0}, 1);
-
-								var ribbonLogoPath = link.find('.ribbon-logo-path');
-								if (ribbonLogoPath.length > 0)
-								{
-									linkLogo.attr('src', ribbonLogoPath.html());
-									pageLogo.hide();
-									linkLogo.show();
-								}
-
-								var shortcutTitle = pageContent.find('.shortcut-title').html();
-								$('.shortcuts-home-bar .title').html(shortcutTitle);
-							},
-							error: function ()
-							{
-							},
-							async: true,
-							dataType: 'html'
-						});
-					});
-
-					updateSearchButtonState();
-
-					updateSelectedCategories();
+								that.selectedCarouselCategory = ev.id + 1;
+							});
+							break;
+					}
 				},
 				async: true,
-				dataType: 'html'
+				dataType: 'json'
 			});
+		};
+
+		var initHomeBar = function (content)
+		{
+			var pageContent = content.find('.shortcuts-page-content');
+			var tabId = pageContent.attr('id').replace("shortcuts-page-content-", "");
+			var pageLogo = $('#shortcuts-tab-' + tabId).find('.ribbon-tab-logo');
+			pageLogo.show();
+			content.find('.shortcuts-home-bar .logo-container img').on('click', function ()
+			{
+				pageLogo.trigger("click");
+			});
+			content.find('.shortcuts-home-bar .buttons-container img').on('click', function (e)
+			{
+				var isExpanded = $(this).hasClass('expanded');
+				if (isExpanded)
+				{
+					$(this).removeClass('expanded');
+					$(this).attr('src', $(this).attr('src').replace('collapse', 'expand'));
+					changeSearchBarVisibility(false);
+				}
+				else
+				{
+					$(this).addClass('expanded');
+					$(this).attr('src', $(this).attr('src').replace('expand', 'collapse'));
+					changeSearchBarVisibility(true);
+				}
+				that.updateContentSize();
+				e.stopPropagation();
+			});
+		};
+
+		var initSearchBar = function (currentPageId)
+		{
+			var search = function ()
+			{
+				if ($('.btn.search-bar-run').hasClass('disabled')) return;
+				var textCondition = $('.shortcuts-search-bar .search-bar-text').val();
+				if ($('#search-exact-match').is(':checked'))
+					textCondition = '"' + textCondition + '"';
+				var searchConditions = $('.shortcuts-search-bar .search-conditions');
+				var onlyFiles = $('#search-file-names-only').is(':checked') ? 1 : 0;
+				var selectedFileTypes = [];
+				if ($('#search-file-type-powerpoint').is(':checked'))
+					selectedFileTypes.push("ppt");
+				if ($('#search-file-type-video').is(':checked'))
+				{
+					selectedFileTypes.push("video");
+					selectedFileTypes.push("mp4");
+					selectedFileTypes.push("wmv");
+				}
+				if ($('#search-file-type-other').is(':checked'))
+				{
+					selectedFileTypes.push("doc");
+					selectedFileTypes.push("xls");
+					selectedFileTypes.push("pdf");
+					selectedFileTypes.push("url");
+					selectedFileTypes.push("url365");
+					selectedFileTypes.push("png");
+					selectedFileTypes.push("jpeg");
+					selectedFileTypes.push("mp3");
+				}
+				if (searchConditions.find('.same-page').html() === 'true')
+				{
+					changeSearchBarVisibility(false);
+					$('.shortcuts-home-bar .buttons-container').remove();
+					searchConditions.remove('.search-text');
+					searchConditions.append('<div class="search-text">' + textCondition + '</div>');
+					var searchByContent = searchConditions.find('.search-by-content');
+					if (searchByContent.length > 0)
+						searchByContent.html(onlyFiles != 1 ? 'true' : false);
+					else
+						searchConditions.append('<div class="search-by-content">' + (onlyFiles != 1) + '</div>');
+					searchConditions.remove('.file-type');
+					$.each(selectedFileTypes, function (index, value)
+					{
+						searchConditions.append('<div class="file-type">' + value + '</div>');
+					});
+					var content = $('#content').find('.shortcuts-page-content');
+					content.html('<div class="search-conditions" style="display: none;">' + searchConditions.html() + '</div>');
+					that.processSearchLink(content, currentPageId, true);
+				}
+				else
+				{
+					var superFilters = [];
+					$.each(searchConditions.find('.super-filter'), function ()
+					{
+						superFilters.push($(this).html());
+					});
+
+					var categories = [];
+					$.each(searchConditions.find('.category'), function ()
+					{
+						var substr = $(this).html().split('------');
+						var category = {
+							category: substr[0],
+							tag: substr[1]
+						};
+						categories.push(category);
+					});
+					window.open("shortcuts/GetQuickSearchResult?pageId=" + currentPageId +
+						"&text=" + textCondition +
+						"&onlyFiles=" + onlyFiles +
+						"&fileTypes=" + $.toJSON(selectedFileTypes) +
+						"&superFilters=" + $.toJSON(superFilters) +
+						"&categories=" + $.toJSON(categories));
+				}
+			};
+
+			$('.shortcuts-search-bar .search-bar-text').keypress(function (e)
+			{
+				updateSearchButtonState();
+				if (e.which == 13)
+					search();
+			});
+			$('.shortcuts-search-bar .search-bar-run').on('click', search);
+
+			$('.file-filter-panel .file-selector input').off('change').on('change', function ()
+			{
+				updateSearchButtonState();
+			});
+
+			$('.tags-filter-panel-switcher').off('click').on('click', function ()
+			{
+				setTagsCondition();
+			});
+
+			updateSearchButtonState();
+			updateSelectedCategories();
 		};
 
 		var changeSearchBarVisibility = function (show)
@@ -455,6 +373,166 @@
 				{
 				}
 			});
+		};
+
+		var getClickHandler = function (handlerType, dataContent, isEmbedded)
+		{
+			var dataObject = $('<div><div class="service-data">' + dataContent + '</div></div>');
+			switch (handlerType)
+			{
+				case 'direct':
+					if (isEmbedded)
+					{
+						return function ()
+						{
+							var content = $('#content');
+							var pageContent = content.find('.shortcuts-page-content');
+							var tabId = pageContent.attr('id').replace("shortcuts-page-content-", "");
+							var shortcutsTab = $('#shortcuts-tab-' + tabId);
+
+							var linkId = dataObject.find('.link-id').html();
+							var linkType = dataObject.find('.link-type').html();
+							var url = dataObject.find('.url').text();
+							var ribbonLogoPath = dataObject.find('.ribbon-logo-path');
+							$.ajax({
+								type: "POST",
+								url: url,
+								beforeSend: function ()
+								{
+									$.SalesPortal.Overlay.show(false);
+								},
+								complete: function ()
+								{
+									that.updateContentSize();
+									$.SalesPortal.Overlay.hide();
+								},
+								success: function (msg)
+								{
+									changeSearchBarVisibility(false);
+									$('.shortcuts-home-bar .buttons-container').remove();
+									var pageContent = content.find('.shortcuts-page-content');
+									if (linkType == 'search')
+									{
+										pageContent.html(msg);
+										that.processSearchLink(pageContent, linkId, false);
+									}
+									else if (linkType == 'window')
+									{
+										pageContent.html("<div class='padding'>" + msg + "</div>");
+										$.SalesPortal.Wallbin.assignLinkEvents($('#content'));
+									}
+									else
+										pageContent.html("<div class='padding'>" + msg + "</div>");
+									content.animate({scrollTop: 0}, 1);
+
+									var linkLogo = shortcutsTab.find('.ribbon-link-logo');
+									linkLogo.hide();
+									if (ribbonLogoPath.length > 0)
+									{
+										linkLogo.attr('src', ribbonLogoPath.html());
+										shortcutsTab.find('.ribbon-tab-logo').hide();
+										linkLogo.show();
+									}
+
+									var shortcutTitle = pageContent.find('.shortcut-title').html();
+									$('.shortcuts-home-bar .title').html(shortcutTitle);
+								},
+								error: function ()
+								{
+								},
+								async: true,
+								dataType: 'html'
+							});
+						}
+					}
+					else
+						return function ()
+						{
+							var linkName = dataObject.find('.link-name').html();
+							$.ajax({
+								type: "POST",
+								url: window.BaseUrl + "statistic/writeActivity",
+								data: {
+									type: 'Shortcuts',
+									subType: 'Open',
+									data: $.toJSON({
+										File: linkName,
+										'Original Format': 'url'
+									})
+								},
+								async: true,
+								dataType: 'html'
+							});
+						};
+				case 'download':
+					return function ()
+					{
+						var linkId = dataObject.find('.link-id').text();
+						var url = dataObject.find('.url').text();
+						$.ajax({
+							type: "POST",
+							url: window.BaseUrl + "shortcuts/getDownloadDialog",
+							data: {linkId: linkId},
+							beforeSend: function ()
+							{
+								$.SalesPortal.Overlay.show(true);
+							},
+							complete: function ()
+							{
+								$.SalesPortal.Overlay.hide();
+							},
+							success: function (msg)
+							{
+								var content = $(msg);
+								content.find('#accept-button').off('click');
+								content.find('#accept-button').on('click', function ()
+								{
+									$.fancybox.close();
+									window.open(url.replace(/&amp;/g, '%26'), "_self");
+								});
+								$.fancybox({
+									content: content,
+									title: 'Download',
+									width: 300,
+									autoSize: false,
+									autoHeight: true,
+									openEffect: 'none',
+									closeEffect: 'none'
+								});
+							},
+							async: true,
+							dataType: 'html'
+						});
+					};
+				case 'video':
+					return function ()
+					{
+						$.SalesPortal.LinkManager.viewSelectedFormat(dataObject, false, true);
+					};
+					break;
+				case 'library-file':
+					return function ()
+					{
+						$.SalesPortal.LinkManager.requestViewDialog(dataObject.find('.link-id').html(), false);
+					};
+					break;
+				case 'library-page':
+					return function ()
+					{
+						$.cookie("selectedLibraryName", dataObject.find('.library-name').html(), {
+							expires: (60 * 60 * 24 * 7)
+						});
+						$.cookie("selectedPageName", dataObject.find('.page-name').html(), {
+							expires: (60 * 60 * 24 * 7)
+						});
+						$.cookie("selectedRibbonTabId", 'home-tab', {
+							expires: (60 * 60 * 24 * 7)
+						});
+						window.location.reload();
+					};
+					break;
+			}
+			return null;
 		};
 
 		this.updateContentSize = function ()

@@ -3,13 +3,8 @@
 	/**
 	 * Class LibraryLinkShortcut
 	 */
-	class LibraryLinkShortcut
+	class LibraryLinkShortcut extends BaseShortcut
 	{
-		public $id;
-		public $type;
-		public $name;
-		public $tooltip;
-		public $imagePath;
 		public $linkId;
 
 		/**
@@ -17,16 +12,11 @@
 		 */
 		public function __construct($linkRecord)
 		{
-			$this->id = $linkRecord->id;
+			parent::__construct($linkRecord);
 			$linkConfig = new DOMDocument();
 			$linkConfig->loadXML($linkRecord->config);
-			$this->type = trim($linkConfig->getElementsByTagName("Type")->item(0)->nodeValue);
-			$nameTags = $linkConfig->getElementsByTagName("line1");
-			$this->name = $nameTags->length > 0 ? trim($nameTags->item(0)->nodeValue) : '';
-			$tooltipTags = $linkConfig->getElementsByTagName("line2");
-			$this->tooltip = $tooltipTags->length > 0 ? trim($tooltipTags->item(0)->nodeValue) : '';
-			$baseUrl = Yii::app()->getBaseUrl(true);
-			$this->imagePath = $baseUrl . $linkRecord->image_path . '?' . $linkRecord->id_page . $linkRecord->id;
+
+			$this->viewPath = 'libraryFileLink';
 
 			$libraryName = trim($linkConfig->getElementsByTagName("Library")->item(0)->nodeValue);
 			$pageName = trim($linkConfig->getElementsByTagName("Page")->item(0)->nodeValue);
@@ -48,5 +38,15 @@
 					$this->linkId = $linkRecord->id;
 				}
 			}
+		}
+
+		/**
+		 * @return string
+		 */
+		public function getServiceData()
+		{
+			$result = '';
+			$result .= '<div class="link-id">' . $this->linkId . '</div>';
+			return $result;
 		}
 	}

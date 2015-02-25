@@ -96,6 +96,42 @@
 														$linkShortcutsRecord->image_path = '/' . str_replace('\\', '/', str_replace($rootFolderPath, Yii::app()->params['librariesRoot'] . DIRECTORY_SEPARATOR . 'Shortcuts', realpath($linkPath . DIRECTORY_SEPARATOR . $linkShortcutsRecord->order . '.png')));
 														$linkShortcutsRecord->config = $linkConfigContent;
 														$linkShortcutsRecord->save();
+
+														$subLinksRootPath = realpath($linkPath . DIRECTORY_SEPARATOR . 'links');
+														if (file_exists($subLinksRootPath))
+														{
+															/** @var $subLinksRoot DirectoryIterator[] */
+															$subLinksRoot = new DirectoryIterator($subLinksRootPath);
+															foreach ($subLinksRoot as $subLinkFolder)
+															{
+																if ($subLinkFolder->isDir() && !$subLinkFolder->isDot())
+																{
+																	$subLinkPath = $subLinkFolder->getPathname();
+																	$subLinkConfigFile = realpath($subLinkPath . DIRECTORY_SEPARATOR . 'config.xml');
+																	if (file_exists($subLinkConfigFile))
+																	{
+																		$subLinkConfigContent = file_get_contents($subLinkConfigFile);
+																		$subLinkConfig = new DOMDocument();
+																		$subLinkConfig->loadXML($subLinkConfigContent);
+
+																		$subLinkShortcutsRecord = new ShortcutsLinkRecord();
+																		$shortcutsIdTags = $subLinkConfig->getElementsByTagName("StaticID");
+																		$subLinkShortcutsId = $shortcutsIdTags->length > 0 ? trim($shortcutsIdTags->item(0)->nodeValue) : null;
+																		if (!isset($subLinkShortcutsId))
+																			$subLinkShortcutsId = uniqid();
+																		$subLinkShortcutsRecord->id = $subLinkShortcutsId;
+																		$subLinkShortcutsRecord->id_tab = $tabShortcutsId;
+																		$subLinkShortcutsRecord->id_group = $linkShortcutsId;
+																		$subLinkShortcutsRecord->order = intval(trim($subLinkConfig->getElementsByTagName("Order")->item(0)->nodeValue));
+																		$subLinkShortcutsRecord->type = trim($subLinkConfig->getElementsByTagName("Type")->item(0)->nodeValue);
+																		$subLinkShortcutsRecord->source_path = '/' . str_replace('\\', '/', str_replace($rootFolderPath, Yii::app()->params['librariesRoot'] . DIRECTORY_SEPARATOR . 'Shortcuts', $subLinkPath));
+																		$subLinkShortcutsRecord->image_path = '/' . str_replace('\\', '/', str_replace($rootFolderPath, Yii::app()->params['librariesRoot'] . DIRECTORY_SEPARATOR . 'Shortcuts', realpath($subLinkPath . DIRECTORY_SEPARATOR . $subLinkShortcutsRecord->order . '.png')));
+																		$subLinkShortcutsRecord->config = $subLinkConfigContent;
+																		$subLinkShortcutsRecord->save();
+																	}
+																}
+															}
+														}
 													}
 												}
 											}

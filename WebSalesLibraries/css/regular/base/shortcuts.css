@@ -67,13 +67,18 @@
 	width: 100%;
 }
 
-.shortcuts-page-content .shortcuts-links-container
+.shortcuts-page-content .shortcuts-links-grid
 {
 	width: 94%;
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 20px;
 	margin-bottom: 20px;
+}
+
+#shortcuts-links-carousel-view
+{
+	padding-top: 50px;
 }
 
 .shortcuts-links .service-data, .shortcut-title

@@ -117,10 +117,10 @@
 						html: ""
 					});
 				},
-				success: function (msg)
+				success: function (data)
 				{
 					var shortcutsLinks = $('#shortcuts-links');
-					shortcutsLinks.html(msg);
+					shortcutsLinks.html(data.content);
 					shortcutsLinks.find('ul').listview();
 					var shortcutsTitle = $('#shortcuts').find('.ui-title').html();
 
@@ -336,7 +336,7 @@
 					});
 				},
 				async: true,
-				dataType: 'html'
+				dataType: 'json'
 			});
 		};
 	};

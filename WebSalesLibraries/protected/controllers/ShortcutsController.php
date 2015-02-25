@@ -34,17 +34,22 @@
 			$pageId = Yii::app()->request->getPost('pageId');
 			if (isset($pageId))
 			{
-				$linkRecords = ShortcutsLinkRecord::model()->findAll(array('order' => '`order`', 'condition' => 'id_page=:id_page', 'params' => array(':id_page' => $pageId)));
 				/** @var $pageRecord ShortcutsPageRecord */
 				$pageRecord = ShortcutsPageRecord::model()->findByPk($pageId);
-				if (isset($linkRecords) && isset($pageRecord))
+				if (isset($pageRecord))
 				{
 					/** @var $tabRecord ShortcutsTabRecord */
 					$tabRecord = ShortcutsTabRecord::model()->findByPk($pageRecord->id_tab);
 					StatisticActivityRecord::WriteActivity('Shortcuts', 'Page Changed', array('Tab' => $tabRecord->name, 'Button' => $pageRecord->name));
-					$this->renderPartial('page', array('pageRecord' => $pageRecord, 'linkRecords' => $linkRecords,));
+					$pageModel = $pageRecord->getModel();
+					echo CJSON::encode(array(
+						'type' => $pageModel->type,
+						'content' => $this->renderPartial('page', array('page' => $pageModel), true),
+						'displayParameters' => $pageModel->getDisplayParameters()
+					));
 				}
 			}
+			Yii::app()->end();
 		}
 
 		public function actionGetWindowShortcut()
@@ -94,7 +99,8 @@
 				/** @var $linkRecord ShortcutsLinkRecord */
 				$linkRecord = ShortcutsLinkRecord::model()->findByPk($linkId);
 				/** @var $pageRecord ShortcutsPageRecord */
-				$pageRecord = ShortcutsPageRecord::model()->findByPk($linkRecord->id_page);
+				$pageRecord = $linkRecord->getParentPage();
+				$pageModel = $pageRecord->getModel();
 				$searchShortcut = new SearchShortcut($linkRecord);
 				$this->pageTitle = $searchShortcut->tooltip;
 				$content = $this->renderPartial('searchResult', array('searchContainer' => $searchShortcut), true);
@@ -103,10 +109,7 @@
 				else
 				{
 					if (!$searchShortcut->showResultsBar && !Yii::app()->browser->isMobile())
-					{
-						$homeBar = $pageRecord->getHomeBar();
-						$content = $this->renderPartial('homeBar', array('homeBar' => $homeBar, 'enableSearchBar' => false), true) . $content;
-					}
+						$content = $this->renderPartial('homeBar', array('homeBar' => $pageModel->homeBar, 'enableSearchBar' => false), true) . $content;
 					$this->render('linkWrapper', array('objectId' => $linkId, 'objectName' => $searchShortcut->tooltip, 'objectLogo' => $searchShortcut->ribbonLogoPath, 'content' => $content));
 				}
 			}
@@ -139,7 +142,8 @@
 			{
 				/** @var $pageRecord ShortcutsPageRecord */
 				$pageRecord = ShortcutsPageRecord::model()->findByPk($pageId);
-				$searchBar = $pageRecord->getSearchBar();
+				$pageModel = $pageRecord->getModel();
+				$searchBar = $pageModel->searchBar;
 				$this->pageTitle = $searchBar->title;
 				$searchBar->conditions->text = $text;
 				$searchBar->conditions->searchByContent = $onlyFiles == 0;
@@ -167,7 +171,8 @@
 			{
 				/** @var $pageRecord ShortcutsPageRecord */
 				$pageRecord = ShortcutsPageRecord::model()->findByPk($pageId);
-				$optionsContainer = $pageRecord->getSearchBar();
+				$pageModel = $pageRecord->getModel();
+				$optionsContainer = $pageModel->searchBar;
 			}
 			else if (isset($linkId))
 			{
@@ -190,7 +195,8 @@
 			}
 			/** @var $pageRecord ShortcutsPageRecord */
 			$pageRecord = ShortcutsPageRecord::model()->findByPk($pageId);
-			$searchBar = $pageRecord->getSearchBar();
+			$pageModel = $pageRecord->getModel();
+			$searchBar = $pageModel->searchBar;
 			$this->renderPartial('subSearchCustomPanel', array('searchBar' => $searchBar));
 		}
 
@@ -204,7 +210,8 @@
 			{
 				/** @var $pageRecord ShortcutsPageRecord */
 				$pageRecord = ShortcutsPageRecord::model()->findByPk($pageId);
-				$searchBar = $pageRecord->getSearchBar();
+				$pageModel = $pageRecord->getModel();
+				$searchBar = $pageModel->searchBar;
 				$templates = $searchBar->subConditions;
 				$id = $pageId;
 			}
@@ -227,7 +234,7 @@
 				/** @var $linkRecord ShortcutsLinkRecord */
 				$linkRecord = ShortcutsLinkRecord::model()->findByPk($linkId);
 				/**@var $link DownloadShortcut */
-				$link = $linkRecord->GetModel();
+				$link = $linkRecord->getModel();
 				$this->renderPartial('downloadDialog', array('link' => $link));
 			}
 		}
@@ -240,7 +247,7 @@
 				/**@var $linkRecord ShortcutsLinkRecord */
 				$linkRecord = ShortcutsLinkRecord::model()->findByPk($linkId);
 				/**@var $link DownloadShortcut */
-				$link = $linkRecord->GetModel();
+				$link = $linkRecord->getModel();
 				$fileName = $link->fileName;
 				$path = $link->sourcePath;
 				return Yii::app()->getRequest()->sendFile($fileName, @file_get_contents($path));

@@ -68,7 +68,7 @@
 					);
 				}
 			}
-			echo json_encode($dialogData);
+			echo CJSON::encode($dialogData);
 			Yii::app()->end();
 		}
 

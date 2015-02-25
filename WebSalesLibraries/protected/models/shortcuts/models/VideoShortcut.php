@@ -3,14 +3,8 @@
 	/**
 	 * Class VideoShortcut
 	 */
-	class VideoShortcut
+	class VideoShortcut extends BaseShortcut
 	{
-		public $id;
-		public $type;
-		public $tooltip;
-		public $name;
-		public $imagePath;
-		public $sourceLink;
 		public $playerLink;
 
 		/**
@@ -18,17 +12,33 @@
 		 */
 		public function __construct($linkRecord)
 		{
-			$this->id = $linkRecord->id;
+			parent::__construct($linkRecord);
 			$linkConfig = new DOMDocument();
 			$linkConfig->loadXML($linkRecord->config);
-			$this->type = trim($linkConfig->getElementsByTagName("Type")->item(0)->nodeValue);
-			$nameTags = $linkConfig->getElementsByTagName("line1");
-			$this->name = $nameTags->length > 0 ? trim($nameTags->item(0)->nodeValue) : '';
-			$tooltipTags = $linkConfig->getElementsByTagName("line2");
-			$this->tooltip = $tooltipTags->length > 0 ? trim($tooltipTags->item(0)->nodeValue) : '';
+
+			$this->viewPath = Yii::app()->browser->isMobile() ? 'directLink' : 'videoLink';
+
 			$baseUrl = Yii::app()->getBaseUrl(true);
-			$this->imagePath = $baseUrl . $linkRecord->image_path . '?' . $linkRecord->id_page . $linkRecord->id;
 			$this->sourceLink = str_replace('&', '%26', str_replace(' ', '%20', $baseUrl . $linkRecord->source_path . '/' . trim($linkConfig->getElementsByTagName("Source")->item(0)->nodeValue)));
 			$this->playerLink = $baseUrl . '/vendor/video-js/video-js.swf';
+		}
+
+		/**
+		 * @return string
+		 */
+		public function getServiceData()
+		{
+			$result = '';
+			$result .= '<div class="file-type">mp4</div>';
+			$result .= '<div class="view-type">mp4</div>';
+			$result .= '<div class="links">'
+				. CJSON::encode(array(array(
+					'src' => $this->sourceLink,
+					'href' => $this->sourceLink,
+					'title' => $this->name,
+					'type' => 'video/mp4',
+					'swf' => $this->playerLink)))
+				. '</div>';
+			return $result;
 		}
 	}

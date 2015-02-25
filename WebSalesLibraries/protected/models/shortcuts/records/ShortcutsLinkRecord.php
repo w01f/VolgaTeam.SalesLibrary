@@ -1,9 +1,11 @@
- <?php
+<?php
 
 	/**
 	 * Class ShortcutsLinkRecord
 	 * @property null|string id
-	 * @property string id_page
+	 * @property string id_tab
+	 * @property null|string id_page
+	 * @property null|string id_group
 	 * @property mixed order
 	 * @property mixed type
 	 * @property mixed source_path
@@ -30,19 +32,33 @@
 		}
 
 		/**
-		 * @return EmptyShortcut|
-		 * FileShortcut|
-		 * DownloadShortcut|
-		 * LibraryLinkShortcut|
-		 * PageShortcut|
-		 * QuickListShortcut|
-		 * SearchShortcut|
-		 * UrlShortcut|
-		 * VideoShortcut|
-		 * WindowShortcut|
-		 * null
+		 * @return ShortcutsLinkRecord[]
 		 */
-		public function GetModel()
+		public function getSubLinks()
+		{
+			return self::model()->findAll(array('order' => '`order`', 'condition' => 'id_group=:id_group', 'params' => array(':id_group' => $this->id)));
+		}
+
+		/**
+		 * @return ShortcutsPageRecord
+		 */
+		public function getParentPage()
+		{
+			if (isset($this->id_group))
+			{
+				/** @var $parentLinkRecord ShortcutsLinkRecord */
+				$parentLinkRecord = self::model()->findByPk($this->id_group);
+				$idPage = $parentLinkRecord->id_page;
+			}
+			else
+				$idPage = $this->id_page;
+			return ShortcutsPageRecord::model()->findByPk($idPage);
+		}
+
+		/**
+		 * @return BaseShortcut || null
+		 */
+		public function getModel()
 		{
 			switch ($this->type)
 			{
@@ -66,6 +82,8 @@
 					return new SearchShortcut($this);
 				case 'none':
 					return new EmptyShortcut($this);
+				case 'carousel':
+					return new CarouselShortcut($this);
 			}
 			return null;
 		}

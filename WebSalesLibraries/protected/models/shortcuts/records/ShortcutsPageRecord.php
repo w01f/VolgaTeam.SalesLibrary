@@ -47,19 +47,32 @@
 		}
 
 		/**
-		 * @return HomeBar
+		 * @return ShortcutsLinkRecord[]
 		 */
-		public function getHomeBar()
+		public function getLinks()
 		{
-			return new HomeBar($this);
+			return ShortcutsLinkRecord::model()->findAll(array('order' => '`order`', 'condition' => 'id_page=:id_page', 'params' => array(':id_page' => $this->id)));
 		}
 
 		/**
-		 * @return SearchBar
+		 * @return PageModel
 		 */
-		public function getSearchBar()
+		public function getModel()
 		{
-			return new SearchBar($this);
+			$pageConfig = new DOMDocument();
+			$pageConfig->loadXML($this->config);
+			$xpath = new DomXPath($pageConfig);
+			$queryResult = $xpath->query('//Config/Type');
+			$type = $queryResult->length > 0 ? strtolower(trim($queryResult->item(0)->nodeValue)) : '';
+			switch ($type)
+			{
+				case 'grid':
+					return new GridPage($this);
+				case 'carousel':
+					return new CarouselPage($this);
+				default:
+					return new GridPage($this);
+			}
 		}
 
 		public static function clearData()

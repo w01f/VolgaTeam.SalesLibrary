@@ -3,40 +3,27 @@
 	/**
 	 * Class WindowShortcut
 	 */
-	class WindowShortcut
+	class WindowShortcut extends BaseShortcut
 	{
-		public $id;
-		public $type;
-		public $name;
 		public $title;
-		public $tooltip;
-		public $imagePath;
 		public $ribbonLogoPath;
-		public $sourceLink;
-		public $samePage;
-
-		private $linkRecord;
 
 		/**
 		 * @param $linkRecord
 		 */
 		public function __construct($linkRecord)
 		{
-			$this->id = $linkRecord->id;
-			$this->linkRecord = $linkRecord;
+			parent::__construct($linkRecord);
 			$linkConfig = new DOMDocument();
 			$linkConfig->loadXML($linkRecord->config);
-			$this->type = trim($linkConfig->getElementsByTagName("Type")->item(0)->nodeValue);
+
+			$this->viewPath = 'directLink';
+
 			$samePageTags = $linkConfig->getElementsByTagName("OpenOnSamePage");
 			$this->samePage = $samePageTags->length > 0 ? filter_var(trim($samePageTags->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : false;
 			$titleTags = $linkConfig->getElementsByTagName("Title");
 			$this->title = $titleTags->length > 0 ? trim($titleTags->item(0)->nodeValue) : '';
-			$nameTags = $linkConfig->getElementsByTagName("line1");
-			$this->name = $nameTags->length > 0 ? trim($nameTags->item(0)->nodeValue) : '';
-			$tooltipTags = $linkConfig->getElementsByTagName("line2");
-			$this->tooltip = $tooltipTags->length > 0 ? trim($tooltipTags->item(0)->nodeValue) : '';
 			$baseUrl = Yii::app()->getBaseUrl(true);
-			$this->imagePath = $baseUrl . $linkRecord->image_path . '?' . $linkRecord->id_page . $linkRecord->id;
 			$this->ribbonLogoPath = $baseUrl . $linkRecord->source_path . '/link_logo.png' . '?' . $linkRecord->id_page . $linkRecord->id;
 			$this->sourceLink = Yii::app()->createAbsoluteUrl('shortcuts/getWindowShortcut', array('linkId' => $linkRecord->id, 'samePage' => $this->samePage));
 		}
@@ -67,5 +54,20 @@
 			$folder->load($windowRecord);
 			$folder->loadFiles(true);
 			return $folder;
+		}
+
+		/**
+		 * @return string
+		 */
+		public function getServiceData()
+		{
+			$result = '';
+			if (isset($this->ribbonLogoPath) && @getimagesize($this->ribbonLogoPath))
+				$result .= '<div class="ribbon-logo-path">' . $this->ribbonLogoPath . '</div>';
+			$result .= '<div class="link-id">' . $this->id . '</div>';
+			$result .= '<div class="link-type">' . $this->type . '</div>';
+			$result .= '<div class="link-name">' . $this->name . ' - ' . $this->tooltip . '</div>';
+			$result .= '<div class="url">' . $this->sourceLink . '</div>';
+			return $result;
 		}
 	}
