@@ -252,6 +252,7 @@ namespace FileManager.PresentationClasses.TabPages
 				ActiveTagsEditor = null;
 			if (ActiveTagsEditor != null)
 			{
+				MainController.Instance.ActiveDecorator.ActivePage.ClearSelection();
 				ActiveTagsEditor.UpdateData();
 				(ActiveTagsEditor as UserControl).BringToFront();
 			}
@@ -280,10 +281,10 @@ namespace FileManager.PresentationClasses.TabPages
 		}
 		#endregion
 
-		private void TabHomeControl_Resize(object sender, EventArgs e)
+		private void Container_Resize(object sender, EventArgs e)
 		{
 			barMinibar.BeginUpdate();
-			barMinibar.Offset = (Width - 115) / 2;
+			barMinibar.Offset = (pnContainer.Width - 115) / 2;
 			barMinibar.ApplyDockRowCol();
 			barMinibar.EndUpdate();
 		}

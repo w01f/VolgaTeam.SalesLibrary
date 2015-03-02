@@ -58,6 +58,7 @@
 			this.pnButtons = new System.Windows.Forms.Panel();
 			this.buttonXReset = new DevComponents.DotNetBar.ButtonX();
 			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
+			this.superTooltip = new DevComponents.DotNetBar.SuperTooltip();
 			((System.ComponentModel.ISupportInitialize)(this.gridViewSecurityUsers)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEditSecurityUserList)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.gridControlSecurityUserList)).BeginInit();
@@ -160,12 +161,12 @@
 			gridLevelNode1.RelationName = "Users";
 			this.gridControlSecurityUserList.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
             gridLevelNode1});
-			this.gridControlSecurityUserList.Location = new System.Drawing.Point(0, 82);
+			this.gridControlSecurityUserList.Location = new System.Drawing.Point(0, 44);
 			this.gridControlSecurityUserList.MainView = this.gridViewSecurityGroups;
 			this.gridControlSecurityUserList.Name = "gridControlSecurityUserList";
 			this.gridControlSecurityUserList.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemCheckEditSecurityUserList});
-			this.gridControlSecurityUserList.Size = new System.Drawing.Size(296, 70);
+			this.gridControlSecurityUserList.Size = new System.Drawing.Size(296, 233);
 			this.gridControlSecurityUserList.TabIndex = 6;
 			this.gridControlSecurityUserList.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewSecurityGroups,
@@ -279,18 +280,17 @@
 			// 
 			// rbSecurityBlackList
 			// 
-			this.rbSecurityBlackList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
 			this.rbSecurityBlackList.BackColor = System.Drawing.Color.Transparent;
 			this.rbSecurityBlackList.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.rbSecurityBlackList.Image = global::FileManager.Properties.Resources.TagsSecurityBlackListWidget;
 			this.rbSecurityBlackList.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			this.rbSecurityBlackList.Location = new System.Drawing.Point(5, 203);
+			this.rbSecurityBlackList.Location = new System.Drawing.Point(5, 111);
 			this.rbSecurityBlackList.Name = "rbSecurityBlackList";
-			this.rbSecurityBlackList.Size = new System.Drawing.Size(296, 53);
+			this.rbSecurityBlackList.Size = new System.Drawing.Size(147, 38);
+			this.superTooltip.SetSuperTooltip(this.rbSecurityBlackList, new DevComponents.DotNetBar.SuperTooltipInfo("Enable Black List", "", "Enable Black list for Groups or Users for this link in the Web Sales Library", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
 			this.rbSecurityBlackList.TabIndex = 42;
 			this.rbSecurityBlackList.TabStop = true;
-			this.rbSecurityBlackList.Text = "Enable Black list for Groups or Users for this link in the Web Sales Library";
+			this.rbSecurityBlackList.Text = "Enable\r\nBlack List";
 			this.rbSecurityBlackList.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
 			this.rbSecurityBlackList.UseVisualStyleBackColor = false;
 			this.rbSecurityBlackList.CheckedChanged += new System.EventHandler(this.rbSecurityRestricted_CheckedChanged);
@@ -305,9 +305,9 @@
 			this.pnSecurityUserList.Controls.Add(this.circularSecurityUserListProgress);
 			this.pnSecurityUserList.Controls.Add(this.laSecurityUserListInfo);
 			this.pnSecurityUserList.ForeColor = System.Drawing.Color.Black;
-			this.pnSecurityUserList.Location = new System.Drawing.Point(5, 262);
+			this.pnSecurityUserList.Location = new System.Drawing.Point(5, 155);
 			this.pnSecurityUserList.Name = "pnSecurityUserList";
-			this.pnSecurityUserList.Size = new System.Drawing.Size(296, 247);
+			this.pnSecurityUserList.Size = new System.Drawing.Size(296, 375);
 			this.pnSecurityUserList.TabIndex = 41;
 			// 
 			// pnSecurityUserListGrid
@@ -319,35 +319,34 @@
 			this.pnSecurityUserListGrid.Enabled = false;
 			this.pnSecurityUserListGrid.Location = new System.Drawing.Point(0, 95);
 			this.pnSecurityUserListGrid.Name = "pnSecurityUserListGrid";
-			this.pnSecurityUserListGrid.Size = new System.Drawing.Size(296, 152);
+			this.pnSecurityUserListGrid.Size = new System.Drawing.Size(296, 280);
 			this.pnSecurityUserListGrid.TabIndex = 8;
 			// 
 			// buttonXSecurityUserListClearAll
 			// 
 			this.buttonXSecurityUserListClearAll.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-			this.buttonXSecurityUserListClearAll.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonXSecurityUserListClearAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXSecurityUserListClearAll.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-			this.buttonXSecurityUserListClearAll.Location = new System.Drawing.Point(0, 44);
+			this.buttonXSecurityUserListClearAll.Location = new System.Drawing.Point(160, 6);
 			this.buttonXSecurityUserListClearAll.Name = "buttonXSecurityUserListClearAll";
-			this.buttonXSecurityUserListClearAll.Size = new System.Drawing.Size(296, 32);
+			this.buttonXSecurityUserListClearAll.Size = new System.Drawing.Size(135, 32);
 			this.buttonXSecurityUserListClearAll.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.superTooltip.SetSuperTooltip(this.buttonXSecurityUserListClearAll, new DevComponents.DotNetBar.SuperTooltipInfo("REMOVE ALL", "", "REMOVE ALL Groups and Users", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
 			this.buttonXSecurityUserListClearAll.TabIndex = 8;
-			this.buttonXSecurityUserListClearAll.Text = "REMOVE ALL Groups and Users";
+			this.buttonXSecurityUserListClearAll.Text = "REMOVE ALL";
 			this.buttonXSecurityUserListClearAll.Click += new System.EventHandler(this.buttonXSecurityUserListClearAll_Click);
 			// 
 			// buttonXSecurityUserListSelectAll
 			// 
 			this.buttonXSecurityUserListSelectAll.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-			this.buttonXSecurityUserListSelectAll.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXSecurityUserListSelectAll.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-			this.buttonXSecurityUserListSelectAll.Location = new System.Drawing.Point(0, 6);
+			this.buttonXSecurityUserListSelectAll.Location = new System.Drawing.Point(2, 6);
 			this.buttonXSecurityUserListSelectAll.Name = "buttonXSecurityUserListSelectAll";
-			this.buttonXSecurityUserListSelectAll.Size = new System.Drawing.Size(296, 32);
+			this.buttonXSecurityUserListSelectAll.Size = new System.Drawing.Size(128, 32);
 			this.buttonXSecurityUserListSelectAll.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.superTooltip.SetSuperTooltip(this.buttonXSecurityUserListSelectAll, new DevComponents.DotNetBar.SuperTooltipInfo("SELECT ALL", "", "SELECT ALL Groups and Users", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
 			this.buttonXSecurityUserListSelectAll.TabIndex = 7;
-			this.buttonXSecurityUserListSelectAll.Text = "SELECT ALL Groups and Users";
+			this.buttonXSecurityUserListSelectAll.Text = "SELECT ALL";
 			this.buttonXSecurityUserListSelectAll.Click += new System.EventHandler(this.buttonXSecurityUserListSelectAll_Click);
 			// 
 			// circularSecurityUserListProgress
@@ -387,18 +386,18 @@
 			// 
 			// rbSecurityForbidden
 			// 
-			this.rbSecurityForbidden.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			this.rbSecurityForbidden.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.rbSecurityForbidden.BackColor = System.Drawing.Color.Transparent;
 			this.rbSecurityForbidden.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.rbSecurityForbidden.Image = global::FileManager.Properties.Resources.TagsSecurityHiddenWidget;
 			this.rbSecurityForbidden.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			this.rbSecurityForbidden.Location = new System.Drawing.Point(5, 47);
+			this.rbSecurityForbidden.Location = new System.Drawing.Point(153, 6);
 			this.rbSecurityForbidden.Name = "rbSecurityForbidden";
-			this.rbSecurityForbidden.Size = new System.Drawing.Size(296, 44);
+			this.rbSecurityForbidden.Size = new System.Drawing.Size(147, 38);
+			this.superTooltip.SetSuperTooltip(this.rbSecurityForbidden, new DevComponents.DotNetBar.SuperTooltipInfo("Hidden Everywhere", "", "This link is HIDDEN in the Local Library and the Web Library", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
 			this.rbSecurityForbidden.TabIndex = 40;
 			this.rbSecurityForbidden.TabStop = true;
-			this.rbSecurityForbidden.Text = "This link is HIDDEN in the Local Library and the Web Library";
+			this.rbSecurityForbidden.Text = "Hidden\r\nEverywhere";
 			this.rbSecurityForbidden.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
 			this.rbSecurityForbidden.UseVisualStyleBackColor = false;
 			// 
@@ -406,67 +405,66 @@
 			// 
 			this.ckSecurityShareLink.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+			this.ckSecurityShareLink.AutoSize = true;
 			this.ckSecurityShareLink.BackColor = System.Drawing.Color.Transparent;
 			this.ckSecurityShareLink.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.ckSecurityShareLink.Location = new System.Drawing.Point(5, 515);
+			this.ckSecurityShareLink.Location = new System.Drawing.Point(5, 536);
 			this.ckSecurityShareLink.Name = "ckSecurityShareLink";
-			this.ckSecurityShareLink.Size = new System.Drawing.Size(296, 41);
+			this.ckSecurityShareLink.Size = new System.Drawing.Size(251, 20);
 			this.ckSecurityShareLink.TabIndex = 39;
-			this.ckSecurityShareLink.Text = "Allow Users to Email this Link and post to quickSITES";
+			this.ckSecurityShareLink.Text = "Allow to Email and post to quickSITES";
 			this.ckSecurityShareLink.UseVisualStyleBackColor = false;
 			this.ckSecurityShareLink.CheckedChanged += new System.EventHandler(this.ValueCheckedChanged);
 			// 
 			// rbSecurityAllowed
 			// 
-			this.rbSecurityAllowed.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
 			this.rbSecurityAllowed.BackColor = System.Drawing.Color.Transparent;
 			this.rbSecurityAllowed.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.rbSecurityAllowed.Image = global::FileManager.Properties.Resources.TagsSecurityVisibleWidget;
 			this.rbSecurityAllowed.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.rbSecurityAllowed.Location = new System.Drawing.Point(5, 6);
 			this.rbSecurityAllowed.Name = "rbSecurityAllowed";
-			this.rbSecurityAllowed.Size = new System.Drawing.Size(296, 38);
+			this.rbSecurityAllowed.Size = new System.Drawing.Size(147, 38);
+			this.superTooltip.SetSuperTooltip(this.rbSecurityAllowed, new DevComponents.DotNetBar.SuperTooltipInfo("Visible Everywhere", "", "Everyone sees this Link in the Local Sales Library and Web Sales Library", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
 			this.rbSecurityAllowed.TabIndex = 37;
 			this.rbSecurityAllowed.TabStop = true;
-			this.rbSecurityAllowed.Text = "Everyone sees this Link in the Local Sales Library and Web Sales Library";
+			this.rbSecurityAllowed.Text = "Visible\r\nEverywhere";
 			this.rbSecurityAllowed.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
 			this.rbSecurityAllowed.UseVisualStyleBackColor = false;
 			this.rbSecurityAllowed.CheckedChanged += new System.EventHandler(this.ValueCheckedChanged);
 			// 
 			// rbSecurityWhiteList
 			// 
-			this.rbSecurityWhiteList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			this.rbSecurityWhiteList.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.rbSecurityWhiteList.BackColor = System.Drawing.Color.Transparent;
 			this.rbSecurityWhiteList.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.rbSecurityWhiteList.Image = global::FileManager.Properties.Resources.TagsSecurityWhiteListWidget;
 			this.rbSecurityWhiteList.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			this.rbSecurityWhiteList.Location = new System.Drawing.Point(5, 144);
+			this.rbSecurityWhiteList.Location = new System.Drawing.Point(153, 58);
 			this.rbSecurityWhiteList.Name = "rbSecurityWhiteList";
-			this.rbSecurityWhiteList.Size = new System.Drawing.Size(296, 53);
+			this.rbSecurityWhiteList.Size = new System.Drawing.Size(147, 38);
+			this.superTooltip.SetSuperTooltip(this.rbSecurityWhiteList, new DevComponents.DotNetBar.SuperTooltipInfo("Enable White List", "", "Enable White list for Groups or Users for this link in the Web Sales Library", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
 			this.rbSecurityWhiteList.TabIndex = 36;
 			this.rbSecurityWhiteList.TabStop = true;
-			this.rbSecurityWhiteList.Text = "Enable White list for Groups or Users for this link in the Web Sales Library";
+			this.rbSecurityWhiteList.Text = "Enable\r\nWhite List";
 			this.rbSecurityWhiteList.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
 			this.rbSecurityWhiteList.UseVisualStyleBackColor = false;
 			this.rbSecurityWhiteList.CheckedChanged += new System.EventHandler(this.rbSecurityRestricted_CheckedChanged);
 			// 
 			// rbSecurityDenied
 			// 
-			this.rbSecurityDenied.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
 			this.rbSecurityDenied.BackColor = System.Drawing.Color.Transparent;
 			this.rbSecurityDenied.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.rbSecurityDenied.Image = global::FileManager.Properties.Resources.TagsSecurityLocalWidget;
 			this.rbSecurityDenied.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			this.rbSecurityDenied.Location = new System.Drawing.Point(5, 94);
+			this.rbSecurityDenied.Location = new System.Drawing.Point(5, 58);
 			this.rbSecurityDenied.Name = "rbSecurityDenied";
-			this.rbSecurityDenied.Size = new System.Drawing.Size(296, 44);
+			this.rbSecurityDenied.Size = new System.Drawing.Size(147, 38);
+			this.superTooltip.SetSuperTooltip(this.rbSecurityDenied, new DevComponents.DotNetBar.SuperTooltipInfo("Visible Local", "", "This link is ONLY in the Local Sales Library. It is NOT visible in the Web Sales " +
+            "Library", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
 			this.rbSecurityDenied.TabIndex = 35;
 			this.rbSecurityDenied.TabStop = true;
-			this.rbSecurityDenied.Text = "This link is ONLY in the Local Sales Library. It is NOT visible in the Web Sales " +
-    "Library)";
+			this.rbSecurityDenied.Text = "Visible ONLY\r\nLocaly";
 			this.rbSecurityDenied.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
 			this.rbSecurityDenied.UseVisualStyleBackColor = false;
 			this.rbSecurityDenied.CheckedChanged += new System.EventHandler(this.ValueCheckedChanged);
@@ -510,6 +508,11 @@
 			this.styleController.AppearanceReadOnly.Font = new System.Drawing.Font("Arial", 9.75F);
 			this.styleController.AppearanceReadOnly.Options.UseFont = true;
 			// 
+			// superTooltip
+			// 
+			this.superTooltip.DefaultTooltipSettings = new DevComponents.DotNetBar.SuperTooltipInfo("", "", "", null, null, DevComponents.DotNetBar.eTooltipColor.Gray);
+			this.superTooltip.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
+			// 
 			// SecurityEditor
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -525,6 +528,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.gridViewSecurityGroups)).EndInit();
 			this.pnMain.ResumeLayout(false);
 			this.pnData.ResumeLayout(false);
+			this.pnData.PerformLayout();
 			this.pnSecurityUserList.ResumeLayout(false);
 			this.pnSecurityUserListGrid.ResumeLayout(false);
 			this.pnButtons.ResumeLayout(false);
@@ -563,5 +567,6 @@
 		private DevExpress.XtraGrid.Columns.GridColumn gridColumnSecurityGroupSelected;
 		private DevExpress.XtraGrid.Columns.GridColumn gridColumnSecurityGroupName;
 		public System.Windows.Forms.RadioButton rbSecurityBlackList;
+		private DevComponents.DotNetBar.SuperTooltip superTooltip;
 	}
 }

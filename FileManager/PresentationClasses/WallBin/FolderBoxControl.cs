@@ -162,6 +162,8 @@ namespace FileManager.PresentationClasses.WallBin
 					toolTipText.Add("No Category Tags Assigned");
 				if (!String.IsNullOrEmpty(file.CustomKeywords.AllTags))
 					toolTipText.Add("Keyword Tags: " + file.CustomKeywords.AllTags);
+				if (file.ExtendedProperties.IsRestricted || file.ExtendedProperties.NoShare || file.ExtendedProperties.IsForbidden)
+					toolTipText.Add("Special Security Settings: Enabled");
 			}
 			else if (file.Type == FileTypes.LineBreak)
 			{
@@ -1229,7 +1231,6 @@ namespace FileManager.PresentationClasses.WallBin
 		{
 			grFiles.MultiSelect = WallBinOptions.AllowMultiSelect && (WallBinOptions.ShowCategoryTags || WallBinOptions.ShowSuperFilterTags || WallBinOptions.ShowKeywordTags || WallBinOptions.ShowSecurityTags);
 			grFiles.DefaultCellStyle.SelectionBackColor = WallBinOptions.AllowEdit ? grFiles.DefaultCellStyle.BackColor : Color.Wheat;
-			grFiles.ClearSelection();
 			_containsWidgets = (from DataGridViewRow row in grFiles.Rows select row.Tag as LibraryLink)
 				.Any(x => x.Widget != null || (WallBinOptions.ShowCategoryTags && x.HasCategories) ||
 					(WallBinOptions.ShowSuperFilterTags && x.HasSuperFilters) ||
@@ -1574,6 +1575,19 @@ namespace FileManager.PresentationClasses.WallBin
 				SetFolderAppearance();
 				UpdateAfterFolderChanged();
 			}
+		}
+
+		private void toolStripMenuItemFolderSort_Click(object sender, EventArgs e)
+		{
+			if (!_containFiles) return;
+			Save();
+			grFiles.RowsRemoved -= grFiles_RowsRemoved;
+			grFiles.ClearSelection();
+			var rows = grFiles.Rows.OfType<DataGridViewRow>().OrderBy(r => r.Cells[0].Value).ToArray();
+			grFiles.Rows.Clear();
+			grFiles.Rows.AddRange(rows);
+			UpdateAfterFolderChanged();
+			grFiles.RowsRemoved += grFiles_RowsRemoved;
 		}
 		#endregion
 

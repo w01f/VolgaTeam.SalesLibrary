@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraTab;
 using FileManager.ConfigurationClasses;
+using SalesDepot.CommonGUI.Forms;
 using SalesDepot.Services.IPadAdminService;
 using Font = System.Drawing.Font;
 using LibraryLink = SalesDepot.CoreObjects.BusinessClasses.LibraryLink;
@@ -59,16 +60,14 @@ namespace FileManager.PresentationClasses.WallBin.LinkProperties
 		}
 
 		public event EventHandler OnForseClose;
-		
+
 		public SecurityOptions(LibraryLink data)
 		{
 			InitializeComponent();
 			_data = data;
 
-			LoadSecurityGroups();
-			
 			LoadData();
-			
+
 			gridViewSecurityGroups.MasterRowEmpty += OnGroupChildListIsEmpty;
 			gridViewSecurityGroups.MasterRowGetRelationCount += OnGetGroupRelationCount;
 			gridViewSecurityGroups.MasterRowGetRelationName += OnGetGroupRelationName;
@@ -107,8 +106,8 @@ namespace FileManager.PresentationClasses.WallBin.LinkProperties
 
 		public void SaveData()
 		{
-			_data.ExtendedProperties.IsRestricted = rbSecurityDenied.Checked || 
-				rbSecurityWhiteList.Checked || 
+			_data.ExtendedProperties.IsRestricted = rbSecurityDenied.Checked ||
+				rbSecurityWhiteList.Checked ||
 				rbSecurityBlackList.Checked;
 			_data.ExtendedProperties.IsForbidden = rbSecurityForbidden.Checked;
 			_data.ExtendedProperties.NoShare = !ckSecurityShareLink.Checked;
@@ -122,44 +121,50 @@ namespace FileManager.PresentationClasses.WallBin.LinkProperties
 				_data.ExtendedProperties.DeniedUsers = null;
 		}
 
-		private void LoadSecurityGroups()
+		public void LoadSecurityGroups()
 		{
-			rbSecurityWhiteList.Enabled = false;
-			rbSecurityBlackList.Enabled = false;
-			pnSecurityUserListGrid.Visible = false;
-			gridControlSecurityUserList.DataSource = null;
-			_securityGroups.Clear();
-			laSecurityUserListInfo.Visible = true;
-			laSecurityUserListInfo.BringToFront();
-			if (!SettingsManager.Instance.WebServiceConnected)
-				laSecurityUserListInfo.Text = String.Format("Service coonection is not configured");
-			circularSecurityUserListProgress.Visible = true;
-			circularSecurityUserListProgress.BringToFront();
-			laSecurityUserListInfo.Text = String.Format("Loading user list from {0}...", SettingsManager.Instance.WebServiceSite);
-			var message = String.Empty;
-			var thread = new Thread(() =>
+			using (var formProgress = new FormProgress())
 			{
-				_securityGroups.AddRange(((SalesDepot.CoreObjects.BusinessClasses.Library)_data.Parent.Parent.Parent).IPadManager.GetGroupsByLibrary(out message));
-				Invoke((MethodInvoker)delegate
+				formProgress.laProgress.Text = "Loading Security Groups...";
+				formProgress.TopMost = true;
+				formProgress.Show();
+
+				rbSecurityWhiteList.Enabled = false;
+				rbSecurityBlackList.Enabled = false;
+				pnSecurityUserListGrid.Visible = false;
+				gridControlSecurityUserList.DataSource = null;
+				_securityGroups.Clear();
+				laSecurityUserListInfo.Visible = true;
+				laSecurityUserListInfo.BringToFront();
+				if (!SettingsManager.Instance.WebServiceConnected)
+					laSecurityUserListInfo.Text = String.Format("Service coonection is not configured");
+				laSecurityUserListInfo.Text = String.Format("Loading user list from {0}...", SettingsManager.Instance.WebServiceSite);
+				var message = String.Empty;
+				var isCompleted = false;
+				Task.Run(() =>
 				{
-					circularSecurityUserListProgress.Visible = false;
-					if (!String.IsNullOrEmpty(message))
-						laSecurityUserListInfo.Text = String.Format("Couldn't load user list from {0}", SettingsManager.Instance.WebServiceSite);
-					else if (!_securityGroups.Any())
-						laSecurityUserListInfo.Text = String.Format("There is no users on {0}", SettingsManager.Instance.WebServiceSite);
-					else
-					{
-						laSecurityUserListInfo.Visible = false;
-						pnSecurityUserListGrid.Visible = true;
-						gridControlSecurityUserList.DataSource = _securityGroups.Where(g => g.users != null).ToList();
-						ApplyAssignedUsers();
-						ApplyDeniedUsers();
-						rbSecurityWhiteList.Enabled = true;
-						rbSecurityBlackList.Enabled = true;
-					}
+					_securityGroups.AddRange(((SalesDepot.CoreObjects.BusinessClasses.Library)_data.Parent.Parent.Parent).IPadManager.GetGroupsByLibrary(out message));
+					isCompleted = true;
 				});
-			});
-			thread.Start();
+				while (!isCompleted)
+					Application.DoEvents();
+				if (!String.IsNullOrEmpty(message))
+					laSecurityUserListInfo.Text = String.Format("Couldn't load user list from {0}", SettingsManager.Instance.WebServiceSite);
+				else if (!_securityGroups.Any())
+					laSecurityUserListInfo.Text = String.Format("There is no users on {0}", SettingsManager.Instance.WebServiceSite);
+				else
+				{
+					laSecurityUserListInfo.Visible = false;
+					pnSecurityUserListGrid.Visible = true;
+					gridControlSecurityUserList.DataSource = _securityGroups.Where(g => g.users != null).ToList();
+					ApplyAssignedUsers();
+					ApplyDeniedUsers();
+					rbSecurityWhiteList.Enabled = true;
+					rbSecurityBlackList.Enabled = true;
+				}
+
+				formProgress.Close();
+			}
 		}
 
 		private void ApplyAssignedUsers()

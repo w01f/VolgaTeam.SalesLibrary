@@ -295,7 +295,6 @@ namespace FileManager.PresentationClasses.WallBin.Decorators
 			_wallbinOptions = options;
 			if (ActiveBox != null)
 				ActiveBox.MakeInactive();
-			ClearSelection();
 			foreach (var folderBoxControl in _boxes)
 				folderBoxControl.ApplyWallBinOptions(options);
 		}

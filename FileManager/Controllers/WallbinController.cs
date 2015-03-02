@@ -817,6 +817,7 @@ namespace FileManager.Controllers
 			if (MainController.Instance.ActiveDecorator.ActivePage == null) return;
 			MainController.Instance.ActiveDecorator.ActivePage.SelectAllLinks();
 			ResetLinksData();
+			MainController.Instance.ActiveDecorator.ActivePage.ClearSelection();
 		}
 
 		private void SecuritySave_Click(object sender, EventArgs e)

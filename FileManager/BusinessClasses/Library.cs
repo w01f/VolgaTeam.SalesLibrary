@@ -172,6 +172,16 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			}
 		}
 
+		public void DeletePreviewableObject(string originalPath)
+		{
+			foreach (var file in Pages
+				.SelectMany(page => page.Folders
+					.SelectMany(folder => folder.Files.Cast<LibraryLink>())
+				.Where(file=> String.Compare(file.OriginalPath, originalPath, StringComparison.OrdinalIgnoreCase) == 0)
+				.ToList()))
+				file.RemoveFromCollection();
+		}
+
 		public void UpdatePreviewContainers()
 		{
 			foreach (var previewContainer in PreviewContainers)

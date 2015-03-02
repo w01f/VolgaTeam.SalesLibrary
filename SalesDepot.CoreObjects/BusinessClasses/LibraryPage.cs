@@ -269,13 +269,21 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			LastChanged = DateTime.Now;
 		}
 
-		public void SortFolderByName(int columnOrder)
+		public void SortFolderByName()
 		{
-			var order = 0;
-			foreach (var folder in Folders.Where(f => f.ColumnOrder == columnOrder).OrderBy(f => f.Name))
+			var rowOrder = 0;
+			var columnOrder = 0;
+			foreach (var folder in Folders.OrderBy(f => f.Name))
 			{
-				folder.RowOrder = order;
-				order++;
+				folder.RowOrder = rowOrder;
+				folder.ColumnOrder = columnOrder;
+				if (columnOrder > 1)
+				{
+					columnOrder = 0;
+					rowOrder++;
+				}
+				else
+					columnOrder++;
 			}
 			LastChanged = DateTime.Now;
 		}

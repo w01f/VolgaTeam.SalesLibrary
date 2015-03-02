@@ -29,16 +29,16 @@
         private void InitializeComponent()
         {
 			this.components = new System.ComponentModel.Container();
-			DevExpress.Utils.SuperToolTip superToolTip1 = new DevExpress.Utils.SuperToolTip();
-			DevExpress.Utils.ToolTipItem toolTipItem1 = new DevExpress.Utils.ToolTipItem();
-			DevExpress.Utils.SuperToolTip superToolTip2 = new DevExpress.Utils.SuperToolTip();
-			DevExpress.Utils.ToolTipItem toolTipItem2 = new DevExpress.Utils.ToolTipItem();
-			DevExpress.Utils.SuperToolTip superToolTip3 = new DevExpress.Utils.SuperToolTip();
-			DevExpress.Utils.ToolTipItem toolTipItem3 = new DevExpress.Utils.ToolTipItem();
-			DevExpress.Utils.SuperToolTip superToolTip4 = new DevExpress.Utils.SuperToolTip();
-			DevExpress.Utils.ToolTipItem toolTipItem4 = new DevExpress.Utils.ToolTipItem();
-			DevExpress.Utils.SuperToolTip superToolTip5 = new DevExpress.Utils.SuperToolTip();
-			DevExpress.Utils.ToolTipItem toolTipItem5 = new DevExpress.Utils.ToolTipItem();
+			DevExpress.Utils.SuperToolTip superToolTip6 = new DevExpress.Utils.SuperToolTip();
+			DevExpress.Utils.ToolTipItem toolTipItem6 = new DevExpress.Utils.ToolTipItem();
+			DevExpress.Utils.SuperToolTip superToolTip7 = new DevExpress.Utils.SuperToolTip();
+			DevExpress.Utils.ToolTipItem toolTipItem7 = new DevExpress.Utils.ToolTipItem();
+			DevExpress.Utils.SuperToolTip superToolTip8 = new DevExpress.Utils.SuperToolTip();
+			DevExpress.Utils.ToolTipItem toolTipItem8 = new DevExpress.Utils.ToolTipItem();
+			DevExpress.Utils.SuperToolTip superToolTip9 = new DevExpress.Utils.SuperToolTip();
+			DevExpress.Utils.ToolTipItem toolTipItem9 = new DevExpress.Utils.ToolTipItem();
+			DevExpress.Utils.SuperToolTip superToolTip10 = new DevExpress.Utils.SuperToolTip();
+			DevExpress.Utils.ToolTipItem toolTipItem10 = new DevExpress.Utils.ToolTipItem();
 			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
 			this.barManager = new DevExpress.XtraBars.BarManager(this.components);
 			this.barMinibar = new DevExpress.XtraBars.Bar();
@@ -80,7 +80,7 @@
 			this.barManager.DockControls.Add(this.barDockControlBottom);
 			this.barManager.DockControls.Add(this.barDockControlLeft);
 			this.barManager.DockControls.Add(this.barDockControlRight);
-			this.barManager.Form = this;
+			this.barManager.Form = this.pnContainer;
 			this.barManager.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
             this.barCheckItemTabs,
             this.barButtonItemSeparator1,
@@ -125,9 +125,9 @@
 			this.barCheckItemTabs.Glyph = global::FileManager.Properties.Resources.TabsView;
 			this.barCheckItemTabs.Id = 0;
 			this.barCheckItemTabs.Name = "barCheckItemTabs";
-			toolTipItem1.Text = "Tabs View";
-			superToolTip1.Items.Add(toolTipItem1);
-			this.barCheckItemTabs.SuperTip = superToolTip1;
+			toolTipItem6.Text = "Tabs View";
+			superToolTip6.Items.Add(toolTipItem6);
+			this.barCheckItemTabs.SuperTip = superToolTip6;
 			// 
 			// barButtonItemFontUp
 			// 
@@ -135,9 +135,9 @@
 			this.barButtonItemFontUp.Glyph = global::FileManager.Properties.Resources.MinibarFontLarger;
 			this.barButtonItemFontUp.Id = 2;
 			this.barButtonItemFontUp.Name = "barButtonItemFontUp";
-			toolTipItem2.Text = "Increase Text Size";
-			superToolTip2.Items.Add(toolTipItem2);
-			this.barButtonItemFontUp.SuperTip = superToolTip2;
+			toolTipItem7.Text = "Increase Text Size";
+			superToolTip7.Items.Add(toolTipItem7);
+			this.barButtonItemFontUp.SuperTip = superToolTip7;
 			// 
 			// barButtonItemFontDown
 			// 
@@ -145,9 +145,9 @@
 			this.barButtonItemFontDown.Glyph = global::FileManager.Properties.Resources.MinibarFontSmaller;
 			this.barButtonItemFontDown.Id = 3;
 			this.barButtonItemFontDown.Name = "barButtonItemFontDown";
-			toolTipItem3.Text = "Decrease Text Size";
-			superToolTip3.Items.Add(toolTipItem3);
-			this.barButtonItemFontDown.SuperTip = superToolTip3;
+			toolTipItem8.Text = "Decrease Text Size";
+			superToolTip8.Items.Add(toolTipItem8);
+			this.barButtonItemFontDown.SuperTip = superToolTip8;
 			// 
 			// barButtonItemLinkUp
 			// 
@@ -156,9 +156,9 @@
 			this.barButtonItemLinkUp.Glyph = global::FileManager.Properties.Resources.MinibarLinkUp;
 			this.barButtonItemLinkUp.Id = 5;
 			this.barButtonItemLinkUp.Name = "barButtonItemLinkUp";
-			toolTipItem4.Text = "Move this Link Up";
-			superToolTip4.Items.Add(toolTipItem4);
-			this.barButtonItemLinkUp.SuperTip = superToolTip4;
+			toolTipItem9.Text = "Move this Link Up";
+			superToolTip9.Items.Add(toolTipItem9);
+			this.barButtonItemLinkUp.SuperTip = superToolTip9;
 			// 
 			// barButtonItemLinkDown
 			// 
@@ -167,9 +167,9 @@
 			this.barButtonItemLinkDown.Glyph = global::FileManager.Properties.Resources.MinibarLinkDown;
 			this.barButtonItemLinkDown.Id = 6;
 			this.barButtonItemLinkDown.Name = "barButtonItemLinkDown";
-			toolTipItem5.Text = "Move this Link Down";
-			superToolTip5.Items.Add(toolTipItem5);
-			this.barButtonItemLinkDown.SuperTip = superToolTip5;
+			toolTipItem10.Text = "Move this Link Down";
+			superToolTip10.Items.Add(toolTipItem10);
+			this.barButtonItemLinkDown.SuperTip = superToolTip10;
 			// 
 			// barButtonItemSeparator2
 			// 
@@ -182,28 +182,28 @@
 			this.barDockControlTop.CausesValidation = false;
 			this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
 			this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
-			this.barDockControlTop.Size = new System.Drawing.Size(900, 0);
+			this.barDockControlTop.Size = new System.Drawing.Size(624, 0);
 			// 
 			// barDockControlBottom
 			// 
 			this.barDockControlBottom.CausesValidation = false;
 			this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.barDockControlBottom.Location = new System.Drawing.Point(0, 544);
-			this.barDockControlBottom.Size = new System.Drawing.Size(900, 31);
+			this.barDockControlBottom.Location = new System.Drawing.Point(0, 497);
+			this.barDockControlBottom.Size = new System.Drawing.Size(624, 31);
 			// 
 			// barDockControlLeft
 			// 
 			this.barDockControlLeft.CausesValidation = false;
 			this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
 			this.barDockControlLeft.Location = new System.Drawing.Point(0, 0);
-			this.barDockControlLeft.Size = new System.Drawing.Size(0, 544);
+			this.barDockControlLeft.Size = new System.Drawing.Size(0, 497);
 			// 
 			// barDockControlRight
 			// 
 			this.barDockControlRight.CausesValidation = false;
 			this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-			this.barDockControlRight.Location = new System.Drawing.Point(900, 0);
-			this.barDockControlRight.Size = new System.Drawing.Size(0, 544);
+			this.barDockControlRight.Location = new System.Drawing.Point(624, 0);
+			this.barDockControlRight.Size = new System.Drawing.Size(0, 497);
 			// 
 			// toolTipController
 			// 
@@ -306,7 +306,7 @@
 			this.retractableBar.Content.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.retractableBar.Content.Location = new System.Drawing.Point(2, 42);
 			this.retractableBar.Content.Name = "Content";
-			this.retractableBar.Content.Size = new System.Drawing.Size(272, 453);
+			this.retractableBar.Content.Size = new System.Drawing.Size(272, 484);
 			this.retractableBar.Content.TabIndex = 1;
 			this.retractableBar.ContentSize = 350;
 			this.retractableBar.Dock = System.Windows.Forms.DockStyle.Left;
@@ -314,18 +314,23 @@
 			this.retractableBar.Location = new System.Drawing.Point(0, 47);
 			this.retractableBar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.retractableBar.Name = "retractableBar";
-			this.retractableBar.Size = new System.Drawing.Size(276, 497);
+			this.retractableBar.Size = new System.Drawing.Size(276, 528);
 			this.retractableBar.TabIndex = 42;
 			// 
 			// pnContainer
 			// 
 			this.pnContainer.Controls.Add(this.pnEmpty);
 			this.pnContainer.Controls.Add(this.pnMain);
+			this.pnContainer.Controls.Add(this.barDockControlLeft);
+			this.pnContainer.Controls.Add(this.barDockControlRight);
+			this.pnContainer.Controls.Add(this.barDockControlBottom);
+			this.pnContainer.Controls.Add(this.barDockControlTop);
 			this.pnContainer.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.pnContainer.Location = new System.Drawing.Point(276, 47);
 			this.pnContainer.Name = "pnContainer";
-			this.pnContainer.Size = new System.Drawing.Size(624, 497);
+			this.pnContainer.Size = new System.Drawing.Size(624, 528);
 			this.pnContainer.TabIndex = 43;
+			this.pnContainer.Resize += new System.EventHandler(this.Container_Resize);
 			// 
 			// TabHomeControl
 			// 
@@ -335,14 +340,9 @@
 			this.Controls.Add(this.retractableBar);
 			this.Controls.Add(this.pnHeader);
 			this.Controls.Add(this.btSetupWallBin);
-			this.Controls.Add(this.barDockControlLeft);
-			this.Controls.Add(this.barDockControlRight);
-			this.Controls.Add(this.barDockControlBottom);
-			this.Controls.Add(this.barDockControlTop);
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.Name = "TabHomeControl";
 			this.Size = new System.Drawing.Size(900, 575);
-			this.Resize += new System.EventHandler(this.TabHomeControl_Resize);
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.barManager)).EndInit();
 			this.pnHeader.ResumeLayout(false);

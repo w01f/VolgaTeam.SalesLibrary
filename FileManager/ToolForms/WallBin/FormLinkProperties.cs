@@ -103,7 +103,9 @@ namespace FileManager.ToolForms.WallBin
 						optionPages.Add(new ExpiredDateOptions(data));
 						break;
 					case LinkPropertiesType.Security:
-						optionPages.Add(new SecurityOptions(data));
+						var securityPage = new SecurityOptions(data);
+						securityPage.LoadSecurityGroups();
+						optionPages.Add(securityPage);
 						break;
 					case LinkPropertiesType.Widget:
 						form.Width = 940;
@@ -143,6 +145,7 @@ namespace FileManager.ToolForms.WallBin
 		{
 			foreach (var optionPage in xtraTabControl.TabPages.OfType<ILinkProperties>())
 				optionPage.SaveData();
+			xtraTabControl.TabPages.Clear();
 			DialogResult = DialogResult.OK;
 			Close();
 		}

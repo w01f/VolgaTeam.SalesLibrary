@@ -98,12 +98,6 @@ namespace FileManager.PresentationClasses.WallBin
 			LoadData();
 		}
 
-		public void SortByName()
-		{
-			_page.SortFolderByName(ColumnOrder);
-			LoadData();
-		}
-
 		private void gridView_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
 		{
 			if (e.Menu == null)

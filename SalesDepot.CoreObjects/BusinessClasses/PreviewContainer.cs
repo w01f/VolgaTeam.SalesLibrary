@@ -17,6 +17,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		IPreviewContainer GetPreviewContainer(string originalPath);
 		IPreviewGenerator GetPreviewGenerator(IPreviewContainer previewContainer);
 		void UpdatePreviewableObject(string originalPath, DateTime lastChanged);
+		void DeletePreviewableObject(string originalPath);
 		void UpdatePreviewContainers();
 	}
 
@@ -39,6 +40,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		string GetTextContent();
 		void UpdateContent();
 		void ClearContent();
+		void DeleteRelatedLinks();
 		Size GetThumbSize();
 	}
 
@@ -306,12 +308,16 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
 		public void ClearContent()
 		{
-			if (!string.IsNullOrEmpty(ContainerPath))
-			{
-				var previewFolder = new DirectoryInfo(ContainerPath);
-				if (previewFolder.Exists)
-					SyncManager.DeleteFolder(previewFolder);
-			}
+			if (string.IsNullOrEmpty(ContainerPath)) return;
+			var previewFolder = new DirectoryInfo(ContainerPath);
+			if (previewFolder.Exists)
+				SyncManager.DeleteFolder(previewFolder);
+		}
+
+		public void DeleteRelatedLinks()
+		{
+			if (string.IsNullOrEmpty(OriginalPath)) return;
+			Parent.DeletePreviewableObject(OriginalPath);
 		}
 		#endregion
 

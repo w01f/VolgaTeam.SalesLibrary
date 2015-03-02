@@ -158,9 +158,9 @@ namespace FileManager.ToolForms.Settings
 
 		private void buttonXSort_Click(object sender, EventArgs e)
 		{
-			var columnPage = xtraTabControlWindows.SelectedTabPage as ColumnSettings;
-			if (columnPage == null) return;
-			columnPage.SortByName();
+			_currentPage.SortFolderByName();
+			foreach (var column in xtraTabControlWindows.TabPages.OfType<ColumnSettings>())
+				column.LoadData();
 			_stateChanged = true;
 		}
 

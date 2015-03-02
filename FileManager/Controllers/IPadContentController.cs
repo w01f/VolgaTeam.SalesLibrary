@@ -24,7 +24,8 @@ namespace FileManager.Controllers
 		{
 			FormMain.Instance.buttonEditIPadLocation.ButtonClick += buttonEditIPadLocation_ButtonClick;
 			FormMain.Instance.buttonEditIPadLocation.EditValueChanged += buttonEditIPadLocation_EditValueChanged;
-			FormMain.Instance.buttonItemIPadVideoConvert.Click += buttonItemIPadVideo_Click;
+			FormMain.Instance.buttonItemIPadVideoConvert.Click += buttonItemIPadVideoConvert_Click;
+			FormMain.Instance.buttonItemIPadVideoDelete.Click += buttonItemIPadVideoDelete_Click;
 			FormMain.Instance.buttonItemIPadSyncFiles.Click += buttonItemIPadSyncFiles_Click;
 		}
 
@@ -72,6 +73,7 @@ namespace FileManager.Controllers
 			if (activeDecorator == null || !activeDecorator.Library.IsConfigured) return;
 			var settingsConfigured = SettingsManager.Instance.WebServiceConnected && !string.IsNullOrEmpty(activeDecorator.Library.IPadManager.SyncDestinationPath);
 			FormMain.Instance.buttonItemIPadVideoConvert.Enabled = settingsConfigured;
+			FormMain.Instance.buttonItemIPadVideoDelete.Enabled = settingsConfigured;
 			FormMain.Instance.buttonItemIPadSyncFiles.Enabled = settingsConfigured;
 			FormMain.Instance.ribbonTabItemIPadUsers.Visible = settingsConfigured & SettingsManager.Instance.EnableIPadUsersTab;
 			activeDecorator.IPadContentManager.UpdateControlsState();
@@ -145,10 +147,16 @@ namespace FileManager.Controllers
 			}
 		}
 
-		private void buttonItemIPadVideo_Click(object sender, EventArgs e)
+		private void buttonItemIPadVideoConvert_Click(object sender, EventArgs e)
 		{
 			if (MainController.Instance.ActiveDecorator != null)
 				MainController.Instance.ActiveDecorator.IPadContentManager.ConvertSelectedVideoFiles();
+		}
+
+		private void buttonItemIPadVideoDelete_Click(object sender, EventArgs e)
+		{
+			if (MainController.Instance.ActiveDecorator != null)
+				MainController.Instance.ActiveDecorator.IPadContentManager.DeleteSelectedVideoFiles();
 		}
 	}
 }

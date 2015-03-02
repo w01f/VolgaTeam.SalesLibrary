@@ -312,6 +312,11 @@ namespace OutlookSalesDepotAddIn.BusinessClasses
 			throw new NotImplementedException();
 		}
 
+		public void DeletePreviewableObject(string originalPath)
+		{
+			throw new NotImplementedException();
+		}
+
 		public void UpdatePreviewContainers()
 		{
 			throw new NotImplementedException();

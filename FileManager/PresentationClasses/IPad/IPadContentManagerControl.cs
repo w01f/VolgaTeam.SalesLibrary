@@ -59,7 +59,29 @@ namespace FileManager.PresentationClasses.IPad
 		{
 			var videoFiles = _videoFiles.Where(x => x.Selected).ToArray();
 			if (videoFiles.Length > 0)
+			{
 				ConvertVideoFiles(videoFiles);
+				UpdateVideoFiles();
+			}
+			else
+				AppManager.Instance.ShowWarning("Please select one or several videos in the list below");
+		}
+
+		public void DeleteSelectedVideoFiles()
+		{
+			var videoFiles = _videoFiles.Where(x => x.Selected).ToList();
+			if (videoFiles.Any())
+			{
+				if (AppManager.Instance.ShowWarningQuestion("Are you sure you want To Remove this Video From your library?") != DialogResult.Yes)
+					return;
+				foreach (var videoFile in videoFiles)
+				{
+					videoFile.Parent.ClearContent();
+					videoFile.Parent.DeleteRelatedLinks();
+				}
+				ParentDecorator.Library.Save();
+				MainController.Instance.RequestUpdateLibrary(ParentDecorator.Library);
+			}
 			else
 				AppManager.Instance.ShowWarning("Please select one or several videos in the list below");
 		}
@@ -106,7 +128,6 @@ namespace FileManager.PresentationClasses.IPad
 				else
 					FormMain.Instance.WindowState = savedState;
 			}
-			UpdateVideoFiles();
 			Enabled = true;
 		}
 
@@ -184,8 +205,18 @@ namespace FileManager.PresentationClasses.IPad
 		private void repositoryItemButtonEditVideoConvert_ButtonClick(object sender, ButtonPressedEventArgs e)
 		{
 			if (gridViewVideo.FocusedRowHandle == GridControl.InvalidRowHandle) return;
-			VideoInfo videoInfo = _videoFiles[gridViewVideo.GetDataSourceRowIndex(gridViewVideo.FocusedRowHandle)];
+			var videoInfo = _videoFiles[gridViewVideo.GetDataSourceRowIndex(gridViewVideo.FocusedRowHandle)];
 			ConvertVideoFiles(new[] { videoInfo });
+			UpdateVideoFiles();
+		}
+
+		private void repositoryItemButtonEditVideoRefersh_ButtonClick(object sender, ButtonPressedEventArgs e)
+		{
+			if (gridViewVideo.FocusedRowHandle == GridControl.InvalidRowHandle) return;
+			var videoInfo = _videoFiles[gridViewVideo.GetDataSourceRowIndex(gridViewVideo.FocusedRowHandle)];
+			videoInfo.Parent.ClearContent();
+			ConvertVideoFiles(new[] { videoInfo });
+			UpdateVideoFiles();
 		}
 
 		private void gridViewVideo_CustomRowCellEdit(object sender, CustomRowCellEditEventArgs e)

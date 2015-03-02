@@ -549,11 +549,8 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		public IEnumerable<GroupModel> GetGroupsByLibrary(out string message)
 		{
 			message = String.Empty;
-			if (_cachedSecurityGroups == null)
-			{
-				_cachedSecurityGroups = new List<GroupModel>();
-				_cachedSecurityGroups.AddRange(_siteClient.GetGroupsByLibrary(Parent.Identifier.ToString(), out message));
-			}
+			if (_cachedSecurityGroups != null) return _cachedSecurityGroups;
+			_cachedSecurityGroups = _siteClient.GetGroupsByLibrary(Parent.Identifier.ToString(), out message).ToList();
 			return _cachedSecurityGroups;
 		}
 

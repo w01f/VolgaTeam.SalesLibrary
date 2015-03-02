@@ -111,13 +111,16 @@ namespace FileManager.PresentationClasses.Tags
 
 			var activePage = MainController.Instance.ActiveDecorator != null ? MainController.Instance.ActiveDecorator.ActivePage : null;
 			if (activePage == null) return;
-			var defaultLink = activePage.SelectedLinks.FirstOrDefault();
+			var defaultLink = activePage.SelectedLinks.FirstOrDefault(link => link.ExtendedProperties.IsRestricted ||
+					link.ExtendedProperties.NoShare ||
+					link.ExtendedProperties.IsForbidden) ?? 
+				activePage.SelectedLinks.FirstOrDefault();
 			Enabled = defaultLink != null;
 			if (defaultLink == null) return;
 
-			var noData = activePage.SelectedLinks.All(x => !x.ExtendedProperties.IsRestricted && 
-				!x.ExtendedProperties.NoShare && 
-				!x.ExtendedProperties.IsForbidden);
+			var noData = activePage.SelectedLinks.All(link => !(link.ExtendedProperties.IsRestricted ||
+				link.ExtendedProperties.NoShare || 
+				link.ExtendedProperties.IsForbidden));
 			var sameData = defaultLink != null && activePage.SelectedLinks
 				.All(x => x.ExtendedProperties.IsRestricted == defaultLink.ExtendedProperties.IsRestricted && 
 					x.ExtendedProperties.IsForbidden == defaultLink.ExtendedProperties.IsForbidden && 

@@ -28,10 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+			this.components = new System.ComponentModel.Container();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-			this.ttCellInfo = new System.Windows.Forms.ToolTip();
+			this.ttCellInfo = new System.Windows.Forms.ToolTip(this.components);
 			this.pnGrid = new System.Windows.Forms.Panel();
 			this.grFiles = new System.Windows.Forms.DataGridView();
 			this.colDisplayName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -39,10 +40,10 @@
 			this.pnHeader = new System.Windows.Forms.Panel();
 			this.labelControlText = new DevExpress.XtraEditors.LabelControl();
 			this.pbImage = new System.Windows.Forms.PictureBox();
-			this.contextMenuStripSecurity = new System.Windows.Forms.ContextMenuStrip();
+			this.contextMenuStripSecurity = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.toolStripMenuItemSecuritySelectAll = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItemSecurityResetAll = new System.Windows.Forms.ToolStripMenuItem();
-			this.contextMenuStripLinkProperties = new System.Windows.Forms.ContextMenuStrip();
+			this.contextMenuStripLinkProperties = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.toolStripMenuItemLinkPropertiesOpen = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItemLinkPropertiesDelete = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -58,11 +59,12 @@
 			this.toolStripMenuItemFolderDeleteTags = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItemFolderDeleteWidgets = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItemFolderDeleteBanners = new System.Windows.Forms.ToolStripMenuItem();
-			this.contextMenuStripFolderProperties = new System.Windows.Forms.ContextMenuStrip();
+			this.contextMenuStripFolderProperties = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.toolStripMenuItemFolderSettings = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItemFolderDelete = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItemFolderWidget = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItemFolderBanner = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItemFolderSort = new System.Windows.Forms.ToolStripMenuItem();
 			this.pnGrid.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.grFiles)).BeginInit();
 			this.pnHeaderBorder.SuspendLayout();
@@ -238,7 +240,7 @@
             this.toolStripMenuItemLinkPropertiesWidget,
             this.toolStripMenuItemLinkPropertiesBanner});
 			this.contextMenuStripLinkProperties.Name = "contextMenuStripLinkProperties";
-			this.contextMenuStripLinkProperties.Size = new System.Drawing.Size(173, 230);
+			this.contextMenuStripLinkProperties.Size = new System.Drawing.Size(173, 208);
 			// 
 			// toolStripMenuItemLinkPropertiesOpen
 			// 
@@ -354,9 +356,10 @@
             this.toolStripMenuItemFolderSettings,
             this.toolStripMenuItemFolderDelete,
             this.toolStripMenuItemFolderWidget,
-            this.toolStripMenuItemFolderBanner});
+            this.toolStripMenuItemFolderBanner,
+            this.toolStripMenuItemFolderSort});
 			this.contextMenuStripFolderProperties.Name = "contextMenuStripLinkProperties";
-			this.contextMenuStripFolderProperties.Size = new System.Drawing.Size(349, 202);
+			this.contextMenuStripFolderProperties.Size = new System.Drawing.Size(349, 246);
 			// 
 			// toolStripMenuItemFolderSettings
 			// 
@@ -385,6 +388,13 @@
 			this.toolStripMenuItemFolderBanner.Size = new System.Drawing.Size(348, 22);
 			this.toolStripMenuItemFolderBanner.Text = "Add a Banner to this Window";
 			this.toolStripMenuItemFolderBanner.Click += new System.EventHandler(this.toolStripMenuItemFolderBanner_Click);
+			// 
+			// toolStripMenuItemFolderSort
+			// 
+			this.toolStripMenuItemFolderSort.Name = "toolStripMenuItemFolderSort";
+			this.toolStripMenuItemFolderSort.Size = new System.Drawing.Size(348, 22);
+			this.toolStripMenuItemFolderSort.Text = "Sort Links in this Window A-Z";
+			this.toolStripMenuItemFolderSort.Click += new System.EventHandler(this.toolStripMenuItemFolderSort_Click);
 			// 
 			// FolderBoxControl
 			// 
@@ -438,5 +448,6 @@
 		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemFolderDelete;
 		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemFolderWidget;
 		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemFolderBanner;
+		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemFolderSort;
     }
 }

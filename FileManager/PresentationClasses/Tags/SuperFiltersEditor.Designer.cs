@@ -70,6 +70,7 @@
 			this.pnData.Controls.Add(this.checkedListBoxControl);
 			this.pnData.Controls.Add(this.labelControlRestrictionInfo);
 			this.pnData.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.pnData.Enabled = false;
 			this.pnData.Location = new System.Drawing.Point(0, 47);
 			this.pnData.Name = "pnData";
 			this.pnData.Size = new System.Drawing.Size(350, 333);

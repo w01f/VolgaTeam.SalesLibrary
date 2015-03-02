@@ -803,6 +803,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\ResetVideoSmall.png" />
     <None Include="Resources\AdvancedSettings.png" />
     <None Include="Resources\ColumnTitleSettings.png" />
     <None Include="Resources\FolderSettings.png" />

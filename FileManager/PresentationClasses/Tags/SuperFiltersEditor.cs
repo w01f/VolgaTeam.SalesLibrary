@@ -56,11 +56,11 @@ namespace FileManager.PresentationClasses.Tags
 
 			var activePage = MainController.Instance.ActiveDecorator != null ? MainController.Instance.ActiveDecorator.ActivePage : null;
 			if (activePage == null) return;
-			var defaultLink = activePage.SelectedLinks.FirstOrDefault();
+			var defaultLink = activePage.SelectedLinks.FirstOrDefault(link => link.HasSuperFilters) ?? activePage.SelectedLinks.FirstOrDefault();
 			Enabled = defaultLink != null;
 			if (defaultLink == null) return;
 
-			var noData = activePage.SelectedLinks.All(x => !x.SuperFilters.Any());
+			var noData = activePage.SelectedLinks.All(link => !link.HasSuperFilters);
 			var sameData = defaultLink != null && activePage.SelectedLinks.All(x => x.CustomKeywords.Compare(defaultLink.CustomKeywords));
 
 			pnButtons.Enabled = !noData;

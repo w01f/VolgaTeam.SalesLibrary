@@ -177,6 +177,11 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			}
 		}
 
+		public void DeletePreviewableObject(string originalPath)
+		{
+			throw new NotImplementedException();
+		}
+
 		public void UpdatePreviewContainers()
 		{
 			foreach (var previewContainer in PreviewContainers)
