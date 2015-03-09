@@ -13,7 +13,10 @@
 		<tr>
 			<td>
 				<? if (!Yii::app()->browser->isMobile()): ?>
-					<img style="margin-top: 20px; margin-bottom: 20px;" src="<? echo Yii::app()->getBaseUrl(true) . '/images/shortcuts/search-bar/search-bar-logo.png?' . $pageId ?>" alt=""/>
+					<? $logoUrl = Yii::app()->getBaseUrl(true) . '/images/shortcuts/search-bar/search-bar-logo.png'; ?>
+					<div style="width:100%;min-height: 20px;">
+						<img style="margin-top: 20px; margin-bottom: 20px;" src="<? echo $logoUrl . '?' . $pageId; ?>" alt="" onerror="this.style.display = 'none'"/>
+					</div>
 				<? endif; ?>
 				<div class="search-conditions" style="display: none;">
 					<div class="shortcut-title"><? echo $searchBar->title; ?></div>

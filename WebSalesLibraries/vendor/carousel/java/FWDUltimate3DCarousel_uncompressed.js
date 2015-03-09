@@ -20940,12 +20940,6 @@
 			self.setBackgrounds();
 			self.setupPreloader();
 			self.positionPreloader();
-
-			if (!self.isMobile)
-			{
-				self.setupContextMenu();
-			}
-
 			self.preloaderLoaded = true;
 			self.resizeHandler();
 		};

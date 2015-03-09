@@ -62,8 +62,7 @@
 							$('.shortcuts-link.direct').off('click').on('click', function (e)
 							{
 								var isEmbedded = $(this).hasClass('embedded');
-								if (isEmbedded)
-									e.preventDefault();
+								e.preventDefault();
 								var handler = getClickHandler('direct', $(this).find('.service-data').html(), isEmbedded);
 								handler();
 							});
@@ -449,6 +448,7 @@
 						return function ()
 						{
 							var linkName = dataObject.find('.link-name').html();
+							var url = dataObject.find('.url').text();
 							$.ajax({
 								type: "POST",
 								url: window.BaseUrl + "statistic/writeActivity",
@@ -463,6 +463,7 @@
 								async: true,
 								dataType: 'html'
 							});
+							window.open(url.replace(/&amp;/g, '%26'), "_blank");
 						};
 				case 'download':
 					return function ()

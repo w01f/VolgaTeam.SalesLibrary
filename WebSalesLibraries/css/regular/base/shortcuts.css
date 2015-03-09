@@ -45,6 +45,11 @@
 	width: 100%;
 }
 
+.shortcuts-search-bar.open
+{
+	margin-bottom: 35px;
+}
+
 .shortcuts-search-bar td
 {
 	padding-left: 10px;
@@ -78,7 +83,7 @@
 
 #shortcuts-links-carousel-view
 {
-	padding-top: 50px;
+	padding-top: 15px;
 }
 
 .shortcuts-links .service-data, .shortcut-title

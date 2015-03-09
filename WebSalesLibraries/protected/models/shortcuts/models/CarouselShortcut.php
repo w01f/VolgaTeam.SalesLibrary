@@ -30,10 +30,6 @@
 			{
 				switch ($link->type)
 				{
-					case 'url':
-					case 'file':
-						$mediaType = 'link';
-						break;
 					case 'none':
 						$mediaType = 'none';
 						break;
