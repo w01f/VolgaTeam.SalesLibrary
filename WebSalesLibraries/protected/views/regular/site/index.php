@@ -355,8 +355,8 @@
 							<? echo Yii::app()->user->firstName . ' ' . Yii::app()->user->lastName; ?>
 						<? endif; ?>
 					</span>
-					<img class="ribbon-tab-logo" src="<? echo Yii::app()->getBaseUrl(true) . $tabShortcutsRecord->image_path . '?' . $tabShortcutsRecord->id; ?>"/>
-					<img class="ribbon-link-logo" src="<? echo Yii::app()->getBaseUrl(true) . $tabShortcutsRecord->image_path . '?' . $tabShortcutsRecord->id; ?>" style="display: none"/>
+					<img class="ribbon-tab-logo ribbon-shortcut-tab-logo" src="<? echo Yii::app()->getBaseUrl(true) . $tabShortcutsRecord->image_path . '?' . $tabShortcutsRecord->id; ?>"/>
+					<img class="ribbon-tab-logo ribbon-shortcut-custom-logo" src="<? echo Yii::app()->getBaseUrl(true) . $tabShortcutsRecord->image_path . '?' . $tabShortcutsRecord->id; ?>" style="display: none"/>
 				</div>
 				<?
 					/** @var $pageShortcuts ShortcutsPageRecord[] */

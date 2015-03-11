@@ -19,3 +19,9 @@
 	float: none;
 	text-align: center;
 }
+
+#right-navbar .logo-list li.disabled img
+{
+	opacity: 0.4;
+	filter: alpha(opacity=40);
+}

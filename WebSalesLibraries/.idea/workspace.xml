@@ -7,21 +7,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="311ca633-43c5-41dd-82ab-ba01ea556142" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/shortcuts/no_cats.png" afterPath="$PROJECT_DIR$/images/shortcuts/no_cats.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/protected/controllers/RedirectController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.htaccess" afterPath="$PROJECT_DIR$/.htaccess" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/shortcuts/models/BaseShortcut.php" afterPath="$PROJECT_DIR$/protected/models/shortcuts/models/BaseShortcut.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/shortcuts/models/CarouselPage.php" afterPath="$PROJECT_DIR$/protected/models/shortcuts/models/CarouselPage.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/shortcuts/models/CarouselShortcut.php" afterPath="$PROJECT_DIR$/protected/models/shortcuts/models/CarouselShortcut.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/carousel/java/FWDUltimate3DCarousel.js" afterPath="$PROJECT_DIR$/vendor/carousel/java/FWDUltimate3DCarousel.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/carousel/java/FWDUltimate3DCarousel_uncompressed.js" afterPath="$PROJECT_DIR$/vendor/carousel/java/FWDUltimate3DCarousel_uncompressed.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/deployment.xml" afterPath="$PROJECT_DIR$/.idea/deployment.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/carousel/load/minimal_classic_skin.css" afterPath="$PROJECT_DIR$/vendor/carousel/load/minimal_classic_skin.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/shortcuts/models/PageModel.php" afterPath="$PROJECT_DIR$/protected/models/shortcuts/models/PageModel.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/shortcuts/models/QuickListShortcut.php" afterPath="$PROJECT_DIR$/protected/models/shortcuts/models/QuickListShortcut.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/shortcuts/models/SearchShortcut.php" afterPath="$PROJECT_DIR$/protected/models/shortcuts/models/SearchShortcut.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/controllers/ShortcutsController.php" afterPath="$PROJECT_DIR$/protected/controllers/ShortcutsController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/shortcuts/models/SubSearchTemplate.php" afterPath="$PROJECT_DIR$/protected/models/shortcuts/models/SubSearchTemplate.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/shortcuts/models/WindowShortcut.php" afterPath="$PROJECT_DIR$/protected/models/shortcuts/models/WindowShortcut.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/views/regular/site/index.php" afterPath="$PROJECT_DIR$/protected/views/regular/site/index.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/config/params.php" afterPath="$PROJECT_DIR$/protected/config/params.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/views/regular/shortcuts/searchBar.php" afterPath="$PROJECT_DIR$/protected/views/regular/shortcuts/searchBar.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/regular/base/shortcuts.css" afterPath="$PROJECT_DIR$/css/regular/base/shortcuts.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/regular/base/ribbon.js" afterPath="$PROJECT_DIR$/js/regular/base/ribbon.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/views/regular/shortcuts/searchResult.php" afterPath="$PROJECT_DIR$/protected/views/regular/shortcuts/searchResult.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/regular/base/shortcuts-search.css" afterPath="$PROJECT_DIR$/css/regular/base/shortcuts-search.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/regular/base/shortcuts-search.js" afterPath="$PROJECT_DIR$/js/regular/base/shortcuts-search.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/regular/base/shortcuts.js" afterPath="$PROJECT_DIR$/js/regular/base/shortcuts.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/carousel/load/skin_modern_silver.css" afterPath="$PROJECT_DIR$/vendor/carousel/load/skin_modern_silver.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/carousel/load/skin_modern_warm.css" afterPath="$PROJECT_DIR$/vendor/carousel/load/skin_modern_warm.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/views/regular/shortcuts/subSearchTemplatesPanel.php" afterPath="$PROJECT_DIR$/protected/views/regular/shortcuts/subSearchTemplatesPanel.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <list id="6cb86652-0ea2-464a-b0b1-9bbef25a8567" name="C#" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/FileManager.csproj" afterPath="$PROJECT_DIR$/../FileManager/FileManager.csproj" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/FormMain.Designer.cs" afterPath="$PROJECT_DIR$/../FileManager/FormMain.Designer.cs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/BusinessClasses/Library.cs" afterPath="$PROJECT_DIR$/../FileManager/BusinessClasses/Library.cs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot.CoreObjects/BusinessClasses/PreviewContainer.cs" afterPath="$PROJECT_DIR$/../SalesDepot.CoreObjects/BusinessClasses/PreviewContainer.cs" />
     </list>
@@ -45,7 +54,37 @@
     <favorites_list name="WebSalesLibraries" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="CarouselShortcut.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/protected/models/shortcuts/models/CarouselShortcut.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="35" column="34" selection-start="963" selection-end="963" vertical-scroll-proportion="-12.384615" vertical-offset="273" max-vertical-offset="1003">
+              <folding>
+                <element signature="e#967#2390#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CarouselPage.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/protected/models/shortcuts/models/CarouselPage.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="32" column="50" selection-start="626" selection-end="626" vertical-scroll-proportion="-1.6827794" vertical-offset="1658" max-vertical-offset="2720">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PageModel.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/protected/models/shortcuts/models/PageModel.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="32" column="51" selection-start="795" selection-end="795" vertical-scroll-proportion="-13.692307" vertical-offset="188" max-vertical-offset="850">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -65,14 +104,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/protected/views/regular/shortcuts/page.php" />
-        <option value="$PROJECT_DIR$/protected/views/regular/shortcuts/grid/container.php" />
-        <option value="$PROJECT_DIR$/protected/controllers/RateController.php" />
-        <option value="$PROJECT_DIR$/protected/controllers/PreviewController.php" />
-        <option value="$PROJECT_DIR$/protected/views/phone/shortcuts/page.php" />
-        <option value="$PROJECT_DIR$/js/phone/shortcuts.js" />
-        <option value="$PROJECT_DIR$/protected/views/regular/shortcuts/carousel/emptyLink.php" />
-        <option value="$PROJECT_DIR$/protected/views/regular/shortcuts/carousel/downloadLink.php" />
         <option value="$PROJECT_DIR$/protected/views/regular/shortcuts/carousel/libraryFileLink.php" />
         <option value="$PROJECT_DIR$/protected/views/regular/shortcuts/carousel/pageLink.php" />
         <option value="$PROJECT_DIR$/protected/views/regular/shortcuts/carousel/videoLink.php" />
@@ -80,7 +111,6 @@
         <option value="$PROJECT_DIR$/protected/views/regular/shortcuts/carousel/container.php" />
         <option value="$PROJECT_DIR$/protected/views/regular/shortcuts/grid/downloadLink.php" />
         <option value="$PROJECT_DIR$/protected/models/shortcuts/models/GridPage.php" />
-        <option value="$PROJECT_DIR$/protected/models/shortcuts/models/WindowShortcut.php" />
         <option value="$PROJECT_DIR$/protected/views/regular/shortcuts/carousel/directLink.php" />
         <option value="$PROJECT_DIR$/protected/models/shortcuts/models/VideoShortcut.php" />
         <option value="$PROJECT_DIR$/protected/views/regular/shortcuts/grid/directLink.php" />
@@ -92,19 +122,11 @@
         <option value="$PROJECT_DIR$/protected/models/shortcuts/models/EmptyShortcut.php" />
         <option value="$PROJECT_DIR$/protected/models/shortcuts/models/DownloadShortcut.php" />
         <option value="$PROJECT_DIR$/protected/models/shortcuts/models/UrlShortcut.php" />
-        <option value="$PROJECT_DIR$/protected/models/shortcuts/models/SearchShortcut.php" />
-        <option value="$PROJECT_DIR$/protected/models/shortcuts/models/QuickListShortcut.php" />
         <option value="$PROJECT_DIR$/protected/models/shortcuts/models/FileShortcut.php" />
-        <option value="db-console:/b3b4574f/5f689e70-8d5b-41e3-aaa1-c8c47e976102/" />
         <option value="$PROJECT_DIR$/protected/data/tables/tbl_shortcut_link.sql" />
-        <option value="$PROJECT_DIR$/protected/models/shortcuts/models/BaseShortcut.php" />
         <option value="$PROJECT_DIR$/protected/models/shortcuts/records/ShortcutsPageRecord.php" />
         <option value="$PROJECT_DIR$/protected/models/shortcuts/records/ShortcutsLinkRecord.php" />
-        <option value="$PROJECT_DIR$/protected/controllers/ShortcutsController.php" />
         <option value="$PROJECT_DIR$/protected/components/actions/ShortcutsUpdateAction.php" />
-        <option value="$PROJECT_DIR$/protected/views/regular/site/index.php" />
-        <option value="$PROJECT_DIR$/protected/models/shortcuts/models/PageModel.php" />
-        <option value="$PROJECT_DIR$/protected/models/shortcuts/models/CarouselPage.php" />
         <option value="$PROJECT_DIR$/vendor/carousel/java/FWDUltimate3DCarousel.js" />
         <option value="$PROJECT_DIR$/vendor/carousel/java/FWDUltimate3DCarousel_uncompressed.js" />
         <option value="$PROJECT_DIR$/protected/views/regular/shortcuts/homeBar.php" />
@@ -112,10 +134,27 @@
         <option value="$PROJECT_DIR$/vendor/carousel/load/minimal_classic_skin.css" />
         <option value="$PROJECT_DIR$/vendor/carousel/load/skin_modern_warm.css" />
         <option value="$PROJECT_DIR$/vendor/carousel/load/skin_modern_silver.css" />
-        <option value="$PROJECT_DIR$/protected/models/shortcuts/models/CarouselShortcut.php" />
-        <option value="$PROJECT_DIR$/js/regular/base/shortcuts.js" />
-        <option value="$PROJECT_DIR$/protected/config/params.php" />
         <option value="$PROJECT_DIR$/protected/views/regular/shortcuts/searchBar.php" />
+        <option value="$PROJECT_DIR$/protected/controllers/RedirectController.php" />
+        <option value="$PROJECT_DIR$/.htaccess" />
+        <option value="$PROJECT_DIR$/protected/models/shortcuts/models/QuickListShortcut.php" />
+        <option value="$PROJECT_DIR$/protected/models/shortcuts/models/WindowShortcut.php" />
+        <option value="db-console:/b3b4574f/5f689e70-8d5b-41e3-aaa1-c8c47e976102/" />
+        <option value="$PROJECT_DIR$/protected/views/regular/site/index.php" />
+        <option value="$PROJECT_DIR$/js/regular/base/ribbon.js" />
+        <option value="$PROJECT_DIR$/js/regular/base/shortcuts.js" />
+        <option value="$PROJECT_DIR$/protected/models/shortcuts/models/BaseShortcut.php" />
+        <option value="$PROJECT_DIR$/protected/models/shortcuts/models/SearchShortcut.php" />
+        <option value="$PROJECT_DIR$/protected/views/regular/shortcuts/searchResult.php" />
+        <option value="$PROJECT_DIR$/protected/models/shortcuts/models/SubSearchTemplate.php" />
+        <option value="$PROJECT_DIR$/js/regular/base/shortcuts-search.js" />
+        <option value="$PROJECT_DIR$/protected/views/regular/shortcuts/subSearchTemplatesPanel.php" />
+        <option value="$PROJECT_DIR$/css/regular/base/shortcuts-search.css" />
+        <option value="$PROJECT_DIR$/protected/config/params.php" />
+        <option value="$PROJECT_DIR$/protected/controllers/ShortcutsController.php" />
+        <option value="$PROJECT_DIR$/protected/models/shortcuts/models/PageModel.php" />
+        <option value="$PROJECT_DIR$/protected/models/shortcuts/models/CarouselShortcut.php" />
+        <option value="$PROJECT_DIR$/protected/models/shortcuts/models/CarouselPage.php" />
       </list>
     </option>
   </component>
@@ -233,15 +272,47 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="protected" />
+              <option name="myItemId" value="vendor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebSalesLibraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebSalesLibraries" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
+              <option name="myItemId" value="vendor" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="regular" />
+              <option name="myItemId" value="carousel" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebSalesLibraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebSalesLibraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vendor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="carousel" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -256,10 +327,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="protected" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -339,39 +406,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="protected" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="protected" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="config" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
+              <option name="myItemId" value="images" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -390,32 +425,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="regular" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="qpage" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="css" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="regular" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="qbuilder" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1187,7 +1196,11 @@
       <created>1424892845672</created>
       <updated>1424892845672</updated>
     </task>
-    <option name="localTasksCounter" value="149" />
+    <task id="LOCAL-00149" summary="Web Sales Depot: Shortcuts carousel small improvements&#10;&#10;">
+      <created>1425909732619</created>
+      <updated>1425909732619</updated>
+    </task>
+    <option name="localTasksCounter" value="150" />
     <servers />
   </component>
   <component name="TodoView" selected-index="3">
@@ -1214,19 +1227,21 @@
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15257958" sideWeight="0.65495205" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2151482" sideWeight="0.923159" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15148188" sideWeight="0.65495205" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="true" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14270501" sideWeight="0.5117396" order="5" side_tool="false" content_ui="tabs" x="20" y="824" width="1874" height="217" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32930845" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32491767" sideWeight="0.49573106" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21624589" sideWeight="0.40288153" order="1" side_tool="false" content_ui="tabs" x="-1278" y="1" width="1271" height="1022" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.17199148" sideWeight="0.87596047" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21033014" sideWeight="0.12957746" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Framework" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.59625965" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25612354" sideWeight="0.87042254" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23001096" sideWeight="0.34451544" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15848452" sideWeight="0.13024282" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="1.0" sideWeight="0.48772678" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24424973" sideWeight="0.44236925" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15848452" sideWeight="0.13024282" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28368017" sideWeight="0.4850587" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32491767" sideWeight="0.49573106" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21033014" sideWeight="0.12957746" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26677316" sideWeight="0.87042254" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24424973" sideWeight="0.44236925" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Assets" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32930845" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15314835" sideWeight="0.76237625" order="4" side_tool="false" content_ui="tabs" />
@@ -1234,10 +1249,8 @@
       <window_info id="DB Browser" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.59625965" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="DB Execution Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24866879" sideWeight="0.8228823" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21577218" sideWeight="0.923159" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21624589" sideWeight="0.40288153" order="1" side_tool="false" content_ui="tabs" x="-1278" y="1" width="1271" height="1022" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32855567" sideWeight="0.49359658" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21523179" sideWeight="0.5741729" order="5" side_tool="false" content_ui="tabs" />
@@ -1286,7 +1299,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="Web Sales Depot: IE SubSearch fix&#10;&#10;" />
     <MESSAGE value="Web Sales Depot: Link Access White\Black list fix&#10;&#10;" />
     <MESSAGE value="Web Sales Depot: Shortcuts sub-search templates images fix &#10;&#10;" />
     <MESSAGE value="Web Sales Depot: Link White\Black list bug fixes &#10;&#10;" />
@@ -1311,7 +1323,8 @@
     <MESSAGE value="Web Sales Depot: Site search bug fix" />
     <MESSAGE value="Web Sales Depot: Site search bug fix&#10;&#10;" />
     <MESSAGE value="Web Sales Depot: Shortcuts carousel fix&#10;&#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="Web Sales Depot: Shortcuts carousel fix&#10;&#10;" />
+    <MESSAGE value="Web Sales Depot: Shortcuts carousel small improvements&#10;&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Web Sales Depot: Shortcuts carousel small improvements&#10;&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1342,7 +1355,7 @@
           <option name="timeStamp" value="386" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="442" />
+      <option name="time" value="444" />
     </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
@@ -1358,131 +1371,6 @@
     </PATH>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/protected/views/regular/shortcuts/grid/downloadLink.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="23" selection-start="586" selection-end="589" vertical-scroll-proportion="-10.461538" vertical-offset="0" max-vertical-offset="425" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/views/regular/shortcuts/grid/directLink.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="8" selection-start="791" selection-end="826" vertical-scroll-proportion="-10.461538" vertical-offset="0" max-vertical-offset="408" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/models/shortcuts/models/UrlShortcut.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="9" selection-start="976" selection-end="976" vertical-scroll-proportion="-22.23077" vertical-offset="0" max-vertical-offset="697" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/models/shortcuts/models/PageShortcut.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="0" selection-start="627" selection-end="627" vertical-scroll-proportion="-19.26923" vertical-offset="9" max-vertical-offset="697" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/models/shortcuts/models/DownloadShortcut.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="68" selection-start="500" selection-end="500" vertical-scroll-proportion="0.58712715" vertical-offset="0" max-vertical-offset="799" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/models/shortcuts/models/QuickListShortcut.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="42" selection-start="1378" selection-end="1378" vertical-scroll-proportion="0.0" vertical-offset="464" max-vertical-offset="1173" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/regular/base/shortcuts-search.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="471" column="49" selection-start="15410" selection-end="15410" vertical-scroll-proportion="0.3323398" vertical-offset="7784" max-vertical-offset="12495" />
-      </provider>
-    </entry>
-    <entry file="dbDummy://db-console:/b3b4574f/5f689e70-8d5b-41e3-aaa1-c8c47e976102/">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="689" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/models/shortcuts/models/SearchShortcut.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="23" selection-start="976" selection-end="976" vertical-scroll-proportion="-10.461538" vertical-offset="306" max-vertical-offset="1411" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/data/tables/tbl_shortcut_link.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="23" selection-start="176" selection-end="176" vertical-scroll-proportion="0.0937931" vertical-offset="0" max-vertical-offset="725" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/models/shortcuts/records/ShortcutsTabRecord.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="35" selection-start="531" selection-end="531" vertical-scroll-proportion="-18.961538" vertical-offset="0" max-vertical-offset="731" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/models/shortcuts/records/ShortcutsPageRecord.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="77" column="0" selection-start="1848" selection-end="1848" vertical-scroll-proportion="0.0" vertical-offset="1309" max-vertical-offset="1479" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/models/shortcuts/records/ShortcutsLinkRecord.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="52" column="0" selection-start="1158" selection-end="1158" vertical-scroll-proportion="0.0" vertical-offset="884" max-vertical-offset="1700" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/components/actions/ShortcutsUpdateAction.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="132" column="0" selection-start="7950" selection-end="7950" vertical-scroll-proportion="0.0" vertical-offset="2244" max-vertical-offset="2601" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/models/shortcuts/models/WindowShortcut.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="58" column="0" selection-start="2235" selection-end="2791" vertical-scroll-proportion="0.0" vertical-offset="986" max-vertical-offset="1326" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/css/regular/base/ticker.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="612" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/css/regular/base/shortcuts-search.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="724" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/models/shortcuts/models/PageModel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="56" selection-start="709" selection-end="790" vertical-scroll-proportion="-23.115385" vertical-offset="62" max-vertical-offset="782" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/views/regular/shortcuts/carousel/container.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="10" selection-start="119" selection-end="119" vertical-scroll-proportion="-1.9615384" vertical-offset="0" max-vertical-offset="170" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/views/regular/shortcuts/downloadDialog.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="746" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/views/regular/shortcuts/subSearchBar.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="733" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/views/regular/shortcuts/searchResult.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1547" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/views/regular/shortcuts/grid/libraryFileLink.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="30" selection-start="546" selection-end="546" vertical-scroll-proportion="-10.461538" vertical-offset="0" max-vertical-offset="408" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/views/regular/shortcuts/grid/videoLink.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="10" selection-start="484" selection-end="556" vertical-scroll-proportion="-11.115385" vertical-offset="0" max-vertical-offset="408" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/controllers/ShortcutsController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="49" column="8" selection-start="1864" selection-end="1864" vertical-scroll-proportion="0.0" vertical-offset="374" max-vertical-offset="4505" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/protected/models/shortcuts/models/VideoShortcut.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="18" column="91" selection-start="315" selection-end="394" vertical-scroll-proportion="0.0" vertical-offset="121" max-vertical-offset="833" />
@@ -1496,21 +1384,6 @@
     <entry file="file://$PROJECT_DIR$/protected/models/shortcuts/models/EmptyShortcut.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="21" column="22" selection-start="329" selection-end="329" vertical-scroll-proportion="0.0" vertical-offset="357" max-vertical-offset="493" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/models/shortcuts/models/FileShortcut.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="51" selection-start="365" selection-end="365" vertical-scroll-proportion="0.3700121" vertical-offset="0" max-vertical-offset="827" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/views/regular/site/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="58" column="167" selection-start="6911" selection-end="7074" vertical-scroll-proportion="0.2004717" vertical-offset="816" max-vertical-offset="8177" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/models/shortcuts/models/BaseShortcut.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="8" selection-start="219" selection-end="236" vertical-scroll-proportion="-9.807693" vertical-offset="0" max-vertical-offset="850" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/protected/models/shortcuts/models/SearchBar.php">
@@ -1528,26 +1401,9 @@
         <state line="18" column="21" selection-start="527" selection-end="527" vertical-scroll-proportion="0.36084905" vertical-offset="0" max-vertical-offset="2550" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/carousel/java/FWDUltimate3DCarousel.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="251315" selection-start="409379" selection-end="409379" vertical-scroll-proportion="0.32469305" vertical-offset="0" max-vertical-offset="733" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/models/shortcuts/models/CarouselPage.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="98" column="0" selection-start="3978" selection-end="3978" vertical-scroll-proportion="-6.509804" vertical-offset="1334" max-vertical-offset="2703">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vendor/carousel/load/html_content.css">
       <provider selected="true" editor-type-id="text-editor">
         <state line="16" column="24" selection-start="396" selection-end="396" vertical-scroll-proportion="-9.88" vertical-offset="25" max-vertical-offset="5389" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/carousel/java/FWDUltimate3DCarousel_uncompressed.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="618" column="42" selection-start="17683" selection-end="17699" vertical-scroll-proportion="25.52" vertical-offset="11144" max-vertical-offset="365483" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/css/regular/base/shortcuts.css">
@@ -1587,36 +1443,271 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/protected/models/shortcuts/models/HomeBar.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="91" selection-start="346" selection-end="346" vertical-scroll-proportion="0.3236111" vertical-offset="90" max-vertical-offset="833">
-          <folding />
-        </state>
+        <state line="19" column="91" selection-start="346" selection-end="346" vertical-scroll-proportion="0.3236111" vertical-offset="90" max-vertical-offset="833" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/protected/models/shortcuts/models/LibraryLinkShortcut.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="33" selection-start="1214" selection-end="1214" vertical-scroll-proportion="0.62059236" vertical-offset="121" max-vertical-offset="969">
+        <state line="33" column="33" selection-start="1214" selection-end="1214" vertical-scroll-proportion="0.62059236" vertical-offset="121" max-vertical-offset="969" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/controllers/SiteController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="40" selection-start="56" selection-end="88" vertical-scroll-proportion="0.0" vertical-offset="68" max-vertical-offset="2686">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/controllers/AdminController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="8415">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/controllers/AuthController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="25" selection-start="752" selection-end="752" vertical-scroll-proportion="0.0" vertical-offset="153" max-vertical-offset="2108">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.htaccess">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="17" selection-start="10" selection-end="17" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="746" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/controllers/RateController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="5" selection-start="88" selection-end="88" vertical-scroll-proportion="0.12028302" vertical-offset="0" max-vertical-offset="848">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/models/shortcuts/models/UrlShortcut.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="28" column="83" selection-start="642" selection-end="656" vertical-scroll-proportion="0.0" vertical-offset="476" max-vertical-offset="697">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/models/shortcuts/models/FileShortcut.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="29" column="69" selection-start="782" selection-end="782" vertical-scroll-proportion="0.0" vertical-offset="63" max-vertical-offset="714">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/models/shortcuts/models/QuickListShortcut.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="12" selection-start="740" selection-end="740" vertical-scroll-proportion="0.0" vertical-offset="208" max-vertical-offset="1173">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/views/regular/shortcuts/linkWrapper.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="22.846153" vertical-offset="594" max-vertical-offset="1224">
+          <folding>
+            <marker date="1407769357463" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1407769357463" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1407769357463" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1407769357463" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1407769357463" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1407769357463" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1407769357463" expanded="true" signature="-1:-1" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://db-console:/b3b4574f/5f689e70-8d5b-41e3-aaa1-c8c47e976102/">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="30" selection-start="30" selection-end="30" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="102">
+          <folding>
+            <marker date="0" expanded="true" signature="-1:-1" placeholder="select * fro..tbl_shortcut_page..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/models/shortcuts/models/WindowShortcut.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="52" selection-start="727" selection-end="767" vertical-scroll-proportion="-16.346153" vertical-offset="0" max-vertical-offset="1326">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/views/regular/shortcuts/page.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="727">
+          <folding>
+            <marker date="1424430112230" expanded="true" signature="-1:-1" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/regular/base/ribbon.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="90" column="28" selection-start="1859" selection-end="1859" vertical-scroll-proportion="0.9910314" vertical-offset="867" max-vertical-offset="4080">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/views/regular/site/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="357" column="49" selection-start="26522" selection-end="26522" vertical-scroll-proportion="0.35873017" vertical-offset="5843" max-vertical-offset="8177">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/carousel/java/FWDUltimate3DCarousel.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="35" selection-start="158099" selection-end="158099" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="340">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/carousel/java/FWDUltimate3DCarousel_uncompressed.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="21059" column="68" selection-start="638391" selection-end="638406" vertical-scroll-proportion="-18.88" vertical-offset="357531" max-vertical-offset="365483">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/regular/base/view-dialog-bar.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2261">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/regular/base/search-view.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="12206">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/regular/base/search-processor.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1037">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/protected/views/regular/shortcuts/searchBar.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="113" column="55" selection-start="5058" selection-end="5058" vertical-scroll-proportion="0.42372882" vertical-offset="1646" max-vertical-offset="2295" />
+        <state line="21" column="32" selection-start="927" selection-end="927" vertical-scroll-proportion="-8.384615" vertical-offset="88" max-vertical-offset="2244">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/models/shortcuts/models/BaseShortcut.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="28" column="12" selection-start="482" selection-end="482" vertical-scroll-proportion="0.66096425" vertical-offset="51" max-vertical-offset="884">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/models/shortcuts/models/SearchShortcut.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="50" column="164" selection-start="1936" selection-end="2171" vertical-scroll-proportion="-16.346153" vertical-offset="425" max-vertical-offset="1547">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/models/shortcuts/models/SubSearchTemplate.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="27" selection-start="847" selection-end="847" vertical-scroll-proportion="-17.0" vertical-offset="0" max-vertical-offset="629">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/views/regular/shortcuts/searchResult.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="85" column="0" selection-start="4443" selection-end="4443" vertical-scroll-proportion="-18.346153" vertical-offset="968" max-vertical-offset="1598">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/views/regular/shortcuts/subSearchTemplatesPanel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="0" selection-start="285" selection-end="285" vertical-scroll-proportion="-5.8846154" vertical-offset="0" max-vertical-offset="1241">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/protected/config/params.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="0" selection-start="248" selection-end="248" vertical-scroll-proportion="0.25679758" vertical-offset="0" max-vertical-offset="662" />
+        <state line="8" column="22" selection-start="242" selection-end="242" vertical-scroll-proportion="0.21150856" vertical-offset="0" max-vertical-offset="643">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/regular/base/shortcuts-search.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="0" selection-start="383" selection-end="383" vertical-scroll-proportion="0.66068757" vertical-offset="0" max-vertical-offset="669">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/regular/base/shortcuts-search.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="626" column="80" selection-start="20955" selection-end="20955" vertical-scroll-proportion="0.0" vertical-offset="10642" max-vertical-offset="12580">
+          <folding>
+            <marker date="1426080026490" expanded="false" signature="-1:-1" placeholder="..." />
+          </folding>
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/regular/base/shortcuts.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="465" column="77" selection-start="15011" selection-end="15011" vertical-scroll-proportion="0.8059259" vertical-offset="7361" max-vertical-offset="10098" />
+        <state line="227" column="46" selection-start="7770" selection-end="7770" vertical-scroll-proportion="1.9335303" vertical-offset="2550" max-vertical-offset="10659">
+          <folding>
+            <marker date="1426070321346" expanded="true" signature="-1:-1" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/controllers/RedirectController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="9" selection-start="336" selection-end="336" vertical-scroll-proportion="-8.5" vertical-offset="0" max-vertical-offset="340">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/controllers/ShortcutsController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="46" column="60" selection-start="1747" selection-end="1747" vertical-scroll-proportion="1.1045197" vertical-offset="0" max-vertical-offset="4522">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/models/shortcuts/records/ShortcutsLinkRecord.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="34" column="40" selection-start="658" selection-end="679" vertical-scroll-proportion="0.29661018" vertical-offset="368" max-vertical-offset="1700">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/models/shortcuts/models/PageModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="32" column="51" selection-start="795" selection-end="795" vertical-scroll-proportion="-13.692307" vertical-offset="188" max-vertical-offset="850">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/protected/models/shortcuts/models/CarouselShortcut.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="55" column="34" selection-start="1205" selection-end="1205" vertical-scroll-proportion="1.0859466" vertical-offset="0" max-vertical-offset="1836">
+        <state line="35" column="34" selection-start="963" selection-end="963" vertical-scroll-proportion="-12.384615" vertical-offset="273" max-vertical-offset="1003">
+          <folding>
+            <element signature="e#967#2390#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/models/shortcuts/models/CarouselPage.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="32" column="50" selection-start="626" selection-end="626" vertical-scroll-proportion="-1.6827794" vertical-offset="1658" max-vertical-offset="2720">
           <folding />
         </state>
       </provider>

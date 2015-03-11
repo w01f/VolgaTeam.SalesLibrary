@@ -11,6 +11,7 @@
 		public $homeBar;
 		public $searchBar;
 		public $viewPath;
+		public $ribbonLogoPath;
 
 		/**
 		 * @var BaseShortcut[]
@@ -26,6 +27,9 @@
 			$this->idTab = $pageRecord->id_tab;
 			$this->homeBar = new HomeBar($pageRecord);
 			$this->searchBar = new SearchBar($pageRecord);
+			$baseUrl = Yii::app()->getBaseUrl(true);
+			$customRibbonPath = $baseUrl . $pageRecord->source_path . '/rbnlogo.png' . '?' . $pageRecord->id;
+			$this->ribbonLogoPath = @getimagesize($customRibbonPath) ? $customRibbonPath : '';
 			/** @var $linkRecords ShortcutsLinkRecord[] */
 			$this->links = array();
 			$linkRecords = $pageRecord->getLinks();

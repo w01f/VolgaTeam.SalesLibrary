@@ -8,9 +8,10 @@
 	<div class="logo-list">
 		<ul class="nav nav-pills">
 			<? foreach ($templates as $template): ?>
-				<li>
-					<a href="#"><img src="<? echo $template->imagePath . '?' . $id; ?>" alt="<? echo $template->tooltip; ?>" data-toggle="tooltip" title="<? echo $template->tooltip; ?>">
-						<div class="search-conditions" style="display: none;">
+				<li class="<? if ($template->disabled): ?>disabled<? else: ?>enabled<? endif; ?>">
+					<a href="#">
+						<img src="<? echo $template->imagePath . '?' . $id; ?>"<? if (!$template->disabled): ?> alt="<? echo $template->tooltip; ?>" data-toggle="tooltip" title="<? echo $template->tooltip; ?><? endif; ?>">
+							<div class="search-conditions" style="display: none;">
 							<? if (isset($template->conditions->text)): ?>
 								<div class="search-text"><? echo $template->conditions->text; ?></div>
 							<? endif; ?>

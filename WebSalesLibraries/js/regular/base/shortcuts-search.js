@@ -10,6 +10,7 @@
 		var shortcutTitle = content.find('.shortcut-title').html();
 		var sortColumn = content.find('.sort-column').html();
 		var sortDirection = content.find('.sort-direction').html();
+		var noCatsLogoPath = content.find('.no-cats-logo-path').text();
 
 		var baseSearchConditionsHtml = $('<div></div>').append(content.find('.search-conditions')).html();
 		var homeBarHtml = $('<div></div>').append(content.parent().find('.shortcuts-home-bar')).html();
@@ -625,7 +626,7 @@
 						linkIds.push($(this).html());
 					});
 					if (linkIds.length == 0)
-						content.find(".links-grid-body-container").html('<img src="' + window.BaseUrl + 'images/shortcuts/no_cats.png">');
+						content.find(".links-grid-body-container").html('<img src="' + noCatsLogoPath + '">');
 					if (hideResults)
 					{
 						var linksFoundTag = resultsBar.find('#search-links-info-count span');
@@ -646,10 +647,14 @@
 			var initPanel = function ()
 			{
 				var logoSelector = sideBar.find('.logo-list ul');
-				sideBar.find('.logo-list ul li img').tooltip({animation: false, trigger: 'hover', placement: 'bottom', delay: { show: 500, hide: 100 }});
-				logoSelector.find('a').on('click', function ()
+				sideBar.find('.logo-list ul li.enabled img').tooltip({animation: false, trigger: 'hover', placement: 'bottom', delay: { show: 500, hide: 100 }});
+				var selectorItems = logoSelector.find('li.enabled a');
+				var firstItem = selectorItems.first();
+				if (firstItem != null)
+					firstItem.addClass('opened');
+				selectorItems.on('click', function ()
 				{
-					logoSelector.find('a').removeClass('opened');
+					selectorItems.removeClass('opened');
 					$(this).addClass('opened');
 					getSearchResults(0);
 				});

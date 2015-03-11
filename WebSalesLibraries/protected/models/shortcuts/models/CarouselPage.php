@@ -1,4 +1,5 @@
 <?
+
 	/**
 	 * Class CarouselPage
 	 */
@@ -30,7 +31,7 @@
 			foreach ($this->links as $link)
 			{
 				/** @var $link CarouselShortcut */
-				$dataList[] = $link->getCategoryContent();
+				$dataList[] = $link->getCategoryContent($this);
 			}
 
 			return array(

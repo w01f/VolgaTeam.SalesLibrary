@@ -5,6 +5,7 @@
 	 */
 	class CarouselShortcut extends BaseShortcut
 	{
+		public $ribbonLogoPath;
 		/** @var BaseShortcut[] */
 		public $subLinks;
 
@@ -15,14 +16,21 @@
 			$linkConfig = new DOMDocument();
 			$linkConfig->loadXML($linkRecord->config);
 
+			$baseUrl = Yii::app()->getBaseUrl(true);
+			$this->ribbonLogoPath = $baseUrl . $linkRecord->source_path . '/rbnlogo.png' . '?' . $linkRecord->id_page . $linkRecord->id;
+
 			$this->subLinks = array();
+			/* @var $subLinkRecords ShortcutsLinkRecord[] */
 			$subLinkRecords = $linkRecord->getSubLinks();
 			foreach ($subLinkRecords as $subLinkRecord)
 				$this->subLinks[] = $subLinkRecord->getModel();
 		}
 
-		/** @return array */
-		public function getCategoryContent()
+		/**
+		 * @param $parentPage CarouselPage
+		 * @return array
+		 */
+		public function getCategoryContent($parentPage)
 		{
 			$dataItems = array();
 			$mediaItems = array();
@@ -87,6 +95,7 @@
 			}
 			return array(
 				'name' => $this->title,
+				'logo' => @getimagesize($this->ribbonLogoPath) ? $this->ribbonLogoPath : $parentPage->ribbonLogoPath,
 				'dataItems' => $dataItems,
 				'mediaItems' => $mediaItems
 			);

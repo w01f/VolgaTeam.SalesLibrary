@@ -14,20 +14,10 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule . index.php
 
+RewriteCond %{REQUEST_URI} secure_links/(.*)/index.html
+RewriteCond %{REQUEST_URI} !redirect
+RewriteRule ^(.*)$ http://%{HTTP_HOST}/redirect/index?secured_uri=$1 [L,R=301,QSA]
+
 <Limit PROPFIND>
 Require valid-user
 </Limit>
-
-#RewriteCond %{HTTP_REFERER} !^http://(www\.)?localhost/.*$ [NC]
-#RewriteCond %{HTTP_REFERER} !^http://(www\.)?isalesdepot.com/.*$ [NC]
-#RewriteCond %{HTTP_REFERER} !^http://(www\.)?wplgipad.com/.*$ [NC]
-#RewriteCond %{HTTP_REFERER} !^http://(www\.)?raycomsales.com/.*$ [NC]
-#RewriteCond %{HTTP_REFERER} !^http://(www\.)?raycomresults.tv/.*$ [NC]
-#RewriteCond %{HTTP_REFERER} !^http://(www\.)?wuddupdog.com/.*$ [NC]
-#RewriteCond %{HTTP_REFERER} !^http://(www\.)?ksatipad.com/.*$ [NC]
-#RewriteRule .(gif|png|jpeg|jpg)$ – [F]
-#pdf|ppt|pptx|doc|docx|xls|xlsx|mp4|ogv|wmv
-
-#XSendFile on
-
-

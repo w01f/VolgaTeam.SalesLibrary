@@ -83,4 +83,7 @@
 	<? if (isset($searchContainer->conditions->sortDirection)): ?>
 		<div class="sort-direction"><? echo $searchContainer->conditions->sortDirection; ?></div>
 	<? endif; ?>
+	<? if (isset($searchContainer->conditionNotMatchLogoPath)): ?>
+		<div class="no-cats-logo-path"><? echo $searchContainer->conditionNotMatchLogoPath; ?></div>
+	<? endif; ?>
 </div>

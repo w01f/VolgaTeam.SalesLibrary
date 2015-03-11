@@ -44,6 +44,7 @@
 					$pageModel = $pageRecord->getModel();
 					echo CJSON::encode(array(
 						'type' => $pageModel->type,
+						'logo' => $pageModel->ribbonLogoPath,
 						'content' => $this->renderPartial('page', array('page' => $pageModel), true),
 						'displayParameters' => $pageModel->getDisplayParameters()
 					));

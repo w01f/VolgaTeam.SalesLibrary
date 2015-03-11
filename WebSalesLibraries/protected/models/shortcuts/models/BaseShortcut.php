@@ -6,6 +6,7 @@
 	abstract class BaseShortcut
 	{
 		public $id;
+		public $pageId;
 		public $type;
 		public $name;
 		public $tooltip;
@@ -25,6 +26,7 @@
 		{
 			$this->linkRecord = $linkRecord;
 			$this->id = $linkRecord->id;
+			$this->pageId = $linkRecord->id_page;
 			$linkConfig = new DOMDocument();
 			$linkConfig->loadXML($linkRecord->config);
 			$this->type = trim($linkConfig->getElementsByTagName("Type")->item(0)->nodeValue);

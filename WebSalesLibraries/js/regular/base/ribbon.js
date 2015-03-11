@@ -88,8 +88,7 @@
 				tabNames[index] = id;
 
 				var title = $(this).find('.ribbon-title');
-				var tabLogo = $(this).find('.ribbon-tab-logo');
-				var linkLogo = $(this).find('.ribbon-link-logo');
+				var tabLogos = $(this).find('.ribbon-tab-logo');
 				var isBackstage = $(this).hasClass('file');
 				header.append('<div id="ribbon-tab-header-' + index + '" class="ribbon-tab-header"></div>');
 				var thisTabHeader = header.find('#ribbon-tab-header-' + index);
@@ -103,9 +102,6 @@
 						that.switchToTabByIndex(index, id);
 						that.goToBackstage();
 					};
-					thisTabHeader.click(tabClickHandler);
-					tabLogo.click(tabClickHandler);
-					linkLogo.click(tabClickHandler);
 				}
 				else
 				{
@@ -120,11 +116,9 @@
 						that.returnFromBackstage();
 						that.switchToTabByIndex(index, id);
 					};
-					thisTabHeader.click(tabClickHandler);
-					tabLogo.click(tabClickHandler);
-					linkLogo.click(tabClickHandler);
 				}
-
+				thisTabHeader.click(tabClickHandler);
+				tabLogos.click(tabClickHandler);
 				$(this).hide();
 			});
 

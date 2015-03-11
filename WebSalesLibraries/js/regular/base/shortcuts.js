@@ -52,7 +52,8 @@
 					var content = $('#content');
 					content.html(data.content);
 
-					initHomeBar(content);
+					initPageLogo(data);
+					initHomeBar();
 					initSearchBar(pageId);
 
 					switch (data.type)
@@ -105,6 +106,17 @@
 							{
 								that.updateContentSize();
 								that.selectedCarouselCategory = ev.id + 1;
+								var logo = data.displayParameters.predefinedDataList[ev.id].logo;
+								var shortcutsTab = $('#' + tabId);
+								shortcutsTab.find('.ribbon-tab-logo').hide();
+								if (logo.length > 0)
+								{
+									var pageLogo = shortcutsTab.find('.ribbon-shortcut-custom-logo');
+									pageLogo.attr('src', logo);
+									pageLogo.show();
+								}
+								else
+									shortcutsTab.find('.ribbon-shortcut-tab-logo').show();
 							});
 							break;
 					}
@@ -114,16 +126,37 @@
 			});
 		};
 
-		var initHomeBar = function (content)
+
+		var initPageLogo = function (data)
 		{
+			var content = $('#content');
 			var pageContent = content.find('.shortcuts-page-content');
 			var tabId = pageContent.attr('id').replace("shortcuts-page-content-", "");
-			var pageLogo = $('#shortcuts-tab-' + tabId).find('.ribbon-tab-logo');
-			pageLogo.show();
+			var shortcutsTab = $('#shortcuts-tab-' + tabId);
+			var tabLogos = shortcutsTab.find('.ribbon-tab-logo');
+			tabLogos.hide();
+			var ribbonLogoPath = data.logo;
+			if (ribbonLogoPath.length > 0)
+			{
+				var pageLogo = shortcutsTab.find('.ribbon-shortcut-custom-logo');
+				pageLogo.attr('src', ribbonLogoPath);
+				pageLogo.show();
+			}
+			else
+				shortcutsTab.find('.ribbon-shortcut-tab-logo').show();
+		};
+
+		var initHomeBar = function ()
+		{
+			var content = $('#content');
+			var pageContent = content.find('.shortcuts-page-content');
+			var tabId = pageContent.attr('id').replace("shortcuts-page-content-", "");
+			var tabPageLogo = $('#shortcuts-tab-' + tabId).find('.ribbon-tab-logo');
 			content.find('.shortcuts-home-bar .logo-container img').on('click', function ()
 			{
-				pageLogo.trigger("click");
+				tabPageLogo.trigger("click");
 			});
+
 			content.find('.shortcuts-home-bar .buttons-container img').on('click', function (e)
 			{
 				var isExpanded = $(this).hasClass('expanded');
@@ -393,6 +426,15 @@
 							var linkType = dataObject.find('.link-type').html();
 							var url = dataObject.find('.url').text();
 							var ribbonLogoPath = dataObject.find('.ribbon-logo-path');
+							shortcutsTab.find('.ribbon-tab-logo').hide();
+							if (ribbonLogoPath.length > 0)
+							{
+								var linkLogo = shortcutsTab.find('.ribbon-shortcut-custom-logo');
+								linkLogo.attr('src', ribbonLogoPath.html());
+								linkLogo.show();
+							}
+							else
+								shortcutsTab.find('.ribbon-shortcut-tab-logo').show();
 							$.ajax({
 								type: "POST",
 								url: url,
@@ -423,15 +465,6 @@
 									else
 										pageContent.html("<div class='padding'>" + msg + "</div>");
 									content.animate({scrollTop: 0}, 1);
-
-									var linkLogo = shortcutsTab.find('.ribbon-link-logo');
-									linkLogo.hide();
-									if (ribbonLogoPath.length > 0)
-									{
-										linkLogo.attr('src', ribbonLogoPath.html());
-										shortcutsTab.find('.ribbon-tab-logo').hide();
-										linkLogo.show();
-									}
 
 									var shortcutTitle = pageContent.find('.shortcut-title').html();
 									$('.shortcuts-home-bar .title').html(shortcutTitle);

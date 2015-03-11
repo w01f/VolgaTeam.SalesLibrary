@@ -23,7 +23,7 @@
 			$this->samePage = $samePageTags->length > 0 ? filter_var(trim($samePageTags->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : false;
 			$baseUrl = Yii::app()->getBaseUrl(true);
 			$this->imagePath = $baseUrl . $linkRecord->image_path . '?' . $linkRecord->id_page . $linkRecord->id;
-			$this->ribbonLogoPath = $baseUrl . $linkRecord->source_path . '/link_logo.png' . '?' . $linkRecord->id_page . $linkRecord->id;
+			$this->ribbonLogoPath = $baseUrl . $linkRecord->source_path . '/rbnlogo.png' . '?' . $linkRecord->id_page . $linkRecord->id;
 			$this->sourceLink = Yii::app()->createAbsoluteUrl('shortcuts/getQuickList', array('linkId' => $linkRecord->id, 'samePage' => $this->samePage));
 		}
 

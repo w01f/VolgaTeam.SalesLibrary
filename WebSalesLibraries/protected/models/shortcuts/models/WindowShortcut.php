@@ -24,7 +24,7 @@
 			$titleTags = $linkConfig->getElementsByTagName("Title");
 			$this->title = $titleTags->length > 0 ? trim($titleTags->item(0)->nodeValue) : '';
 			$baseUrl = Yii::app()->getBaseUrl(true);
-			$this->ribbonLogoPath = $baseUrl . $linkRecord->source_path . '/link_logo.png' . '?' . $linkRecord->id_page . $linkRecord->id;
+			$this->ribbonLogoPath = $baseUrl . $linkRecord->source_path . '/rbnlogo.png' . '?' . $linkRecord->id_page . $linkRecord->id;
 			$this->sourceLink = Yii::app()->createAbsoluteUrl('shortcuts/getWindowShortcut', array('linkId' => $linkRecord->id, 'samePage' => $this->samePage));
 		}
 

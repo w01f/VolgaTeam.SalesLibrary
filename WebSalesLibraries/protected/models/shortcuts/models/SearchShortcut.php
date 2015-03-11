@@ -16,6 +16,7 @@
 		public $showSubSearchTemplates;
 		public $subSearchDefaultView;
 		public $subConditions;
+		public $conditionNotMatchLogoPath;
 
 		/**
 		 * @param $linkRecord
@@ -31,7 +32,14 @@
 			$baseUrl = Yii::app()->getBaseUrl(true);
 			$samePageTags = $linkConfig->getElementsByTagName("OpenOnSamePage");
 			$this->samePage = $samePageTags->length > 0 ? filter_var(trim($samePageTags->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : false;
-			$this->ribbonLogoPath = $baseUrl . $linkRecord->source_path . '/link_logo.png' . '?' . $linkRecord->id_page . $linkRecord->id;
+			$this->ribbonLogoPath = $baseUrl . $linkRecord->source_path . '/rbnlogo.png' . '?' . $linkRecord->id_page . $linkRecord->id;
+
+			$noCatsCustomImagePath = $baseUrl . $linkRecord->source_path . '/no_cats.png' . '?' . $linkRecord->id_page . $linkRecord->id;
+			if (isset($noCatsCustomImagePath) && @getimagesize($noCatsCustomImagePath))
+				$this->conditionNotMatchLogoPath = $noCatsCustomImagePath;
+			else
+				$this->conditionNotMatchLogoPath = $baseUrl . '/images/shortcuts/no_cats.png' . '?' . $linkRecord->id_page . $linkRecord->id;
+
 			$this->sourceLink = Yii::app()->createAbsoluteUrl('shortcuts/getSearchShortcut', array('linkId' => $linkRecord->id, 'samePage' => $this->samePage));
 			$showResultsBarTags = $linkConfig->getElementsByTagName("ShowResultsBar");
 			$this->showResultsBar = $showResultsBarTags->length > 0 ? filter_var(trim($showResultsBarTags->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : true;
