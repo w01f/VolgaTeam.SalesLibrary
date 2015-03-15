@@ -46,6 +46,7 @@
 			this.rbSecurityBlackList = new System.Windows.Forms.RadioButton();
 			this.pnSecurityUserList = new System.Windows.Forms.Panel();
 			this.pnSecurityUserListGrid = new System.Windows.Forms.Panel();
+			this.buttonXImport = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXSecurityUserListClearAll = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXSecurityUserListSelectAll = new DevComponents.DotNetBar.ButtonX();
 			this.circularSecurityUserListProgress = new DevComponents.DotNetBar.Controls.CircularProgress();
@@ -166,7 +167,7 @@
 			this.gridControlSecurityUserList.Name = "gridControlSecurityUserList";
 			this.gridControlSecurityUserList.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemCheckEditSecurityUserList});
-			this.gridControlSecurityUserList.Size = new System.Drawing.Size(296, 233);
+			this.gridControlSecurityUserList.Size = new System.Drawing.Size(315, 233);
 			this.gridControlSecurityUserList.TabIndex = 6;
 			this.gridControlSecurityUserList.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewSecurityGroups,
@@ -248,7 +249,7 @@
 			this.laHeader.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.laHeader.Location = new System.Drawing.Point(0, 0);
 			this.laHeader.Name = "laHeader";
-			this.laHeader.Size = new System.Drawing.Size(306, 24);
+			this.laHeader.Size = new System.Drawing.Size(325, 24);
 			this.laHeader.TabIndex = 0;
 			this.laHeader.Text = "Manage Security";
 			this.laHeader.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -260,7 +261,7 @@
 			this.pnMain.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.pnMain.Location = new System.Drawing.Point(0, 24);
 			this.pnMain.Name = "pnMain";
-			this.pnMain.Size = new System.Drawing.Size(306, 606);
+			this.pnMain.Size = new System.Drawing.Size(325, 606);
 			this.pnMain.TabIndex = 1;
 			// 
 			// pnData
@@ -275,7 +276,7 @@
 			this.pnData.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.pnData.Location = new System.Drawing.Point(0, 47);
 			this.pnData.Name = "pnData";
-			this.pnData.Size = new System.Drawing.Size(306, 559);
+			this.pnData.Size = new System.Drawing.Size(325, 559);
 			this.pnData.TabIndex = 1;
 			// 
 			// rbSecurityBlackList
@@ -307,11 +308,12 @@
 			this.pnSecurityUserList.ForeColor = System.Drawing.Color.Black;
 			this.pnSecurityUserList.Location = new System.Drawing.Point(5, 155);
 			this.pnSecurityUserList.Name = "pnSecurityUserList";
-			this.pnSecurityUserList.Size = new System.Drawing.Size(296, 375);
+			this.pnSecurityUserList.Size = new System.Drawing.Size(315, 375);
 			this.pnSecurityUserList.TabIndex = 41;
 			// 
 			// pnSecurityUserListGrid
 			// 
+			this.pnSecurityUserListGrid.Controls.Add(this.buttonXImport);
 			this.pnSecurityUserListGrid.Controls.Add(this.buttonXSecurityUserListClearAll);
 			this.pnSecurityUserListGrid.Controls.Add(this.buttonXSecurityUserListSelectAll);
 			this.pnSecurityUserListGrid.Controls.Add(this.gridControlSecurityUserList);
@@ -319,21 +321,33 @@
 			this.pnSecurityUserListGrid.Enabled = false;
 			this.pnSecurityUserListGrid.Location = new System.Drawing.Point(0, 95);
 			this.pnSecurityUserListGrid.Name = "pnSecurityUserListGrid";
-			this.pnSecurityUserListGrid.Size = new System.Drawing.Size(296, 280);
+			this.pnSecurityUserListGrid.Size = new System.Drawing.Size(315, 280);
 			this.pnSecurityUserListGrid.TabIndex = 8;
+			// 
+			// buttonXImport
+			// 
+			this.buttonXImport.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXImport.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXImport.Location = new System.Drawing.Point(217, 6);
+			this.buttonXImport.Name = "buttonXImport";
+			this.buttonXImport.Size = new System.Drawing.Size(94, 32);
+			this.buttonXImport.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.superTooltip.SetSuperTooltip(this.buttonXImport, new DevComponents.DotNetBar.SuperTooltipInfo("Import", "", "Load selected users from file", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
+			this.buttonXImport.TabIndex = 9;
+			this.buttonXImport.Text = "Import";
+			this.buttonXImport.Click += new System.EventHandler(this.buttonXImport_Click);
 			// 
 			// buttonXSecurityUserListClearAll
 			// 
 			this.buttonXSecurityUserListClearAll.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-			this.buttonXSecurityUserListClearAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXSecurityUserListClearAll.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-			this.buttonXSecurityUserListClearAll.Location = new System.Drawing.Point(160, 6);
+			this.buttonXSecurityUserListClearAll.Location = new System.Drawing.Point(106, 6);
 			this.buttonXSecurityUserListClearAll.Name = "buttonXSecurityUserListClearAll";
-			this.buttonXSecurityUserListClearAll.Size = new System.Drawing.Size(135, 32);
+			this.buttonXSecurityUserListClearAll.Size = new System.Drawing.Size(94, 32);
 			this.buttonXSecurityUserListClearAll.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.superTooltip.SetSuperTooltip(this.buttonXSecurityUserListClearAll, new DevComponents.DotNetBar.SuperTooltipInfo("REMOVE ALL", "", "REMOVE ALL Groups and Users", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
+			this.superTooltip.SetSuperTooltip(this.buttonXSecurityUserListClearAll, new DevComponents.DotNetBar.SuperTooltipInfo("Remove All", "", "REMOVE ALL Groups and Users", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
 			this.buttonXSecurityUserListClearAll.TabIndex = 8;
-			this.buttonXSecurityUserListClearAll.Text = "REMOVE ALL";
+			this.buttonXSecurityUserListClearAll.Text = "Remove All";
 			this.buttonXSecurityUserListClearAll.Click += new System.EventHandler(this.buttonXSecurityUserListClearAll_Click);
 			// 
 			// buttonXSecurityUserListSelectAll
@@ -342,11 +356,11 @@
 			this.buttonXSecurityUserListSelectAll.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXSecurityUserListSelectAll.Location = new System.Drawing.Point(2, 6);
 			this.buttonXSecurityUserListSelectAll.Name = "buttonXSecurityUserListSelectAll";
-			this.buttonXSecurityUserListSelectAll.Size = new System.Drawing.Size(128, 32);
+			this.buttonXSecurityUserListSelectAll.Size = new System.Drawing.Size(87, 32);
 			this.buttonXSecurityUserListSelectAll.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.superTooltip.SetSuperTooltip(this.buttonXSecurityUserListSelectAll, new DevComponents.DotNetBar.SuperTooltipInfo("SELECT ALL", "", "SELECT ALL Groups and Users", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
+			this.superTooltip.SetSuperTooltip(this.buttonXSecurityUserListSelectAll, new DevComponents.DotNetBar.SuperTooltipInfo("Select All", "", "SELECT ALL Groups and Users", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
 			this.buttonXSecurityUserListSelectAll.TabIndex = 7;
-			this.buttonXSecurityUserListSelectAll.Text = "SELECT ALL";
+			this.buttonXSecurityUserListSelectAll.Text = "Select All";
 			this.buttonXSecurityUserListSelectAll.Click += new System.EventHandler(this.buttonXSecurityUserListSelectAll_Click);
 			// 
 			// circularSecurityUserListProgress
@@ -363,7 +377,7 @@
 			this.circularSecurityUserListProgress.ProgressBarType = DevComponents.DotNetBar.eCircularProgressType.Dot;
 			this.circularSecurityUserListProgress.ProgressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
 			this.circularSecurityUserListProgress.ProgressTextFormat = "";
-			this.circularSecurityUserListProgress.Size = new System.Drawing.Size(296, 39);
+			this.circularSecurityUserListProgress.Size = new System.Drawing.Size(315, 39);
 			this.circularSecurityUserListProgress.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP;
 			this.circularSecurityUserListProgress.TabIndex = 4;
 			this.circularSecurityUserListProgress.Visible = false;
@@ -379,7 +393,7 @@
 			this.laSecurityUserListInfo.Location = new System.Drawing.Point(0, 0);
 			this.laSecurityUserListInfo.Name = "laSecurityUserListInfo";
 			this.laSecurityUserListInfo.Padding = new System.Windows.Forms.Padding(0, 20, 0, 20);
-			this.laSecurityUserListInfo.Size = new System.Drawing.Size(296, 56);
+			this.laSecurityUserListInfo.Size = new System.Drawing.Size(315, 56);
 			this.laSecurityUserListInfo.TabIndex = 5;
 			this.laSecurityUserListInfo.Text = "labelControl";
 			this.laSecurityUserListInfo.Visible = false;
@@ -391,7 +405,7 @@
 			this.rbSecurityForbidden.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.rbSecurityForbidden.Image = global::FileManager.Properties.Resources.TagsSecurityHiddenWidget;
 			this.rbSecurityForbidden.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			this.rbSecurityForbidden.Location = new System.Drawing.Point(153, 6);
+			this.rbSecurityForbidden.Location = new System.Drawing.Point(172, 6);
 			this.rbSecurityForbidden.Name = "rbSecurityForbidden";
 			this.rbSecurityForbidden.Size = new System.Drawing.Size(147, 38);
 			this.superTooltip.SetSuperTooltip(this.rbSecurityForbidden, new DevComponents.DotNetBar.SuperTooltipInfo("Hidden Everywhere", "", "This link is HIDDEN in the Local Library and the Web Library", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
@@ -440,7 +454,7 @@
 			this.rbSecurityWhiteList.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.rbSecurityWhiteList.Image = global::FileManager.Properties.Resources.TagsSecurityWhiteListWidget;
 			this.rbSecurityWhiteList.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			this.rbSecurityWhiteList.Location = new System.Drawing.Point(153, 58);
+			this.rbSecurityWhiteList.Location = new System.Drawing.Point(172, 58);
 			this.rbSecurityWhiteList.Name = "rbSecurityWhiteList";
 			this.rbSecurityWhiteList.Size = new System.Drawing.Size(147, 38);
 			this.superTooltip.SetSuperTooltip(this.rbSecurityWhiteList, new DevComponents.DotNetBar.SuperTooltipInfo("Enable White List", "", "Enable White list for Groups or Users for this link in the Web Sales Library", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
@@ -475,7 +489,7 @@
 			this.pnButtons.Dock = System.Windows.Forms.DockStyle.Top;
 			this.pnButtons.Location = new System.Drawing.Point(0, 0);
 			this.pnButtons.Name = "pnButtons";
-			this.pnButtons.Size = new System.Drawing.Size(306, 47);
+			this.pnButtons.Size = new System.Drawing.Size(325, 47);
 			this.pnButtons.TabIndex = 0;
 			// 
 			// buttonXReset
@@ -486,7 +500,7 @@
 			this.buttonXReset.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXReset.Location = new System.Drawing.Point(5, 8);
 			this.buttonXReset.Name = "buttonXReset";
-			this.buttonXReset.Size = new System.Drawing.Size(296, 30);
+			this.buttonXReset.Size = new System.Drawing.Size(315, 30);
 			this.buttonXReset.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXReset.TabIndex = 0;
 			this.buttonXReset.Text = "RESET ALL SECURITY for the Selected Links";
@@ -521,7 +535,7 @@
 			this.Controls.Add(this.laHeader);
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.Name = "SecurityEditor";
-			this.Size = new System.Drawing.Size(306, 630);
+			this.Size = new System.Drawing.Size(325, 630);
 			((System.ComponentModel.ISupportInitialize)(this.gridViewSecurityUsers)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEditSecurityUserList)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.gridControlSecurityUserList)).EndInit();
@@ -568,5 +582,6 @@
 		private DevExpress.XtraGrid.Columns.GridColumn gridColumnSecurityGroupName;
 		public System.Windows.Forms.RadioButton rbSecurityBlackList;
 		private DevComponents.DotNetBar.SuperTooltip superTooltip;
+		private DevComponents.DotNetBar.ButtonX buttonXImport;
 	}
 }

@@ -537,6 +537,13 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		{
 			_siteClient.DeleteUser(login, out message);
 		}
+
+		public IEnumerable<string> LoadUserLoginsFromFile(string filePath)
+		{
+			var document = new XmlDocument();
+			document.Load(filePath);
+			return document.SelectNodes(@"/Users/User").OfType<XmlNode>().Select(node => node.InnerText.ToLower());
+		}
 		#endregion
 
 		#region Groups

@@ -37,7 +37,6 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		string Serialize();
 		void Deserialize(XmlNode node);
 		string[] GetPreviewLinks(string format);
-		string GetTextContent();
 		void UpdateContent();
 		void ClearContent();
 		void DeleteRelatedLinks();
@@ -247,31 +246,6 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 					}
 			}
 			return size;
-		}
-
-		public string GetTextContent()
-		{
-			var result = string.Empty;
-			if (string.IsNullOrEmpty(ContainerPath)) return result;
-			var textContentFolder = Path.Combine(ContainerPath, "txt");
-			if (!Directory.Exists(textContentFolder)) return result;
-			foreach (string textContentFile in Directory.GetFiles(textContentFolder, "*.txt"))
-			{
-				using (var textContentStream = new StreamReader(textContentFile))
-				{
-					result = textContentStream.ReadToEnd();
-					result = result.Replace(Environment.NewLine, " ");
-					var sb = new StringBuilder();
-					foreach (var c in result.Where(c => (c >= '0' && c <= '9') || (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || c == '.' || c == '_' || c == ' '))
-					{
-						sb.Append(c);
-					}
-					result = sb.ToString();
-					textContentStream.Close();
-					break;
-				}
-			}
-			return result;
 		}
 
 		public virtual void UpdateContent()

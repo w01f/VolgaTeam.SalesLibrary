@@ -229,6 +229,30 @@ namespace FileManager.PresentationClasses.WallBin.LinkProperties
 			gridControlSecurityUserList.RefreshDataSource();
 		}
 
+		private void buttonXImport_Click(object sender, EventArgs e)
+		{
+			var library = (SalesDepot.CoreObjects.BusinessClasses.Library)_data.Parent.Parent.Parent;
+			if (library == null) return;
+			using (var dialog = new OpenFileDialog())
+			{
+				dialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+				dialog.Filter = "Xml files|*.xml";
+				dialog.Title = "Import Users from File";
+				if (dialog.ShowDialog() != DialogResult.OK) return;
+				var users = library.IPadManager.LoadUserLoginsFromFile(dialog.FileName).ToList();
+				foreach (var groupModel in _securityGroups.Where(g => g.users != null))
+				{
+					foreach (var userModel in groupModel.users)
+						userModel.selected = false;
+					foreach (var userModel in groupModel.users.Where(u => users.Any(loadedUser => loadedUser == u.login.ToLower())))
+						userModel.selected = true;
+					groupModel.selected = groupModel.users.Any(u => u.selected);
+				}
+				gridControlSecurityUserList.RefreshDataSource();
+				AppManager.Instance.ShowInfo("Import Complete");
+			}
+		}
+
 		private void OnGroupChildListIsEmpty(object sender, MasterRowEmptyEventArgs e)
 		{
 			e.IsEmpty = !(e.RowHandle != GridControl.InvalidRowHandle && _securityGroups[e.RowHandle].users != null && _securityGroups[e.RowHandle].users.Any());

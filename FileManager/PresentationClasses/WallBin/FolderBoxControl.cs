@@ -729,7 +729,7 @@ namespace FileManager.PresentationClasses.WallBin
 			}
 			Decorator.Parent.StateChanged = true;
 			UpdateButtonsStatus();
-			grFiles.DefaultCellStyle.SelectionBackColor = IsActive ? Color.Wheat : _folder.BackgroundWindowColor;
+			grFiles.DefaultCellStyle.SelectionBackColor = IsActive || !WallBinOptions.AllowEdit ? Color.Wheat : _folder.BackgroundWindowColor;
 		}
 
 		public void Save()
@@ -1601,6 +1601,7 @@ namespace FileManager.PresentationClasses.WallBin
 
 		private void toolStripMenuItemResetAll_Click(object sender, EventArgs e)
 		{
+			grFiles.ClearSelection();
 			var rows = grFiles.Rows.OfType<DataGridViewRow>().ToList();
 			foreach (var row in rows)
 			{
@@ -1612,7 +1613,7 @@ namespace FileManager.PresentationClasses.WallBin
 				link.ExtendedProperties.AssignedUsers = null;
 				link.ExtendedProperties.DeniedUsers = null;
 			}
-			Decorator.Parent.StateChanged = true;
+			UpdateAfterFolderChanged();
 		}
 		#endregion
 		#endregion

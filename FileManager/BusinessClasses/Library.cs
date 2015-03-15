@@ -593,15 +593,6 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 				else
 					break;
 			}
-			foreach (var previewContainer in PreviewContainers.OfType<VideoPreviewContainer>())
-			{
-				if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
-				{
-					previewContainer.UpdateThumbnails();
-				}
-				else
-					break;
-			}
 		}
 
 		public void DeleteDeadLinks(Guid[] deadLinkIdentifiers)
