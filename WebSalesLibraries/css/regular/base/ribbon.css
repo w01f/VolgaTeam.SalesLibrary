@@ -8,9 +8,7 @@ body
 .page
 {
 	border: 1px solid #a5acb5;
-	-webkit-box-shadow: #000000 0 0 10px;
-	-moz-box-shadow: #000000 0 0 10px;
-	box-shadow: #000000 0 0 10px;
+
 	background: #FFF;
 }
 
@@ -20,11 +18,8 @@ body
 	cursor: default;
 	font-size: 8pt;
 	padding-top: 10px;
-	background-color: #eaedf1;
-	border-bottom: 1px solid #8b9097;
-	-webkit-box-shadow: #8b9097 0 1px 3px;
-	-moz-box-shadow: #8b9097 0 1px 3px;
-	box-shadow: #8b9097 0 1px 3px;
+	background-color: #ffffff;
+	border-bottom: 1px solid #dddddd;
 	z-index: 25;
 	position: absolute;
 	top: 0;
@@ -63,26 +58,21 @@ body
 	margin: 0 5px;
 	padding: 5px 10px;
 	font-size: 8pt;
-	color: #444;
-	border: 1px solid #eaedf1;
-	border-bottom-color: #b6babf;
-	-webkit-border-radius: 4px 4px 0 0;
-	-moz-border-radius: 4px 4px 0 0;
-	border-radius: 4px 4px 0 0;
+	color: #777;
 	position: relative;
 	z-index: 40;
 }
 
 #ribbon.backstage .ribbon-tab-header
 {
-	border-bottom: 1px solid #1f48a1;
+	border-bottom: 1px solid #dddddd;
 	position: relative;
 }
 
 #ribbon .ribbon-tab-header:hover
 {
-	background: #f1f3f4;
-	border: 1px solid #b6babf;
+	background: #c6e2ff;
+	border: 1px solid #dddddd;
 	margin: -1px 4px;
 	cursor: pointer;
 	position: relative;
@@ -90,13 +80,14 @@ body
 
 #ribbon.backstage .ribbon-tab-header
 {
-	border-bottom: 1px solid #1f48a1;
+	border-bottom: 1px solid #ffffff;
 	position: relative;
 }
 
 #ribbon .ribbon-tab-header.sel, #ribbon .ribbon-tab-header.sel:hover
 {
 	background: #fff;
+	color: #4488e5;
 	margin: -1px 4px;
 	border: 1px solid #b6babf;
 	border-bottom-color: #fff;
@@ -108,11 +99,11 @@ body
 #ribbon .ribbon-tab-header.file
 {
 	padding: 5px 20px;
-	background: #2860b3;
+	background: #ffffff;
 	background: -webkit-gradient(linear, 0 0, 0 bottom, from(#4488e5), to(#2860b3));
 	background-image: -moz-linear-gradient(#4488e5, #2860b3);
 	-pie-background: linear-gradient(#4488e5, #2860b3);
-	border: 1px solid #1f48a1;
+	border: 1px solid #dddddd;
 	margin: -1px 4px;
 	border-bottom-color: #4488e5;
 	cursor: default;
@@ -122,10 +113,7 @@ body
 
 #ribbon .ribbon-tab-header.file:hover
 {
-	background: #3870c3;
-	background: -webkit-gradient(linear, 0 0, 0 bottom, from(#5498f5), to(#3870c3));
-	background: -moz-linear-gradient(#5498f5, #3870c3);
-	-pie-background: linear-gradient(#5498f5, #3870c3);
+	background: #fff;
 	border: 1px solid #1f48a1;
 	cursor: pointer;
 	border-bottom-color: #4488e5;
@@ -135,10 +123,7 @@ body
 
 #ribbon .ribbon-tab-header.file.sel
 {
-	background: #4488e5;
-	background: -webkit-gradient(linear, 0 0, 0 bottom, from(#2860b3), to(#4488e5));
-	background: -moz-linear-gradient(#2860b3, #4488e5);
-	-pie-background: linear-gradient(#2860b3, #4488e5);
+	background: #fff;
 	border: 1px solid #1f48a1;
 	cursor: pointer;
 	border-bottom-color: #4488e5;
@@ -151,10 +136,7 @@ body
 	height: 90px;
 	padding: 5px;
 	margin-top: 5px;
-	border-top: 1px solid #b6babf;
-	background: -webkit-gradient(linear, 0 0, 0 bottom, from(#ffffff), to(#eaedf1));
-	background: -moz-linear-gradient(#ffffff, #eaedf1);
-	-pie-background: linear-gradient(#ffffff, #eaedf1);
+	border-top: 1px solid #dddddd;
 	min-width: 500px;
 	z-index: 30;
 	-pie-watch-ancestors: 2;
@@ -229,7 +211,7 @@ body
 	border-left: 1px solid #E0E0E0;
 	border-right: 1px solid #fff;
 	margin: 0 5px;
-	height: 80px;
+	height: 92px;
 	position: relative;
 	width: 0;
 	float: left;
@@ -239,9 +221,6 @@ body
 {
 	padding: 4px 6px;
 	border: 1px solid transparent;
-	-webkit-border-radius: 3px 3px 3px 3px;
-	-moz-border-radius: 3px 3px 3px 3px;
-	border-radius: 3px 3px 3px 3px;
 	position: relative;
 }
 
@@ -329,15 +308,15 @@ body
 
 #ribbon .ribbon-button.sel
 {
-	border: 1px solid #F1C43F;
-	background: #fdeeb3;
+	border: 1px solid #c6e2ff;
+	background: #c6e2ff;
 	cursor: pointer;
 }
 
 #ribbon .ribbon-button.regular:hover
 {
-	border: 1px solid #F1C43F;
-	background: #fdeeb3;
+	border: 1px solid #c6e2ff;
+	background: #c6e2ff;
 	cursor: pointer;
 
 }
@@ -350,8 +329,8 @@ body
 
 #ribbon .ribbon-button:active
 {
-	border: 1px solid #F1C43F;
-	background: #F1C43F;
+	border: 1px solid #c6e2ff;
+	background: #c6e2ff;
 	cursor: pointer;
 }
 
@@ -424,25 +403,14 @@ body
 }
 
 #libraries-selector
+ {
+	 width: 220px;
+ }
+
+#libraries-selector .bootstrap-select
 {
+	margin-bottom: 3px;
 	width: 220px;
-}
-
-#libraries-selector select
-{
-	width: 220px;
-}
-
-#select-library, #select-page
-{
-	margin-bottom: 10px;
-	font-size: 9pt;
-	vertical-align: middle;
-	line-height: 15px;
-}
-
-#select-library option, #select-page option
-{
 }
 
 #page-logo
@@ -466,7 +434,7 @@ body
 	line-height: 80px;
 }
 
-.ribbon-news-container  .news-block .news-item
+.ribbon-news-container .news-block .news-item
 {
 	line-height: normal;
 	display: block;

@@ -422,7 +422,8 @@
 			{
 				self.mainHolder_do.setY(-(self.verticalMargins + self.buttonHeight));
 			}
-			self.getStyle().boxShadow = "0px 0px 3px " + self.shadowColor_str;
+			self.getStyle().boxShadow = "0px 0px 0px " + self.shadowColor_str;
+			self.getStyle().border = "1px solid lightgray";
 			FWDU3DCarModTweenMax.to(self.mainHolder_do, .8, {y: 0, ease: Expo.easeInOut});
 		};
 

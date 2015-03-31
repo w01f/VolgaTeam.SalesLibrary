@@ -53,8 +53,6 @@
 				!strstr(Yii::app()->request->getUrl(), 'inactiveusers/') &&
 				!strstr(Yii::app()->request->getUrl(), 'content/')
 			)
-			{
 				Yii::app()->user->loginRequired();
-			}
 		}
 	}

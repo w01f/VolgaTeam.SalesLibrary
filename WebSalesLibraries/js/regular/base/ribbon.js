@@ -23,20 +23,20 @@
 		}
 
 		if ($.cookie("selectedRibbonTabId") != null)
-			that.selectedTabId = $.cookie("selectedRibbonTabId");
+			that.selectedPageId = $.cookie("selectedRibbonTabId");
 		else
-			that.selectedTabId = null;
+			that.selectedPageId = null;
 
 		that.selectedTabIndex = -1;
 		$.cookie("selectedRibbonTabIndex", 0, {
 			expires: (60 * 60 * 24 * 7)
 		});
-		if (that.selectedTabId != null)
+		if (that.selectedPageId != null)
 		{
 			var storedTabIdFound = false;
 			$('.ribbon-tab').each(function (index)
 			{
-				if (that.selectedTabId == $(this).attr('id'))
+				if (that.selectedPageId == $(this).attr('id'))
 				{
 					that.selectedTabIndex = index;
 					$.cookie("selectedRibbonTabIndex", index, {
@@ -48,7 +48,7 @@
 			if (!storedTabIdFound)
 			{
 				that.selectedTabIndex = -1;
-				that.selectedTabId = null;
+				that.selectedPageId = null;
 				$.cookie("selectedRibbonTabId", null);
 			}
 		}
@@ -108,7 +108,7 @@
 					if (that.selectedTabIndex == -1)
 					{
 						that.selectedTabIndex = index;
-						that.selectedTabId = id;
+						that.selectedPageId = id;
 						thisTabHeader.addClass('sel');
 					}
 					tabClickHandler = function ()
@@ -163,7 +163,7 @@
 			ribObj.find('span').attr('unselectable', 'on');
 			ribObj.attr('unselectable', 'on');
 
-			that.switchToTabByIndex(that.selectedTabIndex, that.selectedTabId);
+			that.switchToTabByIndex(that.selectedTabIndex, that.selectedPageId);
 		};
 
 		that.switchToTabByIndex = function (index, id)

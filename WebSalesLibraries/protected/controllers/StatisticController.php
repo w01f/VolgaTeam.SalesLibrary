@@ -432,14 +432,12 @@
 			$data = Yii::app()->request->getPost('data');
 			if (isset($data))
 				$data = CJSON::decode($data);
-
 			$authorized = false;
 			if (isset(Yii::app()->user))
 			{
 				$userId = Yii::app()->user->getId();
 				$authorized = isset($userId);
 			}
-
 			if (isset($type) && isset($subType) && $authorized)
 				StatisticActivityRecord::WriteActivity($type, $subType, $data);
 			Yii::app()->end();

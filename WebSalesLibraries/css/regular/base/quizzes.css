@@ -62,7 +62,7 @@
 .quizzes-list li.quiz-item a.opened
 {
 	text-decoration: none;
-	background-color: hsl(36, 100%, 75%) !important;
+	background-color: #C6E2FF !important;
 }
 
 .quiz-item.passed > a > span

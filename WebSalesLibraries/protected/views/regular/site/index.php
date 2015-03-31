@@ -1,6 +1,6 @@
 <?
 	$cs = Yii::app()->clientScript;
-	$cs->registerCssFile($cs->getCoreScriptUrl() . '/jui/css/base/jquery-ui.min.css');
+	$cs->registerCssFile($cs->getCoreScriptUrl() . '/jui/css/metro/jquery-ui.min.css');
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/vendor/fancybox/source/jquery.fancybox.css?' . Yii::app()->params['version']);
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/vendor/fancybox/source/helpers/jquery.fancybox-thumbs.css?' . Yii::app()->params['version']);
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/vendor/video-js/video-js.min.css?' . Yii::app()->params['version']);
@@ -12,6 +12,7 @@
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/vendor/carousel/load/html_content.css?' . Yii::app()->params['version']);
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/vendor/cleditor/jquery.cleditor.css?' . Yii::app()->params['version']);
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/vendor/star-rating/css/star-rating.min.css?' . Yii::app()->params['version']);
+	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/vendor/combobox/css/bootstrap-select.min.css?' . Yii::app()->params['version']);
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/regular/base/ribbon.css?' . Yii::app()->params['version']);
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/regular/base/layout.css?' . Yii::app()->params['version']);
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/regular/base/minibar.css?' . Yii::app()->params['version']);
@@ -59,6 +60,7 @@
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/carousel/java/FWDUltimate3DCarousel.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/cleditor/jquery.cleditor.min.js', CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/star-rating/js/star-rating.min.js', CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/combobox/js/bootstrap-select.min.js', CClientScript::POS_HEAD);
 	if (Yii::app()->params['ticker']['visible'] && isset($tickerRecords))
 	{
 		$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/modern-ticker/js/jquery.modern-ticker.min.js', CClientScript::POS_HEAD);
@@ -133,10 +135,10 @@
 						<td>
 							<table id="libraries-selector">
 								<tr>
-									<td><label for="select-library"></label><select id="select-library"></select></td>
+									<td><label for="select-library"></label><select id="select-library" class="selectpicker"></select></td>
 								</tr>
 								<tr>
-									<td><label for="select-page"></label><select id="select-page"></select></td>
+									<td><label for="select-page"></label><select id="select-page" class="selectpicker"></select></td>
 								</tr>
 							</table>
 						</td>

@@ -4,8 +4,8 @@
 }
 
 .jx-bar-button li.active {
-    background-color: hsl(36, 100%, 75%) !important;
-    border-color: #ffcc7f #ffcc7f hsl(36, 100%, 70%);
+    background-color: #C6E2FF !important;
+    border-color: #C6E2FF #C6E2FF #C6E2FF;
     color: #333 !important;
     text-shadow: 0 1px 1px rgba(255, 255, 255, 0.33);
     -webkit-font-smoothing: antialiased;

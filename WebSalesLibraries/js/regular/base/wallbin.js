@@ -36,18 +36,22 @@
 				},
 				success: function (msg)
 				{
-					$('#select-library').html(msg);
+					$('#select-library').html(msg).selectpicker('refresh');
 					libraryChanged();
 				},
 				async: true,
 				dataType: 'html'
 			});
 			$(window).off('resize').on('resize', updateContentSize);
-			$('#select-library').off('change').on('change', function ()
+			var librarySelector = $('#select-library');
+			librarySelector.selectpicker();
+			librarySelector.off('change').on('change', function ()
 			{
 				libraryChanged();
 			});
-			$('#select-page').off('change').on('change', function ()
+			var pageSelector = $('#select-page');
+			pageSelector.selectpicker();
+			pageSelector.off('change').on('change', function ()
 			{
 				pageChanged();
 			});
@@ -161,7 +165,9 @@
 
 		var libraryChanged = function ()
 		{
-			var selectedLibraryName = $("#select-library").find(":selected").text();
+			var librarySelector = $("#select-library");
+			var selectedLibraryName = librarySelector.find(":selected").text();
+			librarySelector.selectpicker('render');
 			$.cookie("selectedLibraryName", selectedLibraryName, {
 				expires: 60 * 60 * 24 * 7
 			});
@@ -197,7 +203,7 @@
 				},
 				success: function (msg)
 				{
-					$('#select-page').html(msg);
+					$('#select-page').html(msg).selectpicker('refresh');
 					$("#page-logo").attr('src', $("#select-library").val());
 					pageChanged();
 				},
@@ -209,11 +215,13 @@
 		var pageChanged = function ()
 		{
 			var pageSelector = $("#select-page");
+			var pageLogoUrl = pageSelector.selectpicker('val');
 			var selectedPageName = pageSelector.find(":selected").text();
+			pageSelector.selectpicker('render');
 			$.cookie("selectedPageName", selectedPageName, {
 				expires: 60 * 60 * 24 * 7
 			});
-			$("#page-logo").attr('src', pageSelector.val());
+			$("#page-logo").attr('src', pageLogoUrl);
 			$.ajax({
 				type: "POST",
 				url: window.BaseUrl + "statistic/writeActivity",
@@ -447,6 +455,7 @@
 							var selectedPageIndex = ui.newTab.index();
 							var selectedListItem = pageSelector.find(':nth-child(' + (selectedPageIndex + 1) + ')');
 							selectedListItem.prop("selected", "selected");
+							pageSelector.selectpicker('render');
 							$("#page-logo").attr('src', selectedListItem.val());
 							if ($.cookie("wallbinView") == "accordion")
 								loadAccordion($(ui.newPanel));
@@ -489,7 +498,7 @@
 
 			if ($.cookie("wallbinUseTabs") != "true")
 			{
-				pageselector.show();
+				pageselector.selectpicker('show');
 				tabToggle.removeClass('active').blur();
 				if ($.cookie("wallbinView") == "accordion")
 				{
@@ -504,7 +513,7 @@
 			}
 			else
 			{
-				pageselector.hide();
+				pageselector.selectpicker('hide');
 				tabToggle.addClass('active');
 				if ($.cookie("wallbinView") == "accordion")
 					$('#accordion-view').addClass('active');

@@ -75,7 +75,7 @@
 .favorites-folders-list li a.opened
 {
 	text-decoration: none;
-	background-color: hsl(36, 100%, 75%) !important;
+	background-color: #C6E2FF !important;
 }
 
 .droppable-hover

@@ -36,7 +36,7 @@
 
 .link-grid tr.selected
 {
-	background: hsl(36, 100%, 75%) !important;
+	background: #C6E2FF !important;
 }
 
 .link-grid tr:hover

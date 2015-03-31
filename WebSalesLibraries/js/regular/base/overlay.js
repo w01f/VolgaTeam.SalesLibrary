@@ -16,7 +16,7 @@
 						'height': $(window).height() + 'px'
 					}).fadeIn(0);
 				}
-				$("<div id=\"fancybox-loading\"><div></div></div>").appendTo('body');
+				$('<div id="fancybox-loading"><div></div></div>').appendTo('body');
 			}
 			activeOverlays++;
 		};

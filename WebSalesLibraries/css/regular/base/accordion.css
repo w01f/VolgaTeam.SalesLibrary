@@ -18,18 +18,17 @@
     width: 90%;
     margin: 20px;
     border: 1px solid lightgray;
-    -webkit-box-shadow: #000000 0 0 3px;
-    -moz-box-shadow: #000000 0 0 3px;
-    box-shadow: #000000 0 0 3;
 }
 
 .folder-links
 {
     display: none;
     border-top: 1px solid lightgray;
-    -webkit-box-shadow: #000000 0 0 3px;
-    -moz-box-shadow: #000000 0 0 3px;
-    box-shadow: #000000 0 0 3px;
+}
+
+.btn.folder-header
+{
+	background-color: #fff;
 }
 
 .folder-header .links-number

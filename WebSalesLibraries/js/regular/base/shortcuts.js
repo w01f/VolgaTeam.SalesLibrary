@@ -7,6 +7,7 @@
 		var that = this;
 		var searchShortcutManager = undefined;
 		this.selectedCarouselCategory = 1;
+		this.selectedPageId = undefined;
 
 		this.init = function (tabId)
 		{
@@ -31,6 +32,9 @@
 		{
 			var pageIdSelector = '#' + tabId + ' .sel.shortcuts-page';
 			var pageId = $(pageIdSelector).attr('id');
+			if (that.selectedPageId != pageId)
+				that.selectedCarouselCategory = 1;
+			that.selectedPageId = pageId;
 			$.ajax({
 				type: "POST",
 				url: window.BaseUrl + "shortcuts/getPage",

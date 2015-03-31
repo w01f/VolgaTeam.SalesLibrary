@@ -33,7 +33,7 @@ span.glyphicon
 
 select
 {
-	border-radius: 4px;
+	border-radius: 0;
 	border: 1px solid #CCC;
 	padding: 4px 6px;
 	cursor: pointer;
@@ -55,9 +55,40 @@ form.form-horizontal, form.form-horizontal *
 	box-sizing: border-box !important;
 }
 
+.btn-default
+{
+	background-color: #ffffff;
+}
+
+.btn.disabled
+{
+	background-color: #eee;
+}
+
+.btn:hover
+{
+	background-color: #C6E2FF;
+}
+
 button.active
 {
-	background-color: hsl(36, 100%, 75%) !important;
+	background-color: #C6E2FF !important;
+}
+
+.dropdown-toggle.btn-default
+{
+	background-color: #ffffff !important;
+	outline: 0 !important;
+}
+
+.btn-group.open .dropdown-toggle
+{
+	box-shadow: none !important;
+}
+
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus
+{
+	background-color: #C6E2FF;
 }
 
 .ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button

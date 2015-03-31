@@ -37,7 +37,39 @@
 		 */
 		public static function WriteUserDetail($activityId)
 		{
-			if (isset(Yii::app()->user))
+			$detailRecord = new StatisticUserRecord();
+			$detailRecord->id_activity = $activityId;
+			/** @var $platform string */
+			$platform = Yii::app()->browser->getPlatform();
+			/** @var $browser string */
+			$browser = Yii::app()->browser->getBrowser();
+			switch ($platform)
+			{
+				case Browser::PLATFORM_IPHONE:
+				case Browser::PLATFORM_IPOD:
+				case Browser::PLATFORM_IPAD:
+					$detailRecord->device = $platform;
+					$detailRecord->os = 'iOS';
+					break;
+				case Browser::PLATFORM_BLACKBERRY:
+					$detailRecord->device = $platform;
+					$detailRecord->os = $platform;
+					break;
+				case Browser::PLATFORM_ANDROID:
+					$detailRecord->device = $platform;
+					$detailRecord->os = $platform;
+					break;
+				case Browser::PLATFORM_APPLE:
+					$detailRecord->device = 'Mac';
+					$detailRecord->os = 'iOS';
+					break;
+				default:
+					$detailRecord->device = 'PC';
+					$detailRecord->os = $platform;
+			}
+			$detailRecord->browser = $browser;
+			$detailRecord->ip = Yii::app()->request->getUserHostAddress();
+			if (isset(Yii::app()->user) && !Yii::app()->user->isGuest)
 			{
 				$userId = Yii::app()->user->getId();
 				if (isset($userId))
@@ -46,8 +78,6 @@
 					$userRecord = UserRecord::model()->findByPk($userId);
 					if (isset($userRecord))
 					{
-						$detailRecord = new StatisticUserRecord();
-						$detailRecord->id_activity = $activityId;
 						$detailRecord->login = $userRecord->login;
 						$detailRecord->first_name = $userRecord->first_name;
 						$detailRecord->last_name = $userRecord->last_name;
@@ -68,41 +98,9 @@
 									$group->save();
 								}
 							}
-						$detailRecord->ip = Yii::app()->request->getUserHostAddress();
-
-						/** @var $platform string */
-						$platform = Yii::app()->browser->getPlatform();
-						/** @var $browser string */
-						$browser = Yii::app()->browser->getBrowser();
-						switch ($platform)
-						{
-							case Browser::PLATFORM_IPHONE:
-							case Browser::PLATFORM_IPOD:
-							case Browser::PLATFORM_IPAD:
-								$detailRecord->device = $platform;
-								$detailRecord->os = 'iOS';
-								break;
-							case Browser::PLATFORM_BLACKBERRY:
-								$detailRecord->device = $platform;
-								$detailRecord->os = $platform;
-								break;
-							case Browser::PLATFORM_ANDROID:
-								$detailRecord->device = $platform;
-								$detailRecord->os = $platform;
-								break;
-							case Browser::PLATFORM_APPLE:
-								$detailRecord->device = 'Mac';
-								$detailRecord->os = 'iOS';
-								break;
-							default:
-								$detailRecord->device = 'PC';
-								$detailRecord->os = $platform;
-						}
-						$detailRecord->browser = $browser;
-
-						$detailRecord->save();
 					}
 				}
 			}
+			$detailRecord->save();
 		}
 	}
