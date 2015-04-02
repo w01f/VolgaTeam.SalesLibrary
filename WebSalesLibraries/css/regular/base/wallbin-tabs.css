@@ -17,3 +17,23 @@
 	overflow-y: auto;
 	-webkit-overflow-scrolling: touch;
 }
+
+#content .wallbin-tabs li.ui-tabs-paging-next, #content .wallbin-tabs li.ui-tabs-paging-prev
+{
+	border: none;
+}
+
+#content .wallbin-tabs li.ui-tabs-paging-next .btn-default, #content .wallbin-tabs li.ui-tabs-paging-prev .btn-default
+{
+	line-height: inherit;
+}
+
+#content .wallbin-tabs li.ui-tabs-paging-next .btn-default.disabled, #content .wallbin-tabs li.ui-tabs-paging-prev .btn-default.disabled
+{
+	background-color: #fff;
+}
+
+#content .wallbin-tabs li.ui-tabs-paging-next .btn-default:focus, #content .wallbin-tabs li.ui-tabs-paging-prev .btn-default:focus
+{
+	background-color: #fff;
+}

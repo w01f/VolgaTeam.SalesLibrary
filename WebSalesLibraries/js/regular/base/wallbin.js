@@ -452,11 +452,18 @@
 								expires: 60 * 60 * 24 * 7
 							});
 							var pageSelector = $("#select-page");
-							var selectedPageIndex = ui.newTab.index();
-							var selectedListItem = pageSelector.find(':nth-child(' + (selectedPageIndex + 1) + ')');
-							selectedListItem.prop("selected", "selected");
+							pageSelector.find("option").each(function ()
+							{
+								if ($(this).text() == selectedPageName)
+								{
+									$("#page-logo").attr('src', $(this).val());
+									$(this).prop("selected", "selected");
+								}
+								else
+									$(this).prop("selected", false)
+							});
 							pageSelector.selectpicker('render');
-							$("#page-logo").attr('src', selectedListItem.val());
+
 							if ($.cookie("wallbinView") == "accordion")
 								loadAccordion($(ui.newPanel));
 							else
@@ -476,6 +483,7 @@
 							});
 						}
 					});
+					tabPages.tabs('paging', { follow: true });
 					if ($.cookie("wallbinView") == "accordion")
 						assignAccordionEvents(container);
 					else

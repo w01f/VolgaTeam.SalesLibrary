@@ -61,6 +61,7 @@
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/cleditor/jquery.cleditor.min.js', CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/star-rating/js/star-rating.min.js', CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/combobox/js/bootstrap-select.min.js', CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/tabs-extension/jquery-ui-tabs-paging.js', CClientScript::POS_HEAD);
 	if (Yii::app()->params['ticker']['visible'] && isset($tickerRecords))
 	{
 		$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/modern-ticker/js/jquery.modern-ticker.min.js', CClientScript::POS_HEAD);
