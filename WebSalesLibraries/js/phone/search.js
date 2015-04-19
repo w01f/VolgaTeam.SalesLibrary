@@ -117,7 +117,7 @@
 		{
 			$.ajax({
 				type: "POST",
-				url: window.BaseUrl + "search/searchByContent",
+				url: window.BaseUrl + "search/searchHtml",
 				data: {
 					fileTypes: conditions.fileTypes,
 					condition: conditions.condition,

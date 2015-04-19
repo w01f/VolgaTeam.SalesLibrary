@@ -17,7 +17,7 @@
 
 		//element that triggered the date range picker
 		this.element = $(element);
-		this.button = $('#select-date-range');
+		this.button = $('#search-ribbon-condition-date');
 
 		//create the picker HTML object
 		var DRPTemplate = '<div class="daterangepicker dropdown-menu">' +

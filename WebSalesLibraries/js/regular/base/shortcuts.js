@@ -5,7 +5,9 @@
 	var ShortcutsManager = function ()
 	{
 		var that = this;
-		var searchShortcutManager = undefined;
+
+		var searchBar = undefined;
+
 		this.selectedCarouselCategory = 1;
 		this.selectedPageId = undefined;
 
@@ -23,9 +25,9 @@
 			$(window).off('resize').on('resize', that.updateContentSize);
 		};
 
-		this.processSearchLink = function (content, objectId, isPageSearch)
+		this.processSearchLink = function (content, objectId)
 		{
-			searchShortcutManager = $.SalesPortal.ShortcutsSearchManager(content, objectId, isPageSearch);
+			$.SalesPortal.ShortcutsSearchManager(content, objectId);
 		};
 
 		var loadShortcutsPage = function (tabId)
@@ -57,8 +59,7 @@
 					content.html(data.content);
 
 					initPageLogo(data);
-					initHomeBar();
-					initSearchBar(pageId);
+					searchBar = new $.SalesPortal.ShortcutsSearchBar(pageId);
 
 					switch (data.type)
 					{
@@ -130,7 +131,6 @@
 			});
 		};
 
-
 		var initPageLogo = function (data)
 		{
 			var content = $('#content');
@@ -148,267 +148,6 @@
 			}
 			else
 				shortcutsTab.find('.ribbon-shortcut-tab-logo').show();
-		};
-
-		var initHomeBar = function ()
-		{
-			var content = $('#content');
-			var pageContent = content.find('.shortcuts-page-content');
-			var tabId = pageContent.attr('id').replace("shortcuts-page-content-", "");
-			var tabPageLogo = $('#shortcuts-tab-' + tabId).find('.ribbon-tab-logo');
-			content.find('.shortcuts-home-bar .logo-container img').on('click', function ()
-			{
-				tabPageLogo.trigger("click");
-			});
-
-			content.find('.shortcuts-home-bar .buttons-container img').on('click', function (e)
-			{
-				var isExpanded = $(this).hasClass('expanded');
-				if (isExpanded)
-				{
-					$(this).removeClass('expanded');
-					$(this).attr('src', $(this).attr('src').replace('collapse', 'expand'));
-					changeSearchBarVisibility(false);
-				}
-				else
-				{
-					$(this).addClass('expanded');
-					$(this).attr('src', $(this).attr('src').replace('expand', 'collapse'));
-					changeSearchBarVisibility(true);
-				}
-				that.updateContentSize();
-				e.stopPropagation();
-			});
-		};
-
-		var initSearchBar = function (currentPageId)
-		{
-			var search = function ()
-			{
-				if ($('.btn.search-bar-run').hasClass('disabled')) return;
-				var textCondition = $('.shortcuts-search-bar .search-bar-text').val();
-				if ($('#search-exact-match').is(':checked'))
-					textCondition = '"' + textCondition + '"';
-				var searchConditions = $('.shortcuts-search-bar .search-conditions');
-				var onlyFiles = $('#search-file-names-only').is(':checked') ? 1 : 0;
-				var selectedFileTypes = [];
-				if ($('#search-file-type-powerpoint').is(':checked'))
-					selectedFileTypes.push("ppt");
-				if ($('#search-file-type-video').is(':checked'))
-				{
-					selectedFileTypes.push("video");
-					selectedFileTypes.push("mp4");
-					selectedFileTypes.push("wmv");
-				}
-				if ($('#search-file-type-other').is(':checked'))
-				{
-					selectedFileTypes.push("doc");
-					selectedFileTypes.push("xls");
-					selectedFileTypes.push("pdf");
-					selectedFileTypes.push("url");
-					selectedFileTypes.push("url365");
-					selectedFileTypes.push("png");
-					selectedFileTypes.push("jpeg");
-					selectedFileTypes.push("mp3");
-				}
-				if (searchConditions.find('.same-page').html() === 'true')
-				{
-					changeSearchBarVisibility(false);
-					$('.shortcuts-home-bar .buttons-container').remove();
-					searchConditions.remove('.search-text');
-					searchConditions.append('<div class="search-text">' + textCondition + '</div>');
-					var searchByContent = searchConditions.find('.search-by-content');
-					if (searchByContent.length > 0)
-						searchByContent.html(onlyFiles != 1 ? 'true' : false);
-					else
-						searchConditions.append('<div class="search-by-content">' + (onlyFiles != 1) + '</div>');
-					searchConditions.remove('.file-type');
-					$.each(selectedFileTypes, function (index, value)
-					{
-						searchConditions.append('<div class="file-type">' + value + '</div>');
-					});
-					var content = $('#content').find('.shortcuts-page-content');
-					content.html('<div class="search-conditions" style="display: none;">' + searchConditions.html() + '</div>');
-					that.processSearchLink(content, currentPageId, true);
-				}
-				else
-				{
-					var superFilters = [];
-					$.each(searchConditions.find('.super-filter'), function ()
-					{
-						superFilters.push($(this).html());
-					});
-
-					var categories = [];
-					$.each(searchConditions.find('.category'), function ()
-					{
-						var substr = $(this).html().split('------');
-						var category = {
-							category: substr[0],
-							tag: substr[1]
-						};
-						categories.push(category);
-					});
-					window.open("shortcuts/GetQuickSearchResult?pageId=" + currentPageId +
-						"&text=" + textCondition +
-						"&onlyFiles=" + onlyFiles +
-						"&fileTypes=" + $.toJSON(selectedFileTypes) +
-						"&superFilters=" + $.toJSON(superFilters) +
-						"&categories=" + $.toJSON(categories));
-				}
-			};
-
-			$('.shortcuts-search-bar .search-bar-text').keypress(function (e)
-			{
-				updateSearchButtonState();
-				if (e.which == 13)
-					search();
-			});
-			$('.shortcuts-search-bar .search-bar-run').on('click', search);
-
-			$('.file-filter-panel .file-selector input').off('change').on('change', function ()
-			{
-				updateSearchButtonState();
-			});
-
-			$('.tags-filter-panel-switcher').off('click').on('click', function ()
-			{
-				setTagsCondition();
-			});
-
-			updateSearchButtonState();
-			updateSelectedCategories();
-		};
-
-		var changeSearchBarVisibility = function (show)
-		{
-			var searchBar = $('.shortcuts-search-bar');
-			if (show)
-				searchBar.addClass('open').show();
-			else
-				searchBar.removeClass('open').hide();
-		};
-
-		var updateSearchButtonState = function ()
-		{
-			var hasKeyword = $('.shortcuts-search-bar .search-bar-text').val() != "";
-			var searchConditions = $('.shortcuts-search-bar .search-conditions');
-			var hasSuperFilters = searchConditions.find('.super-filter').length > 0;
-			var hasCategories = searchConditions.find('.category').length > 0;
-			var searchButton = $('.btn.search-bar-run');
-			searchButton.removeClass('disabled');
-			if (!(hasKeyword || hasSuperFilters || hasCategories) || !($('#search-file-type-powerpoint').is(':checked') || $('#search-file-type-video').is(':checked') || $('#search-file-type-other').is(':checked')))
-				searchButton.addClass('disabled');
-		};
-
-		var updateSelectedCategories = function ()
-		{
-			var searchConditions = $('.shortcuts-search-bar .search-conditions');
-			var existedSuperFilters = searchConditions.find('.super-filter').map(function ()
-			{
-				return $(this).html();
-			}).get();
-			var existedCategories = searchConditions.find('.category').map(function ()
-			{
-				return $(this).html().split('------')[1];
-			}).get();
-			var categoryStr = $.merge(existedSuperFilters, existedCategories).join(', ');
-			var selectedCategoryLabel = $('.tag-condition-selected');
-			if (categoryStr != "")
-				selectedCategoryLabel.html($('.tags-filter-panel-switcher').html() + ': ' + categoryStr);
-			else
-				selectedCategoryLabel.html('');
-		};
-
-		var setTagsCondition = function ()
-		{
-			var searchConditions = $('.shortcuts-search-bar .search-conditions');
-			var categorySelector = searchConditions.find('.tag-condition-selector');
-			$.fancybox({
-				content: categorySelector.html(),
-				title: $('.tags-filter-panel-switcher').html(),
-				width: 550,
-				autoSize: false,
-				autoHeight: true,
-				openEffect: 'none',
-				closeEffect: 'none',
-				afterShow: function ()
-				{
-					var innerContent = $('.fancybox-inner');
-					var categories = innerContent.find(".tag-list");
-					var superFilters = innerContent.find(".super-filter-list");
-					categories.accordion({
-						heightStyle: "content",
-						active: false,
-						collapsible: true,
-						icons: {
-							header: "ui-icon-circle-arrow-e",
-							activeHeader: "ui-icon-circle-arrow-s"
-						}
-					});
-
-					$.each(searchConditions.find('.super-filter'), function ()
-					{
-						var value = $(this).html();
-						superFilters.find('.btn:contains("' + value + '")').button('toggle');
-					});
-
-					$.each(searchConditions.find('.category'), function ()
-					{
-						var value = $(this).html();
-						categories.find('.item-selector[value="' + value + '"]').prop('checked', true);
-					});
-
-					categories.find('.group-selector').off('change').on('change', function ()
-					{
-						var categoryGroup = $(this).parent().parent();
-						categoryGroup.find('.item-selector').prop('checked', $(this).is(':checked'));
-					});
-
-					innerContent.find('.tags-clear-all').off('click').on('click', function ()
-					{
-						superFilters.find('.btn').removeClass('active').blur();
-						categories.find(":checked").prop('checked', false);
-					});
-
-					superFilters.find('.btn').off('click').on('click', function ()
-					{
-						$(this).button('toggle').blur();
-					});
-
-					innerContent.find('.cancel-button').on('click', function ()
-					{
-						$.fancybox.close();
-					});
-
-					innerContent.find('.accept-button').on('click', function ()
-					{
-						searchConditions.find('.super-filter').remove();
-						$.each(superFilters.find('.btn.active'), function ()
-						{
-							searchConditions.append($('<div class="super-filter">' + $(this).html() + '</div>'));
-						});
-
-						searchConditions.find('.category').remove();
-						$.each(categories.find(".item-selector:checked"), function ()
-						{
-							searchConditions.append($('<div class="category">' + $(this).val() + '</div>'));
-						});
-
-						$.fancybox.close();
-
-						updateSearchButtonState();
-
-						updateSelectedCategories();
-					});
-				},
-				afterClose: function ()
-				{
-				},
-				onUpdate: function ()
-				{
-				}
-			});
 		};
 
 		var getClickHandler = function (handlerType, dataContent, isEmbedded)
@@ -453,13 +192,12 @@
 								},
 								success: function (msg)
 								{
-									changeSearchBarVisibility(false);
-									$('.shortcuts-home-bar .buttons-container').remove();
+									searchBar.changeVisibility(false);
 									var pageContent = content.find('.shortcuts-page-content');
 									if (linkType == 'search')
 									{
 										pageContent.html(msg);
-										that.processSearchLink(pageContent, linkId, false);
+										that.processSearchLink(pageContent, linkId);
 									}
 									else if (linkType == 'window')
 									{
@@ -469,9 +207,6 @@
 									else
 										pageContent.html("<div class='padding'>" + msg + "</div>");
 									content.animate({scrollTop: 0}, 1);
-
-									var shortcutTitle = pageContent.find('.shortcut-title').html();
-									$('.shortcuts-home-bar .title').html(shortcutTitle);
 								},
 								error: function ()
 								{
@@ -578,42 +313,9 @@
 			$.SalesPortal.Layout.updateContentSize();
 			var content = $('#content');
 			var shortcutsPage = content.find('.shortcuts-page-content');
-			var height = content.height() - content.find('.shortcuts-home-bar').height() - content.find('.shortcuts-search-bar.open').height();
+			var height = content.height() - content.find('.shortcuts-search-bar.open').height();
 			shortcutsPage.css({
 				'height': height + 'px'
-			});
-
-			var searchResult = $('#search-result');
-			searchResult.find('> div').css({
-				'height': height + 'px'
-			});
-			var gridHeader = searchResult.find('.links-grid-header');
-			var searchResultBar = searchResult.find('.search-grid-info');
-			searchResult.find('.links-grid-body-container').css({
-				'height': (height - (searchResultBar.length > 0 ? (searchResultBar.height() + 12) : 0) - gridHeader.height()) + 'px'
-			});
-
-			var linkDateWidth = 100;
-
-			var linkNameHeaderWidth = searchResult.width() -
-				gridHeader.find('td.library-column').width() -
-				gridHeader.find('td.link-type-column').width() -
-				gridHeader.find('td.link-tag-column').width() -
-				gridHeader.find('td.link-rate-column').width() -
-				linkDateWidth;
-			gridHeader.find('td.link-name-column').css({
-				'width': linkNameHeaderWidth + 'px'
-			});
-
-			var gridBody = searchResult.find('.links-grid-body');
-			var linkNameBodyWidth = searchResult.width() -
-				gridBody.find('td.library-column').width() -
-				gridBody.find('td.link-type-column').width() -
-				gridBody.find('td.link-tag-column').width() -
-				gridBody.find('td.link-rate-column').width() -
-				linkDateWidth;
-			gridBody.find('td.link-name-column').css({
-				'width': linkNameBodyWidth + 'px'
 			});
 
 			var sideBar = $('#right-navbar');

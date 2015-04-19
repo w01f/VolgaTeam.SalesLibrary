@@ -133,7 +133,7 @@ body
 
 #ribbon .ribbon-tab
 {
-	height: 90px;
+	height: 100px;
 	padding: 5px;
 	margin-top: 5px;
 	border-top: 1px solid #dddddd;
@@ -141,6 +141,19 @@ body
 	z-index: 30;
 	-pie-watch-ancestors: 2;
 	position: relative;
+}
+
+#ribbon .ribbon-tab.ribbon-tab-overflow
+{
+	height: 100px;
+	padding: 5px;
+	margin-top: 5px;
+	border-top: 1px solid #dddddd;
+	min-width: 500px;
+	z-index: 30;
+	-pie-watch-ancestors: 2;
+	position: relative;
+	overflow: hidden;
 }
 
 #ribbon .ribbon-tab.file

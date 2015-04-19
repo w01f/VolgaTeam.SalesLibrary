@@ -10,9 +10,6 @@
 	<? if (isset($searchContainer->conditions->endDate)): ?>
 		<div class="end-date"><? echo $searchContainer->conditions->endDate; ?></div>
 	<? endif; ?>
-	<? if ($searchContainer->conditions->dateModified): ?>
-		<div class="use-file-date">true</div>
-	<? endif; ?>
 	<? if (isset($searchContainer->conditions->fileTypes)): ?>
 		<? foreach ($searchContainer->conditions->fileTypes as $fileType): ?>
 			<div class="file-type"><? echo $fileType; ?></div>

@@ -111,28 +111,33 @@
 				},
 				success: function ()
 				{
+					var succesDescription = '';
 					if (linkIds.length > 1)
-						$('body').append('<div id="add-link-info" title="Link Cart">Links was added to Link Cart</div>');
+						succesDescription = 'Links was added to Link Cart';
 					else
-						$('body').append('<div id="add-link-info" title="Link Cart">Link was added to Link Cart</div>');
-					$("#add-link-info").dialog({
-						resizable: false,
-						modal: true,
-						buttons: {
-							"OK": function ()
-							{
-								$(this).dialog("close");
-							}
-						},
-						open: function ()
-						{
-							$(this).closest(".ui-dialog")
-								.find(".ui-dialog-titlebar-close")
-								.html("<span class='ui-icon ui-icon-closethick'></span>");
-						},
-						close: function ()
-						{
-							$("#add-link-info").remove();
+						succesDescription = 'Link was added to Link Cart';
+					$.fancybox({
+						content: $('<div class="row" style="margin: 0;">' +
+							'<div class="col-xs-3"><img src="' +
+							window.BaseUrl +
+							'images/fileFormats/add-link-cart.png">' +
+							'</div>' +
+							'<div class="col-xs-8 col-xs-offset-1">' +
+							'<h3>Success!</h3>' +
+							'<p class="text-muted">' +
+							succesDescription +
+							'</p>' +
+							'</div>' +
+							'</div>' +
+							'<div class="row" style="margin: 0;"><div class="col-xs-12 text-center"><button type="button" class="btn btn-default" style="width: 80px; margin-top: 20px" onclick="$.fancybox.close()">OK</button></div></div>'),
+						title: 'Password Requirements',
+						width: 400,
+						autoSize: false,
+						autoHeight: true,
+						openEffect: 'none',
+						closeEffect: 'none',
+						helpers: {
+							title: false
 						}
 					});
 				},

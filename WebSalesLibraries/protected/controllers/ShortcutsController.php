@@ -99,20 +99,13 @@
 			{
 				/** @var $linkRecord ShortcutsLinkRecord */
 				$linkRecord = ShortcutsLinkRecord::model()->findByPk($linkId);
-				/** @var $pageRecord ShortcutsPageRecord */
-				$pageRecord = $linkRecord->getParentPage();
-				$pageModel = $pageRecord->getModel();
 				$searchShortcut = new SearchShortcut($linkRecord);
 				$this->pageTitle = $searchShortcut->tooltip;
 				$content = $this->renderPartial('searchResult', array('searchContainer' => $searchShortcut), true);
 				if ($samePage)
 					echo $content;
 				else
-				{
-					if (!$searchShortcut->showResultsBar && !Yii::app()->browser->isMobile())
-						$content = $this->renderPartial('homeBar', array('homeBar' => $pageModel->homeBar, 'enableSearchBar' => false), true) . $content;
 					$this->render('linkWrapper', array('objectId' => $linkId, 'objectName' => $searchShortcut->tooltip, 'objectLogo' => $searchShortcut->ribbonLogoPath, 'content' => $content));
-				}
 			}
 		}
 
@@ -188,14 +181,15 @@
 		{
 			$pageId = Yii::app()->request->getPost('pageId');
 			$linkId = Yii::app()->request->getPost('linkId');
+			/** @var $pageRecord ShortcutsPageRecord */
 			if (!isset($pageId) && isset($linkId))
 			{
 				/** @var $linkRecord ShortcutsLinkRecord */
 				$linkRecord = ShortcutsLinkRecord::model()->findByPk($linkId);
-				$pageId = $linkRecord->id_page;
+				$pageRecord = $linkRecord->getParentPage();
 			}
-			/** @var $pageRecord ShortcutsPageRecord */
-			$pageRecord = ShortcutsPageRecord::model()->findByPk($pageId);
+			else
+				$pageRecord = ShortcutsPageRecord::model()->findByPk($pageId);
 			$pageModel = $pageRecord->getModel();
 			$searchBar = $pageModel->searchBar;
 			$this->renderPartial('subSearchCustomPanel', array('searchBar' => $searchBar));

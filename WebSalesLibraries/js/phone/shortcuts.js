@@ -293,7 +293,7 @@
 										condition: selectedCondition,
 										startDate: startDate,
 										endDate: endDate,
-										dateFile: searchConditions.find('.use-file-date').length > 0,
+										dateFile: true,
 										libraries: selectedLibraryIds.length > 0 ? $.toJSON(selectedLibraryIds) : null,
 										superFilters: superFilters.length > 0 ? $.toJSON(superFilters) : null,
 										categories: categories.length > 0 ? $.toJSON(categories) : null,

@@ -82,7 +82,7 @@
 				<? foreach ($categories->groups as $group): ?>
 					<h3><span><? echo $group; ?></span></h3>
 					<div class="checkbox">
-						<label class="group-selector-title">
+						<label class="group-selector-container">
 							<input class="group-selector" type="checkbox" <? echo $categories->isGroupSelected($group) ? 'checked="checked"' : '' ?>>
 							<? echo $group; ?>
 						</label>

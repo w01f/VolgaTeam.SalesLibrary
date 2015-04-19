@@ -13,6 +13,7 @@
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/vendor/cleditor/jquery.cleditor.css?' . Yii::app()->params['version']);
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/vendor/star-rating/css/star-rating.min.css?' . Yii::app()->params['version']);
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/vendor/combobox/css/bootstrap-select.min.css?' . Yii::app()->params['version']);
+	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/vendor/data-table/css/dataTables.bootstrap.css?' . Yii::app()->params['version']);
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/regular/base/ribbon.css?' . Yii::app()->params['version']);
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/regular/base/layout.css?' . Yii::app()->params['version']);
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/regular/base/minibar.css?' . Yii::app()->params['version']);
@@ -26,6 +27,7 @@
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/regular/base/view-dialog-bar.css?' . Yii::app()->params['version']);
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/regular/base/tool-dialog.css?' . Yii::app()->params['version']);
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/regular/base/links-grid.css?' . Yii::app()->params['version']);
+	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/regular/base/data-table.css?' . Yii::app()->params['version']);
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/regular/base/shortcuts.css?' . Yii::app()->params['version']);
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/regular/base/shortcuts-search.css?' . Yii::app()->params['version']);
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/regular/base/calendar.css?' . Yii::app()->params['version']);
@@ -62,6 +64,8 @@
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/star-rating/js/star-rating.min.js', CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/combobox/js/bootstrap-select.min.js', CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/tabs-extension/jquery-ui-tabs-paging.js', CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/data-table/js/jquery.dataTables.min.js', CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/data-table/js/dataTables.bootstrap.min.js', CClientScript::POS_HEAD);
 	if (Yii::app()->params['ticker']['visible'] && isset($tickerRecords))
 	{
 		$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/modern-ticker/js/jquery.modern-ticker.min.js', CClientScript::POS_HEAD);
@@ -74,9 +78,11 @@
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/base/view-dialog-bar.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/base/wallbin.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/base/links-grid.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/base/data-table.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/base/search-processor.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/base/search-view.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/base/shortcuts-search.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/base/shortcuts-search-bar.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/base/shortcuts.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/base/favorites.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/base/link-rate.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
@@ -170,68 +176,99 @@
 				<div class="ribbon-section">
 					<span class="section-title">Logout</span>
 					<div class="ribbon-button ribbon-button-large logout-button  <? if (!$isMobile): ?>regular<? endif; ?>">
-						<img class="ribbon-icon ribbon-normal" src="<? echo Yii::app()->getBaseUrl(true) . '/images/ribbon/normal/logout.png' ?>"/>
-						<img class="ribbon-icon ribbon-hot" src="<? echo Yii::app()->getBaseUrl(true) . '/images/ribbon/normal/logout.png' ?>"/>
-						<img class="ribbon-icon ribbon-disabled" src="<? echo Yii::app()->getBaseUrl(true) . '/images/ribbon/normal/logout.png' ?>"/>
+						<img class="ribbon-icon ribbon-normal" src="<? echo Yii::app()->getBaseUrl(true) . '/images/ribbon/logout.png' ?>"/>
+						<img class="ribbon-icon ribbon-hot" src="<? echo Yii::app()->getBaseUrl(true) . '/images/ribbon/logout.png' ?>"/>
+						<img class="ribbon-icon ribbon-disabled" src="<? echo Yii::app()->getBaseUrl(true) . '/images/ribbon/logout.png' ?>"/>
 					</div>
 				</div>
 			<? endif; ?>
 		</div>
 	<? elseif ($tabName == 'search_full_tab'): ?>
 		<? if (Yii::app()->params['search_full_tab']['visible']): ?>
-			<div class="ribbon-tab" id="search-full-tab">
+			<div class="ribbon-tab ribbon-tab-overflow" id="search-full-tab">
 				<span class="ribbon-title"><? echo Yii::app()->params['search_full_tab']['name'] ?></span>
-
 				<div class="ribbon-section">
-                        <span class="section-title">
-                            <? if (isset(Yii::app()->user->firstName) && isset(Yii::app()->user->lastName)): ?>
-								<? echo Yii::app()->user->firstName . ' ' . Yii::app()->user->lastName; ?>
-							<? endif; ?>
-                        </span>
-					<img class="ribbon-tab-logo" src="<? echo Yii::app()->getBaseUrl(true) . '/images/rbntab2logo.png' ?>"/>
+					<span class="section-title">Advanced Search Engine</span>
+					<div class="input-group search-ribbon-condition-content-container">
+						  <input type="text" class="form-control search-bar-text" id="search-ribbon-condition-content-value" placeholder="What are you looking for?">
+						  <span class="input-group-btn">
+							<button id="search-ribbon-clear-content-value" class="btn btn-default search-bar-run" type="button">
+								<span class="glyphicon glyphicon-remove"></span>
+							</button>
+						  </span>
+					</div>
+					<div class="input-group" id="search-ribbon-condition-date-container">
+						<input class="form-control" type="text" readonly placeholder="Select Date Range...">
+						<div class="input-group-btn">
+							<button id="search-ribbon-condition-date" class="btn btn-default" type="button">
+								<span class="glyphicon glyphicon-calendar"></span></button>
+							<button id="search-ribbon-condition-date-clear" class="btn btn-default" type="button">
+								<span class="glyphicon glyphicon-remove"></span></button>
+						</div>
+					</div>
 				</div>
 				<div class="ribbon-section">
-					<span class="section-title">SideBar</span>
-					<div class="ribbon-button ribbon-button-large side-bar-toggle<? echo $sideBarVisible ? ' sel' : ''; ?> <? if (!$isMobile): ?>regular<? endif; ?>">
-						<img class="ribbon-icon ribbon-normal" src="<? echo Yii::app()->getBaseUrl(true) . '/images/search/side-bar.png' ?>"/>
-						<img class="ribbon-icon ribbon-hot" src="<? echo Yii::app()->getBaseUrl(true) . '/images/search/side-bar.png' ?>"/>
-						<img class="ribbon-icon ribbon-disabled" src="<? echo Yii::app()->getBaseUrl(true) . '/images/search/side-bar.png' ?>"/>
+					<span class="section-title">Filters</span>
+					<div class="ribbon-button ribbon-button-large <? if (!$isMobile): ?>regular<? endif; ?>" id="search-ribbon-filter">
+						<img class="ribbon-icon ribbon-normal" src="<? echo Yii::app()->getBaseUrl(true) . '/images/search/ribbon/filter.png' ?>"/>
+						<img class="ribbon-icon ribbon-hot" src="<? echo Yii::app()->getBaseUrl(true) . '/images/search/ribbon/filter.png' ?>"/>
+						<img class="ribbon-icon ribbon-disabled" src="<? echo Yii::app()->getBaseUrl(true) . '/images/search/ribbon/filter.png' ?>"/>
+					</div>
+				</div>
+				<div class="ribbon-section">
+					<span class="section-title">File Types</span>
+					<div class="ribbon-button ribbon-button-large <? if (!$isMobile): ?>regular<? endif; ?>" id="search-ribbon-file-types">
+						<img class="ribbon-icon ribbon-normal" src="<? echo Yii::app()->getBaseUrl(true) . '/images/search/ribbon/file-types.png' ?>"/>
+						<img class="ribbon-icon ribbon-hot" src="<? echo Yii::app()->getBaseUrl(true) . '/images/search/ribbon/file-types.png' ?>"/>
+						<img class="ribbon-icon ribbon-disabled" src="<? echo Yii::app()->getBaseUrl(true) . '/images/search/ribbon/file-types.png' ?>"/>
+					</div>
+				</div>
+				<div class="ribbon-section">
+					<span class="section-title"><? echo Yii::app()->params['tags']['tab_name']; ?></span>
+					<div class="ribbon-button ribbon-button-large <? if (!$isMobile): ?>regular<? endif; ?>" id="search-ribbon-tags">
+						<img class="ribbon-icon ribbon-normal" src="<? echo Yii::app()->getBaseUrl(true) . '/images/search/ribbon/tags.png' ?>"/>
+						<img class="ribbon-icon ribbon-hot" src="<? echo Yii::app()->getBaseUrl(true) . '/images/search/ribbon/tags.png' ?>"/>
+						<img class="ribbon-icon ribbon-disabled" src="<? echo Yii::app()->getBaseUrl(true) . '/images/search/ribbon/tags.png' ?>"/>
+					</div>
+				</div>
+				<div class="ribbon-section">
+					<span class="section-title">Super Tags</span>
+					<div class="ribbon-button ribbon-button-large <? if (!$isMobile): ?>regular<? endif; ?>" id="search-ribbon-super-filters">
+						<img class="ribbon-icon ribbon-normal" src="<? echo Yii::app()->getBaseUrl(true) . '/images/search/ribbon/super-filters.png' ?>"/>
+						<img class="ribbon-icon ribbon-hot" src="<? echo Yii::app()->getBaseUrl(true) . '/images/search/ribbon/super-filters.png' ?>"/>
+						<img class="ribbon-icon ribbon-disabled" src="<? echo Yii::app()->getBaseUrl(true) . '/images/search/ribbon/super-filters.png' ?>"/>
+					</div>
+				</div>
+				<div class="ribbon-section">
+					<span class="section-title"><? echo Yii::app()->params['stations']['tab_name']; ?></span>
+					<div class="ribbon-button ribbon-button-large <? if (!$isMobile): ?>regular<? endif; ?>" id="search-ribbon-libraries">
+						<img class="ribbon-icon ribbon-normal" src="<? echo Yii::app()->getBaseUrl(true) . '/images/search/ribbon/libraries.png' ?>"/>
+						<img class="ribbon-icon ribbon-hot" src="<? echo Yii::app()->getBaseUrl(true) . '/images/search/ribbon/libraries.png' ?>"/>
+						<img class="ribbon-icon ribbon-disabled" src="<? echo Yii::app()->getBaseUrl(true) . '/images/search/ribbon/libraries.png' ?>"/>
 					</div>
 				</div>
 				<div class="ribbon-section">
 					<span class="section-title">Search</span>
-					<div class="ribbon-button ribbon-button-large <? if (!$isMobile): ?>regular<? endif; ?>" id="run-search-full">
-						<img class="ribbon-icon ribbon-normal" src="<? echo Yii::app()->getBaseUrl(true) . '/images/search/search.png' ?>"/>
-						<img class="ribbon-icon ribbon-hot" src="<? echo Yii::app()->getBaseUrl(true) . '/images/search/search.png' ?>"/>
-						<img class="ribbon-icon ribbon-disabled" src="<? echo Yii::app()->getBaseUrl(true) . '/images/search/search.png' ?>"/>
+					<div class="ribbon-button ribbon-button-large <? if (!$isMobile): ?>regular<? endif; ?>" id="search-ribbon-run">
+						<img class="ribbon-icon ribbon-normal" src="<? echo Yii::app()->getBaseUrl(true) . '/images/search/ribbon/search.png' ?>"/>
+						<img class="ribbon-icon ribbon-hot" src="<? echo Yii::app()->getBaseUrl(true) . '/images/search/ribbon/search.png' ?>"/>
+						<img class="ribbon-icon ribbon-disabled" src="<? echo Yii::app()->getBaseUrl(true) . '/images/search/ribbon/search.png' ?>"/>
 					</div>
 				</div>
 				<div class="ribbon-section">
-					<span class="section-title">Clear</span>
-
-					<div class="ribbon-button ribbon-button-large clear-button <? if (!$isMobile): ?>regular<? endif; ?>">
-						<img class="ribbon-icon ribbon-normal" src="<? echo Yii::app()->getBaseUrl(true) . '/images/ribbon/normal/clear.png' ?>"/>
-						<img class="ribbon-icon ribbon-hot" src="<? echo Yii::app()->getBaseUrl(true) . '/images/ribbon/normal/clear.png' ?>"/>
-						<img class="ribbon-icon ribbon-disabled" src="<? echo Yii::app()->getBaseUrl(true) . '/images/ribbon/normal/clear.png' ?>"/>
+					<span class="section-title">Clear Page</span>
+					<div class="ribbon-button ribbon-button-large <? if (!$isMobile): ?>regular<? endif; ?>" id="search-ribbon-clear">
+						<img class="ribbon-icon ribbon-normal" src="<? echo Yii::app()->getBaseUrl(true) . '/images/search/ribbon/clear.png' ?>"/>
+						<img class="ribbon-icon ribbon-hot" src="<? echo Yii::app()->getBaseUrl(true) . '/images/search/ribbon/clear.png' ?>"/>
+						<img class="ribbon-icon ribbon-disabled" src="<? echo Yii::app()->getBaseUrl(true) . '/images/search/ribbon/clear.png' ?>"/>
 					</div>
 				</div>
-				<? if (isset(Yii::app()->user->firstName) && isset(Yii::app()->user->lastName)): ?>
-					<div class="ribbon-section">
-						<span class="section-title">Logout</span>
-
-						<div class="ribbon-button ribbon-button-large logout-button <? if (!$isMobile): ?>regular<? endif; ?>">
-							<img class="ribbon-icon ribbon-normal" src="<? echo Yii::app()->getBaseUrl(true) . '/images/ribbon/normal/logout.png' ?>"/>
-							<img class="ribbon-icon ribbon-hot" src="<? echo Yii::app()->getBaseUrl(true) . '/images/ribbon/normal/logout.png' ?>"/>
-							<img class="ribbon-icon ribbon-disabled" src="<? echo Yii::app()->getBaseUrl(true) . '/images/ribbon/normal/logout.png' ?>"/>
-						</div>
-					</div>
-				<? endif; ?>
 			</div>
 		<? endif; ?>
 	<?
 	elseif ($tabName == 'favorites_tab'): ?>
 		<? if (Yii::app()->params['favorites_tab']['visible']): ?>
-			<div class="ribbon-tab" id="favorites-tab">
+			<div class="ribbon-tab ribbon-tab-overflow" id="favorites-tab">
 				<span class="ribbon-title"><? echo Yii::app()->params['favorites_tab']['name'] ?></span>
 
 				<div class="ribbon-section">
@@ -243,9 +280,9 @@
 						<span class="section-title">Logout</span>
 
 						<div class="ribbon-button ribbon-button-large logout-button <? if (!$isMobile): ?>regular<? endif; ?>">
-							<img class="ribbon-icon ribbon-normal" src="<? echo Yii::app()->getBaseUrl(true) . '/images/ribbon/normal/logout.png' ?>"/>
-							<img class="ribbon-icon ribbon-hot" src="<? echo Yii::app()->getBaseUrl(true) . '/images/ribbon/normal/logout.png' ?>"/>
-							<img class="ribbon-icon ribbon-disabled" src="<? echo Yii::app()->getBaseUrl(true) . '/images/ribbon/normal/logout.png' ?>"/>
+							<img class="ribbon-icon ribbon-normal" src="<? echo Yii::app()->getBaseUrl(true) . '/images/ribbon/logout.png' ?>"/>
+							<img class="ribbon-icon ribbon-hot" src="<? echo Yii::app()->getBaseUrl(true) . '/images/ribbon/logout.png' ?>"/>
+							<img class="ribbon-icon ribbon-disabled" src="<? echo Yii::app()->getBaseUrl(true) . '/images/ribbon/logout.png' ?>"/>
 						</div>
 					</div>
 				<? endif; ?>
@@ -254,7 +291,7 @@
 	<?
 	elseif ($tabName == 'quiz_tab'): ?>
 		<? if (Yii::app()->params['quiz_tab']['visible']): ?>
-			<div class="ribbon-tab" id="quiz-tab">
+			<div class="ribbon-tab ribbon-tab-overflow" id="quiz-tab">
 				<span class="ribbon-title"><? echo Yii::app()->params['quiz_tab']['name'] ?></span>
 				<div class="ribbon-section">
 					<span class="section-title"><? echo Yii::app()->params['quiz_tab']['name'] ?></span>
@@ -265,9 +302,9 @@
 						<span class="section-title">Logout</span>
 
 						<div class="ribbon-button ribbon-button-large logout-button <? if (!$isMobile): ?>regular<? endif; ?>">
-							<img class="ribbon-icon ribbon-normal" src="<? echo Yii::app()->getBaseUrl(true) . '/images/ribbon/normal/logout.png' ?>"/>
-							<img class="ribbon-icon ribbon-hot" src="<? echo Yii::app()->getBaseUrl(true) . '/images/ribbon/normal/logout.png' ?>"/>
-							<img class="ribbon-icon ribbon-disabled" src="<? echo Yii::app()->getBaseUrl(true) . '/images/ribbon/normal/logout.png' ?>"/>
+							<img class="ribbon-icon ribbon-normal" src="<? echo Yii::app()->getBaseUrl(true) . '/images/ribbon/logout.png' ?>"/>
+							<img class="ribbon-icon ribbon-hot" src="<? echo Yii::app()->getBaseUrl(true) . '/images/ribbon/logout.png' ?>"/>
+							<img class="ribbon-icon ribbon-disabled" src="<? echo Yii::app()->getBaseUrl(true) . '/images/ribbon/logout.png' ?>"/>
 						</div>
 					</div>
 				<? endif; ?>
@@ -276,7 +313,7 @@
 	<?
 	elseif ($tabName == 'qbuilder_tab'): ?>
 		<? if (Yii::app()->params['qbuilder_tab']['visible']): ?>
-			<div class="ribbon-tab" id="qbuilder-tab">
+			<div class="ribbon-tab ribbon-tab-overflow" id="qbuilder-tab">
 				<span class="ribbon-title"><? echo Yii::app()->params['qbuilder_tab']['name'] ?></span>
 				<div class="ribbon-section">
 					<span class="section-title"><? echo Yii::app()->params['qbuilder_tab']['name'] ?></span>
@@ -336,9 +373,9 @@
 						<span class="section-title">Logout</span>
 
 						<div class="ribbon-button ribbon-button-large logout-button <? if (!$isMobile): ?>regular<? endif; ?>">
-							<img class="ribbon-icon ribbon-normal" src="<? echo Yii::app()->getBaseUrl(true) . '/images/ribbon/normal/logout.png' ?>"/>
-							<img class="ribbon-icon ribbon-hot" src="<? echo Yii::app()->getBaseUrl(true) . '/images/ribbon/normal/logout.png' ?>"/>
-							<img class="ribbon-icon ribbon-disabled" src="<? echo Yii::app()->getBaseUrl(true) . '/images/ribbon/normal/logout.png' ?>"/>
+							<img class="ribbon-icon ribbon-normal" src="<? echo Yii::app()->getBaseUrl(true) . '/images/ribbon/logout.png' ?>"/>
+							<img class="ribbon-icon ribbon-hot" src="<? echo Yii::app()->getBaseUrl(true) . '/images/ribbon/logout.png' ?>"/>
+							<img class="ribbon-icon ribbon-disabled" src="<? echo Yii::app()->getBaseUrl(true) . '/images/ribbon/logout.png' ?>"/>
 						</div>
 					</div>
 				<? endif; ?>
@@ -349,7 +386,7 @@
 		<? /** @var $tabShortcutsRecord ShortcutsTabRecord */
 		$tabShortcutsRecord = ShortcutsTabRecord::model()->findByPk(str_replace('shortcuts-tab-', '', $tabName)); ?>
 		<? if (isset($tabShortcutsRecord)): ?>
-			<div class="ribbon-tab shortcuts-tab" id="shortcuts-tab-<? echo $tabShortcutsRecord->id; ?>">
+			<div class="ribbon-tab ribbon-tab-overflow shortcuts-tab" id="shortcuts-tab-<? echo $tabShortcutsRecord->id; ?>">
 				<span class="ribbon-title"><? echo $tabShortcutsRecord->name; ?></span>
 
 				<div class="ribbon-section">
@@ -383,9 +420,9 @@
 						<span class="section-title">Logout</span>
 
 						<div class="ribbon-button ribbon-button-large logout-button <? if (!$isMobile): ?>regular<? endif; ?>">
-							<img class="ribbon-icon ribbon-normal" src="<? echo Yii::app()->getBaseUrl(true) . '/images/ribbon/normal/logout.png' ?>"/>
-							<img class="ribbon-icon ribbon-hot" src="<? echo Yii::app()->getBaseUrl(true) . '/images/ribbon/normal/logout.png' ?>"/>
-							<img class="ribbon-icon ribbon-disabled" src="<? echo Yii::app()->getBaseUrl(true) . '/images/ribbon/normal/logout.png' ?>"/>
+							<img class="ribbon-icon ribbon-normal" src="<? echo Yii::app()->getBaseUrl(true) . '/images/ribbon/logout.png' ?>"/>
+							<img class="ribbon-icon ribbon-hot" src="<? echo Yii::app()->getBaseUrl(true) . '/images/ribbon/logout.png' ?>"/>
+							<img class="ribbon-icon ribbon-disabled" src="<? echo Yii::app()->getBaseUrl(true) . '/images/ribbon/logout.png' ?>"/>
 						</div>
 					</div>
 				<? endif; ?>

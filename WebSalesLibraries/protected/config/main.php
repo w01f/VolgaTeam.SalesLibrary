@@ -30,6 +30,7 @@
 			'application.models.ticker.records.*',
 			'application.models.wallbin.models.*',
 			'application.models.wallbin.records.*',
+			'application.models.search.*',
 		),
 		'behaviors' => array(
 			'onBeginRequest' => array(

@@ -23,20 +23,16 @@
 			<? endif; ?>
 		</div>
 		<? if (isset($categoryManager->groups)): ?>
-			<div class="tag-list-container" style="height: 400px">
+			<div class="tag-list-container" style="height: 400px; overflow: auto">
 				<div class="accordion tag-list">
 					<? foreach ($categoryManager->groups as $group): ?>
 						<h3><span><? echo $group; ?></span></h3>
-						<div class="checkbox">
-							<label class="group-selector-title"> <input class="group-selector" type="checkbox">
-								<? echo $group; ?>
-							</label>
+						<div class="checkbox  group-checkbox">
+							<label class="group-selector-container"> <input class="group-selector" type="checkbox">
+								<span class="name"><? echo $group; ?></span> </label>
 							<? foreach ($categoryManager->getTagsByGroup($group) as $tag): ?>
 								<div class="checkbox">
-									<label>
-										<input class="item-selector" type="checkbox" value="<? echo $group . '------' . $tag['tag']; ?>">
-										<? echo $tag['tag']; ?>
-									</label>
+									<label class="tag-selector-container"> <input type="checkbox" class="tag-selector"> <span class="name"><? echo $tag['tag']; ?></span> </label>
 								</div>
 							<? endforeach; ?>
 						</div>

@@ -1,3 +1,35 @@
+#right-navbar
+{
+	width: 25%;
+	min-width: 360px;
+	padding: 0;
+	margin: 0;
+	vertical-align: top;
+	border-right: 2px #999 solid;
+}
+
+#right-navbar .logo-list
+{
+	border: none;
+	margin-left: 0;
+}
+
+.sub-search-bar
+{
+	margin-top: 5px;
+	padding-left: 4px;
+}
+
+.sub-search-bar img
+{
+	cursor: pointer;
+}
+
+.sub-search-bar img.active
+{
+	background-color: #c6e2ff;
+}
+
 .sub-search-conditions-pane
 {
 	padding: 10px;
@@ -24,4 +56,9 @@
 {
 	opacity: 0.4;
 	filter: alpha(opacity=40);
+}
+
+.shortcuts-search-results-container
+{
+	margin: 30px;
 }

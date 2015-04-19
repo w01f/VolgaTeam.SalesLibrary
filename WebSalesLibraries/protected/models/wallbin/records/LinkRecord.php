@@ -186,7 +186,7 @@
 		 * @param $sortDirection string
 		 * @return array|null
 		 */
-		public static function searchByContent($contentConditions,
+		public static function searchByContentLegacy($contentConditions,
 											   $fileTypes,
 											   $startDate,
 											   $endDate,
@@ -217,7 +217,9 @@
 			$links = Yii::app()->session[$datasetKey];
 			if (!isset($links))
 			{
-				if (!((isset($fileTypes) && (count($contentConditions) > 0 || (isset($categories) && count($categories) > 0) || isset($superFilters) || (isset($startDate) && isset($endDate))) || isset($baseLinks))))
+				if (!((isset($fileTypes) &&
+					(count($contentConditions) > 0 || (isset($categories) && count($categories) > 0) || isset($superFilters) || (isset($startDate) && isset($endDate)))
+					|| isset($baseLinks))))
 					return null;
 				$libraryCondition = '1 = 1';
 				if (isset($checkedLibraryIds))

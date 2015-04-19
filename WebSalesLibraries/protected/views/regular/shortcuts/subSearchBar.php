@@ -4,11 +4,11 @@
 	$defaultView = $optionsContainer->subSearchDefaultView;
 ?>
 <? if ($optionsContainer->showSubSearchAll): ?>
-	<img class="no-filter" src="<? echo Yii::app()->getBaseUrl(true) . '/images/shortcuts/sub-search-bar/list-' . ($defaultView == 'all' ? 'on' : 'off') . '.png'; ?>" data-toggle="tooltip" title="Show All Files">
+	<img class="no-filter<? echo($defaultView == 'all' ? ' active' : '') ?>" src="<? echo Yii::app()->getBaseUrl(true) . '/images/shortcuts/sub-search-bar/list.png'; ?>" data-toggle="tooltip" title="Show All Files">
 <? endif; ?>
 <? if ($optionsContainer->showSubSearchSearch): ?>
-	<img class="custom-filter" src="<? echo Yii::app()->getBaseUrl(true) . '/images/shortcuts/sub-search-bar/search-' . ($defaultView == 'search' ? 'on' : 'off') . '.png'; ?>" data-toggle="tooltip" title="Custom Search">
+	<img class="custom-filter<? echo($defaultView == 'search' ? ' active' : '') ?>" src="<? echo Yii::app()->getBaseUrl(true) . '/images/shortcuts/sub-search-bar/search.png'; ?>" data-toggle="tooltip" title="Custom Search">
 <? endif; ?>
 <? if ($optionsContainer->showSubSearchTemplates && $hasTemplates): ?>
-	<img class="predefined-filter" src="<? echo Yii::app()->getBaseUrl(true) . '/images/shortcuts/sub-search-bar/link-' . ($defaultView == 'links' ? 'on' : 'off') . '.png'; ?>" data-toggle="tooltip" title="Category Links">
+	<img class="predefined-filter<? echo($defaultView == 'links' ? ' active' : '') ?>" src="<? echo Yii::app()->getBaseUrl(true) . '/images/shortcuts/sub-search-bar/link.png'; ?>" data-toggle="tooltip" title="Category Links">
 <? endif; ?>

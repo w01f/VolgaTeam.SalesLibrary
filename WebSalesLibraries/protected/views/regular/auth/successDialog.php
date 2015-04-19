@@ -13,7 +13,7 @@
     </tr>
     <tr>
         <td colspan="2" class ="buttons-area">
-            <button class="btn" id="accept-button" type="button">OK</button>
+            <button class="btn btn-default" id="accept-button" type="button">OK</button>
         </td>
     </tr>                    
 </table>

@@ -3,7 +3,7 @@
 	/**
 	 * Class SearchShortcut
 	 */
-	class SearchShortcut extends BaseShortcut
+	class SearchShortcut extends BaseShortcut implements IShortcutSearchOptionsContainer
 	{
 		public $ribbonLogoPath;
 		public $showResultsBar;
@@ -45,7 +45,7 @@
 			$this->showResultsBar = $showResultsBarTags->length > 0 ? filter_var(trim($showResultsBarTags->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : true;
 
 			$xpath = new DomXPath($linkConfig);
-			$this->conditions = new SearchConditions($xpath, $xpath->query('//Config/SearchCondition')->item(0));
+			$this->conditions = SearchConditions::fromXml($xpath, $xpath->query('//Config/SearchCondition')->item(0));
 
 			$enableSubSearchTags = $linkConfig->getElementsByTagName("EnableSubSearch");
 			$this->enableSubSearch = $enableSubSearchTags->length > 0 ? filter_var(trim($enableSubSearchTags->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : false;
@@ -82,5 +82,25 @@
 			$result .= '<div class="link-name">' . $this->name . ' - ' . $this->tooltip . '</div>';
 			$result .= '<div class="url">' . $this->sourceLink . '</div>';
 			return $result;
+		}
+
+		public function getSearchOptions()
+		{
+			$options = new ShortcutsSearchOptions();
+			$options->title = $this->title;
+			$options->isPage = false;
+			$options->openInSamePage = $this->samePage;
+
+			$options->enableSubSearch = $this->enableSubSearch;
+			$options->showSubSearchAll = $this->showSubSearchAll;
+			$options->showSubSearchSearch = $this->showSubSearchSearch;
+			$options->showSubSearchTemplates = $this->showSubSearchTemplates;
+			$options->subSearchDefaultView = $this->subSearchDefaultView;
+
+			$options->emptyResultLogo = $this->conditionNotMatchLogoPath;
+
+			$options->conditions = $this->conditions;
+
+			return $options;
 		}
 	}

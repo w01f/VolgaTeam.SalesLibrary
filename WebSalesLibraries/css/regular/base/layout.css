@@ -135,3 +135,8 @@ button.active
 	vertical-align: middle;
 	float: none;
 }
+
+.pagination > li:first-child > a, .pagination > li:first-child > span {
+	border-top-left-radius: 0 !important;
+	border-bottom-left-radius: 0 !important;
+}

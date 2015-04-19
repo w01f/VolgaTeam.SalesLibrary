@@ -7,17 +7,7 @@
 ?>
 <div class="sub-search-conditions-pane">
 	<div class="search-conditions" style="display: none;">
-		<? if (isset($searchBar->conditions->superFilters)): ?>
-			<? foreach ($searchBar->conditions->superFilters as $superFilter): ?>
-				<div class="super-filter"><? echo $superFilter; ?></div>
-			<? endforeach; ?>
-		<? endif; ?>
-		<? if (isset($searchBar->conditions->categories)): ?>
-			<? foreach ($searchBar->conditions->categories as $category): ?>
-				<? $category = (object)$category; ?>
-				<div class="category"><? echo $category->category; ?>------<? echo $category->tag; ?></div>
-			<? endforeach; ?>
-		<? endif; ?>
+		<div class="encoded-object"><? echo CJSON::encode($searchBar->getSearchOptions()) ?></div>
 		<? $this->renderPartial('categorySelector', array('categoryManager' => $searchBar->categoryManager), false, true); ?>
 	</div>
 	<div class="input-group search-input-container">

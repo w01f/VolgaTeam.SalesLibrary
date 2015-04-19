@@ -3,7 +3,7 @@
 	/**
 	 * Class SearchBar
 	 */
-	class SearchBar
+	class SearchBar implements IShortcutSearchOptionsContainer
 	{
 		public $configured;
 		public $alignment;
@@ -44,7 +44,7 @@
 			$this->samePage = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : true;
 
 			$xpath->query('//Config/SearchCondition');
-			$this->conditions = new SearchConditions($xpath, $xpath->query('//Config/SearchBar/SearchCondition')->item(0));
+			$this->conditions = SearchConditions::fromXml($xpath, $xpath->query('//Config/SearchBar/SearchCondition')->item(0));
 
 			$queryResult = $xpath->query('//SearchBar/EnableSubSearch');
 			$this->enableSubSearch = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : false;
@@ -69,5 +69,23 @@
 
 			$this->categoryManager = new CategoryManager();
 			$this->categoryManager->loadCategories();
+		}
+
+		public function getSearchOptions()
+		{
+			$options = new ShortcutsSearchOptions();
+			$options->title = $this->title;
+			$options->isPage = true;
+			$options->openInSamePage = $this->samePage;
+
+			$options->enableSubSearch = $this->enableSubSearch;
+			$options->showSubSearchAll = $this->showSubSearchAll;
+			$options->showSubSearchSearch = $this->showSubSearchSearch;
+			$options->showSubSearchTemplates = $this->showSubSearchTemplates;
+			$options->subSearchDefaultView = $this->subSearchDefaultView;
+
+			$options->conditions = $this->conditions;
+
+			return $options;
 		}
 	}

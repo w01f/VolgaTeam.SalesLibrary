@@ -56,6 +56,12 @@
 			$this->renderPartial('librariesView', array('libraryGroups' => $libraryGroups), false, true);
 		}
 
+		public function actionEditConditions()
+		{
+			$conditionTag = Yii::app()->request->getPost('conditionTag');
+			$this->renderPartial('conditions/wrapper', array('conditionTag' => $conditionTag), false, true);
+		}
+
 		public function actionSearchByContent()
 		{
 			$isClear = Yii::app()->request->getPost('isClear');
@@ -111,7 +117,7 @@
 				if (!isset($datasetKey))
 					$datasetKey = uniqid();
 
-				$links = LinkRecord::searchByContent(
+				$links = LinkRecord::searchByContentLegacy(
 					SearchHelper::prepareTextCondition($condition),
 					$fileTypes,
 					$startDate,
@@ -211,5 +217,25 @@
 			}
 			else
 				$this->renderPartial('searchResult', array(), false, true);
+		}
+
+		public function actionSearchJson()
+		{
+			$datasetKey = Yii::app()->request->getPost('datasetKey');
+			if (!isset($datasetKey))
+				$datasetKey = uniqid();
+
+
+			$conditionsEncoded = Yii::app()->request->getPost('conditions');
+			$conditions = isset($conditionsEncoded) ?
+				CJSON::decode($conditionsEncoded, false) :
+				new SearchConditions();
+
+			$resultDataset = SearchHelper::queryLinksByCondition($conditions, $datasetKey);
+			echo CJSON::encode(array(
+				'datasetKey' => $datasetKey,
+				'dataset' => $resultDataset
+			));
+			Yii::app()->end();
 		}
 	}
