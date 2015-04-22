@@ -54,7 +54,7 @@
 			if (searchBar.find('.btn.search-bar-run').hasClass('disabled')) return;
 			searchBarConditions.set('text', searchBar.find('.search-bar-text').val());
 			searchBarConditions.set('exactMatch', searchBar.find('#search-exact-match').is(':checked'));
-			searchBarConditions.set('onlyByName', searchBar.find('#search-file-names-only').is(':checked'));
+			searchBarConditions.set('onlyFileNames', searchBar.find('#search-file-names-only').is(':checked'));
 			searchBarConditions.setFileTypesSettings({
 				showPowerPoint: searchBar.find('#search-file-type-powerpoint').prop('checked'),
 				showVideo: searchBar.find('#search-file-type-video').prop('checked'),

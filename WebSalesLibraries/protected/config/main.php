@@ -6,7 +6,6 @@
 		'preload' => array('log', 'browser'),
 		'import' => array(
 			'application.components.*',
-			'application.components.widgets.*',
 			'application.components.core.*',
 			'application.components.behaviors.*',
 			'application.models.*',

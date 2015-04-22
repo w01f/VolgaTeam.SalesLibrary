@@ -6,7 +6,7 @@
 	{
 		var that = this;
 
-		var dataTable = new $.SalesPortal.SearchDataTable();
+		var dataTable = new $.SalesPortal.SearchDataTable(true);
 
 		var currentSearchConditions = new $.SalesPortal.SearchConditions(function ()
 		{

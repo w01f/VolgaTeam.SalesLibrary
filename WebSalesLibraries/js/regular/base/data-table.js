@@ -2,19 +2,43 @@
 {
 	window.BaseUrl = window.BaseUrl || '';
 	$.SalesPortal = $.SalesPortal || { };
-	$.SalesPortal.SearchDataTable = function ()
+	$.SalesPortal.SearchDataTable = function (saveState)
 	{
 		var dataTable = undefined;
 
-		this.init = function (searchResults, sortColumn, sortOrder)
+		this.init = function (searchResults, sortColumnTag, sortDirection)
 		{
 			destroy();
+
+			var sortColumnIndex = 3;
+			switch (sortColumnTag)
+			{
+				case "library":
+					sortColumnIndex = 1;
+					break;
+				case "file_type":
+					sortColumnIndex = 2;
+					break;
+				case "name":
+					sortColumnIndex = 3;
+					break;
+				case "date_modify":
+					sortColumnIndex = 5;
+					break;
+				case "tag":
+					sortColumnIndex = 0;
+					break;
+				case "rate":
+					sortColumnIndex = 4;
+					break;
+			}
 
 			var content = $('#content');
 
 			var tableContainer = content.find('.search-results-container');
 			tableContainer.html('<table id="search-results" class="table table-striped table-bordered"></table>');
 			var table = $("#search-results");
+
 			dataTable = table
 				.dataTable({
 					"data": searchResults != undefined ? searchResults.dataset : [],
@@ -65,9 +89,9 @@
 							"searchable": false
 						}
 					],
-					stateSave: true,
+					stateSave: saveState,
 					"order": [
-						[ 3, "asc" ]
+						[ sortColumnIndex, sortDirection != undefined ? sortDirection : "asc" ]
 					],
 					"scrollY": getTableSize(),
 					"scrollCollapse": false,

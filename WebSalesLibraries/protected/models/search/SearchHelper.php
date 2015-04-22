@@ -80,13 +80,14 @@
 		 */
 		public static function queryLinksByCondition($searchConditions, $datasetKey)
 		{
-			$links = Yii::app()->session[$datasetKey];
-			if (!isset($links))
+			$linksEncoded = Yii::app()->session[$datasetKey];
+			if (!isset($linksEncoded))
 			{
-				$baseLinks = Yii::app()->session[$searchConditions->baseDatasetKey];
+				$baseLinksEncoded = Yii::app()->session[$searchConditions->baseDatasetKey];
 				$baseLinksCondition = '1=1';
-				if (isset($baseLinks))
+				if (isset($baseLinksEncoded))
 				{
+					$baseLinks = CJSON::decode($baseLinksEncoded);
 					$availableLinkIds = array();
 					foreach ($baseLinks as $baseLink)
 						$availableLinkIds[] = $baseLink['id'];
@@ -299,11 +300,13 @@
 					->from('tbl_link link')
 					->leftJoin("(select lcat.id_link, group_concat(lcat.tag separator ', ') as tag from tbl_link_category lcat where " . $categoryJoinCondition . " group by lcat.id_link) glcat", $joinText)
 					->where($whereText)
-					->group('link.file_name, glcat.tag')
+					->group('link.file_relative_path, glcat.tag')
 					->queryAll();
 				$links = self::formatLinksInfo($queryRecords);
-				Yii::app()->session[$datasetKey] = $links;
+				Yii::app()->session[$datasetKey] = CJSON::encode($links);
 			}
+			else
+				$links = CJSON::decode($linksEncoded);
 			return $links;
 		}
 

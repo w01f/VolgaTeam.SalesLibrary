@@ -8,13 +8,15 @@
 
 		var searchShortcutOptions = new $.SalesPortal.SearchOptions($.parseJSON(content.find('.search-conditions .encoded-object').text()));
 
-		var dataTable = new $.SalesPortal.SearchDataTable();
+		var baseDatasetKey = undefined;
+
+		var dataTable = new $.SalesPortal.SearchDataTable(false);
 
 		var subSearchBar = undefined;
 
 		content.html('');
 		content.append($('<table id="shortcuts-search-container" style="table-layout:fixed;"><tr>' +
-			'<td id="right-navbar" style="display: none; width: 15%; min-width: 240px;"></td>' +
+			'<td id="right-navbar" style="display: none;"></td>' +
 			'<td>' +
 			'<div class="search-results-above sub-search-bar" style="display: none;"></div>' +
 			'<div class="search-results-container shortcuts-search-results-container"></div>' +
@@ -61,7 +63,7 @@
 			},
 			function (data)
 			{
-				searchShortcutOptions.conditions.datasetKey = data.datasetKey;
+				baseDatasetKey = data.datasetKey;
 				if (searchShortcutOptions.subSearchDefaultView == 'all')
 					SimpleSearch(content);
 				else if (searchShortcutOptions.subSearchDefaultView == 'search')
@@ -80,7 +82,7 @@
 			{
 				$.SalesPortal.SearchHelper.runSearchJson(
 					{
-						datasetKey: searchShortcutOptions.conditions.datasetKey
+						datasetKey: baseDatasetKey
 					},
 					function ()
 					{
@@ -95,7 +97,10 @@
 					function (data)
 					{
 						var searchResults = new $.SalesPortal.SearchResult(data.datasetKey, data.dataset);
-						dataTable.init(searchResults);
+						dataTable.init(searchResults,
+							searchShortcutOptions.conditions.sortColumn,
+							searchShortcutOptions.conditions.sortDirection
+						);
 						subSearchBar.show();
 						updateContentSize();
 					}
@@ -128,7 +133,7 @@
 							categories: customSearchConditions.categories,
 							onlyWithCategories: searchShortcutOptions.conditions.onlyWithCategories,
 							onlyByName: customSearchConditions.onlyByName,
-							baseDatasetKey: searchShortcutOptions.conditions.datasetKey,
+							baseDatasetKey: baseDatasetKey,
 							datasetKey: null
 						})
 					},
@@ -144,7 +149,10 @@
 					function (data)
 					{
 						var searchResults = new $.SalesPortal.SearchResult(data.datasetKey, data.dataset);
-						dataTable.init(searchResults);
+						dataTable.init(searchResults,
+							searchShortcutOptions.conditions.sortColumn,
+							searchShortcutOptions.conditions.sortDirection
+						);
 						subSearchBar.show();
 						updateContentSize();
 					}
@@ -416,7 +424,7 @@
 							categories: templateCategories,
 							onlyWithCategories: templateOnlyWithCategories,
 							onlyByName: templateOnlyByName,
-							baseDatasetKey: searchShortcutOptions.conditions.datasetKey,
+							baseDatasetKey: baseDatasetKey,
 							datasetKey: null
 						})
 					},
@@ -432,7 +440,14 @@
 					function (data)
 					{
 						var searchResults = new $.SalesPortal.SearchResult(data.datasetKey, data.dataset);
-						dataTable.init(searchResults);
+						dataTable.init(searchResults,
+							selectedTemplateConditions.conditions.sortColumn != undefined ?
+								selectedTemplateConditions.conditions.sortColumn :
+								searchShortcutOptions.conditions.sortColumn,
+							selectedTemplateConditions.conditions.sortDirection != undefined ?
+								selectedTemplateConditions.conditions.sortDirection :
+								searchShortcutOptions.conditions.sortDirection
+						);
 						subSearchBar.show();
 						updateContentSize();
 					}
@@ -522,16 +537,17 @@
 			$.SalesPortal.Shortcuts.updateContentSize();
 
 			var content = $('#content');
-			var height = content.height();
-			var width = content.width();
+			var height = content.outerHeight(true);
 
-			$('#shortcuts-search-container').css({
-				'width': width + 'px'
+			var shortcutsSearchContainer = $('#shortcuts-search-container');
+			var shortcutsSearchContainerWidth = content.width() - 17;
+			shortcutsSearchContainer.css({
+				'width': shortcutsSearchContainerWidth + 'px'
 			});
 
 			var sideBar = $('#right-navbar');
 			sideBar.find('.logo-list').css({
-				'height': (height - 5) + 'px'
+				'height': height + 'px'
 			});
 
 			dataTable.updateSize();
