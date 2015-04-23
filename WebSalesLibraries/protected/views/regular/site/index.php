@@ -30,6 +30,7 @@
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/regular/base/data-table.css?' . Yii::app()->params['version']);
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/regular/base/shortcuts.css?' . Yii::app()->params['version']);
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/regular/base/shortcuts-search.css?' . Yii::app()->params['version']);
+	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/regular/base/shortcuts-search-bar.css?' . Yii::app()->params['version']);
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/regular/base/calendar.css?' . Yii::app()->params['version']);
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/regular/base/favorites.css?' . Yii::app()->params['version']);
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/regular/base/quizzes.css?' . Yii::app()->params['version']);
@@ -415,6 +416,14 @@
 					</div>
 					<? $selected = $pageShortcutsRecord->isEnabled(Yii::app()->user->login) ? false : $selected; ?>
 				<? endforeach; ?>
+				<div class="ribbon-section search-bar-toggle-section disabled">
+					<span class="section-title">Show Search</span>
+					<div class="ribbon-button ribbon-button-large<? if (!$isMobile): ?> regular<? endif; ?>">
+						<img class="ribbon-icon ribbon-normal" src="<? echo Yii::app()->getBaseUrl(true) . '/images/shortcuts/search-bar/search-bar-toggle.png' ?>"/>
+						<img class="ribbon-icon ribbon-hot" src="<? echo Yii::app()->getBaseUrl(true) . '/images/shortcuts/search-bar/search-bar-toggle.png' ?>"/>
+						<img class="ribbon-icon ribbon-disabled" src="<? echo Yii::app()->getBaseUrl(true) . '/images/shortcuts/search-bar/search-bar-toggle.png' ?>"/>
+					</div>
+				</div>
 				<? if (isset(Yii::app()->user->firstName) && isset(Yii::app()->user->lastName)): ?>
 					<div class="ribbon-section">
 						<span class="section-title">Logout</span>

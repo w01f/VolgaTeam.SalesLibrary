@@ -1,24 +1,3 @@
-.shortcuts-search-bar
-{
-	width: 100%;
-}
-
-.shortcuts-search-bar.open
-{
-	margin-bottom: 35px;
-}
-
-.shortcuts-search-bar td
-{
-	padding-left: 10px;
-	padding-right: 10px;
-}
-
-.shortcuts-search-bar .file-filter-panel .search-option
-{
-	padding-left: 50px;
-}
-
 .shortcuts-page-content
 {
 	width: 100%;

@@ -30,36 +30,16 @@
 					<span class="input-group-addon">Search:</span>
 					<input class="form-control search-bar-text" type="text" placeholder="<? echo $searchBar->defaultLabel; ?>">
 					<span class="input-group-btn">
+							<button class="btn btn-default tags-filter-panel-switcher" type="button"><? echo $tagsName; ?></button>
+							<button class="btn btn-default search-bar-options" type="button">Search Options</button>
 							<button class="btn btn-default search-bar-run" type="button">
 								<img src="<? echo Yii::app()->getBaseUrl(true) . '/images/search/search-shortcuts.png'; ?>">
 							</button>
-							<button class="btn btn-default tags-filter-panel-switcher" type="button"><? echo $tagsName; ?></button>
 				  	</span>
 				</div>
 				<p class="text-muted">
 					<small class="tag-condition-selected">Fusce dapibus, tellus ac cursus commodo, tortor mauris nibh.</small>
 				</p>
-			</td>
-		</tr>
-		<tr class="file-filter-panel">
-			<td>
-				<form class="form-inline">
-					<div class="search-option checkbox">
-						<label class="file-selector"><input id="search-file-type-video" type="checkbox" checked>video</label>
-					</div>
-					<div class="search-option checkbox">
-						<label class="file-selector"><input id="search-file-type-powerpoint" type="checkbox" checked>presentations</label>
-					</div>
-					<div class="search-option checkbox">
-						<label class="file-selector"><input id="search-file-type-other" type="checkbox">all other files</label>
-					</div>
-					<div class="search-option checkbox">
-						<label class="file-selector"><input id="search-file-names-only" type="checkbox" checked>file names only</label>
-					</div>
-					<div class="search-option checkbox">
-						<label class="file-selector"><input id="search-exact-match" type="checkbox" checked>exact search</label>
-					</div>
-				</form>
 			</td>
 		</tr>
 	</table>

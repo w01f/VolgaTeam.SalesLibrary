@@ -174,7 +174,7 @@
 				$linkRecord = ShortcutsLinkRecord::model()->findByPk($linkId);
 				$optionsContainer = new SearchShortcut($linkRecord);
 			}
-			$this->renderPartial('subSearchBar', array('optionsContainer' => $optionsContainer));
+			$this->renderPartial('subSearchBar/bar', array('optionsContainer' => $optionsContainer));
 		}
 
 		public function actionGetSubSearchCustomPanel()
@@ -192,7 +192,7 @@
 				$pageRecord = ShortcutsPageRecord::model()->findByPk($pageId);
 			$pageModel = $pageRecord->getModel();
 			$searchBar = $pageModel->searchBar;
-			$this->renderPartial('subSearchCustomPanel', array('searchBar' => $searchBar));
+			$this->renderPartial('subSearchBar/customSearchPanel', array('searchBar' => $searchBar));
 		}
 
 		public function actionGetSubSearchTemplatesPanel()
@@ -218,7 +218,12 @@
 				$templates = $link->subConditions;
 				$id = $linkId;
 			}
-			$this->renderPartial('subSearchTemplatesPanel', array('templates' => $templates, 'id' => $id));
+			$this->renderPartial('subSearchBar/searchTemplatesPanel', array('templates' => $templates, 'id' => $id));
+		}
+
+		public function actionEditSearchBarSettings()
+		{
+			$this->renderPartial('searchBar/settings');
 		}
 
 		public function actionGetDownloadDialog()

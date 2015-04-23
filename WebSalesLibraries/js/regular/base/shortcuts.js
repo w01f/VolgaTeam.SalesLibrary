@@ -59,7 +59,7 @@
 					content.html(data.content);
 
 					initPageLogo(data);
-					searchBar = new $.SalesPortal.ShortcutsSearchBar(pageId);
+					searchBar = new $.SalesPortal.ShortcutsSearchBar(tabId, pageId);
 
 					switch (data.type)
 					{
@@ -193,6 +193,7 @@
 								success: function (msg)
 								{
 									searchBar.changeVisibility(false);
+									searchBar.hideToggle();
 									var pageContent = content.find('.shortcuts-page-content');
 									if (linkType == 'search')
 									{

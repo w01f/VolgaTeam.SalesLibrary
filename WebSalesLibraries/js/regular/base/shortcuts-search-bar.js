@@ -2,20 +2,10 @@
 {
 	window.BaseUrl = window.BaseUrl || '';
 	$.SalesPortal = $.SalesPortal || { };
-	$.SalesPortal.ShortcutsSearchBar = function (pageId)
+	$.SalesPortal.ShortcutsSearchBar = function (tabId, pageId)
 	{
 		var that = this;
 		var searchBar = $('.shortcuts-search-bar');
-		if (searchBar.length > 0)
-		{
-			var shortcutPageId = pageId;
-			var searchBarOptions = new $.SalesPortal.SearchOptions($.parseJSON(searchBar.find('.search-conditions .encoded-object').text()));
-			var searchBarConditions = new $.SalesPortal.SearchConditions(function ()
-			{
-
-			});
-			searchBarConditions.loadFromConditionsFormatted(searchBarOptions.conditions);
-		}
 
 		this.changeVisibility = function (show)
 		{
@@ -25,48 +15,81 @@
 				searchBar.removeClass('open').hide();
 		};
 
+		this.hideToggle = function ()
+		{
+			var toggleSection = $('#' + tabId).find('.search-bar-toggle-section');
+			if (!toggleSection.hasClass('disabled'))
+				toggleSection.addClass('disabled');
+		};
+
 		var init = function ()
 		{
-			searchBar.find('.search-bar-text').keypress(function (e)
+			var toggleSection = $('#' + tabId).find('.search-bar-toggle-section');
+			if (searchBar.length > 0)
 			{
+				toggleSection.removeClass('disabled');
+				var toggleButton = toggleSection.find('.ribbon-button');
+				if (!toggleButton.hasClass('sel'))
+					toggleButton.addClass('sel');
+
+				toggleButton.off('click').on('click', function ()
+				{
+					var needToShow = !$(this).hasClass('sel');
+					if (needToShow)
+					{
+						$(this).addClass('sel');
+						that.changeVisibility(true);
+					}
+					else
+					{
+						$(this).removeClass('sel');
+						that.changeVisibility(false);
+					}
+					updateToggleButtonState($(this));
+				});
+				updateToggleButtonState(toggleButton);
+
+				searchBar.find('.search-bar-text').keypress(function (e)
+				{
+					updateSearchButtonState();
+					if (e.which == 13)
+						search();
+				});
+				searchBar.find('.search-bar-run').on('click', search);
+
+				searchBar.find('.file-filter-panel .file-selector input').off('change').on('change', function ()
+				{
+					updateSearchButtonState();
+				});
+
+				searchBar.find('.search-bar-options').off('click').on('click', function ()
+				{
+					editSettings();
+				});
+
+				searchBar.find('.tags-filter-panel-switcher').off('click').on('click', function ()
+				{
+					editTagsCondition();
+				});
+
 				updateSearchButtonState();
-				if (e.which == 13)
-					search();
-			});
-			searchBar.find('.search-bar-run').on('click', search);
-
-			searchBar.find('.file-filter-panel .file-selector input').off('change').on('change', function ()
+				updateSelectedCategories();
+			}
+			else
 			{
-				updateSearchButtonState();
-			});
-
-			searchBar.find('.tags-filter-panel-switcher').off('click').on('click', function ()
-			{
-				editTagsCondition();
-			});
-
-			updateSearchButtonState();
-			updateSelectedCategories();
+				if (!toggleSection.hasClass('disabled'))
+					toggleSection.addClass('disabled');
+			}
 		};
 
 		var search = function ()
 		{
 			if (searchBar.find('.btn.search-bar-run').hasClass('disabled')) return;
 			searchBarConditions.set('text', searchBar.find('.search-bar-text').val());
-			searchBarConditions.set('exactMatch', searchBar.find('#search-exact-match').is(':checked'));
-			searchBarConditions.set('onlyFileNames', searchBar.find('#search-file-names-only').is(':checked'));
-			searchBarConditions.setFileTypesSettings({
-				showPowerPoint: searchBar.find('#search-file-type-powerpoint').prop('checked'),
-				showVideo: searchBar.find('#search-file-type-video').prop('checked'),
-				showPdf: searchBar.find('#search-file-type-other').prop('checked'),
-				showWord: searchBar.find('#search-file-type-other').prop('checked'),
-				showExcel: searchBar.find('#search-file-type-other').prop('checked'),
-				showImages: searchBar.find('#search-file-type-other').prop('checked'),
-				showUrls: searchBar.find('#search-file-type-other').prop('checked')
-			});
 			if (searchBarOptions.openInSamePage)
 			{
 				that.changeVisibility(false);
+				that.hideToggle();
 				var content = $('#content').find('.shortcuts-page-content');
 				searchBarOptions.conditions = searchBarConditions.getConditionsFormatted();
 				content.html('<div class="search-conditions" style="display: none;"><div class="encoded-object">' + $.toJSON(searchBarOptions) + '</div></div>');
@@ -84,14 +107,34 @@
 			}
 		};
 
+		var updateToggleButtonState = function (target)
+		{
+			var sectionTitle = target.closest('.search-bar-toggle-section').find('.section-title');
+			if (target.hasClass('sel'))
+				sectionTitle.text('Hide Search');
+			else
+				sectionTitle.text('Show Search');
+		};
+
 		var updateSearchButtonState = function ()
 		{
 			var hasKeyword = $('.shortcuts-search-bar .search-bar-text').val() != "";
 			var hasSuperFilters = searchBarConditions.getSuperFiltersSettings().length > 0;
 			var hasCategories = searchBarConditions.getCategorySettings().length > 0;
+			var fileSettings = searchBarConditions.getFileTypesSettings();
 			var searchButton = searchBar.find('.btn.search-bar-run');
 			searchButton.removeClass('disabled');
-			if (!(hasKeyword || hasSuperFilters || hasCategories) || !($('#search-file-type-powerpoint').is(':checked') || $('#search-file-type-video').is(':checked') || $('#search-file-type-other').is(':checked')))
+			if (!(hasKeyword ||
+				hasSuperFilters ||
+				hasCategories) || !(fileSettings.showPowerPoint ||
+				fileSettings.showVideo ||
+				fileSettings.showPdf ||
+				fileSettings.showWord ||
+				fileSettings.showExcel ||
+				fileSettings.showImages ||
+				fileSettings.showUrls
+				)
+				)
 				searchButton.addClass('disabled');
 		};
 
@@ -111,6 +154,87 @@
 				selectedCategoryLabel.html(searchBar.find('.tags-filter-panel-switcher').html() + ': ' + categoryStr);
 			else
 				selectedCategoryLabel.html('');
+		};
+
+		var setDefaultSettings = function ()
+		{
+			searchBarConditions.loadFromConditionsFormatted(searchBarOptions.conditions);
+
+			searchBarConditions.setFileTypesSettings({
+				showPowerPoint: true,
+				showVideo: true,
+				showPdf: false,
+				showWord: false,
+				showExcel: false,
+				showImages: false,
+				showUrls: false
+			});
+			searchBarConditions.set('onlyFileNames', true);
+			searchBarConditions.set('exactMatch', true);
+		};
+
+		var editSettings = function ()
+		{
+			$.ajax({
+				type: "POST",
+				url: window.BaseUrl + "shortcuts/editSearchBarSettings",
+				beforeSend: function ()
+				{
+					$.SalesPortal.Overlay.show(false);
+				},
+				complete: function ()
+				{
+					$.SalesPortal.Overlay.hide();
+				},
+				success: function (msg)
+				{
+					var content = $(msg);
+
+					var fileSettings = searchBarConditions.getFileTypesSettings();
+					content.find('#search-bar-edit-file-power-point').prop('checked', fileSettings.showPowerPoint);
+					content.find('#search-bar-edit-file-video').prop('checked', fileSettings.showVideo);
+					content.find('#search-bar-edit-file-others').prop('checked', fileSettings.showPdf || fileSettings.showWord || fileSettings.showExcel || fileSettings.showImages || fileSettings.showUrls);
+
+					content.find('#search-bar-edit-file-names').prop('checked', searchBarConditions.get('onlyFileNames'));
+					content.find('#search-bar-edit-exact-match').prop('checked', searchBarConditions.get('exactMatch'));
+
+					content.find('.accept-button').off('click').on('click', function ()
+					{
+						searchBarConditions.setFileTypesSettings({
+							showPowerPoint: content.find('#search-bar-edit-file-power-point').prop('checked'),
+							showVideo: content.find('#search-bar-edit-file-video').prop('checked'),
+							showPdf: content.find('#search-bar-edit-file-others').prop('checked'),
+							showWord: content.find('#search-bar-edit-file-others').prop('checked'),
+							showExcel: content.find('#search-bar-edit-file-others').prop('checked'),
+							showImages: content.find('#search-bar-edit-file-others').prop('checked'),
+							showUrls: content.find('#search-bar-edit-file-others').prop('checked')
+						});
+						searchBarConditions.set('onlyFileNames', content.find('#search-bar-edit-file-names').prop('checked'));
+						searchBarConditions.set('exactMatch', content.find('#search-bar-edit-exact-match').prop('checked'));
+
+						$.fancybox.close();
+					});
+					content.find('.cancel-button').off('click').on('click', function ()
+					{
+						$.fancybox.close();
+					});
+
+					$.fancybox({
+						content: content,
+						title: 'Search Options',
+						width: 500,
+						autoSize: false,
+						autoHeight: true,
+						openEffect: 'none',
+						closeEffect: 'none'
+					});
+				},
+				error: function ()
+				{
+				},
+				async: true,
+				dataType: 'html'
+			});
 		};
 
 		var editTagsCondition = function ()
@@ -246,6 +370,15 @@
 		};
 
 		if (searchBar.length > 0)
-			init();
+		{
+			var shortcutPageId = pageId;
+			var searchBarOptions = new $.SalesPortal.SearchOptions($.parseJSON(searchBar.find('.search-conditions .encoded-object').text()));
+			var searchBarConditions = new $.SalesPortal.SearchConditions(function ()
+			{
+
+			});
+			setDefaultSettings();
+		}
+		init();
 	};
 })(jQuery);
