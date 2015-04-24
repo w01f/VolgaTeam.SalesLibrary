@@ -6,7 +6,6 @@
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/vendor/video-js/video-js.min.css?' . Yii::app()->params['version']);
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/vendor/bootstrap/css/bootstrap.min.css?' . Yii::app()->params['version']);
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/vendor/datepicker/css/daterangepicker.css?' . Yii::app()->params['version']);
-	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/vendor/jixedbar/themes/default/jx.stylesheet.css?' . Yii::app()->params['version']);
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/vendor/cubeportfolio/css/cubeportfolio.min.css?' . Yii::app()->params['version']);
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/vendor/carousel/load/skin_modern_silver.css?' . Yii::app()->params['version']);
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/vendor/carousel/load/html_content.css?' . Yii::app()->params['version']);
@@ -16,9 +15,9 @@
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/vendor/data-table/css/dataTables.bootstrap.css?' . Yii::app()->params['version']);
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/regular/base/ribbon.css?' . Yii::app()->params['version']);
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/regular/base/layout.css?' . Yii::app()->params['version']);
-	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/regular/base/minibar.css?' . Yii::app()->params['version']);
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/regular/base/columns.css?' . Yii::app()->params['version']);
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/regular/base/accordion.css?' . Yii::app()->params['version']);
+	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/regular/base/wallbin-ribbon.css?' . Yii::app()->params['version']);
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/regular/base/wallbin-tabs.css?' . Yii::app()->params['version']);
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/regular/base/folder-links.css?' . Yii::app()->params['version']);
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/regular/base/banner.css?' . Yii::app()->params['version']);
@@ -56,7 +55,6 @@
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/bootstrap/js/bootstrap.min.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/datepicker/js/moment.min.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/datepicker/js/daterangepicker.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
-	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/jixedbar/js/jquery.jixedbar.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/gesture-handler/jquery.hammer.min.js', CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/touch-punch/jquery.ui.touch-punch.min.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/cubeportfolio/js/jquery.cubeportfolio.min.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
@@ -87,7 +85,6 @@
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/base/shortcuts.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/base/favorites.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/base/link-rate.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
-	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/base/minibar.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/base/quizzes.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/qbuilder/page-list.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/qbuilder/link-cart.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
@@ -107,12 +104,6 @@
 			$tabParam['shortcuts-tab-' . $tabShortcutsRecord->id] = $tabShortcutsRecord->order;
 
 	asort($tabParam);
-
-	$newsCount = 0;
-	if (Yii::app()->params['ribbon_news']['visible'])
-		foreach (Yii::app()->params['ribbon_news']['urls'] as $url)
-			if ($url['visible'])
-				$newsCount++;
 
 	$sideBarVisible = true;
 	if (isset(Yii::app()->request->cookies['sideBarVisible']->value))
@@ -143,36 +134,63 @@
 						<td>
 							<table id="libraries-selector">
 								<tr>
-									<td><label for="select-library"></label><select id="select-library" class="selectpicker"></select></td>
+									<td>
+										<label for="select-library"></label><select id="select-library" class="selectpicker"></select>
+									</td>
 								</tr>
 								<tr>
-									<td><label for="select-page"></label><select id="select-page" class="selectpicker"></select></td>
+									<td>
+										<label for="select-page"></label><select id="select-page" class="selectpicker"></select>
+									</td>
 								</tr>
 							</table>
 						</td>
 					</tr>
 				</table>
 			</div>
-			<? if ($newsCount > 0): ?>
-				<div class="ribbon-section">
-					<span class="section-title"><? echo Yii::app()->params['ribbon_news']['title']; ?></span>
-					<div class="ribbon-news-container">
-						<? $counter = 0; ?>
-						<? foreach (Yii::app()->params['ribbon_news']['urls'] as $url): ?>
-							<? if ($url['visible']): ?>
-								<? if ($newsCount > 2 && !($counter % 2)): ?>
-									<div class="news-block">
-								<? endif; ?>
-								<a class="news-item" target="_blank" href="<? echo $url['url']; ?>"><img src="<? echo Yii::app()->getBaseUrl(true) . '/images/ribbon/urls/' . $url['image'] . '?' . Yii::app()->params['version']; ?>"></a>
-								<? if ($newsCount > 2 && (($counter % 2) || $counter == ($newsCount - 1))): ?>
-									</div>
-								<? endif; ?>
-								<? $counter++; ?>
-							<? endif; ?>
-						<? endforeach; ?>
+			<div class="ribbon-section">
+				<span class="section-title">Columns</span>
+				<div id="columns-view" class="ribbon-button ribbon-button-large wallbin-style-options  <? if (!$isMobile): ?>regular<? endif; ?>">
+					<img class="ribbon-icon ribbon-normal" src="<? echo Yii::app()->getBaseUrl(true) . '/images/wallbin/columns.png' ?>"/>
+					<img class="ribbon-icon ribbon-hot" src="<? echo Yii::app()->getBaseUrl(true) . '/images/wallbin/columns.png' ?>"/>
+					<img class="ribbon-icon ribbon-disabled" src="<? echo Yii::app()->getBaseUrl(true) . '/images/wallbin/columns.png' ?>"/>
+				</div>
+			</div>
+			<div class="ribbon-section">
+				<span class="section-title">Boxes</span>
+				<div id="accordion-view" class="ribbon-button ribbon-button-large wallbin-style-options  <? if (!$isMobile): ?>regular<? endif; ?>">
+					<img class="ribbon-icon ribbon-normal" src="<? echo Yii::app()->getBaseUrl(true) . '/images/wallbin/accordion.png' ?>"/>
+					<img class="ribbon-icon ribbon-hot" src="<? echo Yii::app()->getBaseUrl(true) . '/images/wallbin/accordion.png' ?>"/>
+					<img class="ribbon-icon ribbon-disabled" src="<? echo Yii::app()->getBaseUrl(true) . '/images/wallbin/accordion.png' ?>"/>
+				</div>
+			</div>
+			<div class="ribbon-section">
+				<span class="section-title">Tabs</span>
+				<div id="tabs-view" class="ribbon-button ribbon-button-large wallbin-style-options  <? if (!$isMobile): ?>regular<? endif; ?>">
+					<img class="ribbon-icon ribbon-normal" src="<? echo Yii::app()->getBaseUrl(true) . '/images/wallbin/tabs.png' ?>"/>
+					<img class="ribbon-icon ribbon-hot" src="<? echo Yii::app()->getBaseUrl(true) . '/images/wallbin/tabs.png' ?>"/>
+					<img class="ribbon-icon ribbon-disabled" src="<? echo Yii::app()->getBaseUrl(true) . '/images/wallbin/tabs.png' ?>"/>
+				</div>
+			</div>
+			<div class="ribbon-section wallbin-view-options">
+				<span class="section-title">View Options</span>
+				<div class="row">
+					<div class="col-xs-6">
+						<button id="increase-text-size" type="button" class="btn btn-default btn-sm">Larger Text</button>
+					</div>
+					<div class="col-xs-6">
+						<button id="increase-text-space" type="button" class="btn btn-default btn-sm">More Spacing</button>
 					</div>
 				</div>
-			<? endif; ?>
+				<div class="row">
+					<div class="col-xs-6">
+						<button id="decrease-text-size" type="button" class="btn btn-default btn-sm">Smaller Text</button>
+					</div>
+					<div class="col-xs-6">
+						<button id="decrease-text-space" type="button" class="btn btn-default btn-sm">Less Spacing</button>
+					</div>
+				</div>
+			</div>
 			<? if (isset(Yii::app()->user->firstName) && isset(Yii::app()->user->lastName)): ?>
 				<div class="ribbon-section">
 					<span class="section-title">Logout</span>
@@ -191,7 +209,7 @@
 				<div class="ribbon-section">
 					<span class="section-title">Advanced Search Engine</span>
 					<div class="input-group search-ribbon-condition-content-container">
-						  <input type="text" class="form-control search-bar-text" id="search-ribbon-condition-content-value" placeholder="What are you looking for?">
+						<input type="text" class="form-control search-bar-text" id="search-ribbon-condition-content-value" placeholder="What are you looking for?">
 						  <span class="input-group-btn">
 							<button id="search-ribbon-clear-content-value" class="btn btn-default search-bar-run" type="button">
 								<span class="glyphicon glyphicon-remove"></span>
@@ -201,7 +219,7 @@
 					<div class="input-group" id="search-ribbon-condition-date-container">
 						<input class="form-control" type="text" readonly placeholder="Select Date Range...">
 						<div class="input-group-btn">
-							<button id="search-ribbon-condition-date" class="btn btn-default" type="button">
+							<button class="btn btn-default select-date-toggle" type="button">
 								<span class="glyphicon glyphicon-calendar"></span></button>
 							<button id="search-ribbon-condition-date-clear" class="btn btn-default" type="button">
 								<span class="glyphicon glyphicon-remove"></span></button>
@@ -360,8 +378,7 @@
 						<img class="ribbon-icon ribbon-normal" src="<?php echo Yii::app()->getBaseUrl(true) . '/images/qpages/ribbon/page-preview.png' ?>"/>
 						<img class="ribbon-icon ribbon-hot" src="<?php echo Yii::app()->getBaseUrl(true) . '/images/qpages/ribbon/page-preview.png' ?>"/>
 						<img class="ribbon-icon ribbon-disabled" src="<?php echo Yii::app()->getBaseUrl(true) . '/images/qpages/ribbon/page-preview.png' ?>"/>
-						<span>Preview</span>
-					</a>
+						<span>Preview</span> </a>
 					<div class="ribbon-button ribbon-button-large" id="page-email-outlook-button" rel="tooltip" title="Send URL with Outlook">
 						<img class="ribbon-icon ribbon-normal" src="<?php echo Yii::app()->getBaseUrl(true) . '/images/qpages/ribbon/page-email.png' ?>"/>
 						<img class="ribbon-icon ribbon-hot" src="<?php echo Yii::app()->getBaseUrl(true) . '/images/qpages/ribbon/page-email.png' ?>"/>
@@ -451,49 +468,7 @@
 	</div>
 </div>
 <!------------------------->
-<!---------Minibar--------->
-<div id="minibar">
-	<ul>
-		<li id="columns-view" title="Columns View">
-			<a href="#"><img src="<? echo Yii::app()->getBaseUrl(true) . '/images/minibar/columns.png' ?>" alt=""/></a>
-		</li>
-	</ul>
-	<span class="jx-separator-left"></span>
-	<ul>
-		<li id="accordion-view" title="Accordion View">
-			<a href="#"><img src="<? echo Yii::app()->getBaseUrl(true) . '/images/minibar/accordion.png' ?>" alt=""/></a>
-		</li>
-	</ul>
-	<span class="jx-separator-left"></span>
-	<ul>
-		<li id="tabs-view" title="Tabs View">
-			<a href="#"><img src="<? echo Yii::app()->getBaseUrl(true) . '/images/minibar/tabs.png' ?>" alt=""/></a>
-		</li>
-	</ul>
-	<span class="jx-separator-left"></span>
-	<ul>
-		<li id="increase-text-size" title="Increase Text Size">
-			<a href="#"><img src="<? echo Yii::app()->getBaseUrl(true) . '/images/minibar/increaseTextSize.png' ?>" alt=""/></a>
-		</li>
-	</ul>
-	<ul>
-		<li id="decrease-text-size" title="Decrease Text Size">
-			<a href="#"><img src="<? echo Yii::app()->getBaseUrl(true) . '/images/minibar/decreaseTextSize.png' ?>" alt=""/></a>
-		</li>
-	</ul>
-	<span class="jx-separator-left"></span>
-	<ul>
-		<li id="increase-text-space" title="Increase Line Spacing">
-			<a href="#"><img src="<? echo Yii::app()->getBaseUrl(true) . '/images/minibar/increaseTextSpace.png' ?>" alt=""/></a>
-		</li>
-	</ul>
-	<ul>
-		<li id="decrease-text-space" title="Decrease Line Spacing">
-			<a href="#"><img src="<? echo Yii::app()->getBaseUrl(true) . '/images/minibar/decreaseTextSpace.png' ?>" alt=""/></a>
-		</li>
-	</ul>
-	<span class="jx-separator-left"></span>
-</div><!-------------------------><!---------Ticker--------->
+<!---------Ticker--------->
 <? if (Yii::app()->params['ticker']['visible'] && isset($tickerRecords)): ?>
 	<div class="modern-ticker mt-round <? echo Yii::app()->params['ticker']['effect']; ?>">
 		<? if ((Yii::app()->params['ticker']['show_label'] || Yii::app()->params['ticker']['show_logo']) && isset($tickerRecords)): ?>

@@ -431,24 +431,3 @@ body
 	border: none;
 	vertical-align: middle;
 }
-
-.ribbon-news-container
-{
-	height: 100%;
-}
-
-.ribbon-news-container .news-block
-{
-	float: left;
-}
-
-.ribbon-news-container .news-item
-{
-	line-height: 80px;
-}
-
-.ribbon-news-container .news-block .news-item
-{
-	line-height: normal;
-	display: block;
-}

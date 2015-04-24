@@ -62,6 +62,7 @@
 					storedTextSpace++;
 					updateTextSpace(storedTextSpace);
 				}
+				$(this).blur();
 			});
 			$('#decrease-text-space').off('click').on('click', function ()
 			{
@@ -70,6 +71,7 @@
 					storedTextSpace--;
 					updateTextSpace(storedTextSpace);
 				}
+				$(this).blur();
 			});
 
 			$('#increase-text-size').off('click').on('click', function ()
@@ -77,6 +79,7 @@
 				if (storedTextSize < 22)
 					storedTextSize++;
 				updateTextSize(storedTextSize);
+				$(this).blur();
 			});
 
 			$('#decrease-text-size').off('click').on('click', function ()
@@ -84,11 +87,12 @@
 				if (storedTextSize > 8)
 					storedTextSize--;
 				updateTextSize(storedTextSize);
+				$(this).blur();
 			});
 
 			$('#columns-view').off('click').on('click', function ()
 			{
-				$('#columns-view,#accordion-view').removeClass('active').blur();
+				$('#columns-view,#accordion-view').removeClass('sel').blur();
 				$.cookie("wallbinView", "columns", {
 					expires: 60 * 60 * 24 * 7
 				});
@@ -97,7 +101,7 @@
 
 			$('#accordion-view').off('click').on('click', function ()
 			{
-				$('#columns-view,#accordion-view').removeClass('active').blur();
+				$('#columns-view,#accordion-view').removeClass('sel').blur();
 				$.cookie("wallbinView", "accordion", {
 					expires: 60 * 60 * 24 * 7
 				});
@@ -107,7 +111,7 @@
 			$('#tabs-view').off('click').on('click', function ()
 			{
 				var tabToggle = $('#tabs-view');
-				$.cookie("wallbinUseTabs", !tabToggle.hasClass('active'), {
+				$.cookie("wallbinUseTabs", !tabToggle.hasClass('sel'), {
 					expires: 60 * 60 * 24 * 7
 				});
 				updateView();
@@ -507,26 +511,26 @@
 			if ($.cookie("wallbinUseTabs") != "true")
 			{
 				pageselector.selectpicker('show');
-				tabToggle.removeClass('active').blur();
+				tabToggle.removeClass('sel').blur();
 				if ($.cookie("wallbinView") == "accordion")
 				{
-					$('#accordion-view').addClass('active');
+					$('#accordion-view').addClass('sel');
 					loadAccordion(container);
 				}
 				else
 				{
-					$('#columns-view').addClass('active');
+					$('#columns-view').addClass('sel');
 					loadColumns(container);
 				}
 			}
 			else
 			{
 				pageselector.selectpicker('hide');
-				tabToggle.addClass('active');
+				tabToggle.addClass('sel');
 				if ($.cookie("wallbinView") == "accordion")
-					$('#accordion-view').addClass('active');
+					$('#accordion-view').addClass('sel');
 				else
-					$('#columns-view').addClass('active');
+					$('#columns-view').addClass('sel');
 				loadTabs(container);
 			}
 		};

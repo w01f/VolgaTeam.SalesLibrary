@@ -16,8 +16,8 @@
 		this.parentEl = 'body';
 
 		//element that triggered the date range picker
-		this.element = $(element);
-		this.button = $('#search-ribbon-condition-date');
+		this.element = $(element).find('input');
+		this.button = $(element).find('.select-date-toggle');;
 
 		//create the picker HTML object
 		var DRPTemplate = '<div class="daterangepicker dropdown-menu">' +

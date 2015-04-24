@@ -258,8 +258,9 @@
 				editorFooter.refresh();
 			});
 
+			var expirationDatePickerContainer = $('#page-content-expiration-date-container');
 			var expirationDatePicker = $('#page-content-expiration-date');
-			expirationDatePicker.daterangepicker(
+			expirationDatePickerContainer.daterangepicker(
 				{
 					format: dateFormat,
 					singleDatePicker: true,
@@ -269,14 +270,12 @@
 
 			$('#page-content-use-expiration-date').off('change').on('change', function ()
 			{
-				var dateContainer = $('#page-content-expiration-date-container');
-				var dateField = $('#page-content-expiration-date');
 				if ($(this).is(':checked'))
-					dateContainer.show();
+					expirationDatePickerContainer.show();
 				else
 				{
-					dateContainer.hide();
-					dateField.val('');
+					expirationDatePickerContainer.hide();
+					expirationDatePicker.val('');
 				}
 			});
 

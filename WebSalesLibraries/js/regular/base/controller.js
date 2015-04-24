@@ -28,43 +28,24 @@
 						async: true,
 						dataType: 'html'
 					});
-					var minibar = $('.jx-bar, .jx-show');
 					switch (id)
 					{
 						case 'home-tab':
-							minibar.css({
-								'height': '30px'
-							});
 							$.SalesPortal.Wallbin.init();
 							break;
 						case 'search-full-tab':
-							minibar.css({
-								'height': '0px'
-							});
 							$.SalesPortal.Search.init();
 							break;
 						case 'favorites-tab':
-							minibar.css({
-								'height': '0px'
-							});
 							$.SalesPortal.Favorites.init();
 							break;
 						case 'quiz-tab':
-							minibar.css({
-								'height': '0px'
-							});
 							$.SalesPortal.QuizManager.init();
 							break;
 						case 'qbuilder-tab':
-							minibar.css({
-								'height': '0px'
-							});
 							$.SalesPortal.QBuilder.Manager.init();
 							break;
 						default:
-							minibar.css({
-								'height': '0px'
-							});
 							if (id != null && id.indexOf("shortcuts-tab-") >= 0)
 								$.SalesPortal.Shortcuts.init(id);
 							else

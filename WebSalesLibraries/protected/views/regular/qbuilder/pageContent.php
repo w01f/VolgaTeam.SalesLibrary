@@ -78,9 +78,9 @@
 						</div>
 						<div class="col-xs-3">
 							<div id="page-content-expiration-date-container" class="input-group input-group-sm <? if ($page->isExpired()): ?>has-error<? endif; ?>" <? if (!(isset($expDate) && $expDate != '')): ?>style="display: none"<? endif; ?>>
-								<input id="page-content-expiration-date" class="form-control" type="text" readonly placeholder="Select Date..." value="<? echo $expDate; ?>">
+								<input id="page-content-expiration-date" class="form-control" type="text" placeholder="Select Date..." value="<? echo $expDate; ?>" readonly>
 								<div class="input-group-btn">
-									<button id="select-date-range" class="btn btn-default" type="button">
+									<button class="btn btn-default select-date-toggle" type="button">
 										<span class="glyphicon glyphicon-calendar"></span></button>
 								</div>
 							</div>

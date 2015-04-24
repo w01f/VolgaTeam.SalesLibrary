@@ -65,7 +65,7 @@
 
 			var dateFormat = 'MM/DD/YYYY';
 			var dateCondition = $('#search-ribbon-condition-date-container');
-			dateCondition.find('input').daterangepicker(
+			dateCondition.daterangepicker(
 				{
 					format: dateFormat,
 					ranges: {
