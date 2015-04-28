@@ -32,11 +32,21 @@
 		}
 
 		/**
+		 * @return array
+		 */
+		public function relations()
+		{
+			return array(
+				'subLinks' => array(self::HAS_MANY, 'ShortcutsLinkRecord', 'id_group', 'order' => 'subLinks.`order`',),
+			);
+		}
+
+		/**
 		 * @return ShortcutsLinkRecord[]
 		 */
 		public function getSubLinks()
 		{
-			return self::model()->findAll(array('order' => '`order`', 'condition' => 'id_group=:id_group', 'params' => array(':id_group' => $this->id)));
+			return $this->subLinks;
 		}
 
 		/**

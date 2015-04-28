@@ -11,6 +11,7 @@
 		public $searchBar;
 		public $viewPath;
 		public $ribbonLogoPath;
+		public $allowSwitchView;
 
 		/**
 		 * @var BaseShortcut[]
@@ -30,7 +31,7 @@
 			$this->ribbonLogoPath = @getimagesize($customRibbonPath) ? $customRibbonPath : '';
 			/** @var $linkRecords ShortcutsLinkRecord[] */
 			$this->links = array();
-			$linkRecords = $pageRecord->getLinks();
+			$linkRecords = $this->getPageLinkRecords($pageRecord);
 			foreach ($linkRecords as $linkRecord)
 				$this->links[] = $linkRecord->getModel();
 		}
@@ -40,4 +41,10 @@
 		 * @return array
 		 */
 		public abstract function getDisplayParameters();
+
+		/**
+		 * @param $pageRecord ShortcutsPageRecord
+		 * @return ShortcutsLinkRecord[]
+		 */
+		public abstract function getPageLinkRecords($pageRecord);
 	}

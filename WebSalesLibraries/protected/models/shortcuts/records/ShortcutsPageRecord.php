@@ -55,19 +55,32 @@
 		}
 
 		/**
+		 * @param $predefinedType string
 		 * @return PageModel
 		 */
-		public function getModel()
+		public function getModel($predefinedType = null)
 		{
 			$pageConfig = new DOMDocument();
 			$pageConfig->loadXML($this->config);
 			$xpath = new DomXPath($pageConfig);
 			$queryResult = $xpath->query('//Config/Type');
-			$type = $queryResult->length > 0 ? strtolower(trim($queryResult->item(0)->nodeValue)) : '';
+			$originalType = $queryResult->length > 0 ? strtolower(trim($queryResult->item(0)->nodeValue)) : '';
+
+			if (!isset($predefinedType))
+				$type = $originalType;
+			else
+				$type = $predefinedType;
+
 			switch ($type)
 			{
 				case 'grid':
-					return new GridPage($this);
+					switch ($originalType)
+					{
+						case 'carousel':
+							return new CarouselGridPage($this);
+						default:
+							return new GridPage($this);
+					}
 				case 'carousel':
 					return new CarouselPage($this);
 				default:

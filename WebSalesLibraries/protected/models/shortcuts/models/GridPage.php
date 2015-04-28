@@ -13,6 +13,7 @@
 			parent::__construct($pageRecord);
 			$this->type = 'grid';
 			$this->viewPath = 'grid';
+			$this->allowSwitchView = false;
 		}
 
 		/**
@@ -28,7 +29,17 @@
 				'gridAdjustment' => 'responsive',
 				'caption' => 'overlayBottomAlong',
 				'displayType' => 'bottomToTop',
-				'displayTypeSpeed' => 100
+				'displayTypeSpeed' => 100,
+				'showPageModeToggle' => $this->allowSwitchView,
 			);
+		}
+
+		/**
+		 * @param $pageRecord ShortcutsPageRecord
+		 * @return ShortcutsLinkRecord[]
+		 */
+		public function getPageLinkRecords($pageRecord)
+		{
+			return $pageRecord->getLinks();
 		}
 	}

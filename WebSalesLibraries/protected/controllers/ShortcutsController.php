@@ -32,6 +32,7 @@
 		public function actionGetPage()
 		{
 			$pageId = Yii::app()->request->getPost('pageId');
+			$predefinedPageType = Yii::app()->request->getPost('predefinedPageType');
 			if (isset($pageId))
 			{
 				/** @var $pageRecord ShortcutsPageRecord */
@@ -41,7 +42,7 @@
 					/** @var $tabRecord ShortcutsTabRecord */
 					$tabRecord = ShortcutsTabRecord::model()->findByPk($pageRecord->id_tab);
 					StatisticActivityRecord::WriteActivity('Shortcuts', 'Page Changed', array('Tab' => $tabRecord->name, 'Button' => $pageRecord->name));
-					$pageModel = $pageRecord->getModel();
+					$pageModel = $pageRecord->getModel($predefinedPageType);
 					echo CJSON::encode(array(
 						'type' => $pageModel->type,
 						'logo' => $pageModel->ribbonLogoPath,

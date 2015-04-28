@@ -29,20 +29,20 @@
 			{
 				toggleSection.removeClass('disabled');
 				var toggleButton = toggleSection.find('.ribbon-button');
-				if (!toggleButton.hasClass('sel'))
-					toggleButton.addClass('sel');
+				if (!toggleButton.hasClass('selected'))
+					toggleButton.addClass('selected');
 
 				toggleButton.off('click').on('click', function ()
 				{
-					var needToShow = !$(this).hasClass('sel');
+					var needToShow = !$(this).hasClass('selected');
 					if (needToShow)
 					{
-						$(this).addClass('sel');
+						$(this).addClass('selected');
 						that.changeVisibility(true);
 					}
 					else
 					{
-						$(this).removeClass('sel');
+						$(this).removeClass('selected');
 						that.changeVisibility(false);
 					}
 					updateToggleButtonState($(this));
@@ -110,7 +110,7 @@
 		var updateToggleButtonState = function (target)
 		{
 			var sectionTitle = target.closest('.search-bar-toggle-section').find('.section-title');
-			if (target.hasClass('sel'))
+			if (target.hasClass('selected'))
 				sectionTitle.text('Hide Search');
 			else
 				sectionTitle.text('Show Search');

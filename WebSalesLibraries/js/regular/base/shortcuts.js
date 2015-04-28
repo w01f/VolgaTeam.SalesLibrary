@@ -5,11 +5,11 @@
 	var ShortcutsManager = function ()
 	{
 		var that = this;
-
 		var searchBar = undefined;
 
-		this.selectedCarouselCategory = 1;
 		this.selectedPageId = undefined;
+		this.selectedCarouselCategory = 1;
+		this.selectedPageType = undefined;
 
 		this.init = function (tabId)
 		{
@@ -30,18 +30,28 @@
 			$.SalesPortal.ShortcutsSearchManager(content, objectId);
 		};
 
-		var loadShortcutsPage = function (tabId)
+		var loadShortcutsPage = function (tabId, predefinedPageType)
 		{
 			var pageIdSelector = '#' + tabId + ' .sel.shortcuts-page';
 			var pageId = $(pageIdSelector).attr('id');
+
+			if (predefinedPageType != undefined)
+				that.selectedPageType = predefinedPageType;
+
 			if (that.selectedPageId != pageId)
+			{
 				that.selectedCarouselCategory = 1;
+				that.selectedPageType = undefined;
+			}
+
 			that.selectedPageId = pageId;
+
 			$.ajax({
 				type: "POST",
 				url: window.BaseUrl + "shortcuts/getPage",
 				data: {
-					pageId: pageId
+					pageId: pageId,
+					predefinedPageType: that.selectedPageType
 				},
 				beforeSend: function ()
 				{
@@ -59,6 +69,8 @@
 					content.html(data.content);
 
 					initPageLogo(data);
+					initPageModeToggle(tabId, data.displayParameters.showPageModeToggle, that.selectedPageType);
+
 					searchBar = new $.SalesPortal.ShortcutsSearchBar(tabId, pageId);
 
 					switch (data.type)
@@ -194,6 +206,8 @@
 								{
 									searchBar.changeVisibility(false);
 									searchBar.hideToggle();
+									hidePageModeToggle();
+
 									var pageContent = content.find('.shortcuts-page-content');
 									if (linkType == 'search')
 									{
@@ -307,6 +321,69 @@
 					break;
 			}
 			return null;
+		};
+
+		var initPageModeToggle = function (tabId, showPageModeToggle, predefinedPageType)
+		{
+			var updatePageModeToggleState = function (target)
+			{
+				var sectionTitle = target.find('.section-title');
+				var sectionImages = target.find('img');
+				if (target.hasClass('default-mode'))
+				{
+					sectionTitle.text('Grid');
+					sectionImages.prop('src', window.BaseUrl + "images/shortcuts/page-type-toggle-grid.png")
+				}
+				else
+				{
+					sectionTitle.text('Carousel');
+					sectionImages.prop('src', window.BaseUrl + "images/shortcuts/page-type-toggle-carousel.png")
+				}
+			};
+
+			var toggleSection = $('#' + tabId).find('.page-type-toggle-section');
+			var useDefaultMode = predefinedPageType == undefined || predefinedPageType == 'carousel';
+			if (showPageModeToggle)
+			{
+				toggleSection.removeClass('disabled');
+				if (useDefaultMode)
+				{
+					if (!toggleSection.hasClass('default-mode'))
+						toggleSection.addClass('default-mode');
+				}
+				else
+					toggleSection.removeClass('default-mode');
+
+				toggleSection.find('.ribbon-button').off('click').on('click', function ()
+				{
+					var modeName = undefined;
+					if (!toggleSection.hasClass('default-mode'))
+					{
+						modeName = 'carousel';
+						toggleSection.addClass('default-mode');
+					}
+					else
+					{
+						modeName = 'grid';
+						toggleSection.removeClass('default-mode');
+					}
+					updatePageModeToggleState(toggleSection);
+					loadShortcutsPage(tabId, modeName);
+				});
+				updatePageModeToggleState(toggleSection);
+			}
+			else
+			{
+				if (!toggleSection.hasClass('disabled'))
+					toggleSection.addClass('disabled');
+			}
+		};
+
+		var hidePageModeToggle = function ()
+		{
+			var toggleSection = $('.page-type-toggle-section');
+			if (!toggleSection.hasClass('disabled'))
+				toggleSection.addClass('disabled');
 		};
 
 		this.updateContentSize = function ()

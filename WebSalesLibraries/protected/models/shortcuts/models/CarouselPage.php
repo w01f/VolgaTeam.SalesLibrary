@@ -16,6 +16,13 @@
 			$this->config = $pageRecord->config;
 			$this->type = 'carousel';
 			$this->viewPath = 'carousel';
+
+			$config = new DOMDocument();
+			$config->loadXML($this->config);
+			$xpath = new DomXPath($config);
+
+			$allowSwitchViewTags = $xpath->query('//Config/TileToggle');
+			$this->allowSwitchView = $allowSwitchViewTags->length > 0 ? filter_var(trim($allowSwitchViewTags->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : false;
 		}
 
 		/**
@@ -35,6 +42,8 @@
 			}
 
 			return array(
+				'showPageModeToggle' => $this->allowSwitchView,
+
 				'predefinedDataList' => $dataList,
 				'carouselWidth' => intval(trim($xpath->query('//Carousel/carouselWidth')->item(0)->nodeValue)),
 				'carouselHeight' => intval(trim($xpath->query('//Carousel/carouselHeight')->item(0)->nodeValue)),
@@ -127,5 +136,14 @@
 				'comboBoxVerticalMargins' => 20,
 				'comboBoxCornerRadius' => 0,
 			);
+		}
+
+		/**
+		 * @param $pageRecord ShortcutsPageRecord
+		 * @return ShortcutsLinkRecord[]
+		 */
+		public function getPageLinkRecords($pageRecord)
+		{
+			return $pageRecord->getLinks();
 		}
 	}

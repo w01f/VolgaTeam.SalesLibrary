@@ -26,3 +26,8 @@
 {
 	box-sizing: border-box !important;
 }
+
+.page-type-toggle-section.disabled, .page-type-toggle-section.disabled + .ribbon-section-sep
+{
+	display: none;
+}

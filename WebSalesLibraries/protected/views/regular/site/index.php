@@ -433,6 +433,14 @@
 					</div>
 					<? $selected = $pageShortcutsRecord->isEnabled(Yii::app()->user->login) ? false : $selected; ?>
 				<? endforeach; ?>
+				<div class="ribbon-section page-type-toggle-section disabled">
+					<span class="section-title">Grid\Carousel</span>
+					<div class="ribbon-button ribbon-button-large<? if (!$isMobile): ?> regular<? endif; ?>">
+						<img class="ribbon-icon ribbon-normal" src="<? echo Yii::app()->getBaseUrl(true) . '/images/shortcuts/page-type-toggle-grid.png' ?>"/>
+						<img class="ribbon-icon ribbon-hot" src="<? echo Yii::app()->getBaseUrl(true) . '/images/shortcuts/page-type-toggle-grid.png' ?>"/>
+						<img class="ribbon-icon ribbon-disabled" src="<? echo Yii::app()->getBaseUrl(true) . '/images/shortcuts/page-type-toggle-grid.png' ?>"/>
+					</div>
+				</div>
 				<div class="ribbon-section search-bar-toggle-section disabled">
 					<span class="section-title">Show Search</span>
 					<div class="ribbon-button ribbon-button-large<? if (!$isMobile): ?> regular<? endif; ?>">
