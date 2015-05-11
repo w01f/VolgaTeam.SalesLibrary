@@ -1,4 +1,8 @@
-<?/** @var $selectedLinks array() */?>
+<? /**
+ * @var $previewData GalleryPreviewData
+ * @var $format string
+ */
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,8 +12,9 @@
 		$cs->registerCssFile(Yii::app()->baseUrl . '/vendor/supersized/css/supersized.css?' . Yii::app()->params['version']);
 		$cs->registerCssFile(Yii::app()->baseUrl . '/vendor/supersized/theme/supersized.shutter.css?' . Yii::app()->params['version']);
 		$cs->registerCoreScript('jquery');
+		$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/json/jquery.json-2.3.min.js', CClientScript::POS_HEAD);
 		$cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/supersized/js/jquery.easing.min.js', CClientScript::POS_HEAD);
-		$cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/supersized/js/supersized.3.2.7.min.js', CClientScript::POS_HEAD);
+		$cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/supersized/js/supersized.3.2.7.min.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
 		$cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/supersized/theme/supersized.shutter.js', CClientScript::POS_HEAD);
 	?>
 	<script type="text/javascript">
@@ -41,10 +46,33 @@
 				// Components
 				slide_links: 'blank',	// Individual links for each slide (Options: false, 'num', 'name', 'blank')
 				thumb_links: 1,			// Individual thumb links for each slide
-				thumbnail_navigation: 0,			// Thumbnail navigation
+				thumbnail_navigation: 0,// Thumbnail navigation
+				slideSwitchHandler: function ()
+				{
+					var viewerData = $.parseJSON($('#data').text());
+					$.ajax({
+						type: "POST",
+						url: window.BaseUrl + "statistic/writeActivity",
+						data: {
+							type: 'Link',
+							subType: 'Preview Page',
+							data: $.toJSON({
+								Name: viewerData.name,
+								File: viewerData.fileName,
+								'Original Format': viewerData.format,
+								Format: '<? echo $format;?>',
+								Mode: 'Fullscreen'
+							})
+						},
+						async: true,
+						dataType: 'html'
+					});
+
+				},
 				slides: [			// Slideshow Images
+					<? $selectedLinks = $previewData->getFullScreenGalleryImages($format)?>
 					<? foreach ($selectedLinks as $link): ?>
-					{image: "<? echo str_replace('//sd_cache','/sd_cache', Yii::app()->getBaseUrl(true).'/'.str_replace('./', '', $link['image'])); ?>", title: "<? echo $link['title']; ?>", thumb: "<? echo str_replace('//sd_cache','/sd_cache',Yii::app()->getBaseUrl(true).'/'.str_replace('./', '', $link['thumb'])); ?>", url: "#"},
+					{image: "<? echo $link['image']; ?>", title: "<? echo $link['title']; ?>", thumb: "<? $link['thumb']; ?>", url: "#"},
 					<? endforeach; ?>
 				]
 			});
@@ -53,6 +81,7 @@
 	</script>
 </head>
 <body>
+<div id="data" style="display: none"><? echo json_encode($previewData) ?></div>
 <!--Arrow Navigation-->
 <a id="prevslide" class="load-item"></a> <a id="nextslide" class="load-item"></a>
 

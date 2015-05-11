@@ -25,11 +25,17 @@ namespace SalesDepot.Services.StatisticService
 				if ((subType.Equals("Open") ||
 					subType.Equals("Open") ||
 					subType.Equals("Preview Options") ||
+					subType.Equals("Preview") ||
 					subType.Equals("Preview Page") ||
 					subType.Equals("Play Video") ||
 					subType.Equals("Send Email") ||
+					subType.Equals("Download File") ||
 					subType.Equals("Email Activity") ||
-					subType.Equals("Create Email")
+					subType.Equals("Create Email") ||
+					subType.Equals("Add to QS") ||
+					subType.Equals("Favorites") ||
+					subType.Equals("Favorites Activity") ||
+					subType.Equals("Add to Favorites")
 					)
 					&& details != null)
 					return details.Where(d => d.tag.ToLower().Equals("file")).Select(d =>

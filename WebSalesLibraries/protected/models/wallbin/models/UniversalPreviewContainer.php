@@ -1,4 +1,4 @@
-<?php
+<?
 
 	/**
 	 * Class UniversalPreviewContainer
@@ -21,31 +21,26 @@
 		 * @soap
 		 */
 		public $pngLinks;
-		public $pngMaxFileSize;
 		/**
 		 * @var string[]
 		 * @soap
 		 */
 		public $pngPhoneLinks;
-		public $pngPhoneMaxFileSize;
 		/**
 		 * @var string[]
 		 * @soap
 		 */
 		public $jpegLinks;
-		public $jpegMaxFileSize;
 		/**
 		 * @var string[]
 		 * @soap
 		 */
 		public $jpegPhoneLinks;
-		public $jpegPhoneMaxFileSize;
 		/**
 		 * @var string[]
 		 * @soap
 		 */
 		public $pdfLinks;
-		public $pdfMaxFileSize;
 		/**
 		 * @var string[]
 		 * @soap
@@ -70,22 +65,12 @@
 		 * @var string[]
 		 * @soap
 		 */
-		public $oldOfficeFormatLinks;
-		/**
-		 * @var string[]
-		 * @soap
-		 */
 		public $newOfficeFormatLinks;
 		/**
 		 * @var string[]
 		 * @soap
 		 */
 		public $thumbsLinks;
-		/**
-		 * @var string[]
-		 * @soap
-		 */
-		public $thumbsPhoneLinks;
 		/**
 		 * @var int
 		 * @soap
@@ -96,6 +81,19 @@
 		 * @soap
 		 */
 		public $thumbsHeight;
+
+		public $pngItems;
+		public $pngGalleryItems;
+		public $jpegItems;
+		public $jpegGalleryItems;
+		public $thumbItems;
+		public $officeItems;
+
+		public $pdf;
+		public $wmv;
+		public $ogv;
+		public $mp4;
+		public $mp4Thumb;
 
 		/**
 		 * @param $library
@@ -110,108 +108,74 @@
 		 */
 		public function load($previewRecords)
 		{
+			$this->pngItems = array();
+			$this->pngGalleryItems = array();
+			$this->jpegItems = array();
+			$this->jpegGalleryItems = array();
+			$this->officeItems = array();
+			$this->thumbItems = array();
 			foreach ($previewRecords as $record)
 			{
 				$this->id = $record->id_container;
 				$this->libraryId = $record->id_library;
-				$previewLink = str_replace(' ', '%20', htmlspecialchars(str_replace('\\', '/', $this->parent->storageLink . '/' . $record->relative_path)));
-				$previewPath = str_replace('\\', '/', $this->parent->storagePath . DIRECTORY_SEPARATOR . $record->relative_path);
+				$previewFile = new PreviewFile();
+				$previewFile->link = str_replace(' ', '%20', htmlspecialchars(str_replace('\\', '/', $this->parent->storageLink . '/' . $record->relative_path)));
+				$previewFile->path = str_replace('\\', '/', $this->parent->storagePath . DIRECTORY_SEPARATOR . $record->relative_path);
+				$previewFile->name = basename($previewFile->path);
+				$previewFile->size = file_exists($previewFile->path) ? filesize($previewFile->path) : 0;
 				switch ($record->type)
 				{
 					case 'png':
-						$previewLink .= '?version=' . filemtime($previewPath);
-						$this->pngLinks[] = $previewLink;
-						$fileSize = file_exists($previewPath) ? filesize($previewPath) : 0;
-						if ($this->pngMaxFileSize < $fileSize)
-							$this->pngMaxFileSize = $fileSize;
+						$previewFile->link .= '?version=' . filemtime($previewFile->path);
+						$this->pngGalleryItems[] = $previewFile;
 						break;
 					case 'png_phone':
-						$previewLink .= '?version=' . filemtime($previewPath);
-						$this->pngPhoneLinks[] = $previewLink;
-						$fileSize = file_exists($previewPath) ? filesize($previewPath) : 0;
-						if ($this->pngPhoneMaxFileSize < $fileSize)
-							$this->pngPhoneMaxFileSize = $fileSize;
+						$previewFile->link .= '?version=' . filemtime($previewFile->path);
+						$this->pngItems[] = $previewFile;
 						break;
 					case 'jpeg':
-						$previewLink .= '?version=' . filemtime($previewPath);
-						$this->jpegLinks[] = $previewLink;
-						$fileSize = file_exists($previewPath) ? filesize($previewPath) : 0;
-						if ($this->jpegMaxFileSize < $fileSize)
-							$this->jpegMaxFileSize = $fileSize;
+						$previewFile->link .= '?version=' . filemtime($previewFile->path);
+						$this->jpegGalleryItems[] = $previewFile;
 						break;
 					case 'jpeg_phone':
-						$previewLink .= '?version=' . filemtime($previewPath);
-						$this->jpegPhoneLinks[] = $previewLink;
-						$fileSize = file_exists($previewPath) ? filesize($previewPath) : 0;
-						if ($this->jpegPhoneMaxFileSize < $fileSize)
-							$this->jpegPhoneMaxFileSize = $fileSize;
+						$previewFile->link .= '?version=' . filemtime($previewFile->path);
+						$this->jpegItems[] = $previewFile;
 						break;
 					case 'pdf':
-						$this->pdfLinks[] = $previewLink;
-						$fileSize = file_exists($previewPath) ? filesize($previewPath) : 0;
-						if ($this->pdfMaxFileSize < $fileSize)
-							$this->pdfMaxFileSize = $fileSize;
+						$this->pdf = $previewFile;
 						break;
 					case 'thumbs':
-						$previewLink .= '?version=' . filemtime($previewPath);
-						$this->thumbsLinks[] = $previewLink;
-						break;
-					case 'thumbs_phone':
-						$previewLink .= '?version=' . filemtime($previewPath);
-						$this->thumbsPhoneLinks[] = $previewLink;
+						$previewFile->link .= '?version=' . filemtime($previewFile->path);
+						$this->thumbItems[] = $previewFile;
 						break;
 					case 'wmv':
-						$this->wmvLinks[] = $previewLink;
+						$this->wmv = $previewFile;
 						break;
 					case 'mp4':
-						$this->mp4Links[] = $previewLink;
+						$this->mp4 = $previewFile;
 						break;
 					case 'mp4 thumb':
-						$this->mp4ThumbLinks[] = $previewLink;
+						$this->mp4Thumb = $previewFile;
 						break;
 					case 'ogv':
-						$this->ogvLinks[] = $previewLink;
+						$this->ogv = $previewFile;
 						break;
+					case 'office':
 					case 'new office':
-						$this->newOfficeFormatLinks[] = $previewLink;
-						break;
-					case 'old office':
-						$this->oldOfficeFormatLinks[] = $previewLink;
+						$this->officeItems[] = $previewFile;
 						break;
 				}
 				if ($record->thumb_width > 0)
-					$thumbsWidth = $record->thumb_width * 0.75;
+					$this->thumbsWidth = $record->thumb_width * 0.75;
 				if ($record->thumb_height > 0)
-					$thumbsHeight = $record->thumb_height * 0.75;
+					$this->thumbsHeight = $record->thumb_height * 0.75;
 			}
-			if (isset($thumbsHeight))
-				$this->thumbsHeight = $thumbsHeight;
-			if (isset($thumbsWidth))
-				$this->thumbsWidth = $thumbsWidth;
-			if (isset($this->pngLinks))
-				natsort($this->pngLinks);
-			if (isset($this->pngPhoneLinks))
-				natsort($this->pngPhoneLinks);
-			if (isset($this->pdfLinks))
-				natsort($this->pdfLinks);
-			if (isset($this->jpegLinks))
-				natsort($this->jpegLinks);
-			if (isset($this->jpegPhoneLinks))
-				natsort($this->jpegPhoneLinks);
-			if (isset($this->oldOfficeFormatLinks))
-				natsort($this->oldOfficeFormatLinks);
-			if (isset($this->newOfficeFormatLinks))
-				natsort($this->newOfficeFormatLinks);
-			if (isset($this->thumbsLinks))
-				natsort($this->thumbsLinks);
-			if (isset($this->thumbsPhoneLinks))
-				natsort($this->thumbsPhoneLinks);
-			if (isset($this->mp4Links))
-				natsort($this->mp4Links);
-			if (isset($this->mp4ThumbLinks))
-				natsort($this->mp4ThumbLinks);
-			if (isset($this->ogvLinks))
-				natsort($this->ogvLinks);
+			$sortHelper = new ObjectSortHelper('link', 'asc');
+			usort($this->pngItems, array($sortHelper, 'sort'));
+			usort($this->pngGalleryItems, array($sortHelper, 'sort'));
+			usort($this->jpegItems, array($sortHelper, 'sort'));
+			usort($this->jpegGalleryItems, array($sortHelper, 'sort'));
+			usort($this->thumbItems, array($sortHelper, 'sort'));
+			usort($this->officeItems, array($sortHelper, 'sort'));
 		}
-
 	}

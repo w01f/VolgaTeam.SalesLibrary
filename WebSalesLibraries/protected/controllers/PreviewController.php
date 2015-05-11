@@ -17,54 +17,27 @@
 				$isQuickSite = true;
 			else
 				$isQuickSite = false;
-			$authorized = false;
 			$dialogData = array();
-			$userId = -1;
-			if (isset(Yii::app()->user))
-			{
-				$userId = Yii::app()->user->getId();
-				$authorized = isset($userId);
-			}
 			if (isset($linkId))
 			{
-				if (Yii::app()->browser->isMobile())
-					$browser = 'mobile';
-				else
-				{
-					$browser = Yii::app()->browser->getBrowser();
-					switch ($browser)
-					{
-						case 'Internet Explorer':
-							$browser = 'ie';
-							break;
-						case 'Chrome':
-						case 'Safari':
-							$browser = 'webkit';
-							break;
-						case 'Firefox':
-							$browser = 'firefox';
-							break;
-						case 'Opera':
-							$browser = 'opera';
-							break;
-						default:
-							$browser = 'webkit';
-							break;
-					}
-				}
 				$linkRecord = LinkRecord::getLinkById($linkId);
 				if (isset($linkRecord))
 				{
 					$libraryManager = new LibraryManager();
 					$library = $libraryManager->getLibraryById($linkRecord->id_library);
 					$link = new LibraryLink(new LibraryFolder(new LibraryPage($library)));
-					$link->browser = $browser;
 					$link->load($linkRecord);
-					if ($authorized)
+
+					$previewData = $link->getPreviewData();
+					$previewData->allowAddToQuickSite = !$isQuickSite;
+
+					if ($previewData->userAuthorized)
 						StatisticActivityRecord::WriteActivity('Link', 'Preview Options', array('Name' => $link->fileName, 'File' => $link->fileName));
+
 					$dialogData = array(
-						'html' => $this->renderPartial('viewDialog', array('link' => $link, 'authorized' => $authorized, 'isQuickSite' => $isQuickSite), true),
-						'rateData' => LinkRateRecord::getRateData($linkId, $userId)
+						'format' => $previewData->viewerFormat,
+						'data' => CJSON::encode($previewData),
+						'content' => $this->renderPartial($previewData->contentView, array('data' => $previewData,), true),
 					);
 				}
 			}
@@ -124,14 +97,13 @@
 					$libraryManager = new LibraryManager();
 					$library = $libraryManager->getLibraryById($linkRecord->id_library);
 					$link = new LibraryLink(new LibraryFolder(new LibraryPage($library)));
-					$link->browser = 'phone';
 					$link->load($linkRecord);
 					$this->renderPartial('linkPreview', array('link' => $link, 'authorized' => $authorized, 'isQuickSite' => $isQuickSite), false, true);
 				}
 			}
 		}
 
-		public function actionRunFullscreenGallery()
+		public function actionRunFullScreenGallery()
 		{
 			$linkId = Yii::app()->request->getQuery('linkId');
 			$format = Yii::app()->request->getQuery('format');
@@ -146,33 +118,28 @@
 					if (isset($library))
 					{
 						$link = new LibraryLink(new LibraryFolder(new LibraryPage($library)));
-						$link->browser = 'default';
 						$link->load($linkRecord);
-						$selectedLinks = $link->getViewSource($format);
-						$selectedThumbs = $link->getViewSource('thumbs');
+
+						/** @var  $previewData GalleryPreviewData */
+						$previewData = $link->getPreviewData();
+						$this->pageTitle = Yii::app()->name . ' - Fullscreen Gallery';
+						$this->render('fullScreenGallery', array('previewData' => $previewData, 'format' => $format));
 					}
 				}
 			}
-			if (isset($selectedLinks) && isset($selectedThumbs))
-			{
-				for ($i = 0; $i < count($selectedLinks); $i++)
-				{
-					$galleryLink = array('image' => $selectedLinks[$i]['href'],
-						'title' => $selectedLinks[$i]['title'],
-						'thumb' => $selectedThumbs[$i]['href']);
-					$galleryLinks[] = $galleryLink;
-				}
-				if (isset($galleryLinks))
-				{
-					$this->pageTitle = Yii::app()->name . ' - Fullscreen Gallery';
-					$this->render('fullscreenGallery', array('selectedLinks' => $galleryLinks));
-				}
-			}
+			Yii::app()->end();
 		}
 
-		public function actionGetViewDialogBar()
+		public function actionGetBar()
 		{
 			$format = Yii::app()->request->getPost('format');
-			$this->renderPartial('viewDialogBar', array('format' => $format), false, true);
+			$this->renderPartial('bar', array('format' => $format), false, true);
+		}
+
+		public function actionDownloadFile()
+		{
+			$data = CJSON::decode(Yii::app()->request->getQuery('data'), false);
+			Yii::app()->getRequest()->sendFile($data->name, @file_get_contents($data->path));
+			Yii::app()->end();
 		}
 	}

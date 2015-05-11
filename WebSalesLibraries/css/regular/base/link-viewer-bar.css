@@ -1,0 +1,13 @@
+.link-viewer-bar
+{
+	position: fixed;
+	z-index: 8030;
+}
+
+.link-viewer-bar div
+{
+	padding: 3px;
+	list-style: none;
+	cursor: pointer;
+}
+

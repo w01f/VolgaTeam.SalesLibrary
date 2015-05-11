@@ -93,8 +93,7 @@
 			$totalRate = self::model()->getRate($linkId, null);
 			$userRate = self::model()->getRate($linkId, $userId);
 			$totalRateImage = self::getStarImage($totalRate);
-			$userRateDescription = self::getCaption($userRate);
-			return array('totalRate' => $totalRate, 'userRate' => $userRate, 'totalRateImage' => $totalRateImage, 'userRateDescription' => $userRateDescription);
+			return array('totalRate' => $totalRate, 'userRate' => $userRate, 'totalRateImage' => $totalRateImage);
 		}
 
 		/**
@@ -109,38 +108,5 @@
 			else
 				$starImage = '';
 			return $starImage;
-		}
-
-		/**
-		 * @param $rateValue float
-		 * @return string
-		 */
-		private static function getCaption($rateValue)
-		{
-			switch ($rateValue)
-			{
-				case 0.5:
-					return "You gave this file half a Star. Not a very big deal here…";
-				case 1:
-					return "You gave this file 1 Star. Don’t really see anything great here…";
-				case 1.5:
-					return "You gave this file 1.5 Stars. Meh… No biggie here…";
-				case 2:
-					return "You gave this file 2 Stars. It’s okay… I guess…";
-				case 2.5:
-					return "You gave this file 2.5 Stars. So-So… I’ve seen better…";
-				case 3:
-					return "You gave this file 3 Stars. This one is about average…";
-				case 3.5:
-					return "You gave this file 3.5 Stars. Not Bad… This is pretty good…";
-				case 4:
-					return "You gave this file 4 Stars. Pretty DARN GOOD! I might use this…";
-				case 4.5:
-					return "You gave this file 4.5 Stars. This is AWESOME! I can use this!";
-				case 5:
-					return "You gave this file 5 Stars. HOLY #$@%#^!  THIS ROCKS!";
-				default:
-					return "What do you THINK about this file or link?";
-			}
 		}
 	}

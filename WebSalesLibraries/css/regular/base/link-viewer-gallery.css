@@ -1,0 +1,33 @@
+.link-viewer .preview-gallery
+{
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+
+.link-viewer .preview-gallery .nav-image-button
+{
+	margin-top: 130px;
+}
+
+.link-viewer .page-image-container,
+.link-viewer .page-image
+{
+	height: 305px;
+}
+
+.link-viewer .current-slide-info
+{
+	margin-bottom: 10px;
+}
+
+.link-viewer .image-type-toggle.selected
+{
+	font-weight: bold;
+	background: #A7C3E0;
+}
+
+.link-viewer .gallery-control-buttons .text-button,
+.link-viewer .gallery-control-buttons .bootstrap-select
+{
+	margin-top: 20px;
+}

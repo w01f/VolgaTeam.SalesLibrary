@@ -120,7 +120,7 @@
 						content: $('<div class="row" style="margin: 0;">' +
 							'<div class="col-xs-3"><img src="' +
 							window.BaseUrl +
-							'images/fileFormats/add-link-cart.png">' +
+							'images/preview/actions/quicksite.png">' +
 							'</div>' +
 							'<div class="col-xs-8 col-xs-offset-1">' +
 							'<h3>Success!</h3>' +

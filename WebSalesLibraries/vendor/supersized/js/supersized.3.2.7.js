@@ -494,8 +494,8 @@
                 var img = $('<img src="'+base.options.slides[loadSlide].image+'"/>'); 
 				
                 img.appendTo(targetList).wrap('<a ' + imageLink + linkTarget + '></a>').parent().parent().addClass('image-loading').css('visibility','hidden');
-				
-                img.load(function(){
+
+				img.load(function(){
                     base._origDim($(this));
                     base.resizeNow();
                 });	// End Load

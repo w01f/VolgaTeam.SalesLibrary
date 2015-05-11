@@ -136,32 +136,6 @@
 		public function getLibraryLinks()
 		{
 			$links = array();
-			if (Yii::app()->browser->isMobile())
-				$browser = 'mobile';
-			else
-			{
-				$browser = Yii::app()->browser->getBrowser();
-				switch ($browser)
-				{
-					case 'Internet Explorer':
-						$browser = 'ie';
-						break;
-					case 'Chrome':
-					case 'Safari':
-						$browser = 'webkit';
-						break;
-					case 'Firefox':
-						$browser = 'firefox';
-						break;
-					case 'Opera':
-						$browser = 'opera';
-						break;
-					default:
-						$browser = 'webkit';
-						break;
-				}
-			}
-
 			$pageLinkRecords = QPageLinkRecord::model()->findAll('id_page=? order by list_order', array($this->id));
 			foreach ($pageLinkRecords as $pageLinkRecord)
 			{
@@ -172,7 +146,7 @@
 					$libraryManager = new LibraryManager();
 					$library = $libraryManager->getLibraryById($linkRecord->id_library);
 					$link = new LibraryLink(new LibraryFolder(new LibraryPage($library)));
-					$link->browser = $browser;
+					$link->browser = Utils::getBrowser();
 					$link->load($linkRecord);
 					$links[] = $link;
 				}

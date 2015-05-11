@@ -40,6 +40,10 @@
 						$previewRecord->id_library = $previewContainer['libraryId'];
 						$previewRecord->type = 'png';
 						$previewRecord->relative_path = $link;
+						if (array_key_exists('thumbsWidth', $previewContainer))
+							$previewRecord->thumb_width = $previewContainer['thumbsWidth'];
+						if (array_key_exists('thumbsHeight', $previewContainer))
+							$previewRecord->thumb_height = $previewContainer['thumbsHeight'];
 						$previewRecord->save();
 					}
 			if (array_key_exists('pngPhoneLinks', $previewContainer))
@@ -62,6 +66,10 @@
 						$previewRecord->id_library = $previewContainer['libraryId'];
 						$previewRecord->type = 'jpeg';
 						$previewRecord->relative_path = $link;
+						if (array_key_exists('thumbsWidth', $previewContainer))
+							$previewRecord->thumb_width = $previewContainer['thumbsWidth'];
+						if (array_key_exists('thumbsHeight', $previewContainer))
+							$previewRecord->thumb_height = $previewContainer['thumbsHeight'];
 						$previewRecord->save();
 					}
 			if (array_key_exists('jpegPhoneLinks', $previewContainer))
@@ -86,7 +94,6 @@
 						$previewRecord->relative_path = $link;
 						$previewRecord->save();
 					}
-
 			if (array_key_exists('wmvLinks', $previewContainer))
 				if (isset($previewContainer['wmvLinks']))
 					foreach ($previewContainer['wmvLinks'] as $link)
@@ -98,7 +105,6 @@
 						$previewRecord->relative_path = $link;
 						$previewRecord->save();
 					}
-
 			if (array_key_exists('mp4Links', $previewContainer))
 				if (isset($previewContainer['mp4Links']))
 					foreach ($previewContainer['mp4Links'] as $link)
@@ -134,19 +140,6 @@
 						$previewRecord->relative_path = $link;
 						$previewRecord->save();
 					}
-
-			if (array_key_exists('oldOfficeFormatLinks', $previewContainer))
-				if (isset($previewContainer['oldOfficeFormatLinks']))
-					foreach ($previewContainer['oldOfficeFormatLinks'] as $link)
-					{
-						$previewRecord = new PreviewRecord();
-						$previewRecord->id_container = $previewContainer['id'];
-						$previewRecord->id_library = $previewContainer['libraryId'];
-						$previewRecord->type = 'old office';
-						$previewRecord->relative_path = $link;
-						$previewRecord->save();
-					}
-
 			if (array_key_exists('newOfficeFormatLinks', $previewContainer))
 				if (isset($previewContainer['newOfficeFormatLinks']))
 					foreach ($previewContainer['newOfficeFormatLinks'] as $link)
@@ -154,34 +147,7 @@
 						$previewRecord = new PreviewRecord();
 						$previewRecord->id_container = $previewContainer['id'];
 						$previewRecord->id_library = $previewContainer['libraryId'];
-						$previewRecord->type = 'new office';
-						$previewRecord->relative_path = $link;
-						$previewRecord->save();
-					}
-
-			if (array_key_exists('thumbsLinks', $previewContainer))
-				if (isset($previewContainer['thumbsLinks']))
-					foreach ($previewContainer['thumbsLinks'] as $link)
-					{
-						$previewRecord = new PreviewRecord();
-						$previewRecord->id_container = $previewContainer['id'];
-						$previewRecord->id_library = $previewContainer['libraryId'];
-						$previewRecord->type = 'thumbs';
-						$previewRecord->relative_path = $link;
-						if (array_key_exists('thumbsWidth', $previewContainer))
-							$previewRecord->thumb_width = $previewContainer['thumbsWidth'];
-						if (array_key_exists('thumbsHeight', $previewContainer))
-							$previewRecord->thumb_height = $previewContainer['thumbsHeight'];
-						$previewRecord->save();
-					}
-			if (array_key_exists('thumbsPhoneLinks', $previewContainer))
-				if (isset($previewContainer['thumbsPhoneLinks']))
-					foreach ($previewContainer['thumbsPhoneLinks'] as $link)
-					{
-						$previewRecord = new PreviewRecord();
-						$previewRecord->id_container = $previewContainer['id'];
-						$previewRecord->id_library = $previewContainer['libraryId'];
-						$previewRecord->type = 'thumbs_phone';
+						$previewRecord->type = 'office';
 						$previewRecord->relative_path = $link;
 						$previewRecord->save();
 					}

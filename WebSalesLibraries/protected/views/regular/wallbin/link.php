@@ -12,7 +12,7 @@
 		if ($isLineBreak)
 			$linkContainerClass = 'link-container line-break';
 		else
-			$linkContainerClass = isset($link->originalFormat) && isset($link->availableFormats) ? 'link-container clickable' : 'link-container';
+			$linkContainerClass = 'link-container clickable';
 		$tooltip = $link->tooltip;
 	}
 

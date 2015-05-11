@@ -30,6 +30,7 @@
 			'application.models.wallbin.models.*',
 			'application.models.wallbin.records.*',
 			'application.models.search.*',
+			'application.models.preview.*',
 		),
 		'behaviors' => array(
 			'onBeginRequest' => array(
