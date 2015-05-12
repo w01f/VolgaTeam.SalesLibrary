@@ -22,10 +22,11 @@
 
 		/**
 		 * @param $link LibraryLink
+		 * @param $isQuickSite boolean
 		 */
-		public function __construct($link)
+		public function __construct($link, $isQuickSite)
 		{
-			parent::__construct($link);
+			parent::__construct($link, $isQuickSite);
 
 			$this->pageItemName = '';
 			switch ($this->format)

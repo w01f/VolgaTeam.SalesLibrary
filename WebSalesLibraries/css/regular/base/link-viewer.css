@@ -70,6 +70,7 @@
 .link-viewer .vjs-poster
 {
 	width: auto;
+	display: none;
 }
 
 /*------------------------------------*/

@@ -295,7 +295,7 @@
 				case 'video':
 					return function ()
 					{
-						$.SalesPortal.LinkManager.viewSelectedFormat(dataObject, false, true);
+						$.SalesPortal.LinkManager.playVideo($.parseJSON(dataObject.find('.links').text()));
 					};
 					break;
 				case 'library-file':

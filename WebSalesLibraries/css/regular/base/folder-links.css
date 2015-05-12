@@ -38,7 +38,7 @@
 {
 	vertical-align: middle;
 	margin-bottom: 9px;
-	min-height: 26px;
+	min-height: 32px;
 	width: 100%;
 }
 
@@ -51,7 +51,7 @@
 {
 	font-size: 12pt;
 	white-space: nowrap;
-	line-height: 26px;
+	line-height: 32px;
 }
 
 .link-line-break

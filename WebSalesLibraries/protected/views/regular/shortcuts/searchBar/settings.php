@@ -39,6 +39,14 @@
 						</div>
 					</div>
 				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="checkbox">
+							<label><input id="search-bar-edit-only-new-files" type="checkbox">new files only<span class="text-muted"><small>
+										<em>(files created in last 12 months)</em></small></span></label>
+						</div>
+					</div>
+				</div>
 			</div>
 		</td>
 	</tr>

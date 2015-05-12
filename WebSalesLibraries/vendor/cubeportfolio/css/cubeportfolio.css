@@ -76,7 +76,7 @@
 
 .cbp-loading {
     /* @editable properties */
-    background: url('../img/cbp-loading.gif') no-repeat scroll center center transparent;
+    background: url('../img/loading.gif') no-repeat scroll center center transparent;
 }
 
 .cbp .cbp-item-hidden {
@@ -2752,7 +2752,7 @@
 
     visibility: hidden;
 
-    background: url("../img/cbp-loading.gif") no-repeat scroll center center transparent;
+    background: url("../img/loading.gif") no-repeat scroll center center transparent;
     border: medium none;
     border-radius: 0;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";

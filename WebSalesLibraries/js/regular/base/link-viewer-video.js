@@ -6,6 +6,7 @@
 	{
 		var viewerData = new VideoViewerData($.parseJSON(parameters.data));
 		var dialogContent = undefined;
+		var player = undefined;
 
 		this.show = function ()
 		{
@@ -38,7 +39,7 @@
 					dialogContent.find('.play-video').hide();
 					dialogContent.find('#video-player').show();
 					_V_.options.flash.swf = viewerData.playerSrc;
-					var myPlayer = _V_("video-player", {
+					player = _V_("video-player", {
 							controls: true,
 							autoplay: false,
 							preload: 'auto',
@@ -47,7 +48,7 @@
 						function ()
 						{
 						});
-					myPlayer.src([
+					player.src([
 						{
 							src: viewerData.mp4Src.href,
 							href: viewerData.mp4Src.href,
@@ -61,6 +62,10 @@
 							type: viewerData.ogvSrc.type
 						}
 					]);
+					player.play();
+
+					dialogContent.find('.open-video-modal').off('click').on('click', showVideoModal);
+					dialogContent.find('.open-video-fullscreen').off('click').on('click', showVideoFullScreen);
 
 					new $.SalesPortal.RateManager().init(
 						viewerData.linkId,
@@ -75,8 +80,8 @@
 		var downloadFile = function ()
 		{
 			$.SalesPortal.LinkManager.downloadFile({
-				name: viewerData.fileName,
-				path: viewerData.filePath
+				name: viewerData.mp4Src.title,
+				path: viewerData.mp4Src.path
 			});
 		};
 
@@ -95,10 +100,40 @@
 				viewerData.format);
 		};
 
-		var playVideo = function ()
+		var showVideoModal = function ()
 		{
+			$.fancybox.close();
+			var viewerBar = new $.SalesPortal.ViewerBar();
+			$.SalesPortal.LinkManager.playVideo([
+				{
+					src: viewerData.mp4Src.href,
+					href: viewerData.mp4Src.href,
+					title: viewerData.fileName,
+					type: viewerData.mp4Src.type
+				},
+				{
+					src: viewerData.ogvSrc.href,
+					href: viewerData.ogvSrc.href,
+					title: viewerData.fileName,
+					type: viewerData.ogvSrc.type
+				}
+			],viewerBar);
+			viewerBar.show({
+				linkId: viewerData.linkId,
+				format: viewerData.format,
+				linkName: viewerData.name,
+				returnCallback: function ()
+				{
+					$.fancybox.close();
+					parameters.data = $.toJSON(viewerData);
+					new $.SalesPortal.VideoViewer(parameters).show();
+				}
+			});
+		};
 
-			myPlayer.play();
+		var showVideoFullScreen = function ()
+		{
+			player.requestFullScreen();
 		};
 
 		var processSaveAction = function ()
@@ -106,16 +141,10 @@
 			var tag = $(this).find('.service-data .tag').text();
 			switch (tag)
 			{
-				case 'download-mp4':
+				case 'download':
 					$.SalesPortal.LinkManager.downloadFile({
 						name: viewerData.mp4Src.title,
 						path: viewerData.mp4Src.path
-					});
-					break;
-				case 'download-wmv':
-					$.SalesPortal.LinkManager.downloadFile({
-						name: viewerData.wmvSrc.title,
-						path: viewerData.wmvSrc.path
 					});
 					break;
 				case 'quicksite':
@@ -142,7 +171,6 @@
 		this.thumbImageSrc = undefined;
 		this.playerSrc = undefined;
 		this.mp4Src = undefined;
-		this.wmvSrc = undefined;
 		this.ogvSrc = undefined;
 
 		this.rateData = undefined;

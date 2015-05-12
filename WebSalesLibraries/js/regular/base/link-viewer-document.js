@@ -147,7 +147,7 @@
 						Name: viewerData.name,
 						File: viewerData.fileName,
 						'Original Format': viewerData.format,
-						Format: imageViewerType,
+						Format: imageViewerType
 					})
 				},
 				async: true,
@@ -174,7 +174,7 @@
 							Name: viewerData.name,
 							File: viewerData.fileName,
 							'Original Format': viewerData.format,
-							Format: imageViewerType,
+							Format: imageViewerType
 						})
 					},
 					async: true,
@@ -196,7 +196,7 @@
 						Name: viewerData.name,
 						File: viewerData.fileName,
 						'Original Format': viewerData.format,
-						Format: imageViewerType,
+						Format: imageViewerType
 					})
 				},
 				async: true,
@@ -218,7 +218,7 @@
 						Name: viewerData.name,
 						File: viewerData.fileName,
 						'Original Format': viewerData.format,
-						Format: imageViewerType,
+						Format: imageViewerType
 					})
 				},
 				async: true,
@@ -237,7 +237,7 @@
 
 		var showGalleryModal = function ()
 		{
-			var documentBar = new $.SalesPortal.DocumentViewerBar();
+			var documentBar = new $.SalesPortal.ViewerBar();
 			var images = viewerData.getGalleryImages(imageViewerType);
 
 			$.fancybox.close();

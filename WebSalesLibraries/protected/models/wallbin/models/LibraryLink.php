@@ -339,12 +339,37 @@
 				$this->tooltip = Yii::app()->params['tooltips']['wallbin'][$this->originalFormat];
 		}
 
+//		private function getTooltip()
+//		{
+//			$tooltipList = array();
+//
+//			$isLineBreak = $this->getIsLineBreak();
+//
+//			if (!$isLineBreak && isset($this->extendedProperties->hoverNote) && $this->extendedProperties->hoverNote != '')
+//				$tooltipList[] = $this->extendedProperties->hoverNote;
+//			else if ($isLineBreak && isset($this->lineBreakProperties->note) && $this->lineBreakProperties->note != '')
+//				$tooltipList[] = $this->lineBreakProperties->note;
+//
+//			if (isset($this->fileName))
+//				$tooltipList[] = $this->fileName;
+//			else if (!$this->getIsLineBreak())
+//				$tooltipList[] = $this->name;
+//
+//			if ($this->isFolder)
+//				$tooltipList[] = 'Folder';
+//			else if (isset($this->originalFormat) && array_key_exists($this->originalFormat, Yii::app()->params['tooltips']['wallbin']))
+//				$tooltipList[] = Yii::app()->params['tooltips']['wallbin'][$this->originalFormat];
+//
+//			$this->tooltip = implode("<br><br>", $tooltipList);
+//		}
+
 		/**
+		 * @param $isQuickSite boolean
 		 * @return PreviewData
 		 */
-		public function getPreviewData()
+		public function getPreviewData($isQuickSite)
 		{
-			return PreviewData::getInstance($this);
+			return PreviewData::getInstance($this, $isQuickSite);
 		}
 
 		/**

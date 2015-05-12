@@ -114,7 +114,8 @@
 		{
 			$pageId = Yii::app()->request->getQuery('pageId');
 			$text = Yii::app()->request->getQuery('text');
-			$onlyFiles = intval(Yii::app()->request->getQuery('onlyFiles'));
+			$onlyFiles = filter_var(trim(Yii::app()->request->getQuery('onlyFiles')), FILTER_VALIDATE_BOOLEAN);
+			$onlyNewFiles = filter_var(trim(Yii::app()->request->getQuery('onlyNewFiles')), FILTER_VALIDATE_BOOLEAN);
 			$fileTypes = Yii::app()->request->getQuery('fileTypes');
 			if (isset($fileTypes))
 				$fileTypes = CJSON::decode($fileTypes);
@@ -141,7 +142,14 @@
 				$searchBar = $pageModel->searchBar;
 				$this->pageTitle = $searchBar->title;
 				$searchBar->conditions->text = $text;
-				$searchBar->conditions->searchByContent = $onlyFiles == 0;
+				$searchBar->conditions->searchByContent = $onlyFiles;
+
+				if ($onlyNewFiles)
+				{
+					$searchBar->conditions->startDate = date('Y-m-d', strtotime('-1 year'));
+					$searchBar->conditions->endDate = date("Y-m-d");
+				}
+
 				$searchBar->conditions->fileTypes = $fileTypes;
 				$searchBar->conditions->superFilters = $superFilters;
 

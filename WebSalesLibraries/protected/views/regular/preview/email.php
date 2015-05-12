@@ -71,9 +71,8 @@
 				</div>
 				<div class="form-group">
 					<div class="checkbox">
-						<label>
-							<input type="checkbox" id="add-page-show-links-as-url" value="">Display all Links as Blue Hyperlinks
-						</label>
+						<label> <input type="checkbox" id="add-page-show-links-as-url" value="">Display all Links as
+							<span class="text-primary"><u>Blue Hyperlinks</u></span></label>
 					</div>
 				</div>
 			</form>

@@ -65,7 +65,8 @@
 					dateEnd: null,
 
 					onlyFileNames: false,
-					exactMatch: true
+					exactMatch: true,
+					onlyNewFiles: false
 				},
 
 				fileTypes: {
@@ -207,12 +208,23 @@
 
 		this.getConditionsFormatted = function ()
 		{
+			var startDate = data.simpleProperties.dateStart;
+			var endDate = data.simpleProperties.dateEnd;
+			if (startDate == null &&
+				endDate == null &&
+				data.simpleProperties.onlyNewFiles == true)
+			{
+				var currentDate = new Date();
+				endDate = currentDate.toLocaleDateString();
+				currentDate.setFullYear(currentDate.getFullYear() - 1);
+				startDate = currentDate.toLocaleDateString();
+			}
 			return {
 				text: data.simpleProperties.text,
 				textExactMatch: data.simpleProperties.exactMatch,
 				fileTypes: data.fileTypes.selectedTypeTags(),
-				startDate: data.simpleProperties.dateStart,
-				endDate: data.simpleProperties.dateEnd,
+				startDate: startDate,
+				endDate: endDate,
 				libraries: data.libraries.items,
 				superFilters: data.superFilters,
 				categories: data.categories.items,
@@ -226,7 +238,7 @@
 		{
 			data.simpleProperties.text = source.text;
 			data.simpleProperties.exactMatch = source.textExactMatch;
-			data.fileTypes.loadFromTags(source.fileTypes) ;
+			data.fileTypes.loadFromTags(source.fileTypes);
 			data.simpleProperties.dateStart = source.startDate;
 			data.simpleProperties.dateEnd = source.endDate;
 			data.libraries.items = source.libraries;

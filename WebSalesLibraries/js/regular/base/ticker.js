@@ -38,7 +38,7 @@
 			{
 				event.preventDefault();
 				event.stopPropagation();
-				$.SalesPortal.LinkManager.viewSelectedFormat($(this), false, false);
+				$.SalesPortal.LinkManager.playVideo($.parseJSON($(this).find('.links')));
 			});
 
 			that.updateContentSize();
@@ -46,7 +46,7 @@
 
 		this.updateContentSize = function ()
 		{
-			var tickerWidth = $(window).width()-4;
+			var tickerWidth = $(window).width() - 4;
 			var newsWidth = tickerWidth - $('.mt-label').width() - $('.mt-controls').width();
 			$('.modern-ticker').css({
 				'width': tickerWidth + 'px'

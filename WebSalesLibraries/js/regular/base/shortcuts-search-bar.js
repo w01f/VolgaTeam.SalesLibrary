@@ -101,6 +101,7 @@
 					"&text=" + searchBarConditions.get('text') +
 					"&textExactMatch=" + searchBarConditions.get('exactMatch') +
 					"&onlyFiles=" + searchBarConditions.get('onlyFileNames') +
+					"&onlyNewFiles=" + searchBarConditions.get('onlyNewFiles') +
 					"&fileTypes=" + $.toJSON(searchBarConditions.getFileTypesSettings().selectedTypeTags()) +
 					"&superFilters=" + $.toJSON(searchBarConditions.getSuperFiltersSettings()) +
 					"&categories=" + $.toJSON(searchBarConditions.getCategorySettings()));
@@ -197,6 +198,7 @@
 
 					content.find('#search-bar-edit-file-names').prop('checked', searchBarConditions.get('onlyFileNames'));
 					content.find('#search-bar-edit-exact-match').prop('checked', searchBarConditions.get('exactMatch'));
+					content.find('#search-bar-edit-only-new-files').prop('checked', searchBarConditions.get('onlyNewFiles'));
 
 					content.find('.accept-button').off('click').on('click', function ()
 					{
@@ -211,6 +213,7 @@
 						});
 						searchBarConditions.set('onlyFileNames', content.find('#search-bar-edit-file-names').prop('checked'));
 						searchBarConditions.set('exactMatch', content.find('#search-bar-edit-exact-match').prop('checked'));
+						searchBarConditions.set('onlyNewFiles', content.find('#search-bar-edit-only-new-files').prop('checked'));
 
 						$.fancybox.close();
 					});

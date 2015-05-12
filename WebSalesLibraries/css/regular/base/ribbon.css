@@ -244,6 +244,7 @@ body
 	min-width: 44px;
 	float: left;
 	position: relative;
+	cursor: pointer;
 }
 
 #ribbon .ribbon-button-small
@@ -302,6 +303,12 @@ body
 #ribbon .ribbon-button:hover .ribbon-icon.ribbon-normal
 {
 	display: none;
+}
+
+#ribbon .ribbon-button-large:hover
+{
+	background: #c6e2ff;
+	cursor: pointer;
 }
 
 #ribbon .ribbon-button-large:hover .ribbon-icon.ribbon-hot

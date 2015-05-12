@@ -12,15 +12,15 @@
 		public $playerSrc;
 
 		public $mp4Src;
-		public $wmvSrc;
 		public $ogvSrc;
 
 		/**
 		 * @param $link LibraryLink
+		 * @param $isQuickSite boolean
 		 */
-		public function __construct($link)
+		public function __construct($link, $isQuickSite)
 		{
-			parent::__construct($link);
+			parent::__construct($link, $isQuickSite);
 			$this->viewerFormat = 'video';
 			$this->contentView = 'videoViewer';
 
@@ -43,15 +43,6 @@
 				$this->mp4Src->path = $this->filePath;
 			}
 
-			if (isset($link->universalPreview->wmv))
-			{
-				$this->wmvSrc = new VideoPreviewItem();
-				$this->wmvSrc->title = $link->universalPreview->wmv->name;
-				$this->wmvSrc->type = 'video/wmv';
-				$this->wmvSrc->href = $link->universalPreview->wmv->link;
-				$this->wmvSrc->path = $link->universalPreview->wmv->path;
-			}
-
 			if (isset($link->universalPreview->ogv))
 			{
 				$this->ogvSrc = new VideoPreviewItem();
@@ -60,32 +51,5 @@
 				$this->ogvSrc->href = $link->universalPreview->ogv->link;
 				$this->ogvSrc->path = $link->universalPreview->ogv->path;
 			}
-		}
-
-		/**
-		 * @return PreviewAction[]
-		 */
-		protected function getDownloadActions()
-		{
-			$imageUrlPrefix = Yii::app()->getBaseUrl(true);
-
-			$actions = array();
-
-			$action = new PreviewAction();
-			$action->tag = 'download-mp4';
-			$action->text = 'DOWNLOAD MP4 version of this file to your Desktop or Mobile Device...';
-			$action->logo = sprintf('%s/images/preview/actions/download-mp4.png?%s', $imageUrlPrefix, Yii::app()->params['version']);
-			$actions[] = $action;
-
-			if (isset($this->link->universalPreview->wmv))
-			{
-				$action = new PreviewAction();
-				$action->tag = 'download-wmv';
-				$action->text = 'DOWNLOAD WMV version of this file to your Desktop or Mobile Device...';
-				$action->logo = sprintf('%s/images/preview/actions/download-wmv.png?%s', $imageUrlPrefix, Yii::app()->params['version']);
-				$actions[] = $action;
-			}
-
-			return $actions;
 		}
 	}

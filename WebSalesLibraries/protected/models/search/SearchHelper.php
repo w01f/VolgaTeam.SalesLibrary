@@ -189,7 +189,7 @@
 							$categoryCondition);
 
 				}
-				else if (count($textConditions) > 0)
+				else if (count($textConditions) > 0 && !$searchConditions->onlyByName)
 				{
 					$categoriesSelector = array();
 					$categoriesJoinSelector = array();
@@ -257,7 +257,7 @@
 
 				$matchCondition = 'link.name,link.file_name,link.tags,link.content';
 				if ($searchConditions->onlyByName)
-					$matchCondition = 'link.name,link.file_name';
+					$matchCondition = 'link.name,link.file_name,link.tags';
 
 				$contentCondition = "1=1";
 				if (count($textConditions) > 0)

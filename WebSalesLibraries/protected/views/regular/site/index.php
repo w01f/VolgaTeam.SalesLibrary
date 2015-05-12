@@ -251,30 +251,36 @@
 						<img class="ribbon-icon ribbon-disabled" src="<? echo Yii::app()->getBaseUrl(true) . '/images/search/ribbon/file-types.png' ?>"/>
 					</div>
 				</div>
-				<div class="ribbon-section">
-					<span class="section-title"><? echo Yii::app()->params['tags']['tab_name']; ?></span>
-					<div class="ribbon-button ribbon-button-large <? if (!$isMobile): ?>regular<? endif; ?>" id="search-ribbon-tags">
-						<img class="ribbon-icon ribbon-normal" src="<? echo Yii::app()->getBaseUrl(true) . '/images/search/ribbon/tags.png' ?>"/>
-						<img class="ribbon-icon ribbon-hot" src="<? echo Yii::app()->getBaseUrl(true) . '/images/search/ribbon/tags.png' ?>"/>
-						<img class="ribbon-icon ribbon-disabled" src="<? echo Yii::app()->getBaseUrl(true) . '/images/search/ribbon/tags.png' ?>"/>
+				<? if (Yii::app()->params['search_options']['hide_tag'] != true): ?>
+					<div class="ribbon-section">
+						<span class="section-title"><? echo Yii::app()->params['tags']['tab_name']; ?></span>
+						<div class="ribbon-button ribbon-button-large <? if (!$isMobile): ?>regular<? endif; ?>" id="search-ribbon-tags">
+							<img class="ribbon-icon ribbon-normal" src="<? echo Yii::app()->getBaseUrl(true) . '/images/search/ribbon/tags.png' ?>"/>
+							<img class="ribbon-icon ribbon-hot" src="<? echo Yii::app()->getBaseUrl(true) . '/images/search/ribbon/tags.png' ?>"/>
+							<img class="ribbon-icon ribbon-disabled" src="<? echo Yii::app()->getBaseUrl(true) . '/images/search/ribbon/tags.png' ?>"/>
+						</div>
 					</div>
-				</div>
-				<div class="ribbon-section">
-					<span class="section-title">Super Tags</span>
-					<div class="ribbon-button ribbon-button-large <? if (!$isMobile): ?>regular<? endif; ?>" id="search-ribbon-super-filters">
-						<img class="ribbon-icon ribbon-normal" src="<? echo Yii::app()->getBaseUrl(true) . '/images/search/ribbon/super-filters.png' ?>"/>
-						<img class="ribbon-icon ribbon-hot" src="<? echo Yii::app()->getBaseUrl(true) . '/images/search/ribbon/super-filters.png' ?>"/>
-						<img class="ribbon-icon ribbon-disabled" src="<? echo Yii::app()->getBaseUrl(true) . '/images/search/ribbon/super-filters.png' ?>"/>
+				<? endif; ?>
+				<? if (Yii::app()->params['search_options']['hide_supertag'] != true): ?>
+					<div class="ribbon-section">
+						<span class="section-title">Super Tags</span>
+						<div class="ribbon-button ribbon-button-large <? if (!$isMobile): ?>regular<? endif; ?>" id="search-ribbon-super-filters">
+							<img class="ribbon-icon ribbon-normal" src="<? echo Yii::app()->getBaseUrl(true) . '/images/search/ribbon/super-filters.png' ?>"/>
+							<img class="ribbon-icon ribbon-hot" src="<? echo Yii::app()->getBaseUrl(true) . '/images/search/ribbon/super-filters.png' ?>"/>
+							<img class="ribbon-icon ribbon-disabled" src="<? echo Yii::app()->getBaseUrl(true) . '/images/search/ribbon/super-filters.png' ?>"/>
+						</div>
 					</div>
-				</div>
-				<div class="ribbon-section">
-					<span class="section-title"><? echo Yii::app()->params['stations']['tab_name']; ?></span>
-					<div class="ribbon-button ribbon-button-large <? if (!$isMobile): ?>regular<? endif; ?>" id="search-ribbon-libraries">
-						<img class="ribbon-icon ribbon-normal" src="<? echo Yii::app()->getBaseUrl(true) . '/images/search/ribbon/libraries.png' ?>"/>
-						<img class="ribbon-icon ribbon-hot" src="<? echo Yii::app()->getBaseUrl(true) . '/images/search/ribbon/libraries.png' ?>"/>
-						<img class="ribbon-icon ribbon-disabled" src="<? echo Yii::app()->getBaseUrl(true) . '/images/search/ribbon/libraries.png' ?>"/>
+				<? endif; ?>
+				<? if (Yii::app()->params['search_options']['hide_libraries'] != true): ?>
+					<div class="ribbon-section">
+						<span class="section-title"><? echo Yii::app()->params['stations']['tab_name']; ?></span>
+						<div class="ribbon-button ribbon-button-large <? if (!$isMobile): ?>regular<? endif; ?>" id="search-ribbon-libraries">
+							<img class="ribbon-icon ribbon-normal" src="<? echo Yii::app()->getBaseUrl(true) . '/images/search/ribbon/libraries.png' ?>"/>
+							<img class="ribbon-icon ribbon-hot" src="<? echo Yii::app()->getBaseUrl(true) . '/images/search/ribbon/libraries.png' ?>"/>
+							<img class="ribbon-icon ribbon-disabled" src="<? echo Yii::app()->getBaseUrl(true) . '/images/search/ribbon/libraries.png' ?>"/>
+						</div>
 					</div>
-				</div>
+				<? endif; ?>
 				<div class="ribbon-section">
 					<span class="section-title">Search</span>
 					<div class="ribbon-button ribbon-button-large <? if (!$isMobile): ?>regular<? endif; ?>" id="search-ribbon-run">

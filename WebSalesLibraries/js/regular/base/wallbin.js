@@ -171,7 +171,7 @@
 		{
 			var librarySelector = $("#select-library");
 			var selectedLibraryName = librarySelector.find(":selected").text();
-			librarySelector.selectpicker('render');
+			librarySelector.selectpicker('refresh');
 			$.cookie("selectedLibraryName", selectedLibraryName, {
 				expires: 60 * 60 * 24 * 7
 			});
@@ -221,7 +221,7 @@
 			var pageSelector = $("#select-page");
 			var pageLogoUrl = pageSelector.selectpicker('val');
 			var selectedPageName = pageSelector.find(":selected").text();
-			pageSelector.selectpicker('render');
+			pageSelector.selectpicker('refresh');
 			$.cookie("selectedPageName", selectedPageName, {
 				expires: 60 * 60 * 24 * 7
 			});
@@ -466,7 +466,7 @@
 								else
 									$(this).prop("selected", false)
 							});
-							pageSelector.selectpicker('render');
+							pageSelector.selectpicker('refresh');
 
 							if ($.cookie("wallbinView") == "accordion")
 								loadAccordion($(ui.newPanel));

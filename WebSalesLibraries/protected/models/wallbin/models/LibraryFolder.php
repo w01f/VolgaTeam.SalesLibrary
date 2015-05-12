@@ -164,7 +164,7 @@
 			if (isset($headerImage))
 				$this->headerHeight = imagesy($headerImage) + 2;
 			else
-				$this->headerHeight = 28;
+				$this->headerHeight = 34;
 		}
 
 

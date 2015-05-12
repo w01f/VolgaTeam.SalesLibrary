@@ -55,7 +55,6 @@
 				}
 			});
 			$('a#view-dialog-link').fancybox();
-			$('.ribbon-button').tooltip({animation: false, trigger: 'hover', placement: 'bottom', delay: { show: 500, hide: 100 }});
 			$('.logout-button').off('click').on('click', function ()
 			{
 				$.SalesPortal.Auth.logout();

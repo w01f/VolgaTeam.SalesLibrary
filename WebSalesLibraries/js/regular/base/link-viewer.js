@@ -318,7 +318,7 @@
 			});
 		};
 
-		var playVideo = function (links)
+		this.playVideo = function (links, viewerBar)
 		{
 			VideoJS.players = {};
 			$.fancybox({
@@ -332,6 +332,8 @@
 				},
 				afterClose: function ()
 				{
+					if (viewerBar != undefined)
+						viewerBar.close();
 					$('#video-player').remove();
 				}
 			});

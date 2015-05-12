@@ -2,7 +2,7 @@
 {
 	window.BaseUrl = window.BaseUrl || '';
 	$.SalesPortal = $.SalesPortal || { };
-	$.SalesPortal.DocumentViewerBar = function ()
+	$.SalesPortal.ViewerBar = function ()
 	{
 		var that = this;
 		var buttonsPanel = undefined;

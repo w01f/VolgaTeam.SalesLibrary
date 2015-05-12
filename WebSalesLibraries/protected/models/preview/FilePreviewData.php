@@ -9,9 +9,13 @@
 		public $filePath;
 		public $fileSize;
 
-		public function __construct($link)
+		/**
+		 * @param $link LibraryLink
+		 * @param $isQuickSite boolean
+		 */
+		public function __construct($link, $isQuickSite)
 		{
-			parent::__construct($link);
+			parent::__construct($link, $isQuickSite);
 
 			$this->viewerFormat = 'file';
 			$this->contentView = 'fileViewer';
@@ -37,13 +41,15 @@
 				case 'pdf':
 				case 'xls':
 				case 'mp3':
-				case 'wmv':
-				case 'mp4':
-				case 'video':
 				case 'jpeg':
 				case 'png':
 				case 'key':
 					$downloadSuffix = $this->format;
+					break;
+				case 'wmv':
+				case 'mp4':
+				case 'video':
+					$downloadSuffix = 'mp4';
 					break;
 				default:
 					$downloadSuffix = 'default';

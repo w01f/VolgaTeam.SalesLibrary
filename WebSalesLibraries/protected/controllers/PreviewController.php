@@ -28,8 +28,7 @@
 					$link = new LibraryLink(new LibraryFolder(new LibraryPage($library)));
 					$link->load($linkRecord);
 
-					$previewData = $link->getPreviewData();
-					$previewData->allowAddToQuickSite = !$isQuickSite;
+					$previewData = $link->getPreviewData($isQuickSite);
 
 					if ($previewData->userAuthorized)
 						StatisticActivityRecord::WriteActivity('Link', 'Preview Options', array('Name' => $link->fileName, 'File' => $link->fileName));
@@ -121,7 +120,7 @@
 						$link->load($linkRecord);
 
 						/** @var  $previewData GalleryPreviewData */
-						$previewData = $link->getPreviewData();
+						$previewData = $link->getPreviewData(false);
 						$this->pageTitle = Yii::app()->name . ' - Fullscreen Gallery';
 						$this->render('fullScreenGallery', array('previewData' => $previewData, 'format' => $format));
 					}
@@ -133,7 +132,22 @@
 		public function actionGetBar()
 		{
 			$format = Yii::app()->request->getPost('format');
-			$this->renderPartial('bar', array('format' => $format), false, true);
+			switch ($format)
+			{
+				case 'ppt':
+				case 'doc':
+				case 'pdf':
+					$this->renderPartial('documentBar', array('format' => $format), false, true);
+					break;
+				case 'mp4':
+				case 'wmv':
+				case 'video':
+					$this->renderPartial('videoBar', array('format' => $format), false, true);
+					break;
+				default:
+					Yii::app()->end();
+					break;
+			}
 		}
 
 		public function actionDownloadFile()

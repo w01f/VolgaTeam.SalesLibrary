@@ -93,7 +93,7 @@
 			}
 
 			sliderData.pageSelector.selectpicker('val',that.currentPageIndex);
-			sliderData.pageSelector.selectpicker('render');
+			sliderData.pageSelector.selectpicker('refresh');
 		};
 
 		initControls();
