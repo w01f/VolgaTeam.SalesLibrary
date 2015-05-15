@@ -59,6 +59,11 @@
 			{
 				$.SalesPortal.Auth.logout();
 			});
+			$.MetroTooltipInit({
+				animation: "fadeInDown fast",
+				position: "top",
+				color: "#063BB3"
+			});
 		};
 
 		this.updateContentSize = function ()

@@ -27,6 +27,7 @@
 				$this->setState('lastName', $user->last_name);
 				$this->setState('email', $user->email);
 				$this->setState('role', $user->role);
+				$this->setState('groups', UserRecord::getGroupNames($user->id));
 				$this->errorCode = self::ERROR_NONE;
 
 				/** @var $resetPassword ResetPasswordRecord */

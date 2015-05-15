@@ -197,11 +197,11 @@
 
 		/**
 		 * @param $userId
-		 * @return null|string
+		 * @return string[]
 		 */
 		public static function getGroupNames($userId)
 		{
-			$groups = null;
+			$groups = array();
 			$userGroupIds = UserGroupRecord::getGroupIdsByUser($userId);
 			if (isset($userGroupIds))
 				foreach ($userGroupIds as $groupId)
@@ -211,10 +211,7 @@
 					if (isset($groupRecord))
 						$groups[] = $groupRecord->name;
 				}
-			if (isset($groups))
-				return implode(', ', $groups);
-			else
-				return null;
+			return $groups;
 		}
 
 	}

@@ -13,6 +13,7 @@
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/vendor/star-rating/css/star-rating.min.css?' . Yii::app()->params['version']);
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/vendor/combobox/css/bootstrap-select.min.css?' . Yii::app()->params['version']);
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/vendor/data-table/css/dataTables.bootstrap.css?' . Yii::app()->params['version']);
+	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/vendor/metro-tooltip/css/MetroTooltip.min.css?' . Yii::app()->params['version']);
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/regular/base/ribbon.css?' . Yii::app()->params['version']);
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/regular/base/layout.css?' . Yii::app()->params['version']);
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/regular/base/columns.css?' . Yii::app()->params['version']);
@@ -68,6 +69,7 @@
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/tabs-extension/jquery-ui-tabs-paging.js', CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/data-table/js/jquery.dataTables.min.js', CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/data-table/js/dataTables.bootstrap.min.js', CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/metro-tooltip/js/MetroTooltip.js', CClientScript::POS_HEAD);
 	if (Yii::app()->params['ticker']['visible'] && isset($tickerRecords))
 	{
 		$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/modern-ticker/js/jquery.modern-ticker.min.js', CClientScript::POS_HEAD);
@@ -107,10 +109,12 @@
 				$tabParam[$key] = $row['position'];
 	}
 
+	/** @var  $tabShortcuts ShortcutsTabRecord[] */
 	$tabShortcuts = ShortcutsTabRecord::model()->findAll(array('order' => '`order`', 'condition' => 'enabled=:enabled', 'params' => array(':enabled' => true)));
 	if (isset($tabShortcuts))
 		foreach ($tabShortcuts as $tabShortcutsRecord)
-			$tabParam['shortcuts-tab-' . $tabShortcutsRecord->id] = $tabShortcutsRecord->order;
+			if ($tabShortcutsRecord->isAvailable(Yii::app()->user))
+				$tabParam['shortcuts-tab-' . $tabShortcutsRecord->id] = $tabShortcutsRecord->order;
 
 	asort($tabParam);
 
@@ -121,7 +125,7 @@
 	$isMobile = isset(Yii::app()->browser) && Yii::app()->browser->isMobile();
 
 	$showPageList = isset(Yii::app()->request->cookies['showQPageList']->value) ? Yii::app()->request->cookies['showQPageList']->value == "true" : true;
-	$showLinlCart = isset(Yii::app()->request->cookies['showLinkCart']->value) ? Yii::app()->request->cookies['showLinkCart']->value == "true" : true;
+	$showLinkCart = isset(Yii::app()->request->cookies['showLinkCart']->value) ? Yii::app()->request->cookies['showLinkCart']->value == "true" : true;
 ?>
 <div id="ribbon">
 <div class="ribbon-window-title"></div>
@@ -363,7 +367,7 @@
 				</div>
 				<div class="ribbon-section">
 					<span class="section-title">Link Cart</span>
-					<div class="ribbon-button ribbon-button-large <? if ($showLinlCart): ?>sel<? endif; ?>" id="link-cart-button" rel="tooltip" title="Link Cart">
+					<div class="ribbon-button ribbon-button-large <? if ($showLinkCart): ?>sel<? endif; ?>" id="link-cart-button" rel="tooltip" title="Link Cart">
 						<img class="ribbon-icon ribbon-normal" src="<?php echo Yii::app()->getBaseUrl(true) . '/images/qpages/ribbon/link-cart.png' ?>"/>
 						<img class="ribbon-icon ribbon-hot" src="<?php echo Yii::app()->getBaseUrl(true) . '/images/qpages/ribbon/link-cart.png' ?>"/>
 						<img class="ribbon-icon ribbon-disabled" src="<?php echo Yii::app()->getBaseUrl(true) . '/images/qpages/ribbon/link-cart.png' ?>"/>

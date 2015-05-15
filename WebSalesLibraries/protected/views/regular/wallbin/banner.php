@@ -2,10 +2,11 @@
 	/**
 	 * @var $banner Banner
 	 * @var $isLinkBanner bool
+	 * @var $tooltip string
 	 */
 ?>
 <? if ($banner->showText): ?>
-<div class="banner-container" <? if (isset($tooltip)): ?>rel="tooltip" title="<? echo $tooltip; ?>"<? endif;?> style="width: auto">
+<div class="banner-container mtTool" <? if (isset($tooltip)): ?>mtcontent="<? echo $tooltip; ?>"<? endif;?> style="width: auto">
 	<img class="banner-image" src="data:image/png;base64,<? echo $banner->image;?>">
 	<span class="<?echo $isLinkBanner ? 'banner-text-link' : 'banner-text';?>"
 		  style="font-family: <? echo $banner->font->name; ?>,serif; font-size: <? echo $banner->font->size; ?>pt; font-weight: <? echo $banner->font->isBold ? ' bold' : ' normal'; ?>;font-style: <? echo $banner->font->isItalic ? ' italic' : ' normal'; ?>;color: <? echo $banner->foreColor; ?>;">
@@ -32,7 +33,7 @@
 		$bannerMarginRight = '0px';
 	}
 	?>
-<div class="banner-container" <? if (isset($tooltip)): ?>rel="tooltip" title="<? echo $tooltip; ?>"<? endif;?>>
+<div class="banner-container mtTool" <? if (isset($tooltip)): ?> mtcontent="<? echo $tooltip; ?>"<? endif;?>>
 	<img class="banner-image" src="data:image/png;base64,<? echo $banner->image;?>" style="margin-left: <? echo $bannerMarginLeft; ?>; margin-right: <? echo $bannerMarginRight; ?>;">
 </div>
 <?endif; ?>

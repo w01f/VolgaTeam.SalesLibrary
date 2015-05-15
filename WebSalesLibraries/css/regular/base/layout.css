@@ -136,7 +136,14 @@ button.active
 	float: none;
 }
 
-.pagination > li:first-child > a, .pagination > li:first-child > span {
+.pagination > li:first-child > a, .pagination > li:first-child > span
+{
 	border-top-left-radius: 0 !important;
 	border-bottom-left-radius: 0 !important;
+}
+
+.mtContent
+{
+	max-width: 250px;
+	z-index: 9000;
 }

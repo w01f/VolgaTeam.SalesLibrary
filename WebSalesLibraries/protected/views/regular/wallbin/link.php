@@ -1,10 +1,12 @@
 <?
 	/** @var $link LibraryLink */
+
+	$tooltip = $link->tooltip;
+
 	if ($link->isFolder)
 	{
 		$isLineBreak = false;
 		$linkContainerClass = 'link-container folder-link';
-		$tooltip = 'Folder';
 	}
 	else
 	{
@@ -13,13 +15,7 @@
 			$linkContainerClass = 'link-container line-break';
 		else
 			$linkContainerClass = 'link-container clickable';
-		$tooltip = $link->tooltip;
 	}
-
-	if (!$isLineBreak && isset($link->extendedProperties->hoverNote) && $link->extendedProperties->hoverNote != '')
-		$tooltip = $link->extendedProperties->hoverNote . ' (' . $tooltip . ')';
-	else if ($isLineBreak && isset($link->lineBreakProperties->note) && $link->lineBreakProperties->note != '')
-		$tooltip = $link->lineBreakProperties->note;
 
 	if ($link->extendedProperties->isRestricted)
 		$linkContainerClass .= ' restricted';
@@ -69,8 +65,7 @@
 		?>
 		<div class="<? echo $linkClass; ?>"
 			 style="background-image: <? echo !(isset($disableWidget) && $disableWidget) && isset($widget) ? "url('data:image/png;base64," . $widget . "')" : ""; ?>; <? echo $linkFontProperties; ?>">
-		<span class="link-text" <? if (isset($tooltip)): ?>rel="tooltip"
-			  title="<? echo $tooltip; ?>"<? endif; ?>><? echo $link->name; ?></span>
+		<span class="link-text mtTool" <? if (isset($tooltip)): ?>mtcontent="<? echo $tooltip; ?>"<? endif; ?>><? echo $link->name; ?></span>
 			<? if (isset($link->extendedProperties->note) && $link->extendedProperties->note != ""): ?>
 				<span class="link-note"><? echo $link->extendedProperties->note; ?></span>
 			<? endif; ?>

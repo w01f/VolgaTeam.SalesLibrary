@@ -328,8 +328,14 @@
 						$type = 9999;
 
 					$link['id'] = $linkRecord['id'];
-					$link['name'] = $linkRecord['name'];
-					$link['file_name'] = $linkRecord['file_name'];
+					$link['name'] = array(
+						'value' => $linkRecord['name'],
+						'file' => $linkRecord['file_name'],
+						'tooltip' => sprintf('%s<br><br>%s',
+							isset($linkRecord['file_name']) && $linkRecord['file_name'] != '' ? $linkRecord['file_name'] : $linkRecord['name'],
+							Yii::app()->params['tooltips']['wallbin'][$linkRecord['format']]
+						)
+					);
 					$link['date'] = array(
 						'display' => date(Yii::app()->params['outputDateFormat'], strtotime($linkRecord['link_date'])),
 						'value' => strtotime($linkRecord['link_date'])

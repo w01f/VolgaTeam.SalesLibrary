@@ -105,7 +105,7 @@
 					$to[] = Yii::app()->user->email;
 					$message->to = $to;
 					$groups = UserRecord::getGroupNames(Yii::app()->user->id);
-					$message->subject = $quiz->title . ' - ' . Yii::app()->user->firstName . ' ' . Yii::app()->user->lastName . (isset($groups) ? (' - ' . $groups) : '');
+					$message->subject = $quiz->title . ' - ' . Yii::app()->user->firstName . ' ' . Yii::app()->user->lastName . (count($groups) > 0 ? (' - ' . implode(', ', $groups)) : '');
 					$message->from = Yii::app()->params['email']['quiz']['from'];
 					if (Yii::app()->params['email']['quiz']['copy_enabled'])
 						$message->cc = Yii::app()->params['email']['quiz']['copy'];

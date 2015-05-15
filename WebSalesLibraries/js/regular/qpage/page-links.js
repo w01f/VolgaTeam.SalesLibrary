@@ -4,7 +4,9 @@
 	var assignLinkEvents = function (container)
 	{
 		$.SalesPortal.Layout.updateContentSize();
-		container.find('.link-text, .banner-container').tooltip({animation: false, trigger: 'hover', placement: 'top', delay: { show: 500, hide: 100 }});
+
+		$.mtReInit();
+
 		container.find('.clickable').off('click').on('click', function (event)
 		{
 			if (checkEmail())
@@ -55,7 +57,9 @@
 					success: function (msg)
 					{
 						folderLinkContent.html(msg);
-						$('.link-text, .banner-container').tooltip({animation: false, trigger: 'hover', placement: 'top', delay: { show: 500, hide: 100 }});
+
+						$.mtReInit();
+
 						assignLinkEvents(folderLinkContent);
 						folderLinkContent.show("blind", {
 							direction: "vertical"

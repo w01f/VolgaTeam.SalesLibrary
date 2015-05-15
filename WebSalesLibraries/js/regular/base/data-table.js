@@ -62,7 +62,13 @@
 						},
 						{
 							"data": "name",
-							"title": "Link"
+							"title": "Link",
+							"render": function (data)
+							{
+								if (data != '')
+									return '<span class="mtTool" mtcontent="' + data.tooltip + '">' + data.value + '</span>';
+								return '';
+							}
 						},
 						{
 							"data": "rate.image",
@@ -111,6 +117,7 @@
 				var linkId = dataTable.api().row(this).data().id;
 				$.SalesPortal.LinkManager.requestViewDialog(linkId, false);
 			});
+			$.mtReInit();
 		};
 
 		this.updateSize = function ()

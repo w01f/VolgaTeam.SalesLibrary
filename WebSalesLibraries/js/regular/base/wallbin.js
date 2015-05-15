@@ -123,7 +123,9 @@
 			updateTextSize(storedTextSize);
 			updateTextSpace(storedTextSpace);
 			updateContentSize();
-			container.find('.link-text, .banner-container').tooltip({animation: false, trigger: 'hover', placement: 'top', container: '#content', delay: { show: 500, hide: 100 }});
+
+			$.mtReInit();
+
 			container.find('.clickable').off('click').on('click', function (event)
 			{
 				var linkId = $(this).attr('id').replace('link', '');
@@ -303,7 +305,9 @@
 						success: function (msg)
 						{
 							folderLinkContent.html(msg);
-							$('.link-text, .banner-container').tooltip({animation: false, trigger: 'hover', placement: 'top', container: '#content', delay: { show: 500, hide: 100 }});
+
+							$.mtReInit();
+
 							that.assignLinkEvents(folderLinkContent);
 							folderLinkContent.show("blind", {
 								direction: "vertical"
@@ -406,7 +410,9 @@
 					success: function (msg)
 					{
 						folderLinks.html(msg);
-						$('.link-text, .banner-container').tooltip({animation: false, trigger: 'hover', placement: 'top', container: '#content', delay: { show: 500, hide: 100 }});
+
+						$.mtReInit();
+
 						that.assignLinkEvents(folderLinks);
 						folderLinks.show("blind", {
 							direction: "vertical"

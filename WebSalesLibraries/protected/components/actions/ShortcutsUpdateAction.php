@@ -25,8 +25,9 @@
 						$tabImageFile = realpath($tabPath . DIRECTORY_SEPARATOR . 'rbnlogo.png');
 						if (file_exists($tabConfigFile))
 						{
+							$tabConfigContent = file_get_contents($tabConfigFile);
 							$tabConfig = new DOMDocument();
-							$tabConfig->load($tabConfigFile);
+							$tabConfig->loadXML($tabConfigContent);
 
 							$tabShortcutsRecord = new ShortcutsTabRecord();
 							$tabShortcutsId = uniqid();
@@ -35,6 +36,7 @@
 							$tabShortcutsRecord->order = intval(trim($tabConfig->getElementsByTagName("Order")->item(0)->nodeValue));
 							$tabShortcutsRecord->enabled = filter_var(trim($tabConfig->getElementsByTagName("Enabled")->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN);
 							$tabShortcutsRecord->image_path = '/' . str_replace('\\', '/', str_replace($rootFolderPath, Yii::app()->params['librariesRoot'] . DIRECTORY_SEPARATOR . 'Shortcuts', $tabImageFile));
+							$tabShortcutsRecord->config = $tabConfigContent;
 							$tabShortcutsRecord->save();
 
 							$pagesRootPath = realpath($tabPath . DIRECTORY_SEPARATOR . 'pages');

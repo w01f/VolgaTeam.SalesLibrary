@@ -13,6 +13,11 @@
 			{
 				window.location = "getProtected?id="+$('#page-id').html();
 			});
+			$.MetroTooltipInit({
+				animation: "fadeInDown fast",
+				position: "top",
+				color: "#063BB3"
+			});
 			$.SalesPortal.Overlay.hide();
 			that.updateContentSize();
 			$(window).on('resize', that.updateContentSize);

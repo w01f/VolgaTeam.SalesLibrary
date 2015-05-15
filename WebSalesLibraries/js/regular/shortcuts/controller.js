@@ -12,6 +12,11 @@
 			var isPage = content.find('.is-page').length > 0;
 			$('#ribbon').ribbon();
 			$('a#view-dialog-link').fancybox();
+			$.MetroTooltipInit({
+				animation: "fadeInDown fast",
+				position: "top",
+				color: "#063BB3"
+			});
 			$.SalesPortal.Overlay.show(true);
 			$.SalesPortal.ShortcutsSearchManager(content, objectId);
 			$.SalesPortal.Overlay.hide();
