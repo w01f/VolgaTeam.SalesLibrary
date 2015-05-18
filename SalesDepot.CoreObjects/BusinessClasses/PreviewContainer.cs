@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Xml;
+using Newtonsoft.Json;
 using SalesDepot.CoreObjects.InteropClasses;
 using SalesDepot.CoreObjects.ToolClasses;
 
@@ -129,29 +130,11 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			set { Parent.UpdatePreviewableObject(OriginalPath, value); }
 		}
 
-		public bool Ready
+		public virtual bool Ready
 		{
 			get
 			{
-				switch (Type)
-				{
-					case FileTypes.MediaPlayerVideo:
-					case FileTypes.QuickTimeVideo:
-						var mp4Destination = Path.Combine(ContainerPath, "mp4");
-						var wmvDestination = Path.Combine(ContainerPath, "wmv");
-						var ogvDestination = Path.Combine(ContainerPath, "ogv");
-						if (Extension.ToUpper().Equals(".MP4"))
-							return (Directory.Exists(wmvDestination) && Directory.GetFiles(wmvDestination, "*.wmv").Length > 0)
-								&& (Directory.Exists(ogvDestination) && Directory.GetFiles(ogvDestination, "*.ogv").Length > 0);
-						if (Extension.ToUpper().Equals(".WMV"))
-							return (Directory.Exists(mp4Destination) && Directory.GetFiles(mp4Destination, "*.mp4").Length > 0)
-								&& (Directory.Exists(ogvDestination) && Directory.GetFiles(ogvDestination, "*.ogv").Length > 0);
-						return (Directory.Exists(mp4Destination) && Directory.GetFiles(mp4Destination, "*.mp4").Length > 0)
-							&& (Directory.Exists(wmvDestination) && Directory.GetFiles(wmvDestination, "*.wmv").Length > 0)
-							&& (Directory.Exists(ogvDestination) && Directory.GetFiles(ogvDestination, "*.ogv").Length > 0);
-					default:
-						return true;
-				}
+				return true;
 			}
 		}
 
@@ -278,6 +261,8 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			var previewGenerator = Parent.GetPreviewGenerator(this);
 			if (previewGenerator != null)
 				previewGenerator.GeneratePreview(GenerateImages, GenerateText);
+			if(update)
+				PngHelper.ConvertFiles(ContainerPath);
 		}
 
 		public void ClearContent()
@@ -368,6 +353,46 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			}
 		}
 
+		public override bool Ready
+		{
+			get
+			{
+				if (!HasInfo) return false;
+				var ffMpegData = GetFFMpegData();
+				if (ffMpegData == null) return false;
+				if (ffMpegData.IsH264Encoded)
+					return true;
+				return HasMp4;
+			}
+		}
+
+		public bool HasMp4
+		{
+			get
+			{
+				var destination = Path.Combine(ContainerPath, "mp4");
+				return Directory.Exists(destination) && Directory.GetFiles(destination, "*.mp4").Length > 0;
+			}
+		}
+
+		public bool HasInfo
+		{
+			get
+			{
+				var destination = Path.Combine(ContainerPath, "info");
+				return Directory.Exists(destination) && Directory.GetFiles(destination, "*.txt").Length > 0;
+			}
+		}
+
+		public bool HasThumbnail
+		{
+			get
+			{
+				var destination = Path.Combine(ContainerPath, "thumb");
+				return Directory.Exists(destination) && Directory.GetFiles(destination, "*.png").Length > 0;
+			}
+		}
+
 		public VideoPreviewContainer(IPreviewStorage parent) : base(parent) { }
 
 		public override IPreviewContainer Clone(IPreviewStorage parent)
@@ -379,36 +404,24 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
 		public override void UpdateContent()
 		{
-			GenerateImages = false;
-			GenerateText = true;
-			base.UpdateContent();
-			UpdateThumbnails();
-		}
-
-		public void UpdateThumbnails()
-		{
-			var parentFile = new FileInfo(OriginalPath);
-			if (string.IsNullOrEmpty(ContainerPath)) return;
-			var previewFolder = new DirectoryInfo(Path.Combine(ContainerPath, "thumb"));
-			bool update;
-			if (!previewFolder.Exists)
-				update = true;
-			else
-			{
-				var time = parentFile.LastWriteTime.Subtract(previewFolder.CreationTime);
-				if (time.Minutes > 0)
-					update = true;
-				else if (!parentFile.Exists)
-					update = true;
-				else
-					update = false;
-			}
-			if (previewFolder.Exists && update)
-				SyncManager.DeleteFolder(previewFolder);
-			if (!parentFile.Exists) return;
+			if (String.IsNullOrEmpty(ContainerPath)) return;
+			if (!Directory.Exists(ContainerPath))
+				Directory.CreateDirectory(ContainerPath);
 			var previewGenerator = Parent.GetPreviewGenerator(this);
 			if (previewGenerator != null)
-				previewGenerator.GeneratePreview(true, false);
+				previewGenerator.GeneratePreview(GenerateImages, GenerateText);
+			PngHelper.ConvertFiles(ContainerPath);
+		}
+
+		public FFMpegData GetFFMpegData()
+		{
+			var infoDestination = Path.Combine(ContainerPath, "info");
+			if (!Directory.Exists(infoDestination))
+				return null;
+			var infoFilePath = Directory.GetFiles(infoDestination, "*.txt").FirstOrDefault();
+			if (String.IsNullOrEmpty(infoFilePath))
+				return null;
+			return new FFMpegData(JsonConvert.DeserializeObject(File.ReadAllText(infoFilePath)));
 		}
 	}
 
@@ -474,6 +487,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 				SyncManager.DeleteFolder(previewFolder);
 			Directory.CreateDirectory(ContainerPath);
 			PowerPointHelper.Instance.ExportPresentationAsImages(Parent.OriginalPath, ContainerPath);
+			PngHelper.ConvertFiles(ContainerPath);
 		}
 
 		public Size GetThumbSize()

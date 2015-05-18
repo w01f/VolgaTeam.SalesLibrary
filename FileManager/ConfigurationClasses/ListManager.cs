@@ -7,7 +7,7 @@ using SalesDepot.CoreObjects.BusinessClasses;
 
 namespace FileManager.ConfigurationClasses
 {
-	internal class ListManager
+	public class ListManager
 	{
 		private static readonly ListManager _instance = new ListManager();
 		private ListManager() { }

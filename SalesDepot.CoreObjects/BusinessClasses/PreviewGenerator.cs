@@ -108,8 +108,10 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			var updateThumbsPhone = !(Directory.Exists(thumbsPhoneDestination) && Directory.GetFiles(thumbsPhoneDestination, "*.png").Length > 0) && generateImages;
 			if (updateThumbsPhone && !Directory.Exists(thumbsPhoneDestination))
 				Directory.CreateDirectory(thumbsPhoneDestination);
+			
 			if (updatePng || updateJpg || updateThumbs)
 				PdfHelper.Instance.ExportPdf(Parent.OriginalPath, pngDestination, jpgDestination, thumbsDestination);
+			
 			if (updatePngPhone || updateJpgPhone || updateThumbsPhone)
 				PdfHelper.Instance.ExportPdfPhone(Parent.OriginalPath, pngPhoneDestination, jpgPhoneDestination, thumbsPhoneDestination);
 

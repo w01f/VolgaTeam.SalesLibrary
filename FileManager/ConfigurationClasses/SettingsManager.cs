@@ -45,7 +45,7 @@ namespace FileManager.ConfigurationClasses
 			AdSpecsSamplesRootPath = string.Empty;
 			ScreenshotLibraryRootPath = string.Empty;
 
-			VideoConverterPath = Path.Combine(ApplicationRootPath, "video converter");
+			FFMpegPath = Path.Combine(ApplicationRootPath, "assets", "ffmpeg");
 
 			TempPath = String.Format(@"{0}\newlocaldirect.com\Sync\Temp", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
 			if (!Directory.Exists(TempPath))
@@ -103,7 +103,7 @@ namespace FileManager.ConfigurationClasses
 		public string WebArtRootPath { get; set; }
 		public string AdSpecsSamplesRootPath { get; set; }
 		public string ScreenshotLibraryRootPath { get; set; }
-		public string VideoConverterPath { get; set; }
+		public string FFMpegPath { get; set; }
 		public string TempPath { get; set; }
 		public string SettingsFilePath { get; private set; }
 

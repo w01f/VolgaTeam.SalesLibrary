@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Windows.Forms.VisualStyles;
 using FileManager.ToolClasses;
 using SalesDepot.CoreObjects.ToolClasses;
 
@@ -8,9 +7,12 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 {
 	public class VideoPreviewGenerator : IPreviewGenerator
 	{
+		private readonly VideoPreviewContainer _videoPreviewContainer;
+
 		public VideoPreviewGenerator(IPreviewContainer parent)
 		{
 			Parent = parent;
+			_videoPreviewContainer = (VideoPreviewContainer)Parent;
 		}
 
 		#region IPreviewGenerator Members
@@ -18,67 +20,41 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
 		public void GeneratePreview(bool generateImages, bool generateText)
 		{
-			if (generateText)
-			{
-				var update = false;
-				if (!Parent.Extension.ToUpper().Equals(".MP4"))
+			if (!_videoPreviewContainer.HasInfo)
+				if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
 				{
+					var infoDestination = Path.Combine(Parent.ContainerPath, "info");
+					if (!Directory.Exists(infoDestination))
+						Directory.CreateDirectory(infoDestination);
+					VideoHelper.Instance.ExtractVideoInfo(Parent.OriginalPath, infoDestination);
+				}
+
+			var ffMpegData = _videoPreviewContainer.GetFFMpegData();
+			if (ffMpegData == null) return;
+
+			if (!String.Equals(Path.GetExtension(Parent.OriginalPath), ".mp4", StringComparison.OrdinalIgnoreCase) || !ffMpegData.IsH264Encoded)
+				if (!_videoPreviewContainer.HasMp4)
 					if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
 					{
-						string mp4Destination = Path.Combine(Parent.ContainerPath, "mp4");
-						bool updateMp4 = !(Directory.Exists(mp4Destination) && Directory.GetFiles(mp4Destination, "*.mp4").Length > 0);
+						var mp4Destination = Path.Combine(Parent.ContainerPath, "mp4");
 						if (!Directory.Exists(mp4Destination))
 							Directory.CreateDirectory(mp4Destination);
-						if (updateMp4)
-							VideoHelper.Instance.ExportMp4(Parent.OriginalPath, mp4Destination);
-						update |= updateMp4;
+						VideoHelper.Instance.ExportMp4(Parent.OriginalPath, mp4Destination, ffMpegData);
 					}
-				}
 
-				if (!Parent.Extension.ToUpper().Equals(".WMV"))
-				{
-					if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
-					{
-						var wmvDestination = Path.Combine(Parent.ContainerPath, "wmv");
-						var updateWmv = !(Directory.Exists(wmvDestination) && Directory.GetFiles(wmvDestination, "*.wmv").Length > 0);
-						if (!Directory.Exists(wmvDestination))
-							Directory.CreateDirectory(wmvDestination);
-						if (updateWmv)
-							VideoHelper.Instance.ExportWmv(Parent.OriginalPath, wmvDestination);
-						update |= updateWmv;
-					}
-				}
-
+			if (!_videoPreviewContainer.HasThumbnail)
 				if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
 				{
-					string ogvDestination = Path.Combine(Parent.ContainerPath, "ogv");
-					bool updateOgv = !(Directory.Exists(ogvDestination) && Directory.GetFiles(ogvDestination, "*.ogv").Length > 0);
-					if (!Directory.Exists(ogvDestination))
-						Directory.CreateDirectory(ogvDestination);
-					if (updateOgv)
-						VideoHelper.Instance.ExportOgv(Parent.OriginalPath, ogvDestination);
-					update |= updateOgv;
-				}
-				if (update)
-					Parent.LastChanged = DateTime.Now;
-			}
-			if (generateImages)
-			{
-				if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
-				{
-					var sourceFile = !Parent.Extension.ToUpper().Equals(".MP4") ?
-					Path.Combine(Parent.ContainerPath, "mp4", Path.ChangeExtension(Path.GetFileName(Parent.OriginalPath), ".mp4")) :
-					Parent.OriginalPath;
+					var sourceFile = !ffMpegData.IsH264Encoded ?
+						Path.Combine(Parent.ContainerPath, "mp4", Path.ChangeExtension(Path.GetFileName(Parent.OriginalPath), ".mp4")) :
+						Parent.OriginalPath;
 					var thumbDestination = Path.Combine(Parent.ContainerPath, "thumb");
-					var update = !(Directory.Exists(thumbDestination) && Directory.GetFiles(thumbDestination, "*.png").Length > 0);
 					if (!Directory.Exists(thumbDestination))
 						Directory.CreateDirectory(thumbDestination);
-					if (update)
-						VideoHelper.Instance.GenerateThumbnails(sourceFile, thumbDestination);
-					if (update)
-						Parent.LastChanged = DateTime.Now;
+					VideoHelper.Instance.GenerateThumbnails(sourceFile, thumbDestination, ffMpegData);
 				}
-			}
+
+			Parent.LastChanged = DateTime.Now;
 		}
 		#endregion
 	}

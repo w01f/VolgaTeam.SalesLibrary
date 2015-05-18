@@ -10,7 +10,7 @@ using SalesDepot.CoreObjects.ToolClasses;
 
 namespace FileManager.BusinessClasses
 {
-	internal class LibraryManager
+	public class LibraryManager
 	{
 		private static readonly LibraryManager _instance = new LibraryManager();
 

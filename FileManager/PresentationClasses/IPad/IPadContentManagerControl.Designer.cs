@@ -29,16 +29,12 @@
         private void InitializeComponent()
         {
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IPadContentManagerControl));
-			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
-			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
-			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
-			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
-			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject5 = new DevExpress.Utils.SerializableAppearanceObject();
+			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject7 = new DevExpress.Utils.SerializableAppearanceObject();
 			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject8 = new DevExpress.Utils.SerializableAppearanceObject();
 			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject9 = new DevExpress.Utils.SerializableAppearanceObject();
-			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject6 = new DevExpress.Utils.SerializableAppearanceObject();
-			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject7 = new DevExpress.Utils.SerializableAppearanceObject();
 			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject10 = new DevExpress.Utils.SerializableAppearanceObject();
+			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject11 = new DevExpress.Utils.SerializableAppearanceObject();
+			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject12 = new DevExpress.Utils.SerializableAppearanceObject();
 			this.xtraTabControl = new DevExpress.XtraTab.XtraTabControl();
 			this.xtraTabPageVideo = new DevExpress.XtraTab.XtraTabPage();
 			this.pnVideo = new System.Windows.Forms.Panel();
@@ -46,12 +42,8 @@
 			this.gridControlVideo = new DevExpress.XtraGrid.GridControl();
 			this.gridViewVideo = new DevExpress.XtraGrid.Views.Grid.GridView();
 			this.gridColumnVideoIndex = new DevExpress.XtraGrid.Columns.GridColumn();
-			this.gridColumnVideoWmvFileName = new DevExpress.XtraGrid.Columns.GridColumn();
-			this.repositoryItemButtonEditVideoWmv = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
 			this.gridColumnVideoMp4FileName = new DevExpress.XtraGrid.Columns.GridColumn();
 			this.repositoryItemButtonEditVideoMp4 = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
-			this.gridColumnVideoOgvFileName = new DevExpress.XtraGrid.Columns.GridColumn();
-			this.repositoryItemButtonEditVideoOgv = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
 			this.gridColumnVideoIPadFolder = new DevExpress.XtraGrid.Columns.GridColumn();
 			this.repositoryItemButtonEditVideoFolderEnabled = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
 			this.gridColumnVideoSelected = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -61,9 +53,9 @@
 			this.gridColumnVideoConvert = new DevExpress.XtraGrid.Columns.GridColumn();
 			this.repositoryItemButtonEditVideoConvertDisabled = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
 			this.gridColumnVideoRefresh = new DevExpress.XtraGrid.Columns.GridColumn();
+			this.repositoryItemButtonEditVideoRefersh = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
 			this.repositoryItemButtonEditVideoConvertEnabled = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
 			this.repositoryItemButtonEditVideoFolderDisabled = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
-			this.repositoryItemButtonEditVideoRefersh = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
 			this.pnVideoTop = new System.Windows.Forms.Panel();
 			this.buttonXClearAll = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXSelectAll = new DevComponents.DotNetBar.ButtonX();
@@ -84,15 +76,13 @@
 			this.pnVideoMain.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.gridControlVideo)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.gridViewVideo)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditVideoWmv)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditVideoMp4)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditVideoOgv)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditVideoFolderEnabled)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditVideoConvertDisabled)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditVideoRefersh)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditVideoConvertEnabled)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditVideoFolderDisabled)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditVideoRefersh)).BeginInit();
 			this.pnVideoTop.SuspendLayout();
 			this.xtraTabPageSite.SuspendLayout();
 			this.pnSite.SuspendLayout();
@@ -174,9 +164,7 @@
 			this.gridControlVideo.Name = "gridControlVideo";
 			this.gridControlVideo.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemButtonEditVideoMp4,
-            this.repositoryItemButtonEditVideoOgv,
             this.repositoryItemButtonEditVideoFolderEnabled,
-            this.repositoryItemButtonEditVideoWmv,
             this.repositoryItemCheckEdit,
             this.repositoryItemButtonEditVideoConvertDisabled,
             this.repositoryItemButtonEditVideoConvertEnabled,
@@ -207,9 +195,7 @@
 			this.gridViewVideo.Appearance.SelectedRow.Options.UseFont = true;
 			this.gridViewVideo.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gridColumnVideoIndex,
-            this.gridColumnVideoWmvFileName,
             this.gridColumnVideoMp4FileName,
-            this.gridColumnVideoOgvFileName,
             this.gridColumnVideoIPadFolder,
             this.gridColumnVideoSelected,
             this.gridColumnVideoSourceFolder,
@@ -224,7 +210,6 @@
 			this.gridViewVideo.OptionsSelection.EnableAppearanceFocusedCell = false;
 			this.gridViewVideo.OptionsSelection.EnableAppearanceFocusedRow = false;
 			this.gridViewVideo.OptionsSelection.EnableAppearanceHideSelection = false;
-			this.gridViewVideo.OptionsView.ColumnAutoWidth = false;
 			this.gridViewVideo.OptionsView.ShowDetailButtons = false;
 			this.gridViewVideo.OptionsView.ShowGroupExpandCollapseButtons = false;
 			this.gridViewVideo.OptionsView.ShowGroupPanel = false;
@@ -242,35 +227,11 @@
 			this.gridColumnVideoIndex.FieldName = "Index";
 			this.gridColumnVideoIndex.Name = "gridColumnVideoIndex";
 			this.gridColumnVideoIndex.OptionsColumn.AllowEdit = false;
+			this.gridColumnVideoIndex.OptionsColumn.FixedWidth = true;
 			this.gridColumnVideoIndex.OptionsColumn.ReadOnly = true;
 			this.gridColumnVideoIndex.Visible = true;
 			this.gridColumnVideoIndex.VisibleIndex = 1;
 			this.gridColumnVideoIndex.Width = 45;
-			// 
-			// gridColumnVideoWmvFileName
-			// 
-			this.gridColumnVideoWmvFileName.Caption = "WMV for IE";
-			this.gridColumnVideoWmvFileName.ColumnEdit = this.repositoryItemButtonEditVideoWmv;
-			this.gridColumnVideoWmvFileName.FieldName = "WmvFileName";
-			this.gridColumnVideoWmvFileName.Name = "gridColumnVideoWmvFileName";
-			this.gridColumnVideoWmvFileName.OptionsColumn.ReadOnly = true;
-			this.gridColumnVideoWmvFileName.ShowButtonMode = DevExpress.XtraGrid.Views.Base.ShowButtonModeEnum.ShowAlways;
-			this.gridColumnVideoWmvFileName.Visible = true;
-			this.gridColumnVideoWmvFileName.VisibleIndex = 3;
-			this.gridColumnVideoWmvFileName.Width = 187;
-			// 
-			// repositoryItemButtonEditVideoWmv
-			// 
-			this.repositoryItemButtonEditVideoWmv.AllowFocused = false;
-			this.repositoryItemButtonEditVideoWmv.AutoHeight = false;
-			this.repositoryItemButtonEditVideoWmv.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, false, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("repositoryItemButtonEditVideoWmv.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true)});
-			this.repositoryItemButtonEditVideoWmv.Name = "repositoryItemButtonEditVideoWmv";
-			this.repositoryItemButtonEditVideoWmv.NullText = "MISSING!";
-			this.repositoryItemButtonEditVideoWmv.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-			this.repositoryItemButtonEditVideoWmv.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.repositoryItemButtonEditVideoWmv_ButtonClick);
-			this.repositoryItemButtonEditVideoWmv.EditValueChanged += new System.EventHandler(this.repositoryItemButtonEditVideoWmv_EditValueChanged);
-			this.repositoryItemButtonEditVideoWmv.Click += new System.EventHandler(this.repositoryItemButtonEditVideoWmv_Click);
 			// 
 			// gridColumnVideoMp4FileName
 			// 
@@ -281,7 +242,7 @@
 			this.gridColumnVideoMp4FileName.OptionsColumn.ReadOnly = true;
 			this.gridColumnVideoMp4FileName.ShowButtonMode = DevExpress.XtraGrid.Views.Base.ShowButtonModeEnum.ShowAlways;
 			this.gridColumnVideoMp4FileName.Visible = true;
-			this.gridColumnVideoMp4FileName.VisibleIndex = 4;
+			this.gridColumnVideoMp4FileName.VisibleIndex = 3;
 			this.gridColumnVideoMp4FileName.Width = 197;
 			// 
 			// repositoryItemButtonEditVideoMp4
@@ -289,36 +250,12 @@
 			this.repositoryItemButtonEditVideoMp4.AllowFocused = false;
 			this.repositoryItemButtonEditVideoMp4.AutoHeight = false;
 			this.repositoryItemButtonEditVideoMp4.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, false, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("repositoryItemButtonEditVideoMp4.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, false, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("repositoryItemButtonEditVideoMp4.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject7, "", null, null, true)});
 			this.repositoryItemButtonEditVideoMp4.Name = "repositoryItemButtonEditVideoMp4";
 			this.repositoryItemButtonEditVideoMp4.NullText = "MISSING!";
 			this.repositoryItemButtonEditVideoMp4.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
 			this.repositoryItemButtonEditVideoMp4.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.repositoryItemButtonEditVideoMp4_ButtonClick);
 			this.repositoryItemButtonEditVideoMp4.Click += new System.EventHandler(this.repositoryItemButtonEditVideoMp4_Click);
-			// 
-			// gridColumnVideoOgvFileName
-			// 
-			this.gridColumnVideoOgvFileName.Caption = "OGV for Firefox";
-			this.gridColumnVideoOgvFileName.ColumnEdit = this.repositoryItemButtonEditVideoOgv;
-			this.gridColumnVideoOgvFileName.FieldName = "OgvFileName";
-			this.gridColumnVideoOgvFileName.Name = "gridColumnVideoOgvFileName";
-			this.gridColumnVideoOgvFileName.OptionsColumn.ReadOnly = true;
-			this.gridColumnVideoOgvFileName.ShowButtonMode = DevExpress.XtraGrid.Views.Base.ShowButtonModeEnum.ShowAlways;
-			this.gridColumnVideoOgvFileName.Visible = true;
-			this.gridColumnVideoOgvFileName.VisibleIndex = 5;
-			this.gridColumnVideoOgvFileName.Width = 187;
-			// 
-			// repositoryItemButtonEditVideoOgv
-			// 
-			this.repositoryItemButtonEditVideoOgv.AllowFocused = false;
-			this.repositoryItemButtonEditVideoOgv.AutoHeight = false;
-			this.repositoryItemButtonEditVideoOgv.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, false, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("repositoryItemButtonEditVideoOgv.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject3, "", null, null, true)});
-			this.repositoryItemButtonEditVideoOgv.Name = "repositoryItemButtonEditVideoOgv";
-			this.repositoryItemButtonEditVideoOgv.NullText = "MISSING!";
-			this.repositoryItemButtonEditVideoOgv.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-			this.repositoryItemButtonEditVideoOgv.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.repositoryItemButtonEditVideoOgv_ButtonClick);
-			this.repositoryItemButtonEditVideoOgv.Click += new System.EventHandler(this.repositoryItemButtonEditVideoOgv_Click);
 			// 
 			// gridColumnVideoIPadFolder
 			// 
@@ -326,10 +263,11 @@
 			this.gridColumnVideoIPadFolder.ColumnEdit = this.repositoryItemButtonEditVideoFolderEnabled;
 			this.gridColumnVideoIPadFolder.FieldName = "IPadFolder";
 			this.gridColumnVideoIPadFolder.Name = "gridColumnVideoIPadFolder";
+			this.gridColumnVideoIPadFolder.OptionsColumn.FixedWidth = true;
 			this.gridColumnVideoIPadFolder.OptionsColumn.ReadOnly = true;
 			this.gridColumnVideoIPadFolder.ShowButtonMode = DevExpress.XtraGrid.Views.Base.ShowButtonModeEnum.ShowAlways;
 			this.gridColumnVideoIPadFolder.Visible = true;
-			this.gridColumnVideoIPadFolder.VisibleIndex = 6;
+			this.gridColumnVideoIPadFolder.VisibleIndex = 4;
 			this.gridColumnVideoIPadFolder.Width = 73;
 			// 
 			// repositoryItemButtonEditVideoFolderEnabled
@@ -337,7 +275,7 @@
 			this.repositoryItemButtonEditVideoFolderEnabled.AllowFocused = false;
 			this.repositoryItemButtonEditVideoFolderEnabled.AutoHeight = false;
 			this.repositoryItemButtonEditVideoFolderEnabled.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::FileManager.Properties.Resources.OpenVideoSmall, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject4, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::FileManager.Properties.Resources.OpenVideoSmall, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject8, "", null, null, true)});
 			this.repositoryItemButtonEditVideoFolderEnabled.Name = "repositoryItemButtonEditVideoFolderEnabled";
 			this.repositoryItemButtonEditVideoFolderEnabled.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
 			this.repositoryItemButtonEditVideoFolderEnabled.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.repositoryItemButtonEditVideoFolder_ButtonClick);
@@ -368,8 +306,9 @@
 			this.gridColumnVideoSourceFolder.Caption = "Source";
 			this.gridColumnVideoSourceFolder.ColumnEdit = this.repositoryItemButtonEditVideoFolderEnabled;
 			this.gridColumnVideoSourceFolder.Name = "gridColumnVideoSourceFolder";
+			this.gridColumnVideoSourceFolder.OptionsColumn.FixedWidth = true;
 			this.gridColumnVideoSourceFolder.Visible = true;
-			this.gridColumnVideoSourceFolder.VisibleIndex = 7;
+			this.gridColumnVideoSourceFolder.VisibleIndex = 5;
 			this.gridColumnVideoSourceFolder.Width = 64;
 			// 
 			// gridColumnVideoSourceFile
@@ -388,15 +327,16 @@
 			this.gridColumnVideoConvert.Caption = "Convert";
 			this.gridColumnVideoConvert.ColumnEdit = this.repositoryItemButtonEditVideoConvertDisabled;
 			this.gridColumnVideoConvert.Name = "gridColumnVideoConvert";
+			this.gridColumnVideoConvert.OptionsColumn.FixedWidth = true;
 			this.gridColumnVideoConvert.Visible = true;
-			this.gridColumnVideoConvert.VisibleIndex = 8;
+			this.gridColumnVideoConvert.VisibleIndex = 6;
 			this.gridColumnVideoConvert.Width = 63;
 			// 
 			// repositoryItemButtonEditVideoConvertDisabled
 			// 
 			this.repositoryItemButtonEditVideoConvertDisabled.AutoHeight = false;
 			this.repositoryItemButtonEditVideoConvertDisabled.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, false, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::FileManager.Properties.Resources.ConvertVideoSmall, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject5, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, false, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::FileManager.Properties.Resources.ConvertVideoSmall, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject9, "", null, null, true)});
 			this.repositoryItemButtonEditVideoConvertDisabled.Name = "repositoryItemButtonEditVideoConvertDisabled";
 			this.repositoryItemButtonEditVideoConvertDisabled.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
 			this.repositoryItemButtonEditVideoConvertDisabled.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.repositoryItemButtonEditVideoConvert_ButtonClick);
@@ -406,15 +346,25 @@
 			this.gridColumnVideoRefresh.Caption = "Refresh";
 			this.gridColumnVideoRefresh.ColumnEdit = this.repositoryItemButtonEditVideoRefersh;
 			this.gridColumnVideoRefresh.Name = "gridColumnVideoRefresh";
+			this.gridColumnVideoRefresh.OptionsColumn.FixedWidth = true;
 			this.gridColumnVideoRefresh.Visible = true;
-			this.gridColumnVideoRefresh.VisibleIndex = 9;
+			this.gridColumnVideoRefresh.VisibleIndex = 7;
 			this.gridColumnVideoRefresh.Width = 63;
+			// 
+			// repositoryItemButtonEditVideoRefersh
+			// 
+			this.repositoryItemButtonEditVideoRefersh.AutoHeight = false;
+			this.repositoryItemButtonEditVideoRefersh.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::FileManager.Properties.Resources.ResetVideoSmall, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject10, "", null, null, true)});
+			this.repositoryItemButtonEditVideoRefersh.Name = "repositoryItemButtonEditVideoRefersh";
+			this.repositoryItemButtonEditVideoRefersh.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
+			this.repositoryItemButtonEditVideoRefersh.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.repositoryItemButtonEditVideoRefersh_ButtonClick);
 			// 
 			// repositoryItemButtonEditVideoConvertEnabled
 			// 
 			this.repositoryItemButtonEditVideoConvertEnabled.AutoHeight = false;
 			this.repositoryItemButtonEditVideoConvertEnabled.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::FileManager.Properties.Resources.ConvertVideoSmall, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject8, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::FileManager.Properties.Resources.ConvertVideoSmall, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject11, "", null, null, true)});
 			this.repositoryItemButtonEditVideoConvertEnabled.Name = "repositoryItemButtonEditVideoConvertEnabled";
 			this.repositoryItemButtonEditVideoConvertEnabled.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
 			this.repositoryItemButtonEditVideoConvertEnabled.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.repositoryItemButtonEditVideoConvert_ButtonClick);
@@ -423,18 +373,9 @@
 			// 
 			this.repositoryItemButtonEditVideoFolderDisabled.AutoHeight = false;
 			this.repositoryItemButtonEditVideoFolderDisabled.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, false, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::FileManager.Properties.Resources.OpenVideoSmall, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject9, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, false, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::FileManager.Properties.Resources.OpenVideoSmall, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject12, "", null, null, true)});
 			this.repositoryItemButtonEditVideoFolderDisabled.Name = "repositoryItemButtonEditVideoFolderDisabled";
 			this.repositoryItemButtonEditVideoFolderDisabled.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
-			// 
-			// repositoryItemButtonEditVideoRefersh
-			// 
-			this.repositoryItemButtonEditVideoRefersh.AutoHeight = false;
-			this.repositoryItemButtonEditVideoRefersh.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::FileManager.Properties.Resources.ResetVideoSmall, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject6, "", null, null, true)});
-			this.repositoryItemButtonEditVideoRefersh.Name = "repositoryItemButtonEditVideoRefersh";
-			this.repositoryItemButtonEditVideoRefersh.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
-			this.repositoryItemButtonEditVideoRefersh.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.repositoryItemButtonEditVideoRefersh_ButtonClick);
 			// 
 			// pnVideoTop
 			// 
@@ -602,15 +543,13 @@
 			this.pnVideoMain.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.gridControlVideo)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.gridViewVideo)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditVideoWmv)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditVideoMp4)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditVideoOgv)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditVideoFolderEnabled)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditVideoConvertDisabled)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditVideoRefersh)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditVideoConvertEnabled)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditVideoFolderDisabled)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditVideoRefersh)).EndInit();
 			this.pnVideoTop.ResumeLayout(false);
 			this.pnVideoTop.PerformLayout();
 			this.xtraTabPageSite.ResumeLayout(false);
@@ -638,15 +577,11 @@
         private System.Windows.Forms.Label laVideoTitle;
         private DevExpress.XtraGrid.GridControl gridControlVideo;
 		private DevExpress.XtraGrid.Views.Grid.GridView gridViewVideo;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnVideoIndex;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnVideoWmvFileName;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnVideoMp4FileName;
-		private DevExpress.XtraGrid.Columns.GridColumn gridColumnVideoOgvFileName;
+		private DevExpress.XtraGrid.Columns.GridColumn gridColumnVideoIndex;
+		private DevExpress.XtraGrid.Columns.GridColumn gridColumnVideoMp4FileName;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnVideoIPadFolder;
-        private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repositoryItemButtonEditVideoMp4;
-        private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repositoryItemButtonEditVideoOgv;
-        private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repositoryItemButtonEditVideoFolderEnabled;
-        private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repositoryItemButtonEditVideoWmv;
+		private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repositoryItemButtonEditVideoMp4;
+		private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repositoryItemButtonEditVideoFolderEnabled;
         private System.Windows.Forms.PictureBox pbOpera;
         private System.Windows.Forms.PictureBox pbSafari;
         private System.Windows.Forms.PictureBox pbFirefox;

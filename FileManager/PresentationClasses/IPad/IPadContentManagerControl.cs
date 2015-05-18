@@ -133,27 +133,13 @@ namespace FileManager.PresentationClasses.IPad
 
 		private void gridViewVideo_RowCellStyle(object sender, RowCellStyleEventArgs e)
 		{
-			int videoIndex = gridViewVideo.GetDataSourceRowIndex(e.RowHandle);
+			var videoIndex = gridViewVideo.GetDataSourceRowIndex(e.RowHandle);
 			if (videoIndex < 0 || videoIndex >= _videoFiles.Count) return;
-			VideoInfo videoInfo = _videoFiles[videoIndex];
-			if (e.Column == gridColumnVideoWmvFileName)
-				e.Appearance.ForeColor = string.IsNullOrEmpty(videoInfo.WmvFilePath) ? Color.Red : Color.Green;
+			var videoInfo = _videoFiles[videoIndex];
 			if (e.Column == gridColumnVideoMp4FileName)
 				e.Appearance.ForeColor = string.IsNullOrEmpty(videoInfo.Mp4FilePath) ? Color.Red : Color.Green;
-			else if (e.Column == gridColumnVideoOgvFileName)
-				e.Appearance.ForeColor = string.IsNullOrEmpty(videoInfo.OgvFilePath) ? Color.Red : Color.Green;
 
 			e.Appearance.BackColor = videoInfo.Selected ? Color.LightGreen : Color.White;
-		}
-
-		private void repositoryItemButtonEditVideoWmv_ButtonClick(object sender, ButtonPressedEventArgs e)
-		{
-			if (gridViewVideo.FocusedRowHandle == GridControl.InvalidRowHandle) return;
-			VideoInfo videoInfo = _videoFiles[gridViewVideo.GetDataSourceRowIndex(gridViewVideo.FocusedRowHandle)];
-			if (File.Exists(videoInfo.WmvFilePath))
-				VideoHelper.Instance.OpenMediaPlayer(videoInfo.WmvFilePath);
-			else
-				AppManager.Instance.ShowWarning("You need to convert this video first!");
 		}
 
 		private void repositoryItemButtonEditVideoMp4_ButtonClick(object sender, ButtonPressedEventArgs e)
@@ -166,29 +152,9 @@ namespace FileManager.PresentationClasses.IPad
 				AppManager.Instance.ShowWarning("You need to convert this video first!");
 		}
 
-		private void repositoryItemButtonEditVideoOgv_ButtonClick(object sender, ButtonPressedEventArgs e)
-		{
-			if (gridViewVideo.FocusedRowHandle == GridControl.InvalidRowHandle) return;
-			VideoInfo videoInfo = _videoFiles[gridViewVideo.GetDataSourceRowIndex(gridViewVideo.FocusedRowHandle)];
-			if (File.Exists(videoInfo.OgvFilePath))
-				VideoHelper.Instance.OpenFirefox(videoInfo.OgvFilePath);
-			else
-				AppManager.Instance.ShowWarning("You need to convert this video first!");
-		}
-
 		private void repositoryItemButtonEditVideoMp4_Click(object sender, EventArgs e)
 		{
 			repositoryItemButtonEditVideoMp4_ButtonClick(this, new ButtonPressedEventArgs(repositoryItemButtonEditVideoMp4.Buttons[0]));
-		}
-
-		private void repositoryItemButtonEditVideoOgv_Click(object sender, EventArgs e)
-		{
-			repositoryItemButtonEditVideoOgv_ButtonClick(this, new ButtonPressedEventArgs(repositoryItemButtonEditVideoOgv.Buttons[0]));
-		}
-
-		private void repositoryItemButtonEditVideoWmv_Click(object sender, EventArgs e)
-		{
-			repositoryItemButtonEditVideoWmv_ButtonClick(this, new ButtonPressedEventArgs(repositoryItemButtonEditVideoWmv.Buttons[0]));
 		}
 
 		private void repositoryItemButtonEditVideoFolder_ButtonClick(object sender, ButtonPressedEventArgs e)
