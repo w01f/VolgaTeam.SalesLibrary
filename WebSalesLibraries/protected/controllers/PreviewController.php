@@ -131,23 +131,7 @@
 
 		public function actionGetBar()
 		{
-			$format = Yii::app()->request->getPost('format');
-			switch ($format)
-			{
-				case 'ppt':
-				case 'doc':
-				case 'pdf':
-					$this->renderPartial('documentBar', array('format' => $format), false, true);
-					break;
-				case 'mp4':
-				case 'wmv':
-				case 'video':
-					$this->renderPartial('videoBar', array('format' => $format), false, true);
-					break;
-				default:
-					Yii::app()->end();
-					break;
-			}
+			$this->renderPartial('bar', array(), false, true);
 		}
 
 		public function actionDownloadFile()

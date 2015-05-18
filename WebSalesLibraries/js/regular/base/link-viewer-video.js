@@ -108,9 +108,6 @@
 				}
 			], viewerBar);
 			viewerBar.show({
-				linkId: viewerData.linkId,
-				format: viewerData.format,
-				linkName: viewerData.name,
 				returnCallback: function ()
 				{
 					$.fancybox.close();

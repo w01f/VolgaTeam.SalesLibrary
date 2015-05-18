@@ -248,13 +248,11 @@
 					closeEffect: 'none',
 					afterClose: function ()
 					{
-						if (!viewerData.isPdf)
-							documentBar.close();
+						documentBar.close();
 					},
 					onUpdate: function ()
 					{
-						if (!viewerData.isPdf)
-							documentBar.resize();
+						documentBar.resize();
 						$.ajax({
 							type: "POST",
 							url: window.BaseUrl + "statistic/writeActivity",
@@ -280,25 +278,15 @@
 						}
 					}
 				});
-			if (!viewerData.isPdf)
-				documentBar.show({
-					linkId: viewerData.linkId,
-					format: viewerData.format,
-					linkName: viewerData.name,
-					originalFileName: viewerData.fileName,
-					originalFilePath: viewerData.filePath,
-					pdfFileName: viewerData.documentInPdf.name,
-					pdfFilePath: viewerData.documentInPdf.path,
-					pages: viewerData.pages,
-					images: images,
-					returnCallback: function ()
-					{
-						viewerData.startFormat = imageViewerType;
-						viewerData.startIndex = imageViewerStartIndex;
-						parameters.data = $.toJSON(viewerData);
-						new $.SalesPortal.DocumentViewer(parameters).show();
-					}
-				});
+			documentBar.show({
+				returnCallback: function ()
+				{
+					viewerData.startFormat = imageViewerType;
+					viewerData.startIndex = imageViewerStartIndex;
+					parameters.data = $.toJSON(viewerData);
+					new $.SalesPortal.DocumentViewer(parameters).show();
+				}
+			});
 		};
 
 		var showGalleryFullScreen = function ()
