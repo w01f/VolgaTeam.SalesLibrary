@@ -54,12 +54,6 @@
 							href: viewerData.mp4Src.href,
 							title: viewerData.fileName,
 							type: viewerData.mp4Src.type
-						},
-						{
-							src: viewerData.ogvSrc.href,
-							href: viewerData.ogvSrc.href,
-							title: viewerData.fileName,
-							type: viewerData.ogvSrc.type
 						}
 					]);
 					player.play();
@@ -109,15 +103,10 @@
 					src: viewerData.mp4Src.href,
 					href: viewerData.mp4Src.href,
 					title: viewerData.fileName,
-					type: viewerData.mp4Src.type
-				},
-				{
-					src: viewerData.ogvSrc.href,
-					href: viewerData.ogvSrc.href,
-					title: viewerData.fileName,
-					type: viewerData.ogvSrc.type
+					type: viewerData.mp4Src.type,
+					swf: viewerData.playerSrc
 				}
-			],viewerBar);
+			], viewerBar);
 			viewerBar.show({
 				linkId: viewerData.linkId,
 				format: viewerData.format,
@@ -171,7 +160,6 @@
 		this.thumbImageSrc = undefined;
 		this.playerSrc = undefined;
 		this.mp4Src = undefined;
-		this.ogvSrc = undefined;
 
 		this.rateData = undefined;
 

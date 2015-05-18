@@ -196,7 +196,7 @@
 						Name: viewerData.name,
 						File: viewerData.fileName,
 						'Original Format': viewerData.format,
-						Format: imageViewerType
+						Format: 'pdf'
 					})
 				},
 				async: true,

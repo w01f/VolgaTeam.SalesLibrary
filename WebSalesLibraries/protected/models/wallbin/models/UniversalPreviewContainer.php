@@ -45,22 +45,12 @@
 		 * @var string[]
 		 * @soap
 		 */
-		public $wmvLinks;
-		/**
-		 * @var string[]
-		 * @soap
-		 */
 		public $mp4Links;
 		/**
 		 * @var string[]
 		 * @soap
 		 */
 		public $mp4ThumbLinks;
-		/**
-		 * @var string[]
-		 * @soap
-		 */
-		public $ogvLinks;
 		/**
 		 * @var string[]
 		 * @soap
@@ -90,8 +80,6 @@
 		public $officeItems;
 
 		public $pdf;
-		public $wmv;
-		public $ogv;
 		public $mp4;
 		public $mp4Thumb;
 
@@ -148,17 +136,11 @@
 						$previewFile->link .= '?version=' . filemtime($previewFile->path);
 						$this->thumbItems[] = $previewFile;
 						break;
-					case 'wmv':
-						$this->wmv = $previewFile;
-						break;
 					case 'mp4':
 						$this->mp4 = $previewFile;
 						break;
 					case 'mp4 thumb':
 						$this->mp4Thumb = $previewFile;
-						break;
-					case 'ogv':
-						$this->ogv = $previewFile;
 						break;
 					case 'office':
 					case 'new office':
