@@ -39,6 +39,10 @@
 					'type' => 'video/mp4',
 					'swf' => $this->playerLink)))
 				. '</div>';
+			$result .= '<div class="activity-data">' . CJSON::encode(array(
+					'action' => 'Shortcut Video Link',
+					'title' => sprintf('%s - %s', $this->name, $this->tooltip)
+				)) . '</div>';
 			return $result;
 		}
 	}

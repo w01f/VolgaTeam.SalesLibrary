@@ -31,6 +31,10 @@
 			$result = '';
 			$result .= '<div class="library-name">' . $this->libraryName . '</div>';
 			$result .= '<div class="page-name">' . $this->pageName . '</div>';
+			$result .= '<div class="activity-data">' . CJSON::encode(array(
+					'action' => 'Shortcut Page Link',
+					'title' => sprintf('%s - %s', $this->name, $this->tooltip)
+				)) . '</div>';
 			return $result;
 		}
 	}

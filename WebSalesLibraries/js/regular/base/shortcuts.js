@@ -123,6 +123,21 @@
 							{
 								that.updateContentSize();
 								that.selectedCarouselCategory = ev.id + 1;
+
+								$.ajax({
+									type: "POST",
+									url: window.BaseUrl + "statistic/writeActivity",
+									data: {
+										type: 'Shortcuts',
+										subType: 'Carousel Group Select',
+										data: $.toJSON({
+											File: data.displayParameters.predefinedDataList[ev.id].name
+										})
+									},
+									async: true,
+									dataType: 'html'
+								});
+
 								var logo = data.displayParameters.predefinedDataList[ev.id].logo;
 								var shortcutsTab = $('#' + tabId);
 								shortcutsTab.find('.ribbon-tab-logo').hide();
@@ -172,6 +187,8 @@
 					{
 						return function ()
 						{
+							trackActivity(dataObject);
+
 							var content = $('#content');
 							var pageContent = content.find('.shortcuts-page-content');
 							var tabId = pageContent.attr('id').replace("shortcuts-page-content-", "");
@@ -234,27 +251,15 @@
 					else
 						return function ()
 						{
-							var linkName = dataObject.find('.link-name').html();
+							trackActivity(dataObject);
 							var url = dataObject.find('.url').text();
-							$.ajax({
-								type: "POST",
-								url: window.BaseUrl + "statistic/writeActivity",
-								data: {
-									type: 'Shortcuts',
-									subType: 'Open',
-									data: $.toJSON({
-										File: linkName,
-										'Original Format': 'url'
-									})
-								},
-								async: true,
-								dataType: 'html'
-							});
 							window.open(url.replace(/&amp;/g, '%26'), "_blank");
 						};
 				case 'download':
 					return function ()
 					{
+						trackActivity(dataObject);
+
 						var linkId = dataObject.find('.link-id').text();
 						var url = dataObject.find('.url').text();
 						$.ajax({
@@ -295,18 +300,21 @@
 				case 'video':
 					return function ()
 					{
+						trackActivity(dataObject);
 						$.SalesPortal.LinkManager.playVideo($.parseJSON(dataObject.find('.links').text()));
 					};
 					break;
 				case 'library-file':
 					return function ()
 					{
+						trackActivity(dataObject);
 						$.SalesPortal.LinkManager.requestViewDialog(dataObject.find('.link-id').html(), false);
 					};
 					break;
 				case 'library-page':
 					return function ()
 					{
+						trackActivity(dataObject);
 						$.cookie("selectedLibraryName", dataObject.find('.library-name').html(), {
 							expires: (60 * 60 * 24 * 7)
 						});
@@ -321,6 +329,24 @@
 					break;
 			}
 			return null;
+		};
+
+		var trackActivity = function (dataObject)
+		{
+			var activityData = $.parseJSON(dataObject.find('.activity-data').text());
+			$.ajax({
+				type: "POST",
+				url: window.BaseUrl + "statistic/writeActivity",
+				data: {
+					type: 'Shortcuts',
+					subType: activityData.action,
+					data: $.toJSON({
+						File: activityData.title
+					})
+				},
+				async: true,
+				dataType: 'html'
+			});
 		};
 
 		var initPageModeToggle = function (tabId, showPageModeToggle, predefinedPageType)

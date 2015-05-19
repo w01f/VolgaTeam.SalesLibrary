@@ -14,7 +14,6 @@
 		</div>
 	</div>
 	<div class="service-data">
-		<div class="url"><? echo $link->sourceLink; ?></div>
-		<div class="link-id"><? echo $link->id; ?></div>
+		<? echo $link->getServiceData(); ?>
 	</div>
 </a>

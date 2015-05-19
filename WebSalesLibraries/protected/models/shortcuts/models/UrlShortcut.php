@@ -31,6 +31,10 @@
 			$result .= '<div class="link-type">' . $this->type . '</div>';
 			$result .= '<div class="link-name">' . $this->name . ' - ' . $this->tooltip . '</div>';
 			$result .= '<div class="url">' . $this->sourceLink . '</div>';
+			$result .= '<div class="activity-data">' . CJSON::encode(array(
+					'action' => 'Shortcut Web Link',
+					'title' => sprintf('%s - %s', $this->name, $this->tooltip)
+				)) . '</div>';
 			return $result;
 		}
 	}
