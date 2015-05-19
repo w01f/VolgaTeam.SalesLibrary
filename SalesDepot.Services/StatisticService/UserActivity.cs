@@ -35,7 +35,15 @@ namespace SalesDepot.Services.StatisticService
 					subType.Equals("Add to QS") ||
 					subType.Equals("Favorites") ||
 					subType.Equals("Favorites Activity") ||
-					subType.Equals("Add to Favorites")
+					subType.Equals("Add to Favorites") ||
+					subType.Equals("Shortcut Video Link") ||
+					subType.Equals("Shortcut Search Link") ||
+					subType.Equals("Shortcut Download Link") ||
+					subType.Equals("Shortcut Web Link") ||
+					subType.Equals("Shortcut Window Link") ||
+					subType.Equals("Shortcut Page Link") ||
+					subType.Equals("Shortcut File Link") ||
+					subType.Equals("Carousel Group Select")
 					)
 					&& details != null)
 					return details.Where(d => d.tag.ToLower().Equals("file")).Select(d =>
