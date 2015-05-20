@@ -44,13 +44,21 @@
 							$condition = str_replace(strtolower($ignoreValue), '', $condition);
 						}
 
-						$ignoreValue = trim($node->nodeValue) . ' ';
-						$condition = str_replace($ignoreValue, '', $condition);
-						$condition = str_replace(strtolower($ignoreValue), '', $condition);
+						if (self::startsWith($conditionToCompare, $ignoreValue))
+						{
+							$condition = str_replace($ignoreValue . ' ', '', $condition);
+							$condition = str_replace(strtolower($ignoreValue) . ' ', '', $condition);
+						}
 
-						$ignoreValue = ' ' . trim($node->nodeValue);
-						$condition = str_replace($ignoreValue, '', $condition);
-						$condition = str_replace(strtolower($ignoreValue), '', $condition);
+						if (self::endsWith($conditionToCompare, $ignoreValue))
+						{
+							$condition = str_replace(' ' . $ignoreValue, '', $condition);
+							$condition = str_replace(' ' . strtolower($ignoreValue), '', $condition);
+						}
+
+						$ignoreValue = ' ' . trim($node->nodeValue) . ' ';
+						$condition = str_replace($ignoreValue, ' ', $condition);
+						$condition = str_replace(strtolower($ignoreValue), ' ', $condition);
 					}
 
 					if ($condition != "" && $condition != '""')
@@ -66,11 +74,24 @@
 						foreach ($aliasNodes as $aliasNode)
 							$result[] = str_replace($conditionToCompare, trim($aliasNode->nodeValue), $condition);
 					}
-				} catch (Exception $e)
+				}
+				catch (Exception $e)
 				{
 				}
 			}
 			return $result;
+		}
+
+		private static function startsWith($haystack, $needle)
+		{
+			// search backwards starting from haystack length characters from the end
+			return $needle === "" || strrpos($haystack, $needle, -strlen($haystack)) !== FALSE;
+		}
+
+		private static function endsWith($haystack, $needle)
+		{
+			// search forward starting from end minus needle length characters
+			return $needle === "" || (($temp = strlen($haystack) - strlen($needle)) >= 0 && strpos($haystack, $needle, $temp) !== FALSE);
 		}
 
 		/**
