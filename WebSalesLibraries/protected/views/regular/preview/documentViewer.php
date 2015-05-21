@@ -93,10 +93,12 @@
 			</div>
 			<div class="row row-buttons gallery-control-buttons">
 				<div class="col col-xs-5 text-left">
-					<div id="user-link-rate-container">
-						<img class="total-rate" src="" style="height:16px"/>
-						<label for="user-link-rate" class="ui-hide-label"></label><input id="user-link-rate" class="rating">
-					</div>
+					<? if ($data->userAuthorized): ?>
+						<div id="user-link-rate-container">
+							<img class="total-rate" src="" style="height:16px"/>
+							<label for="user-link-rate" class="ui-hide-label"></label><input id="user-link-rate" class="rating">
+						</div>
+					<? endif; ?>
 				</div>
 				<div class="col col-xs-2 text-center">
 					<? if (!$data->singlePage): ?>

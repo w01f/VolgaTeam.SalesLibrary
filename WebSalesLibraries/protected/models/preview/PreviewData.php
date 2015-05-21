@@ -52,6 +52,7 @@
 
 			$imageUrlPrefix = Yii::app()->getBaseUrl(true);
 
+			$this->actions = array();
 			if ($this->allowAddToQuickSite)
 			{
 				$action = new PreviewAction();
