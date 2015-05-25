@@ -130,7 +130,7 @@
 							'</div>' +
 							'</div>' +
 							'<div class="row" style="margin: 0;"><div class="col-xs-12 text-center"><button type="button" class="btn btn-default" style="width: 80px; margin-top: 20px" onclick="$.fancybox.close()">OK</button></div></div>'),
-						title: 'Password Requirements',
+						title: 'Link Cart',
 						width: 400,
 						autoSize: false,
 						autoHeight: true,
@@ -167,25 +167,28 @@
 				},
 				success: function ()
 				{
-					$('body').append('<div id="add-link-info" title="Link Cart">Links were added to Link Cart</div>');
-					$("#add-link-info").dialog({
-						resizable: false,
-						modal: true,
-						buttons: {
-							"OK": function ()
-							{
-								$(this).dialog("close");
-							}
-						},
-						open: function ()
-						{
-							$(this).closest(".ui-dialog")
-								.find(".ui-dialog-titlebar-close")
-								.html("<span class='ui-icon ui-icon-closethick'></span>");
-						},
-						close: function ()
-						{
-							$("#add-link-info").remove();
+					$.fancybox({
+						content: $('<div class="row" style="margin: 0;">' +
+							'<div class="col-xs-3"><img src="' +
+							window.BaseUrl +
+							'images/preview/actions/quicksite.png">' +
+							'</div>' +
+							'<div class="col-xs-8 col-xs-offset-1">' +
+							'<h3>Success!</h3>' +
+							'<p class="text-muted">' +
+							'Links were added to Link Cart' +
+							'</p>' +
+							'</div>' +
+							'</div>' +
+							'<div class="row" style="margin: 0;"><div class="col-xs-12 text-center"><button type="button" class="btn btn-default" style="width: 80px; margin-top: 20px" onclick="$.fancybox.close()">OK</button></div></div>'),
+						title: 'Link Cart',
+						width: 400,
+						autoSize: false,
+						autoHeight: true,
+						openEffect: 'none',
+						closeEffect: 'none',
+						helpers: {
+							title: false
 						}
 					});
 				},

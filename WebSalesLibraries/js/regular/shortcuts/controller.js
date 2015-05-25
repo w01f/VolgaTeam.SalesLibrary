@@ -12,11 +12,12 @@
 			var isPage = content.find('.is-page').length > 0;
 			$('#ribbon').ribbon();
 			$('a#view-dialog-link').fancybox();
-			$.MetroTooltipInit({
-				animation: "fadeInDown fast",
-				position: "top",
-				color: "#063BB3"
-			});
+			if (!that.isMobileDevice())
+				$.MetroTooltipInit({
+					animation: "fadeInDown fast",
+					position: "top",
+					color: "#063BB3"
+				});
 			$.SalesPortal.Overlay.show(true);
 			$.SalesPortal.ShortcutsSearchManager(content, objectId);
 			$.SalesPortal.Overlay.hide();
@@ -35,6 +36,11 @@
 			content.css({
 				'height': height + 'px'
 			});
+		};
+
+		this.isMobileDevice = function ()
+		{
+			return /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent);
 		};
 	};
 	$.SalesPortal.Layout = new LayoutManager();

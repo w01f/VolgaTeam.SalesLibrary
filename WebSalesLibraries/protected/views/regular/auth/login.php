@@ -16,11 +16,6 @@
 ?>
 
 <div id="content">
-	<? if (Yii::app()->browser->isMobile()): ?>
-		<a id="button-switch-version" href="#">
-			<img src="<? echo Yii::app()->baseUrl . '/images/auth/mobile-version.png'; ?>" alt="Switch to Mobile version">
-		</a>
-	<? endif; ?>
 	<?
 		$form = $this->beginWidget('CActiveForm', array(
 			'action' => Yii::app()->createUrl('auth/login'),

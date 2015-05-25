@@ -246,6 +246,16 @@
 				{
 					openEffect: 'none',
 					closeEffect: 'none',
+					tpl: $.SalesPortal.Layout.isMobileDevice()?
+							{
+								next     : '<a title="Next" class="fancybox-nav fancybox-next" href="javascript:;"></a>',
+								prev     : '<a title="Previous" class="fancybox-nav fancybox-prev" href="javascript:;"></a>'
+							}:
+							{
+								next     : '<a title="Next" class="fancybox-nav fancybox-next" href="javascript:;"><span></span></a>',
+								prev     : '<a title="Previous" class="fancybox-nav fancybox-prev" href="javascript:;"><span></span></a>'
+							}
+					,
 					afterClose: function ()
 					{
 						documentBar.close();

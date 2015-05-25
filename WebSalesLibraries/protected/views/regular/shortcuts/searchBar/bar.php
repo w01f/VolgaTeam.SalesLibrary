@@ -15,7 +15,7 @@
 				<? if (!Yii::app()->browser->isMobile()): ?>
 					<? $logoUrl = Yii::app()->getBaseUrl(true) . '/images/shortcuts/search-bar/search-bar-logo.png'; ?>
 					<div style="width:100%;min-height: 20px;">
-						<img style="margin-top: 20px; margin-bottom: 20px;" src="<? echo $logoUrl . '?' . $pageId; ?>" alt="" onerror="this.style.display = 'none'"/>
+						<img style="margin-top: 20px;" src="<? echo $logoUrl . '?' . $pageId; ?>" alt="" onerror="this.style.display = 'none'"/>
 					</div>
 				<? endif; ?>
 				<div class="search-conditions" style="display: none;">

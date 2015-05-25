@@ -2,22 +2,23 @@
 {
 	window.BaseUrl = window.BaseUrl || '';
 	$.SalesPortal = $.SalesPortal || { };
-	var LayoutManager = function()
+	var LayoutManager = function ()
 	{
 		var that = this;
-		this.init = function()
+		this.init = function ()
 		{
 			$('#ribbon').ribbon();
 			$('a#view-dialog-link').fancybox();
 			$('#login-button').off('click').on('click', function ()
 			{
-				window.location = "getProtected?id="+$('#page-id').html();
+				window.location = "getProtected?id=" + $('#page-id').html();
 			});
-			$.MetroTooltipInit({
-				animation: "fadeInDown fast",
-				position: "top",
-				color: "#063BB3"
-			});
+			if (!that.isMobileDevice())
+				$.MetroTooltipInit({
+					animation: "fadeInDown fast",
+					position: "top",
+					color: "#063BB3"
+				});
 			$.SalesPortal.Overlay.hide();
 			that.updateContentSize();
 			$(window).on('resize', that.updateContentSize);
@@ -34,6 +35,11 @@
 			content.css({
 				'height': height + 'px'
 			});
+		};
+
+		this.isMobileDevice = function ()
+		{
+			return /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent);
 		};
 	};
 	$.SalesPortal.Layout = new LayoutManager();

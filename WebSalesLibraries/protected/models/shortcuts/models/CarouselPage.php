@@ -41,26 +41,29 @@
 				$dataList[] = $link->getCategoryContent($this);
 			}
 
+			$configPrefix = Yii::app()->browser->isMobile() ? 'Tablet' : 'Desktop';
+			
 			return array(
 				'showPageModeToggle' => $this->allowSwitchView,
 
 				'predefinedDataList' => $dataList,
-				'carouselWidth' => intval(trim($xpath->query('//Carousel/carouselWidth')->item(0)->nodeValue)),
-				'carouselHeight' => intval(trim($xpath->query('//Carousel/carouselHeight')->item(0)->nodeValue)),
-				'carouselStartPosition' => trim($xpath->query('//Carousel/carouselStartPosition')->item(0)->nodeValue),
-				'carouselTopology' => trim($xpath->query('//Carousel/carouselTopology')->item(0)->nodeValue),
-				'carouselXRadius' => intval(trim($xpath->query('//Carousel/carouselXRadius')->item(0)->nodeValue)),
-				'carouselYRadius' => intval(trim($xpath->query('//Carousel/carouselYRadius')->item(0)->nodeValue)),
-				'carouselXRotation' => intval(trim($xpath->query('//Carousel/carouselXRotation')->item(0)->nodeValue)),
-				'carouselYOffset' => intval(trim($xpath->query('//Carousel/carouselYOffset')->item(0)->nodeValue)),
-				'showPrevButton' => trim($xpath->query('//Carousel/showPrevButton')->item(0)->nodeValue),
-				'showNextButton' => trim($xpath->query('//Carousel/showNextButton')->item(0)->nodeValue),
-				'thumbnailWidth' => intval(trim($xpath->query('//Carousel/thumbnailWidth')->item(0)->nodeValue)),
-				'thumbnailHeight' => intval(trim($xpath->query('//Carousel/thumbnailHeight')->item(0)->nodeValue)),
-				'thumbnailBorderSize' => intval(trim($xpath->query('//Carousel/thumbnailBorderSize')->item(0)->nodeValue)),
-				'showScrollbar' => trim($xpath->query('//Carousel/showScrollbar')->item(0)->nodeValue),
-				'showComboBox' => trim($xpath->query('//Carousel/showComboBox')->item(0)->nodeValue),
-				'comboBoxPosition' => trim($xpath->query('//Carousel/comboBoxPosition')->item(0)->nodeValue),
+
+				'carouselWidth' => intval(trim($xpath->query('//Carousel/'.$configPrefix.'/carouselWidth')->item(0)->nodeValue)),
+				'carouselHeight' => intval(trim($xpath->query('//Carousel/'.$configPrefix.'/carouselHeight')->item(0)->nodeValue)),
+				'carouselStartPosition' => trim($xpath->query('//Carousel/'.$configPrefix.'/carouselStartPosition')->item(0)->nodeValue),
+				'carouselTopology' => trim($xpath->query('//Carousel/'.$configPrefix.'/carouselTopology')->item(0)->nodeValue),
+				'carouselXRadius' => intval(trim($xpath->query('//Carousel/'.$configPrefix.'/carouselXRadius')->item(0)->nodeValue)),
+				'carouselYRadius' => intval(trim($xpath->query('//Carousel/'.$configPrefix.'/carouselYRadius')->item(0)->nodeValue)),
+				'carouselXRotation' => intval(trim($xpath->query('//Carousel/'.$configPrefix.'/carouselXRotation')->item(0)->nodeValue)),
+				'carouselYOffset' => intval(trim($xpath->query('//Carousel/'.$configPrefix.'/carouselYOffset')->item(0)->nodeValue)),
+				'showPrevButton' => trim($xpath->query('//Carousel/'.$configPrefix.'/showPrevButton')->item(0)->nodeValue),
+				'showNextButton' => trim($xpath->query('//Carousel/'.$configPrefix.'/showNextButton')->item(0)->nodeValue),
+				'thumbnailWidth' => intval(trim($xpath->query('//Carousel/'.$configPrefix.'/thumbnailWidth')->item(0)->nodeValue)),
+				'thumbnailHeight' => intval(trim($xpath->query('//Carousel/'.$configPrefix.'/thumbnailHeight')->item(0)->nodeValue)),
+				'thumbnailBorderSize' => intval(trim($xpath->query('//Carousel/'.$configPrefix.'/thumbnailBorderSize')->item(0)->nodeValue)),
+				'showScrollbar' => trim($xpath->query('//Carousel/'.$configPrefix.'/showScrollbar')->item(0)->nodeValue),
+				'showComboBox' => trim($xpath->query('//Carousel/'.$configPrefix.'/showComboBox')->item(0)->nodeValue),
+				'comboBoxPosition' => trim($xpath->query('//Carousel/'.$configPrefix.'/comboBoxPosition')->item(0)->nodeValue),
 
 				'carouselHolderDivId' => "shortcuts-links-carousel-view",
 				'displayType' => "responsive",

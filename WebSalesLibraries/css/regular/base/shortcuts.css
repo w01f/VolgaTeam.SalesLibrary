@@ -5,16 +5,22 @@
 
 .shortcuts-page-content .shortcuts-links-grid
 {
-	width: 94%;
-	margin-left: auto;
-	margin-right: auto;
-	margin-top: 20px;
-	margin-bottom: 20px;
+	margin: 20px;
 }
 
-#shortcuts-links-carousel-view
+.shortcuts-links-carousel-view
 {
 	padding-top: 15px;
+}
+
+.shortcuts-links-carousel-view.mobile
+{
+	padding-top: 0;
+}
+
+.shortcuts-links.cbp-wrapper
+{
+	overflow: inherit;
 }
 
 .shortcuts-links .service-data, .shortcut-title

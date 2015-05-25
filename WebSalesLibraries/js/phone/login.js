@@ -123,36 +123,6 @@
 				dataType: 'html'
 			});
 		};
-
-		var switchVersion = function ()
-		{
-			$.ajax({
-				type: "POST",
-				url: window.BaseUrl + "site/switchVersion",
-				data: {
-					siteVersion: 'full'
-				},
-				beforeSend: function ()
-				{
-					$.mobile.loading('show', {
-						textVisible: false,
-						html: ""
-					});
-				},
-				complete: function ()
-				{
-				},
-				success: function ()
-				{
-					location.reload();
-				},
-				error: function ()
-				{
-				},
-				async: true,
-				dataType: 'html'
-			});
-		};
 	};
 	$.SalesPortal.Auth = new AuthManager();
 	$(document).ready(function ()

@@ -28,6 +28,7 @@
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/regular/base/link-viewer-save.css?' . Yii::app()->params['version']);
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/regular/base/link-viewer-email.css?' . Yii::app()->params['version']);
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/regular/base/link-viewer-bar.css?' . Yii::app()->params['version']);
+	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/regular/base/link-viewer-special.css?' . Yii::app()->params['version']);
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/regular/base/tool-dialog.css?' . Yii::app()->params['version']);
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/regular/base/links-grid.css?' . Yii::app()->params['version']);
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/regular/base/data-table.css?' . Yii::app()->params['version']);
@@ -186,21 +187,20 @@
 				</div>
 			</div>
 			<div class="ribbon-section wallbin-view-options">
-				<span class="section-title">View Options</span>
 				<div class="row">
 					<div class="col-xs-6">
-						<button id="increase-text-size" type="button" class="btn btn-default btn-sm">Larger Text</button>
+						<img id="increase-text-size" src="<? echo Yii::app()->getBaseUrl(true) . '/images/wallbin/increase-font.png' ?>"/>
 					</div>
 					<div class="col-xs-6">
-						<button id="increase-text-space" type="button" class="btn btn-default btn-sm">More Spacing</button>
+						<img id="increase-text-space" src="<? echo Yii::app()->getBaseUrl(true) . '/images/wallbin/increase-space.png' ?>"/>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-xs-6">
-						<button id="decrease-text-size" type="button" class="btn btn-default btn-sm">Smaller Text</button>
+						<img id="decrease-text-size" src="<? echo Yii::app()->getBaseUrl(true) . '/images/wallbin/decrease-font.png' ?>"/>
 					</div>
 					<div class="col-xs-6">
-						<button id="decrease-text-space" type="button" class="btn btn-default btn-sm">Less Spacing</button>
+						<img id="decrease-text-space" src="<? echo Yii::app()->getBaseUrl(true) . '/images/wallbin/decrease-space.png' ?>"/>
 					</div>
 				</div>
 			</div>
@@ -497,7 +497,7 @@
 <!------------------------->
 <!---------Ticker--------->
 <? if (Yii::app()->params['ticker']['visible'] && isset($tickerRecords)): ?>
-	<div class="modern-ticker mt-round <? echo Yii::app()->params['ticker']['effect']; ?>">
+	<div class="modern-ticker <? echo Yii::app()->params['ticker']['effect']; ?>">
 		<? if ((Yii::app()->params['ticker']['show_label'] || Yii::app()->params['ticker']['show_logo']) && isset($tickerRecords)): ?>
 			<div class="mt-label">
 				<? if (Yii::app()->params['ticker']['show_logo']): ?>

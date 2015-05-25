@@ -14,11 +14,6 @@
 				resetPassword();
 			});
 
-			$('#button-switch-version').off('click').on('click', function ()
-			{
-				switchVersion();
-			});
-
 			passwordRequirementsTag.off('click').on('click', function (e)
 			{
 				e.preventDefault();
@@ -258,33 +253,6 @@
 			});
 			formLogin.css({
 				'top': top + 'px'
-			});
-		};
-
-		var switchVersion = function ()
-		{
-			$.ajax({
-				type: "POST",
-				url: window.BaseUrl + "site/switchVersion",
-				data: {
-					siteVersion: 'mobile'
-				},
-				beforeSend: function ()
-				{
-					$.SalesPortal.Overlay.show();
-				},
-				complete: function ()
-				{
-				},
-				success: function ()
-				{
-					location.reload();
-				},
-				error: function ()
-				{
-				},
-				async: true,
-				dataType: 'html'
 			});
 		};
 

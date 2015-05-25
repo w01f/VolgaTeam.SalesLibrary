@@ -46,32 +46,14 @@
 
 		public function actionGetSpecialDialog()
 		{
-			$rendered = false;
-			$userId = Yii::app()->user->getId();
-			if (isset($userId))
+			$folderId = Yii::app()->request->getPost('folderId');
+			if (isset($folderId))
 			{
-				$linkIds = Yii::app()->request->getPost('linkIds');
-				$folderId = Yii::app()->request->getPost('folderId');
-				$isSearchResults = Yii::app()->request->getPost('isSearchResults');
-				if (isset($folderId))
+				$folderRecord = FolderRecord::model()->findByPk($folderId);
+				if (isset($folderRecord))
 				{
-					$folderRecord = FolderRecord::model()->findByPk($folderId);
-					if (isset($folderRecord))
-					{
-						$this->renderPartial('specialDialog', array('object' => $folderRecord, 'isLink' => false, 'isLineBreak' => false), false, true);
-						$rendered = true;
-					}
+					$this->renderPartial('specialDialog', array('object' => $folderRecord), false, true);
 				}
-				else if (isset($isSearchResults) && isset($linkIds))
-				{
-					$searchResults = new stdClass();
-					$searchResults->id = implode(',', $linkIds);
-					$searchResults->name = 'Search Results: ' . count($linkIds);
-					$this->renderPartial('specialDialog', array('object' => $searchResults, 'isLink' => false, 'isLineBreak' => false, 'isSearchResult' => true), false, true);
-					$rendered = true;
-				}
-				if (!$rendered)
-					$this->renderPartial('empty', array(), false, true);
 			}
 		}
 

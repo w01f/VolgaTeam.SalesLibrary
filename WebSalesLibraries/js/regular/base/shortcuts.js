@@ -68,6 +68,8 @@
 					var content = $('#content');
 					content.html(data.content);
 
+					that.selectedPageType = data.pageType;
+
 					initPageLogo(data);
 					initPageModeToggle(tabId, data.displayParameters.showPageModeToggle, that.selectedPageType);
 

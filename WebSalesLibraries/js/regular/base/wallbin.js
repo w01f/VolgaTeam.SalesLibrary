@@ -62,7 +62,6 @@
 					storedTextSpace++;
 					updateTextSpace(storedTextSpace);
 				}
-				$(this).blur();
 			});
 			$('#decrease-text-space').off('click').on('click', function ()
 			{
@@ -71,7 +70,6 @@
 					storedTextSpace--;
 					updateTextSpace(storedTextSpace);
 				}
-				$(this).blur();
 			});
 
 			$('#increase-text-size').off('click').on('click', function ()
@@ -79,7 +77,6 @@
 				if (storedTextSize < 22)
 					storedTextSize++;
 				updateTextSize(storedTextSize);
-				$(this).blur();
 			});
 
 			$('#decrease-text-size').off('click').on('click', function ()
@@ -87,7 +84,6 @@
 				if (storedTextSize > 8)
 					storedTextSize--;
 				updateTextSize(storedTextSize);
-				$(this).blur();
 			});
 
 			$('#columns-view').off('click').on('click', function ()
@@ -155,7 +151,7 @@
 					eventDown.stopPropagation();
 				}
 			});
-			if (( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ))
+			if ($.SalesPortal.Layout.isMobileDevice())
 			{
 				container.find('.folder-header-container').hammer().on('doubletap', function (event)
 				{

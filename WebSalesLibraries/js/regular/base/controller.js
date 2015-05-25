@@ -4,6 +4,8 @@
 	$.SalesPortal = $.SalesPortal || { };
 	var LayoutManager = function ()
 	{
+		var that = this;
+
 		this.init = function ()
 		{
 			$('#ribbon').ribbon({
@@ -59,11 +61,12 @@
 			{
 				$.SalesPortal.Auth.logout();
 			});
-			$.MetroTooltipInit({
-				animation: "fadeInDown fast",
-				position: "top",
-				color: "#063BB3"
-			});
+			if (!that.isMobileDevice())
+				$.MetroTooltipInit({
+					animation: "fadeInDown fast",
+					position: "top",
+					color: "#063BB3"
+				});
 		};
 
 		this.updateContentSize = function ()
@@ -79,6 +82,11 @@
 			});
 			if ($.SalesPortal.Ticker != undefined)
 				$.SalesPortal.Ticker.updateContentSize();
+		};
+
+		this.isMobileDevice = function ()
+		{
+			return /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent);
 		};
 	};
 	$.SalesPortal.Layout = new LayoutManager();

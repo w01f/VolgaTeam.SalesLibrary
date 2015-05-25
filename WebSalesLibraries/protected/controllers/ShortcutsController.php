@@ -41,13 +41,28 @@
 				{
 					/** @var $tabRecord ShortcutsTabRecord */
 					$tabRecord = ShortcutsTabRecord::model()->findByPk($pageRecord->id_tab);
+
+					$savePageTypeTagName = sprintf('%s-%s', $tabRecord->name, $pageRecord->name);
+					if (!isset($predefinedPageType))
+					{
+						if (isset(Yii::app()->request->cookies[$savePageTypeTagName]))
+							$predefinedPageType = Yii::app()->request->cookies[$savePageTypeTagName]->value;
+					}
+					else
+					{
+						$cookie = new CHttpCookie($savePageTypeTagName, $predefinedPageType);
+						$cookie->expire = time() + (60 * 60 * 24 * 7);
+						Yii::app()->request->cookies[$savePageTypeTagName] = $cookie;
+					}
+
 					StatisticActivityRecord::WriteActivity('Shortcuts', 'Page Changed', array('Tab' => $tabRecord->name, 'Button' => $pageRecord->name));
 					$pageModel = $pageRecord->getModel($predefinedPageType);
 					echo CJSON::encode(array(
 						'type' => $pageModel->type,
 						'logo' => $pageModel->ribbonLogoPath,
 						'content' => $this->renderPartial('page', array('page' => $pageModel), true),
-						'displayParameters' => $pageModel->getDisplayParameters()
+						'displayParameters' => $pageModel->getDisplayParameters(),
+						'pageType' => $predefinedPageType
 					));
 				}
 			}

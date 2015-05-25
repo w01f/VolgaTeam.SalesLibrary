@@ -1,6 +1,6 @@
 #ribbon .wallbin-view-options .row
 {
-	margin: 9px 0;
+	margin: 0;
 }
 
 #ribbon .wallbin-view-options .col-xs-6
@@ -9,10 +9,15 @@
 	padding-right: 5px;
 }
 
-#ribbon .wallbin-view-options .btn
+#ribbon .wallbin-view-options img
 {
-	width: 90px;
-	outline: none;
+	height: 44px;
+	cursor: pointer;
+}
+
+#ribbon .wallbin-view-options img:hover
+{
+	background: #c6e2ff;
 }
 
 #ribbon .wallbin-style-options img
