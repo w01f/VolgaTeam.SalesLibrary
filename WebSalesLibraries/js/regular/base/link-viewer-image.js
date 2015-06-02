@@ -4,7 +4,7 @@
 	$.SalesPortal = $.SalesPortal || { };
 	$.SalesPortal.ImageViewer = function (parameters)
 	{
-		var viewerData = new FileViewerData($.parseJSON(parameters.data));
+		var viewerData = new $.SalesPortal.SimpleViewerData($.parseJSON(parameters.data));
 		var dialogContent = undefined;
 
 		this.show = function ()
@@ -83,22 +83,5 @@
 					break;
 			}
 		};
-	};
-
-	var FileViewerData = function (source)
-	{
-		this.linkId = undefined;
-		this.name = undefined;
-		this.format = undefined;
-		this.tags = undefined;
-		this.url = undefined;
-		this.fileName = undefined;
-		this.filePath = undefined;
-		this.fileSize = undefined;
-		this.rateData = undefined;
-
-		for (var prop in source)
-			if (source.hasOwnProperty(prop))
-				this[prop] = source[prop];
 	};
 })(jQuery);

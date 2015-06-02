@@ -10,10 +10,20 @@
 			return YiiBase::getPathOfAlias($this->pathPrefix . 'shortcuts');
 		}
 
-		public function actionGetTabs()
+		public function actionGetTab()
 		{
-			$tabShortcuts = ShortcutsTabRecord::model()->findAll(array('order' => '`order', 'condition' => 'enabled=:enabled', 'params' => array(':enabled' => true)));
-			$this->renderPartial('tabs', array('tabShortcuts' => $tabShortcuts));
+			$tabId = Yii::app()->request->getQuery('tabId');
+			$tabRecord = ShortcutsTabRecord::model()->findByPk($tabId);
+			if (isset($tabRecord))
+			{
+				$tabPages = TabPages::getList();
+				$this->render('tabPage', array(
+					'tabPages' => $tabPages,
+					'tabRecord' => $tabRecord,
+				));
+			}
+			else
+				$this->redirect(Yii::app()->createAbsoluteUrl('site/index'));
 		}
 
 		public function actionGetPages()
@@ -56,7 +66,7 @@
 					}
 
 					StatisticActivityRecord::WriteActivity('Shortcuts', 'Page Changed', array('Tab' => $tabRecord->name, 'Button' => $pageRecord->name));
-					$pageModel = $pageRecord->getModel($predefinedPageType);
+					$pageModel = $pageRecord->getModel($this->isPhone ? 'grid' : $predefinedPageType);
 					echo CJSON::encode(array(
 						'type' => $pageModel->type,
 						'logo' => $pageModel->ribbonLogoPath,
@@ -117,7 +127,7 @@
 				$linkRecord = ShortcutsLinkRecord::model()->findByPk($linkId);
 				$searchShortcut = new SearchShortcut($linkRecord);
 				$this->pageTitle = $searchShortcut->tooltip;
-				$content = $this->renderPartial('searchResult', array('searchContainer' => $searchShortcut), true);
+				$content = $this->renderPartial('searchConditions', array('searchContainer' => $searchShortcut), true);
 				if ($samePage)
 					echo $content;
 				else

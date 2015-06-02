@@ -1,12 +1,5 @@
 <?
-	/** @var $link FileShortcut|
-	 * LibraryLinkShortcut|
-	 * PageShortcut|
-	 * QuickListShortcut|
-	 * SearchShortcut|
-	 * UrlShortcut|
-	 * VideoShortcut|
-	 * WindowShortcut*/
+	/** @var $link BaseShortcut*/
 ?>
 <a class="cbp-caption shortcuts-link direct<? echo isset($link->samePage) && $link->samePage ? ' embedded' : ''; ?> <? echo $link->type; ?>" href="<? echo $link->sourceLink ?>" target="_blank">
 	<div class="cbp-caption-defaultWrap">

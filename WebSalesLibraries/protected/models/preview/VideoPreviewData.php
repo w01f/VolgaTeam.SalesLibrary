@@ -12,7 +12,6 @@
 		public $playerSrc;
 
 		public $mp4Src;
-		public $ogvSrc;
 
 		/**
 		 * @param $link LibraryLink
@@ -23,6 +22,7 @@
 			parent::__construct($link, $isQuickSite);
 			$this->viewerFormat = 'video';
 			$this->contentView = 'videoViewer';
+			$this->linkTitle ='Video';
 
 			$this->thumbImageSrc = $link->universalPreview->mp4Thumb->link;
 			$this->forcePreview = $link->extendedProperties->forcePreview;
@@ -41,15 +41,6 @@
 				$this->mp4Src->title = $this->fileName;
 				$this->mp4Src->href = $this->url;
 				$this->mp4Src->path = $this->filePath;
-			}
-
-			if (isset($link->universalPreview->ogv))
-			{
-				$this->ogvSrc = new VideoPreviewItem();
-				$this->ogvSrc->title = $link->universalPreview->ogv->name;
-				$this->ogvSrc->type = 'video/ogg';
-				$this->ogvSrc->href = $link->universalPreview->ogv->link;
-				$this->ogvSrc->path = $link->universalPreview->ogv->path;
 			}
 		}
 	}

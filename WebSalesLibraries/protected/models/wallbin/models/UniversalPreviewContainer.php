@@ -62,6 +62,11 @@
 		 */
 		public $thumbsLinks;
 		/**
+		 * @var string[]
+		 * @soap
+		 */
+		public $thumbsPhoneLinks;
+		/**
 		 * @var int
 		 * @soap
 		 */
@@ -77,6 +82,7 @@
 		public $jpegItems;
 		public $jpegGalleryItems;
 		public $thumbItems;
+		public $thumbPhoneItems;
 		public $officeItems;
 
 		public $pdf;
@@ -102,6 +108,7 @@
 			$this->jpegGalleryItems = array();
 			$this->officeItems = array();
 			$this->thumbItems = array();
+			$this->thumbPhoneItems = array();
 			foreach ($previewRecords as $record)
 			{
 				$this->id = $record->id_container;
@@ -136,6 +143,10 @@
 						$previewFile->link .= '?version=' . filemtime($previewFile->path);
 						$this->thumbItems[] = $previewFile;
 						break;
+					case 'thumbs_phone':
+						$previewFile->link .= '?version=' . filemtime($previewFile->path);
+						$this->thumbPhoneItems[] = $previewFile;
+						break;
 					case 'mp4':
 						$this->mp4 = $previewFile;
 						break;
@@ -158,6 +169,7 @@
 			usort($this->jpegItems, array($sortHelper, 'sort'));
 			usort($this->jpegGalleryItems, array($sortHelper, 'sort'));
 			usort($this->thumbItems, array($sortHelper, 'sort'));
+			usort($this->thumbPhoneItems, array($sortHelper, 'sort'));
 			usort($this->officeItems, array($sortHelper, 'sort'));
 		}
 	}

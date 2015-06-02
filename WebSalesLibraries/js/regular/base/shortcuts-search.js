@@ -48,7 +48,7 @@
 		else
 			subSearchBar = content.find('.sub-search-bar');
 
-		$.SalesPortal.SearchHelper.runSearchJson(
+		$.SalesPortal.SearchHelper.runSearch(
 			{
 				datasetKey: undefined,
 				conditions: $.toJSON(searchShortcutOptions.conditions)
@@ -80,7 +80,7 @@
 
 			var getSearchResults = function ()
 			{
-				$.SalesPortal.SearchHelper.runSearchJson(
+				$.SalesPortal.SearchHelper.runSearch(
 					{
 						datasetKey: baseDatasetKey
 					},
@@ -121,7 +121,7 @@
 			{
 				var customSearchConditions = customSearchData.getConditionsFormatted();
 
-				$.SalesPortal.SearchHelper.runSearchJson(
+				$.SalesPortal.SearchHelper.runSearch(
 					{
 						datasetKey: undefined,
 						conditions: $.toJSON({
@@ -409,7 +409,7 @@
 				var templateOnlyWithCategories = selectedTemplateConditions.conditions.onlyWithCategories;
 				var templateOnlyByName = selectedTemplateConditions.conditions.onlyByName;
 
-				$.SalesPortal.SearchHelper.runSearchJson(
+				$.SalesPortal.SearchHelper.runSearch(
 
 					{
 						datasetKey: undefined,

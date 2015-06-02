@@ -1,5 +1,12 @@
+#shortcuts-links
+{
+	margin-bottom: 15px;
+}
+
 .shortcuts-link
 {
+	display: block;
+	margin-top: 15px;
 	text-align: center;
 }
 

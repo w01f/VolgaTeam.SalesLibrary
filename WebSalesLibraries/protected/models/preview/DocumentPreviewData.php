@@ -15,6 +15,17 @@
 		public function __construct($link, $isQuickSite)
 		{
 			parent::__construct($link, $isQuickSite);
+
+			switch ($this->format)
+			{
+				case 'ppt':
+					$this->linkTitle ='PowerPoint';
+					break;
+				case 'doc':
+					$this->linkTitle ='Word';
+					break;
+			}
+
 			if ($this->galleryEnabled)
 			{
 				$this->viewerFormat = 'document';
@@ -54,12 +65,14 @@
 			$action = new PreviewAction();
 			$action->tag = 'download';
 			$action->text = 'DOWNLOAD this file to your Desktop or Mobile Device...';
+			$action->shortText = 'DOWNLOAD this file';
 			$action->logo = sprintf('%s/images/preview/actions/download-%s.png?%s', $imageUrlPrefix, $this->format, Yii::app()->params['version']);
 			$actions[] = $action;
 
 			$action = new PreviewAction();
 			$action->tag = 'download-pdf';
 			$action->text = 'Open PDF version of this file to your Desktop or Mobile Device...';
+			$action->shortText = 'Open PDF file';
 			$action->logo = sprintf('%s/images/preview/actions/download-pdf.png?%s', $imageUrlPrefix, $this->format, Yii::app()->params['version']);
 			$actions[] = $action;
 

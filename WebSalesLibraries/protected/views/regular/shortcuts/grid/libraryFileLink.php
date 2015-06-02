@@ -1,5 +1,5 @@
 <?
-	/** @var $link LibraryLinkShortcut */
+	/** @var $link BaseShortcut*/
 ?>
 <a class="cbp-caption shortcuts-link library-file" href="#">
 	<div class="cbp-caption-defaultWrap">

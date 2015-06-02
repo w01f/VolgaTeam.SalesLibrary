@@ -4,7 +4,7 @@
 	$.SalesPortal = $.SalesPortal || { };
 	$.SalesPortal.VideoViewer = function (parameters)
 	{
-		var viewerData = new VideoViewerData($.parseJSON(parameters.data));
+		var viewerData = new $.SalesPortal.VideoViewerData($.parseJSON(parameters.data));
 		var dialogContent = undefined;
 		var player = undefined;
 
@@ -141,27 +141,5 @@
 					break;
 			}
 		};
-	};
-
-	var VideoViewerData = function (source)
-	{
-		this.linkId = undefined;
-		this.name = undefined;
-		this.format = undefined;
-		this.tags = undefined;
-		this.url = undefined;
-		this.fileName = undefined;
-		this.filePath = undefined;
-		this.fileSize = undefined;
-
-		this.thumbImageSrc = undefined;
-		this.playerSrc = undefined;
-		this.mp4Src = undefined;
-
-		this.rateData = undefined;
-
-		for (var prop in source)
-			if (source.hasOwnProperty(prop))
-				this[prop] = source[prop];
 	};
 })(jQuery);

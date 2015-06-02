@@ -10,6 +10,7 @@
 		public $format;
 		public $tags;
 		public $url;
+		public $linkTitle;
 
 		public $rateData;
 
@@ -58,6 +59,7 @@
 				$action = new PreviewAction();
 				$action->tag = 'quicksite';
 				$action->text = 'Add this file to a QUICKSITE...';
+				$action->shortText = 'Add to a QUICKSITE';
 				$action->logo = sprintf('%s/images/preview/actions/quicksite.png?%s', $imageUrlPrefix, Yii::app()->params['version']);
 				$this->actions[] = $action;
 			}
@@ -67,6 +69,7 @@
 				$action = new PreviewAction();
 				$action->tag = 'favorites';
 				$action->text = 'Save a Copy of this file to your FAVORITES page...';
+				$action->shortText = 'Add to Favorites';
 				$action->logo = sprintf('%s/images/preview/actions/favorites.png?%s', $imageUrlPrefix, Yii::app()->params['version']);
 				$this->actions[] = $action;
 			}
@@ -98,6 +101,8 @@
 					return new UrlPreviewData($link, $isQuickSite);
 				case 'mp3':
 					return new Mp3PreviewData($link, $isQuickSite);
+				case 'xls':
+					return new ExcelPreviewData($link, $isQuickSite);
 				default:
 					return new FilePreviewData($link, $isQuickSite);
 			}

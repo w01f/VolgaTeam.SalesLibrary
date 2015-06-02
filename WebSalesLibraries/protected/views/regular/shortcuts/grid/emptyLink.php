@@ -1,5 +1,5 @@
 <?
-	/** @var $link EmptyShortcut*/
+	/** @var $link BaseShortcut*/
 ?>
 <a class="cbp-caption shortcuts-link empty" href="#">
 	<div class="cbp-caption-defaultWrap">

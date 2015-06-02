@@ -1,5 +1,5 @@
 <?
-	/** @var $link DownloadShortcut */
+	/** @var $link BaseShortcut*/
 ?>
 <a class="cbp-caption shortcuts-link <? echo $link->type; ?>" href="<? echo $link->sourceLink ?>" target="_self">
 	<div class="cbp-caption-defaultWrap">

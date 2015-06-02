@@ -331,7 +331,7 @@
 
 		var runSearch = function ()
 		{
-			$.SalesPortal.SearchHelper.runSearchJson(
+			$.SalesPortal.SearchHelper.runSearch(
 				{
 					datasetKey: undefined,
 					conditions: $.toJSON(currentSearchConditions.getConditionsFormatted())

@@ -22,12 +22,6 @@
 			{
 				$('#button-login').click();
 			});
-
-			$('#button-switch-version').off('click').on('click', function ()
-			{
-				switchVersion();
-			});
-
 			$('#button-recover-password').off('click').on('click', function ()
 			{
 				$.ajax({
@@ -54,10 +48,10 @@
 					success: function (msg)
 					{
 						if (msg != '')
-							$('#recover-password').find('.error-message div').html(msg);
+							$('#recover-password').find('.error-message').html(msg);
 						else
 						{
-							$('#recover-password').find('.error-message div').html('');
+							$('#recover-password').find('.error-message').html('');
 							$.ajax({
 								type: "POST",
 								url: window.BaseUrl + "auth/recoverPassword",
@@ -91,7 +85,7 @@
 					},
 					error: function ()
 					{
-						$('#recover-password').find('.error-message div').html('Error while validating user. Try again or contact to technical support');
+						$('#recover-password').find('.error-message').html('Error while validating user. Try again or contact to technical support');
 					},
 					async: true,
 					dataType: 'html'

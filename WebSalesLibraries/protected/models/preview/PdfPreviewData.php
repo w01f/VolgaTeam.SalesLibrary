@@ -14,6 +14,7 @@
 		public function __construct($link, $isQuickSite)
 		{
 			parent::__construct($link, $isQuickSite);
+			$this->linkTitle ='PDF file';
 			if ($this->galleryEnabled)
 			{
 				$this->viewerFormat = 'document';

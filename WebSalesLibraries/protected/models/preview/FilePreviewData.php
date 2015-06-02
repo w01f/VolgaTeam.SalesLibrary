@@ -19,6 +19,7 @@
 
 			$this->viewerFormat = 'file';
 			$this->contentView = 'fileViewer';
+			$this->linkTitle ='File';
 
 			$this->fileName = $link->fileName;
 			$this->filePath = $link->filePath;
@@ -59,6 +60,7 @@
 			$action = new PreviewAction();
 			$action->tag = 'download';
 			$action->text = 'DOWNLOAD this file to your Desktop or Mobile Device...';
+			$action->shortText = 'DOWNLOAD this file...';
 			$action->logo = sprintf('%s/images/preview/actions/download-%s.png?%s', $imageUrlPrefix, $downloadSuffix, Yii::app()->params['version']);
 			return array($action);
 		}

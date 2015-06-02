@@ -11,9 +11,28 @@
 
 		public function actionIndex()
 		{
-			$this->pageTitle = Yii::app()->name;
-			$tickerRecords = TickerLinkRecord::getLinks();
-			$this->render('index', array('tickerRecords' => $tickerRecords));
+			$tabPages = TabPages::getList();
+
+			if ($this->isPhone)
+			{
+				foreach ($tabPages as $tabName => $tabIndex)
+				{
+					$this->redirect(TabPages::getTabUrl($tabName));
+					break;
+				}
+			}
+			else
+			{
+				$this->pageTitle = Yii::app()->name;
+				$tickerRecords = TickerLinkRecord::getLinks();
+				$this->render('index', array('tabPages' => $tabPages, 'tickerRecords' => $tickerRecords));
+			}
+		}
+
+		public function actionEmpty()
+		{
+			$tabPages = TabPages::getList();
+			$this->render('index', array('tabPages' => $tabPages));
 		}
 
 		public function actionBadBrowser()

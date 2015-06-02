@@ -18,6 +18,8 @@
 		public $subConditions;
 		public $conditionNotMatchLogoPath;
 
+		public $mobileHeader;
+
 		/**
 		 * @param $linkRecord
 		 */
@@ -29,9 +31,17 @@
 
 			$this->viewPath = 'directLink';
 
+			if (!Yii::app()->browser->isMobile())
+			{
+				$samePageTags = $linkConfig->getElementsByTagName("OpenOnSamePage");
+				$this->samePage = $samePageTags->length > 0 ? filter_var(trim($samePageTags->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : false;
+			}
+			else
+			{
+				$this->samePage = true;
+			}
+
 			$baseUrl = Yii::app()->getBaseUrl(true);
-			$samePageTags = $linkConfig->getElementsByTagName("OpenOnSamePage");
-			$this->samePage = $samePageTags->length > 0 ? filter_var(trim($samePageTags->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : false;
 			$this->ribbonLogoPath = $baseUrl . $linkRecord->source_path . '/rbnlogo.png' . '?' . $linkRecord->id_page . $linkRecord->id;
 
 			$noCatsCustomImagePath = $baseUrl . $linkRecord->source_path . '/no_cats.png' . '?' . $linkRecord->id_page . $linkRecord->id;
@@ -67,6 +77,9 @@
 			$sortHelper = new ObjectSortHelper('imageName', 'asc');
 			usort($subSearchConditions, array($sortHelper, 'sort'));
 			$this->subConditions = $subSearchConditions;
+
+			$mobileHeaderTags = $linkConfig->getElementsByTagName("JQMtitle");
+			$this->mobileHeader = $mobileHeaderTags->length > 0 ? trim($mobileHeaderTags->item(0)->nodeValue) : '';
 		}
 
 		/**
@@ -85,6 +98,9 @@
 					'action' => 'Shortcut Search Link',
 					'title' => sprintf('%s - %s', $this->name, $this->tooltip)
 				)) . '</div>';
+			//For Mobile Version only
+			$result .= '<div class="link-header">' . $this->mobileHeader . '</div>';
+			//-----------------------
 			return $result;
 		}
 

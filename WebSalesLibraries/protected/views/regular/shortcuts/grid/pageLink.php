@@ -1,5 +1,5 @@
 <?
-	/** @var $link PageShortcut*/
+	/** @var $link BaseShortcut*/
 ?>
 <a class="cbp-caption shortcuts-link library-page" href="#">
 	<div class="cbp-caption-defaultWrap">

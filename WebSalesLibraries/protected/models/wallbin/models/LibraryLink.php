@@ -377,12 +377,12 @@
 		{
 			if (isset($this->superFilters))
 				foreach ($this->superFilters as $superFilter)
-					$superFiltersString[] = $superFilter->value;
+					$tagsArray[] = $superFilter->value;
 			if (isset($this->categories))
 				foreach ($this->categories as $category)
-					$superFiltersString[] = $category->tag;
-			if (isset($superFiltersString))
-				return implode(', ', $superFiltersString);
+					$tagsArray[] = $category->tag;
+			if (isset($tagsArray))
+				return implode(', ', $tagsArray);
 			return '';
 		}
 

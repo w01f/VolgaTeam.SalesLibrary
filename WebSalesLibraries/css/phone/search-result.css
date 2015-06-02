@@ -1,0 +1,41 @@
+#search-results .main-footer .entities-count
+{
+	text-align: right;
+	padding-right: 20px;
+}
+
+#search-results .content-header .ui-table-columntoggle-btn
+{
+	float: none;
+	text-align: left;
+}
+
+#search-results .content-data
+{
+	width: 100%;
+	font-size: 0.9em;
+}
+
+#search-results .content-data table .link-id
+{
+	display: none;
+}
+
+#search-results .content-data table .link-name
+{
+	text-align: left;
+	color: #4A87EE;
+	text-decoration: underline;
+}
+
+#search-results .content-data table th span.asc
+{
+	background: url(../../images/search/sort-asc.gif) right center no-repeat;
+	padding-right: 10px;
+}
+
+#search-results .content-data table th span.desc
+{
+	background: url(../../images/search/sort-desc.gif) right center no-repeat;
+	padding-right: 10px;
+}

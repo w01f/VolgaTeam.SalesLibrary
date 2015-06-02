@@ -38,7 +38,7 @@
 			{
 				event.preventDefault();
 				event.stopPropagation();
-				$.SalesPortal.LinkManager.playVideo($.parseJSON($(this).find('.links')));
+				$.SalesPortal.LinkManager.playVideo($.parseJSON($(this).find('.links').text()));
 			});
 
 			that.updateContentSize();

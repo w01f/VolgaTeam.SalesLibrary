@@ -4,9 +4,8 @@
 	$.SalesPortal = $.SalesPortal || { };
 	$.SalesPortal.DocumentViewer = function (parameters)
 	{
-		var viewerData = new DocumentViewerData($.parseJSON(parameters.data));
+		var viewerData = new $.SalesPortal.DocumentViewerData($.parseJSON(parameters.data));
 		var dialogContent = undefined;
-
 		var imageViewerType = viewerData.startFormat;
 		var imageViewer = undefined;
 		var imageViewerStartIndex = viewerData.startIndex;
@@ -247,14 +246,14 @@
 					openEffect: 'none',
 					closeEffect: 'none',
 					tpl: $.SalesPortal.Layout.isMobileDevice()?
-							{
-								next     : '<a title="Next" class="fancybox-nav fancybox-next" href="javascript:;"></a>',
-								prev     : '<a title="Previous" class="fancybox-nav fancybox-prev" href="javascript:;"></a>'
-							}:
-							{
-								next     : '<a title="Next" class="fancybox-nav fancybox-next" href="javascript:;"><span></span></a>',
-								prev     : '<a title="Previous" class="fancybox-nav fancybox-prev" href="javascript:;"><span></span></a>'
-							}
+					{
+						next     : '<a title="Next" class="fancybox-nav fancybox-next" href="javascript:;"></a>',
+						prev     : '<a title="Previous" class="fancybox-nav fancybox-prev" href="javascript:;"></a>'
+					}:
+					{
+						next     : '<a title="Next" class="fancybox-nav fancybox-next" href="javascript:;"><span></span></a>',
+						prev     : '<a title="Previous" class="fancybox-nav fancybox-prev" href="javascript:;"><span></span></a>'
+					}
 					,
 					afterClose: function ()
 					{
@@ -323,7 +322,6 @@
 			window.open("preview/runFullScreenGallery?linkId=" + viewerData.linkId + "&format=" + imageViewerType);
 		};
 
-
 		var processSaveAction = function ()
 		{
 			var tag = $(this).find('.service-data .tag').text();
@@ -342,63 +340,6 @@
 					addToFavorites();
 					break;
 			}
-		};
-	};
-
-	var DocumentViewerData = function (source)
-	{
-		var that = this;
-
-		this.linkId = undefined;
-		this.name = undefined;
-		this.format = undefined;
-		this.tags = undefined;
-		this.url = undefined;
-		this.fileName = undefined;
-		this.filePath = undefined;
-		this.fileSize = undefined;
-		this.thumbWidth = undefined;
-		this.thumbHeight = undefined;
-		this.singlePage = undefined;
-		this.documentInPdf = undefined;
-		this.pages = undefined;
-		this.pagesInPng = undefined;
-		this.galleryPagesInPng = undefined;
-		this.pagesInJpeg = undefined;
-		this.galleryPagesInJpeg = undefined;
-		this.rateData = undefined;
-
-		this.startIndex = 0;
-		this.startFormat = 'png';
-
-		for (var prop in source)
-			if (source.hasOwnProperty(prop))
-				this[prop] = source[prop];
-
-		this.isPdf = this.format == 'pdf';
-
-		this.getPageImages = function (format)
-		{
-			switch (format)
-			{
-				case 'png':
-					return that.pagesInPng;
-				case 'jpeg':
-					return that.pagesInJpeg;
-			}
-			return [];
-		};
-
-		this.getGalleryImages = function (format)
-		{
-			switch (format)
-			{
-				case 'png':
-					return that.galleryPagesInPng;
-				case 'jpeg':
-					return that.galleryPagesInJpeg;
-			}
-			return [];
 		};
 	};
 })(jQuery);

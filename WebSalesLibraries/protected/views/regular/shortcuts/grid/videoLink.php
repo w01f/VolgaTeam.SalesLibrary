@@ -1,5 +1,5 @@
 <?
-	/** @var $link VideoShortcut */
+	/** @var $link BaseShortcut*/
 ?>
 <a class="cbp-caption shortcuts-link preview" href="#">
 	<div class="cbp-caption-defaultWrap">

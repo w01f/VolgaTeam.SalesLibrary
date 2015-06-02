@@ -1,4 +1,8 @@
 <?
+	/**
+	 * @var $tabPages array
+	 */
+
 	$cs = Yii::app()->clientScript;
 	$cs->registerCssFile($cs->getCoreScriptUrl() . '/jui/css/metro/jquery-ui.min.css');
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/vendor/fancybox/source/jquery.fancybox.css?' . Yii::app()->params['version']);
@@ -80,6 +84,7 @@
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/base/login.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/base/overlay.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/base/link-viewer.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/common/link-viewer-data.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/base/link-viewer-file.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/base/link-viewer-document.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/base/link-viewer-video.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
@@ -90,7 +95,7 @@
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/base/wallbin.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/base/links-grid.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/base/data-table.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
-	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/base/search-processor.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/common/search-processor.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/base/search-view.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/base/shortcuts-search.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/base/shortcuts-search-bar.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
@@ -103,21 +108,6 @@
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/qbuilder/page-content.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/qbuilder/main-page.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/base/controller.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
-	foreach (Yii::app()->params as $key => $row)
-	{
-		if (is_array($row))
-			if (array_key_exists('position', $row))
-				$tabParam[$key] = $row['position'];
-	}
-
-	/** @var  $tabShortcuts ShortcutsTabRecord[] */
-	$tabShortcuts = ShortcutsTabRecord::model()->findAll(array('order' => '`order`', 'condition' => 'enabled=:enabled', 'params' => array(':enabled' => true)));
-	if (isset($tabShortcuts))
-		foreach ($tabShortcuts as $tabShortcutsRecord)
-			if ($tabShortcutsRecord->isAvailable(Yii::app()->user))
-				$tabParam['shortcuts-tab-' . $tabShortcutsRecord->id] = $tabShortcutsRecord->order;
-
-	asort($tabParam);
 
 	$sideBarVisible = true;
 	if (isset(Yii::app()->request->cookies['sideBarVisible']->value))
@@ -130,7 +120,7 @@
 ?>
 <div id="ribbon">
 <div class="ribbon-window-title"></div>
-<? foreach ($tabParam as $tabName => $tabIndex): ?>
+<? foreach ($tabPages as $tabName => $tabIndex): ?>
 	<? if ($tabName == 'home_tab'): ?>
 		<div class="ribbon-tab" id="home-tab">
 			<span class="ribbon-title"><? echo Yii::app()->params['home_tab']['name'] ?></span>

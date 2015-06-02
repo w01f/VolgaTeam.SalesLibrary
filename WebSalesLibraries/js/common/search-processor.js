@@ -8,22 +8,7 @@
 		{
 			$.ajax({
 				type: "POST",
-				url: window.BaseUrl + "search/searchByContent",
-				data: searchCondition,
-				beforeSend: beforeSearch,
-				complete: completeCallback,
-				success: successCallBack,
-				error: undefined,
-				async: true,
-				dataType: 'html'
-			});
-		};
-
-		this.runSearchJson = function (searchCondition, beforeSearch, completeCallback, successCallBack)
-		{
-			$.ajax({
-				type: "POST",
-				url: window.BaseUrl + "search/searchJson",
+				url: window.BaseUrl + "search/search",
 				data: searchCondition,
 				beforeSend: beforeSearch,
 				complete: completeCallback,

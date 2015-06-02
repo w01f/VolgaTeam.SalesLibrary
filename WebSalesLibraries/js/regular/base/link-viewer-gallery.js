@@ -5,7 +5,7 @@
 	$.SalesPortal.PreviewGallery = function (parameters)
 	{
 		var that = this;
-		var sliderData = new GalleryData(parameters);
+		var sliderData = new $.SalesPortal.GalleryData(parameters);
 
 		var pageImage = sliderData.container.find('.page-image');
 
@@ -98,19 +98,4 @@
 
 		initControls();
 	};
-
-	var GalleryData = function (source)
-	{
-		this.container = undefined;
-		this.singlePage = undefined;
-		this.pageSelector = undefined;
-		this.pages = undefined;
-		this.pageChanged = undefined;
-		this.startIndex = undefined;
-
-		for (var prop in source)
-			if (source.hasOwnProperty(prop))
-				this[prop] = source[prop];
-	};
-
 })(jQuery);

@@ -129,7 +129,10 @@
 				}
 			}
 
-			$this->thumbnails = $link->universalPreview->thumbItems;
+			if (Yii::app()->browser->isMobile())
+				$this->thumbnails = $link->universalPreview->thumbPhoneItems;
+			else
+				$this->thumbnails = $link->universalPreview->thumbItems;
 
 			$this->galleryEnabled = count($this->pagesInPng) > 0 && count($this->pagesInJpeg) > 0;
 		}
