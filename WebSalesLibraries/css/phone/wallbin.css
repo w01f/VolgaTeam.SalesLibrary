@@ -1,0 +1,22 @@
+.regular-link .ui-btn-icon-left
+{
+	padding-left: 5px;
+}
+
+#library-popup-panel-pages .header a
+{
+	display: inline-block;
+	text-decoration: none;
+}
+
+#library-popup-panel-pages .header a img
+{
+	height: 48px;
+	vertical-align: middle;
+}
+
+#library-popup-panel-pages .header a span
+{
+	vertical-align: middle;
+	margin-left: 20px;
+}

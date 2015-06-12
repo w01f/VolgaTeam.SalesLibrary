@@ -18,9 +18,14 @@
 					position: "top",
 					color: "#063BB3"
 				});
-			$.SalesPortal.Overlay.show(true);
-			$.SalesPortal.ShortcutsSearchManager(content, objectId);
-			$.SalesPortal.Overlay.hide();
+
+			if (content.find('.search-conditions').length > 0)
+			{
+				$.SalesPortal.Overlay.show(true);
+				$.SalesPortal.ShortcutsSearchManager(content, objectId);
+				$.SalesPortal.Overlay.hide();
+			}
+
 			that.updateContentSize();
 			$(window).on('resize', that.updateContentSize);
 		};

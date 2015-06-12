@@ -18,8 +18,6 @@
 		public $subConditions;
 		public $conditionNotMatchLogoPath;
 
-		public $mobileHeader;
-
 		/**
 		 * @param $linkRecord
 		 */
@@ -77,9 +75,6 @@
 			$sortHelper = new ObjectSortHelper('imageName', 'asc');
 			usort($subSearchConditions, array($sortHelper, 'sort'));
 			$this->subConditions = $subSearchConditions;
-
-			$mobileHeaderTags = $linkConfig->getElementsByTagName("JQMtitle");
-			$this->mobileHeader = $mobileHeaderTags->length > 0 ? trim($mobileHeaderTags->item(0)->nodeValue) : '';
 		}
 
 		/**

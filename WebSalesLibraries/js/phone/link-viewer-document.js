@@ -6,10 +6,14 @@
 	$.SalesPortal.DocumentViewer = function (parameters, parentPageData)
 	{
 		var viewerData = new $.SalesPortal.DocumentViewerData($.parseJSON(parameters.data));
+		var sliderCurrentPosition = 0;
 
 		this.show = function ()
 		{
 			cleanupPreviousInstance();
+
+			var body = $('body');
+			body.append($(parameters.content));
 
 			$('.link-viewer-page .page-header .header-title').html(parentPageData.name);
 
@@ -34,13 +38,20 @@
 				onAfterChange: function (slider, i)
 				{
 					baseLinkViewerPage.find('.page-footer .link-viewer-info strong').html('Slide ' + (i + 1) + ' of ' + slidesCount);
+					sliderCurrentPosition = i;
 				}
 			});
-			baseLinkViewerPage.find('.slider .slick-track').css({
-				width: '100%'
+			$(window).on("resize", function ()
+			{
+				baseLinkViewerPage.find('.slider').slickGoTo(sliderCurrentPosition);
 			});
-			baseLinkViewerPage.find('.slider .slick-track .slick-slide.slick-active').css({
-				width: '100%'
+			$(window).on("navigate", function ()
+			{
+				baseLinkViewerPage.find('.slider').slickGoTo(sliderCurrentPosition);
+			});
+			body.on("pagecontainerchange", function (event)
+			{
+				baseLinkViewerPage.find('.slider').slickGoTo(sliderCurrentPosition);
 			});
 
 			var galleryPage = $('#link-viewer-gallery');
@@ -55,22 +66,17 @@
 			{
 				if (e.toolbarAction === 'close')
 				{
-					baseLinkViewerPage.find('.slider .slick-track').css({
-						width: '100%'
-					});
-					baseLinkViewerPage.find('.slider .slick-track .slick-slide.slick-active').css({
-						width: '100%'
-					});
+					baseLinkViewerPage.find('.slider').slickGoTo(sliderCurrentPosition);
 				}
 			});
 
 			$('#link-viwer-open-full-screen').off('click').on('click', function (e)
 			{
 				e.preventDefault();
-				photoSwipeInstance.show(0);
+				photoSwipeInstance.show(sliderCurrentPosition);
 			});
 
-			$('.logout-button-accept').off('click').on('click', function (e)
+			$('.logout-button').off('click').on('click', function (e)
 			{
 				e.stopPropagation();
 				e.preventDefault();
@@ -81,12 +87,13 @@
 			$.mobile.changePage("#link-viewer", {
 				transition: "slidefade"
 			});
+
+			updateSliderSize();
+			baseLinkViewerPage.find('.slider').slickGoTo(sliderCurrentPosition);
 		};
 
 		var cleanupPreviousInstance = function ()
 		{
-			var body = $('body');
-
 			if (typeof photoSwipeInstance != "undefined" && photoSwipeInstance != null)
 			{
 				window.Code.PhotoSwipe.unsetActivateInstance(photoSwipeInstance);
@@ -94,7 +101,14 @@
 			}
 
 			$('body .link-viewer-page').remove();
-			body.append($(parameters.content));
+		};
+
+		var updateSliderSize = function ()
+		{
+			var windowWidth = $(window).width();
+			$('#link-viewer').find('.slider img, .slider .slick-track .slick-slide').css({
+				'width': '100%'
+			});
 		};
 	};
 })(jQuery);

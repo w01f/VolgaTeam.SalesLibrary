@@ -66,7 +66,7 @@
 		}
 
 		/**
-		 * @return BaseShortcut || null
+		 * @return BaseShortcut
 		 */
 		public function getModel()
 		{

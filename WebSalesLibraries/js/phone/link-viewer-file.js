@@ -18,7 +18,7 @@
 
 			baseLinkViewerPage.find('.actions .action').off('click').on('click', processAction);
 
-			$('.logout-button-accept').off('click').on('click', function (e)
+			$('.logout-button').off('click').on('click', function (e)
 			{
 				e.stopPropagation();
 				e.preventDefault();

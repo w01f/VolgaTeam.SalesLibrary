@@ -66,7 +66,7 @@
 			$queryResult = $xpath->query('//Config/Type');
 			$originalType = $queryResult->length > 0 ? strtolower(trim($queryResult->item(0)->nodeValue)) : '';
 
-			if (!isset($predefinedType))
+			if (!(isset($predefinedType) && $predefinedType != ''))
 				$type = $originalType;
 			else
 				$type = $predefinedType;

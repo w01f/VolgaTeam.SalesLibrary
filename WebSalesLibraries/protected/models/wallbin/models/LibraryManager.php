@@ -276,5 +276,4 @@
 				Yii::app()->request->cookies['selectedPageName'] = $cookie;
 			}
 		}
-
 	}

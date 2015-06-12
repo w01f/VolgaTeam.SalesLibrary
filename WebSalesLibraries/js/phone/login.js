@@ -8,11 +8,9 @@
 		{
 			$('#button-login').off('click').on('click', function (event)
 			{
-				if ($('#disclaimer').length)
+				if ($('#disclaimer').length > 0)
 				{
-					$.mobile.changePage("#disclaimer", {
-						transition: "slidefade"
-					});
+					$("#disclaimer").popup("open");
 					$('#button-login').off('click');
 					event.preventDefault();
 					event.stopPropagation();
@@ -20,6 +18,7 @@
 			});
 			$('#button-accept-dislaimer').off('click').on('click', function ()
 			{
+				$("#disclaimer").popup("close");
 				$('#button-login').click();
 			});
 			$('#button-recover-password').off('click').on('click', function ()

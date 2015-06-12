@@ -174,6 +174,7 @@
 		public function loadFiles($usePermissionsFilter)
 		{
 			unset($this->files);
+			$this->files = array();
 			$linkRecords = LinkRecord::getLinksByFolder($this->id);
 			if ($usePermissionsFilter)
 				$linkRecords = LinkRecord::applyPermissionsFilter($linkRecords);
@@ -187,20 +188,19 @@
 					$this->files[] = $link;
 				}
 
-			if (isset($this->files))
-				usort($this->files, "LibraryLink::libraryLinkComparer");
+			usort($this->files, "LibraryLink::libraryLinkComparer");
 
 			$this->displayLinkWidgets = false;
-			if (isset($this->files))
-				foreach ($this->files as $file)
+			foreach ($this->files as $file)
+			{
+				/** @var  $file LibraryLink */
+				$widget = $file->getWidget();
+				if ($widget != null && $widget != '')
 				{
-					$widget = $file->getWidget();
-					if ($widget != null && $widget != '')
-					{
-						$this->displayLinkWidgets = true;
-						break;
-					}
+					$this->displayLinkWidgets = true;
+					break;
 				}
+			}
 		}
 
 		/**

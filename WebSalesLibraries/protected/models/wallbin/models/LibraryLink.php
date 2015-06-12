@@ -149,6 +149,7 @@
 		public $folderContent;
 		public $tooltip;
 		public $isFolder;
+		public $isLineBreak;
 
 		/**
 		 * @param $folder
@@ -255,6 +256,7 @@
 			}
 
 			$this->isFolder = count(LinkRecord::model()->findAll('id_parent_link=?', array($linkRecord->id))) > 0;
+			$this->isLineBreak = isset($this->lineBreakProperties);
 
 			$this->getTooltip();
 		}
@@ -262,6 +264,7 @@
 		public function loadFolderContent()
 		{
 			unset($this->folderContent);
+			$this->folderContent = array();
 			foreach (LinkRecord::model()->findAll('id_parent_link=? and is_dead=0 and is_preview_not_ready=0', array($this->id)) as $contentRecord)
 			{
 				$link = new LibraryLink($this->parent);
@@ -269,8 +272,7 @@
 				$this->folderContent[] = $link;
 			}
 
-			if (isset($this->folderContent))
-				usort($this->folderContent, "LibraryLink::libraryChildLinkComparer");
+			usort($this->folderContent, "LibraryLink::libraryChildLinkComparer");
 		}
 
 		/**

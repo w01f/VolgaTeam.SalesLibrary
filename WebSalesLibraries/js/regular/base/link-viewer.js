@@ -126,7 +126,7 @@
 
 		this.downloadFile = function (fileData)
 		{
-			window.open("preview/downloadFile?data=" + $.toJSON(fileData));
+			window.open("preview/downloadFile?data=" + $.toJSON(fileData).replace(/&/g, '%26'));
 		};
 
 		var favoritesDialogObject = [];

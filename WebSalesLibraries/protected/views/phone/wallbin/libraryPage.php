@@ -1,7 +1,7 @@
 <?
 	/**
+	 * @var $library Library
 	 * @var $tabPages array
-	 * @var $tabRecord ShortcutsTabRecord
 	 */
 
 	$cs = Yii::app()->clientScript;
@@ -12,8 +12,6 @@
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/vendor/slick-slider/slick.css?' . Yii::app()->params['version']);
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/vendor/video-js/video-js.min.css?' . Yii::app()->params['version']);
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/phone/layout.css?' . Yii::app()->params['version']);
-	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/phone/shortcuts.css?' . Yii::app()->params['version']);
-	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/phone/search-result.css?' . Yii::app()->params['version']);
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/phone/link-viewer.css?' . Yii::app()->params['version']);
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/phone/wallbin.css?' . Yii::app()->params['version']);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/json/jquery.json-2.3.min.js', CClientScript::POS_HEAD);
@@ -22,53 +20,54 @@
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/photoswipe/code.photoswipe.jquery-3.0.5.min.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/slick-slider/slick.min.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/video-js/video.min.js', CClientScript::POS_HEAD);
-	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/common/search-processor.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/common/link-viewer-data.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/phone/login.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
-	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/phone/shortcuts.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
-	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/phone/shortcuts-search.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
-	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/phone/data-table.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
-	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/phone/wallbin.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/phone/link-viewer.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/phone/link-viewer-file.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/phone/link-viewer-document.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
-
+	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/phone/wallbin.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
 
 	$siteUrl = Yii::app()->getBaseUrl(true);
 	$siteName = str_replace('http://', '', $siteUrl);
 
-	/** @var $pageShortcuts ShortcutsPageRecord[] */
-	$pageShortcuts = ShortcutsPageRecord::model()->findAll(array('order' => '`order`', 'condition' => 'id_tab=:id_tab', 'params' => array(':id_tab' => $tabRecord->id)));
-	$pageCount = count($pageShortcuts);
-	$currentPage = $pageCount > 0 ? $pageShortcuts[0]->getModel('grid') : null;
+	$defaultPage = $library->pages[0];
 ?>
-<div data-role='page' id="shortcuts" data-cache="never" data-dom-cache="false" data-ajax="false">
+<div data-role='page' id="library" data-cache="never" data-dom-cache="false" data-ajax="false">
 	<div data-role='header' class="page-header" data-position="fixed" data-theme="a">
-		<a href="#shortcuts-popup-panel-left" data-icon="ion-navicon-round" data-iconpos="notext"></a>
-		<h1 class="header-title"><? echo $tabRecord->name ?></h1>
-		<a href="#shortcuts-popup-panel-right" data-icon="ion-navicon-round" data-iconpos="notext"></a>
+		<a href="#library-popup-panel-left" data-icon="ion-navicon-round" data-iconpos="notext"></a>
+		<h1 class="header-title"><? echo $library->name ?></h1>
+		<a href="#library-popup-panel-right" data-icon="ion-navicon-round" data-iconpos="notext"></a>
 	</div>
 	<div data-role='content' class="main-content">
-		<? if ($pageCount > 1): ?>
-			<h3 class="content-header">
-				<a data-rel="popup" data-ajax="false" href="#shortcuts-popup-panel-pages"><? echo $currentPage->name; ?></a>
-			</h3>
-		<? endif; ?>
-		<div class="ui-grid-solo" id="shortcuts-links">
-			<?
-				if (isset($currentPage))
-					echo $this->renderPartial('page', array('page' => $currentPage), true);
-			?>
+		<table class="content-header">
+			<tr>
+				<td class="title">
+					<a data-rel="popup" data-ajax="false" href="#library-popup-panel-pages"><? echo $defaultPage->name; ?></a>
+				</td>
+				<td class="logo">
+					<a data-rel="popup" data-ajax="false" href="#library-popup-panel-pages"><img src="<? echo Yii::app()->getBaseUrl(true) . '/' . $library->logoLink ?>"></a>
+				</td>
+			</tr>
+		</table>
+		<div class="content-data">
+			<? echo $this->renderPartial('pageContent', array('page' => $defaultPage)); ?>
 		</div>
 	</div>
 	<div class="page-footer main-footer" data-role='footer' data-id="ribbon" data-position="fixed" data-theme="a">
-		<span class="ui-mini login">
-			<? if (isset(Yii::app()->user->login)): ?>
-				<? echo Yii::app()->user->login; ?>
-			<? endif; ?>
-		</span>
+		<div class="ui-grid-a">
+			<div class="ui-block-a">
+				<span class="ui-mini login">
+					<? if (isset(Yii::app()->user->login)): ?>
+						<? echo Yii::app()->user->login; ?>
+					<? endif; ?>
+				</span>
+			</div>
+			<div class="ui-block-b entities-count">
+				<span class="ui-mini"><? echo LinkRecord::getLinksCountByLibrary($library->id); ?> files</span>
+			</div>
+		</div>
 	</div>
-	<div data-role="panel" data-display="overlay" id="shortcuts-popup-panel-left">
+	<div data-role="panel" data-display="overlay" id="library-popup-panel-left">
 		<ul data-role="listview">
 			<li data-icon="false">
 				<a data-ajax="false" href="<? echo $siteUrl; ?>"><? echo $siteName; ?></a>
@@ -79,26 +78,25 @@
 			</li>
 		</ul>
 	</div>
-	<div data-role="panel" data-display="overlay" data-position="right" id="shortcuts-popup-panel-right">
+	<div data-role="panel" data-display="overlay" data-position="right" id="library-popup-panel-right">
 		<ul data-role="listview">
 			<? echo $this->renderPartial('../wallbin/libraryList'); ?>
 		</ul>
 	</div>
-	<div data-role="panel" data-display="overlay" data-position="left" id="shortcuts-popup-panel-pages">
+	<div data-role="panel" data-display="overlay" data-position="right" id="library-popup-panel-pages">
 		<ul data-role="listview">
 			<li data-role="list-divider" class="header">
-				<h2><? echo $tabRecord->name ?></h2>
+				<a href="#" data-ajax="false"><img src="<? echo Yii::app()->getBaseUrl(true) . '/' . $library->logoLink ?>">
+					<span><? echo $library->name ?></span> </a>
 			</li>
-			<? foreach ($pageShortcuts as $pageShortcut): ?>
-				<? if ($pageShortcut->isEnabled(Yii::app()->user->login)): ?>
-					<li data-icon="false" class="page-item">
-						<a data-ajax="false" href="#"> <span><? echo $pageShortcut->name; ?></span>
-							<div class="service-data">
-								<div class="page-id"><? echo $pageShortcut->id; ?></div>
-							</div>
-						</a>
-					</li>
-				<? endif; ?>
+			<? foreach ($library->pages as $page): ?>
+				<li data-icon="false" class="page-item">
+					<a data-ajax="false" href="#"> <span><? echo $page->name; ?></span>
+						<div class="service-data">
+							<div class="page-id"><? echo $page->id; ?></div>
+						</div>
+					</a>
+				</li>
 			<? endforeach; ?>
 		</ul>
 	</div>

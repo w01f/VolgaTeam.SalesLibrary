@@ -34,30 +34,6 @@
 					dialogContent.find('.add-favorites').off('click').on('click', addToFavorites);
 					dialogContent.find('.action-container .action').off('click').on('click', processSaveAction);
 
-					VideoJS.players = {};
-					dialogContent.find('.page-image').hide();
-					dialogContent.find('.play-video').hide();
-					dialogContent.find('#video-player').show();
-					_V_.options.flash.swf = viewerData.playerSrc;
-					player = _V_("video-player", {
-							controls: true,
-							autoplay: false,
-							preload: 'auto',
-							poster: viewerData.thumbImageSrc
-						},
-						function ()
-						{
-						});
-					player.src([
-						{
-							src: viewerData.mp4Src.href,
-							href: viewerData.mp4Src.href,
-							title: viewerData.fileName,
-							type: viewerData.mp4Src.type
-						}
-					]);
-					player.play();
-
 					dialogContent.find('.open-video-modal').off('click').on('click', showVideoModal);
 					dialogContent.find('.open-video-fullscreen').off('click').on('click', showVideoFullScreen);
 

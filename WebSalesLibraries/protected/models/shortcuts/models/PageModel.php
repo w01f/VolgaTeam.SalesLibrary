@@ -8,6 +8,7 @@
 		public $id;
 		public $idTab;
 		public $type;
+		public $name;
 		public $searchBar;
 		public $viewPath;
 		public $ribbonLogoPath;
@@ -25,6 +26,7 @@
 		{
 			$this->id = $pageRecord->id;
 			$this->idTab = $pageRecord->id_tab;
+			$this->name = $pageRecord->name;
 			$this->searchBar = new SearchBar($pageRecord);
 			$baseUrl = Yii::app()->getBaseUrl(true);
 			$customRibbonPath = $baseUrl . $pageRecord->source_path . '/rbnlogo.png' . '?' . $pageRecord->id;

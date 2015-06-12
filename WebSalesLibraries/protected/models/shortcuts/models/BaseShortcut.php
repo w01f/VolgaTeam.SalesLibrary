@@ -16,6 +16,8 @@
 		public $samePage;
 		public $viewPath;
 
+		public $mobileHeader;
+
 		/** @var $linkRecord ShortcutsLinkRecord */
 		protected $linkRecord;
 
@@ -38,6 +40,9 @@
 			$this->title = $titleTags->length > 0 ? trim($titleTags->item(0)->nodeValue) : '';
 			$this->imagePath = Yii::app()->getBaseUrl(true) . $linkRecord->image_path . '?' . $linkRecord->id_page . $linkRecord->id;
 			$this->samePage = false;
+
+			$mobileHeaderTags = $linkConfig->getElementsByTagName("JQMtitle");
+			$this->mobileHeader = $mobileHeaderTags->length > 0 ? trim($mobileHeaderTags->item(0)->nodeValue) : '';
 		}
 
 		/**

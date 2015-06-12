@@ -17,16 +17,16 @@
 		This page is under construction
 	</div>
 	<div class="page-footer main-footer" data-role='footer' data-id="ribbon" data-position="fixed" data-theme="a">
-		<span class="ui-mini">
+		<span class="ui-mini login">
 			<? if (isset(Yii::app()->user->login)): ?>
-				(<? echo Yii::app()->user->login; ?>)
+				<? echo Yii::app()->user->login; ?>
 			<? endif; ?>
 			<a href="#" class="logout-button">Log Out</a>
 		</span>
 	</div>
 	<div data-role="panel" data-display="overlay" id="shortcuts-popup-panel-left">
 		<ul data-role="listview">
-			<li data-icon="ion-navicon-round-icon-left">
+			<li data-icon="false">
 				<a data-ajax="false" href="<? echo $siteUrl; ?>"><? echo $siteName; ?></a>
 			</li>
 			<? echo $this->renderPartial('../site/tabPageList', array('tabPages' => $tabPages)); ?>

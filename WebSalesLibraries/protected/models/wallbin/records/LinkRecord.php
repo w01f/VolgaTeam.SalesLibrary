@@ -387,4 +387,13 @@
 			else
 				return null;
 		}
+
+		/**
+		 * @param $libraryId
+		 * @return int
+		 */
+		public static function getLinksCountByLibrary($libraryId)
+		{
+			return self::model()->count('id_library=? and type<>6', array($libraryId));
+		}
 	}

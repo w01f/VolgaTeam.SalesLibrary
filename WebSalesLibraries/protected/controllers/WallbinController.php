@@ -1,5 +1,6 @@
 <?php
 	Yii::import('application.extensions.phpQuery.phpQuery.phpQuery');
+
 	/**
 	 * Class WallbinController
 	 */
@@ -10,55 +11,7 @@
 			return YiiBase::getPathOfAlias($this->pathPrefix . 'wallbin');
 		}
 
-		public function actionGetColumnsView()
-		{
-			$libraryManager = new LibraryManager();
-			$selectedPage = $libraryManager->getSelectedPage();
-			$this->renderPartial('columnsView', array('selectedPage' => $selectedPage), false, true);
-		}
-
-		public function actionGetAccordionView()
-		{
-			$libraryManager = new LibraryManager();
-			$selectedPage = $libraryManager->getSelectedPage();
-			$selectedPage->loadData();
-			$this->renderPartial('accordionView', array('libraryPage' => $selectedPage), false, true);
-		}
-
-		public function actionGetTabsView()
-		{
-			$wallbinView = Yii::app()->request->getPost('wallbinView');
-			if (!isset($wallbinView) || $wallbinView == 'null'|| $wallbinView == '')
-				$wallbinView = 'columns';
-
-			$libraryManager = new LibraryManager();
-			$selectedLibrary = $libraryManager->getSelectedLibrary();
-			$selectedPage = $libraryManager->getSelectedPage();
-			$selectedPage->loadData();
-			$this->renderPartial('tabsView', array('library' => $selectedLibrary, 'selectedPage' => $selectedPage, 'wallbinView' => $wallbinView), false, true);
-		}
-
-		public function actionGetLibraryDropDownList()
-		{
-			$libraryManager = new LibraryManager();
-			$this->renderPartial('libraryDropDownList', array('libraryManager' => $libraryManager), false, true);
-		}
-
-		public function actionGetPageDropDownList()
-		{
-			$libraryManager = new LibraryManager();
-			$this->renderPartial('pageDropDownList', array('selectedLibrary' => $libraryManager->getSelectedLibrary(),
-				'selectedPage' => $libraryManager->getSelectedPage()), false, true);
-		}
-
-		public function actionGetFoldersList()
-		{
-			$libraryManager = new LibraryManager();
-			$selectedPage = $libraryManager->getSelectedPage();
-			$selectedPage->loadData();
-			$this->renderPartial('folders', array('page' => $selectedPage), false, true);
-		}
-
+		//------Common Site API-------------------------------------------
 		public function actionGetFolderLinksList()
 		{
 			$folderId = Yii::app()->request->getPost('folderId');
@@ -101,4 +54,87 @@
 				}
 			}
 		}
+		//------Common Site API-------------------------------------------
+
+		//------Regular Site API-------------------------------------------
+		public function actionGetColumnsView()
+		{
+			$libraryManager = new LibraryManager();
+			$selectedPage = $libraryManager->getSelectedPage();
+			$this->renderPartial('columnsView', array('selectedPage' => $selectedPage), false, true);
+		}
+
+		public function actionGetAccordionView()
+		{
+			$libraryManager = new LibraryManager();
+			$selectedPage = $libraryManager->getSelectedPage();
+			$selectedPage->loadData();
+			$this->renderPartial('accordionView', array('libraryPage' => $selectedPage), false, true);
+		}
+
+		public function actionGetTabsView()
+		{
+			$wallbinView = Yii::app()->request->getPost('wallbinView');
+			if (!isset($wallbinView) || $wallbinView == 'null' || $wallbinView == '')
+				$wallbinView = 'columns';
+
+			$libraryManager = new LibraryManager();
+			$selectedLibrary = $libraryManager->getSelectedLibrary();
+			$selectedPage = $libraryManager->getSelectedPage();
+			$selectedPage->loadData();
+			$this->renderPartial('tabsView', array('library' => $selectedLibrary, 'selectedPage' => $selectedPage, 'wallbinView' => $wallbinView), false, true);
+		}
+
+		public function actionGetLibraryDropDownList()
+		{
+			$libraryManager = new LibraryManager();
+			$this->renderPartial('libraryDropDownList', array('libraryManager' => $libraryManager), false, true);
+		}
+
+		public function actionGetPageDropDownList()
+		{
+			$libraryManager = new LibraryManager();
+			$this->renderPartial('pageDropDownList', array('selectedLibrary' => $libraryManager->getSelectedLibrary(),
+				'selectedPage' => $libraryManager->getSelectedPage()), false, true);
+		}
+		//------Regular Site API-------------------------------------------
+
+		//------Mobile Site API-----------------------------------------------
+
+		public function actionGetLibraryPage()
+		{
+			$libraryId = Yii::app()->request->getQuery('libraryId');
+			$libraryManager = new LibraryManager();
+			if (isset($libraryId))
+				$library = $libraryManager->getLibraryById($libraryId);
+			else
+			{
+				$availableLibraries = $libraryManager->getLibraries();
+				if (count($availableLibraries) > 0)
+					$library = $availableLibraries[0];
+			}
+			if (isset($library))
+			{
+				$tabPages = TabPages::getList();
+				$this->render('libraryPage', array(
+					'library' => $library,
+					'tabPages' => $tabPages
+				));
+			}
+			else
+				Yii::app()->end();
+		}
+
+		public function actionGetPageContent()
+		{
+			$pageId = Yii::app()->request->getPost('pageId');
+			$libraryManager = new LibraryManager();
+			/** @var  $pageRecord LibraryPageRecord */
+			$pageRecord = LibraryPageRecord::model()->findByPk($pageId);
+			$library = $libraryManager->getLibraryById($pageRecord->id_library);
+			$pageModel = new LibraryPage($library);
+			$pageModel->load($pageRecord);
+			$this->renderPartial('pageContent', array('page' => $pageModel));
+		}
+		//------Mobile Site API-----------------------------------------------
 	}

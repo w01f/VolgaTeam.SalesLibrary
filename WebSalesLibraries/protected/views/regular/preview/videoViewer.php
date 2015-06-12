@@ -55,7 +55,11 @@
 		<div role="tabpanel" class="tab-pane active" id="link-viewer-tab-preview">
 			<div class="row preview-gallery">
 				<div class="col col-xs-12 text-center">
-					<video id="video-player" class="video-js vjs-default-skin" height="305" width="750"></video>
+					<video id="video-player" class="video-js vjs-default-skin"
+						   controls preload="auto" height="305" width="750"
+						   poster="<? echo $data->thumbImageSrc; ?>">
+						<source src="<? echo $data->mp4Src->href; ?>" type='video/mp4'/>
+					</video>
 				</div>
 			</div>
 			<div class="row row-buttons gallery-control-buttons">

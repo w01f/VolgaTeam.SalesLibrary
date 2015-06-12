@@ -1,7 +1,7 @@
-<?	/** @var $folder LibraryFolder */?>
+<? /** @var $folder LibraryFolder */ ?>
 <div class="folder-links-scroll-area"
 	 style="background-color: <? echo $folder->windowBackColor; ?>;color: <? echo $folder->windowForeColor; ?>;">
-	<? if (isset($folder->files)): ?>
+	<? if (count($folder->files) > 0): ?>
 		<div class="folder-links-container">
 			<? foreach ($folder->files as $link): ?>
 				<?

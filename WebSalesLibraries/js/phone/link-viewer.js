@@ -4,13 +4,14 @@
 	$.SalesPortal = $.SalesPortal || { };
 	var LinkManager = function ()
 	{
-		this.requestViewDialog = function (linkId, parentPageData)
+		this.requestViewDialog = function (linkId, parentPageData, isQuickSite)
 		{
 			$.ajax({
 				type: "POST",
 				url: window.BaseUrl + "preview/getViewDialog",
 				data: {
-					linkId: linkId
+					linkId: linkId,
+					isQuickSite: isQuickSite
 				},
 				beforeSend: function ()
 				{
