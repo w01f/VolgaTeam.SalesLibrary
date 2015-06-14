@@ -35,6 +35,18 @@
 		}
 
 		/**
+		 * @return string
+		 */
+		public function getPhoneName()
+		{
+			$tabConfig = new DOMDocument();
+			$tabConfig->loadXML($this->config);
+			$xpath = new DomXPath($tabConfig);
+			$queryResult = $xpath->query('//Config/JQMName');
+			return $queryResult->length > 0 ? $queryResult->item(0)->nodeValue : $this->name;
+		}
+
+		/**
 		 * @param $user CWebUser
 		 * @return bool
 		 */
@@ -59,11 +71,14 @@
 			{
 				$isAvailable = false;
 
-				$isAvailable |= in_array($user->login, $approvedUsers);
+				if (isset($user))
+				{
+					$isAvailable |= in_array($user->login, $approvedUsers);
 
-				$userGroups = $user->getState('groups');
-				if (count($userGroups) > 0)
-					$isAvailable |= array_intersect($userGroups, $approvedGroups);
+					$userGroups = $user->getState('groups');
+					if (count($userGroups) > 0)
+						$isAvailable |= array_intersect($userGroups, $approvedGroups);
+				}
 			}
 
 			return $isAvailable;

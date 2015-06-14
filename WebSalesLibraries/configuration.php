@@ -15,6 +15,8 @@
 			'name' => 'Sales Libraries',
 			'params' => array(
 				'appRoot' => dirname(__FILE__),
+				'jqm_home_page_enabled' => true,
+				'jqm_home_page_title' => 'RRTV',
 				'login' => array(
 					'rememberMeField' => true,
 					'forgotPasswordField' => true,
@@ -27,26 +29,31 @@
 				),
 				'home_tab' => array(
 					'name' => 'HOME',
+					'jqm_name' => 'HOME',
 					'position' => 1,
 				),
 				'search_full_tab' => array(
 					'visible' => true,
 					'name' => 'SEARCH',
+					'jqm_name' => 'SEARCH',
 					'position' => 2,
 				),
 				'favorites_tab' => array(
 					'visible' => true,
 					'name' => 'Favorites',
+					'jqm_name' => 'Favorites',
 					'position' => 5,
 				),
 				'quiz_tab' => array(
 					'visible' => true,
 					'name' => 'Tests',
+					'jqm_name' => 'Tests',
 					'position' => 98,
 				),
 				'qbuilder_tab' => array(
 					'visible' => true,
 					'name' => 'QBuilder',
+					'jqm_name' => 'QBuilder',
 					'position' => 99,
 				),
 				'stations' => array(

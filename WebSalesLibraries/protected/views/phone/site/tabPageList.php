@@ -11,12 +11,12 @@
 		</li>
 	<? elseif ($tabName == 'search_full_tab'): ?>
 		<li data-icon="false">
-			<a data-ajax="false" href="<? echo $url; ?>"><? echo Yii::app()->params['search_full_tab']['name'] ?></a>
+			<a class="not-working" data-ajax="false" href="<? echo $url; ?>"><? echo Yii::app()->params['search_full_tab']['name'] ?></a>
 		</li>
 	<?
 	elseif ($tabName == 'favorites_tab'): ?>
 		<li data-icon="false">
-			<a data-ajax="false" href="<? echo $url; ?>"><? echo Yii::app()->params['favorites_tab']['name'] ?></a>
+			<a class="not-working" data-ajax="false" href="<? echo $url; ?>"><? echo Yii::app()->params['favorites_tab']['name'] ?></a>
 		</li>
 	<?
 	elseif (strpos($tabName, 'shortcuts-tab-') !== false): ?>

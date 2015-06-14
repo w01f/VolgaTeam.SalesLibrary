@@ -22,7 +22,7 @@
 					{
 						$tabPath = $tabFolder->getPathname();
 						$tabConfigFile = realpath($tabPath . DIRECTORY_SEPARATOR . 'config.xml');
-						$tabImageFile = realpath($tabPath . DIRECTORY_SEPARATOR . 'rbnlogo.png');
+						$tabImageFile = realpath($tabPath);
 						if (file_exists($tabConfigFile))
 						{
 							$tabConfigContent = file_get_contents($tabConfigFile);

@@ -15,10 +15,15 @@
 
 			if ($this->isPhone)
 			{
-				foreach ($tabPages as $tabName => $tabIndex)
+				if (Yii::app()->params['jqm_home_page_enabled'] == true)
+					$this->render('index', array('tabPages' => $tabPages));
+				else
 				{
-					$this->redirect(TabPages::getTabUrl($tabName));
-					break;
+					foreach ($tabPages as $tabName => $tabIndex)
+					{
+						$this->redirect(TabPages::getTabUrl($tabName));
+						break;
+					}
 				}
 			}
 			else

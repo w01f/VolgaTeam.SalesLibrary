@@ -1,0 +1,32 @@
+.tab-items .tab-item
+{
+	margin-top: 20px;
+}
+
+.tab-items .tab-item
+{
+	width: 96px;
+	height: 128px;
+}
+
+.tab-items .tab-item .logo
+{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.tab-items .tab-item .title
+{
+	font-size: 0.9em;
+}
+
+#not-working-message
+{
+	text-align: center;
+}
+
+#not-working-message .accept-button
+{
+	width: 80px;
+}
