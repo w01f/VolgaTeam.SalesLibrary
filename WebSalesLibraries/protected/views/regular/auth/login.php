@@ -18,10 +18,9 @@
 <div id="content">
 	<?
 		$form = $this->beginWidget('CActiveForm', array(
+			'id' => 'form-login-data',
 			'action' => Yii::app()->createUrl('auth/login'),
-			'htmlOptions' => array(
-				'role' => 'form'
-			)
+			'htmlOptions' => array('role' => 'form')
 		));
 	?>
 	<table id="form-login">
@@ -69,38 +68,10 @@
 				?>
 			</td>
 		</tr>
-		<? if (Yii::app()->params['login']['forgotPasswordField']): ?>
-			<tr>
-				<td colspan="2">
-					<a id="recover-password-link" href="#view-dialog-container">
-						<img src="<? echo Yii::app()->baseUrl . '/images/auth/forgot-password.png'; ?>" alt="Forgot Password?">
-					</a>
-				</td>
-			</tr>
-		<? endif; ?>
-		<? if (Yii::app()->params['login']['complex_password']): ?>
-			<tr>
-				<td colspan="2">
-					<button type="button" id="password-requirements" class="btn btn-default">Password Requirements</button>
-				</td>
-			</tr>
-		<? endif; ?>
-		<? if (Yii::app()->params['login']['disclaimer']): ?>
-			<tr>
-				<td colspan="2">
-					<div id="disclaimer-container" class="checkbox">
-						<label>
-							<input id="disclaimer" type="checkbox" value="">
-							<? echo Yii::app()->params['login']['disclaimerText']; ?>
-						</label>
-					</div>
-				</td>
-			</tr>
-		<? endif; ?>
 		<tr>
 			<? if (Yii::app()->params['login']['rememberMeField']): ?>
 				<td style="text-align: left">
-					<div class="checkbox">
+					<div class="checkbox" style="margin-left: 20px;">
 						<?
 							echo $form->checkBox($formData, 'rememberMe');
 							echo $form->labelEx($formData, 'rememberMe'
@@ -110,18 +81,29 @@
 					</div>
 				</td>
 			<? endif; ?>
-			<td>
+			<td style="text-align: right">
 				<button type="submit" id="button-login" class="btn btn-default">Log In</button>
 			</td>
 		</tr>
 		<tr>
 			<td colspan="2">
-				<a href="mailto:<? echo Yii::app()->params['email']['from']; ?>" style="text-decoration: underline;"><strong>Need an Account?</strong></a>
+				<div class="action-link-group">
+					<? if (Yii::app()->params['login']['forgotPasswordField']): ?>
+						<a id="recover-password-link" class="action-link gray" href="#view-dialog-container">Forgot Password</a>
+					<? endif; ?>
+					<? if (Yii::app()->params['login']['complex_password']): ?>
+						<a id="password-requirements" class="action-link gray" href="#">Password Requirements</a>
+					<? endif; ?>
+					<a class="action-link gray" href="mailto:<? echo Yii::app()->params['email']['from']; ?>">Site Help</a>
+				</div>
 			</td>
 		</tr>
 	</table>
 	<? $this->endWidget(); ?>
 </div>
+<? if (Yii::app()->params['login']['disclaimer']==true): ?>
+	<div class="disclaimer-text"><? echo Yii::app()->params['login']['disclaimerText']; ?></div>
+<? endif; ?>
 <div id="content-overlay">
 </div>
 <div id="view-dialog-wrapper">

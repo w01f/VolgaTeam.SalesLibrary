@@ -110,9 +110,4 @@
 				ResetPasswordRecord::resetPasswordForUser($login, $password, false, true);
 			}
 		}
-
-		public function actionDisclaimerWarning()
-		{
-			$this->renderPartial('disclaimerWarning', array('content' => Yii::app()->params['login']['disclaimerWarningText']), false, true);
-		}
 	}

@@ -39,16 +39,10 @@
 		<a href="#library-popup-panel-right" data-icon="ion-navicon-round" data-iconpos="notext"></a>
 	</div>
 	<div data-role='content' class="main-content">
-		<table class="content-header">
-			<tr>
-				<td class="title">
-					<a data-rel="popup" data-ajax="false" href="#library-popup-panel-pages"><? echo $defaultPage->name; ?></a>
-				</td>
-				<td class="logo">
-					<a data-rel="popup" data-ajax="false" href="#library-popup-panel-pages"><img src="<? echo Yii::app()->getBaseUrl(true) . '/' . $library->logoLink ?>"></a>
-				</td>
-			</tr>
-		</table>
+		<a class="content-header vertical" data-rel="popup" data-ajax="false" href="#library-popup-panel-pages">
+			<div class="logo"><img src="<? echo Yii::app()->getBaseUrl(true) . '/' . $library->logoLink ?>"></div>
+			<div class="title"><? echo $defaultPage->name; ?></div>
+		</a>
 		<div class="content-data">
 			<? echo $this->renderPartial('pageContent', array('page' => $defaultPage)); ?>
 		</div>
@@ -86,8 +80,7 @@
 	<div data-role="panel" data-display="overlay" data-position="right" id="library-popup-panel-pages">
 		<ul data-role="listview">
 			<li data-role="list-divider" class="header">
-				<a href="#" data-ajax="false"><img src="<? echo Yii::app()->getBaseUrl(true) . '/' . $library->logoLink ?>">
-					<span><? echo $library->name ?></span> </a>
+				<a href="#" data-ajax="false"><span><? echo $library->name ?></span></a>
 			</li>
 			<? foreach ($library->pages as $page): ?>
 				<li data-icon="false" class="page-item">

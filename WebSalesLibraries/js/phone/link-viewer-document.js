@@ -106,7 +106,7 @@
 		var updateSliderSize = function ()
 		{
 			var windowWidth = $(window).width();
-			$('#link-viewer').find('.slider img, .slider .slick-track .slick-slide').css({
+			$('#link-viewer').find('.slider img, .slider .slick-track, .slider .slick-track .slick-slide').css({
 				'width': '100%'
 			});
 		};

@@ -39,13 +39,6 @@
 	background: #eee;
 }
 
-#disclaimer-container
-{
-	margin-left: -120px;
-	margin-right: -120px;
-	text-align: justify;
-}
-
 .checkbox input[type="checkbox"]
 {
 	float: none;
@@ -57,4 +50,26 @@
 	vertical-align: top;
 	padding-left: 0;
 	display: inherit;
+}
+
+.action-link-group
+{
+	margin-top: 40px;
+}
+
+.action-link
+{
+	text-decoration: none;
+	margin-bottom: 10px;
+	display: block;
+}
+
+.action-link.gray
+{
+	color: #959595;
+}
+
+.disclaimer-text
+{
+	display: none;
 }

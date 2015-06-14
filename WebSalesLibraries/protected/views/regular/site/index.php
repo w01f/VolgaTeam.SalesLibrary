@@ -176,22 +176,20 @@
 					<img class="ribbon-icon ribbon-disabled" src="<? echo Yii::app()->getBaseUrl(true) . '/images/wallbin/tabs.png' ?>"/>
 				</div>
 			</div>
-			<div class="ribbon-section wallbin-view-options">
-				<div class="row">
-					<div class="col-xs-6">
-						<img id="increase-text-size" src="<? echo Yii::app()->getBaseUrl(true) . '/images/wallbin/increase-font.png' ?>"/>
-					</div>
-					<div class="col-xs-6">
-						<img id="increase-text-space" src="<? echo Yii::app()->getBaseUrl(true) . '/images/wallbin/increase-space.png' ?>"/>
-					</div>
+			<div class="ribbon-section">
+				<span class="section-title">Larger</span>
+				<div id="increase-text-size" class="ribbon-button ribbon-button-large wallbin-style-options  <? if (!$isMobile): ?>regular<? endif; ?>">
+					<img class="ribbon-icon ribbon-normal" src="<? echo Yii::app()->getBaseUrl(true) . '/images/wallbin/increase-size.png' ?>"/>
+					<img class="ribbon-icon ribbon-hot" src="<? echo Yii::app()->getBaseUrl(true) . '/images/wallbin/increase-size.png' ?>"/>
+					<img class="ribbon-icon ribbon-disabled" src="<? echo Yii::app()->getBaseUrl(true) . '/images/wallbin/increase-size.png' ?>"/>
 				</div>
-				<div class="row">
-					<div class="col-xs-6">
-						<img id="decrease-text-size" src="<? echo Yii::app()->getBaseUrl(true) . '/images/wallbin/decrease-font.png' ?>"/>
-					</div>
-					<div class="col-xs-6">
-						<img id="decrease-text-space" src="<? echo Yii::app()->getBaseUrl(true) . '/images/wallbin/decrease-space.png' ?>"/>
-					</div>
+			</div>
+			<div class="ribbon-section">
+				<span class="section-title">Smaller</span>
+				<div id="decrease-text-size" class="ribbon-button ribbon-button-large wallbin-style-options  <? if (!$isMobile): ?>regular<? endif; ?>">
+					<img class="ribbon-icon ribbon-normal" src="<? echo Yii::app()->getBaseUrl(true) . '/images/wallbin/decrease-size.png' ?>"/>
+					<img class="ribbon-icon ribbon-hot" src="<? echo Yii::app()->getBaseUrl(true) . '/images/wallbin/decrease-size.png' ?>"/>
+					<img class="ribbon-icon ribbon-disabled" src="<? echo Yii::app()->getBaseUrl(true) . '/images/wallbin/decrease-size.png' ?>"/>
 				</div>
 			</div>
 			<? if (isset(Yii::app()->user->firstName) && isset(Yii::app()->user->lastName)): ?>

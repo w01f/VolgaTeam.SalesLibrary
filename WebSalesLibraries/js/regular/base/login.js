@@ -52,51 +52,37 @@
 				}
 			});
 
-			$('#button-login').off('click').on('click', function (event)
+			$('#form-login-data').off('submit').on('submit', function (form)
 			{
-				var disclaimer = $('#disclaimer');
-				if (disclaimer.length > 0 && !disclaimer.prop('checked'))
+				var disclaimer = $('.disclaimer-text');
+				var continueLogin = false;
+				if (disclaimer.length > 0)
 				{
-					event.preventDefault();
-					event.stopPropagation();
-					$.ajax({
-						type: "POST",
-						url: window.BaseUrl + "auth/disclaimerWarning",
-						data: {},
-						beforeSend: function ()
-						{
-							$.SalesPortal.Overlay.show(true);
+					$.fancybox({
+						content: $('<div style="text-align: center">' +
+							'<i>Before you log in:</i><br><br>' +
+							disclaimer.text() +
+							'<br><br>' +
+							'<button type="button" id="confirm-disclaimer" class="btn btn-default" onclick="continueLogin = true;$.fancybox.close();">I Agree</button>' +
+							'</div>'),
+						width: 450,
+						autoSize: false,
+						autoHeight: true,
+						openEffect: 'none',
+						closeEffect: 'none',
+						closeBtn: false,
+						helpers: {
+							title: false
 						},
-						complete: function ()
+						afterClose: function ()
 						{
-							$.SalesPortal.Overlay.hide();
-						},
-						success: function (msg)
-						{
-							var content = $(msg);
-							content.find('#accept-button').off('click');
-							content.find('#accept-button').on('click', function ()
-							{
-								$.fancybox.close();
-							});
-							$.fancybox({
-								content: content,
-								title: 'Confirmation Needed!',
-								width: 450,
-								autoSize: false,
-								autoHeight: true,
-								openEffect: 'none',
-								closeEffect: 'none'
-							});
-						},
-						error: function ()
-						{
-						},
-						async: true,
-						dataType: 'html'
+							document.forms[0].submit();
+						}
 					});
+					return false;
 				}
 			});
+
 			updateContentSize();
 			$(window).off('resize').on('resize', updateContentSize);
 		};

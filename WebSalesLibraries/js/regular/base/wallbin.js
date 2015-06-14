@@ -8,7 +8,7 @@
 
 		var storedTextSize = $.cookie("textSize");
 		if (storedTextSize == null)
-			storedTextSize = 12;
+			storedTextSize = 14;
 
 		var storedTextSpace = $.cookie("textSpace");
 		if (storedTextSpace == null)
@@ -55,35 +55,32 @@
 			{
 				pageChanged();
 			});
-			$('#increase-text-space').off('click').on('click', function ()
+
+			$('#increase-text-size').off('click').on('click', function ()
 			{
 				if (storedTextSpace < 3)
 				{
 					storedTextSpace++;
 					updateTextSpace(storedTextSpace);
 				}
+				if (storedTextSize < 17)
+				{
+					storedTextSize += 3;
+					updateTextSize(storedTextSize);
+				}
 			});
-			$('#decrease-text-space').off('click').on('click', function ()
+			$('#decrease-text-size').off('click').on('click', function ()
 			{
 				if (storedTextSpace > 1)
 				{
 					storedTextSpace--;
 					updateTextSpace(storedTextSpace);
 				}
-			});
-
-			$('#increase-text-size').off('click').on('click', function ()
-			{
-				if (storedTextSize < 22)
-					storedTextSize++;
-				updateTextSize(storedTextSize);
-			});
-
-			$('#decrease-text-size').off('click').on('click', function ()
-			{
-				if (storedTextSize > 8)
-					storedTextSize--;
-				updateTextSize(storedTextSize);
+				if (storedTextSize > 11)
+				{
+					storedTextSize -= 3;
+					updateTextSize(storedTextSize);
+				}
 			});
 
 			$('#columns-view').off('click').on('click', function ()
