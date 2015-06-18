@@ -45,8 +45,13 @@
 .login-content .remember-button-container
 {
 	margin-top: 40px;
-	padding-left: 70px;
-	padding-right: 70px;
+	text-align: center;
+}
+
+.login-content .remember-button-container .ui-checkbox
+{
+	display: inline-block;
+	margin-left: -20px;
 }
 
 .login-content .remember-button-container label

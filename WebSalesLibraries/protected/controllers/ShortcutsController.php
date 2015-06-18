@@ -1,5 +1,5 @@
 <?php
-
+	Yii::import('application.extensions.phpQuery.phpQuery.phpQuery');
 	/**
 	 * Class ShortcutsController
 	 */
@@ -113,6 +113,18 @@
 					echo $content;
 				else
 					$this->render('linkWrapper', array('objectId' => $linkId, 'objectName' => $searchShortcut->tooltip, 'objectLogo' => $searchShortcut->ribbonLogoPath, 'content' => $content));
+			}
+		}
+
+		public function actionGetLibraryPageShortcut()
+		{
+			$linkId = Yii::app()->request->getPost('linkId');
+			if (isset($linkId))
+			{
+				$linkRecord = ShortcutsLinkRecord::model()->findByPk($linkId);
+				$libraryPageShortcut = new SinglePageShortcut($linkRecord);
+				$content = $this->renderPartial('pageContent', array('pageShortcut' => $libraryPageShortcut), true);
+				echo $content;
 			}
 		}
 
@@ -302,6 +314,7 @@
 				{
 					case 'window':
 					case 'page':
+					case 'onlypage':
 					case 'quicklist':
 						$link = $linkRecord->getModel();
 						$this->renderPartial('linkWrapper', array(
@@ -319,19 +332,6 @@
 						Yii::app()->end();
 						break;
 				}
-			}
-		}
-
-		public function actionGetLibraryPageShortcut()
-		{
-			$linkId = Yii::app()->request->getPost('linkId');
-			if (isset($linkId))
-			{
-				$linkRecord = ShortcutsLinkRecord::model()->findByPk($linkId);
-				$libraryPageShortcut = new PageShortcut($linkRecord);
-				$libraryPage = $libraryPageShortcut->getLibraryPage();
-				$content = $this->renderPartial('../wallbin/pageContent', array('page' => $libraryPage), true);
-				echo $content;
 			}
 		}
 		//------Mobile Site API-----------------------------------------------

@@ -80,13 +80,16 @@
 	<? if ($authorized): ?>
 		<div data-role="panel" data-display="overlay" id="link-viewer-popup-panel-left">
 			<ul data-role="listview">
-				<li data-icon="false">
-					<a data-ajax="false" href="<? echo $siteUrl; ?>"><? echo $siteName; ?></a>
-				</li>
-				<? echo $this->renderPartial('../site/tabPageList', array('tabPages' => $tabPages)); ?>
+				<? if (Yii::app()->params['jqm_home_page_enabled'] == true): ?>
+					<li data-icon="false">
+						<a data-ajax="false" href="<? echo $siteUrl; ?>"><? echo $siteName; ?></a>
+					</li>
+				<? endif; ?>
+				<? echo $this->renderPartial('../site/tabPageList', array('tabPages' => $tabPages, 'librariesPopupId' => 'link-viewer-popup-panel-right')); ?>
 				<li data-icon="false">
 					<a class="logout-button" href="#">Log Out</a>
 				</li>
+				<li data-role="list-divider"><p>Copyright 2015 adSALESapps.com</p></li>
 			</ul>
 		</div>
 		<div data-role="panel" data-display="overlay" data-position="right" id="link-viewer-popup-panel-right">
@@ -160,13 +163,16 @@
 	<? if ($authorized): ?>
 		<div data-role="panel" data-display="overlay" id="link-viewer-gallery-popup-panel-left">
 			<ul data-role="listview">
-				<li data-icon="false">
-					<a data-ajax="false" href="<? echo $siteUrl; ?>"><? echo $siteName; ?></a>
-				</li>
-				<? echo $this->renderPartial('../site/tabPageList', array('tabPages' => $tabPages)); ?>
+				<? if (Yii::app()->params['jqm_home_page_enabled'] == true): ?>
+					<li data-icon="false">
+						<a data-ajax="false" href="<? echo $siteUrl; ?>"><? echo $siteName; ?></a>
+					</li>
+				<? endif; ?>
+				<? echo $this->renderPartial('../site/tabPageList', array('tabPages' => $tabPages, 'librariesPopupId' => 'link-viewer-gallery-popup-panel-right')); ?>
 				<li data-icon="false">
 					<a class="logout-button" href="#">Log Out</a>
 				</li>
+				<li data-role="list-divider"><p>Copyright 2015 adSALESapps.com</p></li>
 			</ul>
 		</div>
 		<div data-role="panel" data-display="overlay" data-position="right" id="link-viewer-gallery-popup-panel-right">

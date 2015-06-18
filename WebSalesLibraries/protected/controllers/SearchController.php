@@ -12,7 +12,18 @@
 
 		public function actionGetSearchView()
 		{
-			$this->renderPartial('searchView', array(), false, true);
+			$content = $this->renderPartial('searchView', array(), true);
+
+			echo CJSON::encode(array(
+				'content' => $content,
+				'options' => array(
+					'showCategory' => Yii::app()->params['search_options']['hide_tag'] != true,
+					'categoryColumnName' => Yii::app()->params['tags']['column_name'],
+					'showLibraries' => Yii::app()->params['search_options']['hide_libraries'] != true,
+					'librariesColumnName' => Yii::app()->params['stations']['column_name']
+				)
+			));
+			Yii::app()->end();
 		}
 
 		public function actionEditConditions()

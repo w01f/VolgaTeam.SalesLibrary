@@ -33,6 +33,8 @@
 				$rootFolderPath = realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . Yii::app()->params['librariesRoot'] . DIRECTORY_SEPARATOR . 'Libraries');
 				$rootFolder = new DirectoryIterator($rootFolderPath);
 
+				$aliases = $this->getLibraryAliases();
+
 				/** @var $libraryFolder DirectoryIterator */
 				foreach ($rootFolder as $libraryFolder)
 				{
@@ -70,6 +72,11 @@
 										$library->storageLink = $storageLink;
 										$library->logoPath = Yii::app()->params['librariesRoot'] . "/Graphics/" . $libraryFolder->getBasename() . "/no_logo.png";
 										$library->logoLink = str_replace(' ', '%20', htmlspecialchars($library->logoPath));
+
+										$library->alias = $libraryName;
+										if (array_key_exists($libraryName, $aliases))
+											$library->alias = $aliases[$libraryName];
+
 										$library->load();
 										Yii::app()->cacheDB->set($library->id, $library, (60 * 60 * 24 * 7));
 									}
@@ -275,5 +282,39 @@
 				$cookie->expire = time() + (60 * 60 * 24 * 7);
 				Yii::app()->request->cookies['selectedPageName'] = $cookie;
 			}
+		}
+
+		/**
+		 * @return array
+		 */
+		private function getLibraryAliases()
+		{
+			$aliases = array();
+			try
+			{
+				$aliasesFilePath = Yii::app()->params['appRoot'] . DIRECTORY_SEPARATOR . 'jqmlibraryalias.xml';
+				if (file_exists($aliasesFilePath))
+				{
+					$aliasesContent = file_get_contents($aliasesFilePath);
+					if ($aliasesContent)
+					{
+						$aliasesDom = new DOMDocument();
+						$aliasesDom->loadXML($aliasesContent);
+						$xpath = new DomXPath($aliasesDom);
+
+						/** @var $queryResult DOMElement[] */
+						$queryResult = $xpath->query('//LibraryAlias/Library');
+						foreach ($queryResult as $node)
+						{
+							$libraryName = $node->getAttribute('Name');
+							$libraryAlias = $node->getAttribute('Alias');
+							$aliases[$libraryName] = $libraryAlias;
+						}
+					}
+				}
+			} catch (Exception $e)
+			{
+			}
+			return $aliases;
 		}
 	}

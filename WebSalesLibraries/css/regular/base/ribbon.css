@@ -412,25 +412,9 @@ body
 	top: 150px !important;
 }
 
-#libraries-selector-container
-{
-	z-index: 999;
-}
-
 #user-info
 {
 	height: 60%;
-}
-
-#libraries-selector
- {
-	 width: 220px;
- }
-
-#libraries-selector .bootstrap-select
-{
-	margin-bottom: 3px;
-	width: 220px;
 }
 
 #page-logo

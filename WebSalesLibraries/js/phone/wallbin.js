@@ -11,7 +11,9 @@
 			$('#library-popup-panel-pages').find('.page-item a').off('click').on('click', function ()
 			{
 				var pageId = $(this).find('.service-data .page-id').text();
-				$('#library').find('.content-header .title a').html($(this).find('span').html());
+				var libraryPage = $('#library');
+				libraryPage.find('.content-header .title').html($(this).find('span').html());
+				libraryPage.find('.content-header .logo img').prop('src', $(this).find('.service-data .page-logo').text());
 				pageChanged(pageId);
 			});
 

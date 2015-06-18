@@ -6,13 +6,17 @@
 	{
 		var that = this;
 
-		var storedTextSize = $.cookie("textSize");
+		var storedTextSize = $.cookie("wallbinTextSize");
 		if (storedTextSize == null)
 			storedTextSize = 14;
+		else
+			storedTextSize = parseInt(storedTextSize);
 
-		var storedTextSpace = $.cookie("textSpace");
+		var storedTextSpace = $.cookie("wallbinTextSpace");
 		if (storedTextSpace == null)
 			storedTextSpace = 2;
+		else
+			storedTextSpace = parseInt(storedTextSpace);
 
 		this.init = function ()
 		{
@@ -42,7 +46,7 @@
 				async: true,
 				dataType: 'html'
 			});
-			$(window).off('resize').on('resize', updateContentSize);
+			$(window).off('resize').on('resize', that.updateContentSize);
 			var librarySelector = $('#select-library');
 			librarySelector.selectpicker();
 			librarySelector.off('change').on('change', function ()
@@ -115,7 +119,7 @@
 		{
 			updateTextSize(storedTextSize);
 			updateTextSpace(storedTextSpace);
-			updateContentSize();
+			that.updateContentSize();
 
 			$.mtReInit();
 
@@ -256,7 +260,7 @@
 				{
 					container.html('<div class="wallbin-content wallbin-container">' + msg + '</div>').find('img').load(function ()
 					{
-						updateContentSize();
+						that.updateContentSize();
 					});
 					that.assignLinkEvents(container);
 				},
@@ -347,7 +351,7 @@
 				success: function (msg)
 				{
 					container.html('<div class="wallbin-content">' + msg + '</div>');
-					assignAccordionEvents(container);
+					that.assignAccordionEvents(container);
 				},
 				error: function ()
 				{
@@ -358,9 +362,9 @@
 			});
 		};
 
-		var assignAccordionEvents = function (container)
+		this.assignAccordionEvents = function (container)
 		{
-			updateContentSize();
+			that.updateContentSize();
 			container.find('.folder-header')
 				.off('click')
 				.on('click', function ()
@@ -488,7 +492,7 @@
 					});
 					tabPages.tabs('paging', { follow: true });
 					if ($.cookie("wallbinView") == "accordion")
-						assignAccordionEvents(container);
+						that.assignAccordionEvents(container);
 					else
 						that.assignLinkEvents(container);
 				},
@@ -549,7 +553,7 @@
 				$('.link-container').css('margin-bottom', '14px');
 			}
 
-			$.cookie("textSpace", textSpace, {
+			$.cookie("wallbinTextSpace", textSpace, {
 				expires: (60 * 60 * 24 * 7)
 			});
 		};
@@ -558,12 +562,12 @@
 		{
 			$('.link-text, .link-note').css('font-size', textSize + 'pt');
 
-			$.cookie("textSize", textSize, {
+			$.cookie("wallbinTextSize", textSize, {
 				expires: (60 * 60 * 24 * 7)
 			});
 		};
 
-		var updateContentSize = function ()
+		this.updateContentSize = function ()
 		{
 			$.SalesPortal.Layout.updateContentSize();
 			var content = $('#content');

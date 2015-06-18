@@ -306,4 +306,17 @@
 		this.datasetKey = datasetKey;
 		this.dataset = dataset;
 	};
+
+	$.SalesPortal.SearchViewOptions = function (source)
+	{
+		this.showCategory = undefined;
+		this.categoryColumnName = undefined;
+		this.showLibraries = undefined;
+		this.librariesColumnName = undefined;
+
+		for (var prop in source)
+			if (source.hasOwnProperty(prop))
+				this[prop] = source[prop];
+	};
+
 })(jQuery);

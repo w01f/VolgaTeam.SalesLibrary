@@ -117,6 +117,9 @@
 
 	$showPageList = isset(Yii::app()->request->cookies['showQPageList']->value) ? Yii::app()->request->cookies['showQPageList']->value == "true" : true;
 	$showLinkCart = isset(Yii::app()->request->cookies['showLinkCart']->value) ? Yii::app()->request->cookies['showLinkCart']->value == "true" : true;
+
+	$libraryManager = new LibraryManager();
+	$libraries = $libraryManager->getLibraries();
 ?>
 <div id="ribbon">
 <div class="ribbon-window-title"></div>
@@ -137,7 +140,7 @@
 						<td><img src="" id="page-logo"/></td>
 						<td>
 							<table id="libraries-selector">
-								<tr>
+								<tr <? if (count($libraries) < 2): ?>style="display: none;" <? endif; ?>>
 									<td>
 										<label for="select-library"></label><select id="select-library" class="selectpicker"></select>
 									</td>

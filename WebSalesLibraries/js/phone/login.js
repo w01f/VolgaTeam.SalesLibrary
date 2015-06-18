@@ -1,6 +1,7 @@
 (function ($)
 {
 	window.BaseUrl = window.BaseUrl || '';
+	window.homePage = window.homePage || '';
 	$.SalesPortal = $.SalesPortal || { };
 	var AuthManager = function ()
 	{
@@ -90,6 +91,10 @@
 					dataType: 'html'
 				});
 			});
+			$('#site-help-request-link').off('click').on('click', function ()
+			{
+				$('#site-help-menu').popup('close');
+			});
 		};
 
 		this.logout = function ()
@@ -107,7 +112,11 @@
 				},
 				success: function ()
 				{
-					location.reload();
+					if (window.homePage != '')
+						window.open(window.homePage,"_self");
+					else
+						location.reload();
+
 				},
 				error: function ()
 				{

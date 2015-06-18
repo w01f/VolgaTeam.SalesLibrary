@@ -1,13 +1,17 @@
 <?
 	/**
 	 * @var $tabPages array
+	 * @var $librariesPopupId string
 	 */
+
+	$libraryManager = new LibraryManager();
+	$libraries = $libraryManager->getLibraries();
 ?>
 <? foreach ($tabPages as $tabName => $tabIndex): ?>
 	<? $url = TabPages::getTabUrl($tabName); ?>
 	<? if ($tabName == 'home_tab'): ?>
 		<li data-icon="false">
-			<a data-ajax="false" href="<? echo $url; ?>"><? echo Yii::app()->params['home_tab']['name'] ?></a>
+			<a data-ajax="false" href="<? echo count($libraries) > 1 ? ('#' . $librariesPopupId) : $url; ?>"><? echo Yii::app()->params['home_tab']['name'] ?></a>
 		</li>
 	<? elseif ($tabName == 'search_full_tab'): ?>
 		<li data-icon="false">

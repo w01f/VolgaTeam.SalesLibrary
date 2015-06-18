@@ -52,7 +52,7 @@
 				}
 			});
 
-			$('#form-login-data').off('submit').on('submit', function (form)
+			$('#form-login-data').off('submit').on('submit', function ()
 			{
 				var disclaimer = $('.disclaimer-text');
 				var continueLogin = false;
@@ -81,6 +81,7 @@
 					});
 					return false;
 				}
+				return true;
 			});
 
 			updateContentSize();
@@ -216,7 +217,7 @@
 					});
 					$.fancybox({
 						content: content,
-						title: 'Password recovery',
+						title: 'Site Help',
 						openEffect: 'none',
 						closeEffect: 'none'
 					});

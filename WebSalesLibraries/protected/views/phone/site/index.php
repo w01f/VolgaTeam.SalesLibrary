@@ -31,7 +31,7 @@
 					<? $url = TabPages::getTabUrl($tabName); ?>
 					<? if ($tabName == 'home_tab'): ?>
 						<? $logoContent = 'data:image/png;base64,' . base64_encode(file_get_contents($staticTabLogoFolderPath . DIRECTORY_SEPARATOR . 'stations.png')); ?>
-						<a class="cbp-item tab-item" data-ajax="false" href="<? echo $url; ?>">
+						<a class="cbp-item tab-item" data-ajax="false" href="#home-popup-panel-right">
 							<div class="cbp-caption">
 								<img class="logo" src="<? echo $logoContent; ?>">
 								<p class="title"><? echo Yii::app()->params['home_tab']['jqm_name'] ?></p>
@@ -82,13 +82,16 @@
 	</div>
 	<div data-role="panel" data-display="overlay" id="home-popup-panel-left">
 		<ul data-role="listview">
-			<li data-icon="false">
-				<a data-ajax="false" href="<? echo $siteUrl; ?>"><? echo $siteName; ?></a>
-			</li>
-			<? echo $this->renderPartial('../site/tabPageList', array('tabPages' => $tabPages)); ?>
+			<? if (Yii::app()->params['jqm_home_page_enabled'] == true): ?>
+				<li data-icon="false">
+					<a data-ajax="false" href="<? echo $siteUrl; ?>"><? echo $siteName; ?></a>
+				</li>
+			<? endif; ?>
+			<? echo $this->renderPartial('../site/tabPageList', array('tabPages' => $tabPages, 'librariesPopupId' => 'home-popup-panel-right')); ?>
 			<li data-icon="false">
 				<a class="logout-button" href="#">Log Out</a>
 			</li>
+			<li data-role="list-divider"><p>Copyright 2015 adSALESapps.com</p></li>
 		</ul>
 	</div>
 	<div data-role="panel" data-display="overlay" data-position="right" id="home-popup-panel-right">

@@ -7,6 +7,7 @@
 		var that = this;
 
 		var dataTable = new $.SalesPortal.SearchDataTable(true);
+		var viewOptions = undefined;
 
 		var currentSearchConditions = new $.SalesPortal.SearchConditions(function ()
 		{
@@ -29,14 +30,15 @@
 				{
 					$.SalesPortal.Overlay.hide();
 				},
-				success: function (msg)
+				success: function (data)
 				{
-					$('#content').html(msg);
+					$('#content').html(data.content);
+					viewOptions = new $.SalesPortal.SearchViewOptions(data.options);
 					applySearchConditions();
 					updateContentSize();
 				},
 				async: true,
-				dataType: 'html'
+				dataType: 'json'
 			});
 			$(window).off('resize').on('resize', updateContentSize);
 		};
@@ -500,7 +502,7 @@
 
 		var initDataTable = function ()
 		{
-			dataTable.init(existedSearchResults);
+			dataTable.init(existedSearchResults, viewOptions);
 		};
 
 		var updateContentSize = function ()

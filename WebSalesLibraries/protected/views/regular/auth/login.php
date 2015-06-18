@@ -89,12 +89,11 @@
 			<td colspan="2">
 				<div class="action-link-group">
 					<? if (Yii::app()->params['login']['forgotPasswordField']): ?>
-						<a id="recover-password-link" class="action-link gray" href="#view-dialog-container">Forgot Password</a>
+						<a id="recover-password-link" class="action-link gray" href="#view-dialog-container">Site Help</a>
 					<? endif; ?>
 					<? if (Yii::app()->params['login']['complex_password']): ?>
 						<a id="password-requirements" class="action-link gray" href="#">Password Requirements</a>
 					<? endif; ?>
-					<a class="action-link gray" href="mailto:<? echo Yii::app()->params['email']['from']; ?>">Site Help</a>
 				</div>
 			</td>
 		</tr>

@@ -6,7 +6,7 @@
 	{
 		var dataTable = undefined;
 
-		this.init = function (searchResults, sortColumnTag, sortDirection)
+		this.init = function (searchResults, viewOptions, sortColumnTag, sortDirection)
 		{
 			destroy();
 
@@ -39,62 +39,66 @@
 			tableContainer.html('<table id="search-results" class="table table-striped table-bordered"></table>');
 			var table = $("#search-results");
 
+			var columnSettings = [];
+			if (viewOptions.showCategory)
+				columnSettings.push({
+					"data": "tag",
+					"title": viewOptions.categoryColumnName,
+					"width": "15%"
+				});
+			if (viewOptions.showLibraries)
+				columnSettings.push({
+					"data": "library.name",
+					"title": viewOptions.librariesColumnName,
+					"class": "centered",
+					"width": "10%"
+				});
+
+			columnSettings.push({
+				"data": "file_type",
+				"title": "Type",
+				"class": "centered",
+				"width": "50px"
+			});
+			columnSettings.push({
+				"data": "name",
+				"title": "Link",
+				"render": function (data)
+				{
+					if (data != '')
+						return '<span class="mtTool" mtcontent="' + data.tooltip + '">' + data.value + '</span>';
+					return '';
+				}
+			});
+			columnSettings.push({
+				"data": "rate.image",
+				"title": "Rating",
+				"width": "90px",
+				"class": "centered",
+				"render": function (data)
+				{
+					if (data != '')
+						return '<img src="' + data + '" style="height:16px">';
+					return '';
+				}
+			});
+			columnSettings.push({
+				"data": "date.display",
+				"title": "Date",
+				"class": "centered",
+				"width": "80px"
+			});
+			columnSettings.push({
+				"data": "id",
+				"title": "Id",
+				"visible": false,
+				"searchable": false
+			});
+
 			dataTable = table
 				.dataTable({
 					"data": searchResults != undefined ? searchResults.dataset : [],
-					"columns": [
-						{
-							"data": "tag",
-							"title": "Category",
-							"width": "15%"
-						},
-						{
-							"data": "library.name",
-							"title": "Station",
-							"class": "centered",
-							"width": "10%"
-						},
-						{
-							"data": "file_type",
-							"title": "Type",
-							"class": "centered",
-							"width": "50px"
-						},
-						{
-							"data": "name",
-							"title": "Link",
-							"render": function (data)
-							{
-								if (data != '')
-									return '<span class="mtTool" mtcontent="' + data.tooltip + '">' + data.value + '</span>';
-								return '';
-							}
-						},
-						{
-							"data": "rate.image",
-							"title": "Rating",
-							"width": "90px",
-							"class": "centered",
-							"render": function (data)
-							{
-								if (data != '')
-									return '<img src="' + data + '" style="height:16px">';
-								return '';
-							}
-						},
-						{
-							"data": "date.display",
-							"title": "Date",
-							"class": "centered",
-							"width": "80px"
-						},
-						{
-							"data": "id",
-							"title": "Id",
-							"visible": false,
-							"searchable": false
-						}
-					],
+					"columns": columnSettings,
 					stateSave: saveState,
 					"order": [
 						[ sortColumnIndex, sortDirection != undefined ? sortDirection : "asc" ]

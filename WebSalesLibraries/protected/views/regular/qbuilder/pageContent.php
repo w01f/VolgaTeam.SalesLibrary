@@ -1,3 +1,8 @@
+<?
+	/**
+	 *@var $page QPageRecord
+	*/
+?>
 <div>
 	<? if (isset($page)): ?>
 		<form class="form-horizontal page-title">

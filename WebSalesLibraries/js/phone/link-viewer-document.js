@@ -66,6 +66,7 @@
 			{
 				if (e.toolbarAction === 'close')
 				{
+					updateSliderSize();
 					baseLinkViewerPage.find('.slider').slickGoTo(sliderCurrentPosition);
 				}
 			});

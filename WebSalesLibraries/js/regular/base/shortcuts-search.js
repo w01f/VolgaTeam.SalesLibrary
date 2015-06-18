@@ -7,6 +7,7 @@
 		var that = this;
 
 		var searchShortcutOptions = new $.SalesPortal.SearchOptions($.parseJSON(content.find('.search-conditions .encoded-object').text()));
+		var searchViewOptions = new $.SalesPortal.SearchViewOptions($.parseJSON(content.find('.search-view-options .encoded-object').text()));
 
 		var baseDatasetKey = undefined;
 
@@ -98,6 +99,7 @@
 					{
 						var searchResults = new $.SalesPortal.SearchResult(data.datasetKey, data.dataset);
 						dataTable.init(searchResults,
+							searchViewOptions,
 							searchShortcutOptions.conditions.sortColumn,
 							searchShortcutOptions.conditions.sortDirection
 						);
@@ -150,6 +152,7 @@
 					{
 						var searchResults = new $.SalesPortal.SearchResult(data.datasetKey, data.dataset);
 						dataTable.init(searchResults,
+							searchViewOptions,
 							searchShortcutOptions.conditions.sortColumn,
 							searchShortcutOptions.conditions.sortDirection
 						);
@@ -441,6 +444,7 @@
 					{
 						var searchResults = new $.SalesPortal.SearchResult(data.datasetKey, data.dataset);
 						dataTable.init(searchResults,
+							searchViewOptions,
 							selectedTemplateConditions.conditions.sortColumn != undefined ?
 								selectedTemplateConditions.conditions.sortColumn :
 								searchShortcutOptions.conditions.sortColumn,
@@ -552,6 +556,7 @@
 
 			dataTable.updateSize();
 		};
+
 		$(window).off('resize').on('resize', updateContentSize);
 
 		return that;

@@ -15,6 +15,7 @@
 		 * @soap
 		 */
 		public $name;
+		public $alias;
 		public $groupId;
 		public $order;
 		public $storagePath;
@@ -96,6 +97,20 @@
 				foreach ($this->autoWidgets as $autoWidget)
 					if (str_replace('.', '', $autoWidget->extension) == $extension)
 						return $autoWidget->widget;
+			return null;
+		}
+
+		/**
+		 * @param $pageId
+		 * @return LibraryPage|null
+		 */
+		public function getPageById($pageId)
+		{
+			$pages = $this->pages;
+			if (isset($pages))
+				foreach ($pages as $page)
+					if ($page->id == $pageId)
+						return $page;
 			return null;
 		}
 

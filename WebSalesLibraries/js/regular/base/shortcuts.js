@@ -108,6 +108,16 @@
 								var handler = getClickHandler('library-page', $(this).find('.service-data').html(), false);
 								handler();
 							});
+							$('.shortcuts-link.single-page.columns').off('click').on('click', function ()
+							{
+								var handler = getClickHandler('single-page-columns', $(this).find('.service-data').html(), false);
+								handler();
+							});
+							$('.shortcuts-link.single-page.accordion').off('click').on('click', function ()
+							{
+								var handler = getClickHandler('single-page-accordion', $(this).find('.service-data').html(), false);
+								handler();
+							});
 							break;
 						case 'carousel':
 							FWDU3DCarUtils.checkIfHasTransforms();
@@ -327,6 +337,79 @@
 							expires: (60 * 60 * 24 * 7)
 						});
 						window.location.reload();
+					};
+					break;
+				case 'single-page-columns':
+				case 'single-page-accordion':
+					return function ()
+					{
+						trackActivity(dataObject);
+
+						var content = $('#content');
+						var pageContent = content.find('.shortcuts-page-content');
+						var tabId = pageContent.attr('id').replace("shortcuts-page-content-", "");
+						var shortcutsTab = $('#shortcuts-tab-' + tabId);
+
+						var linkId = dataObject.find('.link-id').text();
+						var url = dataObject.find('.url').text();
+						var ribbonLogoPath = dataObject.find('.ribbon-logo-path');
+						shortcutsTab.find('.ribbon-tab-logo').hide();
+						if (ribbonLogoPath.length > 0)
+						{
+							var linkLogo = shortcutsTab.find('.ribbon-shortcut-custom-logo');
+							linkLogo.attr('src', ribbonLogoPath.html());
+							linkLogo.show();
+						}
+						else
+							shortcutsTab.find('.ribbon-shortcut-tab-logo').show();
+
+						var pageViewType = handlerType.replace(/single-page-/g, "");
+
+						$.ajax({
+							type: "POST",
+							url: window.BaseUrl + "shortcuts/getLibraryPageShortcut",
+							data: {linkId: linkId},
+							beforeSend: function ()
+							{
+								$.SalesPortal.Overlay.show(true);
+							},
+							complete: function ()
+							{
+								$.SalesPortal.Overlay.hide();
+							},
+							success: function (msg)
+							{
+								searchBar.changeVisibility(false);
+								searchBar.hideToggle();
+								hidePageModeToggle();
+
+								switch (pageViewType)
+								{
+									case 'columns':
+										pageContent.html('<div class="wallbin-content wallbin-container">' + msg + '</div>').find('img').load(function ()
+										{
+											$.SalesPortal.Shortcuts.updateContentSize();
+											$.SalesPortal.Wallbin.updateContentSize();
+										});
+										$.SalesPortal.Wallbin.assignLinkEvents(pageContent);
+										break;
+									case 'accordion':
+										pageContent.html('<div class="wallbin-content">' + msg + '</div>');
+										$.SalesPortal.Wallbin.assignAccordionEvents(pageContent);
+										$.SalesPortal.Shortcuts.updateContentSize();
+										$.SalesPortal.Wallbin.updateContentSize();
+										break;
+								}
+								$(window).off('resize').on('resize', function ()
+								{
+									$.SalesPortal.Shortcuts.updateContentSize();
+									$.SalesPortal.Wallbin.updateContentSize();
+								});
+								content.animate({scrollTop: 0}, 1);
+							},
+							async: true,
+							dataType: 'html'
+						});
 					};
 					break;
 			}

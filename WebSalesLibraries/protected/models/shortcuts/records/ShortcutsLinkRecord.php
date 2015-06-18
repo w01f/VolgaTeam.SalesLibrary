@@ -85,7 +85,9 @@
 				case 'window':
 					return new WindowShortcut($this);
 				case 'page':
-					return new PageShortcut($this);
+					return new LibraryPageShortcut($this);
+				case 'onlypage':
+					return new SinglePageShortcut($this);
 				case 'quicklist':
 					return new QuickListShortcut($this);
 				case 'search':

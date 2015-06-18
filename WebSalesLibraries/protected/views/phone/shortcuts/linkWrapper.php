@@ -9,9 +9,9 @@
 ?>
 <div id="shortcut-link-page" class="shortcut-link-page" data-role='page' data-cache="never" data-dom-cache="false" data-ajax="false">
 	<div data-role='header' class="page-header" data-position="fixed">
-		<a href="#search-results-popup-panel-left" data-icon="ion-navicon-round" data-iconpos="notext"></a>
+		<a href="#shortcut-link-page-popup-panel-left" data-icon="ion-navicon-round" data-iconpos="notext"></a>
 		<h1 class="header-title"><? echo $link->mobileHeader ?></h1>
-		<a href="#search-results-popup-panel-right" data-icon="ion-navicon-round" data-iconpos="notext"></a>
+		<a href="#shortcut-link-page-popup-panel-right" data-icon="ion-navicon-round" data-iconpos="notext"></a>
 	</div>
 	<div data-role='content' class="main-content">
 		<table class="content-header">
@@ -41,18 +41,21 @@
 			</div>
 		</div>
 	</div>
-	<div data-role="panel" data-display="overlay" id="search-results-popup-panel-left">
+	<div data-role="panel" data-display="overlay" id="shortcut-link-page-popup-panel-left">
 		<ul data-role="listview">
-			<li data-icon="false">
-				<a data-ajax="false" href="<? echo $siteUrl; ?>"><? echo $siteName; ?></a>
-			</li>
-			<? echo $this->renderPartial('../site/tabPageList', array('tabPages' => $tabPages)); ?>
+			<? if (Yii::app()->params['jqm_home_page_enabled'] == true): ?>
+				<li data-icon="false">
+					<a data-ajax="false" href="<? echo $siteUrl; ?>"><? echo $siteName; ?></a>
+				</li>
+			<? endif; ?>
+			<? echo $this->renderPartial('../site/tabPageList', array('tabPages' => $tabPages, 'librariesPopupId' => 'shortcut-link-page-popup-panel-right')); ?>
 			<li data-icon="false">
 				<a class="logout-button" href="#">Log Out</a>
 			</li>
+			<li data-role="list-divider"><p>Copyright 2015 adSALESapps.com</p></li>
 		</ul>
 	</div>
-	<div data-role="panel" data-display="overlay" data-position="right" id="search-results-popup-panel-right">
+	<div data-role="panel" data-display="overlay" data-position="right" id="shortcut-link-page-popup-panel-right">
 		<ul data-role="listview">
 			<? echo $this->renderPartial('../wallbin/libraryList'); ?>
 		</ul>

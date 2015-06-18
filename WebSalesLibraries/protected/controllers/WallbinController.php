@@ -104,6 +104,7 @@
 		public function actionGetLibraryPage()
 		{
 			$libraryId = Yii::app()->request->getQuery('libraryId');
+			$pageId = Yii::app()->request->getQuery('pageId');
 			$libraryManager = new LibraryManager();
 			if (isset($libraryId))
 				$library = $libraryManager->getLibraryById($libraryId);
@@ -115,9 +116,16 @@
 			}
 			if (isset($library))
 			{
+				$defaultPage = null;
+				if (isset($pageId))
+					$defaultPage = $library->getPageById($pageId);
+				if (!isset($defaultPage))
+					$defaultPage = $library->pages[0];
+
 				$tabPages = TabPages::getList();
 				$this->render('libraryPage', array(
 					'library' => $library,
+					'defaultPage' => $defaultPage,
 					'tabPages' => $tabPages
 				));
 			}

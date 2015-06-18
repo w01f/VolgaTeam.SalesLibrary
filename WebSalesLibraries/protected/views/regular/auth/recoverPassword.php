@@ -1,7 +1,12 @@
 <table class="tool-dialog">
 	<tr>
 		<td>
-			<legend>Password Recovery</legend>
+			<legend>Site Help</legend>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<p>Reset your account password:</p>
 		</td>
 	</tr>
 	<tr>
