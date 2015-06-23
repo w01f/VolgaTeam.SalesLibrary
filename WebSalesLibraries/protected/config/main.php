@@ -31,6 +31,7 @@
 			'application.models.wallbin.records.*',
 			'application.models.search.*',
 			'application.models.preview.*',
+			'application.models.user_tabs.*',
 		),
 		'behaviors' => array(
 			'onBeginRequest' => array(

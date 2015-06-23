@@ -1,6 +1,7 @@
 <?
 	/**
 	 * @var $tabPages array
+	 * @var $userLibraryPages LibraryTab[]
 	 */
 
 	$cs = Yii::app()->clientScript;
@@ -70,10 +71,18 @@
 						<? endif; ?>
 					<? endif; ?>
 				<? endforeach; ?>
+				<? foreach ($userLibraryPages as $userLibraryPage): ?>
+					<a class="cbp-item tab-item" data-ajax="false" href="<? echo $userLibraryPage->contentUrl; ?>">
+						<div class="cbp-caption">
+							<img class="logo" src="<? echo $userLibraryPage->iconUrl; ?>">
+							<p class="title"><? echo $userLibraryPage->name; ?></p>
+						</div>
+					</a>
+				<? endforeach; ?>
 			</div>
 		</div>
 	</div>
-	<div class="page-footer main-footer" data-role='footer' data-id="ribbon" data-position="fixed" data-theme="a">
+	<div class="page-footer main-footer" data-role='footer'  data-position="fixed" data-theme="a">
 			<span class="ui-mini login">
 				<? if (isset(Yii::app()->user->login)): ?>
 					<? echo Yii::app()->user->login; ?>

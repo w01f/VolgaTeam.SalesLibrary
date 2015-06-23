@@ -48,7 +48,7 @@
 			</ul>
 		</div>
 	</div>
-	<div class="page-footer main-footer" data-role='footer' data-id="ribbon" data-position="fixed" data-theme="a">
+	<div class="page-footer main-footer" data-role='footer'  data-position="fixed" data-theme="a">
 		<div class="ui-grid-a">
 			<div class="ui-block-a">
 				<? if ($authorized): ?>

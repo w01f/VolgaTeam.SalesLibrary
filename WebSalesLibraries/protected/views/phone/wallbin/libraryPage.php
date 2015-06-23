@@ -2,6 +2,7 @@
 	/**
 	 * @var $library Library
 	 * @var $defaultPage LibraryPage
+	 * @var $tabPageExisted boolean
 	 * @var $tabPages array
 	 */
 
@@ -46,19 +47,33 @@
 			<? echo $this->renderPartial('pageContent', array('page' => $defaultPage)); ?>
 		</div>
 	</div>
-	<div class="page-footer main-footer" data-role='footer' data-id="ribbon" data-position="fixed" data-theme="a">
-		<div class="ui-grid-a">
-			<div class="ui-block-a">
+	<div class="page-footer main-footer" data-role='footer' data-position="fixed" data-theme="a">
+		<ul data-role="listview">
+			<li class="library-action delete-library-page<? if ($tabPageExisted == true): ?> active-action<? endif; ?>">
+				<h4>
+					<a data-rel="popup" data-position-to="window" href="#library-popup-delete-tab-page">Remove this Library from the HOME SCREEN</a>
+				</h4>
+			</li>
+			<li class="library-action add-library-page<? if ($tabPageExisted != true): ?> active-action<? endif; ?>">
+				<h4>
+					<a data-rel="popup" data-position-to="window" href="#library-popup-add-tab-page">Add this Library to the HOME SCREEN</a>
+				</h4>
+			</li>
+			<li class="footer-info">
+				<div class="ui-grid-a">
+					<div class="ui-block-a">
 				<span class="ui-mini login">
 					<? if (isset(Yii::app()->user->login)): ?>
 						<? echo Yii::app()->user->login; ?>
 					<? endif; ?>
 				</span>
-			</div>
-			<div class="ui-block-b entities-count">
-				<span class="ui-mini"><? echo LinkRecord::getLinksCountByLibrary($library->id); ?> files</span>
-			</div>
-		</div>
+					</div>
+					<div class="ui-block-b entities-count">
+						<span class="ui-mini"><? echo LinkRecord::getLinksCountByLibrary($library->id); ?> files</span>
+					</div>
+				</div>
+			</li>
+		</ul>
 	</div>
 	<div data-role="panel" data-display="overlay" id="library-popup-panel-left">
 		<ul data-role="listview">
@@ -96,5 +111,40 @@
 			<? endforeach; ?>
 			<li data-role="list-divider"><p>Copyright 2015 adSALESapps.com</p></li>
 		</ul>
+	</div>
+	<div id="library-popup-add-tab-page" data-role="popup" data-theme="a" data-overlay-theme="d" data-dismissible="false">
+		<div data-role="header" data-theme="d">
+			<h1><? echo $library->alias ?></h1>
+		</div>
+		<div role="main" style="padding:0 20px">
+			<p class="warning-text">Add the <? echo $library->alias ?> Library to your HOME SCREEN?</p>
+			<div class="ui-grid-a">
+				<div class="ui-block-a">
+					<a class="accept-action" href="#" data-role="button" data-theme="d">Add</a>     
+				</div>
+				<div class="ui-block-b">
+					<a href="#" data-role="button" data-theme="d" data-rel="back">Cancel</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="library-popup-delete-tab-page" data-role="popup" data-theme="a" data-overlay-theme="d" data-dismissible="false">
+		<div data-role="header" data-theme="d">
+			<h1><? echo $library->alias ?></h1>
+		</div>
+		<div role="main" style="padding:0 20px">
+			<p class="warning-text">REMOVE the <? echo $library->alias ?> Library from your HOME SCREEN?</p>
+			<div class="ui-grid-a">
+				<div class="ui-block-a">
+					<a class="accept-action" href="#" data-role="button" data-theme="d">Remove</a>     
+				</div>
+				<div class="ui-block-b">
+					<a href="#" data-role="button" data-theme="d" data-rel="back">Cancel</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="service-data">
+		<div class="library-id"><? echo $library->id; ?></div>
 	</div>
 </div>

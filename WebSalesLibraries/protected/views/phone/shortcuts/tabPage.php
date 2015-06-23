@@ -61,7 +61,7 @@
 			?>
 		</div>
 	</div>
-	<div class="page-footer main-footer" data-role='footer' data-id="ribbon" data-position="fixed" data-theme="a">
+	<div class="page-footer main-footer" data-role='footer'  data-position="fixed" data-theme="a">
 		<span class="ui-mini login">
 			<? if (isset(Yii::app()->user->login)): ?>
 				<? echo Yii::app()->user->login; ?>

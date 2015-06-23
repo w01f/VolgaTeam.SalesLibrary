@@ -123,9 +123,18 @@
 					$defaultPage = $library->pages[0];
 
 				$tabPages = TabPages::getList();
+				if (isset(Yii::app()->user))
+				{
+					$userId = Yii::app()->user->getId();
+					$tabPageExisted = UserTabRecord::isUserTabExists($userId, $library->id);
+				}
+				else
+					$tabPageExisted = false;
+
 				$this->render('libraryPage', array(
 					'library' => $library,
 					'defaultPage' => $defaultPage,
+					'tabPageExisted' => $tabPageExisted,
 					'tabPages' => $tabPages
 				));
 			}

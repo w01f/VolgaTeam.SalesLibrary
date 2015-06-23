@@ -51,7 +51,7 @@
 			<a href="<? echo $data->url; ?>" target="_blank"><img src="<? echo $data->url; ?>"></a>
 		</div>
 	</div>
-	<div class="page-footer main-footer" data-role='footer' data-id="ribbon" data-position="fixed" data-theme="a">
+	<div class="page-footer main-footer" data-role='footer'  data-position="fixed" data-theme="a">
 		<div class="ui-grid-a">
 			<div class="ui-block-a">
 				<? if ($authorized): ?>

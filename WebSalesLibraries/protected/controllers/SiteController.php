@@ -16,7 +16,20 @@
 			if ($this->isPhone)
 			{
 				if (Yii::app()->params['jqm_home_page_enabled'] == true)
-					$this->render('index', array('tabPages' => $tabPages));
+				{
+					if (isset(Yii::app()->user))
+					{
+						$userId = Yii::app()->user->getId();
+						$userLibraryTabs = UserTabRecord::getLibraryTabs($userId);
+					}
+					else
+						$userLibraryTabs = array();
+
+					$this->render('index', array(
+						'tabPages' => $tabPages,
+						'userLibraryPages' => $userLibraryTabs
+					));
+				}
 				else
 				{
 					foreach ($tabPages as $tabName => $tabIndex)

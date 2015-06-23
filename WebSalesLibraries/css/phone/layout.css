@@ -60,6 +60,21 @@
 	color: #959595;
 }
 
+.main-footer.ui-footer
+{
+	padding-left: 0;
+}
+
+.main-footer .ui-listview .footer-info
+{
+	padding: 0;
+}
+
+.main-footer .login
+{
+	padding-left: 0.5em;
+}
+
 .main-footer .entities-count
 {
 	text-align: right;

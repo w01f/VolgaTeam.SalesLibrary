@@ -91,7 +91,7 @@
 		</div>
 	</div>
 	<? if ($authorized): ?>
-		<div class="page-footer main-footer" data-role='footer' data-id="ribbon" data-position="fixed" data-theme="a">
+		<div class="page-footer main-footer" data-role='footer'  data-position="fixed" data-theme="a">
 			<div class="ui-grid-a">
 				<div class="ui-block-a">
 				<span class="ui-mini login">
