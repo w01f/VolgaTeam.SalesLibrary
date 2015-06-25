@@ -31,6 +31,9 @@
 
 	$siteUrl = Yii::app()->getBaseUrl(true);
 	$siteName = str_replace('http://', '', $siteUrl);
+
+	$libraryManager = new LibraryManager();
+	$allLibraries = $libraryManager->getLibraries();
 ?>
 <div data-role='page' id="library" data-cache="never" data-dom-cache="false" data-ajax="false">
 	<div data-role='header' class="page-header" data-position="fixed" data-theme="a">
@@ -49,16 +52,18 @@
 	</div>
 	<div class="page-footer main-footer" data-role='footer' data-position="fixed" data-theme="a">
 		<ul data-role="listview">
-			<li class="library-action delete-library-page<? if ($tabPageExisted == true): ?> active-action<? endif; ?>">
-				<h4>
-					<a data-rel="popup" data-position-to="window" href="#library-popup-delete-tab-page">Remove this Library from the HOME SCREEN</a>
-				</h4>
-			</li>
-			<li class="library-action add-library-page<? if ($tabPageExisted != true): ?> active-action<? endif; ?>">
-				<h4>
-					<a data-rel="popup" data-position-to="window" href="#library-popup-add-tab-page">Add this Library to the HOME SCREEN</a>
-				</h4>
-			</li>
+			<? if (count($allLibraries) > 1): ?>
+				<li class="library-action delete-library-page<? if ($tabPageExisted == true): ?> active-action<? endif; ?>">
+					<h4>
+						<a data-rel="popup" data-position-to="window" href="#library-popup-delete-tab-page">Remove this Library from the HOME SCREEN</a>
+					</h4>
+				</li>
+				<li class="library-action add-library-page<? if ($tabPageExisted != true): ?> active-action<? endif; ?>">
+					<h4>
+						<a data-rel="popup" data-position-to="window" href="#library-popup-add-tab-page">Add this Library to the HOME SCREEN</a>
+					</h4>
+				</li>
+			<? endif; ?>
 			<li class="footer-info">
 				<div class="ui-grid-a">
 					<div class="ui-block-a">

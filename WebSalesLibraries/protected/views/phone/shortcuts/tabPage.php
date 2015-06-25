@@ -107,4 +107,17 @@
 			<? endforeach; ?>
 		</ul>
 	</div>
+	<div id="shortcuts-link-download-warning-popup" data-role="popup" data-theme="a" data-overlay-theme="d" data-dismissible="false">
+		<div data-role="header" data-theme="d">
+			<h1>Message</h1>
+		</div>
+		<div role="main" style="padding:0 20px">
+			<p>File Downloads are Disabled for Mobile Devices</p>
+			<div class="ui-grid-solo" style="padding:0 80px">
+				<div class="ui-block-a">
+					<a href="#" data-role="button" data-theme="d" data-rel="back">OK</a>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

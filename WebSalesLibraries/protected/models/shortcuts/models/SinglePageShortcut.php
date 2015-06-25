@@ -14,8 +14,7 @@
 		{
 			parent::__construct($linkRecord);
 
-			$version = Yii::app()->cacheDB->get('siteVersion');
-			$this->viewPath = Yii::app()->browser->isMobile() && isset($version) && $version == 'mobile' ? 'pageLink' : 'singlePageLink';
+			$this->viewPath = 'singlePageLink';
 
 			$linkConfig = new DOMDocument();
 			$linkConfig->loadXML($linkRecord->config);

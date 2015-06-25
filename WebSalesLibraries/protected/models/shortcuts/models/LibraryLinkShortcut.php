@@ -47,6 +47,7 @@
 		{
 			$result = '';
 			$result .= '<div class="link-id">' . $this->linkId . '</div>';
+			$result .= '<div class="mobile-header">' . $this->mobileHeader . '</div>';
 			$result .= '<div class="activity-data">' . CJSON::encode(array(
 					'action' => 'Shortcut File Link',
 					'title' => sprintf('%s - %s', $this->name, $this->tooltip)

@@ -56,6 +56,11 @@
 							shortcutsLinks.html(data.content);
 							initPageContent();
 						});
+					else
+					{
+						shortcutsLinks.html(data.content);
+						initPageContent();
+					}
 				},
 				async: true,
 				dataType: 'json'
@@ -75,6 +80,39 @@
 			shortcutsLinks.find('.shortcuts-link.empty').off('click').on('click', function (e)
 			{
 				e.stopPropagation();
+			});
+
+			shortcutsLinks.find('.shortcuts-link.mp4').off('click').on('click', function (e)
+			{
+				e.stopPropagation();
+				e.preventDefault();
+
+				var shortcutData = $(this).find('.service-data');
+				var url = shortcutData.find('.url').text();
+
+				openPage(
+					shortcutData,
+					function ()
+					{
+						var pageContainer = $('#shortcut-link-page');
+						var videoContent = pageContainer.find('.content-data');
+						videoContent.html('<video ' +
+							'id="video-player" ' +
+							'class="video-js vjs-default-skin" ' +
+							'controls preload="auto" ' +
+							'width="100%" ' +
+							'data-setup="{"autoplay":false}">' +
+							'<source src="' + url + '" type="video/mp4"/>' +
+							'</video>');
+						$.mobile.changePage("#shortcut-link-page", {
+							transition: "slidefade"
+						});
+						$.mobile.loading('hide', {
+							textVisible: false,
+							html: ""
+						});
+					}
+				);
 			});
 
 			shortcutsLinks.find('.shortcuts-link.search').off('click').on('click', function (e)
@@ -102,7 +140,7 @@
 					shortcutData.find('.link-id').text(),
 					{
 						id: '#shortcuts',
-						name: shortcutLinkTitle
+						name: shortcutData.find('.mobile-header').length > 0 ? shortcutData.find('.mobile-header').text() : shortcutLinkTitle
 					},
 					false
 				);
@@ -247,7 +285,7 @@
 			});
 		};
 
-		var openPage = function (shortcutData, getContentHandler)
+		var openPage = function (shortcutData, linkInitializer)
 		{
 			cleanupPreviousInstance();
 
@@ -271,7 +309,7 @@
 				{
 					$('body').append($(msg));
 					$.mobile.initializePage();
-					getContentHandler();
+					linkInitializer();
 				},
 				async: true,
 				dataType: 'html'

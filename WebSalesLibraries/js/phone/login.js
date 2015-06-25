@@ -102,6 +102,20 @@
 			{
 				switchVersion();
 			});
+
+			var tabletLoginContent = $('.login-content.tablet');
+			if (tabletLoginContent.length > 0)
+			{
+				var windowWidth = $(window).width();
+				var margin = '0 ' + (windowWidth / 4) + 'px';
+				tabletLoginContent.css({
+					'margin': margin
+				});
+
+				$('#disclaimer').css({
+					'margin': margin
+				});
+			}
 		};
 
 		this.logout = function ()
@@ -172,4 +186,5 @@
 	{
 		$.SalesPortal.Auth.init();
 	});
-})(jQuery);
+})
+	(jQuery);

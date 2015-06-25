@@ -29,6 +29,8 @@
 		public function getServiceData()
 		{
 			$result = '';
+			$result .= '<div class="link-id">' . $this->id . '</div>';
+			$result .= '<div class="url">' . $this->sourceLink . '</div>';
 			$result .= '<div class="file-type">mp4</div>';
 			$result .= '<div class="view-type">mp4</div>';
 			$result .= '<div class="links">'

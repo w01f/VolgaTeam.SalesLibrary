@@ -18,7 +18,7 @@
 			$linkConfig = new DOMDocument();
 			$linkConfig->loadXML($linkRecord->config);
 
-			$this->viewPath = Yii::app()->browser->isMobile() ? 'directLink' : 'downloadLink';
+			$this->viewPath = 'downloadLink';
 
 			$nameTags = $linkConfig->getElementsByTagName("Source");
 			$this->fileName = $nameTags->length > 0 ? trim($nameTags->item(0)->nodeValue) : '';

@@ -312,6 +312,7 @@
 				$tabPages = TabPages::getList();
 				switch ($linkRecord->type)
 				{
+					case 'mp4':
 					case 'window':
 					case 'page':
 					case 'onlypage':
