@@ -3,16 +3,18 @@
 	/** @var $formData LoginForm */
 
 	$cs = Yii::app()->clientScript;
-	$cs->registerCssFile(Yii::app()->baseUrl . '/vendor/bootstrap/css/bootstrap.min.css?' . Yii::app()->params['version']);
-	$cs->registerCssFile(Yii::app()->baseUrl . '/vendor/fancybox/source/jquery.fancybox.css?' . Yii::app()->params['version']);
-	$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/base/login.css?' . Yii::app()->params['version']);
-	$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/base/tool-dialog.css?' . Yii::app()->params['version']);
-	$cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/bootstrap/js/bootstrap.min.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
+	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/vendor/bootstrap/css/bootstrap.min.css?' . Yii::app()->params['version']);
+	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/vendor/switcher/css/bootstrap-switch.min.css?' . Yii::app()->params['version']);
+	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/vendor/fancybox/source/jquery.fancybox.css?' . Yii::app()->params['version']);
+	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/regular/base/login.css?' . Yii::app()->params['version']);
+	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/regular/base/tool-dialog.css?' . Yii::app()->params['version']);
+	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/bootstrap/js/bootstrap.min.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/switcher/js/bootstrap-switch.min.js?' . Yii::app()->params['version']);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/fancybox/source/jquery.fancybox.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
-	$cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/fancybox/source/helpers/jquery.fancybox-thumbs.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
-	$cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/fancybox/lib/jquery.mousewheel-3.0.6.pack.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
-	$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/overlay.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
-	$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/login.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/fancybox/source/helpers/jquery.fancybox-thumbs.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/fancybox/lib/jquery.mousewheel-3.0.6.pack.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/base/overlay.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/base/login.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
 ?>
 
 <div id="content">
@@ -85,6 +87,15 @@
 				<button type="submit" id="button-login" class="btn btn-default">Log In</button>
 			</td>
 		</tr>
+		<? if (Yii::app()->browser->isMobile()): ?>
+			<tr>
+				<td colspan="2">
+					<div class="action-link-group">
+						<label class="ui-hide-label" for="button-switch-version"></label><input id="button-switch-version" type="checkbox" checked data-on-text="Desktop Site" data-off-text="Mobile Site">
+					</div>
+				</td>
+			</tr>
+		<? endif; ?>
 		<tr>
 			<td colspan="2">
 				<div class="action-link-group">
@@ -100,7 +111,7 @@
 	</table>
 	<? $this->endWidget(); ?>
 </div>
-<? if (Yii::app()->params['login']['disclaimer']==true): ?>
+<? if (Yii::app()->params['login']['disclaimer'] == true): ?>
 	<div class="disclaimer-text"><? echo Yii::app()->params['login']['disclaimerText']; ?></div>
 <? endif; ?>
 <div id="content-overlay">

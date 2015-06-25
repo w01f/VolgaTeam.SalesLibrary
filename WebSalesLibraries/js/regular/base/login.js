@@ -14,6 +14,13 @@
 				resetPassword();
 			});
 
+			var modeSwitchButton = $('#button-switch-version');
+			if (typeof(modeSwitchButton.bootstrapSwitch) == "function")
+				modeSwitchButton.bootstrapSwitch().on('switchChange.bootstrapSwitch', function ()
+				{
+					switchVersion();
+				});
+
 			passwordRequirementsTag.off('click').on('click', function (e)
 			{
 				e.preventDefault();
@@ -221,6 +228,34 @@
 						openEffect: 'none',
 						closeEffect: 'none'
 					});
+				},
+				error: function ()
+				{
+				},
+				async: true,
+				dataType: 'html'
+			});
+		};
+
+		var switchVersion = function ()
+		{
+			$.ajax({
+				type: "POST",
+				url: window.BaseUrl + "site/switchVersion",
+				data: {
+					siteVersion: 'mobile'
+				},
+				beforeSend: function ()
+				{
+					$.SalesPortal.Overlay.show(true);
+				},
+				complete: function ()
+				{
+					$.SalesPortal.Overlay.hide();
+				},
+				success: function ()
+				{
+					location.reload();
 				},
 				error: function ()
 				{

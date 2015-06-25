@@ -22,6 +22,7 @@
 				$("#disclaimer").popup("close");
 				$('#button-login').click();
 			});
+
 			$('#button-recover-password').off('click').on('click', function ()
 			{
 				$.ajax({
@@ -91,9 +92,15 @@
 					dataType: 'html'
 				});
 			});
+
 			$('#site-help-request-link').off('click').on('click', function ()
 			{
 				$('#site-help-menu').popup('close');
+			});
+
+			$('#button-switch-version').on('change', function ()
+			{
+				switchVersion();
 			});
 		};
 
@@ -113,10 +120,44 @@
 				success: function ()
 				{
 					if (window.homePage != '')
-						window.open(window.homePage,"_self");
+						window.open(window.homePage, "_self");
 					else
 						location.reload();
 
+				},
+				error: function ()
+				{
+				},
+				async: true,
+				dataType: 'html'
+			});
+		};
+
+		var switchVersion = function ()
+		{
+			$.ajax({
+				type: "POST",
+				url: window.BaseUrl + "site/switchVersion",
+				data: {
+					siteVersion: 'desktop'
+				},
+				beforeSend: function ()
+				{
+					$.mobile.loading('show', {
+						textVisible: false,
+						html: ""
+					});
+				},
+				complete: function ()
+				{
+					$.mobile.loading('hide', {
+						textVisible: false,
+						html: ""
+					});
+				},
+				success: function ()
+				{
+					location.reload();
 				},
 				error: function ()
 				{

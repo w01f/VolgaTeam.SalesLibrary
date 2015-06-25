@@ -3,6 +3,20 @@
 	margin-bottom: 15px;
 }
 
+#shortcuts-links .cbp-item
+{
+	margin-top: 20px;
+	width: 256px;
+	height: 256px;
+}
+
+#shortcuts-links .cbp-item .logo
+{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
 .shortcuts-link
 {
 	display: block;

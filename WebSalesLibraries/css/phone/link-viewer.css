@@ -22,6 +22,16 @@
 	max-width: 100%;
 }
 
+.link-viewer-page .slick-slide
+{
+	text-align: center;
+}
+
+.link-viewer-page .slider img
+{
+	display: inline-block;
+}
+
 .link-viewer-page .main-footer .link-viewer-info
 {
 	text-align: right;

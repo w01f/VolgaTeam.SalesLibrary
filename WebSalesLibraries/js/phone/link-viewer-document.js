@@ -107,8 +107,12 @@
 		var updateSliderSize = function ()
 		{
 			var windowWidth = $(window).width();
-			$('#link-viewer').find('.slider img, .slider .slick-track, .slider .slick-track .slick-slide').css({
-				'width': '100%'
+			var linkViewer = $('#link-viewer');
+			linkViewer.find('.slider .slick-track, .slider .slick-track .slick-active').css({
+				'width': windowWidth + 'px'
+			});
+			linkViewer.find('.slider img').css({
+				'width': 'auto'
 			});
 		};
 	};

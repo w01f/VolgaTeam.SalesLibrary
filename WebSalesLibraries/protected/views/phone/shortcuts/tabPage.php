@@ -11,6 +11,7 @@
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/vendor/photoswipe/photoswipe.css?' . Yii::app()->params['version']);
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/vendor/slick-slider/slick.css?' . Yii::app()->params['version']);
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/vendor/video-js/video-js.min.css?' . Yii::app()->params['version']);
+	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/vendor/cubeportfolio/css/cubeportfolio.min.css?' . Yii::app()->params['version']);
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/phone/layout.css?' . Yii::app()->params['version']);
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/phone/shortcuts.css?' . Yii::app()->params['version']);
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/phone/search-result.css?' . Yii::app()->params['version']);
@@ -22,6 +23,7 @@
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/photoswipe/code.photoswipe.jquery-3.0.5.min.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/slick-slider/slick.min.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/video-js/video.min.js', CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/cubeportfolio/js/jquery.cubeportfolio.min.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/common/search-processor.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/common/link-viewer-data.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/phone/login.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
@@ -54,14 +56,14 @@
 				<a data-rel="popup" data-ajax="false" href="#shortcuts-popup-panel-pages"><? echo $currentPage->name; ?></a>
 			</h3>
 		<? endif; ?>
-		<div class="ui-grid-solo" id="shortcuts-links">
+		<div id="shortcuts-links">
 			<?
 				if (isset($currentPage))
 					echo $this->renderPartial('page', array('page' => $currentPage), true);
 			?>
 		</div>
 	</div>
-	<div class="page-footer main-footer" data-role='footer'  data-position="fixed" data-theme="a">
+	<div class="page-footer main-footer" data-role='footer' data-position="fixed" data-theme="a">
 		<span class="ui-mini login">
 			<? if (isset(Yii::app()->user->login)): ?>
 				<? echo Yii::app()->user->login; ?>

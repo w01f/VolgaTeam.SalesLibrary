@@ -49,8 +49,13 @@
 				},
 				success: function (data)
 				{
-					$('#shortcuts-links').html(data.content);
-					initPageContent();
+					var shortcutsLinks = $('#shortcuts-links');
+					if (shortcutsLinks.find('ul').length > 0)
+						shortcutsLinks.cubeportfolio('destroy', function ()
+						{
+							shortcutsLinks.html(data.content);
+							initPageContent();
+						});
 				},
 				async: true,
 				dataType: 'json'
@@ -61,7 +66,11 @@
 		{
 			var shortcutsLinks = $('#shortcuts-links');
 
-			shortcutsLinks.find('ul').listview();
+			if (shortcutsLinks.find('ul').length > 0)
+				shortcutsLinks.cubeportfolio({
+					gridAdjustment: 'alignCenter',
+					caption: ''
+				});
 
 			shortcutsLinks.find('.shortcuts-link.empty').off('click').on('click', function (e)
 			{

@@ -74,4 +74,14 @@
 					$this->render('errorMessage', $error);
 			}
 		}
+
+		public function actionSwitchVersion()
+		{
+			$version = Yii::app()->request->getPost('siteVersion');
+			if (isset($version))
+			{
+				Yii::app()->cacheDB->set('siteVersion', $version, (60 * 60 * 24 * 7));
+				Yii::app()->end();
+			}
+		}
 	}
