@@ -296,6 +296,9 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 					if (thumbsLinks != null && thumbsLinks.Length > 0)
 						previewContainer.thumbsLinks = thumbsLinks;
 
+					var thumbsPhoneLinks = libraryPreviewContainer.GetPreviewLinks("thumbs_phone");
+					if (thumbsPhoneLinks != null && thumbsPhoneLinks.Length > 0)
+						previewContainer.thumbsPhoneLinks = thumbsPhoneLinks;
 				}
 				var mp4Links = libraryPreviewContainer.GetPreviewLinks("mp4");
 				if (mp4Links != null && mp4Links.Length > 0)

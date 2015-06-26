@@ -938,6 +938,8 @@ namespace SalesDepot.Services.ContentManagmentService {
         
         private string[] thumbsLinksField;
         
+        private string[] thumbsPhoneLinksField;
+        
         private int thumbsWidthField;
         
         private int thumbsHeightField;
@@ -1049,6 +1051,16 @@ namespace SalesDepot.Services.ContentManagmentService {
             }
             set {
                 this.thumbsLinksField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string[] thumbsPhoneLinks {
+            get {
+                return this.thumbsPhoneLinksField;
+            }
+            set {
+                this.thumbsPhoneLinksField = value;
             }
         }
         

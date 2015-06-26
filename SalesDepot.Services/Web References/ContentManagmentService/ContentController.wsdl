@@ -291,6 +291,7 @@
           <xsd:element name="mp4ThumbLinks" type="tns:stringArray" />
           <xsd:element name="newOfficeFormatLinks" type="tns:stringArray" />
           <xsd:element name="thumbsLinks" type="tns:stringArray" />
+          <xsd:element name="thumbsPhoneLinks" type="tns:stringArray" />
           <xsd:element name="thumbsWidth" type="xsd:int" />
           <xsd:element name="thumbsHeight" type="xsd:int" />
         </xsd:all>
