@@ -27,20 +27,6 @@
 		<div class="content-data">
 		</div>
 	</div>
-	<div class="page-footer main-footer" data-role='footer'  data-position="fixed" data-theme="a">
-		<div class="ui-grid-a">
-			<div class="ui-block-a">
-				<span class="ui-mini login">
-					<? if (isset(Yii::app()->user->login)): ?>
-						<? echo Yii::app()->user->login; ?>
-					<? endif; ?>
-				</span>
-			</div>
-			<div class="ui-block-b">
-				<span class="ui-mini"></span>
-			</div>
-		</div>
-	</div>
 	<div data-role="panel" data-display="overlay" id="shortcut-link-page-popup-panel-left">
 		<ul data-role="listview">
 			<? if (Yii::app()->params['jqm_home_page_enabled'] == true): ?>
@@ -52,6 +38,7 @@
 			<li data-icon="false">
 				<a class="logout-button" href="#">Log Out</a>
 			</li>
+			<li data-role="list-divider"><p class="user-info">User: <? echo Yii::app()->user->login; ?></p></li>
 			<li data-role="list-divider"><p>Copyright 2015 adSALESapps.com</p></li>
 		</ul>
 	</div>

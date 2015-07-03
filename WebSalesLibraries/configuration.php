@@ -65,9 +65,9 @@
 					'column_name' => 'Tag',
 				),
 				'search_options' => array(
-					'hide_tag' => true,
-					'hide_supertag' => true,
-					'hide_libraries' => true,
+					'hide_tag' => false,
+					'hide_supertag' => false,
+					'hide_libraries' => false,
 				),
 				'tooltips' => array(
 					'wallbin' => array(

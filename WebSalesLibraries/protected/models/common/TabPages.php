@@ -35,7 +35,7 @@
 			if ($tabName == 'home_tab')
 				return Yii::app()->createAbsoluteUrl('wallbin/getLibraryPage');
 			else if ($tabName == 'search_full_tab')
-				return Yii::app()->createAbsoluteUrl('site/empty');
+				return Yii::app()->createAbsoluteUrl('search/getSearchView');
 			else if ($tabName == 'favorites_tab')
 				return Yii::app()->createAbsoluteUrl('site/empty');
 			else if (strpos($tabName, 'shortcuts-tab-') !== false)

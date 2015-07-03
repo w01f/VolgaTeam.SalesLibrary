@@ -12,18 +12,29 @@
 
 		public function actionGetSearchView()
 		{
-			$content = $this->renderPartial('searchView', array(), true);
-
-			echo CJSON::encode(array(
-				'content' => $content,
-				'options' => array(
-					'showCategory' => Yii::app()->params['search_options']['hide_tag'] != true,
-					'categoryColumnName' => Yii::app()->params['tags']['column_name'],
-					'showLibraries' => Yii::app()->params['search_options']['hide_libraries'] != true,
-					'librariesColumnName' => Yii::app()->params['stations']['column_name']
-				)
-			));
-			Yii::app()->end();
+			$searchOptions = array(
+				'showCategory' => Yii::app()->params['search_options']['hide_tag'] != true,
+				'categoryColumnName' => Yii::app()->params['tags']['column_name'],
+				'showLibraries' => Yii::app()->params['search_options']['hide_libraries'] != true,
+				'librariesColumnName' => Yii::app()->params['stations']['column_name']
+			);
+			if ($this->isPhone)
+			{
+				$tabPages = TabPages::getList();
+				$this->render('searchView', array(
+					'searchOptions' => $searchOptions,
+					'tabPages' => $tabPages
+				));
+			}
+			else
+			{
+				$content = $this->renderPartial('searchView', array(), true);
+				echo CJSON::encode(array(
+					'content' => $content,
+					'options' => $searchOptions
+				));
+				Yii::app()->end();
+			}
 		}
 
 		public function actionEditConditions()

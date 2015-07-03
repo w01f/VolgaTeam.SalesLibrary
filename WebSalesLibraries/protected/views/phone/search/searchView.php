@@ -1,20 +1,270 @@
-<label for="search-keyword" class="ui-hide-label"></label>
-<input type="search" name="search" id="search-keyword" value=""/>
-<fieldset id="search-match-selector" data-role="controlgroup" data-mini="true">
-	<input type="radio" name="radio-choice" id="search-match-exact" value="choice-1"/>
-	<label for="search-match-exact">Exact Match</label>
-	<input type="radio" name="radio-choice" id="search-match-partial" value="choice-1"/>
-	<label for="search-match-partial">Partial Match</label>
-</fieldset>
-<? if (Yii::app()->params['search_options']['hide_duplicate']): ?>
-	<input type="checkbox" name="hide-duplicated" id="hide-duplicated" class="custom" data-mini="true" />
-	<label for="hide-duplicated">Hide Duplicates</label>
-<? endif; ?>
-<fieldset id="search-fields-options-container" data-role="controlgroup" data-mini="true">
-	<input type="radio" name="radio-choice" id="content-only-file" value="choice-1"/>
-	<label for="content-only-file">File Names Only</label>
-	<input type="radio" name="radio-choice" id="content-only-text" value="choice-2"/>
-	<label for="content-only-text">File Content Only</label>
-	<input type="radio" name="radio-choice" id="content-full" value="choice-3"/>
-	<label for="content-full">Full Database</label>
-</fieldset>
+<?
+	/**
+	 * @var $searchOptions array
+	 * @var $tabPages array
+	 */
+
+	$cs = Yii::app()->clientScript;
+	$cs->registerCoreScript('jquery.ui');
+	$cs->registerCoreScript('cookie');
+	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/vendor/mobile/css/jquery.mobile.ios.theme.css?' . Yii::app()->params['version']);
+	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/vendor/photoswipe/photoswipe.css?' . Yii::app()->params['version']);
+	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/vendor/slick-slider/slick.css?' . Yii::app()->params['version']);
+	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/vendor/video-js/video-js.min.css?' . Yii::app()->params['version']);
+	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/vendor/mobile-datepicker/jquery.mobile.datepicker.css?' . Yii::app()->params['version']);
+	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/vendor/mobile-datepicker/jquery.mobile.datepicker.theme.css?' . Yii::app()->params['version']);
+	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/phone/layout.css?' . Yii::app()->params['version']);
+	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/phone/search-result.css?' . Yii::app()->params['version']);
+	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/phone/link-viewer.css?' . Yii::app()->params['version']);
+	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/phone/wallbin.css?' . Yii::app()->params['version']);
+	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/phone/search.css?' . Yii::app()->params['version']);
+	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/json/jquery.json-2.3.min.js', CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/mobile/js/jquery.mobile.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/photoswipe/lib/klass.min.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/photoswipe/code.photoswipe.jquery-3.0.5.min.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/slick-slider/slick.min.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/video-js/video.min.js', CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/datepicker/js/moment.min.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/mobile-datepicker/jquery.mobile.datepicker.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/common/search-processor.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/common/link-viewer-data.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/phone/login.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/phone/data-table.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/phone/wallbin.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/phone/link-viewer.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/phone/link-viewer-file.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/phone/link-viewer-document.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/phone/search.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
+
+
+	$siteUrl = Yii::app()->getBaseUrl(true);
+	$siteName = str_replace('http://', '', $siteUrl);
+
+	$categories = new CategoryManager();
+	$categories->loadCategories();
+
+	$libraryManager = new LibraryManager();
+	$libraries = $libraryManager->getLibraries();
+	$libraryGroups = $libraryManager->getLibraryGroups();
+?>
+	<div data-role='page' id="search" data-cache="never" data-dom-cache="false" data-ajax="false">
+	<div data-role='header' class="page-header" data-position="fixed" data-theme="a">
+		<a href="#search-popup-panel-left" data-icon="ion-navicon-round" data-iconpos="notext"></a>
+		<h1 class="header-title">Search</h1>
+		<a href="#search-popup-panel-right" data-icon="ion-navicon-round" data-iconpos="notext"></a>
+	</div>
+	<div data-role='content' class="main-content">
+		<?
+			$navBarTabsCount = 2;
+			if (Yii::app()->params['search_options']['hide_tag'] != true)
+				$navBarTabsCount++;
+			if (Yii::app()->params['search_options']['hide_supertag'] != true || Yii::app()->params['search_options']['hide_libraries'] != true)
+				$navBarTabsCount++;
+
+			switch ($navBarTabsCount)
+			{
+				case 3:
+					$navBarGridColumnIndex = 'b';
+					break;
+				case 4:
+					$navBarGridColumnIndex = 'c';
+					break;
+				default:
+					$navBarGridColumnIndex = 'a';
+					break;
+			}
+		?>
+		<div id="search-tabs" data-role="tabs">
+			<div class="navbar" data-role="navbar" data-grid="<? echo $navBarGridColumnIndex; ?>">
+				<ul>
+					<li><a href="#search-tab-filters" class="ui-btn-active">Filters</a></li>
+					<li><a href="#search-tab-file-types">Files</a></li>
+					<? if (Yii::app()->params['search_options']['hide_tag'] != true): ?>
+						<li><a href="#search-tab-categories"><? echo Yii::app()->params['tags']['tab_name']; ?></a>
+						</li>
+					<? endif; ?>
+					<? if (Yii::app()->params['search_options']['hide_supertag'] != true || Yii::app()->params['search_options']['hide_libraries'] != true): ?>
+						<li><a href="#search-tab-libraries">Advanced</a></li>
+					<? endif; ?>
+				</ul>
+			</div>
+			<div id="search-tab-filters" class="ui-content search-tab-content">
+				<legend>What are you looking for?</legend>
+				<ul class="edit-fields" data-role="listview">
+					<li class="edit-field" data-icon="false">
+						<label for="search-tab-filters-text" class="ui-hidden-accessible"></label>
+						<input type="text" id="search-tab-filters-text" value="" placeholder="Type keyword here…">
+					</li>
+					<li class="edit-field" data-icon="false">
+						<label for="search-tab-filters-date-start" class="ui-hidden-accessible"></label>
+						<input type="text" id="search-tab-filters-date-start" placeholder="Start Date" data-role="date" readonly>
+					</li>
+					<li class="edit-field" data-icon="false">
+						<label for="search-tab-filters-date-end" class="ui-hidden-accessible"></label>
+						<input type="text" id="search-tab-filters-date-end" placeholder="End Date" data-role="date" readonly>
+					</li>
+				</ul>
+				<legend style="margin-top: 40px;">Filter Search by:</legend>
+				<div class="ui-grid-a">
+					<div class="ui-block-a">
+						<label class="ios-checkbox ui-icon-ion-checkmark" for="search-tab-filters-file-name-only">File Names Only</label>
+						<input type="checkbox" id="search-tab-filters-file-name-only">
+					</div>
+					<div class="ui-block-b">
+						<label class="ios-checkbox ui-icon-ion-checkmark" for="search-tab-filters-exact-search">Exact Search</label>
+						<input type="checkbox" id="search-tab-filters-exact-search">
+					</div>
+				</div>
+			</div>
+			<div id="search-tab-file-types" class="ui-content search-tab-content">
+				<legend>Specific File Types:</legend>
+				<fieldset data-role="controlgroup">
+					<label for="search-tab-file-types-power-point" class="ios-checkbox ui-icon-ion-checkmark">PowerPoint</label><input type="checkbox" id="search-tab-file-types-power-point" class="search-tab-file-type-toggle">
+					<label for="search-tab-file-types-video" class="ios-checkbox ui-icon-ion-checkmark">Video</label><input type="checkbox" id="search-tab-file-types-video" class="search-tab-file-type-toggle">
+					<label for="search-tab-file-types-pdf" class="ios-checkbox ui-icon-ion-checkmark">Adobe PDF</label><input type="checkbox" id="search-tab-file-types-pdf" class="search-tab-file-type-toggle">
+					<label for="search-tab-file-types-word" class="ios-checkbox ui-icon-ion-checkmark">Word Document</label><input type="checkbox" id="search-tab-file-types-word" class="search-tab-file-type-toggle">
+					<label for="search-tab-file-types-excel" class="ios-checkbox ui-icon-ion-checkmark">Excel Files</label><input type="checkbox" id="search-tab-file-types-excel" class="search-tab-file-type-toggle">
+					<label for="search-tab-file-types-image" class="ios-checkbox ui-icon-ion-checkmark">JPEG-PNG Images</label><input type="checkbox" id="search-tab-file-types-image" class="search-tab-file-type-toggle">
+					<label for="search-tab-file-types-url" class="ios-checkbox ui-icon-ion-checkmark">Web URL Links</label><input type="checkbox" id="search-tab-file-types-url" class="search-tab-file-type-toggle">
+				</fieldset>
+			</div>
+			<? if (Yii::app()->params['search_options']['hide_tag'] != true): ?>
+				<div id="search-tab-categories" class="ui-content search-tab-content">
+					<legend>Specific Categories:</legend>
+					<div class="category-group-buttons">
+						<? foreach ($categories->groups as $group): ?>
+							<? $groupCode = hash('md5', $group); ?>
+							<a href="#search-category-group-panel-<? echo $groupCode; ?>" id="search-category-group-toggle-<? echo $groupCode; ?>" class="category-group-button" data-role="button" data-mini="true" data-inline="true" data-ajax="false"><? echo $group; ?></a>
+						<? endforeach; ?>
+					</div>
+				</div>
+			<? endif; ?>
+			<? if (Yii::app()->params['search_options']['hide_supertag'] != true || Yii::app()->params['search_options']['hide_libraries'] != true): ?>
+				<div id="search-tab-libraries" class="ui-content search-tab-content">
+					<legend>Advanced Options:</legend>
+					<div class="advanced-filter-buttons">
+						<? if (Yii::app()->params['search_options']['hide_libraries'] != true): ?>
+							<a href="#search-library-panel" id="search-filter-library-button" class="advanced-filter-button" data-role="button" data-theme="a">Search specific libraries?</a>
+						<? endif; ?>
+						<? if (Yii::app()->params['search_options']['hide_supertag'] != true && isset($categories->superFilters)): ?>
+							<a href="#search-super-filter-panel" id="search-super-filter-button" class="advanced-filter-button" data-role="button" data-theme="a">Search for special tags?</a>
+						<? endif; ?>
+					</div>
+				</div>
+			<? endif; ?>
+		</div>
+	</div>
+	<div class="page-footer main-footer" data-role='footer' data-position="fixed" data-theme="a">
+		<ul data-role="listview">
+			<li class="search-actions">
+				<div class="ui-grid-a">
+					<div class="ui-block-a">
+						<a id="search-button-clear" class="search-action" data-role="button" data-icon="delete" data-inline="true" data-theme="a" data-ajax="false">Clear</a>
+					</div>
+					<div class="ui-block-b">
+						<a id="search-button-run" class="search-action" data-role="button" data-icon="search" data-inline="true" data-theme="a" data-ajax="false">Search</a>
+					</div>
+				</div>
+			</li>
+		</ul>
+	</div>
+	<div data-role="panel" data-display="overlay" id="search-popup-panel-left">
+		<ul data-role="listview">
+			<? if (Yii::app()->params['jqm_home_page_enabled'] == true): ?>
+				<li data-icon="false">
+					<a data-ajax="false" href="<? echo $siteUrl; ?>"><? echo $siteName; ?></a>
+				</li>
+			<? endif; ?>
+			<? echo $this->renderPartial('../site/tabPageList', array('tabPages' => $tabPages, 'librariesPopupId' => 'search-popup-panel-right')); ?>
+			<li data-icon="false">
+				<a class="logout-button" href="#">Log Out</a>
+			</li>
+			<li data-role="list-divider"><p class="user-info">User: <? echo Yii::app()->user->login; ?></p></li>
+			<li data-role="list-divider"><p>Copyright 2015 adSALESapps.com</p></li>
+		</ul>
+	</div>
+	<div data-role="panel" data-display="overlay" data-position="right" id="search-popup-panel-right">
+		<ul data-role="listview">
+			<? echo $this->renderPartial('../wallbin/libraryList'); ?>
+		</ul>
+	</div>
+	<? if (Yii::app()->params['search_options']['hide_tag'] != true): ?>
+		<? foreach ($categories->groups as $group): ?>
+			<? $groupCode = hash('md5', $group); ?>
+			<div id="search-category-group-panel-<? echo $groupCode; ?>" class="search-category-group-panel" data-role="panel" data-display="overlay" data-position="right">
+				<div data-role='header'>
+					<h3><span class="group-name"><? echo $group; ?></span>:</h3>
+				</div>
+				<div data-role='content'>
+					<div class="ui-grid-a buttons">
+						<div class="ui-block-a">
+							<a class="select-all" href="#" data-role="button" data-inline="true" data-mini="true" data-theme="d">Select All</a>
+						</div>
+						<div class="ui-block-b">
+							<a class="clear-all" href="#" data-role="button" data-inline="true" data-mini="true" data-theme="d">Clear All</a>
+						</div>
+					</div>
+					<fieldset data-role="controlgroup">
+						<legend>What categories do you want to look for?</legend>
+						<? foreach ($categories->getTagsByGroup($group) as $tag): ?>
+							<? $tagCode = hash('md5', $tag['tag']); ?>
+							<label for="search-category-tag-<? echo $tagCode; ?>" class="ios-checkbox ui-icon-ion-checkmark"><? echo $tag['tag']; ?></label>
+							<input type="checkbox" id="search-category-tag-<? echo $tagCode; ?>" class="search-category-tag-toggle">
+						<? endforeach; ?>
+					</fieldset>
+					<div class="ui-grid-solo buttons">
+						<div class="ui-block-a">
+							<a class="accept" href="#search" data-role="button" data-inline="true" data-rel="close" data-mini="true" data-theme="d">Apply</a>
+						</div>
+					</div>
+				</div>
+				<div class="service-data">
+					<div class="category-group-code"><? echo $groupCode; ?></div>
+				</div>
+			</div>
+		<? endforeach; ?>
+	<? endif; ?>
+	<? if (Yii::app()->params['search_options']['hide_libraries'] != true): ?>
+		<div id="search-library-panel" data-role="panel" data-display="overlay" data-position="right">
+			<div data-role='content'>
+				<? foreach ($libraryGroups as $group): ?>
+					<fieldset data-role="controlgroup">
+						<legend><? echo $group->name; ?>:</legend>
+						<? foreach ($group->libraries as $library): ?>
+							<label for="search-library-item-<? echo $library->id; ?>" class="ios-checkbox ui-icon-ion-checkmark"><? echo $library->name; ?></label>
+							<input type="checkbox" id="search-library-item-<? echo $library->id; ?>" class="search-filter-library-toggle" value="<? echo $library->id; ?>">
+						<? endforeach; ?>
+					</fieldset>
+				<? endforeach; ?>
+				<div class="ui-grid-solo buttons">
+					<div class="ui-block-a">
+						<a class="accept" href="#search" data-role="button" data-inline="true" data-rel="close" data-mini="true" data-theme="d">Apply</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	<? endif; ?>
+	<? if (Yii::app()->params['search_options']['hide_supertag'] != true && isset($categories->superFilters)): ?>
+		<div id="search-super-filter-panel" data-role="panel" data-display="overlay" data-position="right">
+			<div data-role='header'>
+				<h3>Super Tags:</h3>
+			</div>
+			<div data-role='content'>
+				<fieldset data-role="controlgroup">
+					<legend>Search for files with these special tags...</legend>
+					<? $count = count($categories->superFilters); ?>
+					<? for ($i = 0; $i < $count; $i++): ?>
+						<label for="search-super-filter-item-<? echo $i; ?>" class="ios-checkbox ui-icon-ion-checkmark"><? echo $categories->superFilters[$i]->value; ?></label>
+						<input type="checkbox" id="search-super-filter-item-<? echo $i; ?>" class="search-super-filter-toggle">
+					<? endfor; ?>
+				</fieldset>
+				<div class="ui-grid-solo buttons">
+					<div class="ui-block-a">
+						<a class="accept" href="#search" data-role="button" data-inline="true" data-rel="close" data-mini="true" data-theme="d">Apply</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	<? endif; ?>
+	</div>
+<? $this->renderPartial('searchResultPage', array('tabPages' => $tabPages, 'parentId' => 'search')); ?>

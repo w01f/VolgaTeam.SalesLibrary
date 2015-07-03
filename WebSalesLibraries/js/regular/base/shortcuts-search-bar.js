@@ -92,7 +92,8 @@
 				that.hideToggle();
 				var content = $('#content').find('.shortcuts-page-content');
 				searchBarOptions.conditions = searchBarConditions.getConditionsFormatted();
-				content.html('<div class="search-conditions" style="display: none;"><div class="encoded-object">' + $.toJSON(searchBarOptions) + '</div></div>');
+				content.html('<div class="search-conditions" style="display: none;"><div class="encoded-object">' + $.toJSON(searchBarOptions) + '</div></div>' +
+					'<div class="search-view-options" style="display: none;"><div class="encoded-object">' + $.toJSON(searchViewOptions) + '</div></div>');
 				$.SalesPortal.ShortcutsSearchManager(content, shortcutPageId);
 			}
 			else
@@ -376,6 +377,7 @@
 		{
 			var shortcutPageId = pageId;
 			var searchBarOptions = new $.SalesPortal.SearchOptions($.parseJSON(searchBar.find('.search-conditions .encoded-object').text()));
+			var searchViewOptions = new $.SalesPortal.SearchOptions($.parseJSON(searchBar.find('.search-view-options .encoded-object').text()));
 			var searchBarConditions = new $.SalesPortal.SearchConditions(function ()
 			{
 

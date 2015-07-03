@@ -5,7 +5,6 @@
 	 */
 
 	$cs = Yii::app()->clientScript;
-	$cs->registerCoreScript('jquery');
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/vendor/mobile/css/jquery.mobile.ios.theme.css?' . Yii::app()->params['version']);
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/vendor/cubeportfolio/css/cubeportfolio.min.css?' . Yii::app()->params['version']);
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/phone/layout.css?' . Yii::app()->params['version']);
@@ -40,7 +39,7 @@
 						</a>
 					<? elseif ($tabName == 'search_full_tab'): ?>
 						<? $logoContent = 'data:image/png;base64,' . base64_encode(file_get_contents($staticTabLogoFolderPath . DIRECTORY_SEPARATOR . 'search.png')); ?>
-						<a class="cbp-item tab-item not-working" data-ajax="false" href="<? echo $url; ?>">
+						<a class="cbp-item tab-item" data-ajax="false" href="<? echo $url; ?>">
 							<div class="cbp-caption">
 								<img class="logo" src="<? echo $logoContent; ?>">
 								<p class="title"><? echo Yii::app()->params['search_full_tab']['jqm_name'] ?></p>
@@ -82,13 +81,6 @@
 			</div>
 		</div>
 	</div>
-	<div class="page-footer main-footer" data-role='footer'  data-position="fixed" data-theme="a">
-			<span class="ui-mini login">
-				<? if (isset(Yii::app()->user->login)): ?>
-					<? echo Yii::app()->user->login; ?>
-				<? endif; ?>
-			</span>
-	</div>
 	<div data-role="panel" data-display="overlay" id="home-popup-panel-left">
 		<ul data-role="listview">
 			<? if (Yii::app()->params['jqm_home_page_enabled'] == true): ?>
@@ -100,6 +92,7 @@
 			<li data-icon="false">
 				<a class="logout-button" href="#">Log Out</a>
 			</li>
+			<li data-role="list-divider"><p class="user-info">User: <? echo Yii::app()->user->login; ?></p></li>
 			<li data-role="list-divider"><p>Copyright 2015 adSALESapps.com</p></li>
 		</ul>
 	</div>

@@ -6,7 +6,7 @@
 	{
 		var dataset = searchResults;
 		var pageContainer = $('#search-results');
-		var tableContainer = undefined;
+		var tableContainer = parentPageData.id;
 		var contentHeaderContainer = pageContainer.find('.content-header');
 
 		var populateTable = function (dataArray, columnTag, direction)
@@ -31,7 +31,7 @@
 				tableBody.append(tr);
 			});
 
-			tableBody.find('tr').off('click').on('click', function (e)
+			tableBody.find('tr').off('click').on('click', function ()
 			{
 				$.SalesPortal.LinkManager.requestViewDialog($(this).find('.link-id').text(), parentPageData, false);
 			})

@@ -2,7 +2,6 @@
 	/** @var $page QPageRecord */
 
 	$cs = Yii::app()->clientScript;
-	$cs->registerCoreScript('jquery');
 	$cs->registerCoreScript('cookie');
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/vendor/mobile/css/jquery.mobile.ios.theme.css?' . Yii::app()->params['version']);
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/vendor/photoswipe/photoswipe.css?' . Yii::app()->params['version']);
@@ -90,21 +89,6 @@
 			<p><? echo strip_tags($page->footer); ?></p>
 		</div>
 	</div>
-	<? if ($authorized): ?>
-		<div class="page-footer main-footer" data-role='footer'  data-position="fixed" data-theme="a">
-			<div class="ui-grid-a">
-				<div class="ui-block-a">
-				<span class="ui-mini login">
-					<? if (isset(Yii::app()->user->login)): ?>
-						<? echo Yii::app()->user->login; ?>
-					<? endif; ?>
-				</span>
-				</div>
-				<div class="ui-block-b">
-				</div>
-			</div>
-		</div>
-	<? endif; ?>
 	<div id="email-warning-dialog" data-role="popup" data-theme="a" data-overlay-theme="d" data-dismissible="false">
 		<div data-role="header" data-theme="d">
 			<h1>Email</h1>
@@ -126,6 +110,7 @@
 				<li data-icon="false">
 					<a class="logout-button" href="#">Log Out</a>
 				</li>
+				<li data-role="list-divider"><p class="user-info">User: <? echo Yii::app()->user->login; ?></p></li>
 				<li data-role="list-divider"><p>Copyright 2015 adSALESapps.com</p></li>
 			</ul>
 		</div>

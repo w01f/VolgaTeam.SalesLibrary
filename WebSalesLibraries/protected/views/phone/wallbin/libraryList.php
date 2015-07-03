@@ -16,4 +16,8 @@
 		</li>
 	<? endforeach; ?>
 <?endif; ?>
+<li data-icon="false">
+	<a class="logout-button" href="#">Log Out</a>
+</li>
+<li data-role="list-divider"><p class="user-info">User: <? echo Yii::app()->user->login; ?></p></li>
 <li data-role="list-divider"><p>Copyright 2015 adSALESapps.com</p></li>

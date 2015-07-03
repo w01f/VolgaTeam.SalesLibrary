@@ -1,42 +1,154 @@
-table.layout-group
+#search .main-footer .search-actions
 {
-	width: 100%;
+	padding: 0;
 }
 
-#search-match-selector td
-{
-	padding-right: 10%;
-	padding-left: 10%;
-}
-
-table.layout-group td
-{
-	vertical-align: middle;
-	height: 25px;
-}
-
-table.layout-group td.on-left
-{
-	text-align: left;
-}
-
-table.layout-group td.on-right
-{
-	text-align: right;
-}
-
-table.layout-group td.on-center
+#search .main-footer .search-actions div
 {
 	text-align: center;
 }
 
-.layout-group-title
+#search .main-footer .search-action
 {
-	white-space: normal;
-	word-wrap: break-word;
+	font-size: 1.1em;
+	border-color: transparent !important;
+	margin: 0;
 }
 
-.dataset-key
+#search-tabs .navbar .ui-state-active a
 {
-	display: none;
+	background-color: #4A87EE;
+	border-color: #4A87EE;
+	color: #FFFFFF;
+}
+
+#search-tabs .navbar .ui-btn-active
+{
+	color: #FFFFFF;
+}
+
+#search-tabs .search-tab-content
+{
+	padding-top: 20px;
+}
+
+#search-tabs .search-tab-content > legend
+{
+	text-align: left;
+}
+
+#search-tabs .search-tab-content .edit-fields
+{
+	margin-top: 15px !important;
+	margin-bottom: 15px !important;
+}
+
+#search-tabs .search-tab-content .edit-field
+{
+	font-size: 0.9em;
+}
+
+#search-tabs .search-tab-content .edit-field label
+{
+	text-align: left;
+	color: #959595;
+	font-size: 0.9em;
+}
+
+#search-tabs .search-tab-content .ui-checkbox label
+{
+	font-size: 0.9em;
+}
+
+#search-tab-filters legend
+{
+	padding: 0 20px;
+}
+
+#search-tab-filters .ui-checkbox label
+{
+	border-color: transparent !important;
+}
+
+#search-tab-file-types legend
+{
+	padding: 0 20px;
+}
+
+#search-tab-file-types fieldset
+{
+	padding: 20px 0 20px;
+	margin: 0;
+	font-size: 0.9em;
+}
+
+#search-tab-categories legend
+{
+	padding: 0 20px;
+	margin: 0;
+}
+
+#search-tab-categories .category-group-buttons
+{
+	padding: 20px 0 0;
+	margin: 0;
+	font-size: 0.9em;
+	text-align: center;
+}
+
+#search .search-category-group-panel,
+#search-library-panel,
+#search-super-filter-panel
+{
+	padding: 0 10px;
+}
+
+#search .search-category-group-panel .ui-header .ui-title,
+#search-super-filter-panel .ui-header .ui-title
+{
+	text-align: left;
+	margin: 0;
+}
+
+#search .search-category-group-panel fieldset legend,
+#search .search-category-group-panel fieldset label,
+#search-library-panel fieldset label,
+#search-super-filter-panel fieldset label
+{
+	font-size: 0.9em;
+}
+
+#search .search-category-group-panel .buttons,
+#search-library-panel .buttons,
+#search-super-filter-panel .buttons
+{
+	text-align: center;
+}
+
+#search-tab-libraries legend
+{
+	padding: 0 20px;
+	margin: 0 0 40px;
+}
+
+#search-tab-libraries .advanced-filter-buttons
+{
+	padding: 0 20px;
+}
+
+#search-tab-libraries .advanced-filter-button
+{
+	margin-bottom: 40px;
+	border-color: #4A87EE;
+}
+
+#ui-datepicker-div
+{
+	z-index: 9999 !important;
+	font-size: 0.9em;
+}
+
+#ui-datepicker-div .ui-datepicker-calendar td a
+{
+	font-size: 0.8em;
 }

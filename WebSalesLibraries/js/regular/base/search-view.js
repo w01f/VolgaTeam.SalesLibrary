@@ -218,7 +218,7 @@
 									categories.push({
 										name: groupName,
 										items: tags
-									})
+									});
 								}
 							});
 						currentSearchConditions.setCategorySettings(categories);
