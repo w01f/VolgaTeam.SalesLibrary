@@ -283,6 +283,28 @@
 					}
 				);
 			});
+
+			shortcutsLinks.find('.shortcuts-link.qpage').off('click').on('click', function (e)
+			{
+				e.stopPropagation();
+				e.preventDefault();
+
+				var shortcutData = $(this).find('.service-data');
+				openPage(
+					shortcutData,
+					function ()
+					{
+						$.SalesPortal.QPage.init();
+						$.mobile.changePage("#quicksite", {
+							transition: "slidefade"
+						});
+						$.mobile.loading('hide', {
+							textVisible: false,
+							html: ""
+						});
+					}
+				);
+			});
 		};
 
 		var openPage = function (shortcutData, linkInitializer)

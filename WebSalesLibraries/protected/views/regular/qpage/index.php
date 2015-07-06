@@ -1,4 +1,6 @@
 <?php
+	/** @var $page QPageRecord */
+
 	$cs = Yii::app()->clientScript;
 	$cs->registerCssFile($cs->getCoreScriptUrl() . '/jui/css/metro/jquery-ui.min.css');
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/vendor/fancybox/source/jquery.fancybox.css?' . Yii::app()->params['version']);

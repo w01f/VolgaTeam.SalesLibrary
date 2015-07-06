@@ -60,6 +60,7 @@
 						$handlerType = 'download';
 						break;
 					case 'url':
+					case 'qpage':
 					case 'file':
 					case 'window':
 					case 'search':

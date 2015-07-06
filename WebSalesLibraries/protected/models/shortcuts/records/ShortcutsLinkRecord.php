@@ -76,6 +76,8 @@
 					return new VideoShortcut($this);
 				case 'url':
 					return new UrlShortcut($this);
+				case 'qpage':
+					return new QPageShortcut($this);
 				case 'file':
 					return new FileShortcut($this);
 				case 'download':

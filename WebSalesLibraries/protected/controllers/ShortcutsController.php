@@ -1,5 +1,6 @@
 <?php
 	Yii::import('application.extensions.phpQuery.phpQuery.phpQuery');
+
 	/**
 	 * Class ShortcutsController
 	 */
@@ -326,6 +327,16 @@
 					case 'search':
 						$this->renderPartial('../search/searchResultPage', array(
 							'tabPages' => $tabPages,
+							'parentId' => 'shortcuts'
+						));
+						break;
+					case 'qpage':
+						/** @var $qPageShortcut QPageShortcut */
+						$qPageShortcut = $linkRecord->getModel();
+						/** @var $pageRecord QPageRecord */
+						$pageRecord = QPageRecord::model()->findByPk($qPageShortcut->pageId);
+						$this->renderPartial('../qpage/pageContent', array(
+							'page' => $pageRecord,
 							'parentId' => 'shortcuts'
 						));
 						break;
