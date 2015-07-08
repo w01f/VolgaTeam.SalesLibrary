@@ -21,7 +21,7 @@
 			baseLinkViewerPage.find('.main-content .content-header .back a').prop('href', parentPageData.id);
 
 			var popupOpenFile = baseLinkViewerPage.find('#link-viewer-open-menu');
-			popupOpenFile.find('.popup-open-action').off('click').on('click', function ()
+			baseLinkViewerPage.find('.popup-open-action').off('click').on('click', function ()
 			{
 				popupOpenFile.popup('close');
 			});
@@ -83,6 +83,8 @@
 				e.preventDefault();
 				$.SalesPortal.Auth.logout();
 			});
+
+			$.SalesPortal.EmailManager.init();
 
 			$.mobile.initializePage();
 			$.mobile.changePage("#link-viewer", {

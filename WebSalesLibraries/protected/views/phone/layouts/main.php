@@ -6,6 +6,8 @@
 	<?
 		$cs = Yii::app()->clientScript;
 		$cs->registerCoreScript('jquery');
+		$cs->registerCoreScript('jquery.ui');
+		$cs->registerCoreScript('cookie');
 	?>
 	<script type="text/javascript">
 		window.BaseUrl = '<? echo Yii::app()->getBaseUrl(true); ?>' + '/';

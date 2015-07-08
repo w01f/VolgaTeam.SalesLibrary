@@ -25,6 +25,8 @@
 				$.SalesPortal.Auth.logout();
 			});
 
+			$.SalesPortal.EmailManager.init();
+
 			$.mobile.initializePage();
 			$.mobile.changePage("#link-viewer", {
 				transition: "slidefade"
@@ -46,6 +48,7 @@
 					open();
 					break;
 				case 'quicksite':
+					$.SalesPortal.EmailManager.show();
 					break;
 				case 'favorites':
 					break;

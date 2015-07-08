@@ -41,7 +41,7 @@
 					<a href="<? echo $data->mp4Src->href; ?>" target="_blank" data-role="button" data-inline="true" data-theme="a">Play Video</a>
 				</div>
 				<div class="ui-block-b">
-					<? if ($authorized): ?>
+					<? if ($authorized && ($data->allowAddToQuickSite || $data->allowAddToFavorites)): ?>
 						<a href="#link-viewer-options-menu" data-role="button" data-rel="popup" data-inline="true" data-theme="a">Options</a>
 					<? endif; ?>
 				</div>
@@ -54,7 +54,7 @@
 			<source src="<? echo $data->mp4Src->href; ?>" type='video/mp4'/>
 		</video>
 	</div>
-	<div class="page-footer main-footer" data-role='footer'  data-position="fixed" data-theme="a">
+	<div class="page-footer main-footer" data-role='footer' data-position="fixed" data-theme="a">
 		<div class="ui-grid-a">
 			<div class="ui-block-a">
 			</div>
@@ -84,12 +84,19 @@
 				<? echo $this->renderPartial('../wallbin/libraryList'); ?>
 			</ul>
 		</div>
-		<div data-role="popup" id="link-viewer-options-menu" data-theme="a">
-			<ul data-role="listview" data-inset="true" style="min-width:250px;" data-corners="false">
-				<li data-role="list-divider" data-theme="d">File Options...</li>
-				<li><a href="#" data-rel="popup">Email this Link</a></li>
-				<li><a href="#" data-rel="popup">Save to Favorites</a></li>
-			</ul>
-		</div>
+		<? if ($data->allowAddToQuickSite || $data->allowAddToFavorites): ?>
+			<div data-role="popup" id="link-viewer-options-menu" data-theme="a">
+				<ul data-role="listview" data-inset="true" style="min-width:250px;" data-corners="false">
+					<li data-role="list-divider" data-theme="d">File Options...</li>
+					<? if ($data->allowAddToQuickSite): ?>
+						<li><a href="#email-page" data-transition="slidefade" data-ajax="false">Email this Link</a></li>
+					<? endif; ?>
+					<? if ($data->allowAddToFavorites): ?>
+						<li><a href="#" data-rel="popup">Save to Favorites</a></li>
+					<? endif; ?>
+				</ul>
+			</div>
+		<? endif; ?>
 	<? endif; ?>
 </div>
+<? echo $this->renderPartial('emailPage', array('previewData' => $data)); ?>

@@ -4,57 +4,38 @@
 	$.SalesPortal = $.SalesPortal || { };
 	var EmailManager = function ()
 	{
-		this.init = function()
+		var emailPage = undefined;
+		this.init = function ()
 		{
-			$('#add-page-name-enabled').on('change', function ()
+			emailPage = $('#email-page');
+
+			var logoTab = $('#email-tab-logo');
+			logoTab.find('li').on('click', function (e)
+			{
+				var currentItem = $(this);
+				if (!currentItem.hasClass('selected'))
+				{
+					logoTab.find('li.selected').removeClass('selected').attr("data-theme", "a").find('a').removeClass("ui-btn-e").addClass("ui-btn-a");
+					$(this).addClass('selected').attr("data-theme", "e").find('a').removeClass("ui-btn-a").addClass("ui-btn-e");
+				}
+			});
+
+			$('#email-tab-security-email-send').on('change', function ()
 			{
 				if ($(this).is(':checked'))
-					$('#add-page-name').textinput('enable');
+					$('#email-tab-security-email-address').prop('disabled', false);
 				else
-					$('#add-page-name').val('').textinput('disable');
+					$('#email-tab-security-email-address').val('').prop('disabled', true);
 			});
-			$('#add-page-info-disclaimer').on('click', function ()
+			$('#email-tab-security-access-code-enable').on('change', function ()
 			{
-				var infoDialog = $('#info-dialog');
-				infoDialog.find('.dialog-description').text('You are Sending a WEB LINK to this file over the internet. The Recipient will receive an email with the website Link. Tell your recipient to click this link to view or download this file…');
-				infoDialog.find('.dialog-title').text('Important Info you should KNOW about EMAILING LINKS');
-				$.mobile.changePage("#info-dialog");
-			});
-			$('#add-page-tracking-disclaimer').on('click', function ()
-			{
-				var infoDialog = $('#info-dialog');
-				infoDialog.find('.dialog-description').text('Enable Link Notifications if you want to know who clicks on your shared Links. DO NOT ENABLE User Login if you are sharing a Link OUTSIDE your company!');
-				infoDialog.find('.dialog-title').text('Important Info you should KNOW about EMAILING LINKS');
-				$.mobile.changePage("#info-dialog");
-			});
-			$('#add-page-options-disclaimer').on('click', function ()
-			{
-				var infoDialog = $('#info-dialog');
-				infoDialog.find('.dialog-description').text('If you disable Widgets & Banners AND If you enable Blue Hyperlinks, then your quickSITE will be clean and simple…');
-				infoDialog.find('.dialog-title').text('Important Info you should KNOW about EMAILING LINKS');
-				$.mobile.changePage("#info-dialog");
-			});
-			$('#add-page-pin-disclaimer').on('click', function ()
-			{
-				var infoDialog = $('#info-dialog');
-				infoDialog.find('.dialog-description').text('Create a 4-Digit Access Pin if you want to control who is ALLOWED to view your shared Link...');
-				infoDialog.find('.dialog-title').text('Important Info you should KNOW about EMAILING LINKS');
-				$.mobile.changePage("#info-dialog");
-			});
-			$('#add-page-logo').find('.page-content').find('li').on('click', function (e)
-			{
-				$('#add-page-logo').find('.page-content').find('li').attr("data-theme", "c").removeClass("ui-btn-up-e").removeClass('ui-btn-hover-e').removeClass('qpage-logo-selected').addClass("ui-btn-up-c").addClass('ui-btn-hover-c');
-				$(this).attr("data-theme", "e").removeClass("ui-btn-up-c").removeClass('ui-btn-hover-c').addClass("ui-btn-up-e").addClass('ui-btn-hover-e').addClass('qpage-logo-selected');
-			});
-			$('#add-page-access-code-enabled').on('change', function ()
-			{
-				var accessCode = $('#add-page-access-code');
+				var accessCode = $('#email-tab-security-access-code');
 				if ($(this).is(':checked'))
-					accessCode.textinput('enable');
+					accessCode.prop('disabled', false);
 				else
-					accessCode.val('').textinput('disable');
+					accessCode.val('').prop('disabled', true);
 			});
-			$('#add-page-access-code').keydown(function (event)
+			$('#email-tab-security-access-code').keydown(function (event)
 			{
 				if (event.keyCode == 46 || event.keyCode == 8)
 				{
@@ -65,69 +46,63 @@
 						event.preventDefault();
 				}
 			});
-			$('#add-page-record-activity').on('change', function ()
+
+			emailPage.find('.page-footer .buttons .accept').off('click').on('click', function ()
 			{
-				var ccEmail = $('#add-page-activity-email-copy');
-				if ($(this).is(':checked'))
-					ccEmail.textinput('enable');
-				else
-					ccEmail.val('').textinput('disable');
+				var subtitle = $('#email-tab-page-name').val();
+				var pinCode = $('#email-tab-security-access-code').val();
+				var logo = $('#email-tab-logo').find('li.selected img').prop('src');
+				var now = new Date();
+				$.ajax({
+					type: "POST",
+					url: window.BaseUrl + "qbuilder/addPageLite",
+					data: {
+						linkId: emailPage.find('.service-data .link-id').text(),
+						createDate: now.toLocaleDateString() + ' ' + now.toLocaleTimeString(),
+						subtitle: subtitle,
+						logo: logo,
+						expiresInDays: emailPage.find('.email-tab-expire-toggle:checked').val(),
+						restricted: $('#email-tab-security-require-login').is(':checked'),
+						pinCode: pinCode,
+						disableWidgets: $('#email-tab-options-disable-widgets').is(':checked'),
+						disableBanners: $('#email-tab-options-disable-banners').is(':checked'),
+						showLinksAsUrl: $('#email-tab-options-enable-blue-links').is(':checked'),
+						recordActivity: $('#email-tab-security-email-send').is(':checked'),
+						activityEmailCopy: $('#email-tab-security-email-address').val()
+					},
+					beforeSend: function ()
+					{
+						$.mobile.loading('show', {
+							textVisible: false,
+							html: ""
+						});
+					},
+					complete: function ()
+					{
+					},
+					success: function (msg)
+					{
+						$.mobile.changePage("#link-viewer", {
+							transition: "slidefade",
+							direction: "reverse"
+						});
+						if (subtitle != '')
+							window.open('mailto: ?subject=' + subtitle + '&body=' + '%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A' + msg + (pinCode.length > 0 ? ("%0D%0APin-code: " + pinCode) : ''), "_self");
+						else
+							window.open('mailto: ?body=' + '%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A' + msg + (pinCode.length > 0 ? ("%0D%0APin-code: " + pinCode) : ''), "_self");
+					},
+					async: true,
+					dataType: 'html'
+				});
 			});
 		};
 
-		this.addLitePage = function (linkId)
+		this.show = function ()
 		{
-			var subtitle = $('#add-page-name').val();
-			var pinCode = $('#add-page-access-code').val();
-			var now = new Date();
-			$.ajax({
-				type: "POST",
-				url: window.BaseUrl + "qbuilder/addPageLite",
-				data: {
-					linkId: linkId,
-					createDate: now.toLocaleDateString() + ' ' + now.toLocaleTimeString(),
-					subtitle: subtitle,
-					logo: $('#add-page-logo').find('.page-content').find('li.qpage-logo-selected').find('img').attr('src'),
-					expiresInDays: $('#add-page-expires-in').val(),
-					restricted: $('#add-page-restricted').is(':checked'),
-					pinCode: pinCode,
-					disableWidgets: $('#add-page-disable-widgets').is(':checked'),
-					disableBanners: $('#add-page-disable-banners').is(':checked'),
-					showLinksAsUrl: $('#add-page-show-links-as-url').is(':checked'),
-					recordActivity: $('#add-page-record-activity').is(':checked'),
-					activityEmailCopy: $('#add-page-activity-email-copy').val()
-				},
-				beforeSend: function ()
-				{
-					$.mobile.loading('show', {
-						textVisible: false,
-						html: ""
-					});
-				},
-				complete: function ()
-				{
-					$.mobile.changePage('#email-success-popup', {
-						transition: "pop"
-					});
-				},
-				success: function (msg)
-				{
-					$.mobile.changePage("#preview", {
-						transition: "slidefade"
-					});
-					if (subtitle != '')
-						window.open('mailto: ?subject=' + subtitle + '&body=' + '%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A' + msg + (pinCode.length > 0 ? ("%0D%0APin-code: " + pinCode) : ''), "_self");
-					else
-						window.open('mailto: ?body=' + '%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A' + msg + (pinCode.length > 0 ? ("%0D%0APin-code: " + pinCode) : ''), "_self");
-				},
-				async: true,
-				dataType: 'html'
+			$.mobile.changePage("#email-page", {
+				transition: "slidefade"
 			});
 		};
 	};
 	$.SalesPortal.EmailManager = new EmailManager();
-	$(document).ready(function ()
-	{
-		$.SalesPortal.EmailManager.init();
-	});
 })(jQuery);

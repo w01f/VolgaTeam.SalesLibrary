@@ -40,7 +40,7 @@
 				<div class="ui-block-a">
 					<a href="#link-viewer-open-menu" data-role="button" data-rel="popup" data-inline="true" data-theme="a">Open</a>
 				</div>
-				<? if ($authorized): ?>
+				<? if ($authorized && ($data->allowAddToQuickSite || $data->allowAddToFavorites)): ?>
 					<div class="ui-block-b">
 						<a id="link-viwer-open-full-screen" href="#" data-role="button" data-inline="true" data-theme="a" data-transition="slidefade">Full Screen</a>
 					</div>
@@ -61,7 +61,7 @@
 			<? endforeach; ?>
 		</div>
 	</div>
-	<div class="page-footer main-footer" data-role='footer'  data-position="fixed" data-theme="a">
+	<div class="page-footer main-footer" data-role='footer' data-position="fixed" data-theme="a">
 		<div class="ui-grid-a">
 			<div class="ui-block-a">
 			</div>
@@ -91,13 +91,19 @@
 				<? echo $this->renderPartial('../wallbin/libraryList'); ?>
 			</ul>
 		</div>
-		<div data-role="popup" id="link-viewer-options-menu" data-theme="a">
-			<ul data-role="listview" data-inset="true" style="min-width:250px;" data-corners="false">
-				<li data-role="list-divider" data-theme="d">File Options...</li>
-				<li><a href="#" data-rel="popup">Email this Link</a></li>
-				<li><a href="#" data-rel="popup">Save to Favorites</a></li>
-			</ul>
-		</div>
+		<? if ($data->allowAddToQuickSite || $data->allowAddToFavorites): ?>
+			<div data-role="popup" id="link-viewer-options-menu" data-theme="a">
+				<ul data-role="listview" data-inset="true" style="min-width:250px;" data-corners="false">
+					<li data-role="list-divider" data-theme="d">File Options...</li>
+					<? if ($data->allowAddToQuickSite): ?>
+						<li><a href="#email-page" data-transition="slidefade" data-ajax="false">Email this Link</a></li>
+					<? endif; ?>
+					<? if ($data->allowAddToFavorites): ?>
+						<li><a href="#" data-rel="popup">Save to Favorites</a></li>
+					<? endif; ?>
+				</ul>
+			</div>
+		<? endif; ?>
 	<? endif; ?>
 	<div data-role="popup" id="link-viewer-open-menu" data-theme="a">
 		<ul data-role="listview" data-inset="true" style="min-width:250px;" data-corners="false">
@@ -141,7 +147,7 @@
 			<? endfor; ?>
 		</ul>
 	</div>
-	<div class="page-footer main-footer" data-role='footer'  data-position="fixed" data-theme="a">
+	<div class="page-footer main-footer" data-role='footer' data-position="fixed" data-theme="a">
 		<div class="ui-grid-a">
 			<div class="ui-block-a">
 			</div>
@@ -173,3 +179,4 @@
 		</div>
 	<? endif; ?>
 </div>
+<? echo $this->renderPartial('emailPage', array('previewData' => $data)); ?>

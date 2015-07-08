@@ -48,7 +48,7 @@
 			</ul>
 		</div>
 	</div>
-	<div class="page-footer main-footer" data-role='footer'  data-position="fixed" data-theme="a">
+	<div class="page-footer main-footer" data-role='footer' data-position="fixed" data-theme="a">
 		<div class="ui-grid-a">
 			<div class="ui-block-a">
 			</div>
@@ -80,3 +80,4 @@
 		</div>
 	<? endif; ?>
 </div>
+<? echo $this->renderPartial('emailPage', array('previewData' => $data)); ?>
