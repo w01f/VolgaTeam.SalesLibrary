@@ -82,7 +82,8 @@
 					},
 					success: function (msg)
 					{
-						$.mobile.changePage("#link-viewer", {
+						$.mobile.changePage("#link-viewer",
+						{
 							transition: "slidefade",
 							direction: "reverse"
 						});

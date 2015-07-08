@@ -26,7 +26,11 @@
 					$this->redirect($page->getUrlInternal());
 				}
 				else
-					$this->render('login', array('formData' => $pinCodedModel));
+				{
+					/** @var $page QPageRecord */
+					$page = QPageRecord::model()->findByPk($attributes['pageId']);
+					$this->render('login', array('formData' => $pinCodedModel, 'page' => $page));
+				}
 			}
 			else
 			{
@@ -41,7 +45,7 @@
 						if (isset($page->pin_code))
 						{
 							$pinCodedModel->pageId = $pageId;
-							$this->render('login', array('formData' => $pinCodedModel));
+							$this->render('login', array('formData' => $pinCodedModel, 'page' => $page));
 						}
 						else
 							$this->redirect($page->getUrlInternal());

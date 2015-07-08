@@ -86,11 +86,10 @@
 					<ul data-role="listview" data-inset="true" style="min-width:250px;" data-corners="false">
 						<li data-role="list-divider" data-theme="d">File Options...</li>
 						<? if ($data->allowAddToQuickSite): ?>
-							<li><a href="#email-page" data-transition="slidefade" data-ajax="false">Email this Link</a>
-							</li>
+							<li><a href="#email-page" data-transition="slidefade" data-ajax="false">Email this Link</a></li>
 						<? endif; ?>
 						<? if ($data->allowAddToFavorites): ?>
-							<li><a href="#" data-rel="popup">Save to Favorites</a></li>
+							<li><a href="#favorites-add-page" data-transition="slidefade" data-ajax="false">Save to Favorites</a></li>
 						<? endif; ?>
 					</ul>
 				</div>
@@ -98,3 +97,4 @@
 		<? endif; ?>
 	</div>
 <? echo $this->renderPartial('emailPage', array('previewData' => $data)); ?>
+<? echo $this->renderPartial('../favorites/favoritesAddPage', array('previewData' => $data)); ?>

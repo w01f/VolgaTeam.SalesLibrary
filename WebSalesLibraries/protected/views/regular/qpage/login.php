@@ -1,6 +1,9 @@
 <?
-	/** @var $form CActiveForm */
-	/** @var $formData PinCodeForm */
+
+	/**
+	 * @var $formData PinCodeForm
+	 * @var $page QPageRecord
+	 */
 	$cs = Yii::app()->clientScript;
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/vendor/bootstrap/css/bootstrap.min.css?' . Yii::app()->params['version']);
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/regular/base/login.css?' . Yii::app()->params['version']);
@@ -12,6 +15,7 @@
 </script>
 <div id="content">
 	<?
+		/** @var $form CActiveForm */
 		$form = $this->beginWidget('CActiveForm', array(
 			'action' => Yii::app()->createUrl('qpage/show'),
 			'htmlOptions' => array(
@@ -27,8 +31,14 @@
 		);
 	?>
 	<div class="form-group">
-		<div class="col-xs-12">
-			<img id="image-logo" src="<? echo Yii::app()->baseUrl . '/images/logo.png'; ?>"/>
+		<div class="col-xs-12 text-center">
+			<?
+				if (isset($page->logo))
+					$logo = $page->logo;
+				else
+					$logo = Yii::app()->baseUrl . '/images/logo.png';
+			?>
+			<img id="image-logo" src="<? echo $logo; ?>"/>
 		</div>
 	</div>
 	<div class="form-group">
@@ -42,7 +52,7 @@
 		<div class="col-xs-7">
 			<? echo $form->textField($formData, 'pinCode', array('id' => 'pin-code', 'maxlength' => 4, 'class' => 'form-control', 'placeholder' => 'Pin-code')); ?>
 		</div>
-		<div class="col-xs-4 col-xs-offset-1">
+		<div class="col-xs-4 col-xs-offset-1 text-right">
 			<? echo CHtml::submitButton('Log In'
 				, array('id' => 'button-login',
 					'class' => 'btn btn-default',
@@ -51,7 +61,7 @@
 		</div>
 	</div>
 	<div class="form-group">
-		<div class="col-xs-12">
+		<div class="col-xs-12 text-center">
 			<p class="form-control-static">
 				<? echo $form->error($formData, 'pinCode'
 					, array('class' => 'error-message')

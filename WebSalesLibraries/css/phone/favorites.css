@@ -1,0 +1,99 @@
+/*Add Page------------------------------------*/
+#favorites-add-page .main-content
+{
+	padding-top: 20px;
+}
+
+#favorites-add-page .main-content > legend
+{
+	text-align: left;
+	margin-left: 10px;
+}
+
+#favorites-add-page .main-content .edit-fields
+{
+	margin-top: 15px !important;
+	margin-bottom: 15px !important;
+}
+
+#favorites-add-page .main-content .edit-field
+{
+	font-size: 0.9em;
+}
+
+#favorites-add-page .main-content .edit-field label
+{
+	text-align: left;
+	color: #959595;
+	font-size: 0.9em;
+}
+
+#favorites-add-page .main-footer .buttons
+{
+	text-align: center;
+}
+
+#favorites-add-page .main-footer .buttons .button
+{
+	width: 80px;
+}
+
+#favorites-add-page-select-folder
+{
+	display: inline-block;
+	border-color: #DDD;
+}
+
+/*-----------------------------------------*/
+
+/*View page------------------------------------*/
+#library .main-footer .library-action
+{
+	text-align: center;
+	display: none;
+}
+
+#library .main-footer .library-action.active-action
+{
+	text-align: center;
+	display: inherit;
+}
+
+#library .main-footer .library-action.add-library-page
+{
+}
+
+#library .main-footer .library-action.delete-library-page a
+{
+	color: red;
+}
+
+.regular-link .ui-btn-icon-left
+{
+	padding-left: 5px;
+}
+
+#library-popup-panel-pages .header a
+{
+	display: inline-block;
+	text-decoration: none;
+}
+
+#library-popup-panel-pages .header a img
+{
+	height: 48px;
+	vertical-align: middle;
+}
+
+#library-popup-panel-pages .header a span
+{
+	vertical-align: middle;
+	color: #000000;
+}
+
+#library-popup-delete-tab-page .warning-text
+{
+	color: red;
+}
+
+/*-----------------------------------------*/

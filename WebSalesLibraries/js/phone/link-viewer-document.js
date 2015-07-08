@@ -85,6 +85,7 @@
 			});
 
 			$.SalesPortal.EmailManager.init();
+			$.SalesPortal.Favorites.initAddPage();
 
 			$.mobile.initializePage();
 			$.mobile.changePage("#link-viewer", {

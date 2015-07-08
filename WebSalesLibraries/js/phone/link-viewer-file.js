@@ -26,6 +26,7 @@
 			});
 
 			$.SalesPortal.EmailManager.init();
+			$.SalesPortal.Favorites.initAddPage();
 
 			$.mobile.initializePage();
 			$.mobile.changePage("#link-viewer", {
@@ -51,6 +52,7 @@
 					$.SalesPortal.EmailManager.show();
 					break;
 				case 'favorites':
+					$.SalesPortal.Favorites.showAddPage();
 					break;
 			}
 		};

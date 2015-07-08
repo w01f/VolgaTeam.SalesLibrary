@@ -10,7 +10,7 @@
 
 	$logos = QPageRecord::getPageLogoList();
 ?>
-<? if ($authorized && ($previewData->allowAddToQuickSite || $previewData->allowAddToFavorites)): ?>
+<? if ($authorized && $previewData->allowAddToQuickSite): ?>
 	<div id="email-page" data-role="page" data-cache="never" data-dom-cache="false" data-ajax="false">
 		<div class="page-header" data-role="header" data-position="fixed" data-theme="a">
 			<h3>Email this link</h3>
