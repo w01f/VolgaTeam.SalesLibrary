@@ -48,7 +48,7 @@
 					<?
 					elseif ($tabName == 'favorites_tab'): ?>
 						<? $logoContent = 'data:image/png;base64,' . base64_encode(file_get_contents($staticTabLogoFolderPath . DIRECTORY_SEPARATOR . 'favorites.png')); ?>
-						<a class="cbp-item tab-item not-working" data-ajax="false" href="<? echo $url; ?>">
+						<a class="cbp-item tab-item" data-ajax="false" href="<? echo $url; ?>">
 							<div class="cbp-caption">
 								<img class="logo" src="<? echo $logoContent; ?>">
 								<p class="title"><? echo Yii::app()->params['favorites_tab']['jqm_name'] ?></p>
@@ -100,17 +100,6 @@
 		<ul data-role="listview">
 			<? echo $this->renderPartial('../wallbin/libraryList'); ?>
 		</ul>
-	</div>
-	<div id="not-working-message" data-role="popup" data-theme="a" data-overlay-theme="d" data-dismissible="false">
-		<div data-role="header" data-theme="d">
-			<h1>Not Yet</h1>
-		</div>
-		<div role="main" style="padding:0 20px">
-			<p>This Smartphone Feature is still in development…</p>
-			<div>
-				<a class="accept-button" href="#" data-inline="true" data-role="button" data-rel="back" data-theme="d">OK</a>
-			</div>
-		</div>
 	</div>
 </div>
 

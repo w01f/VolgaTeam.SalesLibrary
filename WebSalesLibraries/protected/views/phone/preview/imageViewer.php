@@ -97,4 +97,4 @@
 		<? endif; ?>
 	</div>
 <? echo $this->renderPartial('emailPage', array('previewData' => $data)); ?>
-<? echo $this->renderPartial('../favorites/favoritesAddPage', array('previewData' => $data)); ?>
+<? echo $this->renderPartial('../favorites/addPage', array('previewData' => $data)); ?>

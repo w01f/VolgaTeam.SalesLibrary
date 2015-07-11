@@ -11,7 +11,7 @@
 			foreach (Yii::app()->params as $key => $row)
 			{
 				if (is_array($row))
-					if (array_key_exists('position', $row))
+					if (array_key_exists('position', $row) && (!array_key_exists('visible', $row) || $row['visible'] == true))
 						$tabPages[$key] = $row['position'];
 			}
 
@@ -37,11 +37,11 @@
 			else if ($tabName == 'search_full_tab')
 				return Yii::app()->createAbsoluteUrl('search/getSearchView');
 			else if ($tabName == 'favorites_tab')
-				return Yii::app()->createAbsoluteUrl('site/empty');
+				return Yii::app()->createAbsoluteUrl('favorites/getFavoritesView');
 			else if (strpos($tabName, 'shortcuts-tab-') !== false)
 			{
 				return Yii::app()->createAbsoluteUrl('shortcuts/getTab', array('tabId' => str_replace('shortcuts-tab-', '', $tabName)));
 			}
-			return Yii::app()->createAbsoluteUrl('site/empty');
+			return Yii::app()->createAbsoluteUrl('site/index');
 		}
 	}

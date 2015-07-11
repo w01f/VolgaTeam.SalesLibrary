@@ -10,26 +10,28 @@
 			return YiiBase::getPathOfAlias($this->pathPrefix . 'favorites');
 		}
 
+		//------Common Site API-------------------------------------------
 		public function actionGetFavoritesView()
 		{
 			$userId = Yii::app()->user->getId();
 			if (isset($userId))
 			{
-				$rootFolder = FavoritesFolderRecord::getRootFolder($userId);
-				$this->renderPartial('favoritesView', array('rootFolder' => $rootFolder), false, true);
-			}
-		}
-
-		public function actionAddLinkDialog()
-		{
-			$linkId = Yii::app()->request->getPost('linkId');
-			$userId = Yii::app()->user->getId();
-			if (isset($userId) && isset($linkId))
-			{
-				$linkRecord = LinkRecord::getLinkById($linkId);
-				$userFolderRecords = FavoritesFolderRecord::getAllFolderNames($userId);
-				$this->renderPartial('addLinkDialog', array('link' => $linkRecord, 'folders' => $userFolderRecords), false, true);
-				StatisticActivityRecord::WriteActivity('Link', 'Favorites', array('Name' => $linkRecord->name, 'File' => $linkRecord->file_name, 'Original Format' => $linkRecord->format));
+				if ($this->isPhone)
+				{
+					$folders = FavoritesFolderRecord::getChildFolders($userId, null);
+					$links = FavoritesLinkRecord::getLinksByFolder($userId, null, false, 'name', 'asc');
+					$tabPages = TabPages::getList();
+					$this->render('viewPage', array(
+						'folders' => $folders,
+						'links' => $links,
+						'tabPages' => $tabPages
+					));
+				}
+				else
+				{
+					$rootFolder = FavoritesFolderRecord::getRootFolder($userId);
+					$this->renderPartial('favoritesView', array('rootFolder' => $rootFolder), false, true);
+				}
 			}
 		}
 
@@ -50,28 +52,37 @@
 			}
 		}
 
-		public function actionGetFoldersAndLinks()
+		public function actionDeleteLink()
 		{
+			$linkId = Yii::app()->request->getPost('linkId');
 			$folderId = Yii::app()->request->getPost('folderId');
 			if (!isset($folderId) || (isset($folderId) && ($folderId == "" || $folderId == "null")))
 				$folderId = null;
-			$userId = Yii::app()->user->getId();
-			if (isset($userId))
-			{
-				$parentFolder = FavoritesFolderRecord::getFolderById($folderId);
-				$folders = FavoritesFolderRecord::getChildFolders($userId, $folderId);
-				$links = FavoritesLinkRecord::getLinksByFolder($userId, $folderId, false, 'name', 'asc');
-				$this->renderPartial('favoritesLinksAndFolders', array('parentFolder' => $parentFolder, 'folders' => $folders, 'links' => $links), false, true);
-			}
+			if (isset($linkId))
+				FavoritesLinkRecord::deleteLink($linkId, $folderId);
+			Yii::app()->end();
 		}
 
-		public function actionGetFoldersList()
+		public function actionDeleteFolder()
 		{
+			$folderId = Yii::app()->request->getPost('folderId');
+			if (isset($folderId))
+				FavoritesFolderRecord::deleteFolder($folderId);
+			Yii::app()->end();
+		}
+		//------Common Site API-------------------------------------------
+
+		//------Regular Site API-------------------------------------------
+		public function actionAddLinkDialog()
+		{
+			$linkId = Yii::app()->request->getPost('linkId');
 			$userId = Yii::app()->user->getId();
-			if (isset($userId))
+			if (isset($userId) && isset($linkId))
 			{
+				$linkRecord = LinkRecord::getLinkById($linkId);
 				$userFolderRecords = FavoritesFolderRecord::getAllFolderNames($userId);
-				$this->renderPartial('foldersList', array('folders' => $userFolderRecords), false, true);
+				$this->renderPartial('addLinkDialog', array('link' => $linkRecord, 'folders' => $userFolderRecords), false, true);
+				StatisticActivityRecord::WriteActivity('Link', 'Favorites', array('Name' => $linkRecord->name, 'File' => $linkRecord->file_name, 'Original Format' => $linkRecord->format));
 			}
 		}
 
@@ -118,23 +129,21 @@
 			if (isset($linkId))
 				FavoritesLinkRecord::putLinkToFolder($linkId, $parentId, $oldParentId);
 		}
+		//------Regular Site API-------------------------------------------
 
-		public function actionDeleteLink()
+		//------Mobile Site API-----------------------------------------------
+		public function actionGetFoldersAndLinks()
 		{
-			$linkId = Yii::app()->request->getPost('linkId');
 			$folderId = Yii::app()->request->getPost('folderId');
 			if (!isset($folderId) || (isset($folderId) && ($folderId == "" || $folderId == "null")))
 				$folderId = null;
-			if (isset($linkId))
-				FavoritesLinkRecord::deleteLink($linkId, $folderId);
-			Yii::app()->end();
+			$userId = Yii::app()->user->getId();
+			if (isset($userId))
+			{
+				$folders = FavoritesFolderRecord::getChildFolders($userId, $folderId);
+				$links = FavoritesLinkRecord::getLinksByFolder($userId, $folderId, false, 'name', 'asc');
+				$this->renderPartial('foldersAndLinks', array('folders' => $folders, 'links' => $links, 'topLevel' => false), false, true);
+			}
 		}
-
-		public function actionDeleteFolder()
-		{
-			$folderId = Yii::app()->request->getPost('folderId');
-			if (isset($folderId))
-				FavoritesFolderRecord::deleteFolder($folderId);
-			Yii::app()->end();
-		}
+		//------Mobile Site API-----------------------------------------------
 	}
