@@ -12,8 +12,10 @@
 		$headerColumnSizeDivider++;
 	$headerColumnSize = 12 / $headerColumnSizeDivider;
 
+	$fullScreenControlMode  = Yii::app()->browser->getBrowser() == Browser::BROWSER_EO ? 'eo' : 'regular';
+	$fullScreenSizeMode  = Yii::app()->browser->isMobile() ? 'mobile' : 'regular';
 ?>
-<div class="link-viewer">
+<div class="link-viewer <? echo $fullScreenControlMode; ?>">
 	<div class="row row-buttons tab-above-header active" id="tab-above-header-preview">
 		<div class="col col-xs-<? echo $headerColumnSize; ?> text-center">
 			<div class="text-button download-file">
@@ -55,11 +57,7 @@
 		<div role="tabpanel" class="tab-pane active" id="link-viewer-tab-preview">
 			<div class="row preview-gallery">
 				<div class="col col-xs-12 text-center">
-					<video id="video-player" class="video-js vjs-default-skin"
-						   controls preload="auto" height="305" width="750"
-						   poster="<? echo $data->thumbImageSrc; ?>">
-						<source src="<? echo $data->mp4Src->href; ?>" type='video/mp4'/>
-					</video>
+					<video id="video-player" class="video-js vjs-default-skin" height="305" width="750"></video>
 				</div>
 			</div>
 			<div class="row row-buttons gallery-control-buttons">
@@ -77,7 +75,7 @@
 					</div>
 				</div>
 				<div class="col col-xs-1 text-center">
-					<div class="text-button open-video-fullscreen">
+					<div class="text-button open-video-fullscreen-<? echo $fullScreenSizeMode; ?>">
 						<span>100%</span>
 					</div>
 				</div>

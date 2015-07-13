@@ -19,6 +19,7 @@
 				afterShow: function ()
 				{
 					dialogContent = $('.fancybox-wrap');
+					var fullScreenMode = dialogContent.find('.link-viewer').hasClass('eo') ? 'eo' : 'regular';
 
 					dialogContent.find('#link-viewer-body-tabs a[data-toggle="tab"]').on('shown.bs.tab', function (e)
 					{
@@ -35,7 +36,32 @@
 					dialogContent.find('.action-container .action').off('click').on('click', processSaveAction);
 
 					dialogContent.find('.open-video-modal').off('click').on('click', showVideoModal);
-					dialogContent.find('.open-video-fullscreen').off('click').on('click', showVideoFullScreen);
+					dialogContent.find('.open-video-fullscreen-regular').off('click').on('click', showVideoFullScreenForEO);
+					dialogContent.find('.open-video-fullscreen-mobile').off('click').on('click', showVideoFullScreen);
+
+					VideoJS.players = {};
+					player = _V_("video-player", {
+							controls: true,
+							autoplay: false,
+							preload: 'auto',
+							poster: viewerData.thumbImageSrc
+						},
+						function ()
+						{
+						});
+					player.src([
+						{
+							src: viewerData.mp4Src.href,
+							href: viewerData.mp4Src.href,
+							title: viewerData.fileName,
+							type: viewerData.mp4Src.type
+						}
+					]);
+					if (fullScreenMode == 'eo')
+					{
+						$('.vjs-fullscreen-control').css({ 'display': 'none' });
+						$('.vjs-volume-control').css({ 'margin-right': '20px' });
+					}
 
 					new $.SalesPortal.RateManager().init(
 						viewerData.linkId,
@@ -96,6 +122,42 @@
 		var showVideoFullScreen = function ()
 		{
 			player.requestFullScreen();
+		};
+
+		var showVideoFullScreenForEO = function ()
+		{
+			VideoJS.players = {};
+			$.fancybox({
+				content: $('<video id="video-player" class="video-js vjs-default-skin" height = "' + ($(window).height() - 100) + '" width="' + ($(window).width() - 100) + '"></video>'),
+				openEffect: 'none',
+				closeEffect: 'none',
+				autoSize: true,
+				helpers: {
+					title: false
+				}
+			});
+			_V_.options.flash.swf = viewerData.playerSrc;
+			var myPlayer = _V_("video-player", {
+					controls: true,
+					autoplay: false,
+					preload: 'auto',
+					poster: viewerData.thumbImageSrc
+				},
+				function ()
+				{
+				});
+			myPlayer.src([
+				{
+					src: viewerData.mp4Src.href,
+					href: viewerData.mp4Src.href,
+					title: viewerData.fileName,
+					type: viewerData.mp4Src.type
+				}
+			]);
+			$('.vjs-fullscreen-control').css({ 'display': 'none' });
+			$('.vjs-volume-control').css({ 'margin-right': '20px' });
+			$('.fancybox-inner').css({ 'overflow': 'hidden' });
+			myPlayer.play();
 		};
 
 		var processSaveAction = function ()

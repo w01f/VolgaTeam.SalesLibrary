@@ -190,6 +190,7 @@ class Browser
     const BROWSER_IPOD = 'iPod';                              // http://apple.com
     const BROWSER_IPAD = 'iPad';                              // http://apple.com
     const BROWSER_CHROME = 'Chrome';                          // http://www.google.com/chrome
+	const BROWSER_EO = 'EO';           			              //
     const BROWSER_ANDROID = 'Android';                        // http://www.android.com/
     const BROWSER_ANDROID_MOBILE = 'Android Mobile';          // http://www.android.com/
     const BROWSER_GOOGLEBOT = 'GoogleBot';                    // http://en.wikipedia.org/wiki/Googlebot
@@ -474,6 +475,7 @@ class Browser
             $this->checkBrowserGaleon() ||
             $this->checkBrowserNetscapeNavigator9Plus() ||
             $this->checkBrowserFirefox() ||
+			$this->checkBrowserEssentialObjects() ||
             $this->checkBrowserChrome() ||
             $this->checkBrowserOmniWeb() ||
             // common bots
@@ -736,6 +738,23 @@ class Browser
         }
         return false;
     }
+
+	/**
+	 * Determine if the browser is Essential Objects or not (last updated 1.7)
+	 * @return boolean True if the browser is Essential Objects otherwise false
+	 */
+	protected function checkBrowserEssentialObjects()
+	{
+		if (stripos($this->_agent, 'Essential Objects') !== false)
+		{
+			$aresult = explode('/', stristr($this->_agent, 'Chrome'));
+			$aversion = explode(' ', $aresult[1]);
+			$this->setVersion($aversion[0]);
+			$this->setBrowser(self::BROWSER_EO);
+			return true;
+		}
+		return false;
+	}
 
     /**
      * Determine if the browser is WebTv or not (last updated 1.7)
