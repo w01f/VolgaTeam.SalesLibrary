@@ -10,33 +10,6 @@
 			return YiiBase::getPathOfAlias($this->pathPrefix . 'search');
 		}
 
-		public function actionGetSearchView()
-		{
-			$searchOptions = array(
-				'showCategory' => Yii::app()->params['search_options']['hide_tag'] != true,
-				'categoryColumnName' => Yii::app()->params['tags']['column_name'],
-				'showLibraries' => Yii::app()->params['search_options']['hide_libraries'] != true,
-				'librariesColumnName' => Yii::app()->params['stations']['column_name']
-			);
-			if ($this->isPhone)
-			{
-				$tabPages = TabPages::getList();
-				$this->render('searchView', array(
-					'searchOptions' => $searchOptions,
-					'tabPages' => $tabPages
-				));
-			}
-			else
-			{
-				$content = $this->renderPartial('searchView', array(), true);
-				echo CJSON::encode(array(
-					'content' => $content,
-					'options' => $searchOptions
-				));
-				Yii::app()->end();
-			}
-		}
-
 		public function actionEditConditions()
 		{
 			$conditionTag = Yii::app()->request->getPost('conditionTag');
@@ -66,7 +39,7 @@
 				$searchResultInfo['Dates'] = sprintf('%s - %s', $conditions->startDate, $conditions->endDate);
 			if (count($conditions->superFilters) > 0)
 				$searchResultInfo['Super Tags'] = implode(', ', $conditions->superFilters);
-			if (count($conditions->categories) > 0)
+			if (isset($conditions->categories) && count($conditions->categories) > 0)
 			{
 				$categories = array();
 				foreach ($conditions->categories as $category)

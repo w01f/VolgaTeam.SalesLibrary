@@ -23,10 +23,10 @@
 			<h3>
 				<span <? if ($topLevel): ?> class="top-level"<? endif; ?> style="float: left; line-height: 1.8em;">
 							<?
-								if (isset($link['name']) && $link['name'] != '')
-									echo $link['name'];
-								elseif (isset($link['file_name']) && $link['file_name'] != '')
-									echo $link['file_name'];
+								if ($link['name']['value'] != '')
+									echo $link['name']['value'];
+								elseif ($link['name']['file'] != '')
+									echo $link['name']['file'];
 							?>
 				</span>
 				<a style="float: right" class="delete-button" href="#" data-role="button" data-inline="true" data-iconpos="notext" data-theme="a" data-icon="delete"></a>

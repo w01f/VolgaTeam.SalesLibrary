@@ -73,16 +73,7 @@
 		 */
 		public function getLogo()
 		{
-			if (isset($this->logo))
-				return $this->logo;
-			else
-			{
-				$logos = self::getPageLogoList();
-				if (isset($logos))
-					return $logos[0];
-				else
-					return null;
-			}
+			return $this->logo;
 		}
 
 		/**

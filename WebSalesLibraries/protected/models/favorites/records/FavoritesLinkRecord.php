@@ -61,17 +61,12 @@
 		/**
 		 * @param $userId
 		 * @param $folderId
-		 * @param $isSort
-		 * @param $sortColumn
-		 * @param $sortDirection
 		 * @return array
 		 */
-		public static function getLinksByFolder($userId, $folderId, $isSort, $sortColumn, $sortDirection)
+		public static function getLinksByFolder($userId, $folderId)
 		{
-			$sessionId = 'favoriteLinks';
-			if ($isSort == 1)
-				$links = Yii::app()->session[$sessionId];
-			if (!isset($links))
+			$links = array();
+			if (count($links) == 0)
 			{
 				if (isset($folderId))
 					$favoriteLinkRecords = self::model()->findAll('id_user=? and id_folder=?', array($userId, $folderId));
@@ -88,34 +83,23 @@
 							link.name, link.file_name,
 							' . $dateField . ',
 							(select (round(avg(lr.value)*2)/2) as value from tbl_link_rate lr where lr.id_link=link.id) as rate,
-							link.format')
+							link.format,
+							glcat.tag as tag')
 						->from('tbl_link link')
+						->leftJoin("(select lcat.id_link, group_concat(lcat.tag separator ', ') as tag from tbl_link_category lcat group by lcat.id_link) glcat", "glcat.id_link=link.id")
 						->where("id in ('" . implode("', '", $linkIds) . "')")
 						->queryAll();
-					$preLinks = LinkRecord::getLinksGrid($linkRecords);
-					if (isset($preLinks))
-						foreach ($favoriteLinkRecords as $favoriteLinkRecord)
-							foreach ($preLinks as $link)
-								if ($link['id'] == $favoriteLinkRecord->id_link)
-								{
-									$link['name'] = $favoriteLinkRecord->name;
-									$links[] = $link;
-									break;
-								}
+					$links = DataTableHelper::formatRegularData($linkRecords);
+					foreach ($favoriteLinkRecords as $favoriteLinkRecord)
+						foreach ($links as $link)
+							if ($link['id'] == $favoriteLinkRecord->id_link)
+							{
+								$link['name']['value'] = $favoriteLinkRecord->name;
+								break;
+							}
 				}
-				if (isset($links))
-					Yii::app()->session[$sessionId] = $links;
-				else
-					Yii::app()->session[$sessionId] = null;
 			}
-			if (isset($links))
-				if (count($links) > 0)
-				{
-					$sortHelper = new ArraySortHelper($sortColumn, $sortDirection);
-					usort($links, array($sortHelper, 'sort'));
-					return $links;
-				}
-			return array();
+			return $links;
 		}
 
 		/**

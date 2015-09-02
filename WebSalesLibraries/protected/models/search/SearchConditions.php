@@ -34,7 +34,7 @@
 		/**
 		 * @param $xpath DOMXPath
 		 * @param $contextNode DOMNode
-		 * @return \SearchConditions
+		 * @return SearchConditions
 		 */
 		public static function fromXml($xpath, $contextNode)
 		{

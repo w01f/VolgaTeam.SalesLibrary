@@ -59,43 +59,23 @@
 		//------Regular Site API-------------------------------------------
 		public function actionGetColumnsView()
 		{
+			$libraryId = Yii::app()->request->getPost('libraryId');
+			$pageId = Yii::app()->request->getPost('pageId');
 			$libraryManager = new LibraryManager();
-			$selectedPage = $libraryManager->getSelectedPage();
-			$this->renderPartial('columnsView', array('selectedPage' => $selectedPage), false, true);
+			$library = $libraryManager->getLibraryById($libraryId);
+			$selectedPage = $library->getPageById($pageId);
+			echo $selectedPage->getCache();
 		}
 
 		public function actionGetAccordionView()
 		{
+			$libraryId = Yii::app()->request->getPost('libraryId');
+			$pageId = Yii::app()->request->getPost('pageId');
 			$libraryManager = new LibraryManager();
-			$selectedPage = $libraryManager->getSelectedPage();
+			$library = $libraryManager->getLibraryById($libraryId);
+			$selectedPage = $library->getPageById($pageId);
 			$selectedPage->loadData();
 			$this->renderPartial('accordionView', array('libraryPage' => $selectedPage), false, true);
-		}
-
-		public function actionGetTabsView()
-		{
-			$wallbinView = Yii::app()->request->getPost('wallbinView');
-			if (!isset($wallbinView) || $wallbinView == 'null' || $wallbinView == '')
-				$wallbinView = 'columns';
-
-			$libraryManager = new LibraryManager();
-			$selectedLibrary = $libraryManager->getSelectedLibrary();
-			$selectedPage = $libraryManager->getSelectedPage();
-			$selectedPage->loadData();
-			$this->renderPartial('tabsView', array('library' => $selectedLibrary, 'selectedPage' => $selectedPage, 'wallbinView' => $wallbinView), false, true);
-		}
-
-		public function actionGetLibraryDropDownList()
-		{
-			$libraryManager = new LibraryManager();
-			$this->renderPartial('libraryDropDownList', array('libraryManager' => $libraryManager), false, true);
-		}
-
-		public function actionGetPageDropDownList()
-		{
-			$libraryManager = new LibraryManager();
-			$this->renderPartial('pageDropDownList', array('selectedLibrary' => $libraryManager->getSelectedLibrary(),
-				'selectedPage' => $libraryManager->getSelectedPage()), false, true);
 		}
 		//------Regular Site API-------------------------------------------
 
@@ -122,7 +102,6 @@
 				if (!isset($defaultPage))
 					$defaultPage = $library->pages[0];
 
-				$tabPages = TabPages::getList();
 				if (isset(Yii::app()->user))
 				{
 					$userId = Yii::app()->user->getId();
@@ -131,11 +110,10 @@
 				else
 					$tabPageExisted = false;
 
-				$this->render('libraryPage', array(
+				$this->render('libraryWrapper', array(
 					'library' => $library,
 					'defaultPage' => $defaultPage,
-					'tabPageExisted' => $tabPageExisted,
-					'tabPages' => $tabPages
+					'tabPageExisted' => $tabPageExisted
 				));
 			}
 			else

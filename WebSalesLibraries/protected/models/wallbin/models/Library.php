@@ -21,7 +21,6 @@
 		public $storagePath;
 		public $storageLink;
 		public $logoPath;
-		public $logoLink;
 		/**
 		 * @var LibraryPage[]
 		 * @soap

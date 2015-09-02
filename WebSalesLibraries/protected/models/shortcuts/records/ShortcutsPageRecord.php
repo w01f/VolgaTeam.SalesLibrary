@@ -47,11 +47,11 @@
 		}
 
 		/**
-		 * @return ShortcutsLinkRecord[]
+		 * @return ShortcutLinkRecord[]
 		 */
 		public function getLinks()
 		{
-			return ShortcutsLinkRecord::model()->findAll(array('order' => '`order`', 'condition' => 'id_page=:id_page', 'params' => array(':id_page' => $this->id)));
+			return ShortcutLinkRecord::model()->findAll(array('order' => '`order`', 'condition' => 'id_page=:id_page', 'params' => array(':id_page' => $this->id)));
 		}
 
 		/**

@@ -10,28 +10,6 @@
 			return YiiBase::getPathOfAlias($this->pathPrefix . 'quizzes');
 		}
 
-		public function actionGetQuizzesView()
-		{
-			$userId = Yii::app()->user->getId();
-			if (isset($userId))
-			{
-				$quizItems = QuizGroupRecord::getChildItems(null);
-
-				$selectedQuizItemName = isset(Yii::app()->request->cookies['selectedQuizItemName']) ? Yii::app()->request->cookies['selectedQuizItemName']->value : null;
-				$selectedQuizItemBreadcrumbs = null;
-				if (isset($selectedQuizItemName))
-				{
-					foreach ($quizItems as $quizItem)
-					{
-						$selectedQuizItemBreadcrumbs = $quizItem->getSelectedItemBreadcrumbs($selectedQuizItemName);
-						if (isset($selectedQuizItemBreadcrumbs))
-							break;
-					}
-				}
-				$this->renderPartial('quizzesView', array('quizItems' => $quizItems, 'selectedQuizItemBreadcrumbs' => $selectedQuizItemBreadcrumbs), false, true);
-			}
-		}
-
 		public function actionGetQuizList()
 		{
 			$userId = Yii::app()->user->getId();

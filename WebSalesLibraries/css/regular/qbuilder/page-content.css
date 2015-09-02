@@ -1,5 +1,8 @@
 #page-content
 {
+	vertical-align: top;
+	margin: 0;
+	padding: 5px 5px 0;
 }
 
 #page-content > div

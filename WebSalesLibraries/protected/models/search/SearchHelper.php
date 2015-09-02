@@ -74,8 +74,7 @@
 						foreach ($aliasNodes as $aliasNode)
 							$result[] = str_replace($conditionToCompare, trim($aliasNode->nodeValue), $condition);
 					}
-				}
-				catch (Exception $e)
+				} catch (Exception $e)
 				{
 				}
 			}
@@ -185,7 +184,7 @@
 				$categoryCondition = '1=1';
 				$categoryJoinCondition = '1 = 1';
 				$additionalCategoryCondition = '';
-				if (count($searchConditions->categories) > 0)
+				if (isset($searchConditions->categories) && count($searchConditions->categories) > 0)
 				{
 					$categoriesSelector = array();
 					$categoriesJoinSelector = array();
@@ -323,78 +322,11 @@
 					->where($whereText)
 					->group('link.file_relative_path, glcat.tag')
 					->queryAll();
-				$links = self::formatLinksInfo($queryRecords);
+				$links = DataTableHelper::formatRegularData($queryRecords);
 				Yii::app()->session[$datasetKey] = CJSON::encode($links);
 			}
 			else
 				$links = CJSON::decode($linksEncoded);
-			return $links;
-		}
-
-		/**
-		 * @param $linkQueryRecords array
-		 * @return array
-		 */
-		private static function formatLinksInfo($linkQueryRecords)
-		{
-			$links = array();
-			if (count($linkQueryRecords) > 0)
-			{
-				$libraryManager = new LibraryManager();
-				foreach ($linkQueryRecords as $linkRecord)
-				{
-					if (array_key_exists('type', $linkRecord))
-						$type = $linkRecord['type'];
-					else
-						$type = 9999;
-
-					$link['id'] = $linkRecord['id'];
-					$link['name'] = array(
-						'value' => $linkRecord['name'],
-						'file' => $linkRecord['file_name'],
-						'tooltip' => sprintf('%s<br><br>%s',
-							isset($linkRecord['file_name']) && $linkRecord['file_name'] != '' ? $linkRecord['file_name'] : $linkRecord['name'],
-							Yii::app()->params['tooltips']['wallbin'][$linkRecord['format']]
-						)
-					);
-					$link['date'] = array(
-						'display' => date(Yii::app()->params['outputDateFormat'], strtotime($linkRecord['link_date'])),
-						'value' => strtotime($linkRecord['link_date'])
-					);
-
-					/** @var $library Library */
-					$library = $libraryManager->getLibraryById($linkRecord['id_library']);
-					$link['library'] = array(
-						'id' => $linkRecord['id_library'],
-						'name' => isset($library) ? $library->name : ''
-					);
-
-					$link['tag'] = $linkRecord['tag'];
-
-					$link['rate'] = array(
-						'value' => $linkRecord['rate'],
-						'image' => LinkRateRecord::getStarImage(floatval($linkRecord['rate']))
-					);
-
-					switch ($linkRecord['format'])
-					{
-						case 'video':
-						case 'wmv':
-						case 'mp4':
-							$link['file_type'] = 'video';
-							break;
-						default:
-							if ($type == 5)
-								$link['file_type'] = 'folder';
-							else if ($type == 8)
-								$link['file_type'] = 'url';
-							else
-								$link['file_type'] = $linkRecord['format'];
-							break;
-					}
-					$links[] = $link;
-				}
-			}
 			return $links;
 		}
 	}

@@ -1,7 +1,7 @@
 <?
 	/**
 	 * @var $searchBar SearchBar
-	 * @var $pageId string
+	 * @var $linkId string
 	 */
 ?>
 <? if ($searchBar->configured): ?>
@@ -15,22 +15,13 @@
 				<? if (!Yii::app()->browser->isMobile()): ?>
 					<? $logoUrl = Yii::app()->getBaseUrl(true) . '/images/shortcuts/search-bar/search-bar-logo.png'; ?>
 					<div style="width:100%;min-height: 20px;">
-						<img style="margin-top: 20px;" src="<? echo $logoUrl . '?' . $pageId; ?>" alt="" onerror="this.style.display = 'none'"/>
+						<img style="margin-top: 20px;" src="<? echo $logoUrl . '?' . $linkId; ?>" alt="" onerror="this.style.display = 'none'"/>
 					</div>
 				<? endif; ?>
-				<div class="search-conditions" style="display: none;">
-					<div class="encoded-object"><? echo CJSON::encode($searchBar->getSearchOptions()) ?></div>
-					<? $this->renderPartial('categorySelector', array('categoryManager' => $searchBar->categoryManager), false, true); ?>
-				</div>
-				<div class="search-view-options" style="display: none;">
-					<div class="encoded-object">
-						<? echo CJSON::encode(array(
-							'showCategory' => Yii::app()->params['search_options']['hide_tag'] != true,
-							'categoryColumnName' => Yii::app()->params['tags']['column_name'],
-							'showLibraries' => Yii::app()->params['search_options']['hide_libraries'] != true,
-							'librariesColumnName' => Yii::app()->params['stations']['column_name']
-						)) ?>
-					</div>
+				<? $this->renderPartial('searchConditions', array('searchContainer' => $searchBar)); ?>
+				<? $this->renderPartial('categorySelector', array('categoryManager' => $searchBar->categoryManager), false, true); ?>
+				<div class="search-bar-actions">
+					<? $this->renderPartial('../menu/actionItems', array('actionContainer' => $searchBar), false, true); ?>
 				</div>
 			</td>
 		</tr>

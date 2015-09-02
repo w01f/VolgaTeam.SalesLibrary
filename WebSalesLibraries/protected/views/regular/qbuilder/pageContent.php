@@ -1,7 +1,7 @@
 <?
 	/**
-	 *@var $page QPageRecord
-	*/
+	 * @var $page QPageRecord
+	 */
 ?>
 <div>
 	<? if (isset($page)): ?>
@@ -47,7 +47,7 @@
 				<div id="page-content-links-container" class="link-grid-container">
 					<? $links = isset($page) ? $page->getPageLinks() : null; ?>
 					<? if (isset($links)): ?>
-						<? $this->renderPartial('pageLinks', array('links' => $links), false, true); ?>
+						<? $this->renderPartial('../qbuilder/pageLinks', array('links' => $links), false, true); ?>
 					<? endif; ?>
 				</div>
 			</div>
@@ -141,13 +141,15 @@
 				</div>
 			</div>
 			<div id="page-content-tab-logo">
+				<? $selectedLogo = isset($page) ? $page->getLogo() : null; ?>
 				<div class="header">
-					<h4>Select a Logo that will appear at the VERY top of this quickSITE:</h4>
+					<h4 class="checkbox">
+						<label><input type="checkbox" id="page-content-show-logo" value="" <? echo isset($selectedLogo) ? 'checked' : '' ?>>Show a Logo on your QuickSite:</label>
+					</h4>
 				</div>
-				<div class="logo-list">
+				<div class="logo-list<? if (!isset($selectedLogo)): ?> disabled<? endif; ?>">
 					<ul class="nav nav-pills">
 						<? if (isset($logos)): ?>
-							<? $selectedLogo = isset($page) ? $page->getLogo() : null; ?>
 							<? foreach ($logos as $logo): ?>
 								<li>
 									<a href="#" <? if ($selectedLogo == $logo): ?>class="opened"<? endif; ?>><img src="<? echo $logo; ?>"></a>

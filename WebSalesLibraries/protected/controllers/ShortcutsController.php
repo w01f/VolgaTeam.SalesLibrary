@@ -12,121 +12,25 @@
 		}
 
 		//------Common Site API-------------------------------------------
-		public function actionGetPage()
+		public function actionGetSinglePage()
 		{
-			$pageId = Yii::app()->request->getPost('pageId');
-			$predefinedPageType = Yii::app()->request->getPost('predefinedPageType');
-			if (isset($pageId))
-			{
-				/** @var $pageRecord ShortcutsPageRecord */
-				$pageRecord = ShortcutsPageRecord::model()->findByPk($pageId);
-				if (isset($pageRecord))
-				{
-					/** @var $tabRecord ShortcutsTabRecord */
-					$tabRecord = ShortcutsTabRecord::model()->findByPk($pageRecord->id_tab);
-
-					$savePageTypeTagName = sprintf('%s-%s', $tabRecord->name, $pageRecord->name);
-					if (!(isset($predefinedPageType) && $predefinedPageType != ''))
-					{
-						if (isset(Yii::app()->request->cookies[$savePageTypeTagName]))
-							$predefinedPageType = Yii::app()->request->cookies[$savePageTypeTagName]->value;
-					}
-					else
-					{
-						$cookie = new CHttpCookie($savePageTypeTagName, $predefinedPageType);
-						$cookie->expire = time() + (60 * 60 * 24 * 7);
-						Yii::app()->request->cookies[$savePageTypeTagName] = $cookie;
-					}
-
-					StatisticActivityRecord::WriteActivity('Shortcuts', 'Page Changed', array('Tab' => $tabRecord->name, 'Button' => $pageRecord->name));
-					$pageModel = $pageRecord->getModel($this->isPhone ? 'grid' : $predefinedPageType);
-					echo CJSON::encode(array(
-						'type' => $pageModel->type,
-						'logo' => $pageModel->ribbonLogoPath,
-						'content' => $this->renderPartial('page', array('page' => $pageModel), true),
-						'displayParameters' => $pageModel->getDisplayParameters(),
-						'pageType' => $predefinedPageType
-					));
-				}
-			}
-			Yii::app()->end();
-		}
-
-		public function actionGetWindowShortcut()
-		{
-			$this->pageTitle = 'Shortcuts - Window';
 			$linkId = Yii::app()->request->getQuery('linkId');
-			$samePage = (bool)Yii::app()->request->getQuery('samePage');
-			if (isset($linkId))
-			{
-				$linkRecord = ShortcutsLinkRecord::model()->findByPk($linkId);
-				$windowShortcut = new WindowShortcut($linkRecord);
-				$folder = $windowShortcut->getWindow();
+			/** @var  $shortcutRecord ShortcutLinkRecord */
+			$shortcutRecord = ShortcutLinkRecord::model()->findByPk($linkId);
+			/** @var  $shortcut PageContentShortcut */
+			$shortcut = $shortcutRecord->getModel($this->isPhone);
 
-				if ($this->isPhone)
-				{
-					$content = $this->renderPartial('../wallbin/folderLinks', array('folder' => $folder), true);
-				}
-				else
-				{
-					$content = $this->renderPartial('folderContainerHeader', array('windowShortcut' => $windowShortcut), true);
-					$content .= $this->renderFile(Yii::getPathOfAlias($this->pathPrefix . 'wallbin') . '/folderContainer.php', array('folder' => $folder), true);
-				}
+			$this->pageTitle = sprintf('%s - %s', $shortcut->title, $shortcut->description);
 
-				if ($samePage || $this->isPhone)
-					echo $content;
-				else
-					$this->render('linkWrapper', array('objectId' => $linkId, 'objectName' => 'Window', 'objectLogo' => $windowShortcut->ribbonLogoPath, 'content' => $content));
-			}
+			$this->render('pages/singlePage', array('defaultShortcut' => $shortcut));
 		}
 
-		public function actionGetQuickList()
-		{
-			$this->pageTitle = 'Shortcuts - Quick List';
-			$linkId = Yii::app()->request->getQuery('linkId');
-			$samePage = (bool)Yii::app()->request->getQuery('samePage');
-			if (isset($linkId))
-			{
-				$linkRecord = ShortcutsLinkRecord::model()->findByPk($linkId);
-				$quickListShortcut = new QuickListShortcut($linkRecord);
-				$quickListShortcut->loadQuickLinks();
-				$content = $this->renderPartial('quickList', array('quickListShortcut' => $quickListShortcut), true);
-				if ($samePage || $this->isPhone)
-					echo $content;
-				else
-					$this->render('linkWrapper', array('objectId' => $linkId, 'objectName' => 'Quick List', 'objectLogo' => $quickListShortcut->ribbonLogoPath, 'content' => $content));
-			}
-		}
-
-		public function actionGetSearchShortcut()
-		{
-			$this->pageTitle = 'Shortcuts - Search';
-			$linkId = Yii::app()->request->getQuery('linkId');
-			$samePage = (bool)Yii::app()->request->getQuery('samePage');
-			if (isset($linkId))
-			{
-				/** @var $linkRecord ShortcutsLinkRecord */
-				$linkRecord = ShortcutsLinkRecord::model()->findByPk($linkId);
-				$searchShortcut = new SearchShortcut($linkRecord);
-				$this->pageTitle = $searchShortcut->tooltip;
-				$content = $this->renderPartial('searchConditions', array('searchContainer' => $searchShortcut), true);
-				if ($samePage || $this->isPhone)
-					echo $content;
-				else
-					$this->render('linkWrapper', array('objectId' => $linkId, 'objectName' => $searchShortcut->tooltip, 'objectLogo' => $searchShortcut->ribbonLogoPath, 'content' => $content));
-			}
-		}
-
-		public function actionGetLibraryPageShortcut()
+		public function actionGetSamePage()
 		{
 			$linkId = Yii::app()->request->getPost('linkId');
-			if (isset($linkId))
-			{
-				$linkRecord = ShortcutsLinkRecord::model()->findByPk($linkId);
-				$libraryPageShortcut = new SinglePageShortcut($linkRecord);
-				$content = $this->renderPartial('pageContent', array('pageShortcut' => $libraryPageShortcut), true);
-				echo $content;
-			}
+			$linkParameters = Yii::app()->request->getPost('parameters');
+
+			echo CJSON::encode($this->buildShortcutPage($linkId, $linkParameters));
 		}
 
 		public function actionDownload()
@@ -134,22 +38,129 @@
 			$linkId = Yii::app()->request->getQuery('linkId');
 			if (isset($linkId))
 			{
-				/**@var $linkRecord ShortcutsLinkRecord */
-				$linkRecord = ShortcutsLinkRecord::model()->findByPk($linkId);
+				/**@var $linkRecord ShortcutLinkRecord */
+				$linkRecord = ShortcutLinkRecord::model()->findByPk($linkId);
 				/**@var $link DownloadShortcut */
-				$link = $linkRecord->getModel();
+				$link = $linkRecord->getModel($this->isPhone);
 				$fileName = $link->fileName;
 				$path = $link->sourcePath;
 				Yii::app()->getRequest()->sendFile($fileName, @file_get_contents($path));
 			}
 			Yii::app()->end();
 		}
+
+		/**
+		 * @param $linkId string
+		 * @param $parameters array
+		 * @return array
+		 */
+		private function buildShortcutPage($linkId, $parameters)
+		{
+			$pageContentBundle = array();
+
+			/** @var  $shortcutRecord ShortcutLinkRecord */
+			$shortcutRecord = ShortcutLinkRecord::model()->findByPk($linkId);
+			/** @var  $shortcut PageContentShortcut */
+			$shortcut = $shortcutRecord->getModel($this->isPhone, $parameters);
+
+			$viewName = '';
+			$useMobileWrapper = true;
+			switch ($shortcut->type)
+			{
+				case 'gridbundle':
+				case 'carouselbundle':
+					/** @var $shortcut  BundleShortcut */
+					$shortcut->getLinks();
+					$viewName = $shortcut->viewName;
+					break;
+				case 'video':
+					$viewName = 'video';
+					break;
+				case 'search':
+					$useMobileWrapper = false;
+					$viewName = 'searchLink';
+					break;
+				case 'quicklist':
+					$viewName = 'quickList';
+					break;
+				case 'window':
+					$viewName = 'libraryWindow';
+					break;
+				case 'page':
+					$viewName = 'libraryPage';
+					break;
+				case 'qpage':
+					$useMobileWrapper = false;
+					$viewName = 'qpage';
+					break;
+				case 'download':
+					$viewName = 'downloadDialog';
+					break;
+				case 'library':
+					$useMobileWrapper = false;
+					$viewName = 'library';
+					break;
+				case 'searchapp':
+					$useMobileWrapper = false;
+					$viewName = 'searchApp';
+					break;
+				case 'qbuilder':
+					$useMobileWrapper = false;
+					$viewName = 'qbuilder';
+					break;
+				case 'quizzes':
+					$useMobileWrapper = false;
+					$viewName = 'quizzes';
+					break;
+				case 'favorites':
+					$useMobileWrapper = false;
+					$viewName = 'favorites';
+					break;
+			}
+
+			if ($viewName != '')
+			{
+				if ($this->isPhone && $useMobileWrapper)
+					$content = $this->renderPartial(
+						'pages/pageWrapper',
+						array_merge(
+							$shortcut->getViewParameters(),
+							array('shortcutContent' => $this->renderPartial('pages/' . $viewName, $shortcut->getViewParameters(), true))
+						),
+						true);
+				else
+					$content = $this->renderPartial('pages/' . $viewName, $shortcut->getViewParameters(), true);
+
+				$actions = !$this->isPhone ?
+					$this->renderPartial('../menu/actionItems', array('actionContainer' => $shortcut), true) :
+					'';
+				$pageContentBundle = array(
+					'content' => $content,
+					'actions' => $actions,
+					'options' => $shortcut->getPageData()
+				);
+			}
+			return $pageContentBundle;
+		}
 		//------Common Site API-------------------------------------------
 
 		//------Regular Site API-------------------------------------------
+		public function actionGetDownloadDialog()
+		{
+			$linkId = Yii::app()->request->getPost('linkId');
+			if (isset($linkId))
+			{
+				/** @var $linkRecord ShortcutLinkRecord */
+				$linkRecord = ShortcutLinkRecord::model()->findByPk($linkId);
+				/**@var $link DownloadShortcut */
+				$link = $linkRecord->getModel($this->isPhone);
+				$this->renderPartial('downloadDialog', array('link' => $link));
+			}
+		}
+
 		public function actionGetQuickSearchResult()
 		{
-			$pageId = Yii::app()->request->getQuery('pageId');
+			$bundleId = Yii::app()->request->getQuery('bundleId');
 			$text = Yii::app()->request->getQuery('text');
 			$onlyFiles = filter_var(trim(Yii::app()->request->getQuery('onlyFiles')), FILTER_VALIDATE_BOOLEAN);
 			$onlyNewFiles = filter_var(trim(Yii::app()->request->getQuery('onlyNewFiles')), FILTER_VALIDATE_BOOLEAN);
@@ -171,12 +182,13 @@
 			else
 				$categories = array();
 
-			if (isset($pageId))
+			if (isset($bundleId))
 			{
-				/** @var $pageRecord ShortcutsPageRecord */
-				$pageRecord = ShortcutsPageRecord::model()->findByPk($pageId);
-				$pageModel = $pageRecord->getModel();
-				$searchBar = $pageModel->searchBar;
+				/** @var $linkRecord ShortcutLinkRecord */
+				$linkRecord = ShortcutLinkRecord::model()->findByPk($bundleId);
+				/** @var $bundle BundleShortcut */
+				$bundle = $linkRecord->getModel($this->isPhone);
+				$searchBar = $bundle->searchBar;
 				$this->pageTitle = $searchBar->title;
 				$searchBar->conditions->text = $text;
 				$searchBar->conditions->searchByContent = $onlyFiles;
@@ -196,84 +208,53 @@
 					$category = (object)$arrayItem;
 					$searchBar->conditions->categories[] = $category;
 				}
-				$content = $this->renderPartial('searchResult', array('searchContainer' => $searchBar), true);
-				$this->render('linkWrapper', array('objectId' => $pageId, 'objectName' => $searchBar->title, 'content' => $content));
+				$this->render('searchBar/searchBarResultsPage', array('searchBar' => $searchBar, 'bundleId' => $bundleId));
 			}
-		}
-
-		public function actionGetDownloadDialog()
-		{
-			$linkId = Yii::app()->request->getPost('linkId');
-			if (isset($linkId))
-			{
-				/** @var $linkRecord ShortcutsLinkRecord */
-				$linkRecord = ShortcutsLinkRecord::model()->findByPk($linkId);
-				/**@var $link DownloadShortcut */
-				$link = $linkRecord->getModel();
-				$this->renderPartial('downloadDialog', array('link' => $link));
-			}
-		}
-
-		public function actionGetSubSearchBar()
-		{
-			$pageId = Yii::app()->request->getPost('pageId');
-			$linkId = Yii::app()->request->getPost('linkId');
-			/** @var $optionsContainer SearchShortcut|SearchBar */
-			$optionsContainer = null;
-			if (isset($pageId))
-			{
-				/** @var $pageRecord ShortcutsPageRecord */
-				$pageRecord = ShortcutsPageRecord::model()->findByPk($pageId);
-				$pageModel = $pageRecord->getModel();
-				$optionsContainer = $pageModel->searchBar;
-			}
-			else if (isset($linkId))
-			{
-				/** @var $linkRecord ShortcutsLinkRecord */
-				$linkRecord = ShortcutsLinkRecord::model()->findByPk($linkId);
-				$optionsContainer = new SearchShortcut($linkRecord);
-			}
-			$this->renderPartial('subSearchBar/bar', array('optionsContainer' => $optionsContainer));
 		}
 
 		public function actionGetSubSearchCustomPanel()
 		{
-			$pageId = Yii::app()->request->getPost('pageId');
+			$bundleId = Yii::app()->request->getPost('bundleId');
 			$linkId = Yii::app()->request->getPost('linkId');
-			/** @var $pageRecord ShortcutsPageRecord */
-			if (!isset($pageId) && isset($linkId))
+
+			if (isset($bundleId) && !isset($linkId))
 			{
-				/** @var $linkRecord ShortcutsLinkRecord */
-				$linkRecord = ShortcutsLinkRecord::model()->findByPk($linkId);
-				$pageRecord = $linkRecord->getParentPage();
+				/** @var $linkRecord ShortcutLinkRecord */
+				$linkRecord = ShortcutLinkRecord::model()->findByPk($bundleId);
+				/** @var $bundle BundleShortcut */
+				$bundle = $linkRecord->getModel($this->isPhone);
+				$searchBar = $bundle->searchBar;
 			}
 			else
-				$pageRecord = ShortcutsPageRecord::model()->findByPk($pageId);
-			$pageModel = $pageRecord->getModel();
-			$searchBar = $pageModel->searchBar;
+			{
+				/** @var $linkRecord ShortcutLinkRecord */
+				$linkRecord = ShortcutLinkRecord::model()->findByPk($linkId);
+				/** @var $searchLink SearchLinkShortcut */
+				$searchLink = $linkRecord->getModel($this->isPhone);
+				$searchBar = $searchLink->subSearchBar;
+			}
 			$this->renderPartial('subSearchBar/customSearchPanel', array('searchBar' => $searchBar));
 		}
 
 		public function actionGetSubSearchTemplatesPanel()
 		{
-			$pageId = Yii::app()->request->getPost('pageId');
+			$bundleId = Yii::app()->request->getPost('bundleId');
 			$linkId = Yii::app()->request->getPost('linkId');
-			$templates = array();
-			$id = '';
-			if (isset($pageId))
+
+			if (isset($bundleId) && !isset($linkId))
 			{
-				/** @var $pageRecord ShortcutsPageRecord */
-				$pageRecord = ShortcutsPageRecord::model()->findByPk($pageId);
-				$pageModel = $pageRecord->getModel();
-				$searchBar = $pageModel->searchBar;
-				$templates = $searchBar->subConditions;
-				$id = $pageId;
+				/** @var $linkRecord ShortcutLinkRecord */
+				$linkRecord = ShortcutLinkRecord::model()->findByPk($bundleId);
+				/** @var $bundle BundleShortcut */
+				$bundle = $linkRecord->getModel($this->isPhone);
+				$templates = $bundle->searchBar->subConditions;
+				$id = $bundleId;
 			}
-			else if (isset($linkId))
+			else
 			{
-				/** @var $linkRecord ShortcutsLinkRecord */
-				$linkRecord = ShortcutsLinkRecord::model()->findByPk($linkId);
-				$link = new SearchShortcut($linkRecord);
+				/** @var $linkRecord ShortcutLinkRecord */
+				$linkRecord = ShortcutLinkRecord::model()->findByPk($linkId);
+				$link = new SearchLinkShortcut($linkRecord, $this->isPhone);
 				$templates = $link->subConditions;
 				$id = $linkId;
 			}
@@ -287,64 +268,18 @@
 		//------Regular Site API-------------------------------------------
 
 		//------Mobile Site API-----------------------------------------------
-		public function actionGetTab()
+		public function actionGetGroupContent()
 		{
-			$tabId = Yii::app()->request->getQuery('tabId');
-			$tabRecord = ShortcutsTabRecord::model()->findByPk($tabId);
-			if (isset($tabRecord))
+			$groupId = Yii::app()->request->getQuery('groupId');
+			/** @var  $groupRecord ShortcutGroupRecord */
+			$groupRecord = ShortcutGroupRecord::model()->findByPk($groupId);
+			if (isset($groupRecord))
 			{
-				$tabPages = TabPages::getList();
-				$this->render('tabPage', array(
-					'tabPages' => $tabPages,
-					'tabRecord' => $tabRecord,
-				));
+				$groupModel = new ShortcutGroup($groupRecord, $this->isPhone);
+				$this->render('groups/groupContent', array('group' => $groupModel));
 			}
 			else
 				$this->redirect(Yii::app()->createAbsoluteUrl('site/index'));
-		}
-
-		public function actionGetLinkContentWrapper()
-		{
-			$linkId = Yii::app()->request->getPost('linkId');
-			/** @var $linkRecord ShortcutsLinkRecord */
-			$linkRecord = ShortcutsLinkRecord::model()->findByPk($linkId);
-			if (isset($linkRecord))
-			{
-				$tabPages = TabPages::getList();
-				switch ($linkRecord->type)
-				{
-					case 'mp4':
-					case 'window':
-					case 'page':
-					case 'onlypage':
-					case 'quicklist':
-						$link = $linkRecord->getModel();
-						$this->renderPartial('linkWrapper', array(
-							'link' => $link,
-							'tabPages' => $tabPages,
-						));
-						break;
-					case 'search':
-						$this->renderPartial('../search/searchResultPage', array(
-							'tabPages' => $tabPages,
-							'parentId' => 'shortcuts'
-						));
-						break;
-					case 'qpage':
-						/** @var $qPageShortcut QPageShortcut */
-						$qPageShortcut = $linkRecord->getModel();
-						/** @var $pageRecord QPageRecord */
-						$pageRecord = QPageRecord::model()->findByPk($qPageShortcut->pageId);
-						$this->renderPartial('../qpage/pageContent', array(
-							'page' => $pageRecord,
-							'parentId' => 'shortcuts'
-						));
-						break;
-					default:
-						Yii::app()->end();
-						break;
-				}
-			}
 		}
 		//------Mobile Site API-----------------------------------------------
 	}

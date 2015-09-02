@@ -1,0 +1,37 @@
+.shortcuts-search-bar
+{
+	width: 100%;
+}
+
+.shortcuts-search-bar.open
+{
+	margin-bottom: 5px;
+}
+
+.shortcuts-search-bar td
+{
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.search-bar-edit-header
+{
+	margin-top: 0;
+}
+
+.search-bar-editors .row
+{
+	margin-left: 0;
+	margin-right: 0;
+}
+
+.shortcuts-search-bar .search-input-container
+{
+	margin-top: 20px;
+}
+
+.tag-condition-selector,
+.search-bar-actions
+{
+	display: none;
+}

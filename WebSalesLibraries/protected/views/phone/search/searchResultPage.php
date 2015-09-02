@@ -1,11 +1,7 @@
 <?
 	/**
-	 * @var $tabPages array
 	 * @var $parentId string
 	 */
-
-	$siteUrl = Yii::app()->getBaseUrl(true);
-	$siteName = str_replace('http://', '', $siteUrl);
 ?>
 <div id="search-results" class="search-results-page shortcut-link-page" data-role='page' data-cache="never" data-dom-cache="false" data-ajax="false">
 	<div data-role='header' class="page-header" data-position="fixed">
@@ -37,12 +33,7 @@
 	</div>
 	<div data-role="panel" data-display="overlay" id="search-results-popup-panel-left">
 		<ul data-role="listview">
-			<? if (Yii::app()->params['jqm_home_page_enabled'] == true): ?>
-				<li data-icon="false">
-					<a data-ajax="false" href="<? echo $siteUrl; ?>"><? echo $siteName; ?></a>
-				</li>
-			<? endif; ?>
-			<? echo $this->renderPartial('../site/tabPageList', array('tabPages' => $tabPages, 'librariesPopupId' => 'search-results-popup-panel-right')); ?>
+			<? echo $this->renderPartial('../shortcuts/groups/groupList'); ?>
 			<li data-icon="false">
 				<a class="logout-button" href="#">Log Out</a>
 			</li>

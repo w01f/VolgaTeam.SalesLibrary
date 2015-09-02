@@ -10,46 +10,17 @@
 
 		this.init = function ()
 		{
-			$('#page-list-button').off('click').on('click', function ()
-			{
-				if ($(this).hasClass('sel'))
-					$(this).removeClass('sel');
-				else
-					$(this).addClass('sel');
-				$.cookie("showQPageList", $(this).hasClass('sel'), {
-					expires: (60 * 60 * 24 * 7)
-				});
+			if ($.cookie("showQPageList") == "true")
 				that.show();
-				that.updateContentSize();
-			});
-			$('#page-add-button').off('click').on('click', function ()
-			{
-				addPage();
-			});
-			$('#page-delete-button').off('click').on('click', function ()
-			{
-				deletePage();
-			});
-			$('#page-save-button').off('click').on('click', function ()
-			{
-				that.savePage(null);
-			});
-			$('#page-preview-button').off('click').on('click', function ()
-			{
-				that.savePage(function ()
-				{
-				});
-			});
-			$('#page-email-outlook-button').off('click').on('click', function ()
-			{
-				that.savePage(emailPageOutlook);
-			});
+			else
+				that.hide();
+
 			var pageList = $('#page-list-container');
 			if (pageList.find('tr').length > 0)
 				openPage(pageList.find('tr.selected').find('.link-id-column').html());
 			else
 			{
-				$('#page-preview-button').attr('href', '#');
+				$('#shortcut-action-container').find('.qbuilder-qsite-preview').attr('href', '#');
 				$('#page-content').html('');
 			}
 			pageList.find('tr').off('click').on('click', function (event)
@@ -91,14 +62,18 @@
 
 		this.show = function ()
 		{
-			var pageList = $('#page-list');
-			var showPageList = $.cookie("showQPageList") != undefined ?
-				$.cookie("showQPageList") == "true" :
-				$('#page-list-button').hasClass('sel');
-			if (showPageList)
-				pageList.show();
-			else
-				pageList.hide();
+			$.cookie("showQPageList", true, {
+				expires: (60 * 60 * 24 * 7)
+			});
+			$('#page-list').show();
+		};
+
+		this.hide = function ()
+		{
+			$.cookie("showQPageList", false, {
+				expires: (60 * 60 * 24 * 7)
+			});
+			$('#page-list').hide();
 		};
 
 		this.addLitePage = function (libraryLinkId, title, fileName, fileType)
@@ -322,129 +297,7 @@
 			});
 		};
 
-		this.savePage = function (onSuccessHandler)
-		{
-			var pageList = $('#page-list-container');
-			var selectedPageRow = pageList.find('tr.selected');
-			var selectedPageId = that.selectedPage.pageId;
-			var title = $('#page-content-title').val();
-			selectedPageRow.find('td.link-name-column').html(title);
-			$.ajax({
-				type: "POST",
-				url: window.BaseUrl + "qbuilder/savePage",
-				data: {
-					selectedPageId: selectedPageId,
-					title: title,
-					description: $('#page-content-description').val(),
-					logo: $('#page-content-tab-logo').find('a.opened').find('img').attr('src'),
-					expirationDate: $('#page-content-expiration-date').val(),
-					requireLogin: $('#page-content-require-login').is(':checked'),
-					pinCode: $('#page-content-access-code').val(),
-					disableBanners: $('#page-content-disable-banners').is(':checked'),
-					disableWidgets: $('#page-content-disable-widgets').is(':checked'),
-					showLinksAsUrl: $('#page-content-show-links-as-url').is(':checked'),
-					recordActivity: $('#page-content-record-activity').is(':checked'),
-					activityEmailCopy: $('#page-content-activity-email-copy').val(),
-					header: $('#page-content-header-text').val(),
-					footer: $('#page-content-footer-text').val()
-				},
-				beforeSend: function ()
-				{
-					$.SalesPortal.Overlay.show(false);
-				},
-				complete: function ()
-				{
-					$.SalesPortal.Overlay.hide();
-				},
-				success: function ()
-				{
-					if (onSuccessHandler != null)
-						onSuccessHandler();
-					else
-					{
-						$('body').append('<div id="page-content-save-confirm" title="adSALESapps.com">quickSITE is SAVED!</div>');
-						$("#page-content-save-confirm").dialog({
-							resizable: false,
-							modal: true,
-							buttons: {
-								"OK": function ()
-								{
-									$(this).dialog("close");
-								}
-							},
-							open: function ()
-							{
-								$(this).closest(".ui-dialog")
-									.find(".ui-dialog-titlebar-close")
-									.html("<span class='ui-icon ui-icon-closethick'></span>");
-							},
-							close: function ()
-							{
-								$("#page-content-save-confirm").remove();
-							}
-						});
-					}
-				},
-				error: function ()
-				{
-				},
-				async: true,
-				dataType: 'html'
-			});
-		};
-
-		this.updateContentSize = function ()
-		{
-			var height = $('#content').height() - $('#page-list-buttons').height() - 6;
-			$('#page-list-container').css({
-				'height': height + 'px'
-			});
-			if (that.selectedPage != undefined)
-				that.selectedPage.updateContentSize();
-		};
-
-		var load = function (pageToSelectId)
-		{
-			var pageList = $('#page-list-container');
-			if (pageToSelectId == undefined && that.selectedPage != undefined)
-				pageToSelectId = that.selectedPage.pageId;
-			$.ajax({
-				type: "POST",
-				url: window.BaseUrl + "qbuilder/getPageList",
-				data: {
-					selectedPageId: pageToSelectId
-				},
-				beforeSend: function ()
-				{
-					pageList.html('');
-					if (that.selectedPage != undefined)
-						that.selectedPage.clear();
-					that.selectedPage = undefined;
-					$.SalesPortal.Overlay.show(false);
-				},
-				complete: function ()
-				{
-					$.SalesPortal.Overlay.hide();
-				},
-				success: function (msg)
-				{
-					pageList.html(msg);
-					that.init();
-				},
-				error: function ()
-				{
-				},
-				async: true,
-				dataType: 'html'
-			});
-		};
-
-		var openPage = function (selectedPageId)
-		{
-			that.selectedPage = new $.SalesPortal.QBuilder.PageContent(selectedPageId);
-		};
-
-		var addPage = function (clonePageId)
+		this.addPage = function (clonePageId)
 		{
 			$.ajax({
 				type: "POST",
@@ -516,7 +369,7 @@
 			});
 		};
 
-		var deletePage = function (pageId)
+		this.deletePage = function (pageId)
 		{
 			var selectedPageId = that.selectedPage.pageId;
 			if (pageId != undefined)
@@ -567,6 +420,135 @@
 					}
 				});
 			}
+		};
+
+		this.savePage = function (onSuccessHandler)
+		{
+			var pageList = $('#page-list-container');
+			var selectedPageRow = pageList.find('tr.selected');
+			var selectedPageId = that.selectedPage.pageId;
+			var title = $('#page-content-title').val();
+			selectedPageRow.find('td.link-name-column').html(title);
+			$.ajax({
+				type: "POST",
+				url: window.BaseUrl + "qbuilder/savePage",
+				data: {
+					selectedPageId: selectedPageId,
+					title: title,
+					description: $('#page-content-description').val(),
+					logo: $('#page-content-tab-logo').find('a.opened').find('img').attr('src'),
+					expirationDate: $('#page-content-expiration-date').val(),
+					requireLogin: $('#page-content-require-login').is(':checked'),
+					pinCode: $('#page-content-access-code').val(),
+					disableBanners: $('#page-content-disable-banners').is(':checked'),
+					disableWidgets: $('#page-content-disable-widgets').is(':checked'),
+					showLinksAsUrl: $('#page-content-show-links-as-url').is(':checked'),
+					recordActivity: $('#page-content-record-activity').is(':checked'),
+					activityEmailCopy: $('#page-content-activity-email-copy').val(),
+					header: $('#page-content-header-text').val(),
+					footer: $('#page-content-footer-text').val()
+				},
+				beforeSend: function ()
+				{
+					$.SalesPortal.Overlay.show(false);
+				},
+				complete: function ()
+				{
+					$.SalesPortal.Overlay.hide();
+				},
+				success: function ()
+				{
+					if (onSuccessHandler != null)
+						onSuccessHandler();
+					else
+					{
+						$('body').append('<div id="page-content-save-confirm" title="adSALESapps.com">quickSITE is SAVED!</div>');
+						$.fancybox({
+							content: $('<div class="row" style="margin: 0;">' +
+								'<div class="col-xs-3"><img src="' +
+								window.BaseUrl +
+								'images/qpages/save.png">' +
+								'</div>' +
+								'<div class="col-xs-8 col-xs-offset-1">' +
+								'<h3>Boo Yah!</h3>' +
+								'<p class="text-muted">Your QuickSite is Saved</p>' +
+								'</div>' +
+								'</div>' +
+								'<div class="row" style="margin: 0;"><div class="col-xs-12 text-center"><button type="button" class="btn btn-default" style="width: 80px; margin-top: 20px" onclick="$.fancybox.close()">OK</button></div></div>'),
+							title: 'QuickSite',
+							width: 400,
+							autoSize: false,
+							autoHeight: true,
+							openEffect: 'none',
+							closeEffect: 'none',
+							helpers: {
+								title: false
+							}
+						});
+					}
+				},
+				error: function ()
+				{
+				},
+				async: true,
+				dataType: 'html'
+			});
+		};
+
+		this.emailPage = function ()
+		{
+			that.savePage(emailPageOutlook);
+		};
+
+		this.updateContentSize = function ()
+		{
+			var height = $('#content').height() - $('#page-list-buttons').outerHeight() - 10;
+			$('#page-list-container').css({
+				'height': height + 'px'
+			});
+			if (that.selectedPage != undefined)
+				that.selectedPage.updateContentSize();
+		};
+
+		var load = function (pageToSelectId)
+		{
+			var pageList = $('#page-list-container');
+			if (pageToSelectId == undefined && that.selectedPage != undefined)
+				pageToSelectId = that.selectedPage.pageId;
+			$.ajax({
+				type: "POST",
+				url: window.BaseUrl + "qbuilder/getPageList",
+				data: {
+					selectedPageId: pageToSelectId
+				},
+				beforeSend: function ()
+				{
+					pageList.html('');
+					if (that.selectedPage != undefined)
+						that.selectedPage.clear();
+					that.selectedPage = undefined;
+					$.SalesPortal.Overlay.show(false);
+				},
+				complete: function ()
+				{
+					$.SalesPortal.Overlay.hide();
+				},
+				success: function (msg)
+				{
+					pageList.html(msg);
+					that.init();
+				},
+				error: function ()
+				{
+				},
+				async: true,
+				dataType: 'html'
+			});
+		};
+
+		var openPage = function (selectedPageId)
+		{
+			that.selectedPage = new $.SalesPortal.QBuilder.PageContent(selectedPageId);
 		};
 
 		var deletePages = function ()

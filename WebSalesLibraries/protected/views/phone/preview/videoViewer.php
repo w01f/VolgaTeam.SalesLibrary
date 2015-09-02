@@ -3,18 +3,10 @@
 	 * @var $data VideoPreviewData
 	 */
 
-	$siteUrl = Yii::app()->getBaseUrl(true);
-	$siteName = str_replace('http://', '', $siteUrl);
-
 	$authorized = false;
 	$userId = Yii::app()->user->getId();
 	if (isset($userId))
 		$authorized = true;
-
-	if ($authorized)
-		$tabPages = TabPages::getList();
-	else
-		$tabPages = array();
 ?>
 <div data-role='page' id="link-viewer" class="link-viewer-page" data-cache="never" data-dom-cache="false" data-ajax="false">
 	<div data-role='header' class="page-header" data-position="fixed">
@@ -66,12 +58,7 @@
 	<? if ($authorized): ?>
 		<div data-role="panel" data-display="overlay" id="link-viewer-popup-panel-left">
 			<ul data-role="listview">
-				<? if (Yii::app()->params['jqm_home_page_enabled'] == true): ?>
-					<li data-icon="false">
-						<a data-ajax="false" href="<? echo $siteUrl; ?>"><? echo $siteName; ?></a>
-					</li>
-				<? endif; ?>
-				<? echo $this->renderPartial('../site/tabPageList', array('tabPages' => $tabPages, 'librariesPopupId' => 'link-viewer-popup-panel-right')); ?>
+				<? echo $this->renderPartial('../shortcuts/groups/groupList'); ?>
 				<li data-icon="false">
 					<a class="logout-button" href="#">Log Out</a>
 				</li>

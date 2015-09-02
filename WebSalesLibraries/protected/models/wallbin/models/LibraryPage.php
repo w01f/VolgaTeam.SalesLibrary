@@ -78,7 +78,7 @@
 		public $allUsers;
 		public $cachedColumnsView;
 		public $logoPath;
-		public $logoLink;
+		public $logoContent;
 
 		/**
 		 * @param $library
@@ -100,15 +100,13 @@
 			$this->enableColumns = $pageRecord->has_columns;
 			$logoPath = Yii::app()->params['librariesRoot'] . "/Graphics/" . $this->parent->name . "/page" . strval($this->order + 1) . ".png";
 			if (file_exists($logoPath))
-			{
 				$this->logoPath = $logoPath;
-				$this->logoLink = str_replace(' ', '%20', htmlspecialchars($logoPath));
-			}
 			else
-			{
 				$this->logoPath = $this->parent->logoPath;
-				$this->logoLink = str_replace(' ', '%20', htmlspecialchars($this->parent->logoPath));
-			}
+			if (isset($this->logoPath))
+				$this->logoContent = 'data:image/png;base64,' . base64_encode(file_get_contents($this->logoPath));
+			else
+				$this->logoContent = '//:0';
 		}
 
 		public function loadData()
@@ -154,7 +152,7 @@
 		{
 			$this->loadData();
 			$this->loadFolders();
-			$path = Yii::getPathOfAlias('application.views.regular.wallbin') . '/columnsPage.php';
+			$path = Yii::getPathOfAlias('application.views.regular.wallbin') . '/columnsView.php';
 			$content = $controller->renderFile($path, array('libraryPage' => $this), true);
 			if (isset($content) && $content != '')
 			{

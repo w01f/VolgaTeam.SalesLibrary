@@ -1,0 +1,147 @@
+/*Common Header------------------------------------*/
+#content .wallbin-header
+{
+	display: table-row;
+}
+
+#content .wallbin-header > div
+{
+	display: table-cell;
+	vertical-align: middle;
+	padding: 5px;
+	border-bottom: 1px #999 solid;
+}
+
+#content .wallbin-header .page-selector-container
+{
+	width: 100%;
+	text-align: right;
+}
+/*------------------------------------*/
+
+/*Tabs Header------------------------------------*/
+#content .wallbin-header .page-selector-container .tab-pages div,
+#content .wallbin-header .page-selector-container .tab-pages span
+{
+	background-color: #FFF !important;
+	border-radius: 0 !important;
+}
+
+#content .wallbin-header .page-selector-container .tab-pages div.scroll_tab_inner span.scroll_tab_over,
+#content .wallbin-header .page-selector-container .tab-pages div.scroll_tab_inner li.scroll_tab_over
+{
+	background-color: #CCC !important;
+}
+
+#content .wallbin-header .page-selector-container .tab-pages .scroll_tab_left_finisher,
+#content .wallbin-header .page-selector-container .tab-pages .scroll_tab_right_finisher
+{
+	width: 0 !important;
+}
+
+#content .wallbin-header .page-selector-container
+{
+	width: 100%;
+}
+
+#content .wallbin-header .page-selector-container .tab-pages .page-tab-header.selected
+{
+	background-color: #C6E2FF !important;
+}
+
+/*------------------------------------*/
+
+/*Combo Header------------------------------------*/
+#content .wallbin-header .bootstrap-select
+{
+	width: 300px;
+}
+
+/*------------------------------------*/
+
+/*Content------------------------------------*/
+#content .wallbin-container .content-container .page-container
+{
+	width: 100%;
+	display: none;
+}
+
+#content .wallbin-container .page-container .content-container
+{
+	width: 100%;
+	overflow-y: auto;
+	-webkit-overflow-scrolling: touch;
+}
+/*Columns------------------------------------*/
+#content .wallbin-container .page-container .header-container
+{
+	width: 100%;
+	display: table;
+	border-bottom: 1px #999 solid;
+}
+
+#content .page-column
+{
+	width: 33%;
+	float: left;
+	border: none;
+	margin-top: 0;
+	margin-left: -1px;
+	vertical-align: top;
+}
+
+#content .page-column.column2
+{
+	width: 34%;
+	margin-right: -1px;
+}
+
+#content .wallbin-container .page-container .column-header-container
+{
+	display: table-cell;
+	vertical-align: middle;
+	width: 33%;
+}
+
+#content .wallbin-container .page-container .column-header-container.column-header-container-2
+{
+	width: 34%;
+}
+
+#content .wallbin-container .page-container .column-widget
+{
+	vertical-align: middle;
+}
+
+#content .wallbin-container .page-container .column-header
+{
+	vertical-align: middle;
+	padding-left: 5px;
+}
+/*------------------------------------*/
+
+/*Accordion------------------------------------*/
+#content .accordion-folder-container
+{
+	width: 90%;
+	margin: 20px;
+	border: 1px solid lightgray;
+}
+
+#content .accordion-folder-container .folder-links
+{
+	display: none;
+	border-top: 1px solid lightgray;
+}
+
+#content .accordion-folder-container .btn.folder-header
+{
+	background-color: #fff;
+}
+
+#content .accordion-folder-container .folder-header .links-number
+{
+	color: #AAA;
+}
+/*------------------------------------*/
+/*------------------------------------*/

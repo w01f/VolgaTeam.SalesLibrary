@@ -324,7 +324,10 @@
 					return $this->widget;
 			if ($this->isFolder)
 				return base64_encode(file_get_contents(realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'folder-file-icons' . DIRECTORY_SEPARATOR . 'folder.png'));
-			return $this->parent->parent->parent->getAutoWidget($this->fileExtension);
+			if (isset($this->parent) && isset($this->parent->parent) && isset($this->parent->parent->parent))
+				return $this->parent->parent->parent->getAutoWidget($this->fileExtension);
+			else
+				return null;
 		}
 
 		/**

@@ -5,7 +5,6 @@
 	$lastCharFromTagsName = substr(Yii::app()->params['tags']['column_name'], -1);
 	$tagsName = $lastCharFromTagsName == "y" ? substr_replace(Yii::app()->params['tags']['column_name'], "ies", -1) : (Yii::app()->params['tags']['column_name'] . "s");
 ?>
-?>
 <div class="tag-condition-selector">
 	<div class="tool-dialog">
 		<div class="group-panel">

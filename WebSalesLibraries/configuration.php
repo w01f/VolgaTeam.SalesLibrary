@@ -15,8 +15,6 @@
 			'name' => 'Sales Libraries',
 			'params' => array(
 				'appRoot' => dirname(__FILE__),
-				'jqm_home_page_enabled' => true,
-				'jqm_home_page_title' => 'RRTV',
 				'login' => array(
 					'rememberMeField' => true,
 					'forgotPasswordField' => true,
@@ -25,35 +23,6 @@
 					'tempPasswordExpiredIn' => '7',
 					'complex_password' => false,
 					'jqmlogintext' => 'Welcome to Raycom Results for Smartphones',
-				),
-				'home_tab' => array(
-					'name' => 'HOME',
-					'jqm_name' => 'HOME',
-					'position' => 1,
-				),
-				'search_full_tab' => array(
-					'visible' => true,
-					'name' => 'SEARCH',
-					'jqm_name' => 'SEARCH',
-					'position' => 2,
-				),
-				'favorites_tab' => array(
-					'visible' => true,
-					'name' => 'Favorites',
-					'jqm_name' => 'Favorites',
-					'position' => 5,
-				),
-				'quiz_tab' => array(
-					'visible' => true,
-					'name' => 'Tests',
-					'jqm_name' => 'Tests',
-					'position' => 98,
-				),
-				'qbuilder_tab' => array(
-					'visible' => true,
-					'name' => 'QBuilder',
-					'jqm_name' => 'QBuilder',
-					'position' => 99,
 				),
 				'stations' => array(
 					'tab_name' => 'Libraries',
@@ -101,14 +70,6 @@
 						'copy_enabled' => true,
 						'copy' => 'help@adsalesapps.com'
 					),
-				),
-				'ticker' => array(
-					'visible' => true,
-					'show_label' => false,
-					'show_logo' => true,
-					'show_control' => true,
-					'effect' => 'slide',
-					'theme' => 6,
 				),
 				'android_tablets' => array(
 					'Mozilla/5.0 (Linux; U; Android 4.2.2; es-us; GT-P5210 Build/JDQ39) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Safari/534.30/1.05v.3406.d7',

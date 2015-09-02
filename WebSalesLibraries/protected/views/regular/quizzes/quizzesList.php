@@ -19,7 +19,7 @@
 				</div>
 				<?
 					if ($selected && isset($quizItem->childItems))
-						echo $this->renderPartial('quizzesList', array('quizItems' => $quizItem->childItems, 'selectedQuizItemBreadcrumbs' => $selectedQuizItemBreadcrumbs), true);
+						echo $this->renderPartial('../quizzes/quizzesList', array('quizItems' => $quizItem->childItems, 'selectedQuizItemBreadcrumbs' => $selectedQuizItemBreadcrumbs), true);
 				?>
 			</li>
 		<? endforeach; ?>

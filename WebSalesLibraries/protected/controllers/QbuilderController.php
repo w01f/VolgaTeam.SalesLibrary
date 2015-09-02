@@ -10,19 +10,6 @@
 			return YiiBase::getPathOfAlias($this->pathPrefix . 'qbuilder');
 		}
 
-		public function actionGetMainPage()
-		{
-			$userId = Yii::app()->user->getId();
-			if (isset($userId))
-			{
-				$links = UserLinkCartRecord::getLinksByUser($userId);
-				$pages = QPageRecord::model()->getByOwner($userId);
-				$selectedPage = count($pages) > 0 ? $pages[0] : null;
-				$logos = QPageRecord::getPageLogoList();
-				$this->renderPartial('mainPage', array('pages' => $pages, 'selectedPage' => $selectedPage, 'links' => $links, 'logos' => $logos), false, true);
-			}
-		}
-
 		public function actionGetPageList()
 		{
 			$selectedPageId = Yii::app()->request->getPost('selectedPageId');
@@ -104,7 +91,7 @@
 				$activityEmailCopy = null;
 
 			$userId = Yii::app()->user->getId();
-			if (isset($logo) && isset($userId) && isset($createDate) && isset($linkId) && isset($expiresInDays) && isset($restricted))
+			if (isset($userId) && isset($createDate) && isset($linkId) && isset($expiresInDays) && isset($restricted))
 			{
 				$expirationDate = $expiresInDays > 0 ? date(Yii::app()->params['mysqlDateFormat'], strtotime(date("Y-m-d") . ' + ' . $expiresInDays . ' day')) : null;
 				echo QPageRecord::addPageLite($userId, $createDate, $subtitle, $logo, $expirationDate, $restricted, $disableBanners, $disableWidgets, $showLinksAsUrl, $recordActivity, $pinCode, $activityEmailCopy, $linkId)->getUrl();

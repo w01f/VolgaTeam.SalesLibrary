@@ -1,17 +1,29 @@
-#ribbon .form-horizontal > .form-group
+#content .qpage-header
 {
-	margin-left: 3px;
-	margin-right: 3px
+	display: table-row;
 }
 
-#content > div
+#content .qpage-header > div
 {
-	padding-left: 30px;
+	display: table-cell;
+	vertical-align: middle;
+	padding: 5px;
+	border-bottom: 1px #999 solid;
+}
+
+#content .qpage-header .email
+{
+	width: 100%;
+	text-align: right;
+}
+
+#content .qpage-header .email-description
+{
+	line-height: 2.5em;
 }
 
 #page-title
 {
-	margin-top: 30px;
 	margin-bottom: 20px;
 }
 

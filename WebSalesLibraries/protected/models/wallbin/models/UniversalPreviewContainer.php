@@ -118,33 +118,34 @@
 				$previewFile->path = str_replace('\\', '/', $this->parent->storagePath . DIRECTORY_SEPARATOR . $record->relative_path);
 				$previewFile->name = basename($previewFile->path);
 				$previewFile->size = file_exists($previewFile->path) ? filesize($previewFile->path) : 0;
+				$fileTime = file_exists($previewFile->path) ? filemtime($previewFile->path) : 'time_undefined';
 				switch ($record->type)
 				{
 					case 'png':
-						$previewFile->link .= '?version=' . filemtime($previewFile->path);
+						$previewFile->link .= '?version=' . $fileTime;
 						$this->pngGalleryItems[] = $previewFile;
 						break;
 					case 'png_phone':
-						$previewFile->link .= '?version=' . filemtime($previewFile->path);
+						$previewFile->link .= '?version=' . $fileTime;
 						$this->pngItems[] = $previewFile;
 						break;
 					case 'jpeg':
-						$previewFile->link .= '?version=' . filemtime($previewFile->path);
+						$previewFile->link .= '?version=' . $fileTime;
 						$this->jpegGalleryItems[] = $previewFile;
 						break;
 					case 'jpeg_phone':
-						$previewFile->link .= '?version=' . filemtime($previewFile->path);
+						$previewFile->link .= '?version=' . $fileTime;
 						$this->jpegItems[] = $previewFile;
 						break;
 					case 'pdf':
 						$this->pdf = $previewFile;
 						break;
 					case 'thumbs':
-						$previewFile->link .= '?version=' . filemtime($previewFile->path);
+						$previewFile->link .= '?version=' . $fileTime;
 						$this->thumbItems[] = $previewFile;
 						break;
 					case 'thumbs_phone':
-						$previewFile->link .= '?version=' . filemtime($previewFile->path);
+						$previewFile->link .= '?version=' . $fileTime;
 						$this->thumbPhoneItems[] = $previewFile;
 						break;
 					case 'mp4':

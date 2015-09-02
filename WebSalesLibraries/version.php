@@ -1,1 +1,3 @@
-<? echo phpversion(); ?>
+<?
+	echo phpinfo();
+?>

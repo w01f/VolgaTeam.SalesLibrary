@@ -8,6 +8,11 @@
 	height: 400px;
 }
 
+.logo-list.disabled
+{
+	opacity: 0.2;
+}
+
 .logo-list ul
 {
 	width: 100%;

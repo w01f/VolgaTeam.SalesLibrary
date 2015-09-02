@@ -11,46 +11,43 @@
 
 		public function actionIndex()
 		{
-			$tabPages = TabPages::getList();
+			$menuGroups = ShortcutGroupRecord::getAvailableGroups($this->isPhone);
+			$this->pageTitle = Yii::app()->name;
 
 			if ($this->isPhone)
 			{
-				if (Yii::app()->params['jqm_home_page_enabled'] == true)
-				{
-					if (isset(Yii::app()->user))
-					{
-						$userId = Yii::app()->user->getId();
-						$userLibraryTabs = UserTabRecord::getLibraryTabs($userId);
-					}
-					else
-						$userLibraryTabs = array();
-
-					$this->render('index', array(
-						'tabPages' => $tabPages,
-						'userLibraryPages' => $userLibraryTabs
-					));
-				}
-				else
-				{
-					foreach ($tabPages as $tabName => $tabIndex)
-					{
-						$this->redirect(TabPages::getTabUrl($tabName));
-						break;
-					}
-				}
+				$defaultGroup = $menuGroups[0];
+				$this->render('../shortcuts/groups/groupContent', array('group' => $defaultGroup));
 			}
 			else
 			{
-				$this->pageTitle = Yii::app()->name;
-				$tickerRecords = TickerLinkRecord::getLinks();
-				$this->render('index', array('tabPages' => $tabPages, 'tickerRecords' => $tickerRecords));
+				$defaultShortcut = null;
+				foreach ($menuGroups as $menuGroup)
+				{
+					if ($menuGroup->enabled == true)
+						foreach ($menuGroup->menuItems as $menuItem)
+						{
+							/** @var  $shortcut PageContentShortcut */
+							$shortcut = $menuItem->shortcut;
+							if ($shortcut->enabled == true)
+								switch ($shortcut->type)
+								{
+									case 'gridbundle':
+									case 'carouselbundle':
+									case 'library':
+										$defaultShortcut = $shortcut;
+										break;
+									default:
+										continue;
+								}
+							if (isset($defaultShortcut))
+								break;
+						}
+					if (isset($defaultShortcut))
+						break;
+				}
+				$this->render('index', array('menuGroups' => $menuGroups, 'defaultShortcut' => $defaultShortcut));
 			}
-		}
-
-		public function actionEmpty()
-		{
-			$tabPages = TabPages::getList();
-			$this->render('index', array('tabPages' => $tabPages));
 		}
 
 		public function actionBadBrowser()

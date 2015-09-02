@@ -2,11 +2,16 @@
 {
 	window.BaseUrl = window.BaseUrl || '';
 	$.SalesPortal = $.SalesPortal || { };
-	$.SalesPortal.SearchDataTable = function (saveState)
+	$.SalesPortal.SearchDataTable = function (options)
 	{
+
+		var saveState = options != undefined ? options.saveSate : undefined;
+		var deleteHandler = options != undefined ? options.deleteHandler : undefined;
+
+
 		var dataTable = undefined;
 
-		this.init = function (searchResults, viewOptions, sortColumnTag, sortDirection)
+		this.init = function (dataset, viewOptions, sortColumnTag, sortDirection)
 		{
 			destroy();
 
@@ -33,11 +38,16 @@
 					break;
 			}
 
-			var content = $('#content');
+			var content = $.SalesPortal.Content.getContentObject();
 
-			var tableContainer = content.find('.search-results-container');
-			tableContainer.html('<table id="search-results" class="table table-striped table-bordered"></table>');
-			var table = $("#search-results");
+			var tableContainer = content.find('.data-table-content-container');
+
+			if (!$.SalesPortal.Content.isMobileDevice())
+				tableContainer.html('<table id="data-table-content" class="table table-striped table-bordered"></table>');
+			else
+				tableContainer.html('<table id="data-table-content" class="table table-striped"></table>');
+
+			var table = $("#data-table-content");
 
 			var columnSettings = [];
 			if (viewOptions.showCategory)
@@ -88,6 +98,14 @@
 				"class": "centered",
 				"width": "80px"
 			});
+			if (viewOptions.showDeleteButton)
+				columnSettings.push({
+					"data": null,
+					"title": '',
+					"width": "5px",
+					"orderable": false,
+					"defaultContent": '<img class="link-delete-button" src="' + window.BaseUrl + 'images/search/search-delete.png">'
+				});
 			columnSettings.push({
 				"data": "id",
 				"title": "Id",
@@ -97,13 +115,13 @@
 
 			dataTable = table
 				.dataTable({
-					"data": searchResults != undefined ? searchResults.dataset : [],
+					"data": dataset != undefined ? dataset : [],
 					"columns": columnSettings,
 					stateSave: saveState,
 					"order": [
 						[ sortColumnIndex, sortDirection != undefined ? sortDirection : "asc" ]
 					],
-					"scrollY": getTableSize(),
+					"scrollY": $.SalesPortal.Content.isMobileDevice() ? getNativeTableSize() : getBootstrapTableSize(),
 					"scrollCollapse": false,
 					"aLengthMenu": [
 						[15, 25, 50, 100 , -1],
@@ -115,21 +133,33 @@
 						"sZeroRecords": ""
 					}
 				});
-			$("#search-results_length").find('select').selectpicker();
+			if (!$.SalesPortal.Content.isMobileDevice())
+				$("#data-table-content_length").find('select').selectpicker();
+
+			if (viewOptions.showDeleteButton && deleteHandler != undefined)
+			{
+				table.on('click', '.link-delete-button', function (e)
+				{
+					var linkId = dataTable.api().row($(this).closest( "tr" )).data().id;
+					deleteHandler(linkId);
+					e.stopPropagation();
+				});
+			}
 			table.on('click', 'tr', function ()
 			{
 				var linkId = dataTable.api().row(this).data().id;
 				$.SalesPortal.LinkManager.requestViewDialog(linkId, false);
 			});
-			$.mtReInit();
+
+
 		};
 
 		this.updateSize = function ()
 		{
 			if (dataTable != undefined)
 			{
-				var height = getTableSize();
-				$('#search-results_wrapper').find('.dataTables_scrollBody').css({
+				var height = $.SalesPortal.Content.isMobileDevice() ? getNativeTableSize() : getBootstrapTableSize();
+				$('#data-table-content_wrapper').find('.dataTables_scrollBody').css({
 					'height': height + 'px'
 				});
 				dataTable.fnSettings().oScroll.sY = height + 'px';
@@ -149,21 +179,38 @@
 				dataTable.fnDestroy();
 		};
 
-		var getTableSize = function ()
+		var getBootstrapTableSize = function ()
 		{
 			var content = $('#content');
 
-			var topHeight = $('#search-results_length').closest('.row').outerHeight(true);
-			var bottomHeight = $('#search-results_info').closest('.row').outerHeight(true);
+			var topHeight = $('#data-table-content_length').closest('.row').outerHeight(true);
+			var bottomHeight = $('#data-table-content_info').closest('.row').outerHeight(true);
 
-			var tableHeaderHeight = $('#search-results_wrapper').find('.dataTables_scrollHead').outerHeight(true);
+			var tableHeaderHeight = $('#data-table-content_wrapper').find('.dataTables_scrollHead').outerHeight(true);
 
-			var containerOuterHeight = content.find('.search-results-container').outerHeight(true);
-			var containerInnerHeight = content.find('.search-results-container').height();
+			var containerOuterHeight = content.find('.data-table-content-container').outerHeight(true);
+			var containerInnerHeight = content.find('.data-table-content-container').height();
 
-			var aboveContent = content.find('.search-results-above').outerHeight(true);
+			var conditionDescriptionContent = content.find('.search-app-footer').outerHeight(true);
 
-			return content.height() - (topHeight + bottomHeight + tableHeaderHeight + aboveContent + (containerOuterHeight - containerInnerHeight)) - 5;
+			return content.height() - (topHeight + bottomHeight + tableHeaderHeight + conditionDescriptionContent + (containerOuterHeight - containerInnerHeight)) - 5;
+		};
+
+		var getNativeTableSize = function ()
+		{
+			var content = $('#content');
+
+			var topHeight = $('#data-table-content_length').outerHeight(true);
+			var bottomHeight = $('#data-table-content_info').outerHeight(true);
+
+			var tableHeaderHeight = $('#data-table-content_wrapper').find('.dataTables_scrollHead').outerHeight(true);
+
+			var containerOuterHeight = content.find('.data-table-content-container').outerHeight(true);
+			var containerInnerHeight = content.find('.data-table-content-container').height();
+
+			var conditionDescriptionContent = content.find('.search-app-footer').outerHeight(true);
+
+			return content.height() - (topHeight + bottomHeight + tableHeaderHeight + conditionDescriptionContent + (containerOuterHeight - containerInnerHeight)) - 5;
 		};
 	};
 })(jQuery);

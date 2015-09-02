@@ -1,0 +1,47 @@
+#right-navbar
+{
+	width: 200px;
+	padding: 0;
+	margin: 0;
+	vertical-align: top;
+	border-right: 2px #999 solid;
+}
+
+#right-navbar .logo-list
+{
+	border: none;
+	margin-left: 0;
+}
+
+.sub-search-conditions-pane
+{
+	padding: 10px;
+}
+
+.sub-search-conditions-pane .row
+{
+	margin-bottom: 15px;
+}
+
+.sub-search-conditions-pane .file-filter-panel .search-option
+{
+	padding-bottom: 10px;
+}
+
+#right-navbar .logo-list li
+{
+	margin-top: 10px;
+	float: none;
+	text-align: center;
+}
+
+#right-navbar .logo-list li.disabled img
+{
+	opacity: 0.4;
+	filter: alpha(opacity=40);
+}
+
+.shortcuts-data-table-content-container
+{
+	margin: 30px;
+}

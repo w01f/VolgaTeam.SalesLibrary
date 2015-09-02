@@ -1,0 +1,81 @@
+#shortcut-action-menu,
+#shortcut-action-menu .main-level,
+#shortcut-action-menu .level
+{
+	background-color: #2C84EE;
+}
+
+#shortcut-action-menu .main-level,
+#shortcut-action-menu .level
+{
+	border: none;
+	color: #FFF;
+	text-align: center;
+}
+
+#shortcut-action-menu .main-level .menu
+{
+	width: inherit;
+	height: inherit;
+	margin: 0;
+	cursor: pointer;
+}
+
+#shortcut-action-menu .level .column
+{
+	float: none;
+	display: table-cell;
+	margin: 0;
+}
+
+#shortcut-action-menu .main-level .shortcut-menu-header.main-menu-active
+{
+	display: none;
+}
+
+#shortcut-action-menu .main-level .shortcut-menu-header:hover
+{
+	background-color: #2C84EE;
+}
+
+#shortcut-action-menu .main-level .menu .icon
+{
+	padding-top: 5px;
+}
+
+#shortcut-action-menu .main-level i
+{
+	font-size: 35px;
+	vertical-align: sub;
+}
+
+#shortcut-action-menu .metro-side-menu
+{
+	position: fixed;
+	right: 0;
+	left: inherit;
+	z-index: 101;
+	top: 0;
+}
+
+#shortcut-action-menu .metro-side-menu .level
+{
+	transition: all 100ms ease-in 0s;
+	background-color: transparent;
+	position: absolute;
+	top: 48px;
+	left: inherit;
+	right: 2px;
+	border: none;
+}
+
+#shortcut-action-menu .main-level .shortcut-action
+{
+	margin: 5px;
+	padding-top: 5px;
+}
+
+#shortcut-action-menu .main-level .shortcut-action .icon
+{
+	margin-bottom: 5px;
+}

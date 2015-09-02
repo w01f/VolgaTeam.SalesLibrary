@@ -7,6 +7,29 @@
 	{
 		var that = this;
 
+		this.init = function ()
+		{
+			if ($.cookie("showLinkCart") == "true")
+				that.show();
+			else
+				that.hide();
+
+			$('#link-cart-refresh').off('click').on('click', function ()
+			{
+				that.load();
+			});
+			$('#link-cart-clear').off('click').on('click', function ()
+			{
+				clear();
+			});
+			$('#link-cart-add-all').off('click').on('click', function ()
+			{
+				addAllLinksToPage();
+			});
+
+			initLinks();
+		};
+
 		this.load = function ()
 		{
 			var linkCartGrid = $('#link-cart-grid');
@@ -26,7 +49,7 @@
 				success: function (msg)
 				{
 					linkCartGrid.html(msg);
-					that.init();
+					initLinks();
 				},
 				error: function ()
 				{
@@ -36,61 +59,20 @@
 			});
 		};
 
-		this.init = function ()
-		{
-			$('#link-cart-refresh').off('click').on('click', function ()
-			{
-				that.load();
-			});
-			$('#link-cart-clear').off('click').on('click', function ()
-			{
-				clear();
-			});
-			$('#link-cart-add-all').off('click').on('click', function ()
-			{
-				addAllLinksToPage();
-			});
-			$('#link-cart-button').off('click').on('click', function ()
-			{
-				if ($(this).hasClass('sel'))
-					$(this).removeClass('sel');
-				else
-					$(this).addClass('sel');
-				$.cookie("showLinkCart", $(this).hasClass('sel'), {
-					expires: (60 * 60 * 24 * 7)
-				});
-				that.show();
-				that.updateContentSize();
-			});
-
-			var linkCart = $('#link-cart');
-			linkCart.find('.link-delete').off('click').on('click', deleteLink);
-			linkCart.find('.draggable-link').draggable({
-					revert: "invalid",
-					distance: 70,
-					delay: 500,
-					helper: function ()
-					{
-						var ids = $(this).find('.link-id-column').html().split('---');
-						var linkInCartId = ids[0].replace('cart', '');
-						return  $('<span id="' + linkInCartId + '" class="glyphicon glyphicon-file"></span>');
-					},
-					appendTo: "body",
-					cursorAt: { left: -10, top: 0 }
-				}
-			);
-		};
-
 		this.show = function ()
 		{
-			var linkCart = $('#link-cart');
-			var showLinkCart = $.cookie("showLinkCart") != undefined ?
-				$.cookie("showLinkCart") == "true" :
-				$('#link-cart-button').hasClass('sel');
-			if (showLinkCart)
-				linkCart.show();
-			else
-				linkCart.hide();
+			$.cookie("showLinkCart", true, {
+				expires: (60 * 60 * 24 * 7)
+			});
+			$('#link-cart').show();
+		};
+
+		this.hide = function ()
+		{
+			$.cookie("showLinkCart", false, {
+				expires: (60 * 60 * 24 * 7)
+			});
+			$('#link-cart').hide();
 		};
 
 		this.addLinks = function (linkIds)
@@ -202,10 +184,30 @@
 
 		this.updateContentSize = function ()
 		{
-			var height = $('#content').height() - $('#link-cart-buttons').height();
+			var height = $('#content').height() - $('#link-cart-buttons').outerHeight() - 5;
 			$('#link-cart-grid').css({
 				'height': height + 'px'
 			});
+		};
+
+		var initLinks = function ()
+		{
+			var linkCart = $('#link-cart');
+			linkCart.find('.link-delete').off('click').on('click', deleteLink);
+			linkCart.find('.draggable-link').draggable({
+					revert: "invalid",
+					distance: 70,
+					delay: 500,
+					helper: function ()
+					{
+						var ids = $(this).find('.link-id-column').html().split('---');
+						var linkInCartId = ids[0].replace('cart', '');
+						return  $('<span id="' + linkInCartId + '" class="glyphicon glyphicon-file"></span>');
+					},
+					appendTo: "body",
+					cursorAt: { left: -10, top: 0 }
+				}
+			);
 		};
 
 		var clear = function ()

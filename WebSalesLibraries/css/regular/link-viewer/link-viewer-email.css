@@ -1,0 +1,64 @@
+#link-viewer-tab-email .tab-content
+{
+	height: 335px;
+}
+
+#link-viewer-tab-email .send-email
+{
+	width: 80px;
+	margin-top: 20px;
+}
+
+#link-viewer-tab-email .form-group
+{
+	margin: 0;
+}
+
+#link-viewer-tab-email .form-group.title
+{
+	margin-top: 25px;
+	margin-bottom: 5px;
+}
+
+#add-page-name
+{
+	margin-top: 5px;
+}
+
+#link-viewer-tab-email .logo-list
+{
+	height: 285px;
+	margin-top: 5px;
+	padding: 10px;
+}
+
+/*Tab pages------------------*/
+#link-viewer-email-tabs
+{
+	margin-top: 5px;
+}
+
+#link-viewer-email-tabs li a
+{
+	color: #555;
+}
+
+#link-viewer-email-tabs li a:focus
+{
+	outline: 0;
+}
+
+#link-viewer-email-tabs > li.active > a,
+#link-viewer-email-tabs > li.active > a:hover,
+#link-viewer-email-tabs > li.active > a:focus
+{
+	background-color: #c6e2ff;
+}
+
+#link-viewer-email-tabs li a img
+{
+	height: 48px;
+	margin-right: 5px;
+}
+
+/*---------------------------*/

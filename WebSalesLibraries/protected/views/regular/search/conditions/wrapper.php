@@ -7,6 +7,16 @@
 	$logoPath = realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'search' . DIRECTORY_SEPARATOR . 'ribbon' . DIRECTORY_SEPARATOR;
 	switch ($conditionTag)
 	{
+		case 'keyword':
+			$title = 'Keyword Search';
+			$viewPath = 'keyword';
+			$logoPath .= 'keyword.png';
+			break;
+		case 'dateRange':
+			$title = 'Search By Date';
+			$viewPath = 'dateRange';
+			$logoPath .= 'date-range.png';
+			break;
 		case 'settings':
 			$title = 'Filters';
 			$viewPath = 'settings';
@@ -34,22 +44,29 @@
 			break;
 	};
 ?>
-<table class="tool-dialog">
-	<tr>
-		<td colspan="2">
-			<h3 class="search-filter-header">
+<div class="search-filters">
+	<div class="row">
+		<div class="col-xs-12">
+			<h3 class="header">
 				<img class="search-filters-logo" src="<? echo 'data:image/png;base64,' . base64_encode(file_get_contents($logoPath)); ?>"/>
 				<? echo $title; ?>
 			</h3>
-			<div class="search-filter-editors">
-				<? echo $this->renderPartial('conditions/' . $viewPath, array(), true); ?>
-			</div>
-		</td>
-	</tr>
-	<tr>
-		<td colspan="2" class="buttons-area">
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12 search-filter-editors">
+			<? echo $this->renderPartial('conditions/' . $viewPath, array(), true); ?>
+		</div>
+	</div>
+	<div class="row buttons-area">
+		<div class="col-xs-3">
 			<button class="btn btn-default accept-button" type="button">OK</button>
+		</div>
+		<div class="col-xs-3">
 			<button class="btn btn-default cancel-button" type="button">Cancel</button>
-		</td>
-	</tr>
-</table>
+		</div>
+		<div class="col-xs-3 col-xs-offset-3">
+			<button class="btn btn-default search-button" type="button">Search Now</button>
+		</div>
+	</div>
+</div>

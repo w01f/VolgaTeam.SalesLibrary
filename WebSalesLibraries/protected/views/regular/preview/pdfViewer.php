@@ -83,7 +83,7 @@
 				<div class="col col-xs-2 text-center">
 					<? if (!$data->singlePage): ?>
 						<label class="ui-hide-label" for="image-viewer-slide-selector"></label>
-						<select class="selectpicker dropup" id="image-viewer-slide-selector"></select>
+						<select class="selectpicker dropup bootstrapped" id="image-viewer-slide-selector"></select>
 					<? endif; ?>
 				</div>
 				<div class="col col-xs-1 text-center">

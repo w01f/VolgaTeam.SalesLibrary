@@ -11,30 +11,6 @@
 		}
 
 		//------Common Site API-------------------------------------------
-		public function actionGetFavoritesView()
-		{
-			$userId = Yii::app()->user->getId();
-			if (isset($userId))
-			{
-				if ($this->isPhone)
-				{
-					$folders = FavoritesFolderRecord::getChildFolders($userId, null);
-					$links = FavoritesLinkRecord::getLinksByFolder($userId, null, false, 'name', 'asc');
-					$tabPages = TabPages::getList();
-					$this->render('viewPage', array(
-						'folders' => $folders,
-						'links' => $links,
-						'tabPages' => $tabPages
-					));
-				}
-				else
-				{
-					$rootFolder = FavoritesFolderRecord::getRootFolder($userId);
-					$this->renderPartial('favoritesView', array('rootFolder' => $rootFolder), false, true);
-				}
-			}
-		}
-
 		public function actionAddLink()
 		{
 			$linkId = Yii::app()->request->getPost('linkId');
@@ -91,14 +67,20 @@
 			$folderId = Yii::app()->request->getPost('folderId');
 			if (!isset($folderId) || (isset($folderId) && ($folderId == "" || $folderId == "null")))
 				$folderId = null;
-			$isSort = intval(Yii::app()->request->getPost('isSort'));
-			$sortColumn = Yii::app()->request->getPost('sortColumn');
-			$sortDirection = Yii::app()->request->getPost('sortDirection');
 			$userId = Yii::app()->user->getId();
-			if (isset($userId) && isset($isSort))
+			if (isset($userId))
 			{
-				$links = FavoritesLinkRecord::getLinksByFolder($userId, $folderId, $isSort, $sortColumn, $sortDirection);
-				$this->renderPartial('favoritesLinks', array('links' => $links), false, true);
+				$links = FavoritesLinkRecord::getLinksByFolder($userId, $folderId);
+				echo CJSON::encode(array(
+					'links' => $links,
+					'viewOptions' => array(
+						'showCategory' => Yii::app()->params['search_options']['hide_tag'] != true,
+						'categoryColumnName' => Yii::app()->params['tags']['column_name'],
+						'showLibraries' => Yii::app()->params['search_options']['hide_libraries'] != true,
+						'librariesColumnName' => Yii::app()->params['stations']['column_name'],
+						'showDeleteButton' => true
+					)
+				));
 			}
 		}
 

@@ -5,7 +5,6 @@
 
 	$imageUrlPrefix = Yii::app()->getBaseUrl(true);
 	$logos = QPageRecord::getPageLogoList();
-	$selectedLogo = count($logos) > 0 ? $logos[0] : null;
 ?>
 <div class="row">
 	<ul class="nav nav-pills nav-stacked col col-xs-3" role="tablist" id="link-viewer-email-tabs">
@@ -78,11 +77,17 @@
 			</form>
 		</div>
 		<div role="tabpanel" class="tab-pane" id="link-viewer-email-tab-logo">
-			<div class="logo-list">
+			<div class="checkbox">
+				<label>
+					<input id="add-page-show-logo" type="checkbox" value="">
+					<strong>Show a Logo on your QuickSite:</strong>
+				</label>
+			</div>
+			<div class="logo-list disabled">
 				<ul class="nav nav-pills">
 					<? foreach ($logos as $logo): ?>
 						<li>
-							<a href="#" <? if ($selectedLogo == $logo): ?>class="opened"<? endif; ?> style="margin-right: 40px;"><img src="<? echo $logo; ?>"></a>
+							<a href="#" style="margin-right: 40px;"><img src="<? echo $logo; ?>"></a>
 						</li>
 					<? endforeach; ?>
 				</ul>
