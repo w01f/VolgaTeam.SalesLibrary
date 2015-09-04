@@ -9,7 +9,7 @@
 
 		this.init = function ()
 		{
-			$.mobile.changePage("#shortcut-link-page-" + shortcutData.options.linkId, {
+			$.mobile.pageContainer.pagecontainer("change", "#shortcut-link-page-" + shortcutData.options.linkId, {
 				transition: "slidefade"
 			});
 

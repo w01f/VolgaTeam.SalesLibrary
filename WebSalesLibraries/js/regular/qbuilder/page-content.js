@@ -98,10 +98,10 @@
 			var content = $('#content');
 			var pageContent = $('#page-content');
 			var tabLinks = $('#page-content-tab-links');
-			var height = content.height() - 5 -
-				pageContent.find('.page-title').height() -
-				pageContent.find('.ui-tabs-nav').height() -
-				tabLinks.find('.header').height() - 30;
+			var height = content.height() -
+				pageContent.find('.page-title').outerHeight(true) -
+				pageContent.find('#page-content-tabs-headers').outerHeight(true) -
+				tabLinks.find('.header').outerHeight(true) - 20;
 			$('#page-content-links-container').css({
 				'height': height + 'px'
 			});
@@ -112,10 +112,10 @@
 			var content = $('#content');
 			var pageContent = $('#page-content');
 			var tabLogo = $('#page-content-tab-logo');
-			var height = content.height() - 5 -
-				pageContent.find('.page-title').height() -
-				pageContent.find('.ui-tabs-nav').height() -
-				tabLogo.find('.header').height() - 40;
+			var height = content.height() -
+				pageContent.find('.page-title').outerHeight(true) -
+				pageContent.find('#page-content-tabs-headers').outerHeight(true) -
+				tabLogo.find('.header').outerHeight(true) - 50;
 			tabLogo.find('.logo-list').css({
 				'height': height + 'px'
 			});
@@ -126,16 +126,16 @@
 			var content = $('#content');
 			var pageContent = $('#page-content');
 			var containerHeight = content.height() -
-				pageContent.find('.page-title').height() -
-				pageContent.find('.ui-tabs-nav').height();
+				pageContent.find('.page-title').outerHeight(true) -
+				pageContent.find('#page-content-tabs-headers').outerHeight(true);
 
-			var descriptionHeight = containerHeight - $('#page-content-tab-title').find('.checkbox').outerHeight() - 90;
+			var descriptionHeight = containerHeight - $('#page-content-tab-title').find('.checkbox').outerHeight(true) - 70;
 			$('#page-content-description').editable('option', 'height', descriptionHeight);
 
-			var headerHeight = containerHeight - $('#page-content-tab-header').find('.checkbox').outerHeight() - 90;
+			var headerHeight = containerHeight - $('#page-content-tab-header').find('.checkbox').outerHeight(true) - 70;
 			$('#page-content-header-text').editable('option', 'height', headerHeight);
 
-			var footerHeight = containerHeight - $('#page-content-tab-footer').find('.checkbox').outerHeight() - 90;
+			var footerHeight = containerHeight - $('#page-content-tab-footer').find('.checkbox').outerHeight(true) - 70;
 			$('#page-content-footer-text').editable('option', 'height', footerHeight);
 		};
 
@@ -186,6 +186,19 @@
 			$("#page-content-tabs").tabs({
 				activate: that.updateContentSize
 			});
+
+			var tabContainer = $('#page-content-tabs-headers');
+			tabContainer.scrollTabs({
+				click_callback: function ()
+				{
+					tabContainer.find('.page-tab-header').removeClass('selected');
+					$(this).addClass('selected');
+					var relatedContentId = $(this).find('.service-data .tab-id').text();
+					$('#page-content-tabs-content').find('>div').removeClass('selected');
+					$(relatedContentId).addClass('selected');
+				}
+			});
+
 			var pageDescription = $('#page-content-description');
 			pageDescription.editable({
 				inlineMode: false,
@@ -299,7 +312,10 @@
 			$('#page-content-show-logo').off('change').on('change', function ()
 			{
 				if ($(this).is(':checked'))
+				{
 					logoSelector.removeClass('disabled');
+					logoSelector.find('ul a').first().addClass('opened');
+				}
 				else
 				{
 					logoSelector.addClass('disabled');
@@ -361,49 +377,47 @@
 			var linkInPageId = ids[0].replace('id', '');
 			if (linkInPageId != null)
 			{
-				$('body').append('<div id="delete-link-warning" title="Delete Link">Are you SURE you want to delete selected link from Page?</div>');
-				$("#delete-link-warning").dialog({
-					resizable: false,
-					modal: true,
-					buttons: {
-						"Yes": function ()
+				var modalDialog = new $.SalesPortal.ModalDialog({
+					title: 'Delete Link',
+					description: 'Are you SURE you want to delete selected link from Page?',
+					buttons: [
 						{
-							$(this).dialog("close");
-							$.ajax({
-								type: "POST",
-								url: window.BaseUrl + "qbuilder/deleteLinkFromPage",
-								data: {
-									linkInPageId: linkInPageId
-								},
-								beforeSend: function ()
-								{
-									$.SalesPortal.Overlay.show(false);
-								},
-								complete: function ()
-								{
-									$.SalesPortal.Overlay.hide();
-									that.loadLinks();
-								},
-								async: true,
-								dataType: 'html'
-							});
+							tag: 'yes',
+							title: 'Yes',
+							clickHandler: function ()
+							{
+								modalDialog.close();
+								$.ajax({
+									type: "POST",
+									url: window.BaseUrl + "qbuilder/deleteLinkFromPage",
+									data: {
+										linkInPageId: linkInPageId
+									},
+									beforeSend: function ()
+									{
+										$.SalesPortal.Overlay.show(false);
+									},
+									complete: function ()
+									{
+										$.SalesPortal.Overlay.hide();
+										that.loadLinks();
+									},
+									async: true,
+									dataType: 'html'
+								});
+							}
 						},
-						"No": function ()
 						{
-							$(this).dialog("close");
+							tag: 'no',
+							title: 'No',
+							clickHandler: function ()
+							{
+								modalDialog.close();
+							}
 						}
-					},
-					open: function ()
-					{
-						$(this).closest(".ui-dialog")
-							.find(".ui-dialog-titlebar-close")
-							.html("<span class='ui-icon ui-icon-closethick'></span>");
-					},
-					close: function ()
-					{
-						$("#delete-link-warning").remove();
-					}
+					]
 				});
+				modalDialog.show();
 			}
 		};
 		var upLink = function ()

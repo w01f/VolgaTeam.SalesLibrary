@@ -342,7 +342,7 @@
 				},
 				beforeSend: function ()
 				{
-					$.SalesPortal.Overlay.show(true);
+					$.SalesPortal.Overlay.show(false);
 				},
 				complete: function ()
 				{
@@ -452,7 +452,7 @@
 				},
 				beforeSend: function ()
 				{
-					$.SalesPortal.Overlay.show(true);
+					$.SalesPortal.Overlay.show(false);
 				},
 				complete: function ()
 				{

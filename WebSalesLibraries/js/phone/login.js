@@ -75,7 +75,7 @@
 								},
 								success: function ()
 								{
-									$.mobile.changePage("#recover-password-success", {
+									$.mobile.pageContainer.pagecontainer("change", "#recover-password-success", {
 										transition: "slidefade"
 									});
 								},

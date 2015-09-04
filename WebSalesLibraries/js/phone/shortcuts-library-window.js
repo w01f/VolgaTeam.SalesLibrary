@@ -12,7 +12,7 @@
 			contentContainer.find('div[data-role=collapsible]').collapsible();
 			var pageId = "#shortcut-link-page-" + shortcutData.options.linkId;
 			$.SalesPortal.Wallbin.initFolderLinks(contentContainer, pageId);
-			$.mobile.changePage(pageId, {
+			$.mobile.pageContainer.pagecontainer("change", pageId, {
 				transition: "slidefade"
 			});
 		};

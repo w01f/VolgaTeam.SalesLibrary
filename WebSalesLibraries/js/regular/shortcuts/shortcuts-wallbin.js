@@ -44,7 +44,6 @@
 							loadPage($.parseJSON($(this).find('.service-data .encoded-data').text()));
 						}
 					});
-
 					var selectedTab = tabContainer.find('.selected');
 					var left = tabContainer.scrollLeft();
 					tabContainer.find('.scroll_tab_inner').animate({scrollLeft: left + selectedTab.position().left + 'px'}, 0);

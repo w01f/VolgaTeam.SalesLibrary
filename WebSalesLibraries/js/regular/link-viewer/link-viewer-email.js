@@ -30,7 +30,10 @@
 		$('#add-page-show-logo').off('change').on('change', function ()
 		{
 			if ($(this).is(':checked'))
+			{
 				logoSelector.removeClass('disabled');
+				logoSelector.find('ul a').first().addClass('opened');
+			}
 			else
 			{
 				logoSelector.addClass('disabled');

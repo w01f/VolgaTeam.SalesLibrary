@@ -88,50 +88,47 @@
 			foldersPanel.find('.delete-folder').off('click').on('click', function (event)
 			{
 				var folderId = $(this).parent().parent().children('.service-data').children('.folder-id').html();
-				$('body').append('<div id="delete-folder-warning" title="Delete Folder"><p>Are you SURE you want to delete this folder and its contents?</p></div>');
-				$("#delete-folder-warning").dialog({
-					resizable: false,
-					modal: true,
-					buttons: {
-						"Yes": function ()
+				var modalDialog = new $.SalesPortal.ModalDialog({
+					title: 'Delete Folder',
+					description: 'Are you SURE you want to delete this folder and its contents?',
+					buttons: [
 						{
-							$(this).dialog("close");
-							$.ajax({
-								type: "POST",
-								url: window.BaseUrl + "favorites/deleteFolder",
-								data: {
-									folderId: folderId
-								},
-								beforeSend: function ()
-								{
-									$.SalesPortal.Overlay.show(false);
-								},
-								complete: function ()
-								{
-									$.SalesPortal.Overlay.hide();
-									$.SalesPortal.ShortcutsManager.openShortcut($('<div>' + favoritesData.options.serviceData + '</div>'));
-								},
-								async: true,
-								dataType: 'html'
-							});
+							tag: 'yes',
+							title: 'Yes',
+							clickHandler: function ()
+							{
+								modalDialog.close();
+								$.ajax({
+									type: "POST",
+									url: window.BaseUrl + "favorites/deleteFolder",
+									data: {
+										folderId: folderId
+									},
+									beforeSend: function ()
+									{
+										$.SalesPortal.Overlay.show(false);
+									},
+									complete: function ()
+									{
+										$.SalesPortal.Overlay.hide();
+										$.SalesPortal.ShortcutsManager.openShortcut($('<div>' + favoritesData.options.serviceData + '</div>'));
+									},
+									async: true,
+									dataType: 'html'
+								});
+							}
 						},
-						"No": function ()
 						{
-							$(this).dialog("close");
+							tag: 'no',
+							title: 'No',
+							clickHandler: function ()
+							{
+								modalDialog.close();
+							}
 						}
-					},
-					open: function ()
-					{
-						$(this).closest(".ui-dialog")
-							.find(".ui-dialog-titlebar-close")
-							.html("<span class='ui-icon ui-icon-closethick'></span>");
-					},
-					close: function ()
-					{
-						$("#delete-folder-warning").remove();
-					}
+					]
 				});
-
+				modalDialog.show();
 				event.stopPropagation();
 			});
 			foldersPanel.find('.draggable-folder').draggable({

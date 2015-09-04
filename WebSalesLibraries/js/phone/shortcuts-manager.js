@@ -14,6 +14,17 @@
 				gridAdjustment: 'alignCenter'
 			});
 
+			$(window).on("pagechange", function (event, data)
+			{
+				if (data.toPage.prop('id') == groupPage.prop('id') && data.prevPage.prop('id') != groupPage.prop('id'))
+				{
+					groupPage.find('.menu-items').cubeportfolio('destroy');
+					groupPage.find('.menu-items').cubeportfolio({
+						gridAdjustment: 'alignCenter'
+					});
+				}
+			});
+
 			groupPage.find('.menu-item').off('click').on('click', function (e)
 			{
 				var data = $(this).find('.service-data');
@@ -118,7 +129,7 @@
 									new $.SalesPortal.ShortcutsFavorites().init(result);
 									break;
 								default :
-									$.mobile.changePage("#shortcut-link-page-" + result.options.linkId, {
+									$.mobile.pageContainer.pagecontainer("change", "#shortcut-link-page-" + result.options.linkId, {
 										transition: "slidefade"
 									});
 									break;

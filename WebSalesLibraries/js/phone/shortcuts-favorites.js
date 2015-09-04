@@ -6,7 +6,7 @@
 	{
 		this.init = function ()
 		{
-			$.mobile.changePage("#favorites-view", {
+			$.mobile.pageContainer.pagecontainer("change", "#favorites-view", {
 				transition: "slidefade"
 			});
 			$.SalesPortal.Favorites.initViewPage();

@@ -128,27 +128,11 @@
 				var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 				if (!regex.test(emailValue))
 				{
-					$('body').append('<div id="user-email-warning" title="Email">Enter your email address to view this link...<br></div>');
-					$("#user-email-warning").dialog({
-						resizable: false,
-						modal: true,
-						buttons: {
-							"OK": function ()
-							{
-								$(this).dialog("close");
-							}
-						},
-						open: function ()
-						{
-							$(this).closest(".ui-dialog")
-								.find(".ui-dialog-titlebar-close")
-								.html("<span class='ui-icon ui-icon-closethick'></span>");
-						},
-						close: function ()
-						{
-							$("#user-email-warning").remove();
-						}
+					var modalDialog = new $.SalesPortal.ModalDialog({
+						title: 'Email',
+						description: 'Enter your email address to view this link...'
 					});
+					modalDialog.show();
 					return false;
 				}
 			}

@@ -92,23 +92,44 @@
 			}
 
 			$this->isAccessGranted = true;
+
 			$approvedUsers = array();
 			$queryResult = $xpath->query('//Config/ApprovedUsers/User');
 			foreach ($queryResult as $groupNode)
 				$approvedUsers[] = trim($groupNode->nodeValue);
+
+			$excludedUsers = array();
+			$queryResult = $xpath->query('//Config/ExcludedUsers/User');
+			foreach ($queryResult as $groupNode)
+				$excludedUsers[] = trim($groupNode->nodeValue);
+
 			$approvedGroups = array();
 			$queryResult = $xpath->query('//Config/ApprovedGroups/Group');
 			foreach ($queryResult as $groupNode)
 				$approvedGroups[] = trim($groupNode->nodeValue);
-			if (count($approvedUsers) > 0 || count($approvedGroups) > 0)
+
+			$excludedGroups = array();
+			$queryResult = $xpath->query('//Config/ExcludedGroups/Group');
+			foreach ($queryResult as $groupNode)
+				$excludedGroups[] = trim($groupNode->nodeValue);
+
+			$user = Yii::app()->user;
+			if (isset($user))
+				$userGroups = $user->getState('groups');
+			else
+				$userGroups = array();
+
+			if (isset($user) && count($excludedUsers) > 0)
+				$this->isAccessGranted &= !in_array($user->login, $excludedUsers);
+			if (isset($user) && count($excludedGroups) > 0)
+				$this->isAccessGranted &= !array_intersect($userGroups, $excludedGroups);
+
+			if ($this->isAccessGranted && (count($approvedUsers) > 0 || count($approvedGroups) > 0))
 			{
 				$this->isAccessGranted = false;
-				$user = Yii::app()->user;
 				if (isset($user))
 				{
 					$this->isAccessGranted |= in_array($user->login, $approvedUsers);
-
-					$userGroups = $user->getState('groups');
 					if (count($userGroups) > 0)
 						$this->isAccessGranted |= array_intersect($userGroups, $approvedGroups);
 				}

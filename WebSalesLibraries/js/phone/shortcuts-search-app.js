@@ -15,7 +15,7 @@
 
 		this.init = function ()
 		{
-			$.mobile.changePage("#search", {
+			$.mobile.pageContainer.pagecontainer("change", "#search", {
 				transition: "slidefade"
 			});
 
@@ -211,7 +211,7 @@
 				{
 					searchResultsPage.find('.entities-count span').html(data.dataset.length + ' Links');
 
-					$.mobile.changePage("#search-results", {
+					$.mobile.pageContainer.pagecontainer("change", "#search-results", {
 						transition: "slidefade"
 					});
 

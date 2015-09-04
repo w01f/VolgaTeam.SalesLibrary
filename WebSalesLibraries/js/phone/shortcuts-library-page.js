@@ -13,7 +13,7 @@
 
 			var pageId = "#shortcut-link-page-" + shortcutData.options.linkId;
 			$.SalesPortal.Wallbin.initPageContent(contentContainer, pageId);
-			$.mobile.changePage(pageId, {
+			$.mobile.pageContainer.pagecontainer("change", pageId, {
 				transition: "slidefade"
 			});
 		};

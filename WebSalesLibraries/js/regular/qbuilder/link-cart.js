@@ -105,7 +105,7 @@
 							'images/preview/actions/quicksite.png">' +
 							'</div>' +
 							'<div class="col-xs-8 col-xs-offset-1">' +
-							'<h3>Success!</h3>' +
+							'<h3 style="margin-left: 0">Success!</h3>' +
 							'<p class="text-muted">' +
 							succesDescription +
 							'</p>' +
@@ -156,7 +156,7 @@
 							'images/preview/actions/quicksite.png">' +
 							'</div>' +
 							'<div class="col-xs-8 col-xs-offset-1">' +
-							'<h3>Success!</h3>' +
+							'<h3 style="margin-left: 0">Success!</h3>' +
 							'<p class="text-muted">' +
 							'Links were added to Link Cart' +
 							'</p>' +
@@ -240,49 +240,47 @@
 			var linkInCartId = ids[0].replace('cart', '');
 			if (linkInCartId != null)
 			{
-				$('body').append('<div id="delete-link-warning" title="Delete Link">Are you SURE you want to delete selected link from Cart?</div>');
-				$("#delete-link-warning").dialog({
-					resizable: false,
-					modal: true,
-					buttons: {
-						"Yes": function ()
+				var modalDialog = new $.SalesPortal.ModalDialog({
+					title: 'Delete Link',
+					description: 'Are you SURE you want to delete selected link from Cart?',
+					buttons: [
 						{
-							$(this).dialog("close");
-							$.ajax({
-								type: "POST",
-								url: window.BaseUrl + "qbuilder/deleteLinkFromCart",
-								data: {
-									linkInCartId: linkInCartId
-								},
-								beforeSend: function ()
-								{
-									$.SalesPortal.Overlay.show(false);
-								},
-								complete: function ()
-								{
-									$.SalesPortal.Overlay.hide();
-									that.load();
-								},
-								async: true,
-								dataType: 'html'
-							});
+							tag: 'yes',
+							title: 'Yes',
+							clickHandler: function ()
+							{
+								modalDialog.close();
+								$.ajax({
+									type: "POST",
+									url: window.BaseUrl + "qbuilder/deleteLinkFromCart",
+									data: {
+										linkInCartId: linkInCartId
+									},
+									beforeSend: function ()
+									{
+										$.SalesPortal.Overlay.show(false);
+									},
+									complete: function ()
+									{
+										$.SalesPortal.Overlay.hide();
+										that.load();
+									},
+									async: true,
+									dataType: 'html'
+								});
+							}
 						},
-						"No": function ()
 						{
-							$(this).dialog("close");
+							tag: 'no',
+							title: 'No',
+							clickHandler: function ()
+							{
+								modalDialog.close();
+							}
 						}
-					},
-					open: function ()
-					{
-						$(this).closest(".ui-dialog")
-							.find(".ui-dialog-titlebar-close")
-							.html("<span class='ui-icon ui-icon-closethick'></span>");
-					},
-					close: function ()
-					{
-						$("#delete-link-warning").remove();
-					}
+					]
 				});
+				modalDialog.show();
 			}
 		};
 

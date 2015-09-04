@@ -16,6 +16,10 @@
 				that.hide();
 
 			var pageList = $('#page-list-container');
+
+			if (pageList.find('tr.selected').length == 0)
+				pageList.find('tr').first().addClass('selected');
+
 			if (pageList.find('tr').length > 0)
 				openPage(pageList.find('tr.selected').find('.link-id-column').html());
 			else
@@ -37,12 +41,12 @@
 			pageList.find('.link-delete').off('click').on('click', function (event)
 			{
 				event.stopPropagation();
-				deletePage($(this).parent().find('.link-id-column').html());
+				that.deletePage($(this).parent().find('.link-id-column').html());
 			});
 			pageList.find('.link-clone').off('click').on('click', function (event)
 			{
 				event.stopPropagation();
-				addPage($(this).parent().find('.link-id-column').html());
+				that.addPage($(this).parent().find('.link-id-column').html());
 			});
 			pageList.find('.link-up').off('click').on('click', function (event)
 			{
@@ -376,49 +380,47 @@
 				selectedPageId = pageId;
 			if (selectedPageId != null)
 			{
-				$('body').append('<div id="delete-page-warning" title="Delete quickSITE">Are you SURE you want to delete selected quickSITE?</div>');
-				$("#delete-page-warning").dialog({
-					resizable: false,
-					modal: true,
-					buttons: {
-						"Yes": function ()
+				var modalDialog = new $.SalesPortal.ModalDialog({
+					title: 'Delete quickSITE',
+					description: 'Are you SURE you want to delete selected quickSITE?',
+					buttons: [
 						{
-							$(this).dialog("close");
-							$.ajax({
-								type: "POST",
-								url: window.BaseUrl + "qbuilder/deletePage",
-								data: {
-									selectedPageId: selectedPageId
-								},
-								beforeSend: function ()
-								{
-									$.SalesPortal.Overlay.show(false);
-								},
-								complete: function ()
-								{
-									$.SalesPortal.Overlay.hide();
-									load();
-								},
-								async: true,
-								dataType: 'html'
-							});
+							tag: 'yes',
+							title: 'Yes',
+							clickHandler: function ()
+							{
+								modalDialog.close();
+								$.ajax({
+									type: "POST",
+									url: window.BaseUrl + "qbuilder/deletePage",
+									data: {
+										selectedPageId: selectedPageId
+									},
+									beforeSend: function ()
+									{
+										$.SalesPortal.Overlay.show(false);
+									},
+									complete: function ()
+									{
+										$.SalesPortal.Overlay.hide();
+										load();
+									},
+									async: true,
+									dataType: 'html'
+								});
+							}
 						},
-						"No": function ()
 						{
-							$(this).dialog("close");
+							tag: 'no',
+							title: 'No',
+							clickHandler: function ()
+							{
+								modalDialog.close();
+							}
 						}
-					},
-					open: function ()
-					{
-						$(this).closest(".ui-dialog")
-							.find(".ui-dialog-titlebar-close")
-							.html("<span class='ui-icon ui-icon-closethick'></span>");
-					},
-					close: function ()
-					{
-						$("#delete-page-warning").remove();
-					}
+					]
 				});
+				modalDialog.show();
 			}
 		};
 
@@ -470,7 +472,7 @@
 								'images/qpages/save.png">' +
 								'</div>' +
 								'<div class="col-xs-8 col-xs-offset-1">' +
-								'<h3>Boo Yah!</h3>' +
+								'<h3 style="margin-left: 0">Boo Yah!</h3>' +
 								'<p class="text-muted">Your QuickSite is Saved</p>' +
 								'</div>' +
 								'</div>' +

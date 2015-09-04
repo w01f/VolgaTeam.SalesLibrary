@@ -40,7 +40,7 @@
 					},
 					success: function ()
 					{
-						$.mobile.changePage("#link-viewer",
+						$.mobile.pageContainer.pagecontainer("change", "#link-viewer",
 							{
 								transition: "slidefade",
 								direction: "reverse"
@@ -62,7 +62,7 @@
 
 		this.showAddPage = function ()
 		{
-			$.mobile.changePage("#favorites-add-page", {
+			$.mobile.pageContainer.pagecontainer("change", "#favorites-add-page", {
 				transition: "slidefade"
 			});
 		};

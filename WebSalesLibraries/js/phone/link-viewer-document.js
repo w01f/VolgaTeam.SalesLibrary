@@ -88,7 +88,7 @@
 			$.SalesPortal.Favorites.initAddPage();
 
 			$.mobile.initializePage();
-			$.mobile.changePage("#link-viewer", {
+			$.mobile.pageContainer.pagecontainer("change", "#link-viewer", {
 				transition: "slidefade"
 			});
 

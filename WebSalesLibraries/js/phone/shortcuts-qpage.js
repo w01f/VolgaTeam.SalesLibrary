@@ -7,7 +7,7 @@
 		this.init = function ()
 		{
 			$.SalesPortal.QPage.init();
-			$.mobile.changePage("#quicksite", {
+			$.mobile.pageContainer.pagecontainer("change", "#quicksite", {
 				transition: "slidefade"
 			});
 		};

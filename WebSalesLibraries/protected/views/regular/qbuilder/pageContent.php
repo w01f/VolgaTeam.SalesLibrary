@@ -28,16 +28,40 @@
 				</div>
 			</div>
 		</form>
-		<div id="page-content-tabs">
-			<ul>
-				<li><a href="#page-content-tab-links">Links</a></li>
-				<li><a href="#page-content-tab-title">Title</a></li>
-				<li><a href="#page-content-tab-header">Header</a></li>
-				<li><a href="#page-content-tab-footer">Footer</a></li>
-				<li><a href="#page-content-tab-security">Settings</a></li>
-				<li><a href="#page-content-tab-logo">Logo</a></li>
-			</ul>
-			<div id="page-content-tab-links">
+		<div id="page-content-tabs-headers" class="tab-pages scroll_tabs_theme_light">
+			<span class="page-tab-header selected">Links
+				<div class="service-data">
+					<div class="tab-id">#page-content-tab-links</div>
+				</div>
+			</span>
+			<span class="page-tab-header">Title
+				<div class="service-data">
+					<div class="tab-id">#page-content-tab-title</div>
+				</div>
+			</span>
+			<span class="page-tab-header">Header
+				<div class="service-data">
+					<div class="tab-id">#page-content-tab-header</div>
+				</div>
+			</span>
+			<span class="page-tab-header">Footer
+				<div class="service-data">
+					<div class="tab-id">#page-content-tab-footer</div>
+				</div>
+			</span>
+			<span class="page-tab-header">Settings
+				<div class="service-data">
+					<div class="tab-id">#page-content-tab-security</div>
+				</div>
+			</span>
+			<span class="page-tab-header">Logo
+				<div class="service-data">
+					<div class="tab-id">#page-content-tab-logo</div>
+				</div>
+			</span>
+		</div>
+		<div id="page-content-tabs-content">
+			<div id="page-content-tab-links" class="selected">
 				<div class="header">
 					<h4>DRAG your Links from the Cart & DROP them into the list below:</h4>
 					<div id="page-content-links-title">
@@ -74,14 +98,14 @@
 				<h4>Customize your quickSITE with the settings below:</h4>
 				<div class="form-horizontal">
 					<div class="form-group">
-						<div class="col-xs-3">
+						<div class="col-xs-5">
 							<div class="checkbox">
 								<label>
-									<input type="checkbox" id="page-content-use-expiration-date" value="" <? echo isset($expDate) && $expDate != '' ? 'checked' : '' ?>> A. Set Expiration Date
+									<input type="checkbox" id="page-content-use-expiration-date" value="" <? echo isset($expDate) && $expDate != '' ? 'checked' : '' ?>> A. Expiration Date
 								</label>
 							</div>
 						</div>
-						<div class="col-xs-3">
+						<div class="col-xs-4">
 							<div id="page-content-expiration-date-container" class="input-group input-group-sm <? if ($page->isExpired()): ?>has-error<? endif; ?>" <? if (!(isset($expDate) && $expDate != '')): ?>style="display: none"<? endif; ?>>
 								<input id="page-content-expiration-date" class="form-control" type="text" placeholder="Select Date..." value="<? echo $expDate; ?>" readonly>
 								<div class="input-group-btn">
@@ -93,35 +117,35 @@
 					</div>
 					<div class="checkbox">
 						<label>
-							<input type="checkbox" id="page-content-require-login" value="" <? echo $page->restricted ? 'checked' : '' ?>> B. Require Authorized User login and password to view site
+							<input type="checkbox" id="page-content-require-login" value="" <? echo $page->restricted ? 'checked' : '' ?>> B. Require User login and password to view site
 						</label>
 					</div>
 					<div class="form-group">
-						<div class="col-xs-4">
+						<div class="col-xs-5">
 							<div class="checkbox">
 								<label>
-									<input id="page-content-access-code-enabled" type="checkbox" value="" <? echo isset($page->pin_code) && $page->pin_code > 0 ? 'checked' : '' ?>> C. Create a SECURE ACCESS Pin (4 Digits)
+									<input id="page-content-access-code-enabled" type="checkbox" value="" <? echo isset($page->pin_code) && $page->pin_code > 0 ? 'checked' : '' ?>> C. ACCESS Pin (4 Digits)
 								</label>
 							</div>
 						</div>
-						<div class="col-xs-1">
+						<div class="col-xs-4">
 							<label class="sr-only" for="page-content-access-code"></label>
 							<input type="text" maxlength="4" class="form-control input-sm" id="page-content-access-code" <? if (!(isset($page->pin_code) && $page->pin_code > 0)): ?>style="display: none;"<? endif; ?> value="<? echo isset($page->pin_code) ? $page->pin_code : '' ?>">
 						</div>
 					</div>
 					<div class="checkbox">
 						<label>
-							<input type="checkbox" id="page-content-disable-widgets" "value="" <? echo $page->disable_widgets ? 'checked' : '' ?>> D. Disable all Link Widget Icons
+							<input type="checkbox" id="page-content-disable-widgets" "value="" <? echo $page->disable_widgets ? 'checked' : '' ?>> D. Disable Widget Icons
 						</label>
 					</div>
 					<div class="checkbox">
 						<label>
-							<input type="checkbox" id="page-content-disable-banners" value="" <? echo $page->disable_banners ? 'checked' : '' ?>> E. Disable all Link Banner Images
+							<input type="checkbox" id="page-content-disable-banners" value="" <? echo $page->disable_banners ? 'checked' : '' ?>> E. Disable Banner Images
 						</label>
 					</div>
 					<div class="checkbox">
 						<label>
-							<input type="checkbox" id="page-content-show-links-as-url" value="" <? echo $page->show_links_as_url ? 'checked' : '' ?>> F. Display all Links as Blue Hyperlinks
+							<input type="checkbox" id="page-content-show-links-as-url" value="" <? echo $page->show_links_as_url ? 'checked' : '' ?>> F. Blue Hyperlinks
 						</label>
 					</div>
 					<div class="checkbox">

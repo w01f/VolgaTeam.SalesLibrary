@@ -82,11 +82,11 @@
 					},
 					success: function (msg)
 					{
-						$.mobile.changePage("#link-viewer",
-						{
-							transition: "slidefade",
-							direction: "reverse"
-						});
+						$.mobile.pageContainer.pagecontainer("change", "#link-viewer",
+							{
+								transition: "slidefade",
+								direction: "reverse"
+							});
 						if (subtitle != '')
 							window.open('mailto: ?subject=' + subtitle + '&body=' + '%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A' + msg + (pinCode.length > 0 ? ("%0D%0APin-code: " + pinCode) : ''), "_self");
 						else
@@ -100,7 +100,7 @@
 
 		this.show = function ()
 		{
-			$.mobile.changePage("#email-page", {
+			$.mobile.pageContainer.pagecontainer("change", "#email-page", {
 				transition: "slidefade"
 			});
 		};
