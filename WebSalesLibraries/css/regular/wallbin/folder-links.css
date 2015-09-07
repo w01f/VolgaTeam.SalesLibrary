@@ -83,7 +83,19 @@
 	display: none;
 }
 
-.clickable, .folder-link, .link-container.line-break
+.link-container:hover,
+.link-container:visited,
+.link-container:link,
+.link-container:active
+{
+	text-decoration: none;
+	outline : none;
+}
+
+.link-container.clickable,
+.link-container.url,
+.link-container.folder-link,
+.link-container.line-break
 {
 	cursor: pointer;
 }

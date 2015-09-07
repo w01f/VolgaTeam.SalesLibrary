@@ -31,11 +31,13 @@
 				var linkId = $(this).attr('id').replace('link', '');
 				$.SalesPortal.LinkManager.requestViewDialog(linkId, false);
 				event.stopPropagation();
+				event.preventDefault();
 			});
 			container.find('.folder-link').off('click').on('click', function (event)
 			{
 				loadFolderLinkContent($(this));
 				event.stopPropagation();
+				event.preventDefault();
 			});
 			container.find('.folder-header-container').off('mousedown.context').on('mousedown.context', function (eventDown)
 			{

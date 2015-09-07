@@ -6,10 +6,11 @@
 	class SearchHelper
 	{
 		/**
-		 * @param $condition
+		 * @param $condition string
+		 * @param $exactMatch boolean
 		 * @return array
 		 */
-		public static function prepareTextCondition($condition)
+		public static function prepareTextCondition($condition, $exactMatch)
 		{
 			$result = array();
 			if (!isset($condition)) return $result;
@@ -17,8 +18,8 @@
 			$configPath = Yii::app()->params['appRoot'] . DIRECTORY_SEPARATOR . 'search_config.xml';
 			if (!file_exists($configPath))
 			{
-				if ($condition != "" && $condition != '""')
-					$result[] = $condition;
+				if ($condition != '')
+					$result[] = $exactMatch ? sprintf('"%s"', $condition) : $condition;
 			}
 			else
 			{
@@ -30,7 +31,7 @@
 					$xpath = new DomXPath($config);
 
 					$condition = preg_replace('!\s+!', ' ', $condition);
-					$conditionToCompare = trim(str_replace('"', '', $condition));
+					$conditionToCompare = $condition;
 
 					/** @var $queryResult DOMNodeList */
 					$queryResult = $xpath->query('//Config/Ignore');
@@ -61,18 +62,17 @@
 						$condition = str_replace(strtolower($ignoreValue), ' ', $condition);
 					}
 
-					if ($condition != "" && $condition != '""')
-						$result[] = $condition;
-					$conditionToCompare = trim(str_replace('"', '', $condition));
+					if ($condition != "")
+						$result[] = $exactMatch ? sprintf('"%s"', $condition) : $condition;
 					$queryResult = $xpath->query('//Config/AliasFor');
 					foreach ($queryResult as $node)
 					{
 						/** @var $node DomElement */
 						$target = strtolower(trim($groupName = $node->getAttribute('Target')));
-						if ($target != strtolower($conditionToCompare)) continue;
+						if ($target != strtolower($condition)) continue;
 						$aliasNodes = $node->getElementsByTagName('Item');
 						foreach ($aliasNodes as $aliasNode)
-							$result[] = str_replace($conditionToCompare, trim($aliasNode->nodeValue), $condition);
+							$result[] = sprintf('"%s"', str_replace($condition, trim($aliasNode->nodeValue), $condition));
 					}
 				} catch (Exception $e)
 				{
@@ -116,8 +116,7 @@
 							implode("','", $availableLinkIds));
 				}
 
-				$originalTextCondition = $searchConditions->textExactMatch ? sprintf('"%s"', $searchConditions->text) : $searchConditions->text;
-				$textConditions = self::prepareTextCondition($originalTextCondition);
+				$textConditions = self::prepareTextCondition($searchConditions->text, $searchConditions->textExactMatch);
 				if (!(isset($baseLinks) ||
 					(count($searchConditions->fileTypes) > 0 &&
 						(count($textConditions) > 0 || count($searchConditions->categories) > 0 || count($searchConditions->superFilters) > 0 || count($searchConditions->superFilters) > 0 || (isset($searchConditions->startDate) && isset($searchConditions->endDate)))))
@@ -216,8 +215,16 @@
 					foreach ($textConditions as $contentConditionPart)
 					{
 						$conditionToCompare = strtolower(trim(str_replace('"', '', $contentConditionPart)));
-						$categoriesSelector[] = '(link.id in (select id_link from tbl_link_category where lower(category) like "%' . $conditionToCompare . '%" or lower(tag) like "%' . $conditionToCompare . '%"))';
-						$categoriesJoinSelector[] = '(lcat.id in (select id from tbl_link_category where lower(category) like "%' . $conditionToCompare . '%" or lower(tag) like "%' . $conditionToCompare . '%"))';
+						if ($searchConditions->textExactMatch)
+						{
+							$categoriesSelector[] = '(link.id in (select id_link from tbl_link_category where lower(category) regexp "[[:<:]]' . $conditionToCompare . '[[:>:]]" or lower(tag) regexp "[[:<:]]' . $conditionToCompare . '[[:>:]]"))';
+							$categoriesJoinSelector[] = '(lcat.id in (select id from tbl_link_category where lower(category) regexp "[[:<:]]' . $conditionToCompare . '[[:>:]]" or lower(tag) regexp "[[:<:]]' . $conditionToCompare . '[[:>:]]"))';
+						}
+						else
+						{
+							$categoriesSelector[] = '(link.id in (select id_link from tbl_link_category where lower(category) like "%' . $conditionToCompare . '%" or lower(tag) like "%' . $conditionToCompare . '%"))';
+							$categoriesJoinSelector[] = '(lcat.id in (select id from tbl_link_category where lower(category) like "%' . $conditionToCompare . '%" or lower(tag) like "%' . $conditionToCompare . '%"))';
+						}
 					}
 					$categoryCondition = sprintf('(%s)',
 						implode(' or ', $categoriesSelector));

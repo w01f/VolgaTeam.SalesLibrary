@@ -8,6 +8,11 @@
 		$isLineBreak = false;
 		$linkContainerClass = 'link-container folder-link';
 	}
+	else if ($link->isDirectUrl)
+	{
+		$isLineBreak = false;
+		$linkContainerClass = 'link-container url';
+	}
 	else
 	{
 		$isLineBreak = $link->getIsLineBreak();
@@ -20,7 +25,7 @@
 	if ($link->extendedProperties->isRestricted)
 		$linkContainerClass .= ' restricted';
 ?>
-<div class="<? echo $linkContainerClass; ?>" id="link<? echo $link->id; ?>">
+<a class="<? echo $linkContainerClass; ?>" id="link<? echo $link->id; ?>" href="<? echo $link->isDirectUrl ? $link->fileLink : '#'; ?>" target="_blank">
 	<? if (!(isset($disableBanner) && $disableBanner) && isset($link->banner) && $link->banner->isEnabled): ?>
 		<? echo $this->renderFile(Yii::getPathOfAlias('application.views.regular.wallbin') . '/banner.php', array('banner' => $link->banner, 'isLinkBanner' => true, 'tooltip' => (isset($tooltip) ? $tooltip : null)), true); ?>
 	<? else: ?>
@@ -74,4 +79,4 @@
 	<? if ($link->isFolder): ?>
 		<div class="folder-link-content" id="folder-link-content<? echo $link->id; ?>"></div>
 	<? endif; ?>
-</div>
+</a>

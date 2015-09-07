@@ -10,67 +10,70 @@
 
 		this.show = function ()
 		{
-			$.fancybox({
-				content: parameters.content,
-				title: viewerData.name,
-				autoSize: true,
-				openEffect: 'none',
-				closeEffect: 'none',
-				afterShow: function ()
-				{
-					dialogContent = $('.fancybox-wrap');
-					var fullScreenMode = dialogContent.find('.link-viewer').hasClass('eo') ? 'eo' : 'regular';
-
-					dialogContent.find('#link-viewer-body-tabs a[data-toggle="tab"]').on('shown.bs.tab', function (e)
+			if (viewerData.forcePreview == true)
+				showVideoModal();
+			else
+				$.fancybox({
+					content: parameters.content,
+					title: viewerData.name,
+					autoSize: true,
+					openEffect: 'none',
+					closeEffect: 'none',
+					afterShow: function ()
 					{
-						dialogContent.find('.tab-above-header').removeClass('active');
-						var tabTag = e.target.attributes['href'].value.replace("#link-viewer-tab-", "");
-						dialogContent.find('#tab-above-header-' + tabTag).addClass('active');
-					});
+						dialogContent = $('.fancybox-wrap');
+						var fullScreenMode = dialogContent.find('.link-viewer').hasClass('eo') ? 'eo' : 'regular';
 
-					dialogContent.find('.file-size').html('(' + viewerData.fileSize + ')');
-
-					dialogContent.find('.download-file').off('click').on('click', downloadFile);
-					dialogContent.find('.add-quicksite').off('click').on('click', addToQuickSite);
-					dialogContent.find('.add-favorites').off('click').on('click', addToFavorites);
-					dialogContent.find('.action-container .action').off('click').on('click', processSaveAction);
-
-					dialogContent.find('.open-video-modal').off('click').on('click', showVideoModal);
-					dialogContent.find('.open-video-fullscreen-regular').off('click').on('click', showVideoFullScreenForEO);
-					dialogContent.find('.open-video-fullscreen-mobile').off('click').on('click', showVideoFullScreen);
-
-					VideoJS.players = {};
-					player = _V_("video-player", {
-							controls: true,
-							autoplay: false,
-							preload: 'auto',
-							poster: viewerData.thumbImageSrc
-						},
-						function ()
+						dialogContent.find('#link-viewer-body-tabs a[data-toggle="tab"]').on('shown.bs.tab', function (e)
 						{
+							dialogContent.find('.tab-above-header').removeClass('active');
+							var tabTag = e.target.attributes['href'].value.replace("#link-viewer-tab-", "");
+							dialogContent.find('#tab-above-header-' + tabTag).addClass('active');
 						});
-					player.src([
+
+						dialogContent.find('.file-size').html('(' + viewerData.fileSize + ')');
+
+						dialogContent.find('.download-file').off('click').on('click', downloadFile);
+						dialogContent.find('.add-quicksite').off('click').on('click', addToQuickSite);
+						dialogContent.find('.add-favorites').off('click').on('click', addToFavorites);
+						dialogContent.find('.action-container .action').off('click').on('click', processSaveAction);
+
+						dialogContent.find('.open-video-modal').off('click').on('click', showVideoModal);
+						dialogContent.find('.open-video-fullscreen-regular').off('click').on('click', showVideoFullScreenForEO);
+						dialogContent.find('.open-video-fullscreen-mobile').off('click').on('click', showVideoFullScreen);
+
+						VideoJS.players = {};
+						player = _V_("video-player", {
+								controls: true,
+								autoplay: false,
+								preload: 'auto',
+								poster: viewerData.thumbImageSrc
+							},
+							function ()
+							{
+							});
+						player.src([
+							{
+								src: viewerData.mp4Src.href,
+								href: viewerData.mp4Src.href,
+								title: viewerData.fileName,
+								type: viewerData.mp4Src.type
+							}
+						]);
+						if (fullScreenMode == 'eo')
 						{
-							src: viewerData.mp4Src.href,
-							href: viewerData.mp4Src.href,
-							title: viewerData.fileName,
-							type: viewerData.mp4Src.type
+							$('.vjs-fullscreen-control').css({ 'display': 'none' });
+							$('.vjs-volume-control').css({ 'margin-right': '20px' });
 						}
-					]);
-					if (fullScreenMode == 'eo')
-					{
-						$('.vjs-fullscreen-control').css({ 'display': 'none' });
-						$('.vjs-volume-control').css({ 'margin-right': '20px' });
+
+						new $.SalesPortal.RateManager().init(
+							viewerData.linkId,
+							dialogContent.find('#user-link-rate-container'),
+							viewerData.rateData);
+
+						new $.SalesPortal.PreviewEmailer(viewerData);
 					}
-
-					new $.SalesPortal.RateManager().init(
-						viewerData.linkId,
-						dialogContent.find('#user-link-rate-container'),
-						viewerData.rateData);
-
-					new $.SalesPortal.PreviewEmailer(viewerData);
-				}
-			});
+				});
 		};
 
 		var downloadFile = function ()
@@ -113,6 +116,7 @@
 				returnCallback: function ()
 				{
 					$.fancybox.close();
+					viewerData.forcePreview = false;
 					parameters.data = $.toJSON(viewerData);
 					new $.SalesPortal.VideoViewer(parameters).show();
 				}

@@ -150,6 +150,7 @@
 		public $tooltip;
 		public $isFolder;
 		public $isLineBreak;
+		public $isDirectUrl;
 
 		/**
 		 * @param $folder
@@ -257,6 +258,7 @@
 
 			$this->isFolder = count(LinkRecord::model()->findAll('id_parent_link=?', array($linkRecord->id))) > 0;
 			$this->isLineBreak = isset($this->lineBreakProperties);
+			$this->isDirectUrl = $this->type == 8 && $this->extendedProperties->forcePreview;
 
 			$this->getTooltip();
 		}
