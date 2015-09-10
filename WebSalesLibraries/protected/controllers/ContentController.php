@@ -3,7 +3,7 @@
 	/**
 	 * Class ContentController
 	 */
-	class ContentController extends CController
+	class ContentController extends SoapController
 	{
 		/**
 		 * @return array
@@ -41,15 +41,6 @@
 		 * @soap
 		 */
 		public function mockLibrary($library)
-		{
-
-		}
-
-		/**
-		 * @param References $references
-		 * @soap
-		 */
-		public function mockReferences($references)
 		{
 
 		}

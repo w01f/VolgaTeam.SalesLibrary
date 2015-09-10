@@ -4,6 +4,17 @@
 	cursor: pointer;
 }
 
+#data-table-content tr .link-url,
+#data-table-content tr .link-url:hover,
+#data-table-content tr .link-url:visited,
+#data-table-content tr .link-url:link,
+#data-table-content tr .link-url:active
+{
+	text-decoration: none;
+	outline : none;
+	color: #000000;
+}
+
 .data-table-content-container table tr .centered
 {
 	text-align: center;

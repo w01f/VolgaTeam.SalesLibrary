@@ -26,6 +26,7 @@
 				{
 					$category = new Category();
 					$category->category = $categoryRecord->category;
+					$category->description = $categoryRecord->description;
 					$category->tag = $categoryRecord->tag;
 					$category->selected = false;
 					if (isset($selectedCategories))

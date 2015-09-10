@@ -51,6 +51,7 @@
 				!strstr(Yii::app()->request->getUrl(), 'ticker/') &&
 				!strstr(Yii::app()->request->getUrl(), 'utility/') &&
 				!strstr(Yii::app()->request->getUrl(), 'inactiveusers/') &&
+				!strstr(strtolower(Yii::app()->request->getUrl()), 'filemanagerdata/') &&
 				!strstr(Yii::app()->request->getUrl(), 'content/')
 			)
 				Yii::app()->user->loginRequired();

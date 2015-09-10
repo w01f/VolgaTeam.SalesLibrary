@@ -3,7 +3,7 @@
 	/**
 	 * Class IsdController
 	 */
-	class IsdController extends CController
+	abstract class IsdController extends CController
 	{
 		public $browser;
 		public $pathPrefix;

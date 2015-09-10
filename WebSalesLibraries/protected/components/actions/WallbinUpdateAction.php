@@ -73,6 +73,9 @@
 			}
 
 			$categoriesPath = Yii::app()->params['appRoot'] . DIRECTORY_SEPARATOR . 'SDSearch.xml';
+			$maxTags = 10;
+			$doTagCount = true;
+			$categoryRecords = array();
 			if (file_exists($categoriesPath))
 			{
 				$categoriesContent = file_get_contents($categoriesPath);
@@ -82,26 +85,37 @@
 					$categories->loadXML($categoriesContent);
 					$xpath = new DomXPath($categories);
 
-					/** @var $queryResult DOMElement[] */
+					/** @var $queryResult DOMNodeList */
 					$queryResult = $xpath->query('//SDSearch/Category');
 					foreach ($queryResult as $node)
 					{
+						/** @var $node DOMElement */
 						$groupName = $node->getAttribute('Name');
+						$groupDescription = $node->getAttribute('Description');
 						/** @var $tagNodes DOMElement[] */
 						$tagNodes = $node->getElementsByTagName('Tag');
 						foreach ($tagNodes as $tagNode)
 						{
 							$categoryRecord = new Category();
 							$categoryRecord->category = $groupName;
+							$categoryRecord->description = $groupDescription;
 							$categoryRecord->tag = trim($tagNode->getAttribute('Value'));
 							$categoryRecords[] = $categoryRecord;
 						}
 					}
+
+					$queryResult = $xpath->query('//SDSearch/MaxTags');
+					$maxTags = $queryResult->length > 0 ? intval(trim($queryResult->item(0)->nodeValue)) : 0;
+
+					$queryResult = $xpath->query('//SDSearch/TagCount');
+					$doTagCount = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : true;
 				}
 			}
 			CategoryRecord::clearData();
-			if (isset($categoryRecords))
-				CategoryRecord::loadData($categoryRecords);
+			CategoryRecord::loadData($categoryRecords);
+			MetaDataRecord::setData('link-categories', 'last-update', date(Yii::app()->params['sourceDateFormat'], filemtime($categoriesPath)));
+			MetaDataRecord::setData('link-categories', 'max-tags', $maxTags);
+			MetaDataRecord::setData('link-categories', 'tag-count', $doTagCount);
 
 			$superFiltersPath = Yii::app()->params['appRoot'] . DIRECTORY_SEPARATOR . 'superfilter.xml';
 			if (file_exists($superFiltersPath))
@@ -120,7 +134,10 @@
 			}
 			SuperFilterRecord::clearData();
 			if (isset($superFilterRecords))
+			{
 				SuperFilterRecord::loadData($superFilterRecords);
+				MetaDataRecord::setData('link-super-filters', 'last-update', date(Yii::app()->params['sourceDateFormat'], filemtime($superFiltersPath)));
+			}
 
 			LibraryGroupRecord::clearData();
 			$libraryGroupFilePath = Yii::app()->params['appRoot'] . DIRECTORY_SEPARATOR . 'groups.txt';

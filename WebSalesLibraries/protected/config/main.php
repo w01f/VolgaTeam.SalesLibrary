@@ -7,6 +7,7 @@
 		'import' => array(
 			'application.components.*',
 			'application.components.core.*',
+			'application.components.controllers.*',
 			'application.components.behaviors.*',
 			'application.models.*',
 			'application.models.common.*',
@@ -17,6 +18,7 @@
 			'application.models.menu.records.*',
 			'application.models.favorites.models.*',
 			'application.models.favorites.records.*',
+			'application.models.local_app_meta_data.*',
 			'application.models.qpages.models.*',
 			'application.models.qpages.records.*',
 			'application.models.quizzes.models.*',

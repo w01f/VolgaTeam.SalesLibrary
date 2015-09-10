@@ -305,9 +305,12 @@
 				$selectText = 'max(link.id) as id,
 							max(link.id_library) as id_library,
 							max(link.name) as name,
+							max(link.type) as type,
+							link.file_relative_path as path,
 							link.file_name,
 							' . $dateField . ',
 							max(link.format) as format,
+							max(link.properties) as extended_properties,
 							(select (round(avg(lr.value)*2)/2) as value from tbl_link_rate lr where lr.id_link=link.id) as rate,
 							glcat.tag as tag';
 				$joinText = "glcat.id_link=link.id";

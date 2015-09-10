@@ -36,6 +36,11 @@
 		 */
 		public $libraries;
 		/**
+		 * @var string[]
+		 * @soap
+		 */
+		public $libraryIds;
+		/**
 		 * @var boolean selected
 		 * @soap
 		 */

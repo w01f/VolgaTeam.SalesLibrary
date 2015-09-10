@@ -3,7 +3,7 @@
 	/**
 	 * Class AdminController
 	 */
-	class AdminController extends CController
+	class AdminController extends SoapController
 	{
 		/**
 		 * @return array
@@ -22,40 +22,6 @@
 				),
 			);
 		}
-
-		/**
-		 * @param string $sessionKey
-		 * @return bool
-		 */
-		protected function authenticateBySession($sessionKey)
-		{
-			$data = Yii::app()->cacheDB->get($sessionKey);
-			if ($data !== FALSE)
-				return TRUE;
-			else
-				return FALSE;
-		}
-
-		/**
-		 * @param string $login
-		 * @param string $password
-		 * @return string
-		 * @soap
-		 */
-		public function getSessionKey($login, $password)
-		{
-			$identity = new UserIdentity($login, $password);
-			$identity->authenticate();
-			if ($identity->errorCode === UserIdentity::ERROR_NONE)
-			{
-				$sessionKey = strval(md5(mt_rand()));
-				Yii::app()->cacheDB->set($sessionKey, $login, (60 * 60 * 24 * 7));
-				return $sessionKey;
-			}
-			else
-				return '';
-		}
-
 
 		/**
 		 * @param string $sessionKey
@@ -103,6 +69,8 @@
 
 				if ($resetPassword)
 					ResetPasswordRecord::resetPasswordForUser($login, $password, $newUser, true);
+
+				MetaDataRecord::setData('library-security', 'last-update', date(Yii::app()->params['sourceDateFormat']));
 			}
 		}
 
@@ -114,7 +82,10 @@
 		public function deleteUser($sessionKey, $login)
 		{
 			if ($this->authenticateBySession($sessionKey))
+			{
 				UserRecord::deleteUserByLogin($login);
+				MetaDataRecord::setData('library-security', 'last-update', date(Yii::app()->params['sourceDateFormat']));
+			}
 		}
 
 		/**
@@ -226,6 +197,8 @@
 				UserGroupRecord::assignUsersForGroup($id, $assignedUsers);
 
 				GroupLibraryRecord::assignPagesForGroup($id, $assignedPages);
+
+				MetaDataRecord::setData('library-security', 'last-update', date(Yii::app()->params['sourceDateFormat']));
 			}
 		}
 
@@ -241,6 +214,8 @@
 				UserGroupRecord::clearObjectsByGroup($id);
 				GroupLibraryRecord::clearObjectsByGroup($id);
 				GroupRecord::model()->deleteByPk($id);
+
+				MetaDataRecord::setData('library-security', 'last-update', date(Yii::app()->params['sourceDateFormat']));
 			}
 		}
 
@@ -320,58 +295,6 @@
 
 		/**
 		 * @param string $sessionKey
-		 * @param string $libraryId
-		 * @return GroupModel[]
-		 * @soap
-		 */
-		public function getGroupsByLibrary($sessionKey, $libraryId)
-		{
-			$groups = array();
-			if ($this->authenticateBySession($sessionKey))
-			{
-				foreach (GroupRecord::model()->findAll() as $groupRecord)
-				{
-					$group = new GroupModel();
-					$group->id = $groupRecord->id;
-					$group->name = $groupRecord->name;
-
-					$userList = array();
-					$assignedUsers = UserGroupRecord::getUserIdsByGroup($groupRecord->id);
-					$totalUsers = UserRecord::model()->count('role<>2');
-					$group->allUsers = isset($assignedUsers) && $totalUsers == count($assignedUsers);
-					foreach ($assignedUsers as $userId)
-					{
-						/** @var $userRecord UserRecord */
-						$userRecord = UserRecord::model()->findByPk($userId);
-						if (isset($userRecord))
-						{
-							$user = new UserModel();
-							$user->id = $userRecord->id;
-							$user->login = $userRecord->login;
-							$user->firstName = $userRecord->first_name;
-							$user->lastName = $userRecord->last_name;
-							$user->email = $userRecord->email;
-							$userList[] = $user;
-						}
-					}
-					$sortHelper = new ObjectSortHelper('firstName','asc');
-					usort($userList, array($sortHelper, 'sort'));
-					$group->users = $userList;
-
-					$assignedLibraryIds = GroupLibraryRecord::getLibraryIdsByGroup($groupRecord->id);
-					if (in_array($libraryId, $assignedLibraryIds))
-						$groups[] = $group;
-				}
-			}
-
-			Yii::app()->cacheDB->flush();
-			$sortHelper = new ObjectSortHelper('name','asc');
-			usort($groups, array($sortHelper, 'sort'));
-			return $groups;
-		}
-
-		/**
-		 * @param string $sessionKey
 		 * @param string $id
 		 * @param UserModel[] $assignedUsers
 		 * @param GroupModel[] $assignedGroups
@@ -393,6 +316,8 @@
 
 					UserLibraryRecord::assignUsersForPage($page, $assignedUsers);
 					GroupLibraryRecord::assignGroupsForPage($page, $assignedGroups);
+
+					MetaDataRecord::setData('library-security', 'last-update', date(Yii::app()->params['sourceDateFormat']));
 				}
 			}
 		}

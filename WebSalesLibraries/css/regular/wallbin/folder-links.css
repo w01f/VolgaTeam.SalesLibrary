@@ -36,6 +36,7 @@
 
 .folder-links-container .link-container
 {
+	display: inline-block;
 	vertical-align: middle;
 	margin-bottom: 9px;
 	min-height: 32px;
@@ -45,6 +46,11 @@
 .folder-links-container .link-container.restricted
 {
 	display: none;
+}
+
+.folder-links-container .link-container.line-break
+{
+	cursor: default;
 }
 
 .link-text

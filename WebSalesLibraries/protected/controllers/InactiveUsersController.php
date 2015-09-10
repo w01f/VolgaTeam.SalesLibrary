@@ -3,7 +3,7 @@
 	/**
 	 * Class InactiveusersController
 	 */
-	class InactiveusersController extends CController
+	class InactiveusersController extends SoapController
 	{
 		/**
 		 * @return array
@@ -18,39 +18,6 @@
 					),
 				),
 			);
-		}
-
-		/**
-		 * @param string $sessionKey
-		 * @return bool
-		 */
-		protected function authenticateBySession($sessionKey)
-		{
-			$data = Yii::app()->cacheDB->get($sessionKey);
-			if ($data !== FALSE)
-				return TRUE;
-			else
-				return FALSE;
-		}
-
-		/**
-		 * @param string $login
-		 * @param string $password
-		 * @return string session key
-		 * @soap
-		 */
-		public function getSessionKey($login, $password)
-		{
-			$identity = new UserIdentity($login, $password);
-			$identity->authenticate();
-			if ($identity->errorCode === UserIdentity::ERROR_NONE)
-			{
-				$sessionKey = strval(md5(mt_rand()));
-				Yii::app()->cacheDB->set($sessionKey, $login, (60 * 60 * 24 * 7));
-				return $sessionKey;
-			}
-			else
-				return '';
 		}
 
 		/**

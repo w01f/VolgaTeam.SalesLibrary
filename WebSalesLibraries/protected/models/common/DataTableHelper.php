@@ -23,14 +23,12 @@
 						$type = 9999;
 
 					$record['id'] = $linkRecord['id'];
-					$record['name'] = array(
-						'value' => $linkRecord['name'],
-						'file' => $linkRecord['file_name'],
-						'tooltip' => sprintf('%s<br><br>%s',
+					$record['name'] = $linkRecord['name'];
+
+					$record['tooltip']= sprintf('%s<br><br>%s',
 							isset($linkRecord['file_name']) && $linkRecord['file_name'] != '' ? $linkRecord['file_name'] : $linkRecord['name'],
-							Yii::app()->params['tooltips']['wallbin'][$linkRecord['format']]
-						)
-					);
+							Yii::app()->params['tooltips']['wallbin'][$linkRecord['format']]);
+
 					$record['date'] = array(
 						'display' => date(Yii::app()->params['outputDateFormat'], strtotime($linkRecord['link_date'])),
 						'value' => strtotime($linkRecord['link_date'])
@@ -66,6 +64,13 @@
 								$record['file_type'] = $linkRecord['format'];
 							break;
 					}
+
+					$extendedProperties = CJSON::decode($linkRecord['extended_properties'], true);
+					$record['extended_properties'] = $extendedProperties;
+					$record['url'] = $type == 8 && $extendedProperties['forcePreview'] == true ?
+						$linkRecord['path'] :
+						'';
+
 					$dataset[] = $record;
 				}
 			}

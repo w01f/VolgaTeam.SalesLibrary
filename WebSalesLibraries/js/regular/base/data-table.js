@@ -54,31 +54,29 @@
 				columnSettings.push({
 					"data": "tag",
 					"title": viewOptions.categoryColumnName,
-					"width": "15%"
+					"width": "15%",
+					"render": cellRenderer
 				});
 			if (viewOptions.showLibraries)
 				columnSettings.push({
 					"data": "library.name",
 					"title": viewOptions.librariesColumnName,
 					"class": "centered",
-					"width": "10%"
+					"width": "10%",
+					"render": cellRenderer
 				});
 
 			columnSettings.push({
 				"data": "file_type",
 				"title": "Type",
 				"class": "centered",
-				"width": "50px"
+				"width": "50px",
+				"render": cellRenderer
 			});
 			columnSettings.push({
 				"data": "name",
 				"title": "Link",
-				"render": function (data)
-				{
-					if (data != '')
-						return '<span class="mtTool" mtcontent="' + data.tooltip + '">' + data.value + '</span>';
-					return '';
-				}
+				"render": cellRenderer
 			});
 			columnSettings.push({
 				"data": "rate.image",
@@ -96,7 +94,8 @@
 				"data": "date.display",
 				"title": "Date",
 				"class": "centered",
-				"width": "80px"
+				"width": "80px",
+				"render": cellRenderer
 			});
 			if (viewOptions.showDeleteButton)
 				columnSettings.push({
@@ -110,7 +109,8 @@
 				"data": "id",
 				"title": "Id",
 				"visible": false,
-				"searchable": false
+				"searchable": false,
+				"render": cellRenderer
 			});
 
 			dataTable = table
@@ -140,18 +140,22 @@
 			{
 				table.on('click', '.link-delete-button', function (e)
 				{
-					var linkId = dataTable.api().row($(this).closest( "tr" )).data().id;
+					var linkId = dataTable.api().row($(this).closest("tr")).data().id;
 					deleteHandler(linkId);
 					e.stopPropagation();
 				});
 			}
-			table.on('click', 'tr', function ()
+
+			table.on('click', 'tr', function (e)
 			{
 				var linkId = dataTable.api().row(this).data().id;
 				$.SalesPortal.LinkManager.requestViewDialog(linkId, false);
 			});
 
-
+			table.on('click', 'a.link-url', function (e)
+			{
+				e.stopPropagation();
+			});
 		};
 
 		this.updateSize = function ()
@@ -171,6 +175,15 @@
 		{
 			if (dataTable != undefined)
 				dataTable.api().state.clear();
+		};
+
+		var cellRenderer = function (data, type, row, meta)
+		{
+			if (row != '')
+				return row.url != '' ?
+					'<a class="link-url mtTool" mtcontent="' + row.tooltip + '" href="' + row.url + '" target="_blank">' + (data != null ? data : '') + '</a>' :
+					'<span class="mtTool" mtcontent="' + row.tooltip + '">' + (data != null ? data : '') + '</span>';
+			return '';
 		};
 
 		var destroy = function ()

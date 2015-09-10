@@ -31,6 +31,7 @@
 					$.SalesPortal.LinkManager.requestViewDialog(linkId, true);
 				}
 				event.stopPropagation();
+				event.preventDefault();
 			});
 			container.find('.folder-link').off('click').on('click', function (event)
 			{
@@ -39,6 +40,7 @@
 					loadFolderLinkContent($(this));
 				}
 				event.stopPropagation();
+				event.preventDefault();
 			});
 		};
 

@@ -3,8 +3,9 @@
 	/**
 	 * Class CategoryRecord
 	 * @property int id
-	 * @property mixed category
-	 * @property mixed tag
+	 * @property string category
+	 * @property string description
+	 * @property string tag
 	 */
 	class CategoryRecord extends CActiveRecord
 	{
@@ -36,6 +37,7 @@
 				$categoryRecord = new CategoryRecord();
 				$categoryRecord->id = $i;
 				$categoryRecord->category = $category->category;
+				$categoryRecord->description = $category->description;
 				$categoryRecord->tag = $category->tag;
 				$categoryRecord->save();
 				$i++;

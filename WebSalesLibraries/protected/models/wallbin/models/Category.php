@@ -14,6 +14,11 @@
 		 * @var string
 		 * @soap
 		 */
+		public $description;
+		/**
+		 * @var string
+		 * @soap
+		 */
 		public $tag;
 		public $id;
 		public $selected;
@@ -22,6 +27,7 @@
 		{
 			$this->id = uniqid();
 			$this->category = $categoryRecord->category;
+			$this->description = $categoryRecord->description;
 			$this->tag = $categoryRecord->tag;
 		}
 	}

@@ -26,6 +26,11 @@
 
 			$.mtReInit();
 
+			container.find('.line-break').off('click').on('click', function (event)
+			{
+				event.stopPropagation();
+				event.preventDefault();
+			});
 			container.find('.clickable').off('click').on('click', function (event)
 			{
 				var linkId = $(this).attr('id').replace('link', '');

@@ -80,10 +80,13 @@
 					$dateField = 'link.file_date as link_date';
 					$linkRecords = Yii::app()->db->createCommand()
 						->select('link.id, link.id_library,
-							link.name, link.file_name,
+							link.name,
+							link.file_name,
+							link.file_relative_path as path,
 							' . $dateField . ',
 							(select (round(avg(lr.value)*2)/2) as value from tbl_link_rate lr where lr.id_link=link.id) as rate,
 							link.format,
+							link.properties as extended_properties,
 							glcat.tag as tag')
 						->from('tbl_link link')
 						->leftJoin("(select lcat.id_link, group_concat(lcat.tag separator ', ') as tag from tbl_link_category lcat group by lcat.id_link) glcat", "glcat.id_link=link.id")
