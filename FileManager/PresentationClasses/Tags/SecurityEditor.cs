@@ -6,7 +6,7 @@ using System.Threading;
 using System.Windows.Forms;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
-using FileManager.ConfigurationClasses;
+using FileManager.BusinessClasses;
 using FileManager.Controllers;
 using SalesDepot.Services.IPadAdminService;
 using Font = System.Drawing.Font;
@@ -17,8 +17,7 @@ namespace FileManager.PresentationClasses.Tags
 	public partial class SecurityEditor : UserControl, ITagsEditor
 	{
 		private bool _loading;
-		private bool _securityGroupsLoaded;
-		private readonly List<GroupModel> _securityGroups = new List<GroupModel>();
+		private readonly List<LibraryGroup> _securityGroups = new List<LibraryGroup>();
 		private readonly List<string> _assignedUsers = new List<string>();
 		private readonly List<string> _deniedUsers = new List<string>();
 
@@ -28,7 +27,7 @@ namespace FileManager.PresentationClasses.Tags
 			{
 				_assignedUsers.Clear();
 				if (rbSecurityWhiteList.Checked)
-					_assignedUsers.AddRange(_securityGroups.Where(g => g.users != null).SelectMany(g => g.users).Where(u => u.selected).Select(u => u.login));
+					_assignedUsers.AddRange(_securityGroups.Where(g => g.Users != null).SelectMany(g => g.Users).Where(u => u.Selected).Select(u => u.Login));
 				return String.Join(",", _assignedUsers);
 			}
 			set
@@ -46,7 +45,7 @@ namespace FileManager.PresentationClasses.Tags
 			{
 				_deniedUsers.Clear();
 				if (rbSecurityBlackList.Checked)
-					_deniedUsers.AddRange(_securityGroups.Where(g => g.users != null).SelectMany(g => g.users).Where(u => u.selected).Select(u => u.login));
+					_deniedUsers.AddRange(_securityGroups.Where(g => g.Users != null).SelectMany(g => g.Users).Where(u => u.Selected).Select(u => u.Login));
 				return String.Join(",", _deniedUsers);
 			}
 			set
@@ -82,6 +81,8 @@ namespace FileManager.PresentationClasses.Tags
 			rbSecurityBlackList.Font = new Font(rbSecurityBlackList.Font.FontFamily, rbSecurityBlackList.Font.Size - 2, rbSecurityBlackList.Font.Style);
 			rbSecurityForbidden.Font = new Font(rbSecurityForbidden.Font.FontFamily, rbSecurityForbidden.Font.Size - 2, rbSecurityForbidden.Font.Style);
 			ckSecurityShareLink.Font = new Font(ckSecurityShareLink.Font.FontFamily, ckSecurityShareLink.Font.Size - 2, ckSecurityShareLink.Font.Style);
+
+			_securityGroups.AddRange(ListManager.Instance.SecurityGroups.Groups);
 		}
 
 		#region ITagsEditor Members
@@ -149,14 +150,9 @@ namespace FileManager.PresentationClasses.Tags
 					!String.IsNullOrEmpty(defaultLink.ExtendedProperties.DeniedUsers) ? defaultLink.ExtendedProperties.DeniedUsers : null;
 			}
 
-			if (!_securityGroupsLoaded)
-				LoadSecurityGroups();
-			else
-			{
-				ApplyAssignedUsers();
-				ApplyDeniedUsers();
-				_loading = false;
-			}
+			gridControlSecurityUserList.DataSource = _securityGroups;
+			ApplyAssignedUsers();
+			ApplyDeniedUsers();
 		}
 
 		public void ApplyData()
@@ -208,59 +204,15 @@ namespace FileManager.PresentationClasses.Tags
 		}
 		#endregion
 
-		private void LoadSecurityGroups()
-		{
-			rbSecurityWhiteList.Enabled = false;
-			rbSecurityBlackList.Enabled = false;
-			pnSecurityUserListGrid.Visible = false;
-			gridControlSecurityUserList.DataSource = null;
-			_securityGroups.Clear();
-			laSecurityUserListInfo.Visible = true;
-			laSecurityUserListInfo.BringToFront();
-			var library = MainController.Instance.ActiveDecorator != null ? MainController.Instance.ActiveDecorator.Library : null;
-			if (!SettingsManager.Instance.WebServiceConnected)
-				laSecurityUserListInfo.Text = String.Format("Service coonection is not configured");
-			circularSecurityUserListProgress.Visible = true;
-			circularSecurityUserListProgress.BringToFront();
-			laSecurityUserListInfo.Text = String.Format("Loading user list from {0}...", SettingsManager.Instance.WebServiceSite);
-			Application.DoEvents();
-			var message = String.Empty;
-			var thread = new Thread(() =>
-			{
-				_securityGroups.AddRange(library.IPadManager.GetGroupsByLibrary(out message));
-				Invoke((MethodInvoker)delegate
-				{
-					circularSecurityUserListProgress.Visible = false;
-					if (!String.IsNullOrEmpty(message))
-						laSecurityUserListInfo.Text = String.Format("Couldn't load user list from {0}", SettingsManager.Instance.WebServiceSite);
-					else if (!_securityGroups.Any())
-						laSecurityUserListInfo.Text = String.Format("There is no users on {0}", SettingsManager.Instance.WebServiceSite);
-					else
-					{
-						laSecurityUserListInfo.Visible = false;
-						pnSecurityUserListGrid.Visible = true;
-						gridControlSecurityUserList.DataSource = _securityGroups.Where(g => g.users != null).ToList();
-						ApplyAssignedUsers();
-						ApplyDeniedUsers();
-						rbSecurityWhiteList.Enabled = true;
-						rbSecurityBlackList.Enabled = true;
-					}
-				});
-				_securityGroupsLoaded = true;
-				_loading = false;
-			});
-			thread.Start();
-		}
-
 		private void ApplyAssignedUsers()
 		{
 			if (rbSecurityWhiteList.Checked)
 			{
-				foreach (var groupModel in _securityGroups.Where(g => g.users != null))
+				foreach (var groupModel in _securityGroups.Where(g => g.Users != null))
 				{
-					foreach (var userModel in groupModel.users)
-						userModel.selected = _assignedUsers.Contains(userModel.login);
-					groupModel.selected = groupModel.users.Any(u => u.selected);
+					foreach (var userModel in groupModel.Users)
+						userModel.Selected = _assignedUsers.Contains(userModel.Login);
+					groupModel.Selected = groupModel.Users.Any(u => u.Selected);
 				}
 				gridControlSecurityUserList.RefreshDataSource();
 			}
@@ -270,11 +222,11 @@ namespace FileManager.PresentationClasses.Tags
 		{
 			if (rbSecurityBlackList.Checked)
 			{
-				foreach (var groupModel in _securityGroups.Where(g => g.users != null))
+				foreach (var groupModel in _securityGroups.Where(g => g.Users != null))
 				{
-					foreach (var userModel in groupModel.users)
-						userModel.selected = _deniedUsers.Contains(userModel.login);
-					groupModel.selected = groupModel.users.Any(u => u.selected);
+					foreach (var userModel in groupModel.Users)
+						userModel.Selected = _deniedUsers.Contains(userModel.Login);
+					groupModel.Selected = groupModel.Users.Any(u => u.Selected);
 				}
 				gridControlSecurityUserList.RefreshDataSource();
 			}
@@ -300,22 +252,22 @@ namespace FileManager.PresentationClasses.Tags
 
 		private void buttonXSecurityUserListSelectAll_Click(object sender, EventArgs e)
 		{
-			foreach (var groupModel in _securityGroups.Where(g => g.users != null))
+			foreach (var groupModel in _securityGroups.Where(g => g.Users != null))
 			{
-				foreach (var userModel in groupModel.users)
-					userModel.selected = true;
-				groupModel.selected = groupModel.users.Any(u => u.selected);
+				foreach (var userModel in groupModel.Users)
+					userModel.Selected = true;
+				groupModel.Selected = groupModel.Users.Any(u => u.Selected);
 			}
 			gridControlSecurityUserList.RefreshDataSource();
 		}
 
 		private void buttonXSecurityUserListClearAll_Click(object sender, EventArgs e)
 		{
-			foreach (var groupModel in _securityGroups.Where(g => g.users != null))
+			foreach (var groupModel in _securityGroups.Where(g => g.Users != null))
 			{
-				foreach (var userModel in groupModel.users)
-					userModel.selected = false;
-				groupModel.selected = groupModel.users.Any(u => u.selected);
+				foreach (var userModel in groupModel.Users)
+					userModel.Selected = false;
+				groupModel.Selected = groupModel.Users.Any(u => u.Selected);
 			}
 			gridControlSecurityUserList.RefreshDataSource();
 		}
@@ -330,14 +282,14 @@ namespace FileManager.PresentationClasses.Tags
 				dialog.Filter = "Xml files|*.xml";
 				dialog.Title = "Import Users from File";
 				if (dialog.ShowDialog() != DialogResult.OK) return;
-				var users = library.IPadManager.LoadUserLoginsFromFile(dialog.FileName).ToList();
-				foreach (var groupModel in _securityGroups.Where(g => g.users != null))
+				var users = ServiceConnector.Instance.LoadUserLoginsFromFile(dialog.FileName).ToList();
+				foreach (var groupModel in _securityGroups.Where(g => g.Users != null))
 				{
-					foreach (var userModel in groupModel.users)
-						userModel.selected = false;
-					foreach (var userModel in groupModel.users.Where(u => users.Any(loadedUser => loadedUser == u.login.ToLower())))
-						userModel.selected = true;
-					groupModel.selected = groupModel.users.Any(u => u.selected);
+					foreach (var userModel in groupModel.Users)
+						userModel.Selected = false;
+					foreach (var userModel in groupModel.Users.Where(u => users.Any(loadedUser => loadedUser == u.Login.ToLower())))
+						userModel.Selected = true;
+					groupModel.Selected = groupModel.Users.Any(u => u.Selected);
 				}
 				gridControlSecurityUserList.RefreshDataSource();
 				AppManager.Instance.ShowInfo("Import Complete");
@@ -352,7 +304,7 @@ namespace FileManager.PresentationClasses.Tags
 
 		private void OnGroupChildListIsEmpty(object sender, MasterRowEmptyEventArgs e)
 		{
-			e.IsEmpty = !(e.RowHandle != GridControl.InvalidRowHandle && _securityGroups[e.RowHandle].users != null && _securityGroups[e.RowHandle].users.Any());
+			e.IsEmpty = !(e.RowHandle != GridControl.InvalidRowHandle && _securityGroups[e.RowHandle].Users != null && _securityGroups[e.RowHandle].Users.Any());
 		}
 
 		private void OnGetGroupRelationCount(object sender, MasterRowGetRelationCountEventArgs e)
@@ -367,8 +319,8 @@ namespace FileManager.PresentationClasses.Tags
 
 		private void OnGetGroupChildList(object sender, MasterRowGetChildListEventArgs e)
 		{
-			if (e.RowHandle != GridControl.InvalidRowHandle && _securityGroups[e.RowHandle].users != null)
-				e.ChildList = _securityGroups[e.RowHandle].users.ToArray();
+			if (e.RowHandle != GridControl.InvalidRowHandle && _securityGroups[e.RowHandle].Users != null)
+				e.ChildList = _securityGroups[e.RowHandle].Users.ToArray();
 		}
 
 		private void RepositoryItemCheckEditCheckedChanged(object sender, EventArgs e)
@@ -381,21 +333,21 @@ namespace FileManager.PresentationClasses.Tags
 			if (focussedView == gridViewSecurityGroups)
 			{
 				if (focussedView.FocusedRowHandle == GridControl.InvalidRowHandle) return;
-				var groupModel = focussedView.GetFocusedRow() as GroupModel;
+				var groupModel = focussedView.GetFocusedRow() as LibraryGroup;
 				if (groupModel == null) return;
-				if (groupModel.users == null) return;
-				foreach (var userModel in groupModel.users)
-					userModel.selected = groupModel.selected;
+				if (groupModel.Users == null) return;
+				foreach (var userModel in groupModel.Users)
+					userModel.Selected = groupModel.Selected;
 				var usersView = focussedView.GetDetailView(focussedView.FocusedRowHandle, 0) as GridView;
 				if (usersView != null)
 					usersView.RefreshData();
 			}
 			else
 			{
-				var groupModel = focussedView.SourceRow as GroupModel;
-				var userModel = focussedView.GetFocusedRow() as UserModel;
-				if (groupModel == null || userModel == null || !userModel.selected) return;
-				groupModel.selected = userModel.selected;
+				var groupModel = focussedView.SourceRow as LibraryGroup;
+				var userModel = focussedView.GetFocusedRow() as LibraryUser;
+				if (groupModel == null || userModel == null || !userModel.Selected) return;
+				groupModel.Selected = userModel.Selected;
 				gridControlSecurityUserList.MainView.RefreshData();
 			}
 		}

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using DevExpress.XtraTab;
-using FileManager.ConfigurationClasses;
+using FileManager.BusinessClasses;
 using FileManager.Controllers;
 using SalesDepot.CoreObjects.BusinessClasses;
 

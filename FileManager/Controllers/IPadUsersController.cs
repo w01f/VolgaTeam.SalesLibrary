@@ -1,4 +1,5 @@
 ﻿using System;
+using FileManager.BusinessClasses;
 using FileManager.PresentationClasses.TabPages;
 using FileManager.PresentationClasses.WallBin.Decorators;
 
@@ -44,7 +45,7 @@ namespace FileManager.Controllers
 		private void ApplyPermissionsManager()
 		{
 			var activeDecorator = MainController.Instance.ActiveDecorator;
-			if (activeDecorator == null || !activeDecorator.Library.IsConfigured || !ConfigurationClasses.SettingsManager.Instance.EnableIPadUsersTab || !ConfigurationClasses.SettingsManager.Instance.WebServiceConnected) return;
+			if (activeDecorator == null || !activeDecorator.Library.IsConfigured || !SettingsManager.Instance.EnableIPadUsersTab || !ServiceConnector.Instance.Connected) return;
 			activeDecorator.IPadPermissionsManager.RefreshData(true);
 			if (!_tabPage.Controls.Contains(activeDecorator.IPadPermissionsManager))
 				_tabPage.Controls.Add(activeDecorator.IPadPermissionsManager);

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using DevComponents.DotNetBar;
-using FileManager.ConfigurationClasses;
+using FileManager.BusinessClasses;
 using FileManager.PresentationClasses.WallBin.Decorators;
 using SalesDepot.CommonGUI.Forms;
 

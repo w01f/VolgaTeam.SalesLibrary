@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using FileManager.BusinessClasses;
-using FileManager.ConfigurationClasses;
 using FileManager.ToolForms.Settings;
 using SalesDepot.CoreObjects.BusinessClasses;
 using SalesDepot.CoreObjects.InteropClasses;
@@ -29,9 +28,12 @@ namespace FileManager
 
 		private bool Init()
 		{
-			bool result = false;
+			var result = false;
+			
+			AppModeManager.Instance.Load();
 			SettingsManager.Instance.Load();
-			ListManager.Instance.Init();
+			ServiceConnector.Instance.Init();
+			
 			if (string.IsNullOrEmpty(SettingsManager.Instance.BackupPath) || !Directory.Exists(SettingsManager.Instance.BackupPath))
 			{
 				Instance.ShowWarning("Primary Backup Root is not set or unavailable.\nYou need to configure application");
@@ -59,7 +61,9 @@ namespace FileManager
 
 		public void RunSilent()
 		{
+			AppModeManager.Instance.Load();
 			SettingsManager.Instance.Load();
+			ServiceConnector.Instance.Init();
 			ListManager.Instance.Init();
 			if (String.IsNullOrEmpty(SettingsManager.Instance.BackupPath) || 
 				!Directory.Exists(SettingsManager.Instance.BackupPath)) return;

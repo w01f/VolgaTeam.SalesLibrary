@@ -5,7 +5,7 @@ using System.Linq;
 using System.Windows.Forms;
 using DevExpress.XtraTab;
 using DevExpress.XtraTab.ViewInfo;
-using FileManager.ConfigurationClasses;
+using FileManager.BusinessClasses;
 using FileManager.Controllers;
 using FileManager.PresentationClasses.WallBin.Decorators;
 using FileManager.ToolForms.Settings;

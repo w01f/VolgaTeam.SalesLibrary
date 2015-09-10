@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using FileManager.ConfigurationClasses;
+using FileManager.BusinessClasses;
 using FileManager.ToolForms.WallBin;
 using SalesDepot.CoreObjects.BusinessClasses;
 

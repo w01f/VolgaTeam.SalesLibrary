@@ -222,6 +222,7 @@
           <xsd:element name="users" type="tns:UserModelArray" />
           <xsd:element name="allUsers" type="xsd:boolean" />
           <xsd:element name="libraries" type="tns:LibraryArray" />
+          <xsd:element name="libraryIds" type="tns:stringArray" />
           <xsd:element name="allLibraries" type="xsd:boolean" />
         </xsd:all>
       </xsd:complexType>
@@ -254,6 +255,13 @@
         <xsd:complexContent mixed="false">
           <xsd:restriction base="soap-enc:Array">
             <xsd:attribute wsdl:arrayType="tns:Library[]" ref="soap-enc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="stringArray">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soap-enc:Array">
+            <xsd:attribute wsdl:arrayType="xsd:string[]" ref="soap-enc:arrayType" />
           </xsd:restriction>
         </xsd:complexContent>
       </xsd:complexType>
@@ -296,13 +304,6 @@
           <xsd:element name="thumbsHeight" type="xsd:int" />
         </xsd:all>
       </xsd:complexType>
-      <xsd:complexType name="stringArray">
-        <xsd:complexContent mixed="false">
-          <xsd:restriction base="soap-enc:Array">
-            <xsd:attribute wsdl:arrayType="xsd:string[]" ref="soap-enc:arrayType" />
-          </xsd:restriction>
-        </xsd:complexContent>
-      </xsd:complexType>
       <xsd:complexType name="LibraryConfig">
         <xsd:all>
           <xsd:element name="id" type="xsd:string" />
@@ -313,47 +314,19 @@
           <xsd:element name="deadLinkBody" type="xsd:string" />
         </xsd:all>
       </xsd:complexType>
-      <xsd:complexType name="References">
-        <xsd:all>
-          <xsd:element name="categories" type="tns:CategoryArray" />
-          <xsd:element name="superFilters" type="tns:SuperFilterArray" />
-        </xsd:all>
-      </xsd:complexType>
-      <xsd:complexType name="CategoryArray">
-        <xsd:complexContent mixed="false">
-          <xsd:restriction base="soap-enc:Array">
-            <xsd:attribute wsdl:arrayType="tns:Category[]" ref="soap-enc:arrayType" />
-          </xsd:restriction>
-        </xsd:complexContent>
-      </xsd:complexType>
-      <xsd:complexType name="Category">
-        <xsd:all>
-          <xsd:element name="category" type="xsd:string" />
-          <xsd:element name="tag" type="xsd:string" />
-        </xsd:all>
-      </xsd:complexType>
-      <xsd:complexType name="SuperFilterArray">
-        <xsd:complexContent mixed="false">
-          <xsd:restriction base="soap-enc:Array">
-            <xsd:attribute wsdl:arrayType="tns:SuperFilter[]" ref="soap-enc:arrayType" />
-          </xsd:restriction>
-        </xsd:complexContent>
-      </xsd:complexType>
-      <xsd:complexType name="SuperFilter">
-        <xsd:all>
-          <xsd:element name="value" type="xsd:string" />
-        </xsd:all>
-      </xsd:complexType>
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="mockLibraryRequest">
     <wsdl:part name="library" type="tns:Library" />
   </wsdl:message>
   <wsdl:message name="mockLibraryResponse" />
-  <wsdl:message name="mockReferencesRequest">
-    <wsdl:part name="references" type="tns:References" />
+  <wsdl:message name="getSessionKeyRequest">
+    <wsdl:part name="login" type="xsd:string" />
+    <wsdl:part name="password" type="xsd:string" />
   </wsdl:message>
-  <wsdl:message name="mockReferencesResponse" />
+  <wsdl:message name="getSessionKeyResponse">
+    <wsdl:part name="return" type="xsd:string" />
+  </wsdl:message>
   <wsdl:portType name="ContentControllerPortType">
     <wsdl:operation name="mockLibrary">
       <wsdl:documentation>
@@ -361,11 +334,11 @@
       <wsdl:input message="tns:mockLibraryRequest" />
       <wsdl:output message="tns:mockLibraryResponse" />
     </wsdl:operation>
-    <wsdl:operation name="mockReferences">
+    <wsdl:operation name="getSessionKey">
       <wsdl:documentation>
       </wsdl:documentation>
-      <wsdl:input message="tns:mockReferencesRequest" />
-      <wsdl:output message="tns:mockReferencesResponse" />
+      <wsdl:input message="tns:getSessionKeyRequest" />
+      <wsdl:output message="tns:getSessionKeyResponse" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="ContentControllerBinding" type="tns:ContentControllerPortType">
@@ -379,8 +352,8 @@
         <soap:body use="encoded" namespace="urn:ContentControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="mockReferences">
-      <soap:operation soapAction="urn:ContentControllerwsdl#mockReferences" style="rpc" />
+    <wsdl:operation name="getSessionKey">
+      <soap:operation soapAction="urn:ContentControllerwsdl#getSessionKey" style="rpc" />
       <wsdl:input>
         <soap:body use="encoded" namespace="urn:ContentControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
       </wsdl:input>

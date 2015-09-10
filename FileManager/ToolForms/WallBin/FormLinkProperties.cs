@@ -9,7 +9,7 @@ using DevComponents.DotNetBar.Metro;
 using DevExpress.Utils;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraTab;
-using FileManager.ConfigurationClasses;
+using FileManager.BusinessClasses;
 using FileManager.PresentationClasses.WallBin.LinkProperties;
 using SalesDepot.CoreObjects.BusinessClasses;
 
@@ -104,7 +104,6 @@ namespace FileManager.ToolForms.WallBin
 						break;
 					case LinkPropertiesType.Security:
 						var securityPage = new SecurityOptions(data);
-						securityPage.LoadSecurityGroups();
 						optionPages.Add(securityPage);
 						break;
 					case LinkPropertiesType.Widget:

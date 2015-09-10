@@ -5,7 +5,6 @@ using System.Threading;
 using System.Windows.Forms;
 using DevExpress.XtraEditors.Controls;
 using FileManager.BusinessClasses;
-using FileManager.ConfigurationClasses;
 using FileManager.PresentationClasses.TabPages;
 using FileManager.PresentationClasses.WallBin.Decorators;
 using FileManager.ToolClasses;
@@ -71,7 +70,7 @@ namespace FileManager.Controllers
 		{
 			var activeDecorator = MainController.Instance.ActiveDecorator;
 			if (activeDecorator == null || !activeDecorator.Library.IsConfigured) return;
-			var settingsConfigured = SettingsManager.Instance.WebServiceConnected && !string.IsNullOrEmpty(activeDecorator.Library.IPadManager.SyncDestinationPath);
+			var settingsConfigured = ServiceConnector.Instance.Connected && !string.IsNullOrEmpty(activeDecorator.Library.IPadManager.SyncDestinationPath);
 			FormMain.Instance.buttonItemIPadVideoConvert.Enabled = settingsConfigured;
 			FormMain.Instance.buttonItemIPadVideoDelete.Enabled = settingsConfigured;
 			FormMain.Instance.buttonItemIPadSyncFiles.Enabled = settingsConfigured;

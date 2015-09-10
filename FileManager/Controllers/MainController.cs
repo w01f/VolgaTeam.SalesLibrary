@@ -5,7 +5,6 @@ using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using FileManager.BusinessClasses;
-using FileManager.ConfigurationClasses;
 using FileManager.PresentationClasses.WallBin.Decorators;
 using FileManager.ToolForms.Settings;
 using SalesDepot.CommonGUI.Forms;
@@ -249,6 +248,24 @@ namespace FileManager.Controllers
 
 			IPadUsersController = new IPadUsersController();
 			_controllers.Add(TabPageEnum.IPadUsers, IPadUsersController);
+		}
+
+		public void LoadList()
+		{
+			using (var formProgress = new FormProgress())
+			{
+				formProgress.TopMost = true;
+				formProgress.laProgress.Text = "Loading Lists...";
+				FormMain.Instance.ribbonControl.Enabled = false;
+				var thread = new Thread(() => ListManager.Instance.Init());
+				formProgress.Show();
+				thread.Start();
+				Application.DoEvents();
+				while (thread.IsAlive)
+					Application.DoEvents();
+				formProgress.Close();
+				FormMain.Instance.ribbonControl.Enabled = true;
+			}
 		}
 
 		public void LoadDataAndGUI()

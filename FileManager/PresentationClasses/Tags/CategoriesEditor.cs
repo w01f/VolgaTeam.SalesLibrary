@@ -5,7 +5,7 @@ using System.Linq;
 using System.Windows.Forms;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
-using FileManager.ConfigurationClasses;
+using FileManager.BusinessClasses;
 using FileManager.Controllers;
 using SalesDepot.CoreObjects.BusinessClasses;
 

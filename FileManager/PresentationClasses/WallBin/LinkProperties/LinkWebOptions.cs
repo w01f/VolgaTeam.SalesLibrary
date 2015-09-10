@@ -34,11 +34,15 @@ namespace FileManager.PresentationClasses.WallBin.LinkProperties
 		private void LoadData()
 		{
 			ckIsUrl365.Checked = _data.ExtendedProperties.IsUrl365;
+			ckForcePreview.Checked = _data.ExtendedProperties.ForcePreview;
+			textEditLinkPath.EditValue = _data.RelativePath;
 		}
 
 		public void SaveData()
 		{
 			_data.ExtendedProperties.IsUrl365 = ckIsUrl365.Checked;
+			_data.ExtendedProperties.ForcePreview = ckForcePreview.Checked;
+			_data.RelativePath = textEditLinkPath.EditValue as String;
 		}
 	}
 }

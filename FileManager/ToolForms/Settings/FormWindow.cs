@@ -7,7 +7,7 @@ using DevComponents.DotNetBar.Metro;
 using DevExpress.Utils;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
-using FileManager.ConfigurationClasses;
+using FileManager.BusinessClasses;
 using FileManager.PresentationClasses.WallBin;
 using SalesDepot.CoreObjects.BusinessClasses;
 using SalesDepot.CoreObjects.ToolClasses;
@@ -37,8 +37,8 @@ namespace FileManager.ToolForms.Settings
 			ckApllyForAllWindowsAppearance.Checked = _folder.Parent.Parent.ApplyAppearanceForAllWindows;
 			ckApllyForAllWindowsWidget.Checked = _folder.Parent.Parent.ApplyWidgetForAllWindows;
 			ckApllyForAllWindowsBanner.Checked = _folder.Parent.Parent.ApplyBannerForAllWindows;
-			xtraTabPageWindowPropertiesBanner.PageEnabled = Directory.Exists(ListManager.Instance.BannerFolder);
-			xtraTabPageWindowPropertiesWidget.PageEnabled = Directory.Exists(ListManager.Instance.WidgetFolder);
+			xtraTabPageWindowPropertiesBanner.PageEnabled = Directory.Exists(ListManager.Instance.Banners.BannerFolder);
+			xtraTabPageWindowPropertiesWidget.PageEnabled = Directory.Exists(ListManager.Instance.Widgets.WidgetFolder);
 			textEditName.MouseDown += FormMain.Instance.EditorMouseDown;
 			textEditName.MouseUp += FormMain.Instance.EditorMouseUp;
 			textEditName.Enter += FormMain.Instance.EditorEnter;
@@ -136,7 +136,7 @@ namespace FileManager.ToolForms.Settings
 			ckApllyForAllWindowsAppearance.Checked = _propertiesType == WindowPropertiesType.None && _folder.Parent.Parent.ApplyAppearanceForAllWindows;
 
 			xtraTabControlWidgets.TabPages.Clear();
-			foreach (var imageGroup in ListManager.Instance.Widgets)
+			foreach (var imageGroup in ListManager.Instance.Widgets.Items)
 			{
 				var tabPage = new LinkImagesContainer(imageGroup);
 				tabPage.SelectedImageChanged += OnSelectedWidgetChanged;
@@ -148,7 +148,7 @@ namespace FileManager.ToolForms.Settings
 			ckApllyForAllWindowsWidget.Checked = _propertiesType == WindowPropertiesType.None && _folder.Parent.Parent.ApplyWidgetForAllWindows;
 
 			xtraTabControlBanners.TabPages.Clear();
-			foreach (var imageGroup in ListManager.Instance.Banners)
+			foreach (var imageGroup in ListManager.Instance.Banners.Items)
 			{
 				var tabPage = new LinkImagesContainer(imageGroup);
 				tabPage.SelectedImageChanged += OnSelectedBannerChanged;

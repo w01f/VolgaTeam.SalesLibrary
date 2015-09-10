@@ -27,8 +27,6 @@ namespace SalesDepot.Services.ContentManagmentService {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Web.Services.WebServiceBindingAttribute(Name="ContentControllerBinding", Namespace="urn:ContentControllerwsdl")]
-    [System.Xml.Serialization.SoapIncludeAttribute(typeof(SuperFilter))]
-    [System.Xml.Serialization.SoapIncludeAttribute(typeof(Category))]
     [System.Xml.Serialization.SoapIncludeAttribute(typeof(UniversalPreviewContainer))]
     [System.Xml.Serialization.SoapIncludeAttribute(typeof(AutoWidget))]
     [System.Xml.Serialization.SoapIncludeAttribute(typeof(UserModel))]
@@ -43,7 +41,7 @@ namespace SalesDepot.Services.ContentManagmentService {
         
         private System.Threading.SendOrPostCallback mockLibraryOperationCompleted;
         
-        private System.Threading.SendOrPostCallback mockReferencesOperationCompleted;
+        private System.Threading.SendOrPostCallback getSessionKeyOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
         
@@ -87,7 +85,7 @@ namespace SalesDepot.Services.ContentManagmentService {
         public event mockLibraryCompletedEventHandler mockLibraryCompleted;
         
         /// <remarks/>
-        public event mockReferencesCompletedEventHandler mockReferencesCompleted;
+        public event getSessionKeyCompletedEventHandler getSessionKeyCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:ContentControllerwsdl#mockLibrary", RequestNamespace="urn:ContentControllerwsdl", ResponseNamespace="urn:ContentControllerwsdl")]
@@ -118,30 +116,34 @@ namespace SalesDepot.Services.ContentManagmentService {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:ContentControllerwsdl#mockReferences", RequestNamespace="urn:ContentControllerwsdl", ResponseNamespace="urn:ContentControllerwsdl")]
-        public void mockReferences(References references) {
-            this.Invoke("mockReferences", new object[] {
-                        references});
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:ContentControllerwsdl#getSessionKey", RequestNamespace="urn:ContentControllerwsdl", ResponseNamespace="urn:ContentControllerwsdl")]
+        [return: System.Xml.Serialization.SoapElementAttribute("return")]
+        public string getSessionKey(string login, string password) {
+            object[] results = this.Invoke("getSessionKey", new object[] {
+                        login,
+                        password});
+            return ((string)(results[0]));
         }
         
         /// <remarks/>
-        public void mockReferencesAsync(References references) {
-            this.mockReferencesAsync(references, null);
+        public void getSessionKeyAsync(string login, string password) {
+            this.getSessionKeyAsync(login, password, null);
         }
         
         /// <remarks/>
-        public void mockReferencesAsync(References references, object userState) {
-            if ((this.mockReferencesOperationCompleted == null)) {
-                this.mockReferencesOperationCompleted = new System.Threading.SendOrPostCallback(this.OnmockReferencesOperationCompleted);
+        public void getSessionKeyAsync(string login, string password, object userState) {
+            if ((this.getSessionKeyOperationCompleted == null)) {
+                this.getSessionKeyOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetSessionKeyOperationCompleted);
             }
-            this.InvokeAsync("mockReferences", new object[] {
-                        references}, this.mockReferencesOperationCompleted, userState);
+            this.InvokeAsync("getSessionKey", new object[] {
+                        login,
+                        password}, this.getSessionKeyOperationCompleted, userState);
         }
         
-        private void OnmockReferencesOperationCompleted(object arg) {
-            if ((this.mockReferencesCompleted != null)) {
+        private void OngetSessionKeyOperationCompleted(object arg) {
+            if ((this.getSessionKeyCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.mockReferencesCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.getSessionKeyCompleted(this, new getSessionKeyCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -746,93 +748,6 @@ namespace SalesDepot.Services.ContentManagmentService {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:ContentControllerwsdl")]
-    public partial class SuperFilter {
-        
-        private string valueField;
-        
-        /// <remarks/>
-        public string value {
-            get {
-                return this.valueField;
-            }
-            set {
-                this.valueField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.34234")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:ContentControllerwsdl")]
-    public partial class Category {
-        
-        private string categoryField;
-        
-        private string tagField;
-        
-        /// <remarks/>
-        public string category {
-            get {
-                return this.categoryField;
-            }
-            set {
-                this.categoryField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string tag {
-            get {
-                return this.tagField;
-            }
-            set {
-                this.tagField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.34234")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:ContentControllerwsdl")]
-    public partial class References {
-        
-        private Category[] categoriesField;
-        
-        private SuperFilter[] superFiltersField;
-        
-        /// <remarks/>
-        public Category[] categories {
-            get {
-                return this.categoriesField;
-            }
-            set {
-                this.categoriesField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public SuperFilter[] superFilters {
-            get {
-                return this.superFiltersField;
-            }
-            set {
-                this.superFiltersField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.34234")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:ContentControllerwsdl")]
     public partial class LibraryConfig {
         
         private string idField;
@@ -1327,6 +1242,8 @@ namespace SalesDepot.Services.ContentManagmentService {
         
         private Library[] librariesField;
         
+        private string[] libraryIdsField;
+        
         private bool allLibrariesField;
         
         /// <remarks/>
@@ -1386,6 +1303,16 @@ namespace SalesDepot.Services.ContentManagmentService {
             }
             set {
                 this.librariesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string[] libraryIds {
+            get {
+                return this.libraryIdsField;
+            }
+            set {
+                this.libraryIdsField = value;
             }
         }
         
@@ -2357,7 +2284,29 @@ namespace SalesDepot.Services.ContentManagmentService {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.34209")]
-    public delegate void mockReferencesCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    public delegate void getSessionKeyCompletedEventHandler(object sender, getSessionKeyCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.34209")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class getSessionKeyCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal getSessionKeyCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
 }
 
 #pragma warning restore 1591

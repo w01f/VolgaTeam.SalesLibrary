@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using DevComponents.DotNetBar;
+using FileManager.BusinessClasses;
 using FileManager.Controllers;
 using FileManager.PresentationClasses.TabPages;
 
@@ -37,14 +38,15 @@ namespace FileManager
 		#region GUI Event Handlers
 		private void Form_Load(object sender, EventArgs e)
 		{
-			ribbonTabItemCalendar.Visible = ConfigurationClasses.SettingsManager.Instance.EnableOvernightsCalendarTab;
-			ribbonTabItemClipart.Visible = ConfigurationClasses.SettingsManager.Instance.EnableClipartTab && (System.IO.Directory.Exists(ConfigurationClasses.SettingsManager.Instance.ClientLogosRootPath) || System.IO.Directory.Exists(ConfigurationClasses.SettingsManager.Instance.SalesGalleryRootPath) || System.IO.Directory.Exists(ConfigurationClasses.SettingsManager.Instance.WebArtRootPath));
-			ribbonTabItemProgramManager.Visible = ConfigurationClasses.SettingsManager.Instance.EnableProgramManagerTab;
-			ribbonTabItemIPad.Visible = ConfigurationClasses.SettingsManager.Instance.EnableIPadSettingsTab && ConfigurationClasses.SettingsManager.Instance.WebServiceConnected;
-			ribbonTabItemIPadUsers.Visible = ConfigurationClasses.SettingsManager.Instance.EnableIPadUsersTab && ConfigurationClasses.SettingsManager.Instance.WebServiceConnected; ;
-			ribbonTabItemTags.Visible = ConfigurationClasses.SettingsManager.Instance.EnableTagsTab;
-			ribbonTabItemSecurity.Visible = ConfigurationClasses.SettingsManager.Instance.EnableSecurityTab;
+			ribbonTabItemCalendar.Visible = SettingsManager.Instance.EnableOvernightsCalendarTab;
+			ribbonTabItemClipart.Visible = SettingsManager.Instance.EnableClipartTab && (System.IO.Directory.Exists(SettingsManager.Instance.ClientLogosRootPath) || System.IO.Directory.Exists(SettingsManager.Instance.SalesGalleryRootPath) || System.IO.Directory.Exists(SettingsManager.Instance.WebArtRootPath));
+			ribbonTabItemProgramManager.Visible = SettingsManager.Instance.EnableProgramManagerTab;
+			ribbonTabItemIPad.Visible = SettingsManager.Instance.EnableIPadSettingsTab && ServiceConnector.Instance.Connected;
+			ribbonTabItemIPadUsers.Visible = SettingsManager.Instance.EnableIPadUsersTab && ServiceConnector.Instance.Connected;
+			ribbonTabItemTags.Visible = SettingsManager.Instance.EnableTagsTab;
+			ribbonTabItemSecurity.Visible = SettingsManager.Instance.EnableSecurityTab;
 
+			MainController.Instance.LoadList();
 			MainController.Instance.InitializeControllers();
 			MainController.Instance.LoadDataAndGUI();
 

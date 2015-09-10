@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml;
+using SalesDepot.Services.FileManagerDataService;
 using SalesDepot.Services.InactiveUsersService;
 using SalesDepot.Services.IPadAdminService;
 using SalesDepot.Services.StatisticService;
-using SalesDepot.Services.TickerService;
-using GroupModel = SalesDepot.Services.IPadAdminService.GroupModel;
 using Library = SalesDepot.Services.IPadAdminService.Library;
 using LibraryPage = SalesDepot.Services.IPadAdminService.LibraryPage;
 using UserModel = SalesDepot.Services.IPadAdminService.UserModel;
@@ -17,8 +16,7 @@ namespace SalesDepot.Services
 	{
 		protected string _login;
 		protected string _password;
-
-		public string _website;
+		protected string _website;
 
 		public SiteClient(XmlNode node)
 		{
@@ -71,57 +69,14 @@ namespace SalesDepot.Services
 			}
 		}
 
+		#region Admin
+
 		private AdminControllerService GetAdminClient()
 		{
 			try
 			{
 				var client = new AdminControllerService();
 				client.Url = string.Format("{0}/admin/quote?ws=1", _website);
-				return client;
-			}
-			catch
-			{
-				return null;
-			}
-		}
-
-		private StatisticControllerService GetStatisticClient()
-		{
-			try
-			{
-				var client = new StatisticControllerService();
-				client.Timeout = 600000;
-				client.Url = string.Format("{0}/statistic/quote?ws=1", _website);
-				return client;
-			}
-			catch
-			{
-				return null;
-			}
-		}
-
-		private TickerControllerService GetTickerClient()
-		{
-			try
-			{
-				var client = new TickerControllerService();
-				client.Timeout = 600000;
-				client.Url = string.Format("{0}/ticker/quote?ws=1", _website);
-				return client;
-			}
-			catch
-			{
-				return null;
-			}
-		}
-
-		private InactiveusersControllerService GetInactiveUsersClient()
-		{
-			try
-			{
-				var client = new InactiveusersControllerService();
-				client.Timeout = 600000;
-				client.Url = string.Format("{0}/inactiveusers/quote?ws=1", _website);
 				return client;
 			}
 			catch
@@ -181,7 +136,7 @@ namespace SalesDepot.Services
 			return users.ToArray();
 		}
 
-		public void SetUser(string login, string password, string firstName, string lastName, string email, string phone, int role, GroupModel[] groups, LibraryPage[] pages, out string message)
+		public void SetUser(string login, string password, string firstName, string lastName, string email, string phone, int role, IPadAdminService.GroupModel[] groups, LibraryPage[] pages, out string message)
 		{
 			message = string.Empty;
 			AdminControllerService client = GetAdminClient();
@@ -215,8 +170,8 @@ namespace SalesDepot.Services
 					string sessionKey = client.getSessionKey(_login, _password);
 					if (!string.IsNullOrEmpty(sessionKey))
 					{
-						IEnumerable<GroupModel> uniqueGroups = users.SelectMany(user => user.Groups).Where(group => group.IsNew).Distinct();
-						foreach (GroupModel group in uniqueGroups)
+						IEnumerable<IPadAdminService.GroupModel> uniqueGroups = users.SelectMany(user => user.Groups).Where(group => group.IsNew).Distinct();
+						foreach (var group in uniqueGroups)
 							client.setGroup(sessionKey, group.id, group.name, new UserModel[] { }, new LibraryPage[] { });
 						foreach (UserInfo user in users)
 							client.setUser(sessionKey, user.Login, user.Password, user.FirstName, user.LastName, user.Email, user.Phone, user.Groups.ToArray(), user.Pages.ToArray(), 0);
@@ -258,10 +213,10 @@ namespace SalesDepot.Services
 		#endregion
 
 		#region Groups
-		public GroupModel[] GetGroups(out string message)
+		public IPadAdminService.GroupModel[] GetGroups(out string message)
 		{
 			message = string.Empty;
-			var groups = new List<GroupModel>();
+			var groups = new List<IPadAdminService.GroupModel>();
 			AdminControllerService client = GetAdminClient();
 			if (client != null)
 			{
@@ -269,32 +224,7 @@ namespace SalesDepot.Services
 				{
 					string sessionKey = client.getSessionKey(_login, _password);
 					if (!string.IsNullOrEmpty(sessionKey))
-						groups.AddRange(client.getGroups(sessionKey) ?? new GroupModel[] { });
-					else
-						message = "Couldn't complete operation.\nLogin or password are not correct.";
-				}
-				catch (Exception ex)
-				{
-					message = string.Format("Couldn't complete operation.\n{0}.", ex.Message);
-				}
-			}
-			else
-				message = "Couldn't complete operation.\nServer is unavailable.";
-			return groups.ToArray();
-		}
-
-		public GroupModel[] GetGroupsByLibrary(string libraryId, out string message)
-		{
-			message = string.Empty;
-			var groups = new List<GroupModel>();
-			AdminControllerService client = GetAdminClient();
-			if (client != null)
-			{
-				try
-				{
-					string sessionKey = client.getSessionKey(_login, _password);
-					if (!string.IsNullOrEmpty(sessionKey))
-						groups.AddRange(client.getGroupsByLibrary(sessionKey, libraryId) ?? new GroupModel[] { });
+						groups.AddRange(client.getGroups(sessionKey) ?? new IPadAdminService.GroupModel[] { });
 					else
 						message = "Couldn't complete operation.\nLogin or password are not correct.";
 				}
@@ -406,7 +336,7 @@ namespace SalesDepot.Services
 			return libraries.ToArray();
 		}
 
-		public void SetPage(string id, UserModel[] users, GroupModel[] groups, out string message)
+		public void SetPage(string id, UserModel[] users, IPadAdminService.GroupModel[] groups, out string message)
 		{
 			message = string.Empty;
 			AdminControllerService client = GetAdminClient();
@@ -430,7 +360,25 @@ namespace SalesDepot.Services
 		}
 		#endregion
 
+		#endregion
+
 		#region Activities
+		private StatisticControllerService GetStatisticClient()
+		{
+			try
+			{
+				var client = new StatisticControllerService();
+				client.Timeout = 600000;
+				client.Url = string.Format("{0}/statistic/quote?ws=1", _website);
+				return client;
+			}
+			catch
+			{
+				return null;
+			}
+		}
+
+
 		public UserActivity[] GetActivities(DateTime startDate, DateTime endDate, out string message)
 		{
 			message = string.Empty;
@@ -701,57 +649,22 @@ namespace SalesDepot.Services
 		}
 		#endregion
 
-		#region Ticker
-		public TickerLink[] GetTickerLinks(out string message)
-		{
-			message = string.Empty;
-			var records = new List<TickerLink>();
-			TickerControllerService client = GetTickerClient();
-			if (client != null)
-			{
-				try
-				{
-					string sessionKey = client.getSessionKey(_login, _password);
-					if (!string.IsNullOrEmpty(sessionKey))
-						records.AddRange(client.getTickerLinks(sessionKey) ?? new TickerLink[] { });
-					else
-						message = "Couldn't complete operation.\nLogin or password are not correct.";
-				}
-				catch (Exception ex)
-				{
-					message = string.Format("Couldn't complete operation.\n{0}.", ex.Message);
-				}
-			}
-			else
-				message = "Couldn't complete operation.\nServer is unavailable.";
-			return records.ToArray();
-		}
-
-		public void SetTickerLinks(TickerLink[] tickerLinks, out string message)
-		{
-			message = string.Empty;
-			TickerControllerService client = GetTickerClient();
-			if (client != null)
-			{
-				try
-				{
-					string sessionKey = client.getSessionKey(_login, _password);
-					if (!string.IsNullOrEmpty(sessionKey))
-						client.setTickerLinks(sessionKey, tickerLinks);
-					else
-						message = "Couldn't complete operation.\nLogin or password are not correct.";
-				}
-				catch (Exception ex)
-				{
-					message = string.Format("Couldn't complete operation.\n{0}.", ex.Message);
-				}
-			}
-			else
-				message = "Couldn't complete operation.\nServer is unavailable.";
-		}
-		#endregion
-
 		#region Inactive Users
+		private InactiveusersControllerService GetInactiveUsersClient()
+		{
+			try
+			{
+				var client = new InactiveusersControllerService();
+				client.Timeout = 600000;
+				client.Url = string.Format("{0}/inactiveusers/quote?ws=1", _website);
+				return client;
+			}
+			catch
+			{
+				return null;
+			}
+		}
+
 		public InactiveUsersService.UserModel[] GetInactiveUsers(DateTime startDate, DateTime endDate, out string message)
 		{
 			message = string.Empty;
@@ -821,6 +734,121 @@ namespace SalesDepot.Services
 			}
 			else
 				message = "Couldn't complete operation.\nServer is unavailable.";
+		}
+		#endregion
+
+		#region Cloud Data
+
+		private FileManagerDataControllerService GetCloudDataClient()
+		{
+			try
+			{
+				var client = new FileManagerDataControllerService();
+				client.Url = string.Format("{0}/FileManagerData/quote?ws=1", _website);
+				return client;
+			}
+			catch
+			{
+				return null;
+			}
+		}
+
+		public string GetMetaData(string dataTag, string propertyName, out string message)
+		{
+			message = string.Empty;
+			var client = GetCloudDataClient();
+			if (client != null)
+			{
+				try
+				{
+					string sessionKey = client.getSessionKey(_login, _password);
+					if (!string.IsNullOrEmpty(sessionKey))
+						return client.getMetaData(sessionKey, dataTag, propertyName);
+					message = "Couldn't complete operation.\nLogin or password are not correct.";
+				}
+				catch (Exception ex)
+				{
+					message = string.Format("Couldn't complete operation.\n{0}.", ex.Message);
+				}
+			}
+			else
+				message = "Couldn't complete operation.\nServer is unavailable.";
+			return null;
+		}
+
+		public FileManagerDataService.GroupModel[] GetSecurityGroups(out string message)
+		{
+			message = string.Empty;
+			var groups = new List<FileManagerDataService.GroupModel>();
+			var client = GetCloudDataClient();
+			if (client != null)
+			{
+				try
+				{
+					var sessionKey = client.getSessionKey(_login, _password);
+					if (!string.IsNullOrEmpty(sessionKey))
+						groups.AddRange(client.getSecurityGroups(sessionKey) ?? new FileManagerDataService.GroupModel[] { });
+					else
+						message = "Couldn't complete operation.\nLogin or password are not correct.";
+				}
+				catch (Exception ex)
+				{
+					message = string.Format("Couldn't complete operation.\n{0}.", ex.Message);
+				}
+			}
+			else
+				message = "Couldn't complete operation.\nServer is unavailable.";
+			return groups.ToArray();
+		}
+
+		public FileManagerDataService.Category[] GetCategories(out string message)
+		{
+			message = string.Empty;
+			var categories = new List<FileManagerDataService.Category>();
+			var client = GetCloudDataClient();
+			if (client != null)
+			{
+				try
+				{
+					var sessionKey = client.getSessionKey(_login, _password);
+					if (!string.IsNullOrEmpty(sessionKey))
+						categories.AddRange(client.getCategories(sessionKey) ?? new FileManagerDataService.Category[] { });
+					else
+						message = "Couldn't complete operation.\nLogin or password are not correct.";
+				}
+				catch (Exception ex)
+				{
+					message = string.Format("Couldn't complete operation.\n{0}.", ex.Message);
+				}
+			}
+			else
+				message = "Couldn't complete operation.\nServer is unavailable.";
+			return categories.ToArray();
+		}
+
+		public FileManagerDataService.SuperFilter[] GetSuperFilters(out string message)
+		{
+			message = string.Empty;
+			var superFilters = new List<FileManagerDataService.SuperFilter>();
+			var client = GetCloudDataClient();
+			if (client != null)
+			{
+				try
+				{
+					var sessionKey = client.getSessionKey(_login, _password);
+					if (!string.IsNullOrEmpty(sessionKey))
+						superFilters.AddRange(client.getSuperFilters(sessionKey) ?? new FileManagerDataService.SuperFilter[] { });
+					else
+						message = "Couldn't complete operation.\nLogin or password are not correct.";
+				}
+				catch (Exception ex)
+				{
+					message = string.Format("Couldn't complete operation.\n{0}.", ex.Message);
+				}
+			}
+			else
+				message = "Couldn't complete operation.\nServer is unavailable.";
+			return superFilters.ToArray();
 		}
 		#endregion
 	}

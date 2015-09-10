@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using DevComponents.DotNetBar.Metro;
-using FileManager.ConfigurationClasses;
+using FileManager.BusinessClasses;
 using FileManager.PresentationClasses.WallBin;
 
 namespace FileManager.ToolForms.WallBin
@@ -12,7 +12,7 @@ namespace FileManager.ToolForms.WallBin
 		{
 			InitializeComponent();
 			xtraTabControlWidgets.TabPages.Clear();
-			foreach (var imageGroup in ListManager.Instance.Widgets)
+			foreach (var imageGroup in ListManager.Instance.Widgets.Items)
 			{
 				var tabPage = new LinkImagesContainer(imageGroup);
 				tabPage.SelectedImageChanged += OnSelectedWidgetChanged;

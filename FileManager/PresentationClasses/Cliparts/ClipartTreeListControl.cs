@@ -8,7 +8,7 @@ using System.Threading;
 using System.Windows.Forms;
 using DevExpress.XtraTreeList;
 using DevExpress.XtraTreeList.Nodes;
-using FileManager.ConfigurationClasses;
+using FileManager.BusinessClasses;
 using SalesDepot.CoreObjects.InteropClasses;
 
 namespace FileManager.PresentationClasses.Cliparts

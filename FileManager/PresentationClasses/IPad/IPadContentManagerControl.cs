@@ -11,6 +11,7 @@ using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
+using FileManager.BusinessClasses;
 using FileManager.Controllers;
 using FileManager.PresentationClasses.WallBin.Decorators;
 using FileManager.ToolClasses;
@@ -36,7 +37,7 @@ namespace FileManager.PresentationClasses.IPad
 
 		public void UpdateControlsState()
 		{
-			xtraTabControl.Enabled = ConfigurationClasses.SettingsManager.Instance.WebServiceConnected;
+			xtraTabControl.Enabled = ServiceConnector.Instance.Connected;
 		}
 
 		#region Video Tab
@@ -228,13 +229,13 @@ namespace FileManager.PresentationClasses.IPad
 		#region Site Tab
 		private void pbIE_Click(object sender, EventArgs e)
 		{
-			if (ConfigurationClasses.SettingsManager.Instance.WebServiceConnected)
+			if (ServiceConnector.Instance.Connected)
 			{
 				try
 				{
 					var process = new Process();
 					process.StartInfo.FileName = "iexplore.exe";
-					process.StartInfo.Arguments = ConfigurationClasses.SettingsManager.Instance.WebServiceSite;
+					process.StartInfo.Arguments = ServiceConnector.Instance.WebServiceSite;
 					process.Start();
 				}
 				catch
@@ -248,13 +249,13 @@ namespace FileManager.PresentationClasses.IPad
 
 		private void pbChrome_Click(object sender, EventArgs e)
 		{
-			if (ConfigurationClasses.SettingsManager.Instance.WebServiceConnected)
+			if (ServiceConnector.Instance.Connected)
 			{
 				try
 				{
 					var process = new Process();
 					process.StartInfo.FileName = "chrome.exe";
-					process.StartInfo.Arguments = ConfigurationClasses.SettingsManager.Instance.WebServiceSite;
+					process.StartInfo.Arguments = ServiceConnector.Instance.WebServiceSite;
 					process.Start();
 				}
 				catch
@@ -268,13 +269,13 @@ namespace FileManager.PresentationClasses.IPad
 
 		private void pbFirefox_Click(object sender, EventArgs e)
 		{
-			if (ConfigurationClasses.SettingsManager.Instance.WebServiceConnected)
+			if (ServiceConnector.Instance.Connected)
 			{
 				try
 				{
 					var process = new Process();
 					process.StartInfo.FileName = "firefox.exe";
-					process.StartInfo.Arguments = ConfigurationClasses.SettingsManager.Instance.WebServiceSite;
+					process.StartInfo.Arguments = ServiceConnector.Instance.WebServiceSite;
 					process.Start();
 				}
 				catch
@@ -288,13 +289,13 @@ namespace FileManager.PresentationClasses.IPad
 
 		private void pbSafari_Click(object sender, EventArgs e)
 		{
-			if (ConfigurationClasses.SettingsManager.Instance.WebServiceConnected)
+			if (ServiceConnector.Instance.Connected)
 			{
 				try
 				{
 					var process = new Process();
 					process.StartInfo.FileName = "safari.exe";
-					process.StartInfo.Arguments = ConfigurationClasses.SettingsManager.Instance.WebServiceSite;
+					process.StartInfo.Arguments = ServiceConnector.Instance.WebServiceSite;
 					process.Start();
 				}
 				catch
@@ -308,13 +309,13 @@ namespace FileManager.PresentationClasses.IPad
 
 		private void pbOpera_Click(object sender, EventArgs e)
 		{
-			if (ConfigurationClasses.SettingsManager.Instance.WebServiceConnected)
+			if (ServiceConnector.Instance.Connected)
 			{
 				try
 				{
 					var process = new Process();
 					process.StartInfo.FileName = "opera.exe";
-					process.StartInfo.Arguments = ConfigurationClasses.SettingsManager.Instance.WebServiceSite;
+					process.StartInfo.Arguments = ServiceConnector.Instance.WebServiceSite;
 					process.Start();
 				}
 				catch

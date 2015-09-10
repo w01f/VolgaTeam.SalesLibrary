@@ -4,7 +4,7 @@ using System.Threading;
 using System.Windows.Forms;
 using DevComponents.DotNetBar;
 using DevExpress.XtraEditors.Controls;
-using FileManager.ConfigurationClasses;
+using FileManager.BusinessClasses;
 using FileManager.PresentationClasses.TabPages;
 using FileManager.ToolForms.Settings;
 using SalesDepot.CommonGUI.Forms;

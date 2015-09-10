@@ -91,6 +91,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Design" />
@@ -106,10 +107,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppManager.cs" />
-    <Compile Include="BusinessClasses\Library.cs" />
-    <Compile Include="BusinessClasses\LibraryFile.cs" />
-    <Compile Include="BusinessClasses\PreviewGenerator.cs" />
-    <Compile Include="BusinessClasses\SilentSyncManager.cs" />
+    <Compile Include="BusinessClasses\Lists\BannerList.cs" />
+    <Compile Include="BusinessClasses\Lists\CategoryList.cs" />
+    <Compile Include="BusinessClasses\Lists\LibraryGroup.cs" />
+    <Compile Include="BusinessClasses\Lists\LibraryUser.cs" />
+    <Compile Include="BusinessClasses\Lists\LinkImageGroup.cs" />
+    <Compile Include="BusinessClasses\Lists\LinkImageSource.cs" />
+    <Compile Include="BusinessClasses\Lists\MetaDataConst.cs" />
+    <Compile Include="BusinessClasses\Lists\MetaDataContainer.cs" />
+    <Compile Include="BusinessClasses\Lists\SecurityGroups.cs" />
+    <Compile Include="BusinessClasses\Lists\SuperFilterList.cs" />
+    <Compile Include="BusinessClasses\Lists\WidgetList.cs" />
+    <Compile Include="BusinessClasses\Managers\AppModeManager.cs" />
+    <Compile Include="BusinessClasses\Managers\ServiceConnector.cs" />
+    <Compile Include="BusinessClasses\Wallbin\Library.cs" />
+    <Compile Include="BusinessClasses\Wallbin\LibraryFile.cs" />
+    <Compile Include="BusinessClasses\Wallbin\PreviewGenerator.cs" />
+    <Compile Include="BusinessClasses\Managers\SilentSyncManager.cs" />
     <Compile Include="Controllers\CalendarController.cs" />
     <Compile Include="Controllers\ClipartController.cs" />
     <Compile Include="Controllers\IPadContentController.cs" />
@@ -456,8 +470,8 @@
     <Compile Include="ToolForms\Settings\FormPaths.Designer.cs">
       <DependentUpon>FormPaths.cs</DependentUpon>
     </Compile>
-    <Compile Include="ConfigurationClasses\ListManager.cs" />
-    <Compile Include="ConfigurationClasses\SettingsManager.cs" />
+    <Compile Include="BusinessClasses\Managers\ListManager.cs" />
+    <Compile Include="BusinessClasses\Managers\SettingsManager.cs" />
     <Compile Include="PresentationClasses\WallBin\Decorators\LibraryDecorator.cs" />
     <Compile Include="ToolForms\Settings\FormPages.cs">
       <SubType>Form</SubType>
@@ -554,7 +568,7 @@
     <Compile Include="ToolForms\WallBin\FormSelectWidget.Designer.cs">
       <DependentUpon>FormSelectWidget.cs</DependentUpon>
     </Compile>
-    <Compile Include="BusinessClasses\LibraryManager.cs" />
+    <Compile Include="BusinessClasses\Managers\LibraryManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ToolForms\WallBin\FormSyncLock.cs">

@@ -116,7 +116,7 @@ namespace SalesDepot.Cloner
 			Directory.CreateDirectory(this.DestinationFilesPath);
 
 			string[] serviceFolders = { "!Attachments", "!QV", "!WV" };
-			string[] serviceFiles = { Constants.StorageFileName, Constants.StorageLightFileName, Constants.LibrariesJsonFileName, Constants.ReferencesJsonFileName };
+			string[] serviceFiles = { Constants.StorageFileName, Constants.StorageLightFileName, Constants.LibrariesJsonFileName};
 			SyncManager syncManager = new SyncManager();
 			foreach (var subfolder in new DirectoryInfo(this.SourceFilesPath).GetDirectories())
 			{
@@ -162,7 +162,6 @@ namespace SalesDepot.Cloner
 				AddFolderForSync(new DirectoryInfo(Path.Combine(library.Folder.FullName, Constants.LibraryLogoFolder)), filesWhiteList);
 				filesWhiteList.Add(new FileInfo(Path.Combine(library.Folder.FullName, Constants.StorageLightFileName)).FullName);
 				filesWhiteList.Add(new FileInfo(Path.Combine(library.Folder.FullName, Constants.LibrariesJsonFileName)).FullName);
-				filesWhiteList.Add(new FileInfo(Path.Combine(library.Folder.FullName, Constants.ReferencesJsonFileName)).FullName);
 
 				var sourceSubFolders = new List<DirectoryInfo>();
 				var destinationSubFolders = new List<DirectoryInfo>();

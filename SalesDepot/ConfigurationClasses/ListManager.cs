@@ -65,7 +65,6 @@ namespace SalesDepot.ConfigurationClasses
 
 	public class SearchTags
 	{
-		private readonly List<string> _groupLogoFilePaths = new List<string>();
 		private readonly string _listsFileName;
 
 		public SearchTags()

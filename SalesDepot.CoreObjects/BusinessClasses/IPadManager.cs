@@ -25,20 +25,6 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 {
 	public class IPadManager
 	{
-		private SiteClient _siteClient;
-		private readonly string _website;
-		private readonly string _login;
-		private readonly string _password;
-
-		public IPadManager(ILibrary parent, string website, string login, string password)
-		{
-			Parent = parent;
-			SyncDestinationPath = String.Empty;
-			_website = website;
-			_login = login;
-			_password = password;
-		}
-
 		public IPadManager(ILibrary parent)
 		{
 			Parent = parent;
@@ -50,7 +36,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
 		public IPadManager Clone(ILibrary parent)
 		{
-			var ipadManager = new IPadManager(parent, _website, _login, _password);
+			var ipadManager = new IPadManager(parent);
 			ipadManager.SyncDestinationPath = SyncDestinationPath;
 			return ipadManager;
 		}
@@ -74,24 +60,14 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 						break;
 				}
 			}
-			_siteClient = new SiteClient(_website, _login, _password);
 		}
 
 		#region Content Manager
 		public void SaveJson()
 		{
-			Library serverLibrary = PrepareServerLibrary();
-			string jsonString = JsonConvert.SerializeObject(serverLibrary);
+			var serverLibrary = PrepareServerLibrary();
+			var jsonString = JsonConvert.SerializeObject(serverLibrary);
 			using (var sw = new StreamWriter(Path.Combine(Parent.Folder.FullName, Constants.LibrariesJsonFileName), false))
-			{
-				sw.Write(jsonString);
-				sw.Flush();
-			}
-			var references = new References();
-			references.categories = PrepareCategories();
-			references.superFilters = PrepareSuperFilters();
-			jsonString = JsonConvert.SerializeObject(references);
-			using (var sw = new StreamWriter(Path.Combine(Parent.Folder.FullName, Constants.ReferencesJsonFileName), false))
 			{
 				sw.Write(jsonString);
 				sw.Flush();
@@ -472,111 +448,6 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 					linksCollection.Add(childLink);
 				}
 		}
-
-		private Category[] PrepareCategories()
-		{
-			var searchTags = new SearchTags();
-			var result = new List<Category>();
-			foreach (var group in searchTags.SearchGroups)
-			{
-				foreach (var tag in group.Tags)
-				{
-					var category = new Category();
-					category.category = group.Name;
-					category.tag = tag.Name;
-					result.Add(category);
-				}
-			}
-			return result.ToArray();
-		}
-
-		private Services.ContentManagmentService.SuperFilter[] PrepareSuperFilters()
-		{
-			var result = new List<Services.ContentManagmentService.SuperFilter>();
-			foreach (var value in SuperFilter.LoadSuperFilters())
-			{
-				var superFilter = new Services.ContentManagmentService.SuperFilter();
-				superFilter.value = value.Name;
-				result.Add(superFilter);
-			}
-			return result.ToArray();
-		}
-		#endregion
-
-		#region Permissions Manager
-
-		#region Users
-		public bool IsUserPasswordComplex(out string message)
-		{
-			return _siteClient.IsUserPasswordComplex(out message);
-		}
-
-		public UserModel[] GetUsers(out string message)
-		{
-			return _siteClient.GetUsers(out message);
-		}
-
-		public void SetUser(string login, string password, string firstName, string lastName, string email, string phone, int role, GroupModel[] groups, Services.IPadAdminService.LibraryPage[] pages, out string message)
-		{
-			_siteClient.SetUser(login, password, firstName, lastName, email, phone, role, groups, pages, out message);
-		}
-
-		public void DeleteUser(string login, out string message)
-		{
-			_siteClient.DeleteUser(login, out message);
-		}
-
-		public IEnumerable<string> LoadUserLoginsFromFile(string filePath)
-		{
-			var document = new XmlDocument();
-			document.Load(filePath);
-			return document.SelectNodes(@"/Users/User").OfType<XmlNode>().Select(node => node.InnerText.ToLower());
-		}
-		#endregion
-
-		#region Groups
-		public GroupModel[] GetGroups(out string message)
-		{
-			return _siteClient.GetGroups(out message);
-		}
-
-		private List<GroupModel> _cachedSecurityGroups;
-		public IEnumerable<GroupModel> GetGroupsByLibrary(out string message)
-		{
-			message = String.Empty;
-			if (_cachedSecurityGroups != null) return _cachedSecurityGroups;
-			_cachedSecurityGroups = _siteClient.GetGroupsByLibrary(Parent.Identifier.ToString(), out message).ToList();
-			return _cachedSecurityGroups;
-		}
-
-		public void SetGroup(string id, string name, UserModel[] users, Services.IPadAdminService.LibraryPage[] pages, out string message)
-		{
-			_siteClient.SetGroup(id, name, users, pages, out message);
-		}
-
-		public void DeleteGroup(string id, out string message)
-		{
-			_siteClient.DeleteGroup(id, out message);
-		}
-
-		public string[] GetGroupTemplates(out string message)
-		{
-			return _siteClient.GetGroupTemplates(out message);
-		}
-		#endregion
-
-		#region Libraraies
-		public Services.IPadAdminService.Library[] GetLibraries(out string message)
-		{
-			return _siteClient.GetLibraries(out message);
-		}
-
-		public void SetPage(string id, UserModel[] users, GroupModel[] groups, out string message)
-		{
-			_siteClient.SetPage(id, users, groups, out message);
-		}
-		#endregion
-
 		#endregion
 
 		#region Video Management

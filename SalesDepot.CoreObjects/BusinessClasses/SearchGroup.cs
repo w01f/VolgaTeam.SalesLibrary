@@ -7,6 +7,8 @@ using System.Windows.Forms;
 using System.Xml;
 using DevComponents.DotNetBar;
 using DevExpress.XtraEditors;
+using Newtonsoft.Json;
+using Font = System.Drawing.Font;
 
 namespace SalesDepot.CoreObjects.BusinessClasses
 {
@@ -33,11 +35,15 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		public string TagNameObject { get; protected set; }
 
 		public string Name { get; set; }
+
+		[JsonIgnore]
 		public bool Selected { get; set; }
 		public string Description { get; set; }
 		public List<SearchTag> Tags { get; private set; }
 
+		[JsonIgnore]
 		public CheckedListBoxControl ListBox { get; private set; }
+		[JsonIgnore]
 		public ButtonX ToggleButton { get; private set; }
 
 		public bool Compare(SearchGroup anotherGroup)
@@ -127,6 +133,16 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			result.Tags.AddRange(Tags.Select(t => new SearchTag(result.Name) { Name = t.Name, Selected = t.Selected }));
 			return result;
 		}
+
+		public static IEnumerable<SearchGroup> LoadFromCloudData(IEnumerable<SalesDepot.Services.FileManagerDataService.Category> cloudCategories)
+		{
+			return cloudCategories.GroupBy(cat => cat.category).Select(group => new SearchGroup()
+			{
+				Name = group.Key,
+				Description = group.Select(g => g.description).FirstOrDefault(),
+				Tags = new List<SearchTag>(group.Select(g => new SearchTag(group.Key) { Name = g.tag }))
+			});
+		}
 	}
 
 	public class CustomKeywords : SearchGroup
@@ -154,6 +170,8 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 	{
 		public string Name { get; set; }
 		public string Parent { get; private set; }
+
+		[JsonIgnore]
 		public bool Selected { get; set; }
 
 		public SearchTag(string parentGroup)

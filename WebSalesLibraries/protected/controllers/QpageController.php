@@ -1,9 +1,9 @@
 <?php
 
 	/**
-	 * Class QpageController
+	 * Class QPageController
 	 */
-	class QpageController extends IsdController
+	class QPageController extends IsdController
 	{
 		public function getViewPath()
 		{

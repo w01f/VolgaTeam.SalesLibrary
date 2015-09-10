@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
-using FileManager.ConfigurationClasses;
+using FileManager.BusinessClasses;
 using SalesDepot.CoreObjects.ToolClasses;
 
 namespace FileManager.ToolClasses
@@ -23,7 +23,9 @@ namespace FileManager.ToolClasses
 
 		public void ArchiveFiles(IEnumerable<string> originalFiles)
 		{
-			var archiveRoot = String.Format(@"{0}\newlocaldirect.com\xml\file_manager\Archives", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
+			var archiveRoot = AppModeManager.Instance.AppMode==AppModeEnum.Local?
+				String.Format(@"{0}\file_manager\Archives", SettingsManager.Instance.SettingsRootPath):
+				String.Format(@"{0}\Archives", SettingsManager.Instance.ApplicationLocalDataPath);
 			if (!Directory.Exists(archiveRoot))
 				Directory.CreateDirectory(archiveRoot);
 

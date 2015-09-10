@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 using DevComponents.DotNetBar.Metro;
-using FileManager.ConfigurationClasses;
+using FileManager.BusinessClasses;
 using SalesDepot.CoreObjects.InteropClasses;
 
 namespace FileManager.ToolForms.WallBin

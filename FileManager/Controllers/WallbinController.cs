@@ -8,7 +8,6 @@ using System.Windows.Forms;
 using DevComponents.DotNetBar;
 using DevExpress.XtraEditors.Controls;
 using FileManager.BusinessClasses;
-using FileManager.ConfigurationClasses;
 using FileManager.PresentationClasses.TabPages;
 using FileManager.PresentationClasses.WallBin.Decorators;
 using FileManager.Properties;

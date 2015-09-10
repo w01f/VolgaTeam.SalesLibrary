@@ -48,10 +48,6 @@ namespace SalesDepot.SiteManager
 				ribbonBarActivitiesLogo.RecalcLayout();
 				ribbonPanelActivities.PerformLayout();
 
-				labelItemTickerLogo.Image = image;
-				ribbonBarTickerLogo.RecalcLayout();
-				ribbonPanelTicker.PerformLayout();
-
 				labelItemInactiveUsersLogo.Image = image;
 				ribbonBarInactiveUsersLogo.RecalcLayout();
 				ribbonPanelInactiveUsers.PerformLayout();
@@ -78,8 +74,6 @@ namespace SalesDepot.SiteManager
 				key = TabPageEnum.Users;
 			if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemActivities)
 				key = TabPageEnum.Activities;
-			if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemTicker)
-				key = TabPageEnum.Ticker;
 			if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemInactiveUsers)
 				key = TabPageEnum.InactiveUsers;
 			if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemQBuilder)

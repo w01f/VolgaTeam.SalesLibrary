@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using FileManager.BusinessClasses;
-using FileManager.ConfigurationClasses;
 using SalesDepot.CoreObjects.BusinessClasses;
 using SalesDepot.CoreObjects.ToolClasses;
 

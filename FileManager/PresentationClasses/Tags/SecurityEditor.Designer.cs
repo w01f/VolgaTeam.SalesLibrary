@@ -49,8 +49,6 @@
 			this.buttonXImport = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXSecurityUserListClearAll = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXSecurityUserListSelectAll = new DevComponents.DotNetBar.ButtonX();
-			this.circularSecurityUserListProgress = new DevComponents.DotNetBar.Controls.CircularProgress();
-			this.laSecurityUserListInfo = new DevExpress.XtraEditors.LabelControl();
 			this.rbSecurityForbidden = new System.Windows.Forms.RadioButton();
 			this.ckSecurityShareLink = new System.Windows.Forms.CheckBox();
 			this.rbSecurityAllowed = new System.Windows.Forms.RadioButton();
@@ -116,14 +114,14 @@
 			// gridColumnSecurityUserId
 			// 
 			this.gridColumnSecurityUserId.Caption = "Id";
-			this.gridColumnSecurityUserId.FieldName = "id";
+			this.gridColumnSecurityUserId.FieldName = "Id";
 			this.gridColumnSecurityUserId.Name = "gridColumnSecurityUserId";
 			// 
 			// gridColumnSecurityUserSelected
 			// 
 			this.gridColumnSecurityUserSelected.Caption = "Selected";
 			this.gridColumnSecurityUserSelected.ColumnEdit = this.repositoryItemCheckEditSecurityUserList;
-			this.gridColumnSecurityUserSelected.FieldName = "selected";
+			this.gridColumnSecurityUserSelected.FieldName = "Selected";
 			this.gridColumnSecurityUserSelected.Name = "gridColumnSecurityUserSelected";
 			this.gridColumnSecurityUserSelected.OptionsColumn.FixedWidth = true;
 			this.gridColumnSecurityUserSelected.Visible = true;
@@ -167,7 +165,7 @@
 			this.gridControlSecurityUserList.Name = "gridControlSecurityUserList";
 			this.gridControlSecurityUserList.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemCheckEditSecurityUserList});
-			this.gridControlSecurityUserList.Size = new System.Drawing.Size(315, 233);
+			this.gridControlSecurityUserList.Size = new System.Drawing.Size(315, 328);
 			this.gridControlSecurityUserList.TabIndex = 6;
 			this.gridControlSecurityUserList.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewSecurityGroups,
@@ -218,14 +216,14 @@
 			// gridColumnSecurityGroupId
 			// 
 			this.gridColumnSecurityGroupId.Caption = "Id";
-			this.gridColumnSecurityGroupId.FieldName = "id";
+			this.gridColumnSecurityGroupId.FieldName = "Id";
 			this.gridColumnSecurityGroupId.Name = "gridColumnSecurityGroupId";
 			// 
 			// gridColumnSecurityGroupSelected
 			// 
 			this.gridColumnSecurityGroupSelected.Caption = "Selected";
 			this.gridColumnSecurityGroupSelected.ColumnEdit = this.repositoryItemCheckEditSecurityUserList;
-			this.gridColumnSecurityGroupSelected.FieldName = "selected";
+			this.gridColumnSecurityGroupSelected.FieldName = "Selected";
 			this.gridColumnSecurityGroupSelected.Name = "gridColumnSecurityGroupSelected";
 			this.gridColumnSecurityGroupSelected.OptionsColumn.FixedWidth = true;
 			this.gridColumnSecurityGroupSelected.Visible = true;
@@ -235,7 +233,7 @@
 			// gridColumnSecurityGroupName
 			// 
 			this.gridColumnSecurityGroupName.Caption = "Name";
-			this.gridColumnSecurityGroupName.FieldName = "name";
+			this.gridColumnSecurityGroupName.FieldName = "Name";
 			this.gridColumnSecurityGroupName.Name = "gridColumnSecurityGroupName";
 			this.gridColumnSecurityGroupName.OptionsColumn.AllowEdit = false;
 			this.gridColumnSecurityGroupName.OptionsColumn.ReadOnly = true;
@@ -303,8 +301,6 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.pnSecurityUserList.BackColor = System.Drawing.Color.Transparent;
 			this.pnSecurityUserList.Controls.Add(this.pnSecurityUserListGrid);
-			this.pnSecurityUserList.Controls.Add(this.circularSecurityUserListProgress);
-			this.pnSecurityUserList.Controls.Add(this.laSecurityUserListInfo);
 			this.pnSecurityUserList.ForeColor = System.Drawing.Color.Black;
 			this.pnSecurityUserList.Location = new System.Drawing.Point(5, 155);
 			this.pnSecurityUserList.Name = "pnSecurityUserList";
@@ -319,9 +315,9 @@
 			this.pnSecurityUserListGrid.Controls.Add(this.gridControlSecurityUserList);
 			this.pnSecurityUserListGrid.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.pnSecurityUserListGrid.Enabled = false;
-			this.pnSecurityUserListGrid.Location = new System.Drawing.Point(0, 95);
+			this.pnSecurityUserListGrid.Location = new System.Drawing.Point(0, 0);
 			this.pnSecurityUserListGrid.Name = "pnSecurityUserListGrid";
-			this.pnSecurityUserListGrid.Size = new System.Drawing.Size(315, 280);
+			this.pnSecurityUserListGrid.Size = new System.Drawing.Size(315, 375);
 			this.pnSecurityUserListGrid.TabIndex = 8;
 			// 
 			// buttonXImport
@@ -362,41 +358,6 @@
 			this.buttonXSecurityUserListSelectAll.TabIndex = 7;
 			this.buttonXSecurityUserListSelectAll.Text = "Select All";
 			this.buttonXSecurityUserListSelectAll.Click += new System.EventHandler(this.buttonXSecurityUserListSelectAll_Click);
-			// 
-			// circularSecurityUserListProgress
-			// 
-			this.circularSecurityUserListProgress.AnimationSpeed = 50;
-			this.circularSecurityUserListProgress.BackColor = System.Drawing.Color.Transparent;
-			// 
-			// 
-			// 
-			this.circularSecurityUserListProgress.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			this.circularSecurityUserListProgress.Dock = System.Windows.Forms.DockStyle.Top;
-			this.circularSecurityUserListProgress.Location = new System.Drawing.Point(0, 56);
-			this.circularSecurityUserListProgress.Name = "circularSecurityUserListProgress";
-			this.circularSecurityUserListProgress.ProgressBarType = DevComponents.DotNetBar.eCircularProgressType.Dot;
-			this.circularSecurityUserListProgress.ProgressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-			this.circularSecurityUserListProgress.ProgressTextFormat = "";
-			this.circularSecurityUserListProgress.Size = new System.Drawing.Size(315, 39);
-			this.circularSecurityUserListProgress.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP;
-			this.circularSecurityUserListProgress.TabIndex = 4;
-			this.circularSecurityUserListProgress.Visible = false;
-			// 
-			// laSecurityUserListInfo
-			// 
-			this.laSecurityUserListInfo.Appearance.BackColor = System.Drawing.Color.Transparent;
-			this.laSecurityUserListInfo.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.laSecurityUserListInfo.Appearance.ForeColor = System.Drawing.Color.Black;
-			this.laSecurityUserListInfo.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-			this.laSecurityUserListInfo.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.Vertical;
-			this.laSecurityUserListInfo.Dock = System.Windows.Forms.DockStyle.Top;
-			this.laSecurityUserListInfo.Location = new System.Drawing.Point(0, 0);
-			this.laSecurityUserListInfo.Name = "laSecurityUserListInfo";
-			this.laSecurityUserListInfo.Padding = new System.Windows.Forms.Padding(0, 20, 0, 20);
-			this.laSecurityUserListInfo.Size = new System.Drawing.Size(315, 56);
-			this.laSecurityUserListInfo.TabIndex = 5;
-			this.laSecurityUserListInfo.Text = "labelControl";
-			this.laSecurityUserListInfo.Visible = false;
 			// 
 			// rbSecurityForbidden
 			// 
@@ -565,8 +526,6 @@
 		public System.Windows.Forms.CheckBox ckSecurityShareLink;
 		public System.Windows.Forms.RadioButton rbSecurityForbidden;
 		private System.Windows.Forms.Panel pnSecurityUserList;
-		private DevComponents.DotNetBar.Controls.CircularProgress circularSecurityUserListProgress;
-		private DevExpress.XtraEditors.LabelControl laSecurityUserListInfo;
 		private System.Windows.Forms.Panel pnSecurityUserListGrid;
 		private DevComponents.DotNetBar.ButtonX buttonXSecurityUserListClearAll;
 		private DevComponents.DotNetBar.ButtonX buttonXSecurityUserListSelectAll;

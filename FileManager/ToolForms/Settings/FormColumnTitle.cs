@@ -7,7 +7,7 @@ using DevComponents.DotNetBar.Metro;
 using DevExpress.Utils;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
-using FileManager.ConfigurationClasses;
+using FileManager.BusinessClasses;
 using FileManager.PresentationClasses.WallBin;
 using SalesDepot.CoreObjects.BusinessClasses;
 using SalesDepot.CoreObjects.ToolClasses;
@@ -24,8 +24,8 @@ namespace FileManager.ToolForms.Settings
 			_columnTitle = columnTitle;
 			LoadData();
 
-			xtraTabPageWindowPropertiesBanner.PageEnabled = Directory.Exists(ListManager.Instance.BannerFolder);
-			xtraTabPageWindowPropertiesWidget.PageEnabled = Directory.Exists(ListManager.Instance.WidgetFolder);
+			xtraTabPageWindowPropertiesBanner.PageEnabled = Directory.Exists(ListManager.Instance.Banners.BannerFolder);
+			xtraTabPageWindowPropertiesWidget.PageEnabled = Directory.Exists(ListManager.Instance.Widgets.WidgetFolder);
 
 			if ((base.CreateGraphics()).DpiX > 96)
 			{
@@ -84,7 +84,7 @@ namespace FileManager.ToolForms.Settings
 			memoEditTitle.Properties.AppearanceReadOnly.Font = memoEditTitle.Font;
 
 			xtraTabControlWidgets.TabPages.Clear();
-			foreach (var imageGroup in ListManager.Instance.Widgets)
+			foreach (var imageGroup in ListManager.Instance.Widgets.Items)
 			{
 				var tabPage = new LinkImagesContainer(imageGroup);
 				tabPage.SelectedImageChanged += OnSelectedWidgetChanged;
@@ -94,7 +94,7 @@ namespace FileManager.ToolForms.Settings
 			ckEnableWidget.Checked = _columnTitle.EnableWidget;
 
 			xtraTabControlBanners.TabPages.Clear();
-			foreach (var imageGroup in ListManager.Instance.Banners)
+			foreach (var imageGroup in ListManager.Instance.Banners.Items)
 			{
 				var tabPage = new LinkImagesContainer(imageGroup);
 				tabPage.SelectedImageChanged += OnSelectedBannerChanged;

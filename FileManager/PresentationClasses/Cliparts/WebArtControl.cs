@@ -9,7 +9,7 @@ using System.Windows.Forms;
 using DevExpress.XtraBars;
 using DevExpress.XtraTreeList;
 using DevExpress.XtraTreeList.Nodes;
-using FileManager.ConfigurationClasses;
+using FileManager.BusinessClasses;
 using SalesDepot.CoreObjects.ToolClasses;
 using View = Manina.Windows.Forms.View;
 

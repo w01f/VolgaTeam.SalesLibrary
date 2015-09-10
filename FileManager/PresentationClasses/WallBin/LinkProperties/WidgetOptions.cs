@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 using DevExpress.XtraTab;
-using FileManager.ConfigurationClasses;
+using FileManager.BusinessClasses;
 using SalesDepot.CoreObjects.BusinessClasses;
 
 namespace FileManager.PresentationClasses.WallBin.LinkProperties
@@ -37,7 +37,7 @@ namespace FileManager.PresentationClasses.WallBin.LinkProperties
 		private void LoadData()
 		{
 			xtraTabControlWidgets.TabPages.Clear();
-			foreach (var imageGroup in ListManager.Instance.Widgets)
+			foreach (var imageGroup in ListManager.Instance.Widgets.Items)
 			{
 				var tabPage = new LinkImagesContainer(imageGroup);
 				tabPage.SelectedImageChanged += OnSelectedWidgetChanged;

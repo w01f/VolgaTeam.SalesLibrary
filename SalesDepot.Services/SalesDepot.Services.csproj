@@ -84,9 +84,13 @@
     <Compile Include="StatisticService\MainUserReportModel.cs" />
     <Compile Include="StatisticService\UserActivity.cs" />
     <Compile Include="StatisticService\VideoLinkInfo.cs" />
-    <Compile Include="TickerService\TickerLinkRecord.cs" />
     <Compile Include="UtilityClient.cs" />
     <Compile Include="Web References\ContentManagmentService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\FileManagerDataService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -107,11 +111,6 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
     <Compile Include="Web References\StatisticService\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.map</DependentUpon>
-    </Compile>
-    <Compile Include="Web References\TickerService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -173,6 +172,17 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>SalesDepot_Services_ContentManagmentService_ContentControllerService</CachedSettingsPropName>
     </WebReferenceUrl>
+    <WebReferenceUrl Include="http://localhost/SalesLibraries/FileManagerData/quote">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\FileManagerDataService\</RelPath>
+      <UpdateFromURL>http://localhost/SalesLibraries/FileManagerData/quote</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>SalesDepot_Services_FileManagerDataService_FileManagerDataControllerService</CachedSettingsPropName>
+    </WebReferenceUrl>
     <WebReferenceUrl Include="http://localhost/SalesLibraries/inactiveusers/quote">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\InactiveUsersService\</RelPath>
@@ -206,17 +216,6 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>SalesDepot_Services_StatisticService_StatisticControllerService</CachedSettingsPropName>
     </WebReferenceUrl>
-    <WebReferenceUrl Include="http://localhost/SalesLibraries/ticker/quote">
-      <UrlBehavior>Dynamic</UrlBehavior>
-      <RelPath>Web References\TickerService\</RelPath>
-      <UpdateFromURL>http://localhost/SalesLibraries/ticker/quote</UpdateFromURL>
-      <ServiceLocationURL>
-      </ServiceLocationURL>
-      <CachedDynamicPropName>
-      </CachedDynamicPropName>
-      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
-      <CachedSettingsPropName>SalesDepot_Services_TickerService_TickerControllerService</CachedSettingsPropName>
-    </WebReferenceUrl>
     <WebReferenceUrl Include="http://localhost/SalesLibraries/utility/quote">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\UtilityService\</RelPath>
@@ -239,6 +238,20 @@
     <None Include="Web References\ContentManagmentService\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\FileManagerDataService\Category.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\FileManagerDataService\FileManagerDataController.wsdl" />
+    <None Include="Web References\FileManagerDataService\GroupModel.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\FileManagerDataService\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\FileManagerDataService\SuperFilter.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
     </None>
     <None Include="Web References\InactiveUsersService\InactiveUsersController.wsdl" />
     <None Include="Web References\InactiveUsersService\Reference.map">
@@ -306,14 +319,6 @@
       <DependentUpon>Reference.map</DependentUpon>
     </None>
     <None Include="Web References\StatisticService\VideoLinkInfo.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\TickerService\Reference.map">
-      <Generator>MSDiscoCodeGenerator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Web References\TickerService\TickerController.wsdl" />
-    <None Include="Web References\TickerService\TickerLink.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
     <None Include="Web References\UtilityService\Reference.map">

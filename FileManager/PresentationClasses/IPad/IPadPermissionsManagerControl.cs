@@ -9,6 +9,7 @@ using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraTab;
+using FileManager.BusinessClasses;
 using FileManager.PresentationClasses.WallBin.Decorators;
 using FileManager.ToolForms;
 using FileManager.ToolForms.IPad;
@@ -170,8 +171,8 @@ namespace FileManager.PresentationClasses.IPad
 					form.TopMost = true;
 					var thread = new Thread(() =>
 					{
-						_complexPassword = ParentDecorator.Library.IPadManager.IsUserPasswordComplex(out message);
-						_users.AddRange(ParentDecorator.Library.IPadManager.GetUsers(out message));
+						_complexPassword = ServiceConnector.Instance.IsUserPasswordComplex(out message);
+						_users.AddRange(ServiceConnector.Instance.GetUsers(out message));
 					});
 					form.Show();
 					thread.Start();
@@ -191,8 +192,8 @@ namespace FileManager.PresentationClasses.IPad
 			{
 				var thread = new Thread(() =>
 				{
-					_complexPassword = ParentDecorator.Library.IPadManager.IsUserPasswordComplex(out message);
-					_users.AddRange(ParentDecorator.Library.IPadManager.GetUsers(out message));
+					_complexPassword = ServiceConnector.Instance.IsUserPasswordComplex(out message);
+					_users.AddRange(ServiceConnector.Instance.GetUsers(out message));
 				});
 				thread.Start();
 				while (thread.IsAlive)
@@ -230,7 +231,7 @@ namespace FileManager.PresentationClasses.IPad
 						Enabled = false;
 						form.laProgress.Text = "Adding user...";
 						form.TopMost = true;
-						var thread = new Thread(() => ParentDecorator.Library.IPadManager.SetUser(login, password, firstName, lastName, email, phone, role, groups.ToArray(), pages.ToArray(), out message));
+						var thread = new Thread(() => ServiceConnector.Instance.SetUser(login, password, firstName, lastName, email, phone, role, groups.ToArray(), pages.ToArray(), out message));
 						form.Show();
 						thread.Start();
 						while (thread.IsAlive)
@@ -304,7 +305,7 @@ namespace FileManager.PresentationClasses.IPad
 							Enabled = false;
 							form.laProgress.Text = "Updating user...";
 							form.TopMost = true;
-							var thread = new Thread(() => ParentDecorator.Library.IPadManager.SetUser(login, password, firstName, lastName, email, phone, role, groups.ToArray(), pages.ToArray(), out message));
+							var thread = new Thread(() => ServiceConnector.Instance.SetUser(login, password, firstName, lastName, email, phone, role, groups.ToArray(), pages.ToArray(), out message));
 							form.Show();
 							thread.Start();
 							while (thread.IsAlive)
@@ -341,7 +342,7 @@ namespace FileManager.PresentationClasses.IPad
 					Enabled = false;
 					form.laProgress.Text = "Deleting user...";
 					form.TopMost = true;
-					var thread = new Thread(() => ParentDecorator.Library.IPadManager.DeleteUser(userRecord.login, out message));
+					var thread = new Thread(() => ServiceConnector.Instance.DeleteUser(userRecord.login, out message));
 					form.Show();
 					thread.Start();
 					while (thread.IsAlive)
@@ -393,8 +394,8 @@ namespace FileManager.PresentationClasses.IPad
 					form.TopMost = true;
 					var thread = new Thread(() =>
 					{
-						_groups.AddRange(ParentDecorator.Library.IPadManager.GetGroups(out message));
-						_groupTemplates.AddRange(ParentDecorator.Library.IPadManager.GetGroupTemplates(out message));
+						_groups.AddRange(ServiceConnector.Instance.GetGroups(out message));
+						_groupTemplates.AddRange(ServiceConnector.Instance.GetGroupTemplates(out message));
 					});
 					form.Show();
 					thread.Start();
@@ -414,8 +415,8 @@ namespace FileManager.PresentationClasses.IPad
 			{
 				var thread = new Thread(() =>
 				{
-					_groups.AddRange(ParentDecorator.Library.IPadManager.GetGroups(out message));
-					_groupTemplates.AddRange(ParentDecorator.Library.IPadManager.GetGroupTemplates(out message));
+					_groups.AddRange(ServiceConnector.Instance.GetGroups(out message));
+					_groupTemplates.AddRange(ServiceConnector.Instance.GetGroupTemplates(out message));
 				});
 				thread.Start();
 				while (thread.IsAlive)
@@ -448,7 +449,7 @@ namespace FileManager.PresentationClasses.IPad
 						Enabled = false;
 						form.laProgress.Text = "Adding group...";
 						form.TopMost = true;
-						var thread = new Thread(() => ParentDecorator.Library.IPadManager.SetGroup(id, name, users.ToArray(), pages.ToArray(), out message));
+						var thread = new Thread(() => ServiceConnector.Instance.SetGroup(id, name, users.ToArray(), pages.ToArray(), out message));
 						form.Show();
 						thread.Start();
 						while (thread.IsAlive)
@@ -517,7 +518,7 @@ namespace FileManager.PresentationClasses.IPad
 							Enabled = false;
 							form.laProgress.Text = "Updating group...";
 							form.TopMost = true;
-							var thread = new Thread(() => ParentDecorator.Library.IPadManager.SetGroup(id, name, users.ToArray(), pages.ToArray(), out message));
+							var thread = new Thread(() => ServiceConnector.Instance.SetGroup(id, name, users.ToArray(), pages.ToArray(), out message));
 							form.Show();
 							thread.Start();
 							while (thread.IsAlive)
@@ -554,7 +555,7 @@ namespace FileManager.PresentationClasses.IPad
 					Enabled = false;
 					form.laProgress.Text = "Deleting group...";
 					form.TopMost = true;
-					var thread = new Thread(() => ParentDecorator.Library.IPadManager.DeleteGroup(groupRecord.id, out message));
+					var thread = new Thread(() => ServiceConnector.Instance.DeleteGroup(groupRecord.id, out message));
 					form.Show();
 					thread.Start();
 					while (thread.IsAlive)
@@ -604,7 +605,7 @@ namespace FileManager.PresentationClasses.IPad
 					Enabled = false;
 					form.laProgress.Text = "Loading libraries...";
 					form.TopMost = true;
-					var thread = new Thread(() => _libraries.AddRange(ParentDecorator.Library.IPadManager.GetLibraries(out message)));
+					var thread = new Thread(() => _libraries.AddRange(ServiceConnector.Instance.GetLibraries(out message)));
 					form.Show();
 					thread.Start();
 					while (thread.IsAlive)
@@ -621,7 +622,7 @@ namespace FileManager.PresentationClasses.IPad
 			}
 			else
 			{
-				var thread = new Thread(() => _libraries.AddRange(ParentDecorator.Library.IPadManager.GetLibraries(out message)));
+				var thread = new Thread(() => _libraries.AddRange(ServiceConnector.Instance.GetLibraries(out message)));
 				thread.Start();
 				while (thread.IsAlive)
 				{
@@ -680,10 +681,10 @@ namespace FileManager.PresentationClasses.IPad
 									var libraray = _libraries.FirstOrDefault(x => x.id.Equals(pageRecord.libraryId));
 									if (libraray != null)
 										foreach (var page in libraray.pages)
-											ParentDecorator.Library.IPadManager.SetPage(page.id, users.ToArray(), groups.ToArray(), out message);
+											ServiceConnector.Instance.SetPage(page.id, users.ToArray(), groups.ToArray(), out message);
 								}
 								else
-									ParentDecorator.Library.IPadManager.SetPage(pageRecord.id, users.ToArray(), groups.ToArray(), out message);
+									ServiceConnector.Instance.SetPage(pageRecord.id, users.ToArray(), groups.ToArray(), out message);
 							});
 							form.Show();
 							thread.Start();

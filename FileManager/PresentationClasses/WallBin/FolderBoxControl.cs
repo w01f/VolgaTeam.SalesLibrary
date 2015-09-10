@@ -7,7 +7,7 @@ using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using DevExpress.Utils;
-using FileManager.ConfigurationClasses;
+using FileManager.BusinessClasses;
 using FileManager.Controllers;
 using FileManager.PresentationClasses.WallBin.Decorators;
 using FileManager.ToolForms.Settings;

@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using DevExpress.XtraEditors.Controls;
-using FileManager.ConfigurationClasses;
+using FileManager.BusinessClasses;
 using FileManager.Controllers;
 using SalesDepot.CoreObjects.BusinessClasses;
 
@@ -21,7 +21,7 @@ namespace FileManager.PresentationClasses.Tags
 			Dock = DockStyle.Fill;
 
 			checkedListBoxControl.Items.Clear();
-			checkedListBoxControl.Items.AddRange(ListManager.Instance.SuperFilters.Select(sf => sf.Name).ToArray());
+			checkedListBoxControl.Items.AddRange(ListManager.Instance.SuperFilters.Items.Select(sf => sf.Name).ToArray());
 
 			if (!((CreateGraphics()).DpiX > 96)) return;
 			var styleControllerFont = new Font(styleController.Appearance.Font.FontFamily, styleController.Appearance.Font.Size - 2, styleController.Appearance.Font.Style);

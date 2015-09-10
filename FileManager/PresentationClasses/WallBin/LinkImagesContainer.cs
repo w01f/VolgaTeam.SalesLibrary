@@ -7,7 +7,7 @@ using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Layout;
 using DevExpress.XtraGrid.Views.Layout.ViewInfo;
 using DevExpress.XtraTab;
-using FileManager.ConfigurationClasses;
+using FileManager.BusinessClasses;
 
 namespace FileManager.PresentationClasses.WallBin
 {

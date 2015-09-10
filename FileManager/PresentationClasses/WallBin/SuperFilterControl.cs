@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Windows.Forms;
 using DevExpress.XtraEditors.Controls;
-using FileManager.ConfigurationClasses;
+using FileManager.BusinessClasses;
 using FileManager.Controllers;
 using SalesDepot.CoreObjects.BusinessClasses;
 
@@ -19,9 +19,9 @@ namespace FileManager.PresentationClasses.WallBin
 
 		public void Init()
 		{
-			Visible = ListManager.Instance.SuperFilters.Any();
+			Visible = ListManager.Instance.SuperFilters.Items.Any();
 			checkedListBoxControl.Items.Clear();
-			checkedListBoxControl.Items.AddRange(ListManager.Instance.SuperFilters.Select(sf => sf.Name).ToArray());
+			checkedListBoxControl.Items.AddRange(ListManager.Instance.SuperFilters.Items.Select(sf => sf.Name).ToArray());
 		}
 
 		public void UpdateLink()

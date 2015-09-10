@@ -32,7 +32,6 @@ namespace SalesDepot.SiteManager.Controllers
 		#region Controllers
 		public UsersController UsersController { get; private set; }
 		public ActivitiesController ActivitiesController { get; private set; }
-		public TickerController TickerController { get; private set; }
 		public InactiveUsersController InactiveUsersController { get; private set; }
 		public QBuilderController QBuilderController { get; private set; }
 		public UtilitiesController UtilitiesController { get; private set; }
@@ -64,8 +63,6 @@ namespace SalesDepot.SiteManager.Controllers
 							Application.DoEvents();
 							ActivitiesController.InitController();
 							Application.DoEvents();
-							TickerController.InitController();
-							Application.DoEvents();
 							InactiveUsersController.InitController();
 							Application.DoEvents();
 							QBuilderController.InitController();
@@ -93,8 +90,6 @@ namespace SalesDepot.SiteManager.Controllers
 			_controllers.Add(TabPageEnum.Users, UsersController);
 			ActivitiesController = new ActivitiesController();
 			_controllers.Add(TabPageEnum.Activities, ActivitiesController);
-			TickerController = new TickerController();
-			_controllers.Add(TabPageEnum.Ticker, TickerController);
 			InactiveUsersController = new InactiveUsersController();
 			_controllers.Add(TabPageEnum.InactiveUsers, InactiveUsersController);
 			QBuilderController = new QBuilderController();
@@ -120,9 +115,6 @@ namespace SalesDepot.SiteManager.Controllers
 					break;
 				case TabPageEnum.Activities:
 					FormMain.Instance.ribbonControl.SelectedRibbonTabItem = FormMain.Instance.ribbonTabItemActivities;
-					break;
-				case TabPageEnum.Ticker:
-					FormMain.Instance.ribbonControl.SelectedRibbonTabItem = FormMain.Instance.ribbonTabItemTicker;
 					break;
 				case TabPageEnum.InactiveUsers:
 					FormMain.Instance.ribbonControl.SelectedRibbonTabItem = FormMain.Instance.ribbonTabItemInactiveUsers;
@@ -157,7 +149,6 @@ namespace SalesDepot.SiteManager.Controllers
 	{
 		Users,
 		Activities,
-		Ticker,
 		InactiveUsers,
 		QBuilder,
 		Utilities

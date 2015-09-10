@@ -3,7 +3,7 @@ using System.IO;
 using System.Windows.Forms;
 using DevComponents.DotNetBar.Metro;
 using DevExpress.XtraEditors.Controls;
-using FileManager.ConfigurationClasses;
+using FileManager.BusinessClasses;
 
 namespace FileManager.ToolForms.Settings
 {

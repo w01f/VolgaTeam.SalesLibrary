@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
-using FileManager.ConfigurationClasses;
+using FileManager.BusinessClasses;
 using FileManager.PresentationClasses.IPad;
 using FileManager.PresentationClasses.OvernightsCalendar;
 using SalesDepot.CommonGUI.Forms;

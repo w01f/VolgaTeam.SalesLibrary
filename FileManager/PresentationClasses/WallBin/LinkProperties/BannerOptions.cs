@@ -5,7 +5,7 @@ using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraTab;
-using FileManager.ConfigurationClasses;
+using FileManager.BusinessClasses;
 using SalesDepot.CoreObjects.BusinessClasses;
 using SalesDepot.CoreObjects.ToolClasses;
 
@@ -45,7 +45,7 @@ namespace FileManager.PresentationClasses.WallBin.LinkProperties
 		private void LoadData()
 		{
 			xtraTabControlBanners.TabPages.Clear();
-			foreach (var imageGroup in ListManager.Instance.Banners)
+			foreach (var imageGroup in ListManager.Instance.Banners.Items)
 			{
 				var tabPage = new LinkImagesContainer(imageGroup);
 				tabPage.SelectedImageChanged += OnSelectedBannerChanged;
@@ -53,8 +53,8 @@ namespace FileManager.PresentationClasses.WallBin.LinkProperties
 				xtraTabControlBanners.TabPages.Add(tabPage);
 			}
 
-			checkBoxEnableBanner.Enabled = Directory.Exists(ListManager.Instance.BannerFolder);
-			checkBoxEnableBanner.Checked = _data.BannerProperties.Enable && Directory.Exists(ListManager.Instance.BannerFolder);
+			checkBoxEnableBanner.Enabled = Directory.Exists(ListManager.Instance.Banners.BannerFolder);
+			checkBoxEnableBanner.Checked = _data.BannerProperties.Enable && Directory.Exists(ListManager.Instance.Banners.BannerFolder);
 			pbSelectedBanner.Image = _data.BannerProperties.Enable ? _data.BannerProperties.Image : null;
 			laBannerFileName.Text = string.Empty;
 			switch (_data.BannerProperties.ImageAlignement)
