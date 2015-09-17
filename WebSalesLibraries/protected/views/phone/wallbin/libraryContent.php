@@ -73,7 +73,7 @@
 					<a data-ajax="false" href="#"> <span><? echo $page->name; ?></span>
 						<div class="service-data">
 							<div class="page-id"><? echo $page->id; ?></div>
-							<div class="page-logo"><? $page->logoContent ?></div>
+							<div class="page-logo"><? echo $page->logoContent; ?></div>
 						</div>
 					</a>
 				</li>

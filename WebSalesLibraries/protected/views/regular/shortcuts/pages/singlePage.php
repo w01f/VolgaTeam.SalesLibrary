@@ -8,9 +8,6 @@
 	$cs = Yii::app()->clientScript;
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/shortcuts/shortcuts-page-controller.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
 ?>
-<script type="text/javascript">
-	window.BaseUrl = '<?php echo Yii::app()->getBaseUrl(true); ?>';
-</script>
 <? $this->renderPartial('../menu/singlePageMenu'); ?>
 <div id="content" oncontextmenu="return false;">
 	<div class="service-data default-shortcut-data">

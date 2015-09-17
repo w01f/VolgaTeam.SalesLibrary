@@ -14,7 +14,7 @@
 
 		var dataTable = new $.SalesPortal.SearchDataTable(
 			{
-				saveState: false,
+				saveState: false
 			}
 		);
 

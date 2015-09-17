@@ -24,7 +24,7 @@
 			{
 				var tr = $('<tr>');
 				$('<th>').html(record.library.name).appendTo(tr);
-				$('<td class="link-name">').html(record.name.value).appendTo(tr);
+				$('<td class="link-name">').html(record.name).appendTo(tr);
 				$('<td>').html(record.file_type).appendTo(tr);
 				$('<td>').html(record.date.display).appendTo(tr);
 				$('<td class="link-id">').html(record.id).appendTo(tr);
@@ -59,8 +59,8 @@
 				case "name" :
 					return function (x, y)
 					{
-						var xValue = x.name.value;
-						var yValue = y.name.value;
+						var xValue = x.name;
+						var yValue = y.name;
 						return ((xValue < yValue) ? (-1 * directionIndex) : ((xValue > yValue) ? directionIndex : 0));
 					};
 				case "file_type":

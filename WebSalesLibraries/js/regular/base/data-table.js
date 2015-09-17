@@ -95,22 +95,32 @@
 				"title": "Date",
 				"class": "centered",
 				"width": "80px",
+				"iDataSort": 6,
 				"render": cellRenderer
 			});
+
+			columnSettings.push({
+				"data": "date.value",
+				"title": "Date",
+				"visible": false,
+				"searchable": false,
+				"sType": "numeric"
+			});
+
 			if (viewOptions.showDeleteButton)
-				columnSettings.push({
+				columnSettings.push   ({
 					"data": null,
 					"title": '',
 					"width": "5px",
 					"orderable": false,
 					"defaultContent": '<img class="link-delete-button" src="' + window.BaseUrl + 'images/search/search-delete.png">'
 				});
+
 			columnSettings.push({
 				"data": "id",
 				"title": "Id",
 				"visible": false,
-				"searchable": false,
-				"render": cellRenderer
+				"searchable": false
 			});
 
 			dataTable = table
@@ -146,7 +156,7 @@
 				});
 			}
 
-			table.on('click', 'tr', function (e)
+			table.on('click', 'tr', function ()
 			{
 				var linkId = dataTable.api().row(this).data().id;
 				$.SalesPortal.LinkManager.requestViewDialog(linkId, false);
@@ -177,7 +187,7 @@
 				dataTable.api().state.clear();
 		};
 
-		var cellRenderer = function (data, type, row, meta)
+		var cellRenderer = function (data, type, row)
 		{
 			if (row != '')
 				return row.url != '' ?
