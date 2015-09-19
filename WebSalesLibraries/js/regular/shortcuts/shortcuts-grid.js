@@ -10,7 +10,7 @@
 		{
 			gridData = data;
 
-			new $.SalesPortal.ShortcutsSearchBar(gridData.linkId);
+			new $.SalesPortal.ShortcutsSearchBar(gridData);
 
 			var pageContent = $.SalesPortal.Content.getContentObject();
 			var grid = pageContent.find('.shortcuts-links-grid');

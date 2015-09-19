@@ -265,6 +265,11 @@
 		{
 			$this->renderPartial('searchBar/settings');
 		}
+
+		public function actionConfirmSearchBarSearch()
+		{
+			$this->renderPartial('searchBar/confirmation');
+		}
 		//------Regular Site API-------------------------------------------
 
 		//------Mobile Site API-----------------------------------------------

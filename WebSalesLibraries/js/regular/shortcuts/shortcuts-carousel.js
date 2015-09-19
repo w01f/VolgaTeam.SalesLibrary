@@ -10,7 +10,7 @@
 		{
 			carouselData = data;
 
-			new $.SalesPortal.ShortcutsSearchBar(carouselData.linkId);
+			new $.SalesPortal.ShortcutsSearchBar(carouselData);
 
 			FWDU3DCarUtils.checkIfHasTransforms();
 			var carousel = new FWDUltimate3DCarousel(carouselData.displayParameters);

@@ -2,7 +2,7 @@
 {
 	window.BaseUrl = window.BaseUrl || '';
 	$.SalesPortal = $.SalesPortal || { };
-	$.SalesPortal.ShortcutsSearchLink = function (optionsContainer, objectId)
+	$.SalesPortal.ShortcutsSearchLink = function (optionsContainer, objectId, backHandler)
 	{
 		var that = this;
 
@@ -14,7 +14,8 @@
 
 		var dataTable = new $.SalesPortal.SearchDataTable(
 			{
-				saveState: false
+				saveState: false,
+				backHandler: backHandler
 			}
 		);
 

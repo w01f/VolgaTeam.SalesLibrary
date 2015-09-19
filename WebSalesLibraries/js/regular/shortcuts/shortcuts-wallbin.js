@@ -19,13 +19,13 @@
 				libraryData.actions,
 				function ()
 				{
-					$.SalesPortal.Content.getContentObject().find('.page-container').show();
-					initPage();
-					initActionButtons();
-					updateContentSize();
 				}
 			);
 			initLibraryHeader();
+			$.SalesPortal.Content.getContentObject().find('.page-container').show();
+			initPage();
+			initActionButtons();
+			updateContentSize();
 			$(window).off('resize.library').on('resize.library', updateContentSize);
 		};
 
@@ -97,12 +97,12 @@
 					},
 					success: function (result)
 					{
+						contentObject.find('.wallbin-logo-wrapper').html('<img class="wallbin-logo" src="' + pageData.logoContent + '">');
 						libraryContent.append($(result));
 						selectedPage = libraryContent.find('#page-' + pageData.id);
 						selectedPage.show();
 						initPage();
 						updateContentSize();
-						contentObject.find('.wallbin-logo-wrapper').html('<img class="wallbin-logo" src="' + pageData.logoContent + '">');
 					},
 					error: function ()
 					{
@@ -113,10 +113,10 @@
 			}
 			else
 			{
+				contentObject.find('.wallbin-logo-wrapper').html('<img class="wallbin-logo" src="' + pageData.logoContent + '">');
 				selectedPage.show();
 				initPage();
 				updateContentSize();
-				contentObject.find('.wallbin-logo-wrapper').html('<img class="wallbin-logo" src="' + pageData.logoContent + '">');
 			}
 		};
 

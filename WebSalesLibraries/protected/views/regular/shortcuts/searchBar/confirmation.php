@@ -1,7 +1,7 @@
 <div class="search-bar-modal">
 	<div class="row">
 		<div class="col-xs-12">
-			<h3 class="header">Search Options:</h3>
+			<h3 class="header">Search Settings: <strong class="keyword"></strong></h3>
 		</div>
 	</div>
 	<div class="row">
@@ -50,7 +50,7 @@
 	</div>
 	<div class="row buttons-area">
 		<div class="col-xs-6">
-			<button class="btn btn-default accept-button" type="button">OK</button>
+			<button class="btn btn-default search-button" type="button">Search Now</button>
 		</div>
 		<div class="col-xs-6">
 			<button class="btn btn-default cancel-button" type="button">Cancel</button>

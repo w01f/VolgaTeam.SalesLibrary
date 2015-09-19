@@ -7,7 +7,7 @@
 
 		var saveState = options != undefined ? options.saveSate : undefined;
 		var deleteHandler = options != undefined ? options.deleteHandler : undefined;
-
+		var backHandler = options != undefined ? options.backHandler : undefined;
 
 		var dataTable = undefined;
 
@@ -108,7 +108,7 @@
 			});
 
 			if (viewOptions.showDeleteButton)
-				columnSettings.push   ({
+				columnSettings.push({
 					"data": null,
 					"title": '',
 					"width": "5px",
@@ -141,10 +141,22 @@
 					"oLanguage": {
 						"sEmptyTable": "",
 						"sZeroRecords": ""
-					}
+					},
+					"dom": "<'row'<'col-xs-4'l><'col-xs-4 back-url text-center'><'col-xs-4'f>>" +
+						"<'row'<'col-xs-12'tr>>" +
+						"<'row'<'col-xs-5'i><'col-xs-7'p>>"
 				});
 			if (!$.SalesPortal.Content.isMobileDevice())
 				$("#data-table-content_length").find('select').selectpicker();
+
+			if (backHandler != undefined)
+			{
+				var backUrlContent = $("#data-table-content_wrapper").find('.back-url');
+				backUrlContent.html(
+					'<a href="#">Click <strong><u>HERE</u></strong> for a New Search</a>'
+				);
+				backUrlContent.find('a').on('click', backHandler);
+			}
 
 			if (viewOptions.showDeleteButton && deleteHandler != undefined)
 			{

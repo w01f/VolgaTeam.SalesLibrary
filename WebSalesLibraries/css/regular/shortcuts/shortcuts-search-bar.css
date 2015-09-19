@@ -14,11 +14,6 @@
 	padding-right: 10px;
 }
 
-.search-bar-edit-header
-{
-	margin-top: 0;
-}
-
 .search-bar-editors .row
 {
 	margin-left: 0;
@@ -35,3 +30,26 @@
 {
 	display: none;
 }
+
+/*Modals------------------------------------*/
+.search-bar-modal .row
+{
+	margin: 0;
+}
+
+.search-bar-modal .header
+{
+	margin: 0 0 20px;
+}
+
+.search-bar-modal .buttons-area
+{
+	margin-top: 30px;
+	text-align: center;
+}
+
+.search-bar-modal .buttons-area .btn
+{
+	width: 100px;
+}
+/*------------------------------------*/

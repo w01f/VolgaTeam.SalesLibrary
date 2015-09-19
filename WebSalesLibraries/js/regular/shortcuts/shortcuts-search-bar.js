@@ -2,7 +2,7 @@
 {
 	window.BaseUrl = window.BaseUrl || '';
 	$.SalesPortal = $.SalesPortal || { };
-	$.SalesPortal.ShortcutsSearchBar = function (bundleId)
+	$.SalesPortal.ShortcutsSearchBar = function (bundleData)
 	{
 		var searchBar = $('.shortcuts-search-bar');
 
@@ -44,29 +44,102 @@
 		{
 			if (searchBar.find('.btn.search-bar-run').hasClass('disabled')) return;
 			searchBarConditions.set('text', searchBar.find('.search-bar-text').val());
-			if (searchBarOptions.openInSamePage)
-			{
-				var content = $.SalesPortal.Content.getContentObject();
-				searchBarOptions.conditions = searchBarConditions.getConditionsFormatted();
-				$.SalesPortal.Content.fillContent(
-					'<div class="search-conditions" style="display: none;"><div class="encoded-object">' + $.toJSON(searchBarOptions) + '</div></div>' +
-						'<div class="search-view-options" style="display: none;"><div class="encoded-object">' + $.toJSON(searchViewOptions) + '</div></div>',
-					undefined,
-					searchActions
-				);
-				$.SalesPortal.ShortcutsSearchLink(content, shortcutBundleId);
-			}
-			else
-			{
-				window.open("shortcuts/GetQuickSearchResult?bundleId=" + shortcutBundleId +
-					"&text=" + searchBarConditions.get('text') +
-					"&textExactMatch=" + searchBarConditions.get('exactMatch') +
-					"&onlyFiles=" + searchBarConditions.get('onlyFileNames') +
-					"&onlyNewFiles=" + searchBarConditions.get('onlyNewFiles') +
-					"&fileTypes=" + $.toJSON(searchBarConditions.getFileTypesSettings().selectedTypeTags()) +
-					"&superFilters=" + $.toJSON(searchBarConditions.getSuperFiltersSettings()) +
-					"&categories=" + $.toJSON(searchBarConditions.getCategorySettings()));
-			}
+
+			$.ajax({
+				type: "POST",
+				url: window.BaseUrl + "shortcuts/confirmSearchBarSearch",
+				beforeSend: function ()
+				{
+					$.SalesPortal.Overlay.show(false);
+				},
+				complete: function ()
+				{
+					$.SalesPortal.Overlay.hide();
+				},
+				success: function (msg)
+				{
+					var modalContent = $(msg);
+
+					modalContent.find('.keyword').html(searchBarConditions.get('text'));
+
+					var fileSettings = searchBarConditions.getFileTypesSettings();
+					modalContent.find('#search-bar-edit-file-power-point').prop('checked', fileSettings.showPowerPoint);
+					modalContent.find('#search-bar-edit-file-video').prop('checked', fileSettings.showVideo);
+					modalContent.find('#search-bar-edit-file-others').prop('checked', fileSettings.showPdf || fileSettings.showWord || fileSettings.showExcel || fileSettings.showImages || fileSettings.showUrls);
+
+					modalContent.find('#search-bar-edit-file-names').prop('checked', searchBarConditions.get('onlyFileNames'));
+					modalContent.find('#search-bar-edit-exact-match').prop('checked', searchBarConditions.get('exactMatch'));
+					modalContent.find('#search-bar-edit-only-new-files').prop('checked', searchBarConditions.get('onlyNewFiles'));
+
+					modalContent.find('.search-button').off('click').on('click', function ()
+					{
+						searchBarConditions.setFileTypesSettings({
+							showPowerPoint: modalContent.find('#search-bar-edit-file-power-point').prop('checked'),
+							showVideo: modalContent.find('#search-bar-edit-file-video').prop('checked'),
+							showPdf: modalContent.find('#search-bar-edit-file-others').prop('checked'),
+							showWord: modalContent.find('#search-bar-edit-file-others').prop('checked'),
+							showExcel: modalContent.find('#search-bar-edit-file-others').prop('checked'),
+							showImages: modalContent.find('#search-bar-edit-file-others').prop('checked'),
+							showUrls: modalContent.find('#search-bar-edit-file-others').prop('checked')
+						});
+						searchBarConditions.set('onlyFileNames', modalContent.find('#search-bar-edit-file-names').prop('checked'));
+						searchBarConditions.set('exactMatch', modalContent.find('#search-bar-edit-exact-match').prop('checked'));
+						searchBarConditions.set('onlyNewFiles', modalContent.find('#search-bar-edit-only-new-files').prop('checked'));
+
+						$.fancybox.close();
+
+						if (searchBarOptions.openInSamePage)
+						{
+							var content = $.SalesPortal.Content.getContentObject();
+							searchBarOptions.conditions = searchBarConditions.getConditionsFormatted();
+							$.SalesPortal.Content.fillContent(
+								'<div class="search-conditions" style="display: none;"><div class="encoded-object">' + $.toJSON(searchBarOptions) + '</div></div>' +
+									'<div class="search-view-options" style="display: none;"><div class="encoded-object">' + $.toJSON(searchViewOptions) + '</div></div>',
+								undefined,
+								searchActions
+							);
+							$.SalesPortal.ShortcutsSearchLink(
+								content,
+								shortcutBundleData.linkId,
+								function ()
+								{
+									$.SalesPortal.ShortcutsManager.openShortcut($('<div>' + shortcutBundleData.serviceData + '</div>'));
+								}
+							);
+						}
+						else
+						{
+							window.open("shortcuts/GetQuickSearchResult?bundleId=" + shortcutBundleData.linkId +
+								"&text=" + searchBarConditions.get('text') +
+								"&textExactMatch=" + searchBarConditions.get('exactMatch') +
+								"&onlyFiles=" + searchBarConditions.get('onlyFileNames') +
+								"&onlyNewFiles=" + searchBarConditions.get('onlyNewFiles') +
+								"&fileTypes=" + $.toJSON(searchBarConditions.getFileTypesSettings().selectedTypeTags()) +
+								"&superFilters=" + $.toJSON(searchBarConditions.getSuperFiltersSettings()) +
+								"&categories=" + $.toJSON(searchBarConditions.getCategorySettings()));
+						}
+					});
+					modalContent.find('.cancel-button').off('click').on('click', function ()
+					{
+						$.fancybox.close();
+					});
+
+					$.fancybox({
+						content: modalContent,
+						title: 'Search Options',
+						width: 500,
+						autoSize: false,
+						autoHeight: true,
+						openEffect: 'none',
+						closeEffect: 'none'
+					});
+				},
+				error: function ()
+				{
+				},
+				async: true,
+				dataType: 'html'
+			});
 		};
 
 		var updateSearchButtonState = function ()
@@ -368,7 +441,7 @@
 
 		if (searchBar.length > 0)
 		{
-			var shortcutBundleId = bundleId;
+			var shortcutBundleData = bundleData;
 			var searchBarOptions = new $.SalesPortal.SearchOptions($.parseJSON(searchBar.find('.search-conditions .encoded-object').text()));
 			var searchViewOptions = new $.SalesPortal.SearchViewOptions($.parseJSON(searchBar.find('.search-view-options .encoded-object').text()));
 			var searchActions = searchBar.find('.search-bar-actions').html();
