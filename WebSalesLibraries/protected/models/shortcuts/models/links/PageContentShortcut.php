@@ -34,7 +34,7 @@
 		 */
 		public function getSourceLink()
 		{
-			if ($this->samePage || $this->isPhone)
+			if ($this->samePage)
 				return Yii::app()->createAbsoluteUrl('shortcuts/getSamePage');
 			else
 				return Yii::app()->createAbsoluteUrl('shortcuts/getSinglePage', array('linkId' => $this->id));

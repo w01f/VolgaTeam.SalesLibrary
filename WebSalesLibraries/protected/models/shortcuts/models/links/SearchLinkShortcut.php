@@ -38,16 +38,6 @@
 
 			parent::__construct($linkRecord, $isPhone);
 
-			if (!$isPhone)
-			{
-				$samePageTags = $linkConfig->getElementsByTagName("OpenOnSamePage");
-				$this->samePage = $samePageTags->length > 0 ? filter_var(trim($samePageTags->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : true;
-			}
-			else
-			{
-				$this->samePage = true;
-			}
-
 			$baseUrl = Yii::app()->getBaseUrl(true);
 			$noCatsCustomImagePath = $linkRecord->source_path . DIRECTORY_SEPARATOR . 'no_cats.png';
 			if (isset($noCatsCustomImagePath) && @getimagesize($noCatsCustomImagePath))

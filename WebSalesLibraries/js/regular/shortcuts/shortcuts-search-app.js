@@ -75,7 +75,8 @@
 							currentSearchConditions.set('text', text);
 						else
 							currentSearchConditions.set('text', null);
-					}
+					},
+					$(this).find('.icon i').prop('class')
 				);
 			});
 
@@ -173,7 +174,8 @@
 						}
 						currentSearchConditions.set('dateStart', dateStart);
 						currentSearchConditions.set('dateEnd', dateEnd);
-					}
+					},
+					$(this).find('.icon i').prop('class')
 				);
 			});
 
@@ -189,7 +191,8 @@
 					{
 						currentSearchConditions.set('onlyFileNames', content.find('#search-filter-edit-file-names-only').prop('checked'));
 						currentSearchConditions.set('exactMatch', content.find('#search-filter-edit-exact-match').prop('checked'));
-					}
+					},
+					$(this).find('.icon i').prop('class')
 				);
 			});
 
@@ -218,7 +221,8 @@
 							showImages: content.find('#search-filter-edit-file-image').prop('checked'),
 							showUrls: content.find('#search-filter-edit-file-url').prop('checked')
 						});
-					}
+					},
+					$(this).find('.icon i').prop('class')
 				);
 			});
 
@@ -310,7 +314,8 @@
 								}
 							});
 						currentSearchConditions.setCategorySettings(categories);
-					}
+					},
+					$(this).find('.icon i').prop('class')
 				);
 			});
 
@@ -341,7 +346,8 @@
 									items.push($(this).find('.name').text());
 							});
 						currentSearchConditions.setSuperFiltersSettings(items);
-					}
+					},
+					$(this).find('.icon i').prop('class')
 				);
 			});
 
@@ -403,7 +409,8 @@
 									});
 							});
 						currentSearchConditions.setLibrarySettings(items);
-					}
+					},
+					$(this).find('.icon i').prop('class')
 				);
 			});
 		};
@@ -432,7 +439,7 @@
 			);
 		};
 
-		var editSearchConditions = function (conditionTag, initCallback, acceptCallback)
+		var editSearchConditions = function (conditionTag, initCallback, acceptCallback, iconClass)
 		{
 			$.ajax({
 				type: "POST",
@@ -452,6 +459,8 @@
 				{
 					var content = $(msg);
 
+					content.find('.header i').addClass(iconClass);
+
 					initCallback(content);
 
 					content.find('.accept-button').off('click').on('click', function ()
@@ -464,6 +473,17 @@
 						acceptCallback(content);
 						$.fancybox.close();
 						runSearch();
+					});
+					$(document).on('keydown.search', function (e)
+					{
+						if (e.keyCode == 13)
+						{
+							e.preventDefault();
+							e.stopPropagation();
+							acceptCallback(content);
+							$.fancybox.close();
+							runSearch();
+						}
 					});
 					content.find('.cancel-button').off('click').on('click', function ()
 					{
@@ -479,6 +499,10 @@
 						closeEffect: 'none',
 						helpers: {
 							title: false
+						},
+						afterClose: function ()
+						{
+							$(document).off('keydown.search');
 						}
 					});
 				},

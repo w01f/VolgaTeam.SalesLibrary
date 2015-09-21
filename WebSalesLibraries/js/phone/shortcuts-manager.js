@@ -31,8 +31,9 @@
 				that.trackActivity(data);
 
 				var hasPageContent = data.find('.has-page-content').length > 0;
+				var samePage = data.find('.same-page').length > 0;
 
-				if (hasPageContent == true)
+				if (hasPageContent == true && samePage == true)
 				{
 					e.preventDefault();
 					that.openShortcut(data);

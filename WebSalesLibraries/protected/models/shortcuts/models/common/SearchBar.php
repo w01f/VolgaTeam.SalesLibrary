@@ -11,6 +11,7 @@
 		public $defaultLabel;
 		public $conditions;
 		public $samePage;
+		public $showTagsSelector;
 
 		public $enableSubSearch;
 		public $showSubSearchAll;
@@ -39,6 +40,8 @@
 			$this->defaultLabel = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : '';
 			$queryResult = $xpath->query('//SearchBar/OpenOnSamePage');
 			$this->samePage = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : true;
+			$queryResult = $xpath->query('//SearchBar/ShowTagsSelector');
+			$this->showTagsSelector = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : true;
 
 			$xpath->query('//Config/SearchCondition');
 			$this->conditions = SearchConditions::fromXml($xpath, $xpath->query('//Config/SearchBar/SearchCondition')->item(0));

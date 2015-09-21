@@ -15,14 +15,16 @@
 				<td class="title column-toggle-placeholder">
 				</td>
 				<td class="back">
-					<a href="#<? echo $parentId; ?>" data-role="button" data-icon="ion-arrow-left-a" data-mini="true" data-inline="true" data-transition="slidefade" data-direction="reverse">BACK</a>
+					<? if (isset($parentId)): ?>
+						<a href="#<? echo $parentId; ?>" data-role="button" data-icon="ion-arrow-left-a" data-mini="true" data-inline="true" data-transition="slidefade" data-direction="reverse">BACK</a>
+					<? endif; ?>
 				</td>
 			</tr>
 		</table>
 		<div class="content-data">
 		</div>
 	</div>
-	<div class="page-footer main-footer" data-role='footer'  data-position="fixed" data-theme="a">
+	<div class="page-footer main-footer" data-role='footer' data-position="fixed" data-theme="a">
 		<div class="ui-grid-a">
 			<div class="ui-block-a">
 			</div>

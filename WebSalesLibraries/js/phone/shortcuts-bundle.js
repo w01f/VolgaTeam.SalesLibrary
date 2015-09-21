@@ -56,8 +56,9 @@
 				$.SalesPortal.ShortcutsManager.trackActivity(data);
 
 				var hasPageContent = data.find('.has-page-content').length > 0;
+				var samePage = data.find('.same-page').length > 0;
 
-				if (hasPageContent)
+				if (hasPageContent == true && samePage == true)
 				{
 					e.preventDefault();
 					$.SalesPortal.ShortcutsManager.openShortcut(data, shortcutData.options.linkId);

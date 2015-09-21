@@ -31,6 +31,21 @@
 {
 	margin-top: 0;
 	margin-bottom: 20px;
+	display: table;
+}
+
+.search-filters .header .icon
+{
+	font-size: 35px;
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.search-filters .header .title
+{
+	display: table-cell;
+	vertical-align: middle;
+	padding-left: 20px;
 }
 
 .search-filters .buttons-area

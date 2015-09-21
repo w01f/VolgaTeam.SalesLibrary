@@ -19,7 +19,9 @@
 					<? echo $shortcut->title; ?>
 				</td>
 				<td class="back">
-					<a href="#<? echo $parentId; ?>" data-role="button" data-icon="ion-arrow-left-a" data-mini="true" data-inline="true" data-transition="slidefade" data-direction="reverse">BACK</a>
+					<? if ($shortcut->samePage): ?>
+						<a href="#<? echo $parentId; ?>" data-role="button" data-icon="ion-arrow-left-a" data-mini="true" data-inline="true" data-transition="slidefade" data-direction="reverse">BACK</a>
+					<? endif; ?>
 				</td>
 			</tr>
 		</table>

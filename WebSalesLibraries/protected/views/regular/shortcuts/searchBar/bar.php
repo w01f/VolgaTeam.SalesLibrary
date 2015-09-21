@@ -31,11 +31,13 @@
 					<span class="input-group-addon">Search:</span>
 					<input class="form-control search-bar-text" type="text" placeholder="<? echo $searchBar->defaultLabel; ?>">
 					<span class="input-group-btn">
+						<? if ($searchBar->showTagsSelector): ?>
 							<button class="btn btn-default tags-filter-panel-switcher" type="button"><? echo $tagsName; ?></button>
-							<button class="btn btn-default search-bar-options" type="button">Search Options</button>
-							<button class="btn btn-default search-bar-run" type="button">
-								<img src="<? echo Yii::app()->getBaseUrl(true) . '/images/search/search-shortcuts.png'; ?>">
-							</button>
+						<? endIf; ?>
+						<button class="btn btn-default search-bar-options" type="button">Search Options</button>
+						<button class="btn btn-default search-bar-run" type="button">
+							<img src="<? echo Yii::app()->getBaseUrl(true) . '/images/search/search-shortcuts.png'; ?>">
+						</button>
 				  	</span>
 				</div>
 				<p class="text-muted">
