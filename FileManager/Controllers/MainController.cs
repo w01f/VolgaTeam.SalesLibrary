@@ -268,6 +268,28 @@ namespace FileManager.Controllers
 			}
 		}
 
+		public void LoadCloudResorces()
+		{
+			using (var formProgress = new FormProgress())
+			{
+				formProgress.TopMost = true;
+				formProgress.laProgress.Text = "Loading Resources...";
+				FormMain.Instance.ribbonControl.Enabled = false;
+				var thread = new Thread(() =>
+				{
+					CloudResorcesManager.Instance.LoadResorces();
+					SettingsManager.Instance.LoadResources();
+				});
+				formProgress.Show();
+				thread.Start();
+				Application.DoEvents();
+				while (thread.IsAlive)
+					Application.DoEvents();
+				formProgress.Close();
+				FormMain.Instance.ribbonControl.Enabled = true;
+			}
+		}
+
 		public void LoadDataAndGUI()
 		{
 			ActiveDecorator = null;

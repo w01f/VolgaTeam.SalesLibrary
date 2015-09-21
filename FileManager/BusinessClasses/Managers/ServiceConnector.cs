@@ -16,12 +16,18 @@ namespace FileManager.BusinessClasses
 		private const string Password = "M>f0tcGwK>c4'[V";
 
 		private SiteClient _siteClient;
+		private string _resourcesPath;
 
 		public string WebServiceSite { get; private set; }
 
 		public bool Connected
 		{
 			get { return !String.IsNullOrEmpty(WebServiceSite); }
+		}
+
+		public string ResorcesUrl
+		{
+			get { return String.Format("{0}{1}", WebServiceSite, _resourcesPath); }
 		}
 
 		public static ServiceConnector Instance
@@ -33,7 +39,7 @@ namespace FileManager.BusinessClasses
 
 		public void Init()
 		{
-			var serviceConnectionSettingsFilePath = Path.Combine(SettingsManager.Instance.ApplicationRootPath, "credentials.xml");
+			var serviceConnectionSettingsFilePath = Path.Combine(Path.GetDirectoryName(typeof(ServiceConnector).Assembly.Location), "credentials.xml");
 
 			if (!File.Exists(serviceConnectionSettingsFilePath)) return;
 			var document = new XmlDocument();
@@ -41,6 +47,9 @@ namespace FileManager.BusinessClasses
 			var node = document.SelectSingleNode(@"/ipadsite/site");
 			if (node != null)
 				WebServiceSite = node.InnerText;
+			node = document.SelectSingleNode(@"/ipadsite/fmresources");
+			if (node != null)
+				_resourcesPath = node.InnerText;
 			if (Connected)
 				_siteClient = new SiteClient(WebServiceSite, Login, Password);
 		}

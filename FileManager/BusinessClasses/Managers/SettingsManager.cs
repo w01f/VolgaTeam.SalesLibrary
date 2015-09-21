@@ -20,6 +20,7 @@ namespace FileManager.BusinessClasses
 
 		public string ApplicationRootPath { get; private set; }
 		public string ApplicationLocalDataPath { get; private set; }
+		public string CloudResorcesPath { get; private set; }
 		public string SettingsRootPath { get; private set; }
 		public string LogRootPath { get; set; }
 		public string ClientLogosRootPath { get; set; }
@@ -93,6 +94,10 @@ namespace FileManager.BusinessClasses
 			if (!Directory.Exists(ApplicationLocalDataPath))
 				Directory.CreateDirectory(ApplicationLocalDataPath);
 
+			CloudResorcesPath = Path.Combine(ApplicationLocalDataPath, "fm_resources");
+			if (!Directory.Exists(CloudResorcesPath))
+				Directory.CreateDirectory(CloudResorcesPath);
+
 			DestinationPathLength = string.Format(@"{0}\newlocaldirect.com\sync\Incoming\libraries\Primary Root", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles)).Length;
 
 			if (AppModeManager.Instance.AppMode == AppModeEnum.Local)
@@ -107,11 +112,8 @@ namespace FileManager.BusinessClasses
 				Directory.CreateDirectory(settingsFolderPath);
 			SettingsFilePath = Path.Combine(settingsFolderPath, "LocalSettings.xml");
 
-			_categoryRequestSettingsPath = Path.Combine(ApplicationRootPath, "category_request.xml");
 
 			_dashboardSyncSettingsFilePath = string.Format(@"{0}\newlocaldirect.com\!Update_Settings\syncfile.xml", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
-
-			_salesDepotSyncSettingsFilePath = Path.Combine(ApplicationRootPath, "synclock.xml");
 
 			LogRootPath = Path.Combine(AppModeManager.Instance.AppMode == AppModeEnum.Local ? settingsFolderPath : ApplicationLocalDataPath, "Log");
 			if (!Directory.Exists(LogRootPath))
@@ -146,22 +148,6 @@ namespace FileManager.BusinessClasses
 			MultitabView = true;
 			#endregion
 
-			#region Ribbon Settings
-			_ribbonSettingsFilePath = Path.Combine(ApplicationRootPath, "ribbontabs.xml");
-			EnableOvernightsCalendarTab = true;
-			EnableClipartTab = true;
-			EnableProgramManagerTab = true;
-			EnableIPadSettingsTab = true;
-			EnableIPadUsersTab = true;
-			EnableTagsTab = true;
-			EnableSecurityTab = true;
-			ShowTagsCategories = true;
-			LoadRibbonSettings();
-			#endregion
-
-			LoadCategoryRequestSettings();
-			LoadSalesDepotSyncSettings();
-
 			HiddenObjects = new List<string>();
 			HiddenObjects.Add("!Old");
 			HiddenObjects.Add("_gsdata_");
@@ -177,7 +163,7 @@ namespace FileManager.BusinessClasses
 			HiddenObjects.Add("SalesDepotReferences.json");
 		}
 
-		public void Load()
+		public void LoadLocalSettings()
 		{
 			Init();
 
@@ -235,6 +221,28 @@ namespace FileManager.BusinessClasses
 				#endregion
 			}
 			LoadClipartPath();
+		}
+
+		public void LoadResources()
+		{
+			_categoryRequestSettingsPath = Path.Combine(CloudResorcesPath, "category_request.xml");
+			_salesDepotSyncSettingsFilePath = Path.Combine(CloudResorcesPath, "synclock.xml");
+
+			LoadCategoryRequestSettings();
+			LoadSalesDepotSyncSettings();
+
+			#region Ribbon Settings
+			_ribbonSettingsFilePath = Path.Combine(CloudResorcesPath, "ribbontabs.xml");
+			EnableOvernightsCalendarTab = true;
+			EnableClipartTab = true;
+			EnableProgramManagerTab = true;
+			EnableIPadSettingsTab = true;
+			EnableIPadUsersTab = true;
+			EnableTagsTab = true;
+			EnableSecurityTab = true;
+			ShowTagsCategories = true;
+			LoadRibbonSettings();
+			#endregion
 		}
 
 		public void Save()

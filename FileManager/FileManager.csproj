@@ -92,6 +92,9 @@
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL" />
+    <Reference Include="SharpCompress">
+      <HintPath>..\Assemblies\SharpCompress.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Design" />
@@ -119,6 +122,7 @@
     <Compile Include="BusinessClasses\Lists\SuperFilterList.cs" />
     <Compile Include="BusinessClasses\Lists\WidgetList.cs" />
     <Compile Include="BusinessClasses\Managers\AppModeManager.cs" />
+    <Compile Include="BusinessClasses\Managers\CloudResorcesManager.cs" />
     <Compile Include="BusinessClasses\Managers\ServiceConnector.cs" />
     <Compile Include="BusinessClasses\Wallbin\Library.cs" />
     <Compile Include="BusinessClasses\Wallbin\LibraryFile.cs" />

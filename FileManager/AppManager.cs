@@ -31,8 +31,8 @@ namespace FileManager
 			var result = false;
 			
 			AppModeManager.Instance.Load();
-			SettingsManager.Instance.Load();
 			ServiceConnector.Instance.Init();
+			SettingsManager.Instance.LoadLocalSettings();
 			
 			if (string.IsNullOrEmpty(SettingsManager.Instance.BackupPath) || !Directory.Exists(SettingsManager.Instance.BackupPath))
 			{
@@ -62,8 +62,9 @@ namespace FileManager
 		public void RunSilent()
 		{
 			AppModeManager.Instance.Load();
-			SettingsManager.Instance.Load();
 			ServiceConnector.Instance.Init();
+			CloudResorcesManager.Instance.LoadResorces();
+			SettingsManager.Instance.LoadLocalSettings();
 			ListManager.Instance.Init();
 			if (String.IsNullOrEmpty(SettingsManager.Instance.BackupPath) || 
 				!Directory.Exists(SettingsManager.Instance.BackupPath)) return;

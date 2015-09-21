@@ -11,7 +11,7 @@ namespace FMPreviewUpdater
 		static void Main()
 		{
 			Console.WriteLine("Loading Data...");
-			SettingsManager.Instance.Load();
+			SettingsManager.Instance.LoadLocalSettings();
 			ListManager.Instance.Init();
 			if (String.IsNullOrEmpty(SettingsManager.Instance.BackupPath) ||
 				!Directory.Exists(SettingsManager.Instance.BackupPath)) return;

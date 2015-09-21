@@ -43,7 +43,7 @@ namespace FileManager.ToolClasses
 			catch { }
 
 
-			var ftpArchiveSettingspath = Path.Combine(SettingsManager.Instance.ApplicationRootPath, "ftp_upload.txt");
+			var ftpArchiveSettingspath = Path.Combine(SettingsManager.Instance.CloudResorcesPath, "ftp_upload.txt");
 			var ftpArchivePath = String.Empty;
 			if (File.Exists(ftpArchiveSettingspath))
 				ftpArchivePath = File.ReadAllText(ftpArchiveSettingspath).Trim();

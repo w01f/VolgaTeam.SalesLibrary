@@ -38,6 +38,8 @@ namespace FileManager
 		#region GUI Event Handlers
 		private void Form_Load(object sender, EventArgs e)
 		{
+			MainController.Instance.LoadCloudResorces();
+
 			ribbonTabItemCalendar.Visible = SettingsManager.Instance.EnableOvernightsCalendarTab;
 			ribbonTabItemClipart.Visible = SettingsManager.Instance.EnableClipartTab && (System.IO.Directory.Exists(SettingsManager.Instance.ClientLogosRootPath) || System.IO.Directory.Exists(SettingsManager.Instance.SalesGalleryRootPath) || System.IO.Directory.Exists(SettingsManager.Instance.WebArtRootPath));
 			ribbonTabItemProgramManager.Visible = SettingsManager.Instance.EnableProgramManagerTab;

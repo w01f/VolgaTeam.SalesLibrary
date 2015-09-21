@@ -22,7 +22,7 @@ namespace FileManager.BusinessClasses
 		{
 			var artworkPath = AppModeManager.Instance.AppMode == AppModeEnum.Local ?
 				String.Format(@"{0}\newlocaldirect.com\Sales Depot\!Artwork", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles)) :
-				String.Format(@"{0}\!Artwork", SettingsManager.Instance.ApplicationRootPath);
+				String.Format(@"{0}\!Artwork", SettingsManager.Instance.CloudResorcesPath);
 
 			WidgetFolder = String.Format(@"{0}\Widgets", artworkPath);
 			WidgetAdditionalFolder = String.Format(@"{0}\Widgets_2", artworkPath);
