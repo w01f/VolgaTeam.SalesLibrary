@@ -30,7 +30,10 @@
 							$groupConfig->loadXML($groupConfigContent);
 
 							$groupRecord = new ShortcutGroupRecord();
-							$groupId = uniqid();
+							$groupIdTags = $groupConfig->getElementsByTagName("StaticID");
+							$groupId = $groupIdTags->length > 0 ? trim($groupIdTags->item(0)->nodeValue) : null;
+							if (!isset($groupId))
+								$groupId = uniqid();
 							$groupRecord->id = $groupId;
 							$groupRecord->order = intval(trim($groupConfig->getElementsByTagName("Order")->item(0)->nodeValue));
 							$groupRecord->source_path = $groupPath;

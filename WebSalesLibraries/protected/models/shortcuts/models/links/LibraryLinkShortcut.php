@@ -46,7 +46,7 @@
 		{
 			$result = parent::getMenuItemData();
 			$result .= '<div class="library-link-id">' . $this->linkId . '</div>';
-			$result .= '<div class="link-header">' . $this->title . '</div>';
+			$result .= '<div class="link-header">' . ($this->headerTitle != '' ? $this->headerTitle : $this->title) . '</div>';
 			return $result;
 		}
 

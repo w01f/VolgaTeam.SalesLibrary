@@ -19,12 +19,12 @@
 				if (hasPageContent == true && samePage == true)
 				{
 					e.preventDefault();
-					that.openShortcut(data);
+					that.openShortcut(data, {}, e);
 				}
 			});
 		};
 
-		this.openShortcut = function (data, customParameters)
+		this.openShortcut = function (data, customParameters, context)
 		{
 			var shortcutId = data.find('.link-id').text();
 			var url = data.find('.url').text();
@@ -37,6 +37,11 @@
 					break;
 				case 'libraryfile':
 					$.SalesPortal.LinkManager.requestViewDialog(data.find('.library-link-id').html(), false);
+					break;
+				case 'gbookmark':
+					var menu = $('#main-menu');
+					menu.find('div[data-groupid="group-' + data.find('.bookmark-id').text() + '"]').trigger('click');
+					context.stopPropagation();
 					break;
 				default :
 					$.ajax({

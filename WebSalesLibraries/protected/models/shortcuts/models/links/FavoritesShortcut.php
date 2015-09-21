@@ -42,4 +42,14 @@
 		{
 			return 'Favorites App';
 		}
+
+		/**
+		 * @return array
+		 */
+		public function getPageData()
+		{
+			$data = parent::getPageData();
+			$data['serviceData'] = $this->getMenuItemData();
+			return $data;
+		}
 	}

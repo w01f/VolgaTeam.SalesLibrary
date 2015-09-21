@@ -176,6 +176,7 @@
 
 			table.on('click', 'a.link-url', function (e)
 			{
+				$('body').find('.mtContent').remove();
 				e.stopPropagation();
 			});
 		};

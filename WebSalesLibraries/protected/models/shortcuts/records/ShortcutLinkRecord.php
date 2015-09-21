@@ -69,6 +69,8 @@
 					return new QuickListShortcut($this, $isPhone);
 				case 'search':
 					return new SearchLinkShortcut($this, $isPhone);
+				case 'gbookmark':
+					return new GroupBookmarkShortcut($this, $isPhone);
 				case 'gridbundle':
 				case 'carouselbundle':
 					if (!$isPhone)

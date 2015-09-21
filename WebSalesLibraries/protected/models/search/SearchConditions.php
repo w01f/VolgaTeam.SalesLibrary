@@ -43,11 +43,52 @@
 			$queryResult = $xpath->query('Text', $contextNode);
 			$instance->text = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
 
+			$today = date(Yii::app()->params['outputDateFormat']);
 			$queryResult = $xpath->query('StartDate', $contextNode);
-			$instance->startDate = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
+			$startDateText = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
+			if (isset($startDateText))
+			{
+				switch ($startDateText)
+				{
+					case "today":
+						$instance->startDate = date(Yii::app()->params['outputDateFormat'], strtotime($today . ' + 1 days'));
+						break;
+					case "yesterday":
+						$instance->startDate = date(Yii::app()->params['outputDateFormat'], strtotime($today . ' - 1 days'));
+						break;
+					default:
+						if (strstr($startDateText, ' days ago'))
+						{
+							$startDateText = str_replace(' days ago', '', $startDateText);
+							$instance->startDate = date(Yii::app()->params['outputDateFormat'], strtotime($today . ' - ' . $startDateText . ' days'));
+						}
+						else
+							$instance->startDate = $startDateText;
+				}
+			}
 
 			$queryResult = $xpath->query('EndDate', $contextNode);
-			$instance->endDate = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
+			$endDateText = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
+			if (isset($endDateText))
+			{
+				switch ($endDateText)
+				{
+					case "today":
+						$instance->endDate = date(Yii::app()->params['outputDateFormat'], strtotime($today . ' + 1 days'));
+						break;
+					case "yesterday":
+						$instance->endDate = date(Yii::app()->params['outputDateFormat'], strtotime($today . ' - 1 days'));
+						break;
+					default:
+						if (strstr($endDateText, ' days ago'))
+						{
+							$endDateText = str_replace(' days ago', '', $endDateText);
+							$instance->endDate = date(Yii::app()->params['outputDateFormat'], strtotime($today . ' - ' . $endDateText . ' days'));
+						}
+						else
+							$instance->endDate = $endDateText;
+				}
+			}
 
 			$queryResult = $xpath->query('FileType', $contextNode);
 			foreach ($queryResult as $node)

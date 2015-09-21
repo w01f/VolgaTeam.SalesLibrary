@@ -89,6 +89,7 @@
 					playAudio();
 					break;
 				case 'open':
+					$.fancybox.close();
 					$.SalesPortal.LinkManager.openFile(viewerData.url);
 					break;
 				case 'quicksite':

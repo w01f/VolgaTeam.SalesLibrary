@@ -7,6 +7,7 @@
 		var that = this;
 		this.requestViewDialog = function (linkId, isQuickSite)
 		{
+			$('body').find('.mtContent').remove();
 			$.ajax({
 				type: "POST",
 				url: window.BaseUrl + "preview/getViewDialog",
