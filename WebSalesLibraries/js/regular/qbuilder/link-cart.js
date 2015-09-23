@@ -9,10 +9,10 @@
 
 		this.init = function ()
 		{
-			if ($.cookie("showLinkCart") == "true")
-				that.show();
-			else
-				that.hide();
+//			if ($.cookie("showLinkCart") == "true")
+//				that.show();
+//			else
+//				that.hide();
 
 			$('#link-cart-refresh').off('click').on('click', function ()
 			{
@@ -184,7 +184,7 @@
 
 		this.updateContentSize = function ()
 		{
-			var height = $('#content').height() - $('#link-cart-buttons').outerHeight() - 5;
+			var height = $('#content').height() - $('#service-panel').find('.headers').outerHeight(true) - $('#link-cart-buttons').outerHeight(true) - 5;
 			$('#link-cart-grid').css({
 				'height': height + 'px'
 			});

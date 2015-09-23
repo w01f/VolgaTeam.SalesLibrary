@@ -37,7 +37,14 @@
 		{
 			return array(
 				'subLinks' => array(self::HAS_MANY, 'ShortcutLinkRecord', 'id_parent', 'order' => 'subLinks.`order`',),
+				'group' => array(self::BELONGS_TO, 'ShortcutGroupRecord', 'id_group'),
 			);
+		}
+
+		public function getUniqueId()
+		{
+			$groupRecord = ShortcutGroupRecord::model()->findByPk($this->id_group);
+			return sprintf('group%s-link%s', $groupRecord->order, $this->order);
 		}
 
 		/**
@@ -153,10 +160,28 @@
 			}
 		}
 
-		public function getUniqueId()
+		/**
+		 * @param $uniqueId string
+		 * @param $isPhone boolean
+		 * @return BaseShortcut
+		 */
+		public static function getModelByUniqueId($uniqueId, $isPhone)
 		{
-			$groupRecord = ShortcutGroupRecord::model()->findByPk($this->id_group);
-			return sprintf('group%s-link%s', $groupRecord->order, $this->order);
+			$idArray = explode('-', $uniqueId);
+			$groupOrder = str_replace('group', '', $idArray[0]);
+			$linkOrder = str_replace('link', '', $idArray[1]);
+
+			/** @var $record ShortcutLinkRecord */
+			$record = self::model()
+				->with(array(
+					'group' => array(
+						'select' => false,
+						'condition' => "group.order = " . $groupOrder ,
+					)))
+				->find('t.order='.$linkOrder);
+			if (isset($record))
+				return $record->getModel($isPhone);
+			return null;
 		}
 
 		public static function clearData()

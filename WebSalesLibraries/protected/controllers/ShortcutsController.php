@@ -63,6 +63,18 @@
 			/** @var  $shortcut PageContentShortcut */
 			$shortcut = $shortcutRecord->getModel($this->isPhone, $parameters);
 
+			switch ($shortcut->type)
+			{
+				case 'gridbundle':
+				case 'carouselbundle':
+				case 'library':
+					$defaultShortcutTagName = 'default-shortcut';
+					$cookie = new CHttpCookie($defaultShortcutTagName, sprintf('%s', $shortcutRecord->getUniqueId()));
+					$cookie->expire = time() + (60 * 60 * 24 * 7);
+					Yii::app()->request->cookies[$defaultShortcutTagName] = $cookie;
+					break;
+			}
+
 			$viewName = '';
 			$useMobileWrapper = true;
 			switch ($shortcut->type)

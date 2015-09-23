@@ -3,6 +3,7 @@
 	vertical-align: top;
 	margin: 0;
 	padding: 5px 5px 0;
+	display: table-cell;
 }
 
 #page-content > div
@@ -10,6 +11,7 @@
 	overflow-x: hidden;
 	overflow-y: auto;
 	padding-top: 5px;
+	height: 100%;
 }
 
 #page-content .page-content-grid

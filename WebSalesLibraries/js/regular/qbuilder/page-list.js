@@ -10,11 +10,6 @@
 
 		this.init = function ()
 		{
-			if ($.cookie("showQPageList") == "true")
-				that.show();
-			else
-				that.hide();
-
 			var pageList = $('#page-list-container');
 
 			if (pageList.find('tr.selected').length == 0)
@@ -62,22 +57,6 @@
 			{
 				deletePages();
 			});
-		};
-
-		this.show = function ()
-		{
-			$.cookie("showQPageList", true, {
-				expires: (60 * 60 * 24 * 7)
-			});
-			$('#page-list').show();
-		};
-
-		this.hide = function ()
-		{
-			$.cookie("showQPageList", false, {
-				expires: (60 * 60 * 24 * 7)
-			});
-			$('#page-list').hide();
 		};
 
 		this.addLitePage = function (libraryLinkId, title, fileName, fileType)
@@ -504,7 +483,7 @@
 
 		this.updateContentSize = function ()
 		{
-			var height = $('#content').height() - $('#page-list-buttons').outerHeight() - 10;
+			var height = $('#content').height() - $('#service-panel').find('.headers').outerHeight(true) - $('#page-list-buttons').outerHeight(true) - 5;
 			$('#page-list-container').css({
 				'height': height + 'px'
 			});

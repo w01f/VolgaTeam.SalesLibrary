@@ -21,31 +21,33 @@
 			}
 			else
 			{
-				$defaultShortcut = null;
-				foreach ($menuGroups as $menuGroup)
-				{
-					if ($menuGroup->enabled == true)
-						foreach ($menuGroup->menuItems as $menuItem)
-						{
-							/** @var  $shortcut PageContentShortcut */
-							$shortcut = $menuItem->shortcut;
-							if ($shortcut->enabled == true)
-								switch ($shortcut->type)
-								{
-									case 'gridbundle':
-									case 'carouselbundle':
-									case 'library':
-										$defaultShortcut = $shortcut;
-										break;
-									default:
-										continue;
-								}
-							if (isset($defaultShortcut))
-								break;
-						}
-					if (isset($defaultShortcut))
-						break;
-				}
+				$defaultShortcutId = isset(Yii::app()->request->cookies['default-shortcut']) ? Yii::app()->request->cookies['default-shortcut']->value : null;
+				$defaultShortcut = isset($defaultShortcutId) ? ShortcutLinkRecord::getModelByUniqueId($defaultShortcutId, $this->isPhone) : null;
+				if (!isset($defaultShortcut))
+					foreach ($menuGroups as $menuGroup)
+					{
+						if ($menuGroup->enabled == true)
+							foreach ($menuGroup->menuItems as $menuItem)
+							{
+								/** @var  $shortcut PageContentShortcut */
+								$shortcut = $menuItem->shortcut;
+								if ($shortcut->enabled == true)
+									switch ($shortcut->type)
+									{
+										case 'gridbundle':
+										case 'carouselbundle':
+										case 'library':
+											$defaultShortcut = $shortcut;
+											break;
+										default:
+											continue;
+									}
+								if (isset($defaultShortcut))
+									break;
+							}
+						if (isset($defaultShortcut))
+							break;
+					}
 				$this->render('index', array('menuGroups' => $menuGroups, 'defaultShortcut' => $defaultShortcut));
 			}
 		}

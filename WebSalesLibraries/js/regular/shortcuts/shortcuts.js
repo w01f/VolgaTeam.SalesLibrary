@@ -19,12 +19,12 @@
 				if (hasPageContent == true && samePage == true)
 				{
 					e.preventDefault();
-					that.openShortcut(data, {}, e);
+					return that.openShortcut(data, {pushHistory: true});
 				}
 			});
 		};
 
-		this.openShortcut = function (data, customParameters, context)
+		this.openShortcut = function (data, customParameters)
 		{
 			var shortcutId = data.find('.link-id').text();
 			var url = data.find('.url').text();
@@ -41,8 +41,7 @@
 				case 'gbookmark':
 					var menu = $('#main-menu');
 					menu.find('div[data-groupid="group-' + data.find('.bookmark-id').text() + '"]').trigger('click');
-					context.stopPropagation();
-					break;
+					return false;
 				default :
 					$.ajax({
 						type: "POST",
@@ -132,6 +131,10 @@
 					});
 					break;
 			}
+
+			$.SalesPortal.ShortcutsHistory.pushState(data, customParameters);
+
+			return true;
 		};
 
 		this.trackActivity = function (dataObject)

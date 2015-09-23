@@ -246,60 +246,46 @@
 					$customActions[$action->tag] = $action;
 					break;
 				case 'qbuilder':
-					$action = new ShortcutAction('qbuilder-page-list-show');
+					$action = new ShortcutAction('qbuilder-panel-show');
 					$action->order = 10;
-					$action->group = 'qbuilder-page-list';
-					$action->title = 'Show Site List';
+					$action->group = 'qbuilder-panel';
+					$action->title = 'Show Panel';
 					$action->iconClass = 'icon-list4';
 					$customActions[$action->tag] = $action;
 
-					$action = new ShortcutAction('qbuilder-page-list-hide');
+					$action = new ShortcutAction('qbuilder-panel-hide');
 					$action->order = 10;
-					$action->group = 'qbuilder-page-list';
-					$action->title = 'Hide Site List';
+					$action->group = 'qbuilder-panel';
+					$action->title = 'Hide Panel';
 					$action->iconClass = 'icon-list4';
-					$customActions[$action->tag] = $action;
-
-					$action = new ShortcutAction('qbuilder-link-cart-show');
-					$action->order = 20;
-					$action->group = 'qbuilder-link-cart';
-					$action->title = 'Show Link Cart';
-					$action->iconClass = 'icon-cart';
-					$customActions[$action->tag] = $action;
-
-					$action = new ShortcutAction('qbuilder-link-cart-hide');
-					$action->order = 20;
-					$action->group = 'qbuilder-link-cart';
-					$action->title = 'Hide Link Cart';
-					$action->iconClass = 'icon-cart';
 					$customActions[$action->tag] = $action;
 
 					$action = new ShortcutAction('qbuilder-qsite-add');
-					$action->order = 30;
+					$action->order = 20;
 					$action->title = 'Add Site';
 					$action->iconClass = 'icon-add';
 					$customActions[$action->tag] = $action;
 
 					$action = new ShortcutAction('qbuilder-qsite-delete');
-					$action->order = 40;
+					$action->order = 30;
 					$action->title = 'Delete Site';
 					$action->iconClass = 'icon-delete';
 					$customActions[$action->tag] = $action;
 
 					$action = new ShortcutAction('qbuilder-qsite-save');
-					$action->order = 50;
+					$action->order = 40;
 					$action->title = 'Save Site';
 					$action->iconClass = 'icon-save';
 					$customActions[$action->tag] = $action;
 
 					$action = new ShortcutAction('qbuilder-qsite-preview');
-					$action->order = 60;
+					$action->order = 50;
 					$action->title = 'Preview Site';
 					$action->iconClass = 'icon-magnifying-glass';
 					$customActions[$action->tag] = $action;
 
 					$action = new ShortcutAction('qbuilder-qsite-email');
-					$action->order = 70;
+					$action->order = 60;
 					$action->title = 'Email';
 					$action->iconClass = 'icon-email';
 					$customActions[$action->tag] = $action;

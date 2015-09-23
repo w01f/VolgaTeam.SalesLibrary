@@ -50,13 +50,6 @@
 
 		this.updateContentSize = function ()
 		{
-			var content = $('#content');
-			var pageContent = $('#page-content').children('div');
-			var height = content.height() - 5;
-			pageContent.css({
-				'height': height + 'px'
-			});
-
 			updatePageLinks();
 			updatePageLogos();
 			updateEditors();
@@ -182,9 +175,6 @@
 				$.SalesPortal.QBuilder.PageList.savePage(function ()
 				{
 				});
-			});
-			$("#page-content-tabs").tabs({
-				activate: that.updateContentSize
 			});
 
 			var tabContainer = $('#page-content-tabs-headers');

@@ -6,6 +6,8 @@
 	{
 		var qBuilderData = undefined;
 
+		var servicePanel = undefined;
+
 		this.init = function (data)
 		{
 			qBuilderData = data;
@@ -19,11 +21,27 @@
 				qBuilderData.actions
 			);
 
-			$.SalesPortal.QBuilder.PageList.init();
-			$.SalesPortal.QBuilder.PageList.show();
+			servicePanel = $('#service-panel');
 
+			if ($.cookie("showServicePanel") == "false")
+				servicePanel.hide();
+			else
+				servicePanel.show();
+
+			var headerContainer = servicePanel.find('.headers');
+			headerContainer.find('.btn').off('click').on('click', function ()
+			{
+				headerContainer.find('.btn').removeClass('selected');
+				$(this).addClass('selected');
+				var relatedContentId = $(this).find('.service-data .tab-id').text();
+				servicePanel.find('.service-panel-page').hide();
+				$(relatedContentId).show();
+				$.SalesPortal.QBuilder.PageList.updateContentSize();
+				$.SalesPortal.QBuilder.LinkCart.updateContentSize();
+			});
+
+			$.SalesPortal.QBuilder.PageList.init();
 			$.SalesPortal.QBuilder.LinkCart.init();
-			$.SalesPortal.QBuilder.LinkCart.show();
 
 			initActionButtons();
 
@@ -35,41 +53,34 @@
 		{
 			var shortcutActionsContainer = $('#shortcut-action-container');
 
-			if ($.cookie("showQPageList") == "true")
-				shortcutActionsContainer.find('.qbuilder-page-list-show').hide();
+			if ($.cookie("showServicePanel") == "true")
+			{
+				shortcutActionsContainer.find('.qbuilder-panel-show').hide();
+			}
 			else
-				shortcutActionsContainer.find('.qbuilder-page-list-hide').show();
-			shortcutActionsContainer.find('.qbuilder-page-list-show').off('click').on('click', function ()
+				shortcutActionsContainer.find('.qbuilder-panel-hide').hide();
+			shortcutActionsContainer.find('.qbuilder-panel-show').off('click').on('click', function ()
 			{
-				$.SalesPortal.QBuilder.PageList.show();
-				shortcutActionsContainer.find('.qbuilder-page-list-hide').show();
+				servicePanel.show();
+				shortcutActionsContainer.find('.qbuilder-panel-hide').show();
 				$(this).hide();
-				updateContentSize();
-			});
-			shortcutActionsContainer.find('.qbuilder-page-list-hide').off('click').on('click', function ()
-			{
-				$.SalesPortal.QBuilder.PageList.hide();
-				shortcutActionsContainer.find('.qbuilder-page-list-show').show();
-				$(this).hide();
-				updateContentSize();
-			});
 
-			if ($.cookie("showLinkCart") == "true")
-				shortcutActionsContainer.find('.qbuilder-link-cart-show').hide();
-			else
-				shortcutActionsContainer.find('.qbuilder-link-cart-hide').show();
-			shortcutActionsContainer.find('.qbuilder-link-cart-show').off('click').on('click', function ()
-			{
-				$.SalesPortal.QBuilder.LinkCart.show();
-				shortcutActionsContainer.find('.qbuilder-link-cart-hide').show();
-				$(this).hide();
+				$.cookie("showServicePanel", true, {
+					expires: (60 * 60 * 24 * 7)
+				});
+
 				updateContentSize();
 			});
-			shortcutActionsContainer.find('.qbuilder-link-cart-hide').off('click').on('click', function ()
+			shortcutActionsContainer.find('.qbuilder-panel-hide').off('click').on('click', function ()
 			{
-				$.SalesPortal.QBuilder.LinkCart.hide();
-				shortcutActionsContainer.find('.qbuilder-link-cart-show').show();
+				servicePanel.hide();
+				shortcutActionsContainer.find('.qbuilder-panel-show').show();
 				$(this).hide();
+
+				$.cookie("showServicePanel", false, {
+					expires: (60 * 60 * 24 * 7)
+				});
+
 				updateContentSize();
 			});
 

@@ -29,7 +29,7 @@
 							var url = shortcutData.find('.url').text();
 
 							if (hasPageContent && samePage)
-								$.SalesPortal.ShortcutsManager.openShortcut(shortcutData);
+								$.SalesPortal.ShortcutsManager.openShortcut(shortcutData, {pushHistory: true});
 							else
 								window.open(url.replace(/&amp;/g, '%26'), "_blank");
 						};
