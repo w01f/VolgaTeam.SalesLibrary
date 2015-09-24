@@ -118,8 +118,7 @@
 
 				$textConditions = self::prepareTextCondition($searchConditions->text, $searchConditions->textExactMatch);
 				if (!(isset($baseLinks) ||
-					(count($searchConditions->fileTypes) > 0 &&
-						(count($textConditions) > 0 || count($searchConditions->categories) > 0 || count($searchConditions->superFilters) > 0 || count($searchConditions->superFilters) > 0 || (isset($searchConditions->startDate) && isset($searchConditions->endDate)))))
+					(count($textConditions) > 0 || count($searchConditions->categories) > 0 || count($searchConditions->superFilters) > 0 || count($searchConditions->superFilters) > 0 || (isset($searchConditions->startDate) && isset($searchConditions->endDate))))
 				)
 					return array();
 
@@ -324,7 +323,7 @@
 					") and (" . $onlyWithCategoriesCondition .
 					") and (" . $folderCondition .
 					") and (" . $linkCondition .
-					") and link.is_dead=0 and link.is_preview_not_ready=0";
+					") and link.is_dead=0 and link.is_preview_not_ready=0 and link.type<>5";
 				$queryRecords = Yii::app()->db->createCommand()
 					->select($selectText)
 					->from('tbl_link link')

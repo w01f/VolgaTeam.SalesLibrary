@@ -43,6 +43,9 @@
 			$queryResult = $xpath->query('Text', $contextNode);
 			$instance->text = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
 
+			$queryResult = $xpath->query('TextExactMatch', $contextNode);
+			$instance->textExactMatch = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : false;
+
 			$today = date(Yii::app()->params['outputDateFormat']);
 			$queryResult = $xpath->query('StartDate', $contextNode);
 			$startDateText = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;

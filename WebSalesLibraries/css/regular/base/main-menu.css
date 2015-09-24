@@ -109,6 +109,15 @@ body
 	height: 190px;
 }
 
+#main-menu .tile-bt-extralarge.only-icon a
+{
+	display: table-cell;
+	vertical-align: middle;
+	width: 190px;
+	height: 190px;
+	padding: 0;
+}
+
 #main-menu .tile-bt-extralarge i
 {
 	font-size: 80px;

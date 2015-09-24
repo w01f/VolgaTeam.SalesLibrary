@@ -95,6 +95,15 @@
 					selectedTypeTags: function ()
 					{
 						var tags = [];
+						if(this.showPowerPoint &&
+							this.showWord &&
+							this.showExcel &&
+							this.showPdf &&
+							this.showVideo &&
+							this.showUrls &&
+							this.showImages
+							)
+							return tags;
 						if (this.showPowerPoint)
 							tags.push("ppt");
 						if (this.showWord)
