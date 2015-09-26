@@ -69,9 +69,7 @@
 				case 'carouselbundle':
 				case 'library':
 					$defaultShortcutTagName = 'default-shortcut';
-					$cookie = new CHttpCookie($defaultShortcutTagName, sprintf('%s', $shortcutRecord->getUniqueId()));
-					$cookie->expire = time() + (60 * 60 * 24 * 7);
-					Yii::app()->request->cookies[$defaultShortcutTagName] = $cookie;
+					Yii::app()->session[$defaultShortcutTagName] = sprintf('%s', $shortcutRecord->getUniqueId());
 					break;
 			}
 

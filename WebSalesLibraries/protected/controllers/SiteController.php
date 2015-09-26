@@ -21,7 +21,7 @@
 			}
 			else
 			{
-				$defaultShortcutId = isset(Yii::app()->request->cookies['default-shortcut']) ? Yii::app()->request->cookies['default-shortcut']->value : null;
+				$defaultShortcutId = isset(Yii::app()->session['default-shortcut']) ? Yii::app()->session['default-shortcut'] : null;
 				$defaultShortcut = isset($defaultShortcutId) ? ShortcutLinkRecord::getModelByUniqueId($defaultShortcutId, $this->isPhone) : null;
 				if (!isset($defaultShortcut))
 					foreach ($menuGroups as $menuGroup)
