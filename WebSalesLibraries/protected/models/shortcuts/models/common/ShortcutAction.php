@@ -24,7 +24,7 @@
 			$this->tag = $tag;
 			$this->group = '';
 			$this->title = 'No Title';
-			$this->backColor = '00B159';
+			$this->backColor = '008000';
 			$this->textColor = 'FFF';
 			$this->iconColor = 'FFF';
 		}
