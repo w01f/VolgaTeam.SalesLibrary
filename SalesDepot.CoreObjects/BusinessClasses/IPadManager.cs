@@ -8,7 +8,6 @@ using System.Text;
 using System.Windows.Forms;
 using System.Xml;
 using Newtonsoft.Json;
-using SalesDepot.Services;
 using SalesDepot.Services.ContentManagmentService;
 using Banner = SalesDepot.Services.ContentManagmentService.Banner;
 using Column = SalesDepot.Services.ContentManagmentService.Column;
@@ -18,8 +17,6 @@ using LibraryLink = SalesDepot.Services.ContentManagmentService.LibraryLink;
 using LineBreak = SalesDepot.Services.ContentManagmentService.LineBreak;
 using LinkCategory = SalesDepot.Services.ContentManagmentService.LinkCategory;
 using LibraryConfig = SalesDepot.Services.ContentManagmentService.LibraryConfig;
-using UserModel = SalesDepot.Services.IPadAdminService.UserModel;
-using GroupModel = SalesDepot.Services.IPadAdminService.GroupModel;
 
 namespace SalesDepot.CoreObjects.BusinessClasses
 {

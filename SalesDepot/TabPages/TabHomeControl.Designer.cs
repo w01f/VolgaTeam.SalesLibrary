@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TabHomeControl));
 			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
 			DevExpress.Utils.SuperToolTip superToolTip10 = new DevExpress.Utils.SuperToolTip();
@@ -66,7 +67,7 @@
 			this.buttonXEmptyEmailBin = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXCreateEmail = new DevComponents.DotNetBar.ButtonX();
 			this.pnRemoteLibraryContainer = new System.Windows.Forms.Panel();
-			this.barManager = new DevExpress.XtraBars.BarManager();
+			this.barManager = new DevExpress.XtraBars.BarManager(this.components);
 			this.barMinibar = new DevExpress.XtraBars.Bar();
 			this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
 			this.barCheckItemViewClassic = new DevExpress.XtraBars.BarCheckItem();
@@ -78,12 +79,12 @@
 			this.barButtonItemRowSpaceUp = new DevExpress.XtraBars.BarButtonItem();
 			this.barButtonItemRowSpaceDown = new DevExpress.XtraBars.BarButtonItem();
 			this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
-			this.barAndDockingController = new DevExpress.XtraBars.BarAndDockingController();
+			this.barAndDockingController = new DevExpress.XtraBars.BarAndDockingController(this.components);
 			this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
 			this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
 			this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
 			this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
-			this.toolTipController = new DevExpress.Utils.ToolTipController();
+			this.toolTipController = new DevExpress.Utils.ToolTipController(this.components);
 			this.pnMain.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainerControl)).BeginInit();
 			this.splitContainerControl.SuspendLayout();
@@ -134,7 +135,6 @@
 			this.splitContainerControl.Panel2.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Default;
 			this.splitContainerControl.Panel2.Controls.Add(this.pnRemoteLibraryContainer);
 			this.splitContainerControl.Panel2.Text = "Panel2";
-			this.splitContainerControl.PanelVisibility = DevExpress.XtraEditors.SplitPanelVisibility.Panel2;
 			this.splitContainerControl.Size = new System.Drawing.Size(758, 450);
 			this.splitContainerControl.SplitterPosition = 300;
 			this.splitContainerControl.TabIndex = 5;
@@ -150,7 +150,7 @@
 			this.gridControlFiles.Name = "gridControlFiles";
 			this.gridControlFiles.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemButtonEdit});
-			this.gridControlFiles.Size = new System.Drawing.Size(0, 0);
+			this.gridControlFiles.Size = new System.Drawing.Size(296, 70);
 			this.gridControlFiles.TabIndex = 3;
 			this.gridControlFiles.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewFiles});
@@ -210,7 +210,7 @@
 			this.pnTop.Location = new System.Drawing.Point(0, 0);
 			this.pnTop.Name = "pnTop";
 			this.pnTop.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
-			this.pnTop.Size = new System.Drawing.Size(0, 56);
+			this.pnTop.Size = new System.Drawing.Size(296, 56);
 			this.pnTop.TabIndex = 2;
 			// 
 			// laTitle
@@ -252,10 +252,10 @@
 			this.pnBottom.Controls.Add(this.buttonXCreateEmail);
 			this.pnBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
 			this.pnBottom.ForeColor = System.Drawing.Color.Black;
-			this.pnBottom.Location = new System.Drawing.Point(0, -319);
+			this.pnBottom.Location = new System.Drawing.Point(0, 126);
 			this.pnBottom.Name = "pnBottom";
 			this.pnBottom.Padding = new System.Windows.Forms.Padding(10, 0, 10, 10);
-			this.pnBottom.Size = new System.Drawing.Size(0, 319);
+			this.pnBottom.Size = new System.Drawing.Size(296, 320);
 			this.pnBottom.TabIndex = 1;
 			// 
 			// laEmailBinDescription
@@ -266,7 +266,7 @@
 			this.laEmailBinDescription.ForeColor = System.Drawing.Color.DimGray;
 			this.laEmailBinDescription.Location = new System.Drawing.Point(12, 3);
 			this.laEmailBinDescription.Name = "laEmailBinDescription";
-			this.laEmailBinDescription.Size = new System.Drawing.Size(273, 98);
+			this.laEmailBinDescription.Size = new System.Drawing.Size(273, 99);
 			this.laEmailBinDescription.TabIndex = 6;
 			this.laEmailBinDescription.Text = "You can Email some files to clients  with Outlook.\r\n\r\nRight Click on the file  if" +
     " you want to ATTACH IT to an  email.";
@@ -348,7 +348,7 @@
 			this.pnRemoteLibraryContainer.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.pnRemoteLibraryContainer.Location = new System.Drawing.Point(0, 0);
 			this.pnRemoteLibraryContainer.Name = "pnRemoteLibraryContainer";
-			this.pnRemoteLibraryContainer.Size = new System.Drawing.Size(754, 446);
+			this.pnRemoteLibraryContainer.Size = new System.Drawing.Size(449, 446);
 			this.pnRemoteLibraryContainer.TabIndex = 3;
 			// 
 			// barManager

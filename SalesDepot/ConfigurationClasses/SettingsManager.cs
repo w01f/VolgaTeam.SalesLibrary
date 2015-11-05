@@ -74,8 +74,6 @@ namespace SalesDepot.ConfigurationClasses
 			_defaultSaveFilePath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 
 			LocalLibraryCacheFolder = string.Format(@"{0}\newlocaldirect.com\Sales Depot\Remote Libraries\Local Cache", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
-			DefaultWizardFileName = string.Format(@"{0}\newlocaldirect.com\New Biz Wizard\settings\DefaultWizard.ini", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
-			ContentsSlidePath = string.Format(@"{0}\newlocaldirect.com\01. file sync\Master Wizards\", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
 			TempPath = _defaultOpenFilePath;
 			IconPath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\sdicon.ico", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
 			LibraryLogoFolder = string.Empty;
@@ -88,7 +86,6 @@ namespace SalesDepot.ConfigurationClasses
 			Gallery2FilePath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\Gallery2.xml", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
 			TabPageConfigPath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\SDTabNames.xml", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
 
-			DefaultWizard = string.Empty;
 			SalesDepotName = string.Empty;
 			KeyWordFilters = new KeyWordFileFilters();
 
@@ -133,11 +130,8 @@ namespace SalesDepot.ConfigurationClasses
 		public bool IsConfigured { get; set; }
 		public bool UseRemoteConnection { get; set; }
 
-		public string DefaultWizardFileName { get; set; }
 		public string LocalLibraryCacheFolder { get; set; }
-		public string ContentsSlidePath { get; set; }
 		public string TempPath { get; set; }
-		public string DefaultWizard { get; set; }
 		public string SalesDepotName { get; set; }
 		public string IconPath { get; set; }
 		public string LibraryRootFolder { get; set; }
@@ -657,15 +651,6 @@ namespace SalesDepot.ConfigurationClasses
 			}
 
 			IsConfigured = true;
-		}
-
-		public void GetDefaultWizard()
-		{
-			var defaultWizardFile = new FileInfo(DefaultWizardFileName);
-			if (defaultWizardFile.Exists)
-				using (var sr = new StreamReader(defaultWizardFile.FullName))
-					if ((DefaultWizard = sr.ReadLine()) == null)
-						DefaultWizard = string.Empty;
 		}
 
 		public bool CheckLibraries()

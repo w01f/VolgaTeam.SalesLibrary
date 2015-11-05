@@ -54,10 +54,8 @@ namespace FileManager.BusinessClasses
 			int tempInt;
 			if (Int32.TryParse(ServiceConnector.Instance.GetMetaData(MetaDataConst.CategoriesDataTag, MetaDataConst.MaxTagsPropertyName, out message), out tempInt))
 				MaxTags = tempInt;
-
-			bool tempBool;
-			if (Boolean.TryParse(ServiceConnector.Instance.GetMetaData(MetaDataConst.CategoriesDataTag, MetaDataConst.CountTagsPropertyName, out message), out tempBool))
-				TagCount = tempBool;
+			if (Int32.TryParse(ServiceConnector.Instance.GetMetaData(MetaDataConst.CategoriesDataTag, MetaDataConst.CountTagsPropertyName, out message), out tempInt))
+				TagCount = tempInt > 0;
 
 			localMetaData.Content = JsonConvert.SerializeObject(this);
 			localMetaData.Save();

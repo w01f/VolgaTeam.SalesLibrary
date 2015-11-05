@@ -7,7 +7,7 @@
 		public const string SuperFiltersDataTag = "link-super-filters";
 
 		public const string LastUpdatePropertyName = "last-update";
-		public const string MaxTagsPropertyName = "link-super-filters";
-		public const string CountTagsPropertyName = "link-super-filters";
+		public const string MaxTagsPropertyName = "max-tags";
+		public const string CountTagsPropertyName = "tag-count";
 	}
 }

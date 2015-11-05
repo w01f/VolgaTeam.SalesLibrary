@@ -142,6 +142,5 @@ namespace FileManager.BusinessClasses
 			return _siteClient.GetSuperFilters(out message).ToList();
 		}
 		#endregion
-
 	}
 }

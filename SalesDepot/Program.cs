@@ -23,7 +23,6 @@ namespace SalesDepot
 				ConfigurationClasses.SettingsManager.Instance.UseRemoteConnection = args[0].ToLower().Equals("-remote");
 			else
 				ConfigurationClasses.SettingsManager.Instance.UseRemoteConnection = false;
-			ConfigurationClasses.SettingsManager.Instance.GetDefaultWizard();
 			ConfigurationClasses.SettingsManager.Instance.LoadSettings();
 			if (!ConfigurationClasses.SettingsManager.Instance.CheckLibraries())
 			{

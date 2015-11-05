@@ -5,7 +5,6 @@ using System.IO;
 using System.Threading;
 using System.Windows.Forms;
 using DevComponents.DotNetBar;
-using DevExpress.XtraRichEdit.Model;
 using SalesDepot.BusinessClasses;
 using SalesDepot.CommonGUI.Floater;
 using SalesDepot.CommonGUI.Forms;
@@ -29,9 +28,6 @@ namespace SalesDepot
 		private readonly TabPageManager _tabPageManager = new TabPageManager(SettingsManager.Instance.TabPageConfigPath);
 
 		private bool _alowToSave;
-
-		private int _floaterPositionX = int.MinValue;
-		private int _floaterPositionY = int.MinValue;
 
 		public FormMain()
 		{

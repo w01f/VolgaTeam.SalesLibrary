@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
 using System.Xml;
 using ProgramManager.CoreObjects;
@@ -42,7 +41,6 @@ namespace SalesDepot.ConfigurationClasses
 		}
 
 		public string ListsFolder { get; set; }
-		public string AccessRightsFolderFolder { get; set; }
 
 		public SearchTags SearchTags { get; set; }
 
