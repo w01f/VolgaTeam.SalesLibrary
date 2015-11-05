@@ -6,6 +6,8 @@
 	{
 		var that = this;
 
+		var updatedAllContentNecessary = false;
+
 		this.assignShortcutHandlers = function (shortcutsContainer)
 		{
 			shortcutsContainer.find('.shortcuts-link').off('click.shortcut').on('click.shortcut', function (e)
@@ -21,6 +23,7 @@
 					e.preventDefault();
 					return that.openShortcut(data, {pushHistory: true});
 				}
+				return true;
 			});
 		};
 
@@ -29,6 +32,8 @@
 			var shortcutId = data.find('.link-id').text();
 			var url = data.find('.url').text();
 			var shortcutType = data.find('.link-type').text();
+
+			updatedAllContentNecessary = false;
 
 			switch (shortcutType)
 			{
@@ -70,6 +75,7 @@
 										},
 										result.actions);
 									new $.SalesPortal.ShortcutsGrid().init(result.options);
+									updatedAllContentNecessary = true;
 									break;
 								case 'carouselbundle':
 									$.SalesPortal.Content.fillContent(result.content,
@@ -79,6 +85,7 @@
 										},
 										result.actions);
 									new $.SalesPortal.ShortcutsCarousel().init(result.options);
+									updatedAllContentNecessary = true;
 									break;
 								case 'search':
 									$.SalesPortal.Content.fillContent(result.content,
@@ -158,6 +165,30 @@
 		this.updateContentSize = function ()
 		{
 			$.SalesPortal.Content.updateSize();
+		};
+
+		this.updateCurrentShortcut = function ()
+		{
+			if (updatedAllContentNecessary)
+			{
+				var modalDialog = new $.SalesPortal.ModalDialog({
+					title: 'Site Notification',
+					description: 'The site database was recently updated. Click the button below to refresh your page',
+					buttons: [
+						{
+							tag: 'ok',
+							title: 'Refresh this page',
+							width: 160,
+							clickHandler: function ()
+							{
+								modalDialog.close();
+								location.reload();
+							}
+						}
+					]
+				});
+				modalDialog.show();
+			}
 		};
 	};
 	$.SalesPortal.ShortcutsManager = new ShortcutsManager();

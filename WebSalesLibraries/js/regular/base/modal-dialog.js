@@ -75,12 +75,12 @@
 					'<div class="row" style="margin: 0;">' +
 						'<div class="col-xs-3"><img src="' + options.logo + '"></div>' +
 						'<div class="col-xs-8 col-xs-offset-1">' + titleAndDescription + '</div>' +
-					'</div>';
+						'</div>';
 			else
 				content +=
 					'<div class="row" style="margin: 0;">' +
 						'<div class="col-xs-12">' + titleAndDescription + '</div>' +
-					'</div>';
+						'</div>';
 
 			var buttonsCount = options.buttons.length;
 			var columnIndex = 12 / buttonsCount;
@@ -89,14 +89,14 @@
 			{
 				buttonsContent +=
 					'<div class="col-xs-' + columnIndex + ' text-center">' +
-						'<button type="button" class="btn btn-default modal-dialog-button-' + this.tag + '" style="width: 80px; margin-top: 20px">' + this.title + '</button>' +
-					'</div>'
+						'<button type="button" class="btn btn-default modal-dialog-button-' + this.tag + '" style="width: ' + (this.width != undefined ? this.width : 80) + 'px; margin-top: 20px">' + this.title + '</button>' +
+						'</div>'
 			});
 
 			content +=
 				'<div class="row" style="margin: 0;">' +
 					buttonsContent +
-				'</div>';
+					'</div>';
 
 			return content;
 		};

@@ -52,6 +52,12 @@
 			}
 		}
 
+		public function actionGetMenu()
+		{
+			$menuGroups = ShortcutGroupRecord::getAvailableGroups($this->isPhone);
+			$this->renderPartial('../menu/menuPopupContent', array('menuGroups' => $menuGroups));
+		}
+
 		public function actionBadBrowser()
 		{
 			$this->render('badBrowser');

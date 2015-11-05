@@ -4,33 +4,8 @@
 	 */
 ?>
 <div id="main-menu">
-	<nav id="om-nav" class="om-nav img-darkbrick">
-		<div class="om-ctrlbar solid-blue-2">
-			<div class="om-controlitems">
-				<div class="om-controlitem om-closenav menu-icon-holder">
-					<i class="icon-close2"></i>
-				</div>
-				<div class="om-ctrlitems">
-					<div class="om-centerblock">
-						<? foreach ($menuGroups as $menuGroup): ?>
-							<? $this->renderPartial('../menu/menuGroup', array('menuGroup' => $menuGroup)); ?>
-						<? endforeach; ?>
-					</div>
-				</div>
-				<div class="om-movenext om-controlitem">
-					<img src="<? echo Yii::app()->getBaseUrl(true) . '/images/menu/right-arrow.png' ?>" alt=""/>
-				</div>
-			</div>
-		</div>
-		<div class="om-itemholder">
-			<div class="om-itemlist">
-				<? foreach ($menuGroups as $menuGroup): ?>
-					<? foreach ($menuGroup->menuItems as $menuItem): ?>
-						<? $this->renderPartial('../menu/menuItem', array('menuItem' => $menuItem)); ?>
-					<? endforeach; ?>
-				<? endforeach; ?>
-			</div>
-		</div>
+	<nav id="om-nav" class="om-nav img-darkbrick" data-last-update="<? echo date(Yii::app()->params['sourceDateFormat']);?>">
+		<? $this->renderPartial('../menu/menuPopupContent', array('menuGroups' => $menuGroups)); ?>
 	</nav>
 	<div data-navid="om-nav" class="onemenu om-ctrlbar solid-blue-2">
 		<div class="om-controlitems">

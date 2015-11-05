@@ -136,11 +136,6 @@
 		 * @soap
 		 */
 		public $isDead;
-		/**
-		 * @var boolean
-		 * @soap
-		 */
-		public $isPreviewNotReady;
 		public $fileLink;
 		public $filePath;
 		public $universalPreview;
@@ -182,7 +177,6 @@
 			$this->enableWidget = $linkRecord->enable_widget;
 			$this->widget = $linkRecord->widget;
 			$this->isDead = $linkRecord->is_dead;
-			$this->isPreviewNotReady = $linkRecord->is_preview_not_ready;
 
 			$this->originalFormat = $linkRecord->format;
 			if ($this->type == 8)
@@ -251,7 +245,7 @@
 			{
 				$this->fileRelativePath = str_replace('\\', '/', $this->fileRelativePath);
 				$this->filePath = $this->parent->parent->parent->storagePath . $this->fileRelativePath;
-				$this->fileLink = str_replace(' ', '%20', htmlspecialchars(str_replace('\\', '/', $this->parent->parent->parent->storageLink . $this->fileRelativePath)));
+				$this->fileLink = str_replace('&', '%26', str_replace('&amp;', '%26', str_replace(' ', '%20', htmlspecialchars(str_replace('\\', '/', $this->parent->parent->parent->storageLink . $this->fileRelativePath)))));
 				if (!isset($this->fileSize))
 					$this->fileSize = file_exists($this->filePath) ? filesize($this->filePath) : 0;
 			}

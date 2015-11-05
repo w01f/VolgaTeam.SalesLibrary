@@ -37,6 +37,7 @@
 							$groupRecord->id = $groupId;
 							$groupRecord->order = intval(trim($groupConfig->getElementsByTagName("Order")->item(0)->nodeValue));
 							$groupRecord->source_path = $groupPath;
+							$groupRecord->date_modify = date(Yii::app()->params['mysqlDateFormat']);
 							$groupRecord->config = $groupConfigContent;
 							$groupRecord->save();
 

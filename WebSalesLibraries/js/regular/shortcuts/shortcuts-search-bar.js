@@ -103,7 +103,7 @@
 								shortcutBundleData.linkId,
 								function ()
 								{
-									$.SalesPortal.ShortcutsManager.openShortcut($('<div>' + shortcutBundleData.serviceData + '</div>'));
+									location.reload();
 								}
 							);
 						}

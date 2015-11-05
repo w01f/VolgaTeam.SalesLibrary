@@ -5,6 +5,7 @@
 	 * @property string id
 	 * @property int order
 	 * @property string source_path
+	 * @property string date_modify
 	 * @property string config
 	 */
 	class ShortcutGroupRecord extends CActiveRecord
@@ -48,6 +49,14 @@
 		public static function clearData()
 		{
 			self::model()->deleteAll();
+		}
+
+		public static function getLastUpdate()
+		{
+			return strtotime(Yii::app()->db->createCommand()
+				->select('max(date_modify)')
+				->from('tbl_shortcut_group')
+				->queryScalar());
 		}
 
 		/**

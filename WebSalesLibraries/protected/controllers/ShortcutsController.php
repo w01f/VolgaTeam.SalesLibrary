@@ -155,6 +155,16 @@
 		//------Common Site API-------------------------------------------
 
 		//------Regular Site API-------------------------------------------
+		public function actionCheckShortcutsUpdated()
+		{
+			$menuDate = strtotime(Yii::app()->request->getPost('menuDate'));
+			$actualDate = ShortcutGroupRecord::getLastUpdate();
+			echo CJSON::encode(array(
+				'needUpdate' => $menuDate < $actualDate,
+				'lastUpdate' => date(Yii::app()->params['sourceDateFormat'])
+			));
+		}
+
 		public function actionGetDownloadDialog()
 		{
 			$linkId = Yii::app()->request->getPost('linkId');

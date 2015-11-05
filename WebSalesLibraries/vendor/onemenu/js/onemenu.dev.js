@@ -86,6 +86,8 @@
 				$('#' + $nav).css({'display': 'block'});
 			}
 
+			$('#' + $nav).addClass('opened');
+
 
 			// Call omRender function
 			omRender($nav);
@@ -198,6 +200,7 @@
 			{
 				$('#' + $nav).css({'display': 'none'});
 			}
+			$('#' + $nav).removeClass('opened');
 
 
 			// Unbind movenextCtrlBt function
