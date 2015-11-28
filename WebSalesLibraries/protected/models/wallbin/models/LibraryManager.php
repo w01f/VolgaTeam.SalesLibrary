@@ -42,9 +42,25 @@
 					if ($libraryFolder->isDir() && !$libraryFolder->isDot())
 					{
 						$libraryName = $libraryFolder->getBasename();
-						$storagePath = $libraryFolder->getPathname();
-						$storageLink = Yii::app()->baseUrl . '/' . Yii::app()->params['librariesRoot'] . '/Libraries/' . $libraryFolder->getBasename();
-						$storageFile = realpath($storagePath . DIRECTORY_SEPARATOR . 'SalesDepotCacheLight.xml');
+
+						$originalStoragePath = $libraryFolder->getPathname();
+						$originalStorageLink =Yii::app()->baseUrl . '/' . Yii::app()->params['librariesRoot'] . '/Libraries/' . $libraryFolder->getBasename();
+
+						$storagePath = $originalStoragePath;
+						$storageLink = $originalStorageLink;
+						$storageFile = realpath($storagePath . DIRECTORY_SEPARATOR . 'z_library_data_info.xml');
+						if (!file_exists($storageFile))
+						{
+							$storagePath .= DIRECTORY_SEPARATOR . 'Primary Root';
+							$storageLink .= '/Primary Root';
+							$storageFile = realpath($storagePath . DIRECTORY_SEPARATOR . 'z_library_data_info.xml');
+						}
+						if (!file_exists($storageFile))
+						{
+							$storagePath = $originalStoragePath;
+							$storageLink = $originalStorageLink;
+							$storageFile = realpath($storagePath . DIRECTORY_SEPARATOR . 'SalesDepotCacheLight.xml');
+						}
 						if (!file_exists($storageFile))
 						{
 							$storagePath .= DIRECTORY_SEPARATOR . 'Primary Root';
