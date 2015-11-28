@@ -1,0 +1,284 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{03639419-D148-4814-B8C1-CF0AB550D136}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SalesLibraries.CommonGUI</RootNamespace>
+    <AssemblyName>SalesLibraries.CommonGUI</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevComponents.DotNetBar2, Version=12.0.0.7, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Data.v14.1, Version=14.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Utils.v14.1, Version=14.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraEditors.v14.1, Version=14.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BackgroundProcesses\BackgroundProcessManager.cs" />
+    <Compile Include="BackgroundProcesses\BackgroundProcess.cs" />
+    <Compile Include="BackgroundProcesses\FormProgressBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BackgroundProcesses\FormProgressWithAbort.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BackgroundProcesses\FormProgressWithAbort.designer.cs">
+      <DependentUpon>FormProgressWithAbort.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BackgroundProcesses\ProcessPausedEventArgs.cs" />
+    <Compile Include="Calendars\CalendarPartControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Calendars\CalendarPartControl.designer.cs">
+      <DependentUpon>CalendarPartControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Calendars\CalendarYearSelectedEventArgs.cs" />
+    <Compile Include="Calendars\DayControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Calendars\DayControl.designer.cs">
+      <DependentUpon>DayControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Calendars\ICalendarContainerControl.cs" />
+    <Compile Include="Calendars\MonthControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Calendars\MonthControl.designer.cs">
+      <DependentUpon>MonthControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Calendars\WeekDayHeaderControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Calendars\WeekDayHeaderControl.designer.cs">
+      <DependentUpon>WeekDayHeaderControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Calendars\YearControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Calendars\YearControl.designer.cs">
+      <DependentUpon>YearControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Common\EditorHelper.cs" />
+    <Compile Include="Floater\FloaterManager.cs" />
+    <Compile Include="Common\FormStateHelper.cs" />
+    <Compile Include="Common\PictureBoxButtonizer.cs" />
+    <Compile Include="Common\PopupMessageHelper.cs" />
+    <Compile Include="BackgroundProcesses\FormProgressCommon.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BackgroundProcesses\FormProgressCommon.designer.cs">
+      <DependentUpon>FormProgressCommon.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Common\RichTextBoxPrinter.cs" />
+    <Compile Include="Floater\FormFloater.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Floater\FormFloater.designer.cs">
+      <DependentUpon>FormFloater.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="RetractableBar\RetractableBarControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="RetractableBar\RetractableBarControl.designer.cs">
+      <DependentUpon>RetractableBarControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RetractableBar\RetractableBarLeft.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="RetractableBar\RetractableBarLeft.designer.cs">
+      <DependentUpon>RetractableBarLeft.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RetractableBar\RetractableBarRight.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="RetractableBar\RetractableBarRight.designer.cs">
+      <DependentUpon>RetractableBarRight.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Wallbin\ColumnTitles\ColumnTitleControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Wallbin\ColumnTitles\ColumnTitleControl.designer.cs">
+      <DependentUpon>ColumnTitleControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Wallbin\ColumnTitles\ColumnTitlePanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Wallbin\ColumnTitles\ColumnTitlePanel.Designer.cs">
+      <DependentUpon>ColumnTitlePanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Wallbin\Folders\FolderBoxWithHeader.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Wallbin\Folders\FolderBoxWithHeader.Designer.cs">
+      <DependentUpon>FolderBoxWithHeader.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Wallbin\Folders\BaseFolderBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Wallbin\Folders\BaseFolderBox.designer.cs">
+      <DependentUpon>BaseFolderBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Wallbin\Folders\LinkRow.cs" />
+    <Compile Include="Wallbin\Folders\LinkRowInfo.cs" />
+    <Compile Include="Wallbin\Views\IWallbinViewFormat.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ProgressCancel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="BackgroundProcesses\FormProgressCommon.resx">
+      <DependentUpon>FormProgressCommon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BackgroundProcesses\FormProgressWithAbort.resx">
+      <DependentUpon>FormProgressWithAbort.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Calendars\CalendarPartControl.resx">
+      <DependentUpon>CalendarPartControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Calendars\DayControl.resx">
+      <DependentUpon>DayControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Calendars\MonthControl.resx">
+      <DependentUpon>MonthControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Calendars\WeekDayHeaderControl.resx">
+      <DependentUpon>WeekDayHeaderControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Calendars\YearControl.resx">
+      <DependentUpon>YearControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Floater\FormFloater.resx">
+      <DependentUpon>FormFloater.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RetractableBar\RetractableBarControl.resx">
+      <DependentUpon>RetractableBarControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RetractableBar\RetractableBarLeft.resx">
+      <DependentUpon>RetractableBarLeft.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RetractableBar\RetractableBarRight.resx">
+      <DependentUpon>RetractableBarRight.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wallbin\ColumnTitles\ColumnTitleControl.resx">
+      <DependentUpon>ColumnTitleControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wallbin\ColumnTitles\ColumnTitlePanel.resx">
+      <DependentUpon>ColumnTitlePanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wallbin\Folders\FolderBoxWithHeader.resx">
+      <DependentUpon>FolderBoxWithHeader.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Wallbin\Folders\BaseFolderBox.resx">
+      <DependentUpon>BaseFolderBox.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SalesLibraries.Business\SalesLibraries.Business.csproj">
+      <Project>{526944F8-7B85-48CE-81F1-43AE041A321F}</Project>
+      <Name>SalesLibraries.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SalesLibraries.Common\SalesLibraries.Common.csproj">
+      <Project>{F35DC0D8-6816-4033-A5E2-D446C7A956FE}</Project>
+      <Name>SalesLibraries.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="Resources\FloaterHide.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RetractableBarCollapse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RetractableBarExpand.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RetractableBarLogo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TagsWidgetCategories.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TagsWidgetKeywords.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TagsWidgetSecurity.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TagsWidgetSecurityBlackList.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TagsWidgetSecurityHidden.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TagsWidgetSecurityLocal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TagsWidgetSecurityVisible.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TagsWidgetSecurityWhiteList.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TagsWidgetSuperFIlters.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

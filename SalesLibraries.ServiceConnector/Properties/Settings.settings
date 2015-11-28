@@ -1,0 +1,15 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="SalesLibraries.ServiceConnector.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="SalesLibraries_ServiceConnector_AdminService_AdminControllerService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost/SalesLibraries/admin/quote?ws=1</Value>
+    </Setting>
+    <Setting Name="SalesLibraries_ServiceConnector_WallbinContentService_ContentControllerService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost/SalesLibraries/content/quote?ws=1</Value>
+    </Setting>
+    <Setting Name="SalesLibraries_ServiceConnector_FileManagerResourcesService_FileManagerDataControllerService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost/SalesLibraries/fileManagerData/quote?ws=1</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
