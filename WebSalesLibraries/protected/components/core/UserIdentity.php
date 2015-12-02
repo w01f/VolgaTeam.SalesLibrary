@@ -13,7 +13,7 @@
 		public function authenticate()
 		{
 			/** @var $user UserRecord */
-			$user = UserRecord::model()->find('LOWER(login)=?', array(strtolower($this->username)));
+			$user = UserRecord::model()->find('LOWER(login)=:login or LOWER(email)=:login', array('login'=>strtolower($this->username)));
 			if (!isset($user))
 				$this->errorCode = self::ERROR_USERNAME_INVALID;
 			else if (!$user->validatePassword($this->password))
