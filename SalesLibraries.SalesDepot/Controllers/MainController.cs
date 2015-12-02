@@ -99,7 +99,10 @@ namespace SalesLibraries.SalesDepot.Controllers
 				ProcessManager.ResumeProcess();
 			};
 
-			ProcessManager.Run("Checking data version...", cancellationToken => AsyncHelper.RunSync(FileStorageManager.Instance.Init));
+			ProcessManager.RunStartProcess(
+				"Checking data version...",
+				"*This should not take long…",
+				cancellationToken => AsyncHelper.RunSync(FileStorageManager.Instance.Init));
 
 			if (stopRun) return;
 
@@ -107,30 +110,42 @@ namespace SalesLibraries.SalesDepot.Controllers
 			if (appReady)
 			{
 				var progressTitle = String.Empty;
+				var progressDescription = String.Empty;
 				switch (FileStorageManager.Instance.DataState)
 				{
 					case DataActualityState.NotExisted:
 						progressTitle = "Loading data from server for the 1st time...";
+						progressDescription = "*This may take a few minutes…";
 						break;
 					case DataActualityState.Outdated:
 						progressTitle = "Updating data from server...";
+						progressDescription = "*This may take a few minutes…";
 						break;
 					default:
 						progressTitle = "Loading data...";
+						progressDescription = "*This should not take long…";
 						break;
 				}
 
-				ProcessManager.Run(progressTitle, cancellationToken => AsyncHelper.RunSync(InitBusinessObjects));
+				ProcessManager.RunStartProcess(
+					progressTitle, 
+					progressDescription,
+					cancellationToken => AsyncHelper.RunSync(InitBusinessObjects));
 
-				ProcessManager.Run("Syncing your local libraries…", cancellationToken =>
-				{
-					LibrariesSyncHelper.Sync(
-						File.ReadAllText(Configuration.RemoteResourceManager.Instance.NetworkPathFile.LocalPath).Trim(),
-						Configuration.RemoteResourceManager.Instance.LocalLibraryFolder.LocalPath
-						);
-					Wallbin.LoadLibraries(Configuration.RemoteResourceManager.Instance.LocalLibraryFolder.LocalPath);
-					EmailBin.Load();
-				});
+				ProcessManager.RunStartProcess(
+					FileStorageManager.Instance.DataState == DataActualityState.NotExisted ?
+						"Syncing Libraries for the 1st time…" :
+						"Syncing Sales Libraries…",
+					"*This may take a few minutes…",
+					cancellationToken =>
+					{
+						LibrariesSyncHelper.Sync(
+							File.ReadAllText(Configuration.RemoteResourceManager.Instance.NetworkPathFile.LocalPath).Trim(),
+							Configuration.RemoteResourceManager.Instance.LocalLibraryFolder.LocalPath
+							);
+						Wallbin.LoadLibraries(Configuration.RemoteResourceManager.Instance.LocalLibraryFolder.LocalPath);
+						EmailBin.Load();
+					});
 
 				appReady &= Wallbin.Libraries.Any();
 				if (appReady)
@@ -245,8 +260,8 @@ namespace SalesLibraries.SalesDepot.Controllers
 											CheckPowerPointRunning();
 									}
 								}
-							})), 
-							null, 
+							})),
+							null,
 							false);
 					})));
 		}
@@ -298,9 +313,9 @@ namespace SalesLibraries.SalesDepot.Controllers
 			if (PowerPointHelper.Instance.IsLinkedWithApplication) return true;
 			if (beforeRun != null && !beforeRun()) return false;
 			FloaterManager.Instance.ShowFloater(
-				MainForm, 
-				Settings.SalesDepotName, 
-				MainForm.FloaterLogo, 
+				MainForm,
+				Settings.SalesDepotName,
+				MainForm.FloaterLogo,
 				PowerPointManager.Instance.RunPowerPointLoader);
 			return false;
 		}

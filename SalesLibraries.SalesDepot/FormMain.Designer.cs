@@ -3739,7 +3739,7 @@
 		private DevComponents.DotNetBar.ItemContainer itemContainerSearchLogo;
 		public DevComponents.DotNetBar.LabelItem labelItemSearchLogo;
 		private DevComponents.DotNetBar.ItemContainer itemContainerHomeWallbin;
-		private DevComponents.DotNetBar.ItemContainer itemContainerHomeWallbinLibrary;
+		public DevComponents.DotNetBar.ItemContainer itemContainerHomeWallbinLibrary;
 		public DevComponents.DotNetBar.ItemContainer itemContainerHomeWallbinPage;
 		private DevComponents.DotNetBar.LabelItem labelItemHomeWallbinPage;
 		public DevExpress.XtraEditors.ComboBoxEdit comboBoxEditHomePage;

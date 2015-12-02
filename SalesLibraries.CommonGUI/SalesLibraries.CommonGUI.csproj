@@ -66,6 +66,12 @@
     <Compile Include="BackgroundProcesses\FormProgressWithAbort.designer.cs">
       <DependentUpon>FormProgressWithAbort.cs</DependentUpon>
     </Compile>
+    <Compile Include="BackgroundProcesses\FormStart.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BackgroundProcesses\FormStart.designer.cs">
+      <DependentUpon>FormStart.cs</DependentUpon>
+    </Compile>
     <Compile Include="BackgroundProcesses\ProcessPausedEventArgs.cs" />
     <Compile Include="Calendars\CalendarPartControl.cs">
       <SubType>UserControl</SubType>
@@ -179,6 +185,9 @@
     <EmbeddedResource Include="BackgroundProcesses\FormProgressWithAbort.resx">
       <DependentUpon>FormProgressWithAbort.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="BackgroundProcesses\FormStart.resx">
+      <DependentUpon>FormStart.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Calendars\CalendarPartControl.resx">
       <DependentUpon>CalendarPartControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -272,6 +281,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\TagsWidgetSuperFIlters.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StartLogo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

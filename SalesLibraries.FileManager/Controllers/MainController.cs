@@ -90,7 +90,10 @@ namespace SalesLibraries.FileManager.Controllers
 				ProcessManager.ResumeProcess();
 			};
 
-			ProcessManager.Run("Checking data version...", cancellationToken => AsyncHelper.RunSync(FileStorageManager.Instance.Init));
+			ProcessManager.RunStartProcess(
+				"Checking data version...", 
+				"*This should not take long…",
+				cancellationToken => AsyncHelper.RunSync(FileStorageManager.Instance.Init));
 
 			if (stopRun) return;
 
@@ -98,20 +101,27 @@ namespace SalesLibraries.FileManager.Controllers
 			if (appReady)
 			{
 				var progressTitle = String.Empty;
+				var progressDescription = String.Empty;
 				switch (FileStorageManager.Instance.DataState)
 				{
 					case DataActualityState.NotExisted:
 						progressTitle = "Loading data from server for the 1st time...";
+						progressDescription = "*This may take a few minutes…";
 						break;
 					case DataActualityState.Outdated:
 						progressTitle = "Updating data from server...";
+						progressDescription = "*This may take a few minutes…";
 						break;
 					default:
 						progressTitle = "Loading data...";
+						progressDescription = "*This should not take long…";
 						break;
 				}
 
-				ProcessManager.Run(progressTitle, cancellationToken => AsyncHelper.RunSync(InitBusinessObjects));
+				ProcessManager.RunStartProcess(
+					progressTitle, 
+					progressDescription,
+					cancellationToken => AsyncHelper.RunSync(InitBusinessObjects));
 
 				MainForm.Shown += (o, e) =>
 				{

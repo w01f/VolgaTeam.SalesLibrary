@@ -42,7 +42,6 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.Views
 
 		private void InitPageCombo()
 		{
-			MainController.Instance.MainForm.itemContainerHomeWallbinPage.Visible = Pages.Any();
 			_pageSelector = MainController.Instance.MainForm.comboBoxEditHomePage;
 			_pageSelector.Enabled = Pages.Count > 1;
 			_pageSelector.Properties.Items.Clear();
@@ -50,8 +49,6 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.Views
 			_pageSelector.EditValue = ActivePage;
 			_pageSelector.EditValueChanged -= OnSelectedPageChanged;
 			_pageSelector.EditValueChanged += OnSelectedPageChanged;
-			MainController.Instance.MainForm.ribbonBarHomeWallbin.RecalcLayout();
-			MainController.Instance.MainForm.ribbonPanelHome.PerformLayout();
 		}
 
 		private void OnSelectedPageChanged(object sender, EventArgs eventArgs)

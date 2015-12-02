@@ -88,6 +88,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.Views
 				MainController.Instance.MainForm.labelItemHomeWallbinLogo.Image = Properties.Resources.SettingsLogo;
 			MainController.Instance.MainForm.ribbonBarHomeWallbin.RecalcLayout();
 			MainController.Instance.MainForm.ribbonPanelHome.PerformLayout();
+
 			MainController.Instance.MainForm.ribbonBarHomeWallbin.ResumeLayout();
 		}
 		#endregion

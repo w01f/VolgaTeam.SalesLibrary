@@ -30,6 +30,15 @@ namespace SalesLibraries.CommonGUI.BackgroundProcesses
 			}
 		}
 
+		public void RunStartProcess(string title, string description, Action<CancellationToken> process, Action afterComplete = null)
+		{
+			using (var form = new FormStart())
+			{
+				form.SetTitle(title, description);
+				RunWithProgress(form, false, process, cancellationToken => { if (afterComplete != null)afterComplete(); });
+			}
+		}
+
 		public void RunWithProgress(FormProgressBase formProgress, bool showAsync, Action<CancellationToken> process, Action<CancellationToken> afterComplete = null)
 		{
 			var cancellationTokenSource = new CancellationTokenSource();

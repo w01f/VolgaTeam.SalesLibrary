@@ -50,14 +50,15 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.Views
 		private void InitControls()
 		{
 			_librarySelector = MainController.Instance.MainForm.comboBoxEditHomeLibrary;
-			_librarySelector.Enabled = Views.Count > 1;
-			MainController.Instance.MainForm.labelItemHomeWallbinLibrary.Enabled = Views.Count > 1;
 			_librarySelector.Properties.Items.Clear();
 			_librarySelector.Properties.Items.AddRange(Views);
 			_librarySelector.EditValue = ActiveWallbin;
 			_librarySelector.EditValueChanged += OnSelectedLibraryChanged;
 
+			MainController.Instance.MainForm.itemContainerHomeWallbinLibrary.Visible = Views.Count > 1;
 			MainController.Instance.MainForm.itemContainerHomeWallbinPage.Visible = !MainController.Instance.Settings.WallbinViewSettings.MultitabView;
+			MainController.Instance.MainForm.ribbonBarHomeWallbin.RecalcLayout();
+			MainController.Instance.MainForm.ribbonPanelHome.PerformLayout();
 		}
 
 		private void SetActiveWallbin(string libraryName)
