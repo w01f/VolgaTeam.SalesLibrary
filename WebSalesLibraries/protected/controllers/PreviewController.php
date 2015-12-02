@@ -87,8 +87,7 @@
 		public function actionRunFullScreenGallery()
 		{
 			$linkId = Yii::app()->request->getQuery('linkId');
-			$format = Yii::app()->request->getQuery('format');
-			if (isset($linkId) && isset($format))
+			if (isset($linkId))
 			{
 				$linkRecord = LinkRecord::getLinkById($linkId);
 				if (isset($linkRecord))
@@ -104,7 +103,7 @@
 						/** @var  $previewData GalleryPreviewData */
 						$previewData = $link->getPreviewData(false);
 						$this->pageTitle = Yii::app()->name . ' - Fullscreen Gallery';
-						$this->render('fullScreenGallery', array('previewData' => $previewData, 'format' => $format));
+						$this->render('fullScreenGallery', array('previewData' => $previewData));
 					}
 				}
 			}

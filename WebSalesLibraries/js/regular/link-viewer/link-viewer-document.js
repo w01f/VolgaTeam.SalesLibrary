@@ -6,7 +6,6 @@
 	{
 		var viewerData = new $.SalesPortal.DocumentViewerData($.parseJSON(parameters.data));
 		var dialogContent = undefined;
-		var imageViewerType = viewerData.startFormat;
 		var imageViewer = undefined;
 		var imageViewerStartIndex = viewerData.startIndex;
 
@@ -43,22 +42,6 @@
 					});
 
 					updateImageViewer();
-					dialogContent.find('.image-type-toggle.png').off('click').on('click', function ()
-					{
-						if (!$(this).hasClass('selected'))
-						{
-							imageViewerType = 'png';
-							updateImageViewer();
-						}
-					});
-					dialogContent.find('.image-type-toggle.jpeg').off('click').on('click', function ()
-					{
-						if (!$(this).hasClass('selected'))
-						{
-							imageViewerType = 'jpeg';
-							updateImageViewer();
-						}
-					});
 
 					dialogContent.find('.open-pdf').off('click').on('click', openPdf);
 					dialogContent.find('.open-gallery-modal').off('click').on('click', showGalleryModal);
@@ -82,22 +65,10 @@
 				container: dialogContent.find('.preview-gallery'),
 				singlePage: viewerData.singlePage,
 				pageSelector: dialogContent.find("#image-viewer-slide-selector"),
-				pages: viewerData.getPageImages(imageViewerType),
+				pages: viewerData.pagesInPng,
 				pageChanged: updateCurrentPageInfo,
 				startIndex: imageViewerStartIndex
 			});
-
-			switch (imageViewerType)
-			{
-				case 'png':
-					dialogContent.find('.image-type-toggle.jpeg').removeClass('selected');
-					dialogContent.find('.image-type-toggle.png').addClass('selected');
-					break;
-				case 'jpeg':
-					dialogContent.find('.image-type-toggle.png').removeClass('selected');
-					dialogContent.find('.image-type-toggle.jpeg').addClass('selected');
-					break;
-			}
 		};
 
 		var updateCurrentPageInfo = function (pageIndex)
@@ -107,7 +78,7 @@
 			if (!viewerData.isPdf)
 				dialogContent.find('.page-size').html('(' + viewerData.pages[pageIndex].size + ')');
 
-			var pageSlides = viewerData.getPageImages(imageViewerType);
+			var pageSlides = viewerData.pagesInPng;
 			dialogContent.find('.fancybox-title .child').html(pageSlides[pageIndex].title);
 			dialogContent.find('.current-slide-info .text').html(pageSlides[pageIndex].itemIndexInfo);
 
@@ -121,7 +92,7 @@
 						Name: viewerData.name,
 						File: viewerData.fileName,
 						'Original Format': viewerData.format,
-						Format: imageViewerType,
+						Format: 'png',
 						Mode: 'Modal'
 					})
 				},
@@ -146,7 +117,7 @@
 						Name: viewerData.name,
 						File: viewerData.fileName,
 						'Original Format': viewerData.format,
-						Format: imageViewerType
+						Format: 'png'
 					})
 				},
 				async: true,
@@ -173,7 +144,7 @@
 							Name: viewerData.name,
 							File: viewerData.fileName,
 							'Original Format': viewerData.format,
-							Format: imageViewerType
+							Format: 'png'
 						})
 					},
 					async: true,
@@ -217,7 +188,7 @@
 						Name: viewerData.name,
 						File: viewerData.fileName,
 						'Original Format': viewerData.format,
-						Format: imageViewerType
+						Format: 'png'
 					})
 				},
 				async: true,
@@ -237,7 +208,7 @@
 		var showGalleryModal = function ()
 		{
 			var documentBar = new $.SalesPortal.ViewerBar();
-			var images = viewerData.getGalleryImages(imageViewerType);
+			var images = viewerData.galleryPagesInPng;
 
 			$.fancybox.close();
 
@@ -272,7 +243,7 @@
 									Name: viewerData.name,
 									File: viewerData.fileName,
 									'Original Format': viewerData.format,
-									Format: imageViewerType,
+									Format: 'png',
 									Mode: 'Modal'
 								})
 							},
@@ -290,7 +261,6 @@
 			documentBar.show({
 				returnCallback: function ()
 				{
-					viewerData.startFormat = imageViewerType;
 					viewerData.startIndex = imageViewerStartIndex;
 					parameters.data = $.toJSON(viewerData);
 					new $.SalesPortal.DocumentViewer(parameters).show();
@@ -312,14 +282,14 @@
 						Name: viewerData.name,
 						File: viewerData.fileName,
 						'Original Format': viewerData.format,
-						Format: imageViewerType,
+						Format: 'png',
 						Mode: 'Fullscreen'
 					})
 				},
 				async: true,
 				dataType: 'html'
 			});
-			window.open("preview/runFullScreenGallery?linkId=" + viewerData.linkId + "&format=" + imageViewerType);
+			window.open("preview/runFullScreenGallery?linkId=" + viewerData.linkId);
 		};
 
 		var processSaveAction = function ()

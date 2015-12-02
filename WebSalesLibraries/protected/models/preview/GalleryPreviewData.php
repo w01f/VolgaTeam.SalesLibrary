@@ -8,9 +8,7 @@
 		public $galleryEnabled;
 
 		public $pagesInPng;
-		public $pagesInJpeg;
 		public $galleryPagesInPng;
-		public $galleryPagesInJpeg;
 		public $thumbnails;
 
 		public $thumbWidth;
@@ -87,74 +85,21 @@
 				}
 			}
 
-			$this->pagesInJpeg = array();
-			if (isset($link->universalPreview->jpegItems))
-			{
-				$count = count($link->universalPreview->jpegItems);
-				$i = 0;
-				foreach ($link->universalPreview->jpegItems as $previewFile)
-				{
-					$pageItem = new PagePreviewItem();
-					$pageItem->id = sprintf('link%s---%s', $link->id, $i);
-					$pageItem->index = $i;
-					$pageItem->title = sprintf('%s - %s %s of %s', $this->fileName, $this->pageItemName, ($i + 1), $count);
-					$pageItem->fileName = sprintf('%s-%s%s.%s', str_replace('.' . $link->fileExtension, '', $link->fileName), $this->pageItemName, ($i + 1), $link->fileExtension);
-					$pageItem->itemIndexInfo = sprintf('%s %s of %s', $this->pageItemName, ($i + 1), $count);
-					$pageItem->href = $previewFile->link;
-					$pageItem->path = $previewFile->path;
-					$pageItem->size = FilePreviewData::formatFileSize($previewFile->size);
-					$this->pagesInJpeg[] = $pageItem;
-					$i++;
-				}
-			}
-
-			$this->galleryPagesInJpeg = array();
-			if (isset($link->universalPreview->jpegGalleryItems))
-			{
-				$count = count($link->universalPreview->jpegGalleryItems);
-				$i = 0;
-				foreach ($link->universalPreview->jpegGalleryItems as $previewFile)
-				{
-					$pageItem = new PagePreviewItem();
-					$pageItem->id = sprintf('link%s---%s', $link->id, $i);
-					$pageItem->index = $i;
-					$pageItem->title = sprintf('%s - %s %s of %s', $this->fileName, $this->pageItemName, ($i + 1), $count);
-					$pageItem->fileName = sprintf('%s-%s%s.%s', str_replace('.' . $link->fileExtension, '', $link->fileName), $this->pageItemName, ($i + 1), $link->fileExtension);
-					$pageItem->itemIndexInfo = sprintf('%s %s of %s', $this->pageItemName, ($i + 1), $count);
-					$pageItem->href = $previewFile->link;
-					$pageItem->path = $previewFile->path;
-					$pageItem->size = FilePreviewData::formatFileSize($previewFile->size);
-					$this->galleryPagesInJpeg[] = $pageItem;
-					$i++;
-				}
-			}
-
 			if (Yii::app()->browser->isMobile())
 				$this->thumbnails = $link->universalPreview->thumbPhoneItems;
 			else
 				$this->thumbnails = $link->universalPreview->thumbItems;
 
-			$this->galleryEnabled = count($this->pagesInPng) > 0 && count($this->pagesInJpeg) > 0;
+			$this->galleryEnabled = count($this->pagesInPng) > 0;
 		}
 
 		/**
-		 * @param $format string
 		 * @return array
 		 */
-		public function getFullScreenGalleryImages($format)
+		public function getFullScreenGalleryImages()
 		{
 			$galleryLinks = array();
-			$originalImages = array();
-			switch ($format)
-			{
-				case 'png':
-					$originalImages = $this->galleryPagesInPng;
-					break;
-				case 'jpeg':
-					$originalImages = $this->galleryPagesInJpeg;
-					break;
-			}
-
+			$originalImages = $this->galleryPagesInPng;
 			for ($i = 0; $i < count($originalImages); $i++)
 			{
 				$galleryLink = array('image' => $originalImages[$i]->href,

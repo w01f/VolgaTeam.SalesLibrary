@@ -30,16 +30,6 @@
 		 * @var string[]
 		 * @soap
 		 */
-		public $jpegLinks;
-		/**
-		 * @var string[]
-		 * @soap
-		 */
-		public $jpegPhoneLinks;
-		/**
-		 * @var string[]
-		 * @soap
-		 */
 		public $pdfLinks;
 		/**
 		 * @var string[]
@@ -79,8 +69,6 @@
 
 		public $pngItems;
 		public $pngGalleryItems;
-		public $jpegItems;
-		public $jpegGalleryItems;
 		public $thumbItems;
 		public $thumbPhoneItems;
 		public $officeItems;
@@ -104,8 +92,6 @@
 		{
 			$this->pngItems = array();
 			$this->pngGalleryItems = array();
-			$this->jpegItems = array();
-			$this->jpegGalleryItems = array();
 			$this->officeItems = array();
 			$this->thumbItems = array();
 			$this->thumbPhoneItems = array();
@@ -128,14 +114,6 @@
 					case 'png_phone':
 						$previewFile->link .= '?version=' . $fileTime;
 						$this->pngItems[] = $previewFile;
-						break;
-					case 'jpeg':
-						$previewFile->link .= '?version=' . $fileTime;
-						$this->jpegGalleryItems[] = $previewFile;
-						break;
-					case 'jpeg_phone':
-						$previewFile->link .= '?version=' . $fileTime;
-						$this->jpegItems[] = $previewFile;
 						break;
 					case 'pdf':
 						$this->pdf = $previewFile;
@@ -166,8 +144,6 @@
 			$sortHelper = new ObjectSortHelper('link', 'asc');
 			usort($this->pngItems, array($sortHelper, 'sort'));
 			usort($this->pngGalleryItems, array($sortHelper, 'sort'));
-			usort($this->jpegItems, array($sortHelper, 'sort'));
-			usort($this->jpegGalleryItems, array($sortHelper, 'sort'));
 			usort($this->thumbItems, array($sortHelper, 'sort'));
 			usort($this->thumbPhoneItems, array($sortHelper, 'sort'));
 			usort($this->officeItems, array($sortHelper, 'sort'));

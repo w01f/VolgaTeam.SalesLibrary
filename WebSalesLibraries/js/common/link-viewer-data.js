@@ -39,42 +39,15 @@
 		this.pages = undefined;
 		this.pagesInPng = undefined;
 		this.galleryPagesInPng = undefined;
-		this.pagesInJpeg = undefined;
-		this.galleryPagesInJpeg = undefined;
 		this.rateData = undefined;
 
 		this.startIndex = 0;
-		this.startFormat = 'png';
 
 		for (var prop in source)
 			if (source.hasOwnProperty(prop))
 				this[prop] = source[prop];
 
 		this.isPdf = this.format == 'pdf';
-
-		this.getPageImages = function (format)
-		{
-			switch (format)
-			{
-				case 'png':
-					return that.pagesInPng;
-				case 'jpeg':
-					return that.pagesInJpeg;
-			}
-			return [];
-		};
-
-		this.getGalleryImages = function (format)
-		{
-			switch (format)
-			{
-				case 'png':
-					return that.galleryPagesInPng;
-				case 'jpeg':
-					return that.galleryPagesInJpeg;
-			}
-			return [];
-		};
 	};
 
 	$.SalesPortal.VideoViewerData = function (source)

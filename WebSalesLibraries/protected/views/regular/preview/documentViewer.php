@@ -106,17 +106,7 @@
 						<select class="selectpicker dropup bootstrapped" id="image-viewer-slide-selector"></select>
 					<? endif; ?>
 				</div>
-				<div class="col col-xs-1 text-center">
-					<div class="text-button image-type-toggle png">
-						<span>PNG</span>
-					</div>
-				</div>
-				<div class="col col-xs-1 text-center">
-					<div class="text-button image-type-toggle jpeg">
-						<span>JPEG</span>
-					</div>
-				</div>
-				<div class="col col-xs-1 text-center">
+				<div class="col col-xs-1 col-xs-offset-2 text-center">
 					<div class="text-button open-pdf">
 						<span>PDF</span>
 					</div>

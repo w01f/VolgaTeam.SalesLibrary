@@ -57,32 +57,6 @@
 						$previewRecord->relative_path = $link;
 						$previewRecord->save();
 					}
-			if (array_key_exists('jpegLinks', $previewContainer))
-				if (isset($previewContainer['jpegLinks']))
-					foreach ($previewContainer['jpegLinks'] as $link)
-					{
-						$previewRecord = new PreviewRecord();
-						$previewRecord->id_container = $previewContainer['id'];
-						$previewRecord->id_library = $previewContainer['libraryId'];
-						$previewRecord->type = 'jpeg';
-						$previewRecord->relative_path = $link;
-						if (array_key_exists('thumbsWidth', $previewContainer))
-							$previewRecord->thumb_width = $previewContainer['thumbsWidth'];
-						if (array_key_exists('thumbsHeight', $previewContainer))
-							$previewRecord->thumb_height = $previewContainer['thumbsHeight'];
-						$previewRecord->save();
-					}
-			if (array_key_exists('jpegPhoneLinks', $previewContainer))
-				if (isset($previewContainer['jpegPhoneLinks']))
-					foreach ($previewContainer['jpegPhoneLinks'] as $link)
-					{
-						$previewRecord = new PreviewRecord();
-						$previewRecord->id_container = $previewContainer['id'];
-						$previewRecord->id_library = $previewContainer['libraryId'];
-						$previewRecord->type = 'jpeg_phone';
-						$previewRecord->relative_path = $link;
-						$previewRecord->save();
-					}
 			if (array_key_exists('pdfLinks', $previewContainer))
 				if (isset($previewContainer['pdfLinks']))
 					foreach ($previewContainer['pdfLinks'] as $link)
