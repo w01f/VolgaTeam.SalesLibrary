@@ -291,8 +291,6 @@
           <xsd:element name="libraryId" type="xsd:string" />
           <xsd:element name="pngLinks" type="tns:stringArray" />
           <xsd:element name="pngPhoneLinks" type="tns:stringArray" />
-          <xsd:element name="jpegLinks" type="tns:stringArray" />
-          <xsd:element name="jpegPhoneLinks" type="tns:stringArray" />
           <xsd:element name="pdfLinks" type="tns:stringArray" />
           <xsd:element name="mp4Links" type="tns:stringArray" />
           <xsd:element name="mp4ThumbLinks" type="tns:stringArray" />

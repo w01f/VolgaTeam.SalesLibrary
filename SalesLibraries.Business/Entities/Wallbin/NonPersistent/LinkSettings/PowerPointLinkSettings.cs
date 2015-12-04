@@ -75,19 +75,20 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 			Id = Guid.NewGuid();
 		}
 
-		public void UpdateSizeInfo(bool useExistedConnection = false)
+		public void UpdateSizeInfo()
 		{
-			if (!PowerPointHelper.Instance.ConnectHidden() && !useExistedConnection) return;
-			double height;
-			double width;
-			PowerPointHelper.Instance.GetPresentationProperties(ParentFileLink.FullPath, out width, out height);
-			Width = width;
-			Height = height;
-			if (!useExistedConnection)
-				PowerPointHelper.Instance.Disconnect();
+			using (var powerPointProcesor = new PowerPointHidden())
+			{
+				if (!powerPointProcesor.Connect()) return;
+				double height;
+				double width;
+				powerPointProcesor.GetPresentationProperties(ParentFileLink.FullPath, out width, out height);
+				Width = width;
+				Height = height;
+			}
 		}
 
-		public void UpdateQuickViewContent(bool useExistedConnection = false)
+		public void UpdateQuickViewContent(PowerPointProcessor powerPointProcessor)
 		{
 			var parentFile = new FileInfo(ParentFileLink.FullPath);
 			var previewFolder = new DirectoryInfo(ContainerPath);
@@ -101,7 +102,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 			if (!Directory.Exists(Path.Combine(ParentFileLink.ParentLibrary.Path, Constants.RegularPreviewContainersRootFolderName)))
 				Directory.CreateDirectory(Path.Combine(ParentFileLink.ParentLibrary.Path, Constants.RegularPreviewContainersRootFolderName));
 			Directory.CreateDirectory(ContainerPath);
-			PowerPointHelper.Instance.ExportPresentationAsImages(ParentFileLink.FullPath, ContainerPath, !useExistedConnection);
+			powerPointProcessor.ExportPresentationAsImages(ParentFileLink.FullPath, ContainerPath);
 			PngHelper.ConvertFiles(ContainerPath);
 		}
 

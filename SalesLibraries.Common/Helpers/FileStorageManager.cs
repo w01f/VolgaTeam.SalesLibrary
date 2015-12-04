@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using SalesLibraries.Common.Authorization;
 using SalesLibraries.Common.Objects.RemoteStorage;
 
 namespace SalesLibraries.Common.Helpers
@@ -19,12 +20,15 @@ namespace SalesLibraries.Common.Helpers
 		public const string CommonIncomingFolderName = "common";
 		public const string LocalFilesFolderName = "local";
 
+		private static readonly FileStorageManager _instance = new FileStorageManager();
+
 		private string _url;
 		private string _login;
 		private string _password;
 		private string _dataFolderName;
+		private string _authServer;
 
-		private static readonly FileStorageManager _instance = new FileStorageManager();
+		private StorageFile _versionFile;
 
 		public bool Activated { get; private set; }
 		public string Version { get; private set; }
@@ -33,6 +37,7 @@ namespace SalesLibraries.Common.Helpers
 		public event EventHandler<FileProcessingProgressEventArgs> Downloading;
 		public event EventHandler<FileProcessingProgressEventArgs> Extracting;
 		public event EventHandler<EventArgs> UsingLocalMode;
+		public event EventHandler<AuthorizingEventArgs> Authorizing;
 
 		public static FileStorageManager Instance
 		{
@@ -79,8 +84,17 @@ namespace SalesLibraries.Common.Helpers
 		public async Task Init()
 		{
 			await InitCredentials();
+			
+			_versionFile = new ConfigFile(new object[]
+			{
+				IncomingFolderName, 
+				AppProfileManager.Instance.AppNameSet, 
+				"version.txt"
+			});
 			if (Activated)
 				await CheckDataSate();
+			if (Activated)
+				Authorize();
 		}
 
 		private async Task InitCredentials()
@@ -110,6 +124,8 @@ namespace SalesLibraries.Common.Helpers
 					_password = configLine.Replace("Password:", "").Trim();
 				else if (configLine.Contains("DataFolderName:"))
 					_dataFolderName = configLine.Replace("DataFolderName:", "").Trim();
+				else if (configLine.Contains("AuthService:"))
+					_authServer = configLine.Replace("AuthService:", "").Trim();
 			}
 
 			Activated = true;
@@ -118,30 +134,36 @@ namespace SalesLibraries.Common.Helpers
 				Directory.CreateDirectory(LocalStoragePath);
 		}
 
+		private void Authorize()
+		{
+			if (Authorizing == null) return;
+			var args = new AuthorizingEventArgs(_authServer);
+			Authorizing(this, args);
+			if (!args.Authorized &&
+				DataState == DataActualityState.NotExisted &&
+				_versionFile.ExistsLocal())
+				File.Delete(_versionFile.LocalPath);
+			Activated = args.Authorized;
+		}
+
 		private async Task CheckDataSate()
 		{
 			DataState = DataActualityState.NotExisted;
 
-			var versionFile = new ConfigFile(new object[]
-			{
-				IncomingFolderName, 
-				AppProfileManager.Instance.AppNameSet, 
-				"version.txt"
-			});
-			if (!versionFile.ExistsLocal())
+			if (!_versionFile.ExistsLocal())
 			{
 				DataState = DataActualityState.NotExisted;
-				await versionFile.Download();
+				await _versionFile.Download();
 			}
 			else
 			{
 				try
 				{
-					var remoteFile = await GetClient().GetFile(versionFile.RemotePath);
-					if (File.GetLastWriteTime(versionFile.LocalPath) < remoteFile.LastModified)
+					var remoteFile = await GetClient().GetFile(_versionFile.RemotePath);
+					if (File.GetLastWriteTime(_versionFile.LocalPath) < remoteFile.LastModified)
 					{
 						DataState = DataActualityState.Outdated;
-						await versionFile.Download();
+						await _versionFile.Download();
 					}
 					else
 						DataState = DataActualityState.Updated;
@@ -152,8 +174,8 @@ namespace SalesLibraries.Common.Helpers
 					SwitchToLocalMode();
 				}
 			}
-			if (versionFile.ExistsLocal())
-				Version = File.ReadAllText(versionFile.LocalPath);
+			if (_versionFile.ExistsLocal())
+				Version = File.ReadAllText(_versionFile.LocalPath);
 			else
 				Activated = false;
 		}

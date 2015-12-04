@@ -2,8 +2,6 @@
 {
 	public static class PreviewFormats
 	{
-		public const string Jpeg = "jpg";
-		public const string JpegForMobile = "jpg_phone";
 		public const string Pdf = "pdf";
 		public const string Png = "png";
 		public const string PngForMobile = "png_phone";

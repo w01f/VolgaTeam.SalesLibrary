@@ -839,10 +839,6 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         
         private string[] pngPhoneLinksField;
         
-        private string[] jpegLinksField;
-        
-        private string[] jpegPhoneLinksField;
-        
         private string[] pdfLinksField;
         
         private string[] mp4LinksField;
@@ -896,26 +892,6 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
             }
             set {
                 this.pngPhoneLinksField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string[] jpegLinks {
-            get {
-                return this.jpegLinksField;
-            }
-            set {
-                this.jpegLinksField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string[] jpegPhoneLinks {
-            get {
-                return this.jpegPhoneLinksField;
-            }
-            set {
-                this.jpegPhoneLinksField = value;
             }
         }
         

@@ -364,25 +364,16 @@ namespace SalesLibraries.FileManager.Business.Services
 					.GetPreviewLinksByFormat(PreviewFormats.PngForMobile)
 					.Select(path => path.Replace(source.Library.Path, String.Empty))
 					.ToArray(); ;
-				target.jpegLinks = source
-					.GetPreviewLinksByFormat(PreviewFormats.Jpeg)
-					.Select(path => path.Replace(source.Library.Path, String.Empty))
-					.ToArray(); ;
-				target.jpegPhoneLinks = source
-					.GetPreviewLinksByFormat(PreviewFormats.JpegForMobile)
-					.Select(path => path.Replace(source.Library.Path, String.Empty))
-					.ToArray(); ;
 				target.thumbsPhoneLinks = source
 					.GetPreviewLinksByFormat(PreviewFormats.ThumbnailsForMobile)
 					.Select(path => path.Replace(source.Library.Path, String.Empty))
 					.ToArray();
-				target.thumbsLinks = source
-					.GetPreviewLinksByFormat(PreviewFormats.Thumbnails)
-					.Select(path => path.Replace(source.Library.Path, String.Empty))
-					.ToArray();
+				
+				var thumbnails = source.GetPreviewLinksByFormat(PreviewFormats.Thumbnails).ToList();
+				target.thumbsLinks = thumbnails.Select(path => path.Replace(source.Library.Path, String.Empty)).ToArray();
 				if (target.thumbsLinks.Any())
 				{
-					var thumbSize = GetThumbSize(Path.Combine(source.Library.Path, target.thumbsLinks.First()));
+					var thumbSize = GetThumbSize(thumbnails.First());
 					target.thumbsWidth = thumbSize.Width;
 					target.thumbsHeight = thumbSize.Height;
 				}

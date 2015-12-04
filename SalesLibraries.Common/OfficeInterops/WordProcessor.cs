@@ -1,25 +1,17 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Linq;
 using Microsoft.Office.Interop.Word;
+using SalesLibraries.Common.Helpers;
 
 namespace SalesLibraries.Common.OfficeInterops
 {
-	public class WordHelper
+	public abstract class WordProcessor
 	{
-		private static readonly WordHelper _instance = new WordHelper();
-
 		private bool _isFirstLaunch = false;
 		private bool _isOpened;
 
 		public Application WordObject { get; private set; }
-
-		public static WordHelper Instance
-		{
-			get
-			{
-				return _instance;
-			}
-		}
 
 		public bool IsOpened
 		{
@@ -34,8 +26,6 @@ namespace SalesLibraries.Common.OfficeInterops
 				return _isOpened;
 			}
 		}
-
-		private WordHelper(){}
 
 		public bool Connect()
 		{
@@ -78,12 +68,15 @@ namespace SalesLibraries.Common.OfficeInterops
 		{
 			if (_isFirstLaunch)
 			{
-				var proc = Process.GetProcessesByName("WINWORD");
-				if (proc.GetLength(0) > 0)
-					proc[0].Kill();
+				try
+				{
+					WordObject.Quit();
+				}
+				catch {}
+				Process.GetProcessesByName("WINWORD").ToList().ForEach(p=>p.Kill());
 				_isOpened = false;
 			}
-			WordObject = null;
+			Utils.ReleaseComObject(WordObject);
 			GC.Collect();
 		}
 

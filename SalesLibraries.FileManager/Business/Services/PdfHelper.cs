@@ -10,35 +10,31 @@ namespace SalesLibraries.FileManager.Business.Services
 {
 	static class PdfHelper
 	{
-		public static void ExportPdf(string sourceFilePath, string destinationPngPath, string destinationJpgPath, string destinationThumbsPath)
+		public static void ExportPdf(string sourceFilePath, string destinationPngPath, string destinationThumbsPath)
 		{
 			var rasterizer = new PdfRasterizer(sourceFilePath);
 			// Save the image.
 			var pngImageFormat = new PngImageFormat(PngColorFormat.Rgb);
-			var jpgImageFormat = new JpegImageFormat(90);
 			var imageSizeFormat = new PercentageImageSize(100);
 			var thumbsSizeFormat = new PercentageImageSize(10);
 			for (var i = 0; i < rasterizer.Pages.Count; i++)
 			{
 				rasterizer.Pages[i].Draw(Path.Combine(destinationPngPath, "Page" + (i + 1) + ".png"), pngImageFormat, imageSizeFormat);
-				rasterizer.Pages[i].Draw(Path.Combine(destinationJpgPath, "Page" + (i + 1) + ".jpg"), jpgImageFormat, imageSizeFormat);
 				rasterizer.Pages[i].Draw(Path.Combine(destinationThumbsPath, "Page" + (i + 1) + ".png"), pngImageFormat, thumbsSizeFormat);
 			}
 			rasterizer.Dispose();
 		}
 
-		public static void ExportPdfPhone(string sourceFilePath, string destinationPngPath, string destinationJpgPath, string destinationThumbsPath)
+		public static void ExportPdfPhone(string sourceFilePath, string destinationPngPath, string destinationThumbsPath)
 		{
 			var rasterizer = new PdfRasterizer(sourceFilePath);
 			// Save the image.
 			var pngImageFormat = new PngImageFormat(PngColorFormat.Rgb);
-			var jpgImageFormat = new JpegImageFormat(90);
 			var imageSizeFormat = new PercentageImageSize(60);
 			var thumbsSizeFormat = new PercentageImageSize(30);
 			for (var i = 0; i < rasterizer.Pages.Count; i++)
 			{
 				rasterizer.Pages[i].Draw(Path.Combine(destinationPngPath, "Page" + (i + 1) + ".png"), pngImageFormat, imageSizeFormat);
-				rasterizer.Pages[i].Draw(Path.Combine(destinationJpgPath, "Page" + (i + 1) + ".jpg"), jpgImageFormat, imageSizeFormat);
 				rasterizer.Pages[i].Draw(Path.Combine(destinationThumbsPath, "Page" + (i + 1) + ".png"), pngImageFormat, thumbsSizeFormat);
 			}
 

@@ -51,6 +51,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Services\Service.Authorization.cs" />
     <Compile Include="Services\Service.FileManagerResources.cs" />
     <Compile Include="Services\Service.Admin.Libraries.cs" />
     <Compile Include="Services\Service.Admin.Groups.cs" />

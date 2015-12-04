@@ -23,10 +23,25 @@ namespace SalesLibraries.Business.Entities.Helpers
 
 		public static bool IsWordFile(string filePath)
 		{
+			return IsWordFileNewFormat(filePath) || IsWordFileOldFormat(filePath);
+		}
+
+		public static bool IsWordFileNewFormat(string filePath)
+		{
+			switch (GetExtension(filePath))
+			{
+				case ".DOCX":
+					return true;
+				default:
+					return false;
+			}
+		}
+
+		public static bool IsWordFileOldFormat(string filePath)
+		{
 			switch (GetExtension(filePath))
 			{
 				case ".DOC":
-				case ".DOCX":
 					return true;
 				default:
 					return false;

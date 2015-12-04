@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using Microsoft.Office.Core;
@@ -8,27 +9,20 @@ using Microsoft.Office.Interop.PowerPoint;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.Common.Objects.PowerPoint;
 using Application = Microsoft.Office.Interop.PowerPoint.Application;
-using PrintRange = System.Drawing.Printing.PrintRange;
 
 namespace SalesLibraries.Common.OfficeInterops
 {
-	public class PowerPointHelper
+	public abstract class PowerPointProcessor
 	{
-		private static readonly PowerPointHelper _instance = new PowerPointHelper();
-
 		private bool _isFirstLaunch;
-		private int _powerPointProcessId;
-
-		public static PowerPointHelper Instance
-		{
-			get { return _instance; }
-		}
-
 		public Application PowerPointObject { get; private set; }
 		public Presentation SlideSourcePresentation { get; private set; }
 		public SlideShowWindow SlideShowWindow { get; private set; }
 
-		public IntPtr WindowHandle { get; private set; }
+		public IntPtr WindowHandle
+		{
+			get { return PowerPointObject != null ? new IntPtr(PowerPointObject.HWND) : IntPtr.Zero; }
+		}
 
 		public bool IsLinkedWithApplication
 		{
@@ -46,7 +40,7 @@ namespace SalesLibraries.Common.OfficeInterops
 					try
 					{
 						if (PowerPointObject == null)
-							ConnectVisible(false);
+							PowerPointObject = GetExistedPowerPoint(false);
 						var caption = PowerPointObject.Caption;
 					}
 					catch
@@ -59,75 +53,51 @@ namespace SalesLibraries.Common.OfficeInterops
 			}
 		}
 
-		private PowerPointHelper() { }
-
-		public bool ConnectHidden()
+		public virtual bool Connect(bool forceNewObject = false)
 		{
-			bool result = false;
-			MessageFilter.Register();
-			try
-			{
-				PowerPointObject = new Application();
-				PowerPointObject.DisplayAlerts = PpAlertLevel.ppAlertsNone;
-				result = true;
-			}
-			catch { }
-			finally
-			{
-				MessageFilter.Revoke();
-			}
-			return result;
-		}
-
-		public bool ConnectVisible(bool run = true)
-		{
-			bool result;
 			try
 			{
 				MessageFilter.Register();
-				try
+				if (forceNewObject)
 				{
-					if (PowerPointObject == null || run)
-						PowerPointObject =
-							Marshal.GetActiveObject("PowerPoint.Application") as Application;
+					_isFirstLaunch = GetExistedPowerPoint(false) == null;
+					PowerPointObject = CreateNewPowerPoint();
 				}
-				catch
-				{
-					if (run)
-					{
-						PowerPointObject = new Application();
-						PowerPointObject.Visible = MsoTriState.msoCTrue;
-					}
-					_isFirstLaunch = true;
-				}
-				WindowHandle = new IntPtr(PowerPointObject.HWND);
-				uint lpdwProcessId;
-				WinAPIHelper.GetWindowThreadProcessId(WindowHandle, out lpdwProcessId);
-				_powerPointProcessId = (int)lpdwProcessId;
+				else
+					PowerPointObject = GetExistedPowerPoint();
 				PowerPointObject.DisplayAlerts = PpAlertLevel.ppAlertsNone;
-				GetActivePresentation();
-				result = true;
 			}
 			catch
 			{
-				result = false;
 				PowerPointObject = null;
 			}
 			finally
 			{
 				MessageFilter.Revoke();
 			}
-			return result;
+			return PowerPointObject != null;
 		}
 
-		public void Disconnect()
+		private Application CreateNewPowerPoint()
 		{
-			Utils.ReleaseComObject(PowerPointObject);
-			GC.Collect();
-			GC.WaitForPendingFinalizers();
+			return new Application();
 		}
 
-		public void Disconnect(bool closeIfFirstLaunch = true)
+		private Application GetExistedPowerPoint(bool createIfNoExisted = true)
+		{
+			try
+			{
+				_isFirstLaunch = false;
+				return Marshal.GetActiveObject("PowerPoint.Application") as Application;
+			}
+			catch
+			{
+				_isFirstLaunch = true;
+				return createIfNoExisted ? CreateNewPowerPoint() : null;
+			}
+		}
+
+		public void Disconnect(bool closeIfFirstLaunch = false)
 		{
 			if (_isFirstLaunch && closeIfFirstLaunch)
 			{
@@ -140,11 +110,20 @@ namespace SalesLibraries.Common.OfficeInterops
 			GC.WaitForPendingFinalizers();
 		}
 
-		public void Close()
+		protected void Close()
 		{
 			try
 			{
-				Process.GetProcessById(_powerPointProcessId).CloseMainWindow();
+				PowerPointObject.Quit();
+			}
+			catch { }
+			try
+			{
+				uint lpdwProcessId;
+				WinAPIHelper.GetWindowThreadProcessId(WindowHandle, out lpdwProcessId);
+				var powerPointProcessId = (int)lpdwProcessId;
+				Process.GetProcessById(powerPointProcessId).CloseMainWindow();
+				Process.GetProcessesByName("POWERPNT").ToList().ForEach(p => p.Kill());
 			}
 			catch { }
 		}
@@ -208,22 +187,17 @@ namespace SalesLibraries.Common.OfficeInterops
 			return slideIndex;
 		}
 
-		public bool ExportPresentationAsImages(string sourceFilePath, string destinationFolderPath, bool connect = true)
+		public bool ExportPresentationAsImages(string sourceFilePath, string destinationFolderPath)
 		{
 			bool result = false;
 			try
 			{
 				MessageFilter.Register();
-				if (ConnectHidden() || !connect)
-				{
-					Presentation presentation = PowerPointObject.Presentations.Open(sourceFilePath, WithWindow: MsoTriState.msoFalse);
-					presentation.Export(destinationFolderPath, "PNG");
-					presentation.Close();
-					Utils.ReleaseComObject(presentation);
-					if (connect)
-						Disconnect();
-					result = true;
-				}
+				var presentation = PowerPointObject.Presentations.Open(sourceFilePath, WithWindow: MsoTriState.msoFalse);
+				presentation.Export(destinationFolderPath, "PNG");
+				presentation.Close();
+				Utils.ReleaseComObject(presentation);
+				result = true;
 			}
 			catch { }
 			finally
@@ -549,15 +523,15 @@ namespace SalesLibraries.Common.OfficeInterops
 				{
 					switch (dlg.PrinterSettings.PrintRange)
 					{
-						case PrintRange.AllPages:
+						case System.Drawing.Printing.PrintRange.AllPages:
 							fromPage = 1;
 							toPage = SlideSourcePresentation.Slides.Count;
 							break;
-						case PrintRange.CurrentPage:
+						case System.Drawing.Printing.PrintRange.CurrentPage:
 							fromPage = currentSlideIndex;
 							toPage = currentSlideIndex;
 							break;
-						case PrintRange.SomePages:
+						case System.Drawing.Printing.PrintRange.SomePages:
 							fromPage = dlg.PrinterSettings.FromPage;
 							if (fromPage < 1)
 								fromPage = 1;
@@ -704,90 +678,5 @@ namespace SalesLibraries.Common.OfficeInterops
 			}
 			return result;
 		}
-	}
-
-	public class MessageFilter : IOleMessageFilter
-	{
-		//
-		// Class containing the IOleMessageFilter
-		// thread error-handling functions.
-
-		// Start the filter.
-
-		//
-		// IOleMessageFilter functions.
-		// Handle incoming thread requests.
-		int IOleMessageFilter.HandleInComingCall(int dwCallType,
-			IntPtr hTaskCaller, int dwTickCount, IntPtr
-				lpInterfaceInfo)
-		{
-			//Return the flag SERVERCALL_ISHANDLED.
-			return 0;
-		}
-
-		// Thread call was rejected, so try again.
-		int IOleMessageFilter.RetryRejectedCall(IntPtr
-			hTaskCallee, int dwTickCount, int dwRejectType)
-		{
-			if (dwRejectType == 2)
-			// flag = SERVERCALL_RETRYLATER.
-			{
-				// Retry the thread call immediately if return >=0 & 
-				// <100.
-				return 99;
-			}
-			// Too busy; cancel call.
-			return -1;
-		}
-
-		int IOleMessageFilter.MessagePending(IntPtr hTaskCallee,
-			int dwTickCount, int dwPendingType)
-		{
-			//Return the flag PENDINGMSG_WAITDEFPROCESS.
-			return 2;
-		}
-
-		public static void Register()
-		{
-			IOleMessageFilter newFilter = new MessageFilter();
-			IOleMessageFilter oldFilter = null;
-			CoRegisterMessageFilter(newFilter, out oldFilter);
-		}
-
-		// Done with the filter, close it.
-		public static void Revoke()
-		{
-			IOleMessageFilter oldFilter = null;
-			CoRegisterMessageFilter(null, out oldFilter);
-		}
-
-		// Implement the IOleMessageFilter interface.
-		[DllImport("Ole32.dll")]
-		private static extern int
-			CoRegisterMessageFilter(IOleMessageFilter newFilter, out
-				IOleMessageFilter oldFilter);
-	}
-
-	[ComImport, Guid("00000016-0000-0000-C000-000000000046"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
-	internal interface IOleMessageFilter
-	{
-		[PreserveSig]
-		int HandleInComingCall(
-			int dwCallType,
-			IntPtr hTaskCaller,
-			int dwTickCount,
-			IntPtr lpInterfaceInfo);
-
-		[PreserveSig]
-		int RetryRejectedCall(
-			IntPtr hTaskCallee,
-			int dwTickCount,
-			int dwRejectType);
-
-		[PreserveSig]
-		int MessagePending(
-			IntPtr hTaskCallee,
-			int dwTickCount,
-			int dwPendingType);
 	}
 }

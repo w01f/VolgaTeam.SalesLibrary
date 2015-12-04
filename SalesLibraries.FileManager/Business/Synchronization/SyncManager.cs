@@ -139,13 +139,15 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 		{
 			var powerPointFiles = library.Pages.SelectMany(p => p.AllLinks).OfType<PowerPointLink>().ToList();
 			if (!powerPointFiles.Any()) return;
-			if (!PowerPointHelper.Instance.ConnectHidden()) return;
-			foreach (var powerPointLink in powerPointFiles)
+			using (var powerPointProcessor = new PowerPointHidden())
 			{
-				if (cancellationToken.IsCancellationRequested) break;
-				((PowerPointLinkSettings)powerPointLink.Settings).UpdateQuickViewContent(true);
+				if (!powerPointProcessor.Connect()) return;
+				foreach (var powerPointLink in powerPointFiles)
+				{
+					if (cancellationToken.IsCancellationRequested) break;
+					((PowerPointLinkSettings)powerPointLink.Settings).UpdateQuickViewContent(powerPointProcessor);
+				}
 			}
-			PowerPointHelper.Instance.Disconnect();
 		}
 
 		private static void UpdateWebPreviewContent(Library library, CancellationToken cancellationToken)

@@ -12,7 +12,6 @@ namespace SalesLibraries.Common.Helpers
 	public class PowerPointManager
 	{
 		private static readonly PowerPointManager _instance = new PowerPointManager();
-		private PowerPointHelper _powerPointHelper;
 
 		public static PowerPointManager Instance
 		{
@@ -32,11 +31,10 @@ namespace SalesLibraries.Common.Helpers
 
 		public void Init()
 		{
-			_powerPointHelper = PowerPointHelper.Instance;
-			if (_powerPointHelper.IsLinkedWithApplication)
+			if (PowerPointSingleton.Instance.IsLinkedWithApplication)
 			{
 				SettingsSource = SettingsSourceEnum.PowerPoint;
-				GetActiveSettings();
+				SlideSettings = PowerPointSingleton.Instance.GetSlideSettings() ?? SlideSettings;
 			}
 			else
 			{
@@ -59,7 +57,7 @@ namespace SalesLibraries.Common.Helpers
 
 		public void ActivatePowerPoint()
 		{
-			var powerPointHandle = _powerPointHelper.WindowHandle;
+			var powerPointHandle = PowerPointSingleton.Instance.WindowHandle;
 			Utils.ActivateForm(powerPointHandle, true, false);
 			WinAPIHelper.ShowWindow(powerPointHandle, WindowShowStyle.ShowMaximized);
 			uint lpdwProcessId = 0;
@@ -76,11 +74,6 @@ namespace SalesLibraries.Common.Helpers
 			var node = document.SelectSingleNode(@"/Settings/Size");
 			if (node != null)
 				SlideSettings = SlideSettings.ReadFromString(node.InnerText.Trim());
-		}
-
-		private void GetActiveSettings()
-		{
-			SlideSettings = _powerPointHelper.GetSlideSettings() ?? SlideSettings;
 		}
 	}
 }

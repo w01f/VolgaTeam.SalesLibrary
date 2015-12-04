@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SalesLibraries.Business.Contexts.Wallbin;
+using SalesLibraries.Common.Authorization;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.Common.Objects.RemoteStorage;
 using SalesLibraries.CommonGUI.BackgroundProcesses;
@@ -88,6 +89,13 @@ namespace SalesLibraries.FileManager.Controllers
 					Application.Exit();
 				}
 				ProcessManager.ResumeProcess();
+			};
+
+			FileStorageManager.Instance.Authorizing += (o, e) =>
+			{
+				var authManager = new AuthManager();
+				authManager.Init();
+				authManager.Auth(e);
 			};
 
 			ProcessManager.RunStartProcess(

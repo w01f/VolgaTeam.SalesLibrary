@@ -36,8 +36,6 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers
 				{
 					PreviewFormats.Png,
 					PreviewFormats.PngForMobile,
-					PreviewFormats.Jpeg,
-					PreviewFormats.JpegForMobile,
 					PreviewFormats.Thumbnails,
 					PreviewFormats.ThumbnailsForMobile,
 				};
