@@ -100,9 +100,10 @@
 				switch ($fileTypeDescription)
 				{
 					case 'video':
-						$instance->fileTypes[] = 'mp4';
 						$instance->fileTypes[] = 'mp3';
+						$instance->fileTypes[] = 'mp4';
 						$instance->fileTypes[] = 'wmv';
+						$instance->fileTypes[] = 'video';
 						break;
 					case 'image':
 						$instance->fileTypes[] = 'png';
