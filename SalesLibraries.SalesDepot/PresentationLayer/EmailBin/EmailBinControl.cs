@@ -28,7 +28,11 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.EmailBin
 			LoadLinks();
 			LoadEmailBinOptions();
 			UpdateEmailBinButtons();
-			MainController.Instance.EmailBin.ListChanged += (o, e) => LoadLinks();
+			MainController.Instance.EmailBin.ListChanged += (o, e) =>
+			{
+				LoadLinks();
+				UpdateEmailBinButtons();
+			};
 			_isLoading = false;
 		}
 
@@ -54,7 +58,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.EmailBin
 
 		private void buttonXPDF_CheckedChanged(object sender, EventArgs e)
 		{
-			if(_isLoading) return;
+			if (_isLoading) return;
 			MainController.Instance.Settings.EmailBinSettings.EmailBinSendAsPdf = buttonXPDF.Checked;
 			MainController.Instance.Settings.SaveSettings();
 		}
@@ -88,66 +92,62 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.EmailBin
 
 		private void buttonXCreateEmail_Click(object sender, EventArgs e)
 		{
-			bool closePowerPoint = false;
-			if (!PowerPointHelper.Instance.IsLinkedWithApplication)
+			using (var powerPointProcessor = new PowerPointHidden())
 			{
-				PowerPointHelper.Instance.ConnectHidden();
-				closePowerPoint = true;
-			}
+				if (!powerPointProcessor.Connect()) return;
 
-			var emailFiles = new List<string>();
-			if (buttonXPDF.Checked)
-			{
-				var convertResult = true;
-				foreach (var item in MainController.Instance.EmailBin.EmailLinks)
+				var emailFiles = new List<string>();
+				if (buttonXPDF.Checked)
 				{
-					Application.DoEvents();
-					switch (item.Type)
+					var convertResult = true;
+					foreach (var item in MainController.Instance.EmailBin.EmailLinks)
 					{
-						case FileTypes.PowerPoint:
-							var pdfFileName = Path.Combine(RemoteResourceManager.Instance.TempFolder.LocalPath, Path.GetFileNameWithoutExtension(item.FullPath) + ".pdf");
-							if (PowerPointHelper.Instance.ExportPresentationAsPdf(item.FullPath, pdfFileName))
-							{
-								if (File.Exists(pdfFileName))
-									emailFiles.Add(pdfFileName);
-							}
-							else
-							{
-								convertResult = false;
+						Application.DoEvents();
+						switch (item.Type)
+						{
+							case FileTypes.PowerPoint:
+								var pdfFileName = Path.Combine(RemoteResourceManager.Instance.TempFolder.LocalPath, Path.GetFileNameWithoutExtension(item.FullPath) + ".pdf");
+								if (powerPointProcessor.ExportPresentationAsPdf(item.FullPath, pdfFileName))
+								{
+									if (File.Exists(pdfFileName))
+										emailFiles.Add(pdfFileName);
+								}
+								else
+								{
+									convertResult = false;
+									emailFiles.Add(item.FullPath);
+								}
+								break;
+							default:
 								emailFiles.Add(item.FullPath);
-							}
-							break;
-						default:
-							emailFiles.Add(item.FullPath);
-							break;
+								break;
+						}
 					}
+					if (!convertResult)
+						if (MainController.Instance.PopupMessages.ShowWarningQuestion("Some Power Point files were not converted to PDF.\nDo you want to send them in original format?") != DialogResult.Yes)
+							return;
 				}
-				if (!convertResult)
-					if (MainController.Instance.PopupMessages.ShowWarningQuestion("Some Power Point files were not converted to PDF.\nDo you want to send them in original format?") != DialogResult.Yes)
-						return;
-			}
-			else
-				emailFiles.AddRange(MainController.Instance.EmailBin.EmailLinks.Select(l=>l.FullPath));
+				else
+					emailFiles.AddRange(MainController.Instance.EmailBin.EmailLinks.Select(l => l.FullPath));
 
-			if (emailFiles.Count > 0 && MainController.Instance.Settings.EmailBinSettings.EmailBinSendAsZip)
-			{
-				using (var form = new FormZipFileName())
+				if (emailFiles.Count > 0 && MainController.Instance.Settings.EmailBinSettings.EmailBinSendAsZip)
 				{
-					if (form.ShowDialog(MainController.Instance.MainForm) == DialogResult.OK)
+					using (var form = new FormZipFileName())
 					{
-						string compressedFilesPath = Path.Combine(RemoteResourceManager.Instance.TempFolder.LocalPath, form.FileName + ".zip");
-						Utils.CompressFiles(emailFiles, compressedFilesPath);
-						emailFiles.Clear();
-						emailFiles.Add(compressedFilesPath);
+						if (form.ShowDialog(MainController.Instance.MainForm) == DialogResult.OK)
+						{
+							string compressedFilesPath = Path.Combine(RemoteResourceManager.Instance.TempFolder.LocalPath, form.FileName + ".zip");
+							Utils.CompressFiles(emailFiles, compressedFilesPath);
+							emailFiles.Clear();
+							emailFiles.Add(compressedFilesPath);
+						}
+						else
+							emailFiles.Clear();
 					}
-					else
-						emailFiles.Clear();
 				}
+				if (emailFiles.Count > 0)
+					LinkManager.EmailFiles(emailFiles.ToArray());
 			}
-			if (emailFiles.Count > 0)
-				LinkManager.EmailFiles(emailFiles.ToArray());
-			if (closePowerPoint)
-				PowerPointHelper.Instance.Disconnect();
 		}
 	}
 }

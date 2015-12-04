@@ -141,8 +141,8 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Forms
 					"Saving as PDF...",
 					cancellationToken =>
 					{
-						PowerPointHelper.Instance.OpenSlideSourcePresentation(_tempFileCopy);
-						PowerPointHelper.Instance.ExportSlideAsPdf(wholeFile ? -1 : SelectedThumbnail.Index, destinationFileName);
+						PowerPointSingleton.Instance.OpenSlideSourcePresentation(_tempFileCopy);
+						PowerPointSingleton.Instance.ExportSlideAsPdf(wholeFile ? -1 : SelectedThumbnail.Index, destinationFileName);
 
 					});
 
@@ -154,7 +154,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Forms
 		private void barButtonItemEmailLink_ItemClick(object sender, ItemClickEventArgs e)
 		{
 			if (!CheckPowerPointRunning()) return;
-			PowerPointHelper.Instance.OpenSlideSourcePresentation(_tempFileCopy);
+			PowerPointSingleton.Instance.OpenSlideSourcePresentation(_tempFileCopy);
 			using (var form = new FormEmailPresentation())
 			{
 				form.PowerPointLink = PowerPointLink;
@@ -167,8 +167,8 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Forms
 		{
 			if (!CheckPowerPointRunning()) return;
 			MainController.Instance.ActivityManager.AddLinkAccessActivity("Print Link", PowerPointLink);
-			PowerPointHelper.Instance.OpenSlideSourcePresentation(_tempFileCopy);
-			PowerPointHelper.Instance.PrintPresentation(SelectedThumbnail.Index);
+			PowerPointSingleton.Instance.OpenSlideSourcePresentation(_tempFileCopy);
+			PowerPointSingleton.Instance.PrintPresentation(SelectedThumbnail.Index);
 		}
 
 		private void barLargeButtonItemAddAllSlides_ItemClick(object sender, ItemClickEventArgs e)
@@ -237,7 +237,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Forms
 
 		private bool CheckPowerPointRunning()
 		{
-			if (PowerPointHelper.Instance.IsLinkedWithApplication) return true;
+			if (PowerPointSingleton.Instance.IsLinkedWithApplication) return true;
 			if (MainController.Instance.PopupMessages.ShowWarningQuestion("PowerPoint is not Running. Do you want to open it now?") != DialogResult.Yes) return false;
 			AfterClose = () => MainController.Instance.CheckPowerPointRunning();
 			Close();
@@ -247,10 +247,10 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Forms
 		private void InsertSlide(bool allSlides = false)
 		{
 			if (!CheckPowerPointRunning()) return;
-			if (PowerPointHelper.Instance.GetActiveSlideIndex() != -1)
+			if (PowerPointSingleton.Instance.GetActiveSlideIndex() != -1)
 			{
 				MainController.Instance.ActivateApplication();
-				var activeSlideSettings = PowerPointHelper.Instance.GetSlideSettings();
+				var activeSlideSettings = PowerPointSingleton.Instance.GetSlideSettings();
 				if (activeSlideSettings.Orientation.ToString() != _previewData.Settings.Orientation)
 					if (MainController.Instance.PopupMessages.ShowWarningQuestion("This slide is not the same size as your presentation.\nDo you still want to add it?") != DialogResult.Yes)
 						return;
@@ -267,8 +267,8 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Forms
 						{
 							PowerPointManager.Instance.ActivatePowerPoint();
 							MainController.Instance.ActivityManager.AddLinkAccessActivity("Insert Slide", PowerPointLink);
-							PowerPointHelper.Instance.OpenSlideSourcePresentation(_tempFileCopy);
-								PowerPointHelper.Instance.AppendSlide(
+							PowerPointSingleton.Instance.OpenSlideSourcePresentation(_tempFileCopy);
+								PowerPointSingleton.Instance.AppendSlide(
 								allSlides ? -1 : SelectedThumbnail.Index,
 								templatePath);
 

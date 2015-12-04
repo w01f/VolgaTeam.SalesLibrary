@@ -93,7 +93,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Contro
 			if (!MainController.Instance.CheckPowerPointRunning(
 				() => MainController.Instance.PopupMessages.ShowWarningQuestion("PowerPoint is not Running. Do you want to open it now?") == DialogResult.Yes)
 				) return;
-			PowerPointHelper.Instance.OpenSlideSourcePresentation(_tempCopy);
+			PowerPointSingleton.Instance.OpenSlideSourcePresentation(_tempCopy);
 			using (var form = new FormEmailPresentation())
 			{
 				form.PowerPointLink = PowerPointLink;
@@ -108,8 +108,8 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Contro
 				() => MainController.Instance.PopupMessages.ShowWarningQuestion("PowerPoint is not Running. Do you want to open it now?") == DialogResult.Yes)
 				) return;
 			MainController.Instance.ActivityManager.AddLinkAccessActivity("Print Link", Link);
-			PowerPointHelper.Instance.OpenSlideSourcePresentation(_tempCopy);
-			PowerPointHelper.Instance.PrintPresentation(SelectedThumbnail.Index);
+			PowerPointSingleton.Instance.OpenSlideSourcePresentation(_tempCopy);
+			PowerPointSingleton.Instance.PrintPresentation(SelectedThumbnail.Index);
 		}
 		#endregion
 
@@ -119,10 +119,10 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Contro
 			if (!MainController.Instance.CheckPowerPointRunning(
 				() => MainController.Instance.PopupMessages.ShowWarningQuestion("PowerPoint is not Running. Do you want to open it now?") == DialogResult.Yes)
 				) return;
-			if (PowerPointHelper.Instance.GetActiveSlideIndex() != -1)
+			if (PowerPointSingleton.Instance.GetActiveSlideIndex() != -1)
 			{
 				MainController.Instance.ActivateApplication();
-				var activeSlideSettings = PowerPointHelper.Instance.GetSlideSettings();
+				var activeSlideSettings = PowerPointSingleton.Instance.GetSlideSettings();
 				if (activeSlideSettings.Orientation.ToString() != _previewData.Settings.Orientation)
 					if (MainController.Instance.PopupMessages.ShowWarningQuestion("This slide is not the same size as your presentation.\nDo you still want to add it?") != DialogResult.Yes)
 						return;
@@ -136,8 +136,8 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Contro
 						{
 							PowerPointManager.Instance.ActivatePowerPoint();
 							MainController.Instance.ActivityManager.AddLinkAccessActivity("Insert Slide", Link);
-							PowerPointHelper.Instance.OpenSlideSourcePresentation(_tempCopy);
-							PowerPointHelper.Instance.AppendSlide(SelectedThumbnail.Index);
+							PowerPointSingleton.Instance.OpenSlideSourcePresentation(_tempCopy);
+							PowerPointSingleton.Instance.AppendSlide(SelectedThumbnail.Index);
 
 						})
 					);
@@ -166,8 +166,8 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Contro
 					"Saving as PDF...",
 					cancellationToken =>
 					{
-						PowerPointHelper.Instance.OpenSlideSourcePresentation(_tempCopy);
-						PowerPointHelper.Instance.ExportSlideAsPdf(wholeFile ? -1 : SelectedThumbnail.Index, destinationFileName);
+						PowerPointSingleton.Instance.OpenSlideSourcePresentation(_tempCopy);
+						PowerPointSingleton.Instance.ExportSlideAsPdf(wholeFile ? -1 : SelectedThumbnail.Index, destinationFileName);
 
 					});
 

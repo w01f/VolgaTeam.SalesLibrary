@@ -48,10 +48,10 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Forms
 				var destinationFilePath = Path.Combine(Path.GetTempPath(), ckConvertToPDF.Checked ? ((string.IsNullOrEmpty(selectedName) ? PowerPointLink.NameWithoutExtension : selectedName) + ".pdf") : (string.IsNullOrEmpty(selectedName) ? PowerPointLink.NameWithExtension : (selectedName + PowerPointLink.Extension)));
 				if (ckConvertToPDF.Checked)
 				{
-					PowerPointHelper.Instance.ExportSlideAsPdf(rbActiveSlide.Checked ? ActiveSlide : -1, destinationFilePath);
+					PowerPointSingleton.Instance.ExportSlideAsPdf(rbActiveSlide.Checked ? ActiveSlide : -1, destinationFilePath);
 				}
 				else if (rbActiveSlide.Checked)
-					PowerPointHelper.Instance.SaveSingleSlide(ActiveSlide, destinationFilePath);
+					PowerPointSingleton.Instance.SaveSingleSlide(ActiveSlide, destinationFilePath);
 				else
 					File.Copy(PowerPointLink.FullPath, destinationFilePath, true);
 				if (File.Exists(destinationFilePath))

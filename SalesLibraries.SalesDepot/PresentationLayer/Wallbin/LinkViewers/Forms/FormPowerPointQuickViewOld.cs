@@ -61,7 +61,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Forms
 				Text = "QuickView - " + PowerPointLink.NameWithExtension;
 				laFileInfo.Text = "File Added: " + PowerPointLink.AddDate.ToString("MM/dd/yy");
 				MainController.Instance.MainForm.TopMost = true;
-				PowerPointHelper.Instance.SetVisibility(true);
+				PowerPointSingleton.Instance.SetVisibility(true);
 				_scaleK = IsLargeFont() ? 1.67 : 1.35;
 
 				_previewData = new PresentationPreviewContainer(PowerPointLink);
@@ -85,19 +85,19 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Forms
 
 				MainController.Instance.ProcessManager.Run("Loading the presentation...", cancellationToken =>
 				{
-					PowerPointHelper.Instance.OpenSlideSourcePresentation(_viewedFile);
-					PowerPointHelper.Instance.ViewSlideShow();
-					PowerPointHelper.Instance.ResizeSlideShow(
+					PowerPointSingleton.Instance.OpenSlideSourcePresentation(_viewedFile);
+					PowerPointSingleton.Instance.ViewSlideShow();
+					PowerPointSingleton.Instance.ResizeSlideShow(
 						containerHandle, 
 						(int)(containerHeight / _scaleK), 
 						(int)(containerWidth / _scaleK));
 				});
 
-				if (PowerPointHelper.Instance.SlideSourcePresentation != null)
+				if (PowerPointSingleton.Instance.SlideSourcePresentation != null)
 				{
 					comboBoxEditSlides.SelectedIndexChanged -= comboBoxEditSlides_SelectedIndexChanged;
 					comboBoxEditSlides.Properties.Items.Clear();
-					for (var i = 1; i <= PowerPointHelper.Instance.SlideSourcePresentation.Slides.Count; i++)
+					for (var i = 1; i <= PowerPointSingleton.Instance.SlideSourcePresentation.Slides.Count; i++)
 						comboBoxEditSlides.Properties.Items.Add(i.ToString());
 					if (comboBoxEditSlides.Properties.Items.Count > 0)
 						comboBoxEditSlides.SelectedIndex = 0;
@@ -116,7 +116,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Forms
 
 		private void FormQuickView_FormClosed(object sender, FormClosedEventArgs e)
 		{
-			MainController.Instance.ProcessManager.Run("Closing the presentation...", cancellationToken => PowerPointHelper.Instance.ExitSlideShow());
+			MainController.Instance.ProcessManager.Run("Closing the presentation...", cancellationToken => PowerPointSingleton.Instance.ExitSlideShow());
 			try
 			{
 				_viewedFile.Delete();
@@ -135,7 +135,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Forms
 
 			MainController.Instance.ProcessManager.Run("Resizing the presentation...",
 				cancellationToken =>
-					PowerPointHelper.Instance.ResizeSlideShow(
+					PowerPointSingleton.Instance.ResizeSlideShow(
 						containerHandle,
 						(int)(containerHeight / _scaleK),
 						(int)(containerWidth / _scaleK)));
@@ -175,7 +175,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Forms
 				MainController.Instance.ProcessManager.Run(
 					"Saving as PDF...",
 					cancellationToken => 
-						PowerPointHelper.Instance.ExportSlideAsPdf(
+						PowerPointSingleton.Instance.ExportSlideAsPdf(
 						wholeFile ? -1 : (comboBoxEditSlides.SelectedIndex + 1), 
 						destinationFileName));
 
@@ -198,7 +198,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Forms
 		private void barButtonItemPrintLink_ItemClick(object sender, ItemClickEventArgs e)
 		{
 			MainController.Instance.ActivityManager.AddLinkAccessActivity("Print Link", PowerPointLink);
-			PowerPointHelper.Instance.PrintPresentation(comboBoxEditSlides.SelectedIndex + 1);
+			PowerPointSingleton.Instance.PrintPresentation(comboBoxEditSlides.SelectedIndex + 1);
 		}
 
 		private void barLargeButtonItemAddAllSlides_ItemClick(object sender, ItemClickEventArgs e)
@@ -233,7 +233,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Forms
 		#region Other Event Handlers
 		private void comboBoxEditSlides_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			PowerPointHelper.Instance.SlideShowWindow.View.GotoSlide(comboBoxEditSlides.SelectedIndex + 1, MsoTriState.msoFalse);
+			PowerPointSingleton.Instance.SlideShowWindow.View.GotoSlide(comboBoxEditSlides.SelectedIndex + 1, MsoTriState.msoFalse);
 			laSlideNumber.Text = string.Format("Slide {0} of {1}", new object[] { (comboBoxEditSlides.SelectedIndex + 1).ToString(), comboBoxEditSlides.Properties.Items.Count.ToString() });
 		}
 
@@ -267,11 +267,11 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Forms
 		public void InsertSlide(bool allSlides = false)
 		{
 			if (PowerPointLink == null) return;
-			if (PowerPointHelper.Instance.GetActiveSlideIndex() != -1)
+			if (PowerPointSingleton.Instance.GetActiveSlideIndex() != -1)
 			{
 				PowerPointManager.Instance.ActivatePowerPoint();
 				MainController.Instance.ActivateApplication();
-				var activeSlideSettings = PowerPointHelper.Instance.GetSlideSettings();
+				var activeSlideSettings = PowerPointSingleton.Instance.GetSlideSettings();
 				if (activeSlideSettings.Orientation.ToString() != _previewData.Settings.Orientation)
 					if (MainController.Instance.PopupMessages.ShowWarningQuestion("This slide is not the same size as your presentation.\nDo you still want to add it?") != DialogResult.Yes)
 						return;
@@ -289,7 +289,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Forms
 						{
 							PowerPointManager.Instance.ActivatePowerPoint();
 							MainController.Instance.ActivityManager.AddLinkAccessActivity("Insert Slide", PowerPointLink);
-							PowerPointHelper.Instance.AppendSlide(
+							PowerPointSingleton.Instance.AppendSlide(
 								allSlides ? -1 : selectedIndex,
 								templatePath);
 						})

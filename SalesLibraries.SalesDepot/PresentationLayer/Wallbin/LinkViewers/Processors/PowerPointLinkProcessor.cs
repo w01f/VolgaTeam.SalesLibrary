@@ -35,7 +35,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Proces
 
 		protected override void EmailLink()
 		{
-			PowerPointHelper.Instance.OpenSlideSourcePresentation(new FileInfo(_fileLink.FullPath));
+			PowerPointSingleton.Instance.OpenSlideSourcePresentation(new FileInfo(_fileLink.FullPath));
 			using (var form = new FormEmailPresentation())
 			{
 				form.PowerPointLink = _powerPointLink;

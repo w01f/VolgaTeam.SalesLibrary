@@ -32,12 +32,12 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Contro
 
 			Link = link;
 
-			if (WordHelper.Instance.Connect())
+			using (var wordProcessor = new WordHidden())
 			{
+				if (!wordProcessor.Connect()) return;
 				var g = Guid.NewGuid();
 				var newFileName = Path.Combine(RemoteResourceManager.Instance.TempFolder.LocalPath, g + ".html");
-				WordHelper.Instance.ConvertToHtml(Link.FullPath, newFileName);
-				WordHelper.Instance.Disconnect();
+				WordSingleton.Instance.ConvertToHtml(Link.FullPath, newFileName);
 				webBrowser.Url = new Uri(newFileName);
 			}
 		}

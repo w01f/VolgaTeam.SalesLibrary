@@ -226,7 +226,7 @@ namespace SalesLibraries.SalesDepot.Business.LinkViewers
 		{
 			if (!MainController.Instance.CheckPowerPointRunning(() => MainController.Instance.PopupMessages.ShowWarningQuestion("PowerPoint is not Running. Do you want to open it now?") == DialogResult.Yes))
 				return;
-			if (File.Exists(PowerPointHelper.Instance.GetActivePresentation().FullName))
+			if (File.Exists(PowerPointSingleton.Instance.GetActivePresentation().FullName))
 			{
 				MainController.Instance.ActivityManager.AddLinkAccessActivity("Insert video", file);
 				PowerPointManager.Instance.ActivatePowerPoint();
@@ -237,7 +237,7 @@ namespace SalesLibraries.SalesDepot.Business.LinkViewers
 					MainController.Instance.MainForm.FloaterLogo,
 					() => MainController.Instance.ProcessManager.Run(
 						"Inserting the video...",
-						cancellationToken => PowerPointHelper.Instance.InsertVideoIntoActivePresentation(file.FullPath))
+						cancellationToken => PowerPointSingleton.Instance.InsertVideoIntoActivePresentation(file.FullPath))
 					);
 			}
 			else

@@ -176,8 +176,7 @@ namespace SalesLibraries.SalesDepot
 
 		private void FormMain_FormClosed(object sender, FormClosedEventArgs e)
 		{
-			PowerPointHelper.Instance.Disconnect();
-			WordHelper.Instance.Disconnect();
+			PowerPointSingleton.Instance.Disconnect();
 		}
 		#endregion
 	}

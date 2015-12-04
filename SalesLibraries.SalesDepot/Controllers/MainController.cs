@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SalesLibraries.Business.Contexts.Wallbin;
+using SalesLibraries.Common.Authorization;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.Common.Objects.RemoteStorage;
 using SalesLibraries.Common.OfficeInterops;
@@ -97,6 +98,13 @@ namespace SalesLibraries.SalesDepot.Controllers
 					Application.Exit();
 				}
 				ProcessManager.ResumeProcess();
+			};
+
+			FileStorageManager.Instance.Authorizing += (o, e) =>
+			{
+				var authManager = new AuthManager();
+				authManager.Init();
+				authManager.Auth(e);
 			};
 
 			ProcessManager.RunStartProcess(
@@ -250,7 +258,7 @@ namespace SalesLibraries.SalesDepot.Controllers
 							"",
 							() => MainForm.Invoke(new MethodInvoker(() =>
 							{
-								if (!PowerPointHelper.Instance.IsLinkedWithApplication &&
+								if (!PowerPointSingleton.Instance.IsLinkedWithApplication &&
 									Settings.LinkLaunchSettings.PowerPoint == LinkLaunchOptionsEnum.Viewer &&
 									!Settings.RunPowerPointWhenNeeded.HasValue)
 								{
@@ -310,7 +318,7 @@ namespace SalesLibraries.SalesDepot.Controllers
 
 		public bool CheckPowerPointRunning(Func<bool> beforeRun = null)
 		{
-			if (PowerPointHelper.Instance.IsLinkedWithApplication) return true;
+			if (PowerPointSingleton.Instance.IsLinkedWithApplication) return true;
 			if (beforeRun != null && !beforeRun()) return false;
 			FloaterManager.Instance.ShowFloater(
 				MainForm,
