@@ -145,7 +145,7 @@ namespace SalesLibraries.FileManager.Business.Services
 			target.headerForeColor = ColorTranslator.ToHtml(source.Settings.ForeHeaderColor);
 			target.borderColor = ColorTranslator.ToHtml(source.Settings.BorderColor);
 			target.headerAlignment = source.Settings.HeaderAlignment.ToString().ToLower();
-			target.enableWidget = source.Widget.Enable;
+			target.enableWidget = source.Widget.Enabled;
 			target.widget = Convert.ToBase64String((byte[])imageConverter.ConvertTo(source.Widget.Image, typeof(byte[])));
 			target.windowFont = new Font();
 			target.windowFont.ImportData(source.Settings.WindowFont);
@@ -188,8 +188,8 @@ namespace SalesLibraries.FileManager.Business.Services
 			target.originalFormat = source.WebFormat;
 			target.order = source.Order;
 			target.type = (int)source.Type;
-			target.enableWidget = source.Widget.Enable;
-			target.widget = source.Widget.Enable ? Convert.ToBase64String((byte[])imageConverter.ConvertTo(source.Widget.Image, typeof(byte[]))) : null;
+			target.widgetType = (Int32)source.Widget.WidgetType;
+			target.widget = source.Widget.Enabled ? Convert.ToBase64String((byte[])imageConverter.ConvertTo(source.Widget.Image, typeof(byte[]))) : null;
 
 			target.banner = new Banner();
 			target.banner.libraryId = source.ParentLibrary.ExtId.ToString();
@@ -338,7 +338,7 @@ namespace SalesLibraries.FileManager.Business.Services
 			target.foreColor = ColorTranslator.ToHtml(source.Settings.ForeColor);
 			target.showText = source.Settings.ShowText;
 			target.alignment = source.Settings.HeaderAlignment.ToString().ToLower();
-			target.enableWidget = source.Widget.Enable;
+			target.enableWidget = source.Widget.Enabled;
 			target.widget = Convert.ToBase64String((byte[])imageConverter.ConvertTo(source.Widget.Image, typeof(byte[])));
 			target.font = new Font();
 			target.font.name = source.Settings.HeaderFont.Name;

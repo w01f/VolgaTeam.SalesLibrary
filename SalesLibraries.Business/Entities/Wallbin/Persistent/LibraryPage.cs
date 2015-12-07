@@ -185,7 +185,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 			Folders.AddItem(folder);
 		}
 
-		public void SortFoldersByName()
+		public void AlignFoldersByColumns()
 		{
 			var rowOrder = 0;
 			var columnOrder = 0;
@@ -200,6 +200,26 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 				}
 				else
 					columnOrder++;
+			}
+			MarkAsModified();
+		}
+
+		public void AlignFoldersByRows()
+		{
+			var rowCount = Math.Ceiling((Decimal)Folders.Count / ColumnsCount);
+			var rowOrder = 0;
+			var columnOrder = 0;
+			foreach (var folder in Folders.OrderBy(f => f.Name))
+			{
+				folder.RowOrder = rowOrder;
+				folder.ColumnOrder = columnOrder;
+				if (rowOrder == (rowCount - 1))
+				{
+					rowOrder = 0;
+					columnOrder++;
+				}
+				else
+					rowOrder++;
 			}
 			MarkAsModified();
 		}

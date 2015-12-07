@@ -1959,7 +1959,7 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         
         private LineBreak lineBreakPropertiesField;
         
-        private bool enableWidgetField;
+        private int widgetTypeField;
         
         private string widgetField;
         
@@ -2132,12 +2132,12 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         }
         
         /// <remarks/>
-        public bool enableWidget {
+        public int widgetType {
             get {
-                return this.enableWidgetField;
+                return this.widgetTypeField;
             }
             set {
-                this.enableWidgetField = value;
+                this.widgetTypeField = value;
             }
         }
         

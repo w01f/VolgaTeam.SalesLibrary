@@ -142,13 +142,13 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 			{
 				if (form.ShowDialog() != DialogResult.OK) return;
 
-				int position = -1;
-				LinkRow selectedLink = SelectedLinkRow;
+				var position = -1;
+				var selectedLink = SelectedLinkRow;
 				if (selectedLink != null)
 					position = selectedLink.Index;
 
 				_outsideChangesInProgress = true;
-				WebLink newLink = WebLink.Create(form.LinkName, form.LinkPath, DataSource);
+				var newLink = WebLink.Create(form.LinkName, form.LinkPath, DataSource);
 				if (position >= 0)
 					((List<BaseLibraryLink>)DataSource.Links).InsertItem(position, newLink);
 				else
@@ -168,13 +168,13 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 			{
 				if (form.ShowDialog() != DialogResult.OK) return;
 
-				int position = -1;
-				LinkRow selectedLink = SelectedLinkRow;
+				var position = -1;
+				var selectedLink = SelectedLinkRow;
 				if (selectedLink != null)
 					position = selectedLink.Index;
 
 				_outsideChangesInProgress = true;
-				NetworkLink newLink = NetworkLink.Create(form.LinkName, form.LinkPath, DataSource);
+				var newLink = NetworkLink.Create(form.LinkName, form.LinkPath, DataSource);
 				if (position >= 0)
 					((List<BaseLibraryLink>)DataSource.Links).InsertItem(position, newLink);
 				else
@@ -190,13 +190,13 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 
 		public void AddLineBreak()
 		{
-			int position = -1;
-			LinkRow selectedLink = SelectedLinkRow;
+			var position = -1;
+			var selectedLink = SelectedLinkRow;
 			if (selectedLink != null)
 				position = selectedLink.Index;
 
 			_outsideChangesInProgress = true;
-			LineBreak newLink = LineBreak.Create(DataSource);
+			var newLink = LineBreak.Create(DataSource);
 			if (position >= 0)
 				((List<BaseLibraryLink>)DataSource.Links).InsertItem(position, newLink);
 			else
@@ -205,52 +205,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 			_outsideChangesInProgress = false;
 
 			UpdateGridSize();
-			if (DataChanged != null)
-				DataChanged(this, EventArgs.Empty);
-		}
-
-		public void DownLink()
-		{
-			LinkRow selectedRow = SelectedLinkRow;
-			if (selectedRow == null) return;
-			if (selectedRow.IsBottom) return;
-			int currentIndex = selectedRow.Index;
-			int newIndex = currentIndex + 1;
-			BaseLibraryLink linkSource = selectedRow.Source;
-
-			_outsideChangesInProgress = true;
-			grFiles.ClearSelection();
-			selectedRow.Delete();
-			linkSource.Folder = DataSource;
-			((List<BaseLibraryLink>)DataSource.Links).InsertItem(newIndex, linkSource);
-			LinkRow insertedRow = InsertLinkRow(linkSource, newIndex);
-			_outsideChangesInProgress = false;
-
-			insertedRow.Selected = true;
-
-			if (DataChanged != null)
-				DataChanged(this, EventArgs.Empty);
-		}
-
-		public void UpLink()
-		{
-			LinkRow selectedRow = SelectedLinkRow;
-			if (selectedRow == null) return;
-			if (selectedRow.IsTop) return;
-			int currentIndex = selectedRow.Index;
-			int newIndex = currentIndex - 1;
-			BaseLibraryLink linkSource = selectedRow.Source;
-
-			_outsideChangesInProgress = true;
-			grFiles.ClearSelection();
-			selectedRow.Delete();
-			linkSource.Folder = DataSource;
-			((List<BaseLibraryLink>)DataSource.Links).InsertItem(newIndex, linkSource);
-			LinkRow insertedRow = InsertLinkRow(linkSource, newIndex);
-			_outsideChangesInProgress = false;
-
-			insertedRow.Selected = true;
-
 			if (DataChanged != null)
 				DataChanged(this, EventArgs.Empty);
 		}
@@ -268,16 +222,26 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 
 		public void OpenLink()
 		{
-			LinkRow selectedRow = SelectedLinkRow;
+			var selectedRow = SelectedLinkRow;
 			if (selectedRow == null) return;
 			var sourceLink = selectedRow.Source as LibraryObjectLink;
 			if (sourceLink == null) return;
 			Utils.OpenFile(sourceLink.FullPath);
 		}
 
+		public void OpenLinkLocation()
+		{
+			var selectedRow = SelectedLinkRow;
+			if (selectedRow == null) return;
+			var sourceLink = selectedRow.Source as LibraryFileLink;
+			if (sourceLink == null) return;
+			Utils.OpenFile(sourceLink.LocationPath);
+			MainController.Instance.WallbinViews.ActiveWallbin.DataSourcesControl.ShowFileInTree(sourceLink.FullPath);
+		}
+
 		public void DeleteLink()
 		{
-			LinkRow selectedRow = SelectedLinkRow;
+			var selectedRow = SelectedLinkRow;
 			if (selectedRow == null) return;
 			if (MainController.Instance.PopupMessages.ShowQuestion("Are You sure You want to remove this link/line break?") != DialogResult.Yes) return;
 			selectedRow.Delete(true);
@@ -796,6 +760,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 			else
 			{
 				toolStripMenuItemLinkPropertiesOpen.Visible = true;
+				toolStripMenuItemLinkPropertiesOpenLocation.Visible = linkRow.Source is LibraryFileLink;
 				toolStripMenuItemLinkPropertiesAdvanced.Visible = linkRow.Source is LibraryFolderLink;
 				toolStripMenuItemLinkPropertiesTags.Visible = true;
 				toolStripMenuItemLinkPropertiesExpirationDate.Visible = true;
@@ -811,6 +776,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 		private void toolStripMenuItemLinkPropertiesOpen_Click(object sender, EventArgs e)
 		{
 			OpenLink();
+		}
+
+		private void toolStripMenuItemLinkPropertiesOpenLocation_Click(object sender, EventArgs e)
+		{
+			OpenLinkLocation();
 		}
 
 		private void toolStripMenuItemLinkPropertiesDelete_Click(object sender, EventArgs e)

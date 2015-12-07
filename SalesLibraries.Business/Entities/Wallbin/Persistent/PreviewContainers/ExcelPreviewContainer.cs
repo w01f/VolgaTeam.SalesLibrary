@@ -43,7 +43,11 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers
 			base.UpdateState(associatedLinksList);
 			if (!IsUpToDate)
 				return;
-			IsUpToDate = AvailablePreviewFormats.All(previewFormat => Directory.Exists(Path.Combine(ContainerPath, previewFormat)));
+			IsUpToDate = AvailablePreviewFormats.All(previewFormat =>
+			{
+				var previewFolderPath = Path.Combine(ContainerPath, previewFormat);
+				return Directory.Exists(previewFolderPath) && Directory.GetFiles(previewFolderPath).Any();
+			});
 		}
 	}
 }

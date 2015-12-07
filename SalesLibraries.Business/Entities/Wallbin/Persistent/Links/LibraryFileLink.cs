@@ -10,7 +10,6 @@ using SalesLibraries.Business.Entities.Helpers;
 using SalesLibraries.Business.Entities.Interfaces;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings;
-using SalesLibraries.Common.Configuration;
 
 namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 {
@@ -89,12 +88,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		[NotMapped, JsonIgnore]
 		public override string WebPath
 		{
-			get
-			{
-				return DataSourceId == ParentLibrary.ExtId ?
-					String.Format("{1}{0}", RelativePath, Path.DirectorySeparatorChar) :
-					String.Format("{3}{0}{3}{1}{3}{2}", Constants.ExtraFoldersRootFolderName, DataSourceId, RelativePath, Path.DirectorySeparatorChar);
-			}
+			get { return String.Format("{1}{0}", RelativePath, Path.DirectorySeparatorChar); }
 		}
 
 		[NotMapped, JsonIgnore]
@@ -146,6 +140,12 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		public string Extension
 		{
 			get { return Path.GetExtension(FullPath); }
+		}
+
+		[NotMapped, JsonIgnore]
+		public string LocationPath
+		{
+			get { return Path.GetDirectoryName(FullPath); }
 		}
 
 		[NotMapped, JsonIgnore]

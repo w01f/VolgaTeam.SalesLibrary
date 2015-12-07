@@ -48,6 +48,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 				case 1:
 					using (var form = new FormSelectWidget())
 					{
+						form.laWidgetDescription.Text = autoWidget.Extension.ToUpper();
 						form.pbSelectedWidget.Image = autoWidget.Widget;
 						if (form.ShowDialog() != DialogResult.OK) return;
 						autoWidget.Widget = form.pbSelectedWidget.Image;

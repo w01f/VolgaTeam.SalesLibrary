@@ -69,13 +69,29 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers
 			base.UpdateState(associatedLinksList);
 			if (!IsUpToDate)
 				return;
-			IsUpToDate = BasePreviewFormats.All(previewFormat => Directory.Exists(Path.Combine(ContainerPath, previewFormat)))
+			IsUpToDate = BasePreviewFormats.All(previewFormat =>
+				{
+					var previewFolderPath = Path.Combine(ContainerPath, previewFormat);
+					return Directory.Exists(previewFolderPath) && Directory.GetFiles(previewFolderPath).Any();
+				})
 				&&
-				((!GenerateImages && ImagePreviewFormats.All(previewFormat => !Directory.Exists(Path.Combine(ContainerPath, previewFormat)))) ||
-				(GenerateImages && ImagePreviewFormats.All(previewFormat => Directory.Exists(Path.Combine(ContainerPath, previewFormat)))))
+				(!GenerateImages && ImagePreviewFormats.All(previewFormat => !(Directory.Exists(Path.Combine(ContainerPath, previewFormat))))
+					||
+					(GenerateImages && ImagePreviewFormats.All(previewFormat =>
+						{
+							var previewFolderPath = Path.Combine(ContainerPath, previewFormat);
+							return Directory.Exists(previewFolderPath) && Directory.GetFiles(previewFolderPath).Any();
+						}))
+				)
 				&&
-				((!GenerateText && TextPreviewFormats.All(previewFormat => !Directory.Exists(Path.Combine(ContainerPath, previewFormat)))) ||
-				(GenerateText && TextPreviewFormats.All(previewFormat => Directory.Exists(Path.Combine(ContainerPath, previewFormat)))));
+				((!GenerateText && TextPreviewFormats.All(previewFormat => !Directory.Exists(Path.Combine(ContainerPath, previewFormat))))
+					||
+					(GenerateText && TextPreviewFormats.All(previewFormat =>
+						{
+							var previewFolderPath = Path.Combine(ContainerPath, previewFormat);
+							return Directory.Exists(previewFolderPath) && Directory.GetFiles(previewFolderPath).Any();
+						}))
+				);
 		}
 	}
 }

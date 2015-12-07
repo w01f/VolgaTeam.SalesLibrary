@@ -5,19 +5,23 @@ using SalesLibraries.Common.JsonConverters;
 
 namespace SalesLibraries.Business.Entities.Common
 {
-	public class SettingsContainer
+	public abstract class SettingsContainer
 	{
 		protected IChangable Parent { get; set; }
 
 		public static TSettings CreateInstance<TSettings>(IChangable parent, string encodedSource) where TSettings : SettingsContainer
 		{
-			var settings = !String.IsNullOrEmpty(encodedSource) ?
-				JsonConvert.DeserializeObject<TSettings>(encodedSource,
-					new ImageConverter()) :
+			var createNew = String.IsNullOrEmpty(encodedSource);
+			var settings = !createNew ?
+				JsonConvert.DeserializeObject<TSettings>(encodedSource, new ImageConverter()) :
 				Activator.CreateInstance<TSettings>();
 			settings.Parent = parent;
+			if (createNew)
+				settings.AfterConstruction();
 			return settings;
 		}
+
+		protected virtual void AfterConstruction() { }
 
 		protected void OnSettingsChanged()
 		{

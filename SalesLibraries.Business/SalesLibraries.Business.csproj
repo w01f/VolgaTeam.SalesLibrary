@@ -94,6 +94,7 @@
     <Compile Include="Entities\Interfaces\IChangable.cs" />
     <Compile Include="Entities\Interfaces\IExtKeyHolder.cs" />
     <Compile Include="Entities\Wallbin\Common\Enums\FileTypes.cs" />
+    <Compile Include="Entities\Wallbin\Common\Enums\WidgetType.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\AutoWidget.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\BannerSettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\SecuritySettings.cs" />
@@ -115,7 +116,6 @@
     <Compile Include="Entities\Wallbin\NonPersistent\SyncSettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\CalendarSettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\WidgetSettings.cs" />
-    <Compile Include="Entities\Wallbin\Persistent\AdditionalDataSource.cs" />
     <Compile Include="Entities\Wallbin\Persistent\ColumnTitle.cs" />
     <Compile Include="Entities\Wallbin\Persistent\Library.cs" />
     <Compile Include="Entities\Wallbin\Persistent\LibraryFolder.cs" />
@@ -177,9 +177,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Schema\Wallbin\Base\library_folder.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Schema\Wallbin\Base\additional_data_source.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Schema\Wallbin\Base\preview_container.sql">

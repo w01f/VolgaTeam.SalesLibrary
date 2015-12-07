@@ -116,7 +116,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 		[NotMapped, JsonIgnore]
 		public bool ContainLinkWidgets
 		{
-			get { return Links.Any(l => l.Widget.Enable && l.Widget != null); }
+			get { return Links.Any(l => !l.Widget.Disabled && l.Widget.Image != null); }
 		}
 
 		#endregion

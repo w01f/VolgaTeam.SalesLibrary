@@ -96,7 +96,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		private void SaveData()
 		{
 			_sourceLink.Banner.Enable = checkBoxEnableBanner.Checked;
-			_sourceLink.Widget.Enable = !_sourceLink.Banner.Enable && _sourceLink.Widget.Enable;
+			_sourceLink.Widget.WidgetType = !_sourceLink.Banner.Enable ? _sourceLink.Widget.WidgetType : _sourceLink.Widget.DefaultWidgetType;
 			_sourceLink.Banner.Image = pbSelectedBanner.Image;
 			if (rbBannerAligmentLeft.Checked)
 				_sourceLink.Banner.ImageAlignement = Alignment.Left;

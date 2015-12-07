@@ -28,7 +28,6 @@ namespace SalesLibraries.FileManager.Controllers
 			_editor = new VideoContentEditor();
 			MainController.Instance.MainForm.buttonItemVideoConvert.Click += OnVideoConvertClick;
 			MainController.Instance.MainForm.buttonItemVideoDelete.Click += OnVideoDeleteClick;
-			MainController.Instance.MainForm.buttonItemVideoSync.Click += OnVideoSyncClick;
 		}
 
 		public void ShowPage(TabPageEnum pageType)
@@ -66,11 +65,6 @@ namespace SalesLibraries.FileManager.Controllers
 		private void OnVideoDeleteClick(object sender, EventArgs eventArgs)
 		{
 			_editor.DeleteSelected();
-		}
-
-		private void OnVideoSyncClick(object sender, EventArgs eventArgs)
-		{
-			SyncManager.SyncRegular();
 		}
 	}
 }

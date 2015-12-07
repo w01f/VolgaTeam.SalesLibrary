@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using Newtonsoft.Json;
@@ -18,8 +17,6 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 	public class Library : WallbinEntity, IDataSource
 	{
 		#region Persistent Properties
-		[StringLength(128)]
-		public string BrandingText { get; set; }
 		public DateTime? SyncDate { get; set; }
 		public string SettingsEncoded { get; set; }
 		public string SyncSettingsEncoded { get; set; }
@@ -27,7 +24,6 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 		public string ProgramDataEncoded { get; set; }
 		public string CalendarEncoded { get; set; }
 		public virtual ICollection<LibraryPage> Pages { get; set; }
-		public virtual ICollection<AdditionalDataSource> DataSources { get; set; }
 		public virtual ICollection<BasePreviewContainer> PreviewContainers { get; set; }
 		#endregion
 
@@ -97,7 +93,6 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 		public Library()
 		{
 			Pages = new List<LibraryPage>();
-			DataSources = new List<AdditionalDataSource>();
 			PreviewContainers = new Collection<BasePreviewContainer>();
 		}
 
@@ -110,8 +105,6 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 			CalendarEncoded = Calendar.Serialize();
 			foreach (var libraryPage in Pages)
 				libraryPage.BeforeSave();
-			foreach (var dataSource in DataSources)
-				dataSource.BeforeSave();
 			foreach (var previewContainer in PreviewContainers)
 				previewContainer.BeforeSave();
 		}
@@ -130,10 +123,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 			var currentLibrary = (Library)current;
 			Pages.Save(currentLibrary.Pages, context);
 			Pages.Sort();
-			DataSources.Save(currentLibrary.DataSources, context);
-			DataSources.Sort();
 			PreviewContainers.Save(currentLibrary.PreviewContainers, context);
-			DataSources.Sort();
 			base.Save(context, current, withCommit);
 		}
 
@@ -160,17 +150,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 		#region Data Sorces Processing
 		public IEnumerable<IDataSource> GetDataSources()
 		{
-			return new[] { (IDataSource)this }.Union(DataSources);
-		}
-
-		public void AddDataSource()
-		{
-			var additionalDataSource = new AdditionalDataSource()
-			{
-				Library = this,
-				Order = DataSources.Count
-			};
-			DataSources.Add(additionalDataSource);
+			return new[] { (IDataSource)this };
 		}
 		#endregion
 

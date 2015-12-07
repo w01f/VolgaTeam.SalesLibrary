@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Drawing;
 using System.Windows.Forms;
 using DevComponents.DotNetBar.Metro;
+using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.FileManager.Controllers;
 using SalesLibraries.FileManager.PresentationLayer.Wallbin.Common;
@@ -55,15 +55,68 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 				xtraTabControlWidgets.TabPages.Add(tabPage);
 			}
 
-			pbSelectedWidget.Image = _sourceLink.Widget.Enable ? _sourceLink.Widget.Image : null;
-			checkBoxEnableWidget.Checked = _sourceLink.Widget.Enable;
+			var fileLink = _sourceLink as LibraryFileLink;
+			if (fileLink != null)
+			{
+				radioButtonWidgetTypeAuto.Visible = true;
+				pnAutoWidget.Visible = true;
+				if (fileLink.Widget.HasAutoWidget)
+				{
+					pbAutoWidget.Visible = true;
+					pbAutoWidget.Image = fileLink.Widget.AutoWidget;
+					laExtension.Text = fileLink.Extension.Replace(".", String.Empty).ToLower();
+				}
+				else
+				{
+					pbAutoWidget.Visible = false;
+					laExtension.Text = "Not Assigned";
+				}
+			}
+			else
+			{
+				radioButtonWidgetTypeAuto.Visible = false;
+				pnAutoWidget.Visible = false;
+			}
+
+			pbCustomWidget.Image = _sourceLink.Widget.WidgetType == WidgetType.CustomWidget ? _sourceLink.Widget.Image : null;
+			switch (_sourceLink.Widget.WidgetType)
+			{
+				case WidgetType.AutoWidget:
+					radioButtonWidgetTypeAuto.Checked = true;
+					radioButtonWidgetTypeCustom.Checked = false;
+					radioButtonWidgetTypeDisabled.Checked = false;
+					break;
+				case WidgetType.CustomWidget:
+					radioButtonWidgetTypeAuto.Checked = false;
+					radioButtonWidgetTypeCustom.Checked = true;
+					radioButtonWidgetTypeDisabled.Checked = false;
+					break;
+				case WidgetType.NoWidget:
+					radioButtonWidgetTypeAuto.Checked = false;
+					radioButtonWidgetTypeCustom.Checked = false;
+					radioButtonWidgetTypeDisabled.Checked = true;
+					break;
+			}
 		}
 
 		private void SaveData()
 		{
-			_sourceLink.Widget.Enable = checkBoxEnableWidget.Checked;
-			_sourceLink.Widget.Image = pbSelectedWidget.Image;
-			_sourceLink.Banner.Enable = !_sourceLink.Widget.Enable && _sourceLink.Banner.Enable;
+			if (radioButtonWidgetTypeAuto.Checked)
+			{
+				_sourceLink.Widget.WidgetType = WidgetType.AutoWidget;
+				_sourceLink.Widget.Image = null;
+			}
+			else if (radioButtonWidgetTypeCustom.Checked)
+			{
+				_sourceLink.Widget.WidgetType = WidgetType.CustomWidget;
+				_sourceLink.Widget.Image = pbCustomWidget.Image;
+			}
+			else if (radioButtonWidgetTypeDisabled.Checked)
+			{
+				_sourceLink.Widget.WidgetType = WidgetType.NoWidget;
+				_sourceLink.Widget.Image = null;
+			}
+			_sourceLink.Banner.Enable = !_sourceLink.Widget.Enabled && _sourceLink.Banner.Enable;
 		}
 
 		private void FormEditLinkSettings_FormClosing(object sender, FormClosingEventArgs e)
@@ -72,26 +125,22 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 				SaveData();
 		}
 
-		private void checkBoxEnableWidget_CheckedChanged(object sender, EventArgs e)
+		private void OnWidgetTypeChanged(object sender, EventArgs e)
 		{
-			pbSelectedWidget.Enabled = checkBoxEnableWidget.Checked;
-			xtraTabControlWidgets.Enabled = checkBoxEnableWidget.Checked;
+			pbCustomWidget.Enabled = radioButtonWidgetTypeCustom.Checked;
+			pbAutoWidget.Enabled = radioButtonWidgetTypeAuto.Checked;
+			xtraTabControlWidgets.Enabled = radioButtonWidgetTypeCustom.Checked;
 		}
 
 		private void OnSelectedWidgetChanged(object sender, LinkImageEventArgs e)
 		{
-			pbSelectedWidget.Image = e.Image;
+			pbCustomWidget.Image = e.Image;
 		}
 
 		private void OnImageDoubleClick(object sender, EventArgs e)
 		{
 			DialogResult = DialogResult.OK;
 			Close();
-		}
-
-		private void FormEditLinkWidget_Shown(object sender, EventArgs e)
-		{
-			labelControlInfo.ForeColor = Color.Gray;
 		}
 	}
 }

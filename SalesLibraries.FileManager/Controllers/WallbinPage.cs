@@ -45,6 +45,13 @@ namespace SalesLibraries.FileManager.Controllers
 			};
 
 			MainController.Instance.MainForm.buttonItemHomeSync.Click += OnSyncClick;
+			MainController.Instance.MainForm.buttonItemPreferencesSync.Click += OnSyncClick;
+			MainController.Instance.MainForm.buttonItemCalendarSync.Click += OnSyncClick;
+			MainController.Instance.MainForm.buttonItemProgramManagerSync.Click += OnSyncClick;
+			MainController.Instance.MainForm.buttonItemVideoSync.Click += OnSyncClick;
+			MainController.Instance.MainForm.buttonItemTagsSync.Click += OnSyncClick;
+			MainController.Instance.MainForm.buttonItemSecuritySync.Click += OnSyncClick;
+			MainController.Instance.MainForm.buttonItemSettingsSync.Click += OnSyncClick;
 
 			#region Link Operations
 			MainController.Instance.MainForm.buttonItemHomeAddUrl.Click += buttonItemHomeAddUrl_Click;
@@ -62,26 +69,21 @@ namespace SalesLibraries.FileManager.Controllers
 			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesBanner.Click += buttonItemHomeLinkSettings_Click;
 			#endregion
 
-			#region Minibar
-			barCheckItemTabs.Checked = MainController.Instance.Settings.MultitabView;
-			barCheckItemTabs.CheckedChanged += barCheckItemTabs_CheckedChanged;
-			barButtonItemFontUp.ItemClick += barButtonItemFontUp_ItemClick;
-			barButtonItemFontDown.ItemClick += barButtonItemFontDown_ItemClick;
-			barButtonItemLinkUp.ItemClick += barButtonItemLinkUp_ItemClick;
-			barButtonItemLinkDown.ItemClick += barButtonItemLinkDown_ItemClick;
+			#region Wallbin Settings
+			MainController.Instance.MainForm.buttonItemHomeSettings.Click += OnWallbinSettingsClick;
+			MainController.Instance.MainForm.buttonItemHomeZoomIn.Click += OnWallbinFontUpClick;
+			MainController.Instance.MainForm.buttonItemHomeZoomOut.Click += OnWallbinFontDownClick;
 			UpdateFontButtons();
 			#endregion
 
-			#region Settings
+			#region General Settings
 			MainController.Instance.MainForm.buttonItemPreferencesPages.Click += buttonItemPreferencesPages_Click;
 			MainController.Instance.MainForm.buttonItemPreferencesColumns.Click += buttonItemPreferencesColumns_Click;
 			MainController.Instance.MainForm.buttonItemPreferencesAutoWidgets.Click += buttonItemPreferencesAutoWidgets_Click;
 			MainController.Instance.MainForm.buttonItemPreferencesDeadLinks.Click += buttonItemPreferencesDeadLinks_Click;
 			MainController.Instance.MainForm.buttonItemPreferencesEmailList.Click += buttonItemPreferencesEmailList_Click;
 			MainController.Instance.MainForm.buttonItemSettingsLibraries.Click += buttonItemSettingsLibraries_Click;
-			MainController.Instance.MainForm.buttonItemSettingsDataSources.Click += buttonItemSettingsDataSources_Click;
-			MainController.Instance.MainForm.buttonItemSettingsBranding.Click += buttonItemSettingsBranding_Click;
-			MainController.Instance.MainForm.buttonItemSettingsSync.Click += buttonItemSettingsSync_Click;
+			MainController.Instance.MainForm.buttonItemSettingsSyncSettings.Click += buttonItemSettingsSync_Click;
 			MainController.Instance.MainForm.buttonItemSettingsAdvanced.Click += buttonItemSettingsAdvanced_Click;
 			#endregion
 
@@ -102,10 +104,10 @@ namespace SalesLibraries.FileManager.Controllers
 			#endregion
 
 			#region Program Data
-			MainController.Instance.MainForm.buttonItemProgramManagerSyncEnabled.Click += buttonItemProgramManagerSync_Click;
-			MainController.Instance.MainForm.buttonItemProgramManagerSyncDisabled.Click += buttonItemProgramManagerSync_Click;
-			MainController.Instance.MainForm.buttonItemProgramManagerSyncEnabled.CheckedChanged += buttonItemProgramManagerSync_CheckedChanged;
-			MainController.Instance.MainForm.buttonItemProgramManagerSyncDisabled.CheckedChanged += buttonItemProgramManagerSync_CheckedChanged;
+			MainController.Instance.MainForm.buttonItemProgramManagerSyncSettingsEnabled.Click += buttonItemProgramManagerSync_Click;
+			MainController.Instance.MainForm.buttonItemProgramManagerSyncSettingsDisabled.Click += buttonItemProgramManagerSync_Click;
+			MainController.Instance.MainForm.buttonItemProgramManagerSyncSettingsEnabled.CheckedChanged += buttonItemProgramManagerSync_CheckedChanged;
+			MainController.Instance.MainForm.buttonItemProgramManagerSyncSettingsDisabled.CheckedChanged += buttonItemProgramManagerSync_CheckedChanged;
 			MainController.Instance.MainForm.buttonEditProgramManagerLocation.ButtonClick += buttonEditProgramManagerLocation_ButtonClick;
 			#endregion
 
@@ -189,10 +191,6 @@ namespace SalesLibraries.FileManager.Controllers
 			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesWidget.Enabled =
 			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesBanner.Enabled =
 			MainController.Instance.MainForm.buttonItemHomeLinkOpen.Enabled = selectedLink != null;
-			barButtonItemLinkUp.Enabled = MainController.Instance.WallbinViews.FormatState.AllowEdit &&
-				selectedLink != null && !selectedLink.IsTop;
-			barButtonItemLinkDown.Enabled = MainController.Instance.WallbinViews.FormatState.AllowEdit &&
-				selectedLink != null && !selectedLink.IsBottom;
 			MainController.Instance.MainForm.buttonItemHomeLinkOpen.Enabled = selectedLink != null && selectedLink.IsOpenable;
 
 			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesExpirationDate.Enabled =
@@ -413,42 +411,6 @@ namespace SalesLibraries.FileManager.Controllers
 			}
 		}
 
-		private void buttonItemSettingsDataSources_Click(object sender, EventArgs e)
-		{
-			ProcessChanges();
-			var library = MainController.Instance.WallbinViews.ActiveWallbin.DataStorage.Library;
-			var resut = library.PerformTransaction(MainController.Instance.WallbinViews.ActiveWallbin.DataStorage,
-				libraryCopy =>
-				{
-					using (var form = new FormDataSources())
-					{
-						form.Library = libraryCopy;
-						return form.ShowDialog(MainController.Instance.MainForm) == DialogResult.OK;
-					}
-				},
-				copyMethod => MainController.Instance.ProcessManager.Run("Preparing Data...", cancelationToken => copyMethod()),
-				(context, original, current) => MainController.Instance.ProcessManager.Run("Saving Changes...", cancelationToken => original.Save(context, current)));
-			if (!resut) return;
-			MainController.Instance.WallbinViews.ActiveWallbin.LoadDataSource();
-		}
-
-		private void buttonItemSettingsBranding_Click(object sender, EventArgs e)
-		{
-			ProcessChanges();
-			var library = MainController.Instance.WallbinViews.ActiveWallbin.DataStorage.Library;
-			library.PerformTransaction(MainController.Instance.WallbinViews.ActiveWallbin.DataStorage,
-				libraryCopy =>
-				{
-					using (var form = new FormBranding())
-					{
-						form.Library = libraryCopy;
-						return form.ShowDialog(MainController.Instance.MainForm) == DialogResult.OK;
-					}
-				},
-				copyMethod => MainController.Instance.ProcessManager.Run("Preparing Data...", cancelationToken => copyMethod()),
-				(context, original, current) => MainController.Instance.ProcessManager.RunInQueue("Saving Changes...", () => original.Save(context, current)));
-		}
-
 		private void buttonItemSettingsSync_Click(object sender, EventArgs e)
 		{
 			ProcessChanges();
@@ -492,54 +454,34 @@ namespace SalesLibraries.FileManager.Controllers
 		}
 		#endregion
 
-		#region Minibar
+		#region Wallbin Settings
 		private void UpdateFontButtons()
 		{
-			barButtonItemFontUp.Enabled = MainController.Instance.WallbinViews.FormatState.FontSize < 20;
-			barButtonItemFontDown.Enabled = MainController.Instance.WallbinViews.FormatState.FontSize > 8;
+			MainController.Instance.MainForm.buttonItemHomeZoomIn.Enabled = MainController.Instance.WallbinViews.FormatState.FontSize < 20;
+			MainController.Instance.MainForm.buttonItemHomeZoomOut.Enabled = MainController.Instance.WallbinViews.FormatState.FontSize > 8;
 		}
 
-		private void OnMinibarResize(object sender, EventArgs e)
-		{
-			barMinibar.BeginUpdate();
-			barMinibar.Offset = (pnMain.Width - 115) / 2;
-			barMinibar.ApplyDockRowCol();
-			barMinibar.EndUpdate();
-		}
-
-		private void barCheckItemTabs_CheckedChanged(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-		{
-			ProcessChanges();
-			NeedToUpdate = true;
-			MainController.Instance.Settings.MultitabView = barCheckItemTabs.Checked;
-			MainController.Instance.Settings.Save();
-			MainController.Instance.ReloadWallbinViews();
-		}
-
-		private void barButtonItemFontUp_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+		private void OnWallbinFontUpClick(object sender, EventArgs e)
 		{
 			MainController.Instance.WallbinViews.FormatState.FontSize += 2;
 			UpdateFontButtons();
 		}
 
-		private void barButtonItemFontDown_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+		private void OnWallbinFontDownClick(object sender, EventArgs e)
 		{
 			MainController.Instance.WallbinViews.FormatState.FontSize -= 2;
 			UpdateFontButtons();
 		}
 
-		private void barButtonItemLinkUp_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+		private void OnWallbinSettingsClick(object sender, EventArgs e)
 		{
-			var selectedFolder = MainController.Instance.WallbinViews.Selection.SelectedFolder;
-			if (selectedFolder == null) return;
-			selectedFolder.UpLink();
-		}
-
-		private void barButtonItemLinkDown_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-		{
-			var selectedFolder = MainController.Instance.WallbinViews.Selection.SelectedFolder;
-			if (selectedFolder == null) return;
-			selectedFolder.DownLink();
+			using (var form = new FormWallbinSettings())
+			{
+				if (form.ShowDialog(MainController.Instance.MainForm) != DialogResult.OK) return;
+				ProcessChanges();
+				NeedToUpdate = true;
+				MainController.Instance.ReloadWallbinViews();
+			}
 		}
 		#endregion
 
@@ -666,8 +608,8 @@ namespace SalesLibraries.FileManager.Controllers
 		private void UpdateProgramDataSettings()
 		{
 			var library = MainController.Instance.WallbinViews.ActiveWallbin.DataStorage.Library;
-			MainController.Instance.MainForm.buttonItemProgramManagerSyncEnabled.Checked = library.ProgramData.Enable;
-			MainController.Instance.MainForm.buttonItemProgramManagerSyncDisabled.Checked = !library.ProgramData.Enable;
+			MainController.Instance.MainForm.buttonItemProgramManagerSyncSettingsEnabled.Checked = library.ProgramData.Enable;
+			MainController.Instance.MainForm.buttonItemProgramManagerSyncSettingsDisabled.Checked = !library.ProgramData.Enable;
 			MainController.Instance.MainForm.ribbonBarProgramManagerLocation.Enabled = library.ProgramData.Enable;
 			MainController.Instance.MainForm.buttonEditProgramManagerLocation.EditValue = library.ProgramData.Path;
 		}
@@ -676,8 +618,8 @@ namespace SalesLibraries.FileManager.Controllers
 		{
 			var buttonItem = (ButtonItem)sender;
 			if (buttonItem.Checked) return;
-			MainController.Instance.MainForm.buttonItemProgramManagerSyncDisabled.Checked = false;
-			MainController.Instance.MainForm.buttonItemProgramManagerSyncEnabled.Checked = false;
+			MainController.Instance.MainForm.buttonItemProgramManagerSyncSettingsDisabled.Checked = false;
+			MainController.Instance.MainForm.buttonItemProgramManagerSyncSettingsEnabled.Checked = false;
 			buttonItem.Checked = true;
 		}
 
@@ -685,7 +627,7 @@ namespace SalesLibraries.FileManager.Controllers
 		{
 			if (_isLoading) return;
 			var library = MainController.Instance.WallbinViews.ActiveWallbin.DataStorage.Library;
-			library.ProgramData.Enable = MainController.Instance.MainForm.buttonItemProgramManagerSyncEnabled.Checked;
+			library.ProgramData.Enable = MainController.Instance.MainForm.buttonItemProgramManagerSyncSettingsEnabled.Checked;
 			MainController.Instance.MainForm.ribbonBarProgramManagerLocation.Enabled = library.ProgramData.Enable;
 			if (!library.ProgramData.Enable)
 			{
@@ -700,8 +642,8 @@ namespace SalesLibraries.FileManager.Controllers
 			var library = MainController.Instance.WallbinViews.ActiveWallbin.DataStorage.Library;
 			using (var dialog = new FolderBrowserDialog())
 			{
-				dialog.SelectedPath = !String.IsNullOrEmpty(library.ProgramData.Path)?
-					library.ProgramData.Path:
+				dialog.SelectedPath = !String.IsNullOrEmpty(library.ProgramData.Path) ?
+					library.ProgramData.Path :
 					Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 				if (dialog.ShowDialog() != DialogResult.OK) return;
 				if (!Directory.Exists(dialog.SelectedPath)) return;

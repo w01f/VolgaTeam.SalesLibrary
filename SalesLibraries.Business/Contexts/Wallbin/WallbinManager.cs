@@ -18,7 +18,7 @@ namespace SalesLibraries.Business.Contexts.Wallbin
 			Libraries.Clear();
 			if (!Directory.Exists(rootPath)) return;
 			if (rootPath.Equals(Path.GetPathRoot(rootPath)))
-				Libraries.Add(new LibraryContext(Constants.WholeDriveFilesStorage, rootPath));
+				Libraries.Add(new LibraryContext(Constants.PrimaryFileStorageName, rootPath));
 			else
 			{
 				foreach (var subFolderPath in Directory.GetDirectories(rootPath))
@@ -29,7 +29,7 @@ namespace SalesLibraries.Business.Contexts.Wallbin
 		public void LoadLibrary(string rootPath)
 		{
 			Libraries.Clear();
-			Libraries.Add(new LibraryContext(Constants.WholeDriveFilesStorage, rootPath));
+			Libraries.Add(new LibraryContext(Constants.PrimaryFileStorageName, rootPath));
 		}
 	}
 }

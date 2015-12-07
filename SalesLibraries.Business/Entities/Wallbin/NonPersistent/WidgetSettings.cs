@@ -1,19 +1,21 @@
 ﻿using System.Drawing;
+using Newtonsoft.Json;
 using SalesLibraries.Business.Entities.Common;
+using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 
 namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 {
 	public class WidgetSettings : SettingsContainer
 	{
-		private bool _enable;
-		public bool Enable
+		private WidgetType _widgetType;
+		public WidgetType WidgetType
 		{
-			get { return _enable; }
+			get { return _widgetType; }
 			set
 			{
-				if (_enable != value)
+				if (_widgetType != value)
 					OnSettingsChanged();
-				_enable = value;
+				_widgetType = value;
 			}
 		}
 
@@ -27,6 +29,30 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 					OnSettingsChanged();
 				_image = value;
 			}
+		}
+
+		[JsonIgnore]
+		public bool Enabled
+		{
+			get { return _widgetType == WidgetType.CustomWidget; }
+		}
+
+		[JsonIgnore]
+		public bool Disabled
+		{
+			get { return _widgetType == WidgetType.NoWidget; }
+		}
+
+		[JsonIgnore]
+		public virtual WidgetType DefaultWidgetType
+		{
+			get { return WidgetType.NoWidget; }
+		}
+
+		protected override void AfterConstruction()
+		{
+			base.AfterConstruction();
+			_widgetType = DefaultWidgetType;
 		}
 	}
 }

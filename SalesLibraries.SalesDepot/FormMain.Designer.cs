@@ -28,13 +28,12 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.components = new System.ComponentModel.Container();
 			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
 			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
 			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
-			this.styleManager = new DevComponents.DotNetBar.StyleManager(this.components);
-			this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
+			this.styleManager = new DevComponents.DotNetBar.StyleManager();
+			this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel();
 			this.superTooltip = new DevComponents.DotNetBar.SuperTooltip();
 			this.buttonItemProgramScheduleBrowseDay = new DevComponents.DotNetBar.ButtonItem();
 			this.buttonItemProgramScheduleBrowseWeek = new DevComponents.DotNetBar.ButtonItem();
@@ -122,7 +121,7 @@
 			this.ribbonBarHomeSettings = new DevComponents.DotNetBar.RibbonBar();
 			this.ribbonBarHomeWallbin = new DevComponents.DotNetBar.RibbonBar();
 			this.comboBoxEditHomeLibrary = new DevExpress.XtraEditors.ComboBoxEdit();
-			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
+			this.styleController = new DevExpress.XtraEditors.StyleController();
 			this.comboBoxEditHomePage = new DevExpress.XtraEditors.ComboBoxEdit();
 			this.itemContainerHomeBrandLogo = new DevComponents.DotNetBar.ItemContainer();
 			this.labelItemHomeWallbinLogo = new DevComponents.DotNetBar.LabelItem();
@@ -1432,7 +1431,7 @@
 			// comboBoxEditHomeLibrary
 			// 
 			this.comboBoxEditHomeLibrary.Enabled = false;
-			this.comboBoxEditHomeLibrary.Location = new System.Drawing.Point(185, 32);
+			this.comboBoxEditHomeLibrary.Location = new System.Drawing.Point(185, 33);
 			this.comboBoxEditHomeLibrary.Name = "comboBoxEditHomeLibrary";
 			this.comboBoxEditHomeLibrary.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -1444,7 +1443,7 @@
 			// comboBoxEditHomePage
 			// 
 			this.comboBoxEditHomePage.Enabled = false;
-			this.comboBoxEditHomePage.Location = new System.Drawing.Point(185, 78);
+			this.comboBoxEditHomePage.Location = new System.Drawing.Point(185, 79);
 			this.comboBoxEditHomePage.Name = "comboBoxEditHomePage";
 			this.comboBoxEditHomePage.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});

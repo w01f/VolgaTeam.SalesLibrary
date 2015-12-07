@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraTab;
@@ -214,6 +215,25 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.DataSource
 			catch { }
 		}
 
+		private bool FindNodeByPath(TreeListNode targetNode, string itemPath)
+		{
+			var nodeSourceLink = (SourceLink)targetNode.Tag;
+			if (itemPath.Equals(nodeSourceLink.Path, StringComparison.OrdinalIgnoreCase))
+			{
+				targetNode.TreeList.MakeNodeVisible(targetNode);
+				targetNode.Selected = true;
+				return true;
+			}
+			if (itemPath.ToUpper().Contains(nodeSourceLink.Path.ToUpper()))
+			{
+				if (!targetNode.Nodes.Any())
+					FillNode(targetNode, false);
+				if (targetNode.Nodes.ToList().Any(childNode => FindNodeByPath(childNode, itemPath)))
+					return true;
+			}
+			return false;
+		}
+
 		private int GetImageindex(string filePath)
 		{
 			switch (Path.GetExtension(filePath).ToUpper())
@@ -404,13 +424,40 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.DataSource
 			ckDateRange_CheckedChanged(checkEditDateRange, EventArgs.Empty);
 		}
 
+		public void ShowFileInTree(string filePath)
+		{
+			xtraTabControlFiles.SelectedTabPage = xtraTabPageRegular;
+			treeListAllFiles.Selection.Clear();
+
+			treeListAllFiles.SuspendLayout();
+			laTreeViewProgressLabel.Text = "Searching Item...";
+			pnTreeViewProgress.Visible = true;
+			circularProgressTreeView.IsRunning = true;
+			xtraTabControlFiles.Enabled = false;
+
+			var thread = new Thread(() => Invoke(new MethodInvoker(() =>
+			{
+				foreach (var rootNode in treeListAllFiles.Nodes.Skip(1).ToList())
+					if (FindNodeByPath(rootNode, filePath))
+						break;
+			})));
+			thread.Start();
+			while (thread.IsAlive)
+			{
+				Thread.Sleep(500);
+				Application.DoEvents();
+			}
+
+			xtraTabControlFiles.Enabled = true;
+			circularProgressTreeView.IsRunning = false;
+			pnTreeViewProgress.Visible = false;
+			treeListAllFiles.ResumeLayout();
+			treeListAllFiles.Enabled = true;
+		}
+
 		private void ViewItem(FileLink file)
 		{
-			try
-			{
-				Process.Start(file.Path);
-			}
-			catch { }
+			Utils.OpenFile(file.Path);
 		}
 		#endregion
 	}

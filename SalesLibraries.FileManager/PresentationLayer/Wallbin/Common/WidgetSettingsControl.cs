@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 using DevExpress.XtraEditors.Filtering;
+using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent;
 using SalesLibraries.FileManager.Controllers;
 
@@ -31,7 +32,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Common
 			}
 
 			LoadData();
-			
+
 			if ((base.CreateGraphics()).DpiX > 96)
 			{
 				var styleControllerFont = new Font(styleController.Appearance.Font.FontFamily, styleController.Appearance.Font.Size - 2, styleController.Appearance.Font.Style);
@@ -48,14 +49,14 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Common
 
 		public void LoadData()
 		{
-			pbSelectedWidget.Image = _data.Enable ? _data.Image : null;
+			pbSelectedWidget.Image = _data.Enabled ? _data.Image : null;
 			laWidgetFileName.Text = String.Empty;
-			checkBoxEnableWidget.Checked = _data.Enable;
+			checkBoxEnableWidget.Checked = _data.Enabled;
 		}
 
 		public void SaveData()
 		{
-			_data.Enable = checkBoxEnableWidget.Checked;
+			_data.WidgetType = checkBoxEnableWidget.Checked ? WidgetType.CustomWidget : _data.DefaultWidgetType;
 			_data.Image = pbSelectedWidget.Image;
 		}
 

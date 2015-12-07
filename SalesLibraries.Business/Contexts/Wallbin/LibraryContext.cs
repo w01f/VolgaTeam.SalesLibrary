@@ -69,7 +69,6 @@ namespace SalesLibraries.Business.Contexts.Wallbin
 				library.Name = LibraryName;
 				library.Path = DataSourcePath;
 				library.Pages.Sort();
-				library.DataSources.Sort();
 			}
 		}
 	}

@@ -46,7 +46,7 @@ namespace SalesLibraries.CommonGUI.Wallbin.ColumnTitles
 					pbLogo.Image = Data.Banner.Image;
 					pbLogo.Width = Data.Banner.Image.Width;
 				}
-				else if (Data.Widget.Enable && Data.Widget.Image != null)
+				else if (Data.Widget.Enabled && Data.Widget.Image != null)
 				{
 					pbLogo.Visible = false;
 					labelControlText.Appearance.Image = Data.Widget.Image;
@@ -73,7 +73,7 @@ namespace SalesLibraries.CommonGUI.Wallbin.ColumnTitles
 				pbLogo.Image = Data.Banner.Image;
 				pbLogo.Width = Data.Banner.Image.Width;
 			}
-			else if (Data.Widget.Enable && Data.Widget.Image != null)
+			else if (Data.Widget.Enabled && Data.Widget.Image != null)
 			{
 				labelControlText.Visible = false;
 				pbLogo.Visible = true;
@@ -103,14 +103,14 @@ namespace SalesLibraries.CommonGUI.Wallbin.ColumnTitles
 					textHeight = (int)g.MeasureString(Data.Settings.Text, 
 						Data.Settings.HeaderFont, 
 						new Size(
-							labelControlText.Width - (Data.Widget.Enable && Data.Widget != null ? Data.Widget.Image.Width : 0), 
+							labelControlText.Width - (Data.Widget.Enabled && Data.Widget != null ? Data.Widget.Image.Width : 0), 
 							Int32.MaxValue)
 						)
 					.Height;
 
 			if (Data.Banner.Enable && Data.Banner.Image != null)
 				imageHeight = Data.Banner.Image.Height;
-			else if (Data.Widget.Enable && Data.Widget.Image != null)
+			else if (Data.Widget.Enabled && Data.Widget.Image != null)
 				imageHeight = Data.Widget.Image.Height;
 
 			return textHeight > imageHeight ? textHeight : imageHeight;

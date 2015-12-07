@@ -115,7 +115,7 @@
           <xsd:element name="type" type="xsd:int" />
           <xsd:element name="extendedProperties" type="tns:LinkSettings" />
           <xsd:element name="lineBreakProperties" type="tns:LineBreak" />
-          <xsd:element name="enableWidget" type="xsd:boolean" />
+          <xsd:element name="widgetType" type="xsd:int" />
           <xsd:element name="widget" type="xsd:string" />
           <xsd:element name="banner" type="tns:Banner" />
           <xsd:element name="previewId" type="xsd:string" />

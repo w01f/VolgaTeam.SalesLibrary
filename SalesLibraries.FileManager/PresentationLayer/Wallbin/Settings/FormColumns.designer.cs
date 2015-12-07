@@ -32,7 +32,7 @@
 			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
 			this.toolTipSalesDepotSettings = new System.Windows.Forms.ToolTip(this.components);
 			this.buttonXColumnTitleSettings = new DevComponents.DotNetBar.ButtonX();
-			this.buttonXSort = new DevComponents.DotNetBar.ButtonX();
+			this.buttonXAlignByColumns = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXAdd = new DevComponents.DotNetBar.ButtonX();
 			this.pnColumns = new System.Windows.Forms.Panel();
 			this.ckEnableColumnTitles = new System.Windows.Forms.CheckBox();
@@ -43,6 +43,7 @@
 			this.buttonXClose = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXSave = new DevComponents.DotNetBar.ButtonX();
 			this.pnBottom = new System.Windows.Forms.Panel();
+			this.buttonXAlignByRows = new DevComponents.DotNetBar.ButtonX();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			this.pnColumns.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControlWindows)).BeginInit();
@@ -92,21 +93,21 @@
 			this.toolTipSalesDepotSettings.SetToolTip(this.buttonXColumnTitleSettings, "Edit Column Title settings");
 			this.buttonXColumnTitleSettings.Click += new System.EventHandler(this.buttonXColumnTitleSettings_Click);
 			// 
-			// buttonXSort
+			// buttonXAlignByColumns
 			// 
-			this.buttonXSort.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-			this.buttonXSort.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonXSort.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-			this.buttonXSort.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.buttonXSort.Image = global::SalesLibraries.FileManager.Properties.Resources.ButtonSort;
-			this.buttonXSort.ImageFixedSize = new System.Drawing.Size(24, 24);
-			this.buttonXSort.Location = new System.Drawing.Point(658, 74);
-			this.buttonXSort.Name = "buttonXSort";
-			this.buttonXSort.Size = new System.Drawing.Size(37, 37);
-			this.buttonXSort.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.buttonXSort.TabIndex = 26;
-			this.toolTipSalesDepotSettings.SetToolTip(this.buttonXSort, "Sort windows");
-			this.buttonXSort.Click += new System.EventHandler(this.buttonXSort_Click);
+			this.buttonXAlignByColumns.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXAlignByColumns.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonXAlignByColumns.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXAlignByColumns.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.buttonXAlignByColumns.Image = global::SalesLibraries.FileManager.Properties.Resources.SettingsColumnsAlignByColumns;
+			this.buttonXAlignByColumns.ImageFixedSize = new System.Drawing.Size(24, 24);
+			this.buttonXAlignByColumns.Location = new System.Drawing.Point(658, 74);
+			this.buttonXAlignByColumns.Name = "buttonXAlignByColumns";
+			this.buttonXAlignByColumns.Size = new System.Drawing.Size(37, 37);
+			this.buttonXAlignByColumns.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXAlignByColumns.TabIndex = 26;
+			this.toolTipSalesDepotSettings.SetToolTip(this.buttonXAlignByColumns, "Sort windows");
+			this.buttonXAlignByColumns.Click += new System.EventHandler(this.OnAlignByColumnsClick);
 			// 
 			// buttonXAdd
 			// 
@@ -126,8 +127,9 @@
 			// pnColumns
 			// 
 			this.pnColumns.BackColor = System.Drawing.Color.Transparent;
+			this.pnColumns.Controls.Add(this.buttonXAlignByRows);
 			this.pnColumns.Controls.Add(this.buttonXColumnTitleSettings);
-			this.pnColumns.Controls.Add(this.buttonXSort);
+			this.pnColumns.Controls.Add(this.buttonXAlignByColumns);
 			this.pnColumns.Controls.Add(this.ckEnableColumnTitles);
 			this.pnColumns.Controls.Add(this.buttonXAdd);
 			this.pnColumns.Controls.Add(this.xtraTabControlWindows);
@@ -262,6 +264,22 @@
 			this.pnBottom.Size = new System.Drawing.Size(705, 56);
 			this.pnBottom.TabIndex = 19;
 			// 
+			// buttonXAlignByRows
+			// 
+			this.buttonXAlignByRows.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXAlignByRows.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonXAlignByRows.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXAlignByRows.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.buttonXAlignByRows.Image = global::SalesLibraries.FileManager.Properties.Resources.SettingsColumnsAlignByRows;
+			this.buttonXAlignByRows.ImageFixedSize = new System.Drawing.Size(24, 24);
+			this.buttonXAlignByRows.Location = new System.Drawing.Point(658, 117);
+			this.buttonXAlignByRows.Name = "buttonXAlignByRows";
+			this.buttonXAlignByRows.Size = new System.Drawing.Size(37, 37);
+			this.buttonXAlignByRows.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXAlignByRows.TabIndex = 29;
+			this.toolTipSalesDepotSettings.SetToolTip(this.buttonXAlignByRows, "Sort windows");
+			this.buttonXAlignByRows.Click += new System.EventHandler(this.OnAlignByRowsClick);
+			// 
 			// FormColumns
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -308,8 +326,9 @@
 		private DevComponents.DotNetBar.ButtonX buttonXSave;
 		private DevComponents.DotNetBar.ButtonX buttonXAdd;
 		private System.Windows.Forms.CheckBox ckEnableColumnTitles;
-		private DevComponents.DotNetBar.ButtonX buttonXSort;
+		private DevComponents.DotNetBar.ButtonX buttonXAlignByColumns;
 		private DevComponents.DotNetBar.ButtonX buttonXColumnTitleSettings;
 		private System.Windows.Forms.Panel pnBottom;
+		private DevComponents.DotNetBar.ButtonX buttonXAlignByRows;
     }
 }

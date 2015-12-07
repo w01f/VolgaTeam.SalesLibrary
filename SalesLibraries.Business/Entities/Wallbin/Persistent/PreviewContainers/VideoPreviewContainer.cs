@@ -18,11 +18,16 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers
 		{
 			get
 			{
-				var necessaryFormatsConverted = NecessaryPreviewFormats.All(previewFormat => Directory.Exists(Path.Combine(ContainerPath, previewFormat)));
+				var necessaryFormatsConverted = NecessaryPreviewFormats.All(previewFormat =>
+				{
+					var previewFolderPath = Path.Combine(ContainerPath, previewFormat);
+					return Directory.Exists(previewFolderPath) && Directory.GetFiles(previewFolderPath).Any();
+				});
 				if (!necessaryFormatsConverted)
 					return false;
 				var videoData = GetVideoData();
-				return videoData != null && (videoData.IsH264Encoded || Directory.Exists(Path.Combine(ContainerPath, PreviewFormats.VideoMp4)));
+				var mp4ContainerPath = Path.Combine(ContainerPath, PreviewFormats.VideoMp4);
+				return videoData != null && (videoData.IsH264Encoded || (Directory.Exists(mp4ContainerPath) && Directory.GetFiles(mp4ContainerPath).Any()));
 			}
 		}
 

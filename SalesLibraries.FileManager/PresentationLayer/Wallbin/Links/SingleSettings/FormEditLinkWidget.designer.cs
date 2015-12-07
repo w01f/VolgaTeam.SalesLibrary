@@ -30,12 +30,18 @@
         {
 			this.buttonXOK = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXCancel = new DevComponents.DotNetBar.ButtonX();
-			this.checkBoxEnableWidget = new System.Windows.Forms.CheckBox();
-			this.pbSelectedWidget = new System.Windows.Forms.PictureBox();
+			this.pbCustomWidget = new System.Windows.Forms.PictureBox();
 			this.xtraTabControlWidgets = new DevExpress.XtraTab.XtraTabControl();
-			this.labelControlInfo = new DevExpress.XtraEditors.LabelControl();
-			((System.ComponentModel.ISupportInitialize)(this.pbSelectedWidget)).BeginInit();
+			this.radioButtonWidgetTypeAuto = new System.Windows.Forms.RadioButton();
+			this.pbAutoWidget = new System.Windows.Forms.PictureBox();
+			this.radioButtonWidgetTypeCustom = new System.Windows.Forms.RadioButton();
+			this.radioButtonWidgetTypeDisabled = new System.Windows.Forms.RadioButton();
+			this.laExtension = new System.Windows.Forms.Label();
+			this.pnAutoWidget = new System.Windows.Forms.Panel();
+			((System.ComponentModel.ISupportInitialize)(this.pbCustomWidget)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControlWidgets)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.pbAutoWidget)).BeginInit();
+			this.pnAutoWidget.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// buttonXOK
@@ -44,7 +50,7 @@
 			this.buttonXOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXOK.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-			this.buttonXOK.Location = new System.Drawing.Point(688, 496);
+			this.buttonXOK.Location = new System.Drawing.Point(688, 498);
 			this.buttonXOK.Name = "buttonXOK";
 			this.buttonXOK.Size = new System.Drawing.Size(111, 34);
 			this.buttonXOK.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -58,7 +64,7 @@
 			this.buttonXCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXCancel.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.buttonXCancel.Location = new System.Drawing.Point(819, 496);
+			this.buttonXCancel.Location = new System.Drawing.Point(819, 498);
 			this.buttonXCancel.Name = "buttonXCancel";
 			this.buttonXCancel.Size = new System.Drawing.Size(111, 34);
 			this.buttonXCancel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -66,33 +72,18 @@
 			this.buttonXCancel.Text = "Cancel";
 			this.buttonXCancel.TextColor = System.Drawing.Color.Black;
 			// 
-			// checkBoxEnableWidget
+			// pbCustomWidget
 			// 
-			this.checkBoxEnableWidget.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.checkBoxEnableWidget.AutoSize = true;
-			this.checkBoxEnableWidget.BackColor = System.Drawing.Color.White;
-			this.checkBoxEnableWidget.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.checkBoxEnableWidget.ForeColor = System.Drawing.Color.Black;
-			this.checkBoxEnableWidget.Location = new System.Drawing.Point(2, 503);
-			this.checkBoxEnableWidget.Name = "checkBoxEnableWidget";
-			this.checkBoxEnableWidget.Size = new System.Drawing.Size(120, 20);
-			this.checkBoxEnableWidget.TabIndex = 7;
-			this.checkBoxEnableWidget.Text = "Enable Widget";
-			this.checkBoxEnableWidget.UseVisualStyleBackColor = false;
-			this.checkBoxEnableWidget.CheckedChanged += new System.EventHandler(this.checkBoxEnableWidget_CheckedChanged);
-			// 
-			// pbSelectedWidget
-			// 
-			this.pbSelectedWidget.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.pbSelectedWidget.BackColor = System.Drawing.Color.Transparent;
-			this.pbSelectedWidget.Enabled = false;
-			this.pbSelectedWidget.ForeColor = System.Drawing.Color.Black;
-			this.pbSelectedWidget.Location = new System.Drawing.Point(128, 494);
-			this.pbSelectedWidget.Name = "pbSelectedWidget";
-			this.pbSelectedWidget.Size = new System.Drawing.Size(36, 36);
-			this.pbSelectedWidget.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-			this.pbSelectedWidget.TabIndex = 8;
-			this.pbSelectedWidget.TabStop = false;
+			this.pbCustomWidget.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.pbCustomWidget.BackColor = System.Drawing.Color.Transparent;
+			this.pbCustomWidget.Enabled = false;
+			this.pbCustomWidget.ForeColor = System.Drawing.Color.Black;
+			this.pbCustomWidget.Location = new System.Drawing.Point(293, 497);
+			this.pbCustomWidget.Name = "pbCustomWidget";
+			this.pbCustomWidget.Size = new System.Drawing.Size(36, 36);
+			this.pbCustomWidget.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+			this.pbCustomWidget.TabIndex = 8;
+			this.pbCustomWidget.TabStop = false;
 			// 
 			// xtraTabControlWidgets
 			// 
@@ -119,29 +110,100 @@
 			this.xtraTabControlWidgets.Size = new System.Drawing.Size(928, 476);
 			this.xtraTabControlWidgets.TabIndex = 9;
 			// 
-			// labelControlInfo
+			// radioButtonWidgetTypeAuto
 			// 
-			this.labelControlInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.labelControlInfo.Appearance.BackColor = System.Drawing.Color.White;
-			this.labelControlInfo.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.labelControlInfo.Appearance.ForeColor = System.Drawing.Color.Black;
-			this.labelControlInfo.Location = new System.Drawing.Point(256, 504);
-			this.labelControlInfo.Name = "labelControlInfo";
-			this.labelControlInfo.Size = new System.Drawing.Size(327, 16);
-			this.labelControlInfo.TabIndex = 11;
-			this.labelControlInfo.Text = "Right-Click on the widget to save in your favorites gallery";
+			this.radioButtonWidgetTypeAuto.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.radioButtonWidgetTypeAuto.AutoSize = true;
+			this.radioButtonWidgetTypeAuto.BackColor = System.Drawing.Color.White;
+			this.radioButtonWidgetTypeAuto.ForeColor = System.Drawing.Color.Black;
+			this.radioButtonWidgetTypeAuto.Location = new System.Drawing.Point(419, 505);
+			this.radioButtonWidgetTypeAuto.Name = "radioButtonWidgetTypeAuto";
+			this.radioButtonWidgetTypeAuto.Size = new System.Drawing.Size(102, 20);
+			this.radioButtonWidgetTypeAuto.TabIndex = 10;
+			this.radioButtonWidgetTypeAuto.TabStop = true;
+			this.radioButtonWidgetTypeAuto.Text = "Auto Widget:";
+			this.radioButtonWidgetTypeAuto.UseVisualStyleBackColor = false;
+			this.radioButtonWidgetTypeAuto.CheckedChanged += new System.EventHandler(this.OnWidgetTypeChanged);
+			// 
+			// pbAutoWidget
+			// 
+			this.pbAutoWidget.BackColor = System.Drawing.Color.Transparent;
+			this.pbAutoWidget.Dock = System.Windows.Forms.DockStyle.Left;
+			this.pbAutoWidget.Enabled = false;
+			this.pbAutoWidget.ForeColor = System.Drawing.Color.Black;
+			this.pbAutoWidget.Location = new System.Drawing.Point(0, 0);
+			this.pbAutoWidget.Name = "pbAutoWidget";
+			this.pbAutoWidget.Size = new System.Drawing.Size(36, 36);
+			this.pbAutoWidget.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+			this.pbAutoWidget.TabIndex = 11;
+			this.pbAutoWidget.TabStop = false;
+			// 
+			// radioButtonWidgetTypeCustom
+			// 
+			this.radioButtonWidgetTypeCustom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.radioButtonWidgetTypeCustom.AutoSize = true;
+			this.radioButtonWidgetTypeCustom.BackColor = System.Drawing.Color.White;
+			this.radioButtonWidgetTypeCustom.ForeColor = System.Drawing.Color.Black;
+			this.radioButtonWidgetTypeCustom.Location = new System.Drawing.Point(172, 505);
+			this.radioButtonWidgetTypeCustom.Name = "radioButtonWidgetTypeCustom";
+			this.radioButtonWidgetTypeCustom.Size = new System.Drawing.Size(120, 20);
+			this.radioButtonWidgetTypeCustom.TabIndex = 12;
+			this.radioButtonWidgetTypeCustom.TabStop = true;
+			this.radioButtonWidgetTypeCustom.Text = "Custom Widget:";
+			this.radioButtonWidgetTypeCustom.UseVisualStyleBackColor = false;
+			this.radioButtonWidgetTypeCustom.CheckedChanged += new System.EventHandler(this.OnWidgetTypeChanged);
+			// 
+			// radioButtonWidgetTypeDisabled
+			// 
+			this.radioButtonWidgetTypeDisabled.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.radioButtonWidgetTypeDisabled.AutoSize = true;
+			this.radioButtonWidgetTypeDisabled.BackColor = System.Drawing.Color.White;
+			this.radioButtonWidgetTypeDisabled.ForeColor = System.Drawing.Color.Black;
+			this.radioButtonWidgetTypeDisabled.Location = new System.Drawing.Point(6, 505);
+			this.radioButtonWidgetTypeDisabled.Name = "radioButtonWidgetTypeDisabled";
+			this.radioButtonWidgetTypeDisabled.Size = new System.Drawing.Size(87, 20);
+			this.radioButtonWidgetTypeDisabled.TabIndex = 13;
+			this.radioButtonWidgetTypeDisabled.TabStop = true;
+			this.radioButtonWidgetTypeDisabled.Text = "No Widget";
+			this.radioButtonWidgetTypeDisabled.UseVisualStyleBackColor = false;
+			this.radioButtonWidgetTypeDisabled.CheckedChanged += new System.EventHandler(this.OnWidgetTypeChanged);
+			// 
+			// laExtension
+			// 
+			this.laExtension.Dock = System.Windows.Forms.DockStyle.Left;
+			this.laExtension.ForeColor = System.Drawing.Color.Black;
+			this.laExtension.Location = new System.Drawing.Point(36, 0);
+			this.laExtension.Name = "laExtension";
+			this.laExtension.Size = new System.Drawing.Size(118, 36);
+			this.laExtension.TabIndex = 14;
+			this.laExtension.Text = "Not Set";
+			this.laExtension.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// pnAutoWidget
+			// 
+			this.pnAutoWidget.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.pnAutoWidget.BackColor = System.Drawing.Color.Transparent;
+			this.pnAutoWidget.Controls.Add(this.laExtension);
+			this.pnAutoWidget.Controls.Add(this.pbAutoWidget);
+			this.pnAutoWidget.ForeColor = System.Drawing.Color.Black;
+			this.pnAutoWidget.Location = new System.Drawing.Point(520, 497);
+			this.pnAutoWidget.Name = "pnAutoWidget";
+			this.pnAutoWidget.Size = new System.Drawing.Size(162, 36);
+			this.pnAutoWidget.TabIndex = 15;
 			// 
 			// FormEditLinkWidget
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
 			this.BackColor = System.Drawing.Color.White;
 			this.ClientSize = new System.Drawing.Size(934, 542);
+			this.Controls.Add(this.pnAutoWidget);
+			this.Controls.Add(this.radioButtonWidgetTypeDisabled);
+			this.Controls.Add(this.radioButtonWidgetTypeCustom);
+			this.Controls.Add(this.radioButtonWidgetTypeAuto);
 			this.Controls.Add(this.xtraTabControlWidgets);
-			this.Controls.Add(this.pbSelectedWidget);
-			this.Controls.Add(this.checkBoxEnableWidget);
+			this.Controls.Add(this.pbCustomWidget);
 			this.Controls.Add(this.buttonXCancel);
 			this.Controls.Add(this.buttonXOK);
-			this.Controls.Add(this.labelControlInfo);
 			this.DoubleBuffered = true;
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.MinimizeBox = false;
@@ -151,9 +213,10 @@
 			this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
 			this.Text = "Widget Gallery ({0})";
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormEditLinkSettings_FormClosing);
-			this.Shown += new System.EventHandler(this.FormEditLinkWidget_Shown);
-			((System.ComponentModel.ISupportInitialize)(this.pbSelectedWidget)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.pbCustomWidget)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControlWidgets)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.pbAutoWidget)).EndInit();
+			this.pnAutoWidget.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -163,9 +226,13 @@
 
 		private DevComponents.DotNetBar.ButtonX buttonXOK;
 		private DevComponents.DotNetBar.ButtonX buttonXCancel;
-		private System.Windows.Forms.CheckBox checkBoxEnableWidget;
-		private System.Windows.Forms.PictureBox pbSelectedWidget;
+		private System.Windows.Forms.PictureBox pbCustomWidget;
 		private DevExpress.XtraTab.XtraTabControl xtraTabControlWidgets;
-		private DevExpress.XtraEditors.LabelControl labelControlInfo;
+		private System.Windows.Forms.RadioButton radioButtonWidgetTypeAuto;
+		private System.Windows.Forms.PictureBox pbAutoWidget;
+		private System.Windows.Forms.RadioButton radioButtonWidgetTypeCustom;
+		private System.Windows.Forms.RadioButton radioButtonWidgetTypeDisabled;
+		private System.Windows.Forms.Label laExtension;
+		private System.Windows.Forms.Panel pnAutoWidget;
     }
 }

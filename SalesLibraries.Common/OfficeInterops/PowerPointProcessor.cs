@@ -115,17 +115,16 @@ namespace SalesLibraries.Common.OfficeInterops
 			try
 			{
 				PowerPointObject.Quit();
-			}
-			catch { }
-			try
-			{
 				uint lpdwProcessId;
 				WinAPIHelper.GetWindowThreadProcessId(WindowHandle, out lpdwProcessId);
 				var powerPointProcessId = (int)lpdwProcessId;
 				Process.GetProcessById(powerPointProcessId).CloseMainWindow();
-				Process.GetProcessesByName("POWERPNT").ToList().ForEach(p => p.Kill());
 			}
 			catch { }
+			finally
+			{
+				Process.GetProcessesByName("POWERPNT").ToList().ForEach(p => p.Kill());
+			}
 		}
 
 		public Presentation GetActivePresentation()

@@ -80,7 +80,7 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 			else
 				Image = null;
 
-			if (Image == null && (Link.Widget.Enable || Link.Widget.HasAutoWidget) && Link.Widget.Image != null)
+			if (Image == null && !Link.Widget.Disabled)
 				Image = Link.Widget.Image;
 			#endregion
 
@@ -132,7 +132,7 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 				imageWidth = DefaultImageWidth;
 				imageHeight = DefaultImageHeight;
 			}
-			else if ((Link.Widget.Enable || Link.Widget.HasAutoWidget) && Link.Widget.Image != null)
+			else if (!Link.Widget.Disabled && Link.Widget.Image != null)
 			{
 				imageLeft = 0;
 				imageWidth = Link.Widget.Image.Width > DefaultImageWidth ? Link.Widget.Image.Width : DefaultImageWidth;

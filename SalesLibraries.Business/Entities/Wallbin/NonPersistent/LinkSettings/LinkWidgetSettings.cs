@@ -2,12 +2,24 @@
 using System.Drawing;
 using System.Linq;
 using Newtonsoft.Json;
+using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 
 namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 {
 	public class LinkWidgetSettings : WidgetSettings
 	{
+		[JsonIgnore]
+		public override WidgetType DefaultWidgetType
+		{
+			get
+			{
+				return ParentFileLink != null ?
+					WidgetType.AutoWidget :
+					WidgetType.NoWidget;
+			}
+		}
+
 		[JsonIgnore]
 		protected LibraryFileLink ParentFileLink
 		{
@@ -18,9 +30,15 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 		{
 			get
 			{
-				if (Enable && _image != null)
-					return _image;
-				return GetAutoWidget();
+				switch (WidgetType)
+				{
+					case WidgetType.AutoWidget:
+						return AutoWidget;
+					case WidgetType.CustomWidget:
+						return _image;
+					default:
+						return null;
+				}
 			}
 			set
 			{
@@ -33,16 +51,20 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 		[JsonIgnore]
 		public bool HasAutoWidget
 		{
-			get { return GetAutoWidget() != null; }
+			get { return AutoWidget != null; }
 		}
 
-		private Image GetAutoWidget()
+		[JsonIgnore]
+		public Image AutoWidget
 		{
-			if (ParentFileLink == null) return null;
-			return ParentFileLink.ParentLibrary.Settings.AutoWidgets
-					.Where(autoWidget =>
-						String.Compare(autoWidget.Extension, ParentFileLink.Extension.Replace(".", String.Empty), StringComparison.OrdinalIgnoreCase) == 0)
-					.Select(a => a.Widget).FirstOrDefault();
+			get
+			{
+				if (ParentFileLink == null) return null;
+				return ParentFileLink.ParentLibrary.Settings.AutoWidgets
+						.Where(autoWidget =>
+							String.Compare(autoWidget.Extension, ParentFileLink.Extension.Replace(".", String.Empty), StringComparison.OrdinalIgnoreCase) == 0)
+						.Select(a => a.Widget).FirstOrDefault();
+			}
 		}
 	}
 }

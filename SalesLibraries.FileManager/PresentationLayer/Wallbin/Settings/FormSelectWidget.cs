@@ -22,8 +22,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 
 			if ((CreateGraphics()).DpiX > 96)
 			{
-				laAvailableWidgets.Font = new Font(laAvailableWidgets.Font.FontFamily, laAvailableWidgets.Font.Size - 2, laAvailableWidgets.Font.Style);
-				laSelectedWidget.Font = new Font(laSelectedWidget.Font.FontFamily, laSelectedWidget.Font.Size - 2, laSelectedWidget.Font.Style);
+				laWidgetDescription.Font = new Font(laWidgetDescription.Font.FontFamily, laWidgetDescription.Font.Size - 2, laWidgetDescription.Font.Style);
 			}
 		}
 

@@ -28,16 +28,6 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 
 			if (result != SynchronizationResult.Completed || cancellationToken.IsCancellationRequested) return;
 
-			if (library.DataSources.Any())
-			{
-				result = SyncExtraRoots(
-					library,
-					false,
-					syncLog,
-					cancellationToken);
-				if (result != SynchronizationResult.Completed || cancellationToken.IsCancellationRequested) return;
-			}
-
 			result = SyncSpecialFolder(
 				Path.Combine(library.Path, Constants.RegularPreviewContainersRootFolderName),
 				Path.Combine(GetLibrarySyncDestinationPath(library, false), Constants.RegularPreviewContainersRootFolderName),
@@ -82,16 +72,6 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 				cancellationToken);
 
 			if (result != SynchronizationResult.Completed || cancellationToken.IsCancellationRequested) return;
-
-			if (library.DataSources.Any())
-			{
-				result = SyncExtraRoots(
-					library,
-					true,
-					syncLog,
-					cancellationToken);
-				if (result != SynchronizationResult.Completed || cancellationToken.IsCancellationRequested) return;
-			}
 
 			result = SyncSpecialFolder(
 				Path.Combine(library.Path, Constants.WebPreviewContainersRootFolderName),
@@ -157,76 +137,6 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 			return synchronizer.SynchronizeFolder(syncOptions);
 		}
 
-		private static SynchronizationResult SyncExtraRoots(
-			Library library,
-			bool isWebSync,
-			SyncLog syncLog,
-			CancellationToken cancellationToken)
-		{
-			var synchronizer = new SynchronizationHelper();
-			synchronizer.FileSynchronized += syncLog.OnFileSynchronized;
-			synchronizer.FolderSynchronized += syncLog.OnFolderSynchronized;
-			synchronizer.FileSynchronizing += (o, e) =>
-			{
-				if (cancellationToken.IsCancellationRequested)
-					synchronizer.Abort(SynchronizationResult.AbortedDueToShutDown);
-			};
-			synchronizer.SynchronizationCompleting += (o, e) =>
-			{
-				if (e.Result != SynchronizationResult.Completed)
-					syncLog.AbortLoging();
-			};
-
-			var result = SynchronizationResult.Completed;
-
-			var activeDataSourceNames = new List<string>();
-
-			var destinationRootPath = Path.Combine(GetLibrarySyncDestinationPath(library, isWebSync), Constants.ExtraFoldersRootFolderName);
-			if (!Directory.Exists(destinationRootPath))
-				synchronizer.CreateFolder(destinationRootPath);
-
-			foreach (var dataSource in library.DataSources)
-			{
-				var sourcePath = dataSource.Path;
-
-				var filesWhiteListItems = library.Pages
-					.SelectMany(p => p.AllLinks)
-					.OfType<LibraryFileLink>()
-					.Where(link => link.DataSourceId == dataSource.ExtId)
-					.Select(link => link.FullPath)
-					.ToList();
-
-				if (!filesWhiteListItems.Any()) continue;
-
-				activeDataSourceNames.Add(dataSource.ExtId.ToString());
-
-				var destinationPath = Path.Combine(destinationRootPath, dataSource.ExtId.ToString());
-				if (!Directory.Exists(destinationPath))
-					synchronizer.CreateFolder(destinationPath);
-
-				var syncOptions = new SynchronizationOptions(
-					new DirectoryInfo(sourcePath),
-					new DirectoryInfo(destinationPath),
-					true);
-				syncOptions.FilterList = SyncFilterList.Create(filesWhiteListItems, SyncFilterType.ByWhiteList);
-
-				result = synchronizer.SynchronizeFolder(syncOptions);
-
-				if (result != SynchronizationResult.Completed || cancellationToken.IsCancellationRequested) break;
-			}
-
-			if (!(result != SynchronizationResult.Completed || cancellationToken.IsCancellationRequested))
-			{
-				foreach (var directoryPath in Directory.GetDirectories(destinationRootPath))
-				{
-					if (!activeDataSourceNames.Contains(Path.GetFileName(directoryPath)))
-						synchronizer.DeleteFolder(new DirectoryInfo(directoryPath));
-				}
-			}
-
-			return result;
-		}
-
 		private static SynchronizationResult SyncSpecialFolder(
 			string specialFolderPath,
 			string destinationFolderPath,
@@ -266,9 +176,6 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 				Constants.WebPreviewContainersRootFolderName :
 				Constants.RegularPreviewContainersRootFolderName);
 
-			if (library.DataSources.Any())
-				result.Add(Constants.ExtraFoldersRootFolderName);
-
 			if (library.Calendar.Enabled)
 				result.Add(Constants.OvernightsCalendarRootFolderName);
 
@@ -283,7 +190,7 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 			var destinationRoot = isWebSync ?
 				MainController.Instance.Settings.WebPath :
 				MainController.Instance.Settings.NetworkPath;
-			if (library.Name == Constants.WholeDriveFilesStorage)
+			if (library.Name == Constants.PrimaryFileStorageName)
 				return destinationRoot;
 			return Path.Combine(destinationRoot, library.Name);
 		}

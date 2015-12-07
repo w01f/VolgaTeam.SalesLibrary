@@ -153,16 +153,6 @@ namespace SalesLibraries.FileManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap ButtonSort {
-            get {
-                object obj = ResourceManager.GetObject("ButtonSort", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap ButtonVideoConvert {
             get {
                 object obj = ResourceManager.GetObject("ButtonVideoConvert", resourceCulture);
@@ -373,56 +363,6 @@ namespace SalesLibraries.FileManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap MinibarFontLarger {
-            get {
-                object obj = ResourceManager.GetObject("MinibarFontLarger", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap MinibarFontSmaller {
-            get {
-                object obj = ResourceManager.GetObject("MinibarFontSmaller", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap MinibarLinkDown {
-            get {
-                object obj = ResourceManager.GetObject("MinibarLinkDown", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap MinibarLinkUp {
-            get {
-                object obj = ResourceManager.GetObject("MinibarLinkUp", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap MinibarTabsView {
-            get {
-                object obj = ResourceManager.GetObject("MinibarTabsView", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap RetractableLogoFiles {
             get {
                 object obj = ResourceManager.GetObject("RetractableLogoFiles", resourceCulture);
@@ -523,16 +463,6 @@ namespace SalesLibraries.FileManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap SettingsBranding {
-            get {
-                object obj = ResourceManager.GetObject("SettingsBranding", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap SettingsColumns {
             get {
                 object obj = ResourceManager.GetObject("SettingsColumns", resourceCulture);
@@ -543,9 +473,19 @@ namespace SalesLibraries.FileManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap SettingsDataSources {
+        internal static System.Drawing.Bitmap SettingsColumnsAlignByColumns {
             get {
-                object obj = ResourceManager.GetObject("SettingsDataSources", resourceCulture);
+                object obj = ResourceManager.GetObject("SettingsColumnsAlignByColumns", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SettingsColumnsAlignByRows {
+            get {
+                object obj = ResourceManager.GetObject("SettingsColumnsAlignByRows", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -733,9 +673,49 @@ namespace SalesLibraries.FileManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap VideoSync {
+        internal static System.Drawing.Bitmap WallbinSettingsComboboxes {
             get {
-                object obj = ResourceManager.GetObject("VideoSync", resourceCulture);
+                object obj = ResourceManager.GetObject("WallbinSettingsComboboxes", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap WallbinSettingsRibbon {
+            get {
+                object obj = ResourceManager.GetObject("WallbinSettingsRibbon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap WallbinSettingsTabPages {
+            get {
+                object obj = ResourceManager.GetObject("WallbinSettingsTabPages", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap WallbinZoomIn {
+            get {
+                object obj = ResourceManager.GetObject("WallbinZoomIn", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap WallbinZoomOut {
+            get {
+                object obj = ResourceManager.GetObject("WallbinZoomOut", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

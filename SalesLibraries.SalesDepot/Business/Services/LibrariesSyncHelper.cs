@@ -13,7 +13,7 @@ namespace SalesLibraries.SalesDepot.Business.Services
 
 			foreach (var sourceLibraryPath in Directory.GetDirectories(sourcePath))
 			{
-				var legacyLibraryPath = Path.Combine(sourceLibraryPath, Constants.WholeDriveFilesStorage);
+				var legacyLibraryPath = Path.Combine(sourceLibraryPath, Constants.OldPrimaryFileStorageName);
 				var sourceLibraryCachePath = Directory.Exists(legacyLibraryPath) ? legacyLibraryPath : sourceLibraryPath;
 
 				var libraryFolderName = Path.GetFileName(sourceLibraryPath);

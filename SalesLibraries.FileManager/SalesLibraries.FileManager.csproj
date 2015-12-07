@@ -430,6 +430,12 @@
     <Compile Include="PresentationLayer\Wallbin\Settings\FormResetCache.designer.cs">
       <DependentUpon>FormResetCache.cs</DependentUpon>
     </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Settings\FormWallbinSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Settings\FormWallbinSettings.designer.cs">
+      <DependentUpon>FormWallbinSettings.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationLayer\Wallbin\Views\IPageView.cs" />
     <Compile Include="PresentationLayer\Wallbin\Views\PageViewFactory.cs" />
     <Compile Include="PresentationLayer\Wallbin\Views\SelectionManager.cs" />
@@ -445,12 +451,6 @@
     <Compile Include="PresentationLayer\Wallbin\Settings\FormAutoWidgets.designer.cs">
       <DependentUpon>FormAutoWidgets.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Wallbin\Settings\FormBranding.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PresentationLayer\Wallbin\Settings\FormBranding.designer.cs">
-      <DependentUpon>FormBranding.cs</DependentUpon>
-    </Compile>
     <Compile Include="PresentationLayer\Wallbin\Settings\FormColumns.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -462,12 +462,6 @@
     </Compile>
     <Compile Include="PresentationLayer\Wallbin\Settings\FormColumnTitle.designer.cs">
       <DependentUpon>FormColumnTitle.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationLayer\Wallbin\Settings\FormDataSources.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PresentationLayer\Wallbin\Settings\FormDataSources.designer.cs">
-      <DependentUpon>FormDataSources.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Wallbin\Settings\FormDeadLinks.cs">
       <SubType>Form</SubType>
@@ -676,17 +670,11 @@
     <EmbeddedResource Include="PresentationLayer\Wallbin\Settings\FormAutoWidgets.resx">
       <DependentUpon>FormAutoWidgets.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Wallbin\Settings\FormBranding.resx">
-      <DependentUpon>FormBranding.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Settings\FormColumns.resx">
       <DependentUpon>FormColumns.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Settings\FormColumnTitle.resx">
       <DependentUpon>FormColumnTitle.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Wallbin\Settings\FormDataSources.resx">
-      <DependentUpon>FormDataSources.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Settings\FormDeadLinks.resx">
       <DependentUpon>FormDeadLinks.cs</DependentUpon>
@@ -711,6 +699,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Settings\FormSync.resx">
       <DependentUpon>FormSync.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Settings\FormWallbinSettings.resx">
+      <DependentUpon>FormWallbinSettings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Settings\FormWindow.resx">
       <DependentUpon>FormWindow.cs</DependentUpon>
@@ -778,6 +769,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\WallbinSettingsTabPages.png" />
+    <None Include="Resources\WallbinSettingsComboboxes.png" />
+    <None Include="Resources\WallbinZoomOut.png" />
+    <None Include="Resources\WallbinZoomIn.png" />
+    <None Include="Resources\WallbinSettingsRibbon.png" />
+    <None Include="Resources\SettingsColumnsAlignByRows.png" />
+    <None Include="Resources\SettingsColumnsAlignByColumns.png" />
     <None Include="Resources\HomeLogo.png" />
     <None Include="Resources\CalendarFontUp.png" />
     <None Include="Resources\CalendarFontDown.png" />
@@ -787,7 +785,6 @@
     <None Include="Resources\VideoOpenInternetExplorer.png" />
     <None Include="Resources\VideoOpenFirefox.png" />
     <None Include="Resources\VideoOpenChrome.png" />
-    <None Include="Resources\VideoSync.png" />
     <None Include="Resources\VideoDelete.png" />
     <None Include="Resources\VideoConvert.png" />
     <None Include="Resources\ButtonVideoReset.png" />
@@ -818,24 +815,16 @@
     <None Include="Resources\RetractableLogoTags.png" />
     <None Include="Resources\RetractableLogoSecurity.png" />
     <None Include="Resources\RetractableLogoFiles.png" />
-    <None Include="Resources\MinibarTabsView.png" />
-    <None Include="Resources\MinibarLinkUp.png" />
-    <None Include="Resources\MinibarLinkDown.png" />
-    <None Include="Resources\MinibarFontSmaller.png" />
-    <None Include="Resources\MinibarFontLarger.png" />
     <None Include="Resources\ButtonAutoWidgets.png" />
     <None Include="Resources\SettingsSync.png" />
     <None Include="Resources\SettingsLibraries.png" />
-    <None Include="Resources\SettingsDataSources.png" />
     <None Include="Resources\SettingsAdvanced.png" />
-    <None Include="Resources\ButtonSort.png" />
     <None Include="Resources\ButtonSettings.png" />
     <None Include="Resources\Favorites.png" />
     <None Include="Resources\SettingsPages.png" />
     <None Include="Resources\SettingsEmailList.png" />
     <None Include="Resources\SettingsDeadLinks.png" />
     <None Include="Resources\SettingsColumns.png" />
-    <None Include="Resources\SettingsBranding.png" />
     <None Include="Resources\SettingsAutoWidgets.png" />
     <None Include="Resources\ButtonPlus.png" />
     <None Include="Resources\ButtonDelete.png" />

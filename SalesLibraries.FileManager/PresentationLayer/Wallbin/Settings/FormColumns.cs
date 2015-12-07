@@ -142,10 +142,19 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			_stateChanged = true;
 		}
 
-		private void buttonXSort_Click(object sender, EventArgs e)
+		private void OnAlignByColumnsClick(object sender, EventArgs e)
 		{
 			if (_currentPage == null) return;
-			_currentPage.SortFoldersByName();
+			_currentPage.AlignFoldersByColumns();
+			foreach (var columnPage in xtraTabControlWindows.TabPages.OfType<ColumnSettings>())
+				columnPage.LoadData();
+			_stateChanged = true;
+		}
+
+		private void OnAlignByRowsClick(object sender, EventArgs e)
+		{
+			if (_currentPage == null) return;
+			_currentPage.AlignFoldersByRows();
 			foreach (var columnPage in xtraTabControlWindows.TabPages.OfType<ColumnSettings>())
 				columnPage.LoadData();
 			_stateChanged = true;

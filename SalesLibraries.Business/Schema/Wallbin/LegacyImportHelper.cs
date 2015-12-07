@@ -22,7 +22,6 @@ namespace SalesLibraries.Business.Schema.Wallbin
 
 			var legacyLibrary = new Legacy.Entities.Library(target.Name, new DirectoryInfo(libraryPath), false, 0);
 			target.ExtId = legacyLibrary.Identifier;
-			target.BrandingText = legacyLibrary.BrandingText;
 			target.SyncDate = legacyLibrary.SyncDate;
 
 			target.Settings.ApplyAppearanceForAllWindows = legacyLibrary.ApplyAppearanceForAllWindows;
@@ -76,14 +75,6 @@ namespace SalesLibraries.Business.Schema.Wallbin
 				target.Pages.Add(targetPage);
 			}
 
-			foreach (var folder in legacyLibrary.ExtraFolders)
-			{
-				var targetPage = new AdditionalDataSource();
-				targetPage.Library = target;
-				targetPage.ImportLegacyData(folder);
-				target.DataSources.Add(targetPage);
-			}
-
 			foreach (var autoWidget in legacyLibrary.AutoWidgets)
 			{
 				var targetAutoWidget = new AutoWidget();
@@ -135,7 +126,7 @@ namespace SalesLibraries.Business.Schema.Wallbin
 			target.Settings.HeaderFont = (Font)legacy.HeaderFont.Clone();
 			target.Settings.WindowFont = (Font)legacy.WindowFont.Clone();
 
-			target.Widget.Enable = legacy.EnableWidget;
+			target.Widget.WidgetType = legacy.EnableWidget ? WidgetType.CustomWidget : WidgetType.NoWidget;
 			target.Widget.Image = (Image)(legacy.Widget != null ? legacy.Widget.Clone() : null);
 
 			if (legacy.BannerProperties != null)
@@ -194,7 +185,7 @@ namespace SalesLibraries.Business.Schema.Wallbin
 			target.Settings.HeaderAlignment = (Alignment)(Int32)legacy.HeaderAlignment;
 			target.Settings.HeaderFont = (Font)legacy.HeaderFont.Clone();
 
-			target.Widget.Enable = legacy.EnableWidget;
+			target.Widget.WidgetType = legacy.EnableWidget ? WidgetType.CustomWidget : WidgetType.NoWidget;
 			target.Widget.Image = (Image)(legacy.Widget != null ? legacy.Widget.Clone() : null);
 
 			if (legacy.BannerProperties != null)
@@ -213,13 +204,6 @@ namespace SalesLibraries.Business.Schema.Wallbin
 					}
 				}
 			}
-		}
-
-		public static void ImportLegacyData(this AdditionalDataSource target, Legacy.Entities.RootFolder legacy)
-		{
-			target.ExtId = legacy.RootId;
-			target.Path = legacy.Path;
-			target.Order = legacy.Order;
 		}
 
 		public static void ImportLegacyData(this AutoWidget target, Legacy.Entities.AutoWidget legacy)
@@ -246,7 +230,7 @@ namespace SalesLibraries.Business.Schema.Wallbin
 			target.Tags.Keywords.AddRange(legacy.CustomKeywords.Tags.Select(legacyTag => new SearchTag { Name = legacyTag.Name }));
 			target.Tags.SuperFilters.AddRange(legacy.SuperFilters.Select(superFilter => superFilter.Name));
 
-			target.Widget.Enable = legacy.EnableWidget;
+			target.Widget.WidgetType = legacy.EnableWidget ? WidgetType.CustomWidget : target.Widget.DefaultWidgetType;
 			target.Widget.Image = (Image)(legacy.Widget != null ? legacy.Widget.Clone() : null);
 
 			if (legacy.BannerProperties != null)

@@ -74,7 +74,7 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 			{
 				pbImage.Visible = false;
 				labelControlText.Visible = true;
-				if (DataSource.Widget.Enable && DataSource.Widget.Image != null)
+				if (DataSource.Widget.Enabled && DataSource.Widget.Image != null)
 					labelControlText.Appearance.Image = DataSource.Widget.Image;
 				labelControlText.Text = DataSource.Name;
 				labelControlText.Font = DataSource.Settings.HeaderFont;
@@ -116,7 +116,7 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 			}
 			else
 			{
-				if (DataSource.Widget.Enable && DataSource.Widget.Image != null)
+				if (DataSource.Widget.Enabled && DataSource.Widget.Image != null)
 				{
 					using (var g = labelControlText.CreateGraphics())
 						textHeight = (int)g.MeasureString(
