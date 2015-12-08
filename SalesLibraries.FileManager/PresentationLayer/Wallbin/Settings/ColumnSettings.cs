@@ -150,7 +150,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 						FolderMovedRight(this, EventArgs.Empty);
 					break;
 				case 4:
-					using (var form = new FormWindow(folder))
+					using (var form = new FormWindow(folder, new BaseEditFormParams()))
 					{
 						if (form.ShowDialog() != DialogResult.OK) return;
 						gridView.RefreshData();

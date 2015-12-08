@@ -37,12 +37,14 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 		public void LoadPage(bool force = false)
 		{
 			if (_readyToUse && !force) return;
+			MainController.Instance.WallbinViews.Selection.Suspend();
 			if (force)
 				DisposePage();
+			Content.LoadContent();
 			if (!pnContainer.Controls.Contains(Content))
 				pnContainer.Controls.Add(Content);
-			Content.LoadContent();
 			_readyToUse = true;
+			MainController.Instance.WallbinViews.Selection.Resume();
 		}
 
 		public void DisposePage()

@@ -9,7 +9,7 @@ namespace SalesLibraries.Business.Entities.Common
 	{
 		protected IChangable Parent { get; set; }
 
-		public static TSettings CreateInstance<TSettings>(IChangable parent, string encodedSource) where TSettings : SettingsContainer
+		public static TSettings CreateInstance<TSettings>(IChangable parent, string encodedSource = "") where TSettings : SettingsContainer
 		{
 			var createNew = String.IsNullOrEmpty(encodedSource);
 			var settings = !createNew ?

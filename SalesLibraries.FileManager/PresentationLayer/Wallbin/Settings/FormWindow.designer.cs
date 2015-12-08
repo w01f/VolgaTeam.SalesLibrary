@@ -52,16 +52,18 @@
 			this.colorEditWindowHeaderForeColor = new DevExpress.XtraEditors.ColorEdit();
 			this.laHeaderForeColor = new System.Windows.Forms.Label();
 			this.xtraTabPageWidget = new DevExpress.XtraTab.XtraTabPage();
+			this.pnWidgetContainer = new System.Windows.Forms.Panel();
+			this.pnApllyForAllWindowsWidget = new System.Windows.Forms.Panel();
 			this.ckApllyForAllWindowsWidget = new System.Windows.Forms.CheckBox();
 			this.xtraTabPageBanner = new DevExpress.XtraTab.XtraTabPage();
+			this.pnBannerContainer = new System.Windows.Forms.Panel();
+			this.pnApllyForAllWindowsBanner = new System.Windows.Forms.Panel();
 			this.ckApllyForAllWindowsBanner = new System.Windows.Forms.CheckBox();
 			this.pnBottom = new System.Windows.Forms.Panel();
 			this.buttonXSave = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXCancel = new DevComponents.DotNetBar.ButtonX();
 			this.pnTop = new System.Windows.Forms.Panel();
 			this.laLocation = new System.Windows.Forms.Label();
-			this.pnWidgetContainer = new System.Windows.Forms.Panel();
-			this.pnBannerContainer = new System.Windows.Forms.Panel();
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControlWindowProperties)).BeginInit();
 			this.xtraTabControlWindowProperties.SuspendLayout();
 			this.xtraTabPageAppearance.SuspendLayout();
@@ -74,7 +76,9 @@
 			((System.ComponentModel.ISupportInitialize)(this.colorEditWindowHeaderBackColor.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.colorEditWindowHeaderForeColor.Properties)).BeginInit();
 			this.xtraTabPageWidget.SuspendLayout();
+			this.pnApllyForAllWindowsWidget.SuspendLayout();
 			this.xtraTabPageBanner.SuspendLayout();
+			this.pnApllyForAllWindowsBanner.SuspendLayout();
 			this.pnBottom.SuspendLayout();
 			this.pnTop.SuspendLayout();
 			this.SuspendLayout();
@@ -82,9 +86,11 @@
 			// xtraTabControlWindowProperties
 			// 
 			this.xtraTabControlWindowProperties.Appearance.BackColor = System.Drawing.Color.White;
+			this.xtraTabControlWindowProperties.Appearance.BorderColor = System.Drawing.Color.Transparent;
 			this.xtraTabControlWindowProperties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.xtraTabControlWindowProperties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.xtraTabControlWindowProperties.Appearance.Options.UseBackColor = true;
+			this.xtraTabControlWindowProperties.Appearance.Options.UseBorderColor = true;
 			this.xtraTabControlWindowProperties.Appearance.Options.UseFont = true;
 			this.xtraTabControlWindowProperties.Appearance.Options.UseForeColor = true;
 			this.xtraTabControlWindowProperties.AppearancePage.Header.Font = new System.Drawing.Font("Arial", 9.75F);
@@ -95,13 +101,17 @@
 			this.xtraTabControlWindowProperties.AppearancePage.HeaderDisabled.Options.UseFont = true;
 			this.xtraTabControlWindowProperties.AppearancePage.HeaderHotTracked.Font = new System.Drawing.Font("Arial", 9.75F);
 			this.xtraTabControlWindowProperties.AppearancePage.HeaderHotTracked.Options.UseFont = true;
+			this.xtraTabControlWindowProperties.AppearancePage.PageClient.BorderColor = System.Drawing.Color.Transparent;
 			this.xtraTabControlWindowProperties.AppearancePage.PageClient.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.xtraTabControlWindowProperties.AppearancePage.PageClient.Options.UseBorderColor = true;
 			this.xtraTabControlWindowProperties.AppearancePage.PageClient.Options.UseFont = true;
+			this.xtraTabControlWindowProperties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+			this.xtraTabControlWindowProperties.BorderStylePage = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
 			this.xtraTabControlWindowProperties.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.xtraTabControlWindowProperties.Location = new System.Drawing.Point(0, 34);
 			this.xtraTabControlWindowProperties.Name = "xtraTabControlWindowProperties";
 			this.xtraTabControlWindowProperties.SelectedTabPage = this.xtraTabPageAppearance;
-			this.xtraTabControlWindowProperties.Size = new System.Drawing.Size(577, 518);
+			this.xtraTabControlWindowProperties.Size = new System.Drawing.Size(564, 303);
 			this.xtraTabControlWindowProperties.TabIndex = 25;
 			this.xtraTabControlWindowProperties.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.xtraTabPageAppearance,
@@ -132,18 +142,20 @@
 			this.xtraTabPageAppearance.Controls.Add(this.colorEditWindowHeaderForeColor);
 			this.xtraTabPageAppearance.Controls.Add(this.laHeaderForeColor);
 			this.xtraTabPageAppearance.Name = "xtraTabPageAppearance";
-			this.xtraTabPageAppearance.Size = new System.Drawing.Size(571, 487);
+			this.xtraTabPageAppearance.Size = new System.Drawing.Size(558, 272);
 			this.xtraTabPageAppearance.Text = "Appearance";
 			// 
 			// textEditName
 			// 
+			this.textEditName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.textEditName.Location = new System.Drawing.Point(153, 7);
 			this.textEditName.Name = "textEditName";
 			this.textEditName.Properties.Appearance.BackColor = System.Drawing.Color.White;
 			this.textEditName.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.textEditName.Properties.Appearance.Options.UseBackColor = true;
 			this.textEditName.Properties.Appearance.Options.UseForeColor = true;
-			this.textEditName.Size = new System.Drawing.Size(405, 22);
+			this.textEditName.Size = new System.Drawing.Size(392, 22);
 			this.textEditName.StyleController = this.styleController;
 			this.textEditName.TabIndex = 36;
 			// 
@@ -260,7 +272,7 @@
 			this.buttonEditWindowHeaderFont.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
 			this.buttonEditWindowHeaderFont.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-			this.buttonEditWindowHeaderFont.Size = new System.Drawing.Size(405, 22);
+			this.buttonEditWindowHeaderFont.Size = new System.Drawing.Size(392, 22);
 			this.buttonEditWindowHeaderFont.StyleController = this.styleController;
 			this.buttonEditWindowHeaderFont.TabIndex = 28;
 			// 
@@ -279,7 +291,7 @@
 			// 
 			this.colorEditWindowForeColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.colorEditWindowForeColor.EditValue = System.Drawing.Color.Empty;
-			this.colorEditWindowForeColor.Location = new System.Drawing.Point(458, 75);
+			this.colorEditWindowForeColor.Location = new System.Drawing.Point(445, 75);
 			this.colorEditWindowForeColor.Name = "colorEditWindowForeColor";
 			this.colorEditWindowForeColor.Properties.Appearance.BackColor = System.Drawing.Color.White;
 			this.colorEditWindowForeColor.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
@@ -307,7 +319,7 @@
 			// 
 			this.colorEditWindowBackColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.colorEditWindowBackColor.EditValue = System.Drawing.Color.Empty;
-			this.colorEditWindowBackColor.Location = new System.Drawing.Point(458, 41);
+			this.colorEditWindowBackColor.Location = new System.Drawing.Point(445, 41);
 			this.colorEditWindowBackColor.Name = "colorEditWindowBackColor";
 			this.colorEditWindowBackColor.Properties.Appearance.BackColor = System.Drawing.Color.White;
 			this.colorEditWindowBackColor.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
@@ -326,7 +338,7 @@
 			this.ckApllyForAllWindowsAppearance.AutoSize = true;
 			this.ckApllyForAllWindowsAppearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
 			this.ckApllyForAllWindowsAppearance.ForeColor = System.Drawing.Color.Black;
-			this.ckApllyForAllWindowsAppearance.Location = new System.Drawing.Point(6, 464);
+			this.ckApllyForAllWindowsAppearance.Location = new System.Drawing.Point(7, 250);
 			this.ckApllyForAllWindowsAppearance.Name = "ckApllyForAllWindowsAppearance";
 			this.ckApllyForAllWindowsAppearance.Size = new System.Drawing.Size(230, 20);
 			this.ckApllyForAllWindowsAppearance.TabIndex = 15;
@@ -339,7 +351,7 @@
 			this.laForeColor.AutoSize = true;
 			this.laForeColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.laForeColor.ForeColor = System.Drawing.Color.Black;
-			this.laForeColor.Location = new System.Drawing.Point(312, 78);
+			this.laForeColor.Location = new System.Drawing.Point(299, 78);
 			this.laForeColor.Name = "laForeColor";
 			this.laForeColor.Size = new System.Drawing.Size(120, 16);
 			this.laForeColor.TabIndex = 12;
@@ -367,7 +379,7 @@
 			this.laBackColor.AutoSize = true;
 			this.laBackColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.laBackColor.ForeColor = System.Drawing.Color.Black;
-			this.laBackColor.Location = new System.Drawing.Point(312, 44);
+			this.laBackColor.Location = new System.Drawing.Point(299, 44);
 			this.laBackColor.Name = "laBackColor";
 			this.laBackColor.Size = new System.Drawing.Size(125, 16);
 			this.laBackColor.TabIndex = 9;
@@ -405,10 +417,29 @@
 			this.xtraTabPageWidget.Appearance.PageClient.ForeColor = System.Drawing.Color.Black;
 			this.xtraTabPageWidget.Appearance.PageClient.Options.UseForeColor = true;
 			this.xtraTabPageWidget.Controls.Add(this.pnWidgetContainer);
-			this.xtraTabPageWidget.Controls.Add(this.ckApllyForAllWindowsWidget);
+			this.xtraTabPageWidget.Controls.Add(this.pnApllyForAllWindowsWidget);
 			this.xtraTabPageWidget.Name = "xtraTabPageWidget";
-			this.xtraTabPageWidget.Size = new System.Drawing.Size(571, 487);
+			this.xtraTabPageWidget.Size = new System.Drawing.Size(558, 272);
 			this.xtraTabPageWidget.Text = "Widget";
+			// 
+			// pnWidgetContainer
+			// 
+			this.pnWidgetContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.pnWidgetContainer.ForeColor = System.Drawing.Color.Black;
+			this.pnWidgetContainer.Location = new System.Drawing.Point(0, 0);
+			this.pnWidgetContainer.Name = "pnWidgetContainer";
+			this.pnWidgetContainer.Size = new System.Drawing.Size(558, 242);
+			this.pnWidgetContainer.TabIndex = 35;
+			// 
+			// pnApllyForAllWindowsWidget
+			// 
+			this.pnApllyForAllWindowsWidget.Controls.Add(this.ckApllyForAllWindowsWidget);
+			this.pnApllyForAllWindowsWidget.Dock = System.Windows.Forms.DockStyle.Bottom;
+			this.pnApllyForAllWindowsWidget.ForeColor = System.Drawing.Color.Black;
+			this.pnApllyForAllWindowsWidget.Location = new System.Drawing.Point(0, 242);
+			this.pnApllyForAllWindowsWidget.Name = "pnApllyForAllWindowsWidget";
+			this.pnApllyForAllWindowsWidget.Size = new System.Drawing.Size(558, 30);
+			this.pnApllyForAllWindowsWidget.TabIndex = 38;
 			// 
 			// ckApllyForAllWindowsWidget
 			// 
@@ -416,7 +447,7 @@
 			this.ckApllyForAllWindowsWidget.AutoSize = true;
 			this.ckApllyForAllWindowsWidget.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
 			this.ckApllyForAllWindowsWidget.ForeColor = System.Drawing.Color.Black;
-			this.ckApllyForAllWindowsWidget.Location = new System.Drawing.Point(6, 464);
+			this.ckApllyForAllWindowsWidget.Location = new System.Drawing.Point(7, 5);
 			this.ckApllyForAllWindowsWidget.Name = "ckApllyForAllWindowsWidget";
 			this.ckApllyForAllWindowsWidget.Size = new System.Drawing.Size(198, 20);
 			this.ckApllyForAllWindowsWidget.TabIndex = 34;
@@ -428,18 +459,36 @@
 			this.xtraTabPageBanner.Appearance.PageClient.ForeColor = System.Drawing.Color.Black;
 			this.xtraTabPageBanner.Appearance.PageClient.Options.UseForeColor = true;
 			this.xtraTabPageBanner.Controls.Add(this.pnBannerContainer);
-			this.xtraTabPageBanner.Controls.Add(this.ckApllyForAllWindowsBanner);
+			this.xtraTabPageBanner.Controls.Add(this.pnApllyForAllWindowsBanner);
 			this.xtraTabPageBanner.Name = "xtraTabPageBanner";
-			this.xtraTabPageBanner.Size = new System.Drawing.Size(571, 487);
+			this.xtraTabPageBanner.Size = new System.Drawing.Size(558, 272);
 			this.xtraTabPageBanner.Text = "Banner";
+			// 
+			// pnBannerContainer
+			// 
+			this.pnBannerContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.pnBannerContainer.ForeColor = System.Drawing.Color.Black;
+			this.pnBannerContainer.Location = new System.Drawing.Point(0, 0);
+			this.pnBannerContainer.Name = "pnBannerContainer";
+			this.pnBannerContainer.Size = new System.Drawing.Size(558, 242);
+			this.pnBannerContainer.TabIndex = 36;
+			// 
+			// pnApllyForAllWindowsBanner
+			// 
+			this.pnApllyForAllWindowsBanner.Controls.Add(this.ckApllyForAllWindowsBanner);
+			this.pnApllyForAllWindowsBanner.Dock = System.Windows.Forms.DockStyle.Bottom;
+			this.pnApllyForAllWindowsBanner.ForeColor = System.Drawing.Color.Black;
+			this.pnApllyForAllWindowsBanner.Location = new System.Drawing.Point(0, 242);
+			this.pnApllyForAllWindowsBanner.Name = "pnApllyForAllWindowsBanner";
+			this.pnApllyForAllWindowsBanner.Size = new System.Drawing.Size(558, 30);
+			this.pnApllyForAllWindowsBanner.TabIndex = 37;
 			// 
 			// ckApllyForAllWindowsBanner
 			// 
-			this.ckApllyForAllWindowsBanner.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.ckApllyForAllWindowsBanner.AutoSize = true;
 			this.ckApllyForAllWindowsBanner.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
 			this.ckApllyForAllWindowsBanner.ForeColor = System.Drawing.Color.Black;
-			this.ckApllyForAllWindowsBanner.Location = new System.Drawing.Point(6, 464);
+			this.ckApllyForAllWindowsBanner.Location = new System.Drawing.Point(7, 5);
 			this.ckApllyForAllWindowsBanner.Name = "ckApllyForAllWindowsBanner";
 			this.ckApllyForAllWindowsBanner.Size = new System.Drawing.Size(198, 20);
 			this.ckApllyForAllWindowsBanner.TabIndex = 33;
@@ -453,9 +502,9 @@
 			this.pnBottom.Controls.Add(this.buttonXCancel);
 			this.pnBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
 			this.pnBottom.ForeColor = System.Drawing.Color.Black;
-			this.pnBottom.Location = new System.Drawing.Point(0, 552);
+			this.pnBottom.Location = new System.Drawing.Point(0, 337);
 			this.pnBottom.Name = "pnBottom";
-			this.pnBottom.Size = new System.Drawing.Size(577, 55);
+			this.pnBottom.Size = new System.Drawing.Size(564, 55);
 			this.pnBottom.TabIndex = 26;
 			// 
 			// buttonXSave
@@ -464,7 +513,7 @@
 			this.buttonXSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXSave.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXSave.DialogResult = System.Windows.Forms.DialogResult.OK;
-			this.buttonXSave.Location = new System.Drawing.Point(329, 10);
+			this.buttonXSave.Location = new System.Drawing.Point(316, 10);
 			this.buttonXSave.Name = "buttonXSave";
 			this.buttonXSave.Size = new System.Drawing.Size(102, 33);
 			this.buttonXSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -477,7 +526,7 @@
 			this.buttonXCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXCancel.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.buttonXCancel.Location = new System.Drawing.Point(463, 10);
+			this.buttonXCancel.Location = new System.Drawing.Point(450, 10);
 			this.buttonXCancel.Name = "buttonXCancel";
 			this.buttonXCancel.Size = new System.Drawing.Size(102, 33);
 			this.buttonXCancel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -492,7 +541,7 @@
 			this.pnTop.ForeColor = System.Drawing.Color.Black;
 			this.pnTop.Location = new System.Drawing.Point(0, 0);
 			this.pnTop.Name = "pnTop";
-			this.pnTop.Size = new System.Drawing.Size(577, 34);
+			this.pnTop.Size = new System.Drawing.Size(564, 34);
 			this.pnTop.TabIndex = 27;
 			// 
 			// laLocation
@@ -507,39 +556,20 @@
 			this.laLocation.TabIndex = 22;
 			this.laLocation.Text = "Location:";
 			// 
-			// pnWidgetContainer
-			// 
-			this.pnWidgetContainer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.pnWidgetContainer.Location = new System.Drawing.Point(3, 3);
-			this.pnWidgetContainer.Name = "pnWidgetContainer";
-			this.pnWidgetContainer.Size = new System.Drawing.Size(568, 455);
-			this.pnWidgetContainer.TabIndex = 35;
-			// 
-			// pnBannerContainer
-			// 
-			this.pnBannerContainer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.pnBannerContainer.Location = new System.Drawing.Point(3, 3);
-			this.pnBannerContainer.Name = "pnBannerContainer";
-			this.pnBannerContainer.Size = new System.Drawing.Size(568, 455);
-			this.pnBannerContainer.TabIndex = 36;
-			// 
 			// FormWindow
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-			this.ClientSize = new System.Drawing.Size(577, 607);
+			this.ClientSize = new System.Drawing.Size(564, 392);
 			this.Controls.Add(this.xtraTabControlWindowProperties);
 			this.Controls.Add(this.pnBottom);
 			this.Controls.Add(this.pnTop);
 			this.DoubleBuffered = true;
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+			this.ForeColor = System.Drawing.Color.Black;
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "FormWindow";
+			this.ShowIcon = false;
 			this.ShowInTaskbar = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Window Settings";
@@ -557,9 +587,11 @@
 			((System.ComponentModel.ISupportInitialize)(this.colorEditWindowHeaderBackColor.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.colorEditWindowHeaderForeColor.Properties)).EndInit();
 			this.xtraTabPageWidget.ResumeLayout(false);
-			this.xtraTabPageWidget.PerformLayout();
+			this.pnApllyForAllWindowsWidget.ResumeLayout(false);
+			this.pnApllyForAllWindowsWidget.PerformLayout();
 			this.xtraTabPageBanner.ResumeLayout(false);
-			this.xtraTabPageBanner.PerformLayout();
+			this.pnApllyForAllWindowsBanner.ResumeLayout(false);
+			this.pnApllyForAllWindowsBanner.PerformLayout();
 			this.pnBottom.ResumeLayout(false);
 			this.pnTop.ResumeLayout(false);
 			this.pnTop.PerformLayout();
@@ -602,5 +634,7 @@
 		private System.Windows.Forms.Label laName;
 		private System.Windows.Forms.Panel pnWidgetContainer;
 		private System.Windows.Forms.Panel pnBannerContainer;
+		private System.Windows.Forms.Panel pnApllyForAllWindowsWidget;
+		private System.Windows.Forms.Panel pnApllyForAllWindowsBanner;
 	}
 }

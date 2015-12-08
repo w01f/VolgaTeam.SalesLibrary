@@ -61,9 +61,16 @@ namespace SalesLibraries.FileManager.PresentationLayer.Video
 
 		private void LoadVideoInfoInternal()
 		{
-			_videoInfoList.AddRange(_libraryContext.Library.PreviewContainers.OfType<VideoPreviewContainer>().Select(VideoInfo.Create));
+			_videoInfoList.AddRange(_libraryContext.Library.PreviewContainers
+				.OfType<VideoPreviewContainer>()
+				.Select(VideoInfo.Create));
 			var i = 1;
-			_videoInfoList.Sort((x, y) => WinAPIHelper.StrCmpLogicalW(x.SourceFileName, y.SourceFileName));
+			_videoInfoList.Sort((x, y) =>
+			{
+				if(x.Converted == y.Converted)
+					return WinAPIHelper.StrCmpLogicalW(x.SourceFileName, y.SourceFileName);
+				return y.Converted ? 1 : -1;
+			});
 			foreach (var videoInfo in _videoInfoList)
 			{
 				videoInfo.Index = i;
@@ -109,11 +116,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Video
 				},
 				cancellationToken => MainController.Instance.MainForm.Invoke(new MethodInvoker(() =>
 				{
-					if (!cancellationToken.IsCancellationRequested && _libraryContext.Library.SyncSettings.CloseAfterSync)
-					{
-						Application.Exit();
-						return;
-					}
 					MainController.Instance.MainForm.WindowState = savedState;
 					LoadVideoInfo();
 					MainController.Instance.MainForm.ribbonControl.Enabled = true;

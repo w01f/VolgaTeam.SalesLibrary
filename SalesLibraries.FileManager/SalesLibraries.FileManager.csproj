@@ -196,18 +196,6 @@
       <DependentUpon>BannerSettingsControl.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Wallbin\Common\SearchGroupContainer.cs" />
-    <Compile Include="PresentationLayer\Wallbin\Common\WidgetSettingsPage.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="PresentationLayer\Wallbin\Common\WidgetSettingsPage.Designer.cs">
-      <DependentUpon>WidgetSettingsPage.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationLayer\Wallbin\Common\BannerSettingsPage.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="PresentationLayer\Wallbin\Common\BannerSettingsPage.Designer.cs">
-      <DependentUpon>BannerSettingsPage.cs</DependentUpon>
-    </Compile>
     <Compile Include="PresentationLayer\Wallbin\Common\LinkImagesContainer.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -217,7 +205,7 @@
     <Compile Include="PresentationLayer\Wallbin\Common\WidgetSettingsControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Wallbin\Common\WidgetSettingsControl.Designer.cs">
+    <Compile Include="PresentationLayer\Wallbin\Common\WidgetSettingsControl.designer.cs">
       <DependentUpon>WidgetSettingsControl.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Wallbin\DataSource\DataSourceTreeViewControl.cs">
@@ -561,12 +549,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Common\BannerSettingsControl.resx">
       <DependentUpon>BannerSettingsControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Wallbin\Common\WidgetSettingsPage.resx">
-      <DependentUpon>WidgetSettingsPage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Wallbin\Common\BannerSettingsPage.resx">
-      <DependentUpon>BannerSettingsPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Common\LinkImagesContainer.resx">
       <DependentUpon>LinkImagesContainer.cs</DependentUpon>

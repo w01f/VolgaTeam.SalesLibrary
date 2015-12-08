@@ -119,7 +119,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 
 		public void ResetWidgets()
 		{
-			PageContainer.Page.AllLinks.ApplyWidgets(new LinkWidgetSettings());
+			PageContainer.Page.AllLinks.ResetWidgets();
 			MainController.Instance.WallbinViews.Selection.Reset();
 			MainController.Instance.ProcessManager.Run("Updating Page...",
 				cancelationToken => MainController.Instance.MainForm.Invoke(new MethodInvoker(UpdateContent)));
@@ -127,7 +127,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 
 		public void ResetBanners()
 		{
-			PageContainer.Page.AllLinks.ApplyBanners(new BannerSettings());
+			PageContainer.Page.AllLinks.ResetBanners();
 			MainController.Instance.WallbinViews.Selection.Reset();
 			MainController.Instance.ProcessManager.Run("Updating Page...",
 				cancelationToken => MainController.Instance.MainForm.Invoke(new MethodInvoker(UpdateContent)));

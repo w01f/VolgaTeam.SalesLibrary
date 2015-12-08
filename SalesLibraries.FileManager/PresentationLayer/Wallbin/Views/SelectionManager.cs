@@ -9,6 +9,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 {
 	public class SelectionManager
 	{
+		private bool _suspended;
+
 		public DateTime? LastUpdate { get; set; }
 		public ClassicFolderBox SelectedFolder { get; private set; }
 		public List<BaseLibraryLink> SelectedLinks { get; private set; }
@@ -27,6 +29,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 
 		public void SelectLinks(IEnumerable<BaseLibraryLink> links, Keys modifierKeys)
 		{
+			if (_suspended) return;
 			if (modifierKeys == Keys.None)
 			{
 				if (SelectionChanged != null)
@@ -44,6 +47,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 
 		public void SelectFolder(ClassicFolderBox folder)
 		{
+			if (_suspended) return;
 			if (SelectedFolder == folder) return;
 			SelectedFolder = folder;
 			LastUpdate = DateTime.Now;
@@ -53,6 +57,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 
 		public void Reset()
 		{
+			if (_suspended) return;
 			if (SelectionChanged != null)
 				SelectionChanged(this, new SelectionEventArgs(SelectionEventType.SelectionReset));
 			ResetFolder();
@@ -70,6 +75,17 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 		private void ResetFolder()
 		{
 			SelectedFolder = null;
+		}
+
+		public void Suspend()
+		{
+			_suspended = true;
+		}
+
+		public void Resume()
+		{
+			_suspended = false;
+			Reset();
 		}
 	}
 

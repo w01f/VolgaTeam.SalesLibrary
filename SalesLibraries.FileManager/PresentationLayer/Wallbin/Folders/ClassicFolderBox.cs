@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using SalesLibraries.Business.Entities.Common;
 using SalesLibraries.Business.Entities.Helpers;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings;
@@ -290,7 +291,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 		private void ResetWidgets()
 		{
 			if (MainController.Instance.PopupMessages.ShowQuestion("Are You sure You want to remove widgets?") != DialogResult.Yes) return;
-			DataSource.AllLinks.ApplyWidgets(new LinkWidgetSettings());
+			DataSource.AllLinks.ResetWidgets();
 			UpdateContent(true);
 			if (DataChanged != null)
 				DataChanged(this, EventArgs.Empty);
@@ -299,7 +300,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 		private void ResetBanners()
 		{
 			if (MainController.Instance.PopupMessages.ShowQuestion("Are You sure You want to remove banners?") != DialogResult.Yes) return;
-			DataSource.AllLinks.ApplyBanners(new BannerSettings());
+			DataSource.AllLinks.ResetBanners();
 			UpdateContent(true);
 			if (DataChanged != null)
 				DataChanged(this, EventArgs.Empty);
@@ -320,7 +321,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 		#region Folder Data Processing
 		private void EditFolderSettings()
 		{
-			using (var form = new FormWindow(DataSource, WindowPropertiesType.Appearnce))
+			using (var form = new FormWindow(DataSource, new TitleFormParams()))
 			{
 				if (form.ShowDialog(MainController.Instance.MainForm) != DialogResult.OK) return;
 				SetupView();
@@ -332,7 +333,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 
 		private void EditFolderBanner()
 		{
-			using (var form = new FormWindow(DataSource, WindowPropertiesType.Banner))
+			using (var form = new FormWindow(DataSource, new BannerFormParams()))
 			{
 				if (form.ShowDialog(MainController.Instance.MainForm) != DialogResult.OK) return;
 				SetupView();
@@ -344,7 +345,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 
 		private void EditFolderWidget()
 		{
-			using (var form = new FormWindow(DataSource, WindowPropertiesType.Widget))
+			using (var form = new FormWindow(DataSource, new WidgetFormParams()))
 			{
 				if (form.ShowDialog(MainController.Instance.MainForm) != DialogResult.OK) return;
 				SetupView();
@@ -435,8 +436,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 				 e.SelectionType == SelectionEventType.SelectionReset)
 				)
 			{
+				var storedValue = _outsideChangesInProgress;
+				_outsideChangesInProgress = true;
 				grFiles.ClearSelection();
 				grFiles.CurrentCell = null;
+				_outsideChangesInProgress = storedValue;
 			}
 
 			grFiles.DefaultCellStyle.SelectionBackColor = SelectedRowBackColor;
@@ -501,7 +505,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 		private void OnGridSelectionChanged(object sender, EventArgs e)
 		{
 			if (_outsideChangesInProgress) return;
-			IEnumerable<BaseLibraryLink> selectedLinks = grFiles.SelectedRows.OfType<LinkRow>().Select(row => row.Source);
+			var selectedLinks = grFiles.SelectedRows.OfType<LinkRow>().Select(row => row.Source);
 			SelectionManager.SelectLinks(selectedLinks, ModifierKeys);
 		}
 		#endregion

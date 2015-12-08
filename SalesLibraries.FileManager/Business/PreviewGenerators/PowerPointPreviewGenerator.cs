@@ -168,7 +168,7 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 							if (processInteropped)
 								continue;
 						}
-						if (!cancellationToken.IsCancellationRequested && updateTxt && content.Length > 0)
+						if (!cancellationToken.IsCancellationRequested && updateTxt)
 							using (var sw = new StreamWriter(Path.Combine(txtDestination, Path.ChangeExtension(Path.GetFileName(powerPointContainer.SourcePath), "txt")), false))
 							{
 								sw.Write(content.ToString());

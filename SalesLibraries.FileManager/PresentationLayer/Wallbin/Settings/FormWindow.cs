@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Drawing;
-using System.IO;
+using System.Net.Mime;
 using System.Windows.Forms;
 using DevComponents.DotNetBar.Metro;
 using DevExpress.Utils;
+using DevExpress.XtraEditors.Controls;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.Persistent;
 using SalesLibraries.Common.Helpers;
@@ -13,26 +14,21 @@ using SalesLibraries.FileManager.PresentationLayer.Wallbin.Common;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 {
-	public enum WindowPropertiesType
-	{
-		None,
-		Appearnce,
-		Widget,
-		Banner
-	}
-
 	public partial class FormWindow : MetroForm
 	{
 		private readonly LibraryFolder _folder;
-		private readonly WindowPropertiesType _propertiesType;
+		private readonly WindowSettingsEditFormParams _formParameters;
 		private WidgetSettingsControl _widgetControl;
 		private BannerSettingsControl _bannerControl;
 
-		public FormWindow(LibraryFolder folder, WindowPropertiesType propertiesType = WindowPropertiesType.None)
+		public FormWindow(LibraryFolder folder, WindowSettingsEditFormParams formParameters)
 		{
 			InitializeComponent();
 			_folder = folder;
-			_propertiesType = propertiesType;
+			_formParameters = formParameters;
+			Text = String.Format(_formParameters.Title, folder.Name);
+			Width = _formParameters.Width;
+			Height = _formParameters.Height;
 			LoadData();
 
 			ckApllyForAllWindowsAppearance.Checked = _folder.Page.Library.Settings.ApplyAppearanceForAllWindows;
@@ -70,31 +66,41 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 
 		private void LoadData()
 		{
-			switch (_propertiesType)
+			switch (_formParameters.Type)
 			{
 				case WindowPropertiesType.None:
 					xtraTabPageAppearance.PageVisible = true;
 					xtraTabPageWidget.PageVisible = true;
 					xtraTabPageBanner.PageVisible = true;
 					xtraTabControlWindowProperties.ShowTabHeader = DefaultBoolean.True;
+					xtraTabControlWindowProperties.BorderStyle = BorderStyles.Default;
+					xtraTabControlWindowProperties.BorderStylePage = BorderStyles.Default;
 					break;
 				case WindowPropertiesType.Appearnce:
 					xtraTabPageAppearance.PageVisible = true;
 					xtraTabPageWidget.PageVisible = false;
 					xtraTabPageBanner.PageVisible = false;
+					xtraTabPageBanner.BorderStyle = BorderStyle.None;
 					xtraTabControlWindowProperties.ShowTabHeader = DefaultBoolean.False;
+					xtraTabControlWindowProperties.BorderStyle = BorderStyles.NoBorder;
+					xtraTabControlWindowProperties.BorderStylePage = BorderStyles.NoBorder;
 					break;
 				case WindowPropertiesType.Widget:
 					xtraTabPageAppearance.PageVisible = false;
 					xtraTabPageWidget.PageVisible = true;
 					xtraTabPageBanner.PageVisible = false;
+					xtraTabPageWidget.BorderStyle = BorderStyle.None;
 					xtraTabControlWindowProperties.ShowTabHeader = DefaultBoolean.False;
+					xtraTabControlWindowProperties.BorderStyle = BorderStyles.NoBorder;
+					xtraTabControlWindowProperties.BorderStylePage = BorderStyles.NoBorder;
 					break;
 				case WindowPropertiesType.Banner:
 					xtraTabPageAppearance.PageVisible = false;
 					xtraTabPageWidget.PageVisible = false;
 					xtraTabPageBanner.PageVisible = true;
 					xtraTabControlWindowProperties.ShowTabHeader = DefaultBoolean.False;
+					xtraTabControlWindowProperties.BorderStyle = BorderStyles.NoBorder;
+					xtraTabControlWindowProperties.BorderStylePage = BorderStyles.NoBorder;
 					break;
 			}
 
@@ -124,8 +130,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 					rbWindowHeaderAlignmentRight.Checked = true;
 					break;
 			}
-			ckApllyForAllWindowsAppearance.Visible = _propertiesType == WindowPropertiesType.None;
-			ckApllyForAllWindowsAppearance.Checked = _propertiesType == WindowPropertiesType.None && _folder.Page.Library.Settings.ApplyAppearanceForAllWindows;
+			ckApllyForAllWindowsAppearance.Visible = _formParameters.Type == WindowPropertiesType.None;
+			ckApllyForAllWindowsAppearance.Checked = _formParameters.Type == WindowPropertiesType.None && _folder.Page.Library.Settings.ApplyAppearanceForAllWindows;
 
 			_widgetControl = new WidgetSettingsControl(_folder.Widget);
 			pnWidgetContainer.Controls.Add(_widgetControl);
@@ -136,8 +142,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 				if (e.IsChecked)
 					_bannerControl.ChangeState(false);
 			};
-			ckApllyForAllWindowsWidget.Visible = _propertiesType == WindowPropertiesType.None;
-			ckApllyForAllWindowsWidget.Checked = _propertiesType == WindowPropertiesType.None && _folder.Page.Library.Settings.ApplyWidgetForAllWindows;
+			pnApllyForAllWindowsWidget.Visible = _formParameters.Type == WindowPropertiesType.None;
+			ckApllyForAllWindowsWidget.Checked = _formParameters.Type == WindowPropertiesType.None && _folder.Page.Library.Settings.ApplyWidgetForAllWindows;
 
 			_bannerControl = new BannerSettingsControl(_folder.Banner);
 			pnBannerContainer.Controls.Add(_bannerControl);
@@ -148,8 +154,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 				if (e.IsChecked)
 					_widgetControl.ChangeState(false);
 			};
-			ckApllyForAllWindowsBanner.Visible = _propertiesType == WindowPropertiesType.None;
-			ckApllyForAllWindowsBanner.Checked = _propertiesType == WindowPropertiesType.None && _folder.Page.Library.Settings.ApplyBannerForAllWindows;
+			pnApllyForAllWindowsBanner.Visible = _formParameters.Type == WindowPropertiesType.None;
+			ckApllyForAllWindowsBanner.Checked = _formParameters.Type == WindowPropertiesType.None && _folder.Page.Library.Settings.ApplyBannerForAllWindows;
 		}
 
 		private void SaveData()
@@ -167,25 +173,84 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 				_folder.Settings.HeaderAlignment = Alignment.Center;
 			else if (rbWindowHeaderAlignmentRight.Checked)
 				_folder.Settings.HeaderAlignment = Alignment.Right;
-			if (_propertiesType == WindowPropertiesType.None)
+			if (_formParameters.Type == WindowPropertiesType.None)
 				_folder.Page.Library.Settings.ApplyAppearanceForAllWindows = ckApllyForAllWindowsAppearance.Checked;
-			
+
 			_widgetControl.SaveData();
-			if (_propertiesType == WindowPropertiesType.None)
+			if (_formParameters.Type == WindowPropertiesType.None)
 				_folder.Page.Library.Settings.ApplyWidgetForAllWindows = ckApllyForAllWindowsWidget.Checked;
 
 			_bannerControl.SaveData();
-			if (_propertiesType == WindowPropertiesType.None)
+			if (_formParameters.Type == WindowPropertiesType.None)
 				_folder.Page.Library.Settings.ApplyBannerForAllWindows = ckApllyForAllWindowsBanner.Checked;
-			
-			if (_propertiesType == WindowPropertiesType.None)
+
+			if (_formParameters.Type == WindowPropertiesType.None)
 				_folder.Page.ApplyFolderSettings(_folder);
 		}
-		
+
 		private void FormWindowSettings_FormClosed(object sender, FormClosedEventArgs e)
 		{
 			if (DialogResult != DialogResult.OK) return;
 			SaveData();
+		}
+	}
+
+	public enum WindowPropertiesType
+	{
+		None,
+		Appearnce,
+		Widget,
+		Banner
+	}
+
+	public class WindowSettingsEditFormParams
+	{
+		public WindowPropertiesType Type { get; protected set; }
+		public string Title { get; protected set; }
+		public int Height { get; protected set; }
+		public int Width { get; protected set; }
+	}
+	
+	class BaseEditFormParams : WindowSettingsEditFormParams
+	{
+		public BaseEditFormParams()
+		{
+			Title = "Window Settings";
+			Width = 980;
+			Height = 670;
+		}
+	}
+
+	class TitleFormParams : WindowSettingsEditFormParams
+	{
+		public TitleFormParams()
+		{
+			Type = WindowPropertiesType.Appearnce;
+			Title = "Window Settings";
+			Width = 580;
+			Height = 430;
+		}
+	}
+
+	class WidgetFormParams : WindowSettingsEditFormParams
+	{
+		public WidgetFormParams()
+		{
+			Type = WindowPropertiesType.Widget;
+			Title = "Widget Gallery ({0})";
+			Width = 980;
+			Height = 670;
+		}
+	}
+
+	class BannerFormParams : WindowSettingsEditFormParams
+	{
+		public BannerFormParams()
+		{
+			Type = WindowPropertiesType.Banner;
+			Title = "Banner Gallery ({0})";
+			Width = 980;
+			Height = 670;
 		}
 	}
 }

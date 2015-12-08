@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using SalesLibraries.Business.Entities.Common;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
@@ -48,16 +49,30 @@ namespace SalesLibraries.Business.Entities.Helpers
 			}
 		}
 
-		public static void ApplyWidgets(this IEnumerable<BaseLibraryLink> links, WidgetSettings widgetSettings)
+		public static void ApplyWidgets(this IEnumerable<BaseLibraryLink> links, WidgetSettings widgetSettings = null)
 		{
 			foreach (var libraryLink in links)
-				libraryLink.Widget = widgetSettings.Clone<LinkWidgetSettings>(libraryLink);
+				libraryLink.Widget = widgetSettings!= null?
+					widgetSettings.Clone<LinkWidgetSettings>(libraryLink):
+					SettingsContainer.CreateInstance<LinkWidgetSettings>(libraryLink);
 		}
 
-		public static void ApplyBanners(this IEnumerable<BaseLibraryLink> links, BannerSettings bannerSettings)
+		public static void ResetWidgets(this IEnumerable<BaseLibraryLink> links)
+		{
+			links.ApplyWidgets();
+		}
+
+		public static void ApplyBanners(this IEnumerable<BaseLibraryLink> links, BannerSettings bannerSettings = null)
 		{
 			foreach (var libraryLink in links)
-				libraryLink.Banner = bannerSettings.Clone<BannerSettings>(libraryLink);
+				libraryLink.Banner = bannerSettings != null ?
+					bannerSettings.Clone<BannerSettings>(libraryLink) :
+					SettingsContainer.CreateInstance<BannerSettings>(libraryLink);
+		}
+
+		public static void ResetBanners(this IEnumerable<BaseLibraryLink> links)
+		{
+			links.ApplyBanners();
 		}
 
 		public static IEnumerable<LibraryFileLink> GetDeadLinks(this IEnumerable<BaseLibraryLink> links)
