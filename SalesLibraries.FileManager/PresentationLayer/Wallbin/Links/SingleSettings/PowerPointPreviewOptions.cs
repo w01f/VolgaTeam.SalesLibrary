@@ -63,7 +63,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			if (MainController.Instance.PopupMessages.ShowWarningQuestion("Are you sure want to delete preview files for the link?") != DialogResult.Yes) return;
 			_data.ClearPreviewContainer();
 			((PowerPointLinkSettings)_data.Settings).ClearQuickViewContent();
-			MainController.Instance.PopupMessages.ShowInfo("Preview files for the link was deleted and will re-create during next Sync.");
+			MainController.Instance.PopupMessages.ShowInfo("Library files will refresh when you sync your library.");
 		}
 
 		private void buttonXOpenQV_Click(object sender, EventArgs e)

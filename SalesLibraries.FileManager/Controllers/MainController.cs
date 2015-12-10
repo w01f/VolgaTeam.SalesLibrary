@@ -46,7 +46,7 @@ namespace SalesLibraries.FileManager.Controllers
 		public PopupMessageHelper PopupMessages { get; private set; }
 
 		#region Tab Pages
-		protected WallbinPage TabWallbin { get; private set; }
+		public WallbinPage TabWallbin { get; private set; }
 		protected VideoPage TabVideo { get; private set; }
 		protected CalendarPage TabCalendar { get; private set; }
 		#endregion
@@ -99,7 +99,7 @@ namespace SalesLibraries.FileManager.Controllers
 			};
 
 			ProcessManager.RunStartProcess(
-				"Checking data version...", 
+				"Connecting to adSALEScloud…", 
 				"*This should not take long…",
 				cancellationToken => AsyncHelper.RunSync(FileStorageManager.Instance.Init));
 
@@ -117,7 +117,7 @@ namespace SalesLibraries.FileManager.Controllers
 						progressDescription = "*This may take a few minutes…";
 						break;
 					case DataActualityState.Outdated:
-						progressTitle = "Updating data from server...";
+						progressTitle = "Refreshing data from adSALEScloud…";
 						progressDescription = "*This may take a few minutes…";
 						break;
 					default:

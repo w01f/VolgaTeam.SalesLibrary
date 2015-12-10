@@ -73,11 +73,14 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 		{
 			SelectionManager.SelectionChanged += OnSelectionChanged;
 			DataStateObserver.Instance.DataChanged += OnLinksDeleted;
-			
+
+			toolStripMenuItemFolderDeleteSecurity.Visible = MainController.Instance.Settings.EditorSettings.EnableSecurityEdit;
+			toolStripMenuItemFolderDeleteTags.Visible = MainController.Instance.Settings.EditorSettings.EnableTagsEdit;
+
 			_quickEditor = new QuickEditManager(barSubItemLinkPropertiesQuickTools);
 			_quickEditor.OnSettingsChanged += OnQuickSettingsChange;
 			popupMenuLinkProperties.CloseUp += OnLinkPropertiesMenuCloseUp;
-			
+
 			// 
 			// grFiles
 			// 
@@ -770,6 +773,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 			if (e.Button != MouseButtons.Right) return;
 			var linkRow = (LinkRow)grFiles.Rows[e.RowIndex];
 			linkRow.Selected = true;
+			barButtonItemLinkPropertiesSecurity.Visibility = MainController.Instance.Settings.EditorSettings.EnableSecurityEdit ?
+					BarItemVisibility.Always :
+					BarItemVisibility.Never;
 			if (linkRow.Source is LineBreak)
 			{
 				barButtonItemLinkPropertiesOpenLink.Visibility = BarItemVisibility.Never;
@@ -788,7 +794,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 				barButtonItemLinkPropertiesAdvancedSettings.Visibility = linkRow.Source is LibraryFolderLink ?
 					BarItemVisibility.Always :
 					BarItemVisibility.Never;
-				barButtonItemLinkPropertiesTags.Visibility = BarItemVisibility.Always;
+				barButtonItemLinkPropertiesTags.Visibility = MainController.Instance.Settings.EditorSettings.EnableTagsEdit ?
+					BarItemVisibility.Always :
+					BarItemVisibility.Never;
 				barButtonItemLinkPropertiesExpirationDate.Visibility = BarItemVisibility.Always;
 				barButtonItemLinkPropertiesDelete.Caption = "Delete this Link";
 			}
@@ -798,7 +806,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 		#endregion
 
 		#region Context Menu
-
 		#region Link
 		private void barButtonItemLinkPropertiesOpenLink_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
 		{

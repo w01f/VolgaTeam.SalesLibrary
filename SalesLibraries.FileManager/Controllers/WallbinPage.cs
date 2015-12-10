@@ -61,6 +61,9 @@ namespace SalesLibraries.FileManager.Controllers
 			MainController.Instance.MainForm.buttonItemSettingsSync.Click += OnSyncClick;
 
 			#region Link Operations
+			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesTags.Visible = MainController.Instance.Settings.EditorSettings.EnableTagsEdit;
+			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesSecurity.Visible = MainController.Instance.Settings.EditorSettings.EnableSecurityEdit;
+
 			MainController.Instance.MainForm.buttonItemHomeAddUrl.Click += buttonItemHomeAddUrl_Click;
 			MainController.Instance.MainForm.buttonItemHomeAddNetworkShare.Click += buttonItemHomeAddNetworkShare_Click;
 			MainController.Instance.MainForm.buttonItemHomeAddLineBreak.Click += buttonItemHomeAddLineBreak_Click;
@@ -172,7 +175,7 @@ namespace SalesLibraries.FileManager.Controllers
 			MainController.Instance.WallbinViews.SaveActiveWallbin();
 		}
 
-		private void UpdateWallbin()
+		public void UpdateWallbin()
 		{
 			pnEmpty.BringToFront();
 			MainController.Instance.WallbinViews.ActiveWallbin.LoadView(true);
@@ -438,7 +441,7 @@ namespace SalesLibraries.FileManager.Controllers
 		private void buttonItemSettingsAdvanced_Click(object sender, EventArgs e)
 		{
 			var library = MainController.Instance.WallbinViews.ActiveWallbin.DataStorage.Library;
-			using (var form = new FormResetCache(library.Path))
+			using (var form = new FormResetLibraryContent(library.Path))
 			{
 				form.ShowDialog(MainController.Instance.MainForm);
 			}

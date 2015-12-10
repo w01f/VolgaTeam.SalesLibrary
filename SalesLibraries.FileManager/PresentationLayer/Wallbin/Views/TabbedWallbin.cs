@@ -20,6 +20,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 			: base(dataStorage)
 		{
 			InitializeComponent();
+
+			toolStripMenuItemDeleteSecurity.Visible = MainController.Instance.Settings.EditorSettings.EnableSecurityEdit;
+			toolStripMenuItemDeleteTags.Visible = MainController.Instance.Settings.EditorSettings.EnableTagsEdit;
 		}
 
 		public override void DisposeView()
@@ -79,6 +82,15 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 			if (selectedPage == null) return;
 			if (MainController.Instance.PopupMessages.ShowQuestion("Are You sure You want to remove links?") != DialogResult.Yes) return;
 			selectedPage.Content.DeleteLinks();
+			IsDataChanged = true;
+		}
+
+		private void toolStripMenuItemDeleteExpirationDates_Click(object sender, EventArgs e)
+		{
+			var selectedPage = _menuHitInfo.Page as TabPage;
+			if (selectedPage == null) return;
+			if (MainController.Instance.PopupMessages.ShowQuestion("Are You sure You want to remove expiration dates?") != DialogResult.Yes) return;
+			selectedPage.Content.ResetExpirationDates();
 			IsDataChanged = true;
 		}
 

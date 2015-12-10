@@ -14,9 +14,10 @@
 			}
 		}
 
-		public ExcelLinkSettings()
+		protected override void AfterConstruction()
 		{
-			_generateContentText = true;
+			base.AfterConstruction();
+			_generateContentText = false;
 		}
 	}
 }

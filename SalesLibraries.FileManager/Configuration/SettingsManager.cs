@@ -8,38 +8,10 @@ namespace SalesLibraries.FileManager.Configuration
 {
 	class SettingsManager
 	{
-		public SettingsManager()
-		{
-			FFMpegPackagePath = Path.Combine(GlobalSettings.ApplicationRootPath, "assets", "ffmpeg");
-
-			#region FM Settings
-			BackupPath = String.Empty;
-			NetworkPath = String.Empty;
-			WebPath = String.Empty;
-			SelectedLibrary = String.Empty;
-			SelectedPage = String.Empty;
-			SelectedCalendar = String.Empty;
-			FontSize = 12;
-			CalendarFontSize = 10;
-			TreeViewVisible = false;
-			MultitabView = true;
-			#endregion
-
-			#region Ribbon Settings
-			EnableOvernightsCalendarTab = true;
-			EnableProgramManagerTab = true;
-			EnableIPadSettingsTab = true;
-			EnableTagsTab = true;
-			EnableSecurityTab = true;
-			ShowTagsCategories = true;
-			#endregion
-		}
-
 		public string FFMpegPackagePath { get; set; }
 
 		#region FM Settings
 		public string BackupPath { get; set; }
-		//TODO Remove when add multilibrary support
 		public string NetworkPath { get; set; }
 		public string WebPath { get; set; }
 		//----------------------------------------
@@ -84,12 +56,45 @@ namespace SalesLibraries.FileManager.Configuration
 		public string WebServicePassword { get; private set; }
 		#endregion
 
+		public EditorsSettings EditorSettings { get; private set; }
+
+		public SettingsManager()
+		{
+			FFMpegPackagePath = Path.Combine(GlobalSettings.ApplicationRootPath, "assets", "ffmpeg");
+
+			#region FM Settings
+			BackupPath = String.Empty;
+			NetworkPath = String.Empty;
+			WebPath = String.Empty;
+			SelectedLibrary = String.Empty;
+			SelectedPage = String.Empty;
+			SelectedCalendar = String.Empty;
+			FontSize = 12;
+			CalendarFontSize = 10;
+			TreeViewVisible = false;
+			MultitabView = true;
+			#endregion
+
+			#region Ribbon Settings
+			EnableOvernightsCalendarTab = true;
+			EnableProgramManagerTab = true;
+			EnableIPadSettingsTab = true;
+			EnableTagsTab = true;
+			EnableSecurityTab = true;
+			ShowTagsCategories = true;
+			#endregion
+
+			EditorSettings = new EditorsSettings();
+		}
+
 		public void Load()
 		{
 			LoadRibbonSettings();
 			LoadCategoryRequestSettings();
 			LoadSalesDepotSyncSettings();
 			LoadServiceConnectionSettings();
+
+			EditorSettings.Load();
 
 			if (!Common.Helpers.RemoteResourceManager.Instance.AppSettingsFile.ExistsLocal()) return;
 			int tempInt;
@@ -173,36 +178,34 @@ namespace SalesLibraries.FileManager.Configuration
 
 		private void LoadRibbonSettings()
 		{
-			if (RemoteResourceManager.Instance.TabSettingsFile.ExistsLocal())
-			{
-				var document = new XmlDocument();
-				document.Load(RemoteResourceManager.Instance.TabSettingsFile.LocalPath);
+			if (!RemoteResourceManager.Instance.TabSettingsFile.ExistsLocal()) return;
+			var document = new XmlDocument();
+			document.Load(RemoteResourceManager.Instance.TabSettingsFile.LocalPath);
 
-				XmlNode node = document.SelectSingleNode(@"/ribbon/OvernightsCalendar");
-				bool tempBool;
-				if (node != null)
-					if (bool.TryParse(node.InnerText, out tempBool))
-						EnableOvernightsCalendarTab = tempBool;
+			XmlNode node = document.SelectSingleNode(@"/ribbon/OvernightsCalendar");
+			bool tempBool;
+			if (node != null)
+				if (bool.TryParse(node.InnerText, out tempBool))
+					EnableOvernightsCalendarTab = tempBool;
 
-				node = document.SelectSingleNode(@"/ribbon/ProgramSchedule");
-				if (node != null)
-					if (bool.TryParse(node.InnerText, out tempBool))
-						EnableProgramManagerTab = tempBool;
+			node = document.SelectSingleNode(@"/ribbon/ProgramSchedule");
+			if (node != null)
+				if (bool.TryParse(node.InnerText, out tempBool))
+					EnableProgramManagerTab = tempBool;
 
-				node = document.SelectSingleNode(@"/ribbon/iPadsettings");
-				if (node != null)
-					if (bool.TryParse(node.InnerText, out tempBool))
-						EnableIPadSettingsTab = tempBool;
+			node = document.SelectSingleNode(@"/ribbon/iPadsettings");
+			if (node != null)
+				if (bool.TryParse(node.InnerText, out tempBool))
+					EnableIPadSettingsTab = tempBool;
 
-				node = document.SelectSingleNode(@"/ribbon/Tags");
-				if (node != null)
-					if (bool.TryParse(node.InnerText, out tempBool))
-						EnableTagsTab = tempBool;
-				node = document.SelectSingleNode(@"/ribbon/Security");
-				if (node != null)
-					if (bool.TryParse(node.InnerText, out tempBool))
-						EnableSecurityTab = tempBool;
-			}
+			node = document.SelectSingleNode(@"/ribbon/Tags");
+			if (node != null)
+				if (bool.TryParse(node.InnerText, out tempBool))
+					EnableTagsTab = tempBool;
+			node = document.SelectSingleNode(@"/ribbon/Security");
+			if (node != null)
+				if (bool.TryParse(node.InnerText, out tempBool))
+					EnableSecurityTab = tempBool;
 		}
 
 		private void LoadCategoryRequestSettings()

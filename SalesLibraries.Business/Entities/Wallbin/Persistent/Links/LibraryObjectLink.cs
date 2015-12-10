@@ -111,5 +111,11 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 			ExpirationEncoded = ((LibraryObjectLink)link).ExpirationEncoded;
 			base.ApplyValues(link);
 		}
+
+		public override void ResetToDefault()
+		{
+			ExpirationEncoded = null;
+			base.ResetToDefault();
+		}
 	}
 }

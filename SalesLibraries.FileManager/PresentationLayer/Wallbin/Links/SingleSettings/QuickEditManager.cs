@@ -75,6 +75,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		{
 			if (!_changesMade) return;
 			_changesMade = false;
+			_targetLink.MarkAsModified();
 			if (OnSettingsChanged != null)
 				OnSettingsChanged(this, EventArgs.Empty);
 		}

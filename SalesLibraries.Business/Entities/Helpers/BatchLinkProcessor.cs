@@ -16,6 +16,7 @@ namespace SalesLibraries.Business.Entities.Helpers
 			{
 				libraryLink.Tags.Categories.Clear();
 				libraryLink.Tags.Categories.AddRange(searchGroups.Select(searchGroup => searchGroup.Clone()));
+				libraryLink.MarkAsModified();
 			}
 		}
 
@@ -25,6 +26,7 @@ namespace SalesLibraries.Business.Entities.Helpers
 			{
 				libraryLink.Tags.Keywords.Clear();
 				libraryLink.Tags.Keywords.AddRange(keywords.Select(tag => new SearchTag { Name = tag.Name }));
+				libraryLink.MarkAsModified();
 			}
 		}
 
@@ -34,27 +36,51 @@ namespace SalesLibraries.Business.Entities.Helpers
 			{
 				libraryLink.Tags.SuperFilters.Clear();
 				libraryLink.Tags.SuperFilters.AddRange(superFilters);
+				libraryLink.MarkAsModified();
 			}
 		}
 
-		public static void ApplySecurity(this IEnumerable<BaseLibraryLink> links, SecuritySettings securitySettings)
+		public static void ApplySecurity(this IEnumerable<BaseLibraryLink> links, SecuritySettings securitySettings = null)
 		{
 			foreach (var libraryLink in links)
 			{
-				libraryLink.Security.NoShare = securitySettings.NoShare;
-				libraryLink.Security.IsForbidden = securitySettings.IsForbidden;
-				libraryLink.Security.IsRestricted = securitySettings.IsRestricted;
-				libraryLink.Security.AssignedUsers = securitySettings.AssignedUsers;
-				libraryLink.Security.DeniedUsers = securitySettings.DeniedUsers;
+				libraryLink.Security = securitySettings != null ?
+					securitySettings.Clone<SecuritySettings>(libraryLink) :
+					SettingsContainer.CreateInstance<SecuritySettings>(libraryLink);
+				libraryLink.MarkAsModified();
 			}
+		}
+
+		public static void ResetSecurity(this IEnumerable<BaseLibraryLink> links)
+		{
+			links.ApplySecurity();
+		}
+
+		public static void ApplyExpirationSettings(this IEnumerable<BaseLibraryLink> links, LinkExpirationSettings securitySettings = null)
+		{
+			foreach (var libraryLink in links.OfType<LibraryObjectLink>())
+			{
+				libraryLink.ExpirationSettings = securitySettings != null ?
+					securitySettings.Clone<LinkExpirationSettings>(libraryLink) :
+					SettingsContainer.CreateInstance<LinkExpirationSettings>(libraryLink);
+				libraryLink.MarkAsModified();
+			}
+		}
+
+		public static void ResetExpirationSettings(this IEnumerable<BaseLibraryLink> links)
+		{
+			links.ApplyExpirationSettings();
 		}
 
 		public static void ApplyWidgets(this IEnumerable<BaseLibraryLink> links, WidgetSettings widgetSettings = null)
 		{
 			foreach (var libraryLink in links)
-				libraryLink.Widget = widgetSettings!= null?
-					widgetSettings.Clone<LinkWidgetSettings>(libraryLink):
+			{
+				libraryLink.Widget = widgetSettings != null ?
+					widgetSettings.Clone<LinkWidgetSettings>(libraryLink) :
 					SettingsContainer.CreateInstance<LinkWidgetSettings>(libraryLink);
+				libraryLink.MarkAsModified();
+			}
 		}
 
 		public static void ResetWidgets(this IEnumerable<BaseLibraryLink> links)
@@ -65,14 +91,45 @@ namespace SalesLibraries.Business.Entities.Helpers
 		public static void ApplyBanners(this IEnumerable<BaseLibraryLink> links, BannerSettings bannerSettings = null)
 		{
 			foreach (var libraryLink in links)
+			{
 				libraryLink.Banner = bannerSettings != null ?
 					bannerSettings.Clone<BannerSettings>(libraryLink) :
 					SettingsContainer.CreateInstance<BannerSettings>(libraryLink);
+				libraryLink.MarkAsModified();
+			}
 		}
 
 		public static void ResetBanners(this IEnumerable<BaseLibraryLink> links)
 		{
 			links.ApplyBanners();
+		}
+
+		public static void ApplyNote(this IEnumerable<BaseLibraryLink> links, string note = null)
+		{
+			foreach (var libraryLink in links)
+				libraryLink.Settings.Note = note;
+		}
+
+		public static void ResetNote(this IEnumerable<BaseLibraryLink> links)
+		{
+			links.ApplyNote();
+		}
+
+		public static void ApplyHoverNote(this IEnumerable<BaseLibraryLink> links, string hoverNote = null)
+		{
+			foreach (var libraryLink in links.OfType<LibraryObjectLink>())
+				((LibraryObjectLinkSettings)libraryLink.Settings).HoverNote = hoverNote;	
+		}
+
+		public static void ResetHoverNote(this IEnumerable<BaseLibraryLink> links)
+		{
+			links.ApplyHoverNote();
+		}
+
+		public static void ResetToDefault(this IEnumerable<BaseLibraryLink> links)
+		{
+			foreach (var libraryLink in links)
+				libraryLink.ResetToDefault();
 		}
 
 		public static IEnumerable<LibraryFileLink> GetDeadLinks(this IEnumerable<BaseLibraryLink> links)

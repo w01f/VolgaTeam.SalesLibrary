@@ -262,5 +262,15 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 			MarkAsModified();
 			AfterSave();
 		}
+
+		public virtual void ResetToDefault()
+		{
+			SettingsEncoded = null;
+			SecurityEncoded = null;
+			WidgetEncoded = null;
+			BannerEncoded = null;
+			MarkAsModified();
+			AfterSave();
+		}
 	}
 }

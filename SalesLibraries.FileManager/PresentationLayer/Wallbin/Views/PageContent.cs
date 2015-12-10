@@ -99,9 +99,17 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 			PageContainer.Resume();
 		}
 
+		public void ResetExpirationDates()
+		{
+			PageContainer.Page.AllLinks.ResetExpirationSettings();
+			MainController.Instance.WallbinViews.Selection.Reset();
+			MainController.Instance.ProcessManager.Run("Updating Page...", cancelationToken => MainController.Instance.MainForm.Invoke(new MethodInvoker(UpdateContent)));
+			UpdateContent();
+		}
+
 		public void ResetSecurity()
 		{
-			PageContainer.Page.AllLinks.ApplySecurity(new SecuritySettings());
+			PageContainer.Page.AllLinks.ResetSecurity();
 			MainController.Instance.WallbinViews.Selection.Reset();
 			MainController.Instance.ProcessManager.Run("Updating Page...", cancelationToken => MainController.Instance.MainForm.Invoke(new MethodInvoker(UpdateContent)));
 			UpdateContent();

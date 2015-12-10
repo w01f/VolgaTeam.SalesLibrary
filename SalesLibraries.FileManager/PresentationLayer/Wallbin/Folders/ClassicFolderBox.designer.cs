@@ -142,7 +142,7 @@
             this.toolStripMenuItemFolderDeleteTags,
             this.toolStripMenuItemFolderSort});
 			this.contextMenuStripFolderProperties.Name = "contextMenuStripLinkProperties";
-			this.contextMenuStripFolderProperties.Size = new System.Drawing.Size(349, 170);
+			this.contextMenuStripFolderProperties.Size = new System.Drawing.Size(349, 192);
 			// 
 			// toolStripMenuItemFolderSettings
 			// 

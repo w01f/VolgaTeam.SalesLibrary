@@ -66,7 +66,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 			if (MainController.Instance.PopupMessages.ShowWarningQuestion("Are You Sure ?") != DialogResult.Yes) return;
 			if (MainController.Instance.PopupMessages.ShowWarningQuestion("Are you ABSOLUTELY 100% POSITIVE?") != DialogResult.Yes) return;
 			var pages = (allPages ? MainController.Instance.WallbinViews.ActiveWallbin.DataStorage.Library.Pages : new[] { MainController.Instance.WallbinViews.ActiveWallbin.ActivePage.Page }).ToList();
-			pages.SelectMany(p => p.AllLinks).ApplySecurity(new SecuritySettings());
+			pages.SelectMany(p => p.AllLinks).ResetSecurity();
 			if (EditorChanged != null)
 				EditorChanged(this, new EventArgs());
 		}

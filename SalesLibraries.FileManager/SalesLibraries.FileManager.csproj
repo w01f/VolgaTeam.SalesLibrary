@@ -131,6 +131,7 @@
     <Compile Include="Business\Synchronization\SyncManager.cs" />
     <Compile Include="Business\Services\WebContentManager.cs" />
     <Compile Include="Business\Models\LibraryGroup.cs" />
+    <Compile Include="Configuration\EditorsSettings.cs" />
     <Compile Include="Configuration\ListManager.cs" />
     <Compile Include="Configuration\MetaDataConst.cs" />
     <Compile Include="Configuration\MetaDataContainer.cs" />
@@ -414,11 +415,11 @@
     <Compile Include="PresentationLayer\Wallbin\Settings\FormPaths.designer.cs">
       <DependentUpon>FormPaths.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Wallbin\Settings\FormResetCache.cs">
+    <Compile Include="PresentationLayer\Wallbin\Settings\FormResetLibraryContent.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Wallbin\Settings\FormResetCache.designer.cs">
-      <DependentUpon>FormResetCache.cs</DependentUpon>
+    <Compile Include="PresentationLayer\Wallbin\Settings\FormResetLibraryContent.designer.cs">
+      <DependentUpon>FormResetLibraryContent.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Wallbin\Settings\FormWallbinSettings.cs">
       <SubType>Form</SubType>
@@ -675,8 +676,8 @@
     <EmbeddedResource Include="PresentationLayer\Wallbin\Settings\FormPaths.resx">
       <DependentUpon>FormPaths.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Wallbin\Settings\FormResetCache.resx">
-      <DependentUpon>FormResetCache.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Settings\FormResetLibraryContent.resx">
+      <DependentUpon>FormResetLibraryContent.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Settings\FormSelectWidget.resx">
       <DependentUpon>FormSelectWidget.cs</DependentUpon>
