@@ -136,7 +136,7 @@ namespace SalesLibraries.SalesDepot.Controllers
 				}
 
 				ProcessManager.RunStartProcess(
-					progressTitle, 
+					progressTitle,
 					progressDescription,
 					cancellationToken => AsyncHelper.RunSync(InitBusinessObjects));
 
@@ -158,6 +158,9 @@ namespace SalesLibraries.SalesDepot.Controllers
 				appReady &= Wallbin.Libraries.Any();
 				if (appReady)
 				{
+					if (Settings.RunPowerPointWhenNeeded.HasValue && Settings.RunPowerPointWhenNeeded.Value)
+						PowerPointManager.Instance.RunPowerPointLoader();
+
 					ActivityManager.AddUserActivity("Application started");
 
 					LoadControllers();
@@ -259,14 +262,15 @@ namespace SalesLibraries.SalesDepot.Controllers
 							() => MainForm.Invoke(new MethodInvoker(() =>
 							{
 								if (!PowerPointSingleton.Instance.IsLinkedWithApplication &&
-									Settings.LinkLaunchSettings.PowerPoint == LinkLaunchOptionsEnum.Viewer &&
-									!Settings.RunPowerPointWhenNeeded.HasValue)
+									Settings.LinkLaunchSettings.PowerPoint == LinkLaunchOptionsEnum.Viewer)
 								{
-									using (var form = new FormPowerPointWarning())
-									{
-										if (form.ShowDialog(MainForm) == DialogResult.OK)
-											CheckPowerPointRunning();
-									}
+									if (!Settings.RunPowerPointWhenNeeded.HasValue)
+										using (var form = new FormPowerPointWarning())
+										{
+											if (form.ShowDialog(MainForm) == DialogResult.OK)
+												CheckPowerPointRunning();
+											TabSettings.InitController();
+										}
 								}
 							})),
 							null,

@@ -224,7 +224,7 @@ namespace SalesLibraries.SalesDepot.Business.LinkViewers
 
 		public static void AddVideoIntoPresentation(VideoLink file)
 		{
-			if (!MainController.Instance.CheckPowerPointRunning(() => MainController.Instance.PopupMessages.ShowWarningQuestion("PowerPoint is not Running. Do you want to open it now?") == DialogResult.Yes))
+			if (!MainController.Instance.CheckPowerPointRunning(() => MainController.Instance.PopupMessages.ShowWarningQuestion(String.Format("PowerPoint is required to run this application.{0}Do you want to go ahead and open PowerPoint?", Environment.NewLine)) == DialogResult.Yes))
 				return;
 			if (File.Exists(PowerPointSingleton.Instance.GetActivePresentation().FullName))
 			{
@@ -262,7 +262,7 @@ namespace SalesLibraries.SalesDepot.Business.LinkViewers
 
 		public static void ViewPresentationOld(PowerPointLink powerPointLink)
 		{
-			if (!MainController.Instance.CheckPowerPointRunning(() => MainController.Instance.PopupMessages.ShowWarningQuestion("PowerPoint is not Running. Do you want to open it now?") == DialogResult.Yes))
+			if (!MainController.Instance.CheckPowerPointRunning(() => MainController.Instance.PopupMessages.ShowWarningQuestion(String.Format("PowerPoint is required to run this application.{0}Do you want to go ahead and open PowerPoint?", Environment.NewLine)) == DialogResult.Yes))
 				return;
 			using (var form = new FormPowerPointQuickViewOld())
 			{

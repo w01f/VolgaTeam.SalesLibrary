@@ -88,8 +88,8 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Forms
 					PowerPointSingleton.Instance.OpenSlideSourcePresentation(_viewedFile);
 					PowerPointSingleton.Instance.ViewSlideShow();
 					PowerPointSingleton.Instance.ResizeSlideShow(
-						containerHandle, 
-						(int)(containerHeight / _scaleK), 
+						containerHandle,
+						(int)(containerHeight / _scaleK),
 						(int)(containerWidth / _scaleK));
 				});
 
@@ -174,9 +174,9 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Forms
 
 				MainController.Instance.ProcessManager.Run(
 					"Saving as PDF...",
-					cancellationToken => 
+					cancellationToken =>
 						PowerPointSingleton.Instance.ExportSlideAsPdf(
-						wholeFile ? -1 : (comboBoxEditSlides.SelectedIndex + 1), 
+						wholeFile ? -1 : (comboBoxEditSlides.SelectedIndex + 1),
 						destinationFileName));
 
 				MainController.Instance.ActivityManager.AddLinkAccessActivity("Save Link as PDF", PowerPointLink);
@@ -197,8 +197,18 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Forms
 
 		private void barButtonItemPrintLink_ItemClick(object sender, ItemClickEventArgs e)
 		{
+			using (var powerPointProcessor = new PowerPointHidden())
+			{
+				if (!powerPointProcessor.Connect()) return;
+				powerPointProcessor.PrintPresentation(
+					_viewedFile.FullName,
+					comboBoxEditSlides.SelectedIndex + 1,
+					printAction => MainController.Instance.ProcessManager.Run(
+						"Printing...",
+						cancellationToken => printAction()));
+				
+			}
 			MainController.Instance.ActivityManager.AddLinkAccessActivity("Print Link", PowerPointLink);
-			PowerPointSingleton.Instance.PrintPresentation(comboBoxEditSlides.SelectedIndex + 1);
 		}
 
 		private void barLargeButtonItemAddAllSlides_ItemClick(object sender, ItemClickEventArgs e)

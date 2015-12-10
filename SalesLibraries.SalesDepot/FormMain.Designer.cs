@@ -1430,8 +1430,7 @@
 			// 
 			// comboBoxEditHomeLibrary
 			// 
-			this.comboBoxEditHomeLibrary.Enabled = false;
-			this.comboBoxEditHomeLibrary.Location = new System.Drawing.Point(185, 33);
+			this.comboBoxEditHomeLibrary.Location = new System.Drawing.Point(185, 32);
 			this.comboBoxEditHomeLibrary.Name = "comboBoxEditHomeLibrary";
 			this.comboBoxEditHomeLibrary.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -1443,7 +1442,7 @@
 			// comboBoxEditHomePage
 			// 
 			this.comboBoxEditHomePage.Enabled = false;
-			this.comboBoxEditHomePage.Location = new System.Drawing.Point(185, 79);
+			this.comboBoxEditHomePage.Location = new System.Drawing.Point(185, 78);
 			this.comboBoxEditHomePage.Name = "comboBoxEditHomePage";
 			this.comboBoxEditHomePage.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});

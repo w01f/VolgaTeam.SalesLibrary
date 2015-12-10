@@ -91,7 +91,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Contro
 		public void Email()
 		{
 			if (!MainController.Instance.CheckPowerPointRunning(
-				() => MainController.Instance.PopupMessages.ShowWarningQuestion("PowerPoint is not Running. Do you want to open it now?") == DialogResult.Yes)
+				() => MainController.Instance.PopupMessages.ShowWarningQuestion(String.Format("PowerPoint is required to run this application.{0}Do you want to go ahead and open PowerPoint?", Environment.NewLine)) == DialogResult.Yes)
 				) return;
 			PowerPointSingleton.Instance.OpenSlideSourcePresentation(_tempCopy);
 			using (var form = new FormEmailPresentation())
@@ -104,12 +104,17 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Contro
 
 		public void Print()
 		{
-			if (!MainController.Instance.CheckPowerPointRunning(
-				() => MainController.Instance.PopupMessages.ShowWarningQuestion("PowerPoint is not Running. Do you want to open it now?") == DialogResult.Yes)
-				) return;
+			using (var powerPointProcessor = new PowerPointHidden())
+			{
+				if (!powerPointProcessor.Connect()) return;
+				powerPointProcessor.PrintPresentation(
+					_tempCopy.FullName,
+					SelectedThumbnail.Index,
+					printAction => MainController.Instance.ProcessManager.Run(
+						"Printing...",
+						cancellationToken => printAction()));
+			}
 			MainController.Instance.ActivityManager.AddLinkAccessActivity("Print Link", Link);
-			PowerPointSingleton.Instance.OpenSlideSourcePresentation(_tempCopy);
-			PowerPointSingleton.Instance.PrintPresentation(SelectedThumbnail.Index);
 		}
 		#endregion
 
@@ -152,7 +157,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Contro
 		public void SaveAsPDF()
 		{
 			if (!MainController.Instance.CheckPowerPointRunning(
-				() => MainController.Instance.PopupMessages.ShowWarningQuestion("PowerPoint is not Running. Do you want to open it now?") == DialogResult.Yes)
+				() => MainController.Instance.PopupMessages.ShowWarningQuestion(String.Format("PowerPoint is required to run this application.{0}Do you want to go ahead and open PowerPoint?", Environment.NewLine)) == DialogResult.Yes)
 				) return;
 			using (var form = new FormSaveAsPDF())
 			{

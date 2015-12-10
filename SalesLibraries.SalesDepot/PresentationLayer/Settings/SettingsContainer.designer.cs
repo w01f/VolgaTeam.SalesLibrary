@@ -29,17 +29,18 @@
         private void InitializeComponent()
         {
 			this.panel1 = new System.Windows.Forms.Panel();
-			this.quickViewSettingsControl = new Settings.QuickViewSettingsControl();
-			this.excelSettingsControl = new Settings.ExcelSettingsControl();
-			this.powerPointSettingsControl = new Settings.PowerPointSettingsControl();
+			this.quickViewSettingsControl = new SalesLibraries.SalesDepot.PresentationLayer.Settings.QuickViewSettingsControl();
+			this.excelSettingsControl = new SalesLibraries.SalesDepot.PresentationLayer.Settings.ExcelSettingsControl();
+			this.powerPointSettingsControl = new SalesLibraries.SalesDepot.PresentationLayer.Settings.PowerPointSettingsControl();
 			this.panel2 = new System.Windows.Forms.Panel();
-			this.emailSettingsControl1 = new Settings.EmailSettingsControl();
-			this.videoSettingsControl = new Settings.VideoSettingsControl();
-			this.pdfSettingsControl = new Settings.PDFSettingsControl();
+			this.emailSettingsControl1 = new SalesLibraries.SalesDepot.PresentationLayer.Settings.EmailSettingsControl();
+			this.videoSettingsControl = new SalesLibraries.SalesDepot.PresentationLayer.Settings.VideoSettingsControl();
+			this.pdfSettingsControl = new SalesLibraries.SalesDepot.PresentationLayer.Settings.PDFSettingsControl();
 			this.panel3 = new System.Windows.Forms.Panel();
-			this.saveSettingsControl = new Settings.SaveSettingsControl();
-			this.folderSettingsControl = new Settings.FolderSettingsControl();
-			this.wordSettingsControl = new Settings.WordSettingsControl();
+			this.saveSettingsControl = new SalesLibraries.SalesDepot.PresentationLayer.Settings.SaveSettingsControl();
+			this.folderSettingsControl = new SalesLibraries.SalesDepot.PresentationLayer.Settings.FolderSettingsControl();
+			this.wordSettingsControl = new SalesLibraries.SalesDepot.PresentationLayer.Settings.WordSettingsControl();
+			this.powerPointStartupSettingsControl = new SalesLibraries.SalesDepot.PresentationLayer.Settings.PowerPointStartupSettingsControl();
 			this.panel1.SuspendLayout();
 			this.panel2.SuspendLayout();
 			this.panel3.SuspendLayout();
@@ -47,13 +48,14 @@
 			// 
 			// panel1
 			// 
+			this.panel1.Controls.Add(this.powerPointStartupSettingsControl);
 			this.panel1.Controls.Add(this.quickViewSettingsControl);
 			this.panel1.Controls.Add(this.excelSettingsControl);
 			this.panel1.Controls.Add(this.powerPointSettingsControl);
 			this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
 			this.panel1.Location = new System.Drawing.Point(0, 0);
 			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(365, 586);
+			this.panel1.Size = new System.Drawing.Size(365, 722);
 			this.panel1.TabIndex = 0;
 			// 
 			// quickViewSettingsControl
@@ -94,7 +96,7 @@
 			this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
 			this.panel2.Location = new System.Drawing.Point(365, 0);
 			this.panel2.Name = "panel2";
-			this.panel2.Size = new System.Drawing.Size(371, 586);
+			this.panel2.Size = new System.Drawing.Size(371, 722);
 			this.panel2.TabIndex = 1;
 			// 
 			// emailSettingsControl1
@@ -135,7 +137,7 @@
 			this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panel3.Location = new System.Drawing.Point(736, 0);
 			this.panel3.Name = "panel3";
-			this.panel3.Size = new System.Drawing.Size(387, 586);
+			this.panel3.Size = new System.Drawing.Size(387, 722);
 			this.panel3.TabIndex = 2;
 			// 
 			// saveSettingsControl
@@ -168,7 +170,17 @@
 			this.wordSettingsControl.Size = new System.Drawing.Size(332, 176);
 			this.wordSettingsControl.TabIndex = 0;
 			// 
-			// TabSettings
+			// powerPointStartupSettingsControl
+			// 
+			this.powerPointStartupSettingsControl.BackColor = System.Drawing.Color.Transparent;
+			this.powerPointStartupSettingsControl.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.powerPointStartupSettingsControl.Location = new System.Drawing.Point(6, 523);
+			this.powerPointStartupSettingsControl.Name = "powerPointStartupSettingsControl";
+			this.powerPointStartupSettingsControl.Padding = new System.Windows.Forms.Padding(10, 25, 10, 25);
+			this.powerPointStartupSettingsControl.Size = new System.Drawing.Size(332, 173);
+			this.powerPointStartupSettingsControl.TabIndex = 3;
+			// 
+			// SettingsContainer
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
 			this.BackColor = System.Drawing.Color.White;
@@ -178,7 +190,7 @@
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.Name = "SettingsContainer";
-			this.Size = new System.Drawing.Size(1123, 586);
+			this.Size = new System.Drawing.Size(1123, 722);
 			this.panel1.ResumeLayout(false);
 			this.panel2.ResumeLayout(false);
 			this.panel3.ResumeLayout(false);
@@ -200,5 +212,6 @@
 		private FolderSettingsControl folderSettingsControl;
 		private WordSettingsControl wordSettingsControl;
 		private SaveSettingsControl saveSettingsControl;
+		private PowerPointStartupSettingsControl powerPointStartupSettingsControl;
     }
 }

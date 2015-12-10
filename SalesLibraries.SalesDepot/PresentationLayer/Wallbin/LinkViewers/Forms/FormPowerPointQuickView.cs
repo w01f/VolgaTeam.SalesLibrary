@@ -165,10 +165,17 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Forms
 
 		private void barButtonItemPrintLink_ItemClick(object sender, ItemClickEventArgs e)
 		{
-			if (!CheckPowerPointRunning()) return;
+			using (var powerPointProcessor = new PowerPointHidden())
+			{
+				if (!powerPointProcessor.Connect()) return;
+				powerPointProcessor.PrintPresentation(
+					_tempFileCopy.FullName,
+					SelectedThumbnail.Index,
+					printAction => MainController.Instance.ProcessManager.Run(
+						"Printing...",
+						cancellationToken => printAction()));
+			}
 			MainController.Instance.ActivityManager.AddLinkAccessActivity("Print Link", PowerPointLink);
-			PowerPointSingleton.Instance.OpenSlideSourcePresentation(_tempFileCopy);
-			PowerPointSingleton.Instance.PrintPresentation(SelectedThumbnail.Index);
 		}
 
 		private void barLargeButtonItemAddAllSlides_ItemClick(object sender, ItemClickEventArgs e)
@@ -238,7 +245,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Forms
 		private bool CheckPowerPointRunning()
 		{
 			if (PowerPointSingleton.Instance.IsLinkedWithApplication) return true;
-			if (MainController.Instance.PopupMessages.ShowWarningQuestion("PowerPoint is not Running. Do you want to open it now?") != DialogResult.Yes) return false;
+			if (MainController.Instance.PopupMessages.ShowWarningQuestion(String.Format("PowerPoint is required to run this application.{0}Do you want to go ahead and open PowerPoint?", Environment.NewLine)) != DialogResult.Yes) return false;
 			AfterClose = () => MainController.Instance.CheckPowerPointRunning();
 			Close();
 			return false;
@@ -268,9 +275,9 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Forms
 							PowerPointManager.Instance.ActivatePowerPoint();
 							MainController.Instance.ActivityManager.AddLinkAccessActivity("Insert Slide", PowerPointLink);
 							PowerPointSingleton.Instance.OpenSlideSourcePresentation(_tempFileCopy);
-								PowerPointSingleton.Instance.AppendSlide(
-								allSlides ? -1 : SelectedThumbnail.Index,
-								templatePath);
+							PowerPointSingleton.Instance.AppendSlide(
+							allSlides ? -1 : SelectedThumbnail.Index,
+							templatePath);
 
 						})
 					);

@@ -22,6 +22,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Settings
 			videoSettingsControl.LoadData();
 			folderSettingsControl.LoadData();
 			quickViewSettingsControl.LoadData();
+			powerPointStartupSettingsControl.LoadData();
 			Resize += OnResize;
 			panel1.Resize += OnColumnResize;
 			panel2.Resize += OnColumnResize;

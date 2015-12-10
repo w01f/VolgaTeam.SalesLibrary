@@ -198,6 +198,12 @@
     <Compile Include="PresentationLayer\Settings\FormPowerPointWarning.designer.cs">
       <DependentUpon>FormPowerPointWarning.cs</DependentUpon>
     </Compile>
+    <Compile Include="PresentationLayer\Settings\PowerPointStartupSettingsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Settings\PowerPointStartupSettingsControl.designer.cs">
+      <DependentUpon>PowerPointStartupSettingsControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationLayer\Wallbin\Folders\FolderBoxInitializer.cs" />
     <Compile Include="PresentationLayer\Wallbin\LinkViewers\Processors\ILinkViewProcessor.cs" />
     <Compile Include="PresentationLayer\Wallbin\LinkViewers\Processors\LinkProcessorFactory.cs" />
@@ -562,6 +568,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Settings\QuickViewSettingsControl.resx">
       <DependentUpon>QuickViewSettingsControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Settings\PowerPointStartupSettingsControl.resx">
+      <DependentUpon>PowerPointStartupSettingsControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Settings\SaveSettingsControl.resx">
       <DependentUpon>SaveSettingsControl.cs</DependentUpon>
