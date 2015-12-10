@@ -186,6 +186,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 
 			if (_formParameters.Type == WindowPropertiesType.None)
 				_folder.Page.ApplyFolderSettings(_folder);
+			_folder.BeforeSave();
 		}
 
 		private void FormWindowSettings_FormClosed(object sender, FormClosedEventArgs e)

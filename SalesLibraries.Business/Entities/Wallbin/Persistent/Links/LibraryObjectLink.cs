@@ -87,14 +87,9 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		}
 
 		[NotMapped, JsonIgnore]
-		public override Color DisplayColor
+		public bool IsCorrupted
 		{
-			get
-			{
-				return ((LibraryObjectLinkSettings)Settings).IsSpecialFormat ?
-					  Settings.ForeColor :
-					  base.DisplayColor;
-			}
+			get { return !Banner.Enable && String.IsNullOrEmpty(DisplayName); }
 		}
 		#endregion
 

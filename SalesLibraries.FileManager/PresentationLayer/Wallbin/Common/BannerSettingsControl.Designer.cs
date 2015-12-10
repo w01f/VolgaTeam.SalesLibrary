@@ -166,6 +166,8 @@
 			this.colorEditBannerTextColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
 			this.colorEditBannerTextColor.Properties.ColorAlignment = DevExpress.Utils.HorzAlignment.Center;
+			this.colorEditBannerTextColor.Properties.ShowSystemColors = false;
+			this.colorEditBannerTextColor.Properties.ShowWebColors = true;
 			this.colorEditBannerTextColor.Size = new System.Drawing.Size(105, 22);
 			this.colorEditBannerTextColor.StyleController = this.styleController;
 			this.colorEditBannerTextColor.TabIndex = 44;

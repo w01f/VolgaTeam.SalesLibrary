@@ -72,6 +72,8 @@
 			// laCalendarBackColor
 			// 
 			this.laCalendarBackColor.AutoSize = true;
+			this.laCalendarBackColor.BackColor = System.Drawing.Color.White;
+			this.laCalendarBackColor.ForeColor = System.Drawing.Color.Black;
 			this.laCalendarBackColor.Location = new System.Drawing.Point(12, 15);
 			this.laCalendarBackColor.Name = "laCalendarBackColor";
 			this.laCalendarBackColor.Size = new System.Drawing.Size(115, 16);
@@ -126,9 +128,15 @@
 			this.colorEditCalendarBackColor.EditValue = System.Drawing.Color.Empty;
 			this.colorEditCalendarBackColor.Location = new System.Drawing.Point(204, 12);
 			this.colorEditCalendarBackColor.Name = "colorEditCalendarBackColor";
+			this.colorEditCalendarBackColor.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.colorEditCalendarBackColor.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.colorEditCalendarBackColor.Properties.Appearance.Options.UseBackColor = true;
+			this.colorEditCalendarBackColor.Properties.Appearance.Options.UseForeColor = true;
 			this.colorEditCalendarBackColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
 			this.colorEditCalendarBackColor.Properties.ColorAlignment = DevExpress.Utils.HorzAlignment.Center;
+			this.colorEditCalendarBackColor.Properties.ShowSystemColors = false;
+			this.colorEditCalendarBackColor.Properties.ShowWebColors = true;
 			this.colorEditCalendarBackColor.Size = new System.Drawing.Size(100, 22);
 			this.colorEditCalendarBackColor.StyleController = this.styleController;
 			this.colorEditCalendarBackColor.TabIndex = 25;
@@ -138,9 +146,15 @@
 			this.colorEditCalendarBorderColor.EditValue = System.Drawing.Color.Empty;
 			this.colorEditCalendarBorderColor.Location = new System.Drawing.Point(204, 50);
 			this.colorEditCalendarBorderColor.Name = "colorEditCalendarBorderColor";
+			this.colorEditCalendarBorderColor.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.colorEditCalendarBorderColor.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.colorEditCalendarBorderColor.Properties.Appearance.Options.UseBackColor = true;
+			this.colorEditCalendarBorderColor.Properties.Appearance.Options.UseForeColor = true;
 			this.colorEditCalendarBorderColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
 			this.colorEditCalendarBorderColor.Properties.ColorAlignment = DevExpress.Utils.HorzAlignment.Center;
+			this.colorEditCalendarBorderColor.Properties.ShowSystemColors = false;
+			this.colorEditCalendarBorderColor.Properties.ShowWebColors = true;
 			this.colorEditCalendarBorderColor.Size = new System.Drawing.Size(100, 22);
 			this.colorEditCalendarBorderColor.StyleController = this.styleController;
 			this.colorEditCalendarBorderColor.TabIndex = 27;
@@ -148,6 +162,8 @@
 			// laCalendarBorderColor
 			// 
 			this.laCalendarBorderColor.AutoSize = true;
+			this.laCalendarBorderColor.BackColor = System.Drawing.Color.White;
+			this.laCalendarBorderColor.ForeColor = System.Drawing.Color.Black;
 			this.laCalendarBorderColor.Location = new System.Drawing.Point(12, 53);
 			this.laCalendarBorderColor.Name = "laCalendarBorderColor";
 			this.laCalendarBorderColor.Size = new System.Drawing.Size(84, 16);
@@ -159,9 +175,15 @@
 			this.colorEditCalendarHeaderBackColor.EditValue = System.Drawing.Color.Empty;
 			this.colorEditCalendarHeaderBackColor.Location = new System.Drawing.Point(204, 88);
 			this.colorEditCalendarHeaderBackColor.Name = "colorEditCalendarHeaderBackColor";
+			this.colorEditCalendarHeaderBackColor.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.colorEditCalendarHeaderBackColor.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.colorEditCalendarHeaderBackColor.Properties.Appearance.Options.UseBackColor = true;
+			this.colorEditCalendarHeaderBackColor.Properties.Appearance.Options.UseForeColor = true;
 			this.colorEditCalendarHeaderBackColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
 			this.colorEditCalendarHeaderBackColor.Properties.ColorAlignment = DevExpress.Utils.HorzAlignment.Center;
+			this.colorEditCalendarHeaderBackColor.Properties.ShowSystemColors = false;
+			this.colorEditCalendarHeaderBackColor.Properties.ShowWebColors = true;
 			this.colorEditCalendarHeaderBackColor.Size = new System.Drawing.Size(100, 22);
 			this.colorEditCalendarHeaderBackColor.StyleController = this.styleController;
 			this.colorEditCalendarHeaderBackColor.TabIndex = 29;
@@ -169,6 +191,8 @@
 			// laCalendarHeaderColor
 			// 
 			this.laCalendarHeaderColor.AutoSize = true;
+			this.laCalendarHeaderColor.BackColor = System.Drawing.Color.White;
+			this.laCalendarHeaderColor.ForeColor = System.Drawing.Color.Black;
 			this.laCalendarHeaderColor.Location = new System.Drawing.Point(12, 91);
 			this.laCalendarHeaderColor.Name = "laCalendarHeaderColor";
 			this.laCalendarHeaderColor.Size = new System.Drawing.Size(176, 16);
@@ -180,9 +204,15 @@
 			this.colorEditCalendarHeaderForeColor.EditValue = System.Drawing.Color.Empty;
 			this.colorEditCalendarHeaderForeColor.Location = new System.Drawing.Point(204, 125);
 			this.colorEditCalendarHeaderForeColor.Name = "colorEditCalendarHeaderForeColor";
+			this.colorEditCalendarHeaderForeColor.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.colorEditCalendarHeaderForeColor.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.colorEditCalendarHeaderForeColor.Properties.Appearance.Options.UseBackColor = true;
+			this.colorEditCalendarHeaderForeColor.Properties.Appearance.Options.UseForeColor = true;
 			this.colorEditCalendarHeaderForeColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
 			this.colorEditCalendarHeaderForeColor.Properties.ColorAlignment = DevExpress.Utils.HorzAlignment.Center;
+			this.colorEditCalendarHeaderForeColor.Properties.ShowSystemColors = false;
+			this.colorEditCalendarHeaderForeColor.Properties.ShowWebColors = true;
 			this.colorEditCalendarHeaderForeColor.Size = new System.Drawing.Size(100, 22);
 			this.colorEditCalendarHeaderForeColor.StyleController = this.styleController;
 			this.colorEditCalendarHeaderForeColor.TabIndex = 31;
@@ -190,6 +220,8 @@
 			// laCalendarHeaderForeColor
 			// 
 			this.laCalendarHeaderForeColor.AutoSize = true;
+			this.laCalendarHeaderForeColor.BackColor = System.Drawing.Color.White;
+			this.laCalendarHeaderForeColor.ForeColor = System.Drawing.Color.Black;
 			this.laCalendarHeaderForeColor.Location = new System.Drawing.Point(12, 128);
 			this.laCalendarHeaderForeColor.Name = "laCalendarHeaderForeColor";
 			this.laCalendarHeaderForeColor.Size = new System.Drawing.Size(172, 16);
@@ -201,9 +233,15 @@
 			this.colorEditMonthHeaderForeColor.EditValue = System.Drawing.Color.Empty;
 			this.colorEditMonthHeaderForeColor.Location = new System.Drawing.Point(204, 199);
 			this.colorEditMonthHeaderForeColor.Name = "colorEditMonthHeaderForeColor";
+			this.colorEditMonthHeaderForeColor.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.colorEditMonthHeaderForeColor.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.colorEditMonthHeaderForeColor.Properties.Appearance.Options.UseBackColor = true;
+			this.colorEditMonthHeaderForeColor.Properties.Appearance.Options.UseForeColor = true;
 			this.colorEditMonthHeaderForeColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
 			this.colorEditMonthHeaderForeColor.Properties.ColorAlignment = DevExpress.Utils.HorzAlignment.Center;
+			this.colorEditMonthHeaderForeColor.Properties.ShowSystemColors = false;
+			this.colorEditMonthHeaderForeColor.Properties.ShowWebColors = true;
 			this.colorEditMonthHeaderForeColor.Size = new System.Drawing.Size(100, 22);
 			this.colorEditMonthHeaderForeColor.StyleController = this.styleController;
 			this.colorEditMonthHeaderForeColor.TabIndex = 35;
@@ -211,6 +249,8 @@
 			// laMonthHeaderForeColor
 			// 
 			this.laMonthHeaderForeColor.AutoSize = true;
+			this.laMonthHeaderForeColor.BackColor = System.Drawing.Color.White;
+			this.laMonthHeaderForeColor.ForeColor = System.Drawing.Color.Black;
 			this.laMonthHeaderForeColor.Location = new System.Drawing.Point(12, 202);
 			this.laMonthHeaderForeColor.Name = "laMonthHeaderForeColor";
 			this.laMonthHeaderForeColor.Size = new System.Drawing.Size(140, 16);
@@ -222,9 +262,15 @@
 			this.colorEditMonthHeaderBackColor.EditValue = System.Drawing.Color.Empty;
 			this.colorEditMonthHeaderBackColor.Location = new System.Drawing.Point(204, 162);
 			this.colorEditMonthHeaderBackColor.Name = "colorEditMonthHeaderBackColor";
+			this.colorEditMonthHeaderBackColor.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.colorEditMonthHeaderBackColor.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.colorEditMonthHeaderBackColor.Properties.Appearance.Options.UseBackColor = true;
+			this.colorEditMonthHeaderBackColor.Properties.Appearance.Options.UseForeColor = true;
 			this.colorEditMonthHeaderBackColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
 			this.colorEditMonthHeaderBackColor.Properties.ColorAlignment = DevExpress.Utils.HorzAlignment.Center;
+			this.colorEditMonthHeaderBackColor.Properties.ShowSystemColors = false;
+			this.colorEditMonthHeaderBackColor.Properties.ShowWebColors = true;
 			this.colorEditMonthHeaderBackColor.Size = new System.Drawing.Size(100, 22);
 			this.colorEditMonthHeaderBackColor.StyleController = this.styleController;
 			this.colorEditMonthHeaderBackColor.TabIndex = 33;
@@ -232,6 +278,8 @@
 			// laMonthHeaderBackColor
 			// 
 			this.laMonthHeaderBackColor.AutoSize = true;
+			this.laMonthHeaderBackColor.BackColor = System.Drawing.Color.White;
+			this.laMonthHeaderBackColor.ForeColor = System.Drawing.Color.Black;
 			this.laMonthHeaderBackColor.Location = new System.Drawing.Point(12, 165);
 			this.laMonthHeaderBackColor.Name = "laMonthHeaderBackColor";
 			this.laMonthHeaderBackColor.Size = new System.Drawing.Size(144, 16);
@@ -243,9 +291,15 @@
 			this.colorEditMonthBodyForeColor.EditValue = System.Drawing.Color.Empty;
 			this.colorEditMonthBodyForeColor.Location = new System.Drawing.Point(204, 273);
 			this.colorEditMonthBodyForeColor.Name = "colorEditMonthBodyForeColor";
+			this.colorEditMonthBodyForeColor.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.colorEditMonthBodyForeColor.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.colorEditMonthBodyForeColor.Properties.Appearance.Options.UseBackColor = true;
+			this.colorEditMonthBodyForeColor.Properties.Appearance.Options.UseForeColor = true;
 			this.colorEditMonthBodyForeColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
 			this.colorEditMonthBodyForeColor.Properties.ColorAlignment = DevExpress.Utils.HorzAlignment.Center;
+			this.colorEditMonthBodyForeColor.Properties.ShowSystemColors = false;
+			this.colorEditMonthBodyForeColor.Properties.ShowWebColors = true;
 			this.colorEditMonthBodyForeColor.Size = new System.Drawing.Size(100, 22);
 			this.colorEditMonthBodyForeColor.StyleController = this.styleController;
 			this.colorEditMonthBodyForeColor.TabIndex = 39;
@@ -253,6 +307,8 @@
 			// laMonthBodyForeColor
 			// 
 			this.laMonthBodyForeColor.AutoSize = true;
+			this.laMonthBodyForeColor.BackColor = System.Drawing.Color.White;
+			this.laMonthBodyForeColor.ForeColor = System.Drawing.Color.Black;
 			this.laMonthBodyForeColor.Location = new System.Drawing.Point(12, 276);
 			this.laMonthBodyForeColor.Name = "laMonthBodyForeColor";
 			this.laMonthBodyForeColor.Size = new System.Drawing.Size(146, 16);
@@ -264,9 +320,15 @@
 			this.colorEditMonthBodyBackColor.EditValue = System.Drawing.Color.Empty;
 			this.colorEditMonthBodyBackColor.Location = new System.Drawing.Point(204, 236);
 			this.colorEditMonthBodyBackColor.Name = "colorEditMonthBodyBackColor";
+			this.colorEditMonthBodyBackColor.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.colorEditMonthBodyBackColor.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.colorEditMonthBodyBackColor.Properties.Appearance.Options.UseBackColor = true;
+			this.colorEditMonthBodyBackColor.Properties.Appearance.Options.UseForeColor = true;
 			this.colorEditMonthBodyBackColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
 			this.colorEditMonthBodyBackColor.Properties.ColorAlignment = DevExpress.Utils.HorzAlignment.Center;
+			this.colorEditMonthBodyBackColor.Properties.ShowSystemColors = false;
+			this.colorEditMonthBodyBackColor.Properties.ShowWebColors = true;
 			this.colorEditMonthBodyBackColor.Size = new System.Drawing.Size(100, 22);
 			this.colorEditMonthBodyBackColor.StyleController = this.styleController;
 			this.colorEditMonthBodyBackColor.TabIndex = 37;
@@ -274,6 +336,8 @@
 			// laMonthBodyBackColor
 			// 
 			this.laMonthBodyBackColor.AutoSize = true;
+			this.laMonthBodyBackColor.BackColor = System.Drawing.Color.White;
+			this.laMonthBodyBackColor.ForeColor = System.Drawing.Color.Black;
 			this.laMonthBodyBackColor.Location = new System.Drawing.Point(12, 239);
 			this.laMonthBodyBackColor.Name = "laMonthBodyBackColor";
 			this.laMonthBodyBackColor.Size = new System.Drawing.Size(150, 16);
@@ -285,9 +349,15 @@
 			this.colorEditSweepForeColor.EditValue = System.Drawing.Color.Empty;
 			this.colorEditSweepForeColor.Location = new System.Drawing.Point(204, 347);
 			this.colorEditSweepForeColor.Name = "colorEditSweepForeColor";
+			this.colorEditSweepForeColor.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.colorEditSweepForeColor.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.colorEditSweepForeColor.Properties.Appearance.Options.UseBackColor = true;
+			this.colorEditSweepForeColor.Properties.Appearance.Options.UseForeColor = true;
 			this.colorEditSweepForeColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
 			this.colorEditSweepForeColor.Properties.ColorAlignment = DevExpress.Utils.HorzAlignment.Center;
+			this.colorEditSweepForeColor.Properties.ShowSystemColors = false;
+			this.colorEditSweepForeColor.Properties.ShowWebColors = true;
 			this.colorEditSweepForeColor.Size = new System.Drawing.Size(100, 22);
 			this.colorEditSweepForeColor.StyleController = this.styleController;
 			this.colorEditSweepForeColor.TabIndex = 43;
@@ -295,6 +365,8 @@
 			// laSweepForeColor
 			// 
 			this.laSweepForeColor.AutoSize = true;
+			this.laSweepForeColor.BackColor = System.Drawing.Color.White;
+			this.laSweepForeColor.ForeColor = System.Drawing.Color.Black;
 			this.laSweepForeColor.Location = new System.Drawing.Point(12, 350);
 			this.laSweepForeColor.Name = "laSweepForeColor";
 			this.laSweepForeColor.Size = new System.Drawing.Size(122, 16);
@@ -306,9 +378,15 @@
 			this.colorEditSweepBackColor.EditValue = System.Drawing.Color.Empty;
 			this.colorEditSweepBackColor.Location = new System.Drawing.Point(204, 310);
 			this.colorEditSweepBackColor.Name = "colorEditSweepBackColor";
+			this.colorEditSweepBackColor.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.colorEditSweepBackColor.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.colorEditSweepBackColor.Properties.Appearance.Options.UseBackColor = true;
+			this.colorEditSweepBackColor.Properties.Appearance.Options.UseForeColor = true;
 			this.colorEditSweepBackColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
 			this.colorEditSweepBackColor.Properties.ColorAlignment = DevExpress.Utils.HorzAlignment.Center;
+			this.colorEditSweepBackColor.Properties.ShowSystemColors = false;
+			this.colorEditSweepBackColor.Properties.ShowWebColors = true;
 			this.colorEditSweepBackColor.Size = new System.Drawing.Size(100, 22);
 			this.colorEditSweepBackColor.StyleController = this.styleController;
 			this.colorEditSweepBackColor.TabIndex = 41;
@@ -316,6 +394,8 @@
 			// laSweepBackColor
 			// 
 			this.laSweepBackColor.AutoSize = true;
+			this.laSweepBackColor.BackColor = System.Drawing.Color.White;
+			this.laSweepBackColor.ForeColor = System.Drawing.Color.Black;
 			this.laSweepBackColor.Location = new System.Drawing.Point(12, 313);
 			this.laSweepBackColor.Name = "laSweepBackColor";
 			this.laSweepBackColor.Size = new System.Drawing.Size(133, 16);
@@ -327,9 +407,15 @@
 			this.colorEditDeadLinksForeColor.EditValue = System.Drawing.Color.Empty;
 			this.colorEditDeadLinksForeColor.Location = new System.Drawing.Point(204, 384);
 			this.colorEditDeadLinksForeColor.Name = "colorEditDeadLinksForeColor";
+			this.colorEditDeadLinksForeColor.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.colorEditDeadLinksForeColor.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.colorEditDeadLinksForeColor.Properties.Appearance.Options.UseBackColor = true;
+			this.colorEditDeadLinksForeColor.Properties.Appearance.Options.UseForeColor = true;
 			this.colorEditDeadLinksForeColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
 			this.colorEditDeadLinksForeColor.Properties.ColorAlignment = DevExpress.Utils.HorzAlignment.Center;
+			this.colorEditDeadLinksForeColor.Properties.ShowSystemColors = false;
+			this.colorEditDeadLinksForeColor.Properties.ShowWebColors = true;
 			this.colorEditDeadLinksForeColor.Size = new System.Drawing.Size(100, 22);
 			this.colorEditDeadLinksForeColor.StyleController = this.styleController;
 			this.colorEditDeadLinksForeColor.TabIndex = 45;
@@ -337,6 +423,8 @@
 			// laDeadLinksForeColor
 			// 
 			this.laDeadLinksForeColor.AutoSize = true;
+			this.laDeadLinksForeColor.BackColor = System.Drawing.Color.White;
+			this.laDeadLinksForeColor.ForeColor = System.Drawing.Color.Black;
 			this.laDeadLinksForeColor.Location = new System.Drawing.Point(12, 387);
 			this.laDeadLinksForeColor.Name = "laDeadLinksForeColor";
 			this.laDeadLinksForeColor.Size = new System.Drawing.Size(140, 16);
@@ -387,7 +475,9 @@
 			this.Controls.Add(this.buttonXCancel);
 			this.Controls.Add(this.buttonXOK);
 			this.Controls.Add(this.laCalendarBackColor);
+			this.DoubleBuffered = true;
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.ForeColor = System.Drawing.Color.Black;
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.MaximizeBox = false;

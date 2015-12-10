@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Windows.Forms;
 using DevExpress.XtraTab;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
@@ -8,8 +9,8 @@ using SalesLibraries.CommonGUI.Common;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSettings
 {
-	//public partial class LinkObjectOptions : UserControl, ILinkProperties
 	[IntendForClass(typeof(LibraryObjectLink))]
+	//public partial class LinkObjectOptions : UserControl, ILinkSettingsEditControl
 	public sealed partial class LinkObjectOptions : XtraTabPage, ILinkSettingsEditControl
 	{
 		private readonly LibraryObjectLink _data;
@@ -33,6 +34,13 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			InitializeComponent();
 			Text = "Link Notes";
 			_data = data;
+
+			rbNone.Text = BaseLinkSettings.PredefinedNoteNone;
+			rbNew.Text = BaseLinkSettings.PredefinedNoteNew;
+			rbUpdated.Text = BaseLinkSettings.PredefinedNoteUpdated;
+			rbSell.Text = BaseLinkSettings.PredefinedNoteSellThis;
+			rbAttention.Text = BaseLinkSettings.PredefinedNoteAttention;
+
 			if ((base.CreateGraphics()).DpiX > 96)
 			{
 				var styleControllerFont = new Font(styleController.Appearance.Font.FontFamily, styleController.Appearance.Font.Size - 2, styleController.Appearance.Font.Style);
@@ -61,13 +69,13 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			var note = _data.Settings.Note;
 			if (String.IsNullOrEmpty(note))
 				rbNone.Checked = true;
-			else if (note.Equals(rbNew.Text))
+			else if (note.Equals(BaseLinkSettings.PredefinedNoteNew))
 				rbNew.Checked = true;
-			else if (note.Equals(rbUpdated.Text))
+			else if (note.Equals(BaseLinkSettings.PredefinedNoteUpdated))
 				rbUpdated.Checked = true;
-			else if (note.Equals(rbSell.Text))
+			else if (note.Equals(BaseLinkSettings.PredefinedNoteSellThis))
 				rbSell.Checked = true;
-			else if (note.Equals(rbAttention.Text))
+			else if (note.Equals(BaseLinkSettings.PredefinedNoteAttention))
 				rbAttention.Checked = true;
 			else
 			{
@@ -80,13 +88,13 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		public void SaveData()
 		{
 			if (rbNew.Checked)
-				_data.Settings.Note = rbNew.Text;
+				_data.Settings.Note = BaseLinkSettings.PredefinedNoteNew;
 			else if (rbUpdated.Checked)
-				_data.Settings.Note = rbUpdated.Text;
+				_data.Settings.Note = BaseLinkSettings.PredefinedNoteUpdated;
 			else if (rbSell.Checked)
-				_data.Settings.Note = rbSell.Text;
+				_data.Settings.Note = BaseLinkSettings.PredefinedNoteSellThis;
 			else if (rbAttention.Checked)
-				_data.Settings.Note = rbAttention.Text;
+				_data.Settings.Note = BaseLinkSettings.PredefinedNoteAttention;
 			else if (rbCustomNote.Checked)
 				_data.Settings.Note = edCustomNote.Text;
 			else

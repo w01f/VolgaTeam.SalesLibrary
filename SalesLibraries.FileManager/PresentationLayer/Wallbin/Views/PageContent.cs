@@ -172,7 +172,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 					})
 					.ToArray()
 				);
-			Controls.AddRange(_folderBoxes.Select(fb => (Control)fb).ToArray());
+			Controls.AddRange(_folderBoxes.OfType<Control>().ToArray());
 		}
 
 		public void DisposeFolders()

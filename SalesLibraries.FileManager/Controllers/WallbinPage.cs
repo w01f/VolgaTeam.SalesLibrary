@@ -40,8 +40,15 @@ namespace SalesLibraries.FileManager.Controllers
 		{
 			DataStateObserver.Instance.DataChanged += (o, e) =>
 			{
-				if (e.ChangeType != DataChangeType.LibrarySelected) return;
-				OnLibraryChanged(o, e);
+				switch (e.ChangeType)
+				{
+					case DataChangeType.LibrarySelected:
+						OnLibraryChanged(o, e);
+						break;
+					case DataChangeType.LinksDeleted:
+						MainController.Instance.WallbinViews.ActiveWallbin.IsDataChanged = true;
+						break;
+				}
 			};
 
 			MainController.Instance.MainForm.buttonItemHomeSync.Click += OnSyncClick;

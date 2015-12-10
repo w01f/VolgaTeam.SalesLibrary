@@ -14,7 +14,7 @@ using SalesLibraries.FileManager.Controllers;
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSettings
 {
 	[IntendForClass(typeof(BaseLibraryLink))]
-	//public partial class SecurityOptions : UserControl, ILinkProperties
+	//public partial class SecurityOptions : UserControl, ILinkSettingsEditControl
 	public partial class SecurityOptions : XtraTabPage, ILinkSettingsEditControl
 	{
 		private readonly BaseLibraryLink _data;

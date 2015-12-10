@@ -123,7 +123,11 @@ namespace SalesLibraries.Common.OfficeInterops
 			catch { }
 			finally
 			{
-				Process.GetProcessesByName("POWERPNT").ToList().ForEach(p => p.Kill());
+				try
+				{
+					Process.GetProcessesByName("POWERPNT").ToList().ForEach(p => p.Kill());
+				}
+				catch { }
 			}
 		}
 
@@ -502,55 +506,69 @@ namespace SalesLibraries.Common.OfficeInterops
 			}
 		}
 
-		public void PrintPresentation(int currentSlideIndex)
+		public void PrintPresentation(string presentationPath, int currentSlideIndex, Action<Action> printActionWrapper)
 		{
-			try
+			using (var dlg = new PrintDialog
 			{
-				MessageFilter.Register();
+				AllowCurrentPage = true,
+				AllowPrintToFile = false,
+				AllowSelection = false,
+				AllowSomePages = true,
+				ShowNetwork = true,
+				UseEXDialog = true
+			})
+			{
+				if (dlg.ShowDialog() != DialogResult.OK) return;
 
-				int fromPage = 1;
-				int toPage = 1;
+				var fromPage = dlg.PrinterSettings.FromPage;
+				var toPage = 1;
+				var collate = dlg.PrinterSettings.Collate;
+				var copies = dlg.PrinterSettings.Copies;
+				var printRange = dlg.PrinterSettings.PrintRange;
+				var printerName = dlg.PrinterSettings.PrinterName;
 
-				var dlg = new PrintDialog();
-				dlg.AllowCurrentPage = true;
-				dlg.AllowPrintToFile = false;
-				dlg.AllowSelection = false;
-				dlg.AllowSomePages = true;
-				dlg.ShowNetwork = true;
-				dlg.UseEXDialog = true;
-				if (dlg.ShowDialog() == DialogResult.OK)
+				printActionWrapper(() =>
 				{
-					switch (dlg.PrinterSettings.PrintRange)
+					try
 					{
-						case System.Drawing.Printing.PrintRange.AllPages:
-							fromPage = 1;
-							toPage = SlideSourcePresentation.Slides.Count;
-							break;
-						case System.Drawing.Printing.PrintRange.CurrentPage:
-							fromPage = currentSlideIndex;
-							toPage = currentSlideIndex;
-							break;
-						case System.Drawing.Printing.PrintRange.SomePages:
-							fromPage = dlg.PrinterSettings.FromPage;
-							if (fromPage < 1)
+						MessageFilter.Register();
+						var presentation = PowerPointObject.Presentations.Open(presentationPath, WithWindow: MsoTriState.msoFalse);
+						switch (printRange)
+						{
+							case System.Drawing.Printing.PrintRange.AllPages:
 								fromPage = 1;
-							toPage = currentSlideIndex;
-							if (toPage > SlideSourcePresentation.Slides.Count)
-								toPage = SlideSourcePresentation.Slides.Count;
-							break;
+								toPage = presentation.Slides.Count;
+								break;
+							case System.Drawing.Printing.PrintRange.CurrentPage:
+								fromPage = currentSlideIndex;
+								toPage = currentSlideIndex;
+								break;
+							case System.Drawing.Printing.PrintRange.SomePages:
+								if (fromPage < 1)
+									fromPage = 1;
+								toPage = currentSlideIndex;
+								if (toPage > presentation.Slides.Count)
+									toPage = presentation.Slides.Count;
+								break;
+						}
+						presentation.PrintOptions.PrintInBackground = MsoTriState.msoFalse;
+						presentation.PrintOptions.ActivePrinter = printerName;
+						presentation.PrintOptions.NumberOfCopies = copies;
+						presentation.PrintOut(
+							fromPage,
+							toPage,
+							String.Empty,
+							copies,
+							collate ? MsoTriState.msoTrue : MsoTriState.msoFalse);
+						presentation.Close();
+						Utils.ReleaseComObject(presentationPath);
 					}
-					SlideSourcePresentation.PrintOptions.ActivePrinter = dlg.PrinterSettings.PrinterName;
-					SlideSourcePresentation.PrintOptions.NumberOfCopies = dlg.PrinterSettings.Copies;
-					if (dlg.PrinterSettings.Collate)
-						SlideSourcePresentation.PrintOut(fromPage, toPage, string.Empty, dlg.PrinterSettings.Copies, MsoTriState.msoTrue);
-					else
-						SlideSourcePresentation.PrintOut(fromPage, toPage, string.Empty, dlg.PrinterSettings.Copies, MsoTriState.msoFalse);
-				}
-			}
-			catch { }
-			finally
-			{
-				MessageFilter.Revoke();
+					catch { }
+					finally
+					{
+						MessageFilter.Revoke();
+					}
+				});
 			}
 		}
 

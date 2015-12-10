@@ -269,7 +269,8 @@ namespace SalesLibraries.Business.Schema.Wallbin
 				target.Settings.Note = !String.IsNullOrEmpty(legacy.ExtendedProperties.Note) ? legacy.ExtendedProperties.Note.Replace("-", String.Empty).Trim() : String.Empty;
 				if (legacy.ExtendedProperties.Font != null)
 					target.Settings.Font = (Font)legacy.ExtendedProperties.Font.Clone();
-				target.Settings.ForeColor = legacy.ExtendedProperties.ForeColor;
+				if (legacy.ExtendedProperties.IsSpecialFormat)
+					target.Settings.ForeColor = legacy.ExtendedProperties.ForeColor;
 				((LibraryObjectLinkSettings)target.Settings).HoverNote = legacy.ExtendedProperties.HoverNote;
 				((LibraryObjectLinkSettings)target.Settings).IsBold = legacy.ExtendedProperties.IsBold;
 				((LibraryObjectLinkSettings)target.Settings).IsSpecialFormat = legacy.ExtendedProperties.IsSpecialFormat;

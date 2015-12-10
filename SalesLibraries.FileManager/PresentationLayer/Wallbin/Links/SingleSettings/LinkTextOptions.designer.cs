@@ -45,7 +45,6 @@
 			// colorEditLinkSpecialColor
 			// 
 			this.colorEditLinkSpecialColor.EditValue = System.Drawing.Color.Empty;
-			this.colorEditLinkSpecialColor.Enabled = false;
 			this.colorEditLinkSpecialColor.Location = new System.Drawing.Point(128, 169);
 			this.colorEditLinkSpecialColor.Name = "colorEditLinkSpecialColor";
 			this.colorEditLinkSpecialColor.Properties.Appearance.BackColor = System.Drawing.Color.White;
@@ -57,6 +56,8 @@
 			this.colorEditLinkSpecialColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
 			this.colorEditLinkSpecialColor.Properties.ColorAlignment = DevExpress.Utils.HorzAlignment.Center;
+			this.colorEditLinkSpecialColor.Properties.ShowSystemColors = false;
+			this.colorEditLinkSpecialColor.Properties.ShowWebColors = true;
 			this.colorEditLinkSpecialColor.Size = new System.Drawing.Size(105, 22);
 			this.colorEditLinkSpecialColor.StyleController = this.styleController;
 			this.colorEditLinkSpecialColor.TabIndex = 31;
@@ -151,7 +152,6 @@
 			// labelControlForeColor
 			// 
 			this.labelControlForeColor.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.labelControlForeColor.Enabled = false;
 			this.labelControlForeColor.Location = new System.Drawing.Point(26, 173);
 			this.labelControlForeColor.Name = "labelControlForeColor";
 			this.labelControlForeColor.Size = new System.Drawing.Size(60, 16);
@@ -160,8 +160,6 @@
 			// 
 			// LinkTextOptions
 			// 
-			this.Appearance.PageClient.BackColor = System.Drawing.Color.White;
-			this.Appearance.PageClient.Options.UseBackColor = true;
 			this.Controls.Add(this.colorEditLinkSpecialColor);
 			this.Controls.Add(this.labelControlForeColor);
 			this.Controls.Add(this.labelControlTitle);

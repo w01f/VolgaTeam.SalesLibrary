@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
 using SalesLibraries.Business.Contexts.Wallbin;
+using SalesLibraries.FileManager.Business.Services;
 using SalesLibraries.FileManager.Controllers;
 using SalesLibraries.FileManager.PresentationLayer.Wallbin.DataSource;
 using SalesLibraries.FileManager.PresentationLayer.Wallbin.Libraries;
@@ -81,7 +82,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 			ActivePage.Suspend();
 			ActivePage.ShowPage();
 			ActivePage.Resume();
-			
+
 			pnContainer.BringToFront();
 
 			TagInfoControl.BringToFront();
@@ -105,6 +106,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 		public void SaveData()
 		{
 			MainController.Instance.WallbinViews.Selection.Reset();
+			CorruptedLinksHelper.DeleteCorruptedLinks(DataStorage.Library);
 			if (!IsDataChanged) return;
 			DataStorage.SaveChanges();
 			IsDataChanged = false;

@@ -49,14 +49,15 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		{
 			buttonEditLineBreakFont.Tag = _data.Settings.Font;
 			buttonEditLineBreakFont.EditValue = Utils.FontToString(_data.Settings.Font);
-			colorEditLineBreakFontColor.Color = _data.Settings.ForeColor;
+			colorEditLineBreakFontColor.Color = _data.DisplayColor;
 			memoEditNote.EditValue = _data.Settings.Note;
 		}
 
 		public void SaveData()
 		{
 			_data.Settings.Font = buttonEditLineBreakFont.Tag as Font;
-			_data.Settings.ForeColor = colorEditLineBreakFontColor.Color;
+			if (colorEditLineBreakFontColor.Color != _data.DisplayColor)
+				_data.Settings.ForeColor = colorEditLineBreakFontColor.Color;
 			_data.Settings.Note = memoEditNote.EditValue != null ? memoEditNote.EditValue.ToString().Trim() : string.Empty;
 		}
 

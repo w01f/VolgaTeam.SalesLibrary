@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using SalesLibraries.Business.Entities.Common;
+using DevExpress.XtraBars;
 using SalesLibraries.Business.Entities.Helpers;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings;
@@ -27,6 +27,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 	{
 		private readonly Pen _folderBoxDraggedIndicatorPen = new Pen(Color.Black, 8);
 		private readonly Pen _rowDraggedIndicatorPen = new Pen(Color.Black, 2);
+		private readonly QuickEditManager _quickEditor;
 
 		#region Public Properties
 		public override IWallbinViewFormat FormatState
@@ -72,7 +73,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 		{
 			SelectionManager.SelectionChanged += OnSelectionChanged;
 			DataStateObserver.Instance.DataChanged += OnLinksDeleted;
-
+			
+			_quickEditor = new QuickEditManager(barSubItemLinkPropertiesQuickTools);
+			_quickEditor.OnSettingsChanged += OnQuickSettingsChange;
+			popupMenuLinkProperties.CloseUp += OnLinkPropertiesMenuCloseUp;
+			
 			// 
 			// grFiles
 			// 
@@ -212,7 +217,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 
 		public void EditLinkSettings(LinkSettingsType settingsType)
 		{
-			LinkRow selectedRow = SelectedLinkRow;
+			var selectedRow = SelectedLinkRow;
 			if (selectedRow == null) return;
 			if (SettingsEditorFactory.Run(selectedRow.Source, settingsType) != DialogResult.OK) return;
 			selectedRow.Info.Recalc();
@@ -254,7 +259,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 		private void DeleteLinks()
 		{
 			if (MainController.Instance.PopupMessages.ShowQuestion("Are You sure You want to remove links?") != DialogResult.Yes) return;
-			foreach (LinkRow linkRow in grFiles.Rows.OfType<LinkRow>().ToList())
+			foreach (var linkRow in grFiles.Rows.OfType<LinkRow>().ToList())
 				linkRow.Delete(true);
 			UpdateGridSize();
 			if (DataChanged != null)
@@ -310,9 +315,19 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 		{
 			grFiles.ClearSelection();
 			DataSource.SortLinksByDisplayName();
-			List<LinkRow> rows = grFiles.Rows.OfType<LinkRow>().ToList();
+			var rows = grFiles.Rows.OfType<LinkRow>().ToList();
 			grFiles.Rows.Clear();
 			grFiles.Rows.AddRange(rows.OrderBy(linkRow => linkRow.Source.Order).ToArray());
+			if (DataChanged != null)
+				DataChanged(this, EventArgs.Empty);
+		}
+
+		private void OnQuickSettingsChange(object sender, EventArgs e)
+		{
+			var selectedRow = SelectedLinkRow;
+			if (selectedRow == null) return;
+			selectedRow.Info.Recalc();
+			grFiles.Refresh();
 			if (DataChanged != null)
 				DataChanged(this, EventArgs.Empty);
 		}
@@ -470,7 +485,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 		{
 			if (e.ChangeType != DataChangeType.LinksDeleted) return;
 			var linksDeletedArgs = (LinksDeletedEventArgs)e;
-			foreach (LinkRow linkRow in grFiles.Rows.OfType<LinkRow>().Where(row => linksDeletedArgs.LinkIds.Any(id => id.Equals(row.Source.ExtId))))
+			foreach (var linkRow in grFiles.Rows
+				.OfType<LinkRow>()
+				.Where(row => linksDeletedArgs.LinkIds.Any(id => id.Equals(row.Source.ExtId))))
 				linkRow.RemoveFromGrid();
 			UpdateGridSize();
 		}
@@ -493,7 +510,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 			if (!FormatState.AllowEdit) return;
 			var linkRow = (LinkRow)grFiles.Rows[e.RowIndex];
 			if (!linkRow.AllowEdit) return;
-			string editValue = grFiles.Rows[e.RowIndex].Cells[e.ColumnIndex].Value as String ?? String.Empty;
+			var editValue = (grFiles.Rows[e.RowIndex].Cells[e.ColumnIndex].Value as String ?? String.Empty).Trim();
 			if (linkRow.Source.DisplayNameWithoutNote == editValue) return;
 			linkRow.Source.Name = editValue;
 			grFiles.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.Font = linkRow.Info.Font;
@@ -755,76 +772,82 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 			linkRow.Selected = true;
 			if (linkRow.Source is LineBreak)
 			{
-				toolStripMenuItemLinkPropertiesOpen.Visible = false;
-				toolStripMenuItemLinkPropertiesAdvanced.Visible = false;
-				toolStripMenuItemLinkPropertiesTags.Visible = false;
-				toolStripMenuItemLinkPropertiesExpirationDate.Visible = false;
-				toolStripMenuItemLinkPropertiesDelete.Text = "Delete this Line Break";
+				barButtonItemLinkPropertiesOpenLink.Visibility = BarItemVisibility.Never;
+				barButtonItemLinkPropertiesFileLocation.Visibility = BarItemVisibility.Never;
+				barButtonItemLinkPropertiesAdvancedSettings.Visibility = BarItemVisibility.Never;
+				barButtonItemLinkPropertiesTags.Visibility = BarItemVisibility.Never;
+				barButtonItemLinkPropertiesExpirationDate.Visibility = BarItemVisibility.Never;
+				barButtonItemLinkPropertiesDelete.Caption = "Delete this Line Break";
 			}
 			else
 			{
-				toolStripMenuItemLinkPropertiesOpen.Visible = true;
-				toolStripMenuItemLinkPropertiesOpenLocation.Visible = linkRow.Source is LibraryFileLink;
-				toolStripMenuItemLinkPropertiesAdvanced.Visible = linkRow.Source is LibraryFolderLink;
-				toolStripMenuItemLinkPropertiesTags.Visible = true;
-				toolStripMenuItemLinkPropertiesExpirationDate.Visible = true;
-				toolStripMenuItemLinkPropertiesDelete.Text = "Delete this Link";
+				barButtonItemLinkPropertiesOpenLink.Visibility = BarItemVisibility.Always;
+				barButtonItemLinkPropertiesFileLocation.Visibility = linkRow.Source is LibraryFileLink ?
+					BarItemVisibility.Always :
+					BarItemVisibility.Never;
+				barButtonItemLinkPropertiesAdvancedSettings.Visibility = linkRow.Source is LibraryFolderLink ?
+					BarItemVisibility.Always :
+					BarItemVisibility.Never;
+				barButtonItemLinkPropertiesTags.Visibility = BarItemVisibility.Always;
+				barButtonItemLinkPropertiesExpirationDate.Visibility = BarItemVisibility.Always;
+				barButtonItemLinkPropertiesDelete.Caption = "Delete this Link";
 			}
-			contextMenuStripLinkProperties.Show(sender as Control, grFiles.PointToClient(Cursor.Position));
+			_quickEditor.LoadLinkSettings(linkRow.Source);
+			popupMenuLinkProperties.ShowPopup(Cursor.Position);
 		}
 		#endregion
 
 		#region Context Menu
 
 		#region Link
-		private void toolStripMenuItemLinkPropertiesOpen_Click(object sender, EventArgs e)
+		private void barButtonItemLinkPropertiesOpenLink_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
 		{
 			OpenLink();
 		}
 
-		private void toolStripMenuItemLinkPropertiesOpenLocation_Click(object sender, EventArgs e)
+		private void barButtonItemLinkPropertiesFileLocation_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
 		{
 			OpenLinkLocation();
 		}
 
-		private void toolStripMenuItemLinkPropertiesDelete_Click(object sender, EventArgs e)
+		private void barButtonItemLinkPropertiesDelete_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
 		{
 			DeleteLink();
 		}
 
-		private void toolStripMenuItemLinkPropertiesNotes_Click(object sender, EventArgs e)
+		private void barButtonItemLinkPropertiesLinkSettings_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
 		{
 			EditLinkSettings(LinkSettingsType.Notes);
 		}
 
-		private void toolStripMenuItemLinkPropertiesTags_Click(object sender, EventArgs e)
+		private void barButtonItemLinkPropertiesAdvancedSettings_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+		{
+			EditLinkSettings(LinkSettingsType.AdvancedSettings);
+		}
+
+		private void barButtonItemLinkPropertiesTags_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
 		{
 			EditLinkSettings(LinkSettingsType.Tags);
 		}
 
-		private void toolStripMenuItemLinkPropertiesExpirationDate_Click(object sender, EventArgs e)
+		private void barButtonItemLinkPropertiesExpirationDate_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
 		{
 			EditLinkSettings(LinkSettingsType.ExpirationDate);
 		}
 
-		private void toolStripMenuItemLinkPropertiesSecurity_Click(object sender, EventArgs e)
+		private void barButtonItemLinkPropertiesSecurity_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
 		{
 			EditLinkSettings(LinkSettingsType.Security);
 		}
 
-		private void toolStripMenuItemLinkPropertiesWidget_Click(object sender, EventArgs e)
+		private void barButtonItemLinkPropertiesWidget_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
 		{
 			EditLinkSettings(LinkSettingsType.Widget);
 		}
 
-		private void toolStripMenuItemLinkPropertiesBanner_Click(object sender, EventArgs e)
+		void OnLinkPropertiesMenuCloseUp(object sender, EventArgs e)
 		{
-			EditLinkSettings(LinkSettingsType.Banner);
-		}
-
-		private void toolStripMenuItemLinkPropertiesAdvanced_Click(object sender, EventArgs e)
-		{
-			EditLinkSettings(LinkSettingsType.AdvancedSettings);
+			_quickEditor.ApplySettings();
 		}
 		#endregion
 

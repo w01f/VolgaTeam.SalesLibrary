@@ -110,7 +110,7 @@
 			this.xtraTabPageAppearance.Controls.Add(this.colorEditBackColor);
 			this.xtraTabPageAppearance.Controls.Add(this.ckEnableText);
 			this.xtraTabPageAppearance.Name = "xtraTabPageAppearance";
-			this.xtraTabPageAppearance.Size = new System.Drawing.Size(782, 545);
+			this.xtraTabPageAppearance.Size = new System.Drawing.Size(778, 542);
 			this.xtraTabPageAppearance.Text = "Appearance";
 			// 
 			// laColumn1Alignment
@@ -219,6 +219,8 @@
 			this.colorEditForeColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
 			this.colorEditForeColor.Properties.ColorAlignment = DevExpress.Utils.HorzAlignment.Center;
+			this.colorEditForeColor.Properties.ShowSystemColors = false;
+			this.colorEditForeColor.Properties.ShowWebColors = true;
 			this.colorEditForeColor.Size = new System.Drawing.Size(100, 22);
 			this.colorEditForeColor.StyleController = this.styleController;
 			this.colorEditForeColor.TabIndex = 54;
@@ -275,6 +277,8 @@
 			this.colorEditBackColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
 			this.colorEditBackColor.Properties.ColorAlignment = DevExpress.Utils.HorzAlignment.Center;
+			this.colorEditBackColor.Properties.ShowSystemColors = false;
+			this.colorEditBackColor.Properties.ShowWebColors = true;
 			this.colorEditBackColor.Size = new System.Drawing.Size(100, 22);
 			this.colorEditBackColor.StyleController = this.styleController;
 			this.colorEditBackColor.TabIndex = 53;
@@ -298,7 +302,7 @@
 			this.xtraTabPageWidget.Appearance.PageClient.ForeColor = System.Drawing.Color.Black;
 			this.xtraTabPageWidget.Appearance.PageClient.Options.UseForeColor = true;
 			this.xtraTabPageWidget.Name = "xtraTabPageWidget";
-			this.xtraTabPageWidget.Size = new System.Drawing.Size(782, 545);
+			this.xtraTabPageWidget.Size = new System.Drawing.Size(778, 542);
 			this.xtraTabPageWidget.Text = "Widget";
 			// 
 			// xtraTabPageBanner
@@ -306,7 +310,7 @@
 			this.xtraTabPageBanner.Appearance.PageClient.ForeColor = System.Drawing.Color.Black;
 			this.xtraTabPageBanner.Appearance.PageClient.Options.UseForeColor = true;
 			this.xtraTabPageBanner.Name = "xtraTabPageBanner";
-			this.xtraTabPageBanner.Size = new System.Drawing.Size(782, 545);
+			this.xtraTabPageBanner.Size = new System.Drawing.Size(778, 542);
 			this.xtraTabPageBanner.Text = "Banner";
 			// 
 			// ckApplyForAllColumnTitles

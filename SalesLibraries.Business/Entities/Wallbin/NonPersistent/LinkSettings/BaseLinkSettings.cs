@@ -7,6 +7,12 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 {
 	public abstract class BaseLinkSettings : SettingsContainer
 	{
+		public const string PredefinedNoteNone = "None";
+		public const string PredefinedNoteNew = "NEW!";
+		public const string PredefinedNoteUpdated = "UPDATED!";
+		public const string PredefinedNoteSellThis = "SELL THIS!";
+		public const string PredefinedNoteAttention = "ATTENTION!";
+
 		protected string _note;
 		public virtual string Note
 		{
@@ -34,8 +40,8 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 			}
 		}
 
-		private Color _foreColor;
-		public Color ForeColor
+		private Color? _foreColor;
+		public Color? ForeColor
 		{
 			get { return _foreColor; }
 			set
@@ -50,11 +56,6 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 		protected BaseLibraryLink ParentLink
 		{
 			get { return (BaseLibraryLink)Parent; }
-		}
-
-		protected BaseLinkSettings()
-		{
-			_foreColor = Color.Black;
 		}
 	}
 }

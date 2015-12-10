@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Drawing;
-using DevComponents.DotNetBar.Metro;
 
 namespace SalesLibraries.CommonGUI.BackgroundProcesses
 {
@@ -26,6 +25,7 @@ namespace SalesLibraries.CommonGUI.BackgroundProcesses
 
 		private void FormProgress_Shown(object sender, EventArgs e)
 		{
+			BackColor = Color.Green;
 			laTitle.Focus();
 			circularProgress.IsRunning = true;
 		}

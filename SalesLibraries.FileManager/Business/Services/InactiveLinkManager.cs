@@ -59,6 +59,10 @@ namespace SalesLibraries.FileManager.Business.Services
 			using (var form = new FormDeleteInactiveLinks(inactiveLinks))
 			{
 				if (form.ShowDialog(MainController.Instance.MainForm) != DialogResult.OK) return;
+				var deletedLinks = form.InactiveLinks
+					.Where(link => link.IsDeleted)
+					.Select(link => link.Link)
+					.ToList();
 				var changedLibraries = form.InactiveLinks
 					.Where(link => link.IsDeleted || link.IsChanged)
 					.Select(link => link.Link.ParentLibrary)
@@ -66,6 +70,8 @@ namespace SalesLibraries.FileManager.Business.Services
 					.ToList();
 				MainController.Instance.ProcessManager.Run("Saving Changes...", cancelationToken =>
 				{
+					foreach (var deletedLink in deletedLinks)
+						deletedLink.DeleteLink(true);
 					foreach (var library in changedLibraries)
 						library.Context.SaveChanges();
 				});

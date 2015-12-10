@@ -252,6 +252,9 @@
 			// 
 			// pnSecurityUserList
 			// 
+			this.pnSecurityUserList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.pnSecurityUserList.Controls.Add(this.buttonXImport);
 			this.pnSecurityUserList.Controls.Add(this.buttonXSecurityUserListClearAll);
 			this.pnSecurityUserList.Controls.Add(this.buttonXSecurityUserListSelectAll);
@@ -393,8 +396,10 @@
 			// 
 			// SecurityOptions
 			// 
+			this.BackColor = System.Drawing.Color.White;
 			this.Controls.Add(this.groupBoxSecurity);
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.Name = "SecurityOptions";
 			this.Padding = new System.Windows.Forms.Padding(5);
 			this.Size = new System.Drawing.Size(531, 541);
 			((System.ComponentModel.ISupportInitialize)(this.gridViewSecurityUsers)).EndInit();

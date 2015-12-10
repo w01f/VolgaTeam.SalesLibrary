@@ -39,12 +39,6 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 				return base.DisplayFont ?? Settings.Font;
 			}
 		}
-
-		[NotMapped, JsonIgnore]
-		public override Color DisplayColor
-		{
-			get { return Settings.ForeColor; }
-		}
 		#endregion
 
 		public LineBreak()

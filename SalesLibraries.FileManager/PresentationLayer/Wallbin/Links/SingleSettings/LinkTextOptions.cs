@@ -58,7 +58,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			rbLinkSpecialFormat.Checked = ((LibraryObjectLinkSettings)_data.Settings).IsSpecialFormat;
 			buttonEditLinkSpecialFont.EditValue = _data.Settings.Font != null ? Utils.FontToString(_data.Settings.Font) : null;
 			buttonEditLinkSpecialFont.Tag = _data.Settings.Font;
-			colorEditLinkSpecialColor.Color = _data.Settings.ForeColor;
+			colorEditLinkSpecialColor.Color = _data.DisplayColor;
 		}
 
 		public void SaveData()
@@ -66,22 +66,16 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			((LibraryObjectLinkSettings)_data.Settings).IsBold = rbLinkBoldFormat.Checked;
 			((LibraryObjectLinkSettings)_data.Settings).IsSpecialFormat = rbLinkSpecialFormat.Checked;
 			if (((LibraryObjectLinkSettings)_data.Settings).IsSpecialFormat)
-			{
 				_data.Settings.Font = buttonEditLinkSpecialFont.Tag as Font;
-				_data.Settings.ForeColor = colorEditLinkSpecialColor.Color;
-			}
 			else
-			{
 				_data.Settings.Font = null;
-				_data.Settings.ForeColor = Color.Black;
-			}
+			if (_data.DisplayColor != colorEditLinkSpecialColor.Color)
+				_data.Settings.ForeColor = colorEditLinkSpecialColor.Color;
 		}
 
 		private void rbLinkSpecialFormat_CheckedChanged(object sender, EventArgs e)
 		{
 			buttonEditLinkSpecialFont.Enabled = rbLinkSpecialFormat.Checked;
-			labelControlForeColor.Enabled = rbLinkSpecialFormat.Checked;
-			colorEditLinkSpecialColor.Enabled = rbLinkSpecialFormat.Checked;
 		}
 
 		private void FontEdit_Click(object sender, EventArgs e)

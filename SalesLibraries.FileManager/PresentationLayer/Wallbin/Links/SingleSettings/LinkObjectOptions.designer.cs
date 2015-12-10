@@ -208,8 +208,6 @@
 			// 
 			// LinkObjectOptions
 			// 
-			this.Appearance.PageClient.BackColor = System.Drawing.Color.White;
-			this.Appearance.PageClient.Options.UseBackColor = true;
 			this.Controls.Add(this.labelControlHoverNoteDescription);
 			this.Controls.Add(this.edCustomNote);
 			this.Controls.Add(this.labelControlTitle);

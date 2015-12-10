@@ -282,10 +282,10 @@ namespace SalesLibraries.FileManager.Business.Services
 				var objectSource = (LibraryObjectLinkSettings)source;
 				target.hoverNote = objectSource.HoverNote;
 				target.isBold = objectSource.IsBold;
+				target.foreColor = ColorTranslator.ToHtml(source.ForeColor.HasValue ? source.ForeColor.Value : Color.Black);
 				target.isSpecialFormat = objectSource.IsSpecialFormat;
 				if (objectSource.IsSpecialFormat)
 				{
-					target.foreColor = ColorTranslator.ToHtml(source.ForeColor);
 					if (source.Font != null)
 					{
 						target.font = new Font();
@@ -293,10 +293,7 @@ namespace SalesLibraries.FileManager.Business.Services
 					}
 				}
 				else
-				{
-					target.foreColor = ColorTranslator.ToHtml(Color.Black);
 					target.font = null;
-				}
 			}
 			if (source is VideoLinkSettings)
 				target.forcePreview = ((VideoLinkSettings)source).ForcePreview;
@@ -319,7 +316,7 @@ namespace SalesLibraries.FileManager.Business.Services
 			LineBreakSettings source)
 		{
 			target.note = source.Note;
-			target.foreColor = ColorTranslator.ToHtml(source.ForeColor);
+			target.foreColor = ColorTranslator.ToHtml(source.ForeColor.HasValue ? source.ForeColor.Value : Color.Black);
 			target.font = new Font();
 			target.font.ImportData(source.Font);
 			target.dateModify = DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss tt");
@@ -368,7 +365,7 @@ namespace SalesLibraries.FileManager.Business.Services
 					.GetPreviewLinksByFormat(PreviewFormats.ThumbnailsForMobile)
 					.Select(path => path.Replace(source.Library.Path, String.Empty))
 					.ToArray();
-				
+
 				var thumbnails = source.GetPreviewLinksByFormat(PreviewFormats.Thumbnails).ToList();
 				target.thumbsLinks = thumbnails.Select(path => path.Replace(source.Library.Path, String.Empty)).ToArray();
 				if (target.thumbsLinks.Any())

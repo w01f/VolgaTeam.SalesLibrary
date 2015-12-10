@@ -28,8 +28,9 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.components = new System.ComponentModel.Container();
 			this.memoEditNote = new DevExpress.XtraEditors.MemoEdit();
-			this.styleController = new DevExpress.XtraEditors.StyleController();
+			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
 			this.laNote = new System.Windows.Forms.Label();
 			this.laFont = new System.Windows.Forms.Label();
 			this.buttonEditLineBreakFont = new DevExpress.XtraEditors.ButtonEdit();
@@ -125,6 +126,8 @@
 			this.colorEditLineBreakFontColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
 			this.colorEditLineBreakFontColor.Properties.ColorAlignment = DevExpress.Utils.HorzAlignment.Center;
+			this.colorEditLineBreakFontColor.Properties.ShowSystemColors = false;
+			this.colorEditLineBreakFontColor.Properties.ShowWebColors = true;
 			this.colorEditLineBreakFontColor.Size = new System.Drawing.Size(105, 22);
 			this.colorEditLineBreakFontColor.StyleController = this.styleController;
 			this.colorEditLineBreakFontColor.TabIndex = 35;

@@ -192,12 +192,14 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		}
 
 		[NotMapped, JsonIgnore]
-		public virtual Color DisplayColor
+		public Color DisplayColor
 		{
 			get
 			{
 				if (Banner.Enable && Banner.ShowText)
 					return Banner.ForeColor;
+				if (Settings.ForeColor.HasValue)
+					return Settings.ForeColor.Value;
 				return Folder.Settings.ForeWindowColor;
 			}
 		}
