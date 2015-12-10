@@ -36,13 +36,11 @@
 			// pnBody
 			// 
 			this.pnBody.Controls.Add(this.buttonXOpen);
-			this.pnBody.Size = new System.Drawing.Size(312, 89);
 			this.pnBody.Controls.SetChildIndex(this.pbLogo, 0);
 			this.pnBody.Controls.SetChildIndex(this.buttonXOpen, 0);
 			// 
 			// laTitle
 			// 
-			this.laTitle.Size = new System.Drawing.Size(312, 31);
 			this.laTitle.Text = "Change your Email settings";
 			// 
 			// pbLogo
@@ -66,7 +64,6 @@
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.Name = "EmailSettingsControl";
-			this.Size = new System.Drawing.Size(334, 173);
 			this.pnBody.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.pbLogo)).EndInit();
 			this.ResumeLayout(false);

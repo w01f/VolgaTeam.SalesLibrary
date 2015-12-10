@@ -172,9 +172,6 @@
   <data name="Exit" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Exit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="EmailBinEmpty" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\EmailBinEmpty.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="GalleryCopy" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\GalleryCopy.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -235,9 +232,6 @@
   <data name="FolderContentVideo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\FolderContentVideo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="EmailBinPdf" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\EmailBinPdf.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="EmailBinBarButtonLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\EmailBinBarButtonLogo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -252,9 +246,6 @@
   </data>
   <data name="QuickViewEmail" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\QuickViewEmail.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="EmailBinZip" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\EmailBinZip.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="SettingsLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SettingsLogo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -282,9 +273,6 @@
   </data>
   <data name="QuickViewUserSettings" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\QuickViewUserSettings.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="EmailBinSend" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\EmailBinSend.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="QuickViewPrint" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\QuickViewPrint.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

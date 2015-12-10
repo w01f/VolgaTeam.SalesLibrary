@@ -79,6 +79,8 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.Views
 				PageContainer.Page.Library.Name,
 			}));
 
+			var libraryContainerVisibility = MainController.Instance.MainForm.itemContainerHomeWallbinLibrary.Visible;
+			MainController.Instance.MainForm.itemContainerHomeWallbinLibrary.Visible = false;
 			var pageLogoPath = Path.Combine(pageLogoFolder.LocalPath, String.Format("page{0}.png", PageContainer.Page.Order + 1));
 			if (!File.Exists(pageLogoPath))
 				pageLogoPath = Path.Combine(pageLogoFolder.LocalPath, "no_logo.png");
@@ -86,6 +88,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.Views
 				MainController.Instance.MainForm.labelItemHomeWallbinLogo.Image = Image.FromFile(pageLogoPath);
 			else
 				MainController.Instance.MainForm.labelItemHomeWallbinLogo.Image = Properties.Resources.SettingsLogo;
+			MainController.Instance.MainForm.itemContainerHomeWallbinLibrary.Visible = libraryContainerVisibility;
 			MainController.Instance.MainForm.ribbonBarHomeWallbin.RecalcLayout();
 			MainController.Instance.MainForm.ribbonPanelHome.PerformLayout();
 

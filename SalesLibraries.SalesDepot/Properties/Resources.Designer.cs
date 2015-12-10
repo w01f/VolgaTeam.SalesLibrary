@@ -113,49 +113,9 @@ namespace SalesLibraries.SalesDepot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap EmailBinEmpty {
-            get {
-                object obj = ResourceManager.GetObject("EmailBinEmpty", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap EmailBinLogo {
             get {
                 object obj = ResourceManager.GetObject("EmailBinLogo", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap EmailBinPdf {
-            get {
-                object obj = ResourceManager.GetObject("EmailBinPdf", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap EmailBinSend {
-            get {
-                object obj = ResourceManager.GetObject("EmailBinSend", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap EmailBinZip {
-            get {
-                object obj = ResourceManager.GetObject("EmailBinZip", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

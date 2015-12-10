@@ -44,29 +44,29 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.EmailBin
 
 		private void LoadEmailBinOptions()
 		{
-			buttonXPDF.Checked = MainController.Instance.Settings.EmailBinSettings.EmailBinSendAsPdf;
-			buttonXZip.Checked = MainController.Instance.Settings.EmailBinSettings.EmailBinSendAsZip;
+			checkEditConvertPdf.Checked = MainController.Instance.Settings.EmailBinSettings.EmailBinSendAsPdf;
+			checkEditConvertZip.Checked = MainController.Instance.Settings.EmailBinSettings.EmailBinSendAsZip;
 		}
 
 		private void UpdateEmailBinButtons()
 		{
 			buttonXCreateEmail.Enabled = MainController.Instance.EmailBin.EmailLinks.Any();
 			buttonXEmptyEmailBin.Enabled = MainController.Instance.EmailBin.EmailLinks.Any();
-			buttonXPDF.Enabled = MainController.Instance.EmailBin.EmailLinks.Any();
-			buttonXZip.Enabled = MainController.Instance.EmailBin.EmailLinks.Any();
+			checkEditConvertPdf.Enabled = MainController.Instance.EmailBin.EmailLinks.Any();
+			checkEditConvertZip.Enabled = MainController.Instance.EmailBin.EmailLinks.Any();
 		}
 
-		private void buttonXPDF_CheckedChanged(object sender, EventArgs e)
+		private void OnPDFToggleCheckedChanged(object sender, EventArgs e)
 		{
 			if (_isLoading) return;
-			MainController.Instance.Settings.EmailBinSettings.EmailBinSendAsPdf = buttonXPDF.Checked;
+			MainController.Instance.Settings.EmailBinSettings.EmailBinSendAsPdf = checkEditConvertPdf.Checked;
 			MainController.Instance.Settings.SaveSettings();
 		}
 
-		private void buttonXZip_CheckedChanged(object sender, EventArgs e)
+		private void OnZipToggleCheckedChanged(object sender, EventArgs e)
 		{
 			if (_isLoading) return;
-			MainController.Instance.Settings.EmailBinSettings.EmailBinSendAsZip = buttonXZip.Checked;
+			MainController.Instance.Settings.EmailBinSettings.EmailBinSendAsZip = checkEditConvertZip.Checked;
 			MainController.Instance.Settings.SaveSettings();
 		}
 
@@ -97,7 +97,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.EmailBin
 				if (!powerPointProcessor.Connect()) return;
 
 				var emailFiles = new List<string>();
-				if (buttonXPDF.Checked)
+				if (checkEditConvertPdf.Checked)
 				{
 					var convertResult = true;
 					foreach (var item in MainController.Instance.EmailBin.EmailLinks)

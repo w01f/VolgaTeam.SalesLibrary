@@ -13,7 +13,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Settings
 			InitializeComponent();
 		}
 
-		public void LoadData()
+		public override void LoadData()
 		{
 			_allowToSave = false;
 			buttonXEnabled.Checked = !MainController.Instance.Settings.RunPowerPointWhenNeeded.HasValue;

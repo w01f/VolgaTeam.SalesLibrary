@@ -38,7 +38,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Settings
 			pbLogo.Image = Resources.SettingsPowerPoint;
 		}
 
-		public void LoadData()
+		public override void LoadData()
 		{
 			_allowToSave = false;
 			switch (MainController.Instance.Settings.LinkLaunchSettings.PowerPoint)
@@ -80,7 +80,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Settings
 			pbLogo.Image = Resources.SettingsPDF;
 		}
 
-		public void LoadData()
+		public override void LoadData()
 		{
 			_allowToSave = false;
 			switch (MainController.Instance.Settings.LinkLaunchSettings.PDF)
@@ -122,7 +122,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Settings
 			pbLogo.Image = Resources.SettingsWord;
 		}
 
-		public void LoadData()
+		public override void LoadData()
 		{
 			_allowToSave = false;
 			switch (MainController.Instance.Settings.LinkLaunchSettings.Word)
@@ -164,7 +164,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Settings
 			pbLogo.Image = Resources.SettingsExcel;
 		}
 
-		public void LoadData()
+		public override void LoadData()
 		{
 			_allowToSave = false;
 			switch (MainController.Instance.Settings.LinkLaunchSettings.Excel)
@@ -206,7 +206,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Settings
 			pbLogo.Image = Resources.SettingsVideo;
 		}
 
-		public void LoadData()
+		public override void LoadData()
 		{
 			_allowToSave = false;
 			switch (MainController.Instance.Settings.LinkLaunchSettings.Video)
@@ -248,7 +248,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Settings
 			pbLogo.Image = Resources.SettingsFolder;
 		}
 
-		public void LoadData()
+		public override void LoadData()
 		{
 			_allowToSave = false;
 			switch (MainController.Instance.Settings.LinkLaunchSettings.Folder)

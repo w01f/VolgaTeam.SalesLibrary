@@ -45,7 +45,7 @@
 			this.pnBorders.Controls.Add(this.pnSeparator);
 			this.pnBorders.Controls.Add(this.laTitle);
 			this.pnBorders.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.pnBorders.Location = new System.Drawing.Point(10, 25);
+			this.pnBorders.Location = new System.Drawing.Point(10, 5);
 			this.pnBorders.Name = "pnBorders";
 			this.pnBorders.Padding = new System.Windows.Forms.Padding(1);
 			this.pnBorders.Size = new System.Drawing.Size(314, 123);
@@ -97,8 +97,8 @@
 			this.Controls.Add(this.pnBorders);
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.Name = "BaseSettingsControl";
-			this.Padding = new System.Windows.Forms.Padding(10, 25, 10, 25);
-			this.Size = new System.Drawing.Size(334, 173);
+			this.Padding = new System.Windows.Forms.Padding(10, 5, 10, 5);
+			this.Size = new System.Drawing.Size(334, 133);
 			this.pnBorders.ResumeLayout(false);
 			this.pnBody.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.pbLogo)).EndInit();

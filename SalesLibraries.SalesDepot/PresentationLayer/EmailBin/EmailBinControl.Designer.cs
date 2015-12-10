@@ -34,15 +34,18 @@
 			this.gridColumnName = new DevExpress.XtraGrid.Columns.GridColumn();
 			this.repositoryItemButtonEdit = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
 			this.pnBottom = new System.Windows.Forms.Panel();
-			this.laEmailBinDescription = new System.Windows.Forms.Label();
-			this.buttonXPDF = new DevComponents.DotNetBar.ButtonX();
-			this.buttonXZip = new DevComponents.DotNetBar.ButtonX();
+			this.checkEditConvertZip = new DevExpress.XtraEditors.CheckEdit();
+			this.styleController = new DevExpress.XtraEditors.StyleController();
+			this.checkEditConvertPdf = new DevExpress.XtraEditors.CheckEdit();
 			this.buttonXEmptyEmailBin = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXCreateEmail = new DevComponents.DotNetBar.ButtonX();
 			((System.ComponentModel.ISupportInitialize)(this.gridControlFiles)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.gridViewFiles)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit)).BeginInit();
 			this.pnBottom.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditConvertZip.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditConvertPdf.Properties)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// gridControlFiles
@@ -55,7 +58,7 @@
 			this.gridControlFiles.Name = "gridControlFiles";
 			this.gridControlFiles.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemButtonEdit});
-			this.gridControlFiles.Size = new System.Drawing.Size(436, 179);
+			this.gridControlFiles.Size = new System.Drawing.Size(436, 340);
 			this.gridControlFiles.TabIndex = 5;
 			this.gridControlFiles.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewFiles});
@@ -110,107 +113,86 @@
 			// 
 			// pnBottom
 			// 
-			this.pnBottom.Controls.Add(this.laEmailBinDescription);
-			this.pnBottom.Controls.Add(this.buttonXPDF);
-			this.pnBottom.Controls.Add(this.buttonXZip);
+			this.pnBottom.Controls.Add(this.checkEditConvertZip);
+			this.pnBottom.Controls.Add(this.checkEditConvertPdf);
 			this.pnBottom.Controls.Add(this.buttonXEmptyEmailBin);
 			this.pnBottom.Controls.Add(this.buttonXCreateEmail);
 			this.pnBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
 			this.pnBottom.ForeColor = System.Drawing.Color.Black;
-			this.pnBottom.Location = new System.Drawing.Point(0, 179);
+			this.pnBottom.Location = new System.Drawing.Point(0, 340);
 			this.pnBottom.Name = "pnBottom";
 			this.pnBottom.Padding = new System.Windows.Forms.Padding(10, 0, 10, 10);
-			this.pnBottom.Size = new System.Drawing.Size(436, 326);
+			this.pnBottom.Size = new System.Drawing.Size(436, 165);
 			this.pnBottom.TabIndex = 4;
 			// 
-			// laEmailBinDescription
+			// checkEditConvertZip
 			// 
-			this.laEmailBinDescription.Dock = System.Windows.Forms.DockStyle.Top;
-			this.laEmailBinDescription.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.laEmailBinDescription.ForeColor = System.Drawing.Color.DimGray;
-			this.laEmailBinDescription.Location = new System.Drawing.Point(10, 0);
-			this.laEmailBinDescription.Name = "laEmailBinDescription";
-			this.laEmailBinDescription.Size = new System.Drawing.Size(416, 99);
-			this.laEmailBinDescription.TabIndex = 6;
-			this.laEmailBinDescription.Text = "You can Email some files to clients  with Outlook.\r\n\r\nRight Click on the file  if" +
-    " you want to ATTACH IT to an  email.";
-			this.laEmailBinDescription.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.checkEditConvertZip.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.checkEditConvertZip.Location = new System.Drawing.Point(12, 56);
+			this.checkEditConvertZip.Name = "checkEditConvertZip";
+			this.checkEditConvertZip.Properties.AutoWidth = true;
+			this.checkEditConvertZip.Properties.Caption = "Compress All files into a zip";
+			this.checkEditConvertZip.Size = new System.Drawing.Size(184, 20);
+			this.checkEditConvertZip.StyleController = this.styleController;
+			this.checkEditConvertZip.TabIndex = 7;
+			this.checkEditConvertZip.CheckedChanged += new System.EventHandler(this.OnZipToggleCheckedChanged);
 			// 
-			// buttonXPDF
+			// styleController
 			// 
-			this.buttonXPDF.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-			this.buttonXPDF.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonXPDF.AutoCheckOnClick = true;
-			this.buttonXPDF.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-			this.buttonXPDF.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.buttonXPDF.Image = global::SalesLibraries.SalesDepot.Properties.Resources.EmailBinPdf;
-			this.buttonXPDF.ImageFixedSize = new System.Drawing.Size(40, 40);
-			this.buttonXPDF.Location = new System.Drawing.Point(12, 104);
-			this.buttonXPDF.Name = "buttonXPDF";
-			this.buttonXPDF.Size = new System.Drawing.Size(413, 47);
-			this.buttonXPDF.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.buttonXPDF.TabIndex = 5;
-			this.buttonXPDF.Text = "   PowerPoint to PDF";
-			this.buttonXPDF.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
-			this.buttonXPDF.TextColor = System.Drawing.Color.Black;
-			this.buttonXPDF.CheckedChanged += new System.EventHandler(this.buttonXPDF_CheckedChanged);
+			this.styleController.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.styleController.Appearance.Options.UseFont = true;
+			this.styleController.AppearanceDisabled.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.styleController.AppearanceDisabled.Options.UseFont = true;
+			this.styleController.AppearanceDropDown.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.styleController.AppearanceDropDown.Options.UseFont = true;
+			this.styleController.AppearanceDropDownHeader.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.styleController.AppearanceDropDownHeader.Options.UseFont = true;
+			this.styleController.AppearanceFocused.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.styleController.AppearanceFocused.Options.UseFont = true;
+			this.styleController.AppearanceReadOnly.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.styleController.AppearanceReadOnly.Options.UseFont = true;
 			// 
-			// buttonXZip
+			// checkEditConvertPdf
 			// 
-			this.buttonXZip.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-			this.buttonXZip.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonXZip.AutoCheckOnClick = true;
-			this.buttonXZip.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-			this.buttonXZip.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.buttonXZip.Image = global::SalesLibraries.SalesDepot.Properties.Resources.EmailBinZip;
-			this.buttonXZip.ImageFixedSize = new System.Drawing.Size(40, 40);
-			this.buttonXZip.Location = new System.Drawing.Point(12, 157);
-			this.buttonXZip.Name = "buttonXZip";
-			this.buttonXZip.Size = new System.Drawing.Size(413, 47);
-			this.buttonXZip.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.buttonXZip.TabIndex = 4;
-			this.buttonXZip.Text = "   Zip Attachment";
-			this.buttonXZip.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
-			this.buttonXZip.TextColor = System.Drawing.Color.Black;
-			this.buttonXZip.CheckedChanged += new System.EventHandler(this.buttonXZip_CheckedChanged);
+			this.checkEditConvertPdf.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.checkEditConvertPdf.Location = new System.Drawing.Point(12, 18);
+			this.checkEditConvertPdf.Name = "checkEditConvertPdf";
+			this.checkEditConvertPdf.Properties.AutoWidth = true;
+			this.checkEditConvertPdf.Properties.Caption = "Convert All PPT files to PDF";
+			this.checkEditConvertPdf.Size = new System.Drawing.Size(185, 20);
+			this.checkEditConvertPdf.StyleController = this.styleController;
+			this.checkEditConvertPdf.TabIndex = 6;
+			this.checkEditConvertPdf.CheckedChanged += new System.EventHandler(this.OnPDFToggleCheckedChanged);
 			// 
 			// buttonXEmptyEmailBin
 			// 
 			this.buttonXEmptyEmailBin.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-			this.buttonXEmptyEmailBin.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonXEmptyEmailBin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.buttonXEmptyEmailBin.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-			this.buttonXEmptyEmailBin.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.buttonXEmptyEmailBin.Image = global::SalesLibraries.SalesDepot.Properties.Resources.EmailBinEmpty;
+			this.buttonXEmptyEmailBin.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.buttonXEmptyEmailBin.ImageFixedSize = new System.Drawing.Size(40, 40);
-			this.buttonXEmptyEmailBin.Location = new System.Drawing.Point(12, 210);
+			this.buttonXEmptyEmailBin.Location = new System.Drawing.Point(13, 112);
 			this.buttonXEmptyEmailBin.Name = "buttonXEmptyEmailBin";
-			this.buttonXEmptyEmailBin.Size = new System.Drawing.Size(413, 47);
+			this.buttonXEmptyEmailBin.Size = new System.Drawing.Size(123, 37);
 			this.buttonXEmptyEmailBin.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXEmptyEmailBin.TabIndex = 3;
-			this.buttonXEmptyEmailBin.Text = "   Empty Email Bin";
-			this.buttonXEmptyEmailBin.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
+			this.buttonXEmptyEmailBin.Text = "Empty Email Bin";
 			this.buttonXEmptyEmailBin.TextColor = System.Drawing.Color.Black;
 			this.buttonXEmptyEmailBin.Click += new System.EventHandler(this.buttonXEmptyEmailBin_Click);
 			// 
 			// buttonXCreateEmail
 			// 
 			this.buttonXCreateEmail.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-			this.buttonXCreateEmail.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonXCreateEmail.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXCreateEmail.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-			this.buttonXCreateEmail.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.buttonXCreateEmail.Image = global::SalesLibraries.SalesDepot.Properties.Resources.EmailBinSend;
+			this.buttonXCreateEmail.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.buttonXCreateEmail.ImageFixedSize = new System.Drawing.Size(42, 40);
-			this.buttonXCreateEmail.Location = new System.Drawing.Point(12, 263);
+			this.buttonXCreateEmail.Location = new System.Drawing.Point(298, 112);
 			this.buttonXCreateEmail.Name = "buttonXCreateEmail";
-			this.buttonXCreateEmail.Size = new System.Drawing.Size(413, 47);
+			this.buttonXCreateEmail.Size = new System.Drawing.Size(125, 37);
 			this.buttonXCreateEmail.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXCreateEmail.TabIndex = 0;
-			this.buttonXCreateEmail.Text = "  Create Email";
-			this.buttonXCreateEmail.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
+			this.buttonXCreateEmail.Text = "Create Email";
 			this.buttonXCreateEmail.TextColor = System.Drawing.Color.Black;
 			this.buttonXCreateEmail.Click += new System.EventHandler(this.buttonXCreateEmail_Click);
 			// 
@@ -227,6 +209,10 @@
 			((System.ComponentModel.ISupportInitialize)(this.gridViewFiles)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit)).EndInit();
 			this.pnBottom.ResumeLayout(false);
+			this.pnBottom.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditConvertZip.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditConvertPdf.Properties)).EndInit();
 			this.ResumeLayout(false);
 
 		}
@@ -237,11 +223,11 @@
 		private DevExpress.XtraGrid.Views.Grid.GridView gridViewFiles;
 		private DevExpress.XtraGrid.Columns.GridColumn gridColumnName;
 		private System.Windows.Forms.Panel pnBottom;
-		private System.Windows.Forms.Label laEmailBinDescription;
-		private DevComponents.DotNetBar.ButtonX buttonXPDF;
-		private DevComponents.DotNetBar.ButtonX buttonXZip;
 		private DevComponents.DotNetBar.ButtonX buttonXEmptyEmailBin;
 		private DevComponents.DotNetBar.ButtonX buttonXCreateEmail;
 		private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repositoryItemButtonEdit;
+		private DevExpress.XtraEditors.CheckEdit checkEditConvertZip;
+		private DevExpress.XtraEditors.StyleController styleController;
+		private DevExpress.XtraEditors.CheckEdit checkEditConvertPdf;
 	}
 }

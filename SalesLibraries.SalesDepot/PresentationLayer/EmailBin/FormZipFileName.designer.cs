@@ -33,8 +33,10 @@
 			this.buttonXOK = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXCancel = new DevComponents.DotNetBar.ButtonX();
 			this.textEditFileName = new DevExpress.XtraEditors.TextEdit();
+			this.styleController = new DevExpress.XtraEditors.StyleController();
 			((System.ComponentModel.ISupportInitialize)(this.pbLogo)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditFileName.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// pbLogo
@@ -97,7 +99,23 @@
 			this.textEditFileName.Properties.Appearance.Options.UseForeColor = true;
 			this.textEditFileName.Properties.NullText = "Type here";
 			this.textEditFileName.Size = new System.Drawing.Size(282, 22);
+			this.textEditFileName.StyleController = this.styleController;
 			this.textEditFileName.TabIndex = 0;
+			// 
+			// styleController
+			// 
+			this.styleController.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.styleController.Appearance.Options.UseFont = true;
+			this.styleController.AppearanceDisabled.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.styleController.AppearanceDisabled.Options.UseFont = true;
+			this.styleController.AppearanceDropDown.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.styleController.AppearanceDropDown.Options.UseFont = true;
+			this.styleController.AppearanceDropDownHeader.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.styleController.AppearanceDropDownHeader.Options.UseFont = true;
+			this.styleController.AppearanceFocused.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.styleController.AppearanceFocused.Options.UseFont = true;
+			this.styleController.AppearanceReadOnly.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.styleController.AppearanceReadOnly.Options.UseFont = true;
 			// 
 			// FormZipFileName
 			// 
@@ -120,6 +138,7 @@
 			this.Text = "Name the Zip File Before you Send it:";
 			((System.ComponentModel.ISupportInitialize)(this.pbLogo)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditFileName.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
 			this.ResumeLayout(false);
 
         }
@@ -131,5 +150,6 @@
         private DevComponents.DotNetBar.ButtonX buttonXOK;
         private DevComponents.DotNetBar.ButtonX buttonXCancel;
         private DevExpress.XtraEditors.TextEdit textEditFileName;
+		private DevExpress.XtraEditors.StyleController styleController;
     }
 }

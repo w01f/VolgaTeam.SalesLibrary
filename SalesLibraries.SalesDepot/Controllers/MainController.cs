@@ -108,7 +108,7 @@ namespace SalesLibraries.SalesDepot.Controllers
 			};
 
 			ProcessManager.RunStartProcess(
-				"Checking data version...",
+				"Connecting to adSALEScloud…",
 				"*This should not take long…",
 				cancellationToken => AsyncHelper.RunSync(FileStorageManager.Instance.Init));
 
@@ -126,7 +126,7 @@ namespace SalesLibraries.SalesDepot.Controllers
 						progressDescription = "*This may take a few minutes…";
 						break;
 					case DataActualityState.Outdated:
-						progressTitle = "Updating data from server...";
+						progressTitle = "Refreshing data from adSALEScloud…";
 						progressDescription = "*This may take a few minutes…";
 						break;
 					default:

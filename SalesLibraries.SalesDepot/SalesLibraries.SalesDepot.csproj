@@ -758,15 +758,6 @@
     <None Include="Resources\CalendarDisclaimerLogo.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\EmailBinEmpty.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\EmailBinPdf.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\EmailBinSend.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\SettingsEmail.png" />
   </ItemGroup>
   <ItemGroup>
@@ -801,9 +792,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\EmailBinBarButtonLogo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\EmailBinZip.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\ButtonDelete.png" />

@@ -8,5 +8,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Settings
 		{
 			InitializeComponent();
 		}
+
+		public virtual void LoadData() {}
 	}
 }
