@@ -28,6 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.components = new System.ComponentModel.Container();
 			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
 			this.gridControlFiles = new DevExpress.XtraGrid.GridControl();
 			this.gridViewFiles = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -35,7 +36,7 @@
 			this.repositoryItemButtonEdit = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
 			this.pnBottom = new System.Windows.Forms.Panel();
 			this.checkEditConvertZip = new DevExpress.XtraEditors.CheckEdit();
-			this.styleController = new DevExpress.XtraEditors.StyleController();
+			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
 			this.checkEditConvertPdf = new DevExpress.XtraEditors.CheckEdit();
 			this.buttonXEmptyEmailBin = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXCreateEmail = new DevComponents.DotNetBar.ButtonX();
@@ -62,6 +63,8 @@
 			this.gridControlFiles.TabIndex = 5;
 			this.gridControlFiles.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewFiles});
+			this.gridControlFiles.DragDrop += new System.Windows.Forms.DragEventHandler(this.gridControlFiles_DragDrop);
+			this.gridControlFiles.DragEnter += new System.Windows.Forms.DragEventHandler(this.gridControlFiles_DragEnter);
 			// 
 			// gridViewFiles
 			// 
@@ -128,7 +131,7 @@
 			// checkEditConvertZip
 			// 
 			this.checkEditConvertZip.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.checkEditConvertZip.Location = new System.Drawing.Point(12, 56);
+			this.checkEditConvertZip.Location = new System.Drawing.Point(12, 54);
 			this.checkEditConvertZip.Name = "checkEditConvertZip";
 			this.checkEditConvertZip.Properties.AutoWidth = true;
 			this.checkEditConvertZip.Properties.Caption = "Compress All files into a zip";
@@ -155,7 +158,7 @@
 			// checkEditConvertPdf
 			// 
 			this.checkEditConvertPdf.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.checkEditConvertPdf.Location = new System.Drawing.Point(12, 18);
+			this.checkEditConvertPdf.Location = new System.Drawing.Point(12, 16);
 			this.checkEditConvertPdf.Name = "checkEditConvertPdf";
 			this.checkEditConvertPdf.Properties.AutoWidth = true;
 			this.checkEditConvertPdf.Properties.Caption = "Convert All PPT files to PDF";

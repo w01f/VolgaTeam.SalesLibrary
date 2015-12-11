@@ -149,5 +149,19 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.EmailBin
 					LinkManager.EmailFiles(emailFiles.ToArray());
 			}
 		}
+
+		private void gridControlFiles_DragEnter(object sender, DragEventArgs e)
+		{
+			if (e.Data.GetDataPresent(DataFormats.Serializable, true) && e.Data.GetData(DataFormats.Serializable, true) is LibraryFileLink)
+				e.Effect = DragDropEffects.Copy;
+		}
+
+		private void gridControlFiles_DragDrop(object sender, DragEventArgs e)
+		{
+			if (!e.Data.GetDataPresent(DataFormats.Serializable, true)) return;
+			var fileLink = e.Data.GetData(DataFormats.Serializable, true) as LibraryFileLink;
+			if (fileLink == null) return;
+			MainController.Instance.EmailBin.AddLink(fileLink);
+		}
 	}
 }
