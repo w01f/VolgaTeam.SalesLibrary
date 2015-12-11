@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS `tbl_link` (
   `format` varchar(256) NOT NULL,
   `order` int(11) NOT NULL,
   `type` int(11) NOT NULL,
-  `enable_widget` tinyint(1) NOT NULL,
+  `widget_type` tinyint(1) NOT NULL,
   `widget` mediumblob,
   `id_banner` varchar(36),
   `id_line_break` varchar(36),

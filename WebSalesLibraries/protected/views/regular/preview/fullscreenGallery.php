@@ -1,7 +1,6 @@
 <? /**
  * @var $previewData GalleryPreviewData
- * @var $format string
- */
+  */
 ?>
 <!DOCTYPE html>
 <html>
@@ -60,7 +59,7 @@
 								Name: viewerData.name,
 								File: viewerData.fileName,
 								'Original Format': viewerData.format,
-								Format: '<? echo $format;?>',
+								Format: 'png',
 								Mode: 'Fullscreen'
 							})
 						},
@@ -70,7 +69,7 @@
 
 				},
 				slides: [			// Slideshow Images
-					<? $selectedLinks = $previewData->getFullScreenGalleryImages($format)?>
+					<? $selectedLinks = $previewData->getFullScreenGalleryImages()?>
 					<? foreach ($selectedLinks as $link): ?>
 					{image: "<? echo $link['image']; ?>", title: "<? echo $link['title']; ?>", thumb: "<? $link['thumb']; ?>", url: "#"},
 					<? endforeach; ?>
@@ -84,12 +83,6 @@
 <div id="data" style="display: none"><? echo json_encode($previewData) ?></div>
 <!--Arrow Navigation-->
 <a id="prevslide" class="load-item"></a> <a id="nextslide" class="load-item"></a>
-
-<!--        <div id="thumb-tray" class="load-item">
-            <div id="thumb-back"></div>
-            <div id="thumb-forward"></div>
-        </div>-->
-
 <!--Control Bar-->
 <div id="controls-wrapper" class="load-item">
 	<div id="controls">

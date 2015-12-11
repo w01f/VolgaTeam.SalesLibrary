@@ -82,10 +82,10 @@
 		 */
 		public $lineBreakProperties;
 		/**
-		 * @var boolean
+		 * @var int
 		 * @soap
 		 */
-		public $enableWidget;
+		public $widgetType;
 		/**
 		 * @var string
 		 * @soap
@@ -174,7 +174,7 @@
 			$this->fileSize = $linkRecord->file_size;
 			$this->order = $linkRecord->order;
 			$this->type = $linkRecord->type;
-			$this->enableWidget = $linkRecord->enable_widget;
+			$this->widgetType = $linkRecord->widget_type;
 			$this->widget = $linkRecord->widget;
 			$this->isDead = $linkRecord->is_dead;
 
@@ -276,7 +276,7 @@
 		 */
 		public function getWidget()
 		{
-			if (isset($this->parentLinkId))
+			if (isset($this->parentLinkId) && isset($this->originalFormat))
 			{
 				if (isset($this->originalFormat))
 				{
@@ -314,16 +314,28 @@
 							break;
 					}
 				}
-			}
-			if (isset($this->enableWidget))
-				if (isset($this->widget) && $this->widget != '')
-					return $this->widget;
-			if ($this->isFolder)
-				return base64_encode(file_get_contents(realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'folder-file-icons' . DIRECTORY_SEPARATOR . 'folder.png'));
-			if (isset($this->parent) && isset($this->parent->parent) && isset($this->parent->parent->parent))
-				return $this->parent->parent->parent->getAutoWidget($this->fileExtension);
-			else
 				return null;
+			}
+			else
+			{
+				if ($this->isFolder)
+					return base64_encode(file_get_contents(realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'folder-file-icons' . DIRECTORY_SEPARATOR . 'folder.png'));
+				else
+				{
+					switch ($this->widgetType)
+					{
+						case 1:
+							return null;
+						case 2:
+							return $this->parent->parent->parent->getAutoWidget($this->fileExtension);
+						case 3:
+							return isset($this->widget) && $this->widget != '' ? $this->widget : null;
+							break;
+						default:
+							return null;
+					}
+				}
+			}
 		}
 
 		/**

@@ -14,7 +14,7 @@
 	 * @property mixed format
 	 * @property mixed order
 	 * @property mixed type
-	 * @property mixed enable_widget
+	 * @property int widget_type
 	 * @property mixed widget
 	 * @property mixed tags
 	 * @property mixed is_dead
@@ -87,7 +87,7 @@
 				$linkRecord->format = $link['originalFormat'];
 				$linkRecord->order = $link['order'];
 				$linkRecord->type = $link['type'];
-				$linkRecord->enable_widget = $link['enableWidget'];
+				$linkRecord->widget_type = $link['widgetType'];
 				$linkRecord->widget = $link['widget'];
 				if (array_key_exists('isPreviewNotReady', $link))
 					$linkRecord->is_preview_not_ready = $link['isPreviewNotReady'];
