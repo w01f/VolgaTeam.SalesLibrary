@@ -28,12 +28,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Video
 		{
 			InitializeComponent();
 			Dock = DockStyle.Fill;
-
-			pbChrome.Buttonize();
-			pbFirefox.Buttonize();
-			pbIE.Buttonize();
-			pbOpera.Buttonize();
-			pbSafari.Buttonize();
 		}
 
 		public void LoadLibrary(LibraryContext libraryContext)
@@ -253,108 +247,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Video
 			if (ri == null) return;
 			e.RepositoryItem.Appearance.ForeColor = ri.Cells[e.Column].Appearance.ForeColor;
 			e.RepositoryItem.Appearance.BackColor = ri.Cells[e.Column].Appearance.BackColor;
-		}
-		#endregion
-
-		#region Site Tab
-		private void pbIE_Click(object sender, EventArgs e)
-		{
-			if (MainController.Instance.ServiceConnection.IsConnected)
-			{
-				try
-				{
-					var process = new Process();
-					process.StartInfo.FileName = "iexplore.exe";
-					process.StartInfo.Arguments = MainController.Instance.ServiceConnection.Website;
-					process.Start();
-				}
-				catch
-				{
-					MainController.Instance.PopupMessages.ShowWarning("Couldn't open the website");
-				}
-			}
-			else
-				MainController.Instance.PopupMessages.ShowWarning("Website is not set");
-		}
-
-		private void pbChrome_Click(object sender, EventArgs e)
-		{
-			if (MainController.Instance.ServiceConnection.IsConnected)
-			{
-				try
-				{
-					var process = new Process();
-					process.StartInfo.FileName = "chrome.exe";
-					process.StartInfo.Arguments = MainController.Instance.ServiceConnection.Website;
-					process.Start();
-				}
-				catch
-				{
-					MainController.Instance.PopupMessages.ShowWarning("Couldn't open the website");
-				}
-			}
-			else
-				MainController.Instance.PopupMessages.ShowWarning("Website is not set");
-		}
-
-		private void pbFirefox_Click(object sender, EventArgs e)
-		{
-			if (MainController.Instance.ServiceConnection.IsConnected)
-			{
-				try
-				{
-					var process = new Process();
-					process.StartInfo.FileName = "firefox.exe";
-					process.StartInfo.Arguments = MainController.Instance.ServiceConnection.Website;
-					process.Start();
-				}
-				catch
-				{
-					MainController.Instance.PopupMessages.ShowWarning("Couldn't open the website");
-				}
-			}
-			else
-				MainController.Instance.PopupMessages.ShowWarning("Website is not set");
-		}
-
-		private void pbSafari_Click(object sender, EventArgs e)
-		{
-			if (MainController.Instance.ServiceConnection.IsConnected)
-			{
-				try
-				{
-					var process = new Process();
-					process.StartInfo.FileName = "safari.exe";
-					process.StartInfo.Arguments = MainController.Instance.ServiceConnection.Website;
-					process.Start();
-				}
-				catch
-				{
-					MainController.Instance.PopupMessages.ShowWarning("Couldn't open the website");
-				}
-			}
-			else
-				MainController.Instance.PopupMessages.ShowWarning("Website is not set");
-		}
-
-		private void pbOpera_Click(object sender, EventArgs e)
-		{
-			if (MainController.Instance.ServiceConnection.IsConnected)
-			{
-				try
-				{
-					var process = new Process();
-					process.StartInfo.FileName = "opera.exe";
-					process.StartInfo.Arguments = MainController.Instance.ServiceConnection.Website;
-					process.Start();
-				}
-				catch
-				{
-					MainController.Instance.PopupMessages.ShowWarning("Couldn't open the website");
-				}
-			}
-			else
-				MainController.Instance.PopupMessages.ShowWarning("Website is not set");
 		}
 		#endregion
 	}

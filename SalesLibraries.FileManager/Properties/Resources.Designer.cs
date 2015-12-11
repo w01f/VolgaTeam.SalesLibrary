@@ -623,56 +623,6 @@ namespace SalesLibraries.FileManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap VideoOpenChrome {
-            get {
-                object obj = ResourceManager.GetObject("VideoOpenChrome", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap VideoOpenFirefox {
-            get {
-                object obj = ResourceManager.GetObject("VideoOpenFirefox", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap VideoOpenInternetExplorer {
-            get {
-                object obj = ResourceManager.GetObject("VideoOpenInternetExplorer", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap VideoOpenOpera {
-            get {
-                object obj = ResourceManager.GetObject("VideoOpenOpera", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap VideoOpenSafari {
-            get {
-                object obj = ResourceManager.GetObject("VideoOpenSafari", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap WallbinSettingsComboboxes {
             get {
                 object obj = ResourceManager.GetObject("WallbinSettingsComboboxes", resourceCulture);

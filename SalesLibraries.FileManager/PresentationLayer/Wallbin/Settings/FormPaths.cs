@@ -18,8 +18,17 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 
 		public string LocalSyncPath
 		{
-			get { return buttonEditLocalSyncPath.EditValue as String; }
-			set { buttonEditLocalSyncPath.EditValue = value; }
+			get
+			{
+				return checkEditLocalSyncPath.Checked ? 
+					buttonEditLocalSyncPath.EditValue as String : 
+					null;
+			}
+			set
+			{
+				buttonEditLocalSyncPath.EditValue = value;
+				checkEditLocalSyncPath.Checked = !String.IsNullOrEmpty(value);
+			}
 		}
 
 		public string WebSyncPath
@@ -54,7 +63,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 				MainController.Instance.PopupMessages.ShowWarning("Primary Back Root is Incorrect");
 				return;
 			}
-			if (String.IsNullOrEmpty(LocalSyncPath) || !Directory.Exists(LocalSyncPath))
+			if (checkEditLocalSyncPath.Checked && (String.IsNullOrEmpty(LocalSyncPath) || !Directory.Exists(LocalSyncPath)))
 			{
 				MainController.Instance.PopupMessages.ShowWarning("Local Sync Folder is Incorrect");
 				return;
@@ -65,6 +74,15 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 				return;
 			}
 			e.Cancel = false;
+		}
+
+		private void checkEditLocalSyncPath_CheckedChanged(object sender, EventArgs e)
+		{
+			laLocalSyncPath.Enabled = checkEditLocalSyncPath.Checked;
+			laLocalSyncDesription.Enabled = checkEditLocalSyncPath.Checked;
+			buttonEditLocalSyncPath.Enabled = checkEditLocalSyncPath.Checked;
+			if (!checkEditLocalSyncPath.Checked)
+				buttonEditLocalSyncPath.EditValue = null;
 		}
 	}
 }

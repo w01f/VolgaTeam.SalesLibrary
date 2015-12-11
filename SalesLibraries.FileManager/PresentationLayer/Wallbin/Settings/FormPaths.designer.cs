@@ -28,23 +28,24 @@
         /// </summary>
         private void InitializeComponent()
         {
-			this.components = new System.ComponentModel.Container();
 			this.laBackup = new System.Windows.Forms.Label();
 			this.laLocalSyncPath = new System.Windows.Forms.Label();
 			this.buttonXOK = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXCancel = new DevComponents.DotNetBar.ButtonX();
 			this.buttonEditLocalSyncPath = new DevExpress.XtraEditors.ButtonEdit();
-			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
+			this.styleController = new DevExpress.XtraEditors.StyleController();
 			this.buttonEditBackupFolder = new DevExpress.XtraEditors.ButtonEdit();
 			this.buttonEditWebSyncPath = new DevExpress.XtraEditors.ButtonEdit();
 			this.laWebSyncPath = new System.Windows.Forms.Label();
 			this.laBackupDescription = new System.Windows.Forms.Label();
 			this.laLocalSyncDesription = new System.Windows.Forms.Label();
 			this.laWebSyncDescription = new System.Windows.Forms.Label();
+			this.checkEditLocalSyncPath = new DevExpress.XtraEditors.CheckEdit();
 			((System.ComponentModel.ISupportInitialize)(this.buttonEditLocalSyncPath.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.buttonEditBackupFolder.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.buttonEditWebSyncPath.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditLocalSyncPath.Properties)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// laBackup
@@ -62,6 +63,7 @@
 			// 
 			this.laLocalSyncPath.AutoSize = true;
 			this.laLocalSyncPath.BackColor = System.Drawing.Color.White;
+			this.laLocalSyncPath.Enabled = false;
 			this.laLocalSyncPath.ForeColor = System.Drawing.Color.Black;
 			this.laLocalSyncPath.Location = new System.Drawing.Point(12, 101);
 			this.laLocalSyncPath.Name = "laLocalSyncPath";
@@ -99,6 +101,7 @@
 			// 
 			this.buttonEditLocalSyncPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonEditLocalSyncPath.Enabled = false;
 			this.buttonEditLocalSyncPath.Location = new System.Drawing.Point(12, 120);
 			this.buttonEditLocalSyncPath.Name = "buttonEditLocalSyncPath";
 			this.buttonEditLocalSyncPath.Properties.Appearance.BackColor = System.Drawing.Color.White;
@@ -188,6 +191,7 @@
 			// 
 			this.laLocalSyncDesription.AutoSize = true;
 			this.laLocalSyncDesription.BackColor = System.Drawing.Color.White;
+			this.laLocalSyncDesription.Enabled = false;
 			this.laLocalSyncDesription.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.laLocalSyncDesription.ForeColor = System.Drawing.Color.Black;
 			this.laLocalSyncDesription.Location = new System.Drawing.Point(12, 145);
@@ -208,11 +212,23 @@
 			this.laWebSyncDescription.TabIndex = 16;
 			this.laWebSyncDescription.Text = "(This is a “cloud-copy” of your library, configured for mobile and web)";
 			// 
+			// checkEditLocalSyncPath
+			// 
+			this.checkEditLocalSyncPath.Location = new System.Drawing.Point(473, 99);
+			this.checkEditLocalSyncPath.Name = "checkEditLocalSyncPath";
+			this.checkEditLocalSyncPath.Properties.Caption = "Enabled";
+			this.checkEditLocalSyncPath.Properties.GlyphAlignment = DevExpress.Utils.HorzAlignment.Far;
+			this.checkEditLocalSyncPath.Size = new System.Drawing.Size(75, 20);
+			this.checkEditLocalSyncPath.StyleController = this.styleController;
+			this.checkEditLocalSyncPath.TabIndex = 17;
+			this.checkEditLocalSyncPath.CheckedChanged += new System.EventHandler(this.checkEditLocalSyncPath_CheckedChanged);
+			// 
 			// FormPaths
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
 			this.BackColor = System.Drawing.Color.White;
 			this.ClientSize = new System.Drawing.Size(552, 334);
+			this.Controls.Add(this.checkEditLocalSyncPath);
 			this.Controls.Add(this.laWebSyncDescription);
 			this.Controls.Add(this.laLocalSyncDesription);
 			this.Controls.Add(this.laBackupDescription);
@@ -226,6 +242,7 @@
 			this.Controls.Add(this.laBackup);
 			this.DoubleBuffered = true;
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.ForeColor = System.Drawing.Color.Black;
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.MaximizeBox = false;
@@ -239,6 +256,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.buttonEditBackupFolder.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.buttonEditWebSyncPath.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditLocalSyncPath.Properties)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -258,5 +276,6 @@
 		private System.Windows.Forms.Label laBackupDescription;
 		private System.Windows.Forms.Label laLocalSyncDesription;
 		private System.Windows.Forms.Label laWebSyncDescription;
+		private DevExpress.XtraEditors.CheckEdit checkEditLocalSyncPath;
     }
 }

@@ -35,8 +35,6 @@
 			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
 			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject5 = new DevExpress.Utils.SerializableAppearanceObject();
 			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject6 = new DevExpress.Utils.SerializableAppearanceObject();
-			this.xtraTabControl = new DevExpress.XtraTab.XtraTabControl();
-			this.xtraTabPageVideo = new DevExpress.XtraTab.XtraTabPage();
 			this.pnVideo = new System.Windows.Forms.Panel();
 			this.pnVideoMain = new System.Windows.Forms.Panel();
 			this.gridControlVideo = new DevExpress.XtraGrid.GridControl();
@@ -60,18 +58,6 @@
 			this.buttonXClearAll = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXSelectAll = new DevComponents.DotNetBar.ButtonX();
 			this.laVideoTitle = new System.Windows.Forms.Label();
-			this.xtraTabPageSite = new DevExpress.XtraTab.XtraTabPage();
-			this.pnSite = new System.Windows.Forms.Panel();
-			this.pbOpera = new System.Windows.Forms.PictureBox();
-			this.pbSafari = new System.Windows.Forms.PictureBox();
-			this.pbFirefox = new System.Windows.Forms.PictureBox();
-			this.pbChrome = new System.Windows.Forms.PictureBox();
-			this.pbIE = new System.Windows.Forms.PictureBox();
-			this.pnSiteTop = new System.Windows.Forms.Panel();
-			this.laSiteTitle = new System.Windows.Forms.Label();
-			((System.ComponentModel.ISupportInitialize)(this.xtraTabControl)).BeginInit();
-			this.xtraTabControl.SuspendLayout();
-			this.xtraTabPageVideo.SuspendLayout();
 			this.pnVideo.SuspendLayout();
 			this.pnVideoMain.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.gridControlVideo)).BeginInit();
@@ -84,56 +70,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditVideoConvertEnabled)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditVideoFolderDisabled)).BeginInit();
 			this.pnVideoTop.SuspendLayout();
-			this.xtraTabPageSite.SuspendLayout();
-			this.pnSite.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.pbOpera)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.pbSafari)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.pbFirefox)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.pbChrome)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.pbIE)).BeginInit();
-			this.pnSiteTop.SuspendLayout();
 			this.SuspendLayout();
-			// 
-			// xtraTabControl
-			// 
-			this.xtraTabControl.Appearance.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.xtraTabControl.Appearance.Options.UseFont = true;
-			this.xtraTabControl.AppearancePage.Header.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.xtraTabControl.AppearancePage.Header.Options.UseFont = true;
-			this.xtraTabControl.AppearancePage.Header.Options.UseTextOptions = true;
-			this.xtraTabControl.AppearancePage.Header.TextOptions.HotkeyPrefix = DevExpress.Utils.HKeyPrefix.Hide;
-			this.xtraTabControl.AppearancePage.HeaderActive.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.xtraTabControl.AppearancePage.HeaderActive.Options.UseFont = true;
-			this.xtraTabControl.AppearancePage.HeaderActive.Options.UseTextOptions = true;
-			this.xtraTabControl.AppearancePage.HeaderActive.TextOptions.HotkeyPrefix = DevExpress.Utils.HKeyPrefix.Hide;
-			this.xtraTabControl.AppearancePage.HeaderDisabled.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.xtraTabControl.AppearancePage.HeaderDisabled.Options.UseFont = true;
-			this.xtraTabControl.AppearancePage.HeaderDisabled.Options.UseTextOptions = true;
-			this.xtraTabControl.AppearancePage.HeaderDisabled.TextOptions.HotkeyPrefix = DevExpress.Utils.HKeyPrefix.Hide;
-			this.xtraTabControl.AppearancePage.HeaderHotTracked.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.xtraTabControl.AppearancePage.HeaderHotTracked.Options.UseFont = true;
-			this.xtraTabControl.AppearancePage.HeaderHotTracked.Options.UseTextOptions = true;
-			this.xtraTabControl.AppearancePage.HeaderHotTracked.TextOptions.HotkeyPrefix = DevExpress.Utils.HKeyPrefix.Hide;
-			this.xtraTabControl.AppearancePage.PageClient.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.xtraTabControl.AppearancePage.PageClient.Options.UseFont = true;
-			this.xtraTabControl.AppearancePage.PageClient.Options.UseTextOptions = true;
-			this.xtraTabControl.AppearancePage.PageClient.TextOptions.HotkeyPrefix = DevExpress.Utils.HKeyPrefix.Hide;
-			this.xtraTabControl.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.xtraTabControl.Location = new System.Drawing.Point(0, 0);
-			this.xtraTabControl.Name = "xtraTabControl";
-			this.xtraTabControl.SelectedTabPage = this.xtraTabPageVideo;
-			this.xtraTabControl.Size = new System.Drawing.Size(1128, 637);
-			this.xtraTabControl.TabIndex = 2;
-			this.xtraTabControl.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
-            this.xtraTabPageVideo,
-            this.xtraTabPageSite});
-			// 
-			// xtraTabPageVideo
-			// 
-			this.xtraTabPageVideo.Controls.Add(this.pnVideo);
-			this.xtraTabPageVideo.Name = "xtraTabPageVideo";
-			this.xtraTabPageVideo.Size = new System.Drawing.Size(1122, 606);
-			this.xtraTabPageVideo.Text = "iPad Video";
 			// 
 			// pnVideo
 			// 
@@ -143,7 +80,7 @@
 			this.pnVideo.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.pnVideo.Location = new System.Drawing.Point(0, 0);
 			this.pnVideo.Name = "pnVideo";
-			this.pnVideo.Size = new System.Drawing.Size(1122, 606);
+			this.pnVideo.Size = new System.Drawing.Size(1128, 637);
 			this.pnVideo.TabIndex = 1;
 			// 
 			// pnVideoMain
@@ -152,7 +89,7 @@
 			this.pnVideoMain.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.pnVideoMain.Location = new System.Drawing.Point(0, 55);
 			this.pnVideoMain.Name = "pnVideoMain";
-			this.pnVideoMain.Size = new System.Drawing.Size(1122, 551);
+			this.pnVideoMain.Size = new System.Drawing.Size(1128, 582);
 			this.pnVideoMain.TabIndex = 1;
 			// 
 			// gridControlVideo
@@ -170,7 +107,7 @@
             this.repositoryItemButtonEditVideoConvertEnabled,
             this.repositoryItemButtonEditVideoFolderDisabled,
             this.repositoryItemButtonEditVideoRefersh});
-			this.gridControlVideo.Size = new System.Drawing.Size(1122, 551);
+			this.gridControlVideo.Size = new System.Drawing.Size(1128, 582);
 			this.gridControlVideo.TabIndex = 0;
 			this.gridControlVideo.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewVideo});
@@ -259,7 +196,7 @@
 			// 
 			// gridColumnVideoIPadFolder
 			// 
-			this.gridColumnVideoIPadFolder.Caption = "iPad";
+			this.gridColumnVideoIPadFolder.Caption = "Output";
 			this.gridColumnVideoIPadFolder.ColumnEdit = this.repositoryItemButtonEditVideoFolderEnabled;
 			this.gridColumnVideoIPadFolder.Name = "gridColumnVideoIPadFolder";
 			this.gridColumnVideoIPadFolder.OptionsColumn.FixedWidth = true;
@@ -383,7 +320,7 @@
 			this.pnVideoTop.Dock = System.Windows.Forms.DockStyle.Top;
 			this.pnVideoTop.Location = new System.Drawing.Point(0, 0);
 			this.pnVideoTop.Name = "pnVideoTop";
-			this.pnVideoTop.Size = new System.Drawing.Size(1122, 55);
+			this.pnVideoTop.Size = new System.Drawing.Size(1128, 55);
 			this.pnVideoTop.TabIndex = 0;
 			// 
 			// buttonXClearAll
@@ -391,7 +328,7 @@
 			this.buttonXClearAll.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
 			this.buttonXClearAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXClearAll.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-			this.buttonXClearAll.Location = new System.Drawing.Point(1028, 7);
+			this.buttonXClearAll.Location = new System.Drawing.Point(1034, 7);
 			this.buttonXClearAll.Name = "buttonXClearAll";
 			this.buttonXClearAll.Size = new System.Drawing.Size(87, 40);
 			this.buttonXClearAll.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -405,7 +342,7 @@
 			this.buttonXSelectAll.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
 			this.buttonXSelectAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXSelectAll.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-			this.buttonXSelectAll.Location = new System.Drawing.Point(929, 7);
+			this.buttonXSelectAll.Location = new System.Drawing.Point(935, 7);
 			this.buttonXSelectAll.Name = "buttonXSelectAll";
 			this.buttonXSelectAll.Size = new System.Drawing.Size(87, 40);
 			this.buttonXSelectAll.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -424,108 +361,14 @@
 			this.laVideoTitle.TabIndex = 0;
 			this.laVideoTitle.Text = "Your Library has {0} Video File{1}";
 			// 
-			// xtraTabPageSite
-			// 
-			this.xtraTabPageSite.Controls.Add(this.pnSite);
-			this.xtraTabPageSite.Name = "xtraTabPageSite";
-			this.xtraTabPageSite.Size = new System.Drawing.Size(1122, 606);
-			this.xtraTabPageSite.Text = "Check Site";
-			// 
-			// pnSite
-			// 
-			this.pnSite.BackColor = System.Drawing.Color.White;
-			this.pnSite.Controls.Add(this.pbOpera);
-			this.pnSite.Controls.Add(this.pbSafari);
-			this.pnSite.Controls.Add(this.pbFirefox);
-			this.pnSite.Controls.Add(this.pbChrome);
-			this.pnSite.Controls.Add(this.pbIE);
-			this.pnSite.Controls.Add(this.pnSiteTop);
-			this.pnSite.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.pnSite.Location = new System.Drawing.Point(0, 0);
-			this.pnSite.Name = "pnSite";
-			this.pnSite.Size = new System.Drawing.Size(1122, 606);
-			this.pnSite.TabIndex = 0;
-			// 
-			// pbOpera
-			// 
-			this.pbOpera.Image = global::SalesLibraries.FileManager.Properties.Resources.VideoOpenOpera;
-			this.pbOpera.Location = new System.Drawing.Point(683, 73);
-			this.pbOpera.Name = "pbOpera";
-			this.pbOpera.Size = new System.Drawing.Size(134, 134);
-			this.pbOpera.TabIndex = 6;
-			this.pbOpera.TabStop = false;
-			this.pbOpera.Click += new System.EventHandler(this.pbOpera_Click);
-			// 
-			// pbSafari
-			// 
-			this.pbSafari.Image = global::SalesLibraries.FileManager.Properties.Resources.VideoOpenSafari;
-			this.pbSafari.Location = new System.Drawing.Point(514, 73);
-			this.pbSafari.Name = "pbSafari";
-			this.pbSafari.Size = new System.Drawing.Size(134, 134);
-			this.pbSafari.TabIndex = 5;
-			this.pbSafari.TabStop = false;
-			this.pbSafari.Click += new System.EventHandler(this.pbSafari_Click);
-			// 
-			// pbFirefox
-			// 
-			this.pbFirefox.Image = global::SalesLibraries.FileManager.Properties.Resources.VideoOpenFirefox;
-			this.pbFirefox.Location = new System.Drawing.Point(345, 73);
-			this.pbFirefox.Name = "pbFirefox";
-			this.pbFirefox.Size = new System.Drawing.Size(134, 134);
-			this.pbFirefox.TabIndex = 4;
-			this.pbFirefox.TabStop = false;
-			this.pbFirefox.Click += new System.EventHandler(this.pbFirefox_Click);
-			// 
-			// pbChrome
-			// 
-			this.pbChrome.Image = global::SalesLibraries.FileManager.Properties.Resources.VideoOpenChrome;
-			this.pbChrome.Location = new System.Drawing.Point(176, 73);
-			this.pbChrome.Name = "pbChrome";
-			this.pbChrome.Size = new System.Drawing.Size(134, 134);
-			this.pbChrome.TabIndex = 3;
-			this.pbChrome.TabStop = false;
-			this.pbChrome.Click += new System.EventHandler(this.pbChrome_Click);
-			// 
-			// pbIE
-			// 
-			this.pbIE.Image = global::SalesLibraries.FileManager.Properties.Resources.VideoOpenInternetExplorer;
-			this.pbIE.Location = new System.Drawing.Point(7, 73);
-			this.pbIE.Name = "pbIE";
-			this.pbIE.Size = new System.Drawing.Size(134, 134);
-			this.pbIE.TabIndex = 2;
-			this.pbIE.TabStop = false;
-			this.pbIE.Click += new System.EventHandler(this.pbIE_Click);
-			// 
-			// pnSiteTop
-			// 
-			this.pnSiteTop.Controls.Add(this.laSiteTitle);
-			this.pnSiteTop.Dock = System.Windows.Forms.DockStyle.Top;
-			this.pnSiteTop.Location = new System.Drawing.Point(0, 0);
-			this.pnSiteTop.Name = "pnSiteTop";
-			this.pnSiteTop.Size = new System.Drawing.Size(1122, 55);
-			this.pnSiteTop.TabIndex = 1;
-			// 
-			// laSiteTitle
-			// 
-			this.laSiteTitle.AutoSize = true;
-			this.laSiteTitle.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.laSiteTitle.Location = new System.Drawing.Point(3, 16);
-			this.laSiteTitle.Name = "laSiteTitle";
-			this.laSiteTitle.Size = new System.Drawing.Size(135, 22);
-			this.laSiteTitle.TabIndex = 0;
-			this.laSiteTitle.Text = "Browser TEST";
-			// 
 			// VideoContentEditor
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-			this.Controls.Add(this.xtraTabControl);
+			this.Controls.Add(this.pnVideo);
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.Name = "VideoContentEditor";
 			this.Size = new System.Drawing.Size(1128, 637);
-			((System.ComponentModel.ISupportInitialize)(this.xtraTabControl)).EndInit();
-			this.xtraTabControl.ResumeLayout(false);
-			this.xtraTabPageVideo.ResumeLayout(false);
 			this.pnVideo.ResumeLayout(false);
 			this.pnVideoMain.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.gridControlVideo)).EndInit();
@@ -539,23 +382,12 @@
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditVideoFolderDisabled)).EndInit();
 			this.pnVideoTop.ResumeLayout(false);
 			this.pnVideoTop.PerformLayout();
-			this.xtraTabPageSite.ResumeLayout(false);
-			this.pnSite.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.pbOpera)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.pbSafari)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.pbFirefox)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.pbChrome)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.pbIE)).EndInit();
-			this.pnSiteTop.ResumeLayout(false);
-			this.pnSiteTop.PerformLayout();
 			this.ResumeLayout(false);
 
 		}
 
 		#endregion
 
-		private DevExpress.XtraTab.XtraTabControl xtraTabControl;
-		private DevExpress.XtraTab.XtraTabPage xtraTabPageVideo;
 		private System.Windows.Forms.Panel pnVideo;
 		private System.Windows.Forms.Panel pnVideoMain;
 		private DevExpress.XtraGrid.GridControl gridControlVideo;
@@ -579,14 +411,5 @@
 		private DevComponents.DotNetBar.ButtonX buttonXClearAll;
 		private DevComponents.DotNetBar.ButtonX buttonXSelectAll;
 		private System.Windows.Forms.Label laVideoTitle;
-		private DevExpress.XtraTab.XtraTabPage xtraTabPageSite;
-		private System.Windows.Forms.Panel pnSite;
-		private System.Windows.Forms.PictureBox pbOpera;
-		private System.Windows.Forms.PictureBox pbSafari;
-		private System.Windows.Forms.PictureBox pbFirefox;
-		private System.Windows.Forms.PictureBox pbChrome;
-		private System.Windows.Forms.PictureBox pbIE;
-		private System.Windows.Forms.Panel pnSiteTop;
-		private System.Windows.Forms.Label laSiteTitle;
 	}
 }

@@ -17,6 +17,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			InitializeComponent();
 			_libraryPath = libraryPath;
 
+			buttonXResetQV.Enabled = MainController.Instance.Settings.EnableLocalSync;
 			buttonXResetSecurity.Enabled = MainController.Instance.Settings.EditorSettings.EnableSecurityEdit;
 		}
 

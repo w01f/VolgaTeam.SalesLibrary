@@ -765,11 +765,6 @@
     <None Include="Resources\CalendarFontUp.png" />
     <None Include="Resources\CalendarFontDown.png" />
     <None Include="Resources\CalendarColors.png" />
-    <None Include="Resources\VideoOpenSafari.png" />
-    <None Include="Resources\VideoOpenOpera.png" />
-    <None Include="Resources\VideoOpenInternetExplorer.png" />
-    <None Include="Resources\VideoOpenFirefox.png" />
-    <None Include="Resources\VideoOpenChrome.png" />
     <None Include="Resources\VideoDelete.png" />
     <None Include="Resources\VideoConvert.png" />
     <None Include="Resources\ButtonVideoReset.png" />

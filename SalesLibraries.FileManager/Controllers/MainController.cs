@@ -113,7 +113,7 @@ namespace SalesLibraries.FileManager.Controllers
 				switch (FileStorageManager.Instance.DataState)
 				{
 					case DataActualityState.NotExisted:
-						progressTitle = "Loading data from server for the 1st time...";
+						progressTitle = "Syncing with adSALEScloud for the 1st time…";
 						progressDescription = "*This may take a few minutes…";
 						break;
 					case DataActualityState.Outdated:

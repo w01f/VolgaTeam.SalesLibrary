@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading;
+using SalesLibraries.Business.Entities.Interfaces;
 using SalesLibraries.Business.Entities.Wallbin.Persistent;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.Common.Configuration;
@@ -185,7 +186,7 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 			return result;
 		}
 
-		private static string GetLibrarySyncDestinationPath(Library library, bool isWebSync)
+		private static string GetLibrarySyncDestinationPath(IDataSource library, bool isWebSync)
 		{
 			var destinationRoot = isWebSync ?
 				MainController.Instance.Settings.WebPath :

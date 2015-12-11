@@ -50,7 +50,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 		public void LoadData()
 		{
-			buttonXOpenQV.Enabled = Directory.Exists(((PowerPointLinkSettings)_data.Settings).ContainerPath);
+			buttonXOpenQV.Enabled = MainController.Instance.Settings.EnableLocalSync &&
+				Directory.Exists(((PowerPointLinkSettings)_data.Settings).ContainerPath);
 			buttonXOpenWV.Enabled = Directory.Exists(_data.PreviewContainerPath);
 		}
 

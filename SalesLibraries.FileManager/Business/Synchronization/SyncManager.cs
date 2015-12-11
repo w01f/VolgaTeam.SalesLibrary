@@ -100,10 +100,13 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 		{
 			var syncLogs = new List<SyncLog>();
 
-			var localSyncLog = new SyncLog("Library Sync Manual");
-			LibraryFilesSyncHelper.SyncLibraryLocalFiles(library, localSyncLog, cancellationToken);
-			if (cancellationToken.IsCancellationRequested) return;
-			syncLogs.Add(localSyncLog);
+			if (MainController.Instance.Settings.EnableLocalSync)
+			{
+				var localSyncLog = new SyncLog("Library Sync Manual");
+				LibraryFilesSyncHelper.SyncLibraryLocalFiles(library, localSyncLog, cancellationToken);
+				if (cancellationToken.IsCancellationRequested) return;
+				syncLogs.Add(localSyncLog);
+			}
 
 			var webSyncLog = new SyncLog("iPad Sync Manual");
 			LibraryFilesSyncHelper.SyncLibraryWebFiles(library, webSyncLog, cancellationToken);
@@ -137,6 +140,16 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 
 		private static void UpdateQuickViewContent(Library library, CancellationToken cancellationToken)
 		{
+			if (!MainController.Instance.Settings.EnableLocalSync)
+			{
+				try
+				{
+					Utils.DeleteFolder(Path.Combine(library.Path, Constants.RegularPreviewContainersRootFolderName));
+				}
+				catch {}
+				return;
+			}
+
 			var powerPointFiles = library.Pages.SelectMany(p => p.AllLinks).OfType<PowerPointLink>().ToList();
 			if (!powerPointFiles.Any()) return;
 			using (var powerPointProcessor = new PowerPointHidden())

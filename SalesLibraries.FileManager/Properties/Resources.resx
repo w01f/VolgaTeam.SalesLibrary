@@ -190,20 +190,11 @@
   <data name="SettingsLibraries" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SettingsLibraries.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="VideoOpenOpera" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\VideoOpenOpera.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="VideoOpenSafari" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\VideoOpenSafari.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="LinkAddNetwork" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\LinkAddNetwork.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="SettingsEmailList" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SettingsEmailList.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="VideoOpenChrome" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\VideoOpenChrome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="TagsRibbonSave" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\TagsRibbonSave.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -238,17 +229,11 @@
   <data name="SecurityMenuReset" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SecurityMenuReset.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="VideoOpenInternetExplorer" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\VideoOpenInternetExplorer.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="LinkAddUrl" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\LinkAddUrl.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="LinkSettingsFolderXlsx" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\LinkSettingsFolderXlsx.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="VideoOpenFirefox" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\VideoOpenFirefox.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Favorites" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Favorites.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

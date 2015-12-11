@@ -14,6 +14,12 @@ namespace SalesLibraries.FileManager.Configuration
 		public string BackupPath { get; set; }
 		public string NetworkPath { get; set; }
 		public string WebPath { get; set; }
+
+		public bool EnableLocalSync
+		{
+			get { return !String.IsNullOrEmpty(NetworkPath); }
+		}
+
 		//----------------------------------------
 		public string SelectedLibrary { get; set; }
 		public string SelectedPage { get; set; }
@@ -152,7 +158,8 @@ namespace SalesLibraries.FileManager.Configuration
 
 			#region FM Settings
 			xml.AppendLine(@"<BackupPath>" + BackupPath.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</BackupPath>");
-			xml.AppendLine(@"<NetworkPath>" + NetworkPath.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</NetworkPath>");
+			if (EnableLocalSync)
+				xml.AppendLine(@"<NetworkPath>" + NetworkPath.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</NetworkPath>");
 			xml.AppendLine(@"<WebPath>" + WebPath.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</WebPath>");
 			if (!String.IsNullOrEmpty(SelectedLibrary))
 				xml.AppendLine(@"<SelectedLibrary>" + SelectedLibrary.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</SelectedLibrary>");
