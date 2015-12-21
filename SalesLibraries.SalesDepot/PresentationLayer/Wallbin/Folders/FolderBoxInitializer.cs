@@ -23,10 +23,9 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.Folders
 
 			_folderBox.grFiles.CellMouseEnter += OnGridCellMouseEnter;
 			_folderBox.grFiles.CellMouseLeave += OnGridCellMouseLeave;
-			_folderBox.grFiles.CellClick += OnGridCellClick;
-			_folderBox.grFiles.CellMouseUp += OnGridCellMouseUp;
-			_folderBox.grFiles.MouseDown += OnGridMouseDown;
-			_folderBox.grFiles.MouseMove += OnGridMouseMove;
+			_folderBox.grFiles.MouseUp += OnGridCellMouseUp;
+			_folderBox.grFiles.MouseDown += OnGridCellMouseDown;
+			_folderBox.grFiles.MouseMove += OnGridCellMouseMove;
 		}
 
 		private void OnGridCellMouseEnter(object sender, DataGridViewCellEventArgs e)
@@ -41,21 +40,16 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.Folders
 			_folderBox.Cursor = _storedCursor;
 		}
 
-		private void OnGridCellClick(object sender, DataGridViewCellEventArgs e)
+		private void OnGridCellMouseUp(object sender, MouseEventArgs e)
 		{
-			var linkRow = (LinkRow)_folderBox.grFiles.Rows[e.RowIndex];
+			var ht = _folderBox.grFiles.HitTest(e.X, e.Y);
+			if (ht.Type != DataGridViewHitTestType.Cell) return;
+			var linkRow = (LinkRow)_folderBox.grFiles.Rows[ht.RowIndex];
 			if (linkRow.Source is LibraryObjectLink)
-				LinkManager.OpenLink((LibraryObjectLink)linkRow.Source);
+				LinkManager.OpenLink((LibraryObjectLink)linkRow.Source, e.Button == MouseButtons.Right);
 		}
 
-		private void OnGridCellMouseUp(object sender, DataGridViewCellMouseEventArgs e)
-		{
-			if (e.Button != MouseButtons.Right) return;
-			var linkRow = (LinkRow)_folderBox.grFiles.Rows[e.RowIndex];
-			LinkManager.OpenLink((LibraryObjectLink)linkRow.Source, true);
-		}
-
-		private void OnGridMouseDown(object sender, MouseEventArgs e)
+		private void OnGridCellMouseDown(object sender, MouseEventArgs e)
 		{
 			var ht = _folderBox.grFiles.HitTest(e.X, e.Y);
 			if (ht.Type == DataGridViewHitTestType.Cell)
@@ -70,10 +64,9 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.Folders
 				_hitTest = null;
 		}
 
-		private void OnGridMouseMove(object sender, MouseEventArgs e)
+		private void OnGridCellMouseMove(object sender, MouseEventArgs e)
 		{
-			if (_hitTest == null || _dragBox.Contains(e.X, e.Y))
-				return;
+			if (_hitTest == null || _dragBox.Contains(e.X, e.Y)) return;
 			var linkRow = (LinkRow)_folderBox.grFiles.Rows[_hitTest.RowIndex];
 			var fileLink = linkRow.Source as LibraryFileLink;
 			if (fileLink == null || fileLink.IsFolder)
@@ -83,6 +76,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.Folders
 			data.SetData(DataFormats.StringFormat, fileLink.FullPath);
 			data.SetData(DataFormats.Serializable, fileLink);
 			_folderBox.DoDragDrop(data, DragDropEffects.Copy);
+			_hitTest = null;
 		}
 	}
 }

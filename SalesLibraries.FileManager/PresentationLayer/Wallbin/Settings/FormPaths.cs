@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using DevComponents.DotNetBar.Metro;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
+using SalesLibraries.Common.Helpers;
 using SalesLibraries.FileManager.Controllers;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
@@ -20,8 +21,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 		{
 			get
 			{
-				return checkEditLocalSyncPath.Checked ? 
-					buttonEditLocalSyncPath.EditValue as String : 
+				return checkEditLocalSyncPath.Checked ?
+					buttonEditLocalSyncPath.EditValue as String :
 					null;
 			}
 			set
@@ -40,6 +41,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 		public FormPaths()
 		{
 			InitializeComponent();
+			Text = String.Format(Text, AppProfileManager.Instance.LibraryAlias);
 		}
 
 		private void buttonEditFolderSelector_ButtonClick(object sender, ButtonPressedEventArgs e)
@@ -71,6 +73,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			if (String.IsNullOrEmpty(WebSyncPath) || !Directory.Exists(WebSyncPath))
 			{
 				MainController.Instance.PopupMessages.ShowWarning("Web Sync Folder is Incorrect");
+				return;
+			}
+			if (BackupPath == LocalSyncPath || BackupPath == WebSyncPath || LocalSyncPath == WebSyncPath)
+			{
+				MainController.Instance.PopupMessages.ShowWarning(String.Format("DUDE! WTH?{0}Check your Paths…{0}Something is Really Screwed Up…", Environment.NewLine));
 				return;
 			}
 			e.Cancel = false;

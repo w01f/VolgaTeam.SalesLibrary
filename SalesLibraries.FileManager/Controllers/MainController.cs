@@ -113,7 +113,7 @@ namespace SalesLibraries.FileManager.Controllers
 				switch (FileStorageManager.Instance.DataState)
 				{
 					case DataActualityState.NotExisted:
-						progressTitle = "Syncing with adSALEScloud for the 1st time…";
+						progressTitle = "Syncing adSALEScloud for the 1st time…";
 						progressDescription = "*This may take a few minutes…";
 						break;
 					case DataActualityState.Outdated:
@@ -149,7 +149,7 @@ namespace SalesLibraries.FileManager.Controllers
 								mainForm.Close();
 						}
 					}
-					MainForm.ConfigureRibbon();
+					MainForm.InitForm();
 					LoadControllers();
 
 					LoadData();

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Windows.Forms;
+using SalesLibraries.Common.Helpers;
 using SalesLibraries.SalesDepot.Controllers;
 
 namespace SalesLibraries.SalesDepot
@@ -20,6 +21,8 @@ namespace SalesLibraries.SalesDepot
 
 			if (firstInstance)
 			{
+				AppDomain.CurrentDomain.AssemblyResolve += SharedAssemblyHelper.OnAssemblyResolve;
+
 				Application.EnableVisualStyles();
 				Application.SetCompatibleTextRenderingDefault(false);
 				MainController.Instance.RunApplication();

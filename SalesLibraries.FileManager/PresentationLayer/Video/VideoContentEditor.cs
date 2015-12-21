@@ -11,7 +11,6 @@ using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using SalesLibraries.Business.Contexts.Wallbin;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers;
 using SalesLibraries.Common.Helpers;
-using SalesLibraries.CommonGUI.Common;
 using SalesLibraries.FileManager.Business.Models;
 using SalesLibraries.FileManager.Business.Services;
 using SalesLibraries.FileManager.Controllers;
@@ -57,11 +56,12 @@ namespace SalesLibraries.FileManager.PresentationLayer.Video
 		{
 			_videoInfoList.AddRange(_libraryContext.Library.PreviewContainers
 				.OfType<VideoPreviewContainer>()
+				.Where(videContainer => _libraryContext.Library.GetPreviewableLinksBySourcePath(videContainer.SourcePath).Any())
 				.Select(VideoInfo.Create));
 			var i = 1;
 			_videoInfoList.Sort((x, y) =>
 			{
-				if(x.Converted == y.Converted)
+				if (x.Converted == y.Converted)
 					return WinAPIHelper.StrCmpLogicalW(x.SourceFileName, y.SourceFileName);
 				return y.Converted ? 1 : -1;
 			});
@@ -233,7 +233,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Video
 		{
 			var videoInfo = gridViewVideo.GetRow(e.RowHandle) as VideoInfo;
 			if (videoInfo == null) return;
-			bool videoConverted = videoInfo.Converted;
+			var videoConverted = videoInfo.Converted;
 			if (e.Column == gridColumnVideoIPadFolder)
 				e.RepositoryItem = videoConverted ? repositoryItemButtonEditVideoFolderEnabled : repositoryItemButtonEditVideoFolderDisabled;
 			else if (e.Column == gridColumnVideoConvert)

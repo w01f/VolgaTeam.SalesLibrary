@@ -11,7 +11,7 @@ namespace SalesLibraries.ServiceConnector.Services
 			{
 				var client = new FileManagerDataControllerService
 				{
-					Url = String.Format("http://{0}/FileManagerData/quote?ws=1", url)
+					Url = String.Format("{0}/FileManagerData/quote?ws=1", url)
 				};
 				var sessionKey = client.getSessionKey(login, password);
 				return !String.IsNullOrEmpty(sessionKey);

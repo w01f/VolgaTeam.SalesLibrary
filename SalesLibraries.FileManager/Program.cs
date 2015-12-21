@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Windows.Forms;
+using SalesLibraries.Common.Helpers;
 using SalesLibraries.FileManager.Controllers;
 
 namespace SalesLibraries.FileManager
@@ -18,6 +19,8 @@ namespace SalesLibraries.FileManager
 			_mutex = new Mutex(false, "Local\\FileManagerApplication", out firstInstance);
 			if (firstInstance)
 			{
+				AppDomain.CurrentDomain.AssemblyResolve += SharedAssemblyHelper.OnAssemblyResolve;
+
 				var silent = args != null && args.Length > 0 && args[0].ToLower().Equals("silent");
 				if (!silent)
 				{

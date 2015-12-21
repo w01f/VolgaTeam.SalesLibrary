@@ -21,7 +21,10 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 				uncompletedTags = totalLinks - taggedLinks;
 			}
 			unconvertedVideos = MainController.Instance.Settings.SyncLockByUnconvertedVideo ?
-				library.PreviewContainers.OfType<VideoPreviewContainer>().Count(pc => !pc.IsConverted) :
+				library.PreviewContainers
+					.OfType<VideoPreviewContainer>()
+					.Where(videContainer => library.GetPreviewableLinksBySourcePath(videContainer.SourcePath).Any())
+					.Count(pc => !pc.IsConverted) :
 				0;
 			inactiveLinks = 0;
 			if (MainController.Instance.Settings.SyncLockByInactiveLinks)

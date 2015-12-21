@@ -1,5 +1,6 @@
 ﻿using System;
 using DevComponents.DotNetBar;
+using SalesLibraries.Common.Helpers;
 using SalesLibraries.FileManager.Controllers;
 
 namespace SalesLibraries.FileManager
@@ -12,7 +13,13 @@ namespace SalesLibraries.FileManager
 			ribbonControl.Enabled = false;
 		}
 
-		public void ConfigureRibbon()
+		public void InitForm()
+		{
+			Text = String.Format(Text, AppProfileManager.Instance.LibraryAlias);
+			ConfigureRibbon();
+		}
+
+		private void ConfigureRibbon()
 		{
 			ribbonTabItemCalendar.Visible = MainController.Instance.Settings.EnableOvernightsCalendarTab;
 			ribbonTabItemProgramManager.Visible = MainController.Instance.Settings.EnableProgramManagerTab;

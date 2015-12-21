@@ -14,7 +14,6 @@ namespace SalesLibraries.Common.Helpers
 		public const string UserDataFolderName = "user_data";
 
 		private static readonly AppProfileManager _instance = new AppProfileManager();
-		private string _libraryAlias;
 		private string _appName;
 		private Guid _appID;
 		private StorageFile _localAppIdFile;
@@ -26,13 +25,15 @@ namespace SalesLibraries.Common.Helpers
 
 		public AppTypeEnum AppType { get; private set; }
 
+		public string LibraryAlias { get; private set; }
+
 		public string[] AppNameSet
 		{
 			get
 			{
-				if (String.IsNullOrEmpty(_libraryAlias))
+				if (String.IsNullOrEmpty(LibraryAlias))
 					return new[] { _appName };
-				return new[] { _appName, _libraryAlias };
+				return new[] { _appName, LibraryAlias };
 			}
 		}
 
@@ -63,16 +64,11 @@ namespace SalesLibraries.Common.Helpers
 			}
 		}
 
-		public void SetLibraryAlias(string libraryAlias)
-		{
-			_libraryAlias = libraryAlias;
-		}
-
 		public async Task LoadProfile()
 		{
-			_localAppIdFile = String.IsNullOrEmpty(_libraryAlias) ?
-				new StorageFile(new[] { String.Format("{0}_app_id.xml",_appName) }) :
-				new StorageFile(new[] { String.Format("{0}_{1}_app_id.xml", _appName, _libraryAlias) });
+			_localAppIdFile = String.IsNullOrEmpty(LibraryAlias) ?
+				new StorageFile(new[] { String.Format("{0}_app_id.xml", _appName) }) :
+				new StorageFile(new[] { String.Format("{0}_{1}_app_id.xml", _appName, LibraryAlias) });
 
 			_appID = Guid.Empty;
 			if (File.Exists(_localAppIdFile.LocalPath))
@@ -122,6 +118,11 @@ namespace SalesLibraries.Common.Helpers
 				sw.Write(xml);
 				sw.Flush();
 			}
+		}
+
+		public void SetLibraryAlias(string libraryAlias)
+		{
+			LibraryAlias = libraryAlias;
 		}
 	}
 }

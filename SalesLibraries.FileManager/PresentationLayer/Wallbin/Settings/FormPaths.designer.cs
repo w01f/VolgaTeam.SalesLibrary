@@ -28,12 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+			this.components = new System.ComponentModel.Container();
 			this.laBackup = new System.Windows.Forms.Label();
 			this.laLocalSyncPath = new System.Windows.Forms.Label();
 			this.buttonXOK = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXCancel = new DevComponents.DotNetBar.ButtonX();
 			this.buttonEditLocalSyncPath = new DevExpress.XtraEditors.ButtonEdit();
-			this.styleController = new DevExpress.XtraEditors.StyleController();
+			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
 			this.buttonEditBackupFolder = new DevExpress.XtraEditors.ButtonEdit();
 			this.buttonEditWebSyncPath = new DevExpress.XtraEditors.ButtonEdit();
 			this.laWebSyncPath = new System.Windows.Forms.Label();
@@ -216,6 +217,8 @@
 			// 
 			this.checkEditLocalSyncPath.Location = new System.Drawing.Point(473, 99);
 			this.checkEditLocalSyncPath.Name = "checkEditLocalSyncPath";
+			this.checkEditLocalSyncPath.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.checkEditLocalSyncPath.Properties.Appearance.Options.UseForeColor = true;
 			this.checkEditLocalSyncPath.Properties.Caption = "Enabled";
 			this.checkEditLocalSyncPath.Properties.GlyphAlignment = DevExpress.Utils.HorzAlignment.Far;
 			this.checkEditLocalSyncPath.Size = new System.Drawing.Size(75, 20);
@@ -242,7 +245,6 @@
 			this.Controls.Add(this.laBackup);
 			this.DoubleBuffered = true;
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.ForeColor = System.Drawing.Color.Black;
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.MaximizeBox = false;
@@ -250,7 +252,7 @@
 			this.Name = "FormPaths";
 			this.ShowInTaskbar = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-			this.Text = "Paths";
+			this.Text = "Paths ({0})";
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormApplicationSettings_FormClosing);
 			((System.ComponentModel.ISupportInitialize)(this.buttonEditLocalSyncPath.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
