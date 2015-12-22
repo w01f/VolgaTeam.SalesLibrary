@@ -37,6 +37,7 @@
 			this.pdfViewerControl.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.pdfViewerControl.Location = new System.Drawing.Point(0, 0);
 			this.pdfViewerControl.Name = "pdfViewerControl";
+			this.pdfViewerControl.NavigationPaneInitialVisibility = DevExpress.XtraPdfViewer.PdfNavigationPaneVisibility.Hidden;
 			this.pdfViewerControl.Size = new System.Drawing.Size(407, 332);
 			this.pdfViewerControl.TabIndex = 0;
 			this.pdfViewerControl.DoubleClick += new System.EventHandler(this.pdfViewerControl_DoubleClick);

@@ -852,6 +852,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 			EditLinkSettings(LinkSettingsType.Widget);
 		}
 
+		private void barButtonItemLinkPropertiesBanner_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+		{
+			EditLinkSettings(LinkSettingsType.Banner);
+		}
+
 		void OnLinkPropertiesMenuCloseUp(object sender, EventArgs e)
 		{
 			_quickEditor.ApplySettings();

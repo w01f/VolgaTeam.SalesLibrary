@@ -29,14 +29,13 @@
 		protected override void InitializeComponent()
 		{
 			base.InitializeComponent();
-			this.components = new System.ComponentModel.Container();
-			this.contextMenuStripSecurity = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.contextMenuStripSecurity = new System.Windows.Forms.ContextMenuStrip();
 			this.toolStripMenuItemSecuritySelectAll = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItemSecurityResetAll = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItemFolderDeleteLinks = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItemFolderDeleteSecurity = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItemFolderDeleteTags = new System.Windows.Forms.ToolStripMenuItem();
-			this.contextMenuStripFolderProperties = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.contextMenuStripFolderProperties = new System.Windows.Forms.ContextMenuStrip();
 			this.toolStripMenuItemFolderSettings = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
 			this.toolStripMenuItemFolderDelete = new System.Windows.Forms.ToolStripMenuItem();
@@ -47,7 +46,7 @@
 			this.toolStripMenuItemFolderDeleteWidgets = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItemFolderDeleteBanners = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItemFolderSort = new System.Windows.Forms.ToolStripMenuItem();
-			this.popupMenuLinkProperties = new DevExpress.XtraBars.PopupMenu(this.components);
+			this.popupMenuLinkProperties = new DevExpress.XtraBars.PopupMenu();
 			this.barButtonItemLinkPropertiesOpenLink = new DevExpress.XtraBars.BarButtonItem();
 			this.barButtonItemLinkPropertiesFileLocation = new DevExpress.XtraBars.BarButtonItem();
 			this.barButtonItemLinkPropertiesDelete = new DevExpress.XtraBars.BarButtonItem();
@@ -59,7 +58,7 @@
 			this.barButtonItemLinkPropertiesWidget = new DevExpress.XtraBars.BarButtonItem();
 			this.barButtonItemLinkPropertiesBanner = new DevExpress.XtraBars.BarButtonItem();
 			this.barSubItemLinkPropertiesQuickTools = new DevExpress.XtraBars.BarSubItem();
-			this.barManager = new DevExpress.XtraBars.BarManager(this.components);
+			this.barManager = new DevExpress.XtraBars.BarManager();
 			this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
 			this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
 			this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
@@ -142,7 +141,7 @@
             this.toolStripMenuItemFolderDeleteTags,
             this.toolStripMenuItemFolderSort});
 			this.contextMenuStripFolderProperties.Name = "contextMenuStripLinkProperties";
-			this.contextMenuStripFolderProperties.Size = new System.Drawing.Size(349, 192);
+			this.contextMenuStripFolderProperties.Size = new System.Drawing.Size(349, 170);
 			// 
 			// toolStripMenuItemFolderSettings
 			// 
@@ -299,6 +298,7 @@
 			this.barButtonItemLinkPropertiesBanner.Caption = "Banner";
 			this.barButtonItemLinkPropertiesBanner.Id = 9;
 			this.barButtonItemLinkPropertiesBanner.Name = "barButtonItemLinkPropertiesBanner";
+			this.barButtonItemLinkPropertiesBanner.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemLinkPropertiesBanner_ItemClick);
 			// 
 			// barSubItemLinkPropertiesQuickTools
 			// 
@@ -378,6 +378,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.popupMenuLinkProperties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.barManager)).EndInit();
 			this.ResumeLayout(false);
+			this.PerformLayout();
 
 		}
 

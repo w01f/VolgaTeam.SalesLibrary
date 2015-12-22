@@ -9,6 +9,7 @@ using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.FileManager.Controllers;
 using SalesLibraries.FileManager.PresentationLayer.Wallbin.Common;
+using Alignment = SalesLibraries.Business.Entities.Wallbin.Common.Enums.Alignment;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSettings
 {

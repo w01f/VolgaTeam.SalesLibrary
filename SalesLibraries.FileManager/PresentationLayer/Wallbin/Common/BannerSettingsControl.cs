@@ -9,6 +9,7 @@ using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.FileManager.Controllers;
+using Alignment = SalesLibraries.Business.Entities.Wallbin.Common.Enums.Alignment;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Common
 {
