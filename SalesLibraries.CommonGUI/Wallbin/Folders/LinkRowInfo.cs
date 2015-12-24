@@ -199,6 +199,9 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 				textWidth = (int)textSize.Width;
 				textHeight = (int)textSize.Height;
 			}
+
+			//TODO Hack code. Refactor this!
+			textWidth += 10;
 			#endregion
 
 			#region Fore Color

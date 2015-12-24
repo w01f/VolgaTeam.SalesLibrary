@@ -444,6 +444,7 @@ namespace SalesLibraries.FileManager.Business.Services
 			target.size = (int)Math.Round(source.Size, 0);
 			target.isBold = source.Bold;
 			target.isItalic = source.Italic;
+			target.isUnderlined = source.Underline;
 		}
 
 		private static Size GetThumbSize(string filePath)

@@ -28,11 +28,10 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.components = new System.ComponentModel.Container();
 			this.xtraTabControlWindowProperties = new DevExpress.XtraTab.XtraTabControl();
 			this.xtraTabPageAppearance = new DevExpress.XtraTab.XtraTabPage();
 			this.textEditName = new DevExpress.XtraEditors.TextEdit();
-			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
+			this.styleController = new DevExpress.XtraEditors.StyleController();
 			this.laName = new System.Windows.Forms.Label();
 			this.colorEditWindowBorderColor = new DevExpress.XtraEditors.ColorEdit();
 			this.laBorderColor = new System.Windows.Forms.Label();
@@ -177,11 +176,11 @@
 			// laName
 			// 
 			this.laName.AutoSize = true;
-			this.laName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.laName.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.laName.ForeColor = System.Drawing.Color.Black;
 			this.laName.Location = new System.Drawing.Point(3, 10);
 			this.laName.Name = "laName";
-			this.laName.Size = new System.Drawing.Size(45, 16);
+			this.laName.Size = new System.Drawing.Size(42, 16);
 			this.laName.TabIndex = 35;
 			this.laName.Text = "Name";
 			// 
@@ -198,7 +197,6 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
 			this.colorEditWindowBorderColor.Properties.ColorAlignment = DevExpress.Utils.HorzAlignment.Center;
 			this.colorEditWindowBorderColor.Properties.ShowSystemColors = false;
-			this.colorEditWindowBorderColor.Properties.ShowWebColors = true;
 			this.colorEditWindowBorderColor.Size = new System.Drawing.Size(100, 22);
 			this.colorEditWindowBorderColor.StyleController = this.styleController;
 			this.colorEditWindowBorderColor.TabIndex = 34;
@@ -206,17 +204,18 @@
 			// laBorderColor
 			// 
 			this.laBorderColor.AutoSize = true;
-			this.laBorderColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.laBorderColor.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.laBorderColor.ForeColor = System.Drawing.Color.Black;
 			this.laBorderColor.Location = new System.Drawing.Point(3, 115);
 			this.laBorderColor.Name = "laBorderColor";
-			this.laBorderColor.Size = new System.Drawing.Size(84, 16);
+			this.laBorderColor.Size = new System.Drawing.Size(80, 16);
 			this.laBorderColor.TabIndex = 33;
 			this.laBorderColor.Text = "Border Color";
 			// 
 			// rbWindowHeaderAlignmentRight
 			// 
 			this.rbWindowHeaderAlignmentRight.AutoSize = true;
+			this.rbWindowHeaderAlignmentRight.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.rbWindowHeaderAlignmentRight.ForeColor = System.Drawing.Color.Black;
 			this.rbWindowHeaderAlignmentRight.Location = new System.Drawing.Point(365, 187);
 			this.rbWindowHeaderAlignmentRight.Name = "rbWindowHeaderAlignmentRight";
@@ -229,6 +228,7 @@
 			// rbHeaderAlignmentCenter
 			// 
 			this.rbHeaderAlignmentCenter.AutoSize = true;
+			this.rbHeaderAlignmentCenter.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.rbHeaderAlignmentCenter.ForeColor = System.Drawing.Color.Black;
 			this.rbHeaderAlignmentCenter.Location = new System.Drawing.Point(260, 187);
 			this.rbHeaderAlignmentCenter.Name = "rbHeaderAlignmentCenter";
@@ -241,6 +241,7 @@
 			// rbHeaderAlignmentLeft
 			// 
 			this.rbHeaderAlignmentLeft.AutoSize = true;
+			this.rbHeaderAlignmentLeft.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.rbHeaderAlignmentLeft.ForeColor = System.Drawing.Color.Black;
 			this.rbHeaderAlignmentLeft.Location = new System.Drawing.Point(153, 187);
 			this.rbHeaderAlignmentLeft.Name = "rbHeaderAlignmentLeft";
@@ -253,11 +254,11 @@
 			// laHeaderAlignment
 			// 
 			this.laHeaderAlignment.AutoSize = true;
-			this.laHeaderAlignment.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.laHeaderAlignment.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.laHeaderAlignment.ForeColor = System.Drawing.Color.Black;
 			this.laHeaderAlignment.Location = new System.Drawing.Point(3, 189);
 			this.laHeaderAlignment.Name = "laHeaderAlignment";
-			this.laHeaderAlignment.Size = new System.Drawing.Size(109, 16);
+			this.laHeaderAlignment.Size = new System.Drawing.Size(103, 16);
 			this.laHeaderAlignment.TabIndex = 29;
 			this.laHeaderAlignment.Text = "Header Aligment";
 			// 
@@ -281,11 +282,11 @@
 			// laHeaderFont
 			// 
 			this.laHeaderFont.AutoSize = true;
-			this.laHeaderFont.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.laHeaderFont.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.laHeaderFont.ForeColor = System.Drawing.Color.Black;
 			this.laHeaderFont.Location = new System.Drawing.Point(3, 153);
 			this.laHeaderFont.Name = "laHeaderFont";
-			this.laHeaderFont.Size = new System.Drawing.Size(83, 16);
+			this.laHeaderFont.Size = new System.Drawing.Size(79, 16);
 			this.laHeaderFont.TabIndex = 16;
 			this.laHeaderFont.Text = "Header Font";
 			// 
@@ -303,7 +304,6 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
 			this.colorEditWindowForeColor.Properties.ColorAlignment = DevExpress.Utils.HorzAlignment.Center;
 			this.colorEditWindowForeColor.Properties.ShowSystemColors = false;
-			this.colorEditWindowForeColor.Properties.ShowWebColors = true;
 			this.colorEditWindowForeColor.Size = new System.Drawing.Size(100, 22);
 			this.colorEditWindowForeColor.StyleController = this.styleController;
 			this.colorEditWindowForeColor.TabIndex = 27;
@@ -311,11 +311,11 @@
 			// laHeaderBackColor
 			// 
 			this.laHeaderBackColor.AutoSize = true;
-			this.laHeaderBackColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.laHeaderBackColor.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.laHeaderBackColor.ForeColor = System.Drawing.Color.Black;
 			this.laHeaderBackColor.Location = new System.Drawing.Point(3, 44);
 			this.laHeaderBackColor.Name = "laHeaderBackColor";
-			this.laHeaderBackColor.Size = new System.Drawing.Size(123, 16);
+			this.laHeaderBackColor.Size = new System.Drawing.Size(117, 16);
 			this.laHeaderBackColor.TabIndex = 0;
 			this.laHeaderBackColor.Text = "Header Back Color";
 			// 
@@ -333,7 +333,6 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
 			this.colorEditWindowBackColor.Properties.ColorAlignment = DevExpress.Utils.HorzAlignment.Center;
 			this.colorEditWindowBackColor.Properties.ShowSystemColors = false;
-			this.colorEditWindowBackColor.Properties.ShowWebColors = true;
 			this.colorEditWindowBackColor.Size = new System.Drawing.Size(100, 22);
 			this.colorEditWindowBackColor.StyleController = this.styleController;
 			this.colorEditWindowBackColor.TabIndex = 26;
@@ -342,11 +341,11 @@
 			// 
 			this.ckApllyForAllWindowsAppearance.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.ckApllyForAllWindowsAppearance.AutoSize = true;
-			this.ckApllyForAllWindowsAppearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
+			this.ckApllyForAllWindowsAppearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.ckApllyForAllWindowsAppearance.ForeColor = System.Drawing.Color.Black;
 			this.ckApllyForAllWindowsAppearance.Location = new System.Drawing.Point(7, 250);
 			this.ckApllyForAllWindowsAppearance.Name = "ckApllyForAllWindowsAppearance";
-			this.ckApllyForAllWindowsAppearance.Size = new System.Drawing.Size(230, 20);
+			this.ckApllyForAllWindowsAppearance.Size = new System.Drawing.Size(222, 20);
 			this.ckApllyForAllWindowsAppearance.TabIndex = 15;
 			this.ckApllyForAllWindowsAppearance.Text = "Apply Appearance to All Windows";
 			this.ckApllyForAllWindowsAppearance.UseVisualStyleBackColor = true;
@@ -355,11 +354,11 @@
 			// 
 			this.laForeColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.laForeColor.AutoSize = true;
-			this.laForeColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.laForeColor.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.laForeColor.ForeColor = System.Drawing.Color.Black;
 			this.laForeColor.Location = new System.Drawing.Point(299, 78);
 			this.laForeColor.Name = "laForeColor";
-			this.laForeColor.Size = new System.Drawing.Size(120, 16);
+			this.laForeColor.Size = new System.Drawing.Size(118, 16);
 			this.laForeColor.TabIndex = 12;
 			this.laForeColor.Text = "Window Font Color";
 			// 
@@ -376,7 +375,6 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
 			this.colorEditWindowHeaderBackColor.Properties.ColorAlignment = DevExpress.Utils.HorzAlignment.Center;
 			this.colorEditWindowHeaderBackColor.Properties.ShowSystemColors = false;
-			this.colorEditWindowHeaderBackColor.Properties.ShowWebColors = true;
 			this.colorEditWindowHeaderBackColor.Size = new System.Drawing.Size(100, 22);
 			this.colorEditWindowHeaderBackColor.StyleController = this.styleController;
 			this.colorEditWindowHeaderBackColor.TabIndex = 24;
@@ -385,11 +383,11 @@
 			// 
 			this.laBackColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.laBackColor.AutoSize = true;
-			this.laBackColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.laBackColor.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.laBackColor.ForeColor = System.Drawing.Color.Black;
 			this.laBackColor.Location = new System.Drawing.Point(299, 44);
 			this.laBackColor.Name = "laBackColor";
-			this.laBackColor.Size = new System.Drawing.Size(125, 16);
+			this.laBackColor.Size = new System.Drawing.Size(122, 16);
 			this.laBackColor.TabIndex = 9;
 			this.laBackColor.Text = "Window Back Color";
 			// 
@@ -406,7 +404,6 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
 			this.colorEditWindowHeaderForeColor.Properties.ColorAlignment = DevExpress.Utils.HorzAlignment.Center;
 			this.colorEditWindowHeaderForeColor.Properties.ShowSystemColors = false;
-			this.colorEditWindowHeaderForeColor.Properties.ShowWebColors = true;
 			this.colorEditWindowHeaderForeColor.Size = new System.Drawing.Size(100, 22);
 			this.colorEditWindowHeaderForeColor.StyleController = this.styleController;
 			this.colorEditWindowHeaderForeColor.TabIndex = 25;
@@ -414,11 +411,11 @@
 			// laHeaderForeColor
 			// 
 			this.laHeaderForeColor.AutoSize = true;
-			this.laHeaderForeColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.laHeaderForeColor.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.laHeaderForeColor.ForeColor = System.Drawing.Color.Black;
 			this.laHeaderForeColor.Location = new System.Drawing.Point(3, 78);
 			this.laHeaderForeColor.Name = "laHeaderForeColor";
-			this.laHeaderForeColor.Size = new System.Drawing.Size(118, 16);
+			this.laHeaderForeColor.Size = new System.Drawing.Size(113, 16);
 			this.laHeaderForeColor.TabIndex = 6;
 			this.laHeaderForeColor.Text = "Header Font Color";
 			// 
@@ -455,11 +452,11 @@
 			// 
 			this.ckApllyForAllWindowsWidget.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.ckApllyForAllWindowsWidget.AutoSize = true;
-			this.ckApllyForAllWindowsWidget.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
+			this.ckApllyForAllWindowsWidget.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.ckApllyForAllWindowsWidget.ForeColor = System.Drawing.Color.Black;
 			this.ckApllyForAllWindowsWidget.Location = new System.Drawing.Point(7, 5);
 			this.ckApllyForAllWindowsWidget.Name = "ckApllyForAllWindowsWidget";
-			this.ckApllyForAllWindowsWidget.Size = new System.Drawing.Size(198, 20);
+			this.ckApllyForAllWindowsWidget.Size = new System.Drawing.Size(195, 20);
 			this.ckApllyForAllWindowsWidget.TabIndex = 34;
 			this.ckApllyForAllWindowsWidget.Text = "Apply Widget to All Windows";
 			this.ckApllyForAllWindowsWidget.UseVisualStyleBackColor = true;
@@ -496,11 +493,11 @@
 			// ckApllyForAllWindowsBanner
 			// 
 			this.ckApllyForAllWindowsBanner.AutoSize = true;
-			this.ckApllyForAllWindowsBanner.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
+			this.ckApllyForAllWindowsBanner.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.ckApllyForAllWindowsBanner.ForeColor = System.Drawing.Color.Black;
 			this.ckApllyForAllWindowsBanner.Location = new System.Drawing.Point(7, 5);
 			this.ckApllyForAllWindowsBanner.Name = "ckApllyForAllWindowsBanner";
-			this.ckApllyForAllWindowsBanner.Size = new System.Drawing.Size(198, 20);
+			this.ckApllyForAllWindowsBanner.Size = new System.Drawing.Size(195, 20);
 			this.ckApllyForAllWindowsBanner.TabIndex = 33;
 			this.ckApllyForAllWindowsBanner.Text = "Apply Banner to All Windows";
 			this.ckApllyForAllWindowsBanner.UseVisualStyleBackColor = true;

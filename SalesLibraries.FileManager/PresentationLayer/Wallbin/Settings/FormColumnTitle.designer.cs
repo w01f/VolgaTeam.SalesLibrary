@@ -28,7 +28,6 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.components = new System.ComponentModel.Container();
 			this.xtraTabControlWindowProperties = new DevExpress.XtraTab.XtraTabControl();
 			this.xtraTabPageAppearance = new DevExpress.XtraTab.XtraTabPage();
 			this.laColumn1Alignment = new System.Windows.Forms.Label();
@@ -36,7 +35,7 @@
 			this.rbAlignmentCenter = new System.Windows.Forms.RadioButton();
 			this.rbAlignmentLeft = new System.Windows.Forms.RadioButton();
 			this.buttonEditFont = new DevExpress.XtraEditors.ButtonEdit();
-			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
+			this.styleController = new DevExpress.XtraEditors.StyleController();
 			this.laFont = new System.Windows.Forms.Label();
 			this.colorEditForeColor = new DevExpress.XtraEditors.ColorEdit();
 			this.memoEditTitle = new DevExpress.XtraEditors.MemoEdit();
@@ -116,16 +115,17 @@
 			// laColumn1Alignment
 			// 
 			this.laColumn1Alignment.AutoSize = true;
-			this.laColumn1Alignment.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.laColumn1Alignment.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.laColumn1Alignment.ForeColor = System.Drawing.Color.Black;
 			this.laColumn1Alignment.Location = new System.Drawing.Point(6, 52);
 			this.laColumn1Alignment.Name = "laColumn1Alignment";
-			this.laColumn1Alignment.Size = new System.Drawing.Size(67, 16);
+			this.laColumn1Alignment.Size = new System.Drawing.Size(66, 16);
 			this.laColumn1Alignment.TabIndex = 59;
 			this.laColumn1Alignment.Text = "Alignment";
 			// 
 			// rbAlignmentRight
 			// 
+			this.rbAlignmentRight.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.rbAlignmentRight.ForeColor = System.Drawing.Color.Black;
 			this.rbAlignmentRight.Location = new System.Drawing.Point(232, 50);
 			this.rbAlignmentRight.Name = "rbAlignmentRight";
@@ -138,6 +138,7 @@
 			// 
 			// rbAlignmentCenter
 			// 
+			this.rbAlignmentCenter.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.rbAlignmentCenter.ForeColor = System.Drawing.Color.Black;
 			this.rbAlignmentCenter.Location = new System.Drawing.Point(156, 50);
 			this.rbAlignmentCenter.Name = "rbAlignmentCenter";
@@ -150,6 +151,7 @@
 			// 
 			// rbAlignmentLeft
 			// 
+			this.rbAlignmentLeft.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.rbAlignmentLeft.ForeColor = System.Drawing.Color.Black;
 			this.rbAlignmentLeft.Location = new System.Drawing.Point(95, 50);
 			this.rbAlignmentLeft.Name = "rbAlignmentLeft";
@@ -198,11 +200,11 @@
 			// 
 			this.laFont.AutoSize = true;
 			this.laFont.Enabled = false;
-			this.laFont.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.laFont.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.laFont.ForeColor = System.Drawing.Color.Black;
 			this.laFont.Location = new System.Drawing.Point(6, 175);
 			this.laFont.Name = "laFont";
-			this.laFont.Size = new System.Drawing.Size(83, 16);
+			this.laFont.Size = new System.Drawing.Size(79, 16);
 			this.laFont.TabIndex = 52;
 			this.laFont.Text = "Header Font";
 			// 
@@ -220,7 +222,6 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
 			this.colorEditForeColor.Properties.ColorAlignment = DevExpress.Utils.HorzAlignment.Center;
 			this.colorEditForeColor.Properties.ShowSystemColors = false;
-			this.colorEditForeColor.Properties.ShowWebColors = true;
 			this.colorEditForeColor.Size = new System.Drawing.Size(100, 22);
 			this.colorEditForeColor.StyleController = this.styleController;
 			this.colorEditForeColor.TabIndex = 54;
@@ -240,28 +241,27 @@
 			this.memoEditTitle.Size = new System.Drawing.Size(763, 54);
 			this.memoEditTitle.StyleController = this.styleController;
 			this.memoEditTitle.TabIndex = 49;
-			this.memoEditTitle.UseOptimizedRendering = true;
 			// 
 			// laForeColor
 			// 
 			this.laForeColor.AutoSize = true;
 			this.laForeColor.Enabled = false;
-			this.laForeColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.laForeColor.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.laForeColor.ForeColor = System.Drawing.Color.Black;
 			this.laForeColor.Location = new System.Drawing.Point(6, 203);
 			this.laForeColor.Name = "laForeColor";
-			this.laForeColor.Size = new System.Drawing.Size(69, 16);
+			this.laForeColor.Size = new System.Drawing.Size(68, 16);
 			this.laForeColor.TabIndex = 51;
 			this.laForeColor.Text = "Font Color";
 			// 
 			// laColumn1BackColor
 			// 
 			this.laColumn1BackColor.AutoSize = true;
-			this.laColumn1BackColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.laColumn1BackColor.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.laColumn1BackColor.ForeColor = System.Drawing.Color.Black;
 			this.laColumn1BackColor.Location = new System.Drawing.Point(6, 14);
 			this.laColumn1BackColor.Name = "laColumn1BackColor";
-			this.laColumn1BackColor.Size = new System.Drawing.Size(74, 16);
+			this.laColumn1BackColor.Size = new System.Drawing.Size(72, 16);
 			this.laColumn1BackColor.TabIndex = 50;
 			this.laColumn1BackColor.Text = "Back Color";
 			// 
@@ -278,7 +278,6 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
 			this.colorEditBackColor.Properties.ColorAlignment = DevExpress.Utils.HorzAlignment.Center;
 			this.colorEditBackColor.Properties.ShowSystemColors = false;
-			this.colorEditBackColor.Properties.ShowWebColors = true;
 			this.colorEditBackColor.Size = new System.Drawing.Size(100, 22);
 			this.colorEditBackColor.StyleController = this.styleController;
 			this.colorEditBackColor.TabIndex = 53;
@@ -317,11 +316,11 @@
 			// 
 			this.ckApplyForAllColumnTitles.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.ckApplyForAllColumnTitles.AutoSize = true;
-			this.ckApplyForAllColumnTitles.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
+			this.ckApplyForAllColumnTitles.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.ckApplyForAllColumnTitles.ForeColor = System.Drawing.Color.Black;
-			this.ckApplyForAllColumnTitles.Location = new System.Drawing.Point(630, 7);
+			this.ckApplyForAllColumnTitles.Location = new System.Drawing.Point(631, 7);
 			this.ckApplyForAllColumnTitles.Name = "ckApplyForAllColumnTitles";
-			this.ckApplyForAllColumnTitles.Size = new System.Drawing.Size(149, 20);
+			this.ckApplyForAllColumnTitles.Size = new System.Drawing.Size(148, 20);
 			this.ckApplyForAllColumnTitles.TabIndex = 35;
 			this.ckApplyForAllColumnTitles.Text = "Apply to All Columns";
 			this.ckApplyForAllColumnTitles.UseVisualStyleBackColor = true;

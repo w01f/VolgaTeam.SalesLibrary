@@ -102,10 +102,11 @@
 			// 
 			this.rbMarkupAsLineBreak.AutoSize = true;
 			this.rbMarkupAsLineBreak.BackColor = System.Drawing.Color.Transparent;
+			this.rbMarkupAsLineBreak.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.rbMarkupAsLineBreak.ForeColor = System.Drawing.Color.Black;
 			this.rbMarkupAsLineBreak.Location = new System.Drawing.Point(6, 82);
 			this.rbMarkupAsLineBreak.Name = "rbMarkupAsLineBreak";
-			this.rbMarkupAsLineBreak.Size = new System.Drawing.Size(183, 21);
+			this.rbMarkupAsLineBreak.Size = new System.Drawing.Size(166, 20);
 			this.rbMarkupAsLineBreak.TabIndex = 2;
 			this.rbMarkupAsLineBreak.Text = "Replace with Line Break";
 			this.rbMarkupAsLineBreak.UseVisualStyleBackColor = false;
@@ -126,10 +127,11 @@
 			this.rbMarkupAsBold.AutoSize = true;
 			this.rbMarkupAsBold.BackColor = System.Drawing.Color.Transparent;
 			this.rbMarkupAsBold.Checked = true;
+			this.rbMarkupAsBold.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.rbMarkupAsBold.ForeColor = System.Drawing.Color.Black;
 			this.rbMarkupAsBold.Location = new System.Drawing.Point(6, 37);
 			this.rbMarkupAsBold.Name = "rbMarkupAsBold";
-			this.rbMarkupAsBold.Size = new System.Drawing.Size(190, 21);
+			this.rbMarkupAsBold.Size = new System.Drawing.Size(173, 20);
 			this.rbMarkupAsBold.TabIndex = 0;
 			this.rbMarkupAsBold.TabStop = true;
 			this.rbMarkupAsBold.Text = "Bold Warning  INACTIVE!";

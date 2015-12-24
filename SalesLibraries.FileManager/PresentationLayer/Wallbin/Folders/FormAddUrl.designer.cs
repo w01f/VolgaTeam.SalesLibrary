@@ -28,16 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-			this.components = new System.ComponentModel.Container();
 			this.textEditWebAddress = new DevExpress.XtraEditors.TextEdit();
-			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
+			this.styleController = new DevExpress.XtraEditors.StyleController();
 			this.laTitle = new System.Windows.Forms.Label();
-			this.pbLogo = new System.Windows.Forms.PictureBox();
 			this.laLinkPath = new System.Windows.Forms.Label();
 			this.laLinkName = new System.Windows.Forms.Label();
 			this.edLinkName = new System.Windows.Forms.TextBox();
 			this.buttonXCancel = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXSave = new DevComponents.DotNetBar.ButtonX();
+			this.pbLogo = new System.Windows.Forms.PictureBox();
+			this.ckForcePreview = new System.Windows.Forms.CheckBox();
+			this.ckBlueHyperlink = new System.Windows.Forms.CheckBox();
 			((System.ComponentModel.ISupportInitialize)(this.textEditWebAddress.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pbLogo)).BeginInit();
@@ -75,24 +76,12 @@
 			this.laTitle.BackColor = System.Drawing.Color.White;
 			this.laTitle.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.laTitle.ForeColor = System.Drawing.Color.Black;
-			this.laTitle.Location = new System.Drawing.Point(68, 3);
+			this.laTitle.Location = new System.Drawing.Point(68, -1);
 			this.laTitle.Name = "laTitle";
-			this.laTitle.Size = new System.Drawing.Size(319, 50);
+			this.laTitle.Size = new System.Drawing.Size(319, 55);
 			this.laTitle.TabIndex = 9;
 			this.laTitle.Text = "Add a Website Link to your Sales Library…";
 			this.laTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// pbLogo
-			// 
-			this.pbLogo.BackColor = System.Drawing.Color.White;
-			this.pbLogo.ForeColor = System.Drawing.Color.Black;
-			this.pbLogo.Image = global::SalesLibraries.FileManager.Properties.Resources.LinkAddUrl;
-			this.pbLogo.Location = new System.Drawing.Point(7, 3);
-			this.pbLogo.Name = "pbLogo";
-			this.pbLogo.Size = new System.Drawing.Size(55, 50);
-			this.pbLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-			this.pbLogo.TabIndex = 8;
-			this.pbLogo.TabStop = false;
 			// 
 			// laLinkPath
 			// 
@@ -133,7 +122,7 @@
 			this.buttonXCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXCancel.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.buttonXCancel.Location = new System.Drawing.Point(294, 171);
+			this.buttonXCancel.Location = new System.Drawing.Point(294, 241);
 			this.buttonXCancel.Name = "buttonXCancel";
 			this.buttonXCancel.Size = new System.Drawing.Size(93, 32);
 			this.buttonXCancel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -147,7 +136,7 @@
 			this.buttonXSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXSave.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXSave.DialogResult = System.Windows.Forms.DialogResult.OK;
-			this.buttonXSave.Location = new System.Drawing.Point(195, 171);
+			this.buttonXSave.Location = new System.Drawing.Point(195, 241);
 			this.buttonXSave.Name = "buttonXSave";
 			this.buttonXSave.Size = new System.Drawing.Size(93, 32);
 			this.buttonXSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -155,11 +144,53 @@
 			this.buttonXSave.Text = "Save";
 			this.buttonXSave.TextColor = System.Drawing.Color.Black;
 			// 
+			// pbLogo
+			// 
+			this.pbLogo.BackColor = System.Drawing.Color.White;
+			this.pbLogo.ForeColor = System.Drawing.Color.Black;
+			this.pbLogo.Image = global::SalesLibraries.FileManager.Properties.Resources.LinkAddUrl;
+			this.pbLogo.Location = new System.Drawing.Point(7, -1);
+			this.pbLogo.Name = "pbLogo";
+			this.pbLogo.Size = new System.Drawing.Size(55, 55);
+			this.pbLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+			this.pbLogo.TabIndex = 8;
+			this.pbLogo.TabStop = false;
+			// 
+			// ckForcePreview
+			// 
+			this.ckForcePreview.AutoSize = true;
+			this.ckForcePreview.Checked = true;
+			this.ckForcePreview.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.ckForcePreview.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.ckForcePreview.ForeColor = System.Drawing.Color.Black;
+			this.ckForcePreview.Location = new System.Drawing.Point(7, 174);
+			this.ckForcePreview.Name = "ckForcePreview";
+			this.ckForcePreview.Size = new System.Drawing.Size(301, 20);
+			this.ckForcePreview.TabIndex = 27;
+			this.ckForcePreview.Text = "Immediately Launch this URL when clicked";
+			this.ckForcePreview.UseVisualStyleBackColor = true;
+			// 
+			// ckBlueHyperlink
+			// 
+			this.ckBlueHyperlink.AutoSize = true;
+			this.ckBlueHyperlink.Checked = true;
+			this.ckBlueHyperlink.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.ckBlueHyperlink.Font = new System.Drawing.Font("Arial", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.ckBlueHyperlink.ForeColor = System.Drawing.Color.Blue;
+			this.ckBlueHyperlink.Location = new System.Drawing.Point(7, 209);
+			this.ckBlueHyperlink.Name = "ckBlueHyperlink";
+			this.ckBlueHyperlink.Size = new System.Drawing.Size(120, 20);
+			this.ckBlueHyperlink.TabIndex = 28;
+			this.ckBlueHyperlink.Text = "Blue Hyperlink";
+			this.ckBlueHyperlink.UseVisualStyleBackColor = true;
+			// 
 			// FormAddUrl
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
 			this.BackColor = System.Drawing.Color.White;
-			this.ClientSize = new System.Drawing.Size(394, 214);
+			this.ClientSize = new System.Drawing.Size(394, 284);
+			this.Controls.Add(this.ckBlueHyperlink);
+			this.Controls.Add(this.ckForcePreview);
 			this.Controls.Add(this.buttonXCancel);
 			this.Controls.Add(this.buttonXSave);
 			this.Controls.Add(this.laLinkPath);
@@ -198,5 +229,7 @@
 		private System.Windows.Forms.TextBox edLinkName;
 		private DevComponents.DotNetBar.ButtonX buttonXCancel;
 		private DevComponents.DotNetBar.ButtonX buttonXSave;
+		public System.Windows.Forms.CheckBox ckForcePreview;
+		public System.Windows.Forms.CheckBox ckBlueHyperlink;
     }
 }

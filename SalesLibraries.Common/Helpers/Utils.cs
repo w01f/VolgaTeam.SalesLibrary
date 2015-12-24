@@ -60,7 +60,7 @@ namespace SalesLibraries.Common.Helpers
 
 		public static string FontToString(Font font)
 		{
-			string str = font.Name + ", " + font.Size.ToString("#0");
+			var str = font.Name + ", " + font.Size.ToString("#0");
 			if (font.Bold)
 				str = str + ", Bold";
 			if (font.Italic)

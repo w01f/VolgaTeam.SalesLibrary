@@ -270,6 +270,7 @@
 			// 
 			this.buttonXImport.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
 			this.buttonXImport.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXImport.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.buttonXImport.Location = new System.Drawing.Point(309, 5);
 			this.buttonXImport.Name = "buttonXImport";
 			this.buttonXImport.Size = new System.Drawing.Size(132, 32);
@@ -282,6 +283,7 @@
 			// 
 			this.buttonXSecurityUserListClearAll.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
 			this.buttonXSecurityUserListClearAll.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXSecurityUserListClearAll.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.buttonXSecurityUserListClearAll.Location = new System.Drawing.Point(156, 5);
 			this.buttonXSecurityUserListClearAll.Name = "buttonXSecurityUserListClearAll";
 			this.buttonXSecurityUserListClearAll.Size = new System.Drawing.Size(132, 32);
@@ -294,6 +296,7 @@
 			// 
 			this.buttonXSecurityUserListSelectAll.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
 			this.buttonXSecurityUserListSelectAll.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXSecurityUserListSelectAll.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.buttonXSecurityUserListSelectAll.Location = new System.Drawing.Point(3, 5);
 			this.buttonXSecurityUserListSelectAll.Name = "buttonXSecurityUserListSelectAll";
 			this.buttonXSecurityUserListSelectAll.Size = new System.Drawing.Size(132, 32);
@@ -396,10 +399,9 @@
 			// 
 			// SecurityOptions
 			// 
-			this.BackColor = System.Drawing.Color.White;
+			this.Appearance.PageClient.BackColor = System.Drawing.Color.White;
+			this.Appearance.PageClient.Options.UseBackColor = true;
 			this.Controls.Add(this.groupBoxSecurity);
-			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.Name = "SecurityOptions";
 			this.Padding = new System.Windows.Forms.Padding(5);
 			this.Size = new System.Drawing.Size(531, 541);
 			((System.ComponentModel.ISupportInitialize)(this.gridViewSecurityUsers)).EndInit();

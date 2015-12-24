@@ -22,6 +22,16 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 			get { return textEditWebAddress.EditValue as String; }
 		}
 
+		public bool ForcePreview
+		{
+			get { return ckForcePreview.Checked; }
+		}
+
+		public bool DisplayAsHyperlink
+		{
+			get { return ckBlueHyperlink.Checked; }
+		}
+
 		private void AddLinkForm_FormClosing(object sender, FormClosingEventArgs e)
 		{
 			if (DialogResult != DialogResult.OK) return;

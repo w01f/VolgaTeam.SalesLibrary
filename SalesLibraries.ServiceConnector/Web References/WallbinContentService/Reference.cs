@@ -701,6 +701,8 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         
         private bool isItalicField;
         
+        private bool isUnderlinedField;
+        
         /// <remarks/>
         public string name {
             get {
@@ -738,6 +740,16 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
             }
             set {
                 this.isItalicField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool isUnderlined {
+            get {
+                return this.isUnderlinedField;
+            }
+            set {
+                this.isUnderlinedField = value;
             }
         }
     }

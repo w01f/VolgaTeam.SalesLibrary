@@ -28,10 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-			this.components = new System.ComponentModel.Container();
 			this.edLinkName = new System.Windows.Forms.TextBox();
 			this.buttonEditFolderPath = new DevExpress.XtraEditors.ButtonEdit();
-			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
+			this.styleController = new DevExpress.XtraEditors.StyleController();
 			this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
 			this.laTitle = new System.Windows.Forms.Label();
 			this.pbLogo = new System.Windows.Forms.PictureBox();
@@ -96,7 +95,7 @@
 			this.laTitle.ForeColor = System.Drawing.Color.Black;
 			this.laTitle.Location = new System.Drawing.Point(68, 3);
 			this.laTitle.Name = "laTitle";
-			this.laTitle.Size = new System.Drawing.Size(319, 50);
+			this.laTitle.Size = new System.Drawing.Size(319, 55);
 			this.laTitle.TabIndex = 7;
 			this.laTitle.Text = "Add a Network Folder Link to your Sales Library…";
 			this.laTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -108,7 +107,7 @@
 			this.pbLogo.Image = global::SalesLibraries.FileManager.Properties.Resources.LinkAddNetwork;
 			this.pbLogo.Location = new System.Drawing.Point(7, 3);
 			this.pbLogo.Name = "pbLogo";
-			this.pbLogo.Size = new System.Drawing.Size(55, 50);
+			this.pbLogo.Size = new System.Drawing.Size(55, 55);
 			this.pbLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 			this.pbLogo.TabIndex = 6;
 			this.pbLogo.TabStop = false;

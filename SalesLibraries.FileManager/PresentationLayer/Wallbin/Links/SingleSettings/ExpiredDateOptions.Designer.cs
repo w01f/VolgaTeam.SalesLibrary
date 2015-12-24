@@ -75,6 +75,7 @@
 			// 
 			this.checkBoxLabelLink.AutoSize = true;
 			this.checkBoxLabelLink.BackColor = System.Drawing.Color.Transparent;
+			this.checkBoxLabelLink.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.checkBoxLabelLink.ForeColor = System.Drawing.Color.Black;
 			this.checkBoxLabelLink.Location = new System.Drawing.Point(9, 150);
 			this.checkBoxLabelLink.Name = "checkBoxLabelLink";
@@ -105,6 +106,7 @@
 			// 
 			this.checkBoxSendEmailWhenDelete.AutoSize = true;
 			this.checkBoxSendEmailWhenDelete.BackColor = System.Drawing.Color.Transparent;
+			this.checkBoxSendEmailWhenDelete.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.checkBoxSendEmailWhenDelete.ForeColor = System.Drawing.Color.Black;
 			this.checkBoxSendEmailWhenDelete.Location = new System.Drawing.Point(9, 176);
 			this.checkBoxSendEmailWhenDelete.Name = "checkBoxSendEmailWhenDelete";
@@ -208,7 +210,6 @@
 			this.Appearance.PageClient.Options.UseBackColor = true;
 			this.Controls.Add(this.gbExpiredLinks);
 			this.Controls.Add(this.checkBoxEnableExpiredLinks);
-			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.Size = new System.Drawing.Size(531, 541);
 			this.Text = "Expiration Date";
 			((System.ComponentModel.ISupportInitialize)(this.gbExpiredLinks)).EndInit();

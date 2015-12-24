@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Drawing;
 using Newtonsoft.Json;
 using SalesLibraries.Business.Entities.Common;
 using SalesLibraries.Business.Entities.Wallbin.Common.Constants;
@@ -64,11 +65,26 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 			Type = FileTypes.Url;
 		}
 
-		public static WebLink Create(string name, string path, LibraryFolder parentFolder)
+		public static WebLink Create(
+			string name,
+			string path,
+			bool forcePreview,
+			bool displayAsHyperlnk,
+			LibraryFolder parentFolder)
 		{
 			var link = Create(path);
 			link.Name = name;
 			link.Folder = parentFolder;
+			((WebLinkSettings)link.Settings).ForcePreview = forcePreview;
+			if (displayAsHyperlnk)
+			{
+				((WebLinkSettings)link.Settings).IsBold = false;
+				((WebLinkSettings)link.Settings).IsSpecialFormat = true;
+
+				var oldFont = link.Settings.Font;
+				link.Settings.Font = new Font(oldFont.Name, oldFont.Size, FontStyle.Underline);
+				link.Settings.ForeColor = Color.Blue;
+			}
 			return link;
 		}
 

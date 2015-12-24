@@ -28,9 +28,8 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.components = new System.ComponentModel.Container();
 			this.colorEditLinkSpecialColor = new DevExpress.XtraEditors.ColorEdit();
-			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
+			this.styleController = new DevExpress.XtraEditors.StyleController();
 			this.buttonEditLinkSpecialFont = new DevExpress.XtraEditors.ButtonEdit();
 			this.rbLinkSpecialFormat = new System.Windows.Forms.RadioButton();
 			this.rbLinkBoldFormat = new System.Windows.Forms.RadioButton();
@@ -57,7 +56,6 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
 			this.colorEditLinkSpecialColor.Properties.ColorAlignment = DevExpress.Utils.HorzAlignment.Center;
 			this.colorEditLinkSpecialColor.Properties.ShowSystemColors = false;
-			this.colorEditLinkSpecialColor.Properties.ShowWebColors = true;
 			this.colorEditLinkSpecialColor.Size = new System.Drawing.Size(105, 22);
 			this.colorEditLinkSpecialColor.StyleController = this.styleController;
 			this.colorEditLinkSpecialColor.TabIndex = 31;
@@ -103,10 +101,11 @@
 			// 
 			this.rbLinkSpecialFormat.AutoSize = true;
 			this.rbLinkSpecialFormat.BackColor = System.Drawing.Color.White;
+			this.rbLinkSpecialFormat.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold);
 			this.rbLinkSpecialFormat.ForeColor = System.Drawing.Color.Black;
 			this.rbLinkSpecialFormat.Location = new System.Drawing.Point(8, 111);
 			this.rbLinkSpecialFormat.Name = "rbLinkSpecialFormat";
-			this.rbLinkSpecialFormat.Size = new System.Drawing.Size(114, 20);
+			this.rbLinkSpecialFormat.Size = new System.Drawing.Size(123, 20);
 			this.rbLinkSpecialFormat.TabIndex = 2;
 			this.rbLinkSpecialFormat.Text = "Special Format";
 			this.rbLinkSpecialFormat.UseVisualStyleBackColor = false;
@@ -130,10 +129,11 @@
 			this.rbLinkRegularFormat.AutoSize = true;
 			this.rbLinkRegularFormat.BackColor = System.Drawing.Color.White;
 			this.rbLinkRegularFormat.Checked = true;
+			this.rbLinkRegularFormat.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold);
 			this.rbLinkRegularFormat.ForeColor = System.Drawing.Color.Black;
 			this.rbLinkRegularFormat.Location = new System.Drawing.Point(8, 52);
 			this.rbLinkRegularFormat.Name = "rbLinkRegularFormat";
-			this.rbLinkRegularFormat.Size = new System.Drawing.Size(67, 20);
+			this.rbLinkRegularFormat.Size = new System.Drawing.Size(72, 20);
 			this.rbLinkRegularFormat.TabIndex = 0;
 			this.rbLinkRegularFormat.TabStop = true;
 			this.rbLinkRegularFormat.Text = "Normal";
@@ -167,7 +167,6 @@
 			this.Controls.Add(this.rbLinkSpecialFormat);
 			this.Controls.Add(this.rbLinkRegularFormat);
 			this.Controls.Add(this.rbLinkBoldFormat);
-			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.Size = new System.Drawing.Size(531, 541);
 			((System.ComponentModel.ISupportInitialize)(this.colorEditLinkSpecialColor.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();

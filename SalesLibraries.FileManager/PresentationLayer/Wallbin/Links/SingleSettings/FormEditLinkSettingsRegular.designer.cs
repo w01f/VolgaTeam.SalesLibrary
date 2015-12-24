@@ -150,7 +150,7 @@
 			this.laTitle.Text = "label1";
 			this.laTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
-			// FormEditLinkSettings
+			// FormEditLinkSettingsRegular
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
 			this.BackColor = System.Drawing.Color.White;
@@ -161,7 +161,7 @@
 			this.DoubleBuffered = true;
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.MinimizeBox = false;
-			this.Name = "FormEditLinkSettings";
+			this.Name = "FormEditLinkSettingsRegular";
 			this.ShowIcon = false;
 			this.ShowInTaskbar = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
@@ -183,6 +183,6 @@
 		public DevExpress.XtraTab.XtraTabControl xtraTabControl;
 		private System.Windows.Forms.Panel pnBottom;
 	    public System.Windows.Forms.Panel pnTop;
-	    public System.Windows.Forms.Label laTitle;
+		public System.Windows.Forms.Label laTitle;
     }
 }

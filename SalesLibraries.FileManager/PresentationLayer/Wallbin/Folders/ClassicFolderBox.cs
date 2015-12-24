@@ -157,7 +157,12 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 					position = selectedLink.Index;
 
 				_outsideChangesInProgress = true;
-				var newLink = WebLink.Create(form.LinkName, form.LinkPath, DataSource);
+				var newLink = WebLink.Create(
+					form.LinkName, 
+					form.LinkPath, 
+					form.ForcePreview,
+					form.DisplayAsHyperlink,
+					DataSource);
 				if (position >= 0)
 					((List<BaseLibraryLink>)DataSource.Links).InsertItem(position, newLink);
 				else
@@ -807,52 +812,52 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 
 		#region Context Menu
 		#region Link
-		private void barButtonItemLinkPropertiesOpenLink_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+		private void barButtonItemLinkPropertiesOpenLink_ItemClick(object sender, ItemClickEventArgs e)
 		{
 			OpenLink();
 		}
 
-		private void barButtonItemLinkPropertiesFileLocation_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+		private void barButtonItemLinkPropertiesFileLocation_ItemClick(object sender, ItemClickEventArgs e)
 		{
 			OpenLinkLocation();
 		}
 
-		private void barButtonItemLinkPropertiesDelete_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+		private void barButtonItemLinkPropertiesDelete_ItemClick(object sender, ItemClickEventArgs e)
 		{
 			DeleteLink();
 		}
 
-		private void barButtonItemLinkPropertiesLinkSettings_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+		private void barButtonItemLinkPropertiesLinkSettings_ItemClick(object sender, ItemClickEventArgs e)
 		{
 			EditLinkSettings(LinkSettingsType.Notes);
 		}
 
-		private void barButtonItemLinkPropertiesAdvancedSettings_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+		private void barButtonItemLinkPropertiesAdvancedSettings_ItemClick(object sender, ItemClickEventArgs e)
 		{
 			EditLinkSettings(LinkSettingsType.AdvancedSettings);
 		}
 
-		private void barButtonItemLinkPropertiesTags_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+		private void barButtonItemLinkPropertiesTags_ItemClick(object sender, ItemClickEventArgs e)
 		{
 			EditLinkSettings(LinkSettingsType.Tags);
 		}
 
-		private void barButtonItemLinkPropertiesExpirationDate_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+		private void barButtonItemLinkPropertiesExpirationDate_ItemClick(object sender, ItemClickEventArgs e)
 		{
 			EditLinkSettings(LinkSettingsType.ExpirationDate);
 		}
 
-		private void barButtonItemLinkPropertiesSecurity_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+		private void barButtonItemLinkPropertiesSecurity_ItemClick(object sender, ItemClickEventArgs e)
 		{
 			EditLinkSettings(LinkSettingsType.Security);
 		}
 
-		private void barButtonItemLinkPropertiesWidget_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+		private void barButtonItemLinkPropertiesWidget_ItemClick(object sender, ItemClickEventArgs e)
 		{
 			EditLinkSettings(LinkSettingsType.Widget);
 		}
 
-		private void barButtonItemLinkPropertiesBanner_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+		private void barButtonItemLinkPropertiesBanner_ItemClick(object sender, ItemClickEventArgs e)
 		{
 			EditLinkSettings(LinkSettingsType.Banner);
 		}

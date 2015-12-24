@@ -28,8 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.components = new System.ComponentModel.Container();
-			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
+			this.styleController = new DevExpress.XtraEditors.StyleController();
 			this.labelControlTitle = new DevExpress.XtraEditors.LabelControl();
 			this.laAdminTools = new System.Windows.Forms.Label();
 			this.buttonXRefreshPreview = new DevComponents.DotNetBar.ButtonX();
@@ -78,6 +77,7 @@
 			// 
 			this.buttonXRefreshPreview.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
 			this.buttonXRefreshPreview.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXRefreshPreview.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.buttonXRefreshPreview.Location = new System.Drawing.Point(151, 101);
 			this.buttonXRefreshPreview.Name = "buttonXRefreshPreview";
 			this.buttonXRefreshPreview.Size = new System.Drawing.Size(118, 26);
@@ -91,6 +91,7 @@
 			// 
 			this.buttonXOpenWV.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
 			this.buttonXOpenWV.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXOpenWV.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.buttonXOpenWV.Location = new System.Drawing.Point(8, 101);
 			this.buttonXOpenWV.Name = "buttonXOpenWV";
 			this.buttonXOpenWV.Size = new System.Drawing.Size(118, 26);
@@ -102,13 +103,12 @@
 			// 
 			// PreviewOptions
 			// 
-			this.BackColor = System.Drawing.Color.White;
+			this.Appearance.PageClient.BackColor = System.Drawing.Color.White;
+			this.Appearance.PageClient.Options.UseBackColor = true;
 			this.Controls.Add(this.buttonXRefreshPreview);
 			this.Controls.Add(this.laAdminTools);
 			this.Controls.Add(this.buttonXOpenWV);
 			this.Controls.Add(this.labelControlTitle);
-			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.Name = "PreviewOptions";
 			this.Size = new System.Drawing.Size(531, 541);
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
 			this.ResumeLayout(false);
