@@ -168,10 +168,7 @@
 			$result .= '<div class="link-type">' . $this->type . '</div>';
 			$result .= '<div class="link-name">' . $this->title . ' - ' . $this->description . '</div>';
 			$result .= '<div class="url">' . $this->getServiceDataUrl() . '</div>';
-			$result .= '<div class="activity-data">' . CJSON::encode(array(
-					'action' => $this->getTypeForActivityTracker(),
-					'title' => $this->getTitleForActivityTracker(),
-				)) . '</div>';
+			$result .= '<div class="activity-data">' . CJSON::encode($this->getActivityData()) . '</div>';
 			return $result;
 		}
 
@@ -206,6 +203,19 @@
 		public function getServiceDataUrl()
 		{
 			return $this->getSourceLink();
+		}
+
+		/**
+		 * @return array
+		 */
+		public function getActivityData()
+		{
+			return array(
+				'action' => $this->getTypeForActivityTracker(),
+				'details' => array(
+					'File' => $this->getTitleForActivityTracker()
+				),
+			);
 		}
 
 		/**

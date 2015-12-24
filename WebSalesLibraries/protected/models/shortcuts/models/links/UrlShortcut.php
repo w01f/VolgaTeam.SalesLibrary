@@ -21,6 +21,16 @@
 		}
 
 		/**
+		 * @return array
+		 */
+		public function getActivityData()
+		{
+			$activityData = parent::getActivityData();
+			$activityData['details']['URL'] = $this->sourceLink;
+			return $activityData;
+		}
+
+		/**
 		 * @return string
 		 */
 		public function getTypeForActivityTracker()

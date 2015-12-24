@@ -164,13 +164,12 @@
 
 		this.trackActivity = function (activityData, action, operation)
 		{
+			var details = activityData.details;
+			details['Operation'] = operation == undefined ? 'Open' : operation;
 			$.SalesPortal.LogHelper.write({
 				type: 'Shortcut Tile',
 				subType: action == undefined ? activityData.action : action,
-				data: {
-					File: activityData.title,
-					Operation: operation == undefined ? 'Open' : operation
-				}
+				data: details
 			});
 		};
 

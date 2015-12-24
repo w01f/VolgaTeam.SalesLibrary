@@ -19,7 +19,7 @@
 				logHandler: function ()
 				{
 					$.SalesPortal.ShortcutsManager.trackActivity(
-						{title: searchShortcutOptions.title},
+						{details: {File: searchShortcutOptions.title}},
 						'Search Activity',
 						'Search Activity');
 				}
