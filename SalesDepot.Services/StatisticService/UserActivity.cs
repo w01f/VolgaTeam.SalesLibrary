@@ -22,37 +22,20 @@ namespace SalesDepot.Services.StatisticService
 		{
 			get
 			{
-				if ((subType.Equals("Open") ||
-					subType.Equals("Open") ||
-					subType.Equals("Preview Options") ||
-					subType.Equals("Preview") ||
-					subType.Equals("Preview Page") ||
-					subType.Equals("Play Video") ||
-					subType.Equals("Send Email") ||
-					subType.Equals("Download File") ||
-					subType.Equals("Email Activity") ||
-					subType.Equals("Create Email") ||
-					subType.Equals("Add to QS") ||
-					subType.Equals("Favorites") ||
-					subType.Equals("Favorites Activity") ||
-					subType.Equals("Add to Favorites") ||
-					subType.Equals("Shortcut Video Link") ||
-					subType.Equals("Shortcut Search Link") ||
-					subType.Equals("Shortcut Download Link") ||
-					subType.Equals("Shortcut Web Link") ||
-					subType.Equals("Shortcut Window Link") ||
-					subType.Equals("Shortcut Page Link") ||
-					subType.Equals("Shortcut File Link") ||
-					subType.Equals("Carousel Group Select")
-					)
-					&& details != null)
-					return details.Where(d => d.tag.ToLower().Equals("file")).Select(d =>
-																						 {
-																							 if (d.value.Contains("?version="))
-																								 return d.value.Substring(0, d.value.IndexOf("?version="));
-																							 return d.value;
-																						 }).FirstOrDefault();
-				return String.Empty;
+				if (details == null) return String.Empty;
+				return details
+					.Where(d => !String.IsNullOrEmpty(d.tag))
+					.Where(d => d.tag.Equals("file", StringComparison.OrdinalIgnoreCase) ||
+						d.tag.Equals("file name", StringComparison.OrdinalIgnoreCase) ||
+						d.tag.Equals("link", StringComparison.OrdinalIgnoreCase) ||
+						d.tag.Equals("name", StringComparison.OrdinalIgnoreCase))
+					.Select(d =>
+						{
+							if (d.value.Contains("?version="))
+								return d.value.Substring(0, d.value.IndexOf("?version="));
+							return d.value;
+						})
+					.FirstOrDefault() ?? String.Empty;
 			}
 		}
 

@@ -11,9 +11,6 @@
     <Setting Name="SalesDepot_Services_StatisticService_StatisticControllerService" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://localhost/SalesLibraries/statistic/quote?ws=1</Value>
     </Setting>
-    <Setting Name="SalesDepot_Services_InactiveUsersService_InactiveUsersControllerService" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://localhost/SalesLibraries/inactiveusers/quote?ws=1</Value>
-    </Setting>
     <Setting Name="SalesDepot_Services_QBuilderService_QbuilderControllerService" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://localhost/SalesLibraries/qbuilder/quote?ws=1</Value>
     </Setting>
@@ -22,6 +19,9 @@
     </Setting>
     <Setting Name="SalesDepot_Services_FileManagerDataService_FileManagerDataControllerService" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://localhost/SalesLibraries/fileManagerData/quote?ws=1</Value>
+    </Setting>
+    <Setting Name="SalesDepot_Services_InactiveUsersService_InactiveUsersControllerService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost/SalesLibraries/inactiveUsers/quote?ws=1</Value>
     </Setting>
   </Settings>
 </SettingsFile>

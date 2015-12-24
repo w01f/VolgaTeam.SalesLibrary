@@ -56,16 +56,6 @@ namespace SalesDepot.Services.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost/SalesLibraries/inactiveusers/quote?ws=1")]
-        public string SalesDepot_Services_InactiveUsersService_InactiveUsersControllerService {
-            get {
-                return ((string)(this["SalesDepot_Services_InactiveUsersService_InactiveUsersControllerService"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
         [global::System.Configuration.DefaultSettingValueAttribute("http://localhost/SalesLibraries/qbuilder/quote?ws=1")]
         public string SalesDepot_Services_QBuilderService_QbuilderControllerService {
             get {
@@ -90,6 +80,16 @@ namespace SalesDepot.Services.Properties {
         public string SalesDepot_Services_FileManagerDataService_FileManagerDataControllerService {
             get {
                 return ((string)(this["SalesDepot_Services_FileManagerDataService_FileManagerDataControllerService"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost/SalesLibraries/inactiveUsers/quote?ws=1")]
+        public string SalesDepot_Services_InactiveUsersService_InactiveUsersControllerService {
+            get {
+                return ((string)(this["SalesDepot_Services_InactiveUsersService_InactiveUsersControllerService"]));
             }
         }
     }

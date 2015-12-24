@@ -8,6 +8,7 @@ using DevExpress.XtraTab;
 using FileManager.BusinessClasses;
 using SalesDepot.CoreObjects.BusinessClasses;
 using SalesDepot.CoreObjects.ToolClasses;
+using Alignment = SalesDepot.CoreObjects.BusinessClasses.Alignment;
 
 namespace FileManager.PresentationClasses.WallBin.LinkProperties
 {

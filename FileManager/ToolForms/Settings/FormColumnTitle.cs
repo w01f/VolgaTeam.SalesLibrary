@@ -11,6 +11,7 @@ using FileManager.BusinessClasses;
 using FileManager.PresentationClasses.WallBin;
 using SalesDepot.CoreObjects.BusinessClasses;
 using SalesDepot.CoreObjects.ToolClasses;
+using Alignment = SalesDepot.CoreObjects.BusinessClasses.Alignment;
 
 namespace FileManager.ToolForms.Settings
 {

@@ -650,13 +650,13 @@ namespace SalesDepot.Services
 		#endregion
 
 		#region Inactive Users
-		private InactiveusersControllerService GetInactiveUsersClient()
+		private InactiveUsersControllerService GetInactiveUsersClient()
 		{
 			try
 			{
-				var client = new InactiveusersControllerService();
+				var client = new InactiveUsersControllerService();
 				client.Timeout = 600000;
-				client.Url = string.Format("{0}/inactiveusers/quote?ws=1", _website);
+				client.Url = string.Format("{0}/InactiveUsers/quote?ws=1", _website);
 				return client;
 			}
 			catch
@@ -669,7 +669,7 @@ namespace SalesDepot.Services
 		{
 			message = string.Empty;
 			var userRecords = new List<InactiveUsersService.UserModel>();
-			InactiveusersControllerService client = GetInactiveUsersClient();
+			var client = GetInactiveUsersClient();
 			if (client != null)
 			{
 				try
@@ -693,7 +693,7 @@ namespace SalesDepot.Services
 		public void ResetUsers(string[] userIds, bool onlyEmail, string sender, string subject, string body, out string message)
 		{
 			message = string.Empty;
-			InactiveusersControllerService client = GetInactiveUsersClient();
+			var client = GetInactiveUsersClient();
 			if (client != null)
 			{
 				try
@@ -716,7 +716,7 @@ namespace SalesDepot.Services
 		public void DeleteUsers(string[] userIds, bool onlyEmail, string sender, string subject, string body, out string message)
 		{
 			message = string.Empty;
-			InactiveusersControllerService client = GetInactiveUsersClient();
+			var client = GetInactiveUsersClient();
 			if (client != null)
 			{
 				try

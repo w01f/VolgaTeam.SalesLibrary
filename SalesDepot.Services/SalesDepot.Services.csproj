@@ -183,10 +183,10 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>SalesDepot_Services_FileManagerDataService_FileManagerDataControllerService</CachedSettingsPropName>
     </WebReferenceUrl>
-    <WebReferenceUrl Include="http://localhost/SalesLibraries/inactiveusers/quote">
+    <WebReferenceUrl Include="http://localhost/SalesLibraries/InactiveUsers/quote">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\InactiveUsersService\</RelPath>
-      <UpdateFromURL>http://localhost/SalesLibraries/inactiveusers/quote</UpdateFromURL>
+      <UpdateFromURL>http://localhost/SalesLibraries/InactiveUsers/quote</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>
