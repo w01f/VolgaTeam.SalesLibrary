@@ -8,7 +8,14 @@
 		var viewOptions = undefined;
 		var dataTable = new $.SalesPortal.SearchDataTable(
 			{
-				saveState: true
+				saveState: true,
+				logHandler: function ()
+				{
+					$.SalesPortal.ShortcutsManager.trackActivity(
+						$.parseJSON($('<div>' + appData.options.serviceData + '</div>').find('.activity-data').text()),
+						'Search Activity',
+						'Search Activity');
+				}
 			}
 		);
 
@@ -45,25 +52,25 @@
 		{
 			var shortcutActionsContainer = $('#shortcut-action-container');
 
-			shortcutActionsContainer.find('.search-app-run').off('click').on('click', function ()
+			shortcutActionsContainer.find('.search-app-run').off('click.action').on('click.action', function ()
 			{
 				runSearch();
 			});
 
-			shortcutActionsContainer.find('.search-app-clear').off('click').on('click', function ()
+			shortcutActionsContainer.find('.search-app-clear').off('click.action').on('click.action', function ()
 			{
 				dataTable.clear();
 				$.SalesPortal.ShortcutsManager.openShortcut(
 					$('<div>' + appData.options.serviceData + '</div>'));
 			});
 
-			shortcutActionsContainer.find('.search-app-keyword').off('click').on('click', function ()
+			shortcutActionsContainer.find('.search-app-keyword').off('click.action').on('click.action', function ()
 			{
 				editSearchConditions('keyword',
 					function (content)
 					{
 						content.find('#search-filter-edit-condition-content-value').val(currentSearchConditions.get('text'));
-						content.find("#search-filter-edit-condition-clear-content-value").off('click').on('click', function ()
+						content.find("#search-filter-edit-condition-clear-content-value").off('click.search-app').on('click.search-app', function ()
 						{
 							content.find('#search-filter-edit-condition-content-value').val('');
 						});
@@ -80,7 +87,7 @@
 				);
 			});
 
-			shortcutActionsContainer.find('.search-app-date-range').off('click').on('click', function ()
+			shortcutActionsContainer.find('.search-app-date-range').off('click.action').on('click.action', function ()
 			{
 				editSearchConditions('dateRange',
 					function (content)
@@ -179,7 +186,7 @@
 				);
 			});
 
-			shortcutActionsContainer.find('.search-app-filters').off('click').on('click', function ()
+			shortcutActionsContainer.find('.search-app-filters').off('click.action').on('click.action', function ()
 			{
 				editSearchConditions('settings',
 					function (content)
@@ -196,7 +203,7 @@
 				);
 			});
 
-			shortcutActionsContainer.find('.search-app-file-types').off('click').on('click', function ()
+			shortcutActionsContainer.find('.search-app-file-types').off('click.action').on('click.action', function ()
 			{
 				editSearchConditions('fileTypes',
 					function (content)
@@ -226,7 +233,7 @@
 				);
 			});
 
-			shortcutActionsContainer.find('.search-app-tags').off('click').on('click', function ()
+			shortcutActionsContainer.find('.search-app-tags').off('click.action').on('click.action', function ()
 			{
 				editSearchConditions('categories',
 					function (content)
@@ -280,7 +287,7 @@
 							$(this).closest('.group-checkbox').find('.tag-selector').prop('checked', $(this).is(':checked'));
 						});
 
-						content.find('#search-filter-edit-clear-all').off('click').on('click', function ()
+						content.find('#search-filter-edit-clear-all').off('click.search-app').on('click.search-app', function ()
 						{
 							categoriesPane.find(":checked").prop('checked', false);
 						});
@@ -319,7 +326,7 @@
 				);
 			});
 
-			shortcutActionsContainer.find('.search-app-super-tags').off('click').on('click', function ()
+			shortcutActionsContainer.find('.search-app-super-tags').off('click.action').on('click.action', function ()
 			{
 				editSearchConditions('superFilters',
 					function (content)
@@ -351,7 +358,7 @@
 				);
 			});
 
-			shortcutActionsContainer.find('.search-app-libraries').off('click').on('click', function ()
+			shortcutActionsContainer.find('.search-app-libraries').off('click.action').on('click.action', function ()
 			{
 				editSearchConditions('libraries',
 					function (content)
@@ -384,12 +391,12 @@
 							}
 						});
 
-						content.find('#search-filter-edit-select-all').off('click').on('click', function ()
+						content.find('#search-filter-edit-select-all').off('click.search-app').on('click.search-app', function ()
 						{
 							librariesPane.find('input[type="checkbox"]').prop('checked', true);
 						});
 
-						content.find('#search-filter-edit-clear-all').off('click').on('click', function ()
+						content.find('#search-filter-edit-clear-all').off('click.search-app').on('click.search-app', function ()
 						{
 							librariesPane.find(":checked").prop('checked', false);
 						});
@@ -459,16 +466,22 @@
 				{
 					var content = $(msg);
 
+					var formLogger = new $.SalesPortal.FormLogger();
+					formLogger.init({
+						logObject: {name: appData.options.headerTitle},
+						formContent: content
+					});
+
 					content.find('.header i').addClass(iconClass);
 
 					initCallback(content);
 
-					content.find('.accept-button').off('click').on('click', function ()
+					content.find('.accept-button').off('click.search-app').on('click.search-app', function ()
 					{
 						acceptCallback(content);
 						$.fancybox.close();
 					});
-					content.find('.search-button').off('click').on('click', function ()
+					content.find('.search-button').off('click.search-app').on('click.search-app', function ()
 					{
 						acceptCallback(content);
 						$.fancybox.close();
@@ -485,7 +498,7 @@
 							runSearch();
 						}
 					});
-					content.find('.cancel-button').off('click').on('click', function ()
+					content.find('.cancel-button').off('click.search-app').on('click.search-app', function ()
 					{
 						$.fancybox.close();
 					});

@@ -146,4 +146,15 @@
 		{
 			return Yii::app()->createAbsoluteUrl('shortcuts/getGroupContent', array('groupId' => $this->id));
 		}
+
+		/**
+		 * @return string
+		 */
+		public function getGroupData()
+		{
+			$result = '';
+			$result .= '<div class="activity-data">' . CJSON::encode(array(
+					'title' => $this->title)) . '</div>';
+			return $result;
+		}
 	}

@@ -1,6 +1,6 @@
 <? /**
  * @var $previewData GalleryPreviewData
-  */
+ */
 ?>
 <!DOCTYPE html>
 <html>
@@ -8,13 +8,14 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 	<?
 		$cs = Yii::app()->clientScript;
-		$cs->registerCssFile(Yii::app()->baseUrl . '/vendor/supersized/css/supersized.css?' . Yii::app()->params['version']);
-		$cs->registerCssFile(Yii::app()->baseUrl . '/vendor/supersized/theme/supersized.shutter.css?' . Yii::app()->params['version']);
+		$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/vendor/supersized/css/supersized.css?' . Yii::app()->params['version']);
+		$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/vendor/supersized/theme/supersized.shutter.css?' . Yii::app()->params['version']);
 		$cs->registerCoreScript('jquery');
 		$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/json/jquery.json-2.3.min.js', CClientScript::POS_HEAD);
-		$cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/supersized/js/jquery.easing.min.js', CClientScript::POS_HEAD);
-		$cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/supersized/js/supersized.3.2.7.min.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
-		$cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/supersized/theme/supersized.shutter.js', CClientScript::POS_HEAD);
+		$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/supersized/js/jquery.easing.min.js', CClientScript::POS_HEAD);
+		$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/supersized/js/supersized.3.2.7.min.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
+		$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/supersized/theme/supersized.shutter.js', CClientScript::POS_HEAD);
+		$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/common/logger.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
 	?>
 	<script type="text/javascript">
 		jQuery(function ($)
@@ -48,25 +49,20 @@
 				thumbnail_navigation: 0,// Thumbnail navigation
 				slideSwitchHandler: function ()
 				{
-					var viewerData = $.parseJSON($('#data').text());
-					$.ajax({
-						type: "POST",
-						url: window.BaseUrl + "statistic/writeActivity",
-						data: {
+					<? if ($previewData->userAuthorized): ?>
+						var viewerData = $.parseJSON($('#data').text());
+						$.SalesPortal.LogHelper.write({
 							type: 'Link',
 							subType: 'Preview Page',
-							data: $.toJSON({
+							data: {
 								Name: viewerData.name,
 								File: viewerData.fileName,
 								'Original Format': viewerData.format,
 								Format: 'png',
 								Mode: 'Fullscreen'
-							})
-						},
-						async: true,
-						dataType: 'html'
-					});
-
+							}
+						});
+					<?endif;?>
 				},
 				slides: [			// Slideshow Images
 					<? $selectedLinks = $previewData->getFullScreenGalleryImages()?>

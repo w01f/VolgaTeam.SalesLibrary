@@ -15,7 +15,14 @@
 		var dataTable = new $.SalesPortal.SearchDataTable(
 			{
 				saveState: false,
-				backHandler: backHandler
+				backHandler: backHandler,
+				logHandler: function ()
+				{
+					$.SalesPortal.ShortcutsManager.trackActivity(
+						{title: searchShortcutOptions.title},
+						'Search Activity',
+						'Search Activity');
+				}
 			}
 		);
 
@@ -136,10 +143,17 @@
 
 			var initPanel = function ()
 			{
-				sideBar.find('.tags-filter-panel-switcher').off('click').on('click', function ()
+				var formLogger = new $.SalesPortal.FormLogger();
+				formLogger.init({
+					logObject: {name: searchShortcutOptions.title},
+					formContent: sideBar
+				});
+
+				sideBar.find('.tags-filter-panel-switcher').off('click.search-options').on('click.search-options', function ()
 				{
 					editTagsCondition();
 				});
+
 				sideBar.find('.search-bar-text')
 					.off('input').on('input', function ()
 					{
@@ -192,7 +206,8 @@
 			var editTagsCondition = function ()
 			{
 				var categoryConditions = sideBar.find('.search-conditions');
-				var categorySelector = categoryConditions.find('.tag-condition-selector');
+				var categorySelector = categoryConditions.find('.tag-condition-selector-wrapper');
+				categorySelector.find('.tag-condition-selector').addClass('logger-form');
 				$.fancybox({
 					content: categorySelector.html(),
 					title: $('.tags-filter-panel-switcher').html(),
@@ -204,6 +219,12 @@
 					afterShow: function ()
 					{
 						var innerContent = $('.fancybox-inner');
+
+						var formLogger = new $.SalesPortal.FormLogger();
+						formLogger.init({
+							logObject: {name: searchShortcutOptions.title},
+							formContent: innerContent
+						});
 
 						var categoriesContent = innerContent.find(".tag-list");
 						var categories = customSearchData.getCategorySettings();
@@ -257,24 +278,24 @@
 						{
 							superFiltersContent.find('.btn:contains("' + value + '")').button('toggle');
 						});
-						superFiltersContent.find('.btn').off('click').on('click', function ()
+						superFiltersContent.find('.btn').off('click.search-options').on('click.search-options', function ()
 						{
 							$(this).button('toggle').blur();
 						});
 
 
-						innerContent.find('.tags-clear-all').off('click').on('click', function ()
+						innerContent.find('.tags-clear-all').off('click.search-options').on('click.search-options', function ()
 						{
 							superFiltersContent.find('.btn').removeClass('active').blur();
 							categoriesContent.find(":checked").prop('checked', false);
 						});
 
-						innerContent.find('.cancel-button').on('click', function ()
+						innerContent.find('.cancel-button').on('click.search-app', function ()
 						{
 							$.fancybox.close();
 						});
 
-						innerContent.find('.accept-button').on('click', function ()
+						innerContent.find('.accept-button').on('click.search-app', function ()
 						{
 							var selectedSuperFilters = [];
 							var allSuperFilterButtons = superFiltersContent.find('.btn');
@@ -436,7 +457,7 @@
 				var firstItem = selectorItems.first();
 				if (firstItem != null)
 					firstItem.addClass('opened');
-				selectorItems.on('click', function ()
+				selectorItems.on('click.search-app', function ()
 				{
 					selectorItems.removeClass('opened');
 					$(this).addClass('opened');
@@ -489,21 +510,21 @@
 				else if (searchShortcutOptions.subSearchDefaultView == 'links')
 					shortcutActionsContainer.find('.sub-search-links').hide();
 
-				shortcutActionsContainer.find('.sub-search-all').off('click').on('click', function ()
+				shortcutActionsContainer.find('.sub-search-all').off('click.action').on('click.action', function ()
 				{
 					SimpleSearch(content);
 					shortcutActionsContainer.find('.sub-search-action').show();
 					$(this).hide();
 				});
 
-				shortcutActionsContainer.find('.sub-search-criteria').off('click').on('click', function ()
+				shortcutActionsContainer.find('.sub-search-criteria').off('click.action').on('click.action', function ()
 				{
 					SubSearchCustom(content);
 					shortcutActionsContainer.find('.sub-search-action').show();
 					$(this).hide();
 				});
 
-				shortcutActionsContainer.find('.sub-search-links').off('click').on('click', function ()
+				shortcutActionsContainer.find('.sub-search-links').off('click.action').on('click.action', function ()
 				{
 					SubSearchByTemplates(content);
 					shortcutActionsContainer.find('.sub-search-action').show();

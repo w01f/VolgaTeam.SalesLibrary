@@ -89,7 +89,7 @@
 		 */
 		public function getTypeForActivityTracker()
 		{
-			return 'Shortcut Search Link';
+			return 'Search';
 		}
 
 		/**

@@ -28,7 +28,8 @@
 			groupPage.find('.menu-item').off('click').on('click', function (e)
 			{
 				var data = $(this).find('.service-data');
-				that.trackActivity(data);
+				var activityData = $.parseJSON(data.find('.activity-data').text());
+				that.trackActivity(activityData);
 
 				var hasPageContent = data.find('.has-page-content').length > 0;
 				var samePage = data.find('.same-page').length > 0;
@@ -157,18 +158,12 @@
 		this.trackActivity = function (dataObject)
 		{
 			var activityData = $.parseJSON(dataObject.find('.activity-data').text());
-			$.ajax({
-				type: "POST",
-				url: window.BaseUrl + "statistic/writeActivity",
+			$.SalesPortal.LogHelper.write({
+				type: 'Shortcut Tile',
+				subType: activityData.action,
 				data: {
-					type: 'Shortcuts',
-					subType: activityData.action,
-					data: $.toJSON({
-						File: activityData.title
-					})
-				},
-				async: true,
-				dataType: 'html'
+					File: activityData.title
+				}
 			});
 		};
 	};

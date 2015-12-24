@@ -153,18 +153,13 @@
 				async: true,
 				dataType: 'html'
 			});
-			$.ajax({
-				type: "POST",
-				url: window.BaseUrl + "statistic/writeActivity",
+
+			$.SalesPortal.LogHelper.write({
+				type: 'Quizzes',
+				subType: 'Quiz Selected',
 				data: {
-					type: 'Quizzes',
-					subType: 'Quiz Selected',
-					data: $.toJSON({
-						Name: itemName
-					})
-				},
-				async: true,
-				dataType: 'html'
+					Name: itemName
+				}
 			});
 		};
 
@@ -486,38 +481,28 @@
 				});
 			else
 				openForm(end.content);
-			$.ajax({
-				type: "POST",
-				url: window.BaseUrl + "statistic/writeActivity",
+
+			$.SalesPortal.LogHelper.write({
+				type: 'Quizzes',
+				subType: 'Quiz Finished',
 				data: {
-					type: 'Quizzes',
-					subType: 'Quiz Finished',
-					data: $.toJSON({
-						Name: extendedTitle,
-						ID: uniqueId
-					})
-				},
-				async: true,
-				dataType: 'html'
+					Name: extendedTitle,
+					ID: uniqueId
+				}
 			});
 		};
 
 		this.run = function ()
 		{
 			showCover();
-			$.ajax({
-				type: "POST",
-				url: window.BaseUrl + "statistic/writeActivity",
+
+			$.SalesPortal.LogHelper.write({
+				type: 'Quizzes',
+				subType: 'Quiz Started',
 				data: {
-					type: 'Quizzes',
-					subType: 'Quiz Started',
-					data: $.toJSON({
-						Name: extendedTitle,
-						ID: uniqueId
-					})
-				},
-				async: true,
-				dataType: 'html'
+					Name: extendedTitle,
+					ID: uniqueId
+				}
 			});
 		};
 	};

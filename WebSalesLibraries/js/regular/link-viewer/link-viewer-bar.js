@@ -18,7 +18,7 @@
 					buttonsPanel = $(msg);
 					$('body').append(buttonsPanel);
 					that.resize();
-					buttonsPanel.find('.back').off('click').on('click', function ()
+					buttonsPanel.find('.back').off('click.preview').on('click.preview', function ()
 					{
 						$.fancybox.close();
 						options.returnCallback();

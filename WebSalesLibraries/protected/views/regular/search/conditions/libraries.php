@@ -5,8 +5,8 @@
 ?>
 <div class="row">
 	<div class="col-xs-12">
-		<button type="button" class="btn btn-default btn-block" id="search-filter-edit-select-all">Select All</button>
-		<button type="button" class="btn btn-default btn-block" id="search-filter-edit-clear-all">Clear All</button>
+		<button type="button" class="btn btn-default btn-block log-action" id="search-filter-edit-select-all">Select All</button>
+		<button type="button" class="btn btn-default btn-block log-action" id="search-filter-edit-clear-all">Clear All</button>
 	</div>
 </div>
 <br>
@@ -18,7 +18,7 @@
 				<div>
 					<? foreach ($group->libraries as $library): ?>
 						<div class="checkbox">
-							<label> <input type="checkbox" value="<? echo $library->id; ?>">
+							<label> <input class="log-action" type="checkbox" value="<? echo $library->id; ?>">
 								<span class="name"><? echo $library->name; ?></span>
 							</label>
 						</div>

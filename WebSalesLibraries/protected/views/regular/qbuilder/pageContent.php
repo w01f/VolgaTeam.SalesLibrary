@@ -11,7 +11,7 @@
 					<p class="form-control-static text-left">Title:</p>
 				</div>
 				<div class="col-xs-6">
-					<label for="page-content-title" class="sr-only"></label><input type="text" id="page-content-title" class="form-control" value="<? echo $page->title; ?>">
+					<label for="page-content-title" class="sr-only"></label><input type="text" id="page-content-title" class="form-control log-action" value="<? echo $page->title; ?>">
 				</div>
 				<div class="col-xs-5">
 					<p class="form-control-static text-right">Created: <? echo $page->getCreateDateFormatted(); ?></p>
@@ -23,41 +23,41 @@
 				</div>
 				<div class="col-xs-11">
 					<p class="form-control-static text-left">
-						<a id="page-content-url" href="<? echo $page->getUrl(); ?>" target="_blank"><? echo $page->getUrl(); ?></a>
+						<a id="page-content-url" class="log-action" href="<? echo $page->getUrl(); ?>" target="_blank"><? echo $page->getUrl(); ?></a>
 					</p>
 				</div>
 			</div>
 		</form>
 		<div id="page-content-tabs-headers" class="tab-pages scroll_tabs_theme_light">
-			<span class="page-tab-header selected">Links
-				<div class="service-data">
-					<div class="tab-id">#page-content-tab-links</div>
-				</div>
+			<span class="page-tab-header log-action selected">Links
+				<span class="service-data">
+					<span class="tab-id">#page-content-tab-links</span>
+				</span>
 			</span>
 			<span class="page-tab-header">Title
-				<div class="service-data">
-					<div class="tab-id">#page-content-tab-title</div>
-				</div>
+				<span class="service-data">
+					<span class="tab-id">#page-content-tab-title</span>
+				</span>
 			</span>
 			<span class="page-tab-header">Header
-				<div class="service-data">
-					<div class="tab-id">#page-content-tab-header</div>
-				</div>
+				<span class="service-data">
+					<span class="tab-id">#page-content-tab-header</span>
+				</span>
 			</span>
 			<span class="page-tab-header">Footer
-				<div class="service-data">
-					<div class="tab-id">#page-content-tab-footer</div>
-				</div>
+				<span class="service-data">
+					<span class="tab-id">#page-content-tab-footer</span>
+				</span>
 			</span>
 			<span class="page-tab-header">Settings
-				<div class="service-data">
-					<div class="tab-id">#page-content-tab-security</div>
-				</div>
+				<span class="service-data">
+					<span class="tab-id">#page-content-tab-security</span>
+				</span>
 			</span>
 			<span class="page-tab-header">Logo
-				<div class="service-data">
-					<div class="tab-id">#page-content-tab-logo</div>
-				</div>
+				<span class="service-data">
+					<span class="tab-id">#page-content-tab-logo</span>
+				</span>
 			</span>
 		</div>
 		<div id="page-content-tabs-content">
@@ -69,29 +69,25 @@
 					</div>
 				</div>
 				<div id="page-content-links-container" class="link-grid-container">
-					<? $links = isset($page) ? $page->getPageLinks() : null; ?>
-					<? if (isset($links)): ?>
-						<? $this->renderPartial('../qbuilder/pageLinks', array('links' => $links), false, true); ?>
-					<? endif; ?>
 				</div>
 			</div>
 			<div id="page-content-tab-title">
 				<h4 class="checkbox">
-					<label><input type="checkbox" id="page-content-show-description" value="" <? echo isset($page->subtitle) && $page->subtitle != '' ? 'checked' : '' ?>> This statement will be placed at the TOP of your quickSITE...</label>
+					<label><input type="checkbox" id="page-content-show-description" class="log-action" value="" <? echo isset($page->subtitle) && $page->subtitle != '' ? 'checked' : '' ?>> This statement will be placed at the TOP of your quickSITE...</label>
 				</h4>
-				<label class="sr-only" for="page-content-description"></label><textarea id="page-content-description"><? echo $page->subtitle; ?></textarea>
+				<label class="sr-only" for="page-content-description"></label><textarea id="page-content-description" class="log-action"><? echo $page->subtitle; ?></textarea>
 			</div>
 			<div id="page-content-tab-header">
 				<h4 class="checkbox">
-					<label><input type="checkbox" id="page-content-show-header" value="" <? echo isset($page->header) && $page->header != '' ? 'checked' : '' ?>>The Header Text will be JUST ABOVE the links you are sharing…</label>
+					<label><input type="checkbox" id="page-content-show-header" class="log-action" value="" <? echo isset($page->header) && $page->header != '' ? 'checked' : '' ?>>The Header Text will be JUST ABOVE the links you are sharing…</label>
 				</h4>
-				<label class="sr-only" for="page-content-header-text"></label><textarea id="page-content-header-text"><? echo $page->header; ?></textarea>
+				<label class="sr-only" for="page-content-header-text"></label><textarea id="page-content-header-text" class="log-action"><? echo $page->header; ?></textarea>
 			</div>
 			<div id="page-content-tab-footer">
 				<h4 class="checkbox">
-					<label><input type="checkbox" id="page-content-show-footer" value="" <? echo isset($page->footer) && $page->footer != '' ? 'checked' : '' ?>>The Footer Text will be at the VERY BOTTOM of your quickSITE…</label>
+					<label><input type="checkbox" id="page-content-show-footer" class="log-action" value="" <? echo isset($page->footer) && $page->footer != '' ? 'checked' : '' ?>>The Footer Text will be at the VERY BOTTOM of your quickSITE…</label>
 				</h4>
-				<label class="sr-only" for="page-content-footer-text"></label><textarea id="page-content-footer-text"><? echo $page->footer; ?></textarea>
+				<label class="sr-only" for="page-content-footer-text"></label><textarea id="page-content-footer-text" class="log-action"><? echo $page->footer; ?></textarea>
 			</div>
 			<div id="page-content-tab-security">
 				<? $expDate = $page->getExpirationDateFormatted(); ?>
@@ -101,15 +97,15 @@
 						<div class="col-xs-5">
 							<div class="checkbox">
 								<label>
-									<input type="checkbox" id="page-content-use-expiration-date" value="" <? echo isset($expDate) && $expDate != '' ? 'checked' : '' ?>> A. Expiration Date
+									<input type="checkbox" id="page-content-use-expiration-date" class="log-action" value="" <? echo isset($expDate) && $expDate != '' ? 'checked' : '' ?>> A. Expiration Date
 								</label>
 							</div>
 						</div>
 						<div class="col-xs-4">
 							<div id="page-content-expiration-date-container" class="input-group input-group-sm <? if ($page->isExpired()): ?>has-error<? endif; ?>" <? if (!(isset($expDate) && $expDate != '')): ?>style="display: none"<? endif; ?>>
-								<input id="page-content-expiration-date" class="form-control" type="text" placeholder="Select Date..." value="<? echo $expDate; ?>" readonly>
+								<input id="page-content-expiration-date" class="form-control log-action" type="text" placeholder="Select Date..." value="<? echo $expDate; ?>" readonly>
 								<div class="input-group-btn">
-									<button class="btn btn-default select-date-toggle" type="button">
+									<button class="btn btn-default select-date-toggle log-action" type="button">
 										<span class="glyphicon glyphicon-calendar"></span></button>
 								</div>
 							</div>
@@ -117,40 +113,40 @@
 					</div>
 					<div class="checkbox">
 						<label>
-							<input type="checkbox" id="page-content-require-login" value="" <? echo $page->restricted ? 'checked' : '' ?>> B. Require User login and password to view site
+							<input type="checkbox" id="page-content-require-login" class="log-action" value="" <? echo $page->restricted ? 'checked' : '' ?>> B. Require User login and password to view site
 						</label>
 					</div>
 					<div class="form-group">
 						<div class="col-xs-5">
 							<div class="checkbox">
 								<label>
-									<input id="page-content-access-code-enabled" type="checkbox" value="" <? echo isset($page->pin_code) && $page->pin_code > 0 ? 'checked' : '' ?>> C. ACCESS Pin (4 Digits)
+									<input id="page-content-access-code-enabled" class="log-action" type="checkbox" value="" <? echo isset($page->pin_code) && $page->pin_code > 0 ? 'checked' : '' ?>> C. ACCESS Pin (4 Digits)
 								</label>
 							</div>
 						</div>
 						<div class="col-xs-4">
 							<label class="sr-only" for="page-content-access-code"></label>
-							<input type="text" maxlength="4" class="form-control input-sm" id="page-content-access-code" <? if (!(isset($page->pin_code) && $page->pin_code > 0)): ?>style="display: none;"<? endif; ?> value="<? echo isset($page->pin_code) ? $page->pin_code : '' ?>">
+							<input type="text" maxlength="4" class="form-control input-sm log-action" id="page-content-access-code" <? if (!(isset($page->pin_code) && $page->pin_code > 0)): ?>style="display: none;"<? endif; ?> value="<? echo isset($page->pin_code) ? $page->pin_code : '' ?>">
 						</div>
 					</div>
 					<div class="checkbox">
 						<label>
-							<input type="checkbox" id="page-content-disable-widgets" "value="" <? echo $page->disable_widgets ? 'checked' : '' ?>> D. Disable Widget Icons
+							<input type="checkbox" id="page-content-disable-widgets" class="log-action" value="" <? echo $page->disable_widgets ? 'checked' : '' ?>> D. Disable Widget Icons
 						</label>
 					</div>
 					<div class="checkbox">
 						<label>
-							<input type="checkbox" id="page-content-disable-banners" value="" <? echo $page->disable_banners ? 'checked' : '' ?>> E. Disable Banner Images
+							<input type="checkbox" id="page-content-disable-banners" class="log-action" value="" <? echo $page->disable_banners ? 'checked' : '' ?>> E. Disable Banner Images
 						</label>
 					</div>
 					<div class="checkbox">
 						<label>
-							<input type="checkbox" id="page-content-show-links-as-url" value="" <? echo $page->show_links_as_url ? 'checked' : '' ?>> F. Blue Hyperlinks
+							<input type="checkbox" id="page-content-show-links-as-url" class="log-action" value="" <? echo $page->show_links_as_url ? 'checked' : '' ?>> F. Blue Hyperlinks
 						</label>
 					</div>
 					<div class="checkbox">
 						<label>
-							<input type="checkbox" id="page-content-record-activity" value="" <? echo $page->record_activity ? 'checked' : '' ?>> G. Email me each time someone clicks a link on this quickSITE
+							<input type="checkbox" id="page-content-record-activity" class="log-action" value="" <? echo $page->record_activity ? 'checked' : '' ?>> G. Email me each time someone clicks a link on this quickSITE
 						</label>
 					</div>
 					<div class="form-group">
@@ -159,7 +155,7 @@
 						</div>
 						<div class="col-xs-4">
 							<label for="page-content-activity-email-copy" class="sr-only"></label>
-							<input type="email" id="page-content-activity-email-copy" class="form-control" <? echo !$page->record_activity ? 'disabled' : '' ?> value="<? echo isset($page->activity_email_copy) ? $page->activity_email_copy : '' ?>">
+							<input type="email" id="page-content-activity-email-copy" class="form-control log-action" <? echo !$page->record_activity ? 'disabled' : '' ?> value="<? echo isset($page->activity_email_copy) ? $page->activity_email_copy : '' ?>">
 						</div>
 					</div>
 				</div>
@@ -168,7 +164,7 @@
 				<? $selectedLogo = isset($page) ? $page->getLogo() : null; ?>
 				<div class="header">
 					<h4 class="checkbox">
-						<label><input type="checkbox" id="page-content-show-logo" value="" <? echo isset($selectedLogo) ? 'checked' : '' ?>>Show a Logo on your QuickSite:</label>
+						<label><input type="checkbox" id="page-content-show-logo" class="log-action" value="" <? echo isset($selectedLogo) ? 'checked' : '' ?>>Show a Logo on your QuickSite:</label>
 					</h4>
 				</div>
 				<div class="logo-list<? if (!isset($selectedLogo)): ?> disabled<? endif; ?>">
@@ -176,7 +172,7 @@
 						<? if (isset($logos)): ?>
 							<? foreach ($logos as $logo): ?>
 								<li>
-									<a href="#" <? if ($selectedLogo == $logo): ?>class="opened"<? endif; ?>><img src="<? echo $logo; ?>"></a>
+									<a href="#" class="log-action<? if ($selectedLogo == $logo): ?> opened<? endif; ?>"><img src="<? echo $logo; ?>"></a>
 								</li>
 							<? endforeach; ?>
 						<? endif; ?>

@@ -8,4 +8,7 @@
 	<? else: ?>
 		<img src="<? echo $menuGroup->imageContent; ?>" alt=""/>
 	<?endif; ?>
+	<div class="service-data">
+		<? echo $menuGroup->getGroupData(); ?>
+	</div>
 </div>

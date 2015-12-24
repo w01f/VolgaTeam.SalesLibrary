@@ -42,6 +42,6 @@
 		 */
 		public function getTypeForActivityTracker()
 		{
-			return 'Training App';
+			return 'Quizzes';
 		}
 	}

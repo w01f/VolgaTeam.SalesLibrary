@@ -22,7 +22,8 @@
 						dataItem.onClick = function ()
 						{
 							var shortcutData = $('<div>' + dataItem.dataContent + '</div>');
-							$.SalesPortal.ShortcutsManager.trackActivity(shortcutData);
+							var activityData = $.parseJSON(shortcutData.find('.activity-data').text());
+							$.SalesPortal.ShortcutsManager.trackActivity(activityData);
 
 							var hasPageContent = shortcutData.find('.has-page-content').length > 0;
 							var samePage = shortcutData.find('.same-page').length > 0;
@@ -38,18 +39,12 @@
 			carousel.addListener(FWDUltimate3DCarousel.CATEGORY_CHANGE, function (ev)
 			{
 				updateContentSize();
-				$.ajax({
-					type: "POST",
-					url: window.BaseUrl + "statistic/writeActivity",
+				$.SalesPortal.LogHelper.write({
+					type: 'Navigation',
+					subType: 'Carousel Group Select',
 					data: {
-						type: 'Shortcuts',
-						subType: 'Carousel Group Select',
-						data: $.toJSON({
-							File: carouselData.displayParameters.predefinedDataList[ev.id].name
-						})
-					},
-					async: true,
-					dataType: 'html'
+						File: carouselData.displayParameters.predefinedDataList[ev.id].name
+					}
 				});
 			});
 
@@ -65,7 +60,7 @@
 			shortcutActionsContainer.find('.grid').show();
 			shortcutActionsContainer.find('.carousel').hide();
 
-			shortcutActionsContainer.find('.grid').off('click').on('click', function ()
+			shortcutActionsContainer.find('.grid').off('click.action').on('click.action', function ()
 			{
 				$.SalesPortal.ShortcutsManager.openShortcut(
 					$('<div>' + carouselData.serviceData + '</div>'),

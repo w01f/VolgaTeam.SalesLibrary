@@ -1,3 +1,8 @@
+<?
+	/**
+	 * @var $folders FavoritesFolder
+	 */
+?>
 <ul class="favorites-folders-list nav nav-list">
 	<? foreach ($folders as $folder): ?>
 	<li>
@@ -9,6 +14,7 @@
 		<div class="service-data">
 			<? if (isset($folder->id)): ?>
 			<div class="folder-id"><? echo $folder->id;?></div>
+			<div class="folder-name"><? echo $folder->name;?></div>
 			<?php endif;?>
 		</div>
 		<?if (isset($folder->childFolders)) echo $this->renderFile(Yii::getPathOfAlias('application.views.regular.favorites') . '/favoritesFolders.php', array('folders' => $folder->childFolders, 'selectedFolderId' => isset($selectedFolderId) ? $selectedFolderId : null), true);?>

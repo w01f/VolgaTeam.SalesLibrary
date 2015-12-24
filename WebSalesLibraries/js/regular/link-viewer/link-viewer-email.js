@@ -5,29 +5,25 @@
 	$.SalesPortal.PreviewEmailer = function (viewerData)
 	{
 		var dialogContent = $('.fancybox-wrap');
+
+		var formLogger = new $.SalesPortal.FormLogger();
+		formLogger.init({
+			logObject: {
+				name: viewerData.name,
+				fileName: viewerData.fileName,
+				format: viewerData.format
+			},
+			formContent: dialogContent.find('#link-viewer-tab-email')
+		});
+
 		dialogContent.find('#add-page-expires-in').find('.btn').on('click', function ()
 		{
 			dialogContent.find('#add-page-expires-in').find('.btn').removeClass('active').blur();
 			$(this).addClass('active');
-			$.ajax({
-				type: "POST",
-				url: window.BaseUrl + "statistic/writeActivity",
-				data: {
-					type: 'Email',
-					subType: 'Email Activity',
-					data: $.toJSON({
-						Name: viewerData.name,
-						File: viewerData.fileName,
-						'Original Format': viewerData.format
-					})
-				},
-				async: true,
-				dataType: 'html'
-			});
 		});
 
 		var logoSelector = dialogContent.find('.logo-list');
-		$('#add-page-show-logo').off('change').on('change', function ()
+		$('#add-page-show-logo').off('change.email').on('change.email', function ()
 		{
 			if ($(this).is(':checked'))
 			{
@@ -46,21 +42,6 @@
 			if (!logoSelector.hasClass('disabled'))
 			{
 				$(this).addClass('opened');
-				$.ajax({
-					type: "POST",
-					url: window.BaseUrl + "statistic/writeActivity",
-					data: {
-						type: 'Email',
-						subType: 'Email Activity',
-						data: $.toJSON({
-							Name: viewerData.name,
-							File: viewerData.fileName,
-							'Original Format': viewerData.format
-						})
-					},
-					async: true,
-					dataType: 'html'
-				});
 			}
 		});
 		dialogContent.find('#add-page-name-enabled').on('change', function ()
@@ -70,7 +51,7 @@
 			else
 				dialogContent.find('#add-page-name').removeAttr('disabled');
 		});
-		dialogContent.find('#add-page-access-code-enabled').off('change').on('change', function ()
+		dialogContent.find('#add-page-access-code-enabled').off('change.email').on('change.email', function ()
 		{
 			var accessCode = $('#add-page-access-code');
 			if ($(this).is(':checked'))
@@ -92,7 +73,7 @@
 					event.preventDefault();
 			}
 		});
-		dialogContent.find('#add-page-record-activity').off('change').on('change', function ()
+		dialogContent.find('#add-page-record-activity').off('change.email').on('change.email', function ()
 		{
 			var ccEmail = $('#add-page-activity-email-copy');
 			if ($(this).is(':checked'))
@@ -102,24 +83,6 @@
 				ccEmail.attr('disabled', 'disabled');
 				ccEmail.val('');
 			}
-		});
-		dialogContent.find('#add-page-name-enabled, #add-page-restricted,#add-page-access-code,#add-page-disable-widgets,#add-page-disable-banners,#add-page-record-activity,#add-page-show-links-as-url').on('change', function ()
-		{
-			$.ajax({
-				type: "POST",
-				url: window.BaseUrl + "statistic/writeActivity",
-				data: {
-					type: 'Email',
-					subType: 'Email Activity',
-					data: $.toJSON({
-						Name: viewerData.name,
-						File: viewerData.fileName,
-						'Original Format': viewerData.format
-					})
-				},
-				async: true,
-				dataType: 'html'
-			});
 		});
 		dialogContent.find('.send-email').on('click', function ()
 		{

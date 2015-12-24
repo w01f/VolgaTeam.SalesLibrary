@@ -30,12 +30,9 @@
 
 					$previewData = $link->getPreviewData($isQuickSite);
 
-					if ($previewData->userAuthorized)
-						StatisticActivityRecord::WriteActivity('Link', 'Preview Options', array('Name' => $link->fileName, 'File' => $link->fileName));
-
 					$dialogData = array(
 						'format' => $previewData->viewerFormat,
-						'data' => CJSON::encode($previewData),
+						'data' => $previewData,
 						'content' => $this->renderPartial($previewData->contentView, array('data' => $previewData,), true),
 					);
 				}

@@ -25,6 +25,17 @@
 				},
 				success: function (parameters)
 				{
+					if(parameters.data.userAuthorized)
+						$.SalesPortal.LogHelper.write({
+							type: 'Link',
+							subType: 'Preview Options',
+							data: {
+								Name: parameters.data.name,
+								File: parameters.data.fileName,
+								'Original Format': parameters.format
+							}
+						});
+
 					switch (parameters.format)
 					{
 						case 'document':
@@ -84,10 +95,6 @@
 
 		this.showSpecialDialog = function (content, linkIds, folderId)
 		{
-			var singleLinkId = linkIds != undefined && linkIds.length > 0 ? linkIds[0] : undefined;
-			var linkName = content.find('.object-name').text();
-			var fileName = content.find('.object-file-name').text();
-			var fileType = content.find('.object-file-type').text();
 			content.find('#context-add').off('click').on('click', function ()
 			{
 				$.fancybox.close();
@@ -95,19 +102,6 @@
 					$.SalesPortal.QBuilder.LinkCart.addLinks(linkIds);
 				else if (folderId != undefined)
 					$.SalesPortal.QBuilder.LinkCart.addFolder(folderId);
-			});
-			content.find('#context-email').off('click').on('click', function ()
-			{
-				$.fancybox.close();
-				$.SalesPortal.QBuilder.PageList.addLitePage(singleLinkId, linkName, fileName, fileType);
-			});
-			content.find('#context-manager').off('click').on('click', function ()
-			{
-				$.fancybox.close();
-			});
-			content.find('.accept-button').off('click').on('click', function ()
-			{
-				$.fancybox.close();
 			});
 			$.fancybox({
 				content: content,
@@ -150,6 +144,27 @@
 				success: function (msg)
 				{
 					favoritesDialogObject.content = $(msg);
+
+					$.SalesPortal.LogHelper.write({
+						type: 'Link',
+						subType: 'Favorites Activity',
+						data: {
+							Name: title,
+							File: fileName,
+							'Original Format': fileType
+						}
+					});
+
+					var formLogger = new $.SalesPortal.FormLogger();
+					formLogger.init({
+						logObject: {
+							name: title,
+							fileName: fileName,
+							format: fileType
+						},
+						formContent: favoritesDialogObject.content
+					});
+
 					favoritesDialogObject.mainView = favoritesDialogObject.content.find('.main-view');
 					favoritesDialogObject.mainView.find('.dropdown .dropdown-toggle').dropdown();
 					favoritesDialogObject.mainView.find('#show-folder-selector').on('click', function ()
@@ -158,41 +173,11 @@
 						{
 							favoritesDialogObject.mainView.hide();
 							favoritesDialogObject.folderSelector.show();
-							$.ajax({
-								type: "POST",
-								url: window.BaseUrl + "statistic/writeActivity",
-								data: {
-									type: 'Link',
-									subType: 'Favorites Activity',
-									data: $.toJSON({
-										Name: title,
-										File: fileName,
-										'Original Format': fileType
-									})
-								},
-								async: true,
-								dataType: 'html'
-							});
 						}
 					});
 					favoritesDialogObject.mainView.find('#clear-folder').on('click', function ()
 					{
 						favoritesDialogObject.mainView.find('#favorites-folder-name').val('');
-						$.ajax({
-							type: "POST",
-							url: window.BaseUrl + "statistic/writeActivity",
-							data: {
-								type: 'Link',
-								subType: 'Favorites Activity',
-								data: $.toJSON({
-									Name: title,
-									File: fileName,
-									'Original Format': fileType
-								})
-							},
-							async: true,
-							dataType: 'html'
-						});
 					});
 					favoritesDialogObject.mainView.find('.btn.cancel-button').on('click', function ()
 					{
@@ -224,13 +209,6 @@
 								{
 									$.fancybox.close();
 								});
-								favoritesDialogObject.content.find('.favorites-button').on('click', function ()
-								{
-									$.cookie("selectedRibbonTabId", 'favorites-tab', {
-										expires: (60 * 60 * 24 * 7)
-									});
-									location.reload();
-								});
 								$.fancybox({
 									content: favoritesDialogObject.content,
 									title: title,
@@ -251,21 +229,6 @@
 					{
 						favoritesDialogObject.folderSelector.hide();
 						favoritesDialogObject.mainView.show();
-						$.ajax({
-							type: "POST",
-							url: window.BaseUrl + "statistic/writeActivity",
-							data: {
-								type: 'Link',
-								subType: 'Favorites Activity',
-								data: $.toJSON({
-									Name: title,
-									File: fileName,
-									'Original Format': fileType
-								})
-							},
-							async: true,
-							dataType: 'html'
-						});
 					});
 					favoritesDialogObject.folderSelector.find('.btn.accept-button').on('click', function ()
 					{
@@ -278,21 +241,6 @@
 						{
 							favoritesDialogObject.folderSelector.find('li').removeClass('active');
 							$(this).addClass('active');
-							$.ajax({
-								type: "POST",
-								url: window.BaseUrl + "statistic/writeActivity",
-								data: {
-									type: 'Link',
-									subType: 'Favorites Activity',
-									data: $.toJSON({
-										Name: title,
-										File: fileName,
-										'Original Format': fileType
-									})
-								},
-								async: true,
-								dataType: 'html'
-							});
 						})
 						.on('dblclick', function ()
 						{

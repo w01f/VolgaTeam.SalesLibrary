@@ -4,7 +4,7 @@
 	 * */
 	$title = $data->isOffice365 ? 'Office 365 Link...' : 'Website URL Link...';
 ?>
-<div class="link-viewer">
+<div class="link-viewer<? if ($data->userAuthorized): ?> logger-form<?endif;?>" data-log-group="Link" data-log-action="Preview Activity">
 	<div class="row tab-above-header active" id="tab-above-header-save">
 		<? echo $title; ?>
 	</div>
@@ -14,9 +14,13 @@
 		</div>
 	<? endif; ?>
 	<ul class="nav nav-tabs" role="tablist" id="link-viewer-body-tabs">
-		<li class="active"><a href="#link-viewer-tab-save" role="tab" data-toggle="tab">Link Options</a></li>
+		<li class="active">
+			<a class="log-action" href="#link-viewer-tab-save" role="tab" data-toggle="tab">Link Options</a>
+		</li>
 		<? if ($data->allowAddToQuickSite): ?>
-			<li><a href="#link-viewer-tab-email" role="tab" data-toggle="tab">Email</a></li>
+			<li>
+				<a class="log-action" href="#link-viewer-tab-email" role="tab" data-toggle="tab" data-log-action="Add to QS">Email</a>
+			</li>
 		<? endif; ?>
 	</ul>
 	<div class="tab-content">

@@ -35,6 +35,6 @@
 		 */
 		public function getTypeForActivityTracker()
 		{
-			return 'Shortcut Quick List Link';
+			return 'Quicklist';
 		}
 	}

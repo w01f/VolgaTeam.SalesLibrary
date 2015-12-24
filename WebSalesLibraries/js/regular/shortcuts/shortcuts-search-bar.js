@@ -16,19 +16,19 @@
 					if (e.which == 13)
 						search();
 				});
-				searchBar.find('.search-bar-run').on('click', search);
+				searchBar.find('.search-bar-run').on('click.search-bar', search);
 
 				searchBar.find('.file-filter-panel .file-selector input').off('change').on('change', function ()
 				{
 					updateSearchButtonState();
 				});
 
-				searchBar.find('.search-bar-options').off('click').on('click', function ()
+				searchBar.find('.search-bar-options').off('click.search-bar').on('click.search-bar', function ()
 				{
 					editSettings();
 				});
 
-				searchBar.find('.tags-filter-panel-switcher').off('click').on('click', function ()
+				searchBar.find('.tags-filter-panel-switcher').off('click.search-bar').on('click.search-bar', function ()
 				{
 					editTagsCondition();
 				});
@@ -37,6 +37,12 @@
 				updateSelectedCategories();
 
 				initActionButtons();
+
+				var formLogger = new $.SalesPortal.FormLogger();
+				formLogger.init({
+					logObject: {name: 'Search Bar'},
+					formContent: searchBar
+				});
 			}
 		};
 
@@ -71,7 +77,7 @@
 					modalContent.find('#search-bar-edit-exact-match').prop('checked', searchBarConditions.get('exactMatch'));
 					modalContent.find('#search-bar-edit-only-new-files').prop('checked', searchBarConditions.get('onlyNewFiles'));
 
-					modalContent.find('.search-button').off('click').on('click', function ()
+					modalContent.find('.search-button').off('click.search-bar').on('click.search-bar', function ()
 					{
 						searchBarConditions.setFileTypesSettings({
 							showPowerPoint: modalContent.find('#search-bar-edit-file-power-point').prop('checked'),
@@ -119,7 +125,7 @@
 								"&categories=" + $.toJSON(searchBarConditions.getCategorySettings()));
 						}
 					});
-					modalContent.find('.cancel-button').off('click').on('click', function ()
+					modalContent.find('.cancel-button').off('click.search-bar').on('click.search-bar', function ()
 					{
 						$.fancybox.close();
 					});
@@ -216,6 +222,12 @@
 				{
 					var content = $(msg);
 
+					var formLogger = new $.SalesPortal.FormLogger();
+					formLogger.init({
+						logObject: {name: 'Search Bar'},
+						formContent: content
+					});
+
 					var fileSettings = searchBarConditions.getFileTypesSettings();
 					content.find('#search-bar-edit-file-power-point').prop('checked', fileSettings.showPowerPoint);
 					content.find('#search-bar-edit-file-video').prop('checked', fileSettings.showVideo);
@@ -225,7 +237,7 @@
 					content.find('#search-bar-edit-exact-match').prop('checked', searchBarConditions.get('exactMatch'));
 					content.find('#search-bar-edit-only-new-files').prop('checked', searchBarConditions.get('onlyNewFiles'));
 
-					content.find('.accept-button').off('click').on('click', function ()
+					content.find('.accept-button').off('click.search-bar').on('click.search-bar', function ()
 					{
 						searchBarConditions.setFileTypesSettings({
 							showPowerPoint: content.find('#search-bar-edit-file-power-point').prop('checked'),
@@ -242,7 +254,7 @@
 
 						$.fancybox.close();
 					});
-					content.find('.cancel-button').off('click').on('click', function ()
+					content.find('.cancel-button').off('click.search-bar').on('click.search-bar', function ()
 					{
 						$.fancybox.close();
 					});
@@ -267,7 +279,8 @@
 
 		var editTagsCondition = function ()
 		{
-			var categorySelector = searchBar.find('.tag-condition-selector');
+			var categorySelector = searchBar.find('.tag-condition-selector-wrapper');
+			categorySelector.find('.tag-condition-selector').addClass('logger-form');
 			$.fancybox({
 				content: categorySelector.html(),
 				title: $('.tags-filter-panel-switcher').html(),
@@ -279,6 +292,12 @@
 				afterShow: function ()
 				{
 					var innerContent = $('.fancybox-inner');
+
+					var formLogger = new $.SalesPortal.FormLogger();
+					formLogger.init({
+						logObject: {name: 'Search Bar'},
+						formContent: innerContent
+					});
 
 					var categoriesContent = innerContent.find(".tag-list");
 					var categories = searchBarConditions.getCategorySettings();
@@ -332,24 +351,24 @@
 					{
 						superFiltersContent.find('.btn:contains("' + value + '")').button('toggle');
 					});
-					superFiltersContent.find('.btn').off('click').on('click', function ()
+					superFiltersContent.find('.btn').off('click.search-bar').on('click.search-bar', function ()
 					{
 						$(this).button('toggle').blur();
 					});
 
 
-					innerContent.find('.tags-clear-all').off('click').on('click', function ()
+					innerContent.find('.tags-clear-all').off('click.search-bar').on('click.search-bar', function ()
 					{
 						superFiltersContent.find('.btn').removeClass('active').blur();
 						categoriesContent.find(":checked").prop('checked', false);
 					});
 
-					innerContent.find('.cancel-button').on('click', function ()
+					innerContent.find('.cancel-button').on('click.search-bar', function ()
 					{
 						$.fancybox.close();
 					});
 
-					innerContent.find('.accept-button').on('click', function ()
+					innerContent.find('.accept-button').on('click.search-bar', function ()
 					{
 						var selectedSuperFilters = [];
 						var allSuperFilterButtons = superFiltersContent.find('.btn');
@@ -403,13 +422,13 @@
 
 			updateSearchToggleButtonState();
 
-			shortcutActionsContainer.find('.show-search').off('click').on('click', function ()
+			shortcutActionsContainer.find('.show-search').off('click.action').on('click.action', function ()
 			{
 				changeVisibility(true);
 				updateSearchToggleButtonState();
 			});
 
-			shortcutActionsContainer.find('.hide-search').off('click').on('click', function ()
+			shortcutActionsContainer.find('.hide-search').off('click.action').on('click.action', function ()
 			{
 				changeVisibility(false);
 				updateSearchToggleButtonState();

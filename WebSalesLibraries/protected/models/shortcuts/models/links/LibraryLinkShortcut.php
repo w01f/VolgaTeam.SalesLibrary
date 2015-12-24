@@ -55,6 +55,6 @@
 		 */
 		public function getTypeForActivityTracker()
 		{
-			return 'Shortcut File Link';
+			return 'Libraryfile';
 		}
 	}

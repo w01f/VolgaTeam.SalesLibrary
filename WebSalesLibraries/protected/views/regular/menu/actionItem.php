@@ -13,4 +13,7 @@
 		<i class="<? echo $action->iconClass; ?>"></i>
 	</div>
 	<div class="text"><? echo $action->title; ?></div>
+	<div class="service-data">
+		<? echo $action->getActionData(); ?>
+	</div>
 </a>

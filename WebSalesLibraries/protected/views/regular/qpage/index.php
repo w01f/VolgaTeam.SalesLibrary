@@ -7,6 +7,11 @@
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/regular/qpage/page-content.css?' . Yii::app()->params['version']);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/qpage/qpage-controller.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
 	$userId = Yii::app()->user->getId();
+
+	$authorized = false;
+	$userId = Yii::app()->user->getId();
+	if (isset($userId))
+		$authorized = true;
 ?>
 <script type="text/javascript">
 	window.BaseUrl = '<?php echo Yii::app()->getBaseUrl(true); ?>' + '/qpage/';
@@ -21,7 +26,7 @@
 					<img src="<? echo $page->logo; ?>">
 				<? endif; ?>
 			</div>
-			<div class="email">
+			<div class="email logger-form">
 				<? if ($page->record_activity): ?>
 					<div class="row">
 						<div class="col-xs-8">
@@ -48,11 +53,17 @@
 						<? if ($page->show_links_as_url): ?>
 							<? if ($link->name != '' && !$link->isFolder): ?>
 								<li>
-									<a href="#" id="link<?php echo $link->id; ?>" class="clickable" style="text-decoration: underline;"><? echo $link->name; ?></a>
+									<a href="#" id="link<?php echo $link->id; ?>" class="clickable<? if ($authorized): ?> log-action<?endif;?>" style="text-decoration: underline;"><? echo $link->name; ?></a>
 								</li>
 							<? endif; ?>
 						<? else: ?>
-							<? echo $this->renderFile(Yii::getPathOfAlias('application.views.regular.wallbin') . '/link.php', array('link' => $link, 'disableBanner' => $page->disable_banners, 'disableWidget' => $page->disable_widgets), true); ?>
+							<? echo $this->renderFile(Yii::getPathOfAlias('application.views.regular.wallbin') . '/link.php',
+								array(
+									'link' => $link,
+									'disableBanner' => $page->disable_banners,
+									'disableWidget' => $page->disable_widgets,
+									'authorized' => $authorized
+								), true); ?>
 						<? endif; ?>
 					<?php endforeach; ?>
 				<? endif; ?>

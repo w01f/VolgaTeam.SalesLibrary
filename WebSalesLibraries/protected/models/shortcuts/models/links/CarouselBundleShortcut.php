@@ -32,7 +32,7 @@
 		 */
 		public function getTypeForActivityTracker()
 		{
-			return 'Shortcut Carousel Link';
+			return 'Carouselbundle';
 		}
 
 		/**

@@ -52,7 +52,7 @@
 		 */
 		public function getTypeForActivityTracker()
 		{
-			return 'Shortcut Page Link';
+			return 'LibraryPage';
 		}
 
 		/**

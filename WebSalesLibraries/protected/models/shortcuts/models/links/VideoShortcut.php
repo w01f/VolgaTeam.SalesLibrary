@@ -47,7 +47,7 @@
 		 */
 		public function getTypeForActivityTracker()
 		{
-			return 'Shortcut Video Link';
+			return 'Video';
 		}
 
 		/**

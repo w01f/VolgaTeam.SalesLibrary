@@ -4,7 +4,7 @@
 	$.SalesPortal = $.SalesPortal || { };
 	$.SalesPortal.RateManager = function ()
 	{
-		this.init = function (linkId, controlsContainer, rateData)
+		this.init = function (linkData, controlsContainer, rateData)
 		{
 			if (rateData != undefined)
 			{
@@ -17,7 +17,7 @@
 					$.ajax({
 						type: "POST",
 						url: window.BaseUrl + "rate/setRate",
-						data: {linkId: linkId, value: value},
+						data: {linkId: linkData.id, value: value},
 						success: function (msg)
 						{
 							if (msg.totalRateImage != '')
@@ -33,6 +33,17 @@
 						},
 						async: true,
 						dataType: 'json'
+					});
+
+					$.SalesPortal.LogHelper.write({
+						type: 'Link',
+						subType: 'Rate',
+						data: {
+							Name: linkData.name,
+							File: linkData.file,
+							'Original Format': linkData.format,
+							'Rate': value
+						}
 					});
 				});
 

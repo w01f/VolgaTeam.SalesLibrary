@@ -375,15 +375,6 @@
 		}
 
 		/**
-		 * @param $isQuickSite boolean
-		 * @return PreviewData
-		 */
-		public function getPreviewData($isQuickSite)
-		{
-			return PreviewData::getInstance($this, $isQuickSite);
-		}
-
-		/**
 		 * @return string
 		 */
 		public function getTagsString()
@@ -422,5 +413,30 @@
 		public static function libraryChildLinkComparer($x, $y)
 		{
 			return strcasecmp($x->name, $y->name);
+		}
+
+		/**
+		 * @param $isQuickSite boolean
+		 * @return PreviewData
+		 */
+		public function getPreviewData($isQuickSite)
+		{
+			return PreviewData::getInstance($this, $isQuickSite);
+		}
+
+		/**
+		 * @return string
+		 */
+		public function getLinkData()
+		{
+			$result = '';
+			$result .= '<div class="activity-data">' .
+				CJSON::encode(array(
+					'title' => $this->name,
+					'fileName' => $this->fileName,
+					'format' => $this->originalFormat
+				)) .
+				'</div>';
+			return $result;
 		}
 	}

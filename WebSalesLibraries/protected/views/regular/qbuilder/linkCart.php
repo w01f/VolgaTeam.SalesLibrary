@@ -21,7 +21,7 @@
 						</tr>
 					</table>
 				</td>
-				<td class="link-delete">
+				<td class="link-delete log-action">
 					<img src="<?php echo Yii::app()->baseUrl . '/images/search/search-delete.png?1' ?>" alt="Delete Link">
 				</td>
 			</tr>

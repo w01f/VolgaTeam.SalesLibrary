@@ -29,7 +29,6 @@
 
 		var initActionButtons = function ()
 		{
-			//var shortcutActionsContainer = $('#shortcut-action-container');
 		};
 
 		var updateContentSize = function ()

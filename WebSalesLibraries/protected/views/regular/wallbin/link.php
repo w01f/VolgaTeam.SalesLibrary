@@ -1,5 +1,10 @@
 <?
-	/** @var $link LibraryLink */
+	/**
+	 * @var $link LibraryLink
+	 * @var $disableBanner boolean
+	 * @var $disableWidget boolean
+	 * @var $authorized boolean
+	 */
 
 	$tooltip = $link->tooltip;
 
@@ -24,6 +29,8 @@
 
 	if ($link->extendedProperties->isRestricted)
 		$linkContainerClass .= ' restricted';
+	if ($authorized)
+		$linkContainerClass .= ' log-activity';
 ?>
 <a class="<? echo $linkContainerClass; ?>" id="link<? echo $link->id; ?>" href="<? echo $link->isDirectUrl ? $link->fileLink : '#'; ?>" target="_blank">
 	<? if (!(isset($disableBanner) && $disableBanner) && isset($link->banner) && $link->banner->isEnabled): ?>
@@ -64,6 +71,7 @@
 				. 'font-size: ' . $font->size . 'pt; '
 				. 'font-weight: ' . ($link->extendedProperties->isBold ? 'bold' : ($font->isBold ? ' bold' : ' normal')) . '; '
 				. 'font-style: ' . ($font->isItalic ? ' italic' : ' normal') . '; '
+				. 'text-decoration: ' . ($font->isUnderlined ? ' underline' : ' inherit') . '; '
 				. 'color: ' . $color . '; '
 				. 'white-space: nowrap;';
 		}
@@ -79,4 +87,7 @@
 	<? if ($link->isFolder): ?>
 		<div class="folder-link-content" id="folder-link-content<? echo $link->id; ?>"></div>
 	<? endif; ?>
+	<div class="service-data">
+		<? echo $link->getLinkData(); ?>
+	</div>
 </a>

@@ -12,6 +12,10 @@
 				deleteHandler: function (linkId)
 				{
 					deleteLink(linkId, currentFolderId);
+				},
+				logHandler: function ()
+				{
+					trackActivity();
 				}
 			}
 		);
@@ -41,7 +45,6 @@
 
 		var initActionButtons = function ()
 		{
-			//var shortcutActionsContainer = $('#shortcut-action-container');
 		};
 
 		var loadFolders;
@@ -85,7 +88,7 @@
 				}
 			);
 			foldersPanel.find('.delete-folder').hide();
-			foldersPanel.find('.delete-folder').off('click').on('click', function (event)
+			foldersPanel.find('.delete-folder').off('click.favorites').on('click.favorites', function (event)
 			{
 				var folderId = $(this).parent().parent().children('.service-data').children('.folder-id').html();
 				var modalDialog = new $.SalesPortal.ModalDialog({
@@ -129,6 +132,7 @@
 					]
 				});
 				modalDialog.show();
+				trackActivity();
 				event.stopPropagation();
 			});
 			foldersPanel.find('.draggable-folder').draggable({
@@ -227,6 +231,7 @@
 			var folderId = listItem.children('.service-data').children('.folder-id').text();
 			currentFolderId = folderId;
 			getFolderLinks(folderId);
+			trackActivity();
 		};
 
 		var getFolderLinks = function (folderId)
@@ -307,6 +312,15 @@
 				async: true,
 				dataType: 'html'
 			});
+		};
+
+		var trackActivity = function ()
+		{
+			var activityData = $.parseJSON($('<div>' + favoritesData.options.serviceData + '</div>').find('.activity-data').text());
+			$.SalesPortal.ShortcutsManager.trackActivity(
+				activityData,
+				'Favorites Activity',
+				'Favorites Activity');
 		};
 
 		var updateContentSize = function ()

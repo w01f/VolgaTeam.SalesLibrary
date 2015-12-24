@@ -16,6 +16,9 @@
 		public $textColor;
 		public $iconColor;
 
+		/** @var $parentShortcut BaseShortcut */
+		private $parentShortcut;
+
 		public function __construct($tag)
 		{
 			$this->id = uniqid();
@@ -70,13 +73,45 @@
 		}
 
 		/**
-		 * @param $contentType string
+		 * @return string
+		 */
+		public function getActionData()
+		{
+			$result = '';
+			if (!isset($this->parentShortcut))
+				return $result;
+			$result .= '<div class="activity-data">' . CJSON::encode(array(
+					'shortcut' => $this->parentShortcut->getTypeForActivityTracker(),
+					'file' => $this->parentShortcut->getTitleForActivityTracker(),
+					'title' => $this->title
+				)) .
+				'</div>';
+			return $result;
+		}
+
+		/**
+		 * @param $shortcut BaseShortcut
 		 * @return array[]
 		 */
-		public static function getCustomActions($contentType)
+		public static function getShortcutActions($shortcut)
+		{
+			$customActions = self::getActionsByShortcutType($shortcut->type);
+			foreach ($customActions as $tag => $action)
+			{
+				/** @var $action ShortcutAction */
+				$action->parentShortcut = $shortcut;
+			}
+			return $customActions;
+		}
+
+		/**
+		 * @param $shortcutType string
+		 * @return array[]
+		 */
+		public static function getActionsByShortcutType($shortcutType)
 		{
 			$customActions = self::getCommonActions();
-			switch ($contentType)
+			switch ($shortcutType)
 			{
 				case 'gridbundle':
 					$action = new ShortcutAction('carousel');

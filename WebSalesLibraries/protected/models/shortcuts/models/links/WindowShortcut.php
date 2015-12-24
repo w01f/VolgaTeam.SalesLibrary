@@ -70,6 +70,6 @@
 		 */
 		public function getTypeForActivityTracker()
 		{
-			return 'Shortcut Window Link';
+			return 'Window';
 		}
 	}

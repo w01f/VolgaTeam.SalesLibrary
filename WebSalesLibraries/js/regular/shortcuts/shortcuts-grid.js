@@ -16,7 +16,7 @@
 			var grid = pageContent.find('.shortcuts-links-grid');
 			grid.cubeportfolio(gridData.displayParameters);
 
-			$.SalesPortal.ShortcutsManager.assignShortcutHandlers(grid);
+			$.SalesPortal.ShortcutsManager.assignShortcutItemHandlers(grid);
 
 			initActionButtons();
 
@@ -30,7 +30,7 @@
 			shortcutActionsContainer.find('.carousel').show();
 			shortcutActionsContainer.find('.grid').hide();
 
-			shortcutActionsContainer.find('.carousel').off('click').on('click', function ()
+			shortcutActionsContainer.find('.carousel').off('click.action').on('click.action', function ()
 			{
 				$.SalesPortal.ShortcutsManager.openShortcut(
 					$('<div>' + gridData.serviceData + '</div>'),

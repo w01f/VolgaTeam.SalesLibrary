@@ -10,6 +10,7 @@
 							 font-size: <? echo $column->font->size; ?>pt;
 							 font-weight: <? echo $column->font->isBold ? ' bold' : ' normal'; ?>;
 							 font-style: <? echo $column->font->isItalic ? ' italic' : ' normal'; ?>;
+							 text-decoration: <? echo $column->font->isUnderlined ? ' underline' : ' inherit'; ?>;
 							 text-align: <? echo $column->alignment; ?>;
 							 background-color: <? echo $column->backColor; ?>;
 							 color: <? echo $column->foreColor; ?>;">

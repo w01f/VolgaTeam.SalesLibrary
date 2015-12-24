@@ -1,9 +1,9 @@
 <?php
 
 	/**
-	 * Class InactiveusersController
+	 * Class InactiveUsersController
 	 */
-	class InactiveusersController extends SoapController
+	class InactiveUsersController extends SoapController
 	{
 		/**
 		 * @return array

@@ -92,9 +92,30 @@
 			else
 				shortcutActionsMenu.find('.shortcut-menu-header').hide();
 
-			shortcutActionsContainer.find('.logout').off('click').on('click', function ()
+			shortcutActionsContainer.find('.logout').off('click.action').on('click.action', function ()
 			{
 				$.SalesPortal.Auth.logout();
+			});
+
+			shortcutActionsContainer.find('.shortcut-action').off('click.log').on('click.log', function ()
+			{
+				if (!$(this).hasClass('logout'))
+				{
+					var dataObject = $(this).find('.service-data');
+					var activityDataEncoded = dataObject.find('.activity-data').text();
+					if (activityDataEncoded != '')
+					{
+						var activityData = $.parseJSON(activityDataEncoded);
+						$.SalesPortal.LogHelper.write({
+							type: 'Shortcut Tile',
+							subType: activityData.shortcut,
+							data: {
+								File: activityData.file,
+								Operation: activityData.title
+							}
+						});
+					}
+				}
 			});
 		};
 	};

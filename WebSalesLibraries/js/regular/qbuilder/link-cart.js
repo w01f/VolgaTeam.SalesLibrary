@@ -7,27 +7,24 @@
 	{
 		var that = this;
 
+		this.qBuilderData = undefined;
+
 		this.init = function ()
 		{
-//			if ($.cookie("showLinkCart") == "true")
-//				that.show();
-//			else
-//				that.hide();
-
-			$('#link-cart-refresh').off('click').on('click', function ()
+			$('#link-cart-refresh').off('click.link-cart').on('click.link-cart', function ()
 			{
 				that.load();
 			});
-			$('#link-cart-clear').off('click').on('click', function ()
+			$('#link-cart-clear').off('click.link-cart').on('click.link-cart', function ()
 			{
 				clear();
 			});
-			$('#link-cart-add-all').off('click').on('click', function ()
+			$('#link-cart-add-all').off('click.link-cart').on('click.link-cart', function ()
 			{
 				addAllLinksToPage();
 			});
 
-			initLinks();
+			that.load();
 		};
 
 		this.load = function ()
@@ -98,30 +95,22 @@
 						succesDescription = 'Links was added to Link Cart';
 					else
 						succesDescription = 'Link was added to Link Cart';
-					$.fancybox({
-						content: $('<div class="row" style="margin: 0;">' +
-							'<div class="col-xs-3"><img src="' +
-							window.BaseUrl +
-							'images/preview/actions/quicksite.png">' +
-							'</div>' +
-							'<div class="col-xs-8 col-xs-offset-1">' +
-							'<h3 style="margin-left: 0">Success!</h3>' +
-							'<p class="text-muted">' +
-							succesDescription +
-							'</p>' +
-							'</div>' +
-							'</div>' +
-							'<div class="row" style="margin: 0;"><div class="col-xs-12 text-center"><button type="button" class="btn btn-default" style="width: 80px; margin-top: 20px" onclick="$.fancybox.close()">OK</button></div></div>'),
-						title: 'Link Cart',
-						width: 400,
-						autoSize: false,
-						autoHeight: true,
-						openEffect: 'none',
-						closeEffect: 'none',
-						helpers: {
-							title: false
-						}
+					var modalDialog = new $.SalesPortal.ModalDialog({
+						title: 'Success!',
+						logo:'images/preview/actions/quicksite.png',
+						description: succesDescription,
+						buttons: [
+							{
+								tag: 'ok',
+								title: 'OK',
+								clickHandler: function ()
+								{
+									modalDialog.close();
+								}
+							}
+						]
 					});
+					modalDialog.show();
 				},
 				error: function ()
 				{
@@ -149,30 +138,22 @@
 				},
 				success: function ()
 				{
-					$.fancybox({
-						content: $('<div class="row" style="margin: 0;">' +
-							'<div class="col-xs-3"><img src="' +
-							window.BaseUrl +
-							'images/preview/actions/quicksite.png">' +
-							'</div>' +
-							'<div class="col-xs-8 col-xs-offset-1">' +
-							'<h3 style="margin-left: 0">Success!</h3>' +
-							'<p class="text-muted">' +
-							'Links were added to Link Cart' +
-							'</p>' +
-							'</div>' +
-							'</div>' +
-							'<div class="row" style="margin: 0;"><div class="col-xs-12 text-center"><button type="button" class="btn btn-default" style="width: 80px; margin-top: 20px" onclick="$.fancybox.close()">OK</button></div></div>'),
-						title: 'Link Cart',
-						width: 400,
-						autoSize: false,
-						autoHeight: true,
-						openEffect: 'none',
-						closeEffect: 'none',
-						helpers: {
-							title: false
-						}
+					var modalDialog = new $.SalesPortal.ModalDialog({
+						title: 'Success!',
+						logo:'images/preview/actions/quicksite.png',
+						description: 'Links were added to Link Cart',
+						buttons: [
+							{
+								tag: 'ok',
+								title: 'OK',
+								clickHandler: function ()
+								{
+									modalDialog.close();
+								}
+							}
+						]
 					});
+					modalDialog.show();
 				},
 				error: function ()
 				{
@@ -193,7 +174,14 @@
 		var initLinks = function ()
 		{
 			var linkCart = $('#link-cart');
-			linkCart.find('.link-delete').off('click').on('click', deleteLink);
+
+			var formLogger = new $.SalesPortal.FormLogger();
+			formLogger.init({
+				logObject: {name: that.qBuilderData.options.headerTitle},
+				formContent: linkCart
+			});
+
+			linkCart.find('.link-delete').off('click.link-cart').on('click.link-cart', deleteLink);
 			linkCart.find('.draggable-link').draggable({
 					revert: "invalid",
 					distance: 70,

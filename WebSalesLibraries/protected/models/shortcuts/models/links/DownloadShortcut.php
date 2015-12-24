@@ -41,6 +41,6 @@
 		 */
 		public function getTypeForActivityTracker()
 		{
-			return 'Shortcut Download Link';
+			return 'Download';
 		}
 	}

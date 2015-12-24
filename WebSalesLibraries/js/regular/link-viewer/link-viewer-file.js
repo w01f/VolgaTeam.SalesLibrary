@@ -4,7 +4,7 @@
 	$.SalesPortal = $.SalesPortal || { };
 	$.SalesPortal.FileViewer = function (parameters)
 	{
-		var viewerData = new $.SalesPortal.SimpleViewerData($.parseJSON(parameters.data));
+		var viewerData = new $.SalesPortal.SimpleViewerData(parameters.data);
 		var dialogContent = undefined;
 
 		this.show = function ()
@@ -19,6 +19,16 @@
 				{
 					dialogContent = $('.fancybox-wrap');
 
+					var formLogger = new $.SalesPortal.FormLogger();
+					formLogger.init({
+						logObject: {
+							name: viewerData.name,
+							fileName: viewerData.fileName,
+							format: viewerData.format
+						},
+						formContent: dialogContent
+					});
+
 					dialogContent.find('#link-viewer-body-tabs a[data-toggle="tab"]').on('shown.bs.tab', function (e)
 					{
 						dialogContent.find('.tab-above-header').removeClass('active');
@@ -26,10 +36,15 @@
 						dialogContent.find('#tab-above-header-' + tabTag).addClass('active');
 					});
 
-					dialogContent.find('.action-container .action').off('click').on('click', processSaveAction);
+					dialogContent.find('.action-container .action').off('click.preview').on('click.preview', processSaveAction);
 
 					new $.SalesPortal.RateManager().init(
-						viewerData.linkId,
+						{
+							id: viewerData.linkId,
+							name: viewerData.name,
+							file: viewerData.fileName,
+							format: viewerData.format
+						},
 						dialogContent.find('#user-link-rate-container'),
 						viewerData.rateData);
 

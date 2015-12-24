@@ -11,19 +11,6 @@
 		 */
 		public function __construct($linkRecord, $isPhone)
 		{
-//			$linkConfig = new DOMDocument();
-//			$linkConfig->loadXML($linkRecord->config);
-//			$xpath = new DomXPath($linkConfig);
-//
-//			$queryResult = $xpath->query('//Config/HideTags');
-//			$this->hideTags = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : null;
-//
-//			$queryResult = $xpath->query('//Config/HideSuperTags');
-//			$this->hideSuperTags = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : null;
-//
-//			$queryResult = $xpath->query('//Config/HideLibraries');
-//			$this->hideLibraries = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : null;
-
 			parent::__construct($linkRecord, $isPhone);
 		}
 
@@ -49,6 +36,6 @@
 		 */
 		public function getTypeForActivityTracker()
 		{
-			return 'Search App';
+			return 'SearchApp';
 		}
 	}

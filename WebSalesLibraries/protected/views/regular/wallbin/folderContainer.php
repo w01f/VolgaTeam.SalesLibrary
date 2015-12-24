@@ -5,6 +5,7 @@
 			 font-size: <? echo $folder->headerFont->size; ?>pt;
 			 font-weight: <? echo $folder->headerFont->isBold ? ' bold' : ' normal'; ?>;
 			 font-style: <? echo $folder->headerFont->isItalic ? ' italic' : ' normal'; ?>;
+			 text-decoration: <? echo $folder->headerFont->isUnderlined ? ' underline' : ' inherit'; ?>;
 			 text-align: <? echo $folder->headerAlignment; ?>;
 			 background-color: <? echo $folder->headerBackColor; ?>;
 			 color: <? echo $folder->headerForeColor; ?>;

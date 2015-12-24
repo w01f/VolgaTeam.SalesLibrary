@@ -9,14 +9,14 @@
 		<div class="row">
 			<div class="col-xs-5 col-xs-offset-1">
 				<div class="checkbox">
-					<label><input type="checkbox"><span class="name"><? echo $categories->superFilters[$i]->value; ?></span>
+					<label><input class="log-action" type="checkbox"><span class="name"><? echo $categories->superFilters[$i]->value; ?></span>
 					</label>
 				</div>
 			</div>
 			<? if (($i + 1) < $count): ?>
 				<div class="col-xs-5 col-xs-offset-1">
 					<div class="checkbox">
-						<label><input type="checkbox"><span class="name"><? echo $categories->superFilters[$i + 1]->value; ?></span>
+						<label><input class="log-action" type="checkbox"><span class="name"><? echo $categories->superFilters[$i + 1]->value; ?></span>
 						</label>
 					</div>
 				</div>

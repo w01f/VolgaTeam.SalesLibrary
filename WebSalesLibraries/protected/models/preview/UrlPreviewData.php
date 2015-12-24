@@ -5,6 +5,7 @@
 	 */
 	class UrlPreviewData extends PreviewData
 	{
+		public $fileName;
 		public $isOffice365;
 
 		/**
@@ -17,6 +18,7 @@
 			$this->viewerFormat = 'url';
 			$this->contentView = 'urlViewer';
 
+			$this->fileName = $link->fileName;
 			$this->isOffice365 = $this->format == 'url365';
 
 			$imageUrlPrefix = Yii::app()->getBaseUrl(true);

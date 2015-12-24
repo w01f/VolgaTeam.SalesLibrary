@@ -42,4 +42,12 @@
 			$viewParameters['page'] = QPageRecord::model()->findByPk($this->pageId);
 			return $viewParameters;
 		}
+
+		/**
+		 * @return string
+		 */
+		public function getTypeForActivityTracker()
+		{
+			return 'Qpage';
+		}
 	}

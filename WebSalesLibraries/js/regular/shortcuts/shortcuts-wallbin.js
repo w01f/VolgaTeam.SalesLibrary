@@ -118,6 +118,14 @@
 				initPage();
 				updateContentSize();
 			}
+			$.SalesPortal.LogHelper.write({
+				type: 'Wallbin',
+				subType: 'Page Open',
+				data: {
+					Name: libraryData.options.headerTitle,
+					PageName: pageData.name
+				}
+			});
 		};
 
 		var initPage = function ()
@@ -138,7 +146,7 @@
 		{
 			var shortcutActionsContainer = $('#shortcut-action-container');
 
-			shortcutActionsContainer.find('.page-select-tabs').off('click').on('click', function ()
+			shortcutActionsContainer.find('.page-select-tabs').off('click.action').on('click.action', function ()
 			{
 				$.SalesPortal.ShortcutsManager.openShortcut(
 					$('<div>' + libraryData.options.serviceData + '</div>'),
@@ -148,7 +156,7 @@
 					}
 				);
 			});
-			shortcutActionsContainer.find('.page-select-combo').off('click').on('click', function ()
+			shortcutActionsContainer.find('.page-select-combo').off('click.action').on('click.action', function ()
 			{
 				$.SalesPortal.ShortcutsManager.openShortcut(
 					$('<div>' + libraryData.options.serviceData + '</div>'),
@@ -158,7 +166,7 @@
 					}
 				);
 			});
-			shortcutActionsContainer.find('.page-view-columns').off('click').on('click', function ()
+			shortcutActionsContainer.find('.page-view-columns').off('click.action').on('click.action', function ()
 			{
 				$.SalesPortal.ShortcutsManager.openShortcut(
 					$('<div>' + libraryData.options.serviceData + '</div>'),
@@ -168,7 +176,7 @@
 					}
 				);
 			});
-			shortcutActionsContainer.find('.page-view-accordion').off('click').on('click', function ()
+			shortcutActionsContainer.find('.page-view-accordion').off('click.action').on('click.action', function ()
 			{
 				$.SalesPortal.ShortcutsManager.openShortcut(
 					$('<div>' + libraryData.options.serviceData + '</div>'),
@@ -179,12 +187,12 @@
 				);
 			});
 
-			shortcutActionsContainer.find('.page-zoom-in').off('click').on('click', function ()
+			shortcutActionsContainer.find('.page-zoom-in').off('click.action').on('click.action', function ()
 			{
 				$.SalesPortal.Wallbin.zoomIn();
 			});
 
-			shortcutActionsContainer.find('.page-zoom-out').off('click').on('click', function ()
+			shortcutActionsContainer.find('.page-zoom-out').off('click.action').on('click.action', function ()
 			{
 				$.SalesPortal.Wallbin.zoomOut();
 			});

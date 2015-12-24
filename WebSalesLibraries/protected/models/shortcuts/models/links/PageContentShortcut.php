@@ -70,7 +70,9 @@
 		{
 			$data = parent::getPageData();
 			if ($this->isPhone)
-				$data['headerTitle'] = $this->headerTitle != '' ? $this->headerTitle : $this->title;
+				$data['headerTitle'] = $this->headerTitle != '' ?
+					$this->headerTitle :
+					($this->title != '' ? $this->title : $this->description);
 			else
 				$data['headerTitle'] = $this->description;
 			$data['headerIcon'] = $this->headerIcon;

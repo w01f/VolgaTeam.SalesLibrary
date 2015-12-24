@@ -36,7 +36,7 @@
 			break;
 	};
 ?>
-<div class="search-filters">
+<div class="search-filters logger-form" data-log-group="Shortcut Tile" data-log-action="Search Activity">
 	<div class="row">
 		<div class="col-xs-12">
 			<h3 class="header">
@@ -52,10 +52,10 @@
 	</div>
 	<div class="row buttons-area">
 		<div class="col-xs-3">
-			<button class="btn btn-default accept-button" type="button">OK</button>
+			<button class="btn btn-default log-action accept-button" type="button">OK</button>
 		</div>
 		<div class="col-xs-3">
-			<button class="btn btn-default cancel-button" type="button">Cancel</button>
+			<button class="btn btn-default log-action cancel-button" type="button">Cancel</button>
 		</div>
 		<div class="col-xs-3 col-xs-offset-3">
 			<button class="btn btn-default search-button" type="button">Search Now</button>

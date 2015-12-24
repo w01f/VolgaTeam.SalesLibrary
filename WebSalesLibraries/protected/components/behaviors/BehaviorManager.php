@@ -50,7 +50,7 @@
 				!strstr(Yii::app()->request->getUrl(), 'statistic/quote') &&
 				!strstr(Yii::app()->request->getUrl(), 'ticker/') &&
 				!strstr(Yii::app()->request->getUrl(), 'utility/') &&
-				!strstr(Yii::app()->request->getUrl(), 'inactiveusers/') &&
+				!strstr(strtolower(Yii::app()->request->getUrl()), 'inactiveusers/') &&
 				!strstr(strtolower(Yii::app()->request->getUrl()), 'filemanagerdata/') &&
 				!strstr(strtolower(Yii::app()->request->getUrl()), 'adsalesdata/') &&
 				!strstr(Yii::app()->request->getUrl(), 'content/')

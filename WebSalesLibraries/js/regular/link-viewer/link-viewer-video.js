@@ -4,14 +4,25 @@
 	$.SalesPortal = $.SalesPortal || { };
 	$.SalesPortal.VideoViewer = function (parameters)
 	{
-		var viewerData = new $.SalesPortal.VideoViewerData($.parseJSON(parameters.data));
+		var viewerData = new $.SalesPortal.VideoViewerData(parameters.data);
 		var dialogContent = undefined;
 		var player = undefined;
 
 		this.show = function ()
 		{
 			if (viewerData.forcePreview == true)
+			{
 				showVideoModal();
+				$.SalesPortal.LogHelper.write({
+					type: 'Link',
+					subType: 'Preview Modal',
+					data: {
+						Name: viewerData.name,
+						File: viewerData.fileName,
+						'Original Format': viewerData.format
+					}
+				});
+			}
 			else
 				$.fancybox({
 					content: parameters.content,
@@ -22,6 +33,17 @@
 					afterShow: function ()
 					{
 						dialogContent = $('.fancybox-wrap');
+
+						var formLogger = new $.SalesPortal.FormLogger();
+						formLogger.init({
+							logObject: {
+								name: viewerData.name,
+								fileName: viewerData.fileName,
+								format: viewerData.format
+							},
+							formContent: dialogContent
+						});
+
 						var fullScreenMode = dialogContent.find('.link-viewer').hasClass('eo') ? 'eo' : 'regular';
 
 						dialogContent.find('#link-viewer-body-tabs a[data-toggle="tab"]').on('shown.bs.tab', function (e)
@@ -33,14 +55,14 @@
 
 						dialogContent.find('.file-size').html('(' + viewerData.fileSize + ')');
 
-						dialogContent.find('.download-file').off('click').on('click', downloadFile);
-						dialogContent.find('.add-quicksite').off('click').on('click', addToQuickSite);
-						dialogContent.find('.add-favorites').off('click').on('click', addToFavorites);
-						dialogContent.find('.action-container .action').off('click').on('click', processSaveAction);
+						dialogContent.find('.download-file').off('click.preview').on('click.preview', downloadFile);
+						dialogContent.find('.add-quicksite').off('click.preview').on('click.preview', addToQuickSite);
+						dialogContent.find('.add-favorites').off('click.preview').on('click.preview', addToFavorites);
+						dialogContent.find('.action-container .action').off('click.preview').on('click.preview', processSaveAction);
 
-						dialogContent.find('.open-video-modal').off('click').on('click', showVideoModal);
-						dialogContent.find('.open-video-fullscreen-regular').off('click').on('click', showVideoFullScreenForEO);
-						dialogContent.find('.open-video-fullscreen-mobile').off('click').on('click', showVideoFullScreen);
+						dialogContent.find('.open-video-modal').off('click.preview').on('click.preview', showVideoModal);
+						dialogContent.find('.open-video-fullscreen-regular').off('click.preview').on('click.preview', showVideoFullScreenForEO);
+						dialogContent.find('.open-video-fullscreen-mobile').off('click.preview').on('click.preview', showVideoFullScreen);
 
 						VideoJS.players = {};
 						player = _V_("video-player", {
@@ -65,9 +87,26 @@
 							$('.vjs-fullscreen-control').css({ 'display': 'none' });
 							$('.vjs-volume-control').css({ 'margin-right': '20px' });
 						}
+						player.addEvent('play', function ()
+						{
+							$.SalesPortal.LogHelper.write({
+								type: 'Link',
+								subType: 'Play',
+								data: {
+									Name: viewerData.name,
+									File: viewerData.fileName,
+									'Original Format': viewerData.format
+								}
+							});
+						});
 
 						new $.SalesPortal.RateManager().init(
-							viewerData.linkId,
+							{
+								id: viewerData.linkId,
+								name: viewerData.name,
+								file: viewerData.fileName,
+								format: viewerData.format
+							},
 							dialogContent.find('#user-link-rate-container'),
 							viewerData.rateData);
 
@@ -117,7 +156,7 @@
 				{
 					$.fancybox.close();
 					viewerData.forcePreview = false;
-					parameters.data = $.toJSON(viewerData);
+					parameters.data = viewerData;
 					new $.SalesPortal.VideoViewer(parameters).show();
 				}
 			});

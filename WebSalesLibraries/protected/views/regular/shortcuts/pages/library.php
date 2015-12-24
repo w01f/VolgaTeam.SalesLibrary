@@ -30,6 +30,7 @@
 							<div class="encoded-data">
 								<? echo CJSON::encode(array(
 										'id' => $page->id,
+										'name' => $page->name,
 										'logoContent' => $page->logoContent
 									)
 								);?>
@@ -43,6 +44,7 @@
 				<? foreach ($library->pages as $page): ?>
 					<option value='<? echo base64_encode(CJSON::encode(array(
 							'id' => $page->id,
+							'name' => $page->name,
 							'logoContent' => $page->logoContent
 						)
 					));?>' <? echo $selectedPage->id == $page->id ? 'selected' : ''; ?>><? echo $page->name; ?></option>

@@ -40,7 +40,7 @@
 		 */
 		public function getTypeForActivityTracker()
 		{
-			return 'Favorites App';
+			return 'Favorites';
 		}
 
 		/**

@@ -25,6 +25,11 @@
 		 * @soap
 		 */
 		public $isItalic;
+		/**
+		 * @var boolean
+		 * @soap
+		 */
+		public $isUnderlined;
 
 		/**
 		 * @return Font
@@ -36,6 +41,7 @@
 			$font->size = 12;
 			$font->isBold = false;
 			$font->isItalic = false;
+			$font->isUnderlined = false;
 			return $font;
 		}
 	}

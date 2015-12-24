@@ -3,7 +3,7 @@
 	 * @var $links array
 	 */
 ?>
-<table class="link-grid">
+<table class="link-grid logger-form" data-log-group="Link" data-log-action="QBuilder Activity">
 	<?
 		if (Yii::app()->browser->isMobile())
 			$clickClass = ' click-mobile draggable-link';
@@ -26,13 +26,13 @@
 					</tr>
 				</table>
 			</td>
-			<td class="link-up">
+			<td class="link-up log-action">
 				<img src="<? echo Yii::app()->baseUrl . '/images/search/search-link-up.png' ?>" alt="Up Link">
 			</td>
-			<td class="link-down">
+			<td class="link-down log-action">
 				<img src="<? echo Yii::app()->baseUrl . '/images/search/search-link-down.png' ?>" alt="Down Link">
 			</td>
-			<td class="link-delete">
+			<td class="link-delete log-action">
 				<img src="<? echo Yii::app()->baseUrl . '/images/search/search-delete.png?1' ?>" alt="Delete Link">
 			</td>
 		</tr>

@@ -8,12 +8,30 @@
 
 		var updatedAllContentNecessary = false;
 
-		this.assignShortcutHandlers = function (shortcutsContainer)
+		this.assignShortcutGroupHandlers = function (groupsContainer)
+		{
+			groupsContainer.find('.om-ctrlitem').off('click.shortcut-group').on('click.shortcut-group', function ()
+			{
+				var data = $(this).find('.service-data');
+				var activityData = $.parseJSON(data.find('.activity-data').text());
+
+				$.SalesPortal.LogHelper.write({
+					type: 'Navigation',
+					subType: 'MenuBar Group',
+					data: {
+						File: activityData.title
+					}
+				});
+			});
+		};
+
+		this.assignShortcutItemHandlers = function (shortcutsContainer)
 		{
 			shortcutsContainer.find('.shortcuts-link').off('click.shortcut').on('click.shortcut', function (e)
 			{
 				var data = $(this).find('.service-data');
-				that.trackActivity(data);
+				var activityData = $.parseJSON(data.find('.activity-data').text());
+				that.trackActivity(activityData);
 
 				var hasPageContent = data.find('.has-page-content').length > 0;
 				var samePage = data.find('.same-page').length > 0;
@@ -144,21 +162,15 @@
 			return true;
 		};
 
-		this.trackActivity = function (dataObject)
+		this.trackActivity = function (activityData, action, operation)
 		{
-			var activityData = $.parseJSON(dataObject.find('.activity-data').text());
-			$.ajax({
-				type: "POST",
-				url: window.BaseUrl + "statistic/writeActivity",
+			$.SalesPortal.LogHelper.write({
+				type: 'Shortcut Tile',
+				subType: action == undefined ? activityData.action : action,
 				data: {
-					type: 'Shortcuts',
-					subType: activityData.action,
-					data: $.toJSON({
-						File: activityData.title
-					})
-				},
-				async: true,
-				dataType: 'html'
+					File: activityData.title,
+					Operation: operation == undefined ? 'Open' : operation
+				}
 			});
 		};
 

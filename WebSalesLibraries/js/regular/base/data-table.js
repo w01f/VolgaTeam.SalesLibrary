@@ -4,10 +4,10 @@
 	$.SalesPortal = $.SalesPortal || { };
 	$.SalesPortal.SearchDataTable = function (options)
 	{
-
 		var saveState = options != undefined ? options.saveSate : undefined;
 		var deleteHandler = options != undefined ? options.deleteHandler : undefined;
 		var backHandler = options != undefined ? options.backHandler : undefined;
+		var logHandler = options != undefined ? options.logHandler : undefined;
 
 		var dataTable = undefined;
 
@@ -15,7 +15,13 @@
 		{
 			destroy();
 
-			var sortColumnIndex = 3;
+			var defaultSortColumnIndex = 1;
+			if (viewOptions.showCategory)
+				defaultSortColumnIndex++;
+			if (viewOptions.showLibraries)
+				defaultSortColumnIndex++;
+
+			var sortColumnIndex = defaultSortColumnIndex;
 			switch (sortColumnTag)
 			{
 				case "library":
@@ -123,29 +129,28 @@
 				"searchable": false
 			});
 
-			dataTable = table
-				.dataTable({
-					"data": dataset != undefined ? dataset : [],
-					"columns": columnSettings,
-					stateSave: saveState,
-					"order": [
-						[ sortColumnIndex, sortDirection != undefined ? sortDirection : "asc" ]
-					],
-					"scrollY": $.SalesPortal.Content.isMobileDevice() ? getNativeTableSize() : getBootstrapTableSize(),
-					"scrollCollapse": false,
-					"aLengthMenu": [
-						[15, 25, 50, 100 , -1],
-						[15, 25, 50, 100, "All"]
-					],
-					"iDisplayLength": 15,
-					"oLanguage": {
-						"sEmptyTable": "",
-						"sZeroRecords": ""
-					},
-					"dom": "<'row'<'col-xs-4'l><'col-xs-4 back-url text-center'><'col-xs-4'f>>" +
-						"<'row'<'col-xs-12'tr>>" +
-						"<'row'<'col-xs-5'i><'col-xs-7'p>>"
-				});
+			dataTable = table.dataTable({
+				"data": dataset != undefined ? dataset : [],
+				"columns": columnSettings,
+				stateSave: saveState,
+				"order": [
+					[ sortColumnIndex, sortDirection != undefined ? sortDirection : "asc" ]
+				],
+				"scrollY": $.SalesPortal.Content.isMobileDevice() ? getNativeTableSize() : getBootstrapTableSize(),
+				"scrollCollapse": false,
+				"aLengthMenu": [
+					[15, 25, 50, 100 , -1],
+					[15, 25, 50, 100, "All"]
+				],
+				"iDisplayLength": 15,
+				"oLanguage": {
+					"sEmptyTable": "",
+					"sZeroRecords": ""
+				},
+				"dom": "<'row'<'col-xs-4'l><'col-xs-4 back-url text-center'><'col-xs-4'f>>" +
+					"<'row'<'col-xs-12'tr>>" +
+					"<'row'<'col-xs-5'i><'col-xs-7'p>>"
+			});
 			if (!$.SalesPortal.Content.isMobileDevice())
 				$("#data-table-content_length").find('select').selectpicker();
 
@@ -178,7 +183,21 @@
 			{
 				$('body').find('.mtContent').remove();
 				e.stopPropagation();
+
+				var url = $(this).prop('href');
+				$.SalesPortal.LogHelper.write({
+					type: 'Link',
+					subType: 'Open',
+					data: {
+						File: url
+					}
+				});
 			});
+
+			if (logHandler != undefined)
+			{
+				table.on('search.dt', logHandler).on('page.dt', logHandler).on('length.dt', logHandler);
+			}
 		};
 
 		this.updateSize = function ()

@@ -29,18 +29,6 @@
 			$this->renderPartial('addPage', array('clone' => $clone), false, true);
 		}
 
-		public function actionAddPageLiteDialog()
-		{
-			$linkId = Yii::app()->request->getPost('linkId');
-			$linkRecord = LinkRecord::getLinkById($linkId);
-			$logos = QPageRecord::getPageLogoList();
-			if (isset($linkRecord))
-			{
-				$this->renderPartial('addPageLite', array('linkRecord' => $linkRecord, 'logos' => $logos), false, true);
-				StatisticActivityRecord::WriteActivity('Email', 'Create Email', array('Name' => $linkRecord->name, 'File' => $linkRecord->file_name, 'Original Format' => $linkRecord->format));
-			}
-		}
-
 		public function actionAddPage()
 		{
 			$title = Yii::app()->request->getPost('title');
@@ -95,10 +83,6 @@
 			{
 				$expirationDate = $expiresInDays > 0 ? date(Yii::app()->params['mysqlDateFormat'], strtotime(date("Y-m-d") . ' + ' . $expiresInDays . ' day')) : null;
 				echo QPageRecord::addPageLite($userId, $createDate, $subtitle, $logo, $expirationDate, $restricted, $disableBanners, $disableWidgets, $showLinksAsUrl, $recordActivity, $pinCode, $activityEmailCopy, $linkId)->getUrl();
-
-				$linkRecord = LinkRecord::getLinkById($linkId);
-				if (isset($linkRecord))
-					StatisticActivityRecord::WriteActivity('Email', 'Send Email', array('Name' => $linkRecord->name, 'File' => $linkRecord->file_name, 'Original Format' => $linkRecord->format));
 			}
 			Yii::app()->end();
 		}

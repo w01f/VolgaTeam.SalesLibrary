@@ -95,18 +95,13 @@
 		public function getActions()
 		{
 			$actions = array();
-
-			$commonActions = ShortcutAction::getCommonActions();
-			$customActions = ShortcutAction::getCustomActions('search');
-			$actionsByKey = array_merge($commonActions, $customActions);
-
+			$actionsByKey = ShortcutAction::getActionsByShortcutType('search');
 			if (array_key_exists('sub-search-all', $actionsByKey))
 				$actionsByKey['sub-search-all']->enabled = $this->enableSubSearch && $this->showSubSearchAll;
 			if (array_key_exists('sub-search-criteria', $actionsByKey))
 				$actionsByKey['sub-search-criteria']->enabled = $this->enableSubSearch && $this->showSubSearchSearch;
 			if (array_key_exists('sub-search-links', $actionsByKey))
 				$actionsByKey['sub-search-links']->enabled = $this->enableSubSearch && $this->showSubSearchTemplates;
-
 			foreach ($actionsByKey as $action)
 			{
 				/** @var $action ShortcutAction */
@@ -115,7 +110,6 @@
 			}
 			$sortHelper = new ObjectSortHelper('order', 'asc');
 			usort($actions, array($sortHelper, 'sort'));
-
 			return $actions;
 		}
 	}

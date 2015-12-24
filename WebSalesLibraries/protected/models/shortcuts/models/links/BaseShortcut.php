@@ -170,7 +170,7 @@
 			$result .= '<div class="url">' . $this->getServiceDataUrl() . '</div>';
 			$result .= '<div class="activity-data">' . CJSON::encode(array(
 					'action' => $this->getTypeForActivityTracker(),
-					'title' => sprintf('%s - %s', $this->title, $this->description)
+					'title' => $this->getTitleForActivityTracker(),
 				)) . '</div>';
 			return $result;
 		}
@@ -214,15 +214,22 @@
 		public abstract function getTypeForActivityTracker();
 
 		/**
+		 * @return string
+		 */
+		public function getTitleForActivityTracker()
+		{
+			return isset($this->title) && $this->title != '' ?
+				$this->title :
+				(isset($this->headerTitle) && $this->headerTitle != '' ? $this->headerTitle : $this->description);
+		}
+
+		/**
 		 * @param $xpath DOMXPath
 		 * @param $actionConfigNodes DOMNode[]
 		 */
 		protected function initActions($xpath, $actionConfigNodes)
 		{
-			$commonActions = ShortcutAction::getCommonActions();
-			$customActions = ShortcutAction::getCustomActions($this->type);
-			$actionsByKey = array_merge($commonActions, $customActions);
-
+			$actionsByKey = ShortcutAction::getShortcutActions($this);
 			$this->customizeActions($actionsByKey, $xpath, $actionConfigNodes);
 
 			$actions = array();

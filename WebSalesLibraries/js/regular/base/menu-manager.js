@@ -13,6 +13,11 @@
 				{
 					$('#content-overlay').removeClass('main-menu-opened').addClass('main-menu-opened');
 					$('#shortcut-action-menu').find('.shortcut-menu-header').addClass('main-menu-active');
+					$.SalesPortal.LogHelper.write({
+						type: 'Navigation',
+						subType: 'MenuBar',
+						data: {}
+					});
 				},
 				onClose: function ()
 				{
@@ -20,7 +25,8 @@
 					$('#shortcut-action-menu').find('.shortcut-menu-header').removeClass('main-menu-active');
 				}
 			});
-			$.SalesPortal.ShortcutsManager.assignShortcutHandlers(menuContainer.find('.om-itemholder .om-itemlist'));
+			$.SalesPortal.ShortcutsManager.assignShortcutGroupHandlers(menuContainer.find('.om-controlitems .om-ctrlitems'));
+			$.SalesPortal.ShortcutsManager.assignShortcutItemHandlers(menuContainer.find('.om-itemholder .om-itemlist'));
 
 			setTimeout(checkIfShortcutsUpdated, 60000);
 		};
@@ -78,7 +84,7 @@
 				success: function (result)
 				{
 					menuItemsContainer.html(result);
-					$.SalesPortal.ShortcutsManager.assignShortcutHandlers(menuContainer.find('.om-itemholder .om-itemlist'));
+					$.SalesPortal.ShortcutsManager.assignShortcutItemHandlers(menuContainer.find('.om-itemholder .om-itemlist'));
 				},
 				error: function ()
 				{

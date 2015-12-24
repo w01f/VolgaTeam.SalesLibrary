@@ -75,6 +75,8 @@
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/scroll-tabs/js/jquery.scrolltabs.js', CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/common/link-viewer-data.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/common/search-processor.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/common/logger.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/common/form-logger.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/base/menu-manager.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/base/login.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/base/overlay.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);

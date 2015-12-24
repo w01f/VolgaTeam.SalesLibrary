@@ -25,7 +25,7 @@
 		 */
 		public function getTypeForActivityTracker()
 		{
-			return 'Shortcut Web Link';
+			return 'URL';
 		}
 
 		public function getSourceLink()

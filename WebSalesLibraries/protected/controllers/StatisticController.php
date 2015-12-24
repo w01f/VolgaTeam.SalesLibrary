@@ -397,8 +397,6 @@
 			$type = Yii::app()->request->getPost('type');
 			$subType = Yii::app()->request->getPost('subType');
 			$data = Yii::app()->request->getPost('data');
-			if (isset($data))
-				$data = CJSON::decode($data);
 			$authorized = false;
 			if (isset(Yii::app()->user))
 			{

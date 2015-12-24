@@ -54,6 +54,7 @@
 						'url' => 'Web URL',
 						'url365' => 'Office 365 URL',
 						'key' => 'Apple Keynote',
+						'other' => 'Undefined file'
 					),
 				),
 				'email' => array(

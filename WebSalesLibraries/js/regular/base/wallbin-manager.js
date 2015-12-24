@@ -26,23 +26,37 @@
 
 			$.mtReInit();
 
-			container.find('.line-break').off('click').on('click', function (event)
+			container.find('.line-break').off('click.open').on('click.open', function (event)
 			{
 				event.stopPropagation();
 				event.preventDefault();
 			});
-			container.find('.clickable').off('click').on('click', function (event)
+			container.find('.clickable').off('click.open').on('click.open', function (event)
 			{
 				var linkId = $(this).attr('id').replace('link', '');
 				$.SalesPortal.LinkManager.requestViewDialog(linkId, false);
 				event.stopPropagation();
 				event.preventDefault();
 			});
-			container.find('.folder-link').off('click').on('click', function (event)
+			container.find('.folder-link').off('click.open').on('click.open', function (event)
 			{
 				loadFolderLinkContent($(this));
-				event.stopPropagation();
 				event.preventDefault();
+			});
+			container.find('.log-activity').off('click.log').on('click.log', function ()
+			{
+				var data = $(this).children('.service-data');
+				var activityData = $.parseJSON(data.find('.activity-data').text());
+
+				$.SalesPortal.LogHelper.write({
+					type: 'Link',
+					subType: 'Open',
+					data: {
+						Name: activityData.title,
+						File: activityData.fileName,
+						'Original Format': activityData.format
+					}
+				});
 			});
 			container.find('.folder-header-container').off('mousedown.context').on('mousedown.context', function (eventDown)
 			{
@@ -154,6 +168,15 @@
 						var folderContainer = $(this).parent();
 						var folderId = $.trim($(this).attr("id").replace('folder-', ''));
 						showAccordionFolder(folderContainer, folderId);
+						$.SalesPortal.LogHelper.write({
+							type: 'Library Window',
+							subType: 'Open Accordion',
+							data: {
+								Name: parameters.data.name,
+								File: parameters.data.fileName,
+								'Original Format': parameters.format
+							}
+						});
 					}
 				});
 		};

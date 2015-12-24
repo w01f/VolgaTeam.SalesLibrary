@@ -22,7 +22,7 @@
 		{
 			$.mtReInit();
 
-			container.find('.clickable').off('click').on('click', function (event)
+			container.find('.clickable').off('click.open').on('click.open', function (event)
 			{
 				if (checkEmail())
 				{
@@ -33,13 +33,25 @@
 				event.stopPropagation();
 				event.preventDefault();
 			});
-			container.find('.folder-link').off('click').on('click', function (event)
+			container.find('.log-activity').off('click.log').on('click.log', function ()
+			{
+				var data = $(this).children('.service-data');
+				var activityData = $.parseJSON(data.find('.activity-data').text());
+
+				$.SalesPortal.LogHelper.write({
+					type: 'Link',
+					subType: 'Open',
+					data: {
+						Name: activityData.title,
+						File: activityData.fileName,
+						'Original Format': activityData.format
+					}
+				});
+			});
+			container.find('.folder-link').off('click.open').on('click.open', function (event)
 			{
 				if (checkEmail())
-				{
 					loadFolderLinkContent($(this));
-				}
-				event.stopPropagation();
 				event.preventDefault();
 			});
 		};
@@ -143,7 +155,7 @@
 
 		var initActionButtons = function ()
 		{
-			$('#login-button').off('click').on('click', function ()
+			$('#login-button').off('click.action').on('click.action', function ()
 			{
 				window.location = "getProtected?id=" + $('#page-id').html();
 			});

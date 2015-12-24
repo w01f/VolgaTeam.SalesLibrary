@@ -23,32 +23,31 @@
 	if ($data->allowAddToQuickSite)
 		$headerColumnSizeDivider++;
 	$headerColumnSize = 12 / $headerColumnSizeDivider;
-
 ?>
-<div class="link-viewer">
+<div class="link-viewer<? if ($data->userAuthorized): ?> logger-form<?endif;?>" data-log-group="Link" data-log-action="Preview Activity">
 	<div class="row row-buttons tab-above-header active" id="tab-above-header-preview">
 		<div class="col col-xs-<? echo $headerColumnSize; ?> text-center">
-			<div class="text-button download-file">
+			<div class="text-button log-action download-file" data-log-action="Download File">
 				<span>Download File</span> <span class="text-muted file-size"></span>
 			</div>
 		</div>
 		<? if (!$data->singlePage): ?>
 			<div class="col col-xs-<? echo $headerColumnSize; ?> text-center">
-				<div class="text-button download-page">
+				<div class="text-button log-action download-page" data-log-action="Download File">
 					<span>Download <? echo $pageItemName; ?></span> <span class="text-muted page-size"></span>
 				</div>
 			</div>
 		<? endif; ?>
 		<? if ($data->allowAddToQuickSite): ?>
 			<div class="col col-xs-<? echo $headerColumnSize; ?> text-center">
-				<div class="text-button add-quicksite">
+				<div class="text-button log-action add-quicksite" data-log-action="Add to QS">
 					<span>Quicksite</span>
 				</div>
 			</div>
 		<? endif; ?>
 		<? if ($data->allowAddToFavorites): ?>
 			<div class="col col-xs-<? echo $headerColumnSize; ?> text-center">
-				<div class="text-button add-favorites">
+				<div class="text-button log-action add-favorites" data-log-action="Add to Favorites">
 					<span>Favorites</span>
 				</div>
 			</div>
@@ -64,10 +63,13 @@
 	<? endif; ?>
 	<ul class="nav nav-tabs" role="tablist" id="link-viewer-body-tabs">
 		<li class="active">
-			<a href="#link-viewer-tab-preview" role="tab" data-toggle="tab">Preview</a></li>
-		<li><a href="#link-viewer-tab-save" role="tab" data-toggle="tab">Save</a></li>
+			<a class="log-action" href="#link-viewer-tab-preview" role="tab" data-toggle="tab">Preview</a>
+		</li>
+		<li>
+			<a class="log-action" href="#link-viewer-tab-save" role="tab" data-toggle="tab">Save</a>
+		</li>
 		<? if ($data->allowAddToQuickSite): ?>
-			<li><a href="#link-viewer-tab-email" role="tab" data-toggle="tab">Email</a></li>
+			<li><a class="log-action" href="#link-viewer-tab-email" role="tab" data-toggle="tab">Email</a></li>
 		<? endif; ?>
 	</ul>
 	<div class="tab-content">
@@ -75,17 +77,17 @@
 			<div class="row preview-gallery">
 				<div class="col col-xs-1 text-center">
 					<? if (!$data->singlePage): ?>
-						<div class="image-button nav-image-button move-previous">
+						<div class="image-button nav-image-button log-action move-previous" data-log-action="Preview Page">
 							<img src="<? echo sprintf('%s/images/preview/gallery/prev-slide.png', $imageUrlPrefix); ?>">
 						</div>
 					<? endif; ?>
 				</div>
 				<div class="col col-xs-10 text-center page-image-container">
-					<img class="page-image" style="display: none;" src="//:0">
+					<img class="page-image log-action" style="display: none;" src="//:0">
 				</div>
 				<div class="col col-xs-1 text-center">
 					<? if (!$data->singlePage): ?>
-						<div class="image-button nav-image-button move-next">
+						<div class="image-button nav-image-button log-action move-next" data-log-action="Preview Page">
 							<img src="<? echo sprintf('%s/images/preview/gallery/next-slide.png', $imageUrlPrefix); ?>">
 						</div>
 					<? endif; ?>
@@ -103,21 +105,21 @@
 				<div class="col col-xs-2 text-center">
 					<? if (!$data->singlePage): ?>
 						<label class="ui-hide-label" for="image-viewer-slide-selector"></label>
-						<select class="selectpicker dropup bootstrapped" id="image-viewer-slide-selector"></select>
+						<select class="selectpicker dropup bootstrapped log-action" id="image-viewer-slide-selector" data-log-action="Preview Page"></select>
 					<? endif; ?>
 				</div>
 				<div class="col col-xs-1 col-xs-offset-2 text-center">
-					<div class="text-button open-pdf">
+					<div class="text-button log-action open-pdf" data-log-action="Open PDF">
 						<span>PDF</span>
 					</div>
 				</div>
 				<div class="col col-xs-1 text-center">
-					<div class="text-button open-gallery-modal">
+					<div class="text-button log-action open-gallery-modal" data-log-action="Preview Modal">
 						<span>75%</span>
 					</div>
 				</div>
 				<div class="col col-xs-1 text-center">
-					<div class="text-button open-gallery-fullscreen">
+					<div class="text-button log-action open-gallery-fullscreen" data-log-action="Preview Fullscreen">
 						<span>100%</span>
 					</div>
 				</div>

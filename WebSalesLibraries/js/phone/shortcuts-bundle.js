@@ -53,7 +53,8 @@
 			contentContainer.find('.shortcuts-link').off('click').on('click', function (e)
 			{
 				var data = $(this).find('.service-data');
-				$.SalesPortal.ShortcutsManager.trackActivity(data);
+				var activityData = $.parseJSON(data.find('.activity-data').text());
+				$.SalesPortal.ShortcutsManager.trackActivity(activityData);
 
 				var hasPageContent = data.find('.has-page-content').length > 0;
 				var samePage = data.find('.same-page').length > 0;

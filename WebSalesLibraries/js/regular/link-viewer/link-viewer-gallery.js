@@ -19,7 +19,7 @@
 		{
 			if (!sliderData.singlePage)
 			{
-				sliderData.pageSelector.off('change');
+				sliderData.pageSelector.off('change.gallery');
 				var options = '';
 				for (i = 0; i < totalPages; i++)
 				{
@@ -37,7 +37,7 @@
 					showCurrentPage();
 					updateNavButtons();
 				});
-				navButtonNext.off('click').on('click', function ()
+				navButtonNext.off('click.gallery').on('click.gallery', function ()
 				{
 					if (!$(this).hasClass('disabled'))
 					{
@@ -46,7 +46,7 @@
 						updateNavButtons();
 					}
 				});
-				navButtonPrev.off('click').on('click', function ()
+				navButtonPrev.off('click.gallery').on('click.gallery', function ()
 				{
 					if (!$(this).hasClass('disabled'))
 					{

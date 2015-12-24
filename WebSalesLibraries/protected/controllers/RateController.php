@@ -18,9 +18,6 @@
 			if (isset($linkId) && isset($userId))
 			{
 				LinkRateRecord::setRate($linkId, $userId, $value);
-				$linkRecord = LinkRecord::getLinkById($linkId);
-				if (isset($linkRecord))
-					StatisticActivityRecord::WriteActivity('Link', 'Like', array('Name' => $linkRecord->name, 'File' => $linkRecord->file_name, 'Original Format' => $linkRecord->format, 'Rate' => $value));
 				echo CJSON::encode(LinkRateRecord::getRateData($linkId, $userId));
 			}
 			Yii::app()->end();

@@ -24,7 +24,7 @@
 		 */
 		public function getTypeForActivityTracker()
 		{
-			return 'Shortcut Grid Link';
+			return 'Gridbundle';
 		}
 
 		/**
