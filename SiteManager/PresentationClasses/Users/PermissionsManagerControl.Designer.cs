@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+			this.components = new System.ComponentModel.Container();
 			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
 			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
 			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
@@ -47,7 +48,7 @@
 			this.buttonXUserFilterGroupsNone = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXUserFilterGroupsAll = new DevComponents.DotNetBar.ButtonX();
 			this.labelControlUserFilterGroupsTitle = new DevExpress.XtraEditors.LabelControl();
-			this.styleController = new DevExpress.XtraEditors.StyleController();
+			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
 			this.checkedListBoxControlUserFilterGroups = new DevExpress.XtraEditors.CheckedListBoxControl();
 			this.checkEditEnableUserFilter = new DevExpress.XtraEditors.CheckEdit();
 			this.xtraTabPageGroups = new DevExpress.XtraTab.XtraTabPage();
@@ -271,10 +272,11 @@
 			this.buttonXUserFilterGroupsNone.CausesValidation = false;
 			this.buttonXUserFilterGroupsNone.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXUserFilterGroupsNone.Enabled = false;
+			this.buttonXUserFilterGroupsNone.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.buttonXUserFilterGroupsNone.Location = new System.Drawing.Point(139, 63);
 			this.buttonXUserFilterGroupsNone.Name = "buttonXUserFilterGroupsNone";
 			this.buttonXUserFilterGroupsNone.Size = new System.Drawing.Size(103, 23);
-			this.buttonXUserFilterGroupsNone.Style = DevComponents.DotNetBar.eDotNetBarStyle.Metro;
+			this.buttonXUserFilterGroupsNone.Style = DevComponents.DotNetBar.eDotNetBarStyle.Office2013;
 			this.buttonXUserFilterGroupsNone.TabIndex = 24;
 			this.buttonXUserFilterGroupsNone.Text = "Clear All";
 			this.buttonXUserFilterGroupsNone.TextColor = System.Drawing.Color.Black;
@@ -286,10 +288,11 @@
 			this.buttonXUserFilterGroupsAll.CausesValidation = false;
 			this.buttonXUserFilterGroupsAll.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXUserFilterGroupsAll.Enabled = false;
+			this.buttonXUserFilterGroupsAll.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.buttonXUserFilterGroupsAll.Location = new System.Drawing.Point(8, 63);
 			this.buttonXUserFilterGroupsAll.Name = "buttonXUserFilterGroupsAll";
 			this.buttonXUserFilterGroupsAll.Size = new System.Drawing.Size(103, 23);
-			this.buttonXUserFilterGroupsAll.Style = DevComponents.DotNetBar.eDotNetBarStyle.Metro;
+			this.buttonXUserFilterGroupsAll.Style = DevComponents.DotNetBar.eDotNetBarStyle.Office2013;
 			this.buttonXUserFilterGroupsAll.TabIndex = 23;
 			this.buttonXUserFilterGroupsAll.Text = "Select All";
 			this.buttonXUserFilterGroupsAll.TextColor = System.Drawing.Color.Black;
@@ -567,6 +570,7 @@
 			this.buttonXCollapseLibraries.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
 			this.buttonXCollapseLibraries.CausesValidation = false;
 			this.buttonXCollapseLibraries.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXCollapseLibraries.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.buttonXCollapseLibraries.Location = new System.Drawing.Point(191, 7);
 			this.buttonXCollapseLibraries.Name = "buttonXCollapseLibraries";
 			this.buttonXCollapseLibraries.Size = new System.Drawing.Size(159, 33);
@@ -581,6 +585,7 @@
 			this.buttonXExpandLibraries.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
 			this.buttonXExpandLibraries.CausesValidation = false;
 			this.buttonXExpandLibraries.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXExpandLibraries.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.buttonXExpandLibraries.Location = new System.Drawing.Point(3, 7);
 			this.buttonXExpandLibraries.Name = "buttonXExpandLibraries";
 			this.buttonXExpandLibraries.Size = new System.Drawing.Size(159, 33);

@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Office.Interop.Excel;
-using SalesDepot.CoreObjects.InteropClasses;
-using SalesDepot.CoreObjects.ToolClasses;
 using SalesDepot.Services.StatisticService;
+using SalesDepot.SiteManager.InteropClasses;
 
 namespace SalesDepot.SiteManager.ToolClasses
 {

@@ -180,6 +180,10 @@
 			// gridControlLibraries
 			// 
 			this.gridControlLibraries.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.gridControlLibraries.EmbeddedNavigator.Appearance.BackColor = System.Drawing.Color.White;
+			this.gridControlLibraries.EmbeddedNavigator.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.gridControlLibraries.EmbeddedNavigator.Appearance.Options.UseBackColor = true;
+			this.gridControlLibraries.EmbeddedNavigator.Appearance.Options.UseForeColor = true;
 			gridLevelNode1.LevelTemplate = this.gridViewPages;
 			gridLevelNode1.RelationName = "Pages";
 			this.gridControlLibraries.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
@@ -280,6 +284,8 @@
 			// laLogin
 			// 
 			this.laLogin.AutoSize = true;
+			this.laLogin.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.laLogin.ForeColor = System.Drawing.Color.Black;
 			this.laLogin.Location = new System.Drawing.Point(3, 11);
 			this.laLogin.Name = "laLogin";
 			this.laLogin.Size = new System.Drawing.Size(43, 16);
@@ -290,10 +296,14 @@
 			// 
 			this.textEditLogin.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.dxValidationProvider.SetIconAlignment(this.textEditLogin, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
 			this.dxErrorProvider.SetIconAlignment(this.textEditLogin, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
+			this.dxValidationProvider.SetIconAlignment(this.textEditLogin, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
 			this.textEditLogin.Location = new System.Drawing.Point(102, 8);
 			this.textEditLogin.Name = "textEditLogin";
+			this.textEditLogin.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.textEditLogin.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.textEditLogin.Properties.Appearance.Options.UseBackColor = true;
+			this.textEditLogin.Properties.Appearance.Options.UseForeColor = true;
 			this.textEditLogin.Properties.AppearanceDisabled.ForeColor = System.Drawing.Color.Black;
 			this.textEditLogin.Properties.AppearanceDisabled.Options.UseForeColor = true;
 			this.textEditLogin.Properties.NullText = "Type...";
@@ -305,6 +315,8 @@
 			// laFirstName
 			// 
 			this.laFirstName.AutoSize = true;
+			this.laFirstName.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.laFirstName.ForeColor = System.Drawing.Color.Black;
 			this.laFirstName.Location = new System.Drawing.Point(3, 48);
 			this.laFirstName.Name = "laFirstName";
 			this.laFirstName.Size = new System.Drawing.Size(76, 16);
@@ -315,10 +327,14 @@
 			// 
 			this.textEditFirstName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.dxValidationProvider.SetIconAlignment(this.textEditFirstName, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
 			this.dxErrorProvider.SetIconAlignment(this.textEditFirstName, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
+			this.dxValidationProvider.SetIconAlignment(this.textEditFirstName, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
 			this.textEditFirstName.Location = new System.Drawing.Point(102, 45);
 			this.textEditFirstName.Name = "textEditFirstName";
+			this.textEditFirstName.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.textEditFirstName.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.textEditFirstName.Properties.Appearance.Options.UseBackColor = true;
+			this.textEditFirstName.Properties.Appearance.Options.UseForeColor = true;
 			this.textEditFirstName.Properties.NullText = "Type...";
 			this.textEditFirstName.Size = new System.Drawing.Size(251, 22);
 			this.textEditFirstName.StyleController = this.styleController;
@@ -329,10 +345,14 @@
 			// 
 			this.textEditLastName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.dxValidationProvider.SetIconAlignment(this.textEditLastName, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
 			this.dxErrorProvider.SetIconAlignment(this.textEditLastName, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
+			this.dxValidationProvider.SetIconAlignment(this.textEditLastName, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
 			this.textEditLastName.Location = new System.Drawing.Point(102, 85);
 			this.textEditLastName.Name = "textEditLastName";
+			this.textEditLastName.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.textEditLastName.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.textEditLastName.Properties.Appearance.Options.UseBackColor = true;
+			this.textEditLastName.Properties.Appearance.Options.UseForeColor = true;
 			this.textEditLastName.Properties.NullText = "Type...";
 			this.textEditLastName.Size = new System.Drawing.Size(251, 22);
 			this.textEditLastName.StyleController = this.styleController;
@@ -342,6 +362,8 @@
 			// laLastName
 			// 
 			this.laLastName.AutoSize = true;
+			this.laLastName.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.laLastName.ForeColor = System.Drawing.Color.Black;
 			this.laLastName.Location = new System.Drawing.Point(3, 88);
 			this.laLastName.Name = "laLastName";
 			this.laLastName.Size = new System.Drawing.Size(75, 16);
@@ -352,10 +374,14 @@
 			// 
 			this.textEditEmail.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.dxValidationProvider.SetIconAlignment(this.textEditEmail, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
 			this.dxErrorProvider.SetIconAlignment(this.textEditEmail, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
+			this.dxValidationProvider.SetIconAlignment(this.textEditEmail, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
 			this.textEditEmail.Location = new System.Drawing.Point(102, 166);
 			this.textEditEmail.Name = "textEditEmail";
+			this.textEditEmail.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.textEditEmail.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.textEditEmail.Properties.Appearance.Options.UseBackColor = true;
+			this.textEditEmail.Properties.Appearance.Options.UseForeColor = true;
 			this.textEditEmail.Properties.Mask.EditMask = "(\\w|[\\.\\-])+@(\\w|[\\-]+\\.)*(\\w|[\\-]){2,63}\\.[a-zA-Z]{2,4}";
 			this.textEditEmail.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
 			this.textEditEmail.Properties.NullText = "Type...";
@@ -367,6 +393,8 @@
 			// laEmail
 			// 
 			this.laEmail.AutoSize = true;
+			this.laEmail.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.laEmail.ForeColor = System.Drawing.Color.Black;
 			this.laEmail.Location = new System.Drawing.Point(3, 169);
 			this.laEmail.Name = "laEmail";
 			this.laEmail.Size = new System.Drawing.Size(45, 16);
@@ -376,9 +404,10 @@
 			// laPassword
 			// 
 			this.laPassword.AutoSize = true;
+			this.laPassword.ForeColor = System.Drawing.Color.Black;
 			this.laPassword.Location = new System.Drawing.Point(3, 250);
 			this.laPassword.Name = "laPassword";
-			this.laPassword.Size = new System.Drawing.Size(69, 16);
+			this.laPassword.Size = new System.Drawing.Size(57, 13);
 			this.laPassword.TabIndex = 8;
 			this.laPassword.Text = "Password:";
 			// 
@@ -387,6 +416,8 @@
 			this.checkEditPassword.EditValue = true;
 			this.checkEditPassword.Location = new System.Drawing.Point(3, 238);
 			this.checkEditPassword.Name = "checkEditPassword";
+			this.checkEditPassword.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.checkEditPassword.Properties.Appearance.Options.UseForeColor = true;
 			this.checkEditPassword.Properties.Appearance.Options.UseTextOptions = true;
 			this.checkEditPassword.Properties.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
 			this.checkEditPassword.Properties.AutoHeight = false;
@@ -430,11 +461,15 @@
 			// 
 			this.buttonEditPassword.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.dxValidationProvider.SetIconAlignment(this.buttonEditPassword, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
 			this.dxErrorProvider.SetIconAlignment(this.buttonEditPassword, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
+			this.dxValidationProvider.SetIconAlignment(this.buttonEditPassword, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
 			this.buttonEditPassword.Location = new System.Drawing.Point(102, 247);
 			this.buttonEditPassword.Name = "buttonEditPassword";
 			this.buttonEditPassword.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
+			this.buttonEditPassword.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.buttonEditPassword.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.buttonEditPassword.Properties.Appearance.Options.UseBackColor = true;
+			this.buttonEditPassword.Properties.Appearance.Options.UseForeColor = true;
 			this.buttonEditPassword.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Ellipsis, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, null, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "Generate new password", null, null, true)});
 			this.buttonEditPassword.Properties.NullText = "Type...";
@@ -447,10 +482,14 @@
 			// 
 			this.textEditEmailConfirm.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.dxValidationProvider.SetIconAlignment(this.textEditEmailConfirm, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
 			this.dxErrorProvider.SetIconAlignment(this.textEditEmailConfirm, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
+			this.dxValidationProvider.SetIconAlignment(this.textEditEmailConfirm, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
 			this.textEditEmailConfirm.Location = new System.Drawing.Point(102, 205);
 			this.textEditEmailConfirm.Name = "textEditEmailConfirm";
+			this.textEditEmailConfirm.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.textEditEmailConfirm.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.textEditEmailConfirm.Properties.Appearance.Options.UseBackColor = true;
+			this.textEditEmailConfirm.Properties.Appearance.Options.UseForeColor = true;
 			this.textEditEmailConfirm.Properties.Mask.EditMask = "(\\w|[\\.\\-])+@(\\w|[\\-]+\\.)*(\\w|[\\-]){2,63}\\.[a-zA-Z]{2,4}";
 			this.textEditEmailConfirm.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
 			this.textEditEmailConfirm.Properties.NullText = "Type...";
@@ -463,10 +502,14 @@
 			// 
 			this.textEditPhone.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.dxValidationProvider.SetIconAlignment(this.textEditPhone, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
 			this.dxErrorProvider.SetIconAlignment(this.textEditPhone, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
+			this.dxValidationProvider.SetIconAlignment(this.textEditPhone, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
 			this.textEditPhone.Location = new System.Drawing.Point(102, 126);
 			this.textEditPhone.Name = "textEditPhone";
+			this.textEditPhone.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.textEditPhone.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.textEditPhone.Properties.Appearance.Options.UseBackColor = true;
+			this.textEditPhone.Properties.Appearance.Options.UseForeColor = true;
 			this.textEditPhone.Properties.NullText = "Type...";
 			this.textEditPhone.Size = new System.Drawing.Size(251, 22);
 			this.textEditPhone.StyleController = this.styleController;
@@ -482,6 +525,10 @@
 			this.xtraTabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+			this.xtraTabControl.Appearance.BackColor = System.Drawing.Color.White;
+			this.xtraTabControl.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.xtraTabControl.Appearance.Options.UseBackColor = true;
+			this.xtraTabControl.Appearance.Options.UseForeColor = true;
 			this.xtraTabControl.AppearancePage.Header.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.xtraTabControl.AppearancePage.Header.Options.UseFont = true;
 			this.xtraTabControl.AppearancePage.HeaderActive.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -504,6 +551,8 @@
 			// 
 			// xtraTabPageUser
 			// 
+			this.xtraTabPageUser.Appearance.PageClient.ForeColor = System.Drawing.Color.Black;
+			this.xtraTabPageUser.Appearance.PageClient.Options.UseForeColor = true;
 			this.xtraTabPageUser.Controls.Add(this.laPhone);
 			this.xtraTabPageUser.Controls.Add(this.textEditPhone);
 			this.xtraTabPageUser.Controls.Add(this.textEditEmailConfirm);
@@ -526,6 +575,8 @@
 			// laPhone
 			// 
 			this.laPhone.AutoSize = true;
+			this.laPhone.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.laPhone.ForeColor = System.Drawing.Color.Black;
 			this.laPhone.Location = new System.Drawing.Point(3, 129);
 			this.laPhone.Name = "laPhone";
 			this.laPhone.Size = new System.Drawing.Size(49, 16);
@@ -535,6 +586,8 @@
 			// laEmailConfirm
 			// 
 			this.laEmailConfirm.AutoSize = true;
+			this.laEmailConfirm.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.laEmailConfirm.ForeColor = System.Drawing.Color.Black;
 			this.laEmailConfirm.Location = new System.Drawing.Point(3, 208);
 			this.laEmailConfirm.Name = "laEmailConfirm";
 			this.laEmailConfirm.Size = new System.Drawing.Size(93, 16);
@@ -543,6 +596,8 @@
 			// 
 			// xtraTabPageGroups
 			// 
+			this.xtraTabPageGroups.Appearance.PageClient.ForeColor = System.Drawing.Color.Black;
+			this.xtraTabPageGroups.Appearance.PageClient.Options.UseForeColor = true;
 			this.xtraTabPageGroups.Controls.Add(this.pnAssignedGroups);
 			this.xtraTabPageGroups.Controls.Add(this.gridControlGroups);
 			this.xtraTabPageGroups.Name = "xtraTabPageGroups";
@@ -554,6 +609,7 @@
 			this.pnAssignedGroups.Controls.Add(this.buttonXGroupsClearAll);
 			this.pnAssignedGroups.Controls.Add(this.buttonXGroupsSelectAll);
 			this.pnAssignedGroups.Dock = System.Windows.Forms.DockStyle.Top;
+			this.pnAssignedGroups.ForeColor = System.Drawing.Color.Black;
 			this.pnAssignedGroups.Location = new System.Drawing.Point(0, 0);
 			this.pnAssignedGroups.Name = "pnAssignedGroups";
 			this.pnAssignedGroups.Size = new System.Drawing.Size(375, 46);
@@ -565,6 +621,7 @@
 			this.buttonXGroupsClearAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXGroupsClearAll.CausesValidation = false;
 			this.buttonXGroupsClearAll.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXGroupsClearAll.Font = new System.Drawing.Font("Arial", 9.75F);
 			this.buttonXGroupsClearAll.Location = new System.Drawing.Point(256, 7);
 			this.buttonXGroupsClearAll.Name = "buttonXGroupsClearAll";
 			this.buttonXGroupsClearAll.Size = new System.Drawing.Size(90, 33);
@@ -579,6 +636,7 @@
 			this.buttonXGroupsSelectAll.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
 			this.buttonXGroupsSelectAll.CausesValidation = false;
 			this.buttonXGroupsSelectAll.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXGroupsSelectAll.Font = new System.Drawing.Font("Arial", 9.75F);
 			this.buttonXGroupsSelectAll.Location = new System.Drawing.Point(29, 7);
 			this.buttonXGroupsSelectAll.Name = "buttonXGroupsSelectAll";
 			this.buttonXGroupsSelectAll.Size = new System.Drawing.Size(90, 33);
@@ -591,6 +649,10 @@
 			// gridControlGroups
 			// 
 			this.gridControlGroups.Dock = System.Windows.Forms.DockStyle.Bottom;
+			this.gridControlGroups.EmbeddedNavigator.Appearance.BackColor = System.Drawing.Color.White;
+			this.gridControlGroups.EmbeddedNavigator.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.gridControlGroups.EmbeddedNavigator.Appearance.Options.UseBackColor = true;
+			this.gridControlGroups.EmbeddedNavigator.Appearance.Options.UseForeColor = true;
 			this.gridControlGroups.Location = new System.Drawing.Point(0, 44);
 			this.gridControlGroups.MainView = this.gridViewGroups;
 			this.gridControlGroups.Name = "gridControlGroups";
@@ -676,6 +738,8 @@
 			// 
 			// xtraTabPageLibraries
 			// 
+			this.xtraTabPageLibraries.Appearance.PageClient.ForeColor = System.Drawing.Color.Black;
+			this.xtraTabPageLibraries.Appearance.PageClient.Options.UseForeColor = true;
 			this.xtraTabPageLibraries.Controls.Add(this.gridControlLibraries);
 			this.xtraTabPageLibraries.Controls.Add(this.pnAssignedLibraries);
 			this.xtraTabPageLibraries.Name = "xtraTabPageLibraries";
@@ -687,6 +751,7 @@
 			this.pnAssignedLibraries.Controls.Add(this.buttonXLibrariesClearAll);
 			this.pnAssignedLibraries.Controls.Add(this.buttonXLibrariesSelectAll);
 			this.pnAssignedLibraries.Dock = System.Windows.Forms.DockStyle.Top;
+			this.pnAssignedLibraries.ForeColor = System.Drawing.Color.Black;
 			this.pnAssignedLibraries.Location = new System.Drawing.Point(0, 0);
 			this.pnAssignedLibraries.Name = "pnAssignedLibraries";
 			this.pnAssignedLibraries.Size = new System.Drawing.Size(375, 46);
@@ -698,6 +763,7 @@
 			this.buttonXLibrariesClearAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXLibrariesClearAll.CausesValidation = false;
 			this.buttonXLibrariesClearAll.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXLibrariesClearAll.Font = new System.Drawing.Font("Arial", 9.75F);
 			this.buttonXLibrariesClearAll.Location = new System.Drawing.Point(256, 7);
 			this.buttonXLibrariesClearAll.Name = "buttonXLibrariesClearAll";
 			this.buttonXLibrariesClearAll.Size = new System.Drawing.Size(90, 33);
@@ -712,6 +778,7 @@
 			this.buttonXLibrariesSelectAll.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
 			this.buttonXLibrariesSelectAll.CausesValidation = false;
 			this.buttonXLibrariesSelectAll.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXLibrariesSelectAll.Font = new System.Drawing.Font("Arial", 9.75F);
 			this.buttonXLibrariesSelectAll.Location = new System.Drawing.Point(29, 7);
 			this.buttonXLibrariesSelectAll.Name = "buttonXLibrariesSelectAll";
 			this.buttonXLibrariesSelectAll.Size = new System.Drawing.Size(90, 33);
@@ -729,6 +796,7 @@
 			this.Controls.Add(this.xtraTabControl);
 			this.Controls.Add(this.buttonXCancel);
 			this.Controls.Add(this.buttonXSave);
+			this.DoubleBuffered = true;
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.MaximizeBox = false;

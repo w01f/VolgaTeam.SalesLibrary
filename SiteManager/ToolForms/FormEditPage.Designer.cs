@@ -94,6 +94,8 @@
 			// laLibrary
 			// 
 			this.laLibrary.AutoSize = true;
+			this.laLibrary.BackColor = System.Drawing.Color.White;
+			this.laLibrary.ForeColor = System.Drawing.Color.Black;
 			this.laLibrary.Location = new System.Drawing.Point(8, 9);
 			this.laLibrary.Name = "laLibrary";
 			this.laLibrary.Size = new System.Drawing.Size(70, 16);
@@ -138,6 +140,10 @@
 			this.xtraTabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+			this.xtraTabControl.Appearance.BackColor = System.Drawing.Color.White;
+			this.xtraTabControl.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.xtraTabControl.Appearance.Options.UseBackColor = true;
+			this.xtraTabControl.Appearance.Options.UseForeColor = true;
 			this.xtraTabControl.AppearancePage.Header.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.xtraTabControl.AppearancePage.Header.Options.UseFont = true;
 			this.xtraTabControl.AppearancePage.HeaderActive.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -159,6 +165,8 @@
 			// 
 			// xtraTabPageUsers
 			// 
+			this.xtraTabPageUsers.Appearance.PageClient.ForeColor = System.Drawing.Color.Black;
+			this.xtraTabPageUsers.Appearance.PageClient.Options.UseForeColor = true;
 			this.xtraTabPageUsers.Controls.Add(this.gridControlUsers);
 			this.xtraTabPageUsers.Controls.Add(this.pnAssignedUsers);
 			this.xtraTabPageUsers.Name = "xtraTabPageUsers";
@@ -168,6 +176,10 @@
 			// gridControlUsers
 			// 
 			this.gridControlUsers.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.gridControlUsers.EmbeddedNavigator.Appearance.BackColor = System.Drawing.Color.White;
+			this.gridControlUsers.EmbeddedNavigator.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.gridControlUsers.EmbeddedNavigator.Appearance.Options.UseBackColor = true;
+			this.gridControlUsers.EmbeddedNavigator.Appearance.Options.UseForeColor = true;
 			this.gridControlUsers.Location = new System.Drawing.Point(0, 46);
 			this.gridControlUsers.MainView = this.gridViewUsers;
 			this.gridControlUsers.Name = "gridControlUsers";
@@ -256,6 +268,7 @@
 			this.pnAssignedUsers.Controls.Add(this.buttonXUsersClearAll);
 			this.pnAssignedUsers.Controls.Add(this.buttonXUsersSelectAll);
 			this.pnAssignedUsers.Dock = System.Windows.Forms.DockStyle.Top;
+			this.pnAssignedUsers.ForeColor = System.Drawing.Color.Black;
 			this.pnAssignedUsers.Location = new System.Drawing.Point(0, 0);
 			this.pnAssignedUsers.Name = "pnAssignedUsers";
 			this.pnAssignedUsers.Size = new System.Drawing.Size(375, 46);
@@ -267,6 +280,7 @@
 			this.buttonXUsersClearAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXUsersClearAll.CausesValidation = false;
 			this.buttonXUsersClearAll.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXUsersClearAll.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.buttonXUsersClearAll.Location = new System.Drawing.Point(256, 7);
 			this.buttonXUsersClearAll.Name = "buttonXUsersClearAll";
 			this.buttonXUsersClearAll.Size = new System.Drawing.Size(90, 33);
@@ -281,6 +295,7 @@
 			this.buttonXUsersSelectAll.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
 			this.buttonXUsersSelectAll.CausesValidation = false;
 			this.buttonXUsersSelectAll.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXUsersSelectAll.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.buttonXUsersSelectAll.Location = new System.Drawing.Point(29, 7);
 			this.buttonXUsersSelectAll.Name = "buttonXUsersSelectAll";
 			this.buttonXUsersSelectAll.Size = new System.Drawing.Size(90, 33);
@@ -292,6 +307,8 @@
 			// 
 			// xtraTabPageGroups
 			// 
+			this.xtraTabPageGroups.Appearance.PageClient.ForeColor = System.Drawing.Color.Black;
+			this.xtraTabPageGroups.Appearance.PageClient.Options.UseForeColor = true;
 			this.xtraTabPageGroups.Controls.Add(this.gridControlGroups);
 			this.xtraTabPageGroups.Controls.Add(this.pnAssignedGroups);
 			this.xtraTabPageGroups.Name = "xtraTabPageGroups";
@@ -301,6 +318,10 @@
 			// gridControlGroups
 			// 
 			this.gridControlGroups.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.gridControlGroups.EmbeddedNavigator.Appearance.BackColor = System.Drawing.Color.White;
+			this.gridControlGroups.EmbeddedNavigator.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.gridControlGroups.EmbeddedNavigator.Appearance.Options.UseBackColor = true;
+			this.gridControlGroups.EmbeddedNavigator.Appearance.Options.UseForeColor = true;
 			this.gridControlGroups.Location = new System.Drawing.Point(0, 46);
 			this.gridControlGroups.MainView = this.gridViewGroups;
 			this.gridControlGroups.Name = "gridControlGroups";
@@ -389,6 +410,7 @@
 			this.pnAssignedGroups.Controls.Add(this.buttonXGroupsClearAll);
 			this.pnAssignedGroups.Controls.Add(this.buttonXGroupsSelectAll);
 			this.pnAssignedGroups.Dock = System.Windows.Forms.DockStyle.Top;
+			this.pnAssignedGroups.ForeColor = System.Drawing.Color.Black;
 			this.pnAssignedGroups.Location = new System.Drawing.Point(0, 0);
 			this.pnAssignedGroups.Name = "pnAssignedGroups";
 			this.pnAssignedGroups.Size = new System.Drawing.Size(375, 46);
@@ -400,6 +422,7 @@
 			this.buttonXGroupsClearAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXGroupsClearAll.CausesValidation = false;
 			this.buttonXGroupsClearAll.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXGroupsClearAll.Font = new System.Drawing.Font("Arial", 9.75F);
 			this.buttonXGroupsClearAll.Location = new System.Drawing.Point(256, 7);
 			this.buttonXGroupsClearAll.Name = "buttonXGroupsClearAll";
 			this.buttonXGroupsClearAll.Size = new System.Drawing.Size(90, 33);
@@ -414,6 +437,7 @@
 			this.buttonXGroupsSelectAll.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
 			this.buttonXGroupsSelectAll.CausesValidation = false;
 			this.buttonXGroupsSelectAll.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXGroupsSelectAll.Font = new System.Drawing.Font("Arial", 9.75F);
 			this.buttonXGroupsSelectAll.Location = new System.Drawing.Point(29, 7);
 			this.buttonXGroupsSelectAll.Name = "buttonXGroupsSelectAll";
 			this.buttonXGroupsSelectAll.Size = new System.Drawing.Size(90, 33);
@@ -426,6 +450,8 @@
 			// laPage
 			// 
 			this.laPage.AutoSize = true;
+			this.laPage.BackColor = System.Drawing.Color.White;
+			this.laPage.ForeColor = System.Drawing.Color.Black;
 			this.laPage.Location = new System.Drawing.Point(8, 37);
 			this.laPage.Name = "laPage";
 			this.laPage.Size = new System.Drawing.Size(61, 16);
@@ -437,7 +463,9 @@
 			this.checkEditapplyForLibrary.Location = new System.Drawing.Point(9, 65);
 			this.checkEditapplyForLibrary.Name = "checkEditapplyForLibrary";
 			this.checkEditapplyForLibrary.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+			this.checkEditapplyForLibrary.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.checkEditapplyForLibrary.Properties.Appearance.Options.UseFont = true;
+			this.checkEditapplyForLibrary.Properties.Appearance.Options.UseForeColor = true;
 			this.checkEditapplyForLibrary.Properties.AutoWidth = true;
 			this.checkEditapplyForLibrary.Properties.Caption = "Apply Permissions for WHOLE {0} Library";
 			this.checkEditapplyForLibrary.Size = new System.Drawing.Size(281, 20);
@@ -455,6 +483,7 @@
 			this.Controls.Add(this.xtraTabControl);
 			this.Controls.Add(this.buttonXCancel);
 			this.Controls.Add(this.buttonXSave);
+			this.DoubleBuffered = true;
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.MaximizeBox = false;

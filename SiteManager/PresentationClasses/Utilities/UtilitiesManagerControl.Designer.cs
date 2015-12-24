@@ -28,7 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-			this.styleController = new DevExpress.XtraEditors.StyleController();
+			this.components = new System.ComponentModel.Container();
+			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
 			this.splitContainerControl = new DevExpress.XtraEditors.SplitContainerControl();
 			this.pnUtilityOperations = new System.Windows.Forms.Panel();
 			this.buttonXUpdateContent = new DevComponents.DotNetBar.ButtonX();
@@ -93,6 +94,7 @@
 			this.buttonXUpdateContent.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXUpdateContent.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXUpdateContent.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.buttonXUpdateContent.Location = new System.Drawing.Point(12, 13);
 			this.buttonXUpdateContent.Name = "buttonXUpdateContent";
 			this.buttonXUpdateContent.Size = new System.Drawing.Size(205, 41);
@@ -107,6 +109,7 @@
 			this.buttonXUpdateShorcuts.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXUpdateShorcuts.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXUpdateShorcuts.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.buttonXUpdateShorcuts.Location = new System.Drawing.Point(12, 88);
 			this.buttonXUpdateShorcuts.Name = "buttonXUpdateShorcuts";
 			this.buttonXUpdateShorcuts.Size = new System.Drawing.Size(205, 41);
@@ -134,6 +137,7 @@
 			this.buttonXProcessDeadLinks.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXProcessDeadLinks.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXProcessDeadLinks.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.buttonXProcessDeadLinks.Location = new System.Drawing.Point(12, 159);
 			this.buttonXProcessDeadLinks.Name = "buttonXProcessDeadLinks";
 			this.buttonXProcessDeadLinks.Size = new System.Drawing.Size(205, 41);
@@ -148,6 +152,7 @@
 			this.buttonXUpdateQuizzes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXUpdateQuizzes.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXUpdateQuizzes.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.buttonXUpdateQuizzes.Location = new System.Drawing.Point(12, 234);
 			this.buttonXUpdateQuizzes.Name = "buttonXUpdateQuizzes";
 			this.buttonXUpdateQuizzes.Size = new System.Drawing.Size(205, 41);
@@ -169,7 +174,6 @@
 			this.memoEditResult.Properties.ReadOnly = true;
 			this.memoEditResult.Size = new System.Drawing.Size(669, 483);
 			this.memoEditResult.TabIndex = 0;
-			this.memoEditResult.UseOptimizedRendering = true;
 			// 
 			// UtilitiesManagerControl
 			// 

@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using Microsoft.Office.Interop.Excel;
-using SalesDepot.CoreObjects.InteropClasses;
-using SalesDepot.CoreObjects.ToolClasses;
+using SalesDepot.SiteManager.InteropClasses;
 
 namespace SalesDepot.SiteManager.ToolClasses
 {

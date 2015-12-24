@@ -8,9 +8,9 @@ using System.Threading;
 using System.Windows.Forms;
 using DevExpress.Data;
 using DevExpress.XtraPrinting;
-using SalesDepot.CommonGUI.Forms;
 using SalesDepot.Services.StatisticService;
 using SalesDepot.SiteManager.ToolClasses;
+using SalesDepot.SiteManager.ToolForms;
 
 namespace SalesDepot.SiteManager.PresentationClasses.Activities.QuizStatusData
 {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
-using SalesDepot.CommonGUI.Forms;
+using SalesDepot.SiteManager.ToolForms;
 
 namespace SalesDepot.SiteManager.PresentationClasses.Activities
 {

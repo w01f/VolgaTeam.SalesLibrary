@@ -7,8 +7,8 @@ using System.Windows.Forms;
 using DevComponents.DotNetBar.Metro;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
-using SalesDepot.CoreObjects.InteropClasses;
 using SalesDepot.Services.IPadAdminService;
+using SalesDepot.SiteManager.InteropClasses;
 
 namespace SalesDepot.SiteManager.ToolForms
 {

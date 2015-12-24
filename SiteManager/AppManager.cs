@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Linq;
 using System.Windows.Forms;
+using SalesDepot.SiteManager.InteropClasses;
 
 namespace SalesDepot.SiteManager
 {
@@ -28,15 +29,15 @@ namespace SalesDepot.SiteManager
 
 		public void ActivateForm(IntPtr handle, bool maximized, bool topMost)
 		{
-			CoreObjects.InteropClasses.WinAPIHelper.ShowWindow(handle, maximized ? CoreObjects.InteropClasses.WindowShowStyle.ShowMaximized : CoreObjects.InteropClasses.WindowShowStyle.ShowNormal);
+			WinAPIHelper.ShowWindow(handle, maximized ? WindowShowStyle.ShowMaximized : WindowShowStyle.ShowNormal);
 			uint lpdwProcessId;
-			CoreObjects.InteropClasses.WinAPIHelper.AttachThreadInput(CoreObjects.InteropClasses.WinAPIHelper.GetCurrentThreadId(), CoreObjects.InteropClasses.WinAPIHelper.GetWindowThreadProcessId(CoreObjects.InteropClasses.WinAPIHelper.GetForegroundWindow(), out lpdwProcessId), true);
-			CoreObjects.InteropClasses.WinAPIHelper.SetForegroundWindow(handle);
-			CoreObjects.InteropClasses.WinAPIHelper.AttachThreadInput(CoreObjects.InteropClasses.WinAPIHelper.GetCurrentThreadId(), CoreObjects.InteropClasses.WinAPIHelper.GetWindowThreadProcessId(CoreObjects.InteropClasses.WinAPIHelper.GetForegroundWindow(), out lpdwProcessId), false);
+			WinAPIHelper.AttachThreadInput(WinAPIHelper.GetCurrentThreadId(), WinAPIHelper.GetWindowThreadProcessId(WinAPIHelper.GetForegroundWindow(), out lpdwProcessId), true);
+			WinAPIHelper.SetForegroundWindow(handle);
+			WinAPIHelper.AttachThreadInput(WinAPIHelper.GetCurrentThreadId(), WinAPIHelper.GetWindowThreadProcessId(WinAPIHelper.GetForegroundWindow(), out lpdwProcessId), false);
 			if (topMost)
-				CoreObjects.InteropClasses.WinAPIHelper.MakeTopMost(handle);
+				WinAPIHelper.MakeTopMost(handle);
 			else
-				CoreObjects.InteropClasses.WinAPIHelper.MakeNormal(handle);
+				WinAPIHelper.MakeNormal(handle);
 		}
 
 		public void ActivateMainForm()

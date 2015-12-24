@@ -6,8 +6,8 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
-using SalesDepot.CommonGUI.Forms;
 using SalesDepot.Services.StatisticService;
+using SalesDepot.SiteManager.ToolForms;
 
 namespace SalesDepot.SiteManager.PresentationClasses.Activities.VideoLinkData
 {

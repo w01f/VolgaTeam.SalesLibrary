@@ -58,6 +58,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXLoadData.CausesValidation = false;
 			this.buttonXLoadData.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXLoadData.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.buttonXLoadData.Location = new System.Drawing.Point(7, 5);
 			this.buttonXLoadData.Name = "buttonXLoadData";
 			this.buttonXLoadData.Size = new System.Drawing.Size(226, 27);

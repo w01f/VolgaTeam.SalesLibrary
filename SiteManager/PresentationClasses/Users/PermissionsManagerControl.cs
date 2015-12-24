@@ -9,7 +9,6 @@ using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraTab;
-using SalesDepot.CommonGUI.Forms;
 using SalesDepot.Services.IPadAdminService;
 using SalesDepot.SiteManager.BusinessClasses;
 using SalesDepot.SiteManager.ToolForms;
