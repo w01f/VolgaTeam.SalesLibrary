@@ -1,0 +1,21 @@
+CREATE TABLE [LibraryLink] (
+[Id] INTEGER NOT NULL PRIMARY KEY,
+[ExtId] BLOB NOT NULL,
+[Folder_Id] INTEGER REFERENCES [LibraryFolder]([Id]),
+[FolderLink_Id] INTEGER REFERENCES [LibraryLink]([Id]),
+[Name] VARCHAR(128),
+[Type] INTEGER NOT NULL,
+[Order] INTEGER NOT NULL,
+[RelativePath] VARCHAR(256),
+[IsDead] INTEGER,
+[DataSourceId] BLOB,
+[AddDate] DATETIME,
+[LastModified] DATETIME,
+[SettingsEncoded] TEXT,
+[ExpirationEncoded] TEXT,
+[SecurityEncoded] TEXT,
+[TagsEncoded] TEXT,
+[WidgetEncoded] TEXT,
+[BannerEncoded] TEXT,
+[Discriminator] VARCHAR(128) NOT NULL
+)
