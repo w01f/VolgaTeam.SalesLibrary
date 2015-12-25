@@ -35,6 +35,9 @@
   <PropertyGroup>
     <ApplicationIcon>icon.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>SalesLibraries.FileManager.Program</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="ceTe.DynamicPDF.Rasterizer.40.x86, Version=2.0.0.28903, Culture=neutral, PublicKeyToken=09b5ce0d5c0a9d8b, processorArchitecture=x86">
       <Private>False</Private>

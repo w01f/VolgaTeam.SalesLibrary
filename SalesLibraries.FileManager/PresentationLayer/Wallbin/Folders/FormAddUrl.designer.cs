@@ -28,8 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+			this.components = new System.ComponentModel.Container();
 			this.textEditWebAddress = new DevExpress.XtraEditors.TextEdit();
-			this.styleController = new DevExpress.XtraEditors.StyleController();
+			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
 			this.laTitle = new System.Windows.Forms.Label();
 			this.laLinkPath = new System.Windows.Forms.Label();
 			this.laLinkName = new System.Windows.Forms.Label();
@@ -159,6 +160,7 @@
 			// ckForcePreview
 			// 
 			this.ckForcePreview.AutoSize = true;
+			this.ckForcePreview.BackColor = System.Drawing.Color.White;
 			this.ckForcePreview.Checked = true;
 			this.ckForcePreview.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.ckForcePreview.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -168,11 +170,12 @@
 			this.ckForcePreview.Size = new System.Drawing.Size(301, 20);
 			this.ckForcePreview.TabIndex = 27;
 			this.ckForcePreview.Text = "Immediately Launch this URL when clicked";
-			this.ckForcePreview.UseVisualStyleBackColor = true;
+			this.ckForcePreview.UseVisualStyleBackColor = false;
 			// 
 			// ckBlueHyperlink
 			// 
 			this.ckBlueHyperlink.AutoSize = true;
+			this.ckBlueHyperlink.BackColor = System.Drawing.Color.White;
 			this.ckBlueHyperlink.Checked = true;
 			this.ckBlueHyperlink.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.ckBlueHyperlink.Font = new System.Drawing.Font("Arial", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -182,7 +185,7 @@
 			this.ckBlueHyperlink.Size = new System.Drawing.Size(120, 20);
 			this.ckBlueHyperlink.TabIndex = 28;
 			this.ckBlueHyperlink.Text = "Blue Hyperlink";
-			this.ckBlueHyperlink.UseVisualStyleBackColor = true;
+			this.ckBlueHyperlink.UseVisualStyleBackColor = false;
 			// 
 			// FormAddUrl
 			// 
@@ -201,6 +204,7 @@
 			this.Controls.Add(this.pbLogo);
 			this.DoubleBuffered = true;
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.ForeColor = System.Drawing.Color.Black;
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
