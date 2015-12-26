@@ -52,8 +52,7 @@
 				!strstr(strtolower(Yii::app()->request->getUrl()), 'inactiveusers/') &&
 				!strstr(strtolower(Yii::app()->request->getUrl()), 'filemanagerdata/') &&
 				!strstr(strtolower(Yii::app()->request->getUrl()), 'adsalesdata/') &&
-				!strstr(Yii::app()->request->getUrl(), 'content/') &&
-				!strstr(Yii::app()->request->getUrl(), '')
+				!strstr(Yii::app()->request->getUrl(), 'content/')
 			)
 				Yii::app()->user->loginRequired();
 		}
