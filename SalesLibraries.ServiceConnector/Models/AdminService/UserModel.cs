@@ -26,6 +26,17 @@ namespace SalesLibraries.ServiceConnector.AdminService
 			}
 		}
 
+		public DateTime? CreateDate
+		{
+			get
+			{
+				DateTime temp;
+				if (DateTime.TryParse(dateAdd, out temp))
+					return temp;
+				return null;
+			}
+		}
+
 		public string LoginWithName
 		{
 			get { return string.Format("{0} ({1})", login, FullName); }

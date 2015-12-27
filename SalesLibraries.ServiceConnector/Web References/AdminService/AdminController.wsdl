@@ -39,6 +39,7 @@
           <xsd:element name="phone" type="xsd:string" />
           <xsd:element name="role" type="xsd:int" />
           <xsd:element name="selected" type="xsd:boolean" />
+          <xsd:element name="dateAdd" type="xsd:string" />
           <xsd:element name="groups" type="tns:GroupModelArray" />
           <xsd:element name="groupNames" type="xsd:string" />
           <xsd:element name="allGroups" type="xsd:boolean" />
@@ -126,6 +127,7 @@
           <xsd:element name="size" type="xsd:int" />
           <xsd:element name="isBold" type="xsd:boolean" />
           <xsd:element name="isItalic" type="xsd:boolean" />
+          <xsd:element name="isUnderlined" type="xsd:boolean" />
         </xsd:all>
       </xsd:complexType>
       <xsd:complexType name="Banner">
@@ -166,7 +168,7 @@
           <xsd:element name="type" type="xsd:int" />
           <xsd:element name="extendedProperties" type="tns:LinkSettings" />
           <xsd:element name="lineBreakProperties" type="tns:LineBreak" />
-          <xsd:element name="enableWidget" type="xsd:boolean" />
+          <xsd:element name="widgetType" type="xsd:int" />
           <xsd:element name="widget" type="xsd:string" />
           <xsd:element name="banner" type="tns:Banner" />
           <xsd:element name="previewId" type="xsd:string" />
@@ -177,7 +179,6 @@
           <xsd:element name="dateModify" type="xsd:string" />
           <xsd:element name="contentPath" type="xsd:string" />
           <xsd:element name="isDead" type="xsd:boolean" />
-          <xsd:element name="isPreviewNotReady" type="xsd:boolean" />
         </xsd:all>
       </xsd:complexType>
       <xsd:complexType name="LinkSettings">
@@ -285,8 +286,6 @@
           <xsd:element name="libraryId" type="xsd:string" />
           <xsd:element name="pngLinks" type="tns:stringArray" />
           <xsd:element name="pngPhoneLinks" type="tns:stringArray" />
-          <xsd:element name="jpegLinks" type="tns:stringArray" />
-          <xsd:element name="jpegPhoneLinks" type="tns:stringArray" />
           <xsd:element name="pdfLinks" type="tns:stringArray" />
           <xsd:element name="mp4Links" type="tns:stringArray" />
           <xsd:element name="mp4ThumbLinks" type="tns:stringArray" />

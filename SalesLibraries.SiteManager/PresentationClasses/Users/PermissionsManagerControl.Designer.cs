@@ -42,6 +42,7 @@
 			this.gridColumnUsersActions = new DevExpress.XtraGrid.Columns.GridColumn();
 			this.repositoryItemButtonEditUsersActions = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
 			this.gridColumnUsersPhone = new DevExpress.XtraGrid.Columns.GridColumn();
+			this.gridColumnUsersCreateDate = new DevExpress.XtraGrid.Columns.GridColumn();
 			this.xtraTabControl = new DevExpress.XtraTab.XtraTabControl();
 			this.xtraTabPageUsers = new DevExpress.XtraTab.XtraTabPage();
 			this.splitContainerControlUsers = new DevExpress.XtraEditors.SplitContainerControl();
@@ -98,7 +99,7 @@
 			this.gridControlUsers.Name = "gridControlUsers";
 			this.gridControlUsers.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemButtonEditUsersActions});
-			this.gridControlUsers.Size = new System.Drawing.Size(634, 455);
+			this.gridControlUsers.Size = new System.Drawing.Size(637, 452);
 			this.gridControlUsers.TabIndex = 2;
 			this.gridControlUsers.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewUsers});
@@ -126,7 +127,8 @@
             this.gridColumnUsersEmail,
             this.gridColumnUsersLogin,
             this.gridColumnUsersActions,
-            this.gridColumnUsersPhone});
+            this.gridColumnUsersPhone,
+            this.gridColumnUsersCreateDate});
 			this.gridViewUsers.GridControl = this.gridControlUsers;
 			this.gridViewUsers.Name = "gridViewUsers";
 			this.gridViewUsers.OptionsCustomization.AllowColumnMoving = false;
@@ -158,7 +160,7 @@
 			this.gridColumnUsersFullName.OptionsColumn.ReadOnly = true;
 			this.gridColumnUsersFullName.Visible = true;
 			this.gridColumnUsersFullName.VisibleIndex = 0;
-			this.gridColumnUsersFullName.Width = 129;
+			this.gridColumnUsersFullName.Width = 138;
 			// 
 			// gridColumnUsersEmail
 			// 
@@ -169,7 +171,7 @@
 			this.gridColumnUsersEmail.OptionsColumn.ReadOnly = true;
 			this.gridColumnUsersEmail.Visible = true;
 			this.gridColumnUsersEmail.VisibleIndex = 1;
-			this.gridColumnUsersEmail.Width = 98;
+			this.gridColumnUsersEmail.Width = 105;
 			// 
 			// gridColumnUsersLogin
 			// 
@@ -180,7 +182,7 @@
 			this.gridColumnUsersLogin.OptionsColumn.ReadOnly = true;
 			this.gridColumnUsersLogin.Visible = true;
 			this.gridColumnUsersLogin.VisibleIndex = 3;
-			this.gridColumnUsersLogin.Width = 98;
+			this.gridColumnUsersLogin.Width = 106;
 			// 
 			// gridColumnUsersActions
 			// 
@@ -191,7 +193,7 @@
 			this.gridColumnUsersActions.OptionsColumn.ShowCaption = false;
 			this.gridColumnUsersActions.ShowButtonMode = DevExpress.XtraGrid.Views.Base.ShowButtonModeEnum.ShowAlways;
 			this.gridColumnUsersActions.Visible = true;
-			this.gridColumnUsersActions.VisibleIndex = 4;
+			this.gridColumnUsersActions.VisibleIndex = 5;
 			this.gridColumnUsersActions.Width = 80;
 			// 
 			// repositoryItemButtonEditUsersActions
@@ -213,7 +215,21 @@
 			this.gridColumnUsersPhone.OptionsColumn.ReadOnly = true;
 			this.gridColumnUsersPhone.Visible = true;
 			this.gridColumnUsersPhone.VisibleIndex = 2;
-			this.gridColumnUsersPhone.Width = 122;
+			this.gridColumnUsersPhone.Width = 131;
+			// 
+			// gridColumnUsersCreateDate
+			// 
+			this.gridColumnUsersCreateDate.Caption = "Created";
+			this.gridColumnUsersCreateDate.DisplayFormat.FormatString = "MM/dd/yyyy";
+			this.gridColumnUsersCreateDate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
+			this.gridColumnUsersCreateDate.FieldName = "CreateDate";
+			this.gridColumnUsersCreateDate.Name = "gridColumnUsersCreateDate";
+			this.gridColumnUsersCreateDate.OptionsColumn.AllowEdit = false;
+			this.gridColumnUsersCreateDate.OptionsColumn.FixedWidth = true;
+			this.gridColumnUsersCreateDate.OptionsColumn.ReadOnly = true;
+			this.gridColumnUsersCreateDate.Visible = true;
+			this.gridColumnUsersCreateDate.VisibleIndex = 4;
+			this.gridColumnUsersCreateDate.Width = 90;
 			// 
 			// xtraTabControl
 			// 
@@ -243,7 +259,7 @@
 			// 
 			this.xtraTabPageUsers.Controls.Add(this.splitContainerControlUsers);
 			this.xtraTabPageUsers.Name = "xtraTabPageUsers";
-			this.xtraTabPageUsers.Size = new System.Drawing.Size(896, 455);
+			this.xtraTabPageUsers.Size = new System.Drawing.Size(892, 452);
 			this.xtraTabPageUsers.Text = "Users";
 			// 
 			// splitContainerControlUsers
@@ -260,7 +276,7 @@
 			this.splitContainerControlUsers.Panel1.Text = "Panel1";
 			this.splitContainerControlUsers.Panel2.Controls.Add(this.gridControlUsers);
 			this.splitContainerControlUsers.Panel2.Text = "Panel2";
-			this.splitContainerControlUsers.Size = new System.Drawing.Size(896, 455);
+			this.splitContainerControlUsers.Size = new System.Drawing.Size(892, 452);
 			this.splitContainerControlUsers.SplitterPosition = 250;
 			this.splitContainerControlUsers.TabIndex = 3;
 			this.splitContainerControlUsers.Text = "splitContainerControl1";
@@ -333,7 +349,7 @@
 			this.checkedListBoxControlUserFilterGroups.Location = new System.Drawing.Point(8, 95);
 			this.checkedListBoxControlUserFilterGroups.Name = "checkedListBoxControlUserFilterGroups";
 			this.checkedListBoxControlUserFilterGroups.SelectionMode = System.Windows.Forms.SelectionMode.None;
-			this.checkedListBoxControlUserFilterGroups.Size = new System.Drawing.Size(234, 357);
+			this.checkedListBoxControlUserFilterGroups.Size = new System.Drawing.Size(234, 354);
 			this.checkedListBoxControlUserFilterGroups.StyleController = this.styleController;
 			this.checkedListBoxControlUserFilterGroups.TabIndex = 21;
 			this.checkedListBoxControlUserFilterGroups.ItemCheck += new DevExpress.XtraEditors.Controls.ItemCheckEventHandler(this.checkedListBoxControlUserFilterGroups_ItemCheck);
@@ -352,7 +368,7 @@
 			// 
 			this.xtraTabPageGroups.Controls.Add(this.gridControlGroups);
 			this.xtraTabPageGroups.Name = "xtraTabPageGroups";
-			this.xtraTabPageGroups.Size = new System.Drawing.Size(896, 455);
+			this.xtraTabPageGroups.Size = new System.Drawing.Size(892, 452);
 			this.xtraTabPageGroups.Text = "Groups";
 			// 
 			// gridControlGroups
@@ -363,7 +379,7 @@
 			this.gridControlGroups.Name = "gridControlGroups";
 			this.gridControlGroups.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemButtonEditGroupActions});
-			this.gridControlGroups.Size = new System.Drawing.Size(896, 455);
+			this.gridControlGroups.Size = new System.Drawing.Size(892, 452);
 			this.gridControlGroups.TabIndex = 3;
 			this.gridControlGroups.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewGroups});
@@ -449,7 +465,7 @@
 			this.xtraTabPageLibraries.Controls.Add(this.gridControlPages);
 			this.xtraTabPageLibraries.Controls.Add(this.pnLibraraies);
 			this.xtraTabPageLibraries.Name = "xtraTabPageLibraries";
-			this.xtraTabPageLibraries.Size = new System.Drawing.Size(896, 455);
+			this.xtraTabPageLibraries.Size = new System.Drawing.Size(892, 452);
 			this.xtraTabPageLibraries.Text = "Libraries";
 			// 
 			// gridControlPages
@@ -461,7 +477,7 @@
 			this.gridControlPages.Name = "gridControlPages";
 			this.gridControlPages.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemButtonEditPageActions});
-			this.gridControlPages.Size = new System.Drawing.Size(896, 408);
+			this.gridControlPages.Size = new System.Drawing.Size(892, 405);
 			this.gridControlPages.TabIndex = 4;
 			this.gridControlPages.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewPages});
@@ -562,7 +578,7 @@
 			this.pnLibraraies.Dock = System.Windows.Forms.DockStyle.Top;
 			this.pnLibraraies.Location = new System.Drawing.Point(0, 0);
 			this.pnLibraraies.Name = "pnLibraraies";
-			this.pnLibraraies.Size = new System.Drawing.Size(896, 47);
+			this.pnLibraraies.Size = new System.Drawing.Size(892, 47);
 			this.pnLibraraies.TabIndex = 5;
 			// 
 			// buttonXCollapseLibraries
@@ -663,5 +679,6 @@
 		private DevExpress.XtraEditors.CheckedListBoxControl checkedListBoxControlUserFilterGroups;
 		private DevExpress.XtraEditors.CheckEdit checkEditEnableUserFilter;
 		private DevExpress.XtraEditors.StyleController styleController;
+		private DevExpress.XtraGrid.Columns.GridColumn gridColumnUsersCreateDate;
     }
 }

@@ -641,6 +641,8 @@ namespace SalesLibraries.ServiceConnector.AdminService {
         
         private bool selectedField;
         
+        private string dateAddField;
+        
         private GroupModel[] groupsField;
         
         private string groupNamesField;
@@ -738,6 +740,16 @@ namespace SalesLibraries.ServiceConnector.AdminService {
             }
             set {
                 this.selectedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string dateAdd {
+            get {
+                return this.dateAddField;
+            }
+            set {
+                this.dateAddField = value;
             }
         }
         
@@ -1327,6 +1339,8 @@ namespace SalesLibraries.ServiceConnector.AdminService {
         
         private bool isItalicField;
         
+        private bool isUnderlinedField;
+        
         /// <remarks/>
         public string name {
             get {
@@ -1364,6 +1378,16 @@ namespace SalesLibraries.ServiceConnector.AdminService {
             }
             set {
                 this.isItalicField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool isUnderlined {
+            get {
+                return this.isUnderlinedField;
+            }
+            set {
+                this.isUnderlinedField = value;
             }
         }
     }
@@ -1465,10 +1489,6 @@ namespace SalesLibraries.ServiceConnector.AdminService {
         
         private string[] pngPhoneLinksField;
         
-        private string[] jpegLinksField;
-        
-        private string[] jpegPhoneLinksField;
-        
         private string[] pdfLinksField;
         
         private string[] mp4LinksField;
@@ -1522,26 +1542,6 @@ namespace SalesLibraries.ServiceConnector.AdminService {
             }
             set {
                 this.pngPhoneLinksField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string[] jpegLinks {
-            get {
-                return this.jpegLinksField;
-            }
-            set {
-                this.jpegLinksField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string[] jpegPhoneLinks {
-            get {
-                return this.jpegPhoneLinksField;
-            }
-            set {
-                this.jpegPhoneLinksField = value;
             }
         }
         
@@ -2327,7 +2327,7 @@ namespace SalesLibraries.ServiceConnector.AdminService {
         
         private LineBreak lineBreakPropertiesField;
         
-        private bool enableWidgetField;
+        private int widgetTypeField;
         
         private string widgetField;
         
@@ -2348,8 +2348,6 @@ namespace SalesLibraries.ServiceConnector.AdminService {
         private string contentPathField;
         
         private bool isDeadField;
-        
-        private bool isPreviewNotReadyField;
         
         /// <remarks/>
         public string id {
@@ -2502,12 +2500,12 @@ namespace SalesLibraries.ServiceConnector.AdminService {
         }
         
         /// <remarks/>
-        public bool enableWidget {
+        public int widgetType {
             get {
-                return this.enableWidgetField;
+                return this.widgetTypeField;
             }
             set {
-                this.enableWidgetField = value;
+                this.widgetTypeField = value;
             }
         }
         
@@ -2608,16 +2606,6 @@ namespace SalesLibraries.ServiceConnector.AdminService {
             }
             set {
                 this.isDeadField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool isPreviewNotReady {
-            get {
-                return this.isPreviewNotReadyField;
-            }
-            set {
-                this.isPreviewNotReadyField = value;
             }
         }
     }
