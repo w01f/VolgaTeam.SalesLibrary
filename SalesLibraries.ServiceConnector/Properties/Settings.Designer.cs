@@ -53,5 +53,46 @@ namespace SalesLibraries.ServiceConnector.Properties {
                     "llerService"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost/SalesLibraries/utility/quote?ws=1")]
+        public string SalesLibraries_ServiceConnector_UtilityService_UtilityControllerService {
+            get {
+                return ((string)(this["SalesLibraries_ServiceConnector_UtilityService_UtilityControllerService"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost/SalesLibraries/inactiveUsers/quote?ws=1")]
+        public string SalesLibraries_ServiceConnector_InactiveUsersService_InactiveUsersControllerService {
+            get {
+                return ((string)(this["SalesLibraries_ServiceConnector_InactiveUsersService_InactiveUsersControllerServi" +
+                    "ce"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost/SalesLibraries/qBuilder/quote?ws=1")]
+        public string SalesLibraries_ServiceConnector_QBuilderService_QBuilderControllerService {
+            get {
+                return ((string)(this["SalesLibraries_ServiceConnector_QBuilderService_QBuilderControllerService"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost/SalesLibraries/statistic/quote?ws=1")]
+        public string SalesLibraries_ServiceConnector_StatisticService_StatisticControllerService {
+            get {
+                return ((string)(this["SalesLibraries_ServiceConnector_StatisticService_StatisticControllerService"]));
+            }
+        }
     }
 }

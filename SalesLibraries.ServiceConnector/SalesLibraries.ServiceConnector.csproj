@@ -45,6 +45,17 @@
     <Compile Include="Models\AdminService\LibraryPage.cs" />
     <Compile Include="Models\AdminService\UserInfo.cs" />
     <Compile Include="Models\AdminService\UserModel.cs" />
+    <Compile Include="Models\InactiveUsers\UserModel.cs" />
+    <Compile Include="Models\QBuilder\QPageModel.cs" />
+    <Compile Include="Models\Statistic\AccessReportModel.cs" />
+    <Compile Include="Models\Statistic\MainGroupReportModel.cs" />
+    <Compile Include="Models\Statistic\MainUserReportModel.cs" />
+    <Compile Include="Models\Statistic\NavigationGroupReportModel.cs" />
+    <Compile Include="Models\Statistic\NavigationUserReportModel.cs" />
+    <Compile Include="Models\Statistic\QuizPassGroupReportModel.cs" />
+    <Compile Include="Models\Statistic\QuizPassUserReportModel.cs" />
+    <Compile Include="Models\Statistic\UserActivity.cs" />
+    <Compile Include="Models\Statistic\VideoLinkInfo.cs" />
     <Compile Include="Models\WallbinContentService\LibraryConfig.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -52,6 +63,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Services\Service.Authorization.cs" />
+    <Compile Include="Services\Service.Common.cs" />
     <Compile Include="Services\Service.FileManagerResources.cs" />
     <Compile Include="Services\Service.Admin.Libraries.cs" />
     <Compile Include="Services\Service.Admin.Groups.cs" />
@@ -59,12 +71,36 @@
     <Compile Include="Services\Service.Admin.cs" />
     <Compile Include="Services\Service.Credentials.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\Service.InactiveUsers.cs" />
+    <Compile Include="Services\Service.QBuilder.cs" />
+    <Compile Include="Services\Service.Statistic.cs" />
+    <Compile Include="Services\Service.Utility.cs" />
     <Compile Include="Web References\AdminService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
     <Compile Include="Web References\FileManagerResourcesService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\InactiveUsersService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\QBuilderService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\StatisticService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\UtilityService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -115,6 +151,50 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>SalesLibraries_ServiceConnector_FileManagerResourcesService_FileManagerDataControllerService</CachedSettingsPropName>
     </WebReferenceUrl>
+    <WebReferenceUrl Include="http://localhost/SalesLibraries/InactiveUsers/quote">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\InactiveUsersService\</RelPath>
+      <UpdateFromURL>http://localhost/SalesLibraries/InactiveUsers/quote</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>SalesLibraries_ServiceConnector_InactiveUsersService_InactiveUsersControllerService</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://localhost/SalesLibraries/QBuilder/quote">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\QBuilderService\</RelPath>
+      <UpdateFromURL>http://localhost/SalesLibraries/QBuilder/quote</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>SalesLibraries_ServiceConnector_QBuilderService_QBuilderControllerService</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://localhost/SalesLibraries/statistic/quote">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\StatisticService\</RelPath>
+      <UpdateFromURL>http://localhost/SalesLibraries/statistic/quote</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>SalesLibraries_ServiceConnector_StatisticService_StatisticControllerService</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://localhost/SalesLibraries/utility/quote">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\UtilityService\</RelPath>
+      <UpdateFromURL>http://localhost/SalesLibraries/utility/quote</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>SalesLibraries_ServiceConnector_UtilityService_UtilityControllerService</CachedSettingsPropName>
+    </WebReferenceUrl>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -150,6 +230,62 @@
     <None Include="Web References\FileManagerResourcesService\SuperFilter.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
+    <None Include="Web References\InactiveUsersService\InactiveUsersController.wsdl" />
+    <None Include="Web References\InactiveUsersService\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\InactiveUsersService\UserModel.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\QBuilderService\QBuilderController.wsdl" />
+    <None Include="Web References\QBuilderService\QPageModel.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\QBuilderService\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\StatisticService\AccessReportModel.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\StatisticService\FileActivityReportModel.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\StatisticService\MainGroupReportModel.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\StatisticService\MainUserReportModel.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\StatisticService\NavigationGroupReportModel.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\StatisticService\NavigationUserReportModel.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\StatisticService\QuizPassGroupReportModel.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\StatisticService\QuizPassUserReportModel.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\StatisticService\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\StatisticService\StatisticController.wsdl" />
+    <None Include="Web References\StatisticService\UserActivity.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\StatisticService\VideoLinkInfo.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\UtilityService\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\UtilityService\UtilityController.wsdl" />
     <None Include="Web References\WallbinContentService\ContentController.wsdl" />
     <None Include="Web References\WallbinContentService\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>

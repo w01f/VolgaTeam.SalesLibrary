@@ -11,5 +11,17 @@
     <Setting Name="SalesLibraries_ServiceConnector_FileManagerResourcesService_FileManagerDataControllerService" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://localhost/SalesLibraries/fileManagerData/quote?ws=1</Value>
     </Setting>
+    <Setting Name="SalesLibraries_ServiceConnector_UtilityService_UtilityControllerService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost/SalesLibraries/utility/quote?ws=1</Value>
+    </Setting>
+    <Setting Name="SalesLibraries_ServiceConnector_InactiveUsersService_InactiveUsersControllerService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost/SalesLibraries/inactiveUsers/quote?ws=1</Value>
+    </Setting>
+    <Setting Name="SalesLibraries_ServiceConnector_QBuilderService_QBuilderControllerService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost/SalesLibraries/qBuilder/quote?ws=1</Value>
+    </Setting>
+    <Setting Name="SalesLibraries_ServiceConnector_StatisticService_StatisticControllerService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost/SalesLibraries/statistic/quote?ws=1</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
