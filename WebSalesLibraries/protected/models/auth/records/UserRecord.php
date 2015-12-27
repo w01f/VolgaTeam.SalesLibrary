@@ -10,6 +10,7 @@
 	 * @property mixed email
 	 * @property mixed phone
 	 * @property mixed role
+	 * @property mixed date_add
 	 */
 	class UserRecord extends CActiveRecord
 	{

@@ -51,6 +51,11 @@
 		 */
 		public $selected;
 		/**
+		 * @var string
+		 * @soap
+		 */
+		public $dateAdd;
+		/**
 		 * @var GroupModel[]
 		 * @soap
 		 */

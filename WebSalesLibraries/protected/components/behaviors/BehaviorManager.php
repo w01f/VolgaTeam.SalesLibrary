@@ -34,25 +34,27 @@
 
 		public function checkLoginRequired()
 		{
+			$url = strtolower(Yii::app()->request->getUrl());
 			if (Yii::app()->user->isGuest &&
-				!strstr(Yii::app()->request->getUrl(), 'auth/') &&
-				!strstr(Yii::app()->request->getUrl(), 'site/badBrowser') &&
-				!strstr(Yii::app()->request->getUrl(), 'site/login') &&
-				!strstr(Yii::app()->request->getUrl(), 'site/switchVersion') &&
-				!strstr(Yii::app()->request->getUrl(), 'qpage/show') &&
-				!strstr(Yii::app()->request->getUrl(), 'qpage/recordActivity') &&
-				!strstr(Yii::app()->request->getUrl(), 'qpage/getPublic') &&
-				!strstr(Yii::app()->request->getUrl(), 'qpage/preview') &&
-				!strstr(Yii::app()->request->getUrl(), 'qpage/site') &&
-				!strstr(Yii::app()->request->getUrl(), 'qpage/wallbin') &&
-				!strstr(Yii::app()->request->getUrl(), 'admin/') &&
-				!strstr(Yii::app()->request->getUrl(), 'utility/') &&
-				!strstr(strtolower(Yii::app()->request->getUrl()), 'statistic/quote') &&
-				!strstr(strtolower(Yii::app()->request->getUrl()), 'qbuilder/quote') &&
-				!strstr(strtolower(Yii::app()->request->getUrl()), 'inactiveusers/') &&
-				!strstr(strtolower(Yii::app()->request->getUrl()), 'filemanagerdata/') &&
-				!strstr(strtolower(Yii::app()->request->getUrl()), 'adsalesdata/') &&
-				!strstr(Yii::app()->request->getUrl(), 'content/')
+				$url != '' &&
+				!strstr($url, 'auth/') &&
+				!strstr($url, 'site/badBrowser') &&
+				!strstr($url, 'site/login') &&
+				!strstr($url, 'site/switchVersion') &&
+				!strstr($url, 'qpage/show') &&
+				!strstr($url, 'qpage/recordActivity') &&
+				!strstr($url, 'qpage/getPublic') &&
+				!strstr($url, 'qpage/preview') &&
+				!strstr($url, 'qpage/site') &&
+				!strstr($url, 'qpage/wallbin') &&
+				!strstr($url, 'admin/') &&
+				!strstr($url, 'utility/') &&
+				!strstr($url, 'statistic/quote') &&
+				!strstr($url, 'qbuilder/quote') &&
+				!strstr($url, 'inactiveusers/') &&
+				!strstr($url, 'filemanagerdata/') &&
+				!strstr($url, 'adsalesdata/') &&
+				!strstr($url, 'content/')
 			)
 				Yii::app()->user->loginRequired();
 		}

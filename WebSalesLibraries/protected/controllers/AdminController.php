@@ -47,6 +47,7 @@
 				{
 					$user = new UserRecord();
 					$user->login = $login;
+					$user->date_add = date(Yii::app()->params['mysqlDateFormat'], strtotime(date("Y-m-d H:i:s")));
 					$newUser = TRUE;
 				}
 				$user->first_name = $firstName;
@@ -54,6 +55,7 @@
 				$user->email = $email;
 				$user->phone = $phone;
 				$user->role = $role;
+
 				if ($password !== '')
 				{
 					$user->password = md5($password);
@@ -107,6 +109,7 @@
 					$user->email = $userRecord->email;
 					$user->phone = $userRecord->phone;
 					$user->role = $userRecord->role;
+					$user->dateAdd = $userRecord->date_add;
 
 					$assignedLibraryIds = UserLibraryRecord::getLibraryIdsByUser($userRecord->id);
 					$totalLibraries = LibraryRecord::model()->count();
@@ -279,6 +282,7 @@
 							$user->firstName = $userRecord->first_name;
 							$user->lastName = $userRecord->last_name;
 							$user->email = $userRecord->email;
+							$user->dateAdd = $userRecord->date_add;
 							$group->users[] = $user;
 						}
 					}
@@ -364,6 +368,7 @@
 									$user->firstName = $userRecord->first_name;
 									$user->lastName = $userRecord->last_name;
 									$user->email = $userRecord->email;
+									$user->dateAdd = $userRecord->date_add;
 									$page->users[] = $user;
 								}
 							}
