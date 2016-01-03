@@ -129,7 +129,7 @@
 
 		/**
 		 * @param $userId
-		 * @return array|null
+		 * @return array
 		 */
 		public static function getPageIdsByUserAngHisGroups($userId)
 		{
@@ -154,7 +154,7 @@
 
 			if (isset($pageIds))
 				return array_unique($pageIds);
-			return null;
+			return array();
 		}
 
 		/**

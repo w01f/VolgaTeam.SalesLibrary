@@ -13,7 +13,7 @@
 		public function authenticate()
 		{
 			/** @var $user UserRecord */
-			$user = UserRecord::model()->find('LOWER(login)=:login or LOWER(email)=:login', array('login'=>strtolower($this->username)));
+			$user = UserRecord::model()->find('LOWER(login)=:login or LOWER(email)=:login', array('login' => strtolower($this->username)));
 			if (!isset($user))
 				$this->errorCode = self::ERROR_USERNAME_INVALID;
 			else if (!$user->validatePassword($this->password))
@@ -66,9 +66,62 @@
 			return false;
 		}
 
+		/**
+		 * @return int
+		 */
 		public function getId()
 		{
 			return $this->_id;
 		}
 
+		/**
+		 * @return int
+		 */
+		public static function getCurrentUserId()
+		{
+			$userId = -1;
+			if (isset(Yii::app()->user))
+				$userId = Yii::app()->user->getId();
+			return $userId;
+		}
+
+		/**
+		 * @return string
+		 */
+		public static function getCurrentUserLogin()
+		{
+			if (isset(Yii::app()->user))
+				return Yii::app()->user->login;
+			return null;
+		}
+
+		/**
+		 * @return array
+		 */
+		public static function getCurrentUserGroups()
+		{
+			$user = Yii::app()->user;
+			if (isset($user))
+				return $user->getState('groups');
+			return  array();
+		}
+
+		/**
+		 * @return boolean
+		 */
+		public static function isUserAuthorized()
+		{
+			return self::getCurrentUserId() != -1;
+		}
+
+		/**
+		 * @return boolean
+		 */
+		public static function isUserAdmin()
+		{
+			if (isset(Yii::app()->user) && isset(Yii::app()->user->role))
+				return Yii::app()->user->role == 2;
+			else
+				return true;
+		}
 	}

@@ -29,7 +29,7 @@
 		{
 			$data = parent::getPageData();
 
-			$userId = Yii::app()->user->getId();
+			$userId = UserIdentity::getCurrentUserId();
 			$pages = QPageRecord::model()->getByOwner($userId);
 			$data['selectedPageId'] = count($pages) > 0 ? $pages[0]->id : null;
 			$data['serviceData'] = $this->getMenuItemData();

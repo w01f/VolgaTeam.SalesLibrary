@@ -25,31 +25,54 @@
 				},
 				success: function (parameters)
 				{
-					if(parameters.data.userAuthorized)
-						$.SalesPortal.LogHelper.write({
-							type: 'Link',
-							subType: 'Preview Options',
-							data: {
-								Name: parameters.data.name,
-								File: parameters.data.fileName,
-								'Original Format': parameters.format
-							}
-						});
-
-					switch (parameters.format)
+					if (parameters.data.config.allowPreview)
 					{
-						case 'document':
-							new $.SalesPortal.DocumentViewer(parameters).show();
-							break;
-						case 'video':
-							new $.SalesPortal.VideoViewer(parameters).show();
-							break;
-						case 'image':
-							new $.SalesPortal.ImageViewer(parameters).show();
-							break;
-						default :
-							new $.SalesPortal.FileViewer(parameters).show();
-							break;
+						if (parameters.data.config.enableLogging)
+							$.SalesPortal.LogHelper.write({
+								type: 'Link',
+								subType: 'Preview Options',
+								data: {
+									Name: parameters.data.name,
+									File: parameters.data.fileName,
+									'Original Format': parameters.format
+								}
+							});
+
+						switch (parameters.format)
+						{
+							case 'document':
+								new $.SalesPortal.DocumentViewer(parameters).show();
+								break;
+							case 'video':
+								new $.SalesPortal.VideoViewer(parameters).show();
+								break;
+							case 'image':
+								new $.SalesPortal.ImageViewer(parameters).show();
+								break;
+							default :
+								new $.SalesPortal.FileViewer(parameters).show();
+								break;
+						}
+					}
+					else
+					{
+						var modalDialog = new $.SalesPortal.ModalDialog({
+							title: '<span class="text-danger">Sorry...</span>',
+							description: 'You are not authorized to view this link.',
+							buttons: [
+								{
+									tag: 'close',
+									title: 'Close',
+									width: 80,
+									clickHandler: function ()
+									{
+										modalDialog.close();
+									}
+								}
+							],
+							closeOnOutsideClick: true
+						});
+						modalDialog.show();
 					}
 				},
 				error: function ()

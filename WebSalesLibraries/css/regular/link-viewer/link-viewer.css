@@ -17,7 +17,7 @@
 
 .link-viewer > .tab-content
 {
-	height: 400px;
+	height: 410px;
 }
 
 .link-viewer .file-size
@@ -41,8 +41,9 @@
 	display: none;
 }
 
-#tab-above-header-save,
-#tab-above-header-email
+#tab-above-header-preview .header-text,
+#tab-above-header-save .header-text,
+#tab-above-header-email .header-text
 {
 	line-height: 34px;
 	font-size: 1.5em;

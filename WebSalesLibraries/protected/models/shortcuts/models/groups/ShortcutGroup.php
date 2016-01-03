@@ -114,10 +114,7 @@
 				$excludedGroups[] = trim($groupNode->nodeValue);
 
 			$user = Yii::app()->user;
-			if (isset($user))
-				$userGroups = $user->getState('groups');
-			else
-				$userGroups = array();
+			$userGroups = UserIdentity::getCurrentUserGroups();
 
 			if (isset($user) && count($excludedUsers) > 0)
 				$this->isAccessGranted &= !in_array($user->login, $excludedUsers);

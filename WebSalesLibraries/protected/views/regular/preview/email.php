@@ -6,7 +6,7 @@
 	$imageUrlPrefix = Yii::app()->getBaseUrl(true);
 	$logos = QPageRecord::getPageLogoList();
 ?>
-<div class="row<? if ($data->userAuthorized): ?> logger-form<?endif;?>" data-log-group="Link" data-log-action="Email Activity">
+<div class="row<? if ($data->config->enableLogging): ?> logger-form<?endif;?>" data-log-group="Link" data-log-action="Email Activity">
 	<ul class="nav nav-pills nav-stacked col col-xs-3" role="tablist" id="link-viewer-email-tabs">
 		<li class="active">
 			<a class="log-action" href="#link-viewer-email-tab-settings" role="tab" data-toggle="tab">

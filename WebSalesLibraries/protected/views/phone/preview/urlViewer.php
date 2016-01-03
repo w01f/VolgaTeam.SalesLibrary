@@ -2,11 +2,7 @@
 	/**
 	 * @var $data UrlPreviewData
 	 */
-
-	$authorized = false;
-	$userId = Yii::app()->user->getId();
-	if (isset($userId))
-		$authorized = true;
+	$authorized = UserIdentity::isUserAuthorized();
 ?>
 <div data-role='page' id="link-viewer" class="link-viewer-page" data-cache="never" data-dom-cache="false" data-ajax="false">
 	<div data-role='header' class="page-header" data-position="fixed">
@@ -56,7 +52,7 @@
 				<li data-icon="false">
 					<a class="logout-button" href="#">Log Out</a>
 				</li>
-				<li data-role="list-divider"><p class="user-info">User: <? echo Yii::app()->user->login; ?></p></li>
+				<li data-role="list-divider"><p class="user-info">User: <? echo UserIdentity::getCurrentUserLogin(); ?></p></li>
 				<li data-role="list-divider"><p>Copyright 2015 adSALESapps.com</p></li>
 			</ul>
 		</div>

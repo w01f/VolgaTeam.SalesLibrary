@@ -14,7 +14,12 @@
 			parent::__construct($link, $isQuickSite);
 			$this->viewerFormat = 'file';
 			$this->contentView = 'fileViewer';
-			$this->linkTitle ='MP3 File';
+			$this->linkTitle = 'MP3 File';
+		}
+
+		protected function initActions()
+		{
+			parent::initActions();
 
 			$imageUrlPrefix = Yii::app()->getBaseUrl(true);
 			$action = new PreviewAction();

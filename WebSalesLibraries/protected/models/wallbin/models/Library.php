@@ -49,21 +49,19 @@
 
 		public function load()
 		{
-			if (isset(Yii::app()->user))
+			$isAdmin = UserIdentity::isUserAdmin();
+			if (!$isAdmin)
 			{
-				$userId = Yii::app()->user->getId();
-				if (isset(Yii::app()->user->role))
-					$isAdmin = Yii::app()->user->role == 2;
-				else
-					$isAdmin = true;
-				if (isset($userId) && !$isAdmin)
-					$availablePageIds = UserLibraryRecord::getPageIdsByUserAngHisGroups($userId);
+				$userId = UserIdentity::getCurrentUserId();
+				$availablePageIds = UserLibraryRecord::getPageIdsByUserAngHisGroups($userId);
 			}
+			else
+				$availablePageIds = array();
 			foreach (LibraryPageRecord::model()->findAll('id_library=?', array($this->id)) as $pageRecord)
 			{
 				$page = new LibraryPage($this);
 				$page->load($pageRecord);
-				if ((isset($availablePageIds) && in_array($page->id, $availablePageIds)) || (!isset($userId) || (isset($isAdmin) && $isAdmin)))
+				if (in_array($page->id, $availablePageIds) || $isAdmin)
 					$this->pages[] = $page;
 			}
 			if (isset($this->pages))

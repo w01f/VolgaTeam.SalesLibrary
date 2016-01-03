@@ -409,8 +409,8 @@
 		 */
 		public static function getMaxPageIndex()
 		{
-			$userId = Yii::app()->user->getId();
-			if (isset($userId))
+			$userId = UserIdentity::getCurrentUserId();
+			if ($userId != -1)
 			{
 				return Yii::app()->db->createCommand()
 					->select('max(list_order)')

@@ -15,17 +15,20 @@
 		public function __construct($link, $isQuickSite)
 		{
 			parent::__construct($link, $isQuickSite);
+
 			$this->viewerFormat = 'url';
 			$this->contentView = 'urlViewer';
 
 			$this->fileName = $link->fileName;
 			$this->isOffice365 = $this->format == 'url365';
 
-			$imageUrlPrefix = Yii::app()->getBaseUrl(true);
 			$this->linkTitle = $this->isOffice365 ? 'Office 365 Link' : 'URL';
+		}
 
+		protected function initActions()
+		{
 			$this->actions = array();
-
+			$imageUrlPrefix = Yii::app()->getBaseUrl(true);
 			$action = new PreviewAction();
 			$action->tag = 'open';
 			$action->text = sprintf('OPEN this %s in a new browser window...', $this->linkTitle);
@@ -33,7 +36,7 @@
 			$action->logo = sprintf('%s/images/preview/actions/open-%s.png?%s', $imageUrlPrefix, $this->format, Yii::app()->params['version']);
 			$this->actions[] = $action;
 
-			if ($this->allowAddToQuickSite)
+			if ($this->config->allowAddToQuickSite)
 			{
 				$action = new PreviewAction();
 				$action->tag = 'quicksite';
@@ -43,7 +46,7 @@
 				$this->actions[] = $action;
 			}
 
-			if ($this->allowAddToFavorites)
+			if ($this->config->allowAddToFavorites)
 			{
 				$action = new PreviewAction();
 				$action->tag = 'favorites';

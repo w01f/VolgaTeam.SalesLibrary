@@ -2,17 +2,10 @@
 	/**
 	 * @var $previewData FilePreviewData|UrlPreviewData
 	 */
-
-	$authorized = false;
-	$userId = Yii::app()->user->getId();
-	$userFolders = array();
-	if (isset($userId))
-	{
-		$authorized = true;
-		$userFolders = FavoritesFolderRecord::getAllFolderNames($userId);
-	}
+	$userId = UserIdentity::getCurrentUserId();
+	$userFolders = FavoritesFolderRecord::getAllFolderNames($userId);
 ?>
-<? if ($authorized && $previewData->allowAddToFavorites): ?>
+<? if ($previewData->config->allowAddToFavorites): ?>
 	<div id="favorites-add-page" data-role="page" data-cache="never" data-dom-cache="false" data-ajax="false">
 		<div class="page-header" data-role="header" data-position="fixed" data-theme="a">
 			<h3>Add to Favorites</h3>

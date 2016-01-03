@@ -14,8 +14,8 @@
 		{
 			$linkId = Yii::app()->request->getPost('linkId');
 			$value = floatval(Yii::app()->request->getPost('value'));
-			$userId = Yii::app()->user->getId();
-			if (isset($linkId) && isset($userId))
+			$userId = UserIdentity::getCurrentUserId();
+			if (isset($linkId))
 			{
 				LinkRateRecord::setRate($linkId, $userId, $value);
 				echo CJSON::encode(LinkRateRecord::getRateData($linkId, $userId));

@@ -233,17 +233,9 @@
 		public static function applyPermissionsFilter($links)
 		{
 			$filteredLinks = array();
-			$isAdmin = false;
-			$userId = null;
-			if (isset(Yii::app()->user))
-			{
-				$userId = Yii::app()->user->getId();
-				if (isset(Yii::app()->user->role))
-					$isAdmin = Yii::app()->user->role == 2;
-				else
-					$isAdmin = true;
-			}
-			if (!$isAdmin && isset($userId))
+			$isAdmin =UserIdentity::isUserAdmin();
+			$userId = UserIdentity::getCurrentUserId();
+			if (!$isAdmin)
 			{
 				foreach ($links as $link)
 				{

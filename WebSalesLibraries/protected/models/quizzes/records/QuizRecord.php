@@ -74,7 +74,7 @@
 		public static function getByGroup($groupId)
 		{
 			$quizItems = null;
-			$userId = Yii::app()->user->getId();
+			$userId = UserIdentity::getCurrentUserId();
 			/** @var $quizRecords QuizRecord[] */
 			$quizRecords = isset($groupId) ?
 				self::model()->findAll(array('order' => "'order'", 'condition' => 'id_group=:x', 'params' => array(':x' => $groupId))) :

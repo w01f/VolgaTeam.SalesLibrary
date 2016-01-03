@@ -71,34 +71,31 @@
 			$detailRecord->ip = Yii::app()->request->getUserHostAddress();
 			if (isset(Yii::app()->user) && !Yii::app()->user->isGuest)
 			{
-				$userId = Yii::app()->user->getId();
-				if (isset($userId))
+				$userId = UserIdentity::getCurrentUserId();
+				/** @var $userRecord UserRecord */
+				$userRecord = UserRecord::model()->findByPk($userId);
+				if (isset($userRecord))
 				{
-					/** @var $userRecord UserRecord */
-					$userRecord = UserRecord::model()->findByPk($userId);
-					if (isset($userRecord))
-					{
-						$detailRecord->login = $userRecord->login;
-						$detailRecord->first_name = $userRecord->first_name;
-						$detailRecord->last_name = $userRecord->last_name;
-						$detailRecord->email = $userRecord->email;
-						$detailRecord->phone = $userRecord->phone;
+					$detailRecord->login = $userRecord->login;
+					$detailRecord->first_name = $userRecord->first_name;
+					$detailRecord->last_name = $userRecord->last_name;
+					$detailRecord->email = $userRecord->email;
+					$detailRecord->phone = $userRecord->phone;
 
-						$userGroupIds = UserGroupRecord::getGroupIdsByUser($userRecord->id);
-						if (isset($userGroupIds))
-							foreach ($userGroupIds as $groupId)
+					$userGroupIds = UserGroupRecord::getGroupIdsByUser($userRecord->id);
+					if (isset($userGroupIds))
+						foreach ($userGroupIds as $groupId)
+						{
+							/** @var $groupRecord GroupRecord */
+							$groupRecord = GroupRecord::model()->findByPk($groupId);
+							if (isset($groupRecord))
 							{
-								/** @var $groupRecord GroupRecord */
-								$groupRecord = GroupRecord::model()->findByPk($groupId);
-								if (isset($groupRecord))
-								{
-									$group = new StatisticGroupRecord();
-									$group->id_activity = $activityId;
-									$group->name = $groupRecord->name;
-									$group->save();
-								}
+								$group = new StatisticGroupRecord();
+								$group->id_activity = $activityId;
+								$group->name = $groupRecord->name;
+								$group->save();
 							}
-					}
+						}
 				}
 			}
 			$detailRecord->save();

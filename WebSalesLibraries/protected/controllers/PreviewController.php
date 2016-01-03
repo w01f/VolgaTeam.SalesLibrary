@@ -33,7 +33,7 @@
 					$dialogData = array(
 						'format' => $previewData->viewerFormat,
 						'data' => $previewData,
-						'content' => $this->renderPartial($previewData->contentView, array('data' => $previewData,), true),
+						'content' => $this->renderPartial($previewData->contentView, array('data' => $previewData), true),
 					);
 				}
 			}
@@ -66,12 +66,7 @@
 				$linkRecord = LinkRecord::getLinkById($linkId);
 				if (isset($linkRecord))
 				{
-					$authorized = false;
-					if (isset(Yii::app()->user))
-					{
-						$userId = Yii::app()->user->getId();
-						$authorized = isset($userId);
-					}
+					$authorized = UserIdentity::isUserAuthorized();
 					$libraryManager = new LibraryManager();
 					$library = $libraryManager->getLibraryById($linkRecord->id_library);
 					$link = new LibraryLink(new LibraryFolder(new LibraryPage($library)));

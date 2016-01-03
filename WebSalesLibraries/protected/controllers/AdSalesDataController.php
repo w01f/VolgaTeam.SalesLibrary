@@ -1,7 +1,7 @@
 <?
 
 	/**
-	 * Class FileManagerDataController
+	 * Class AdSalesDataController
 	 */
 	class AdSalesDataController extends LocalAppDataController
 	{

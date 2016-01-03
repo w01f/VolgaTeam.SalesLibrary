@@ -172,41 +172,31 @@
 		 */
 		public function getCache()
 		{
-			$isAdmin = false;
-			$userId = null;
-			if (isset(Yii::app()->user))
-			{
-				$userId = Yii::app()->user->getId();
-				if (isset(Yii::app()->user->role))
-					$isAdmin = Yii::app()->user->role == 2;
-				else
-					$isAdmin = true;
-			}
 			/** @var  $cacheRecord LibraryPageRecord */
 			$cacheRecord = LibraryPageRecord::model()->findByPk($this->id);
 			$cachedPageContent = $cacheRecord->cached_col_view;
 			$cachedPage = phpQuery::newDocument($cachedPageContent);
 			$linkTags = $cachedPage['.link-container.restricted'];
+
+			$isAdmin =UserIdentity::isUserAdmin();
+			$userId = UserIdentity::getCurrentUserId();
 			if (!$isAdmin)
 			{
 				foreach ($linkTags as $linkTag)
 				{
 					$linkId = str_replace('link', '', pq($linkTag)->attr('id'));
 					$allowLink = false;
-					if (isset($userId))
+					$isWhiteListEnabled = count(LinkWhiteListRecord::getUserIds($linkId)) > 0;
+					if ($isWhiteListEnabled)
 					{
-						$isWhiteListEnabled = count(LinkWhiteListRecord::getUserIds($linkId)) > 0;
-						if ($isWhiteListEnabled)
-						{
-							$availableLinkIds = LinkWhiteListRecord::getAvailableLinks($userId);
-							$allowLink = in_array($linkId, $availableLinkIds);
-						}
-						$isBlackListEnabled = count(LinkBlackListRecord::getUserIds($linkId)) > 0;
-						if ($isBlackListEnabled)
-						{
-							$availableLinkIds = LinkBlackListRecord::getDeniedLinks($userId);
-							$allowLink = !in_array($linkId, $availableLinkIds);
-						}
+						$availableLinkIds = LinkWhiteListRecord::getAvailableLinks($userId);
+						$allowLink = in_array($linkId, $availableLinkIds);
+					}
+					$isBlackListEnabled = count(LinkBlackListRecord::getUserIds($linkId)) > 0;
+					if ($isBlackListEnabled)
+					{
+						$availableLinkIds = LinkBlackListRecord::getDeniedLinks($userId);
+						$allowLink = !in_array($linkId, $availableLinkIds);
 					}
 					if ($allowLink)
 						pq($linkTag)->removeClass('restricted');

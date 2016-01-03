@@ -15,7 +15,7 @@
 		{
 			$linkId = Yii::app()->request->getPost('linkId');
 			$linkName = Yii::app()->request->getPost('linkName');
-			$userId = Yii::app()->user->getId();
+			$userId = UserIdentity::getCurrentUserId();
 			$folderName = Yii::app()->request->getPost('folderName');
 			if (isset($folderName) && $folderName == '')
 				$folderName = null;
@@ -65,21 +65,18 @@
 			$folderId = Yii::app()->request->getPost('folderId');
 			if (!isset($folderId) || (isset($folderId) && ($folderId == "" || $folderId == "null")))
 				$folderId = null;
-			$userId = Yii::app()->user->getId();
-			if (isset($userId))
-			{
-				$links = FavoritesLinkRecord::getLinksByFolder($userId, $folderId);
-				echo CJSON::encode(array(
-					'links' => $links,
-					'viewOptions' => array(
-						'showCategory' => Yii::app()->params['search_options']['hide_tag'] != true,
-						'categoryColumnName' => Yii::app()->params['tags']['column_name'],
-						'showLibraries' => Yii::app()->params['search_options']['hide_libraries'] != true,
-						'librariesColumnName' => Yii::app()->params['stations']['column_name'],
-						'showDeleteButton' => true
-					)
-				));
-			}
+			$userId = UserIdentity::getCurrentUserId();
+			$links = FavoritesLinkRecord::getLinksByFolder($userId, $folderId);
+			echo CJSON::encode(array(
+				'links' => $links,
+				'viewOptions' => array(
+					'showCategory' => Yii::app()->params['search_options']['hide_tag'] != true,
+					'categoryColumnName' => Yii::app()->params['tags']['column_name'],
+					'showLibraries' => Yii::app()->params['search_options']['hide_libraries'] != true,
+					'librariesColumnName' => Yii::app()->params['stations']['column_name'],
+					'showDeleteButton' => true
+				)
+			));
 		}
 
 		public function actionPutFolderToFolder()
@@ -117,13 +114,10 @@
 			$folderId = Yii::app()->request->getPost('folderId');
 			if (!isset($folderId) || (isset($folderId) && ($folderId == "" || $folderId == "null")))
 				$folderId = null;
-			$userId = Yii::app()->user->getId();
-			if (isset($userId))
-			{
-				$folders = FavoritesFolderRecord::getChildFolders($userId, $folderId);
-				$links = FavoritesLinkRecord::getLinksByFolder($userId, $folderId, false, 'name', 'asc');
-				$this->renderPartial('foldersAndLinks', array('folders' => $folders, 'links' => $links, 'topLevel' => false), false, true);
-			}
+			$userId = UserIdentity::getCurrentUserId();
+			$folders = FavoritesFolderRecord::getChildFolders($userId, $folderId);
+			$links = FavoritesLinkRecord::getLinksByFolder($userId, $folderId, false, 'name', 'asc');
+			$this->renderPartial('foldersAndLinks', array('folders' => $folders, 'links' => $links, 'topLevel' => false), false, true);
 		}
 		//------Mobile Site API-----------------------------------------------
 	}

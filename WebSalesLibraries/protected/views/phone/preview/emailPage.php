@@ -2,15 +2,10 @@
 	/**
 	 * @var $previewData FilePreviewData|UrlPreviewData
 	 */
-
-	$authorized = false;
-	$userId = Yii::app()->user->getId();
-	if (isset($userId))
-		$authorized = true;
-
+	$authorized = UserIdentity::isUserAuthorized();
 	$logos = QPageRecord::getPageLogoList();
 ?>
-<? if ($authorized && $previewData->allowAddToQuickSite): ?>
+<? if ($authorized && $previewData->config->allowAddToQuickSite): ?>
 	<div id="email-page" data-role="page" data-cache="never" data-dom-cache="false" data-ajax="false">
 		<div class="page-header" data-role="header" data-position="fixed" data-theme="a">
 			<h3>Email this link</h3>

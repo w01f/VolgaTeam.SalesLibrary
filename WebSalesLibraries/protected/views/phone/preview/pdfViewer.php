@@ -2,19 +2,14 @@
 	/**
 	 * @var $data PdfPreviewData
 	 */
-
-	$authorized = false;
-	$userId = Yii::app()->user->getId();
-	if (isset($userId))
-		$authorized = true;
 ?>
 	<div data-role='page' id="link-viewer" class="link-viewer-page" data-cache="never" data-dom-cache="false" data-ajax="false">
 		<div data-role='header' class="page-header" data-position="fixed">
-			<? if ($authorized): ?>
+			<? if ($data->config->userAuthorized): ?>
 				<a href="#link-viewer-popup-panel-left" data-icon="ion-navicon-round" data-iconpos="notext"></a>
 			<? endif; ?>
 			<h1 class="header-title"></h1>
-			<? if ($authorized): ?>
+			<? if ($data->config->userAuthorized): ?>
 				<a href="#link-viewer-popup-panel-right" data-icon="ion-navicon-round" data-iconpos="notext"></a>
 			<? endif; ?>
 		</div>
@@ -32,7 +27,7 @@
 					<div class="ui-block-a">
 						<a href="#link-viewer-open-menu" data-role="button" data-rel="popup" data-inline="true" data-theme="a">Open</a>
 					</div>
-					<? if ($authorized && ($data->allowAddToQuickSite || $data->allowAddToFavorites)): ?>
+					<? if ($data->config->allowAddToQuickSite || $data->config->allowAddToFavorites): ?>
 						<div class="ui-block-b">
 							<a id="link-viwer-open-full-screen" href="#" data-role="button" data-inline="true" data-theme="a" data-transition="slidefade">Full Screen</a>
 						</div>
@@ -62,14 +57,14 @@
 				</div>
 			</div>
 		</div>
-		<? if ($authorized): ?>
+		<? if ($data->config->userAuthorized): ?>
 			<div data-role="panel" data-display="overlay" id="link-viewer-popup-panel-left">
 				<ul data-role="listview">
 					<? echo $this->renderPartial('../shortcuts/groups/groupList'); ?>
 					<li data-icon="false">
 						<a class="logout-button" href="#">Log Out</a>
 					</li>
-					<li data-role="list-divider"><p class="user-info">User: <? echo Yii::app()->user->login; ?></p></li>
+					<li data-role="list-divider"><p class="user-info">User: <? echo UserIdentity::getCurrentUserLogin(); ?></p></li>
 					<li data-role="list-divider"><p>Copyright 2015 adSALESapps.com</p></li>
 				</ul>
 			</div>
@@ -78,14 +73,14 @@
 					<? echo $this->renderPartial('../wallbin/libraryList'); ?>
 				</ul>
 			</div>
-			<? if ($data->allowAddToQuickSite || $data->allowAddToFavorites): ?>
+			<? if ($data->config->allowAddToQuickSite || $data->config->allowAddToFavorites): ?>
 				<div data-role="popup" id="link-viewer-options-menu" data-theme="a">
 					<ul data-role="listview" data-inset="true" style="min-width:250px;" data-corners="false">
 						<li data-role="list-divider" data-theme="d">File Options...</li>
-						<? if ($data->allowAddToQuickSite): ?>
+						<? if ($data->config->allowAddToQuickSite): ?>
 							<li><a href="#email-page" data-transition="slidefade" data-ajax="false">Email this Link</a></li>
 						<? endif; ?>
-						<? if ($data->allowAddToFavorites): ?>
+						<? if ($data->config->allowAddToFavorites): ?>
 							<li><a href="#favorites-add-page" data-transition="slidefade" data-ajax="false">Save to Favorites</a></li>
 						<? endif; ?>
 					</ul>
@@ -106,11 +101,11 @@
 	</div>
 	<div data-role='page' id="link-viewer-gallery" class="link-viewer-page" data-cache="never" data-dom-cache="false" data-ajax="false">
 		<div data-role='header' class="page-header" data-position="fixed">
-			<? if ($authorized): ?>
+			<? if ($data->config->userAuthorized): ?>
 				<a href="#link-viewer-gallery-popup-panel-left" data-icon="ion-navicon-round" data-iconpos="notext"></a>
 			<? endif; ?>
 			<h1 class="header-title"></h1>
-			<? if ($authorized): ?>
+			<? if ($data->config->userAuthorized): ?>
 				<a href="#link-viewer-gallery-popup-panel-right" data-icon="ion-navicon-round" data-iconpos="notext"></a>
 			<? endif; ?>
 		</div>
@@ -134,12 +129,10 @@
 		<div class="page-footer main-footer" data-role='footer' data-position="fixed" data-theme="a">
 			<div class="ui-grid-a">
 				<div class="ui-block-a">
-					<? if ($authorized): ?>
+					<? if ($data->config->userAuthorized): ?>
 						<span class="ui-mini login">
-						<? if (isset(Yii::app()->user->login)): ?>
-							<? echo Yii::app()->user->login; ?>
-						<? endif; ?>
-					</span>
+							<? echo UserIdentity::getCurrentUserLogin(); ?>
+						</span>
 					<? endif; ?>
 				</div>
 				<div class="ui-block-b link-viewer-info">
@@ -147,7 +140,7 @@
 				</div>
 			</div>
 		</div>
-		<? if ($authorized): ?>
+		<? if ($data->config->userAuthorized): ?>
 			<div data-role="panel" data-display="overlay" id="link-viewer-gallery-popup-panel-left">
 				<ul data-role="listview">
 					<? echo $this->renderPartial('../shortcuts/groups/groupList'); ?>

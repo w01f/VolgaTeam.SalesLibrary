@@ -19,16 +19,14 @@
 				if (isset(Yii::app()->session['libraries']))
 					$libraries = Yii::app()->session['libraries'];
 			}
-			if (isset(Yii::app()->user))
+			$isAdmin = UserIdentity::isUserAdmin();
+			if (!$isAdmin)
 			{
-				$userId = Yii::app()->user->getId();
-				if (isset(Yii::app()->user->role))
-					$isAdmin = Yii::app()->user->role == 2;
-				else
-					$isAdmin = true;
-				if (isset($userId) && !$isAdmin)
-					$availableLibraryIds = UserLibraryRecord::getLibraryIdsByUserAngHisGroups($userId);
+				$userId = UserIdentity::getCurrentUserId();
+				$availableLibraryIds = UserLibraryRecord::getLibraryIdsByUserAngHisGroups($userId);
 			}
+			else
+				$availableLibraryIds = array();
 			if (!is_array($libraries))
 			{
 				$rootFolderPath = realpath(Yii::app()->params['appRoot'] . DIRECTORY_SEPARATOR . Yii::app()->params['librariesRoot'] . DIRECTORY_SEPARATOR . 'Libraries');
@@ -44,7 +42,7 @@
 						$libraryName = $libraryFolder->getBasename();
 
 						$originalStoragePath = $libraryFolder->getPathname();
-						$originalStorageLink =Yii::app()->baseUrl . '/' . Yii::app()->params['librariesRoot'] . '/Libraries/' . $libraryFolder->getBasename();
+						$originalStorageLink = Yii::app()->baseUrl . '/' . Yii::app()->params['librariesRoot'] . '/Libraries/' . $libraryFolder->getBasename();
 
 						$storagePath = $originalStoragePath;
 						$storageLink = $originalStorageLink;
@@ -75,26 +73,26 @@
 							$libraryRecord = LibraryRecord::model()->findByPk($libraryId);
 							if (isset($libraryRecord))
 							{
-								if ((isset($availableLibraryIds) && in_array($libraryId, $availableLibraryIds)) || (!isset($userId) || (isset($isAdmin) && $isAdmin)))
+								if (in_array($libraryId, $availableLibraryIds) || $isAdmin)
 								{
 									//$library = Yii::app()->cacheDB->get($libraryId);
 									//if (!isset($library))
 									//{
-										$library = new Library();
-										$library->name = $libraryName;
-										$library->id = $libraryId;
-										$library->groupId = $libraryRecord->id_group;
-										$library->order = $libraryRecord->order;
-										$library->storagePath = $storagePath;
-										$library->storageLink = $storageLink;
-										$library->logoPath = Yii::app()->params['librariesRoot'] . "/Graphics/" . $libraryFolder->getBasename() . "/no_logo.png";
+									$library = new Library();
+									$library->name = $libraryName;
+									$library->id = $libraryId;
+									$library->groupId = $libraryRecord->id_group;
+									$library->order = $libraryRecord->order;
+									$library->storagePath = $storagePath;
+									$library->storageLink = $storageLink;
+									$library->logoPath = Yii::app()->params['librariesRoot'] . "/Graphics/" . $libraryFolder->getBasename() . "/no_logo.png";
 
-										$library->alias = $libraryName;
-										if (array_key_exists($libraryName, $aliases))
-											$library->alias = $aliases[$libraryName];
+									$library->alias = $libraryName;
+									if (array_key_exists($libraryName, $aliases))
+										$library->alias = $aliases[$libraryName];
 
-										$library->load();
-										//Yii::app()->cacheDB->set($library->id, $library, (60 * 60 * 24 * 7));
+									$library->load();
+									//Yii::app()->cacheDB->set($library->id, $library, (60 * 60 * 24 * 7));
 									//}
 									$libraries[] = $library;
 								}
@@ -122,18 +120,15 @@
 		public function getLibraryGroups()
 		{
 			$libraryGroups = array();
-			if (isset(Yii::app()->user))
+			$isAdmin = UserIdentity::isUserAdmin();
+			if (!$isAdmin)
 			{
-				$userId = Yii::app()->user->getId();
-				if (isset(Yii::app()->user->role))
-					$isAdmin = Yii::app()->user->role == 2;
-				else
-					$isAdmin = true;
-				if (isset($userId) && !$isAdmin)
-					$availableLibraryIds = UserLibraryRecord::getLibraryIdsByUserAngHisGroups($userId);
+				$userId = UserIdentity::getCurrentUserId();
+				$availableLibraryIds = UserLibraryRecord::getLibraryIdsByUserAngHisGroups($userId);
 			}
+			else
+				$availableLibraryIds = array();
 			$libraryGroupRecords = LibraryGroupRecord::model()->findAll();
-
 			if (isset($libraryGroupRecords) && count($libraryGroupRecords) > 0)
 			{
 				foreach ($libraryGroupRecords as $libraryGroupRecord)
@@ -175,7 +170,7 @@
 				{
 					foreach ($libraryRecords as $libraryRecord)
 					{
-						if ((isset($availableLibraryIds) && in_array($libraryRecord->id, $availableLibraryIds)) || (!isset($userId) || (isset($isAdmin) && $isAdmin)))
+						if (in_array($libraryRecord->id, $availableLibraryIds) || $isAdmin)
 						{
 							$library = new Library();
 							$library->id = $libraryRecord->id;

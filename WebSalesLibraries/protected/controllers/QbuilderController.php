@@ -13,13 +13,10 @@
 		public function actionGetPageList()
 		{
 			$selectedPageId = Yii::app()->request->getPost('selectedPageId');
-			$userId = Yii::app()->user->getId();
-			if (isset($userId))
-			{
-				$pages = QPageRecord::model()->getByOwner($userId);
-				$selectedPage = QPageRecord::model()->findByPk($selectedPageId);
-				$this->renderPartial('pageList', array('pages' => $pages, 'selectedPage' => $selectedPage), false, true);
-			}
+			$userId = UserIdentity::getCurrentUserId();
+			$pages = QPageRecord::model()->getByOwner($userId);
+			$selectedPage = QPageRecord::model()->findByPk($selectedPageId);
+			$this->renderPartial('pageList', array('pages' => $pages, 'selectedPage' => $selectedPage), false, true);
 		}
 
 		public function actionAddPageDialog()
@@ -34,8 +31,8 @@
 			$title = Yii::app()->request->getPost('title');
 			$createDate = Yii::app()->request->getPost('createDate');
 			$clonePageId = Yii::app()->request->getPost('clonePageId');
-			$userId = Yii::app()->user->getId();
-			if (isset($title) && $title != '' && isset($userId) && isset($createDate))
+			$userId = UserIdentity::getCurrentUserId();
+			if (isset($title) && $title != '' && isset($createDate))
 			{
 				if (isset($clonePageId))
 					echo QPageRecord::clonePage($userId, $title, $createDate, $clonePageId);
@@ -78,8 +75,8 @@
 			if (isset($activityEmailCopy) && $activityEmailCopy == '')
 				$activityEmailCopy = null;
 
-			$userId = Yii::app()->user->getId();
-			if (isset($userId) && isset($createDate) && isset($linkId) && isset($expiresInDays) && isset($restricted))
+			$userId = UserIdentity::getCurrentUserId();
+			if (isset($createDate) && isset($linkId) && isset($expiresInDays) && isset($restricted))
 			{
 				$expirationDate = $expiresInDays > 0 ? date(Yii::app()->params['mysqlDateFormat'], strtotime(date("Y-m-d") . ' + ' . $expiresInDays . ' day')) : null;
 				echo QPageRecord::addPageLite($userId, $createDate, $subtitle, $logo, $expirationDate, $restricted, $disableBanners, $disableWidgets, $showLinksAsUrl, $recordActivity, $pinCode, $activityEmailCopy, $linkId)->getUrl();
@@ -97,12 +94,9 @@
 
 		public function actionDeletePagesDialog()
 		{
-			$userId = Yii::app()->user->getId();
-			if (isset($userId))
-			{
-				$pages = QPageRecord::model()->getByOwner($userId);
-				$this->renderPartial('deletePages', array('pages' => $pages), false, true);
-			}
+			$userId = UserIdentity::getCurrentUserId();
+			$pages = QPageRecord::model()->getByOwner($userId);
+			$this->renderPartial('deletePages', array('pages' => $pages), false, true);
 		}
 
 		public function actionDeletePages()
@@ -159,22 +153,19 @@
 
 		public function actionSetPageOrder()
 		{
-			$userId = Yii::app()->user->getId();
+			$userId = UserIdentity::getCurrentUserId();
 			$pageId = Yii::app()->request->getPost('pageId');
 			$order = intval(Yii::app()->request->getPost('order'));
-			if (isset($userId) && isset($pageId) && isset($order))
+			if (isset($pageId) && isset($order))
 				QPageRecord::setPageOrder($userId, $pageId, $order);
 			Yii::app()->end();
 		}
 
 		public function actionGetLinkCart()
 		{
-			$userId = Yii::app()->user->getId();
-			if (isset($userId))
-			{
-				$links = UserLinkCartRecord::getLinksByUser($userId);
-				$this->renderPartial('linkCart', array('links' => $links), false, true);
-			}
+			$userId = UserIdentity::getCurrentUserId();
+			$links = UserLinkCartRecord::getLinksByUser($userId);
+			$this->renderPartial('linkCart', array('links' => $links), false, true);
 		}
 
 		public function actionClearLinkCart()
@@ -189,15 +180,15 @@
 		{
 			$linkIds = Yii::app()->request->getPost('linkIds');
 			$folderId = Yii::app()->request->getPost('folderId');
-			$userId = Yii::app()->user->getId();
-			if (isset($folderId) && isset($userId))
+			$userId = UserIdentity::getCurrentUserId();
+			if (isset($folderId))
 			{
 				$linkIds = FolderRecord::model()->getChildLinkIds($folderId);
 				if (isset($linkIds))
 					foreach ($linkIds as $linkId)
 						UserLinkCartRecord::addLink($userId, $linkId);
 			}
-			else if (isset($linkIds) && isset($userId))
+			else if (isset($linkIds))
 				foreach ($linkIds as $linkId)
 					UserLinkCartRecord::addLink($userId, $linkId);
 			Yii::app()->end();
@@ -220,8 +211,8 @@
 		public function actionAddAllLinksToPage()
 		{
 			$pageId = Yii::app()->request->getPost('pageId');
-			$userId = Yii::app()->user->getId();
-			if (isset($pageId) && isset($userId))
+			$userId = UserIdentity::getCurrentUserId();
+			if (isset($pageId))
 			{
 				/** @var $selectedPage QPageRecord */
 				$selectedPage = QPageRecord::model()->findByPk($pageId);

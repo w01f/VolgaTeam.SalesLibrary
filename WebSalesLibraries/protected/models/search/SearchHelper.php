@@ -6,73 +6,85 @@
 	class SearchHelper
 	{
 		/**
-		 * @param $condition string
+		 * @param $conditionArray mixed
 		 * @param $exactMatch boolean
 		 * @return array
 		 */
 		public static function prepareTextCondition($condition, $exactMatch)
 		{
 			$result = array();
-			if (!isset($condition)) return $result;
+			if (!isset($condition) || $condition == '') return $result;
+
+			$conditionArray = is_array($condition) ? $condition : array($condition);
 
 			$configPath = Yii::app()->params['appRoot'] . DIRECTORY_SEPARATOR . 'search_config.xml';
 			if (!file_exists($configPath))
 			{
-				if ($condition != '')
-					$result[] = $exactMatch ? sprintf('"%s"', $condition) : $condition;
+				if ($exactMatch)
+				{
+					foreach ($conditionArray as $conditionPart)
+						$result[] = sprintf('"%s"', $conditionPart);
+				}
+				else
+					$result = $conditionArray;
 			}
 			else
 			{
 				try
 				{
-					$configContent = file_get_contents($configPath);
-					$config = new DOMDocument();
-					$config->loadXML($configContent);
-					$xpath = new DomXPath($config);
-
-					$condition = preg_replace('!\s+!', ' ', $condition);
-					$conditionToCompare = $condition;
-
-					/** @var $queryResult DOMNodeList */
-					$queryResult = $xpath->query('//Config/Ignore');
-					foreach ($queryResult as $node)
+					foreach ($conditionArray as $conditionArrayItem)
 					{
-						/** @var $node DomElement */
-						$ignoreValue = trim($node->nodeValue);
-						if (strlen($conditionToCompare) == strlen($ignoreValue))
+						$conditionPart = $conditionArrayItem;
+
+						$configContent = file_get_contents($configPath);
+						$config = new DOMDocument();
+						$config->loadXML($configContent);
+						$xpath = new DomXPath($config);
+
+						$conditionPart = preg_replace('!\s+!', ' ', $conditionPart);
+						$conditionToCompare = $conditionPart;
+
+						/** @var $queryResult DOMNodeList */
+						$queryResult = $xpath->query('//Config/Ignore');
+						foreach ($queryResult as $node)
 						{
-							$condition = str_replace($ignoreValue, '', $condition);
-							$condition = str_replace(strtolower($ignoreValue), '', $condition);
+							/** @var $node DomElement */
+							$ignoreValue = trim($node->nodeValue);
+							if (strlen($conditionToCompare) == strlen($ignoreValue))
+							{
+								$conditionPart = str_replace($ignoreValue, '', $conditionPart);
+								$conditionPart = str_replace(strtolower($ignoreValue), '', $conditionPart);
+							}
+
+							if (self::startsWith($conditionToCompare, $ignoreValue))
+							{
+								$conditionPart = str_replace($ignoreValue . ' ', '', $conditionPart);
+								$conditionPart = str_replace(strtolower($ignoreValue) . ' ', '', $conditionPart);
+							}
+
+							if (self::endsWith($conditionToCompare, $ignoreValue))
+							{
+								$conditionPart = str_replace(' ' . $ignoreValue, '', $conditionPart);
+								$conditionPart = str_replace(' ' . strtolower($ignoreValue), '', $conditionPart);
+							}
+
+							$ignoreValue = ' ' . trim($node->nodeValue) . ' ';
+							$conditionPart = str_replace($ignoreValue, ' ', $conditionPart);
+							$conditionPart = str_replace(strtolower($ignoreValue), ' ', $conditionPart);
 						}
 
-						if (self::startsWith($conditionToCompare, $ignoreValue))
+						if ($conditionPart != "")
+							$result[] = $exactMatch ? sprintf('"%s"', $conditionPart) : $conditionPart;
+						$queryResult = $xpath->query('//Config/AliasFor');
+						foreach ($queryResult as $node)
 						{
-							$condition = str_replace($ignoreValue . ' ', '', $condition);
-							$condition = str_replace(strtolower($ignoreValue) . ' ', '', $condition);
+							/** @var $node DomElement */
+							$target = strtolower(trim($groupName = $node->getAttribute('Target')));
+							if ($target != strtolower($conditionPart)) continue;
+							$aliasNodes = $node->getElementsByTagName('Item');
+							foreach ($aliasNodes as $aliasNode)
+								$result[] = sprintf('"%s"', str_replace($conditionPart, trim($aliasNode->nodeValue), $conditionPart));
 						}
-
-						if (self::endsWith($conditionToCompare, $ignoreValue))
-						{
-							$condition = str_replace(' ' . $ignoreValue, '', $condition);
-							$condition = str_replace(' ' . strtolower($ignoreValue), '', $condition);
-						}
-
-						$ignoreValue = ' ' . trim($node->nodeValue) . ' ';
-						$condition = str_replace($ignoreValue, ' ', $condition);
-						$condition = str_replace(strtolower($ignoreValue), ' ', $condition);
-					}
-
-					if ($condition != "")
-						$result[] = $exactMatch ? sprintf('"%s"', $condition) : $condition;
-					$queryResult = $xpath->query('//Config/AliasFor');
-					foreach ($queryResult as $node)
-					{
-						/** @var $node DomElement */
-						$target = strtolower(trim($groupName = $node->getAttribute('Target')));
-						if ($target != strtolower($condition)) continue;
-						$aliasNodes = $node->getElementsByTagName('Item');
-						foreach ($aliasNodes as $aliasNode)
-							$result[] = sprintf('"%s"', str_replace($condition, trim($aliasNode->nodeValue), $condition));
 					}
 				} catch (Exception $e)
 				{
@@ -98,244 +110,251 @@
 		 * @param $datasetKey string
 		 * @return array
 		 */
-		public static function queryLinksByCondition($searchConditions, $datasetKey)
+		public static function getDatasetByCondition($searchConditions, $datasetKey)
 		{
 			$linksEncoded = Yii::app()->session[$datasetKey];
 			if (!isset($linksEncoded))
 			{
-				$baseLinksEncoded = Yii::app()->session[$searchConditions->baseDatasetKey];
-				$baseLinksCondition = '1=1';
-				if (isset($baseLinksEncoded))
-				{
-					$baseLinks = CJSON::decode($baseLinksEncoded);
-					$availableLinkIds = array();
-					foreach ($baseLinks as $baseLink)
-						$availableLinkIds[] = $baseLink['id'];
-					if (count($availableLinkIds) > 0)
-						$baseLinksCondition = sprintf("link.id in ('%s')",
-							implode("','", $availableLinkIds));
-				}
-
-				$textConditions = self::prepareTextCondition($searchConditions->text, $searchConditions->textExactMatch);
-				if (!(isset($baseLinks) ||
-					(count($textConditions) > 0 || count($searchConditions->categories) > 0 || count($searchConditions->superFilters) > 0 || count($searchConditions->superFilters) > 0 || (isset($searchConditions->startDate) && isset($searchConditions->endDate))))
-				)
-					return array();
-
-				$count = count($searchConditions->libraries);
-				switch ($count)
-				{
-					case 0:
-						$libraryCondition = '1 = 1';
-						break;
-					default:
-						$libraryIds = array();
-						foreach ($searchConditions->libraries as $library)
-							$libraryIds[] = $library->id;
-						$libraryCondition = sprintf("link.id_library in ('%s')",
-							implode("','", $libraryIds));
-						break;
-				}
-
-				$count = count($searchConditions->fileTypes);
-				switch ($count)
-				{
-					case 0:
-						$fileTypeCondition = '1 = 1';
-						break;
-					default:
-						$fileTypeCondition = sprintf("link.format in ('%s')",
-							implode("','", $searchConditions->fileTypes));;
-						break;
-				}
-
-				$dateCondition = '1 = 1';
-				$additionalDateCondition = '';
-				if (isset($searchConditions->startDate) && isset($searchConditions->endDate) && $searchConditions->startDate != '' && $searchConditions->endDate != '')
-				{
-					$dateColumn = 'link.file_date';
-					$dateCondition = sprintf('%1$s >= \'%2$s\' and %1$s <= \'%3$s\'',
-						$dateColumn,
-						date(Yii::app()->params['mysqlDateFormat'], strtotime($searchConditions->startDate)),
-						date(Yii::app()->params['mysqlDateFormat'], strtotime($searchConditions->endDate) + 86400));
-					if (count($textConditions) == 0)
-						$additionalDateCondition = sprintf(" or (%s)",
-							$dateCondition);;
-				}
-
-				$superFilterCondition = '1 = 1';
-				$additionalSuperFilterCondition = '';
-				if (count($searchConditions->superFilters) > 0)
-				{
-					foreach ($searchConditions->superFilters as $superFilter)
-						$superFilterSelector[] = sprintf("(link.id in (select id_link from tbl_link_super_filter where value = '%s'))", $superFilter);
-					if (isset($superFilterSelector))
-					{
-						$superFilterCondition = sprintf("(%s)",
-							implode(' or ', $superFilterSelector));
-						if (count($textConditions) == 0)
-							$additionalSuperFilterCondition = sprintf(' or %s',
-								$superFilterCondition);
-					}
-				}
-
-				$categoryCondition = '1=1';
-				$categoryJoinCondition = '1 = 1';
-				$additionalCategoryCondition = '';
-				if (isset($searchConditions->categories) && count($searchConditions->categories) > 0)
-				{
-					$categoriesSelector = array();
-					$categoriesJoinSelector = array();
-					foreach ($searchConditions->categories as $category)
-					{
-						foreach ($category->items as $categoryItem)
-						{
-							$categoriesSelector[] = sprintf('(link.id in (select id_link from tbl_link_category where category = "%s" and tag = "%s"))',
-								$category->name,
-								$categoryItem);
-							$categoriesJoinSelector[] = sprintf('(lcat.id in (select id from tbl_link_category where category = "%s" and tag = "%s"))',
-								$category->name,
-								$categoryItem);
-						}
-					}
-					$categoryCondition = sprintf('(%s)',
-						implode(' or ', $categoriesSelector));
-					$categoryJoinCondition = sprintf('(%s)',
-						implode(' or ', $categoriesJoinSelector));
-					if (count($textConditions) == 0)
-						$additionalCategoryCondition = sprintf(' or %s',
-							$categoryCondition);
-
-				}
-				else if (count($textConditions) > 0 && !$searchConditions->onlyByName)
-				{
-					$categoriesSelector = array();
-					$categoriesJoinSelector = array();
-					foreach ($textConditions as $contentConditionPart)
-					{
-						$conditionToCompare = strtolower(trim(str_replace('"', '', $contentConditionPart)));
-						if ($searchConditions->textExactMatch)
-						{
-							$categoriesSelector[] = '(link.id in (select id_link from tbl_link_category where lower(category) regexp "[[:<:]]' . $conditionToCompare . '[[:>:]]" or lower(tag) regexp "[[:<:]]' . $conditionToCompare . '[[:>:]]"))';
-							$categoriesJoinSelector[] = '(lcat.id in (select id from tbl_link_category where lower(category) regexp "[[:<:]]' . $conditionToCompare . '[[:>:]]" or lower(tag) regexp "[[:<:]]' . $conditionToCompare . '[[:>:]]"))';
-						}
-						else
-						{
-							$categoriesSelector[] = '(link.id in (select id_link from tbl_link_category where lower(category) like "%' . $conditionToCompare . '%" or lower(tag) like "%' . $conditionToCompare . '%"))';
-							$categoriesJoinSelector[] = '(lcat.id in (select id from tbl_link_category where lower(category) like "%' . $conditionToCompare . '%" or lower(tag) like "%' . $conditionToCompare . '%"))';
-						}
-					}
-					$categoryCondition = sprintf('(%s)',
-						implode(' or ', $categoriesSelector));
-					$additionalCategoryCondition = sprintf(' or %s',
-						$categoryCondition);
-					$categoryCondition = '1=1';
-				}
-
-				$onlyWithCategoriesCondition = '1 = 1';
-				$additionalOnlyWithCategoriesCondition = '';
-				if ($searchConditions->onlyWithCategories)
-				{
-					$onlyWithCategoriesCondition = 'exists (select id_link from tbl_link_category where id_link = link.id)';
-					if (count($textConditions) == 0)
-						$additionalOnlyWithCategoriesCondition = ' or (exists (select id_link from tbl_link_category where id_link = link.id))';
-				}
-
-				$folderCondition = '1 <> 1';
-				$isAdmin = true;
-				if (isset(Yii::app()->user))
-				{
-					$userId = Yii::app()->user->getId();
-					if (isset(Yii::app()->user->role))
-						$isAdmin = Yii::app()->user->role == 2;
-					else
-						$isAdmin = true;
-					if (isset($userId) && !$isAdmin)
-						$assignedPageIds = UserLibraryRecord::getPageIdsByUserAngHisGroups($userId);
-				}
-				if (isset($assignedPageIds))
-					$folderCondition = sprintf("link.id_folder in (select id from tbl_folder where id_page in ('%s'))",
-						implode("', '", $assignedPageIds));
-				else if (!isset($userId) || (isset($isAdmin) && $isAdmin))
-					$folderCondition = '1 = 1';
-
-				$linkCondition = '1 <> 1';
-				if ($isAdmin)
-					$linkCondition = '1 = 1';
-				else if (isset($userId))
-				{
-					$restrictedLinkConditions = array();
-					$availableLinkIds = LinkWhiteListRecord::getAvailableLinks($userId);
-					if (count($availableLinkIds) > 0)
-						$restrictedLinkConditions[] = sprintf("link.id in ('%s')",
-							implode("', '", $availableLinkIds));
-
-					$deniedLinkIds = LinkBlackListRecord::getDeniedLinks($userId);
-					if (count($deniedLinkIds) > 0)
-						$restrictedLinkConditions[] = sprintf("link.id not in ('%s')",
-							implode("', '", $deniedLinkIds));
-
-					$linkCondition = "link.is_restricted <> 1";
-					if (count($restrictedLinkConditions) > 0)
-						$linkCondition = sprintf("link.is_restricted <> 1 or (%s)",
-							implode(" and ", $restrictedLinkConditions));
-				}
-
-				$matchCondition = 'link.name,link.file_name,link.tags,link.content';
-				if ($searchConditions->onlyByName)
-					$matchCondition = 'link.name,link.file_name,link.tags';
-
-				$contentCondition = "1=1";
-				if (count($textConditions) > 0)
-				{
-					$conditionParts = array();
-					foreach ($textConditions as $contentConditionPart)
-						$conditionParts[] = sprintf("(match(%s) against('%s' in boolean mode))", $matchCondition, $contentConditionPart);
-					$contentCondition = implode(" or ", $conditionParts);
-				}
-				$contentCondition = sprintf("(%s%s%s%s%s)",
-					$contentCondition,
-					$additionalDateCondition,
-					$additionalSuperFilterCondition,
-					$additionalCategoryCondition,
-					$additionalOnlyWithCategoriesCondition);
-
-				$dateField = 'max(link.file_date) as link_date';
-				$selectText = 'max(link.id) as id,
-							max(link.id_library) as id_library,
-							max(link.name) as name,
-							max(link.type) as type,
-							link.file_relative_path as path,
-							link.file_name,
-							' . $dateField . ',
-							max(link.format) as format,
-							max(link.properties) as extended_properties,
-							(select (round(avg(lr.value)*2)/2) as value from tbl_link_rate lr where lr.id_link=link.id) as rate,
-							glcat.tag as tag';
-				$joinText = "glcat.id_link=link.id";
-				$whereText = $contentCondition .
-					" and (" . $baseLinksCondition .
-					") and (" . $libraryCondition .
-					") and (" . $fileTypeCondition .
-					") and (" . $dateCondition .
-					") and (" . $categoryCondition .
-					") and (" . $superFilterCondition .
-					") and (" . $onlyWithCategoriesCondition .
-					") and (" . $folderCondition .
-					") and (" . $linkCondition .
-					") and link.is_dead=0 and link.is_preview_not_ready=0 and link.type<>5";
-				$queryRecords = Yii::app()->db->createCommand()
-					->select($selectText)
-					->from('tbl_link link')
-					->leftJoin("(select lcat.id_link, group_concat(lcat.tag separator ', ') as tag from tbl_link_category lcat where " . $categoryJoinCondition . " group by lcat.id_link) glcat", $joinText)
-					->where($whereText)
-					->group('link.file_relative_path, glcat.tag')
-					->queryAll();
+				$queryRecords = self::queryLinksByCondition($searchConditions, $datasetKey);
 				$links = DataTableHelper::formatRegularData($queryRecords);
 				Yii::app()->session[$datasetKey] = CJSON::encode($links);
 			}
 			else
 				$links = CJSON::decode($linksEncoded);
 			return $links;
+		}
+
+		/**
+		 * @param $searchConditions SearchConditions
+		 * @param $datasetKey string
+		 * @return array
+		 */
+		public static function queryLinksByCondition($searchConditions, $datasetKey)
+		{
+			$baseLinksEncoded = Yii::app()->session[$searchConditions->baseDatasetKey];
+			$baseLinksCondition = '1=1';
+			if (isset($baseLinksEncoded))
+			{
+				$baseLinks = CJSON::decode($baseLinksEncoded);
+				$availableLinkIds = array();
+				foreach ($baseLinks as $baseLink)
+					$availableLinkIds[] = $baseLink['id'];
+				if (count($availableLinkIds) > 0)
+					$baseLinksCondition = sprintf("link.id in ('%s')",
+						implode("','", $availableLinkIds));
+			}
+
+			$textConditions = self::prepareTextCondition($searchConditions->text, $searchConditions->textExactMatch);
+			if (!(isset($baseLinks) ||
+				(count($textConditions) > 0 || count($searchConditions->categories) > 0 || count($searchConditions->superFilters) > 0 || count($searchConditions->superFilters) > 0 || (isset($searchConditions->startDate) && isset($searchConditions->endDate))))
+			)
+				return array();
+
+			$libraryCondition = '1 = 1';
+			if (count($searchConditions->libraries) > 0)
+			{
+				$libraryIds = array();
+				foreach ($searchConditions->libraries as $library)
+					$libraryIds[] = $library->id;
+				$libraryCondition = sprintf("link.id_library in ('%s')",
+					implode("','", $libraryIds));
+			}
+
+			$count = count($searchConditions->fileTypes);
+			switch ($count)
+			{
+				case 0:
+					$fileTypeCondition = '1 = 1';
+					break;
+				default:
+					$fileTypeCondition = sprintf("link.format in ('%s')",
+						implode("','", $searchConditions->fileTypes));;
+					break;
+			}
+
+			$dateCondition = '1 = 1';
+			$additionalDateCondition = '';
+			if (isset($searchConditions->startDate) && isset($searchConditions->endDate) && $searchConditions->startDate != '' && $searchConditions->endDate != '')
+			{
+				$dateColumn = 'link.file_date';
+				$dateCondition = sprintf('%1$s >= \'%2$s\' and %1$s <= \'%3$s\'',
+					$dateColumn,
+					date(Yii::app()->params['mysqlDateFormat'], strtotime($searchConditions->startDate)),
+					date(Yii::app()->params['mysqlDateFormat'], strtotime($searchConditions->endDate) + 86400));
+				if (count($textConditions) == 0)
+					$additionalDateCondition = sprintf(" or (%s)",
+						$dateCondition);;
+			}
+
+			$superFilterCondition = '1 = 1';
+			$additionalSuperFilterCondition = '';
+			if (count($searchConditions->superFilters) > 0)
+			{
+				foreach ($searchConditions->superFilters as $superFilter)
+					$superFilterSelector[] = sprintf("(link.id in (select id_link from tbl_link_super_filter where value = '%s'))", $superFilter);
+				if (isset($superFilterSelector))
+				{
+					$superFilterCondition = sprintf("(%s)",
+						implode(' or ', $superFilterSelector));
+					if (count($textConditions) == 0)
+						$additionalSuperFilterCondition = sprintf(' or %s',
+							$superFilterCondition);
+				}
+			}
+
+			$categoryCondition = '1=1';
+			$categoryJoinCondition = '1 = 1';
+			$additionalCategoryCondition = '';
+			if (isset($searchConditions->categories) && count($searchConditions->categories) > 0)
+			{
+				$categoriesSelector = array();
+				$categoriesJoinSelector = array();
+				foreach ($searchConditions->categories as $category)
+				{
+					foreach ($category->items as $categoryItem)
+					{
+						$categoriesSelector[] = sprintf('(link.id in (select id_link from tbl_link_category where category = "%s" and tag = "%s"))',
+							$category->name,
+							$categoryItem);
+						$categoriesJoinSelector[] = sprintf('(lcat.id in (select id from tbl_link_category where category = "%s" and tag = "%s"))',
+							$category->name,
+							$categoryItem);
+					}
+				}
+				$categoryCondition = sprintf('(%s)',
+					implode(' or ', $categoriesSelector));
+				$categoryJoinCondition = sprintf('(%s)',
+					implode(' or ', $categoriesJoinSelector));
+				if (count($textConditions) == 0)
+					$additionalCategoryCondition = sprintf(' or %s',
+						$categoryCondition);
+
+			}
+			else if (count($textConditions) > 0 && !$searchConditions->onlyByName)
+			{
+				$categoriesSelector = array();
+				$categoriesJoinSelector = array();
+				foreach ($textConditions as $contentConditionPart)
+				{
+					$conditionToCompare = strtolower(trim(str_replace('"', '', $contentConditionPart)));
+					if ($searchConditions->textExactMatch)
+					{
+						$categoriesSelector[] = '(link.id in (select id_link from tbl_link_category where lower(category) regexp "[[:<:]]' . $conditionToCompare . '[[:>:]]" or lower(tag) regexp "[[:<:]]' . $conditionToCompare . '[[:>:]]"))';
+						$categoriesJoinSelector[] = '(lcat.id in (select id from tbl_link_category where lower(category) regexp "[[:<:]]' . $conditionToCompare . '[[:>:]]" or lower(tag) regexp "[[:<:]]' . $conditionToCompare . '[[:>:]]"))';
+					}
+					else
+					{
+						$categoriesSelector[] = '(link.id in (select id_link from tbl_link_category where lower(category) like "%' . $conditionToCompare . '%" or lower(tag) like "%' . $conditionToCompare . '%"))';
+						$categoriesJoinSelector[] = '(lcat.id in (select id from tbl_link_category where lower(category) like "%' . $conditionToCompare . '%" or lower(tag) like "%' . $conditionToCompare . '%"))';
+					}
+				}
+				$categoryCondition = sprintf('(%s)',
+					implode(' or ', $categoriesSelector));
+				$additionalCategoryCondition = sprintf(' or %s',
+					$categoryCondition);
+				$categoryCondition = '1=1';
+			}
+
+			$onlyWithCategoriesCondition = '1 = 1';
+			$additionalOnlyWithCategoriesCondition = '';
+			if ($searchConditions->onlyWithCategories)
+			{
+				$onlyWithCategoriesCondition = 'exists (select id_link from tbl_link_category where id_link = link.id)';
+				if (count($textConditions) == 0)
+					$additionalOnlyWithCategoriesCondition = ' or (exists (select id_link from tbl_link_category where id_link = link.id))';
+			}
+
+			$folderCondition = '1 <> 1';
+			$isAdmin = UserIdentity::isUserAdmin();
+			if ($isAdmin)
+				$folderCondition = '1 = 1';
+			else
+			{
+				$userId = UserIdentity::getCurrentUserId();
+				$assignedPageIds = UserLibraryRecord::getPageIdsByUserAngHisGroups($userId);
+				if (count($assignedPageIds) > 0)
+				{
+					$folderCondition = sprintf("link.id_folder in (select id from tbl_folder where id_page in ('%s'))",
+						implode("', '", $assignedPageIds));
+				}
+			}
+
+			$linkCondition = '1 <> 1';
+			if ($isAdmin)
+				$linkCondition = '1 = 1';
+			else if (isset($userId))
+			{
+				$restrictedLinkConditions = array();
+				$availableLinkIds = LinkWhiteListRecord::getAvailableLinks($userId);
+				if (count($availableLinkIds) > 0)
+					$restrictedLinkConditions[] = sprintf("link.id in ('%s')",
+						implode("', '", $availableLinkIds));
+
+				$deniedLinkIds = LinkBlackListRecord::getDeniedLinks($userId);
+				if (count($deniedLinkIds) > 0)
+					$restrictedLinkConditions[] = sprintf("link.id not in ('%s')",
+						implode("', '", $deniedLinkIds));
+
+				$linkCondition = "link.is_restricted <> 1";
+				if (count($restrictedLinkConditions) > 0)
+					$linkCondition = sprintf("link.is_restricted <> 1 or (%s)",
+						implode(" and ", $restrictedLinkConditions));
+			}
+
+			$matchCondition = 'link.name,link.file_name,link.tags,link.content';
+			if ($searchConditions->onlyByName)
+				$matchCondition = 'link.name,link.file_name,link.tags';
+
+			$contentCondition = "1=1";
+			if (count($textConditions) > 0)
+			{
+				$conditionParts = array();
+				foreach ($textConditions as $contentConditionPart)
+					$conditionParts[] = sprintf("(match(%s) against('%s' in boolean mode))", $matchCondition, $contentConditionPart);
+				$contentCondition = implode(" or ", $conditionParts);
+			}
+			$contentCondition = sprintf("(%s%s%s%s%s)",
+				$contentCondition,
+				$additionalDateCondition,
+				$additionalSuperFilterCondition,
+				$additionalCategoryCondition,
+				$additionalOnlyWithCategoriesCondition);
+
+			$dateField = 'max(link.file_date) as link_date';
+			$selectText = 'max(link.id) as id,
+							max(link.id_library) as id_library,
+							max(link.name) as name,
+							max(link.type) as type,
+							max(lib.name) as lib_name,
+							link.file_relative_path as path,
+							link.file_name as file_name,
+							' . $dateField . ',
+							max(link.format) as format,
+							max(link.properties) as extended_properties,
+							(select (round(avg(lr.value)*2)/2) as value from tbl_link_rate lr where lr.id_link=link.id) as rate,
+							glcat.tag as tag';
+			$joinText = "glcat.id_link=link.id";
+			$whereText = $contentCondition .
+				" and (" . $baseLinksCondition .
+				") and (" . $libraryCondition .
+				") and (" . $fileTypeCondition .
+				") and (" . $dateCondition .
+				") and (" . $categoryCondition .
+				") and (" . $superFilterCondition .
+				") and (" . $onlyWithCategoriesCondition .
+				") and (" . $folderCondition .
+				") and (" . $linkCondition .
+				") and link.is_dead=0 and link.is_preview_not_ready=0 and link.type<>5";
+
+			$dbCommnad = Yii::app()->db->createCommand();
+			$dbCommnad = $dbCommnad->select($selectText);
+			$dbCommnad = $dbCommnad->from('tbl_link link');
+			$dbCommnad = $dbCommnad->join('tbl_library lib', 'lib.id=link.id_library');
+			$dbCommnad = $dbCommnad->leftJoin("(select lcat.id_link, group_concat(lcat.tag separator ', ') as tag from tbl_link_category lcat where " . $categoryJoinCondition . " group by lcat.id_link) glcat", $joinText);
+			$dbCommnad = $dbCommnad->where($whereText);
+			$dbCommnad = $dbCommnad->group('link.file_relative_path, glcat.tag');
+			$queryRecords = $dbCommnad->queryAll();
+
+			return $queryRecords;
 		}
 	}

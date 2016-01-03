@@ -12,12 +12,12 @@
 		public $url;
 		public $linkTitle;
 
+		/**
+		 * @var PreviewConfig config
+		 */
+		public $config;
+
 		public $rateData;
-
-		public $userAuthorized;
-
-		public $allowAddToFavorites;
-		public $allowAddToQuickSite;
 
 		public $viewerFormat;
 		public $contentView;
@@ -39,22 +39,20 @@
 			$this->tags = $link->getTagsString();
 			$this->url = $link->fileLink;
 
-			$this->userAuthorized = false;
-			$userId = -1;
-			if (isset(Yii::app()->user))
-			{
-				$userId = Yii::app()->user->getId();
-				$this->userAuthorized = isset($userId);
-			}
-			$this->allowAddToFavorites = $this->userAuthorized;
-			$this->allowAddToQuickSite = !$isQuickSite;
+			$this->config = new PreviewConfig();
+			$this->config->init($link, $isQuickSite);
 
+			$userId = UserIdentity::getCurrentUserId();
 			$this->rateData = LinkRateRecord::getRateData($link->id, $userId);
 
-			$imageUrlPrefix = Yii::app()->getBaseUrl(true);
+			$this->initActions();
+		}
 
+		protected function initActions()
+		{
 			$this->actions = array();
-			if ($this->allowAddToQuickSite)
+			$imageUrlPrefix = Yii::app()->getBaseUrl(true);
+			if ($this->config->allowAddToQuickSite)
 			{
 				$action = new PreviewAction();
 				$action->tag = 'quicksite';
@@ -64,7 +62,7 @@
 				$this->actions[] = $action;
 			}
 
-			if ($this->allowAddToFavorites)
+			if ($this->config->allowAddToFavorites)
 			{
 				$action = new PreviewAction();
 				$action->tag = 'favorites';

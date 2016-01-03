@@ -99,7 +99,7 @@
 		{
 			if ($this->authenticateBySession($sessionKey))
 			{
-				foreach (UserRecord::model()->findAll('role<>2') as $userRecord)
+				foreach (UserRecord::model()->findAll(array('condition' => 'role<>2', 'order' => 'first_name, last_name')) as $userRecord)
 				{
 					$user = new UserModel();
 					$user->id = $userRecord->id;
@@ -231,7 +231,7 @@
 		{
 			if ($this->authenticateBySession($sessionKey))
 			{
-				foreach (GroupRecord::model()->findAll() as $groupRecord)
+				foreach (GroupRecord::model()->findAll(array('order' => 'name')) as $groupRecord)
 				{
 					$group = new GroupModel();
 					$group->id = $groupRecord->id;
@@ -335,7 +335,7 @@
 		{
 			if ($this->authenticateBySession($sessionKey))
 			{
-				foreach (LibraryRecord::model()->findAll() as $libraryRecord)
+				foreach (LibraryRecord::model()->findAll(array('order' => 'name')) as $libraryRecord)
 				{
 					$library = new Library();
 					$library->id = $libraryRecord->id;

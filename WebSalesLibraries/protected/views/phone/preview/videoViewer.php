@@ -2,19 +2,14 @@
 	/**
 	 * @var $data VideoPreviewData
 	 */
-
-	$authorized = false;
-	$userId = Yii::app()->user->getId();
-	if (isset($userId))
-		$authorized = true;
 ?>
 <div data-role='page' id="link-viewer" class="link-viewer-page" data-cache="never" data-dom-cache="false" data-ajax="false">
 	<div data-role='header' class="page-header" data-position="fixed">
-		<? if ($authorized): ?>
+		<? if ($data->config->userAuthorized): ?>
 			<a href="#link-viewer-popup-panel-left" data-icon="ion-navicon-round" data-iconpos="notext"></a>
 		<? endif; ?>
 		<h1 class="header-title"></h1>
-		<? if ($authorized): ?>
+		<? if ($data->config->userAuthorized): ?>
 			<a href="#link-viewer-popup-panel-right" data-icon="ion-navicon-round" data-iconpos="notext"></a>
 		<? endif; ?>
 	</div>
@@ -33,7 +28,7 @@
 					<a href="<? echo $data->mp4Src->href; ?>" target="_blank" data-role="button" data-inline="true" data-theme="a">Play Video</a>
 				</div>
 				<div class="ui-block-b">
-					<? if ($authorized && ($data->allowAddToQuickSite || $data->allowAddToFavorites)): ?>
+					<? if ($data->config->allowAddToQuickSite || $data->config->allowAddToFavorites): ?>
 						<a href="#link-viewer-options-menu" data-role="button" data-rel="popup" data-inline="true" data-theme="a">Options</a>
 					<? endif; ?>
 				</div>
@@ -55,14 +50,14 @@
 			</div>
 		</div>
 	</div>
-	<? if ($authorized): ?>
+	<? if ($data->config->userAuthorized): ?>
 		<div data-role="panel" data-display="overlay" id="link-viewer-popup-panel-left">
 			<ul data-role="listview">
 				<? echo $this->renderPartial('../shortcuts/groups/groupList'); ?>
 				<li data-icon="false">
 					<a class="logout-button" href="#">Log Out</a>
 				</li>
-				<li data-role="list-divider"><p class="user-info">User: <? echo Yii::app()->user->login; ?></p></li>
+				<li data-role="list-divider"><p class="user-info">User: <? echo UserIdentity::getCurrentUserLogin(); ?></p></li>
 				<li data-role="list-divider"><p>Copyright 2015 adSALESapps.com</p></li>
 			</ul>
 		</div>
@@ -71,14 +66,14 @@
 				<? echo $this->renderPartial('../wallbin/libraryList'); ?>
 			</ul>
 		</div>
-		<? if ($data->allowAddToQuickSite || $data->allowAddToFavorites): ?>
+		<? if ($data->config->allowAddToQuickSite || $data->config->allowAddToFavorites): ?>
 			<div data-role="popup" id="link-viewer-options-menu" data-theme="a">
 				<ul data-role="listview" data-inset="true" style="min-width:250px;" data-corners="false">
 					<li data-role="list-divider" data-theme="d">File Options...</li>
-					<? if ($data->allowAddToQuickSite): ?>
+					<? if ($data->config->allowAddToQuickSite): ?>
 						<li><a href="#email-page" data-transition="slidefade" data-ajax="false">Email this Link</a></li>
 					<? endif; ?>
-					<? if ($data->allowAddToFavorites): ?>
+					<? if ($data->config->allowAddToFavorites): ?>
 						<li><a href="#favorites-add-page" data-transition="slidefade" data-ajax="false">Save to Favorites</a></li>
 					<? endif; ?>
 				</ul>

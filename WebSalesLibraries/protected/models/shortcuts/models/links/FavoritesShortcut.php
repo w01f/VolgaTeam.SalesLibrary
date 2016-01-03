@@ -20,7 +20,7 @@
 		public function getViewParameters()
 		{
 			$viewParameters = parent::getViewParameters();
-			$userId = Yii::app()->user->getId();
+			$userId = UserIdentity::getCurrentUserId();
 			if ($this->isPhone)
 			{
 				$viewParameters['folders'] = FavoritesFolderRecord::getChildFolders($userId, null);

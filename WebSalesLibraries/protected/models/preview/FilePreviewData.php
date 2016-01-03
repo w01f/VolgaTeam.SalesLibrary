@@ -19,12 +19,16 @@
 
 			$this->viewerFormat = 'file';
 			$this->contentView = 'fileViewer';
-			$this->linkTitle ='File';
+			$this->linkTitle = 'File';
 
 			$this->fileName = $link->fileName;
 			$this->filePath = $link->filePath;
 			$this->fileSize = self::formatFileSize($link->fileSize);
+		}
 
+		protected function initActions()
+		{
+			parent::initActions();
 			$this->actions = CMap::mergeArray($this->getDownloadActions(), $this->actions);
 		}
 
@@ -33,36 +37,42 @@
 		 */
 		protected function getDownloadActions()
 		{
-			$imageUrlPrefix = Yii::app()->getBaseUrl(true);
+			$actions = array();
 
-			switch ($this->format)
+			if ($this->config->allowDownload)
 			{
-				case 'ppt':
-				case 'doc':
-				case 'pdf':
-				case 'xls':
-				case 'mp3':
-				case 'jpeg':
-				case 'png':
-				case 'key':
-					$downloadSuffix = $this->format;
-					break;
-				case 'wmv':
-				case 'mp4':
-				case 'video':
-					$downloadSuffix = 'mp4';
-					break;
-				default:
-					$downloadSuffix = 'default';
-					break;
+				$imageUrlPrefix = Yii::app()->getBaseUrl(true);
+				switch ($this->format)
+				{
+					case 'ppt':
+					case 'doc':
+					case 'pdf':
+					case 'xls':
+					case 'mp3':
+					case 'jpeg':
+					case 'png':
+					case 'key':
+						$downloadSuffix = $this->format;
+						break;
+					case 'wmv':
+					case 'mp4':
+					case 'video':
+						$downloadSuffix = 'mp4';
+						break;
+					default:
+						$downloadSuffix = 'default';
+						break;
+				}
+
+				$action = new PreviewAction();
+				$action->tag = 'download';
+				$action->text = 'DOWNLOAD this file to your Desktop or Mobile Device...';
+				$action->shortText = 'DOWNLOAD this file...';
+				$action->logo = sprintf('%s/images/preview/actions/download-%s.png?%s', $imageUrlPrefix, $downloadSuffix, Yii::app()->params['version']);
+				$actions[] = $action;
 			}
 
-			$action = new PreviewAction();
-			$action->tag = 'download';
-			$action->text = 'DOWNLOAD this file to your Desktop or Mobile Device...';
-			$action->shortText = 'DOWNLOAD this file...';
-			$action->logo = sprintf('%s/images/preview/actions/download-%s.png?%s', $imageUrlPrefix, $downloadSuffix, Yii::app()->params['version']);
-			return array($action);
+			return $actions;
 		}
 
 		/**

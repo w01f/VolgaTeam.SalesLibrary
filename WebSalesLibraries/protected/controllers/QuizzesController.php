@@ -12,9 +12,9 @@
 
 		public function actionGetQuizList()
 		{
-			$userId = Yii::app()->user->getId();
+			$userId = UserIdentity::getCurrentUserId();
 			$parentId = Yii::app()->request->getPost('parentId');
-			if (isset($userId) && isset($parentId))
+			if (isset($parentId))
 			{
 				$quizItems = QuizGroupRecord::getChildItems($parentId);
 				$this->renderPartial('quizzesList', array('quizItems' => $quizItems), false, true);
@@ -23,9 +23,9 @@
 
 		public function actionGetQuizPanel()
 		{
-			$userId = Yii::app()->user->getId();
+			$userId = UserIdentity::getCurrentUserId();
 			$quizId = Yii::app()->request->getPost('quizId');
-			if (isset($userId) && isset($quizId))
+			if (isset($quizId))
 			{
 				/** @var $quizRecord QuizRecord */
 				$quizRecord = QuizRecord::model()->findByPk($quizId);
@@ -45,9 +45,9 @@
 
 		public function actionGetQuizCover()
 		{
-			$userId = Yii::app()->user->getId();
+			$userId = UserIdentity::getCurrentUserId();
 			$quizId = Yii::app()->request->getPost('quizId');
-			if (isset($userId) && isset($quizId))
+			if (isset($quizId))
 			{
 				/** @var $quizRecord QuizRecord */
 				$quizRecord = QuizRecord::model()->findByPk($quizId);
@@ -58,14 +58,14 @@
 
 		public function actionGetQuizEnd()
 		{
-			$userId = Yii::app()->user->getId();
+			$userId = UserIdentity::getCurrentUserId();
 			$quizId = Yii::app()->request->getPost('quizId');
 			$results = Yii::app()->request->getPost('results');
 			if (isset($results))
 				$results = CJSON::decode($results);
 			else
 				$results = array();
-			if (isset($userId) && isset($quizId) && isset($results))
+			if (isset($quizId) && isset($results))
 			{
 				/** @var $quizRecord QuizRecord */
 				$quizRecord = QuizRecord::model()->findByPk($quizId);
@@ -97,10 +97,10 @@
 
 		public function actionGetQuizQuestion()
 		{
-			$userId = Yii::app()->user->getId();
+			$userId = UserIdentity::getCurrentUserId();
 			$quizId = Yii::app()->request->getPost('quizId');
 			$quizQuestion = Yii::app()->request->getPost('quizQuestion');
-			if (isset($userId) && isset($quizId) && isset($quizQuestion))
+			if (isset($quizId) && isset($quizQuestion))
 			{
 				/** @var $quizRecord QuizRecord */
 				$quizRecord = QuizRecord::model()->findByPk($quizId);

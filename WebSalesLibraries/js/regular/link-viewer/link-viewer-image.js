@@ -29,6 +29,10 @@
 						formContent: dialogContent
 					});
 
+					dialogContent.find('.tab-above-header').first().addClass('active');
+					dialogContent.find('#link-viewer-body-tabs li').first().addClass('active');
+					dialogContent.find('.tab-content .tab-pane').first().addClass('active');
+
 					dialogContent.find('#link-viewer-body-tabs a[data-toggle="tab"]').on('shown.bs.tab', function (e)
 					{
 						dialogContent.find('.tab-above-header').removeClass('active');

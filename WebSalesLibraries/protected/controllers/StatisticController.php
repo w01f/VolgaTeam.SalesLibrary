@@ -18,8 +18,6 @@
 						'ActivityDetail' => 'ActivityDetail',
 						'MainUserReportModel' => 'MainUserReportModel',
 						'MainGroupReportModel' => 'MainGroupReportModel',
-						'NavigationUserReportModel' => 'NavigationUserReportModel',
-						'NavigationGroupReportModel' => 'NavigationGroupReportModel',
 						'QuizPassUserReportModel' => 'QuizPassUserReportModel',
 						'QuizPassGroupReportModel' => 'QuizPassGroupReportModel',
 						'FileActivityReportModel' => 'FileActivityReportModel',
@@ -142,74 +140,6 @@
 					$reportRecord->logins = $resultRecord['logins'];
 					$reportRecord->docs = $resultRecord['docs'];
 					$reportRecord->videos = $resultRecord['videos'];
-					$reportRecords[] = $reportRecord;
-				}
-			}
-			if (isset($reportRecords))
-				return $reportRecords;
-			else
-				return null;
-		}
-
-		/**
-		 * @param string $sessionKey
-		 * @param string $dateStart
-		 * @param string $dateEnd
-		 * @return NavigationUserReportModel[]
-		 * @soap
-		 */
-		public function getNavigationUserReport($sessionKey, $dateStart, $dateEnd)
-		{
-			if ($this->authenticateBySession($sessionKey))
-			{
-				$command = Yii::app()->db->createCommand("call sp_get_navigation_user_report(:start_date,:end_date)");
-				$command->bindValue(":start_date", date(Yii::app()->params['mysqlDateFormat'], strtotime($dateStart)), PDO::PARAM_STR);
-				$command->bindValue(":end_date", date(Yii::app()->params['mysqlDateFormat'], strtotime($dateEnd)), PDO::PARAM_STR);
-				$resultRecords = $command->queryAll();
-				foreach ($resultRecords as $resultRecord)
-				{
-					$reportRecord = new NavigationUserReportModel();
-					$reportRecord->firstName = $resultRecord['first_name'];
-					$reportRecord->lastName = $resultRecord['last_name'];
-					$reportRecord->group = $resultRecord['group_name'];
-					$reportRecord->groupUserCount = $resultRecord['group_user_count'];
-					$reportRecord->userTotal = $resultRecord['user_activity_total'];
-					$reportRecord->groupTotal = $resultRecord['group_activity_total'];
-					$reportRecord->userLibraries = $resultRecord['user_activity_libs'];
-					$reportRecord->groupLibraries = $resultRecord['group_activity_libs'];
-					$reportRecord->userPages = $resultRecord['user_activity_pages'];
-					$reportRecord->groupPages = $resultRecord['group_activity_pages'];
-					$reportRecords[] = $reportRecord;
-				}
-			}
-			if (isset($reportRecords))
-				return $reportRecords;
-			else
-				return null;
-		}
-
-		/**
-		 * @param string $sessionKey
-		 * @param string $dateStart
-		 * @param string $dateEnd
-		 * @return NavigationGroupReportModel[]
-		 * @soap
-		 */
-		public function getNavigationGroupReport($sessionKey, $dateStart, $dateEnd)
-		{
-			if ($this->authenticateBySession($sessionKey))
-			{
-				$command = Yii::app()->db->createCommand("call sp_get_navigation_group_report(:start_date,:end_date)");
-				$command->bindValue(":start_date", date(Yii::app()->params['mysqlDateFormat'], strtotime($dateStart)), PDO::PARAM_STR);
-				$command->bindValue(":end_date", date(Yii::app()->params['mysqlDateFormat'], strtotime($dateEnd)), PDO::PARAM_STR);
-				$resultRecords = $command->queryAll();
-				foreach ($resultRecords as $resultRecord)
-				{
-					$reportRecord = new NavigationGroupReportModel();
-					$reportRecord->name = $resultRecord['name'];
-					$reportRecord->totals = $resultRecord['totals'];
-					$reportRecord->libs = $resultRecord['libs'];
-					$reportRecord->pages = $resultRecord['pages'];
 					$reportRecords[] = $reportRecord;
 				}
 			}
@@ -397,12 +327,7 @@
 			$type = Yii::app()->request->getPost('type');
 			$subType = Yii::app()->request->getPost('subType');
 			$data = Yii::app()->request->getPost('data');
-			$authorized = false;
-			if (isset(Yii::app()->user))
-			{
-				$userId = Yii::app()->user->getId();
-				$authorized = isset($userId);
-			}
+			$authorized = UserIdentity::isUserAuthorized();
 			if (isset($type) && isset($subType) && $authorized)
 				StatisticActivityRecord::WriteActivity($type, $subType, $data);
 			Yii::app()->end();

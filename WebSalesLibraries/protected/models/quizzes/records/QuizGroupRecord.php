@@ -76,7 +76,7 @@
 				$groupItem->name = $groupRecord->name;
 				$groupItem->isGroup = true;
 
-				$userId = Yii::app()->user->getId();
+				$userId = UserIdentity::getCurrentUserId();
 				if ($groupRecord->isEnabled($userId))
 				{
 					$groupItem->childItems = self::getChildItems($groupRecord->id);

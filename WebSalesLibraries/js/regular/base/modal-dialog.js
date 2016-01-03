@@ -28,7 +28,8 @@
 			description: userOptions.description != undefined ? userOptions.description : defaultOptions.description,
 			logo: userOptions.logo != undefined ? userOptions.logo : defaultOptions.logo,
 			width: userOptions.width != undefined ? userOptions.width : defaultOptions.width,
-			buttons: userOptions.buttons != undefined ? userOptions.buttons : defaultOptions.buttons
+			buttons: userOptions.buttons != undefined ? userOptions.buttons : defaultOptions.buttons,
+			closeOnOutsideClick: userOptions.closeOnOutsideClick != undefined ? userOptions.closeOnOutsideClick : false
 		};
 
 		this.show = function ()
@@ -44,7 +45,7 @@
 				helpers: {
 					title: false,
 					overlay: {
-						closeClick: false
+						closeClick: options.closeOnOutsideClick
 					}
 				}
 			});

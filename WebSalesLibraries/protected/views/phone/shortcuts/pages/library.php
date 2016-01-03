@@ -5,7 +5,7 @@
 
 	if (isset(Yii::app()->user))
 	{
-		$userId = Yii::app()->user->getId();
+		$userId = UserIdentity::getCurrentUserId();
 		$tabPageExisted = UserTabRecord::isUserTabExists($userId, $library->id);
 	}
 	else

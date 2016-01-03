@@ -12,25 +12,19 @@
 
 		public function actionAddLibraryTab()
 		{
-			if (isset(Yii::app()->user))
-			{
-				$userId = Yii::app()->user->getId();
-				$libraryId = Yii::app()->request->getPost('libraryId');
-				UserTabRecord::addLibraryTab($userId, $libraryId);
-				echo CJSON::encode(array('result' => true));
-			}
+			$userId = UserIdentity::getCurrentUserId();
+			$libraryId = Yii::app()->request->getPost('libraryId');
+			UserTabRecord::addLibraryTab($userId, $libraryId);
+			echo CJSON::encode(array('result' => true));
 			Yii::app()->end();
 		}
 
 		public function actionDeleteLibraryTab()
 		{
-			if (isset(Yii::app()->user))
-			{
-				$userId = Yii::app()->user->getId();
-				$libraryId = Yii::app()->request->getPost('libraryId');
-				UserTabRecord::deleteTab($userId, $libraryId);
-				echo CJSON::encode(array('result' => true));
-			}
+			$userId = UserIdentity::getCurrentUserId();
+			$libraryId = Yii::app()->request->getPost('libraryId');
+			UserTabRecord::deleteTab($userId, $libraryId);
+			echo CJSON::encode(array('result' => true));
 			Yii::app()->end();
 		}
 	}

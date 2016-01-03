@@ -28,7 +28,7 @@
 				CJSON::decode($conditionsEncoded, false) :
 				new SearchConditions();
 
-			$resultDataset = SearchHelper::queryLinksByCondition($conditions, $datasetKey);
+			$resultDataset = SearchHelper::getDatasetByCondition($conditions, $datasetKey);
 
 			$searchResultInfo = array();
 			if (isset($conditions->text) && $conditions->text != '')

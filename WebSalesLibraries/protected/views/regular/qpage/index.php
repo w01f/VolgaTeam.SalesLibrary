@@ -6,12 +6,7 @@
 	$cs = Yii::app()->clientScript;
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/regular/qpage/page-content.css?' . Yii::app()->params['version']);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/qpage/qpage-controller.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
-	$userId = Yii::app()->user->getId();
-
-	$authorized = false;
-	$userId = Yii::app()->user->getId();
-	if (isset($userId))
-		$authorized = true;
+	$authorized = UserIdentity::isUserAuthorized();
 ?>
 <script type="text/javascript">
 	window.BaseUrl = '<?php echo Yii::app()->getBaseUrl(true); ?>' + '/qpage/';

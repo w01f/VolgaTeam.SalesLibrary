@@ -52,6 +52,7 @@
 				!strstr($url, 'statistic/quote') &&
 				!strstr($url, 'qbuilder/quote') &&
 				!strstr($url, 'inactiveusers/') &&
+				!strstr($url, 'linkconfigprofile/') &&
 				!strstr($url, 'filemanagerdata/') &&
 				!strstr($url, 'adsalesdata/') &&
 				!strstr($url, 'content/')

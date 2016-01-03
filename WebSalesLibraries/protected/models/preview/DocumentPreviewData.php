@@ -19,10 +19,10 @@
 			switch ($this->format)
 			{
 				case 'ppt':
-					$this->linkTitle ='PowerPoint';
+					$this->linkTitle = 'PowerPoint';
 					break;
 				case 'doc':
-					$this->linkTitle ='Word';
+					$this->linkTitle = 'Word';
 					break;
 			}
 
@@ -62,19 +62,25 @@
 
 			$imageUrlPrefix = Yii::app()->getBaseUrl(true);
 
-			$action = new PreviewAction();
-			$action->tag = 'download';
-			$action->text = 'DOWNLOAD this file to your Desktop or Mobile Device...';
-			$action->shortText = 'DOWNLOAD this file';
-			$action->logo = sprintf('%s/images/preview/actions/download-%s.png?%s', $imageUrlPrefix, $this->format, Yii::app()->params['version']);
-			$actions[] = $action;
+			if ($this->config->allowDownload)
+			{
+				$action = new PreviewAction();
+				$action->tag = 'download';
+				$action->text = 'DOWNLOAD this file to your Desktop or Mobile Device...';
+				$action->shortText = 'DOWNLOAD this file';
+				$action->logo = sprintf('%s/images/preview/actions/download-%s.png?%s', $imageUrlPrefix, $this->format, Yii::app()->params['version']);
+				$actions[] = $action;
+			}
 
-			$action = new PreviewAction();
-			$action->tag = 'download-pdf';
-			$action->text = 'Open PDF version of this file to your Desktop or Mobile Device...';
-			$action->shortText = 'Open PDF file';
-			$action->logo = sprintf('%s/images/preview/actions/download-pdf.png?%s', $imageUrlPrefix, $this->format, Yii::app()->params['version']);
-			$actions[] = $action;
+			if ($this->config->allowPdf)
+			{
+				$action = new PreviewAction();
+				$action->tag = 'download-pdf';
+				$action->text = 'Open PDF version of this file to your Desktop or Mobile Device...';
+				$action->shortText = 'Open PDF file';
+				$action->logo = sprintf('%s/images/preview/actions/download-pdf.png?%s', $imageUrlPrefix, $this->format, Yii::app()->params['version']);
+				$actions[] = $action;
+			}
 
 			return $actions;
 		}

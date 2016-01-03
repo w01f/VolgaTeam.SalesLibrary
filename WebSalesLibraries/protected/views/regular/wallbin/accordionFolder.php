@@ -1,16 +1,6 @@
 <? /** @var $folder LibraryFolder */ ?>
 <div class="accordion-folder-container">
 	<?
-		$isAdmin = false;
-		$userId = null;
-		if (isset(Yii::app()->user))
-		{
-			$userId = Yii::app()->user->getId();
-			if (isset(Yii::app()->user->role))
-				$isAdmin = Yii::app()->user->role == 2;
-			else
-				$isAdmin = true;
-		}
 		$linksNumber = $folder->getRealLinksNumber();
 		$linksCaption = '';
 		if ($linksNumber == 1)

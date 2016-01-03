@@ -49,7 +49,7 @@
 				thumbnail_navigation: 0,// Thumbnail navigation
 				slideSwitchHandler: function ()
 				{
-					<? if ($previewData->userAuthorized): ?>
+					<? if ($previewData->config->enableLogging): ?>
 						var viewerData = $.parseJSON($('#data').text());
 						$.SalesPortal.LogHelper.write({
 							type: 'Link',
