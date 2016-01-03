@@ -218,7 +218,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Video
 		}
 		#endregion
 
-
 		#region Grid Formatting
 		private void gridViewVideo_RowCellStyle(object sender, RowCellStyleEventArgs e)
 		{

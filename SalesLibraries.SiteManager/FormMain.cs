@@ -48,6 +48,10 @@ namespace SalesLibraries.SiteManager
 				ribbonBarActivitiesLogo.RecalcLayout();
 				ribbonPanelActivities.PerformLayout();
 
+				labelItemLinkConfigProfilesLogo.Image = image;
+				ribbonBarLinkConfigProfilesLogo.RecalcLayout();
+				ribbonPanelLinkConfigProfiles.PerformLayout();
+
 				labelItemInactiveUsersLogo.Image = image;
 				ribbonBarInactiveUsersLogo.RecalcLayout();
 				ribbonPanelInactiveUsers.PerformLayout();
@@ -74,6 +78,8 @@ namespace SalesLibraries.SiteManager
 				key = TabPageEnum.Users;
 			if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemActivities)
 				key = TabPageEnum.Activities;
+			if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemLinkConfigProfiles)
+				key = TabPageEnum.LinkConfigProfiles;
 			if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemInactiveUsers)
 				key = TabPageEnum.InactiveUsers;
 			if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemQBuilder)

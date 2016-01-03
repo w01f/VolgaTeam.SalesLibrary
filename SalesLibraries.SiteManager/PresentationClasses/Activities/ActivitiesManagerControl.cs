@@ -37,34 +37,30 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Activities
 			_views.Add(ViewType.MainUserReport, view2);
 			splitContainerControl.Panel2.Controls.Add(view2);
 			pnCustomFilter.Controls.AddRange(view2.FilterControls.ToArray());
-			var view3 = new NavigationData.ContainerControl();
-			_views.Add(ViewType.NavigationUserReport, view3);
+			var view3 = new AccessData.ContainerControl();
+			_views.Add(ViewType.AccessGroupReport, view3);
 			splitContainerControl.Panel2.Controls.Add(view3);
 			pnCustomFilter.Controls.AddRange(view3.FilterControls.ToArray());
-			var view4 = new AccessData.ContainerControl();
-			_views.Add(ViewType.AccessGroupReport, view4);
+			var view4 = new QuizPassData.ContainerControl();
+			_views.Add(ViewType.QuizPassUserReport, view4);
 			splitContainerControl.Panel2.Controls.Add(view4);
 			pnCustomFilter.Controls.AddRange(view4.FilterControls.ToArray());
-			var view5 = new QuizPassData.ContainerControl();
-			_views.Add(ViewType.QuizPassUserReport, view5);
+			var view5 = new QuizStatusData.ContainerControl();
+			_views.Add(ViewType.QuizStatusUserReport, view5);
 			splitContainerControl.Panel2.Controls.Add(view5);
 			pnCustomFilter.Controls.AddRange(view5.FilterControls.ToArray());
-			var view6 = new QuizStatusData.ContainerControl();
-			_views.Add(ViewType.QuizStatusUserReport, view6);
+			var view6 = new QuizUnitedData.ContainerControl();
+			_views.Add(ViewType.QuizUnitedReport, view6);
 			splitContainerControl.Panel2.Controls.Add(view6);
 			pnCustomFilter.Controls.AddRange(view6.FilterControls.ToArray());
-			var view7 = new QuizUnitedData.ContainerControl();
-			_views.Add(ViewType.QuizUnitedReport, view7);
+			var view7 = new FileActivityData.ContainerControl();
+			_views.Add(ViewType.FileActivityReport, view7);
 			splitContainerControl.Panel2.Controls.Add(view7);
 			pnCustomFilter.Controls.AddRange(view7.FilterControls.ToArray());
-			var view8 = new FileActivityData.ContainerControl();
-			_views.Add(ViewType.FileActivityReport, view8);
+			var view8 = new VideoLinkData.ContainerControl();
+			_views.Add(ViewType.VideoInfoReport, view8);
 			splitContainerControl.Panel2.Controls.Add(view8);
 			pnCustomFilter.Controls.AddRange(view8.FilterControls.ToArray());
-			var view9 = new VideoLinkData.ContainerControl();
-			_views.Add(ViewType.VideoInfoReport, view9);
-			splitContainerControl.Panel2.Controls.Add(view9);
-			pnCustomFilter.Controls.AddRange(view9.FilterControls.ToArray());
 		}
 
 		public void ChangeView(ViewType viewType)

@@ -46,12 +46,14 @@
     <Compile Include="Models\AdminService\UserInfo.cs" />
     <Compile Include="Models\AdminService\UserModel.cs" />
     <Compile Include="Models\InactiveUsers\UserModel.cs" />
+    <Compile Include="Models\LinkConfigProfiles\LibraryLinkReference.cs" />
+    <Compile Include="Models\LinkConfigProfiles\SecurityGroupReference.cs" />
+    <Compile Include="Models\LinkConfigProfiles\LibraryReference.cs" />
+    <Compile Include="Models\LinkConfigProfiles\LinkConfigProfileModel.cs" />
     <Compile Include="Models\QBuilder\QPageModel.cs" />
     <Compile Include="Models\Statistic\AccessReportModel.cs" />
     <Compile Include="Models\Statistic\MainGroupReportModel.cs" />
     <Compile Include="Models\Statistic\MainUserReportModel.cs" />
-    <Compile Include="Models\Statistic\NavigationGroupReportModel.cs" />
-    <Compile Include="Models\Statistic\NavigationUserReportModel.cs" />
     <Compile Include="Models\Statistic\QuizPassGroupReportModel.cs" />
     <Compile Include="Models\Statistic\QuizPassUserReportModel.cs" />
     <Compile Include="Models\Statistic\UserActivity.cs" />
@@ -71,6 +73,7 @@
     <Compile Include="Services\Service.Admin.cs" />
     <Compile Include="Services\Service.Credentials.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\Service.LinkConfigProfiles.cs" />
     <Compile Include="Services\Service.InactiveUsers.cs" />
     <Compile Include="Services\Service.QBuilder.cs" />
     <Compile Include="Services\Service.Statistic.cs" />
@@ -86,6 +89,11 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
     <Compile Include="Web References\InactiveUsersService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\LinkConfigProfileService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -161,6 +169,17 @@
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>SalesLibraries_ServiceConnector_InactiveUsersService_InactiveUsersControllerService</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://localhost/SalesLibraries/LinkConfigProfile/quote">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\LinkConfigProfileService\</RelPath>
+      <UpdateFromURL>http://localhost/SalesLibraries/LinkConfigProfile/quote</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>SalesLibraries_ServiceConnector_LinkConfigProfileService_LinkConfigProfileControllerService</CachedSettingsPropName>
     </WebReferenceUrl>
     <WebReferenceUrl Include="http://localhost/SalesLibraries/QBuilder/quote">
       <UrlBehavior>Dynamic</UrlBehavior>
@@ -238,6 +257,23 @@
     <None Include="Web References\InactiveUsersService\UserModel.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
+    <None Include="Web References\LinkConfigProfileService\LibraryLinkReference.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\LinkConfigProfileService\LibraryReference.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\LinkConfigProfileService\LinkConfigProfileController.wsdl" />
+    <None Include="Web References\LinkConfigProfileService\LinkConfigProfileModel.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\LinkConfigProfileService\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\LinkConfigProfileService\SecurityGroupReference.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
     <None Include="Web References\QBuilderService\QBuilderController.wsdl" />
     <None Include="Web References\QBuilderService\QPageModel.datasource">
       <DependentUpon>Reference.map</DependentUpon>
@@ -256,12 +292,6 @@
       <DependentUpon>Reference.map</DependentUpon>
     </None>
     <None Include="Web References\StatisticService\MainUserReportModel.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\StatisticService\NavigationGroupReportModel.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\StatisticService\NavigationUserReportModel.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
     <None Include="Web References\StatisticService\QuizPassGroupReportModel.datasource">
@@ -292,6 +322,7 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

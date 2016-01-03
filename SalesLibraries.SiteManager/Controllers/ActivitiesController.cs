@@ -46,7 +46,6 @@ namespace SalesLibraries.SiteManager.Controllers
 			FormMain.Instance.buttonItemActivitiesViewsReport5.Click += buttonItemActivitiesViews_Click;
 			FormMain.Instance.buttonItemActivitiesViewsReport6.Click += buttonItemActivitiesViews_Click;
 			FormMain.Instance.buttonItemActivitiesViewsReport7.Click += buttonItemActivitiesViews_Click;
-			FormMain.Instance.buttonItemActivitiesViewsReport8.Click += buttonItemActivitiesViews_Click;
 			FormMain.Instance.buttonItemActivitiesViewsRawData.CheckedChanged += buttonItemActivitiesViews_CheckedChanged;
 			FormMain.Instance.buttonItemActivitiesViewsReport1.CheckedChanged += buttonItemActivitiesViews_CheckedChanged;
 			FormMain.Instance.buttonItemActivitiesViewsReport2.CheckedChanged += buttonItemActivitiesViews_CheckedChanged;
@@ -55,7 +54,6 @@ namespace SalesLibraries.SiteManager.Controllers
 			FormMain.Instance.buttonItemActivitiesViewsReport5.CheckedChanged += buttonItemActivitiesViews_CheckedChanged;
 			FormMain.Instance.buttonItemActivitiesViewsReport6.CheckedChanged += buttonItemActivitiesViews_CheckedChanged;
 			FormMain.Instance.buttonItemActivitiesViewsReport7.CheckedChanged += buttonItemActivitiesViews_CheckedChanged;
-			FormMain.Instance.buttonItemActivitiesViewsReport8.CheckedChanged += buttonItemActivitiesViews_CheckedChanged;
 			FormMain.Instance.buttonItemActivitiesViewsRawData.Checked = true;
 
 			FormMain.Instance.buttonItemActivitiesExport.Click += buttonItemActivitiesExport_Click;
@@ -102,15 +100,13 @@ namespace SalesLibraries.SiteManager.Controllers
 			if (button == null || button.Checked) return;
 			FormMain.Instance.buttonItemActivitiesViewsRawData.Checked = false;
 			FormMain.Instance.buttonItemActivitiesViewsReport1.Checked = false;
+			FormMain.Instance.buttonItemActivitiesViewsReport3.Checked = false;
 			FormMain.Instance.buttonItemActivitiesViewsReport2.Checked = false;
-			FormMain.Instance.buttonItemActivitiesViewsReport2.Checked = false;
-			FormMain.Instance.buttonItemActivitiesViewsReport4.Checked = false;
 			FormMain.Instance.buttonItemActivitiesViewsReport3.Checked = false;
 			FormMain.Instance.buttonItemActivitiesViewsReport4.Checked = false;
 			FormMain.Instance.buttonItemActivitiesViewsReport5.Checked = false;
 			FormMain.Instance.buttonItemActivitiesViewsReport6.Checked = false;
 			FormMain.Instance.buttonItemActivitiesViewsReport7.Checked = false;
-			FormMain.Instance.buttonItemActivitiesViewsReport8.Checked = false;
 			button.Checked = true;
 		}
 

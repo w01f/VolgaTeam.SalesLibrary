@@ -32,6 +32,7 @@ namespace SalesLibraries.SiteManager.Controllers
 		#region Controllers
 		public UsersController UsersController { get; private set; }
 		public ActivitiesController ActivitiesController { get; private set; }
+		public LinkConfigProfilesController LinkConfigProfilesController { get; private set; }
 		public InactiveUsersController InactiveUsersController { get; private set; }
 		public QBuilderController QBuilderController { get; private set; }
 		public UtilitiesController UtilitiesController { get; private set; }
@@ -63,6 +64,8 @@ namespace SalesLibraries.SiteManager.Controllers
 							Application.DoEvents();
 							ActivitiesController.InitController();
 							Application.DoEvents();
+							LinkConfigProfilesController.InitController();
+							Application.DoEvents();
 							InactiveUsersController.InitController();
 							Application.DoEvents();
 							QBuilderController.InitController();
@@ -90,6 +93,8 @@ namespace SalesLibraries.SiteManager.Controllers
 			_controllers.Add(TabPageEnum.Users, UsersController);
 			ActivitiesController = new ActivitiesController();
 			_controllers.Add(TabPageEnum.Activities, ActivitiesController);
+			LinkConfigProfilesController = new LinkConfigProfilesController();
+			_controllers.Add(TabPageEnum.LinkConfigProfiles, LinkConfigProfilesController);
 			InactiveUsersController = new InactiveUsersController();
 			_controllers.Add(TabPageEnum.InactiveUsers, InactiveUsersController);
 			QBuilderController = new QBuilderController();
@@ -115,6 +120,9 @@ namespace SalesLibraries.SiteManager.Controllers
 					break;
 				case TabPageEnum.Activities:
 					FormMain.Instance.ribbonControl.SelectedRibbonTabItem = FormMain.Instance.ribbonTabItemActivities;
+					break;
+				case TabPageEnum.LinkConfigProfiles:
+					FormMain.Instance.ribbonControl.SelectedRibbonTabItem = FormMain.Instance.ribbonTabItemLinkConfigProfiles;
 					break;
 				case TabPageEnum.InactiveUsers:
 					FormMain.Instance.ribbonControl.SelectedRibbonTabItem = FormMain.Instance.ribbonTabItemInactiveUsers;
@@ -149,6 +157,7 @@ namespace SalesLibraries.SiteManager.Controllers
 	{
 		Users,
 		Activities,
+		LinkConfigProfiles,
 		InactiveUsers,
 		QBuilder,
 		Utilities

@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:LinkConfigProfileControllerwsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" xmlns="http://schemas.xmlsoap.org/wsdl/" name="LinkConfigProfileController" targetNamespace="urn:LinkConfigProfileControllerwsdl" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="urn:LinkConfigProfileControllerwsdl">
+      <xsd:complexType name="LibraryReferenceArray">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soap-enc:Array">
+            <xsd:attribute wsdl:arrayType="tns:LibraryReference[]" ref="soap-enc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="LibraryReference">
+        <xsd:all>
+          <xsd:element name="id" type="xsd:string" />
+          <xsd:element name="name" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="SecurityGroupReferenceArray">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soap-enc:Array">
+            <xsd:attribute wsdl:arrayType="tns:SecurityGroupReference[]" ref="soap-enc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="SecurityGroupReference">
+        <xsd:all>
+          <xsd:element name="id" type="xsd:string" />
+          <xsd:element name="name" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="LinkConfigProfileModelArray">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soap-enc:Array">
+            <xsd:attribute wsdl:arrayType="tns:LinkConfigProfileModel[]" ref="soap-enc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="LinkConfigProfileModel">
+        <xsd:all>
+          <xsd:element name="id" type="xsd:string" />
+          <xsd:element name="name" type="xsd:string" />
+          <xsd:element name="order" type="xsd:int" />
+          <xsd:element name="config" type="tns:LinkConfig" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="LinkConfig">
+        <xsd:all>
+          <xsd:element name="disablePreview" type="xsd:boolean" />
+          <xsd:element name="disableDownload" type="xsd:boolean" />
+          <xsd:element name="disableQuickSite" type="xsd:boolean" />
+          <xsd:element name="disableFavorites" type="xsd:boolean" />
+          <xsd:element name="disableSave" type="xsd:boolean" />
+          <xsd:element name="disableEmail" type="xsd:boolean" />
+          <xsd:element name="disablePdf" type="xsd:boolean" />
+          <xsd:element name="libraryLinkTags" type="tns:stringArray" />
+          <xsd:element name="libraryReferences" type="tns:LibraryReferenceArray" />
+          <xsd:element name="securityGroupReferences" type="tns:SecurityGroupReferenceArray" />
+          <xsd:element name="ignoredLinkReferences" type="tns:LibraryLinkReferenceArray" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="stringArray">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soap-enc:Array">
+            <xsd:attribute wsdl:arrayType="xsd:string[]" ref="soap-enc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="LibraryLinkReferenceArray">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soap-enc:Array">
+            <xsd:attribute wsdl:arrayType="tns:LibraryLinkReference[]" ref="soap-enc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="LibraryLinkReference">
+        <xsd:all>
+          <xsd:element name="id" type="xsd:string" />
+          <xsd:element name="name" type="xsd:string" />
+          <xsd:element name="fileName" type="xsd:string" />
+          <xsd:element name="filePath" type="xsd:string" />
+          <xsd:element name="libraryName" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="getLibrariesRequest">
+    <wsdl:part name="sessionKey" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getLibrariesResponse">
+    <wsdl:part name="return" type="tns:LibraryReferenceArray" />
+  </wsdl:message>
+  <wsdl:message name="getSecurityGroupsRequest">
+    <wsdl:part name="sessionKey" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getSecurityGroupsResponse">
+    <wsdl:part name="return" type="tns:SecurityGroupReferenceArray" />
+  </wsdl:message>
+  <wsdl:message name="getProfilesRequest">
+    <wsdl:part name="sessionKey" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getProfilesResponse">
+    <wsdl:part name="return" type="tns:LinkConfigProfileModelArray" />
+  </wsdl:message>
+  <wsdl:message name="saveProfileRequest">
+    <wsdl:part name="sessionKey" type="xsd:string" />
+    <wsdl:part name="profile" type="tns:LinkConfigProfileModel" />
+  </wsdl:message>
+  <wsdl:message name="saveProfileResponse" />
+  <wsdl:message name="deleteProfileRequest">
+    <wsdl:part name="sessionKey" type="xsd:string" />
+    <wsdl:part name="profile" type="tns:LinkConfigProfileModel" />
+  </wsdl:message>
+  <wsdl:message name="deleteProfileResponse" />
+  <wsdl:message name="getAffectedLinksRequest">
+    <wsdl:part name="sessionKey" type="xsd:string" />
+    <wsdl:part name="profile" type="tns:LinkConfigProfileModel" />
+  </wsdl:message>
+  <wsdl:message name="getAffectedLinksResponse">
+    <wsdl:part name="return" type="tns:LibraryLinkReferenceArray" />
+  </wsdl:message>
+  <wsdl:message name="getMetaDataRequest">
+    <wsdl:part name="sessionKey" type="xsd:string" />
+    <wsdl:part name="dataTag" type="xsd:string" />
+    <wsdl:part name="propertyName" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getMetaDataResponse">
+    <wsdl:part name="return" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getSessionKeyRequest">
+    <wsdl:part name="login" type="xsd:string" />
+    <wsdl:part name="password" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getSessionKeyResponse">
+    <wsdl:part name="return" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:portType name="LinkConfigProfileControllerPortType">
+    <wsdl:operation name="getLibraries">
+      <wsdl:documentation>
+      </wsdl:documentation>
+      <wsdl:input message="tns:getLibrariesRequest" />
+      <wsdl:output message="tns:getLibrariesResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getSecurityGroups">
+      <wsdl:documentation>
+      </wsdl:documentation>
+      <wsdl:input message="tns:getSecurityGroupsRequest" />
+      <wsdl:output message="tns:getSecurityGroupsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getProfiles">
+      <wsdl:documentation>
+      </wsdl:documentation>
+      <wsdl:input message="tns:getProfilesRequest" />
+      <wsdl:output message="tns:getProfilesResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="saveProfile">
+      <wsdl:documentation>
+      </wsdl:documentation>
+      <wsdl:input message="tns:saveProfileRequest" />
+      <wsdl:output message="tns:saveProfileResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="deleteProfile">
+      <wsdl:documentation>
+      </wsdl:documentation>
+      <wsdl:input message="tns:deleteProfileRequest" />
+      <wsdl:output message="tns:deleteProfileResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getAffectedLinks">
+      <wsdl:documentation>
+      </wsdl:documentation>
+      <wsdl:input message="tns:getAffectedLinksRequest" />
+      <wsdl:output message="tns:getAffectedLinksResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getMetaData">
+      <wsdl:documentation>
+      </wsdl:documentation>
+      <wsdl:input message="tns:getMetaDataRequest" />
+      <wsdl:output message="tns:getMetaDataResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getSessionKey">
+      <wsdl:documentation>
+      </wsdl:documentation>
+      <wsdl:input message="tns:getSessionKeyRequest" />
+      <wsdl:output message="tns:getSessionKeyResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="LinkConfigProfileControllerBinding" type="tns:LinkConfigProfileControllerPortType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <wsdl:operation name="getLibraries">
+      <soap:operation soapAction="urn:LinkConfigProfileControllerwsdl#getLibraries" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:LinkConfigProfileControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:LinkConfigProfileControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getSecurityGroups">
+      <soap:operation soapAction="urn:LinkConfigProfileControllerwsdl#getSecurityGroups" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:LinkConfigProfileControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:LinkConfigProfileControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getProfiles">
+      <soap:operation soapAction="urn:LinkConfigProfileControllerwsdl#getProfiles" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:LinkConfigProfileControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:LinkConfigProfileControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="saveProfile">
+      <soap:operation soapAction="urn:LinkConfigProfileControllerwsdl#saveProfile" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:LinkConfigProfileControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:LinkConfigProfileControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteProfile">
+      <soap:operation soapAction="urn:LinkConfigProfileControllerwsdl#deleteProfile" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:LinkConfigProfileControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:LinkConfigProfileControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAffectedLinks">
+      <soap:operation soapAction="urn:LinkConfigProfileControllerwsdl#getAffectedLinks" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:LinkConfigProfileControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:LinkConfigProfileControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getMetaData">
+      <soap:operation soapAction="urn:LinkConfigProfileControllerwsdl#getMetaData" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:LinkConfigProfileControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:LinkConfigProfileControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getSessionKey">
+      <soap:operation soapAction="urn:LinkConfigProfileControllerwsdl#getSessionKey" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:LinkConfigProfileControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:LinkConfigProfileControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="LinkConfigProfileControllerService">
+    <wsdl:port name="LinkConfigProfileControllerPort" binding="tns:LinkConfigProfileControllerBinding">
+      <soap:address location="http://localhost/SalesLibraries/linkConfigProfile/quote?ws=1" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

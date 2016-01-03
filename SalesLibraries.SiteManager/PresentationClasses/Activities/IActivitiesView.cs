@@ -20,13 +20,12 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Activities
 	{
 		RawData = 0,
 		MainUserReport = 1,
-		NavigationUserReport = 2,
-		AccessGroupReport = 3,
-		QuizPassUserReport = 4,
-		QuizStatusUserReport = 5,
-		QuizUnitedReport = 6,
-		FileActivityReport = 7,
-		VideoInfoReport = 8,
+		AccessGroupReport = 2,
+		QuizPassUserReport = 3,
+		QuizStatusUserReport = 4,
+		QuizUnitedReport = 5,
+		FileActivityReport = 6,
+		VideoInfoReport = 7,
 		None = 999
 	}
 }

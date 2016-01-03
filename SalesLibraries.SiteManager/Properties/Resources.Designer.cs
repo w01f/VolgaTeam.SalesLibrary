@@ -93,9 +93,9 @@ namespace SalesLibraries.SiteManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap EditTicker {
+        internal static System.Drawing.Bitmap EditButton {
             get {
-                object obj = ResourceManager.GetObject("EditTicker", resourceCulture);
+                object obj = ResourceManager.GetObject("EditButton", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -123,29 +123,39 @@ namespace SalesLibraries.SiteManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap ExportTicker {
-            get {
-                object obj = ResourceManager.GetObject("ExportTicker", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap ImportTicker {
-            get {
-                object obj = ResourceManager.GetObject("ImportTicker", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap ImportUsers {
             get {
                 object obj = ResourceManager.GetObject("ImportUsers", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap LinkConfigProfilesAdd {
+            get {
+                object obj = ResourceManager.GetObject("LinkConfigProfilesAdd", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap LinkConfigProfilesDelete {
+            get {
+                object obj = ResourceManager.GetObject("LinkConfigProfilesDelete", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap LinkConfigProfilesSave {
+            get {
+                object obj = ResourceManager.GetObject("LinkConfigProfilesSave", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -109,11 +109,13 @@
   <ItemGroup>
     <Compile Include="AppManager.cs" />
     <Compile Include="BusinessClasses\ImportManager.cs" />
+    <Compile Include="BusinessClasses\LinkConfigProfilesDataHelper.cs" />
     <Compile Include="BusinessClasses\WebSiteManager.cs" />
     <Compile Include="ConfigurationClasses\AppWindowSettings.cs" />
     <Compile Include="ConfigurationClasses\InactiveUsersSettings.cs" />
     <Compile Include="ConfigurationClasses\SettingsManager.cs" />
     <Compile Include="Controllers\ActivitiesController.cs" />
+    <Compile Include="Controllers\LinkConfigProfilesController.cs" />
     <Compile Include="Controllers\UtilitiesController.cs" />
     <Compile Include="Controllers\QBuilderController.cs" />
     <Compile Include="Controllers\InactiveUsersController.cs" />
@@ -229,41 +231,11 @@
     <Compile Include="PresentationClasses\Activities\QuizUnitedData\Filter.Designer.cs">
       <DependentUpon>Filter.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationClasses\Activities\NavigationData\ContainerControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="PresentationClasses\Activities\NavigationData\ContainerControl.Designer.cs">
-      <DependentUpon>ContainerControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationClasses\Activities\NavigationData\TotalControl.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="PresentationClasses\Activities\NavigationData\TotalControl.Designer.cs">
-      <DependentUpon>TotalControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationClasses\Activities\NavigationData\GroupControl.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="PresentationClasses\Activities\NavigationData\GroupControl.Designer.cs">
-      <DependentUpon>GroupControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="PresentationClasses\Activities\RawData\Filter.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="PresentationClasses\Activities\RawData\Filter.Designer.cs">
       <DependentUpon>Filter.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationClasses\Activities\NavigationData\GroupFilter.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="PresentationClasses\Activities\NavigationData\GroupFilter.Designer.cs">
-      <DependentUpon>GroupFilter.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationClasses\Activities\NavigationData\UserFilter.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="PresentationClasses\Activities\NavigationData\UserFilter.Designer.cs">
-      <DependentUpon>UserFilter.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationClasses\Activities\MainData\GroupFilter.cs">
       <SubType>UserControl</SubType>
@@ -313,6 +285,30 @@
     </Compile>
     <Compile Include="PresentationClasses\Activities\VideoLinkData\GroupControl.Designer.cs">
       <DependentUpon>GroupControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\LinkConfigProfiles\FormEditProfile.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\LinkConfigProfiles\FormEditProfile.Designer.cs">
+      <DependentUpon>FormEditProfile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\LinkConfigProfiles\LinkConfigProfilesManagerControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\LinkConfigProfiles\LinkConfigProfilesManagerControl.Designer.cs">
+      <DependentUpon>LinkConfigProfilesManagerControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\LinkConfigProfiles\ProfileControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\LinkConfigProfiles\ProfileControl.Designer.cs">
+      <DependentUpon>ProfileControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TabPages\TabLogConfigProfilesControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TabPages\TabLogConfigProfilesControl.Designer.cs">
+      <DependentUpon>TabLogConfigProfilesControl.cs</DependentUpon>
     </Compile>
     <Compile Include="ToolClasses\ActivityExportHelper.cs" />
     <Compile Include="ToolClasses\GroupSummaryHelper.cs" />
@@ -507,26 +503,8 @@
     <EmbeddedResource Include="PresentationClasses\Activities\QuizUnitedData\Filter.resx">
       <DependentUpon>Filter.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationClasses\Activities\NavigationData\ContainerControl.resx">
-      <DependentUpon>ContainerControl.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PresentationClasses\Activities\NavigationData\TotalControl.resx">
-      <DependentUpon>TotalControl.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PresentationClasses\Activities\NavigationData\GroupControl.resx">
-      <DependentUpon>GroupControl.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="PresentationClasses\Activities\RawData\Filter.resx">
       <DependentUpon>Filter.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PresentationClasses\Activities\NavigationData\GroupFilter.resx">
-      <DependentUpon>GroupFilter.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PresentationClasses\Activities\NavigationData\UserFilter.resx">
-      <DependentUpon>UserFilter.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationClasses\Activities\MainData\GroupFilter.resx">
       <DependentUpon>GroupFilter.cs</DependentUpon>
@@ -584,6 +562,15 @@
     <EmbeddedResource Include="PresentationClasses\InactiveUsers\InactiveUsersFilter.resx">
       <DependentUpon>InactiveUsersFilter.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\LinkConfigProfiles\FormEditProfile.resx">
+      <DependentUpon>FormEditProfile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\LinkConfigProfiles\LinkConfigProfilesManagerControl.resx">
+      <DependentUpon>LinkConfigProfilesManagerControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\LinkConfigProfiles\ProfileControl.resx">
+      <DependentUpon>ProfileControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationClasses\QBuilder\QPagesFilter.resx">
       <DependentUpon>QPagesFilter.cs</DependentUpon>
     </EmbeddedResource>
@@ -608,6 +595,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="TabPages\TabLogConfigProfilesControl.resx">
+      <DependentUpon>TabLogConfigProfilesControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TabPages\TabUtilitiesControl.resx">
       <DependentUpon>TabUtilitiesControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -651,11 +641,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
-    <None Include="Resources\EditTicker.png" />
+    <None Include="Resources\EditButton.png" />
+    <None Include="Resources\LinkConfigProfilesSave.png" />
+    <None Include="Resources\LinkConfigProfilesDelete.png" />
+    <None Include="Resources\LinkConfigProfilesAdd.png" />
     <None Include="Resources\Url.png" />
     <None Include="Resources\DeleteButton.png" />
-    <None Include="Resources\ExportTicker.png" />
-    <None Include="Resources\ImportTicker.png" />
     <None Include="Resources\NudgeDown.png" />
     <None Include="Resources\NudgeUp.png" />
     <None Include="Resources\ExportGroup.png" />

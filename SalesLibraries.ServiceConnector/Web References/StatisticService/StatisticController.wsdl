@@ -80,42 +80,6 @@
           <xsd:element name="totals" type="xsd:int" />
         </xsd:all>
       </xsd:complexType>
-      <xsd:complexType name="NavigationUserReportModelArray">
-        <xsd:complexContent mixed="false">
-          <xsd:restriction base="soap-enc:Array">
-            <xsd:attribute wsdl:arrayType="tns:NavigationUserReportModel[]" ref="soap-enc:arrayType" />
-          </xsd:restriction>
-        </xsd:complexContent>
-      </xsd:complexType>
-      <xsd:complexType name="NavigationUserReportModel">
-        <xsd:all>
-          <xsd:element name="firstName" type="xsd:string" />
-          <xsd:element name="lastName" type="xsd:string" />
-          <xsd:element name="group" type="xsd:string" />
-          <xsd:element name="groupUserCount" type="xsd:int" />
-          <xsd:element name="userTotal" type="xsd:int" />
-          <xsd:element name="groupTotal" type="xsd:int" />
-          <xsd:element name="userLibraries" type="xsd:int" />
-          <xsd:element name="groupLibraries" type="xsd:int" />
-          <xsd:element name="userPages" type="xsd:int" />
-          <xsd:element name="groupPages" type="xsd:int" />
-        </xsd:all>
-      </xsd:complexType>
-      <xsd:complexType name="NavigationGroupReportModelArray">
-        <xsd:complexContent mixed="false">
-          <xsd:restriction base="soap-enc:Array">
-            <xsd:attribute wsdl:arrayType="tns:NavigationGroupReportModel[]" ref="soap-enc:arrayType" />
-          </xsd:restriction>
-        </xsd:complexContent>
-      </xsd:complexType>
-      <xsd:complexType name="NavigationGroupReportModel">
-        <xsd:all>
-          <xsd:element name="name" type="xsd:string" />
-          <xsd:element name="pages" type="xsd:int" />
-          <xsd:element name="libs" type="xsd:int" />
-          <xsd:element name="totals" type="xsd:int" />
-        </xsd:all>
-      </xsd:complexType>
       <xsd:complexType name="AccessReportModelArray">
         <xsd:complexContent mixed="false">
           <xsd:restriction base="soap-enc:Array">
@@ -229,22 +193,6 @@
   <wsdl:message name="getMainGroupReportResponse">
     <wsdl:part name="return" type="tns:MainGroupReportModelArray" />
   </wsdl:message>
-  <wsdl:message name="getNavigationUserReportRequest">
-    <wsdl:part name="sessionKey" type="xsd:string" />
-    <wsdl:part name="dateStart" type="xsd:string" />
-    <wsdl:part name="dateEnd" type="xsd:string" />
-  </wsdl:message>
-  <wsdl:message name="getNavigationUserReportResponse">
-    <wsdl:part name="return" type="tns:NavigationUserReportModelArray" />
-  </wsdl:message>
-  <wsdl:message name="getNavigationGroupReportRequest">
-    <wsdl:part name="sessionKey" type="xsd:string" />
-    <wsdl:part name="dateStart" type="xsd:string" />
-    <wsdl:part name="dateEnd" type="xsd:string" />
-  </wsdl:message>
-  <wsdl:message name="getNavigationGroupReportResponse">
-    <wsdl:part name="return" type="tns:NavigationGroupReportModelArray" />
-  </wsdl:message>
   <wsdl:message name="getAccessReportRequest">
     <wsdl:part name="sessionKey" type="xsd:string" />
     <wsdl:part name="dateStart" type="xsd:string" />
@@ -309,18 +257,6 @@
       <wsdl:input message="tns:getMainGroupReportRequest" />
       <wsdl:output message="tns:getMainGroupReportResponse" />
     </wsdl:operation>
-    <wsdl:operation name="getNavigationUserReport">
-      <wsdl:documentation>
-      </wsdl:documentation>
-      <wsdl:input message="tns:getNavigationUserReportRequest" />
-      <wsdl:output message="tns:getNavigationUserReportResponse" />
-    </wsdl:operation>
-    <wsdl:operation name="getNavigationGroupReport">
-      <wsdl:documentation>
-      </wsdl:documentation>
-      <wsdl:input message="tns:getNavigationGroupReportRequest" />
-      <wsdl:output message="tns:getNavigationGroupReportResponse" />
-    </wsdl:operation>
     <wsdl:operation name="getAccessReport">
       <wsdl:documentation>
       </wsdl:documentation>
@@ -380,24 +316,6 @@
     </wsdl:operation>
     <wsdl:operation name="getMainGroupReport">
       <soap:operation soapAction="urn:StatisticControllerwsdl#getMainGroupReport" style="rpc" />
-      <wsdl:input>
-        <soap:body use="encoded" namespace="urn:StatisticControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="encoded" namespace="urn:StatisticControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="getNavigationUserReport">
-      <soap:operation soapAction="urn:StatisticControllerwsdl#getNavigationUserReport" style="rpc" />
-      <wsdl:input>
-        <soap:body use="encoded" namespace="urn:StatisticControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="encoded" namespace="urn:StatisticControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="getNavigationGroupReport">
-      <soap:operation soapAction="urn:StatisticControllerwsdl#getNavigationGroupReport" style="rpc" />
       <wsdl:input>
         <soap:body use="encoded" namespace="urn:StatisticControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
       </wsdl:input>

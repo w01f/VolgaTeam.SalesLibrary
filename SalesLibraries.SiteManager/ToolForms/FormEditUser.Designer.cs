@@ -193,7 +193,7 @@
 			this.gridControlLibraries.Name = "gridControlLibraries";
 			this.gridControlLibraries.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemCheckEditLibrary});
-			this.gridControlLibraries.Size = new System.Drawing.Size(375, 495);
+			this.gridControlLibraries.Size = new System.Drawing.Size(371, 492);
 			this.gridControlLibraries.TabIndex = 0;
 			this.gridControlLibraries.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewLibraries,
@@ -307,7 +307,7 @@
 			this.textEditLogin.Properties.AppearanceDisabled.ForeColor = System.Drawing.Color.Black;
 			this.textEditLogin.Properties.AppearanceDisabled.Options.UseForeColor = true;
 			this.textEditLogin.Properties.NullText = "Type...";
-			this.textEditLogin.Size = new System.Drawing.Size(251, 22);
+			this.textEditLogin.Size = new System.Drawing.Size(247, 22);
 			this.textEditLogin.StyleController = this.styleController;
 			this.textEditLogin.TabIndex = 1;
 			this.textEditLogin.Validating += new System.ComponentModel.CancelEventHandler(this.textEdit_Validating);
@@ -336,7 +336,7 @@
 			this.textEditFirstName.Properties.Appearance.Options.UseBackColor = true;
 			this.textEditFirstName.Properties.Appearance.Options.UseForeColor = true;
 			this.textEditFirstName.Properties.NullText = "Type...";
-			this.textEditFirstName.Size = new System.Drawing.Size(251, 22);
+			this.textEditFirstName.Size = new System.Drawing.Size(247, 22);
 			this.textEditFirstName.StyleController = this.styleController;
 			this.textEditFirstName.TabIndex = 3;
 			this.textEditFirstName.Validating += new System.ComponentModel.CancelEventHandler(this.textEdit_Validating);
@@ -354,7 +354,7 @@
 			this.textEditLastName.Properties.Appearance.Options.UseBackColor = true;
 			this.textEditLastName.Properties.Appearance.Options.UseForeColor = true;
 			this.textEditLastName.Properties.NullText = "Type...";
-			this.textEditLastName.Size = new System.Drawing.Size(251, 22);
+			this.textEditLastName.Size = new System.Drawing.Size(247, 22);
 			this.textEditLastName.StyleController = this.styleController;
 			this.textEditLastName.TabIndex = 5;
 			this.textEditLastName.Validating += new System.ComponentModel.CancelEventHandler(this.textEdit_Validating);
@@ -385,7 +385,7 @@
 			this.textEditEmail.Properties.Mask.EditMask = "(\\w|[\\.\\-])+@(\\w|[\\-]+\\.)*(\\w|[\\-]){2,63}\\.[a-zA-Z]{2,4}";
 			this.textEditEmail.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
 			this.textEditEmail.Properties.NullText = "Type...";
-			this.textEditEmail.Size = new System.Drawing.Size(251, 22);
+			this.textEditEmail.Size = new System.Drawing.Size(247, 22);
 			this.textEditEmail.StyleController = this.styleController;
 			this.textEditEmail.TabIndex = 7;
 			this.textEditEmail.Validating += new System.ComponentModel.CancelEventHandler(this.textEditEmail_Validating);
@@ -473,7 +473,7 @@
 			this.buttonEditPassword.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Ellipsis, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, null, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "Generate new password", null, null, true)});
 			this.buttonEditPassword.Properties.NullText = "Type...";
-			this.buttonEditPassword.Size = new System.Drawing.Size(251, 22);
+			this.buttonEditPassword.Size = new System.Drawing.Size(247, 22);
 			this.buttonEditPassword.StyleController = this.styleController;
 			this.buttonEditPassword.TabIndex = 13;
 			this.buttonEditPassword.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.buttonEditPassword_ButtonClick);
@@ -493,7 +493,7 @@
 			this.textEditEmailConfirm.Properties.Mask.EditMask = "(\\w|[\\.\\-])+@(\\w|[\\-]+\\.)*(\\w|[\\-]){2,63}\\.[a-zA-Z]{2,4}";
 			this.textEditEmailConfirm.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
 			this.textEditEmailConfirm.Properties.NullText = "Type...";
-			this.textEditEmailConfirm.Size = new System.Drawing.Size(251, 22);
+			this.textEditEmailConfirm.Size = new System.Drawing.Size(247, 22);
 			this.textEditEmailConfirm.StyleController = this.styleController;
 			this.textEditEmailConfirm.TabIndex = 15;
 			this.textEditEmailConfirm.Validating += new System.ComponentModel.CancelEventHandler(this.textEditEmail_Validating);
@@ -511,7 +511,7 @@
 			this.textEditPhone.Properties.Appearance.Options.UseBackColor = true;
 			this.textEditPhone.Properties.Appearance.Options.UseForeColor = true;
 			this.textEditPhone.Properties.NullText = "Type...";
-			this.textEditPhone.Size = new System.Drawing.Size(251, 22);
+			this.textEditPhone.Size = new System.Drawing.Size(247, 22);
 			this.textEditPhone.StyleController = this.styleController;
 			this.textEditPhone.TabIndex = 17;
 			this.textEditPhone.Validating += new System.ComponentModel.CancelEventHandler(this.textEdit_Validating);
@@ -569,7 +569,7 @@
 			this.xtraTabPageUser.Controls.Add(this.laEmail);
 			this.xtraTabPageUser.Controls.Add(this.textEditLastName);
 			this.xtraTabPageUser.Name = "xtraTabPageUser";
-			this.xtraTabPageUser.Size = new System.Drawing.Size(375, 541);
+			this.xtraTabPageUser.Size = new System.Drawing.Size(371, 538);
 			this.xtraTabPageUser.Text = "User";
 			// 
 			// laPhone
@@ -598,10 +598,10 @@
 			// 
 			this.xtraTabPageGroups.Appearance.PageClient.ForeColor = System.Drawing.Color.Black;
 			this.xtraTabPageGroups.Appearance.PageClient.Options.UseForeColor = true;
-			this.xtraTabPageGroups.Controls.Add(this.pnAssignedGroups);
 			this.xtraTabPageGroups.Controls.Add(this.gridControlGroups);
+			this.xtraTabPageGroups.Controls.Add(this.pnAssignedGroups);
 			this.xtraTabPageGroups.Name = "xtraTabPageGroups";
-			this.xtraTabPageGroups.Size = new System.Drawing.Size(375, 541);
+			this.xtraTabPageGroups.Size = new System.Drawing.Size(371, 538);
 			this.xtraTabPageGroups.Text = "Groups";
 			// 
 			// pnAssignedGroups
@@ -612,7 +612,7 @@
 			this.pnAssignedGroups.ForeColor = System.Drawing.Color.Black;
 			this.pnAssignedGroups.Location = new System.Drawing.Point(0, 0);
 			this.pnAssignedGroups.Name = "pnAssignedGroups";
-			this.pnAssignedGroups.Size = new System.Drawing.Size(375, 46);
+			this.pnAssignedGroups.Size = new System.Drawing.Size(371, 46);
 			this.pnAssignedGroups.TabIndex = 2;
 			// 
 			// buttonXGroupsClearAll
@@ -622,7 +622,7 @@
 			this.buttonXGroupsClearAll.CausesValidation = false;
 			this.buttonXGroupsClearAll.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXGroupsClearAll.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.buttonXGroupsClearAll.Location = new System.Drawing.Point(256, 7);
+			this.buttonXGroupsClearAll.Location = new System.Drawing.Point(252, 7);
 			this.buttonXGroupsClearAll.Name = "buttonXGroupsClearAll";
 			this.buttonXGroupsClearAll.Size = new System.Drawing.Size(90, 33);
 			this.buttonXGroupsClearAll.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -648,17 +648,17 @@
 			// 
 			// gridControlGroups
 			// 
-			this.gridControlGroups.Dock = System.Windows.Forms.DockStyle.Bottom;
+			this.gridControlGroups.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.gridControlGroups.EmbeddedNavigator.Appearance.BackColor = System.Drawing.Color.White;
 			this.gridControlGroups.EmbeddedNavigator.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.gridControlGroups.EmbeddedNavigator.Appearance.Options.UseBackColor = true;
 			this.gridControlGroups.EmbeddedNavigator.Appearance.Options.UseForeColor = true;
-			this.gridControlGroups.Location = new System.Drawing.Point(0, 44);
+			this.gridControlGroups.Location = new System.Drawing.Point(0, 46);
 			this.gridControlGroups.MainView = this.gridViewGroups;
 			this.gridControlGroups.Name = "gridControlGroups";
 			this.gridControlGroups.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemCheckEditGroup});
-			this.gridControlGroups.Size = new System.Drawing.Size(375, 497);
+			this.gridControlGroups.Size = new System.Drawing.Size(371, 492);
 			this.gridControlGroups.TabIndex = 1;
 			this.gridControlGroups.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewGroups});
@@ -743,7 +743,7 @@
 			this.xtraTabPageLibraries.Controls.Add(this.gridControlLibraries);
 			this.xtraTabPageLibraries.Controls.Add(this.pnAssignedLibraries);
 			this.xtraTabPageLibraries.Name = "xtraTabPageLibraries";
-			this.xtraTabPageLibraries.Size = new System.Drawing.Size(375, 541);
+			this.xtraTabPageLibraries.Size = new System.Drawing.Size(371, 538);
 			this.xtraTabPageLibraries.Text = "Assigned Libraries";
 			// 
 			// pnAssignedLibraries
@@ -754,7 +754,7 @@
 			this.pnAssignedLibraries.ForeColor = System.Drawing.Color.Black;
 			this.pnAssignedLibraries.Location = new System.Drawing.Point(0, 0);
 			this.pnAssignedLibraries.Name = "pnAssignedLibraries";
-			this.pnAssignedLibraries.Size = new System.Drawing.Size(375, 46);
+			this.pnAssignedLibraries.Size = new System.Drawing.Size(371, 46);
 			this.pnAssignedLibraries.TabIndex = 1;
 			// 
 			// buttonXLibrariesClearAll
@@ -764,7 +764,7 @@
 			this.buttonXLibrariesClearAll.CausesValidation = false;
 			this.buttonXLibrariesClearAll.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXLibrariesClearAll.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.buttonXLibrariesClearAll.Location = new System.Drawing.Point(256, 7);
+			this.buttonXLibrariesClearAll.Location = new System.Drawing.Point(252, 7);
 			this.buttonXLibrariesClearAll.Name = "buttonXLibrariesClearAll";
 			this.buttonXLibrariesClearAll.Size = new System.Drawing.Size(90, 33);
 			this.buttonXLibrariesClearAll.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -798,6 +798,7 @@
 			this.Controls.Add(this.buttonXSave);
 			this.DoubleBuffered = true;
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.ForeColor = System.Drawing.Color.Black;
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;

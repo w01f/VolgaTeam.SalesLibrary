@@ -145,19 +145,22 @@
   <data name="Url" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Url.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ExportTicker" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ExportTicker.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="NudgeDown" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\NudgeDown.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="RefreshUsers" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\RefreshUsers.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ImportTicker" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ImportTicker.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="EditButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\EditButton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="EditTicker" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\EditTicker.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="LinkConfigProfilesAdd" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LinkConfigProfilesAdd.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LinkConfigProfilesDelete" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LinkConfigProfilesDelete.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LinkConfigProfilesSave" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LinkConfigProfilesSave.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

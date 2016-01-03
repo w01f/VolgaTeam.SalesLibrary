@@ -94,5 +94,16 @@ namespace SalesLibraries.ServiceConnector.Properties {
                 return ((string)(this["SalesLibraries_ServiceConnector_StatisticService_StatisticControllerService"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost/SalesLibraries/linkConfigProfile/quote?ws=1")]
+        public string SalesLibraries_ServiceConnector_LinkConfigProfileService_LinkConfigProfileControllerService {
+            get {
+                return ((string)(this["SalesLibraries_ServiceConnector_LinkConfigProfileService_LinkConfigProfileControl" +
+                    "lerService"]));
+            }
+        }
     }
 }
