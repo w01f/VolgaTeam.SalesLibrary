@@ -28,8 +28,7 @@
 			groupPage.find('.menu-item').off('click').on('click', function (e)
 			{
 				var data = $(this).find('.service-data');
-				var activityData = $.parseJSON(data.find('.activity-data').text());
-				that.trackActivity(activityData);
+				that.trackActivity(data);
 
 				var hasPageContent = data.find('.has-page-content').length > 0;
 				var samePage = data.find('.same-page').length > 0;

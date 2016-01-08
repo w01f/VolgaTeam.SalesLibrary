@@ -29,6 +29,7 @@
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/cubeportfolio/js/jquery.cubeportfolio.min.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/common/search-processor.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/common/link-viewer-data.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/common/logger.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/phone/login.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/phone/data-table.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/phone/wallbin-manager.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
