@@ -44,7 +44,7 @@ namespace SalesLibraries.Common.Helpers
 		private void SaveStorage()
 		{
 			_activityStorage.Save(_activityFile.LocalPath);
-			_activityFile.Upload();
+			//_activityFile.Upload();
 		}
 
 		public void AddActivity(UserActivity activity)
