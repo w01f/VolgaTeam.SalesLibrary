@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using SalesLibraries.Common.Helpers;
 
 namespace SalesLibraries.Common.Objects.Graphics
 {
@@ -33,10 +34,9 @@ namespace SalesLibraries.Common.Objects.Graphics
 					if (favoritesImagesGroup == null) return;
 					favoritesImagesGroup.AddImage<T>(linkImageSource.FilePath);
 				};
-				if (linkImageSource.Index > 0 && linkImageSource.Image != null)
-					Images.Add(linkImageSource);
+				Images.Add(linkImageSource);
 			}
-			Images.Sort((x, y) => x.Index.CompareTo(y.Index));
+			Images.Sort((x, y) => WinAPIHelper.StrCmpLogicalW(x.FileName, y.FileName));
 			if (OnDataChanged != null)
 				OnDataChanged(this, EventArgs.Empty);
 		}

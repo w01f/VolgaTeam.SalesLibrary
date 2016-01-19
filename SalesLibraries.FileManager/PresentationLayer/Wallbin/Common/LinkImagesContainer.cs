@@ -1,13 +1,10 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
-using DevExpress.Utils;
-using DevExpress.XtraGrid;
-using DevExpress.XtraGrid.Views.Base;
-using DevExpress.XtraGrid.Views.Layout;
-using DevExpress.XtraGrid.Views.Layout.ViewInfo;
 using DevExpress.XtraTab;
+using Manina.Windows.Forms;
 using SalesLibraries.Common.Objects.Graphics;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Common
@@ -17,98 +14,93 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Common
 	public sealed partial class LinkImagesContainer : XtraTabPage
 	{
 		private readonly LinkImageGroup _parent;
-		private LayoutViewHitInfo _hitInfo;
-		private bool _allowToSave;
+		private ImageListView.HitInfo _menuHitInfo;
 
 		public event EventHandler<LinkImageEventArgs> SelectedImageChanged;
 		public event EventHandler<EventArgs> OnImageDoubleClick;
+
+		protected LinkImageSource SelectedImageSource
+		{
+			get
+			{
+				return imageListView.SelectedItems.Count > 0 ?
+					imageListView.SelectedItems.Select(item => (LinkImageSource)item.Tag).FirstOrDefault() :
+					null;
+			}
+		}
 
 		public LinkImagesContainer(LinkImageGroup parent)
 		{
 			InitializeComponent();
 			_parent = parent;
-			_allowToSave = false;
 			Text = _parent.Name;
-			gridControlGallery.DataSource = _parent.Images;
-			_parent.OnDataChanged += (o, e) =>
-			{
-				_allowToSave = false;
-				gridControlGallery.DataSource = _parent.Images;
-				layoutViewGallery.RefreshData();
-				_allowToSave = true;
-			};
-			_allowToSave = true;
-			gridControlGallery.MouseUp += gridControlGallery_MouseUp;
-			gridControlGallery.MouseMove += gridControlGallery_MouseMove;
-			layoutViewGallery.FocusedRowChanged += layoutViewGalery_FocusedRowChanged;
-			layoutViewGallery.Click += gridViewGallery_Click;
-			layoutViewGallery.DoubleClick += gridViewGallery_DoubleClick;
+			LoadImages();
+			_parent.OnDataChanged += (o, e) => LoadImages();
+			imageListView.ItemClick+=OnGalleryItemClick;
+			imageListView.ItemDoubleClick += OnGalleryItemDoubleClick;
+			imageListView.ItemHover += OnGalleryItemHover;
+			imageListView.MouseDown += OnGalleryMouseDown;
+			imageListView.MouseMove += OnGalleryMouseMove;
 		}
 
-		private void gridControlGallery_MouseMove(object sender, MouseEventArgs e)
+		private void LoadImages()
 		{
-			layoutViewGallery.Focus();
+			imageListView.Items.Clear();
+			imageListView.Items.AddRange(_parent.Images.Select(ims => new ImageListViewItem(ims.FilePath, ims.FileName) { Tag = ims }).ToArray());
 		}
 
-		private void layoutViewGalery_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
+		private void OnGalleryItemClick(object sender, ItemClickEventArgs e)
 		{
-			if (!_allowToSave) return;
-			var imageSource = layoutViewGallery.GetFocusedRow() as LinkImageSource;
-			if (imageSource == null) return;
-			if (e.PrevFocusedRowHandle == GridControl.InvalidRowHandle) return;
+			imageListView.ClearSelection();
+			e.Item.Selected = true;
+			var linkImage = SelectedImageSource;
 			if (SelectedImageChanged != null)
-				SelectedImageChanged(this, new LinkImageEventArgs { Image = imageSource.Image, Text = imageSource.FileName });
+				SelectedImageChanged(this, new LinkImageEventArgs { Image = Image.FromFile(linkImage.FilePath), Text = linkImage.FileName });
 		}
 
-		private void gridViewGallery_Click(object sender, EventArgs e)
+		private void OnGalleryItemDoubleClick(object sender, ItemClickEventArgs e)
 		{
-			var pt = gridControlGallery.PointToClient(MousePosition);
-			var hitInfo = layoutViewGallery.CalcHitInfo(pt);
-			if (hitInfo.RowHandle == layoutViewGallery.FocusedRowHandle)
-				layoutViewGalery_FocusedRowChanged(sender, new FocusedRowChangedEventArgs(hitInfo.RowHandle, hitInfo.RowHandle));
-		}
-
-		private void gridViewGallery_DoubleClick(object sender, EventArgs e)
-		{
-			var pt = gridControlGallery.PointToClient(MousePosition);
-			if (!layoutViewGallery.CalcHitInfo(pt).InField) return;
-			gridViewGallery_Click(sender, e);
+			OnGalleryItemClick(sender, e);
 			if (OnImageDoubleClick != null)
 				OnImageDoubleClick(this, EventArgs.Empty);
 		}
 
-		private void gridControlGallery_MouseUp(object sender, MouseEventArgs e)
+		private void OnGalleryItemHover(object sender, ItemHoverEventArgs e)
 		{
-			_hitInfo = layoutViewGallery.CalcHitInfo(e.Location);
-			if (_hitInfo.InField && e.Button == MouseButtons.Right && !(_parent is FavoriteImageGroup))
-				contextMenuStrip.Show(MousePosition);
+			toolTip.RemoveAll();
+			var sourceItem = e.Item != null ? e.Item.Tag as LinkImageSource : null;
+			if (sourceItem == null) return;
+			var toolTipText = sourceItem.FileName;
+			toolTip.SetToolTip(imageListView, toolTipText);
+		}
+
+		private void OnGalleryMouseMove(object sender, MouseEventArgs e)
+		{
+			imageListView.Focus();
+		}
+
+		private void OnGalleryMouseDown(object sender, MouseEventArgs e)
+		{
+			_menuHitInfo = null;
+			ImageListView.HitInfo hitInfo;
+			imageListView.HitTest(new Point(e.X, e.Y), out hitInfo);
+			if (ModifierKeys != Keys.None) return;
+			if (!hitInfo.InItemArea) return;
+			switch (e.Button)
+			{
+				case MouseButtons.Right:
+					_menuHitInfo = hitInfo;
+					contextMenuStrip.Show(MousePosition);
+					break;
+			}
 		}
 
 		private void addToFavoritesToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			if (_hitInfo == null) return;
-			var selectedImage = layoutViewGallery.GetRow(_hitInfo.RowHandle) as LinkImageSource;
-			if (selectedImage == null) return;
-			selectedImage.CopyToFavs();
-		}
-
-		private void toolTipController_GetActiveObjectInfo(object sender, ToolTipControllerGetActiveObjectInfoEventArgs e)
-		{
-			ToolTipControlInfo info = null;
-			try
-			{
-				var view = gridControlGallery.GetViewAt(e.ControlMousePosition) as LayoutView;
-				if (view == null) return;
-				var hi = view.CalcHitInfo(e.ControlMousePosition);
-				if (!hi.InFieldValue) return;
-				var imageSource = view.GetRow(hi.RowHandle) as LinkImageSource;
-				if (imageSource == null) return;
-				info = new ToolTipControlInfo(new CellToolTipInfo(hi.RowHandle, hi.Column, "cell"), imageSource.FileName);
-			}
-			finally
-			{
-				e.Info = info;
-			}
+			if (_menuHitInfo == null) return;
+			var imageSource = imageListView.Items[_menuHitInfo.ItemIndex].Tag as LinkImageSource;
+			if (imageSource == null) return;
+			imageSource.CopyToFavs();
 		}
 	}
 
