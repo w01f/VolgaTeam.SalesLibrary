@@ -197,6 +197,7 @@ namespace SalesLibraries.Common.OfficeInterops
 			{
 				MessageFilter.Register();
 				var presentation = PowerPointObject.Presentations.Open(sourceFilePath, WithWindow: MsoTriState.msoFalse);
+				presentation.Final = false;
 				presentation.Export(destinationFolderPath, "PNG");
 				presentation.Close();
 				Utils.ReleaseComObject(presentation);

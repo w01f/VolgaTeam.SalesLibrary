@@ -12,6 +12,7 @@ using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers;
 using SalesLibraries.Common.Configuration;
+using SalesLibraries.Common.Extensions;
 using SalesLibraries.ServiceConnector.WallbinContentService;
 using Font = SalesLibraries.ServiceConnector.WallbinContentService.Font;
 using LineBreak = SalesLibraries.ServiceConnector.WallbinContentService.LineBreak;
@@ -138,12 +139,12 @@ namespace SalesLibraries.FileManager.Business.Services
 			target.libraryId = source.Page.Library.ExtId.ToString();
 			target.name = source.Name;
 			target.columnOrder = source.ColumnOrder;
-			target.rowOrder = (int)source.RowOrder;
-			target.windowBackColor = ColorTranslator.ToHtml(source.Settings.BackgroundWindowColor);
-			target.windowForeColor = ColorTranslator.ToHtml(source.Settings.ForeWindowColor);
-			target.headerBackColor = ColorTranslator.ToHtml(source.Settings.BackgroundHeaderColor);
-			target.headerForeColor = ColorTranslator.ToHtml(source.Settings.ForeHeaderColor);
-			target.borderColor = ColorTranslator.ToHtml(source.Settings.BorderColor);
+			target.rowOrder = source.RowOrder;
+			target.windowBackColor = source.Settings.BackgroundWindowColor.ToHex();
+			target.windowForeColor = source.Settings.ForeWindowColor.ToHex();
+			target.headerBackColor = source.Settings.BackgroundHeaderColor.ToHex();
+			target.headerForeColor = source.Settings.ForeHeaderColor.ToHex();
+			target.borderColor = source.Settings.BorderColor.ToHex();
 			target.headerAlignment = source.Settings.HeaderAlignment.ToString().ToLower();
 			target.enableWidget = source.Widget.Enabled;
 			target.widget = Convert.ToBase64String((byte[])imageConverter.ConvertTo(source.Widget.Image, typeof(byte[])));
@@ -163,6 +164,7 @@ namespace SalesLibraries.FileManager.Business.Services
 			#region Files
 			var links = new List<LibraryLink>();
 			foreach (var sourceLink in source.AllLinks.Where(link =>
+				!(link is LibraryFileLink && ((LibraryFileLink)link).IsDead) &&
 				link.Type != FileTypes.Network &&
 				!link.Security.IsForbidden &&
 				(!link.Security.IsRestricted || !String.IsNullOrEmpty(link.Security.AssignedUsers) || !String.IsNullOrEmpty(link.Security.DeniedUsers))))
@@ -282,7 +284,7 @@ namespace SalesLibraries.FileManager.Business.Services
 				var objectSource = (LibraryObjectLinkSettings)source;
 				target.hoverNote = objectSource.HoverNote;
 				target.isBold = objectSource.IsBold;
-				target.foreColor = ColorTranslator.ToHtml(source.ForeColor.HasValue ? source.ForeColor.Value : Color.Black);
+				target.foreColor = (source.ForeColor.HasValue ? source.ForeColor.Value : Color.Black).ToHex();
 				target.isSpecialFormat = objectSource.IsSpecialFormat;
 				if (objectSource.IsSpecialFormat)
 				{
@@ -316,7 +318,7 @@ namespace SalesLibraries.FileManager.Business.Services
 			LineBreakSettings source)
 		{
 			target.note = source.Note;
-			target.foreColor = ColorTranslator.ToHtml(source.ForeColor.HasValue ? source.ForeColor.Value : Color.Black);
+			target.foreColor = (source.ForeColor.HasValue ? source.ForeColor.Value : Color.Black).ToHex();
 			target.font = new Font();
 			target.font.ImportData(source.Font);
 			target.dateModify = DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss tt");
@@ -331,8 +333,8 @@ namespace SalesLibraries.FileManager.Business.Services
 			target.libraryId = source.Page.Library.ExtId.ToString();
 			target.name = source.Settings.Text;
 			target.order = source.ColumnOrder;
-			target.backColor = ColorTranslator.ToHtml(source.Settings.BackgroundColor);
-			target.foreColor = ColorTranslator.ToHtml(source.Settings.ForeColor);
+			target.backColor = source.Settings.BackgroundColor.ToHex();
+			target.foreColor = source.Settings.ForeColor.ToHex();
 			target.showText = source.Settings.ShowText;
 			target.alignment = source.Settings.HeaderAlignment.ToString().ToLower();
 			target.enableWidget = source.Widget.Enabled;
@@ -421,7 +423,7 @@ namespace SalesLibraries.FileManager.Business.Services
 			target.showText = source.ShowText;
 			target.imageAlignment = source.ImageAlignement.ToString().ToLower();
 			target.text = source.Text;
-			target.foreColor = ColorTranslator.ToHtml(source.ForeColor);
+			target.foreColor = source.ForeColor.ToHex();
 			target.font = new Font();
 			target.font.ImportData(source.Font);
 			target.dateModify = DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss tt");

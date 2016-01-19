@@ -32,7 +32,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Video
 		public void LoadLibrary(LibraryContext libraryContext)
 		{
 			_libraryContext = libraryContext;
-			LoadVideoInfoInternal();
 		}
 
 		public void LoadVideoInfo()

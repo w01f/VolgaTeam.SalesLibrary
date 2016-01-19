@@ -88,6 +88,7 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 						processInteropped = powerPointProcessor.DoTimeLimitedAction(() =>
 						{
 							presentation = powerPointProcessor.PowerPointObject.Presentations.Open(previewContainer.SourcePath, WithWindow: MsoTriState.msoFalse);
+							presentation.Final = false;
 						});
 						if (processInteropped || presentation == null) continue;
 
@@ -145,6 +146,8 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 									processInteropped = powerPointProcessor.DoTimeLimitedAction(() =>
 									{
 										var singleSlidePresentation = powerPointProcessor.PowerPointObject.Presentations.Add(MsoTriState.msoFalse);
+										singleSlidePresentation.PageSetup.SlideWidth = presentation.PageSetup.SlideWidth;
+										singleSlidePresentation.PageSetup.SlideHeight = presentation.PageSetup.SlideHeight;
 										powerPointProcessor.CopyPasteSlide(slide, singleSlidePresentation);
 										singleSlidePresentation.SaveCopyAs(Path.Combine(pptxDestination, String.Format("Slide{0}.{1}", i, "pptx")));
 										singleSlidePresentation.Close();
@@ -179,8 +182,8 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 						{
 							processInteropped = powerPointProcessor.DoTimeLimitedAction(() => 
 								presentation.ExportAsFixedFormat(
-									Path.Combine(pdfDestination, 
-									Path.ChangeExtension(Path.GetFileName(powerPointContainer.SourcePath), "pdf")), 
+									Path.Combine(pdfDestination,
+										Path.ChangeExtension(Path.GetFileName(powerPointContainer.SourcePath), "pdf")),
 									PpFixedFormatType.ppFixedFormatTypePDF));
 							if (processInteropped)
 								continue;

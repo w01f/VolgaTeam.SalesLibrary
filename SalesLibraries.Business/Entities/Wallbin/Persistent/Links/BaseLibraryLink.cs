@@ -159,7 +159,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 			get
 			{
 				if (Banner.Enable)
-					return Banner.ShowText ? Banner.Text : null;
+					return Banner.ShowText ? Banner.Text : String.Empty;
 				return Name;
 			}
 		}

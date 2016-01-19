@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Windows.Forms;
 using SalesLibraries.Common.DataState;
-using SalesLibraries.FileManager.Business.Synchronization;
 using SalesLibraries.FileManager.PresentationLayer.Video;
 
 namespace SalesLibraries.FileManager.Controllers
@@ -37,9 +35,15 @@ namespace SalesLibraries.FileManager.Controllers
 			if (!MainController.Instance.MainForm.pnContainer.Controls.Contains(_editor))
 				MainController.Instance.MainForm.pnContainer.Controls.Add(_editor);
 
-			_editor.LoadVideoInfo();
-
 			_editor.BringToFront();
+
+			if (NeedToUpdate)
+			{
+				NeedToUpdate = false;
+				OnLibraryChanged(this, EventArgs.Empty);
+			}
+
+			_editor.LoadVideoInfo();
 		}
 
 		public void ProcessChanges()
@@ -50,11 +54,14 @@ namespace SalesLibraries.FileManager.Controllers
 
 		public void OnLibraryChanged(object sender, EventArgs e)
 		{
+			if (!IsActive)
+			{
+				NeedToUpdate = true;
+				return;
+			}
 			var activeWallbin = MainController.Instance.WallbinViews.ActiveWallbin;
 			if (activeWallbin == null) return;
-			MainController.Instance.ProcessManager.RunInQueue("Loading Video...",
-					() => MainController.Instance.MainForm.Invoke(
-						new MethodInvoker(() => _editor.LoadLibrary(activeWallbin.DataStorage))));
+			_editor.LoadLibrary(activeWallbin.DataStorage);
 		}
 
 		private void OnVideoConvertClick(object sender, EventArgs eventArgs)

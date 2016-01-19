@@ -23,13 +23,14 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 		{
 			InitializeComponent();
 			_columnTitle = columnTitle;
-			LoadData();
 
 			xtraTabPageBanner.PageEnabled = MainController.Instance.Lists.Banners.MainFolder.ExistsLocal();
 			xtraTabPageWidget.PageEnabled = MainController.Instance.Lists.Widgets.MainFolder.ExistsLocal();
 
 			buttonEditFont.ButtonClick += EditorHelper.FontEdit_ButtonClick;
 			buttonEditFont.Click += EditorHelper.FontEdit_Click;
+
+			Load += OnFormLoad;
 
 			if ((base.CreateGraphics()).DpiX > 96)
 			{
@@ -48,6 +49,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 				xtraTabControlWindowProperties.AppearancePage.HeaderDisabled.Font = new Font(xtraTabControlWindowProperties.AppearancePage.HeaderDisabled.Font.FontFamily, xtraTabControlWindowProperties.AppearancePage.HeaderDisabled.Font.Size - 2, xtraTabControlWindowProperties.AppearancePage.HeaderDisabled.Font.Style);
 				xtraTabControlWindowProperties.AppearancePage.HeaderHotTracked.Font = new Font(xtraTabControlWindowProperties.AppearancePage.HeaderHotTracked.Font.FontFamily, xtraTabControlWindowProperties.AppearancePage.HeaderHotTracked.Font.Size - 2, xtraTabControlWindowProperties.AppearancePage.HeaderHotTracked.Font.Style);
 			}
+		}
+
+		private void OnFormLoad(object sender, EventArgs e)
+		{
+			LoadData();
 		}
 
 		private void LoadData()

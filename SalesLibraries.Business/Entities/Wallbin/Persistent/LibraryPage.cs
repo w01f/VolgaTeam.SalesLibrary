@@ -172,6 +172,19 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 			}
 		}
 
+		public IEnumerable<ColumnTitle> GetColumnTitles()
+		{
+			if (!ColumnTitles.Any())
+				for (int i = 0; i < ColumnsCount; i++)
+				{
+					var columnTitle = new ColumnTitle();
+					columnTitle.ColumnOrder = i;
+					columnTitle.Page = this;
+					ColumnTitles.Add(columnTitle);
+				}
+			return ColumnTitles;
+		}
+
 		public void AddFolder(int columnOrder)
 		{
 			var folder = new LibraryFolder();

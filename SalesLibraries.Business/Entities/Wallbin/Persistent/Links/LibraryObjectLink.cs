@@ -43,6 +43,8 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		{
 			get
 			{
+				if (Banner.Enable)
+					return base.DisplayNameWithoutNote;
 				return String.Format("{0}{1}",
 						DisplayNameWithoutNote,
 						!String.IsNullOrEmpty(Settings.Note) ? String.Format(" - {0}", Settings.Note) : String.Empty);

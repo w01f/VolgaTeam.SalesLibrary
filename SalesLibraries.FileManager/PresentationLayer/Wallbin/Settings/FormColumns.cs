@@ -171,7 +171,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 		{
 			var columnPage = xtraTabControlWindows.SelectedTabPage as ColumnSettings;
 			if (columnPage == null) return;
-			var columnTitle = _currentPage.ColumnTitles.ElementAtOrDefault(columnPage.ColumnOrder);
+			var columnTitle = _currentPage.GetColumnTitles().ElementAtOrDefault(columnPage.ColumnOrder);
 			using (var form = new FormColumnTitle(columnTitle))
 			{
 				if (form.ShowDialog(this) != DialogResult.OK) return;

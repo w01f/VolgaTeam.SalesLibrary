@@ -84,10 +84,13 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 						var sourceFileName = Path.GetFileName(wordContainer.SourcePath);
 						var sourceFilePath = wordContainer.SourcePath;
 						var document = wordProcessor.WordObject.Documents.Open(sourceFilePath);
+						document.Final = false;
 
 						var pdfFileName = Path.Combine(pdfDestination, Path.ChangeExtension(sourceFileName, "pdf"));
 						if (updatePdf)
+						{
 							document.ExportAsFixedFormat(pdfFileName, WdExportFormat.wdExportFormatPDF);
+						}
 
 						if (updatePng || updateThumbs)
 							PdfHelper.ExportPdf(pdfFileName, pngDestination, thumbsDestination);

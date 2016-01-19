@@ -236,8 +236,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 			_folderBoxes.Remove(folderBox);
 			Controls.Remove(folderBox);
 			folderBox.Dispose();
-			PageContainer.Page.Folders.RemoveItem(libraryFolder);
 			libraryFolder.Delete(PageContainer.Page.Library.Context);
+			PageContainer.Page.Folders.RemoveItem(libraryFolder);
 			UpdateFoldersSize();
 			OnFolderDataChanged(this, EventArgs.Empty);
 		}
