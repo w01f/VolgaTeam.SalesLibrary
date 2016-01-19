@@ -170,12 +170,7 @@
 						showAccordionFolder(folderContainer, folderId);
 						$.SalesPortal.LogHelper.write({
 							type: 'Library Window',
-							subType: 'Open Accordion',
-							data: {
-								Name: parameters.data.name,
-								File: parameters.data.fileName,
-								'Original Format': parameters.format
-							}
+							subType: 'Open Accordion'
 						});
 					}
 				});
