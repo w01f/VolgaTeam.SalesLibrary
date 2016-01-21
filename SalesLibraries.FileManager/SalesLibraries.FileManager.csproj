@@ -839,9 +839,7 @@
     <PostBuildEvent>copy “$(ProjectDir)bin\Debug\SalesLibraries*.dll” “d:\WorkingFiles\SalesDepot\Release\Site Admin.exe” /Y
 copy “$(ProjectDir)bin\Debug\Site Admin.exe” “d:\WorkingFiles\SalesDepot\Release\Site Admin.exe” /Y
 copy “$(ProjectDir)bin\Debug\Site Admin.exe.config” “d:\WorkingFiles\SalesDepot\Release\Site Admin.exe” /Y
-copy “$(ProjectDir)bin\Debug\Schema\*.*” “d:\WorkingFiles\SalesDepot\Release\Site Admin.exe\Schema” /Y
-copy “$(ProjectDir)bin\Debug\x64\*.*” “d:\WorkingFiles\SalesDepot\Release\Site Admin.exe\x64” /Y
-copy “$(ProjectDir)bin\Debug\x86\*.*” “d:\WorkingFiles\SalesDepot\Release\Site Admin.exe\x86” /Y</PostBuildEvent>
+copy “$(ProjectDir)bin\Debug\Schema\*.*” “d:\WorkingFiles\SalesDepot\Release\Site Admin.exe\Schema” /Y</PostBuildEvent>
   </PropertyGroup>
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.99.0\build\net451\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.99.0\build\net451\System.Data.SQLite.Core.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
