@@ -85,15 +85,19 @@
 				"render": cellRenderer
 			});
 			columnSettings.push({
-				"data": "rate.image",
+				"data": "rate",
 				"title": "Rating",
 				"width": "90px",
 				"class": "centered",
-				"render": function (data)
-				{
-					if (data != '')
-						return '<img src="' + data + '" style="height:16px">';
-					return '';
+				"orderDataType": "link-rate",
+				"render": {
+					_: function (data)
+					{
+						if (data.image != '')
+							return '<img src="' + data.image + '" style="height:16px">';
+						return '';
+					},
+					sort: 'value'
 				}
 			});
 			columnSettings.push({

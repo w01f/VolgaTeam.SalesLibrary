@@ -95,7 +95,7 @@
 						/** @var  $previewData GalleryPreviewData */
 						$previewData = $link->getPreviewData(false);
 						$this->pageTitle = Yii::app()->name . ' - Fullscreen Gallery';
-						$this->render('fullScreenGallery', array('previewData' => $previewData));
+						$this->render('fullscreenGallery', array('previewData' => $previewData));
 					}
 				}
 			}

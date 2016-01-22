@@ -82,13 +82,10 @@
 <!--Control Bar-->
 <div id="controls-wrapper" class="load-item">
 	<div id="controls">
-
 		<!--Slide captions displayed here-->
 		<div id="slidecaption"></div>
-
 		<!--Navigation-->
 		<ul id="slide-list"></ul>
-
 		<!--Thumb Tray button-->
 		<a id="tray-button"></a>
 	</div>

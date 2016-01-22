@@ -4,7 +4,7 @@
 	$.SalesPortal = $.SalesPortal || { };
 	$.SalesPortal.FileViewer = function (parameters, parentPageData)
 	{
-		var viewerData = new $.SalesPortal.SimpleViewerData($.parseJSON(parameters.data));
+		var viewerData = new $.SalesPortal.SimpleViewerData(parameters.data);
 
 		this.show = function ()
 		{

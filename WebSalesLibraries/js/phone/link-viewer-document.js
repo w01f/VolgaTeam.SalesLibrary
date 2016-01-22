@@ -5,7 +5,7 @@
 	var photoSwipeInstance = undefined;
 	$.SalesPortal.DocumentViewer = function (parameters, parentPageData)
 	{
-		var viewerData = new $.SalesPortal.DocumentViewerData($.parseJSON(parameters.data));
+		var viewerData = new $.SalesPortal.DocumentViewerData(parameters.data);
 		var sliderCurrentPosition = 0;
 
 		this.show = function ()
