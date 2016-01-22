@@ -176,6 +176,7 @@ namespace SalesLibraries.SalesDepot
 
 		private void FormMain_FormClosed(object sender, FormClosedEventArgs e)
 		{
+			MainController.Instance.ActivityManager.AddUserActivity("Application started");
 			PowerPointSingleton.Instance.Disconnect();
 		}
 		#endregion

@@ -22,7 +22,6 @@ namespace SalesLibraries.SalesDepot.Controllers
 			if (!MainController.Instance.MainForm.pnContainer.Controls.Contains(this))
 				MainController.Instance.MainForm.pnContainer.Controls.Add(this);
 			BringToFront();
-			MainController.Instance.ActivityManager.AddUserActivity("Settings selected");
 		}
 
 		public void OnLibraryChanged(object sender, EventArgs e) { }

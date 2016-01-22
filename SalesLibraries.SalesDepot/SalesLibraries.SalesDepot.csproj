@@ -155,7 +155,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Business\Activities\SalesDepotActivityManager.cs" />
     <Compile Include="Business\Dictionaries\SearchTagList.cs" />
     <Compile Include="Business\Gallery\GalleryImageSource.cs" />
     <Compile Include="Business\Gallery\SnapshotCollection.cs" />

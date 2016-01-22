@@ -84,7 +84,6 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Contro
 
 		public void Save()
 		{
-			MainController.Instance.ActivityManager.AddLinkAccessActivity("Save Link", PowerPointLink);
 			LinkManager.SaveLink("Save copy of the presentation as", PowerPointLink);
 		}
 
@@ -114,7 +113,6 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Contro
 						"Printing...",
 						cancellationToken => printAction()));
 			}
-			MainController.Instance.ActivityManager.AddLinkAccessActivity("Print Link", Link);
 		}
 		#endregion
 
@@ -140,7 +138,6 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Contro
 						cancellationToken =>
 						{
 							PowerPointManager.Instance.ActivatePowerPoint();
-							MainController.Instance.ActivityManager.AddLinkAccessActivity("Insert Slide", Link);
 							PowerPointSingleton.Instance.OpenSlideSourcePresentation(_tempCopy);
 							PowerPointSingleton.Instance.AppendSlide(SelectedThumbnail.Index);
 
@@ -176,7 +173,6 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Contro
 
 					});
 
-				MainController.Instance.ActivityManager.AddLinkAccessActivity("Save Link as PDF", Link);
 				LinkManager.SaveFile("Save PDF as", new FileInfo(destinationFileName));
 			}
 		}

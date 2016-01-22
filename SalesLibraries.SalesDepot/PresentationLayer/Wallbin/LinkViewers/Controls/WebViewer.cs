@@ -37,7 +37,6 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Contro
 
 		public void Open()
 		{
-			MainController.Instance.ActivityManager.AddLinkAccessActivity("Open Link", Link);
 			Utils.OpenFile(((WebLink)Link).Url);
 		}
 

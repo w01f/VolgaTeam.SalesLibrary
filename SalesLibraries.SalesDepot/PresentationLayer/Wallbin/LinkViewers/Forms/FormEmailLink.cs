@@ -35,7 +35,6 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Forms
 		private void FormEmailPresentation_FormClosed(object sender, FormClosedEventArgs e)
 		{
 			if (DialogResult != DialogResult.OK) return;
-			MainController.Instance.ActivityManager.AddLinkAccessActivity("Email Link", FileLink);
 			var selectedName = ckChangeEmailName.Checked && textEditEmailName.EditValue != null ? textEditEmailName.EditValue.ToString() : FileLink.NameWithExtension;
 			var destinationFilePath = Path.Combine(Path.GetTempPath(), (selectedName + FileLink.Extension));
 			File.Copy(FileLink.FullPath, destinationFilePath, true);

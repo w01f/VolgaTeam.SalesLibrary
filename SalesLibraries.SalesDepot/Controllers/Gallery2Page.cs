@@ -1,7 +1,6 @@
 ﻿using System;
 using DevComponents.DotNetBar;
 using DevExpress.XtraEditors;
-using SalesLibraries.Common.Objects.Activity;
 using SalesLibraries.SalesDepot.Business.Services;
 using SalesLibraries.SalesDepot.PresentationLayer.Gallery;
 
@@ -112,7 +111,6 @@ namespace SalesLibraries.SalesDepot.Controllers
 				InitControl();
 			}
 			BringToFront();
-			MainController.Instance.ActivityManager.AddUserActivity("Gallery selected");
 		}
 
 		public void OnLibraryChanged(object sender, EventArgs e) { }

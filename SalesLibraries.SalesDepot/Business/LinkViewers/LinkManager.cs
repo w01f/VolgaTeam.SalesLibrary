@@ -27,7 +27,6 @@ namespace SalesLibraries.SalesDepot.Business.LinkViewers
 
 		public static void OpenLink(LibraryObjectLink link, bool specialOptions = false)
 		{
-			MainController.Instance.ActivityManager.AddLinkAccessActivity("Link Access", link);
 			if (specialOptions)
 			{
 				using (var formViewOptions = new FormLinkSpecialOptions())
@@ -49,7 +48,6 @@ namespace SalesLibraries.SalesDepot.Business.LinkViewers
 
 		public static void PreviewLink(LibraryObjectLink link)
 		{
-			MainController.Instance.ActivityManager.AddLinkAccessActivity("Preview Link", link);
 			using (var form = new FormLinkPreview())
 			{
 				form.Link = link;
@@ -63,7 +61,6 @@ namespace SalesLibraries.SalesDepot.Business.LinkViewers
 
 		public static void EmailLink(LibraryFileLink fileLink)
 		{
-			MainController.Instance.ActivityManager.AddLinkAccessActivity("Email Link", fileLink);
 			EmailFile(fileLink.FullPath);
 		}
 
@@ -90,7 +87,6 @@ namespace SalesLibraries.SalesDepot.Business.LinkViewers
 				var newFile = Path.Combine(MainController.Instance.Settings.OpenFilePath, @"Copy of " + Path.GetFileName(fileLink.FullPath));
 				File.Copy(fileLink.FullPath, newFile, true);
 				Utils.OpenFile(newFile);
-				MainController.Instance.ActivityManager.AddLinkAccessActivity("Open Link", fileLink);
 			}
 			catch
 			{
@@ -109,7 +105,6 @@ namespace SalesLibraries.SalesDepot.Business.LinkViewers
 				process.StartInfo = videoPlay;
 				process.StartInfo.WindowStyle = ProcessWindowStyle.Maximized;
 				process.Start();
-				MainController.Instance.ActivityManager.AddLinkAccessActivity("Open Video", videoLink);
 			}
 			catch
 			{
@@ -121,7 +116,6 @@ namespace SalesLibraries.SalesDepot.Business.LinkViewers
 		{
 			if (!folderLink.CheckIfDead())
 			{
-				MainController.Instance.ActivityManager.AddLinkAccessActivity("Open Folder", folderLink);
 				Utils.OpenFile(folderLink.FullPath);
 			}
 			else
@@ -139,8 +133,6 @@ namespace SalesLibraries.SalesDepot.Business.LinkViewers
 				dialog.Filter = fileLink.Extension.Substring(1).ToUpper() + " Files|*" + fileLink.Extension;
 				if (dialog.ShowDialog(MainController.Instance.MainForm) == DialogResult.OK)
 				{
-					MainController.Instance.ActivityManager.AddLinkAccessActivity("Save Link", fileLink);
-
 					var newFile = dialog.FileName;
 					File.Copy(fileLink.FullPath, newFile, true);
 					if (File.Exists(newFile))
@@ -219,7 +211,6 @@ namespace SalesLibraries.SalesDepot.Business.LinkViewers
 					MainController.Instance.PopupMessages.ShowWarning("AcroRd32.exe has not been found");
 				}
 			}
-			MainController.Instance.ActivityManager.AddLinkAccessActivity("Print Link", fileLink);
 		}
 
 		public static void AddVideoIntoPresentation(VideoLink file)
@@ -228,7 +219,6 @@ namespace SalesLibraries.SalesDepot.Business.LinkViewers
 				return;
 			if (File.Exists(PowerPointSingleton.Instance.GetActivePresentation().FullName))
 			{
-				MainController.Instance.ActivityManager.AddLinkAccessActivity("Insert video", file);
 				PowerPointManager.Instance.ActivatePowerPoint();
 				MainController.Instance.ActivateApplication();
 				FloaterManager.Instance.ShowFloater(
@@ -251,7 +241,6 @@ namespace SalesLibraries.SalesDepot.Business.LinkViewers
 			using (var form = new FormPowerPointQuickView())
 			{
 				form.PowerPointLink = powerPointLink;
-				MainController.Instance.ActivityManager.AddLinkAccessActivity("Preview Link", powerPointLink);
 				form.ShowDialog(MainController.Instance.MainForm);
 				if (form.AfterClose != null)
 					form.AfterClose();
@@ -267,7 +256,6 @@ namespace SalesLibraries.SalesDepot.Business.LinkViewers
 			using (var form = new FormPowerPointQuickViewOld())
 			{
 				form.PowerPointLink = powerPointLink;
-				MainController.Instance.ActivityManager.AddLinkAccessActivity("Preview Link", powerPointLink);
 				form.ShowDialog(MainController.Instance.MainForm);
 				RegistryHelper.SalesDepotHandle = MainController.Instance.MainForm.Handle;
 				RegistryHelper.MaximizeSalesDepot = true;

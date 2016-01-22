@@ -107,8 +107,6 @@
     <Compile Include="JsonConverters\DefaultSerializeSettings.cs" />
     <Compile Include="JsonConverters\ImageConverter.cs" />
     <Compile Include="Helpers\ActivityManager.cs" />
-    <Compile Include="Objects\Activity\LinkAccessActivity.cs" />
-    <Compile Include="Objects\Activity\PageSelectActivity.cs" />
     <Compile Include="Objects\Activity\UserActivity.cs" />
     <Compile Include="Objects\Graphics\Banner.cs" />
     <Compile Include="Objects\Graphics\IImageSourceList.cs" />

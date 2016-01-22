@@ -12,7 +12,6 @@ using SalesLibraries.Common.OfficeInterops;
 using SalesLibraries.CommonGUI.BackgroundProcesses;
 using SalesLibraries.CommonGUI.Common;
 using SalesLibraries.CommonGUI.Floater;
-using SalesLibraries.SalesDepot.Business.Activities;
 using SalesLibraries.SalesDepot.Business.Services;
 using SalesLibraries.SalesDepot.Configuration;
 using SalesLibraries.SalesDepot.PresentationLayer.Settings;
@@ -38,7 +37,7 @@ namespace SalesLibraries.SalesDepot.Controllers
 
 		public WallbinManager Wallbin { get; private set; }
 
-		public SalesDepotActivityManager ActivityManager { get; private set; }
+		public ActivityManager ActivityManager { get; private set; }
 		public HelpManager HelpManager { get; private set; }
 
 		public ViewManager WallbinViews { get; private set; }
@@ -194,7 +193,7 @@ namespace SalesLibraries.SalesDepot.Controllers
 			Lists.Load();
 			SelectActiveTab();
 
-			ActivityManager = Common.Helpers.ActivityManager.OpenStorage<SalesDepotActivityManager>();
+			ActivityManager = ActivityManager.OpenStorage<ActivityManager>();
 
 			HelpManager.LoadHelpLinks();
 		}

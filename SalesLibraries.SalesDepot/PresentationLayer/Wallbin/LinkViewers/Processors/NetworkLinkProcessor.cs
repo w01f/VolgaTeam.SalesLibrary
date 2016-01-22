@@ -17,7 +17,6 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Proces
 
 		public void Open()
 		{
-			MainController.Instance.ActivityManager.AddLinkAccessActivity("Open Link", _link);
 			Utils.OpenFile(_link.FullPath);
 		}
 	}

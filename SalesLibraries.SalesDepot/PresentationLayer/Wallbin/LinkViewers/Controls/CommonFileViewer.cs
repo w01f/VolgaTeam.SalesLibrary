@@ -55,11 +55,9 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Contro
 					LinkManager.OpenFolderLink((LibraryFolderLink)Link);
 					break;
 				case FileTypes.Url:
-					MainController.Instance.ActivityManager.AddLinkAccessActivity("Open Link", Link);
 					Utils.OpenFile(((WebLink)Link).Url);
 					break;
 				case FileTypes.Network:
-					MainController.Instance.ActivityManager.AddLinkAccessActivity("Open Link", Link);
 					Utils.OpenFile(Link.FullPath);
 					break;
 				default:

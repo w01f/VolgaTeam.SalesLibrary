@@ -39,7 +39,6 @@ namespace SalesLibraries.SalesDepot.Controllers
 				MainController.Instance.MainForm.pnContainer.Controls.Add(this);
 			pnContainer.BringToFront();
 			BringToFront();
-			MainController.Instance.ActivityManager.AddUserActivity("Wall Bin selected");
 		}
 
 		public void OnLibraryChanged(object sender, EventArgs e)

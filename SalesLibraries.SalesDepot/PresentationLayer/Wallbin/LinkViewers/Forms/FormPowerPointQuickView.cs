@@ -122,7 +122,6 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Forms
 
 		private void barButtonItemSave_ItemClick(object sender, ItemClickEventArgs e)
 		{
-			MainController.Instance.ActivityManager.AddLinkAccessActivity("Save Link", PowerPointLink);
 			LinkManager.SaveLink("Save copy of the presentation as", PowerPointLink);
 		}
 
@@ -146,7 +145,6 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Forms
 
 					});
 
-				MainController.Instance.ActivityManager.AddLinkAccessActivity("Save Link as PDF", PowerPointLink);
 				LinkManager.SaveFile("Save PDF as", new FileInfo(destinationFileName));
 			}
 		}
@@ -175,7 +173,6 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Forms
 						"Printing...",
 						cancellationToken => printAction()));
 			}
-			MainController.Instance.ActivityManager.AddLinkAccessActivity("Print Link", PowerPointLink);
 		}
 
 		private void barLargeButtonItemAddAllSlides_ItemClick(object sender, ItemClickEventArgs e)
@@ -273,7 +270,6 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Forms
 						cancellationToken =>
 						{
 							PowerPointManager.Instance.ActivatePowerPoint();
-							MainController.Instance.ActivityManager.AddLinkAccessActivity("Insert Slide", PowerPointLink);
 							PowerPointSingleton.Instance.OpenSlideSourcePresentation(_tempFileCopy);
 							PowerPointSingleton.Instance.AppendSlide(
 							allSlides ? -1 : SelectedThumbnail.Index,
