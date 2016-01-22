@@ -68,17 +68,17 @@
     <Compile Include="BackgroundProcesses\FormProgressBase.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="BackgroundProcesses\FormProgressWithAbort.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="BackgroundProcesses\FormProgressWithAbort.designer.cs">
-      <DependentUpon>FormProgressWithAbort.cs</DependentUpon>
-    </Compile>
     <Compile Include="BackgroundProcesses\FormStart.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="BackgroundProcesses\FormStart.designer.cs">
       <DependentUpon>FormStart.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BackgroundProcesses\FormProgressWithAbort.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BackgroundProcesses\FormProgressWithAbort.designer.cs">
+      <DependentUpon>FormProgressWithAbort.cs</DependentUpon>
     </Compile>
     <Compile Include="BackgroundProcesses\ProcessPausedEventArgs.cs" />
     <Compile Include="Calendars\CalendarPartControl.cs">
@@ -190,11 +190,11 @@
     <EmbeddedResource Include="BackgroundProcesses\FormProgressCommon.resx">
       <DependentUpon>FormProgressCommon.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="BackgroundProcesses\FormProgressWithAbort.resx">
-      <DependentUpon>FormProgressWithAbort.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="BackgroundProcesses\FormStart.resx">
       <DependentUpon>FormStart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BackgroundProcesses\FormProgressWithAbort.resx">
+      <DependentUpon>FormProgressWithAbort.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Calendars\CalendarPartControl.resx">
       <DependentUpon>CalendarPartControl.cs</DependentUpon>

@@ -1,6 +1,5 @@
 ﻿using SalesLibraries.Common.Helpers;
 using SalesLibraries.Common.Objects.RemoteStorage;
-using SalesLibraries.ServiceConnector.Services;
 
 namespace SalesLibraries.Common.Authorization
 {
@@ -24,9 +23,7 @@ namespace SalesLibraries.Common.Authorization
 
 		public void Auth(AuthorizingEventArgs authArgs)
 		{
-			authArgs.Authorized = Settings.HasCredentials &&
-				(FileStorageManager.Instance.UseLocalMode || 
-					ServiceConnection.IsAuthorized(authArgs.AuthServer, Settings.Login, Settings.GetPassword()));
+			authArgs.Authorized = Settings.HasCredentials;
 		}
 	}
 }

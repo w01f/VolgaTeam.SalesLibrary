@@ -100,7 +100,6 @@ namespace SalesLibraries.FileManager.Controllers
 
 			ProcessManager.RunStartProcess(
 				"Connecting to adSALEScloud…", 
-				"*This should not take long…",
 				cancellationToken => AsyncHelper.RunSync(FileStorageManager.Instance.Init));
 
 			if (stopRun) return;
@@ -109,26 +108,21 @@ namespace SalesLibraries.FileManager.Controllers
 			if (appReady)
 			{
 				var progressTitle = String.Empty;
-				var progressDescription = String.Empty;
 				switch (FileStorageManager.Instance.DataState)
 				{
 					case DataActualityState.NotExisted:
 						progressTitle = "Syncing adSALEScloud for the 1st time…";
-						progressDescription = "*This may take a few minutes…";
 						break;
 					case DataActualityState.Outdated:
 						progressTitle = "Refreshing data from adSALEScloud…";
-						progressDescription = "*This may take a few minutes…";
 						break;
 					default:
 						progressTitle = "Loading data...";
-						progressDescription = "*This should not take long…";
 						break;
 				}
 
 				ProcessManager.RunStartProcess(
 					progressTitle, 
-					progressDescription,
 					cancellationToken => AsyncHelper.RunSync(InitBusinessObjects));
 
 				MainForm.Shown += (o, e) =>
