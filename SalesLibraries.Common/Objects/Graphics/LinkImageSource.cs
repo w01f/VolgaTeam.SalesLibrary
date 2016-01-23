@@ -9,6 +9,7 @@ namespace SalesLibraries.Common.Objects.Graphics
 		public string FilePath { get; private set; }
 
 		public event EventHandler<EventArgs> AddToFavs;
+		public event EventHandler<EventArgs> RemoveFromFavs;
 
 		protected LinkImageSource(string filePath)
 		{
@@ -20,6 +21,12 @@ namespace SalesLibraries.Common.Objects.Graphics
 		{
 			if (AddToFavs != null)
 				AddToFavs(this, EventArgs.Empty);
+		}
+
+		public virtual void DeleteFromFavs()
+		{
+			if (RemoveFromFavs != null)
+				RemoveFromFavs(this, EventArgs.Empty);
 		}
 	}
 }

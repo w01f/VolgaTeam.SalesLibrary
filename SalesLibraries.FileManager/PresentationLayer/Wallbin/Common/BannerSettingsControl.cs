@@ -35,7 +35,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Common
 			xtraTabControlBanners.TabPages.Clear();
 			foreach (var imageGroup in MainController.Instance.Lists.Banners.Items)
 			{
-				var tabPage = new LinkImagesContainer(imageGroup);
+				var tabPage = BaseLinkImagesContainer.Create(imageGroup);
 				tabPage.SelectedImageChanged += OnSelectedBannerChanged;
 				tabPage.OnImageDoubleClick += OnImageDoubleClick;
 				xtraTabControlBanners.TabPages.Add(tabPage);

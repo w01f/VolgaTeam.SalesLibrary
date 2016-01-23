@@ -28,7 +28,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Common
 			xtraTabControlWidgets.TabPages.Clear();
 			foreach (var imageGroup in MainController.Instance.Lists.Widgets.Items)
 			{
-				var tabPage = new LinkImagesContainer(imageGroup);
+				var tabPage = BaseLinkImagesContainer.Create(imageGroup);
 				tabPage.SelectedImageChanged += OnSelectedWidgetChanged;
 				tabPage.OnImageDoubleClick += OnImageDoubleClick;
 				xtraTabControlWidgets.TabPages.Add(tabPage);

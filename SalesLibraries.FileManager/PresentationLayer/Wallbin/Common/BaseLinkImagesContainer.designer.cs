@@ -1,6 +1,6 @@
 ﻿namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Common
 {
-	sealed partial class LinkImagesContainer
+	abstract partial class BaseLinkImagesContainer
 	{
 		/// <summary> 
 		/// Required designer variable.
@@ -30,7 +30,6 @@
 		{
 			this.components = new System.ComponentModel.Container();
 			this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-			this.addToFavoritesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolTip = new System.Windows.Forms.ToolTip(this.components);
 			this.imageListView = new Manina.Windows.Forms.ImageListView();
 			this.contextMenuStrip.SuspendLayout();
@@ -38,19 +37,8 @@
 			// 
 			// contextMenuStrip
 			// 
-			this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.addToFavoritesToolStripMenuItem});
 			this.contextMenuStrip.Name = "contextMenuStrip";
 			this.contextMenuStrip.Size = new System.Drawing.Size(174, 36);
-			// 
-			// addToFavoritesToolStripMenuItem
-			// 
-			this.addToFavoritesToolStripMenuItem.Image = global::SalesLibraries.FileManager.Properties.Resources.Favorites;
-			this.addToFavoritesToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-			this.addToFavoritesToolStripMenuItem.Name = "addToFavoritesToolStripMenuItem";
-			this.addToFavoritesToolStripMenuItem.Size = new System.Drawing.Size(173, 32);
-			this.addToFavoritesToolStripMenuItem.Text = "Add To Favorites";
-			this.addToFavoritesToolStripMenuItem.Click += new System.EventHandler(this.addToFavoritesToolStripMenuItem_Click);
 			// 
 			// toolTip
 			// 
@@ -87,9 +75,8 @@
 
 		#endregion
 
-		private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
-		private System.Windows.Forms.ToolStripMenuItem addToFavoritesToolStripMenuItem;
+		protected System.Windows.Forms.ContextMenuStrip contextMenuStrip;
 		private System.Windows.Forms.ToolTip toolTip;
-		private Manina.Windows.Forms.ImageListView imageListView;
+		protected Manina.Windows.Forms.ImageListView imageListView;
 	}
 }

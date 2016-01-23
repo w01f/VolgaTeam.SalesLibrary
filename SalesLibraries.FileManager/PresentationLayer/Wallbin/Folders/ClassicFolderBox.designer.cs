@@ -29,13 +29,14 @@
 		protected override void InitializeComponent()
 		{
 			base.InitializeComponent();
-			this.contextMenuStripSecurity = new System.Windows.Forms.ContextMenuStrip();
+			this.components = new System.ComponentModel.Container();
+			this.contextMenuStripSecurity = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.toolStripMenuItemSecuritySelectAll = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItemSecurityResetAll = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItemFolderDeleteLinks = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItemFolderDeleteSecurity = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItemFolderDeleteTags = new System.Windows.Forms.ToolStripMenuItem();
-			this.contextMenuStripFolderProperties = new System.Windows.Forms.ContextMenuStrip();
+			this.contextMenuStripFolderProperties = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.toolStripMenuItemFolderSettings = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
 			this.toolStripMenuItemFolderDelete = new System.Windows.Forms.ToolStripMenuItem();
@@ -46,7 +47,7 @@
 			this.toolStripMenuItemFolderDeleteWidgets = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItemFolderDeleteBanners = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItemFolderSort = new System.Windows.Forms.ToolStripMenuItem();
-			this.popupMenuLinkProperties = new DevExpress.XtraBars.PopupMenu();
+			this.popupMenuLinkProperties = new DevExpress.XtraBars.PopupMenu(this.components);
 			this.barButtonItemLinkPropertiesOpenLink = new DevExpress.XtraBars.BarButtonItem();
 			this.barButtonItemLinkPropertiesFileLocation = new DevExpress.XtraBars.BarButtonItem();
 			this.barButtonItemLinkPropertiesDelete = new DevExpress.XtraBars.BarButtonItem();
@@ -58,7 +59,7 @@
 			this.barButtonItemLinkPropertiesWidget = new DevExpress.XtraBars.BarButtonItem();
 			this.barButtonItemLinkPropertiesBanner = new DevExpress.XtraBars.BarButtonItem();
 			this.barSubItemLinkPropertiesQuickTools = new DevExpress.XtraBars.BarSubItem();
-			this.barManager = new DevExpress.XtraBars.BarManager();
+			this.barManager = new DevExpress.XtraBars.BarManager(this.components);
 			this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
 			this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
 			this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();

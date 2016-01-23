@@ -11,10 +11,10 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Common
 {
 	[ToolboxItem(false)]
 	//public partial class LinkImagesContainer : UserControl
-	public sealed partial class LinkImagesContainer : XtraTabPage
+	public abstract partial class BaseLinkImagesContainer : XtraTabPage
 	{
 		private readonly LinkImageGroup _parent;
-		private ImageListView.HitInfo _menuHitInfo;
+		protected ImageListView.HitInfo _menuHitInfo;
 
 		public event EventHandler<LinkImageEventArgs> SelectedImageChanged;
 		public event EventHandler<EventArgs> OnImageDoubleClick;
@@ -29,19 +29,29 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Common
 			}
 		}
 
-		public LinkImagesContainer(LinkImageGroup parent)
+		protected BaseLinkImagesContainer(LinkImageGroup parent)
 		{
 			InitializeComponent();
 			_parent = parent;
 			Text = _parent.Name;
 			LoadImages();
+			InitPopupMenu();
 			_parent.OnDataChanged += (o, e) => LoadImages();
-			imageListView.ItemClick+=OnGalleryItemClick;
+			imageListView.ItemClick += OnGalleryItemClick;
 			imageListView.ItemDoubleClick += OnGalleryItemDoubleClick;
 			imageListView.ItemHover += OnGalleryItemHover;
 			imageListView.MouseDown += OnGalleryMouseDown;
 			imageListView.MouseMove += OnGalleryMouseMove;
 		}
+
+		public static BaseLinkImagesContainer Create(LinkImageGroup parent)
+		{
+			if (parent is FavoriteImageGroup)
+				return new FavoritesImagesContainer(parent);
+			return new RegularImagesContainer(parent);
+		}
+
+		protected abstract void InitPopupMenu();
 
 		private void LoadImages()
 		{
@@ -93,14 +103,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Common
 					contextMenuStrip.Show(MousePosition);
 					break;
 			}
-		}
-
-		private void addToFavoritesToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			if (_menuHitInfo == null) return;
-			var imageSource = imageListView.Items[_menuHitInfo.ItemIndex].Tag as LinkImageSource;
-			if (imageSource == null) return;
-			imageSource.CopyToFavs();
 		}
 	}
 

@@ -146,7 +146,13 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 				Caption = "Bold Text",
 				CheckBoxVisibility = CheckBoxVisibility.AfterText
 			};
+
+			var boldFont = new Font(_itemBoldFont.ItemInMenuAppearance.Normal.Font.Name, _itemBoldFont.ItemInMenuAppearance.Normal.Font.Size, FontStyle.Bold);
+			_itemBoldFont.ItemInMenuAppearance.Normal.Font = boldFont;
+			_itemBoldFont.ItemInMenuAppearance.Pressed.Font = boldFont;
+			_itemBoldFont.ItemInMenuAppearance.Hovered.Font = boldFont;
 			_itemBoldFont.CheckedChanged += (o, e) => _settingsManager.OnFontChanged();
+			
 			maxId++;
 
 			_itemLineBreakFont = new BarEditItem
