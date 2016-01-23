@@ -212,12 +212,18 @@
     <Compile Include="PresentationLayer\Wallbin\Common\BannerSettingsControl.designer.cs">
       <DependentUpon>BannerSettingsControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Wallbin\Common\SearchGroupContainer.cs" />
-    <Compile Include="PresentationLayer\Wallbin\Common\LinkImagesContainer.cs">
+    <Compile Include="PresentationLayer\Wallbin\Common\RegularImagesContainer.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Wallbin\Common\LinkImagesContainer.designer.cs">
-      <DependentUpon>LinkImagesContainer.cs</DependentUpon>
+    <Compile Include="PresentationLayer\Wallbin\Common\FavoritesImagesContainer.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Common\SearchGroupContainer.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Common\BaseLinkImagesContainer.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Common\BaseLinkImagesContainer.designer.cs">
+      <DependentUpon>BaseLinkImagesContainer.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Wallbin\Common\WidgetSettingsControl.cs">
       <SubType>UserControl</SubType>
@@ -568,8 +574,8 @@
     <EmbeddedResource Include="PresentationLayer\Wallbin\Common\BannerSettingsControl.resx">
       <DependentUpon>BannerSettingsControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Wallbin\Common\LinkImagesContainer.resx">
-      <DependentUpon>LinkImagesContainer.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Common\BaseLinkImagesContainer.resx">
+      <DependentUpon>BaseLinkImagesContainer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Common\WidgetSettingsControl.resx">
       <DependentUpon>WidgetSettingsControl.cs</DependentUpon>
@@ -836,10 +842,10 @@
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy “$(ProjectDir)bin\Debug\SalesLibraries*.dll” “d:\WorkingFiles\SalesDepot\Release\Site Admin.exe” /Y
-copy “$(ProjectDir)bin\Debug\Site Admin.exe” “d:\WorkingFiles\SalesDepot\Release\Site Admin.exe” /Y
-copy “$(ProjectDir)bin\Debug\Site Admin.exe.config” “d:\WorkingFiles\SalesDepot\Release\Site Admin.exe” /Y
-copy “$(ProjectDir)bin\Debug\Schema\*.*” “d:\WorkingFiles\SalesDepot\Release\Site Admin.exe\Schema” /Y</PostBuildEvent>
+    <PostBuildEvent>xcopy “$(ProjectDir)\bin\Debug\SalesLibraries*.dll” “d:\WorkingFiles\SalesDepot\Release\Site Admin.exe” /Y
+xcopy “$(ProjectDir)\bin\Debug\Site Admin.exe” “d:\WorkingFiles\SalesDepot\Release\Site Admin.exe” /Y
+xcopy “$(ProjectDir)\bin\Debug\Site Admin.exe.config” “d:\WorkingFiles\SalesDepot\Release\Site Admin.exe” /Y
+xcopy “$(ProjectDir)\bin\Debug\Schema\*.*” “d:\WorkingFiles\SalesDepot\Release\Site Admin.exe\Schema” /Y</PostBuildEvent>
   </PropertyGroup>
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.99.0\build\net451\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.99.0\build\net451\System.Data.SQLite.Core.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -895,13 +895,13 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy “$(ProjectDir)bin\Debug\SalesLibraries*.dll” “d:\WorkingFiles\SalesDepot\Release\Sales Library.exe” /Y
-copy “$(ProjectDir)bin\Debug\ProgramManager*.dll” “d:\WorkingFiles\SalesDepot\Release\Sales Library.exe” /Y
-copy “$(ProjectDir)bin\Debug\Ax*.dll” “d:\WorkingFiles\SalesDepot\Release\Sales Library.exe” /Y
-copy “$(ProjectDir)bin\Debug\Interop*.dll” “d:\WorkingFiles\SalesDepot\Release\Sales Library.exe” /Y
-copy “$(ProjectDir)bin\Debug\Sales Library.exe” “d:\WorkingFiles\SalesDepot\Release\Sales Library.exe” /Y
-copy “$(ProjectDir)bin\Debug\Sales Library.exe.config” “d:\WorkingFiles\SalesDepot\Release\Sales Library.exe” /Y
-copy “$(ProjectDir)bin\Debug\Schema\*.*” “d:\WorkingFiles\SalesDepot\Release\Sales Library.exe\Schema” /Y</PostBuildEvent>
+    <PostBuildEvent>xcopy “$(ProjectDir)\bin\Debug\SalesLibraries*.dll” “d:\WorkingFiles\SalesDepot\Release\Sales Library.exe” /Y
+xcopy “$(ProjectDir)\bin\Debug\ProgramManager*.dll” “d:\WorkingFiles\SalesDepot\Release\Sales Library.exe” /Y
+xcopy “$(ProjectDir)\bin\Debug\Ax*.dll” “d:\WorkingFiles\SalesDepot\Release\Sales Library.exe” /Y
+xcopy “$(ProjectDir)\bin\Debug\Interop*.dll” “d:\WorkingFiles\SalesDepot\Release\Sales Library.exe” /Y
+xcopy “$(ProjectDir)\bin\Debug\Sales Library.exe” “d:\WorkingFiles\SalesDepot\Release\Sales Library.exe” /Y
+xcopy “$(ProjectDir)\bin\Debug\Sales Library.exe.config” “d:\WorkingFiles\SalesDepot\Release\Sales Library.exe” /Y
+xcopy “$(ProjectDir)\bin\Debug\Schema\*.*” “d:\WorkingFiles\SalesDepot\Release\Sales Library.exe\Schema” /Y</PostBuildEvent>
   </PropertyGroup>
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.99.0\build\net451\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.99.0\build\net451\System.Data.SQLite.Core.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

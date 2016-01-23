@@ -11,14 +11,18 @@ namespace SalesLibraries.CommonGUI.BackgroundProcesses
 		private readonly ConcurrentQueue<BackgroundProcess> _tasks = new ConcurrentQueue<BackgroundProcess>();
 		private readonly FormProgressCommon _formProgress = new FormProgressCommon();
 		private readonly Form _mainForm;
+		private readonly string _title;
+
 		private int _processesInQueue;
+		private bool _startFormTrayed;
 
 		public event EventHandler<EventArgs> Suspended;
 		public event EventHandler<EventArgs> Resumed;
 
-		public BackgroundProcessManager(Form mainForm)
+		public BackgroundProcessManager(Form mainForm, string title)
 		{
 			_mainForm = mainForm;
+			_title = title;
 		}
 
 		public void Run(string title, Action<CancellationToken> process, Action afterComplete = null)
@@ -30,12 +34,18 @@ namespace SalesLibraries.CommonGUI.BackgroundProcesses
 			}
 		}
 
-		public void RunStartProcess(string title, Action<CancellationToken> process, Action afterComplete = null)
+		public void RunStartProcess(string text, Action<CancellationToken> process, Action afterComplete = null)
 		{
-			using (var form = new FormStart())
+			using (var form = new FormStart(_title, _startFormTrayed))
 			{
-				form.SetTitle(title);
-				RunWithProgress(form, false, process, cancellationToken => { if (afterComplete != null)afterComplete(); });
+				form.SetText(text);
+				form.Trayed += (o, e) => _startFormTrayed = true;
+				form.Activated += (o, e) => _startFormTrayed = false;
+				RunWithProgress(form, false, process, cancellationToken =>
+				{
+					if (afterComplete != null)
+						afterComplete();
+				});
 			}
 		}
 

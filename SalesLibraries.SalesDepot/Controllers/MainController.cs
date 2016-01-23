@@ -69,7 +69,7 @@ namespace SalesLibraries.SalesDepot.Controllers
 			WallbinViews = new ViewManager();
 
 			MainForm = new FormMain();
-			ProcessManager = new BackgroundProcessManager(MainForm);
+			ProcessManager = new BackgroundProcessManager(MainForm, Settings.SalesDepotName);
 			PopupMessages = new PopupMessageHelper(Settings.SalesDepotName);
 		}
 		public void RunApplication()

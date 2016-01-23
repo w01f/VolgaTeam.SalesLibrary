@@ -11,7 +11,7 @@ namespace SalesLibraries.Common.Helpers
 		private XDocument _activityStorage;
 		private readonly StorageFile _activityFile;
 
-		protected ActivityManager()
+		public ActivityManager()
 		{
 			var activityFolder = AppProfileManager.Instance.UserDataFolder;
 			_activityFile = new StorageFile(activityFolder.RelativePathParts.Merge(String.Format("{0}.xml", DateTime.Now.ToString("MM-dd-yyyy"))));

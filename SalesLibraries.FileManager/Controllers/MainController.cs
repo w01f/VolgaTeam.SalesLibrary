@@ -60,7 +60,7 @@ namespace SalesLibraries.FileManager.Controllers
 			HelpManager = new HelpManager();
 			WallbinViews = new ViewManager();
 			MainForm = new FormMain();
-			ProcessManager = new BackgroundProcessManager(MainForm);
+			ProcessManager = new BackgroundProcessManager(MainForm, "Site Admin");
 			PopupMessages = new PopupMessageHelper("Site Admin");
 		}
 
