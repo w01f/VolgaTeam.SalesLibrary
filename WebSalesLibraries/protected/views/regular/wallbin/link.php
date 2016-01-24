@@ -60,7 +60,7 @@
 			else
 				$font = Font::getDefault();
 
-			if ($link->extendedProperties->isSpecialFormat && isset($link->extendedProperties->foreColor))
+			if (isset($link->extendedProperties->foreColor))
 				$color = $link->extendedProperties->foreColor;
 			else if (isset($link->parent) && isset($link->parent->windowForeColor))
 				$color = $link->parent->windowForeColor;
@@ -69,9 +69,9 @@
 
 			$linkFontProperties = 'font-family: ' . $font->name . '; '
 				. 'font-size: ' . $font->size . 'pt; '
-				. 'font-weight: ' . ($link->extendedProperties->isBold ? 'bold' : ($font->isBold ? ' bold' : ' normal')) . '; '
-				. 'font-style: ' . ($font->isItalic ? ' italic' : ' normal') . '; '
-				. 'text-decoration: ' . ($font->isUnderlined ? ' underline' : ' inherit') . '; '
+				. 'font-weight: ' . ($link->extendedProperties->isBold ? ' bold' : ($font->isBold ? ' bold' : ' normal')) . '; '
+				. 'font-style: ' . ($link->extendedProperties->isItalic ? ' italic' : ($font->isItalic ? ' italic' : ' normal')) . '; '
+				. 'text-decoration: ' . ($link->extendedProperties->isUnderline ? ' underline' : ($font->isUnderlined ? ' underline' : ' inherit')) . '; '
 				. 'color: ' . $color . '; '
 				. 'white-space: nowrap;';
 		}

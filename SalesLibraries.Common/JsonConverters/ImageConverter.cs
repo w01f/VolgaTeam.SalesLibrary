@@ -23,7 +23,7 @@ namespace SalesLibraries.Common.JsonConverters
 			var bmp = value as Bitmap;
 			if (bmp == null) return;
 			var m = new MemoryStream();
-			bmp.Save(m, Utils.GetImageFormat(bmp));
+			bmp.Save(m, Utils.GetImageFormat((Image)bmp.Clone()));
 			writer.WriteValue(Convert.ToBase64String(m.ToArray()));
 		}
 	}

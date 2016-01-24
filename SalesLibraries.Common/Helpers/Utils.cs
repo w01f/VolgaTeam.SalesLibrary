@@ -90,9 +90,9 @@ namespace SalesLibraries.Common.Helpers
 			return Image.FromStream((Stream)Clipboard.GetData("PNG"));
 		}
 
-		public static ImageFormat GetImageFormat(Bitmap bitmap)
+		public static ImageFormat GetImageFormat(Image image)
 		{
-			var img = bitmap.RawFormat;
+			var img = image.RawFormat;
 			if (img.Equals(ImageFormat.Jpeg))
 				return ImageFormat.Jpeg;
 			if (img.Equals(ImageFormat.Bmp))

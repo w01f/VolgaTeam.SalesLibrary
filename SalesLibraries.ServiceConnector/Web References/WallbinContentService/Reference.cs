@@ -1059,6 +1059,8 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         
         private bool selectedField;
         
+        private string dateAddField;
+        
         private GroupModel[] groupsField;
         
         private string groupNamesField;
@@ -1156,6 +1158,16 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
             }
             set {
                 this.selectedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string dateAdd {
+            get {
+                return this.dateAddField;
+            }
+            set {
+                this.dateAddField = value;
             }
         }
         
@@ -1806,6 +1818,10 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         
         private bool isBoldField;
         
+        private bool isItalicField;
+        
+        private bool isUnderlineField;
+        
         private bool isSpecialFormatField;
         
         private Font fontField;
@@ -1849,6 +1865,26 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
             }
             set {
                 this.isBoldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool isItalic {
+            get {
+                return this.isItalicField;
+            }
+            set {
+                this.isItalicField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool isUnderline {
+            get {
+                return this.isUnderlineField;
+            }
+            set {
+                this.isUnderlineField = value;
             }
         }
         

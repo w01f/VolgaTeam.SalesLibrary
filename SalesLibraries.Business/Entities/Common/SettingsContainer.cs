@@ -18,10 +18,13 @@ namespace SalesLibraries.Business.Entities.Common
 			settings.Parent = parent;
 			if (createNew)
 				settings.AfterConstruction();
+			settings.AfterCreate();
 			return settings;
 		}
 
 		protected virtual void AfterConstruction() { }
+
+		protected virtual void AfterCreate() { }
 
 		protected void OnSettingsChanged()
 		{

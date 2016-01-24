@@ -283,7 +283,9 @@ namespace SalesLibraries.FileManager.Business.Services
 			{
 				var objectSource = (LibraryObjectLinkSettings)source;
 				target.hoverNote = objectSource.HoverNote;
-				target.isBold = objectSource.IsBold;
+				target.isBold = (objectSource.RegularFontStyle & FontStyle.Bold) == FontStyle.Bold;
+				target.isItalic = (objectSource.RegularFontStyle & FontStyle.Italic) == FontStyle.Italic;
+				target.isUnderline = (objectSource.RegularFontStyle & FontStyle.Underline) == FontStyle.Underline;
 				target.foreColor = (source.ForeColor.HasValue ? source.ForeColor.Value : Color.Black).ToHex();
 				target.isSpecialFormat = objectSource.IsSpecialFormat;
 				if (objectSource.IsSpecialFormat)

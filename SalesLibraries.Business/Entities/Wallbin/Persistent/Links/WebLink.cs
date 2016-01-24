@@ -78,11 +78,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 			((WebLinkSettings)link.Settings).ForcePreview = forcePreview;
 			if (displayAsHyperlnk)
 			{
-				((WebLinkSettings)link.Settings).IsBold = false;
-				((WebLinkSettings)link.Settings).IsSpecialFormat = true;
-
-				var oldFont = link.Settings.Font;
-				link.Settings.Font = new Font(oldFont.Name, oldFont.Size, FontStyle.Underline);
+				((WebLinkSettings)link.Settings).RegularFontStyle = FontStyle.Underline | FontStyle.Bold;
 				link.Settings.ForeColor = Color.Blue;
 			}
 			return link;

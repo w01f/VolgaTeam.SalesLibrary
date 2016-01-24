@@ -140,7 +140,7 @@ namespace SalesLibraries.SalesDepot.Controllers
 					cancellationToken =>
 					{
 						LibrariesSyncHelper.Sync(
-							File.ReadAllText(Configuration.RemoteResourceManager.Instance.NetworkPathFile.LocalPath).Trim(),
+							File.ReadAllLines(Configuration.RemoteResourceManager.Instance.NetworkPathFile.LocalPath),
 							Configuration.RemoteResourceManager.Instance.LocalLibraryFolder.LocalPath
 							);
 						Wallbin.LoadLibraries(Configuration.RemoteResourceManager.Instance.LocalLibraryFolder.LocalPath);

@@ -24,6 +24,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		private bool _changesMade;
 
 		private BarCheckItem _itemBoldFont;
+		private BarCheckItem _itemItalicFont;
+		private BarCheckItem _itemUnderlinedFont;
 		private BarSubItem _itemLinkNote;
 		private BarEditItem _itemLinkNoteCustom;
 		private BarEditItem _itemHoverNote;
@@ -143,7 +145,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			_itemBoldFont = new BarCheckItem
 			{
 				Id = maxId,
-				Caption = "Bold Text",
+				Caption = "Bold",
 				CheckBoxVisibility = CheckBoxVisibility.AfterText
 			};
 
@@ -151,8 +153,38 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			_itemBoldFont.ItemInMenuAppearance.Normal.Font = boldFont;
 			_itemBoldFont.ItemInMenuAppearance.Pressed.Font = boldFont;
 			_itemBoldFont.ItemInMenuAppearance.Hovered.Font = boldFont;
+
 			_itemBoldFont.CheckedChanged += (o, e) => _settingsManager.OnFontChanged();
-			
+			maxId++;
+
+			_itemItalicFont = new BarCheckItem
+			{
+				Id = maxId,
+				Caption = "Italics",
+				CheckBoxVisibility = CheckBoxVisibility.AfterText
+			};
+
+			var italicFont = new Font(_itemItalicFont.ItemInMenuAppearance.Normal.Font.Name, _itemItalicFont.ItemInMenuAppearance.Normal.Font.Size, FontStyle.Italic);
+			_itemItalicFont.ItemInMenuAppearance.Normal.Font = italicFont;
+			_itemItalicFont.ItemInMenuAppearance.Pressed.Font = italicFont;
+			_itemItalicFont.ItemInMenuAppearance.Hovered.Font = italicFont;
+
+			_itemItalicFont.CheckedChanged += (o, e) => _settingsManager.OnFontChanged();
+			maxId++;
+
+			_itemUnderlinedFont = new BarCheckItem
+			{
+				Id = maxId,
+				Caption = "Underline",
+				CheckBoxVisibility = CheckBoxVisibility.AfterText
+			};
+
+			var underlineFont = new Font(_itemUnderlinedFont.ItemInMenuAppearance.Normal.Font.Name, _itemUnderlinedFont.ItemInMenuAppearance.Normal.Font.Size, FontStyle.Underline);
+			_itemUnderlinedFont.ItemInMenuAppearance.Normal.Font = underlineFont;
+			_itemUnderlinedFont.ItemInMenuAppearance.Pressed.Font = underlineFont;
+			_itemUnderlinedFont.ItemInMenuAppearance.Hovered.Font = underlineFont;
+
+			_itemUnderlinedFont.CheckedChanged += (o, e) => _settingsManager.OnFontChanged();
 			maxId++;
 
 			_itemLineBreakFont = new BarEditItem
@@ -192,6 +224,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			};
 
 			_barManager.Items.Add(_itemBoldFont);
+			_barManager.Items.Add(_itemItalicFont);
+			_barManager.Items.Add(_itemUnderlinedFont);
 			_barManager.Items.Add(_itemLineBreakFont);
 			_barManager.Items.Add(_itemLinkNote);
 			_barManager.Items.Add(_itemHoverNote);
@@ -201,6 +235,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			_itemsContainer.LinksPersistInfo.AddRange(new[]
 			{
 				new LinkPersistInfo(_itemBoldFont),
+				new LinkPersistInfo(_itemItalicFont),
+				new LinkPersistInfo(_itemUnderlinedFont),
 				new LinkPersistInfo(_itemLineBreakFont),
 				new LinkPersistInfo(_itemLinkNote),
 				new LinkPersistInfo(_itemHoverNote),
@@ -282,6 +318,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			protected override void SetMenuItemsViibility()
 			{
 				_editManager._itemBoldFont.Visibility = BarItemVisibility.Always;
+				_editManager._itemItalicFont.Visibility = BarItemVisibility.Always;
+				_editManager._itemUnderlinedFont.Visibility = BarItemVisibility.Always;
 				_editManager._itemLineBreakFont.Visibility = BarItemVisibility.Never;
 				_editManager._itemLinkNote.Visibility = BarItemVisibility.Always;
 				_editManager._itemHoverNote.Visibility = BarItemVisibility.Always;
@@ -293,7 +331,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 				base.LoadSettings();
 
 				_loading = true;
-				_editManager._itemBoldFont.Checked = Settings.IsBold;
+				_editManager._itemBoldFont.Checked = (Settings.RegularFontStyle & FontStyle.Bold) == FontStyle.Bold;
+				_editManager._itemItalicFont.Checked = (Settings.RegularFontStyle & FontStyle.Italic) == FontStyle.Italic;
+				_editManager._itemUnderlinedFont.Checked = (Settings.RegularFontStyle & FontStyle.Underline) == FontStyle.Underline;
 				if (!(String.IsNullOrEmpty(Settings.Note) || PredefinedNotes.Contains(Settings.Note)))
 					_editManager._itemLinkNoteCustom.EditValue = Settings.Note;
 				_editManager._itemHoverNote.EditValue = Settings.HoverNote;
@@ -326,8 +366,15 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			{
 				if (_loading) return;
 
-				Settings.IsBold = _editManager._itemBoldFont.Checked;
-				if (Settings.IsBold)
+				var regularFontStyle = FontStyle.Regular;
+				if (_editManager._itemBoldFont.Checked)
+					regularFontStyle = regularFontStyle | FontStyle.Bold;
+				if (_editManager._itemItalicFont.Checked)
+					regularFontStyle = regularFontStyle | FontStyle.Italic;
+				if (_editManager._itemUnderlinedFont.Checked)
+					regularFontStyle = regularFontStyle | FontStyle.Underline;
+				Settings.RegularFontStyle = regularFontStyle;
+				if (regularFontStyle != FontStyle.Regular)
 				{
 					Settings.IsSpecialFormat = false;
 					Settings.Font = null;
@@ -358,6 +405,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			protected override void SetMenuItemsViibility()
 			{
 				_editManager._itemBoldFont.Visibility = BarItemVisibility.Never;
+				_editManager._itemItalicFont.Visibility = BarItemVisibility.Never;
+				_editManager._itemUnderlinedFont.Visibility = BarItemVisibility.Never;
 				_editManager._itemLineBreakFont.Visibility = BarItemVisibility.Always;
 				_editManager._itemLinkNote.Visibility = BarItemVisibility.Never;
 				_editManager._itemHoverNote.Visibility = BarItemVisibility.Always;

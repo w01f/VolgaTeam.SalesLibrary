@@ -44,18 +44,21 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 				styleController.AppearanceFocused.Font = styleControllerFont;
 				styleController.AppearanceReadOnly.Font = styleControllerFont;
 				labelControlTitle.Font = new Font(labelControlTitle.Font.FontFamily, labelControlTitle.Font.Size - 2, labelControlTitle.Font.Style);
-				rbLinkRegularFormat.Font = new Font(rbLinkRegularFormat.Font.FontFamily, rbLinkRegularFormat.Font.Size - 2, rbLinkRegularFormat.Font.Style);
-				rbLinkBoldFormat.Font = new Font(rbLinkBoldFormat.Font.FontFamily, rbLinkBoldFormat.Font.Size - 2, rbLinkBoldFormat.Font.Style);
-				rbLinkSpecialFormat.Font = new Font(rbLinkSpecialFormat.Font.FontFamily, rbLinkSpecialFormat.Font.Size - 2, rbLinkSpecialFormat.Font.Style);
+				checkEditBold.Font = new Font(checkEditBold.Font.FontFamily, checkEditBold.Font.Size - 2, checkEditBold.Font.Style);
+				checkEditItalic.Font = new Font(checkEditItalic.Font.FontFamily, checkEditItalic.Font.Size - 2, checkEditItalic.Font.Style);
+				checkEditUnderlined.Font = new Font(checkEditUnderlined.Font.FontFamily, checkEditUnderlined.Font.Size - 2, checkEditUnderlined.Font.Style);
+				checkEditSpecialFormat.Font = new Font(checkEditSpecialFormat.Font.FontFamily, checkEditSpecialFormat.Font.Size - 2, checkEditSpecialFormat.Font.Style);
 				labelControlForeColor.Font = new Font(labelControlForeColor.Font.FontFamily, labelControlForeColor.Font.Size - 2, labelControlForeColor.Font.Style);
 			}
 		}
 
 		public void LoadData()
 		{
-			rbLinkRegularFormat.Checked = ((LibraryObjectLinkSettings)_data.Settings).IsRegularFormat;
-			rbLinkBoldFormat.Checked = ((LibraryObjectLinkSettings)_data.Settings).IsBold;
-			rbLinkSpecialFormat.Checked = ((LibraryObjectLinkSettings)_data.Settings).IsSpecialFormat;
+			var regularFontStyle = ((LibraryObjectLinkSettings)_data.Settings).RegularFontStyle;
+			checkEditBold.Checked = (regularFontStyle & FontStyle.Bold) == FontStyle.Bold;
+			checkEditItalic.Checked = (regularFontStyle & FontStyle.Italic) == FontStyle.Italic;
+			checkEditUnderlined.Checked = (regularFontStyle & FontStyle.Underline) == FontStyle.Underline;
+			checkEditSpecialFormat.Checked = ((LibraryObjectLinkSettings)_data.Settings).IsSpecialFormat;
 			buttonEditLinkSpecialFont.EditValue = _data.Settings.Font != null ? Utils.FontToString(_data.Settings.Font) : null;
 			buttonEditLinkSpecialFont.Tag = _data.Settings.Font;
 			colorEditLinkSpecialColor.Color = _data.DisplayColor;
@@ -63,8 +66,15 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 		public void SaveData()
 		{
-			((LibraryObjectLinkSettings)_data.Settings).IsBold = rbLinkBoldFormat.Checked;
-			((LibraryObjectLinkSettings)_data.Settings).IsSpecialFormat = rbLinkSpecialFormat.Checked;
+			var regulraStyle = FontStyle.Regular;
+			if (checkEditBold.Checked)
+				regulraStyle = regulraStyle | FontStyle.Bold;
+			if (checkEditItalic.Checked)
+				regulraStyle = regulraStyle | FontStyle.Italic;
+			if (checkEditUnderlined.Checked)
+				regulraStyle = regulraStyle | FontStyle.Underline;
+			((LibraryObjectLinkSettings)_data.Settings).RegularFontStyle = regulraStyle;
+			((LibraryObjectLinkSettings)_data.Settings).IsSpecialFormat = checkEditSpecialFormat.Checked;
 			if (((LibraryObjectLinkSettings)_data.Settings).IsSpecialFormat)
 				_data.Settings.Font = buttonEditLinkSpecialFont.Tag as Font;
 			else
@@ -73,9 +83,23 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 				_data.Settings.ForeColor = colorEditLinkSpecialColor.Color;
 		}
 
-		private void rbLinkSpecialFormat_CheckedChanged(object sender, EventArgs e)
+		private void checkEditSpecialFormat_CheckedChanged(object sender, EventArgs e)
 		{
-			buttonEditLinkSpecialFont.Enabled = rbLinkSpecialFormat.Checked;
+			buttonEditLinkSpecialFont.Enabled = checkEditSpecialFormat.Checked;
+			if (checkEditSpecialFormat.Checked)
+			{
+				checkEditBold.Checked = false;
+				checkEditItalic.Checked = false;
+				checkEditUnderlined.Checked = false;
+			}
+		}
+
+		private void checkEditRegularStyle_CheckedChanged(object sender, EventArgs e)
+		{
+			if (checkEditBold.Checked ||
+				checkEditItalic.Checked ||
+				checkEditUnderlined.Checked)
+				checkEditSpecialFormat.Checked = false;
 		}
 
 		private void FontEdit_Click(object sender, EventArgs e)

@@ -272,7 +272,8 @@ namespace SalesLibraries.Business.Schema.Wallbin
 				if (legacy.ExtendedProperties.IsSpecialFormat)
 					target.Settings.ForeColor = legacy.ExtendedProperties.ForeColor;
 				((LibraryObjectLinkSettings)target.Settings).HoverNote = legacy.ExtendedProperties.HoverNote;
-				((LibraryObjectLinkSettings)target.Settings).IsBold = legacy.ExtendedProperties.IsBold;
+				if (legacy.ExtendedProperties.IsBold)
+					((LibraryObjectLinkSettings)target.Settings).RegularFontStyle = FontStyle.Bold;
 				((LibraryObjectLinkSettings)target.Settings).IsSpecialFormat = legacy.ExtendedProperties.IsSpecialFormat;
 				((LibraryObjectLink)target).ExpirationSettings.Enable = legacy.ExpirationDateOptions.EnableExpirationDate;
 				((LibraryObjectLink)target).ExpirationSettings.ExpirationDate = legacy.ExpirationDateOptions.ExpirationDate;

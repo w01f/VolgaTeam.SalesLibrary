@@ -159,10 +159,43 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 			}
 			else if (Link is LibraryObjectLink)
 			{
-				Font = ((LibraryObjectLinkSettings)Link.Settings).DisplayAsBold ?
-					_parent.FolderBox.BoldRowFont :
-					_parent.FolderBox.RegularRowFont;
-				fontForSizeCalculation = _parent.FolderBox.BoldRowFont;
+				var objectLinkSettings = (LibraryObjectLinkSettings)Link.Settings;
+
+				if (objectLinkSettings.DisplayAsBold)
+				{
+					Font = _parent.FolderBox.BoldRowFont;
+				}
+				else
+				{
+					switch (objectLinkSettings.RegularFontStyle)
+					{
+						case (FontStyle.Bold | FontStyle.Italic | FontStyle.Underline):
+							Font = _parent.FolderBox.BoldItalicUndrerlineRowFont;
+							break;
+						case (FontStyle.Bold | FontStyle.Italic):
+							Font = _parent.FolderBox.BoldItalicRowFont;
+							break;
+						case (FontStyle.Italic | FontStyle.Underline):
+							Font = _parent.FolderBox.ItalicUnderlineRowFont;
+							break;
+						case (FontStyle.Bold | FontStyle.Underline):
+							Font = _parent.FolderBox.BoldUnderlineRowFont;
+							break;
+						case FontStyle.Bold:
+							Font = _parent.FolderBox.BoldRowFont;
+							break;
+						case FontStyle.Italic:
+							Font = _parent.FolderBox.ItalicRowFont;
+							break;
+						case FontStyle.Underline:
+							Font = _parent.FolderBox.UnderlineRowFont;
+							break;
+						default:
+							Font = _parent.FolderBox.RegularRowFont;
+							break;
+					}
+				}
+				fontForSizeCalculation = _parent.FolderBox.BoldItalicUndrerlineRowFont;
 			}
 			else
 			{

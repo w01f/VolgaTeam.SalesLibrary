@@ -17,8 +17,21 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 
 		#region Public Properties
 		public LibraryFolder DataSource { get; private set; }
-		public Font BoldRowFont { get; private set; }
+
 		public Font RegularRowFont { get; private set; }
+
+		public Font BoldRowFont { get; private set; }
+		public Font BoldItalicRowFont { get; private set; }
+		public Font BoldUnderlineRowFont { get; private set; }
+
+		public Font ItalicRowFont { get; private set; }
+		public Font ItalicUnderlineRowFont { get; private set; }
+
+		public Font UnderlineRowFont { get; private set; }
+
+		public Font BoldItalicUndrerlineRowFont { get; private set; }
+
+
 		public RichTextBox RichTextControl { get; private set; }
 
 		public event EventHandler<EventArgs> BoxSizeChanged;
@@ -161,7 +174,13 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 		protected void UpdateFont()
 		{
 			RegularRowFont = new Font(DataSource.Settings.WindowFont.FontFamily, FormatState.FontSize, DataSource.Settings.WindowFont.Style);
-			BoldRowFont = new Font(DataSource.Settings.WindowFont.FontFamily, FormatState.FontSize, FontStyle.Bold | DataSource.Settings.WindowFont.Style);
+			BoldRowFont = new Font(DataSource.Settings.WindowFont.FontFamily, FormatState.FontSize, FontStyle.Bold);
+			BoldItalicRowFont = new Font(DataSource.Settings.WindowFont.FontFamily, FormatState.FontSize, FontStyle.Bold | FontStyle.Italic);
+			BoldUnderlineRowFont = new Font(DataSource.Settings.WindowFont.FontFamily, FormatState.FontSize, FontStyle.Bold | FontStyle.Underline);
+			ItalicRowFont = new Font(DataSource.Settings.WindowFont.FontFamily, FormatState.FontSize, FontStyle.Italic);
+			ItalicUnderlineRowFont = new Font(DataSource.Settings.WindowFont.FontFamily, FormatState.FontSize, FontStyle.Italic | FontStyle.Underline);
+			UnderlineRowFont = new Font(DataSource.Settings.WindowFont.FontFamily, FormatState.FontSize, FontStyle.Underline);
+			BoldItalicUndrerlineRowFont = new Font(DataSource.Settings.WindowFont.FontFamily, FormatState.FontSize, FontStyle.Bold | FontStyle.Italic | FontStyle.Underline);
 		}
 		#endregion
 

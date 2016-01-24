@@ -23,6 +23,16 @@
 		 * @var boolean
 		 * @soap
 		 */
+		public $isItalic;
+		/**
+		 * @var boolean
+		 * @soap
+		 */
+		public $isUnderline;
+		/**
+		 * @var boolean
+		 * @soap
+		 */
 		public $isSpecialFormat;
 		/**
 		 * @var Font

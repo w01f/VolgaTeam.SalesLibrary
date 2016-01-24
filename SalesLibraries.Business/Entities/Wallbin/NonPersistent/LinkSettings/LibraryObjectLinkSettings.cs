@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Drawing;
+using Newtonsoft.Json;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 
 namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
@@ -17,15 +18,16 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 			}
 		}
 
-		private bool _isBold;
-		public bool IsBold
+		public bool IsBold { get; set; }
+		private FontStyle _regularFontStyle;
+		public FontStyle RegularFontStyle
 		{
-			get { return _isBold; }
+			get { return _regularFontStyle; }
 			set
 			{
-				if (_isBold != value)
+				if (_regularFontStyle != value)
 					OnSettingsChanged();
-				_isBold = value;
+				_regularFontStyle = value;
 			}
 		}
 
@@ -41,13 +43,6 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 			}
 		}
 
-
-		[JsonIgnore]
-		public bool IsRegularFormat
-		{
-			get { return !(_isBold || _isSpecialFormat); }
-		}
-
 		[JsonIgnore]
 		public virtual bool DisplayAsBold
 		{
@@ -55,7 +50,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 			{
 				if (ParentObjectLink.ExpirationSettings.Enable && ParentObjectLink.ExpirationSettings.IsExpired && ParentObjectLink.ExpirationSettings.MarkWhenExpired)
 					return true;
-				return _isBold;
+				return false;
 			}
 		}
 
@@ -63,6 +58,23 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 		protected LibraryObjectLink ParentObjectLink
 		{
 			get { return (LibraryObjectLink)Parent; }
+		}
+
+		protected override void AfterConstruction()
+		{
+			base.AfterConstruction();
+			RegularFontStyle = FontStyle.Regular;
+		}
+
+		protected override void AfterCreate()
+		{
+			base.AfterCreate();
+			//TODO Remove After several version
+			if (IsBold)
+			{
+				_regularFontStyle = FontStyle.Bold;
+				IsBold = false;
+			}
 		}
 	}
 }
