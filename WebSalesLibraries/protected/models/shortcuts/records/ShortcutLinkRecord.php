@@ -178,7 +178,7 @@
 						'select' => false,
 						'condition' => "group.order = " . $groupOrder ,
 					)))
-				->find('t.order='.$linkOrder);
+				->find('t.id_parent is null and t.order='.$linkOrder);
 			if (isset($record))
 				return $record->getModel($isPhone);
 			return null;
