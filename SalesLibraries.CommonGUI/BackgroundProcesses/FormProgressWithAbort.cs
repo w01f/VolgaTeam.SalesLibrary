@@ -11,8 +11,8 @@ namespace SalesLibraries.CommonGUI.BackgroundProcesses
 		private int _ticks;
 		public override string Title
 		{
-			get { return laProgress.Text; }
-			set { laProgress.Text = value; }
+			get { return laTitle.Text; }
+			set { laTitle.Text = value; }
 		}
 
 		public FormProgressWithAbort()
@@ -20,7 +20,7 @@ namespace SalesLibraries.CommonGUI.BackgroundProcesses
 			InitializeComponent();
 			if ((CreateGraphics()).DpiX > 96)
 			{
-				laProgress.Font = new Font(laProgress.Font.FontFamily, laProgress.Font.Size - 2, laProgress.Font.Style);
+				laTitle.Font = new Font(laTitle.Font.FontFamily, laTitle.Font.Size - 2, laTitle.Font.Style);
 				laTime.Font = new Font(laTime.Font.FontFamily, laTime.Font.Size - 2, laTime.Font.Style);
 			}
 
@@ -57,7 +57,7 @@ namespace SalesLibraries.CommonGUI.BackgroundProcesses
 
 		private void FormProgress_Shown(object sender, EventArgs e)
 		{
-			laProgress.Focus();
+			laTitle.Focus();
 			circularProgress.IsRunning = true;
 			_ticks = 0;
 			_timer.Start();

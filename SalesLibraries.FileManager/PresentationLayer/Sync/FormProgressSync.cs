@@ -7,11 +7,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Sync
 	{
 		protected override void InitForm()
 		{
-			Title = "Syncing Sales Library...";
-			panelEx.Style.BackColor1.Color = Color.Blue;
-			panelEx.Style.BackColor2.Color = Color.Blue;
-			panelExCancel.Style.BackColor1.Color = Color.Blue;
-			panelExCancel.Style.BackColor2.Color = Color.Blue;
+			Title = "Uploading Library...";
+			panelEx.Style.BackColor1.Color = Color.ForestGreen;
+			panelEx.Style.BackColor2.Color = Color.ForestGreen;
+			panelExCancel.Style.BackColor1.Color = Color.ForestGreen;
+			panelExCancel.Style.BackColor2.Color = Color.ForestGreen;
 		}
 	}
 }
