@@ -28,17 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
+			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormStart));
 			this.laTitle = new System.Windows.Forms.Label();
 			this.panelEx = new DevComponents.DotNetBar.PanelEx();
+			this.circularProgress = new DevComponents.DotNetBar.Controls.CircularProgress();
 			this.panelExCancel = new DevComponents.DotNetBar.PanelEx();
 			this.pbCancel = new System.Windows.Forms.PictureBox();
-			this.notifyIcon = new System.Windows.Forms.NotifyIcon();
-			this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip();
+			this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
+			this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.toolStripMenuItemShowProgress = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
 			this.toolStripMenuItemKillApp = new System.Windows.Forms.ToolStripMenuItem();
-			this.circularProgress = new DevComponents.DotNetBar.Controls.CircularProgress();
 			this.panelEx.SuspendLayout();
 			this.panelExCancel.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pbCancel)).BeginInit();
@@ -50,12 +51,12 @@
 			this.laTitle.BackColor = System.Drawing.Color.Transparent;
 			this.laTitle.Cursor = System.Windows.Forms.Cursors.Arrow;
 			this.laTitle.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.laTitle.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.laTitle.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.laTitle.ForeColor = System.Drawing.Color.White;
 			this.laTitle.Location = new System.Drawing.Point(26, 0);
 			this.laTitle.Name = "laTitle";
 			this.laTitle.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-			this.laTitle.Size = new System.Drawing.Size(221, 32);
+			this.laTitle.Size = new System.Drawing.Size(248, 32);
 			this.laTitle.TabIndex = 2;
 			this.laTitle.Text = "Test...";
 			this.laTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -74,7 +75,7 @@
 			this.panelEx.Location = new System.Drawing.Point(1, 1);
 			this.panelEx.Name = "panelEx";
 			this.panelEx.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-			this.panelEx.Size = new System.Drawing.Size(281, 32);
+			this.panelEx.Size = new System.Drawing.Size(308, 32);
 			this.panelEx.Style.BackColor1.Color = System.Drawing.Color.ForestGreen;
 			this.panelEx.Style.BackColor2.Color = System.Drawing.Color.ForestGreen;
 			this.panelEx.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
@@ -83,6 +84,25 @@
 			this.panelEx.Style.GradientAngle = 90;
 			this.panelEx.TabIndex = 4;
 			// 
+			// circularProgress
+			// 
+			this.circularProgress.AnimationSpeed = 50;
+			this.circularProgress.BackColor = System.Drawing.Color.Transparent;
+			// 
+			// 
+			// 
+			this.circularProgress.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			this.circularProgress.Dock = System.Windows.Forms.DockStyle.Left;
+			this.circularProgress.Enabled = false;
+			this.circularProgress.Location = new System.Drawing.Point(5, 0);
+			this.circularProgress.Name = "circularProgress";
+			this.circularProgress.ProgressBarType = DevComponents.DotNetBar.eCircularProgressType.Dot;
+			this.circularProgress.ProgressColor = System.Drawing.Color.White;
+			this.circularProgress.ProgressTextFormat = "";
+			this.circularProgress.Size = new System.Drawing.Size(21, 32);
+			this.circularProgress.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP;
+			this.circularProgress.TabIndex = 18;
+			// 
 			// panelExCancel
 			// 
 			this.panelExCancel.CanvasColor = System.Drawing.SystemColors.Control;
@@ -90,7 +110,7 @@
 			this.panelExCancel.Controls.Add(this.pbCancel);
 			this.panelExCancel.DisabledBackColor = System.Drawing.Color.Empty;
 			this.panelExCancel.Dock = System.Windows.Forms.DockStyle.Right;
-			this.panelExCancel.Location = new System.Drawing.Point(247, 0);
+			this.panelExCancel.Location = new System.Drawing.Point(274, 0);
 			this.panelExCancel.Name = "panelExCancel";
 			this.panelExCancel.Padding = new System.Windows.Forms.Padding(1);
 			this.panelExCancel.Size = new System.Drawing.Size(34, 32);
@@ -150,30 +170,11 @@
 			this.toolStripMenuItemKillApp.Text = "Kill {0}";
 			this.toolStripMenuItemKillApp.Click += new System.EventHandler(this.toolStripMenuItemKillApp_Click);
 			// 
-			// circularProgress
-			// 
-			this.circularProgress.AnimationSpeed = 50;
-			this.circularProgress.BackColor = System.Drawing.Color.Transparent;
-			// 
-			// 
-			// 
-			this.circularProgress.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			this.circularProgress.Dock = System.Windows.Forms.DockStyle.Left;
-			this.circularProgress.Enabled = false;
-			this.circularProgress.Location = new System.Drawing.Point(5, 0);
-			this.circularProgress.Name = "circularProgress";
-			this.circularProgress.ProgressBarType = DevComponents.DotNetBar.eCircularProgressType.Dot;
-			this.circularProgress.ProgressColor = System.Drawing.Color.White;
-			this.circularProgress.ProgressTextFormat = "";
-			this.circularProgress.Size = new System.Drawing.Size(21, 32);
-			this.circularProgress.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP;
-			this.circularProgress.TabIndex = 18;
-			// 
 			// FormStart
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
 			this.BackColor = System.Drawing.Color.White;
-			this.ClientSize = new System.Drawing.Size(283, 34);
+			this.ClientSize = new System.Drawing.Size(310, 34);
 			this.ControlBox = false;
 			this.Controls.Add(this.panelEx);
 			this.Cursor = System.Windows.Forms.Cursors.Arrow;

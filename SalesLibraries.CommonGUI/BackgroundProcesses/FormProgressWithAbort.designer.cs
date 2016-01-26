@@ -30,10 +30,10 @@
         {
 			this.laTitle = new System.Windows.Forms.Label();
 			this.panelEx = new DevComponents.DotNetBar.PanelEx();
+			this.laTime = new System.Windows.Forms.Label();
 			this.circularProgress = new DevComponents.DotNetBar.Controls.CircularProgress();
 			this.panelExCancel = new DevComponents.DotNetBar.PanelEx();
 			this.pbCancel = new System.Windows.Forms.PictureBox();
-			this.laTime = new System.Windows.Forms.Label();
 			this.panelEx.SuspendLayout();
 			this.panelExCancel.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pbCancel)).BeginInit();
@@ -44,7 +44,7 @@
 			this.laTitle.BackColor = System.Drawing.Color.Transparent;
 			this.laTitle.Cursor = System.Windows.Forms.Cursors.Arrow;
 			this.laTitle.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.laTitle.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.laTitle.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.laTitle.ForeColor = System.Drawing.Color.White;
 			this.laTitle.Location = new System.Drawing.Point(26, 0);
 			this.laTitle.Name = "laTitle";
@@ -77,6 +77,22 @@
 			this.panelEx.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
 			this.panelEx.Style.GradientAngle = 90;
 			this.panelEx.TabIndex = 4;
+			// 
+			// laTime
+			// 
+			this.laTime.BackColor = System.Drawing.Color.Transparent;
+			this.laTime.Cursor = System.Windows.Forms.Cursors.Arrow;
+			this.laTime.Dock = System.Windows.Forms.DockStyle.Right;
+			this.laTime.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.laTime.ForeColor = System.Drawing.Color.White;
+			this.laTime.Location = new System.Drawing.Point(186, 0);
+			this.laTime.Name = "laTime";
+			this.laTime.Padding = new System.Windows.Forms.Padding(0, 0, 5, 0);
+			this.laTime.Size = new System.Drawing.Size(61, 32);
+			this.laTime.TabIndex = 22;
+			this.laTime.Text = "0:00:00";
+			this.laTime.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			this.laTime.UseMnemonic = false;
 			// 
 			// circularProgress
 			// 
@@ -129,22 +145,6 @@
 			this.pbCancel.TabIndex = 0;
 			this.pbCancel.TabStop = false;
 			this.pbCancel.Click += new System.EventHandler(this.pbCancel_Click);
-			// 
-			// laTime
-			// 
-			this.laTime.BackColor = System.Drawing.Color.Transparent;
-			this.laTime.Cursor = System.Windows.Forms.Cursors.Arrow;
-			this.laTime.Dock = System.Windows.Forms.DockStyle.Right;
-			this.laTime.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.laTime.ForeColor = System.Drawing.Color.White;
-			this.laTime.Location = new System.Drawing.Point(186, 0);
-			this.laTime.Name = "laTime";
-			this.laTime.Padding = new System.Windows.Forms.Padding(0, 0, 5, 0);
-			this.laTime.Size = new System.Drawing.Size(61, 32);
-			this.laTime.TabIndex = 22;
-			this.laTime.Text = "0:00:00";
-			this.laTime.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-			this.laTime.UseMnemonic = false;
 			// 
 			// FormProgressWithAbort
 			// 
