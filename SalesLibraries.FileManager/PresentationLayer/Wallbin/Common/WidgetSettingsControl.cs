@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Linq;
 using System.Windows.Forms;
 using DevExpress.XtraEditors.Filtering;
+using DevExpress.XtraTab;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent;
 using SalesLibraries.FileManager.Controllers;
@@ -19,20 +21,23 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Common
 		{
 			_data = data;
 			InitializeComponent();
-			LoadData();
 		}
 
 		public void LoadData()
 		{
 			_loading = true;
 			xtraTabControlWidgets.TabPages.Clear();
-			foreach (var imageGroup in MainController.Instance.Lists.Widgets.Items)
-			{
-				var tabPage = BaseLinkImagesContainer.Create(imageGroup);
-				tabPage.SelectedImageChanged += OnSelectedWidgetChanged;
-				tabPage.OnImageDoubleClick += OnImageDoubleClick;
-				xtraTabControlWidgets.TabPages.Add(tabPage);
-			}
+			xtraTabControlWidgets.TabPages.AddRange(
+				MainController.Instance.Lists.Widgets.Items.Select(imageGroup =>
+				{
+					var tabPage = BaseLinkImagesContainer.Create(imageGroup);
+					tabPage.SelectedImageChanged += OnSelectedWidgetChanged;
+					tabPage.OnImageDoubleClick += OnImageDoubleClick;
+					return (XtraTabPage)tabPage;
+				}).ToArray()
+			);
+			xtraTabControlWidgets.SelectedPageChanging += (o, e) => { if (e.Page != null) ((BaseLinkImagesContainer)e.Page).Init(); };
+			((BaseLinkImagesContainer)xtraTabControlWidgets.SelectedTabPage).Init();
 
 			pbCustomWidget.Image = _data.WidgetType == WidgetType.CustomWidget ? _data.Image : null;
 			switch (_data.WidgetType)
@@ -51,6 +56,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Common
 
 		public void SaveData()
 		{
+			if (_data == null) return;
 			if (radioButtonWidgetTypeCustom.Checked)
 			{
 				_data.WidgetType = WidgetType.CustomWidget;
@@ -76,7 +82,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Common
 			pbCustomWidget.Enabled = radioButtonWidgetTypeCustom.Checked;
 			xtraTabControlWidgets.Enabled = radioButtonWidgetTypeCustom.Checked;
 			if (!_loading && StateChanged != null)
-				StateChanged(this, new CheckedChangedEventArgs(radioButtonWidgetTypeDisabled.Checked));
+				StateChanged(this, new CheckedChangedEventArgs(radioButtonWidgetTypeCustom.Checked));
 		}
 
 		private void OnSelectedWidgetChanged(object sender, LinkImageEventArgs e)

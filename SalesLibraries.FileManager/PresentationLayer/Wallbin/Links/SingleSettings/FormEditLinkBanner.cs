@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using DevComponents.DotNetBar.Metro;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
-using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
+using DevExpress.XtraTab;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.FileManager.Controllers;
@@ -52,13 +53,16 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		private void LoadData()
 		{
 			xtraTabControlBanners.TabPages.Clear();
-			foreach (var imageGroup in MainController.Instance.Lists.Banners.Items)
-			{
-				var tabPage = BaseLinkImagesContainer.Create(imageGroup);
-				tabPage.SelectedImageChanged += OnSelectedBannerChanged;
-				tabPage.OnImageDoubleClick += OnImageDoubleClick;
-				xtraTabControlBanners.TabPages.Add(tabPage);
-			}
+			xtraTabControlBanners.TabPages.AddRange(
+				MainController.Instance.Lists.Banners.Items.Select(imageGroup =>
+				{
+					var tabPage = BaseLinkImagesContainer.Create(imageGroup);
+					tabPage.SelectedImageChanged += OnSelectedBannerChanged;
+					tabPage.OnImageDoubleClick += OnImageDoubleClick;
+					return (XtraTabPage)tabPage;
+				}).ToArray());
+			xtraTabControlBanners.SelectedPageChanged += (o, e) => ((BaseLinkImagesContainer)e.Page).Init();
+			((BaseLinkImagesContainer)xtraTabControlBanners.SelectedTabPage).Init();
 
 			checkBoxEnableBanner.Enabled = MainController.Instance.Lists.Banners.MainFolder.ExistsLocal();
 			checkBoxEnableBanner.Checked = _sourceLink.Banner.Enable && MainController.Instance.Lists.Banners.MainFolder.ExistsLocal();

@@ -69,9 +69,9 @@
 			this.xtraTabControlWidgets.AppearancePage.PageClient.Font = new System.Drawing.Font("Arial", 9.75F);
 			this.xtraTabControlWidgets.AppearancePage.PageClient.Options.UseFont = true;
 			this.xtraTabControlWidgets.Enabled = false;
-			this.xtraTabControlWidgets.Location = new System.Drawing.Point(-1, -4);
+			this.xtraTabControlWidgets.Location = new System.Drawing.Point(0, 0);
 			this.xtraTabControlWidgets.Name = "xtraTabControlWidgets";
-			this.xtraTabControlWidgets.Size = new System.Drawing.Size(926, 492);
+			this.xtraTabControlWidgets.Size = new System.Drawing.Size(920, 488);
 			this.xtraTabControlWidgets.TabIndex = 9;
 			// 
 			// radioButtonWidgetTypeCustom

@@ -15,6 +15,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Common
 	{
 		private readonly LinkImageGroup _parent;
 		protected ImageListView.HitInfo _menuHitInfo;
+		private bool _initialized;
 
 		public event EventHandler<LinkImageEventArgs> SelectedImageChanged;
 		public event EventHandler<EventArgs> OnImageDoubleClick;
@@ -34,8 +35,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Common
 			InitializeComponent();
 			_parent = parent;
 			Text = _parent.Name;
-			LoadImages();
-			InitPopupMenu();
 			_parent.OnDataChanged += (o, e) => LoadImages();
 			imageListView.ItemClick += OnGalleryItemClick;
 			imageListView.ItemDoubleClick += OnGalleryItemDoubleClick;
@@ -49,6 +48,17 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Common
 			if (parent is FavoriteImageGroup)
 				return new FavoritesImagesContainer(parent);
 			return new RegularImagesContainer(parent);
+		}
+
+		public void Init()
+		{
+			if(_initialized) return;
+			Cursor = Cursors.WaitCursor;
+			Application.DoEvents();
+			InitPopupMenu();
+			LoadImages();
+			_initialized = true;
+			Cursor = Cursors.Default;
 		}
 
 		protected abstract void InitPopupMenu();

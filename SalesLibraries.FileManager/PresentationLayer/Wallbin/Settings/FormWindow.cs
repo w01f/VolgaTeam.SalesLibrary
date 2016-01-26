@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Drawing;
-using System.Net.Mime;
 using System.Windows.Forms;
 using DevComponents.DotNetBar.Metro;
 using DevExpress.Utils;
 using DevExpress.XtraEditors.Controls;
+using DevExpress.XtraTab;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.Persistent;
 using SalesLibraries.Common.Helpers;
@@ -93,6 +93,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 					xtraTabControlWindowProperties.ShowTabHeader = DefaultBoolean.False;
 					xtraTabControlWindowProperties.BorderStyle = BorderStyles.NoBorder;
 					xtraTabControlWindowProperties.BorderStylePage = BorderStyles.NoBorder;
+					OnSelectedPageChanging(xtraTabControlWindowProperties, new TabPageChangingEventArgs(null, xtraTabPageWidget));
 					break;
 				case WindowPropertiesType.Banner:
 					xtraTabPageAppearance.PageVisible = false;
@@ -101,6 +102,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 					xtraTabControlWindowProperties.ShowTabHeader = DefaultBoolean.False;
 					xtraTabControlWindowProperties.BorderStyle = BorderStyles.NoBorder;
 					xtraTabControlWindowProperties.BorderStylePage = BorderStyles.NoBorder;
+					OnSelectedPageChanging(xtraTabControlWindowProperties, new TabPageChangingEventArgs(null, xtraTabPageBanner));
 					break;
 			}
 
@@ -132,30 +134,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			}
 			ckApllyForAllWindowsAppearance.Visible = _formParameters.Type == WindowPropertiesType.None;
 			ckApllyForAllWindowsAppearance.Checked = _formParameters.Type == WindowPropertiesType.None && _folder.Page.Library.Settings.ApplyAppearanceForAllWindows;
-
-			_widgetControl = new WidgetSettingsControl(_folder.Widget);
-			pnWidgetContainer.Controls.Add(_widgetControl);
-			_widgetControl.Dock = DockStyle.Fill;
-			_widgetControl.LoadData();
-			_widgetControl.StateChanged += (o, e) =>
-			{
-				if (e.IsChecked)
-					_bannerControl.ChangeState(false);
-			};
-			pnApllyForAllWindowsWidget.Visible = _formParameters.Type == WindowPropertiesType.None;
-			ckApllyForAllWindowsWidget.Checked = _formParameters.Type == WindowPropertiesType.None && _folder.Page.Library.Settings.ApplyWidgetForAllWindows;
-
-			_bannerControl = new BannerSettingsControl(_folder.Banner);
-			pnBannerContainer.Controls.Add(_bannerControl);
-			_bannerControl.Dock = DockStyle.Fill;
-			_bannerControl.LoadData();
-			_bannerControl.StateChanged += (o, e) =>
-			{
-				if (e.IsChecked)
-					_widgetControl.ChangeState(false);
-			};
-			pnApllyForAllWindowsBanner.Visible = _formParameters.Type == WindowPropertiesType.None;
-			ckApllyForAllWindowsBanner.Checked = _formParameters.Type == WindowPropertiesType.None && _folder.Page.Library.Settings.ApplyBannerForAllWindows;
 		}
 
 		private void SaveData()
@@ -176,11 +154,13 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			if (_formParameters.Type == WindowPropertiesType.None)
 				_folder.Page.Library.Settings.ApplyAppearanceForAllWindows = ckApllyForAllWindowsAppearance.Checked;
 
-			_widgetControl.SaveData();
+			if (_widgetControl != null)
+				_widgetControl.SaveData();
 			if (_formParameters.Type == WindowPropertiesType.None)
 				_folder.Page.Library.Settings.ApplyWidgetForAllWindows = ckApllyForAllWindowsWidget.Checked;
 
-			_bannerControl.SaveData();
+			if (_bannerControl != null)
+				_bannerControl.SaveData();
 			if (_formParameters.Type == WindowPropertiesType.None)
 				_folder.Page.Library.Settings.ApplyBannerForAllWindows = ckApllyForAllWindowsBanner.Checked;
 
@@ -193,6 +173,54 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 		{
 			if (DialogResult != DialogResult.OK) return;
 			SaveData();
+		}
+
+		private void OnSelectedPageChanging(object sender, DevExpress.XtraTab.TabPageChangingEventArgs pageArgs)
+		{
+			if (pageArgs.Page == xtraTabPageWidget && _widgetControl == null)
+			{
+				Cursor = Cursors.WaitCursor;
+				Application.DoEvents();
+				_widgetControl = new WidgetSettingsControl(_folder.Widget);
+				_widgetControl.Dock = DockStyle.Fill;
+				pnWidgetContainer.Controls.Add(_widgetControl);
+				_widgetControl.LoadData();
+				_widgetControl.StateChanged += (o, e) =>
+				{
+					if (e.IsChecked)
+					{
+						if (_bannerControl != null)
+							_bannerControl.ChangeState(false);
+						else
+							_folder.Banner.Enable = false;
+					}
+				};
+				pnApllyForAllWindowsWidget.Visible = _formParameters.Type == WindowPropertiesType.None;
+				ckApllyForAllWindowsWidget.Checked = _formParameters.Type == WindowPropertiesType.None && _folder.Page.Library.Settings.ApplyWidgetForAllWindows;
+				Cursor = Cursors.Default;
+			}
+			else if (pageArgs.Page == xtraTabPageBanner && _bannerControl == null)
+			{
+				Cursor = Cursors.WaitCursor;
+				Application.DoEvents();
+				_bannerControl = new BannerSettingsControl(_folder.Banner);
+				_bannerControl.Dock = DockStyle.Fill;
+				pnBannerContainer.Controls.Add(_bannerControl);
+				_bannerControl.LoadData();
+				_bannerControl.StateChanged += (o, e) =>
+				{
+					if (e.IsChecked)
+					{
+						if (_widgetControl != null)
+							_widgetControl.ChangeState(false);
+						else
+							_folder.Widget.WidgetType = _folder.Widget.DefaultWidgetType;
+					}
+				};
+				pnApllyForAllWindowsBanner.Visible = _formParameters.Type == WindowPropertiesType.None;
+				ckApllyForAllWindowsBanner.Checked = _formParameters.Type == WindowPropertiesType.None && _folder.Page.Library.Settings.ApplyBannerForAllWindows;
+				Cursor = Cursors.Default;
+			}
 		}
 	}
 
@@ -211,7 +239,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 		public int Height { get; protected set; }
 		public int Width { get; protected set; }
 	}
-	
+
 	class BaseEditFormParams : WindowSettingsEditFormParams
 	{
 		public BaseEditFormParams()

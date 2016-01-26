@@ -28,10 +28,11 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.components = new System.ComponentModel.Container();
 			this.xtraTabControlWindowProperties = new DevExpress.XtraTab.XtraTabControl();
 			this.xtraTabPageAppearance = new DevExpress.XtraTab.XtraTabPage();
 			this.textEditName = new DevExpress.XtraEditors.TextEdit();
-			this.styleController = new DevExpress.XtraEditors.StyleController();
+			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
 			this.laName = new System.Windows.Forms.Label();
 			this.colorEditWindowBorderColor = new DevExpress.XtraEditors.ColorEdit();
 			this.laBorderColor = new System.Windows.Forms.Label();
@@ -116,6 +117,7 @@
             this.xtraTabPageAppearance,
             this.xtraTabPageWidget,
             this.xtraTabPageBanner});
+			this.xtraTabControlWindowProperties.SelectedPageChanging += new DevExpress.XtraTab.TabPageChangingEventHandler(this.OnSelectedPageChanging);
 			// 
 			// xtraTabPageAppearance
 			// 

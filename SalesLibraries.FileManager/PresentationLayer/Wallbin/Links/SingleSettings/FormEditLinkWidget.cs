@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Linq;
 using System.Windows.Forms;
 using DevComponents.DotNetBar.Metro;
+using DevExpress.XtraTab;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.FileManager.Controllers;
@@ -47,13 +49,17 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		private void LoadData()
 		{
 			xtraTabControlWidgets.TabPages.Clear();
-			foreach (var imageGroup in MainController.Instance.Lists.Widgets.Items)
-			{
-				var tabPage = BaseLinkImagesContainer.Create(imageGroup);
-				tabPage.SelectedImageChanged += OnSelectedWidgetChanged;
-				tabPage.OnImageDoubleClick += OnImageDoubleClick;
-				xtraTabControlWidgets.TabPages.Add(tabPage);
-			}
+			xtraTabControlWidgets.TabPages.AddRange(
+				MainController.Instance.Lists.Widgets.Items.Select(imageGroup =>
+				{
+					var tabPage = BaseLinkImagesContainer.Create(imageGroup);
+					tabPage.SelectedImageChanged += OnSelectedWidgetChanged;
+					tabPage.OnImageDoubleClick += OnImageDoubleClick;
+					return (XtraTabPage)tabPage;
+				}).ToArray()
+			);
+			xtraTabControlWidgets.SelectedPageChanged += (o, e) => ((BaseLinkImagesContainer)e.Page).Init();
+			((BaseLinkImagesContainer)xtraTabControlWidgets.SelectedTabPage).Init();
 
 			var fileLink = _sourceLink as LibraryFileLink;
 			if (fileLink != null)

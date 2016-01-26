@@ -116,6 +116,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 			pnHeader.DragDrop += OnDragDrop;
 			pnHeader.DragOver += OnDragOver;
 			pnHeader.DragLeave += OnDragLeave;
+			pnHeader.MouseDown += OnHeaderMouseDown;
+			pnHeader.MouseMove += OnHeaderMouseMove;
 			// 
 			// labelControlText
 			// 

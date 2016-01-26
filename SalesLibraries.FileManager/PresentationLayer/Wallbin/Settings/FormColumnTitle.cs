@@ -86,26 +86,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			memoEditTitle.Properties.AppearanceDisabled.Font = memoEditTitle.Font;
 			memoEditTitle.Properties.AppearanceFocused.Font = memoEditTitle.Font;
 			memoEditTitle.Properties.AppearanceReadOnly.Font = memoEditTitle.Font;
-
-			_widgetControl = new WidgetSettingsControl(_columnTitle.Widget);
-			xtraTabPageWidget.Controls.Add(_widgetControl);
-			_widgetControl.Dock = DockStyle.Fill;
-			_widgetControl.LoadData();
-			_widgetControl.StateChanged += (o, e) =>
-			{
-				if (e.IsChecked)
-					_bannerControl.ChangeState(false);
-			};
-
-			_bannerControl = new BannerSettingsControl(_columnTitle.Banner);
-			xtraTabPageBanner.Controls.Add(_bannerControl);
-			_bannerControl.Dock = DockStyle.Fill;
-			_bannerControl.LoadData();
-			_bannerControl.StateChanged += (o, e) =>
-			{
-				if (e.IsChecked)
-					_widgetControl.ChangeState(false);
-			};
 		}
 
 		private void SaveData()
@@ -127,6 +107,50 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			_bannerControl.SaveData();
 
 			_columnTitle.Page.ApplyColumnTitleSettings(_columnTitle);
+		}
+
+		private void OnSelectedPageChanging(object sender, DevExpress.XtraTab.TabPageChangingEventArgs pageArgs)
+		{
+			if (pageArgs.Page == xtraTabPageWidget && _widgetControl == null)
+			{
+				Cursor = Cursors.WaitCursor;
+				Application.DoEvents();
+				_widgetControl = new WidgetSettingsControl(_columnTitle.Widget);
+				xtraTabPageWidget.Controls.Add(_widgetControl);
+				_widgetControl.Dock = DockStyle.Fill;
+				_widgetControl.LoadData();
+				_widgetControl.StateChanged += (o, e) =>
+				{
+					if (e.IsChecked)
+					{
+						if (_bannerControl != null)
+							_bannerControl.ChangeState(false);
+						else
+							_columnTitle.Banner.Enable = false;
+					}
+				};
+				Cursor = Cursors.Default;
+			}
+			else if (pageArgs.Page == xtraTabPageBanner && _bannerControl == null)
+			{
+				Cursor = Cursors.WaitCursor;
+				Application.DoEvents();
+				_bannerControl = new BannerSettingsControl(_columnTitle.Banner);
+				xtraTabPageBanner.Controls.Add(_bannerControl);
+				_bannerControl.Dock = DockStyle.Fill;
+				_bannerControl.LoadData();
+				_bannerControl.StateChanged += (o, e) =>
+				{
+					if (e.IsChecked)
+					{
+						if (_widgetControl != null)
+							_widgetControl.ChangeState(false);
+						else
+							_columnTitle.Widget.WidgetType = _columnTitle.Widget.DefaultWidgetType;
+					}
+				};
+				Cursor = Cursors.Default;
+			}
 		}
 
 		#region Appearance

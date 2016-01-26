@@ -28,6 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.components = new System.ComponentModel.Container();
 			this.xtraTabControlWindowProperties = new DevExpress.XtraTab.XtraTabControl();
 			this.xtraTabPageAppearance = new DevExpress.XtraTab.XtraTabPage();
 			this.laColumn1Alignment = new System.Windows.Forms.Label();
@@ -35,7 +36,7 @@
 			this.rbAlignmentCenter = new System.Windows.Forms.RadioButton();
 			this.rbAlignmentLeft = new System.Windows.Forms.RadioButton();
 			this.buttonEditFont = new DevExpress.XtraEditors.ButtonEdit();
-			this.styleController = new DevExpress.XtraEditors.StyleController();
+			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
 			this.laFont = new System.Windows.Forms.Label();
 			this.colorEditForeColor = new DevExpress.XtraEditors.ColorEdit();
 			this.memoEditTitle = new DevExpress.XtraEditors.MemoEdit();
@@ -85,12 +86,13 @@
 			this.xtraTabControlWindowProperties.Location = new System.Drawing.Point(0, 34);
 			this.xtraTabControlWindowProperties.Name = "xtraTabControlWindowProperties";
 			this.xtraTabControlWindowProperties.SelectedTabPage = this.xtraTabPageAppearance;
-			this.xtraTabControlWindowProperties.Size = new System.Drawing.Size(784, 573);
+			this.xtraTabControlWindowProperties.Size = new System.Drawing.Size(842, 573);
 			this.xtraTabControlWindowProperties.TabIndex = 25;
 			this.xtraTabControlWindowProperties.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.xtraTabPageAppearance,
             this.xtraTabPageWidget,
             this.xtraTabPageBanner});
+			this.xtraTabControlWindowProperties.SelectedPageChanging += new DevExpress.XtraTab.TabPageChangingEventHandler(this.OnSelectedPageChanging);
 			// 
 			// xtraTabPageAppearance
 			// 
@@ -109,7 +111,7 @@
 			this.xtraTabPageAppearance.Controls.Add(this.colorEditBackColor);
 			this.xtraTabPageAppearance.Controls.Add(this.ckEnableText);
 			this.xtraTabPageAppearance.Name = "xtraTabPageAppearance";
-			this.xtraTabPageAppearance.Size = new System.Drawing.Size(778, 542);
+			this.xtraTabPageAppearance.Size = new System.Drawing.Size(836, 542);
 			this.xtraTabPageAppearance.Text = "Appearance";
 			// 
 			// laColumn1Alignment
@@ -176,7 +178,7 @@
 			this.buttonEditFont.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
 			this.buttonEditFont.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-			this.buttonEditFont.Size = new System.Drawing.Size(677, 22);
+			this.buttonEditFont.Size = new System.Drawing.Size(735, 22);
 			this.buttonEditFont.StyleController = this.styleController;
 			this.buttonEditFont.TabIndex = 55;
 			this.buttonEditFont.EditValueChanged += new System.EventHandler(this.buttonEditFont_EditValueChanged);
@@ -238,7 +240,7 @@
 			this.memoEditTitle.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.memoEditTitle.Properties.Appearance.Options.UseBackColor = true;
 			this.memoEditTitle.Properties.Appearance.Options.UseForeColor = true;
-			this.memoEditTitle.Size = new System.Drawing.Size(763, 54);
+			this.memoEditTitle.Size = new System.Drawing.Size(821, 54);
 			this.memoEditTitle.StyleController = this.styleController;
 			this.memoEditTitle.TabIndex = 49;
 			// 
@@ -318,7 +320,7 @@
 			this.ckApplyForAllColumnTitles.AutoSize = true;
 			this.ckApplyForAllColumnTitles.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.ckApplyForAllColumnTitles.ForeColor = System.Drawing.Color.Black;
-			this.ckApplyForAllColumnTitles.Location = new System.Drawing.Point(631, 7);
+			this.ckApplyForAllColumnTitles.Location = new System.Drawing.Point(689, 7);
 			this.ckApplyForAllColumnTitles.Name = "ckApplyForAllColumnTitles";
 			this.ckApplyForAllColumnTitles.Size = new System.Drawing.Size(148, 20);
 			this.ckApplyForAllColumnTitles.TabIndex = 35;
@@ -334,7 +336,7 @@
 			this.pnBottom.ForeColor = System.Drawing.Color.Black;
 			this.pnBottom.Location = new System.Drawing.Point(0, 607);
 			this.pnBottom.Name = "pnBottom";
-			this.pnBottom.Size = new System.Drawing.Size(784, 55);
+			this.pnBottom.Size = new System.Drawing.Size(842, 55);
 			this.pnBottom.TabIndex = 26;
 			// 
 			// buttonXSave
@@ -343,7 +345,7 @@
 			this.buttonXSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXSave.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXSave.DialogResult = System.Windows.Forms.DialogResult.OK;
-			this.buttonXSave.Location = new System.Drawing.Point(536, 10);
+			this.buttonXSave.Location = new System.Drawing.Point(594, 10);
 			this.buttonXSave.Name = "buttonXSave";
 			this.buttonXSave.Size = new System.Drawing.Size(102, 33);
 			this.buttonXSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -356,7 +358,7 @@
 			this.buttonXCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXCancel.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.buttonXCancel.Location = new System.Drawing.Point(670, 10);
+			this.buttonXCancel.Location = new System.Drawing.Point(728, 10);
 			this.buttonXCancel.Name = "buttonXCancel";
 			this.buttonXCancel.Size = new System.Drawing.Size(102, 33);
 			this.buttonXCancel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -372,7 +374,7 @@
 			this.pnTop.ForeColor = System.Drawing.Color.Black;
 			this.pnTop.Location = new System.Drawing.Point(0, 0);
 			this.pnTop.Name = "pnTop";
-			this.pnTop.Size = new System.Drawing.Size(784, 34);
+			this.pnTop.Size = new System.Drawing.Size(842, 34);
 			this.pnTop.TabIndex = 27;
 			// 
 			// laLocation
@@ -390,7 +392,7 @@
 			// FormColumnTitle
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-			this.ClientSize = new System.Drawing.Size(784, 662);
+			this.ClientSize = new System.Drawing.Size(842, 662);
 			this.Controls.Add(this.xtraTabControlWindowProperties);
 			this.Controls.Add(this.pnBottom);
 			this.Controls.Add(this.pnTop);

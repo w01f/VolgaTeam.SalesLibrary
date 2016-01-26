@@ -1,11 +1,12 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraEditors.Filtering;
-using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
+using DevExpress.XtraTab;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.FileManager.Controllers;
@@ -26,20 +27,23 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Common
 		{
 			_data = data;
 			InitializeComponent();
-			LoadData();
 		}
 
 		public void LoadData()
 		{
 			_loading = true;
 			xtraTabControlBanners.TabPages.Clear();
-			foreach (var imageGroup in MainController.Instance.Lists.Banners.Items)
-			{
-				var tabPage = BaseLinkImagesContainer.Create(imageGroup);
-				tabPage.SelectedImageChanged += OnSelectedBannerChanged;
-				tabPage.OnImageDoubleClick += OnImageDoubleClick;
-				xtraTabControlBanners.TabPages.Add(tabPage);
-			}
+			xtraTabControlBanners.TabPages.AddRange(
+				MainController.Instance.Lists.Banners.Items.Select(imageGroup =>
+				{
+					var tabPage = BaseLinkImagesContainer.Create(imageGroup);
+					tabPage.SelectedImageChanged += OnSelectedBannerChanged;
+					tabPage.OnImageDoubleClick += OnImageDoubleClick;
+					return (XtraTabPage)tabPage;
+				}).ToArray());
+			xtraTabControlBanners.SelectedPageChanging += (o, e) => { if (e.Page != null) ((BaseLinkImagesContainer)e.Page).Init(); };
+			((BaseLinkImagesContainer)xtraTabControlBanners.SelectedTabPage).Init();
+
 			checkBoxEnableBanner.Enabled = MainController.Instance.Lists.Banners.MainFolder.ExistsLocal();
 			checkBoxEnableBanner.Checked = _data.Enable && MainController.Instance.Lists.Banners.MainFolder.ExistsLocal();
 			pbSelectedBanner.Image = _data.Enable ? _data.Image : null;
