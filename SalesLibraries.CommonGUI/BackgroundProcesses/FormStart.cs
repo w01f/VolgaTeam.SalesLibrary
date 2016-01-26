@@ -62,6 +62,7 @@ namespace SalesLibraries.CommonGUI.BackgroundProcesses
 		private void FormProgress_Shown(object sender, EventArgs e)
 		{
 			laTitle.Focus();
+			circularProgress.IsRunning = true;
 		}
 
 		private void FormStart_FormClosed(object sender, FormClosedEventArgs e)
