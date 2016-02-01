@@ -103,7 +103,7 @@
     <Compile Include="Helpers\Utils.cs" />
     <Compile Include="Dictionaries\WidgetList.cs" />
     <Compile Include="Helpers\WinAPIHelper.cs" />
-    <Compile Include="JsonConverters\EFProxyContractResolver.cs" />
+    <Compile Include="JsonConverters\EntitySettingsResolver.cs" />
     <Compile Include="JsonConverters\DefaultSerializeSettings.cs" />
     <Compile Include="JsonConverters\ImageConverter.cs" />
     <Compile Include="Helpers\ActivityManager.cs" />

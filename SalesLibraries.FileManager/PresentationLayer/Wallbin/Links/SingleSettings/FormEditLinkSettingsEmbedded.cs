@@ -59,7 +59,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			AddOptionPages(
 				ObjectIntendHelper.GetObjectInstances(
 					typeof(ILinkSettingsEditControl),
-					EFProxyContractResolver.ExtractObjectTypeFromProxy(_sourceLink.GetType()), _sourceLink)
+					EntitySettingsResolver.ExtractObjectTypeFromProxy(_sourceLink.GetType()), _sourceLink)
 					.OfType<ILinkSettingsEditControl>()
 					.Where(lp =>
 						lp.SettingsType == settingsType && lp.AvailableForEmbedded)

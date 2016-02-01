@@ -13,7 +13,7 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 		{
 			var previewGenerators = ObjectIntendHelper.GetObjectInstances(
 				typeof(IPreviewGenerator),
-				EFProxyContractResolver.ExtractObjectTypeFromProxy(previewContainer.GetType()))
+				EntitySettingsResolver.ExtractObjectTypeFromProxy(previewContainer.GetType()))
 				.OfType<IPreviewGenerator>()
 				.ToList();
 			if (!previewGenerators.Any())

@@ -11,7 +11,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Contro
 		{
 			return ObjectIntendHelper.GetObjectInstances(
 					typeof(ILinkViewer),
-					EFProxyContractResolver.ExtractObjectTypeFromProxy(sourceLink.GetType()),
+					EntitySettingsResolver.ExtractObjectTypeFromProxy(sourceLink.GetType()),
 					sourceLink)
 				.OfType<ILinkViewer>()
 				.FirstOrDefault() ?? new CommonFileViewer(sourceLink);

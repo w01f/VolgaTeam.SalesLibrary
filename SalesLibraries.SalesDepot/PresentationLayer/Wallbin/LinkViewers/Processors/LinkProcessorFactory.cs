@@ -11,7 +11,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Proces
 		{
 			return ObjectIntendHelper.GetObjectInstances(
 					typeof(ILinkViewProcessor),
-					EFProxyContractResolver.ExtractObjectTypeFromProxy(link.GetType()),
+					EntitySettingsResolver.ExtractObjectTypeFromProxy(link.GetType()),
 					link)
 				.OfType<ILinkViewProcessor>()
 				.FirstOrDefault() ?? new CommonFileLinkProcessor((LibraryFileLink)link);

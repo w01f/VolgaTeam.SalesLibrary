@@ -9,7 +9,7 @@ namespace SalesLibraries.Common.JsonConverters
 			ReferenceLoopHandling = ReferenceLoopHandling.Serialize;
 			PreserveReferencesHandling = PreserveReferencesHandling.Objects;
 			TypeNameHandling = TypeNameHandling.All;
-			ContractResolver = new EFProxyContractResolver();
+			ContractResolver = new EntitySettingsResolver();
 			Converters.Add(new ImageConverter());
 		}
 	}
