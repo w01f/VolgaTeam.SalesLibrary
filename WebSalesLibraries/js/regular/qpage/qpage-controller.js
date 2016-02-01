@@ -53,6 +53,7 @@
 				if (checkEmail())
 					loadFolderLinkContent($(this));
 				event.preventDefault();
+				event.stopPropagation();
 			});
 		};
 

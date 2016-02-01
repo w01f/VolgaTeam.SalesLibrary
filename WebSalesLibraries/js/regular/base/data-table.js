@@ -89,7 +89,6 @@
 				"title": "Rating",
 				"width": "90px",
 				"class": "centered",
-				"orderDataType": "link-rate",
 				"render": {
 					_: function (data)
 					{
@@ -101,12 +100,14 @@
 				}
 			});
 			columnSettings.push({
-				"data": "date.display",
+				"data": "date",
 				"title": "Date",
 				"class": "centered",
 				"width": "80px",
-				"iDataSort": 6,
-				"render": cellRenderer
+				"render": {
+					_: cellRenderer,
+					sort: 'value'
+				}
 			});
 
 			columnSettings.push({
@@ -225,11 +226,18 @@
 
 		var cellRenderer = function (data, type, row)
 		{
-			if (row != '')
-				return row.url != '' ?
-					'<a class="link-url mtTool" mtcontent="' + row.tooltip + '" href="' + row.url + '" target="_blank">' + (data != null ? data : '') + '</a>' :
-					'<span class="mtTool" mtcontent="' + row.tooltip + '">' + (data != null ? data : '') + '</span>';
-			return '';
+			if (type == "display")
+			{
+				var displayValue = typeof data === 'object' && data != null ? data.display : data;
+				displayValue = displayValue != null ? displayValue : '';
+
+				if (row != '')
+					return row.url != '' ?
+						'<a class="link-url mtTool" mtcontent="' + row.tooltip + '" href="' + row.url + '" target="_blank">' + displayValue + '</a>' :
+						'<span class="mtTool" mtcontent="' + row.tooltip + '">' + displayValue + '</span>';
+				return '';
+			}
+			return data;
 		};
 
 		var destroy = function ()

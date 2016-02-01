@@ -42,6 +42,7 @@
 			{
 				loadFolderLinkContent($(this));
 				event.preventDefault();
+				event.stopPropagation();
 			});
 			container.find('.log-activity').off('click.log').on('click.log', function ()
 			{
