@@ -147,7 +147,7 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 			#endregion
 
 			#region Text
-			Text = Link.DisplayName;
+			Text = !String.IsNullOrEmpty(Link.DisplayName) ? Link.DisplayName : String.Empty;
 			#endregion
 
 			#region Font

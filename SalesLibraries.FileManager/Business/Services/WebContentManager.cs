@@ -277,10 +277,10 @@ namespace SalesLibraries.FileManager.Business.Services
 			this LinkSettings target,
 			BaseLinkSettings source)
 		{
-			target.note = source.Note;
-
 			if (source is LibraryObjectLinkSettings)
 			{
+				target.note = source.Note;
+
 				var objectSource = (LibraryObjectLinkSettings)source;
 				target.hoverNote = objectSource.HoverNote;
 				target.isBold = (objectSource.RegularFontStyle & FontStyle.Bold) == FontStyle.Bold;

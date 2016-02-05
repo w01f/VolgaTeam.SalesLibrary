@@ -196,8 +196,10 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 		protected void OnGridCellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
 		{
 			var linkRow = (LinkRow)grFiles.Rows[e.RowIndex];
-			var hintText = linkRow.Source.Hint;
-			grFiles.Rows[e.RowIndex].Cells[e.ColumnIndex].ToolTipText = !String.IsNullOrEmpty(hintText.Replace(Environment.NewLine, String.Empty)) ? hintText : null;
+			var hintText = linkRow.Source != null ? linkRow.Source.Hint : null;
+			hintText = !String.IsNullOrEmpty(hintText) ? hintText.Replace(Environment.NewLine, String.Empty) : null;
+			hintText = !String.IsNullOrEmpty(hintText) ? hintText : null;
+			grFiles.Rows[e.RowIndex].Cells[e.ColumnIndex].ToolTipText = hintText;
 		}
 
 		protected virtual void OnGridCellPainting(object sender, DataGridViewCellPaintingEventArgs e)

@@ -241,10 +241,10 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 
 		public virtual void DeleteLink(bool fullDelete = false)
 		{
-			if (Folder != null)
-				Folder.Links.RemoveItem(this);
 			if (fullDelete)
 				Delete(ParentLibrary.Context);
+			if (Folder != null)
+				Folder.Links.RemoveItem(this);
 			ResetParent();
 		}
 

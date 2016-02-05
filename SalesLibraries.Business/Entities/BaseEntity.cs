@@ -28,8 +28,17 @@ namespace SalesLibraries.Business.Entities
 		public virtual void Delete(TContext context)
 		{
 			var entityEntry = context.Entry(this);
-			if (entityEntry.State != EntityState.Detached)
-				entityEntry.State = EntityState.Deleted;
+			switch (entityEntry.State)
+			{
+				case EntityState.Added:
+					entityEntry.State = EntityState.Detached;
+					break;
+				case EntityState.Detached:
+					break;
+				default:
+					entityEntry.State = EntityState.Deleted;
+					break;
+			}
 		}
 
 		public virtual void Add(TContext context)

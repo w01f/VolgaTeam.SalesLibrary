@@ -10,6 +10,7 @@ namespace SalesLibraries.Common.JsonConverters
 			PreserveReferencesHandling = PreserveReferencesHandling.Objects;
 			TypeNameHandling = TypeNameHandling.All;
 			ContractResolver = new EntitySettingsResolver();
+			Formatting = Formatting.None;
 			Converters.Add(new ImageConverter());
 		}
 	}
