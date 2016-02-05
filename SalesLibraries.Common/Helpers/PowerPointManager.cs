@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Xml;
 using SalesLibraries.Common.Extensions;
 using SalesLibraries.Common.Objects.PowerPoint;
@@ -31,7 +32,7 @@ namespace SalesLibraries.Common.Helpers
 
 		public void Init()
 		{
-			if (PowerPointSingleton.Instance.IsLinkedWithApplication)
+			if (PowerPointSingleton.Instance.Connect(false))
 			{
 				SettingsSource = SettingsSourceEnum.PowerPoint;
 				SlideSettings = PowerPointSingleton.Instance.GetSlideSettings() ?? SlideSettings;
@@ -45,6 +46,8 @@ namespace SalesLibraries.Common.Helpers
 
 		public void RunPowerPointLoader()
 		{
+			Process.GetProcesses().Where(p => p.ProcessName.ToUpper().Contains("POWERPNT")).ToList().ForEach(p => p.Kill());
+
 			var launcherTemplate = new StorageFile(RemoteResourceManager.Instance.LauncherTemplatesFolder.RelativePathParts.Merge(SlideSettings.LauncherTemplateName));
 			if (!launcherTemplate.ExistsLocal())
 				throw new FileNotFoundException(String.Format("There is no {0} found", launcherTemplate.Name));
@@ -52,6 +55,7 @@ namespace SalesLibraries.Common.Helpers
 			var process = new Process();
 			process.StartInfo.FileName = launcherTemplate.LocalPath;
 			process.StartInfo.UseShellExecute = true;
+			process.StartInfo.WindowStyle = ProcessWindowStyle.Maximized;
 			process.Start();
 		}
 

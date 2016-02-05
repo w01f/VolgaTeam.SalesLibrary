@@ -28,28 +28,22 @@ namespace SalesLibraries.Common.OfficeInterops
 		{
 			get
 			{
-				var isOpened = true;
-				var proc = Process.GetProcessesByName("POWERPNT");
-				if (!(proc.GetLength(0) > 0))
+				if (!Process.GetProcessesByName("POWERPNT").Any())
 				{
 					PowerPointObject = null;
-					isOpened = false;
+					return false;
 				}
-				else
+				try
 				{
-					try
-					{
-						if (PowerPointObject == null)
-							PowerPointObject = GetExistedPowerPoint(false);
-						var caption = PowerPointObject.Caption;
-					}
-					catch
-					{
-						PowerPointObject = null;
-						isOpened = false;
-					}
+					if (PowerPointObject == null)
+						PowerPointObject = GetExistedPowerPoint(false);
+					return PowerPointObject.Caption != "";
 				}
-				return isOpened;
+				catch
+				{
+					PowerPointObject = null;
+					return false;
+				}
 			}
 		}
 
@@ -131,7 +125,7 @@ namespace SalesLibraries.Common.OfficeInterops
 			}
 		}
 
-		public Presentation GetActivePresentation()
+		public Presentation GetActivePresentation(bool create = true)
 		{
 			Presentation presentation;
 			try
@@ -140,32 +134,36 @@ namespace SalesLibraries.Common.OfficeInterops
 			}
 			catch
 			{
-				try
+				presentation = null;
+				if (create)
 				{
-					MessageFilter.Register();
-					if (PowerPointObject.Presentations.Count == 0)
+					try
 					{
-						var presentations = PowerPointObject.Presentations;
-						presentation = presentations.Add(MsoTriState.msoCTrue);
-						Utils.ReleaseComObject(presentations);
-						var slides = presentation.Slides;
-						slides.Add(1, PpSlideLayout.ppLayoutTitle);
-						Utils.ReleaseComObject(slides);
+						MessageFilter.Register();
+						if (PowerPointObject.Presentations.Count == 0)
+						{
+							var presentations = PowerPointObject.Presentations;
+							presentation = presentations.Add(MsoTriState.msoCTrue);
+							Utils.ReleaseComObject(presentations);
+							var slides = presentation.Slides;
+							slides.Add(1, PpSlideLayout.ppLayoutTitle);
+							Utils.ReleaseComObject(slides);
+						}
+						else
+						{
+							var presentations = PowerPointObject.Presentations;
+							presentation = presentations[1];
+							Utils.ReleaseComObject(presentations);
+						}
 					}
-					else
+					catch
 					{
-						var presentations = PowerPointObject.Presentations;
-						presentation = presentations[1];
-						Utils.ReleaseComObject(presentations);
+						presentation = null;
 					}
-				}
-				catch
-				{
-					presentation = null;
-				}
-				finally
-				{
-					MessageFilter.Revoke();
+					finally
+					{
+						MessageFilter.Revoke();
+					}
 				}
 			}
 			return presentation;

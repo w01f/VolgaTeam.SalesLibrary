@@ -253,7 +253,7 @@ namespace SalesLibraries.SalesDepot.Controllers
 							"",
 							() => MainForm.Invoke(new MethodInvoker(() =>
 							{
-								if (!PowerPointSingleton.Instance.IsLinkedWithApplication &&
+								if (!PowerPointSingleton.Instance.Connect(false) &&
 									Settings.LinkLaunchSettings.PowerPoint == LinkLaunchOptionsEnum.Viewer)
 								{
 									if (!Settings.RunPowerPointWhenNeeded.HasValue)
@@ -314,7 +314,8 @@ namespace SalesLibraries.SalesDepot.Controllers
 
 		public bool CheckPowerPointRunning(Func<bool> beforeRun = null)
 		{
-			if (PowerPointSingleton.Instance.IsLinkedWithApplication) return true;
+			if (PowerPointSingleton.Instance.Connect(false)) 
+				return true;
 			if (beforeRun != null && !beforeRun()) return false;
 			FloaterManager.Instance.ShowFloater(
 				MainForm,
