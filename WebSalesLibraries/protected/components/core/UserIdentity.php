@@ -102,8 +102,12 @@
 		{
 			$user = Yii::app()->user;
 			if (isset($user))
-				return $user->getState('groups');
-			return  array();
+			{
+				$groups = $user->getState('groups');
+				if (isset($groups))
+					return $groups;
+			}
+			return array();
 		}
 
 		/**

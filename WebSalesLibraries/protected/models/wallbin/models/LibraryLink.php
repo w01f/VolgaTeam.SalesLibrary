@@ -318,23 +318,24 @@
 			}
 			else
 			{
-				if ($this->isFolder)
-					return base64_encode(file_get_contents(realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'folder-file-icons' . DIRECTORY_SEPARATOR . 'folder.png'));
-				else
+				$widget = null;
+				switch ($this->widgetType)
 				{
-					switch ($this->widgetType)
-					{
-						case 1:
-							return null;
-						case 2:
-							return $this->parent->parent->parent->getAutoWidget($this->fileExtension);
-						case 3:
-							return isset($this->widget) && $this->widget != '' ? $this->widget : null;
-							break;
-						default:
-							return null;
-					}
+					case 1:
+						$widget = null;
+						break;
+					case 2:
+						$widget = $this->parent->parent->parent->getAutoWidget($this->fileExtension);
+						break;
+					case 3:
+						$widget = isset($this->widget) && $this->widget != '' ? $this->widget : null;
+						break;
+					default:
+						$widget = null;
 				}
+				if (!isset($widget) && $this->isFolder)
+					$widget = base64_encode(file_get_contents(realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'folder-file-icons' . DIRECTORY_SEPARATOR . 'folder.png'));
+				return $widget;
 			}
 		}
 
@@ -365,7 +366,7 @@
 
 			if ($this->isFolder)
 				$tooltipList[] = 'Folder';
-			else if (isset($this->originalFormat) && array_key_exists($this->originalFormat, Yii::app()->params['tooltips']['wallbin']))
+			else if (!$isLineBreak && isset($this->originalFormat) && array_key_exists($this->originalFormat, Yii::app()->params['tooltips']['wallbin']))
 				$tooltipList[] = Yii::app()->params['tooltips']['wallbin'][$this->originalFormat];
 
 			if (count($tooltipList) > 0)
