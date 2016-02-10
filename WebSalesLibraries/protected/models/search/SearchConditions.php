@@ -21,6 +21,8 @@
 
 		public $baseDatasetKey;
 
+		public $searchByContent;
+
 		public function __construct()
 		{
 			$this->fileTypes = array();
