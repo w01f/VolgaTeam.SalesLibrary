@@ -32,13 +32,14 @@ namespace SalesLibraries.Common.Helpers
 
 		public void Init()
 		{
-			if (PowerPointSingleton.Instance.Connect(false))
+			if (PowerPointSingleton.Instance.Connect())
 			{
 				SettingsSource = SettingsSourceEnum.PowerPoint;
 				SlideSettings = PowerPointSingleton.Instance.GetSlideSettings() ?? SlideSettings;
 			}
 			else
 			{
+				KillPowerPoint();
 				SettingsSource = SettingsSourceEnum.Application;
 				GetDefaultSettings();
 			}
@@ -46,7 +47,7 @@ namespace SalesLibraries.Common.Helpers
 
 		public void RunPowerPointLoader()
 		{
-			Process.GetProcesses().Where(p => p.ProcessName.ToUpper().Contains("POWERPNT")).ToList().ForEach(p => p.Kill());
+			KillPowerPoint();
 
 			var launcherTemplate = new StorageFile(RemoteResourceManager.Instance.LauncherTemplatesFolder.RelativePathParts.Merge(SlideSettings.LauncherTemplateName));
 			if (!launcherTemplate.ExistsLocal())
@@ -57,6 +58,11 @@ namespace SalesLibraries.Common.Helpers
 			process.StartInfo.UseShellExecute = true;
 			process.StartInfo.WindowStyle = ProcessWindowStyle.Maximized;
 			process.Start();
+		}
+
+		private void KillPowerPoint()
+		{
+			Process.GetProcesses().Where(p => p.ProcessName.ToUpper().Contains("POWERPNT")).ToList().ForEach(p => p.Kill());
 		}
 
 		public void ActivatePowerPoint()

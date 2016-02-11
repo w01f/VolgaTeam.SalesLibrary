@@ -94,7 +94,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.EmailBin
 		{
 			using (var powerPointProcessor = new PowerPointHidden())
 			{
-				if (!powerPointProcessor.Connect()) return;
+				if (!powerPointProcessor.Connect(true)) return;
 
 				var emailFiles = new List<string>();
 				if (checkEditConvertPdf.Checked)

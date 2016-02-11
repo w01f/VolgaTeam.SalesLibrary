@@ -165,7 +165,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Forms
 		{
 			using (var powerPointProcessor = new PowerPointHidden())
 			{
-				if (!powerPointProcessor.Connect()) return;
+				if (!powerPointProcessor.Connect(true)) return;
 				powerPointProcessor.PrintPresentation(
 					_tempFileCopy.FullName,
 					SelectedThumbnail.Index,
@@ -241,7 +241,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Forms
 
 		private bool CheckPowerPointRunning()
 		{
-			if (PowerPointSingleton.Instance.Connect(false)) return true;
+			if (PowerPointSingleton.Instance.Connect()) return true;
 			if (MainController.Instance.PopupMessages.ShowWarningQuestion(String.Format("PowerPoint is required to run this application.{0}Do you want to go ahead and open PowerPoint?", Environment.NewLine)) != DialogResult.Yes) return false;
 			AfterClose = () => MainController.Instance.CheckPowerPointRunning();
 			Close();

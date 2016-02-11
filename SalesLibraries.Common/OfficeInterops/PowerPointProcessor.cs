@@ -36,7 +36,7 @@ namespace SalesLibraries.Common.OfficeInterops
 				try
 				{
 					if (PowerPointObject == null)
-						PowerPointObject = GetExistedPowerPoint(false);
+						PowerPointObject = GetExistedPowerPoint();
 					return PowerPointObject.Caption != "";
 				}
 				catch
@@ -54,7 +54,7 @@ namespace SalesLibraries.Common.OfficeInterops
 				MessageFilter.Register();
 				if (forceNewObject)
 				{
-					_isFirstLaunch = GetExistedPowerPoint(false) == null;
+					_isFirstLaunch = GetExistedPowerPoint() == null;
 					PowerPointObject = CreateNewPowerPoint();
 				}
 				else
@@ -77,7 +77,7 @@ namespace SalesLibraries.Common.OfficeInterops
 			return new Application();
 		}
 
-		private Application GetExistedPowerPoint(bool createIfNoExisted = true)
+		private Application GetExistedPowerPoint()
 		{
 			try
 			{
@@ -86,13 +86,13 @@ namespace SalesLibraries.Common.OfficeInterops
 			}
 			catch
 			{
-				_isFirstLaunch = true;
-				return createIfNoExisted ? CreateNewPowerPoint() : null;
+				return null;
 			}
 		}
 
 		public void Disconnect(bool closeIfFirstLaunch = false)
 		{
+			CloseSlideSourcePresentation();
 			if (_isFirstLaunch && closeIfFirstLaunch)
 			{
 				Close();
@@ -221,6 +221,7 @@ namespace SalesLibraries.Common.OfficeInterops
 						MessageFilter.Register();
 						var presentationObject = PowerPointObject.Presentations.Open(originalFileName, MsoTriState.msoFalse, MsoTriState.msoFalse, MsoTriState.msoFalse);
 						presentationObject.SaveAs(pdfFileName, PpSaveAsFileType.ppSaveAsPDF, MsoTriState.msoCTrue);
+						presentationObject.Close();
 					}
 				}
 				else

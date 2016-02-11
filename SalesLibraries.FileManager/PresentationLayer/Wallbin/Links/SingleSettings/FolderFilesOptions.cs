@@ -8,8 +8,8 @@ using SalesLibraries.Common.Helpers;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSettings
 {
-	//public partial class FolderFilesOptions : UserControl, ILinkProperties
 	[IntendForClass(typeof(LibraryFolderLink))]
+	//public partial class FolderFilesOptions : UserControl, ILinkSettingsEditControl
 	public sealed partial class FolderFilesOptions : XtraTabPage, ILinkSettingsEditControl
 	{
 		private readonly LibraryFolderLink _data;

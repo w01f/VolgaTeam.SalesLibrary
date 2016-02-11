@@ -127,24 +127,24 @@ namespace SalesLibraries.Common.Helpers
 			catch { }
 		}
 
-		public static void DeleteFolder(string folderPath, string filter = "")
+		public static void DeleteFolder(string folderPath)
 		{
-			DeleteFolder(new DirectoryInfo(folderPath), filter);
+			DeleteFolder(new DirectoryInfo(folderPath));
 		}
 
-		public static void DeleteFolder(DirectoryInfo folder, string filter = "")
+		public static void DeleteFolder(DirectoryInfo folder)
 		{
 			try
 			{
 				if (!folder.Exists) return;
 				MakeFolderAvailable(folder);
 				foreach (var subFolder in folder.GetDirectories())
-					DeleteFolder(subFolder, filter);
+					DeleteFolder(subFolder);
 				foreach (var file in folder.GetFiles())
 				{
 					try
 					{
-						if (File.Exists(file.FullName) && (folder.Name.Contains(filter) || string.IsNullOrEmpty(filter)))
+						if (File.Exists(file.FullName))
 							File.Delete(file.FullName);
 					}
 					catch
@@ -152,7 +152,7 @@ namespace SalesLibraries.Common.Helpers
 						try
 						{
 							Thread.Sleep(100);
-							if (File.Exists(file.FullName) && (folder.Name.Contains(filter) || string.IsNullOrEmpty(filter)))
+							if (File.Exists(file.FullName))
 								File.Delete(file.FullName);
 						}
 						catch { }
@@ -160,7 +160,7 @@ namespace SalesLibraries.Common.Helpers
 				}
 				try
 				{
-					if (Directory.Exists(folder.FullName) && (folder.Name.Contains(filter) || string.IsNullOrEmpty(filter)))
+					if (Directory.Exists(folder.FullName))
 						Directory.Delete(folder.FullName, false);
 				}
 				catch
@@ -168,10 +168,45 @@ namespace SalesLibraries.Common.Helpers
 					try
 					{
 						Thread.Sleep(100);
-						if (Directory.Exists(folder.FullName) && (folder.Name.Contains(filter) || string.IsNullOrEmpty(filter)))
+						if (Directory.Exists(folder.FullName))
 							Directory.Delete(folder.FullName, false);
 					}
 					catch { }
+				}
+			}
+			catch { }
+		}
+
+		public static void CleanFolder(string folderPath)
+		{
+			CleanFolder(new DirectoryInfo(folderPath));
+		}
+
+		public static void CleanFolder(DirectoryInfo folder)
+		{
+			try
+			{
+				if (!folder.Exists) return;
+				MakeFolderAvailable(folder);
+				foreach (var subFolder in folder.GetDirectories())
+					DeleteFolder(subFolder);
+				foreach (var file in folder.GetFiles())
+				{
+					try
+					{
+						if (File.Exists(file.FullName))
+							File.Delete(file.FullName);
+					}
+					catch
+					{
+						try
+						{
+							Thread.Sleep(100);
+							if (File.Exists(file.FullName))
+								File.Delete(file.FullName);
+						}
+						catch { }
+					}
 				}
 			}
 			catch { }

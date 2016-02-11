@@ -5,12 +5,7 @@ namespace SalesLibraries.Common.Helpers
 {
 	public class RemoteResourceManager
 	{
-		private static readonly RemoteResourceManager _instance = new RemoteResourceManager();
-
-		public static RemoteResourceManager Instance
-		{
-			get { return _instance; }
-		}
+		public static RemoteResourceManager Instance { get; } = new RemoteResourceManager();
 
 		#region Local
 		public StorageDirectory AppSettingsFolder { get; private set; }
@@ -38,7 +33,9 @@ namespace SalesLibraries.Common.Helpers
 			{
 				"Temp"
 			});
-			if (!await TempFolder.Exists())
+			if (TempFolder.ExistsLocal())
+				Utils.CleanFolder(TempFolder.LocalPath);
+			if (!TempFolder.ExistsLocal())
 				await StorageDirectory.CreateSubFolder(new string[] { }, "Temp");
 
 			AppSettingsFolder = new StorageDirectory(new object[]

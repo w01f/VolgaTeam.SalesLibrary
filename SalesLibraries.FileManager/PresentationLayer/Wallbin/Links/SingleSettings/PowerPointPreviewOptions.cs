@@ -11,8 +11,8 @@ using SalesLibraries.FileManager.Controllers;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSettings
 {
-	//public partial class PowerPointPreviewOptions : UserControl, ILinkProperties
 	[IntendForClass(typeof(PowerPointLink))]
+	//public partial class PowerPointPreviewOptions : UserControl, ILinkSettingsEditControl
 	public sealed partial class PowerPointPreviewOptions : XtraTabPage, ILinkSettingsEditControl
 	{
 		private readonly PowerPointLink _data;

@@ -79,7 +79,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 		{
 			using (var powerPointProcesor = new PowerPointHidden())
 			{
-				if (!powerPointProcesor.Connect()) return;
+				if (!powerPointProcesor.Connect(true)) return;
 				double height;
 				double width;
 				powerPointProcesor.GetPresentationProperties(ParentFileLink.FullPath, out width, out height);

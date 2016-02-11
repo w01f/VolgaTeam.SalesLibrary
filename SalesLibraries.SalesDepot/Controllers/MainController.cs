@@ -175,7 +175,7 @@ namespace SalesLibraries.SalesDepot.Controllers
 			Utils.ActivateForm(handle, RegistryHelper.MaximizeSalesDepot, false);
 		}
 
-		public async Task InitBusinessObjects()
+		private async Task InitBusinessObjects()
 		{
 			await AppProfileManager.Instance.LoadProfile();
 			await Configuration.RemoteResourceManager.Instance.Load();
@@ -253,7 +253,7 @@ namespace SalesLibraries.SalesDepot.Controllers
 							"",
 							() => MainForm.Invoke(new MethodInvoker(() =>
 							{
-								if (!PowerPointSingleton.Instance.Connect(false) &&
+								if (!PowerPointSingleton.Instance.Connect() &&
 									Settings.LinkLaunchSettings.PowerPoint == LinkLaunchOptionsEnum.Viewer)
 								{
 									if (!Settings.RunPowerPointWhenNeeded.HasValue)
@@ -314,7 +314,7 @@ namespace SalesLibraries.SalesDepot.Controllers
 
 		public bool CheckPowerPointRunning(Func<bool> beforeRun = null)
 		{
-			if (PowerPointSingleton.Instance.Connect(false)) 
+			if (PowerPointSingleton.Instance.Connect()) 
 				return true;
 			if (beforeRun != null && !beforeRun()) return false;
 			FloaterManager.Instance.ShowFloater(

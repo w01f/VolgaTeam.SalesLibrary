@@ -33,7 +33,7 @@ namespace SalesLibraries.CommonGUI.Common
 
 		public void LoadState()
 		{
-			int? x = null, y = null;
+			int? x = null, y = null, width = null, height = null;
 			if (_stateStorageFile.ExistsLocal())
 			{
 				var document = new XmlDocument();
@@ -53,22 +53,50 @@ namespace SalesLibraries.CommonGUI.Common
 					if (Int32.TryParse(node.InnerText, out temp))
 						y = temp;
 				}
+				node = document.SelectSingleNode(@"/Location/Width");
+				if (node != null)
+				{
+					int temp;
+					if (Int32.TryParse(node.InnerText, out temp))
+						width = temp;
+				}
+				node = document.SelectSingleNode(@"/Location/Height");
+				if (node != null)
+				{
+					int temp;
+					if (Int32.TryParse(node.InnerText, out temp))
+						height = temp;
+				}
 			}
 			if (x.HasValue && y.HasValue)
 			{
 				_form.StartPosition = FormStartPosition.Manual;
 				_form.Location = new Point(x.Value, y.Value);
+				if (width.HasValue && height.HasValue)
+				{
+					_form.Width = width.Value;
+					_form.Height = height.Value;
+				}
 			}
-			if (_showMaximized)
-				_form.WindowState = FormWindowState.Maximized;
+			else
+			{
+				_form.StartPosition = FormStartPosition.CenterScreen;
+				if (_showMaximized)
+					_form.WindowState = FormWindowState.Maximized;
+			}
 		}
 
 		private void SaveState()
 		{
 			var xml = new StringBuilder();
 			xml.AppendLine(@"<Location>");
-			xml.AppendLine(@"<X>" + _form.Location.X + @"</X>");
-			xml.AppendLine(@"<Y>" + _form.Location.Y + @"</Y>");
+			if (_form.WindowState != FormWindowState.Maximized)
+			{
+				xml.AppendLine(@"<X>" + _form.Location.X + @"</X>");
+				xml.AppendLine(@"<Y>" + _form.Location.Y + @"</Y>");
+				xml.AppendLine(@"<Width>" + _form.Width + @"</Width>");
+				xml.AppendLine(@"<Height>" + _form.Height + @"</Height>");
+			}
 			xml.AppendLine(@"</Location>");
 			using (var sw = new StreamWriter(_stateStorageFile.LocalPath, false))
 			{

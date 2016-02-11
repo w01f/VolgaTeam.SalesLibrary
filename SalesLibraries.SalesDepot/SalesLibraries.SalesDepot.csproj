@@ -895,13 +895,9 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy “$(ProjectDir)\bin\Debug\SalesLibraries*.dll” “d:\WorkingFiles\SalesDepot\Release\Sales Library.exe” /Y
-xcopy “$(ProjectDir)\bin\Debug\ProgramManager*.dll” “d:\WorkingFiles\SalesDepot\Release\Sales Library.exe” /Y
-xcopy “$(ProjectDir)\bin\Debug\Ax*.dll” “d:\WorkingFiles\SalesDepot\Release\Sales Library.exe” /Y
-xcopy “$(ProjectDir)\bin\Debug\Interop*.dll” “d:\WorkingFiles\SalesDepot\Release\Sales Library.exe” /Y
-xcopy “$(ProjectDir)\bin\Debug\Sales Library.exe” “d:\WorkingFiles\SalesDepot\Release\Sales Library.exe” /Y
-xcopy “$(ProjectDir)\bin\Debug\Sales Library.exe.config” “d:\WorkingFiles\SalesDepot\Release\Sales Library.exe” /Y
-xcopy “$(ProjectDir)\bin\Debug\Schema\*.*” “d:\WorkingFiles\SalesDepot\Release\Sales Library.exe\Schema” /Y</PostBuildEvent>
+    <PostBuildEvent>robocopy /s /z /r:100 "$(SolutionDir)SalesLibraries.Business\$(OutDir)\" "d:\WorkingFiles\SalesDepot\Release\Sales Library.exe" "*.sql" "sequense.txt"
+if %25errorlevel%25 leq 1 robocopy /s /z /r:100 "$(TargetDir)\" "d:\WorkingFiles\SalesDepot\Release\Sales Library.exe" "SalesLibraries*.dll" "Interop*.dll" "Ax*.dll" "ProgramManager*.dll" "Sales Library.exe" "Sales Library.exe.config"
+if %25errorlevel%25 leq 1 exit 0 else exit %25errorlevel%25</PostBuildEvent>
   </PropertyGroup>
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.99.0\build\net451\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.99.0\build\net451\System.Data.SQLite.Core.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

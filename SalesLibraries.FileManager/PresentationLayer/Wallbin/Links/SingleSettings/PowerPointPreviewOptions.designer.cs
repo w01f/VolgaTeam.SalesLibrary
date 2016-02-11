@@ -79,6 +79,7 @@
 			// 
 			this.buttonXRefreshPreview.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
 			this.buttonXRefreshPreview.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXRefreshPreview.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.buttonXRefreshPreview.Location = new System.Drawing.Point(294, 101);
 			this.buttonXRefreshPreview.Name = "buttonXRefreshPreview";
 			this.buttonXRefreshPreview.Size = new System.Drawing.Size(118, 26);
@@ -92,6 +93,7 @@
 			// 
 			this.buttonXOpenQV.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
 			this.buttonXOpenQV.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXOpenQV.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.buttonXOpenQV.Location = new System.Drawing.Point(8, 101);
 			this.buttonXOpenQV.Name = "buttonXOpenQV";
 			this.buttonXOpenQV.Size = new System.Drawing.Size(118, 26);
@@ -105,6 +107,7 @@
 			// 
 			this.buttonXOpenWV.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
 			this.buttonXOpenWV.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXOpenWV.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.buttonXOpenWV.Location = new System.Drawing.Point(151, 101);
 			this.buttonXOpenWV.Name = "buttonXOpenWV";
 			this.buttonXOpenWV.Size = new System.Drawing.Size(118, 26);
@@ -114,15 +117,15 @@
 			this.buttonXOpenWV.TextColor = System.Drawing.Color.Black;
 			this.buttonXOpenWV.Click += new System.EventHandler(this.buttonXOpenWV_Click);
 			// 
-			// LinkAdminOptions
+			// PowerPointPreviewOptions
 			// 
-			this.BackColor = System.Drawing.Color.White;
+			this.Appearance.PageClient.BackColor = System.Drawing.Color.White;
+			this.Appearance.PageClient.Options.UseBackColor = true;
 			this.Controls.Add(this.buttonXRefreshPreview);
 			this.Controls.Add(this.laAdminTools);
 			this.Controls.Add(this.buttonXOpenQV);
 			this.Controls.Add(this.buttonXOpenWV);
 			this.Controls.Add(this.labelControlTitle);
-			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.Name = "LinkAdminOptions";
 			this.Size = new System.Drawing.Size(531, 541);
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();

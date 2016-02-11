@@ -197,7 +197,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Forms
 		{
 			using (var powerPointProcessor = new PowerPointHidden())
 			{
-				if (!powerPointProcessor.Connect()) return;
+				if (!powerPointProcessor.Connect(true)) return;
 				powerPointProcessor.PrintPresentation(
 					_viewedFile.FullName,
 					comboBoxEditSlides.SelectedIndex + 1,

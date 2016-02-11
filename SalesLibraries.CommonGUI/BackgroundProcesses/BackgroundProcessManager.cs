@@ -24,7 +24,7 @@ namespace SalesLibraries.CommonGUI.BackgroundProcesses
 			_mainForm = mainForm;
 			_title = title;
 		}
-
+		
 		public void Run(string title, Action<CancellationToken> process, Action afterComplete = null)
 		{
 			using (var form = new FormProgressCommon())

@@ -12,7 +12,7 @@ namespace SalesLibraries.Common.OfficeInterops
 		private PowerPointSingleton() { }
 
 
-		public override bool Connect(bool force = true)
+		public override bool Connect(bool force = false)
 		{
 			var result = base.Connect(force);
 			if (!result)

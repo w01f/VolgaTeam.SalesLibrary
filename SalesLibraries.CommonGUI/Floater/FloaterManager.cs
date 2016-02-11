@@ -8,16 +8,12 @@ namespace SalesLibraries.CommonGUI.Floater
 {
 	public class FloaterManager
 	{
-		private static readonly FloaterManager _instance = new FloaterManager();
 		private int _floaterPositionX = int.MinValue;
 		private int _floaterPositionY = int.MinValue;
 
 		private FloaterManager() { }
 
-		public static FloaterManager Instance
-		{
-			get { return _instance; }
-		}
+		public static FloaterManager Instance { get; } = new FloaterManager();
 
 		public void ShowFloater(Form sender, string caption, Image logo, Action afterShow)
 		{

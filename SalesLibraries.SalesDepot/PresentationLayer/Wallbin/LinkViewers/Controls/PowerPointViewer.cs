@@ -105,7 +105,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Contro
 		{
 			using (var powerPointProcessor = new PowerPointHidden())
 			{
-				if (!powerPointProcessor.Connect()) return;
+				if (!powerPointProcessor.Connect(true)) return;
 				powerPointProcessor.PrintPresentation(
 					_tempCopy.FullName,
 					SelectedThumbnail.Index,

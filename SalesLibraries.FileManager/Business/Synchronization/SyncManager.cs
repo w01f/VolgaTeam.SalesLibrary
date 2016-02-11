@@ -154,7 +154,7 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 			if (!powerPointFiles.Any()) return;
 			using (var powerPointProcessor = new PowerPointHidden())
 			{
-				if (!powerPointProcessor.Connect()) return;
+				if (!powerPointProcessor.Connect(true)) return;
 				foreach (var powerPointLink in powerPointFiles)
 				{
 					if (cancellationToken.IsCancellationRequested) break;

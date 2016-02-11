@@ -81,7 +81,7 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 					try
 					{
 						var processInteropped = false;
-						if (!powerPointProcessor.Connect()) continue;
+						if (!powerPointProcessor.Connect(true)) continue;
 						MessageFilter.Register();
 
 						Presentation presentation = null;

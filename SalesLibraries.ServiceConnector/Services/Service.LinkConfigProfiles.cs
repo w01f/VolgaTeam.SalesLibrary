@@ -13,7 +13,7 @@ namespace SalesLibraries.ServiceConnector.Services
 			{
 				var client = new LinkConfigProfileControllerService
 				{
-					Url = string.Format("{0}/LinkConfigProfile/quote?ws=1", Website)
+					Url = String.Format("{0}/LinkConfigProfile/quote?ws=1", Website)
 				};
 				return client;
 			}

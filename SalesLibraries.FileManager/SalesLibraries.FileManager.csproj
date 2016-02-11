@@ -39,6 +39,9 @@
   <PropertyGroup>
     <StartupObject>SalesLibraries.FileManager.Program</StartupObject>
   </PropertyGroup>
+  <PropertyGroup>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="ceTe.DynamicPDF.Rasterizer.40.x86, Version=2.0.0.28903, Culture=neutral, PublicKeyToken=09b5ce0d5c0a9d8b, processorArchitecture=x86">
       <Private>True</Private>
@@ -733,6 +736,7 @@
     <EmbeddedResource Include="PresentationLayer\Wallbin\Views\TabbedWallbin.resx">
       <DependentUpon>TabbedWallbin.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -842,10 +846,9 @@
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy “$(ProjectDir)\bin\Debug\SalesLibraries*.dll” “d:\WorkingFiles\SalesDepot\Release\Site Admin.exe” /Y
-xcopy “$(ProjectDir)\bin\Debug\Site Admin.exe” “d:\WorkingFiles\SalesDepot\Release\Site Admin.exe” /Y
-xcopy “$(ProjectDir)\bin\Debug\Site Admin.exe.config” “d:\WorkingFiles\SalesDepot\Release\Site Admin.exe” /Y
-xcopy “$(ProjectDir)\bin\Debug\Schema\*.*” “d:\WorkingFiles\SalesDepot\Release\Site Admin.exe\Schema” /Y</PostBuildEvent>
+    <PostBuildEvent>robocopy /s /z /r:100 "$(SolutionDir)SalesLibraries.Business\$(OutDir)\" "d:\WorkingFiles\SalesDepot\Release\Site Admin.exe" "*.sql" "sequense.txt"
+if %25errorlevel%25 leq 1 robocopy /s /z /r:100 "$(TargetDir)\" "d:\WorkingFiles\SalesDepot\Release\Site Admin.exe" "SalesLibraries*.dll" "Site Admin.exe" "Site Admin.exe.config"
+if %25errorlevel%25 leq 1 exit 0 else exit %25errorlevel%25</PostBuildEvent>
   </PropertyGroup>
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.99.0\build\net451\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.99.0\build\net451\System.Data.SQLite.Core.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

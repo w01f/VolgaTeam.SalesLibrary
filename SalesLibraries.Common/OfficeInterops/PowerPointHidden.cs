@@ -5,11 +5,6 @@ namespace SalesLibraries.Common.OfficeInterops
 {
 	public class PowerPointHidden : PowerPointProcessor, IDisposable
 	{
-		public override bool Connect(bool forceNewObject = false)
-		{
-			return base.Connect(true);
-		}
-
 		public void Dispose()
 		{
 			Disconnect(true);
