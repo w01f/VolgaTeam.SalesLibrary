@@ -82,7 +82,7 @@
 			$userId = -1;
 			if (isset(Yii::app()->user))
 				$userId = Yii::app()->user->getId();
-			return $userId;
+			return isset($userId) ? $userId : -1;
 		}
 
 		/**
@@ -115,7 +115,8 @@
 		 */
 		public static function isUserAuthorized()
 		{
-			return self::getCurrentUserId() != -1;
+			$userId = self::getCurrentUserId();
+			return $userId != -1;
 		}
 
 		/**

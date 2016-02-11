@@ -344,7 +344,7 @@
 				") and (" . $onlyWithCategoriesCondition .
 				") and (" . $folderCondition .
 				") and (" . $linkCondition .
-				") and link.is_dead=0 and link.is_preview_not_ready=0 and link.type<>5";
+				") and link.is_dead=0 and link.is_preview_not_ready=0 and link.type<>5 and link.type<>6";
 
 			$dbCommnad = Yii::app()->db->createCommand();
 			$dbCommnad = $dbCommnad->select($selectText);
