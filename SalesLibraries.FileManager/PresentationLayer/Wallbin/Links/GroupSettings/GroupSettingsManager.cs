@@ -43,7 +43,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 			switch (e.SelectionType)
 			{
 				case SelectionEventType.SelectionReset:
-					ProcessChanges();
 					if (ActiveEditor != null)
 						ActiveEditor.UpdateData();
 					break;
@@ -56,7 +55,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 
 		public void SwitchEditor()
 		{
-			ProcessChanges();
 			ActiveEditor = null;
 			if (MainController.Instance.WallbinViews.FormatState.ShowCategoryTags)
 				ActiveEditor = _categoriesEditor;
@@ -70,12 +68,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 				ActiveEditor = _tagsCleaner;
 			if (ActiveEditor != null)
 				ActiveEditor.UpdateData();
-		}
-
-		public void ProcessChanges()
-		{
-			if (ActiveEditor != null && ActiveEditor.NeedToApply)
-				ActiveEditor.ApplyData();
 		}
 	}
 }

@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using DevComponents.DotNetBar;
 using SalesLibraries.Business.Entities.Wallbin.Persistent;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.CommonGUI.Common;
@@ -196,10 +197,9 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 		protected void OnGridCellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
 		{
 			var linkRow = (LinkRow)grFiles.Rows[e.RowIndex];
-			var hintText = linkRow.Source != null ? linkRow.Source.Hint : null;
-			hintText = !String.IsNullOrEmpty(hintText) ? hintText.Replace(Environment.NewLine, String.Empty) : null;
-			hintText = !String.IsNullOrEmpty(hintText) ? hintText : null;
-			grFiles.Rows[e.RowIndex].Cells[e.ColumnIndex].ToolTipText = hintText;
+			var hintText = linkRow.Source?.Hint;
+			if (!String.IsNullOrEmpty(hintText) && !String.IsNullOrEmpty(hintText.Replace(Environment.NewLine, String.Empty)))
+				grFiles.Rows[e.RowIndex].Cells[e.ColumnIndex].ToolTipText = hintText;
 		}
 
 		protected virtual void OnGridCellPainting(object sender, DataGridViewCellPaintingEventArgs e)

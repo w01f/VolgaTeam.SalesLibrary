@@ -5,6 +5,7 @@ using System.Linq;
 using System.Windows.Forms;
 using DevExpress.XtraEditors.Controls;
 using SalesLibraries.Business.Entities.Helpers;
+using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.Common.Extensions;
 using SalesLibraries.FileManager.Controllers;
 using SalesLibraries.FileManager.PresentationLayer.Wallbin.Views;
@@ -44,7 +45,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 		{
 			get { return "Manage Super Filters"; }
 		}
-		public bool NeedToApply { get; set; }
 
 		public event EventHandler<EventArgs> EditorChanged;
 
@@ -55,12 +55,12 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 			checkedListBoxControl.UnCheckAll();
 			Enabled = false;
 
-			var defaultLink = Selection.SelectedLinks.FirstOrDefault(link => link.Tags.HasSuperFilters) ?? Selection.SelectedLinks.FirstOrDefault();
+			var defaultLink = Selection.SelectedFiles.OfType<LibraryObjectLink>().FirstOrDefault(link => link.Tags.HasSuperFilters) ?? Selection.SelectedFiles.FirstOrDefault();
 			Enabled = defaultLink != null;
 			if (defaultLink == null) return;
 
-			var noData = Selection.SelectedLinks.All(link => !link.Tags.SuperFilters.Any());
-			var sameData = Selection.SelectedLinks.All(link => link.Tags.SuperFilters.Compare(defaultLink.Tags.SuperFilters));
+			var noData = Selection.SelectedFiles.All(link => !link.Tags.SuperFilters.Any());
+			var sameData = Selection.SelectedFiles.All(link => link.Tags.SuperFilters.Compare(defaultLink.Tags.SuperFilters));
 
 			pnButtons.Enabled = !noData;
 			pnData.Enabled = sameData || noData;
@@ -72,9 +72,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 			_loading = false;
 		}
 
-		public void ApplyData()
+		private void ApplyData()
 		{
-			Selection.SelectedLinks.ApplySuperFilters(checkedListBoxControl.Items.OfType<CheckedListBoxItem>().Where(it => it.CheckState == CheckState.Checked).Select(it => it.Value.ToString()).ToArray());
+			Selection.SelectedFiles.ApplySuperFilters(checkedListBoxControl.Items.OfType<CheckedListBoxItem>().Where(it => it.CheckState == CheckState.Checked).Select(it => it.Value.ToString()).ToArray());
 			if (EditorChanged != null)
 				EditorChanged(this, new EventArgs());
 		}
@@ -82,7 +82,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 		public void ResetData()
 		{
 			if (MainController.Instance.PopupMessages.ShowWarningQuestion("Are you sure You want to DELETE ALL Super Filters for the selected files?") != DialogResult.Yes) return;
-			Selection.SelectedLinks.ApplySuperFilters(new string[] { });
+			Selection.SelectedFiles.ApplySuperFilters(new string[] { });
 			if (EditorChanged != null)
 				EditorChanged(this, new EventArgs());
 
@@ -98,7 +98,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 		private void checkedListBoxControl_ItemCheck(object sender, DevExpress.XtraEditors.Controls.ItemCheckEventArgs e)
 		{
 			if (!_loading)
-				NeedToApply = true;
+				ApplyData();
 		}
 	}
 }

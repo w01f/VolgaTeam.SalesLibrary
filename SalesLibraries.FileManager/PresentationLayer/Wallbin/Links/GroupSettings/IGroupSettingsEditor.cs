@@ -5,9 +5,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 	interface IGroupSettingsEditor
 	{
 		string Title { get; }
-		bool NeedToApply { get; }
 		void UpdateData();
-		void ApplyData();
 		void ResetData();
 		event EventHandler<EventArgs> EditorChanged;
 	}

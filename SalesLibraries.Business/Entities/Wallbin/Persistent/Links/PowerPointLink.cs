@@ -29,13 +29,16 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		[NotMapped, JsonIgnore]
 		public override string Hint
 		{
-			get { return String.Format("{0}{2}{1}", 
-				base.Hint,
-				String.Format("Slide Size: {0} W = {1} H = {2}", 
-					((PowerPointLinkSettings)Settings).Orientation, 
-					((PowerPointLinkSettings)Settings).Width.ToString("#.##"), 
-					((PowerPointLinkSettings)Settings).Height.ToString("#.##")), 
-				Environment.NewLine); }
+			get
+			{
+				return String.Format("{0}{2}{1}",
+					base.Hint,
+					String.Format("Slide Size: {0} W = {1} H = {2}",
+						((PowerPointLinkSettings)Settings).Orientation,
+						((PowerPointLinkSettings)Settings).Width.ToString("#.##"),
+						((PowerPointLinkSettings)Settings).Height.ToString("#.##")),
+					Environment.NewLine);
+			}
 		}
 		#endregion
 

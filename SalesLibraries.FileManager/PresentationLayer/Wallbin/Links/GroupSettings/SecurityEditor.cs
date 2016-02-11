@@ -95,7 +95,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 		{
 			get { return "Manage Security"; }
 		}
-		public bool NeedToApply { get; set; }
 
 		public event EventHandler<EventArgs> EditorChanged;
 
@@ -110,12 +109,12 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 			DeniedUsers = null;
 			Enabled = false;
 
-			var defaultLink = Selection.SelectedLinks.FirstOrDefault(link => link.Security.HasSecuritySettings) ?? Selection.SelectedLinks.FirstOrDefault();
+			var defaultLink = Selection.SelectedFiles.FirstOrDefault(link => link.Security.HasSecuritySettings) ?? Selection.SelectedFiles.FirstOrDefault();
 			Enabled = defaultLink != null;
 			if (defaultLink == null) return;
 
-			var noData = Selection.SelectedLinks.All(link => !link.Security.HasSecuritySettings);
-			var sameData = Selection.SelectedLinks
+			var noData = Selection.SelectedFiles.All(link => !link.Security.HasSecuritySettings);
+			var sameData = Selection.SelectedFiles
 				.All(link =>
 					link.Security.IsRestricted == defaultLink.Security.IsRestricted &&
 					link.Security.IsForbidden == defaultLink.Security.IsForbidden &&
@@ -145,18 +144,20 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 			}
 
 			LoadSecurityGroups(defaultLink.ParentLibrary.ExtId);
+
+			pnSecurityUserList.Enabled = pnSecurityUserList.Enabled && (rbSecurityWhiteList.Checked || rbSecurityBlackList.Checked);
 			_loading = false;
 		}
 
-		public void ApplyData()
+		private void ApplyData()
 		{
 			var assignedUsers = AssignedUsers;
 			var deniedUsers = DeniedUsers;
-			Selection.SelectedLinks.ApplySecurity(new SecuritySettings
+			Selection.SelectedFiles.ApplySecurity(new SecuritySettings
 			{
 				IsForbidden = rbSecurityForbidden.Checked,
 				IsRestricted = rbSecurityDenied.Checked || rbSecurityWhiteList.Checked || rbSecurityBlackList.Checked,
-				NoShare = !ckSecurityShareLink.Checked,
+				NoShare = rbSecurityDenied.Checked,
 				AssignedUsers = rbSecurityWhiteList.Checked && !String.IsNullOrEmpty(assignedUsers) ? assignedUsers : null,
 				DeniedUsers = rbSecurityBlackList.Checked && !String.IsNullOrEmpty(deniedUsers) ? deniedUsers : null
 			});
@@ -167,7 +168,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 		public void ResetData()
 		{
 			if (MainController.Instance.PopupMessages.ShowWarningQuestion("Are you sure You want to DELETE ALL SECURITY SETTINGS for the selected files?") != DialogResult.Yes) return;
-			Selection.SelectedLinks.ApplySecurity(new SecuritySettings());
+			Selection.SelectedFiles.ApplySecurity(new SecuritySettings());
 			if (EditorChanged != null)
 				EditorChanged(this, new EventArgs());
 
@@ -227,13 +228,15 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 		{
 			pnSecurityUserList.Enabled = rbSecurityWhiteList.Checked || rbSecurityBlackList.Checked; ;
 			if (_loading) return;
-			NeedToApply = true;
+			var radioButton = sender as RadioButton;
+			if (radioButton == null || !radioButton.Checked) return;
 			if (!rbSecurityWhiteList.Checked)
 				_assignedUsers.Clear();
 			if (!rbSecurityBlackList.Checked)
 				_assignedUsers.Clear();
 			ApplyAssignedUsers();
 			ApplyDeniedUsers();
+			ApplyData();
 		}
 
 		private void buttonXSecurityUserListSelectAll_Click(object sender, EventArgs e)
@@ -284,7 +287,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 		private void ValueCheckedChanged(object sender, EventArgs e)
 		{
 			if (!_loading)
-				NeedToApply = true;
+				ApplyData();
 		}
 
 		private void OnGroupChildListIsEmpty(object sender, MasterRowEmptyEventArgs e)
@@ -310,8 +313,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 
 		private void RepositoryItemCheckEditCheckedChanged(object sender, EventArgs e)
 		{
-			if (!_loading)
-				NeedToApply = true;
 			var focussedView = gridControlSecurityUserList.FocusedView as GridView;
 			if (focussedView == null) return;
 			focussedView.CloseEditor();
@@ -334,6 +335,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 				groupModel.Selected = userModel.Selected;
 				gridControlSecurityUserList.MainView.RefreshData();
 			}
+			if (!_loading)
+				ApplyData();
 		}
 	}
 }

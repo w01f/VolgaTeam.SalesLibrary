@@ -763,7 +763,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 		{
 			if (IsActive) return;
 			SelectionManager.SelectFolder(this);
-			DataGridView.HitTestInfo hitTest = grFiles.HitTest(e.X, e.Y);
+			var hitTest = grFiles.HitTest(e.X, e.Y);
 			if (hitTest.Type != DataGridViewHitTestType.Cell)
 				labelControlText.Focus();
 		}

@@ -29,7 +29,7 @@
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
-			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
+			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
 			this.pnMain = new System.Windows.Forms.Panel();
 			this.pnData = new System.Windows.Forms.Panel();
 			this.gridControl = new DevExpress.XtraGrid.GridControl();
@@ -117,6 +117,7 @@
 			this.gridView.OptionsView.ShowIndicator = false;
 			this.gridView.OptionsView.ShowPreviewRowLines = DevExpress.Utils.DefaultBoolean.False;
 			this.gridView.RowHeight = 35;
+			this.gridView.HiddenEditor += new System.EventHandler(this.gridView_HiddenEditor);
 			// 
 			// gridColumnValue
 			// 
@@ -140,7 +141,7 @@
 			this.repositoryItemButtonEditKeyword.AppearanceReadOnly.Options.UseFont = true;
 			this.repositoryItemButtonEditKeyword.AutoHeight = false;
 			this.repositoryItemButtonEditKeyword.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::SalesLibraries.FileManager.Properties.Resources.ButtonDelete, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::SalesLibraries.FileManager.Properties.Resources.ButtonDelete, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "", null, null, true)});
 			this.repositoryItemButtonEditKeyword.Name = "repositoryItemButtonEditKeyword";
 			this.repositoryItemButtonEditKeyword.NullText = "Type Keyword...";
 			this.repositoryItemButtonEditKeyword.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.repositoryItemButtonEditKeyword_ButtonClick);

@@ -54,6 +54,7 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 		public void Recalc()
 		{
 			#region Image
+			Image = null;
 			if (Link.Banner.Enable && Link.Banner.Image != null)
 				Image = Link.Banner.Image;
 			else if (FormatState.ShowCategoryTags && Link.Tags.HasCategories)
@@ -66,19 +67,16 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 			{
 				if (Link.Security.IsForbidden)
 					Image = Properties.Resources.TagsWidgetSecurityHidden;
-				else if (Link.Security.IsRestricted &&
-					String.IsNullOrEmpty(Link.Security.AssignedUsers) &&
-					String.IsNullOrEmpty(Link.Security.DeniedUsers))
+				else if (Link.Security.NoShare)
 					Image = Properties.Resources.TagsWidgetSecurityLocal;
-				else if (Link.Security.IsRestricted &&
-					!String.IsNullOrEmpty(Link.Security.AssignedUsers))
-					Image = Properties.Resources.TagsWidgetSecurityWhiteList;
-				else if (Link.Security.IsRestricted &&
-					!String.IsNullOrEmpty(Link.Security.DeniedUsers))
-					Image = Properties.Resources.TagsWidgetSecurityBlackList;
+				else if (Link.Security.IsRestricted)
+				{
+					if (!String.IsNullOrEmpty(Link.Security.AssignedUsers))
+						Image = Properties.Resources.TagsWidgetSecurityWhiteList;
+					else if (!String.IsNullOrEmpty(Link.Security.DeniedUsers))
+						Image = Properties.Resources.TagsWidgetSecurityBlackList;
+				}
 			}
-			else
-				Image = null;
 
 			if (Image == null && !Link.Widget.Disabled)
 				Image = Link.Widget.Image;

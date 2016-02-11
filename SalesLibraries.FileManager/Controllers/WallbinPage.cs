@@ -171,7 +171,6 @@ namespace SalesLibraries.FileManager.Controllers
 		public void ProcessChanges()
 		{
 			if (!IsActive) return;
-			_groupSettingsManager.ProcessChanges();
 			MainController.Instance.WallbinViews.SaveActiveWallbin();
 		}
 

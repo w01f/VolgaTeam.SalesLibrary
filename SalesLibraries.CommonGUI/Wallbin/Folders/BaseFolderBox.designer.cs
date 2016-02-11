@@ -139,5 +139,5 @@
 		protected System.Windows.Forms.Panel pnHeader;
 		protected System.Windows.Forms.Panel pnHeaderBorder;
 		protected System.Windows.Forms.Panel pnBorders;
-    }
+	}
 }

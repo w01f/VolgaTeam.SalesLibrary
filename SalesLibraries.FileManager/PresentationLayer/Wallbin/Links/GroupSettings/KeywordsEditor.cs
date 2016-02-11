@@ -50,7 +50,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 		{
 			get { return "Manage Keywords"; }
 		}
-		public bool NeedToApply { get; set; }
 
 		public event EventHandler<EventArgs> EditorChanged;
 
@@ -62,12 +61,12 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 			_keywords.Clear();
 			Enabled = false;
 
-			var defaultLink = Selection.SelectedLinks.FirstOrDefault(link => link.Tags.HasKeywords) ?? Selection.SelectedLinks.FirstOrDefault();
+			var defaultLink = Selection.SelectedFiles.FirstOrDefault(link => link.Tags.HasKeywords) ?? Selection.SelectedFiles.FirstOrDefault();
 			Enabled = defaultLink != null;
 			if (defaultLink == null) return;
 
-			var noData = Selection.SelectedLinks.All(link => link.Tags.Keywords.Any());
-			var sameData = Selection.SelectedLinks.All(link => link.Tags.Keywords.Compare(defaultLink.Tags.Keywords));
+			var noData = Selection.SelectedFiles.All(link => link.Tags.Keywords.Any());
+			var sameData = Selection.SelectedFiles.All(link => link.Tags.Keywords.Compare(defaultLink.Tags.Keywords));
 
 			pnButtons.Enabled = !noData;
 			pnData.Enabled = sameData || noData;
@@ -82,7 +81,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 		{
 			gridView.CloseEditor();
 			_keywords.RemoveAll(tag => String.IsNullOrEmpty(tag.Name));
-			Selection.SelectedLinks.ApplyKeywords(_keywords.Where(tag => !String.IsNullOrEmpty(tag.Name)).ToArray());
+			Selection.SelectedFiles.ApplyKeywords(_keywords.Where(tag => !String.IsNullOrEmpty(tag.Name)).ToArray());
 			if (EditorChanged != null)
 				EditorChanged(this, new EventArgs());
 		}
@@ -90,7 +89,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 		public void ResetData()
 		{
 			if (MainController.Instance.PopupMessages.ShowWarningQuestion("Are you sure You want to DELETE ALL KEYWORD TAGS for the selected files?") != DialogResult.Yes) return;
-			Selection.SelectedLinks.ApplyKeywords(new SearchTag[] { });
+			Selection.SelectedFiles.ApplyKeywords(new SearchTag[] { });
 			if (EditorChanged != null)
 				EditorChanged(this, new EventArgs());
 			UpdateData();
@@ -108,7 +107,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 			if (gridView.FocusedRowHandle == GridControl.InvalidRowHandle) return;
 			_keywords.RemoveAt(gridView.GetDataSourceRowIndex(gridView.FocusedRowHandle));
 			gridView.RefreshData();
-			NeedToApply = true;
+			ApplyData();
 		}
 
 		private void buttonXAdd_Click(object sender, EventArgs e)
@@ -122,7 +121,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 				gridView.FocusedRowHandle = gridView.RowCount - 1;
 				gridView.MakeRowVisible(gridView.FocusedRowHandle, true);
 			}
-			NeedToApply = true;
+		}
+
+		private void gridView_HiddenEditor(object sender, EventArgs e)
+		{
+			ApplyData();
 		}
 	}
 }

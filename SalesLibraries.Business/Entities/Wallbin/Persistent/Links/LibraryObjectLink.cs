@@ -71,7 +71,9 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 				lines.Add(String.Format("Added: {0}", AddDate.ToString("M/dd/yy h:mm:ss tt")));
 				if (ExpirationSettings.IsExpired)
 					lines.Add(String.Format("Expires: {0}", ExpirationSettings.ExpirationDate.ToString("M/dd/yy h:mm:ss tt")));
-				lines.Add(base.Hint);
+				var baseHint = base.Hint;
+				if (!String.IsNullOrEmpty(baseHint))
+					lines.Add(baseHint);
 				return String.Join(Environment.NewLine, lines);
 			}
 		}

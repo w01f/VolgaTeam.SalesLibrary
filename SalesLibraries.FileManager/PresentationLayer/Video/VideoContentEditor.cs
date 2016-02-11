@@ -27,6 +27,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Video
 		{
 			InitializeComponent();
 			Dock = DockStyle.Fill;
+			laVideoTitle.Visible = false;
 		}
 
 		public void LoadLibrary(LibraryContext libraryContext)
@@ -36,6 +37,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Video
 
 		public void LoadVideoInfo()
 		{
+			laVideoTitle.Visible = false;
 			_videoInfoList.Clear();
 			MainController.Instance.ProcessManager.RunInQueue("Loading Video...",
 				LoadVideoInfoInternal,
@@ -47,6 +49,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Video
 							String.Format("Your Library has {0} Video File{1}",
 								_videoInfoList.Count, (_videoInfoList.Count > 1 ? "s" : String.Empty)) :
 							"Your Library does not have any Video Files";
+						laVideoTitle.Visible = true;
 					}))
 				);
 		}

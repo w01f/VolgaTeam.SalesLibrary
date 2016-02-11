@@ -3,7 +3,6 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
 using SalesLibraries.Business.Entities.Helpers;
-using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings;
 using SalesLibraries.Common.Objects.SearchTags;
 using SalesLibraries.FileManager.Controllers;
 
@@ -23,11 +22,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 		{
 			get { return "Blow Up Tags"; }
 		}
-		public bool NeedToApply { get; set; }
 
 		public event EventHandler<EventArgs> EditorChanged;
 		public void UpdateData() { }
-		public void ApplyData() { }
 		public void ResetData() { }
 		#endregion
 

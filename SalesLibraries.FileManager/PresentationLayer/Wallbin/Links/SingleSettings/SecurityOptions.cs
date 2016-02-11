@@ -112,6 +112,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			ckSecurityShareLink.Checked = !_data.Security.NoShare;
 
 			LoadSecurityGroups(_data.ParentLibrary.ExtId);
+
+			pnSecurityUserList.Enabled = pnSecurityUserList.Enabled && (rbSecurityWhiteList.Checked || rbSecurityBlackList.Checked);
+
 			_dataLoading = false;
 		}
 
@@ -121,7 +124,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 				rbSecurityWhiteList.Checked ||
 				rbSecurityBlackList.Checked;
 			_data.Security.IsForbidden = rbSecurityForbidden.Checked;
-			_data.Security.NoShare = !ckSecurityShareLink.Checked;
+			_data.Security.NoShare = rbSecurityDenied.Checked;
 			if (rbSecurityWhiteList.Checked && !String.IsNullOrEmpty(AssignedUsers))
 				_data.Security.AssignedUsers = AssignedUsers;
 			else

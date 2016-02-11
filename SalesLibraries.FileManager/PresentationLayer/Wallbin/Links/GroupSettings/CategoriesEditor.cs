@@ -42,14 +42,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 		{
 			get { return "Manage Search Tags"; }
 		}
-		public bool NeedToApply { get; private set; }
 
 		public event EventHandler<EventArgs> EditorChanged;
 
 		public void UpdateData()
 		{
-			NeedToApply = false;
-
 			buttonXReset.Enabled = false;
 			pnData.Enabled = false;
 			Enabled = false;
@@ -61,12 +58,12 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 			gridViewGroups.CollapseAllDetails();
 			labelControlCategoryInfo.Text = String.Empty;
 
-			var defaultLink = Selection.SelectedLinks.FirstOrDefault(link => link.Tags.HasCategories) ?? Selection.SelectedLinks.FirstOrDefault();
+			var defaultLink = Selection.SelectedFiles.FirstOrDefault(link => link.Tags.HasCategories) ?? Selection.SelectedFiles.FirstOrDefault();
 			Enabled = defaultLink != null;
 			if (defaultLink == null) return;
 
-			var noData = Selection.SelectedLinks.All(link => !link.Tags.HasCategories);
-			var sameData = Selection.SelectedLinks.All(link => link.Tags.Categories.Compare(defaultLink.Tags.Categories));
+			var noData = Selection.SelectedFiles.All(link => !link.Tags.HasCategories);
+			var sameData = Selection.SelectedFiles.All(link => link.Tags.Categories.Compare(defaultLink.Tags.Categories));
 
 			buttonXReset.Enabled = !noData;
 			pnData.Enabled = sameData || noData;
@@ -98,21 +95,24 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 				totalTags > 0 ? String.Join(", ", selectedTags.Select(t => t.Name)) : "No Tags Selected");
 		}
 
-		public void ApplyData()
+		private void ApplyData()
 		{
 			gridViewGroups.CloseEditor();
 			gridViewTags.CloseEditor();
-			Selection.SelectedLinks.ApplyCategories(_groupTemplates.Where(x => x.Selected).Select(g =>
-			{
-				var searchGroup = new SearchGroup
+			Selection.SelectedFiles.ApplyCategories(_groupTemplates
+				.Where(x => x.Selected)
+				.Select(g =>
 				{
-					Name = g.Name,
-					Description = g.Description,
-				};
-				searchGroup.Tags.AddRange(g.Tags.Where(t => t.Selected));
-				return searchGroup;
-			}).ToArray());
-			NeedToApply = false;
+					var searchGroup = new SearchGroup
+					{
+						Name = g.Name,
+						Description = g.Description,
+					};
+					searchGroup.Tags.AddRange(g.Tags.Where(t => t.Selected));
+					return searchGroup;
+				})
+				.Where(g=>g.Tags.Any())
+				.ToArray());
 			if (EditorChanged != null)
 				EditorChanged(this, new EventArgs());
 		}
@@ -120,7 +120,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 		public void ResetData()
 		{
 			if (MainController.Instance.PopupMessages.ShowWarningQuestion("Are you sure You want to DELETE ALL CATEGORY TAGS for the selected files?") != DialogResult.Yes) return;
-			Selection.SelectedLinks.ApplyCategories(new SearchGroup[] { });
+			Selection.SelectedFiles.ApplyCategories(new SearchGroup[] { });
 			if (EditorChanged != null)
 				EditorChanged(this, new EventArgs());
 			UpdateData();
@@ -167,7 +167,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 				gridControl.MainView.RefreshData();
 			}
 			UpdateCategoryInfo(true);
-			NeedToApply = true;
+			ApplyData();
 		}
 
 		private void repositoryItemCheckEditLibrary_EditValueChanging(object sender, DevExpress.XtraEditors.Controls.ChangingEventArgs e)
