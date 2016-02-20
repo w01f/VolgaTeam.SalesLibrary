@@ -3,7 +3,6 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using DevComponents.DotNetBar;
 using SalesLibraries.Business.Entities.Wallbin.Persistent;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.CommonGUI.Common;
