@@ -1,7 +1,7 @@
 (function ($)
 {
 	window.BaseUrl = window.BaseUrl || '';
-	$.SalesPortal = $.SalesPortal || { };
+	$.SalesPortal = $.SalesPortal || {};
 	$.SalesPortal.ShortcutsSearchLink = function (optionsContainer, objectId, backHandler)
 	{
 		var that = this;
@@ -26,37 +26,48 @@
 			}
 		);
 
-		$.SalesPortal.Content.getContentObject().html('<table id="shortcuts-search-container" style="table-layout:fixed;"><tr>' +
-			'<td id="right-navbar" style="display: none;"></td>' +
-			'<td>' +
-			'<div class="data-table-content-container shortcuts-data-table-content-container"></div>' +
-			'</td>' +
-			'</tr></table>');
+		this.runSearch = function (resultCallback)
+		{
+			$.SalesPortal.SearchHelper.runSearch(
+				{
+					datasetKey: undefined,
+					conditions: $.toJSON(searchShortcutOptions.conditions)
+				},
+				function ()
+				{
+					$.SalesPortal.Overlay.show(false);
+				},
+				function ()
+				{
+					$.SalesPortal.Overlay.hide();
+				},
+				function (data)
+				{
+					if (data.dataset.length > 0)
+					{
+						$.SalesPortal.Content.getContentObject().html('<table id="shortcuts-search-container" style="table-layout:fixed;"><tr>' +
+							'<td id="right-navbar" style="display: none;"></td>' +
+							'<td>' +
+							'<div class="data-table-content-container shortcuts-data-table-content-container"></div>' +
+							'</td>' +
+							'</tr></table>');
 
-		$.SalesPortal.SearchHelper.runSearch(
-			{
-				datasetKey: undefined,
-				conditions: $.toJSON(searchShortcutOptions.conditions)
-			},
-			function ()
-			{
-				$.SalesPortal.Overlay.show(false);
-			},
-			function ()
-			{
-				$.SalesPortal.Overlay.hide();
-			},
-			function (data)
-			{
-				baseDatasetKey = data.datasetKey;
-				if (searchShortcutOptions.subSearchDefaultView == 'all')
-					SimpleSearch(content);
-				else if (searchShortcutOptions.subSearchDefaultView == 'search')
-					SubSearchCustom(content);
-				else if (searchShortcutOptions.subSearchDefaultView == 'links')
-					SubSearchByTemplates(content);
-			}
-		);
+						baseDatasetKey = data.datasetKey;
+						if (searchShortcutOptions.subSearchDefaultView == 'all')
+							SimpleSearch(content);
+						else if (searchShortcutOptions.subSearchDefaultView == 'search')
+							SubSearchCustom(content);
+						else if (searchShortcutOptions.subSearchDefaultView == 'links')
+							SubSearchByTemplates(content);
+
+						initActionButtons();
+						$(window).off('resize.search-link').on('resize.search-link', updateContentSize);
+					}
+					if (resultCallback != undefined)
+						resultCallback(data);
+				}
+			);
+		};
 
 		var SimpleSearch = function (content)
 		{
@@ -164,10 +175,10 @@
 							customSearchData.set('text', null);
 					})
 					.off('keypress').on('keypress', function (e)
-					{
-						if (e.which == 13)
-							getSearchResults();
-					});
+				{
+					if (e.which == 13)
+						getSearchResults();
+				});
 
 				sideBar.find('.file-filter-panel .file-selector input').off('change').on('change', function ()
 				{
@@ -406,7 +417,6 @@
 				var templateOnlyByName = selectedTemplateConditions.conditions.onlyByName;
 
 				$.SalesPortal.SearchHelper.runSearch(
-
 					{
 						datasetKey: undefined,
 						conditions: $.toJSON({
@@ -452,7 +462,12 @@
 			var initPanel = function ()
 			{
 				var logoSelector = sideBar.find('.logo-list ul');
-				sideBar.find('.logo-list ul li.enabled img').tooltip({animation: false, trigger: 'hover', placement: 'bottom', delay: { show: 500, hide: 100 }});
+				sideBar.find('.logo-list ul li.enabled img').tooltip({
+					animation: false,
+					trigger: 'hover',
+					placement: 'bottom',
+					delay: {show: 500, hide: 100}
+				});
 				var selectorItems = logoSelector.find('li.enabled a');
 				var firstItem = selectorItems.first();
 				if (firstItem != null)
@@ -556,10 +571,6 @@
 
 			dataTable.updateSize();
 		};
-
-		initActionButtons();
-
-		$(window).off('resize.search-link').on('resize.search-link', updateContentSize);
 
 		return that;
 	};

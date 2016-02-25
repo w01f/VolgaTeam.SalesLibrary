@@ -1,7 +1,7 @@
 (function ($)
 {
 	window.BaseUrl = window.BaseUrl || '';
-	$.SalesPortal = $.SalesPortal || { };
+	$.SalesPortal = $.SalesPortal || {};
 	var ShortcutsManager = function ()
 	{
 		var that = this;
@@ -112,7 +112,7 @@
 											icon: result.options.headerIcon
 										},
 										result.actions);
-									$.SalesPortal.ShortcutsSearchLink($.SalesPortal.Content.getContentObject(), shortcutId);
+									$.SalesPortal.ShortcutsSearchLink($.SalesPortal.Content.getContentObject(), shortcutId).runSearch();
 									break;
 								case 'window':
 									new $.SalesPortal.ShortcutsLibraryWindow().init(result);

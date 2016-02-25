@@ -1,7 +1,7 @@
 (function ($)
 {
 	window.BaseUrl = window.BaseUrl || '';
-	$.SalesPortal = $.SalesPortal || { };
+	$.SalesPortal = $.SalesPortal || {};
 
 	$(document).one('ready', function ()
 	{
@@ -15,20 +15,16 @@
 
 			var searchBarOptions = new $.SalesPortal.SearchOptions($.parseJSON(serviceData.find('.search-conditions .encoded-object').text()));
 			var searchViewOptions = new $.SalesPortal.SearchViewOptions($.parseJSON(serviceData.find('.search-view-options .encoded-object').text()));
-			var searchActions = serviceData.find('.search-bar-actions').html();
 
 			$.SalesPortal.Content.init();
 
 			if (searchBarOptions != '' && searchViewOptions != '')
 			{
-				$.SalesPortal.Content.fillContent(
+				var options = $('<div>' +
 					'<div class="search-conditions" style="display: none;"><div class="encoded-object">' + $.toJSON(searchBarOptions) + '</div></div>' +
-						'<div class="search-view-options" style="display: none;"><div class="encoded-object">' + $.toJSON(searchViewOptions) + '</div></div>',
-					undefined,
-					searchActions
-				);
-
-				$.SalesPortal.ShortcutsSearchLink(content, objectId);
+					'<div class="search-view-options" style="display: none;"><div class="encoded-object">' + $.toJSON(searchViewOptions) + '</div></div>' +
+					'</div>');
+				$.SalesPortal.ShortcutsSearchLink(options, objectId).runSearch();
 			}
 		}
 	});

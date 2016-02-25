@@ -1,7 +1,7 @@
 (function ($)
 {
 	window.BaseUrl = window.BaseUrl || '';
-	$.SalesPortal = $.SalesPortal || { };
+	$.SalesPortal = $.SalesPortal || {};
 	$.SalesPortal.ShortcutsSearchBar = function (bundleData)
 	{
 		var searchBar = $('.shortcuts-search-bar');
@@ -96,22 +96,45 @@
 
 						if (searchBarOptions.openInSamePage)
 						{
-							var content = $.SalesPortal.Content.getContentObject();
 							searchBarOptions.conditions = searchBarConditions.getConditionsFormatted();
-							$.SalesPortal.Content.fillContent(
+							var options = $('<div>' +
 								'<div class="search-conditions" style="display: none;"><div class="encoded-object">' + $.toJSON(searchBarOptions) + '</div></div>' +
-									'<div class="search-view-options" style="display: none;"><div class="encoded-object">' + $.toJSON(searchViewOptions) + '</div></div>',
-								undefined,
-								searchActions
-							);
+								'<div class="search-view-options" style="display: none;"><div class="encoded-object">' + $.toJSON(searchViewOptions) + '</div></div>' +
+								'</div>');
 							$.SalesPortal.ShortcutsSearchLink(
-								content,
+								options,
 								shortcutBundleData.linkId,
 								function ()
 								{
 									location.reload();
 								}
-							);
+							).runSearch(function (data)
+							{
+								if (data.dataset.length == 0)
+								{
+									var modalDialog = new $.SalesPortal.ModalDialog({
+										title: '<span><img src="images/shortcuts/search-bar/search-bar-no-results-warning.png"></span>' +
+										'<span style="margin-left: 20px">Search: “<b>' + searchBarConditions.get('text') + '</b>”</span>',
+										description: 'Sorry, but there are no files on the site with this specific word or phrase.<br><br>' +
+										'You might want to try a simpler, more general keyword search.<br><br>' +
+										'<i>For Example</i>:<br>' +
+										'Instead of searching for “<i>Doppler Mobile Weather App</i>”<br><br>' +
+										'You might try searching for: “<i>Weather App</i>”',
+										width: 500,
+										buttons: [
+											{
+												tag: 'ok',
+												title: 'Continue',
+												clickHandler: function ()
+												{
+													modalDialog.close();
+												}
+											}
+										]
+									});
+									modalDialog.show();
+								}
+							});
 						}
 						else
 						{
@@ -159,14 +182,14 @@
 			if (!(hasKeyword ||
 				hasSuperFilters ||
 				hasCategories) || !(fileSettings.showPowerPoint ||
-				fileSettings.showVideo ||
-				fileSettings.showPdf ||
-				fileSettings.showWord ||
-				fileSettings.showExcel ||
-				fileSettings.showImages ||
-				fileSettings.showUrls
+					fileSettings.showVideo ||
+					fileSettings.showPdf ||
+					fileSettings.showWord ||
+					fileSettings.showExcel ||
+					fileSettings.showImages ||
+					fileSettings.showUrls
 				)
-				)
+			)
 				searchButton.addClass('disabled');
 		};
 
@@ -463,10 +486,8 @@
 			var shortcutBundleData = bundleData;
 			var searchBarOptions = new $.SalesPortal.SearchOptions($.parseJSON(searchBar.find('.search-conditions .encoded-object').text()));
 			var searchViewOptions = new $.SalesPortal.SearchViewOptions($.parseJSON(searchBar.find('.search-view-options .encoded-object').text()));
-			var searchActions = searchBar.find('.search-bar-actions').html();
 			var searchBarConditions = new $.SalesPortal.SearchConditions(function ()
 			{
-
 			});
 			setDefaultSettings();
 		}
