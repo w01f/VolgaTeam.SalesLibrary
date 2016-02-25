@@ -250,8 +250,16 @@ namespace SalesLibraries.FileManager.Controllers
 		private void OnSelectionChanged(object sender, SelectionEventArgs e)
 		{
 			UpdateLinkButtons();
-			superFilterControl.UpdateData();
 			linkInfoControl.UpdateData();
+			switch (e.SelectionType)
+			{
+				case SelectionEventType.SelectionReset:
+					superFilterControl.Reset();
+					break;
+				case SelectionEventType.LinkSelected:
+					superFilterControl.UpdateData();
+					break;
+			}
 		}
 
 		private void OnSyncClick(object sender, EventArgs e)

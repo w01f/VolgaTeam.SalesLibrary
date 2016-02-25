@@ -52,7 +52,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 		{
 			pnButtons.Enabled = false;
 			pnData.Enabled = false;
+
+			_loading = true;
 			checkedListBoxControl.UnCheckAll();
+			_loading = false;
+
 			Enabled = false;
 
 			var defaultLink = Selection.SelectedFiles.OfType<LibraryObjectLink>().FirstOrDefault(link => link.Tags.HasSuperFilters) ?? Selection.SelectedFiles.FirstOrDefault();

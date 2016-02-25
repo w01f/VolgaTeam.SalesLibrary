@@ -9,8 +9,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 	public partial class SuperFilterControl : UserControl
 	{
 		private bool _loading;
-		
+
 		public event EventHandler<EventArgs> EditorChanged;
+
+		private bool AllowEdit => MainController.Instance.Lists.SuperFilters.Items.Any() && MainController.Instance.WallbinViews.FormatState.AllowEdit;
+
 		public SuperFilterControl()
 		{
 			InitializeComponent();
@@ -21,16 +24,22 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			Visible = MainController.Instance.Lists.SuperFilters.Items.Any();
 			checkedListBoxControl.Items.Clear();
 			checkedListBoxControl.Items.AddRange(MainController.Instance.Lists.SuperFilters.Items.Cast<object>().ToArray());
-			UpdateData();
 		}
-		
+
 		public void UpdateData()
 		{
+			if (!AllowEdit)
+			{
+				Visible = false;
+				return;
+			}
+
+			Reset();
+
 			_loading = true;
-			checkedListBoxControl.UnCheckAll();
 			var selectedFolder = MainController.Instance.WallbinViews.Selection.SelectedFolder;
 			var selectedLink = MainController.Instance.WallbinViews.Selection.SelectedLink;
-			if (selectedFolder!= null && selectedLink != null)
+			if (selectedFolder != null && selectedLink != null)
 			{
 				Enabled = true;
 				foreach (CheckedListBoxItem item in checkedListBoxControl.Items)
@@ -38,7 +47,17 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			}
 			else
 				Enabled = false;
-			Visible = MainController.Instance.Lists.SuperFilters.Items.Any() && Enabled && MainController.Instance.WallbinViews.FormatState.AllowEdit;
+			Visible = Enabled && AllowEdit;
+			_loading = false;
+		}
+
+		public void Reset()
+		{
+			Enabled = false;
+			Visible = false;
+			if (!AllowEdit) return;
+			_loading = true;
+			checkedListBoxControl.UnCheckAll();
 			_loading = false;
 		}
 
