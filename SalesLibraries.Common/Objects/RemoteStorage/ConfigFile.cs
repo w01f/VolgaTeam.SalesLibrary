@@ -21,14 +21,14 @@ namespace SalesLibraries.Common.Objects.RemoteStorage
 			}
 		}
 
-		public override async Task Download()
+		public override async Task Download(bool force = false)
 		{
 			try
 			{
 				var client = FileStorageManager.Instance.GetClient();
 				var remoteFile = await client.GetFile(RemotePath);
-				_isOutdated = !(ExistsLocal() && File.GetLastWriteTime(LocalPath) >= remoteFile.LastModified);
-				if (_isOutdated)
+				IsOutdated = !(ExistsLocal() && File.GetLastWriteTime(LocalPath) >= remoteFile.LastModified);
+				if (IsOutdated)
 				{
 					AllocateParentFolder();
 					using (var remoteStream = await client.Download(RemotePath))

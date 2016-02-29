@@ -12,16 +12,13 @@ namespace SalesLibraries.Common.Objects.RemoteStorage
 	public class StorageFile : StorageItem
 	{
 		private readonly Item _remoteSource;
-		protected bool _isOutdated;
+		public bool IsOutdated { get; protected set; }
 
-		public string Extension
-		{
-			get { return Path.GetExtension(LocalPath); }
-		}
+		public string Extension => Path.GetExtension(LocalPath);
 
 		public StorageFile(object[] relativePathParts) : base(relativePathParts) { }
 
-		public StorageFile(object[] parentPathParts, Item remoteSource)
+		public StorageFile(string[] parentPathParts, Item remoteSource)
 			: base(parentPathParts.Merge(remoteSource.GetName()))
 		{
 			_remoteSource = remoteSource;
@@ -75,48 +72,60 @@ namespace SalesLibraries.Common.Objects.RemoteStorage
 			catch { }
 		}
 
-		public virtual async Task Download()
+		public virtual async Task Download(bool force = false)
 		{
 			try
 			{
 				var client = FileStorageManager.Instance.GetClient();
-				if ((ExistsLocal() && FileStorageManager.Instance.DataState == DataActualityState.Updated) || FileStorageManager.Instance.UseLocalMode)
+				if ((ExistsLocal() && FileStorageManager.Instance.DataState == DataActualityState.Updated && !force) || FileStorageManager.Instance.UseLocalMode)
 					return;
 				var remoteFile = _remoteSource ?? await client.GetFile(RemotePath);
-				_isOutdated = !(ExistsLocal() && File.GetLastWriteTime(LocalPath) >= remoteFile.LastModified);
-				if (_isOutdated)
+				IsOutdated = !(ExistsLocal() && File.GetLastWriteTime(LocalPath) >= remoteFile.LastModified);
+				if (IsOutdated)
 				{
 					AllocateParentFolder();
-					using (var remoteStream = await client.Download(RemotePath))
+					var fullyLoaded = false;
+					do
 					{
-						if (remoteStream != null)
+						try
 						{
 							using (var localStream = File.Create(LocalPath))
 							{
-								var contentLenght = remoteFile.ContentLength.HasValue ? remoteFile.ContentLength.Value : 0;
-								var buffer = new byte[1024];
-								int bytesRead;
-								int alreadyRead = 0;
-								do
+								using (var remoteStream = await client.Download(RemotePath))
 								{
-									bytesRead = remoteStream.Read(buffer, 0, buffer.Length);
-									alreadyRead += bytesRead;
-									FileStorageManager.Instance.ShowDownloadProgress(new FileProcessingProgressEventArgs(NameOnly, contentLenght, alreadyRead));
-									localStream.Write(buffer, 0, bytesRead);
+									if (remoteStream != null)
+									{
+										var alreadyRead = 0;
+										var contentLenght = remoteFile.ContentLength.HasValue ? remoteFile.ContentLength.Value : 0;
+										var bufferSize = contentLenght / 10;
+										var buffer = new byte[bufferSize];
+										int bytesRead;
+										do
+										{
+											bytesRead = remoteStream.Read(buffer, 0, buffer.Length);
+											alreadyRead += bytesRead;
+											FileStorageManager.Instance.ShowDownloadProgress(new FileProcessingProgressEventArgs(NameOnly, contentLenght, alreadyRead));
+											localStream.Write(buffer, 0, bytesRead);
+										} while (bytesRead > 0);
+									}
+									remoteStream.Close();
+									fullyLoaded = true;
 								}
-								while (bytesRead > 0);
 								localStream.Close();
 							}
-							remoteStream.Close();
+						}
+						catch (IOException)
+						{
 						}
 					}
+					while (!fullyLoaded);
 				}
 			}
-			catch (WebDAVException exception)
+			catch (WebDAVException)
 			{
 				throw new FileNotFoundException(String.Format("Error downloading file {0}", LocalPath));
 			}
-			catch (HttpRequestException e)
+			catch (HttpRequestException)
 			{
 				FileStorageManager.Instance.SwitchToLocalMode();
 			}

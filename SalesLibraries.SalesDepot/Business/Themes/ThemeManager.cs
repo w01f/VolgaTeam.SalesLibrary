@@ -59,7 +59,7 @@ namespace SalesLibraries.SalesDepot.Business.Themes
 
 			LoadApprovedThemes(storageDirectory);
 
-			foreach (var themeFolder in storageDirectory.GetFolders())
+			foreach (var themeFolder in storageDirectory.GetLocalFolders())
 			{
 				var theme = new Theme(themeFolder);
 				theme.Load();

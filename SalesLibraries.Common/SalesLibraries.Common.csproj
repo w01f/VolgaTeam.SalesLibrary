@@ -116,7 +116,6 @@
     <Compile Include="Objects\PowerPoint\SlideSettings.cs" />
     <Compile Include="Objects\PowerPoint\SlideSettingsChangingEventArgs.cs" />
     <Compile Include="Objects\RemoteStorage\ArchiveDirectory.cs" />
-    <Compile Include="Objects\RemoteStorage\ArhiveFile.cs" />
     <Compile Include="Authorization\AuthorizingEventArgs.cs" />
     <Compile Include="Objects\RemoteStorage\ConfigFile.cs" />
     <Compile Include="Objects\RemoteStorage\Enums.cs" />
