@@ -73,7 +73,7 @@ namespace SalesLibraries.Common.Objects.RemoteStorage
 			var isOutdated = false;
 			foreach (var archivePartFile in archivePartFiles)
 			{
-				await archivePartFile.Download();
+				await archivePartFile.Download(true);
 				isOutdated |= archivePartFile.IsOutdated;
 			}
 			if (isOutdated || !TargetExists(targetPath))

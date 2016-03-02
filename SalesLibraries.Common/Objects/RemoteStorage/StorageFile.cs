@@ -79,7 +79,7 @@ namespace SalesLibraries.Common.Objects.RemoteStorage
 				var client = FileStorageManager.Instance.GetClient();
 				if ((ExistsLocal() && FileStorageManager.Instance.DataState == DataActualityState.Updated && !force) || FileStorageManager.Instance.UseLocalMode)
 					return;
-				var remoteFile = _remoteSource ?? await client.GetFile(RemotePath);
+				var remoteFile = _remoteSource != null && !force ? _remoteSource : await client.GetFile(RemotePath);
 				IsOutdated = !(ExistsLocal() && File.GetLastWriteTime(LocalPath) >= remoteFile.LastModified);
 				if (IsOutdated)
 				{
