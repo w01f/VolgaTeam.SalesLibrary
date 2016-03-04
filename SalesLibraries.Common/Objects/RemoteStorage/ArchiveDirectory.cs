@@ -59,40 +59,72 @@ namespace SalesLibraries.Common.Objects.RemoteStorage
 			var existedFiles = (_parentFoder.ExistsLocal() ? _parentFoder.GetLocalFiles(filter).ToArray() : new StorageFile[] { }).ToList();
 			var archivePartFiles = (await _parentFoder.GetRemoteFiles(filter)).ToList();
 
-			if (existedFiles.Count != archivePartFiles.Count)
-				existedFiles.ForEach(file =>
+			var successfullyExtracted = true;
+
+			do
+			{
+				if (existedFiles.Count != archivePartFiles.Count ||
+					!existedFiles.All(exsited => archivePartFiles.Any(actual => actual.Name == exsited.Name)) ||
+					!successfullyExtracted)
+					existedFiles.ForEach(file =>
+					{
+						try
+						{
+							if (File.Exists(file.LocalPath))
+								File.Delete(file.LocalPath);
+						}
+						catch
+						{
+						}
+					});
+
+				var isOutdated = false;
+				foreach (var archivePartFile in archivePartFiles)
 				{
+					await archivePartFile.Download(true);
+					isOutdated |= archivePartFile.IsOutdated;
+				}
+				if (isOutdated || !TargetExists(targetPath))
+				{
+					var fileStreams = new List<FileStream>();
 					try
 					{
-						if (File.Exists(file.LocalPath))
-							File.Delete(file.LocalPath);
+						Cleanup(targetPath);
+						Int64 alreadyRead = 0;
+						var contentLenght = archivePartFiles.Sum(s => new FileInfo(s.LocalPath).Length);
+						fileStreams.AddRange(archivePartFiles.Select(s => s.LocalPath).Select(File.OpenRead).ToList());
+						using (var reader = RarReader.Open(fileStreams))
+						{
+							while (reader.MoveToNextEntry())
+							{
+								alreadyRead += reader.Entry.CompressedSize;
+								reader.WriteEntryToDirectory(targetPath, ExtractOptions.ExtractFullPath | ExtractOptions.Overwrite);
+								FileStorageManager.Instance.ShowExtractionProgress(new FileProcessingProgressEventArgs(NameOnly, contentLenght,
+									alreadyRead));
+							}
+							FileStorageManager.Instance.ShowExtractionProgress(new FileProcessingProgressEventArgs(NameOnly, 100, 100));
+						}
+						successfullyExtracted = TargetExists(targetPath);
 					}
-					catch { }
-				});
-
-			var isOutdated = false;
-			foreach (var archivePartFile in archivePartFiles)
-			{
-				await archivePartFile.Download(true);
-				isOutdated |= archivePartFile.IsOutdated;
-			}
-			if (isOutdated || !TargetExists(targetPath))
-			{
-				Cleanup(targetPath);
-				Int64 alreadyRead = 0;
-				var contentLenght = archivePartFiles.Sum(s => new FileInfo(s.LocalPath).Length);
-				using (var reader = RarReader.Open(archivePartFiles.Select(s => s.LocalPath).Select(File.OpenRead)))
-				{
-					while (reader.MoveToNextEntry())
+					catch
 					{
-						if (reader.Entry.IsDirectory) continue;
-						alreadyRead += reader.Entry.CompressedSize;
-						reader.WriteEntryToDirectory(targetPath, ExtractOptions.ExtractFullPath | ExtractOptions.Overwrite);
-						FileStorageManager.Instance.ShowExtractionProgress(new FileProcessingProgressEventArgs(NameOnly, contentLenght, alreadyRead));
+						successfullyExtracted = false;
 					}
-					FileStorageManager.Instance.ShowExtractionProgress(new FileProcessingProgressEventArgs(NameOnly, 100, 100));
+					finally
+					{
+						try
+						{
+							foreach (var fileStream in fileStreams)
+							{
+								fileStream.Close();
+								fileStream.Dispose();
+							}
+						}
+						catch { }
+						fileStreams.Clear();
+					}
 				}
-			}
+			} while (!successfullyExtracted);
 		}
 
 		private bool TargetExists(string targetPath)

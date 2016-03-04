@@ -20,8 +20,6 @@ namespace SalesLibraries.Common.Helpers
 		public const string CommonIncomingFolderName = "common";
 		public const string LocalFilesFolderName = "local";
 
-		private static readonly FileStorageManager _instance = new FileStorageManager();
-
 		private string _url;
 		private string _login;
 		private string _password;
@@ -39,10 +37,7 @@ namespace SalesLibraries.Common.Helpers
 		public event EventHandler<EventArgs> UsingLocalMode;
 		public event EventHandler<AuthorizingEventArgs> Authorizing;
 
-		public static FileStorageManager Instance
-		{
-			get { return _instance; }
-		}
+		public static FileStorageManager Instance { get; } = new FileStorageManager();
 
 		public DataActualityState DataState { get; set; }
 
@@ -84,11 +79,11 @@ namespace SalesLibraries.Common.Helpers
 		public async Task Init()
 		{
 			await InitCredentials();
-			
+
 			_versionFile = new ConfigFile(new object[]
 			{
-				IncomingFolderName, 
-				AppProfileManager.Instance.AppNameSet, 
+				IncomingFolderName,
+				AppProfileManager.Instance.AppNameSet,
 				"version.txt"
 			});
 			if (Activated)
@@ -139,10 +134,6 @@ namespace SalesLibraries.Common.Helpers
 			if (Authorizing == null) return;
 			var args = new AuthorizingEventArgs(_authServer);
 			Authorizing(this, args);
-			if (!args.Authorized &&
-				DataState == DataActualityState.NotExisted &&
-				_versionFile.ExistsLocal())
-				File.Delete(_versionFile.LocalPath);
 			Activated = args.Authorized;
 		}
 
@@ -153,20 +144,15 @@ namespace SalesLibraries.Common.Helpers
 			if (!_versionFile.ExistsLocal())
 			{
 				DataState = DataActualityState.NotExisted;
-				await _versionFile.Download();
 			}
 			else
 			{
 				try
 				{
 					var remoteFile = await GetClient().GetFile(_versionFile.RemotePath);
-					if (File.GetLastWriteTime(_versionFile.LocalPath) < remoteFile.LastModified)
-					{
-						DataState = DataActualityState.Outdated;
-						await _versionFile.Download();
-					}
-					else
-						DataState = DataActualityState.Updated;
+					DataState = File.GetLastWriteTime(_versionFile.LocalPath) < remoteFile.LastModified ?
+						DataActualityState.Outdated :
+						DataActualityState.Updated;
 				}
 				catch (HttpRequestException e)
 				{
@@ -174,10 +160,21 @@ namespace SalesLibraries.Common.Helpers
 					SwitchToLocalMode();
 				}
 			}
+		}
+
+		public async Task FixDataState()
+		{
+			if (DataState != DataActualityState.Updated)
+				await _versionFile.Download();
+
 			if (_versionFile.ExistsLocal())
+			{
 				Version = File.ReadAllText(_versionFile.LocalPath);
+				DataState = DataActualityState.Updated;
+			}
 			else
 				Activated = false;
+
 		}
 
 		public void ShowDownloadProgress(FileProcessingProgressEventArgs eventArgs)

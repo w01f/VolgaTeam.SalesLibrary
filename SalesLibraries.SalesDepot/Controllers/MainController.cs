@@ -189,6 +189,8 @@ namespace SalesLibraries.SalesDepot.Controllers
 			ActivityManager = ActivityManager.OpenStorage<ActivityManager>();
 
 			HelpManager.LoadHelpLinks();
+
+			await FileStorageManager.Instance.FixDataState();
 		}
 
 		private void LoadControllers()

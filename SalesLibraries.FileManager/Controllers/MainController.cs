@@ -224,6 +224,8 @@ namespace SalesLibraries.FileManager.Controllers
 			ServiceConnection.Load(Settings.WebServiceSite);
 			Lists.Load();
 			HelpManager.LoadHelpLinks();
+
+			await FileStorageManager.Instance.FixDataState();
 		}
 
 		private void LoadData()
