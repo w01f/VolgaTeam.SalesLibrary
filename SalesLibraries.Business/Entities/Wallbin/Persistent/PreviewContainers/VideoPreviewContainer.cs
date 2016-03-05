@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
+using SalesLibraries.Business.Entities.Helpers;
 using SalesLibraries.Business.Entities.Wallbin.Common.Constants;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.Common.Objects.Video;
@@ -25,9 +26,8 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers
 				});
 				if (!necessaryFormatsConverted)
 					return false;
-				var videoData = GetVideoData();
 				var mp4ContainerPath = Path.Combine(ContainerPath, PreviewFormats.VideoMp4);
-				return videoData != null && (videoData.IsH264Encoded || (Directory.Exists(mp4ContainerPath) && Directory.GetFiles(mp4ContainerPath).Any()));
+				return IsMp4Converted || (Directory.Exists(mp4ContainerPath) && Directory.GetFiles(mp4ContainerPath).Any());
 			}
 		}
 
@@ -41,6 +41,16 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers
 		public override string[] AvailablePreviewFormats
 		{
 			get { return new[] { PreviewFormats.VideoMp4, PreviewFormats.VideoInfo, PreviewFormats.VideoThumbnail }; }
+		}
+
+		[NotMapped, JsonIgnore]
+		public bool IsMp4Converted
+		{
+			get
+			{
+				var videoData = GetVideoData();
+				return FileFormatHelper.IsMp4File(SourcePath) && videoData != null && videoData.IsH264Encoded;
+			}
 		}
 
 		private IEnumerable<string> NecessaryPreviewFormats

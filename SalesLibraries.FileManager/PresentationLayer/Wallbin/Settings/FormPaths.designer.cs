@@ -215,6 +215,7 @@
 			// 
 			// checkEditLocalSyncPath
 			// 
+			this.checkEditLocalSyncPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.checkEditLocalSyncPath.Location = new System.Drawing.Point(473, 99);
 			this.checkEditLocalSyncPath.Name = "checkEditLocalSyncPath";
 			this.checkEditLocalSyncPath.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
@@ -245,6 +246,7 @@
 			this.Controls.Add(this.laBackup);
 			this.DoubleBuffered = true;
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.ForeColor = System.Drawing.Color.Black;
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.MaximizeBox = false;

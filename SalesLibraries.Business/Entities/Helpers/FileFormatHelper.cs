@@ -94,6 +94,17 @@ namespace SalesLibraries.Business.Entities.Helpers
 			}
 		}
 
+		public static bool IsMp4File(string filePath)
+		{
+			switch (GetExtension(filePath))
+			{
+				case ".MP4":
+					return true;
+				default:
+					return false;
+			}
+		}
+
 		public static bool IsPngFile(string filePath)
 		{
 			switch (GetExtension(filePath))

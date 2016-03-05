@@ -34,8 +34,7 @@ namespace SalesLibraries.FileManager.Business.Models
 				Converted = previewContainer.IsConverted
 			};
 
-			var videoData = previewContainer.GetVideoData();
-			if (videoData != null && videoData.IsH264Encoded)
+			if (previewContainer.IsMp4Converted)
 			{
 				videoInfo.Mp4FileName = videoInfo.SourceFileName;
 				videoInfo.Mp4FilePath = previewContainer.SourcePath;

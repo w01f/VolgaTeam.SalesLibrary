@@ -30,7 +30,7 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 				updated |= updateInfo;
 			}
 
-			if (!cancellationToken.IsCancellationRequested && videoData != null && !videoData.IsH264Encoded)
+			if (!cancellationToken.IsCancellationRequested && videoData != null && !((VideoPreviewContainer)previewContainer).IsMp4Converted)
 			{
 				var mp4Destination = Path.Combine(previewContainer.ContainerPath, PreviewFormats.VideoMp4);
 				var updateMp4 = !(Directory.Exists(mp4Destination) && Directory.GetFiles(mp4Destination).Any());
@@ -43,7 +43,7 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 
 			if (!cancellationToken.IsCancellationRequested && videoData != null)
 			{
-				var sourceFile = !videoData.IsH264Encoded ?
+				var sourceFile = !((VideoPreviewContainer)previewContainer).IsMp4Converted ?
 					Path.Combine(previewContainer.ContainerPath, PreviewFormats.VideoMp4, Path.ChangeExtension(Path.GetFileName(previewContainer.SourcePath), ".mp4")) :
 					previewContainer.SourcePath;
 				var thumbDestination = Path.Combine(previewContainer.ContainerPath, PreviewFormats.VideoThumbnail);

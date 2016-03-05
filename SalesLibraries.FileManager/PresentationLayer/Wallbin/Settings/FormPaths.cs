@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using DevComponents.DotNetBar.Metro;
@@ -42,6 +43,27 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 		{
 			InitializeComponent();
 			Text = String.Format(Text, AppProfileManager.Instance.LibraryAlias);
+			if (CreateGraphics().DpiX > 96)
+			{
+				var font = new Font(styleController.Appearance.Font.FontFamily, styleController.Appearance.Font.Size - 2,
+					styleController.Appearance.Font.Style);
+				styleController.Appearance.Font = font;
+				styleController.AppearanceDisabled.Font = font;
+				styleController.AppearanceDropDown.Font = font;
+				styleController.AppearanceDropDownHeader.Font = font;
+				styleController.AppearanceFocused.Font = font;
+				styleController.AppearanceReadOnly.Font = font;
+
+				laBackup.Font = new Font(laBackup.Font.FontFamily, laBackup.Font.Size - 2, laBackup.Font.Style);
+				laBackupDescription.Font = new Font(laBackupDescription.Font.FontFamily, laBackupDescription.Font.Size - 2, laBackupDescription.Font.Style);
+				laLocalSyncPath.Font = new Font(laLocalSyncPath.Font.FontFamily, laLocalSyncPath.Font.Size - 2, laLocalSyncPath.Font.Style);
+				laLocalSyncDesription.Font = new Font(laLocalSyncDesription.Font.FontFamily, laLocalSyncDesription.Font.Size - 2, laLocalSyncDesription.Font.Style);
+				laWebSyncPath.Font = new Font(laWebSyncPath.Font.FontFamily, laWebSyncPath.Font.Size - 2, laWebSyncPath.Font.Style);
+				laWebSyncDescription.Font = new Font(laWebSyncDescription.Font.FontFamily, laWebSyncDescription.Font.Size - 2, laWebSyncDescription.Font.Style);
+
+				buttonXOK.Font = new Font(buttonXOK.Font.FontFamily, buttonXOK.Font.Size - 2, buttonXOK.Font.Style);
+				buttonXCancel.Font = new Font(buttonXCancel.Font.FontFamily, buttonXCancel.Font.Size - 2, buttonXCancel.Font.Style);
+			}
 		}
 
 		private void buttonEditFolderSelector_ButtonClick(object sender, ButtonPressedEventArgs e)
