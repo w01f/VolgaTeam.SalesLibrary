@@ -22,6 +22,8 @@ namespace SalesLibraries.Common.Objects.PowerPoint
 							return "5 x 4";
 						if (SizeWidth == 13 && SizeHeght == 7.32)
 							return "16 x 9";
+						if (SizeWidth == 13.333333333333334 && SizeHeght == 7.5)
+							return "16 x 9";
 						return "4 x 3";
 					case SlideOrientationEnum.Portrait:
 						if (SizeWidth == 7.5 && SizeHeght == 10)
@@ -29,6 +31,8 @@ namespace SalesLibraries.Common.Objects.PowerPoint
 						if (SizeWidth == 8.25 && SizeHeght == 10.75)
 							return "4 x 5";
 						if (SizeWidth == 7.32 && SizeHeght == 13)
+							return "9 x 16";
+						if (SizeWidth == 7.5 && SizeHeght == 13.333333333333334)
 							return "9 x 16";
 						return "4 x 3";
 					default:
@@ -50,6 +54,8 @@ namespace SalesLibraries.Common.Objects.PowerPoint
 							return "Slides54";
 						if (SizeWidth == 13 && SizeHeght == 7.32)
 							return "Slides169";
+						if (SizeWidth == 13.333333333333334 && SizeHeght == 7.5)
+							return "Slides169";
 						return "Slides43";
 					case SlideOrientationEnum.Portrait:
 						if (SizeWidth == 7.5 && SizeHeght == 10)
@@ -57,6 +63,8 @@ namespace SalesLibraries.Common.Objects.PowerPoint
 						if (SizeWidth == 8.25 && SizeHeght == 10.75)
 							return "Slides45";
 						if (SizeWidth == 7.32 && SizeHeght == 13)
+							return "Slides916";
+						if (SizeWidth == 7.5 && SizeHeght == 13.333333333333334)
 							return "Slides916";
 						return "Slides43";
 					default:
@@ -123,8 +131,8 @@ namespace SalesLibraries.Common.Objects.PowerPoint
 					return new SlideSettings
 					{
 						Orientation = SlideOrientationEnum.Landscape,
-						SizeWidth = 13,
-						SizeHeght = 7.32
+						SizeWidth = 13.333333333333334,
+						SizeHeght = 7.5
 					};
 			}
 			throw new ArgumentOutOfRangeException("Can't parse slide configuration");
