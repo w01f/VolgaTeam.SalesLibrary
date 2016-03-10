@@ -22,41 +22,48 @@
 					</td>
 				</tr>
 			</table>
-			<div class="actions">
-				<div class="ui-grid-b">
-					<div class="ui-block-a">
-						<a href="#link-viewer-open-menu" data-role="button" data-rel="popup" data-inline="true" data-theme="a">Open</a>
+			<? if ($data->config->allowPreview): ?>
+				<div class="actions">
+					<div class="ui-grid-b">
+						<div class="ui-block-a">
+							<a href="#link-viewer-open-menu" data-role="button" data-rel="popup" data-inline="true" data-theme="a">Open</a>
+						</div>
+						<? if ($data->config->allowAddToQuickSite || $data->config->allowAddToFavorites): ?>
+							<div class="ui-block-b">
+								<a id="link-viwer-open-full-screen" href="#" data-role="button" data-inline="true" data-theme="a" data-transition="slidefade">Full Screen</a>
+							</div>
+							<div class="ui-block-c">
+								<a href="#link-viewer-options-menu" data-role="button" data-rel="popup" data-inline="true" data-theme="a">Options</a>
+							</div>
+						<? else: ?>
+							<div class="ui-block-b"></div>
+							<div class="ui-block-c">
+								<a id="link-viwer-open-full-screen" href="#" data-role="button" data-inline="true" data-theme="a" data-transition="slidefade">Full Screen</a>
+							</div>
+						<? endif; ?>
 					</div>
-					<? if ($data->config->allowAddToQuickSite || $data->config->allowAddToFavorites): ?>
-						<div class="ui-block-b">
-							<a id="link-viwer-open-full-screen" href="#" data-role="button" data-inline="true" data-theme="a" data-transition="slidefade">Full Screen</a>
-						</div>
-						<div class="ui-block-c">
-							<a href="#link-viewer-options-menu" data-role="button" data-rel="popup" data-inline="true" data-theme="a">Options</a>
-						</div>
-					<? else: ?>
-						<div class="ui-block-b"></div>
-						<div class="ui-block-c">
-							<a id="link-viwer-open-full-screen" href="#" data-role="button" data-inline="true" data-theme="a" data-transition="slidefade">Full Screen</a>
-						</div>
-					<? endif; ?>
 				</div>
-			</div>
-			<div class="slider images">
-				<? foreach ($data->pagesInPng as $pngPage): ?>
-					<div><img src="<? echo $pngPage->href; ?>"></div>
-				<? endforeach; ?>
-			</div>
+				<div class="slider images">
+					<? foreach ($data->pagesInPng as $pngPage): ?>
+						<div><img src="<? echo $pngPage->href; ?>"></div>
+					<? endforeach; ?>
+				</div>
+			<? else: ?>
+				<p>Sorry...</p>
+				<p>You are not authorized to view this link.</p>
+			<? endif; ?>
 		</div>
-		<div class="page-footer main-footer" data-role='footer' data-position="fixed" data-theme="a">
-			<div class="ui-grid-a">
-				<div class="ui-block-a">
-				</div>
-				<div class="ui-block-b link-viewer-info">
-					<span class="ui-mini"><strong><? echo $data->linkTitle; ?></strong></span>
+		<? if ($data->config->allowPreview): ?>
+			<div class="page-footer main-footer" data-role='footer' data-position="fixed" data-theme="a">
+				<div class="ui-grid-a">
+					<div class="ui-block-a">
+					</div>
+					<div class="ui-block-b link-viewer-info">
+						<span class="ui-mini"><strong><? echo $data->linkTitle; ?></strong></span>
+					</div>
 				</div>
 			</div>
-		</div>
+		<? endif; ?>
 		<? if ($data->config->userAuthorized): ?>
 			<div data-role="panel" data-display="overlay" id="link-viewer-popup-panel-left">
 				<ul data-role="listview">
@@ -93,9 +100,11 @@
 				<li>
 					<a href="#link-viewer-gallery" data-transition="slidefade">Thumb Gallery</a>
 				</li>
-				<li>
-					<a class="popup-open-action" href="<? echo $data->url; ?>" target="_blank" data-rel="external">Adobe PDF</a>
-				</li>
+				<? if ($data->config->allowDownload && $data->config->allowPdf): ?>
+					<li>
+						<a class="popup-open-action" href="<? echo $data->url; ?>" target="_blank" data-rel="external">Adobe PDF</a>
+					</li>
+				<? endif; ?>
 			</ul>
 		</div>
 	</div>
@@ -157,5 +166,9 @@
 			</div>
 		<? endif; ?>
 	</div>
-<? echo $this->renderPartial('emailPage', array('previewData' => $data)); ?>
-<? echo $this->renderPartial('../favorites/addPage', array('previewData' => $data)); ?>
+	<? if ($data->config->allowAddToQuickSite): ?>
+		<? echo $this->renderPartial('emailPage', array('previewData' => $data)); ?>
+	<? endif; ?>
+	<? if ($data->config->allowAddToFavorites): ?>
+		<? echo $this->renderPartial('../favorites/addPage', array('previewData' => $data)); ?>
+	<? endif; ?>

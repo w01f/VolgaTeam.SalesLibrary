@@ -68,54 +68,51 @@
 						dialogContent.find('.open-video-fullscreen-regular').off('click.preview').on('click.preview', showVideoFullScreenForEO);
 						dialogContent.find('.open-video-fullscreen-mobile').off('click.preview').on('click.preview', showVideoFullScreen);
 
-						if (parameters.data.config.allowPreview)
-						{
-							VideoJS.players = {};
-							player = _V_("video-player", {
-									controls: true,
-									autoplay: false,
-									preload: 'auto',
-									poster: viewerData.thumbImageSrc
-								},
-								function ()
-								{
-								});
-							player.src([
-								{
-									src: viewerData.mp4Src.href,
-									href: viewerData.mp4Src.href,
-									title: viewerData.fileName,
-									type: viewerData.mp4Src.type
-								}
-							]);
-							if (fullScreenMode == 'eo')
+						VideoJS.players = {};
+						player = _V_("video-player", {
+								controls: true,
+								autoplay: false,
+								preload: 'auto',
+								poster: viewerData.thumbImageSrc
+							},
+							function ()
 							{
-								$('.vjs-fullscreen-control').css({ 'display': 'none' });
-								$('.vjs-volume-control').css({ 'margin-right': '20px' });
-							}
-							player.addEvent('play', function ()
-							{
-								$.SalesPortal.LogHelper.write({
-									type: 'Link',
-									subType: 'Play',
-									data: {
-										Name: viewerData.name,
-										File: viewerData.fileName,
-										'Original Format': viewerData.format
-									}
-								});
 							});
-
-							new $.SalesPortal.RateManager().init(
-								{
-									id: viewerData.linkId,
-									name: viewerData.name,
-									file: viewerData.fileName,
-									format: viewerData.format
-								},
-								dialogContent.find('#user-link-rate-container'),
-								viewerData.rateData);
+						player.src([
+							{
+								src: viewerData.mp4Src.href,
+								href: viewerData.mp4Src.href,
+								title: viewerData.fileName,
+								type: viewerData.mp4Src.type
+							}
+						]);
+						if (fullScreenMode == 'eo')
+						{
+							$('.vjs-fullscreen-control').css({ 'display': 'none' });
+							$('.vjs-volume-control').css({ 'margin-right': '20px' });
 						}
+						player.addEvent('play', function ()
+						{
+							$.SalesPortal.LogHelper.write({
+								type: 'Link',
+								subType: 'Play',
+								data: {
+									Name: viewerData.name,
+									File: viewerData.fileName,
+									'Original Format': viewerData.format
+								}
+							});
+						});
+
+						new $.SalesPortal.RateManager().init(
+							{
+								id: viewerData.linkId,
+								name: viewerData.name,
+								file: viewerData.fileName,
+								format: viewerData.format
+							},
+							dialogContent.find('#user-link-rate-container'),
+							viewerData.rateData);
 
 						new $.SalesPortal.PreviewEmailer(viewerData);
 					}

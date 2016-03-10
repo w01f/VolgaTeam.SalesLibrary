@@ -22,34 +22,41 @@
 				</td>
 			</tr>
 		</table>
-		<div class="actions">
+		<? if ($data->config->allowPreview): ?>
+			<div class="actions">
+				<div class="ui-grid-a">
+					<div class="ui-block-a">
+						<a href="<? echo $data->mp4Src->href; ?>" target="_blank" data-role="button" data-inline="true" data-theme="a">Play Video</a>
+					</div>
+					<div class="ui-block-b">
+						<? if ($data->config->allowAddToQuickSite || $data->config->allowAddToFavorites): ?>
+							<a href="#link-viewer-options-menu" data-role="button" data-rel="popup" data-inline="true" data-theme="a">Options</a>
+						<? endif; ?>
+					</div>
+				</div>
+			</div>
+			<video id="video-player" class="video-js vjs-default-skin"
+				   controls preload="auto" width="100%"
+				   poster="<? echo $data->thumbImageSrc; ?>"
+				   data-setup='{"autoplay":false}'>
+				<source src="<? echo $data->mp4Src->href; ?>" type='video/mp4'/>
+			</video>
+		<? else: ?>
+			<p>Sorry...</p>
+			<p>You are not authorized to view this link.</p>
+		<? endif; ?>
+	</div>
+	<? if ($data->config->allowPreview): ?>
+		<div class="page-footer main-footer" data-role='footer' data-position="fixed" data-theme="a">
 			<div class="ui-grid-a">
 				<div class="ui-block-a">
-					<a href="<? echo $data->mp4Src->href; ?>" target="_blank" data-role="button" data-inline="true" data-theme="a">Play Video</a>
 				</div>
-				<div class="ui-block-b">
-					<? if ($data->config->allowAddToQuickSite || $data->config->allowAddToFavorites): ?>
-						<a href="#link-viewer-options-menu" data-role="button" data-rel="popup" data-inline="true" data-theme="a">Options</a>
-					<? endif; ?>
+				<div class="ui-block-b link-viewer-info">
+					<span class="ui-mini"><strong><? echo $data->linkTitle; ?></strong></span>
 				</div>
 			</div>
 		</div>
-		<video id="video-player" class="video-js vjs-default-skin"
-			   controls preload="auto" width="100%"
-			   poster="<? echo $data->thumbImageSrc; ?>"
-			   data-setup='{"autoplay":false}'>
-			<source src="<? echo $data->mp4Src->href; ?>" type='video/mp4'/>
-		</video>
-	</div>
-	<div class="page-footer main-footer" data-role='footer' data-position="fixed" data-theme="a">
-		<div class="ui-grid-a">
-			<div class="ui-block-a">
-			</div>
-			<div class="ui-block-b link-viewer-info">
-				<span class="ui-mini"><strong><? echo $data->linkTitle; ?></strong></span>
-			</div>
-		</div>
-	</div>
+	<? endif; ?>
 	<? if ($data->config->userAuthorized): ?>
 		<div data-role="panel" data-display="overlay" id="link-viewer-popup-panel-left">
 			<ul data-role="listview">
@@ -81,5 +88,9 @@
 		<? endif; ?>
 	<? endif; ?>
 </div>
-<? echo $this->renderPartial('emailPage', array('previewData' => $data)); ?>
-<? echo $this->renderPartial('../favorites/addPage', array('previewData' => $data)); ?>
+<? if ($data->config->allowAddToQuickSite): ?>
+	<? echo $this->renderPartial('emailPage', array('previewData' => $data)); ?>
+<? endif; ?>
+<? if ($data->config->allowAddToFavorites): ?>
+	<? echo $this->renderPartial('../favorites/addPage', array('previewData' => $data)); ?>
+<? endif; ?>

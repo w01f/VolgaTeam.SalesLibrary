@@ -22,23 +22,29 @@
 					</td>
 				</tr>
 			</table>
-			<div class="actions">
-				<div class="ui-grid-a">
-					<div class="ui-block-a">
-						<a href="<? echo $data->url; ?>" target="_blank" data-role="button" data-inline="true" data-theme="a">Open</a>
-					</div>
-					<div class="ui-block-b">
-						<? if ($data->config->allowAddToQuickSite || $data->config->allowAddToFavorites): ?>
-							<a href="#link-viewer-options-menu" data-role="button" data-rel="popup" data-inline="true" data-theme="a">Options</a>
-						<? endif; ?>
+			<? if ($data->config->allowPreview): ?>
+				<div class="actions">
+					<div class="ui-grid-a">
+						<div class="ui-block-a">
+							<a href="<? echo $data->url; ?>" target="_blank" data-role="button" data-inline="true" data-theme="a">Open</a>
+						</div>
+						<div class="ui-block-b">
+							<? if ($data->config->allowAddToQuickSite || $data->config->allowAddToFavorites): ?>
+								<a href="#link-viewer-options-menu" data-role="button" data-rel="popup" data-inline="true" data-theme="a">Options</a>
+							<? endif; ?>
+						</div>
 					</div>
 				</div>
-			</div>
-			<div class="thumbnail">
-				<a href="<? echo $data->url; ?>" target="_blank"><img src="<? echo $data->url; ?>"></a>
-			</div>
+				<div class="thumbnail">
+					<a href="<? echo $data->url; ?>" target="_blank"><img src="<? echo $data->url; ?>"></a>
+				</div>
+			<? else: ?>
+				<p>Sorry...</p>
+				<p>You are not authorized to view this link.</p>
+			<? endif; ?>
 		</div>
-		<div class="page-footer main-footer" data-role='footer' data-position="fixed" data-theme="a">
+		<? if ($data->config->allowPreview): ?>
+			<div class="page-footer main-footer" data-role='footer' data-position="fixed" data-theme="a">
 			<div class="ui-grid-a">
 				<div class="ui-block-a">
 				</div>
@@ -47,6 +53,7 @@
 				</div>
 			</div>
 		</div>
+		<? endif; ?>
 		<? if ($data->config->userAuthorized): ?>
 			<div data-role="panel" data-display="overlay" id="link-viewer-popup-panel-left">
 				<ul data-role="listview">
@@ -78,5 +85,9 @@
 			<? endif; ?>
 		<? endif; ?>
 	</div>
-<? echo $this->renderPartial('emailPage', array('previewData' => $data)); ?>
-<? echo $this->renderPartial('../favorites/addPage', array('previewData' => $data)); ?>
+<? if ($data->config->allowAddToQuickSite): ?>
+	<? echo $this->renderPartial('emailPage', array('previewData' => $data)); ?>
+<? endif; ?>
+<? if ($data->config->allowAddToFavorites): ?>
+	<? echo $this->renderPartial('../favorites/addPage', array('previewData' => $data)); ?>
+<? endif; ?>

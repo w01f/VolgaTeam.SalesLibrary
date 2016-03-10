@@ -23,20 +23,26 @@
 				</td>
 			</tr>
 		</table>
-		<div class="actions">
-			<ul data-role="listview">
-				<? foreach ($data->actions as $action): ?>
-					<li class="action">
-						<span class="action-text"><? echo $action->shortText; ?></span>
-						<div class="service-data">
-							<div class="tag"><? echo $action->tag; ?></div>
-						</div>
-					</li>
-				<? endforeach; ?>
-			</ul>
-		</div>
+		<? if ($data->config->allowPreview): ?>
+			<div class="actions">
+				<ul data-role="listview">
+					<? foreach ($data->actions as $action): ?>
+						<li class="action">
+							<span class="action-text"><? echo $action->shortText; ?></span>
+							<div class="service-data">
+								<div class="tag"><? echo $action->tag; ?></div>
+							</div>
+						</li>
+					<? endforeach; ?>
+				</ul>
+			</div>
+		<? else: ?>
+			<p>Sorry...</p>
+			<p>You are not authorized to view this link.</p>
+		<? endif; ?>
 	</div>
-	<div class="page-footer main-footer" data-role='footer' data-position="fixed" data-theme="a">
+	<? if ($data->config->allowPreview): ?>
+		<div class="page-footer main-footer" data-role='footer' data-position="fixed" data-theme="a">
 		<div class="ui-grid-a">
 			<div class="ui-block-a">
 			</div>
@@ -45,6 +51,7 @@
 			</div>
 		</div>
 	</div>
+	<? endif; ?>
 	<? if ($authorized): ?>
 		<div data-role="panel" data-display="overlay" id="link-viewer-popup-panel-left">
 			<ul data-role="listview">
@@ -63,5 +70,9 @@
 		</div>
 	<? endif; ?>
 </div>
-<? echo $this->renderPartial('emailPage', array('previewData' => $data)); ?>
-<? echo $this->renderPartial('../favorites/addPage', array('previewData' => $data)); ?>
+<? if ($data->config->allowAddToQuickSite): ?>
+	<? echo $this->renderPartial('emailPage', array('previewData' => $data)); ?>
+<? endif; ?>
+<? if ($data->config->allowAddToFavorites): ?>
+	<? echo $this->renderPartial('../favorites/addPage', array('previewData' => $data)); ?>
+<? endif; ?>
