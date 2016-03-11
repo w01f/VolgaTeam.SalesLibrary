@@ -10,6 +10,7 @@ CREATE TABLE IF NOT EXISTS `tbl_user` (
   `company` varchar(200) DEFAULT NULL,
   `role` int(11) NOT NULL DEFAULT '0' COMMENT '1-admin 2-super 0-user',
   `date_add` datetime NULL,
+  `date_modify` datetime NULL,
   PRIMARY KEY (`id`),
   KEY `login` (`login`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;

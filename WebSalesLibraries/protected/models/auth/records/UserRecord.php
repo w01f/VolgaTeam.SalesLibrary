@@ -11,6 +11,7 @@
 	 * @property mixed phone
 	 * @property mixed role
 	 * @property mixed date_add
+	 * @property mixed date_modify
 	 */
 	class UserRecord extends CActiveRecord
 	{
@@ -60,6 +61,7 @@
 			if (isset($user))
 			{
 				$user->password = self::hashPassword($password);
+				$user->date_modify = date(Yii::app()->params['mysqlDateFormat'], strtotime(date("Y-m-d H:i:s")));
 				$user->save();
 			}
 		}

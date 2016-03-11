@@ -42,6 +42,7 @@
 			$resetPassword = false;
 			if ($this->authenticateBySession($sessionKey))
 			{
+				/** @var  $user UserRecord */
 				$user = UserRecord::model()->find('LOWER(login)=?', array(strtolower($login)));
 				if (!isset($user))
 				{
@@ -50,6 +51,8 @@
 					$user->date_add = date(Yii::app()->params['mysqlDateFormat'], strtotime(date("Y-m-d H:i:s")));
 					$newUser = TRUE;
 				}
+				else
+					$user->date_modify = date(Yii::app()->params['mysqlDateFormat'], strtotime(date("Y-m-d H:i:s")));
 				$user->first_name = $firstName;
 				$user->last_name = $lastName;
 				$user->email = $email;
@@ -61,6 +64,8 @@
 					$user->password = md5($password);
 					$resetPassword = true;
 				}
+
+
 				$user->save();
 
 				if (isset($assignedGroups) && count($assignedGroups) > 0)
@@ -101,6 +106,7 @@
 			{
 				foreach (UserRecord::model()->findAll(array('condition' => 'role<>2', 'order' => 'first_name, last_name')) as $userRecord)
 				{
+					/** @var $userRecord UserRecord*/
 					$user = new UserModel();
 					$user->id = $userRecord->id;
 					$user->login = $userRecord->login;
@@ -110,6 +116,7 @@
 					$user->phone = $userRecord->phone;
 					$user->role = $userRecord->role;
 					$user->dateAdd = $userRecord->date_add;
+					$user->dateModify = $userRecord->date_modify;
 
 					$assignedLibraryIds = UserLibraryRecord::getLibraryIdsByUser($userRecord->id);
 					$totalLibraries = LibraryRecord::model()->count();
@@ -283,6 +290,7 @@
 							$user->lastName = $userRecord->last_name;
 							$user->email = $userRecord->email;
 							$user->dateAdd = $userRecord->date_add;
+							$user->dateModify = $userRecord->date_modify;
 							$group->users[] = $user;
 						}
 					}
@@ -369,6 +377,7 @@
 									$user->lastName = $userRecord->last_name;
 									$user->email = $userRecord->email;
 									$user->dateAdd = $userRecord->date_add;
+									$user->dateModify = $userRecord->date_modify;
 									$page->users[] = $user;
 								}
 							}

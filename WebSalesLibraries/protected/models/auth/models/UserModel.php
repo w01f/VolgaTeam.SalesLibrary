@@ -56,6 +56,11 @@
 		 */
 		public $dateAdd;
 		/**
+		 * @var string
+		 * @soap
+		 */
+		public $dateModify;
+		/**
 		 * @var GroupModel[]
 		 * @soap
 		 */
