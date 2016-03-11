@@ -220,6 +220,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Activities.AccessData
 				var groupPage = new GroupControl(filteredRecords.Where(r => r.name == group), StartDate, EndDate) { GroupName = group };
 				_groupFilterControl.ColumnsChanged += (o, e) => groupPage.ApplyColumns(_groupFilterControl);
 				xtraTabControlGroups.TabPages.Add(groupPage);
+				groupPage.ApplyColumns(_groupFilterControl);
 			}
 			xtraTabControlGroups_SelectedPageChanged(xtraTabControlGroups, new TabPageChangedEventArgs(null, xtraTabControlGroups.SelectedTabPage));
 		}

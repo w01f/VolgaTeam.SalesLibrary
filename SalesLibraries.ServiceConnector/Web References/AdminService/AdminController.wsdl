@@ -40,6 +40,7 @@
           <xsd:element name="role" type="xsd:int" />
           <xsd:element name="selected" type="xsd:boolean" />
           <xsd:element name="dateAdd" type="xsd:string" />
+          <xsd:element name="dateModify" type="xsd:string" />
           <xsd:element name="groups" type="tns:GroupModelArray" />
           <xsd:element name="groupNames" type="xsd:string" />
           <xsd:element name="allGroups" type="xsd:boolean" />
@@ -186,6 +187,8 @@
           <xsd:element name="note" type="xsd:string" />
           <xsd:element name="hoverNote" type="xsd:string" />
           <xsd:element name="isBold" type="xsd:boolean" />
+          <xsd:element name="isItalic" type="xsd:boolean" />
+          <xsd:element name="isUnderline" type="xsd:boolean" />
           <xsd:element name="isSpecialFormat" type="xsd:boolean" />
           <xsd:element name="font" type="tns:Font" />
           <xsd:element name="foreColor" type="xsd:string" />
@@ -315,7 +318,7 @@
       </xsd:complexType>
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="setUserRequest">
+  <wsdl:message name="setUserIn">
     <wsdl:part name="sessionKey" type="xsd:string" />
     <wsdl:part name="login" type="xsd:string" />
     <wsdl:part name="password" type="xsd:string" />
@@ -327,135 +330,135 @@
     <wsdl:part name="assignedPages" type="tns:LibraryPageArray" />
     <wsdl:part name="role" type="xsd:int" />
   </wsdl:message>
-  <wsdl:message name="setUserResponse" />
-  <wsdl:message name="deleteUserRequest">
+  <wsdl:message name="setUserOut" />
+  <wsdl:message name="deleteUserIn">
     <wsdl:part name="sessionKey" type="xsd:string" />
     <wsdl:part name="login" type="xsd:string" />
   </wsdl:message>
-  <wsdl:message name="deleteUserResponse" />
-  <wsdl:message name="getUsersRequest">
+  <wsdl:message name="deleteUserOut" />
+  <wsdl:message name="getUsersIn">
     <wsdl:part name="sessionKey" type="xsd:string" />
   </wsdl:message>
-  <wsdl:message name="getUsersResponse">
+  <wsdl:message name="getUsersOut">
     <wsdl:part name="return" type="tns:UserModelArray" />
   </wsdl:message>
-  <wsdl:message name="isUserPasswordComplexRequest">
+  <wsdl:message name="isUserPasswordComplexIn">
     <wsdl:part name="sessionKey" type="xsd:string" />
   </wsdl:message>
-  <wsdl:message name="isUserPasswordComplexResponse">
+  <wsdl:message name="isUserPasswordComplexOut">
     <wsdl:part name="return" type="xsd:boolean" />
   </wsdl:message>
-  <wsdl:message name="setGroupRequest">
+  <wsdl:message name="setGroupIn">
     <wsdl:part name="sessionKey" type="xsd:string" />
     <wsdl:part name="id" type="xsd:string" />
     <wsdl:part name="name" type="xsd:string" />
     <wsdl:part name="assignedUsers" type="tns:UserModelArray" />
     <wsdl:part name="assignedPages" type="tns:LibraryPageArray" />
   </wsdl:message>
-  <wsdl:message name="setGroupResponse" />
-  <wsdl:message name="deleteGroupRequest">
+  <wsdl:message name="setGroupOut" />
+  <wsdl:message name="deleteGroupIn">
     <wsdl:part name="sessionKey" type="xsd:string" />
     <wsdl:part name="id" type="xsd:string" />
   </wsdl:message>
-  <wsdl:message name="deleteGroupResponse" />
-  <wsdl:message name="getGroupsRequest">
+  <wsdl:message name="deleteGroupOut" />
+  <wsdl:message name="getGroupsIn">
     <wsdl:part name="sessionKey" type="xsd:string" />
   </wsdl:message>
-  <wsdl:message name="getGroupsResponse">
+  <wsdl:message name="getGroupsOut">
     <wsdl:part name="return" type="tns:GroupModelArray" />
   </wsdl:message>
-  <wsdl:message name="setPageRequest">
+  <wsdl:message name="setPageIn">
     <wsdl:part name="sessionKey" type="xsd:string" />
     <wsdl:part name="id" type="xsd:string" />
     <wsdl:part name="assignedUsers" type="tns:UserModelArray" />
     <wsdl:part name="assignedGroups" type="tns:GroupModelArray" />
   </wsdl:message>
-  <wsdl:message name="setPageResponse" />
-  <wsdl:message name="getLibrariesRequest">
+  <wsdl:message name="setPageOut" />
+  <wsdl:message name="getLibrariesIn">
     <wsdl:part name="sessionKey" type="xsd:string" />
   </wsdl:message>
-  <wsdl:message name="getLibrariesResponse">
+  <wsdl:message name="getLibrariesOut">
     <wsdl:part name="return" type="tns:LibraryArray" />
   </wsdl:message>
-  <wsdl:message name="getGroupTemplatesRequest">
+  <wsdl:message name="getGroupTemplatesIn">
     <wsdl:part name="sessionKey" type="xsd:string" />
   </wsdl:message>
-  <wsdl:message name="getGroupTemplatesResponse">
+  <wsdl:message name="getGroupTemplatesOut">
     <wsdl:part name="return" type="tns:stringArray" />
   </wsdl:message>
-  <wsdl:message name="getSessionKeyRequest">
+  <wsdl:message name="getSessionKeyIn">
     <wsdl:part name="login" type="xsd:string" />
     <wsdl:part name="password" type="xsd:string" />
   </wsdl:message>
-  <wsdl:message name="getSessionKeyResponse">
+  <wsdl:message name="getSessionKeyOut">
     <wsdl:part name="return" type="xsd:string" />
   </wsdl:message>
   <wsdl:portType name="AdminControllerPortType">
     <wsdl:operation name="setUser">
       <wsdl:documentation>
       </wsdl:documentation>
-      <wsdl:input message="tns:setUserRequest" />
-      <wsdl:output message="tns:setUserResponse" />
+      <wsdl:input message="tns:setUserIn" />
+      <wsdl:output message="tns:setUserOut" />
     </wsdl:operation>
     <wsdl:operation name="deleteUser">
       <wsdl:documentation>
       </wsdl:documentation>
-      <wsdl:input message="tns:deleteUserRequest" />
-      <wsdl:output message="tns:deleteUserResponse" />
+      <wsdl:input message="tns:deleteUserIn" />
+      <wsdl:output message="tns:deleteUserOut" />
     </wsdl:operation>
     <wsdl:operation name="getUsers">
       <wsdl:documentation>
       </wsdl:documentation>
-      <wsdl:input message="tns:getUsersRequest" />
-      <wsdl:output message="tns:getUsersResponse" />
+      <wsdl:input message="tns:getUsersIn" />
+      <wsdl:output message="tns:getUsersOut" />
     </wsdl:operation>
     <wsdl:operation name="isUserPasswordComplex">
       <wsdl:documentation>
       </wsdl:documentation>
-      <wsdl:input message="tns:isUserPasswordComplexRequest" />
-      <wsdl:output message="tns:isUserPasswordComplexResponse" />
+      <wsdl:input message="tns:isUserPasswordComplexIn" />
+      <wsdl:output message="tns:isUserPasswordComplexOut" />
     </wsdl:operation>
     <wsdl:operation name="setGroup">
       <wsdl:documentation>
       </wsdl:documentation>
-      <wsdl:input message="tns:setGroupRequest" />
-      <wsdl:output message="tns:setGroupResponse" />
+      <wsdl:input message="tns:setGroupIn" />
+      <wsdl:output message="tns:setGroupOut" />
     </wsdl:operation>
     <wsdl:operation name="deleteGroup">
       <wsdl:documentation>
       </wsdl:documentation>
-      <wsdl:input message="tns:deleteGroupRequest" />
-      <wsdl:output message="tns:deleteGroupResponse" />
+      <wsdl:input message="tns:deleteGroupIn" />
+      <wsdl:output message="tns:deleteGroupOut" />
     </wsdl:operation>
     <wsdl:operation name="getGroups">
       <wsdl:documentation>
       </wsdl:documentation>
-      <wsdl:input message="tns:getGroupsRequest" />
-      <wsdl:output message="tns:getGroupsResponse" />
+      <wsdl:input message="tns:getGroupsIn" />
+      <wsdl:output message="tns:getGroupsOut" />
     </wsdl:operation>
     <wsdl:operation name="setPage">
       <wsdl:documentation>
       </wsdl:documentation>
-      <wsdl:input message="tns:setPageRequest" />
-      <wsdl:output message="tns:setPageResponse" />
+      <wsdl:input message="tns:setPageIn" />
+      <wsdl:output message="tns:setPageOut" />
     </wsdl:operation>
     <wsdl:operation name="getLibraries">
       <wsdl:documentation>
       </wsdl:documentation>
-      <wsdl:input message="tns:getLibrariesRequest" />
-      <wsdl:output message="tns:getLibrariesResponse" />
+      <wsdl:input message="tns:getLibrariesIn" />
+      <wsdl:output message="tns:getLibrariesOut" />
     </wsdl:operation>
     <wsdl:operation name="getGroupTemplates">
       <wsdl:documentation>
       </wsdl:documentation>
-      <wsdl:input message="tns:getGroupTemplatesRequest" />
-      <wsdl:output message="tns:getGroupTemplatesResponse" />
+      <wsdl:input message="tns:getGroupTemplatesIn" />
+      <wsdl:output message="tns:getGroupTemplatesOut" />
     </wsdl:operation>
     <wsdl:operation name="getSessionKey">
       <wsdl:documentation>
       </wsdl:documentation>
-      <wsdl:input message="tns:getSessionKeyRequest" />
-      <wsdl:output message="tns:getSessionKeyResponse" />
+      <wsdl:input message="tns:getSessionKeyIn" />
+      <wsdl:output message="tns:getSessionKeyOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="AdminControllerBinding" type="tns:AdminControllerPortType">

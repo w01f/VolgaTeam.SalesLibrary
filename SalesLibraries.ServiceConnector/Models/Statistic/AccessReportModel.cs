@@ -1,4 +1,6 @@
-﻿namespace SalesLibraries.ServiceConnector.StatisticService
+﻿using System.Text;
+
+namespace SalesLibraries.ServiceConnector.StatisticService
 {
 	public partial class AccessReportModel
 	{
@@ -25,6 +27,22 @@
 		public double AllInactivePercent
 		{
 			get { return AllUsers > 0 ? (double)AllInactive / AllUsers : 0; }
+		}
+
+		public string Details
+		{
+			get
+			{
+				var result = new StringBuilder();
+				if (!string.IsNullOrEmpty(activeNames))
+					result.AppendLine("Active Users - " + activeNames);
+				if (!string.IsNullOrEmpty(inactiveNames))
+				{
+					result.AppendLine();
+					result.AppendLine("Inactive Users - " + inactiveNames);
+				}
+				return result.ToString();
+			}
 		}
 	}
 }

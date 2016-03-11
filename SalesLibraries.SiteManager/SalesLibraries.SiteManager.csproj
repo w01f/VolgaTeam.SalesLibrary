@@ -723,7 +723,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>robocopy /s /z /r:100 "$(TargetDir)\" "d:\WorkingFiles\SalesDepot\Release\SiteManager.exe" "*.dll""SiteManager.exe"
+    <PostBuildEvent>robocopy /z /r:100 "$(TargetDir)\" "d:\WorkingFiles\SalesDepot\Release\SiteManager.exe" "*.dll" "SiteManager.exe"
 if %25errorlevel%25 leq 1 exit 0 else exit %25errorlevel%25</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

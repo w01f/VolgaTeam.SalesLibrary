@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
@@ -302,24 +303,24 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Users
 			if (userRecord == null) return;
 			using (var formEdit = new FormEditUser(false, _complexPassword, _users.Select(x => x.login).ToArray(),
 												   _groups.Select(x => new GroupModel
-																	   {
-																		   id = x.id,
-																		   name = x.name,
-																		   selected = (userRecord.groups != null && userRecord.groups.Any(y => y.id == x.id))
-																	   }).ToArray(),
+												   {
+													   id = x.id,
+													   name = x.name,
+													   selected = (userRecord.groups != null && userRecord.groups.Any(y => y.id == x.id))
+												   }).ToArray(),
 												   _libraries.Select(x => new Library
-																		  {
-																			  id = x.id,
-																			  name = x.name,
-																			  selected = (userRecord.libraries != null && userRecord.libraries.Any(y => y.id == x.id)),
-																			  pages = x.pages.Select(y => new LibraryPage
-																										  {
-																											  id = y.id,
-																											  name = y.name,
-																											  libraryId = y.libraryId,
-																											  selected = (userRecord.libraries != null && userRecord.libraries.Where(library => library.pages != null).SelectMany(library => library.pages).Select(userPage => userPage.id).Contains(y.id))
-																										  }).ToArray()
-																		  }).ToArray()))
+												   {
+													   id = x.id,
+													   name = x.name,
+													   selected = (userRecord.libraries != null && userRecord.libraries.Any(y => y.id == x.id)),
+													   pages = x.pages.Select(y => new LibraryPage
+													   {
+														   id = y.id,
+														   name = y.name,
+														   libraryId = y.libraryId,
+														   selected = (userRecord.libraries != null && userRecord.libraries.Where(library => library.pages != null).SelectMany(library => library.pages).Select(userPage => userPage.id).Contains(y.id))
+													   }).ToArray()
+												   }).ToArray()))
 			{
 				formEdit.textEditLogin.EditValue = userRecord.login;
 				formEdit.textEditFirstName.EditValue = userRecord.firstName;
@@ -410,6 +411,14 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Users
 				else if (e.Button.Index == 1)
 					DeleteUser();
 			}
+		}
+
+		private void OnGridUsersRowCellStyle(object sender, RowCellStyleEventArgs e)
+		{
+			if (e.Column != gridColumnUsersCreateDate) return;
+			var userModel = gridViewUsers.GetRow(e.RowHandle) as UserModel;
+			if (userModel == null) return;
+			e.Appearance.ForeColor = userModel.IsModified ? Color.Red : Color.Black;
 		}
 
 		#region Users Filter
@@ -585,27 +594,27 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Users
 														_groupTemplates.ToArray(),
 														_groups.Where(x => !x.name.Equals(groupRecord.name)).Select(x => x.name).ToArray(),
 														_users.Select(x => new UserModel
-																		   {
-																			   id = x.id,
-																			   login = x.login,
-																			   firstName = x.firstName,
-																			   lastName = x.lastName,
-																			   email = x.email,
-																			   selected = (groupRecord.users != null && groupRecord.users.Any(y => y.id == x.id))
-																		   }).ToArray(),
+														{
+															id = x.id,
+															login = x.login,
+															firstName = x.firstName,
+															lastName = x.lastName,
+															email = x.email,
+															selected = (groupRecord.users != null && groupRecord.users.Any(y => y.id == x.id))
+														}).ToArray(),
 														_libraries.Select(x => new Library
-																			   {
-																				   id = x.id,
-																				   name = x.name,
-																				   selected = (groupRecord.libraries != null && groupRecord.libraries.Any(y => y.id == x.id)),
-																				   pages = x.pages.Select(y => new LibraryPage
-																											   {
-																												   id = y.id,
-																												   name = y.name,
-																												   libraryId = y.libraryId,
-																												   selected = (groupRecord.libraries != null && groupRecord.libraries.SelectMany(library => library.pages).Select(groupPage => groupPage.id).Contains(y.id))
-																											   }).ToArray()
-																			   }).ToArray()))
+														{
+															id = x.id,
+															name = x.name,
+															selected = (groupRecord.libraries != null && groupRecord.libraries.Any(y => y.id == x.id)),
+															pages = x.pages.Select(y => new LibraryPage
+															{
+																id = y.id,
+																name = y.name,
+																libraryId = y.libraryId,
+																selected = (groupRecord.libraries != null && groupRecord.libraries.SelectMany(library => library.pages).Select(groupPage => groupPage.id).Contains(y.id))
+															}).ToArray()
+														}).ToArray()))
 				{
 					formEdit.comboBoxEditName.EditValue = groupRecord.name;
 					if (formEdit.ShowDialog() == DialogResult.OK)
@@ -747,20 +756,20 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Users
 			if (pageRecord != null)
 			{
 				using (var formEdit = new FormEditPage(_users.Select(x => new UserModel
-																		  {
-																			  id = x.id,
-																			  login = x.login,
-																			  firstName = x.firstName,
-																			  lastName = x.lastName,
-																			  email = x.email,
-																			  selected = (pageRecord.users != null && pageRecord.users.Any(y => y.id == x.id))
-																		  }).ToArray(),
+				{
+					id = x.id,
+					login = x.login,
+					firstName = x.firstName,
+					lastName = x.lastName,
+					email = x.email,
+					selected = (pageRecord.users != null && pageRecord.users.Any(y => y.id == x.id))
+				}).ToArray(),
 													   _groups.Select(x => new GroupModel
-																		   {
-																			   id = x.id,
-																			   name = x.name,
-																			   selected = (pageRecord.groups != null && pageRecord.groups.Any(y => y.id == x.id))
-																		   }).ToArray()))
+													   {
+														   id = x.id,
+														   name = x.name,
+														   selected = (pageRecord.groups != null && pageRecord.groups.Any(y => y.id == x.id))
+													   }).ToArray()))
 				{
 					formEdit.laLibrary.Text = string.Format(formEdit.laLibrary.Text, pageRecord.libraryName);
 					formEdit.laPage.Text = string.Format(formEdit.laPage.Text, pageRecord.name);

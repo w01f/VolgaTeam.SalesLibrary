@@ -31,9 +31,20 @@ namespace SalesLibraries.ServiceConnector.AdminService
 			get
 			{
 				DateTime temp;
+				if (DateTime.TryParse(dateModify, out temp))
+					return temp;
 				if (DateTime.TryParse(dateAdd, out temp))
 					return temp;
 				return null;
+			}
+		}
+
+		public bool IsModified
+		{
+			get
+			{
+				DateTime temp;
+				return DateTime.TryParse(dateModify, out temp);
 			}
 		}
 

@@ -149,6 +149,7 @@
 			this.gridViewUsers.PreviewIndent = 5;
 			this.gridViewUsers.RowHeight = 35;
 			this.gridViewUsers.RowSeparatorHeight = 5;
+			this.gridViewUsers.RowCellStyle += new DevExpress.XtraGrid.Views.Grid.RowCellStyleEventHandler(this.OnGridUsersRowCellStyle);
 			this.gridViewUsers.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gridView_FocusedRowChanged);
 			// 
 			// gridColumnUsersFullName

@@ -100,7 +100,6 @@ namespace SalesLibraries.SiteManager.Controllers
 			if (button == null || button.Checked) return;
 			FormMain.Instance.buttonItemActivitiesViewsRawData.Checked = false;
 			FormMain.Instance.buttonItemActivitiesViewsReport1.Checked = false;
-			FormMain.Instance.buttonItemActivitiesViewsReport3.Checked = false;
 			FormMain.Instance.buttonItemActivitiesViewsReport2.Checked = false;
 			FormMain.Instance.buttonItemActivitiesViewsReport3.Checked = false;
 			FormMain.Instance.buttonItemActivitiesViewsReport4.Checked = false;

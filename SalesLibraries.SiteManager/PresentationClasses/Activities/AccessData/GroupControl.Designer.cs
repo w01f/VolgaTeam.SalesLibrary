@@ -98,7 +98,6 @@
             this.gridBandMain,
             this.gridBandActive,
             this.gridBandInactive});
-			this.advBandedGridViewData.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Default;
 			this.advBandedGridViewData.Columns.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn[] {
             this.gridColumnUsersNumber,
             this.gridColumnActiveNumber,
@@ -259,7 +258,6 @@
 			// GroupControl
 			// 
 			this.Controls.Add(this.gridControlData);
-			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.Name = "AccessGroupReportControl";
 			this.Size = new System.Drawing.Size(898, 483);
