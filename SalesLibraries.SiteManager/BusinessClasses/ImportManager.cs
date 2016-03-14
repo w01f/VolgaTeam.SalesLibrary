@@ -37,15 +37,26 @@ namespace SalesLibraries.SiteManager.BusinessClasses
 					dataAdapter.Fill(dataTable);
 					foreach (DataRow row in dataTable.Rows)
 					{
-						var firtsName = dataTable.Columns.Count > 0 && row[0] != null ? row[0].ToString() : string.Empty;
-						var lastName = dataTable.Columns.Count > 1 && row[1] != null ? row[1].ToString() : string.Empty;
-						var email = dataTable.Columns.Count > 2 && row[2] != null ? row[2].ToString() : string.Empty;
-						var phone = dataTable.Columns.Count > 3 && row[3] != null ? row[3].ToString() : string.Empty;
-						var login = dataTable.Columns.Count > 4 && row[4] != null ? row[4].ToString() : string.Empty;
+						var firtsName = dataTable.Columns.Count > 0 && row[0] != null ? row[0].ToString() : String.Empty;
+						var lastName = dataTable.Columns.Count > 1 && row[1] != null ? row[1].ToString() : String.Empty;
+						var email = dataTable.Columns.Count > 2 && row[2] != null ? row[2].ToString() : String.Empty;
+						var phone = dataTable.Columns.Count > 3 && row[3] != null ? row[3].ToString() : String.Empty;
+						var login = dataTable.Columns.Count > 4 && row[4] != null ? row[4].ToString() : String.Empty;
 
 						if (string.IsNullOrEmpty(login) || string.IsNullOrEmpty(email)) continue;
-						var newUser = !existedUserLogins.Any(x => x.ToLower().Equals(login.ToLower().Trim()));
 
+						var group = existedGroupList.FirstOrDefault(x => x.name.ToLower().Equals(groupName.Trim().ToLower()));
+
+						var notChangedUser = group != null && existedUsers.Any(u =>
+								 login.Equals(u.login, StringComparison.OrdinalIgnoreCase) &&
+								 firtsName.Equals(u.firstName, StringComparison.OrdinalIgnoreCase) &&
+								 lastName.Equals(u.lastName, StringComparison.OrdinalIgnoreCase) &&
+								 email.Equals(u.email, StringComparison.OrdinalIgnoreCase) &&
+								 phone.Equals(u.phone, StringComparison.OrdinalIgnoreCase) &&
+								 u.groups.Any(existedGroup => group.name == existedGroup.name));
+						if (notChangedUser) continue;
+
+						var newUser = !existedUserLogins.Any(existedLogin => login.Equals(existedLogin, StringComparison.OrdinalIgnoreCase));
 						var user = new UserInfo();
 						user.Login = login.ToLower().Trim();
 						user.Password = newUser ? (complexPassword ? Membership.GeneratePassword(10, 3) : (new PasswordGenerator()).Generate()) : String.Empty;
@@ -54,7 +65,6 @@ namespace SalesLibraries.SiteManager.BusinessClasses
 						user.Email = email.ToLower().Trim();
 						user.Phone = phone.ToLower().Trim();
 
-						var group = existedGroupList.FirstOrDefault(x => x.name.ToLower().Equals(groupName.Trim().ToLower()));
 						if (group == null)
 						{
 							group = new GroupModel();

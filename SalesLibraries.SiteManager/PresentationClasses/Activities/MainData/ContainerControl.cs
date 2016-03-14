@@ -10,6 +10,7 @@ using DevExpress.XtraPrinting;
 using DevExpress.XtraTab;
 using SalesLibraries.ServiceConnector.StatisticService;
 using SalesLibraries.SiteManager.BusinessClasses;
+using SalesLibraries.SiteManager.PresentationClasses.Common;
 using SalesLibraries.SiteManager.ToolClasses;
 using SalesLibraries.SiteManager.ToolForms;
 

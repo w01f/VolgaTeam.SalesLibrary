@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using DevExpress.XtraPrinting;
 using DevExpress.XtraTab;
 using SalesLibraries.ServiceConnector.StatisticService;
+using SalesLibraries.SiteManager.PresentationClasses.Common;
 
 namespace SalesLibraries.SiteManager.PresentationClasses.Activities.RawData
 {

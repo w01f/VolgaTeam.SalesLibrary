@@ -115,6 +115,7 @@
     <Compile Include="ConfigurationClasses\InactiveUsersSettings.cs" />
     <Compile Include="ConfigurationClasses\SettingsManager.cs" />
     <Compile Include="Controllers\ActivitiesController.cs" />
+    <Compile Include="Controllers\LibraryFilesController.cs" />
     <Compile Include="Controllers\LinkConfigProfilesController.cs" />
     <Compile Include="Controllers\UtilitiesController.cs" />
     <Compile Include="Controllers\QBuilderController.cs" />
@@ -249,7 +250,7 @@
     <Compile Include="PresentationClasses\Activities\MainData\UserFilter.Designer.cs">
       <DependentUpon>UserFilter.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationClasses\Activities\IGroupControl.cs" />
+    <Compile Include="PresentationClasses\Common\IGroupControl.cs" />
     <Compile Include="PresentationClasses\Activities\MainData\GroupControl.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -285,6 +286,30 @@
     </Compile>
     <Compile Include="PresentationClasses\Activities\VideoLinkData\GroupControl.Designer.cs">
       <DependentUpon>GroupControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\LibraryFiles\Filter.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\LibraryFiles\Filter.Designer.cs">
+      <DependentUpon>Filter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\LibraryFiles\TotalControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\LibraryFiles\TotalControl.Designer.cs">
+      <DependentUpon>TotalControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\LibraryFiles\LibraryControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\LibraryFiles\LibraryControl.Designer.cs">
+      <DependentUpon>LibraryControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\LibraryFiles\LibraryFilesManagerControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\LibraryFiles\LibraryFilesManagerControl.Designer.cs">
+      <DependentUpon>LibraryFilesManagerControl.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationClasses\LinkConfigProfiles\FormEditProfile.cs">
       <SubType>Form</SubType>
@@ -562,6 +587,21 @@
     <EmbeddedResource Include="PresentationClasses\InactiveUsers\InactiveUsersFilter.resx">
       <DependentUpon>InactiveUsersFilter.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\LibraryFiles\Filter.resx">
+      <DependentUpon>Filter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\LibraryFiles\TotalControl.resx">
+      <DependentUpon>TotalControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\LibraryFiles\LibraryControl.resx">
+      <DependentUpon>LibraryControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\LibraryFiles\LibraryFilesManagerControl.resx">
+      <DependentUpon>LibraryFilesManagerControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationClasses\LinkConfigProfiles\FormEditProfile.resx">
       <DependentUpon>FormEditProfile.cs</DependentUpon>
     </EmbeddedResource>
@@ -721,6 +761,7 @@
       <Name>SalesLibraries.ServiceConnector</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>robocopy /z /r:100 "$(TargetDir)\" "d:\WorkingFiles\SalesDepot\Release\SiteManager.exe" "*.dll" "SiteManager.exe"

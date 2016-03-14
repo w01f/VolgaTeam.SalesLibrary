@@ -119,7 +119,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Users
 						form.TopMost = true;
 						var thread = new Thread(() =>
 													{
-														IEnumerable<UserInfo> users = ImportManager.ImportUsers(dialog.FileName, _users.ToArray(), _groups.ToArray(), _complexPassword, out message);
+														var users = ImportManager.ImportUsers(dialog.FileName, _users.ToArray(), _groups.ToArray(), _complexPassword, out message);
 														if (string.IsNullOrEmpty(message))
 															WebSiteManager.Instance.SelectedSite.SetUsers(users.ToArray(), out message);
 													});

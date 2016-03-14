@@ -52,11 +52,13 @@
     <Compile Include="Models\LinkConfigProfiles\LinkConfigProfileModel.cs" />
     <Compile Include="Models\QBuilder\QPageModel.cs" />
     <Compile Include="Models\Statistic\AccessReportModel.cs" />
+    <Compile Include="Models\Statistic\LibraryFilesTotalModel.cs" />
     <Compile Include="Models\Statistic\MainGroupReportModel.cs" />
     <Compile Include="Models\Statistic\MainUserReportModel.cs" />
     <Compile Include="Models\Statistic\QuizPassGroupReportModel.cs" />
     <Compile Include="Models\Statistic\QuizPassUserReportModel.cs" />
     <Compile Include="Models\Statistic\UserActivity.cs" />
+    <Compile Include="Models\Statistic\LibraryFilesModel.cs" />
     <Compile Include="Models\Statistic\VideoLinkInfo.cs" />
     <Compile Include="Models\WallbinContentService\LibraryConfig.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
@@ -286,6 +288,9 @@
       <DependentUpon>Reference.map</DependentUpon>
     </None>
     <None Include="Web References\StatisticService\FileActivityReportModel.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\StatisticService\LibraryFilesModel.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
     <None Include="Web References\StatisticService\MainGroupReportModel.datasource">

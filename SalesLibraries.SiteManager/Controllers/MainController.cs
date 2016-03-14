@@ -33,6 +33,7 @@ namespace SalesLibraries.SiteManager.Controllers
 		public UsersController UsersController { get; private set; }
 		public ActivitiesController ActivitiesController { get; private set; }
 		public LinkConfigProfilesController LinkConfigProfilesController { get; private set; }
+		public LibraryFilesController LibraryFilesController { get; private set; }
 		public InactiveUsersController InactiveUsersController { get; private set; }
 		public QBuilderController QBuilderController { get; private set; }
 		public UtilitiesController UtilitiesController { get; private set; }
@@ -66,6 +67,8 @@ namespace SalesLibraries.SiteManager.Controllers
 							Application.DoEvents();
 							LinkConfigProfilesController.InitController();
 							Application.DoEvents();
+							LibraryFilesController.InitController();
+							Application.DoEvents();
 							InactiveUsersController.InitController();
 							Application.DoEvents();
 							QBuilderController.InitController();
@@ -95,6 +98,8 @@ namespace SalesLibraries.SiteManager.Controllers
 			_controllers.Add(TabPageEnum.Activities, ActivitiesController);
 			LinkConfigProfilesController = new LinkConfigProfilesController();
 			_controllers.Add(TabPageEnum.LinkConfigProfiles, LinkConfigProfilesController);
+			LibraryFilesController = new LibraryFilesController();
+			_controllers.Add(TabPageEnum.LibraryFiles, LibraryFilesController);
 			InactiveUsersController = new InactiveUsersController();
 			_controllers.Add(TabPageEnum.InactiveUsers, InactiveUsersController);
 			QBuilderController = new QBuilderController();
@@ -123,6 +128,9 @@ namespace SalesLibraries.SiteManager.Controllers
 					break;
 				case TabPageEnum.LinkConfigProfiles:
 					FormMain.Instance.ribbonControl.SelectedRibbonTabItem = FormMain.Instance.ribbonTabItemLinkConfigProfiles;
+					break;
+				case TabPageEnum.LibraryFiles:
+					FormMain.Instance.ribbonControl.SelectedRibbonTabItem = FormMain.Instance.ribbonTabItemLibraries;
 					break;
 				case TabPageEnum.InactiveUsers:
 					FormMain.Instance.ribbonControl.SelectedRibbonTabItem = FormMain.Instance.ribbonTabItemInactiveUsers;
@@ -158,6 +166,7 @@ namespace SalesLibraries.SiteManager.Controllers
 		Users,
 		Activities,
 		LinkConfigProfiles,
+		LibraryFiles,
 		InactiveUsers,
 		QBuilder,
 		Utilities

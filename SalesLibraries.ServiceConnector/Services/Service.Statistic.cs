@@ -239,5 +239,32 @@ namespace SalesLibraries.ServiceConnector.Services
 				message = "Couldn't complete operation.\nServer is unavailable.";
 			return activities.ToArray();
 		}
+
+		public LibraryFilesModel[] GetLibraryFiles(out string message)
+		{
+			message = string.Empty;
+			var activities = new List<LibraryFilesModel>();
+			var client = GetStatisticClient();
+			if (client != null)
+			{
+				try
+				{
+					var sessionKey = client.getSessionKey(Login, Password);
+					if (!string.IsNullOrEmpty(sessionKey))
+					{
+						activities.AddRange(client.getLibraryFiles(sessionKey) ?? new LibraryFilesModel[] { });
+					}
+					else
+						message = "Couldn't complete operation.\nLogin or password are not correct.";
+				}
+				catch (Exception ex)
+				{
+					message = string.Format("Couldn't complete operation.\n{0}.", ex.Message);
+				}
+			}
+			else
+				message = "Couldn't complete operation.\nServer is unavailable.";
+			return activities.ToArray();
+		}
 	}
 }
