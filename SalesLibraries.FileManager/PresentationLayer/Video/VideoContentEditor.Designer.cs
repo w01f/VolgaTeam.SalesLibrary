@@ -55,6 +55,7 @@
 			this.repositoryItemButtonEditVideoConvertEnabled = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
 			this.repositoryItemButtonEditVideoFolderDisabled = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
 			this.pnVideoTop = new System.Windows.Forms.Panel();
+			this.labelControlMp4ConversionWarning = new DevExpress.XtraEditors.LabelControl();
 			this.buttonXClearAll = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXSelectAll = new DevComponents.DotNetBar.ButtonX();
 			this.laVideoTitle = new System.Windows.Forms.Label();
@@ -314,6 +315,7 @@
 			// 
 			// pnVideoTop
 			// 
+			this.pnVideoTop.Controls.Add(this.labelControlMp4ConversionWarning);
 			this.pnVideoTop.Controls.Add(this.buttonXClearAll);
 			this.pnVideoTop.Controls.Add(this.buttonXSelectAll);
 			this.pnVideoTop.Controls.Add(this.laVideoTitle);
@@ -322,6 +324,20 @@
 			this.pnVideoTop.Name = "pnVideoTop";
 			this.pnVideoTop.Size = new System.Drawing.Size(1128, 55);
 			this.pnVideoTop.TabIndex = 0;
+			// 
+			// labelControlMp4ConversionWarning
+			// 
+			this.labelControlMp4ConversionWarning.AllowHtmlString = true;
+			this.labelControlMp4ConversionWarning.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.labelControlMp4ConversionWarning.Appearance.Font = new System.Drawing.Font("Arial", 14.25F);
+			this.labelControlMp4ConversionWarning.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+			this.labelControlMp4ConversionWarning.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+			this.labelControlMp4ConversionWarning.Location = new System.Drawing.Point(477, 7);
+			this.labelControlMp4ConversionWarning.Name = "labelControlMp4ConversionWarning";
+			this.labelControlMp4ConversionWarning.Size = new System.Drawing.Size(435, 40);
+			this.labelControlMp4ConversionWarning.TabIndex = 3;
+			this.labelControlMp4ConversionWarning.Text = "<i><color=red>MP4 Conversions Needed: {0}</color></i>";
 			// 
 			// buttonXClearAll
 			// 
@@ -411,5 +427,6 @@
 		private DevComponents.DotNetBar.ButtonX buttonXClearAll;
 		private DevComponents.DotNetBar.ButtonX buttonXSelectAll;
 		private System.Windows.Forms.Label laVideoTitle;
+		private DevExpress.XtraEditors.LabelControl labelControlMp4ConversionWarning;
 	}
 }

@@ -28,6 +28,16 @@ namespace SalesLibraries.FileManager.PresentationLayer.Video
 			InitializeComponent();
 			Dock = DockStyle.Fill;
 			laVideoTitle.Visible = false;
+			labelControlMp4ConversionWarning.Visible = false;
+			if ((CreateGraphics()).DpiX > 96)
+			{
+				laVideoTitle.Font = new Font(laVideoTitle.Font.FontFamily,
+					laVideoTitle.Font.Size - 2,
+					laVideoTitle.Font.Style);
+				labelControlMp4ConversionWarning.Font = new Font(labelControlMp4ConversionWarning.Font.FontFamily,
+					labelControlMp4ConversionWarning.Font.Size - 2,
+					labelControlMp4ConversionWarning.Font.Style);
+			}
 		}
 
 		public void LoadLibrary(LibraryContext libraryContext)
@@ -38,6 +48,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Video
 		public void LoadVideoInfo()
 		{
 			laVideoTitle.Visible = false;
+			labelControlMp4ConversionWarning.Visible = false;
 			_videoInfoList.Clear();
 			MainController.Instance.ProcessManager.RunInQueue("Loading Video...",
 				LoadVideoInfoInternal,
@@ -50,6 +61,14 @@ namespace SalesLibraries.FileManager.PresentationLayer.Video
 								_videoInfoList.Count, (_videoInfoList.Count > 1 ? "s" : String.Empty)) :
 							"Your Library does not have any Video Files";
 						laVideoTitle.Visible = true;
+
+						var mp4NoteConvertedCount = _videoInfoList.Count(vi => String.IsNullOrEmpty(vi.Mp4FilePath));
+						if (mp4NoteConvertedCount > 0)
+						{
+							labelControlMp4ConversionWarning.Text = String.Format("<i><color=red>MP4 Conversions Needed: {0}</color></i>",
+								mp4NoteConvertedCount);
+							labelControlMp4ConversionWarning.Visible = true;
+						}
 					}))
 				);
 		}
