@@ -22,6 +22,7 @@
 						'QuizPassGroupReportModel' => 'QuizPassGroupReportModel',
 						'FileActivityReportModel' => 'FileActivityReportModel',
 						'VideoLinkInfo' => 'VideoLinkInfo',
+						'LibraryFilesModel' => 'LibraryFilesModel',
 					),
 				),
 			);
@@ -312,6 +313,34 @@
 					$reportRecord->fileName = $resultRecord['file_name'];
 					$reportRecord->activityCount = $resultRecord['action_count'];
 					$reportRecords[] = $reportRecord;
+				}
+			}
+			return $reportRecords;
+		}
+
+		/**
+		 * @param string $sessionKey
+		 * @return LibraryFilesModel[]
+		 * @soap
+		 */
+		public function getLibraryFiles($sessionKey)
+		{
+			$reportRecords = array();
+			if ($this->authenticateBySession($sessionKey))
+			{
+				$command = Yii::app()->db->createCommand("call sp_get_library_files_report()");
+				$resultRecords = $command->queryAll();
+				foreach ($resultRecords as $resultRecord)
+				{
+					$libraryFilesModel = new LibraryFilesModel();
+					$libraryFilesModel->library = $resultRecord['library'];
+					$libraryFilesModel->libraryDate = $resultRecord['library_date'];
+					$libraryFilesModel->linkName = $resultRecord['link_name'];
+					$libraryFilesModel->fileName = $resultRecord['file_name'];
+					$libraryFilesModel->fileType = $resultRecord['file_type'];
+					$libraryFilesModel->fileFormat = $resultRecord['file_format'];
+					$libraryFilesModel->fileDate = $resultRecord['file_date'];
+					$reportRecords[] = $libraryFilesModel;
 				}
 			}
 			return $reportRecords;
