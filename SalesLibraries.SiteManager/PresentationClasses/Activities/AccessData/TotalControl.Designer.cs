@@ -29,111 +29,111 @@
         private void InitializeComponent()
         {
 			this.gridControlData = new DevExpress.XtraGrid.GridControl();
-			this.advBandedGridViewData = new DevExpress.XtraGrid.Views.BandedGrid.AdvBandedGridView();
+			this.bandedGridView = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridView();
 			this.gridBandMain = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
 			this.gridColumnUsersNumber = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-			this.repositoryItemSpinEditNumeric = new DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit();
+			this.repositoryItemMemoEdit = new DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit();
 			this.gridColumnActiveNumber = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+			this.repositoryItemSpinEditNumeric = new DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit();
 			this.gridColumnActivePercent = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
 			this.repositoryItemSpinEditPercent = new DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit();
 			this.gridColumnInactiveNumber = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
 			this.gridColumnInactivePercent = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-			this.repositoryItemDateEditDate = new DevExpress.XtraEditors.Repository.RepositoryItemDateEdit();
 			((System.ComponentModel.ISupportInitialize)(this.gridControlData)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.advBandedGridViewData)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.bandedGridView)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.repositoryItemMemoEdit)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemSpinEditNumeric)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemSpinEditPercent)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEditDate)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEditDate.CalendarTimeProperties)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// gridControlData
 			// 
 			this.gridControlData.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.gridControlData.Location = new System.Drawing.Point(0, 0);
-			this.gridControlData.MainView = this.advBandedGridViewData;
+			this.gridControlData.MainView = this.bandedGridView;
 			this.gridControlData.Name = "gridControlData";
 			this.gridControlData.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
-            this.repositoryItemDateEditDate,
             this.repositoryItemSpinEditNumeric,
-            this.repositoryItemSpinEditPercent});
+            this.repositoryItemSpinEditPercent,
+            this.repositoryItemMemoEdit});
 			this.gridControlData.Size = new System.Drawing.Size(898, 483);
 			this.gridControlData.TabIndex = 2;
 			this.gridControlData.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.advBandedGridViewData});
+            this.bandedGridView});
 			// 
-			// advBandedGridViewData
+			// bandedGridView
 			// 
-			this.advBandedGridViewData.Appearance.BandPanel.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold);
-			this.advBandedGridViewData.Appearance.BandPanel.Options.UseFont = true;
-			this.advBandedGridViewData.Appearance.BandPanel.Options.UseTextOptions = true;
-			this.advBandedGridViewData.Appearance.BandPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-			this.advBandedGridViewData.Appearance.EvenRow.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.advBandedGridViewData.Appearance.EvenRow.Options.UseFont = true;
-			this.advBandedGridViewData.Appearance.EvenRow.Options.UseTextOptions = true;
-			this.advBandedGridViewData.Appearance.EvenRow.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-			this.advBandedGridViewData.Appearance.FocusedCell.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.advBandedGridViewData.Appearance.FocusedCell.Options.UseFont = true;
-			this.advBandedGridViewData.Appearance.FocusedRow.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.advBandedGridViewData.Appearance.FocusedRow.Options.UseFont = true;
-			this.advBandedGridViewData.Appearance.HeaderPanel.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold);
-			this.advBandedGridViewData.Appearance.HeaderPanel.Options.UseFont = true;
-			this.advBandedGridViewData.Appearance.HeaderPanel.Options.UseTextOptions = true;
-			this.advBandedGridViewData.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-			this.advBandedGridViewData.Appearance.OddRow.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.advBandedGridViewData.Appearance.OddRow.Options.UseFont = true;
-			this.advBandedGridViewData.Appearance.OddRow.Options.UseTextOptions = true;
-			this.advBandedGridViewData.Appearance.OddRow.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-			this.advBandedGridViewData.Appearance.Preview.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.advBandedGridViewData.Appearance.Preview.Options.UseFont = true;
-			this.advBandedGridViewData.Appearance.Row.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.advBandedGridViewData.Appearance.Row.Options.UseFont = true;
-			this.advBandedGridViewData.Appearance.SelectedRow.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.advBandedGridViewData.Appearance.SelectedRow.Options.UseFont = true;
-			this.advBandedGridViewData.AppearancePrint.HeaderPanel.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.advBandedGridViewData.AppearancePrint.HeaderPanel.Options.UseFont = true;
-			this.advBandedGridViewData.Bands.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] {
+			this.bandedGridView.Appearance.BandPanel.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold);
+			this.bandedGridView.Appearance.BandPanel.Options.UseFont = true;
+			this.bandedGridView.Appearance.BandPanel.Options.UseTextOptions = true;
+			this.bandedGridView.Appearance.BandPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+			this.bandedGridView.Appearance.EvenRow.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.bandedGridView.Appearance.EvenRow.Options.UseFont = true;
+			this.bandedGridView.Appearance.EvenRow.Options.UseTextOptions = true;
+			this.bandedGridView.Appearance.EvenRow.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+			this.bandedGridView.Appearance.FocusedCell.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.bandedGridView.Appearance.FocusedCell.Options.UseFont = true;
+			this.bandedGridView.Appearance.FocusedRow.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.bandedGridView.Appearance.FocusedRow.Options.UseFont = true;
+			this.bandedGridView.Appearance.HeaderPanel.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold);
+			this.bandedGridView.Appearance.HeaderPanel.Options.UseFont = true;
+			this.bandedGridView.Appearance.HeaderPanel.Options.UseTextOptions = true;
+			this.bandedGridView.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+			this.bandedGridView.Appearance.OddRow.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.bandedGridView.Appearance.OddRow.Options.UseFont = true;
+			this.bandedGridView.Appearance.OddRow.Options.UseTextOptions = true;
+			this.bandedGridView.Appearance.OddRow.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+			this.bandedGridView.Appearance.Preview.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.bandedGridView.Appearance.Preview.Options.UseFont = true;
+			this.bandedGridView.Appearance.Row.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.bandedGridView.Appearance.Row.Options.UseFont = true;
+			this.bandedGridView.Appearance.SelectedRow.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.bandedGridView.Appearance.SelectedRow.Options.UseFont = true;
+			this.bandedGridView.AppearancePrint.HeaderPanel.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold);
+			this.bandedGridView.AppearancePrint.HeaderPanel.Options.UseFont = true;
+			this.bandedGridView.AppearancePrint.HeaderPanel.Options.UseTextOptions = true;
+			this.bandedGridView.AppearancePrint.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+			this.bandedGridView.Bands.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] {
             this.gridBandMain});
-			this.advBandedGridViewData.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Default;
-			this.advBandedGridViewData.Columns.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn[] {
+			this.bandedGridView.Columns.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn[] {
             this.gridColumnUsersNumber,
             this.gridColumnActiveNumber,
             this.gridColumnActivePercent,
             this.gridColumnInactiveNumber,
             this.gridColumnInactivePercent});
-			this.advBandedGridViewData.GridControl = this.gridControlData;
-			this.advBandedGridViewData.Name = "advBandedGridViewData";
-			this.advBandedGridViewData.OptionsBehavior.Editable = false;
-			this.advBandedGridViewData.OptionsBehavior.ReadOnly = true;
-			this.advBandedGridViewData.OptionsCustomization.AllowBandMoving = false;
-			this.advBandedGridViewData.OptionsCustomization.AllowFilter = false;
-			this.advBandedGridViewData.OptionsCustomization.AllowGroup = false;
-			this.advBandedGridViewData.OptionsCustomization.AllowQuickHideColumns = false;
-			this.advBandedGridViewData.OptionsCustomization.ShowBandsInCustomizationForm = false;
-			this.advBandedGridViewData.OptionsMenu.EnableColumnMenu = false;
-			this.advBandedGridViewData.OptionsMenu.EnableFooterMenu = false;
-			this.advBandedGridViewData.OptionsMenu.EnableGroupPanelMenu = false;
-			this.advBandedGridViewData.OptionsMenu.ShowAutoFilterRowItem = false;
-			this.advBandedGridViewData.OptionsMenu.ShowDateTimeGroupIntervalItems = false;
-			this.advBandedGridViewData.OptionsMenu.ShowGroupSortSummaryItems = false;
-			this.advBandedGridViewData.OptionsPrint.PrintBandHeader = false;
-			this.advBandedGridViewData.OptionsPrint.PrintPreview = true;
-			this.advBandedGridViewData.OptionsSelection.EnableAppearanceFocusedCell = false;
-			this.advBandedGridViewData.OptionsSelection.EnableAppearanceHideSelection = false;
-			this.advBandedGridViewData.OptionsView.AutoCalcPreviewLineCount = true;
-			this.advBandedGridViewData.OptionsView.ColumnAutoWidth = true;
-			this.advBandedGridViewData.OptionsView.EnableAppearanceEvenRow = true;
-			this.advBandedGridViewData.OptionsView.EnableAppearanceOddRow = true;
-			this.advBandedGridViewData.OptionsView.ShowBands = false;
-			this.advBandedGridViewData.OptionsView.ShowDetailButtons = false;
-			this.advBandedGridViewData.OptionsView.ShowGroupExpandCollapseButtons = false;
-			this.advBandedGridViewData.OptionsView.ShowGroupPanel = false;
-			this.advBandedGridViewData.OptionsView.ShowIndicator = false;
-			this.advBandedGridViewData.OptionsView.ShowPreview = true;
-			this.advBandedGridViewData.PreviewFieldName = "Groups";
-			this.advBandedGridViewData.PreviewIndent = 5;
-			this.advBandedGridViewData.RowHeight = 35;
-			this.advBandedGridViewData.RowSeparatorHeight = 10;
+			this.bandedGridView.GridControl = this.gridControlData;
+			this.bandedGridView.Name = "bandedGridView";
+			this.bandedGridView.OptionsBehavior.Editable = false;
+			this.bandedGridView.OptionsBehavior.ReadOnly = true;
+			this.bandedGridView.OptionsCustomization.AllowBandMoving = false;
+			this.bandedGridView.OptionsCustomization.AllowBandResizing = false;
+			this.bandedGridView.OptionsCustomization.AllowColumnMoving = false;
+			this.bandedGridView.OptionsCustomization.AllowColumnResizing = false;
+			this.bandedGridView.OptionsCustomization.AllowFilter = false;
+			this.bandedGridView.OptionsCustomization.AllowGroup = false;
+			this.bandedGridView.OptionsCustomization.AllowQuickHideColumns = false;
+			this.bandedGridView.OptionsCustomization.AllowSort = false;
+			this.bandedGridView.OptionsCustomization.ShowBandsInCustomizationForm = false;
+			this.bandedGridView.OptionsMenu.EnableColumnMenu = false;
+			this.bandedGridView.OptionsMenu.EnableFooterMenu = false;
+			this.bandedGridView.OptionsMenu.EnableGroupPanelMenu = false;
+			this.bandedGridView.OptionsMenu.ShowAutoFilterRowItem = false;
+			this.bandedGridView.OptionsMenu.ShowDateTimeGroupIntervalItems = false;
+			this.bandedGridView.OptionsMenu.ShowGroupSortSummaryItems = false;
+			this.bandedGridView.OptionsPrint.PrintBandHeader = false;
+			this.bandedGridView.OptionsPrint.PrintHorzLines = false;
+			this.bandedGridView.OptionsPrint.PrintPreview = true;
+			this.bandedGridView.OptionsSelection.EnableAppearanceFocusedCell = false;
+			this.bandedGridView.OptionsSelection.EnableAppearanceFocusedRow = false;
+			this.bandedGridView.OptionsSelection.EnableAppearanceHideSelection = false;
+			this.bandedGridView.OptionsView.RowAutoHeight = true;
+			this.bandedGridView.OptionsView.ShowBands = false;
+			this.bandedGridView.OptionsView.ShowDetailButtons = false;
+			this.bandedGridView.OptionsView.ShowGroupExpandCollapseButtons = false;
+			this.bandedGridView.OptionsView.ShowGroupPanel = false;
+			this.bandedGridView.OptionsView.ShowHorizontalLines = DevExpress.Utils.DefaultBoolean.False;
+			this.bandedGridView.OptionsView.ShowIndicator = false;
+			this.bandedGridView.RowHeight = 25;
 			// 
 			// gridBandMain
 			// 
@@ -150,13 +150,31 @@
 			// gridColumnUsersNumber
 			// 
 			this.gridColumnUsersNumber.AppearanceCell.Options.UseTextOptions = true;
-			this.gridColumnUsersNumber.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+			this.gridColumnUsersNumber.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+			this.gridColumnUsersNumber.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Top;
+			this.gridColumnUsersNumber.AppearanceCell.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
 			this.gridColumnUsersNumber.Caption = "Total Users#";
-			this.gridColumnUsersNumber.ColumnEdit = this.repositoryItemSpinEditNumeric;
-			this.gridColumnUsersNumber.FieldName = "AllUsers";
+			this.gridColumnUsersNumber.ColumnEdit = this.repositoryItemMemoEdit;
+			this.gridColumnUsersNumber.FieldName = "GroupHeader";
 			this.gridColumnUsersNumber.Name = "gridColumnUsersNumber";
 			this.gridColumnUsersNumber.Visible = true;
 			this.gridColumnUsersNumber.Width = 151;
+			// 
+			// repositoryItemMemoEdit
+			// 
+			this.repositoryItemMemoEdit.Name = "repositoryItemMemoEdit";
+			// 
+			// gridColumnActiveNumber
+			// 
+			this.gridColumnActiveNumber.AppearanceCell.Options.UseTextOptions = true;
+			this.gridColumnActiveNumber.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+			this.gridColumnActiveNumber.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Top;
+			this.gridColumnActiveNumber.Caption = "Active#";
+			this.gridColumnActiveNumber.ColumnEdit = this.repositoryItemSpinEditNumeric;
+			this.gridColumnActiveNumber.FieldName = "AllActive";
+			this.gridColumnActiveNumber.Name = "gridColumnActiveNumber";
+			this.gridColumnActiveNumber.Visible = true;
+			this.gridColumnActiveNumber.Width = 130;
 			// 
 			// repositoryItemSpinEditNumeric
 			// 
@@ -170,17 +188,11 @@
 			this.repositoryItemSpinEditNumeric.Name = "repositoryItemSpinEditNumeric";
 			this.repositoryItemSpinEditNumeric.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
 			// 
-			// gridColumnActiveNumber
-			// 
-			this.gridColumnActiveNumber.Caption = "Active#";
-			this.gridColumnActiveNumber.ColumnEdit = this.repositoryItemSpinEditNumeric;
-			this.gridColumnActiveNumber.FieldName = "AllActive";
-			this.gridColumnActiveNumber.Name = "gridColumnActiveNumber";
-			this.gridColumnActiveNumber.Visible = true;
-			this.gridColumnActiveNumber.Width = 130;
-			// 
 			// gridColumnActivePercent
 			// 
+			this.gridColumnActivePercent.AppearanceCell.Options.UseTextOptions = true;
+			this.gridColumnActivePercent.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+			this.gridColumnActivePercent.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Top;
 			this.gridColumnActivePercent.Caption = "Active%";
 			this.gridColumnActivePercent.ColumnEdit = this.repositoryItemSpinEditPercent;
 			this.gridColumnActivePercent.FieldName = "AllActivePercent";
@@ -203,7 +215,8 @@
 			// gridColumnInactiveNumber
 			// 
 			this.gridColumnInactiveNumber.AppearanceCell.Options.UseTextOptions = true;
-			this.gridColumnInactiveNumber.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+			this.gridColumnInactiveNumber.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+			this.gridColumnInactiveNumber.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Top;
 			this.gridColumnInactiveNumber.Caption = "Inactive#";
 			this.gridColumnInactiveNumber.ColumnEdit = this.repositoryItemSpinEditNumeric;
 			this.gridColumnInactiveNumber.FieldName = "AllInactive";
@@ -213,6 +226,9 @@
 			// 
 			// gridColumnInactivePercent
 			// 
+			this.gridColumnInactivePercent.AppearanceCell.Options.UseTextOptions = true;
+			this.gridColumnInactivePercent.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+			this.gridColumnInactivePercent.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Top;
 			this.gridColumnInactivePercent.Caption = "Inactive%";
 			this.gridColumnInactivePercent.ColumnEdit = this.repositoryItemSpinEditPercent;
 			this.gridColumnInactivePercent.FieldName = "AllInactivePercent";
@@ -220,32 +236,17 @@
 			this.gridColumnInactivePercent.Visible = true;
 			this.gridColumnInactivePercent.Width = 119;
 			// 
-			// repositoryItemDateEditDate
-			// 
-			this.repositoryItemDateEditDate.AutoHeight = false;
-			this.repositoryItemDateEditDate.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-			this.repositoryItemDateEditDate.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton()});
-			this.repositoryItemDateEditDate.DisplayFormat.FormatString = "MM/dd/yyyy hh:mm tt";
-			this.repositoryItemDateEditDate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
-			this.repositoryItemDateEditDate.EditFormat.FormatString = "MM/dd/yyyy hh:mm tt";
-			this.repositoryItemDateEditDate.EditFormat.FormatType = DevExpress.Utils.FormatType.Custom;
-			this.repositoryItemDateEditDate.Name = "repositoryItemDateEditDate";
-			// 
 			// TotalControl
 			// 
 			this.Controls.Add(this.gridControlData);
-			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.Name = "AccessAllReportControl";
 			this.Size = new System.Drawing.Size(898, 483);
 			((System.ComponentModel.ISupportInitialize)(this.gridControlData)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.advBandedGridViewData)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.bandedGridView)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.repositoryItemMemoEdit)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemSpinEditNumeric)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemSpinEditPercent)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEditDate.CalendarTimeProperties)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEditDate)).EndInit();
 			this.ResumeLayout(false);
 
         }
@@ -253,15 +254,15 @@
         #endregion
 
 		private DevExpress.XtraGrid.GridControl gridControlData;
-		private DevExpress.XtraEditors.Repository.RepositoryItemDateEdit repositoryItemDateEditDate;
-		private DevExpress.XtraGrid.Views.BandedGrid.AdvBandedGridView advBandedGridViewData;
-		private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn gridColumnUsersNumber;
-		private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn gridColumnActiveNumber;
-		private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn gridColumnActivePercent;
-		private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn gridColumnInactiveNumber;
-		private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn gridColumnInactivePercent;
 		private DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit repositoryItemSpinEditNumeric;
 		private DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit repositoryItemSpinEditPercent;
+		private DevExpress.XtraGrid.Views.BandedGrid.BandedGridView bandedGridView;
+		private DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit repositoryItemMemoEdit;
+		private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn gridColumnInactivePercent;
+		private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn gridColumnInactiveNumber;
+		private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn gridColumnActivePercent;
+		private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn gridColumnActiveNumber;
+		private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn gridColumnUsersNumber;
 		private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBandMain;
-    }
+	}
 }

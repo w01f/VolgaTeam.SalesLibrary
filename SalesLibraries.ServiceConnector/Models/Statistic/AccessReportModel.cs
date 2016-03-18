@@ -1,13 +1,15 @@
-﻿using System.Text;
+﻿using System;
+using System.Linq;
+using System.Text;
 
 namespace SalesLibraries.ServiceConnector.StatisticService
 {
 	public partial class AccessReportModel
 	{
-		public string Groups { get; set; }
-		public int AllActive { get; set; }
-		public int AllInactive { get; set; }
-		public int AllUsers { get; set; }
+		public string GroupHeader { get; set; }
+		public double? AllActive { get; set; }
+		public double? AllInactive { get; set; }
+		public int? AllUsers { get; set; }
 
 		public double ActivePercent
 		{
@@ -19,29 +21,58 @@ namespace SalesLibraries.ServiceConnector.StatisticService
 			get { return userCount > 0 ? (double)inactiveCount / userCount : 0; }
 		}
 
-		public double AllActivePercent
+		public double? AllActivePercent
 		{
-			get { return AllUsers > 0 ? (double)AllActive / AllUsers : 0; }
+			get { return AllUsers > 0 ? AllActive / AllUsers : null; }
 		}
 
-		public double AllInactivePercent
+		public double? AllInactivePercent
 		{
-			get { return AllUsers > 0 ? (double)AllInactive / AllUsers : 0; }
+			get { return AllUsers > 0 ? AllInactive / AllUsers : null; }
 		}
 
-		public string Details
+		public string AllGroups
 		{
 			get
 			{
-				var result = new StringBuilder();
-				if (!string.IsNullOrEmpty(activeNames))
-					result.AppendLine("Active Users - " + activeNames);
-				if (!string.IsNullOrEmpty(inactiveNames))
-				{
-					result.AppendLine();
-					result.AppendLine("Inactive Users - " + inactiveNames);
-				}
-				return result.ToString();
+				if (!String.IsNullOrEmpty(GroupHeader))
+					return String.Format("{0}{2}{2}{1}",
+						AllUsers,
+						GroupHeader,
+						Environment.NewLine);
+				return null;
+			}
+		}
+
+		public string ActiveNames
+		{
+			get
+			{
+				if (!String.IsNullOrEmpty(activeNames))
+					return String.Format("{0}{2}{2}{1}",
+						activeCount,
+						String.Join(Environment.NewLine, activeNames
+							.Split(',')
+							.Select(item => item.Trim())
+							.OrderBy(item=>item)),
+						Environment.NewLine);
+				return null;
+			}
+		}
+
+		public string InactiveNames
+		{
+			get
+			{
+				if (!String.IsNullOrEmpty(inactiveNames))
+					return String.Format("{0}{2}{2}{1}",
+						inactiveCount,
+						String.Join(Environment.NewLine, inactiveNames
+							.Split(',')
+							.Select(item => item.Trim())
+							.OrderBy(item => item)),
+						Environment.NewLine);
+				return null;
 			}
 		}
 	}

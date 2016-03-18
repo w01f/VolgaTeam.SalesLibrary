@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Printing;
-using System.Text;
 using System.Windows.Forms;
-using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraPrinting;
 using DevExpress.XtraTab;
 using SalesLibraries.ServiceConnector.StatisticService;
@@ -86,22 +84,6 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Activities.AccessData
 			e.Graph.Font = new Font("Arial", 12, FontStyle.Bold);
 			var rec = new RectangleF(0, 0, e.Graph.ClientPageSize.Width, 50);
 			e.Graph.DrawString(reportHeader, Color.Black, rec, BorderSide.None);
-		}
-
-		private void advBandedGridViewData_CalcPreviewText(object sender, CalcPreviewTextEventArgs e)
-		{
-			var record = advBandedGridViewData.GetRow(e.RowHandle) as AccessReportModel;
-			if (record == null) return;
-			var result = new StringBuilder();
-			if (!string.IsNullOrEmpty(record.activeNames) && _showActive)
-				result.AppendLine("Active Users - " + record.activeNames);
-			if (!string.IsNullOrEmpty(record.inactiveNames) && _showInactive)
-			{
-				if (result.Length > 0)
-					result.AppendLine();
-				result.AppendLine("Inactive Users - " + record.inactiveNames);
-			}
-			e.PreviewText = result.ToString();
 		}
 	}
 }

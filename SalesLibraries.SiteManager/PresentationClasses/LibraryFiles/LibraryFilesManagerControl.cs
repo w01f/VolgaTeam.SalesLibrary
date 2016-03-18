@@ -147,16 +147,16 @@ namespace SalesLibraries.SiteManager.PresentationClasses.LibraryFiles
 				_records);
 
 			var totalRecords = filteredRecords
-				.GroupBy(g=>g.library)
-				.Select(g=> new LibraryFilesTotalModel()
+				.GroupBy(g => g.library)
+				.Select(g => new LibraryFilesTotalModel()
 				{
 					Name = g.Key,
 					FilesCount = g.Count(),
-					VideoCount = g.Count(r => "video".Equals(r.fileFormat,StringComparison.OrdinalIgnoreCase)),
-					LibraryDate = g.Select(r=>r.LibraryDate).FirstOrDefault()
+					VideoCount = g.Count(r => new[] { "video", "mp4", "wmv" }.Any(item => item.Equals(r.fileFormat, StringComparison.OrdinalIgnoreCase))),
+					LibraryDate = g.Select(r => r.LibraryDate).FirstOrDefault()
 				})
 				.OrderBy(r => r.Name).ToList();
-			var totalPage = new TotalControl(totalRecords); 
+			var totalPage = new TotalControl(totalRecords);
 			xtraTabControlLibraries.TabPages.Add(totalPage);
 
 			foreach (var group in filteredRecords.OrderBy(r => r.library).Select(g => g.library).Distinct())

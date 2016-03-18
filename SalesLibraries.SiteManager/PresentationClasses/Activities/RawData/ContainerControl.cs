@@ -94,7 +94,10 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Activities.RawData
 				}
 			}
 			updateMessage = message;
-			_filterControl.UpdateDataSource(_records.SelectMany(x => x.GroupList).Where(x => !string.IsNullOrEmpty(x)).OrderBy(x => x).Distinct().ToArray());
+			_filterControl.UpdateDataSource(
+				_records.SelectMany(x => x.GroupList).Where(x => !string.IsNullOrEmpty(x)).OrderBy(x => x).Distinct().ToArray(),
+				_records.Select(x => x.login).Where(x => !string.IsNullOrEmpty(x)).OrderBy(x => x).Distinct().ToArray()
+				);
 			ApplyData();
 		}
 

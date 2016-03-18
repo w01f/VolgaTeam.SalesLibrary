@@ -36,12 +36,12 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Activities.AccessData
 			_startDate = startDate;
 			_endDate = endDate;
 
-			gridControlData.DataSource = Records.Take(1).ToList();
+			gridControlData.DataSource = Records.ToList();
 		}
 
 		public PrintableComponentLink GetPrintLink()
 		{
-			advBandedGridViewData.CheckLoaded();
+			bandedGridView.CheckLoaded();
 			var printLink = new PrintableComponentLink()
 			{
 				Landscape = true,
@@ -56,16 +56,8 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Activities.AccessData
 		{
 			gridColumnActiveNumber.Visible = filter.ShowNumber;
 			gridColumnActivePercent.Visible = filter.ShowPercent;
-			if (filter.ShowNumber)
-				advBandedGridViewData.SetColumnPosition(gridColumnActiveNumber, 0, 0);
-			if (filter.ShowPercent)
-				advBandedGridViewData.SetColumnPosition(gridColumnActivePercent, 0, 1);
 			gridColumnInactiveNumber.Visible = filter.ShowNumber;
 			gridColumnInactivePercent.Visible = filter.ShowPercent;
-			if (filter.ShowNumber)
-				advBandedGridViewData.SetColumnPosition(gridColumnInactiveNumber, 0, 0);
-			if (filter.ShowPercent)
-				advBandedGridViewData.SetColumnPosition(gridColumnInactivePercent, 0, 1);
 		}
 
 		private void OnCreateReportHeaderArea(object sender, CreateAreaEventArgs e)

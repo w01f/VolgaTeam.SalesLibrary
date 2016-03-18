@@ -35,6 +35,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Activities.RawData
 		public event EventHandler<EventArgs> ColumnsChanged;
 
 		public List<string> AllGroups { get; private set; }
+		public List<string> AllUsers { get; private set; }
 		public List<string> SelectedGroups { get; private set; }
 
 		public Filter()
@@ -42,10 +43,11 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Activities.RawData
 			InitializeComponent();
 			Dock = DockStyle.Fill;
 			AllGroups = new List<string>();
+			AllUsers = new List<String>();
 			SelectedGroups = new List<string>();
 		}
 
-		public void UpdateDataSource(string[] groups)
+		public void UpdateDataSource(string[] groups, string[] users)
 		{
 			_init = true;
 
@@ -59,7 +61,11 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Activities.RawData
 			foreach (var group in groups)
 				checkedListBoxControlGroups.Items.Add(group, SelectedGroups.Contains(group));
 
-			labelControlGroupsTitle.Text = string.Format("Groups: {0}", AllGroups.Count);
+			labelControlGroupsTitle.Text = String.Format("Groups: {0}", AllGroups.Count);
+
+			AllUsers.Clear();
+			AllUsers.AddRange(users);
+			labelControlUsersTitle.Text = String.Format("Users: {0}", AllUsers.Count);
 
 			_init = false;
 		}

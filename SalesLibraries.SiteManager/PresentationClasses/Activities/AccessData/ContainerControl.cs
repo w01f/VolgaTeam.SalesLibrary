@@ -145,7 +145,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Activities.AccessData
 				dialog.Filter = "Excel files|*.xlsx";
 				dialog.Title = "Export Individual User Group Site Access Report";
 				if (dialog.ShowDialog() != DialogResult.OK) return;
-				
+
 				var options = new XlsxExportOptions();
 				options.SheetName = Path.GetFileNameWithoutExtension(dialog.FileName);
 				options.TextExportMode = TextExportMode.Text;
@@ -200,18 +200,27 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Activities.AccessData
 
 			var filteredRecords = new List<AccessReportModel>();
 			filteredRecords.AddRange(_groupFilterControl.EnableFilter ? _records.Where(x => _groupFilterControl.SelectedGroups.Contains(x.name)) : _records);
+
 			var allActive = filteredRecords.Sum(x => x.activeCount);
 			var allInactive = filteredRecords.Sum(x => x.inactiveCount);
 			var allUsers = filteredRecords.Sum(x => x.userCount);
-			var groups = string.Join(", ", _groupFilterControl.SelectedGroups);
-			foreach (var record in filteredRecords)
+			var totalRecords = new List<AccessReportModel>();
+			totalRecords.Add(new AccessReportModel
 			{
-				record.Groups = groups;
-				record.AllActive = allActive;
-				record.AllInactive = allInactive;
-				record.AllUsers = allUsers;
-			}
-			var totalPage = new TotalControl(filteredRecords, StartDate, EndDate);
+				GroupHeader = allUsers.ToString(),
+				AllActive = allActive,
+				AllInactive = allInactive,
+				AllUsers = allUsers
+			});
+			totalRecords.Add(new AccessReportModel
+			{
+				GroupHeader = "User Groups:"
+			});
+			totalRecords.AddRange(_groupFilterControl.SelectedGroups.Select(selectedGroup => new AccessReportModel
+			{
+				GroupHeader = selectedGroup
+			}));
+			var totalPage = new TotalControl(totalRecords, StartDate, EndDate);
 			_totalFilterControl.ColumnsChanged += (o, e) => totalPage.ApplyColumns(_totalFilterControl);
 			xtraTabControlGroups.TabPages.Add(totalPage);
 

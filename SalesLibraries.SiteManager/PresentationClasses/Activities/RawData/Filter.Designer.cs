@@ -40,6 +40,7 @@
 			this.checkEditShowActionGroup = new DevExpress.XtraEditors.CheckEdit();
 			this.checkEditShowAction = new DevExpress.XtraEditors.CheckEdit();
 			this.checkEditShowFile = new DevExpress.XtraEditors.CheckEdit();
+			this.labelControlUsersTitle = new DevExpress.XtraEditors.LabelControl();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditEnableFilter.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkedListBoxControlGroups)).BeginInit();
@@ -192,10 +193,20 @@
 			this.checkEditShowFile.TabIndex = 25;
 			this.checkEditShowFile.CheckedChanged += new System.EventHandler(this.checkEditShowColumns_CheckedChanged);
 			// 
+			// labelControlUsersTitle
+			// 
+			this.labelControlUsersTitle.Location = new System.Drawing.Point(127, 34);
+			this.labelControlUsersTitle.Name = "labelControlUsersTitle";
+			this.labelControlUsersTitle.Size = new System.Drawing.Size(38, 16);
+			this.labelControlUsersTitle.StyleController = this.styleController;
+			this.labelControlUsersTitle.TabIndex = 26;
+			this.labelControlUsersTitle.Text = "Users:";
+			// 
 			// Filter
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
 			this.BackColor = System.Drawing.Color.White;
+			this.Controls.Add(this.labelControlUsersTitle);
 			this.Controls.Add(this.checkEditShowFile);
 			this.Controls.Add(this.checkEditShowAction);
 			this.Controls.Add(this.checkEditShowActionGroup);
@@ -234,5 +245,6 @@
 		private DevExpress.XtraEditors.CheckEdit checkEditShowActionGroup;
 		private DevExpress.XtraEditors.CheckEdit checkEditShowAction;
 		private DevExpress.XtraEditors.CheckEdit checkEditShowFile;
+		private DevExpress.XtraEditors.LabelControl labelControlUsersTitle;
 	}
 }
