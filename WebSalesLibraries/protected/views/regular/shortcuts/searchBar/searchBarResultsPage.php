@@ -19,12 +19,3 @@
 		<? $this->renderPartial('searchConditions', array('searchContainer' => $searchBar)); ?>
 	</div>
 </div>
-<div id="content-overlay"></div>
-<!--  View dialog hidden part  -->
-<div>
-	<a id="view-dialog-link" href="#view-dialog-container">View Options</a>
-
-	<div id="view-dialog-wrapper">
-		<div id="view-dialog-container"></div>
-	</div>
-</div>

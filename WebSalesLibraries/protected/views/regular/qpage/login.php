@@ -7,8 +7,8 @@
 	$cs = Yii::app()->clientScript;
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/vendor/bootstrap/css/bootstrap.min.css?' . Yii::app()->params['version']);
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/regular/base/login.css?' . Yii::app()->params['version']);
-	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/bootstrap/js/bootstrap.min.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
-	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/qpage/login.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/bootstrap/js/bootstrap.min.js?' . Yii::app()->params['version'], CClientScript::POS_END);
+	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/qpage/login.js?' . Yii::app()->params['version'], CClientScript::POS_END);
 ?>
 <script type="text/javascript">
 	window.BaseUrl = '<?php echo Yii::app()->getBaseUrl(true); ?>' + '/qpage/';

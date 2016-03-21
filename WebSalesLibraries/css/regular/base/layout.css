@@ -5,8 +5,20 @@
 	-webkit-overflow-scrolling: touch;
 }
 
+#content-overlay
+{
+	position: absolute;
+	top: 0;
+	left: 0;
+	overflow: hidden;
+	display: none;
+	opacity: 0.82;
+	background: #eee;
+}
+
 #content-overlay.main-menu-opened,
-#content-overlay.action-menu-opened
+#content-overlay.action-menu-opened,
+#content-overlay.splash
 {
 	background-color: black;
 	width: 100%;
@@ -25,17 +37,6 @@
 #content .mock
 {
 	opacity: 0;
-}
-
-#content-overlay
-{
-	position: absolute;
-	top: 0;
-	left: 0;
-	overflow: hidden;
-	display: none;
-	opacity: 0.82;
-	background: #eee;
 }
 
 #view-dialog-wrapper, #view-dialog-link

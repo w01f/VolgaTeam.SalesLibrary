@@ -9,7 +9,6 @@
 		if (defaultShortcutData.length > 0)
 			$.SalesPortal.ShortcutsManager.openShortcut(defaultShortcutData, {pushHistory: true});
 	};
-
 	$(document).ready(function ()
 	{
 		$.SalesPortal.MainMenu.init();
