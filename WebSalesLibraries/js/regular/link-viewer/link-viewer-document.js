@@ -19,6 +19,8 @@
 				closeEffect: 'none',
 				afterShow: function ()
 				{
+					$.SalesPortal.SalesLibraryExtensions.sendLinkData(viewerData);
+
 					dialogContent = $('.fancybox-wrap');
 
 					var formLogger = new $.SalesPortal.FormLogger();
@@ -74,6 +76,10 @@
 						viewerData.rateData);
 
 					new $.SalesPortal.PreviewEmailer(viewerData);
+				},
+				afterClose: function ()
+				{
+					$.SalesPortal.SalesLibraryExtensions.releaseLinkData();
 				}
 			});
 		};
@@ -93,6 +99,8 @@
 		var updateCurrentPageInfo = function (pageIndex)
 		{
 			imageViewerStartIndex = pageIndex;
+
+			$.SalesPortal.SalesLibraryExtensions.switchDocumentPage(pageIndex);
 
 			if (!viewerData.isPdf)
 				dialogContent.find('.page-size').html('(' + viewerData.pages[pageIndex].size + ')');
@@ -162,12 +170,18 @@
 						next: '<a title="Next" class="fancybox-nav fancybox-next" href="javascript:;"><span></span></a>',
 						prev: '<a title="Previous" class="fancybox-nav fancybox-prev" href="javascript:;"><span></span></a>'
 					},
+					afterShow: function ()
+					{
+						$.SalesPortal.SalesLibraryExtensions.sendLinkData(viewerData);
+					},
 					afterClose: function ()
 					{
+						$.SalesPortal.SalesLibraryExtensions.releaseLinkData();
 						documentBar.close();
 					},
-					onUpdate: function ()
+					onUpdate: function (e)
 					{
+						$.SalesPortal.SalesLibraryExtensions.switchDocumentPage(this.index);
 						documentBar.resize();
 						$.SalesPortal.LogHelper.write({
 							type: 'Link',

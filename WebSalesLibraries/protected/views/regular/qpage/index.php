@@ -12,7 +12,7 @@
 	window.BaseUrl = '<?php echo Yii::app()->getBaseUrl(true); ?>' + '/qpage/';
 </script>
 <? $this->renderPartial('../menu/singlePageMenu', array('headerText' => $page->title)); ?>
-<div id="content" oncontextmenu="return false;">
+<div id="content">
 	<div id="page-id" style="display: none;"><? echo $page->id; ?></div>
 	<? if (isset($page->logo) || $page->record_activity): ?>
 		<div class="qpage-header">

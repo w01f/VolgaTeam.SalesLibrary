@@ -290,7 +290,7 @@
 			});
 		};
 
-		this.playVideo = function (links, viewerBar)
+		this.playVideo = function (links, viewerBar, callbackAfterShow, callbackAfterClose)
 		{
 			VideoJS.players = {};
 			$.fancybox({
@@ -301,12 +301,16 @@
 				afterShow: function ()
 				{
 					$('.fancybox-wrap').addClass('content-boxed');
+					if (callbackAfterShow !== undefined)
+						callbackAfterShow();
 				},
 				afterClose: function ()
 				{
 					if (viewerBar != undefined)
 						viewerBar.close();
 					$('#video-player').remove();
+					if (callbackAfterClose !== undefined)
+						callbackAfterClose();
 				}
 			});
 			_V_.options.flash.swf = links[0].swf;

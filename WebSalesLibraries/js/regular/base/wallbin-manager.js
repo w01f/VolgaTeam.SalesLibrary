@@ -59,6 +59,9 @@
 					}
 				});
 			});
+			container.find('.folder-header-container').contextmenu( function() {
+				return false;
+			});
 			container.find('.folder-header-container').off('mousedown.context').on('mousedown.context', function (eventDown)
 			{
 				if (eventDown.which == 3)

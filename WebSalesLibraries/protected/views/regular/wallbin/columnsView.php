@@ -1,5 +1,5 @@
 <? /** @var $libraryPage LibraryPage */ ?>
-<div class="page-container" id="page-<? echo $libraryPage->id; ?>" oncontextmenu="return false;">
+<div class="page-container" id="page-<? echo $libraryPage->id; ?>">
 	<? if (isset($libraryPage->columns) && $libraryPage->enableColumns): ?>
 		<div class="header-container">
 			<? for ($i = 0; $i < 3; $i++): ?>

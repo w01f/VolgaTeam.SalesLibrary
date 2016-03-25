@@ -4,9 +4,14 @@
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0"/>
 	<title><?php echo $this->pageTitle; ?></title>
-	<? Yii::app()->clientScript->registerCoreScript('jquery'); ?>
+	<?
+		$cs = Yii::app()->clientScript;
+		$cs->registerCoreScript('jquery');
+		$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/link-viewer/link-viewer-extensions.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
+	?>
 	<script type="text/javascript">
 		window.BaseUrl = '<?php echo Yii::app()->getBaseUrl(true); ?>' + '/';
+		$.SalesPortal.SalesLibraryExtensions.activate();
 	</script>
 </head>
 <body <? if (isset(Yii::app()->browser) && Yii::app()->browser->isMobile()): ?> class="mobile-body"<? endif; ?>>

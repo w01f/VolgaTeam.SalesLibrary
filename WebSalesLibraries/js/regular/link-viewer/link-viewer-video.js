@@ -32,6 +32,8 @@
 					closeEffect: 'none',
 					afterShow: function ()
 					{
+						$.SalesPortal.SalesLibraryExtensions.sendLinkData(viewerData);
+
 						dialogContent = $('.fancybox-wrap');
 
 						var formLogger = new $.SalesPortal.FormLogger();
@@ -115,6 +117,10 @@
 							viewerData.rateData);
 
 						new $.SalesPortal.PreviewEmailer(viewerData);
+					},
+					afterClose: function ()
+					{
+						$.SalesPortal.SalesLibraryExtensions.releaseLinkData();
 					}
 				});
 		};
@@ -153,8 +159,17 @@
 					title: viewerData.fileName,
 					type: viewerData.mp4Src.type,
 					swf: viewerData.playerSrc
+				}],
+				viewerBar,
+				function ()
+				{
+					$.SalesPortal.SalesLibraryExtensions.sendLinkData(viewerData);
+				},
+				function ()
+				{
+					$.SalesPortal.SalesLibraryExtensions.releaseLinkData();
 				}
-			], viewerBar);
+			);
 			viewerBar.show({
 				returnCallback: function ()
 				{
@@ -173,6 +188,7 @@
 
 		var showVideoFullScreenForEO = function ()
 		{
+			$.fancybox.close();
 			VideoJS.players = {};
 			$.fancybox({
 				content: $('<video id="video-player" class="video-js vjs-default-skin" height = "' + ($(window).height() - 100) + '" width="' + ($(window).width() - 100) + '"></video>'),
@@ -181,6 +197,14 @@
 				autoSize: true,
 				helpers: {
 					title: false
+				},
+				afterShow: function ()
+				{
+					$.SalesPortal.SalesLibraryExtensions.sendLinkData(viewerData);
+				},
+				afterClose: function ()
+				{
+					$.SalesPortal.SalesLibraryExtensions.releaseLinkData();
 				}
 			});
 			_V_.options.flash.swf = viewerData.playerSrc;
