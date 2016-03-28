@@ -44,7 +44,7 @@
 			slide_links: 'blank',	// Individual links for each slide (Options: false, 'num', 'name', 'blank')
 			thumb_links: 1,			// Individual thumb links for each slide
 			thumbnail_navigation: 0,// Thumbnail navigation
-			slideSwitchHandler: function (e)
+			slideSwitchHandler: function ()
 			{
 				$.SalesPortal.SalesLibraryExtensions.switchDocumentPage($.supersized.vars.current_slide);
 				<? if ($previewData->config->enableLogging): ?>
