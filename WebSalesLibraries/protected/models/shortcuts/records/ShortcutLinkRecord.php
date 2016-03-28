@@ -38,13 +38,17 @@
 			return array(
 				'subLinks' => array(self::HAS_MANY, 'ShortcutLinkRecord', 'id_parent', 'order' => 'subLinks.`order`',),
 				'group' => array(self::BELONGS_TO, 'ShortcutGroupRecord', 'id_group'),
+				'parent' => array(self::BELONGS_TO, 'ShortcutLinkRecord', 'id_parent'),
 			);
 		}
 
 		public function getUniqueId()
 		{
+			/** @var  $groupRecord ShortcutGroupRecord*/
 			$groupRecord = ShortcutGroupRecord::model()->findByPk($this->id_group);
-			return sprintf('group%s-link%s', $groupRecord->order, $this->order);
+			/** @var  $parentRecord ShortcutLinkRecord*/
+			$parentRecord = ShortcutLinkRecord::model()->findByPk($this->id_parent);
+			return sprintf('group%s-parent%s-link%s', $groupRecord->order, isset($parentRecord) ? $parentRecord->order : '', $this->order);
 		}
 
 		/**
@@ -169,16 +173,24 @@
 		{
 			$idArray = explode('-', $uniqueId);
 			$groupOrder = str_replace('group', '', $idArray[0]);
-			$linkOrder = str_replace('link', '', $idArray[1]);
+			$parentOrder = str_replace('parent', '', $idArray[1]);
+			$linkOrder = str_replace('link', '', $idArray[2]);
+
+			$withArray = array();
+			$withArray['group'] = array(
+					'select' => false,
+					'condition' => "group.order = " . $groupOrder
+					);
+			if ($parentOrder != '')
+				$withArray['parent'] = array(
+						'select' => false,
+						'condition' => "parent.order = " . $parentOrder,
+					);
 
 			/** @var $record ShortcutLinkRecord */
 			$record = self::model()
-				->with(array(
-					'group' => array(
-						'select' => false,
-						'condition' => "group.order = " . $groupOrder ,
-					)))
-				->find('t.id_parent is null and t.order='.$linkOrder);
+				->with($withArray)
+				->find('t.order=' . $linkOrder . ($parentOrder == '' ? ' and t.id_parent is null' : ''));
 			if (isset($record))
 				return $record->getModel($isPhone);
 			return null;

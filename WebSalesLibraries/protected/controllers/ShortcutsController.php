@@ -68,6 +68,7 @@
 				case 'gridbundle':
 				case 'carouselbundle':
 				case 'library':
+				case 'search':
 					$defaultShortcutTagName = 'default-shortcut';
 					Yii::app()->session[$defaultShortcutTagName] = sprintf('%s', $shortcutRecord->getUniqueId());
 					break;
