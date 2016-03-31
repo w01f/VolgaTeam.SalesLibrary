@@ -22,7 +22,7 @@
 
 			$this->pageTitle = sprintf('%s - %s', $shortcut->title, $shortcut->description);
 
-			$this->render('pages/singlePage', array('defaultShortcut' => $shortcut));
+			$this->render('pages/singlePage', array('shortcut' => $shortcut));
 		}
 
 		public function actionGetSamePage()
@@ -63,16 +63,17 @@
 			/** @var  $shortcut PageContentShortcut */
 			$shortcut = $shortcutRecord->getModel($this->isPhone, $parameters);
 
-			switch ($shortcut->type)
-			{
-				case 'gridbundle':
-				case 'carouselbundle':
-				case 'library':
-				case 'search':
-					$defaultShortcutTagName = 'default-shortcut';
-					Yii::app()->session[$defaultShortcutTagName] = sprintf('%s', $shortcutRecord->getUniqueId());
-					break;
-			}
+			if($shortcut->samePage)
+				switch ($shortcut->type)
+				{
+					case 'gridbundle':
+					case 'carouselbundle':
+					case 'library':
+					case 'search':
+						$defaultShortcutTagName = 'default-shortcut';
+						Yii::app()->session[$defaultShortcutTagName] = sprintf('%s', $shortcutRecord->getUniqueId());
+						break;
+				}
 
 			$viewName = '';
 			$useMobileWrapper = true;

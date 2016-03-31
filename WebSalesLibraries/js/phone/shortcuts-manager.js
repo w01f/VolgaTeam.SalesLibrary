@@ -16,7 +16,7 @@
 
 			$(window).on("pagechange", function (event, data)
 			{
-				if (data.toPage.prop('id') == groupPage.prop('id') && data.prevPage.prop('id') != groupPage.prop('id'))
+				if (data.toPage.prop('id') == groupPage.prop('id') && (data.prevPage == undefined || data.prevPage.prop('id') != groupPage.prop('id')))
 				{
 					groupPage.find('.menu-items').cubeportfolio('destroy');
 					groupPage.find('.menu-items').cubeportfolio({

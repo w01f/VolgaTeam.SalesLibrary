@@ -69,4 +69,14 @@
 		 * @soap
 		 */
 		public $forcePreview;
+		/**
+		 * @var double
+		 * @soap
+		 */
+		public $slideWidth;
+		/**
+		 * @var double
+		 * @soap
+		 */
+		public $slideHeight;
 	}

@@ -18,10 +18,10 @@
 		$headerColumnSize = 0;
 	$enablePreviewHeader = $headerColumnSize > 0;
 
-	$fullScreenControlMode = Yii::app()->browser->getBrowser() == Browser::BROWSER_EO ? 'eo' : 'regular';
+	$isEOBrowser = Yii::app()->browser->getBrowser() == Browser::BROWSER_EO;
 	$fullScreenSizeMode = Yii::app()->browser->isMobile() ? 'mobile' : 'regular';
 ?>
-<div class="link-viewer <? echo $fullScreenControlMode; ?><? if ($data->config->enableLogging): ?> logger-form<? endif; ?>" data-log-group="Link" data-log-action="Preview Activity">
+<div class="link-viewer<? echo $isEOBrowser?' eo':''; ?><? if ($data->config->enableLogging): ?> logger-form<? endif; ?>" data-log-group="Link" data-log-action="Preview Activity">
 	<? if ($enablePreviewHeader): ?>
 		<div class="row row-buttons tab-above-header" id="tab-above-header-preview">
 			<? if ($data->config->allowDownload): ?>
@@ -78,7 +78,12 @@
 		<div role="tabpanel" class="tab-pane" id="link-viewer-tab-preview">
 			<div class="row preview-gallery">
 				<div class="col col-xs-12 text-center">
-					<video id="video-player" class="video-js vjs-default-skin log-action" height="305" width="750"></video>
+					<video id="video-player"
+					       class="<? if ($isEOBrowser): ?> eo<? endif; ?> log-action"
+					       controls poster="<? echo $data->thumbImageSrc;?>"
+					       height="305" width="750">
+						<source src="<? echo $data->mp4Src->href;?>" type="video/mp4">
+					</video>
 				</div>
 			</div>
 			<div class="row row-buttons gallery-control-buttons">

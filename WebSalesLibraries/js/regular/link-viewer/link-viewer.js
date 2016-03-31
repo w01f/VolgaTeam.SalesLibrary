@@ -292,10 +292,13 @@
 
 		this.playVideo = function (links, viewerBar, callbackAfterShow, callbackAfterClose)
 		{
-			VideoJS.players = {};
 			$.fancybox({
 				title: links[0].title,
-				content: $('<video id="video-player" class="video-js vjs-default-skin" height = "480" width="640"></video>'),
+				content: $('<video controls autoplay preload="auto"' +
+					' id="video-player"' +
+					' height = "480" width="680">'+
+						'<source src="'+links[0].href+'" type="video/mp4">' +
+					'</video>'),
 				openEffect: 'none',
 				closeEffect: 'none',
 				afterShow: function ()
@@ -313,20 +316,6 @@
 						callbackAfterClose();
 				}
 			});
-			_V_.options.flash.swf = links[0].swf;
-			var myPlayer = _V_("video-player", {
-					controls: true,
-					autoplay: false,
-					preload: 'auto',
-					width: 640,
-					height: 480,
-					poster: '//:0'
-				},
-				function ()
-				{
-				});
-			myPlayer.src(links);
-			myPlayer.play();
 		};
 	};
 	$.SalesPortal.LinkManager = new LinkManager();

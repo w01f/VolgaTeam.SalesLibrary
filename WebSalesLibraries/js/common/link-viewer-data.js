@@ -40,6 +40,8 @@
 		this.pagesInPng = undefined;
 		this.galleryPagesInPng = undefined;
 		this.rateData = undefined;
+		this.slideWidth = undefined;
+		this.slideHeight = undefined;
 
 		this.startIndex = 0;
 
@@ -62,7 +64,6 @@
 		this.fileSize = undefined;
 
 		this.thumbImageSrc = undefined;
-		this.playerSrc = undefined;
 		this.mp4Src = undefined;
 
 		this.rateData = undefined;

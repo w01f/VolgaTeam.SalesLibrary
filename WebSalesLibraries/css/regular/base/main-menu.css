@@ -90,7 +90,19 @@ body
 #main-menu .menu-header i
 {
 	display: inline-block;
-	margin-right: 10px;
+}
+
+#main-menu .menu-header .main-site-url
+{
+	display: inline-block;
+	padding-right: 40px;
+	padding-left: 0;
+}
+
+#main-menu .menu-header .main-site-url a
+{
+	font-size: 0.7em;
+	color: white;
 }
 
 #main-menu .tile-bt-extralarge a

@@ -16,16 +16,6 @@
 		{
 			parent::__construct($link, $isQuickSite);
 
-			switch ($this->format)
-			{
-				case 'ppt':
-					$this->linkTitle = 'PowerPoint';
-					break;
-				case 'doc':
-					$this->linkTitle = 'Word';
-					break;
-			}
-
 			if ($this->galleryEnabled)
 			{
 				$this->viewerFormat = 'document';

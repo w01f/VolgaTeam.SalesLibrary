@@ -9,8 +9,6 @@
 
 		public $thumbImageSrc;
 
-		public $playerSrc;
-
 		public $mp4Src;
 
 		/**
@@ -26,7 +24,6 @@
 
 			$this->thumbImageSrc = $link->universalPreview->mp4Thumb->link;
 			$this->forcePreview = $link->extendedProperties->forcePreview;
-			$this->playerSrc = Yii::app()->getBaseUrl(true) . '/vendor/video-js/video-js.swf';
 
 			$this->mp4Src = new VideoPreviewItem();
 			$this->mp4Src->type = 'video/mp4';

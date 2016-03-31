@@ -28,7 +28,14 @@
 				else if (viewerData.mp4Src !== undefined)
 					parts.push((window.BaseUrl + viewerData.mp4Src.href).replace(/\/\/+/g, '/'));
 
-				SalesLibraryExtensions_sendLinkData(format, fileName, originalUrl, parts);
+				var slideWidth = 0;
+				if (viewerData.slideWidth !== undefined)
+					slideWidth = viewerData.slideWidth;
+				var slideHeight = 0;
+				if (viewerData.slideHeight !== undefined)
+					slideHeight = viewerData.slideHeight;
+
+				SalesLibraryExtensions_sendLinkData(format, fileName, originalUrl, parts, slideWidth, slideHeight);
 			}
 			catch(err) {}
 		};

@@ -4,7 +4,6 @@
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/vendor/mobile/css/jquery.mobile.ios.theme.css?' . Yii::app()->params['version']);
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/vendor/photoswipe/photoswipe.css?' . Yii::app()->params['version']);
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/vendor/slick-slider/slick.css?' . Yii::app()->params['version']);
-	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/vendor/video-js/video-js.min.css?' . Yii::app()->params['version']);
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/vendor/mobile-datepicker/jquery.mobile.datepicker.css?' . Yii::app()->params['version']);
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/vendor/mobile-datepicker/jquery.mobile.datepicker.theme.css?' . Yii::app()->params['version']);
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/vendor/cubeportfolio/css/cubeportfolio.min.css?' . Yii::app()->params['version']);
@@ -23,7 +22,6 @@
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/photoswipe/lib/klass.min.js?' . Yii::app()->params['version'], CClientScript::POS_END);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/photoswipe/code.photoswipe.jquery-3.0.5.min.js?' . Yii::app()->params['version'], CClientScript::POS_END);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/slick-slider/slick.min.js?' . Yii::app()->params['version'], CClientScript::POS_END);
-	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/video-js/video.min.js', CClientScript::POS_END);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/datepicker/js/moment.min.js?' . Yii::app()->params['version'], CClientScript::POS_END);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/mobile-datepicker/jquery.mobile.datepicker.js?' . Yii::app()->params['version'], CClientScript::POS_END);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/cubeportfolio/js/jquery.cubeportfolio.min.js?' . Yii::app()->params['version'], CClientScript::POS_END);

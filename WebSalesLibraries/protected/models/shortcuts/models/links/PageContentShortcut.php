@@ -7,6 +7,7 @@
 	{
 		public $headerIcon;
 		public $samePage;
+		public $showMainSiteUrl;
 
 		/**
 		 * @param $linkRecord
@@ -22,6 +23,9 @@
 
 			$samePageTags = $linkConfig->getElementsByTagName("OpenOnSamePage");
 			$this->samePage = $samePageTags->length > 0 ? filter_var(trim($samePageTags->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : true;
+
+			$showMainSiteUrlTags = $linkConfig->getElementsByTagName("Fullsitelink");
+			$this->showMainSiteUrl = $showMainSiteUrlTags->length > 0 ? filter_var(trim($showMainSiteUrlTags->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : false;
 
 			$queryResult = $xpath->query('//Config/HeaderIcon');
 			$this->headerIcon = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : '';

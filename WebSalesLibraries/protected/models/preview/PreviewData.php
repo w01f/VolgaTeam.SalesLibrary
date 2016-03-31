@@ -83,8 +83,9 @@
 			switch ($link->originalFormat)
 			{
 				case 'ppt':
+					return new PowerPointPreviewData($link, $isQuickSite);
 				case 'doc':
-					return new DocumentPreviewData($link, $isQuickSite);
+					return new WordPreviewData($link, $isQuickSite);
 				case 'pdf':
 					return new PdfPreviewData($link, $isQuickSite);
 				case 'video':

@@ -6,7 +6,6 @@
 	class VideoShortcut extends PageContentShortcut
 	{
 		public $sourceLink;
-		public $playerLink;
 
 		/**
 		 * @param $linkRecord
@@ -20,7 +19,6 @@
 
 			$baseUrl = Yii::app()->getBaseUrl(true);
 			$this->sourceLink = str_replace('&', '%26', str_replace(' ', '%20', $baseUrl . $this->relativeLink . '/' . trim($linkConfig->getElementsByTagName("Source")->item(0)->nodeValue)));
-			$this->playerLink = $baseUrl . '/vendor/video-js/video-js.swf';
 		}
 
 		/**
@@ -36,8 +34,7 @@
 					'src' => $this->getSourceLink(),
 					'href' => $this->getSourceLink(),
 					'title' => $this->title,
-					'type' => 'video/mp4',
-					'swf' => $this->playerLink)))
+					'type' => 'video/mp4')))
 				. '</div>';
 			return $result;
 		}

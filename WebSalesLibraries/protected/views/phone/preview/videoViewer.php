@@ -35,8 +35,7 @@
 					</div>
 				</div>
 			</div>
-			<video id="video-player" class="video-js vjs-default-skin"
-				   controls preload="auto" width="100%"
+			<video id="video-player" controls preload="auto" width="100%"
 				   poster="<? echo $data->thumbImageSrc; ?>"
 				   data-setup='{"autoplay":false}'>
 				<source src="<? echo $data->mp4Src->href; ?>" type='video/mp4'/>
