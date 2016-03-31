@@ -303,6 +303,11 @@ namespace SalesLibraries.FileManager.Business.Services
 				target.forcePreview = ((VideoLinkSettings)source).ForcePreview;
 			if (source is WebLinkSettings)
 				target.forcePreview = ((WebLinkSettings)source).ForcePreview;
+			if (source is PowerPointLinkSettings)
+			{
+				target.slideWidth = Convert.ToSingle(((PowerPointLinkSettings)source).Width);
+				target.slideHeight = Convert.ToSingle(((PowerPointLinkSettings)source).Height);
+			}
 		}
 
 		private static void ImportData(

@@ -55,6 +55,8 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 					return "5x4";
 				if (Width == 13 && Height == 7.32)
 					return "16x9";
+				if (Width == 13.333333333333334 && Height == 7.5)
+					return "16x9";
 				if (Width == 7.5 && Height == 10)
 					return "3x4";
 				if (Width == 8.25 && Height == 10.75)

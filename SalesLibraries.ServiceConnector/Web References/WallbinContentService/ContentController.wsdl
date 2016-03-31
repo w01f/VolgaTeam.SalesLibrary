@@ -144,6 +144,8 @@
           <xsd:element name="assignedUsers" type="xsd:string" />
           <xsd:element name="deniedUsers" type="xsd:string" />
           <xsd:element name="forcePreview" type="xsd:boolean" />
+          <xsd:element name="slideWidth" type="xsd:float" />
+          <xsd:element name="slideHeight" type="xsd:float" />
         </xsd:all>
       </xsd:complexType>
       <xsd:complexType name="LineBreak">
@@ -247,6 +249,7 @@
           <xsd:element name="role" type="xsd:int" />
           <xsd:element name="selected" type="xsd:boolean" />
           <xsd:element name="dateAdd" type="xsd:string" />
+          <xsd:element name="dateModify" type="xsd:string" />
           <xsd:element name="groups" type="tns:GroupModelArray" />
           <xsd:element name="groupNames" type="xsd:string" />
           <xsd:element name="allGroups" type="xsd:boolean" />
@@ -317,29 +320,29 @@
       </xsd:complexType>
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="mockLibraryRequest">
+  <wsdl:message name="mockLibraryIn">
     <wsdl:part name="library" type="tns:Library" />
   </wsdl:message>
-  <wsdl:message name="mockLibraryResponse" />
-  <wsdl:message name="getSessionKeyRequest">
+  <wsdl:message name="mockLibraryOut" />
+  <wsdl:message name="getSessionKeyIn">
     <wsdl:part name="login" type="xsd:string" />
     <wsdl:part name="password" type="xsd:string" />
   </wsdl:message>
-  <wsdl:message name="getSessionKeyResponse">
+  <wsdl:message name="getSessionKeyOut">
     <wsdl:part name="return" type="xsd:string" />
   </wsdl:message>
   <wsdl:portType name="ContentControllerPortType">
     <wsdl:operation name="mockLibrary">
       <wsdl:documentation>
       </wsdl:documentation>
-      <wsdl:input message="tns:mockLibraryRequest" />
-      <wsdl:output message="tns:mockLibraryResponse" />
+      <wsdl:input message="tns:mockLibraryIn" />
+      <wsdl:output message="tns:mockLibraryOut" />
     </wsdl:operation>
     <wsdl:operation name="getSessionKey">
       <wsdl:documentation>
       </wsdl:documentation>
-      <wsdl:input message="tns:getSessionKeyRequest" />
-      <wsdl:output message="tns:getSessionKeyResponse" />
+      <wsdl:input message="tns:getSessionKeyIn" />
+      <wsdl:output message="tns:getSessionKeyOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="ContentControllerBinding" type="tns:ContentControllerPortType">
