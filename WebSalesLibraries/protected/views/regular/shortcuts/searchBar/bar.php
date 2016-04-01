@@ -12,12 +12,6 @@
 	<table class="shortcuts-search-bar logger-form open" data-log-group="Shortcut Tile" data-log-action="Search Bar" style="text-align: <? echo $searchBar->alignment; ?>;">
 		<tr>
 			<td>
-				<? if (!Yii::app()->browser->isMobile()): ?>
-					<? $logoUrl = Yii::app()->getBaseUrl(true) . '/images/shortcuts/search-bar/search-bar-logo.png'; ?>
-					<div style="width:100%;min-height: 20px;">
-						<img style="margin-top: 20px;" src="<? echo $logoUrl . '?' . $linkId; ?>" alt="" onerror="this.style.display = 'none'"/>
-					</div>
-				<? endif; ?>
 				<? $this->renderPartial('searchConditions', array('searchContainer' => $searchBar)); ?>
 				<div class="tag-condition-selector-wrapper">
 					<? $this->renderPartial('categorySelector', array('categoryManager' => $searchBar->categoryManager), false, true); ?>

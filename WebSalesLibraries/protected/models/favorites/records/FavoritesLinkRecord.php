@@ -76,7 +76,10 @@
 				{
 					/** @var $linkIds string[] */
 					foreach ($favoriteLinkRecords as $favoriteLinkRecord)
+					{
+						/** @var  $favoriteLinkRecord FavoritesLinkRecord */
 						$linkIds[] = $favoriteLinkRecord->id_link;
+					}
 					$dateField = 'link.file_date as link_date';
 					$linkRecords = Yii::app()->db->createCommand()
 						->select('link.id, link.id_library,
@@ -94,12 +97,15 @@
 						->queryAll();
 					$links = DataTableHelper::formatRegularData($linkRecords);
 					foreach ($favoriteLinkRecords as $favoriteLinkRecord)
-						foreach ($links as $link)
-							if ($link['id'] == $favoriteLinkRecord->id_link)
+					{
+						/** @var  $favoriteLinkRecord FavoritesLinkRecord */
+						for ($i = 0; $i < count($links); $i++)
+							if ($links[$i]['id'] == $favoriteLinkRecord->id_link)
 							{
-								$link['name']['value'] = $favoriteLinkRecord->name;
+								$links[$i]['name'] = $favoriteLinkRecord->name;
 								break;
 							}
+					}
 				}
 			}
 			return $links;

@@ -224,7 +224,7 @@
 		var showGalleryFullScreen = function ()
 		{
 			$.fancybox.close();
-			window.open("preview/runFullScreenGallery?linkId=" + viewerData.linkId);
+			window.open(window.BaseUrl + "preview/runFullScreenGallery?linkId=" + viewerData.linkId);
 		};
 
 		var processSaveAction = function ()
