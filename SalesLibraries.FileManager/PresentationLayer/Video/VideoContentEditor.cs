@@ -83,7 +83,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Video
 			_videoInfoList.Sort((x, y) =>
 			{
 				if (x.Converted == y.Converted)
-					return WinAPIHelper.StrCmpLogicalW(x.SourceFileName, y.SourceFileName);
+					return WinAPIHelper.StrCmpLogicalW(x.SourceFileInfo, y.SourceFileInfo);
 				return y.Converted ? 1 : -1;
 			});
 			foreach (var videoInfo in _videoInfoList)
@@ -244,7 +244,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Video
 		{
 			var videoInfo = gridViewVideo.GetRow(e.RowHandle) as VideoInfo;
 			if (videoInfo == null) return;
-			if (e.Column == gridColumnVideoMp4FileName)
+			if (e.Column == gridColumnVideoMp4FileInfo)
 				e.Appearance.ForeColor = String.IsNullOrEmpty(videoInfo.Mp4FilePath) ? Color.Red : Color.Green;
 			e.Appearance.BackColor = videoInfo.Selected ? Color.LightGreen : Color.White;
 		}

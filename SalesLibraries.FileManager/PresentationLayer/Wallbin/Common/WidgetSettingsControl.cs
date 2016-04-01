@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using DevExpress.XtraEditors.Filtering;
@@ -21,6 +22,21 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Common
 		{
 			_data = data;
 			InitializeComponent();
+			if ((CreateGraphics()).DpiX > 96)
+			{
+				var font = new Font(styleController.Appearance.Font.FontFamily, styleController.Appearance.Font.Size - 2,
+					styleController.Appearance.Font.Style);
+				styleController.Appearance.Font = font;
+				styleController.AppearanceDisabled.Font = font;
+				styleController.AppearanceDropDown.Font = font;
+				styleController.AppearanceDropDownHeader.Font = font;
+				styleController.AppearanceFocused.Font = font;
+				styleController.AppearanceReadOnly.Font = font;
+
+				radioButtonWidgetTypeCustom.Font = new Font(radioButtonWidgetTypeCustom.Font.FontFamily, radioButtonWidgetTypeCustom.Font.Size - 2, radioButtonWidgetTypeCustom.Font.Style);
+				radioButtonWidgetTypeDisabled.Font = new Font(radioButtonWidgetTypeDisabled.Font.FontFamily, radioButtonWidgetTypeDisabled.Font.Size - 2, radioButtonWidgetTypeDisabled.Font.Style);
+				buttonXSearch.Font = new Font(buttonXSearch.Font.FontFamily, buttonXSearch.Font.Size - 2, buttonXSearch.Font.Style);
+			}
 		}
 
 		public void LoadData()
@@ -36,7 +52,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Common
 					return (XtraTabPage)tabPage;
 				}).ToArray()
 			);
-			xtraTabControlWidgets.SelectedPageChanging += (o, e) => { if (e.Page != null) ((BaseLinkImagesContainer)e.Page).Init(); };
+			xtraTabControlWidgets.SelectedPageChanging += (o, e) =>
+			{
+				if (e.Page != null && !(e.Page is SearchResultsImagesContainer))
+					((BaseLinkImagesContainer)e.Page).Init();
+			};
 			((BaseLinkImagesContainer)xtraTabControlWidgets.SelectedTabPage).Init();
 
 			pbCustomWidget.Image = _data.WidgetType == WidgetType.CustomWidget ? _data.Image : null;
@@ -80,6 +100,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Common
 		private void OnWidgetTypeChanged(object sender, EventArgs e)
 		{
 			pbCustomWidget.Enabled = radioButtonWidgetTypeCustom.Checked;
+			pnSearch.Enabled = radioButtonWidgetTypeCustom.Checked;
 			xtraTabControlWidgets.Enabled = radioButtonWidgetTypeCustom.Checked;
 			if (!_loading && StateChanged != null)
 				StateChanged(this, new CheckedChangedEventArgs(radioButtonWidgetTypeCustom.Checked));
@@ -94,6 +115,24 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Common
 		{
 			if (DoubleClicked != null)
 				DoubleClicked(this, EventArgs.Empty);
+		}
+
+		private void OnSearchButtonClick(object sender, EventArgs e)
+		{
+			var keyword = textEditSearch.EditValue as String;
+			if (String.IsNullOrEmpty(keyword)) return;
+			MainController.Instance.Lists.Widgets.SearchResults.LoadImages(keyword);
+		}
+
+		private void OnSearchEditValueChanged(object sender, EventArgs e)
+		{
+			buttonXSearch.Enabled = !String.IsNullOrEmpty(textEditSearch.EditValue as String);
+		}
+
+		private void OnSearchKeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.KeyCode == Keys.Enter)
+				OnSearchButtonClick(sender, EventArgs.Empty);
 		}
 	}
 }

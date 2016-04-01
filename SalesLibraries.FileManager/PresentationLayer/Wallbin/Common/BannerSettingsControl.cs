@@ -27,6 +27,31 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Common
 		{
 			_data = data;
 			InitializeComponent();
+			if (CreateGraphics().DpiX > 96)
+			{
+				var font = new Font(styleController.Appearance.Font.FontFamily, styleController.Appearance.Font.Size - 2,
+					styleController.Appearance.Font.Style);
+				styleController.Appearance.Font = font;
+				styleController.AppearanceDisabled.Font = font;
+				styleController.AppearanceDropDown.Font = font;
+				styleController.AppearanceDropDownHeader.Font = font;
+				styleController.AppearanceFocused.Font = font;
+				styleController.AppearanceReadOnly.Font = font;
+
+				checkBoxEnableBanner.Font = new Font(checkBoxEnableBanner.Font.FontFamily, checkBoxEnableBanner.Font.Size - 2,
+					checkBoxEnableBanner.Font.Style);
+				checkBoxBannerShowText.Font = new Font(checkBoxBannerShowText.Font.FontFamily, checkBoxBannerShowText.Font.Size - 2,
+					checkBoxBannerShowText.Font.Style);
+				rbBannerAligmentCenter.Font = new Font(rbBannerAligmentCenter.Font.FontFamily, rbBannerAligmentCenter.Font.Size - 2,
+					rbBannerAligmentCenter.Font.Style);
+				rbBannerAligmentLeft.Font = new Font(rbBannerAligmentLeft.Font.FontFamily, rbBannerAligmentLeft.Font.Size - 2,
+					rbBannerAligmentLeft.Font.Style);
+				rbBannerAligmentRight.Font = new Font(rbBannerAligmentRight.Font.FontFamily, rbBannerAligmentRight.Font.Size - 2,
+					rbBannerAligmentRight.Font.Style);
+				laBannerAligment.Font = new Font(laBannerAligment.Font.FontFamily, laBannerAligment.Font.Size - 2, laBannerAligment.Font.Style);
+				laTextFormat.Font = new Font(laTextFormat.Font.FontFamily, laTextFormat.Font.Size - 2, laTextFormat.Font.Style);
+				buttonXSearch.Font = new Font(buttonXSearch.Font.FontFamily, buttonXSearch.Font.Size - 2, buttonXSearch.Font.Style);
+			}
 		}
 
 		public void LoadData()
@@ -41,7 +66,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Common
 					tabPage.OnImageDoubleClick += OnImageDoubleClick;
 					return (XtraTabPage)tabPage;
 				}).ToArray());
-			xtraTabControlBanners.SelectedPageChanging += (o, e) => { if (e.Page != null) ((BaseLinkImagesContainer)e.Page).Init(); };
+			xtraTabControlBanners.SelectedPageChanging += (o, e) =>
+			{
+				if (e.Page != null && !(e.Page is SearchResultsImagesContainer))
+					((BaseLinkImagesContainer)e.Page).Init();
+			};
 			((BaseLinkImagesContainer)xtraTabControlBanners.SelectedTabPage).Init();
 
 			checkBoxEnableBanner.Enabled = MainController.Instance.Lists.Banners.MainFolder.ExistsLocal();
@@ -105,6 +134,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Common
 		private void checkBoxEnableBanner_CheckedChanged(object sender, EventArgs e)
 		{
 			pnControls.Enabled = checkBoxEnableBanner.Checked;
+			pnSearch.Enabled = checkBoxEnableBanner.Checked;
 			if (!_loading && StateChanged != null)StateChanged(this, new CheckedChangedEventArgs(checkBoxEnableBanner.Checked));
 		}
 
@@ -164,6 +194,24 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Common
 		{
 			if (DoubleClicked != null)
 				DoubleClicked(this, EventArgs.Empty);
+		}
+
+		private void OnSearchButtonClick(object sender, EventArgs e)
+		{
+			var keyword = textEditSearch.EditValue as String;
+			if (String.IsNullOrEmpty(keyword)) return;
+			MainController.Instance.Lists.Banners.SearchResults.LoadImages(keyword);
+		}
+
+		private void OnSearchEditValueChanged(object sender, EventArgs e)
+		{
+			buttonXSearch.Enabled = !String.IsNullOrEmpty(textEditSearch.EditValue as String);
+		}
+
+		private void OnSearchKeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.KeyCode == Keys.Enter)
+				OnSearchButtonClick(sender, EventArgs.Empty);
 		}
 	}
 }

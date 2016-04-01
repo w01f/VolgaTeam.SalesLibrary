@@ -215,6 +215,9 @@
     <Compile Include="PresentationLayer\Wallbin\Common\BannerSettingsControl.designer.cs">
       <DependentUpon>BannerSettingsControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Common\SearchResultsImagesContainer.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Wallbin\Common\RegularImagesContainer.cs">
       <SubType>Component</SubType>
     </Compile>

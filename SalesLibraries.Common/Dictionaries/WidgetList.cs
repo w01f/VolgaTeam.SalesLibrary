@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using SalesLibraries.Common.Extensions;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.Common.Objects.Graphics;
@@ -14,6 +15,8 @@ namespace SalesLibraries.Common.Dictionaries
 		public StorageDirectory FavsFolder { get; private set; }
 		public List<LinkImageGroup> Items { get; private set; }
 
+		public SearchResultsImageGroup SearchResults => Items.OfType<SearchResultsImageGroup>().Single();
+
 		public WidgetList()
 		{
 			Items = new List<LinkImageGroup>();
@@ -26,18 +29,26 @@ namespace SalesLibraries.Common.Dictionaries
 			FavsFolder = new StorageDirectory(RemoteResourceManager.Instance.AppSettingsFolder.RelativePathParts.Merge("Favorite_Widgets"));
 
 			Items.Clear();
-			var imageGroup = new LinkImageGroup(this);
-			imageGroup.Name = "Gallery";
-			imageGroup.Order = -2;
+
+			SourceFolderImageGroup sourceFolderImageGroup = new RegularImageGroup(this);
+			sourceFolderImageGroup.Name = "Gallery";
+			sourceFolderImageGroup.Order = -3;
 			if (MainFolder.ExistsLocal())
-				imageGroup.LoadImages<Widget>(MainFolder.LocalPath);
-			Items.Add(imageGroup);
-			imageGroup = new FavoriteImageGroup(this);
-			imageGroup.Name = "My Favorites";
-			imageGroup.Order = -1;
+				sourceFolderImageGroup.LoadImages<Widget>(MainFolder.LocalPath);
+			Items.Add(sourceFolderImageGroup);
+
+			var searchResultsimageGroup = new SearchResultsImageGroup(this);
+			searchResultsimageGroup.Name = "Search Results";
+			searchResultsimageGroup.Order = -2;
+			Items.Add(searchResultsimageGroup);
+
+			sourceFolderImageGroup = new FavoriteImageGroup(this);
+			sourceFolderImageGroup.Name = "My Favorites";
+			sourceFolderImageGroup.Order = -1;
 			if (FavsFolder.ExistsLocal())
-				imageGroup.LoadImages<Widget>(FavsFolder.LocalPath);
-			Items.Add(imageGroup);
+				sourceFolderImageGroup.LoadImages<Widget>(FavsFolder.LocalPath);
+			Items.Add(sourceFolderImageGroup);
+
 			if (AdditionalFolder.ExistsLocal())
 			{
 				var contentDescriptionPath = Path.Combine(AdditionalFolder.LocalPath, "order.txt");
@@ -49,11 +60,11 @@ namespace SalesLibraries.Common.Dictionaries
 					{
 						var groupFolderPath = Path.Combine(AdditionalFolder.LocalPath, groupName);
 						if (!Directory.Exists(groupFolderPath)) continue;
-						imageGroup = new LinkImageGroup(this);
-						imageGroup.Name = groupName;
-						imageGroup.Order = groupIndex;
-						imageGroup.LoadImages<Widget>(groupFolderPath);
-						Items.Add(imageGroup);
+						sourceFolderImageGroup = new RegularImageGroup(this);
+						sourceFolderImageGroup.Name = groupName;
+						sourceFolderImageGroup.Order = groupIndex;
+						sourceFolderImageGroup.LoadImages<Widget>(groupFolderPath);
+						Items.Add(sourceFolderImageGroup);
 						groupIndex++;
 					}
 				}

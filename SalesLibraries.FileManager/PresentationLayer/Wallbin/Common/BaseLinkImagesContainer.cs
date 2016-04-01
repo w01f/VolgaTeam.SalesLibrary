@@ -13,7 +13,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Common
 	//public partial class LinkImagesContainer : UserControl
 	public abstract partial class BaseLinkImagesContainer : XtraTabPage
 	{
-		private readonly LinkImageGroup _parent;
+		protected readonly LinkImageGroup _parent;
 		protected ImageListView.HitInfo _menuHitInfo;
 		private bool _initialized;
 
@@ -35,7 +35,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Common
 			InitializeComponent();
 			_parent = parent;
 			Text = _parent.Name;
-			_parent.OnDataChanged += (o, e) => LoadImages();
+			_parent.DataChanged += (o, e) => LoadImages();
 			imageListView.ItemClick += OnGalleryItemClick;
 			imageListView.ItemDoubleClick += OnGalleryItemDoubleClick;
 			imageListView.ItemHover += OnGalleryItemHover;
@@ -47,7 +47,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Common
 		{
 			if (parent is FavoriteImageGroup)
 				return new FavoritesImagesContainer(parent);
-			return new RegularImagesContainer(parent);
+			if (parent is RegularImageGroup)
+				return new RegularImagesContainer(parent);
+			if (parent is SearchResultsImageGroup)
+				return new SearchResultsImagesContainer(parent);
+			throw new ArgumentOutOfRangeException("There is no container control for image group");
 		}
 
 		public void Init()
@@ -63,7 +67,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Common
 
 		protected abstract void InitPopupMenu();
 
-		private void LoadImages()
+		protected virtual void LoadImages()
 		{
 			imageListView.Items.Clear();
 			imageListView.Items.AddRange(_parent.Images.Select(ims => new ImageListViewItem(ims.FilePath, ims.FileName) { Tag = ims }).ToArray());

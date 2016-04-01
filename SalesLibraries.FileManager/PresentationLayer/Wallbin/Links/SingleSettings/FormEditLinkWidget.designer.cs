@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+			this.components = new System.ComponentModel.Container();
 			this.buttonXOK = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXCancel = new DevComponents.DotNetBar.ButtonX();
 			this.pbCustomWidget = new System.Windows.Forms.PictureBox();
@@ -38,10 +39,18 @@
 			this.radioButtonWidgetTypeDisabled = new System.Windows.Forms.RadioButton();
 			this.laExtension = new System.Windows.Forms.Label();
 			this.pnAutoWidget = new System.Windows.Forms.Panel();
+			this.labelControlSearchTitle = new DevExpress.XtraEditors.LabelControl();
+			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
+			this.textEditSearch = new DevExpress.XtraEditors.TextEdit();
+			this.buttonXSearch = new DevComponents.DotNetBar.ButtonX();
+			this.pnSearch = new System.Windows.Forms.Panel();
 			((System.ComponentModel.ISupportInitialize)(this.pbCustomWidget)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControlWidgets)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pbAutoWidget)).BeginInit();
 			this.pnAutoWidget.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.textEditSearch.Properties)).BeginInit();
+			this.pnSearch.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// buttonXOK
@@ -105,9 +114,9 @@
 			this.xtraTabControlWidgets.AppearancePage.PageClient.Font = new System.Drawing.Font("Arial", 9.75F);
 			this.xtraTabControlWidgets.AppearancePage.PageClient.Options.UseFont = true;
 			this.xtraTabControlWidgets.Enabled = false;
-			this.xtraTabControlWidgets.Location = new System.Drawing.Point(2, 12);
+			this.xtraTabControlWidgets.Location = new System.Drawing.Point(2, 37);
 			this.xtraTabControlWidgets.Name = "xtraTabControlWidgets";
-			this.xtraTabControlWidgets.Size = new System.Drawing.Size(928, 476);
+			this.xtraTabControlWidgets.Size = new System.Drawing.Size(928, 451);
 			this.xtraTabControlWidgets.TabIndex = 9;
 			// 
 			// radioButtonWidgetTypeAuto
@@ -191,11 +200,81 @@
 			this.pnAutoWidget.Size = new System.Drawing.Size(162, 36);
 			this.pnAutoWidget.TabIndex = 15;
 			// 
+			// labelControlSearchTitle
+			// 
+			this.labelControlSearchTitle.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelControlSearchTitle.AppearanceDisabled.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelControlSearchTitle.AppearanceDisabled.ForeColor = System.Drawing.Color.Gray;
+			this.labelControlSearchTitle.Location = new System.Drawing.Point(7, 9);
+			this.labelControlSearchTitle.Name = "labelControlSearchTitle";
+			this.labelControlSearchTitle.Size = new System.Drawing.Size(60, 16);
+			this.labelControlSearchTitle.StyleController = this.styleController;
+			this.labelControlSearchTitle.TabIndex = 16;
+			this.labelControlSearchTitle.Text = "Keyword:";
+			// 
+			// styleController
+			// 
+			this.styleController.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.styleController.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.styleController.Appearance.Options.UseFont = true;
+			this.styleController.Appearance.Options.UseForeColor = true;
+			this.styleController.AppearanceDisabled.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.styleController.AppearanceDisabled.ForeColor = System.Drawing.Color.Gray;
+			this.styleController.AppearanceDisabled.Options.UseFont = true;
+			this.styleController.AppearanceDisabled.Options.UseForeColor = true;
+			this.styleController.AppearanceDropDown.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.styleController.AppearanceDropDown.Options.UseFont = true;
+			this.styleController.AppearanceDropDownHeader.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.styleController.AppearanceDropDownHeader.Options.UseFont = true;
+			this.styleController.AppearanceFocused.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.styleController.AppearanceFocused.Options.UseFont = true;
+			this.styleController.AppearanceReadOnly.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.styleController.AppearanceReadOnly.Options.UseFont = true;
+			// 
+			// textEditSearch
+			// 
+			this.textEditSearch.Location = new System.Drawing.Point(72, 6);
+			this.textEditSearch.Name = "textEditSearch";
+			this.textEditSearch.Size = new System.Drawing.Size(191, 22);
+			this.textEditSearch.StyleController = this.styleController;
+			this.textEditSearch.TabIndex = 17;
+			this.textEditSearch.EditValueChanged += new System.EventHandler(this.OnSearchEditValueChanged);
+			this.textEditSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.OnSearchKeyDown);
+			// 
+			// buttonXSearch
+			// 
+			this.buttonXSearch.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXSearch.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXSearch.Enabled = false;
+			this.buttonXSearch.Location = new System.Drawing.Point(280, 5);
+			this.buttonXSearch.Name = "buttonXSearch";
+			this.buttonXSearch.Size = new System.Drawing.Size(77, 24);
+			this.buttonXSearch.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXSearch.TabIndex = 18;
+			this.buttonXSearch.Text = "Search";
+			this.buttonXSearch.TextColor = System.Drawing.Color.Black;
+			this.buttonXSearch.Click += new System.EventHandler(this.OnSearchButtonClick);
+			// 
+			// pnSearch
+			// 
+			this.pnSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.pnSearch.BackColor = System.Drawing.Color.Transparent;
+			this.pnSearch.Controls.Add(this.labelControlSearchTitle);
+			this.pnSearch.Controls.Add(this.buttonXSearch);
+			this.pnSearch.Controls.Add(this.textEditSearch);
+			this.pnSearch.Enabled = false;
+			this.pnSearch.ForeColor = System.Drawing.Color.Black;
+			this.pnSearch.Location = new System.Drawing.Point(569, -2);
+			this.pnSearch.Name = "pnSearch";
+			this.pnSearch.Size = new System.Drawing.Size(362, 33);
+			this.pnSearch.TabIndex = 19;
+			// 
 			// FormEditLinkWidget
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
 			this.BackColor = System.Drawing.Color.White;
 			this.ClientSize = new System.Drawing.Size(934, 542);
+			this.Controls.Add(this.pnSearch);
 			this.Controls.Add(this.pnAutoWidget);
 			this.Controls.Add(this.radioButtonWidgetTypeDisabled);
 			this.Controls.Add(this.radioButtonWidgetTypeCustom);
@@ -217,6 +296,10 @@
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControlWidgets)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pbAutoWidget)).EndInit();
 			this.pnAutoWidget.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.textEditSearch.Properties)).EndInit();
+			this.pnSearch.ResumeLayout(false);
+			this.pnSearch.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -234,5 +317,10 @@
 		private System.Windows.Forms.RadioButton radioButtonWidgetTypeDisabled;
 		private System.Windows.Forms.Label laExtension;
 		private System.Windows.Forms.Panel pnAutoWidget;
-    }
+		private DevExpress.XtraEditors.LabelControl labelControlSearchTitle;
+		private DevExpress.XtraEditors.StyleController styleController;
+		private DevExpress.XtraEditors.TextEdit textEditSearch;
+		private DevComponents.DotNetBar.ButtonX buttonXSearch;
+		private System.Windows.Forms.Panel pnSearch;
+	}
 }

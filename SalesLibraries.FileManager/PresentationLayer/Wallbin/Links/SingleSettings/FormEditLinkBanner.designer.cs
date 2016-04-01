@@ -45,6 +45,10 @@
 			this.laTextFormat = new System.Windows.Forms.Label();
 			this.xtraTabControlBanners = new DevExpress.XtraTab.XtraTabControl();
 			this.pnControls = new System.Windows.Forms.Panel();
+			this.pnSearch = new System.Windows.Forms.Panel();
+			this.labelControlSearchTitle = new DevExpress.XtraEditors.LabelControl();
+			this.buttonXSearch = new DevComponents.DotNetBar.ButtonX();
+			this.textEditSearch = new DevExpress.XtraEditors.TextEdit();
 			((System.ComponentModel.ISupportInitialize)(this.pbSelectedBanner.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.colorEditBannerTextColor.Properties)).BeginInit();
@@ -52,6 +56,8 @@
 			((System.ComponentModel.ISupportInitialize)(this.memoEditBannerText.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControlBanners)).BeginInit();
 			this.pnControls.SuspendLayout();
+			this.pnSearch.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.textEditSearch.Properties)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// buttonXOK
@@ -98,7 +104,7 @@
 			// 
 			// pbSelectedBanner
 			// 
-			this.pbSelectedBanner.Location = new System.Drawing.Point(143, 0);
+			this.pbSelectedBanner.Location = new System.Drawing.Point(143, 10);
 			this.pbSelectedBanner.Name = "pbSelectedBanner";
 			this.pbSelectedBanner.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
 			this.pbSelectedBanner.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
@@ -159,7 +165,7 @@
 			this.laBannerAligment.BackColor = System.Drawing.Color.Transparent;
 			this.laBannerAligment.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.laBannerAligment.ForeColor = System.Drawing.Color.Black;
-			this.laBannerAligment.Location = new System.Drawing.Point(487, 10);
+			this.laBannerAligment.Location = new System.Drawing.Point(494, 10);
 			this.laBannerAligment.Name = "laBannerAligment";
 			this.laBannerAligment.Size = new System.Drawing.Size(127, 16);
 			this.laBannerAligment.TabIndex = 37;
@@ -170,7 +176,9 @@
 			this.styleController.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.styleController.Appearance.Options.UseFont = true;
 			this.styleController.AppearanceDisabled.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.styleController.AppearanceDisabled.ForeColor = System.Drawing.Color.Gray;
 			this.styleController.AppearanceDisabled.Options.UseFont = true;
+			this.styleController.AppearanceDisabled.Options.UseForeColor = true;
 			this.styleController.AppearanceDropDown.Font = new System.Drawing.Font("Arial", 9.75F);
 			this.styleController.AppearanceDropDown.Options.UseFont = true;
 			this.styleController.AppearanceDropDownHeader.Font = new System.Drawing.Font("Arial", 9.75F);
@@ -197,7 +205,6 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
 			this.colorEditBannerTextColor.Properties.ColorAlignment = DevExpress.Utils.HorzAlignment.Center;
 			this.colorEditBannerTextColor.Properties.ShowSystemColors = false;
-			this.colorEditBannerTextColor.Properties.ShowWebColors = true;
 			this.colorEditBannerTextColor.Size = new System.Drawing.Size(105, 22);
 			this.colorEditBannerTextColor.StyleController = this.styleController;
 			this.colorEditBannerTextColor.TabIndex = 44;
@@ -238,7 +245,6 @@
 			this.memoEditBannerText.Size = new System.Drawing.Size(349, 49);
 			this.memoEditBannerText.StyleController = this.styleController;
 			this.memoEditBannerText.TabIndex = 42;
-			this.memoEditBannerText.UseOptimizedRendering = true;
 			// 
 			// checkBoxBannerShowText
 			// 
@@ -288,9 +294,9 @@
 			this.xtraTabControlBanners.AppearancePage.HeaderHotTracked.Options.UseFont = true;
 			this.xtraTabControlBanners.AppearancePage.PageClient.Font = new System.Drawing.Font("Arial", 9.75F);
 			this.xtraTabControlBanners.AppearancePage.PageClient.Options.UseFont = true;
-			this.xtraTabControlBanners.Location = new System.Drawing.Point(16, 65);
+			this.xtraTabControlBanners.Location = new System.Drawing.Point(16, 80);
 			this.xtraTabControlBanners.Name = "xtraTabControlBanners";
-			this.xtraTabControlBanners.Size = new System.Drawing.Size(900, 438);
+			this.xtraTabControlBanners.Size = new System.Drawing.Size(900, 423);
 			this.xtraTabControlBanners.TabIndex = 46;
 			// 
 			// pnControls
@@ -299,6 +305,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.pnControls.BackColor = System.Drawing.Color.Transparent;
+			this.pnControls.Controls.Add(this.pnSearch);
 			this.pnControls.Controls.Add(this.xtraTabControlBanners);
 			this.pnControls.Controls.Add(this.pbSelectedBanner);
 			this.pnControls.Controls.Add(this.laTextFormat);
@@ -316,6 +323,62 @@
 			this.pnControls.Name = "pnControls";
 			this.pnControls.Size = new System.Drawing.Size(922, 608);
 			this.pnControls.TabIndex = 47;
+			// 
+			// pnSearch
+			// 
+			this.pnSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.pnSearch.BackColor = System.Drawing.Color.Transparent;
+			this.pnSearch.Controls.Add(this.labelControlSearchTitle);
+			this.pnSearch.Controls.Add(this.buttonXSearch);
+			this.pnSearch.Controls.Add(this.textEditSearch);
+			this.pnSearch.Enabled = false;
+			this.pnSearch.ForeColor = System.Drawing.Color.Black;
+			this.pnSearch.Location = new System.Drawing.Point(554, 41);
+			this.pnSearch.Name = "pnSearch";
+			this.pnSearch.Size = new System.Drawing.Size(362, 33);
+			this.pnSearch.TabIndex = 47;
+			// 
+			// labelControlSearchTitle
+			// 
+			this.labelControlSearchTitle.Appearance.BackColor = System.Drawing.Color.White;
+			this.labelControlSearchTitle.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelControlSearchTitle.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.labelControlSearchTitle.AppearanceDisabled.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.labelControlSearchTitle.AppearanceDisabled.ForeColor = System.Drawing.Color.Gray;
+			this.labelControlSearchTitle.Location = new System.Drawing.Point(7, 9);
+			this.labelControlSearchTitle.Name = "labelControlSearchTitle";
+			this.labelControlSearchTitle.Size = new System.Drawing.Size(60, 16);
+			this.labelControlSearchTitle.StyleController = this.styleController;
+			this.labelControlSearchTitle.TabIndex = 16;
+			this.labelControlSearchTitle.Text = "Keyword:";
+			// 
+			// buttonXSearch
+			// 
+			this.buttonXSearch.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXSearch.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXSearch.Enabled = false;
+			this.buttonXSearch.Location = new System.Drawing.Point(280, 5);
+			this.buttonXSearch.Name = "buttonXSearch";
+			this.buttonXSearch.Size = new System.Drawing.Size(77, 24);
+			this.buttonXSearch.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXSearch.TabIndex = 18;
+			this.buttonXSearch.Text = "Search";
+			this.buttonXSearch.TextColor = System.Drawing.Color.Black;
+			this.buttonXSearch.Click += new System.EventHandler(this.OnSearchButtonClick);
+			// 
+			// textEditSearch
+			// 
+			this.textEditSearch.Location = new System.Drawing.Point(72, 6);
+			this.textEditSearch.Name = "textEditSearch";
+			this.textEditSearch.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.textEditSearch.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.textEditSearch.Properties.Appearance.Options.UseBackColor = true;
+			this.textEditSearch.Properties.Appearance.Options.UseForeColor = true;
+			this.textEditSearch.Size = new System.Drawing.Size(191, 22);
+			this.textEditSearch.StyleController = this.styleController;
+			this.textEditSearch.TabIndex = 17;
+			this.textEditSearch.EditValueChanged += new System.EventHandler(this.OnSearchEditValueChanged);
+			this.textEditSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.OnSearchKeyDown);
 			// 
 			// FormEditLinkBanner
 			// 
@@ -343,6 +406,9 @@
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControlBanners)).EndInit();
 			this.pnControls.ResumeLayout(false);
 			this.pnControls.PerformLayout();
+			this.pnSearch.ResumeLayout(false);
+			this.pnSearch.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.textEditSearch.Properties)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -366,5 +432,9 @@
 		private System.Windows.Forms.Label laTextFormat;
 		private DevExpress.XtraTab.XtraTabControl xtraTabControlBanners;
 		private System.Windows.Forms.Panel pnControls;
-    }
+		private System.Windows.Forms.Panel pnSearch;
+		private DevExpress.XtraEditors.TextEdit textEditSearch;
+		private DevComponents.DotNetBar.ButtonX buttonXSearch;
+		private DevExpress.XtraEditors.LabelControl labelControlSearchTitle;
+	}
 }

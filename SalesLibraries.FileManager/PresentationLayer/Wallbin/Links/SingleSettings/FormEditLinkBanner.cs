@@ -38,6 +38,33 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		{
 			_sourceLink = sourceLink;
 			InitializeComponent();
+			if (CreateGraphics().DpiX > 96)
+			{
+				var font = new Font(styleController.Appearance.Font.FontFamily, styleController.Appearance.Font.Size - 2,
+					styleController.Appearance.Font.Style);
+				styleController.Appearance.Font = font;
+				styleController.AppearanceDisabled.Font = font;
+				styleController.AppearanceDropDown.Font = font;
+				styleController.AppearanceDropDownHeader.Font = font;
+				styleController.AppearanceFocused.Font = font;
+				styleController.AppearanceReadOnly.Font = font;
+
+				checkBoxEnableBanner.Font = new Font(checkBoxEnableBanner.Font.FontFamily, checkBoxEnableBanner.Font.Size - 2,
+					checkBoxEnableBanner.Font.Style);
+				checkBoxBannerShowText.Font = new Font(checkBoxBannerShowText.Font.FontFamily, checkBoxBannerShowText.Font.Size - 2,
+					checkBoxBannerShowText.Font.Style);
+				rbBannerAligmentCenter.Font = new Font(rbBannerAligmentCenter.Font.FontFamily, rbBannerAligmentCenter.Font.Size - 2,
+					rbBannerAligmentCenter.Font.Style);
+				rbBannerAligmentLeft.Font = new Font(rbBannerAligmentLeft.Font.FontFamily, rbBannerAligmentLeft.Font.Size - 2,
+					rbBannerAligmentLeft.Font.Style);
+				rbBannerAligmentRight.Font = new Font(rbBannerAligmentRight.Font.FontFamily, rbBannerAligmentRight.Font.Size - 2,
+					rbBannerAligmentRight.Font.Style);
+				laBannerAligment.Font = new Font(laBannerAligment.Font.FontFamily, laBannerAligment.Font.Size - 2, laBannerAligment.Font.Style);
+				laTextFormat.Font = new Font(laTextFormat.Font.FontFamily, laTextFormat.Font.Size - 2, laTextFormat.Font.Style);
+				buttonXCancel.Font = new Font(buttonXCancel.Font.FontFamily, buttonXCancel.Font.Size - 2, buttonXCancel.Font.Style);
+				buttonXOK.Font = new Font(buttonXOK.Font.FontFamily, buttonXOK.Font.Size - 2, buttonXOK.Font.Style);
+				buttonXSearch.Font = new Font(buttonXSearch.Font.FontFamily, buttonXSearch.Font.Size - 2, buttonXSearch.Font.Style);
+			}
 		}
 
 		public void InitForm(LinkSettingsType settingsType)
@@ -89,7 +116,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			buttonEditBannerTextFont.Tag = _sourceLink.Banner.Font;
 			buttonEditBannerTextFont.EditValue = Utils.FontToString(_sourceLink.Banner.Font);
 			colorEditBannerTextColor.Color = _sourceLink.Banner.ForeColor;
-			memoEditBannerText.EditValue = !String.IsNullOrEmpty(_sourceLink.Banner.Text)?_sourceLink.Banner.Text: _sourceLink.Name;
+			memoEditBannerText.EditValue = !String.IsNullOrEmpty(_sourceLink.Banner.Text) ? _sourceLink.Banner.Text : _sourceLink.Name;
 			memoEditBannerText.Font = _sourceLink.Banner.Font;
 			memoEditBannerText.Properties.Appearance.Font = _sourceLink.Banner.Font;
 			memoEditBannerText.Properties.AppearanceDisabled.Font = _sourceLink.Banner.Font;
@@ -124,6 +151,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		private void checkBoxEnableBanner_CheckedChanged(object sender, EventArgs e)
 		{
 			pnControls.Enabled = checkBoxEnableBanner.Checked;
+			pnSearch.Enabled = checkBoxEnableBanner.Checked;
 		}
 
 		private void OnSelectedBannerChanged(object sender, LinkImageEventArgs e)
@@ -182,6 +210,24 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		{
 			DialogResult = DialogResult.OK;
 			Close();
+		}
+
+		private void OnSearchButtonClick(object sender, EventArgs e)
+		{
+			var keyword = textEditSearch.EditValue as String;
+			if (String.IsNullOrEmpty(keyword)) return;
+			MainController.Instance.Lists.Banners.SearchResults.LoadImages(keyword);
+		}
+
+		private void OnSearchEditValueChanged(object sender, EventArgs e)
+		{
+			buttonXSearch.Enabled = !String.IsNullOrEmpty(textEditSearch.EditValue as String);
+		}
+
+		private void OnSearchKeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.KeyCode == Keys.Enter)
+				OnSearchButtonClick(sender, EventArgs.Empty);
 		}
 	}
 }

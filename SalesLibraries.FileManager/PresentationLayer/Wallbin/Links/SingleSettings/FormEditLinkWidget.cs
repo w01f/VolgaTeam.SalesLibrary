@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using DevComponents.DotNetBar.Metro;
@@ -34,6 +35,27 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		{
 			_sourceLink = sourceLink;
 			InitializeComponent();
+			if (CreateGraphics().DpiX > 96)
+			{
+				var font = new Font(styleController.Appearance.Font.FontFamily, styleController.Appearance.Font.Size - 2,
+					styleController.Appearance.Font.Style);
+				styleController.Appearance.Font = font;
+				styleController.AppearanceDisabled.Font = font;
+				styleController.AppearanceDropDown.Font = font;
+				styleController.AppearanceDropDownHeader.Font = font;
+				styleController.AppearanceFocused.Font = font;
+				styleController.AppearanceReadOnly.Font = font;
+
+				radioButtonWidgetTypeAuto.Font = new Font(radioButtonWidgetTypeAuto.Font.FontFamily, radioButtonWidgetTypeAuto.Font.Size - 2,
+					radioButtonWidgetTypeAuto.Font.Style);
+				radioButtonWidgetTypeCustom.Font = new Font(radioButtonWidgetTypeCustom.Font.FontFamily, radioButtonWidgetTypeCustom.Font.Size - 2,
+					radioButtonWidgetTypeCustom.Font.Style);
+				radioButtonWidgetTypeDisabled.Font = new Font(radioButtonWidgetTypeDisabled.Font.FontFamily, radioButtonWidgetTypeDisabled.Font.Size - 2,
+					radioButtonWidgetTypeDisabled.Font.Style);
+				buttonXCancel.Font = new Font(buttonXCancel.Font.FontFamily, buttonXCancel.Font.Size - 2, buttonXCancel.Font.Style);
+				buttonXOK.Font = new Font(buttonXOK.Font.FontFamily, buttonXOK.Font.Size - 2, buttonXOK.Font.Style);
+				buttonXSearch.Font = new Font(buttonXSearch.Font.FontFamily, buttonXSearch.Font.Size - 2, buttonXSearch.Font.Style);
+			}
 		}
 
 		public void InitForm(LinkSettingsType settingsType)
@@ -136,6 +158,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			pbCustomWidget.Enabled = radioButtonWidgetTypeCustom.Checked;
 			pbAutoWidget.Enabled = radioButtonWidgetTypeAuto.Checked;
 			xtraTabControlWidgets.Enabled = radioButtonWidgetTypeCustom.Checked;
+			pnSearch.Enabled = radioButtonWidgetTypeCustom.Checked;
 		}
 
 		private void OnSelectedWidgetChanged(object sender, LinkImageEventArgs e)
@@ -147,6 +170,24 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		{
 			DialogResult = DialogResult.OK;
 			Close();
+		}
+
+		private void OnSearchButtonClick(object sender, EventArgs e)
+		{
+			var keyword = textEditSearch.EditValue as String;
+			if(String.IsNullOrEmpty(keyword)) return;
+			MainController.Instance.Lists.Widgets.SearchResults.LoadImages(keyword);
+		}
+
+		private void OnSearchEditValueChanged(object sender, EventArgs e)
+		{
+			buttonXSearch.Enabled = !String.IsNullOrEmpty(textEditSearch.EditValue as String);
+		}
+
+		private void OnSearchKeyDown(object sender, KeyEventArgs e)
+		{
+			if(e.KeyCode == Keys.Enter)
+				OnSearchButtonClick(sender,EventArgs.Empty);
 		}
 	}
 }

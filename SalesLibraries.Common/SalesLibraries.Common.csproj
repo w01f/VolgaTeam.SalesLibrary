@@ -109,8 +109,12 @@
     <Compile Include="Helpers\ActivityManager.cs" />
     <Compile Include="Objects\Activity\UserActivity.cs" />
     <Compile Include="Objects\Graphics\Banner.cs" />
+    <Compile Include="Objects\Graphics\FavoriteImageGroup.cs" />
     <Compile Include="Objects\Graphics\IImageSourceList.cs" />
     <Compile Include="Objects\Graphics\LinkImageGroup.cs" />
+    <Compile Include="Objects\Graphics\RegularImageGroup.cs" />
+    <Compile Include="Objects\Graphics\SearchResultsImageGroup.cs" />
+    <Compile Include="Objects\Graphics\SourceFolderImageGroup.cs" />
     <Compile Include="Objects\Graphics\LinkImageSource.cs" />
     <Compile Include="Objects\PowerPoint\Enums.cs" />
     <Compile Include="Objects\PowerPoint\SlideSettings.cs" />

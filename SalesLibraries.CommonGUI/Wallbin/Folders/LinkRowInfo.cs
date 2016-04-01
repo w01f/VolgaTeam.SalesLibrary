@@ -10,7 +10,7 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 {
 	public class LinkRowInfo : IDisposable
 	{
-		private const int ImageWidthMargin = 6;
+		private const int WidthMargin = 6;
 		private const int DefaultImageWidth = 26;
 		private const int DefaultImageHeight = Widget.DefaultHeight;
 
@@ -218,15 +218,9 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 				textWidth = (Int32)textSize.Width;
 				textHeight = (Int32)textSize.Height;
 			}
-			else if (Link is LineBreak)
-			{
-				textLeft = imageLeft + imageWidth + ImageWidthMargin;
-				textWidth = (Int32)textSize.Width;
-				textHeight = (Int32)textSize.Height;
-			}
 			else
 			{
-				textLeft = imageLeft + imageWidth + (_parent.Source.Folder.ContainLinkWidgets ? ImageWidthMargin : 0);
+				textLeft = imageLeft + imageWidth + WidthMargin;
 				textWidth = (int)textSize.Width;
 				textHeight = (int)textSize.Height;
 			}
