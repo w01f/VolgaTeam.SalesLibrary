@@ -98,6 +98,8 @@
 				case 'url':
 				case 'url365':
 					return new UrlPreviewData($link, $isQuickSite);
+				case 'youtube':
+					return new YouTubePreviewData($link, $isQuickSite);
 				case 'mp3':
 					return new Mp3PreviewData($link, $isQuickSite);
 				case 'xls':

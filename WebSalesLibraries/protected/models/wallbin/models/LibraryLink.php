@@ -235,7 +235,7 @@
 			{
 
 			}
-			else if ($this->type == 8)
+			else if ($this->type == 8 || $this->type == 14)
 			{
 				$this->fileRelativePath = str_replace('\\', '', $this->fileRelativePath);
 				$this->fileName = $this->fileRelativePath;
@@ -303,6 +303,8 @@
 							return base64_encode(file_get_contents(realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'folder-file-icons' . DIRECTORY_SEPARATOR . 'url.png'));
 						case 'url365':
 							return base64_encode(file_get_contents(realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'folder-file-icons' . DIRECTORY_SEPARATOR . 'url365.png'));
+						case 'youtube':
+							return base64_encode(file_get_contents(realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'folder-file-icons' . DIRECTORY_SEPARATOR . 'url.png'));
 						case 'mp3':
 							return base64_encode(file_get_contents(realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'folder-file-icons' . DIRECTORY_SEPARATOR . 'mp3.png'));
 						case 'key':

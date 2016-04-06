@@ -114,6 +114,9 @@
 			$this->parent = $page;
 		}
 
+		/**
+		 * @param $folderRecord
+		 */
 		public function load($folderRecord)
 		{
 			$this->id = $folderRecord->id;
@@ -153,16 +156,16 @@
 			{
 				$banner = $this->banner->image;
 				if (isset($banner) && $banner != '')
-					$headerImage = imagecreatefromstring(base64_decode($banner));
+					$headerImage = @imagecreatefromstring(base64_decode($banner));
 			}
 			else
 			{
 				$widget = $this->getWidget();
 				if (isset($widget) && $widget != '')
-					$headerImage = imagecreatefromstring(base64_decode($widget));
+					$headerImage = @imagecreatefromstring(base64_decode($widget));
 			}
 			if (isset($headerImage))
-				$this->headerHeight = imagesy($headerImage) + 2;
+				$this->headerHeight = @imagesy($headerImage) + 2;
 			else
 				$this->headerHeight = 34;
 		}

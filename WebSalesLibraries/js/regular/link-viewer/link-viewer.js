@@ -46,6 +46,9 @@
 							case 'video':
 								new $.SalesPortal.VideoViewer(parameters).show();
 								break;
+							case 'youtube':
+								new $.SalesPortal.YouTubeViewer(parameters).show();
+								break;
 							case 'image':
 								new $.SalesPortal.ImageViewer(parameters).show();
 								break;

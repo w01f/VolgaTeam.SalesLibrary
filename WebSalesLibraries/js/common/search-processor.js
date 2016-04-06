@@ -123,6 +123,7 @@
 						{
 							tags.push("url");
 							tags.push("url365");
+							tags.push("youtube");
 						}
 						if (this.showImages)
 						{
@@ -146,7 +147,7 @@
 								thatData.showPdf = true;
 							else if (value == 'video' || value == 'mp4' || value == 'wmv' || value == 'mp3')
 								thatData.showVideo = true;
-							else if (value == 'url' || value == 'url365')
+							else if (value == 'url' || value == 'url365' || value == 'youtube')
 								thatData.showUrls = true;
 							else if (value == 'png' || value == 'jpeg')
 								thatData.showImages = true;

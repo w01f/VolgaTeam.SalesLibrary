@@ -67,7 +67,7 @@
 
 					$extendedProperties = CJSON::decode($linkRecord['extended_properties'], true);
 					$record['extended_properties'] = $extendedProperties;
-					$record['url'] = $type == 8 && $extendedProperties['forcePreview'] == true ?
+					$record['url'] = ($type == 8 || $type == 14) && $extendedProperties['forcePreview'] == true ?
 						$linkRecord['path'] :
 						'';
 

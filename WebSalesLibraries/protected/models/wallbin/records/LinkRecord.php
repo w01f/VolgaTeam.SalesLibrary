@@ -82,7 +82,7 @@
 				$linkRecord->file_relative_path = $link['fileRelativePath'];
 				$linkRecord->file_name = $link['fileName'];
 				$linkRecord->file_extension = $link['fileExtension'];
-				$linkRecord->file_date = $link['originalFormat'] == 'url' || $link['originalFormat'] == 'url365' ? date(Yii::app()->params['mysqlDateFormat'], strtotime($link['dateAdd'])) : date(Yii::app()->params['mysqlDateFormat'], strtotime($link['fileDate']));
+				$linkRecord->file_date = $link['originalFormat'] == 'url' || $link['originalFormat'] == 'url365' || $link['originalFormat'] == 'youtube' ? date(Yii::app()->params['mysqlDateFormat'], strtotime($link['dateAdd'])) : date(Yii::app()->params['mysqlDateFormat'], strtotime($link['fileDate']));
 				$linkRecord->file_size = $link['fileSize'];
 				$linkRecord->format = $link['originalFormat'];
 				$linkRecord->order = $link['order'];
@@ -350,6 +350,9 @@
 							break;
 						case 'url365':
 							$link['file_type'] = base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'search-url365.png'));
+							break;
+						case 'youtube':
+							$link['file_type'] = base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'search-url.png'));
 							break;
 						case 'mp3':
 							$link['file_type'] = base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'search-mp3.png'));

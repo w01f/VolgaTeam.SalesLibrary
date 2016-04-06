@@ -52,6 +52,7 @@
 						'mp3' => 'MP3 Track',
 						'mp4' => 'MP4 Video',
 						'url' => 'Web URL',
+						'youtube' => 'YouTube',
 						'url365' => 'Office 365 URL',
 						'key' => 'Apple Keynote',
 						'other' => 'Undefined file'
