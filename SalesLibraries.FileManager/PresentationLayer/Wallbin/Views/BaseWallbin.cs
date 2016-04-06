@@ -12,7 +12,7 @@ using SalesLibraries.FileManager.PresentationLayer.Wallbin.Libraries;
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 {
 	[ToolboxItem(false)]
-	public partial class BaseWallbin : UserControl, IWallbinView
+	public abstract partial class BaseWallbin : UserControl, IWallbinView
 	{
 		protected bool ReadyToUse { get; set; }
 		public LibraryContext DataStorage { get; private set; }
@@ -127,21 +127,21 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 
 		protected void SetActivePage(IPageView pageView)
 		{
-			if (PageChanging != null)
-				PageChanging(this, EventArgs.Empty);
+			PageChanging?.Invoke(this, EventArgs.Empty);
 			ActivePage = pageView;
 			if (ActivePage == null) return;
 			ActivePage.LoadPage();
 			MainController.Instance.Settings.SelectedPage = ActivePage.Page.Name;
 			MainController.Instance.Settings.Save();
-			if (PageChanged != null)
-				PageChanged(this, EventArgs.Empty);
+			PageChanged?.Invoke(this, EventArgs.Empty);
 		}
 
 		private void OnPageChanging(object sender, EventArgs e)
 		{
 			SaveData();
 		}
+
+		public abstract void SelectPage(IPageView pageView);
 		#endregion
 
 		#region Data Sources

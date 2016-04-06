@@ -67,6 +67,9 @@
     <Reference Include="System.Xml">
       <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.1\System.Xml.dll</HintPath>
     </Reference>
+    <Reference Include="Vintasoft.Imaging">
+      <HintPath>..\Assemblies\Vintasoft.Imaging\Vintasoft.Imaging.dll</HintPath>
+    </Reference>
     <Reference Include="WebDAVClient, Version=1.0.23.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\WebDAVClient.1.0.23\lib\net45\WebDAVClient.dll</HintPath>
       <Private>True</Private>

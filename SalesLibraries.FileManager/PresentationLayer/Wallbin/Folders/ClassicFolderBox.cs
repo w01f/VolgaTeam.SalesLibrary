@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using DevExpress.XtraBars;
 using SalesLibraries.Business.Entities.Helpers;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent;
+using SalesLibraries.Business.Entities.Wallbin.NonPersistent.HyperLinkInfo;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings;
 using SalesLibraries.Business.Entities.Wallbin.Persistent;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
@@ -16,6 +17,7 @@ using SalesLibraries.Common.Objects.SearchTags;
 using SalesLibraries.CommonGUI.Wallbin.Folders;
 using SalesLibraries.CommonGUI.Wallbin.Views;
 using SalesLibraries.FileManager.Controllers;
+using SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.HyperlinkEdit;
 using SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSettings;
 using SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings;
 using SalesLibraries.FileManager.PresentationLayer.Wallbin.Views;
@@ -28,6 +30,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 		private readonly Pen _folderBoxDraggedIndicatorPen = new Pen(Color.Black, 8);
 		private readonly Pen _rowDraggedIndicatorPen = new Pen(Color.Black, 2);
 		private readonly QuickEditManager _quickEditor;
+		private readonly CopyFolderManager _copyFolderManager;
 
 		#region Public Properties
 		public override IWallbinViewFormat FormatState
@@ -80,6 +83,12 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 			_quickEditor = new QuickEditManager(barSubItemLinkPropertiesQuickTools);
 			_quickEditor.OnSettingsChanged += OnQuickSettingsChange;
 			popupMenuLinkProperties.CloseUp += OnLinkPropertiesMenuCloseUp;
+
+			_copyFolderManager = new CopyFolderManager(
+				DataSource,
+				toolStripMenuItemFolderCopy,
+				toolStripMenuItemFolderMove);
+			_copyFolderManager.FolderMoved += OnFolderMoved;
 
 			// 
 			// grFiles
@@ -147,9 +156,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 		#endregion
 
 		#region Link Data Processing
-		public void AddUrl()
+		public void AddHyperLink()
 		{
-			using (var form = new FormAddUrl())
+			using (var form = new FormAddHyperLink())
 			{
 				if (form.ShowDialog() != DialogResult.OK) return;
 
@@ -159,40 +168,31 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 					position = selectedLink.Index;
 
 				_outsideChangesInProgress = true;
-				var newLink = WebLink.Create(
-					form.LinkName, 
-					form.LinkPath, 
-					form.ForcePreview,
-					form.DisplayAsHyperlink,
-					DataSource);
+
+				LibraryObjectLink newLink;
+				switch (form.SelctedEditorType)
+				{
+					case HyperLinkTypeEnum.Url:
+						newLink = WebLink.Create(
+							(UrlLinkInfo)form.SelectedEditor.GetHyperLinkInfo(),
+							DataSource);
+						break;
+					case HyperLinkTypeEnum.YouTube:
+						newLink = YouTubeLink.Create(
+							(YouTubeLinkInfo)form.SelectedEditor.GetHyperLinkInfo(),
+							DataSource);
+						break;
+					case HyperLinkTypeEnum.Network:
+						newLink = NetworkLink.Create(
+							(LanLinkInfo)form.SelectedEditor.GetHyperLinkInfo(),
+							DataSource);
+						break;
+					default:
+						throw new ArgumentOutOfRangeException("Link type not found");
+				}
+
 				if (position >= 0)
-					((List<BaseLibraryLink>)DataSource.Links).InsertItem(position, newLink);
-				else
-					DataSource.Links.AddItem(newLink);
-				InsertLinkRow(newLink, position);
-				_outsideChangesInProgress = false;
-
-				UpdateGridSize();
-				if (DataChanged != null)
-					DataChanged(this, EventArgs.Empty);
-			}
-		}
-
-		public void AddNetworkLink()
-		{
-			using (var form = new FormAddNetworkLink())
-			{
-				if (form.ShowDialog() != DialogResult.OK) return;
-
-				var position = -1;
-				var selectedLink = SelectedLinkRow;
-				if (selectedLink != null)
-					position = selectedLink.Index;
-
-				_outsideChangesInProgress = true;
-				var newLink = NetworkLink.Create(form.LinkName, form.LinkPath, DataSource);
-				if (position >= 0)
-					((List<BaseLibraryLink>)DataSource.Links).InsertItem(position, newLink);
+					((List<BaseLibraryLink>)DataSource.Links).InsertItem(newLink, position);
 				else
 					DataSource.Links.AddItem(newLink);
 				InsertLinkRow(newLink, position);
@@ -214,7 +214,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 			_outsideChangesInProgress = true;
 			var newLink = LineBreak.Create(DataSource);
 			if (position >= 0)
-				((List<BaseLibraryLink>)DataSource.Links).InsertItem(position, newLink);
+				((List<BaseLibraryLink>)DataSource.Links).InsertItem(newLink, position);
 			else
 				DataSource.Links.AddItem(newLink);
 			InsertLinkRow(newLink, position);
@@ -338,7 +338,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 			if (selectedRow == null) return;
 			selectedRow.Info.Recalc();
 			grFiles.Refresh();
-			if (DataChanged != null)
+			if (DataChanged == null)
 				DataChanged(this, EventArgs.Empty);
 		}
 		#endregion
@@ -351,8 +351,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 				if (form.ShowDialog(MainController.Instance.MainForm) != DialogResult.OK) return;
 				SetupView();
 				UpdateContent(true);
-				if (DataChanged != null)
-					DataChanged(this, EventArgs.Empty);
+				DataChanged?.Invoke(this, EventArgs.Empty);
 			}
 		}
 
@@ -363,8 +362,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 				if (form.ShowDialog(MainController.Instance.MainForm) != DialogResult.OK) return;
 				SetupView();
 				UpdateGridSize();
-				if (DataChanged != null)
-					DataChanged(this, EventArgs.Empty);
+				DataChanged?.Invoke(this, EventArgs.Empty);
 			}
 		}
 
@@ -375,14 +373,23 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 				if (form.ShowDialog(MainController.Instance.MainForm) != DialogResult.OK) return;
 				SetupView();
 				UpdateGridSize();
-				if (DataChanged != null)
-					DataChanged(this, EventArgs.Empty);
+				DataChanged?.Invoke(this, EventArgs.Empty);
 			}
 		}
 
 		private void DeleteFolder()
 		{
 			FolderContainer.DeleteFolder(this);
+		}
+
+		private void OnFolderMoved(Object sender, FolderMovingEventArgs e)
+		{
+			if (e.DeleteFromCurrent)
+				FolderContainer.DeleteFolder(this);
+			var targetPageView = MainController.Instance.WallbinViews.ActiveWallbin.Pages
+				.FirstOrDefault(pageView => pageView.Page == e.TargetPage);
+			targetPageView.LoadPage(true);
+			MainController.Instance.WallbinViews.ActiveWallbin.SelectPage(targetPageView);
 		}
 		#endregion
 
@@ -394,7 +401,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 			{
 				link = LibraryFileLink.Create(sourceLink, DataSource);
 				if (position >= 0)
-					((List<BaseLibraryLink>)DataSource.Links).InsertItem(position, link);
+					((List<BaseLibraryLink>)DataSource.Links).InsertItem(link, position);
 				else
 					DataSource.Links.AddItem(link);
 			});
@@ -429,7 +436,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 			grFiles.ClearSelection();
 			grFiles.Rows.Insert(positionToInsert, targetRow);
 			targetRow.Source.Folder = DataSource;
-			((List<BaseLibraryLink>)DataSource.Links).InsertItem(positionToInsert, targetRow.Source);
+			((List<BaseLibraryLink>)DataSource.Links).InsertItem(targetRow.Source, positionToInsert);
 			targetRow.ChangeFolder(this);
 			targetRow.Info.Recalc();
 			targetRow.InfoChanged += OnLinkRowInfoChanged;
@@ -736,7 +743,10 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 					if (FormatState.ShowSecurityTags)
 						contextMenuStripSecurity.Show((Control)sender, e.Location);
 					else
+					{
+						_copyFolderManager.UpdateTargets();
 						contextMenuStripFolderProperties.Show((Control)sender, e.Location);
+					}
 					break;
 			}
 		}

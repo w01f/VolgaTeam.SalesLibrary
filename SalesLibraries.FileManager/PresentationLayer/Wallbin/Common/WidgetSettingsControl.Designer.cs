@@ -35,14 +35,16 @@
 			this.radioButtonWidgetTypeDisabled = new System.Windows.Forms.RadioButton();
 			this.pnSearch = new System.Windows.Forms.Panel();
 			this.labelControlSearchTitle = new DevExpress.XtraEditors.LabelControl();
+			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
 			this.buttonXSearch = new DevComponents.DotNetBar.ButtonX();
 			this.textEditSearch = new DevExpress.XtraEditors.TextEdit();
-			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
+			this.checkEditInvert = new DevExpress.XtraEditors.CheckEdit();
 			((System.ComponentModel.ISupportInitialize)(this.pbCustomWidget)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControlWidgets)).BeginInit();
 			this.pnSearch.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.textEditSearch.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.textEditSearch.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditInvert.Properties)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// pbCustomWidget
@@ -141,6 +143,25 @@
 			this.labelControlSearchTitle.TabIndex = 16;
 			this.labelControlSearchTitle.Text = "Keyword:";
 			// 
+			// styleController
+			// 
+			this.styleController.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.styleController.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.styleController.Appearance.Options.UseFont = true;
+			this.styleController.Appearance.Options.UseForeColor = true;
+			this.styleController.AppearanceDisabled.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.styleController.AppearanceDisabled.ForeColor = System.Drawing.Color.Gray;
+			this.styleController.AppearanceDisabled.Options.UseFont = true;
+			this.styleController.AppearanceDisabled.Options.UseForeColor = true;
+			this.styleController.AppearanceDropDown.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.styleController.AppearanceDropDown.Options.UseFont = true;
+			this.styleController.AppearanceDropDownHeader.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.styleController.AppearanceDropDownHeader.Options.UseFont = true;
+			this.styleController.AppearanceFocused.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.styleController.AppearanceFocused.Options.UseFont = true;
+			this.styleController.AppearanceReadOnly.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.styleController.AppearanceReadOnly.Options.UseFont = true;
+			// 
 			// buttonXSearch
 			// 
 			this.buttonXSearch.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
@@ -169,29 +190,24 @@
 			this.textEditSearch.EditValueChanged += new System.EventHandler(this.OnSearchEditValueChanged);
 			this.textEditSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.OnSearchKeyDown);
 			// 
-			// styleController
+			// checkEditInvert
 			// 
-			this.styleController.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.styleController.Appearance.ForeColor = System.Drawing.Color.Black;
-			this.styleController.Appearance.Options.UseFont = true;
-			this.styleController.Appearance.Options.UseForeColor = true;
-			this.styleController.AppearanceDisabled.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.styleController.AppearanceDisabled.ForeColor = System.Drawing.Color.Gray;
-			this.styleController.AppearanceDisabled.Options.UseFont = true;
-			this.styleController.AppearanceDisabled.Options.UseForeColor = true;
-			this.styleController.AppearanceDropDown.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.styleController.AppearanceDropDown.Options.UseFont = true;
-			this.styleController.AppearanceDropDownHeader.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.styleController.AppearanceDropDownHeader.Options.UseFont = true;
-			this.styleController.AppearanceFocused.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.styleController.AppearanceFocused.Options.UseFont = true;
-			this.styleController.AppearanceReadOnly.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.styleController.AppearanceReadOnly.Options.UseFont = true;
+			this.checkEditInvert.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.checkEditInvert.Enabled = false;
+			this.checkEditInvert.Location = new System.Drawing.Point(386, 505);
+			this.checkEditInvert.Name = "checkEditInvert";
+			this.checkEditInvert.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.checkEditInvert.Properties.Appearance.Options.UseForeColor = true;
+			this.checkEditInvert.Properties.Caption = "Invert";
+			this.checkEditInvert.Size = new System.Drawing.Size(75, 20);
+			this.checkEditInvert.StyleController = this.styleController;
+			this.checkEditInvert.TabIndex = 49;
 			// 
 			// WidgetSettingsControl
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
 			this.BackColor = System.Drawing.Color.White;
+			this.Controls.Add(this.checkEditInvert);
 			this.Controls.Add(this.pnSearch);
 			this.Controls.Add(this.radioButtonWidgetTypeDisabled);
 			this.Controls.Add(this.radioButtonWidgetTypeCustom);
@@ -205,8 +221,9 @@
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControlWidgets)).EndInit();
 			this.pnSearch.ResumeLayout(false);
 			this.pnSearch.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.textEditSearch.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.textEditSearch.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditInvert.Properties)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -223,5 +240,6 @@
 		private DevComponents.DotNetBar.ButtonX buttonXSearch;
 		private DevExpress.XtraEditors.TextEdit textEditSearch;
 		private DevExpress.XtraEditors.StyleController styleController;
+		private DevExpress.XtraEditors.CheckEdit checkEditInvert;
 	}
 }

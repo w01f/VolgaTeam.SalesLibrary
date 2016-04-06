@@ -22,5 +22,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 		void ShowView();
 		void DisposeView();
 		void SaveData();
+		void SelectPage(IPageView pageView);
 	}
 }

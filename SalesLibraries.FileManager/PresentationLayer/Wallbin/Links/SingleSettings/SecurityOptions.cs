@@ -8,7 +8,7 @@ using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraTab;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.Common.Helpers;
-using SalesLibraries.FileManager.Business.Models;
+using SalesLibraries.FileManager.Business.Models.Security;
 using SalesLibraries.FileManager.Controllers;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSettings

@@ -8,8 +8,7 @@ using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
 using SalesLibraries.Business.Entities.Helpers;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings;
-using SalesLibraries.FileManager.Business.Models;
-using SalesLibraries.FileManager.Business.Services;
+using SalesLibraries.FileManager.Business.Models.Security;
 using SalesLibraries.FileManager.Controllers;
 using SalesLibraries.FileManager.PresentationLayer.Wallbin.Views;
 

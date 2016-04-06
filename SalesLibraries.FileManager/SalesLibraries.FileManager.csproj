@@ -130,11 +130,14 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="Vintasoft.Imaging">
+      <HintPath>..\Assemblies\Vintasoft.Imaging\Vintasoft.Imaging.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Business\Dictionaries\SearchTagList.cs" />
     <Compile Include="Business\Dictionaries\SuperFilterList.cs" />
-    <Compile Include="Business\Models\LibraryUser.cs" />
+    <Compile Include="Business\Models\Security\LibraryUser.cs" />
     <Compile Include="Business\PreviewGenerators\PowerPointPreviewGenerator.cs" />
     <Compile Include="Business\PreviewGenerators\ExcelPreviewGenerator.cs" />
     <Compile Include="Business\PreviewGenerators\PdfPreviewGenerator.cs" />
@@ -148,7 +151,7 @@
     <Compile Include="Business\Synchronization\SyncLockHelper.cs" />
     <Compile Include="Business\Synchronization\SyncManager.cs" />
     <Compile Include="Business\Services\WebContentManager.cs" />
-    <Compile Include="Business\Models\LibraryGroup.cs" />
+    <Compile Include="Business\Models\Security\LibraryGroup.cs" />
     <Compile Include="Configuration\EditorsSettings.cs" />
     <Compile Include="Configuration\ListManager.cs" />
     <Compile Include="Configuration\MetaDataConst.cs" />
@@ -174,9 +177,9 @@
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="Business\Models\VideoInfo.cs" />
+    <Compile Include="Business\Models\VideoInfo\VideoInfo.cs" />
     <Compile Include="Business\Services\InactiveLinkManager.cs" />
-    <Compile Include="Business\Models\InactiveLink.cs" />
+    <Compile Include="Business\Models\InactiveLinks\InactiveLink.cs" />
     <Compile Include="Business\Services\TaggedLinksManager.cs" />
     <Compile Include="Business\Services\VideoHelper.cs" />
     <Compile Include="PresentationLayer\Calendars\CalendarContainerControl.cs">
@@ -249,17 +252,32 @@
     <Compile Include="PresentationLayer\Wallbin\Folders\ClassicFolderBox.designer.cs">
       <DependentUpon>ClassicFolderBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Wallbin\Folders\FormAddNetworkLink.cs">
+    <Compile Include="PresentationLayer\Wallbin\Folders\CopyFolderManager.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Folders\FolderMovingEventArgs.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\FormAddHyperLink.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Wallbin\Folders\FormAddNetworkLink.designer.cs">
-      <DependentUpon>FormAddNetworkLink.cs</DependentUpon>
+    <Compile Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\FormAddHyperLink.designer.cs">
+      <DependentUpon>FormAddHyperLink.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Wallbin\Folders\FormAddUrl.cs">
-      <SubType>Form</SubType>
+    <Compile Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\IHyperLinkEditControl.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\LanLinkEditControl.cs">
+      <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Wallbin\Folders\FormAddUrl.designer.cs">
-      <DependentUpon>FormAddUrl.cs</DependentUpon>
+    <Compile Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\LanLinkEditControl.Designer.cs">
+      <DependentUpon>LanLinkEditControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\YouTubeEditControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\YouTubeEditControl.Designer.cs">
+      <DependentUpon>YouTubeEditControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\UrlEditControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\UrlEditControl.Designer.cs">
+      <DependentUpon>UrlEditControl.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Wallbin\Libraries\FormDeleteInactiveLinks.cs">
       <SubType>Form</SubType>
@@ -379,6 +397,12 @@
     </Compile>
     <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkVideoOptions.designer.cs">
       <DependentUpon>LinkVideoOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkYouTubeOptions.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkYouTubeOptions.designer.cs">
+      <DependentUpon>LinkYouTubeOptions.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkWebOptions.cs">
       <SubType>Component</SubType>
@@ -592,11 +616,17 @@
     <EmbeddedResource Include="PresentationLayer\Wallbin\Folders\ClassicFolderBox.resx">
       <DependentUpon>ClassicFolderBox.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Wallbin\Folders\FormAddNetworkLink.resx">
-      <DependentUpon>FormAddNetworkLink.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\FormAddHyperLink.resx">
+      <DependentUpon>FormAddHyperLink.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Wallbin\Folders\FormAddUrl.resx">
-      <DependentUpon>FormAddUrl.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\LanLinkEditControl.resx">
+      <DependentUpon>LanLinkEditControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\YouTubeEditControl.resx">
+      <DependentUpon>YouTubeEditControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\UrlEditControl.resx">
+      <DependentUpon>UrlEditControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Libraries\FormDeleteInactiveLinks.resx">
       <DependentUpon>FormDeleteInactiveLinks.cs</DependentUpon>
@@ -654,6 +684,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkVideoOptions.resx">
       <DependentUpon>LinkVideoOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkYouTubeOptions.resx">
+      <DependentUpon>LinkYouTubeOptions.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkWebOptions.resx">
       <DependentUpon>LinkWebOptions.cs</DependentUpon>
@@ -783,6 +816,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\LinkAddYoutube.png" />
     <None Include="Resources\WallbinSettingsTabPages.png" />
     <None Include="Resources\WallbinSettingsComboboxes.png" />
     <None Include="Resources\WallbinZoomOut.png" />

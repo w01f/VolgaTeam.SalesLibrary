@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Drawing;
 using Newtonsoft.Json;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
+using SalesLibraries.Business.Entities.Wallbin.NonPersistent.HyperLinkInfo;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings;
 
 namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
@@ -42,11 +44,16 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 			Type = FileTypes.Network;
 		}
 
-		public static NetworkLink Create(string name, string path, LibraryFolder parentFolder)
+		public static NetworkLink Create(LanLinkInfo linkInfo, LibraryFolder parentFolder)
 		{
-			var link = Create(path);
-			link.Name = name;
+			var link = Create(linkInfo.Path);
+			link.Name = linkInfo.Name;
 			link.Folder = parentFolder;
+			if (linkInfo.FormatAsBluelink)
+			{
+				((LibraryObjectLinkSettings)link.Settings).RegularFontStyle = FontStyle.Underline | FontStyle.Bold;
+				link.Settings.ForeColor = Color.Blue;
+			}
 			return link;
 		}
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml;
 using Newtonsoft.Json;
-using SalesLibraries.FileManager.Business.Models;
+using SalesLibraries.FileManager.Business.Models.Security;
 using SalesLibraries.FileManager.Controllers;
 
 namespace SalesLibraries.FileManager.Configuration

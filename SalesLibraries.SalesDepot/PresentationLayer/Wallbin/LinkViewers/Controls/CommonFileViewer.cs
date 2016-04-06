@@ -55,7 +55,8 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Contro
 					LinkManager.OpenFolderLink((LibraryFolderLink)Link);
 					break;
 				case FileTypes.Url:
-					Utils.OpenFile(((WebLink)Link).Url);
+				case FileTypes.YouTube:
+					Utils.OpenFile(((HyperLink)Link).Url);
 					break;
 				case FileTypes.Network:
 					Utils.OpenFile(Link.FullPath);

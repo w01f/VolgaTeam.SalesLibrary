@@ -12,6 +12,7 @@
 		Excel = 11,
 		Word = 12,
 		OvernightsLink = 13,
+		YouTube = 14,
 		Other = 999
 	}
 }

@@ -11,7 +11,7 @@ using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using SalesLibraries.Business.Contexts.Wallbin;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers;
 using SalesLibraries.Common.Helpers;
-using SalesLibraries.FileManager.Business.Models;
+using SalesLibraries.FileManager.Business.Models.VideoInfo;
 using SalesLibraries.FileManager.Business.Services;
 using SalesLibraries.FileManager.Controllers;
 

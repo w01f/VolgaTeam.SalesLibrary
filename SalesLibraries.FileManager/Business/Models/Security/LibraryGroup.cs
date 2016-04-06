@@ -3,7 +3,7 @@ using System.Linq;
 using Newtonsoft.Json;
 using SalesLibraries.ServiceConnector.FileManagerResourcesService;
 
-namespace SalesLibraries.FileManager.Business.Models
+namespace SalesLibraries.FileManager.Business.Models.Security
 {
 	class LibraryGroup
 	{

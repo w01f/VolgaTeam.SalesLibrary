@@ -41,7 +41,7 @@
 			this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
 			this.toolStripMenuItemFolderDelete = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-			this.manageWidgetsAndBannersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItemFolderManageWidgetsAndBanners = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItemFolderWidget = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItemFolderBanner = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItemFolderDeleteWidgets = new System.Windows.Forms.ToolStripMenuItem();
@@ -64,6 +64,8 @@
 			this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
 			this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
 			this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
+			this.toolStripMenuItemFolderCopy = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItemFolderMove = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.pbImage)).BeginInit();
 			this.pnHeader.SuspendLayout();
 			this.pnHeaderBorder.SuspendLayout();
@@ -136,13 +138,15 @@
             this.toolStripSeparator2,
             this.toolStripMenuItemFolderDeleteLinks,
             this.toolStripMenuItemFolderDelete,
+            this.toolStripMenuItemFolderCopy,
+            this.toolStripMenuItemFolderMove,
             this.toolStripSeparator3,
-            this.manageWidgetsAndBannersToolStripMenuItem,
+            this.toolStripMenuItemFolderManageWidgetsAndBanners,
             this.toolStripMenuItemFolderDeleteSecurity,
             this.toolStripMenuItemFolderDeleteTags,
             this.toolStripMenuItemFolderSort});
 			this.contextMenuStripFolderProperties.Name = "contextMenuStripLinkProperties";
-			this.contextMenuStripFolderProperties.Size = new System.Drawing.Size(349, 170);
+			this.contextMenuStripFolderProperties.Size = new System.Drawing.Size(349, 236);
 			// 
 			// toolStripMenuItemFolderSettings
 			// 
@@ -168,16 +172,16 @@
 			this.toolStripSeparator3.Name = "toolStripSeparator3";
 			this.toolStripSeparator3.Size = new System.Drawing.Size(345, 6);
 			// 
-			// manageWidgetsAndBannersToolStripMenuItem
+			// toolStripMenuItemFolderManageWidgetsAndBanners
 			// 
-			this.manageWidgetsAndBannersToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+			this.toolStripMenuItemFolderManageWidgetsAndBanners.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItemFolderWidget,
             this.toolStripMenuItemFolderBanner,
             this.toolStripMenuItemFolderDeleteWidgets,
             this.toolStripMenuItemFolderDeleteBanners});
-			this.manageWidgetsAndBannersToolStripMenuItem.Name = "manageWidgetsAndBannersToolStripMenuItem";
-			this.manageWidgetsAndBannersToolStripMenuItem.Size = new System.Drawing.Size(348, 22);
-			this.manageWidgetsAndBannersToolStripMenuItem.Text = "Manage Widgets and Banners...";
+			this.toolStripMenuItemFolderManageWidgetsAndBanners.Name = "toolStripMenuItemFolderManageWidgetsAndBanners";
+			this.toolStripMenuItemFolderManageWidgetsAndBanners.Size = new System.Drawing.Size(348, 22);
+			this.toolStripMenuItemFolderManageWidgetsAndBanners.Text = "Manage Widgets and Banners...";
 			// 
 			// toolStripMenuItemFolderWidget
 			// 
@@ -356,6 +360,18 @@
 			this.barDockControlRight.Location = new System.Drawing.Point(311, 0);
 			this.barDockControlRight.Size = new System.Drawing.Size(0, 308);
 			// 
+			// toolStripMenuItemFolderCopy
+			// 
+			this.toolStripMenuItemFolderCopy.Name = "toolStripMenuItemFolderCopy";
+			this.toolStripMenuItemFolderCopy.Size = new System.Drawing.Size(348, 22);
+			this.toolStripMenuItemFolderCopy.Text = "Copy this Window to a another page...";
+			// 
+			// toolStripMenuItemFolderMove
+			// 
+			this.toolStripMenuItemFolderMove.Name = "toolStripMenuItemFolderMove";
+			this.toolStripMenuItemFolderMove.Size = new System.Drawing.Size(348, 22);
+			this.toolStripMenuItemFolderMove.Text = "Move this Window to a another page...";
+			// 
 			// ClassicFolderBox
 			// 
 			this.Controls.Add(this.barDockControlLeft);
@@ -397,7 +413,7 @@
 		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemFolderSort;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-		private System.Windows.Forms.ToolStripMenuItem manageWidgetsAndBannersToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemFolderManageWidgetsAndBanners;
 		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemFolderWidget;
 		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemFolderBanner;
 		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemFolderDeleteWidgets;
@@ -419,5 +435,7 @@
 		private DevExpress.XtraBars.BarButtonItem barButtonItemLinkPropertiesWidget;
 		private DevExpress.XtraBars.BarButtonItem barButtonItemLinkPropertiesBanner;
 		private DevExpress.XtraBars.BarSubItem barSubItemLinkPropertiesQuickTools;
+		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemFolderCopy;
+		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemFolderMove;
 	}
 }

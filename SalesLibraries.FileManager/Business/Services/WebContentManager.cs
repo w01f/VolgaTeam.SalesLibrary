@@ -301,8 +301,8 @@ namespace SalesLibraries.FileManager.Business.Services
 			}
 			if (source is VideoLinkSettings)
 				target.forcePreview = ((VideoLinkSettings)source).ForcePreview;
-			if (source is WebLinkSettings)
-				target.forcePreview = ((WebLinkSettings)source).ForcePreview;
+			if (source is HyperLinkSettings)
+				target.forcePreview = ((HyperLinkSettings)source).ForcePreview;
 			if (source is PowerPointLinkSettings)
 			{
 				target.slideWidth = Convert.ToSingle(((PowerPointLinkSettings)source).Width);

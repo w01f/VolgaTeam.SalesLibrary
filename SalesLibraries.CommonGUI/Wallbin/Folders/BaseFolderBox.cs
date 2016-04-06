@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.ComponentModel.Design;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -10,6 +11,7 @@ using SalesLibraries.CommonGUI.Wallbin.Views;
 
 namespace SalesLibraries.CommonGUI.Wallbin.Folders
 {
+	[Designer("System.Windows.Forms.Design.ParentControlDesigner, System.Design", typeof(IDesigner))]
 	[ToolboxItem(false)]
 	public partial class BaseFolderBox : UserControl
 	{

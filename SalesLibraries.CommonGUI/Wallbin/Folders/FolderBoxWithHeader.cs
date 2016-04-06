@@ -1,4 +1,6 @@
 ﻿using System;
+using System.ComponentModel;
+using System.ComponentModel.Design;
 using System.Drawing;
 using System.Windows.Forms;
 using DevExpress.Utils;
@@ -8,6 +10,7 @@ using SalesLibraries.Common.Objects.Graphics;
 
 namespace SalesLibraries.CommonGUI.Wallbin.Folders
 {
+	[Designer("System.Windows.Forms.Design.ParentControlDesigner, System.Design", typeof(IDesigner))]
 	public partial class FolderBoxWithHeader : BaseFolderBox
 	{
 		private const int MinHeaderWidth = 250;
@@ -76,6 +79,8 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 				labelControlText.Visible = true;
 				if (DataSource.Widget.Enabled && DataSource.Widget.Image != null)
 					labelControlText.Appearance.Image = DataSource.Widget.Image;
+				else
+					labelControlText.Appearance.Image = null;
 				labelControlText.Text = DataSource.Name;
 				labelControlText.Font = DataSource.Settings.HeaderFont;
 				labelControlText.ForeColor = DataSource.Settings.ForeHeaderColor;

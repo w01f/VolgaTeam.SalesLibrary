@@ -6,6 +6,7 @@ using DevExpress.XtraEditors.Filtering;
 using DevExpress.XtraTab;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent;
+using SalesLibraries.Common.Extensions;
 using SalesLibraries.FileManager.Controllers;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Common
@@ -80,7 +81,15 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Common
 			if (radioButtonWidgetTypeCustom.Checked)
 			{
 				_data.WidgetType = WidgetType.CustomWidget;
-				_data.Image = pbCustomWidget.Image;
+				if (pbCustomWidget.Image != null)
+				{
+					var image = (Image) pbCustomWidget.Image.Clone();
+					_data.Image = checkEditInvert.Checked
+						? image.Invert()
+						: image;
+				}
+				else
+					_data.Image = null;
 			}
 			else if (radioButtonWidgetTypeDisabled.Checked)
 			{
@@ -101,6 +110,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Common
 		{
 			pbCustomWidget.Enabled = radioButtonWidgetTypeCustom.Checked;
 			pnSearch.Enabled = radioButtonWidgetTypeCustom.Checked;
+			checkEditInvert.Enabled = radioButtonWidgetTypeCustom.Checked;
 			xtraTabControlWidgets.Enabled = radioButtonWidgetTypeCustom.Checked;
 			if (!_loading && StateChanged != null)
 				StateChanged(this, new CheckedChangedEventArgs(radioButtonWidgetTypeCustom.Checked));

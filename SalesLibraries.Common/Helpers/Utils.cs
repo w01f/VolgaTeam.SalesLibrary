@@ -90,30 +90,6 @@ namespace SalesLibraries.Common.Helpers
 			return Image.FromStream((Stream)Clipboard.GetData("PNG"));
 		}
 
-		public static ImageFormat GetImageFormat(Image image)
-		{
-			var img = image.RawFormat;
-			if (img.Equals(ImageFormat.Jpeg))
-				return ImageFormat.Jpeg;
-			if (img.Equals(ImageFormat.Bmp))
-				return ImageFormat.Bmp;
-			if (img.Equals(ImageFormat.Png))
-				return ImageFormat.Png;
-			if (img.Equals(ImageFormat.Emf))
-				return ImageFormat.Emf;
-			if (img.Equals(ImageFormat.Exif))
-				return ImageFormat.Exif;
-			if (img.Equals(ImageFormat.Gif))
-				return ImageFormat.Gif;
-			if (img.Equals(ImageFormat.Icon))
-				return ImageFormat.Icon;
-			if (img.Equals(ImageFormat.MemoryBmp))
-				return ImageFormat.MemoryBmp;
-			if (img.Equals(ImageFormat.Tiff))
-				return ImageFormat.Tiff;
-			return ImageFormat.Wmf;
-		}
-
 		public static void MakeFolderAvailable(DirectoryInfo folder)
 		{
 			try

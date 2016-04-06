@@ -44,6 +44,7 @@
 			this.textEditSearch = new DevExpress.XtraEditors.TextEdit();
 			this.buttonXSearch = new DevComponents.DotNetBar.ButtonX();
 			this.pnSearch = new System.Windows.Forms.Panel();
+			this.checkEditInvert = new DevExpress.XtraEditors.CheckEdit();
 			((System.ComponentModel.ISupportInitialize)(this.pbCustomWidget)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControlWidgets)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pbAutoWidget)).BeginInit();
@@ -51,6 +52,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditSearch.Properties)).BeginInit();
 			this.pnSearch.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditInvert.Properties)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// buttonXOK
@@ -87,7 +89,7 @@
 			this.pbCustomWidget.BackColor = System.Drawing.Color.Transparent;
 			this.pbCustomWidget.Enabled = false;
 			this.pbCustomWidget.ForeColor = System.Drawing.Color.Black;
-			this.pbCustomWidget.Location = new System.Drawing.Point(293, 497);
+			this.pbCustomWidget.Location = new System.Drawing.Point(242, 497);
 			this.pbCustomWidget.Name = "pbCustomWidget";
 			this.pbCustomWidget.Size = new System.Drawing.Size(36, 36);
 			this.pbCustomWidget.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -125,7 +127,7 @@
 			this.radioButtonWidgetTypeAuto.AutoSize = true;
 			this.radioButtonWidgetTypeAuto.BackColor = System.Drawing.Color.White;
 			this.radioButtonWidgetTypeAuto.ForeColor = System.Drawing.Color.Black;
-			this.radioButtonWidgetTypeAuto.Location = new System.Drawing.Point(419, 505);
+			this.radioButtonWidgetTypeAuto.Location = new System.Drawing.Point(309, 505);
 			this.radioButtonWidgetTypeAuto.Name = "radioButtonWidgetTypeAuto";
 			this.radioButtonWidgetTypeAuto.Size = new System.Drawing.Size(102, 20);
 			this.radioButtonWidgetTypeAuto.TabIndex = 10;
@@ -153,7 +155,7 @@
 			this.radioButtonWidgetTypeCustom.AutoSize = true;
 			this.radioButtonWidgetTypeCustom.BackColor = System.Drawing.Color.White;
 			this.radioButtonWidgetTypeCustom.ForeColor = System.Drawing.Color.Black;
-			this.radioButtonWidgetTypeCustom.Location = new System.Drawing.Point(172, 505);
+			this.radioButtonWidgetTypeCustom.Location = new System.Drawing.Point(121, 505);
 			this.radioButtonWidgetTypeCustom.Name = "radioButtonWidgetTypeCustom";
 			this.radioButtonWidgetTypeCustom.Size = new System.Drawing.Size(120, 20);
 			this.radioButtonWidgetTypeCustom.TabIndex = 12;
@@ -195,14 +197,16 @@
 			this.pnAutoWidget.Controls.Add(this.laExtension);
 			this.pnAutoWidget.Controls.Add(this.pbAutoWidget);
 			this.pnAutoWidget.ForeColor = System.Drawing.Color.Black;
-			this.pnAutoWidget.Location = new System.Drawing.Point(520, 497);
+			this.pnAutoWidget.Location = new System.Drawing.Point(410, 497);
 			this.pnAutoWidget.Name = "pnAutoWidget";
 			this.pnAutoWidget.Size = new System.Drawing.Size(162, 36);
 			this.pnAutoWidget.TabIndex = 15;
 			// 
 			// labelControlSearchTitle
 			// 
+			this.labelControlSearchTitle.Appearance.BackColor = System.Drawing.Color.White;
 			this.labelControlSearchTitle.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelControlSearchTitle.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.labelControlSearchTitle.AppearanceDisabled.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelControlSearchTitle.AppearanceDisabled.ForeColor = System.Drawing.Color.Gray;
 			this.labelControlSearchTitle.Location = new System.Drawing.Point(7, 9);
@@ -235,6 +239,10 @@
 			// 
 			this.textEditSearch.Location = new System.Drawing.Point(72, 6);
 			this.textEditSearch.Name = "textEditSearch";
+			this.textEditSearch.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.textEditSearch.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.textEditSearch.Properties.Appearance.Options.UseBackColor = true;
+			this.textEditSearch.Properties.Appearance.Options.UseForeColor = true;
 			this.textEditSearch.Size = new System.Drawing.Size(191, 22);
 			this.textEditSearch.StyleController = this.styleController;
 			this.textEditSearch.TabIndex = 17;
@@ -269,11 +277,23 @@
 			this.pnSearch.Size = new System.Drawing.Size(362, 33);
 			this.pnSearch.TabIndex = 19;
 			// 
+			// checkEditInvert
+			// 
+			this.checkEditInvert.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.checkEditInvert.Enabled = false;
+			this.checkEditInvert.Location = new System.Drawing.Point(576, 505);
+			this.checkEditInvert.Name = "checkEditInvert";
+			this.checkEditInvert.Properties.Caption = "Invert";
+			this.checkEditInvert.Size = new System.Drawing.Size(75, 20);
+			this.checkEditInvert.StyleController = this.styleController;
+			this.checkEditInvert.TabIndex = 20;
+			// 
 			// FormEditLinkWidget
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
 			this.BackColor = System.Drawing.Color.White;
 			this.ClientSize = new System.Drawing.Size(934, 542);
+			this.Controls.Add(this.checkEditInvert);
 			this.Controls.Add(this.pnSearch);
 			this.Controls.Add(this.pnAutoWidget);
 			this.Controls.Add(this.radioButtonWidgetTypeDisabled);
@@ -300,6 +320,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.textEditSearch.Properties)).EndInit();
 			this.pnSearch.ResumeLayout(false);
 			this.pnSearch.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditInvert.Properties)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -322,5 +343,6 @@
 		private DevExpress.XtraEditors.TextEdit textEditSearch;
 		private DevComponents.DotNetBar.ButtonX buttonXSearch;
 		private System.Windows.Forms.Panel pnSearch;
+		private DevExpress.XtraEditors.CheckEdit checkEditInvert;
 	}
 }

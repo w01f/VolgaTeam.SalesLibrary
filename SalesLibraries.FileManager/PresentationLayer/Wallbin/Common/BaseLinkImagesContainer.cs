@@ -35,12 +35,13 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Common
 			InitializeComponent();
 			_parent = parent;
 			Text = _parent.Name;
-			_parent.DataChanged += (o, e) => LoadImages();
+			_parent.DataChanged += OnParentImageGroupChanged;
 			imageListView.ItemClick += OnGalleryItemClick;
 			imageListView.ItemDoubleClick += OnGalleryItemDoubleClick;
 			imageListView.ItemHover += OnGalleryItemHover;
 			imageListView.MouseDown += OnGalleryMouseDown;
 			imageListView.MouseMove += OnGalleryMouseMove;
+			Disposed += OnDisposed;
 		}
 
 		public static BaseLinkImagesContainer Create(LinkImageGroup parent)
@@ -71,6 +72,16 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Common
 		{
 			imageListView.Items.Clear();
 			imageListView.Items.AddRange(_parent.Images.Select(ims => new ImageListViewItem(ims.FilePath, ims.FileName) { Tag = ims }).ToArray());
+		}
+
+		private void OnDisposed(object sender, EventArgs e)
+		{
+			_parent.DataChanged -= OnParentImageGroupChanged;
+		}
+
+		private void OnParentImageGroupChanged(Object sender, EventArgs e)
+		{
+			LoadImages();
 		}
 
 		private void OnGalleryItemClick(object sender, ItemClickEventArgs e)

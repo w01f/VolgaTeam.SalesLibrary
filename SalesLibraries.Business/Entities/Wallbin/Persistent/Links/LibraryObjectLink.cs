@@ -121,5 +121,13 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 			ExpirationEncoded = null;
 			base.ResetToDefault();
 		}
+
+		public override BaseLibraryLink Copy()
+		{
+			var link = (LibraryObjectLink)base.Copy();
+			link.RelativePath = RelativePath;
+			link.ExpirationEncoded = ExpirationEncoded;
+			return link;
+		}
 	}
 }

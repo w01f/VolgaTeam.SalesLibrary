@@ -1,5 +1,8 @@
 ﻿using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
+using Vintasoft.Imaging;
+using Vintasoft.Imaging.ImageProcessing.Color;
 
 namespace SalesLibraries.Common.Extensions
 {
@@ -49,6 +52,46 @@ namespace SalesLibraries.Common.Extensions
 				graphicsHandle.DrawRectangle(pen, 0, 0, originalWidth, originalHeight);
 			}
 			return newImage;
+		}
+
+		public static Image Invert(this Image image)
+		{
+			using (var vintasoftImage = new VintasoftImage(image, true))
+			{
+				var command = new InvertCommand();
+				try
+				{
+					command.ExecuteInPlace(vintasoftImage);
+				}
+				catch
+				{
+				}
+				return vintasoftImage.GetAsBitmap();
+			}
+		}
+
+		public static ImageFormat GetImageFormat(Image image)
+		{
+			var img = image.RawFormat;
+			if (img.Equals(ImageFormat.Jpeg))
+				return ImageFormat.Jpeg;
+			if (img.Equals(ImageFormat.Bmp))
+				return ImageFormat.Bmp;
+			if (img.Equals(ImageFormat.Png))
+				return ImageFormat.Png;
+			if (img.Equals(ImageFormat.Emf))
+				return ImageFormat.Emf;
+			if (img.Equals(ImageFormat.Exif))
+				return ImageFormat.Exif;
+			if (img.Equals(ImageFormat.Gif))
+				return ImageFormat.Gif;
+			if (img.Equals(ImageFormat.Icon))
+				return ImageFormat.Icon;
+			if (img.Equals(ImageFormat.MemoryBmp))
+				return ImageFormat.MemoryBmp;
+			if (img.Equals(ImageFormat.Tiff))
+				return ImageFormat.Tiff;
+			return ImageFormat.Wmf;
 		}
 	}
 }

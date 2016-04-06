@@ -77,6 +77,20 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 			return !Directory.Exists(FullPath);
 		}
 
+		public override BaseLibraryLink Copy()
+		{
+			var folderLink = (LibraryFolderLink)base.Copy();
+
+			foreach (var libraryLink in Links.OfType<LibraryFileLink>())
+			{
+				var newLink = (LibraryFileLink)libraryLink.Copy();
+				newLink.FolderLink = folderLink;
+				folderLink.Links.Add(newLink);
+			}
+
+			return folderLink;
+		}
+
 		public void UpdateContent()
 		{
 			var existedPaths = new List<string>();

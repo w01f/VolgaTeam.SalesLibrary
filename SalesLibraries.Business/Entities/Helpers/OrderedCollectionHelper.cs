@@ -59,7 +59,7 @@ namespace SalesLibraries.Business.Entities.Helpers
 		}
 
 		public static void Sort<TItem>(this ICollection<TItem> targetCollection, Func<TItem, bool> filterCondition = null)
-			where TItem : class,ICollectionItem
+			where TItem : class, ICollectionItem
 		{
 			var filteredCollection = (filterCondition != null ? targetCollection.Where(filterCondition) : targetCollection).ToList();
 			foreach (var item in filteredCollection)
@@ -78,13 +78,23 @@ namespace SalesLibraries.Business.Entities.Helpers
 			targetItem.Parent.MarkAsModified();
 		}
 
-		public static void InsertItem<TItem>(this IList<TItem> targetCollection, int position, TItem targetItem, Func<TItem, bool> filterCondition = null)
+		public static void InsertItem<TItem>(this IList<TItem> targetCollection, TItem targetItem, int position, Func<TItem, bool> filterCondition = null)
 			where TItem : class, ICollectionItem
 		{
 			for (var i = position; i < targetCollection.Count; i++)
 				targetCollection[i].CollectionOrder += 1;
 			targetItem.CollectionOrder = position;
 			targetCollection.Insert(position, targetItem);
+			targetCollection.ResetItemsOrder(filterCondition);
+			targetItem.Parent.MarkAsModified();
+		}
+
+		public static void ChangeItemPosition<TItem>(this IList<TItem> targetCollection, TItem targetItem, int newPosition, Func<TItem, bool> filterCondition = null)
+			where TItem : class, ICollectionItem
+		{
+			for (var i = newPosition; i < targetCollection.Count; i++)
+				targetCollection[i].CollectionOrder += 1;
+			targetItem.CollectionOrder = newPosition;
 			targetCollection.ResetItemsOrder(filterCondition);
 			targetItem.Parent.MarkAsModified();
 		}

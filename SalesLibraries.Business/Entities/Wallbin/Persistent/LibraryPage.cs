@@ -188,13 +188,18 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 		public void AddFolder(int columnOrder)
 		{
 			var folder = new LibraryFolder();
-			folder.Page = this;
-			folder.ColumnOrder = columnOrder;
-			folder.RowOrder = Folders.Any(f => f.ColumnOrder == columnOrder) ? Folders.Where(f => f.ColumnOrder == columnOrder).Max(f => f.RowOrder) + 1 : 0;
 			folder.Name = String.Format("Window {0}", (folder.RowOrder + 1).ToString("#,##0"));
 			var defaultFolder = Folders.FirstOrDefault();
 			if (defaultFolder != null)
 				ApplyFolderSettings(folder, defaultFolder);
+			var rowOrder = Folders.Any(f => f.ColumnOrder == columnOrder) ? Folders.Where(f => f.ColumnOrder == columnOrder).Max(f => f.RowOrder) + 1 : 0;
+			AddFolder(folder, columnOrder, rowOrder);
+		}
+
+		public void AddFolder(LibraryFolder folder, int columnOrder, int rowOrder)
+		{
+			folder.Page = this;
+			folder.ColumnOrder = columnOrder;
 			Folders.AddItem(folder);
 		}
 

@@ -65,7 +65,6 @@ namespace SalesLibraries.FileManager.Controllers
 			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesSecurity.Visible = MainController.Instance.Settings.EditorSettings.EnableSecurityEdit;
 
 			MainController.Instance.MainForm.buttonItemHomeAddUrl.Click += buttonItemHomeAddUrl_Click;
-			MainController.Instance.MainForm.buttonItemHomeAddNetworkShare.Click += buttonItemHomeAddNetworkShare_Click;
 			MainController.Instance.MainForm.buttonItemHomeAddLineBreak.Click += buttonItemHomeAddLineBreak_Click;
 
 			MainController.Instance.MainForm.buttonItemHomeLinkOpen.Click += buttonItemHomeLinkOpen_Click;
@@ -190,7 +189,6 @@ namespace SalesLibraries.FileManager.Controllers
 				null;
 
 			MainController.Instance.MainForm.buttonItemHomeAddUrl.Enabled =
-			MainController.Instance.MainForm.buttonItemHomeAddNetworkShare.Enabled =
 			MainController.Instance.MainForm.buttonItemHomeAddLineBreak.Enabled = selectedFolder != null;
 
 			MainController.Instance.MainForm.buttonItemHomeLinkDelete.Enabled =
@@ -272,14 +270,7 @@ namespace SalesLibraries.FileManager.Controllers
 		{
 			var selectedFolder = MainController.Instance.WallbinViews.Selection.SelectedFolder;
 			if (selectedFolder == null) return;
-			selectedFolder.AddUrl();
-		}
-
-		private void buttonItemHomeAddNetworkShare_Click(object sender, EventArgs e)
-		{
-			var selectedFolder = MainController.Instance.WallbinViews.Selection.SelectedFolder;
-			if (selectedFolder == null) return;
-			selectedFolder.AddNetworkLink();
+			selectedFolder.AddHyperLink();
 		}
 
 		private void buttonItemHomeAddLineBreak_Click(object sender, EventArgs e)

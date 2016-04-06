@@ -40,6 +40,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 			MainController.Instance.MainForm.ribbonPanelHome.PerformLayout();
 		}
 
+		public override void SelectPage(IPageView pageView)
+		{
+			_pageSelector.EditValue = pageView;
+		}
+
 		public override void ShowView()
 		{
 			Application.DoEvents();

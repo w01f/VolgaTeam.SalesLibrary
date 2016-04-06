@@ -7,7 +7,7 @@ using SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers;
 using SalesLibraries.Common.DataState;
 using SalesLibraries.FileManager.Business.PreviewGenerators;
 
-namespace SalesLibraries.FileManager.Business.Models
+namespace SalesLibraries.FileManager.Business.Models.VideoInfo
 {
 	class VideoInfo
 	{

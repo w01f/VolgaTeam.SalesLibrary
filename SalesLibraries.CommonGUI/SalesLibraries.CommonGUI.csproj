@@ -114,6 +114,7 @@
       <DependentUpon>YearControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Common\EditorHelper.cs" />
+    <Compile Include="Common\XtraTabDragDropHelper.cs" />
     <Compile Include="Floater\FloaterManager.cs" />
     <Compile Include="Common\FormStateHelper.cs" />
     <Compile Include="Common\PictureBoxButtonizer.cs" />

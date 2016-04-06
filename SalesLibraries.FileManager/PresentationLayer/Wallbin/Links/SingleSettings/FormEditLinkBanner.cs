@@ -7,6 +7,7 @@ using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraTab;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
+using SalesLibraries.Common.Extensions;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.FileManager.Controllers;
 using SalesLibraries.FileManager.PresentationLayer.Wallbin.Common;
@@ -129,7 +130,15 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		{
 			_sourceLink.Banner.Enable = checkBoxEnableBanner.Checked;
 			_sourceLink.Widget.WidgetType = !_sourceLink.Banner.Enable ? _sourceLink.Widget.WidgetType : _sourceLink.Widget.DefaultWidgetType;
-			_sourceLink.Banner.Image = pbSelectedBanner.Image;
+			if (pbSelectedBanner.Image != null)
+			{
+				var image = (Image) pbSelectedBanner.Image.Clone();
+				_sourceLink.Banner.Image = checkEditInvert.Checked
+					? image.Invert()
+					: image;
+			}
+			else
+				_sourceLink.Banner.Image = null;
 			if (rbBannerAligmentLeft.Checked)
 				_sourceLink.Banner.ImageAlignement = Alignment.Left;
 			else if (rbBannerAligmentCenter.Checked)

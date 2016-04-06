@@ -1,6 +1,6 @@
 ﻿using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 
-namespace SalesLibraries.FileManager.Business.Models
+namespace SalesLibraries.FileManager.Business.Models.InactiveLinks
 {
 	public class InactiveLink
 	{

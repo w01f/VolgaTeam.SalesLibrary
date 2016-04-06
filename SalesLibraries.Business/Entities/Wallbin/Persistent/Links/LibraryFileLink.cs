@@ -193,6 +193,14 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 			base.ApplyValues(link);
 		}
 
+		public override BaseLibraryLink Copy()
+		{
+			var link = (LibraryFileLink)base.Copy();
+			link.IsDead = IsDead;
+			link.DataSourceId = DataSourceId;
+			return link;
+		}
+
 		public static LibraryFileLink Create(SourceLink sourceLink, LibraryFolder parentFolder)
 		{
 			var link = Create(sourceLink, parentFolder.Page.Library);

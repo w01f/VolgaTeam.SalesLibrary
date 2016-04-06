@@ -6,6 +6,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Proces
 {
 	[IntendForClass(typeof(NetworkLink))]
 	[IntendForClass(typeof(WebLink))]
+	[IntendForClass(typeof(YouTubeLink))]
 	class NetworkLinkProcessor : ILinkViewProcessor
 	{
 		private readonly LibraryObjectLink _link;

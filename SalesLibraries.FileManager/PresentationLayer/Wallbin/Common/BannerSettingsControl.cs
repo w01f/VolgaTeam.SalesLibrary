@@ -8,6 +8,7 @@ using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraEditors.Filtering;
 using DevExpress.XtraTab;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent;
+using SalesLibraries.Common.Extensions;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.FileManager.Controllers;
 using Alignment = SalesLibraries.Business.Entities.Wallbin.Common.Enums.Alignment;
@@ -111,7 +112,15 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Common
 		public void SaveData()
 		{
 			_data.Enable = checkBoxEnableBanner.Checked;
-			_data.Image = pbSelectedBanner.Image;
+			if (pbSelectedBanner.Image != null)
+			{
+				var image = (Image) pbSelectedBanner.Image.Clone();
+				_data.Image = checkEditInvert.Checked
+					? image.Invert()
+					: image;
+			}
+			else
+				_data.Image = null;
 			if (rbBannerAligmentLeft.Checked)
 				_data.ImageAlignement = Alignment.Left;
 			else if (rbBannerAligmentCenter.Checked)

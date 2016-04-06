@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
@@ -7,7 +8,9 @@ using DevExpress.XtraTab;
 using DevExpress.XtraTab.ViewInfo;
 using SalesLibraries.Business.Contexts.Wallbin;
 using SalesLibraries.Business.Entities.Helpers;
+using SalesLibraries.Business.Entities.Wallbin.Persistent;
 using SalesLibraries.Common.Helpers;
+using SalesLibraries.CommonGUI.Common;
 using SalesLibraries.FileManager.Controllers;
 using SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings;
 
@@ -16,6 +19,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 	[ToolboxItem(false)]
 	public partial class TabbedWallbin : BaseWallbin
 	{
+		private XtraTabDragDropHelper<TabPage> _tabDragDropHelper;
+
 		public TabbedWallbin(LibraryContext dataStorage)
 			: base(dataStorage)
 		{
@@ -40,6 +45,14 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 			xtraTabControl.SelectedTabPage = (XtraTabPage)ActivePage;
 			xtraTabControl.SelectedPageChanging += OnSelectedPageChanging;
 			xtraTabControl.SelectedPageChanged += OnSelectedPageChanged;
+
+			_tabDragDropHelper = new XtraTabDragDropHelper<TabPage>(xtraTabControl);
+			_tabDragDropHelper.TabMoved += OnTabMoved;
+		}
+
+		public override void SelectPage(IPageView pageView)
+		{
+			xtraTabControl.SelectedTabPage = (XtraTabPage) pageView;
 		}
 
 		private void OnSelectedPageChanging(object sender, TabPageChangingEventArgs e)
@@ -64,6 +77,14 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 			newPage.ShowPage();
 			WinAPIHelper.SendMessage(e.Page.Handle, 11, new IntPtr(1), IntPtr.Zero);
 			newPage.Resume();
+		}
+
+		private void OnTabMoved(Object sender, TabMoveEventArgs e)
+		{
+			((List<LibraryPage>)DataStorage.Library.Pages).ChangeItemPosition(
+				((IPageView)e.MovedPage).Page, 
+				((IPageView)e.TargetPage).Page.Order + (1 * e.Offset));
+			IsDataChanged = true;
 		}
 
 		#region Page Context Menu Processing

@@ -7,7 +7,7 @@ using SalesLibraries.Business.Entities.Wallbin.NonPersistent;
 using SalesLibraries.Business.Entities.Wallbin.Persistent;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.Common.OfficeInterops;
-using SalesLibraries.FileManager.Business.Models;
+using SalesLibraries.FileManager.Business.Models.InactiveLinks;
 using SalesLibraries.FileManager.Controllers;
 using SalesLibraries.FileManager.PresentationLayer.Wallbin.Libraries;
 

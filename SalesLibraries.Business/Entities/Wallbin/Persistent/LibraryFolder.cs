@@ -118,7 +118,6 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 		{
 			get { return Links.Any(l => !l.Widget.Disabled && l.Widget.Image != null); }
 		}
-
 		#endregion
 
 		public LibraryFolder()
@@ -175,6 +174,28 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 				order++;
 			}
 			Links.Sort();
+		}
+
+		public LibraryFolder Copy()
+		{
+			BeforeSave();
+
+			var folder = new LibraryFolder();
+			folder.Name = Name;
+			folder.ColumnOrder = ColumnOrder;
+			folder.RowOrder = RowOrder;
+			folder.SettingsEncoded = SettingsEncoded;
+			folder.WidgetEncoded = WidgetEncoded;
+			folder.BannerEncoded = BannerEncoded;
+
+			foreach (var libraryLink in Links)
+			{
+				var newLink = libraryLink.Copy();
+				newLink.Folder = folder;
+				folder.Links.Add(newLink);
+			}
+
+			return folder;
 		}
 
 		public class LibraryFolderSettings : SettingsContainer

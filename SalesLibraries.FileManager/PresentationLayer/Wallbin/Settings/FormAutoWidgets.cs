@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using DevComponents.DotNetBar.Metro;
 using DevExpress.XtraEditors.Controls;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent;
 using SalesLibraries.Business.Entities.Wallbin.Persistent;
+using SalesLibraries.Common.Extensions;
 using SalesLibraries.FileManager.Controllers;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
@@ -51,8 +53,15 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 						form.laWidgetDescription.Text = autoWidget.Extension.ToUpper();
 						form.pbSelectedWidget.Image = autoWidget.Widget;
 						if (form.ShowDialog() != DialogResult.OK) return;
-						autoWidget.Widget = form.pbSelectedWidget.Image;
-						gridViewAutoWidgets.UpdateCurrentRow();
+						if (form.pbSelectedWidget.Image != null)
+						{
+							var image = (Image) form.pbSelectedWidget.Image.Clone();
+							autoWidget.Widget = form.checkEditInvert.Checked
+								? image.Invert()
+								: image;
+						}
+						else
+							autoWidget.Widget = null;
 					}
 					break;
 			}

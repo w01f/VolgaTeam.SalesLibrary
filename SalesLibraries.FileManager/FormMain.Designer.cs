@@ -59,7 +59,6 @@
 			this.ribbonBarHomeAddLink = new DevComponents.DotNetBar.RibbonBar();
 			this.itemContainerHomeAddLink = new DevComponents.DotNetBar.ItemContainer();
 			this.buttonItemHomeAddUrl = new DevComponents.DotNetBar.ButtonItem();
-			this.buttonItemHomeAddNetworkShare = new DevComponents.DotNetBar.ButtonItem();
 			this.buttonItemHomeAddLineBreak = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarHomeWallbin = new DevComponents.DotNetBar.RibbonBar();
 			this.comboBoxEditHomePage = new DevExpress.XtraEditors.ComboBoxEdit();
@@ -209,7 +208,7 @@
 			// 
 			// styleManager
 			// 
-			this.styleManager.ManagerStyle = DevComponents.DotNetBar.eStyle.Office2013;
+			this.styleManager.ManagerStyle = DevComponents.DotNetBar.eStyle.Metro;
 			this.styleManager.MetroColorParameters = new DevComponents.DotNetBar.Metro.ColorTables.MetroColorGeneratorParameters(System.Drawing.Color.White, System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(87)))), ((int)(((byte)(154))))));
 			// 
 			// ribbonControl
@@ -746,9 +745,8 @@
 			this.itemContainerHomeAddLink.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical;
 			this.itemContainerHomeAddLink.Name = "itemContainerHomeAddLink";
 			this.itemContainerHomeAddLink.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.buttonItemHomeAddUrl,
-            this.buttonItemHomeAddNetworkShare,
-            this.buttonItemHomeAddLineBreak});
+            this.buttonItemHomeAddLineBreak,
+            this.buttonItemHomeAddUrl});
 			// 
 			// 
 			// 
@@ -762,16 +760,7 @@
 			this.buttonItemHomeAddUrl.ForeColor = System.Drawing.Color.Black;
 			this.buttonItemHomeAddUrl.Name = "buttonItemHomeAddUrl";
 			this.superTooltip.SetSuperTooltip(this.buttonItemHomeAddUrl, new DevComponents.DotNetBar.SuperTooltipInfo("Add Web Link", "", "Add a Link to a website", null, null, DevComponents.DotNetBar.eTooltipColor.Default, true, false, new System.Drawing.Size(0, 0)));
-			this.buttonItemHomeAddUrl.Text = " Web Link";
-			// 
-			// buttonItemHomeAddNetworkShare
-			// 
-			this.buttonItemHomeAddNetworkShare.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
-			this.buttonItemHomeAddNetworkShare.Enabled = false;
-			this.buttonItemHomeAddNetworkShare.ForeColor = System.Drawing.Color.Black;
-			this.buttonItemHomeAddNetworkShare.Name = "buttonItemHomeAddNetworkShare";
-			this.superTooltip.SetSuperTooltip(this.buttonItemHomeAddNetworkShare, new DevComponents.DotNetBar.SuperTooltipInfo("Add Network Link", "", "Add a Link to folder on your network", null, null, DevComponents.DotNetBar.eTooltipColor.Default, true, false, new System.Drawing.Size(0, 0)));
-			this.buttonItemHomeAddNetworkShare.Text = " LAN Link";
+			this.buttonItemHomeAddUrl.Text = " Hyperlink";
 			// 
 			// buttonItemHomeAddLineBreak
 			// 
@@ -3075,7 +3064,7 @@
 			this.pnContainer.Location = new System.Drawing.Point(5, 184);
 			this.pnContainer.Name = "pnContainer";
 			this.pnContainer.Padding = new System.Windows.Forms.Padding(0, 2, 0, 0);
-			this.pnContainer.Size = new System.Drawing.Size(995, 555);
+			this.pnContainer.Size = new System.Drawing.Size(995, 553);
 			this.pnContainer.TabIndex = 32;
 			// 
 			// defaultLookAndFeel
@@ -3090,7 +3079,7 @@
 			// FormMain
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-			this.ClientSize = new System.Drawing.Size(1005, 741);
+			this.ClientSize = new System.Drawing.Size(1005, 739);
 			this.Controls.Add(this.pnContainer);
 			this.Controls.Add(this.ribbonControl);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -3202,7 +3191,6 @@
 		public DevComponents.DotNetBar.RibbonBar ribbonBarHomeAddLink;
 		private DevComponents.DotNetBar.ItemContainer itemContainerHomeAddLink;
 		public DevComponents.DotNetBar.ButtonItem buttonItemHomeAddUrl;
-		public DevComponents.DotNetBar.ButtonItem buttonItemHomeAddNetworkShare;
 		public DevComponents.DotNetBar.ButtonItem buttonItemHomeAddLineBreak;
 		private DevComponents.DotNetBar.RibbonPanel ribbonPanelVideo;
 		private DevComponents.DotNetBar.RibbonPanel ribbonPanelProgramManager;

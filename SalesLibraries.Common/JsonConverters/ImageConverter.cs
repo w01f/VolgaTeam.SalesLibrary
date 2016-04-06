@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using Newtonsoft.Json;
-using SalesLibraries.Common.Helpers;
+using SalesLibraries.Common.Extensions;
 
 namespace SalesLibraries.Common.JsonConverters
 {
@@ -23,7 +24,14 @@ namespace SalesLibraries.Common.JsonConverters
 			var bmp = value as Bitmap;
 			if (bmp == null) return;
 			var m = new MemoryStream();
-			bmp.Save(m, Utils.GetImageFormat((Image)bmp.Clone()));
+			try
+			{
+				bmp.Save(m, GraphicObjectExtensions.GetImageFormat(bmp));
+			}
+			catch
+			{
+				bmp.Save(m, ImageFormat.Png);
+			}
 			writer.WriteValue(Convert.ToBase64String(m.ToArray()));
 		}
 	}

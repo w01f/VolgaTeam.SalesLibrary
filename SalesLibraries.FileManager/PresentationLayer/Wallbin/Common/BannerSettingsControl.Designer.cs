@@ -43,6 +43,7 @@
 			this.laTextFormat = new System.Windows.Forms.Label();
 			this.xtraTabControlBanners = new DevExpress.XtraTab.XtraTabControl();
 			this.pnControls = new System.Windows.Forms.Panel();
+			this.checkEditInvert = new DevExpress.XtraEditors.CheckEdit();
 			this.pnSearch = new System.Windows.Forms.Panel();
 			this.labelControlSearchTitle = new DevExpress.XtraEditors.LabelControl();
 			this.buttonXSearch = new DevComponents.DotNetBar.ButtonX();
@@ -54,6 +55,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.memoEditBannerText.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControlBanners)).BeginInit();
 			this.pnControls.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditInvert.Properties)).BeginInit();
 			this.pnSearch.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.textEditSearch.Properties)).BeginInit();
 			this.SuspendLayout();
@@ -276,6 +278,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.pnControls.BackColor = System.Drawing.Color.Transparent;
+			this.pnControls.Controls.Add(this.checkEditInvert);
 			this.pnControls.Controls.Add(this.pnSearch);
 			this.pnControls.Controls.Add(this.xtraTabControlBanners);
 			this.pnControls.Controls.Add(this.pbSelectedBanner);
@@ -294,6 +297,17 @@
 			this.pnControls.Name = "pnControls";
 			this.pnControls.Size = new System.Drawing.Size(922, 608);
 			this.pnControls.TabIndex = 47;
+			// 
+			// checkEditInvert
+			// 
+			this.checkEditInvert.Location = new System.Drawing.Point(16, 48);
+			this.checkEditInvert.Name = "checkEditInvert";
+			this.checkEditInvert.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.checkEditInvert.Properties.Appearance.Options.UseForeColor = true;
+			this.checkEditInvert.Properties.Caption = "Invert";
+			this.checkEditInvert.Size = new System.Drawing.Size(75, 20);
+			this.checkEditInvert.StyleController = this.styleController;
+			this.checkEditInvert.TabIndex = 49;
 			// 
 			// pnSearch
 			// 
@@ -369,6 +383,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControlBanners)).EndInit();
 			this.pnControls.ResumeLayout(false);
 			this.pnControls.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditInvert.Properties)).EndInit();
 			this.pnSearch.ResumeLayout(false);
 			this.pnSearch.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.textEditSearch.Properties)).EndInit();
@@ -397,5 +412,6 @@
 		private DevExpress.XtraEditors.LabelControl labelControlSearchTitle;
 		private DevComponents.DotNetBar.ButtonX buttonXSearch;
 		private DevExpress.XtraEditors.TextEdit textEditSearch;
+		private DevExpress.XtraEditors.CheckEdit checkEditInvert;
 	}
 }

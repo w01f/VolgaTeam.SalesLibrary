@@ -6,6 +6,7 @@ using DevComponents.DotNetBar.Metro;
 using DevExpress.XtraTab;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
+using SalesLibraries.Common.Extensions;
 using SalesLibraries.FileManager.Controllers;
 using SalesLibraries.FileManager.PresentationLayer.Wallbin.Common;
 
@@ -137,7 +138,15 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			else if (radioButtonWidgetTypeCustom.Checked)
 			{
 				_sourceLink.Widget.WidgetType = WidgetType.CustomWidget;
-				_sourceLink.Widget.Image = pbCustomWidget.Image;
+				if (pbCustomWidget.Image != null)
+				{
+					var image = (Image) pbCustomWidget.Image.Clone();
+					_sourceLink.Widget.Image = checkEditInvert.Checked
+						? image.Invert()
+						: image;
+				}
+				else
+					_sourceLink.Widget.Image = null;
 			}
 			else if (radioButtonWidgetTypeDisabled.Checked)
 			{
@@ -159,6 +168,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			pbAutoWidget.Enabled = radioButtonWidgetTypeAuto.Checked;
 			xtraTabControlWidgets.Enabled = radioButtonWidgetTypeCustom.Checked;
 			pnSearch.Enabled = radioButtonWidgetTypeCustom.Checked;
+			checkEditInvert.Enabled = radioButtonWidgetTypeCustom.Checked;
 		}
 
 		private void OnSelectedWidgetChanged(object sender, LinkImageEventArgs e)
@@ -175,7 +185,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		private void OnSearchButtonClick(object sender, EventArgs e)
 		{
 			var keyword = textEditSearch.EditValue as String;
-			if(String.IsNullOrEmpty(keyword)) return;
+			if (String.IsNullOrEmpty(keyword)) return;
 			MainController.Instance.Lists.Widgets.SearchResults.LoadImages(keyword);
 		}
 
@@ -186,8 +196,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 		private void OnSearchKeyDown(object sender, KeyEventArgs e)
 		{
-			if(e.KeyCode == Keys.Enter)
-				OnSearchButtonClick(sender,EventArgs.Empty);
+			if (e.KeyCode == Keys.Enter)
+				OnSearchButtonClick(sender, EventArgs.Empty);
 		}
 	}
 }

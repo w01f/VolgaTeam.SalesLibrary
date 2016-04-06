@@ -272,5 +272,23 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 			MarkAsModified();
 			AfterSave();
 		}
+
+		public virtual BaseLibraryLink Copy()
+		{
+			BeforeSave();
+
+			var link = (BaseLibraryLink)Activator.CreateInstance(GetType());
+			link.Type = Type;
+			link.Name = Name;
+			link.Order = Order;
+			link.AddDate = AddDate;
+			link.SettingsEncoded = SettingsEncoded;
+			link.SecurityEncoded = SecurityEncoded;
+			link.TagsEncoded = TagsEncoded;
+			link.WidgetEncoded = WidgetEncoded;
+			link.BannerEncoded = BannerEncoded;
+
+			return link;
+		}
 	}
 }

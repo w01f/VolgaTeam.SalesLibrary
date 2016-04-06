@@ -2,11 +2,11 @@
 using System.Windows.Forms;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.Common.Helpers;
-using SalesLibraries.SalesDepot.Controllers;
 
 namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Controls
 {
 	[IntendForClass(typeof(WebLink))]
+	[IntendForClass(typeof(YouTubeLink))]
 	[ToolboxItem(false)]
 	public partial class WebViewer : UserControl, ILinkViewer
 	{
@@ -26,7 +26,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Contro
 			Visible = false;
 
 			Link = link;
-			webBrowser.Navigate(((WebLink)Link).Url);
+			webBrowser.Navigate(((HyperLink)Link).Url);
 		}
 
 		#region IFileViewer Methods
@@ -37,7 +37,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Contro
 
 		public void Open()
 		{
-			Utils.OpenFile(((WebLink)Link).Url);
+			Utils.OpenFile(((HyperLink)Link).Url);
 		}
 
 		public void Save() { }
