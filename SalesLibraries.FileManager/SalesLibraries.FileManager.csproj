@@ -398,6 +398,12 @@
     <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkVideoOptions.designer.cs">
       <DependentUpon>LinkVideoOptions.cs</DependentUpon>
     </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkLanOptions.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkLanOptions.designer.cs">
+      <DependentUpon>LinkLanOptions.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkYouTubeOptions.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -684,6 +690,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkVideoOptions.resx">
       <DependentUpon>LinkVideoOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkLanOptions.resx">
+      <DependentUpon>LinkLanOptions.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkYouTubeOptions.resx">
       <DependentUpon>LinkYouTubeOptions.cs</DependentUpon>

@@ -93,9 +93,9 @@
 			this.laPath.ForeColor = System.Drawing.Color.Black;
 			this.laPath.Location = new System.Drawing.Point(11, 113);
 			this.laPath.Name = "laPath";
-			this.laPath.Size = new System.Drawing.Size(63, 16);
+			this.laPath.Size = new System.Drawing.Size(108, 16);
 			this.laPath.TabIndex = 33;
-			this.laPath.Text = "Link Path";
+			this.laPath.Text = "Network Location";
 			// 
 			// laName
 			// 

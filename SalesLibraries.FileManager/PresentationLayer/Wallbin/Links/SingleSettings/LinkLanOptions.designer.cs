@@ -1,6 +1,6 @@
 ﻿namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSettings
 {
-	sealed partial class LinkWebOptions
+	sealed partial class LinkLanOptions
 	{
 		/// <summary> 
 		/// Required designer variable.
@@ -31,8 +31,6 @@
 			this.components = new System.ComponentModel.Container();
 			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
 			this.labelControlTitle = new DevExpress.XtraEditors.LabelControl();
-			this.ckIsUrl365 = new System.Windows.Forms.CheckBox();
-			this.ckForcePreview = new System.Windows.Forms.CheckBox();
 			this.labelControlName = new DevExpress.XtraEditors.LabelControl();
 			this.textEditName = new DevExpress.XtraEditors.TextEdit();
 			this.textEditPath = new DevExpress.XtraEditors.TextEdit();
@@ -67,36 +65,12 @@
 			this.labelControlTitle.TabIndex = 24;
 			this.labelControlTitle.Text = "You may want to apply these special, advanced settings to the link";
 			// 
-			// ckIsUrl365
-			// 
-			this.ckIsUrl365.AutoSize = true;
-			this.ckIsUrl365.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.ckIsUrl365.ForeColor = System.Drawing.Color.Black;
-			this.ckIsUrl365.Location = new System.Drawing.Point(8, 196);
-			this.ckIsUrl365.Name = "ckIsUrl365";
-			this.ckIsUrl365.Size = new System.Drawing.Size(244, 20);
-			this.ckIsUrl365.TabIndex = 25;
-			this.ckIsUrl365.Text = "This URL is an Office 365 URL Link";
-			this.ckIsUrl365.UseVisualStyleBackColor = true;
-			// 
-			// ckForcePreview
-			// 
-			this.ckForcePreview.AutoSize = true;
-			this.ckForcePreview.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.ckForcePreview.ForeColor = System.Drawing.Color.Black;
-			this.ckForcePreview.Location = new System.Drawing.Point(8, 240);
-			this.ckForcePreview.Name = "ckForcePreview";
-			this.ckForcePreview.Size = new System.Drawing.Size(301, 20);
-			this.ckForcePreview.TabIndex = 26;
-			this.ckForcePreview.Text = "Immediately Launch this URL when clicked";
-			this.ckForcePreview.UseVisualStyleBackColor = true;
-			// 
 			// labelControlName
 			// 
 			this.labelControlName.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelControlName.Location = new System.Drawing.Point(8, 55);
 			this.labelControlName.Name = "labelControlName";
-			this.labelControlName.Size = new System.Drawing.Size(62, 16);
+			this.labelControlName.Size = new System.Drawing.Size(68, 16);
 			this.labelControlName.StyleController = this.styleController;
 			this.labelControlName.TabIndex = 27;
 			this.labelControlName.Text = "Link Name";
@@ -126,19 +100,17 @@
 			this.labelControlPath.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelControlPath.Location = new System.Drawing.Point(8, 121);
 			this.labelControlPath.Name = "labelControlPath";
-			this.labelControlPath.Size = new System.Drawing.Size(55, 16);
+			this.labelControlPath.Size = new System.Drawing.Size(111, 16);
 			this.labelControlPath.StyleController = this.styleController;
 			this.labelControlPath.TabIndex = 29;
-			this.labelControlPath.Text = "Link Path";
+			this.labelControlPath.Text = "Network Location";
 			// 
-			// LinkWebOptions
+			// LinkLanOptions
 			// 
 			this.Controls.Add(this.textEditPath);
 			this.Controls.Add(this.labelControlPath);
 			this.Controls.Add(this.textEditName);
 			this.Controls.Add(this.labelControlName);
-			this.Controls.Add(this.ckForcePreview);
-			this.Controls.Add(this.ckIsUrl365);
 			this.Controls.Add(this.labelControlTitle);
 			this.Size = new System.Drawing.Size(531, 541);
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
@@ -153,8 +125,6 @@
 
 		private DevExpress.XtraEditors.StyleController styleController;
 		private DevExpress.XtraEditors.LabelControl labelControlTitle;
-		public System.Windows.Forms.CheckBox ckIsUrl365;
-		public System.Windows.Forms.CheckBox ckForcePreview;
 		private DevExpress.XtraEditors.LabelControl labelControlName;
 		private DevExpress.XtraEditors.TextEdit textEditName;
 		private DevExpress.XtraEditors.TextEdit textEditPath;
