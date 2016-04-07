@@ -25,10 +25,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.HyperlinkEd
 
 				laName.Font = new Font(laName.Font.FontFamily, laName.Font.Size - 2, laName.Font.Style);
 				laPath.Font = new Font(laPath.Font.FontFamily, laPath.Font.Size - 2, laPath.Font.Style);
-				ckBlueHyperlink.Font = new Font(ckBlueHyperlink.Font.FontFamily, ckBlueHyperlink.Font.Size - 2,
-					ckBlueHyperlink.Font.Style);
-				ckForcePreview.Font = new Font(ckForcePreview.Font.FontFamily, ckForcePreview.Font.Size - 2,
-					ckForcePreview.Font.Style);
 			}
 		}
 
@@ -54,8 +50,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.HyperlinkEd
 			{
 				Name = textEditName.EditValue as String,
 				Path = textEditPath.EditValue as String,
-				FormatAsBluelink = ckBlueHyperlink.Checked,
-				ForcePreview = ckForcePreview.Checked
+				FormatAsBluelink = checkEditBlueHyperlink.Checked,
+				FormatBold = checkEditBold.Checked,
+				ForcePreview = checkEditForcePreview.Checked
 			};
 		}
 
@@ -64,7 +61,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.HyperlinkEd
 			if (templateEditor != null)
 			{
 				textEditName.EditValue = templateEditor.Name;
-				ckBlueHyperlink.Checked = templateEditor.FormatAsBluelink;
+				checkEditBlueHyperlink.Checked = templateEditor.FormatAsBluelink;
+				checkEditBold.Checked = templateEditor.FormatBold;
 			}
 			if (templateEditor is HyperLinkInfo)
 			{
@@ -72,11 +70,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.HyperlinkEd
 			}
 			if (templateEditor is UrlLinkInfo)
 			{
-				ckForcePreview.Checked = ((UrlLinkInfo)templateEditor).ForcePreview;
+				checkEditForcePreview.Checked = ((UrlLinkInfo)templateEditor).ForcePreview;
 			}
 			if (templateEditor is YouTubeLinkInfo)
 			{
-				ckForcePreview.Checked = ((YouTubeLinkInfo)templateEditor).ForcePreview;
+				checkEditForcePreview.Checked = ((UrlLinkInfo)templateEditor).ForcePreview;
 			}
 		}
 	}

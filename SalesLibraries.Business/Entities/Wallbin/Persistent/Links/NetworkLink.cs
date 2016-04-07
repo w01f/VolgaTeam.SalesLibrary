@@ -51,8 +51,12 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 			link.Folder = parentFolder;
 			if (linkInfo.FormatAsBluelink)
 			{
-				((LibraryObjectLinkSettings)link.Settings).RegularFontStyle = FontStyle.Underline | FontStyle.Bold;
+				((LibraryObjectLinkSettings)link.Settings).RegularFontStyle = ((LibraryObjectLinkSettings)link.Settings).RegularFontStyle | FontStyle.Underline;
 				link.Settings.ForeColor = Color.Blue;
+			}
+			if (linkInfo.FormatBold)
+			{
+				((LibraryObjectLinkSettings)link.Settings).RegularFontStyle = ((LibraryObjectLinkSettings)link.Settings).RegularFontStyle | FontStyle.Bold;
 			}
 			return link;
 		}

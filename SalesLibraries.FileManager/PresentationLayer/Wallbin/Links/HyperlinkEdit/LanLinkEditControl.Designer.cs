@@ -31,14 +31,17 @@
 			this.components = new System.ComponentModel.Container();
 			this.labelControllTitle = new DevExpress.XtraEditors.LabelControl();
 			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
-			this.ckBlueHyperlink = new System.Windows.Forms.CheckBox();
 			this.laPath = new System.Windows.Forms.Label();
 			this.laName = new System.Windows.Forms.Label();
 			this.textEditPath = new DevExpress.XtraEditors.TextEdit();
 			this.textEditName = new DevExpress.XtraEditors.TextEdit();
+			this.checkEditBold = new DevExpress.XtraEditors.CheckEdit();
+			this.checkEditBlueHyperlink = new DevExpress.XtraEditors.CheckEdit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditPath.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditName.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditBold.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditBlueHyperlink.Properties)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// labelControllTitle
@@ -70,21 +73,6 @@
 			this.styleController.AppearanceFocused.Options.UseFont = true;
 			this.styleController.AppearanceReadOnly.Font = new System.Drawing.Font("Arial", 9.75F);
 			this.styleController.AppearanceReadOnly.Options.UseFont = true;
-			// 
-			// ckBlueHyperlink
-			// 
-			this.ckBlueHyperlink.AutoSize = true;
-			this.ckBlueHyperlink.BackColor = System.Drawing.Color.White;
-			this.ckBlueHyperlink.Checked = true;
-			this.ckBlueHyperlink.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.ckBlueHyperlink.Font = new System.Drawing.Font("Arial", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.ckBlueHyperlink.ForeColor = System.Drawing.Color.Black;
-			this.ckBlueHyperlink.Location = new System.Drawing.Point(14, 176);
-			this.ckBlueHyperlink.Name = "ckBlueHyperlink";
-			this.ckBlueHyperlink.Size = new System.Drawing.Size(120, 20);
-			this.ckBlueHyperlink.TabIndex = 3;
-			this.ckBlueHyperlink.Text = "Blue Hyperlink";
-			this.ckBlueHyperlink.UseVisualStyleBackColor = false;
 			// 
 			// laPath
 			// 
@@ -136,22 +124,46 @@
 			this.textEditName.StyleController = this.styleController;
 			this.textEditName.TabIndex = 0;
 			// 
+			// checkEditBold
+			// 
+			this.checkEditBold.Location = new System.Drawing.Point(158, 175);
+			this.checkEditBold.Name = "checkEditBold";
+			this.checkEditBold.Properties.AllowHtmlDraw = DevExpress.Utils.DefaultBoolean.True;
+			this.checkEditBold.Properties.Caption = "<b>BOLD</b>";
+			this.checkEditBold.Size = new System.Drawing.Size(87, 20);
+			this.checkEditBold.StyleController = this.styleController;
+			this.checkEditBold.TabIndex = 44;
+			// 
+			// checkEditBlueHyperlink
+			// 
+			this.checkEditBlueHyperlink.EditValue = true;
+			this.checkEditBlueHyperlink.Location = new System.Drawing.Point(14, 175);
+			this.checkEditBlueHyperlink.Name = "checkEditBlueHyperlink";
+			this.checkEditBlueHyperlink.Properties.AllowHtmlDraw = DevExpress.Utils.DefaultBoolean.True;
+			this.checkEditBlueHyperlink.Properties.Caption = "<color=blue><u>Blue Hyperlink</u></color>";
+			this.checkEditBlueHyperlink.Size = new System.Drawing.Size(118, 20);
+			this.checkEditBlueHyperlink.StyleController = this.styleController;
+			this.checkEditBlueHyperlink.TabIndex = 43;
+			// 
 			// LanLinkEditControl
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
 			this.BackColor = System.Drawing.Color.White;
+			this.Controls.Add(this.checkEditBold);
 			this.Controls.Add(this.textEditName);
 			this.Controls.Add(this.labelControllTitle);
-			this.Controls.Add(this.ckBlueHyperlink);
 			this.Controls.Add(this.laPath);
 			this.Controls.Add(this.laName);
 			this.Controls.Add(this.textEditPath);
+			this.Controls.Add(this.checkEditBlueHyperlink);
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.Name = "LanLinkEditControl";
 			this.Size = new System.Drawing.Size(350, 280);
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditPath.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditName.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditBold.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditBlueHyperlink.Properties)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -161,10 +173,11 @@
 
 		private DevExpress.XtraEditors.LabelControl labelControllTitle;
 		private DevExpress.XtraEditors.StyleController styleController;
-		public System.Windows.Forms.CheckBox ckBlueHyperlink;
 		private System.Windows.Forms.Label laPath;
 		private System.Windows.Forms.Label laName;
 		private DevExpress.XtraEditors.TextEdit textEditPath;
 		private DevExpress.XtraEditors.TextEdit textEditName;
+		private DevExpress.XtraEditors.CheckEdit checkEditBold;
+		private DevExpress.XtraEditors.CheckEdit checkEditBlueHyperlink;
 	}
 }

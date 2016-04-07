@@ -31,15 +31,19 @@
 			this.components = new System.ComponentModel.Container();
 			this.labelControllTitle = new DevExpress.XtraEditors.LabelControl();
 			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
-			this.ckBlueHyperlink = new System.Windows.Forms.CheckBox();
-			this.ckForcePreview = new System.Windows.Forms.CheckBox();
 			this.laPath = new System.Windows.Forms.Label();
 			this.laName = new System.Windows.Forms.Label();
 			this.textEditPath = new DevExpress.XtraEditors.TextEdit();
 			this.textEditName = new DevExpress.XtraEditors.TextEdit();
+			this.checkEditBold = new DevExpress.XtraEditors.CheckEdit();
+			this.checkEditForcePreview = new DevExpress.XtraEditors.CheckEdit();
+			this.checkEditBlueHyperlink = new DevExpress.XtraEditors.CheckEdit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditPath.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditName.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditBold.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditForcePreview.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditBlueHyperlink.Properties)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// labelControllTitle
@@ -71,36 +75,6 @@
 			this.styleController.AppearanceFocused.Options.UseFont = true;
 			this.styleController.AppearanceReadOnly.Font = new System.Drawing.Font("Arial", 9.75F);
 			this.styleController.AppearanceReadOnly.Options.UseFont = true;
-			// 
-			// ckBlueHyperlink
-			// 
-			this.ckBlueHyperlink.AutoSize = true;
-			this.ckBlueHyperlink.BackColor = System.Drawing.Color.White;
-			this.ckBlueHyperlink.Checked = true;
-			this.ckBlueHyperlink.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.ckBlueHyperlink.Font = new System.Drawing.Font("Arial", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.ckBlueHyperlink.ForeColor = System.Drawing.Color.Black;
-			this.ckBlueHyperlink.Location = new System.Drawing.Point(14, 215);
-			this.ckBlueHyperlink.Name = "ckBlueHyperlink";
-			this.ckBlueHyperlink.Size = new System.Drawing.Size(120, 20);
-			this.ckBlueHyperlink.TabIndex = 3;
-			this.ckBlueHyperlink.Text = "Blue Hyperlink";
-			this.ckBlueHyperlink.UseVisualStyleBackColor = false;
-			// 
-			// ckForcePreview
-			// 
-			this.ckForcePreview.AutoSize = true;
-			this.ckForcePreview.BackColor = System.Drawing.Color.White;
-			this.ckForcePreview.Checked = true;
-			this.ckForcePreview.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.ckForcePreview.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.ckForcePreview.ForeColor = System.Drawing.Color.Black;
-			this.ckForcePreview.Location = new System.Drawing.Point(14, 176);
-			this.ckForcePreview.Name = "ckForcePreview";
-			this.ckForcePreview.Size = new System.Drawing.Size(298, 20);
-			this.ckForcePreview.TabIndex = 2;
-			this.ckForcePreview.Text = "Immediately Launch this link when clicked";
-			this.ckForcePreview.UseVisualStyleBackColor = false;
 			// 
 			// laPath
 			// 
@@ -152,23 +126,59 @@
 			this.textEditName.StyleController = this.styleController;
 			this.textEditName.TabIndex = 0;
 			// 
+			// checkEditBold
+			// 
+			this.checkEditBold.Location = new System.Drawing.Point(158, 214);
+			this.checkEditBold.Name = "checkEditBold";
+			this.checkEditBold.Properties.AllowHtmlDraw = DevExpress.Utils.DefaultBoolean.True;
+			this.checkEditBold.Properties.Caption = "<b>BOLD</b>";
+			this.checkEditBold.Size = new System.Drawing.Size(87, 20);
+			this.checkEditBold.StyleController = this.styleController;
+			this.checkEditBold.TabIndex = 42;
+			// 
+			// checkEditForcePreview
+			// 
+			this.checkEditForcePreview.EditValue = true;
+			this.checkEditForcePreview.Location = new System.Drawing.Point(14, 175);
+			this.checkEditForcePreview.Name = "checkEditForcePreview";
+			this.checkEditForcePreview.Properties.AllowHtmlDraw = DevExpress.Utils.DefaultBoolean.True;
+			this.checkEditForcePreview.Properties.Caption = "<b>Immediately Launch this URL when clicked</b>";
+			this.checkEditForcePreview.Size = new System.Drawing.Size(326, 20);
+			this.checkEditForcePreview.StyleController = this.styleController;
+			this.checkEditForcePreview.TabIndex = 41;
+			// 
+			// checkEditBlueHyperlink
+			// 
+			this.checkEditBlueHyperlink.EditValue = true;
+			this.checkEditBlueHyperlink.Location = new System.Drawing.Point(14, 214);
+			this.checkEditBlueHyperlink.Name = "checkEditBlueHyperlink";
+			this.checkEditBlueHyperlink.Properties.AllowHtmlDraw = DevExpress.Utils.DefaultBoolean.True;
+			this.checkEditBlueHyperlink.Properties.Caption = "<color=blue><u>Blue Hyperlink</u></color>";
+			this.checkEditBlueHyperlink.Size = new System.Drawing.Size(118, 20);
+			this.checkEditBlueHyperlink.StyleController = this.styleController;
+			this.checkEditBlueHyperlink.TabIndex = 40;
+			// 
 			// YouTubeEditControl
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
 			this.BackColor = System.Drawing.Color.White;
+			this.Controls.Add(this.checkEditBold);
 			this.Controls.Add(this.textEditName);
 			this.Controls.Add(this.labelControllTitle);
-			this.Controls.Add(this.ckBlueHyperlink);
-			this.Controls.Add(this.ckForcePreview);
 			this.Controls.Add(this.laPath);
 			this.Controls.Add(this.laName);
 			this.Controls.Add(this.textEditPath);
+			this.Controls.Add(this.checkEditForcePreview);
+			this.Controls.Add(this.checkEditBlueHyperlink);
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.Name = "YouTubeEditControl";
 			this.Size = new System.Drawing.Size(350, 280);
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditPath.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditName.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditBold.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditForcePreview.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditBlueHyperlink.Properties)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -178,11 +188,12 @@
 
 		private DevExpress.XtraEditors.LabelControl labelControllTitle;
 		private DevExpress.XtraEditors.StyleController styleController;
-		public System.Windows.Forms.CheckBox ckBlueHyperlink;
-		public System.Windows.Forms.CheckBox ckForcePreview;
 		private System.Windows.Forms.Label laPath;
 		private System.Windows.Forms.Label laName;
 		private DevExpress.XtraEditors.TextEdit textEditPath;
 		private DevExpress.XtraEditors.TextEdit textEditName;
+		private DevExpress.XtraEditors.CheckEdit checkEditBold;
+		private DevExpress.XtraEditors.CheckEdit checkEditForcePreview;
+		private DevExpress.XtraEditors.CheckEdit checkEditBlueHyperlink;
 	}
 }

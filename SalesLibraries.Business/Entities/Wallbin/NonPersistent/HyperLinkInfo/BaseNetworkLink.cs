@@ -4,5 +4,6 @@
 	{
 		public string Name { get; set; }
 		public bool FormatAsBluelink { get; set; }
+		public bool FormatBold { get; set; }
 	}
 }

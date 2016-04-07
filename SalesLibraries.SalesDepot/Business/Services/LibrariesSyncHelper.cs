@@ -14,7 +14,10 @@ namespace SalesLibraries.SalesDepot.Business.Services
 				if (!Directory.Exists(sourcePath)) continue;
 				if (!Directory.Exists(destinationPath)) continue;
 
-				foreach (var sourceLibraryPath in Directory.GetDirectories(sourcePath))
+				var sourcePathCollection = new List<string>();
+				sourcePathCollection.AddRange(Directory.GetDirectories(sourcePath));
+
+				foreach (var sourceLibraryPath in sourcePathCollection)
 				{
 					var legacyLibraryPath = Path.Combine(sourceLibraryPath, Constants.OldPrimaryFileStorageName);
 					var sourceLibraryCachePath = Directory.Exists(legacyLibraryPath) ? legacyLibraryPath : sourceLibraryPath;
@@ -45,6 +48,7 @@ namespace SalesLibraries.SalesDepot.Business.Services
 							);
 						syncHelper.SynchronizeFolder(syncOptions);
 					}
+					break;
 				}
 				break;
 			}
