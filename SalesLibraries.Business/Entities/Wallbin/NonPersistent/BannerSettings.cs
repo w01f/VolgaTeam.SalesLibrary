@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Drawing;
+using Newtonsoft.Json;
 using SalesLibraries.Business.Entities.Common;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
+using SalesLibraries.Common.Extensions;
 
 namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 {
@@ -18,6 +20,18 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 				_enable = value;
 			}
 		}
+		
+		private bool _inverted;
+		public bool Inverted
+		{
+			get { return _inverted; }
+			set
+			{
+				if (_inverted != value)
+					OnSettingsChanged();
+				_inverted = value;
+			}
+		}
 
 		private Image _image;
 		public Image Image
@@ -28,6 +42,22 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 				if (_image != value)
 					OnSettingsChanged();
 				_image = value;
+			}
+		}
+
+		private Image _invertedImage;
+		[JsonIgnore]
+		public Image DisplayedImage
+		{
+			get
+			{
+				if (Inverted)
+				{
+					if (_invertedImage == null)
+						_invertedImage = ((Image)Image?.Clone()).Invert();
+					return _invertedImage;
+				}
+				return Image;
 			}
 		}
 

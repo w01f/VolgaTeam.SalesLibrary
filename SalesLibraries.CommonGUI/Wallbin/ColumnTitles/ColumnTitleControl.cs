@@ -40,21 +40,21 @@ namespace SalesLibraries.CommonGUI.Wallbin.ColumnTitles
 						break;
 				}
 				pbLogo.Dock = DockStyle.Left;
-				if (Data.Banner.Enable && Data.Banner.Image != null)
+				if (Data.Banner.Enable && Data.Banner.DisplayedImage != null)
 				{
 					pbLogo.Visible = true;
-					pbLogo.Image = Data.Banner.Image;
-					pbLogo.Width = Data.Banner.Image.Width;
+					pbLogo.Image = Data.Banner.DisplayedImage;
+					pbLogo.Width = Data.Banner.DisplayedImage.Width;
 				}
-				else if (Data.Widget.Enabled && Data.Widget.Image != null)
+				else if (Data.Widget.Enabled && Data.Widget.DisplayedImage != null)
 				{
 					pbLogo.Visible = false;
-					labelControlText.Appearance.Image = Data.Widget.Image;
+					labelControlText.Appearance.Image = Data.Widget.DisplayedImage;
 				}
 				else
 					pbLogo.Visible = false;
 			}
-			else if (Data.Banner.Enable && Data.Banner.Image != null)
+			else if (Data.Banner.Enable && Data.Banner.DisplayedImage != null)
 			{
 				labelControlText.Visible = false;
 				pbLogo.Visible = true;
@@ -70,10 +70,10 @@ namespace SalesLibraries.CommonGUI.Wallbin.ColumnTitles
 						pbLogo.Dock = DockStyle.Right;
 						break;
 				}
-				pbLogo.Image = Data.Banner.Image;
-				pbLogo.Width = Data.Banner.Image.Width;
+				pbLogo.Image = Data.Banner.DisplayedImage;
+				pbLogo.Width = Data.Banner.DisplayedImage.Width;
 			}
-			else if (Data.Widget.Enabled && Data.Widget.Image != null)
+			else if (Data.Widget.Enabled && Data.Widget.DisplayedImage != null)
 			{
 				labelControlText.Visible = false;
 				pbLogo.Visible = true;
@@ -89,8 +89,8 @@ namespace SalesLibraries.CommonGUI.Wallbin.ColumnTitles
 						pbLogo.Dock = DockStyle.Right;
 						break;
 				}
-				pbLogo.Image = Data.Widget.Image;
-				pbLogo.Width = Data.Widget.Image.Width;
+				pbLogo.Image = Data.Widget.DisplayedImage;
+				pbLogo.Width = Data.Widget.DisplayedImage.Width;
 			}
 		}
 
@@ -103,15 +103,15 @@ namespace SalesLibraries.CommonGUI.Wallbin.ColumnTitles
 					textHeight = (int)g.MeasureString(Data.Settings.Text, 
 						Data.Settings.HeaderFont, 
 						new Size(
-							labelControlText.Width - (Data.Widget.Enabled && Data.Widget != null ? Data.Widget.Image.Width : 0), 
+							labelControlText.Width - (Data.Widget.Enabled && Data.Widget != null ? Data.Widget.DisplayedImage.Width : 0), 
 							Int32.MaxValue)
 						)
 					.Height;
 
-			if (Data.Banner.Enable && Data.Banner.Image != null)
-				imageHeight = Data.Banner.Image.Height;
+			if (Data.Banner.Enable && Data.Banner.DisplayedImage != null)
+				imageHeight = Data.Banner.DisplayedImage.Height;
 			else if (Data.Widget.Enabled && Data.Widget.Image != null)
-				imageHeight = Data.Widget.Image.Height;
+				imageHeight = Data.Widget.DisplayedImage.Height;
 
 			return textHeight > imageHeight ? textHeight : imageHeight;
 		}

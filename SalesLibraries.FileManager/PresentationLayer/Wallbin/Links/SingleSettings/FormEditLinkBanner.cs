@@ -7,7 +7,6 @@ using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraTab;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
-using SalesLibraries.Common.Extensions;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.FileManager.Controllers;
 using SalesLibraries.FileManager.PresentationLayer.Wallbin.Common;
@@ -19,16 +18,10 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 	{
 		private readonly BaseLibraryLink _sourceLink;
 
-		public LinkSettingsType[] EditableSettings
+		public LinkSettingsType[] EditableSettings => new[]
 		{
-			get
-			{
-				return new[]
-				{
-					LinkSettingsType.Banner,
-				};
-			}
-		}
+			LinkSettingsType.Banner,
+		};
 
 		public bool IsForEmbedded
 		{
@@ -94,6 +87,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 			checkBoxEnableBanner.Enabled = MainController.Instance.Lists.Banners.MainFolder.ExistsLocal();
 			checkBoxEnableBanner.Checked = _sourceLink.Banner.Enable && MainController.Instance.Lists.Banners.MainFolder.ExistsLocal();
+			checkEditInvert.Checked = _sourceLink.Banner.Inverted;
 			pbSelectedBanner.Image = _sourceLink.Banner.Enable ? _sourceLink.Banner.Image : null;
 			switch (_sourceLink.Banner.ImageAlignement)
 			{
@@ -124,21 +118,14 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			memoEditBannerText.Properties.AppearanceFocused.Font = _sourceLink.Banner.Font;
 			memoEditBannerText.Properties.AppearanceReadOnly.Font = _sourceLink.Banner.Font;
 			memoEditBannerText.ForeColor = _sourceLink.Banner.ForeColor;
+			memoEditBannerText.BackColor = _sourceLink.BannerBackColor;
 		}
 
 		private void SaveData()
 		{
 			_sourceLink.Banner.Enable = checkBoxEnableBanner.Checked;
-			_sourceLink.Widget.WidgetType = !_sourceLink.Banner.Enable ? _sourceLink.Widget.WidgetType : _sourceLink.Widget.DefaultWidgetType;
-			if (pbSelectedBanner.Image != null)
-			{
-				var image = (Image) pbSelectedBanner.Image.Clone();
-				_sourceLink.Banner.Image = checkEditInvert.Checked
-					? image.Invert()
-					: image;
-			}
-			else
-				_sourceLink.Banner.Image = null;
+			_sourceLink.Banner.Inverted = checkEditInvert.Checked;
+			_sourceLink.Banner.Image = pbSelectedBanner.Image;
 			if (rbBannerAligmentLeft.Checked)
 				_sourceLink.Banner.ImageAlignement = Alignment.Left;
 			else if (rbBannerAligmentCenter.Checked)

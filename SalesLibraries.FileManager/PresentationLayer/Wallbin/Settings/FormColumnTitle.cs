@@ -135,7 +135,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			{
 				Cursor = Cursors.WaitCursor;
 				Application.DoEvents();
-				_bannerControl = new BannerSettingsControl(_columnTitle.Banner);
+				_bannerControl = new BannerSettingsControl(_columnTitle);
 				xtraTabPageBanner.Controls.Add(_bannerControl);
 				_bannerControl.Dock = DockStyle.Fill;
 				_bannerControl.LoadData();

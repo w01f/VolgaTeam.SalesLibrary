@@ -35,7 +35,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 					case WidgetType.AutoWidget:
 						return AutoWidget;
 					case WidgetType.CustomWidget:
-						return _image;
+						return base.Image;
 					default:
 						return null;
 				}
@@ -63,7 +63,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 				return ParentFileLink.ParentLibrary.Settings.AutoWidgets
 						.Where(autoWidget =>
 							String.Compare(autoWidget.Extension, ParentFileLink.Extension.Replace(".", String.Empty), StringComparison.OrdinalIgnoreCase) == 0)
-						.Select(a => a.Widget).FirstOrDefault();
+						.Select(a => a.DisplayedImage).FirstOrDefault();
 			}
 		}
 	}

@@ -9,7 +9,7 @@ using SalesLibraries.Business.Entities.Wallbin.NonPersistent;
 
 namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 {
-	public class ColumnTitle : WallbinCollectionEntity
+	public class ColumnTitle : WallbinCollectionEntity, IBannerSettingsHolder
 	{
 		#region Persistent Properties
 		private int _columnOrder;
@@ -68,6 +68,9 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 			get { return _banner ?? (_banner = SettingsContainer.CreateInstance<BannerSettings>(this, BannerEncoded)); }
 			set { _banner = value; }
 		}
+
+		[NotMapped, JsonIgnore]
+		public Color BannerBackColor => Settings.BackgroundColor;
 		#endregion
 
 		public override void BeforeSave()

@@ -55,8 +55,8 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 		{
 			#region Image
 			Image = null;
-			if (Link.Banner.Enable && Link.Banner.Image != null)
-				Image = Link.Banner.Image;
+			if (Link.Banner.Enable && Link.Banner.DisplayedImage != null)
+				Image = Link.Banner.DisplayedImage;
 			else if (FormatState.ShowCategoryTags && Link.Tags.HasCategories)
 				Image = Properties.Resources.TagsWidgetCategories;
 			else if (FormatState.ShowSuperFilterTags && Link.Tags.HasSuperFilters)
@@ -79,7 +79,7 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 			}
 
 			if (Image == null && !Link.Widget.Disabled)
-				Image = Link.Widget.Image;
+				Image = Link.Widget.DisplayedImage;
 			#endregion
 
 			#region Image Size and Coordinates
@@ -87,7 +87,7 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 			int imageTop;
 			int imageWidth;
 			int imageHeight;
-			if (Link.Banner.Enable && Link.Banner.Image != null)
+			if (Link.Banner.Enable && Link.Banner.DisplayedImage != null)
 			{
 				if (Link.Banner.ShowText)
 				{
@@ -101,12 +101,12 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 							imageLeft = 0;
 							break;
 						case Alignment.Center:
-							imageLeft = (_parent.DataGridView.Width - Link.Banner.Image.Width) / 2;
+							imageLeft = (_parent.DataGridView.Width - Link.Banner.DisplayedImage.Width) / 2;
 							if (imageLeft < 0)
 								imageLeft = 0;
 							break;
 						case Alignment.Right:
-							imageLeft = _parent.DataGridView.Width - Link.Banner.Image.Width;
+							imageLeft = _parent.DataGridView.Width - Link.Banner.DisplayedImage.Width;
 							if (imageLeft < 0)
 								imageLeft = 0;
 							break;
@@ -115,8 +115,8 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 							break;
 					}
 				}
-				imageWidth = Link.Banner.Image.Width > DefaultImageWidth ? Link.Banner.Image.Width : DefaultImageWidth;
-				imageHeight = Link.Banner.Image.Height > DefaultImageHeight ? Link.Banner.Image.Height : DefaultImageHeight;
+				imageWidth = Link.Banner.DisplayedImage.Width > DefaultImageWidth ? Link.Banner.DisplayedImage.Width : DefaultImageWidth;
+				imageHeight = Link.Banner.DisplayedImage.Height > DefaultImageHeight ? Link.Banner.DisplayedImage.Height : DefaultImageHeight;
 			}
 			else if ((FormatState.ShowCategoryTags ||
 					FormatState.ShowKeywordTags ||
@@ -130,11 +130,11 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 				imageWidth = DefaultImageWidth;
 				imageHeight = DefaultImageHeight;
 			}
-			else if (!Link.Widget.Disabled && Link.Widget.Image != null)
+			else if (!Link.Widget.Disabled && Link.Widget.DisplayedImage != null)
 			{
 				imageLeft = 0;
-				imageWidth = Link.Widget.Image.Width > DefaultImageWidth ? Link.Widget.Image.Width : DefaultImageWidth;
-				imageHeight = Link.Widget.Image.Height > DefaultImageHeight ? Link.Widget.Image.Height : DefaultImageHeight;
+				imageWidth = Link.Widget.DisplayedImage.Width > DefaultImageWidth ? Link.Widget.DisplayedImage.Width : DefaultImageWidth;
+				imageHeight = Link.Widget.DisplayedImage.Height > DefaultImageHeight ? Link.Widget.DisplayedImage.Height : DefaultImageHeight;
 			}
 			else
 			{

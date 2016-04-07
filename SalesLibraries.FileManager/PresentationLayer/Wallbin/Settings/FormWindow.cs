@@ -175,7 +175,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			SaveData();
 		}
 
-		private void OnSelectedPageChanging(object sender, DevExpress.XtraTab.TabPageChangingEventArgs pageArgs)
+		private void OnSelectedPageChanging(object sender, TabPageChangingEventArgs pageArgs)
 		{
 			if (pageArgs.Page == xtraTabPageWidget && _widgetControl == null)
 			{
@@ -203,7 +203,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			{
 				Cursor = Cursors.WaitCursor;
 				Application.DoEvents();
-				_bannerControl = new BannerSettingsControl(_folder.Banner);
+				_bannerControl = new BannerSettingsControl(_folder);
 				_bannerControl.Dock = DockStyle.Fill;
 				pnBannerContainer.Controls.Add(_bannerControl);
 				_bannerControl.LoadData();

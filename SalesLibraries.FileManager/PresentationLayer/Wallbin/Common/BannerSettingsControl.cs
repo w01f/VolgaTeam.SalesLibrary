@@ -7,8 +7,7 @@ using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraEditors.Filtering;
 using DevExpress.XtraTab;
-using SalesLibraries.Business.Entities.Wallbin.NonPersistent;
-using SalesLibraries.Common.Extensions;
+using SalesLibraries.Business.Entities.Interfaces;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.FileManager.Controllers;
 using Alignment = SalesLibraries.Business.Entities.Wallbin.Common.Enums.Alignment;
@@ -19,14 +18,14 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Common
 	public partial class BannerSettingsControl : UserControl
 	{
 		private bool _loading;
-		private readonly BannerSettings _data;
+		private readonly IBannerSettingsHolder _bannerHolder;
 
 		public event EventHandler<CheckedChangedEventArgs> StateChanged;
 		public event EventHandler<EventArgs> DoubleClicked;
 
-		public BannerSettingsControl(BannerSettings data)
+		public BannerSettingsControl(IBannerSettingsHolder bannerHolder)
 		{
-			_data = data;
+			_bannerHolder = bannerHolder;
 			InitializeComponent();
 			if (CreateGraphics().DpiX > 96)
 			{
@@ -75,9 +74,10 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Common
 			((BaseLinkImagesContainer)xtraTabControlBanners.SelectedTabPage).Init();
 
 			checkBoxEnableBanner.Enabled = MainController.Instance.Lists.Banners.MainFolder.ExistsLocal();
-			checkBoxEnableBanner.Checked = _data.Enable && MainController.Instance.Lists.Banners.MainFolder.ExistsLocal();
-			pbSelectedBanner.Image = _data.Enable ? _data.Image : null;
-			switch (_data.ImageAlignement)
+			checkBoxEnableBanner.Checked = _bannerHolder.Banner.Enable && MainController.Instance.Lists.Banners.MainFolder.ExistsLocal();
+			checkEditInvert.Checked = _bannerHolder.Banner.Inverted;
+			pbSelectedBanner.Image = _bannerHolder.Banner.Enable ? _bannerHolder.Banner.Image : null;
+			switch (_bannerHolder.Banner.ImageAlignement)
 			{
 				case Alignment.Left:
 					rbBannerAligmentLeft.Checked = true;
@@ -95,42 +95,36 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Common
 					rbBannerAligmentRight.Checked = true;
 					break;
 			}
-			checkBoxBannerShowText.Checked = _data.ImageAlignement == Alignment.Left && _data.ShowText;
-			buttonEditBannerTextFont.Tag = _data.Font;
-			buttonEditBannerTextFont.EditValue = Utils.FontToString(_data.Font);
-			colorEditBannerTextColor.Color = _data.ForeColor;
-			memoEditBannerText.EditValue = !String.IsNullOrEmpty(_data.Text)?_data.Text: null;
-			memoEditBannerText.Font = _data.Font;
-			memoEditBannerText.Properties.Appearance.Font = _data.Font;
-			memoEditBannerText.Properties.AppearanceDisabled.Font = _data.Font;
-			memoEditBannerText.Properties.AppearanceFocused.Font = _data.Font;
-			memoEditBannerText.Properties.AppearanceReadOnly.Font = _data.Font;
-			memoEditBannerText.ForeColor = _data.ForeColor;
+			checkBoxBannerShowText.Checked = _bannerHolder.Banner.ImageAlignement == Alignment.Left && _bannerHolder.Banner.ShowText;
+			buttonEditBannerTextFont.Tag = _bannerHolder.Banner.Font;
+			buttonEditBannerTextFont.EditValue = Utils.FontToString(_bannerHolder.Banner.Font);
+			colorEditBannerTextColor.Color = _bannerHolder.Banner.ForeColor;
+			memoEditBannerText.EditValue = !String.IsNullOrEmpty(_bannerHolder.Banner.Text)?_bannerHolder.Banner.Text: null;
+			memoEditBannerText.Font = _bannerHolder.Banner.Font;
+			memoEditBannerText.Properties.Appearance.Font = _bannerHolder.Banner.Font;
+			memoEditBannerText.Properties.AppearanceDisabled.Font = _bannerHolder.Banner.Font;
+			memoEditBannerText.Properties.AppearanceFocused.Font = _bannerHolder.Banner.Font;
+			memoEditBannerText.Properties.AppearanceReadOnly.Font = _bannerHolder.Banner.Font;
+			memoEditBannerText.ForeColor = _bannerHolder.Banner.ForeColor;
+			memoEditBannerText.BackColor = _bannerHolder.BannerBackColor;
 			_loading = false;
 		}
 
 		public void SaveData()
 		{
-			_data.Enable = checkBoxEnableBanner.Checked;
-			if (pbSelectedBanner.Image != null)
-			{
-				var image = (Image) pbSelectedBanner.Image.Clone();
-				_data.Image = checkEditInvert.Checked
-					? image.Invert()
-					: image;
-			}
-			else
-				_data.Image = null;
+			_bannerHolder.Banner.Enable = checkBoxEnableBanner.Checked;
+			_bannerHolder.Banner.Inverted = checkEditInvert.Checked;
+			_bannerHolder.Banner.Image = pbSelectedBanner.Image;
 			if (rbBannerAligmentLeft.Checked)
-				_data.ImageAlignement = Alignment.Left;
+				_bannerHolder.Banner.ImageAlignement = Alignment.Left;
 			else if (rbBannerAligmentCenter.Checked)
-				_data.ImageAlignement = Alignment.Center;
+				_bannerHolder.Banner.ImageAlignement = Alignment.Center;
 			else if (rbBannerAligmentRight.Checked)
-				_data.ImageAlignement = Alignment.Right;
-			_data.ShowText = _data.ImageAlignement == Alignment.Left && checkBoxBannerShowText.Checked;
-			_data.Text = _data.ShowText ? memoEditBannerText.EditValue as String : null;
-			_data.Font = buttonEditBannerTextFont.Tag as Font;
-			_data.ForeColor = colorEditBannerTextColor.Color;
+				_bannerHolder.Banner.ImageAlignement = Alignment.Right;
+			_bannerHolder.Banner.ShowText = _bannerHolder.Banner.ImageAlignement == Alignment.Left && checkBoxBannerShowText.Checked;
+			_bannerHolder.Banner.Text = _bannerHolder.Banner.ShowText ? memoEditBannerText.EditValue as String : null;
+			_bannerHolder.Banner.Font = buttonEditBannerTextFont.Tag as Font;
+			_bannerHolder.Banner.ForeColor = colorEditBannerTextColor.Color;
 		}
 
 		public void ChangeState(bool enable)

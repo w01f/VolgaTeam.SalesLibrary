@@ -15,7 +15,7 @@ using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings;
 
 namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 {
-	public abstract class BaseLibraryLink : WallbinCollectionEntity
+	public abstract class BaseLibraryLink : WallbinCollectionEntity, IBannerSettingsHolder
 	{
 		#region Persistent Properties
 		[Required]
@@ -203,6 +203,9 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 				return Folder.Settings.ForeWindowColor;
 			}
 		}
+
+		[NotMapped, JsonIgnore]
+		public Color BannerBackColor => Folder.Settings.BackgroundWindowColor;
 		#endregion
 
 		protected BaseLibraryLink()

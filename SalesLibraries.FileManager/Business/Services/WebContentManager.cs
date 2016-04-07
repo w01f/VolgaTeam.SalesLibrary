@@ -147,7 +147,7 @@ namespace SalesLibraries.FileManager.Business.Services
 			target.borderColor = source.Settings.BorderColor.ToHex();
 			target.headerAlignment = source.Settings.HeaderAlignment.ToString().ToLower();
 			target.enableWidget = source.Widget.Enabled;
-			target.widget = Convert.ToBase64String((byte[])imageConverter.ConvertTo(source.Widget.Image, typeof(byte[])));
+			target.widget = Convert.ToBase64String((byte[])imageConverter.ConvertTo(source.Widget.DisplayedImage, typeof(byte[])));
 			target.windowFont = new Font();
 			target.windowFont.ImportData(source.Settings.WindowFont);
 			target.headerFont = new Font();
@@ -191,7 +191,7 @@ namespace SalesLibraries.FileManager.Business.Services
 			target.order = source.Order;
 			target.type = (int)source.Type;
 			target.widgetType = (Int32)source.Widget.WidgetType;
-			target.widget = source.Widget.Enabled ? Convert.ToBase64String((byte[])imageConverter.ConvertTo(source.Widget.Image, typeof(byte[]))) : null;
+			target.widget = source.Widget.Enabled ? Convert.ToBase64String((byte[])imageConverter.ConvertTo(source.Widget.DisplayedImage, typeof(byte[]))) : null;
 
 			target.banner = new Banner();
 			target.banner.libraryId = source.ParentLibrary.ExtId.ToString();
@@ -286,7 +286,7 @@ namespace SalesLibraries.FileManager.Business.Services
 				target.isBold = (objectSource.RegularFontStyle & FontStyle.Bold) == FontStyle.Bold;
 				target.isItalic = (objectSource.RegularFontStyle & FontStyle.Italic) == FontStyle.Italic;
 				target.isUnderline = (objectSource.RegularFontStyle & FontStyle.Underline) == FontStyle.Underline;
-				target.foreColor = (source.ForeColor.HasValue ? source.ForeColor.Value : Color.Black).ToHex();
+				target.foreColor = source.ForeColor?.ToHex();
 				target.isSpecialFormat = objectSource.IsSpecialFormat;
 				if (objectSource.IsSpecialFormat)
 				{
@@ -345,7 +345,7 @@ namespace SalesLibraries.FileManager.Business.Services
 			target.showText = source.Settings.ShowText;
 			target.alignment = source.Settings.HeaderAlignment.ToString().ToLower();
 			target.enableWidget = source.Widget.Enabled;
-			target.widget = Convert.ToBase64String((byte[])imageConverter.ConvertTo(source.Widget.Image, typeof(byte[])));
+			target.widget = Convert.ToBase64String((byte[])imageConverter.ConvertTo(source.Widget.DisplayedImage, typeof(byte[])));
 			target.font = new Font();
 			target.font.name = source.Settings.HeaderFont.Name;
 			target.font.size = (int)Math.Round(source.Settings.HeaderFont.Size, 0);
@@ -426,7 +426,7 @@ namespace SalesLibraries.FileManager.Business.Services
 			var imageConverter = TypeDescriptor.GetConverter(typeof(Bitmap));
 			target.id = Guid.NewGuid().ToString();
 			target.isEnabled = source.Enable;
-			target.image = Convert.ToBase64String((byte[])imageConverter.ConvertTo(source.Image, typeof(byte[])));
+			target.image = Convert.ToBase64String((byte[])imageConverter.ConvertTo(source.DisplayedImage, typeof(byte[])));
 			target.showText = source.ShowText;
 			target.imageAlignment = source.ImageAlignement.ToString().ToLower();
 			target.text = source.Text;
@@ -442,7 +442,7 @@ namespace SalesLibraries.FileManager.Business.Services
 		{
 			var imageConverter = TypeDescriptor.GetConverter(typeof(Bitmap));
 			target.extension = source.Extension;
-			target.widget = Convert.ToBase64String((byte[])imageConverter.ConvertTo(source.Widget, typeof(byte[])));
+			target.widget = Convert.ToBase64String((byte[])imageConverter.ConvertTo(source.DisplayedImage, typeof(byte[])));
 		}
 
 		private static void ImportData(

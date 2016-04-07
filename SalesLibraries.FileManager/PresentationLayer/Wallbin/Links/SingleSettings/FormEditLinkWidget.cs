@@ -6,7 +6,6 @@ using DevComponents.DotNetBar.Metro;
 using DevExpress.XtraTab;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
-using SalesLibraries.Common.Extensions;
 using SalesLibraries.FileManager.Controllers;
 using SalesLibraries.FileManager.PresentationLayer.Wallbin.Common;
 
@@ -16,16 +15,10 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 	{
 		private readonly BaseLibraryLink _sourceLink;
 
-		public LinkSettingsType[] EditableSettings
+		public LinkSettingsType[] EditableSettings => new[]
 		{
-			get
-			{
-				return new[]
-				{
-					LinkSettingsType.Widget,
-				};
-			}
-		}
+			LinkSettingsType.Widget,
+		};
 
 		public bool IsForEmbedded
 		{
@@ -107,6 +100,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 				pnAutoWidget.Visible = false;
 			}
 
+			checkEditInvert.Checked = _sourceLink.Widget.Inverted;
 			pbCustomWidget.Image = _sourceLink.Widget.WidgetType == WidgetType.CustomWidget ? _sourceLink.Widget.Image : null;
 			switch (_sourceLink.Widget.WidgetType)
 			{
@@ -138,15 +132,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			else if (radioButtonWidgetTypeCustom.Checked)
 			{
 				_sourceLink.Widget.WidgetType = WidgetType.CustomWidget;
-				if (pbCustomWidget.Image != null)
-				{
-					var image = (Image) pbCustomWidget.Image.Clone();
-					_sourceLink.Widget.Image = checkEditInvert.Checked
-						? image.Invert()
-						: image;
-				}
-				else
-					_sourceLink.Widget.Image = null;
+				_sourceLink.Widget.Inverted = checkEditInvert.Checked;
+				_sourceLink.Widget.Image = pbCustomWidget.Image;
 			}
 			else if (radioButtonWidgetTypeDisabled.Checked)
 			{

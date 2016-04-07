@@ -16,7 +16,7 @@ using SalesLibraries.Common.Helpers;
 
 namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 {
-	public class LibraryFolder : WallbinCollectionEntity
+	public class LibraryFolder : WallbinCollectionEntity, IBannerSettingsHolder
 	{
 		#region Persistent Properties
 		private string _name;
@@ -118,6 +118,9 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 		{
 			get { return Links.Any(l => !l.Widget.Disabled && l.Widget.Image != null); }
 		}
+
+		[NotMapped, JsonIgnore]
+		public Color BannerBackColor => Settings.BackgroundHeaderColor;
 		#endregion
 
 		public LibraryFolder()

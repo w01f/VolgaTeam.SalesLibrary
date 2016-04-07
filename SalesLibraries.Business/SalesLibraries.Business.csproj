@@ -86,6 +86,7 @@
     <Compile Include="Entities\Helpers\FileFormatHelper.cs" />
     <Compile Include="Entities\Helpers\OrderedCollectionHelper.cs" />
     <Compile Include="Entities\IDbEntity.cs" />
+    <Compile Include="Entities\Interfaces\IBannerSettingsHolder.cs" />
     <Compile Include="Entities\Interfaces\IDataSource.cs" />
     <Compile Include="Entities\Interfaces\IPreviewGenerator.cs" />
     <Compile Include="Entities\Interfaces\ITableItem.cs" />

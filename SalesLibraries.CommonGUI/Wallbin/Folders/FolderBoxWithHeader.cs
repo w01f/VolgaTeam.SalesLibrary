@@ -27,10 +27,10 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 			pbImage.BackColor = DataSource.Settings.BackgroundHeaderColor;
 			labelControlText.BackColor = DataSource.Settings.BackgroundHeaderColor;
 
-			if (DataSource.Banner.Enable && DataSource.Banner.Image != null)
+			if (DataSource.Banner.Enable && DataSource.Banner.DisplayedImage != null)
 			{
 				pbImage.Visible = true;
-				pbImage.Image = DataSource.Banner.Image;
+				pbImage.Image = DataSource.Banner.DisplayedImage;
 				if (DataSource.Banner.ShowText && !String.IsNullOrEmpty(DataSource.Banner.Text))
 				{
 					labelControlText.Visible = true;
@@ -39,7 +39,7 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 					labelControlText.Text = DataSource.Banner.Text;
 					labelControlText.Font = DataSource.Banner.Font;
 					labelControlText.ForeColor = DataSource.Banner.ForeColor;
-					switch (DataSource.Settings.HeaderAlignment)
+					switch (DataSource.Banner.ImageAlignement)
 					{
 						case Alignment.Left:
 							labelControlText.Appearance.TextOptions.HAlignment = HorzAlignment.Near;
@@ -70,15 +70,15 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 							pbImage.SizeMode = PictureBoxSizeMode.Normal;
 							break;
 					}
-					pnHeaderBorder.Height = DataSource.Banner.Image.Height;
+					pnHeaderBorder.Height = DataSource.Banner.DisplayedImage.Height;
 				}
 			}
 			else
 			{
 				pbImage.Visible = false;
 				labelControlText.Visible = true;
-				if (DataSource.Widget.Enabled && DataSource.Widget.Image != null)
-					labelControlText.Appearance.Image = DataSource.Widget.Image;
+				if (DataSource.Widget.Enabled && DataSource.Widget.DisplayedImage != null)
+					labelControlText.Appearance.Image = DataSource.Widget.DisplayedImage;
 				else
 					labelControlText.Appearance.Image = null;
 				labelControlText.Text = DataSource.Name;
@@ -103,9 +103,9 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 		public override void UpdateHeaderSize()
 		{
 			int textHeight;
-			if (DataSource.Banner.Enable && DataSource.Banner.Image != null)
+			if (DataSource.Banner.Enable && DataSource.Banner.DisplayedImage != null)
 			{
-				pbImage.Width = DataSource.Banner.Image.Width;
+				pbImage.Width = DataSource.Banner.DisplayedImage.Width;
 				if (DataSource.Banner.ShowText && !String.IsNullOrEmpty(DataSource.Banner.Text))
 				{
 					using (var g = labelControlText.CreateGraphics())
@@ -114,22 +114,22 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 								labelControlText.Font,
 								new Size(labelControlText.Width < MinHeaderWidth ? MinHeaderWidth : labelControlText.Width, Int32.MaxValue))
 							.Height + 10;
-					pnHeaderBorder.Height = DataSource.Banner.Image.Height > textHeight ? DataSource.Banner.Image.Height : textHeight;
+					pnHeaderBorder.Height = DataSource.Banner.DisplayedImage.Height > textHeight ? DataSource.Banner.DisplayedImage.Height : textHeight;
 				}
 				else
-					pnHeaderBorder.Height = DataSource.Banner.Image.Height;
+					pnHeaderBorder.Height = DataSource.Banner.DisplayedImage.Height;
 			}
 			else
 			{
-				if (DataSource.Widget.Enabled && DataSource.Widget.Image != null)
+				if (DataSource.Widget.Enabled && DataSource.Widget.DisplayedImage != null)
 				{
 					using (var g = labelControlText.CreateGraphics())
 						textHeight = (int)g.MeasureString(
 								labelControlText.Text,
 								labelControlText.Font,
-								new Size((labelControlText.Width < MinHeaderWidth ? MinHeaderWidth : labelControlText.Width) - DataSource.Widget.Image.Width, Int32.MaxValue))
+								new Size((labelControlText.Width < MinHeaderWidth ? MinHeaderWidth : labelControlText.Width) - DataSource.Widget.DisplayedImage.Width, Int32.MaxValue))
 							.Height + 10;
-					pnHeaderBorder.Height = DataSource.Widget.Image.Height > textHeight ? DataSource.Widget.Image.Height : (textHeight > Widget.DefaultHeight ? textHeight : Widget.DefaultHeight);
+					pnHeaderBorder.Height = DataSource.Widget.DisplayedImage.Height > textHeight ? DataSource.Widget.DisplayedImage.Height : (textHeight > Widget.DefaultHeight ? textHeight : Widget.DefaultHeight);
 				}
 				else
 				{
