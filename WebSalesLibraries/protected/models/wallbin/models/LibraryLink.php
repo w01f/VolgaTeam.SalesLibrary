@@ -263,6 +263,7 @@
 			$this->folderContent = array();
 			foreach (LinkRecord::model()->findAll('id_parent_link=? and is_dead=0 and is_preview_not_ready=0', array($this->id)) as $contentRecord)
 			{
+				/** @var  $contentRecord LinkRecord */
 				$link = new LibraryLink($this->parent);
 				$link->load($contentRecord);
 				$this->folderContent[] = $link;
@@ -280,41 +281,62 @@
 			{
 				if (isset($this->originalFormat))
 				{
+					$fileName = null;
 					switch ($this->originalFormat)
 					{
 						case 'ppt':
-							return base64_encode(file_get_contents(realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'folder-file-icons' . DIRECTORY_SEPARATOR . 'pptx.png'));
+							$fileName = 'pptx.png';
+							break;
 						case 'doc':
-							return base64_encode(file_get_contents(realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'folder-file-icons' . DIRECTORY_SEPARATOR . 'docx.png'));
+							$fileName = 'docx.png';
+							break;
 						case 'xls':
-							return base64_encode(file_get_contents(realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'folder-file-icons' . DIRECTORY_SEPARATOR . 'xlsx.png'));
+							$fileName = 'xlsx.png';
+							break;
 						case 'pdf':
-							return base64_encode(file_get_contents(realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'folder-file-icons' . DIRECTORY_SEPARATOR . 'pdf.png'));
+							$fileName = 'pdf.png';
+							break;
 						case 'video':
 						case 'wmv':
-							return base64_encode(file_get_contents(realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'folder-file-icons' . DIRECTORY_SEPARATOR . 'wmv.png'));
+							$fileName = 'wmv.png';
+							break;
 						case 'mp4':
-							return base64_encode(file_get_contents(realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'folder-file-icons' . DIRECTORY_SEPARATOR . 'mp4.png'));
+							$fileName = 'mp4.png';
+							break;
 						case 'png':
-							return base64_encode(file_get_contents(realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'folder-file-icons' . DIRECTORY_SEPARATOR . 'png.png'));
+							$fileName = 'png.png';
+							break;
 						case 'jpeg':
-							return base64_encode(file_get_contents(realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'folder-file-icons' . DIRECTORY_SEPARATOR . 'jpeg.png'));
+							$fileName = 'jpeg.png';
+							break;
 						case 'url':
-							return base64_encode(file_get_contents(realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'folder-file-icons' . DIRECTORY_SEPARATOR . 'url.png'));
+							$fileName = 'url.png';
+							break;
 						case 'url365':
-							return base64_encode(file_get_contents(realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'folder-file-icons' . DIRECTORY_SEPARATOR . 'url365.png'));
+							$fileName = 'url365.png';
+							break;
 						case 'youtube':
-							return base64_encode(file_get_contents(realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'folder-file-icons' . DIRECTORY_SEPARATOR . 'url.png'));
+							$fileName = 'url.png';
+							break;
 						case 'mp3':
-							return base64_encode(file_get_contents(realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'folder-file-icons' . DIRECTORY_SEPARATOR . 'mp3.png'));
+							$fileName = 'mp3.png';
+							break;
 						case 'key':
-							return base64_encode(file_get_contents(realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'folder-file-icons' . DIRECTORY_SEPARATOR . 'keynote.png'));
+							$fileName = 'keynote.png';
+							break;
 						default:
 							if ($this->isFolder)
-								return base64_encode(file_get_contents(realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'folder-file-icons' . DIRECTORY_SEPARATOR . 'folder.png'));
-							return $this->parent->parent->parent->getAutoWidget($this->fileExtension);
+								$fileName = 'folder.png';
 							break;
 					}
+					if (isset($fileName))
+					{
+						$backColor = $this->parent->windowBackColor;
+						$colorPrefix = Utils::isColorLight($backColor) ? 'white' : 'black';
+						return base64_encode(file_get_contents(realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'folder-file-icons' . DIRECTORY_SEPARATOR . $colorPrefix . DIRECTORY_SEPARATOR . $fileName));
+					}
+					else
+						return $this->parent->parent->parent->getAutoWidget($this->fileExtension);
 				}
 				return null;
 			}
@@ -336,7 +358,11 @@
 						$widget = null;
 				}
 				if (!isset($widget) && $this->isFolder)
-					$widget = base64_encode(file_get_contents(realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'folder-file-icons' . DIRECTORY_SEPARATOR . 'folder.png'));
+				{
+					$backColor = $this->parent->windowBackColor;
+					$colorPrefix = Utils::isColorLight($backColor) ? 'white' : 'black';
+					$widget = base64_encode(file_get_contents(realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'folder-file-icons'  . DIRECTORY_SEPARATOR . $colorPrefix . DIRECTORY_SEPARATOR . 'folder.png'));
+				}
 				return $widget;
 			}
 		}
