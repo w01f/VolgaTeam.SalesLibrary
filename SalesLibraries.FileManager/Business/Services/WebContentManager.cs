@@ -165,7 +165,6 @@ namespace SalesLibraries.FileManager.Business.Services
 			var links = new List<LibraryLink>();
 			foreach (var sourceLink in source.AllLinks.Where(link =>
 				!(link is LibraryFileLink && ((LibraryFileLink)link).IsDead) &&
-				link.Type != FileTypes.Network &&
 				!link.Security.IsForbidden &&
 				(!link.Security.IsRestricted || !String.IsNullOrEmpty(link.Security.AssignedUsers) || !String.IsNullOrEmpty(link.Security.DeniedUsers))))
 			{

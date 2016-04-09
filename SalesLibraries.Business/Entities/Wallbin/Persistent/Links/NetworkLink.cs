@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Drawing;
 using Newtonsoft.Json;
+using SalesLibraries.Business.Entities.Wallbin.Common.Constants;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.HyperLinkInfo;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings;
@@ -23,6 +24,9 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		{
 			get { return RelativePath; }
 		}
+
+		[NotMapped, JsonIgnore]
+		public override string WebFormat => WebFormats.Lan;
 
 		[NotMapped, JsonIgnore]
 		public override string Hint
