@@ -26,8 +26,8 @@
 					$record['name'] = $linkRecord['name'];
 
 					$record['tooltip']= sprintf('%s<br><br>%s',
-							isset($linkRecord['file_name']) && $linkRecord['file_name'] != '' ? $linkRecord['file_name'] : $linkRecord['name'],
-							Yii::app()->params['tooltips']['wallbin'][$linkRecord['format']]);
+						isset($linkRecord['file_name']) && $linkRecord['file_name'] != '' ? $linkRecord['file_name'] : $linkRecord['name'],
+						array_key_exists($linkRecord['format'], Yii::app()->params['tooltips']['wallbin']) ? Yii::app()->params['tooltips']['wallbin'][$linkRecord['format']] : '');
 
 					$record['date'] = array(
 						'display' => date(Yii::app()->params['outputDateFormat'], strtotime($linkRecord['link_date'])),

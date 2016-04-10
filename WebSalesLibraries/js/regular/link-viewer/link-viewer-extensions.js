@@ -18,7 +18,18 @@
 			{
 				var format = viewerData.format;
 				var fileName = viewerData.fileName;
-				var originalUrl = (window.BaseUrl + viewerData.url).replace(/\/\/+/g, '/');
+
+				var originalUrl ='';
+				switch (format){
+					case "ppt":
+					case "video":
+						originalUrl = (window.BaseUrl + viewerData.url).replace(/\/\/+/g, '/');
+						break;
+					default:
+						originalUrl = viewerData.url;
+						break;
+				}
+
 				var parts = [];
 				if (viewerData.pages !== undefined)
 					$.each(viewerData.pages, function (itemIndex, item)

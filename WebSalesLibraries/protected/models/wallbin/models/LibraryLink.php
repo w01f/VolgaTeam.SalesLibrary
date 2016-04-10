@@ -233,12 +233,22 @@
 			}
 			else if ($this->type == 6)
 			{
-
 			}
-			else if ($this->type == 8 || $this->type == 14)
+			else if ($this->type == 8)
 			{
 				$this->fileRelativePath = str_replace('\\', '', $this->fileRelativePath);
 				$this->fileName = $this->fileRelativePath;
+				$this->fileLink = $this->fileRelativePath;
+			}
+			else if ($this->type == 9)
+			{
+				$this->fileName = $this->name;
+				$this->fileLink = $this->fileRelativePath;
+			}
+			else if ($this->type == 14)
+			{
+				$this->fileRelativePath = str_replace('\\', '', $this->fileRelativePath);
+				$this->fileName = $this->name;
 				$this->fileLink = $this->fileRelativePath;
 			}
 			else

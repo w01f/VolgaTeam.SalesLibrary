@@ -354,6 +354,9 @@
 						case 'youtube':
 							$link['file_type'] = base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'search-url.png'));
 							break;
+						case 'lan':
+							$link['file_type'] = base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'search-url.png'));
+							break;
 						case 'mp3':
 							$link['file_type'] = base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'search-mp3.png'));
 							break;

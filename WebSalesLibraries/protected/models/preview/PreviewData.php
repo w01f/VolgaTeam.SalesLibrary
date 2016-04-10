@@ -100,6 +100,8 @@
 					return new UrlPreviewData($link, $isQuickSite);
 				case 'youtube':
 					return new YouTubePreviewData($link, $isQuickSite);
+				case 'lan':
+					return new LanPreviewData($link, $isQuickSite);
 				case 'mp3':
 					return new Mp3PreviewData($link, $isQuickSite);
 				case 'xls':
