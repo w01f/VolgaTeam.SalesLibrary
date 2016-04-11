@@ -63,8 +63,7 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 
 		public void OnInfoChanged()
 		{
-			if (InfoChanged != null)
-				InfoChanged(this, EventArgs.Empty);
+			InfoChanged?.Invoke(this, EventArgs.Empty);
 		}
 
 		protected override void Dispose(bool disposing)

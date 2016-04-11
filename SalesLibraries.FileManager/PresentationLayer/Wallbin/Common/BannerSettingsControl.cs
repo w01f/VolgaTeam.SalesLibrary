@@ -95,7 +95,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Common
 					rbBannerAligmentRight.Checked = true;
 					break;
 			}
-			checkBoxBannerShowText.Checked = _bannerHolder.Banner.ImageAlignement == Alignment.Left && _bannerHolder.Banner.ShowText;
+			checkBoxBannerShowText.Checked = _bannerHolder.Banner.ShowText;
 			buttonEditBannerTextFont.Tag = _bannerHolder.Banner.Font;
 			buttonEditBannerTextFont.EditValue = Utils.FontToString(_bannerHolder.Banner.Font);
 			colorEditBannerTextColor.Color = _bannerHolder.Banner.ForeColor;
@@ -121,7 +121,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Common
 				_bannerHolder.Banner.ImageAlignement = Alignment.Center;
 			else if (rbBannerAligmentRight.Checked)
 				_bannerHolder.Banner.ImageAlignement = Alignment.Right;
-			_bannerHolder.Banner.ShowText = _bannerHolder.Banner.ImageAlignement == Alignment.Left && checkBoxBannerShowText.Checked;
+			_bannerHolder.Banner.ShowText = checkBoxBannerShowText.Checked;
 			_bannerHolder.Banner.Text = _bannerHolder.Banner.ShowText ? memoEditBannerText.EditValue as String : null;
 			_bannerHolder.Banner.Font = buttonEditBannerTextFont.Tag as Font;
 			_bannerHolder.Banner.ForeColor = colorEditBannerTextColor.Color;
@@ -138,19 +138,13 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Common
 		{
 			pnControls.Enabled = checkBoxEnableBanner.Checked;
 			pnSearch.Enabled = checkBoxEnableBanner.Checked;
-			if (!_loading && StateChanged != null)StateChanged(this, new CheckedChangedEventArgs(checkBoxEnableBanner.Checked));
+			if (!_loading)
+				StateChanged?.Invoke(this, new CheckedChangedEventArgs(checkBoxEnableBanner.Checked));
 		}
 
 		private void OnSelectedBannerChanged(object sender, LinkImageEventArgs e)
 		{
 			pbSelectedBanner.Image = e.Image;
-		}
-
-		private void OnBannerAligmentChanged(object sender, EventArgs e)
-		{
-			var enableText = rbBannerAligmentLeft.Checked;
-			checkBoxBannerShowText.Enabled = enableText;
-			checkBoxBannerShowText.Checked = checkBoxBannerShowText.Checked && enableText;
 		}
 
 		private void checkBoxBannerShowText_CheckedChanged(object sender, EventArgs e)

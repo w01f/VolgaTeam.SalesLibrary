@@ -100,7 +100,6 @@
 			this.rbBannerAligmentRight.TabStop = true;
 			this.rbBannerAligmentRight.Text = "Right";
 			this.rbBannerAligmentRight.UseVisualStyleBackColor = false;
-			this.rbBannerAligmentRight.CheckedChanged += new System.EventHandler(this.OnBannerAligmentChanged);
 			// 
 			// rbBannerAligmentCenter
 			// 
@@ -114,7 +113,6 @@
 			this.rbBannerAligmentCenter.TabStop = true;
 			this.rbBannerAligmentCenter.Text = "Center";
 			this.rbBannerAligmentCenter.UseVisualStyleBackColor = false;
-			this.rbBannerAligmentCenter.CheckedChanged += new System.EventHandler(this.OnBannerAligmentChanged);
 			// 
 			// rbBannerAligmentLeft
 			// 
@@ -128,7 +126,6 @@
 			this.rbBannerAligmentLeft.TabStop = true;
 			this.rbBannerAligmentLeft.Text = "Left";
 			this.rbBannerAligmentLeft.UseVisualStyleBackColor = false;
-			this.rbBannerAligmentLeft.CheckedChanged += new System.EventHandler(this.OnBannerAligmentChanged);
 			// 
 			// laBannerAligment
 			// 

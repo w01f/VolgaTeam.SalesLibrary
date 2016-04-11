@@ -136,15 +136,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 			labelControlText.DragLeave += OnDragLeave;
 			labelControlText.MouseDown += OnHeaderMouseDown;
 			labelControlText.MouseMove += OnHeaderMouseMove;
-			// 
-			// pbImage
-			// 
-			pbImage.Click += OnHeaderClick;
-			pbImage.DragDrop += OnDragDrop;
-			pbImage.DragOver += OnDragOver;
-			pbImage.DragLeave += OnDragLeave;
-			pbImage.MouseDown += OnHeaderMouseDown;
-			pbImage.MouseMove += OnHeaderMouseMove;
 		}
 
 		#region Public Methods
@@ -199,8 +190,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 				_outsideChangesInProgress = false;
 
 				UpdateGridSize();
-				if (DataChanged != null)
-					DataChanged(this, EventArgs.Empty);
+				DataChanged?.Invoke(this, EventArgs.Empty);
 			}
 		}
 
@@ -221,8 +211,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 			_outsideChangesInProgress = false;
 
 			UpdateGridSize();
-			if (DataChanged != null)
-				DataChanged(this, EventArgs.Empty);
+			DataChanged?.Invoke(this, EventArgs.Empty);
 		}
 
 		public void EditLinkSettings(LinkSettingsType settingsType)
@@ -232,15 +221,13 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 			if (SettingsEditorFactory.Run(selectedRow.Source, settingsType) != DialogResult.OK) return;
 			selectedRow.Info.Recalc();
 			grFiles.Refresh();
-			if (DataChanged != null)
-				DataChanged(this, EventArgs.Empty);
+			DataChanged?.Invoke(this, EventArgs.Empty);
 		}
 
 		public void OpenLink()
 		{
 			var selectedRow = SelectedLinkRow;
-			if (selectedRow == null) return;
-			var sourceLink = selectedRow.Source as LibraryObjectLink;
+			var sourceLink = selectedRow?.Source as LibraryObjectLink;
 			if (sourceLink == null) return;
 			Utils.OpenFile(sourceLink.FullPath);
 		}
@@ -248,8 +235,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 		public void OpenLinkLocation()
 		{
 			var selectedRow = SelectedLinkRow;
-			if (selectedRow == null) return;
-			var sourceLink = selectedRow.Source as LibraryFileLink;
+			var sourceLink = selectedRow?.Source as LibraryFileLink;
 			if (sourceLink == null) return;
 			Utils.OpenFile(sourceLink.LocationPath);
 			MainController.Instance.WallbinViews.ActiveWallbin.DataSourcesControl.ShowFileInTree(sourceLink.FullPath);
@@ -262,8 +248,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 			if (MainController.Instance.PopupMessages.ShowQuestion("Are You sure You want to remove this link/line break?") != DialogResult.Yes) return;
 			selectedRow.Delete(true);
 			UpdateGridSize();
-			if (DataChanged != null)
-				DataChanged(this, EventArgs.Empty);
+			DataChanged?.Invoke(this, EventArgs.Empty);
 		}
 
 		private void DeleteLinks()
@@ -272,8 +257,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 			foreach (var linkRow in grFiles.Rows.OfType<LinkRow>().ToList())
 				linkRow.Delete(true);
 			UpdateGridSize();
-			if (DataChanged != null)
-				DataChanged(this, EventArgs.Empty);
+			DataChanged?.Invoke(this, EventArgs.Empty);
 		}
 
 		public void SelectAll(bool handleSelection = true)
@@ -288,8 +272,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 			if (MainController.Instance.PopupMessages.ShowQuestion("Are You sure You want to delete security settings?") != DialogResult.Yes) return;
 			DataSource.AllLinks.ApplySecurity(new SecuritySettings());
 			UpdateContent(true);
-			if (DataChanged != null)
-				DataChanged(this, EventArgs.Empty);
+			DataChanged?.Invoke(this, EventArgs.Empty);
 		}
 
 		private void ResetTags()
@@ -299,8 +282,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 			DataSource.AllLinks.ApplyKeywords(new SearchTag[] { });
 			DataSource.AllLinks.ApplySuperFilters(new string[] { });
 			UpdateContent(true);
-			if (DataChanged != null)
-				DataChanged(this, EventArgs.Empty);
+			DataChanged?.Invoke(this, EventArgs.Empty);
 		}
 
 		private void ResetWidgets()
@@ -308,8 +290,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 			if (MainController.Instance.PopupMessages.ShowQuestion("Are You sure You want to remove widgets?") != DialogResult.Yes) return;
 			DataSource.AllLinks.ResetWidgets();
 			UpdateContent(true);
-			if (DataChanged != null)
-				DataChanged(this, EventArgs.Empty);
+			DataChanged?.Invoke(this, EventArgs.Empty);
 		}
 
 		private void ResetBanners()
@@ -317,8 +298,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 			if (MainController.Instance.PopupMessages.ShowQuestion("Are You sure You want to remove banners?") != DialogResult.Yes) return;
 			DataSource.AllLinks.ResetBanners();
 			UpdateContent(true);
-			if (DataChanged != null)
-				DataChanged(this, EventArgs.Empty);
+			DataChanged?.Invoke(this, EventArgs.Empty);
 		}
 
 		private void SortLinkByName()
@@ -328,8 +308,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 			var rows = grFiles.Rows.OfType<LinkRow>().ToList();
 			grFiles.Rows.Clear();
 			grFiles.Rows.AddRange(rows.OrderBy(linkRow => linkRow.Source.Order).ToArray());
-			if (DataChanged != null)
-				DataChanged(this, EventArgs.Empty);
+			DataChanged?.Invoke(this, EventArgs.Empty);
 		}
 
 		private void OnQuickSettingsChange(object sender, EventArgs e)
@@ -338,8 +317,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 			if (selectedRow == null) return;
 			selectedRow.Info.Recalc();
 			grFiles.Refresh();
-			if (DataChanged == null)
-				DataChanged(this, EventArgs.Empty);
+			DataChanged?.Invoke(this, EventArgs.Empty);
 		}
 		#endregion
 
@@ -441,8 +419,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 			targetRow.Info.Recalc();
 			targetRow.InfoChanged += OnLinkRowInfoChanged;
 			UpdateGridSize();
-			if (DataChanged != null)
-				DataChanged(this, EventArgs.Empty);
+			DataChanged?.Invoke(this, EventArgs.Empty);
 		}
 
 		private void OnSelectionChanged(object sender, SelectionEventArgs e)

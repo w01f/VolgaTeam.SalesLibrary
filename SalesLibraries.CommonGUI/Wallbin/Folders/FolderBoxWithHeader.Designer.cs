@@ -28,20 +28,17 @@
 		/// </summary>
 		protected override void InitializeComponent()
 		{
-			base.InitializeComponent();
 
+			base.InitializeComponent();
 			this.labelControlText = new DevExpress.XtraEditors.LabelControl();
-			this.pbImage = new System.Windows.Forms.PictureBox();
 			this.pnHeader.SuspendLayout();
 			this.pnHeaderBorder.SuspendLayout();
 			this.pnBorders.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.pbImage)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// pnHeader
 			// 
 			this.pnHeader.Controls.Add(this.labelControlText);
-			this.pnHeader.Controls.Add(this.pbImage);
 			// 
 			// labelControlText
 			// 
@@ -50,29 +47,18 @@
 			this.labelControlText.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
 			this.labelControlText.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.labelControlText.ImageAlignToText = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-			this.labelControlText.Location = new System.Drawing.Point(43, 0);
+			this.labelControlText.Location = new System.Drawing.Point(0, 0);
 			this.labelControlText.Name = "labelControlText";
-			this.labelControlText.Size = new System.Drawing.Size(266, 37);
+			this.labelControlText.Size = new System.Drawing.Size(309, 50);
 			this.labelControlText.TabIndex = 5;
 			this.labelControlText.UseMnemonic = false;
 			// 
-			// pbImage
+			// FolderBoxWithHeader
 			// 
-			this.pbImage.BackColor = System.Drawing.SystemColors.Control;
-			this.pbImage.Dock = System.Windows.Forms.DockStyle.Left;
-			this.pbImage.Location = new System.Drawing.Point(0, 0);
-			this.pbImage.Name = "pbImage";
-			this.pbImage.Size = new System.Drawing.Size(43, 37);
-			this.pbImage.TabIndex = 4;
-			this.pbImage.TabStop = false;
-			// 
-			// ColumnFolderBox
-			// 
-			this.Name = "ColumnFolderBox";
+			this.Name = "FolderBoxWithHeader";
 			this.pnHeader.ResumeLayout(false);
 			this.pnHeaderBorder.ResumeLayout(false);
 			this.pnBorders.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.pbImage)).EndInit();
 			this.ResumeLayout(false);
 
 		}
@@ -80,6 +66,5 @@
 		#endregion
 
 		public DevExpress.XtraEditors.LabelControl labelControlText;
-		public System.Windows.Forms.PictureBox pbImage;
 	}
 }

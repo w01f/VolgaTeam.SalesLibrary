@@ -159,8 +159,8 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 			grFiles.Height = height;
 			colDisplayName.Width = maxColumnWidth > grFiles.Width ? maxColumnWidth : grFiles.Width;
 			UpdateControlHeight();
-			if (!_outsideChangesInProgress && BoxSizeChanged != null)
-				BoxSizeChanged(this, EventArgs.Empty);
+			if (!_outsideChangesInProgress)
+				BoxSizeChanged?.Invoke(this, EventArgs.Empty);
 		}
 
 		protected virtual void UpdateControlHeight()

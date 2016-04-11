@@ -24,66 +24,40 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 
 		protected override void SetupView()
 		{
-			pbImage.BackColor = DataSource.Settings.BackgroundHeaderColor;
 			labelControlText.BackColor = DataSource.Settings.BackgroundHeaderColor;
+			labelControlText.Appearance.Image = null;
 
 			if (DataSource.Banner.Enable && DataSource.Banner.DisplayedImage != null)
 			{
-				pbImage.Visible = true;
-				pbImage.Image = DataSource.Banner.DisplayedImage;
-				if (DataSource.Banner.ShowText && !String.IsNullOrEmpty(DataSource.Banner.Text))
+				labelControlText.Appearance.Image = DataSource.Banner.DisplayedImage;
+				pnHeaderBorder.Height = DataSource.Banner.DisplayedImage.Height;
+
+				labelControlText.Text = DataSource.Banner.Text;
+				labelControlText.Font = DataSource.Banner.Font;
+				labelControlText.ForeColor = DataSource.Banner.ForeColor;
+				
+				switch (DataSource.Banner.ImageAlignement)
 				{
-					labelControlText.Visible = true;
-					pbImage.Dock = DockStyle.Left;
-					pbImage.SizeMode = PictureBoxSizeMode.Normal;
-					labelControlText.Text = DataSource.Banner.Text;
-					labelControlText.Font = DataSource.Banner.Font;
-					labelControlText.ForeColor = DataSource.Banner.ForeColor;
-					switch (DataSource.Banner.ImageAlignement)
-					{
-						case Alignment.Left:
-							labelControlText.Appearance.TextOptions.HAlignment = HorzAlignment.Near;
-							break;
-						case Alignment.Center:
-							labelControlText.Appearance.TextOptions.HAlignment = HorzAlignment.Center;
-							break;
-						case Alignment.Right:
-							labelControlText.Appearance.TextOptions.HAlignment = HorzAlignment.Far;
-							break;
-					}
-				}
-				else
-				{
-					labelControlText.Visible = false;
-					switch (DataSource.Banner.ImageAlignement)
-					{
-						case Alignment.Left:
-							pbImage.Dock = DockStyle.Left;
-							pbImage.SizeMode = PictureBoxSizeMode.Normal;
-							break;
-						case Alignment.Center:
-							pbImage.Dock = DockStyle.Fill;
-							pbImage.SizeMode = PictureBoxSizeMode.CenterImage;
-							break;
-						case Alignment.Right:
-							pbImage.Dock = DockStyle.Right;
-							pbImage.SizeMode = PictureBoxSizeMode.Normal;
-							break;
-					}
-					pnHeaderBorder.Height = DataSource.Banner.DisplayedImage.Height;
+					case Alignment.Left:
+						labelControlText.Appearance.TextOptions.HAlignment = HorzAlignment.Near;
+						break;
+					case Alignment.Center:
+						labelControlText.Appearance.TextOptions.HAlignment = HorzAlignment.Center;
+						break;
+					case Alignment.Right:
+						labelControlText.Appearance.TextOptions.HAlignment = HorzAlignment.Far;
+						break;
 				}
 			}
 			else
 			{
-				pbImage.Visible = false;
-				labelControlText.Visible = true;
 				if (DataSource.Widget.Enabled && DataSource.Widget.DisplayedImage != null)
 					labelControlText.Appearance.Image = DataSource.Widget.DisplayedImage;
-				else
-					labelControlText.Appearance.Image = null;
+
 				labelControlText.Text = DataSource.Name;
 				labelControlText.Font = DataSource.Settings.HeaderFont;
 				labelControlText.ForeColor = DataSource.Settings.ForeHeaderColor;
+
 				switch (DataSource.Settings.HeaderAlignment)
 				{
 					case Alignment.Left:
@@ -97,6 +71,7 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 						break;
 				}
 			}
+
 			base.SetupView();
 		}
 
@@ -105,19 +80,13 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 			int textHeight;
 			if (DataSource.Banner.Enable && DataSource.Banner.DisplayedImage != null)
 			{
-				pbImage.Width = DataSource.Banner.DisplayedImage.Width;
-				if (DataSource.Banner.ShowText && !String.IsNullOrEmpty(DataSource.Banner.Text))
-				{
-					using (var g = labelControlText.CreateGraphics())
-						textHeight = (int)g.MeasureString(
-								labelControlText.Text,
-								labelControlText.Font,
-								new Size(labelControlText.Width < MinHeaderWidth ? MinHeaderWidth : labelControlText.Width, Int32.MaxValue))
-							.Height + 10;
-					pnHeaderBorder.Height = DataSource.Banner.DisplayedImage.Height > textHeight ? DataSource.Banner.DisplayedImage.Height : textHeight;
-				}
-				else
-					pnHeaderBorder.Height = DataSource.Banner.DisplayedImage.Height;
+				using (var g = labelControlText.CreateGraphics())
+					textHeight = (int)g.MeasureString(
+							labelControlText.Text,
+							labelControlText.Font,
+							new Size(labelControlText.Width < MinHeaderWidth ? MinHeaderWidth : labelControlText.Width, Int32.MaxValue))
+						.Height + 10;
+				pnHeaderBorder.Height = DataSource.Banner.DisplayedImage.Height > textHeight ? DataSource.Banner.DisplayedImage.Height : textHeight;
 			}
 			else
 			{

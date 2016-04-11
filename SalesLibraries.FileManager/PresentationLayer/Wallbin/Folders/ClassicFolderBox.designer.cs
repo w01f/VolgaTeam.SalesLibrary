@@ -66,7 +66,6 @@
 			this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
 			this.toolStripMenuItemFolderCopy = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItemFolderMove = new System.Windows.Forms.ToolStripMenuItem();
-			((System.ComponentModel.ISupportInitialize)(this.pbImage)).BeginInit();
 			this.pnHeader.SuspendLayout();
 			this.pnHeaderBorder.SuspendLayout();
 			this.pnBorders.SuspendLayout();
@@ -80,10 +79,6 @@
 			// 
 			this.labelControlText.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
 			this.labelControlText.Size = new System.Drawing.Size(266, 50);
-			// 
-			// pbImage
-			// 
-			this.pbImage.Size = new System.Drawing.Size(43, 50);
 			// 
 			// contextMenuStripSecurity
 			// 
@@ -386,7 +381,6 @@
 			this.Controls.SetChildIndex(this.barDockControlRight, 0);
 			this.Controls.SetChildIndex(this.barDockControlLeft, 0);
 			this.Controls.SetChildIndex(this.pnBorders, 0);
-			((System.ComponentModel.ISupportInitialize)(this.pbImage)).EndInit();
 			this.pnHeader.ResumeLayout(false);
 			this.pnHeaderBorder.ResumeLayout(false);
 			this.pnBorders.ResumeLayout(false);

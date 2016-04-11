@@ -33,15 +33,9 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 				return _parent.FolderBox.SelectedRowBackColor;
 			}
 		}
-		protected BaseLibraryLink Link
-		{
-			get { return _parent.Source; }
-		}
+		protected BaseLibraryLink Link => _parent.Source;
 
-		protected IWallbinViewFormat FormatState
-		{
-			get { return _parent.FolderBox.FormatState; }
-		}
+		protected IWallbinViewFormat FormatState => _parent.FolderBox.FormatState;
 
 		public LinkRowInfo(LinkRow parent)
 		{

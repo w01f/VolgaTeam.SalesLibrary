@@ -42,6 +42,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 				if (_image != value)
 					OnSettingsChanged();
 				_image = value;
+				_invertedImage = null;
 			}
 		}
 
