@@ -6,16 +6,27 @@
 				<? if (isset($libraryPage->columns[$i])): ?>
 					<? $column = $libraryPage->columns[$i]; ?>
 					<div class="column-header-container column-header-container-<? echo $i; ?>"
-						 style="font-family: <? echo $column->font->name; ?>,serif;
-							 font-size: <? echo $column->font->size; ?>pt;
-							 font-weight: <? echo $column->font->isBold ? ' bold' : ' normal'; ?>;
-							 font-style: <? echo $column->font->isItalic ? ' italic' : ' normal'; ?>;
-							 text-decoration: <? echo $column->font->isUnderlined ? ' underline' : ' inherit'; ?>;
-							 text-align: <? echo $column->alignment; ?>;
-							 background-color: <? echo $column->backColor; ?>;
-							 color: <? echo $column->foreColor; ?>;">
+					     style="font-family: <? echo isset($column->banner) && $column->banner->isEnabled ? $column->banner->font->name: $column->font->name; ?>,serif;
+						     font-size: <? echo isset($column->banner) && $column->banner->isEnabled ? $column->banner->font->size: $column->font->size; ?>pt;
+						     font-weight: <? echo (isset($column->banner) && $column->banner->isEnabled ? $column->banner->font->isBold: $column->font->isBold) ? ' bold' : ' normal'; ?>;
+						     font-style: <? echo (isset($column->banner) && $column->banner->isEnabled ? $column->banner->font->isItalic: $column->font->isItalic) ? ' italic' : ' normal'; ?>;
+						     text-decoration: <? echo (isset($column->banner) && $column->banner->isEnabled ? $column->banner->font->isUnderlined: $column->font->isUnderlined) ? ' underline' : ' inherit'; ?>;
+						     text-align: <? echo isset($column->banner) && $column->banner->isEnabled ? $column->banner->imageAlignment : $column->alignment; ?>;
+						     background-color: <? echo $column->backColor; ?>;
+						     color: <? echo isset($column->banner) && $column->banner->isEnabled ? $column->banner->foreColor :$column->foreColor; ?>;">
 						<? if (isset($column->banner) && $column->banner->isEnabled): ?>
-							<? echo $this->renderFile(Yii::getPathOfAlias('application.views.regular.wallbin') . '/banner.php', array('banner' => $column->banner, 'isLinkBanner' => false), true); ?>
+							<table style="height: 100%; display: inline;">
+								<tr>
+									<td><img src="data:image/png;base64,<? echo $column->banner->image; ?>"></td>
+									<? if ($column->banner->showText): ?>
+										<td>
+											<span style="text-align: <? echo $column->banner->imageAlignment; ?>;">
+												<? echo $column->banner->text; ?>
+											</span>
+										</td>
+									<? endif; ?>
+								</tr>
+							</table>
 						<? else: ?>
 							<? $widget = $column->getWidget(); ?>
 							<? if (isset($widget)): ?>

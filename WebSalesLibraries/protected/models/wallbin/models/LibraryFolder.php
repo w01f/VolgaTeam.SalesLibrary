@@ -152,22 +152,13 @@
 			}
 
 			$headerImage = null;
-			if (isset($this->banner) && $this->banner->isEnabled)
-			{
-				$banner = $this->banner->image;
-				if (isset($banner) && $banner != '')
-					$headerImage = @imagecreatefromstring(base64_decode($banner));
-			}
-			else
-			{
-				$widget = $this->getWidget();
-				if (isset($widget) && $widget != '')
-					$headerImage = @imagecreatefromstring(base64_decode($widget));
-			}
+			$widget = $this->getWidget();
+			if (isset($widget) && $widget != '')
+				$headerImage = @imagecreatefromstring(base64_decode($widget));
 			if (isset($headerImage))
 				$this->headerHeight = @imagesy($headerImage) + 2;
 			else
-				$this->headerHeight = 34;
+				$this->headerHeight = 55;
 		}
 
 
