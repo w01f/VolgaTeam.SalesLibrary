@@ -96,16 +96,16 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="EO.Base, Version=16.0.36.0, Culture=neutral, PublicKeyToken=e92353a6bf73fffc, processorArchitecture=MSIL">
-      <HintPath>..\packages\EO.WebBrowser.16.0.36.0\lib\EO.Base.dll</HintPath>
+    <Reference Include="EO.Base, Version=16.0.49.0, Culture=neutral, PublicKeyToken=e92353a6bf73fffc, processorArchitecture=MSIL">
+      <HintPath>..\packages\EO.WebBrowser.16.0.49.0\lib\EO.Base.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="EO.WebBrowser, Version=16.0.36.0, Culture=neutral, PublicKeyToken=e92353a6bf73fffc, processorArchitecture=MSIL">
-      <HintPath>..\packages\EO.WebBrowser.16.0.36.0\lib\EO.WebBrowser.dll</HintPath>
+    <Reference Include="EO.WebBrowser, Version=16.0.49.0, Culture=neutral, PublicKeyToken=e92353a6bf73fffc, processorArchitecture=MSIL">
+      <HintPath>..\packages\EO.WebBrowser.16.0.49.0\lib\EO.WebBrowser.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="EO.WebEngine, Version=16.0.36.0, Culture=neutral, PublicKeyToken=e92353a6bf73fffc, processorArchitecture=MSIL">
-      <HintPath>..\packages\EO.WebBrowser.16.0.36.0\lib\EO.WebEngine.dll</HintPath>
+    <Reference Include="EO.WebEngine, Version=16.0.49.0, Culture=neutral, PublicKeyToken=e92353a6bf73fffc, processorArchitecture=MSIL">
+      <HintPath>..\packages\EO.WebBrowser.16.0.49.0\lib\EO.WebEngine.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Office.Interop.Excel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
