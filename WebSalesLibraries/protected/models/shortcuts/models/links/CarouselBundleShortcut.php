@@ -6,12 +6,14 @@
 	class CarouselBundleShortcut extends BundleShortcut
 	{
 		public $config;
+		public $defaultCategoryIndex;
 
 		/**
-		 * @param $linkRecord
+		 * @param ShortcutLinkRecord $linkRecord
 		 * @param $isPhone boolean
+		 * @param int $defaultCategoryIndex
 		 */
-		public function __construct($linkRecord, $isPhone)
+		public function __construct($linkRecord, $isPhone, $defaultCategoryIndex)
 		{
 			parent::__construct($linkRecord, $isPhone);
 
@@ -25,6 +27,8 @@
 
 			$allowSwitchViewTags = $xpath->query('//Config/TileToggle');
 			$this->allowSwitchView = $allowSwitchViewTags->length > 0 ? filter_var(trim($allowSwitchViewTags->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : false;
+
+			$this->defaultCategoryIndex = $defaultCategoryIndex;
 		}
 
 		/**
@@ -123,7 +127,7 @@
 				'scrollbarTextColorSelected' => "#000000",
 
 				//combobox settings
-				'startAtCategory' => 1,
+				'startAtCategory' => $this->defaultCategoryIndex,
 				'selectLabel' => "default",
 				'allCategoriesLabel' => "All Categories",
 				'showAllCategories' => "no",

@@ -1,10 +1,11 @@
 (function ($)
 {
 	window.BaseUrl = window.BaseUrl || '';
-	$.SalesPortal = $.SalesPortal || { };
+	$.SalesPortal = $.SalesPortal || {};
 	$.SalesPortal.ShortcutsCarousel = function ()
 	{
 		var carouselData = undefined;
+		var justLoaded = true;
 
 		this.init = function (data)
 		{
@@ -39,6 +40,21 @@
 			carousel.addListener(FWDUltimate3DCarousel.CATEGORY_CHANGE, function (ev)
 			{
 				updateContentSize();
+
+				if(!justLoaded)
+				{
+					var shortcutData = $('<div>' + carouselData.serviceData + '</div>');
+					$.SalesPortal.ShortcutsHistory.pushState(
+						shortcutData,
+						{
+							pushHistory: true,
+							pageViewType: 'carouselbundle',
+							defaultCategoryIndex: (ev.id + 1)
+						});
+				}
+
+				justLoaded = false;
+
 				$.SalesPortal.LogHelper.write({
 					type: 'Navigation',
 					subType: 'Carousel Group Select',

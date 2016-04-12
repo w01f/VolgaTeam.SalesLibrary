@@ -2,15 +2,14 @@
 	/**
 	 * @var $data UrlPreviewData
 	 * */
-	$title = $data->isOffice365 ? 'Office 365 Link...' : 'Website URL Link...';
 ?>
 <div class="link-viewer<? if ($data->config->enableLogging): ?> logger-form<? endif; ?>" data-log-group="Link" data-log-action="Preview Activity">
 	<div class="row tab-above-header" id="tab-above-header-save">
-		<span class="header-text"><? echo $title; ?></span>
+		<span class="header-text">URL: <? echo $data->url; ?></span>
 	</div>
 	<? if ($data->config->allowEmail): ?>
 		<div class="row tab-above-header" id="tab-above-header-email">
-			<span class="header-text"><? echo $title; ?></span>
+			<span class="header-text">URL: <? echo $data->url; ?></span>
 		</div>
 	<? endif; ?>
 	<ul class="nav nav-tabs" role="tablist" id="link-viewer-body-tabs">

@@ -47,6 +47,11 @@
 {
 	line-height: 34px;
 	font-size: 1.5em;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	display: inline-block;
+	width: 100%;
+	overflow: hidden;
 }
 
 .link-viewer .tab-above-header.active

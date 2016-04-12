@@ -87,7 +87,9 @@
 					if (!$isPhone)
 					{
 						$savedBundleModeTagName = $this->getUniqueId();
-						if (isset($parameters) && array_key_exists('pageViewType', $parameters))
+						$parametersHaveBeenSet =isset($parameters);
+
+						if ($parametersHaveBeenSet && array_key_exists('pageViewType', $parameters))
 						{
 							$bundleType = $parameters['pageViewType'];
 							$cookie = new CHttpCookie($savedBundleModeTagName, $bundleType);
@@ -101,12 +103,16 @@
 							else
 								$bundleType = $this->type;
 						}
+
 						switch ($bundleType)
 						{
 							case 'gridbundle':
 								return new GridBundleShortcut($this, $isPhone);
 							case 'carouselbundle':
-								return new CarouselBundleShortcut($this, $isPhone);
+								$defaultCategoryIndex = 1;
+								if ($parametersHaveBeenSet && array_key_exists('defaultCategoryIndex', $parameters))
+									$defaultCategoryIndex = $parameters['defaultCategoryIndex'];
+								return new CarouselBundleShortcut($this, $isPhone, $defaultCategoryIndex);
 							default:
 								return new EmptyShortcut($this, $isPhone);
 						}
