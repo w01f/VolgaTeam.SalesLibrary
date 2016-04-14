@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -239,9 +238,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.DataSource
 			switch (Path.GetExtension(filePath).ToUpper())
 			{
 				case ".XLS":
-				case ".XLSX":
 				case ".XLT":
 				case ".XLTX":
+				case ".XLSX":
 					return 3;
 				case ".BMP":
 				case ".JPG":
@@ -256,6 +255,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.DataSource
 					return 5;
 				case ".PPT":
 				case ".PPTX":
+				case ".PPS":
+				case ".PPSX":
 					return 6;
 				case ".MPEG":
 				case ".MPG":
@@ -266,12 +267,12 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.DataSource
 				case ".MP4":
 				case ".M4V":
 					return 7;
-				case ".URL":
-					return 8;
 				case ".DOC":
 				case ".DOCX":
-					return 9;
+					return 8;
 				case ".KEY":
+					return 9;
+				case ".MP3":
 					return 10;
 				default:
 					return 2;

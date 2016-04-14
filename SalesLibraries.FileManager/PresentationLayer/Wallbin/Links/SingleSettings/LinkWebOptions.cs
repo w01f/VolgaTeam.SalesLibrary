@@ -52,7 +52,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			textEditName.EditValue = _data.Name;
 			textEditPath.EditValue = _data.RelativePath;
 			ckIsUrl365.Checked = ((WebLinkSettings)_data.Settings).IsUrl365;
-			ckForcePreview.Checked = ((WebLinkSettings)_data.Settings).ForcePreview;
+			ckForcePreview.Checked = ((HyperLinkSettings)_data.Settings).ForcePreview;
 		}
 
 		public void SaveData()
@@ -60,7 +60,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			_data.Name = textEditName.EditValue as String;
 			_data.RelativePath = textEditPath.EditValue as String;
 			((WebLinkSettings)_data.Settings).IsUrl365 = ckIsUrl365.Checked;
-			((WebLinkSettings)_data.Settings).ForcePreview = ckForcePreview.Checked;
+			((HyperLinkSettings)_data.Settings).ForcePreview = ckForcePreview.Checked;
 		}
 	}
 }

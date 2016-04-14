@@ -60,6 +60,12 @@
     <Compile Include="Models\Statistic\UserActivity.cs" />
     <Compile Include="Models\Statistic\LibraryFilesModel.cs" />
     <Compile Include="Models\Statistic\VideoLinkInfo.cs" />
+    <Compile Include="Models\WallbinContentService\AppLinkSettings.cs" />
+    <Compile Include="Models\WallbinContentService\BaseLinkSettings.cs" />
+    <Compile Include="Models\WallbinContentService\IBaseLinkSettings.cs" />
+    <Compile Include="Models\WallbinContentService\PowerPointLinkSettings.cs" />
+    <Compile Include="Models\WallbinContentService\VideoLinkSettings.cs" />
+    <Compile Include="Models\WallbinContentService\HyperLinkSettings.cs" />
     <Compile Include="Models\WallbinContentService\LibraryConfig.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>

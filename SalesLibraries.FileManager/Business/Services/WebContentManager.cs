@@ -14,8 +14,13 @@ using SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers;
 using SalesLibraries.Common.Configuration;
 using SalesLibraries.Common.Extensions;
 using SalesLibraries.ServiceConnector.WallbinContentService;
+using AppLinkSettings = SalesLibraries.ServiceConnector.WallbinContentService.AppLinkSettings;
+using BaseLinkSettings = SalesLibraries.ServiceConnector.WallbinContentService.BaseLinkSettings;
 using Font = SalesLibraries.ServiceConnector.WallbinContentService.Font;
+using HyperLinkSettings = SalesLibraries.ServiceConnector.WallbinContentService.HyperLinkSettings;
 using LineBreak = SalesLibraries.ServiceConnector.WallbinContentService.LineBreak;
+using VideoLinkSettings = SalesLibraries.ServiceConnector.WallbinContentService.VideoLinkSettings;
+using PowerPointLinkSettings = SalesLibraries.ServiceConnector.WallbinContentService.PowerPointLinkSettings;
 
 namespace SalesLibraries.FileManager.Business.Services
 {
@@ -196,8 +201,34 @@ namespace SalesLibraries.FileManager.Business.Services
 			target.banner.libraryId = source.ParentLibrary.ExtId.ToString();
 			target.banner.ImportData(source.Banner);
 
-			target.extendedProperties = new LinkSettings();
-			target.extendedProperties.ImportData(source.Settings);
+			switch (source.Type)
+			{
+				case FileTypes.Video:
+					target.extendedProperties = new VideoLinkSettings();
+					((VideoLinkSettings)target.extendedProperties).ImportData(
+						(SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings.VideoLinkSettings)source.Settings);
+					break;
+				case FileTypes.PowerPoint:
+					target.extendedProperties = new PowerPointLinkSettings();
+					((PowerPointLinkSettings)target.extendedProperties).ImportData(
+						(SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings.PowerPointLinkSettings)source.Settings);
+					break;
+				case FileTypes.Url:
+				case FileTypes.YouTube:
+					target.extendedProperties = new HyperLinkSettings();
+					((HyperLinkSettings)target.extendedProperties).ImportData(
+						(SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings.HyperLinkSettings)source.Settings);
+					break;
+				case FileTypes.AppLink:
+					target.extendedProperties = new AppLinkSettings();
+					((AppLinkSettings)target.extendedProperties).ImportData(
+						(SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings.AppLinkSettings)source.Settings);
+					break;
+				default:
+					target.extendedProperties = new BaseLinkSettings();
+					target.extendedProperties.ImportData(source.Settings);
+					break;
+			}
 			target.extendedProperties.ImportData(source.Security);
 
 			if (source is LibraryObjectLink)
@@ -273,8 +304,8 @@ namespace SalesLibraries.FileManager.Business.Services
 		}
 
 		private static void ImportData(
-			this LinkSettings target,
-			BaseLinkSettings source)
+			this IBaseLinkSettings target,
+			SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings.BaseLinkSettings source)
 		{
 			if (source is LibraryObjectLinkSettings)
 			{
@@ -298,19 +329,43 @@ namespace SalesLibraries.FileManager.Business.Services
 				else
 					target.font = null;
 			}
-			if (source is VideoLinkSettings)
-				target.forcePreview = ((VideoLinkSettings)source).ForcePreview;
-			if (source is HyperLinkSettings)
-				target.forcePreview = ((HyperLinkSettings)source).ForcePreview;
-			if (source is PowerPointLinkSettings)
-			{
-				target.slideWidth = Convert.ToSingle(((PowerPointLinkSettings)source).Width);
-				target.slideHeight = Convert.ToSingle(((PowerPointLinkSettings)source).Height);
-			}
 		}
 
 		private static void ImportData(
-			this LinkSettings target,
+			this VideoLinkSettings target,
+			SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings.VideoLinkSettings source)
+		{
+			((IBaseLinkSettings)target).ImportData(source);
+			target.forcePreview = source.ForcePreview;
+		}
+
+		private static void ImportData(
+			this PowerPointLinkSettings target,
+			SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings.PowerPointLinkSettings source)
+		{
+			((IBaseLinkSettings)target).ImportData(source);
+			target.slideWidth = Convert.ToSingle(source.Width);
+			target.slideHeight = Convert.ToSingle(source.Height);
+		}
+
+		private static void ImportData(
+			this HyperLinkSettings target,
+			SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings.HyperLinkSettings source)
+		{
+			((IBaseLinkSettings)target).ImportData(source);
+			target.forcePreview = source.ForcePreview;
+		}
+
+		private static void ImportData(
+			this AppLinkSettings target,
+			SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings.AppLinkSettings source)
+		{
+			((IBaseLinkSettings)target).ImportData(source);
+			target.secondPath = source.SecondPath;
+		}
+
+		private static void ImportData(
+			this IBaseLinkSettings target,
 			SecuritySettings source)
 		{
 			target.isRestricted = source.IsRestricted;

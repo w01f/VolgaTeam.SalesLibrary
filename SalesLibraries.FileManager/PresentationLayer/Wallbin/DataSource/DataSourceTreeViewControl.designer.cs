@@ -107,13 +107,13 @@
 			this.treeListAllFiles.OptionsMenu.EnableFooterMenu = false;
 			this.treeListAllFiles.OptionsSelection.EnableAppearanceFocusedCell = false;
 			this.treeListAllFiles.OptionsSelection.MultiSelect = true;
+			this.treeListAllFiles.OptionsView.FocusRectStyle = DevExpress.XtraTreeList.DrawFocusRectStyle.None;
 			this.treeListAllFiles.OptionsView.ShowColumns = false;
-			this.treeListAllFiles.OptionsView.ShowFocusedFrame = false;
 			this.treeListAllFiles.OptionsView.ShowHorzLines = false;
 			this.treeListAllFiles.OptionsView.ShowIndicator = false;
 			this.treeListAllFiles.OptionsView.ShowVertLines = false;
 			this.treeListAllFiles.ShowButtonMode = DevExpress.XtraTreeList.ShowButtonModeEnum.ShowForFocusedRow;
-			this.treeListAllFiles.Size = new System.Drawing.Size(297, 389);
+			this.treeListAllFiles.Size = new System.Drawing.Size(293, 386);
 			this.treeListAllFiles.StateImageList = this.imageListFiles;
 			this.treeListAllFiles.TabIndex = 1;
 			this.treeListAllFiles.MouseClick += new System.Windows.Forms.MouseEventHandler(this.treeListAllFiles_MouseClick);
@@ -140,17 +140,17 @@
 			// 
 			this.imageListFiles.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListFiles.ImageStream")));
 			this.imageListFiles.TransparentColor = System.Drawing.Color.Magenta;
-			this.imageListFiles.Images.SetKeyName(0, "");
-			this.imageListFiles.Images.SetKeyName(1, "");
+			this.imageListFiles.Images.SetKeyName(0, "DataSourceListClosedFolder.png");
+			this.imageListFiles.Images.SetKeyName(1, "DataSourceListOpenedFolder.png");
 			this.imageListFiles.Images.SetKeyName(2, "All other Files.png");
-			this.imageListFiles.Images.SetKeyName(3, "Excel Files.png");
-			this.imageListFiles.Images.SetKeyName(4, "Image Files.png");
-			this.imageListFiles.Images.SetKeyName(5, "PDF Files.png");
-			this.imageListFiles.Images.SetKeyName(6, "PowerPoint Files.png");
-			this.imageListFiles.Images.SetKeyName(7, "Video Clips.png");
-			this.imageListFiles.Images.SetKeyName(8, "Web Links.png");
-			this.imageListFiles.Images.SetKeyName(9, "Word Files.png");
-			this.imageListFiles.Images.SetKeyName(10, "keynote.png");
+			this.imageListFiles.Images.SetKeyName(3, "DataSourceListXls.png");
+			this.imageListFiles.Images.SetKeyName(4, "DataSourceListPng.png");
+			this.imageListFiles.Images.SetKeyName(5, "DataSourceListPdf.png");
+			this.imageListFiles.Images.SetKeyName(6, "DataSourceListPpt.png");
+			this.imageListFiles.Images.SetKeyName(7, "DataSourceListMp4.png");
+			this.imageListFiles.Images.SetKeyName(8, "DataSourceListDoc.png");
+			this.imageListFiles.Images.SetKeyName(9, "DataSourceListKeynote.png");
+			this.imageListFiles.Images.SetKeyName(10, "DataSourceListMp3.png");
 			// 
 			// treeListSearchFiles
 			// 
@@ -176,13 +176,13 @@
 			this.treeListSearchFiles.OptionsMenu.EnableFooterMenu = false;
 			this.treeListSearchFiles.OptionsSelection.EnableAppearanceFocusedCell = false;
 			this.treeListSearchFiles.OptionsSelection.MultiSelect = true;
+			this.treeListSearchFiles.OptionsView.FocusRectStyle = DevExpress.XtraTreeList.DrawFocusRectStyle.None;
 			this.treeListSearchFiles.OptionsView.ShowColumns = false;
-			this.treeListSearchFiles.OptionsView.ShowFocusedFrame = false;
 			this.treeListSearchFiles.OptionsView.ShowHorzLines = false;
 			this.treeListSearchFiles.OptionsView.ShowIndicator = false;
 			this.treeListSearchFiles.OptionsView.ShowVertLines = false;
 			this.treeListSearchFiles.ShowButtonMode = DevExpress.XtraTreeList.ShowButtonModeEnum.ShowForFocusedRow;
-			this.treeListSearchFiles.Size = new System.Drawing.Size(297, 247);
+			this.treeListSearchFiles.Size = new System.Drawing.Size(293, 244);
 			this.treeListSearchFiles.StateImageList = this.imageListFiles;
 			this.treeListSearchFiles.TabIndex = 2;
 			this.treeListSearchFiles.MouseClick += new System.Windows.Forms.MouseEventHandler(this.treeListAllFiles_MouseClick);
@@ -214,7 +214,7 @@
 			this.pnKeyWord.Dock = System.Windows.Forms.DockStyle.Top;
 			this.pnKeyWord.Location = new System.Drawing.Point(0, 0);
 			this.pnKeyWord.Name = "pnKeyWord";
-			this.pnKeyWord.Size = new System.Drawing.Size(297, 142);
+			this.pnKeyWord.Size = new System.Drawing.Size(293, 142);
 			this.pnKeyWord.TabIndex = 0;
 			// 
 			// groupControlDateRange
@@ -228,7 +228,7 @@
 			this.groupControlDateRange.Location = new System.Drawing.Point(6, 69);
 			this.groupControlDateRange.Name = "groupControlDateRange";
 			this.groupControlDateRange.ShowCaption = false;
-			this.groupControlDateRange.Size = new System.Drawing.Size(282, 64);
+			this.groupControlDateRange.Size = new System.Drawing.Size(278, 64);
 			this.groupControlDateRange.TabIndex = 0;
 			// 
 			// laStartDate
@@ -245,7 +245,7 @@
 			// 
 			this.dateEditEndDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.dateEditEndDate.EditValue = null;
-			this.dateEditEndDate.Location = new System.Drawing.Point(157, 35);
+			this.dateEditEndDate.Location = new System.Drawing.Point(153, 35);
 			this.dateEditEndDate.Name = "dateEditEndDate";
 			this.dateEditEndDate.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
 			this.dateEditEndDate.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -280,7 +280,7 @@
 			// 
 			this.dateEditStartDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.dateEditStartDate.EditValue = null;
-			this.dateEditStartDate.Location = new System.Drawing.Point(157, 7);
+			this.dateEditStartDate.Location = new System.Drawing.Point(153, 7);
 			this.dateEditStartDate.Name = "dateEditStartDate";
 			this.dateEditStartDate.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
 			this.dateEditStartDate.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -306,7 +306,7 @@
 			this.buttonXSearch.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
 			this.buttonXSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXSearch.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-			this.buttonXSearch.Location = new System.Drawing.Point(213, 37);
+			this.buttonXSearch.Location = new System.Drawing.Point(209, 37);
 			this.buttonXSearch.Name = "buttonXSearch";
 			this.buttonXSearch.Size = new System.Drawing.Size(75, 28);
 			this.buttonXSearch.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -337,7 +337,7 @@
 			this.textEditKeyWord.Location = new System.Drawing.Point(8, 7);
 			this.textEditKeyWord.Name = "textEditKeyWord";
 			this.textEditKeyWord.Properties.NullText = "Type keyword here...";
-			this.textEditKeyWord.Size = new System.Drawing.Size(280, 22);
+			this.textEditKeyWord.Size = new System.Drawing.Size(276, 22);
 			this.textEditKeyWord.StyleController = this.styleController;
 			this.textEditKeyWord.TabIndex = 3;
 			this.textEditKeyWord.KeyDown += new System.Windows.Forms.KeyEventHandler(this.edKeyWord_KeyDown);
@@ -422,7 +422,7 @@
 			// 
 			this.xtraTabPageRegular.Controls.Add(this.treeListAllFiles);
 			this.xtraTabPageRegular.Name = "xtraTabPageRegular";
-			this.xtraTabPageRegular.Size = new System.Drawing.Size(297, 389);
+			this.xtraTabPageRegular.Size = new System.Drawing.Size(293, 386);
 			this.xtraTabPageRegular.Text = "Tree View";
 			// 
 			// xtraTabPageSearch
@@ -430,7 +430,7 @@
 			this.xtraTabPageSearch.Controls.Add(this.treeListSearchFiles);
 			this.xtraTabPageSearch.Controls.Add(this.pnKeyWord);
 			this.xtraTabPageSearch.Name = "xtraTabPageSearch";
-			this.xtraTabPageSearch.Size = new System.Drawing.Size(297, 389);
+			this.xtraTabPageSearch.Size = new System.Drawing.Size(293, 386);
 			this.xtraTabPageSearch.Text = "Search";
 			// 
 			// pnTreeViewProgress

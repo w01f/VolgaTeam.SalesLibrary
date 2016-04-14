@@ -178,6 +178,16 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 							(LanLinkInfo)form.SelectedEditor.GetHyperLinkInfo(),
 							DataSource);
 						break;
+					case HyperLinkTypeEnum.QuickSite:
+						newLink = QuickSiteLink.Create(
+							(QuickSiteLinkInfo)form.SelectedEditor.GetHyperLinkInfo(),
+							DataSource);
+						break;
+					case HyperLinkTypeEnum.App:
+						newLink = AppLink.Create(
+							(AppLinkInfo)form.SelectedEditor.GetHyperLinkInfo(),
+							DataSource);
+						break;
 					default:
 						throw new ArgumentOutOfRangeException("Link type not found");
 				}
@@ -229,7 +239,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 			var selectedRow = SelectedLinkRow;
 			var sourceLink = selectedRow?.Source as LibraryObjectLink;
 			if (sourceLink == null) return;
-			Utils.OpenFile(sourceLink.FullPath);
+			Utils.OpenFile(sourceLink.OpenPaths);
 		}
 
 		public void OpenLinkLocation()

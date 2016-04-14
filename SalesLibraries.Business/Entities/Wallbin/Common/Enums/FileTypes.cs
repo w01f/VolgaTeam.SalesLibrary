@@ -13,6 +13,7 @@
 		Word = 12,
 		OvernightsLink = 13,
 		YouTube = 14,
+		AppLink = 15,
 		Other = 999
 	}
 }

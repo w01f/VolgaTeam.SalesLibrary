@@ -76,6 +76,10 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.HyperlinkEd
 			{
 				checkEditForcePreview.Checked = ((UrlLinkInfo)templateEditor).ForcePreview;
 			}
+			if (templateEditor is QuickSiteLinkInfo)
+			{
+				checkEditForcePreview.Checked = ((QuickSiteLinkInfo)templateEditor).ForcePreview;
+			}
 		}
 	}
 }

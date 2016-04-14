@@ -5,6 +5,8 @@
 		Url,
 		YouTube,
 		Network,
+		QuickSite,
+		App,
 		Internal
 	}
 }

@@ -9,35 +9,33 @@ using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings;
 
 namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 {
-	public class YouTubeLink : HyperLink
+	public class QuickSiteLink : HyperLink
 	{
 		#region Nonpersistent Properties
-		private YouTubeSettings _settings;
+		private QuickSiteSettings _settings;
 		[NotMapped, JsonIgnore]
 		public override BaseLinkSettings Settings
 		{
-			get { return _settings ?? (_settings = SettingsContainer.CreateInstance<YouTubeSettings>(this, SettingsEncoded)); }
-			set { _settings = value as YouTubeSettings; }
+			get { return _settings ?? (_settings = SettingsContainer.CreateInstance<QuickSiteSettings>(this, SettingsEncoded)); }
+			set { _settings = value as QuickSiteSettings; }
 		}
 
 		[NotMapped, JsonIgnore]
-		public override string WebFormat
-		{
-			get { return WebFormats.YouTube; }
-		}
+		public override string WebFormat => WebFormats.QuickSite;
+
 		#endregion
 
-		public YouTubeLink()
+		public QuickSiteLink()
 		{
-			Type = FileTypes.YouTube;
+			Type = FileTypes.Url;
 		}
 
-		public static YouTubeLink Create(YouTubeLinkInfo linkInfo, LibraryFolder parentFolder)
+		public static QuickSiteLink Create(QuickSiteLinkInfo linkInfo, LibraryFolder parentFolder)
 		{
 			var link = Create(linkInfo.Path);
 			link.Name = linkInfo.Name;
 			link.Folder = parentFolder;
-			((YouTubeSettings)link.Settings).ForcePreview = linkInfo.ForcePreview;
+			((QuickSiteSettings)link.Settings).ForcePreview = linkInfo.ForcePreview;
 			if (linkInfo.FormatAsBluelink)
 			{
 				((LibraryObjectLinkSettings)link.Settings).RegularFontStyle = ((LibraryObjectLinkSettings)link.Settings).RegularFontStyle | FontStyle.Underline;
@@ -50,9 +48,9 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 			return link;
 		}
 
-		public static YouTubeLink Create(string path)
+		public static QuickSiteLink Create(string path)
 		{
-			return new YouTubeLink { RelativePath = path };
+			return new QuickSiteLink { RelativePath = path };
 		}
 	}
 }

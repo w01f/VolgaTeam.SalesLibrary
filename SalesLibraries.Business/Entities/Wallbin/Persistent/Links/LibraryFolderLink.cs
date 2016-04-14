@@ -103,7 +103,8 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 					var folderLink = (LibraryFolderLink)Create(new FolderLink { RootId = DataSourceId, Path = folderPath }, this);
 					Links.AddItem(folderLink);
 				}
-				foreach (var filePath in Directory.GetFiles(FullPath).Where(filePath => GlobalSettings.HiddenObjects.All(item => filePath.ToLower() != item.ToLower())))
+				foreach (var filePath in Directory.GetFiles(FullPath)
+					.Where(filePath => GlobalSettings.HiddenObjects.All(item => !filePath.ToUpper().Contains(item.ToUpper()))))
 				{
 					existedPaths.Add(filePath);
 					if (Links.Any(link => link.FullPath.ToLower().Equals(filePath.ToLower()))) continue;

@@ -8,11 +8,11 @@ using SalesLibraries.Common.Helpers;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSettings
 {
-	[IntendForClass(typeof(YouTubeLink))]
-	//public sealed partial class LinkYouTubeOptions : UserControl, ILinkSettingsEditControl
-	public sealed partial class LinkYouTubeOptions : XtraTabPage, ILinkSettingsEditControl
+	[IntendForClass(typeof(QuickSiteLink))]
+	//public sealed partial class LinkQuickSiteOptions : UserControl, ILinkSettingsEditControl
+	public sealed partial class LinkQuickSiteOptions : XtraTabPage, ILinkSettingsEditControl
 	{
-		private readonly YouTubeLink _data;
+		private readonly QuickSiteLink _data;
 
 		public LinkSettingsType SettingsType
 		{
@@ -28,7 +28,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		}
 		public event EventHandler<EventArgs> ForceCloseRequested;
 
-		public LinkYouTubeOptions(YouTubeLink data)
+		public LinkQuickSiteOptions(QuickSiteLink data)
 		{
 			InitializeComponent();
 			Text = "Advanced";

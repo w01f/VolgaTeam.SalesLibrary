@@ -196,5 +196,19 @@ namespace SalesLibraries.Common.Helpers
 			}
 			catch (Exception) { }
 		}
+
+		public static void OpenFile(string[] filePaths)
+		{
+			foreach (var filePath in filePaths)
+			{
+				try
+				{
+					Process.Start(filePath);
+					break;
+				}
+				catch (Exception) { }
+			}
+			
+		}
 	}
 }

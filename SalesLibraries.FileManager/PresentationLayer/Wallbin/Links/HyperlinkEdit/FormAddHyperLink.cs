@@ -26,6 +26,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.HyperlinkEd
 				buttonXUrl.Font = new Font(buttonXUrl.Font.FontFamily, buttonXUrl.Font.Size - 2, buttonXUrl.Font.Style);
 				buttonXYouTube.Font = new Font(buttonXYouTube.Font.FontFamily, buttonXYouTube.Font.Size - 2, buttonXYouTube.Font.Style);
 				buttonXLan.Font = new Font(buttonXLan.Font.FontFamily, buttonXLan.Font.Size - 2, buttonXLan.Font.Style);
+				buttonXQuickSite.Font = new Font(buttonXQuickSite.Font.FontFamily, buttonXQuickSite.Font.Size - 2, buttonXQuickSite.Font.Style);
+				buttonXApp.Font = new Font(buttonXApp.Font.FontFamily, buttonXApp.Font.Size - 2, buttonXApp.Font.Style);
 				buttonXSave.Font = new Font(buttonXSave.Font.FontFamily, buttonXSave.Font.Size - 2, buttonXSave.Font.Style);
 				buttonXCancel.Font = new Font(buttonXCancel.Font.FontFamily, buttonXCancel.Font.Size - 2, buttonXCancel.Font.Style);
 			}
@@ -34,7 +36,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.HyperlinkEd
 			{
 				buttonXUrl,
 				buttonXYouTube,
-				buttonXLan
+				buttonXLan,
+				buttonXQuickSite,
+				buttonXApp
 			});
 
 			_editorSelectors.ForEach(button =>
@@ -71,6 +75,12 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.HyperlinkEd
 						break;
 					case HyperLinkTypeEnum.Network:
 						SelectedEditor = new LanLinkEditControl();
+						break;
+					case HyperLinkTypeEnum.QuickSite:
+						SelectedEditor = new QuickSiteEditControl();
+						break;
+					case HyperLinkTypeEnum.App:
+						SelectedEditor = new AppLinkEditControl();
 						break;
 					default:
 						throw new ArgumentOutOfRangeException("Link type is not found");

@@ -6,9 +6,9 @@ using SalesLibraries.FileManager.Controllers;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.HyperlinkEdit
 {
-	public partial class UrlEditControl : UserControl, IHyperLinkEditControl
+	public partial class QuickSiteEditControl : UserControl, IHyperLinkEditControl
 	{
-		public UrlEditControl()
+		public QuickSiteEditControl()
 		{
 			InitializeComponent();
 			Dock = DockStyle.Fill;
@@ -30,7 +30,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.HyperlinkEd
 
 		public bool ValidateLinkInfo()
 		{
-			var linkInfo = (UrlLinkInfo)GetHyperLinkInfo();
+			var linkInfo = (QuickSiteLinkInfo)GetHyperLinkInfo();
 			if (String.IsNullOrEmpty(linkInfo.Name))
 			{
 				MainController.Instance.PopupMessages.ShowWarning("You should set the link name before saving");
@@ -46,7 +46,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.HyperlinkEd
 
 		public BaseNetworkLink GetHyperLinkInfo()
 		{
-			return new UrlLinkInfo
+			return new QuickSiteLinkInfo()
 			{
 				Name = textEditName.EditValue as String,
 				Path = textEditPath.EditValue as String,
@@ -74,7 +74,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.HyperlinkEd
 			}
 			if (templateEditor is YouTubeLinkInfo)
 			{
-				checkEditForcePreview.Checked = ((YouTubeLinkInfo)templateEditor).ForcePreview;
+				checkEditForcePreview.Checked = ((UrlLinkInfo)templateEditor).ForcePreview;
 			}
 			if (templateEditor is QuickSiteLinkInfo)
 			{

@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.HyperLinkInfo;
 using SalesLibraries.FileManager.Controllers;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.HyperlinkEdit
 {
-	public partial class UrlEditControl : UserControl, IHyperLinkEditControl
+	public partial class AppLinkEditControl : UserControl, IHyperLinkEditControl
 	{
-		public UrlEditControl()
+		public AppLinkEditControl()
 		{
 			InitializeComponent();
 			Dock = DockStyle.Fill;
@@ -25,12 +26,13 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.HyperlinkEd
 
 				laName.Font = new Font(laName.Font.FontFamily, laName.Font.Size - 2, laName.Font.Style);
 				laPath.Font = new Font(laPath.Font.FontFamily, laPath.Font.Size - 2, laPath.Font.Style);
+				laSecondPath.Font = new Font(laSecondPath.Font.FontFamily, laSecondPath.Font.Size - 2, laSecondPath.Font.Style);
 			}
 		}
 
 		public bool ValidateLinkInfo()
 		{
-			var linkInfo = (UrlLinkInfo)GetHyperLinkInfo();
+			var linkInfo = (AppLinkInfo)GetHyperLinkInfo();
 			if (String.IsNullOrEmpty(linkInfo.Name))
 			{
 				MainController.Instance.PopupMessages.ShowWarning("You should set the link name before saving");
@@ -46,13 +48,13 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.HyperlinkEd
 
 		public BaseNetworkLink GetHyperLinkInfo()
 		{
-			return new UrlLinkInfo
+			return new AppLinkInfo
 			{
 				Name = textEditName.EditValue as String,
 				Path = textEditPath.EditValue as String,
+				SecondPath = textEditSecondPath.EditValue as String,
 				FormatAsBluelink = checkEditBlueHyperlink.Checked,
 				FormatBold = checkEditBold.Checked,
-				ForcePreview = checkEditForcePreview.Checked
 			};
 		}
 
@@ -67,18 +69,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.HyperlinkEd
 			if (templateEditor is HyperLinkInfo)
 			{
 				textEditPath.EditValue = ((HyperLinkInfo)templateEditor).Path;
-			}
-			if (templateEditor is UrlLinkInfo)
-			{
-				checkEditForcePreview.Checked = ((UrlLinkInfo)templateEditor).ForcePreview;
-			}
-			if (templateEditor is YouTubeLinkInfo)
-			{
-				checkEditForcePreview.Checked = ((YouTubeLinkInfo)templateEditor).ForcePreview;
-			}
-			if (templateEditor is QuickSiteLinkInfo)
-			{
-				checkEditForcePreview.Checked = ((QuickSiteLinkInfo)templateEditor).ForcePreview;
 			}
 		}
 	}

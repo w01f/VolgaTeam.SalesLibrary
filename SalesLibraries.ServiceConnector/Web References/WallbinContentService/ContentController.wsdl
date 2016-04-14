@@ -114,7 +114,7 @@
           <xsd:element name="originalFormat" type="xsd:string" />
           <xsd:element name="order" type="xsd:int" />
           <xsd:element name="type" type="xsd:int" />
-          <xsd:element name="extendedProperties" type="tns:LinkSettings" />
+          <xsd:element name="extendedProperties" type="tns:BaseLinkSettings" />
           <xsd:element name="lineBreakProperties" type="tns:LineBreak" />
           <xsd:element name="widgetType" type="xsd:int" />
           <xsd:element name="widget" type="xsd:string" />
@@ -129,7 +129,7 @@
           <xsd:element name="isDead" type="xsd:boolean" />
         </xsd:all>
       </xsd:complexType>
-      <xsd:complexType name="LinkSettings">
+      <xsd:complexType name="BaseLinkSettings">
         <xsd:all>
           <xsd:element name="note" type="xsd:string" />
           <xsd:element name="hoverNote" type="xsd:string" />
@@ -143,9 +143,6 @@
           <xsd:element name="noShare" type="xsd:boolean" />
           <xsd:element name="assignedUsers" type="xsd:string" />
           <xsd:element name="deniedUsers" type="xsd:string" />
-          <xsd:element name="forcePreview" type="xsd:boolean" />
-          <xsd:element name="slideWidth" type="xsd:float" />
-          <xsd:element name="slideHeight" type="xsd:float" />
         </xsd:all>
       </xsd:complexType>
       <xsd:complexType name="LineBreak">
@@ -318,12 +315,97 @@
           <xsd:element name="deadLinkBody" type="xsd:string" />
         </xsd:all>
       </xsd:complexType>
+      <xsd:complexType name="VideoLinkSettings">
+        <xsd:all>
+          <xsd:element name="forcePreview" type="xsd:boolean" />
+          <xsd:element name="note" type="xsd:string" />
+          <xsd:element name="hoverNote" type="xsd:string" />
+          <xsd:element name="isBold" type="xsd:boolean" />
+          <xsd:element name="isItalic" type="xsd:boolean" />
+          <xsd:element name="isUnderline" type="xsd:boolean" />
+          <xsd:element name="isSpecialFormat" type="xsd:boolean" />
+          <xsd:element name="font" type="tns:Font" />
+          <xsd:element name="foreColor" type="xsd:string" />
+          <xsd:element name="isRestricted" type="xsd:boolean" />
+          <xsd:element name="noShare" type="xsd:boolean" />
+          <xsd:element name="assignedUsers" type="xsd:string" />
+          <xsd:element name="deniedUsers" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="HyperLinkSettings">
+        <xsd:all>
+          <xsd:element name="forcePreview" type="xsd:boolean" />
+          <xsd:element name="note" type="xsd:string" />
+          <xsd:element name="hoverNote" type="xsd:string" />
+          <xsd:element name="isBold" type="xsd:boolean" />
+          <xsd:element name="isItalic" type="xsd:boolean" />
+          <xsd:element name="isUnderline" type="xsd:boolean" />
+          <xsd:element name="isSpecialFormat" type="xsd:boolean" />
+          <xsd:element name="font" type="tns:Font" />
+          <xsd:element name="foreColor" type="xsd:string" />
+          <xsd:element name="isRestricted" type="xsd:boolean" />
+          <xsd:element name="noShare" type="xsd:boolean" />
+          <xsd:element name="assignedUsers" type="xsd:string" />
+          <xsd:element name="deniedUsers" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="PowerPointLinkSettings">
+        <xsd:all>
+          <xsd:element name="slideWidth" type="xsd:float" />
+          <xsd:element name="slideHeight" type="xsd:float" />
+          <xsd:element name="note" type="xsd:string" />
+          <xsd:element name="hoverNote" type="xsd:string" />
+          <xsd:element name="isBold" type="xsd:boolean" />
+          <xsd:element name="isItalic" type="xsd:boolean" />
+          <xsd:element name="isUnderline" type="xsd:boolean" />
+          <xsd:element name="isSpecialFormat" type="xsd:boolean" />
+          <xsd:element name="font" type="tns:Font" />
+          <xsd:element name="foreColor" type="xsd:string" />
+          <xsd:element name="isRestricted" type="xsd:boolean" />
+          <xsd:element name="noShare" type="xsd:boolean" />
+          <xsd:element name="assignedUsers" type="xsd:string" />
+          <xsd:element name="deniedUsers" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="AppLinkSettings">
+        <xsd:all>
+          <xsd:element name="secondPath" type="xsd:string" />
+          <xsd:element name="note" type="xsd:string" />
+          <xsd:element name="hoverNote" type="xsd:string" />
+          <xsd:element name="isBold" type="xsd:boolean" />
+          <xsd:element name="isItalic" type="xsd:boolean" />
+          <xsd:element name="isUnderline" type="xsd:boolean" />
+          <xsd:element name="isSpecialFormat" type="xsd:boolean" />
+          <xsd:element name="font" type="tns:Font" />
+          <xsd:element name="foreColor" type="xsd:string" />
+          <xsd:element name="isRestricted" type="xsd:boolean" />
+          <xsd:element name="noShare" type="xsd:boolean" />
+          <xsd:element name="assignedUsers" type="xsd:string" />
+          <xsd:element name="deniedUsers" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="mockLibraryIn">
     <wsdl:part name="library" type="tns:Library" />
   </wsdl:message>
   <wsdl:message name="mockLibraryOut" />
+  <wsdl:message name="mockVideoLinkSettingsIn">
+    <wsdl:part name="settings" type="tns:VideoLinkSettings" />
+  </wsdl:message>
+  <wsdl:message name="mockVideoLinkSettingsOut" />
+  <wsdl:message name="mockHyperLinkSettingsIn">
+    <wsdl:part name="settings" type="tns:HyperLinkSettings" />
+  </wsdl:message>
+  <wsdl:message name="mockHyperLinkSettingsOut" />
+  <wsdl:message name="mockPowerPointLinkSettingsIn">
+    <wsdl:part name="settings" type="tns:PowerPointLinkSettings" />
+  </wsdl:message>
+  <wsdl:message name="mockPowerPointLinkSettingsOut" />
+  <wsdl:message name="mockAppLinkSettingsIn">
+    <wsdl:part name="settings" type="tns:AppLinkSettings" />
+  </wsdl:message>
+  <wsdl:message name="mockAppLinkSettingsOut" />
   <wsdl:message name="getSessionKeyIn">
     <wsdl:part name="login" type="xsd:string" />
     <wsdl:part name="password" type="xsd:string" />
@@ -338,6 +420,30 @@
       <wsdl:input message="tns:mockLibraryIn" />
       <wsdl:output message="tns:mockLibraryOut" />
     </wsdl:operation>
+    <wsdl:operation name="mockVideoLinkSettings">
+      <wsdl:documentation>
+      </wsdl:documentation>
+      <wsdl:input message="tns:mockVideoLinkSettingsIn" />
+      <wsdl:output message="tns:mockVideoLinkSettingsOut" />
+    </wsdl:operation>
+    <wsdl:operation name="mockHyperLinkSettings">
+      <wsdl:documentation>
+      </wsdl:documentation>
+      <wsdl:input message="tns:mockHyperLinkSettingsIn" />
+      <wsdl:output message="tns:mockHyperLinkSettingsOut" />
+    </wsdl:operation>
+    <wsdl:operation name="mockPowerPointLinkSettings">
+      <wsdl:documentation>
+      </wsdl:documentation>
+      <wsdl:input message="tns:mockPowerPointLinkSettingsIn" />
+      <wsdl:output message="tns:mockPowerPointLinkSettingsOut" />
+    </wsdl:operation>
+    <wsdl:operation name="mockAppLinkSettings">
+      <wsdl:documentation>
+      </wsdl:documentation>
+      <wsdl:input message="tns:mockAppLinkSettingsIn" />
+      <wsdl:output message="tns:mockAppLinkSettingsOut" />
+    </wsdl:operation>
     <wsdl:operation name="getSessionKey">
       <wsdl:documentation>
       </wsdl:documentation>
@@ -349,6 +455,42 @@
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
     <wsdl:operation name="mockLibrary">
       <soap:operation soapAction="urn:ContentControllerwsdl#mockLibrary" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ContentControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ContentControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="mockVideoLinkSettings">
+      <soap:operation soapAction="urn:ContentControllerwsdl#mockVideoLinkSettings" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ContentControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ContentControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="mockHyperLinkSettings">
+      <soap:operation soapAction="urn:ContentControllerwsdl#mockHyperLinkSettings" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ContentControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ContentControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="mockPowerPointLinkSettings">
+      <soap:operation soapAction="urn:ContentControllerwsdl#mockPowerPointLinkSettings" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ContentControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ContentControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="mockAppLinkSettings">
+      <soap:operation soapAction="urn:ContentControllerwsdl#mockAppLinkSettings" style="rpc" />
       <wsdl:input>
         <soap:body use="encoded" namespace="urn:ContentControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
       </wsdl:input>

@@ -210,7 +210,7 @@
     <Compile Include="PresentationLayer\Wallbin\LinkViewers\Processors\LinkProcessorFactory.cs" />
     <Compile Include="PresentationLayer\Wallbin\LinkViewers\Processors\DocumentLinkProcessor.cs" />
     <Compile Include="PresentationLayer\Wallbin\LinkViewers\Processors\CommonFileLinkProcessor.cs" />
-    <Compile Include="PresentationLayer\Wallbin\LinkViewers\Processors\NetworkLinkProcessor.cs" />
+    <Compile Include="PresentationLayer\Wallbin\LinkViewers\Processors\HyperLinkProcessor.cs" />
     <Compile Include="PresentationLayer\Wallbin\LinkViewers\Processors\FolderLinkProcessor.cs" />
     <Compile Include="PresentationLayer\Wallbin\LinkViewers\Processors\VideoLinkProcessor.cs" />
     <Compile Include="PresentationLayer\Wallbin\LinkViewers\Processors\PreviewableFileLinkProcessor.cs" />

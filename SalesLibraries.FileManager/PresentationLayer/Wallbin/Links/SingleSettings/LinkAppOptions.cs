@@ -8,11 +8,11 @@ using SalesLibraries.Common.Helpers;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSettings
 {
-	[IntendForClass(typeof(YouTubeLink))]
-	//public sealed partial class LinkYouTubeOptions : UserControl, ILinkSettingsEditControl
-	public sealed partial class LinkYouTubeOptions : XtraTabPage, ILinkSettingsEditControl
+	[IntendForClass(typeof(AppLink))]
+	//public sealed partial class LinkAppOptions : UserControl, ILinkSettingsEditControl
+	public sealed partial class LinkAppOptions : XtraTabPage, ILinkSettingsEditControl
 	{
-		private readonly YouTubeLink _data;
+		private readonly AppLink _data;
 
 		public LinkSettingsType SettingsType
 		{
@@ -28,7 +28,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		}
 		public event EventHandler<EventArgs> ForceCloseRequested;
 
-		public LinkYouTubeOptions(YouTubeLink data)
+		public LinkAppOptions(AppLink data)
 		{
 			InitializeComponent();
 			Text = "Advanced";
@@ -44,6 +44,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 				labelControlTitle.Font = new Font(labelControlTitle.Font.FontFamily, labelControlTitle.Font.Size - 2, labelControlTitle.Font.Style);
 				labelControlName.Font = new Font(labelControlName.Font.FontFamily, labelControlName.Font.Size - 2, labelControlName.Font.Style);
 				labelControlPath.Font = new Font(labelControlPath.Font.FontFamily, labelControlPath.Font.Size - 2, labelControlPath.Font.Style);
+				labelControlSecondPath.Font = new Font(labelControlSecondPath.Font.FontFamily, labelControlSecondPath.Font.Size - 2, labelControlSecondPath.Font.Style);
 			}
 		}
 
@@ -51,14 +52,14 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		{
 			textEditName.EditValue = _data.Name;
 			textEditPath.EditValue = _data.RelativePath;
-			ckForcePreview.Checked = ((HyperLinkSettings)_data.Settings).ForcePreview;
+			textEditSecondPath.EditValue = ((AppLinkSettings)_data.Settings).SecondPath;
 		}
 
 		public void SaveData()
 		{
 			_data.Name = textEditName.EditValue as String;
 			_data.RelativePath = textEditPath.EditValue as String;
-			((HyperLinkSettings)_data.Settings).ForcePreview = ckForcePreview.Checked;
+			((AppLinkSettings)_data.Settings).SecondPath = textEditSecondPath.EditValue as String;
 		}
 	}
 }

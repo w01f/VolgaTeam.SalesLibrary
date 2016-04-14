@@ -261,11 +261,23 @@
       <DependentUpon>FormAddHyperLink.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\IHyperLinkEditControl.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\AppLinkEditControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\AppLinkEditControl.Designer.cs">
+      <DependentUpon>AppLinkEditControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\LanLinkEditControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\LanLinkEditControl.Designer.cs">
       <DependentUpon>LanLinkEditControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\QuickSiteEditControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\QuickSiteEditControl.Designer.cs">
+      <DependentUpon>QuickSiteEditControl.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\YouTubeEditControl.cs">
       <SubType>UserControl</SubType>
@@ -367,6 +379,12 @@
     <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LineBreakOptions.designer.cs">
       <DependentUpon>LineBreakOptions.cs</DependentUpon>
     </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkAppOptions.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkAppOptions.designer.cs">
+      <DependentUpon>LinkAppOptions.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkObjectOptions.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -403,6 +421,12 @@
     </Compile>
     <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkLanOptions.designer.cs">
       <DependentUpon>LinkLanOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkQuickSiteOptions.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkQuickSiteOptions.designer.cs">
+      <DependentUpon>LinkQuickSiteOptions.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkYouTubeOptions.cs">
       <SubType>Component</SubType>
@@ -625,8 +649,14 @@
     <EmbeddedResource Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\FormAddHyperLink.resx">
       <DependentUpon>FormAddHyperLink.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\AppLinkEditControl.resx">
+      <DependentUpon>AppLinkEditControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\LanLinkEditControl.resx">
       <DependentUpon>LanLinkEditControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\QuickSiteEditControl.resx">
+      <DependentUpon>QuickSiteEditControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\YouTubeEditControl.resx">
       <DependentUpon>YouTubeEditControl.cs</DependentUpon>
@@ -676,6 +706,9 @@
     <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\LineBreakOptions.resx">
       <DependentUpon>LineBreakOptions.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkAppOptions.resx">
+      <DependentUpon>LinkAppOptions.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkObjectOptions.resx">
       <DependentUpon>LinkObjectOptions.cs</DependentUpon>
     </EmbeddedResource>
@@ -693,6 +726,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkLanOptions.resx">
       <DependentUpon>LinkLanOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkQuickSiteOptions.resx">
+      <DependentUpon>LinkQuickSiteOptions.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkYouTubeOptions.resx">
       <DependentUpon>LinkYouTubeOptions.cs</DependentUpon>
@@ -825,6 +861,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\DataSourceListXls.png" />
+    <None Include="Resources\DataSourceListPpt.png" />
+    <None Include="Resources\DataSourceListPng.png" />
+    <None Include="Resources\DataSourceListPdf.png" />
+    <None Include="Resources\DataSourceListOpenedFolder.png" />
+    <None Include="Resources\DataSourceListMp4.png" />
+    <None Include="Resources\DataSourceListMp3.png" />
+    <None Include="Resources\DataSourceListKeynote.png" />
+    <None Include="Resources\DataSourceListDoc.png" />
+    <None Include="Resources\DataSourceListClosedFolder.png" />
+    <None Include="Resources\LinkAddQuickSite.png" />
+    <None Include="Resources\LinkAddApp.png" />
     <None Include="Resources\LinkAddYoutube.png" />
     <None Include="Resources\WallbinSettingsTabPages.png" />
     <None Include="Resources\WallbinSettingsComboboxes.png" />

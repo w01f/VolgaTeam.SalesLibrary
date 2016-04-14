@@ -36,6 +36,9 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		public abstract string FullPath { get; }
 
 		[NotMapped, JsonIgnore]
+		public virtual string[] OpenPaths => new[] { FullPath };
+
+		[NotMapped, JsonIgnore]
 		public abstract string WebPath { get; }
 
 		[NotMapped, JsonIgnore]

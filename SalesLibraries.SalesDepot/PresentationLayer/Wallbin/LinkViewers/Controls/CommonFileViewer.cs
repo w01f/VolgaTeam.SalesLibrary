@@ -5,7 +5,6 @@ using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.SalesDepot.Business.LinkViewers;
-using SalesLibraries.SalesDepot.Controllers;
 
 namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Controls
 {
@@ -60,6 +59,9 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Contro
 					break;
 				case FileTypes.Network:
 					Utils.OpenFile(Link.FullPath);
+					break;
+				case FileTypes.AppLink:
+					Utils.OpenFile(new[] { Link.FullPath, ((AppLink)Link).SecondPath });
 					break;
 				default:
 					LinkManager.OpenLink(Link);

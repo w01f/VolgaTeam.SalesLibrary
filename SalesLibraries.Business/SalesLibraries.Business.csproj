@@ -101,11 +101,14 @@
     <Compile Include="Entities\Wallbin\NonPersistent\AutoWidget.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\BannerSettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\HyperLinkInfo\BaseNetworkLink.cs" />
-    <Compile Include="Entities\Wallbin\NonPersistent\HyperLinkInfo\HyperlinkTypeEnum.cs" />
+    <Compile Include="Entities\Wallbin\NonPersistent\HyperLinkInfo\HyperLinkTypeEnum.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\HyperLinkInfo\HyperLinkInfo.cs" />
+    <Compile Include="Entities\Wallbin\NonPersistent\HyperLinkInfo\AppLinkInfo.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\HyperLinkInfo\LanLinkInfo.cs" />
+    <Compile Include="Entities\Wallbin\NonPersistent\HyperLinkInfo\QuickSiteLinkInfo.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\HyperLinkInfo\YouTubeLinkInfo.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\HyperLinkInfo\UrlLinkInfo.cs" />
+    <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\AppLinkSettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\HyperLinkSettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\SecuritySettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\BaseLinkSettings.cs" />
@@ -113,6 +116,7 @@
     <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\LineBreakSettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\LinkWidgetSettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\TagSettings.cs" />
+    <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\QuickSiteSettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\YouTubeSettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\WebLinkSettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\VideoLinkSettings.cs" />
@@ -134,6 +138,7 @@
     <Compile Include="Entities\Wallbin\Persistent\LibraryPage.cs" />
     <Compile Include="Entities\Wallbin\Persistent\Links\CommonFileLink.cs" />
     <Compile Include="Entities\Wallbin\Persistent\Links\LibraryFolderLink.cs" />
+    <Compile Include="Entities\Wallbin\Persistent\Links\AppLink.cs" />
     <Compile Include="Entities\Wallbin\Persistent\Links\PdfLink.cs" />
     <Compile Include="Entities\Wallbin\Persistent\Links\PreviewableLink.cs" />
     <Compile Include="Entities\Wallbin\Persistent\Links\VideoLink.cs" />
@@ -145,6 +150,7 @@
     <Compile Include="Entities\Wallbin\Persistent\Links\ExcelLink.cs" />
     <Compile Include="Entities\Wallbin\Persistent\Links\DocumentLink.cs" />
     <Compile Include="Entities\Wallbin\Persistent\Links\HyperLink.cs" />
+    <Compile Include="Entities\Wallbin\Persistent\Links\QuickSiteLink.cs" />
     <Compile Include="Entities\Wallbin\Persistent\Links\YouTubeLink.cs" />
     <Compile Include="Entities\Wallbin\Persistent\Links\WebLink.cs" />
     <Compile Include="Entities\Wallbin\Persistent\Links\WordLink.cs" />
