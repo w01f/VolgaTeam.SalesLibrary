@@ -97,6 +97,7 @@
 					return new ImagePreviewData($link, $isQuickSite);
 				case 'url':
 				case 'url365':
+				case 'quicksite':
 					return new UrlPreviewData($link, $isQuickSite);
 				case 'youtube':
 					return new YouTubePreviewData($link, $isQuickSite);
@@ -106,6 +107,8 @@
 					return new Mp3PreviewData($link, $isQuickSite);
 				case 'xls':
 					return new ExcelPreviewData($link, $isQuickSite);
+				case 'app':
+					return new AppLinkPreviewData($link, $isQuickSite);
 				default:
 					return new FilePreviewData($link, $isQuickSite);
 			}

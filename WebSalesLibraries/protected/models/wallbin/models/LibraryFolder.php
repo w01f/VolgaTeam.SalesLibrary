@@ -158,7 +158,7 @@
 			if (isset($headerImage))
 				$this->headerHeight = @imagesy($headerImage) + 2;
 			else
-				$this->headerHeight = 55;
+				$this->headerHeight = 34;
 		}
 
 
@@ -179,7 +179,8 @@
 					$link->load($linkRecord);
 					if ($usePermissionsFilter)
 						$link->extendedProperties->isRestricted = false;
-					$this->files[] = $link;
+					if(!$usePermissionsFilter || !$link->isAppLink || ($link->isAppLink && Yii::app()->browser->getBrowser() == Browser::BROWSER_EO))
+						$this->files[] = $link;
 				}
 
 			usort($this->files, "LibraryLink::libraryLinkComparer");

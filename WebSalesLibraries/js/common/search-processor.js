@@ -125,6 +125,8 @@
 							tags.push("url365");
 							tags.push("youtube");
 							tags.push("lan");
+							tags.push("quicksite");
+							tags.push("app");
 						}
 						if (this.showImages)
 						{
@@ -148,7 +150,7 @@
 								thatData.showPdf = true;
 							else if (value == 'video' || value == 'mp4' || value == 'wmv' || value == 'mp3')
 								thatData.showVideo = true;
-							else if (value == 'url' || value == 'url365' || value == 'youtube' || value == 'lan')
+							else if (value == 'url' || value == 'url365' || value == 'youtube' || value == 'lan' || value == 'quicksite' || value == 'app')
 								thatData.showUrls = true;
 							else if (value == 'png' || value == 'jpeg')
 								thatData.showImages = true;

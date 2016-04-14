@@ -43,7 +43,8 @@
 	width: 100%;
 }
 
-.folder-links-container .link-container.restricted
+.folder-links-container .link-container.restricted,
+.folder-links-container .link-container.hidden-app-link
 {
 	display: none;
 }

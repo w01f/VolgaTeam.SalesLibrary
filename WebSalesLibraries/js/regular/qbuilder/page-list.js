@@ -218,9 +218,7 @@
 						$('body').append('<div id="page-content-save-confirm" title="adSALESapps.com">quickSITE is SAVED!</div>');
 						$.fancybox({
 							content: $('<div class="row" style="margin: 0;">' +
-								'<div class="col-xs-3"><img src="' +
-								window.BaseUrl +
-								'images/qpages/save.png">' +
+								'<div class="col-xs-3"><img src="' + window.BaseUrl + 'images/qpages/save.png">' +
 								'</div>' +
 								'<div class="col-xs-8 col-xs-offset-1">' +
 								'<h3 style="margin-left: 0">Boo Yah!</h3>' +

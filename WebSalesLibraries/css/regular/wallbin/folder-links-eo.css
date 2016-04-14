@@ -1,0 +1,4 @@
+.folder-links-container .link-container.hidden-app-link
+{
+	display: inherit !important;
+}

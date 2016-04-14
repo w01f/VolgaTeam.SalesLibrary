@@ -27,8 +27,8 @@
 							$.SalesPortal.ShortcutsManager.trackActivity(activityData);
 
 							var hasPageContent = shortcutData.find('.has-page-content').length > 0;
-							var samePage = shortcutData.find('.same-page').length > 0;
-							var url = shortcutData.find('.url').text();
+							var samePage = dataItem.samePage;
+							var url = dataItem.url;
 
 							if (hasPageContent && samePage)
 								$.SalesPortal.ShortcutsManager.openShortcut(shortcutData, {pushHistory: true});

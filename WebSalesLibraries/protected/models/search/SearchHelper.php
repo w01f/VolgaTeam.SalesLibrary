@@ -305,6 +305,8 @@
 			if ($searchConditions->onlyByName)
 				$matchCondition = 'link.name,link.file_name,link.tags';
 
+			$includeAppLinks = Yii::app()->browser->getBrowser() == Browser::BROWSER_EO;
+
 			$contentCondition = "1=1";
 			if (count($textConditions) > 0)
 			{
@@ -344,7 +346,7 @@
 				") and (" . $onlyWithCategoriesCondition .
 				") and (" . $folderCondition .
 				") and (" . $linkCondition .
-				") and link.is_dead=0 and link.is_preview_not_ready=0 and link.type<>5 and link.type<>6";
+				") and link.is_dead=0 and link.is_preview_not_ready=0 and link.type<>5 and link.type<>6" . ($includeAppLinks ? '' : ' and link.type<>15');
 
 			$dbCommnad = Yii::app()->db->createCommand();
 			$dbCommnad = $dbCommnad->select($selectText);

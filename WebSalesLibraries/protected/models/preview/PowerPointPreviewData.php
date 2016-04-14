@@ -17,7 +17,10 @@
 			parent::__construct($link, $isQuickSite);
 			$this->linkTitle = 'PowerPoint';
 
-			$this->slideWidth = $link->extendedProperties->slideWidth;
-			$this->slideHeight = $link->extendedProperties->slideHeight;
+			/** @var  $linkSettings PowerPointLinkSettings*/
+			$linkSettings = $link->extendedProperties;
+
+			$this->slideWidth = $linkSettings->slideWidth;
+			$this->slideHeight = $linkSettings->slideHeight;
 		}
 	}

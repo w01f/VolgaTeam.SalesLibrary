@@ -95,7 +95,7 @@
 		/**
 		 * @param $actionsByKey array
 		 * @param $xpath DOMXPath
-		 * @param $actionConfigNodes DOMNode[]
+		 * @param $actionConfigNodes DOMNodeList
 		 */
 		protected function customizeActions($actionsByKey, $xpath, $actionConfigNodes)
 		{

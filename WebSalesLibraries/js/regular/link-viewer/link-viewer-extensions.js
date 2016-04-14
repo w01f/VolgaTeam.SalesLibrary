@@ -38,6 +38,8 @@
 					});
 				else if (viewerData.mp4Src !== undefined)
 					parts.push((window.BaseUrl + viewerData.mp4Src.href).replace(/\/\/+/g, '/'));
+				else if (viewerData.secondPath !== undefined)
+					parts.push(viewerData.secondPath);
 
 				var slideWidth = 0;
 				if (viewerData.slideWidth !== undefined)

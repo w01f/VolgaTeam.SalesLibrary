@@ -22,7 +22,10 @@
 						'Column' => 'Column',
 						'LibraryFolder' => 'LibraryFolder',
 						'LibraryLink' => 'LibraryLink',
-						'LinkSettings' => 'LinkSettings',
+						'BaseLinkSettings' => 'BaseLinkSettings',
+						'VideoLinkSettings' => 'VideoLinkSettings',
+						'HyperLinkSettings' => 'HyperLinkSettings',
+						'PowerPointLinkSettings' => 'PowerPointLinkSettings',
 						'LineBreak' => 'LineBreak',
 						'LinkCategory' => 'LinkCategory',
 						'LinkSuperFilter' => 'LinkSuperFilter',
@@ -41,6 +44,42 @@
 		 * @soap
 		 */
 		public function mockLibrary($library)
+		{
+
+		}
+
+		/**
+		 * @param VideoLinkSettings $settings
+		 * @soap
+		 */
+		public function mockVideoLinkSettings($settings)
+		{
+
+		}
+
+		/**
+		 * @param HyperLinkSettings $settings
+		 * @soap
+		 */
+		public function mockHyperLinkSettings($settings)
+		{
+
+		}
+
+		/**
+		 * @param PowerPointLinkSettings $settings
+		 * @soap
+		 */
+		public function mockPowerPointLinkSettings($settings)
+		{
+
+		}
+
+		/**
+		 * @param AppLinkSettings $settings
+		 * @soap
+		 */
+		public function mockAppLinkSettings($settings)
 		{
 
 		}

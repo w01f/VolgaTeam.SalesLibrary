@@ -232,7 +232,7 @@
 
 		/**
 		 * @param $xpath DOMXPath
-		 * @param $actionConfigNodes DOMNode[]
+		 * @param $actionConfigNodes DOMNodeList
 		 */
 		protected function initActions($xpath, $actionConfigNodes)
 		{
@@ -262,7 +262,7 @@
 		/**
 		 * @param $actionsByKey array
 		 * @param $xpath DOMXPath
-		 * @param $actionConfigNodes DOMNode[]
+		 * @param $actionConfigNodes DOMNodeList
 		 */
 		protected function customizeActions($actionsByKey, $xpath, $actionConfigNodes)
 		{

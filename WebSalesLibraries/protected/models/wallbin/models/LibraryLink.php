@@ -72,7 +72,7 @@
 		 */
 		public $type;
 		/**
-		 * @var LinkSettings
+		 * @var BaseLinkSettings|VideoLinkSettings|HyperLinkSettings|PowerPointLinkSettings
 		 * @soap
 		 */
 		public $extendedProperties;
@@ -146,6 +146,7 @@
 		public $isFolder;
 		public $isLineBreak;
 		public $isDirectUrl;
+		public $isAppLink;
 
 		/**
 		 * @param $folder
@@ -154,8 +155,7 @@
 		{
 			$this->parent = $folder;
 			$this->id = uniqid();
-			$this->extendedProperties = new LinkSettings();
-			$this->extendedProperties->forcePreview = false;
+			$this->extendedProperties = new BaseLinkSettings();
 		}
 
 		/**
@@ -179,10 +179,7 @@
 			$this->isDead = $linkRecord->is_dead;
 
 			$this->originalFormat = $linkRecord->format;
-			if ($this->type == 8)
-				$this->originalFormat = $this->originalFormat != 'url' && $this->originalFormat != 'url365' ? "url" : $this->originalFormat;
-
-			$this->extendedProperties = CJSON::decode($linkRecord->properties, false);
+			$this->extendedProperties = BaseLinkSettings::createByLink($linkRecord);
 
 			$lineBreakRecord = LineBreakRecord::model()->findByPk($linkRecord->id_line_break);
 			if ($lineBreakRecord !== null)
@@ -251,6 +248,11 @@
 				$this->fileName = $this->name;
 				$this->fileLink = $this->fileRelativePath;
 			}
+			else if ($this->type == 15)
+			{
+				$this->fileName = $this->name;
+				$this->fileLink = $this->fileRelativePath;
+			}
 			else
 			{
 				$this->fileRelativePath = str_replace('\\', '/', $this->fileRelativePath);
@@ -263,6 +265,7 @@
 			$this->isFolder = count(LinkRecord::model()->findAll('id_parent_link=?', array($linkRecord->id))) > 0;
 			$this->isLineBreak = isset($this->lineBreakProperties);
 			$this->isDirectUrl = $this->type == 8 && $this->extendedProperties->forcePreview;
+			$this->isAppLink = $this->type == 15;
 
 			$this->getTooltip();
 		}
@@ -328,6 +331,12 @@
 						case 'youtube':
 							$fileName = 'url.png';
 							break;
+						case 'quicksite':
+							$fileName = 'url.png';
+							break;
+						case 'app':
+							$fileName = 'url.png';
+							break;
 						case 'mp3':
 							$fileName = 'mp3.png';
 							break;
@@ -371,7 +380,7 @@
 				{
 					$backColor = $this->parent->windowBackColor;
 					$colorPrefix = Utils::isColorLight($backColor) ? 'white' : 'black';
-					$widget = base64_encode(file_get_contents(realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'folder-file-icons'  . DIRECTORY_SEPARATOR . $colorPrefix . DIRECTORY_SEPARATOR . 'folder.png'));
+					$widget = base64_encode(file_get_contents(realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'folder-file-icons' . DIRECTORY_SEPARATOR . $colorPrefix . DIRECTORY_SEPARATOR . 'folder.png'));
 				}
 				return $widget;
 			}

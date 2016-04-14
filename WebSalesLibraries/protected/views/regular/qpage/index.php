@@ -11,7 +11,7 @@
 <script type="text/javascript">
 	window.BaseUrl = '<?php echo Yii::app()->getBaseUrl(true); ?>' + '/qpage/';
 </script>
-<? $this->renderPartial('../menu/singlePageMenu', array('headerText' => $page->title)); ?>
+<? $this->renderPartial('../menu/singlePageMenu', array('headerText' => $page->title, 'showMainSiteUrl' => false)); ?>
 <div id="content">
 	<div id="page-id" style="display: none;"><? echo $page->id; ?></div>
 	<? if (isset($page->logo) || $page->record_activity): ?>

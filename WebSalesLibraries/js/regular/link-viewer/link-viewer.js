@@ -52,6 +52,9 @@
 							case 'lan':
 								new $.SalesPortal.LanViewer(parameters).show();
 								break;
+							case 'app':
+								new $.SalesPortal.AppLinkViewer(parameters).show();
+								break;
 							case 'image':
 								new $.SalesPortal.ImageViewer(parameters).show();
 								break;

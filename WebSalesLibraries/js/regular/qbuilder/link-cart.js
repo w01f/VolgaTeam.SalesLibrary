@@ -97,7 +97,7 @@
 						succesDescription = 'Link was added to Link Cart';
 					var modalDialog = new $.SalesPortal.ModalDialog({
 						title: 'Success!',
-						logo:'images/preview/actions/quicksite.png',
+						logo: window.BaseUrl + 'images/preview/actions/quicksite.png',
 						description: succesDescription,
 						buttons: [
 							{
@@ -140,7 +140,7 @@
 				{
 					var modalDialog = new $.SalesPortal.ModalDialog({
 						title: 'Success!',
-						logo:'images/preview/actions/quicksite.png',
+						logo: window.BaseUrl + 'images/preview/actions/quicksite.png',
 						description: 'Links were added to Link Cart',
 						buttons: [
 							{

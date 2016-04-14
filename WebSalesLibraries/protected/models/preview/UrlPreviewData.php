@@ -22,26 +22,53 @@
 			$this->fileName = $link->fileName;
 			$this->isOffice365 = $this->format == 'url365';
 
-			$this->linkTitle = $this->isOffice365 ? 'Office 365 Link' : 'URL';
+			switch($this->format)
+			{
+				case 'url365':
+					$this->linkTitle = 'Office 365 Link';
+					break;
+				case 'quicksite':
+					$this->linkTitle = 'QuickSite';
+					break;
+				default:
+					$this->linkTitle = 'URL';
+					break;
+			}
 		}
 
 		protected function initActions()
 		{
+			switch($this->format)
+			{
+				case 'url365':
+					$linkTitle = 'Office 365 Link';
+					$imageName = $this->format;
+					break;
+				case 'quicksite':
+					$linkTitle = 'QuickSite';
+					$imageName = 'url';
+					break;
+				default:
+					$linkTitle = 'URL';
+					$imageName = $this->format;
+					break;
+			}
+
 			$this->actions = array();
 			$imageUrlPrefix = Yii::app()->getBaseUrl(true);
 			$action = new PreviewAction();
 			$action->tag = 'open';
-			$action->text = sprintf('OPEN this %s in a new browser window...', $this->linkTitle);
-			$action->shortText = sprintf('OPEN this %s<br>%s', $this->linkTitle, $this->url);
-			$action->logo = sprintf('%s/images/preview/actions/open-%s.png?%s', $imageUrlPrefix, $this->format, Yii::app()->params['version']);
+			$action->text = sprintf('OPEN this %s in a new browser window...', $linkTitle);
+			$action->shortText = sprintf('OPEN this %s<br>%s', $linkTitle, $this->url);
+			$action->logo = sprintf('%s/images/preview/actions/open-%s.png?%s', $imageUrlPrefix, $imageName, Yii::app()->params['version']);
 			$this->actions[] = $action;
 
 			if ($this->config->allowAddToQuickSite)
 			{
 				$action = new PreviewAction();
 				$action->tag = 'quicksite';
-				$action->text = sprintf('Save this %s to a Quick Site...', $this->linkTitle);
-				$action->shortText = sprintf('Email a Link to this %s', $this->linkTitle);
+				$action->text = sprintf('Save this %s to a Quick Site...', $linkTitle);
+				$action->shortText = sprintf('Email a Link to this %s', $linkTitle);
 				$action->logo = sprintf('%s/images/preview/actions/quicksite.png?%s', $imageUrlPrefix, Yii::app()->params['version']);
 				$this->actions[] = $action;
 			}

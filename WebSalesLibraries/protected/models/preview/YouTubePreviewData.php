@@ -15,13 +15,14 @@
 		 */
 		public function __construct($link, $isQuickSite)
 		{
+			$this->linkTitle = 'YouTube link';
+
 			parent::__construct($link, $isQuickSite);
 
 			$this->viewerFormat = 'youtube';
 			$this->contentView = 'youTubeViewer';
 
 			$this->fileName = $link->fileName;
-			$this->linkTitle = 'YouTube link';
 			if (preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $this->url, $match))
 			{
 				$this->youTubeId = $match[1];

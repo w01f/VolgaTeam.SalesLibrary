@@ -16,7 +16,7 @@
 					<i class="header-icon <? echo isset($iconClass) ? $iconClass : ''; ?>"></i>
 					<span class="header-text"><? echo isset($headerText) ? $headerText : ''; ?></span>
 				</div>
-				<? if ($showMainSiteUrl): ?>
+				<? if (isset($showMainSiteUrl) && $showMainSiteUrl): ?>
 					<div class="col col-xs-2 text-right main-site-url">
 						<a href="<? echo $mainSiteUrl; ?>"
 						   target="_blank"><? echo str_replace('http://', '', str_replace('https://', '', $mainSiteUrl)); ?></a>

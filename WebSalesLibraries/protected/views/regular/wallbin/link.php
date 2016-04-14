@@ -27,6 +27,8 @@
 			$linkContainerClass = 'link-container clickable';
 	}
 
+	if ($link->isAppLink)
+		$linkContainerClass .= ' hidden-app-link';
 	if ($link->extendedProperties->isRestricted)
 		$linkContainerClass .= ' restricted';
 	if ($authorized)
@@ -80,7 +82,7 @@
 			 style="background-image: <? echo !(isset($disableWidget) && $disableWidget) && isset($widget) ? "url('data:image/png;base64," . $widget . "')" : ""; ?>; <? echo $linkFontProperties; ?>">
 			<span class="link-text mtTool" <? if (isset($tooltip)): ?>mtcontent="<? echo $tooltip; ?>"<? endif; ?>><? echo $link->name; ?></span>
 			<? if (isset($link->extendedProperties->note) && $link->extendedProperties->note != ""): ?>
-				<span class="link-note"><? echo $link->extendedProperties->note; ?></span>
+				<span class="link-note"><? echo ' - '.$link->extendedProperties->note; ?></span>
 			<? endif; ?>
 		</div>
 	<? endif; ?>

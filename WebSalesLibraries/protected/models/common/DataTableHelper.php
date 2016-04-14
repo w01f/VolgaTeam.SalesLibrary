@@ -55,10 +55,13 @@
 						case 'mp4':
 							$record['file_type'] = 'video';
 							break;
+						case 'quicksite':
+							$record['file_type'] = $linkRecord['format'];
+							break;
 						default:
 							if ($type == 5)
 								$record['file_type'] = 'folder';
-							else if ($type == 8)
+							if ($type == 8)
 								$record['file_type'] = 'url';
 							else
 								$record['file_type'] = $linkRecord['format'];

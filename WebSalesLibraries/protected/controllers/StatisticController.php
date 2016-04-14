@@ -272,8 +272,8 @@
 					$videoLinkInfo->linkDate = $resultRecord['link_date'];
 					$videoLinkInfo->fileDate = $resultRecord['file_date'];
 
-					/** @var $extendedProperties LinkSettings */
-					$extendedProperties = CJSON::decode($resultRecord['properties'], false);
+					/** @var $extendedProperties BaseLinkSettings */
+					$extendedProperties = BaseLinkSettings::createByContent($resultRecord['properties']);
 					$videoLinkInfo->linkNote = $extendedProperties->note;
 					$videoLinkInfo->hoverNote = $extendedProperties->hoverNote;
 
