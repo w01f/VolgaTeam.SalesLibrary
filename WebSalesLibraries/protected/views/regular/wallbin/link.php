@@ -8,6 +8,7 @@
 
 	$tooltip = $link->tooltip;
 
+	$draggable = false;
 	if ($link->isFolder)
 	{
 		$isLineBreak = false;
@@ -24,7 +25,10 @@
 		if ($isLineBreak)
 			$linkContainerClass = 'link-container line-break';
 		else
+		{
 			$linkContainerClass = 'link-container clickable';
+			$draggable = true;
+		}
 	}
 
 	if ($link->isAppLink)
@@ -78,8 +82,8 @@
 				. 'white-space: nowrap;';
 		}
 		?>
-		<div class="<? echo $linkClass; ?>"
-			 style="background-image: <? echo !(isset($disableWidget) && $disableWidget) && isset($widget) ? "url('data:image/png;base64," . $widget . "')" : ""; ?>; <? echo $linkFontProperties; ?>">
+		<div class="<? echo $linkClass; ?>" draggable="<? echo $draggable?'true':'false'; ?>"
+		     style="background-image: <? echo !(isset($disableWidget) && $disableWidget) && isset($widget) ? "url('data:image/png;base64," . $widget . "')" : ""; ?>; <? echo $linkFontProperties; ?>">
 			<span class="link-text mtTool" <? if (isset($tooltip)): ?>mtcontent="<? echo $tooltip; ?>"<? endif; ?>><? echo $link->name; ?></span>
 			<? if (isset($link->extendedProperties->note) && $link->extendedProperties->note != ""): ?>
 				<span class="link-note"><? echo ' - '.$link->extendedProperties->note; ?></span>

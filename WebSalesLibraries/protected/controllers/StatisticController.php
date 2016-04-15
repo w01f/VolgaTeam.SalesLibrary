@@ -282,8 +282,8 @@
 					$libraryFolderPath = realpath($rootPath . $libraryRelativePath);
 					if (!file_exists($libraryFolderPath))
 						$libraryRelativePath = DIRECTORY_SEPARATOR . Yii::app()->params['librariesRoot'] . DIRECTORY_SEPARATOR . 'Libraries' . DIRECTORY_SEPARATOR . $videoLinkInfo->station;
-					$videoLinkInfo->mp4Url = $resultRecord['mp4_path'] != '' ? Yii::app()->getBaseUrl(true) . htmlspecialchars(str_replace('&', '%26', str_replace(' ', '%20', str_replace('\\', '/', $libraryRelativePath . $resultRecord['mp4_path'])))) : '';
-					$videoLinkInfo->thumbUrl = $resultRecord['thumb_path'] != '' ? Yii::app()->getBaseUrl(true) . htmlspecialchars(str_replace('&', '%26', str_replace(' ', '%20', str_replace('\\', '/', $libraryRelativePath . $resultRecord['thumb_path'])))) : '';
+					$videoLinkInfo->mp4Url = $resultRecord['mp4_path'] != '' ? Yii::app()->getBaseUrl(true) . Utils::formatUrl($libraryRelativePath . $resultRecord['mp4_path']) : '';
+					$videoLinkInfo->thumbUrl = $resultRecord['thumb_path'] != '' ? Yii::app()->getBaseUrl(true) . Utils::formatUrl($libraryRelativePath . $resultRecord['thumb_path']) : '';
 					$reportRecords[] = $videoLinkInfo;
 				}
 			}

@@ -224,43 +224,11 @@
 				}
 			}
 
-			if ($this->type == 5)
-			{
-				$this->fileName = $this->fileRelativePath;
-			}
-			else if ($this->type == 6)
-			{
-			}
-			else if ($this->type == 8)
-			{
-				$this->fileRelativePath = str_replace('\\', '', $this->fileRelativePath);
-				$this->fileName = $this->fileRelativePath;
-				$this->fileLink = $this->fileRelativePath;
-			}
-			else if ($this->type == 9)
-			{
-				$this->fileName = $this->name;
-				$this->fileLink = $this->fileRelativePath;
-			}
-			else if ($this->type == 14)
-			{
-				$this->fileRelativePath = str_replace('\\', '', $this->fileRelativePath);
-				$this->fileName = $this->name;
-				$this->fileLink = $this->fileRelativePath;
-			}
-			else if ($this->type == 15)
-			{
-				$this->fileName = $this->name;
-				$this->fileLink = $this->fileRelativePath;
-			}
-			else
-			{
-				$this->fileRelativePath = str_replace('\\', '/', $this->fileRelativePath);
-				$this->filePath = $this->parent->parent->parent->storagePath . $this->fileRelativePath;
-				$this->fileLink = str_replace('&', '%26', str_replace('&amp;', '%26', str_replace(' ', '%20', htmlspecialchars(str_replace('\\', '/', $this->parent->parent->parent->storageLink . $this->fileRelativePath)))));
-				if (!isset($this->fileSize))
-					$this->fileSize = file_exists($this->filePath) ? filesize($this->filePath) : 0;
-			}
+			$fileInfo = FileInfo::fromLinkRecord($linkRecord, $this->parent->parent->parent);
+			$this->fileName = isset($fileInfo->name) ? $fileInfo->name : $this->fileName;
+			$this->filePath = isset($fileInfo->path) ? $fileInfo->path : $this->filePath;
+			$this->fileLink = isset($fileInfo->path) ? $fileInfo->link : $this->fileLink;
+			$this->fileSize = !isset($this->fileSize) ? $fileInfo->size : $this->fileSize;
 
 			$this->isFolder = count(LinkRecord::model()->findAll('id_parent_link=?', array($linkRecord->id))) > 0;
 			$this->isLineBreak = isset($this->lineBreakProperties);
@@ -394,6 +362,9 @@
 			return $this->type == 6 && isset($this->lineBreakProperties);
 		}
 
+		/**
+		 * @return string
+		 */
 		private function getTooltip()
 		{
 			$tooltipList = array();
@@ -478,6 +449,15 @@
 		public function getLinkData()
 		{
 			$result = '';
+
+			if (isset($this->fileLink))
+			{
+				$downloadLink = FileInfo::getFileMIME($this->originalFormat) . ':' .
+					$this->fileName . ':' .
+					str_replace('SalesLibraries/SalesLibraries', 'SalesLibraries', Yii::app()->getBaseUrl(true) . $this->fileLink);
+				$result .= '<div class="download-link">' . $downloadLink . '</div>';
+			}
+
 			$result .= '<div class="activity-data">' .
 				CJSON::encode(array(
 					'title' => $this->name,

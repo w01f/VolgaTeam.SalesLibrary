@@ -48,7 +48,12 @@
 						<? if ($page->show_links_as_url): ?>
 							<? if ($link->name != '' && !$link->isFolder): ?>
 								<li>
-									<a href="#" id="link<?php echo $link->id; ?>" class="clickable<? if ($authorized): ?> log-action<?endif;?>" style="text-decoration: underline;"><? echo $link->name; ?></a>
+									<a href="#" id="link<?php echo $link->id; ?>" class="clickable<? if ($authorized): ?> log-action<?endif;?>" style="text-decoration: underline;">
+										<? echo $link->name; ?>
+										<span class="service-data">
+											<? echo $link->getLinkData(); ?>
+										</span>
+									</a>
 								</li>
 							<? endif; ?>
 						<? else: ?>

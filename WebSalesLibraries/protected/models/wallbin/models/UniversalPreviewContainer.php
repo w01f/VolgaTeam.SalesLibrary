@@ -100,7 +100,7 @@
 				$this->id = $record->id_container;
 				$this->libraryId = $record->id_library;
 				$previewFile = new PreviewFile();
-				$previewFile->link = str_replace('&', '%26', str_replace('&amp;', '%26', str_replace(' ', '%20', htmlspecialchars(str_replace('\\', '/', $this->parent->storageLink . '/' . $record->relative_path)))));
+				$previewFile->link = Utils::formatUrl($this->parent->storageLink . '/' . $record->relative_path);
 				$previewFile->path = str_replace('\\', '/', $this->parent->storagePath . DIRECTORY_SEPARATOR . $record->relative_path);
 				$previewFile->name = basename($previewFile->path);
 				$previewFile->size = file_exists($previewFile->path) ? filesize($previewFile->path) : 0;

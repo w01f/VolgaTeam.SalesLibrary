@@ -1,7 +1,7 @@
 (function ($)
 {
 	window.BaseUrl = window.BaseUrl || '';
-	$.SalesPortal = $.SalesPortal || { };
+	$.SalesPortal = $.SalesPortal || {};
 	$.SalesPortal.SearchDataTable = function (options)
 	{
 		var saveState = options != undefined ? options.saveSate : undefined;
@@ -139,12 +139,12 @@
 				"columns": columnSettings,
 				stateSave: saveState,
 				"order": [
-					[ sortColumnIndex, sortDirection != undefined ? sortDirection : "asc" ]
+					[sortColumnIndex, sortDirection != undefined ? sortDirection : "asc"]
 				],
 				"scrollY": $.SalesPortal.Content.isMobileDevice() ? getNativeTableSize() : getBootstrapTableSize(),
 				"scrollCollapse": false,
 				"aLengthMenu": [
-					[15, 25, 50, 100 , -1],
+					[15, 25, 50, 100, -1],
 					[15, 25, 50, 100, "All"]
 				],
 				"iDisplayLength": 15,
@@ -153,8 +153,8 @@
 					"sZeroRecords": ""
 				},
 				"dom": "<'row'<'col-xs-4'l><'col-xs-4 back-url text-center'><'col-xs-4'f>>" +
-					"<'row'<'col-xs-12'tr>>" +
-					"<'row'<'col-xs-5'i><'col-xs-7'p>>"
+				"<'row'<'col-xs-12'tr>>" +
+				"<'row'<'col-xs-5'i><'col-xs-7'p>>"
 			});
 			if (!$.SalesPortal.Content.isMobileDevice())
 				$("#data-table-content_length").find('select').selectpicker();
@@ -199,6 +199,13 @@
 				});
 			});
 
+			table.on('dragstart', 'span.link-file', function (e)
+			{
+				var url = $(this).data( "url" );
+				if (url != '')
+					e.originalEvent.dataTransfer.setData('DownloadURL', url);
+			});
+
 			if (logHandler != undefined)
 			{
 				table.on('search.dt', logHandler).on('page.dt', logHandler).on('length.dt', logHandler);
@@ -231,11 +238,12 @@
 				var displayValue = typeof data === 'object' && data != null ? data.display : data;
 				displayValue = displayValue != null ? displayValue : '';
 
-				if (row != '')
-					return row.url != '' ?
-						'<a class="link-url mtTool" mtcontent="' + row.tooltip + '" href="' + row.url + '" target="_blank">' + displayValue + '</a>' :
-						'<span class="mtTool" mtcontent="' + row.tooltip + '">' + displayValue + '</span>';
-				return '';
+				if (row == '') return '';
+				if (row.isHyperlink)
+					return '<a class="link-url mtTool" mtcontent="' + row.tooltip + '" href="' + row.url + '" target="_blank">' + displayValue + '</a>';
+				if (row.isFile)
+					return '<span class="link-file mtTool" draggable="true" data-url="' + row.url + '" mtcontent="' + row.tooltip + '">' + displayValue + '</span>';
+				return '<span class="mtTool" mtcontent="' + row.tooltip + '">' + displayValue + '</span>';
 			}
 			return data;
 		};

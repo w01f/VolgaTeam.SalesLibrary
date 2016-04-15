@@ -24,7 +24,7 @@
 			if ($this->isPhone)
 			{
 				$viewParameters['folders'] = FavoritesFolderRecord::getChildFolders($userId, null);
-				$viewParameters['links'] = FavoritesLinkRecord::getLinksByFolder($userId, null, false, 'name', 'asc');
+				$viewParameters['links'] = FavoritesLinkRecord::getLinksByFolder($userId, null);
 
 			}
 			else

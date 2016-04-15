@@ -18,7 +18,7 @@
 			$linkConfig->loadXML($linkRecord->config);
 
 			$baseUrl = Yii::app()->getBaseUrl(true);
-			$this->sourceLink = str_replace('&', '%26', str_replace(' ', '%20', $baseUrl . $this->relativeLink . '/' . trim($linkConfig->getElementsByTagName("Source")->item(0)->nodeValue)));
+			$this->sourceLink = Utils::formatUrl($baseUrl . $this->relativeLink . '/' . trim($linkConfig->getElementsByTagName("Source")->item(0)->nodeValue));
 		}
 
 		/**

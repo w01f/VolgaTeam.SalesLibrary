@@ -25,7 +25,7 @@
 					$record['id'] = $linkRecord['id'];
 					$record['name'] = $linkRecord['name'];
 
-					$record['tooltip']= sprintf('%s<br><br>%s',
+					$record['tooltip'] = sprintf('%s<br><br>%s',
 						isset($linkRecord['file_name']) && $linkRecord['file_name'] != '' ? $linkRecord['file_name'] : $linkRecord['name'],
 						array_key_exists($linkRecord['format'], Yii::app()->params['tooltips']['wallbin']) ? Yii::app()->params['tooltips']['wallbin'][$linkRecord['format']] : '');
 
@@ -70,9 +70,18 @@
 
 					$extendedProperties = CJSON::decode($linkRecord['extended_properties'], true);
 					$record['extended_properties'] = $extendedProperties;
-					$record['url'] = $type == 8 && $extendedProperties['forcePreview'] == true ?
-						$linkRecord['path'] :
-						'';
+
+					$record['isHyperlink'] = $type == 8 && $extendedProperties['forcePreview'] == true;
+
+					$fileInfo = FileInfo::fromLinkData($type, $linkRecord['name'], $linkRecord['file_name'], $linkRecord['path'], $library);
+					$record['isFile'] = $fileInfo->isFile;
+
+					if ($record['isHyperlink'])
+						$record['url'] = $fileInfo->link;
+					else
+						$record['url'] = FileInfo::getFileMIME($linkRecord['format']) . ':' .
+							(isset($fileInfo->name) ? $fileInfo->name : $linkRecord['file_name']) . ':' .
+							str_replace('SalesLibraries/SalesLibraries', 'SalesLibraries', Yii::app()->getBaseUrl(true) . $fileInfo->link);
 
 					$dataset[] = $record;
 				}

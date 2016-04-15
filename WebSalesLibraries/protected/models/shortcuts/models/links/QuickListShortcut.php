@@ -25,7 +25,7 @@
 				$fileName = trim($fileNode->nodeValue);
 				$fileLink = new QuickListFile();
 				$fileLink->name = $fileName;
-				$fileLink->link = str_replace('&', '%26', str_replace(' ', '%20', $quickListPath . $fileName));
+				$fileLink->link = Utils::formatUrl($quickListPath . $fileName);
 				$this->fileLinks[] = $fileLink;
 			}
 		}

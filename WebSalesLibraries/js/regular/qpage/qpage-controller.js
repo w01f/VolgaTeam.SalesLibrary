@@ -33,6 +33,14 @@
 				event.stopPropagation();
 				event.preventDefault();
 			});
+
+			container.find('.clickable').off('dragstart').on('dragstart', function (event)
+			{
+				var url = $(this).find('.service-data .download-link').text();
+				if (url != '')
+					event.originalEvent.dataTransfer.setData('DownloadURL', url);
+			});
+
 			container.find('.log-activity').off('click.log').on('click.log', function ()
 			{
 				var data = $(this).children('.service-data');

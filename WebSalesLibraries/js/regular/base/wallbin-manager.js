@@ -31,6 +31,7 @@
 				event.stopPropagation();
 				event.preventDefault();
 			});
+
 			container.find('.clickable').off('click.open').on('click.open', function (event)
 			{
 				var linkId = $(this).attr('id').replace('link', '');
@@ -38,6 +39,13 @@
 				event.stopPropagation();
 				event.preventDefault();
 			});
+			container.find('.clickable').off('dragstart').on('dragstart', function (event)
+			{
+				var url = $(this).find('.service-data .download-link').text();
+				if (url != '')
+					event.originalEvent.dataTransfer.setData('DownloadURL', url);
+			});
+
 			container.find('.folder-link').off('click.open').on('click.open', function (event)
 			{
 				loadFolderLinkContent($(this));
