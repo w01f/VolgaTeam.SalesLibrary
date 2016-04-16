@@ -227,7 +227,7 @@
 			$fileInfo = FileInfo::fromLinkRecord($linkRecord, $this->parent->parent->parent);
 			$this->fileName = isset($fileInfo->name) ? $fileInfo->name : $this->fileName;
 			$this->filePath = isset($fileInfo->path) ? $fileInfo->path : $this->filePath;
-			$this->fileLink = isset($fileInfo->path) ? $fileInfo->link : $this->fileLink;
+			$this->fileLink = isset($fileInfo->link) ? $fileInfo->link : $this->fileLink;
 			$this->fileSize = !isset($this->fileSize) ? $fileInfo->size : $this->fileSize;
 
 			$this->isFolder = count(LinkRecord::model()->findAll('id_parent_link=?', array($linkRecord->id))) > 0;

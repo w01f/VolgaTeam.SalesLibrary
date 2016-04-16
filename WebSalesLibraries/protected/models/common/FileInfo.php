@@ -47,6 +47,7 @@
 				case 9:
 				case 15:
 					$fileInfo->name = $name;
+					$fileInfo->link = $relativePath;
 					break;
 				case 14:
 					$fileInfo->name = $name;
