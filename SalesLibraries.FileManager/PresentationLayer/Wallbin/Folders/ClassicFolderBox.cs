@@ -476,9 +476,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 		{
 			Padding newPadding;
 			if (IsFolderBoxDragged)
-				newPadding = new Padding(0, 3, 0, 0);
+				newPadding = new Padding(0, 2, 0, 0);
 			else if (IsActive && !FormatState.AllowMultiSelect)
-				newPadding = new Padding(3, 3, 3, 3);
+				newPadding = new Padding(2, 2, 2, 2);
 			else
 				newPadding = Padding.Empty;
 			if (Padding.Left != newPadding.Left ||
@@ -714,7 +714,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 				Equals(_mouseDownHitInfo, DataGridView.HitTestInfo.Nowhere) ||
 				_dragStartBox.Contains(e.X, e.Y))
 				return;
-			LinkRow selectedLink = SelectedLinkRow;
+			var selectedLink = SelectedLinkRow;
 			if (selectedLink != null)
 				grFiles.DoDragDrop(selectedLink, DragDropEffects.All);
 			_mouseDownHitInfo = DataGridView.HitTestInfo.Nowhere;
