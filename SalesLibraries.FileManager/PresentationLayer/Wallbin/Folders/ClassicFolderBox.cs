@@ -90,6 +90,13 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 				toolStripMenuItemFolderMove);
 			_copyFolderManager.FolderMoved += OnFolderMoved;
 
+			contextMenuStripFolderProperties.DefaultDropDownDirection = Screen.AllScreens.Length > 0 && DataSource.ColumnOrder > 0
+				? ToolStripDropDownDirection.Left
+				: ToolStripDropDownDirection.Default;
+			contextMenuStripSecurity.DefaultDropDownDirection = Screen.AllScreens.Length > 0 && DataSource.ColumnOrder > 0
+				? ToolStripDropDownDirection.Left
+				: ToolStripDropDownDirection.Default;
+
 			// 
 			// grFiles
 			// 
@@ -696,7 +703,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 		{
 			if (!FormatState.AllowEdit) return;
 			_mouseDownHitInfo = DataGridView.HitTestInfo.Nowhere;
-			;
 		}
 
 		private void OnGridCellMouseMove(object sender, DataGridViewCellMouseEventArgs e)
@@ -728,11 +734,21 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 					break;
 				case MouseButtons.Right:
 					if (FormatState.ShowSecurityTags)
-						contextMenuStripSecurity.Show((Control)sender, e.Location);
+						contextMenuStripSecurity.Show(
+							(Control)sender,
+							e.Location,
+							Screen.AllScreens.Length > 0 && DataSource.ColumnOrder > 0 ?
+								ToolStripDropDownDirection.Left :
+								ToolStripDropDownDirection.Default);
 					else
 					{
 						_copyFolderManager.UpdateTargets();
-						contextMenuStripFolderProperties.Show((Control)sender, e.Location);
+						contextMenuStripFolderProperties.Show(
+							(Control)sender,
+							e.Location,
+							Screen.AllScreens.Length > 0 && DataSource.ColumnOrder > 0 ?
+								ToolStripDropDownDirection.Left :
+								ToolStripDropDownDirection.Default);
 					}
 					break;
 			}

@@ -59,16 +59,21 @@ namespace SalesLibraries.FileManager.Business.Models.VideoInfo
 			}
 			else
 			{
-				var mp4Folder = Path.Combine(previewContainer.ContainerPath, PreviewFormats.VideoMp4);
-				if (Directory.Exists(mp4Folder))
+				var mp4FilePath = Path.Combine(
+					previewContainer.ContainerPath,
+					PreviewFormats.VideoMp4,
+					Path.GetFileName(Path.ChangeExtension(previewContainer.SourcePath, PreviewFormats.VideoMp4)));
+				if (File.Exists(mp4FilePath))
 				{
-					var mp4FilePath = Path.Combine(mp4Folder, Path.GetFileName(Path.ChangeExtension(previewContainer.SourcePath, PreviewFormats.VideoMp4)));
 					videoInfo.Mp4FilePath = mp4FilePath;
 					videoInfo.Mp4FileInfo = String.Format("{0}{1}",
 						Path.GetFileName(mp4FilePath),
-						File.Exists(mp4FilePath) ?
-							String.Format("     <b>({0})</b>", FormatVideoSize(new FileInfo(videoInfo.Mp4FilePath).Length)) :
-							String.Empty);
+						String.Format("     <b>({0})</b>", FormatVideoSize(new FileInfo(videoInfo.Mp4FilePath).Length)));
+				}
+				else
+				{
+					videoInfo.Mp4FilePath = null;
+					videoInfo.Mp4FileInfo = videoData != null && videoData.IsCorrupted ? "CORRUPTED!" : "MISSING!";
 				}
 			}
 

@@ -192,7 +192,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Video
 		{
 			var videoInfo = gridViewVideo.GetFocusedRow() as VideoInfo;
 			if (videoInfo == null) return;
-			if (File.Exists(videoInfo.Mp4FilePath))
+			if (!String.IsNullOrEmpty(videoInfo.Mp4FilePath) && File.Exists(videoInfo.Mp4FilePath))
 				VideoHelper.PlayVideo(videoInfo.Mp4FilePath);
 			else
 				MainController.Instance.PopupMessages.ShowWarning("You need to convert this video first!");

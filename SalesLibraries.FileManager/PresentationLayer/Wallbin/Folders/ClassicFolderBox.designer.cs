@@ -40,6 +40,8 @@
 			this.toolStripMenuItemFolderSettings = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
 			this.toolStripMenuItemFolderDelete = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItemFolderCopy = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItemFolderMove = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
 			this.toolStripMenuItemFolderManageWidgetsAndBanners = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItemFolderWidget = new System.Windows.Forms.ToolStripMenuItem();
@@ -64,8 +66,6 @@
 			this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
 			this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
 			this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
-			this.toolStripMenuItemFolderCopy = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolStripMenuItemFolderMove = new System.Windows.Forms.ToolStripMenuItem();
 			this.pnHeader.SuspendLayout();
 			this.pnHeaderBorder.SuspendLayout();
 			this.pnBorders.SuspendLayout();
@@ -78,7 +78,6 @@
 			// labelControlText
 			// 
 			this.labelControlText.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-			this.labelControlText.Size = new System.Drawing.Size(266, 50);
 			// 
 			// contextMenuStripSecurity
 			// 
@@ -161,6 +160,18 @@
 			this.toolStripMenuItemFolderDelete.Size = new System.Drawing.Size(348, 22);
 			this.toolStripMenuItemFolderDelete.Text = "Delete this window";
 			this.toolStripMenuItemFolderDelete.Click += new System.EventHandler(this.toolStripMenuItemFolderDelete_Click);
+			// 
+			// toolStripMenuItemFolderCopy
+			// 
+			this.toolStripMenuItemFolderCopy.Name = "toolStripMenuItemFolderCopy";
+			this.toolStripMenuItemFolderCopy.Size = new System.Drawing.Size(348, 22);
+			this.toolStripMenuItemFolderCopy.Text = "Copy this Window to a another page...";
+			// 
+			// toolStripMenuItemFolderMove
+			// 
+			this.toolStripMenuItemFolderMove.Name = "toolStripMenuItemFolderMove";
+			this.toolStripMenuItemFolderMove.Size = new System.Drawing.Size(348, 22);
+			this.toolStripMenuItemFolderMove.Text = "Move this Window to a another page...";
 			// 
 			// toolStripSeparator3
 			// 
@@ -354,18 +365,6 @@
 			this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
 			this.barDockControlRight.Location = new System.Drawing.Point(311, 0);
 			this.barDockControlRight.Size = new System.Drawing.Size(0, 308);
-			// 
-			// toolStripMenuItemFolderCopy
-			// 
-			this.toolStripMenuItemFolderCopy.Name = "toolStripMenuItemFolderCopy";
-			this.toolStripMenuItemFolderCopy.Size = new System.Drawing.Size(348, 22);
-			this.toolStripMenuItemFolderCopy.Text = "Copy this Window to a another page...";
-			// 
-			// toolStripMenuItemFolderMove
-			// 
-			this.toolStripMenuItemFolderMove.Name = "toolStripMenuItemFolderMove";
-			this.toolStripMenuItemFolderMove.Size = new System.Drawing.Size(348, 22);
-			this.toolStripMenuItemFolderMove.Text = "Move this Window to a another page...";
 			// 
 			// ClassicFolderBox
 			// 

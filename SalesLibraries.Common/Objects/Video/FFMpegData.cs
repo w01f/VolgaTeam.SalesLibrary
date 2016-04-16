@@ -6,16 +6,16 @@ namespace SalesLibraries.Common.Objects.Video
 {
 	public class FFMpegData
 	{
+		public bool IsCorrupted { get; private set; }
 		public string Codec { get; private set; }
 		public int Bitrate { get; private set; }
 		public int Width { get; private set; }
 		public int Height { get; private set; }
 		public double Duration { get; private set; }
 
-		public bool IsH264Encoded
-		{
-			get { return String.Equals(Codec, "h264", StringComparison.OrdinalIgnoreCase); }
-		}
+		public bool IsH264Encoded => String.Equals(Codec, "h264", StringComparison.OrdinalIgnoreCase);
+
+		public FFMpegData() { }
 
 		public FFMpegData(dynamic source)
 		{
@@ -42,7 +42,14 @@ namespace SalesLibraries.Common.Objects.Video
 
 		public static FFMpegData LoadFromFile(string infoFilePath)
 		{
-			return new FFMpegData(JsonConvert.DeserializeObject(File.ReadAllText(infoFilePath)));
+			try
+			{
+				return new FFMpegData(JsonConvert.DeserializeObject(File.ReadAllText(infoFilePath)));
+			}
+			catch (Exception)
+			{
+				return new FFMpegData { IsCorrupted = true };
+			}
 		}
 	}
 }
