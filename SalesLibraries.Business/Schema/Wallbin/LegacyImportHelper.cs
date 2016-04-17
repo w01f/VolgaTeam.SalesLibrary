@@ -282,7 +282,6 @@ namespace SalesLibraries.Business.Schema.Wallbin
 			}
 			if (target is WebLink)
 			{
-				((WebLinkSettings)target.Settings).IsUrl365 = legacy.ExtendedProperties.IsUrl365;
 				((WebLinkSettings)target.Settings).ForcePreview = legacy.ExtendedProperties.ForcePreview;
 			}
 			if (target is LibraryFileLink)

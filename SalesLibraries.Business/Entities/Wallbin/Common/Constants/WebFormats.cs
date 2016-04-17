@@ -11,7 +11,6 @@
 		public const string Png = "png";
 		public const string PowerPoint = "ppt";
 		public const string Url = "url";
-		public const string Url365 = "url365";
 		public const string YouTube = "youtube";
 		public const string QuickSite = "quicksite";
 		public const string AppLink = "app";

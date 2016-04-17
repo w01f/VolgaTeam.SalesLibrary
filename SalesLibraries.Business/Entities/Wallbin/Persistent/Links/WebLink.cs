@@ -21,10 +21,8 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		}
 
 		[NotMapped, JsonIgnore]
-		public override string WebFormat
-		{
-			get { return ((WebLinkSettings)Settings).IsUrl365 ? WebFormats.Url365 : WebFormats.Url; }
-		}
+		public override string WebFormat => WebFormats.Url;
+
 		#endregion
 
 		public WebLink()
