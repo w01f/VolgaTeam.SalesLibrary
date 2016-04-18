@@ -96,7 +96,6 @@
 				case 'jpeg':
 					return new ImagePreviewData($link, $isQuickSite);
 				case 'url':
-				case 'url365':
 				case 'quicksite':
 					return new UrlPreviewData($link, $isQuickSite);
 				case 'youtube':

@@ -291,17 +291,8 @@
 							$fileName = 'jpeg.png';
 							break;
 						case 'url':
-							$fileName = 'url.png';
-							break;
-						case 'url365':
-							$fileName = 'url365.png';
-							break;
 						case 'youtube':
-							$fileName = 'url.png';
-							break;
 						case 'quicksite':
-							$fileName = 'url.png';
-							break;
 						case 'app':
 							$fileName = 'url.png';
 							break;

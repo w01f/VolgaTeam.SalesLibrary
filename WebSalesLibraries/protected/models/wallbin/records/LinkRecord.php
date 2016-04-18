@@ -82,7 +82,7 @@
 				$linkRecord->file_relative_path = $link['fileRelativePath'];
 				$linkRecord->file_name = $link['fileName'];
 				$linkRecord->file_extension = $link['fileExtension'];
-				$linkRecord->file_date = $link['originalFormat'] == 'url' || $link['originalFormat'] == 'url365' || $link['originalFormat'] == 'youtube' || $link['originalFormat'] == 'quicksite' || $link['originalFormat'] == 'app' ? date(Yii::app()->params['mysqlDateFormat'], strtotime($link['dateAdd'])) : date(Yii::app()->params['mysqlDateFormat'], strtotime($link['fileDate']));
+				$linkRecord->file_date = $link['originalFormat'] == 'url' || $link['originalFormat'] == 'youtube' || $link['originalFormat'] == 'quicksite' || $link['originalFormat'] == 'app' ? date(Yii::app()->params['mysqlDateFormat'], strtotime($link['dateAdd'])) : date(Yii::app()->params['mysqlDateFormat'], strtotime($link['fileDate']));
 				$linkRecord->file_size = $link['fileSize'];
 				$linkRecord->format = $link['originalFormat'];
 				$linkRecord->order = $link['order'];
@@ -346,20 +346,9 @@
 							$link['file_type'] = base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'search-keynote.png'));
 							break;
 						case 'url':
-							$link['file_type'] = base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'search-url.png'));
-							break;
-						case 'url365':
-							$link['file_type'] = base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'search-url365.png'));
-							break;
 						case 'youtube':
-							$link['file_type'] = base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'search-url.png'));
-							break;
 						case 'quicksite':
-							$link['file_type'] = base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'search-url.png'));
-							break;
 						case 'app':
-							$link['file_type'] = base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'search-url.png'));
-							break;
 						case 'lan':
 							$link['file_type'] = base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'search-url.png'));
 							break;
