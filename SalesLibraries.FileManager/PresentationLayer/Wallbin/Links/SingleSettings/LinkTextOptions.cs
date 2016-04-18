@@ -16,18 +16,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 	{
 		private readonly LibraryObjectLink _data;
 
-		public LinkSettingsType SettingsType
-		{
-			get { return LinkSettingsType.Notes; }
-		}
-		public int Order
-		{
-			get { return 1; }
-		}
-		public bool AvailableForEmbedded
-		{
-			get { return false; }
-		}
+		public LinkSettingsType SettingsType => LinkSettingsType.Notes;
+		public int Order => 1;
+		public bool AvailableForEmbedded => false;
+		public SettingsEditorHeaderInfo HeaderInfo => null;
+
 		public event EventHandler<EventArgs> ForceCloseRequested;
 
 		public LinkTextOptions(LibraryObjectLink data)

@@ -59,18 +59,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			}
 		}
 
-		public LinkSettingsType SettingsType
-		{
-			get { return LinkSettingsType.Security; }
-		}
-		public int Order
-		{
-			get { return 0; }
-		}
-		public bool AvailableForEmbedded
-		{
-			get { return true; }
-		}
+		public LinkSettingsType SettingsType => LinkSettingsType.Security;
+		public int Order => 0;
+		public bool AvailableForEmbedded => true;
+		public SettingsEditorHeaderInfo HeaderInfo => null;
+
 		public event EventHandler<EventArgs> ForceCloseRequested;
 
 		public SecurityOptions(BaseLibraryLink data)

@@ -3,6 +3,7 @@ using System.Drawing;
 using DevExpress.XtraTab;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.Common.Helpers;
+using SalesLibraries.FileManager.Properties;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSettings
 {
@@ -12,18 +13,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 	{
 		private readonly NetworkLink _data;
 
-		public LinkSettingsType SettingsType
-		{
-			get { return LinkSettingsType.Notes; }
-		}
-		public int Order
-		{
-			get { return 2; }
-		}
-		public bool AvailableForEmbedded
-		{
-			get { return true; }
-		}
+		public LinkSettingsType SettingsType => LinkSettingsType.Notes;
+		public int Order => 2;
+		public bool AvailableForEmbedded => true;
+		public SettingsEditorHeaderInfo HeaderInfo => new SettingsEditorHeaderInfo { Title = "LAN", Logo = Resources.LinkAddNetwork };
+
 		public event EventHandler<EventArgs> ForceCloseRequested;
 
 		public LinkLanOptions(NetworkLink data)

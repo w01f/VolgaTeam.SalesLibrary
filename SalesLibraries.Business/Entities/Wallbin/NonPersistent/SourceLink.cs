@@ -8,15 +8,9 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 		public Guid RootId { get; set; }
 		public string Path { get; set; }
 		
-		public string Name
-		{
-			get { return System.IO.Path.GetFileName(Path); }
-		}
+		public string Name => System.IO.Path.GetFileName(Path);
 
-		public string NameWithoutExtension
-		{
-			get { return System.IO.Path.GetFileNameWithoutExtension(Path); }
-		}
+		public string NameWithoutExtension => System.IO.Path.GetFileNameWithoutExtension(Path);
 	}
 
 	public class FileLink : SourceLink { }

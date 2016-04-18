@@ -5,6 +5,7 @@ using DevExpress.XtraTab;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.Common.Helpers;
+using SalesLibraries.FileManager.Properties;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSettings
 {
@@ -14,18 +15,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 	{
 		private readonly AppLink _data;
 
-		public LinkSettingsType SettingsType
-		{
-			get { return LinkSettingsType.Notes; }
-		}
-		public int Order
-		{
-			get { return 2; }
-		}
-		public bool AvailableForEmbedded
-		{
-			get { return true; }
-		}
+		public LinkSettingsType SettingsType => LinkSettingsType.Notes;
+		public int Order => 2;
+		public bool AvailableForEmbedded => true;
+		public SettingsEditorHeaderInfo HeaderInfo => new SettingsEditorHeaderInfo { Title = "App", Logo = Resources.LinkAddApp };
+
 		public event EventHandler<EventArgs> ForceCloseRequested;
 
 		public LinkAppOptions(AppLink data)

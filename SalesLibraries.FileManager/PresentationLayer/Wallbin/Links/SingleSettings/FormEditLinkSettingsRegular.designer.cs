@@ -34,7 +34,7 @@
 			this.hyperLinkEditRequestNewCategories = new DevExpress.XtraEditors.HyperLinkEdit();
 			this.pnBottom = new System.Windows.Forms.Panel();
 			this.pnTop = new System.Windows.Forms.Panel();
-			this.laTitle = new System.Windows.Forms.Label();
+			this.labelControlTitle = new DevExpress.XtraEditors.LabelControl();
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControl)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.hyperLinkEditRequestNewCategories.Properties)).BeginInit();
 			this.pnBottom.SuspendLayout();
@@ -60,10 +60,10 @@
 			this.xtraTabControl.AppearancePage.PageClient.Font = new System.Drawing.Font("Arial", 9.75F);
 			this.xtraTabControl.AppearancePage.PageClient.Options.UseFont = true;
 			this.xtraTabControl.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.xtraTabControl.Location = new System.Drawing.Point(0, 44);
+			this.xtraTabControl.Location = new System.Drawing.Point(0, 52);
 			this.xtraTabControl.Name = "xtraTabControl";
 			this.xtraTabControl.ShowTabHeader = DevExpress.Utils.DefaultBoolean.False;
-			this.xtraTabControl.Size = new System.Drawing.Size(607, 494);
+			this.xtraTabControl.Size = new System.Drawing.Size(607, 486);
 			this.xtraTabControl.TabIndex = 4;
 			this.xtraTabControl.SelectedPageChanged += new DevExpress.XtraTab.TabPageChangedEventHandler(this.xtraTabControl_SelectedPageChanged);
 			// 
@@ -129,26 +129,28 @@
 			// pnTop
 			// 
 			this.pnTop.BackColor = System.Drawing.Color.Transparent;
-			this.pnTop.Controls.Add(this.laTitle);
+			this.pnTop.Controls.Add(this.labelControlTitle);
 			this.pnTop.Dock = System.Windows.Forms.DockStyle.Top;
 			this.pnTop.ForeColor = System.Drawing.Color.Black;
 			this.pnTop.Location = new System.Drawing.Point(0, 0);
 			this.pnTop.Name = "pnTop";
-			this.pnTop.Size = new System.Drawing.Size(607, 44);
+			this.pnTop.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+			this.pnTop.Size = new System.Drawing.Size(607, 52);
 			this.pnTop.TabIndex = 9;
 			// 
-			// laTitle
+			// labelControlTitle
 			// 
-			this.laTitle.BackColor = System.Drawing.Color.White;
-			this.laTitle.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.laTitle.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.laTitle.ForeColor = System.Drawing.Color.Black;
-			this.laTitle.Location = new System.Drawing.Point(0, 0);
-			this.laTitle.Name = "laTitle";
-			this.laTitle.Size = new System.Drawing.Size(607, 44);
-			this.laTitle.TabIndex = 0;
-			this.laTitle.Text = "label1";
-			this.laTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.labelControlTitle.Appearance.BackColor = System.Drawing.Color.White;
+			this.labelControlTitle.Appearance.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelControlTitle.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.labelControlTitle.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+			this.labelControlTitle.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.labelControlTitle.ImageAlignToText = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+			this.labelControlTitle.Location = new System.Drawing.Point(10, 0);
+			this.labelControlTitle.Name = "labelControlTitle";
+			this.labelControlTitle.Size = new System.Drawing.Size(597, 52);
+			this.labelControlTitle.TabIndex = 0;
+			this.labelControlTitle.Text = "Link Settings";
 			// 
 			// FormEditLinkSettingsRegular
 			// 
@@ -183,6 +185,6 @@
 		public DevExpress.XtraTab.XtraTabControl xtraTabControl;
 		private System.Windows.Forms.Panel pnBottom;
 	    public System.Windows.Forms.Panel pnTop;
-		public System.Windows.Forms.Label laTitle;
-    }
+		private DevExpress.XtraEditors.LabelControl labelControlTitle;
+	}
 }

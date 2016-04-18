@@ -31,6 +31,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		{
 			get { return false; }
 		}
+		public SettingsEditorHeaderInfo HeaderInfo => null;
+
 		public event EventHandler<EventArgs> ForceCloseRequested;
 
 		public PreviewOptions(PreviewableLink data)

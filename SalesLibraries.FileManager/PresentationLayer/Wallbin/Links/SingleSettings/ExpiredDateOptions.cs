@@ -13,18 +13,11 @@ namespace FileManager.PresentationClasses.WallBin.LinkProperties
 	{
 		private readonly LibraryObjectLink _data;
 
-		public LinkSettingsType SettingsType
-		{
-			get { return LinkSettingsType.ExpirationDate; }
-		}
-		public int Order
-		{
-			get { return 0; }
-		}
-		public bool AvailableForEmbedded
-		{
-			get { return false; }
-		}
+		public LinkSettingsType SettingsType => LinkSettingsType.ExpirationDate;
+		public int Order => 0;
+		public bool AvailableForEmbedded => false;
+		public SettingsEditorHeaderInfo HeaderInfo => null;
+
 		public event EventHandler<EventArgs> ForceCloseRequested;
 
 		public ExpiredDateOptions(LibraryObjectLink data)

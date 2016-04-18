@@ -29,6 +29,7 @@
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LinkAppOptions));
 			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
 			this.labelControlTitle = new DevExpress.XtraEditors.LabelControl();
 			this.labelControlName = new DevExpress.XtraEditors.LabelControl();
@@ -37,6 +38,7 @@
 			this.labelControlPath = new DevExpress.XtraEditors.LabelControl();
 			this.textEditSecondPath = new DevExpress.XtraEditors.TextEdit();
 			this.labelControlSecondPath = new DevExpress.XtraEditors.LabelControl();
+			this.labelControlWarning = new DevExpress.XtraEditors.LabelControl();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditName.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditPath.Properties)).BeginInit();
@@ -128,8 +130,25 @@
 			this.labelControlSecondPath.TabIndex = 31;
 			this.labelControlSecondPath.Text = "Path Option 2";
 			// 
+			// labelControlWarning
+			// 
+			this.labelControlWarning.AllowHtmlString = true;
+			this.labelControlWarning.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.labelControlWarning.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Top;
+			this.labelControlWarning.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+			this.labelControlWarning.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+			this.labelControlWarning.Location = new System.Drawing.Point(8, 277);
+			this.labelControlWarning.Name = "labelControlWarning";
+			this.labelControlWarning.Size = new System.Drawing.Size(504, 250);
+			this.labelControlWarning.StyleController = this.styleController;
+			this.labelControlWarning.TabIndex = 33;
+			this.labelControlWarning.Text = resources.GetString("labelControlWarning.Text");
+			// 
 			// LinkAppOptions
 			// 
+			this.Controls.Add(this.labelControlWarning);
 			this.Controls.Add(this.textEditSecondPath);
 			this.Controls.Add(this.labelControlSecondPath);
 			this.Controls.Add(this.textEditPath);
@@ -158,5 +177,6 @@
 		private DevExpress.XtraEditors.LabelControl labelControlPath;
 		private DevExpress.XtraEditors.TextEdit textEditSecondPath;
 		private DevExpress.XtraEditors.LabelControl labelControlSecondPath;
+		private DevExpress.XtraEditors.LabelControl labelControlWarning;
 	}
 }

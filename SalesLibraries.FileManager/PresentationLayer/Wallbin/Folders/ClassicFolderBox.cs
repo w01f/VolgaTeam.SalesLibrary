@@ -90,10 +90,10 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 				toolStripMenuItemFolderMove);
 			_copyFolderManager.FolderMoved += OnFolderMoved;
 
-			contextMenuStripFolderProperties.DefaultDropDownDirection = Screen.AllScreens.Length > 0 && DataSource.ColumnOrder > 0
+			contextMenuStripFolderProperties.DefaultDropDownDirection = Screen.AllScreens.Length > 0 && DataSource.ColumnOrder > 1
 				? ToolStripDropDownDirection.Left
 				: ToolStripDropDownDirection.Default;
-			contextMenuStripSecurity.DefaultDropDownDirection = Screen.AllScreens.Length > 0 && DataSource.ColumnOrder > 0
+			contextMenuStripSecurity.DefaultDropDownDirection = Screen.AllScreens.Length > 0 && DataSource.ColumnOrder > 1
 				? ToolStripDropDownDirection.Left
 				: ToolStripDropDownDirection.Default;
 
@@ -106,7 +106,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 			grFiles.CellMouseDown += OnGridCellMouseDown;
 			grFiles.CellMouseLeave += OnGridCellMouseLeave;
 			grFiles.CellMouseMove += OnGridCellMouseMove;
-			grFiles.CellMouseUp += grFiles_CellMouseUp;
+			grFiles.CellMouseUp += OnGridCellMouseUp;
 			grFiles.SelectionChanged += OnGridSelectionChanged;
 			grFiles.DragDrop += OnDragDrop;
 			grFiles.DragOver += OnDragOver;
@@ -427,15 +427,16 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 					(targetRow.Index < newPosition ? newPosition - 1 : newPosition);
 			else
 				positionToInsert = newPosition == -1 ? grFiles.RowCount : newPosition;
+			var targetLink = targetRow.Source;
 			targetRow.Delete();
+			targetRow.Dispose();
+
 			grFiles.ClearSelection();
-			grFiles.Rows.Insert(positionToInsert, targetRow);
-			targetRow.Source.Folder = DataSource;
-			((List<BaseLibraryLink>)DataSource.Links).InsertItem(targetRow.Source, positionToInsert);
-			targetRow.ChangeFolder(this);
-			targetRow.Info.Recalc();
-			targetRow.InfoChanged += OnLinkRowInfoChanged;
+			targetLink.Folder = DataSource;
+			((List<BaseLibraryLink>)DataSource.Links).InsertItem(targetLink, positionToInsert);
+			var newRow = InsertLinkRow(targetLink, positionToInsert);
 			UpdateGridSize();
+			newRow.Selected = true;
 			DataChanged?.Invoke(this, EventArgs.Empty);
 		}
 
@@ -699,7 +700,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 			_mouseDownHitInfo = grFiles.HitTest(e.X, e.Y);
 		}
 
-		private void grFiles_CellMouseUp(object sender, DataGridViewCellMouseEventArgs e)
+		private void OnGridCellMouseUp(object sender, DataGridViewCellMouseEventArgs e)
 		{
 			if (!FormatState.AllowEdit) return;
 			_mouseDownHitInfo = DataGridView.HitTestInfo.Nowhere;
@@ -737,7 +738,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 						contextMenuStripSecurity.Show(
 							(Control)sender,
 							e.Location,
-							Screen.AllScreens.Length > 0 && DataSource.ColumnOrder > 0 ?
+							Screen.AllScreens.Length > 0 && DataSource.ColumnOrder > 1 ?
 								ToolStripDropDownDirection.Left :
 								ToolStripDropDownDirection.Default);
 					else
@@ -746,7 +747,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 						contextMenuStripFolderProperties.Show(
 							(Control)sender,
 							e.Location,
-							Screen.AllScreens.Length > 0 && DataSource.ColumnOrder > 0 ?
+							Screen.AllScreens.Length > 0 && DataSource.ColumnOrder > 1 ?
 								ToolStripDropDownDirection.Left :
 								ToolStripDropDownDirection.Default);
 					}

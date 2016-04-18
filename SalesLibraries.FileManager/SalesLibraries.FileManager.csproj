@@ -466,6 +466,7 @@
       <DependentUpon>SecurityOptions.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\SettingsEditorFactory.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\SettingsEditorHeaderInfo.cs" />
     <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\SuperFilterControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

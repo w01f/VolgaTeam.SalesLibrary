@@ -15,18 +15,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		private readonly LibraryFolderLink _data;
 		private readonly List<LibraryFileLink> _files = new List<LibraryFileLink>();
 
-		public LinkSettingsType SettingsType
-		{
-			get { return LinkSettingsType.AdvancedSettings; }
-		}
-		public int Order
-		{
-			get { return 0; }
-		}
-		public bool AvailableForEmbedded
-		{
-			get { return false; }
-		}
+		public LinkSettingsType SettingsType => LinkSettingsType.AdvancedSettings;
+		public int Order => 0;
+		public bool AvailableForEmbedded => false;
+		public SettingsEditorHeaderInfo HeaderInfo => null;
+
 		public event EventHandler<EventArgs> ForceCloseRequested;
 
 		public FolderFilesOptions(LibraryFolderLink data)

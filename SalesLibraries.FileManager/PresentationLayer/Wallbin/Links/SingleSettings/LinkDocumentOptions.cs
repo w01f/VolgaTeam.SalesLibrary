@@ -13,18 +13,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 	{
 		private readonly DocumentLink _data;
 
-		public LinkSettingsType SettingsType
-		{
-			get { return LinkSettingsType.Notes; }
-		}
-		public int Order
-		{
-			get { return 2; }
-		}
-		public bool AvailableForEmbedded
-		{
-			get { return true; }
-		}
+		public LinkSettingsType SettingsType => LinkSettingsType.Notes;
+		public int Order => 2;
+		public bool AvailableForEmbedded => true;
+		public SettingsEditorHeaderInfo HeaderInfo => null;
+
 		public event EventHandler<EventArgs> ForceCloseRequested;
 
 		public LinkDocumentOptions(DocumentLink data)

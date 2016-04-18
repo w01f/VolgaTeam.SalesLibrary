@@ -58,7 +58,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			Height = 630;
 			Text = _sourceLink.ToString();
 			StartPosition = FormStartPosition.CenterScreen;
-			laTitle.Text = GetFormTitle(settingsType);
 			AddOptionPages(
 				ObjectIntendHelper.GetObjectInstances(
 					typeof(ILinkSettingsEditControl),
@@ -67,24 +66,37 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 					.Where(lp =>
 						lp.SettingsType == settingsType)
 					.OrderBy(lp => lp.Order));
+
+			var headerInfo = GetFormTitle(settingsType);
+			labelControlTitle.Text = String.Format("{0}{1}",
+				headerInfo.Logo != null ? "  " : String.Empty,
+				headerInfo.Title);
+			labelControlTitle.Appearance.Image = headerInfo.Logo;
 		}
 
-		private static string GetFormTitle(LinkSettingsType settingsType)
+		private SettingsEditorHeaderInfo GetFormTitle(LinkSettingsType settingsType)
 		{
+			var customEditorHeaderInfo = xtraTabControl.TabPages
+				.OfType<ILinkSettingsEditControl>()
+				.Where(editor => editor.HeaderInfo != null)
+				.Select(editor => editor.HeaderInfo)
+				.FirstOrDefault();
+			if (customEditorHeaderInfo != null)
+				return customEditorHeaderInfo;
 			switch (settingsType)
 			{
 				case LinkSettingsType.AdvancedSettings:
-					return "Advanced Settings";
+					return new SettingsEditorHeaderInfo { Title = "Advanced Settings" };
 				case LinkSettingsType.ExpirationDate:
-					return "Expirartion Date";
+					return new SettingsEditorHeaderInfo { Title = "Expirartion Date" };
 				case LinkSettingsType.Notes:
-					return "Notes";
+					return new SettingsEditorHeaderInfo { Title = "Link Settings" };
 				case LinkSettingsType.Security:
-					return "Security";
+					return new SettingsEditorHeaderInfo { Title = "Security" };
 				case LinkSettingsType.Tags:
-					return "Tags";
+					return new SettingsEditorHeaderInfo { Title = "Tags" };
 			}
-			return "Link Settings";
+			return new SettingsEditorHeaderInfo { Title = "Link Settings" };
 		}
 
 		private void AddOptionPages(IEnumerable<ILinkSettingsEditControl> pages)

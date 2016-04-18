@@ -24,18 +24,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		private bool _loading;
 		private readonly List<SearchGroupContainer> _searchGroups = new List<SearchGroupContainer>();
 
-		public LinkSettingsType SettingsType
-		{
-			get { return LinkSettingsType.Tags; }
-		}
-		public int Order
-		{
-			get { return 0; }
-		}
-		public bool AvailableForEmbedded
-		{
-			get { return true; }
-		}
+		public LinkSettingsType SettingsType => LinkSettingsType.Tags;
+		public int Order => 0;
+		public bool AvailableForEmbedded => true;
+		public SettingsEditorHeaderInfo HeaderInfo => null;
+
 		public event EventHandler<EventArgs> ForceCloseRequested;
 
 		public TagsOptions(BaseLibraryLink data)
