@@ -596,20 +596,13 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 			}
 		}
 
-		protected bool IsDataDragged
-		{
-			get { return DataDraggedOver != null; }
-		}
+		protected bool IsDataDragged => DataDraggedOver != null;
 
-		protected bool IsSourceLinksDragged
-		{
-			get { return IsDataDragged && DataDraggedOver.GetDataPresent(typeof(SourceLink[])); }
-		}
+		protected bool IsSourceLinksDragged => IsDataDragged &&
+			DataDraggedOver.GetDataPresent(DataFormats.Serializable, true) &&
+			DataDraggedOver.GetData(DataFormats.Serializable, true) is SourceLink[];
 
-		protected bool IsLinkRowDragged
-		{
-			get { return IsDataDragged && DataDraggedOver.GetDataPresent(typeof(LinkRow)); }
-		}
+		protected bool IsLinkRowDragged => IsDataDragged && DataDraggedOver.GetDataPresent(typeof(LinkRow));
 
 		protected bool IsFolderBoxDragged
 		{
@@ -671,19 +664,19 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 		{
 			FolderContainer.ProcessScrollOnDragOver(sender, e);
 			if (!FormatState.AllowEdit) return;
-			var droppedLinks = e.Data.GetData(typeof(SourceLink[])) as SourceLink[];
-			if (droppedLinks != null)
+			if(IsSourceLinksDragged)
 			{
+				var droppedLinks = DataDraggedOver.GetData(DataFormats.Serializable, true) as SourceLink[];
 				SelectionManager.SelectFolder(this);
 				InsertLinks(droppedLinks, _mouseDragOverHitInfo.RowIndex);
 			}
-			var droppedRow = e.Data.GetData(typeof(LinkRow)) as LinkRow;
+			var droppedRow = DataDraggedOver.GetData(typeof(LinkRow)) as LinkRow;
 			if (droppedRow != null)
 			{
 				SelectionManager.SelectFolder(this);
 				ProcessRowMoving(droppedRow, _mouseDragOverHitInfo.RowIndex);
 			}
-			var droppedFolder = e.Data.GetData(typeof(ClassicFolderBox)) as ClassicFolderBox;
+			var droppedFolder = DataDraggedOver.GetData(typeof(ClassicFolderBox)) as ClassicFolderBox;
 			if (droppedFolder != null && droppedFolder != this)
 				FolderContainer.ProcessFolderMoving(droppedFolder, DataSource.ColumnOrder, DataSource.RowOrder);
 			ResetDragInfo();

@@ -208,7 +208,24 @@ namespace SalesLibraries.Common.Helpers
 				}
 				catch (Exception) { }
 			}
-			
+
+		}
+
+		public static void CopyToFolder(string targetRootPath, IEnumerable<string> sourceItemsPaths)
+		{
+			foreach (var sourcePath in sourceItemsPaths)
+			{
+				if (Directory.Exists(sourcePath))
+				{
+					var targetDirectoryPath = Path.Combine(targetRootPath, Path.GetFileName(sourcePath));
+					if (!Directory.Exists(targetDirectoryPath))
+						Directory.CreateDirectory(targetDirectoryPath);
+					CopyToFolder(targetDirectoryPath, Directory.GetDirectories(sourcePath));
+					CopyToFolder(targetDirectoryPath, Directory.GetFiles(sourcePath));
+				}
+				else if (File.Exists(sourcePath))
+					File.Copy(sourcePath, Path.Combine(targetRootPath, Path.GetFileName(sourcePath)), true);
+			}
 		}
 	}
 }

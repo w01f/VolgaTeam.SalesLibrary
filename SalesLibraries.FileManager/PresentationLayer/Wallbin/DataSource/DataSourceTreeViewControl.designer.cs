@@ -85,6 +85,7 @@
 			// 
 			// treeListAllFiles
 			// 
+			this.treeListAllFiles.AllowDrop = true;
 			this.treeListAllFiles.Appearance.FocusedCell.Font = new System.Drawing.Font("Arial", 9.75F);
 			this.treeListAllFiles.Appearance.FocusedCell.Options.UseFont = true;
 			this.treeListAllFiles.Appearance.FocusedRow.Font = new System.Drawing.Font("Arial", 9.75F);
@@ -116,6 +117,8 @@
 			this.treeListAllFiles.Size = new System.Drawing.Size(293, 386);
 			this.treeListAllFiles.StateImageList = this.imageListFiles;
 			this.treeListAllFiles.TabIndex = 1;
+			this.treeListAllFiles.DragDrop += new System.Windows.Forms.DragEventHandler(this.treeListAllFiles_DragDrop);
+			this.treeListAllFiles.DragOver += new System.Windows.Forms.DragEventHandler(this.treeListAllFiles_DragOver);
 			this.treeListAllFiles.MouseClick += new System.Windows.Forms.MouseEventHandler(this.treeListAllFiles_MouseClick);
 			this.treeListAllFiles.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.treeListAllFiles_MouseDoubleClick);
 			this.treeListAllFiles.MouseDown += new System.Windows.Forms.MouseEventHandler(this.treeList_MouseDown);

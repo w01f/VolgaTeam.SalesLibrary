@@ -214,6 +214,10 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.DataSource
 			catch { }
 		}
 
+		private void RefreshNode(TreeListNode node)
+		{
+		}
+
 		private bool FindNodeByPath(TreeListNode targetNode, string itemPath)
 		{
 			var nodeSourceLink = (SourceLink)targetNode.Tag;
@@ -297,19 +301,68 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.DataSource
 					_dragStartHitInfo.MousePoint.Y - dragSize.Height / 2), dragSize);
 				if (!dragRect.Contains(e.Location))
 				{
-					treeList.DoDragDrop(
-						treeList.Selection
-							.OfType<TreeListNode>()
-							.Select(node => node.Tag)
-							.OfType<SourceLink>()
-							.ToArray()
-						, DragDropEffects.Copy);
+					var souceLinks = treeList.Selection
+						.OfType<TreeListNode>()
+						.Select(node => node.Tag)
+						.OfType<SourceLink>()
+						.ToArray();
+
+					var data = new DataObject();
+					data.SetData(DataFormats.FileDrop, souceLinks.Select(link => link.Path).ToArray());
+					data.SetData(DataFormats.Serializable, souceLinks);
+
+					treeList.DoDragDrop(data, DragDropEffects.Copy);
 					return;
 				}
 			}
 			var hitPoint = new Point(e.X, e.Y);
 			var hitInfo = treeListAllFiles.CalcHitInfo(hitPoint);
 			treeList.Cursor = hitInfo.Node != null ? Cursors.Hand : Cursors.Default;
+		}
+
+		private void treeListAllFiles_DragOver(object sender, DragEventArgs e)
+		{
+			var p = treeListAllFiles.PointToClient(new Point(e.X, e.Y));
+			var targetNode = treeListAllFiles.CalcHitInfo(p).Node;
+			if (targetNode?.Tag is SourceLink && e.Data.GetDataPresent(DataFormats.FileDrop))
+				e.Effect = DragDropEffects.Copy;
+			else
+				e.Effect = DragDropEffects.None;
+		}
+
+		private async void treeListAllFiles_DragDrop(object sender, DragEventArgs e)
+		{
+			var p = treeListAllFiles.PointToClient(new Point(e.X, e.Y));
+			var targetNode = treeListAllFiles.CalcHitInfo(p).Node;
+			if (!(targetNode?.Tag is SourceLink && e.Data.GetDataPresent(DataFormats.FileDrop))) return;
+			var droppedItemsPaths = e.Data.GetData(DataFormats.FileDrop) as String[];
+			if (droppedItemsPaths == null) return;
+			if (targetNode.Tag is FileLink)
+				targetNode = targetNode.ParentNode;
+			var targetFolderLink = (FolderLink)targetNode.Tag;
+			var targetFolderPath = targetFolderLink.Path;
+
+			treeListAllFiles.SuspendLayout();
+			laTreeViewProgressLabel.Text = "Copying Files...";
+			pnTreeViewProgress.Visible = true;
+			circularProgressTreeView.IsRunning = true;
+			xtraTabControlFiles.Enabled = false;
+
+			await Task.Run(() =>
+			{
+				Utils.CopyToFolder(targetFolderPath, droppedItemsPaths);
+				Invoke(new MethodInvoker(() =>
+				{
+					targetNode.Nodes.Clear();
+					FillNode(targetNode, false);
+				}));
+			});
+
+			xtraTabControlFiles.Enabled = true;
+			circularProgressTreeView.IsRunning = false;
+			pnTreeViewProgress.Visible = false;
+			treeListAllFiles.ResumeLayout();
+			treeListAllFiles.Enabled = true;
 		}
 		#endregion
 
