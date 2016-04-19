@@ -40,7 +40,9 @@
 		 */
 		public static function updateData($banner)
 		{
-			$bannerRecord = new BannerRecord();
+			$bannerRecord = self::model()->findByPk($banner['id']);
+			if (!isset($bannerRecord))
+				$bannerRecord = new BannerRecord();
 			$bannerRecord->id = $banner['id'];
 			$bannerRecord->id_library = $banner['libraryId'];
 			$bannerRecord->enabled = $banner['isEnabled'];
