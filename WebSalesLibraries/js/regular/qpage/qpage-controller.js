@@ -34,11 +34,12 @@
 				event.preventDefault();
 			});
 
-			container.find('.clickable').off('dragstart').on('dragstart', function (event)
+			container.find('.clickable, .url').off('dragstart').on('dragstart', function (event)
 			{
+				var header = $(this).find('.service-data .download-header').text();
 				var url = $(this).find('.service-data .download-link').text();
 				if (url != '')
-					event.originalEvent.dataTransfer.setData('DownloadURL', url);
+					event.originalEvent.dataTransfer.setData(header, url);
 			});
 
 			container.find('.log-activity').off('click.log').on('click.log', function ()

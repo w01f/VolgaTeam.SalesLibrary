@@ -74,14 +74,25 @@
 					$record['isHyperlink'] = $type == 8 && $extendedProperties['forcePreview'] == true;
 
 					$fileInfo = FileInfo::fromLinkData($type, $linkRecord['name'], $linkRecord['file_name'], $linkRecord['path'], $library);
-					$record['isFile'] = $fileInfo->isFile;
+					$record['isDraggable'] = $fileInfo->isFile || in_array($linkRecord['format'], array('url', 'quicksite', 'youtube'));
 
 					if ($record['isHyperlink'])
+					{
+						$record['url_header'] = 'URL';
 						$record['url'] = $fileInfo->link;
+					}
+					else if (in_array($linkRecord['format'], array('url', 'quicksite', 'youtube')))
+					{
+						$record['url_header'] = 'URL';
+						$record['url'] = $fileInfo->link;
+					}
 					else
+					{
+						$record['url_header'] = 'DownloadURL';
 						$record['url'] = FileInfo::getFileMIME($linkRecord['format']) . ':' .
 							(isset($fileInfo->name) ? $fileInfo->name : $linkRecord['file_name']) . ':' .
 							str_replace('SalesLibraries/SalesLibraries', 'SalesLibraries', Yii::app()->getBaseUrl(true) . $fileInfo->link);
+					}
 
 					$dataset[] = $record;
 				}

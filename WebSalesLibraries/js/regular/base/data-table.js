@@ -201,9 +201,10 @@
 
 			table.on('dragstart', 'span.link-file', function (e)
 			{
+				var urlHeader = $(this).data( "url-header" );
 				var url = $(this).data( "url" );
 				if (url != '')
-					e.originalEvent.dataTransfer.setData('DownloadURL', url);
+					e.originalEvent.dataTransfer.setData(urlHeader, url);
 			});
 
 			if (logHandler != undefined)
@@ -241,8 +242,8 @@
 				if (row == '') return '';
 				if (row.isHyperlink)
 					return '<a class="link-url mtTool" mtcontent="' + row.tooltip + '" href="' + row.url + '" target="_blank">' + displayValue + '</a>';
-				if (row.isFile)
-					return '<span class="link-file mtTool" draggable="true" data-url="' + row.url + '" mtcontent="' + row.tooltip + '">' + displayValue + '</span>';
+				if (row.isDraggable)
+					return '<span class="link-file mtTool" draggable="true" data-url-header="' + row.url_header + '" data-url="' + row.url + '" mtcontent="' + row.tooltip + '">' + displayValue + '</span>';
 				return '<span class="mtTool" mtcontent="' + row.tooltip + '">' + displayValue + '</span>';
 			}
 			return data;

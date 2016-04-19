@@ -443,9 +443,19 @@
 
 			if (isset($this->fileLink))
 			{
-				$downloadLink = FileInfo::getFileMIME($this->originalFormat) . ':' .
-					$this->fileName . ':' .
-					str_replace('SalesLibraries/SalesLibraries', 'SalesLibraries', Yii::app()->getBaseUrl(true) . $this->fileLink);
+				if (in_array($this->originalFormat, array('url', 'quicksite', 'youtube')))
+				{
+					$downloadHeader = 'URL';
+					$downloadLink = $this->fileName;
+				}
+				else
+				{
+					$downloadHeader = 'DownloadURL';
+					$downloadLink = FileInfo::getFileMIME($this->originalFormat) . ':' .
+						$this->fileName . ':' .
+						str_replace('SalesLibraries/SalesLibraries', 'SalesLibraries', Yii::app()->getBaseUrl(true) . $this->fileLink);
+				}
+				$result .= '<div class="download-header">' . $downloadHeader . '</div>';
 				$result .= '<div class="download-link">' . $downloadLink . '</div>';
 			}
 
