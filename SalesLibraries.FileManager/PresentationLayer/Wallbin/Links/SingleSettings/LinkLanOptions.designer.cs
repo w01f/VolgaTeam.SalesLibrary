@@ -29,12 +29,14 @@
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LinkLanOptions));
 			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
 			this.labelControlTitle = new DevExpress.XtraEditors.LabelControl();
 			this.labelControlName = new DevExpress.XtraEditors.LabelControl();
 			this.textEditName = new DevExpress.XtraEditors.TextEdit();
 			this.textEditPath = new DevExpress.XtraEditors.TextEdit();
 			this.labelControlPath = new DevExpress.XtraEditors.LabelControl();
+			this.labelControlWarning = new DevExpress.XtraEditors.LabelControl();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditName.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditPath.Properties)).BeginInit();
@@ -105,13 +107,31 @@
 			this.labelControlPath.TabIndex = 29;
 			this.labelControlPath.Text = "Network Location";
 			// 
+			// labelControlWarning
+			// 
+			this.labelControlWarning.AllowHtmlString = true;
+			this.labelControlWarning.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.labelControlWarning.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Bottom;
+			this.labelControlWarning.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+			this.labelControlWarning.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+			this.labelControlWarning.Location = new System.Drawing.Point(8, 189);
+			this.labelControlWarning.Name = "labelControlWarning";
+			this.labelControlWarning.Size = new System.Drawing.Size(504, 349);
+			this.labelControlWarning.StyleController = this.styleController;
+			this.labelControlWarning.TabIndex = 34;
+			this.labelControlWarning.Text = resources.GetString("labelControlWarning.Text");
+			// 
 			// LinkLanOptions
 			// 
+			this.Controls.Add(this.labelControlWarning);
 			this.Controls.Add(this.textEditPath);
 			this.Controls.Add(this.labelControlPath);
 			this.Controls.Add(this.textEditName);
 			this.Controls.Add(this.labelControlName);
 			this.Controls.Add(this.labelControlTitle);
+			this.Name = "LinkLanOptions";
 			this.Size = new System.Drawing.Size(531, 541);
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditName.Properties)).EndInit();
@@ -129,5 +149,6 @@
 		private DevExpress.XtraEditors.TextEdit textEditName;
 		private DevExpress.XtraEditors.TextEdit textEditPath;
 		private DevExpress.XtraEditors.LabelControl labelControlPath;
+		private DevExpress.XtraEditors.LabelControl labelControlWarning;
 	}
 }

@@ -136,12 +136,12 @@
 			this.labelControlWarning.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.labelControlWarning.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Top;
+			this.labelControlWarning.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Bottom;
 			this.labelControlWarning.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
 			this.labelControlWarning.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-			this.labelControlWarning.Location = new System.Drawing.Point(8, 277);
+			this.labelControlWarning.Location = new System.Drawing.Point(8, 251);
 			this.labelControlWarning.Name = "labelControlWarning";
-			this.labelControlWarning.Size = new System.Drawing.Size(504, 250);
+			this.labelControlWarning.Size = new System.Drawing.Size(504, 276);
 			this.labelControlWarning.StyleController = this.styleController;
 			this.labelControlWarning.TabIndex = 33;
 			this.labelControlWarning.Text = resources.GetString("labelControlWarning.Text");
