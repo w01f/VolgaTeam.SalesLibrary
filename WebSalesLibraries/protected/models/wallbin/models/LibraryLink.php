@@ -446,7 +446,7 @@
 				if (in_array($this->originalFormat, array('url', 'quicksite', 'youtube')))
 				{
 					$downloadHeader = 'URL';
-					$downloadLink = $this->fileName;
+					$downloadLink = $this->fileLink;
 				}
 				else
 				{
