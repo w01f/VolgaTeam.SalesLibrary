@@ -11,6 +11,7 @@ using SalesLibraries.Business.Entities.Helpers;
 using SalesLibraries.Business.Entities.Wallbin.Persistent;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.CommonGUI.Common;
+using SalesLibraries.CommonGUI.CustomDialog;
 using SalesLibraries.FileManager.Controllers;
 using SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings;
 
@@ -169,24 +170,41 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 		{
 			var selectedPage = _menuHitInfo.Page as TabPage;
 			if (selectedPage == null) return;
-			if (MainController.Instance.PopupMessages.ShowQuestion("Are You sure You want to delete this page?") != DialogResult.Yes) return;
-			selectedPage.DisposePage();
-			MainController.Instance.ProcessManager.Run("Deleting Page...",
-			cancelationToken =>
+			using (var form = new FormCustomDialog(
+					String.Format("{0}{1}{2}",
+						"<size=+4>Are you SURE you want to DELETE this Page?</size><br>",
+						String.Format("<size=+2>{0}</size>", selectedPage.Page.Name),
+						"<br><br>*All Links on this page will be removed from your site"
+					),
+					new[]
+					{
+						new CustomDialogButtonInfo {Title = "DELETE",DialogResult = DialogResult.OK,Width = 100},
+						new CustomDialogButtonInfo {Title = "CANCEL",DialogResult = DialogResult.Cancel,Width = 100}
+					}
+				))
 			{
-				selectedPage.Page.Delete(DataStorage);
-				DataStorage.Library.MarkAsModified();
-				DataStorage.Library.Pages.RemoveItem(selectedPage.Page);
-			});
-			IsDataChanged = true;
-			SaveData();
-			pnEmpty.BringToFront();
-			MainController.Instance.ProcessManager.RunInQueue("Loading Library...",
-			() => MainController.Instance.MainForm.Invoke(new MethodInvoker(() =>
-			{
-				LoadView(true);
-				MainController.Instance.WallbinViews.SetActiveWallbin(this);
-			})));
+				form.Width = 500;
+				form.Height = 160;
+				if (form.ShowDialog(MainController.Instance.MainForm) != DialogResult.OK) return;
+				selectedPage.DisposePage();
+				MainController.Instance.ProcessManager.Run("Deleting Page...",
+					cancelationToken =>
+					{
+						selectedPage.Page.Delete(DataStorage);
+						DataStorage.Library.MarkAsModified();
+						DataStorage.Library.Pages.RemoveItem(selectedPage.Page);
+					});
+				IsDataChanged = true;
+				SaveData();
+				pnEmpty.BringToFront();
+				MainController.Instance.ProcessManager.RunInQueue("Loading Library...",
+					() => MainController.Instance.MainForm.Invoke(new MethodInvoker(() =>
+					{
+						LoadView(true);
+						MainController.Instance.WallbinViews.SetActiveWallbin(this);
+					})));
+			}
+			
 		}
 		#endregion
 	}

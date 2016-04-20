@@ -14,6 +14,7 @@ using SalesLibraries.Business.Entities.Interfaces;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent;
 using SalesLibraries.Common.Configuration;
 using SalesLibraries.Common.Helpers;
+using SalesLibraries.CommonGUI.CustomDialog;
 using SalesLibraries.FileManager.Controllers;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.DataSource
@@ -74,13 +75,19 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.DataSource
 			var treeList = sender as TreeList;
 			if (treeList == null) return;
 			var hitPoint = new Point(e.X, e.Y);
-			var hitInfo = treeListAllFiles.CalcHitInfo(hitPoint);
-			if (hitInfo.Node == null) return;
-			if (hitInfo.Node.Tag == null) return;
-			if (hitInfo.Node.Tag.GetType() != typeof(FileLink)) return;
-			treeListAllFiles.Selection.Clear();
+			var hitInfo = treeList.CalcHitInfo(hitPoint);
+			if (!(hitInfo.Node?.Tag is SourceLink)) return;
+			treeList.Selection.Clear();
 			hitInfo.Node.Selected = true;
-			contextMenuStrip.Show(treeListAllFiles, hitPoint);
+			if (hitInfo.Node.Tag is FileLink)
+			{
+				tmiFileDelete.Visible = treeList == treeListAllFiles;
+				contextMenuStripFile.Show(treeList, hitPoint);
+			}
+			else if (hitInfo.Node.Tag is FolderLink && hitInfo.Node.StateImageIndex == 1)
+			{
+				contextMenuStripFolder.Show(treeList, hitPoint);
+			}
 		}
 
 		private async void treeListAllFiles_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -132,15 +139,20 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.DataSource
 			}
 			else if (hitInfo.Node.Tag != null)
 			{
-				if (hitInfo.Node.Tag.GetType() == typeof(FolderLink))
-					FillNode(hitInfo.Node, false);
-				else if (hitInfo.Node.Tag.GetType() == typeof(FileLink))
-					ViewItem(hitInfo.Node.Tag as FileLink);
+				if (hitInfo.Node.Tag is FolderLink)
+				{
+					if (hitInfo.Node.Nodes.Count == 0 && hitInfo.Node.StateImageIndex == 0)
+						FillNode(hitInfo.Node, false);
+					else if (hitInfo.Node.Nodes.Count == 0 && hitInfo.Node.StateImageIndex == 1)
+						hitInfo.Node.StateImageIndex = 0;
+				}
+				else if (hitInfo.Node.Tag is FileLink)
+					ViewItem((FileLink)hitInfo.Node.Tag);
 			}
 			treeList.ResumeLayout();
 		}
 
-		private void tmiOpen_Click(object sender, EventArgs e)
+		private void tmiFileOpen_Click(object sender, EventArgs e)
 		{
 			FileLink fileLink = null;
 			switch (xtraTabControlFiles.SelectedTabPageIndex)
@@ -158,64 +170,118 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.DataSource
 				ViewItem(fileLink);
 		}
 
-		private void FillNode(TreeListNode node, bool showSubItems)
+		private void tmiFileDelete_Click(object sender, EventArgs e)
 		{
-			if (node.Tag == null) return;
-			var folderLink = node.Tag as FolderLink;
-			if (folderLink == null || node.Nodes.Count != 0) return;
-			try
+			var fileNode = treeListAllFiles.Selection[0];
+			var fileLink = fileNode.Tag as FileLink;
+			if (fileLink == null) return;
+			using (var form = new FormCustomDialog(
+					String.Format("{0}{1}",
+						"<size=+4>Are you SURE you want to DELETE this file from your Site Source Directory?</size>",
+						"<br><br>* This Link will also be removed from your Site…<br>*This file is saved in z_archive…"
+					),
+					new[]
+					{
+						new CustomDialogButtonInfo {Title = "DELETE",DialogResult = DialogResult.OK,Width = 100},
+						new CustomDialogButtonInfo {Title = "CANCEL",DialogResult = DialogResult.Cancel,Width = 100}
+					}
+				))
 			{
-				TreeListNode childNode;
-				try
-				{
-					var folders = new List<string>();
-					folders.AddRange(Directory.GetDirectories(folderLink.Path));
-					folders.Sort(WinAPIHelper.StrCmpLogicalW);
-					foreach (var subFolder in folders)
-					{
-						if (!GlobalSettings.HiddenObjects.Any(x => subFolder.ToLower().Contains(x.ToLower())))
-						{
-							var subFolderLink = new FolderLink();
-							subFolderLink.RootId = folderLink.RootId;
-							subFolderLink.Path = subFolder;
-							childNode = treeListAllFiles.AppendNode(new[] { subFolderLink.Name }, node, subFolderLink);
-							childNode.StateImageIndex = 0;
-
-							if (showSubItems)
-								FillNode(childNode, showSubItems);
-							if (showSubItems && childNode.Nodes.Count == 0)
-								node.Nodes.Remove(childNode);
-						}
-					}
-				}
-				catch { }
-				try
-				{
-					var files = new List<string>();
-					files.AddRange(Directory.GetFiles(folderLink.Path));
-					files.Sort(WinAPIHelper.StrCmpLogicalW);
-					foreach (var file in Directory.GetFiles(folderLink.Path))
-					{
-						if (!GlobalSettings.HiddenObjects.Any(x => file.ToLower().Contains(x.ToLower())))
-						{
-							var fileLink = new FileLink();
-							fileLink.RootId = folderLink.RootId;
-							fileLink.Path = file;
-							childNode = treeListAllFiles.AppendNode(new[] { String.Format("{0} ({1})", fileLink.Name, File.GetLastWriteTime(file).ToString("MM/dd/yy hh:mm tt")) }, node, fileLink);
-							childNode.StateImageIndex = GetImageindex(file);
-						}
-						Application.DoEvents();
-					}
-				}
-				catch { }
-				node.StateImageIndex = 1;
-				node.Expanded = true;
+				form.Width = 500;
+				form.Height = 170;
+				if (form.ShowDialog(MainController.Instance.MainForm) != DialogResult.OK) return;
+				if (Utils.MoveFileToArchive(fileLink.Path))
+					fileNode.ParentNode.Nodes.Remove(fileNode);
+				else
+					MainController.Instance.PopupMessages.ShowWarning("Couldn't delete file. It might be busy by another process");
 			}
-			catch { }
 		}
 
-		private void RefreshNode(TreeListNode node)
+		private void tmiFolderCreate_Click(object sender, EventArgs e)
 		{
+			var folderNode = treeListAllFiles.Selection[0];
+			var folderLink = folderNode.Tag as FolderLink;
+			if (folderLink == null) return;
+			using (var form = new FormCreateFolder())
+			{
+				if (form.ShowDialog(MainController.Instance.MainForm) != DialogResult.OK) return;
+				var subFolderPath = Path.Combine(folderLink.Path, form.FolderName);
+				if (Directory.Exists(subFolderPath)) return;
+				Directory.CreateDirectory(subFolderPath);
+
+				var subFolderLink = new FolderLink();
+				subFolderLink.RootId = folderLink.RootId;
+				subFolderLink.Path = subFolderPath;
+				var childNode = treeListAllFiles.AppendNode(new[] { subFolderLink.Name }, folderNode, subFolderLink);
+				childNode.StateImageIndex = 0;
+			}
+		}
+
+		private void FillNode(TreeListNode node, bool showSubItems)
+		{
+			var folderLink = node.Tag as FolderLink;
+			if (folderLink == null) return;
+			if (node.Nodes.Count == 0)
+			{
+				try
+				{
+					TreeListNode childNode;
+					try
+					{
+						var folders = new List<string>();
+						folders.AddRange(Directory.GetDirectories(folderLink.Path));
+						folders.Sort(WinAPIHelper.StrCmpLogicalW);
+						foreach (var subFolder in folders)
+						{
+							if (!GlobalSettings.HiddenObjects.Any(x => subFolder.ToLower().Contains(x.ToLower())))
+							{
+								var subFolderLink = new FolderLink();
+								subFolderLink.RootId = folderLink.RootId;
+								subFolderLink.Path = subFolder;
+								childNode = treeListAllFiles.AppendNode(new[] { subFolderLink.Name }, node, subFolderLink);
+								childNode.StateImageIndex = 0;
+
+								if (showSubItems)
+									FillNode(childNode, showSubItems);
+								if (showSubItems && childNode.Nodes.Count == 0)
+									node.Nodes.Remove(childNode);
+							}
+						}
+					}
+					catch
+					{
+					}
+					try
+					{
+						var files = new List<string>();
+						files.AddRange(Directory.GetFiles(folderLink.Path));
+						files.Sort(WinAPIHelper.StrCmpLogicalW);
+						foreach (var file in Directory.GetFiles(folderLink.Path))
+						{
+							if (!GlobalSettings.HiddenObjects.Any(x => file.ToLower().Contains(x.ToLower())))
+							{
+								var fileLink = new FileLink();
+								fileLink.RootId = folderLink.RootId;
+								fileLink.Path = file;
+								childNode =
+									treeListAllFiles.AppendNode(
+										new[] { String.Format("{0} ({1})", fileLink.Name, File.GetLastWriteTime(file).ToString("MM/dd/yy hh:mm tt")) },
+										node, fileLink);
+								childNode.StateImageIndex = GetImageindex(file);
+							}
+							Application.DoEvents();
+						}
+					}
+					catch
+					{
+					}
+				}
+				catch
+				{
+				}
+			}
+			node.StateImageIndex = 1;
+			node.Expanded = true;
 		}
 
 		private bool FindNodeByPath(TreeListNode targetNode, string itemPath)
@@ -363,6 +429,22 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.DataSource
 			pnTreeViewProgress.Visible = false;
 			treeListAllFiles.ResumeLayout();
 			treeListAllFiles.Enabled = true;
+		}
+
+		private void treeListAllFiles_AfterCollapse(object sender, NodeEventArgs e)
+		{
+			if (e.Node.GetValue(treeListColumnName).Equals("Collapse All") ||
+				e.Node.GetValue(treeListColumnName).Equals("Expand All"))
+				return;
+			e.Node.StateImageIndex = 0;
+		}
+
+		private void treeListAllFiles_AfterExpand(object sender, NodeEventArgs e)
+		{
+			if (e.Node.GetValue(treeListColumnName).Equals("Collapse All") ||
+				e.Node.GetValue(treeListColumnName).Equals("Expand All"))
+				return;
+			e.Node.StateImageIndex = 1;
 		}
 		#endregion
 

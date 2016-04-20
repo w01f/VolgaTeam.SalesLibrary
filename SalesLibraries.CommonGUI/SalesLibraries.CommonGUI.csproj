@@ -115,6 +115,13 @@
     </Compile>
     <Compile Include="Common\EditorHelper.cs" />
     <Compile Include="Common\XtraTabDragDropHelper.cs" />
+    <Compile Include="CustomDialog\CustomDialogButtonInfo.cs" />
+    <Compile Include="CustomDialog\FormCustomDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CustomDialog\FormCustomDialog.Designer.cs">
+      <DependentUpon>FormCustomDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Floater\FloaterManager.cs" />
     <Compile Include="Common\FormStateHelper.cs" />
     <Compile Include="Common\PictureBoxButtonizer.cs" />
@@ -212,6 +219,9 @@
     <EmbeddedResource Include="Calendars\YearControl.resx">
       <DependentUpon>YearControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CustomDialog\FormCustomDialog.resx">
+      <DependentUpon>FormCustomDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Floater\FormFloater.resx">
       <DependentUpon>FormFloater.cs</DependentUpon>
     </EmbeddedResource>
@@ -294,6 +304,7 @@
   <ItemGroup>
     <None Include="Resources\StartLogo.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

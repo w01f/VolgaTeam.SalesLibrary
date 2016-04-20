@@ -28,14 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DataSourceTreeViewControl));
+			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
 			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
-			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
 			this.treeListAllFiles = new DevExpress.XtraTreeList.TreeList();
 			this.treeListColumnName = new DevExpress.XtraTreeList.Columns.TreeListColumn();
 			this.treeListColumnPath = new DevExpress.XtraTreeList.Columns.TreeListColumn();
-			this.imageListFiles = new System.Windows.Forms.ImageList(this.components);
+			this.imageListFiles = new System.Windows.Forms.ImageList();
 			this.treeListSearchFiles = new DevExpress.XtraTreeList.TreeList();
 			this.treeListColumn1 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
 			this.treeListColumn2 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
@@ -47,13 +46,14 @@
 			this.dateEditStartDate = new DevExpress.XtraEditors.DateEdit();
 			this.buttonXSearch = new DevComponents.DotNetBar.ButtonX();
 			this.checkEditDateRange = new DevExpress.XtraEditors.CheckEdit();
-			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
+			this.styleController = new DevExpress.XtraEditors.StyleController();
 			this.textEditKeyWord = new DevExpress.XtraEditors.TextEdit();
 			this.pnRefresh = new System.Windows.Forms.Panel();
 			this.buttonXRefresh = new DevComponents.DotNetBar.ButtonX();
 			this.laDoubleClick = new System.Windows.Forms.Label();
-			this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-			this.tmiOpen = new System.Windows.Forms.ToolStripMenuItem();
+			this.contextMenuStripFile = new System.Windows.Forms.ContextMenuStrip();
+			this.tmiFileOpen = new System.Windows.Forms.ToolStripMenuItem();
+			this.tmiFileDelete = new System.Windows.Forms.ToolStripMenuItem();
 			this.xtraTabControlFiles = new DevExpress.XtraTab.XtraTabControl();
 			this.xtraTabPageRegular = new DevExpress.XtraTab.XtraTabPage();
 			this.xtraTabPageSearch = new DevExpress.XtraTab.XtraTabPage();
@@ -61,6 +61,8 @@
 			this.laTreeViewProgressLabel = new System.Windows.Forms.Label();
 			this.circularProgressTreeView = new DevComponents.DotNetBar.Controls.CircularProgress();
 			this.pnMain = new System.Windows.Forms.Panel();
+			this.contextMenuStripFolder = new System.Windows.Forms.ContextMenuStrip();
+			this.tmiFolderCreate = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.treeListAllFiles)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.treeListSearchFiles)).BeginInit();
 			this.pnKeyWord.SuspendLayout();
@@ -74,13 +76,14 @@
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditKeyWord.Properties)).BeginInit();
 			this.pnRefresh.SuspendLayout();
-			this.contextMenuStrip.SuspendLayout();
+			this.contextMenuStripFile.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControlFiles)).BeginInit();
 			this.xtraTabControlFiles.SuspendLayout();
 			this.xtraTabPageRegular.SuspendLayout();
 			this.xtraTabPageSearch.SuspendLayout();
 			this.pnTreeViewProgress.SuspendLayout();
 			this.pnMain.SuspendLayout();
+			this.contextMenuStripFolder.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// treeListAllFiles
@@ -117,6 +120,8 @@
 			this.treeListAllFiles.Size = new System.Drawing.Size(293, 386);
 			this.treeListAllFiles.StateImageList = this.imageListFiles;
 			this.treeListAllFiles.TabIndex = 1;
+			this.treeListAllFiles.AfterExpand += new DevExpress.XtraTreeList.NodeEventHandler(this.treeListAllFiles_AfterExpand);
+			this.treeListAllFiles.AfterCollapse += new DevExpress.XtraTreeList.NodeEventHandler(this.treeListAllFiles_AfterCollapse);
 			this.treeListAllFiles.DragDrop += new System.Windows.Forms.DragEventHandler(this.treeListAllFiles_DragDrop);
 			this.treeListAllFiles.DragOver += new System.Windows.Forms.DragEventHandler(this.treeListAllFiles_DragOver);
 			this.treeListAllFiles.MouseClick += new System.Windows.Forms.MouseEventHandler(this.treeListAllFiles_MouseClick);
@@ -254,7 +259,7 @@
 			this.dateEditEndDate.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.dateEditEndDate.Properties.Appearance.Options.UseFont = true;
 			this.dateEditEndDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("dateEditEndDate.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("dateEditEndDate.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject3, "", null, null, true)});
 			this.dateEditEndDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
 			this.dateEditEndDate.Properties.DisplayFormat.FormatString = "MM/dd/yyyy";
@@ -289,7 +294,7 @@
 			this.dateEditStartDate.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.dateEditStartDate.Properties.Appearance.Options.UseFont = true;
 			this.dateEditStartDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("dateEditStartDate.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("dateEditStartDate.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true)});
 			this.dateEditStartDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
 			this.dateEditStartDate.Properties.DisplayFormat.FormatString = "MM/dd/yyyy";
@@ -380,21 +385,30 @@
 			this.laDoubleClick.Text = "Double Click to Open";
 			this.laDoubleClick.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
-			// contextMenuStrip
+			// contextMenuStripFile
 			// 
-			this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tmiOpen});
-			this.contextMenuStrip.Name = "contextMenuStrip";
-			this.contextMenuStrip.ShowImageMargin = false;
-			this.contextMenuStrip.Size = new System.Drawing.Size(82, 26);
+			this.contextMenuStripFile.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tmiFileOpen,
+            this.tmiFileDelete});
+			this.contextMenuStripFile.Name = "contextMenuStrip";
+			this.contextMenuStripFile.ShowImageMargin = false;
+			this.contextMenuStripFile.Size = new System.Drawing.Size(176, 48);
 			// 
-			// tmiOpen
+			// tmiFileOpen
 			// 
-			this.tmiOpen.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.tmiOpen.Name = "tmiOpen";
-			this.tmiOpen.Size = new System.Drawing.Size(81, 22);
-			this.tmiOpen.Text = "Open";
-			this.tmiOpen.Click += new System.EventHandler(this.tmiOpen_Click);
+			this.tmiFileOpen.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.tmiFileOpen.Name = "tmiFileOpen";
+			this.tmiFileOpen.Size = new System.Drawing.Size(175, 22);
+			this.tmiFileOpen.Text = "Open";
+			this.tmiFileOpen.Click += new System.EventHandler(this.tmiFileOpen_Click);
+			// 
+			// tmiFileDelete
+			// 
+			this.tmiFileDelete.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.tmiFileDelete.Name = "tmiFileDelete";
+			this.tmiFileDelete.Size = new System.Drawing.Size(175, 22);
+			this.tmiFileDelete.Text = "Delete this source file";
+			this.tmiFileDelete.Click += new System.EventHandler(this.tmiFileDelete_Click);
 			// 
 			// xtraTabControlFiles
 			// 
@@ -487,6 +501,22 @@
 			this.pnMain.Size = new System.Drawing.Size(299, 500);
 			this.pnMain.TabIndex = 8;
 			// 
+			// contextMenuStripFolder
+			// 
+			this.contextMenuStripFolder.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tmiFolderCreate});
+			this.contextMenuStripFolder.Name = "contextMenuStrip";
+			this.contextMenuStripFolder.ShowImageMargin = false;
+			this.contextMenuStripFolder.Size = new System.Drawing.Size(187, 26);
+			// 
+			// tmiFolderCreate
+			// 
+			this.tmiFolderCreate.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.tmiFolderCreate.Name = "tmiFolderCreate";
+			this.tmiFolderCreate.Size = new System.Drawing.Size(186, 22);
+			this.tmiFolderCreate.Text = "Create a New Subfolder";
+			this.tmiFolderCreate.Click += new System.EventHandler(this.tmiFolderCreate_Click);
+			// 
 			// DataSourceTreeViewControl
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -510,13 +540,14 @@
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditKeyWord.Properties)).EndInit();
 			this.pnRefresh.ResumeLayout(false);
-			this.contextMenuStrip.ResumeLayout(false);
+			this.contextMenuStripFile.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControlFiles)).EndInit();
 			this.xtraTabControlFiles.ResumeLayout(false);
 			this.xtraTabPageRegular.ResumeLayout(false);
 			this.xtraTabPageSearch.ResumeLayout(false);
 			this.pnTreeViewProgress.ResumeLayout(false);
 			this.pnMain.ResumeLayout(false);
+			this.contextMenuStripFolder.ResumeLayout(false);
 			this.ResumeLayout(false);
 
         }
@@ -525,8 +556,8 @@
 
 		private System.Windows.Forms.Panel pnKeyWord;
         private System.Windows.Forms.Panel pnRefresh;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
-        private System.Windows.Forms.ToolStripMenuItem tmiOpen;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripFile;
+        private System.Windows.Forms.ToolStripMenuItem tmiFileOpen;
 		private System.Windows.Forms.Label laDoubleClick;
         private System.Windows.Forms.Label laEndDate;
         private System.Windows.Forms.Label laStartDate;
@@ -552,5 +583,8 @@
 		private System.Windows.Forms.Label laTreeViewProgressLabel;
 		private DevComponents.DotNetBar.Controls.CircularProgress circularProgressTreeView;
 		private DevExpress.XtraEditors.GroupControl groupControlDateRange;
-    }
+		private System.Windows.Forms.ToolStripMenuItem tmiFileDelete;
+		private System.Windows.Forms.ContextMenuStrip contextMenuStripFolder;
+		private System.Windows.Forms.ToolStripMenuItem tmiFolderCreate;
+	}
 }

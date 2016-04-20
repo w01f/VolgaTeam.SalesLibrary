@@ -14,6 +14,7 @@ using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.Common.DataState;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.Common.Objects.SearchTags;
+using SalesLibraries.CommonGUI.CustomDialog;
 using SalesLibraries.CommonGUI.Wallbin.Folders;
 using SalesLibraries.CommonGUI.Wallbin.Views;
 using SalesLibraries.FileManager.Controllers;
@@ -374,7 +375,24 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 
 		private void DeleteFolder()
 		{
-			FolderContainer.DeleteFolder(this);
+			using (var form = new FormCustomDialog(
+					String.Format("{0}{1}{2}",
+						"<size=+4>Are you SURE you want to DELETE this Window?</size><br>",
+						String.Format("<size=+2>{0}</size>", DataSource.Name),
+						"<br><br>*All Links in this window will be removed from your site"
+					),
+					new[]
+					{
+						new CustomDialogButtonInfo {Title = "DELETE",DialogResult = DialogResult.OK,Width = 100},
+						new CustomDialogButtonInfo {Title = "CANCEL",DialogResult = DialogResult.Cancel,Width = 100}
+					}
+				))
+			{
+				form.Width = 500;
+				form.Height = 160;
+				if (form.ShowDialog(MainController.Instance.MainForm) == DialogResult.OK)
+					FolderContainer.DeleteFolder(this);
+			}
 		}
 
 		private void OnFolderMoved(Object sender, FolderMovingEventArgs e)
@@ -664,7 +682,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 		{
 			FolderContainer.ProcessScrollOnDragOver(sender, e);
 			if (!FormatState.AllowEdit) return;
-			if(IsSourceLinksDragged)
+			if (IsSourceLinksDragged)
 			{
 				var droppedLinks = DataDraggedOver.GetData(DataFormats.Serializable, true) as SourceLink[];
 				SelectionManager.SelectFolder(this);

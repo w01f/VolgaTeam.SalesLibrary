@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
 using Ionic.Zip;
+using SalesLibraries.Common.Configuration;
 
 namespace SalesLibraries.Common.Helpers
 {
@@ -19,7 +21,9 @@ namespace SalesLibraries.Common.Helpers
 			{
 				Marshal.ReleaseComObject(o);
 			}
-			catch { }
+			catch
+			{
+			}
 			finally
 			{
 				o = null;
@@ -39,9 +43,11 @@ namespace SalesLibraries.Common.Helpers
 		{
 			WinAPIHelper.ShowWindow(handle, maximized ? WindowShowStyle.ShowMaximized : WindowShowStyle.ShowNormal);
 			uint lpdwProcessId = 0;
-			WinAPIHelper.AttachThreadInput(WinAPIHelper.GetCurrentThreadId(), WinAPIHelper.GetWindowThreadProcessId(WinAPIHelper.GetForegroundWindow(), out lpdwProcessId), true);
+			WinAPIHelper.AttachThreadInput(WinAPIHelper.GetCurrentThreadId(),
+				WinAPIHelper.GetWindowThreadProcessId(WinAPIHelper.GetForegroundWindow(), out lpdwProcessId), true);
 			WinAPIHelper.SetForegroundWindow(handle);
-			WinAPIHelper.AttachThreadInput(WinAPIHelper.GetCurrentThreadId(), WinAPIHelper.GetWindowThreadProcessId(WinAPIHelper.GetForegroundWindow(), out lpdwProcessId), false);
+			WinAPIHelper.AttachThreadInput(WinAPIHelper.GetCurrentThreadId(),
+				WinAPIHelper.GetWindowThreadProcessId(WinAPIHelper.GetForegroundWindow(), out lpdwProcessId), false);
 			if (topMost)
 				WinAPIHelper.MakeTopMost(handle);
 			else
@@ -53,9 +59,11 @@ namespace SalesLibraries.Common.Helpers
 			var taskBarHandle = WinAPIHelper.FindWindow("Shell_traywnd", "");
 			WinAPIHelper.ShowWindow(taskBarHandle, WindowShowStyle.Show);
 			uint lpdwProcessId;
-			WinAPIHelper.AttachThreadInput(WinAPIHelper.GetCurrentThreadId(), WinAPIHelper.GetWindowThreadProcessId(WinAPIHelper.GetForegroundWindow(), out lpdwProcessId), true);
+			WinAPIHelper.AttachThreadInput(WinAPIHelper.GetCurrentThreadId(),
+				WinAPIHelper.GetWindowThreadProcessId(WinAPIHelper.GetForegroundWindow(), out lpdwProcessId), true);
 			WinAPIHelper.SetForegroundWindow(taskBarHandle);
-			WinAPIHelper.AttachThreadInput(WinAPIHelper.GetCurrentThreadId(), WinAPIHelper.GetWindowThreadProcessId(WinAPIHelper.GetForegroundWindow(), out lpdwProcessId), false);
+			WinAPIHelper.AttachThreadInput(WinAPIHelper.GetCurrentThreadId(),
+				WinAPIHelper.GetWindowThreadProcessId(WinAPIHelper.GetForegroundWindow(), out lpdwProcessId), false);
 		}
 
 		public static string FontToString(Font font)
@@ -100,7 +108,9 @@ namespace SalesLibraries.Common.Helpers
 					if (File.Exists(file.FullName))
 						File.SetAttributes(file.FullName, FileAttributes.Normal);
 			}
-			catch { }
+			catch
+			{
+			}
 		}
 
 		public static void DeleteFolder(string folderPath)
@@ -131,7 +141,9 @@ namespace SalesLibraries.Common.Helpers
 							if (File.Exists(file.FullName))
 								File.Delete(file.FullName);
 						}
-						catch { }
+						catch
+						{
+						}
 					}
 				}
 				try
@@ -147,10 +159,14 @@ namespace SalesLibraries.Common.Helpers
 						if (Directory.Exists(folder.FullName))
 							Directory.Delete(folder.FullName, false);
 					}
-					catch { }
+					catch
+					{
+					}
 				}
 			}
-			catch { }
+			catch
+			{
+			}
 		}
 
 		public static void CleanFolder(string folderPath)
@@ -181,11 +197,15 @@ namespace SalesLibraries.Common.Helpers
 							if (File.Exists(file.FullName))
 								File.Delete(file.FullName);
 						}
-						catch { }
+						catch
+						{
+						}
 					}
 				}
 			}
-			catch { }
+			catch
+			{
+			}
 		}
 
 		public static void OpenFile(string filePath)
@@ -194,7 +214,9 @@ namespace SalesLibraries.Common.Helpers
 			{
 				Process.Start(filePath);
 			}
-			catch (Exception) { }
+			catch (Exception)
+			{
+			}
 		}
 
 		public static void OpenFile(string[] filePaths)
@@ -206,7 +228,9 @@ namespace SalesLibraries.Common.Helpers
 					Process.Start(filePath);
 					break;
 				}
-				catch (Exception) { }
+				catch (Exception)
+				{
+				}
 			}
 
 		}
@@ -226,6 +250,27 @@ namespace SalesLibraries.Common.Helpers
 				else if (File.Exists(sourcePath))
 					File.Copy(sourcePath, Path.Combine(targetRootPath, Path.GetFileName(sourcePath)), true);
 			}
+		}
+
+		public static bool MoveFileToArchive(string targetFilePath)
+		{
+			var folderPath = Path.GetDirectoryName(targetFilePath);
+			var archivePath = Path.Combine(folderPath, Constants.FilesDeletedFromFolderArchiveName);
+			var archivedFilePath = Path.Combine(archivePath, Path.GetFileName(targetFilePath));
+			if (!Directory.Exists(archivePath))
+				Directory.CreateDirectory(archivePath);
+			try
+			{
+				if (File.Exists(archivedFilePath))
+					File.Delete(archivedFilePath);
+				File.Move(targetFilePath, archivedFilePath);
+				return true;
+			}
+			catch
+			{
+				return false;
+			}
+
 		}
 	}
 }

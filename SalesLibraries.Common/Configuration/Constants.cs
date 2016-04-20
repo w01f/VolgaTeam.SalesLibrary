@@ -15,5 +15,6 @@
 		public const string ProgramManagerRootFolderName = @"!PM";
 		public const string WindowsThumbnailFile = "thumbs.db";
 		public const string GoodSyncServiceFolderName = "_gsdata_";
+		public const string FilesDeletedFromFolderArchiveName = "z_archive";
 	}
 }

@@ -246,6 +246,12 @@
     <Compile Include="PresentationLayer\Wallbin\DataSource\DataSourceTreeViewControl.designer.cs">
       <DependentUpon>DataSourceTreeViewControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="PresentationLayer\Wallbin\DataSource\FormCreateFolder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\DataSource\FormCreateFolder.Designer.cs">
+      <DependentUpon>FormCreateFolder.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationLayer\Wallbin\Folders\ClassicFolderBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -643,6 +649,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\DataSource\DataSourceTreeViewControl.resx">
       <DependentUpon>DataSourceTreeViewControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\DataSource\FormCreateFolder.resx">
+      <DependentUpon>FormCreateFolder.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Folders\ClassicFolderBox.resx">
       <DependentUpon>ClassicFolderBox.cs</DependentUpon>
