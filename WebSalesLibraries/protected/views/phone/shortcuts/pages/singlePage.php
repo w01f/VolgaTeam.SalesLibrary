@@ -1,6 +1,6 @@
 <?
 	/**
-	 * @var $defaultShortcut PageContentShortcut
+	 * @var $shortcut PageContentShortcut
 	 */
 
 	$this->renderPartial('../site/scripts');
@@ -14,5 +14,5 @@
 	});
 </script>
 <div class="service-data default-shortcut-data">
-	<? echo $defaultShortcut->getMenuItemData(); ?>
+	<? echo $shortcut->getMenuItemData(); ?>
 </div>
