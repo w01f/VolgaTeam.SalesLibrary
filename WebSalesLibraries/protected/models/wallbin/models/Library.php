@@ -46,6 +46,7 @@
 		 * @soap
 		 */
 		public $config;
+		public $lastUpdate;
 
 		public function load()
 		{

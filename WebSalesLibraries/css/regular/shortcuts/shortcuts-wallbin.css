@@ -17,6 +17,25 @@
 	width: 100%;
 	text-align: right;
 }
+
+#library-update-stamp
+{
+	position: fixed;
+	top: 48px;
+	left: 0;
+	width: 130px;
+	z-index: 2;
+	display: inline-table;
+	height: 22px;
+}
+
+#library-update-stamp .text
+{
+	display: table-cell;
+	vertical-align: middle;
+	text-align: left;
+	color: #999;
+}
 /*------------------------------------*/
 
 /*Tabs Header------------------------------------*/

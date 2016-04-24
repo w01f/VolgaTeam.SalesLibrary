@@ -16,6 +16,9 @@
 	if (!isset($selectedPage))
 		$selectedPage = $library->pages[0];
 ?>
+<div id="library-update-stamp">
+	<span class="text">Updated: <? echo date(Yii::app()->params['outputDateFormat'], strtotime($library->lastUpdate)); ?></span>
+</div>
 <div class="wallbin-header">
 	<div class="wallbin-logo-wrapper">
 		<img class="wallbin-logo" src="<? echo $selectedPage->logoContent; ?>">

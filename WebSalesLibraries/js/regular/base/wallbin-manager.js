@@ -313,6 +313,12 @@
 					'height': (wallbinHeight - headerHeight) + 'px'
 				});
 			});
+
+			var libraryUpdateStamp = $('#library-update-stamp');
+			libraryUpdateStamp.css({
+				'left': ($('body').outerWidth() - libraryUpdateStamp.outerWidth()) + 'px'
+			});
+
 		};
 	};
 	$.SalesPortal.Wallbin = new WallbinManager();

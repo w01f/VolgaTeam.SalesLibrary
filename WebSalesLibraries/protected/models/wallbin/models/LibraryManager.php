@@ -70,6 +70,7 @@
 							$doc = new DOMDocument();
 							$doc->load($storageFile);
 							$libraryId = trim($doc->getElementsByTagName("Identifier")->item(0)->nodeValue);
+							/** @var LibraryRecord $libraryRecord */
 							$libraryRecord = LibraryRecord::model()->findByPk($libraryId);
 							if (isset($libraryRecord))
 							{
@@ -83,6 +84,7 @@
 									$library->id = $libraryId;
 									$library->groupId = $libraryRecord->id_group;
 									$library->order = $libraryRecord->order;
+									$library->lastUpdate = $libraryRecord->last_update;
 									$library->storagePath = $storagePath;
 									$library->storageLink = $storageLink;
 									$library->logoPath = Yii::app()->params['librariesRoot'] . "/Graphics/" . $libraryFolder->getBasename() . "/no_logo.png";

@@ -85,7 +85,7 @@
 				</div>
 				<div class="col col-xs-1 text-center">
 					<div class="text-button log-action open-fullscreen" data-log-action="Preview Fullscreen">
-						<span>100%</span>
+						<span>YouTube</span>
 					</div>
 				</div>
 			</div>
