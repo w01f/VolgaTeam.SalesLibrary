@@ -54,6 +54,33 @@
 			}
 		}
 
+		public function actionGetRateDialog()
+		{
+			$linkId = Yii::app()->request->getPost('linkId');
+			$dialogData = array();
+			if (isset($linkId))
+			{
+				$linkRecord = LinkRecord::getLinkById($linkId);
+				if (isset($linkRecord))
+				{
+					$libraryManager = new LibraryManager();
+					$library = $libraryManager->getLibraryById($linkRecord->id_library);
+					$link = new LibraryLink(new LibraryFolder(new LibraryPage($library)));
+					$link->load($linkRecord);
+
+					$previewData = $link->getPreviewData(false);
+
+					$dialogData = array(
+						'format' => $previewData->viewerFormat,
+						'data' => $previewData,
+						'content' => $this->renderPartial('rateDialog', array('previewData' => $previewData), true),
+					);
+				}
+			}
+			echo CJSON::encode($dialogData);
+			Yii::app()->end();
+		}
+
 		public function actionGetLinkPreviewList()
 		{
 			$linkId = Yii::app()->request->getPost('linkId');

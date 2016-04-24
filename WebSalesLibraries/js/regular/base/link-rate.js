@@ -17,7 +17,11 @@
 					$.ajax({
 						type: "POST",
 						url: window.BaseUrl + "rate/setRate",
-						data: {linkId: linkData.id, value: value},
+						data:
+						{
+							linkId: linkData.id,
+							value: value
+						},
 						success: function (msg)
 						{
 							if (msg.totalRateImage != '')

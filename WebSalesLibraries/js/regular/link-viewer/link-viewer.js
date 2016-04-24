@@ -114,7 +114,23 @@
 					if (msg != '')
 					{
 						var content = $(msg);
-						that.showSpecialDialog(content, linkIds, folderId);
+						content.find('#context-add').off('click').on('click', function ()
+						{
+							$.fancybox.close();
+							if (linkIds != undefined)
+								$.SalesPortal.QBuilder.LinkCart.addLinks(linkIds);
+							else if (folderId != undefined)
+								$.SalesPortal.QBuilder.LinkCart.addFolder(folderId);
+						});
+						$.fancybox({
+							content: content,
+							title: 'Advanced LINK Options',
+							width: 490,
+							autoSize: false,
+							autoHeight: true,
+							openEffect: 'none',
+							closeEffect: 'none'
+						});
 					}
 				},
 				error: function ()
@@ -125,24 +141,87 @@
 			});
 		};
 
-		this.showSpecialDialog = function (content, linkIds, folderId)
+		this.requestRateDialog = function (linkId, afterClose)
 		{
-			content.find('#context-add').off('click').on('click', function ()
-			{
-				$.fancybox.close();
-				if (linkIds != undefined)
-					$.SalesPortal.QBuilder.LinkCart.addLinks(linkIds);
-				else if (folderId != undefined)
-					$.SalesPortal.QBuilder.LinkCart.addFolder(folderId);
-			});
-			$.fancybox({
-				content: content,
-				title: 'Advanced LINK Options',
-				width: 490,
-				autoSize: false,
-				autoHeight: true,
-				openEffect: 'none',
-				closeEffect: 'none'
+			$('body').find('.mtContent').remove();
+			$.ajax({
+				type: "POST",
+				url: window.BaseUrl + "preview/getRateDialog",
+				data: {
+					linkId: linkId
+				},
+				beforeSend: function ()
+				{
+					$.SalesPortal.Overlay.show(false);
+				},
+				complete: function ()
+				{
+					$.SalesPortal.Overlay.hide();
+				},
+				success: function (parameters)
+				{
+					if (parameters.data.config.allowPreview && parameters.data.config.enableRating)
+					{
+						if (parameters.data.config.enableLogging)
+							$.SalesPortal.LogHelper.write({
+								type: 'Link',
+								subType: 'Preview Options',
+								data: {
+									Name: parameters.data.name,
+									File: parameters.data.fileName,
+									'Original Format': parameters.format
+								}
+							});
+
+						$.fancybox({
+							content: parameters.content,
+							title: parameters.data.name,
+							autoSize: true,
+							openEffect: 'none',
+							closeEffect: 'none',
+							afterShow: function ()
+							{
+								var dialogContent = $('.fancybox-wrap');
+
+								new $.SalesPortal.RateManager().init(
+									{
+										id: parameters.data.linkId,
+										name: parameters.data.name,
+										file: parameters.data.fileName,
+										format: parameters.data.format
+									},
+									dialogContent.find('#user-link-rate-container'),
+									parameters.data.rateData);
+							},
+							afterClose: afterClose
+					});
+					}
+					else
+					{
+						var modalDialog = new $.SalesPortal.ModalDialog({
+							title: '<span class="text-danger">Sorry...</span>',
+							description: 'You are not authorized to rate this link.',
+							buttons: [
+								{
+									tag: 'close',
+									title: 'Close',
+									width: 80,
+									clickHandler: function ()
+									{
+										modalDialog.close();
+									}
+								}
+							],
+							closeOnOutsideClick: true
+						});
+						modalDialog.show();
+					}
+				},
+				error: function ()
+				{
+				},
+				async: true,
+				dataType: 'json'
 			});
 		};
 

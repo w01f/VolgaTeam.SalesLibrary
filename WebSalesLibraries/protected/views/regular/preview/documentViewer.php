@@ -1,7 +1,7 @@
 <?
 	/**
 	 * @var $data DocumentPreviewData
-	 * */
+	 */
 
 	$imageUrlPrefix = Yii::app()->getBaseUrl(true);
 	$pageItemName = '';

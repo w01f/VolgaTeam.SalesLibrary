@@ -1,5 +1,4 @@
-<?php
-
+<?
 	/**
 	 * Class SearchHelper
 	 */
@@ -115,7 +114,7 @@
 			$linksEncoded = Yii::app()->session[$datasetKey];
 			if (!isset($linksEncoded))
 			{
-				$queryRecords = self::queryLinksByCondition($searchConditions, $datasetKey);
+				$queryRecords = self::queryLinksByCondition($searchConditions);
 				$links = DataTableHelper::formatRegularData($queryRecords);
 				Yii::app()->session[$datasetKey] = CJSON::encode($links);
 			}
@@ -126,10 +125,9 @@
 
 		/**
 		 * @param $searchConditions SearchConditions
-		 * @param $datasetKey string
 		 * @return array
 		 */
-		public static function queryLinksByCondition($searchConditions, $datasetKey)
+		public static function queryLinksByCondition($searchConditions)
 		{
 			$baseLinksEncoded = Yii::app()->session[$searchConditions->baseDatasetKey];
 			$baseLinksCondition = '1=1';
@@ -348,6 +346,7 @@
 				") and (" . $linkCondition .
 				") and link.is_dead=0 and link.is_preview_not_ready=0 and link.type<>5 and link.type<>6" . ($includeAppLinks ? '' : ' and link.type<>15');
 
+			/** @var CDbCommand $dbCommnad */
 			$dbCommnad = Yii::app()->db->createCommand();
 			$dbCommnad = $dbCommnad->select($selectText);
 			$dbCommnad = $dbCommnad->from('tbl_link link');

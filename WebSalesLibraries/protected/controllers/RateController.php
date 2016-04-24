@@ -22,4 +22,15 @@
 			}
 			Yii::app()->end();
 		}
+
+		public function actionGetRate()
+		{
+			$linkId = Yii::app()->request->getPost('linkId');
+			$userId = UserIdentity::getCurrentUserId();
+			if (isset($linkId))
+			{
+				echo CJSON::encode(LinkRateRecord::getRateData($linkId, $userId));
+			}
+			Yii::app()->end();
+		}
 	}

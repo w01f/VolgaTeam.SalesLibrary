@@ -1,0 +1,27 @@
+/*Common------------------------------------*/
+.link-viewer-rate
+{
+    width: 400px;
+}
+
+.link-viewer-rate .title
+{
+    margin-left: 0;
+}
+
+.link-viewer-rate .file-name
+{
+    color: #666666;
+}
+
+.link-viewer img.total-rate
+{
+    margin-left: 7px;
+    margin-bottom: 7px;
+    height: 16px;
+}
+
+.link-viewer-rate #user-link-rate-container
+{
+    margin-top: 20px;
+}

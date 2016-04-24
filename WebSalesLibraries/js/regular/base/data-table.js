@@ -92,9 +92,10 @@
 				"render": {
 					_: function (data)
 					{
+						var cellContent = '';
 						if (data.image != '')
-							return '<img src="' + data.image + '" style="height:16px">';
-						return '';
+							cellContent = '<img src="' + data.image + '">';
+						return '<div class="clickable-area rate-image-container">' + cellContent + '</div>';
 					},
 					sort: 'value'
 				}
@@ -178,9 +179,9 @@
 				});
 			}
 
-			table.on('click', 'tr', function ()
+			table.on('click', 'span.clickable-area', function ()
 			{
-				var linkId = dataTable.api().row(this).data().id;
+				var linkId = dataTable.api().row($(this).closest("tr")).data().id;
 				$.SalesPortal.LinkManager.requestViewDialog(linkId, false);
 			});
 
@@ -199,10 +200,41 @@
 				});
 			});
 
+			table.on('click', '.rate-image-container', function (e)
+			{
+				e.stopPropagation();
+
+				var linkRow = dataTable.api().row($(this).closest("tr"));
+				var linkData = linkRow.data();
+				var linkId = linkData.id;
+
+				$.SalesPortal.LinkManager.requestRateDialog(linkId, function ()
+				{
+					$.ajax({
+						type: "POST",
+						url: window.BaseUrl + "rate/getRate",
+						data: {
+							linkId: linkData.id
+						},
+						success: function (msg)
+						{
+							linkData.rate.value = msg.totalRate;
+							linkData.rate.image = msg.totalRateImage;
+							linkRow.invalidate().draw();
+						},
+						error: function ()
+						{
+						},
+						async: true,
+						dataType: 'json'
+					});
+				});
+			});
+
 			table.on('dragstart', 'span.link-file', function (e)
 			{
-				var urlHeader = $(this).data( "url-header" );
-				var url = $(this).data( "url" );
+				var urlHeader = $(this).data("url-header");
+				var url = $(this).data("url");
 				if (url != '')
 					e.originalEvent.dataTransfer.setData(urlHeader, url);
 			});
@@ -234,19 +266,25 @@
 
 		var cellRenderer = function (data, type, row)
 		{
+			var cellContent = '';
+
 			if (type == "display")
 			{
 				var displayValue = typeof data === 'object' && data != null ? data.display : data;
 				displayValue = displayValue != null ? displayValue : '';
 
-				if (row == '') return '';
-				if (row.isHyperlink)
-					return '<a class="link-url mtTool" mtcontent="' + row.tooltip + '" href="' + row.url + '" target="_blank">' + displayValue + '</a>';
-				if (row.isDraggable)
-					return '<span class="link-file mtTool" draggable="true" data-url-header="' + row.url_header + '" data-url="' + row.url + '" mtcontent="' + row.tooltip + '">' + displayValue + '</span>';
-				return '<span class="mtTool" mtcontent="' + row.tooltip + '">' + displayValue + '</span>';
+				if (row == '')
+					cellContent = '';
+				else if (row.isHyperlink)
+					cellContent = '<a class="link-url mtTool" mtcontent="' + row.tooltip + '" href="' + row.url + '" target="_blank">' + displayValue + '</a>';
+				else if (row.isDraggable)
+					cellContent = '<span class="link-file mtTool" draggable="true" data-url-header="' + row.url_header + '" data-url="' + row.url + '" mtcontent="' + row.tooltip + '">' + displayValue + '</span>';
+				else
+					cellContent = '<span class="mtTool" mtcontent="' + row.tooltip + '">' + displayValue + '</span>';
 			}
-			return data;
+			else
+				cellContent = data;
+			return '<span class="clickable-area">' + cellContent + '</span>';
 		};
 
 		var destroy = function ()
