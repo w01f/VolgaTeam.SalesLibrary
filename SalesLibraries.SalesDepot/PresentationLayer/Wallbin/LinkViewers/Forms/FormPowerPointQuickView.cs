@@ -255,7 +255,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Forms
 			{
 				MainController.Instance.ActivateApplication();
 				var activeSlideSettings = PowerPointSingleton.Instance.GetSlideSettings();
-				if (activeSlideSettings.Orientation.ToString() != _previewData.Settings.Orientation)
+				if (activeSlideSettings.SlideSize.Orientation.ToString() != _previewData.Settings.Orientation)
 					if (MainController.Instance.PopupMessages.ShowWarningQuestion("This slide is not the same size as your presentation.\nDo you still want to add it?") != DialogResult.Yes)
 						return;
 

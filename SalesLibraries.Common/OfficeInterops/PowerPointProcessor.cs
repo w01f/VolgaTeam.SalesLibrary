@@ -408,24 +408,9 @@ namespace SalesLibraries.Common.OfficeInterops
 			{
 				MessageFilter.Register();
 				var settings = new SlideSettings();
-				if (PowerPointObject == null) return null;
-				if (PowerPointObject.ActivePresentation == null) return null;
-				settings.SizeWidth = PowerPointObject.ActivePresentation.PageSetup.SlideWidth / 72;
-				settings.SizeHeght = PowerPointObject.ActivePresentation.PageSetup.SlideHeight / 72;
-				switch (PowerPointObject.ActivePresentation.PageSetup.SlideOrientation)
-				{
-					case MsoOrientation.msoOrientationHorizontal:
-						settings.Orientation = SlideOrientationEnum.Landscape;
-						break;
-					case MsoOrientation.msoOrientationVertical:
-						settings.Orientation = SlideOrientationEnum.Portrait;
-						break;
-				}
-				if (settings.SizeWidth == 10 && settings.SizeHeght == 5.625)
-				{
-					settings.SizeWidth = 13;
-					settings.SizeHeght = 7.32;
-				}
+				if (PowerPointObject?.ActivePresentation == null) return null;
+				settings.SlideSize.Width = Math.Round(Convert.ToDecimal(PowerPointObject.ActivePresentation.PageSetup.SlideWidth / 72), 3);
+				settings.SlideSize.Height = Math.Round(Convert.ToDecimal(PowerPointObject.ActivePresentation.PageSetup.SlideHeight / 72), 3);
 				return settings;
 			}
 			catch
@@ -450,10 +435,10 @@ namespace SalesLibraries.Common.OfficeInterops
 			try
 			{
 				MessageFilter.Register();
-				presentation.PageSetup.SlideWidth = (float)settings.SizeWidth * 72;
-				presentation.PageSetup.SlideHeight = (float)settings.SizeHeght * 72;
+				presentation.PageSetup.SlideWidth = (float)settings.SlideSize.Width * 72;
+				presentation.PageSetup.SlideHeight = (float)settings.SlideSize.Height * 72;
 
-				switch (settings.Orientation)
+				switch (settings.SlideSize.Orientation)
 				{
 					case SlideOrientationEnum.Landscape:
 						presentation.PageSetup.SlideOrientation = MsoOrientation.msoOrientationHorizontal;

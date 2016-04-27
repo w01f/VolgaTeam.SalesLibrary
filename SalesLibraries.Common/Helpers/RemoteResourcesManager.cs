@@ -20,6 +20,7 @@ namespace SalesLibraries.Common.Helpers
 		public ArchiveDirectory LauncherTemplatesFolder { get; private set; }
 
 		public StorageFile DefaultSlideSettingsFile { get; private set; }
+		public StorageFile SlideSizeSettingsFile { get; private set; }
 		public StorageFile HelpFile { get; private set; }
 		public StorageFile HelpBrowserFile { get; private set; }
 		#endregion
@@ -88,6 +89,15 @@ namespace SalesLibraries.Common.Helpers
 				"DefaultSlideSettings.xml"
 			});
 			await DefaultSlideSettingsFile.Download();
+
+			SlideSizeSettingsFile = new StorageFile(new[]
+			{
+				FileStorageManager.IncomingFolderName,
+				FileStorageManager.CommonIncomingFolderName,
+				"AppSettings",
+				"SlideSizeSettings.xml"
+			});
+			await SlideSizeSettingsFile.Download();
 
 			HelpFile = new StorageFile(new[]
 			{

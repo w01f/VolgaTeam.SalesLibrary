@@ -1,40 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
+using SalesLibraries.Common.Helpers;
 
 namespace SalesLibraries.Common.Objects.PowerPoint
 {
 	public class SlideSettings
 	{
-		public double SizeHeght { get; set; }
-		public double SizeWidth { get; set; }
-		public SlideOrientationEnum Orientation { get; set; }
+		public SlideSize SlideSize { get; }
+
+		public SlideFormatEnum Format => SlideFormatParser.GetFormatBySlideSize(SlideSize);
 
 		public string SizeFormatted
 		{
 			get
 			{
-				switch (Orientation)
+				switch (Format)
 				{
-					case SlideOrientationEnum.Landscape:
-						if (SizeWidth == 10 && SizeHeght == 7.5)
-							return "4 x 3";
-						if (SizeWidth == 10.75 && SizeHeght == 8.25)
-							return "5 x 4";
-						if (SizeWidth == 13 && SizeHeght == 7.32)
-							return "16 x 9";
-						if (SizeWidth == 13.333333333333334 && SizeHeght == 7.5)
-							return "16 x 9";
+					case SlideFormatEnum.Format4x3:
 						return "4 x 3";
-					case SlideOrientationEnum.Portrait:
-						if (SizeWidth == 7.5 && SizeHeght == 10)
-							return "3 x 4";
-						if (SizeWidth == 8.25 && SizeHeght == 10.75)
-							return "4 x 5";
-						if (SizeWidth == 7.32 && SizeHeght == 13)
-							return "9 x 16";
-						if (SizeWidth == 7.5 && SizeHeght == 13.333333333333334)
-							return "9 x 16";
-						return "4 x 3";
+					case SlideFormatEnum.Format3x4:
+						return "3 x 4";
+					case SlideFormatEnum.Format16x9:
+						return "16 x 9";
 					default:
 						return "4 x 3";
 				}
@@ -45,97 +32,60 @@ namespace SalesLibraries.Common.Objects.PowerPoint
 		{
 			get
 			{
-				switch (Orientation)
+				switch (Format)
 				{
-					case SlideOrientationEnum.Landscape:
-						if (SizeWidth == 10 && SizeHeght == 7.5)
-							return "Slides43";
-						if (SizeWidth == 10.75 && SizeHeght == 8.25)
-							return "Slides54";
-						if (SizeWidth == 13 && SizeHeght == 7.32)
-							return "Slides169";
-						if (SizeWidth == 13.333333333333334 && SizeHeght == 7.5)
-							return "Slides169";
+					case SlideFormatEnum.Format4x3:
 						return "Slides43";
-					case SlideOrientationEnum.Portrait:
-						if (SizeWidth == 7.5 && SizeHeght == 10)
-							return "Slides34";
-						if (SizeWidth == 8.25 && SizeHeght == 10.75)
-							return "Slides45";
-						if (SizeWidth == 7.32 && SizeHeght == 13)
-							return "Slides916";
-						if (SizeWidth == 7.5 && SizeHeght == 13.333333333333334)
-							return "Slides916";
-						return "Slides43";
+					case SlideFormatEnum.Format3x4:
+						return "Slides34";
+					case SlideFormatEnum.Format16x9:
+						return "Slides169";
 					default:
 						return "Slides43";
 				}
 			}
 		}
 
-		public string SlideMasterFolder
-		{
-			get { return SizeFormatted.Replace(" ", ""); }
-		}
+		public string SlideMasterFolder => SizeFormatted.Replace(" ", "");
 
-		public string LauncherTemplateName
-		{
-			get { return String.Format("adSALESapps{0}.potx", SlideFolder.Replace("Slides", "")); }
-		}
+		public string LauncherTemplateName => String.Format("adSALESapps{0}.potx", SlideFolder.Replace("Slides", ""));
 
 		public SlideSettings()
 		{
-			Orientation = SlideOrientationEnum.Landscape;
-			SizeWidth = 10;
-			SizeHeght = 7.5;
+			SlideSize = new SlideSize
+			{
+				Width = 10,
+				Height = 7.5m
+			};
 		}
 
 		public bool IsEqual(SlideSettings target)
 		{
-			return target.SizeWidth == SizeWidth && target.SizeHeght == SizeHeght && target.Orientation == Orientation;
+			return target.SlideSize.Width == SlideSize.Width &&
+				target.SlideSize.Height == SlideSize.Height;
 		}
 
 		public static SlideSettings ReadFromString(string size)
 		{
+			var slideSettings = new SlideSettings();
 			switch (size)
 			{
 				case "4x3":
-					return new SlideSettings
-					{
-						Orientation = SlideOrientationEnum.Landscape,
-						SizeWidth = 10,
-						SizeHeght = 7.5
-					};
+					slideSettings.SlideSize.Width = 10;
+					slideSettings.SlideSize.Height = 7.5m;
+					break;
 				case "3x4":
-					return new SlideSettings
-					{
-						Orientation = SlideOrientationEnum.Portrait,
-						SizeWidth = 7.5,
-						SizeHeght = 10
-					};
-				case "5x4":
-					return new SlideSettings
-					{
-						Orientation = SlideOrientationEnum.Landscape,
-						SizeWidth = 10.75,
-						SizeHeght = 8.25
-					};
-				case "4x5":
-					return new SlideSettings
-					{
-						Orientation = SlideOrientationEnum.Portrait,
-						SizeWidth = 8.25,
-						SizeHeght = 10.75
-					};
+					slideSettings.SlideSize.Width = 7.5m;
+					slideSettings.SlideSize.Height = 10;
+					break;
 				case "16x9":
-					return new SlideSettings
-					{
-						Orientation = SlideOrientationEnum.Landscape,
-						SizeWidth = 13.333333333333334,
-						SizeHeght = 7.5
-					};
+					slideSettings.SlideSize.Width = 13.333m;
+					slideSettings.SlideSize.Height = 7.5m;
+					break;
+				default:
+					throw new ArgumentOutOfRangeException("Can't parse slide configuration");
 			}
-			throw new ArgumentOutOfRangeException("Can't parse slide configuration");
+			return slideSettings;
 		}
 
 		public static IEnumerable<SlideSettings> GetAvailableConfigurations()

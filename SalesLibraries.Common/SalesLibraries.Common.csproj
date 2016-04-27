@@ -102,6 +102,7 @@
     <Compile Include="Helpers\PowerPointManager.cs" />
     <Compile Include="Helpers\RemoteResourcesManager.cs" />
     <Compile Include="Helpers\SettingsSerializeHelper.cs" />
+    <Compile Include="Helpers\SlideFormatParser.cs" />
     <Compile Include="Helpers\TabPageConfigurator.cs" />
     <Compile Include="Helpers\Utils.cs" />
     <Compile Include="Dictionaries\WidgetList.cs" />
@@ -120,8 +121,10 @@
     <Compile Include="Objects\Graphics\SourceFolderImageGroup.cs" />
     <Compile Include="Objects\Graphics\LinkImageSource.cs" />
     <Compile Include="Objects\PowerPoint\Enums.cs" />
+    <Compile Include="Objects\PowerPoint\SlideFormat.cs" />
     <Compile Include="Objects\PowerPoint\SlideSettings.cs" />
     <Compile Include="Objects\PowerPoint\SlideSettingsChangingEventArgs.cs" />
+    <Compile Include="Objects\PowerPoint\SlideSize.cs" />
     <Compile Include="Objects\RemoteStorage\ArchiveDirectory.cs" />
     <Compile Include="Authorization\AuthorizingEventArgs.cs" />
     <Compile Include="Objects\RemoteStorage\ConfigFile.cs" />

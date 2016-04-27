@@ -12,12 +12,7 @@ namespace SalesLibraries.Common.Helpers
 {
 	public class PowerPointManager
 	{
-		private static readonly PowerPointManager _instance = new PowerPointManager();
-
-		public static PowerPointManager Instance
-		{
-			get { return _instance; }
-		}
+		public static PowerPointManager Instance { get; } = new PowerPointManager();
 
 		public SettingsSourceEnum SettingsSource { get; private set; }
 		public SlideSettings SlideSettings { get; private set; }
@@ -32,6 +27,7 @@ namespace SalesLibraries.Common.Helpers
 
 		public void Init()
 		{
+			SlideFormatParser.LoadAvailableFormats();
 			if (PowerPointSingleton.Instance.Connect())
 			{
 				SettingsSource = SettingsSourceEnum.PowerPoint;
