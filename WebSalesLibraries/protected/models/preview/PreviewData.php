@@ -108,6 +108,8 @@
 					return new ExcelPreviewData($link, $isQuickSite);
 				case 'app':
 					return new AppLinkPreviewData($link, $isQuickSite);
+				case 'internal':
+					return new InternalLinkPreviewData($link, $isQuickSite);
 				default:
 					return new FilePreviewData($link, $isQuickSite);
 			}

@@ -40,6 +40,7 @@
 					$fileInfo->name = $relativePath;
 					break;
 				case 6:
+				case 16:
 					break;
 				case 8:
 					$fileInfo->name = $fileInfo->link = str_replace('\\', '', $relativePath);

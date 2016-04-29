@@ -54,6 +54,9 @@
 						'url' => 'Web URL',
 						'youtube' => 'YouTube',
 						'lan' => 'LAN Link',
+						'quicksite' => 'QuickSite Link',
+						'internal' => 'Internal Link',
+						'app' => 'App Link',
 						'key' => 'Apple Keynote',
 						'other' => 'Undefined file'
 					),

@@ -294,6 +294,7 @@
 						case 'youtube':
 						case 'quicksite':
 						case 'app':
+						case 'internal':
 							$fileName = 'url.png';
 							break;
 						case 'mp3':

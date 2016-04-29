@@ -1,5 +1,5 @@
 <?php
-
+	Yii::import('application.extensions.phpQuery.phpQuery.phpQuery');
 	/**
 	 * Class PreviewController
 	 */

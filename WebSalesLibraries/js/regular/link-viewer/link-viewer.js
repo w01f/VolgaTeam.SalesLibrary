@@ -55,6 +55,9 @@
 							case 'app':
 								new $.SalesPortal.AppLinkViewer(parameters).show();
 								break;
+							case 'internal':
+								new $.SalesPortal.InternalLinkViewer(parameters).show();
+								break;
 							case 'image':
 								new $.SalesPortal.ImageViewer(parameters).show();
 								break;
@@ -194,7 +197,7 @@
 									parameters.data.rateData);
 							},
 							afterClose: afterClose
-					});
+						});
 					}
 					else
 					{

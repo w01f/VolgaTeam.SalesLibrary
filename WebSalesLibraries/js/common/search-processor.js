@@ -149,7 +149,7 @@
 								thatData.showPdf = true;
 							else if (value == 'video' || value == 'mp4' || value == 'wmv' || value == 'mp3')
 								thatData.showVideo = true;
-							else if (value == 'url' || value == 'youtube' || value == 'lan' || value == 'quicksite' || value == 'app')
+							else if (value == 'url' || value == 'youtube' || value == 'lan' || value == 'quicksite' || value == 'app' || value == 'internal')
 								thatData.showUrls = true;
 							else if (value == 'png' || value == 'jpeg')
 								thatData.showImages = true;

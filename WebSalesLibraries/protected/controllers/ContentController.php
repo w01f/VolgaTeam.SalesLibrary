@@ -26,6 +26,8 @@
 						'VideoLinkSettings' => 'VideoLinkSettings',
 						'HyperLinkSettings' => 'HyperLinkSettings',
 						'PowerPointLinkSettings' => 'PowerPointLinkSettings',
+						'AppLinkSettings' => 'AppLinkSettings',
+						'InternalLinkSettings' => 'InternalLinkSettings',
 						'LineBreak' => 'LineBreak',
 						'LinkCategory' => 'LinkCategory',
 						'LinkSuperFilter' => 'LinkSuperFilter',
@@ -80,6 +82,15 @@
 		 * @soap
 		 */
 		public function mockAppLinkSettings($settings)
+		{
+
+		}
+
+		/**
+		 * @param InternalLinkSettings $settings
+		 * @soap
+		 */
+		public function mockInternalLinkSettings($settings)
 		{
 
 		}
