@@ -384,6 +384,27 @@
           <xsd:element name="deniedUsers" type="xsd:string" />
         </xsd:all>
       </xsd:complexType>
+      <xsd:complexType name="InternalLinkSettings">
+        <xsd:all>
+          <xsd:element name="libraryName" type="xsd:string" />
+          <xsd:element name="pageName" type="xsd:string" />
+          <xsd:element name="windowName" type="xsd:string" />
+          <xsd:element name="linkName" type="xsd:string" />
+          <xsd:element name="forcePreview" type="xsd:boolean" />
+          <xsd:element name="note" type="xsd:string" />
+          <xsd:element name="hoverNote" type="xsd:string" />
+          <xsd:element name="isBold" type="xsd:boolean" />
+          <xsd:element name="isItalic" type="xsd:boolean" />
+          <xsd:element name="isUnderline" type="xsd:boolean" />
+          <xsd:element name="isSpecialFormat" type="xsd:boolean" />
+          <xsd:element name="font" type="tns:Font" />
+          <xsd:element name="foreColor" type="xsd:string" />
+          <xsd:element name="isRestricted" type="xsd:boolean" />
+          <xsd:element name="noShare" type="xsd:boolean" />
+          <xsd:element name="assignedUsers" type="xsd:string" />
+          <xsd:element name="deniedUsers" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="mockLibraryIn">
@@ -406,6 +427,10 @@
     <wsdl:part name="settings" type="tns:AppLinkSettings" />
   </wsdl:message>
   <wsdl:message name="mockAppLinkSettingsOut" />
+  <wsdl:message name="mockInternalLinkSettingsIn">
+    <wsdl:part name="settings" type="tns:InternalLinkSettings" />
+  </wsdl:message>
+  <wsdl:message name="mockInternalLinkSettingsOut" />
   <wsdl:message name="getSessionKeyIn">
     <wsdl:part name="login" type="xsd:string" />
     <wsdl:part name="password" type="xsd:string" />
@@ -443,6 +468,12 @@
       </wsdl:documentation>
       <wsdl:input message="tns:mockAppLinkSettingsIn" />
       <wsdl:output message="tns:mockAppLinkSettingsOut" />
+    </wsdl:operation>
+    <wsdl:operation name="mockInternalLinkSettings">
+      <wsdl:documentation>
+      </wsdl:documentation>
+      <wsdl:input message="tns:mockInternalLinkSettingsIn" />
+      <wsdl:output message="tns:mockInternalLinkSettingsOut" />
     </wsdl:operation>
     <wsdl:operation name="getSessionKey">
       <wsdl:documentation>
@@ -491,6 +522,15 @@
     </wsdl:operation>
     <wsdl:operation name="mockAppLinkSettings">
       <soap:operation soapAction="urn:ContentControllerwsdl#mockAppLinkSettings" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ContentControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ContentControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="mockInternalLinkSettings">
+      <soap:operation soapAction="urn:ContentControllerwsdl#mockInternalLinkSettings" style="rpc" />
       <wsdl:input>
         <soap:body use="encoded" namespace="urn:ContentControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
       </wsdl:input>

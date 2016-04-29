@@ -71,14 +71,19 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.DataSource
 
 		private void treeListAllFiles_MouseClick(object sender, MouseEventArgs e)
 		{
-			if (e.Button != MouseButtons.Right) return;
 			var treeList = sender as TreeList;
 			if (treeList == null) return;
 			var hitPoint = new Point(e.X, e.Y);
 			var hitInfo = treeList.CalcHitInfo(hitPoint);
 			if (!(hitInfo.Node?.Tag is SourceLink)) return;
-			treeList.Selection.Clear();
-			hitInfo.Node.Selected = true;
+			var ctrlSelect = (Control.ModifierKeys & Keys.Control) == Keys.Control;
+			var shiftSelect = (Control.ModifierKeys & Keys.Shift) == Keys.Shift;
+			if (!ctrlSelect && !shiftSelect)
+			{
+				treeList.Selection.Clear();
+				hitInfo.Node.Selected = true;
+			}
+			if (e.Button != MouseButtons.Right) return;
 			if (hitInfo.Node.Tag is FileLink)
 			{
 				tmiFileDelete.Visible = treeList == treeListAllFiles;
@@ -388,12 +393,18 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.DataSource
 
 		private void treeListAllFiles_DragOver(object sender, DragEventArgs e)
 		{
+			e.Effect = DragDropEffects.None;
 			var p = treeListAllFiles.PointToClient(new Point(e.X, e.Y));
 			var targetNode = treeListAllFiles.CalcHitInfo(p).Node;
-			if (targetNode?.Tag is SourceLink && e.Data.GetDataPresent(DataFormats.FileDrop))
+			if (!(targetNode?.Tag is SourceLink) || !e.Data.GetDataPresent(DataFormats.FileDrop)) return;
+			var droppedItemsPaths = e.Data.GetData(DataFormats.FileDrop) as String[];
+			if(droppedItemsPaths== null) return;
+			if (targetNode.Tag is FileLink)
+				targetNode = targetNode.ParentNode;
+			var targetFolderLink = (FolderLink)targetNode.Tag;
+			var targetFolderPath = targetFolderLink.Path;
+			if (!droppedItemsPaths.Any(path => path.Equals(targetFolderPath, StringComparison.OrdinalIgnoreCase)))
 				e.Effect = DragDropEffects.Copy;
-			else
-				e.Effect = DragDropEffects.None;
 		}
 
 		private async void treeListAllFiles_DragDrop(object sender, DragEventArgs e)

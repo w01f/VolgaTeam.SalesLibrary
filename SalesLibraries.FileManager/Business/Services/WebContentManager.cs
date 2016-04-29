@@ -18,6 +18,7 @@ using AppLinkSettings = SalesLibraries.ServiceConnector.WallbinContentService.Ap
 using BaseLinkSettings = SalesLibraries.ServiceConnector.WallbinContentService.BaseLinkSettings;
 using Font = SalesLibraries.ServiceConnector.WallbinContentService.Font;
 using HyperLinkSettings = SalesLibraries.ServiceConnector.WallbinContentService.HyperLinkSettings;
+using InternalLinkSettings = SalesLibraries.ServiceConnector.WallbinContentService.InternalLinkSettings;
 using LineBreak = SalesLibraries.ServiceConnector.WallbinContentService.LineBreak;
 using VideoLinkSettings = SalesLibraries.ServiceConnector.WallbinContentService.VideoLinkSettings;
 using PowerPointLinkSettings = SalesLibraries.ServiceConnector.WallbinContentService.PowerPointLinkSettings;
@@ -224,6 +225,11 @@ namespace SalesLibraries.FileManager.Business.Services
 					((AppLinkSettings)target.extendedProperties).ImportData(
 						(SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings.AppLinkSettings)source.Settings);
 					break;
+				case FileTypes.InternalLink:
+					target.extendedProperties = new InternalLinkSettings();
+					((InternalLinkSettings)target.extendedProperties).ImportData(
+						(SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings.InternalLinkSettings)source.Settings);
+					break;
 				default:
 					target.extendedProperties = new BaseLinkSettings();
 					target.extendedProperties.ImportData(source.Settings);
@@ -362,6 +368,18 @@ namespace SalesLibraries.FileManager.Business.Services
 		{
 			((IBaseLinkSettings)target).ImportData(source);
 			target.secondPath = source.SecondPath;
+		}
+
+		private static void ImportData(
+			this InternalLinkSettings target,
+			SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings.InternalLinkSettings source)
+		{
+			((IBaseLinkSettings)target).ImportData(source);
+			target.libraryName = source.LibraryName;
+			target.pageName = source.PageName;
+			target.windowName = source.WindowName;
+			target.linkName = source.LinkName;
+			target.forcePreview = source.ForcePreview;
 		}
 
 		private static void ImportData(

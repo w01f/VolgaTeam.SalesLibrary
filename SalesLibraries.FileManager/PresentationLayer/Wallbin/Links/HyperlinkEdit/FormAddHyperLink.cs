@@ -28,6 +28,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.HyperlinkEd
 				buttonXLan.Font = new Font(buttonXLan.Font.FontFamily, buttonXLan.Font.Size - 2, buttonXLan.Font.Style);
 				buttonXQuickSite.Font = new Font(buttonXQuickSite.Font.FontFamily, buttonXQuickSite.Font.Size - 2, buttonXQuickSite.Font.Style);
 				buttonXApp.Font = new Font(buttonXApp.Font.FontFamily, buttonXApp.Font.Size - 2, buttonXApp.Font.Style);
+				buttonXInternal.Font = new Font(buttonXInternal.Font.FontFamily, buttonXInternal.Font.Size - 2, buttonXInternal.Font.Style);
 				buttonXSave.Font = new Font(buttonXSave.Font.FontFamily, buttonXSave.Font.Size - 2, buttonXSave.Font.Style);
 				buttonXCancel.Font = new Font(buttonXCancel.Font.FontFamily, buttonXCancel.Font.Size - 2, buttonXCancel.Font.Style);
 			}
@@ -38,7 +39,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.HyperlinkEd
 				buttonXYouTube,
 				buttonXLan,
 				buttonXQuickSite,
-				buttonXApp
+				buttonXApp,
+				buttonXInternal
 			});
 
 			_editorSelectors.ForEach(button =>
@@ -81,6 +83,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.HyperlinkEd
 						break;
 					case HyperLinkTypeEnum.App:
 						SelectedEditor = new AppLinkEditControl();
+						break;
+					case HyperLinkTypeEnum.Internal:
+						SelectedEditor = new InternalLinkEditControl();
 						break;
 					default:
 						throw new ArgumentOutOfRangeException("Link type is not found");

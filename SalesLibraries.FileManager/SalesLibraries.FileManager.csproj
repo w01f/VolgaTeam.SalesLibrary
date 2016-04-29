@@ -260,6 +260,12 @@
     </Compile>
     <Compile Include="PresentationLayer\Wallbin\Folders\CopyFolderManager.cs" />
     <Compile Include="PresentationLayer\Wallbin\Folders\FolderMovingEventArgs.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\InternalLinkEditControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\InternalLinkEditControl.Designer.cs">
+      <DependentUpon>InternalLinkEditControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\FormAddHyperLink.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -384,6 +390,12 @@
     </Compile>
     <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LineBreakOptions.designer.cs">
       <DependentUpon>LineBreakOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkInternalOptions.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkInternalOptions.designer.cs">
+      <DependentUpon>LinkInternalOptions.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkAppOptions.cs">
       <SubType>Component</SubType>
@@ -656,6 +668,9 @@
     <EmbeddedResource Include="PresentationLayer\Wallbin\Folders\ClassicFolderBox.resx">
       <DependentUpon>ClassicFolderBox.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\InternalLinkEditControl.resx">
+      <DependentUpon>InternalLinkEditControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\FormAddHyperLink.resx">
       <DependentUpon>FormAddHyperLink.cs</DependentUpon>
     </EmbeddedResource>
@@ -715,6 +730,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\LineBreakOptions.resx">
       <DependentUpon>LineBreakOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkInternalOptions.resx">
+      <DependentUpon>LinkInternalOptions.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkAppOptions.resx">
       <DependentUpon>LinkAppOptions.cs</DependentUpon>
@@ -871,6 +889,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\LinkAddInternal.png" />
     <None Include="Resources\DataSourceListXls.png" />
     <None Include="Resources\DataSourceListPpt.png" />
     <None Include="Resources\DataSourceListPng.png" />

@@ -60,6 +60,7 @@
     <Compile Include="Models\Statistic\UserActivity.cs" />
     <Compile Include="Models\Statistic\LibraryFilesModel.cs" />
     <Compile Include="Models\Statistic\VideoLinkInfo.cs" />
+    <Compile Include="Models\WallbinContentService\InternalLinkSettings.cs" />
     <Compile Include="Models\WallbinContentService\AppLinkSettings.cs" />
     <Compile Include="Models\WallbinContentService\BaseLinkSettings.cs" />
     <Compile Include="Models\WallbinContentService\IBaseLinkSettings.cs" />

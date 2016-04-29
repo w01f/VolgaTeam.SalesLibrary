@@ -14,6 +14,7 @@
 		public const string YouTube = "youtube";
 		public const string QuickSite = "quicksite";
 		public const string AppLink = "app";
+		public const string InternalLink = "internal";
 		public const string Lan = "lan";
 		public const string Video = "video";
 		public const string Word = "doc";

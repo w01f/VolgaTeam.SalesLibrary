@@ -49,6 +49,8 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         
         private System.Threading.SendOrPostCallback mockAppLinkSettingsOperationCompleted;
         
+        private System.Threading.SendOrPostCallback mockInternalLinkSettingsOperationCompleted;
+        
         private System.Threading.SendOrPostCallback getSessionKeyOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
@@ -103,6 +105,9 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         
         /// <remarks/>
         public event mockAppLinkSettingsCompletedEventHandler mockAppLinkSettingsCompleted;
+        
+        /// <remarks/>
+        public event mockInternalLinkSettingsCompletedEventHandler mockInternalLinkSettingsCompleted;
         
         /// <remarks/>
         public event getSessionKeyCompletedEventHandler getSessionKeyCompleted;
@@ -244,6 +249,34 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
             if ((this.mockAppLinkSettingsCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.mockAppLinkSettingsCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:ContentControllerwsdl#mockInternalLinkSettings", RequestNamespace="urn:ContentControllerwsdl", ResponseNamespace="urn:ContentControllerwsdl")]
+        public void mockInternalLinkSettings(InternalLinkSettings settings) {
+            this.Invoke("mockInternalLinkSettings", new object[] {
+                        settings});
+        }
+        
+        /// <remarks/>
+        public void mockInternalLinkSettingsAsync(InternalLinkSettings settings) {
+            this.mockInternalLinkSettingsAsync(settings, null);
+        }
+        
+        /// <remarks/>
+        public void mockInternalLinkSettingsAsync(InternalLinkSettings settings, object userState) {
+            if ((this.mockInternalLinkSettingsOperationCompleted == null)) {
+                this.mockInternalLinkSettingsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnmockInternalLinkSettingsOperationCompleted);
+            }
+            this.InvokeAsync("mockInternalLinkSettings", new object[] {
+                        settings}, this.mockInternalLinkSettingsOperationCompleted, userState);
+        }
+        
+        private void OnmockInternalLinkSettingsOperationCompleted(object arg) {
+            if ((this.mockInternalLinkSettingsCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.mockInternalLinkSettingsCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -882,6 +915,219 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
             }
             set {
                 this.isUnderlinedField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:ContentControllerwsdl")]
+    public partial class InternalLinkSettings {
+        
+        private string libraryNameField;
+        
+        private string pageNameField;
+        
+        private string windowNameField;
+        
+        private string linkNameField;
+        
+        private bool forcePreviewField;
+        
+        private string noteField;
+        
+        private string hoverNoteField;
+        
+        private bool isBoldField;
+        
+        private bool isItalicField;
+        
+        private bool isUnderlineField;
+        
+        private bool isSpecialFormatField;
+        
+        private Font fontField;
+        
+        private string foreColorField;
+        
+        private bool isRestrictedField;
+        
+        private bool noShareField;
+        
+        private string assignedUsersField;
+        
+        private string deniedUsersField;
+        
+        /// <remarks/>
+        public string libraryName {
+            get {
+                return this.libraryNameField;
+            }
+            set {
+                this.libraryNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string pageName {
+            get {
+                return this.pageNameField;
+            }
+            set {
+                this.pageNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string windowName {
+            get {
+                return this.windowNameField;
+            }
+            set {
+                this.windowNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string linkName {
+            get {
+                return this.linkNameField;
+            }
+            set {
+                this.linkNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool forcePreview {
+            get {
+                return this.forcePreviewField;
+            }
+            set {
+                this.forcePreviewField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string note {
+            get {
+                return this.noteField;
+            }
+            set {
+                this.noteField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string hoverNote {
+            get {
+                return this.hoverNoteField;
+            }
+            set {
+                this.hoverNoteField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool isBold {
+            get {
+                return this.isBoldField;
+            }
+            set {
+                this.isBoldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool isItalic {
+            get {
+                return this.isItalicField;
+            }
+            set {
+                this.isItalicField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool isUnderline {
+            get {
+                return this.isUnderlineField;
+            }
+            set {
+                this.isUnderlineField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool isSpecialFormat {
+            get {
+                return this.isSpecialFormatField;
+            }
+            set {
+                this.isSpecialFormatField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public Font font {
+            get {
+                return this.fontField;
+            }
+            set {
+                this.fontField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string foreColor {
+            get {
+                return this.foreColorField;
+            }
+            set {
+                this.foreColorField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool isRestricted {
+            get {
+                return this.isRestrictedField;
+            }
+            set {
+                this.isRestrictedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool noShare {
+            get {
+                return this.noShareField;
+            }
+            set {
+                this.noShareField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string assignedUsers {
+            get {
+                return this.assignedUsersField;
+            }
+            set {
+                this.assignedUsersField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string deniedUsers {
+            get {
+                return this.deniedUsersField;
+            }
+            set {
+                this.deniedUsersField = value;
             }
         }
     }
@@ -3113,6 +3359,10 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
     public delegate void mockAppLinkSettingsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    public delegate void mockInternalLinkSettingsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]

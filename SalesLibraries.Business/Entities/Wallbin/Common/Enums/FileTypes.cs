@@ -14,6 +14,7 @@
 		OvernightsLink = 13,
 		YouTube = 14,
 		AppLink = 15,
+		InternalLink = 16,
 		Other = 999
 	}
 }

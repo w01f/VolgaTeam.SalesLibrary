@@ -196,6 +196,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 							(AppLinkInfo)form.SelectedEditor.GetHyperLinkInfo(),
 							DataSource);
 						break;
+					case HyperLinkTypeEnum.Internal:
+						newLink = InternalLink.Create(
+							(InternalLinkInfo)form.SelectedEditor.GetHyperLinkInfo(),
+							DataSource);
+						break;
 					default:
 						throw new ArgumentOutOfRangeException("Link type not found");
 				}
@@ -686,7 +691,30 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 			{
 				var droppedLinks = DataDraggedOver.GetData(DataFormats.Serializable, true) as SourceLink[];
 				SelectionManager.SelectFolder(this);
-				InsertLinks(droppedLinks, _mouseDragOverHitInfo.RowIndex);
+
+				var fileLinks = droppedLinks.OfType<FileLink>().ToList();
+				var folderLinks = droppedLinks.OfType<FolderLink>().ToList();
+
+				var confirmDrop = true;
+				if (folderLinks.Any(folderLink => fileLinks.Any(fileLink => fileLink.Path.Contains(folderLink.Path))))
+					using (var form = new FormCustomDialog(
+						String.Format("{0}{1}",
+							"<size=+4>Are you SURE you want to Drag the Folder AND all the Files into this Window?</size><br>",
+							"<br>It might look kind of strange to have the entire folder in this window…"
+						),
+						new[]
+						{
+							new CustomDialogButtonInfo {Title = "Yep!",DialogResult = DialogResult.OK,Width = 100},
+							new CustomDialogButtonInfo {Title = "CANCEL",DialogResult = DialogResult.Cancel,Width = 100}
+						}
+					))
+					{
+						form.Width = 500;
+						form.Height = 160;
+						confirmDrop = form.ShowDialog(MainController.Instance.MainForm) == DialogResult.OK;
+					}
+				if (confirmDrop)
+					InsertLinks(droppedLinks, _mouseDragOverHitInfo.RowIndex);
 			}
 			var droppedRow = DataDraggedOver.GetData(typeof(LinkRow)) as LinkRow;
 			if (droppedRow != null)
