@@ -18,6 +18,8 @@ namespace SalesLibraries.Common.Helpers
 			{
 				case AppTypeEnum.FileManager:
 					return "FileManagerHelp.xml";
+				case AppTypeEnum.CloudAdmin:
+					return "CloudAdminHelp.xml";
 				case AppTypeEnum.SalesDepot:
 					return "SalesLibraryHelp.xml";
 			}

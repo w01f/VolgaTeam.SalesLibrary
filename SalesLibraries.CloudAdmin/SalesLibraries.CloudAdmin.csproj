@@ -1,0 +1,811 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6BD2F1D1-DE8B-4469-A432-070C4C9B8776}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SalesLibraries.CloudAdmin</RootNamespace>
+    <AssemblyName>Cloud Admin</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>SalesLibraries.CloudAdmin.Program</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ceTe.DynamicPDF.Rasterizer.40.x86, Version=2.0.0.28903, Culture=neutral, PublicKeyToken=09b5ce0d5c0a9d8b, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\ceTe Software\DynamicPDF Rasterizer v2.0.0 for .NET\bin\ceTe.DynamicPDF.Rasterizer.40.x86.dll</HintPath>
+    </Reference>
+    <Reference Include="DevComponents.DotNetBar2, Version=12.6.0.6, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Data.v15.2, Version=15.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Utils.v15.2, Version=15.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraBars.v15.2, Version=15.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraEditors.v15.2, Version=15.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraGrid.v15.2, Version=15.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ImageListView, Version=11.0.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ImageListView.11.0.4.0\lib\net35\ImageListView.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.9.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.9\lib\itextsharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.SQLite, Version=1.0.101.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.Core.1.0.101.0\lib\net451\System.Data.SQLite.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.SQLite.EF6, Version=1.0.101.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.EF6.1.0.101.0\lib\net451\System.Data.SQLite.EF6.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.SQLite.Linq, Version=1.0.101.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.Linq.1.0.101.0\lib\net451\System.Data.SQLite.Linq.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Vintasoft.Imaging">
+      <HintPath>..\Assemblies\Vintasoft.Imaging\Vintasoft.Imaging.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Business\Dictionaries\SearchTagList.cs" />
+    <Compile Include="Business\Dictionaries\SuperFilterList.cs" />
+    <Compile Include="Business\Models\Security\LibraryGroup.cs" />
+    <Compile Include="Business\Models\Security\LibraryUser.cs" />
+    <Compile Include="Business\Services\CorruptedLinksHelper.cs" />
+    <Compile Include="Business\Services\LicenseHelper.cs" />
+    <Compile Include="Business\Services\TaggedLinksManager.cs" />
+    <Compile Include="Configuration\EditorsSettings.cs" />
+    <Compile Include="Configuration\ListManager.cs" />
+    <Compile Include="Configuration\MetaDataConst.cs" />
+    <Compile Include="Configuration\MetaDataContainer.cs" />
+    <Compile Include="Configuration\RemoteResourceManager.cs" />
+    <Compile Include="Configuration\SecurityLists.cs" />
+    <Compile Include="Configuration\SettingsManager.cs" />
+    <Compile Include="Controllers\IPageController.cs" />
+    <Compile Include="Controllers\MainController.cs" />
+    <Compile Include="Controllers\TabPageEnum.cs" />
+    <Compile Include="Controllers\WallbinPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controllers\WallbinPage.Designer.cs">
+      <DependentUpon>WallbinPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMain.Designer.cs">
+      <DependentUpon>FormMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Common\BannerSettingsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Common\BannerSettingsControl.designer.cs">
+      <DependentUpon>BannerSettingsControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Common\BaseLinkImagesContainer.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Common\BaseLinkImagesContainer.designer.cs">
+      <DependentUpon>BaseLinkImagesContainer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Common\FavoritesImagesContainer.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Common\RegularImagesContainer.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Common\SearchGroupContainer.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Common\SearchResultsImagesContainer.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Common\WidgetSettingsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Common\WidgetSettingsControl.Designer.cs">
+      <DependentUpon>WidgetSettingsControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Folders\ClassicFolderBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Folders\ClassicFolderBox.designer.cs">
+      <DependentUpon>ClassicFolderBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Folders\CopyFolderManager.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Folders\FolderMovingEventArgs.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Libraries\LibraryTagInfo.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Libraries\LibraryTagInfo.Designer.cs">
+      <DependentUpon>LibraryTagInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\GroupSettings\CategoriesEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\GroupSettings\CategoriesEditor.designer.cs">
+      <DependentUpon>CategoriesEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\GroupSettings\GroupSettingsManager.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\GroupSettings\IGroupSettingsEditor.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\GroupSettings\KeywordsEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\GroupSettings\KeywordsEditor.designer.cs">
+      <DependentUpon>KeywordsEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\GroupSettings\SecurityEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\GroupSettings\SecurityEditor.designer.cs">
+      <DependentUpon>SecurityEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\GroupSettings\SuperFiltersEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\GroupSettings\SuperFiltersEditor.designer.cs">
+      <DependentUpon>SuperFiltersEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\GroupSettings\TagsCleaner.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\GroupSettings\TagsCleaner.designer.cs">
+      <DependentUpon>TagsCleaner.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\AppLinkEditControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\AppLinkEditControl.Designer.cs">
+      <DependentUpon>AppLinkEditControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\FormAddHyperLink.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\FormAddHyperLink.designer.cs">
+      <DependentUpon>FormAddHyperLink.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\IHyperLinkEditControl.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\InternalLinkEditControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\InternalLinkEditControl.Designer.cs">
+      <DependentUpon>InternalLinkEditControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\LanLinkEditControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\LanLinkEditControl.Designer.cs">
+      <DependentUpon>LanLinkEditControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\QuickSiteEditControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\QuickSiteEditControl.Designer.cs">
+      <DependentUpon>QuickSiteEditControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\UrlEditControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\UrlEditControl.Designer.cs">
+      <DependentUpon>UrlEditControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\YouTubeEditControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\YouTubeEditControl.Designer.cs">
+      <DependentUpon>YouTubeEditControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\ExpiredDateOptions.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\ExpiredDateOptions.Designer.cs">
+      <DependentUpon>ExpiredDateOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\FolderFilesOptions.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\FolderFilesOptions.designer.cs">
+      <DependentUpon>FolderFilesOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\FormEditLinkBanner.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\FormEditLinkBanner.designer.cs">
+      <DependentUpon>FormEditLinkBanner.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\FormEditLinkSettingsEmbedded.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\FormEditLinkSettingsEmbedded.designer.cs">
+      <DependentUpon>FormEditLinkSettingsEmbedded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\FormEditLinkSettingsRegular.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\FormEditLinkSettingsRegular.designer.cs">
+      <DependentUpon>FormEditLinkSettingsRegular.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\FormEditLinkWidget.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\FormEditLinkWidget.designer.cs">
+      <DependentUpon>FormEditLinkWidget.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\ILinkSettingsEditControl.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\ILinkSettingsEditForm.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LineBreakOptions.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LineBreakOptions.designer.cs">
+      <DependentUpon>LineBreakOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkAppOptions.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkAppOptions.designer.cs">
+      <DependentUpon>LinkAppOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkDocumentOptions.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkDocumentOptions.designer.cs">
+      <DependentUpon>LinkDocumentOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkExcelOptions.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkExcelOptions.designer.cs">
+      <DependentUpon>LinkExcelOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkInfoControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkInfoControl.Designer.cs">
+      <DependentUpon>LinkInfoControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkInternalOptions.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkInternalOptions.designer.cs">
+      <DependentUpon>LinkInternalOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkLanOptions.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkLanOptions.designer.cs">
+      <DependentUpon>LinkLanOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkObjectOptions.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkObjectOptions.designer.cs">
+      <DependentUpon>LinkObjectOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkQuickSiteOptions.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkQuickSiteOptions.designer.cs">
+      <DependentUpon>LinkQuickSiteOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkSettingsType.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkTextOptions.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkTextOptions.designer.cs">
+      <DependentUpon>LinkTextOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkVideoOptions.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkVideoOptions.designer.cs">
+      <DependentUpon>LinkVideoOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkWebOptions.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkWebOptions.designer.cs">
+      <DependentUpon>LinkWebOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkYouTubeOptions.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkYouTubeOptions.designer.cs">
+      <DependentUpon>LinkYouTubeOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\PreviewOptions.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\PreviewOptions.designer.cs">
+      <DependentUpon>PreviewOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\QuickEditManager.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\SecurityOptions.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\SecurityOptions.designer.cs">
+      <DependentUpon>SecurityOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\SettingsEditorFactory.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\SettingsEditorHeaderInfo.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\SuperFilterControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\SuperFilterControl.designer.cs">
+      <DependentUpon>SuperFilterControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\TagsOptions.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\TagsOptions.designer.cs">
+      <DependentUpon>TagsOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Settings\ColumnSettings.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Settings\ColumnSettings.Designer.cs">
+      <DependentUpon>ColumnSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Settings\FormAutoWidgets.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Settings\FormAutoWidgets.designer.cs">
+      <DependentUpon>FormAutoWidgets.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Settings\FormColumns.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Settings\FormColumns.designer.cs">
+      <DependentUpon>FormColumns.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Settings\FormColumnTitle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Settings\FormColumnTitle.designer.cs">
+      <DependentUpon>FormColumnTitle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Settings\FormEmailList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Settings\FormEmailList.designer.cs">
+      <DependentUpon>FormEmailList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Settings\FormPageName.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Settings\FormPageName.designer.cs">
+      <DependentUpon>FormPageName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Settings\FormPages.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Settings\FormPages.designer.cs">
+      <DependentUpon>FormPages.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Settings\FormResetLibraryContent.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Settings\FormResetLibraryContent.designer.cs">
+      <DependentUpon>FormResetLibraryContent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Settings\FormSelectWidget.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Settings\FormSelectWidget.designer.cs">
+      <DependentUpon>FormSelectWidget.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Settings\FormSync.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Settings\FormSync.designer.cs">
+      <DependentUpon>FormSync.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Settings\FormWallbinSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Settings\FormWallbinSettings.designer.cs">
+      <DependentUpon>FormWallbinSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Settings\FormWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Settings\FormWindow.designer.cs">
+      <DependentUpon>FormWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Views\BaseWallbin.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Views\BaseWallbin.Designer.cs">
+      <DependentUpon>BaseWallbin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Views\FormatState.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Views\IPageView.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Views\IWallbinView.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Views\PageContent.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Views\PageContent.Designer.cs">
+      <DependentUpon>PageContent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Views\PageViewFactory.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Views\SelectionManager.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Views\SimplePage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Views\SimplePage.Designer.cs">
+      <DependentUpon>SimplePage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Views\SimpleWallbin.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Views\SimpleWallbin.Designer.cs">
+      <DependentUpon>SimpleWallbin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Views\TabbedWallbin.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Views\TabbedWallbin.Designer.cs">
+      <DependentUpon>TabbedWallbin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Views\TabPage.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Views\TabPage.Designer.cs">
+      <DependentUpon>TabPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Views\ViewManager.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Views\WallbinViewFactory.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Controllers\WallbinPage.resx">
+      <DependentUpon>WallbinPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMain.resx">
+      <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Common\BannerSettingsControl.resx">
+      <DependentUpon>BannerSettingsControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Common\BaseLinkImagesContainer.resx">
+      <DependentUpon>BaseLinkImagesContainer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Common\WidgetSettingsControl.resx">
+      <DependentUpon>WidgetSettingsControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Folders\ClassicFolderBox.resx">
+      <DependentUpon>ClassicFolderBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Libraries\LibraryTagInfo.resx">
+      <DependentUpon>LibraryTagInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\GroupSettings\CategoriesEditor.resx">
+      <DependentUpon>CategoriesEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\GroupSettings\KeywordsEditor.resx">
+      <DependentUpon>KeywordsEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\GroupSettings\SecurityEditor.resx">
+      <DependentUpon>SecurityEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\GroupSettings\SuperFiltersEditor.resx">
+      <DependentUpon>SuperFiltersEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\GroupSettings\TagsCleaner.resx">
+      <DependentUpon>TagsCleaner.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\AppLinkEditControl.resx">
+      <DependentUpon>AppLinkEditControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\FormAddHyperLink.resx">
+      <DependentUpon>FormAddHyperLink.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\InternalLinkEditControl.resx">
+      <DependentUpon>InternalLinkEditControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\LanLinkEditControl.resx">
+      <DependentUpon>LanLinkEditControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\QuickSiteEditControl.resx">
+      <DependentUpon>QuickSiteEditControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\UrlEditControl.resx">
+      <DependentUpon>UrlEditControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\YouTubeEditControl.resx">
+      <DependentUpon>YouTubeEditControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\ExpiredDateOptions.resx">
+      <DependentUpon>ExpiredDateOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\FolderFilesOptions.resx">
+      <DependentUpon>FolderFilesOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\FormEditLinkBanner.resx">
+      <DependentUpon>FormEditLinkBanner.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\FormEditLinkSettingsEmbedded.resx">
+      <DependentUpon>FormEditLinkSettingsEmbedded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\FormEditLinkSettingsRegular.resx">
+      <DependentUpon>FormEditLinkSettingsRegular.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\FormEditLinkWidget.resx">
+      <DependentUpon>FormEditLinkWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\LineBreakOptions.resx">
+      <DependentUpon>LineBreakOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkAppOptions.resx">
+      <DependentUpon>LinkAppOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkDocumentOptions.resx">
+      <DependentUpon>LinkDocumentOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkExcelOptions.resx">
+      <DependentUpon>LinkExcelOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkInfoControl.resx">
+      <DependentUpon>LinkInfoControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkInternalOptions.resx">
+      <DependentUpon>LinkInternalOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkLanOptions.resx">
+      <DependentUpon>LinkLanOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkObjectOptions.resx">
+      <DependentUpon>LinkObjectOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkQuickSiteOptions.resx">
+      <DependentUpon>LinkQuickSiteOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkTextOptions.resx">
+      <DependentUpon>LinkTextOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkVideoOptions.resx">
+      <DependentUpon>LinkVideoOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkWebOptions.resx">
+      <DependentUpon>LinkWebOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkYouTubeOptions.resx">
+      <DependentUpon>LinkYouTubeOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\PreviewOptions.resx">
+      <DependentUpon>PreviewOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\SecurityOptions.resx">
+      <DependentUpon>SecurityOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\SuperFilterControl.resx">
+      <DependentUpon>SuperFilterControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\TagsOptions.resx">
+      <DependentUpon>TagsOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Settings\ColumnSettings.resx">
+      <DependentUpon>ColumnSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Settings\FormAutoWidgets.resx">
+      <DependentUpon>FormAutoWidgets.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Settings\FormColumns.resx">
+      <DependentUpon>FormColumns.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Settings\FormColumnTitle.resx">
+      <DependentUpon>FormColumnTitle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Settings\FormEmailList.resx">
+      <DependentUpon>FormEmailList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Settings\FormPageName.resx">
+      <DependentUpon>FormPageName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Settings\FormPages.resx">
+      <DependentUpon>FormPages.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Settings\FormResetLibraryContent.resx">
+      <DependentUpon>FormResetLibraryContent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Settings\FormSelectWidget.resx">
+      <DependentUpon>FormSelectWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Settings\FormSync.resx">
+      <DependentUpon>FormSync.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Settings\FormWallbinSettings.resx">
+      <DependentUpon>FormWallbinSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Settings\FormWindow.resx">
+      <DependentUpon>FormWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Views\BaseWallbin.resx">
+      <DependentUpon>BaseWallbin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Views\PageContent.resx">
+      <DependentUpon>PageContent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Views\SimplePage.resx">
+      <DependentUpon>SimplePage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Views\SimpleWallbin.resx">
+      <DependentUpon>SimpleWallbin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Views\TabbedWallbin.resx">
+      <DependentUpon>TabbedWallbin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Views\TabPage.resx">
+      <DependentUpon>TabPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="icon.ico" />
+    <None Include="Resources\WallbinZoomOut.png" />
+    <None Include="Resources\WallbinZoomIn.png" />
+    <None Include="Resources\WallbinSettingsTabPages.png" />
+    <None Include="Resources\WallbinSettingsRibbon.png" />
+    <None Include="Resources\WallbinSettingsComboboxes.png" />
+    <None Include="Resources\VideoDelete.png" />
+    <None Include="Resources\VideoConvert.png" />
+    <None Include="Resources\TagsRibbonSuperFIlters.png" />
+    <None Include="Resources\TagsRibbonSave.png" />
+    <None Include="Resources\TagsRibbonKeywords.png" />
+    <None Include="Resources\TagsRibbonClear.png" />
+    <None Include="Resources\TagsRibbonCategories.png" />
+    <None Include="Resources\Sync.png" />
+    <None Include="Resources\SettingsSync.png" />
+    <None Include="Resources\SettingsPages.png" />
+    <None Include="Resources\SettingsEmailList.png" />
+    <None Include="Resources\SettingsColumnTitle.png" />
+    <None Include="Resources\SettingsColumnsAlignByRows.png" />
+    <None Include="Resources\SettingsColumnsAlignByColumns.png" />
+    <None Include="Resources\SettingsColumns.png" />
+    <None Include="Resources\SettingsAutoWidgets.png" />
+    <None Include="Resources\SettingsAdvanced.png" />
+    <None Include="Resources\SecurityRibbonSelect.png" />
+    <None Include="Resources\SecurityRibbonReset.png" />
+    <None Include="Resources\SecurityRibbonLogo.png" />
+    <None Include="Resources\SecurityMenuSelect.png" />
+    <None Include="Resources\SecurityMenuReset.png" />
+    <None Include="Resources\RetractableLogoTags.png" />
+    <None Include="Resources\RetractableLogoSecurity.png" />
+    <None Include="Resources\LinkSettingsFolderXlsx.png" />
+    <None Include="Resources\LinkSettingsFolderWmv.png" />
+    <None Include="Resources\LinkSettingsFolderTags.png" />
+    <None Include="Resources\LinkSettingsFolderSync.png" />
+    <None Include="Resources\LinkSettingsFolderSelectByType.png" />
+    <None Include="Resources\LinkSettingsFolderPptx.png" />
+    <None Include="Resources\LinkSettingsFolderPdf.png" />
+    <None Include="Resources\LinkSettingsFolderDocx.png" />
+    <None Include="Resources\LinkOpen.png" />
+    <None Include="Resources\LinkDelete.png" />
+    <None Include="Resources\LinkAddYoutube.png" />
+    <None Include="Resources\LinkAddUrl.png" />
+    <None Include="Resources\LinkAddQuickSite.png" />
+    <None Include="Resources\LinkAddNetwork.png" />
+    <None Include="Resources\LinkAddInternal.png" />
+    <None Include="Resources\LinkAddApp.png" />
+    <None Include="Resources\HomeLogo.png" />
+    <None Include="Resources\Help.png" />
+    <None Include="Resources\Favorites.png" />
+    <None Include="Resources\Exit.png" />
+    <None Include="Resources\ButtonVideoReset.png" />
+    <None Include="Resources\ButtonVideoConvert.png" />
+    <None Include="Resources\ButtonSettings.png" />
+    <None Include="Resources\ButtonPlus.png" />
+    <None Include="Resources\ButtonOpen.png" />
+    <None Include="Resources\ButtonDelete.png" />
+    <None Include="Resources\ButtonAutoWidgets.png" />
+    <None Include="Resources\ArrowUp.png" />
+    <None Include="Resources\ArrowRight.png" />
+    <None Include="Resources\ArrowLeft.png" />
+    <None Include="Resources\ArrowDown.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SalesLibraries.Business\SalesLibraries.Business.csproj">
+      <Project>{526944F8-7B85-48CE-81F1-43AE041A321F}</Project>
+      <Name>SalesLibraries.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SalesLibraries.CommonGUI\SalesLibraries.CommonGUI.csproj">
+      <Project>{03639419-D148-4814-B8C1-CF0AB550D136}</Project>
+      <Name>SalesLibraries.CommonGUI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SalesLibraries.Common\SalesLibraries.Common.csproj">
+      <Project>{F35DC0D8-6816-4033-A5E2-D446C7A956FE}</Project>
+      <Name>SalesLibraries.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SalesLibraries.ServiceConnector\SalesLibraries.ServiceConnector.csproj">
+      <Project>{900CCF99-921A-4E35-8686-C85D48263785}</Project>
+      <Name>SalesLibraries.ServiceConnector</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\System.Data.SQLite.Core.1.0.101.0\build\net451\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.101.0\build\net451\System.Data.SQLite.Core.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\System.Data.SQLite.Core.1.0.101.0\build\net451\System.Data.SQLite.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.Data.SQLite.Core.1.0.101.0\build\net451\System.Data.SQLite.Core.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

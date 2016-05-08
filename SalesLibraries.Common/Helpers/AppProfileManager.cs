@@ -56,6 +56,9 @@ namespace SalesLibraries.Common.Helpers
 				case AppTypeEnum.FileManager:
 					_appName = "app_site_admin";
 					break;
+				case AppTypeEnum.CloudAdmin:
+					_appName = "app_cloud_admin";
+					break;
 				case AppTypeEnum.SalesDepot:
 					_appName = "app_sales_library";
 					break;
@@ -87,14 +90,28 @@ namespace SalesLibraries.Common.Helpers
 
 			ProfilesRootFolder = new StorageDirectory(new object[]
 			{
-				FileStorageManager.OutgoingFolderName, 
+				FileStorageManager.OutgoingFolderName,
 				AppNameSet
 			});
 			if (!await ProfilesRootFolder.Exists(true))
-				await StorageDirectory.CreateSubFolder(new[]
+				if (AppNameSet.Length > 1)
 				{
-					FileStorageManager.OutgoingFolderName
-				}, AppNameSet, true);
+					await StorageDirectory.CreateSubFolder(new[]
+					{
+						FileStorageManager.OutgoingFolderName
+					}, _appName, true);
+					await StorageDirectory.CreateSubFolder(new[]
+					{
+						FileStorageManager.OutgoingFolderName
+					}, AppNameSet, true);
+				}
+				else
+				{
+					await StorageDirectory.CreateSubFolder(new[]
+					{
+						FileStorageManager.OutgoingFolderName
+					}, AppNameSet, true);
+				}
 
 			ProfileFolder = new StorageDirectory(ProfilesRootFolder.RelativePathParts.Merge(ProfileName));
 			if (!await ProfileFolder.Exists(true))

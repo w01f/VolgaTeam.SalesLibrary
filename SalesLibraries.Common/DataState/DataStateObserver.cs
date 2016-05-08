@@ -5,12 +5,7 @@ namespace SalesLibraries.Common.DataState
 {
 	public class DataStateObserver
 	{
-		private readonly static DataStateObserver _instance = new DataStateObserver();
-
-		public static DataStateObserver Instance
-		{
-			get { return _instance; }
-		}
+		public static DataStateObserver Instance { get; } = new DataStateObserver();
 
 		public event EventHandler<DataChangeEventArgs> DataChanged;
 
@@ -18,14 +13,12 @@ namespace SalesLibraries.Common.DataState
 
 		public void RaiseLibrarySelected()
 		{
-			if (DataChanged != null)
-				DataChanged(this, new LibrarySelectedEventArgs());
+			DataChanged?.Invoke(this, new LibrarySelectedEventArgs());
 		}
 
 		public void RaiseLinksDeleted(IEnumerable<Guid> linkIds)
 		{
-			if (DataChanged != null)
-				DataChanged(this, new LinksDeletedEventArgs(linkIds));
+			DataChanged?.Invoke(this, new LinksDeletedEventArgs(linkIds));
 		}
 	}
 }

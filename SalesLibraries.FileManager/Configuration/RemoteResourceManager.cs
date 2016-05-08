@@ -15,7 +15,6 @@ namespace SalesLibraries.FileManager.Configuration
 		}
 
 		#region Local
-		public StorageDirectory LocalLibraryFolder { get; private set; }
 		public StorageDirectory MetaDataCacheFolder { get; private set; }
 		public StorageDirectory ArchiveFolder { get; private set; }
 		#endregion
@@ -35,14 +34,6 @@ namespace SalesLibraries.FileManager.Configuration
 			await Common.Helpers.RemoteResourceManager.Instance.Load();
 
 			#region Local
-			LocalLibraryFolder = new StorageDirectory(new[]
-			{
-				FileStorageManager.LocalFilesFolderName,
-				"Libraries"
-			});
-			if (!await LocalLibraryFolder.Exists())
-				await StorageDirectory.CreateSubFolder(new[] { FileStorageManager.LocalFilesFolderName }, "Libraries");
-
 			MetaDataCacheFolder = new StorageDirectory(new object[]
 			{
 				FileStorageManager.LocalFilesFolderName,

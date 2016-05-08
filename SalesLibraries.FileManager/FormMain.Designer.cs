@@ -58,8 +58,8 @@
 			this.buttonItemHomeLinkDelete = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarHomeAddLink = new DevComponents.DotNetBar.RibbonBar();
 			this.itemContainerHomeAddLink = new DevComponents.DotNetBar.ItemContainer();
-			this.buttonItemHomeAddUrl = new DevComponents.DotNetBar.ButtonItem();
 			this.buttonItemHomeAddLineBreak = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemHomeAddUrl = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarHomeWallbin = new DevComponents.DotNetBar.RibbonBar();
 			this.comboBoxEditHomePage = new DevExpress.XtraEditors.ComboBoxEdit();
 			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
@@ -221,13 +221,13 @@
 			this.ribbonControl.CanCustomize = false;
 			this.ribbonControl.CaptionVisible = true;
 			this.ribbonControl.Controls.Add(this.ribbonPanelHome);
-			this.ribbonControl.Controls.Add(this.ribbonPanelSettings);
 			this.ribbonControl.Controls.Add(this.ribbonPanelSecurity);
 			this.ribbonControl.Controls.Add(this.ribbonPanelTags);
 			this.ribbonControl.Controls.Add(this.ribbonPanelVideo);
 			this.ribbonControl.Controls.Add(this.ribbonPanelProgramManager);
 			this.ribbonControl.Controls.Add(this.ribbonPanelCalendar);
 			this.ribbonControl.Controls.Add(this.ribbonPanelPreferences);
+			this.ribbonControl.Controls.Add(this.ribbonPanelSettings);
 			this.ribbonControl.Dock = System.Windows.Forms.DockStyle.Top;
 			this.ribbonControl.EnableQatPlacement = false;
 			this.ribbonControl.ForeColor = System.Drawing.Color.Black;
@@ -753,15 +753,6 @@
 			this.itemContainerHomeAddLink.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			this.itemContainerHomeAddLink.VerticalItemAlignment = DevComponents.DotNetBar.eVerticalItemsAlignment.Middle;
 			// 
-			// buttonItemHomeAddUrl
-			// 
-			this.buttonItemHomeAddUrl.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
-			this.buttonItemHomeAddUrl.Enabled = false;
-			this.buttonItemHomeAddUrl.ForeColor = System.Drawing.Color.Black;
-			this.buttonItemHomeAddUrl.Name = "buttonItemHomeAddUrl";
-			this.superTooltip.SetSuperTooltip(this.buttonItemHomeAddUrl, new DevComponents.DotNetBar.SuperTooltipInfo("Add Web Link", "", "Add a Link to a website", null, null, DevComponents.DotNetBar.eTooltipColor.Default, true, false, new System.Drawing.Size(0, 0)));
-			this.buttonItemHomeAddUrl.Text = " Hyperlink";
-			// 
 			// buttonItemHomeAddLineBreak
 			// 
 			this.buttonItemHomeAddLineBreak.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
@@ -770,6 +761,15 @@
 			this.buttonItemHomeAddLineBreak.Name = "buttonItemHomeAddLineBreak";
 			this.superTooltip.SetSuperTooltip(this.buttonItemHomeAddLineBreak, new DevComponents.DotNetBar.SuperTooltipInfo("Add Line Break", "", "Add an empty Line ABOVE the selected Link", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
 			this.buttonItemHomeAddLineBreak.Text = "Line Break";
+			// 
+			// buttonItemHomeAddUrl
+			// 
+			this.buttonItemHomeAddUrl.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
+			this.buttonItemHomeAddUrl.Enabled = false;
+			this.buttonItemHomeAddUrl.ForeColor = System.Drawing.Color.Black;
+			this.buttonItemHomeAddUrl.Name = "buttonItemHomeAddUrl";
+			this.superTooltip.SetSuperTooltip(this.buttonItemHomeAddUrl, new DevComponents.DotNetBar.SuperTooltipInfo("Add Web Link", "", "Add a Link to a website", null, null, DevComponents.DotNetBar.eTooltipColor.Default, true, false, new System.Drawing.Size(0, 0)));
+			this.buttonItemHomeAddUrl.Text = " Hyperlink";
 			// 
 			// ribbonBarHomeWallbin
 			// 
@@ -1150,7 +1150,7 @@
 			this.ribbonPanelSecurity.Location = new System.Drawing.Point(0, 53);
 			this.ribbonPanelSecurity.Name = "ribbonPanelSecurity";
 			this.ribbonPanelSecurity.Padding = new System.Windows.Forms.Padding(3, 0, 3, 2);
-			this.ribbonPanelSecurity.Size = new System.Drawing.Size(860, 126);
+			this.ribbonPanelSecurity.Size = new System.Drawing.Size(995, 130);
 			// 
 			// 
 			// 
@@ -1185,7 +1185,7 @@
 			this.ribbonBarSecurityExit.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarSecurityExit.Location = new System.Drawing.Point(557, 0);
 			this.ribbonBarSecurityExit.Name = "ribbonBarSecurityExit";
-			this.ribbonBarSecurityExit.Size = new System.Drawing.Size(92, 124);
+			this.ribbonBarSecurityExit.Size = new System.Drawing.Size(92, 128);
 			this.ribbonBarSecurityExit.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarSecurityExit.TabIndex = 29;
 			this.ribbonBarSecurityExit.Text = "EXIT";
@@ -1226,7 +1226,7 @@
 			this.ribbonBarSecurityHelp.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarSecurityHelp.Location = new System.Drawing.Point(476, 0);
 			this.ribbonBarSecurityHelp.Name = "ribbonBarSecurityHelp";
-			this.ribbonBarSecurityHelp.Size = new System.Drawing.Size(81, 124);
+			this.ribbonBarSecurityHelp.Size = new System.Drawing.Size(81, 128);
 			this.ribbonBarSecurityHelp.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarSecurityHelp.TabIndex = 21;
 			this.ribbonBarSecurityHelp.Text = "HELP";
@@ -1265,7 +1265,7 @@
 			this.ribbonBarSecuritySync.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarSecuritySync.Location = new System.Drawing.Point(389, 0);
 			this.ribbonBarSecuritySync.Name = "ribbonBarSecuritySync";
-			this.ribbonBarSecuritySync.Size = new System.Drawing.Size(87, 124);
+			this.ribbonBarSecuritySync.Size = new System.Drawing.Size(87, 128);
 			this.ribbonBarSecuritySync.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarSecuritySync.TabIndex = 28;
 			this.ribbonBarSecuritySync.Text = "Sync";
@@ -1305,7 +1305,7 @@
 			this.ribbonBarSecurityReset.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarSecurityReset.Location = new System.Drawing.Point(295, 0);
 			this.ribbonBarSecurityReset.Name = "ribbonBarSecurityReset";
-			this.ribbonBarSecurityReset.Size = new System.Drawing.Size(94, 124);
+			this.ribbonBarSecurityReset.Size = new System.Drawing.Size(94, 128);
 			this.ribbonBarSecurityReset.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarSecurityReset.TabIndex = 19;
 			this.ribbonBarSecurityReset.Text = "Reset All";
@@ -1344,7 +1344,7 @@
 			this.ribbonBarSecuritySelect.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarSecuritySelect.Location = new System.Drawing.Point(201, 0);
 			this.ribbonBarSecuritySelect.Name = "ribbonBarSecuritySelect";
-			this.ribbonBarSecuritySelect.Size = new System.Drawing.Size(94, 124);
+			this.ribbonBarSecuritySelect.Size = new System.Drawing.Size(94, 128);
 			this.ribbonBarSecuritySelect.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarSecuritySelect.TabIndex = 18;
 			this.ribbonBarSecuritySelect.Text = "Select All";
@@ -1383,7 +1383,7 @@
 			this.ribbonBarSecurityLogo.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarSecurityLogo.Location = new System.Drawing.Point(3, 0);
 			this.ribbonBarSecurityLogo.Name = "ribbonBarSecurityLogo";
-			this.ribbonBarSecurityLogo.Size = new System.Drawing.Size(198, 124);
+			this.ribbonBarSecurityLogo.Size = new System.Drawing.Size(198, 128);
 			this.ribbonBarSecurityLogo.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarSecurityLogo.TabIndex = 17;
 			this.ribbonBarSecurityLogo.Text = "Manage Permissions";
@@ -1415,7 +1415,7 @@
 			this.ribbonPanelTags.Location = new System.Drawing.Point(0, 53);
 			this.ribbonPanelTags.Name = "ribbonPanelTags";
 			this.ribbonPanelTags.Padding = new System.Windows.Forms.Padding(3, 0, 3, 2);
-			this.ribbonPanelTags.Size = new System.Drawing.Size(860, 126);
+			this.ribbonPanelTags.Size = new System.Drawing.Size(995, 130);
 			// 
 			// 
 			// 
@@ -1450,7 +1450,7 @@
 			this.ribbonBarTagsExit.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarTagsExit.Location = new System.Drawing.Point(542, 0);
 			this.ribbonBarTagsExit.Name = "ribbonBarTagsExit";
-			this.ribbonBarTagsExit.Size = new System.Drawing.Size(92, 124);
+			this.ribbonBarTagsExit.Size = new System.Drawing.Size(92, 128);
 			this.ribbonBarTagsExit.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarTagsExit.TabIndex = 28;
 			this.ribbonBarTagsExit.Text = "EXIT";
@@ -1491,7 +1491,7 @@
 			this.ribbonBarTagsHelp.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarTagsHelp.Location = new System.Drawing.Point(461, 0);
 			this.ribbonBarTagsHelp.Name = "ribbonBarTagsHelp";
-			this.ribbonBarTagsHelp.Size = new System.Drawing.Size(81, 124);
+			this.ribbonBarTagsHelp.Size = new System.Drawing.Size(81, 128);
 			this.ribbonBarTagsHelp.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarTagsHelp.TabIndex = 22;
 			this.ribbonBarTagsHelp.Text = "HELP";
@@ -1531,7 +1531,7 @@
 			this.ribbonBarTagsSync.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarTagsSync.Location = new System.Drawing.Point(374, 0);
 			this.ribbonBarTagsSync.Name = "ribbonBarTagsSync";
-			this.ribbonBarTagsSync.Size = new System.Drawing.Size(87, 124);
+			this.ribbonBarTagsSync.Size = new System.Drawing.Size(87, 128);
 			this.ribbonBarTagsSync.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarTagsSync.TabIndex = 27;
 			this.ribbonBarTagsSync.Text = "Sync";
@@ -1571,7 +1571,7 @@
 			this.ribbonBarTagsClear.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarTagsClear.Location = new System.Drawing.Point(284, 0);
 			this.ribbonBarTagsClear.Name = "ribbonBarTagsClear";
-			this.ribbonBarTagsClear.Size = new System.Drawing.Size(90, 124);
+			this.ribbonBarTagsClear.Size = new System.Drawing.Size(90, 128);
 			this.ribbonBarTagsClear.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarTagsClear.TabIndex = 19;
 			this.ribbonBarTagsClear.Text = "NUKE EM!";
@@ -1610,7 +1610,7 @@
 			this.ribbonBarTagsKeywords.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarTagsKeywords.Location = new System.Drawing.Point(186, 0);
 			this.ribbonBarTagsKeywords.Name = "ribbonBarTagsKeywords";
-			this.ribbonBarTagsKeywords.Size = new System.Drawing.Size(98, 124);
+			this.ribbonBarTagsKeywords.Size = new System.Drawing.Size(98, 128);
 			this.ribbonBarTagsKeywords.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarTagsKeywords.TabIndex = 18;
 			this.ribbonBarTagsKeywords.Text = "KeyWords";
@@ -1649,7 +1649,7 @@
 			this.ribbonBarTagsSuperFilters.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarTagsSuperFilters.Location = new System.Drawing.Point(92, 0);
 			this.ribbonBarTagsSuperFilters.Name = "ribbonBarTagsSuperFilters";
-			this.ribbonBarTagsSuperFilters.Size = new System.Drawing.Size(94, 124);
+			this.ribbonBarTagsSuperFilters.Size = new System.Drawing.Size(94, 128);
 			this.ribbonBarTagsSuperFilters.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarTagsSuperFilters.TabIndex = 21;
 			this.ribbonBarTagsSuperFilters.Text = "Super Filters";
@@ -1688,7 +1688,7 @@
 			this.ribbonBarTagsCategories.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarTagsCategories.Location = new System.Drawing.Point(3, 0);
 			this.ribbonBarTagsCategories.Name = "ribbonBarTagsCategories";
-			this.ribbonBarTagsCategories.Size = new System.Drawing.Size(89, 124);
+			this.ribbonBarTagsCategories.Size = new System.Drawing.Size(89, 128);
 			this.ribbonBarTagsCategories.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarTagsCategories.TabIndex = 17;
 			this.ribbonBarTagsCategories.Text = "Category Tags";
@@ -1720,7 +1720,7 @@
 			this.ribbonPanelVideo.Location = new System.Drawing.Point(0, 53);
 			this.ribbonPanelVideo.Name = "ribbonPanelVideo";
 			this.ribbonPanelVideo.Padding = new System.Windows.Forms.Padding(3, 0, 3, 2);
-			this.ribbonPanelVideo.Size = new System.Drawing.Size(860, 126);
+			this.ribbonPanelVideo.Size = new System.Drawing.Size(995, 130);
 			// 
 			// 
 			// 
@@ -1755,7 +1755,7 @@
 			this.ribbonBarVideoExit.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarVideoExit.Location = new System.Drawing.Point(367, 0);
 			this.ribbonBarVideoExit.Name = "ribbonBarVideoExit";
-			this.ribbonBarVideoExit.Size = new System.Drawing.Size(92, 124);
+			this.ribbonBarVideoExit.Size = new System.Drawing.Size(92, 128);
 			this.ribbonBarVideoExit.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarVideoExit.TabIndex = 27;
 			this.ribbonBarVideoExit.Text = "EXIT";
@@ -1796,7 +1796,7 @@
 			this.ribbonBarHelp.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarHelp.Location = new System.Drawing.Point(286, 0);
 			this.ribbonBarHelp.Name = "ribbonBarHelp";
-			this.ribbonBarHelp.Size = new System.Drawing.Size(81, 124);
+			this.ribbonBarHelp.Size = new System.Drawing.Size(81, 128);
 			this.ribbonBarHelp.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarHelp.TabIndex = 20;
 			this.ribbonBarHelp.Text = "HELP";
@@ -1836,7 +1836,7 @@
 			this.ribbonBarVideoSync.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarVideoSync.Location = new System.Drawing.Point(199, 0);
 			this.ribbonBarVideoSync.Name = "ribbonBarVideoSync";
-			this.ribbonBarVideoSync.Size = new System.Drawing.Size(87, 124);
+			this.ribbonBarVideoSync.Size = new System.Drawing.Size(87, 128);
 			this.ribbonBarVideoSync.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarVideoSync.TabIndex = 26;
 			this.ribbonBarVideoSync.Text = "Sync";
@@ -1876,7 +1876,7 @@
 			this.ribbonBarVideoDelete.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarVideoDelete.Location = new System.Drawing.Point(101, 0);
 			this.ribbonBarVideoDelete.Name = "ribbonBarVideoDelete";
-			this.ribbonBarVideoDelete.Size = new System.Drawing.Size(98, 124);
+			this.ribbonBarVideoDelete.Size = new System.Drawing.Size(98, 128);
 			this.ribbonBarVideoDelete.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarVideoDelete.TabIndex = 21;
 			this.ribbonBarVideoDelete.Text = "Delete Video";
@@ -1915,7 +1915,7 @@
 			this.ribbonBarVideoConvert.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarVideoConvert.Location = new System.Drawing.Point(3, 0);
 			this.ribbonBarVideoConvert.Name = "ribbonBarVideoConvert";
-			this.ribbonBarVideoConvert.Size = new System.Drawing.Size(98, 124);
+			this.ribbonBarVideoConvert.Size = new System.Drawing.Size(98, 128);
 			this.ribbonBarVideoConvert.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarVideoConvert.TabIndex = 18;
 			this.ribbonBarVideoConvert.Text = "Convert Video";
@@ -1947,7 +1947,7 @@
 			this.ribbonPanelProgramManager.Location = new System.Drawing.Point(0, 53);
 			this.ribbonPanelProgramManager.Name = "ribbonPanelProgramManager";
 			this.ribbonPanelProgramManager.Padding = new System.Windows.Forms.Padding(3, 0, 3, 2);
-			this.ribbonPanelProgramManager.Size = new System.Drawing.Size(860, 126);
+			this.ribbonPanelProgramManager.Size = new System.Drawing.Size(995, 130);
 			// 
 			// 
 			// 
@@ -1982,7 +1982,7 @@
 			this.ribbonBarProgramManagerExit.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarProgramManagerExit.Location = new System.Drawing.Point(558, 0);
 			this.ribbonBarProgramManagerExit.Name = "ribbonBarProgramManagerExit";
-			this.ribbonBarProgramManagerExit.Size = new System.Drawing.Size(92, 124);
+			this.ribbonBarProgramManagerExit.Size = new System.Drawing.Size(92, 128);
 			this.ribbonBarProgramManagerExit.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarProgramManagerExit.TabIndex = 26;
 			this.ribbonBarProgramManagerExit.Text = "EXIT";
@@ -2023,7 +2023,7 @@
 			this.ribbonBarProgramManagerHelp.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarProgramManagerHelp.Location = new System.Drawing.Point(477, 0);
 			this.ribbonBarProgramManagerHelp.Name = "ribbonBarProgramManagerHelp";
-			this.ribbonBarProgramManagerHelp.Size = new System.Drawing.Size(81, 124);
+			this.ribbonBarProgramManagerHelp.Size = new System.Drawing.Size(81, 128);
 			this.ribbonBarProgramManagerHelp.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarProgramManagerHelp.TabIndex = 19;
 			this.ribbonBarProgramManagerHelp.Text = "HELP";
@@ -2063,7 +2063,7 @@
 			this.ribbonBarProgramManagerSync.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarProgramManagerSync.Location = new System.Drawing.Point(390, 0);
 			this.ribbonBarProgramManagerSync.Name = "ribbonBarProgramManagerSync";
-			this.ribbonBarProgramManagerSync.Size = new System.Drawing.Size(87, 124);
+			this.ribbonBarProgramManagerSync.Size = new System.Drawing.Size(87, 128);
 			this.ribbonBarProgramManagerSync.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarProgramManagerSync.TabIndex = 25;
 			this.ribbonBarProgramManagerSync.Text = "Sync";
@@ -2107,7 +2107,7 @@
 			this.ribbonBarProgramManagerLocation.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarProgramManagerLocation.Location = new System.Drawing.Point(82, 0);
 			this.ribbonBarProgramManagerLocation.Name = "ribbonBarProgramManagerLocation";
-			this.ribbonBarProgramManagerLocation.Size = new System.Drawing.Size(308, 124);
+			this.ribbonBarProgramManagerLocation.Size = new System.Drawing.Size(308, 128);
 			this.ribbonBarProgramManagerLocation.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarProgramManagerLocation.TabIndex = 18;
 			this.ribbonBarProgramManagerLocation.Text = "Program Manager Network Location";
@@ -2123,7 +2123,7 @@
 			// 
 			// buttonEditProgramManagerLocation
 			// 
-			this.buttonEditProgramManagerLocation.Location = new System.Drawing.Point(4, 62);
+			this.buttonEditProgramManagerLocation.Location = new System.Drawing.Point(4, 63);
 			this.buttonEditProgramManagerLocation.Name = "buttonEditProgramManagerLocation";
 			this.buttonEditProgramManagerLocation.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
@@ -2179,7 +2179,7 @@
 			this.ribbonBarProgramManagerSyncSettings.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarProgramManagerSyncSettings.Location = new System.Drawing.Point(3, 0);
 			this.ribbonBarProgramManagerSyncSettings.Name = "ribbonBarProgramManagerSyncSettings";
-			this.ribbonBarProgramManagerSyncSettings.Size = new System.Drawing.Size(79, 124);
+			this.ribbonBarProgramManagerSyncSettings.Size = new System.Drawing.Size(79, 128);
 			this.ribbonBarProgramManagerSyncSettings.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarProgramManagerSyncSettings.TabIndex = 17;
 			this.ribbonBarProgramManagerSyncSettings.Text = "Sync";
@@ -2238,7 +2238,7 @@
 			this.ribbonPanelCalendar.Location = new System.Drawing.Point(0, 53);
 			this.ribbonPanelCalendar.Name = "ribbonPanelCalendar";
 			this.ribbonPanelCalendar.Padding = new System.Windows.Forms.Padding(3, 0, 3, 2);
-			this.ribbonPanelCalendar.Size = new System.Drawing.Size(860, 126);
+			this.ribbonPanelCalendar.Size = new System.Drawing.Size(995, 130);
 			// 
 			// 
 			// 
@@ -2273,7 +2273,7 @@
 			this.ribbonBarCalendarExit.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarCalendarExit.Location = new System.Drawing.Point(781, 0);
 			this.ribbonBarCalendarExit.Name = "ribbonBarCalendarExit";
-			this.ribbonBarCalendarExit.Size = new System.Drawing.Size(92, 124);
+			this.ribbonBarCalendarExit.Size = new System.Drawing.Size(92, 128);
 			this.ribbonBarCalendarExit.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarCalendarExit.TabIndex = 25;
 			this.ribbonBarCalendarExit.Text = "EXIT";
@@ -2314,7 +2314,7 @@
 			this.ribbonBarCalendarHelp.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarCalendarHelp.Location = new System.Drawing.Point(700, 0);
 			this.ribbonBarCalendarHelp.Name = "ribbonBarCalendarHelp";
-			this.ribbonBarCalendarHelp.Size = new System.Drawing.Size(81, 124);
+			this.ribbonBarCalendarHelp.Size = new System.Drawing.Size(81, 128);
 			this.ribbonBarCalendarHelp.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarCalendarHelp.TabIndex = 22;
 			this.ribbonBarCalendarHelp.Text = "HELP";
@@ -2354,7 +2354,7 @@
 			this.ribbonBarCalendarSync.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarCalendarSync.Location = new System.Drawing.Point(613, 0);
 			this.ribbonBarCalendarSync.Name = "ribbonBarCalendarSync";
-			this.ribbonBarCalendarSync.Size = new System.Drawing.Size(87, 124);
+			this.ribbonBarCalendarSync.Size = new System.Drawing.Size(87, 128);
 			this.ribbonBarCalendarSync.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarCalendarSync.TabIndex = 24;
 			this.ribbonBarCalendarSync.Text = "Sync";
@@ -2394,7 +2394,7 @@
 			this.ribbonBarCalendarFont.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarCalendarFont.Location = new System.Drawing.Point(560, 0);
 			this.ribbonBarCalendarFont.Name = "ribbonBarCalendarFont";
-			this.ribbonBarCalendarFont.Size = new System.Drawing.Size(53, 124);
+			this.ribbonBarCalendarFont.Size = new System.Drawing.Size(53, 128);
 			this.ribbonBarCalendarFont.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarCalendarFont.TabIndex = 20;
 			this.ribbonBarCalendarFont.Text = "Text";
@@ -2458,7 +2458,7 @@
 			this.ribbonBarCalendarSettings.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarCalendarSettings.Location = new System.Drawing.Point(466, 0);
 			this.ribbonBarCalendarSettings.Name = "ribbonBarCalendarSettings";
-			this.ribbonBarCalendarSettings.Size = new System.Drawing.Size(94, 124);
+			this.ribbonBarCalendarSettings.Size = new System.Drawing.Size(94, 128);
 			this.ribbonBarCalendarSettings.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarCalendarSettings.TabIndex = 19;
 			this.ribbonBarCalendarSettings.Text = "Colors";
@@ -2499,7 +2499,7 @@
 			this.ribbonBarCalendarParts.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarCalendarParts.Location = new System.Drawing.Point(390, 0);
 			this.ribbonBarCalendarParts.Name = "ribbonBarCalendarParts";
-			this.ribbonBarCalendarParts.Size = new System.Drawing.Size(76, 124);
+			this.ribbonBarCalendarParts.Size = new System.Drawing.Size(76, 128);
 			this.ribbonBarCalendarParts.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarCalendarParts.TabIndex = 21;
 			this.ribbonBarCalendarParts.Text = "Calendars";
@@ -2541,7 +2541,7 @@
 			this.ribbonBarCalendarLocation.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarCalendarLocation.Location = new System.Drawing.Point(82, 0);
 			this.ribbonBarCalendarLocation.Name = "ribbonBarCalendarLocation";
-			this.ribbonBarCalendarLocation.Size = new System.Drawing.Size(308, 124);
+			this.ribbonBarCalendarLocation.Size = new System.Drawing.Size(308, 128);
 			this.ribbonBarCalendarLocation.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarCalendarLocation.TabIndex = 18;
 			this.ribbonBarCalendarLocation.Text = "Archive Network Location";
@@ -2557,7 +2557,7 @@
 			// 
 			// buttonEditCalendarLocation
 			// 
-			this.buttonEditCalendarLocation.Location = new System.Drawing.Point(4, 62);
+			this.buttonEditCalendarLocation.Location = new System.Drawing.Point(4, 63);
 			this.buttonEditCalendarLocation.Name = "buttonEditCalendarLocation";
 			this.buttonEditCalendarLocation.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
@@ -2612,7 +2612,7 @@
 			this.ribbonBarCalendarSyncStatus.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarCalendarSyncStatus.Location = new System.Drawing.Point(3, 0);
 			this.ribbonBarCalendarSyncStatus.Name = "ribbonBarCalendarSyncStatus";
-			this.ribbonBarCalendarSyncStatus.Size = new System.Drawing.Size(79, 124);
+			this.ribbonBarCalendarSyncStatus.Size = new System.Drawing.Size(79, 128);
 			this.ribbonBarCalendarSyncStatus.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarCalendarSyncStatus.TabIndex = 17;
 			this.ribbonBarCalendarSyncStatus.Text = "Sync";
@@ -2671,7 +2671,7 @@
 			this.ribbonPanelPreferences.Location = new System.Drawing.Point(0, 53);
 			this.ribbonPanelPreferences.Name = "ribbonPanelPreferences";
 			this.ribbonPanelPreferences.Padding = new System.Windows.Forms.Padding(3, 0, 3, 2);
-			this.ribbonPanelPreferences.Size = new System.Drawing.Size(860, 126);
+			this.ribbonPanelPreferences.Size = new System.Drawing.Size(995, 130);
 			// 
 			// 
 			// 
@@ -2706,7 +2706,7 @@
 			this.ribbonBarPreferencesExit.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarPreferencesExit.Location = new System.Drawing.Point(621, 0);
 			this.ribbonBarPreferencesExit.Name = "ribbonBarPreferencesExit";
-			this.ribbonBarPreferencesExit.Size = new System.Drawing.Size(92, 124);
+			this.ribbonBarPreferencesExit.Size = new System.Drawing.Size(92, 128);
 			this.ribbonBarPreferencesExit.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarPreferencesExit.TabIndex = 24;
 			this.ribbonBarPreferencesExit.Text = "EXIT";
@@ -2747,7 +2747,7 @@
 			this.ribbonBarPreferencesHelp.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarPreferencesHelp.Location = new System.Drawing.Point(540, 0);
 			this.ribbonBarPreferencesHelp.Name = "ribbonBarPreferencesHelp";
-			this.ribbonBarPreferencesHelp.Size = new System.Drawing.Size(81, 124);
+			this.ribbonBarPreferencesHelp.Size = new System.Drawing.Size(81, 128);
 			this.ribbonBarPreferencesHelp.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarPreferencesHelp.TabIndex = 22;
 			this.ribbonBarPreferencesHelp.Text = "HELP";
@@ -2787,7 +2787,7 @@
 			this.ribbonBarPreferencesSync.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarPreferencesSync.Location = new System.Drawing.Point(453, 0);
 			this.ribbonBarPreferencesSync.Name = "ribbonBarPreferencesSync";
-			this.ribbonBarPreferencesSync.Size = new System.Drawing.Size(87, 124);
+			this.ribbonBarPreferencesSync.Size = new System.Drawing.Size(87, 128);
 			this.ribbonBarPreferencesSync.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarPreferencesSync.TabIndex = 23;
 			this.ribbonBarPreferencesSync.Text = "Sync";
@@ -2827,7 +2827,7 @@
 			this.ribbonBarPreferencesEmailList.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarPreferencesEmailList.Location = new System.Drawing.Point(366, 0);
 			this.ribbonBarPreferencesEmailList.Name = "ribbonBarPreferencesEmailList";
-			this.ribbonBarPreferencesEmailList.Size = new System.Drawing.Size(87, 124);
+			this.ribbonBarPreferencesEmailList.Size = new System.Drawing.Size(87, 128);
 			this.ribbonBarPreferencesEmailList.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarPreferencesEmailList.TabIndex = 20;
 			this.ribbonBarPreferencesEmailList.Text = "Email List";
@@ -2867,7 +2867,7 @@
 			this.ribbonBarPreferencesDeadLinks.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarPreferencesDeadLinks.Location = new System.Drawing.Point(275, 0);
 			this.ribbonBarPreferencesDeadLinks.Name = "ribbonBarPreferencesDeadLinks";
-			this.ribbonBarPreferencesDeadLinks.Size = new System.Drawing.Size(91, 124);
+			this.ribbonBarPreferencesDeadLinks.Size = new System.Drawing.Size(91, 128);
 			this.ribbonBarPreferencesDeadLinks.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarPreferencesDeadLinks.TabIndex = 19;
 			this.ribbonBarPreferencesDeadLinks.Text = "Dead Links";
@@ -2907,7 +2907,7 @@
 			this.ribbonBarPreferencesAutoWidgets.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarPreferencesAutoWidgets.Location = new System.Drawing.Point(179, 0);
 			this.ribbonBarPreferencesAutoWidgets.Name = "ribbonBarPreferencesAutoWidgets";
-			this.ribbonBarPreferencesAutoWidgets.Size = new System.Drawing.Size(96, 124);
+			this.ribbonBarPreferencesAutoWidgets.Size = new System.Drawing.Size(96, 128);
 			this.ribbonBarPreferencesAutoWidgets.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarPreferencesAutoWidgets.TabIndex = 21;
 			this.ribbonBarPreferencesAutoWidgets.Text = "Auto Widgets";
@@ -2947,7 +2947,7 @@
 			this.ribbonBarPreferencesColumns.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarPreferencesColumns.Location = new System.Drawing.Point(91, 0);
 			this.ribbonBarPreferencesColumns.Name = "ribbonBarPreferencesColumns";
-			this.ribbonBarPreferencesColumns.Size = new System.Drawing.Size(88, 124);
+			this.ribbonBarPreferencesColumns.Size = new System.Drawing.Size(88, 128);
 			this.ribbonBarPreferencesColumns.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarPreferencesColumns.TabIndex = 18;
 			this.ribbonBarPreferencesColumns.Text = "Columns";
@@ -2987,7 +2987,7 @@
 			this.ribbonBarPreferencesPages.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarPreferencesPages.Location = new System.Drawing.Point(3, 0);
 			this.ribbonBarPreferencesPages.Name = "ribbonBarPreferencesPages";
-			this.ribbonBarPreferencesPages.Size = new System.Drawing.Size(88, 124);
+			this.ribbonBarPreferencesPages.Size = new System.Drawing.Size(88, 128);
 			this.ribbonBarPreferencesPages.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarPreferencesPages.TabIndex = 17;
 			this.ribbonBarPreferencesPages.Text = "Pages";
@@ -3064,7 +3064,7 @@
 			this.pnContainer.Location = new System.Drawing.Point(5, 184);
 			this.pnContainer.Name = "pnContainer";
 			this.pnContainer.Padding = new System.Windows.Forms.Padding(0, 2, 0, 0);
-			this.pnContainer.Size = new System.Drawing.Size(995, 553);
+			this.pnContainer.Size = new System.Drawing.Size(995, 551);
 			this.pnContainer.TabIndex = 32;
 			// 
 			// defaultLookAndFeel
@@ -3079,7 +3079,7 @@
 			// FormMain
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-			this.ClientSize = new System.Drawing.Size(1005, 739);
+			this.ClientSize = new System.Drawing.Size(1005, 737);
 			this.Controls.Add(this.pnContainer);
 			this.Controls.Add(this.ribbonControl);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

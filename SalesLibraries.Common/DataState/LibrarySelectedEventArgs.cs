@@ -2,9 +2,6 @@
 {
 	class LibrarySelectedEventArgs : DataChangeEventArgs
 	{
-		public override DataChangeType ChangeType
-		{
-			get { return DataChangeType.LibrarySelected; }
-		}
+		public override DataChangeType ChangeType => DataChangeType.LibrarySelected;
 	}
 }
