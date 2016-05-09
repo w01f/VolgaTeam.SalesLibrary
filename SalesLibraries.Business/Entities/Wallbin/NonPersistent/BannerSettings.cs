@@ -20,7 +20,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 				_enable = value;
 			}
 		}
-		
+
 		private bool _inverted;
 		public bool Inverted
 		{
@@ -120,6 +120,12 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 					OnSettingsChanged();
 				_font = value;
 			}
+		}
+
+		protected override void AfterCreate()
+		{
+			if (Font.Unit != GraphicsUnit.Point)
+				Font = new Font(Font.FontFamily, Font.Size, Font.Style, GraphicsUnit.Point);
 		}
 	}
 }

@@ -22,12 +22,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 	{
 		private ColumnTitlePanel _columnTitlePanel;
 		private readonly List<ClassicFolderBox> _folderBoxes = new List<ClassicFolderBox>();
-		public IPageView PageContainer { get; private set; }
+		public IPageView PageContainer { get; }
 
-		private int InnerWidth
-		{
-			get { return Width - SystemInformation.VerticalScrollBarWidth; }
-		}
+		private int InnerWidth => Width - SystemInformation.VerticalScrollBarWidth;
 
 		public PageContent(IPageView pageContainer)
 		{

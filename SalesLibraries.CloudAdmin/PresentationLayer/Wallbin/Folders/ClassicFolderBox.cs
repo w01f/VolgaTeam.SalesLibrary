@@ -684,7 +684,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders
 
 		private void OnDragDrop(object sender, DragEventArgs e)
 		{
-			FolderContainer.ProcessScrollOnDragOver(sender, e);
+			FolderContainer.ProcessScrollOnDragLeave(sender, e);
 			if (!FormatState.AllowEdit) return;
 			if (IsSourceLinksDragged)
 			{

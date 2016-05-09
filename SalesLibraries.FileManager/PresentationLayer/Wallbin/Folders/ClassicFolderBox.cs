@@ -114,27 +114,27 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 			grFiles.DragLeave += OnDragLeave;
 			grFiles.MouseDown += OnGridMouseDown;
 
-			// 
-			// pnBorders
-			// 
-			pnBorders.DragDrop += OnDragDrop;
-			pnBorders.DragOver += OnDragOver;
-			pnBorders.DragLeave += OnDragLeave;
+			//// 
+			//// pnBorders
+			//// 
+			//pnBorders.DragDrop += OnDragDrop;
+			//pnBorders.DragOver += OnDragOver;
+			//pnBorders.DragLeave += OnDragLeave;
 
-			// 
-			// pnHeaderBorder
-			// 
-			pnHeaderBorder.DragDrop += OnDragDrop;
-			pnHeaderBorder.DragOver += OnDragOver;
-			pnHeaderBorder.DragLeave += OnDragLeave;
-			// 
-			// pnHeader
-			// 
-			pnHeader.DragDrop += OnDragDrop;
-			pnHeader.DragOver += OnDragOver;
-			pnHeader.DragLeave += OnDragLeave;
-			pnHeader.MouseDown += OnHeaderMouseDown;
-			pnHeader.MouseMove += OnHeaderMouseMove;
+			//// 
+			//// pnHeaderBorder
+			//// 
+			//pnHeaderBorder.DragDrop += OnDragDrop;
+			//pnHeaderBorder.DragOver += OnDragOver;
+			//pnHeaderBorder.DragLeave += OnDragLeave;
+			//// 
+			//// pnHeader
+			//// 
+			//pnHeader.DragDrop += OnDragDrop;
+			//pnHeader.DragOver += OnDragOver;
+			//pnHeader.DragLeave += OnDragLeave;
+			//pnHeader.MouseDown += OnHeaderMouseDown;
+			//pnHeader.MouseMove += OnHeaderMouseMove;
 			// 
 			// labelControlText
 			// 
@@ -685,7 +685,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 
 		private void OnDragDrop(object sender, DragEventArgs e)
 		{
-			FolderContainer.ProcessScrollOnDragOver(sender, e);
+			FolderContainer.ProcessScrollOnDragLeave(sender, e);
 			if (!FormatState.AllowEdit) return;
 			if (IsSourceLinksDragged)
 			{
