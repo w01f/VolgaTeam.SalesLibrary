@@ -64,6 +64,7 @@
     <Compile Include="Models\WallbinContentService\AppLinkSettings.cs" />
     <Compile Include="Models\WallbinContentService\BaseLinkSettings.cs" />
     <Compile Include="Models\WallbinContentService\IBaseLinkSettings.cs" />
+    <Compile Include="Models\WallbinContentService\ExcelLinkSettings.cs" />
     <Compile Include="Models\WallbinContentService\PowerPointLinkSettings.cs" />
     <Compile Include="Models\WallbinContentService\VideoLinkSettings.cs" />
     <Compile Include="Models\WallbinContentService\HyperLinkSettings.cs" />

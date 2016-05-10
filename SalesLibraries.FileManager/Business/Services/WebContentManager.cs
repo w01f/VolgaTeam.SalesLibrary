@@ -22,6 +22,7 @@ using InternalLinkSettings = SalesLibraries.ServiceConnector.WallbinContentServi
 using LineBreak = SalesLibraries.ServiceConnector.WallbinContentService.LineBreak;
 using VideoLinkSettings = SalesLibraries.ServiceConnector.WallbinContentService.VideoLinkSettings;
 using PowerPointLinkSettings = SalesLibraries.ServiceConnector.WallbinContentService.PowerPointLinkSettings;
+using ExcelLinkSettings = SalesLibraries.ServiceConnector.WallbinContentService.ExcelLinkSettings;
 
 namespace SalesLibraries.FileManager.Business.Services
 {
@@ -214,6 +215,11 @@ namespace SalesLibraries.FileManager.Business.Services
 					((PowerPointLinkSettings)target.extendedProperties).ImportData(
 						(SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings.PowerPointLinkSettings)source.Settings);
 					break;
+				case FileTypes.Excel:
+					target.extendedProperties = new ExcelLinkSettings();
+					((ExcelLinkSettings)target.extendedProperties).ImportData(
+						(SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings.ExcelLinkSettings)source.Settings);
+					break;
 				case FileTypes.Url:
 				case FileTypes.YouTube:
 					target.extendedProperties = new HyperLinkSettings();
@@ -380,6 +386,15 @@ namespace SalesLibraries.FileManager.Business.Services
 			target.windowName = source.WindowName;
 			target.linkName = source.LinkName;
 			target.forcePreview = source.ForcePreview;
+		}
+
+		private static void ImportData(
+			this ExcelLinkSettings target,
+			SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings.ExcelLinkSettings source)
+		{
+			((IBaseLinkSettings)target).ImportData(source);
+			target.forceDownload = source.ForceDownload;
+			target.forceOpen = source.ForceOpen;
 		}
 
 		private static void ImportData(

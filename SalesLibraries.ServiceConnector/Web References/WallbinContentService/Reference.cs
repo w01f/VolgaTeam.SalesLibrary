@@ -51,6 +51,8 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         
         private System.Threading.SendOrPostCallback mockInternalLinkSettingsOperationCompleted;
         
+        private System.Threading.SendOrPostCallback mockExcelLinkSettingsOperationCompleted;
+        
         private System.Threading.SendOrPostCallback getSessionKeyOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
@@ -108,6 +110,9 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         
         /// <remarks/>
         public event mockInternalLinkSettingsCompletedEventHandler mockInternalLinkSettingsCompleted;
+        
+        /// <remarks/>
+        public event mockExcelLinkSettingsCompletedEventHandler mockExcelLinkSettingsCompleted;
         
         /// <remarks/>
         public event getSessionKeyCompletedEventHandler getSessionKeyCompleted;
@@ -277,6 +282,34 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
             if ((this.mockInternalLinkSettingsCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.mockInternalLinkSettingsCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:ContentControllerwsdl#mockExcelLinkSettings", RequestNamespace="urn:ContentControllerwsdl", ResponseNamespace="urn:ContentControllerwsdl")]
+        public void mockExcelLinkSettings(ExcelLinkSettings settings) {
+            this.Invoke("mockExcelLinkSettings", new object[] {
+                        settings});
+        }
+        
+        /// <remarks/>
+        public void mockExcelLinkSettingsAsync(ExcelLinkSettings settings) {
+            this.mockExcelLinkSettingsAsync(settings, null);
+        }
+        
+        /// <remarks/>
+        public void mockExcelLinkSettingsAsync(ExcelLinkSettings settings, object userState) {
+            if ((this.mockExcelLinkSettingsOperationCompleted == null)) {
+                this.mockExcelLinkSettingsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnmockExcelLinkSettingsOperationCompleted);
+            }
+            this.InvokeAsync("mockExcelLinkSettings", new object[] {
+                        settings}, this.mockExcelLinkSettingsOperationCompleted, userState);
+        }
+        
+        private void OnmockExcelLinkSettingsOperationCompleted(object arg) {
+            if ((this.mockExcelLinkSettingsCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.mockExcelLinkSettingsCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -915,6 +948,183 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
             }
             set {
                 this.isUnderlinedField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:ContentControllerwsdl")]
+    public partial class ExcelLinkSettings {
+        
+        private bool forceDownloadField;
+        
+        private bool forceOpenField;
+        
+        private string noteField;
+        
+        private string hoverNoteField;
+        
+        private bool isBoldField;
+        
+        private bool isItalicField;
+        
+        private bool isUnderlineField;
+        
+        private bool isSpecialFormatField;
+        
+        private Font fontField;
+        
+        private string foreColorField;
+        
+        private bool isRestrictedField;
+        
+        private bool noShareField;
+        
+        private string assignedUsersField;
+        
+        private string deniedUsersField;
+        
+        /// <remarks/>
+        public bool forceDownload {
+            get {
+                return this.forceDownloadField;
+            }
+            set {
+                this.forceDownloadField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool forceOpen {
+            get {
+                return this.forceOpenField;
+            }
+            set {
+                this.forceOpenField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string note {
+            get {
+                return this.noteField;
+            }
+            set {
+                this.noteField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string hoverNote {
+            get {
+                return this.hoverNoteField;
+            }
+            set {
+                this.hoverNoteField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool isBold {
+            get {
+                return this.isBoldField;
+            }
+            set {
+                this.isBoldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool isItalic {
+            get {
+                return this.isItalicField;
+            }
+            set {
+                this.isItalicField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool isUnderline {
+            get {
+                return this.isUnderlineField;
+            }
+            set {
+                this.isUnderlineField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool isSpecialFormat {
+            get {
+                return this.isSpecialFormatField;
+            }
+            set {
+                this.isSpecialFormatField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public Font font {
+            get {
+                return this.fontField;
+            }
+            set {
+                this.fontField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string foreColor {
+            get {
+                return this.foreColorField;
+            }
+            set {
+                this.foreColorField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool isRestricted {
+            get {
+                return this.isRestrictedField;
+            }
+            set {
+                this.isRestrictedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool noShare {
+            get {
+                return this.noShareField;
+            }
+            set {
+                this.noShareField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string assignedUsers {
+            get {
+                return this.assignedUsersField;
+            }
+            set {
+                this.assignedUsersField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string deniedUsers {
+            get {
+                return this.deniedUsersField;
+            }
+            set {
+                this.deniedUsersField = value;
             }
         }
     }
@@ -3363,6 +3573,10 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
     public delegate void mockInternalLinkSettingsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    public delegate void mockExcelLinkSettingsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]

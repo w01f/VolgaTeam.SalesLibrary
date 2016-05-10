@@ -28,10 +28,11 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.components = new System.ComponentModel.Container();
-			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
+			this.styleController = new DevExpress.XtraEditors.StyleController();
 			this.labelControlTitle = new DevExpress.XtraEditors.LabelControl();
 			this.ckDoNotGenerateText = new System.Windows.Forms.CheckBox();
+			this.ckForceDownload = new System.Windows.Forms.CheckBox();
+			this.ckForceOpen = new System.Windows.Forms.CheckBox();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -72,9 +73,35 @@
 			this.ckDoNotGenerateText.Text = "Do NOT Create Full Data File (Always select this for Nielsen Books) ";
 			this.ckDoNotGenerateText.UseVisualStyleBackColor = true;
 			// 
+			// ckForceDownload
+			// 
+			this.ckForceDownload.AutoSize = true;
+			this.ckForceDownload.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.ckForceDownload.ForeColor = System.Drawing.Color.Black;
+			this.ckForceDownload.Location = new System.Drawing.Point(8, 96);
+			this.ckForceDownload.Name = "ckForceDownload";
+			this.ckForceDownload.Size = new System.Drawing.Size(351, 20);
+			this.ckForceDownload.TabIndex = 26;
+			this.ckForceDownload.Text = "Immediately Download this Excel file when clicked";
+			this.ckForceDownload.UseVisualStyleBackColor = true;
+			// 
+			// ckForceOpen
+			// 
+			this.ckForceOpen.AutoSize = true;
+			this.ckForceOpen.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.ckForceOpen.ForeColor = System.Drawing.Color.Black;
+			this.ckForceOpen.Location = new System.Drawing.Point(8, 144);
+			this.ckForceOpen.Name = "ckForceOpen";
+			this.ckForceOpen.Size = new System.Drawing.Size(334, 20);
+			this.ckForceOpen.TabIndex = 27;
+			this.ckForceOpen.Text = "Auto-Open this file in custom sales app browsers";
+			this.ckForceOpen.UseVisualStyleBackColor = true;
+			// 
 			// LinkExcelOptions
 			// 
 			this.BackColor = System.Drawing.Color.White;
+			this.Controls.Add(this.ckForceOpen);
+			this.Controls.Add(this.ckForceDownload);
 			this.Controls.Add(this.ckDoNotGenerateText);
 			this.Controls.Add(this.labelControlTitle);
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -91,5 +118,7 @@
 		private DevExpress.XtraEditors.StyleController styleController;
 		private DevExpress.XtraEditors.LabelControl labelControlTitle;
 		public System.Windows.Forms.CheckBox ckDoNotGenerateText;
+		public System.Windows.Forms.CheckBox ckForceDownload;
+		public System.Windows.Forms.CheckBox ckForceOpen;
 	}
 }
