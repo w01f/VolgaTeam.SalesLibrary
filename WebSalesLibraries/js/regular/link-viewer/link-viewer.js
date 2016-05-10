@@ -43,6 +43,9 @@
 							case 'document':
 								new $.SalesPortal.DocumentViewer(parameters).show();
 								break;
+							case 'xls':
+								new $.SalesPortal.ExcelViewer(parameters).show();
+								break;
 							case 'video':
 								new $.SalesPortal.VideoViewer(parameters).show();
 								break;

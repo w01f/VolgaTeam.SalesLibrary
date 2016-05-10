@@ -23,6 +23,7 @@
 				switch (format){
 					case "ppt":
 					case "video":
+					case "xls":
 						originalUrl = (window.BaseUrl + viewerData.url).replace(/\/\/+/g, '/');
 						break;
 					default:

@@ -28,6 +28,7 @@
 						'PowerPointLinkSettings' => 'PowerPointLinkSettings',
 						'AppLinkSettings' => 'AppLinkSettings',
 						'InternalLinkSettings' => 'InternalLinkSettings',
+						'ExcelLinkSettings' => 'ExcelLinkSettings',
 						'LineBreak' => 'LineBreak',
 						'LinkCategory' => 'LinkCategory',
 						'LinkSuperFilter' => 'LinkSuperFilter',
@@ -91,6 +92,15 @@
 		 * @soap
 		 */
 		public function mockInternalLinkSettings($settings)
+		{
+
+		}
+
+		/**
+		 * @param ExcelLinkSettings $settings
+		 * @soap
+		 */
+		public function mockExcelLinkSettings($settings)
 		{
 
 		}

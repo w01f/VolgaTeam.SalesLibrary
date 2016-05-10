@@ -37,7 +37,7 @@
 			$this->name = $link->name;
 			$this->format = $link->originalFormat;
 			$this->tags = $link->getTagsString();
-			$this->url = $link->fileLink;
+			$this->url = str_replace('SalesLibraries/SalesLibraries', 'SalesLibraries', $link->fileLink);
 
 			$this->config = new PreviewConfig();
 			$this->config->init($link, $isQuickSite);

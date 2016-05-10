@@ -142,6 +142,24 @@
 				this[prop] = source[prop];
 	};
 
+	$.SalesPortal.ExcelViewerData = function (source)
+	{
+		this.linkId = undefined;
+		this.name = undefined;
+		this.format = undefined;
+		this.tags = undefined;
+		this.url = undefined;
+		this.fileName = undefined;
+		this.isEOBrowser = undefined;
+		this.forceDownload = undefined;
+		this.forceOpen = undefined;
+		this.rateData = undefined;
+
+		for (var prop in source)
+			if (source.hasOwnProperty(prop))
+				this[prop] = source[prop];
+	};
+
 	$.SalesPortal.GalleryData = function (source)
 	{
 		this.container = undefined;
