@@ -130,7 +130,10 @@
 			$pageLinkRecords = QPageLinkRecord::model()->findAll('id_page=? order by list_order', array($this->id));
 			foreach ($pageLinkRecords as $pageLinkRecord)
 			{
-				/** @var $linkRecord LinkRecord */
+				/**
+				 * @var $pageLinkRecord QPageLinkRecord
+				 * @var $linkRecord LinkRecord
+				 */
 				$linkRecord = LinkRecord::getLinkById($pageLinkRecord->id_link);
 				if (isset($linkRecord))
 				{
@@ -298,6 +301,9 @@
 				$clonedPageLinks = QPageLinkRecord::model()->findAll('id_page=?', array($clonePageId));
 				foreach ($clonedPageLinks as $clonedPageLink)
 				{
+					/**
+					 * @var $clonedPageLink QPageLinkRecord
+					 */
 					$linkInPageRecord = new QPageLinkRecord();
 					$linkInPageRecord->id = uniqid();
 					$linkInPageRecord->id_link = $clonedPageLink->id_link;

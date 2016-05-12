@@ -49,9 +49,10 @@
 	display: none;
 }
 
-.folder-links-container .link-container.line-break
+.folder-links-container .link-container.line-break,
+.folder-links-container .link-container.line-break .banner-container
 {
-	cursor: default;
+	cursor: default !important;
 }
 
 .link-text

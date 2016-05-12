@@ -6,14 +6,14 @@
 				<? if (isset($libraryPage->columns[$i])): ?>
 					<? $column = $libraryPage->columns[$i]; ?>
 					<div class="column-header-container column-header-container-<? echo $i; ?>"
-					     style="font-family: <? echo isset($column->banner) && $column->banner->isEnabled ? $column->banner->font->name: $column->font->name; ?>,serif;
-						     font-size: <? echo isset($column->banner) && $column->banner->isEnabled ? $column->banner->font->size: $column->font->size; ?>pt;
-						     font-weight: <? echo (isset($column->banner) && $column->banner->isEnabled ? $column->banner->font->isBold: $column->font->isBold) ? ' bold' : ' normal'; ?>;
-						     font-style: <? echo (isset($column->banner) && $column->banner->isEnabled ? $column->banner->font->isItalic: $column->font->isItalic) ? ' italic' : ' normal'; ?>;
-						     text-decoration: <? echo (isset($column->banner) && $column->banner->isEnabled ? $column->banner->font->isUnderlined: $column->font->isUnderlined) ? ' underline' : ' inherit'; ?>;
+					     style="font-family: <? echo isset($column->banner) && $column->banner->isEnabled ? $column->banner->font->name : $column->font->name; ?>,serif;
+						     font-size: <? echo isset($column->banner) && $column->banner->isEnabled ? $column->banner->font->size : $column->font->size; ?>pt;
+						     font-weight: <? echo (isset($column->banner) && $column->banner->isEnabled ? $column->banner->font->isBold : $column->font->isBold) ? ' bold' : ' normal'; ?>;
+						     font-style: <? echo (isset($column->banner) && $column->banner->isEnabled ? $column->banner->font->isItalic : $column->font->isItalic) ? ' italic' : ' normal'; ?>;
+						     text-decoration: <? echo (isset($column->banner) && $column->banner->isEnabled ? $column->banner->font->isUnderlined : $column->font->isUnderlined) ? ' underline' : ' inherit'; ?>;
 						     text-align: <? echo isset($column->banner) && $column->banner->isEnabled ? $column->banner->imageAlignment : $column->alignment; ?>;
 						     background-color: <? echo $column->backColor; ?>;
-						     color: <? echo isset($column->banner) && $column->banner->isEnabled ? $column->banner->foreColor :$column->foreColor; ?>;">
+						     color: <? echo isset($column->banner) && $column->banner->isEnabled ? $column->banner->foreColor : $column->foreColor; ?>;">
 						<? if (isset($column->banner) && $column->banner->isEnabled): ?>
 							<table style="height: 100%; display: inline;">
 								<tr>
@@ -44,16 +44,18 @@
 		</div>
 	<? endif; ?>
 	<div class="content-container">
-		<? for ($i = 0; $i < 3; $i++): ?>
-			<? $folders = $libraryPage->getFoldersByColumn($i); ?>
-			<? if (isset($folders)): ?>
-				<div class="page-column column<? echo $i; ?>">
-					<?
-						foreach ($folders as $folder)
-							echo $this->renderFile(Yii::getPathOfAlias('application.views.regular.wallbin') . '/folderContainer.php', array('folder' => $folder), true);
-					?>
-				</div>
-			<? endif; ?>
-		<? endfor; ?>
+		<div class="content-columns-container">
+			<? for ($i = 0; $i < 3; $i++): ?>
+				<? $folders = $libraryPage->getFoldersByColumn($i); ?>
+				<? if (isset($folders)): ?>
+					<div class="page-column column<? echo $i; ?>">
+						<?
+							foreach ($folders as $folder)
+								echo $this->renderFile(Yii::getPathOfAlias('application.views.regular.wallbin') . '/folderContainer.php', array('folder' => $folder), true);
+						?>
+					</div>
+				<? endif; ?>
+			<? endfor; ?>
+		</div>
 	</div>
 </div>

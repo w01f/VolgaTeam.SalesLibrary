@@ -91,22 +91,35 @@
 	overflow-y: auto;
 	-webkit-overflow-scrolling: touch;
 }
+
+#content .wallbin-container .page-container .content-columns-container
+{
+    width: 100%;
+    display: table;
+    table-layout: fixed;
+}
 /*Columns------------------------------------*/
 #content .wallbin-container .page-container .header-container
 {
 	width: 100%;
 	display: table;
+    table-layout: fixed;
 	border-bottom: 1px #999 solid;
 }
 
 #content .page-column
 {
 	width: 33%;
-	float: left;
+    display: table-cell;
 	border: none;
 	margin-top: 0;
 	margin-left: -1px;
 	vertical-align: top;
+}
+
+#content .wallbin-container div.content-container > div.page-column
+{
+    float: left;
 }
 
 #content .page-column.column2

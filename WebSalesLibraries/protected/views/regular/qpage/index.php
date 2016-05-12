@@ -29,7 +29,8 @@
 								<strong>To view the links on this site, enter your email address:</strong></p>
 						</div>
 						<div class="col-xs-4">
-							<input type="email" id="user-email" class="form-control" placeholder="Email" required <? if (isset(Yii::app()->user->email)): ?>value="<? echo Yii::app()->user->email; ?>" <? endif; ?>>
+							<input type="email" id="user-email" class="form-control" placeholder="Email" required
+							       <? if (isset(Yii::app()->user->email)): ?>value="<? echo Yii::app()->user->email; ?>" <? endif; ?>>
 						</div>
 					</div>
 				<? endif; ?>
@@ -41,33 +42,29 @@
 		<div id="page-header"><? echo nl2br($page->header); ?></div>
 		<div id="page-links-container" class="folder-links-container">
 			<? if ($page->show_links_as_url): ?>
-			<ul class="nav nav-pills nav-stacked"><? endif; ?>
+			<ul class="nav nav-pills nav-stacked">
+				<? endif; ?>
 				<? $links = $page->getLibraryLinks() ?>
 				<? if (isset($links)): ?>
 					<?php foreach ($links as $link): ?>
 						<? if ($page->show_links_as_url): ?>
-							<? if ($link->name != '' && !$link->isFolder): ?>
-								<li>
-									<a href="#" id="link<?php echo $link->id; ?>" class="clickable<? if ($authorized): ?> log-action<?endif;?>" style="text-decoration: underline;">
-										<? echo $link->name; ?>
-										<span class="service-data">
-											<? echo $link->getLinkData(); ?>
-										</span>
-									</a>
-								</li>
+							<? if ($link->name != '' && !$link->isFolder && !$link->isFolder): ?>
+								<? $this->renderPartial('blueHyperlink', array('link' => $link, 'authorized' => $authorized)); ?>
 							<? endif; ?>
 						<? else: ?>
-							<? echo $this->renderFile(Yii::getPathOfAlias('application.views.regular.wallbin') . '/link.php',
+							<? $this->renderFile(Yii::getPathOfAlias('application.views.regular.wallbin') . '/link.php',
 								array(
 									'link' => $link,
 									'disableBanner' => $page->disable_banners,
 									'disableWidget' => $page->disable_widgets,
 									'authorized' => $authorized
-								), true); ?>
+								)); ?>
 						<? endif; ?>
 					<?php endforeach; ?>
 				<? endif; ?>
-				<? if ($page->show_links_as_url): ?></ul><? endif; ?>
+				<? if ($page->show_links_as_url): ?>
+			</ul>
+		<? endif; ?>
 		</div>
 		<div id="page-footer"><? echo nl2br($page->footer); ?></div>
 	</div>

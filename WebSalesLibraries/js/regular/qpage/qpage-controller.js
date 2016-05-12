@@ -22,6 +22,12 @@
 		{
 			$.mtReInit();
 
+			container.find('.line-break').off('click.open').on('click.open', function (event)
+			{
+				event.stopPropagation();
+				event.preventDefault();
+			});
+
 			container.find('.clickable').off('click.open').on('click.open', function (event)
 			{
 				if (checkEmail())
@@ -39,7 +45,7 @@
 				var header = $(this).find('.service-data .download-header').text();
 				var url = $(this).find('.service-data .download-link').text();
 				if (url != '')
-					event.originalEvent.dataTransfer.setData(header, url);
+					event.originalEvent.dataTransfer.setData(header, url.replace('site_base_url_placeholder', window.BaseUrl).replace(/\/\/+/g, '/'));
 			});
 
 			container.find('.log-activity').off('click.log').on('click.log', function ()
