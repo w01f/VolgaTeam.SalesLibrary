@@ -61,6 +61,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		public override IChangable Parent
 		{
 			get { return Folder; }
+			set { Folder = value as LibraryFolder; }
 		}
 
 		[NotMapped, JsonIgnore]

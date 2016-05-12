@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using DevExpress.XtraTab;
+using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.Common.Helpers;
 
@@ -48,7 +49,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 				selectedFiles.FirstOrDefault() :
 				advBandedGridView.GetFocusedRow() as LibraryFileLink;
 			if (targetFile == null) return;
-			SettingsEditorFactory.Run(targetFile, settingsType, true);
+			SettingsEditorFactory.RunEmbedded(targetFile, _data, settingsType);
 		}
 
 		private void SelectLinks(IEnumerable<LibraryFileLink> selectedLinks)

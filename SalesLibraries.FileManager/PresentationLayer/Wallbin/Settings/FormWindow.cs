@@ -154,13 +154,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			if (_formParameters.Type == WindowPropertiesType.None)
 				_folder.Page.Library.Settings.ApplyAppearanceForAllWindows = ckApllyForAllWindowsAppearance.Checked;
 
-			if (_widgetControl != null)
-				_widgetControl.SaveData();
+			_widgetControl?.SaveData();
 			if (_formParameters.Type == WindowPropertiesType.None)
 				_folder.Page.Library.Settings.ApplyWidgetForAllWindows = ckApllyForAllWindowsWidget.Checked;
 
-			if (_bannerControl != null)
-				_bannerControl.SaveData();
+			_bannerControl?.SaveData();
 			if (_formParameters.Type == WindowPropertiesType.None)
 				_folder.Page.Library.Settings.ApplyBannerForAllWindows = ckApllyForAllWindowsBanner.Checked;
 

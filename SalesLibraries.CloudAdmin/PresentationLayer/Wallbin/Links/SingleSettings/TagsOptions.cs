@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid;
 using DevExpress.XtraTab;
+using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.CloudAdmin.Controllers;
 using SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Common;

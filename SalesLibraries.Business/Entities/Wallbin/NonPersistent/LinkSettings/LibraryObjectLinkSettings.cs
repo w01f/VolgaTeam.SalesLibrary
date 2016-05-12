@@ -55,10 +55,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 		}
 
 		[JsonIgnore]
-		protected LibraryObjectLink ParentObjectLink
-		{
-			get { return (LibraryObjectLink)Parent; }
-		}
+		protected LibraryObjectLink ParentObjectLink => (LibraryObjectLink)Parent;
 
 		protected override void AfterConstruction()
 		{

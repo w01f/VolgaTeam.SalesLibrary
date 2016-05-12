@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using DevComponents.DotNetBar.Metro;
+using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.FileManager.Business.Models.InactiveLinks;
 using SalesLibraries.FileManager.Controllers;
 using SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSettings;

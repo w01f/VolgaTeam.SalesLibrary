@@ -102,8 +102,8 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Settings
 			_columnTitle.Settings.ForeColor = colorEditForeColor.Color;
 			_columnTitle.Settings.HeaderFont = (Font)buttonEditFont.Tag;
 			
-			_widgetControl.SaveData();
-			_bannerControl.SaveData();
+			_widgetControl?.SaveData();
+			_bannerControl?.SaveData();
 
 			_columnTitle.Page.ApplyColumnTitleSettings(_columnTitle);
 		}

@@ -102,9 +102,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			_columnTitle.Settings.ShowText = ckEnableText.Checked & !String.IsNullOrEmpty(_columnTitle.Settings.Text);
 			_columnTitle.Settings.ForeColor = colorEditForeColor.Color;
 			_columnTitle.Settings.HeaderFont = (Font)buttonEditFont.Tag;
-			
-			_widgetControl.SaveData();
-			_bannerControl.SaveData();
+
+			_widgetControl?.SaveData();
+			_bannerControl?.SaveData();
 
 			_columnTitle.Page.ApplyColumnTitleSettings(_columnTitle);
 		}

@@ -1,45 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using DevComponents.DotNetBar.Metro;
 using DevExpress.Utils;
-using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraTab;
+using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
+using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.Common.JsonConverters;
-using SalesLibraries.FileManager.Controllers;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSettings
 {
-	public partial class FormEditLinkSettingsEmbedded : MetroForm, ILinkSettingsEditForm
+	public partial class FormEditLinkSettingsEmbedded : MetroForm
 	{
-		private readonly BaseLibraryLink _sourceLink;
+		private readonly LibraryFileLink _sourceLink;
+		private readonly LibraryFolderLink _parentFolderLink;
 
-		public LinkSettingsType[] EditableSettings
+		public LinkSettingsType[] EditableSettings => new[]
 		{
-			get
-			{
-				return new[]
-				{
-					LinkSettingsType.Notes,
-					LinkSettingsType.Security,
-					LinkSettingsType.Tags
-				};
-			}
-		}
+			LinkSettingsType.Notes,
+			LinkSettingsType.Security,
+			LinkSettingsType.Tags
+		};
 
-		public bool IsForEmbedded
+		public FormEditLinkSettingsEmbedded(BaseLibraryLink sourceLink, LibraryFolderLink parentFolderLink)
 		{
-			get { return true; }
-		}
-
-		public FormEditLinkSettingsEmbedded(BaseLibraryLink sourceLink)
-		{
-			_sourceLink = sourceLink;
+			_parentFolderLink = parentFolderLink;
+			_sourceLink = (LibraryFileLink)sourceLink;
 			InitializeComponent();
 			if ((CreateGraphics()).DpiX > 96)
 			{
@@ -56,6 +45,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			Height = 400;
 			Text = _sourceLink.ToString();
 			StartPosition = FormStartPosition.CenterScreen;
+
+			var folderSettings = (LibraryFolderLinkSettings)_parentFolderLink.Settings;
+			checkEditApplyForAll.Checked = folderSettings.SettingsTemplates
+				.Any(st => st.SettingsType == settingsType && st.FileType == _sourceLink.Type);
+			
 			AddOptionPages(
 				ObjectIntendHelper.GetObjectInstances(
 					typeof(ILinkSettingsEditControl),
@@ -80,8 +74,14 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 		private void SaveData()
 		{
+			var folderSettings = (LibraryFolderLinkSettings)_parentFolderLink.Settings;
 			foreach (var optionPage in xtraTabControl.TabPages.OfType<ILinkSettingsEditControl>())
+			{
 				optionPage.SaveData();
+
+				var settingsType = optionPage.SettingsType;
+				folderSettings.ProcessUniverslaLinkSettings(settingsType, _sourceLink, checkEditApplyForAll.Checked);
+			}
 		}
 
 		private void ForceClose()
@@ -94,27 +94,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		{
 			if (DialogResult == DialogResult.OK)
 				SaveData();
-		}
-
-		private void xtraTabControl_SelectedPageChanged(object sender, TabPageChangedEventArgs e)
-		{
-			hyperLinkEditRequestNewCategories.Visible = e.Page is TagsOptions &&
-				!String.IsNullOrEmpty(MainController.Instance.Settings.CategoryRequestRecipients) &&
-				!String.IsNullOrEmpty(MainController.Instance.Settings.CategoryRequestSubject) &&
-				!String.IsNullOrEmpty(MainController.Instance.Settings.CategoryRequestBody);
-		}
-
-		private void hyperLinkEditRequestNewCategories_OpenLink(object sender, OpenLinkEventArgs e)
-		{
-			try
-			{
-				Process.Start(String.Format("mailto:{0}?subject={1}&body={2}",
-					MainController.Instance.Settings.CategoryRequestRecipients,
-					MainController.Instance.Settings.CategoryRequestSubject,
-					MainController.Instance.Settings.CategoryRequestBody));
-			}
-			catch { }
-			e.Handled = true;
 		}
 	}
 }

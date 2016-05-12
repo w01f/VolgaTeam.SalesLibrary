@@ -338,7 +338,6 @@
     <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkQuickSiteOptions.designer.cs">
       <DependentUpon>LinkQuickSiteOptions.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkSettingsType.cs" />
     <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkTextOptions.cs">
       <SubType>Component</SubType>
     </Compile>

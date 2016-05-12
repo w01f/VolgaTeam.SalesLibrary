@@ -4,9 +4,11 @@ using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
 using SalesLibraries.Business.Contexts.Wallbin;
+using SalesLibraries.Business.Entities.Common;
 using SalesLibraries.Business.Entities.Helpers;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent;
+using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings;
 using SalesLibraries.Common.Configuration;
 
 namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
@@ -19,6 +21,14 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		#endregion
 
 		#region Nonpersistent Properties
+		private LibraryFolderLinkSettings _settings;
+		[NotMapped, JsonIgnore]
+		public override BaseLinkSettings Settings
+		{
+			get { return _settings ?? (_settings = SettingsContainer.CreateInstance<LibraryFolderLinkSettings>(this, SettingsEncoded)); }
+			set { _settings = value as LibraryFolderLinkSettings; }
+		}
+
 		[NotMapped, JsonIgnore]
 		public IEnumerable<LibraryFileLink> AllLinks
 		{
@@ -96,12 +106,14 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 			var existedPaths = new List<string>();
 			if (Directory.Exists(FullPath))
 			{
+				var newLinks = new List<LibraryFileLink>();
 				foreach (var folderPath in Directory.GetDirectories(FullPath))
 				{
 					existedPaths.Add(folderPath);
 					if (Links.Any(link => link.FullPath.ToLower().Equals(folderPath.ToLower()))) continue;
 					var folderLink = (LibraryFolderLink)Create(new FolderLink { RootId = DataSourceId, Path = folderPath }, this);
 					Links.AddItem(folderLink);
+					newLinks.Add(folderLink);
 				}
 				foreach (var filePath in Directory.GetFiles(FullPath)
 					.Where(filePath => GlobalSettings.HiddenObjects.All(item => !filePath.ToUpper().Contains(item.ToUpper()))))
@@ -110,7 +122,10 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 					if (Links.Any(link => link.FullPath.ToLower().Equals(filePath.ToLower()))) continue;
 					var fileLink = Create(new FileLink { RootId = DataSourceId, Path = filePath }, this);
 					Links.AddItem(fileLink);
+					newLinks.Add(fileLink);
 				}
+
+				_settings.ApplyUniverslaLinkSettings(newLinks);
 			}
 			var linksToRemove = Links.Where(link => !existedPaths.Any(path => path.ToLower().Equals(link.FullPath.ToLower()))).ToList();
 			foreach (var link in linksToRemove)

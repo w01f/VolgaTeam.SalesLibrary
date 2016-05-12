@@ -36,6 +36,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 		public override IChangable Parent
 		{
 			get { return Page; }
+			set { Page = value as LibraryPage; }
 		}
 
 		[NotMapped, JsonIgnore]

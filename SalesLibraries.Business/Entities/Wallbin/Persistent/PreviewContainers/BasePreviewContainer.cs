@@ -30,6 +30,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers
 		public override IChangable Parent
 		{
 			get { return Library; }
+			set { Library = value as Library; }
 		}
 
 		[NotMapped, JsonIgnore]

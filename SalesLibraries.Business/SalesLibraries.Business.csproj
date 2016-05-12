@@ -98,6 +98,7 @@
     <Compile Include="Entities\Interfaces\IChangable.cs" />
     <Compile Include="Entities\Interfaces\IExtKeyHolder.cs" />
     <Compile Include="Entities\Wallbin\Common\Enums\FileTypes.cs" />
+    <Compile Include="Entities\Wallbin\Common\Enums\LinkSettingsType.cs" />
     <Compile Include="Entities\Wallbin\Common\Enums\WidgetType.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\AutoWidget.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\BannerSettings.cs" />
@@ -113,6 +114,8 @@
     <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\InternalLinkSettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\AppLinkSettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\HyperLinkSettings.cs" />
+    <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\LinkFileSettingsTemplate.cs" />
+    <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\LibraryFolderLinkSettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\SecuritySettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\BaseLinkSettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\LibraryFileLinkSettings.cs" />

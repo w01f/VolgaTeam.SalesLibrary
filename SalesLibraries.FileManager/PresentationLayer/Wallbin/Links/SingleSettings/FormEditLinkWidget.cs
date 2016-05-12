@@ -20,11 +20,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			LinkSettingsType.Widget,
 		};
 
-		public bool IsForEmbedded
-		{
-			get { return false; }
-		}
-
 		public FormEditLinkWidget(BaseLibraryLink sourceLink)
 		{
 			_sourceLink = sourceLink;

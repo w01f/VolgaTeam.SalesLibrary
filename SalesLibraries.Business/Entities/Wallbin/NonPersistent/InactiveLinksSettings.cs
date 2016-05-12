@@ -6,6 +6,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 	public class InactiveLinksSettings : SettingsContainer
 	{
 		private bool _enable;
+
 		public bool Enable
 		{
 			get { return _enable; }
@@ -18,6 +19,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 		}
 
 		private bool _showBoldWarning;
+
 		public bool ShowBoldWarning
 		{
 			get { return _showBoldWarning; }
@@ -30,6 +32,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 		}
 
 		private bool _replaceInactiveLinksWithLineBreak;
+
 		public bool ReplaceInactiveLinksWithLineBreak
 		{
 			get { return _replaceInactiveLinksWithLineBreak; }
@@ -42,6 +45,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 		}
 
 		private bool _showMessageAtStartup;
+
 		public bool ShowMessageAtStartup
 		{
 			get { return _showMessageAtStartup; }
@@ -54,6 +58,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 		}
 
 		private bool _sendEmail;
+
 		public bool SendEmail
 		{
 			get { return _sendEmail; }
@@ -67,9 +72,9 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 
 		public List<string> EmailList { get; private set; }
 
-		public InactiveLinksSettings()
+		protected override void AfterConstruction()
 		{
+			base.AfterConstruction();
 			EmailList = new List<string>();
 		}
-	}
-}
+	}}

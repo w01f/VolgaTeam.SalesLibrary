@@ -1,4 +1,5 @@
 ﻿using System;
+using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSettings
 {

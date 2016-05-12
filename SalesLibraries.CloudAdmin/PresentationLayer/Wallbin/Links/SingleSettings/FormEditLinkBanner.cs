@@ -6,6 +6,7 @@ using DevComponents.DotNetBar.Metro;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraTab;
+using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.CloudAdmin.Controllers;
 using SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Common;
@@ -22,11 +23,6 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 		{
 			LinkSettingsType.Banner,
 		};
-
-		public bool IsForEmbedded
-		{
-			get { return false; }
-		}
 
 		public FormEditLinkBanner(BaseLibraryLink sourceLink)
 		{

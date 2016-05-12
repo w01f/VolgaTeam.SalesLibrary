@@ -8,6 +8,7 @@ using DevComponents.DotNetBar.Metro;
 using DevExpress.Utils;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraTab;
+using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.CloudAdmin.Controllers;
 using SalesLibraries.Common.Helpers;
@@ -19,25 +20,14 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 	{
 		private readonly BaseLibraryLink _sourceLink;
 
-		public LinkSettingsType[] EditableSettings
+		public LinkSettingsType[] EditableSettings => new[]
 		{
-			get
-			{
-				return new[]
-				{
-					LinkSettingsType.AdvancedSettings,
-					LinkSettingsType.ExpirationDate,
-					LinkSettingsType.Notes,
-					LinkSettingsType.Security,
-					LinkSettingsType.Tags,
-				};
-			}
-		}
-
-		public bool IsForEmbedded
-		{
-			get { return false; }
-		}
+			LinkSettingsType.AdvancedSettings,
+			LinkSettingsType.ExpirationDate,
+			LinkSettingsType.Notes,
+			LinkSettingsType.Security,
+			LinkSettingsType.Tags,
+		};
 
 		public FormEditLinkSettingsRegular(BaseLibraryLink sourceLink)
 		{
@@ -88,7 +78,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 				case LinkSettingsType.AdvancedSettings:
 					return new SettingsEditorHeaderInfo { Title = "Advanced Settings" };
 				case LinkSettingsType.ExpirationDate:
-					return new SettingsEditorHeaderInfo { Title = "Expirartion Date" };
+					return new SettingsEditorHeaderInfo { Title = "Expiration Date" };
 				case LinkSettingsType.Notes:
 					return new SettingsEditorHeaderInfo { Title = "Link Settings" };
 				case LinkSettingsType.Security:

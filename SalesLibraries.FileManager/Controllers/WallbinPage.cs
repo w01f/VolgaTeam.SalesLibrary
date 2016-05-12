@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using DevComponents.DotNetBar;
 using DevExpress.XtraEditors.Controls;
 using SalesLibraries.Business.Entities.Helpers;
+using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.Common.DataState;
 using SalesLibraries.CommonGUI.RetractableBar;

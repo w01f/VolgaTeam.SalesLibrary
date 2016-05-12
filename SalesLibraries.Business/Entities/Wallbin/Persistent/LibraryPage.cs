@@ -55,6 +55,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 		public override IChangable Parent
 		{
 			get { return Library; }
+			set { Library = value as Library; }
 		}
 
 		private LibraryPageSettings _settings;

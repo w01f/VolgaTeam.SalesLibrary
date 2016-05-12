@@ -1,4 +1,4 @@
-﻿namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSettings
+﻿namespace SalesLibraries.Business.Entities.Wallbin.Common.Enums
 {
 	public enum LinkSettingsType
 	{

@@ -1,4 +1,4 @@
-﻿namespace FileManager.PresentationClasses.WallBin.LinkProperties
+﻿namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSettings
 {
 	partial class ExpiredDateOptions
 	{

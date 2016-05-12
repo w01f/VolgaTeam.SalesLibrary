@@ -20,11 +20,6 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 			LinkSettingsType.Widget,
 		};
 
-		public bool IsForEmbedded
-		{
-			get { return false; }
-		}
-
 		public FormEditLinkWidget(BaseLibraryLink sourceLink)
 		{
 			_sourceLink = sourceLink;

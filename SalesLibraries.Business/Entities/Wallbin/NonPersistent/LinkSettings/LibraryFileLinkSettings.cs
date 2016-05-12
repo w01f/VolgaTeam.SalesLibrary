@@ -7,10 +7,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 	public class LibraryFileLinkSettings : LibraryObjectLinkSettings
 	{
 		[JsonIgnore]
-		protected LibraryFileLink ParentFileLink
-		{
-			get { return (LibraryFileLink)Parent; }
-		}
+		protected LibraryFileLink ParentFileLink => (LibraryFileLink)Parent;
 
 		public override string Note
 		{
