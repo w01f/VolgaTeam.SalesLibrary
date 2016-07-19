@@ -1,4 +1,8 @@
-<? /** @var $folder LibraryFolder */ ?>
+<?
+	use application\models\wallbin\models\web\LibraryFolder as LibraryFolder;
+
+	/** @var $folder LibraryFolder */
+?>
 <div class="folder-links-scroll-area"
 	 style="background-color: <? echo $folder->windowBackColor; ?>;color: <? echo $folder->windowForeColor; ?>;">
 	<? if (count($folder->files) > 0): ?>

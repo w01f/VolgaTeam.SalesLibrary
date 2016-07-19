@@ -1,4 +1,6 @@
 <?
+	use application\models\wallbin\models\web\LibraryPage as LibraryPage;
+
 	/**
 	 * @var $page LibraryPage
 	 * */

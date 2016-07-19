@@ -56,6 +56,7 @@
 				!strstr($url, 'linkconfigprofile/') &&
 				!strstr($url, 'filemanagerdata/') &&
 				!strstr($url, 'adsalesdata/') &&
+				!strstr($url, 'cloudadmin/') &&
 				!strstr($url, 'content/')
 			)
 				Yii::app()->user->loginRequired();

@@ -2,30 +2,33 @@
 
 	/**
 	 * Class FolderRecord
-	 * @property mixed id
-	 * @property mixed id_library
-	 * @property mixed id_page
-	 * @property mixed name
-	 * @property mixed column_order
-	 * @property mixed row_order
-	 * @property mixed border_color
-	 * @property mixed window_back_color
-	 * @property mixed window_fore_color
-	 * @property mixed header_back_color
-	 * @property mixed header_fore_color
-	 * @property mixed window_font_name
-	 * @property mixed window_font_size
-	 * @property mixed window_font_bold
-	 * @property mixed window_font_italic
-	 * @property mixed header_font_name
-	 * @property mixed header_font_size
-	 * @property mixed header_font_bold
-	 * @property mixed header_font_italic
-	 * @property mixed header_alignment
-	 * @property mixed widget
-	 * @property mixed enable_widget
-	 * @property mixed date_add
-	 * @property bool|string date_modify
+	 * @property string id
+	 * @property string id_library
+	 * @property string id_page
+	 * @property string name
+	 * @property int column_order
+	 * @property int row_order
+	 * @property string border_color
+	 * @property string window_back_color
+	 * @property string window_fore_color
+	 * @property string header_back_color
+	 * @property string header_fore_color
+	 * @property string window_font_name
+	 * @property int window_font_size
+	 * @property boolean window_font_bold
+	 * @property boolean window_font_italic
+	 * @property string header_font_name
+	 * @property int header_font_size
+	 * @property boolean header_font_bold
+	 * @property boolean header_font_italic
+	 * @property string header_alignment
+	 * @property string widget
+	 * @property boolean enable_widget
+	 * @property string date_add
+	 * @property string date_modify
+	 * @property string folder_settings
+	 * @property string widget_settings
+	 * @property string banner_settings
 	 */
 	class FolderRecord extends CActiveRecord
 	{
@@ -67,6 +70,7 @@
 			$criteria->condition = 't.id=:id and links.id_parent_link is null and links.type<>9 and no_share=0 and is_restricted=0';
 			$criteria->params = array(':id' => $folderId);
 			$criteria->order = 'links.order ASC';
+			/** @var FolderRecord $result */
 			$result = $this->with('links')->find($criteria);
 			if (isset($result))
 				foreach ($result->links as $link)
@@ -78,7 +82,7 @@
 		 * @param $folder
 		 * @param $libraryRootPath
 		 */
-		public static function updateData($folder, $libraryRootPath)
+		public static function updateDataFromSoap($folder, $libraryRootPath)
 		{
 			$needToUpdate = false;
 			$needToCreate = false;

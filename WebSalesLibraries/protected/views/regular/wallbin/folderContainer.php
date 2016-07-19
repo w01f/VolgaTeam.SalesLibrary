@@ -1,4 +1,8 @@
-<? /** @var $folder LibraryFolder */ ?>
+<?
+	use application\models\wallbin\models\web\LibraryFolder as LibraryFolder;
+
+	/** @var $folder LibraryFolder */
+?>
 <div class="folder-body" style="border-color: <? echo $folder->borderColor; ?>;">
 	<div class="folder-header-container" id="folder<? echo $folder->id; ?>"
 		 style="font-family: <? echo isset($folder->banner) && $folder->banner->isEnabled ? $folder->banner->font->name: $folder->headerFont->name; ?>,serif;

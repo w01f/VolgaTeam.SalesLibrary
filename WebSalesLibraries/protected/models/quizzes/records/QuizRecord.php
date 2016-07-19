@@ -51,6 +51,7 @@
 			$criteria->condition = 't.id_user=:userId and t.id_quiz=:quizId';
 			$criteria->params = array(':userId' => $userId, ':quizId' => $this->unique_id);
 			$criteria->group = 't.quiz_set';
+			/** @var  $quizResults QuizResultRecord[] */
 			$quizResults = QuizResultRecord::model()->findAll($criteria);
 			foreach ($quizResults as $quizResult)
 				if ($quizResult->quiz_score >= $this->pass_score)

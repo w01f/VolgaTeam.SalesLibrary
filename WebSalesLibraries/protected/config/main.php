@@ -33,11 +33,20 @@
 			'application.models.shortcuts.records.*',
 			'application.models.statistic.models.*',
 			'application.models.statistic.records.*',
-			'application.models.wallbin.models.*',
+			'application.models.wallbin.models.web.*',
+			'application.models.wallbin.models.soap.*',
+			'application.models.wallbin.models.cadmin.*',
+			'application.models.wallbin.models.cadmin.entities.*',
+			'application.models.wallbin.models.cadmin.settings.*',
 			'application.models.wallbin.records.*',
 			'application.models.search.*',
 			'application.models.preview.*',
 			'application.models.user_tabs.*',
+			'application.models.rest.*',
+			'application.models.cadmin.records.*',
+			'application.models.cadmin.models.connection.*',
+			'application.models.cadmin.models.library_data.*',
+			'application.models.cadmin.models.versions_management.*',
 		),
 		'behaviors' => array(
 			'onBeginRequest' => array(
@@ -59,6 +68,10 @@
 				'urlFormat' => 'path',
 				'showScriptName' => false,
 				'rules' => array(
+					// REST patterns
+					array('cloudadmin/get', 'pattern'=>'cloudadmin/<model:\w+>', 'verb'=>'POST'),
+					array('cloudadmin/set', 'pattern'=>'cloudadmin/<model:\w+>', 'verb'=>'PUT'),
+					// Other patterns
 					'<controller:\w+>/<id:\d+>' => '<controller>/view',
 					'<controller:\w+>/<action:\w+>' => '<controller>/<action>',
 					'qpage/<controller:\w+>/<action:\w+>' => '<controller>/<action>',

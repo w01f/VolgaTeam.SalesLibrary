@@ -1,4 +1,6 @@
 <?
+	use application\models\wallbin\models\web\LibraryManager as LibraryManager;
+
 	/** @var $shortcut SearchAppShortcut */
 
 	$categories = new CategoryManager();

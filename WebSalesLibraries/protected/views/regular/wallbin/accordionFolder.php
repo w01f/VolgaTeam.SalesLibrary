@@ -1,4 +1,8 @@
-<? /** @var $folder LibraryFolder */ ?>
+<?
+	use application\models\wallbin\models\web\LibraryFolder as LibraryFolder;
+
+	/** @var $folder LibraryFolder */
+?>
 <div class="accordion-folder-container">
 	<?
 		$linksNumber = $folder->getRealLinksNumber();

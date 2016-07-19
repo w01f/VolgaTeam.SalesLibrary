@@ -1,4 +1,6 @@
 <?
+	use application\models\wallbin\models\web\Library as Library;
+
 	/**
 	 * @var $library Library
 	 * @var $pageSelectorMode string

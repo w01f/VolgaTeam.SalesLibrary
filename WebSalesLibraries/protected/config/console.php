@@ -4,7 +4,7 @@ return array(
     'name' => 'Sales Libraries Cron Daemon',
     'preload' => array('log'),
     'import' => array(
-        'application.commands.*',
+        'application.connection.*',
 		'application.components.*',
 		'application.components.widgets.*',
 		'application.components.core.*',
@@ -33,7 +33,8 @@ return array(
 	    'application.models.shortcuts.records.*',
 	    'application.models.statistic.models.*',
 	    'application.models.statistic.records.*',
-	    'application.models.wallbin.models.*',
+	    'application.models.wallbin.models.web.*',
+	    'application.models.wallbin.models.cadmin.*',
 	    'application.models.wallbin.records.*',
 	    'application.models.search.*',
 	    'application.models.preview.*',

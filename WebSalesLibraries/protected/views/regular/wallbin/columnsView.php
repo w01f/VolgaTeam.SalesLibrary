@@ -1,4 +1,8 @@
-<? /** @var $libraryPage LibraryPage */ ?>
+<?
+	use application\models\wallbin\models\web\LibraryPage as LibraryPage;
+
+	/** @var $libraryPage LibraryPage */
+?>
 <div class="page-container" id="page-<? echo $libraryPage->id; ?>">
 	<? if (isset($libraryPage->columns) && $libraryPage->enableColumns): ?>
 		<div class="header-container">

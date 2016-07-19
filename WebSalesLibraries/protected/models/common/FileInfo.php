@@ -1,5 +1,5 @@
 <?
-
+	use application\models\wallbin\models\web\Library as Library;
 	/**
 	 * Class FileInfo
 	 */
@@ -19,18 +19,17 @@
 		 */
 		public static function fromLinkRecord($linkRecord, $parentLibrary)
 		{
-			return self::fromLinkData($linkRecord->type, $linkRecord->name, $linkRecord->file_name, $linkRecord->file_relative_path, $parentLibrary);
+			return self::fromLinkData($linkRecord->type, $linkRecord->name, $linkRecord->file_relative_path, $parentLibrary);
 		}
 
 		/**
 		 * @param int $type
 		 * @param string $name
-		 * @param string $fileName
 		 * @param string $relativePath
 		 * @param Library $parentLibrary
 		 * @return FileInfo
 		 */
-		public static function fromLinkData($type, $name, $fileName, $relativePath, $parentLibrary)
+		public static function fromLinkData($type, $name, $relativePath, $parentLibrary)
 		{
 			$fileInfo = new FileInfo();
 			$fileInfo->isFile = false;

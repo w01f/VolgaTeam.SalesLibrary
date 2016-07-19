@@ -1,5 +1,11 @@
-<?php
+<?
+	use application\models\wallbin\models\web\LibraryManager as LibraryManager;
+	use application\models\wallbin\models\web\LibraryPage as LibraryPage;
+	use application\models\wallbin\models\web\LibraryFolder as LibraryFolder;
+	use application\models\wallbin\models\web\LibraryLink as LibraryLink;
+
 	Yii::import('application.extensions.phpQuery.phpQuery.phpQuery');
+
 	/**
 	 * Class PreviewController
 	 */

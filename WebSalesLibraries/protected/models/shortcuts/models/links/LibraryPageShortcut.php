@@ -1,4 +1,6 @@
 <?
+	use application\models\wallbin\models\web\LibraryManager as LibraryManager;
+	use application\models\wallbin\models\web\LibraryPage as LibraryPage;
 
 	/**
 	 * Class LibraryPageShortcut

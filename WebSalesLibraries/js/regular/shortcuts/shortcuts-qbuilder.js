@@ -110,10 +110,13 @@
 
 			shortcutActionsContainer.find('.qbuilder-qsite-preview')
 				.prop('target', "_blank")
-				.off('click.action').on('click.action', function ()
+				.off('click.action').on('click.action', function (e)
 				{
+					var url = $(this).attr('href');
+					e.preventDefault();
 					$.SalesPortal.QBuilder.PageList.savePage(function ()
 					{
+						window.open(url);
 					});
 				});
 

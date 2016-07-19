@@ -1,4 +1,4 @@
-<?php
+<?
 
 	/**
 	 * Class AdminController
@@ -14,10 +14,10 @@
 				'quote' => array(
 					'class' => 'CWebServiceAction',
 					'classMap' => array(
+						'SoapLibrary' => 'SoapLibrary',
+						'SoapLibraryPage' => 'SoapLibraryPage',
 						'UserModel' => 'UserModel',
 						'GroupModel' => 'GroupModel',
-						'Library' => 'Library',
-						'LibraryPage' => 'LibraryPage',
 					),
 				),
 			);
@@ -32,7 +32,7 @@
 		 * @param string $email
 		 * @param string $phone
 		 * @param GroupModel[] $assignedGroups
-		 * @param LibraryPage[] $assignedPages
+		 * @param SoapLibraryPage[] $assignedPages
 		 * @param int $role
 		 * @soap
 		 */
@@ -128,13 +128,14 @@
 						$libraryRecord = LibraryRecord::model()->findByPk($libraryId);
 						if (isset($libraryRecord))
 						{
-							$library = new Library();
+							$library = new SoapLibrary();
 							$library->id = $libraryRecord->id;
 							$library->name = $libraryRecord->name;
+							/** @var $pageRecords LibraryPageRecord[] */
 							$pageRecords = LibraryPageRecord::model()->findAll("id_library=? and id in ('" . implode("','", $assignedPageIds) . "')", array($libraryRecord->id));
 							foreach ($pageRecords as $pageRecord)
 							{
-								$page = new LibraryPage($library);
+								$page = new SoapLibraryPage($library);
 								$page->id = $pageRecord->id;
 								$page->libraryId = $pageRecord->id_library;
 								$page->name = $pageRecord->name;
@@ -188,7 +189,7 @@
 		 * @param string $id
 		 * @param string $name
 		 * @param UserModel[] $assignedUsers
-		 * @param LibraryPage[] $assignedPages
+		 * @param SoapLibraryPage[] $assignedPages
 		 * @soap
 		 */
 		public function setGroup($sessionKey, $id, $name, $assignedUsers, $assignedPages)
@@ -240,6 +241,7 @@
 			{
 				foreach (GroupRecord::model()->findAll(array('order' => 'name')) as $groupRecord)
 				{
+					/** @var $groupRecord GroupRecord */
 					$group = new GroupModel();
 					$group->id = $groupRecord->id;
 					$group->name = $groupRecord->name;
@@ -254,15 +256,16 @@
 						$libraryRecord = LibraryRecord::model()->findByPk($libraryId);
 						if (isset($libraryRecord))
 						{
-							$library = new Library();
+							$library = new SoapLibrary();
 							$library->id = $libraryRecord->id;
 							$library->name = $libraryRecord->name;
+							/** @var $pageRecords LibraryPageRecord[] */
 							$pageRecords = LibraryPageRecord::model()->findAll("id_library=? and id in ('" . implode("','", $assignedPageIds) . "')", array($libraryRecord->id));
 							if (isset($pageRecords))
 							{
 								foreach ($pageRecords as $pageRecord)
 								{
-									$page = new LibraryPage($library);
+									$page = new SoapLibraryPage($library);
 									$page->id = $pageRecord->id;
 									$page->libraryId = $pageRecord->id_library;
 									$page->name = $pageRecord->name;
@@ -320,9 +323,9 @@
 				$pageRecord = LibraryPageRecord::model()->findByPk($id);
 				if (isset($pageRecord))
 				{
-					$library = new Library();
+					$library = new SoapLibrary();
 					$library->id = $pageRecord->id_library;
-					$page = new LibraryPage($library);
+					$page = new SoapLibraryPage($library);
 					$page->id = $pageRecord->id;
 					$page->libraryId = $pageRecord->id_library;
 
@@ -336,7 +339,7 @@
 
 		/**
 		 * @param string $sessionKey
-		 * @return Library[]
+		 * @return SoapLibrary[]
 		 * @soap
 		 */
 		public function getLibraries($sessionKey)
@@ -345,16 +348,18 @@
 			{
 				foreach (LibraryRecord::model()->findAll(array('order' => 'name')) as $libraryRecord)
 				{
-					$library = new Library();
+					/** @var  $libraryRecord LibraryRecord*/
+					$library = new SoapLibrary();
 					$library->id = $libraryRecord->id;
 					$library->name = $libraryRecord->name;
 
+					/** @var $pageRecords LibraryPageRecord[] */
 					$pageRecords = LibraryPageRecord::model()->findAll('id_library=?', array($libraryRecord->id));
 					if (isset($pageRecords))
 					{
 						foreach ($pageRecords as $pageRecord)
 						{
-							$page = new LibraryPage($library);
+							$page = new SoapLibraryPage($library);
 							$page->id = $pageRecord->id;
 							$page->libraryId = $pageRecord->id_library;
 							$page->name = $pageRecord->name;
@@ -419,7 +424,10 @@
 		{
 			if ($this->authenticateBySession($sessionKey))
 				foreach (GroupTemplateRecord::model()->findAll() as $groupTemplateRecord)
+				{
+					/** @var $groupTemplateRecord GroupTemplateRecord */
 					$groupTemplates[] = $groupTemplateRecord->name;
+				}
 			if (isset($groupTemplates))
 				return $groupTemplates;
 			return array();

@@ -1,8 +1,8 @@
 (function ($)
 {
 	window.BaseUrl = window.BaseUrl || '';
-	$.SalesPortal = $.SalesPortal || { };
-	$.SalesPortal.QBuilder = $.SalesPortal.QBuilder || { };
+	$.SalesPortal = $.SalesPortal || {};
+	$.SalesPortal.QBuilder = $.SalesPortal.QBuilder || {};
 	$.SalesPortal.QBuilder.PageContent = function (parameters)
 	{
 		var that = this;
@@ -168,7 +168,8 @@
 		};
 		var afterLoad = function ()
 		{
-			var pageUrl = $('#page-content-url');
+			var pageUrlControl = $('#page-content-url');
+			var pageUrl = pageUrlControl.attr('href');
 
 			var formLogger = new $.SalesPortal.FormLogger();
 			formLogger.init({
@@ -176,11 +177,13 @@
 				formContent: $('#page-content')
 			});
 
-			$('#shortcut-action-container').find('.qbuilder-qsite-preview').attr('href', pageUrl.attr('href'));
-			pageUrl.off('click.qbuilder').on('click.qbuilder', function ()
+			$('#shortcut-action-container').find('.qbuilder-qsite-preview').attr('href', pageUrl);
+			pageUrlControl.off('click.qbuilder').on('click.qbuilder', function (e)
 			{
+				e.preventDefault();
 				$.SalesPortal.QBuilder.PageList.savePage(function ()
 				{
+					window.open(pageUrl);
 				});
 			});
 
@@ -204,7 +207,8 @@
 			});
 			if (pageDescription.val() == '')
 				pageDescription.editable('disable');
-			pageDescription.on('editable.click', function () {
+			pageDescription.on('editable.click', function ()
+			{
 				qBuilderData.options.trackActivityDelegate();
 			});
 			$('#page-content-show-description').off('change').on('change', function ()
@@ -224,7 +228,8 @@
 			});
 			if (pageHeader.val() == '')
 				pageHeader.editable('disable');
-			pageHeader.on('editable.click', function () {
+			pageHeader.on('editable.click', function ()
+			{
 				qBuilderData.options.trackActivityDelegate();
 			});
 			$('#page-content-show-header').off('change').on('change', function ()
@@ -244,7 +249,8 @@
 			});
 			if (pageFooter.val() == '')
 				pageFooter.editable('disable');
-			pageFooter.on('editable.click', function () {
+			pageFooter.on('editable.click', function ()
+			{
 				qBuilderData.options.trackActivityDelegate();
 			});
 			$('#page-content-show-footer').off('change').on('change', function ()
@@ -367,10 +373,10 @@
 				$.SalesPortal.LinkManager.requestViewDialog(linkId, true);
 			});
 
-			pageLinks.find("td.click-mobile").off('touchstart').off('touchmove').off('touchend').on('touchstart',function ()
+			pageLinks.find("td.click-mobile").off('touchstart').off('touchmove').off('touchend').on('touchstart', function ()
 			{
 				isScrolling = false;
-			}).on('touchmove',function ()
+			}).on('touchmove', function ()
 			{
 				isScrolling = true;
 			}).on('touchend', function (e)

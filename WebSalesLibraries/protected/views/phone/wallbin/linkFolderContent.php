@@ -1,4 +1,8 @@
-<? /** @var $link LibraryLink */ ?>
+<?
+	use application\models\wallbin\models\web\LibraryLink as LibraryLink;
+
+	/** @var $link LibraryLink */
+?>
 <div data-role="collapsibleset" data-theme="a" data-content-theme="a" data-inset="true">
 	<? foreach ($link->folderContent as $link): ?>
 		<? if ($link->isFolder): ?>

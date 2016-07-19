@@ -4,9 +4,10 @@
 	 * Class LibraryPageRecord
 	 * @property mixed id
 	 * @property mixed id_library
-	 * @property mixed name
-	 * @property mixed order
-	 * @property mixed has_columns
+	 * @property string name
+	 * @property int order
+	 * @property boolean has_columns
+	 * @property string settings
 	 * @property string date_modify
 	 * @property string cached_col_view
 	 */
@@ -30,10 +31,10 @@
 		}
 
 		/**
-		 * @param $page
-		 * @param $libraryRootPath
+		 * @param array $page
+		 * @param string $libraryRootPath
 		 */
-		public static function updateData($page, $libraryRootPath)
+		public static function updateDataFromSoap($page, $libraryRootPath)
 		{
 			$needToUpdate = false;
 			$needToCreate = false;
@@ -67,13 +68,43 @@
 			$folderIds = null;
 			foreach ($page['folders'] as $folder)
 			{
-				FolderRecord::updateData($folder, $libraryRootPath);
+				FolderRecord::updateDataFromSoap($folder, $libraryRootPath);
 				$folderIds[] = $folder['id'];
 			}
 			FolderRecord::clearByIds($page['id'], $folderIds);
 
 			foreach ($page['columns'] as $column)
 				ColumnRecord::updateData($column);
+		}
+
+		/**
+		 * @param application\models\wallbin\models\cadmin\entities\LibraryPage $libraryPage
+		 * @param int $changeType
+		 */
+		public static function updateDataFromChangeSet($libraryPage, $changeType)
+		{
+			switch ($changeType)
+			{
+				case ChangeSet::ChangeTypeAdd:
+				case ChangeSet::ChangeTypeUpdate:
+					$libraryPageRecord = self::model()->findByPk($libraryPage->id);
+					if (!isset($libraryPageRecord))
+					{
+						$libraryPageRecord = new LibraryPageRecord();
+						$libraryPageRecord->id = $libraryPage->id;
+						$libraryPageRecord->id_library = $libraryPage->libraryId;
+					}
+					$libraryPageRecord->name = $libraryPage->name;
+					$libraryPageRecord->order = $libraryPage->order;
+					$libraryPageRecord->date_modify = date(Yii::app()->params['mysqlDateFormat'], strtotime($libraryPage->lastModified));
+					$libraryPageRecord->settings = CJSON::encode($libraryPage->settings);
+					$libraryPageRecord->save();
+					break;
+				case ChangeSet::ChangeTypeDelete:
+					FolderRecord::clearByIds($libraryPage->id, null);
+					self::model()->deleteByPk($libraryPage->id);
+					break;
+			}
 		}
 
 		/**
@@ -98,8 +129,8 @@
 		}
 
 		/**
-		 * @param $libraryId
-		 * @param $pageIds
+		 * @param string $libraryId
+		 * @param array $pageIds
 		 */
 		public static function clearByIds($libraryId, $pageIds)
 		{

@@ -1,4 +1,8 @@
-<? /** @var $libraryPage LibraryPage */ ?>
+<?
+	use application\models\wallbin\models\web\LibraryPage as LibraryPage;
+
+	/** @var $libraryPage LibraryPage */
+?>
 <div class="page-container" id="page-<? echo $libraryPage->id; ?>">
 	<div class="content-container">
 		<div class="content-columns-container">

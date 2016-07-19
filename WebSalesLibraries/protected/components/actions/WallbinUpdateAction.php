@@ -1,4 +1,6 @@
-<?php
+<?
+	use application\models\wallbin\models\web\Library as Library;
+	use application\models\wallbin\models\web\Category as Category;
 
 	/**
 	 * Class WallbinUpdateAction
@@ -51,7 +53,7 @@
 							$library['name'] = $libraryName;
 							$libraryId = $library['id'];
 							$libraryIds[] = $libraryId;
-							$updated = LibraryRecord::updateData($library, $sourceDate, $storagePath);
+							$updated = LibraryRecord::updateDataFromSoap($library, $sourceDate, $storagePath);
 							if ($updated)
 							{
 								echo "Updating HTML cache for " . $libraryName . "...\n";
@@ -165,6 +167,7 @@
 			if (file_exists($groupTemplateFilePath))
 				GroupTemplateRecord::updateData(file($groupTemplateFilePath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES));
 
+			/** @var $liveLinkRecords LinkRecord[]*/
 			$liveLinkRecords = LinkRecord::model()->findAll();
 			if (isset($liveLinkRecords))
 				foreach ($liveLinkRecords as $linkRecord)

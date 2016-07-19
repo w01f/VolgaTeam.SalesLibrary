@@ -1,4 +1,6 @@
-<?php
+<?
+	use application\models\wallbin\models\web\LibraryManager as LibraryManager;
+	use application\models\wallbin\models\web\Library as Library;
 
 	/**
 	 * Class LinkRecord
@@ -22,7 +24,7 @@
 	 * @property mixed date_modify
 	 * @property mixed id_preview
 	 * @property mixed content
-	 * @property mixed properties
+	 * @property mixed settings
 	 * @property mixed id_banner
 	 * @property mixed id_line_break
 	 * @property mixed id
@@ -83,12 +85,12 @@
 				$linkRecord->file_name = $link['fileName'];
 				$linkRecord->file_extension = $link['fileExtension'];
 				$linkRecord->file_date = $link['originalFormat'] == 'url' ||
-					$link['originalFormat'] == 'youtube' ||
-					$link['originalFormat'] == 'quicksite' ||
-					$link['originalFormat'] == 'internal' ||
-					$link['originalFormat'] == 'app' ?
-						date(Yii::app()->params['mysqlDateFormat'], strtotime($link['dateAdd'])) :
-						date(Yii::app()->params['mysqlDateFormat'], strtotime($link['fileDate']));
+				$link['originalFormat'] == 'youtube' ||
+				$link['originalFormat'] == 'quicksite' ||
+				$link['originalFormat'] == 'internal' ||
+				$link['originalFormat'] == 'app' ?
+					date(Yii::app()->params['mysqlDateFormat'], strtotime($link['dateAdd'])) :
+					date(Yii::app()->params['mysqlDateFormat'], strtotime($link['fileDate']));
 				$linkRecord->file_size = $link['fileSize'];
 				$linkRecord->format = $link['originalFormat'];
 				$linkRecord->order = $link['order'];
@@ -130,7 +132,7 @@
 					else if ($key == 'no_share')
 						$linkRecord->no_share = CJSON::decode($value);
 					else
-						$linkRecord->properties = CJSON::encode($link['extendedProperties']);
+						$linkRecord->settings = CJSON::encode($link['extendedProperties']);
 				}
 
 			if (array_key_exists('lineBreakProperties', $link) && isset($link['lineBreakProperties']))
@@ -178,6 +180,7 @@
 		 */
 		public static function getLinkById($linkId)
 		{
+			/** @var  $linkRecord LinkRecord */
 			$linkRecord = self::model()->findByPk($linkId);
 			if (isset($linkRecord) && $linkRecord->is_dead == false && $linkRecord->is_preview_not_ready == false)
 				return $linkRecord;
@@ -239,7 +242,7 @@
 		public static function applyPermissionsFilter($links)
 		{
 			$filteredLinks = array();
-			$isAdmin =UserIdentity::isUserAdmin();
+			$isAdmin = UserIdentity::isUserAdmin();
 			$userId = UserIdentity::getCurrentUserId();
 			if (!$isAdmin)
 			{

@@ -1,4 +1,8 @@
 <?
+	use application\models\wallbin\models\web\LibraryManager as LibraryManager;
+	use application\models\wallbin\models\web\Library as Library;
+	use application\models\wallbin\models\web\LibraryPage as LibraryPage;
+
 	/**
 	 * @var $library Library
 	 * @var $defaultPage LibraryPage

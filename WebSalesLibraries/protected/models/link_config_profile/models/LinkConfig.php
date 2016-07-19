@@ -1,4 +1,5 @@
-<?php
+<?
+	use application\models\wallbin\models\web\LibraryLink as LibraryLink;
 
 	/**
 	 * Class LinkConfig
@@ -125,7 +126,7 @@
 			$searchConditions->textExactMatch = true;
 			$searchConditions->libraries = isset($this->libraryReferences) ? $this->libraryReferences : array();
 
-			$queryRecords = SearchHelper::queryLinksByCondition($searchConditions, uniqid());
+			$queryRecords = SearchHelper::getDatasetByCondition($searchConditions, uniqid());
 
 			$affectedLinkReferences = array();
 			foreach ($queryRecords as $queryRecord)

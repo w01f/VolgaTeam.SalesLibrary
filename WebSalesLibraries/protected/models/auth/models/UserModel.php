@@ -1,5 +1,4 @@
 <?php
-
 	/**
 	 * Class UserModel
 	 */
@@ -76,7 +75,7 @@
 		 */
 		public $allGroups;
 		/**
-		 * @var Library[]
+		 * @var SoapLibrary[]
 		 * @soap
 		 */
 		public $libraries;

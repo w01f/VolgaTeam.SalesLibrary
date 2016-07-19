@@ -44,6 +44,5 @@
 		{
 			self::model()->deleteAll('id_library=?', array($libraryId));
 		}
-
 	}
 

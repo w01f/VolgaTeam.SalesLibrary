@@ -89,7 +89,7 @@
 							' . $dateField . ',
 							(select (round(avg(lr.value)*2)/2) as value from tbl_link_rate lr where lr.id_link=link.id) as rate,
 							link.format,
-							link.properties as extended_properties,
+							link.settings as extended_properties,
 							glcat.tag as tag')
 						->from('tbl_link link')
 						->leftJoin("(select lcat.id_link, group_concat(lcat.tag separator ', ') as tag from tbl_link_category lcat group by lcat.id_link) glcat", "glcat.id_link=link.id")

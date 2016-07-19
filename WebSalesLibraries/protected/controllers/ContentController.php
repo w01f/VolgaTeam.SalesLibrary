@@ -1,5 +1,4 @@
 <?php
-
 	/**
 	 * Class ContentController
 	 */
@@ -15,13 +14,13 @@
 					'class' => 'CWebServiceAction',
 					'classMap' => array(
 						'Font' => 'Font',
-						'Library' => 'Library',
-						'LibraryPage' => 'LibraryPage',
-						'AutoWidget' => 'AutoWidget',
-						'Banner' => 'Banner',
-						'Column' => 'Column',
-						'LibraryFolder' => 'LibraryFolder',
-						'LibraryLink' => 'LibraryLink',
+						'SoapLibrary' => 'SoapLibrary',
+						'SoapLibraryPage' => 'SoapLibraryPage',
+						'SoapAutoWidget' => 'SoapAutoWidget',
+						'SoapBanner' => 'SoapBanner',
+						'SoapColumn' => 'SoapColumn',
+						'SoapLibraryFolder' => 'SoapLibraryFolder',
+						'SoapLibraryLink' => 'SoapLibraryLink',
 						'BaseLinkSettings' => 'BaseLinkSettings',
 						'VideoLinkSettings' => 'VideoLinkSettings',
 						'HyperLinkSettings' => 'HyperLinkSettings',
@@ -43,7 +42,7 @@
 		}
 
 		/**
-		 * @param Library $library
+		 * @param SoapLibrary $library
 		 * @soap
 		 */
 		public function mockLibrary($library)

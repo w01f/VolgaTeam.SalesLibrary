@@ -1,4 +1,5 @@
 <?
+	use application\models\wallbin\models\web\Category as Category;
 
 	/**
 	 * Class FileManagerDataController
@@ -34,6 +35,7 @@
 			{
 				foreach (GroupRecord::model()->findAll() as $groupRecord)
 				{
+					/** @var $groupRecord GroupRecord*/
 					$group = new GroupModel();
 					$group->id = $groupRecord->id;
 					$group->name = $groupRecord->name;

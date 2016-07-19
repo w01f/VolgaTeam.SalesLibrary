@@ -330,7 +330,7 @@
 							link.file_name as file_name,
 							' . $dateField . ',
 							max(link.format) as format,
-							max(link.properties) as extended_properties,
+							max(link.settings) as extended_properties,
 							(select (round(avg(lr.value)*2)/2) as value from tbl_link_rate lr where lr.id_link=link.id) as rate,
 							glcat.tag as tag';
 			$joinText = "glcat.id_link=link.id";

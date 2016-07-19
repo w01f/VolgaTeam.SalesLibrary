@@ -58,7 +58,10 @@
 		{
 			$linkIds = array();
 			foreach (self::model()->findAll('id_user=?', array($userId)) as $userLink)
+			{
+				/** @var LinkBlackListRecord $userLink*/
 				$linkIds[] = $userLink->id_link;
+			}
 			return $linkIds;
 		}
 
@@ -70,7 +73,10 @@
 		{
 			$userIds = array();
 			foreach (self::model()->findAll('id_link=?', array($linkId)) as $userLink)
+			{
+				/** @var LinkBlackListRecord $userLink*/
 				$userIds[] = $userLink->id_user;
+			}
 			return array_unique($userIds);
 		}
 

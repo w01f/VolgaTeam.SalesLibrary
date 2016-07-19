@@ -1,4 +1,6 @@
 <?
+	use application\models\wallbin\models\web\LibraryLink as LibraryLink;
+
 	/**
 	 * Class PreviewConfig
 	 */

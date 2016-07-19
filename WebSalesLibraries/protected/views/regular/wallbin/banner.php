@@ -1,4 +1,6 @@
 <?
+	use application\models\wallbin\models\web\Banner as Banner;
+
 	/**
 	 * @var $banner Banner
 	 * @var $isLinkBanner bool

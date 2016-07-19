@@ -6,7 +6,7 @@ select
   lcat.group_name as category_groups,
   lcat.tag_name as category_tags,
   replace(l.tags,' ',', ') as keywords,
-  l.properties as properties,
+  l.settings as properties,
   (case when prv.relative_path is null then l.file_relative_path else concat('/',prv.relative_path) end) as mp4_path,
   concat('/',thumb.relative_path) as thumb_path,
   lb.name as station,

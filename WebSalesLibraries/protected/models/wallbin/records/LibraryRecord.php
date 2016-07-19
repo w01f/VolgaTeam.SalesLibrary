@@ -1,12 +1,13 @@
-<?php
+<?
 
 	/**
 	 * Class LibraryRecord
 	 * @property mixed id
 	 * @property string id_group
-	 * @property mixed name
+	 * @property string name
 	 * @property int order
-	 * @property mixed last_update
+	 * @property string settings
+	 * @property string last_update
 	 */
 	class LibraryRecord extends CActiveRecord
 	{
@@ -28,12 +29,41 @@
 		}
 
 		/**
-		 * @param $library
+		 * @param $libraryName string
+		 * @return LibraryRecord
+		 */
+		public static function createEmptyLibrary($libraryName)
+		{
+			$libraryId = Utils::getGUID();
+			$createDate = date(Yii::app()->params['mysqlDateFormat']);
+
+			/** @var $libraryRecord LibraryRecord */
+			$libraryRecord = new LibraryRecord();
+			$libraryRecord->id = $libraryId;
+			$libraryRecord->name = $libraryName;
+			$libraryRecord->last_update = $createDate;
+			$libraryRecord->save();
+
+			/** @var $pageRecord LibraryPageRecord */
+			$pageRecord = new LibraryPageRecord();
+			$pageRecord->id = Utils::getGUID();
+			$pageRecord->id_library = $libraryId;
+			$pageRecord->name = 'Home';
+			$pageRecord->order = 0;
+			$pageRecord->has_columns = false;
+			$pageRecord->date_modify = $createDate;
+			$pageRecord->save();
+
+			return $libraryRecord;
+		}
+
+		/**
+		 * @param array $library
 		 * @param $sourceDate
 		 * @param $libraryRootPath
 		 * @return bool
 		 */
-		public static function updateData($library, $sourceDate, $libraryRootPath)
+		public static function updateDataFromSoap($library, $sourceDate, $libraryRootPath)
 		{
 			$needToUpdate = false;
 			$needToCreate = false;
@@ -70,7 +100,7 @@
 				$pageIds = null;
 				foreach ($library['pages'] as $page)
 				{
-					LibraryPageRecord::updateData($page, $libraryRootPath);
+					LibraryPageRecord::updateDataFromSoap($page, $libraryRootPath);
 					$pageIds[] = $page['id'];
 				}
 				LibraryPageRecord::clearByIds($library['id'], $pageIds);
@@ -83,6 +113,34 @@
 			}
 			else
 				return false;
+		}
+
+		/**
+		 * @param application\models\wallbin\models\cadmin\entities\Library $library
+		 * @param int $changeType
+		 */
+		public static function updateDataFromChangeSet($library, $changeType)
+		{
+			switch ($changeType)
+			{
+				case ChangeSet::ChangeTypeAdd:
+				case ChangeSet::ChangeTypeUpdate:
+					$libraryRecord = self::model()->findByPk($library->id);
+					if (!isset($libraryRecord))
+					{
+						$libraryRecord = new LibraryRecord();
+						$libraryRecord->id = $library->id;
+					}
+					$libraryRecord->name = $library->name;
+					$libraryRecord->last_update = date(Yii::app()->params['mysqlDateFormat'], strtotime($library->lastModified));
+					$libraryRecord->settings = CJSON::encode($library->settings);
+					$libraryRecord->save();
+					break;
+				case ChangeSet::ChangeTypeDelete:
+					self::clearData($library->id);
+					self::model()->deleteByPk($library->id);
+					break;
+			}
 		}
 
 		/**

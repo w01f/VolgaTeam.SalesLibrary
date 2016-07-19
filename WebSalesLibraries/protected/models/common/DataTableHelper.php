@@ -1,4 +1,6 @@
-<?php
+<?
+	use application\models\wallbin\models\web\LibraryManager as LibraryManager;
+	use application\models\wallbin\models\web\Library as Library;
 
 	/**
 	 * Class DataTableHelper
@@ -24,6 +26,10 @@
 
 					$record['id'] = $linkRecord['id'];
 					$record['name'] = $linkRecord['name'];
+
+					$record['file_name'] = $linkRecord['file_name'];
+					$record['path'] = $linkRecord['path'];
+					$record['lib_name'] = $linkRecord['lib_name'];
 
 					$record['tooltip'] = sprintf('%s<br><br>%s',
 						isset($linkRecord['file_name']) && $linkRecord['file_name'] != '' ? $linkRecord['file_name'] : $linkRecord['name'],
@@ -73,7 +79,7 @@
 
 					$record['isHyperlink'] = $type == 8 && $extendedProperties['forcePreview'] == true;
 
-					$fileInfo = FileInfo::fromLinkData($type, $linkRecord['name'], $linkRecord['file_name'], $linkRecord['path'], $library);
+					$fileInfo = FileInfo::fromLinkData($type, $linkRecord['name'], $linkRecord['path'], $library);
 					$record['isDraggable'] = $fileInfo->isFile || in_array($linkRecord['format'], array('url', 'quicksite', 'youtube'));
 
 					if ($record['isHyperlink'])
