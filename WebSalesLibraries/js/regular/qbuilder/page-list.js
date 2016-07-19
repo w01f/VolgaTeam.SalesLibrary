@@ -16,7 +16,7 @@
 				pageToSelectId = that.selectedPage.pageId;
 			$.ajax({
 				type: "POST",
-				url: window.BaseUrl + "qbuilder/getPageList",
+				url: window.BaseUrl + "qBuilder/getPageList",
 				data: {
 					selectedPageId: pageToSelectId
 				},
@@ -49,7 +49,7 @@
 		{
 			$.ajax({
 				type: "POST",
-				url: window.BaseUrl + "qbuilder/addPageDialog",
+				url: window.BaseUrl + "qBuilder/addPageDialog",
 				data: {
 					clone: clonePageId != undefined
 				},
@@ -76,7 +76,7 @@
 						var now = new Date();
 						$.ajax({
 							type: "POST",
-							url: window.BaseUrl + "qbuilder/addPage",
+							url: window.BaseUrl + "qBuilder/addPage",
 							data: {
 								title: $('#add-page-name').val(),
 								createDate: now.toLocaleDateString() + ' ' + now.toLocaleTimeString(),
@@ -143,7 +143,7 @@
 								modalDialog.close();
 								$.ajax({
 									type: "POST",
-									url: window.BaseUrl + "qbuilder/deletePage",
+									url: window.BaseUrl + "qBuilder/deletePage",
 									data: {
 										selectedPageId: selectedPageId
 									},
@@ -184,7 +184,7 @@
 			selectedPageRow.find('td.link-name-column').html(title);
 			$.ajax({
 				type: "POST",
-				url: window.BaseUrl + "qbuilder/savePage",
+				url: window.BaseUrl + "qBuilder/savePage",
 				data: {
 					selectedPageId: selectedPageId,
 					title: title,
@@ -330,7 +330,7 @@
 		{
 			$.ajax({
 				type: "POST",
-				url: window.BaseUrl + "qbuilder/deletePagesDialog",
+				url: window.BaseUrl + "qBuilder/deletePagesDialog",
 				data: {    },
 				beforeSend: function ()
 				{
@@ -368,7 +368,7 @@
 
 						$.ajax({
 							type: "POST",
-							url: window.BaseUrl + "qbuilder/deletePages",
+							url: window.BaseUrl + "qBuilder/deletePages",
 							data: {
 								pageIds: $.toJSON(selectedPageIds)
 							},
@@ -420,7 +420,7 @@
 			{
 				$.ajax({
 					type: "POST",
-					url: window.BaseUrl + "qbuilder/setPageOrder",
+					url: window.BaseUrl + "qBuilder/setPageOrder",
 					data: {
 						pageId: pageId,
 						order: (rowIndex - 1)
@@ -449,7 +449,7 @@
 				var rowIndex = $('#page-list').find('tr.page-list-item').index(nextRow);
 				$.ajax({
 					type: "POST",
-					url: window.BaseUrl + "qbuilder/setPageOrder",
+					url: window.BaseUrl + "qBuilder/setPageOrder",
 					data: {
 						pageId: pageId,
 						order: rowIndex > 0 ? (rowIndex - 1) : 0

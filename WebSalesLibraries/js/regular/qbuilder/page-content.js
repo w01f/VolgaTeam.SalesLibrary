@@ -16,7 +16,7 @@
 			var pageLinksContainer = $('#page-content-links-container');
 			$.ajax({
 				type: "POST",
-				url: window.BaseUrl + "qbuilder/getPageLinks",
+				url: window.BaseUrl + "qBuilder/getPageLinks",
 				data: {
 					selectedPageId: that.pageId
 				},
@@ -60,7 +60,7 @@
 			var pageContent = $('#page-content');
 			$.ajax({
 				type: "POST",
-				url: window.BaseUrl + "qbuilder/getPageContent",
+				url: window.BaseUrl + "qBuilder/getPageContent",
 				data: {
 					selectedPageId: that.pageId
 				},
@@ -142,7 +142,7 @@
 				var linkInCartId = ui.helper.attr('id');
 				$.ajax({
 					type: "POST",
-					url: window.BaseUrl + "qbuilder/addLinkToPage",
+					url: window.BaseUrl + "qBuilder/addLinkToPage",
 					data: {
 						pageId: that.pageId,
 						linkInCartId: linkInCartId,
@@ -411,7 +411,7 @@
 								modalDialog.close();
 								$.ajax({
 									type: "POST",
-									url: window.BaseUrl + "qbuilder/deleteLinkFromPage",
+									url: window.BaseUrl + "qBuilder/deleteLinkFromPage",
 									data: {
 										linkInPageId: linkInPageId
 									},
@@ -452,7 +452,7 @@
 			{
 				$.ajax({
 					type: "POST",
-					url: window.BaseUrl + "qbuilder/setPageLinkOrder",
+					url: window.BaseUrl + "qBuilder/setPageLinkOrder",
 					data: {
 						pageId: that.pageId,
 						linkInPageId: linkInPageId,
@@ -485,7 +485,7 @@
 				{
 					$.ajax({
 						type: "POST",
-						url: window.BaseUrl + "qbuilder/setPageLinkOrder",
+						url: window.BaseUrl + "qBuilder/setPageLinkOrder",
 						data: {
 							pageId: that.pageId,
 							linkInPageId: linkInPageId,

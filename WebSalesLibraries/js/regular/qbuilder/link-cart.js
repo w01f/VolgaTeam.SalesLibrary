@@ -32,7 +32,7 @@
 			var linkCartGrid = $('#link-cart-grid');
 			$.ajax({
 				type: "POST",
-				url: window.BaseUrl + "qbuilder/getLinkCart",
+				url: window.BaseUrl + "qBuilder/getLinkCart",
 				data: {    },
 				beforeSend: function ()
 				{
@@ -76,7 +76,7 @@
 		{
 			$.ajax({
 				type: "POST",
-				url: window.BaseUrl + "qbuilder/addLinksToCart",
+				url: window.BaseUrl + "qBuilder/addLinksToCart",
 				data: {
 					linkIds: linkIds
 				},
@@ -124,7 +124,7 @@
 		{
 			$.ajax({
 				type: "POST",
-				url: window.BaseUrl + "qbuilder/addLinksToCart",
+				url: window.BaseUrl + "qBuilder/addLinksToCart",
 				data: {
 					folderId: folderId
 				},
@@ -203,7 +203,7 @@
 			var linkCartGrid = $('#link-cart-grid');
 			$.ajax({
 				type: "POST",
-				url: window.BaseUrl + "qbuilder/clearLinkCart",
+				url: window.BaseUrl + "qBuilder/clearLinkCart",
 				data: {    },
 				beforeSend: function ()
 				{
@@ -240,7 +240,7 @@
 								modalDialog.close();
 								$.ajax({
 									type: "POST",
-									url: window.BaseUrl + "qbuilder/deleteLinkFromCart",
+									url: window.BaseUrl + "qBuilder/deleteLinkFromCart",
 									data: {
 										linkInCartId: linkInCartId
 									},
@@ -277,7 +277,7 @@
 			var selectedPageId = $.SalesPortal.QBuilder.PageList.selectedPage.pageId;
 			$.ajax({
 				type: "POST",
-				url: window.BaseUrl + "qbuilder/addAllLinksToPage",
+				url: window.BaseUrl + "qBuilder/addAllLinksToPage",
 				data: {
 					pageId: selectedPageId
 				},

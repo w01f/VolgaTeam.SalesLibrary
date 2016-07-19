@@ -91,7 +91,7 @@
 			var now = new Date();
 			$.ajax({
 				type: "POST",
-				url: window.BaseUrl + "qbuilder/addPageLite",
+				url: window.BaseUrl + "qBuilder/addPageLite",
 				data: {
 					linkId: viewerData.linkId,
 					createDate: now.toLocaleDateString() + ' ' + now.toLocaleTimeString(),

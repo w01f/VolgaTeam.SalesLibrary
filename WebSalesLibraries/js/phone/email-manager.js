@@ -55,7 +55,7 @@
 				var now = new Date();
 				$.ajax({
 					type: "POST",
-					url: window.BaseUrl + "qbuilder/addPageLite",
+					url: window.BaseUrl + "qBuilder/addPageLite",
 					data: {
 						linkId: emailPage.find('.service-data .link-id').text(),
 						createDate: now.toLocaleDateString() + ' ' + now.toLocaleTimeString(),
