@@ -62,6 +62,7 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 				}));
 				UpdateFolderContent(targetLibrary, cancellationToken);
 				UpdatePreviewContent(targetLibrary, cancellationToken);
+				targetLibrary.SyncDate = DateTime.Now;
 				targetContext.SaveChanges();
 				if (cancellationToken.IsCancellationRequested) return;
 				WebContentManager.GenerateWebContent(targetLibrary);
@@ -96,6 +97,33 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 			MainController.Instance.MainForm.ribbonControl.Enabled = true;
 		}
 
+		public static void SyncSilent()
+		{
+			foreach (var targetContext in MainController.Instance.Wallbin.Libraries)
+			{
+				var targetLibrary = targetContext.Library;
+
+				int uncompletedTags;
+				int unconvertedVideos;
+				int inactiveLinks;
+				TaggedLinksManager.Instance.Load(targetLibrary);
+				InactiveLinkManager.Instance.Load(new[] { targetLibrary });
+				var isSyncLock = targetLibrary.IsLockedForSync(out uncompletedTags, out unconvertedVideos, out inactiveLinks);
+				if (isSyncLock)
+					return;
+
+				var cancellationToken = new CancellationToken();
+				UpdateFolderContent(targetLibrary, cancellationToken);
+				UpdatePreviewContent(targetLibrary, cancellationToken);
+				targetLibrary.SyncDate = DateTime.Now;
+				targetContext.SaveChanges();
+				if (cancellationToken.IsCancellationRequested) return;
+				WebContentManager.GenerateWebContent(targetLibrary);
+				if (cancellationToken.IsCancellationRequested) return;
+				SyncLibrary(targetLibrary, cancellationToken);
+			}
+		}
+
 		private static void SyncLibrary(Library library, CancellationToken cancellationToken)
 		{
 			var syncLogs = new List<SyncLog>();
@@ -116,7 +144,7 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 			var resultFiles = new List<string>();
 			var tempPath = Path.GetTempPath();
 			resultFiles.AddRange(syncLogs.Select(log => log.Save(tempPath)));
-			resultFiles.Add(Path.Combine(library.Path, Constants.StorageFileName));
+			resultFiles.Add(Path.Combine(library.Path, Constants.LocalStorageFileName));
 			resultFiles.Add(Path.Combine(library.Path, Constants.LibrariesJsonFileName));
 			resultFiles.Add(Path.Combine(library.Path, Constants.ShortLibraryInfoFileName));
 			resultFiles.Add(RemoteResourceManager.Instance.AppSettingsFile.LocalPath);
@@ -146,7 +174,7 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 				{
 					Utils.DeleteFolder(Path.Combine(library.Path, Constants.RegularPreviewContainersRootFolderName));
 				}
-				catch {}
+				catch { }
 				return;
 			}
 

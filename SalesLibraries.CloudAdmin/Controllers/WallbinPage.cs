@@ -40,9 +40,6 @@ namespace SalesLibraries.CloudAdmin.Controllers
 			{
 				switch (e.ChangeType)
 				{
-					case DataChangeType.LibrarySelected:
-						OnLibraryChanged(o, e);
-						break;
 					case DataChangeType.LinksDeleted:
 						MainController.Instance.WallbinViews.ActiveWallbin.IsDataChanged = true;
 						break;
@@ -243,9 +240,15 @@ namespace SalesLibraries.CloudAdmin.Controllers
 
 		private void OnSyncClick(object sender, EventArgs e)
 		{
-			//SyncManager.SyncRegular();
+			MainController.Instance.ProcessChanges();
+			MainController.Instance.ProcessManager.RunStartProcess(
+				String.Format("Syncing changes with {0}", MainController.Instance.Settings.SiteLibrary),
+				cancellationToken =>
+				{
+					MainController.Instance.Wallbin.CheckinData();
+				});
 		}
-
+		
 		#region Link Operations Processing
 		private void buttonItemHomeAddUrl_Click(object sender, EventArgs e)
 		{

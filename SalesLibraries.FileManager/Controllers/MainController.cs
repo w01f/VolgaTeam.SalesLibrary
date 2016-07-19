@@ -6,44 +6,41 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SalesLibraries.Business.Contexts.Wallbin;
+using SalesLibraries.Business.Contexts.Wallbin.Local;
 using SalesLibraries.Common.Authorization;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.Common.Objects.RemoteStorage;
 using SalesLibraries.CommonGUI.BackgroundProcesses;
 using SalesLibraries.CommonGUI.Common;
 using SalesLibraries.FileManager.Business.Services;
+using SalesLibraries.FileManager.Business.Synchronization;
 using SalesLibraries.FileManager.Configuration;
 using SalesLibraries.FileManager.PresentationLayer.Wallbin.Libraries;
 using SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings;
 using SalesLibraries.FileManager.PresentationLayer.Wallbin.Views;
-using SalesLibraries.ServiceConnector.Services;
+using SalesLibraries.ServiceConnector.Services.Soap;
 
 namespace SalesLibraries.FileManager.Controllers
 {
 	class MainController
 	{
-		private static readonly MainController _instance = new MainController();
-
 		private readonly Dictionary<TabPageEnum, IPageController> _tabPages = new Dictionary<TabPageEnum, IPageController>();
 		private TabPageEnum _activeTab;
 
-		public static MainController Instance
-		{
-			get { return _instance; }
-		}
+		public static MainController Instance { get; } = new MainController();
 
-		public SettingsManager Settings { get; private set; }
-		public ListManager Lists { get; private set; }
-		public ServiceConnection ServiceConnection { get; private set; }
-		public WallbinManager Wallbin { get; private set; }
-		public HelpManager HelpManager { get; private set; }
+		public SettingsManager Settings { get; }
+		public ListManager Lists { get; }
+		public SoapServiceConnection SoapServiceConnection { get; }
+		public LocalWallbinManager Wallbin { get; }
+		public HelpManager HelpManager { get; }
 
-		public ViewManager WallbinViews { get; private set; }
+		public ViewManager WallbinViews { get; }
 
-		public FormMain MainForm { get; private set; }
+		public FormMain MainForm { get; }
 
-		public BackgroundProcessManager ProcessManager { get; private set; }
-		public PopupMessageHelper PopupMessages { get; private set; }
+		public BackgroundProcessManager ProcessManager { get; }
+		public PopupMessageHelper PopupMessages { get; }
 
 		#region Tab Pages
 		public WallbinPage TabWallbin { get; private set; }
@@ -55,8 +52,8 @@ namespace SalesLibraries.FileManager.Controllers
 		{
 			Settings = new SettingsManager();
 			Lists = new ListManager();
-			ServiceConnection = new ServiceConnection();
-			Wallbin = new WallbinManager();
+			SoapServiceConnection = new SoapServiceConnection();
+			Wallbin = new LocalWallbinManager();
 			HelpManager = new HelpManager();
 			WallbinViews = new ViewManager();
 			MainForm = new FormMain();
@@ -99,7 +96,7 @@ namespace SalesLibraries.FileManager.Controllers
 			};
 
 			ProcessManager.RunStartProcess(
-				"Connecting to adSALEScloud…", 
+				"Connecting to adSALEScloud…",
 				cancellationToken => AsyncHelper.RunSync(FileStorageManager.Instance.Init));
 
 			if (stopRun) return;
@@ -122,7 +119,7 @@ namespace SalesLibraries.FileManager.Controllers
 				}
 
 				ProcessManager.RunStartProcess(
-					progressTitle, 
+					progressTitle,
 					cancellationToken => AsyncHelper.RunSync(InitBusinessObjects));
 
 				MainForm.Shown += (o, e) =>
@@ -161,6 +158,35 @@ namespace SalesLibraries.FileManager.Controllers
 
 		public void RunConsole()
 		{
+			var stopRun = false;
+
+			LicenseHelper.Register();
+
+			AppProfileManager.Instance.InitApplication(AppTypeEnum.FileManager);
+
+			FileStorageManager.Instance.UsingLocalMode += (o, e) =>
+			{
+				if (FileStorageManager.Instance.UseLocalMode) return;
+				if (FileStorageManager.Instance.DataState == DataActualityState.Updated) return;
+				stopRun = true;
+			};
+
+			FileStorageManager.Instance.Authorizing += (o, e) =>
+			{
+				var authManager = new AuthManager();
+				authManager.Init();
+				authManager.Auth(e);
+			};
+
+			AsyncHelper.RunSync(FileStorageManager.Instance.Init);
+
+			if (stopRun) return;
+
+			if (!FileStorageManager.Instance.Activated) return;
+
+			AsyncHelper.RunSync(InitBusinessObjects);
+			Wallbin.LoadLibrary(Settings.BackupPath);
+			SyncManager.SyncSilent();
 		}
 
 		public void ReloadData()
@@ -221,7 +247,7 @@ namespace SalesLibraries.FileManager.Controllers
 			await Configuration.RemoteResourceManager.Instance.Load();
 
 			Settings.Load();
-			ServiceConnection.Load(Settings.WebServiceSite);
+			SoapServiceConnection.Load(Settings.WebServiceSite);
 			Lists.Load();
 			HelpManager.LoadHelpLinks();
 

@@ -24,8 +24,8 @@ namespace SalesLibraries.SalesDepot.Business.Services
 
 					var libraryFolderName = Path.GetFileName(sourceLibraryPath);
 
-					var sourceLibraryCacheFile = File.Exists(Path.Combine(sourceLibraryCachePath, Constants.StorageFileName)) ?
-						new FileInfo(Path.Combine(sourceLibraryCachePath, Constants.StorageFileName)) :
+					var sourceLibraryCacheFile = File.Exists(Path.Combine(sourceLibraryCachePath, Constants.LocalStorageFileName)) ?
+						new FileInfo(Path.Combine(sourceLibraryCachePath, Constants.LocalStorageFileName)) :
 						new FileInfo(Path.Combine(sourceLibraryCachePath, Constants.LegacyStorageFileName));
 
 					if (!sourceLibraryCacheFile.Exists) continue;
@@ -48,7 +48,6 @@ namespace SalesLibraries.SalesDepot.Business.Services
 							);
 						syncHelper.SynchronizeFolder(syncOptions);
 					}
-					break;
 				}
 				break;
 			}

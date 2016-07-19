@@ -14,7 +14,6 @@ using SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Settings;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.CommonGUI.Common;
 using SalesLibraries.CommonGUI.CustomDialog;
-using TabPage = SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views.TabPage;
 
 namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 {
@@ -201,7 +200,6 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 					() => MainController.Instance.MainForm.Invoke(new MethodInvoker(() =>
 					{
 						LoadView(true);
-						MainController.Instance.WallbinViews.SetActiveWallbin(this);
 					})));
 			}
 			

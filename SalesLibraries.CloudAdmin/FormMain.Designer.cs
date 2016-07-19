@@ -2215,8 +2215,7 @@
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Cloud Admin ({0})";
 			this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
-			this.Shown += new System.EventHandler(this.FormMain_Shown);
+			this.Shown += new System.EventHandler(this.OnFormMainShown);
 			this.ribbonControl.ResumeLayout(false);
 			this.ribbonControl.PerformLayout();
 			this.ribbonPanelHome.ResumeLayout(false);

@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using SalesLibraries.Business.Contexts.Wallbin;
+using SalesLibraries.Business.Contexts.Wallbin.Local;
 using SalesLibraries.Common.Authorization;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.Common.Objects.RemoteStorage;
@@ -21,30 +21,26 @@ namespace SalesLibraries.SalesDepot.Controllers
 {
 	class MainController
 	{
-		private static readonly MainController _instance = new MainController();
 		private readonly Dictionary<TabPageEnum, IPageController> _tabPages = new Dictionary<TabPageEnum, IPageController>();
 
-		public static MainController Instance
-		{
-			get { return _instance; }
-		}
+		public static MainController Instance { get; } = new MainController();
 
 		public TabPageEnum ActiveTab { get; private set; }
 
-		public SettingsManager Settings { get; private set; }
+		public SettingsManager Settings { get; }
 		public ListManager Lists { get; private set; }
-		public EmailBinManager EmailBin { get; private set; }
+		public EmailBinManager EmailBin { get; }
 
-		public WallbinManager Wallbin { get; private set; }
+		public LocalWallbinManager Wallbin { get; }
 
 		public ActivityManager ActivityManager { get; private set; }
-		public HelpManager HelpManager { get; private set; }
+		public HelpManager HelpManager { get; }
 
-		public ViewManager WallbinViews { get; private set; }
+		public ViewManager WallbinViews { get; }
 
-		public FormMain MainForm { get; private set; }
-		public BackgroundProcessManager ProcessManager { get; private set; }
-		public PopupMessageHelper PopupMessages { get; private set; }
+		public FormMain MainForm { get; }
+		public BackgroundProcessManager ProcessManager { get; }
+		public PopupMessageHelper PopupMessages { get; }
 
 		#region Tab Pages
 		private WallbinPage TabWallbin { get; set; }
@@ -61,7 +57,7 @@ namespace SalesLibraries.SalesDepot.Controllers
 			Settings = new SettingsManager();
 			Lists = new ListManager();
 
-			Wallbin = new WallbinManager();
+			Wallbin = new LocalWallbinManager();
 
 			HelpManager = new HelpManager();
 			EmailBin = new EmailBinManager();
@@ -72,6 +68,7 @@ namespace SalesLibraries.SalesDepot.Controllers
 			ProcessManager = new BackgroundProcessManager(MainForm, Settings.SalesDepotName);
 			PopupMessages = new PopupMessageHelper(Settings.SalesDepotName);
 		}
+
 		public void RunApplication()
 		{
 			var stopRun = false;

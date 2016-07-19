@@ -96,7 +96,10 @@ namespace SalesLibraries.FileManager.PresentationLayer.Video
 		public void ProcessChanges()
 		{
 			if (!_isDataChanged) return;
-			_libraryContext.SaveChanges();
+			MainController.Instance.ProcessManager.Run("Saving Changes...", cancelationToken =>
+			{
+				_libraryContext.SaveChanges();
+			});
 			_isDataChanged = false;
 		}
 

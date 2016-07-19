@@ -6,7 +6,7 @@ using System.Windows.Forms;
 using SalesLibraries.SiteManager.BusinessClasses;
 using SalesLibraries.SiteManager.ConfigurationClasses;
 using SalesLibraries.SiteManager.ToolForms;
-using SalesLibraries.ServiceConnector.Services;
+using SalesLibraries.ServiceConnector.Services.Soap;
 
 namespace SalesLibraries.SiteManager.Controllers
 {
@@ -17,7 +17,7 @@ namespace SalesLibraries.SiteManager.Controllers
 
 		#region Sites
 		public event EventHandler<SiteChangedEventArgs> SiteChanged;
-		public void ChangeSite(ServiceConnection site)
+		public void ChangeSite(SoapServiceConnection site)
 		{
 			WebSiteManager.Instance.SelectSite(site);
 			if (SiteChanged != null)
@@ -183,6 +183,6 @@ namespace SalesLibraries.SiteManager.Controllers
 
 	public class SiteChangedEventArgs : EventArgs
 	{
-		public ServiceConnection SelectedSite { get; set; }
+		public SoapServiceConnection SelectedSite { get; set; }
 	}
 }

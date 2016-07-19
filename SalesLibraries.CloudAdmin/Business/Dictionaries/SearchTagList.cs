@@ -20,7 +20,7 @@ namespace SalesLibraries.CloudAdmin.Business.Dictionaries
 			{
 				DateTime? cloudLastUpdate = null;
 				DateTime tempDate;
-				var dateStr = MainController.Instance.ServiceConnection.GetMetaData(MetaDataConst.CategoriesDataTag, MetaDataConst.LastUpdatePropertyName, out message);
+				var dateStr = MainController.Instance.SoapServiceConnection.GetMetaData(MetaDataConst.CategoriesDataTag, MetaDataConst.LastUpdatePropertyName, out message);
 				if (DateTime.TryParse(dateStr, out tempDate))
 					cloudLastUpdate = tempDate;
 				if (!cloudLastUpdate.HasValue || cloudLastUpdate <= localMetaData.LastUpdate)
@@ -35,12 +35,12 @@ namespace SalesLibraries.CloudAdmin.Business.Dictionaries
 			else
 				localMetaData = new MetaDataContainer(MetaDataConst.CategoriesDataTag);
 
-			SearchGroups.AddRange(LoadFromCloudData(MainController.Instance.ServiceConnection.GetCategories(out message)));
+			SearchGroups.AddRange(LoadFromCloudData(MainController.Instance.SoapServiceConnection.GetCategories(out message)));
 
 			int tempInt;
-			if (Int32.TryParse(MainController.Instance.ServiceConnection.GetMetaData(MetaDataConst.CategoriesDataTag, MetaDataConst.MaxTagsPropertyName, out message), out tempInt))
+			if (Int32.TryParse(MainController.Instance.SoapServiceConnection.GetMetaData(MetaDataConst.CategoriesDataTag, MetaDataConst.MaxTagsPropertyName, out message), out tempInt))
 				MaxTags = tempInt;
-			if (Int32.TryParse(MainController.Instance.ServiceConnection.GetMetaData(MetaDataConst.CategoriesDataTag, MetaDataConst.CountTagsPropertyName, out message), out tempInt))
+			if (Int32.TryParse(MainController.Instance.SoapServiceConnection.GetMetaData(MetaDataConst.CategoriesDataTag, MetaDataConst.CountTagsPropertyName, out message), out tempInt))
 				TagCount = tempInt > 0;
 
 			localMetaData.Content = JsonConvert.SerializeObject(this);

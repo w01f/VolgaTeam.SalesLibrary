@@ -68,8 +68,6 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers
 		public bool IsAlive { get; protected set; }
 		#endregion
 
-		public override void BeforeSave() { }
-
 		public override void ResetParent()
 		{
 			Library = null;

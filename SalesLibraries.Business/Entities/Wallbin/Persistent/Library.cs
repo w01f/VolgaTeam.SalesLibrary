@@ -98,15 +98,19 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 
 		public override void BeforeSave()
 		{
-			SettingsEncoded = Settings.Serialize();
-			SyncSettingsEncoded = SyncSettings.Serialize();
-			InactiveLinksEncoded = InactiveLinksSettings.Serialize();
-			ProgramDataEncoded = ProgramData.Serialize();
-			CalendarEncoded = Calendar.Serialize();
-			foreach (var libraryPage in Pages)
-				libraryPage.BeforeSave();
-			foreach (var previewContainer in PreviewContainers)
-				previewContainer.BeforeSave();
+			if (NeedToSave)
+			{
+				SettingsEncoded = Settings.Serialize();
+				SyncSettingsEncoded = SyncSettings.Serialize();
+				InactiveLinksEncoded = InactiveLinksSettings.Serialize();
+				ProgramDataEncoded = ProgramData.Serialize();
+				CalendarEncoded = Calendar.Serialize();
+				foreach (var libraryPage in Pages)
+					libraryPage.BeforeSave();
+				foreach (var previewContainer in PreviewContainers)
+					previewContainer.BeforeSave();
+			}
+			base.BeforeSave();
 		}
 
 		public override void AfterSave()

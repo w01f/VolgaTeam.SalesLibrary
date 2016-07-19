@@ -56,8 +56,11 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 
 		public override void BeforeSave()
 		{
-			foreach (var link in Links)
-				link.BeforeSave();
+			if (NeedToSave)
+			{
+				foreach (var link in Links)
+					link.BeforeSave();
+			}
 			base.BeforeSave();
 		}
 
@@ -125,7 +128,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 					newLinks.Add(fileLink);
 				}
 
-				_settings.ApplyUniverslaLinkSettings(newLinks);
+				((LibraryFolderLinkSettings)Settings).ApplyUniverslaLinkSettings(newLinks);
 			}
 			var linksToRemove = Links.Where(link => !existedPaths.Any(path => path.ToLower().Equals(link.FullPath.ToLower()))).ToList();
 			foreach (var link in linksToRemove)

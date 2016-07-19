@@ -43,8 +43,7 @@ namespace SalesLibraries.CommonGUI.BackgroundProcesses
 				form.Activated += (o, e) => _startFormTrayed = false;
 				RunWithProgress(form, false, process, cancellationToken =>
 				{
-					if (afterComplete != null)
-						afterComplete();
+					afterComplete?.Invoke();
 				});
 			}
 		}
@@ -72,8 +71,7 @@ namespace SalesLibraries.CommonGUI.BackgroundProcesses
 			formProgress.Shown += async (sender, args) =>
 			{
 				await Task.Run(() => process(cancellationTokenSource.Token), cancellationTokenSource.Token);
-				if (afterComplete != null)
-					afterComplete(cancellationTokenSource.Token);
+				afterComplete?.Invoke(cancellationTokenSource.Token);
 				_mainForm.Invoke(new MethodInvoker(formProgress.Close));
 				cancellationTokenSource.Dispose();
 			};
@@ -89,14 +87,12 @@ namespace SalesLibraries.CommonGUI.BackgroundProcesses
 
 		public void SuspendProcess()
 		{
-			if (Suspended != null)
-				Suspended(this, EventArgs.Empty);
+			Suspended?.Invoke(this, EventArgs.Empty);
 		}
 
 		public void ResumeProcess()
 		{
-			if (Resumed != null)
-				Resumed(this, EventArgs.Empty);
+			Resumed?.Invoke(this, EventArgs.Empty);
 		}
 
 		public void RunInQueue(string title, Action process, Action afterComplete = null, bool showProgress = true)
@@ -139,8 +135,7 @@ namespace SalesLibraries.CommonGUI.BackgroundProcesses
 						Application.DoEvents();
 					}));
 				await Task.Run(currentProcess.Process);
-				if (currentProcess.AfterComplete != null)
-					currentProcess.AfterComplete();
+				currentProcess.AfterComplete?.Invoke();
 				PerformQueueProcess();
 			});
 		}

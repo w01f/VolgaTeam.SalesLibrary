@@ -10,21 +10,12 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 	public class LinkWidgetSettings : WidgetSettings
 	{
 		[JsonIgnore]
-		public override WidgetType DefaultWidgetType
-		{
-			get
-			{
-				return ParentFileLink != null ?
-					WidgetType.AutoWidget :
-					WidgetType.NoWidget;
-			}
-		}
+		public override WidgetType DefaultWidgetType => ParentFileLink != null ?
+			WidgetType.AutoWidget :
+			WidgetType.NoWidget;
 
 		[JsonIgnore]
-		protected LibraryFileLink ParentFileLink
-		{
-			get { return Parent as LibraryFileLink; }
-		}
+		protected LibraryFileLink ParentFileLink => Parent as LibraryFileLink;
 
 		public override Image Image
 		{
@@ -49,21 +40,19 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 		}
 
 		[JsonIgnore]
-		public bool HasAutoWidget
-		{
-			get { return AutoWidget != null; }
-		}
+		public bool HasAutoWidget => AutoWidget != null;
 
 		[JsonIgnore]
 		public Image AutoWidget
 		{
 			get
 			{
-				if (ParentFileLink == null) return null;
-				return ParentFileLink.ParentLibrary.Settings.AutoWidgets
-						.Where(autoWidget =>
-							String.Compare(autoWidget.Extension, ParentFileLink.Extension.Replace(".", String.Empty), StringComparison.OrdinalIgnoreCase) == 0)
-						.Select(a => a.DisplayedImage).FirstOrDefault();
+				if (ParentFileLink.IsDead)
+					return null;
+				return ParentFileLink?.ParentLibrary.Settings.AutoWidgets
+					.Where(autoWidget =>
+						String.Compare(autoWidget.Extension, ParentFileLink.Extension.Replace(".", String.Empty), StringComparison.OrdinalIgnoreCase) == 0)
+					.Select(a => a.DisplayedImage).FirstOrDefault();
 			}
 		}
 	}

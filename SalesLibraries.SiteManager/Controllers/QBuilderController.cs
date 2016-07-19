@@ -2,7 +2,7 @@
 using SalesLibraries.SiteManager.BusinessClasses;
 using SalesLibraries.SiteManager.PresentationClasses.QBuilder;
 using SalesLibraries.SiteManager.TabPages;
-using SalesLibraries.ServiceConnector.Services;
+using SalesLibraries.ServiceConnector.Services.Soap;
 
 namespace SalesLibraries.SiteManager.Controllers
 {
@@ -34,7 +34,7 @@ namespace SalesLibraries.SiteManager.Controllers
 			FormMain.Instance.comboBoxEditQBuilderSite.EditValueChanged += (o, e) =>
 			{
 				if (!NeedToUpdate)
-					MainController.Instance.ChangeSite(FormMain.Instance.comboBoxEditQBuilderSite.EditValue as ServiceConnection);
+					MainController.Instance.ChangeSite(FormMain.Instance.comboBoxEditQBuilderSite.EditValue as SoapServiceConnection);
 			};
 			FormMain.Instance.buttonItemQBuilderRefresh.Click += buttonItemQBuilderRefresh_Click;
 			MainController.Instance.SiteChanged += (sender, args) =>

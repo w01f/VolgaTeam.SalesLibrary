@@ -19,7 +19,7 @@ namespace SalesLibraries.Common.Configuration
 				Constants.WebPreviewContainersRootFolderName, 
 				Constants.OvernightsCalendarRootFolderName, 
 				Constants.ProgramManagerRootFolderName, 
-				Constants.StorageFileName, 
+				Constants.LocalStorageFileName, 
 				Constants.LegacyStorageFileName, 
 				Constants.LibrariesJsonFileName, 
 				Constants.ShortLibraryInfoFileName,

@@ -1,4 +1,4 @@
-﻿using SalesLibraries.ServiceConnector.Services;
+﻿using SalesLibraries.ServiceConnector.Services.Soap;
 using SalesLibraries.SiteManager.BusinessClasses;
 using SalesLibraries.SiteManager.PresentationClasses.Utilities;
 using SalesLibraries.SiteManager.TabPages;
@@ -33,7 +33,7 @@ namespace SalesLibraries.SiteManager.Controllers
 			FormMain.Instance.comboBoxEditUtilitiesSite.EditValueChanged += (o, e) =>
 			{
 				if (!NeedToUpdate)
-					MainController.Instance.ChangeSite(FormMain.Instance.comboBoxEditUtilitiesSite.EditValue as ServiceConnection);
+					MainController.Instance.ChangeSite(FormMain.Instance.comboBoxEditUtilitiesSite.EditValue as SoapServiceConnection);
 			};
 			MainController.Instance.SiteChanged += (sender, args) =>
 													   {

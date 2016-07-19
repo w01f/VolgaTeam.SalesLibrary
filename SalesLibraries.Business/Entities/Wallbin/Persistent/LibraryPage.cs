@@ -99,11 +99,15 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 
 		public override void BeforeSave()
 		{
-			SettingsEncoded = Settings.Serialize();
-			foreach (var libraryFolder in Folders)
-				libraryFolder.BeforeSave();
-			foreach (var columnTitle in ColumnTitles)
-				columnTitle.BeforeSave();
+			if (NeedToSave)
+			{
+				SettingsEncoded = Settings.Serialize();
+				foreach (var libraryFolder in Folders)
+					libraryFolder.BeforeSave();
+				foreach (var columnTitle in ColumnTitles)
+					columnTitle.BeforeSave();
+			}
+			base.BeforeSave();
 		}
 
 		public override void AfterSave()

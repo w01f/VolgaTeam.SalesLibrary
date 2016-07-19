@@ -13,15 +13,11 @@ namespace SalesLibraries.Common.Helpers
 	{
 		public const string UserDataFolderName = "user_data";
 
-		private static readonly AppProfileManager _instance = new AppProfileManager();
 		private string _appName;
 		private Guid _appID;
 		private StorageFile _localAppIdFile;
 
-		public static AppProfileManager Instance
-		{
-			get { return _instance; }
-		}
+		public static AppProfileManager Instance { get; } = new AppProfileManager();
 
 		public AppTypeEnum AppType { get; private set; }
 
@@ -37,10 +33,7 @@ namespace SalesLibraries.Common.Helpers
 			}
 		}
 
-		private string ProfileName
-		{
-			get { return String.Format("AppID-{0}", _appID); }
-		}
+		private string ProfileName => String.Format("AppID-{0}", _appID);
 
 		public StorageDirectory ProfilesRootFolder { get; private set; }
 		public StorageDirectory ProfileFolder { get; private set; }

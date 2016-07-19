@@ -27,16 +27,16 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Web.Services.WebServiceBindingAttribute(Name="ContentControllerBinding", Namespace="urn:ContentControllerwsdl")]
-    [System.Xml.Serialization.SoapIncludeAttribute(typeof(UniversalPreviewContainer))]
-    [System.Xml.Serialization.SoapIncludeAttribute(typeof(AutoWidget))]
+    [System.Xml.Serialization.SoapIncludeAttribute(typeof(SoapUniversalPreviewContainer))]
+    [System.Xml.Serialization.SoapIncludeAttribute(typeof(SoapAutoWidget))]
     [System.Xml.Serialization.SoapIncludeAttribute(typeof(UserModel))]
     [System.Xml.Serialization.SoapIncludeAttribute(typeof(GroupModel))]
-    [System.Xml.Serialization.SoapIncludeAttribute(typeof(Column))]
+    [System.Xml.Serialization.SoapIncludeAttribute(typeof(SoapColumn))]
     [System.Xml.Serialization.SoapIncludeAttribute(typeof(LinkCategory))]
     [System.Xml.Serialization.SoapIncludeAttribute(typeof(LinkSuperFilter))]
-    [System.Xml.Serialization.SoapIncludeAttribute(typeof(LibraryLink))]
-    [System.Xml.Serialization.SoapIncludeAttribute(typeof(LibraryFolder))]
-    [System.Xml.Serialization.SoapIncludeAttribute(typeof(LibraryPage))]
+    [System.Xml.Serialization.SoapIncludeAttribute(typeof(SoapLibraryLink))]
+    [System.Xml.Serialization.SoapIncludeAttribute(typeof(SoapLibraryFolder))]
+    [System.Xml.Serialization.SoapIncludeAttribute(typeof(SoapLibraryPage))]
     public partial class ContentControllerService : System.Web.Services.Protocols.SoapHttpClientProtocol {
         
         private System.Threading.SendOrPostCallback mockLibraryOperationCompleted;
@@ -119,18 +119,18 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:ContentControllerwsdl#mockLibrary", RequestNamespace="urn:ContentControllerwsdl", ResponseNamespace="urn:ContentControllerwsdl")]
-        public void mockLibrary(Library library) {
+        public void mockLibrary(SoapLibrary library) {
             this.Invoke("mockLibrary", new object[] {
                         library});
         }
         
         /// <remarks/>
-        public void mockLibraryAsync(Library library) {
+        public void mockLibraryAsync(SoapLibrary library) {
             this.mockLibraryAsync(library, null);
         }
         
         /// <remarks/>
-        public void mockLibraryAsync(Library library, object userState) {
+        public void mockLibraryAsync(SoapLibrary library, object userState) {
             if ((this.mockLibraryOperationCompleted == null)) {
                 this.mockLibraryOperationCompleted = new System.Threading.SendOrPostCallback(this.OnmockLibraryOperationCompleted);
             }
@@ -370,17 +370,17 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:ContentControllerwsdl")]
-    public partial class Library {
+    public partial class SoapLibrary {
         
         private string idField;
         
         private string nameField;
         
-        private LibraryPage[] pagesField;
+        private SoapLibraryPage[] pagesField;
         
-        private AutoWidget[] autoWidgetsField;
+        private SoapAutoWidget[] autoWidgetsField;
         
-        private UniversalPreviewContainer[] previewContainersField;
+        private SoapUniversalPreviewContainer[] previewContainersField;
         
         private bool selectedField;
         
@@ -407,7 +407,7 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         }
         
         /// <remarks/>
-        public LibraryPage[] pages {
+        public SoapLibraryPage[] pages {
             get {
                 return this.pagesField;
             }
@@ -417,7 +417,7 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         }
         
         /// <remarks/>
-        public AutoWidget[] autoWidgets {
+        public SoapAutoWidget[] autoWidgets {
             get {
                 return this.autoWidgetsField;
             }
@@ -427,7 +427,7 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         }
         
         /// <remarks/>
-        public UniversalPreviewContainer[] previewContainers {
+        public SoapUniversalPreviewContainer[] previewContainers {
             get {
                 return this.previewContainersField;
             }
@@ -463,7 +463,7 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:ContentControllerwsdl")]
-    public partial class LibraryPage {
+    public partial class SoapLibraryPage {
         
         private string idField;
         
@@ -475,11 +475,11 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         
         private int orderField;
         
-        private LibraryFolder[] foldersField;
+        private SoapLibraryFolder[] foldersField;
         
         private bool enableColumnsField;
         
-        private Column[] columnsField;
+        private SoapColumn[] columnsField;
         
         private string dateModifyField;
         
@@ -544,7 +544,7 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         }
         
         /// <remarks/>
-        public LibraryFolder[] folders {
+        public SoapLibraryFolder[] folders {
             get {
                 return this.foldersField;
             }
@@ -564,7 +564,7 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         }
         
         /// <remarks/>
-        public Column[] columns {
+        public SoapColumn[] columns {
             get {
                 return this.columnsField;
             }
@@ -640,7 +640,7 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:ContentControllerwsdl")]
-    public partial class LibraryFolder {
+    public partial class SoapLibraryFolder {
         
         private string idField;
         
@@ -674,9 +674,9 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         
         private string widgetField;
         
-        private Banner bannerField;
+        private SoapBanner bannerField;
         
-        private LibraryLink[] filesField;
+        private SoapLibraryLink[] filesField;
         
         private string dateAddField;
         
@@ -843,7 +843,7 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         }
         
         /// <remarks/>
-        public Banner banner {
+        public SoapBanner banner {
             get {
                 return this.bannerField;
             }
@@ -853,7 +853,7 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         }
         
         /// <remarks/>
-        public LibraryLink[] files {
+        public SoapLibraryLink[] files {
             get {
                 return this.filesField;
             }
@@ -2101,7 +2101,7 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:ContentControllerwsdl")]
-    public partial class UniversalPreviewContainer {
+    public partial class SoapUniversalPreviewContainer {
         
         private string idField;
         
@@ -2254,7 +2254,7 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:ContentControllerwsdl")]
-    public partial class AutoWidget {
+    public partial class SoapAutoWidget {
         
         private string libraryIdField;
         
@@ -2329,7 +2329,7 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         
         private bool allGroupsField;
         
-        private Library[] librariesField;
+        private SoapLibrary[] librariesField;
         
         private bool allLibrariesField;
         
@@ -2474,7 +2474,7 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         }
         
         /// <remarks/>
-        public Library[] libraries {
+        public SoapLibrary[] libraries {
             get {
                 return this.librariesField;
             }
@@ -2512,7 +2512,7 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         
         private bool allUsersField;
         
-        private Library[] librariesField;
+        private SoapLibrary[] librariesField;
         
         private string[] libraryIdsField;
         
@@ -2569,7 +2569,7 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         }
         
         /// <remarks/>
-        public Library[] libraries {
+        public SoapLibrary[] libraries {
             get {
                 return this.librariesField;
             }
@@ -2605,7 +2605,7 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:ContentControllerwsdl")]
-    public partial class Column {
+    public partial class SoapColumn {
         
         private string pageIdField;
         
@@ -2629,7 +2629,7 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         
         private string widgetField;
         
-        private Banner bannerField;
+        private SoapBanner bannerField;
         
         private string dateModifyField;
         
@@ -2744,7 +2744,7 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         }
         
         /// <remarks/>
-        public Banner banner {
+        public SoapBanner banner {
             get {
                 return this.bannerField;
             }
@@ -2770,7 +2770,7 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:ContentControllerwsdl")]
-    public partial class Banner {
+    public partial class SoapBanner {
         
         private string idField;
         
@@ -3235,7 +3235,7 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:ContentControllerwsdl")]
-    public partial class LibraryLink {
+    public partial class SoapLibraryLink {
         
         private string idField;
         
@@ -3271,7 +3271,7 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         
         private string widgetField;
         
-        private Banner bannerField;
+        private SoapBanner bannerField;
         
         private string previewIdField;
         
@@ -3460,7 +3460,7 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         }
         
         /// <remarks/>
-        public Banner banner {
+        public SoapBanner banner {
             get {
                 return this.bannerField;
             }

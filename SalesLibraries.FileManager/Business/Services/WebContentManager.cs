@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 using SalesLibraries.Business.Entities.Wallbin.Common.Constants;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings;
+using SalesLibraries.Business.Entities.Wallbin.Persistent;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers;
 using SalesLibraries.Common.Configuration;
@@ -19,10 +20,10 @@ using BaseLinkSettings = SalesLibraries.ServiceConnector.WallbinContentService.B
 using Font = SalesLibraries.ServiceConnector.WallbinContentService.Font;
 using HyperLinkSettings = SalesLibraries.ServiceConnector.WallbinContentService.HyperLinkSettings;
 using InternalLinkSettings = SalesLibraries.ServiceConnector.WallbinContentService.InternalLinkSettings;
-using LineBreak = SalesLibraries.ServiceConnector.WallbinContentService.LineBreak;
 using VideoLinkSettings = SalesLibraries.ServiceConnector.WallbinContentService.VideoLinkSettings;
 using PowerPointLinkSettings = SalesLibraries.ServiceConnector.WallbinContentService.PowerPointLinkSettings;
 using ExcelLinkSettings = SalesLibraries.ServiceConnector.WallbinContentService.ExcelLinkSettings;
+using LineBreak = SalesLibraries.ServiceConnector.WallbinContentService.LineBreak;
 
 namespace SalesLibraries.FileManager.Business.Services
 {
@@ -30,7 +31,7 @@ namespace SalesLibraries.FileManager.Business.Services
 	{
 		public static void GenerateWebContent(SalesLibraries.Business.Entities.Wallbin.Persistent.Library sourceLibrary)
 		{
-			var targetLibrary = new Library();
+			var targetLibrary = new SoapLibrary();
 			targetLibrary.ImportData(sourceLibrary);
 
 			var config = new LibraryConfig();
@@ -39,30 +40,30 @@ namespace SalesLibraries.FileManager.Business.Services
 			targetLibrary.config = config;
 
 			#region Pages
-			var pages = new List<LibraryPage>();
+			var pages = new List<SoapLibraryPage>();
 			foreach (var sourcePage in sourceLibrary.Pages)
 			{
-				var page = new LibraryPage();
+				var page = new SoapLibraryPage();
 				page.ImportData(sourcePage);
 				pages.Add(page);
 			}
 			targetLibrary.pages = pages.ToArray();
 			#endregion
 
-			var autoWidgets = new List<AutoWidget>();
+			var autoWidgets = new List<SoapAutoWidget>();
 			foreach (var sourceAutoWidget in sourceLibrary.Settings.AutoWidgets)
 			{
-				var autoWidget = new AutoWidget();
+				var autoWidget = new SoapAutoWidget();
 				autoWidget.libraryId = sourceLibrary.ExtId.ToString();
 				autoWidget.ImportData(sourceAutoWidget);
 				autoWidgets.Add(autoWidget);
 			}
 			targetLibrary.autoWidgets = autoWidgets.ToArray();
 
-			var previewContainers = new List<UniversalPreviewContainer>();
+			var previewContainers = new List<SoapUniversalPreviewContainer>();
 			foreach (var sourcePreviewContainer in sourceLibrary.PreviewContainers)
 			{
-				var previewContainer = new UniversalPreviewContainer();
+				var previewContainer = new SoapUniversalPreviewContainer();
 				previewContainer.ImportData(sourcePreviewContainer);
 				previewContainers.Add(previewContainer);
 			}
@@ -88,16 +89,16 @@ namespace SalesLibraries.FileManager.Business.Services
 		}
 
 		private static void ImportData(
-			this Library target,
-			SalesLibraries.Business.Entities.Wallbin.Persistent.Library source)
+			this SoapLibrary target,
+			Library source)
 		{
 			target.id = source.ExtId.ToString();
 			target.name = source.Name;
 		}
 
 		private static void ImportData(
-			this LibraryPage target,
-			SalesLibraries.Business.Entities.Wallbin.Persistent.LibraryPage source)
+			this SoapLibraryPage target,
+			LibraryPage source)
 		{
 			target.id = source.ExtId.ToString();
 			target.libraryId = source.Library.ExtId.ToString();
@@ -107,14 +108,14 @@ namespace SalesLibraries.FileManager.Business.Services
 			target.dateModify = source.LastModified.ToString("MM/dd/yyyy hh:mm:ss tt");
 
 			#region Columns
-			var columns = new List<Column>();
+			var columns = new List<SoapColumn>();
 			foreach (var columnTitle in source.ColumnTitles)
 			{
-				var column = new Column();
+				var column = new SoapColumn();
 				column.ImportData(columnTitle);
 
 				#region Banner
-				column.banner = new Banner();
+				column.banner = new SoapBanner();
 				column.banner.libraryId = columnTitle.Page.Library.ToString();
 				column.banner.ImportData(columnTitle.Banner);
 				#endregion
@@ -125,10 +126,10 @@ namespace SalesLibraries.FileManager.Business.Services
 			#endregion
 
 			#region Folders
-			var folders = new List<LibraryFolder>();
+			var folders = new List<SoapLibraryFolder>();
 			foreach (var sourceFolder in source.Folders)
 			{
-				var folder = new LibraryFolder();
+				var folder = new SoapLibraryFolder();
 				folder.ImportData(sourceFolder);
 				folders.Add(folder);
 			}
@@ -137,8 +138,8 @@ namespace SalesLibraries.FileManager.Business.Services
 		}
 
 		private static void ImportData(
-			this LibraryFolder target,
-			SalesLibraries.Business.Entities.Wallbin.Persistent.LibraryFolder source)
+			this SoapLibraryFolder target,
+			LibraryFolder source)
 		{
 			var imageConverter = TypeDescriptor.GetConverter(typeof(Bitmap));
 			target.id = source.ExtId.ToString();
@@ -163,19 +164,19 @@ namespace SalesLibraries.FileManager.Business.Services
 			target.dateModify = source.LastModified.ToString("MM/dd/yyyy hh:mm:ss tt");
 
 			#region Banner
-			target.banner = new Banner();
+			target.banner = new SoapBanner();
 			target.banner.libraryId = source.Page.Library.ExtId.ToString();
 			target.banner.ImportData(source.Banner);
 			#endregion
 
 			#region Files
-			var links = new List<LibraryLink>();
+			var links = new List<SoapLibraryLink>();
 			foreach (var sourceLink in source.AllLinks.Where(link =>
 				!(link is LibraryFileLink && ((LibraryFileLink)link).IsDead) &&
 				!link.Security.IsForbidden &&
 				(!link.Security.IsRestricted || !String.IsNullOrEmpty(link.Security.AssignedUsers) || !String.IsNullOrEmpty(link.Security.DeniedUsers))))
 			{
-				var link = new LibraryLink();
+				var link = new SoapLibraryLink();
 				link.ImportData(sourceLink);
 				links.Add(link);
 			}
@@ -184,7 +185,7 @@ namespace SalesLibraries.FileManager.Business.Services
 		}
 
 		private static void ImportData(
-			this LibraryLink target,
+			this SoapLibraryLink target,
 			BaseLibraryLink source)
 		{
 			var imageConverter = TypeDescriptor.GetConverter(typeof(Bitmap));
@@ -199,7 +200,7 @@ namespace SalesLibraries.FileManager.Business.Services
 			target.widgetType = (Int32)source.Widget.WidgetType;
 			target.widget = source.Widget.Enabled ? Convert.ToBase64String((byte[])imageConverter.ConvertTo(source.Widget.DisplayedImage, typeof(byte[]))) : null;
 
-			target.banner = new Banner();
+			target.banner = new SoapBanner();
 			target.banner.libraryId = source.ParentLibrary.ExtId.ToString();
 			target.banner.ImportData(source.Banner);
 
@@ -419,8 +420,8 @@ namespace SalesLibraries.FileManager.Business.Services
 		}
 
 		private static void ImportData(
-			this Column target,
-			SalesLibraries.Business.Entities.Wallbin.Persistent.ColumnTitle source)
+			this SoapColumn target,
+			ColumnTitle source)
 		{
 			var imageConverter = TypeDescriptor.GetConverter(typeof(Bitmap));
 			target.pageId = source.Page.ExtId.ToString();
@@ -442,7 +443,7 @@ namespace SalesLibraries.FileManager.Business.Services
 		}
 
 		private static void ImportData(
-			this UniversalPreviewContainer target,
+			this SoapUniversalPreviewContainer target,
 			BasePreviewContainer source)
 		{
 			target.id = source.ExtId.ToString();
@@ -507,7 +508,7 @@ namespace SalesLibraries.FileManager.Business.Services
 		}
 
 		private static void ImportData(
-			this Banner target,
+			this SoapBanner target,
 			SalesLibraries.Business.Entities.Wallbin.NonPersistent.BannerSettings source)
 		{
 			var imageConverter = TypeDescriptor.GetConverter(typeof(Bitmap));
@@ -524,7 +525,7 @@ namespace SalesLibraries.FileManager.Business.Services
 		}
 
 		private static void ImportData(
-			this AutoWidget target,
+			this SoapAutoWidget target,
 			SalesLibraries.Business.Entities.Wallbin.NonPersistent.AutoWidget source)
 		{
 			var imageConverter = TypeDescriptor.GetConverter(typeof(Bitmap));

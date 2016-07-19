@@ -124,6 +124,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 
 		protected override void AfterCreate()
 		{
+			base.AfterCreate();
 			if (Font.Unit != GraphicsUnit.Point)
 				Font = new Font(Font.FontFamily, Font.Size, Font.Style, GraphicsUnit.Point);
 		}

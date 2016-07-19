@@ -3,7 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Xml;
 using SalesLibraries.SiteManager.ConfigurationClasses;
-using SalesLibraries.ServiceConnector.Services;
+using SalesLibraries.ServiceConnector.Services.Soap;
 
 namespace SalesLibraries.SiteManager.BusinessClasses
 {
@@ -11,17 +11,17 @@ namespace SalesLibraries.SiteManager.BusinessClasses
 	{
 		private static readonly WebSiteManager _instance = new WebSiteManager();
 
-		private ServiceConnection _selectedSite;
+		private SoapServiceConnection _selectedSite;
 
 		private WebSiteManager()
 		{
-			Sites = new List<ServiceConnection>();
+			Sites = new List<SoapServiceConnection>();
 			Load();
 		}
 
-		public List<ServiceConnection> Sites { get; private set; }
+		public List<SoapServiceConnection> Sites { get; private set; }
 
-		public ServiceConnection SelectedSite
+		public SoapServiceConnection SelectedSite
 		{
 			get { return _selectedSite ?? (_selectedSite = !string.IsNullOrEmpty(SettingsManager.Instance.SelectedSiteName) ? Sites.FirstOrDefault(x => x.Website == SettingsManager.Instance.SelectedSiteName) ?? Sites.FirstOrDefault() : Sites.FirstOrDefault()); }
 		}
@@ -41,10 +41,10 @@ namespace SalesLibraries.SiteManager.BusinessClasses
 			var node = document.SelectSingleNode(@"/Sites");
 			if (node != null)
 				foreach (XmlNode childNode in node.ChildNodes)
-					Sites.Add(new ServiceConnection(childNode));
+					Sites.Add(new SoapServiceConnection(childNode));
 		}
 
-		public void SelectSite(ServiceConnection site)
+		public void SelectSite(SoapServiceConnection site)
 		{
 			if (site == null) return;
 			_selectedSite = site;

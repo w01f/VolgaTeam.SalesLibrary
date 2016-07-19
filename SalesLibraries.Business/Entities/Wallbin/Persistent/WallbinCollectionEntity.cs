@@ -10,8 +10,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 		public override void MarkAsModified()
 		{
 			base.MarkAsModified();
-			if (Parent != null)
-				Parent.MarkAsModified();
+			Parent?.MarkAsModified();
 		}
 	}
 }

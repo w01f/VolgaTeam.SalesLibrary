@@ -20,7 +20,7 @@ namespace SalesLibraries.FileManager.Configuration
 			{
 				DateTime? cloudLastUpdate = null;
 				DateTime tempDate;
-				var dateStr = MainController.Instance.ServiceConnection.GetMetaData(MetaDataConst.SecurityGroupsDataTag, MetaDataConst.LastUpdatePropertyName, out message);
+				var dateStr = MainController.Instance.SoapServiceConnection.GetMetaData(MetaDataConst.SecurityGroupsDataTag, MetaDataConst.LastUpdatePropertyName, out message);
 				if (DateTime.TryParse(dateStr, out tempDate))
 					cloudLastUpdate = tempDate;
 				if (!cloudLastUpdate.HasValue || cloudLastUpdate <= localMetaData.LastUpdate)
@@ -31,7 +31,7 @@ namespace SalesLibraries.FileManager.Configuration
 			}
 			else
 				localMetaData = new MetaDataContainer(MetaDataConst.SecurityGroupsDataTag);
-			_groups.AddRange(MainController.Instance.ServiceConnection.GetSecurityGroups(out message).Select(LibraryGroup.LoadFromCloudData));
+			_groups.AddRange(MainController.Instance.SoapServiceConnection.GetSecurityGroups(out message).Select(LibraryGroup.LoadFromCloudData));
 			localMetaData.Content = JsonConvert.SerializeObject(_groups);
 			localMetaData.Save();
 		}

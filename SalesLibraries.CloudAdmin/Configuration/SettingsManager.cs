@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Xml;
 using SalesLibraries.Common.Configuration;
@@ -42,8 +43,7 @@ namespace SalesLibraries.CloudAdmin.Configuration
 
 		#region Service Connection Settings
 		public string WebServiceSite { get; private set; }
-		public string WebServiceLogin { get; private set; }
-		public string WebServicePassword { get; private set; }
+		public string SiteLibrary { get; private set; }
 		#endregion
 
 		public EditorsSettings EditorSettings { get; private set; }
@@ -190,7 +190,12 @@ namespace SalesLibraries.CloudAdmin.Configuration
 		private void LoadServiceConnectionSettings()
 		{
 			if (!RemoteResourceManager.Instance.SiteFile.ExistsLocal()) return;
-			WebServiceSite = File.ReadAllText(RemoteResourceManager.Instance.SiteFile.LocalPath).Trim();
+			var configLines =File.ReadAllLines(RemoteResourceManager.Instance.SiteFile.LocalPath)
+				.Select(line => line.Trim())
+				.ToList();
+			if(configLines.Count<2) return;
+			WebServiceSite = configLines.ElementAt(0);
+			SiteLibrary = configLines.ElementAt(1);
 		}
 	}
 }

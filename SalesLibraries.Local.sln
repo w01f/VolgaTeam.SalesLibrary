@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesLibraries.FileManager", "SalesLibraries.FileManager\SalesLibraries.FileManager.csproj", "{3223EC26-E88B-4E9A-A8C0-72E49177E3FD}"
 EndProject
@@ -18,6 +18,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesLibraries.SalesDepot", "SalesLibraries.SalesDepot\SalesLibraries.SalesDepot.csproj", "{3E306160-3DF5-48FA-B4D9-F66D5ED1A2D6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesLibraries.CloudAdmin", "SalesLibraries.CloudAdmin\SalesLibraries.CloudAdmin.csproj", "{6BD2F1D1-DE8B-4469-A432-070C4C9B8776}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesLibraries.FileManager.Silent", "SalesLibraries.FileManager.Silent\SalesLibraries.FileManager.Silent.csproj", "{203DC284-E0D5-473B-AB17-186670F89C72}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesLibraries.Cloner", "SalesLibraries.Cloner\SalesLibraries.Cloner.csproj", "{872D4E03-4AF4-4CDF-BB9C-05107B74E255}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,6 +63,14 @@ Global
 		{6BD2F1D1-DE8B-4469-A432-070C4C9B8776}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6BD2F1D1-DE8B-4469-A432-070C4C9B8776}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6BD2F1D1-DE8B-4469-A432-070C4C9B8776}.Release|Any CPU.Build.0 = Release|Any CPU
+		{203DC284-E0D5-473B-AB17-186670F89C72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{203DC284-E0D5-473B-AB17-186670F89C72}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{203DC284-E0D5-473B-AB17-186670F89C72}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{203DC284-E0D5-473B-AB17-186670F89C72}.Release|Any CPU.Build.0 = Release|Any CPU
+		{872D4E03-4AF4-4CDF-BB9C-05107B74E255}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{872D4E03-4AF4-4CDF-BB9C-05107B74E255}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{872D4E03-4AF4-4CDF-BB9C-05107B74E255}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{872D4E03-4AF4-4CDF-BB9C-05107B74E255}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

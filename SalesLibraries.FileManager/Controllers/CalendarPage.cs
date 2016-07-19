@@ -76,7 +76,10 @@ namespace SalesLibraries.FileManager.Controllers
 		{
 			if (!_isDataChanged) return;
 			if (ActiveLibraryContext == null) return;
-			ActiveLibraryContext.SaveChanges();
+			MainController.Instance.ProcessManager.Run("Saving Changes...", cancelationToken =>
+			{
+				ActiveLibraryContext.SaveChanges();
+			});
 			_isDataChanged = false;
 		}
 

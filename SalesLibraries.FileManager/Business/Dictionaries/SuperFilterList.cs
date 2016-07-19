@@ -18,7 +18,7 @@ namespace SalesLibraries.FileManager.Business.Dictionaries
 			{
 				DateTime? cloudLastUpdate = null;
 				DateTime tempDate;
-				var dateStr = MainController.Instance.ServiceConnection.GetMetaData(MetaDataConst.SuperFiltersDataTag, MetaDataConst.LastUpdatePropertyName, out message);
+				var dateStr = MainController.Instance.SoapServiceConnection.GetMetaData(MetaDataConst.SuperFiltersDataTag, MetaDataConst.LastUpdatePropertyName, out message);
 				if (DateTime.TryParse(dateStr, out tempDate))
 					cloudLastUpdate = tempDate;
 				if (!cloudLastUpdate.HasValue || cloudLastUpdate <= localMetaData.LastUpdate)
@@ -30,7 +30,7 @@ namespace SalesLibraries.FileManager.Business.Dictionaries
 			else
 				localMetaData = new MetaDataContainer(MetaDataConst.SuperFiltersDataTag);
 
-			Items.AddRange(MainController.Instance.ServiceConnection.GetSuperFilters(out message).Select(cloudSuperFilter => cloudSuperFilter.value));
+			Items.AddRange(MainController.Instance.SoapServiceConnection.GetSuperFilters(out message).Select(cloudSuperFilter => cloudSuperFilter.value));
 
 			localMetaData.Content = JsonConvert.SerializeObject(Items);
 			localMetaData.Save();

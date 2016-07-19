@@ -32,7 +32,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.Views
 			pnContainer.Dock = DockStyle.Fill;
 			pnEmpty.BringToFront();
 			DataStorage = dataStorage;
-			ProgramSchedule = new ProgramScheduleContext(DataStorage.DataSourcePath);
+			ProgramSchedule = new ProgramScheduleContext(DataStorage.DataSourceFolderPath);
 			Pages = new List<IPageView>();
 		}
 

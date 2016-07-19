@@ -102,7 +102,10 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 
 		public override void BeforeSave()
 		{
-			ExpirationEncoded = ExpirationSettings.Serialize();
+			if (NeedToSave)
+			{
+				ExpirationEncoded = ExpirationSettings.Serialize();
+			}
 			base.BeforeSave();
 		}
 

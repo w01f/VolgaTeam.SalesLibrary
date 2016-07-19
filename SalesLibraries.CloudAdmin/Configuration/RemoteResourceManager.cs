@@ -11,6 +11,7 @@ namespace SalesLibraries.CloudAdmin.Configuration
 
 		#region Local
 		public StorageDirectory MetaDataCacheFolder { get; private set; }
+		public StorageDirectory LocalLibraryCacheFolder { get; private set; }
 		#endregion
 
 		#region Remote
@@ -41,6 +42,18 @@ namespace SalesLibraries.CloudAdmin.Configuration
 					AppProfileManager.Instance.AppNameSet
 				}, "Cache");
 
+			LocalLibraryCacheFolder = new StorageDirectory(new object[]
+			{
+				FileStorageManager.LocalFilesFolderName,
+				AppProfileManager.Instance.AppNameSet,
+				"Library"
+			});
+			if (!await LocalLibraryCacheFolder.Exists())
+				await StorageDirectory.CreateSubFolder(new object[]
+				{
+					FileStorageManager.LocalFilesFolderName,
+					AppProfileManager.Instance.AppNameSet
+				}, "Library");
 			#endregion
 
 			#region Remote

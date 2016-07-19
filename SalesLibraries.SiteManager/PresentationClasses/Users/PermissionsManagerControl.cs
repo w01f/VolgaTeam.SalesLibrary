@@ -22,7 +22,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Users
 	{
 		private readonly List<string> _groupTemplates = new List<string>();
 		private readonly List<GroupModel> _groups = new List<GroupModel>();
-		private readonly List<Library> _libraries = new List<Library>();
+		private readonly List<SoapLibrary> _libraries = new List<SoapLibrary>();
 		private readonly List<UserModel> _users = new List<UserModel>();
 		private bool _complexPassword = true;
 		private bool _groupsCollectionChanged;
@@ -56,7 +56,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Users
 			else if (xtraTabControl.SelectedTabPage == xtraTabPageLibraries)
 			{
 				FormMain.Instance.buttonItemUsersAdd.Enabled = false;
-				FormMain.Instance.buttonItemUsersEdit.Enabled = gridControlPages.FocusedView as GridView != null && ((gridControlPages.FocusedView as GridView).GetFocusedRow() as LibraryPage) != null;
+				FormMain.Instance.buttonItemUsersEdit.Enabled = gridControlPages.FocusedView as GridView != null && ((gridControlPages.FocusedView as GridView).GetFocusedRow() as SoapLibraryPage) != null;
 				FormMain.Instance.buttonItemUsersDelete.Enabled = false;
 			}
 			else
@@ -253,7 +253,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Users
 		public void AddUser()
 		{
 			string message = string.Empty;
-			using (var formEdit = new FormEditUser(true, _complexPassword, _users.Select(x => x.login).ToArray(), _groups.Select(x => new GroupModel { id = x.id, name = x.name }).ToArray(), _libraries.Select(x => new Library { id = x.id, name = x.name, pages = x.pages.Select(y => new LibraryPage { id = y.id, name = y.name, libraryId = y.libraryId }).ToArray() }).ToArray()))
+			using (var formEdit = new FormEditUser(true, _complexPassword, _users.Select(x => x.login).ToArray(), _groups.Select(x => new GroupModel { id = x.id, name = x.name }).ToArray(), _libraries.Select(x => new SoapLibrary { id = x.id, name = x.name, pages = x.pages.Select(y => new SoapLibraryPage { id = y.id, name = y.name, libraryId = y.libraryId }).ToArray() }).ToArray()))
 			{
 				if (formEdit.ShowDialog() == DialogResult.OK)
 				{
@@ -265,7 +265,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Users
 					string phone = formEdit.textEditPhone.EditValue != null ? formEdit.textEditPhone.EditValue.ToString() : string.Empty;
 					int role = 0;
 					var groups = new List<GroupModel>(formEdit.AssignedGroups);
-					var pages = new List<LibraryPage>(formEdit.AssignedPages);
+					var pages = new List<SoapLibraryPage>(formEdit.AssignedPages);
 					using (var form = new FormProgress())
 					{
 						FormMain.Instance.ribbonControl.Enabled = false;
@@ -308,12 +308,12 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Users
 													   name = x.name,
 													   selected = (userRecord.groups != null && userRecord.groups.Any(y => y.id == x.id))
 												   }).ToArray(),
-												   _libraries.Select(x => new Library
+												   _libraries.Select(x => new SoapLibrary
 												   {
 													   id = x.id,
 													   name = x.name,
 													   selected = (userRecord.libraries != null && userRecord.libraries.Any(y => y.id == x.id)),
-													   pages = x.pages.Select(y => new LibraryPage
+													   pages = x.pages.Select(y => new SoapLibraryPage
 													   {
 														   id = y.id,
 														   name = y.name,
@@ -338,7 +338,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Users
 					string phone = formEdit.textEditPhone.EditValue != null ? formEdit.textEditPhone.EditValue.ToString() : string.Empty;
 					var role = 0;
 					var groups = new List<GroupModel>(formEdit.AssignedGroups);
-					var pages = new List<LibraryPage>(formEdit.AssignedPages);
+					var pages = new List<SoapLibraryPage>(formEdit.AssignedPages);
 					using (var form = new FormProgress())
 					{
 						FormMain.Instance.ribbonControl.Enabled = false;
@@ -546,14 +546,14 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Users
 		private void AddGroup()
 		{
 			string message = string.Empty;
-			using (var formEdit = new FormEditGroup(true, _groupTemplates.ToArray(), _groups.Select(x => x.name).ToArray(), _users.Select(x => new UserModel { id = x.id, login = x.login, firstName = x.firstName, lastName = x.lastName, email = x.email }).ToArray(), _libraries.Select(x => new Library { id = x.id, name = x.name, pages = x.pages.Select(y => new LibraryPage { id = y.id, name = y.name, libraryId = y.libraryId }).ToArray() }).ToArray()))
+			using (var formEdit = new FormEditGroup(true, _groupTemplates.ToArray(), _groups.Select(x => x.name).ToArray(), _users.Select(x => new UserModel { id = x.id, login = x.login, firstName = x.firstName, lastName = x.lastName, email = x.email }).ToArray(), _libraries.Select(x => new SoapLibrary { id = x.id, name = x.name, pages = x.pages.Select(y => new SoapLibraryPage { id = y.id, name = y.name, libraryId = y.libraryId }).ToArray() }).ToArray()))
 			{
 				if (formEdit.ShowDialog() == DialogResult.OK)
 				{
 					string id = Guid.NewGuid().ToString();
 					string name = formEdit.comboBoxEditName.EditValue != null ? formEdit.comboBoxEditName.EditValue.ToString() : string.Empty;
 					var users = new List<UserModel>(formEdit.AssignedUsers);
-					var pages = new List<LibraryPage>(formEdit.AssignedPages);
+					var pages = new List<SoapLibraryPage>(formEdit.AssignedPages);
 					using (var form = new FormProgress())
 					{
 						FormMain.Instance.ribbonControl.Enabled = false;
@@ -602,12 +602,12 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Users
 															email = x.email,
 															selected = (groupRecord.users != null && groupRecord.users.Any(y => y.id == x.id))
 														}).ToArray(),
-														_libraries.Select(x => new Library
+														_libraries.Select(x => new SoapLibrary
 														{
 															id = x.id,
 															name = x.name,
 															selected = (groupRecord.libraries != null && groupRecord.libraries.Any(y => y.id == x.id)),
-															pages = x.pages.Select(y => new LibraryPage
+															pages = x.pages.Select(y => new SoapLibraryPage
 															{
 																id = y.id,
 																name = y.name,
@@ -622,7 +622,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Users
 						string id = groupRecord.id;
 						string name = formEdit.comboBoxEditName.EditValue != null ? formEdit.comboBoxEditName.EditValue.ToString() : string.Empty;
 						var users = new List<UserModel>(formEdit.AssignedUsers);
-						var pages = new List<LibraryPage>(formEdit.AssignedPages);
+						var pages = new List<SoapLibraryPage>(formEdit.AssignedPages);
 						using (var form = new FormProgress())
 						{
 							FormMain.Instance.ribbonControl.Enabled = false;
@@ -752,7 +752,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Users
 		private void EditPage()
 		{
 			string message = string.Empty;
-			var pageRecord = gridViewPages.GetFocusedRow() as LibraryPage;
+			var pageRecord = gridViewPages.GetFocusedRow() as SoapLibraryPage;
 			if (pageRecord != null)
 			{
 				using (var formEdit = new FormEditPage(_users.Select(x => new UserModel
@@ -789,9 +789,9 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Users
 														{
 															if (allLibrary)
 															{
-																Library libraray = _libraries.FirstOrDefault(x => x.id.Equals(pageRecord.libraryId));
+																var libraray = _libraries.FirstOrDefault(x => x.id.Equals(pageRecord.libraryId));
 																if (libraray != null)
-																	foreach (LibraryPage page in libraray.pages)
+																	foreach (SoapLibraryPage page in libraray.pages)
 																		WebSiteManager.Instance.SelectedSite.SetPage(page.id, users.ToArray(), groups.ToArray(), out message);
 															}
 															else

@@ -26,14 +26,9 @@ namespace SalesLibraries.CloudAdmin
 			ribbonTabItemSecurity.Visible = MainController.Instance.Settings.EnableSecurityTab;
 		}
 
-		private void FormMain_Shown(object sender, EventArgs e)
+		private void OnFormMainShown(object sender, EventArgs e)
 		{
 			ribbonControl.SelectedRibbonTabChanged += ribbonControl_SelectedRibbonTabChanged;
-		}
-
-		private void FormMain_FormClosing(object sender, System.Windows.Forms.FormClosingEventArgs e)
-		{
-			MainController.Instance.ProcessChanges();
 		}
 
 		private void buttonItemExit_Click(object sender, EventArgs e)

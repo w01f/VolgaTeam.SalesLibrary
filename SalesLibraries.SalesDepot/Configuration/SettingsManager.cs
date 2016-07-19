@@ -17,9 +17,9 @@ namespace SalesLibraries.SalesDepot.Configuration
 
 		public event EventHandler<EventArgs> SettingsChanged;
 
-		public WallbinViewSettings WallbinViewSettings { get; private set; }
-		public WallbinButtonsSettings WallbinButtonsSettings { get; private set; }
-		public CalendarViewSettings CalendarViewSettings { get; private set; }
+		public WallbinViewSettings WallbinViewSettings { get; }
+		public WallbinButtonsSettings WallbinButtonsSettings { get; }
+		public CalendarViewSettings CalendarViewSettings { get; }
 		public ProgramScheduleSettings ProgramScheduleSettings { get; private set; }
 		public EmailBinSettings EmailBinSettings { get; private set; }
 		public LinkLaunchSettings LinkLaunchSettings { get; private set; }
@@ -28,10 +28,7 @@ namespace SalesLibraries.SalesDepot.Configuration
 		public EmailButtonsDisplayOptionsEnum EmailButtons { get; set; }
 		public bool? RunPowerPointWhenNeeded { get; set; }
 
-		public string SalesDepotName
-		{
-			get { return "Sales Libraries"; }
-		}
+		public string SalesDepotName => "Sales Libraries";
 
 		public string OpenFilePath
 		{

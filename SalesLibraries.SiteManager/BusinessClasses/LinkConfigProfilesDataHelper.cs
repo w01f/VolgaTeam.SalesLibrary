@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using SalesLibraries.ServiceConnector.LinkConfigProfileService;
-using SalesLibraries.ServiceConnector.Services;
+using SalesLibraries.ServiceConnector.Services.Soap;
 
 namespace SalesLibraries.SiteManager.BusinessClasses
 {
@@ -15,7 +15,7 @@ namespace SalesLibraries.SiteManager.BusinessClasses
 			SecurityGroups = new List<SecurityGroupReference>();
 		}
 
-		public static void LoadReferences(ServiceConnection site)
+		public static void LoadReferences(SoapServiceConnection site)
 		{
 			Libraries.Clear();
 			Libraries.AddRange(site.GetLibraryReferences());

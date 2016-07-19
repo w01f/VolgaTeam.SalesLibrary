@@ -22,20 +22,20 @@ namespace SalesLibraries.SiteManager.ToolForms
 		private readonly List<string> _existedUsers = new List<string>();
 
 		private readonly List<GroupModel> _groups = new List<GroupModel>();
-		private readonly List<Library> _libraries = new List<Library>();
-		private readonly List<LibraryPage> _pages = new List<LibraryPage>();
+		private readonly List<SoapLibrary> _libraries = new List<SoapLibrary>();
+		private readonly List<SoapLibraryPage> _pages = new List<SoapLibraryPage>();
 
 		public GroupModel[] AssignedGroups
 		{
 			get { return _groups.Where(x => x.selected).ToArray(); }
 		}
 
-		public LibraryPage[] AssignedPages
+		public SoapLibraryPage[] AssignedPages
 		{
 			get { return _pages.Where(x => x.selected).ToArray(); }
 		}
 
-		public FormEditUser(bool newUser, bool complexPassword, string[] existedUsers, GroupModel[] groups, Library[] libraries)
+		public FormEditUser(bool newUser, bool complexPassword, string[] existedUsers, GroupModel[] groups, SoapLibrary[] libraries)
 		{
 			InitializeComponent();
 
@@ -211,7 +211,7 @@ namespace SalesLibraries.SiteManager.ToolForms
 				{
 					if (focussedView.FocusedRowHandle != GridControl.InvalidRowHandle)
 					{
-						var libraray = focussedView.GetFocusedRow() as Library;
+						var libraray = focussedView.GetFocusedRow() as SoapLibrary;
 						if (libraray != null)
 						{
 							foreach (var page in _pages.Where(x => x.libraryId == libraray.id))
@@ -224,8 +224,8 @@ namespace SalesLibraries.SiteManager.ToolForms
 				}
 				else
 				{
-					var libraray = focussedView.SourceRow as Library;
-					var page = focussedView.GetFocusedRow() as LibraryPage;
+					var libraray = focussedView.SourceRow as SoapLibrary;
+					var page = focussedView.GetFocusedRow() as SoapLibraryPage;
 					if (libraray != null && page != null && page.selected)
 					{
 						libraray.selected = page.selected;

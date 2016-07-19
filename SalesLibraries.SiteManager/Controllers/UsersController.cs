@@ -1,5 +1,5 @@
 ﻿using System;
-using SalesLibraries.ServiceConnector.Services;
+using SalesLibraries.ServiceConnector.Services.Soap;
 using SalesLibraries.SiteManager.PresentationClasses.Users;
 using SalesLibraries.SiteManager.TabPages;
 using SalesLibraries.SiteManager.BusinessClasses;
@@ -34,7 +34,7 @@ namespace SalesLibraries.SiteManager.Controllers
 			FormMain.Instance.comboBoxEditUsersSite.EditValueChanged += (o, e) =>
 			{
 				if (!NeedToUpdate)
-					MainController.Instance.ChangeSite(FormMain.Instance.comboBoxEditUsersSite.EditValue as ServiceConnection);
+					MainController.Instance.ChangeSite(FormMain.Instance.comboBoxEditUsersSite.EditValue as SoapServiceConnection);
 			};
 			FormMain.Instance.buttonItemUsersAdd.Click += buttonItemIPadUsersAdd_Click;
 			FormMain.Instance.buttonItemUsersEdit.Click += buttonItemIPadUsersEdit_Click;

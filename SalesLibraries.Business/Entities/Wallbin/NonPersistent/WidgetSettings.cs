@@ -64,22 +64,13 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 		}
 
 		[JsonIgnore]
-		public bool Enabled
-		{
-			get { return _widgetType == WidgetType.CustomWidget; }
-		}
+		public bool Enabled => _widgetType == WidgetType.CustomWidget;
 
 		[JsonIgnore]
-		public bool Disabled
-		{
-			get { return _widgetType == WidgetType.NoWidget; }
-		}
+		public bool Disabled => _widgetType == WidgetType.NoWidget;
 
 		[JsonIgnore]
-		public virtual WidgetType DefaultWidgetType
-		{
-			get { return WidgetType.NoWidget; }
-		}
+		public virtual WidgetType DefaultWidgetType => WidgetType.NoWidget;
 
 		protected override void AfterConstruction()
 		{

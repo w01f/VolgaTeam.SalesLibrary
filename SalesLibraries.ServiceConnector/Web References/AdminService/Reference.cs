@@ -27,15 +27,15 @@ namespace SalesLibraries.ServiceConnector.AdminService {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Web.Services.WebServiceBindingAttribute(Name="AdminControllerBinding", Namespace="urn:AdminControllerwsdl")]
-    [System.Xml.Serialization.SoapIncludeAttribute(typeof(UniversalPreviewContainer))]
-    [System.Xml.Serialization.SoapIncludeAttribute(typeof(AutoWidget))]
-    [System.Xml.Serialization.SoapIncludeAttribute(typeof(Column))]
+    [System.Xml.Serialization.SoapIncludeAttribute(typeof(SoapUniversalPreviewContainer))]
+    [System.Xml.Serialization.SoapIncludeAttribute(typeof(SoapAutoWidget))]
+    [System.Xml.Serialization.SoapIncludeAttribute(typeof(SoapColumn))]
     [System.Xml.Serialization.SoapIncludeAttribute(typeof(LinkCategory))]
     [System.Xml.Serialization.SoapIncludeAttribute(typeof(LinkSuperFilter))]
-    [System.Xml.Serialization.SoapIncludeAttribute(typeof(LibraryLink))]
-    [System.Xml.Serialization.SoapIncludeAttribute(typeof(LibraryFolder))]
-    [System.Xml.Serialization.SoapIncludeAttribute(typeof(LibraryPage))]
-    [System.Xml.Serialization.SoapIncludeAttribute(typeof(Library))]
+    [System.Xml.Serialization.SoapIncludeAttribute(typeof(SoapLibraryLink))]
+    [System.Xml.Serialization.SoapIncludeAttribute(typeof(SoapLibraryFolder))]
+    [System.Xml.Serialization.SoapIncludeAttribute(typeof(SoapLibraryPage))]
+    [System.Xml.Serialization.SoapIncludeAttribute(typeof(SoapLibrary))]
     [System.Xml.Serialization.SoapIncludeAttribute(typeof(UserModel))]
     [System.Xml.Serialization.SoapIncludeAttribute(typeof(GroupModel))]
     public partial class AdminControllerService : System.Web.Services.Protocols.SoapHttpClientProtocol {
@@ -135,7 +135,7 @@ namespace SalesLibraries.ServiceConnector.AdminService {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:AdminControllerwsdl#setUser", RequestNamespace="urn:AdminControllerwsdl", ResponseNamespace="urn:AdminControllerwsdl")]
-        public void setUser(string sessionKey, string login, string password, string firstName, string lastName, string email, string phone, GroupModel[] assignedGroups, LibraryPage[] assignedPages, int role) {
+        public void setUser(string sessionKey, string login, string password, string firstName, string lastName, string email, string phone, GroupModel[] assignedGroups, SoapLibraryPage[] assignedPages, int role) {
             this.Invoke("setUser", new object[] {
                         sessionKey,
                         login,
@@ -150,12 +150,12 @@ namespace SalesLibraries.ServiceConnector.AdminService {
         }
         
         /// <remarks/>
-        public void setUserAsync(string sessionKey, string login, string password, string firstName, string lastName, string email, string phone, GroupModel[] assignedGroups, LibraryPage[] assignedPages, int role) {
+        public void setUserAsync(string sessionKey, string login, string password, string firstName, string lastName, string email, string phone, GroupModel[] assignedGroups, SoapLibraryPage[] assignedPages, int role) {
             this.setUserAsync(sessionKey, login, password, firstName, lastName, email, phone, assignedGroups, assignedPages, role, null);
         }
         
         /// <remarks/>
-        public void setUserAsync(string sessionKey, string login, string password, string firstName, string lastName, string email, string phone, GroupModel[] assignedGroups, LibraryPage[] assignedPages, int role, object userState) {
+        public void setUserAsync(string sessionKey, string login, string password, string firstName, string lastName, string email, string phone, GroupModel[] assignedGroups, SoapLibraryPage[] assignedPages, int role, object userState) {
             if ((this.setUserOperationCompleted == null)) {
                 this.setUserOperationCompleted = new System.Threading.SendOrPostCallback(this.OnsetUserOperationCompleted);
             }
@@ -271,7 +271,7 @@ namespace SalesLibraries.ServiceConnector.AdminService {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:AdminControllerwsdl#setGroup", RequestNamespace="urn:AdminControllerwsdl", ResponseNamespace="urn:AdminControllerwsdl")]
-        public void setGroup(string sessionKey, string id, string name, UserModel[] assignedUsers, LibraryPage[] assignedPages) {
+        public void setGroup(string sessionKey, string id, string name, UserModel[] assignedUsers, SoapLibraryPage[] assignedPages) {
             this.Invoke("setGroup", new object[] {
                         sessionKey,
                         id,
@@ -281,12 +281,12 @@ namespace SalesLibraries.ServiceConnector.AdminService {
         }
         
         /// <remarks/>
-        public void setGroupAsync(string sessionKey, string id, string name, UserModel[] assignedUsers, LibraryPage[] assignedPages) {
+        public void setGroupAsync(string sessionKey, string id, string name, UserModel[] assignedUsers, SoapLibraryPage[] assignedPages) {
             this.setGroupAsync(sessionKey, id, name, assignedUsers, assignedPages, null);
         }
         
         /// <remarks/>
-        public void setGroupAsync(string sessionKey, string id, string name, UserModel[] assignedUsers, LibraryPage[] assignedPages, object userState) {
+        public void setGroupAsync(string sessionKey, string id, string name, UserModel[] assignedUsers, SoapLibraryPage[] assignedPages, object userState) {
             if ((this.setGroupOperationCompleted == null)) {
                 this.setGroupOperationCompleted = new System.Threading.SendOrPostCallback(this.OnsetGroupOperationCompleted);
             }
@@ -402,10 +402,10 @@ namespace SalesLibraries.ServiceConnector.AdminService {
         /// <remarks/>
         [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:AdminControllerwsdl#getLibraries", RequestNamespace="urn:AdminControllerwsdl", ResponseNamespace="urn:AdminControllerwsdl")]
         [return: System.Xml.Serialization.SoapElementAttribute("return")]
-        public Library[] getLibraries(string sessionKey) {
+        public SoapLibrary[] getLibraries(string sessionKey) {
             object[] results = this.Invoke("getLibraries", new object[] {
                         sessionKey});
-            return ((Library[])(results[0]));
+            return ((SoapLibrary[])(results[0]));
         }
         
         /// <remarks/>
@@ -528,7 +528,7 @@ namespace SalesLibraries.ServiceConnector.AdminService {
         
         private bool allUsersField;
         
-        private Library[] librariesField;
+        private SoapLibrary[] librariesField;
         
         private string[] libraryIdsField;
         
@@ -585,7 +585,7 @@ namespace SalesLibraries.ServiceConnector.AdminService {
         }
         
         /// <remarks/>
-        public Library[] libraries {
+        public SoapLibrary[] libraries {
             get {
                 return this.librariesField;
             }
@@ -651,7 +651,7 @@ namespace SalesLibraries.ServiceConnector.AdminService {
         
         private bool allGroupsField;
         
-        private Library[] librariesField;
+        private SoapLibrary[] librariesField;
         
         private bool allLibrariesField;
         
@@ -796,7 +796,7 @@ namespace SalesLibraries.ServiceConnector.AdminService {
         }
         
         /// <remarks/>
-        public Library[] libraries {
+        public SoapLibrary[] libraries {
             get {
                 return this.librariesField;
             }
@@ -822,17 +822,17 @@ namespace SalesLibraries.ServiceConnector.AdminService {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:AdminControllerwsdl")]
-    public partial class Library {
+    public partial class SoapLibrary {
         
         private string idField;
         
         private string nameField;
         
-        private LibraryPage[] pagesField;
+        private SoapLibraryPage[] pagesField;
         
-        private AutoWidget[] autoWidgetsField;
+        private SoapAutoWidget[] autoWidgetsField;
         
-        private UniversalPreviewContainer[] previewContainersField;
+        private SoapUniversalPreviewContainer[] previewContainersField;
         
         private bool selectedField;
         
@@ -859,7 +859,7 @@ namespace SalesLibraries.ServiceConnector.AdminService {
         }
         
         /// <remarks/>
-        public LibraryPage[] pages {
+        public SoapLibraryPage[] pages {
             get {
                 return this.pagesField;
             }
@@ -869,7 +869,7 @@ namespace SalesLibraries.ServiceConnector.AdminService {
         }
         
         /// <remarks/>
-        public AutoWidget[] autoWidgets {
+        public SoapAutoWidget[] autoWidgets {
             get {
                 return this.autoWidgetsField;
             }
@@ -879,7 +879,7 @@ namespace SalesLibraries.ServiceConnector.AdminService {
         }
         
         /// <remarks/>
-        public UniversalPreviewContainer[] previewContainers {
+        public SoapUniversalPreviewContainer[] previewContainers {
             get {
                 return this.previewContainersField;
             }
@@ -915,7 +915,7 @@ namespace SalesLibraries.ServiceConnector.AdminService {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:AdminControllerwsdl")]
-    public partial class LibraryPage {
+    public partial class SoapLibraryPage {
         
         private string idField;
         
@@ -927,11 +927,11 @@ namespace SalesLibraries.ServiceConnector.AdminService {
         
         private int orderField;
         
-        private LibraryFolder[] foldersField;
+        private SoapLibraryFolder[] foldersField;
         
         private bool enableColumnsField;
         
-        private Column[] columnsField;
+        private SoapColumn[] columnsField;
         
         private string dateModifyField;
         
@@ -996,7 +996,7 @@ namespace SalesLibraries.ServiceConnector.AdminService {
         }
         
         /// <remarks/>
-        public LibraryFolder[] folders {
+        public SoapLibraryFolder[] folders {
             get {
                 return this.foldersField;
             }
@@ -1016,7 +1016,7 @@ namespace SalesLibraries.ServiceConnector.AdminService {
         }
         
         /// <remarks/>
-        public Column[] columns {
+        public SoapColumn[] columns {
             get {
                 return this.columnsField;
             }
@@ -1092,7 +1092,7 @@ namespace SalesLibraries.ServiceConnector.AdminService {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:AdminControllerwsdl")]
-    public partial class LibraryFolder {
+    public partial class SoapLibraryFolder {
         
         private string idField;
         
@@ -1126,9 +1126,9 @@ namespace SalesLibraries.ServiceConnector.AdminService {
         
         private string widgetField;
         
-        private Banner bannerField;
+        private SoapBanner bannerField;
         
-        private LibraryLink[] filesField;
+        private SoapLibraryLink[] filesField;
         
         private string dateAddField;
         
@@ -1295,7 +1295,7 @@ namespace SalesLibraries.ServiceConnector.AdminService {
         }
         
         /// <remarks/>
-        public Banner banner {
+        public SoapBanner banner {
             get {
                 return this.bannerField;
             }
@@ -1305,7 +1305,7 @@ namespace SalesLibraries.ServiceConnector.AdminService {
         }
         
         /// <remarks/>
-        public LibraryLink[] files {
+        public SoapLibraryLink[] files {
             get {
                 return this.filesField;
             }
@@ -1491,7 +1491,7 @@ namespace SalesLibraries.ServiceConnector.AdminService {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:AdminControllerwsdl")]
-    public partial class UniversalPreviewContainer {
+    public partial class SoapUniversalPreviewContainer {
         
         private string idField;
         
@@ -1644,7 +1644,7 @@ namespace SalesLibraries.ServiceConnector.AdminService {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:AdminControllerwsdl")]
-    public partial class AutoWidget {
+    public partial class SoapAutoWidget {
         
         private string libraryIdField;
         
@@ -1689,7 +1689,7 @@ namespace SalesLibraries.ServiceConnector.AdminService {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:AdminControllerwsdl")]
-    public partial class Column {
+    public partial class SoapColumn {
         
         private string pageIdField;
         
@@ -1713,7 +1713,7 @@ namespace SalesLibraries.ServiceConnector.AdminService {
         
         private string widgetField;
         
-        private Banner bannerField;
+        private SoapBanner bannerField;
         
         private string dateModifyField;
         
@@ -1828,7 +1828,7 @@ namespace SalesLibraries.ServiceConnector.AdminService {
         }
         
         /// <remarks/>
-        public Banner banner {
+        public SoapBanner banner {
             get {
                 return this.bannerField;
             }
@@ -1854,7 +1854,7 @@ namespace SalesLibraries.ServiceConnector.AdminService {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:AdminControllerwsdl")]
-    public partial class Banner {
+    public partial class SoapBanner {
         
         private string idField;
         
@@ -2085,88 +2085,7 @@ namespace SalesLibraries.ServiceConnector.AdminService {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:AdminControllerwsdl")]
-    public partial class LineBreak {
-        
-        private string idField;
-        
-        private string libraryIdField;
-        
-        private Font fontField;
-        
-        private string foreColorField;
-        
-        private string noteField;
-        
-        private string dateModifyField;
-        
-        /// <remarks/>
-        public string id {
-            get {
-                return this.idField;
-            }
-            set {
-                this.idField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string libraryId {
-            get {
-                return this.libraryIdField;
-            }
-            set {
-                this.libraryIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public Font font {
-            get {
-                return this.fontField;
-            }
-            set {
-                this.fontField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string foreColor {
-            get {
-                return this.foreColorField;
-            }
-            set {
-                this.foreColorField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string note {
-            get {
-                return this.noteField;
-            }
-            set {
-                this.noteField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string dateModify {
-            get {
-                return this.dateModifyField;
-            }
-            set {
-                this.dateModifyField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:AdminControllerwsdl")]
-    public partial class LinkSettings {
+    public partial class BaseLinkSettings {
         
         private string noteField;
         
@@ -2191,8 +2110,6 @@ namespace SalesLibraries.ServiceConnector.AdminService {
         private string assignedUsersField;
         
         private string deniedUsersField;
-        
-        private bool forcePreviewField;
         
         /// <remarks/>
         public string note {
@@ -2313,16 +2230,6 @@ namespace SalesLibraries.ServiceConnector.AdminService {
                 this.deniedUsersField = value;
             }
         }
-        
-        /// <remarks/>
-        public bool forcePreview {
-            get {
-                return this.forcePreviewField;
-            }
-            set {
-                this.forcePreviewField = value;
-            }
-        }
     }
     
     /// <remarks/>
@@ -2331,7 +2238,7 @@ namespace SalesLibraries.ServiceConnector.AdminService {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:AdminControllerwsdl")]
-    public partial class LibraryLink {
+    public partial class SoapLibraryLink {
         
         private string idField;
         
@@ -2359,15 +2266,13 @@ namespace SalesLibraries.ServiceConnector.AdminService {
         
         private int typeField;
         
-        private LinkSettings extendedPropertiesField;
-        
-        private LineBreak lineBreakPropertiesField;
+        private BaseLinkSettings extendedPropertiesField;
         
         private int widgetTypeField;
         
         private string widgetField;
         
-        private Banner bannerField;
+        private SoapBanner bannerField;
         
         private string previewIdField;
         
@@ -2516,22 +2421,12 @@ namespace SalesLibraries.ServiceConnector.AdminService {
         }
         
         /// <remarks/>
-        public LinkSettings extendedProperties {
+        public BaseLinkSettings extendedProperties {
             get {
                 return this.extendedPropertiesField;
             }
             set {
                 this.extendedPropertiesField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public LineBreak lineBreakProperties {
-            get {
-                return this.lineBreakPropertiesField;
-            }
-            set {
-                this.lineBreakPropertiesField = value;
             }
         }
         
@@ -2556,7 +2451,7 @@ namespace SalesLibraries.ServiceConnector.AdminService {
         }
         
         /// <remarks/>
-        public Banner banner {
+        public SoapBanner banner {
             get {
                 return this.bannerField;
             }
@@ -2762,10 +2657,10 @@ namespace SalesLibraries.ServiceConnector.AdminService {
         }
         
         /// <remarks/>
-        public Library[] Result {
+        public SoapLibrary[] Result {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((Library[])(this.results[0]));
+                return ((SoapLibrary[])(this.results[0]));
             }
         }
     }

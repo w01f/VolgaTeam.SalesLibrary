@@ -36,12 +36,12 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 			}
 		}
 
-		public BaseWallbin()
+		protected BaseWallbin()
 		{
 			InitializeComponent();
 		}
 
-		public BaseWallbin(LibraryContext dataStorage)
+		protected BaseWallbin(LibraryContext dataStorage)
 		{
 			InitializeComponent();
 			Dock = DockStyle.Fill;
@@ -91,8 +91,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 			Pages.ForEach(p => p.DisposePage());
 			Pages.Clear();
 			ActivePage = null;
-			if (TagInfoControl != null)
-				TagInfoControl.ReleaseControl();
+			TagInfoControl?.ReleaseControl();
 		}
 
 		public void SaveData()
@@ -100,7 +99,10 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 			MainController.Instance.WallbinViews.Selection.Reset();
 			CorruptedLinksHelper.DeleteCorruptedLinks(DataStorage.Library);
 			if (!IsDataChanged) return;
-			DataStorage.SaveChanges();
+			MainController.Instance.ProcessManager.Run("Saving Changes...", cancelationToken =>
+			{
+				DataStorage.SaveChanges();
+			});
 			IsDataChanged = false;
 		}
 

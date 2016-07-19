@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using SalesLibraries.Business.Contexts.Wallbin;
+using SalesLibraries.Business.Contexts.Wallbin.Cloud;
 using SalesLibraries.CloudAdmin.Business.Services;
 using SalesLibraries.CloudAdmin.Configuration;
 using SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views;
@@ -13,7 +13,11 @@ using SalesLibraries.Common.Helpers;
 using SalesLibraries.Common.Objects.RemoteStorage;
 using SalesLibraries.CommonGUI.BackgroundProcesses;
 using SalesLibraries.CommonGUI.Common;
-using SalesLibraries.ServiceConnector.Services;
+using SalesLibraries.ServiceConnector.Models.Rest.Common;
+using SalesLibraries.ServiceConnector.Models.Rest.Connection;
+using SalesLibraries.ServiceConnector.Models.Rest.Wallbin;
+using SalesLibraries.ServiceConnector.Services.Rest;
+using SalesLibraries.ServiceConnector.Services.Soap;
 
 namespace SalesLibraries.CloudAdmin.Controllers
 {
@@ -26,8 +30,10 @@ namespace SalesLibraries.CloudAdmin.Controllers
 
 		public SettingsManager Settings { get; }
 		public ListManager Lists { get; }
-		public ServiceConnection ServiceConnection { get; }
-		public WallbinManager Wallbin { get; private set; }
+		public AuthManager AuthManager { get; }
+		public SoapServiceConnection SoapServiceConnection { get; }
+		public RestServiceConnection RestServiceConnection { get; }
+		public CloudWallbinManager Wallbin { get; private set; }
 		public HelpManager HelpManager { get; }
 
 		public ViewManager WallbinViews { get; }
@@ -46,8 +52,10 @@ namespace SalesLibraries.CloudAdmin.Controllers
 		{
 			Settings = new SettingsManager();
 			Lists = new ListManager();
-			ServiceConnection = new ServiceConnection();
-			Wallbin = new WallbinManager();
+			AuthManager = new AuthManager();
+			SoapServiceConnection = new SoapServiceConnection();
+			RestServiceConnection = new RestServiceConnection();
+			Wallbin = new CloudWallbinManager(RestServiceConnection);
 			HelpManager = new HelpManager();
 			WallbinViews = new ViewManager();
 			MainForm = new FormMain();
@@ -84,9 +92,8 @@ namespace SalesLibraries.CloudAdmin.Controllers
 
 			FileStorageManager.Instance.Authorizing += (o, e) =>
 			{
-				var authManager = new AuthManager();
-				authManager.Init();
-				authManager.Auth(e);
+				AuthManager.Init();
+				AuthManager.Auth(e);
 			};
 
 			ProcessManager.RunStartProcess(
@@ -95,8 +102,7 @@ namespace SalesLibraries.CloudAdmin.Controllers
 
 			if (stopRun) return;
 
-			var appReady = FileStorageManager.Instance.Activated;
-			if (appReady)
+			if (FileStorageManager.Instance.Activated)
 			{
 				var progressTitle = String.Empty;
 				switch (FileStorageManager.Instance.DataState)
@@ -115,31 +121,97 @@ namespace SalesLibraries.CloudAdmin.Controllers
 				ProcessManager.RunStartProcess(
 					progressTitle,
 					cancellationToken => AsyncHelper.RunSync(InitBusinessObjects));
+			}
+			else
+			{
+				PopupMessages.ShowWarning("This app is not activated. Contact adSALESapps Support (help@adSALESapps.com)");
+				return;
+			}
 
-				MainForm.Shown += (o, e) =>
+			RestResponse connectionResponce = null;
+			ProcessManager.RunStartProcess(
+					String.Format("Connecting to {0}", Settings.SiteLibrary),
+					cancellationToken =>
+					{
+						connectionResponce = RestServiceConnection.DoRequest(new ConnectionGetRequestData
+						{
+							RequestType = ConnectionRequestType.Connect,
+							LibraryName = Settings.SiteLibrary,
+							UserName = AuthManager.Settings.Login
+						});
+					});
+			if (connectionResponce == null)
+			{
+				PopupMessages.ShowWarning("Connection Error. Contact adSALESapps Support (help@adSALESapps.com)");
+				return;
+			}
+			if (connectionResponce.Result == ResponseResult.Error)
+			{
+				var error = connectionResponce.GetData<RestError>();
+				PopupMessages.ShowWarning(error.Message);
+				return;
+			}
+			var connectionInfo = connectionResponce.GetData<ConnectionInfo>();
+			if (connectionInfo.State == ConnectionState.Busy)
+			{
+				PopupMessages.ShowWarning(
+					String.Format("The library {0} is busy by user: {1}",
+						Settings.SiteLibrary,
+						connectionInfo.User
+						));
+				return;
+			}
+
+			var libraryLoaded = false;
+			ProcessManager.RunStartProcess(
+					"Loading Library",
+					cancellationToken =>
+					{
+						try
+						{
+							Wallbin.Init(connectionInfo, Configuration.RemoteResourceManager.Instance.LocalLibraryCacheFolder.LocalPath);
+							Wallbin.CheckoutData();
+							libraryLoaded = true;
+						}
+						catch (CloudLibraryException ex)
+						{
+							PopupMessages.ShowWarning(ex.ServiceErrorMessage);
+						}
+					});
+			if (!libraryLoaded)
+				return;
+
+			MainForm.Shown += (o, e) =>
 				{
 					MainForm.InitForm();
 					LoadControllers();
 
-					LoadData();
 					ProcessManager.RunInQueue("Loading Wallbin...",
 						() => MainForm.Invoke(new MethodInvoker(() => WallbinViews.Load())),
 						() => MainForm.Invoke(new MethodInvoker(() => ShowTab(TabPageEnum.Home))));
 				};
-				Application.Run(MainForm);
-			}
-
-			if (!appReady)
-				PopupMessages.ShowWarning("This app is not activated. Contact adSALESapps Support (help@adSALESapps.com)");
-		}
-
-		public void ReloadData()
-		{
-			MainForm.pnContainer.Controls.Clear();
-			LoadData();
-			ProcessManager.RunInQueue("Loading Wallbin...",
-				() => MainForm.Invoke(new MethodInvoker(() => WallbinViews.Load())),
-				() => MainForm.Invoke(new MethodInvoker(() => ShowTab())));
+			MainForm.Closing += (o, e) =>
+				  {
+					  ProcessChanges();
+					  ProcessManager.RunStartProcess(
+						  String.Format("Syncing changes with {0}", Settings.SiteLibrary),
+						  cancellationToken =>
+						  {
+							  Wallbin.CheckinData();
+						  });
+					  ProcessManager.RunStartProcess(
+						  String.Format("Closing Connection to {0}", Settings.SiteLibrary),
+						  cancellationToken =>
+						  {
+							  connectionResponce = RestServiceConnection.DoRequest(new ConnectionGetRequestData
+							  {
+								  RequestType = ConnectionRequestType.Disconnect,
+								  LibraryName = Settings.SiteLibrary,
+								  UserName = AuthManager.Settings.Login
+							  });
+						  });
+				  };
+			Application.Run(MainForm);
 		}
 
 		public void ReloadWallbinViews()
@@ -190,36 +262,32 @@ namespace SalesLibraries.CloudAdmin.Controllers
 			await Configuration.RemoteResourceManager.Instance.Load();
 
 			Settings.Load();
-			ServiceConnection.Load(Settings.WebServiceSite);
+			SoapServiceConnection.Load(Settings.WebServiceSite);
+			RestServiceConnection.Load(Settings.WebServiceSite);
 			Lists.Load();
 			HelpManager.LoadHelpLinks();
 
 			await FileStorageManager.Instance.FixDataState();
 		}
 
-		private void LoadData()
-		{
-			//ProcessManager.Run("Loading Files...", cancelationToken => Wallbin.LoadLibrary(Settings.BackupPath));
-		}
-
 		private void LoadControllers()
 		{
 			_tabPages.Clear();
-			//TabWallbin = new WallbinPage();
-			//_tabPages.Add(TabPageEnum.Home, TabWallbin);
-			//_tabPages.Add(TabPageEnum.Tags, TabWallbin);
-			//_tabPages.Add(TabPageEnum.Security, TabWallbin);
-			//_tabPages.Add(TabPageEnum.Preferences, TabWallbin);
-			//_tabPages.Add(TabPageEnum.Settings, TabWallbin);
+			TabWallbin = new WallbinPage();
+			_tabPages.Add(TabPageEnum.Home, TabWallbin);
+			_tabPages.Add(TabPageEnum.Tags, TabWallbin);
+			_tabPages.Add(TabPageEnum.Security, TabWallbin);
+			_tabPages.Add(TabPageEnum.Preferences, TabWallbin);
+			_tabPages.Add(TabPageEnum.Settings, TabWallbin);
 
 			//TabVideo = new VideoPage();
 			//_tabPages.Add(TabPageEnum.VideoManager, TabVideo);
 
-			//ProcessManager.Run("Loading Controls...", cancelationToken => MainForm.Invoke(new MethodInvoker(() =>
-			//{
-			//	TabWallbin.InitController();
-			//	TabVideo.InitController();
-			//})));
+			ProcessManager.Run("Loading Controls...", cancelationToken => MainForm.Invoke(new MethodInvoker(() =>
+			{
+				TabWallbin.InitController();
+				//TabVideo.InitController();
+			})));
 		}
 	}
 }

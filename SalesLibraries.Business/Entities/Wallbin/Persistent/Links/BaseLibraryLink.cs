@@ -222,11 +222,15 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 
 		public override void BeforeSave()
 		{
-			SettingsEncoded = Settings.Serialize();
-			SecurityEncoded = Security.Serialize();
-			TagsEncoded = Tags.Serialize();
-			WidgetEncoded = Widget.Serialize();
-			BannerEncoded = Banner.Serialize();
+			if (NeedToSave)
+			{
+				SettingsEncoded = Settings.Serialize();
+				SecurityEncoded = Security.Serialize();
+				TagsEncoded = Tags.Serialize();
+				WidgetEncoded = Widget.Serialize();
+				BannerEncoded = Banner.Serialize();
+			}
+			base.BeforeSave();
 		}
 
 		public override void AfterSave()
@@ -247,8 +251,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		{
 			if (fullDelete)
 				Delete(ParentLibrary.Context);
-			if (Folder != null)
-				Folder.Links.RemoveItem(this);
+			Folder?.Links.RemoveItem(this);
 			ResetParent();
 		}
 

@@ -81,6 +81,7 @@ namespace SalesLibraries.Business.Entities.Helpers
 		public static void InsertItem<TItem>(this IList<TItem> targetCollection, TItem targetItem, int position, Func<TItem, bool> filterCondition = null)
 			where TItem : class, ICollectionItem
 		{
+			targetCollection.ResetItemsOrder(filterCondition);
 			for (var i = position; i < targetCollection.Count; i++)
 				targetCollection[i].CollectionOrder += 1;
 			targetItem.CollectionOrder = position;
@@ -92,6 +93,7 @@ namespace SalesLibraries.Business.Entities.Helpers
 		public static void ChangeItemPosition<TItem>(this IList<TItem> targetCollection, TItem targetItem, int newPosition, Func<TItem, bool> filterCondition = null)
 			where TItem : class, ICollectionItem
 		{
+			targetCollection.ResetItemsOrder(filterCondition);
 			for (var i = newPosition; i < targetCollection.Count; i++)
 				targetCollection[i].CollectionOrder += 1;
 			targetItem.CollectionOrder = newPosition;
@@ -102,8 +104,7 @@ namespace SalesLibraries.Business.Entities.Helpers
 		public static void RemoveItem<TItem>(this ICollection<TItem> targetCollection, TItem targetItem, Func<TItem, bool> filterCondition = null)
 			where TItem : class, ICollectionItem
 		{
-			if (targetItem.Parent != null)
-				targetItem.Parent.MarkAsModified();
+			targetItem.Parent?.MarkAsModified();
 			targetCollection.Remove(targetItem);
 			targetCollection.ResetItemsOrder(filterCondition);
 		}

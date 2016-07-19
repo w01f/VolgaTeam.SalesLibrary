@@ -1,5 +1,8 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Runtime.Serialization;
+using Newtonsoft.Json;
 using SalesLibraries.Business.Contexts.Wallbin;
 using SalesLibraries.Business.Entities.Interfaces;
 
@@ -14,10 +17,23 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 		[Required]
 		public DateTime LastModified { get; set; }
 		#endregion
+
+		#region Non Persistent Properties
+		[NotMapped, JsonIgnore]
+		public bool AllowToHandleChanges { get; set; }
+		[NotMapped, JsonIgnore]
+		protected bool NeedToSave { get; set; }
+		#endregion
+
 		protected WallbinEntity()
 		{
 			ExtId = Guid.NewGuid();
 			LastModified = DateTime.Now;
+		}
+
+		public override void BeforeSave()
+		{
+			NeedToSave = false;
 		}
 
 		public virtual bool CompareByKey(IExtKeyHolder target)
@@ -33,7 +49,21 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 
 		public virtual void MarkAsModified()
 		{
+			if (!AllowToHandleChanges) return;
+			NeedToSave = true;
 			LastModified = DateTime.Now;
+		}
+
+		[OnDeserialized]
+		public void AfterDeserialize(StreamingContext context)
+		{
+			AllowToHandleChanges = true;
+		}
+
+		[OnDeserializing]
+		public void BeforeDeserialize(StreamingContext context)
+		{
+			AllowToHandleChanges = false;
 		}
 	}
 }

@@ -16,12 +16,12 @@ namespace SalesLibraries.SiteManager.ToolForms
 	{
 		private readonly List<string> _existedGroups = new List<string>();
 
-		private readonly List<Library> _libraries = new List<Library>();
+		private readonly List<SoapLibrary> _libraries = new List<SoapLibrary>();
 		private readonly bool _newGroup;
-		private readonly List<LibraryPage> _pages = new List<LibraryPage>();
+		private readonly List<SoapLibraryPage> _pages = new List<SoapLibraryPage>();
 		private readonly List<UserModel> _users = new List<UserModel>();
 
-		public FormEditGroup(bool newGroup, string[] groupTemplates, string[] existedGroups, UserModel[] users, Library[] libraries)
+		public FormEditGroup(bool newGroup, string[] groupTemplates, string[] existedGroups, UserModel[] users, SoapLibrary[] libraries)
 		{
 			InitializeComponent();
 
@@ -58,7 +58,7 @@ namespace SalesLibraries.SiteManager.ToolForms
 			get { return _users.Where(x => x.selected).ToArray(); }
 		}
 
-		public LibraryPage[] AssignedPages
+		public SoapLibraryPage[] AssignedPages
 		{
 			get { return _pages.Where(x => x.selected).ToArray(); }
 		}
@@ -91,9 +91,9 @@ namespace SalesLibraries.SiteManager.ToolForms
 		#region Libraraies
 		private void buttonXLibrariesSelectAll_Click(object sender, EventArgs e)
 		{
-			foreach (Library library in _libraries)
+			foreach (SoapLibrary library in _libraries)
 				library.selected = true;
-			foreach (LibraryPage page in _pages)
+			foreach (SoapLibraryPage page in _pages)
 				page.selected = true;
 			gridViewLibraries.RefreshData();
 			if (gridViewLibraries.FocusedRowHandle != GridControl.InvalidRowHandle && gridViewLibraries.GetDetailView(gridViewLibraries.FocusedRowHandle, 0) != null)
@@ -102,9 +102,9 @@ namespace SalesLibraries.SiteManager.ToolForms
 
 		private void buttonXLibrariesClearAll_Click(object sender, EventArgs e)
 		{
-			foreach (Library library in _libraries)
+			foreach (SoapLibrary library in _libraries)
 				library.selected = false;
-			foreach (LibraryPage page in _pages)
+			foreach (SoapLibraryPage page in _pages)
 				page.selected = false;
 			gridViewLibraries.RefreshData();
 			if (gridViewLibraries.FocusedRowHandle != GridControl.InvalidRowHandle && gridViewLibraries.GetDetailView(gridViewLibraries.FocusedRowHandle, 0) != null)
@@ -143,21 +143,20 @@ namespace SalesLibraries.SiteManager.ToolForms
 				{
 					if (focussedView.FocusedRowHandle != GridControl.InvalidRowHandle)
 					{
-						var libraray = focussedView.GetFocusedRow() as Library;
+						var libraray = focussedView.GetFocusedRow() as SoapLibrary;
 						if (libraray != null)
 						{
-							foreach (LibraryPage page in _pages.Where(x => x.libraryId == libraray.id))
+							foreach (var page in _pages.Where(x => x.libraryId == libraray.id))
 								page.selected = libraray.selected;
 							var pagesView = focussedView.GetDetailView(focussedView.FocusedRowHandle, 0) as GridView;
-							if (pagesView != null)
-								pagesView.RefreshData();
+							pagesView?.RefreshData();
 						}
 					}
 				}
 				else
 				{
-					var libraray = focussedView.SourceRow as Library;
-					var page = focussedView.GetFocusedRow() as LibraryPage;
+					var libraray = focussedView.SourceRow as SoapLibrary;
+					var page = focussedView.GetFocusedRow() as SoapLibraryPage;
 					if (libraray != null && page != null && page.selected)
 					{
 						libraray.selected = page.selected;

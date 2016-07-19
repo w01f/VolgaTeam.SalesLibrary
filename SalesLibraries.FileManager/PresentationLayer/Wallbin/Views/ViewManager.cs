@@ -36,8 +36,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 
 		public void Load()
 		{
-			if (BeforeLoad != null)
-				BeforeLoad(this, EventArgs.Empty);
+			BeforeLoad?.Invoke(this, EventArgs.Empty);
 			Views.ForEach(v =>
 			{
 				v.DisposeView();
@@ -70,8 +69,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 
 		public void SetActiveWallbin(IWallbinView wallbinView)
 		{
-			if (LibraryChanging != null)
-				LibraryChanging(this, EventArgs.Empty);
+			LibraryChanging?.Invoke(this, EventArgs.Empty);
 			ActiveWallbin = wallbinView;
 			if (ActiveWallbin == null) return;
 			ActiveWallbin.LoadView();

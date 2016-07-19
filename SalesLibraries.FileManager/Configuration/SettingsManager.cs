@@ -15,10 +15,7 @@ namespace SalesLibraries.FileManager.Configuration
 		public string NetworkPath { get; set; }
 		public string WebPath { get; set; }
 
-		public bool EnableLocalSync
-		{
-			get { return !String.IsNullOrEmpty(NetworkPath); }
-		}
+		public bool EnableLocalSync => !String.IsNullOrEmpty(NetworkPath);
 
 		//----------------------------------------
 		public string SelectedLibrary { get; set; }

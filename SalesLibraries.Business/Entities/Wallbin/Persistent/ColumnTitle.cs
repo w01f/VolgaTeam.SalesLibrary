@@ -76,9 +76,13 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 
 		public override void BeforeSave()
 		{
-			SettingsEncoded = Settings.Serialize();
-			WidgetEncoded = Widget.Serialize();
-			BannerEncoded = Banner.Serialize();
+			if (NeedToSave)
+			{
+				SettingsEncoded = Settings.Serialize();
+				WidgetEncoded = Widget.Serialize();
+				BannerEncoded = Banner.Serialize();
+			}
+			base.BeforeSave();
 		}
 
 		public override void AfterSave()

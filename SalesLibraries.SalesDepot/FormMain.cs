@@ -41,10 +41,7 @@ namespace SalesLibraries.SalesDepot
 			}
 		}
 
-		public string FloaterText
-		{
-			get { return ribbonBarHomeWallbin.Text; }
-		}
+		public string FloaterText => ribbonBarHomeWallbin.Text;
 
 		protected override void OnHandleCreated(EventArgs e)
 		{

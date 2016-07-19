@@ -108,7 +108,10 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 			MainController.Instance.WallbinViews.Selection.Reset();
 			CorruptedLinksHelper.DeleteCorruptedLinks(DataStorage.Library);
 			if (!IsDataChanged) return;
-			DataStorage.SaveChanges();
+			MainController.Instance.ProcessManager.Run("Saving Changes...", cancelationToken =>
+			{
+				DataStorage.SaveChanges();
+			});
 			IsDataChanged = false;
 		}
 

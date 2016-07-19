@@ -14,12 +14,12 @@ namespace SalesLibraries.Business.Entities.Helpers
 		{
 			var serializerSettings = new DefaultSerializeSettings();
 			original.BeforeSave();
-			var originalEncoded = JsonConvert.SerializeObject(original, Formatting.Indented, serializerSettings);
+			var originalEncoded = JsonConvert.SerializeObject(original, serializerSettings);
 			var copy = JsonConvert.DeserializeObject<TEntity>(originalEncoded, serializerSettings);
 
 			var collectionItemOriginal = original as ICollectionItem;
 			if (collectionItemOriginal != null)
-				((ICollectionItem) copy).Parent = collectionItemOriginal.Parent;
+				((ICollectionItem)copy).Parent = collectionItemOriginal.Parent;
 
 			return copy;
 		}

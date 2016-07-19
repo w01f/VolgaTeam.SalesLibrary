@@ -2,7 +2,8 @@
 {
 	public class Constants
 	{
-		public const string StorageFileName = @"z_library_data_local.sqlite";
+		public const string LocalStorageFileName = @"z_library_data_local.sqlite";
+		public const string RemoteStorageFileName = @"z_library_data_cloud.sqlite";
 		public const string ShortLibraryInfoFileName = @"z_library_data_info.xml";
 		public const string LegacyStorageFileName = @"SalesDepotCache.xml";
 		public const string LibrariesJsonFileName = @"z_library_data_cloud.json";

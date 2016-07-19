@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using SalesLibraries.Business.Entities.Interfaces;
 using SalesLibraries.Common.JsonConverters;
@@ -9,11 +10,15 @@ namespace SalesLibraries.Business.Entities.Common
 	{
 		protected IChangable Parent { get; set; }
 
+		[JsonIgnore]
+		protected bool AllowToHandleChanges { get; set; }
+
 		public static TSettings CreateInstance<TSettings>(IChangable parent, string encodedSource = "") where TSettings : SettingsContainer
 		{
 			var createNew = String.IsNullOrEmpty(encodedSource);
+			var serializerSettings = new DefaultSerializeSettings();
 			var settings = !createNew ?
-				JsonConvert.DeserializeObject<TSettings>(encodedSource, new ImageConverter()) :
+				JsonConvert.DeserializeObject<TSettings>(encodedSource, serializerSettings) :
 				Activator.CreateInstance<TSettings>();
 			settings.Parent = parent;
 			if (createNew)
@@ -24,23 +29,38 @@ namespace SalesLibraries.Business.Entities.Common
 
 		protected virtual void AfterConstruction() { }
 
-		protected virtual void AfterCreate() { }
+		protected virtual void AfterCreate()
+		{
+			AllowToHandleChanges = true;
+		}
 
 		protected void OnSettingsChanged()
 		{
-			if (Parent != null)
-				Parent.MarkAsModified();
+			if (AllowToHandleChanges)
+				Parent?.MarkAsModified();
 		}
 
 		public string Serialize()
 		{
-			return JsonConvert.SerializeObject(this,
-				new ImageConverter());
+			var serializerSettings = new DefaultSerializeSettings();
+			return JsonConvert.SerializeObject(this, serializerSettings);
 		}
 
 		public TSettings Clone<TSettings>(IChangable parent) where TSettings : SettingsContainer
 		{
 			return CreateInstance<TSettings>(parent, Serialize());
+		}
+
+		[OnDeserialized]
+		public void AfterDeserialize(StreamingContext context)
+		{
+			AllowToHandleChanges = true;
+		}
+
+		[OnDeserializing]
+		public void BeforeDeserialize(StreamingContext context)
+		{
+			AllowToHandleChanges = false;
 		}
 	}
 }

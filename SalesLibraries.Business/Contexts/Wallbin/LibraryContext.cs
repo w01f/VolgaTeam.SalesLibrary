@@ -1,38 +1,36 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using System.Data.Entity.Core.Objects;
 using System.Data.Entity.Validation;
 using System.IO;
 using System.Linq;
 using SalesLibraries.Business.Entities.Common;
 using SalesLibraries.Business.Entities.Helpers;
+using SalesLibraries.Business.Entities.Wallbin.Persistent;
 using SalesLibraries.Business.Mappers.Wallbin;
-using SalesLibraries.Business.Schema.Wallbin;
-using Constants = SalesLibraries.Common.Configuration.Constants;
 using Library = SalesLibraries.Business.Entities.Wallbin.Persistent.Library;
 
 namespace SalesLibraries.Business.Contexts.Wallbin
 {
-	public class LibraryContext : SqLiteContext
+	public abstract class LibraryContext : SqLiteContext
 	{
-		public string LibraryName { get; private set; }
-		public string DataSourcePath { get; private set; }
+		public string LibraryName { get; }
+		public string DataSourceFolderPath { get; }
+		public string DataSourceFilePath { get; }
 
 		public DbSet<Library> Libraries { get; set; }
 		public DbSet<DBVersion> Versions { get; set; }
 
-		public Library Library
-		{
-			get { return Libraries.Single(); }
-		}
+		public event EventHandler<EventArgs> BeforeSave;
 
-		public LibraryContext(string libraryName, string libraryPath)
-			: base(Path.Combine(libraryPath, Constants.StorageFileName))
+		public Library Library => Libraries.Single();
+
+		protected LibraryContext(string libraryName, string libraryPath, string libraryFileName)
+			: base(Path.Combine(libraryPath, libraryFileName))
 		{
 			LibraryName = libraryName;
-			DataSourcePath = libraryPath;
-			Database.SetInitializer(new WallbinInitializer());
-			Database.Initialize(true);
-			ObjectContext.ObjectMaterialized += OnObjectMaterialized;
+			DataSourceFolderPath = libraryPath;
+			DataSourceFilePath = Path.Combine(libraryPath, libraryFileName);
 		}
 
 		public override int SaveChanges()
@@ -44,7 +42,10 @@ namespace SalesLibraries.Business.Contexts.Wallbin
 				{
 					library.BeforeSave();
 				}
-				return base.SaveChanges();
+				BeforeSave?.Invoke(this, EventArgs.Empty);
+				var result = base.SaveChanges();
+				Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, "VACUUM;");
+				return result;
 			}
 			catch (DbEntityValidationException e)
 			{
@@ -60,15 +61,19 @@ namespace SalesLibraries.Business.Contexts.Wallbin
 			base.OnModelCreating(modelBuilder);
 		}
 
-		private void OnObjectMaterialized(object sender, ObjectMaterializedEventArgs e)
+		protected void OnObjectMaterialized(object sender, ObjectMaterializedEventArgs e)
 		{
 			if (e.Entity is Library)
 			{
 				var library = ((Library)e.Entity);
 				library.Context = this;
 				library.Name = LibraryName;
-				library.Path = DataSourcePath;
+				library.Path = DataSourceFolderPath;
 				library.Pages.Sort();
+			}
+			if (e.Entity is WallbinEntity)
+			{
+				((WallbinEntity) e.Entity).AllowToHandleChanges = true;
 			}
 		}
 	}

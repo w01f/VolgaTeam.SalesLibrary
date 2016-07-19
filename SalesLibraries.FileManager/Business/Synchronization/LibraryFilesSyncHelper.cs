@@ -122,7 +122,7 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 				filesWhiteListItems.Add(Path.Combine(library.Path, Constants.ShortLibraryInfoFileName));
 			}
 			else
-				filesWhiteListItems.Add(Path.Combine(library.Path, Constants.StorageFileName));
+				filesWhiteListItems.Add(Path.Combine(library.Path, Constants.LocalStorageFileName));
 
 			var destinationPath = GetLibrarySyncDestinationPath(library, isWebSync);
 

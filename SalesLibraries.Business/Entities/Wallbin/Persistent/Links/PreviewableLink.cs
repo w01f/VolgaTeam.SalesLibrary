@@ -8,10 +8,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 	{
 		#region Nonpersistent Properties
 		[NotMapped, JsonIgnore]
-		public string PreviewContainerPath
-		{
-			get { return GetPreviewContainer().ContainerPath; }
-		}
+		public string PreviewContainerPath => GetPreviewContainer().ContainerPath;
 		#endregion
 		
 		protected override void AfterCreate()

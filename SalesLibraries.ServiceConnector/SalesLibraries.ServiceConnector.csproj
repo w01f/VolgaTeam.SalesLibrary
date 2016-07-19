@@ -30,8 +30,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.105.2.3\lib\net451\RestSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
@@ -41,53 +50,93 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\AdminService\GroupModel.cs" />
-    <Compile Include="Models\AdminService\LibraryPage.cs" />
-    <Compile Include="Models\AdminService\UserInfo.cs" />
-    <Compile Include="Models\AdminService\UserModel.cs" />
-    <Compile Include="Models\InactiveUsers\UserModel.cs" />
-    <Compile Include="Models\LinkConfigProfiles\LibraryLinkReference.cs" />
-    <Compile Include="Models\LinkConfigProfiles\SecurityGroupReference.cs" />
-    <Compile Include="Models\LinkConfigProfiles\LibraryReference.cs" />
-    <Compile Include="Models\LinkConfigProfiles\LinkConfigProfileModel.cs" />
-    <Compile Include="Models\QBuilder\QPageModel.cs" />
-    <Compile Include="Models\Statistic\AccessReportModel.cs" />
-    <Compile Include="Models\Statistic\LibraryFilesTotalModel.cs" />
-    <Compile Include="Models\Statistic\MainGroupReportModel.cs" />
-    <Compile Include="Models\Statistic\MainUserReportModel.cs" />
-    <Compile Include="Models\Statistic\QuizPassGroupReportModel.cs" />
-    <Compile Include="Models\Statistic\QuizPassUserReportModel.cs" />
-    <Compile Include="Models\Statistic\UserActivity.cs" />
-    <Compile Include="Models\Statistic\LibraryFilesModel.cs" />
-    <Compile Include="Models\Statistic\VideoLinkInfo.cs" />
-    <Compile Include="Models\WallbinContentService\InternalLinkSettings.cs" />
-    <Compile Include="Models\WallbinContentService\AppLinkSettings.cs" />
-    <Compile Include="Models\WallbinContentService\BaseLinkSettings.cs" />
-    <Compile Include="Models\WallbinContentService\IBaseLinkSettings.cs" />
-    <Compile Include="Models\WallbinContentService\ExcelLinkSettings.cs" />
-    <Compile Include="Models\WallbinContentService\PowerPointLinkSettings.cs" />
-    <Compile Include="Models\WallbinContentService\VideoLinkSettings.cs" />
-    <Compile Include="Models\WallbinContentService\HyperLinkSettings.cs" />
-    <Compile Include="Models\WallbinContentService\LibraryConfig.cs" />
+    <Compile Include="..\SalesLibraries.Common\JsonConverters\GuidConverter.cs">
+      <Link>Json\GuidConverter.cs</Link>
+    </Compile>
+    <Compile Include="..\SalesLibraries.Common\JsonConverters\ImageConverter.cs">
+      <Link>Json\ImageConverter.cs</Link>
+    </Compile>
+    <Compile Include="..\SalesLibraries.Common\JsonConverters\RestEnumConverter.cs">
+      <Link>Json\RestEnumConverter.cs</Link>
+    </Compile>
+    <Compile Include="..\SalesLibraries.Common\JsonConverters\RestSerializeSettings.cs">
+      <Link>Json\RestSerializeSettings.cs</Link>
+    </Compile>
+    <Compile Include="Json\RestJsonSerializationStrategy.cs" />
+    <Compile Include="Models\Rest\Common\RequestBody.cs" />
+    <Compile Include="Models\Rest\Connection\ConnectionGetRequestData.cs" />
+    <Compile Include="Models\Rest\Common\IRequestData.cs" />
+    <Compile Include="Models\Rest\Connection\ConnectionInfo.cs" />
+    <Compile Include="Models\Rest\Connection\ConnectionRequestType.cs" />
+    <Compile Include="Models\Rest\Connection\ConnectionState.cs" />
+    <Compile Include="Models\Rest\VersionsManagement\ChangeSet.cs" />
+    <Compile Include="Models\Rest\VersionsManagement\ChangesSetRequestData.cs" />
+    <Compile Include="Models\Rest\VersionsManagement\ChangeType.cs" />
+    <Compile Include="Models\Rest\VersionsManagement\ChangesGetRequestData.cs" />
+    <Compile Include="Models\Rest\VersionsManagement\IVersioned.cs" />
+    <Compile Include="Models\Rest\VersionsManagement\ObjectType.cs" />
+    <Compile Include="Models\Rest\Wallbin\CloudLibraryException.cs" />
+    <Compile Include="Models\Rest\Wallbin\LibraryGetRequestData.cs" />
+    <Compile Include="Models\Rest\Wallbin\LibraryDataPackage.cs" />
+    <Compile Include="Models\Rest\Wallbin\Entities\Library.cs" />
+    <Compile Include="Models\Rest\Wallbin\Entities\LibraryPage.cs" />
+    <Compile Include="Models\Rest\Wallbin\Settings\AutoWidget.cs" />
+    <Compile Include="Models\Rest\Wallbin\Settings\LibraryPageSettings.cs" />
+    <Compile Include="Models\Rest\Wallbin\Settings\LibrarySettings.cs" />
+    <Compile Include="Services\Rest\RestExtension.cs" />
+    <Compile Include="Models\Rest\Common\ResponseResult.cs" />
+    <Compile Include="Models\Rest\Common\RestError.cs" />
+    <Compile Include="Models\Rest\Common\RestResponse.cs" />
+    <Compile Include="Models\Soap\AdminService\GroupModel.cs" />
+    <Compile Include="Models\Soap\AdminService\LibraryPage.cs" />
+    <Compile Include="Models\Soap\AdminService\UserInfo.cs" />
+    <Compile Include="Models\Soap\AdminService\UserModel.cs" />
+    <Compile Include="Models\Soap\InactiveUsers\UserModel.cs" />
+    <Compile Include="Models\Soap\LinkConfigProfiles\LibraryLinkReference.cs" />
+    <Compile Include="Models\Soap\LinkConfigProfiles\SecurityGroupReference.cs" />
+    <Compile Include="Models\Soap\LinkConfigProfiles\LibraryReference.cs" />
+    <Compile Include="Models\Soap\LinkConfigProfiles\LinkConfigProfileModel.cs" />
+    <Compile Include="Models\Soap\QBuilder\QPageModel.cs" />
+    <Compile Include="Models\Soap\Statistic\AccessReportModel.cs" />
+    <Compile Include="Models\Soap\Statistic\LibraryFilesTotalModel.cs" />
+    <Compile Include="Models\Soap\Statistic\MainGroupReportModel.cs" />
+    <Compile Include="Models\Soap\Statistic\MainUserReportModel.cs" />
+    <Compile Include="Models\Soap\Statistic\QuizPassGroupReportModel.cs" />
+    <Compile Include="Models\Soap\Statistic\QuizPassUserReportModel.cs" />
+    <Compile Include="Models\Soap\Statistic\UserActivity.cs" />
+    <Compile Include="Models\Soap\Statistic\LibraryFilesModel.cs" />
+    <Compile Include="Models\Soap\Statistic\VideoLinkInfo.cs" />
+    <Compile Include="Models\Soap\WallbinContentService\InternalLinkSettings.cs" />
+    <Compile Include="Models\Soap\WallbinContentService\AppLinkSettings.cs" />
+    <Compile Include="Models\Soap\WallbinContentService\BaseLinkSettings.cs" />
+    <Compile Include="Models\Soap\WallbinContentService\IBaseLinkSettings.cs" />
+    <Compile Include="Models\Soap\WallbinContentService\ExcelLinkSettings.cs" />
+    <Compile Include="Models\Soap\WallbinContentService\PowerPointLinkSettings.cs" />
+    <Compile Include="Models\Soap\WallbinContentService\VideoLinkSettings.cs" />
+    <Compile Include="Models\Soap\WallbinContentService\HyperLinkSettings.cs" />
+    <Compile Include="Models\Soap\WallbinContentService\LibraryConfig.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Services\Service.Authorization.cs" />
-    <Compile Include="Services\Service.Common.cs" />
-    <Compile Include="Services\Service.FileManagerResources.cs" />
-    <Compile Include="Services\Service.Admin.Libraries.cs" />
-    <Compile Include="Services\Service.Admin.Groups.cs" />
-    <Compile Include="Services\Service.Admin.Users.cs" />
-    <Compile Include="Services\Service.Admin.cs" />
-    <Compile Include="Services\Service.Credentials.cs" />
+    <Compile Include="Services\Rest\Service.Controller.cs" />
+    <Compile Include="Services\Rest\Service.Common.cs" />
+    <Compile Include="Services\Rest\Service.Credentials.cs" />
+    <Compile Include="Services\Soap\Service.Authorization.cs" />
+    <Compile Include="Services\Soap\Service.Common.cs" />
+    <Compile Include="Services\Soap\Service.FileManagerResources.cs" />
+    <Compile Include="Services\Soap\Service.Admin.Libraries.cs" />
+    <Compile Include="Services\Soap\Service.Admin.Groups.cs" />
+    <Compile Include="Services\Soap\Service.Admin.Users.cs" />
+    <Compile Include="Services\Soap\Service.Admin.cs" />
+    <Compile Include="Services\Soap\Service.Credentials.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\Service.LinkConfigProfiles.cs" />
-    <Compile Include="Services\Service.InactiveUsers.cs" />
-    <Compile Include="Services\Service.QBuilder.cs" />
-    <Compile Include="Services\Service.Statistic.cs" />
-    <Compile Include="Services\Service.Utility.cs" />
+    <Compile Include="Services\Soap\Service.LinkConfigProfiles.cs" />
+    <Compile Include="Services\Soap\Service.InactiveUsers.cs" />
+    <Compile Include="Services\Soap\Service.QBuilder.cs" />
+    <Compile Include="Services\Soap\Service.Statistic.cs" />
+    <Compile Include="Services\Soap\Service.Utility.cs" />
     <Compile Include="Web References\AdminService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -227,6 +276,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -241,6 +291,9 @@
     <None Include="Web References\AdminService\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\AdminService\SoapLibrary1.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
     </None>
     <None Include="Web References\AdminService\UserModel.datasource">
       <DependentUpon>Reference.map</DependentUpon>

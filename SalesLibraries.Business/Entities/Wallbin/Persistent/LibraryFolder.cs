@@ -132,11 +132,15 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 
 		public override void BeforeSave()
 		{
-			SettingsEncoded = Settings.Serialize();
-			WidgetEncoded = Widget.Serialize();
-			BannerEncoded = Banner.Serialize();
-			foreach (var link in Links)
-				link.BeforeSave();
+			if (NeedToSave)
+			{
+				SettingsEncoded = Settings.Serialize();
+				WidgetEncoded = Widget.Serialize();
+				BannerEncoded = Banner.Serialize();
+				foreach (var link in Links)
+					link.BeforeSave();
+			}
+			base.BeforeSave();
 		}
 
 		public override void AfterSave()
