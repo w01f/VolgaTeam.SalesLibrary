@@ -72,6 +72,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 			{
 				var lines = new List<string>();
 				lines.Add(String.Format("Added: {0}", AddDate.ToString("M/dd/yy h:mm:ss tt")));
+				lines.Add(String.Format("Updated: {0}", LastModified.ToString("M/dd/yy h:mm:ss tt")));
 				if (ExpirationSettings.IsExpired)
 					lines.Add(String.Format("Expires: {0}", ExpirationSettings.ExpirationDate.ToString("M/dd/yy h:mm:ss tt")));
 				var baseHint = base.Hint;
@@ -82,22 +83,14 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		}
 
 		[NotMapped, JsonIgnore]
-		public override Font DisplayFont
-		{
-			get
-			{
-				return base.DisplayFont ??
-					(((LibraryObjectLinkSettings)Settings).IsSpecialFormat ?
-						Settings.Font :
-						null);
-			}
-		}
+		public override Font DisplayFont => base.DisplayFont ??
+		                                    (((LibraryObjectLinkSettings)Settings).IsSpecialFormat ?
+			                                    Settings.Font :
+			                                    null);
 
 		[NotMapped, JsonIgnore]
-		public bool IsCorrupted
-		{
-			get { return !Banner.Enable && String.IsNullOrEmpty(DisplayName); }
-		}
+		public bool IsCorrupted => !Banner.Enable && String.IsNullOrEmpty(DisplayName);
+
 		#endregion
 
 		public override void BeforeSave()

@@ -34,34 +34,19 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 
 		#region Nonpersistent Properties
 		[NotMapped, JsonIgnore]
-		public override IChangable Parent
-		{
-			get { return (IChangable)FolderLink ?? Folder; }
-		}
+		public override IChangable Parent => (IChangable)FolderLink ?? Folder;
 
 		[NotMapped, JsonIgnore]
-		public override Library ParentLibrary
-		{
-			get { return FolderLink != null ? FolderLink.ParentLibrary : base.ParentLibrary; }
-		}
+		public override Library ParentLibrary => FolderLink != null ? FolderLink.ParentLibrary : base.ParentLibrary;
 
 		[NotMapped, JsonIgnore]
-		public override LibraryPage ParentPage
-		{
-			get { return FolderLink != null ? FolderLink.ParentPage : base.ParentPage; }
-		}
+		public override LibraryPage ParentPage => FolderLink != null ? FolderLink.ParentPage : base.ParentPage;
 
 		[NotMapped, JsonIgnore]
-		public override LibraryFolder ParentFolder
-		{
-			get { return FolderLink != null ? FolderLink.ParentFolder : base.ParentFolder; }
-		}
+		public override LibraryFolder ParentFolder => FolderLink != null ? FolderLink.ParentFolder : base.ParentFolder;
 
 		[NotMapped, JsonIgnore]
-		public override BaseLibraryLink TopLevelLink
-		{
-			get { return FolderLink ?? base.TopLevelLink; }
-		}
+		public override BaseLibraryLink TopLevelLink => FolderLink ?? base.TopLevelLink;
 
 		private LibraryFileLinkSettings _settings;
 		[NotMapped, JsonIgnore]
@@ -86,10 +71,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		}
 
 		[NotMapped, JsonIgnore]
-		public override string WebPath
-		{
-			get { return String.Format("{1}{0}", RelativePath, Path.DirectorySeparatorChar); }
-		}
+		public override string WebPath => String.Format("{1}{0}", RelativePath, Path.DirectorySeparatorChar);
 
 		[NotMapped, JsonIgnore]
 		public override string DisplayNameWithoutNote
@@ -113,52 +95,34 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 				if (!String.IsNullOrEmpty(((LibraryObjectLinkSettings)Settings).HoverNote))
 					lines.Add(((LibraryObjectLinkSettings)Settings).HoverNote);
 				lines.Add(String.Format("{0}: {1}", HintTitle, NameWithExtension));
+				if (!String.Equals(NameWithExtension, RelativePath, StringComparison.OrdinalIgnoreCase))
+					lines.Add(WebPath?.Replace(NameWithExtension, String.Empty));
 				lines.Add(base.Hint);
 				return String.Join(Environment.NewLine, lines);
 			}
 		}
 
 		[NotMapped, JsonIgnore]
-		public virtual string HintTitle
-		{
-			get { return "File"; }
-		}
+		public virtual string HintTitle => "File";
 
 		[NotMapped, JsonIgnore]
-		public string NameWithExtension
-		{
-			get { return Path.GetFileName(FullPath); }
-		}
+		public string NameWithExtension => Path.GetFileName(FullPath);
 
 		[NotMapped, JsonIgnore]
-		public string NameWithoutExtension
-		{
-			get { return Path.GetFileNameWithoutExtension(FullPath); }
-		}
+		public string NameWithoutExtension => Path.GetFileNameWithoutExtension(FullPath);
 
 		[NotMapped, JsonIgnore]
-		public string Extension
-		{
-			get { return Path.GetExtension(FullPath); }
-		}
+		public string Extension => Path.GetExtension(FullPath);
 
 		[NotMapped, JsonIgnore]
-		public string LocationPath
-		{
-			get { return Path.GetDirectoryName(FullPath); }
-		}
+		public string LocationPath => Path.GetDirectoryName(FullPath);
 
 		[NotMapped, JsonIgnore]
-		public string RootPath
-		{
-			get { return ParentLibrary.Path; }
-		}
+		public string RootPath => ParentLibrary.Path;
 
 		[NotMapped, JsonIgnore]
-		public virtual bool IsFolder
-		{
-			get { return false; }
-		}
+		public virtual bool IsFolder => false;
+
 		#endregion
 
 		public override string ToString()
@@ -168,8 +132,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 
 		public override void DeleteLink(bool fullDelete = false)
 		{
-			if (FolderLink != null)
-				FolderLink.Links.RemoveItem(this);
+			FolderLink?.Links.RemoveItem(this);
 			base.DeleteLink(fullDelete);
 		}
 
@@ -249,6 +212,18 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 			if (FileFormatHelper.IsVideoFile(filePath))
 				return new VideoLink();
 			return new CommonFileLink();
+		}
+
+		public void UpdateFileDate()
+		{
+			if (!File.Exists(FullPath)) return;
+			var currentDate = new FileInfo(FullPath).LastWriteTime;
+			var savedDate = ((LibraryFileLinkSettings)Settings).FileDate;
+			if (savedDate.HasValue && savedDate < currentDate)
+				MarkAsModified();
+			((LibraryFileLinkSettings)Settings).FileDate = currentDate;
+			if (!savedDate.HasValue && AddDate < currentDate)
+				MarkAsModified();
 		}
 	}
 }

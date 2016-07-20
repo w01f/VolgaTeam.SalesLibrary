@@ -6,6 +6,8 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 {
 	public class LibraryFileLinkSettings : LibraryObjectLinkSettings
 	{
+		public DateTime? FileDate { get; set; }
+
 		[JsonIgnore]
 		protected LibraryFileLink ParentFileLink => (LibraryFileLink)Parent;
 

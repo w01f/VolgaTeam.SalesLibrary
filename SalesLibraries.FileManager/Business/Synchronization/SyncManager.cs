@@ -61,6 +61,7 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 						MainController.Instance.MainForm.WindowState = FormWindowState.Minimized;
 				}));
 				UpdateFolderContent(targetLibrary, cancellationToken);
+				UpdateFileDates(targetLibrary, cancellationToken);
 				UpdatePreviewContent(targetLibrary, cancellationToken);
 				targetLibrary.SyncDate = DateTime.Now;
 				targetContext.SaveChanges();
@@ -114,6 +115,7 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 
 				var cancellationToken = new CancellationToken();
 				UpdateFolderContent(targetLibrary, cancellationToken);
+				UpdateFileDates(targetLibrary, cancellationToken);
 				UpdatePreviewContent(targetLibrary, cancellationToken);
 				targetLibrary.SyncDate = DateTime.Now;
 				targetContext.SaveChanges();
@@ -149,6 +151,14 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 			resultFiles.Add(Path.Combine(library.Path, Constants.ShortLibraryInfoFileName));
 			resultFiles.Add(RemoteResourceManager.Instance.AppSettingsFile.LocalPath);
 			ArchiveSyncResulst(resultFiles);
+		}
+
+		private static void UpdateFileDates(Library library, CancellationToken cancellationToken)
+		{
+			var fileLinks = library.Pages.SelectMany(p => p.AllLinks).OfType<LibraryFileLink>().Where(f=>!f.IsFolder).ToList();
+			if (!fileLinks.Any()) return;
+			if (cancellationToken.IsCancellationRequested) return;
+			fileLinks.ForEach(f => f.UpdateFileDate());
 		}
 
 		private static void UpdateFolderContent(Library library, CancellationToken cancellationToken)
