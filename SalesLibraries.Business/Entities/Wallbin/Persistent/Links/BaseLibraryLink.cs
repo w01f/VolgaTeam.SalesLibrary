@@ -65,28 +65,16 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		}
 
 		[NotMapped, JsonIgnore]
-		public virtual Library ParentLibrary
-		{
-			get { return Folder.Page.Library; }
-		}
+		public virtual Library ParentLibrary => Folder.Page.Library;
 
 		[NotMapped, JsonIgnore]
-		public virtual LibraryPage ParentPage
-		{
-			get { return Folder.Page; }
-		}
+		public virtual LibraryPage ParentPage => Folder.Page;
 
 		[NotMapped, JsonIgnore]
-		public virtual LibraryFolder ParentFolder
-		{
-			get { return Folder; }
-		}
+		public virtual LibraryFolder ParentFolder => Folder;
 
 		[NotMapped, JsonIgnore]
-		public virtual BaseLibraryLink TopLevelLink
-		{
-			get { return this; }
-		}
+		public virtual BaseLibraryLink TopLevelLink => this;
 
 		[NotMapped, JsonIgnore]
 		public abstract BaseLinkSettings Settings { get; set; }
@@ -143,16 +131,10 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		}
 
 		[NotMapped, JsonIgnore]
-		public virtual string WebFormat
-		{
-			get { return WebFormats.Other; }
-		}
+		public virtual string WebFormat => WebFormats.Other;
 
 		[NotMapped, JsonIgnore]
-		public virtual string DisplayName
-		{
-			get { return DisplayNameWithoutNote; }
-		}
+		public virtual string DisplayName => DisplayNameWithoutNote;
 
 		[NotMapped, JsonIgnore]
 		public virtual string DisplayNameWithoutNote

@@ -13,16 +13,10 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers
 	{
 		#region Nonpersistent Properties
 		[NotMapped, JsonIgnore]
-		protected override string PreviewSubFolder
-		{
-			get { return DocumentSubFolderName; }
-		}
+		protected override string PreviewSubFolder => DocumentSubFolderName;
 
 		[NotMapped, JsonIgnore]
-		public override string[] AvailablePreviewFormats
-		{
-			get { return new[] { PreviewFormats.Text }; }
-		}
+		public override string[] AvailablePreviewFormats => new[] { PreviewFormats.Text };
 
 		[NotMapped, JsonIgnore]
 		public bool GenerateText { get; private set; }

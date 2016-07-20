@@ -28,15 +28,9 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Calendars
 			}
 		}
 
-		public int CurrentFontSize
-		{
-			get { return MainController.Instance.Settings.CalendarViewSettings.FontSize; }
-		}
+		public int CurrentFontSize => MainController.Instance.Settings.CalendarViewSettings.FontSize;
 
-		public Control ContainerControl
-		{
-			get { return pnContainer; }
-		}
+		public Control ContainerControl => pnContainer;
 
 		public CalendarContainerControl()
 		{

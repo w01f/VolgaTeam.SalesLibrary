@@ -12,10 +12,7 @@ namespace SalesLibraries.SalesDepot.Business.LinkViewers
 
 		public List<PresentationSlideThumbnail> Thumbnails { get; set; }
 
-		public PowerPointLinkSettings Settings
-		{
-			get { return (PowerPointLinkSettings)_sourceLink.Settings; }
-		}
+		public PowerPointLinkSettings Settings => (PowerPointLinkSettings)_sourceLink.Settings;
 
 		public PresentationPreviewContainer(PowerPointLink sourceLink)
 		{

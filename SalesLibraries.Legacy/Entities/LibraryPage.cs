@@ -82,10 +82,7 @@ namespace SalesLibraries.Legacy.Entities
 			}
 		}
 
-		public int Index
-		{
-			get { return _order + 1; }
-		}
+		public int Index => _order + 1;
 
 		public DateTime LastChanged { get; set; }
 

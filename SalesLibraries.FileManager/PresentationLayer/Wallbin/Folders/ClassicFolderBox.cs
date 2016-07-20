@@ -35,30 +35,15 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 		private readonly CopyFolderManager _copyFolderManager;
 
 		#region Public Properties
-		public override IWallbinViewFormat FormatState
-		{
-			get { return MainController.Instance.WallbinViews.FormatState; }
-		}
+		public override IWallbinViewFormat FormatState => MainController.Instance.WallbinViews.FormatState;
 
-		protected SelectionManager SelectionManager
-		{
-			get { return MainController.Instance.WallbinViews.Selection; }
-		}
+		protected SelectionManager SelectionManager => MainController.Instance.WallbinViews.Selection;
 
-		protected PageContent FolderContainer
-		{
-			get { return (PageContent)Parent; }
-		}
+		protected PageContent FolderContainer => (PageContent)Parent;
 
-		public bool IsActive
-		{
-			get { return SelectionManager.SelectedFolder == this; }
-		}
+		public bool IsActive => SelectionManager.SelectedFolder == this;
 
-		public LinkRow SelectedLinkRow
-		{
-			get { return grFiles.SelectedRows.OfType<LinkRow>().FirstOrDefault(); }
-		}
+		public LinkRow SelectedLinkRow => grFiles.SelectedRows.OfType<LinkRow>().FirstOrDefault();
 
 		public override Color SelectedRowBackColor
 		{

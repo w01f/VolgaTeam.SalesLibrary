@@ -17,10 +17,7 @@ namespace SalesLibraries.Common.OfficeInterops
 
 		private ExcelHelper() {}
 
-		public static ExcelHelper Instance
-		{
-			get { return _instance; }
-		}
+		public static ExcelHelper Instance => _instance;
 
 		public bool IsOpened
 		{

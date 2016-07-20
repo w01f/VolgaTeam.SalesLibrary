@@ -6,10 +6,7 @@ namespace SalesLibraries.ServiceConnector.InactiveUsersService
 	{
 		public bool Selected { get; set; }
 
-		public string FullName
-		{
-			get { return (firstName + " " + lastName).Trim(); }
-		}
+		public string FullName => (firstName + " " + lastName).Trim();
 
 		public string[] GroupNameList
 		{

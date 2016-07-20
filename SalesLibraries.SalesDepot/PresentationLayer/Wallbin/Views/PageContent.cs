@@ -22,10 +22,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.Views
 		protected readonly List<BaseFolderBox> _folderBoxes = new List<BaseFolderBox>();
 		public IPageView PageContainer { get; private set; }
 
-		protected int InnerWidth
-		{
-			get { return Width - SystemInformation.VerticalScrollBarWidth; }
-		}
+		protected int InnerWidth => Width - SystemInformation.VerticalScrollBarWidth;
 
 		protected PageContent(IPageView pageContainer)
 		{

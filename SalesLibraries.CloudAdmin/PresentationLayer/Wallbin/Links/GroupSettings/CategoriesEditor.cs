@@ -18,10 +18,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.GroupSetting
 	{
 		private readonly List<SearchGroup> _groupTemplates = new List<SearchGroup>();
 
-		private SelectionManager Selection
-		{
-			get { return MainController.Instance.WallbinViews.Selection; }
-		}
+		private SelectionManager Selection => MainController.Instance.WallbinViews.Selection;
 
 		public CategoriesEditor()
 		{
@@ -38,10 +35,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.GroupSetting
 		}
 
 		#region IGroupSettingsEditor Members
-		public string Title
-		{
-			get { return "Manage Search Tags"; }
-		}
+		public string Title => "Manage Search Tags";
 
 		public event EventHandler<EventArgs> EditorChanged;
 

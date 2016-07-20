@@ -27,10 +27,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Forms
 		public PowerPointLink PowerPointLink { get; set; }
 		public Action AfterClose { get; private set; }
 
-		private PresentationSlideThumbnail SelectedThumbnail
-		{
-			get { return (PresentationSlideThumbnail)comboBoxEditSlides.EditValue; }
-		}
+		private PresentationSlideThumbnail SelectedThumbnail => (PresentationSlideThumbnail)comboBoxEditSlides.EditValue;
 
 		public FormPowerPointQuickView()
 		{

@@ -31,10 +31,7 @@ namespace SalesLibraries.SalesDepot.Business.LinkViewers
 			}
 		}
 
-		public string DisplayName
-		{
-			get { return SourceFileLink.Name; }
-		}
+		public string DisplayName => SourceFileLink.Name;
 
 		public FilePreviewShortcut(LibraryFileLink sourceFileLink)
 		{

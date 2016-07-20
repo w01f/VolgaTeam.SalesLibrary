@@ -17,10 +17,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 	{
 		private bool _loading;
 
-		private SelectionManager Selection
-		{
-			get { return MainController.Instance.WallbinViews.Selection; }
-		}
+		private SelectionManager Selection => MainController.Instance.WallbinViews.Selection;
 
 		public SuperFiltersEditor()
 		{
@@ -41,10 +38,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 		}
 
 		#region IGroupSettingsEditor Members
-		public string Title
-		{
-			get { return "Manage Super Filters"; }
-		}
+		public string Title => "Manage Super Filters";
 
 		public event EventHandler<EventArgs> EditorChanged;
 

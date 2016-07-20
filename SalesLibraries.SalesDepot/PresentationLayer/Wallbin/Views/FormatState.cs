@@ -27,16 +27,16 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.Views
 			}
 		}
 
-		public bool AllowEdit { get { return false; } }
-		public bool AllowMultiSelect { get { return false; } }
+		public bool AllowEdit => false;
+		public bool AllowMultiSelect => false;
 
-		public bool ShowCategoryTags { get { return false; } }
+		public bool ShowCategoryTags => false;
 
-		public bool ShowSuperFilterTags { get { return false; } }
+		public bool ShowSuperFilterTags => false;
 
-		public bool ShowKeywordTags { get { return false; } }
+		public bool ShowKeywordTags => false;
 
-		public bool ShowSecurityTags { get { return false; } }
+		public bool ShowSecurityTags => false;
 
 		public event EventHandler<EventArgs> StateChanged;
 		#endregion

@@ -72,10 +72,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 		public LibraryContext Context { get; set; }
 
 		[NotMapped, JsonIgnore]
-		public Guid DataSourceId
-		{
-			get { return ExtId; }
-		}
+		public Guid DataSourceId => ExtId;
 
 		[NotMapped]
 		public string Path { get; set; }
@@ -84,10 +81,8 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 		public string Name { get; set; }
 
 		[NotMapped, JsonIgnore]
-		public int Order
-		{
-			get { return -1; }
-		}
+		public int Order => -1;
+
 		#endregion
 
 		public Library()

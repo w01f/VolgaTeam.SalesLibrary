@@ -22,10 +22,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.GroupSetting
 		private readonly List<string> _assignedUsers = new List<string>();
 		private readonly List<string> _deniedUsers = new List<string>();
 
-		private SelectionManager Selection
-		{
-			get { return MainController.Instance.WallbinViews.Selection; }
-		}
+		private SelectionManager Selection => MainController.Instance.WallbinViews.Selection;
 
 		private string AssignedUsers
 		{
@@ -90,10 +87,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.GroupSetting
 		}
 
 		#region IGroupSettingsEditor Members
-		public string Title
-		{
-			get { return "Manage Security"; }
-		}
+		public string Title => "Manage Security";
 
 		public event EventHandler<EventArgs> EditorChanged;
 

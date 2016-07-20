@@ -37,23 +37,14 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers
 		public override int CollectionOrder { get; set; }
 
 		[NotMapped, JsonIgnore]
-		public string SourcePath
-		{
-			get { return Path.Combine(Library.Path, RelativePath); }
-		}
+		public string SourcePath => Path.Combine(Library.Path, RelativePath);
 
 		[NotMapped, JsonIgnore]
-		public string ContainerPath
-		{
-			get
-			{
-				return Path.Combine(
-					Library.Path,
-					Constants.WebPreviewContainersRootFolderName,
-					PreviewSubFolder,
-					ExtId.ToString());
-			}
-		}
+		public string ContainerPath => Path.Combine(
+			Library.Path,
+			Constants.WebPreviewContainersRootFolderName,
+			PreviewSubFolder,
+			ExtId.ToString());
 
 		[NotMapped, JsonIgnore]
 		protected abstract string PreviewSubFolder { get; }

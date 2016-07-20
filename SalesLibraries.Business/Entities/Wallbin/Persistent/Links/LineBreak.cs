@@ -20,25 +20,14 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		}
 
 		[NotMapped, JsonIgnore]
-		public override string DisplayNameWithoutNote
-		{
-			get { return String.IsNullOrEmpty(base.DisplayNameWithoutNote) ? Settings.Note : base.DisplayNameWithoutNote; }
-		}
+		public override string DisplayNameWithoutNote => String.IsNullOrEmpty(base.DisplayNameWithoutNote) ? Settings.Note : base.DisplayNameWithoutNote;
 
 		[NotMapped, JsonIgnore]
-		public override string Hint
-		{
-			get { return String.Format("{0}{2}{1}", Settings.Note, base.Hint, Environment.NewLine); }
-		}
+		public override string Hint => String.Format("{0}{2}{1}", Settings.Note, base.Hint, Environment.NewLine);
 
 		[NotMapped, JsonIgnore]
-		public override Font DisplayFont
-		{
-			get
-			{
-				return base.DisplayFont ?? Settings.Font;
-			}
-		}
+		public override Font DisplayFont => base.DisplayFont ?? Settings.Font;
+
 		#endregion
 
 		public LineBreak()

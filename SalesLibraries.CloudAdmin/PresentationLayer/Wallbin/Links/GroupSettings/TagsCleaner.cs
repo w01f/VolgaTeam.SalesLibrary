@@ -18,10 +18,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.GroupSetting
 		}
 
 		#region IGroupSettingsEditor Members
-		public string Title
-		{
-			get { return "Blow Up Tags"; }
-		}
+		public string Title => "Blow Up Tags";
 
 		public event EventHandler<EventArgs> EditorChanged;
 		public void UpdateData() { }

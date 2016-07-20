@@ -36,13 +36,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 		}
 
 		[JsonIgnore]
-		public string Orientation
-		{
-			get
-			{
-				return Height < Width ? "Landscape" : "Portrait";
-			}
-		}
+		public string Orientation => Height < Width ? "Landscape" : "Portrait";
 
 		[JsonIgnore]
 		public string Size
@@ -67,10 +61,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 			}
 		}
 
-		public string ContainerPath
-		{
-			get { return Path.Combine(ParentFileLink.ParentLibrary.Path, Constants.RegularPreviewContainersRootFolderName, Id.ToString()); }
-		}
+		public string ContainerPath => Path.Combine(ParentFileLink.ParentLibrary.Path, Constants.RegularPreviewContainersRootFolderName, Id.ToString());
 
 		public PowerPointLinkSettings()
 		{

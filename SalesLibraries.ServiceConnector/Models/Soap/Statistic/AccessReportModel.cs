@@ -11,25 +11,13 @@ namespace SalesLibraries.ServiceConnector.StatisticService
 		public double? AllInactive { get; set; }
 		public int? AllUsers { get; set; }
 
-		public double ActivePercent
-		{
-			get { return userCount > 0 ? (double)activeCount / userCount : 0; }
-		}
+		public double ActivePercent => userCount > 0 ? (double)activeCount / userCount : 0;
 
-		public double InactivePercent
-		{
-			get { return userCount > 0 ? (double)inactiveCount / userCount : 0; }
-		}
+		public double InactivePercent => userCount > 0 ? (double)inactiveCount / userCount : 0;
 
-		public double? AllActivePercent
-		{
-			get { return AllUsers > 0 ? AllActive / AllUsers : null; }
-		}
+		public double? AllActivePercent => AllUsers > 0 ? AllActive / AllUsers : null;
 
-		public double? AllInactivePercent
-		{
-			get { return AllUsers > 0 ? AllInactive / AllUsers : null; }
-		}
+		public double? AllInactivePercent => AllUsers > 0 ? AllInactive / AllUsers : null;
 
 		public string AllGroups
 		{

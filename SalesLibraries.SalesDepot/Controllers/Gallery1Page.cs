@@ -14,85 +14,38 @@ namespace SalesLibraries.SalesDepot.Controllers
 		public bool NeedToUpdate { get; set; }
 
 		#region GalleryControl
-		public override GalleryManager Manager
-		{
-			get { return _galleryManager; }
-		}
+		public override GalleryManager Manager => _galleryManager;
 
-		public override RibbonPanel Panel
-		{
-			get { return MainController.Instance.MainForm.ribbonPanelGallery1; }
-		}
+		public override RibbonPanel Panel => MainController.Instance.MainForm.ribbonPanelGallery1;
 
-		public override RibbonBar BrowseBar
-		{
-			get { return MainController.Instance.MainForm.ribbonBarGallery1Browse; }
-		}
+		public override RibbonBar BrowseBar => MainController.Instance.MainForm.ribbonBarGallery1Browse;
 
-		public override RibbonBar ImageBar
-		{
-			get { return MainController.Instance.MainForm.ribbonBarGallery1Image; }
-		}
+		public override RibbonBar ImageBar => MainController.Instance.MainForm.ribbonBarGallery1Image;
 
-		public override RibbonBar ZoomBar
-		{
-			get { return MainController.Instance.MainForm.ribbonBarGallery1Zoom; }
-		}
+		public override RibbonBar ZoomBar => MainController.Instance.MainForm.ribbonBarGallery1Zoom;
 
-		public override RibbonBar CopyBar
-		{
-			get { return MainController.Instance.MainForm.ribbonBarGallery1Copy; }
-		}
+		public override RibbonBar CopyBar => MainController.Instance.MainForm.ribbonBarGallery1Copy;
 
-		public override ItemContainer BrowseModeContainer
-		{
-			get { return MainController.Instance.MainForm.itemContainerGallery1BrowseContentType; }
-		}
+		public override ItemContainer BrowseModeContainer => MainController.Instance.MainForm.itemContainerGallery1BrowseContentType;
 
-		public override ButtonItem ViewMode
-		{
-			get { return MainController.Instance.MainForm.buttonItemGallery1View; }
-		}
+		public override ButtonItem ViewMode => MainController.Instance.MainForm.buttonItemGallery1View;
 
-		public override ButtonItem EditMode
-		{
-			get { return MainController.Instance.MainForm.buttonItemGallery1Edit; }
-		}
+		public override ButtonItem EditMode => MainController.Instance.MainForm.buttonItemGallery1Edit;
 
-		public override ButtonItem ImageSelect
-		{
-			get { return MainController.Instance.MainForm.buttonItemGallery1ImageSelect; }
-		}
+		public override ButtonItem ImageSelect => MainController.Instance.MainForm.buttonItemGallery1ImageSelect;
 
-		public override ButtonItem ImageCrop
-		{
-			get { return MainController.Instance.MainForm.buttonItemGallery1ImageCrop; }
-		}
+		public override ButtonItem ImageCrop => MainController.Instance.MainForm.buttonItemGallery1ImageCrop;
 
-		public override ButtonItem ZoomIn
-		{
-			get { return MainController.Instance.MainForm.buttonItemGallery1ZoomIn; }
-		}
+		public override ButtonItem ZoomIn => MainController.Instance.MainForm.buttonItemGallery1ZoomIn;
 
-		public override ButtonItem ZoomOut
-		{
-			get { return MainController.Instance.MainForm.buttonItemGallery1ZoomOut; }
-		}
+		public override ButtonItem ZoomOut => MainController.Instance.MainForm.buttonItemGallery1ZoomOut;
 
-		public override ButtonItem Copy
-		{
-			get { return MainController.Instance.MainForm.buttonItemGallery1Copy; }
-		}
+		public override ButtonItem Copy => MainController.Instance.MainForm.buttonItemGallery1Copy;
 
-		public override ComboBoxEdit SectionsList
-		{
-			get { return MainController.Instance.MainForm.comboBoxEditGallery1Sections; }
-		}
+		public override ComboBoxEdit SectionsList => MainController.Instance.MainForm.comboBoxEditGallery1Sections;
 
-		public override ComboBoxEdit GroupsList
-		{
-			get { return MainController.Instance.MainForm.comboBoxEditGallery1Groups; }
-		}
+		public override ComboBoxEdit GroupsList => MainController.Instance.MainForm.comboBoxEditGallery1Groups;
+
 		#endregion
 
 		#region IPageController

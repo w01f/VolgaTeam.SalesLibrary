@@ -21,25 +21,13 @@ namespace SalesLibraries.SalesDepot.Business.ProgramSchedule
 		public Station ActiveStation { get; private set; }
 		public event EventHandler<EventArgs> StationChanged;
 
-		private string StationsFolderPath
-		{
-			get { return Path.Combine(_rootFolderPath, Constants.ProgramManagerRootFolderName, StationsRoot); }
-		}
+		private string StationsFolderPath => Path.Combine(_rootFolderPath, Constants.ProgramManagerRootFolderName, StationsRoot);
 
-		private string ReporActivityListTemplatePath
-		{
-			get { return Path.Combine(_rootFolderPath, Constants.ProgramManagerRootFolderName, OutputRoot, "ActivityList.xls"); }
-		}
+		private string ReporActivityListTemplatePath => Path.Combine(_rootFolderPath, Constants.ProgramManagerRootFolderName, OutputRoot, "ActivityList.xls");
 
-		private string OutputFolder
-		{
-			get { return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "Program Schedules"); }
-		}
+		private string OutputFolder => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "Program Schedules");
 
-		public bool HasData
-		{
-			get { return Directory.Exists(StationsFolderPath) && Directory.GetDirectories(StationsFolderPath).Any(); }
-		}
+		public bool HasData => Directory.Exists(StationsFolderPath) && Directory.GetDirectories(StationsFolderPath).Any();
 
 		public ProgramScheduleContext(string rootFolderPath)
 		{

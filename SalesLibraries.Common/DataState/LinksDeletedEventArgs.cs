@@ -7,10 +7,7 @@ namespace SalesLibraries.Common.DataState
 	{
 		public List<Guid> LinkIds { get; private set; }
 
-		public override DataChangeType ChangeType
-		{
-			get { return DataChangeType.LinksDeleted; }
-		}
+		public override DataChangeType ChangeType => DataChangeType.LinksDeleted;
 
 		public LinksDeletedEventArgs(IEnumerable<Guid> linkIds)
 		{

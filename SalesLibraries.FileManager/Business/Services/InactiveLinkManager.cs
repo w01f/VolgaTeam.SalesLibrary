@@ -17,10 +17,7 @@ namespace SalesLibraries.FileManager.Business.Services
 	{
 		private static readonly InactiveLinkManager _instance = new InactiveLinkManager();
 
-		public static InactiveLinkManager Instance
-		{
-			get { return _instance; }
-		}
+		public static InactiveLinkManager Instance => _instance;
 
 		public List<LibraryFileLink> DeadLinks { get; private set; }
 		public List<LibraryObjectLink> ExpiredLinks { get; private set; }

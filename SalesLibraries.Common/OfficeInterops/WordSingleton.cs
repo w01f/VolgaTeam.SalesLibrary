@@ -4,13 +4,7 @@
 	{
 		private static readonly WordSingleton _instance = new WordSingleton();
 
-		public static WordSingleton Instance
-		{
-			get
-			{
-				return _instance;
-			}
-		}
+		public static WordSingleton Instance => _instance;
 
 		private WordSingleton() { }
 	}

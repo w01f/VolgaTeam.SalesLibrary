@@ -22,17 +22,12 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Contro
 			get { return ((LibraryFolderLink)Link).Links.Select(link => new FilePreviewShortcut(link)).ToList(); }
 		}
 
-		private FilePreviewShortcut SelectedFile
-		{
-			get { return gridViewFiles.GetFocusedRow() as FilePreviewShortcut; }
-		}
+		private FilePreviewShortcut SelectedFile => gridViewFiles.GetFocusedRow() as FilePreviewShortcut;
 
 		public LibraryObjectLink Link { get; private set; }
 
-		public string DisplayName
-		{
-			get { return Link.Name; }
-		}
+		public string DisplayName => Link.Name;
+
 		#endregion
 
 		public FolderViewer(LibraryObjectLink link)

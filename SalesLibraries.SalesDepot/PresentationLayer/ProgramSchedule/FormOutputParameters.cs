@@ -26,20 +26,11 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.ProgramSchedule
 			InitializeComponent();
 		}
 
-		public Station Station
-		{
-			get { return (Station)comboBoxEditStation.EditValue; }
-		}
+		public Station Station => (Station)comboBoxEditStation.EditValue;
 
-		public Week[] Weeks
-		{
-			get { return _weeks.ToArray(); }
-		}
+		public Week[] Weeks => _weeks.ToArray();
 
-		public bool Landscape
-		{
-			get { return buttonXLandscape.Checked; }
-		}
+		public bool Landscape => buttonXLandscape.Checked;
 
 		private void FormOutputParameters_Load(object sender, EventArgs e)
 		{

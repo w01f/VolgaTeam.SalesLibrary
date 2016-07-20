@@ -36,16 +36,11 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		}
 
 		[NotMapped, JsonIgnore]
-		public override string HintTitle
-		{
-			get { return "Folder"; }
-		}
+		public override string HintTitle => "Folder";
 
 		[NotMapped, JsonIgnore]
-		public override bool IsFolder
-		{
-			get { return true; }
-		}
+		public override bool IsFolder => true;
+
 		#endregion
 
 		public LibraryFolderLink()

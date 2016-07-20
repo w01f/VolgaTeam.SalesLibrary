@@ -13,40 +13,25 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers
 	{
 		#region Nonpersistent Properties
 		[NotMapped, JsonIgnore]
-		protected override string PreviewSubFolder
-		{
-			get { return DocumentSubFolderName; }
-		}
+		protected override string PreviewSubFolder => DocumentSubFolderName;
 
 		[NotMapped, JsonIgnore]
-		public override string[] AvailablePreviewFormats
-		{
-			get { return BasePreviewFormats.Union(ImagePreviewFormats.Union(TextPreviewFormats)).ToArray(); }
-		}
+		public override string[] AvailablePreviewFormats => BasePreviewFormats.Union(ImagePreviewFormats.Union(TextPreviewFormats)).ToArray();
 
 		[NotMapped, JsonIgnore]
 		protected abstract IEnumerable<string> BasePreviewFormats { get; }
 
 		[NotMapped, JsonIgnore]
-		private IEnumerable<string> ImagePreviewFormats
+		private IEnumerable<string> ImagePreviewFormats => new[]
 		{
-			get
-			{
-				return new[]
-				{
-					PreviewFormats.Png,
-					PreviewFormats.PngForMobile,
-					PreviewFormats.Thumbnails,
-					PreviewFormats.ThumbnailsForMobile,
-				};
-			}
-		}
+			PreviewFormats.Png,
+			PreviewFormats.PngForMobile,
+			PreviewFormats.Thumbnails,
+			PreviewFormats.ThumbnailsForMobile,
+		};
 
 		[NotMapped, JsonIgnore]
-		private IEnumerable<string> TextPreviewFormats
-		{
-			get { return new[] { PreviewFormats.Text }; }
-		}
+		private IEnumerable<string> TextPreviewFormats => new[] { PreviewFormats.Text };
 
 		[NotMapped, JsonIgnore]
 		public bool GenerateImages { get; private set; }

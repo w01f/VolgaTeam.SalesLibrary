@@ -19,10 +19,8 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		}
 
 		[NotMapped, JsonIgnore]
-		public override string WebFormat
-		{
-			get { return WebFormats.Excel; }
-		}
+		public override string WebFormat => WebFormats.Excel;
+
 		#endregion
 
 		public ExcelLink()

@@ -310,10 +310,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 			public ObjectLinkSettingsManager(QuickEditManager editManager, BaseLibraryLink targetLink) : base(editManager, targetLink) { }
 
-			private LibraryObjectLinkSettings Settings
-			{
-				get { return (LibraryObjectLinkSettings)TargetLink.Settings; }
-			}
+			private LibraryObjectLinkSettings Settings => (LibraryObjectLinkSettings)TargetLink.Settings;
 
 			protected override void SetMenuItemsViibility()
 			{
@@ -397,10 +394,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		{
 			public LineBreakSettingsManager(QuickEditManager editManager, BaseLibraryLink targetLink) : base(editManager, targetLink) { }
 
-			private LineBreakSettings Settings
-			{
-				get { return (LineBreakSettings)TargetLink.Settings; }
-			}
+			private LineBreakSettings Settings => (LineBreakSettings)TargetLink.Settings;
 
 			protected override void SetMenuItemsViibility()
 			{

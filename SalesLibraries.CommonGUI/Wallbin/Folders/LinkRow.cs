@@ -12,25 +12,13 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 
 		public event EventHandler<EventArgs> InfoChanged;
 
-		public bool AllowEdit
-		{
-			get { return !Source.Banner.Enable; }
-		}
+		public bool AllowEdit => !Source.Banner.Enable;
 
-		public bool IsTop
-		{
-			get { return Index == 0; }
-		}
+		public bool IsTop => Index == 0;
 
-		public bool IsBottom
-		{
-			get { return DataGridView != null && Index == DataGridView.RowCount - 1; }
-		}
+		public bool IsBottom => DataGridView != null && Index == DataGridView.RowCount - 1;
 
-		public bool IsOpenable
-		{
-			get { return Source is LibraryObjectLink; }
-		}
+		public bool IsOpenable => Source is LibraryObjectLink;
 
 		public LinkRow()
 		{

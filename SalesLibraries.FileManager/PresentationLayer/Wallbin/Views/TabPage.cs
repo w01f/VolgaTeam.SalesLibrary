@@ -13,10 +13,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 		private bool _readyToUse;
 		public LibraryPage Page { get; private set; }
 		public PageContent Content { get; private set; }
-		public bool IsActive
-		{
-			get { return MainController.Instance.WallbinViews.ActiveWallbin.ActivePage == this; }
-		}
+		public bool IsActive => MainController.Instance.WallbinViews.ActiveWallbin.ActivePage == this;
 
 		public TabPage(LibraryPage page)
 		{

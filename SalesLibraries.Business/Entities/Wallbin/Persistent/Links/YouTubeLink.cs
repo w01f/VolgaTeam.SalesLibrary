@@ -21,10 +21,8 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		}
 
 		[NotMapped, JsonIgnore]
-		public override string WebFormat
-		{
-			get { return WebFormats.YouTube; }
-		}
+		public override string WebFormat => WebFormats.YouTube;
+
 		#endregion
 
 		public YouTubeLink()

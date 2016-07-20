@@ -20,10 +20,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 	{
 		private readonly List<SearchTag> _keywords = new List<SearchTag>();
 
-		private SelectionManager Selection
-		{
-			get { return MainController.Instance.WallbinViews.Selection; }
-		}
+		private SelectionManager Selection => MainController.Instance.WallbinViews.Selection;
 
 		public KeywordsEditor()
 		{
@@ -46,10 +43,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 		}
 
 		#region IGroupSettingsEditor Members
-		public string Title
-		{
-			get { return "Manage Keywords"; }
-		}
+		public string Title => "Manage Keywords";
 
 		public event EventHandler<EventArgs> EditorChanged;
 

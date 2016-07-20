@@ -12,10 +12,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.Folders
 	public partial class AccordionFolderBox : BaseFolderBox
 	{
 		#region Public Properties
-		public override IWallbinViewFormat FormatState
-		{
-			get { return MainController.Instance.WallbinViews.FormatState; }
-		}
+		public override IWallbinViewFormat FormatState => MainController.Instance.WallbinViews.FormatState;
 
 		private bool _isExpanded;
 		public bool IsExpanded

@@ -11,25 +11,13 @@ namespace SalesLibraries.Common.Objects.RemoteStorage
 	{
 		public string[] RelativePathParts { get; private set; }
 
-		public string LocalPath
-		{
-			get { return Path.Combine(FileStorageManager.Instance.LocalStoragePath, Path.Combine(RelativePathParts)); }
-		}
+		public string LocalPath => Path.Combine(FileStorageManager.Instance.LocalStoragePath, Path.Combine(RelativePathParts));
 
-		public string RemotePath
-		{
-			get { return String.Format("/{0}", String.Join(@"/", RelativePathParts)); }
-		}
+		public string RemotePath => String.Format("/{0}", String.Join(@"/", RelativePathParts));
 
-		public string Name
-		{
-			get { return Path.GetFileName(LocalPath); }
-		}
+		public string Name => Path.GetFileName(LocalPath);
 
-		public string NameOnly
-		{
-			get { return Path.GetFileNameWithoutExtension(LocalPath); }
-		}
+		public string NameOnly => Path.GetFileNameWithoutExtension(LocalPath);
 
 		protected StorageItem(object[] relativePathParts)
 		{

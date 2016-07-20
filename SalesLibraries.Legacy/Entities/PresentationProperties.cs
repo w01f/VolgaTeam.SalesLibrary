@@ -9,13 +9,7 @@ namespace SalesLibraries.Legacy.Entities
 		public double Width { get; set; }
 		public DateTime LastUpdate { get; set; }
 
-		public string Orientation
-		{
-			get
-			{
-				return Height < Width ? "Landscape" : "Portrait";
-			}
-		}
+		public string Orientation => Height < Width ? "Landscape" : "Portrait";
 
 		public string Size
 		{

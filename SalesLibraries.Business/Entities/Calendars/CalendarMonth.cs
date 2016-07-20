@@ -15,10 +15,7 @@ namespace SalesLibraries.Business.Entities.Calendars
 		public DateTime MonthFirstDay { get; set; }
 		public List<CalendarDay> Days { get; private set; }
 
-		public string Name
-		{
-			get { return MonthFirstDay.ToString("MMMM").ToUpper(); }
-		}
+		public string Name => MonthFirstDay.ToString("MMMM").ToUpper();
 
 		public void LoadDays()
 		{

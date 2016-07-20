@@ -13,13 +13,7 @@ namespace SalesLibraries.Common.OfficeInterops
 
 		private OutlookHelper() { }
 
-		public static OutlookHelper Instance
-		{
-			get
-			{
-				return _instance;
-			}
-		}
+		public static OutlookHelper Instance => _instance;
 
 		private Application _outlookObject;
 

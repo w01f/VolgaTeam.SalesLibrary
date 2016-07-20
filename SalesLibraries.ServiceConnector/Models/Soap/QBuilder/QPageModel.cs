@@ -9,15 +9,9 @@ namespace SalesLibraries.ServiceConnector.QBuilderService
 	{
 		public bool FullyLoaded { get; set; }
 
-		public string FullName
-		{
-			get { return (firstName + " " + lastName).Trim(); }
-		}
+		public string FullName => (firstName + " " + lastName).Trim();
 
-		public string Type
-		{
-			get { return isEmail ? "Email" : "quickSITE"; }
-		}
+		public string Type => isEmail ? "Email" : "quickSITE";
 
 		public string[] GroupNameList
 		{

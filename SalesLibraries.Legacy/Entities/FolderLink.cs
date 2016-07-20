@@ -14,10 +14,7 @@ namespace SalesLibraries.Legacy.Entities
 		public Guid RootId { get; set; }
 		public DirectoryInfo Folder { get; set; }
 
-		public bool IsDrive
-		{
-			get { return Folder.FullName.Equals(Folder.Root.FullName); }
-		}
+		public bool IsDrive => Folder.FullName.Equals(Folder.Root.FullName);
 
 		public virtual void Deserialize(XmlNode node)
 		{
@@ -50,10 +47,7 @@ namespace SalesLibraries.Legacy.Entities
 		public Library Parent { get; private set; }
 		public int Order { get; set; }
 
-		public int Index
-		{
-			get { return Order + 1; }
-		}
+		public int Index => Order + 1;
 
 		public string Path
 		{

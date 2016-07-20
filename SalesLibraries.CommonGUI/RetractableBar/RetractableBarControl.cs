@@ -20,17 +20,11 @@ namespace SalesLibraries.CommonGUI.RetractableBar
 
 		[Category("Appearance")]
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
-		public Panel Content
-		{
-			get { return pnContent; }
-		}
+		public Panel Content => pnContent;
 
 		[Category("Header")]
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
-		public Panel Header
-		{
-			get { return pnHeaderContent; }
-		}
+		public Panel Header => pnHeaderContent;
 
 		[Browsable(true), DefaultValue(DefaultContentSize), Category("Appearance")]
 		public int ContentSize { get; set; }

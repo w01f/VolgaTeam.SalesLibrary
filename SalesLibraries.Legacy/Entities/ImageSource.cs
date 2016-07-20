@@ -26,10 +26,7 @@ namespace SalesLibraries.Legacy.Entities
 		public string FileName { get; set; }
 		public string OutputFilePath { get; set; }
 
-		public bool ContainsData
-		{
-			get { return XtraTinyImage != null; }
-		}
+		public bool ContainsData => XtraTinyImage != null;
 
 		public void Deserialize(XmlNode node)
 		{

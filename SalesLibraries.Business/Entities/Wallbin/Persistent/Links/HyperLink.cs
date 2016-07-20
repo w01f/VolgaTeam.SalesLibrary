@@ -10,16 +10,10 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 	{
 		#region Nonpersistent Properties
 		[NotMapped, JsonIgnore]
-		public override string FullPath
-		{
-			get { return RelativePath; }
-		}
+		public override string FullPath => RelativePath;
 
 		[NotMapped, JsonIgnore]
-		public override string WebPath
-		{
-			get { return RelativePath; }
-		}
+		public override string WebPath => RelativePath;
 
 		[NotMapped, JsonIgnore]
 		public override string Hint
@@ -36,10 +30,8 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		}
 
 		[NotMapped, JsonIgnore]
-		public string Url
-		{
-			get { return RelativePath; }
-		}
+		public string Url => RelativePath;
+
 		#endregion
 	}
 }

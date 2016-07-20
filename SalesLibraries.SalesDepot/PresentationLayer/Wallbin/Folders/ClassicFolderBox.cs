@@ -13,10 +13,8 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.Folders
 		}
 
 		#region Public Properties
-		public override IWallbinViewFormat FormatState
-		{
-			get { return MainController.Instance.WallbinViews.FormatState; }
-		}
+		public override IWallbinViewFormat FormatState => MainController.Instance.WallbinViews.FormatState;
+
 		#endregion
 	}
 }

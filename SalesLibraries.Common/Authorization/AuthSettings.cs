@@ -18,10 +18,7 @@ namespace SalesLibraries.Common.Authorization
 		public string Password { get; set; }
 		public string Login { get; set; }
 
-		public bool HasCredentials
-		{
-			get { return !String.IsNullOrEmpty(Login) && !String.IsNullOrEmpty(Password); }
-		}
+		public bool HasCredentials => !String.IsNullOrEmpty(Login) && !String.IsNullOrEmpty(Password);
 
 		public void Init(StorageFile settingsFile)
 		{

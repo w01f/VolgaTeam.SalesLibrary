@@ -13,28 +13,16 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 		public List<string> SuperFilters { get; private set; }
 
 		[JsonIgnore]
-		public bool HasTags
-		{
-			get { return HasCategories || HasKeywords || HasSuperFilters; }
-		}
+		public bool HasTags => HasCategories || HasKeywords || HasSuperFilters;
 
 		[JsonIgnore]
-		public bool HasCategories
-		{
-			get { return Categories.Any(); }
-		}
+		public bool HasCategories => Categories.Any();
 
 		[JsonIgnore]
-		public bool HasSuperFilters
-		{
-			get { return SuperFilters.Any(); }
-		}
+		public bool HasSuperFilters => SuperFilters.Any();
 
 		[JsonIgnore]
-		public bool HasKeywords
-		{
-			get { return Keywords.Any(); }
-		}
+		public bool HasKeywords => Keywords.Any();
 
 		[JsonIgnore]
 		public string AllCategories

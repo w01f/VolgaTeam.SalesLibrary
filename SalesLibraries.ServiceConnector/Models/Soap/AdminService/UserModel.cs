@@ -5,10 +5,7 @@ namespace SalesLibraries.ServiceConnector.AdminService
 {
 	public partial class UserModel
 	{
-		public string FullName
-		{
-			get { return (firstName + " " + lastName).Trim(); }
-		}
+		public string FullName => (firstName + " " + lastName).Trim();
 
 		public string Role
 		{
@@ -48,10 +45,7 @@ namespace SalesLibraries.ServiceConnector.AdminService
 			}
 		}
 
-		public string LoginWithName
-		{
-			get { return string.Format("{0} ({1})", login, FullName); }
-		}
+		public string LoginWithName => string.Format("{0} ({1})", login, FullName);
 
 		public string AssignedObjects
 		{

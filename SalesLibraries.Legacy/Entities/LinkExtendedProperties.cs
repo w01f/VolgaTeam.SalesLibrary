@@ -194,10 +194,7 @@ namespace SalesLibraries.Legacy.Entities
 			}
 		}
 
-		public bool IsRegularFormat
-		{
-			get { return !(_isBold || _isSpecialFormat); }
-		}
+		public bool IsRegularFormat => !(_isBold || _isSpecialFormat);
 
 		public bool DisplayAsBold
 		{

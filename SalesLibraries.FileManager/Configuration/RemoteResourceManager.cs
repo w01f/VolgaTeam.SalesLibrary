@@ -9,10 +9,7 @@ namespace SalesLibraries.FileManager.Configuration
 	{
 		private static readonly RemoteResourceManager _instance = new RemoteResourceManager();
 
-		public static RemoteResourceManager Instance
-		{
-			get { return _instance; }
-		}
+		public static RemoteResourceManager Instance => _instance;
 
 		#region Local
 		public StorageDirectory MetaDataCacheFolder { get; private set; }

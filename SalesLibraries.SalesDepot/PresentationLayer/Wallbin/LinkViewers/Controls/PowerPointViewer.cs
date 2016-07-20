@@ -23,17 +23,12 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Contro
 		#region Properties
 		public LibraryObjectLink Link { get; private set; }
 
-		public string DisplayName
-		{
-			get { return Link.Name; }
-		}
+		public string DisplayName => Link.Name;
 
-		public PowerPointLink PowerPointLink { get { return (PowerPointLink)Link; } }
+		public PowerPointLink PowerPointLink => (PowerPointLink)Link;
 
-		private PresentationSlideThumbnail SelectedThumbnail
-		{
-			get { return (PresentationSlideThumbnail)comboBoxEditSlides.EditValue; }
-		}
+		private PresentationSlideThumbnail SelectedThumbnail => (PresentationSlideThumbnail)comboBoxEditSlides.EditValue;
+
 		#endregion
 
 		public PowerPointViewer(LibraryObjectLink link)

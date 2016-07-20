@@ -13,12 +13,6 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.EmailBin
 			buttonXCancel.Font = new System.Drawing.Font(buttonXCancel.Font.FontFamily, buttonXCancel.Font.Size - 2, buttonXCancel.Font.Style);
 		}
 
-		public string FileName
-		{
-			get
-			{
-				return textEditFileName.EditValue != null ? textEditFileName.EditValue.ToString() : null;
-			}
-		}
+		public string FileName => textEditFileName.EditValue != null ? textEditFileName.EditValue.ToString() : null;
 	}
 }

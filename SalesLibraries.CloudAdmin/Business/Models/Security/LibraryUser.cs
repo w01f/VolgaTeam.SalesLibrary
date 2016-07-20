@@ -14,10 +14,7 @@ namespace SalesLibraries.CloudAdmin.Business.Models.Security
 		[JsonIgnore]
 		public bool Selected { get; set; }
 
-		public string FullName
-		{
-			get { return String.Format("{0} {1}", FirstName, LastName); }
-		}
+		public string FullName => String.Format("{0} {1}", FirstName, LastName);
 
 		public static LibraryUser LoadFromCloudData(UserModel cloudUser)
 		{

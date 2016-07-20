@@ -5,10 +5,7 @@ namespace SalesLibraries.Common.OfficeInterops
 	public class PowerPointSingleton : PowerPointProcessor
 	{
 		private static readonly PowerPointSingleton _instance = new PowerPointSingleton();
-		public static PowerPointSingleton Instance
-		{
-			get { return _instance; }
-		}
+		public static PowerPointSingleton Instance => _instance;
 		private PowerPointSingleton() { }
 
 

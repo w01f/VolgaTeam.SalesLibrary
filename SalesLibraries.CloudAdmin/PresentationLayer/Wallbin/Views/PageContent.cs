@@ -22,10 +22,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 		private readonly List<ClassicFolderBox> _folderBoxes = new List<ClassicFolderBox>();
 		public IPageView PageContainer { get; private set; }
 
-		private int InnerWidth
-		{
-			get { return Width - SystemInformation.VerticalScrollBarWidth; }
-		}
+		private int InnerWidth => Width - SystemInformation.VerticalScrollBarWidth;
 
 		public PageContent(IPageView pageContainer)
 		{

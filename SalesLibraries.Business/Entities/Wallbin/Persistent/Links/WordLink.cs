@@ -9,10 +9,8 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 	{
 		#region Nonpersistent Properties
 		[NotMapped, JsonIgnore]
-		public override string WebFormat
-		{
-			get { return WebFormats.Word; }
-		}
+		public override string WebFormat => WebFormats.Word;
+
 		#endregion
 
 		public WordLink()

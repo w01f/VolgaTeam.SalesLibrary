@@ -18,10 +18,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 			}
 		}
 
-		public int RowSpace
-		{
-			get { return 2; }
-		}
+		public int RowSpace => 2;
 
 		private bool _allowEdit;
 		public bool AllowEdit

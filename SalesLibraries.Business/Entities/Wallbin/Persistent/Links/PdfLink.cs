@@ -9,10 +9,8 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 	{
 		#region Nonpersistent Properties
 		[NotMapped, JsonIgnore]
-		public override string WebFormat
-		{
-			get { return WebFormats.Pdf; }
-		}
+		public override string WebFormat => WebFormats.Pdf;
+
 		#endregion
 
 		public PdfLink()

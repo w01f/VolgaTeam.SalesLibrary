@@ -17,10 +17,8 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Contro
 		#region Properties
 		public LibraryObjectLink Link { get; private set; }
 
-		public string DisplayName
-		{
-			get { return Link.Name; }
-		}
+		public string DisplayName => Link.Name;
+
 		#endregion
 
 		public PDFViewer(LibraryObjectLink link)

@@ -8,10 +8,8 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers
 	{
 		#region Nonpersistent Properties
 		[NotMapped, JsonIgnore]
-		protected override IEnumerable<string> BasePreviewFormats
-		{
-			get { return new string[] { }; }
-		}
+		protected override IEnumerable<string> BasePreviewFormats => new string[] { };
+
 		#endregion
 	}
 }

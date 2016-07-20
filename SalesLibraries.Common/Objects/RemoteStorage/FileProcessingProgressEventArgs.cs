@@ -12,10 +12,7 @@ namespace SalesLibraries.Common.Objects.RemoteStorage
 		public decimal TotalSize { get; private set; }
 		public decimal DownloadedSize { get; private set; }
 
-		public int ProgressPercent
-		{
-			get { return (Int32)((DownloadedSize / TotalSize) * 100); }
-		}
+		public int ProgressPercent => (Int32)((DownloadedSize / TotalSize) * 100);
 
 		public FileProcessingProgressEventArgs(string fileName, decimal totalSize, decimal downloadedSize)
 		{

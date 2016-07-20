@@ -20,18 +20,11 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 	{
 		private readonly PreviewableLink _data;
 
-		public LinkSettingsType SettingsType
-		{
-			get { return LinkSettingsType.Notes; }
-		}
-		public int Order
-		{
-			get { return 3; }
-		}
-		public bool AvailableForEmbedded
-		{
-			get { return false; }
-		}
+		public LinkSettingsType SettingsType => LinkSettingsType.Notes;
+
+		public int Order => 3;
+
+		public bool AvailableForEmbedded => false;
 		public SettingsEditorHeaderInfo HeaderInfo => null;
 
 		public event EventHandler<EventArgs> ForceCloseRequested;

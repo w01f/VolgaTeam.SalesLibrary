@@ -66,9 +66,6 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 		}
 
 		[JsonIgnore]
-		public bool HasSecuritySettings
-		{
-			get { return NoShare || IsForbidden || IsRestricted; }
-		}
+		public bool HasSecuritySettings => NoShare || IsForbidden || IsRestricted;
 	}
 }

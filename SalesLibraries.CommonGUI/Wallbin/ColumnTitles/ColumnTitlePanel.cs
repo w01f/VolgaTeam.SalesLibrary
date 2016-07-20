@@ -10,10 +10,7 @@ namespace SalesLibraries.CommonGUI.Wallbin.ColumnTitles
 	{
 		private LibraryPage _page;
 
-		public int PanelBottom
-		{
-			get { return Bottom; }
-		}
+		public int PanelBottom => Bottom;
 
 		public ColumnTitlePanel(LibraryPage page)
 		{

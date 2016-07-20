@@ -41,10 +41,7 @@ namespace SalesLibraries.Common.Helpers
 
 		public DataActualityState DataState { get; set; }
 
-		private string RemoteStorageUrl
-		{
-			get { return String.Format(RemoteStorageUrlTemplate, _url); }
-		}
+		private string RemoteStorageUrl => String.Format(RemoteStorageUrlTemplate, _url);
 
 		public string LocalStoragePath
 		{

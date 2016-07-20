@@ -11,10 +11,7 @@ namespace SalesLibraries.FileManager.Business.Services
 		public int TotalLinks { get; private set; }
 		public int TaggedLinks { get; private set; }
 
-		public static TaggedLinksManager Instance
-		{
-			get { return _instance; }
-		}
+		public static TaggedLinksManager Instance => _instance;
 
 		public void Load(Library library)
 		{
