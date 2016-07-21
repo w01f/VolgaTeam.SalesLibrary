@@ -66,11 +66,13 @@
 			$this->windowFont->size = $folderRecord->window_font_size;
 			$this->windowFont->isBold = $folderRecord->window_font_bold;
 			$this->windowFont->isItalic = $folderRecord->window_font_italic;
+			$this->windowFont->isUnderlined = $folderRecord->window_font_underline;
 			$this->headerFont = new \Font();
 			$this->headerFont->name = $folderRecord->header_font_name;
 			$this->headerFont->size = $folderRecord->header_font_size;
 			$this->headerFont->isBold = $folderRecord->header_font_bold;
 			$this->headerFont->isItalic = $folderRecord->header_font_italic;
+			$this->headerFont->isUnderlined = $folderRecord->header_font_underline;
 			$this->headerAlignment = $folderRecord->header_alignment;
 			$this->enableWidget = $folderRecord->enable_widget;
 			$this->widget = $folderRecord->widget;

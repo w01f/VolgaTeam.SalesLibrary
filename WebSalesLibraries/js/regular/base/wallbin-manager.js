@@ -284,7 +284,7 @@
 
 		var updateTextSize = function (textSize)
 		{
-			$('.link-text, .link-note').css('font-size', textSize + 'pt');
+			$('.link-text-sized, .link-note-sized').css('font-size', textSize + 'pt');
 
 			$.cookie("wallbinTextSize", textSize, {
 				expires: (60 * 60 * 24 * 7)

@@ -57,9 +57,13 @@
 
 .link-text
 {
-	font-size: 12pt;
 	white-space: nowrap;
 	line-height: 32px;
+}
+
+.link-text-sized
+{
+	font-size: 12pt;
 }
 
 .link-line-break

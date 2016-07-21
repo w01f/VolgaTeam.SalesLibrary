@@ -12,6 +12,7 @@
 	 * @property mixed font_name
 	 * @property mixed font_bold
 	 * @property mixed font_italic
+	 * @property mixed font_underline
 	 * @property mixed show_text
 	 * @property mixed alignment
 	 * @property mixed enable_widget
@@ -54,6 +55,7 @@
 			$columnRecord->font_size = $column['font']['size'];
 			$columnRecord->font_bold = $column['font']['isBold'];
 			$columnRecord->font_italic = $column['font']['isItalic'];
+			$columnRecord->font_underline = $column['font']['isUnderlined'];
 			$columnRecord->show_text = $column['showText'];
 			$columnRecord->alignment = $column['alignment'];
 			$columnRecord->enable_widget = $column['enableWidget'];

@@ -1,14 +1,11 @@
 <?php
+	namespace application\models\wallbin\models\web;
 
 	/**
 	 * Class SuperFilter
 	 */
 	class SuperFilter
 	{
-		/**
-		 * @var string
-		 * @soap
-		 */
 		public $value;
 		public $selected;
 

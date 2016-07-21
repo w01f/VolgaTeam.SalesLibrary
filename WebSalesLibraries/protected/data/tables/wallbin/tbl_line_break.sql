@@ -8,6 +8,7 @@ CREATE TABLE IF NOT EXISTS `tbl_line_break` (
   `font_size` int(11) NOT NULL,
   `font_bold` tinyint(1) NOT NULL,
   `font_italic` tinyint(1) NOT NULL,
+  `font_underline` tinyint(1) NULL,
   `date_modify` datetime NULL,
   PRIMARY KEY (`id`),
   KEY `id_library` (`id_library`)

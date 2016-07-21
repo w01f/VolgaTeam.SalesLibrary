@@ -40,12 +40,14 @@
 	if ($authorized)
 		$linkContainerClass .= ' log-activity';
 ?>
-<a class="<? echo $linkContainerClass; ?>" id="link<? echo $link->id; ?>" href="<? echo $link->isDirectUrl ? $link->fileLink : '#'; ?>" target="_blank">
+<a class="<? echo $linkContainerClass; ?>" id="link<? echo $link->id; ?>"
+   href="<? echo $link->isDirectUrl ? $link->fileLink : '#'; ?>" target="_blank">
 	<? if (!(isset($disableBanner) && $disableBanner) && isset($link->banner) && $link->banner->isEnabled): ?>
 		<? echo $this->renderFile(Yii::getPathOfAlias('application.views.regular.wallbin') . '/banner.php', array('banner' => $link->banner, 'isLinkBanner' => true, 'tooltip' => (isset($tooltip) ? $tooltip : null)), true); ?>
 	<? else: ?>
 		<?
 		$widget = $link->getWidget();
+		$isLinkStaticFontSize = false;
 		if ($isLineBreak)
 		{
 			$displayWidget = !(isset($disableWidget) && $disableWidget) && isset($widget) && $widget != '';
@@ -54,15 +56,20 @@
 				. 'font-size: ' . $link->lineBreakProperties->font->size . 'pt; '
 				. 'font-weight: ' . ($link->lineBreakProperties->font->isBold ? ' bold' : ' normal') . '; '
 				. 'font-style: ' . ($link->lineBreakProperties->font->isItalic ? ' italic' : ' normal') . '; '
+				. 'text-decoration: ' . ($link->lineBreakProperties->font->isUnderlined ? ' underline' : ' none') . '; '
 				. 'color: ' . $link->lineBreakProperties->foreColor . '; '
 				. 'white-space: nowrap;';
+			$isLinkStaticFontSize = true;
 		}
 		else
 		{
 			$displayWidget = isset($link->files) ? $link->parent->displayLinkWidgets : (!(isset($disableWidget) && $disableWidget) && isset($widget) && $widget != '');
 			$linkClass = $displayWidget ? ' widget' : '';
 			if ($link->extendedProperties->isSpecialFormat && isset($link->extendedProperties->font))
+			{
+				$isLinkStaticFontSize = true;
 				$font = $link->extendedProperties->font;
+			}
 			else if (isset($link->parent) && isset($link->parent->windowFont))
 				$font = $link->parent->windowFont;
 			else
@@ -84,11 +91,13 @@
 				. 'white-space: nowrap;';
 		}
 		?>
-		<div class="<? echo $linkClass; ?>" draggable="<? echo $draggable?'true':'false'; ?>"
+		<div class="<? echo $linkClass; ?>" draggable="<? echo $draggable ? 'true' : 'false'; ?>"
 		     style="background-image: <? echo !(isset($disableWidget) && $disableWidget) && isset($widget) ? "url('data:image/png;base64," . $widget . "')" : ""; ?>; <? echo $linkFontProperties; ?>">
-			<span class="link-text mtTool" <? if (isset($tooltip)): ?>mtcontent="<? echo $tooltip; ?>"<? endif; ?>><? echo $link->name; ?></span>
+			<span class="link-text<? echo !$isLinkStaticFontSize ? ' link-text-sized' : ''; ?> mtTool"
+			      <? if (isset($tooltip)): ?>mtcontent="<? echo $tooltip; ?>"<? endif; ?>><? echo $link->name; ?></span>
 			<? if (isset($link->extendedProperties->note) && $link->extendedProperties->note != ""): ?>
-				<span class="link-note"><? echo ' - '.$link->extendedProperties->note; ?></span>
+				<span
+					class="link-note<? echo !$isLinkStaticFontSize ? ' link-note-sized' : ''; ?>"><? echo ' - ' . $link->extendedProperties->note; ?></span>
 			<? endif; ?>
 		</div>
 	<? endif; ?>

@@ -10,6 +10,7 @@
 	 * @property mixed font_size
 	 * @property mixed font_bold
 	 * @property mixed font_italic
+	 * @property mixed font_underline
 	 * @property mixed date_modify
 	 */
 	class LineBreakRecord extends CActiveRecord
@@ -45,6 +46,7 @@
 			$lineBreakRecord->font_size = $lineBreak['font']['size'];
 			$lineBreakRecord->font_bold = $lineBreak['font']['isBold'];
 			$lineBreakRecord->font_italic = $lineBreak['font']['isItalic'];
+			$lineBreakRecord->font_underline = $lineBreak['font']['isUnderlined'];
 			$lineBreakRecord->date_modify = date(Yii::app()->params['mysqlDateFormat'], strtotime($lineBreak['dateModify']));
 			$lineBreakRecord->save();
 		}

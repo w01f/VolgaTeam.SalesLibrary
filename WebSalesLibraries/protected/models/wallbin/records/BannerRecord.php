@@ -14,6 +14,7 @@
 	 * @property mixed font_size
 	 * @property mixed font_bold
 	 * @property mixed font_italic
+	 * @property mixed font_underline
 	 * @property mixed date_modify
 	 */
 	class BannerRecord extends CActiveRecord
@@ -55,6 +56,7 @@
 			$bannerRecord->font_size = $banner['font']['size'];
 			$bannerRecord->font_bold = $banner['font']['isBold'];
 			$bannerRecord->font_italic = $banner['font']['isItalic'];
+			$bannerRecord->font_underline = $banner['font']['isUnderlined'];
 			$bannerRecord->date_modify = date(Yii::app()->params['mysqlDateFormat'], strtotime($banner['dateModify']));
 			$bannerRecord->save();
 		}

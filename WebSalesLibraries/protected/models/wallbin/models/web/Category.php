@@ -6,20 +6,8 @@
 	 */
 	class Category
 	{
-		/**
-		 * @var string
-		 * @soap
-		 */
 		public $category;
-		/**
-		 * @var string
-		 * @soap
-		 */
 		public $description;
-		/**
-		 * @var string
-		 * @soap
-		 */
 		public $tag;
 		public $id;
 		public $selected;

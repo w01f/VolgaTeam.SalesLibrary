@@ -1,5 +1,6 @@
 <?
 	use application\models\wallbin\models\web\Category as Category;
+	use application\models\wallbin\models\web\SuperFilter as SuperFilter;
 
 	/**
 	 * Class CategoryManager

@@ -11,6 +11,7 @@ CREATE TABLE IF NOT EXISTS `tbl_column` (
   `font_size` int(11) NOT NULL,
   `font_bold` tinyint(1) NOT NULL,
   `font_italic` tinyint(1) NOT NULL,
+  `font_underline` tinyint(1) NULL,
   `show_text` tinyint(1) NOT NULL,
   `alignment` varchar(64) NOT NULL,
   `enable_widget` tinyint(1) NOT NULL,

@@ -38,5 +38,6 @@
 			$this->font->size = $bannerRecord->font_size;
 			$this->font->isBold = $bannerRecord->font_bold;
 			$this->font->isItalic = $bannerRecord->font_italic;
+			$this->font->isUnderlined = $bannerRecord->font_underline;
 		}
 	}

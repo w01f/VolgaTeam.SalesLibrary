@@ -1,5 +1,6 @@
 <?
 	use application\models\wallbin\models\web\Category as Category;
+	use application\models\wallbin\models\web\SuperFilter as SuperFilter;
 
 	/**
 	 * Class FileManagerDataController
@@ -16,8 +17,8 @@
 					'class' => 'CWebServiceAction',
 					'classMap' => array(
 						'GroupModel' => 'GroupModel',
-						'Category' => 'Category',
-						'SuperFilter' => 'SuperFilter',
+						'SoapCategory' => 'SoapCategory',
+						'SoapSuperFilter' => 'SoapSuperFilter',
 					),
 				),
 			);
@@ -35,7 +36,7 @@
 			{
 				foreach (GroupRecord::model()->findAll() as $groupRecord)
 				{
-					/** @var $groupRecord GroupRecord*/
+					/** @var $groupRecord GroupRecord */
 					$group = new GroupModel();
 					$group->id = $groupRecord->id;
 					$group->name = $groupRecord->name;
@@ -59,7 +60,7 @@
 							$userList[] = $user;
 						}
 					}
-					$sortHelper = new ObjectSortHelper('firstName','asc');
+					$sortHelper = new ObjectSortHelper('firstName', 'asc');
 					usort($userList, array($sortHelper, 'sort'));
 					$group->users = $userList;
 
@@ -69,40 +70,45 @@
 			}
 
 			Yii::app()->cacheDB->flush();
-			$sortHelper = new ObjectSortHelper('name','asc');
+			$sortHelper = new ObjectSortHelper('name', 'asc');
 			usort($groups, array($sortHelper, 'sort'));
 			return $groups;
 		}
 
 		/**
 		 * @param string $sessionKey
-		 * @return Category[]
+		 * @return SoapCategory[]
 		 * @soap
 		 */
 		public function getCategories($sessionKey)
 		{
+			$soapCategories = array();
 			if ($this->authenticateBySession($sessionKey))
 			{
 				$categoryManager = new CategoryManager();
 				$categoryManager->loadCategories();
-				return $categoryManager->categories;
+				foreach ($categoryManager->categories as $category)
+					$soapCategories[] = SoapCategory::load($category);
 			}
-			return null;
+			return $soapCategories;
 		}
 
 		/**
 		 * @param string $sessionKey
-		 * @return SuperFilter[]
+		 * @return SoapSuperFilter[]
 		 * @soap
 		 */
 		public function getSuperFilters($sessionKey)
 		{
+			$soapSuperFilters = array();
 			if ($this->authenticateBySession($sessionKey))
 			{
 				$categoryManager = new CategoryManager();
 				$categoryManager->loadCategories();
-				return $categoryManager->superFilters;
+
+				foreach ($categoryManager->superFilters as $superFilter)
+					$soapSuperFilters[] = SoapSuperFilter::load($superFilter);
 			}
-			return null;
+			return $soapSuperFilters;
 		}
 	}

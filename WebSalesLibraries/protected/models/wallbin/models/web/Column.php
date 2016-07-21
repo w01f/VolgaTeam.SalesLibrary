@@ -60,6 +60,7 @@
 			$this->font->size = $columnRecord->font_size;
 			$this->font->isBold = $columnRecord->font_bold;
 			$this->font->isItalic = $columnRecord->font_italic;
+			$this->font->isUnderlined = $columnRecord->font_underline;
 			$this->showText = $columnRecord->show_text;
 			$this->alignment = $columnRecord->alignment;
 			$this->enableWidget = $columnRecord->enable_widget;

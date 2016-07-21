@@ -17,10 +17,12 @@
 	 * @property int window_font_size
 	 * @property boolean window_font_bold
 	 * @property boolean window_font_italic
+	 * @property boolean window_font_underline
 	 * @property string header_font_name
 	 * @property int header_font_size
 	 * @property boolean header_font_bold
 	 * @property boolean header_font_italic
+	 * @property boolean header_font_underline
 	 * @property string header_alignment
 	 * @property string widget
 	 * @property boolean enable_widget
@@ -117,10 +119,12 @@
 				$folderRecord->window_font_size = $folder['windowFont']['size'];
 				$folderRecord->window_font_bold = $folder['windowFont']['isBold'];
 				$folderRecord->window_font_italic = $folder['windowFont']['isItalic'];
+				$folderRecord->window_font_underline = $folder['windowFont']['isUnderlined'];
 				$folderRecord->header_font_name = $folder['headerFont']['name'];
 				$folderRecord->header_font_size = $folder['headerFont']['size'];
 				$folderRecord->header_font_bold = $folder['headerFont']['isBold'];
 				$folderRecord->header_font_italic = $folder['headerFont']['isItalic'];
+				$folderRecord->header_font_underline = $folder['headerFont']['isUnderlined'];
 				$folderRecord->header_alignment = $folder['headerAlignment'];
 				$folderRecord->enable_widget = $folder['enableWidget'];
 				$folderRecord->widget = $folder['widget'];
