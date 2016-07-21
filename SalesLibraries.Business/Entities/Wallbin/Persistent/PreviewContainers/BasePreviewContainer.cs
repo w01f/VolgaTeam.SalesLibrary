@@ -124,15 +124,15 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers
 		{
 			BasePreviewContainer previewContainer;
 			if (FileFormatHelper.IsPowerPointFile(sourceFile))
-				previewContainer = new PowerPointPreviewContainer();
+				previewContainer = CreateEntity<PowerPointPreviewContainer>();
 			else if (FileFormatHelper.IsWordFile(sourceFile))
-				previewContainer = new WordPreviewContainer();
+				previewContainer = CreateEntity<WordPreviewContainer>();
 			else if (FileFormatHelper.IsPdfFile(sourceFile))
-				previewContainer = new PdfPreviewContainer();
+				previewContainer = CreateEntity<PdfPreviewContainer>();
 			else if (FileFormatHelper.IsExcelFile(sourceFile))
-				previewContainer = new ExcelPreviewContainer();
-			else if (FileFormatHelper.IsVideoFile(sourceFile) )
-				previewContainer = new VideoPreviewContainer();
+				previewContainer = CreateEntity<ExcelPreviewContainer>();
+			else if (FileFormatHelper.IsVideoFile(sourceFile))
+				previewContainer = CreateEntity<VideoPreviewContainer>();
 			else
 				return null;
 			var relativePath = sourceFile.Replace(parent.Path, String.Empty);

@@ -50,7 +50,10 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 
 		public static QuickSiteLink Create(string path)
 		{
-			return new QuickSiteLink { RelativePath = path };
+			return CreateEntity<QuickSiteLink>(quickSiteLink =>
+			{
+				quickSiteLink.RelativePath = path;
+			});
 		}
 	}
 }

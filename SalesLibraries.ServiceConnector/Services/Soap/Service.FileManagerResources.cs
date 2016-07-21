@@ -71,10 +71,10 @@ namespace SalesLibraries.ServiceConnector.Services.Soap
 			return groups.ToArray();
 		}
 
-		public IEnumerable<Category> GetCategories(out string message)
+		public IEnumerable<SoapCategory> GetCategories(out string message)
 		{
 			message = string.Empty;
-			var categories = new List<Category>();
+			var categories = new List<SoapCategory>();
 			var client = GetFileManagerResourcesClient();
 			if (client != null)
 			{
@@ -82,7 +82,7 @@ namespace SalesLibraries.ServiceConnector.Services.Soap
 				{
 					var sessionKey = client.getSessionKey(Login, Password);
 					if (!string.IsNullOrEmpty(sessionKey))
-						categories.AddRange(client.getCategories(sessionKey) ?? new Category[] { });
+						categories.AddRange(client.getCategories(sessionKey) ?? new SoapCategory[] { });
 					else
 						message = "Couldn't complete operation.\nLogin or password are not correct.";
 				}
@@ -96,10 +96,10 @@ namespace SalesLibraries.ServiceConnector.Services.Soap
 			return categories.ToArray();
 		}
 
-		public IEnumerable<SuperFilter> GetSuperFilters(out string message)
+		public IEnumerable<SoapSuperFilter> GetSuperFilters(out string message)
 		{
 			message = string.Empty;
-			var superFilters = new List<SuperFilter>();
+			var superFilters = new List<SoapSuperFilter>();
 			var client = GetFileManagerResourcesClient();
 			if (client != null)
 			{
@@ -107,7 +107,7 @@ namespace SalesLibraries.ServiceConnector.Services.Soap
 				{
 					var sessionKey = client.getSessionKey(Login, Password);
 					if (!string.IsNullOrEmpty(sessionKey))
-						superFilters.AddRange(client.getSuperFilters(sessionKey) ?? new SuperFilter[] { });
+						superFilters.AddRange(client.getSuperFilters(sessionKey) ?? new SoapSuperFilter[] { });
 					else
 						message = "Couldn't complete operation.\nLogin or password are not correct.";
 				}

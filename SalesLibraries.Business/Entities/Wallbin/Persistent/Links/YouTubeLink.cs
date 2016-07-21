@@ -50,7 +50,10 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 
 		public static YouTubeLink Create(string path)
 		{
-			return new YouTubeLink { RelativePath = path };
+			return CreateEntity<YouTubeLink>(youTubeLink =>
+			{
+				youTubeLink.RelativePath = path;
+			});
 		}
 	}
 }

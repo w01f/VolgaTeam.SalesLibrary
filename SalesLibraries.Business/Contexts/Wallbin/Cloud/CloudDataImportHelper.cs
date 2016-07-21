@@ -12,11 +12,11 @@ namespace SalesLibraries.Business.Contexts.Wallbin.Cloud
 			Library targetLibrary;
 			if (!target.HasData || !target.Library.ExtId.Equals(source.Library.Id))
 			{
-				targetLibrary = new Library
+				targetLibrary = WallbinEntity.CreateEntity<Library>(library =>
 				{
-					Context = target,
-					Path = target.DataSourceFolderPath
-				};
+					library.Context = target;
+					library.Path = target.DataSourceFolderPath;
+				});
 				target.Libraries.Add(targetLibrary);
 			}
 			else
@@ -25,7 +25,7 @@ namespace SalesLibraries.Business.Contexts.Wallbin.Cloud
 
 			foreach (var sourceLibraryPage in source.Pages)
 			{
-				var targetPage = new LibraryPage();
+				var targetPage = WallbinEntity.CreateEntity<LibraryPage>();
 				targetPage.ImportCloudData(sourceLibraryPage);
 				targetPage.Library = targetLibrary;
 				targetLibrary.Pages.Add(targetPage);

@@ -67,7 +67,7 @@ namespace SalesLibraries.Business.Contexts.Wallbin.Local
 
 			foreach (var legacyPage in legacyLibrary.Pages)
 			{
-				var targetPage = new LibraryPage();
+				var targetPage = WallbinEntity.CreateEntity<LibraryPage>();
 				targetPage.Library = target;
 				targetPage.ImportLegacyData(legacyPage);
 				target.Pages.Add(targetPage);
@@ -91,7 +91,7 @@ namespace SalesLibraries.Business.Contexts.Wallbin.Local
 
 			foreach (var libraryFolder in legacy.Folders)
 			{
-				var targetFolder = new LibraryFolder();
+				var targetFolder = WallbinEntity.CreateEntity<LibraryFolder>();
 				targetFolder.Page = target;
 				targetFolder.ImportLegacyData(libraryFolder);
 				target.Folders.Add(targetFolder);
@@ -100,7 +100,7 @@ namespace SalesLibraries.Business.Contexts.Wallbin.Local
 			if (legacy.EnableColumnTitles)
 				foreach (var columnTitle in legacy.ColumnTitles)
 				{
-					var targetColumnTitle = new ColumnTitle();
+					var targetColumnTitle = WallbinEntity.CreateEntity<ColumnTitle>();
 					targetColumnTitle.Page = target;
 					targetColumnTitle.ImportLegacyData(columnTitle);
 					target.ColumnTitles.Add(targetColumnTitle);
@@ -125,7 +125,7 @@ namespace SalesLibraries.Business.Contexts.Wallbin.Local
 			target.Settings.WindowFont = (Font)legacy.WindowFont.Clone();
 
 			target.Widget.WidgetType = legacy.EnableWidget ? WidgetType.CustomWidget : WidgetType.NoWidget;
-			target.Widget.Image = (Image)(legacy.Widget != null ? legacy.Widget.Clone() : null);
+			target.Widget.Image = (Image)legacy.Widget?.Clone();
 
 			if (legacy.BannerProperties != null)
 			{
@@ -150,7 +150,7 @@ namespace SalesLibraries.Business.Contexts.Wallbin.Local
 				switch (legacyLink.Type)
 				{
 					case Legacy.Entities.FileTypes.LineBreak:
-						libraryLink = new LineBreak();
+						libraryLink = WallbinEntity.CreateEntity<LineBreak>();
 						break;
 					case Legacy.Entities.FileTypes.Url:
 						libraryLink = WebLink.Create(legacyLink.OriginalPath);
@@ -159,7 +159,7 @@ namespace SalesLibraries.Business.Contexts.Wallbin.Local
 						libraryLink = NetworkLink.Create(legacyLink.OriginalPath);
 						break;
 					case Legacy.Entities.FileTypes.Folder:
-						libraryLink = new LibraryFolderLink();
+						libraryLink = WallbinEntity.CreateEntity<LibraryFolderLink>();
 						break;
 					default:
 						libraryLink = LibraryFileLink.Create(legacyLink.OriginalPath);
@@ -315,7 +315,7 @@ namespace SalesLibraries.Business.Contexts.Wallbin.Local
 					switch (legacyLink.Type)
 					{
 						case Legacy.Entities.FileTypes.Folder:
-							libraryLink = new LibraryFolderLink();
+							libraryLink = WallbinEntity.CreateEntity<LibraryFolderLink>();
 							break;
 						default:
 							libraryLink = LibraryFileLink.Create(legacyLink.OriginalPath);

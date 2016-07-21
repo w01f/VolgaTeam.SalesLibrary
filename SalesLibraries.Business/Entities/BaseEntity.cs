@@ -1,6 +1,8 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
+using Newtonsoft.Json;
 
 namespace SalesLibraries.Business.Entities
 {

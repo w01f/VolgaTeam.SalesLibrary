@@ -47,7 +47,7 @@ namespace SalesLibraries.CommonGUI.Wallbin.ColumnTitles
 
 		public void UpdateSize()
 		{
-			if(!_page.Settings.EnableColumnTitles) return;
+			if (!_page.Settings.EnableColumnTitles) return;
 			var panelWidth = Width / 3;
 			var columTitles = Controls.OfType<ColumnTitleControl>().ToList();
 			foreach (var columnTitleControl in columTitles)

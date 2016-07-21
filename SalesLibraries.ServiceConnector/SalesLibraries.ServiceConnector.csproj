@@ -298,9 +298,6 @@
     <None Include="Web References\AdminService\UserModel.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
-    <None Include="Web References\FileManagerResourcesService\Category.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
     <None Include="Web References\FileManagerResourcesService\FileManagerDataController.wsdl" />
     <None Include="Web References\FileManagerResourcesService\GroupModel.datasource">
       <DependentUpon>Reference.map</DependentUpon>
@@ -309,7 +306,10 @@
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Web References\FileManagerResourcesService\SuperFilter.datasource">
+    <None Include="Web References\FileManagerResourcesService\SoapCategory.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\FileManagerResourcesService\SoapSuperFilter.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
     <None Include="Web References\InactiveUsersService\InactiveUsersController.wsdl" />

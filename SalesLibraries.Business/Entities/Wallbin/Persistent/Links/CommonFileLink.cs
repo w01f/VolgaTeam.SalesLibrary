@@ -13,7 +13,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		{
 			get
 			{
-				if(FileFormatHelper.IsJpegFile(FullPath))
+				if (FileFormatHelper.IsJpegFile(FullPath))
 					return WebFormats.Jpeg;
 				if (FileFormatHelper.IsAppleDocumentFile(FullPath))
 					return WebFormats.AppleDocument;

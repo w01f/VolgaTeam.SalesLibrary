@@ -100,11 +100,11 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 				InactiveLinksEncoded = InactiveLinksSettings.Serialize();
 				ProgramDataEncoded = ProgramData.Serialize();
 				CalendarEncoded = Calendar.Serialize();
-				foreach (var libraryPage in Pages)
-					libraryPage.BeforeSave();
-				foreach (var previewContainer in PreviewContainers)
-					previewContainer.BeforeSave();
 			}
+			foreach (var libraryPage in Pages)
+				libraryPage.BeforeSave();
+			foreach (var previewContainer in PreviewContainers)
+				previewContainer.BeforeSave();
 			base.BeforeSave();
 		}
 
@@ -136,11 +136,11 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 		#region Page Processing
 		public void AddPage()
 		{
-			var page = new LibraryPage
+			var page = CreateEntity<LibraryPage>(p =>
 			{
-				Library = this,
-				Order = Pages.Count
-			};
+				p.Library = this;
+				p.Order = Pages.Count;
+			});
 			Pages.AddItem(page);
 			page.Name = String.Format("Page {0}", page.Order + 1);
 		}

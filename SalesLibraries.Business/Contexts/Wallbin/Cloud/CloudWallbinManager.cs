@@ -201,7 +201,7 @@ namespace SalesLibraries.Business.Contexts.Wallbin.Cloud
 						var localLibraryPage = workingContext.Library.Pages.FirstOrDefault(page => page.ExtId == sourceLibraryPage.Id);
 						if (localLibraryPage == null)
 						{
-							localLibraryPage = new LibraryPage();
+							localLibraryPage = WallbinEntity.CreateEntity<LibraryPage>();
 							localLibraryPage.Library = workingContext.Library;
 							workingContext.Library.Pages.Add(localLibraryPage);
 						}

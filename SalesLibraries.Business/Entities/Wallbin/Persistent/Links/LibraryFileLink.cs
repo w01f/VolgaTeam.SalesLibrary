@@ -186,7 +186,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 			if (sourceLink is FileLink)
 				link = Create(sourceLink.Path);
 			else
-				link = new LibraryFolderLink();
+				link = CreateEntity<LibraryFolderLink>();
 			link.Name = sourceLink.NameWithoutExtension;
 			link.DataSourceId = sourceLink.RootId;
 			var dataSourcePath = parentLibrary.GetDataSources().Where(ds => ds.DataSourceId == sourceLink.RootId).Select(ds => ds.Path).FirstOrDefault();
@@ -202,16 +202,16 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		public static LibraryFileLink Create(string filePath)
 		{
 			if (FileFormatHelper.IsPowerPointFile(filePath))
-				return new PowerPointLink();
+				return CreateEntity<PowerPointLink>();
 			if (FileFormatHelper.IsWordFile(filePath))
-				return new WordLink();
+				return CreateEntity<WordLink>();
 			if (FileFormatHelper.IsPdfFile(filePath))
-				return new PdfLink();
+				return CreateEntity<PdfLink>();
 			if (FileFormatHelper.IsExcelFile(filePath))
-				return new ExcelLink();
+				return CreateEntity<ExcelLink>();
 			if (FileFormatHelper.IsVideoFile(filePath))
-				return new VideoLink();
-			return new CommonFileLink();
+				return CreateEntity<VideoLink>();
+			return CreateEntity<CommonFileLink>();
 		}
 
 		public void UpdateFileDate()

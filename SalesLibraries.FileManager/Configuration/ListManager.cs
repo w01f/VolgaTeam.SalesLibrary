@@ -5,11 +5,11 @@ namespace SalesLibraries.FileManager.Configuration
 {
 	class ListManager
 	{
-		public WidgetList Widgets { get; private set; }
-		public BannerList Banners { get; private set; }
+		public WidgetList Widgets { get; }
+		public BannerList Banners { get; }
 		public SearchTagList SearchTags { get; set; }
-		public SuperFilterList SuperFilters { get; private set; }
-		public SecurityLists Security { get; private set; }
+		public SuperFilterList SuperFilters { get; }
+		public SecurityLists Security { get; }
 
 		public ListManager()
 		{

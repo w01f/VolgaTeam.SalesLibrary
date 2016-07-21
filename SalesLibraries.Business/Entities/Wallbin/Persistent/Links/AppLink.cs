@@ -79,7 +79,10 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 
 		public static AppLink Create(string path)
 		{
-			return new AppLink { RelativePath = path };
+			return CreateEntity<AppLink>(appLink =>
+			{
+				appLink.RelativePath = path;
+			});
 		}
 	}
 }

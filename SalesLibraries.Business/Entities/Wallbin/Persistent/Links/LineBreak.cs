@@ -42,9 +42,10 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 
 		public static LineBreak Create(LibraryFolder parentFolder)
 		{
-			var link = new LineBreak();
-			link.Folder = parentFolder;
-			return link;
+			return CreateEntity<LineBreak>(lineBreak =>
+			{
+				lineBreak.Folder = parentFolder;
+			});
 		}
 	}
 }

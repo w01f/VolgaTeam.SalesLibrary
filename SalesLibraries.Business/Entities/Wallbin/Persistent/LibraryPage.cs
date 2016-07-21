@@ -180,9 +180,9 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 		public IEnumerable<ColumnTitle> GetColumnTitles()
 		{
 			if (!ColumnTitles.Any())
-				for (int i = 0; i < ColumnsCount; i++)
+				for (var i = 0; i < ColumnsCount; i++)
 				{
-					var columnTitle = new ColumnTitle();
+					var columnTitle = CreateEntity<ColumnTitle>();
 					columnTitle.ColumnOrder = i;
 					columnTitle.Page = this;
 					ColumnTitles.Add(columnTitle);
@@ -192,13 +192,17 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 
 		public void AddFolder(int columnOrder)
 		{
-			var folder = new LibraryFolder();
-			folder.Name = String.Format("Window {0}", (folder.RowOrder + 1).ToString("#,##0"));
-			var defaultFolder = Folders.FirstOrDefault();
-			if (defaultFolder != null)
-				ApplyFolderSettings(folder, defaultFolder);
 			var rowOrder = Folders.Any(f => f.ColumnOrder == columnOrder) ? Folders.Where(f => f.ColumnOrder == columnOrder).Max(f => f.RowOrder) + 1 : 0;
-			AddFolder(folder, columnOrder, rowOrder);
+			AddFolder(
+				CreateEntity<LibraryFolder>(folder =>
+				{
+					folder.Name = String.Format("Window {0}", (folder.RowOrder + 1).ToString("#,##0"));
+					var defaultFolder = Folders.FirstOrDefault();
+					if (defaultFolder != null)
+						ApplyFolderSettings(folder, defaultFolder);
+				}),
+				columnOrder,
+				rowOrder);
 		}
 
 		public void AddFolder(LibraryFolder folder, int columnOrder, int rowOrder)

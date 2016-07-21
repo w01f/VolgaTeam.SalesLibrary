@@ -65,5 +65,13 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 		{
 			AllowToHandleChanges = false;
 		}
+
+		public static TWallbinEntitty CreateEntity<TWallbinEntitty>(Action<TWallbinEntitty> configureCallback = null) where TWallbinEntitty : WallbinEntity
+		{
+			var entity = Activator.CreateInstance<TWallbinEntitty>();
+			entity.AllowToHandleChanges = true;
+			configureCallback?.Invoke(entity);
+			return entity;
+		}
 	}
 }

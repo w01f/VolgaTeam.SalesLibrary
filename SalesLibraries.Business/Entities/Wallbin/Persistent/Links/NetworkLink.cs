@@ -61,7 +61,10 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 
 		public static NetworkLink Create(string path)
 		{
-			return new NetworkLink { RelativePath = path };
+			return CreateEntity<NetworkLink>(networkLink =>
+			{
+				networkLink.RelativePath = path;
+			});
 		}
 	}
 }

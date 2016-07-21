@@ -71,7 +71,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 
 		public static InternalLink Create(InternalLinkInfo linkInfo, LibraryFolder parentFolder)
 		{
-			var link = new InternalLink();
+			var link = CreateEntity<InternalLink>();
 			link.Name = linkInfo.Name;
 			link.Folder = parentFolder;
 			((InternalLinkSettings)link.Settings).LibraryName = linkInfo.LibraryName;

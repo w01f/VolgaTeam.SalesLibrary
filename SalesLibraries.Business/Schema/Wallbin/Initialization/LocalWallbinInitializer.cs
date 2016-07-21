@@ -8,12 +8,12 @@ namespace SalesLibraries.Business.Schema.Wallbin.Initialization
 	{
 		protected override void Seed()
 		{
-			var library = new Library
+			var library = WallbinEntity.CreateEntity<Library>(lib =>
 			{
-				Context = _context,
-				Name = _context.LibraryName,
-				Path = _context.DataSourceFolderPath
-			};
+				lib.Context = _context;
+				lib.Name = _context.LibraryName;
+				lib.Path = _context.DataSourceFolderPath;
+			});
 			library.ImportLegacyData(_context.DataSourceFolderPath);
 			library.BeforeSave();
 			if (!library.Pages.Any())

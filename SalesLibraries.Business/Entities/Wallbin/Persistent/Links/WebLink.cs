@@ -50,7 +50,10 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 
 		public static WebLink Create(string path)
 		{
-			return new WebLink { RelativePath = path };
+			return CreateEntity<WebLink>(webLink =>
+			{
+				webLink.RelativePath = path;
+			});
 		}
 	}
 }
