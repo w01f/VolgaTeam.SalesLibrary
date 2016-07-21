@@ -47,7 +47,7 @@ namespace SalesLibraries.CloudAdmin.Business.Dictionaries
 			localMetaData.Save();
 		}
 
-		private static IEnumerable<SearchGroup> LoadFromCloudData(IEnumerable<Category> cloudCategories)
+		private static IEnumerable<SearchGroup> LoadFromCloudData(IEnumerable<SoapCategory> cloudCategories)
 		{
 			return cloudCategories.GroupBy(cat => cat.category).Select(group =>
 			{
