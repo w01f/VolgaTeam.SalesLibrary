@@ -34,8 +34,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.GroupSetting
 
 		private void OnEditorChanged(object sender, EventArgs e)
 		{
-			if (ChangesMade != null)
-				ChangesMade(sender, e);
+			ChangesMade?.Invoke(sender, e);
 		}
 
 		private void OnLinkSelectionChanged(object sender, SelectionEventArgs e)

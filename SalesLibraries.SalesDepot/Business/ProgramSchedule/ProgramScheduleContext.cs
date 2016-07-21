@@ -62,8 +62,7 @@ namespace SalesLibraries.SalesDepot.Business.ProgramSchedule
 			if (ActiveStation == null) return;
 			MainController.Instance.Settings.ProgramScheduleSettings.SelectedStation = station.Name;
 			MainController.Instance.Settings.SaveSettings();
-			if (StationChanged != null)
-				StationChanged(this, EventArgs.Empty);
+			StationChanged?.Invoke(this, EventArgs.Empty);
 		}
 
 		private string GetReportWeekScheduleTemplatePath(bool landscape)

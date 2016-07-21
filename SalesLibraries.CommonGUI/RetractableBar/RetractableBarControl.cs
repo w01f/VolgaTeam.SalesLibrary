@@ -83,8 +83,7 @@ namespace SalesLibraries.CommonGUI.RetractableBar
 				timer.Start();
 			}
 			if (!silent)
-				if (StateChanged != null)
-					StateChanged(this, new StateChangedEventArgs(false));
+				StateChanged?.Invoke(this, new StateChangedEventArgs(false));
 		}
 
 		public void Expand(bool silent = false)
@@ -117,8 +116,7 @@ namespace SalesLibraries.CommonGUI.RetractableBar
 				timer.Start();
 			}
 			if (!silent)
-				if (StateChanged != null)
-					StateChanged(this, new StateChangedEventArgs(true));
+				StateChanged?.Invoke(this, new StateChangedEventArgs(true));
 		}
 
 		private void simpleButtonExpand_Click(object sender, EventArgs e)

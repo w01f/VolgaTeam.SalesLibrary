@@ -136,10 +136,7 @@ namespace SalesLibraries.Common.Synchronization
 					destinationFileName,
 					operation);
 
-				if (FileSynchronizing != null)
-				{
-					FileSynchronizing(this, args);
-				}
+				FileSynchronizing?.Invoke(this, args);
 
 				if (args.Cancel)
 					continue;
@@ -148,13 +145,11 @@ namespace SalesLibraries.Common.Synchronization
 				{
 					srcFileInfo.CopyTo(destinationFileName, true);
 
-					if (FileSynchronized != null)
-						FileSynchronized(this, new SynchronizedEventArgs(args));
+					FileSynchronized?.Invoke(this, new SynchronizedEventArgs(args));
 				}
 				catch (Exception ex)
 				{
-					if (Error != null)
-						Error(this, new SynchronizationExceptionEventArgs(args, ex));
+					Error?.Invoke(this, new SynchronizationExceptionEventArgs(args, ex));
 				}
 			}
 
@@ -173,8 +168,7 @@ namespace SalesLibraries.Common.Synchronization
 						dstFileInfo.FullName,
 						SynchronizationOperation.Delete);
 
-					if (FileSynchronizing != null)
-						FileSynchronizing(this, args);
+					FileSynchronizing?.Invoke(this, args);
 
 					if (args.Cancel)
 						continue;
@@ -182,13 +176,11 @@ namespace SalesLibraries.Common.Synchronization
 					try
 					{
 						dstFileInfo.Delete();
-						if (FileSynchronized != null)
-							FileSynchronized(this, new SynchronizedEventArgs(args));
+						FileSynchronized?.Invoke(this, new SynchronizedEventArgs(args));
 					}
 					catch (Exception ex)
 					{
-						if (Error != null)
-							Error(this, new SynchronizationExceptionEventArgs(args, ex));
+						Error?.Invoke(this, new SynchronizationExceptionEventArgs(args, ex));
 					}
 				}
 			}
@@ -218,8 +210,7 @@ namespace SalesLibraries.Common.Synchronization
 					dstSubDir.FullName,
 					operation);
 
-				if (FolderSynchronizing != null)
-					FolderSynchronizing(this, args);
+				FolderSynchronizing?.Invoke(this, args);
 
 				if (args.Cancel) continue;
 
@@ -245,8 +236,7 @@ namespace SalesLibraries.Common.Synchronization
 							dstSubDir.FullName,
 							dstSubDir.FullName,
 							SynchronizationOperation.Delete);
-						if (FolderSynchronizing != null)
-							FolderSynchronizing(this, args);
+						FolderSynchronizing?.Invoke(this, args);
 
 						if (args.Cancel) continue;
 
@@ -269,8 +259,7 @@ namespace SalesLibraries.Common.Synchronization
 			if (!Directory.Exists(path))
 			{
 				Directory.CreateDirectory(path);
-				if (FolderSynchronized != null)
-					FolderSynchronized(this, new SynchronizedEventArgs(path, path, SynchronizationOperation.Add));
+				FolderSynchronized?.Invoke(this, new SynchronizedEventArgs(path, path, SynchronizationOperation.Add));
 			}
 			return dirInfo;
 		}
@@ -278,8 +267,7 @@ namespace SalesLibraries.Common.Synchronization
 		public void DeleteFolder(DirectoryInfo folder)
 		{
 			Utils.DeleteFolder(folder);
-			if (FolderSynchronized != null)
-				FolderSynchronized(this, new SynchronizedEventArgs(folder.FullName, folder.FullName, SynchronizationOperation.Delete));
+			FolderSynchronized?.Invoke(this, new SynchronizedEventArgs(folder.FullName, folder.FullName, SynchronizationOperation.Delete));
 		}
 	}
 }

@@ -128,8 +128,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 
 		public void Update()
 		{
-			if (StateChanged != null)
-				StateChanged(this, EventArgs.Empty);
+			StateChanged?.Invoke(this, EventArgs.Empty);
 		}
 
 		public void SwitchAccordingPage(TabPageEnum pageType)

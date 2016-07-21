@@ -57,8 +57,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			if (!_changesMade) return;
 			_changesMade = false;
 			_settingsManager.TargetLink.MarkAsModified();
-			if (OnSettingsChanged != null)
-				OnSettingsChanged(this, EventArgs.Empty);
+			OnSettingsChanged?.Invoke(this, EventArgs.Empty);
 		}
 
 		private void InitItemsContainer()
@@ -279,8 +278,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 			protected void RaiseSettingsChanged()
 			{
-				if (OnSettingsChanged != null)
-					OnSettingsChanged(this, EventArgs.Empty);
+				OnSettingsChanged?.Invoke(this, EventArgs.Empty);
 			}
 
 			public virtual void LoadSettings()

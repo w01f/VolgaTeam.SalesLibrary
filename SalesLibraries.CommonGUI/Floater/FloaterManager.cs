@@ -26,8 +26,7 @@ namespace SalesLibraries.CommonGUI.Floater
 			{
 				form.Shown += (o, e) =>
 				{
-					if (afterShow != null)
-						afterShow();
+					afterShow?.Invoke();
 				};
 				var result = form.ShowDialog();
 				_floaterPositionY = form.Top;

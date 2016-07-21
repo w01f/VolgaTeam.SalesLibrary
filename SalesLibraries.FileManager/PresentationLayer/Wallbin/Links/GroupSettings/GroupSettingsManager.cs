@@ -34,8 +34,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 
 		private void OnEditorChanged(object sender, EventArgs e)
 		{
-			if (ChangesMade != null)
-				ChangesMade(sender, e);
+			ChangesMade?.Invoke(sender, e);
 		}
 
 		private void OnLinkSelectionChanged(object sender, SelectionEventArgs e)

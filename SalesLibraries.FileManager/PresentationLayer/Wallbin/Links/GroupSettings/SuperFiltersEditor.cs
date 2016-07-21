@@ -73,16 +73,14 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 		private void ApplyData()
 		{
 			Selection.SelectedFiles.ApplySuperFilters(checkedListBoxControl.Items.OfType<CheckedListBoxItem>().Where(it => it.CheckState == CheckState.Checked).Select(it => it.Value.ToString()).ToArray());
-			if (EditorChanged != null)
-				EditorChanged(this, new EventArgs());
+			EditorChanged?.Invoke(this, new EventArgs());
 		}
 
 		public void ResetData()
 		{
 			if (MainController.Instance.PopupMessages.ShowWarningQuestion("Are you sure You want to DELETE ALL Super Filters for the selected files?") != DialogResult.Yes) return;
 			Selection.SelectedFiles.ApplySuperFilters(new string[] { });
-			if (EditorChanged != null)
-				EditorChanged(this, new EventArgs());
+			EditorChanged?.Invoke(this, new EventArgs());
 
 			UpdateData();
 		}

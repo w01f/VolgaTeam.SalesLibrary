@@ -89,15 +89,13 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Common
 			imageListView.ClearSelection();
 			e.Item.Selected = true;
 			var linkImage = SelectedImageSource;
-			if (SelectedImageChanged != null)
-				SelectedImageChanged(this, new LinkImageEventArgs { Image = Image.FromFile(linkImage.FilePath), Text = linkImage.FileName });
+			SelectedImageChanged?.Invoke(this, new LinkImageEventArgs { Image = Image.FromFile(linkImage.FilePath), Text = linkImage.FileName });
 		}
 
 		private void OnGalleryItemDoubleClick(object sender, ItemClickEventArgs e)
 		{
 			OnGalleryItemClick(sender, e);
-			if (OnImageDoubleClick != null)
-				OnImageDoubleClick(this, EventArgs.Empty);
+			OnImageDoubleClick?.Invoke(this, EventArgs.Empty);
 		}
 
 		private void OnGalleryItemHover(object sender, ItemHoverEventArgs e)

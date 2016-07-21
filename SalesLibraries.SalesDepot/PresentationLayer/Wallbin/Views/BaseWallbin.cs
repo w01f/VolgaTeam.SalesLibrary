@@ -92,8 +92,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.Views
 			ActivePage.LoadPage();
 			MainController.Instance.Settings.WallbinViewSettings.SelectedPage = ActivePage.Page.Name;
 			MainController.Instance.Settings.SaveSettings();
-			if (PageChanged != null)
-				PageChanged(this, EventArgs.Empty);
+			PageChanged?.Invoke(this, EventArgs.Empty);
 		}
 		#endregion
 	}

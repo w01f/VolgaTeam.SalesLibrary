@@ -59,24 +59,21 @@ namespace SalesLibraries.SalesDepot.Business.Services
 		{
 			EmailLinks.Add(fileLink);
 			Save();
-			if (ListChanged != null)
-				ListChanged(this, EventArgs.Empty);
+			ListChanged?.Invoke(this, EventArgs.Empty);
 		}
 
 		public void RemoveLink(LibraryFileLink fileLink)
 		{
 			EmailLinks.Remove(fileLink);
 			Save();
-			if (ListChanged != null)
-				ListChanged(this, EventArgs.Empty);
+			ListChanged?.Invoke(this, EventArgs.Empty);
 		}
 
 		public void ClearAll()
 		{
 			EmailLinks.Clear();
 			Save();
-			if (ListChanged != null)
-				ListChanged(this, EventArgs.Empty);
+			ListChanged?.Invoke(this, EventArgs.Empty);
 		}
 	}
 }

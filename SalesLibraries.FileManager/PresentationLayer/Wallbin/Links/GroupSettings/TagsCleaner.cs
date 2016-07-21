@@ -31,8 +31,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 			if (MainController.Instance.PopupMessages.ShowWarningQuestion("Are you ABSOLUTELY 100% POSITIVE?") != DialogResult.Yes) return;
 			var pages = (allPages ? MainController.Instance.WallbinViews.ActiveWallbin.DataStorage.Library.Pages : new[] { MainController.Instance.WallbinViews.ActiveWallbin.ActivePage.Page }).ToList();
 			pages.SelectMany(p => p.AllLinks).ApplyCategories(new SearchGroup[] { });
-			if (EditorChanged != null)
-				EditorChanged(this, new EventArgs());
+			EditorChanged?.Invoke(this, new EventArgs());
 		}
 
 		private void ClearSuperFilters(bool allPages)
@@ -41,8 +40,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 			if (MainController.Instance.PopupMessages.ShowWarningQuestion("Are you ABSOLUTELY 100% POSITIVE?") != DialogResult.Yes) return;
 			var pages = (allPages ? MainController.Instance.WallbinViews.ActiveWallbin.DataStorage.Library.Pages : new[] { MainController.Instance.WallbinViews.ActiveWallbin.ActivePage.Page }).ToList();
 			pages.SelectMany(p => p.AllLinks).ApplySuperFilters(new string[] { });
-			if (EditorChanged != null)
-				EditorChanged(this, new EventArgs());
+			EditorChanged?.Invoke(this, new EventArgs());
 		}
 
 		private void ClearKeywords(bool allPages)
@@ -51,8 +49,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 			if (MainController.Instance.PopupMessages.ShowWarningQuestion("Are you ABSOLUTELY 100% POSITIVE?") != DialogResult.Yes) return;
 			var pages = (allPages ? MainController.Instance.WallbinViews.ActiveWallbin.DataStorage.Library.Pages : new[] { MainController.Instance.WallbinViews.ActiveWallbin.ActivePage.Page }).ToList();
 			pages.SelectMany(p => p.AllLinks).ApplyKeywords(new SearchTag[] { });
-			if (EditorChanged != null)
-				EditorChanged(this, new EventArgs());
+			EditorChanged?.Invoke(this, new EventArgs());
 		}
 
 		private void ClearSecurity(bool allPages)
@@ -61,8 +58,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 			if (MainController.Instance.PopupMessages.ShowWarningQuestion("Are you ABSOLUTELY 100% POSITIVE?") != DialogResult.Yes) return;
 			var pages = (allPages ? MainController.Instance.WallbinViews.ActiveWallbin.DataStorage.Library.Pages : new[] { MainController.Instance.WallbinViews.ActiveWallbin.ActivePage.Page }).ToList();
 			pages.SelectMany(p => p.AllLinks).ResetSecurity();
-			if (EditorChanged != null)
-				EditorChanged(this, new EventArgs());
+			EditorChanged?.Invoke(this, new EventArgs());
 		}
 
 		private void hyperLinkEditCategoriesActivePage_OpenLink(object sender, DevExpress.XtraEditors.Controls.OpenLinkEventArgs e)

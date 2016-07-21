@@ -10,8 +10,7 @@ namespace SalesLibraries.CommonGUI.BackgroundProcesses
 
 		protected void AbortProcess()
 		{
-			if (ProcessAborted != null)
-				ProcessAborted(this, new EventArgs());
+			ProcessAborted?.Invoke(this, new EventArgs());
 		}
 	}
 }

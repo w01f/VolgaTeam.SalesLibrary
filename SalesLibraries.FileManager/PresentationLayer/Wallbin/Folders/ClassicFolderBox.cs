@@ -423,8 +423,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 			}
 			_outsideChangesInProgress = false;
 			UpdateGridSize();
-			if (DataChanged != null)
-				DataChanged(this, EventArgs.Empty);
+			DataChanged?.Invoke(this, EventArgs.Empty);
 		}
 
 		private void ProcessRowMoving(LinkRow targetRow, int newPosition = -1)
@@ -536,8 +535,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 			linkRow.Source.Name = editValue;
 			grFiles.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.Font = linkRow.Info.Font;
 			linkRow.Info.Recalc();
-			if (DataChanged != null)
-				DataChanged(this, EventArgs.Empty);
+			DataChanged?.Invoke(this, EventArgs.Empty);
 		}
 
 		private void OnGridSelectionChanged(object sender, EventArgs e)

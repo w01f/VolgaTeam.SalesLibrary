@@ -80,8 +80,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			var folder = gridView.GetFocusedRow() as LibraryFolder;
 			if (folder == null) return;
 			FolderInBuffer = null;
-			if (FolderCopied != null)
-				FolderCopied(this, new FolderCopiedEventArgs { SourceFolder = folder });
+			FolderCopied?.Invoke(this, new FolderCopiedEventArgs { SourceFolder = folder });
 		}
 
 		public void PasteFolder()
@@ -90,8 +89,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			var oldColumnOrder = FolderInBuffer.ColumnOrder;
 			_page.MoveFolderToColumn(FolderInBuffer, ColumnOrder);
 			LoadData();
-			if (FolderPasted != null)
-				FolderPasted(this, new FolderPastedEventArgs { OldColumnOrder = (Int32)oldColumnOrder });
+			FolderPasted?.Invoke(this, new FolderPastedEventArgs { OldColumnOrder = (Int32)oldColumnOrder });
 		}
 
 		public void SortByOrder()
@@ -111,8 +109,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 
 		private void gridView_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
 		{
-			if (FolderChanged != null)
-				FolderChanged(this, EventArgs.Empty);
+			FolderChanged?.Invoke(this, EventArgs.Empty);
 		}
 
 		private void repositoryItemButtonEditWindowOperations_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
@@ -127,8 +124,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 						_page.Folders.UpItem(folder, item => item.ColumnOrder == ColumnOrder);
 						LoadData();
 						gridView.FocusedRowHandle = newRowHandle >= 0 ? newRowHandle : 0;
-						if (FolderChanged != null)
-							FolderChanged(this, EventArgs.Empty);
+						FolderChanged?.Invoke(this, EventArgs.Empty);
 					}
 					break;
 				case 1:
@@ -137,33 +133,28 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 						_page.Folders.DownItem(folder, item => item.ColumnOrder == ColumnOrder);
 						LoadData();
 						gridView.FocusedRowHandle = newRowHandle < gridView.RowCount ? newRowHandle : gridView.RowCount - 1;
-						if (FolderChanged != null)
-							FolderChanged(this, EventArgs.Empty);
+						FolderChanged?.Invoke(this, EventArgs.Empty);
 					}
 					break;
 				case 2:
-					if (FolderMovedLeft != null)
-						FolderMovedLeft(this, EventArgs.Empty);
+					FolderMovedLeft?.Invoke(this, EventArgs.Empty);
 					break;
 				case 3:
-					if (FolderMovedRight != null)
-						FolderMovedRight(this, EventArgs.Empty);
+					FolderMovedRight?.Invoke(this, EventArgs.Empty);
 					break;
 				case 4:
 					using (var form = new FormWindow(folder, new BaseEditFormParams()))
 					{
 						if (form.ShowDialog() != DialogResult.OK) return;
 						gridView.RefreshData();
-						if (FolderChanged != null)
-							FolderChanged(this, EventArgs.Empty);
+						FolderChanged?.Invoke(this, EventArgs.Empty);
 					}
 					break;
 				case 5:
 					if (MainController.Instance.PopupMessages.ShowWarningQuestion("Are you sure want to delete selected window?") != DialogResult.Yes) return;
 					_page.Folders.RemoveItem(folder, item => item.ColumnOrder == ColumnOrder);
 					LoadData();
-					if (FolderChanged != null)
-						FolderChanged(this, EventArgs.Empty);
+					FolderChanged?.Invoke(this, EventArgs.Empty);
 					break;
 			}
 		}

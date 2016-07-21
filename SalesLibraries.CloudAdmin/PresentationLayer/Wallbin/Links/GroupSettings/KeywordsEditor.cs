@@ -76,16 +76,14 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.GroupSetting
 			gridView.CloseEditor();
 			_keywords.RemoveAll(tag => String.IsNullOrEmpty(tag.Name));
 			Selection.SelectedFiles.ApplyKeywords(_keywords.Where(tag => !String.IsNullOrEmpty(tag.Name)).ToArray());
-			if (EditorChanged != null)
-				EditorChanged(this, new EventArgs());
+			EditorChanged?.Invoke(this, new EventArgs());
 		}
 
 		public void ResetData()
 		{
 			if (MainController.Instance.PopupMessages.ShowWarningQuestion("Are you sure You want to DELETE ALL KEYWORD TAGS for the selected files?") != DialogResult.Yes) return;
 			Selection.SelectedFiles.ApplyKeywords(new SearchTag[] { });
-			if (EditorChanged != null)
-				EditorChanged(this, new EventArgs());
+			EditorChanged?.Invoke(this, new EventArgs());
 			UpdateData();
 		}
 		#endregion

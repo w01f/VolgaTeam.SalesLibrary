@@ -31,8 +31,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 				_isDataChanged = value;
 				if (!_isDataChanged) return;
 				TagInfoControl.UpdateInfo();
-				if (DataChanged != null)
-					DataChanged(this, EventArgs.Empty);
+				DataChanged?.Invoke(this, EventArgs.Empty);
 			}
 		}
 

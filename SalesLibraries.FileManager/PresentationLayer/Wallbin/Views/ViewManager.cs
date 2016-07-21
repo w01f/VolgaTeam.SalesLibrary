@@ -93,8 +93,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 		#region Event Handlers
 		private void OnViewBeforeLoad(object sender, EventArgs e)
 		{
-			if (LibraryChanging != null)
-				LibraryChanging(this, EventArgs.Empty);
+			LibraryChanging?.Invoke(this, EventArgs.Empty);
 		}
 
 		private void OnLibraryChanging(object sender, EventArgs e)
@@ -114,8 +113,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 
 		private void OnLibraryDataChanged(object sender, EventArgs e)
 		{
-			if (DataChanged != null)
-				DataChanged(sender, e);
+			DataChanged?.Invoke(sender, e);
 		}
 		#endregion
 	}

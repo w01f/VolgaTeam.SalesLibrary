@@ -67,8 +67,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 			var selectedLink = MainController.Instance.WallbinViews.Selection.SelectedLink;
 			selectedLink.Tags.SuperFilters.Clear();
 			selectedLink.Tags.SuperFilters.AddRange(checkedListBoxControl.Items.OfType<CheckedListBoxItem>().Where(it => it.CheckState == CheckState.Checked).Select(it => it.Value.ToString()));
-			if (EditorChanged != null)
-				EditorChanged(this, EventArgs.Empty);
+			EditorChanged?.Invoke(this, EventArgs.Empty);
 		}
 	}
 }

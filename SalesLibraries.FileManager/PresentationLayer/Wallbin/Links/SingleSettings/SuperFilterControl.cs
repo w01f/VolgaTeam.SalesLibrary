@@ -68,8 +68,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			selectedLink.Tags.SuperFilters.Clear();
 			selectedLink.Tags.SuperFilters.AddRange(checkedListBoxControl.Items.OfType<CheckedListBoxItem>().Where(it => it.CheckState == CheckState.Checked).Select(it => it.Value.ToString()));
 			selectedLink.MarkAsModified();
-			if (EditorChanged != null)
-				EditorChanged(this, EventArgs.Empty);
+			EditorChanged?.Invoke(this, EventArgs.Empty);
 		}
 	}
 }

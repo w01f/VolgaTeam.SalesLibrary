@@ -154,16 +154,14 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 				AssignedUsers = rbSecurityWhiteList.Checked && !String.IsNullOrEmpty(assignedUsers) ? assignedUsers : null,
 				DeniedUsers = rbSecurityBlackList.Checked && !String.IsNullOrEmpty(deniedUsers) ? deniedUsers : null
 			});
-			if (EditorChanged != null)
-				EditorChanged(this, new EventArgs());
+			EditorChanged?.Invoke(this, new EventArgs());
 		}
 
 		public void ResetData()
 		{
 			if (MainController.Instance.PopupMessages.ShowWarningQuestion("Are you sure You want to DELETE ALL SECURITY SETTINGS for the selected files?") != DialogResult.Yes) return;
 			Selection.SelectedFiles.ApplySecurity(new SecuritySettings());
-			if (EditorChanged != null)
-				EditorChanged(this, new EventArgs());
+			EditorChanged?.Invoke(this, new EventArgs());
 
 			UpdateData();
 		}

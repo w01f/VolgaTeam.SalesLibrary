@@ -112,8 +112,7 @@ namespace SalesLibraries.CommonGUI.Calendars
 			_calendarControl.RunProcessInBackground("Loading Calendar...", cancellationToken =>
 				_calendarControl.InvokeInContainer(new MethodInvoker(() => ShowYear(selectedYear))));
 			ShowYear(selectedYear);
-			if (YearSelected != null)
-				YearSelected(this, new CalendarYearSelectedEventArgs(selectedYear.Data.Year));
+			YearSelected?.Invoke(this, new CalendarYearSelectedEventArgs(selectedYear.Data.Year));
 		}
 	}
 }

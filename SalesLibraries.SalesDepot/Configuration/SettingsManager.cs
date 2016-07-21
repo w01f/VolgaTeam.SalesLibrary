@@ -160,8 +160,7 @@ namespace SalesLibraries.SalesDepot.Configuration
 				sw.Flush();
 			}
 
-			if (SettingsChanged != null)
-				SettingsChanged(this, EventArgs.Empty);
+			SettingsChanged?.Invoke(this, EventArgs.Empty);
 		}
 	}
 }

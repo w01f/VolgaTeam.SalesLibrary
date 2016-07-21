@@ -30,7 +30,7 @@ namespace SalesLibraries.CommonGUI.BackgroundProcesses
 			using (var form = new FormProgressCommon())
 			{
 				form.Title = title;
-				RunWithProgress(form, false, process, cancellationToken => { if (afterComplete != null)afterComplete(); });
+				RunWithProgress(form, false, process, cancellationToken => { afterComplete?.Invoke(); });
 			}
 		}
 

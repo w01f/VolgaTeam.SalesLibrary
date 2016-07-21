@@ -69,8 +69,7 @@ namespace SalesLibraries.SalesDepot.Business.Themes
 			}
 			_themes.Sort((x, y) => x.Order.CompareTo(y.Order));
 
-			if (ThemesChanged != null)
-				ThemesChanged(this, EventArgs.Empty);
+			ThemesChanged?.Invoke(this, EventArgs.Empty);
 		}
 
 		public IEnumerable<Theme> GetThemes(SlideType slideType)

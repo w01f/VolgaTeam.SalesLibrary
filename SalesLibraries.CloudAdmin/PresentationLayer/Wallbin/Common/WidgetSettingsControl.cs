@@ -116,8 +116,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Common
 
 		private void OnImageDoubleClick(object sender, EventArgs e)
 		{
-			if (DoubleClicked != null)
-				DoubleClicked(this, EventArgs.Empty);
+			DoubleClicked?.Invoke(this, EventArgs.Empty);
 		}
 
 		private void OnSearchButtonClick(object sender, EventArgs e)

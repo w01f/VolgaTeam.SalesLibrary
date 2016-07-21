@@ -29,8 +29,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 			if (_suspended) return;
 			if (modifierKeys == Keys.None)
 			{
-				if (SelectionChanged != null)
-					SelectionChanged(this, new SelectionEventArgs(SelectionEventType.SelectionReset));
+				SelectionChanged?.Invoke(this, new SelectionEventArgs(SelectionEventType.SelectionReset));
 				ResetLinks();
 			}
 			else
@@ -41,8 +40,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 			_selectedLinks.AddRange(links.Where(link => _selectedLinks.All(selectedLink => selectedLink.ExtId != link.ExtId)));
 			SelectedFiles.AddRange(_selectedLinks.OfType<LibraryObjectLink>());
 			LastUpdate = DateTime.Now;
-			if (SelectionChanged != null)
-				SelectionChanged(this, new SelectionEventArgs(SelectionEventType.LinkSelected));
+			SelectionChanged?.Invoke(this, new SelectionEventArgs(SelectionEventType.LinkSelected));
 		}
 
 		public void SelectFolder(ClassicFolderBox folder)
@@ -59,13 +57,11 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 		public void Reset()
 		{
 			if (_suspended) return;
-			if (SelectionChanged != null)
-				SelectionChanged(this, new SelectionEventArgs(SelectionEventType.SelectionReset));
+			SelectionChanged?.Invoke(this, new SelectionEventArgs(SelectionEventType.SelectionReset));
 			ResetFolder();
 			ResetLinks();
 			LastUpdate = DateTime.Now;
-			if (SelectionChanged != null)
-				SelectionChanged(this, new SelectionEventArgs(SelectionEventType.SelectionReset));
+			SelectionChanged?.Invoke(this, new SelectionEventArgs(SelectionEventType.SelectionReset));
 		}
 
 		private void ResetLinks()

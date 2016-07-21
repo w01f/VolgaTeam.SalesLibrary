@@ -19,14 +19,12 @@ namespace SalesLibraries.Common.Objects.Graphics
 
 		public virtual void CopyToFavs()
 		{
-			if (AddToFavs != null)
-				AddToFavs(this, EventArgs.Empty);
+			AddToFavs?.Invoke(this, EventArgs.Empty);
 		}
 
 		public virtual void DeleteFromFavs()
 		{
-			if (RemoveFromFavs != null)
-				RemoveFromFavs(this, EventArgs.Empty);
+			RemoveFromFavs?.Invoke(this, EventArgs.Empty);
 		}
 	}
 }

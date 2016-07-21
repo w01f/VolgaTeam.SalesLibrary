@@ -107,16 +107,14 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.GroupSetting
 				})
 				.Where(g=>g.Tags.Any())
 				.ToArray());
-			if (EditorChanged != null)
-				EditorChanged(this, new EventArgs());
+			EditorChanged?.Invoke(this, new EventArgs());
 		}
 
 		public void ResetData()
 		{
 			if (MainController.Instance.PopupMessages.ShowWarningQuestion("Are you sure You want to DELETE ALL CATEGORY TAGS for the selected files?") != DialogResult.Yes) return;
 			Selection.SelectedFiles.ApplyCategories(new SearchGroup[] { });
-			if (EditorChanged != null)
-				EditorChanged(this, new EventArgs());
+			EditorChanged?.Invoke(this, new EventArgs());
 			UpdateData();
 		}
 		#endregion

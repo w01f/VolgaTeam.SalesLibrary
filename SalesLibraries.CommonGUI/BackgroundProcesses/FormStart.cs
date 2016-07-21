@@ -73,15 +73,13 @@ namespace SalesLibraries.CommonGUI.BackgroundProcesses
 		private void pbCancel_Click(object sender, EventArgs e)
 		{
 			ShowTrayIcon();
-			if (Trayed != null)
-				Trayed(this, EventArgs.Empty);
+			Trayed?.Invoke(this, EventArgs.Empty);
 		}
 
 		private void toolStripMenuItemShowProgress_Click(object sender, EventArgs e)
 		{
 			HideTrayIcon();
-			if (Activated != null)
-				Activated(this, EventArgs.Empty);
+			Activated?.Invoke(this, EventArgs.Empty);
 		}
 
 		private void toolStripMenuItemKillApp_Click(object sender, EventArgs e)

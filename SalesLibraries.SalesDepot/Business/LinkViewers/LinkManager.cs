@@ -242,8 +242,7 @@ namespace SalesLibraries.SalesDepot.Business.LinkViewers
 			{
 				form.PowerPointLink = powerPointLink;
 				form.ShowDialog(MainController.Instance.MainForm);
-				if (form.AfterClose != null)
-					form.AfterClose();
+				form.AfterClose?.Invoke();
 				RegistryHelper.SalesDepotHandle = MainController.Instance.MainForm.Handle;
 				RegistryHelper.MaximizeSalesDepot = true;
 			}
