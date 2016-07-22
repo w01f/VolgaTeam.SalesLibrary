@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using SalesLibraries.Common.Configuration;
+using SalesLibraries.Common.Helpers;
 using SalesLibraries.Common.Synchronization;
 
 namespace SalesLibraries.SalesDepot.Business.Services
@@ -48,6 +49,15 @@ namespace SalesLibraries.SalesDepot.Business.Services
 							);
 						syncHelper.SynchronizeFolder(syncOptions);
 					}
+				}
+
+				var destinationPathCollection = new List<string>();
+				destinationPathCollection.AddRange(Directory.GetDirectories(destinationPath));
+				foreach (var destinationLibraryPath in destinationPathCollection)
+				{
+					var libraryFolderName = Path.GetFileName(destinationLibraryPath);
+					if (!Directory.Exists(Path.Combine(sourcePath, libraryFolderName)))
+						Utils.DeleteFolder(destinationLibraryPath);
 				}
 				break;
 			}

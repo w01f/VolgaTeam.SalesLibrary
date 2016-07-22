@@ -183,7 +183,8 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 			if (library.ProgramData.Enable)
 				result.Add(Constants.ProgramManagerRootFolderName);
 
-			result.Add(Constants.GoodSyncServiceFolderName);
+			if (isWebSync)
+				result.Add(Constants.GoodSyncServiceFolderName);
 
 			return result;
 		}
