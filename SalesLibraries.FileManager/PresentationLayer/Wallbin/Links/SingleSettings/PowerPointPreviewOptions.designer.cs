@@ -32,8 +32,8 @@
 			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
 			this.labelControlTitle = new DevExpress.XtraEditors.LabelControl();
 			this.laAdminTools = new System.Windows.Forms.Label();
-			this.buttonXRefreshPreview = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXOpenQV = new DevComponents.DotNetBar.ButtonX();
+			this.buttonXRefreshPreview = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXOpenWV = new DevComponents.DotNetBar.ButtonX();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			this.SuspendLayout();
@@ -75,58 +75,63 @@
 			this.laAdminTools.TabIndex = 10;
 			this.laAdminTools.Text = "Admin Tools:";
 			// 
-			// buttonXRefreshPreview
-			// 
-			this.buttonXRefreshPreview.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-			this.buttonXRefreshPreview.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-			this.buttonXRefreshPreview.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.buttonXRefreshPreview.Location = new System.Drawing.Point(294, 101);
-			this.buttonXRefreshPreview.Name = "buttonXRefreshPreview";
-			this.buttonXRefreshPreview.Size = new System.Drawing.Size(118, 26);
-			this.buttonXRefreshPreview.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.buttonXRefreshPreview.TabIndex = 13;
-			this.buttonXRefreshPreview.Text = "Refresh QV && WV";
-			this.buttonXRefreshPreview.TextColor = System.Drawing.Color.Black;
-			this.buttonXRefreshPreview.Click += new System.EventHandler(this.buttonXRefreshPreview_Click);
-			// 
 			// buttonXOpenQV
 			// 
 			this.buttonXOpenQV.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXOpenQV.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXOpenQV.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXOpenQV.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.buttonXOpenQV.Location = new System.Drawing.Point(8, 101);
+			this.buttonXOpenQV.Location = new System.Drawing.Point(78, 114);
 			this.buttonXOpenQV.Name = "buttonXOpenQV";
-			this.buttonXOpenQV.Size = new System.Drawing.Size(118, 26);
+			this.buttonXOpenQV.Size = new System.Drawing.Size(375, 30);
 			this.buttonXOpenQV.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXOpenQV.TabIndex = 11;
 			this.buttonXOpenQV.Text = "!QV Folder";
 			this.buttonXOpenQV.TextColor = System.Drawing.Color.Black;
 			this.buttonXOpenQV.Click += new System.EventHandler(this.buttonXOpenQV_Click);
 			// 
+			// buttonXRefreshPreview
+			// 
+			this.buttonXRefreshPreview.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXRefreshPreview.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonXRefreshPreview.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXRefreshPreview.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.buttonXRefreshPreview.Location = new System.Drawing.Point(78, 217);
+			this.buttonXRefreshPreview.Name = "buttonXRefreshPreview";
+			this.buttonXRefreshPreview.Size = new System.Drawing.Size(375, 30);
+			this.buttonXRefreshPreview.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXRefreshPreview.TabIndex = 26;
+			this.buttonXRefreshPreview.Text = "Refresh QV & WV";
+			this.buttonXRefreshPreview.TextColor = System.Drawing.Color.Black;
+			this.buttonXRefreshPreview.UseMnemonic = false;
+			this.buttonXRefreshPreview.Click += new System.EventHandler(this.buttonXRefreshPreview_Click);
+			// 
 			// buttonXOpenWV
 			// 
 			this.buttonXOpenWV.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXOpenWV.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXOpenWV.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXOpenWV.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.buttonXOpenWV.Location = new System.Drawing.Point(151, 101);
+			this.buttonXOpenWV.Location = new System.Drawing.Point(78, 165);
 			this.buttonXOpenWV.Name = "buttonXOpenWV";
-			this.buttonXOpenWV.Size = new System.Drawing.Size(118, 26);
+			this.buttonXOpenWV.Size = new System.Drawing.Size(375, 30);
 			this.buttonXOpenWV.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.buttonXOpenWV.TabIndex = 12;
+			this.buttonXOpenWV.TabIndex = 25;
 			this.buttonXOpenWV.Text = "!WV Folder";
 			this.buttonXOpenWV.TextColor = System.Drawing.Color.Black;
 			this.buttonXOpenWV.Click += new System.EventHandler(this.buttonXOpenWV_Click);
 			// 
 			// PowerPointPreviewOptions
 			// 
-			this.Appearance.PageClient.BackColor = System.Drawing.Color.White;
-			this.Appearance.PageClient.Options.UseBackColor = true;
 			this.Controls.Add(this.buttonXRefreshPreview);
+			this.Controls.Add(this.buttonXOpenWV);
 			this.Controls.Add(this.laAdminTools);
 			this.Controls.Add(this.buttonXOpenQV);
-			this.Controls.Add(this.buttonXOpenWV);
 			this.Controls.Add(this.labelControlTitle);
-			this.Name = "LinkAdminOptions";
+			this.Name = "PowerPointPreviewOptions";
 			this.Size = new System.Drawing.Size(531, 541);
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
 			this.ResumeLayout(false);
@@ -139,8 +144,8 @@
 		private DevExpress.XtraEditors.StyleController styleController;
 		private DevExpress.XtraEditors.LabelControl labelControlTitle;
 		public System.Windows.Forms.Label laAdminTools;
-		public DevComponents.DotNetBar.ButtonX buttonXRefreshPreview;
 		public DevComponents.DotNetBar.ButtonX buttonXOpenQV;
+		public DevComponents.DotNetBar.ButtonX buttonXRefreshPreview;
 		public DevComponents.DotNetBar.ButtonX buttonXOpenWV;
 	}
 }

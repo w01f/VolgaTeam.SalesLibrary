@@ -9,15 +9,16 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		#region Nonpersistent Properties
 		[NotMapped, JsonIgnore]
 		public string PreviewContainerPath => GetPreviewContainer().ContainerPath;
+		public string PreviewContainerName => GetPreviewContainer().ExtId.ToString("D");
 		#endregion
-		
+
 		protected override void AfterCreate()
 		{
 			GetPreviewContainer();
 			base.AfterCreate();
 		}
 
-		private BasePreviewContainer GetPreviewContainer()
+		public BasePreviewContainer GetPreviewContainer()
 		{
 			return ParentLibrary.GetPreviewContainerBySourcePath(FullPath);
 		}

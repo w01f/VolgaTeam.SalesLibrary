@@ -8,14 +8,15 @@ using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.CommonGUI.Common;
+using SalesLibraries.FileManager.Business.PreviewGenerators;
 using SalesLibraries.FileManager.Controllers;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSettings
 {
-	//public partial class PreviewOptions : UserControl, ILinkProperties
 	[IntendForClass(typeof(DocumentLink))]
 	[IntendForClass(typeof(ExcelLink))]
 	[IntendForClass(typeof(VideoLink))]
+	//public partial class PreviewOptions : UserControl
 	public sealed partial class PreviewOptions : XtraTabPage, ILinkSettingsEditControl
 	{
 		private readonly PreviewableLink _data;
@@ -48,7 +49,13 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 		public void LoadData()
 		{
-			buttonXOpenWV.Enabled = Directory.Exists(_data.PreviewContainerPath);
+			if (Directory.Exists(_data.PreviewContainerPath))
+			{
+				buttonXOpenWV.Enabled = true;
+				buttonXOpenWV.Text = String.Format("!WV Folder ({0})", _data.PreviewContainerName);
+			}
+			else
+				buttonXOpenWV.Enabled = false;
 		}
 
 		public void SaveData()
@@ -57,9 +64,16 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 		private void buttonXRefreshPreview_Click(object sender, EventArgs e)
 		{
-			if (MainController.Instance.PopupMessages.ShowWarningQuestion("Are you sure want to delete preview files for the link?") != DialogResult.Yes) return;
-			_data.ClearPreviewContainer();
-			MainController.Instance.PopupMessages.ShowInfo("Library files will refresh when you sync your library.");
+			if (MainController.Instance.PopupMessages.ShowWarningQuestion(String.Format("Are you sure you want to refresh the server files for:{1}{0}?", _data.NameWithExtension, Environment.NewLine)) != DialogResult.Yes) return;
+
+			MainController.Instance.ProcessManager.Run("Updating Preview files...", cancelationToken =>
+			{
+				_data.ClearPreviewContainer();
+				var previewContainer = _data.GetPreviewContainer();
+				var previewGenerator = previewContainer.GetPreviewGenerator();
+				previewContainer.UpdateContent(previewGenerator, cancelationToken);
+			});
+			MainController.Instance.PopupMessages.ShowInfo(String.Format("{0}{1}Is now updated for the server!", _data.NameWithExtension, Environment.NewLine));
 		}
 
 		private void buttonXOpenWV_Click(object sender, EventArgs e)

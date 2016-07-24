@@ -53,6 +53,7 @@
 			this.barButtonItemLinkPropertiesOpenLink = new DevExpress.XtraBars.BarButtonItem();
 			this.barButtonItemLinkPropertiesFileLocation = new DevExpress.XtraBars.BarButtonItem();
 			this.barButtonItemLinkPropertiesDelete = new DevExpress.XtraBars.BarButtonItem();
+			this.barButtonItemLinkPropertiesRefreshPreview = new DevExpress.XtraBars.BarButtonItem();
 			this.barButtonItemLinkPropertiesLinkSettings = new DevExpress.XtraBars.BarButtonItem();
 			this.barButtonItemLinkPropertiesAdvancedSettings = new DevExpress.XtraBars.BarButtonItem();
 			this.barButtonItemLinkPropertiesTags = new DevExpress.XtraBars.BarButtonItem();
@@ -230,7 +231,8 @@
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemLinkPropertiesOpenLink),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemLinkPropertiesFileLocation),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemLinkPropertiesDelete),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemLinkPropertiesLinkSettings, true),
+			new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemLinkPropertiesRefreshPreview),
+			new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemLinkPropertiesLinkSettings, true),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemLinkPropertiesAdvancedSettings),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemLinkPropertiesTags),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemLinkPropertiesExpirationDate),
@@ -262,52 +264,59 @@
 			this.barButtonItemLinkPropertiesDelete.Name = "barButtonItemLinkPropertiesDelete";
 			this.barButtonItemLinkPropertiesDelete.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemLinkPropertiesDelete_ItemClick);
 			// 
+			// barButtonItemLinkPropertiesRefreshPreview
+			// 
+			this.barButtonItemLinkPropertiesRefreshPreview.Caption = "Refresh this link";
+			this.barButtonItemLinkPropertiesRefreshPreview.Id = 3;
+			this.barButtonItemLinkPropertiesRefreshPreview.Name = "barButtonItemLinkPropertiesRefreshPreview";
+			this.barButtonItemLinkPropertiesRefreshPreview.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemLinkPropertiesRefreshPreview_ItemClick);
+			// 
 			// barButtonItemLinkPropertiesLinkSettings
 			// 
 			this.barButtonItemLinkPropertiesLinkSettings.Caption = "Link Settings";
-			this.barButtonItemLinkPropertiesLinkSettings.Id = 3;
+			this.barButtonItemLinkPropertiesLinkSettings.Id = 4;
 			this.barButtonItemLinkPropertiesLinkSettings.Name = "barButtonItemLinkPropertiesLinkSettings";
 			this.barButtonItemLinkPropertiesLinkSettings.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemLinkPropertiesLinkSettings_ItemClick);
 			// 
 			// barButtonItemLinkPropertiesAdvancedSettings
 			// 
 			this.barButtonItemLinkPropertiesAdvancedSettings.Caption = "Advanced Settings";
-			this.barButtonItemLinkPropertiesAdvancedSettings.Id = 4;
+			this.barButtonItemLinkPropertiesAdvancedSettings.Id = 5;
 			this.barButtonItemLinkPropertiesAdvancedSettings.Name = "barButtonItemLinkPropertiesAdvancedSettings";
 			this.barButtonItemLinkPropertiesAdvancedSettings.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemLinkPropertiesAdvancedSettings_ItemClick);
 			// 
 			// barButtonItemLinkPropertiesTags
 			// 
 			this.barButtonItemLinkPropertiesTags.Caption = "Search Tag";
-			this.barButtonItemLinkPropertiesTags.Id = 5;
+			this.barButtonItemLinkPropertiesTags.Id = 6;
 			this.barButtonItemLinkPropertiesTags.Name = "barButtonItemLinkPropertiesTags";
 			this.barButtonItemLinkPropertiesTags.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemLinkPropertiesTags_ItemClick);
 			// 
 			// barButtonItemLinkPropertiesExpirationDate
 			// 
 			this.barButtonItemLinkPropertiesExpirationDate.Caption = "Expiration Date";
-			this.barButtonItemLinkPropertiesExpirationDate.Id = 6;
+			this.barButtonItemLinkPropertiesExpirationDate.Id = 7;
 			this.barButtonItemLinkPropertiesExpirationDate.Name = "barButtonItemLinkPropertiesExpirationDate";
 			this.barButtonItemLinkPropertiesExpirationDate.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemLinkPropertiesExpirationDate_ItemClick);
 			// 
 			// barButtonItemLinkPropertiesSecurity
 			// 
 			this.barButtonItemLinkPropertiesSecurity.Caption = "Link Security";
-			this.barButtonItemLinkPropertiesSecurity.Id = 7;
+			this.barButtonItemLinkPropertiesSecurity.Id = 8;
 			this.barButtonItemLinkPropertiesSecurity.Name = "barButtonItemLinkPropertiesSecurity";
 			this.barButtonItemLinkPropertiesSecurity.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemLinkPropertiesSecurity_ItemClick);
 			// 
 			// barButtonItemLinkPropertiesWidget
 			// 
 			this.barButtonItemLinkPropertiesWidget.Caption = "Widget";
-			this.barButtonItemLinkPropertiesWidget.Id = 8;
+			this.barButtonItemLinkPropertiesWidget.Id = 9;
 			this.barButtonItemLinkPropertiesWidget.Name = "barButtonItemLinkPropertiesWidget";
 			this.barButtonItemLinkPropertiesWidget.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemLinkPropertiesWidget_ItemClick);
 			// 
 			// barButtonItemLinkPropertiesBanner
 			// 
 			this.barButtonItemLinkPropertiesBanner.Caption = "Banner";
-			this.barButtonItemLinkPropertiesBanner.Id = 9;
+			this.barButtonItemLinkPropertiesBanner.Id = 10;
 			this.barButtonItemLinkPropertiesBanner.Name = "barButtonItemLinkPropertiesBanner";
 			this.barButtonItemLinkPropertiesBanner.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemLinkPropertiesBanner_ItemClick);
 			// 
@@ -328,7 +337,8 @@
             this.barButtonItemLinkPropertiesOpenLink,
             this.barButtonItemLinkPropertiesFileLocation,
             this.barButtonItemLinkPropertiesDelete,
-            this.barButtonItemLinkPropertiesLinkSettings,
+			this.barButtonItemLinkPropertiesRefreshPreview,
+			this.barButtonItemLinkPropertiesLinkSettings,
             this.barButtonItemLinkPropertiesAdvancedSettings,
             this.barButtonItemLinkPropertiesTags,
             this.barButtonItemLinkPropertiesExpirationDate,
@@ -420,6 +430,7 @@
 		private DevExpress.XtraBars.BarButtonItem barButtonItemLinkPropertiesOpenLink;
 		private DevExpress.XtraBars.BarButtonItem barButtonItemLinkPropertiesFileLocation;
 		private DevExpress.XtraBars.BarButtonItem barButtonItemLinkPropertiesDelete;
+		private DevExpress.XtraBars.BarButtonItem barButtonItemLinkPropertiesRefreshPreview;
 		private DevExpress.XtraBars.BarButtonItem barButtonItemLinkPropertiesLinkSettings;
 		private DevExpress.XtraBars.BarButtonItem barButtonItemLinkPropertiesAdvancedSettings;
 		private DevExpress.XtraBars.BarButtonItem barButtonItemLinkPropertiesTags;

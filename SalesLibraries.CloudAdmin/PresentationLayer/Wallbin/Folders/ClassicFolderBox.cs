@@ -20,6 +20,7 @@ using SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views;
 using SalesLibraries.Common.DataState;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.Common.Objects.SearchTags;
+using SalesLibraries.Common.OfficeInterops;
 using SalesLibraries.CommonGUI.CustomDialog;
 using SalesLibraries.CommonGUI.Wallbin.Folders;
 using SalesLibraries.CommonGUI.Wallbin.Views;
@@ -99,28 +100,6 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders
 			grFiles.DragOver += OnDragOver;
 			grFiles.DragLeave += OnDragLeave;
 			grFiles.MouseDown += OnGridMouseDown;
-
-			// 
-			// pnBorders
-			// 
-			pnBorders.DragDrop += OnDragDrop;
-			pnBorders.DragOver += OnDragOver;
-			pnBorders.DragLeave += OnDragLeave;
-
-			// 
-			// pnHeaderBorder
-			// 
-			pnHeaderBorder.DragDrop += OnDragDrop;
-			pnHeaderBorder.DragOver += OnDragOver;
-			pnHeaderBorder.DragLeave += OnDragLeave;
-			// 
-			// pnHeader
-			// 
-			pnHeader.DragDrop += OnDragDrop;
-			pnHeader.DragOver += OnDragOver;
-			pnHeader.DragLeave += OnDragLeave;
-			pnHeader.MouseDown += OnHeaderMouseDown;
-			pnHeader.MouseMove += OnHeaderMouseMove;
 			// 
 			// labelControlText
 			// 
@@ -195,10 +174,13 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders
 					((List<BaseLibraryLink>)DataSource.Links).InsertItem(newLink, position);
 				else
 					DataSource.Links.AddItem(newLink);
-				InsertLinkRow(newLink, position);
+				var newRow = InsertLinkRow(newLink, position);
 				_outsideChangesInProgress = false;
 
 				UpdateGridSize();
+
+				newRow.Selected = true;
+
 				DataChanged?.Invoke(this, EventArgs.Empty);
 			}
 		}
@@ -216,10 +198,13 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders
 				((List<BaseLibraryLink>)DataSource.Links).InsertItem(newLink, position);
 			else
 				DataSource.Links.AddItem(newLink);
-			InsertLinkRow(newLink, position);
+			var newRow = InsertLinkRow(newLink, position);
 			_outsideChangesInProgress = false;
 
 			UpdateGridSize();
+
+			newRow.Selected = true;
+
 			DataChanged?.Invoke(this, EventArgs.Empty);
 		}
 
@@ -327,6 +312,30 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders
 			grFiles.Refresh();
 			DataChanged?.Invoke(this, EventArgs.Empty);
 		}
+
+		private void RefreshPreviewFiles()
+		{
+			var sourceLink = SelectedLinkRow?.Source as PreviewableLink;
+			if (sourceLink == null) return;
+			if (MainController.Instance.PopupMessages.ShowWarningQuestion(String.Format("Are you sure you want to refresh the server files for:{1}{0}?", sourceLink.NameWithExtension, Environment.NewLine)) != DialogResult.Yes) return;
+			MainController.Instance.ProcessManager.Run("Updating Preview files...", cancelationToken =>
+			{
+				if (sourceLink.Type == FileTypes.PowerPoint)
+				{
+					((PowerPointLinkSettings)sourceLink.Settings).ClearQuickViewContent();
+					using (var powerPointProcessor = new PowerPointHidden())
+					{
+						if (!powerPointProcessor.Connect(true)) return;
+						((PowerPointLinkSettings)sourceLink.Settings).UpdateQuickViewContent(powerPointProcessor);
+					}
+				}
+				sourceLink.ClearPreviewContainer();
+				var previewContainer = sourceLink.GetPreviewContainer();
+				var previewGenerator = previewContainer.GetPreviewGenerator();
+				previewContainer.UpdateContent(previewGenerator, cancelationToken);
+			});
+			MainController.Instance.PopupMessages.ShowInfo(String.Format("{0}{1}Is now updated for the server!", sourceLink.NameWithExtension, Environment.NewLine));
+		}
 		#endregion
 
 		#region Folder Data Processing
@@ -413,15 +422,22 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders
 
 		private void InsertLinks(IEnumerable<SourceLink> sourceLinks, int position = -1)
 		{
+			if (!sourceLinks.Any()) return;
+
 			_outsideChangesInProgress = true;
-			foreach (SourceLink sourceLink in sourceLinks)
+			LinkRow row = null;
+			foreach (var sourceLink in sourceLinks)
 			{
-				InsertLinkRow(InsertFileLink(sourceLink, position), position);
+				row = InsertLinkRow(InsertFileLink(sourceLink, position), position);
 				if (position != -1)
 					position++;
 			}
 			_outsideChangesInProgress = false;
+
 			UpdateGridSize();
+
+			row.Selected = true;
+
 			DataChanged?.Invoke(this, EventArgs.Empty);
 		}
 
@@ -670,6 +686,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders
 		{
 			FolderContainer.ProcessScrollOnDragLeave(sender, e);
 			if (!FormatState.AllowEdit) return;
+			SelectionManager.SelectFolder(this);
 			if (IsSourceLinksDragged)
 			{
 				var droppedLinks = DataDraggedOver.GetData(DataFormats.Serializable, true) as SourceLink[];
@@ -699,15 +716,15 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders
 				if (confirmDrop)
 					InsertLinks(droppedLinks, _mouseDragOverHitInfo.RowIndex);
 			}
+
 			var droppedRow = DataDraggedOver.GetData(typeof(LinkRow)) as LinkRow;
 			if (droppedRow != null)
-			{
-				SelectionManager.SelectFolder(this);
 				ProcessRowMoving(droppedRow, _mouseDragOverHitInfo.RowIndex);
-			}
+
 			var droppedFolder = DataDraggedOver.GetData(typeof(ClassicFolderBox)) as ClassicFolderBox;
 			if (droppedFolder != null && droppedFolder != this)
 				FolderContainer.ProcessFolderMoving(droppedFolder, DataSource.ColumnOrder, DataSource.RowOrder);
+
 			ResetDragInfo();
 		}
 
@@ -824,6 +841,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders
 				barButtonItemLinkPropertiesOpenLink.Visibility = BarItemVisibility.Never;
 				barButtonItemLinkPropertiesFileLocation.Visibility = BarItemVisibility.Never;
 				barButtonItemLinkPropertiesAdvancedSettings.Visibility = BarItemVisibility.Never;
+				barButtonItemLinkPropertiesRefreshPreview.Visibility = BarItemVisibility.Never;
 				barButtonItemLinkPropertiesTags.Visibility = BarItemVisibility.Never;
 				barButtonItemLinkPropertiesExpirationDate.Visibility = BarItemVisibility.Never;
 				barButtonItemLinkPropertiesDelete.Caption = "Delete this Line Break";
@@ -835,6 +853,9 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders
 					BarItemVisibility.Always :
 					BarItemVisibility.Never;
 				barButtonItemLinkPropertiesAdvancedSettings.Visibility = linkRow.Source is LibraryFolderLink ?
+					BarItemVisibility.Always :
+					BarItemVisibility.Never;
+				barButtonItemLinkPropertiesRefreshPreview.Visibility = linkRow.Source is PreviewableLink ?
 					BarItemVisibility.Always :
 					BarItemVisibility.Never;
 				barButtonItemLinkPropertiesTags.Visibility = MainController.Instance.Settings.EditorSettings.EnableTagsEdit ?
@@ -863,6 +884,11 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders
 		private void barButtonItemLinkPropertiesDelete_ItemClick(object sender, ItemClickEventArgs e)
 		{
 			DeleteLink();
+		}
+
+		private void barButtonItemLinkPropertiesRefreshPreview_ItemClick(object sender, ItemClickEventArgs e)
+		{
+			RefreshPreviewFiles();
 		}
 
 		private void barButtonItemLinkPropertiesLinkSettings_ItemClick(object sender, ItemClickEventArgs e)

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
 using SalesLibraries.Business.Entities.Common;
@@ -27,13 +28,19 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 		[JsonIgnore]
 		public string AllCategories
 		{
-			get { return string.Join(", ", Categories.SelectMany(sg => sg.Tags.Select(t => t.Name))); }
+			get { return String.Join(", ", Categories.SelectMany(sg => sg.Tags.Select(t => t.Name))); }
 		}
 
 		[JsonIgnore]
 		public string AllKeywords
 		{
-			get { return string.Join(", ", Keywords.Select(t => t.Name)); }
+			get { return String.Join(", ", Keywords.Select(t => t.Name)); }
+		}
+
+		[JsonIgnore]
+		public string AllTags
+		{
+			get { return String.Join(", ", Categories.SelectMany(sg => sg.Tags.Select(t => t.Name)).Union(Keywords.Select(t => t.Name))); }
 		}
 
 		public TagSettings()

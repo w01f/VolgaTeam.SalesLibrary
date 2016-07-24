@@ -116,13 +116,13 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 				.Where(link => link.DataSourceId == library.DataSourceId)
 				.Select(link => link.FullPath)
 				.ToList();
+
+			filesWhiteListItems.Add(Path.Combine(library.Path, Constants.LocalStorageFileName));
 			if (isWebSync)
 			{
 				filesWhiteListItems.Add(Path.Combine(library.Path, Constants.LibrariesJsonFileName));
 				filesWhiteListItems.Add(Path.Combine(library.Path, Constants.ShortLibraryInfoFileName));
 			}
-			else
-				filesWhiteListItems.Add(Path.Combine(library.Path, Constants.LocalStorageFileName));
 
 			var destinationPath = GetLibrarySyncDestinationPath(library, isWebSync);
 

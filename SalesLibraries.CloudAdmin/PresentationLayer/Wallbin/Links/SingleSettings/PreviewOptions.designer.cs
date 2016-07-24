@@ -28,7 +28,8 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.styleController = new DevExpress.XtraEditors.StyleController();
+			this.components = new System.ComponentModel.Container();
+			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
 			this.labelControlTitle = new DevExpress.XtraEditors.LabelControl();
 			this.laAdminTools = new System.Windows.Forms.Label();
 			this.buttonXRefreshPreview = new DevComponents.DotNetBar.ButtonX();
@@ -60,7 +61,7 @@
 			this.labelControlTitle.Size = new System.Drawing.Size(440, 34);
 			this.labelControlTitle.TabIndex = 24;
 			this.labelControlTitle.Text = "This is some serious Advanced Admin Ninja Stuff…\r\nDon’t mess with these, unless y" +
-    "ou really know what you are doing…";
+	"ou really know what you are doing…";
 			// 
 			// laAdminTools
 			// 
@@ -76,11 +77,13 @@
 			// buttonXRefreshPreview
 			// 
 			this.buttonXRefreshPreview.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXRefreshPreview.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+			| System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXRefreshPreview.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXRefreshPreview.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.buttonXRefreshPreview.Location = new System.Drawing.Point(151, 101);
+			this.buttonXRefreshPreview.Location = new System.Drawing.Point(78, 166);
 			this.buttonXRefreshPreview.Name = "buttonXRefreshPreview";
-			this.buttonXRefreshPreview.Size = new System.Drawing.Size(118, 26);
+			this.buttonXRefreshPreview.Size = new System.Drawing.Size(375, 30);
 			this.buttonXRefreshPreview.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXRefreshPreview.TabIndex = 13;
 			this.buttonXRefreshPreview.Text = "Refresh WV";
@@ -90,11 +93,13 @@
 			// buttonXOpenWV
 			// 
 			this.buttonXOpenWV.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXOpenWV.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+			| System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXOpenWV.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXOpenWV.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.buttonXOpenWV.Location = new System.Drawing.Point(8, 101);
+			this.buttonXOpenWV.Location = new System.Drawing.Point(78, 114);
 			this.buttonXOpenWV.Name = "buttonXOpenWV";
-			this.buttonXOpenWV.Size = new System.Drawing.Size(118, 26);
+			this.buttonXOpenWV.Size = new System.Drawing.Size(375, 30);
 			this.buttonXOpenWV.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXOpenWV.TabIndex = 12;
 			this.buttonXOpenWV.Text = "!WV Folder";
@@ -103,12 +108,11 @@
 			// 
 			// PreviewOptions
 			// 
-			this.Appearance.PageClient.BackColor = System.Drawing.Color.White;
-			this.Appearance.PageClient.Options.UseBackColor = true;
 			this.Controls.Add(this.buttonXRefreshPreview);
 			this.Controls.Add(this.laAdminTools);
 			this.Controls.Add(this.buttonXOpenWV);
 			this.Controls.Add(this.labelControlTitle);
+			this.Name = "PreviewOptions";
 			this.Size = new System.Drawing.Size(531, 541);
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
 			this.ResumeLayout(false);

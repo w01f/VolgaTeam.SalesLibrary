@@ -18,9 +18,13 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			var selectedFolder = MainController.Instance.WallbinViews.Selection.SelectedFolder;
 			var selectedLink = MainController.Instance.WallbinViews.Selection.SelectedLink;
 			Text = selectedFolder != null && selectedLink != null ?
-				String.Format("<b>{0}</b>{1}",
+				String.Format("{0}{1}",
 					selectedLink.Name,
-					selectedLink.Tags.HasCategories ? String.Format("{0}({1})", Environment.NewLine, selectedLink.Tags.AllCategories) : String.Empty) :
+					selectedLink.Tags.HasCategories || selectedLink.Tags.HasKeywords ?
+						String.Format("{0}<size=-2><color=gray>({1})</color></size>",
+							Environment.NewLine,
+							selectedLink.Tags.AllTags) :
+						String.Empty) :
 				String.Empty;
 		}
 	}

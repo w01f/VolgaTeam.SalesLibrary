@@ -253,6 +253,7 @@ namespace SalesLibraries.FileManager.Controllers
 			switch (e.SelectionType)
 			{
 				case SelectionEventType.SelectionReset:
+				case SelectionEventType.FolderSelected:
 					superFilterControl.Reset();
 					break;
 				case SelectionEventType.LinkSelected:

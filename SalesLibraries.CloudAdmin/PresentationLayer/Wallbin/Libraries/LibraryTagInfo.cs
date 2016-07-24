@@ -29,7 +29,10 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Libraries
 			}
 			else if (totalLinks > taggedLinks)
 			{
-				Text = String.Format("{0} Links Require Tags!", totalLinks - taggedLinks);
+				var linksRequireToTag = totalLinks - taggedLinks;
+				Text = linksRequireToTag == 1 ?
+					"1 Link Requires a Tag!" :
+					String.Format("{0} Links Require Tags!", linksRequireToTag);
 				ForeColor = Color.Red;
 			}
 			else if (totalLinks > 0 && taggedLinks == totalLinks)

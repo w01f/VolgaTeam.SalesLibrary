@@ -8,6 +8,8 @@ using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.Common.Helpers;
+using SalesLibraries.Common.OfficeInterops;
+using SalesLibraries.FileManager.Business.PreviewGenerators;
 using SalesLibraries.FileManager.Controllers;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSettings
@@ -44,9 +46,23 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 		public void LoadData()
 		{
-			buttonXOpenQV.Enabled = MainController.Instance.Settings.EnableLocalSync &&
-				Directory.Exists(((PowerPointLinkSettings)_data.Settings).ContainerPath);
-			buttonXOpenWV.Enabled = Directory.Exists(_data.PreviewContainerPath);
+			if (MainController.Instance.Settings.EnableLocalSync &&
+				Directory.Exists(((PowerPointLinkSettings)_data.Settings).ContainerPath))
+			{
+				buttonXOpenQV.Enabled = true;
+				buttonXOpenQV.Text = String.Format("!QV Folder ({0})", ((PowerPointLinkSettings)_data.Settings).Id.ToString("D"));
+			}
+			else
+				buttonXOpenQV.Enabled = false;
+
+
+			if (Directory.Exists(_data.PreviewContainerPath))
+			{
+				buttonXOpenWV.Enabled = true;
+				buttonXOpenWV.Text = String.Format("!WV Folder ({0})", _data.PreviewContainerName);
+			}
+			else
+				buttonXOpenWV.Enabled = false;
 		}
 
 		public void SaveData()
@@ -55,10 +71,23 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 		private void buttonXRefreshPreview_Click(object sender, EventArgs e)
 		{
-			if (MainController.Instance.PopupMessages.ShowWarningQuestion("Are you sure want to delete preview files for the link?") != DialogResult.Yes) return;
-			_data.ClearPreviewContainer();
-			((PowerPointLinkSettings)_data.Settings).ClearQuickViewContent();
-			MainController.Instance.PopupMessages.ShowInfo("Library files will refresh when you sync your library.");
+			if (MainController.Instance.PopupMessages.ShowWarningQuestion(String.Format("Are you sure you want to refresh the server files for:{1}{0}?", _data.NameWithExtension, Environment.NewLine)) != DialogResult.Yes) return;
+
+			MainController.Instance.ProcessManager.Run("Updating Preview files...", cancelationToken =>
+			{
+				((PowerPointLinkSettings)_data.Settings).ClearQuickViewContent();
+				using (var powerPointProcessor = new PowerPointHidden())
+				{
+					if (!powerPointProcessor.Connect(true)) return;
+					((PowerPointLinkSettings)_data.Settings).UpdateQuickViewContent(powerPointProcessor);
+				}
+
+				_data.ClearPreviewContainer();
+				var previewContainer = _data.GetPreviewContainer();
+				var previewGenerator = previewContainer.GetPreviewGenerator();
+				previewContainer.UpdateContent(previewGenerator, cancelationToken);
+			});
+			MainController.Instance.PopupMessages.ShowInfo(String.Format("{0}{1}Is now updated for the server!", _data.NameWithExtension, Environment.NewLine));
 		}
 
 		private void buttonXOpenQV_Click(object sender, EventArgs e)
