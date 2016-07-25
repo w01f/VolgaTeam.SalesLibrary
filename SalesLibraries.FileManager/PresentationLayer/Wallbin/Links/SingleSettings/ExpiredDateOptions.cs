@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Drawing;
+using System.Linq;
+using System.Windows.Forms;
 using DevExpress.XtraTab;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
@@ -7,8 +9,8 @@ using SalesLibraries.Common.Helpers;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSettings
 {
-	//public partial class ExpiredDateOptions : UserControl, ILinkProperties
 	[IntendForClass(typeof(LibraryObjectLink))]
+	//public partial class ExpiredDateOptions : UserControl, ILinkSettingsEditControl
 	public partial class ExpiredDateOptions : XtraTabPage, ILinkSettingsEditControl
 	{
 		private readonly LibraryObjectLink _data;
@@ -28,9 +30,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			dateEditExpirationDate.Properties.NullDate = DateTime.MinValue;
 			if ((CreateGraphics()).DpiX > 96)
 			{
-				laAddDateTitle.Font = new Font(laAddDateTitle.Font.FontFamily, laAddDateTitle.Font.Size - 2, laAddDateTitle.Font.Style);
-				laAddDateValue.Font = new Font(laAddDateValue.Font.FontFamily, laAddDateValue.Font.Size - 2, laAddDateValue.Font.Style);
-				laExpirationDateTitle.Font = new Font(laExpirationDateTitle.Font.FontFamily, laExpirationDateTitle.Font.Size - 2, laExpirationDateTitle.Font.Style);
+				laAddDateValue.Font = new Font(laAddDateValue.Font.FontFamily, laAddDateValue.Font.Size - 1, laAddDateValue.Font.Style);
 				laExpireddateActions.Font = new Font(laExpireddateActions.Font.FontFamily, laExpireddateActions.Font.Size - 2, laExpireddateActions.Font.Style);
 				checkBoxLabelLink.Font = new Font(checkBoxLabelLink.Font.FontFamily, checkBoxLabelLink.Font.Size - 2, checkBoxLabelLink.Font.Style);
 				checkBoxEnableExpiredLinks.Font = new Font(checkBoxEnableExpiredLinks.Font.FontFamily, checkBoxEnableExpiredLinks.Font.Size - 2, checkBoxEnableExpiredLinks.Font.Style);
@@ -40,7 +40,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 		public void LoadData()
 		{
-			laAddDateValue.Text = _data.AddDate.ToString("M/dd/yyyy h:mm:ss tt");
+			laAddDateValue.Text = String.Format(laAddDateValue.Text, _data.AddDate.ToString("M/dd/yy"));
 			dateEditExpirationDate.DateTime = _data.ExpirationSettings.ExpirationDate;
 			timeEditExpirationTime.Time = _data.ExpirationSettings.ExpirationDate;
 			checkBoxSendEmailWhenDelete.Checked = _data.ExpirationSettings.SendEmailOnSync;
@@ -58,14 +58,24 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 		private void checkBoxEnableExpiredLinks_CheckedChanged(object sender, EventArgs e)
 		{
-			gbExpiredLinks.Enabled = checkBoxEnableExpiredLinks.Checked;
+			foreach (var control in Controls.OfType<Control>())
+			{
+				if (control == checkBoxEnableExpiredLinks) continue;
+				control.Enabled = checkBoxEnableExpiredLinks.Checked;
+			}
 			if (checkBoxEnableExpiredLinks.Checked)
 			{
+				checkBoxEnableExpiredLinks.ForeColor = Color.Black;
+				dateEditExpirationDate.ForeColor = Color.Black;
+				timeEditExpirationTime.ForeColor = Color.Black;
 				dateEditExpirationDate.DateTime = _data.ExpirationSettings.ExpirationDate;
 				timeEditExpirationTime.Time = _data.ExpirationSettings.ExpirationDate;
 			}
 			else
 			{
+				checkBoxEnableExpiredLinks.ForeColor = Color.Gray;
+				dateEditExpirationDate.ForeColor = Color.Gray;
+				timeEditExpirationTime.ForeColor = Color.Gray;
 				dateEditExpirationDate.EditValue = DateTime.MinValue;
 				timeEditExpirationTime.Time = DateTime.MinValue;
 			}

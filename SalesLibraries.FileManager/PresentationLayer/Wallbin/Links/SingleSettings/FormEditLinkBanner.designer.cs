@@ -354,17 +354,15 @@
 			// 
 			// labelControlSearchTitle
 			// 
-			this.labelControlSearchTitle.Appearance.BackColor = System.Drawing.Color.White;
-			this.labelControlSearchTitle.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelControlSearchTitle.AllowHtmlString = true;
 			this.labelControlSearchTitle.Appearance.ForeColor = System.Drawing.Color.Black;
-			this.labelControlSearchTitle.AppearanceDisabled.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.labelControlSearchTitle.AppearanceDisabled.ForeColor = System.Drawing.Color.Gray;
 			this.labelControlSearchTitle.Location = new System.Drawing.Point(7, 9);
 			this.labelControlSearchTitle.Name = "labelControlSearchTitle";
 			this.labelControlSearchTitle.Size = new System.Drawing.Size(60, 16);
 			this.labelControlSearchTitle.StyleController = this.styleController;
 			this.labelControlSearchTitle.TabIndex = 16;
-			this.labelControlSearchTitle.Text = "Keyword:";
+			this.labelControlSearchTitle.Text = "<b>Keyword:</b>";
 			// 
 			// buttonXSearch
 			// 

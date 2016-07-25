@@ -204,17 +204,16 @@
 			// 
 			// labelControlSearchTitle
 			// 
+			this.labelControlSearchTitle.AllowHtmlString = true;
 			this.labelControlSearchTitle.Appearance.BackColor = System.Drawing.Color.White;
-			this.labelControlSearchTitle.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelControlSearchTitle.Appearance.ForeColor = System.Drawing.Color.Black;
-			this.labelControlSearchTitle.AppearanceDisabled.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelControlSearchTitle.AppearanceDisabled.ForeColor = System.Drawing.Color.Gray;
 			this.labelControlSearchTitle.Location = new System.Drawing.Point(7, 9);
 			this.labelControlSearchTitle.Name = "labelControlSearchTitle";
 			this.labelControlSearchTitle.Size = new System.Drawing.Size(60, 16);
 			this.labelControlSearchTitle.StyleController = this.styleController;
 			this.labelControlSearchTitle.TabIndex = 16;
-			this.labelControlSearchTitle.Text = "Keyword:";
+			this.labelControlSearchTitle.Text = "<b>Keyword:</b>";
 			// 
 			// styleController
 			// 
@@ -283,6 +282,8 @@
 			this.checkEditInvert.Enabled = false;
 			this.checkEditInvert.Location = new System.Drawing.Point(576, 505);
 			this.checkEditInvert.Name = "checkEditInvert";
+			this.checkEditInvert.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.checkEditInvert.Properties.Appearance.Options.UseForeColor = true;
 			this.checkEditInvert.Properties.Caption = "Invert";
 			this.checkEditInvert.Size = new System.Drawing.Size(75, 20);
 			this.checkEditInvert.StyleController = this.styleController;

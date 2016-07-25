@@ -23,6 +23,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			{
 				laPages.Font = new Font(laPages.Font.FontFamily, laPages.Font.Size - 2, laPages.Font.Style);
 				ckEnableColumnTitles.Font = new Font(ckEnableColumnTitles.Font.FontFamily, ckEnableColumnTitles.Font.Size - 2, ckEnableColumnTitles.Font.Style);
+				buttonXColumnTitleSettings.Font = new Font(buttonXColumnTitleSettings.Font.FontFamily, buttonXColumnTitleSettings.Font.Size - 2, buttonXColumnTitleSettings.Font.Style);
+				buttonXSave.Font = new Font(buttonXSave.Font.FontFamily, buttonXSave.Font.Size - 2, buttonXSave.Font.Style);
+				buttonXClose.Font = new Font(buttonXClose.Font.FontFamily, buttonXClose.Font.Size - 2, buttonXClose.Font.Style);
 			}
 		}
 

@@ -78,7 +78,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 				case LinkSettingsType.AdvancedSettings:
 					return new SettingsEditorHeaderInfo { Title = "Advanced Settings" };
 				case LinkSettingsType.ExpirationDate:
-					return new SettingsEditorHeaderInfo { Title = "Expiration Date" };
+					return new SettingsEditorHeaderInfo { Title = "Do you want to set an Expiration Date?" };
 				case LinkSettingsType.Notes:
 					return new SettingsEditorHeaderInfo { Title = "Link Settings" };
 				case LinkSettingsType.Security:

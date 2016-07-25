@@ -12,6 +12,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 		{
 			InitializeComponent();
 			if (!((CreateGraphics()).DpiX > 96)) return;
+			gbDeadLinksMarkup.AppearanceCaption.Font = new Font(gbDeadLinksMarkup.AppearanceCaption.Font.FontFamily, gbDeadLinksMarkup.AppearanceCaption.Font.Size - 2, gbDeadLinksMarkup.AppearanceCaption.Font.Style);
 			laAdminCaption.Font = new Font(laAdminCaption.Font.FontFamily, laAdminCaption.Font.Size - 2, laAdminCaption.Font.Style);
 			laMarkupAsBoldDescription.Font = new Font(laMarkupAsBoldDescription.Font.FontFamily, laMarkupAsBoldDescription.Font.Size - 1, laMarkupAsBoldDescription.Font.Style);
 			laMarkupAsLineBreakDescription.Font = new Font(laMarkupAsLineBreakDescription.Font.FontFamily, laMarkupAsLineBreakDescription.Font.Size - 1, laMarkupAsLineBreakDescription.Font.Style);

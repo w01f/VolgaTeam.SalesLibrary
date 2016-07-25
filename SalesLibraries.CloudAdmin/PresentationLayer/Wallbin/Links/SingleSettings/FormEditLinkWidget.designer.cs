@@ -1,33 +1,33 @@
 ﻿namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettings
 {
 	partial class FormEditLinkWidget
-    {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
+	{
+		/// <summary>
+		/// Required designer variable.
+		/// </summary>
+		private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+		/// <summary>
+		/// Clean up any resources being used.
+		/// </summary>
+		/// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+		protected override void Dispose(bool disposing)
+		{
+			if (disposing && (components != null))
+			{
+				components.Dispose();
+			}
+			base.Dispose(disposing);
+		}
 
-        #region Windows Form Designer generated code
+		#region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent()
-        {
+		/// <summary>
+		/// Required method for Designer support - do not modify
+		/// the contents of this method with the code editor.
+		/// </summary>
+		private void InitializeComponent()
+		{
 			this.components = new System.ComponentModel.Container();
 			this.buttonXOK = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXCancel = new DevComponents.DotNetBar.ButtonX();
@@ -98,9 +98,9 @@
 			// 
 			// xtraTabControlWidgets
 			// 
-			this.xtraTabControlWidgets.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			this.xtraTabControlWidgets.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+			| System.Windows.Forms.AnchorStyles.Left)
+			| System.Windows.Forms.AnchorStyles.Right)));
 			this.xtraTabControlWidgets.Appearance.BackColor = System.Drawing.Color.Transparent;
 			this.xtraTabControlWidgets.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.xtraTabControlWidgets.Appearance.Options.UseBackColor = true;
@@ -204,17 +204,16 @@
 			// 
 			// labelControlSearchTitle
 			// 
+			this.labelControlSearchTitle.AllowHtmlString = true;
 			this.labelControlSearchTitle.Appearance.BackColor = System.Drawing.Color.White;
-			this.labelControlSearchTitle.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelControlSearchTitle.Appearance.ForeColor = System.Drawing.Color.Black;
-			this.labelControlSearchTitle.AppearanceDisabled.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelControlSearchTitle.AppearanceDisabled.ForeColor = System.Drawing.Color.Gray;
 			this.labelControlSearchTitle.Location = new System.Drawing.Point(7, 9);
 			this.labelControlSearchTitle.Name = "labelControlSearchTitle";
 			this.labelControlSearchTitle.Size = new System.Drawing.Size(60, 16);
 			this.labelControlSearchTitle.StyleController = this.styleController;
 			this.labelControlSearchTitle.TabIndex = 16;
-			this.labelControlSearchTitle.Text = "Keyword:";
+			this.labelControlSearchTitle.Text = "<b>Keyword:</b>";
 			// 
 			// styleController
 			// 
@@ -283,6 +282,8 @@
 			this.checkEditInvert.Enabled = false;
 			this.checkEditInvert.Location = new System.Drawing.Point(576, 505);
 			this.checkEditInvert.Name = "checkEditInvert";
+			this.checkEditInvert.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.checkEditInvert.Properties.Appearance.Options.UseForeColor = true;
 			this.checkEditInvert.Properties.Caption = "Invert";
 			this.checkEditInvert.Size = new System.Drawing.Size(75, 20);
 			this.checkEditInvert.StyleController = this.styleController;
@@ -324,9 +325,9 @@
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
-        }
+		}
 
-        #endregion
+		#endregion
 
 		private DevComponents.DotNetBar.ButtonX buttonXOK;
 		private DevComponents.DotNetBar.ButtonX buttonXCancel;
