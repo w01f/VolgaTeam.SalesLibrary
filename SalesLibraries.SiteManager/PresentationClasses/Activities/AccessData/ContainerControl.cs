@@ -37,10 +37,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Activities.AccessData
 
 		private readonly GroupFilter _groupFilterControl;
 		private readonly TotalFilter _totalFilterControl;
-		public IEnumerable<Control> FilterControls
-		{
-			get { return new Control[] { _groupFilterControl, _totalFilterControl }; }
-		}
+		public IEnumerable<Control> FilterControls => new Control[] { _groupFilterControl, _totalFilterControl };
 
 		public ContainerControl()
 		{

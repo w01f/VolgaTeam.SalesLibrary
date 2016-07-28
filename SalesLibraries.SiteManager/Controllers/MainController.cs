@@ -43,10 +43,7 @@ namespace SalesLibraries.SiteManager.Controllers
 		{
 		}
 
-		public static MainController Instance
-		{
-			get { return _instance ?? (_instance = new MainController()); }
-		}
+		public static MainController Instance => _instance ?? (_instance = new MainController());
 
 		private void InitializePresentationLayer()
 		{

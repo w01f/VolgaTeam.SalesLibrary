@@ -27,14 +27,10 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Activities.MainData
 
 		public event EventHandler<EventArgs> FilterChanged;
 
-		public bool ShowUsers
-		{
-			get { return checkEditShowUsers.Checked; }
-		}
-		public bool ShowGroups
-		{
-			get { return checkEditShowGroups.Checked; }
-		}
+		public bool ShowUsers => checkEditShowUsers.Checked;
+
+		public bool ShowGroups => checkEditShowGroups.Checked;
+
 		public bool ShowNumber
 		{
 			get { return checkEditShowNumber.Checked; }

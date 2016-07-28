@@ -21,10 +21,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Activities.MainData
 		private readonly DateTime _endDate;
 		public List<MainGroupReportModel> Records { get; private set; }
 		
-		public string GroupName
-		{
-			get { return Text; }
-		}
+		public string GroupName => Text;
 
 		public TotalControl(IEnumerable<MainGroupReportModel> records, DateTime startDate, DateTime endDate)
 		{

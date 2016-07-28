@@ -36,14 +36,9 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Activities.AccessData
 			get { return checkEditShowPercent.Checked; }
 			set { checkEditShowPercent.Checked = value; }
 		}
-		public bool ShowActive
-		{
-			get { return checkEditShowActiveUsers.Checked; }
-		}
-		public bool ShowInactive
-		{
-			get { return checkEditShowInactiveUsers.Checked; }
-		}
+		public bool ShowActive => checkEditShowActiveUsers.Checked;
+
+		public bool ShowInactive => checkEditShowInactiveUsers.Checked;
 		public event EventHandler<EventArgs> ColumnsChanged;
 
 		public List<string> AllGroups { get; private set; }

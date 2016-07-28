@@ -38,10 +38,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Activities.MainData
 
 		private readonly UserFilter _userFilterControl;
 		private readonly GroupFilter _groupFilterControl;
-		public IEnumerable<Control> FilterControls
-		{
-			get { return new Control[] { _userFilterControl, _groupFilterControl }; }
-		}
+		public IEnumerable<Control> FilterControls => new Control[] { _userFilterControl, _groupFilterControl };
 
 		public ContainerControl()
 		{

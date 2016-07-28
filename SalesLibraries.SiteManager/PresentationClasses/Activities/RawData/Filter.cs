@@ -16,22 +16,13 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Activities.RawData
 		public bool EnableFilter { get; private set; }
 		public event EventHandler<EventArgs> FilterChanged;
 
-		public bool ShowDetails
-		{
-			get { return checkEditShowDetails.Checked; }
-		}
-		public bool ShowActionGroup
-		{
-			get { return checkEditShowActionGroup.Checked; }
-		}
-		public bool ShowAction
-		{
-			get { return checkEditShowAction.Checked; }
-		}
-		public bool ShowFile
-		{
-			get { return checkEditShowFile.Checked; }
-		}
+		public bool ShowDetails => checkEditShowDetails.Checked;
+
+		public bool ShowActionGroup => checkEditShowActionGroup.Checked;
+
+		public bool ShowAction => checkEditShowAction.Checked;
+
+		public bool ShowFile => checkEditShowFile.Checked;
 		public event EventHandler<EventArgs> ColumnsChanged;
 
 		public List<string> AllGroups { get; private set; }

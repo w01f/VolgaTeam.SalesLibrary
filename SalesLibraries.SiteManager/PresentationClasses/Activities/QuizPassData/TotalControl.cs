@@ -19,10 +19,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Activities.QuizPassData
 		private readonly DateTime _endDate;
 		public List<QuizPassGroupReportModel> Records { get; private set; }
 
-		public string GroupName
-		{
-			get { return Text; }
-		}
+		public string GroupName => Text;
 
 		public TotalControl(IEnumerable<QuizPassGroupReportModel> records, DateTime startDate, DateTime endDate)
 		{

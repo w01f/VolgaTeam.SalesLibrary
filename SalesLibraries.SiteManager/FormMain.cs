@@ -28,10 +28,7 @@ namespace SalesLibraries.SiteManager
 			}
 		}
 
-		public static FormMain Instance
-		{
-			get { return _instance ?? (_instance = new FormMain()); }
-		}
+		public static FormMain Instance => _instance ?? (_instance = new FormMain());
 
 		private void FormMain_Load(object sender, EventArgs e)
 		{

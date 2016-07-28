@@ -35,10 +35,7 @@ namespace SalesLibraries.SiteManager.ConfigurationClasses
 			Load();
 		}
 
-		public static SettingsManager Instance
-		{
-			get { return _instance; }
-		}
+		public static SettingsManager Instance => _instance;
 
 		public void Load()
 		{

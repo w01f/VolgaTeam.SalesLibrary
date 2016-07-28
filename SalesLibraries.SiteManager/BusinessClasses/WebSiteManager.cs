@@ -26,10 +26,7 @@ namespace SalesLibraries.SiteManager.BusinessClasses
 			get { return _selectedSite ?? (_selectedSite = !string.IsNullOrEmpty(SettingsManager.Instance.SelectedSiteName) ? Sites.FirstOrDefault(x => x.Website == SettingsManager.Instance.SelectedSiteName) ?? Sites.FirstOrDefault() : Sites.FirstOrDefault()); }
 		}
 
-		public static WebSiteManager Instance
-		{
-			get { return _instance; }
-		}
+		public static WebSiteManager Instance => _instance;
 
 		private void Load()
 		{

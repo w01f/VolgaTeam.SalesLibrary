@@ -11,17 +11,11 @@ namespace SalesLibraries.SiteManager.InteropClasses
 		private static readonly ExcelHelper _instance = new ExcelHelper();
 
 		private Application _excelObject;
-		public Application ExcelObject
-		{
-			get { return _excelObject; }
-		}
+		public Application ExcelObject => _excelObject;
 
 		private ExcelHelper() { }
 
-		public static ExcelHelper Instance
-		{
-			get { return _instance; }
-		}
+		public static ExcelHelper Instance => _instance;
 
 		public bool Connect()
 		{

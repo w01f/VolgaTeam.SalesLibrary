@@ -26,10 +26,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Activities.FileActivity
 		}
 		public event EventHandler<EventArgs> FilterChanged;
 
-		public int RecordsCount
-		{
-			get { return Convert.ToInt32(imageComboBoxEditRecords.EditValue); }
-		}
+		public int RecordsCount => Convert.ToInt32(imageComboBoxEditRecords.EditValue);
 
 		public List<string> AllGroups { get; private set; }
 		public List<string> SelectedGroups { get; private set; }

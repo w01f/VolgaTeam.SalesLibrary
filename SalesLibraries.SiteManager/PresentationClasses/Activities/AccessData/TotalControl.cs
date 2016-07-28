@@ -20,10 +20,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Activities.AccessData
 		private readonly DateTime _endDate;
 		public List<AccessReportModel> Records { get; private set; }
 
-		public string GroupName
-		{
-			get { return Text; }
-		}
+		public string GroupName => Text;
 
 		public TotalControl(IEnumerable<AccessReportModel> records, DateTime startDate, DateTime endDate)
 		{

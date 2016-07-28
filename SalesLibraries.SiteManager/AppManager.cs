@@ -14,13 +14,7 @@ namespace SalesLibraries.SiteManager
 		{
 		}
 
-		public static AppManager Instance
-		{
-			get
-			{
-				return _instance;
-			}
-		}
+		public static AppManager Instance => _instance;
 
 		public void RunForm()
 		{

@@ -15,10 +15,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.LibraryFiles
 	{
 		public List<LibraryFilesTotalModel> Records { get; private set; }
 
-		public string GroupName
-		{
-			get { return Text; }
-		}
+		public string GroupName => Text;
 
 		public TotalControl(IEnumerable<LibraryFilesTotalModel> records)
 		{

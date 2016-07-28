@@ -11,8 +11,6 @@ using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraPrinting;
 using SalesLibraries.ServiceConnector.LinkConfigProfileService;
 using SalesLibraries.SiteManager.BusinessClasses;
-using SalesLibraries.SiteManager.PresentationClasses.Activities;
-using SalesLibraries.SiteManager.ToolClasses;
 using SalesLibraries.SiteManager.ToolForms;
 using Application = System.Windows.Forms.Application;
 
@@ -27,10 +25,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.LinkConfigProfiles
 
 		public bool NeedToSave { get; private set; }
 
-		public LinkConfigProfileModel Profile
-		{
-			get { return _dataSource; }
-		}
+		public LinkConfigProfileModel Profile => _dataSource;
 
 		public string ProfileName
 		{

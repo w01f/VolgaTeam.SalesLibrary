@@ -36,10 +36,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Activities.QuizPassData
 		}
 
 		private readonly Filter _filterControl;
-		public IEnumerable<Control> FilterControls
-		{
-			get { return new Control[] { _filterControl }; }
-		}
+		public IEnumerable<Control> FilterControls => new Control[] { _filterControl };
 
 		public ContainerControl()
 		{

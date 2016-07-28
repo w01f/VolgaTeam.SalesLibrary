@@ -19,8 +19,8 @@ namespace SalesLibraries.SiteManager.PresentationClasses.InactiveUsers
 		public List<string> AllGroups { get; private set; }
 		public List<string> SelectedGroups { get; private set; }
 
-		public bool EmailReset { get { return checkEditEmailReset.Checked; } }
-		public bool EmailDelete { get { return checkEditEmailDelete.Checked; } }
+		public bool EmailReset => checkEditEmailReset.Checked;
+		public bool EmailDelete => checkEditEmailDelete.Checked;
 
 		public InactiveUsersFilter()
 		{
