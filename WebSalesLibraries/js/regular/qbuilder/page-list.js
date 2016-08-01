@@ -241,7 +241,7 @@
 				error: function ()
 				{
 				},
-				async: true,
+				async: false,
 				dataType: 'html'
 			});
 		};

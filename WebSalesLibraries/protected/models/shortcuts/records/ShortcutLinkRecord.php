@@ -165,6 +165,8 @@
 					return new QuizzesShortcut($this, $isPhone);
 				case 'favorites':
 					return new FavoritesShortcut($this, $isPhone);
+				case 'user_preferences':
+					return new FavoritesShortcut($this, $isPhone);
 				default:
 					return new EmptyShortcut($this, $isPhone);
 			}

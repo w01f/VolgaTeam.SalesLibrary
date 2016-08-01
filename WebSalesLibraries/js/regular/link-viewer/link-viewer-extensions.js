@@ -12,24 +12,46 @@
 			catch(err) {}
 		};
 
-		this.sendLinkData = function (viewerData)
+		this.openLink = function (viewerData)
 		{
 			try
 			{
 				var format = viewerData.format;
 				var fileName = viewerData.fileName;
 
-				var originalUrl ='';
+				var path ='';
 				switch (format){
 					case "ppt":
 					case "video":
 					case "xls":
-						originalUrl = (window.BaseUrl + viewerData.url).replace(/\/\/+/g, '/');
+					case "doc":
+					case "pdf":
+					case "jpeg":
+					case "png":
+						path = (window.BaseUrl + viewerData.url).replace(/\/\/+/g, '/');
 						break;
 					default:
-						originalUrl = viewerData.url;
+						path = viewerData.url;
 						break;
 				}
+
+				var secondPath ='';
+				if (viewerData.secondPath !== undefined)
+					secondPath = viewerData.secondPath;
+
+
+				SalesLibraryExtensions_openLink(format, fileName, path, secondPath);
+			}
+			catch(err) {}
+		};
+
+		this.sendLinkData = function (viewerData)
+		{
+			try
+			{
+				var format = viewerData.format;
+				var fileName = viewerData.fileName;
+				var originalUrl = (window.BaseUrl + viewerData.url).replace(/\/\/+/g, '/');
 
 				var parts = [];
 				if (viewerData.pages !== undefined)
@@ -39,8 +61,6 @@
 					});
 				else if (viewerData.mp4Src !== undefined)
 					parts.push((window.BaseUrl + viewerData.mp4Src.href).replace(/\/\/+/g, '/'));
-				else if (viewerData.secondPath !== undefined)
-					parts.push(viewerData.secondPath);
 
 				var slideWidth = 0;
 				if (viewerData.slideWidth !== undefined)

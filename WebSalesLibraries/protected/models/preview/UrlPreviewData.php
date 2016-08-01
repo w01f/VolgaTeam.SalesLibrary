@@ -10,11 +10,10 @@
 
 		/**
 		 * @param $link LibraryLink
-		 * @param $isQuickSite boolean
 		 */
-		public function __construct($link, $isQuickSite)
+		public function __construct($link)
 		{
-			parent::__construct($link, $isQuickSite);
+			parent::__construct($link);
 
 			$this->viewerFormat = 'url';
 			$this->contentView = 'urlViewer';
@@ -32,7 +31,7 @@
 			}
 		}
 
-		protected function initActions()
+		public function initActions()
 		{
 			switch($this->format)
 			{

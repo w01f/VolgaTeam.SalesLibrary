@@ -37,7 +37,7 @@
 			$configProfileModel->name = $this->name;
 			$configProfileModel->order = $this->order;
 
-			$configProfileModel->config = new LinkConfig(CJSON::decode($this->config, true));
+			$configProfileModel->config = new LinkProfileSettings(CJSON::decode($this->config, true));
 
 			return $configProfileModel;
 		}

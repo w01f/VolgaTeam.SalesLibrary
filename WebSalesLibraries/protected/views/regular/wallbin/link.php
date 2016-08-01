@@ -93,11 +93,11 @@
 		?>
 		<div class="<? echo $linkClass; ?>" draggable="<? echo $draggable ? 'true' : 'false'; ?>"
 		     style="background-image: <? echo !(isset($disableWidget) && $disableWidget) && isset($widget) ? "url('data:image/png;base64," . $widget . "')" : ""; ?>; <? echo $linkFontProperties; ?>">
-			<span class="link-text<? echo !$isLinkStaticFontSize ? ' link-text-sized' : ''; ?> mtTool"
+			<span class="link-text<? echo $isLinkStaticFontSize != true ? ' link-text-sized' : ''; ?> mtTool"
 			      <? if (isset($tooltip)): ?>mtcontent="<? echo $tooltip; ?>"<? endif; ?>><? echo $link->name; ?></span>
 			<? if (isset($link->extendedProperties->note) && $link->extendedProperties->note != ""): ?>
 				<span
-					class="link-note<? echo !$isLinkStaticFontSize ? ' link-note-sized' : ''; ?>"><? echo ' - ' . $link->extendedProperties->note; ?></span>
+					class="link-note<? echo $isLinkStaticFontSize != true ? ' link-note-sized' : ''; ?>"><? echo ' - ' . $link->extendedProperties->note; ?></span>
 			<? endif; ?>
 		</div>
 	<? endif; ?>

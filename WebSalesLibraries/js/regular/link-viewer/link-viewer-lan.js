@@ -10,7 +10,7 @@
 		this.show = function ()
 		{
 			if (viewerData.isEOBrowser == true)
-				$.SalesPortal.SalesLibraryExtensions.sendLinkData(viewerData);
+				$.SalesPortal.SalesLibraryExtensions.openLink(viewerData);
 			else
 			{
 				var modalDialog = new $.SalesPortal.ModalDialog({

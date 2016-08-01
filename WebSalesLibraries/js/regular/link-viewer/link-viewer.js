@@ -1,10 +1,12 @@
 (function ($)
 {
 	window.BaseUrl = window.BaseUrl || '';
-	$.SalesPortal = $.SalesPortal || { };
+	$.SalesPortal = $.SalesPortal || {};
 	var LinkManager = function ()
 	{
 		var that = this;
+		var downloadPopup = undefined;
+
 		this.requestViewDialog = function (linkId, isQuickSite)
 		{
 			$('body').find('.mtContent').remove();
@@ -42,9 +44,6 @@
 						{
 							case 'document':
 								new $.SalesPortal.DocumentViewer(parameters).show();
-								break;
-							case 'xls':
-								new $.SalesPortal.ExcelViewer(parameters).show();
 								break;
 							case 'video':
 								new $.SalesPortal.VideoViewer(parameters).show();
@@ -238,7 +237,7 @@
 
 		this.downloadFile = function (fileData)
 		{
-			window.open(window.BaseUrl + "preview/downloadFile?data=" + $.toJSON(fileData).replace(/&/g, '%26'));
+			window.location = window.BaseUrl + "preview/downloadFile?data=" + $.toJSON(fileData).replace(/&/g, '%26');
 		};
 
 		var favoritesDialogObject = [];
@@ -390,8 +389,8 @@
 				title: links[0].title,
 				content: $('<video controls autoplay preload="auto"' +
 					' id="video-player"' +
-					' height = "480" width="680">'+
-						'<source src="'+links[0].href+'" type="video/mp4">' +
+					' height = "480" width="680">' +
+					'<source src="' + links[0].href + '" type="video/mp4">' +
 					'</video>'),
 				openEffect: 'none',
 				closeEffect: 'none',

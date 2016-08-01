@@ -1,0 +1,25 @@
+.user-preferences-editor .row
+{
+	margin: 0;
+}
+
+.user-preferences-editor .header
+{
+	margin: 0 0 30px;
+}
+
+.user-preferences-editor .row .checkbox
+{
+	margin-top: 0;
+}
+
+.user-preferences-editor .buttons-area
+{
+	margin-top: 30px;
+	text-align: center;
+}
+
+.user-preferences-editor .buttons-area .btn
+{
+	width: 100px;
+}

@@ -15,11 +15,10 @@
 
 		/**
 		 * @param $link LibraryLink
-		 * @param $isQuickSite boolean
 		 */
-		public function __construct($link, $isQuickSite)
+		public function __construct($link)
 		{
-			parent::__construct($link, $isQuickSite);
+			parent::__construct($link);
 
 			$this->viewerFormat = 'internal';
 			$this->contentView = 'internalLinkViewer';
@@ -81,7 +80,7 @@
 			}
 		}
 
-		protected function initActions()
+		public function initActions()
 		{
 			$this->actions = array();
 		}

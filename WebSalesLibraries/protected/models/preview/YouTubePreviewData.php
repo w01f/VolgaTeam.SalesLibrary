@@ -12,14 +12,12 @@
 
 		/**
 		 * @param $link LibraryLink
-		 * @param $isQuickSite boolean
 		 */
-		public function __construct($link, $isQuickSite)
+		public function __construct($link)
 		{
+			parent::__construct($link);
+
 			$this->linkTitle = 'YouTube link';
-
-			parent::__construct($link, $isQuickSite);
-
 			$this->viewerFormat = 'youtube';
 			$this->contentView = 'youTubeViewer';
 
@@ -32,7 +30,7 @@
 			$this->forcePreview = $link->extendedProperties->forcePreview;
 		}
 
-		protected function initActions()
+		public function initActions()
 		{
 			$this->actions = array();
 			$imageUrlPrefix = Yii::app()->getBaseUrl(true);

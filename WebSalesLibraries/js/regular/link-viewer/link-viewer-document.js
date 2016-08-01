@@ -1,7 +1,7 @@
 (function ($)
 {
 	window.BaseUrl = window.BaseUrl || '';
-	$.SalesPortal = $.SalesPortal || { };
+	$.SalesPortal = $.SalesPortal || {};
 	$.SalesPortal.DocumentViewer = function (parameters)
 	{
 		var viewerData = new $.SalesPortal.DocumentViewerData(parameters.data);
@@ -11,77 +11,82 @@
 
 		this.show = function ()
 		{
-			$.fancybox({
-				content: parameters.content,
-				title: viewerData.name,
-				autoSize: true,
-				openEffect: 'none',
-				closeEffect: 'none',
-				afterShow: function ()
-				{
-					$.SalesPortal.SalesLibraryExtensions.sendLinkData(viewerData);
-
-					dialogContent = $('.fancybox-wrap');
-
-					var formLogger = new $.SalesPortal.FormLogger();
-					formLogger.init({
-						logObject: {
-							name: viewerData.name,
-							fileName: viewerData.fileName,
-							format: viewerData.format
-						},
-						formContent: dialogContent
-					});
-
-					dialogContent.find('.tab-above-header').first().addClass('active');
-					dialogContent.find('#link-viewer-body-tabs li').first().addClass('active');
-					dialogContent.find('.tab-content .tab-pane').first().addClass('active');
-
-					dialogContent.find('#link-viewer-body-tabs a[data-toggle="tab"]').on('shown.bs.tab', function (e)
+			if (viewerData.config.isEOBrowser == true && viewerData.config.forceOpen == true)
+				$.SalesPortal.SalesLibraryExtensions.openLink(viewerData);
+			else if (viewerData.config.forceDownload == true)
+				downloadFile();
+			else
+				$.fancybox({
+					content: parameters.content,
+					title: viewerData.name,
+					autoSize: true,
+					openEffect: 'none',
+					closeEffect: 'none',
+					afterShow: function ()
 					{
-						dialogContent.find('.tab-above-header').removeClass('active');
-						var tabTag = e.target.attributes['href'].value.replace("#link-viewer-tab-", "");
-						dialogContent.find('#tab-above-header-' + tabTag).addClass('active');
-					});
+						$.SalesPortal.SalesLibraryExtensions.sendLinkData(viewerData);
 
-					dialogContent.find('.file-size').html('(' + viewerData.fileSize + ')');
+						dialogContent = $('.fancybox-wrap');
 
-					dialogContent.find('.download-file').off('click.preview').on('click.preview', downloadFile);
-					dialogContent.find('.download-page').off('click.preview').on('click.preview', downloadPage);
-					dialogContent.find('.add-quicksite').off('click.preview').on('click.preview', addToQuickSite);
-					dialogContent.find('.add-favorites').off('click.preview').on('click.preview', addToFavorites);
+						var formLogger = new $.SalesPortal.FormLogger();
+						formLogger.init({
+							logObject: {
+								name: viewerData.name,
+								fileName: viewerData.fileName,
+								format: viewerData.format
+							},
+							formContent: dialogContent
+						});
 
-					dialogContent.find("#image-viewer-slide-selector").selectpicker({
-						dropupAuto: false,
-						container: 'body',
-						width: '60px'
-					});
+						dialogContent.find('.tab-above-header').first().addClass('active');
+						dialogContent.find('#link-viewer-body-tabs li').first().addClass('active');
+						dialogContent.find('.tab-content .tab-pane').first().addClass('active');
 
-					updateImageViewer();
-
-					dialogContent.find('.open-pdf').off('click.preview').on('click.preview', openPdf);
-					dialogContent.find('.open-gallery-modal').off('click.preview').on('click.preview', showGalleryModal);
-					dialogContent.find('.open-gallery-fullscreen').off('click.preview').on('click.preview', showGalleryFullScreen);
-
-					dialogContent.find('.action-container .action').off('click.preview').on('click.preview', processSaveAction);
-
-					new $.SalesPortal.RateManager().init(
+						dialogContent.find('#link-viewer-body-tabs a[data-toggle="tab"]').on('shown.bs.tab', function (e)
 						{
-							id: viewerData.linkId,
-							name: viewerData.name,
-							file: viewerData.fileName,
-							format: viewerData.format
-						},
-						dialogContent.find('#user-link-rate-container'),
-						viewerData.rateData);
+							dialogContent.find('.tab-above-header').removeClass('active');
+							var tabTag = e.target.attributes['href'].value.replace("#link-viewer-tab-", "");
+							dialogContent.find('#tab-above-header-' + tabTag).addClass('active');
+						});
 
-					new $.SalesPortal.PreviewEmailer(viewerData);
-				},
-				afterClose: function ()
-				{
-					$.SalesPortal.SalesLibraryExtensions.releaseLinkData();
-				}
-			});
+						dialogContent.find('.file-size').html('(' + viewerData.fileSize + ')');
+
+						dialogContent.find('.download-file').off('click.preview').on('click.preview', downloadFile);
+						dialogContent.find('.download-page').off('click.preview').on('click.preview', downloadPage);
+						dialogContent.find('.add-quicksite').off('click.preview').on('click.preview', addToQuickSite);
+						dialogContent.find('.add-favorites').off('click.preview').on('click.preview', addToFavorites);
+
+						dialogContent.find("#image-viewer-slide-selector").selectpicker({
+							dropupAuto: false,
+							container: 'body',
+							width: '60px'
+						});
+
+						updateImageViewer();
+
+						dialogContent.find('.open-pdf').off('click.preview').on('click.preview', openPdf);
+						dialogContent.find('.open-gallery-modal').off('click.preview').on('click.preview', showGalleryModal);
+						dialogContent.find('.open-gallery-fullscreen').off('click.preview').on('click.preview', showGalleryFullScreen);
+
+						dialogContent.find('.action-container .action').off('click.preview').on('click.preview', processSaveAction);
+
+						new $.SalesPortal.RateManager().init(
+							{
+								id: viewerData.linkId,
+								name: viewerData.name,
+								file: viewerData.fileName,
+								format: viewerData.format
+							},
+							dialogContent.find('#user-link-rate-container'),
+							viewerData.rateData);
+
+						new $.SalesPortal.PreviewEmailer(viewerData);
+					},
+					afterClose: function ()
+					{
+						$.SalesPortal.SalesLibraryExtensions.releaseLinkData();
+					}
+				});
 		};
 
 		var updateImageViewer = function ()

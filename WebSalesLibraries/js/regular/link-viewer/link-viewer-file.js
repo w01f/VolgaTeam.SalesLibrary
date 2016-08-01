@@ -1,7 +1,7 @@
 (function ($)
 {
 	window.BaseUrl = window.BaseUrl || '';
-	$.SalesPortal = $.SalesPortal || { };
+	$.SalesPortal = $.SalesPortal || {};
 	$.SalesPortal.FileViewer = function (parameters)
 	{
 		var viewerData = new $.SalesPortal.SimpleViewerData(parameters.data);
@@ -9,52 +9,57 @@
 
 		this.show = function ()
 		{
-			$.fancybox({
-				content: parameters.content,
-				title: viewerData.name,
-				autoSize: true,
-				openEffect: 'none',
-				closeEffect: 'none',
-				afterShow: function ()
-				{
-					dialogContent = $('.fancybox-wrap');
-
-					var formLogger = new $.SalesPortal.FormLogger();
-					formLogger.init({
-						logObject: {
-							name: viewerData.name,
-							fileName: viewerData.fileName,
-							format: viewerData.format
-						},
-						formContent: dialogContent
-					});
-
-					dialogContent.find('.tab-above-header').first().addClass('active');
-					dialogContent.find('#link-viewer-body-tabs li').first().addClass('active');
-					dialogContent.find('.tab-content .tab-pane').first().addClass('active');
-
-					dialogContent.find('#link-viewer-body-tabs a[data-toggle="tab"]').on('shown.bs.tab', function (e)
+			if (viewerData.config.isEOBrowser == true && viewerData.config.forceOpen == true)
+				$.SalesPortal.SalesLibraryExtensions.openLink(viewerData);
+			else if (viewerData.config.forceDownload == true)
+				download();
+			else
+				$.fancybox({
+					content: parameters.content,
+					title: viewerData.name,
+					autoSize: true,
+					openEffect: 'none',
+					closeEffect: 'none',
+					afterShow: function ()
 					{
-						dialogContent.find('.tab-above-header').removeClass('active');
-						var tabTag = e.target.attributes['href'].value.replace("#link-viewer-tab-", "");
-						dialogContent.find('#tab-above-header-' + tabTag).addClass('active');
-					});
+						dialogContent = $('.fancybox-wrap');
 
-					dialogContent.find('.action-container .action').off('click.preview').on('click.preview', processSaveAction);
+						var formLogger = new $.SalesPortal.FormLogger();
+						formLogger.init({
+							logObject: {
+								name: viewerData.name,
+								fileName: viewerData.fileName,
+								format: viewerData.format
+							},
+							formContent: dialogContent
+						});
 
-					new $.SalesPortal.RateManager().init(
+						dialogContent.find('.tab-above-header').first().addClass('active');
+						dialogContent.find('#link-viewer-body-tabs li').first().addClass('active');
+						dialogContent.find('.tab-content .tab-pane').first().addClass('active');
+
+						dialogContent.find('#link-viewer-body-tabs a[data-toggle="tab"]').on('shown.bs.tab', function (e)
 						{
-							id: viewerData.linkId,
-							name: viewerData.name,
-							file: viewerData.fileName,
-							format: viewerData.format
-						},
-						dialogContent.find('#user-link-rate-container'),
-						viewerData.rateData);
+							dialogContent.find('.tab-above-header').removeClass('active');
+							var tabTag = e.target.attributes['href'].value.replace("#link-viewer-tab-", "");
+							dialogContent.find('#tab-above-header-' + tabTag).addClass('active');
+						});
 
-					new $.SalesPortal.PreviewEmailer(viewerData);
-				}
-			});
+						dialogContent.find('.action-container .action').off('click.preview').on('click.preview', processSaveAction);
+
+						new $.SalesPortal.RateManager().init(
+							{
+								id: viewerData.linkId,
+								name: viewerData.name,
+								file: viewerData.fileName,
+								format: viewerData.format
+							},
+							dialogContent.find('#user-link-rate-container'),
+							viewerData.rateData);
+
+						new $.SalesPortal.PreviewEmailer(viewerData);
+					}
+				});
 		};
 
 		var download = function ()

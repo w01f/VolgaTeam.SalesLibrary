@@ -12,11 +12,10 @@
 
 		/**
 		 * @param $link LibraryLink
-		 * @param $isQuickSite boolean
 		 */
-		public function __construct($link, $isQuickSite)
+		public function __construct($link)
 		{
-			parent::__construct($link, $isQuickSite);
+			parent::__construct($link);
 
 			$this->viewerFormat = 'file';
 			$this->contentView = 'fileViewer';
@@ -27,7 +26,16 @@
 			$this->fileSize = self::formatFileSize($link->fileSize);
 		}
 
-		protected function initActions()
+		/**
+		 * @param $isQuickSite boolean
+		 */
+		public function applyLinkSettings($isQuickSite)
+		{
+			$this->config = new FilePreviewConfig();
+			$this->config->init($this->link, $isQuickSite);
+		}
+
+		public function initActions()
 		{
 			parent::initActions();
 			$this->actions = CMap::mergeArray($this->getDownloadActions(), $this->actions);

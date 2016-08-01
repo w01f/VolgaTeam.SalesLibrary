@@ -2,9 +2,9 @@
 	use application\models\wallbin\models\web\LibraryLink as LibraryLink;
 
 	/**
-	 * Class LinkConfig
+	 * Class LinkProfileSettings
 	 */
-	class LinkConfig
+	class LinkProfileSettings
 	{
 		/**
 		 * @var boolean disablePreview

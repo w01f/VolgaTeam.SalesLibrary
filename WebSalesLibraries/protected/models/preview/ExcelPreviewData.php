@@ -6,27 +6,30 @@
 	 */
 	class ExcelPreviewData extends FilePreviewData
 	{
-		public $isEOBrowser;
-
-		public $forceDownload;
-		public $forceOpen;
-
 		/**
 		 * @param $link LibraryLink
-		 * @param $isQuickSite boolean
 		 */
-		public function __construct($link, $isQuickSite)
+		public function __construct($link)
 		{
-			parent::__construct($link, $isQuickSite);
+			parent::__construct($link);
 			$this->viewerFormat = 'xls';
 			$this->linkTitle = 'Excel File';
+		}
 
-			$this->isEOBrowser = Yii::app()->browser->getBrowser() == Browser::BROWSER_EO;
+		/**
+		 * @param $isQuickSite boolean
+		 */
+		public function applyLinkSettings($isQuickSite)
+		{
+			parent::applyLinkSettings($isQuickSite);
 
-			/** @var  $linkSettings ExcelLinkSettings*/
-			$linkSettings = $link->extendedProperties;
+			/** @var  $previewConfig FilePreviewConfig */
+			$previewConfig = $this->config;
 
-			$this->forceDownload = $linkSettings->forceDownload;
-			$this->forceOpen = $linkSettings->forceOpen;
+			/** @var  $linkSettings ExcelLinkSettings */
+			$linkSettings = $this->link->extendedProperties;
+
+			$previewConfig->forceOpen |= $linkSettings->forceOpen;
+			$previewConfig->forceDownload |= $linkSettings->forceDownload;
 		}
 	}

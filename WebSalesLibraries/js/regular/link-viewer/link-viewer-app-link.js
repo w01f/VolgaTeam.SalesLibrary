@@ -9,7 +9,7 @@
 
 		this.show = function ()
 		{
-			$.SalesPortal.SalesLibraryExtensions.sendLinkData(viewerData);
+			$.SalesPortal.SalesLibraryExtensions.openLink(viewerData);
 		};
 	};
 })(jQuery);

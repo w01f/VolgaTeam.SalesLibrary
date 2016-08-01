@@ -1,4 +1,4 @@
-<?php
+<?
 
 	/**
 	 * Class LinkConfigProfileModel
@@ -21,7 +21,7 @@
 		 */
 		public $order;
 		/**
-		 * @var LinkConfig config
+		 * @var LinkProfileSettings config
 		 * @soap
 		 */
 		public $config;

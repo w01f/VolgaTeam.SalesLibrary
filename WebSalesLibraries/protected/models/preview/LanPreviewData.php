@@ -11,11 +11,10 @@
 
 		/**
 		 * @param $link LibraryLink
-		 * @param $isQuickSite boolean
 		 */
-		public function __construct($link, $isQuickSite)
+		public function __construct($link)
 		{
-			parent::__construct($link, $isQuickSite);
+			parent::__construct($link);
 
 			$this->viewerFormat = 'lan';
 			$this->contentView = 'lanViewer';
@@ -23,7 +22,7 @@
 			$this->isEOBrowser = Yii::app()->browser->getBrowser() == Browser::BROWSER_EO;
 		}
 
-		protected function initActions()
+		public function initActions()
 		{
 			$this->actions = array();
 		}

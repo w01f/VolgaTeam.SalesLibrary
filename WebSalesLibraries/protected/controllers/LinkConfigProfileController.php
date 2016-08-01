@@ -15,7 +15,7 @@
 					'class' => 'CWebServiceAction',
 					'classMap' => array(
 						'LinkConfigProfileModel' => 'LinkConfigProfileModel',
-						'LinkConfig' => 'LinkConfig',
+						'LinkProfileSettings' => 'LinkProfileSettings',
 						'LibraryReference' => 'LibraryReference',
 						'LibraryLinkReference' => 'LibraryLinkReference',
 						'SecurityGroupReference' => 'SecurityGroupReference',
@@ -36,6 +36,7 @@
 			{
 				foreach (LibraryRecord::model()->findAll(array('order' => 'name')) as $libraryRecord)
 				{
+					/** @var LibraryRecord $libraryRecord */
 					$libraryReference = new LibraryReference();
 					$libraryReference->id = $libraryRecord->id;
 					$libraryReference->name = $libraryRecord->name;
@@ -57,6 +58,7 @@
 			{
 				foreach (GroupRecord::model()->findAll(array('order' => 'name')) as $groupRecord)
 				{
+					/** @var GroupRecord $groupRecord */
 					$securityGroupReference = new SecurityGroupReference();
 					$securityGroupReference->id = $groupRecord->id;
 					$securityGroupReference->name = $groupRecord->name;

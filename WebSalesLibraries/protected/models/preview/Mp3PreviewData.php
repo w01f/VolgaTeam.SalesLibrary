@@ -8,17 +8,16 @@
 	{
 		/**
 		 * @param $link LibraryLink
-		 * @param $isQuickSite boolean
 		 */
-		public function __construct($link, $isQuickSite)
+		public function __construct($link)
 		{
-			parent::__construct($link, $isQuickSite);
+			parent::__construct($link);
 			$this->viewerFormat = 'file';
 			$this->contentView = 'fileViewer';
 			$this->linkTitle = 'MP3 File';
 		}
 
-		protected function initActions()
+		public function initActions()
 		{
 			parent::initActions();
 

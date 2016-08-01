@@ -14,7 +14,7 @@
 		public $linkTitle;
 
 		/**
-		 * @var PreviewConfig config
+		 * @var BasePreviewConfig config
 		 */
 		public $config;
 
@@ -29,9 +29,8 @@
 
 		/**
 		 * @param $link LibraryLink
-		 * @param $isQuickSite boolean
 		 */
-		public function __construct($link, $isQuickSite)
+		public function __construct($link)
 		{
 			$this->link = $link;
 			$this->linkId = $link->id;
@@ -40,16 +39,20 @@
 			$this->tags = $link->getTagsString();
 			$this->url = str_replace('SalesLibraries/SalesLibraries', 'SalesLibraries', $link->fileLink);
 
-			$this->config = new PreviewConfig();
-			$this->config->init($link, $isQuickSite);
-
 			$userId = UserIdentity::getCurrentUserId();
 			$this->rateData = LinkRateRecord::getRateData($link->id, $userId);
-
-			$this->initActions();
 		}
 
-		protected function initActions()
+		/**
+		 * @param $isQuickSite boolean
+		 */
+		public function applyLinkSettings($isQuickSite)
+		{
+			$this->config = new BasePreviewConfig();
+			$this->config->init($this->link, $isQuickSite);
+		}
+
+		public function initActions()
 		{
 			$this->actions = array();
 			$imageUrlPrefix = Yii::app()->getBaseUrl(true);
@@ -81,38 +84,55 @@
 		 */
 		public static function getInstance($link, $isQuickSite)
 		{
+			$previewData = null;
 			switch ($link->originalFormat)
 			{
 				case 'ppt':
-					return new PowerPointPreviewData($link, $isQuickSite);
+					$previewData = new PowerPointPreviewData($link);
+					break;
 				case 'doc':
-					return new WordPreviewData($link, $isQuickSite);
+					$previewData = new WordPreviewData($link);
+					break;
 				case 'pdf':
-					return new PdfPreviewData($link, $isQuickSite);
+					$previewData = new PdfPreviewData($link);
+					break;
 				case 'video':
 				case 'wmv':
 				case 'mp4':
-					return new VideoPreviewData($link, $isQuickSite);
+					$previewData = new VideoPreviewData($link);
+					break;
 				case 'png':
 				case 'jpeg':
-					return new ImagePreviewData($link, $isQuickSite);
+					$previewData = new ImagePreviewData($link);
+					break;
 				case 'url':
 				case 'quicksite':
-					return new UrlPreviewData($link, $isQuickSite);
+					$previewData = new UrlPreviewData($link);
+					break;
 				case 'youtube':
-					return new YouTubePreviewData($link, $isQuickSite);
+					$previewData = new YouTubePreviewData($link);
+					break;
 				case 'lan':
-					return new LanPreviewData($link, $isQuickSite);
+					$previewData = new LanPreviewData($link);
+					break;
 				case 'mp3':
-					return new Mp3PreviewData($link, $isQuickSite);
+					$previewData = new Mp3PreviewData($link);
+					break;
 				case 'xls':
-					return new ExcelPreviewData($link, $isQuickSite);
+					$previewData = new ExcelPreviewData($link);
+					break;
 				case 'app':
-					return new AppLinkPreviewData($link, $isQuickSite);
+					$previewData = new AppLinkPreviewData($link);
+					break;
 				case 'internal':
-					return new InternalLinkPreviewData($link, $isQuickSite);
+					$previewData = new InternalLinkPreviewData($link);
+					break;
 				default:
-					return new FilePreviewData($link, $isQuickSite);
+					$previewData = new FilePreviewData($link);
+					break;
 			}
+			$previewData->applyLinkSettings($isQuickSite);
+			$previewData->initActions();
+			return $previewData;
 		}
 	}
