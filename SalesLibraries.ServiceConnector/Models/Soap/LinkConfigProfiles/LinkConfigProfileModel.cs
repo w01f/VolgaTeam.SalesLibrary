@@ -13,7 +13,7 @@ namespace SalesLibraries.ServiceConnector.LinkConfigProfileService
 		{
 			id = Guid.NewGuid().ToString();
 
-			config = new LinkConfig();
+			config = new LinkProfileSettings();
 		
 			config.disableDownload = false;
 			config.disablePdf = false;

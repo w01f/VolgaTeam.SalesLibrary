@@ -40,10 +40,10 @@
           <xsd:element name="id" type="xsd:string" />
           <xsd:element name="name" type="xsd:string" />
           <xsd:element name="order" type="xsd:int" />
-          <xsd:element name="config" type="tns:LinkConfig" />
+          <xsd:element name="config" type="tns:LinkProfileSettings" />
         </xsd:all>
       </xsd:complexType>
-      <xsd:complexType name="LinkConfig">
+      <xsd:complexType name="LinkProfileSettings">
         <xsd:all>
           <xsd:element name="disablePreview" type="xsd:boolean" />
           <xsd:element name="disableDownload" type="xsd:boolean" />
@@ -83,104 +83,104 @@
       </xsd:complexType>
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="getLibrariesRequest">
+  <wsdl:message name="getLibrariesIn">
     <wsdl:part name="sessionKey" type="xsd:string" />
   </wsdl:message>
-  <wsdl:message name="getLibrariesResponse">
+  <wsdl:message name="getLibrariesOut">
     <wsdl:part name="return" type="tns:LibraryReferenceArray" />
   </wsdl:message>
-  <wsdl:message name="getSecurityGroupsRequest">
+  <wsdl:message name="getSecurityGroupsIn">
     <wsdl:part name="sessionKey" type="xsd:string" />
   </wsdl:message>
-  <wsdl:message name="getSecurityGroupsResponse">
+  <wsdl:message name="getSecurityGroupsOut">
     <wsdl:part name="return" type="tns:SecurityGroupReferenceArray" />
   </wsdl:message>
-  <wsdl:message name="getProfilesRequest">
+  <wsdl:message name="getProfilesIn">
     <wsdl:part name="sessionKey" type="xsd:string" />
   </wsdl:message>
-  <wsdl:message name="getProfilesResponse">
+  <wsdl:message name="getProfilesOut">
     <wsdl:part name="return" type="tns:LinkConfigProfileModelArray" />
   </wsdl:message>
-  <wsdl:message name="saveProfileRequest">
+  <wsdl:message name="saveProfileIn">
     <wsdl:part name="sessionKey" type="xsd:string" />
     <wsdl:part name="profile" type="tns:LinkConfigProfileModel" />
   </wsdl:message>
-  <wsdl:message name="saveProfileResponse" />
-  <wsdl:message name="deleteProfileRequest">
+  <wsdl:message name="saveProfileOut" />
+  <wsdl:message name="deleteProfileIn">
     <wsdl:part name="sessionKey" type="xsd:string" />
     <wsdl:part name="profile" type="tns:LinkConfigProfileModel" />
   </wsdl:message>
-  <wsdl:message name="deleteProfileResponse" />
-  <wsdl:message name="getAffectedLinksRequest">
+  <wsdl:message name="deleteProfileOut" />
+  <wsdl:message name="getAffectedLinksIn">
     <wsdl:part name="sessionKey" type="xsd:string" />
     <wsdl:part name="profile" type="tns:LinkConfigProfileModel" />
   </wsdl:message>
-  <wsdl:message name="getAffectedLinksResponse">
+  <wsdl:message name="getAffectedLinksOut">
     <wsdl:part name="return" type="tns:LibraryLinkReferenceArray" />
   </wsdl:message>
-  <wsdl:message name="getMetaDataRequest">
+  <wsdl:message name="getMetaDataIn">
     <wsdl:part name="sessionKey" type="xsd:string" />
     <wsdl:part name="dataTag" type="xsd:string" />
     <wsdl:part name="propertyName" type="xsd:string" />
   </wsdl:message>
-  <wsdl:message name="getMetaDataResponse">
+  <wsdl:message name="getMetaDataOut">
     <wsdl:part name="return" type="xsd:string" />
   </wsdl:message>
-  <wsdl:message name="getSessionKeyRequest">
+  <wsdl:message name="getSessionKeyIn">
     <wsdl:part name="login" type="xsd:string" />
     <wsdl:part name="password" type="xsd:string" />
   </wsdl:message>
-  <wsdl:message name="getSessionKeyResponse">
+  <wsdl:message name="getSessionKeyOut">
     <wsdl:part name="return" type="xsd:string" />
   </wsdl:message>
   <wsdl:portType name="LinkConfigProfileControllerPortType">
     <wsdl:operation name="getLibraries">
       <wsdl:documentation>
       </wsdl:documentation>
-      <wsdl:input message="tns:getLibrariesRequest" />
-      <wsdl:output message="tns:getLibrariesResponse" />
+      <wsdl:input message="tns:getLibrariesIn" />
+      <wsdl:output message="tns:getLibrariesOut" />
     </wsdl:operation>
     <wsdl:operation name="getSecurityGroups">
       <wsdl:documentation>
       </wsdl:documentation>
-      <wsdl:input message="tns:getSecurityGroupsRequest" />
-      <wsdl:output message="tns:getSecurityGroupsResponse" />
+      <wsdl:input message="tns:getSecurityGroupsIn" />
+      <wsdl:output message="tns:getSecurityGroupsOut" />
     </wsdl:operation>
     <wsdl:operation name="getProfiles">
       <wsdl:documentation>
       </wsdl:documentation>
-      <wsdl:input message="tns:getProfilesRequest" />
-      <wsdl:output message="tns:getProfilesResponse" />
+      <wsdl:input message="tns:getProfilesIn" />
+      <wsdl:output message="tns:getProfilesOut" />
     </wsdl:operation>
     <wsdl:operation name="saveProfile">
       <wsdl:documentation>
       </wsdl:documentation>
-      <wsdl:input message="tns:saveProfileRequest" />
-      <wsdl:output message="tns:saveProfileResponse" />
+      <wsdl:input message="tns:saveProfileIn" />
+      <wsdl:output message="tns:saveProfileOut" />
     </wsdl:operation>
     <wsdl:operation name="deleteProfile">
       <wsdl:documentation>
       </wsdl:documentation>
-      <wsdl:input message="tns:deleteProfileRequest" />
-      <wsdl:output message="tns:deleteProfileResponse" />
+      <wsdl:input message="tns:deleteProfileIn" />
+      <wsdl:output message="tns:deleteProfileOut" />
     </wsdl:operation>
     <wsdl:operation name="getAffectedLinks">
       <wsdl:documentation>
       </wsdl:documentation>
-      <wsdl:input message="tns:getAffectedLinksRequest" />
-      <wsdl:output message="tns:getAffectedLinksResponse" />
+      <wsdl:input message="tns:getAffectedLinksIn" />
+      <wsdl:output message="tns:getAffectedLinksOut" />
     </wsdl:operation>
     <wsdl:operation name="getMetaData">
       <wsdl:documentation>
       </wsdl:documentation>
-      <wsdl:input message="tns:getMetaDataRequest" />
-      <wsdl:output message="tns:getMetaDataResponse" />
+      <wsdl:input message="tns:getMetaDataIn" />
+      <wsdl:output message="tns:getMetaDataOut" />
     </wsdl:operation>
     <wsdl:operation name="getSessionKey">
       <wsdl:documentation>
       </wsdl:documentation>
-      <wsdl:input message="tns:getSessionKeyRequest" />
-      <wsdl:output message="tns:getSessionKeyResponse" />
+      <wsdl:input message="tns:getSessionKeyIn" />
+      <wsdl:output message="tns:getSessionKeyOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="LinkConfigProfileControllerBinding" type="tns:LinkConfigProfileControllerPortType">
