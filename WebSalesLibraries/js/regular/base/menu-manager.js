@@ -1,31 +1,33 @@
 (function ($)
 {
 	window.BaseUrl = window.BaseUrl || '';
-	$.SalesPortal = $.SalesPortal || { };
+	$.SalesPortal = $.SalesPortal || {};
 	var MenuManager = function ()
 	{
 		this.init = function ()
 		{
 			var menuContainer = $('#main-menu');
-			menuContainer.find('.onemenu').onemenu({
-				animEffect: 'fade',
-				onOpen: function ()
-				{
-					$('#content-overlay').removeClass('main-menu-opened').addClass('main-menu-opened');
-					$('#shortcut-action-menu').find('.shortcut-menu-header').addClass('main-menu-active');
-					$.SalesPortal.LogHelper.write({
-						type: 'Navigation',
-						subType: 'MenuBar',
-						data: {}
-					});
-				},
-				onClose: function ()
-				{
-					$('#content-overlay').removeClass('main-menu-opened');
-					$('#shortcut-action-menu').find('.shortcut-menu-header').removeClass('main-menu-active');
-				}
-			});
-			$.SalesPortal.ShortcutsManager.assignShortcutGroupHandlers(menuContainer.find('.om-controlitems .om-ctrlitems'));
+			var menuGroups = menuContainer.find('.om-controlitems .om-ctrlitems');
+			if (menuGroups.length > 0)
+				menuContainer.find('.onemenu').onemenu({
+					animEffect: 'fade',
+					onOpen: function ()
+					{
+						$('#content-overlay').removeClass('main-menu-opened').addClass('main-menu-opened');
+						$('#shortcut-action-menu').find('.shortcut-menu-header').addClass('main-menu-active');
+						$.SalesPortal.LogHelper.write({
+							type: 'Navigation',
+							subType: 'MenuBar',
+							data: {}
+						});
+					},
+					onClose: function ()
+					{
+						$('#content-overlay').removeClass('main-menu-opened');
+						$('#shortcut-action-menu').find('.shortcut-menu-header').removeClass('main-menu-active');
+					}
+				});
+			$.SalesPortal.ShortcutsManager.assignShortcutGroupHandlers(menuContainer);
 			$.SalesPortal.ShortcutsManager.assignShortcutItemHandlers(menuContainer.find('.om-itemholder .om-itemlist'));
 
 			setTimeout(checkIfShortcutsUpdated, 60000);

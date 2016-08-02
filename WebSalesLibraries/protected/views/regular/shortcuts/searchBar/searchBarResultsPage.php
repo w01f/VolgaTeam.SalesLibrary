@@ -1,5 +1,6 @@
 <?
 	/**
+	 * @var $menuGroups ShortcutGroup[]
 	 * @var $searchBar SearchBar
 	 * @var $bundleId string
 	 */
@@ -9,7 +10,7 @@
 	$cs = Yii::app()->clientScript;
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/shortcuts/shortcuts-search-bar-results-controller.js?' . Yii::app()->params['version'], CClientScript::POS_END);
 ?>
-<? $this->renderPartial('../menu/singlePageMenu', array('headerText' => 'Quick Search', 'showMainSiteUrl' => false)); ?>
+<? $this->renderPartial('../menu/mainMenu', array('menuGroups' => $menuGroups, 'headerText' => 'Quick Search', 'showMainSiteUrl' => false)); ?>
 <div id="content">
 	<div class="service-data">
 		<div class="object-id" style="display: none;"><? echo $bundleId; ?></div>

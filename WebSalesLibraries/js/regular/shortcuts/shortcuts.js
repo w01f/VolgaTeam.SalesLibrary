@@ -52,7 +52,7 @@
 			var shortcutType = data.find('.link-type').text();
 
 			updatedAllContentNecessary = false;
-
+			var menu = $('#main-menu');
 			switch (shortcutType)
 			{
 				case 'video':
@@ -65,10 +65,10 @@
 					new $.SalesPortal.ShortcutsUserPreferences().init();
 					break;
 				case 'gbookmark':
-					var menu = $('#main-menu');
 					menu.find('div[data-groupid="group-' + data.find('.bookmark-id').text() + '"]').trigger('click');
 					return false;
 				default :
+					menu.find('.main-site-url').show();
 					$.ajax({
 						type: "POST",
 						url: url,

@@ -16,7 +16,9 @@
 			var searchBarOptions = new $.SalesPortal.SearchOptions($.parseJSON(serviceData.find('.search-conditions .encoded-object').text()));
 			var searchViewOptions = new $.SalesPortal.SearchViewOptions($.parseJSON(serviceData.find('.search-view-options .encoded-object').text()));
 
+			$.SalesPortal.MainMenu.init();
 			$.SalesPortal.Content.init();
+			$.SalesPortal.ShortcutsHistory.init();
 
 			if (searchBarOptions != '' && searchViewOptions != '')
 			{

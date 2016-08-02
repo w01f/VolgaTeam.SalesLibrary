@@ -6,7 +6,12 @@
 	{
 		this.init = function ()
 		{
+			$.SalesPortal.MainMenu.init();
+
+			$('#main-menu').find('.main-site-url').hide();
+
 			$.SalesPortal.Content.init();
+			$.SalesPortal.ShortcutsHistory.init();
 			assignLinkEvents($('#page-links-container'));
 			initActionButtons();
 			updateSize();

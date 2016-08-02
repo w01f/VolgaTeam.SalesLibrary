@@ -116,7 +116,11 @@
 			if (isset($page) && (($page->restricted && $protected) || !$page->restricted))
 			{
 				$this->pageTitle = $page->title;
-				$this->render('index', array('page' => $page));
+				if ($protected)
+					$menuGroups = ShortcutGroupRecord::getAvailableGroups($this->isPhone);
+				else
+					$menuGroups = array();
+				$this->render('index', array('menuGroups' => $menuGroups, 'page' => $page));
 			}
 			else
 			{

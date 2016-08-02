@@ -22,7 +22,9 @@
 
 			$this->pageTitle = sprintf('%s - %s', $shortcut->title, $shortcut->description);
 
-			$this->render('pages/singlePage', array('shortcut' => $shortcut));
+			$menuGroups = ShortcutGroupRecord::getAvailableGroups($this->isPhone);
+
+			$this->render('pages/singlePage', array('menuGroups' => $menuGroups, 'shortcut' => $shortcut));
 		}
 
 		public function actionGetSamePage()
@@ -63,7 +65,7 @@
 			/** @var  $shortcut PageContentShortcut */
 			$shortcut = $shortcutRecord->getModel($this->isPhone, $parameters);
 
-			if($shortcut->samePage)
+			if ($shortcut->samePage)
 				switch ($shortcut->type)
 				{
 					case 'gridbundle':
@@ -230,7 +232,8 @@
 					$category = (object)$arrayItem;
 					$searchBar->conditions->categories[] = $category;
 				}
-				$this->render('searchBar/searchBarResultsPage', array('searchBar' => $searchBar, 'bundleId' => $bundleId));
+				$menuGroups = ShortcutGroupRecord::getAvailableGroups($this->isPhone);
+				$this->render('searchBar/searchBarResultsPage', array('menuGroups' => $menuGroups, 'searchBar' => $searchBar, 'bundleId' => $bundleId));
 			}
 		}
 

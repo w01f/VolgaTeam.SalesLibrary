@@ -4,7 +4,6 @@
 	 * @var $headerText string
 	 * @var $showMainSiteUrl bool
 	 * */
-
 	$mainSiteUrl = Yii::app()->getBaseUrl(true);
 ?>
 

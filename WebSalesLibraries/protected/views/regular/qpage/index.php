@@ -1,5 +1,8 @@
 <?php
-	/** @var $page QPageRecord */
+	/**
+	 * @var $menuGroups ShortcutGroup[]
+	 * @var $page QPageRecord
+	 */
 
 	$this->renderPartial('../site/scripts');
 
@@ -11,7 +14,18 @@
 <script type="text/javascript">
 	window.BaseUrl = '<?php echo Yii::app()->getBaseUrl(true); ?>' + '/qpage/';
 </script>
-<? $this->renderPartial('../menu/singlePageMenu', array('headerText' => $page->title, 'showMainSiteUrl' => false)); ?>
+<?
+	if (count($menuGroups) > 0)
+		$this->renderPartial('../menu/mainMenu', array(
+			'menuGroups' => $menuGroups,
+			'headerText' => $page->title,
+			'showMainSiteUrl' => true,
+			'mainSiteUrl' => $page->getUrl(),
+			'mainSiteName' => sprintf('Back to: %s', $page->title),
+			'mainSiteTarget'=>'_self'));
+	else
+		$this->renderPartial('../menu/singlePageMenu', array('headerText' => $page->title, 'showMainSiteUrl' => false));
+?>
 <div id="content">
 	<div id="page-id" style="display: none;"><? echo $page->id; ?></div>
 	<? if (isset($page->logo) || $page->record_activity): ?>

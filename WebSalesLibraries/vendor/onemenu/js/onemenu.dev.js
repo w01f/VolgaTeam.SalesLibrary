@@ -366,6 +366,10 @@
 			open();
 			$onOpen();
 		});
+		$(e).find('.main-site-url').on('click', function (e)
+		{
+			e.stopPropagation();
+		});
 		// End OneMenu Click function
 
 		// Resize Window
