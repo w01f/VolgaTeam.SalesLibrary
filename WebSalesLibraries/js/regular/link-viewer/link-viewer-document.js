@@ -184,7 +184,7 @@
 						$.SalesPortal.SalesLibraryExtensions.releaseLinkData();
 						documentBar.close();
 					},
-					onUpdate: function (e)
+					onUpdate: function ()
 					{
 						$.SalesPortal.SalesLibraryExtensions.switchDocumentPage(this.index);
 						documentBar.resize();

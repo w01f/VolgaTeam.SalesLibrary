@@ -23,7 +23,8 @@
 		public $viewerFormat;
 		public $contentView;
 
-		public $actions;
+		public $dialogActions;
+		public $contextActions;
 
 		protected $link;
 
@@ -52,9 +53,9 @@
 			$this->config->init($this->link, $isQuickSite);
 		}
 
-		public function initActions()
+		public function initDialogActions()
 		{
-			$this->actions = array();
+			$this->dialogActions = array();
 			$imageUrlPrefix = Yii::app()->getBaseUrl(true);
 			if ($this->config->allowAddToQuickSite)
 			{
@@ -63,7 +64,7 @@
 				$action->text = 'Add this file to a QUICKSITE...';
 				$action->shortText = 'Add to a QUICKSITE';
 				$action->logo = sprintf('%s/images/preview/actions/quicksite.png?%s', $imageUrlPrefix, Yii::app()->params['version']);
-				$this->actions[] = $action;
+				$this->dialogActions[] = $action;
 			}
 
 			if ($this->config->allowAddToFavorites)
@@ -73,9 +74,11 @@
 				$action->text = 'Save a Copy of this file to your FAVORITES page...';
 				$action->shortText = 'Add to Favorites';
 				$action->logo = sprintf('%s/images/preview/actions/favorites.png?%s', $imageUrlPrefix, Yii::app()->params['version']);
-				$this->actions[] = $action;
+				$this->dialogActions[] = $action;
 			}
 		}
+
+		public abstract function initContextActions();
 
 		/**
 		 * @param $link LibraryLink
@@ -127,12 +130,24 @@
 				case 'internal':
 					$previewData = new InternalLinkPreviewData($link);
 					break;
+				case 'folder':
+					$previewData = new FolderPreviewData($link);
+					break;
+				case 'line break':
+					$previewData = new LineBreakPreviewData($link);
+					break;
 				default:
-					$previewData = new FilePreviewData($link);
+					if ($link->isFolder)
+						$previewData = new FolderPreviewData($link);
+					else if ($link->isLineBreak)
+						$previewData = new LineBreakPreviewData($link);
+					else
+						$previewData = new FilePreviewData($link);
 					break;
 			}
 			$previewData->applyLinkSettings($isQuickSite);
-			$previewData->initActions();
+			$previewData->initDialogActions();
+			$previewData->initContextActions();
 			return $previewData;
 		}
 	}

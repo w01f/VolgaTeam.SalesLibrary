@@ -22,8 +22,13 @@
 			$this->isEOBrowser = Yii::app()->browser->getBrowser() == Browser::BROWSER_EO;
 		}
 
-		public function initActions()
+		public function initDialogActions()
 		{
-			$this->actions = array();
+			$this->dialogActions = array();
+		}
+
+		public function initContextActions()
+		{
+			$this->contextActions = array();
 		}
 	}

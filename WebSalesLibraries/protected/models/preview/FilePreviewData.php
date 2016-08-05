@@ -35,10 +35,57 @@
 			$this->config->init($this->link, $isQuickSite);
 		}
 
-		public function initActions()
+		public function initDialogActions()
 		{
-			parent::initActions();
-			$this->actions = CMap::mergeArray($this->getDownloadActions(), $this->actions);
+			parent::initDialogActions();
+			$this->dialogActions = CMap::mergeArray($this->getDownloadActions(), $this->dialogActions);
+		}
+
+		public function initContextActions()
+		{
+			$this->contextActions = array();
+
+			if ($this->link->isDirectUrl && $this->config->isEOBrowser)
+				return;
+
+			$action = new PreviewAction();
+			$action->tag = 'open';
+			$action->text = 'Open this Link';
+			$this->contextActions[] = $action;
+
+			if ($this->config->allowDownload)
+			{
+				$action = new PreviewAction();
+				$action->tag = 'download';
+				$action->text = 'Download this file';
+				$this->contextActions[] = $action;
+			}
+			if ($this->config->allowAddToQuickSite)
+			{
+				$action = new PreviewAction();
+				$action->tag = 'linkcart';
+				$action->text = 'Add this file to my QuickSites Cart';
+				$this->contextActions[] = $action;
+
+				$action = new PreviewAction();
+				$action->tag = 'quicksite';
+				$action->text = 'Email this Link';
+				$this->contextActions[] = $action;
+			}
+			if ($this->config->allowAddToFavorites)
+			{
+				$action = new PreviewAction();
+				$action->tag = 'favorites';
+				$action->text = 'Save to Favorites';
+				$this->contextActions[] = $action;
+			}
+			if ($this->config->enableRating)
+			{
+				$action = new PreviewAction();
+				$action->tag = 'rate';
+				$action->text = 'Rate this Link';
+				$this->contextActions[] = $action;
+			}
 		}
 
 		/**

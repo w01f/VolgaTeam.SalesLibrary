@@ -5,11 +5,11 @@
 	var LinkManager = function ()
 	{
 		var that = this;
-		var downloadPopup = undefined;
 
 		this.requestViewDialog = function (linkId, isQuickSite)
 		{
 			$('body').find('.mtContent').remove();
+			that.cleanupContextMenu();
 			$.ajax({
 				type: "POST",
 				url: window.BaseUrl + "preview/getViewDialog",
@@ -97,14 +97,16 @@
 			});
 		};
 
-		this.requestSpecialDialog = function (linkIds, folderId)
+		this.requestLinkContextMenu = function (linkId, isQuickSite, pointX, pointY)
 		{
+			$('body').find('.mtContent').remove();
+			that.cleanupContextMenu();
 			$.ajax({
 				type: "POST",
-				url: window.BaseUrl + "preview/getSpecialDialog",
+				url: window.BaseUrl + "preview/getLinkContextMenu",
 				data: {
-					linkIds: linkIds,
-					folderId: folderId
+					linkId: linkId,
+					isQuickSite: isQuickSite
 				},
 				beforeSend: function ()
 				{
@@ -114,35 +116,106 @@
 				{
 					$.SalesPortal.Overlay.hide();
 				},
-				success: function (msg)
+				success: function (parameters)
 				{
-					if (msg != '')
+					if (parameters.data.config.allowPreview)
 					{
-						var content = $(msg);
-						content.find('#context-add').off('click').on('click', function ()
+						if (parameters.data.config.enableLogging)
+							$.SalesPortal.LogHelper.write({
+								type: 'Link',
+								subType: 'Context Menu',
+								data: {
+									Name: parameters.data.name,
+									File: parameters.data.fileName,
+									'Original Format': parameters.format
+								}
+							});
+						if (parameters.content != '')
 						{
-							$.fancybox.close();
-							if (linkIds != undefined)
-								$.SalesPortal.QBuilder.LinkCart.addLinks(linkIds);
-							else if (folderId != undefined)
-								$.SalesPortal.QBuilder.LinkCart.addFolder(folderId);
+							var menu = $(parameters.content);
+							$('body').append(menu);
+
+							var formLogger = new $.SalesPortal.FormLogger();
+							formLogger.init({
+								logObject: {
+									name: parameters.data.name,
+									fileName: parameters.data.fileName,
+									format: parameters.format
+								},
+								formContent: menu
+							});
+
+							menu
+								.show()
+								.css({
+									position: "absolute",
+									left: getMenuPosition(menu, pointX, 'width', 'scrollLeft'),
+									top: getMenuPosition(menu, pointY, 'height', 'scrollTop')
+								})
+								.off('click')
+								.on('click', 'a', function ()
+								{
+									menu.hide();
+
+									var tag = $(this).find('.service-data .tag').text();
+									switch (tag)
+									{
+										case 'open':
+											that.requestViewDialog(linkId, isQuickSite);
+											break;
+										case 'download':
+											that.downloadFile({
+												name: parameters.data.fileName,
+												path: parameters.data.filePath
+											});
+											break;
+										case 'linkcart':
+											$.SalesPortal.QBuilder.LinkCart.addLinks([parameters.data.linkId]);
+											break;
+										case 'quicksite':
+											that.requestEmailDialog(linkId);
+											break;
+										case 'favorites':
+											that.addToFavorites(
+												parameters.data.linkId,
+												parameters.data.name,
+												parameters.data.fileName,
+												parameters.data.format);
+											break;
+										case 'rate':
+											that.requestRateDialog(parameters.data.linkId);
+											//$.SalesPortal.QBuilder.LinkCart.addLinks([parameters.data.linkId]);
+											break;
+									}
+								});
+						}
+					}
+					else
+					{
+						var modalDialog = new $.SalesPortal.ModalDialog({
+							title: '<span class="text-danger">Sorry...</span>',
+							description: 'You are not authorized to view this link.',
+							buttons: [
+								{
+									tag: 'close',
+									title: 'Close',
+									width: 80,
+									clickHandler: function ()
+									{
+										modalDialog.close();
+									}
+								}
+							],
+							closeOnOutsideClick: true
 						});
-						$.fancybox({
-							content: content,
-							title: 'Advanced LINK Options',
-							width: 490,
-							autoSize: false,
-							autoHeight: true,
-							openEffect: 'none',
-							closeEffect: 'none'
-						});
+						modalDialog.show();
 					}
 				},
 				error: function ()
 				{
 				},
 				async: true,
-				dataType: 'html'
+				dataType: 'json'
 			});
 		};
 
@@ -221,6 +294,50 @@
 						});
 						modalDialog.show();
 					}
+				},
+				error: function ()
+				{
+				},
+				async: true,
+				dataType: 'json'
+			});
+		};
+
+		this.requestEmailDialog = function (linkId)
+		{
+			$('body').find('.mtContent').remove();
+			that.cleanupContextMenu();
+			$.ajax({
+				type: "POST",
+				url: window.BaseUrl + "preview/getEmailDialog",
+				data: {
+					linkId: linkId
+				},
+				beforeSend: function ()
+				{
+					$.SalesPortal.Overlay.show(false);
+				},
+				complete: function ()
+				{
+					$.SalesPortal.Overlay.hide();
+				},
+				success: function (parameters)
+				{
+					var viewerData = new $.SalesPortal.SimpleViewerData(parameters.data);
+					$.fancybox({
+						content: parameters.content,
+						title: parameters.data.name,
+						width: 800,
+						autoSize: false,
+						autoHeight: true,
+						openEffect: 'none',
+						closeEffect: 'none',
+						afterShow: function ()
+						{
+							var dialogContent = $('.fancybox-wrap');
+							new $.SalesPortal.PreviewEmailer(viewerData);
+						}
+					});
 				},
 				error: function ()
 				{
@@ -410,6 +527,41 @@
 				}
 			});
 		};
+
+		this.cleanupContextMenu = function ()
+		{
+			var body = $('body');
+			body.find('.context-menu-content').remove();
+		};
+
+		var getMenuPosition = function (menuObject, mouse, direction, scrollDir)
+		{
+			var win = $(window)[direction](),
+				scroll = $(window)[scrollDir](),
+				menu = menuObject[direction](),
+				position = mouse + scroll;
+
+			// opening menu would pass the side of the page
+			if (mouse + menu > win && menu < mouse)
+				position -= menu;
+
+			return position;
+		}
 	};
+
+
 	$.SalesPortal.LinkManager = new LinkManager();
+
+	$(document).one('ready', function ()
+	{
+		$('body')
+			.on('click', function ()
+			{
+				$.SalesPortal.LinkManager.cleanupContextMenu();
+			})
+			.on('contextmenu', function ()
+			{
+				$.SalesPortal.LinkManager.cleanupContextMenu();
+			});
+	});
 })(jQuery);

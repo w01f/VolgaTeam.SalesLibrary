@@ -19,12 +19,15 @@
 		public $enableLogging;
 		public $enableRating;
 
+		public $isEOBrowser;
+
 		/**
 		 * @param $libraryLink LibraryLink
 		 * @param $isQuickSite boolean
 		 */
 		public function init($libraryLink, $isQuickSite)
 		{
+			$this->isEOBrowser = Yii::app()->browser->getBrowser() == Browser::BROWSER_EO;
 			$this->initDefaults($isQuickSite);
 			$this->loadConfigProfiles($libraryLink);
 		}

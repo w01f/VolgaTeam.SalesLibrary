@@ -26,7 +26,7 @@
 		<? if ($data->config->allowPreview): ?>
 			<div class="actions">
 				<ul data-role="listview">
-					<? foreach ($data->actions as $action): ?>
+					<? foreach ($data->dialogActions as $action): ?>
 						<li class="action">
 							<span class="action-text"><? echo $action->shortText; ?></span>
 							<div class="service-data">

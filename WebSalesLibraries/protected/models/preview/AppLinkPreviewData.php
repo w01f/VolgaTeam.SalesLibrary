@@ -25,8 +25,8 @@
 			$this->secondPath = $linkSettings->secondPath;
 		}
 
-		public function initActions()
+		public function initDialogActions()
 		{
-			$this->actions = array();
+			$this->dialogActions = array();
 		}
 	}

@@ -142,8 +142,8 @@
 			$this->fileLink = isset($fileInfo->link) ? $fileInfo->link : $this->fileLink;
 			$this->fileSize = !isset($this->fileSize) ? $fileInfo->size : $this->fileSize;
 
-			$this->isFolder = count(\LinkRecord::model()->findAll('id_parent_link=?', array($linkRecord->id))) > 0;
-			$this->isLineBreak = isset($this->lineBreakProperties);
+			$this->isFolder = $this->originalFormat == 'folder' || count(\LinkRecord::model()->findAll('id_parent_link=?', array($linkRecord->id))) > 0;
+			$this->isLineBreak = $this->originalFormat == 'line break' || isset($this->lineBreakProperties);
 			$this->isDirectUrl = $this->type == 8 && $this->extendedProperties->forcePreview;
 			$this->isAppLink = $this->type == 15;
 
@@ -214,6 +214,9 @@
 							break;
 						case 'key':
 							$fileName = 'keynote.png';
+							break;
+						case 'folder':
+							$fileName = 'folder.png';
 							break;
 						default:
 							if ($this->isFolder)

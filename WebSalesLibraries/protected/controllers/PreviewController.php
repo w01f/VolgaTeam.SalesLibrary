@@ -47,19 +47,6 @@
 			Yii::app()->end();
 		}
 
-		public function actionGetSpecialDialog()
-		{
-			$folderId = Yii::app()->request->getPost('folderId');
-			if (isset($folderId))
-			{
-				$folderRecord = FolderRecord::model()->findByPk($folderId);
-				if (isset($folderRecord))
-				{
-					$this->renderPartial('specialDialog', array('object' => $folderRecord), false, true);
-				}
-			}
-		}
-
 		public function actionGetRateDialog()
 		{
 			$linkId = Yii::app()->request->getPost('linkId');
@@ -85,6 +72,52 @@
 			}
 			echo CJSON::encode($dialogData);
 			Yii::app()->end();
+		}
+
+		public function actionGetLinkContextMenu()
+		{
+			$linkId = Yii::app()->request->getPost('linkId');
+			if (strtolower(trim(Yii::app()->request->getPost('isQuickSite'))) == 'true')
+				$isQuickSite = true;
+			else
+				$isQuickSite = false;
+			$menuData = array();
+			if (isset($linkId))
+			{
+				$linkRecord = LinkRecord::getLinkById($linkId);
+				if (isset($linkRecord))
+				{
+					$libraryManager = new LibraryManager();
+					$library = $libraryManager->getLibraryById($linkRecord->id_library);
+					$link = new LibraryLink(new LibraryFolder(new LibraryPage($library)));
+					$link->load($linkRecord);
+
+					$previewData = $link->getPreviewData($isQuickSite);
+
+					$menuData = array(
+						'format' => $previewData->viewerFormat,
+						'data' => $previewData,
+						'content' => count($previewData->contextActions) > 0 ?
+							$this->renderPartial('linkContextMenu', array('data' => $previewData), true) :
+							'',
+					);
+				}
+			}
+			echo CJSON::encode($menuData);
+			Yii::app()->end();
+		}
+
+		public function actionGetWindowContextMenu()
+		{
+			$folderId = Yii::app()->request->getPost('folderId');
+			if (isset($folderId))
+			{
+				$folderRecord = FolderRecord::model()->findByPk($folderId);
+				if (isset($folderRecord))
+				{
+					$this->renderPartial('folderContextMenu');
+				}
+			}
 		}
 
 		public function actionGetLinkPreviewList()
@@ -138,6 +171,33 @@
 		public function actionGetBar()
 		{
 			$this->renderPartial('bar', array(), false, true);
+		}
+
+		public function actionGetEmailDialog()
+		{
+			$linkId = Yii::app()->request->getPost('linkId');
+			$dialogData = array();
+			if (isset($linkId))
+			{
+				$linkRecord = LinkRecord::getLinkById($linkId);
+				if (isset($linkRecord))
+				{
+					$libraryManager = new LibraryManager();
+					$library = $libraryManager->getLibraryById($linkRecord->id_library);
+					$link = new LibraryLink(new LibraryFolder(new LibraryPage($library)));
+					$link->load($linkRecord);
+
+					$previewData = $link->getPreviewData(false);
+
+					$dialogData = array(
+						'format' => $previewData->viewerFormat,
+						'data' => $previewData,
+						'content' => $this->renderPartial('emailDialog', array('data' => $previewData), true),
+					);
+				}
+			}
+			echo CJSON::encode($dialogData);
+			Yii::app()->end();
 		}
 
 		public function actionDownloadFile()

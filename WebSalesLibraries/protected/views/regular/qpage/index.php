@@ -62,7 +62,7 @@
 				<? if (isset($links)): ?>
 					<?php foreach ($links as $link): ?>
 						<? if ($page->show_links_as_url): ?>
-							<? if ($link->name != '' && !$link->isFolder && !$link->isFolder): ?>
+							<? if ($link->name != '' && !$link->isFolder): ?>
 								<? $this->renderPartial('blueHyperlink', array('link' => $link, 'authorized' => $authorized)); ?>
 							<? endif; ?>
 						<? else: ?>

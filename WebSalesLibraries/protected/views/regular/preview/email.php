@@ -1,7 +1,7 @@
 <?
 	/**
-	 * @var $data DocumentPreviewData
-	 * */
+	 * @var $data PreviewData
+	 */
 
 	$imageUrlPrefix = Yii::app()->getBaseUrl(true);
 	$logos = QPageRecord::getPageLogoList();

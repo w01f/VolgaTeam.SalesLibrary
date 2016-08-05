@@ -80,8 +80,40 @@
 			}
 		}
 
-		public function initActions()
+		public function initDialogActions()
 		{
-			$this->actions = array();
+			$this->dialogActions = array();
+		}
+
+		public function initContextActions()
+		{
+			$this->contextActions = array();
+
+			if ($this->config->allowAddToQuickSite)
+			{
+				$action = new PreviewAction();
+				$action->tag = 'linkcart';
+				$action->text = 'Add this URL to my QuickSites Cart';
+				$this->contextActions[] = $action;
+
+				$action = new PreviewAction();
+				$action->tag = 'quicksite';
+				$action->text = 'Email this URL';
+				$this->contextActions[] = $action;
+			}
+			if ($this->config->allowAddToFavorites)
+			{
+				$action = new PreviewAction();
+				$action->tag = 'favorites';
+				$action->text = 'Save to Favorites';
+				$this->contextActions[] = $action;
+			}
+			if ($this->config->enableRating)
+			{
+				$action = new PreviewAction();
+				$action->tag = 'rate';
+				$action->text = 'Rate this URL Link';
+				$this->contextActions[] = $action;
+			}
 		}
 	}

@@ -17,9 +17,9 @@
 			$this->linkTitle = 'MP3 File';
 		}
 
-		public function initActions()
+		public function initDialogActions()
 		{
-			parent::initActions();
+			parent::initDialogActions();
 
 			$imageUrlPrefix = Yii::app()->getBaseUrl(true);
 			$action = new PreviewAction();
@@ -28,6 +28,6 @@
 			$action->shortText = 'Play this file';
 			$action->logo = sprintf('%s/images/preview/actions/download-mp3.png?%s', $imageUrlPrefix, $this->format, Yii::app()->params['version']);
 
-			$this->actions = CMap::mergeArray(array($action), $this->actions);
+			$this->dialogActions = CMap::mergeArray(array($action), $this->dialogActions);
 		}
 	}

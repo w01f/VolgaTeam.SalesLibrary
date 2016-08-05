@@ -41,8 +41,8 @@
 		public static function getProfile($userId)
 		{
 			/** @var  $userProfileRecord LinkUserProfileRecord */
-			$userProfileRecord = self::model()->find('id_user=?', $userId);
-			if(isset($userProfileRecord))
+			$userProfileRecord = self::model()->find('id_user=?', array($userId));
+			if (isset($userProfileRecord))
 				return $userProfileRecord->getModel();
 			return LinkUserProfileModel::getDefault();
 		}
@@ -54,7 +54,7 @@
 		public static function saveProfile($userId, $profileModel)
 		{
 			/** @var  $userProfileRecord LinkUserProfileRecord */
-			$userProfileRecord = self::model()->find('id_user=?', $userId);
+			$userProfileRecord = self::model()->find('id_user=?', array($userId));
 			if (!isset($userProfileRecord))
 			{
 				$userProfileRecord = new LinkUserProfileRecord();
