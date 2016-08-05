@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using SalesLibraries.Business.Contexts.Wallbin;
 using SalesLibraries.Business.Entities.Common;
 using SalesLibraries.Business.Entities.Helpers;
+using SalesLibraries.Business.Entities.Wallbin.Common.Constants;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings;
@@ -41,6 +42,8 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		[NotMapped, JsonIgnore]
 		public override bool IsFolder => true;
 
+		[NotMapped, JsonIgnore]
+		public override string WebFormat => WebFormats.Folder;
 		#endregion
 
 		public LibraryFolderLink()

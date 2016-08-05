@@ -18,5 +18,7 @@
 		public const string Lan = "lan";
 		public const string Video = "video";
 		public const string Word = "doc";
+		public const string Folder = "folder";
+		public const string LineBreak = "line break";
 	}
 }
