@@ -1,10 +1,11 @@
 (function ($)
 {
 	window.BaseUrl = window.BaseUrl || '';
-	$.SalesPortal = $.SalesPortal || { };
-	$.SalesPortal.PreviewEmailer = function (viewerData)
+	$.SalesPortal = $.SalesPortal || {};
+	$.SalesPortal.PreviewEmailer = function (viewerData, isProtected)
 	{
-		var dialogContent = $('.fancybox-wrap');
+		var idSuffix = '-' + (isProtected ? 'protected' : 'public');
+		var dialogContent = $('#email-content' + idSuffix);
 
 		var formLogger = new $.SalesPortal.FormLogger();
 		formLogger.init({
@@ -13,7 +14,7 @@
 				fileName: viewerData.fileName,
 				format: viewerData.format
 			},
-			formContent: dialogContent.find('#link-viewer-tab-email')
+			formContent: dialogContent
 		});
 
 		dialogContent.find('#add-page-expires-in').find('.btn').on('click', function ()
@@ -23,7 +24,7 @@
 		});
 
 		var logoSelector = dialogContent.find('.logo-list');
-		$('#add-page-show-logo').off('change.email').on('change.email', function ()
+		dialogContent.find('#add-page-show-logo').off('change.email').on('change.email', function ()
 		{
 			if ($(this).is(':checked'))
 			{
@@ -53,7 +54,7 @@
 		});
 		dialogContent.find('#add-page-access-code-enabled').off('change.email').on('change.email', function ()
 		{
-			var accessCode = $('#add-page-access-code');
+			var accessCode = dialogContent.find('#add-page-access-code');
 			if ($(this).is(':checked'))
 				accessCode.show();
 			else
@@ -75,7 +76,7 @@
 		});
 		dialogContent.find('#add-page-record-activity').off('change.email').on('change.email', function ()
 		{
-			var ccEmail = $('#add-page-activity-email-copy');
+			var ccEmail = dialogContent.find('#add-page-activity-email-copy');
 			if ($(this).is(':checked'))
 				ccEmail.removeAttr('disabled');
 			else
@@ -98,7 +99,7 @@
 					subtitle: subtitle,
 					logo: dialogContent.find('.logo-list a.opened').find('img').attr('src'),
 					expiresInDays: dialogContent.find('#add-page-expires-in').find('.active').val(),
-					restricted: dialogContent.find('#add-page-restricted').is(':checked'),
+					restricted: isProtected,
 					pinCode: pinCode,
 					disableWidgets: dialogContent.find('#add-page-disable-widgets').is(':checked'),
 					disableBanners: dialogContent.find('#add-page-disable-banners').is(':checked'),
@@ -117,9 +118,9 @@
 				success: function (msg)
 				{
 					if (subtitle != '')
-						window.open('mailto:?subject=' + subtitle.replace(/&/g, '%26').replace(' ', '%20') + '&body=' + '%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A' + msg + (pinCode.length > 0 ? ("%0D%0APin-code: " + pinCode) : ''), "_self");
+						window.open('mailto:?subject=' + subtitle.replace(/&/g, '%26').replace(' ', '%20') + '&body=' + '%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A' + msg + (pinCode != undefined && pinCode.length > 0 ? ("%0D%0APin-code: " + pinCode) : ''), "_self");
 					else
-						window.open('mailto:?body=' + '%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A' + msg + (pinCode.length > 0 ? ("%0D%0APin-code: " + pinCode) : ''), "_self");
+						window.open('mailto:?body=' + '%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A' + msg + (pinCode != undefined && pinCode.length > 0 ? ("%0D%0APin-code: " + pinCode) : ''), "_self");
 				},
 				error: function ()
 				{

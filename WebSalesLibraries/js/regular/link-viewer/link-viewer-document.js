@@ -80,7 +80,8 @@
 							dialogContent.find('#user-link-rate-container'),
 							viewerData.rateData);
 
-						new $.SalesPortal.PreviewEmailer(viewerData);
+						new $.SalesPortal.PreviewEmailer(viewerData, false);
+						new $.SalesPortal.PreviewEmailer(viewerData, true);
 					},
 					afterClose: function ()
 					{

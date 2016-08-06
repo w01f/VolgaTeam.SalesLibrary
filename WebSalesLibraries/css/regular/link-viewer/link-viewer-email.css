@@ -1,20 +1,20 @@
-#link-viewer-tab-email .tab-content
+.link-viewer-tab-email .tab-content
 {
 	height: 335px;
 }
 
-#link-viewer-tab-email .send-email
+.link-viewer-tab-email .send-email
 {
 	width: 80px;
 	margin-top: 20px;
 }
 
-#link-viewer-tab-email .form-group
+.link-viewer-tab-email .form-group
 {
 	margin: 0;
 }
 
-#link-viewer-tab-email .form-group.title
+.link-viewer-tab-email .form-group.title
 {
 	margin-top: 25px;
 	margin-bottom: 5px;
@@ -25,7 +25,7 @@
 	margin-top: 5px;
 }
 
-#link-viewer-tab-email .logo-list
+.link-viewer-tab-email .logo-list
 {
 	height: 285px;
 	margin-top: 5px;

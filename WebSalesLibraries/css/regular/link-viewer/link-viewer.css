@@ -43,7 +43,8 @@
 
 #tab-above-header-preview .header-text,
 #tab-above-header-save .header-text,
-#tab-above-header-email .header-text
+#tab-above-header-email-protected .header-text,
+#tab-above-header-email-public .header-text
 {
 	line-height: 34px;
 	font-size: 1.5em;

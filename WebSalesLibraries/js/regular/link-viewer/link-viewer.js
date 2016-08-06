@@ -335,7 +335,30 @@
 						afterShow: function ()
 						{
 							var dialogContent = $('.fancybox-wrap');
-							new $.SalesPortal.PreviewEmailer(viewerData);
+
+							var formLogger = new $.SalesPortal.FormLogger();
+							formLogger.init({
+								logObject: {
+									name: viewerData.name,
+									fileName: viewerData.fileName,
+									format: viewerData.format
+								},
+								formContent: dialogContent
+							});
+
+							dialogContent.find('.tab-above-header').first().addClass('active');
+							dialogContent.find('#link-viewer-body-tabs li').first().addClass('active');
+							dialogContent.find('.tab-content .tab-pane').first().addClass('active');
+
+							dialogContent.find('#link-viewer-body-tabs a[data-toggle="tab"]').on('shown.bs.tab', function (e)
+							{
+								dialogContent.find('.tab-above-header').removeClass('active');
+								var tabTag = e.target.attributes['href'].value.replace("#link-viewer-tab-", "");
+								dialogContent.find('#tab-above-header-' + tabTag).addClass('active');
+							});
+
+							new $.SalesPortal.PreviewEmailer(viewerData, false);
+							new $.SalesPortal.PreviewEmailer(viewerData, true);
 						}
 					});
 				},
