@@ -20,6 +20,10 @@
 	{
 		$isLineBreak = false;
 		$linkContainerClass = 'link-container url';
+		if($link->isExternalUrl)
+			$linkContainerClass .= ' url-external';
+		else
+			$linkContainerClass .= ' url-internal';
 	}
 	else
 	{

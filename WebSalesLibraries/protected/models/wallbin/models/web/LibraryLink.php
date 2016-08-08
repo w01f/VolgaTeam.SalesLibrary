@@ -58,6 +58,7 @@
 		public $isFolder;
 		public $isLineBreak;
 		public $isDirectUrl;
+		public $isExternalUrl;
 		public $isAppLink;
 
 		/**
@@ -144,8 +145,25 @@
 
 			$this->isFolder = $this->originalFormat == 'folder' || count(\LinkRecord::model()->findAll('id_parent_link=?', array($linkRecord->id))) > 0;
 			$this->isLineBreak = $this->originalFormat == 'line break' || isset($this->lineBreakProperties);
-			$this->isDirectUrl = $this->type == 8 && $this->extendedProperties->forcePreview;
 			$this->isAppLink = $this->type == 15;
+
+			$this->isDirectUrl = $this->type == 8 && $this->extendedProperties->forcePreview;
+			$this->isExternalUrl = false;
+			if ($this->isDirectUrl)
+			{
+				$currentDomainInfo = parse_url(\Yii::app()->getBaseUrl(true));
+				$urlInfo = parse_url($this->fileLink);
+
+				$domainHost = $currentDomainInfo['host'];
+				$urlHost = array_key_exists('host', $urlInfo) ? $urlInfo['host'] : null;
+				$urlPath = array_key_exists('path', $urlInfo) ? strtolower($urlInfo['path']) : null;
+
+				$this->isExternalUrl = $domainHost != $urlHost ||
+					(isset($urlPath) &&
+						(strpos($urlPath, 'qpage') ||
+							strpos($urlPath, 'public_links') ||
+							strpos($urlPath, 'getSinglePage')));
+			}
 
 			$this->getTooltip();
 		}

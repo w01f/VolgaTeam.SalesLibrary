@@ -57,6 +57,11 @@
 			return /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent);
 		};
 
+		this.isEOBrowser = function ()
+		{
+			return /Essential Objects/i.test(navigator.userAgent);
+		};
+
 		var initHeader = function (headerOptions)
 		{
 			var mainMenu = $('#main-menu');
