@@ -71,7 +71,6 @@
 					"width": "10%",
 					"render": cellRenderer
 				});
-
 			columnSettings.push({
 				"data": "file_type",
 				"title": "Type",
@@ -110,7 +109,6 @@
 					sort: 'value'
 				}
 			});
-
 			columnSettings.push({
 				"data": "date.value",
 				"title": "Date",
@@ -118,7 +116,6 @@
 				"searchable": false,
 				"sType": "numeric"
 			});
-
 			if (viewOptions.showDeleteButton)
 				columnSettings.push({
 					"data": null,
@@ -127,7 +124,6 @@
 					"orderable": false,
 					"defaultContent": '<img class="link-delete-button" src="' + window.BaseUrl + 'images/search/search-delete.png">'
 				});
-
 			columnSettings.push({
 				"data": "id",
 				"title": "Id",
@@ -179,27 +175,6 @@
 				});
 			}
 
-			table.on('click', 'span.clickable-area', function ()
-			{
-				var linkId = dataTable.api().row($(this).closest("tr")).data().id;
-				$.SalesPortal.LinkManager.requestViewDialog(linkId, false);
-			});
-
-			table.on('click', 'a.link-url', function (e)
-			{
-				$('body').find('.mtContent').remove();
-				e.stopPropagation();
-
-				var url = $(this).prop('href');
-				$.SalesPortal.LogHelper.write({
-					type: 'Link',
-					subType: 'Open',
-					data: {
-						File: url
-					}
-				});
-			});
-
 			table.on('click', '.rate-image-container', function (e)
 			{
 				e.stopPropagation();
@@ -231,13 +206,81 @@
 				});
 			});
 
-			table.on('dragstart', 'span.link-file', function (e)
+			if ($.SalesPortal.Content.isMobileDevice())
 			{
-				var urlHeader = $(this).data("url-header");
-				var url = $(this).data("url");
-				if (url != '')
-					e.originalEvent.dataTransfer.setData(urlHeader, url);
-			});
+				table.find('.link-file').hammer().on('tap', function ()
+				{
+					var linkId = dataTable.api().row($(this).closest("tr")).data().id;
+					$.SalesPortal.LinkManager.requestViewDialog(linkId, false);
+				});
+
+				table.find('.link-url').hammer().on('tap', function ()
+				{
+					$('body').find('.mtContent').remove();
+					var url = $(this).find('.link-content').prop('href');
+					$.SalesPortal.LogHelper.write({
+						type: 'Link',
+						subType: 'Open',
+						data: {
+							File: url
+						}
+					});
+				});
+
+				table.find('.link-file, .link-url').hammer().on('hold', function (event)
+				{
+					var linkId = dataTable.api().row($(this).closest("tr")).data().id;
+					$.SalesPortal.LinkManager.requestLinkContextMenu(linkId, false, event.gesture.center.pageX, event.gesture.center.pageY);
+					event.gesture.stopPropagation();
+					event.gesture.preventDefault();
+				});
+			}
+			else
+			{
+				table.on('click', '.link-file', function ()
+				{
+					var linkId = dataTable.api().row($(this).closest("tr")).data().id;
+					$.SalesPortal.LinkManager.requestViewDialog(linkId, false);
+				});
+
+				table.on('click', '.link-url', function ()
+				{
+					$('body').find('.mtContent').remove();
+					var url = $(this).find('.link-content').prop('href');
+					$.SalesPortal.LogHelper.write({
+						type: 'Link',
+						subType: 'Open',
+						data: {
+							File: url
+						}
+					});
+				});
+
+				table.on('contextmenu', '.link-file, .link-url-internal', function (event)
+				{
+					var linkId = dataTable.api().row($(this).closest("tr")).data().id;
+					$.SalesPortal.LinkManager.requestLinkContextMenu(linkId, false, event.clientX, event.clientY);
+					return false;
+				});
+
+				if (!$.SalesPortal.Content.isEOBrowser())
+				{
+					table.on('contextmenu', '.link-url-external', function (event)
+					{
+						var linkId = dataTable.api().row($(this).closest("tr")).data().id;
+						$.SalesPortal.LinkManager.requestLinkContextMenu(linkId, false, event.clientX, event.clientY);
+						return false;
+					});
+				}
+
+				table.on('dragstart', '.link-file', function (e)
+				{
+					var urlHeader = $(this).find('.link-content').data("url-header");
+					var url = $(this).find('.link-content').data("url");
+					if (url != '')
+						e.originalEvent.dataTransfer.setData(urlHeader, url);
+				});
+			}
 
 			if (logHandler != undefined)
 			{
@@ -267,24 +310,36 @@
 		var cellRenderer = function (data, type, row)
 		{
 			var cellContent = '';
+			var objectClass = '';
 
 			if (type == "display")
 			{
 				var displayValue = typeof data === 'object' && data != null ? data.display : data;
 				displayValue = displayValue != null ? displayValue : '';
 
-				if (row == '')
-					cellContent = '';
-				else if (row.isHyperlink)
-					cellContent = '<a class="link-url mtTool" mtcontent="' + row.tooltip + '" href="' + row.url + '" target="_blank">' + displayValue + '</a>';
-				else if (row.isDraggable)
-					cellContent = '<span class="link-file mtTool" draggable="true" data-url-header="' + row.url_header + '" data-url="' + row.url + '" mtcontent="' + row.tooltip + '">' + displayValue + '</span>';
-				else
-					cellContent = '<span class="mtTool" mtcontent="' + row.tooltip + '">' + displayValue + '</span>';
+				if (row != '')
+				{
+					if (row.isHyperlink)
+					{
+						cellContent = '<a class="mtTool link-content" mtcontent="' + row.tooltip + '" href="' + row.url + '" target="_blank">' + displayValue + '</a>';
+						objectClass = ' link-url';
+						if(row.isExternalHyperlink)
+							objectClass += ' link-url-external';
+						else
+							objectClass += ' link-url-internal';
+					}
+					else if (row.isDraggable)
+					{
+						cellContent = '<span class="mtTool link-content" draggable="true" data-url-header="' + row.url_header + '" data-url="' + row.url + '" mtcontent="' + row.tooltip + '">' + displayValue + '</span>';
+						objectClass = ' link-file';
+					}
+					else
+						cellContent = '<span class="mtTool link-content" mtcontent="' + row.tooltip + '">' + displayValue + '</span>';
+				}
 			}
 			else
 				cellContent = data;
-			return '<span class="clickable-area">' + cellContent + '</span>';
+			return '<span class="clickable-area' + objectClass + '">' + cellContent + '</span>';
 		};
 
 		var destroy = function ()

@@ -78,6 +78,10 @@
 					$record['extended_properties'] = $extendedProperties;
 
 					$record['isHyperlink'] = $type == 8 && $extendedProperties['forcePreview'] == true;
+					if($record['isHyperlink'])
+					{
+
+					}
 
 					$fileInfo = FileInfo::fromLinkData($type, $linkRecord['name'], $linkRecord['path'], $library);
 					$record['isDraggable'] = $fileInfo->isFile || in_array($linkRecord['format'], array('url', 'quicksite', 'youtube'));
@@ -86,6 +90,19 @@
 					{
 						$record['url_header'] = 'URL';
 						$record['url'] = $fileInfo->link;
+
+						$currentDomainInfo = parse_url(\Yii::app()->getBaseUrl(true));
+						$urlInfo = parse_url($fileInfo->link);
+
+						$domainHost = $currentDomainInfo['host'];
+						$urlHost = array_key_exists('host', $urlInfo) ? $urlInfo['host'] : null;
+						$urlPath = array_key_exists('path', $urlInfo) ? strtolower($urlInfo['path']) : null;
+
+						$record['isExternalHyperlink'] = $domainHost != $urlHost ||
+							(isset($urlPath) &&
+								(strpos($urlPath, 'qpage') ||
+									strpos($urlPath, 'public_links') ||
+									strpos($urlPath, 'getSinglePage')));
 					}
 					else if (in_array($linkRecord['format'], array('url', 'quicksite', 'youtube')))
 					{

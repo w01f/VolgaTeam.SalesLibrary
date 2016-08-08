@@ -59,7 +59,7 @@
 					event.gesture.preventDefault();
 				});
 
-				container.find('.clickable, .folder-link, .line-break').hammer().on('hold', function (event)
+				container.find('.clickable, .folder-link, .line-break, .url').hammer().on('hold', function (event)
 				{
 					if (checkEmail())
 					{
@@ -119,6 +119,31 @@
 					}
 					return false;
 				});
+
+				container.find('.url-internal').off('contextmenu').on('contextmenu', function (event)
+				{
+					if (checkEmail())
+					{
+						var linkId = $(this).attr('id').replace('link', '');
+						recordActivity(linkId);
+						$.SalesPortal.LinkManager.requestLinkContextMenu(linkId, false, event.clientX, event.clientY);
+					}
+					return false;
+				});
+
+				if (!$.SalesPortal.Content.isEOBrowser())
+				{
+					container.find('.url-external').off('contextmenu').on('contextmenu', function (event)
+					{
+						if (checkEmail())
+						{
+							var linkId = $(this).attr('id').replace('link', '');
+							recordActivity(linkId);
+							$.SalesPortal.LinkManager.requestLinkContextMenu(linkId, false, event.clientX, event.clientY);
+						}
+						return false;
+					});
+				}
 
 				container.find('.folder-link').off('click.open').on('click.open', function (event)
 				{

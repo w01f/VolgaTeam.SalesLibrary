@@ -80,7 +80,7 @@
 					event.preventDefault();
 					event.stopPropagation();
 				});
-				container.find('.folder-header-container').hammer().hammer().on('hold', function (event)
+				container.find('.folder-header-container').hammer().on('hold', function (event)
 				{
 					var folderId = $(this).attr('id').replace('folder', '');
 					getWindowContextMenu(folderId, event.gesture.center.pageX, event.gesture.center.pageY);

@@ -10,11 +10,11 @@
 	height: 16px;
 }
 
-#data-table-content tr .link-url,
-#data-table-content tr .link-url:hover,
-#data-table-content tr .link-url:visited,
-#data-table-content tr .link-url:link,
-#data-table-content tr .link-url:active
+#data-table-content tr a.link-content,
+#data-table-content tr a.link-content:hover,
+#data-table-content tr a.link-content:visited,
+#data-table-content tr a.link-content:link,
+#data-table-content tr a.link-content:active
 {
 	text-decoration: none;
 	outline : none;
