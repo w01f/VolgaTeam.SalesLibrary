@@ -1,4 +1,6 @@
-﻿namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
+﻿using DevExpress.Utils;
+
+namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 {
 	partial class TabbedWallbin
 	{
@@ -61,12 +63,16 @@
 			// 
 			this.xtraTabControl.AppearancePage.Header.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.xtraTabControl.AppearancePage.Header.Options.UseFont = true;
+			this.xtraTabControl.AppearancePage.Header.TextOptions.HotkeyPrefix = HKeyPrefix.None;
 			this.xtraTabControl.AppearancePage.HeaderActive.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.xtraTabControl.AppearancePage.HeaderActive.Options.UseFont = true;
+			this.xtraTabControl.AppearancePage.HeaderActive.TextOptions.HotkeyPrefix = HKeyPrefix.None;
 			this.xtraTabControl.AppearancePage.HeaderDisabled.Font = new System.Drawing.Font("Arial", 9.75F);
 			this.xtraTabControl.AppearancePage.HeaderDisabled.Options.UseFont = true;
+			this.xtraTabControl.AppearancePage.HeaderDisabled.TextOptions.HotkeyPrefix = HKeyPrefix.None;
 			this.xtraTabControl.AppearancePage.HeaderHotTracked.Font = new System.Drawing.Font("Arial", 9.75F);
 			this.xtraTabControl.AppearancePage.HeaderHotTracked.Options.UseFont = true;
+			this.xtraTabControl.AppearancePage.HeaderHotTracked.TextOptions.HotkeyPrefix = HKeyPrefix.None;
 			this.xtraTabControl.AppearancePage.PageClient.Font = new System.Drawing.Font("Arial", 9.75F);
 			this.xtraTabControl.AppearancePage.PageClient.Options.UseFont = true;
 			this.xtraTabControl.Dock = System.Windows.Forms.DockStyle.Fill;

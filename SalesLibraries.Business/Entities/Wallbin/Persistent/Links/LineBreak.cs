@@ -30,7 +30,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		public override Font DisplayFont => base.DisplayFont ?? Settings.Font;
 
 		[NotMapped, JsonIgnore]
-		public override string WebFormat => WebFormats.Folder;
+		public override string WebFormat => WebFormats.LineBreak;
 		#endregion
 
 		public LineBreak()

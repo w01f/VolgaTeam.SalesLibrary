@@ -398,7 +398,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.DataSource
 			var targetNode = treeListAllFiles.CalcHitInfo(p).Node;
 			if (!(targetNode?.Tag is SourceLink) || !e.Data.GetDataPresent(DataFormats.FileDrop)) return;
 			var droppedItemsPaths = e.Data.GetData(DataFormats.FileDrop) as String[];
-			if(droppedItemsPaths== null) return;
+			if (droppedItemsPaths == null) return;
 			if (targetNode.Tag is FileLink)
 				targetNode = targetNode.ParentNode;
 			var targetFolderLink = (FolderLink)targetNode.Tag;
@@ -427,7 +427,13 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.DataSource
 
 			await Task.Run(() =>
 			{
-				Utils.CopyToFolder(targetFolderPath, droppedItemsPaths);
+				try
+				{
+					Utils.CopyToFolder(targetFolderPath, droppedItemsPaths);
+				}
+				catch
+				{
+				}
 				Invoke(new MethodInvoker(() =>
 				{
 					targetNode.Nodes.Clear();

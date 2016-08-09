@@ -19,7 +19,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 		{
 			InitializeComponent();
 			Page = page;
-			Text = Page.Name.Replace("&", "&&");
+			Text = Page.Name;
 			Controls.Add(pnContainer);
 			Controls.Add(pnEmpty);
 			Content = new PageContent(this);

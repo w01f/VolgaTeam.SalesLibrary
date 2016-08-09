@@ -34,12 +34,12 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders
 			{
 				_copyContainer.DropDownItems.Add(
 					new ToolStripMenuItem(
-						libraryPage.Name,
+						libraryPage.Name.Replace("&", "&&"),
 						null,
 						(sender, args) => CopyFolder(libraryPage)));
 				_moveContainer.DropDownItems.Add(
 					new ToolStripMenuItem(
-						libraryPage.Name,
+						libraryPage.Name.Replace("&", "&&"),
 						null,
 						(sender, args) => MoveFolder(libraryPage)));
 			}
