@@ -327,6 +327,7 @@
 					$page->lastName = $pageRecord['last_name'];
 					$page->email = $pageRecord['email'];
 					$page->groups = $pageRecord['groups'];
+					$page->totalViews = $pageRecord['total_views'];
 					$pages[] = $page;
 				}
 			}

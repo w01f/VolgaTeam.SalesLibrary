@@ -27,7 +27,7 @@
 	}
 	else
 	{
-		$isLineBreak = $link->getIsLineBreak();
+		$isLineBreak = $link->isLineBreak;
 		if ($isLineBreak)
 			$linkContainerClass = 'link-container line-break';
 		else

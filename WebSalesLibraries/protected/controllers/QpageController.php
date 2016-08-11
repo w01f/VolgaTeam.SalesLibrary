@@ -113,6 +113,11 @@
 		{
 			/** @var $page QPageRecord */
 			$page = QPageRecord::model()->findByPk($pageId);
+			if (isset($page))
+				StatisticActivityRecord::WriteActivity('QSite', sprintf('Open %s', $protected ? 'secure' : 'public'), array(
+					'ID' => $page->id,
+					'URL' => $page->getUrl(),
+				));
 			if (isset($page) && (($page->restricted && $protected) || !$page->restricted))
 			{
 				$this->pageTitle = $page->title;

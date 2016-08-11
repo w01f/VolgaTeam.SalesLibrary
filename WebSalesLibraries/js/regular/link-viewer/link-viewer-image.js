@@ -24,15 +24,18 @@
 					{
 						dialogContent = $('.fancybox-wrap');
 
-						var formLogger = new $.SalesPortal.FormLogger();
-						formLogger.init({
-							logObject: {
-								name: viewerData.name,
-								fileName: viewerData.fileName,
-								format: viewerData.format
-							},
-							formContent: dialogContent
-						});
+						if (viewerData.config.enableLogging)
+						{
+							var formLogger = new $.SalesPortal.FormLogger();
+							formLogger.init({
+								logObject: {
+									name: viewerData.name,
+									fileName: viewerData.fileName,
+									format: viewerData.format
+								},
+								formContent: dialogContent
+							});
+						}
 
 						dialogContent.find('.tab-above-header').first().addClass('active');
 						dialogContent.find('#link-viewer-body-tabs li').first().addClass('active');

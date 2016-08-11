@@ -28,15 +28,18 @@
 
 						dialogContent = $('.fancybox-wrap');
 
-						var formLogger = new $.SalesPortal.FormLogger();
-						formLogger.init({
-							logObject: {
-								name: viewerData.name,
-								fileName: viewerData.fileName,
-								format: viewerData.format
-							},
-							formContent: dialogContent
-						});
+						if (viewerData.config.enableLogging)
+						{
+							var formLogger = new $.SalesPortal.FormLogger();
+							formLogger.init({
+								logObject: {
+									name: viewerData.name,
+									fileName: viewerData.fileName,
+									format: viewerData.format
+								},
+								formContent: dialogContent
+							});
+						}
 
 						dialogContent.find('.tab-above-header').first().addClass('active');
 						dialogContent.find('#link-viewer-body-tabs li').first().addClass('active');
@@ -189,16 +192,19 @@
 					{
 						$.SalesPortal.SalesLibraryExtensions.switchDocumentPage(this.index);
 						documentBar.resize();
-						$.SalesPortal.LogHelper.write({
-							type: 'Link',
-							subType: 'Preview Page',
-							data: {
-								Name: viewerData.name,
-								File: viewerData.fileName,
-								'Original Format': viewerData.format,
-								Format: 'png'
-							}
-						});
+						if (viewerData.config.enableLogging)
+						{
+							$.SalesPortal.LogHelper.write({
+								type: 'Link',
+								subType: 'Preview Page',
+								data: {
+									Name: viewerData.name,
+									File: viewerData.fileName,
+									'Original Format': viewerData.format,
+									Format: 'png'
+								}
+							});
+						}
 					},
 					helpers: {
 						thumbs: {
@@ -213,16 +219,19 @@
 					viewerData.startIndex = imageViewerStartIndex;
 					parameters.data = viewerData;
 					new $.SalesPortal.DocumentViewer(parameters).show();
-					$.SalesPortal.LogHelper.write({
-						type: 'Link',
-						subType: 'Preview Activity',
-						data: {
-							Name: viewerData.name,
-							File: viewerData.fileName,
-							'Original Format': viewerData.format,
-							Format: 'png'
-						}
-					});
+					if (viewerData.config.enableLogging)
+					{
+						$.SalesPortal.LogHelper.write({
+							type: 'Link',
+							subType: 'Preview Activity',
+							data: {
+								Name: viewerData.name,
+								File: viewerData.fileName,
+								'Original Format': viewerData.format,
+								Format: 'png'
+							}
+						});
+					}
 				}
 			});
 		};

@@ -7,15 +7,18 @@
 		var idSuffix = '-' + (isProtected ? 'protected' : 'public');
 		var dialogContent = $('#email-content' + idSuffix);
 
-		var formLogger = new $.SalesPortal.FormLogger();
-		formLogger.init({
-			logObject: {
-				name: viewerData.name,
-				fileName: viewerData.fileName,
-				format: viewerData.format
-			},
-			formContent: dialogContent
-		});
+		if (viewerData.config.enableLogging)
+		{
+			var formLogger = new $.SalesPortal.FormLogger();
+			formLogger.init({
+				logObject: {
+					name: viewerData.name,
+					fileName: viewerData.fileName,
+					format: viewerData.format
+				},
+				formContent: dialogContent
+			});
+		}
 
 		dialogContent.find('#add-page-expires-in').find('.btn').on('click', function ()
 		{

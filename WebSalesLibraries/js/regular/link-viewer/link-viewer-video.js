@@ -1,7 +1,7 @@
 (function ($)
 {
 	window.BaseUrl = window.BaseUrl || '';
-	$.SalesPortal = $.SalesPortal || { };
+	$.SalesPortal = $.SalesPortal || {};
 	$.SalesPortal.VideoViewer = function (parameters)
 	{
 		var viewerData = new $.SalesPortal.VideoViewerData(parameters.data);
@@ -37,15 +37,18 @@
 
 						dialogContent = $('.fancybox-wrap');
 
-						var formLogger = new $.SalesPortal.FormLogger();
-						formLogger.init({
-							logObject: {
-								name: viewerData.name,
-								fileName: viewerData.fileName,
-								format: viewerData.format
-							},
-							formContent: dialogContent
-						});
+						if (viewerData.config.enableLogging)
+						{
+							var formLogger = new $.SalesPortal.FormLogger();
+							formLogger.init({
+								logObject: {
+									name: viewerData.name,
+									fileName: viewerData.fileName,
+									format: viewerData.format
+								},
+								formContent: dialogContent
+							});
+						}
 
 						allowFullScreenMode = dialogContent.find('.link-viewer').hasClass('eo') ? 'eo' : 'regular';
 
@@ -72,7 +75,8 @@
 						dialogContent.find('.open-video-fullscreen-mobile').off('click.preview').on('click.preview', showVideoFullScreenMobile);
 
 						player = dialogContent.find('#video-player');
-						player.on('play', function () {
+						player.on('play', function ()
+						{
 							$.SalesPortal.LogHelper.write({
 								type: 'Link',
 								subType: 'Play',
@@ -132,12 +136,12 @@
 			$.fancybox.close();
 			var viewerBar = new $.SalesPortal.ViewerBar();
 			$.SalesPortal.LinkManager.playVideo([
-				{
-					src: viewerData.mp4Src.href,
-					href: viewerData.mp4Src.href,
-					title: viewerData.fileName,
-					type: viewerData.mp4Src.type
-				}],
+					{
+						src: viewerData.mp4Src.href,
+						href: viewerData.mp4Src.href,
+						title: viewerData.fileName,
+						type: viewerData.mp4Src.type
+					}],
 				viewerBar,
 				function ()
 				{
@@ -176,12 +180,12 @@
 			var videoClass = allowFullScreenMode ? 'eo' : '';
 			$.fancybox({
 				content: $('<video controls autoplay preload="auto"' +
-						' id="video-player" class="' + videoClass + '"' +
-						' height = "' + ($(window).height() - 100) +'"' +
-						' width="' + ($(window).width() - 100) + '"' +
-						' poster="'+viewerData.thumbImageSrc+'">' +
-					'<source src="'+viewerData.mp4Src.href+'" type="video/mp4">' +
-				'</video>'),
+					' id="video-player" class="' + videoClass + '"' +
+					' height = "' + ($(window).height() - 100) + '"' +
+					' width="' + ($(window).width() - 100) + '"' +
+					' poster="' + viewerData.thumbImageSrc + '">' +
+					'<source src="' + viewerData.mp4Src.href + '" type="video/mp4">' +
+					'</video>'),
 				openEffect: 'none',
 				closeEffect: 'none',
 				autoSize: true,
@@ -197,7 +201,7 @@
 					$.SalesPortal.SalesLibraryExtensions.releaseLinkData();
 				}
 			});
-			$('.fancybox-inner').css({ 'overflow': 'hidden' });
+			$('.fancybox-inner').css({'overflow': 'hidden'});
 		};
 
 		var processSaveAction = function ()

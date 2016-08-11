@@ -47,7 +47,9 @@
 					$activity->date = $activityRecord->date_time;
 					$activity->type = $activityRecord->type;
 					$activity->subType = $activityRecord->sub_type;
-					$activity->login = $activityRecord->userActivity->login;
+					$activity->login = isset($activityRecord->userActivity->login) && $activityRecord->userActivity->login != '' ?
+						$activityRecord->userActivity->login :
+						'public user';
 					$activity->firstName = $activityRecord->userActivity->first_name;
 					$activity->lastName = $activityRecord->userActivity->last_name;
 					$activity->email = $activityRecord->userActivity->email;

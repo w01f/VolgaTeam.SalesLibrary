@@ -1,7 +1,7 @@
 (function ($)
 {
 	window.BaseUrl = window.BaseUrl || '';
-	$.SalesPortal = $.SalesPortal || { };
+	$.SalesPortal = $.SalesPortal || {};
 	$.SalesPortal.YouTubeViewer = function (parameters)
 	{
 		var viewerData = new $.SalesPortal.YouTubeViewerData(parameters.data);
@@ -33,15 +33,18 @@
 					{
 						dialogContent = $('.fancybox-wrap');
 
-						var formLogger = new $.SalesPortal.FormLogger();
-						formLogger.init({
-							logObject: {
-								name: viewerData.name,
-								fileName: viewerData.fileName,
-								format: viewerData.format
-							},
-							formContent: dialogContent
-						});
+						if (viewerData.config.enableLogging)
+						{
+							var formLogger = new $.SalesPortal.FormLogger();
+							formLogger.init({
+								logObject: {
+									name: viewerData.name,
+									fileName: viewerData.fileName,
+									format: viewerData.format
+								},
+								formContent: dialogContent
+							});
+						}
 
 						dialogContent.find('.tab-above-header').first().addClass('active');
 						dialogContent.find('#link-viewer-body-tabs li').first().addClass('active');
@@ -98,10 +101,10 @@
 			var viewerBar = new $.SalesPortal.ViewerBar();
 			$.fancybox({
 				title: viewerData.name,
-				content:'<iframe ' +
-						'height = "480" width="680" frameborder="0" allowfullscreen ' +
-						'src="https://www.youtube.com/embed/'+viewerData.youTubeId+'?autoplay=1">' +
-					'</iframe>',
+				content: '<iframe ' +
+				'height = "480" width="680" frameborder="0" allowfullscreen ' +
+				'src="https://www.youtube.com/embed/' + viewerData.youTubeId + '?autoplay=1">' +
+				'</iframe>',
 				openEffect: 'none',
 				closeEffect: 'none',
 				afterShow: function ()

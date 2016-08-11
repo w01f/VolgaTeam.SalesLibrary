@@ -121,4 +121,9 @@
 		 * @soap
 		 */
 		public $groups;
+		/**
+		 * @var string int
+		 * @soap
+		 */
+		public $totalViews;
 	}

@@ -144,7 +144,7 @@
 			$this->fileSize = !isset($this->fileSize) ? $fileInfo->size : $this->fileSize;
 
 			$this->isFolder = $this->originalFormat == 'folder' || count(\LinkRecord::model()->findAll('id_parent_link=?', array($linkRecord->id))) > 0;
-			$this->isLineBreak = $this->originalFormat == 'line break' || isset($this->lineBreakProperties);
+			$this->isLineBreak = $this->originalFormat == 'line break' || ($this->type == 6 && isset($this->lineBreakProperties));
 			$this->isAppLink = $this->type == 15;
 
 			$this->isDirectUrl = $this->type == 8 && $this->extendedProperties->forcePreview;
@@ -294,14 +294,14 @@
 		{
 			$tooltipList = array();
 
-			$isLineBreak = $this->getIsLineBreak();
+			$isLineBreak = $this->isLineBreak;
 
 			if (!$isLineBreak && isset($this->extendedProperties->hoverNote) && $this->extendedProperties->hoverNote != '')
 			{
 				$tooltipList[] = $this->extendedProperties->hoverNote;
 				if (!$this->isFolder && isset($this->fileName))
 					$tooltipList[] = $this->fileName;
-				else if (!$this->getIsLineBreak())
+				else if (!$this->isLineBreak)
 					$tooltipList[] = $this->name;
 			}
 			else if ($isLineBreak && isset($this->lineBreakProperties->note) && $this->lineBreakProperties->note != '')

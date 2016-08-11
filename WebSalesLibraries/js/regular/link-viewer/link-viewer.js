@@ -135,15 +135,18 @@
 							var menu = $(parameters.content);
 							$('body').append(menu);
 
-							var formLogger = new $.SalesPortal.FormLogger();
-							formLogger.init({
-								logObject: {
-									name: parameters.data.name,
-									fileName: parameters.data.fileName,
-									format: parameters.format
-								},
-								formContent: menu
-							});
+							if (parameters.data.config.enableLogging)
+							{
+								var formLogger = new $.SalesPortal.FormLogger();
+								formLogger.init({
+									logObject: {
+										name: parameters.data.name,
+										fileName: parameters.data.fileName,
+										format: parameters.format
+									},
+									formContent: menu
+								});
+							}
 
 							menu
 								.show()
@@ -336,15 +339,18 @@
 						{
 							var dialogContent = $('.fancybox-wrap');
 
-							var formLogger = new $.SalesPortal.FormLogger();
-							formLogger.init({
-								logObject: {
-									name: viewerData.name,
-									fileName: viewerData.fileName,
-									format: viewerData.format
-								},
-								formContent: dialogContent
-							});
+							if (parameters.data.config.enableLogging)
+							{
+								var formLogger = new $.SalesPortal.FormLogger();
+								formLogger.init({
+									logObject: {
+										name: viewerData.name,
+										fileName: viewerData.fileName,
+										format: viewerData.format
+									},
+									formContent: dialogContent
+								});
+							}
 
 							dialogContent.find('.tab-above-header').first().addClass('active');
 							dialogContent.find('#link-viewer-body-tabs li').first().addClass('active');

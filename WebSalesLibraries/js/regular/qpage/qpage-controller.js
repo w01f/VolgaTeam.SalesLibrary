@@ -1,7 +1,7 @@
 (function ($)
 {
 	window.BaseUrl = window.BaseUrl || '';
-	$.SalesPortal = $.SalesPortal || { };
+	$.SalesPortal = $.SalesPortal || {};
 	var QPageManager = function ()
 	{
 		this.init = function ()
@@ -244,17 +244,19 @@
 		var recordActivity = function (linkId)
 		{
 			var pageId = $('#page-id').html();
-			$.ajax({
-				type: "POST",
-				url: window.BaseUrl + "recordActivity",
-				data: {
-					pageId: pageId,
-					userEmail: $('#user-email').val(),
-					linkId: linkId
-				},
-				async: true,
-				dataType: 'html'
-			});
+			var email = $('#user-email').val();
+			if (email != undefined && email.length > 0)
+				$.ajax({
+					type: "POST",
+					url: window.BaseUrl + "recordActivity",
+					data: {
+						pageId: pageId,
+						userEmail: email,
+						linkId: linkId
+					},
+					async: true,
+					dataType: 'html'
+				});
 		};
 
 		function checkEmail()

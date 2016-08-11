@@ -10,5 +10,10 @@ from tbl_statistic_detail sdet
    join tbl_user as u on u.login = su.login
    left join tbl_user_group as ug on ug.id_user = u.id
    left join tbl_group as g on g.id = ug.id_group
-where sdet.tag = 'File' and sdet.data is not null and sdet.data <> '' and  sact.date_time >= start_date and sact.date_time <= end_date
+where
+  (sdet.tag = 'File' or sdet.tag = 'URL') and
+  sdet.data is not null and
+  sdet.data <> '' and
+  sact.date_time >= start_date and
+  sact.date_time <= end_date
 group by sdet.data, g.name;
