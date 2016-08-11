@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.40629.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesLibraries.ServiceConnector", "SalesLibraries.ServiceConnector\SalesLibraries.ServiceConnector.csproj", "{900CCF99-921A-4E35-8686-C85D48263785}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesLibraries.SiteManager", "SalesLibraries.SiteManager\SalesLibraries.SiteManager.csproj", "{DD5FB7D5-6358-4DC4-87C7-EDA57B7F8BBB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesLibraries.UrlEncoder", "SalesLibraries.UrlEncoder\SalesLibraries.UrlEncoder.csproj", "{C9A1056D-7506-4B13-9E08-64360ABE5615}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,6 +39,18 @@ Global
 		{DD5FB7D5-6358-4DC4-87C7-EDA57B7F8BBB}.Release|Mixed Platforms.Build.0 = Release|x86
 		{DD5FB7D5-6358-4DC4-87C7-EDA57B7F8BBB}.Release|x86.ActiveCfg = Release|x86
 		{DD5FB7D5-6358-4DC4-87C7-EDA57B7F8BBB}.Release|x86.Build.0 = Release|x86
+		{C9A1056D-7506-4B13-9E08-64360ABE5615}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9A1056D-7506-4B13-9E08-64360ABE5615}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9A1056D-7506-4B13-9E08-64360ABE5615}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{C9A1056D-7506-4B13-9E08-64360ABE5615}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{C9A1056D-7506-4B13-9E08-64360ABE5615}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C9A1056D-7506-4B13-9E08-64360ABE5615}.Debug|x86.Build.0 = Debug|Any CPU
+		{C9A1056D-7506-4B13-9E08-64360ABE5615}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9A1056D-7506-4B13-9E08-64360ABE5615}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9A1056D-7506-4B13-9E08-64360ABE5615}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{C9A1056D-7506-4B13-9E08-64360ABE5615}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{C9A1056D-7506-4B13-9E08-64360ABE5615}.Release|x86.ActiveCfg = Release|Any CPU
+		{C9A1056D-7506-4B13-9E08-64360ABE5615}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
