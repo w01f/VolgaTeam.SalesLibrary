@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.Windows.Forms;
+using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraPrinting;
 using DevExpress.XtraTab;
 using SalesLibraries.ServiceConnector.StatisticService;
@@ -64,6 +65,16 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Activities.FileActivity
 			e.Graph.Font = new Font("Arial", 12, FontStyle.Bold);
 			var rec = new RectangleF(0, 0, e.Graph.ClientPageSize.Width, 50);
 			e.Graph.DrawString(reportHeader, Color.Black, rec, BorderSide.None);
+		}
+
+		private void OnCustomRowCellEdit(object sender, CustomRowCellEditEventArgs e)
+		{
+			if (e.Column != gridColumnFileName) return;
+			var dataRow = advBandedGridViewData.GetRow(e.RowHandle) as FileActivityReportModel;
+			if (dataRow != null && dataRow.IsUrl)
+				e.RepositoryItem = repositoryItemHyperLinkEdit;
+			else
+				e.RepositoryItem = repositoryItemButtonEdit;
 		}
 	}
 }

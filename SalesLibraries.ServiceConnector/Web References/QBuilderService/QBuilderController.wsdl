@@ -34,6 +34,7 @@
           <xsd:element name="lastName" type="xsd:string" />
           <xsd:element name="email" type="xsd:string" />
           <xsd:element name="groups" type="xsd:string" />
+          <xsd:element name="totalViews" type="xsd:string" />
         </xsd:all>
       </xsd:complexType>
       <xsd:complexType name="QPageLinkModelArray">
@@ -64,42 +65,42 @@
       </xsd:complexType>
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="getAllPagesRequest">
+  <wsdl:message name="getAllPagesIn">
     <wsdl:part name="sessionKey" type="xsd:string" />
   </wsdl:message>
-  <wsdl:message name="getAllPagesResponse">
+  <wsdl:message name="getAllPagesOut">
     <wsdl:part name="return" type="tns:QPageModelArray" />
   </wsdl:message>
-  <wsdl:message name="deletePagesRequest">
+  <wsdl:message name="deletePagesIn">
     <wsdl:part name="sessionKey" type="xsd:string" />
     <wsdl:part name="pageIds" type="tns:stringArray" />
   </wsdl:message>
-  <wsdl:message name="deletePagesResponse" />
-  <wsdl:message name="getSessionKeyRequest">
+  <wsdl:message name="deletePagesOut" />
+  <wsdl:message name="getSessionKeyIn">
     <wsdl:part name="login" type="xsd:string" />
     <wsdl:part name="password" type="xsd:string" />
   </wsdl:message>
-  <wsdl:message name="getSessionKeyResponse">
+  <wsdl:message name="getSessionKeyOut">
     <wsdl:part name="return" type="xsd:string" />
   </wsdl:message>
   <wsdl:portType name="QBuilderControllerPortType">
     <wsdl:operation name="getAllPages">
       <wsdl:documentation>
       </wsdl:documentation>
-      <wsdl:input message="tns:getAllPagesRequest" />
-      <wsdl:output message="tns:getAllPagesResponse" />
+      <wsdl:input message="tns:getAllPagesIn" />
+      <wsdl:output message="tns:getAllPagesOut" />
     </wsdl:operation>
     <wsdl:operation name="deletePages">
       <wsdl:documentation>
       </wsdl:documentation>
-      <wsdl:input message="tns:deletePagesRequest" />
-      <wsdl:output message="tns:deletePagesResponse" />
+      <wsdl:input message="tns:deletePagesIn" />
+      <wsdl:output message="tns:deletePagesOut" />
     </wsdl:operation>
     <wsdl:operation name="getSessionKey">
       <wsdl:documentation>
       </wsdl:documentation>
-      <wsdl:input message="tns:getSessionKeyRequest" />
-      <wsdl:output message="tns:getSessionKeyResponse" />
+      <wsdl:input message="tns:getSessionKeyIn" />
+      <wsdl:output message="tns:getSessionKeyOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="QBuilderControllerBinding" type="tns:QBuilderControllerPortType">

@@ -36,10 +36,14 @@
 			this.gridColumnType = new DevExpress.XtraGrid.Columns.GridColumn();
 			this.gridColumnSubType = new DevExpress.XtraGrid.Columns.GridColumn();
 			this.gridColumnFile = new DevExpress.XtraGrid.Columns.GridColumn();
+			this.repositoryItemHyperLinkEdit = new DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit();
+			this.repositoryItemButtonEdit = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
 			((System.ComponentModel.ISupportInitialize)(this.gridControlData)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.gridViewData)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEditDate)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEditDate.CalendarTimeProperties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.repositoryItemHyperLinkEdit)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// gridControlData
@@ -49,7 +53,9 @@
 			this.gridControlData.MainView = this.gridViewData;
 			this.gridControlData.Name = "gridControlData";
 			this.gridControlData.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
-            this.repositoryItemDateEditDate});
+            this.repositoryItemDateEditDate,
+            this.repositoryItemHyperLinkEdit,
+            this.repositoryItemButtonEdit});
 			this.gridControlData.Size = new System.Drawing.Size(898, 483);
 			this.gridControlData.TabIndex = 2;
 			this.gridControlData.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -75,7 +81,6 @@
 			this.gridViewData.Appearance.SelectedRow.Options.UseFont = true;
 			this.gridViewData.AppearancePrint.HeaderPanel.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold);
 			this.gridViewData.AppearancePrint.HeaderPanel.Options.UseFont = true;
-			this.gridViewData.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Default;
 			this.gridViewData.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gridColumnDate,
             this.gridColumnLogin,
@@ -84,8 +89,6 @@
             this.gridColumnFile});
 			this.gridViewData.GridControl = this.gridControlData;
 			this.gridViewData.Name = "gridViewData";
-			this.gridViewData.OptionsBehavior.Editable = false;
-			this.gridViewData.OptionsBehavior.ReadOnly = true;
 			this.gridViewData.OptionsCustomization.AllowColumnMoving = false;
 			this.gridViewData.OptionsCustomization.AllowFilter = false;
 			this.gridViewData.OptionsCustomization.AllowGroup = false;
@@ -111,6 +114,7 @@
 			this.gridViewData.PreviewIndent = 5;
 			this.gridViewData.RowHeight = 35;
 			this.gridViewData.RowSeparatorHeight = 5;
+			this.gridViewData.CustomRowCellEdit += new DevExpress.XtraGrid.Views.Grid.CustomRowCellEditEventHandler(this.OnCustomRowCellEdit);
 			// 
 			// gridColumnDate
 			// 
@@ -118,6 +122,8 @@
 			this.gridColumnDate.ColumnEdit = this.repositoryItemDateEditDate;
 			this.gridColumnDate.FieldName = "ActivityDate";
 			this.gridColumnDate.Name = "gridColumnDate";
+			this.gridColumnDate.OptionsColumn.AllowEdit = false;
+			this.gridColumnDate.OptionsColumn.ReadOnly = true;
 			this.gridColumnDate.Visible = true;
 			this.gridColumnDate.VisibleIndex = 0;
 			this.gridColumnDate.Width = 243;
@@ -140,6 +146,8 @@
 			this.gridColumnLogin.Caption = "Login";
 			this.gridColumnLogin.FieldName = "login";
 			this.gridColumnLogin.Name = "gridColumnLogin";
+			this.gridColumnLogin.OptionsColumn.AllowEdit = false;
+			this.gridColumnLogin.OptionsColumn.ReadOnly = true;
 			this.gridColumnLogin.Visible = true;
 			this.gridColumnLogin.VisibleIndex = 1;
 			this.gridColumnLogin.Width = 231;
@@ -149,6 +157,8 @@
 			this.gridColumnType.Caption = "Action Group";
 			this.gridColumnType.FieldName = "type";
 			this.gridColumnType.Name = "gridColumnType";
+			this.gridColumnType.OptionsColumn.AllowEdit = false;
+			this.gridColumnType.OptionsColumn.ReadOnly = true;
 			this.gridColumnType.Visible = true;
 			this.gridColumnType.VisibleIndex = 2;
 			this.gridColumnType.Width = 258;
@@ -158,6 +168,8 @@
 			this.gridColumnSubType.Caption = "Action";
 			this.gridColumnSubType.FieldName = "subType";
 			this.gridColumnSubType.Name = "gridColumnSubType";
+			this.gridColumnSubType.OptionsColumn.AllowEdit = false;
+			this.gridColumnSubType.OptionsColumn.ReadOnly = true;
 			this.gridColumnSubType.Visible = true;
 			this.gridColumnSubType.VisibleIndex = 3;
 			this.gridColumnSubType.Width = 258;
@@ -171,16 +183,30 @@
 			this.gridColumnFile.VisibleIndex = 4;
 			this.gridColumnFile.Width = 758;
 			// 
+			// repositoryItemHyperLinkEdit
+			// 
+			this.repositoryItemHyperLinkEdit.AutoHeight = false;
+			this.repositoryItemHyperLinkEdit.Name = "repositoryItemHyperLinkEdit";
+			this.repositoryItemHyperLinkEdit.ReadOnly = true;
+			this.repositoryItemHyperLinkEdit.SingleClick = true;
+			// 
+			// repositoryItemButtonEdit
+			// 
+			this.repositoryItemButtonEdit.AutoHeight = false;
+			this.repositoryItemButtonEdit.Name = "repositoryItemButtonEdit";
+			this.repositoryItemButtonEdit.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+			// 
 			// GroupControl
 			// 
 			this.Controls.Add(this.gridControlData);
-			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.Size = new System.Drawing.Size(898, 483);
 			((System.ComponentModel.ISupportInitialize)(this.gridControlData)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.gridViewData)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEditDate.CalendarTimeProperties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEditDate)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.repositoryItemHyperLinkEdit)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit)).EndInit();
 			this.ResumeLayout(false);
 
         }
@@ -195,5 +221,7 @@
 		private DevExpress.XtraGrid.Columns.GridColumn gridColumnType;
 		private DevExpress.XtraGrid.Columns.GridColumn gridColumnSubType;
 		private DevExpress.XtraGrid.Columns.GridColumn gridColumnFile;
-    }
+		private DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit repositoryItemHyperLinkEdit;
+		private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repositoryItemButtonEdit;
+	}
 }

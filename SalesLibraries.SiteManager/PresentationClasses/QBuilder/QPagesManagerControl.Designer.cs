@@ -28,9 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+			this.components = new System.ComponentModel.Container();
 			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
 			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
-			this.styleController = new DevExpress.XtraEditors.StyleController();
+			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
 			this.gridControlRecords = new DevExpress.XtraGrid.GridControl();
 			this.gridViewRecords = new DevExpress.XtraGrid.Views.Grid.GridView();
 			this.gridColumnPagesName = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -46,6 +47,7 @@
 			this.gridColumnPinCode = new DevExpress.XtraGrid.Columns.GridColumn();
 			this.splitContainerControlData = new DevExpress.XtraEditors.SplitContainerControl();
 			this.pnCustomFilter = new System.Windows.Forms.Panel();
+			this.gridColumnTotalViews = new DevExpress.XtraGrid.Columns.GridColumn();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.gridControlRecords)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.gridViewRecords)).BeginInit();
@@ -82,7 +84,7 @@
             this.repositoryItemDateEditPages,
             this.repositoryItemButtonEditPagesActions,
             this.repositoryItemHyperLinkEditPages});
-			this.gridControlRecords.Size = new System.Drawing.Size(669, 483);
+			this.gridControlRecords.Size = new System.Drawing.Size(676, 483);
 			this.gridControlRecords.TabIndex = 3;
 			this.gridControlRecords.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewRecords});
@@ -113,6 +115,7 @@
             this.gridColumnPagesDateCreate,
             this.gridColumnPagesDateExpiration,
             this.gridColumnPagesActions,
+            this.gridColumnTotalViews,
             this.gridColumnPinCode});
 			this.gridViewRecords.GridControl = this.gridControlRecords;
 			this.gridViewRecords.Name = "gridViewRecords";
@@ -144,7 +147,7 @@
 			this.gridColumnPagesName.OptionsColumn.ReadOnly = true;
 			this.gridColumnPagesName.Visible = true;
 			this.gridColumnPagesName.VisibleIndex = 2;
-			this.gridColumnPagesName.Width = 110;
+			this.gridColumnPagesName.Width = 83;
 			// 
 			// gridColumnPagesGroup
 			// 
@@ -155,7 +158,7 @@
 			this.gridColumnPagesGroup.OptionsColumn.ReadOnly = true;
 			this.gridColumnPagesGroup.Visible = true;
 			this.gridColumnPagesGroup.VisibleIndex = 3;
-			this.gridColumnPagesGroup.Width = 76;
+			this.gridColumnPagesGroup.Width = 58;
 			// 
 			// gridColumnPagesUrl
 			// 
@@ -166,7 +169,7 @@
 			this.gridColumnPagesUrl.ShowButtonMode = DevExpress.XtraGrid.Views.Base.ShowButtonModeEnum.ShowAlways;
 			this.gridColumnPagesUrl.Visible = true;
 			this.gridColumnPagesUrl.VisibleIndex = 0;
-			this.gridColumnPagesUrl.Width = 128;
+			this.gridColumnPagesUrl.Width = 97;
 			// 
 			// repositoryItemHyperLinkEditPages
 			// 
@@ -239,7 +242,7 @@
 			this.gridColumnPagesActions.OptionsColumn.ShowCaption = false;
 			this.gridColumnPagesActions.ShowButtonMode = DevExpress.XtraGrid.Views.Base.ShowButtonModeEnum.ShowAlways;
 			this.gridColumnPagesActions.Visible = true;
-			this.gridColumnPagesActions.VisibleIndex = 7;
+			this.gridColumnPagesActions.VisibleIndex = 8;
 			this.gridColumnPagesActions.Width = 45;
 			// 
 			// repositoryItemButtonEditPagesActions
@@ -285,6 +288,18 @@
 			this.pnCustomFilter.Size = new System.Drawing.Size(230, 483);
 			this.pnCustomFilter.TabIndex = 21;
 			// 
+			// gridColumnTotalViews
+			// 
+			this.gridColumnTotalViews.Caption = "Views";
+			this.gridColumnTotalViews.FieldName = "totalViews";
+			this.gridColumnTotalViews.Name = "gridColumnTotalViews";
+			this.gridColumnTotalViews.OptionsColumn.AllowEdit = false;
+			this.gridColumnTotalViews.OptionsColumn.FixedWidth = true;
+			this.gridColumnTotalViews.OptionsColumn.ReadOnly = true;
+			this.gridColumnTotalViews.Visible = true;
+			this.gridColumnTotalViews.VisibleIndex = 7;
+			this.gridColumnTotalViews.Width = 60;
+			// 
 			// QPagesManagerControl
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -325,5 +340,6 @@
 		private DevExpress.XtraGrid.Columns.GridColumn gridColumnPagesActions;
 		private DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit repositoryItemHyperLinkEditPages;
 		private DevExpress.XtraGrid.Columns.GridColumn gridColumnPinCode;
-    }
+		private DevExpress.XtraGrid.Columns.GridColumn gridColumnTotalViews;
+	}
 }
