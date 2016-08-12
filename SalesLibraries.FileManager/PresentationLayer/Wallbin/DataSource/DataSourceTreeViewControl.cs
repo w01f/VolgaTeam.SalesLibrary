@@ -419,6 +419,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.DataSource
 			var targetFolderLink = (FolderLink)targetNode.Tag;
 			var targetFolderPath = targetFolderLink.Path;
 
+			if (droppedItemsPaths.Any(path => String.Equals(targetFolderPath, Path.GetDirectoryName(path), StringComparison.OrdinalIgnoreCase)))
+				return;
+
 			treeListAllFiles.SuspendLayout();
 			laTreeViewProgressLabel.Text = "Copying Files...";
 			pnTreeViewProgress.Visible = true;
