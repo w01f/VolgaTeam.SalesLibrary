@@ -63,10 +63,17 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			}
 			else
 				buttonXOpenWV.Enabled = false;
+
+			checkEditFakeDate.Checked = ((PowerPointLinkSettings)_data.Settings).FakeFileDate.HasValue;
+			dateEditFakeDate.EditValue = ((PowerPointLinkSettings)_data.Settings).FakeFileDate;
 		}
 
 		public void SaveData()
 		{
+			((PowerPointLinkSettings)_data.Settings).FakeFileDate = checkEditFakeDate.Checked &&
+																	 dateEditFakeDate.EditValue != null
+				? (DateTime?)dateEditFakeDate.EditValue
+				: null;
 		}
 
 		private void buttonXRefreshPreview_Click(object sender, EventArgs e)
@@ -80,6 +87,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 				{
 					if (!powerPointProcessor.Connect(true)) return;
 					((PowerPointLinkSettings)_data.Settings).UpdateQuickViewContent(powerPointProcessor);
+					((PowerPointLinkSettings)_data.Settings).UpdatePresentationInfo(powerPointProcessor);
 				}
 
 				_data.ClearPreviewContainer();
@@ -106,6 +114,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 				Process.Start(_data.PreviewContainerPath);
 			}
 			catch { }
+		}
+
+		private void checkEditFakeDate_CheckedChanged(object sender, EventArgs e)
+		{
+			dateEditFakeDate.Visible = checkEditFakeDate.Checked;
 		}
 	}
 }

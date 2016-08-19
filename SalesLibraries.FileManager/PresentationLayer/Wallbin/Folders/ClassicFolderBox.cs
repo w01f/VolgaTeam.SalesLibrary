@@ -329,6 +329,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders
 					{
 						if (!powerPointProcessor.Connect(true)) return;
 						((PowerPointLinkSettings)sourceLink.Settings).UpdateQuickViewContent(powerPointProcessor);
+						((PowerPointLinkSettings)sourceLink.Settings).UpdatePresentationInfo(powerPointProcessor);
 					}
 				}
 				sourceLink.ClearPreviewContainer();

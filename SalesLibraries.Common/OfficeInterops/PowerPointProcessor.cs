@@ -287,79 +287,6 @@ namespace SalesLibraries.Common.OfficeInterops
 			}
 		}
 
-		public void CopyPasteSlide(Slide source, Presentation destination)
-		{
-			try
-			{
-				source.Copy();
-				SlideRange pastedRange = destination.Slides.Paste();
-				Design design = GetDesignFromSlide(source, destination);
-				if (design != null)
-					pastedRange.Design = design;
-				else
-					pastedRange.Design = source.Design;
-				pastedRange.ColorScheme = source.ColorScheme;
-				if (source.FollowMasterBackground == MsoTriState.msoFalse)
-				{
-					pastedRange.FollowMasterBackground = MsoTriState.msoFalse;
-					pastedRange.Background.Fill.Visible = source.Background.Fill.Visible;
-					pastedRange.Background.Fill.ForeColor = source.Background.Fill.ForeColor;
-					pastedRange.Background.Fill.BackColor = source.Background.Fill.BackColor;
-
-					switch (source.Background.Fill.Type)
-					{
-						case MsoFillType.msoFillTextured:
-							switch (source.Background.Fill.TextureType)
-							{
-								case MsoTextureType.msoTexturePreset:
-									pastedRange.Background.Fill.PresetTextured(source.Background.Fill.PresetTexture);
-									break;
-							}
-							break;
-						case MsoFillType.msoFillSolid:
-							pastedRange.Background.Fill.Transparency = 0;
-							pastedRange.Background.Fill.Solid();
-							break;
-						case MsoFillType.msoFillPicture:
-							if (source.Shapes.Count > 0)
-								(source.Shapes.Range(1)).Visible = MsoTriState.msoFalse;
-							MsoTriState masterShape = source.DisplayMasterShapes;
-							source.DisplayMasterShapes = MsoTriState.msoFalse;
-
-							string tempFile = Path.GetTempFileName();
-							source.Export(tempFile, "PNG");
-							pastedRange.Background.Fill.UserPicture(tempFile);
-							if (File.Exists(tempFile))
-								File.Delete(tempFile);
-
-							source.DisplayMasterShapes = masterShape;
-							if (source.Shapes.Count > 0)
-								(source.Shapes.Range(1)).Visible = MsoTriState.msoFalse;
-							break;
-						case MsoFillType.msoFillPatterned:
-							pastedRange.Background.Fill.Patterned(source.Background.Fill.Pattern);
-							break;
-						case MsoFillType.msoFillGradient:
-							switch (source.Background.Fill.GradientColorType)
-							{
-								case MsoGradientColorType.msoGradientTwoColors:
-									pastedRange.Background.Fill.TwoColorGradient(source.Background.Fill.GradientStyle, source.Background.Fill.GradientVariant);
-									break;
-								case MsoGradientColorType.msoGradientPresetColors:
-									pastedRange.Background.Fill.PresetGradient(source.Background.Fill.GradientStyle, source.Background.Fill.GradientVariant, source.Background.Fill.PresetGradientType);
-									break;
-								case MsoGradientColorType.msoGradientOneColor:
-									pastedRange.Background.Fill.OneColorGradient(source.Background.Fill.GradientStyle, source.Background.Fill.GradientVariant, source.Background.Fill.GradientDegree);
-									break;
-							}
-							break;
-					}
-				}
-				MakeDesignUnique(source, pastedRange.Design);
-			}
-			catch { }
-		}
-
 		private Design GetDesignFromSlide(Slide slide, Presentation presentation)
 		{
 			foreach (Design design in presentation.Designs)
@@ -376,6 +303,38 @@ namespace SalesLibraries.Common.OfficeInterops
 					design.SlideMaster.Shapes[design.SlideMaster.Shapes.Count].Delete();
 				else
 					break;
+			}
+		}
+
+		public void RenameDefaultOfficeDesigns(string sourcePresentationPath)
+		{
+			try
+			{
+				MessageFilter.Register();
+
+				var sourcePresentation = PowerPointObject.Presentations.Open(sourcePresentationPath,
+					WithWindow: MsoTriState.msoFalse);
+
+				var random = new Random();
+				const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+				var needTosave = false;
+				foreach (Design design in sourcePresentation.Designs)
+				{
+					if (String.IsNullOrEmpty(design.Name)) continue;
+					if (!design.Name.ToUpper().Contains("OFFICE THEME")) continue;
+					design.Name = String.Format("asa_{0}",
+						new string(Enumerable.Repeat(chars, 10).Select(s => s[random.Next(s.Length)]).ToArray()));
+					needTosave = true;
+				}
+				if (needTosave)
+					sourcePresentation.Save();
+				sourcePresentation.Close();
+			}
+			catch { }
+			finally
+			{
+				MessageFilter.Revoke();
 			}
 		}
 

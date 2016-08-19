@@ -145,10 +145,11 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 								{
 									processInteropped = powerPointProcessor.DoTimeLimitedAction(() =>
 									{
-										var singleSlidePresentation = powerPointProcessor.PowerPointObject.Presentations.Add(MsoTriState.msoFalse);
-										singleSlidePresentation.PageSetup.SlideWidth = presentation.PageSetup.SlideWidth;
-										singleSlidePresentation.PageSetup.SlideHeight = presentation.PageSetup.SlideHeight;
-										powerPointProcessor.CopyPasteSlide(slide, singleSlidePresentation);
+										var singleSlidePresentation = powerPointProcessor.PowerPointObject.Presentations.Open(previewContainer.SourcePath, WithWindow: MsoTriState.msoFalse);
+										var totalSlides = singleSlidePresentation.Slides.Count;
+										for (int j = totalSlides; j >= 1; j--)
+											if (j != i)
+												singleSlidePresentation.Slides[j].Delete();
 										singleSlidePresentation.SaveCopyAs(Path.Combine(pptxDestination, String.Format("Slide{0}.{1}", i, "pptx")));
 										singleSlidePresentation.Close();
 										Utils.ReleaseComObject(singleSlidePresentation);
@@ -180,7 +181,7 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 
 						if (!cancellationToken.IsCancellationRequested && updatePdf)
 						{
-							processInteropped = powerPointProcessor.DoTimeLimitedAction(() => 
+							processInteropped = powerPointProcessor.DoTimeLimitedAction(() =>
 								presentation.ExportAsFixedFormat(
 									Path.Combine(pdfDestination,
 										Path.ChangeExtension(Path.GetFileName(powerPointContainer.SourcePath), "pdf")),
@@ -188,7 +189,7 @@ namespace SalesLibraries.FileManager.Business.PreviewGenerators
 							if (processInteropped)
 								continue;
 						}
-						
+
 						presentation.Close();
 						Utils.ReleaseComObject(presentation);
 

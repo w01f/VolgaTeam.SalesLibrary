@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.IO;
 using Newtonsoft.Json;
 using SalesLibraries.Common.Configuration;
@@ -10,6 +11,18 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 	public class PowerPointLinkSettings : DocumentLinkSettings
 	{
 		public Guid Id { get; set; }
+
+		private DateTime? _lastPresentationInfoUpdate;
+		public DateTime? LastPresentationInfoUpdate
+		{
+			get { return _lastPresentationInfoUpdate; }
+			set
+			{
+				if (_lastPresentationInfoUpdate != value)
+					OnSettingsChanged();
+				_lastPresentationInfoUpdate = value;
+			}
+		}
 
 		private double _height;
 		public double Height
@@ -24,6 +37,8 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 		}
 
 		private double _width;
+		private DateTime? _fakeFileDate;
+
 		public double Width
 		{
 			get { return _width; }
@@ -32,6 +47,17 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 				if (_width != value)
 					OnSettingsChanged();
 				_width = value;
+			}
+		}
+
+		public DateTime? FakeFileDate
+		{
+			get { return _fakeFileDate; }
+			set
+			{
+				if (_fakeFileDate != value)
+					OnSettingsChanged();
+				_fakeFileDate = value;
 			}
 		}
 
@@ -73,12 +99,32 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 			using (var powerPointProcesor = new PowerPointHidden())
 			{
 				if (!powerPointProcesor.Connect(true)) return;
-				double height;
-				double width;
-				powerPointProcesor.GetPresentationProperties(ParentFileLink.FullPath, out width, out height);
-				Width = width;
-				Height = height;
+				UpdateSizeInfo(powerPointProcesor);
 			}
+		}
+
+		public void UpdateSizeInfo(PowerPointProcessor powerPointProcessor)
+		{
+			double height;
+			double width;
+			powerPointProcessor.GetPresentationProperties(ParentFileLink.FullPath, out width, out height);
+			Width = width;
+			Height = height;
+		}
+
+		private void UpdateThemes(PowerPointProcessor powerPointProcessor)
+		{
+			powerPointProcessor.RenameDefaultOfficeDesigns(ParentFileLink.FullPath);
+		}
+
+		public void UpdatePresentationInfo(PowerPointProcessor powerPointProcessor, bool force = false)
+		{
+			var sourceFile = new FileInfo(ParentFileLink.FullPath);
+			if (!sourceFile.Exists) return;
+			if (LastPresentationInfoUpdate.HasValue && LastPresentationInfoUpdate == sourceFile.LastWriteTime) return;
+			UpdateSizeInfo(powerPointProcessor);
+			UpdateThemes(powerPointProcessor);
+			LastPresentationInfoUpdate = sourceFile.LastWriteTime;
 		}
 
 		public void UpdateQuickViewContent(PowerPointProcessor powerPointProcessor)

@@ -61,6 +61,7 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 						MainController.Instance.MainForm.WindowState = FormWindowState.Minimized;
 				}));
 				UpdateFolderContent(targetLibrary, cancellationToken);
+				UpdatePowerPointInfo(targetLibrary, cancellationToken);
 				UpdateFileDates(targetLibrary, cancellationToken);
 				UpdatePreviewContent(targetLibrary, cancellationToken);
 				targetLibrary.SyncDate = DateTime.Now;
@@ -115,6 +116,7 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 
 				var cancellationToken = new CancellationToken();
 				UpdateFolderContent(targetLibrary, cancellationToken);
+				UpdatePowerPointInfo(targetLibrary, cancellationToken);
 				UpdateFileDates(targetLibrary, cancellationToken);
 				UpdatePreviewContent(targetLibrary, cancellationToken);
 				targetLibrary.SyncDate = DateTime.Now;
@@ -167,6 +169,21 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 			if (!folderLinks.Any()) return;
 			if (cancellationToken.IsCancellationRequested) return;
 			folderLinks.ForEach(f => f.UpdateContent());
+		}
+
+		private static void UpdatePowerPointInfo(Library library, CancellationToken cancellationToken)
+		{
+			var powerPointFiles = library.Pages.SelectMany(p => p.AllLinks).OfType<PowerPointLink>().ToList();
+			if (!powerPointFiles.Any()) return;
+			using (var powerPointProcessor = new PowerPointHidden())
+			{
+				if (!powerPointProcessor.Connect(true)) return;
+				foreach (var powerPointLink in powerPointFiles)
+				{
+					if (cancellationToken.IsCancellationRequested) break;
+					((PowerPointLinkSettings)powerPointLink.Settings).UpdatePresentationInfo(powerPointProcessor);
+				}
+			}
 		}
 
 		private static void UpdatePreviewContent(Library library, CancellationToken cancellationToken)

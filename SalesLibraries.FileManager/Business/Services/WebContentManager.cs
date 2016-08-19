@@ -279,6 +279,13 @@ namespace SalesLibraries.FileManager.Business.Services
 				target.lineBreakProperties.libraryId = source.ParentLibrary.ExtId.ToString();
 				target.lineBreakProperties.ImportData((LineBreakSettings)source.Settings);
 			}
+			if (source is PowerPointLink)
+			{
+				var sourceFile = (PowerPointLink)source;
+				target.fileDate =
+					((SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings.PowerPointLinkSettings)sourceFile.Settings)
+						.FakeFileDate?.ToString("MM/dd/yyyy hh:mm:ss tt") ?? target.fileDate;
+			}
 
 			#region Tags
 			var fileSuperFilters = new List<LinkSuperFilter>();

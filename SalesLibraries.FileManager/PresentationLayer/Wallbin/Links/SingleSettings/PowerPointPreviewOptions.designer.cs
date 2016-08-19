@@ -35,7 +35,12 @@
 			this.buttonXOpenQV = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXRefreshPreview = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXOpenWV = new DevComponents.DotNetBar.ButtonX();
+			this.checkEditFakeDate = new DevExpress.XtraEditors.CheckEdit();
+			this.dateEditFakeDate = new DevExpress.XtraEditors.DateEdit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditFakeDate.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.dateEditFakeDate.Properties.CalendarTimeProperties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.dateEditFakeDate.Properties)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// styleController
@@ -124,8 +129,37 @@
 			this.buttonXOpenWV.TextColor = System.Drawing.Color.Black;
 			this.buttonXOpenWV.Click += new System.EventHandler(this.buttonXOpenWV_Click);
 			// 
+			// checkEditFakeDate
+			// 
+			this.checkEditFakeDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.checkEditFakeDate.Location = new System.Drawing.Point(8, 508);
+			this.checkEditFakeDate.Name = "checkEditFakeDate";
+			this.checkEditFakeDate.Properties.AutoWidth = true;
+			this.checkEditFakeDate.Properties.Caption = "";
+			this.checkEditFakeDate.Size = new System.Drawing.Size(19, 19);
+			this.checkEditFakeDate.StyleController = this.styleController;
+			this.checkEditFakeDate.TabIndex = 27;
+			this.checkEditFakeDate.CheckedChanged += new System.EventHandler(this.checkEditFakeDate_CheckedChanged);
+			// 
+			// dateEditFakeDate
+			// 
+			this.dateEditFakeDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.dateEditFakeDate.EditValue = null;
+			this.dateEditFakeDate.Location = new System.Drawing.Point(33, 507);
+			this.dateEditFakeDate.Name = "dateEditFakeDate";
+			this.dateEditFakeDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+			this.dateEditFakeDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+			this.dateEditFakeDate.Size = new System.Drawing.Size(129, 22);
+			this.dateEditFakeDate.StyleController = this.styleController;
+			this.dateEditFakeDate.TabIndex = 28;
+			this.dateEditFakeDate.Visible = false;
+			// 
 			// PowerPointPreviewOptions
 			// 
+			this.Controls.Add(this.dateEditFakeDate);
+			this.Controls.Add(this.checkEditFakeDate);
 			this.Controls.Add(this.buttonXRefreshPreview);
 			this.Controls.Add(this.buttonXOpenWV);
 			this.Controls.Add(this.laAdminTools);
@@ -134,6 +168,9 @@
 			this.Name = "PowerPointPreviewOptions";
 			this.Size = new System.Drawing.Size(531, 541);
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditFakeDate.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.dateEditFakeDate.Properties.CalendarTimeProperties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.dateEditFakeDate.Properties)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -147,5 +184,7 @@
 		public DevComponents.DotNetBar.ButtonX buttonXOpenQV;
 		public DevComponents.DotNetBar.ButtonX buttonXRefreshPreview;
 		public DevComponents.DotNetBar.ButtonX buttonXOpenWV;
+		private DevExpress.XtraEditors.CheckEdit checkEditFakeDate;
+		private DevExpress.XtraEditors.DateEdit dateEditFakeDate;
 	}
 }
