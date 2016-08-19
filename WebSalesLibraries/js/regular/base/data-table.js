@@ -34,12 +34,15 @@
 					sortColumnIndex = 3;
 					break;
 				case "date_modify":
-					sortColumnIndex = 5;
+					sortColumnIndex = 6;
 					break;
 				case "tag":
 					sortColumnIndex = 0;
 					break;
 				case "rate":
+					sortColumnIndex = 5;
+					break;
+				case "views":
 					sortColumnIndex = 4;
 					break;
 			}
@@ -82,6 +85,17 @@
 				"data": "name",
 				"title": "Link",
 				"render": cellRenderer
+			});
+			columnSettings.push({
+				"data": "views",
+				"title": "Views",
+				"class": "centered",
+				"width": "50px",
+				"sType": "numeric",
+				"render": {
+					_: cellRenderer,
+					sort: 'value'
+				}
 			});
 			columnSettings.push({
 				"data": "rate",
@@ -217,12 +231,14 @@
 				table.find('.link-url').hammer().on('tap', function ()
 				{
 					$('body').find('.mtContent').remove();
+					var linkId = dataTable.api().row($(this).closest("tr")).data().id;
 					var url = $(this).find('.link-content').prop('href');
 					$.SalesPortal.LogHelper.write({
 						type: 'Link',
 						subType: 'Open',
+						linkId: linkId,
 						data: {
-							File: url
+							file: url
 						}
 					});
 				});
@@ -247,11 +263,13 @@
 				{
 					$('body').find('.mtContent').remove();
 					var url = $(this).find('.link-content').prop('href');
+					var linkId = dataTable.api().row($(this).closest("tr")).data().id;
 					$.SalesPortal.LogHelper.write({
 						type: 'Link',
 						subType: 'Open',
+						linkId: linkId,
 						data: {
-							File: url
+							file: url
 						}
 					});
 				});
@@ -323,7 +341,7 @@
 					{
 						cellContent = '<a class="mtTool link-content" mtcontent="' + row.tooltip + '" href="' + row.url + '" target="_blank">' + displayValue + '</a>';
 						objectClass = ' link-url';
-						if(row.isExternalHyperlink)
+						if (row.isExternalHyperlink)
 							objectClass += ' link-url-external';
 						else
 							objectClass += ' link-url-internal';

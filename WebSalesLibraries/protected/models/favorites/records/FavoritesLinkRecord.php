@@ -90,7 +90,8 @@
 							(select (round(avg(lr.value)*2)/2) as value from tbl_link_rate lr where lr.id_link=link.id) as rate,
 							link.format,
 							link.settings as extended_properties,
-							glcat.tag as tag')
+							glcat.tag as tag,
+							(select count(s_d.id) from tbl_statistic_detail s_d where s_d.tag = \'File\' and s_d.data = link.file_name) as total_views')
 						->from('tbl_link link')
 						->leftJoin("(select lcat.id_link, group_concat(lcat.tag separator ', ') as tag from tbl_link_category lcat group by lcat.id_link) glcat", "glcat.id_link=link.id")
 						->where("id in ('" . implode("', '", $linkIds) . "')")

@@ -59,7 +59,7 @@
 					type: 'Navigation',
 					subType: 'Carousel Group Select',
 					data: {
-						File: carouselData.displayParameters.predefinedDataList[ev.id].name
+						file: carouselData.displayParameters.predefinedDataList[ev.id].name
 					}
 				});
 			});

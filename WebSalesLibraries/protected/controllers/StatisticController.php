@@ -65,12 +65,16 @@
 					if (isset($groups))
 						$activity->groups = implode(", ", array_values($groups));
 
-					foreach ($activityRecord->activityDetails as $detailRecord)
+					if (isset($activityRecord->activityData) && isset($activityRecord->activityData->data))
 					{
-						$detail = new ActivityDetail();
-						$detail->tag = $detailRecord->tag;
-						$detail->value = $detailRecord->data;
-						$activity->details[] = $detail;
+						$dataArray = CJSON::decode($activityRecord->activityData->data, true);
+						foreach ($dataArray as $key => $value)
+						{
+							$detail = new ActivityDetail();
+							$detail->tag = ucfirst(preg_replace('/\B([A-Z])/', ' $1', $key));
+							$detail->value = $value;
+							$activity->details[] = $detail;
+						}
 					}
 					$activities[] = $activity;
 				}
@@ -312,7 +316,7 @@
 				{
 					$reportRecord = new FileActivityReportModel();
 					$reportRecord->group = $resultRecord['group_name'];
-					$reportRecord->fileName = $resultRecord['file_name'];
+					$reportRecord->fileName = str_replace('\/', '/', $resultRecord['file_name']);
 					$reportRecord->activityCount = $resultRecord['action_count'];
 					$reportRecords[] = $reportRecord;
 				}
@@ -358,9 +362,15 @@
 			$type = Yii::app()->request->getPost('type');
 			$subType = Yii::app()->request->getPost('subType');
 			$data = Yii::app()->request->getPost('data');
+			$linkId = Yii::app()->request->getPost('linkId');
 			$authorized = UserIdentity::isUserAuthorized();
 			if (isset($type) && isset($subType) && $authorized)
-				StatisticActivityRecord::WriteActivity($type, $subType, $data);
+			{
+				if (isset($linkId))
+					StatisticActivityRecord::writeLinkActivity($linkId, $type, $subType, $data);
+				else
+					StatisticActivityRecord::writeCommonActivity($type, $subType, $data);
+			}
 			Yii::app()->end();
 		}
 	}

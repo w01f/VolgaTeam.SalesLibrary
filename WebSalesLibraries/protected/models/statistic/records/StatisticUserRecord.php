@@ -35,7 +35,7 @@
 		/**
 		 * @param $activityId string
 		 */
-		public static function WriteUserDetail($activityId)
+		public static function writeUserDetail($activityId)
 		{
 			$detailRecord = new StatisticUserRecord();
 			$detailRecord->id_activity = $activityId;

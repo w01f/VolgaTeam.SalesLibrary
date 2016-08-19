@@ -335,31 +335,6 @@
 		}
 
 		/**
-		 * @param $x
-		 * @param $y
-		 * @return int
-		 */
-		public static function libraryLinkComparer($x, $y)
-		{
-			if ($x->order == $y->order)
-			{
-				return strcmp($x->name, $x->name);
-			}
-			else
-				return ($x->order < $y->order) ? -1 : 1;
-		}
-
-		/**
-		 * @param $x
-		 * @param $y
-		 * @return int
-		 */
-		public static function libraryChildLinkComparer($x, $y)
-		{
-			return strcasecmp($x->name, $y->name);
-		}
-
-		/**
 		 * @param $isQuickSite boolean
 		 * @return \PreviewData
 		 */
@@ -395,11 +370,45 @@
 
 			$result .= '<div class="activity-data">' .
 				\CJSON::encode(array(
+					'id' => $this->id,
 					'title' => $this->name,
 					'fileName' => $this->fileName,
 					'format' => $this->originalFormat
 				)) .
 				'</div>';
 			return $result;
+		}
+
+		/**
+		 * @return int
+		 */
+		public function getTotalViews()
+		{
+			return \StatisticLinkRecord::model()->count('id_link=?', array($this->id));
+		}
+
+		/**
+		 * @param $x
+		 * @param $y
+		 * @return int
+		 */
+		public static function libraryLinkComparer($x, $y)
+		{
+			if ($x->order == $y->order)
+			{
+				return strcmp($x->name, $x->name);
+			}
+			else
+				return ($x->order < $y->order) ? -1 : 1;
+		}
+
+		/**
+		 * @param $x
+		 * @param $y
+		 * @return int
+		 */
+		public static function libraryChildLinkComparer($x, $y)
+		{
+			return strcasecmp($x->name, $y->name);
 		}
 	}

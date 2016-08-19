@@ -20,6 +20,8 @@
 
 		public $rateData;
 
+		public $totalViews;
+
 		public $viewerFormat;
 		public $contentView;
 
@@ -42,6 +44,8 @@
 
 			$userId = UserIdentity::getCurrentUserId();
 			$this->rateData = LinkRateRecord::getRateData($link->id, $userId);
+
+			$this->totalViews = $link->getTotalViews();
 		}
 
 		/**

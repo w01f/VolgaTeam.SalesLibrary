@@ -42,11 +42,12 @@
 					$.SalesPortal.LogHelper.write({
 						type: 'Link',
 						subType: 'Rate',
+						linkId: linkData.id,
 						data: {
-							Name: linkData.name,
-							File: linkData.file,
-							'Original Format': linkData.format,
-							'Rate': value
+							name: linkData.name,
+							file: linkData.file,
+							'originalFormat': linkData.format,
+							'rate': value
 						}
 					});
 				});

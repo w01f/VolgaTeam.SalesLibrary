@@ -48,17 +48,18 @@
 			{
 				$.SalesPortal.SalesLibraryExtensions.switchDocumentPage($.supersized.vars.current_slide);
 				<? if ($previewData->config->enableLogging): ?>
-					$.SalesPortal.LogHelper.write({
-						type: 'Link',
-						subType: 'Preview Page',
-						data: {
-							Name: viewerData.name,
-							File: viewerData.fileName,
-							'Original Format': viewerData.format,
-							Format: 'png',
-							Mode: 'Fullscreen'
-						}
-					});
+				$.SalesPortal.LogHelper.write({
+					type: 'Link',
+					subType: 'Preview Page',
+					linkId: viewerData.linkId,
+					data: {
+						name: viewerData.name,
+						file: viewerData.fileName,
+						originalFormat: viewerData.format,
+						format: 'png',
+						mode: 'Fullscreen'
+					}
+				});
 				<?endif;?>
 			},
 			slides: [			// Slideshow Images

@@ -88,7 +88,7 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col col-xs-12 text-left">
+				<div class="col col-xs-8 text-left">
 					<? if ($data->config->enableRating): ?>
 						<div id="user-link-rate-container">
 							<img class="total-rate" src="" style="height:16px"/>
@@ -97,6 +97,11 @@
 						</div>
 					<? endif; ?>
 				</div>
+				<? if ($data->totalViews > 0): ?>
+					<div class="col col-xs-4 <? echo !$data->config->enableRating ? 'col-xs-offset-8 ' : ''; ?>text-right">
+						<div class="text-label">Views: <? echo $data->totalViews; ?></div>
+					</div>
+				<? endif; ?>
 			</div>
 		</div>
 		<? if ($data->config->allowSave): ?>

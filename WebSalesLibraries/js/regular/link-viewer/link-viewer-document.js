@@ -35,7 +35,8 @@
 								logObject: {
 									name: viewerData.name,
 									fileName: viewerData.fileName,
-									format: viewerData.format
+									format: viewerData.format,
+									linkId: viewerData.linkId
 								},
 								formContent: dialogContent
 							});
@@ -197,11 +198,12 @@
 							$.SalesPortal.LogHelper.write({
 								type: 'Link',
 								subType: 'Preview Page',
+								linkId: viewerData.linkId,
 								data: {
-									Name: viewerData.name,
-									File: viewerData.fileName,
-									'Original Format': viewerData.format,
-									Format: 'png'
+									name: viewerData.name,
+									file: viewerData.fileName,
+									originalFormat: viewerData.format,
+									format: 'png'
 								}
 							});
 						}
@@ -224,11 +226,12 @@
 						$.SalesPortal.LogHelper.write({
 							type: 'Link',
 							subType: 'Preview Activity',
+							linkId: viewerData.linkId,
 							data: {
-								Name: viewerData.name,
-								File: viewerData.fileName,
-								'Original Format': viewerData.format,
-								Format: 'png'
+								name: viewerData.name,
+								file: viewerData.fileName,
+								originalFormat: viewerData.format,
+								format: 'png'
 							}
 						});
 					}

@@ -17,10 +17,11 @@
 				$.SalesPortal.LogHelper.write({
 					type: 'Link',
 					subType: 'Preview Modal',
+					linkId: viewerData.linkId,
 					data: {
-						Name: viewerData.name,
-						File: viewerData.fileName,
-						'Original Format': viewerData.format
+						name: viewerData.name,
+						file: viewerData.fileName,
+						originalFormat: viewerData.format
 					}
 				});
 			}
@@ -44,7 +45,8 @@
 								logObject: {
 									name: viewerData.name,
 									fileName: viewerData.fileName,
-									format: viewerData.format
+									format: viewerData.format,
+									linkId: viewerData.linkId
 								},
 								formContent: dialogContent
 							});
@@ -80,10 +82,11 @@
 							$.SalesPortal.LogHelper.write({
 								type: 'Link',
 								subType: 'Play',
+								linkId: viewerData.linkId,
 								data: {
-									Name: viewerData.name,
-									File: viewerData.fileName,
-									'Original Format': viewerData.format
+									name: viewerData.name,
+									file: viewerData.fileName,
+									originalFormat: viewerData.format
 								}
 							});
 						});

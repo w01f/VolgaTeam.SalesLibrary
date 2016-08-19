@@ -24,26 +24,4 @@
 		{
 			return '{{statistic_detail}}';
 		}
-
-		/**
-		 * @param $activityId string
-		 * @param $activityData array
-		 */
-		public static function WriteActivityDetail($activityId, $activityData)
-		{
-			if (isset($activityData) && is_array($activityData))
-			{
-				foreach ($activityData as $tag => $data)
-				{
-					if (isset($data))
-					{
-						$detailRecord = new StatisticDetailRecord();
-						$detailRecord->id_activity = $activityId;
-						$detailRecord->tag = $tag;
-						$detailRecord->data = trim(str_replace('<br>', '', str_replace('</b>', '', str_replace('<b>', '', $data))));
-						$detailRecord->save();
-					}
-				}
-			}
-		}
 	}

@@ -22,15 +22,17 @@
 				var actionName = logAction.data('log-action');
 				var actionData = logObject.isInitialized ?
 				{
-					Name: logObject.name,
-					File: logObject.fileName,
-					'Original Format': logObject.format
+					name: logObject.name,
+					file: logObject.fileName,
+					originalFormat: logObject.format
 				} :
 				{};
 
 				$.SalesPortal.LogHelper.write({
 					type: actionGroupName != undefined ? actionGroupName : actionDefaultGroupName,
 					subType: actionName != undefined ? actionName : actionDefaultName,
+					linkId: logObject.linkId != undefined ? logObject.linkId : undefined,
+					qpageId: logObject.qpageId != undefined ? logObject.qpageId : undefined,
 					data: actionData
 				});
 			};
@@ -43,6 +45,9 @@
 		this.name = undefined;
 		this.fileName = undefined;
 		this.format = undefined;
+
+		this.linkId = undefined;
+		this.qpageId = undefined;
 
 		if (source != undefined)
 		{

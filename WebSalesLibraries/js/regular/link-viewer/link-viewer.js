@@ -33,10 +33,11 @@
 							$.SalesPortal.LogHelper.write({
 								type: 'Link',
 								subType: 'Preview Options',
+								linkId: parameters.data.linkId,
 								data: {
-									Name: parameters.data.name,
-									File: parameters.data.fileName,
-									'Original Format': parameters.format
+									name: parameters.data.name,
+									file: parameters.data.fileName,
+									originalFormat: parameters.format
 								}
 							});
 
@@ -124,10 +125,11 @@
 							$.SalesPortal.LogHelper.write({
 								type: 'Link',
 								subType: 'Context Menu',
+								linkId: parameters.data.linkId,
 								data: {
-									Name: parameters.data.name,
-									File: parameters.data.fileName,
-									'Original Format': parameters.format
+									name: parameters.data.name,
+									file: parameters.data.fileName,
+									originalFormat: parameters.format
 								}
 							});
 						if (parameters.content != '')
@@ -142,7 +144,8 @@
 									logObject: {
 										name: parameters.data.name,
 										fileName: parameters.data.fileName,
-										format: parameters.format
+										format: parameters.format,
+										linkId: parameters.data.linkId
 									},
 									formContent: menu
 								});
@@ -247,10 +250,11 @@
 							$.SalesPortal.LogHelper.write({
 								type: 'Link',
 								subType: 'Preview Options',
+								linkId: parameters.data.linkId,
 								data: {
-									Name: parameters.data.name,
-									File: parameters.data.fileName,
-									'Original Format': parameters.format
+									name: parameters.data.name,
+									file: parameters.data.fileName,
+									originalFormat: parameters.format
 								}
 							});
 
@@ -346,7 +350,8 @@
 									logObject: {
 										name: viewerData.name,
 										fileName: viewerData.fileName,
-										format: viewerData.format
+										format: viewerData.format,
+										linkId: viewerData.linkId
 									},
 									formContent: dialogContent
 								});
@@ -410,10 +415,11 @@
 					$.SalesPortal.LogHelper.write({
 						type: 'Link',
 						subType: 'Favorites Activity',
+
 						data: {
-							Name: title,
-							File: fileName,
-							'Original Format': fileType
+							name: title,
+							file: fileName,
+							originalFormat: fileType
 						}
 					});
 
@@ -422,7 +428,8 @@
 						logObject: {
 							name: title,
 							fileName: fileName,
-							format: fileType
+							format: fileType,
+							linkId: linkId
 						},
 						formContent: favoritesDialogObject.content
 					});

@@ -7,15 +7,14 @@ select
   count(distinct su.login) as user_count
 from tbl_statistic_activity sact
   join tbl_statistic_user su on su.id_activity = sact.id
-  left join tbl_statistic_detail sdet_i on sdet_i.id_activity = sact.id and sdet_i.tag = 'ID'
-  left join tbl_quiz q on q.unique_id = sdet_i.data
+  left join tbl_statistic_data sdet_i on sdet_i.id_activity = sact.id and sdet_i.data like '%"id": %'
+  left join tbl_quiz q on sdet_i.data like concat('%"id": "',q.unique_id,'"%')
   left join tbl_quiz_group qg on qg.id = q.id_group
   left join tbl_quiz_group tlg on tlg.id = qg.id_top_level
   join tbl_user u on u.login = su.login
   left join tbl_user_group ug on ug.id_user = u.id
   left join tbl_group g on g.id = ug.id_group
-where sact.type = 'Quizzes'
-      and sact.sub_type='Quiz Passed'
+where sact.type = 'Quizzes' and sact.sub_type='Quiz Passed'
       and sact.date_time >= start_date and sact.date_time <= end_date
 group by
   g.name,

@@ -163,10 +163,11 @@
 				$.SalesPortal.LogHelper.write({
 					type: 'Link',
 					subType: 'Open',
+					linkId: activityData.id,
 					data: {
-						Name: activityData.title,
-						File: activityData.fileName,
-						'Original Format': activityData.format
+						name: activityData.title,
+						file: activityData.fileName,
+						originalFormat: activityData.format
 					}
 				});
 			});

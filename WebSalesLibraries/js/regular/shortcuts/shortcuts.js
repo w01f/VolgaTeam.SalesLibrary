@@ -19,7 +19,7 @@
 					type: 'Navigation',
 					subType: 'MenuBar Group',
 					data: {
-						File: activityData.title
+						file: activityData.title
 					}
 				});
 			});

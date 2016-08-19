@@ -158,7 +158,7 @@
 				type: 'Quizzes',
 				subType: 'Quiz Selected',
 				data: {
-					Name: itemName
+					name: itemName
 				}
 			});
 		};
@@ -486,8 +486,8 @@
 				type: 'Quizzes',
 				subType: 'Quiz Finished',
 				data: {
-					Name: extendedTitle,
-					ID: uniqueId
+					name: extendedTitle,
+					id: uniqueId
 				}
 			});
 		};
@@ -500,8 +500,8 @@
 				type: 'Quizzes',
 				subType: 'Quiz Started',
 				data: {
-					Name: extendedTitle,
-					ID: uniqueId
+					name: extendedTitle,
+					id: uniqueId
 				}
 			});
 		};

@@ -14,7 +14,8 @@
 				logObject: {
 					name: viewerData.name,
 					fileName: viewerData.fileName,
-					format: viewerData.format
+					format: viewerData.format,
+					linkId: viewerData.linkId
 				},
 				formContent: dialogContent
 			});

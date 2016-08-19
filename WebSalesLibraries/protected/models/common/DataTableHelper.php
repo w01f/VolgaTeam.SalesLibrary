@@ -49,6 +49,11 @@
 
 					$record['tag'] = $linkRecord['tag'];
 
+					$record['views'] = array(
+						'value' => intval($linkRecord['total_views']),
+						'display' => $linkRecord['total_views'] == 0 ? '' : $linkRecord['total_views']
+					);
+
 					$record['rate'] = array(
 						'value' => $linkRecord['rate'],
 						'image' => LinkRateRecord::getStarImage(floatval($linkRecord['rate']))
@@ -78,7 +83,7 @@
 					$record['extended_properties'] = $extendedProperties;
 
 					$record['isHyperlink'] = $type == 8 && $extendedProperties['forcePreview'] == true;
-					if($record['isHyperlink'])
+					if ($record['isHyperlink'])
 					{
 
 					}

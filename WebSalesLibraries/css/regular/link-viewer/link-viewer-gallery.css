@@ -27,7 +27,13 @@
 }
 
 .link-viewer .gallery-control-buttons .text-button,
+.link-viewer .gallery-control-buttons .text-label,
 .link-viewer .gallery-control-buttons .bootstrap-select
 {
 	margin-top: 20px;
+}
+
+.link-viewer .gallery-control-buttons .text-label
+{
+	line-height: 40px;
 }

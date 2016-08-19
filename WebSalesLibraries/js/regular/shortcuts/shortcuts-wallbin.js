@@ -123,7 +123,7 @@
 				subType: 'Page Open',
 				data: {
 					Name: libraryData.options.headerTitle,
-					PageName: pageData.name
+					pageName: pageData.name
 				}
 			});
 		};

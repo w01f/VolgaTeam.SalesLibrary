@@ -114,9 +114,10 @@
 						$.SalesPortal.LogHelper.write({
 							type: 'Shortcut Tile',
 							subType: activityData.shortcut,
+							linkId: activityData.id,
 							data: {
-								File: activityData.file,
-								Operation: activityData.title
+								file: activityData.file,
+								operation: activityData.title
 							}
 						});
 					}

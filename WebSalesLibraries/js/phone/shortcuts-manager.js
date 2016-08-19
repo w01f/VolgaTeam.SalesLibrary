@@ -161,7 +161,7 @@
 				type: 'Shortcut Tile',
 				subType: activityData.action,
 				data: {
-					File: activityData.title
+					file: activityData.title
 				}
 			});
 		};

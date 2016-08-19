@@ -332,7 +332,10 @@
 							max(link.format) as format,
 							max(link.settings) as extended_properties,
 							(select (round(avg(lr.value)*2)/2) as value from tbl_link_rate lr where lr.id_link=link.id) as rate,
-							glcat.tag as tag';
+							glcat.tag as tag,
+							(select count(s_l.id)
+								from tbl_statistic_link s_l
+								where s_l.id_link = link.id) as total_views';
 			$joinText = "glcat.id_link=link.id";
 			$whereText = $contentCondition .
 				" and (" . $baseLinksCondition .

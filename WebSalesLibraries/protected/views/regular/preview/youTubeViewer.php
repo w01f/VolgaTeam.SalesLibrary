@@ -82,7 +82,7 @@
 				</div>
 			</div>
 			<div class="row row-buttons gallery-control-buttons">
-				<div class="col col-xs-5 text-left">
+				<div class="col col-xs-3 text-left">
 					<? if ($data->config->enableRating): ?>
 						<div id="user-link-rate-container">
 							<img class="total-rate" src="" style="height:16px"/>
@@ -91,7 +91,12 @@
 						</div>
 					<? endif; ?>
 				</div>
-				<div class="col col-xs-1 col-xs-offset-5 text-center">
+				<? if ($data->totalViews > 0): ?>
+					<div class="col col-xs-2 <? echo !$data->config->enableRating ? 'col-xs-offset-2 ' : ''; ?>text-center">
+						<div class="text-label">Views: <? echo $data->totalViews; ?></div>
+					</div>
+				<? endif; ?>
+				<div class="col col-xs-1  <? echo $data->totalViews == 0 ? 'col-xs-offset-7 ' : 'col-xs-offset-5 '; ?>text-center">
 					<div class="text-button log-action open-modal" data-log-action="Preview Modal">
 						<span>75%</span>
 					</div>

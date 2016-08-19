@@ -17,7 +17,7 @@
 				$loginModel->attributes = $attributes;
 				if ($loginModel->validate() && $loginModel->login())
 				{
-					StatisticActivityRecord::WriteActivity('System', 'Login', null);
+					StatisticActivityRecord::writeCommonActivity('System', 'Login', null);
 					if ($loginModel->needToResetPassword)
 					{
 						$this->redirect($this->createUrl('auth/changePassword', array(
@@ -36,7 +36,7 @@
 
 		public function actionLogout()
 		{
-			StatisticActivityRecord::WriteActivity('System', 'Logout', null);
+			StatisticActivityRecord::writeCommonActivity('System', 'Logout', null);
 			Yii::app()->user->logout();
 			Yii::app()->end();
 		}
@@ -59,7 +59,7 @@
 				$changePasswordModel->rememberMe = $attributes['rememberMe'];
 				if ($changePasswordModel->validate() && $changePasswordModel->changePassword())
 				{
-					StatisticActivityRecord::WriteActivity('System', 'Login', null);
+					StatisticActivityRecord::writeCommonActivity('System', 'Login', null);
 					$this->redirect(Yii::app()->user->returnUrl);
 				}
 				else

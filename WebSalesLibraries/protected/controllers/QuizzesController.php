@@ -73,9 +73,9 @@
 				$quizSet = $quiz->saveResults($userId, $results);
 				$quizResults = QuizResultRecord::getQuizResult($userId, $quiz, $quizSet);
 				if ($quizResults->successful)
-					StatisticActivityRecord::WriteActivity('Quizzes', 'Quiz Passed', array('Name' => $quiz->subtitle . ' - ' . $quiz->title . ' - ' . $quiz->date, 'ID' => $quiz->uniqId, 'Score' => $quizResults->score . '%'));
+					StatisticActivityRecord::writeCommonActivity('Quizzes', 'Quiz Passed', array('name' => $quiz->subtitle . ' - ' . $quiz->title . ' - ' . $quiz->date, 'id' => $quiz->uniqId, 'score' => $quizResults->score . '%'));
 				else
-					StatisticActivityRecord::WriteActivity('Quizzes', 'Quiz Failed', array('Name' => $quiz->subtitle . ' - ' . $quiz->title . ' - ' . $quiz->date, 'ID' => $quiz->uniqId, 'Score' => $quizResults->score . '%'));
+					StatisticActivityRecord::writeCommonActivity('Quizzes', 'Quiz Failed', array('name' => $quiz->subtitle . ' - ' . $quiz->title . ' - ' . $quiz->date, 'id' => $quiz->uniqId, 'score' => $quizResults->score . '%'));
 				if ($quiz->sendScoreToAdmin && isset($quiz->adminEmails) && isset(Yii::app()->user->email))
 				{
 					$message = Yii::app()->email;
