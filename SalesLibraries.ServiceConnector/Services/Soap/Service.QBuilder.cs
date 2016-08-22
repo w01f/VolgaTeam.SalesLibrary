@@ -20,7 +20,7 @@ namespace SalesLibraries.ServiceConnector.Services.Soap
 			}
 		}
 
-		public QPageModel[] GetAllPages(out string message)
+		public QPageModel[] GetAllPages(DateTime startDate, DateTime endDate, out string message)
 		{
 			message = string.Empty;
 			var pages = new List<QPageModel>();
@@ -31,7 +31,16 @@ namespace SalesLibraries.ServiceConnector.Services.Soap
 				{
 					var sessionKey = client.getSessionKey(Login, Password);
 					if (!string.IsNullOrEmpty(sessionKey))
-						pages.AddRange(client.getAllPages(sessionKey) ?? new QPageModel[] { });
+					{
+						while (startDate < endDate)
+						{
+							var nextDate = startDate.AddDays(30);
+							if (nextDate > endDate)
+								nextDate = endDate;
+							pages.AddRange(client.getAllPages(sessionKey, startDate.ToString("MM/dd/yyyy hh:mm tt"), nextDate.ToString("MM/dd/yyyy hh:mm tt")) ?? new QPageModel[] { });
+							startDate = nextDate;
+						}
+					}
 					else
 						message = "Couldn't complete operation.\nLogin or password are not correct.";
 				}

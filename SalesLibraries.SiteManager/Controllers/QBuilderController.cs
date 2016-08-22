@@ -36,7 +36,9 @@ namespace SalesLibraries.SiteManager.Controllers
 				if (!NeedToUpdate)
 					MainController.Instance.ChangeSite(FormMain.Instance.comboBoxEditQBuilderSite.EditValue as SoapServiceConnection);
 			};
-			FormMain.Instance.buttonItemQBuilderRefresh.Click += buttonItemQBuilderRefresh_Click;
+
+			FormMain.Instance.buttonItemQBuilder.Click += buttonItemQBuilderExport_Click;
+
 			MainController.Instance.SiteChanged += (sender, args) =>
 													   {
 														   if (IsActive)
@@ -64,9 +66,9 @@ namespace SalesLibraries.SiteManager.Controllers
 		}
 		#endregion
 
-		private void buttonItemQBuilderRefresh_Click(object sender, EventArgs e)
+		private void buttonItemQBuilderExport_Click(object sender, EventArgs e)
 		{
-			QPagesManagerControl.RefreshData(true);
+			QPagesManagerControl.ExportData();
 		}
 	}
 }

@@ -13,6 +13,8 @@ namespace SalesLibraries.ServiceConnector.QBuilderService
 
 		public string Type => isEmail ? "Email" : "quickSITE";
 
+		public string SecurityType => isRestricted ? "protected" : "public";
+
 		public string[] GroupNameList
 		{
 			get
@@ -42,6 +44,8 @@ namespace SalesLibraries.ServiceConnector.QBuilderService
 				return null;
 			}
 		}
+
+		public int? TotalViews => totalViews > 0 ? (int?)totalViews : null;
 
 		public string Details
 		{

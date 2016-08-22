@@ -1,13 +1,21 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.Drawing;
+using System.Drawing.Printing;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid;
+using DevExpress.XtraPrinting;
 using SalesLibraries.SiteManager.BusinessClasses;
 using SalesLibraries.SiteManager.ToolForms;
 using SalesLibraries.ServiceConnector.QBuilderService;
+using SalesLibraries.SiteManager.ToolClasses;
+using BorderSide = DevExpress.XtraPrinting.BorderSide;
 
 namespace SalesLibraries.SiteManager.PresentationClasses.QBuilder
 {
@@ -25,6 +33,11 @@ namespace SalesLibraries.SiteManager.PresentationClasses.QBuilder
 			_filterControl = new QPagesFilter();
 			_filterControl.FilterChanged += (o, e) => ApplyData();
 			pnCustomFilter.Controls.Add(_filterControl);
+
+			var now = DateTime.Now;
+			dateEditStart.DateTime = new DateTime(now.Year, now.Month, now.Day, 0, 0, 0);
+			now = now.AddDays(1);
+			dateEditEnd.DateTime = new DateTime(now.Year, now.Month, now.Day, 0, 0, 0);
 		}
 
 		public void RefreshData(bool showMessages)
@@ -39,7 +52,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.QBuilder
 					Enabled = false;
 					form.laProgress.Text = "Loading data...";
 					form.TopMost = true;
-					var thread = new Thread(() => _records.AddRange(WebSiteManager.Instance.SelectedSite.GetAllPages(out message)));
+					var thread = new Thread(() => _records.AddRange(WebSiteManager.Instance.SelectedSite.GetAllPages(dateEditStart.DateTime, dateEditEnd.DateTime, out message)));
 					form.Show();
 					thread.Start();
 					while (thread.IsAlive)
@@ -56,7 +69,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.QBuilder
 			}
 			else
 			{
-				var thread = new Thread(() => _records.AddRange(WebSiteManager.Instance.SelectedSite.GetAllPages(out message)));
+				var thread = new Thread(() => _records.AddRange(WebSiteManager.Instance.SelectedSite.GetAllPages(dateEditStart.DateTime, dateEditEnd.DateTime, out message)));
 				thread.Start();
 				while (thread.IsAlive)
 				{
@@ -110,6 +123,82 @@ namespace SalesLibraries.SiteManager.PresentationClasses.QBuilder
 				return;
 			}
 			RefreshData(false);
+		}
+
+		public void ExportData()
+		{
+			using (var dialog = new SaveFileDialog())
+			{
+				dialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+				dialog.FileName = string.Format("quickSITES & Emails({0}).xlsx", DateTime.Now.ToString("MMddyy-hmmtt"));
+				dialog.Filter = "Excel files|*.xlsx";
+				dialog.Title = "Export quickSites & Emails";
+				if (dialog.ShowDialog() != DialogResult.OK) return;
+				var options = new XlsxExportOptions();
+				options.SheetName = Path.GetFileNameWithoutExtension(dialog.FileName);
+				options.TextExportMode = TextExportMode.Text;
+				options.ExportHyperlinks = true;
+				options.ShowGridLines = true;
+				options.ExportMode = XlsxExportMode.SingleFile;
+
+				var parts = new Dictionary<string, string>();
+				using (var form = new FormProgress())
+				{
+					FormMain.Instance.ribbonControl.Enabled = false;
+					Enabled = false;
+					form.laProgress.Text = "Exporting data...";
+					form.TopMost = true;
+					form.Show();
+					Application.DoEvents();
+					var thread = new Thread(() =>
+					{
+						var tempFile = Path.Combine(Path.GetTempPath(), String.Format("{0}.xlsx", Guid.NewGuid()));
+						BeginInvoke(new Action(() =>
+						{
+							using (var printingSystem = new PrintingSystem())
+							{
+								var printLink = new PrintableComponentLink
+								{
+									Landscape = true,
+									PaperKind = PaperKind.A4,
+									Component = gridControlRecords
+								};
+								printLink.CreateReportHeaderArea += OnCreateReportHeaderArea;
+								printLink.CreateDocument(printingSystem);
+								printingSystem.ExportToXlsx(tempFile, options);
+							}
+						}));
+						parts.Add("quickSITES & Emails", tempFile);
+						ActivityExportHelper.ExportCommonData(dialog.FileName, parts);
+					});
+					thread.Start();
+					while (thread.IsAlive)
+					{
+						Thread.Sleep(100);
+						Application.DoEvents();
+					}
+					form.Close();
+					Enabled = true;
+					FormMain.Instance.ribbonControl.Enabled = true;
+				}
+
+				if (File.Exists(dialog.FileName))
+					Process.Start(dialog.FileName);
+			}
+		}
+
+		private void OnCreateReportHeaderArea(object sender, CreateAreaEventArgs e)
+		{
+			var reportHeader = string.Format("quickSITES & Emails: {0} - {1}", dateEditStart.DateTime.ToString("MM/dd/yy"), dateEditEnd.DateTime.AddDays(-1).ToString("MM/dd/yy"));
+			e.Graph.StringFormat = new BrickStringFormat(StringAlignment.Center);
+			e.Graph.Font = new Font("Arial", 12, FontStyle.Bold);
+			var rec = new RectangleF(0, 0, e.Graph.ClientPageSize.Width, 50);
+			e.Graph.DrawString(reportHeader, Color.Black, rec, BorderSide.None);
+		}
+
+		private void buttonXLoadData_Click(object sender, EventArgs e)
+		{
+			RefreshData(true);
 		}
 
 		private void repositoryItemHyperLinkEditPages_ButtonClick(object sender, ButtonPressedEventArgs e)

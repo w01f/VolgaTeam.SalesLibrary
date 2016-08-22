@@ -39,15 +39,23 @@
 			this.gridColumnPagesUrl = new DevExpress.XtraGrid.Columns.GridColumn();
 			this.repositoryItemHyperLinkEditPages = new DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit();
 			this.gridColumnPagesType = new DevExpress.XtraGrid.Columns.GridColumn();
+			this.gridColumnPagesSecurityType = new DevExpress.XtraGrid.Columns.GridColumn();
 			this.gridColumnPagesDateCreate = new DevExpress.XtraGrid.Columns.GridColumn();
 			this.repositoryItemDateEditPages = new DevExpress.XtraEditors.Repository.RepositoryItemDateEdit();
 			this.gridColumnPagesDateExpiration = new DevExpress.XtraGrid.Columns.GridColumn();
 			this.gridColumnPagesActions = new DevExpress.XtraGrid.Columns.GridColumn();
 			this.repositoryItemButtonEditPagesActions = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
+			this.gridColumnTotalViews = new DevExpress.XtraGrid.Columns.GridColumn();
 			this.gridColumnPinCode = new DevExpress.XtraGrid.Columns.GridColumn();
 			this.splitContainerControlData = new DevExpress.XtraEditors.SplitContainerControl();
 			this.pnCustomFilter = new System.Windows.Forms.Panel();
-			this.gridColumnTotalViews = new DevExpress.XtraGrid.Columns.GridColumn();
+			this.pnFilterButtons = new System.Windows.Forms.Panel();
+			this.buttonXLoadData = new DevComponents.DotNetBar.ButtonX();
+			this.gbDate = new System.Windows.Forms.GroupBox();
+			this.labelControlDateEnd = new DevExpress.XtraEditors.LabelControl();
+			this.dateEditEnd = new DevExpress.XtraEditors.DateEdit();
+			this.labelControlDateStart = new DevExpress.XtraEditors.LabelControl();
+			this.dateEditStart = new DevExpress.XtraEditors.DateEdit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.gridControlRecords)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.gridViewRecords)).BeginInit();
@@ -57,6 +65,12 @@
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditPagesActions)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainerControlData)).BeginInit();
 			this.splitContainerControlData.SuspendLayout();
+			this.pnFilterButtons.SuspendLayout();
+			this.gbDate.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.dateEditEnd.Properties.CalendarTimeProperties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.dateEditEnd.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.dateEditStart.Properties.CalendarTimeProperties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.dateEditStart.Properties)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// styleController
@@ -84,7 +98,7 @@
             this.repositoryItemDateEditPages,
             this.repositoryItemButtonEditPagesActions,
             this.repositoryItemHyperLinkEditPages});
-			this.gridControlRecords.Size = new System.Drawing.Size(676, 483);
+			this.gridControlRecords.Size = new System.Drawing.Size(669, 483);
 			this.gridControlRecords.TabIndex = 3;
 			this.gridControlRecords.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewRecords});
@@ -112,6 +126,7 @@
             this.gridColumnPagesGroup,
             this.gridColumnPagesUrl,
             this.gridColumnPagesType,
+            this.gridColumnPagesSecurityType,
             this.gridColumnPagesDateCreate,
             this.gridColumnPagesDateExpiration,
             this.gridColumnPagesActions,
@@ -137,6 +152,8 @@
 			this.gridViewRecords.PreviewIndent = 5;
 			this.gridViewRecords.RowHeight = 35;
 			this.gridViewRecords.RowSeparatorHeight = 5;
+			this.gridViewRecords.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
+            new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.gridColumnPagesDateCreate, DevExpress.Data.ColumnSortOrder.Descending)});
 			// 
 			// gridColumnPagesName
 			// 
@@ -146,8 +163,8 @@
 			this.gridColumnPagesName.OptionsColumn.AllowEdit = false;
 			this.gridColumnPagesName.OptionsColumn.ReadOnly = true;
 			this.gridColumnPagesName.Visible = true;
-			this.gridColumnPagesName.VisibleIndex = 2;
-			this.gridColumnPagesName.Width = 83;
+			this.gridColumnPagesName.VisibleIndex = 3;
+			this.gridColumnPagesName.Width = 54;
 			// 
 			// gridColumnPagesGroup
 			// 
@@ -157,8 +174,8 @@
 			this.gridColumnPagesGroup.OptionsColumn.AllowEdit = false;
 			this.gridColumnPagesGroup.OptionsColumn.ReadOnly = true;
 			this.gridColumnPagesGroup.Visible = true;
-			this.gridColumnPagesGroup.VisibleIndex = 3;
-			this.gridColumnPagesGroup.Width = 58;
+			this.gridColumnPagesGroup.VisibleIndex = 4;
+			this.gridColumnPagesGroup.Width = 38;
 			// 
 			// gridColumnPagesUrl
 			// 
@@ -169,7 +186,7 @@
 			this.gridColumnPagesUrl.ShowButtonMode = DevExpress.XtraGrid.Views.Base.ShowButtonModeEnum.ShowAlways;
 			this.gridColumnPagesUrl.Visible = true;
 			this.gridColumnPagesUrl.VisibleIndex = 0;
-			this.gridColumnPagesUrl.Width = 97;
+			this.gridColumnPagesUrl.Width = 63;
 			// 
 			// repositoryItemHyperLinkEditPages
 			// 
@@ -193,6 +210,18 @@
 			this.gridColumnPagesType.VisibleIndex = 1;
 			this.gridColumnPagesType.Width = 91;
 			// 
+			// gridColumnPagesSecurityType
+			// 
+			this.gridColumnPagesSecurityType.Caption = "Security";
+			this.gridColumnPagesSecurityType.FieldName = "SecurityType";
+			this.gridColumnPagesSecurityType.Name = "gridColumnPagesSecurityType";
+			this.gridColumnPagesSecurityType.OptionsColumn.AllowEdit = false;
+			this.gridColumnPagesSecurityType.OptionsColumn.FixedWidth = true;
+			this.gridColumnPagesSecurityType.OptionsColumn.ReadOnly = true;
+			this.gridColumnPagesSecurityType.Visible = true;
+			this.gridColumnPagesSecurityType.VisibleIndex = 2;
+			this.gridColumnPagesSecurityType.Width = 100;
+			// 
 			// gridColumnPagesDateCreate
 			// 
 			this.gridColumnPagesDateCreate.Caption = "Created";
@@ -203,7 +232,7 @@
 			this.gridColumnPagesDateCreate.OptionsColumn.FixedWidth = true;
 			this.gridColumnPagesDateCreate.OptionsColumn.ReadOnly = true;
 			this.gridColumnPagesDateCreate.Visible = true;
-			this.gridColumnPagesDateCreate.VisibleIndex = 4;
+			this.gridColumnPagesDateCreate.VisibleIndex = 5;
 			this.gridColumnPagesDateCreate.Width = 93;
 			// 
 			// repositoryItemDateEditPages
@@ -229,7 +258,7 @@
 			this.gridColumnPagesDateExpiration.OptionsColumn.FixedWidth = true;
 			this.gridColumnPagesDateExpiration.OptionsColumn.ReadOnly = true;
 			this.gridColumnPagesDateExpiration.Visible = true;
-			this.gridColumnPagesDateExpiration.VisibleIndex = 5;
+			this.gridColumnPagesDateExpiration.VisibleIndex = 6;
 			this.gridColumnPagesDateExpiration.Width = 88;
 			// 
 			// gridColumnPagesActions
@@ -242,7 +271,7 @@
 			this.gridColumnPagesActions.OptionsColumn.ShowCaption = false;
 			this.gridColumnPagesActions.ShowButtonMode = DevExpress.XtraGrid.Views.Base.ShowButtonModeEnum.ShowAlways;
 			this.gridColumnPagesActions.Visible = true;
-			this.gridColumnPagesActions.VisibleIndex = 8;
+			this.gridColumnPagesActions.VisibleIndex = 9;
 			this.gridColumnPagesActions.Width = 45;
 			// 
 			// repositoryItemButtonEditPagesActions
@@ -254,6 +283,18 @@
 			this.repositoryItemButtonEditPagesActions.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
 			this.repositoryItemButtonEditPagesActions.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.repositoryItemButtonEditPagesActions_ButtonClick);
 			// 
+			// gridColumnTotalViews
+			// 
+			this.gridColumnTotalViews.Caption = "Views";
+			this.gridColumnTotalViews.FieldName = "TotalViews";
+			this.gridColumnTotalViews.Name = "gridColumnTotalViews";
+			this.gridColumnTotalViews.OptionsColumn.AllowEdit = false;
+			this.gridColumnTotalViews.OptionsColumn.FixedWidth = true;
+			this.gridColumnTotalViews.OptionsColumn.ReadOnly = true;
+			this.gridColumnTotalViews.Visible = true;
+			this.gridColumnTotalViews.VisibleIndex = 8;
+			this.gridColumnTotalViews.Width = 60;
+			// 
 			// gridColumnPinCode
 			// 
 			this.gridColumnPinCode.Caption = "Pin";
@@ -263,7 +304,7 @@
 			this.gridColumnPinCode.OptionsColumn.FixedWidth = true;
 			this.gridColumnPinCode.OptionsColumn.ReadOnly = true;
 			this.gridColumnPinCode.Visible = true;
-			this.gridColumnPinCode.VisibleIndex = 6;
+			this.gridColumnPinCode.VisibleIndex = 7;
 			this.gridColumnPinCode.Width = 60;
 			// 
 			// splitContainerControlData
@@ -272,6 +313,8 @@
 			this.splitContainerControlData.Location = new System.Drawing.Point(0, 0);
 			this.splitContainerControlData.Name = "splitContainerControlData";
 			this.splitContainerControlData.Panel1.Controls.Add(this.pnCustomFilter);
+			this.splitContainerControlData.Panel1.Controls.Add(this.pnFilterButtons);
+			this.splitContainerControlData.Panel1.Controls.Add(this.gbDate);
 			this.splitContainerControlData.Panel1.MinSize = 230;
 			this.splitContainerControlData.Panel1.Text = "Panel1";
 			this.splitContainerControlData.Panel2.Controls.Add(this.gridControlRecords);
@@ -283,22 +326,103 @@
 			// pnCustomFilter
 			// 
 			this.pnCustomFilter.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.pnCustomFilter.Location = new System.Drawing.Point(0, 0);
+			this.pnCustomFilter.Location = new System.Drawing.Point(0, 137);
 			this.pnCustomFilter.Name = "pnCustomFilter";
-			this.pnCustomFilter.Size = new System.Drawing.Size(230, 483);
+			this.pnCustomFilter.Size = new System.Drawing.Size(230, 346);
 			this.pnCustomFilter.TabIndex = 21;
 			// 
-			// gridColumnTotalViews
+			// pnFilterButtons
 			// 
-			this.gridColumnTotalViews.Caption = "Views";
-			this.gridColumnTotalViews.FieldName = "totalViews";
-			this.gridColumnTotalViews.Name = "gridColumnTotalViews";
-			this.gridColumnTotalViews.OptionsColumn.AllowEdit = false;
-			this.gridColumnTotalViews.OptionsColumn.FixedWidth = true;
-			this.gridColumnTotalViews.OptionsColumn.ReadOnly = true;
-			this.gridColumnTotalViews.Visible = true;
-			this.gridColumnTotalViews.VisibleIndex = 7;
-			this.gridColumnTotalViews.Width = 60;
+			this.pnFilterButtons.Controls.Add(this.buttonXLoadData);
+			this.pnFilterButtons.Dock = System.Windows.Forms.DockStyle.Top;
+			this.pnFilterButtons.Location = new System.Drawing.Point(0, 98);
+			this.pnFilterButtons.Name = "pnFilterButtons";
+			this.pnFilterButtons.Size = new System.Drawing.Size(230, 39);
+			this.pnFilterButtons.TabIndex = 23;
+			// 
+			// buttonXLoadData
+			// 
+			this.buttonXLoadData.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXLoadData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonXLoadData.CausesValidation = false;
+			this.buttonXLoadData.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXLoadData.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.buttonXLoadData.Location = new System.Drawing.Point(7, 5);
+			this.buttonXLoadData.Name = "buttonXLoadData";
+			this.buttonXLoadData.Size = new System.Drawing.Size(216, 27);
+			this.buttonXLoadData.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXLoadData.TabIndex = 16;
+			this.buttonXLoadData.Text = "Load Data";
+			this.buttonXLoadData.TextColor = System.Drawing.Color.Black;
+			this.buttonXLoadData.Click += new System.EventHandler(this.buttonXLoadData_Click);
+			// 
+			// gbDate
+			// 
+			this.gbDate.Controls.Add(this.labelControlDateEnd);
+			this.gbDate.Controls.Add(this.dateEditEnd);
+			this.gbDate.Controls.Add(this.labelControlDateStart);
+			this.gbDate.Controls.Add(this.dateEditStart);
+			this.gbDate.Dock = System.Windows.Forms.DockStyle.Top;
+			this.gbDate.Location = new System.Drawing.Point(0, 0);
+			this.gbDate.Name = "gbDate";
+			this.gbDate.Size = new System.Drawing.Size(230, 98);
+			this.gbDate.TabIndex = 22;
+			this.gbDate.TabStop = false;
+			this.gbDate.Text = "Date range";
+			// 
+			// labelControlDateEnd
+			// 
+			this.labelControlDateEnd.Location = new System.Drawing.Point(10, 63);
+			this.labelControlDateEnd.Name = "labelControlDateEnd";
+			this.labelControlDateEnd.Size = new System.Drawing.Size(58, 16);
+			this.labelControlDateEnd.StyleController = this.styleController;
+			this.labelControlDateEnd.TabIndex = 3;
+			this.labelControlDateEnd.Text = "End Date:";
+			// 
+			// dateEditEnd
+			// 
+			this.dateEditEnd.EditValue = null;
+			this.dateEditEnd.Location = new System.Drawing.Point(100, 60);
+			this.dateEditEnd.Name = "dateEditEnd";
+			this.dateEditEnd.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+			this.dateEditEnd.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+			this.dateEditEnd.Properties.DisplayFormat.FormatString = "MM/dd/yyyy";
+			this.dateEditEnd.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
+			this.dateEditEnd.Properties.EditFormat.FormatString = "MM/dd/yyyy";
+			this.dateEditEnd.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Custom;
+			this.dateEditEnd.Size = new System.Drawing.Size(123, 22);
+			this.dateEditEnd.StyleController = this.styleController;
+			this.dateEditEnd.TabIndex = 2;
+			// 
+			// labelControlDateStart
+			// 
+			this.labelControlDateStart.Location = new System.Drawing.Point(10, 24);
+			this.labelControlDateStart.Name = "labelControlDateStart";
+			this.labelControlDateStart.Size = new System.Drawing.Size(63, 16);
+			this.labelControlDateStart.StyleController = this.styleController;
+			this.labelControlDateStart.TabIndex = 1;
+			this.labelControlDateStart.Text = "Start Date:";
+			// 
+			// dateEditStart
+			// 
+			this.dateEditStart.EditValue = null;
+			this.dateEditStart.Location = new System.Drawing.Point(100, 21);
+			this.dateEditStart.Name = "dateEditStart";
+			this.dateEditStart.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+			this.dateEditStart.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+			this.dateEditStart.Properties.DisplayFormat.FormatString = "MM/dd/yyyy";
+			this.dateEditStart.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
+			this.dateEditStart.Properties.EditFormat.FormatString = "MM/dd/yyyy";
+			this.dateEditStart.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Custom;
+			this.dateEditStart.Size = new System.Drawing.Size(123, 22);
+			this.dateEditStart.StyleController = this.styleController;
+			this.dateEditStart.TabIndex = 0;
 			// 
 			// QPagesManagerControl
 			// 
@@ -318,6 +442,13 @@
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditPagesActions)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainerControlData)).EndInit();
 			this.splitContainerControlData.ResumeLayout(false);
+			this.pnFilterButtons.ResumeLayout(false);
+			this.gbDate.ResumeLayout(false);
+			this.gbDate.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.dateEditEnd.Properties.CalendarTimeProperties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.dateEditEnd.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.dateEditStart.Properties.CalendarTimeProperties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.dateEditStart.Properties)).EndInit();
 			this.ResumeLayout(false);
 
         }
@@ -341,5 +472,13 @@
 		private DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit repositoryItemHyperLinkEditPages;
 		private DevExpress.XtraGrid.Columns.GridColumn gridColumnPinCode;
 		private DevExpress.XtraGrid.Columns.GridColumn gridColumnTotalViews;
+		private System.Windows.Forms.Panel pnFilterButtons;
+		private DevComponents.DotNetBar.ButtonX buttonXLoadData;
+		private System.Windows.Forms.GroupBox gbDate;
+		private DevExpress.XtraEditors.LabelControl labelControlDateEnd;
+		private DevExpress.XtraEditors.DateEdit dateEditEnd;
+		private DevExpress.XtraEditors.LabelControl labelControlDateStart;
+		private DevExpress.XtraEditors.DateEdit dateEditStart;
+		private DevExpress.XtraGrid.Columns.GridColumn gridColumnPagesSecurityType;
 	}
 }

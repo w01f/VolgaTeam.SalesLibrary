@@ -84,6 +84,7 @@
     <Compile Include="Models\Rest\Wallbin\Settings\LibraryPageSettings.cs" />
     <Compile Include="Models\Rest\Wallbin\Settings\LibrarySettings.cs" />
     <Compile Include="Models\Soap\Statistic\FileActivityReportModel.cs" />
+    <Compile Include="Models\Soap\WallbinContentService\QPageLinkSettings.cs" />
     <Compile Include="Services\Rest\RestExtension.cs" />
     <Compile Include="Models\Rest\Common\ResponseResult.cs" />
     <Compile Include="Models\Rest\Common\RestError.cs" />

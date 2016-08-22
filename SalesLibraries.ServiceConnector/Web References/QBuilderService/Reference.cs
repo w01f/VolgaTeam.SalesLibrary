@@ -87,24 +87,28 @@ namespace SalesLibraries.ServiceConnector.QBuilderService {
         /// <remarks/>
         [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:QBuilderControllerwsdl#getAllPages", RequestNamespace="urn:QBuilderControllerwsdl", ResponseNamespace="urn:QBuilderControllerwsdl")]
         [return: System.Xml.Serialization.SoapElementAttribute("return")]
-        public QPageModel[] getAllPages(string sessionKey) {
+        public QPageModel[] getAllPages(string sessionKey, string dateStart, string dateEnd) {
             object[] results = this.Invoke("getAllPages", new object[] {
-                        sessionKey});
+                        sessionKey,
+                        dateStart,
+                        dateEnd});
             return ((QPageModel[])(results[0]));
         }
         
         /// <remarks/>
-        public void getAllPagesAsync(string sessionKey) {
-            this.getAllPagesAsync(sessionKey, null);
+        public void getAllPagesAsync(string sessionKey, string dateStart, string dateEnd) {
+            this.getAllPagesAsync(sessionKey, dateStart, dateEnd, null);
         }
         
         /// <remarks/>
-        public void getAllPagesAsync(string sessionKey, object userState) {
+        public void getAllPagesAsync(string sessionKey, string dateStart, string dateEnd, object userState) {
             if ((this.getAllPagesOperationCompleted == null)) {
                 this.getAllPagesOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetAllPagesOperationCompleted);
             }
             this.InvokeAsync("getAllPages", new object[] {
-                        sessionKey}, this.getAllPagesOperationCompleted, userState);
+                        sessionKey,
+                        dateStart,
+                        dateEnd}, this.getAllPagesOperationCompleted, userState);
         }
         
         private void OngetAllPagesOperationCompleted(object arg) {
@@ -249,7 +253,7 @@ namespace SalesLibraries.ServiceConnector.QBuilderService {
         
         private string groupsField;
         
-        private string totalViewsField;
+        private int totalViewsField;
         
         /// <remarks/>
         public string id {
@@ -482,7 +486,7 @@ namespace SalesLibraries.ServiceConnector.QBuilderService {
         }
         
         /// <remarks/>
-        public string totalViews {
+        public int totalViews {
             get {
                 return this.totalViewsField;
             }

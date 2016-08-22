@@ -801,6 +801,8 @@ namespace SalesLibraries.ServiceConnector.StatisticService {
         
         private string fileNameField;
         
+        private string libraryField;
+        
         private int activityCountField;
         
         private string groupField;
@@ -812,6 +814,16 @@ namespace SalesLibraries.ServiceConnector.StatisticService {
             }
             set {
                 this.fileNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string library {
+            get {
+                return this.libraryField;
+            }
+            set {
+                this.libraryField = value;
             }
         }
         

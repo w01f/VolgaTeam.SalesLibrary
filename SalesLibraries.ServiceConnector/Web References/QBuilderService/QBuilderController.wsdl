@@ -34,7 +34,7 @@
           <xsd:element name="lastName" type="xsd:string" />
           <xsd:element name="email" type="xsd:string" />
           <xsd:element name="groups" type="xsd:string" />
-          <xsd:element name="totalViews" type="xsd:string" />
+          <xsd:element name="totalViews" type="xsd:int" />
         </xsd:all>
       </xsd:complexType>
       <xsd:complexType name="QPageLinkModelArray">
@@ -67,6 +67,8 @@
   </wsdl:types>
   <wsdl:message name="getAllPagesIn">
     <wsdl:part name="sessionKey" type="xsd:string" />
+    <wsdl:part name="dateStart" type="xsd:string" />
+    <wsdl:part name="dateEnd" type="xsd:string" />
   </wsdl:message>
   <wsdl:message name="getAllPagesOut">
     <wsdl:part name="return" type="tns:QPageModelArray" />
