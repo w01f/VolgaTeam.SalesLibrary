@@ -104,6 +104,7 @@
     <Compile Include="Helpers\SettingsSerializeHelper.cs" />
     <Compile Include="Helpers\SlideFormatParser.cs" />
     <Compile Include="Helpers\TabPageConfigurator.cs" />
+    <Compile Include="Helpers\UrlParseHelper.cs" />
     <Compile Include="Helpers\Utils.cs" />
     <Compile Include="Dictionaries\WidgetList.cs" />
     <Compile Include="Helpers\WinAPIHelper.cs" />
