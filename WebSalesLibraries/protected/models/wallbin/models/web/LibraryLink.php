@@ -21,7 +21,7 @@
 		public $order;
 		public $type;
 		/**
-		 * @var \BaseLinkSettings|\VideoLinkSettings|\HyperLinkSettings|\PowerPointLinkSettings
+		 * @var \BaseLinkSettings|\VideoLinkSettings|\HyperLinkSettings|\PowerPointLinkSettings|\AppLinkSettings|\InternalLinkSettings|\QPageLinkSettings|
 		 */
 		public $extendedProperties;
 		/**
@@ -147,7 +147,7 @@
 			$this->isLineBreak = $this->originalFormat == 'line break' || ($this->type == 6 && isset($this->lineBreakProperties));
 			$this->isAppLink = $this->type == 15;
 
-			$this->isDirectUrl = $this->type == 8 && $this->extendedProperties->forcePreview;
+			$this->isDirectUrl = ($this->type == 8 || $this->type == 17) && $this->extendedProperties->forcePreview;
 			$this->isExternalUrl = false;
 			if ($this->isDirectUrl)
 			{
@@ -384,7 +384,18 @@
 		 */
 		public function getTotalViews()
 		{
-			return \StatisticLinkRecord::model()->count('id_link=?', array($this->id));
+			/** @var int $totalLinkViews */
+			$totalLinkViews = \StatisticLinkRecord::model()->count('id_link=?', array($this->id));
+			if ($this->originalFormat == 'quicksite')
+			{
+				/** @var  $quickSiteSettings \QPageLinkSettings */
+				$quickSiteSettings = $this->extendedProperties;
+				/** @var int $quickSiteViews */
+				$quickSiteViews = \StatisticQPageRecord::model()->count('id_qpage=?', array($quickSiteSettings->qpageId));
+				if ($quickSiteViews > 0)
+					$totalLinkViews += $quickSiteViews;
+			}
+			return $totalLinkViews;
 		}
 
 		/**

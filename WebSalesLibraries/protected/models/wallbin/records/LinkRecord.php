@@ -84,13 +84,7 @@
 				$linkRecord->file_relative_path = $link['fileRelativePath'];
 				$linkRecord->file_name = $link['fileName'];
 				$linkRecord->file_extension = $link['fileExtension'];
-				$linkRecord->file_date = $link['originalFormat'] == 'url' ||
-				$link['originalFormat'] == 'youtube' ||
-				$link['originalFormat'] == 'quicksite' ||
-				$link['originalFormat'] == 'internal' ||
-				$link['originalFormat'] == 'app' ?
-					date(Yii::app()->params['mysqlDateFormat'], strtotime($link['dateAdd'])) :
-					date(Yii::app()->params['mysqlDateFormat'], strtotime($link['fileDate']));
+				$linkRecord->file_date = date(Yii::app()->params['mysqlDateFormat'], strtotime($link['fileDate']));
 				$linkRecord->file_size = $link['fileSize'];
 				$linkRecord->format = $link['originalFormat'];
 				$linkRecord->order = $link['order'];
@@ -123,16 +117,26 @@
 			if (array_key_exists('extendedProperties', $link) && isset($link['extendedProperties']))
 				foreach ($link['extendedProperties'] as $key => $value)
 				{
-					if ($key == 'assignedUsers' && isset($value))
-						LinkWhiteListRecord::updateData($link['id'], $link['libraryId'], $value);
-					else if ($key == 'deniedUsers' && isset($value))
-						LinkBlackListRecord::updateData($link['id'], $link['libraryId'], $value);
-					else if ($key == 'isRestricted')
-						$linkRecord->is_restricted = CJSON::decode($value);
-					else if ($key == 'no_share')
-						$linkRecord->no_share = CJSON::decode($value);
-					else
-						$linkRecord->settings = CJSON::encode($link['extendedProperties']);
+					if (!isset($value)) continue;
+					switch ($key)
+					{
+						case 'assignedUsers':
+							LinkWhiteListRecord::updateData($link['id'], $link['libraryId'], $value);
+							break;
+						case 'deniedUsers':
+							LinkBlackListRecord::updateData($link['id'], $link['libraryId'], $value);
+							break;
+						case 'isRestricted':
+							$linkRecord->is_restricted = CJSON::decode($value);
+							break;
+						case 'no_share':
+							$linkRecord->no_share = CJSON::decode($value);
+							break;
+						case 'qpageId':
+							LinkQPageRecord::addLinkQPageRelation($linkRecord->id, $value);
+							break;
+					}
+					$linkRecord->settings = CJSON::encode($link['extendedProperties']);
 				}
 
 			if (array_key_exists('lineBreakProperties', $link) && isset($link['lineBreakProperties']))
@@ -152,26 +156,6 @@
 						LinkCategoryRecord::updateData($category);
 
 			$linkRecord->save();
-		}
-
-		/**
-		 * @param $libraryId
-		 */
-		public static function clearByLibrary($libraryId)
-		{
-			self::model()->deleteAll('id_library=?', array($libraryId));
-		}
-
-		/**
-		 * @param $folderId
-		 * @param $linkIds
-		 */
-		public static function clearByIds($folderId, $linkIds)
-		{
-			if (isset($linkIds))
-				Yii::app()->db->createCommand()->delete('tbl_link', "id_folder = '" . $folderId . "' and id not in ('" . implode("','", $linkIds) . "')");
-			else
-				Yii::app()->db->createCommand()->delete('tbl_link', "id_folder = '" . $folderId . "'");
 		}
 
 		/**
@@ -398,5 +382,43 @@
 		public static function getLinksCountByLibrary($libraryId)
 		{
 			return self::model()->count('id_library=? and type<>6', array($libraryId));
+		}
+
+		/**
+		 * @param $libraryId
+		 */
+		public static function clearByLibrary($libraryId)
+		{
+			self::model()->deleteAll('id_library=?', array($libraryId));
+		}
+
+		/**
+		 * @param string $folderId
+		 * @param array $excludeLinkIds
+		 */
+		public static function clearByIds($folderId, $excludeLinkIds)
+		{
+			if (count($excludeLinkIds) > 0)
+				Yii::app()->db->createCommand()->delete('tbl_link', "id_folder = '" . $folderId . "' and id not in ('" . implode("','", $excludeLinkIds) . "')");
+			else
+				Yii::app()->db->createCommand()->delete('tbl_link', "id_folder = '" . $folderId . "'");
+		}
+
+		public static function clearDeadLinkData()
+		{
+			/** @var $liveLinkRecords LinkRecord[] */
+			$liveLinkRecords = self::model()->findAll();
+			$liveLinkIds = array();
+			if (isset($liveLinkRecords))
+				foreach ($liveLinkRecords as $linkRecord)
+					$liveLinkIds[] = $linkRecord->id;
+			if (count($liveLinkIds) > 0)
+			{
+				FavoritesLinkRecord::clearByLinkIds($liveLinkIds);
+				UserLinkCartRecord::clearByLinkIds($liveLinkIds);
+				QPageLinkRecord::clearByLinkIds($liveLinkIds);
+				LinkRateRecord::clearByLinkIds($liveLinkIds);
+				LinkQPageRecord::clearByLinkIds($liveLinkIds);
+			}
 		}
 	}

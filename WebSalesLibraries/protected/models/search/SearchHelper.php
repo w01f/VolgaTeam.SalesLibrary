@@ -333,9 +333,20 @@
 							max(link.settings) as extended_properties,
 							(select (round(avg(lr.value)*2)/2) as value from tbl_link_rate lr where lr.id_link=link.id) as rate,
 							glcat.tag as tag,
-							(select count(s_l.id)
-								from tbl_statistic_link s_l
-								where s_l.id_link = link.id) as total_views';
+						   (select sum(aggr.link_views) from
+				           (select
+				              s_l.id_link as link_id,
+				              count(s_l.id) as link_views
+				            from tbl_statistic_link s_l
+				            group by s_l.id_link
+				            union
+				            select
+				              l_q.id_link as link_id,
+				              count(s_q.id) as link_views
+				            from tbl_statistic_qpage s_q
+				              join tbl_link_qpage l_q on l_q.id_qpage = s_q.id_qpage
+				            group by l_q.id_link
+				           ) aggr where aggr.link_id=link.id) as total_views';
 			$joinText = "glcat.id_link=link.id";
 			$whereText = $contentCondition .
 				" and (" . $baseLinksCondition .

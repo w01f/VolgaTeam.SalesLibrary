@@ -122,7 +122,7 @@
 		 */
 		public $groups;
 		/**
-		 * @var string int
+		 * @var int totalViews
 		 * @soap
 		 */
 		public $totalViews;

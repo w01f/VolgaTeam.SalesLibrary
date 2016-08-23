@@ -366,7 +366,8 @@
 			/** @var $pageRecord QPageRecord */
 			$pageRecord = self::model()->findByPk($pageId);
 			$ownerId = $pageRecord->id_owner;
-			QPageLinkRecord::model()->deleteAll('id_page=?', array($pageId));
+			self::model()->deleteAll('id_page=?', array($pageId));
+			StatisticQPageRecord::model()->deleteAll('id_qpage=?', array($pageId));
 			$pageRecord->delete();
 			self::rebuildPageList($ownerId, -1);
 		}

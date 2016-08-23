@@ -27,9 +27,9 @@
 		}
 
 		/**
-		 * @param $linkId
-		 * @param $libraryId
-		 * @param $users
+		 * @param string $linkId
+		 * @param string $libraryId
+		 * @param array $users
 		 */
 		public static function updateData($linkId, $libraryId, $users)
 		{

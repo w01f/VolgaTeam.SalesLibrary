@@ -13,6 +13,7 @@
 			$rootFolderPath = Yii::app()->params['appRoot'] . DIRECTORY_SEPARATOR . Yii::app()->params['librariesRoot'] . DIRECTORY_SEPARATOR . 'Libraries';
 			/** @var $rootFolder DirectoryIterator[] */
 			$rootFolder = new DirectoryIterator($rootFolderPath);
+			$libraryIds = array();
 			foreach ($rootFolder as $libraryFolder)
 			{
 				if ($libraryFolder->isDir() && !$libraryFolder->isDot())
@@ -20,7 +21,7 @@
 					$libraryName = $libraryFolder->getBasename();
 
 					$originalStoragePath = $libraryFolder->getPathname();
-					$originalStorageLink =Yii::app()->baseUrl . '/' . Yii::app()->params['librariesRoot'] . '/Libraries/' . $libraryFolder->getBasename();
+					$originalStorageLink = Yii::app()->baseUrl . '/' . Yii::app()->params['librariesRoot'] . '/Libraries/' . $libraryFolder->getBasename();
 
 					$storagePath = $originalStoragePath;
 					$storageLink = $originalStorageLink;
@@ -73,22 +74,19 @@
 				}
 			}
 
-			if (isset($libraryIds))
-			{
-				/** @var $libraryRecords LinkRecord[] */
-				$libraryRecords = LibraryRecord::model()->findAll();
-				foreach ($libraryRecords as $libraryRecord)
-					if (!in_array($libraryRecord->id, $libraryIds))
-					{
-						UserLibraryRecord::model()->deleteAll('id_library = ?', array($libraryRecord->id));
-						LibraryRecord::clearData($libraryRecord->id);
-						LinkRecord::clearByLibrary($libraryRecord->id);
-						FolderRecord::clearByLibrary($libraryRecord->id);
-						LibraryPageRecord::clearByLibrary($libraryRecord->id);
-						$libraryRecord->delete();
-						Yii::app()->cacheDB->flush();
-					}
-			}
+			/** @var $libraryRecords LinkRecord[] */
+			$libraryRecords = LibraryRecord::model()->findAll();
+			foreach ($libraryRecords as $libraryRecord)
+				if (!in_array($libraryRecord->id, $libraryIds))
+				{
+					UserLibraryRecord::model()->deleteAll('id_library = ?', array($libraryRecord->id));
+					LibraryRecord::clearData($libraryRecord->id);
+					LinkRecord::clearByLibrary($libraryRecord->id);
+					FolderRecord::clearByLibrary($libraryRecord->id);
+					LibraryPageRecord::clearByLibrary($libraryRecord->id);
+					$libraryRecord->delete();
+					Yii::app()->cacheDB->flush();
+				}
 
 			$categoriesPath = Yii::app()->params['appRoot'] . DIRECTORY_SEPARATOR . 'SDSearch.xml';
 			$maxTags = 10;
@@ -167,18 +165,7 @@
 			if (file_exists($groupTemplateFilePath))
 				GroupTemplateRecord::updateData(file($groupTemplateFilePath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES));
 
-			/** @var $liveLinkRecords LinkRecord[]*/
-			$liveLinkRecords = LinkRecord::model()->findAll();
-			if (isset($liveLinkRecords))
-				foreach ($liveLinkRecords as $linkRecord)
-					$liveLinkIds[] = $linkRecord->id;
-			if (isset($liveLinkIds))
-			{
-				FavoritesLinkRecord::clearByLinkIds($liveLinkIds);
-				UserLinkCartRecord::clearByLinkIds($liveLinkIds);
-				QPageLinkRecord::clearByLinkIds($liveLinkIds);
-				LinkRateRecord::clearByLinkIds($liveLinkIds);
-			}
+			LinkRecord::clearDeadLinkData();
 
 			echo "Job completed.\n";
 		}

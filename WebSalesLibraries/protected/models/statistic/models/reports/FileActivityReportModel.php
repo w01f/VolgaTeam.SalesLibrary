@@ -11,6 +11,11 @@
 		 */
 		public $fileName;
 		/**
+		 * @var string library
+		 * @soap
+		 */
+		public $library;
+		/**
 		 * @var int activityCount
 		 * @soap
 		 */

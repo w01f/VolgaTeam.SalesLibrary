@@ -37,4 +37,12 @@
 				$activityRecord->save();
 			}
 		}
+
+		/**
+		 * @param array $liveLinkIds
+		 */
+		public static function clearByLinkIds($liveLinkIds)
+		{
+			Yii::app()->db->createCommand()->delete('tbl_statistic_link', "id_link not in ('" . implode("','", $liveLinkIds) . "')");
+		}
 	}

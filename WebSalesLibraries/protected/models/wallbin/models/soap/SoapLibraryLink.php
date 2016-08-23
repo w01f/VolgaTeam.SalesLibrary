@@ -1,4 +1,5 @@
 <?
+
 	/**
 	 * Class SoapLibraryLink
 	 */
@@ -70,7 +71,7 @@
 		 */
 		public $type;
 		/**
-		 * @var BaseLinkSettings|VideoLinkSettings|HyperLinkSettings|PowerPointLinkSettings
+		 * @var BaseLinkSettings|VideoLinkSettings|HyperLinkSettings|PowerPointLinkSettings|AppLinkSettings|InternalLinkPreviewData|QPageLinkSettings
 		 * @soap
 		 */
 		public $extendedProperties;

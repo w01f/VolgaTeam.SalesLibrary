@@ -25,7 +25,7 @@
 
 		/**
 		 * @param $activityId string
-		 * @param $linkId string
+		 * @param $qpageId string
 		 */
 		public static function writeQPageActivity($activityId, $qpageId)
 		{

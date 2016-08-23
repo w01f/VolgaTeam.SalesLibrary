@@ -7,7 +7,14 @@
      data-log-action="Preview Activity">
 	<? if ($data->config->allowSave): ?>
 		<div class="row tab-above-header" id="tab-above-header-save">
-			<span class="header-text">Download or Save this file…</span>
+			<div class="col col-xs-10 text-left">
+				<span class="header-text">Download or Save this file…</span>
+			</div>
+			<? if ($data->totalViews > 0): ?>
+				<div class="col col-xs-2 text-right">
+					<span class="header-text">Views: <? echo $data->totalViews; ?></span>
+				</div>
+			<? endif; ?>
 		</div>
 	<? endif; ?>
 	<? if ($data->config->allowEmail): ?>

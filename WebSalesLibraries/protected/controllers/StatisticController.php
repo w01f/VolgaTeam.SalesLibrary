@@ -317,6 +317,7 @@
 					$reportRecord = new FileActivityReportModel();
 					$reportRecord->group = $resultRecord['group_name'];
 					$reportRecord->fileName = str_replace('\/', '/', $resultRecord['file_name']);
+					$reportRecord->library = isset($resultRecord['lib_name']) && $resultRecord['lib_name'] != '' ? $resultRecord['lib_name'] : 'URL';
 					$reportRecord->activityCount = $resultRecord['action_count'];
 					$reportRecords[] = $reportRecord;
 				}

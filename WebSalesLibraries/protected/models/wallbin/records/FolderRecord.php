@@ -138,7 +138,7 @@
 
 			BannerRecord::updateData($folder['banner']);
 
-			$linkIds = null;
+			$linkIds = array();
 			foreach ($folder['files'] as $link)
 			{
 				LinkRecord::updateData($link, $libraryRootPath);
@@ -156,19 +156,19 @@
 		}
 
 		/**
-		 * @param $pageId
-		 * @param $folderIds
+		 * @param string $pageId
+		 * @param array $excludeFolderIds
 		 */
-		public static function clearByIds($pageId, $folderIds)
+		public static function clearByIds($pageId, $excludeFolderIds)
 		{
 			/** @var $folderRecords FolderRecord[] */
-			if (isset($folderIds))
-				$folderRecords = self::model()->findAll("id_page = '" . $pageId . "' and id not in ('" . implode("','", $folderIds) . "')");
+			if (count($excludeFolderIds) > 0)
+				$folderRecords = self::model()->findAll("id_page = '" . $pageId . "' and id not in ('" . implode("','", $excludeFolderIds) . "')");
 			else
 				$folderRecords = self::model()->findAll("id_page = '" . $pageId . "'");
 			foreach ($folderRecords as $folderRecord)
 			{
-				LinkRecord::clearByIds($folderRecord->id, null);
+				LinkRecord::clearByIds($folderRecord->id, array());
 				$folderRecord->delete();
 			}
 		}

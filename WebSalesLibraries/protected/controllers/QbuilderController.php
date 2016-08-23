@@ -303,14 +303,18 @@
 
 		/**
 		 * @param string $sessionKey
+		 * @param string $dateStart
+		 * @param string $dateEnd
 		 * @return QPageModel[]
 		 * @soap
 		 */
-		public function getAllPages($sessionKey)
+		public function getAllPages($sessionKey, $dateStart, $dateEnd)
 		{
 			if ($this->authenticateBySession($sessionKey))
 			{
-				$command = Yii::app()->db->createCommand("call sp_get_all_qpages()");
+				$command = Yii::app()->db->createCommand("call sp_get_all_qpages(:start_date,:end_date)");
+				$command->bindValue(":start_date", date(Yii::app()->params['mysqlDateFormat'], strtotime($dateStart)), PDO::PARAM_STR);
+				$command->bindValue(":end_date", date(Yii::app()->params['mysqlDateFormat'], strtotime($dateEnd)), PDO::PARAM_STR);
 				$pageRecords = $command->queryAll();
 				foreach ($pageRecords as $pageRecord)
 				{
@@ -326,6 +330,7 @@
 					$page->firstName = $pageRecord['first_name'];
 					$page->lastName = $pageRecord['last_name'];
 					$page->email = $pageRecord['email'];
+					$page->isRestricted = $pageRecord['restricted'];
 					$page->groups = $pageRecord['groups'];
 					$page->totalViews = $pageRecord['total_views'];
 					$pages[] = $page;
@@ -349,4 +354,5 @@
 					QPageRecord::deletePage($pageId);
 		}
 		/////////////////Service Part///////////////////////////
+
 	}

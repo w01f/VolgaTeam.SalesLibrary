@@ -3,9 +3,11 @@ CREATE PROCEDURE sp_get_file_activity_report(in start_date datetime,in end_date 
 select
   l.file_name as file_name,
   count(slink.id_link) as action_count,
+  lib.name as lib_name,
   g.name as group_name
 from tbl_statistic_link slink
    join tbl_link l on l.id = slink.id_link
+   join tbl_library lib on lib.id = l.id_library
    join tbl_statistic_activity as sact on sact.id = slink.id_activity
    join tbl_statistic_user as su on su.id_activity = sact.id
    join tbl_user as u on u.login = su.login
@@ -21,6 +23,7 @@ union
 select
   substring(sd.data, locate('"url":', sd.data)+7, locate('"', substring(sd.data, locate('"url":', sd.data) + 7)) - 1) as file_name,
   count(qpage.id_qpage) as action_count,
+  ''  as lib_name,
   g.name as group_name
 from tbl_statistic_qpage qpage
   join tbl_qpage qp on qp.id = qpage.id_qpage

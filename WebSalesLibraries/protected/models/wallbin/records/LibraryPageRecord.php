@@ -65,7 +65,7 @@
 				echo 'Page ' . ($needToCreate ? 'created' : 'updated') . ': ' . $page['name'] . "\n";
 			}
 
-			$folderIds = null;
+			$folderIds = array();
 			foreach ($page['folders'] as $folder)
 			{
 				FolderRecord::updateDataFromSoap($folder, $libraryRootPath);
@@ -101,7 +101,7 @@
 					$libraryPageRecord->save();
 					break;
 				case ChangeSet::ChangeTypeDelete:
-					FolderRecord::clearByIds($libraryPage->id, null);
+					FolderRecord::clearByIds($libraryPage->id, array());
 					self::model()->deleteByPk($libraryPage->id);
 					break;
 			}
@@ -130,18 +130,18 @@
 
 		/**
 		 * @param string $libraryId
-		 * @param array $pageIds
+		 * @param array $excludePageIds
 		 */
-		public static function clearByIds($libraryId, $pageIds)
+		public static function clearByIds($libraryId, $excludePageIds)
 		{
 			/** @var $pageRecords LibraryPageRecord[] */
-			if (isset($pageIds))
-				$pageRecords = self::model()->findAll("id_library = '" . $libraryId . "' and id not in ('" . implode("','", $pageIds) . "')");
+			if (count($excludePageIds) > 0)
+				$pageRecords = self::model()->findAll("id_library = '" . $libraryId . "' and id not in ('" . implode("','", $excludePageIds) . "')");
 			else
 				$pageRecords = self::model()->findAll("id_library = '" . $libraryId . "'");
 			foreach ($pageRecords as $pageRecord)
 			{
-				FolderRecord::clearByIds($pageRecord->id, null);
+				FolderRecord::clearByIds($pageRecord->id, array());
 				$pageRecord->delete();
 			}
 		}

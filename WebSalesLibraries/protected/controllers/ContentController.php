@@ -28,6 +28,7 @@
 						'AppLinkSettings' => 'AppLinkSettings',
 						'InternalLinkSettings' => 'InternalLinkSettings',
 						'ExcelLinkSettings' => 'ExcelLinkSettings',
+						'QPageLinkSettings' => 'QPageLinkSettings',
 						'LineBreak' => 'LineBreak',
 						'LinkCategory' => 'LinkCategory',
 						'LinkSuperFilter' => 'LinkSuperFilter',
@@ -100,6 +101,15 @@
 		 * @soap
 		 */
 		public function mockExcelLinkSettings($settings)
+		{
+
+		}
+
+		/**
+		 * @param QPageLinkSettings $settings
+		 * @soap
+		 */
+		public function mockQPageLinkSettings($settings)
 		{
 
 		}

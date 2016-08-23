@@ -97,7 +97,7 @@
 				foreach ($library['previewContainers'] as $previewContainer)
 					PreviewRecord::updateData($previewContainer);
 
-				$pageIds = null;
+				$pageIds = array();
 				foreach ($library['pages'] as $page)
 				{
 					LibraryPageRecord::updateDataFromSoap($page, $libraryRootPath);

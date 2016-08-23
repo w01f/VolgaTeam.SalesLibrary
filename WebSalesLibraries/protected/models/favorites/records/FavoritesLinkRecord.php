@@ -157,7 +157,7 @@
 		}
 
 		/**
-		 * @param $liveLinkIds
+		 * @param array $liveLinkIds
 		 */
 		public static function clearByLinkIds($liveLinkIds)
 		{
