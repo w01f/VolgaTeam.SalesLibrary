@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Data;
 using System.IO;
+using System.Linq;
 using Newtonsoft.Json;
 using SalesLibraries.Common.Configuration;
 using SalesLibraries.Common.Helpers;
@@ -37,7 +37,6 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 		}
 
 		private double _width;
-		private DateTime? _fakeFileDate;
 
 		public double Width
 		{
@@ -47,17 +46,6 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 				if (_width != value)
 					OnSettingsChanged();
 				_width = value;
-			}
-		}
-
-		public DateTime? FakeFileDate
-		{
-			get { return _fakeFileDate; }
-			set
-			{
-				if (_fakeFileDate != value)
-					OnSettingsChanged();
-				_fakeFileDate = value;
 			}
 		}
 
@@ -132,7 +120,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 			var parentFile = new FileInfo(ParentFileLink.FullPath);
 			var previewFolder = new DirectoryInfo(ContainerPath);
 			var needToUpdate = false;
-			if (!previewFolder.Exists)
+			if (!previewFolder.Exists || !previewFolder.GetFiles().Any())
 				needToUpdate = true;
 			else if (parentFile.LastWriteTime > previewFolder.CreationTime)
 				needToUpdate = true;

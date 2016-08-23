@@ -15,6 +15,7 @@
 		YouTube = 14,
 		AppLink = 15,
 		InternalLink = 16,
+		QPageLink = 17,
 		Other = 999
 	}
 }

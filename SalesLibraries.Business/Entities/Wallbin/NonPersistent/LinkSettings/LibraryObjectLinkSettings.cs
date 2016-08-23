@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using Newtonsoft.Json;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 
@@ -40,6 +41,18 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 				if (_isSpecialFormat != value)
 					OnSettingsChanged();
 				_isSpecialFormat = value;
+			}
+		}
+
+		private DateTime? _fakeFileDate;
+		public DateTime? FakeFileDate
+		{
+			get { return _fakeFileDate; }
+			set
+			{
+				if (_fakeFileDate != value)
+					OnSettingsChanged();
+				_fakeFileDate = value;
 			}
 		}
 

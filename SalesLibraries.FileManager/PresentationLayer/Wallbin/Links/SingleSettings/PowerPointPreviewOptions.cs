@@ -34,12 +34,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			_data = data;
 			if ((base.CreateGraphics()).DpiX > 96)
 			{
-				var styleControllerFont = new Font(styleController.Appearance.Font.FontFamily, styleController.Appearance.Font.Size - 2, styleController.Appearance.Font.Style);
-				styleController.AppearanceDisabled.Font = styleControllerFont;
-				styleController.AppearanceDropDown.Font = styleControllerFont;
-				styleController.AppearanceDropDownHeader.Font = styleControllerFont;
-				styleController.AppearanceFocused.Font = styleControllerFont;
-				styleController.AppearanceReadOnly.Font = styleControllerFont;
 				labelControlTitle.Font = new Font(labelControlTitle.Font.FontFamily, labelControlTitle.Font.Size - 2, labelControlTitle.Font.Style);
 			}
 		}
@@ -63,18 +57,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			}
 			else
 				buttonXOpenWV.Enabled = false;
-
-			checkEditFakeDate.Checked = ((PowerPointLinkSettings)_data.Settings).FakeFileDate.HasValue;
-			dateEditFakeDate.EditValue = ((PowerPointLinkSettings)_data.Settings).FakeFileDate;
 		}
 
-		public void SaveData()
-		{
-			((PowerPointLinkSettings)_data.Settings).FakeFileDate = checkEditFakeDate.Checked &&
-																	 dateEditFakeDate.EditValue != null
-				? (DateTime?)dateEditFakeDate.EditValue
-				: null;
-		}
+		public void SaveData() { }
 
 		private void buttonXRefreshPreview_Click(object sender, EventArgs e)
 		{
@@ -114,11 +99,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 				Process.Start(_data.PreviewContainerPath);
 			}
 			catch { }
-		}
-
-		private void checkEditFakeDate_CheckedChanged(object sender, EventArgs e)
-		{
-			dateEditFakeDate.Visible = checkEditFakeDate.Checked;
 		}
 	}
 }

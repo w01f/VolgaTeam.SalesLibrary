@@ -27,7 +27,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 
 		public QuickSiteLink()
 		{
-			Type = FileTypes.Url;
+			Type = FileTypes.QPageLink;
 		}
 
 		public static QuickSiteLink Create(QuickSiteLinkInfo linkInfo, LibraryFolder parentFolder)

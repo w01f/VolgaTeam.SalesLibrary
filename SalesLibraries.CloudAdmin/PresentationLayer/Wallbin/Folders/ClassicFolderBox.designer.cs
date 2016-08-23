@@ -67,6 +67,7 @@
 			this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
 			this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
 			this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
+			this.barSubItemLinkPropertiesAdvanced = new DevExpress.XtraBars.BarSubItem();
 			this.pnHeader.SuspendLayout();
 			this.pnHeaderBorder.SuspendLayout();
 			this.pnBorders.SuspendLayout();
@@ -141,7 +142,7 @@
 			this.toolStripMenuItemFolderDeleteTags,
 			this.toolStripMenuItemFolderSort});
 			this.contextMenuStripFolderProperties.Name = "contextMenuStripLinkProperties";
-			this.contextMenuStripFolderProperties.Size = new System.Drawing.Size(349, 236);
+			this.contextMenuStripFolderProperties.Size = new System.Drawing.Size(349, 214);
 			// 
 			// toolStripMenuItemFolderSettings
 			// 
@@ -229,16 +230,13 @@
 			// 
 			this.popupMenuLinkProperties.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
 			new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemLinkPropertiesOpenLink),
-			new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemLinkPropertiesFileLocation),
 			new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemLinkPropertiesDelete),
-			new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemLinkPropertiesRefreshPreview),
 			new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemLinkPropertiesLinkSettings, true),
 			new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemLinkPropertiesAdvancedSettings),
 			new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemLinkPropertiesTags),
-			new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemLinkPropertiesExpirationDate),
-			new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemLinkPropertiesSecurity),
 			new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemLinkPropertiesWidget),
 			new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemLinkPropertiesBanner),
+			new DevExpress.XtraBars.LinkPersistInfo(this.barSubItemLinkPropertiesAdvanced, true),
 			new DevExpress.XtraBars.LinkPersistInfo(this.barSubItemLinkPropertiesQuickTools, true)});
 			this.popupMenuLinkProperties.Manager = this.barManager;
 			this.popupMenuLinkProperties.Name = "popupMenuLinkProperties";
@@ -308,14 +306,14 @@
 			// 
 			// barButtonItemLinkPropertiesWidget
 			// 
-			this.barButtonItemLinkPropertiesWidget.Caption = "Widget";
+			this.barButtonItemLinkPropertiesWidget.Caption = "Widget  (tiny)";
 			this.barButtonItemLinkPropertiesWidget.Id = 9;
 			this.barButtonItemLinkPropertiesWidget.Name = "barButtonItemLinkPropertiesWidget";
 			this.barButtonItemLinkPropertiesWidget.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemLinkPropertiesWidget_ItemClick);
 			// 
 			// barButtonItemLinkPropertiesBanner
 			// 
-			this.barButtonItemLinkPropertiesBanner.Caption = "Banner";
+			this.barButtonItemLinkPropertiesBanner.Caption = "Banner  (BIG)";
 			this.barButtonItemLinkPropertiesBanner.Id = 10;
 			this.barButtonItemLinkPropertiesBanner.Name = "barButtonItemLinkPropertiesBanner";
 			this.barButtonItemLinkPropertiesBanner.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemLinkPropertiesBanner_ItemClick);
@@ -345,8 +343,9 @@
 			this.barButtonItemLinkPropertiesSecurity,
 			this.barButtonItemLinkPropertiesWidget,
 			this.barButtonItemLinkPropertiesBanner,
-			this.barSubItemLinkPropertiesQuickTools});
-			this.barManager.MaxItemId = 28;
+			this.barSubItemLinkPropertiesQuickTools,
+			this.barSubItemLinkPropertiesAdvanced});
+			this.barManager.MaxItemId = 30;
 			// 
 			// barDockControlTop
 			// 
@@ -375,6 +374,17 @@
 			this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
 			this.barDockControlRight.Location = new System.Drawing.Point(311, 0);
 			this.barDockControlRight.Size = new System.Drawing.Size(0, 308);
+			// 
+			// barSubItemLinkPropertiesAdvanced
+			// 
+			this.barSubItemLinkPropertiesAdvanced.Caption = "Advanced Options";
+			this.barSubItemLinkPropertiesAdvanced.Id = 29;
+			this.barSubItemLinkPropertiesAdvanced.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+			new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemLinkPropertiesFileLocation),
+			new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemLinkPropertiesRefreshPreview),
+			new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemLinkPropertiesExpirationDate),
+			new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemLinkPropertiesSecurity)});
+			this.barSubItemLinkPropertiesAdvanced.Name = "barSubItemLinkPropertiesAdvanced";
 			// 
 			// ClassicFolderBox
 			// 
@@ -441,5 +451,6 @@
 		private DevExpress.XtraBars.BarSubItem barSubItemLinkPropertiesQuickTools;
 		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemFolderCopy;
 		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemFolderMove;
+		private DevExpress.XtraBars.BarSubItem barSubItemLinkPropertiesAdvanced;
 	}
 }

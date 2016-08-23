@@ -223,9 +223,19 @@ namespace SalesLibraries.FileManager.Business.Services
 					break;
 				case FileTypes.Url:
 				case FileTypes.YouTube:
-					target.extendedProperties = new HyperLinkSettings();
-					((HyperLinkSettings)target.extendedProperties).ImportData(
-						(SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings.HyperLinkSettings)source.Settings);
+				case FileTypes.QPageLink:
+					if (source is QuickSiteLink)
+					{
+						target.extendedProperties = new QPageLinkSettings();
+						((QPageLinkSettings)target.extendedProperties).ImportData(
+							(QuickSiteSettings)source.Settings);
+					}
+					else
+					{
+						target.extendedProperties = new HyperLinkSettings();
+						((HyperLinkSettings)target.extendedProperties).ImportData(
+							(SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings.HyperLinkSettings)source.Settings);
+					}
 					break;
 				case FileTypes.AppLink:
 					target.extendedProperties = new AppLinkSettings();
@@ -244,11 +254,6 @@ namespace SalesLibraries.FileManager.Business.Services
 			}
 			target.extendedProperties.ImportData(source.Security);
 
-			if (source is LibraryObjectLink)
-			{
-				var sourceObject = (LibraryObjectLink)source;
-				target.fileRelativePath = sourceObject.WebPath;
-			}
 			if (source is LibraryFileLink)
 			{
 				var sourceFile = (LibraryFileLink)source;
@@ -258,6 +263,14 @@ namespace SalesLibraries.FileManager.Business.Services
 				target.isDead = sourceFile.CheckIfDead();
 				if (!sourceFile.IsFolder)
 					target.fileSize = (Int32)new FileInfo(sourceFile.FullPath).Length;
+			}
+			if (source is LibraryObjectLink)
+			{
+				var sourceObject = (LibraryObjectLink)source;
+				target.fileRelativePath = sourceObject.WebPath;
+				target.fileDate =
+					((LibraryObjectLinkSettings)sourceObject.Settings)
+						.FakeFileDate?.ToString("MM/dd/yyyy hh:mm:ss tt") ?? target.fileDate ?? target.dateAdd;
 			}
 			if (source is PreviewableLink)
 			{
@@ -278,13 +291,6 @@ namespace SalesLibraries.FileManager.Business.Services
 				target.lineBreakProperties.id = source.ExtId.ToString();
 				target.lineBreakProperties.libraryId = source.ParentLibrary.ExtId.ToString();
 				target.lineBreakProperties.ImportData((LineBreakSettings)source.Settings);
-			}
-			if (source is PowerPointLink)
-			{
-				var sourceFile = (PowerPointLink)source;
-				target.fileDate =
-					((SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings.PowerPointLinkSettings)sourceFile.Settings)
-						.FakeFileDate?.ToString("MM/dd/yyyy hh:mm:ss tt") ?? target.fileDate;
 			}
 
 			#region Tags
@@ -375,6 +381,16 @@ namespace SalesLibraries.FileManager.Business.Services
 			((IBaseLinkSettings)target).ImportData(source);
 			target.forcePreview = source.ForcePreview;
 		}
+
+		private static void ImportData(
+			this QPageLinkSettings target,
+			QuickSiteSettings source)
+		{
+			((IBaseLinkSettings)target).ImportData(source);
+			target.forcePreview = source.ForcePreview;
+			target.qpageId = source.QuickSiteId;
+		}
+
 
 		private static void ImportData(
 			this AppLinkSettings target,

@@ -267,6 +267,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 			BeforeSave();
 
 			var link = (BaseLibraryLink)Activator.CreateInstance(GetType());
+			link.ExtId = ExtId;
 			link.Type = Type;
 			link.Name = Name;
 			link.Order = Order;

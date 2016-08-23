@@ -38,6 +38,8 @@
 			this.checkEditBold = new DevExpress.XtraEditors.CheckEdit();
 			this.checkEditItalic = new DevExpress.XtraEditors.CheckEdit();
 			this.checkEditUnderlined = new DevExpress.XtraEditors.CheckEdit();
+			this.dateEditFakeDate = new DevExpress.XtraEditors.DateEdit();
+			this.checkEditFakeDate = new DevExpress.XtraEditors.CheckEdit();
 			((System.ComponentModel.ISupportInitialize)(this.colorEditLinkSpecialColor.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.buttonEditLinkSpecialFont.Properties)).BeginInit();
@@ -45,6 +47,9 @@
 			((System.ComponentModel.ISupportInitialize)(this.checkEditBold.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditItalic.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditUnderlined.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.dateEditFakeDate.Properties.CalendarTimeProperties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.dateEditFakeDate.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditFakeDate.Properties)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// colorEditLinkSpecialColor
@@ -190,8 +195,37 @@
 			this.checkEditUnderlined.TabIndex = 35;
 			this.checkEditUnderlined.CheckedChanged += new System.EventHandler(this.checkEditRegularStyle_CheckedChanged);
 			// 
+			// dateEditFakeDate
+			// 
+			this.dateEditFakeDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.dateEditFakeDate.EditValue = null;
+			this.dateEditFakeDate.Location = new System.Drawing.Point(33, 506);
+			this.dateEditFakeDate.Name = "dateEditFakeDate";
+			this.dateEditFakeDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+			this.dateEditFakeDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+			this.dateEditFakeDate.Size = new System.Drawing.Size(129, 22);
+			this.dateEditFakeDate.StyleController = this.styleController;
+			this.dateEditFakeDate.TabIndex = 37;
+			this.dateEditFakeDate.Visible = false;
+			// 
+			// checkEditFakeDate
+			// 
+			this.checkEditFakeDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.checkEditFakeDate.Location = new System.Drawing.Point(8, 507);
+			this.checkEditFakeDate.Name = "checkEditFakeDate";
+			this.checkEditFakeDate.Properties.AutoWidth = true;
+			this.checkEditFakeDate.Properties.Caption = "";
+			this.checkEditFakeDate.Size = new System.Drawing.Size(19, 19);
+			this.checkEditFakeDate.StyleController = this.styleController;
+			this.checkEditFakeDate.TabIndex = 36;
+			this.checkEditFakeDate.CheckedChanged += new System.EventHandler(this.checkEditFakeDate_CheckedChanged);
+			// 
 			// LinkTextOptions
 			// 
+			this.Controls.Add(this.dateEditFakeDate);
+			this.Controls.Add(this.checkEditFakeDate);
 			this.Controls.Add(this.checkEditUnderlined);
 			this.Controls.Add(this.checkEditItalic);
 			this.Controls.Add(this.checkEditBold);
@@ -200,6 +234,7 @@
 			this.Controls.Add(this.labelControlForeColor);
 			this.Controls.Add(this.labelControlTitle);
 			this.Controls.Add(this.buttonEditLinkSpecialFont);
+			this.Name = "LinkTextOptions";
 			this.Size = new System.Drawing.Size(531, 541);
 			((System.ComponentModel.ISupportInitialize)(this.colorEditLinkSpecialColor.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
@@ -208,6 +243,9 @@
 			((System.ComponentModel.ISupportInitialize)(this.checkEditBold.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditItalic.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditUnderlined.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.dateEditFakeDate.Properties.CalendarTimeProperties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.dateEditFakeDate.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditFakeDate.Properties)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -224,5 +262,7 @@
 		private DevExpress.XtraEditors.CheckEdit checkEditBold;
 		private DevExpress.XtraEditors.CheckEdit checkEditItalic;
 		private DevExpress.XtraEditors.CheckEdit checkEditUnderlined;
+		private DevExpress.XtraEditors.DateEdit dateEditFakeDate;
+		private DevExpress.XtraEditors.CheckEdit checkEditFakeDate;
 	}
 }
