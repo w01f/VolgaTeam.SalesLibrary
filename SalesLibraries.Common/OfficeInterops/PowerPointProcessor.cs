@@ -266,43 +266,20 @@ namespace SalesLibraries.Common.OfficeInterops
 				var indexToPaste = GetActiveSlideIndex();
 				if (!string.IsNullOrEmpty(templatePath))
 					SlideSourcePresentation.ApplyTheme(templatePath);
+				var destinationPresentation = GetActivePresentation();
 				for (var i = 1; i <= SlideSourcePresentation.Slides.Count; i++)
 				{
 					if ((i != slideIndex) && (slideIndex != -1)) continue;
-					var slide = SlideSourcePresentation.Slides[i];
-					var activeSlides = GetActivePresentation().Slides;
-					activeSlides.InsertFromFile(SlideSourcePresentation.FullName, indexToPaste, i, i);
+					SlideSourcePresentation.Slides[i].Copy();
+					destinationPresentation.Application.CommandBars.ExecuteMso("PasteSourceFormatting");
 					indexToPaste++;
-					var insertedSlide = activeSlides[indexToPaste];
-					var design = GetDesignFromSlide(slide, GetActivePresentation());
-					insertedSlide.Design = design ?? slide.Design;
-					insertedSlide.ColorScheme = slide.ColorScheme;
-					insertedSlide.Select();
 				}
+				destinationPresentation.Slides[indexToPaste].Select();
 			}
 			catch { }
 			finally
 			{
 				MessageFilter.Revoke();
-			}
-		}
-
-		private Design GetDesignFromSlide(Slide slide, Presentation presentation)
-		{
-			foreach (Design design in presentation.Designs)
-				if (design.Name == slide.Design.Name)
-					return design;
-			return null;
-		}
-
-		private void MakeDesignUnique(Slide slide, Design design)
-		{
-			while (!(design.SlideMaster.Shapes.Count <= slide.Design.SlideMaster.Shapes.Count))
-			{
-				if (design.SlideMaster.Shapes.Count > 0)
-					design.SlideMaster.Shapes[design.SlideMaster.Shapes.Count].Delete();
-				else
-					break;
 			}
 		}
 

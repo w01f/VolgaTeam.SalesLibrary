@@ -117,33 +117,25 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Contro
 			if (!MainController.Instance.CheckPowerPointRunning(
 				() => MainController.Instance.PopupMessages.ShowWarningQuestion("PowerPoint is not Running. Do you want to open it now?") == DialogResult.Yes)
 				) return;
-			if (PowerPointSingleton.Instance.GetActiveSlideIndex() != -1)
-			{
-				MainController.Instance.ActivateApplication();
-				var activeSlideSettings = PowerPointSingleton.Instance.GetSlideSettings();
-				if (activeSlideSettings.SlideSize.Orientation.ToString() != _previewData.Settings.Orientation)
-					if (MainController.Instance.PopupMessages.ShowWarningQuestion("This slide is not the same size as your presentation.\nDo you still want to add it?") != DialogResult.Yes)
-						return;
-				FloaterManager.Instance.ShowFloater(
-					MainController.Instance.MainForm,
-					MainController.Instance.Settings.SalesDepotName,
-					MainController.Instance.MainForm.FloaterLogo,
-					() => MainController.Instance.ProcessManager.Run(
-						"Inserting selected slide...",
-						cancellationToken =>
-						{
-							PowerPointManager.Instance.ActivatePowerPoint();
-							PowerPointSingleton.Instance.OpenSlideSourcePresentation(_tempCopy);
-							PowerPointSingleton.Instance.AppendSlide(SelectedThumbnail.Index);
+			MainController.Instance.ActivateApplication();
+			var activeSlideSettings = PowerPointSingleton.Instance.GetSlideSettings();
+			if (activeSlideSettings.SlideSize.Orientation.ToString() != _previewData.Settings.Orientation)
+				if (MainController.Instance.PopupMessages.ShowWarningQuestion("This slide is not the same size as your presentation.\nDo you still want to add it?") != DialogResult.Yes)
+					return;
+			FloaterManager.Instance.ShowFloater(
+				MainController.Instance.MainForm,
+				MainController.Instance.Settings.SalesDepotName,
+				MainController.Instance.MainForm.FloaterLogo,
+				() => MainController.Instance.ProcessManager.Run(
+					"Inserting selected slide...",
+					cancellationToken =>
+					{
+						PowerPointManager.Instance.ActivatePowerPoint();
+						PowerPointSingleton.Instance.OpenSlideSourcePresentation(_tempCopy);
+						PowerPointSingleton.Instance.AppendSlide(SelectedThumbnail.Index);
 
-						})
-					);
-			}
-			else
-			{
-				using (var warningForm = new FormSelectSlideWarning())
-					warningForm.ShowDialog(MainController.Instance.MainForm);
-			}
+					})
+				);
 		}
 
 		public void SaveAsPDF()

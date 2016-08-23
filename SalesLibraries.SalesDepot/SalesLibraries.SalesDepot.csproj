@@ -446,12 +446,6 @@
     <Compile Include="PresentationLayer\Wallbin\LinkViewers\Forms\FormSaveAsPDF.designer.cs">
       <DependentUpon>FormSaveAsPDF.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Wallbin\LinkViewers\Forms\FormSelectSlideWarning.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PresentationLayer\Wallbin\LinkViewers\Forms\FormSelectSlideWarning.designer.cs">
-      <DependentUpon>FormSelectSlideWarning.cs</DependentUpon>
-    </Compile>
     <Compile Include="PresentationLayer\Wallbin\LinkViewers\Forms\FormVideoViewOptions.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -630,9 +624,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\LinkViewers\Forms\FormSaveAsPDF.resx">
       <DependentUpon>FormSaveAsPDF.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Wallbin\LinkViewers\Forms\FormSelectSlideWarning.resx">
-      <DependentUpon>FormSelectSlideWarning.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\LinkViewers\Forms\FormVideoViewOptions.resx">
       <DependentUpon>FormVideoViewOptions.cs</DependentUpon>
@@ -822,12 +813,6 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\PowerPointWarningArrow.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\PowerPointWarningSlides.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\QuickViewAdd.png" />

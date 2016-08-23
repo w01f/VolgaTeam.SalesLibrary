@@ -204,7 +204,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Forms
 					printAction => MainController.Instance.ProcessManager.Run(
 						"Printing...",
 						cancellationToken => printAction()));
-				
+
 			}
 		}
 
@@ -274,38 +274,30 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Forms
 		public void InsertSlide(bool allSlides = false)
 		{
 			if (PowerPointLink == null) return;
-			if (PowerPointSingleton.Instance.GetActiveSlideIndex() != -1)
-			{
-				PowerPointManager.Instance.ActivatePowerPoint();
-				MainController.Instance.ActivateApplication();
-				var activeSlideSettings = PowerPointSingleton.Instance.GetSlideSettings();
-				if (activeSlideSettings.SlideSize.Orientation.ToString() != _previewData.Settings.Orientation)
-					if (MainController.Instance.PopupMessages.ShowWarningQuestion("This slide is not the same size as your presentation.\nDo you still want to add it?") != DialogResult.Yes)
-						return;
+			PowerPointManager.Instance.ActivatePowerPoint();
+			MainController.Instance.ActivateApplication();
+			var activeSlideSettings = PowerPointSingleton.Instance.GetSlideSettings();
+			if (activeSlideSettings.SlideSize.Orientation.ToString() != _previewData.Settings.Orientation)
+				if (MainController.Instance.PopupMessages.ShowWarningQuestion("This slide is not the same size as your presentation.\nDo you still want to add it?") != DialogResult.Yes)
+					return;
 
-				var selectedIndex = comboBoxEditSlides.SelectedIndex + 1;
-				var selectedTheme = comboBoxEditSlideTemplate.EditValue as Theme;
-				var templatePath = checkEditChangeSlideTemplate.Checked && selectedTheme != null ? selectedTheme.GetThemePath() : String.Empty;
-				FloaterManager.Instance.ShowFloater(
-					MainController.Instance.MainForm,
-					MainController.Instance.Settings.SalesDepotName,
-					MainController.Instance.MainForm.FloaterLogo,
-					() => MainController.Instance.ProcessManager.Run(
-						"Inserting selected slide...",
-						cancellationToken =>
-						{
-							PowerPointManager.Instance.ActivatePowerPoint();
-							PowerPointSingleton.Instance.AppendSlide(
-								allSlides ? -1 : selectedIndex,
-								templatePath);
-						})
-					);
-			}
-			else
-			{
-				using (var warningForm = new FormSelectSlideWarning())
-					warningForm.ShowDialog(this);
-			}
+			var selectedIndex = comboBoxEditSlides.SelectedIndex + 1;
+			var selectedTheme = comboBoxEditSlideTemplate.EditValue as Theme;
+			var templatePath = checkEditChangeSlideTemplate.Checked && selectedTheme != null ? selectedTheme.GetThemePath() : String.Empty;
+			FloaterManager.Instance.ShowFloater(
+				MainController.Instance.MainForm,
+				MainController.Instance.Settings.SalesDepotName,
+				MainController.Instance.MainForm.FloaterLogo,
+				() => MainController.Instance.ProcessManager.Run(
+					"Inserting selected slide...",
+					cancellationToken =>
+					{
+						PowerPointManager.Instance.ActivatePowerPoint();
+						PowerPointSingleton.Instance.AppendSlide(
+							allSlides ? -1 : selectedIndex,
+							templatePath);
+					})
+				);
 		}
 
 		private bool IsLargeFont()

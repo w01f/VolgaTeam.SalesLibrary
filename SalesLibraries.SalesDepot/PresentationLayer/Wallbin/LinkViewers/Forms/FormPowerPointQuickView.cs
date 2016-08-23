@@ -248,38 +248,30 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Forms
 		private void InsertSlide(bool allSlides = false)
 		{
 			if (!CheckPowerPointRunning()) return;
-			if (PowerPointSingleton.Instance.GetActiveSlideIndex() != -1)
-			{
-				MainController.Instance.ActivateApplication();
-				var activeSlideSettings = PowerPointSingleton.Instance.GetSlideSettings();
-				if (activeSlideSettings.SlideSize.Orientation.ToString() != _previewData.Settings.Orientation)
-					if (MainController.Instance.PopupMessages.ShowWarningQuestion("This slide is not the same size as your presentation.\nDo you still want to add it?") != DialogResult.Yes)
-						return;
+			MainController.Instance.ActivateApplication();
+			var activeSlideSettings = PowerPointSingleton.Instance.GetSlideSettings();
+			if (activeSlideSettings.SlideSize.Orientation.ToString() != _previewData.Settings.Orientation)
+				if (MainController.Instance.PopupMessages.ShowWarningQuestion("This slide is not the same size as your presentation.\nDo you still want to add it?") != DialogResult.Yes)
+					return;
 
-				var selectedTheme = comboBoxEditSlideTemplate.EditValue as Theme;
-				var templatePath = checkEditChangeSlideTemplate.Checked && selectedTheme != null ? selectedTheme.GetThemePath() : String.Empty;
-				FloaterManager.Instance.ShowFloater(
-					MainController.Instance.MainForm,
-					MainController.Instance.Settings.SalesDepotName,
-					MainController.Instance.MainForm.FloaterLogo,
-					() => MainController.Instance.ProcessManager.Run(
-						"Inserting selected slide...",
-						cancellationToken =>
-						{
-							PowerPointManager.Instance.ActivatePowerPoint();
-							PowerPointSingleton.Instance.OpenSlideSourcePresentation(_tempFileCopy);
-							PowerPointSingleton.Instance.AppendSlide(
-							allSlides ? -1 : SelectedThumbnail.Index,
-							templatePath);
+			var selectedTheme = comboBoxEditSlideTemplate.EditValue as Theme;
+			var templatePath = checkEditChangeSlideTemplate.Checked && selectedTheme != null ? selectedTheme.GetThemePath() : String.Empty;
+			FloaterManager.Instance.ShowFloater(
+				MainController.Instance.MainForm,
+				MainController.Instance.Settings.SalesDepotName,
+				MainController.Instance.MainForm.FloaterLogo,
+				() => MainController.Instance.ProcessManager.Run(
+					"Inserting selected slide...",
+					cancellationToken =>
+					{
+						PowerPointManager.Instance.ActivatePowerPoint();
+						PowerPointSingleton.Instance.OpenSlideSourcePresentation(_tempFileCopy);
+						PowerPointSingleton.Instance.AppendSlide(
+						allSlides ? -1 : SelectedThumbnail.Index,
+						templatePath);
 
-						})
-					);
-			}
-			else
-			{
-				using (var warningForm = new FormSelectSlideWarning())
-					warningForm.ShowDialog(this);
-			}
+					})
+				);
 		}
 		#endregion
 	}
