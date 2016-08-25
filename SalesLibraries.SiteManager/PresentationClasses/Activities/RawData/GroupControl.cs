@@ -84,5 +84,24 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Activities.RawData
 			else
 				e.RepositoryItem = repositoryItemButtonEdit;
 		}
+
+		private void OnGridViewShownEditor(object sender, EventArgs e)
+		{
+			var view = (GridView)sender;
+			view.ActiveEditor.MouseWheel -= OnActiveEditorMouseWheel;
+			view.ActiveEditor.MouseWheel += OnActiveEditorMouseWheel;
+		}
+
+		private void OnActiveEditorMouseWheel(Object sender, MouseEventArgs e)
+		{
+			gridViewData.HideEditor();
+			gridViewData.Focus();
+		}
+
+		private void OnGridViewMouseMove(object sender, MouseEventArgs e)
+		{
+			gridViewData.HideEditor();
+			gridViewData.Focus();
+		}
 	}
 }

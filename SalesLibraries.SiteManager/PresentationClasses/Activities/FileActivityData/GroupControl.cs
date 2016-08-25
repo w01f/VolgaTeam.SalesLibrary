@@ -31,7 +31,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Activities.FileActivity
 			}
 		}
 
-		public GroupControl(IEnumerable<FileActivityReportModel> records, DateTime startDate, DateTime endDate)
+		public GroupControl(IEnumerable<FileActivityReportModel> records, DateTime startDate, DateTime endDate, bool showLibrary)
 		{
 			InitializeComponent();
 			Dock = DockStyle.Fill;
@@ -43,6 +43,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Activities.FileActivity
 			_endDate = endDate;
 
 			gridControlData.DataSource = Records;
+			gridColumnLibraryName.Visible = showLibrary;
 		}
 
 		public PrintableComponentLink GetPrintLink()
@@ -75,6 +76,25 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Activities.FileActivity
 				e.RepositoryItem = repositoryItemHyperLinkEdit;
 			else
 				e.RepositoryItem = repositoryItemButtonEdit;
+		}
+
+		private void OnGridViewShownEditor(object sender, EventArgs e)
+		{
+			var view = (GridView)sender;
+			view.ActiveEditor.MouseWheel -= OnActiveEditorMouseWheel;
+			view.ActiveEditor.MouseWheel += OnActiveEditorMouseWheel;
+		}
+
+		private void OnActiveEditorMouseWheel(Object sender, MouseEventArgs e)
+		{
+			advBandedGridViewData.HideEditor();
+			advBandedGridViewData.Focus();
+		}
+
+		private void OnGridViewMouseMove(object sender, MouseEventArgs e)
+		{
+			advBandedGridViewData.HideEditor();
+			advBandedGridViewData.Focus();
 		}
 	}
 }

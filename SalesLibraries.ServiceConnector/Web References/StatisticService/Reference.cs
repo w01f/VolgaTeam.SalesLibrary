@@ -55,6 +55,8 @@ namespace SalesLibraries.ServiceConnector.StatisticService {
         
         private System.Threading.SendOrPostCallback getFileActivityReportOperationCompleted;
         
+        private System.Threading.SendOrPostCallback getFileActivityReportLegacyOperationCompleted;
+        
         private System.Threading.SendOrPostCallback getLibraryFilesOperationCompleted;
         
         private System.Threading.SendOrPostCallback getSessionKeyOperationCompleted;
@@ -120,6 +122,9 @@ namespace SalesLibraries.ServiceConnector.StatisticService {
         
         /// <remarks/>
         public event getFileActivityReportCompletedEventHandler getFileActivityReportCompleted;
+        
+        /// <remarks/>
+        public event getFileActivityReportLegacyCompletedEventHandler getFileActivityReportLegacyCompleted;
         
         /// <remarks/>
         public event getLibraryFilesCompletedEventHandler getLibraryFilesCompleted;
@@ -392,6 +397,40 @@ namespace SalesLibraries.ServiceConnector.StatisticService {
             if ((this.getFileActivityReportCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.getFileActivityReportCompleted(this, new getFileActivityReportCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:StatisticControllerwsdl#getFileActivityReportLegacy", RequestNamespace="urn:StatisticControllerwsdl", ResponseNamespace="urn:StatisticControllerwsdl")]
+        [return: System.Xml.Serialization.SoapElementAttribute("return")]
+        public FileActivityReportModel[] getFileActivityReportLegacy(string sessionKey, string dateStart, string dateEnd) {
+            object[] results = this.Invoke("getFileActivityReportLegacy", new object[] {
+                        sessionKey,
+                        dateStart,
+                        dateEnd});
+            return ((FileActivityReportModel[])(results[0]));
+        }
+        
+        /// <remarks/>
+        public void getFileActivityReportLegacyAsync(string sessionKey, string dateStart, string dateEnd) {
+            this.getFileActivityReportLegacyAsync(sessionKey, dateStart, dateEnd, null);
+        }
+        
+        /// <remarks/>
+        public void getFileActivityReportLegacyAsync(string sessionKey, string dateStart, string dateEnd, object userState) {
+            if ((this.getFileActivityReportLegacyOperationCompleted == null)) {
+                this.getFileActivityReportLegacyOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetFileActivityReportLegacyOperationCompleted);
+            }
+            this.InvokeAsync("getFileActivityReportLegacy", new object[] {
+                        sessionKey,
+                        dateStart,
+                        dateEnd}, this.getFileActivityReportLegacyOperationCompleted, userState);
+        }
+        
+        private void OngetFileActivityReportLegacyOperationCompleted(object arg) {
+            if ((this.getFileActivityReportLegacyCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.getFileActivityReportLegacyCompleted(this, new getFileActivityReportLegacyCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -1649,6 +1688,32 @@ namespace SalesLibraries.ServiceConnector.StatisticService {
         private object[] results;
         
         internal getFileActivityReportCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public FileActivityReportModel[] Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((FileActivityReportModel[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    public delegate void getFileActivityReportLegacyCompletedEventHandler(object sender, getFileActivityReportLegacyCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class getFileActivityReportLegacyCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal getFileActivityReportLegacyCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }

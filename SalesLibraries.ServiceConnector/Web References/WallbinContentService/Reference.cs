@@ -1013,6 +1013,8 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         
         private string foreColorField;
         
+        private bool isTextWordWrapField;
+        
         private bool isRestrictedField;
         
         private bool noShareField;
@@ -1122,6 +1124,16 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         }
         
         /// <remarks/>
+        public bool isTextWordWrap {
+            get {
+                return this.isTextWordWrapField;
+            }
+            set {
+                this.isTextWordWrapField = value;
+            }
+        }
+        
+        /// <remarks/>
         public bool isRestricted {
             get {
                 return this.isRestrictedField;
@@ -1189,6 +1201,8 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         private Font fontField;
         
         private string foreColorField;
+        
+        private bool isTextWordWrapField;
         
         private bool isRestrictedField;
         
@@ -1299,6 +1313,16 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         }
         
         /// <remarks/>
+        public bool isTextWordWrap {
+            get {
+                return this.isTextWordWrapField;
+            }
+            set {
+                this.isTextWordWrapField = value;
+            }
+        }
+        
+        /// <remarks/>
         public bool isRestricted {
             get {
                 return this.isRestrictedField;
@@ -1372,6 +1396,8 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         private Font fontField;
         
         private string foreColorField;
+        
+        private bool isTextWordWrapField;
         
         private bool isRestrictedField;
         
@@ -1512,6 +1538,16 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         }
         
         /// <remarks/>
+        public bool isTextWordWrap {
+            get {
+                return this.isTextWordWrapField;
+            }
+            set {
+                this.isTextWordWrapField = value;
+            }
+        }
+        
+        /// <remarks/>
         public bool isRestricted {
             get {
                 return this.isRestrictedField;
@@ -1577,6 +1613,8 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         private Font fontField;
         
         private string foreColorField;
+        
+        private bool isTextWordWrapField;
         
         private bool isRestrictedField;
         
@@ -1677,6 +1715,16 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         }
         
         /// <remarks/>
+        public bool isTextWordWrap {
+            get {
+                return this.isTextWordWrapField;
+            }
+            set {
+                this.isTextWordWrapField = value;
+            }
+        }
+        
+        /// <remarks/>
         public bool isRestricted {
             get {
                 return this.isRestrictedField;
@@ -1744,6 +1792,8 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         private Font fontField;
         
         private string foreColorField;
+        
+        private bool isTextWordWrapField;
         
         private bool isRestrictedField;
         
@@ -1854,6 +1904,16 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         }
         
         /// <remarks/>
+        public bool isTextWordWrap {
+            get {
+                return this.isTextWordWrapField;
+            }
+            set {
+                this.isTextWordWrapField = value;
+            }
+        }
+        
+        /// <remarks/>
         public bool isRestricted {
             get {
                 return this.isRestrictedField;
@@ -1919,6 +1979,8 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         private Font fontField;
         
         private string foreColorField;
+        
+        private bool isTextWordWrapField;
         
         private bool isRestrictedField;
         
@@ -2015,6 +2077,16 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
             }
             set {
                 this.foreColorField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool isTextWordWrap {
+            get {
+                return this.isTextWordWrapField;
+            }
+            set {
+                this.isTextWordWrapField = value;
             }
         }
         
@@ -2085,6 +2157,8 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         
         private string foreColorField;
         
+        private bool isTextWordWrapField;
+        
         private bool isRestrictedField;
         
         private bool noShareField;
@@ -2180,6 +2254,16 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
             }
             set {
                 this.foreColorField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool isTextWordWrap {
+            get {
+                return this.isTextWordWrapField;
+            }
+            set {
+                this.isTextWordWrapField = value;
             }
         }
         
@@ -3310,6 +3394,8 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         
         private string foreColorField;
         
+        private bool isTextWordWrapField;
+        
         private bool isRestrictedField;
         
         private bool noShareField;
@@ -3395,6 +3481,16 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
             }
             set {
                 this.foreColorField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool isTextWordWrap {
+            get {
+                return this.isTextWordWrapField;
+            }
+            set {
+                this.isTextWordWrapField = value;
             }
         }
         

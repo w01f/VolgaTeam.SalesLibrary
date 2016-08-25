@@ -61,6 +61,10 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Activities
 			_views.Add(ViewType.VideoInfoReport, view8);
 			splitContainerControl.Panel2.Controls.Add(view8);
 			pnCustomFilter.Controls.AddRange(view8.FilterControls.ToArray());
+			var view9 = new FileActivityData.LegacyContainerControl();
+			_views.Add(ViewType.FileActivityReportLegacy, view9);
+			splitContainerControl.Panel2.Controls.Add(view9);
+			pnCustomFilter.Controls.AddRange(view9.FilterControls.ToArray());
 		}
 
 		public void ChangeView(ViewType viewType)

@@ -98,7 +98,7 @@
             this.repositoryItemDateEditPages,
             this.repositoryItemButtonEditPagesActions,
             this.repositoryItemHyperLinkEditPages});
-			this.gridControlRecords.Size = new System.Drawing.Size(669, 483);
+			this.gridControlRecords.Size = new System.Drawing.Size(676, 483);
 			this.gridControlRecords.TabIndex = 3;
 			this.gridControlRecords.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewRecords});
@@ -154,6 +154,8 @@
 			this.gridViewRecords.RowSeparatorHeight = 5;
 			this.gridViewRecords.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
             new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.gridColumnPagesDateCreate, DevExpress.Data.ColumnSortOrder.Descending)});
+			this.gridViewRecords.ShownEditor += new System.EventHandler(this.OnGridViewShownEditor);
+			this.gridViewRecords.MouseMove += new System.Windows.Forms.MouseEventHandler(this.OnGridViewMouseMove);
 			// 
 			// gridColumnPagesName
 			// 

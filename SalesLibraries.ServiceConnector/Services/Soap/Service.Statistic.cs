@@ -213,6 +213,33 @@ namespace SalesLibraries.ServiceConnector.Services.Soap
 			return activities.ToArray();
 		}
 
+		public FileActivityReportModel[] GetFileActivityReportLegacy(DateTime startDate, DateTime endDate, out string message)
+		{
+			message = string.Empty;
+			var activities = new List<FileActivityReportModel>();
+			var client = GetStatisticClient();
+			if (client != null)
+			{
+				try
+				{
+					var sessionKey = client.getSessionKey(Login, Password);
+					if (!string.IsNullOrEmpty(sessionKey))
+					{
+						activities.AddRange(client.getFileActivityReportLegacy(sessionKey, startDate.ToString("MM/dd/yyyy hh:mm tt"), endDate.ToString("MM/dd/yyyy hh:mm tt")) ?? new FileActivityReportModel[] { });
+					}
+					else
+						message = "Couldn't complete operation.\nLogin or password are not correct.";
+				}
+				catch (Exception ex)
+				{
+					message = string.Format("Couldn't complete operation.\n{0}.", ex.Message);
+				}
+			}
+			else
+				message = "Couldn't complete operation.\nServer is unavailable.";
+			return activities.ToArray();
+		}
+
 		public VideoLinkInfo[] GetVideoLinkInfo(out string message)
 		{
 			message = string.Empty;

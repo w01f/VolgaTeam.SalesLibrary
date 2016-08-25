@@ -115,6 +115,8 @@
 			this.gridViewData.RowHeight = 35;
 			this.gridViewData.RowSeparatorHeight = 5;
 			this.gridViewData.CustomRowCellEdit += new DevExpress.XtraGrid.Views.Grid.CustomRowCellEditEventHandler(this.OnCustomRowCellEdit);
+			this.gridViewData.ShownEditor += new System.EventHandler(this.OnGridViewShownEditor);
+			this.gridViewData.MouseMove += new System.Windows.Forms.MouseEventHandler(this.OnGridViewMouseMove);
 			// 
 			// gridColumnDate
 			// 

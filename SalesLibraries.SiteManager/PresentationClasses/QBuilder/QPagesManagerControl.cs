@@ -10,6 +10,7 @@ using System.Threading;
 using System.Windows.Forms;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid;
+using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraPrinting;
 using SalesLibraries.SiteManager.BusinessClasses;
 using SalesLibraries.SiteManager.ToolForms;
@@ -199,6 +200,25 @@ namespace SalesLibraries.SiteManager.PresentationClasses.QBuilder
 		private void buttonXLoadData_Click(object sender, EventArgs e)
 		{
 			RefreshData(true);
+		}
+
+		private void OnGridViewShownEditor(object sender, EventArgs e)
+		{
+			var view = (GridView)sender;
+			view.ActiveEditor.MouseWheel -= OnActiveEditorMouseWheel;
+			view.ActiveEditor.MouseWheel += OnActiveEditorMouseWheel;
+		}
+
+		private void OnActiveEditorMouseWheel(Object sender, MouseEventArgs e)
+		{
+			gridViewRecords.HideEditor();
+			gridViewRecords.Focus();
+		}
+
+		private void OnGridViewMouseMove(object sender, MouseEventArgs e)
+		{
+			gridViewRecords.HideEditor();
+			gridViewRecords.Focus();
 		}
 
 		private void repositoryItemHyperLinkEditPages_ButtonClick(object sender, ButtonPressedEventArgs e)

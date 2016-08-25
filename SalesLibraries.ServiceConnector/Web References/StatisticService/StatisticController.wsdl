@@ -250,6 +250,14 @@
   <wsdl:message name="getFileActivityReportOut">
     <wsdl:part name="return" type="tns:FileActivityReportModelArray" />
   </wsdl:message>
+  <wsdl:message name="getFileActivityReportLegacyIn">
+    <wsdl:part name="sessionKey" type="xsd:string" />
+    <wsdl:part name="dateStart" type="xsd:string" />
+    <wsdl:part name="dateEnd" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getFileActivityReportLegacyOut">
+    <wsdl:part name="return" type="tns:FileActivityReportModelArray" />
+  </wsdl:message>
   <wsdl:message name="getLibraryFilesIn">
     <wsdl:part name="sessionKey" type="xsd:string" />
   </wsdl:message>
@@ -311,6 +319,12 @@
       </wsdl:documentation>
       <wsdl:input message="tns:getFileActivityReportIn" />
       <wsdl:output message="tns:getFileActivityReportOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getFileActivityReportLegacy">
+      <wsdl:documentation>
+      </wsdl:documentation>
+      <wsdl:input message="tns:getFileActivityReportLegacyIn" />
+      <wsdl:output message="tns:getFileActivityReportLegacyOut" />
     </wsdl:operation>
     <wsdl:operation name="getLibraryFiles">
       <wsdl:documentation>
@@ -392,6 +406,15 @@
     </wsdl:operation>
     <wsdl:operation name="getFileActivityReport">
       <soap:operation soapAction="urn:StatisticControllerwsdl#getFileActivityReport" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:StatisticControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:StatisticControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getFileActivityReportLegacy">
+      <soap:operation soapAction="urn:StatisticControllerwsdl#getFileActivityReportLegacy" style="rpc" />
       <wsdl:input>
         <soap:body use="encoded" namespace="urn:StatisticControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
       </wsdl:input>

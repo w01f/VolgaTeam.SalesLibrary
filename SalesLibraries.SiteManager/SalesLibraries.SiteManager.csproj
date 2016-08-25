@@ -166,11 +166,17 @@
     <Compile Include="PresentationClasses\Activities\AccessData\TotalFilter.Designer.cs">
       <DependentUpon>TotalFilter.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationClasses\Activities\FileActivityData\ContainerControl.cs">
+    <Compile Include="PresentationClasses\Activities\FileActivityData\BaseContainerControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PresentationClasses\Activities\FileActivityData\ContainerControl.Designer.cs">
-      <DependentUpon>ContainerControl.cs</DependentUpon>
+    <Compile Include="PresentationClasses\Activities\FileActivityData\BaseContainerControl.Designer.cs">
+      <DependentUpon>BaseContainerControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\FileActivityData\LegacyContainerControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\FileActivityData\ContainerControl.cs">
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="PresentationClasses\Activities\FileActivityData\GroupControl.cs">
       <SubType>Component</SubType>
@@ -488,8 +494,8 @@
     <EmbeddedResource Include="PresentationClasses\Activities\AccessData\TotalFilter.resx">
       <DependentUpon>TotalFilter.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationClasses\Activities\FileActivityData\ContainerControl.resx">
-      <DependentUpon>ContainerControl.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationClasses\Activities\FileActivityData\BaseContainerControl.resx">
+      <DependentUpon>BaseContainerControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationClasses\Activities\FileActivityData\GroupControl.resx">

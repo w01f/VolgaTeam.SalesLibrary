@@ -22,10 +22,13 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService
 
 		/// <remarks/>
 		Font font { get; set; }
-
+		
 		/// <remarks/>
 		string foreColor { get; set; }
-
+		
+		/// <remarks/>
+		bool isTextWordWrap { get; set; }
+		
 		/// <remarks/>
 		bool isRestricted { get; set; }
 

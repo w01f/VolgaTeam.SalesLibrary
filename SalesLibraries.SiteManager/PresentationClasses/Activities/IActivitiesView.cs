@@ -26,6 +26,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Activities
 		QuizUnitedReport = 5,
 		FileActivityReport = 6,
 		VideoInfoReport = 7,
+		FileActivityReportLegacy = 8,
 		None = 999
 	}
 }
