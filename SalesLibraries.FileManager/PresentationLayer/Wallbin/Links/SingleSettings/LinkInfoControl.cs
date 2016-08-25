@@ -19,7 +19,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			var selectedLink = MainController.Instance.WallbinViews.Selection.SelectedLink;
 			Text = selectedFolder != null && selectedLink != null ?
 				String.Format("{0}{1}",
-					selectedLink.Name,
+					selectedLink.LinkInfoDisplayName,
 					selectedLink.Tags.HasCategories || selectedLink.Tags.HasKeywords ?
 						String.Format("{0}<size=-2><color=gray>({1})</color></size>",
 							Environment.NewLine,

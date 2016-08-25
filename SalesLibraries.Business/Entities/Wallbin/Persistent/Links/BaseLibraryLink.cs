@@ -148,6 +148,9 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		}
 
 		[NotMapped, JsonIgnore]
+		public abstract string LinkInfoDisplayName { get; }
+
+		[NotMapped, JsonIgnore]
 		public virtual string Hint
 		{
 			get
@@ -158,7 +161,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 				if (Tags.Keywords.Any(k => !String.IsNullOrEmpty(k.Name)))
 					lines.Add(String.Format("Keyword Tags: {0}", Tags.AllKeywords));
 				if (Security.HasSecuritySettings)
-					lines.Add(String.Format("Special Security Settings: Enabled"));
+					lines.Add("Special Security Settings: Enabled");
 				return String.Join(Environment.NewLine, lines);
 			}
 		}
@@ -262,12 +265,15 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 			AfterSave();
 		}
 
-		public virtual BaseLibraryLink Copy()
+		public virtual BaseLibraryLink Copy(bool forMove = false)
 		{
+			NeedToSave = true;
+
 			BeforeSave();
 
 			var link = (BaseLibraryLink)Activator.CreateInstance(GetType());
-			link.ExtId = ExtId;
+			if (forMove)
+				link.ExtId = ExtId;
 			link.Type = Type;
 			link.Name = Name;
 			link.Order = Order;

@@ -12,7 +12,9 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 	public class LineBreak : BaseLibraryLink
 	{
 		#region Nonpersistent Properties
+
 		private LineBreakSettings _settings;
+
 		[NotMapped, JsonIgnore]
 		public override BaseLinkSettings Settings
 		{
@@ -21,10 +23,25 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		}
 
 		[NotMapped, JsonIgnore]
-		public override string DisplayNameWithoutNote => String.IsNullOrEmpty(base.DisplayNameWithoutNote) ? Settings.Note : base.DisplayNameWithoutNote;
+		public override string DisplayNameWithoutNote
+			=> String.IsNullOrEmpty(base.DisplayNameWithoutNote) ? Settings.Note : base.DisplayNameWithoutNote;
 
 		[NotMapped, JsonIgnore]
-		public override string Hint => String.Format("{0}{2}{1}", Settings.Note, base.Hint, Environment.NewLine);
+		public override string LinkInfoDisplayName => Settings.TextWordWrap ? "Line break" : Name;
+
+		[NotMapped, JsonIgnore]
+		public override string Hint
+		{
+			get
+			{
+				var baseHint = base.Hint;
+				if (!String.IsNullOrEmpty(baseHint))
+					return String.Format("{0}{2}{1}", Settings.Note, baseHint, Environment.NewLine);
+				if (!String.IsNullOrEmpty(Settings.Note))
+					return Settings.Note;
+				return null;
+			}
+		}
 
 		[NotMapped, JsonIgnore]
 		public override Font DisplayFont => base.DisplayFont ?? Settings.Font;

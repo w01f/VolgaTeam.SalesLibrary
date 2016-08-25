@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Drawing;
+using System.IO;
+using System.Windows.Forms;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
@@ -24,6 +26,7 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 		public int RowHeight { get; private set; }
 		public Color ForeColor { get; private set; }
 		public Font Font { get; private set; }
+		public bool WordWrap { get; private set; }
 		public Color BackColor
 		{
 			get
@@ -33,7 +36,10 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 				return _parent.FolderBox.SelectedRowBackColor;
 			}
 		}
-		protected BaseLibraryLink Link => _parent.Source;
+
+		public bool IsResponsible => WordWrap || (Link != null && Link.Banner.Enable && Link.Banner.ImageAlignement != Alignment.Left);
+
+		protected BaseLibraryLink Link => _parent?.Source;
 
 		protected IWallbinViewFormat FormatState => _parent.FolderBox.FormatState;
 
@@ -140,6 +146,7 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 
 			#region Text
 			Text = !String.IsNullOrEmpty(Link.DisplayName) ? Link.DisplayName : String.Empty;
+			WordWrap = Link.Settings.TextWordWrap;
 			#endregion
 
 			#region Font
@@ -197,15 +204,25 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 			#endregion
 
 			#region Text Size and Coordinates
-			SizeF textSize;
+
 			int textLeft;
 			int textTop;
 			int textWidth;
 			int textHeight;
-			using (var g = Graphics.FromImage(new Bitmap(1, 1)))
-			{
-				textSize = g.MeasureString(Text, fontForSizeCalculation, Int32.MaxValue);
-			}
+
+			var textForCalculation = Text.Contains(Environment.NewLine) ?
+				String.Format("{0}{1}1", Text, Environment.NewLine) :
+				String.Format("{0}{1}1", Text, "          ");
+			var textSize = TextRenderer.MeasureText(
+				textForCalculation,
+				fontForSizeCalculation,
+				new Size(WordWrap ? _parent.DataGridView.Width - imageWidth - WidthMargin : Int32.MaxValue, Int32.MaxValue),
+				TextFormatFlags.ExpandTabs |
+					TextFormatFlags.Top | TextFormatFlags.Left |
+					TextFormatFlags.TextBoxControl |
+					TextFormatFlags.WordBreak
+				);
+
 			if (Link.Banner.Enable)
 			{
 				textLeft = imageLeft + imageWidth;
@@ -215,12 +232,9 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 			else
 			{
 				textLeft = imageLeft + imageWidth + WidthMargin;
-				textWidth = (int)textSize.Width;
-				textHeight = (int)textSize.Height;
+				textWidth = (Int32)textSize.Width;
+				textHeight = (Int32)textSize.Height;
 			}
-
-			//TODO Hack code. Refactor this!
-			textWidth += 10;
 			#endregion
 
 			#region Fore Color
@@ -231,7 +245,7 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 			if (textHeight > imageHeight)
 			{
 				textTop = 0;
-				imageTop = (textHeight - imageHeight) / 2;
+				imageTop = Link != null && !Link.Banner.Enable && WordWrap ? 0 : (textHeight - imageHeight) / 2;
 			}
 			else if (textHeight == imageHeight)
 			{
@@ -247,7 +261,7 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 
 			ImageBorder = new Rectangle(imageLeft, imageTop, imageWidth, imageHeight);
 			TextBorder = new Rectangle(textLeft, textTop, textWidth, textHeight);
-			var newRowWidth = ImageBorder.Width + TextBorder.Width + 10;
+			var newRowWidth = ImageBorder.Width + TextBorder.Width;
 			var newRowHeight = (textHeight > imageHeight ? textHeight : imageHeight);
 
 			switch (_parent.FolderBox.FormatState.RowSpace)

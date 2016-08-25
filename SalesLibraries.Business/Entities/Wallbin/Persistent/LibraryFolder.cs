@@ -184,8 +184,10 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 			Links.Sort();
 		}
 
-		public LibraryFolder Copy()
+		public LibraryFolder Copy(bool forMove = false)
 		{
+			NeedToSave = true;
+
 			BeforeSave();
 
 			return CreateEntity<LibraryFolder>(folder =>
@@ -199,7 +201,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 
 				foreach (var libraryLink in Links)
 				{
-					var newLink = libraryLink.Copy();
+					var newLink = libraryLink.Copy(forMove);
 					newLink.Folder = folder;
 					folder.Links.Add(newLink);
 				}

@@ -56,6 +56,9 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 			buttonEditLinkSpecialFont.EditValue = _data.Settings.Font != null ? Utils.FontToString(_data.Settings.Font) : null;
 			buttonEditLinkSpecialFont.Tag = _data.Settings.Font;
 			colorEditLinkSpecialColor.Color = _data.DisplayColor;
+			checkEditTextWordWrap.Checked = _data.Settings.TextWordWrap;
+			checkEditFakeDate.Checked = ((LibraryObjectLinkSettings)_data.Settings).FakeFileDate.HasValue;
+			dateEditFakeDate.EditValue = ((LibraryObjectLinkSettings)_data.Settings).FakeFileDate;
 		}
 
 		public void SaveData()
@@ -75,6 +78,11 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 				_data.Settings.Font = null;
 			if (_data.DisplayColor != colorEditLinkSpecialColor.Color)
 				_data.Settings.ForeColor = colorEditLinkSpecialColor.Color;
+			_data.Settings.TextWordWrap = checkEditTextWordWrap.Checked;
+			((LibraryObjectLinkSettings)_data.Settings).FakeFileDate = checkEditFakeDate.Checked &&
+														 dateEditFakeDate.EditValue != null
+				? (DateTime?)dateEditFakeDate.EditValue
+				: null;
 		}
 
 		private void checkEditSpecialFormat_CheckedChanged(object sender, EventArgs e)
@@ -112,6 +120,11 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 		private void FontEdit_ButtonClick(object sender, ButtonPressedEventArgs e)
 		{
 			FontEdit_Click(sender, null);
+		}
+
+		private void checkEditFakeDate_CheckedChanged(object sender, EventArgs e)
+		{
+			dateEditFakeDate.Visible = checkEditFakeDate.Checked;
 		}
 	}
 }

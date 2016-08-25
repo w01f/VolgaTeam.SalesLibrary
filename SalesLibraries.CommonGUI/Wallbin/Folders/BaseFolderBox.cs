@@ -184,6 +184,13 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 			UnderlineRowFont = new Font(DataSource.Settings.WindowFont.FontFamily, FormatState.FontSize, FontStyle.Underline);
 			BoldItalicUndrerlineRowFont = new Font(DataSource.Settings.WindowFont.FontFamily, FormatState.FontSize, FontStyle.Bold | FontStyle.Italic | FontStyle.Underline);
 		}
+
+		protected override void OnResize(EventArgs e)
+		{
+			base.OnResize(e);
+			foreach (var linkRow in grFiles.Rows.OfType<LinkRow>().Where(r=>r.Info.IsResponsible))
+				linkRow.Info.Recalc();
+		}
 		#endregion
 
 		#region Link Row Events
@@ -201,6 +208,13 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 			var hintText = linkRow.Source?.Hint;
 			if (!String.IsNullOrEmpty(hintText) && !String.IsNullOrEmpty(hintText.Replace(Environment.NewLine, String.Empty)))
 				grFiles.Rows[e.RowIndex].Cells[e.ColumnIndex].ToolTipText = hintText;
+			else
+				grFiles.Rows[e.RowIndex].Cells[e.ColumnIndex].ToolTipText = null;
+			if (linkRow.Info.WordWrap)
+			{
+				e.Value = String.Empty;
+				e.FormattingApplied = true;
+			}
 		}
 
 		protected virtual void OnGridCellPainting(object sender, DataGridViewCellPaintingEventArgs e)

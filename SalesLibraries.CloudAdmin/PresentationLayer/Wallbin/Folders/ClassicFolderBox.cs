@@ -536,9 +536,26 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders
 			if (!FormatState.AllowEdit) return;
 			var linkRow = (LinkRow)grFiles.Rows[e.RowIndex];
 			if (!linkRow.AllowEdit) return;
-			grFiles.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.Font = RegularRowFont;
-			grFiles.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = linkRow.Source.DisplayNameWithoutNote;
-			e.Cancel = false;
+			if (linkRow.Info.WordWrap)
+			{
+				using (var form = new FormEditLinkText())
+				{
+					form.EditedText = linkRow.Source.DisplayNameWithoutNote;
+					if (form.ShowDialog(MainController.Instance.MainForm) != DialogResult.OK) return;
+					var newLinkText = form.EditedText;
+					if (linkRow.Source.DisplayNameWithoutNote == newLinkText) return;
+					linkRow.Source.Name = newLinkText;
+					linkRow.Info.Recalc();
+					DataChanged?.Invoke(this, EventArgs.Empty);
+					e.Cancel = true;
+				}
+			}
+			else
+			{
+				grFiles.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.Font = RegularRowFont;
+				grFiles.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = linkRow.Source.DisplayNameWithoutNote;
+				e.Cancel = false;
+			}
 		}
 
 		private void OnGridCellEndEdit(object sender, DataGridViewCellEventArgs e)
@@ -834,9 +851,9 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders
 			if (e.Button != MouseButtons.Right) return;
 			var linkRow = (LinkRow)grFiles.Rows[e.RowIndex];
 			linkRow.Selected = true;
-			barButtonItemLinkPropertiesSecurity.Visibility = MainController.Instance.Settings.EditorSettings.EnableSecurityEdit ?
-					BarItemVisibility.Always :
-					BarItemVisibility.Never;
+			barButtonItemLinkPropertiesSecurity.Visibility = MainController.Instance.Settings.EditorSettings.EnableSecurityEdit
+				? BarItemVisibility.Always
+				: BarItemVisibility.Never;
 			if (linkRow.Source is LineBreak)
 			{
 				barButtonItemLinkPropertiesOpenLink.Visibility = BarItemVisibility.Never;
@@ -850,18 +867,18 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders
 			else
 			{
 				barButtonItemLinkPropertiesOpenLink.Visibility = BarItemVisibility.Always;
-				barButtonItemLinkPropertiesFileLocation.Visibility = linkRow.Source is LibraryFileLink ?
-					BarItemVisibility.Always :
-					BarItemVisibility.Never;
-				barButtonItemLinkPropertiesAdvancedSettings.Visibility = linkRow.Source is LibraryFolderLink ?
-					BarItemVisibility.Always :
-					BarItemVisibility.Never;
-				barButtonItemLinkPropertiesRefreshPreview.Visibility = linkRow.Source is PreviewableLink ?
-					BarItemVisibility.Always :
-					BarItemVisibility.Never;
-				barButtonItemLinkPropertiesTags.Visibility = MainController.Instance.Settings.EditorSettings.EnableTagsEdit ?
-					BarItemVisibility.Always :
-					BarItemVisibility.Never;
+				barButtonItemLinkPropertiesFileLocation.Visibility = linkRow.Source is LibraryFileLink
+					? BarItemVisibility.Always
+					: BarItemVisibility.Never;
+				barButtonItemLinkPropertiesAdvancedSettings.Visibility = linkRow.Source is LibraryFolderLink
+					? BarItemVisibility.Always
+					: BarItemVisibility.Never;
+				barButtonItemLinkPropertiesRefreshPreview.Visibility = linkRow.Source is PreviewableLink
+					? BarItemVisibility.Always
+					: BarItemVisibility.Never;
+				barButtonItemLinkPropertiesTags.Visibility = MainController.Instance.Settings.EditorSettings.EnableTagsEdit
+					? BarItemVisibility.Always
+					: BarItemVisibility.Never;
 				barButtonItemLinkPropertiesExpirationDate.Visibility = BarItemVisibility.Always;
 				barButtonItemLinkPropertiesDelete.Caption = "Delete this Link";
 			}

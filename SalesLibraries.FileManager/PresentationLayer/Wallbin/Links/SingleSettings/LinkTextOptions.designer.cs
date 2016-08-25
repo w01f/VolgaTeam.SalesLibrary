@@ -40,6 +40,7 @@
 			this.checkEditUnderlined = new DevExpress.XtraEditors.CheckEdit();
 			this.dateEditFakeDate = new DevExpress.XtraEditors.DateEdit();
 			this.checkEditFakeDate = new DevExpress.XtraEditors.CheckEdit();
+			this.checkEditTextWordWrap = new DevExpress.XtraEditors.CheckEdit();
 			((System.ComponentModel.ISupportInitialize)(this.colorEditLinkSpecialColor.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.buttonEditLinkSpecialFont.Properties)).BeginInit();
@@ -50,6 +51,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.dateEditFakeDate.Properties.CalendarTimeProperties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.dateEditFakeDate.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditFakeDate.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditTextWordWrap.Properties)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// colorEditLinkSpecialColor
@@ -121,7 +123,7 @@
 			// labelControlForeColor
 			// 
 			this.labelControlForeColor.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.labelControlForeColor.Location = new System.Drawing.Point(49, 171);
+			this.labelControlForeColor.Location = new System.Drawing.Point(58, 172);
 			this.labelControlForeColor.Name = "labelControlForeColor";
 			this.labelControlForeColor.Size = new System.Drawing.Size(60, 16);
 			this.labelControlForeColor.TabIndex = 31;
@@ -222,8 +224,19 @@
 			this.checkEditFakeDate.TabIndex = 36;
 			this.checkEditFakeDate.CheckedChanged += new System.EventHandler(this.checkEditFakeDate_CheckedChanged);
 			// 
+			// checkEditTextWordWrap
+			// 
+			this.checkEditTextWordWrap.Location = new System.Drawing.Point(8, 219);
+			this.checkEditTextWordWrap.Name = "checkEditTextWordWrap";
+			this.checkEditTextWordWrap.Properties.AutoWidth = true;
+			this.checkEditTextWordWrap.Properties.Caption = "Word-Wrap this Link Text";
+			this.checkEditTextWordWrap.Size = new System.Drawing.Size(208, 20);
+			this.checkEditTextWordWrap.StyleController = this.styleController;
+			this.checkEditTextWordWrap.TabIndex = 44;
+			// 
 			// LinkTextOptions
 			// 
+			this.Controls.Add(this.checkEditTextWordWrap);
 			this.Controls.Add(this.dateEditFakeDate);
 			this.Controls.Add(this.checkEditFakeDate);
 			this.Controls.Add(this.checkEditUnderlined);
@@ -246,6 +259,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.dateEditFakeDate.Properties.CalendarTimeProperties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.dateEditFakeDate.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditFakeDate.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditTextWordWrap.Properties)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -264,5 +278,6 @@
 		private DevExpress.XtraEditors.CheckEdit checkEditUnderlined;
 		private DevExpress.XtraEditors.DateEdit dateEditFakeDate;
 		private DevExpress.XtraEditors.CheckEdit checkEditFakeDate;
+		private DevExpress.XtraEditors.CheckEdit checkEditTextWordWrap;
 	}
 }

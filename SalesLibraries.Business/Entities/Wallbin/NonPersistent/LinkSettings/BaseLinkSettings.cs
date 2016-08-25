@@ -52,6 +52,18 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 			}
 		}
 
+		private bool _textWordWrap;
+		public bool TextWordWrap
+		{
+			get { return _textWordWrap; }
+			set
+			{
+				if (_textWordWrap != value)
+					OnSettingsChanged();
+				_textWordWrap = value;
+			}
+		}
+
 		[JsonIgnore]
 		protected BaseLibraryLink ParentLink => (BaseLibraryLink)Parent;
 	}

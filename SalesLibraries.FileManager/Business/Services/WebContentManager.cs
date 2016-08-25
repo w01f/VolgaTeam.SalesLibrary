@@ -333,6 +333,7 @@ namespace SalesLibraries.FileManager.Business.Services
 			this IBaseLinkSettings target,
 			SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings.BaseLinkSettings source)
 		{
+			target.isTextWordWrap = source.TextWordWrap;
 			if (source is LibraryObjectLinkSettings)
 			{
 				target.note = source.Note;
@@ -436,7 +437,7 @@ namespace SalesLibraries.FileManager.Business.Services
 			LineBreakSettings source)
 		{
 			target.note = source.Note;
-			target.foreColor = (source.ForeColor.HasValue ? source.ForeColor.Value : Color.Black).ToHex();
+			target.foreColor = source.ForeColor?.ToHex();
 			target.font = new Font();
 			target.font.ImportData(source.Font);
 			target.dateModify = DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss tt");

@@ -276,6 +276,12 @@
     <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\FormEditLinkSettingsRegular.designer.cs">
       <DependentUpon>FormEditLinkSettingsRegular.cs</DependentUpon>
     </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\FormEditLinkText.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\FormEditLinkText.designer.cs">
+      <DependentUpon>FormEditLinkText.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\FormEditLinkWidget.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -577,6 +583,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\FormEditLinkSettingsRegular.resx">
       <DependentUpon>FormEditLinkSettingsRegular.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\FormEditLinkText.resx">
+      <DependentUpon>FormEditLinkText.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\FormEditLinkWidget.resx">
       <DependentUpon>FormEditLinkWidget.cs</DependentUpon>

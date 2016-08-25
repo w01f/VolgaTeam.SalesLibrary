@@ -360,6 +360,12 @@
     <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\FolderFilesOptions.designer.cs">
       <DependentUpon>FolderFilesOptions.cs</DependentUpon>
     </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\FormEditLinkText.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\FormEditLinkText.Designer.cs">
+      <DependentUpon>FormEditLinkText.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\FormEditLinkWidget.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -715,6 +721,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\FolderFilesOptions.resx">
       <DependentUpon>FolderFilesOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\FormEditLinkText.resx">
+      <DependentUpon>FormEditLinkText.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\FormEditLinkWidget.resx">
       <DependentUpon>FormEditLinkWidget.cs</DependentUpon>

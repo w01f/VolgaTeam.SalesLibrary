@@ -19,7 +19,6 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 			}
 		}
 
-		public bool IsBold { get; set; }
 		private FontStyle _regularFontStyle;
 		public FontStyle RegularFontStyle
 		{
@@ -74,17 +73,6 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 		{
 			base.AfterConstruction();
 			RegularFontStyle = FontStyle.Regular;
-		}
-
-		protected override void AfterCreate()
-		{
-			base.AfterCreate();
-			//TODO Remove After several version
-			if (IsBold)
-			{
-				_regularFontStyle = FontStyle.Bold;
-				IsBold = false;
-			}
 		}
 	}
 }

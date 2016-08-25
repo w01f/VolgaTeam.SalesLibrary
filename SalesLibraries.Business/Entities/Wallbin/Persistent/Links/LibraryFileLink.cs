@@ -74,6 +74,9 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		public override string WebPath => String.Format("{1}{0}", RelativePath, Path.DirectorySeparatorChar);
 
 		[NotMapped, JsonIgnore]
+		public override string LinkInfoDisplayName => Settings.TextWordWrap ? NameWithExtension : Name;
+
+		[NotMapped, JsonIgnore]
 		public override string DisplayNameWithoutNote
 		{
 			get
@@ -156,9 +159,9 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 			base.ApplyValues(link);
 		}
 
-		public override BaseLibraryLink Copy()
+		public override BaseLibraryLink Copy(bool forMove = false)
 		{
-			var link = (LibraryFileLink)base.Copy();
+			var link = (LibraryFileLink)base.Copy(forMove);
 			link.IsDead = IsDead;
 			link.DataSourceId = DataSourceId;
 			return link;

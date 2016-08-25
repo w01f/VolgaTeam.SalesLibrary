@@ -88,9 +88,9 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 			return !Directory.Exists(FullPath);
 		}
 
-		public override BaseLibraryLink Copy()
+		public override BaseLibraryLink Copy(bool forMove = false)
 		{
-			var folderLink = (LibraryFolderLink)base.Copy();
+			var folderLink = (LibraryFolderLink)base.Copy(forMove);
 
 			foreach (var libraryLink in Links.OfType<LibraryFileLink>())
 			{

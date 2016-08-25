@@ -10,8 +10,8 @@ using SalesLibraries.Common.Helpers;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSettings
 {
-	//public partial class LineBreakOptions : UserControl, ILinkProperties
 	[IntendForClass(typeof(LineBreak))]
+	//public partial class LineBreakOptions : UserControl, ILinkSettingsEditControl
 	public partial class LineBreakOptions : XtraTabPage, ILinkSettingsEditControl
 	{
 		private readonly LineBreak _data;
@@ -44,6 +44,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			buttonEditLineBreakFont.Tag = _data.Settings.Font;
 			buttonEditLineBreakFont.EditValue = Utils.FontToString(_data.Settings.Font);
 			colorEditLineBreakFontColor.Color = _data.DisplayColor;
+			checkEditTextWordWrap.Checked = _data.Settings.TextWordWrap;
 			memoEditNote.EditValue = _data.Settings.Note;
 		}
 
@@ -52,6 +53,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			_data.Settings.Font = buttonEditLineBreakFont.Tag as Font;
 			if (colorEditLineBreakFontColor.Color != _data.DisplayColor)
 				_data.Settings.ForeColor = colorEditLineBreakFontColor.Color;
+			_data.Settings.TextWordWrap = checkEditTextWordWrap.Checked;
 			_data.Settings.Note = memoEditNote.EditValue != null ? memoEditNote.EditValue.ToString().Trim() : string.Empty;
 		}
 

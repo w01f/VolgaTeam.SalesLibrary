@@ -56,6 +56,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			buttonEditLinkSpecialFont.EditValue = _data.Settings.Font != null ? Utils.FontToString(_data.Settings.Font) : null;
 			buttonEditLinkSpecialFont.Tag = _data.Settings.Font;
 			colorEditLinkSpecialColor.Color = _data.DisplayColor;
+			checkEditTextWordWrap.Checked = _data.Settings.TextWordWrap;
 			checkEditFakeDate.Checked = ((LibraryObjectLinkSettings)_data.Settings).FakeFileDate.HasValue;
 			dateEditFakeDate.EditValue = ((LibraryObjectLinkSettings)_data.Settings).FakeFileDate;
 		}
@@ -77,6 +78,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 				_data.Settings.Font = null;
 			if (_data.DisplayColor != colorEditLinkSpecialColor.Color)
 				_data.Settings.ForeColor = colorEditLinkSpecialColor.Color;
+			_data.Settings.TextWordWrap = checkEditTextWordWrap.Checked;
 			((LibraryObjectLinkSettings)_data.Settings).FakeFileDate = checkEditFakeDate.Checked &&
 														 dateEditFakeDate.EditValue != null
 				? (DateTime?)dateEditFakeDate.EditValue

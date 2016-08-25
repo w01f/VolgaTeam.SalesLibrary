@@ -32,6 +32,9 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		public override string WebFormat => WebFormats.InternalLink;
 
 		[NotMapped, JsonIgnore]
+		public override string LinkInfoDisplayName => Settings.TextWordWrap ? "Internal Link" : Name;
+
+		[NotMapped, JsonIgnore]
 		public override string Hint
 		{
 			get

@@ -66,6 +66,9 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		}
 
 		[NotMapped, JsonIgnore]
+		public override string LinkInfoDisplayName => Settings.TextWordWrap ? RelativePath : Name;
+
+		[NotMapped, JsonIgnore]
 		public override string Hint
 		{
 			get
@@ -84,9 +87,9 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 
 		[NotMapped, JsonIgnore]
 		public override Font DisplayFont => base.DisplayFont ??
-		                                    (((LibraryObjectLinkSettings)Settings).IsSpecialFormat ?
-			                                    Settings.Font :
-			                                    null);
+											(((LibraryObjectLinkSettings)Settings).IsSpecialFormat ?
+												Settings.Font :
+												null);
 
 		[NotMapped, JsonIgnore]
 		public bool IsCorrupted => !Banner.Enable && String.IsNullOrEmpty(DisplayName);
@@ -121,9 +124,9 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 			base.ResetToDefault();
 		}
 
-		public override BaseLibraryLink Copy()
+		public override BaseLibraryLink Copy(bool forMove = false)
 		{
-			var link = (LibraryObjectLink)base.Copy();
+			var link = (LibraryObjectLink)base.Copy(forMove);
 			link.RelativePath = RelativePath;
 			link.ExpirationEncoded = ExpirationEncoded;
 			return link;

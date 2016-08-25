@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using DevExpress.XtraEditors;
-using SalesLibraries.CloudAdmin.Controllers;
+using SalesLibraries.FileManager.Controllers;
 
 namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettings
 {
@@ -19,7 +19,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 			var selectedLink = MainController.Instance.WallbinViews.Selection.SelectedLink;
 			Text = selectedFolder != null && selectedLink != null ?
 				String.Format("{0}{1}",
-					selectedLink.Name,
+					selectedLink.LinkInfoDisplayName,
 					selectedLink.Tags.HasCategories || selectedLink.Tags.HasKeywords ?
 						String.Format("{0}<size=-2><color=gray>({1})</color></size>",
 							Environment.NewLine,

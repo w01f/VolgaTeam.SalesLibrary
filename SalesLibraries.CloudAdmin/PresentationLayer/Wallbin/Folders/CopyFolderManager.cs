@@ -45,9 +45,9 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders
 			}
 		}
 
-		private void AddFolder(LibraryPage targetPage)
+		private void AddFolder(LibraryPage targetPage, bool moveFolder = false)
 		{
-			var newFolder = _dataSource.Copy();
+			var newFolder = _dataSource.Copy(moveFolder);
 			var newColumnOrder = targetPage.Folders.Any() ? targetPage.Folders.Max(f => f.ColumnOrder) : 0;
 			var newRowOrder = targetPage.Folders.Any(f => f.ColumnOrder == newColumnOrder) ? targetPage.Folders.Where(f => f.ColumnOrder == newColumnOrder).Max(f => f.RowOrder) : 0;
 			targetPage.AddFolder(newFolder, newColumnOrder, newRowOrder);
@@ -61,7 +61,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders
 
 		private void MoveFolder(LibraryPage targetPage)
 		{
-			AddFolder(targetPage);
+			AddFolder(targetPage, true);
 			FolderMoved?.Invoke(this, new FolderMovingEventArgs { TargetPage = targetPage, DeleteFromCurrent = true });
 		}
 	}
