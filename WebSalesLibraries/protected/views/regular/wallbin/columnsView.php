@@ -25,7 +25,7 @@
 									<? if ($column->banner->showText): ?>
 										<td>
 											<span style="text-align: <? echo $column->banner->imageAlignment; ?>;">
-												<? echo $column->banner->text; ?>
+												<? echo nl2br($column->banner->text); ?>
 											</span>
 										</td>
 									<? endif; ?>

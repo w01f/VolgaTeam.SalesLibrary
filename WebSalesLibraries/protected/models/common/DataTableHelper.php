@@ -25,14 +25,14 @@
 						$type = 9999;
 
 					$record['id'] = $linkRecord['id'];
-					$record['name'] = $linkRecord['name'];
+					$record['name'] = nl2br($linkRecord['name']);
 
 					$record['file_name'] = $linkRecord['file_name'];
 					$record['path'] = $linkRecord['path'];
 					$record['lib_name'] = $linkRecord['lib_name'];
 
 					$record['tooltip'] = sprintf('%s<br><br>%s',
-						isset($linkRecord['file_name']) && $linkRecord['file_name'] != '' ? $linkRecord['file_name'] : $linkRecord['name'],
+						isset($linkRecord['file_name']) && $linkRecord['file_name'] != '' ? $linkRecord['file_name'] : nl2br($linkRecord['name']),
 						array_key_exists($linkRecord['format'], Yii::app()->params['tooltips']['wallbin']) ? Yii::app()->params['tooltips']['wallbin'][$linkRecord['format']] : '');
 
 					$record['date'] = array(

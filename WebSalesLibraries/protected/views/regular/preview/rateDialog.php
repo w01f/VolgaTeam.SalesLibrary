@@ -12,7 +12,7 @@
 	<div class="row">
 		<div class="col col-xs-12 text-left">
 			<h4 class="file-name">
-				<? echo isset($previewData->fileName) ? $previewData->fileName : $previewData->name ?>
+				<? echo isset($previewData->fileName) ? $previewData->fileName : nl2br($previewData->name); ?>
 			</h4>
 		</div>
 	</div>

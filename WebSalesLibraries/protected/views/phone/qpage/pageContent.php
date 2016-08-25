@@ -50,7 +50,7 @@
 				<? $links = $page->getLibraryLinks(); ?>
 				<? foreach ($links as $link): ?>
 					<? if (!in_array($link->type, array(5, 6))): ?>
-						<div><a class="file-link" href="#"><span><? echo $link->name; ?></span>
+						<div><a class="file-link" href="#"><span><? echo nl2br($link->name); ?></span>
 								<div class="service-data">
 									<div class="link-id"><? echo $link->id; ?></div>
 								</div>

@@ -52,9 +52,10 @@
 		public $filePath;
 		public $universalPreview;
 		public $browser;
-		public $isFavorite;
 		public $folderContent;
 		public $tooltip;
+
+		public $isFavorite;
 		public $isFolder;
 		public $isLineBreak;
 		public $isDirectUrl;
@@ -302,7 +303,7 @@
 				if (!$this->isFolder && isset($this->fileName))
 					$tooltipList[] = $this->fileName;
 				else if (!$this->isLineBreak)
-					$tooltipList[] = $this->name;
+					$tooltipList[] = nl2br($this->name);
 			}
 			else if ($isLineBreak && isset($this->lineBreakProperties->note) && $this->lineBreakProperties->note != '')
 				$tooltipList[] = $this->lineBreakProperties->note;

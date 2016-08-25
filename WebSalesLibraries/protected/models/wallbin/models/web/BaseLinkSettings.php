@@ -49,6 +49,11 @@
 		 * @var boolean
 		 * @soap
 		 */
+		public $isTextWordWrap;
+		/**
+		 * @var boolean
+		 * @soap
+		 */
 		public $isRestricted;
 		/**
 		 * @var boolean

@@ -36,7 +36,7 @@
 	<a href="<? echo $link->isDirectUrl ? $link->fileLink : '#'; ?>" target="_blank" id="link<?php echo $link->id; ?>"
 	   class="<? echo $linkContainerClass; ?>"
 	   style="text-decoration: underline;">
-		<? echo $link->name; ?>
+		<? echo nl2br($link->name); ?>
 		<span class="service-data"><? echo $link->getLinkData(); ?></span>
 	</a>
 </li>

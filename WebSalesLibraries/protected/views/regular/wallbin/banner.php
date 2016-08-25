@@ -17,7 +17,7 @@
 			  font-style: <? echo $banner->font->isItalic ? ' italic' : ' normal'; ?>;
 			  text-decoration: <? echo $banner->font->isUnderlined ? ' underline' : ' inherit'; ?>;
 			  color: <? echo $banner->foreColor; ?>;">
-			<?echo $banner->text;?>
+			<?echo nl2br($banner->text);?>
 	</span>
 </div>
 <? else: ?>

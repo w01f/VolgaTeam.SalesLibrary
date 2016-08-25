@@ -316,10 +316,42 @@
 				{
 					$reportRecord = new FileActivityReportModel();
 					$reportRecord->group = $resultRecord['group_name'];
-					$reportRecord->fileName = str_replace('\/', '/', $resultRecord['file_name']);
+					$reportRecord->fileName = base64_encode(str_replace('\/', '/', $resultRecord['file_name']));
 					$reportRecord->library = isset($resultRecord['lib_name']) && $resultRecord['lib_name'] != '' ? $resultRecord['lib_name'] : 'URL';
 					$reportRecord->activityCount = $resultRecord['action_count'];
 					$reportRecords[] = $reportRecord;
+				}
+			}
+			return $reportRecords;
+		}
+
+		/**
+		 * @param string $sessionKey
+		 * @param string $dateStart
+		 * @param string $dateEnd
+		 * @return FileActivityReportModel[]
+		 * @soap
+		 */
+		public function getFileActivityReportLegacy($sessionKey, $dateStart, $dateEnd)
+		{
+			$reportRecords = array();
+			if ($this->authenticateBySession($sessionKey))
+			{
+				$command = Yii::app()->db->createCommand("call sp_get_file_activity_report_legacy(:start_date,:end_date)");
+				$command->bindValue(":start_date", date(Yii::app()->params['mysqlDateFormat'], strtotime($dateStart)), PDO::PARAM_STR);
+				$command->bindValue(":end_date", date(Yii::app()->params['mysqlDateFormat'], strtotime($dateEnd)), PDO::PARAM_STR);
+				$resultRecords = $command->queryAll();
+				foreach ($resultRecords as $resultRecord)
+				{
+					if (!empty($resultRecord['file_name']) && $resultRecord['file_name'] != '-')
+					{
+						$reportRecord = new FileActivityReportModel();
+						$reportRecord->group = $resultRecord['group_name'];
+						$reportRecord->fileName = base64_encode(str_replace('\/', '/', $resultRecord['file_name']));
+						$reportRecord->library = isset($resultRecord['lib_name']) && $resultRecord['lib_name'] != '' ? $resultRecord['lib_name'] : 'URL';
+						$reportRecord->activityCount = $resultRecord['action_count'];
+						$reportRecords[] = $reportRecord;
+					}
 				}
 			}
 			return $reportRecords;

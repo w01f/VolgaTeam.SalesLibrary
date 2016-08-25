@@ -17,7 +17,7 @@
 	<div data-role='content' class="main-content">
 		<table class="content-header">
 			<tr>
-				<td class="title gray"><? echo $data->name; ?></td>
+				<td class="title gray"><? echo nl2br($data->name); ?></td>
 				<td class="back">
 					<a href="#" data-role="button" data-icon="ion-arrow-left-a" data-mini="true" data-inline="true" data-transition="slidefade" data-direction="reverse">BACK</a>
 				</td>

@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS `tbl_link` (
   `id_parent_link` varchar(36) NULL,
   `id_folder` varchar(36) NOT NULL,
   `id_library` varchar(36) NOT NULL,
-  `name` varchar(256) NOT NULL,
+  `name` varchar(4096) NOT NULL,
   `file_relative_path` varchar(256) NOT NULL,
   `file_name` varchar(256) NOT NULL,
   `file_extension` varchar(8) NOT NULL,

@@ -55,7 +55,7 @@
 	cursor: default !important;
 }
 
-.link-text
+.link-text-no-wrap
 {
 	white-space: nowrap;
 	line-height: 32px;
@@ -66,7 +66,7 @@
 	font-size: 12pt;
 }
 
-.link-line-break
+.link-line-break-no-wrap
 {
 	white-space: nowrap;
 }

@@ -20,7 +20,7 @@
 	{
 		$isLineBreak = false;
 		$linkContainerClass = 'link-container url';
-		if($link->isExternalUrl)
+		if ($link->isExternalUrl)
 			$linkContainerClass .= ' url-external';
 		else
 			$linkContainerClass .= ' url-internal';
@@ -54,51 +54,62 @@
 		$isLinkStaticFontSize = false;
 		if ($isLineBreak)
 		{
+			if (!empty($link->lineBreakProperties->foreColor))
+				$color = $link->lineBreakProperties->foreColor;
+			else if (isset($link->parent) && !empty($link->parent->windowForeColor))
+				$color = $link->parent->windowForeColor;
+			else
+				$color = '#000000';
 			$displayWidget = !(isset($disableWidget) && $disableWidget) && isset($widget) && $widget != '';
-			$linkClass = 'link-line-break' . ($displayWidget ? ' widget' : '');
+			$linkClass = 'link-line-break' . (!$link->extendedProperties->isTextWordWrap ? ' link-line-break-no-wrap' : '') . ($displayWidget ? ' widget' : '');
 			$linkFontProperties = 'font-family: ' . $link->lineBreakProperties->font->name . '; '
 				. 'font-size: ' . $link->lineBreakProperties->font->size . 'pt; '
 				. 'font-weight: ' . ($link->lineBreakProperties->font->isBold ? ' bold' : ' normal') . '; '
 				. 'font-style: ' . ($link->lineBreakProperties->font->isItalic ? ' italic' : ' normal') . '; '
 				. 'text-decoration: ' . ($link->lineBreakProperties->font->isUnderlined ? ' underline' : ' none') . '; '
-				. 'color: ' . $link->lineBreakProperties->foreColor . '; '
-				. 'white-space: nowrap;';
+				. 'color: ' . $color . '; '
+				. (!$link->extendedProperties->isTextWordWrap ? 'white-space: nowrap; ' : '')
+				. (!(isset($disableWidget) && $disableWidget) && isset($widget) ? "background-image: url('data:image/png;base64," . $widget . "');" : '');
 			$isLinkStaticFontSize = true;
 		}
 		else
 		{
 			$displayWidget = isset($link->files) ? $link->parent->displayLinkWidgets : (!(isset($disableWidget) && $disableWidget) && isset($widget) && $widget != '');
 			$linkClass = $displayWidget ? ' widget' : '';
+
+			$isDefaultFont = true;
 			if ($link->extendedProperties->isSpecialFormat && isset($link->extendedProperties->font))
 			{
 				$isLinkStaticFontSize = true;
 				$font = $link->extendedProperties->font;
+				$isDefaultFont = false;
 			}
 			else if (isset($link->parent) && isset($link->parent->windowFont))
 				$font = $link->parent->windowFont;
 			else
 				$font = Font::getDefault();
 
-			if (isset($link->extendedProperties->foreColor))
+			if (!empty($link->extendedProperties->foreColor))
 				$color = $link->extendedProperties->foreColor;
-			else if (isset($link->parent) && isset($link->parent->windowForeColor))
+			else if (isset($link->parent) && !empty($link->parent->windowForeColor))
 				$color = $link->parent->windowForeColor;
 			else
 				$color = '#000000';
 
 			$linkFontProperties = 'font-family: ' . $font->name . '; '
-				. 'font-size: ' . $font->size . 'pt; '
-				. 'font-weight: ' . ($link->extendedProperties->isBold ? ' bold' : ($font->isBold ? ' bold' : ' normal')) . '; '
-				. 'font-style: ' . ($link->extendedProperties->isItalic ? ' italic' : ($font->isItalic ? ' italic' : ' normal')) . '; '
-				. 'text-decoration: ' . ($link->extendedProperties->isUnderline ? ' underline' : ($font->isUnderlined ? ' underline' : ' inherit')) . '; '
-				. 'color: ' . $color . '; '
-				. 'white-space: nowrap;';
+			. (!$isDefaultFont ? 'font-size: ' . $font->size . 'pt; ' : ' ')
+			. 'font-weight: ' . ($link->extendedProperties->isBold ? ' bold' : ($font->isBold ? ' bold' : ' normal')) . '; '
+			. 'font-style: ' . ($link->extendedProperties->isItalic ? ' italic' : ($font->isItalic ? ' italic' : ' normal')) . '; '
+			. 'text-decoration: ' . ($link->extendedProperties->isUnderline ? ' underline' : ($font->isUnderlined ? ' underline' : ' inherit')) . '; '
+			. 'color: ' . $color . '; '
+			. (!$link->extendedProperties->isTextWordWrap ? 'white-space: nowrap; ' : '')
+				. (!(isset($disableWidget) && $disableWidget) && isset($widget) ? "background-image: url('data:image/png;base64," . $widget . "');" : '');
 		}
 		?>
 		<div class="<? echo $linkClass; ?>" draggable="<? echo $draggable ? 'true' : 'false'; ?>"
-		     style="background-image: <? echo !(isset($disableWidget) && $disableWidget) && isset($widget) ? "url('data:image/png;base64," . $widget . "')" : ""; ?>; <? echo $linkFontProperties; ?>">
-			<span class="link-text<? echo $isLinkStaticFontSize != true ? ' link-text-sized' : ''; ?> mtTool"
-			      <? if (isset($tooltip)): ?>mtcontent="<? echo $tooltip; ?>"<? endif; ?>><? echo $link->name; ?></span>
+		     style="<? echo $linkFontProperties; ?>">
+			<span class="link-text<? echo !$link->extendedProperties->isTextWordWrap ? ' link-text-no-wrap' : ''; ?><? echo $isLinkStaticFontSize != true ? ' link-text-sized' : ''; ?> mtTool"
+				<? if (isset($tooltip)): ?>mtcontent="<? echo $tooltip; ?>"<? endif; ?>><? echo nl2br($link->name); ?></span>
 			<? if (isset($link->extendedProperties->note) && $link->extendedProperties->note != ""): ?>
 				<span
 					class="link-note<? echo $isLinkStaticFontSize != true ? ' link-note-sized' : ''; ?>"><? echo ' - ' . $link->extendedProperties->note; ?></span>
