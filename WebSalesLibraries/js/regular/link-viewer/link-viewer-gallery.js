@@ -7,7 +7,7 @@
 		var that = this;
 		var sliderData = new $.SalesPortal.GalleryData(parameters);
 
-		var pageImage = sliderData.container.find('.page-image');
+		var pageImage = sliderData.container.find('.page-preview-image');
 
 		var navButtonNext = sliderData.container.find('.nav-image-button.move-next');
 		var navButtonPrev = sliderData.container.find('.nav-image-button.move-previous');

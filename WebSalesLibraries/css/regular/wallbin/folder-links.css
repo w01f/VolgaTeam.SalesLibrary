@@ -55,10 +55,17 @@
 	cursor: default !important;
 }
 
+.link-text,
 .link-text-no-wrap
 {
 	white-space: nowrap;
 	line-height: 32px;
+}
+
+.link-text-wrap
+{
+	white-space: normal !important;
+	line-height: normal !important;
 }
 
 .link-text-sized
@@ -66,9 +73,20 @@
 	font-size: 12pt;
 }
 
+.link-line-break,
 .link-line-break-no-wrap
 {
 	white-space: nowrap;
+}
+
+.link-line-break-wrap
+{
+	white-space: normal !important;
+}
+
+.link-line-break .link-text
+{
+    cursor: default;
 }
 
 .link-note
@@ -106,8 +124,7 @@
 
 .link-container.clickable,
 .link-container.url,
-.link-container.folder-link,
-.link-container.line-break
+.link-container.folder-link
 {
 	cursor: pointer;
 }

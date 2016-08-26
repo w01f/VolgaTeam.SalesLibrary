@@ -119,8 +119,10 @@
 
 		this.initFolderLinks = function (libraryFolderElement, parentId)
 		{
+			var collapsibleLinks = libraryFolderElement.find('.collapsible-link');
+			collapsibleLinks.collapsible('disable');
+
 			var regularLinks = libraryFolderElement.find('.regular-link');
-			regularLinks.collapsible('disable');
 			regularLinks.off('click').on('click', function ()
 			{
 				$.SalesPortal.LinkManager.requestViewDialog(
@@ -131,6 +133,12 @@
 					},
 					false
 				);
+			});
+
+			var directLinks = libraryFolderElement.find('.direct-link');
+			directLinks.off('click').on('click', function ()
+			{
+				$.SalesPortal.LinkManager.openFile($(this).find('.url').text(), "_blank");
 			});
 
 			var folderLinks = libraryFolderElement.find('.folder-link');

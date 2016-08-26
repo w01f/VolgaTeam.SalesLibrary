@@ -15,6 +15,8 @@
 		{
 			destroy();
 
+			dataset = dataset != undefined ? dataset : [];
+
 			var defaultSortColumnIndex = 1;
 			if (viewOptions.showCategory)
 				defaultSortColumnIndex++;
@@ -58,8 +60,19 @@
 
 			var table = $("#data-table-content");
 
+			var hasCategories = false;
+
+			$.each(dataset, function (index, value)
+			{
+				if (value.tag != null && value.tag != '')
+				{
+					hasCategories = true;
+					return false;
+				}
+			});
+
 			var columnSettings = [];
-			if (viewOptions.showCategory)
+			if (viewOptions.showCategory && hasCategories)
 				columnSettings.push({
 					"data": "tag",
 					"title": viewOptions.categoryColumnName,
@@ -101,14 +114,14 @@
 				"data": "rate",
 				"title": "Rating",
 				"width": "90px",
-				"class": "centered",
+				"class": "centered rate-image-container",
 				"render": {
 					_: function (data)
 					{
 						var cellContent = '';
 						if (data.image != '')
 							cellContent = '<img src="' + data.image + '">';
-						return '<div class="clickable-area rate-image-container">' + cellContent + '</div>';
+						return cellContent;
 					},
 					sort: 'value'
 				}
@@ -146,7 +159,7 @@
 			});
 
 			dataTable = table.dataTable({
-				"data": dataset != undefined ? dataset : [],
+				"data": dataset,
 				"columns": columnSettings,
 				stateSave: saveState,
 				"order": [
@@ -163,7 +176,9 @@
 					"sEmptyTable": "",
 					"sZeroRecords": ""
 				},
-				"dom": "<'row'<'col-xs-4'l><'col-xs-4 back-url text-center'><'col-xs-4'f>>" +
+				"dom": (dataset.length > 0 ?
+					"<'row'<'col-xs-4'l><'col-xs-4 back-url text-center'><'col-xs-4'f>>" :
+					"<'row'<'col-xs-12 back-url text-center'>>") +
 				"<'row'<'col-xs-12'tr>>" +
 				"<'row'<'col-xs-5'i><'col-xs-7'p>>"
 			});
@@ -189,7 +204,7 @@
 				});
 			}
 
-			table.on('click', '.rate-image-container', function (e)
+			table.find('.rate-image-container').closest('td').on('click', function (e)
 			{
 				e.stopPropagation();
 
@@ -207,9 +222,12 @@
 						},
 						success: function (msg)
 						{
+							var scrollBody = $(".dataTables_scrollBody");
+							var scrollPos = scrollBody.scrollTop();
 							linkData.rate.value = msg.totalRate;
 							linkData.rate.image = msg.totalRateImage;
 							linkRow.invalidate().draw();
+							scrollBody.scrollTop(scrollPos);
 						},
 						error: function ()
 						{

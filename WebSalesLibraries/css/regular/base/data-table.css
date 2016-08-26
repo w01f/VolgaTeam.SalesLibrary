@@ -4,7 +4,11 @@
 	cursor: pointer;
 }
 
-#data-table-content tr .rate-image-container,
+#data-table-content tr .rate-image-container
+{
+    cursor: pointer;
+}
+
 #data-table-content tr .rate-image-container img
 {
 	height: 16px;

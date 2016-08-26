@@ -9,10 +9,22 @@
 	margin-top: 130px;
 }
 
-.link-viewer .page-image-container,
-.link-viewer .page-image
+.link-viewer .preview-image-container,
+.link-viewer .preview-image-container .page-preview-image
 {
 	height: 310px;
+}
+
+.link-viewer .preview-image-container .single-preview-image
+{
+	max-height: 310px;
+}
+
+.link-viewer .preview-image-container .image-format-helper
+{
+	display: inline-block;
+	height: 100%;
+	vertical-align: middle;
 }
 
 .link-viewer .current-slide-info

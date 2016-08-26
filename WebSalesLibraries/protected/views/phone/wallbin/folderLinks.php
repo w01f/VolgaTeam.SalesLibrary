@@ -13,8 +13,16 @@
 					<div class="link-id"><? echo $link->id; ?></div>
 				</div>
 			</div>
-		<? elseif(!$link->isLineBreak): ?>
-			<div class="regular-link" data-role="collapsible" data-collapsed-icon="none" data-expanded-icon="none">
+		<? elseif ($link->isDirectUrl): ?>
+			<div class="collapsible-link direct-link" data-role="collapsible" data-collapsed-icon="none" data-expanded-icon="none">
+				<h3><? echo nl2br($link->name); ?></h3>
+				<div class="service-data">
+					<div class="url"><? echo $link->fileLink; ?></div>
+					<div class="link-id"><? echo $link->id; ?></div>
+				</div>
+			</div>
+		<? elseif (!$link->isLineBreak): ?>
+			<div class="collapsible-link regular-link" data-role="collapsible" data-collapsed-icon="none" data-expanded-icon="none">
 				<h3><? echo nl2br($link->name); ?></h3>
 				<div class="service-data">
 					<div class="link-id"><? echo $link->id; ?></div>

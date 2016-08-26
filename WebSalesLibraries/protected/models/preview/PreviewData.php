@@ -37,7 +37,9 @@
 		{
 			$this->link = $link;
 			$this->linkId = $link->id;
-			$this->name = $link->name;
+			$this->name = $link->extendedProperties->isTextWordWrap ?
+				$link->fileName :
+				$link->name;
 			$this->format = $link->originalFormat;
 			$this->tags = $link->getTagsString();
 			$this->url = str_replace('SalesLibraries/SalesLibraries', 'SalesLibraries', $link->fileLink);

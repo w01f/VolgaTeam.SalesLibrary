@@ -83,11 +83,12 @@
 	<div class="tab-content">
 		<div role="tabpanel" class="tab-pane" id="link-viewer-tab-preview">
 			<div class="row">
-				<div class="col col-xs-12 text-center">
-					<img class="page-image log-action" src="<? echo $data->url; ?>">
+				<div class="preview-image-container col col-xs-12 text-center">
+					<span class="image-format-helper"></span>
+					<img class="single-preview-image log-action" src="<? echo $data->url; ?>">
 				</div>
 			</div>
-			<div class="row">
+			<div class="row gallery-control-buttons">
 				<div class="col col-xs-8 text-left">
 					<? if ($data->config->enableRating): ?>
 						<div id="user-link-rate-container">

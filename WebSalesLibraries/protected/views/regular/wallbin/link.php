@@ -61,7 +61,7 @@
 			else
 				$color = '#000000';
 			$displayWidget = !(isset($disableWidget) && $disableWidget) && isset($widget) && $widget != '';
-			$linkClass = 'link-line-break' . (!$link->extendedProperties->isTextWordWrap ? ' link-line-break-no-wrap' : '') . ($displayWidget ? ' widget' : '');
+			$linkClass = 'link-line-break' . (!$link->extendedProperties->isTextWordWrap ? ' link-line-break-no-wrap' : ' link-line-break-wrap') . ($displayWidget ? ' widget' : '');
 			$linkFontProperties = 'font-family: ' . $link->lineBreakProperties->font->name . '; '
 				. 'font-size: ' . $link->lineBreakProperties->font->size . 'pt; '
 				. 'font-weight: ' . ($link->lineBreakProperties->font->isBold ? ' bold' : ' normal') . '; '
@@ -108,7 +108,7 @@
 		?>
 		<div class="<? echo $linkClass; ?>" draggable="<? echo $draggable ? 'true' : 'false'; ?>"
 		     style="<? echo $linkFontProperties; ?>">
-			<span class="link-text<? echo !$link->extendedProperties->isTextWordWrap ? ' link-text-no-wrap' : ''; ?><? echo $isLinkStaticFontSize != true ? ' link-text-sized' : ''; ?> mtTool"
+			<span class="link-text<? echo !$link->extendedProperties->isTextWordWrap ? ' link-text-no-wrap' : ' link-text-wrap'; ?><? echo $isLinkStaticFontSize != true ? ' link-text-sized' : ''; ?> mtTool"
 				<? if (isset($tooltip)): ?>mtcontent="<? echo $tooltip; ?>"<? endif; ?>><? echo nl2br($link->name); ?></span>
 			<? if (isset($link->extendedProperties->note) && $link->extendedProperties->note != ""): ?>
 				<span

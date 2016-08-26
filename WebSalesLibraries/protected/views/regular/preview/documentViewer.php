@@ -112,8 +112,8 @@
 						</div>
 					<? endif; ?>
 				</div>
-				<div class="col col-xs-10 text-center page-image-container">
-					<img class="page-image log-action" style="display: none;" src="//:0">
+				<div class="col col-xs-10 text-center preview-image-container">
+					<img class="page-preview-image log-action" style="display: none;" src="//:0">
 				</div>
 				<div class="col col-xs-1 text-center">
 					<? if (!$data->singlePage): ?>

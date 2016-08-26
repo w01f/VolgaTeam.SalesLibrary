@@ -1,7 +1,7 @@
 (function ($)
 {
 	window.BaseUrl = window.BaseUrl || '';
-	$.SalesPortal = $.SalesPortal || { };
+	$.SalesPortal = $.SalesPortal || {};
 	var LinkManager = function ()
 	{
 		this.requestViewDialog = function (linkId, parentPageData, isQuickSite)
@@ -44,9 +44,9 @@
 			});
 		};
 
-		this.openFile = function (url)
+		this.openFile = function (url, target)
 		{
-			window.open(url.replace(/&amp;/g, '%26'));
+			window.open(url.replace(/&amp;/g, '%26'), target);
 		};
 	};
 	$.SalesPortal.LinkManager = new LinkManager();
