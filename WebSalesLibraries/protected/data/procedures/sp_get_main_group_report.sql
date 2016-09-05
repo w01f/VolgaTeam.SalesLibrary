@@ -21,14 +21,14 @@ select distinct(g.name),
           left join (
             select sg.name,count(sg.id) as doc_count from tbl_statistic_group as sg
                   join tbl_statistic_activity as sact on sact.id = sg.id_activity
-                  join tbl_statistic_data as sdet on sdet.id_activity = sact.id and sdet.data like '%"originalFormat": %' and sdet.data not like '%"originalFormat": "video"%' and sdet.data not like '%"originalFormat": "wmv"%' and sdet.data not like '%"originalFormat": "mp4"%'
+                  join tbl_statistic_data as sdet on sdet.id_activity = sact.id and sdet.data like '%"originalFormat":%' and sdet.data not like '%"originalFormat":"video"%' and sdet.data not like '%"originalFormat": "video"%' and sdet.data not like '%"originalFormat": "wmv"%' and sdet.data not like '%"originalFormat": "mp4"%'
             where sact.date_time >= start_date and sact.date_time <= end_date
             group by sg.name
             ) as g_docs on g_docs.name = g.name
           left join (
             select sg.name,count(sg.id) as video_count from tbl_statistic_group as sg
                   join tbl_statistic_activity as sact on sact.id = sg.id_activity
-                  join tbl_statistic_data as sdet on sdet.id_activity = sact.id and sdet.data like '%"originalFormat": %' and (sdet.data like '%"originalFormat": "video"%' or sdet.data like '%"originalFormat": "wmv"%' or sdet.data like '%"originalFormat": "mp4"%')
+                  join tbl_statistic_data as sdet on sdet.id_activity = sact.id and sdet.data like '%"originalFormat":%' and (sdet.data like '%"originalFormat":"video"%' or sdet.data like '%"originalFormat": "video"%' or sdet.data like '%"originalFormat": "wmv"%' or sdet.data like '%"originalFormat": "mp4"%')
             where sact.date_time >= start_date and sact.date_time <= end_date
             group by sg.name
             ) as g_videos on g_videos.name = g.name;

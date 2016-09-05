@@ -204,7 +204,7 @@
 				});
 			}
 
-			table.find('.rate-image-container').closest('td').on('click', function (e)
+			table.on('click', '.rate-image-container', function (e)
 			{
 				e.stopPropagation();
 

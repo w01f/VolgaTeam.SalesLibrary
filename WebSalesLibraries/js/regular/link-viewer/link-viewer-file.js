@@ -22,6 +22,8 @@
 					closeEffect: 'none',
 					afterShow: function ()
 					{
+						$.SalesPortal.SalesLibraryExtensions.sendLinkData(viewerData);
+
 						dialogContent = $('.fancybox-wrap');
 
 						if (viewerData.config.enableLogging)

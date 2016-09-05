@@ -11,5 +11,5 @@ CREATE PROCEDURE sp_get_library_files_report()
   from tbl_library lib
     join tbl_link l on l.id_library = lib.id
     left join tbl_preview p on p.id_container = l.id_preview
-  where l.type in (0,1,10,11,12,999)
+  where l.type in (0,1,3,4,10,11,12,999)
   group by lib.id, l.id, l.name, l.format;
