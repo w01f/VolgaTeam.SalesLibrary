@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
-using SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders;
+using SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 {
@@ -14,14 +14,14 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 
 		public DateTime? LastUpdate { get; set; }
 		public ClassicFolderBox SelectedFolder { get; private set; }
-		public List<LibraryObjectLink> SelectedFiles { get; private set; }
+		public List<BaseLibraryLink> SelectedLinks { get; }
 		public event EventHandler<SelectionEventArgs> SelectionChanged;
 
 		public BaseLibraryLink SelectedLink => _selectedLinks.Count == 1 ? _selectedLinks.First() : null;
 
 		public SelectionManager()
 		{
-			SelectedFiles = new List<LibraryObjectLink>();
+			SelectedLinks = new List<BaseLibraryLink>();
 		}
 
 		public void SelectLinks(IEnumerable<BaseLibraryLink> links, Keys modifierKeys)
@@ -38,7 +38,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 			if (!links.Any()) return;
 
 			_selectedLinks.AddRange(links.Where(link => _selectedLinks.All(selectedLink => selectedLink.ExtId != link.ExtId)));
-			SelectedFiles.AddRange(_selectedLinks.OfType<LibraryObjectLink>());
+			SelectedLinks.AddRange(_selectedLinks.OfType<BaseLibraryLink>());
 			LastUpdate = DateTime.Now;
 			SelectionChanged?.Invoke(this, new SelectionEventArgs(SelectionEventType.LinkSelected));
 		}
@@ -67,7 +67,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 		private void ResetLinks()
 		{
 			_selectedLinks.Clear();
-			SelectedFiles.Clear();
+			SelectedLinks.Clear();
 		}
 
 		private void ResetFolder()

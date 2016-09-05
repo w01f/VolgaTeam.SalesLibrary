@@ -8,7 +8,7 @@ using DevExpress.XtraEditors;
 using SalesLibraries.Business.Entities.Helpers;
 using SalesLibraries.Business.Entities.Wallbin.Persistent;
 using SalesLibraries.CloudAdmin.Controllers;
-using SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders;
+using SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders.Controls;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.Common.Objects.SearchTags;
 using SalesLibraries.CommonGUI.Wallbin.ColumnTitles;

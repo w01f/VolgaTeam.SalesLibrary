@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows.Forms;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders;
+using SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders.Controls;
 
 namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 {
@@ -14,14 +15,14 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 
 		public DateTime? LastUpdate { get; set; }
 		public ClassicFolderBox SelectedFolder { get; private set; }
-		public List<LibraryObjectLink> SelectedFiles { get; }
+		public List<LibraryObjectLink> SelectedLinks { get; }
 		public event EventHandler<SelectionEventArgs> SelectionChanged;
 
 		public BaseLibraryLink SelectedLink => _selectedLinks.Count == 1 ? _selectedLinks.First() : null;
 
 		public SelectionManager()
 		{
-			SelectedFiles = new List<LibraryObjectLink>();
+			SelectedLinks = new List<LibraryObjectLink>();
 		}
 
 		public void SelectLinks(IEnumerable<BaseLibraryLink> links, Keys modifierKeys)
@@ -38,7 +39,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 			if (!links.Any()) return;
 
 			_selectedLinks.AddRange(links.Where(link => _selectedLinks.All(selectedLink => selectedLink.ExtId != link.ExtId)));
-			SelectedFiles.AddRange(_selectedLinks.OfType<LibraryObjectLink>());
+			SelectedLinks.AddRange(_selectedLinks.OfType<LibraryObjectLink>());
 			LastUpdate = DateTime.Now;
 			SelectionChanged?.Invoke(this, new SelectionEventArgs(SelectionEventType.LinkSelected));
 		}
@@ -67,7 +68,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 		private void ResetLinks()
 		{
 			_selectedLinks.Clear();
-			SelectedFiles.Clear();
+			SelectedLinks.Clear();
 		}
 
 		private void ResetFolder()

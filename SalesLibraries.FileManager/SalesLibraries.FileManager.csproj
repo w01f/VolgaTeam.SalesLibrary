@@ -253,14 +253,16 @@
     <Compile Include="PresentationLayer\Wallbin\DataSource\FormCreateFolder.Designer.cs">
       <DependentUpon>FormCreateFolder.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Wallbin\Folders\ClassicFolderBox.cs">
+    <Compile Include="PresentationLayer\Wallbin\Folders\Controls\ClassicFolderBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Wallbin\Folders\ClassicFolderBox.designer.cs">
+    <Compile Include="PresentationLayer\Wallbin\Folders\Controls\ClassicFolderBox.designer.cs">
       <DependentUpon>ClassicFolderBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Wallbin\Folders\CopyFolderManager.cs" />
-    <Compile Include="PresentationLayer\Wallbin\Folders\FolderMovingEventArgs.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Folders\Clipboard\FolderClipboardManager.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Folders\Clipboard\FolderMovingEventArgs.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\Clipboard\LinkClipboardActionType.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\Clipboard\LinksClipboardManager.cs" />
     <Compile Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\InternalLinkEditControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -671,7 +673,7 @@
     <EmbeddedResource Include="PresentationLayer\Wallbin\DataSource\FormCreateFolder.resx">
       <DependentUpon>FormCreateFolder.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Wallbin\Folders\ClassicFolderBox.resx">
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Folders\Controls\ClassicFolderBox.resx">
       <DependentUpon>ClassicFolderBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\InternalLinkEditControl.resx">

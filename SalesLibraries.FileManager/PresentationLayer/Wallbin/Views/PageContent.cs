@@ -6,14 +6,12 @@ using System.Linq;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using SalesLibraries.Business.Entities.Helpers;
-using SalesLibraries.Business.Entities.Wallbin.NonPersistent;
-using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings;
 using SalesLibraries.Business.Entities.Wallbin.Persistent;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.Common.Objects.SearchTags;
 using SalesLibraries.CommonGUI.Wallbin.ColumnTitles;
 using SalesLibraries.FileManager.Controllers;
-using SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders;
+using SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 {

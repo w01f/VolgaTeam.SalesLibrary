@@ -52,12 +52,12 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 			gridViewGroups.CollapseAllDetails();
 			labelControlCategoryInfo.Text = String.Empty;
 
-			var defaultLink = Selection.SelectedFiles.FirstOrDefault(link => link.Tags.HasCategories) ?? Selection.SelectedFiles.FirstOrDefault();
+			var defaultLink = Selection.SelectedLinks.FirstOrDefault(link => link.Tags.HasCategories) ?? Selection.SelectedLinks.FirstOrDefault();
 			Enabled = defaultLink != null;
 			if (defaultLink == null) return;
 
-			var noData = Selection.SelectedFiles.All(link => !link.Tags.HasCategories);
-			var sameData = Selection.SelectedFiles.All(link => link.Tags.Categories.Compare(defaultLink.Tags.Categories));
+			var noData = Selection.SelectedLinks.All(link => !link.Tags.HasCategories);
+			var sameData = Selection.SelectedLinks.All(link => link.Tags.Categories.Compare(defaultLink.Tags.Categories));
 
 			buttonXReset.Enabled = !noData;
 			pnData.Enabled = sameData || noData;
@@ -93,7 +93,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 		{
 			gridViewGroups.CloseEditor();
 			gridViewTags.CloseEditor();
-			Selection.SelectedFiles.ApplyCategories(_groupTemplates
+			Selection.SelectedLinks.ApplyCategories(_groupTemplates
 				.Where(x => x.Selected)
 				.Select(g =>
 				{
@@ -113,7 +113,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 		public void ResetData()
 		{
 			if (MainController.Instance.PopupMessages.ShowWarningQuestion("Are you sure You want to DELETE ALL CATEGORY TAGS for the selected files?") != DialogResult.Yes) return;
-			Selection.SelectedFiles.ApplyCategories(new SearchGroup[] { });
+			Selection.SelectedLinks.ApplyCategories(new SearchGroup[] { });
 			EditorChanged?.Invoke(this, new EventArgs());
 			UpdateData();
 		}

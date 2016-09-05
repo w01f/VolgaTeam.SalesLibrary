@@ -102,12 +102,12 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.GroupSetting
 			DeniedUsers = null;
 			Enabled = false;
 
-			var defaultLink = Selection.SelectedFiles.FirstOrDefault(link => link.Security.HasSecuritySettings) ?? Selection.SelectedFiles.FirstOrDefault();
+			var defaultLink = Selection.SelectedLinks.FirstOrDefault(link => link.Security.HasSecuritySettings) ?? Selection.SelectedLinks.FirstOrDefault();
 			Enabled = defaultLink != null;
 			if (defaultLink == null) return;
 
-			var noData = Selection.SelectedFiles.All(link => !link.Security.HasSecuritySettings);
-			var sameData = Selection.SelectedFiles
+			var noData = Selection.SelectedLinks.All(link => !link.Security.HasSecuritySettings);
+			var sameData = Selection.SelectedLinks
 				.All(link =>
 					link.Security.IsRestricted == defaultLink.Security.IsRestricted &&
 					link.Security.IsForbidden == defaultLink.Security.IsForbidden &&
@@ -146,7 +146,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.GroupSetting
 		{
 			var assignedUsers = AssignedUsers;
 			var deniedUsers = DeniedUsers;
-			Selection.SelectedFiles.ApplySecurity(new SecuritySettings
+			Selection.SelectedLinks.ApplySecurity(new SecuritySettings
 			{
 				IsForbidden = rbSecurityForbidden.Checked,
 				IsRestricted = rbSecurityDenied.Checked || rbSecurityWhiteList.Checked || rbSecurityBlackList.Checked,
@@ -160,7 +160,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.GroupSetting
 		public void ResetData()
 		{
 			if (MainController.Instance.PopupMessages.ShowWarningQuestion("Are you sure You want to DELETE ALL SECURITY SETTINGS for the selected files?") != DialogResult.Yes) return;
-			Selection.SelectedFiles.ApplySecurity(new SecuritySettings());
+			Selection.SelectedLinks.ApplySecurity(new SecuritySettings());
 			EditorChanged?.Invoke(this, new EventArgs());
 
 			UpdateData();

@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using SalesLibraries.CloudAdmin.Controllers;
+using SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.Clipboard;
 
 namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 {
@@ -8,6 +10,9 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 	{
 		public FormatState FormatState { get; }
 		public SelectionManager Selection { get; private set; }
+		public LinksClipboardManager LinksClipboard { get; private set; }
+
+		public List<IWallbinView> Views { get; }
 
 		public IWallbinView ActiveWallbin { get; private set; }
 
@@ -19,6 +24,8 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 			FormatState.StateChanged += UpdateViewState;
 
 			Selection = new SelectionManager();
+			LinksClipboard = new LinksClipboardManager();
+			Views = new List<IWallbinView>();
 		}
 
 		public void Load()

@@ -55,12 +55,12 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.GroupSetting
 			_keywords.Clear();
 			Enabled = false;
 
-			var defaultLink = Selection.SelectedFiles.FirstOrDefault(link => link.Tags.HasKeywords) ?? Selection.SelectedFiles.FirstOrDefault();
+			var defaultLink = Selection.SelectedLinks.FirstOrDefault(link => link.Tags.HasKeywords) ?? Selection.SelectedLinks.FirstOrDefault();
 			Enabled = defaultLink != null;
 			if (defaultLink == null) return;
 
-			var noData = Selection.SelectedFiles.All(link => link.Tags.Keywords.Any());
-			var sameData = Selection.SelectedFiles.All(link => link.Tags.Keywords.Compare(defaultLink.Tags.Keywords));
+			var noData = Selection.SelectedLinks.All(link => link.Tags.Keywords.Any());
+			var sameData = Selection.SelectedLinks.All(link => link.Tags.Keywords.Compare(defaultLink.Tags.Keywords));
 
 			pnButtons.Enabled = !noData;
 			pnData.Enabled = sameData || noData;
@@ -75,14 +75,14 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.GroupSetting
 		{
 			gridView.CloseEditor();
 			_keywords.RemoveAll(tag => String.IsNullOrEmpty(tag.Name));
-			Selection.SelectedFiles.ApplyKeywords(_keywords.Where(tag => !String.IsNullOrEmpty(tag.Name)).ToArray());
+			Selection.SelectedLinks.ApplyKeywords(_keywords.Where(tag => !String.IsNullOrEmpty(tag.Name)).ToArray());
 			EditorChanged?.Invoke(this, new EventArgs());
 		}
 
 		public void ResetData()
 		{
 			if (MainController.Instance.PopupMessages.ShowWarningQuestion("Are you sure You want to DELETE ALL KEYWORD TAGS for the selected files?") != DialogResult.Yes) return;
-			Selection.SelectedFiles.ApplyKeywords(new SearchTag[] { });
+			Selection.SelectedLinks.ApplyKeywords(new SearchTag[] { });
 			EditorChanged?.Invoke(this, new EventArgs());
 			UpdateData();
 		}

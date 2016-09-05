@@ -5,15 +5,17 @@ using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using SalesLibraries.Common.DataState;
 using SalesLibraries.FileManager.Controllers;
+using SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.Clipboard;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 {
 	class ViewManager
 	{
-		public FormatState FormatState { get; private set; }
+		public FormatState FormatState { get; }
 		public SelectionManager Selection { get; private set; }
+		public LinksClipboardManager LinksClipboard { get; private set; }
 
-		public List<IWallbinView> Views { get; private set; }
+		public List<IWallbinView> Views { get; }
 
 		public IWallbinView ActiveWallbin { get; private set; }
 
@@ -27,7 +29,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 			FormatState.StateChanged += UpdateViewState;
 
 			Selection = new SelectionManager();
-
+			LinksClipboard = new LinksClipboardManager();
 			Views = new List<IWallbinView>();
 
 			BeforeLoad += OnViewBeforeLoad;

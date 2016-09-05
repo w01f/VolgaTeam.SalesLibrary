@@ -19,7 +19,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		public LinkSettingsType SettingsType => LinkSettingsType.Notes;
 		public int Order => 0;
 		public bool AvailableForEmbedded => false;
-		public SettingsEditorHeaderInfo HeaderInfo => null;
+		public SettingsEditorHeaderInfo HeaderInfo => new SettingsEditorHeaderInfo { Title = "Line Break Settings" };
 
 		public event EventHandler<EventArgs> ForceCloseRequested;
 
@@ -45,6 +45,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			buttonEditLineBreakFont.EditValue = Utils.FontToString(_data.Settings.Font);
 			colorEditLineBreakFontColor.Color = _data.DisplayColor;
 			checkEditTextWordWrap.Checked = _data.Settings.TextWordWrap;
+			checkEditNote.Checked = !String.IsNullOrEmpty(_data.Settings.Note);
 			memoEditNote.EditValue = _data.Settings.Note;
 		}
 
@@ -54,7 +55,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			if (colorEditLineBreakFontColor.Color != _data.DisplayColor)
 				_data.Settings.ForeColor = colorEditLineBreakFontColor.Color;
 			_data.Settings.TextWordWrap = checkEditTextWordWrap.Checked;
-			_data.Settings.Note = memoEditNote.EditValue != null ? memoEditNote.EditValue.ToString().Trim() : string.Empty;
+			_data.Settings.Note = memoEditNote.EditValue as String;
 		}
 
 		private void FontEdit_Click(object sender, EventArgs e)
@@ -73,6 +74,13 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		private void FontEdit_ButtonClick(object sender, ButtonPressedEventArgs e)
 		{
 			FontEdit_Click(this, null);
+		}
+
+		private void checkEditNote_CheckedChanged(object sender, EventArgs e)
+		{
+			memoEditNote.Enabled = checkEditNote.Checked;
+			if (!checkEditNote.Checked)
+				memoEditNote.EditValue = null;
 		}
 	}
 }

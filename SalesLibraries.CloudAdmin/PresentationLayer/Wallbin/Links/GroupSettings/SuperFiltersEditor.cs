@@ -53,12 +53,12 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.GroupSetting
 
 			Enabled = false;
 
-			var defaultLink = Selection.SelectedFiles.OfType<LibraryObjectLink>().FirstOrDefault(link => link.Tags.HasSuperFilters) ?? Selection.SelectedFiles.FirstOrDefault();
+			var defaultLink = Selection.SelectedLinks.OfType<LibraryObjectLink>().FirstOrDefault(link => link.Tags.HasSuperFilters) ?? Selection.SelectedLinks.FirstOrDefault();
 			Enabled = defaultLink != null;
 			if (defaultLink == null) return;
 
-			var noData = Selection.SelectedFiles.All(link => !link.Tags.SuperFilters.Any());
-			var sameData = Selection.SelectedFiles.All(link => link.Tags.SuperFilters.Compare(defaultLink.Tags.SuperFilters));
+			var noData = Selection.SelectedLinks.All(link => !link.Tags.SuperFilters.Any());
+			var sameData = Selection.SelectedLinks.All(link => link.Tags.SuperFilters.Compare(defaultLink.Tags.SuperFilters));
 
 			pnButtons.Enabled = !noData;
 			pnData.Enabled = sameData || noData;
@@ -72,14 +72,14 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.GroupSetting
 
 		private void ApplyData()
 		{
-			Selection.SelectedFiles.ApplySuperFilters(checkedListBoxControl.Items.OfType<CheckedListBoxItem>().Where(it => it.CheckState == CheckState.Checked).Select(it => it.Value.ToString()).ToArray());
+			Selection.SelectedLinks.ApplySuperFilters(checkedListBoxControl.Items.OfType<CheckedListBoxItem>().Where(it => it.CheckState == CheckState.Checked).Select(it => it.Value.ToString()).ToArray());
 			EditorChanged?.Invoke(this, new EventArgs());
 		}
 
 		public void ResetData()
 		{
 			if (MainController.Instance.PopupMessages.ShowWarningQuestion("Are you sure You want to DELETE ALL Super Filters for the selected files?") != DialogResult.Yes) return;
-			Selection.SelectedFiles.ApplySuperFilters(new string[] { });
+			Selection.SelectedLinks.ApplySuperFilters(new string[] { });
 			EditorChanged?.Invoke(this, new EventArgs());
 
 			UpdateData();
