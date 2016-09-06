@@ -9,6 +9,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 	{
 		public const string PredefinedNoteNone = "None";
 		public const string PredefinedNoteNew = "NEW!";
+		public const string PredefinedNoteSold = "SOLD!";
 		public const string PredefinedNoteUpdated = "UPDATED!";
 		public const string PredefinedNoteSellThis = "SELL THIS!";
 		public const string PredefinedNoteAttention = "ATTENTION!";

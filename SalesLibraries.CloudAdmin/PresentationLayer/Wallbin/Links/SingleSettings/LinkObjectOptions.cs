@@ -30,6 +30,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 
 			rbNone.Text = BaseLinkSettings.PredefinedNoteNone;
 			rbNew.Text = BaseLinkSettings.PredefinedNoteNew;
+			rbSold.Text = BaseLinkSettings.PredefinedNoteSold;
 			rbUpdated.Text = BaseLinkSettings.PredefinedNoteUpdated;
 			rbSell.Text = BaseLinkSettings.PredefinedNoteSellThis;
 			rbAttention.Text = BaseLinkSettings.PredefinedNoteAttention;
@@ -47,6 +48,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 				rbNew.Font = new Font(rbNew.Font.FontFamily, rbNew.Font.Size - 2, rbNew.Font.Style);
 				rbNone.Font = new Font(rbNone.Font.FontFamily, rbNone.Font.Size - 2, rbNone.Font.Style);
 				rbSell.Font = new Font(rbSell.Font.FontFamily, rbSell.Font.Size - 2, rbSell.Font.Style);
+				rbSold.Font = new Font(rbSold.Font.FontFamily, rbSold.Font.Size - 2, rbSold.Font.Style);
 				rbUpdated.Font = new Font(rbUpdated.Font.FontFamily, rbUpdated.Font.Size - 2, rbUpdated.Font.Style);
 				laLinkHoverNote.Font = new Font(laLinkHoverNote.Font.FontFamily, laLinkHoverNote.Font.Size - 2, laLinkHoverNote.Font.Style);
 				labelControlTitle.Font = new Font(labelControlTitle.Font.FontFamily, labelControlTitle.Font.Size - 2, labelControlTitle.Font.Style);
@@ -64,6 +66,8 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 				rbNone.Checked = true;
 			else if (note.Equals(BaseLinkSettings.PredefinedNoteNew))
 				rbNew.Checked = true;
+			else if (note.Equals(BaseLinkSettings.PredefinedNoteSold))
+				rbSold.Checked = true;
 			else if (note.Equals(BaseLinkSettings.PredefinedNoteUpdated))
 				rbUpdated.Checked = true;
 			else if (note.Equals(BaseLinkSettings.PredefinedNoteSellThis))
@@ -82,6 +86,8 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 		{
 			if (rbNew.Checked)
 				_data.Settings.Note = BaseLinkSettings.PredefinedNoteNew;
+			else if (rbSold.Checked)
+				_data.Settings.Note = BaseLinkSettings.PredefinedNoteSold;
 			else if (rbUpdated.Checked)
 				_data.Settings.Note = BaseLinkSettings.PredefinedNoteUpdated;
 			else if (rbSell.Checked)

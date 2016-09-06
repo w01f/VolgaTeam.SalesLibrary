@@ -237,15 +237,45 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders.Controls
 			var sourceLink = selectedRow?.Source as LibraryFileLink;
 			if (sourceLink == null) return;
 			Utils.OpenFile(sourceLink.LocationPath);
-			MainController.Instance.WallbinViews.ActiveWallbin.DataSourcesControl.ShowFileInTree(sourceLink.FullPath);
 		}
 
 		public void DeleteLink()
 		{
 			var selectedRow = SelectedLinkRow;
 			if (selectedRow == null) return;
-			if (MainController.Instance.PopupMessages.ShowQuestion("Are You sure You want to remove this link/line break?") != DialogResult.Yes) return;
-			selectedRow.Delete(true);
+			grFiles.SuspendLayout();
+			var relatedLinks = selectedRow.SourceObject?.GetRelatedLinks();
+			if (relatedLinks != null && relatedLinks.Any())
+			{
+				using (var form = new FormDeleteLink())
+				{
+					var result = form.ShowDialog(MainController.Instance.MainForm);
+					switch (result)
+					{
+						case DialogResult.OK:
+							selectedRow.DeleteWithSourceLink(true);
+							break;
+						case DialogResult.Yes:
+							DataStateObserver.Instance.RaiseLinksDeleted(relatedLinks.Select(l => l.ExtId));
+							selectedRow.DeleteWithAllRelatedLinks();
+							break;
+						default:
+							grFiles.ResumeLayout();
+							return;
+					}
+				}
+			}
+			else
+			{
+				if (MainController.Instance.PopupMessages.ShowQuestion("Are You sure You want to remove this link/line break?") !=
+					DialogResult.Yes)
+				{
+					grFiles.ResumeLayout();
+					return;
+				}
+				selectedRow.DeleteWithSourceLink(true);
+			}
+			grFiles.ResumeLayout();
 			UpdateGridSize();
 			DataChanged?.Invoke(this, EventArgs.Empty);
 		}
@@ -254,7 +284,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders.Controls
 		{
 			if (MainController.Instance.PopupMessages.ShowQuestion("Are You sure You want to remove links?") != DialogResult.Yes) return;
 			foreach (var linkRow in grFiles.Rows.OfType<LinkRow>().ToList())
-				linkRow.Delete(true);
+				linkRow.DeleteWithSourceLink(true);
 			UpdateGridSize();
 			DataChanged?.Invoke(this, EventArgs.Empty);
 		}
@@ -503,7 +533,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders.Controls
 			else
 				positionToInsert = newPosition == -1 ? grFiles.RowCount : newPosition;
 			var targetLink = targetRow.Source;
-			targetRow.Delete();
+			targetRow.DeleteWithSourceLink();
 			targetRow.Dispose();
 
 			grFiles.ClearSelection();

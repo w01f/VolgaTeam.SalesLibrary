@@ -299,7 +299,8 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 		{
 			public static readonly string[] PredefinedNotes =  { 
 				BaseLinkSettings.PredefinedNoteNone, 
-				BaseLinkSettings.PredefinedNoteNew, 
+				BaseLinkSettings.PredefinedNoteNew,
+				BaseLinkSettings.PredefinedNoteSold,
 				BaseLinkSettings.PredefinedNoteUpdated, 
 				BaseLinkSettings.PredefinedNoteSellThis, 
 				BaseLinkSettings.PredefinedNoteAttention 

@@ -165,6 +165,12 @@
     </Compile>
     <Compile Include="PresentationLayer\Wallbin\Folders\Clipboard\FolderClipboardManager.cs" />
     <Compile Include="PresentationLayer\Wallbin\Folders\Clipboard\FolderMovingEventArgs.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Folders\Controls\FormDeleteLink.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Folders\Controls\FormDeleteLink.designer.cs">
+      <DependentUpon>FormDeleteLink.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationLayer\Wallbin\Libraries\LibraryTagInfo.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -531,6 +537,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Folders\Controls\ClassicFolderBox.resx">
       <DependentUpon>ClassicFolderBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Folders\Controls\FormDeleteLink.resx">
+      <DependentUpon>FormDeleteLink.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Libraries\LibraryTagInfo.resx">
       <DependentUpon>LibraryTagInfo.cs</DependentUpon>

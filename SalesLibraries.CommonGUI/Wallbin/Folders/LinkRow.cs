@@ -12,6 +12,8 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 
 		public event EventHandler<EventArgs> InfoChanged;
 
+		public LibraryObjectLink SourceObject => Source as LibraryObjectLink;
+
 		public bool AllowEdit => !Source.Banner.Enable;
 
 		public bool IsTop => Index == 0;
@@ -36,10 +38,16 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 			FolderBox = folderBox;
 		}
 
-		public void Delete(bool fullDelete = false)
+		public void DeleteWithSourceLink(bool fullDelete = false)
 		{
 			RemoveFromGrid();
 			Source.DeleteLink(fullDelete);
+		}
+
+		public void DeleteWithAllRelatedLinks()
+		{
+			RemoveFromGrid();
+			SourceObject?.DeleteLinkAndRelatedLinks();
 		}
 
 		public void RemoveFromGrid()

@@ -2,17 +2,11 @@
 using System.Drawing;
 using DevComponents.DotNetBar.Metro;
 
-namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSettings
+namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 {
-	public partial class FormEditLinkText : MetroForm
+	public partial class FormDeleteLink : MetroForm
 	{
-		public string EditedText
-		{
-			get { return memoEdit.EditValue as String; }
-			set { memoEdit.EditValue = value; }
-		}
-
-		public FormEditLinkText()
+		public FormDeleteLink()
 		{
 			InitializeComponent();
 
@@ -28,7 +22,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 				styleController.AppearanceReadOnly.Font = font;
 
 				buttonXCancel.Font = new Font(buttonXCancel.Font.FontFamily, buttonXCancel.Font.Size - 2, buttonXCancel.Font.Style);
-				buttonXOK.Font = new Font(buttonXOK.Font.FontFamily, buttonXOK.Font.Size - 2, buttonXOK.Font.Style);
+				buttonXDeleteLink.Font = new Font(buttonXDeleteLink.Font.FontFamily, buttonXDeleteLink.Font.Size - 2, buttonXDeleteLink.Font.Style);
 			}
 		}
 	}

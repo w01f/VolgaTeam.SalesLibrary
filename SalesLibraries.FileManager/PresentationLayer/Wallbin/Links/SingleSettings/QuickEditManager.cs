@@ -299,7 +299,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		{
 			public static readonly string[] PredefinedNotes =  { 
 				BaseLinkSettings.PredefinedNoteNone, 
-				BaseLinkSettings.PredefinedNoteNew, 
+				BaseLinkSettings.PredefinedNoteNew,
+				BaseLinkSettings.PredefinedNoteSold,
 				BaseLinkSettings.PredefinedNoteUpdated, 
 				BaseLinkSettings.PredefinedNoteSellThis, 
 				BaseLinkSettings.PredefinedNoteAttention 

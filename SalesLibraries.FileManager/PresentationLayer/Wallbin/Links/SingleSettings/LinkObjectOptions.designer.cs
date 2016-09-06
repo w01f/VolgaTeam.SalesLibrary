@@ -41,6 +41,7 @@
 			this.laLinkHoverNote = new System.Windows.Forms.Label();
 			this.labelControlTitle = new DevExpress.XtraEditors.LabelControl();
 			this.labelControlHoverNoteDescription = new DevExpress.XtraEditors.LabelControl();
+			this.rbSold = new System.Windows.Forms.RadioButton();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditLinkHoverNote.Properties)).BeginInit();
 			this.SuspendLayout();
@@ -69,8 +70,8 @@
 			this.edCustomNote.ForeColor = System.Drawing.Color.Black;
 			this.edCustomNote.Location = new System.Drawing.Point(8, 143);
 			this.edCustomNote.Name = "edCustomNote";
-			this.edCustomNote.Size = new System.Drawing.Size(520, 26);
-			this.edCustomNote.TabIndex = 6;
+			this.edCustomNote.Size = new System.Drawing.Size(605, 26);
+			this.edCustomNote.TabIndex = 7;
 			// 
 			// rbCustomNote
 			// 
@@ -81,7 +82,7 @@
 			this.rbCustomNote.Location = new System.Drawing.Point(8, 114);
 			this.rbCustomNote.Name = "rbCustomNote";
 			this.rbCustomNote.Size = new System.Drawing.Size(127, 23);
-			this.rbCustomNote.TabIndex = 5;
+			this.rbCustomNote.TabIndex = 6;
 			this.rbCustomNote.TabStop = true;
 			this.rbCustomNote.Text = "Custom Note";
 			this.rbCustomNote.UseVisualStyleBackColor = false;
@@ -96,7 +97,7 @@
 			this.rbNew.Location = new System.Drawing.Point(82, 45);
 			this.rbNew.Name = "rbNew";
 			this.rbNew.Size = new System.Drawing.Size(69, 23);
-			this.rbNew.TabIndex = 0;
+			this.rbNew.TabIndex = 1;
 			this.rbNew.TabStop = true;
 			this.rbNew.Text = "NEW!";
 			this.rbNew.UseVisualStyleBackColor = false;
@@ -107,10 +108,10 @@
 			this.rbUpdated.BackColor = System.Drawing.Color.White;
 			this.rbUpdated.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.rbUpdated.ForeColor = System.Drawing.Color.Black;
-			this.rbUpdated.Location = new System.Drawing.Point(166, 45);
+			this.rbUpdated.Location = new System.Drawing.Point(239, 45);
 			this.rbUpdated.Name = "rbUpdated";
 			this.rbUpdated.Size = new System.Drawing.Size(109, 23);
-			this.rbUpdated.TabIndex = 1;
+			this.rbUpdated.TabIndex = 3;
 			this.rbUpdated.TabStop = true;
 			this.rbUpdated.Text = "UPDATED!";
 			this.rbUpdated.UseVisualStyleBackColor = false;
@@ -121,10 +122,10 @@
 			this.rbAttention.BackColor = System.Drawing.Color.White;
 			this.rbAttention.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.rbAttention.ForeColor = System.Drawing.Color.Black;
-			this.rbAttention.Location = new System.Drawing.Point(411, 45);
+			this.rbAttention.Location = new System.Drawing.Point(484, 45);
 			this.rbAttention.Name = "rbAttention";
 			this.rbAttention.Size = new System.Drawing.Size(122, 23);
-			this.rbAttention.TabIndex = 3;
+			this.rbAttention.TabIndex = 5;
 			this.rbAttention.TabStop = true;
 			this.rbAttention.Text = "ATTENTION!";
 			this.rbAttention.UseVisualStyleBackColor = false;
@@ -135,10 +136,10 @@
 			this.rbSell.BackColor = System.Drawing.Color.White;
 			this.rbSell.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.rbSell.ForeColor = System.Drawing.Color.Black;
-			this.rbSell.Location = new System.Drawing.Point(286, 45);
+			this.rbSell.Location = new System.Drawing.Point(359, 45);
 			this.rbSell.Name = "rbSell";
 			this.rbSell.Size = new System.Drawing.Size(114, 23);
-			this.rbSell.TabIndex = 2;
+			this.rbSell.TabIndex = 4;
 			this.rbSell.TabStop = true;
 			this.rbSell.Text = "SELL THIS!";
 			this.rbSell.UseVisualStyleBackColor = false;
@@ -152,7 +153,7 @@
 			this.rbNone.Location = new System.Drawing.Point(8, 45);
 			this.rbNone.Name = "rbNone";
 			this.rbNone.Size = new System.Drawing.Size(68, 23);
-			this.rbNone.TabIndex = 4;
+			this.rbNone.TabIndex = 0;
 			this.rbNone.TabStop = true;
 			this.rbNone.Text = "None";
 			this.rbNone.UseVisualStyleBackColor = false;
@@ -167,9 +168,9 @@
 			this.textEditLinkHoverNote.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.textEditLinkHoverNote.Properties.Appearance.Options.UseBackColor = true;
 			this.textEditLinkHoverNote.Properties.Appearance.Options.UseForeColor = true;
-			this.textEditLinkHoverNote.Size = new System.Drawing.Size(520, 22);
+			this.textEditLinkHoverNote.Size = new System.Drawing.Size(605, 22);
 			this.textEditLinkHoverNote.StyleController = this.styleController;
-			this.textEditLinkHoverNote.TabIndex = 22;
+			this.textEditLinkHoverNote.TabIndex = 8;
 			// 
 			// laLinkHoverNote
 			// 
@@ -201,13 +202,28 @@
 			this.labelControlHoverNoteDescription.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.Vertical;
 			this.labelControlHoverNoteDescription.Location = new System.Drawing.Point(8, 266);
 			this.labelControlHoverNoteDescription.Name = "labelControlHoverNoteDescription";
-			this.labelControlHoverNoteDescription.Size = new System.Drawing.Size(520, 51);
+			this.labelControlHoverNoteDescription.Size = new System.Drawing.Size(605, 51);
 			this.labelControlHoverNoteDescription.TabIndex = 24;
 			this.labelControlHoverNoteDescription.Text = "Not the same as a “Link Note”…\r\nThe Hover Note is a custom, special little messag" +
     "e that appears when the mouse hovers over the link…";
 			// 
+			// rbSold
+			// 
+			this.rbSold.AutoSize = true;
+			this.rbSold.BackColor = System.Drawing.Color.White;
+			this.rbSold.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.rbSold.ForeColor = System.Drawing.Color.Black;
+			this.rbSold.Location = new System.Drawing.Point(157, 45);
+			this.rbSold.Name = "rbSold";
+			this.rbSold.Size = new System.Drawing.Size(76, 23);
+			this.rbSold.TabIndex = 2;
+			this.rbSold.TabStop = true;
+			this.rbSold.Text = "SOLD!";
+			this.rbSold.UseVisualStyleBackColor = false;
+			// 
 			// LinkObjectOptions
 			// 
+			this.Controls.Add(this.rbSold);
 			this.Controls.Add(this.labelControlHoverNoteDescription);
 			this.Controls.Add(this.edCustomNote);
 			this.Controls.Add(this.labelControlTitle);
@@ -220,8 +236,8 @@
 			this.Controls.Add(this.textEditLinkHoverNote);
 			this.Controls.Add(this.laLinkHoverNote);
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.Name = "LinkBaseOptions";
-			this.Size = new System.Drawing.Size(531, 541);
+			this.Name = "LinkObjectOptions";
+			this.Size = new System.Drawing.Size(616, 541);
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditLinkHoverNote.Properties)).EndInit();
 			this.ResumeLayout(false);
@@ -243,5 +259,6 @@
 		private DevExpress.XtraEditors.StyleController styleController;
 		private DevExpress.XtraEditors.LabelControl labelControlTitle;
 		private DevExpress.XtraEditors.LabelControl labelControlHoverNoteDescription;
+		private System.Windows.Forms.RadioButton rbSold;
 	}
 }

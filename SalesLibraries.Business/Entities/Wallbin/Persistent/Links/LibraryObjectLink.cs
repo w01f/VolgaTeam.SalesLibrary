@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Drawing;
+using System.Linq;
 using Newtonsoft.Json;
 using SalesLibraries.Business.Entities.Common;
+using SalesLibraries.Business.Entities.Helpers;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings;
 
 namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
@@ -130,6 +132,22 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 			link.RelativePath = RelativePath;
 			link.ExpirationEncoded = ExpirationEncoded;
 			return link;
+		}
+
+		public IList<LibraryObjectLink> GetRelatedLinks()
+		{
+			return ParentLibrary.Pages
+				.SelectMany(p => p.TopLevelLinks)
+				.OfType<LibraryObjectLink>()
+				.Where(l => String.Equals(l.RelativePath, RelativePath, StringComparison.OrdinalIgnoreCase))
+				.ToList();
+		}
+
+		public void DeleteLinkAndRelatedLinks()
+		{
+			var relatedLinks = GetRelatedLinks();
+			foreach (var libraryObjectLink in relatedLinks)
+				libraryObjectLink.DeleteLink(true);
 		}
 	}
 }
