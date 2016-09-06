@@ -7,9 +7,7 @@ namespace SalesLibraries.FileManager.Configuration
 {
 	public class RemoteResourceManager
 	{
-		private static readonly RemoteResourceManager _instance = new RemoteResourceManager();
-
-		public static RemoteResourceManager Instance => _instance;
+		public static RemoteResourceManager Instance { get; } = new RemoteResourceManager();
 
 		#region Local
 		public StorageDirectory MetaDataCacheFolder { get; private set; }
@@ -26,11 +24,10 @@ namespace SalesLibraries.FileManager.Configuration
 
 		private RemoteResourceManager() { }
 
-		public async Task Load()
+		public async Task LoadLocal()
 		{
-			await Common.Helpers.RemoteResourceManager.Instance.Load();
+			await Common.Helpers.RemoteResourceManager.Instance.LoadLocal();
 
-			#region Local
 			MetaDataCacheFolder = new StorageDirectory(new object[]
 			{
 				FileStorageManager.LocalFilesFolderName,
@@ -40,16 +37,19 @@ namespace SalesLibraries.FileManager.Configuration
 			if (!await MetaDataCacheFolder.Exists())
 				await StorageDirectory.CreateSubFolder(new object[]
 				{
-					FileStorageManager.LocalFilesFolderName, 
+					FileStorageManager.LocalFilesFolderName,
 					AppProfileManager.Instance.AppNameSet
 				}, "Cache");
 
 			ArchiveFolder = new StorageDirectory(AppProfileManager.Instance.ProfileFolder.RelativePathParts.Merge("Sync Archive"));
 			if (!await ArchiveFolder.Exists(true))
 				await StorageDirectory.CreateSubFolder(AppProfileManager.Instance.ProfileFolder.RelativePathParts, "Sync Archive", true);
-			#endregion
+		}
 
-			#region Remote
+		public async Task LoadRemote()
+		{
+			await Common.Helpers.RemoteResourceManager.Instance.LoadRemote();
+
 			var appOutgoingFolder = new StorageDirectory(new object[]
 			{
 				FileStorageManager.IncomingFolderName,
@@ -81,7 +81,6 @@ namespace SalesLibraries.FileManager.Configuration
 				"SyncLock.xml"
 				));
 			await SyncLockSettingsFile.Download();
-			#endregion
 		}
 	}
 }

@@ -23,7 +23,8 @@ namespace SalesLibraries.Common.Configuration
 				Constants.LegacyStorageFileName, 
 				Constants.LibrariesJsonFileName, 
 				Constants.ShortLibraryInfoFileName,
-				Constants.FilesDeletedFromFolderArchiveName
+				Constants.FilesDeletedFromFolderArchiveName,
+				Constants.DatabaseConnectionStateInfoFileName
 			};
 		}
 	}

@@ -24,11 +24,10 @@ namespace SalesLibraries.CloudAdmin.Configuration
 
 		private RemoteResourceManager() { }
 
-		public async Task Load()
+		public async Task LoadLocal()
 		{
-			await Common.Helpers.RemoteResourceManager.Instance.Load();
+			await Common.Helpers.RemoteResourceManager.Instance.LoadLocal();
 
-			#region Local
 			MetaDataCacheFolder = new StorageDirectory(new object[]
 			{
 				FileStorageManager.LocalFilesFolderName,
@@ -38,7 +37,7 @@ namespace SalesLibraries.CloudAdmin.Configuration
 			if (!await MetaDataCacheFolder.Exists())
 				await StorageDirectory.CreateSubFolder(new object[]
 				{
-					FileStorageManager.LocalFilesFolderName, 
+					FileStorageManager.LocalFilesFolderName,
 					AppProfileManager.Instance.AppNameSet
 				}, "Cache");
 
@@ -54,7 +53,11 @@ namespace SalesLibraries.CloudAdmin.Configuration
 					FileStorageManager.LocalFilesFolderName,
 					AppProfileManager.Instance.AppNameSet
 				}, "Library");
-			#endregion
+		}
+
+		public async Task LoadRemote()
+		{
+			await Common.Helpers.RemoteResourceManager.Instance.LoadRemote();
 
 			#region Remote
 			var appOutgoingFolder = new StorageDirectory(new object[]

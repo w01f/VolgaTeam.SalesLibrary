@@ -27,9 +27,8 @@ namespace SalesLibraries.Common.Helpers
 
 		private RemoteResourceManager() { }
 
-		public async Task Load()
+		public async Task LoadLocal()
 		{
-			#region Local
 			TempFolder = new StorageDirectory(new[]
 			{
 				"Temp"
@@ -54,9 +53,10 @@ namespace SalesLibraries.Common.Helpers
 				"Settings.xml"
 			});
 			AppSettingsFile.AllocateParentFolder();
-			#endregion
+		}
 
-			#region Remote
+		public async Task LoadRemote()
+		{
 			ArtworkFolder = new ArchiveDirectory(new object[]
 			{
 				FileStorageManager.IncomingFolderName,
@@ -116,7 +116,6 @@ namespace SalesLibraries.Common.Helpers
 				"!Help_Browser.xml"
 			});
 			await HelpBrowserFile.Download();
-			#endregion
 		}
 	}
 }

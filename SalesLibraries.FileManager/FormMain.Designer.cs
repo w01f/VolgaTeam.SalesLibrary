@@ -3087,7 +3087,7 @@
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Site Admin ({0})";
 			this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OnFormClosing);
 			this.Shown += new System.EventHandler(this.FormMain_Shown);
 			this.ribbonControl.ResumeLayout(false);
 			this.ribbonControl.PerformLayout();

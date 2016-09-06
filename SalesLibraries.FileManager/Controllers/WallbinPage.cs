@@ -9,6 +9,8 @@ using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.Common.DataState;
 using SalesLibraries.CommonGUI.RetractableBar;
+using SalesLibraries.FileManager.Business.Models.Connection;
+using SalesLibraries.FileManager.Business.Services;
 using SalesLibraries.FileManager.Business.Synchronization;
 using SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettings;
 using SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSettings;
@@ -410,7 +412,26 @@ namespace SalesLibraries.FileManager.Controllers
 				form.LocalSyncPath = MainController.Instance.Settings.NetworkPath;
 				form.WebSyncPath = MainController.Instance.Settings.WebPath;
 				if (form.ShowDialog(MainController.Instance.MainForm) != DialogResult.OK) return;
-				var backupChanged = !String.Equals(MainController.Instance.Settings.BackupPath, form.BackupPath, StringComparison.InvariantCultureIgnoreCase);
+				var backupChanged = !String.Equals(
+					MainController.Instance.Settings.BackupPath, 
+					form.BackupPath, 
+					StringComparison.InvariantCultureIgnoreCase);
+
+				if (backupChanged)
+				{
+					DatabaseConnectionHelper.Disconnect(MainController.Instance.Settings.BackupPath);
+
+					var connectionState = DatabaseConnectionHelper.GetConnectionState(form.BackupPath);
+					if (connectionState.Type == ConnectionStateType.Busy)
+					{
+						MainController.Instance.PopupMessages.ShowWarning(
+							String.Format(
+								"{0} is currently updating the site.{1}Please try back again later, or ask the user to hurry up and finish…",
+								connectionState.User,
+								Environment.NewLine));
+						return;
+					}
+				}
 				MainController.Instance.Settings.BackupPath = form.BackupPath;
 				MainController.Instance.Settings.NetworkPath = form.LocalSyncPath;
 				MainController.Instance.Settings.WebPath = form.WebSyncPath;

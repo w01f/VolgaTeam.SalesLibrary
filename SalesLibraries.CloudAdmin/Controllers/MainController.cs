@@ -259,7 +259,8 @@ namespace SalesLibraries.CloudAdmin.Controllers
 		private async Task InitBusinessObjects()
 		{
 			await AppProfileManager.Instance.LoadProfile();
-			await Configuration.RemoteResourceManager.Instance.Load();
+			await Configuration.RemoteResourceManager.Instance.LoadLocal();
+			await Configuration.RemoteResourceManager.Instance.LoadRemote();
 
 			Settings.Load();
 			SoapServiceConnection.Load(Settings.WebServiceSite);

@@ -90,15 +90,8 @@ namespace SalesLibraries.FileManager.Configuration
 			EditorSettings = new EditorsSettings();
 		}
 
-		public void Load()
+		public void LoadLocal()
 		{
-			LoadRibbonSettings();
-			LoadCategoryRequestSettings();
-			LoadSalesDepotSyncSettings();
-			LoadServiceConnectionSettings();
-
-			EditorSettings.Load();
-
 			if (!Common.Helpers.RemoteResourceManager.Instance.AppSettingsFile.ExistsLocal()) return;
 			int tempInt;
 			bool tempBool;
@@ -147,6 +140,16 @@ namespace SalesLibraries.FileManager.Configuration
 			#endregion
 		}
 
+		public void LoadRemote()
+		{
+			LoadRibbonSettings();
+			LoadCategoryRequestSettings();
+			LoadSalesDepotSyncSettings();
+			LoadServiceConnectionSettings();
+
+			EditorSettings.Load();
+		}
+
 		public void Save()
 		{
 			var xml = new StringBuilder();
@@ -186,7 +189,7 @@ namespace SalesLibraries.FileManager.Configuration
 			var document = new XmlDocument();
 			document.Load(RemoteResourceManager.Instance.TabSettingsFile.LocalPath);
 
-			XmlNode node = document.SelectSingleNode(@"/ribbon/OvernightsCalendar");
+			var node = document.SelectSingleNode(@"/ribbon/OvernightsCalendar");
 			bool tempBool;
 			if (node != null)
 				if (bool.TryParse(node.InnerText, out tempBool))

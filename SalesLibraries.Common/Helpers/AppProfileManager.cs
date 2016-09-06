@@ -73,9 +73,8 @@ namespace SalesLibraries.Common.Helpers
 				document.Load(_localAppIdFile.LocalPath);
 
 				var node = document.SelectSingleNode(@"/AppID");
-				if (node != null)
-					if (!string.IsNullOrEmpty(node.InnerText))
-						_appID = new Guid(node.InnerText);
+				if (!String.IsNullOrEmpty(node?.InnerText))
+					_appID = new Guid(node.InnerText);
 			}
 
 			if (_appID.Equals(Guid.Empty))

@@ -33,9 +33,9 @@ namespace SalesLibraries.FileManager
 			ribbonControl.SelectedRibbonTabChanged += ribbonControl_SelectedRibbonTabChanged;
 		}
 
-		private void FormMain_FormClosing(object sender, System.Windows.Forms.FormClosingEventArgs e)
+		private void OnFormClosing(object sender, System.Windows.Forms.FormClosingEventArgs e)
 		{
-			MainController.Instance.ProcessChanges();
+			MainController.Instance.ProcessClose();
 		}
 
 		private void buttonItemExit_Click(object sender, EventArgs e)

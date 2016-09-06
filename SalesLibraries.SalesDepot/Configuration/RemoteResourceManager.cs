@@ -32,7 +32,7 @@ namespace SalesLibraries.SalesDepot.Configuration
 
 		public async Task Load()
 		{
-			await Common.Helpers.RemoteResourceManager.Instance.Load();
+			await Common.Helpers.RemoteResourceManager.Instance.LoadRemote();
 
 			#region Local
 			LocalLibraryFolder = new StorageDirectory(new[]

@@ -5,13 +5,13 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using SalesLibraries.Business.Contexts.Wallbin;
 using SalesLibraries.Business.Contexts.Wallbin.Local;
 using SalesLibraries.Common.Authorization;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.Common.Objects.RemoteStorage;
 using SalesLibraries.CommonGUI.BackgroundProcesses;
 using SalesLibraries.CommonGUI.Common;
+using SalesLibraries.FileManager.Business.Models.Connection;
 using SalesLibraries.FileManager.Business.Services;
 using SalesLibraries.FileManager.Business.Synchronization;
 using SalesLibraries.FileManager.Configuration;
@@ -102,8 +102,41 @@ namespace SalesLibraries.FileManager.Controllers
 			if (stopRun) return;
 
 			var appReady = FileStorageManager.Instance.Activated;
+
 			if (appReady)
 			{
+				ProcessManager.RunStartProcess(
+					"Connecting adSALEScloud...",
+					cancellationToken => AsyncHelper.RunSync(async () =>
+					{
+						await AppProfileManager.Instance.LoadProfile();
+						await Configuration.RemoteResourceManager.Instance.LoadLocal();
+						Settings.LoadLocal();
+					}));
+
+				if (!String.IsNullOrEmpty(Settings.BackupPath) && Directory.Exists(Settings.BackupPath))
+				{
+					var connectionState = DatabaseConnectionHelper.GetConnectionState(Settings.BackupPath);
+					if (connectionState.Type == ConnectionStateType.Busy)
+					{
+						PopupMessages.ShowWarning(
+							String.Format(
+								"{0} is currently updating the site.{1}Please try back again later, or ask the user to hurry up and finish…",
+								connectionState.User,
+								Environment.NewLine));
+						return;
+					}
+				}
+
+				ProcessManager.RunStartProcess(
+					"Connecting adSALEScloud...",
+					cancellationToken => AsyncHelper.RunSync(async () =>
+					{
+						await AppProfileManager.Instance.LoadProfile();
+						await Configuration.RemoteResourceManager.Instance.LoadLocal();
+						Settings.LoadLocal();
+					}));
+
 				var progressTitle = String.Empty;
 				switch (FileStorageManager.Instance.DataState)
 				{
@@ -120,7 +153,13 @@ namespace SalesLibraries.FileManager.Controllers
 
 				ProcessManager.RunStartProcess(
 					progressTitle,
-					cancellationToken => AsyncHelper.RunSync(InitBusinessObjects));
+					cancellationToken => AsyncHelper.RunSync(async () =>
+					{
+						await Configuration.RemoteResourceManager.Instance.LoadRemote();
+						Settings.LoadRemote();
+						InitBusinessObjects();
+						await FileStorageManager.Instance.FixDataState();
+					}));
 
 				MainForm.Shown += (o, e) =>
 				{
@@ -142,7 +181,6 @@ namespace SalesLibraries.FileManager.Controllers
 					}
 					MainForm.InitForm();
 					LoadControllers();
-
 					LoadData();
 					ProcessInactiveLinks();
 					ProcessManager.RunInQueue("Loading Wallbin...",
@@ -184,7 +222,17 @@ namespace SalesLibraries.FileManager.Controllers
 
 			if (!FileStorageManager.Instance.Activated) return;
 
-			AsyncHelper.RunSync(InitBusinessObjects);
+			AsyncHelper.RunSync(async () =>
+			{
+				await AppProfileManager.Instance.LoadProfile();
+				await Configuration.RemoteResourceManager.Instance.LoadLocal();
+				Settings.LoadLocal();
+
+				await Configuration.RemoteResourceManager.Instance.LoadRemote();
+				Settings.LoadRemote();
+				InitBusinessObjects();
+				await FileStorageManager.Instance.FixDataState();
+			});
 			Wallbin.LoadLibrary(Settings.BackupPath);
 			SyncManager.SyncSilent();
 		}
@@ -228,6 +276,12 @@ namespace SalesLibraries.FileManager.Controllers
 				pageController.Value.ProcessChanges();
 		}
 
+		public void ProcessClose()
+		{
+			ProcessChanges();
+			DatabaseConnectionHelper.Disconnect(Settings.BackupPath);
+		}
+
 		public void ActivateApplication()
 		{
 			var mainFormHandle = IntPtr.Zero;
@@ -241,21 +295,16 @@ namespace SalesLibraries.FileManager.Controllers
 			Utils.ActivateForm(mainFormHandle, true, false);
 		}
 
-		private async Task InitBusinessObjects()
+		private void InitBusinessObjects()
 		{
-			await AppProfileManager.Instance.LoadProfile();
-			await Configuration.RemoteResourceManager.Instance.Load();
-
-			Settings.Load();
 			SoapServiceConnection.Load(Settings.WebServiceSite);
 			Lists.Load();
 			HelpManager.LoadHelpLinks();
-
-			await FileStorageManager.Instance.FixDataState();
 		}
 
 		private void LoadData()
 		{
+			DatabaseConnectionHelper.Connect(Settings.BackupPath);
 			ProcessManager.Run("Loading Files...", cancelationToken => Wallbin.LoadLibrary(Settings.BackupPath));
 		}
 

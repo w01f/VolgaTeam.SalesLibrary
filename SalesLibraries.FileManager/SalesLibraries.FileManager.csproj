@@ -138,6 +138,8 @@
   <ItemGroup>
     <Compile Include="Business\Dictionaries\SearchTagList.cs" />
     <Compile Include="Business\Dictionaries\SuperFilterList.cs" />
+    <Compile Include="Business\Models\Connection\ConnectionState.cs" />
+    <Compile Include="Business\Models\Connection\ConnectionStateType.cs" />
     <Compile Include="Business\Models\Security\LibraryUser.cs" />
     <Compile Include="Business\PreviewGenerators\PowerPointPreviewGenerator.cs" />
     <Compile Include="Business\PreviewGenerators\ExcelPreviewGenerator.cs" />
@@ -148,6 +150,7 @@
     <Compile Include="Business\Services\CorruptedLinksHelper.cs" />
     <Compile Include="Business\Services\LicenseHelper.cs" />
     <Compile Include="Business\Services\PdfHelper.cs" />
+    <Compile Include="Business\Services\DatabaseConnectionHelper.cs" />
     <Compile Include="Business\Synchronization\LibraryFilesSyncHelper.cs" />
     <Compile Include="Business\Synchronization\SyncLockHelper.cs" />
     <Compile Include="Business\Synchronization\SyncManager.cs" />
