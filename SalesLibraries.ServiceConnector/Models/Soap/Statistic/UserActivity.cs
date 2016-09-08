@@ -27,7 +27,8 @@ namespace SalesLibraries.ServiceConnector.StatisticService
 					(details != null && "url".Equals((details
 						.Where(d => "Original Format".Equals(d.tag, StringComparison.OrdinalIgnoreCase))
 						.Select(d => d.value)
-						.FirstOrDefault() ?? String.Empty), StringComparison.OrdinalIgnoreCase));
+						.FirstOrDefault() ?? String.Empty), StringComparison.OrdinalIgnoreCase)) ||
+					(details != null && details.Any(d => "url".Equals(d.tag, StringComparison.OrdinalIgnoreCase)));
 			}
 		}
 
