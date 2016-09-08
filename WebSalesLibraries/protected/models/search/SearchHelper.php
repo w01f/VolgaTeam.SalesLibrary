@@ -1,11 +1,12 @@
 <?
+
 	/**
 	 * Class SearchHelper
 	 */
 	class SearchHelper
 	{
 		/**
-		 * @param $conditionArray mixed
+		 * @param $condition
 		 * @param $exactMatch boolean
 		 * @return array
 		 */
@@ -85,7 +86,8 @@
 								$result[] = sprintf('"%s"', str_replace($conditionPart, trim($aliasNode->nodeValue), $conditionPart));
 						}
 					}
-				} catch (Exception $e)
+				}
+				catch (Exception $e)
 				{
 				}
 			}
@@ -310,7 +312,7 @@
 			{
 				$conditionParts = array();
 				foreach ($textConditions as $contentConditionPart)
-					$conditionParts[] = sprintf("(match(%s) against('%s' in boolean mode))", $matchCondition, $contentConditionPart);
+					$conditionParts[] = sprintf("(match(%s) against('%s' in boolean mode))", $matchCondition, str_replace("'", "\'", $contentConditionPart));
 				$contentCondition = implode(" or ", $conditionParts);
 			}
 			$contentCondition = sprintf("(%s%s%s%s%s)",
