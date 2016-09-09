@@ -1,5 +1,5 @@
 DROP PROCEDURE IF EXISTS sp_get_all_qpages;
-CREATE PROCEDURE sp_get_all_qpages(in start_date datetime,in end_date datetime)
+CREATE PROCEDURE sp_get_all_qpages(in start_date datetime,in end_date datetime,in filter_by_view_date boolean)
 select
   q.id as id,
   q.title as title,
@@ -18,6 +18,16 @@ from tbl_qpage q
   join tbl_user u on u.id = q.id_owner
   left join tbl_user_group ug on ug.id_user = u.id
   left join tbl_group g on g.id = ug.id_group
-  left join (select s_q.id_qpage as id, count(s_q.id) as total_views from tbl_statistic_qpage s_q group by s_q.id_qpage) views on views.id = q.id
-where q.create_date >= start_date and q.create_date <= end_date
+  left join (
+              select
+                s_q.id_qpage as id,
+                count(s_q.id) as total_views,
+                max(sa.date_time) as last_view_date
+              from tbl_statistic_qpage s_q
+                join tbl_statistic_activity sa on sa.id = s_q.id_activity
+              group by s_q.id_qpage)
+            views on views.id = q.id
+where
+  if(filter_by_view_date,views.last_view_date,q.create_date) >= start_date and
+  if(filter_by_view_date,views.last_view_date,q.create_date) <= end_date
 group by q.id,q.is_email,q.create_date,q.expiration_date,u.login, u.first_name, u.last_name, u.email, views.total_views;
