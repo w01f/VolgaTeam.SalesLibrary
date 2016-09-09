@@ -1,6 +1,7 @@
 DROP PROCEDURE IF EXISTS sp_get_file_activity_report_legacy;
 CREATE PROCEDURE sp_get_file_activity_report_legacy(in start_date datetime,in end_date datetime)
 select
+  'library link' as file_type,
   case when sdet.data like '%"file": %'
     then substring(sdet.data, locate('"file": ', sdet.data)+9, locate('"', substring(sdet.data, locate('"file": ', sdet.data) + 9)) - 1)
   else substring(sdet.data, locate('"file":', sdet.data)+8, locate('"', substring(sdet.data, locate('"file":', sdet.data) + 8)) - 1)
@@ -20,6 +21,7 @@ where
 group by file_name, g.name
 union
 select
+  'qpage' as file_type,
   case when sdet.data like '%"url": %'
     then substring(sdet.data, locate('"url": ', sdet.data)+8, locate('"', substring(sdet.data, locate('"url": ', sdet.data) + 8)) - 1)
   else substring(sdet.data, locate('"url":', sdet.data)+7, locate('"', substring(sdet.data, locate('"url":', sdet.data) + 7)) - 1)

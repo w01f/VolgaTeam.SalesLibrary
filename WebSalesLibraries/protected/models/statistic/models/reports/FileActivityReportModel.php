@@ -6,10 +6,25 @@
 	class FileActivityReportModel
 	{
 		/**
+		 * @var string fileType
+		 * @soap
+		 */
+		public $fileType;
+		/**
 		 * @var string fileName
 		 * @soap
 		 */
 		public $fileName;
+		/**
+		 * @var string fileLink
+		 * @soap
+		 */
+		public $fileLink;
+		/**
+		 * @var string fileDetail
+		 * @soap
+		 */
+		public $fileDetail;
 		/**
 		 * @var string library
 		 * @soap

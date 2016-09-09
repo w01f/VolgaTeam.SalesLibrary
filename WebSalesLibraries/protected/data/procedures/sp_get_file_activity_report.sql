@@ -1,7 +1,10 @@
 DROP PROCEDURE IF EXISTS sp_get_file_activity_report;
 CREATE PROCEDURE sp_get_file_activity_report(in start_date datetime,in end_date datetime)
     select
+      'library link' as file_type,
       l.file_name as file_name,
+      l.file_name as file_link,
+      l.id_preview as file_detail,
       count(slink.id_link) as action_count,
       lib.name as lib_name,
       g.name as group_name
@@ -21,7 +24,10 @@ CREATE PROCEDURE sp_get_file_activity_report(in start_date datetime,in end_date 
     group by l.id, l.file_name, g.name
     union
     select
-      substring(sd.data, locate('"url":', sd.data)+7, locate('"', substring(sd.data, locate('"url":', sd.data) + 7)) - 1) as file_name,
+      'qpage' as file_type,
+      qp.title as file_name,
+      substring(sd.data, locate('"url":', sd.data)+7, locate('"', substring(sd.data, locate('"url":', sd.data) + 7)) - 1) as file_link,
+      substring(sd.data, locate('"url":', sd.data)+7, locate('"', substring(sd.data, locate('"url":', sd.data) + 7)) - 1) as file_detail,
       count(qpage.id_qpage) as action_count,
       group_concat(distinct lb.name separator ', ')  as lib_name,
       g.name as group_name

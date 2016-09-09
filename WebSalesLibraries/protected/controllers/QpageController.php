@@ -116,6 +116,7 @@
 			if (isset($page))
 				StatisticActivityRecord::writeQPageActivity($page->id, 'QSite', sprintf('Open %s', $protected ? 'secure' : 'public'), array(
 					'id' => $page->id,
+					'qsite title' => $page->title,
 					'url' => $page->getUrl(),
 				));
 			if (isset($page) && (($page->restricted && $protected) || !$page->restricted))
