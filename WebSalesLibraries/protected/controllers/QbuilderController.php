@@ -1,5 +1,4 @@
-<?php
-
+<?
 	/**
 	 * Class QBuilderController
 	 */
@@ -216,6 +215,7 @@
 			{
 				/** @var $selectedPage QPageRecord */
 				$selectedPage = QPageRecord::model()->findByPk($pageId);
+				/** @var UserLinkCartRecord[] $linkRecords */
 				$linkRecords = UserLinkCartRecord::model()->findAll('id_user=?', array($userId));
 				foreach ($linkRecords as $linkRecord)
 					$selectedPage->addLink($linkRecord->id, -1);
@@ -236,6 +236,7 @@
 			$linkInPageId = Yii::app()->request->getPost('linkInPageId');
 			if (isset($linkInPageId))
 			{
+				/** @var QPageLinkRecord $linkRecord */
 				$linkRecord = QPageLinkRecord::model()->findByPk($linkInPageId);
 				$pageId = $linkRecord->id_page;
 				QPageLinkRecord::deleteLink($linkInPageId);
@@ -305,16 +306,18 @@
 		 * @param string $sessionKey
 		 * @param string $dateStart
 		 * @param string $dateEnd
+		 * @param boolean $filterByViewDate
 		 * @return QPageModel[]
 		 * @soap
 		 */
-		public function getAllPages($sessionKey, $dateStart, $dateEnd)
+		public function getAllPages($sessionKey, $dateStart, $dateEnd, $filterByViewDate)
 		{
 			if ($this->authenticateBySession($sessionKey))
 			{
-				$command = Yii::app()->db->createCommand("call sp_get_all_qpages(:start_date,:end_date)");
+				$command = Yii::app()->db->createCommand("call sp_get_all_qpages(:start_date,:end_date,:filter_by_view_date)");
 				$command->bindValue(":start_date", date(Yii::app()->params['mysqlDateFormat'], strtotime($dateStart)), PDO::PARAM_STR);
 				$command->bindValue(":end_date", date(Yii::app()->params['mysqlDateFormat'], strtotime($dateEnd)), PDO::PARAM_STR);
+				$command->bindValue(":filter_by_view_date", $filterByViewDate, PDO::PARAM_BOOL);
 				$pageRecords = $command->queryAll();
 				foreach ($pageRecords as $pageRecord)
 				{
@@ -354,5 +357,4 @@
 					QPageRecord::deletePage($pageId);
 		}
 		/////////////////Service Part///////////////////////////
-
 	}
