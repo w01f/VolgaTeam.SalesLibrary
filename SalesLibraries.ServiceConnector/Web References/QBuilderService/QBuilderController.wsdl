@@ -69,6 +69,7 @@
     <wsdl:part name="sessionKey" type="xsd:string" />
     <wsdl:part name="dateStart" type="xsd:string" />
     <wsdl:part name="dateEnd" type="xsd:string" />
+    <wsdl:part name="filterByViewDate" type="xsd:boolean" />
   </wsdl:message>
   <wsdl:message name="getAllPagesOut">
     <wsdl:part name="return" type="tns:QPageModelArray" />

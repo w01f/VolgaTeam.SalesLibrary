@@ -20,7 +20,7 @@ namespace SalesLibraries.ServiceConnector.Services.Soap
 			}
 		}
 
-		public QPageModel[] GetAllPages(DateTime startDate, DateTime endDate, out string message)
+		public QPageModel[] GetAllPages(DateTime startDate, DateTime endDate, bool filterByViewDate, out string message)
 		{
 			message = string.Empty;
 			var pages = new List<QPageModel>();
@@ -37,7 +37,7 @@ namespace SalesLibraries.ServiceConnector.Services.Soap
 							var nextDate = startDate.AddDays(30);
 							if (nextDate > endDate)
 								nextDate = endDate;
-							pages.AddRange(client.getAllPages(sessionKey, startDate.ToString("MM/dd/yyyy hh:mm tt"), nextDate.ToString("MM/dd/yyyy hh:mm tt")) ?? new QPageModel[] { });
+							pages.AddRange(client.getAllPages(sessionKey, startDate.ToString("MM/dd/yyyy hh:mm tt"), nextDate.ToString("MM/dd/yyyy hh:mm tt"), filterByViewDate) ?? new QPageModel[] { });
 							startDate = nextDate;
 						}
 					}

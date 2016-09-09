@@ -52,6 +52,8 @@
 			this.pnFilterButtons = new System.Windows.Forms.Panel();
 			this.buttonXLoadData = new DevComponents.DotNetBar.ButtonX();
 			this.gbDate = new System.Windows.Forms.GroupBox();
+			this.checkEditFilterByViewDate = new DevExpress.XtraEditors.CheckEdit();
+			this.checkEditFilterByCreateDate = new DevExpress.XtraEditors.CheckEdit();
 			this.labelControlDateEnd = new DevExpress.XtraEditors.LabelControl();
 			this.dateEditEnd = new DevExpress.XtraEditors.DateEdit();
 			this.labelControlDateStart = new DevExpress.XtraEditors.LabelControl();
@@ -67,6 +69,8 @@
 			this.splitContainerControlData.SuspendLayout();
 			this.pnFilterButtons.SuspendLayout();
 			this.gbDate.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditFilterByViewDate.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditFilterByCreateDate.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.dateEditEnd.Properties.CalendarTimeProperties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.dateEditEnd.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.dateEditStart.Properties.CalendarTimeProperties)).BeginInit();
@@ -328,16 +332,16 @@
 			// pnCustomFilter
 			// 
 			this.pnCustomFilter.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.pnCustomFilter.Location = new System.Drawing.Point(0, 137);
+			this.pnCustomFilter.Location = new System.Drawing.Point(0, 173);
 			this.pnCustomFilter.Name = "pnCustomFilter";
-			this.pnCustomFilter.Size = new System.Drawing.Size(230, 346);
+			this.pnCustomFilter.Size = new System.Drawing.Size(230, 310);
 			this.pnCustomFilter.TabIndex = 21;
 			// 
 			// pnFilterButtons
 			// 
 			this.pnFilterButtons.Controls.Add(this.buttonXLoadData);
 			this.pnFilterButtons.Dock = System.Windows.Forms.DockStyle.Top;
-			this.pnFilterButtons.Location = new System.Drawing.Point(0, 98);
+			this.pnFilterButtons.Location = new System.Drawing.Point(0, 134);
 			this.pnFilterButtons.Name = "pnFilterButtons";
 			this.pnFilterButtons.Size = new System.Drawing.Size(230, 39);
 			this.pnFilterButtons.TabIndex = 23;
@@ -362,17 +366,46 @@
 			// 
 			// gbDate
 			// 
+			this.gbDate.Controls.Add(this.checkEditFilterByViewDate);
+			this.gbDate.Controls.Add(this.checkEditFilterByCreateDate);
 			this.gbDate.Controls.Add(this.labelControlDateEnd);
 			this.gbDate.Controls.Add(this.dateEditEnd);
 			this.gbDate.Controls.Add(this.labelControlDateStart);
 			this.gbDate.Controls.Add(this.dateEditStart);
 			this.gbDate.Dock = System.Windows.Forms.DockStyle.Top;
+			this.gbDate.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.gbDate.Location = new System.Drawing.Point(0, 0);
 			this.gbDate.Name = "gbDate";
-			this.gbDate.Size = new System.Drawing.Size(230, 98);
+			this.gbDate.Size = new System.Drawing.Size(230, 134);
 			this.gbDate.TabIndex = 22;
 			this.gbDate.TabStop = false;
-			this.gbDate.Text = "Date range";
+			this.gbDate.Text = "Date Range";
+			// 
+			// checkEditFilterByViewDate
+			// 
+			this.checkEditFilterByViewDate.Location = new System.Drawing.Point(159, 99);
+			this.checkEditFilterByViewDate.Name = "checkEditFilterByViewDate";
+			this.checkEditFilterByViewDate.Properties.AutoWidth = true;
+			this.checkEditFilterByViewDate.Properties.Caption = "Viewed";
+			this.checkEditFilterByViewDate.Properties.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Radio;
+			this.checkEditFilterByViewDate.Properties.RadioGroupIndex = 1;
+			this.checkEditFilterByViewDate.Size = new System.Drawing.Size(64, 20);
+			this.checkEditFilterByViewDate.StyleController = this.styleController;
+			this.checkEditFilterByViewDate.TabIndex = 5;
+			this.checkEditFilterByViewDate.TabStop = false;
+			// 
+			// checkEditFilterByCreateDate
+			// 
+			this.checkEditFilterByCreateDate.EditValue = true;
+			this.checkEditFilterByCreateDate.Location = new System.Drawing.Point(10, 99);
+			this.checkEditFilterByCreateDate.Name = "checkEditFilterByCreateDate";
+			this.checkEditFilterByCreateDate.Properties.AutoWidth = true;
+			this.checkEditFilterByCreateDate.Properties.Caption = "Created";
+			this.checkEditFilterByCreateDate.Properties.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Radio;
+			this.checkEditFilterByCreateDate.Properties.RadioGroupIndex = 1;
+			this.checkEditFilterByCreateDate.Size = new System.Drawing.Size(67, 20);
+			this.checkEditFilterByCreateDate.StyleController = this.styleController;
+			this.checkEditFilterByCreateDate.TabIndex = 4;
 			// 
 			// labelControlDateEnd
 			// 
@@ -447,6 +480,8 @@
 			this.pnFilterButtons.ResumeLayout(false);
 			this.gbDate.ResumeLayout(false);
 			this.gbDate.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditFilterByViewDate.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditFilterByCreateDate.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.dateEditEnd.Properties.CalendarTimeProperties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.dateEditEnd.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.dateEditStart.Properties.CalendarTimeProperties)).EndInit();
@@ -482,5 +517,7 @@
 		private DevExpress.XtraEditors.LabelControl labelControlDateStart;
 		private DevExpress.XtraEditors.DateEdit dateEditStart;
 		private DevExpress.XtraGrid.Columns.GridColumn gridColumnPagesSecurityType;
+		private DevExpress.XtraEditors.CheckEdit checkEditFilterByViewDate;
+		private DevExpress.XtraEditors.CheckEdit checkEditFilterByCreateDate;
 	}
 }

@@ -45,6 +45,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.QBuilder
 		{
 			ClearData();
 			var message = string.Empty;
+			var fileterByViewDate = checkEditFilterByViewDate.Checked;
 			if (showMessages)
 			{
 				using (var form = new FormProgress())
@@ -53,7 +54,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.QBuilder
 					Enabled = false;
 					form.laProgress.Text = "Loading data...";
 					form.TopMost = true;
-					var thread = new Thread(() => _records.AddRange(WebSiteManager.Instance.SelectedSite.GetAllPages(dateEditStart.DateTime, dateEditEnd.DateTime, out message)));
+					var thread = new Thread(() => _records.AddRange(WebSiteManager.Instance.SelectedSite.GetAllPages(dateEditStart.DateTime, dateEditEnd.DateTime, fileterByViewDate, out message)));
 					form.Show();
 					thread.Start();
 					while (thread.IsAlive)
@@ -70,7 +71,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.QBuilder
 			}
 			else
 			{
-				var thread = new Thread(() => _records.AddRange(WebSiteManager.Instance.SelectedSite.GetAllPages(dateEditStart.DateTime, dateEditEnd.DateTime, out message)));
+				var thread = new Thread(() => _records.AddRange(WebSiteManager.Instance.SelectedSite.GetAllPages(dateEditStart.DateTime, dateEditEnd.DateTime, fileterByViewDate, out message)));
 				thread.Start();
 				while (thread.IsAlive)
 				{

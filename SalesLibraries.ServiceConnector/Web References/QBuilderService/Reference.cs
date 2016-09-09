@@ -87,28 +87,30 @@ namespace SalesLibraries.ServiceConnector.QBuilderService {
         /// <remarks/>
         [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:QBuilderControllerwsdl#getAllPages", RequestNamespace="urn:QBuilderControllerwsdl", ResponseNamespace="urn:QBuilderControllerwsdl")]
         [return: System.Xml.Serialization.SoapElementAttribute("return")]
-        public QPageModel[] getAllPages(string sessionKey, string dateStart, string dateEnd) {
+        public QPageModel[] getAllPages(string sessionKey, string dateStart, string dateEnd, bool filterByViewDate) {
             object[] results = this.Invoke("getAllPages", new object[] {
                         sessionKey,
                         dateStart,
-                        dateEnd});
+                        dateEnd,
+                        filterByViewDate});
             return ((QPageModel[])(results[0]));
         }
         
         /// <remarks/>
-        public void getAllPagesAsync(string sessionKey, string dateStart, string dateEnd) {
-            this.getAllPagesAsync(sessionKey, dateStart, dateEnd, null);
+        public void getAllPagesAsync(string sessionKey, string dateStart, string dateEnd, bool filterByViewDate) {
+            this.getAllPagesAsync(sessionKey, dateStart, dateEnd, filterByViewDate, null);
         }
         
         /// <remarks/>
-        public void getAllPagesAsync(string sessionKey, string dateStart, string dateEnd, object userState) {
+        public void getAllPagesAsync(string sessionKey, string dateStart, string dateEnd, bool filterByViewDate, object userState) {
             if ((this.getAllPagesOperationCompleted == null)) {
                 this.getAllPagesOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetAllPagesOperationCompleted);
             }
             this.InvokeAsync("getAllPages", new object[] {
                         sessionKey,
                         dateStart,
-                        dateEnd}, this.getAllPagesOperationCompleted, userState);
+                        dateEnd,
+                        filterByViewDate}, this.getAllPagesOperationCompleted, userState);
         }
         
         private void OngetAllPagesOperationCompleted(object arg) {
