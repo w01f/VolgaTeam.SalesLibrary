@@ -6,16 +6,10 @@ namespace SalesLibraries.ServiceConnector.StatisticService
 {
 	public partial class FileActivityReportModel
 	{
-		public string FileName => Encoding.UTF8.GetString(Convert.FromBase64String(fileName));
+		public string FileName => !String.IsNullOrEmpty(fileName) ? Encoding.UTF8.GetString(Convert.FromBase64String(fileName)) : null;
+		public string FileLink => !String.IsNullOrEmpty(fileLink) ? Encoding.UTF8.GetString(Convert.FromBase64String(fileLink)) : null;
+		public string FileDetail => !String.IsNullOrEmpty(fileDetail) ? Encoding.UTF8.GetString(Convert.FromBase64String(fileDetail)) : null;
 
-		public bool IsUrl
-		{
-			get
-			{
-				Uri uriResult;
-				return Uri.TryCreate(FileName, UriKind.Absolute, out uriResult)
-					&& (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
-			}
-		}
+		public bool IsUrl => "qpage".Equals(fileType, StringComparison.OrdinalIgnoreCase);
 	}
 }

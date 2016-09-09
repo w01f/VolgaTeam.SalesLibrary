@@ -838,7 +838,13 @@ namespace SalesLibraries.ServiceConnector.StatisticService {
     [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:StatisticControllerwsdl")]
     public partial class FileActivityReportModel {
         
+        private string fileTypeField;
+        
         private string fileNameField;
+        
+        private string fileLinkField;
+        
+        private string fileDetailField;
         
         private string libraryField;
         
@@ -847,12 +853,42 @@ namespace SalesLibraries.ServiceConnector.StatisticService {
         private string groupField;
         
         /// <remarks/>
+        public string fileType {
+            get {
+                return this.fileTypeField;
+            }
+            set {
+                this.fileTypeField = value;
+            }
+        }
+        
+        /// <remarks/>
         public string fileName {
             get {
                 return this.fileNameField;
             }
             set {
                 this.fileNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string fileLink {
+            get {
+                return this.fileLinkField;
+            }
+            set {
+                this.fileLinkField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string fileDetail {
+            get {
+                return this.fileDetailField;
+            }
+            set {
+                this.fileDetailField = value;
             }
         }
         

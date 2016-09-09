@@ -179,7 +179,7 @@
 			// gridColumnFile
 			// 
 			this.gridColumnFile.Caption = "File";
-			this.gridColumnFile.FieldName = "File";
+			this.gridColumnFile.FieldName = "FileTitle";
 			this.gridColumnFile.Name = "gridColumnFile";
 			this.gridColumnFile.Visible = true;
 			this.gridColumnFile.VisibleIndex = 4;
@@ -191,6 +191,7 @@
 			this.repositoryItemHyperLinkEdit.Name = "repositoryItemHyperLinkEdit";
 			this.repositoryItemHyperLinkEdit.ReadOnly = true;
 			this.repositoryItemHyperLinkEdit.SingleClick = true;
+			this.repositoryItemHyperLinkEdit.OpenLink += new DevExpress.XtraEditors.Controls.OpenLinkEventHandler(this.OnOpenFileLink);
 			// 
 			// repositoryItemButtonEdit
 			// 

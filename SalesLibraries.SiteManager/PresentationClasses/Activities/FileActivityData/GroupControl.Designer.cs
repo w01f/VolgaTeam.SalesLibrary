@@ -30,13 +30,14 @@
         {
 			this.gridControlData = new DevExpress.XtraGrid.GridControl();
 			this.advBandedGridViewData = new DevExpress.XtraGrid.Views.BandedGrid.AdvBandedGridView();
-			this.gridBandMain = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
 			this.gridColumnFileName = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
 			this.gridColumnLibraryName = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
 			this.gridColumnActivityCount = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
 			this.repositoryItemSpinEditNumeric = new DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit();
 			this.repositoryItemHyperLinkEdit = new DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit();
 			this.repositoryItemButtonEdit = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
+			this.gridColumnFileDetail = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+			this.gridBandMain = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
 			((System.ComponentModel.ISupportInitialize)(this.gridControlData)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.advBandedGridViewData)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemSpinEditNumeric)).BeginInit();
@@ -97,6 +98,7 @@
             this.gridBandMain});
 			this.advBandedGridViewData.Columns.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn[] {
             this.gridColumnFileName,
+            this.gridColumnFileDetail,
             this.gridColumnLibraryName,
             this.gridColumnActivityCount});
 			this.advBandedGridViewData.GridControl = this.gridControlData;
@@ -130,17 +132,6 @@
 			this.advBandedGridViewData.ShownEditor += new System.EventHandler(this.OnGridViewShownEditor);
 			this.advBandedGridViewData.MouseMove += new System.Windows.Forms.MouseEventHandler(this.OnGridViewMouseMove);
 			// 
-			// gridBandMain
-			// 
-			this.gridBandMain.Caption = "User:";
-			this.gridBandMain.Columns.Add(this.gridColumnFileName);
-			this.gridBandMain.Columns.Add(this.gridColumnLibraryName);
-			this.gridBandMain.Columns.Add(this.gridColumnActivityCount);
-			this.gridBandMain.MinWidth = 20;
-			this.gridBandMain.Name = "gridBandMain";
-			this.gridBandMain.VisibleIndex = 0;
-			this.gridBandMain.Width = 896;
-			// 
 			// gridColumnFileName
 			// 
 			this.gridColumnFileName.AppearanceCell.Options.UseTextOptions = true;
@@ -151,7 +142,7 @@
 			this.gridColumnFileName.FieldName = "FileName";
 			this.gridColumnFileName.Name = "gridColumnFileName";
 			this.gridColumnFileName.Visible = true;
-			this.gridColumnFileName.Width = 596;
+			this.gridColumnFileName.Width = 462;
 			// 
 			// gridColumnLibraryName
 			// 
@@ -204,12 +195,37 @@
 			this.repositoryItemHyperLinkEdit.Name = "repositoryItemHyperLinkEdit";
 			this.repositoryItemHyperLinkEdit.ReadOnly = true;
 			this.repositoryItemHyperLinkEdit.SingleClick = true;
+			this.repositoryItemHyperLinkEdit.OpenLink += new DevExpress.XtraEditors.Controls.OpenLinkEventHandler(this.OnOpenFileLink);
 			// 
 			// repositoryItemButtonEdit
 			// 
 			this.repositoryItemButtonEdit.AutoHeight = false;
 			this.repositoryItemButtonEdit.Name = "repositoryItemButtonEdit";
 			this.repositoryItemButtonEdit.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+			// 
+			// gridColumnFileDetail
+			// 
+			this.gridColumnFileDetail.AppearanceCell.Options.UseTextOptions = true;
+			this.gridColumnFileDetail.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+			this.gridColumnFileDetail.AppearanceHeader.Options.UseTextOptions = true;
+			this.gridColumnFileDetail.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+			this.gridColumnFileDetail.Caption = "Link Detail";
+			this.gridColumnFileDetail.FieldName = "FileDetail";
+			this.gridColumnFileDetail.Name = "gridColumnFileDetail";
+			this.gridColumnFileDetail.Visible = true;
+			this.gridColumnFileDetail.Width = 315;
+			// 
+			// gridBandMain
+			// 
+			this.gridBandMain.Caption = "User:";
+			this.gridBandMain.Columns.Add(this.gridColumnFileName);
+			this.gridBandMain.Columns.Add(this.gridColumnFileDetail);
+			this.gridBandMain.Columns.Add(this.gridColumnLibraryName);
+			this.gridBandMain.Columns.Add(this.gridColumnActivityCount);
+			this.gridBandMain.MinWidth = 20;
+			this.gridBandMain.Name = "gridBandMain";
+			this.gridBandMain.VisibleIndex = 0;
+			this.gridBandMain.Width = 1077;
 			// 
 			// GroupControl
 			// 
@@ -234,7 +250,8 @@
 		private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn gridColumnFileName;
 		private DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit repositoryItemHyperLinkEdit;
 		private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repositoryItemButtonEdit;
-		private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBandMain;
 		private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn gridColumnLibraryName;
+		private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBandMain;
+		private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn gridColumnFileDetail;
 	}
 }

@@ -162,7 +162,10 @@
       </xsd:complexType>
       <xsd:complexType name="FileActivityReportModel">
         <xsd:all>
+          <xsd:element name="fileType" type="xsd:string" />
           <xsd:element name="fileName" type="xsd:string" />
+          <xsd:element name="fileLink" type="xsd:string" />
+          <xsd:element name="fileDetail" type="xsd:string" />
           <xsd:element name="library" type="xsd:string" />
           <xsd:element name="activityCount" type="xsd:int" />
           <xsd:element name="group" type="xsd:string" />

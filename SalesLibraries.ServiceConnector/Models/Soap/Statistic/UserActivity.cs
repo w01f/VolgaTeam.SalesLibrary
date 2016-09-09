@@ -32,7 +32,39 @@ namespace SalesLibraries.ServiceConnector.StatisticService
 			}
 		}
 
-		public string File
+		public string FileTitle
+		{
+			get
+			{
+				if (details == null) return String.Empty;
+				Func<ActivityDetail, bool> selector = d =>
+							"name".Equals(d.tag, StringComparison.OrdinalIgnoreCase) ||
+							"file".Equals(d.tag, StringComparison.OrdinalIgnoreCase) ||
+							"link".Equals(d.tag, StringComparison.OrdinalIgnoreCase) ||
+							"url".Equals(d.tag, StringComparison.OrdinalIgnoreCase) ||
+							"qsite title".Equals(d.tag, StringComparison.OrdinalIgnoreCase) ||
+							"file name".Equals(d.tag, StringComparison.OrdinalIgnoreCase);
+				return details
+					.OrderBy(d => new[]
+						{
+							"file",
+							"link",
+							"file name",
+							"qsite title",
+						}.Any(item => item.Equals(d.tag, StringComparison.OrdinalIgnoreCase)) ? 1 : 2)
+					.ThenBy(d => d.tag)
+					.Where(selector)
+					.Select(d =>
+						{
+							if (d.value.Contains("?version="))
+								return d.value.Substring(0, d.value.IndexOf("?version="));
+							return d.value;
+						})
+					.FirstOrDefault() ?? String.Empty;
+			}
+		}
+
+		public string FileLink
 		{
 			get
 			{
@@ -54,11 +86,11 @@ namespace SalesLibraries.ServiceConnector.StatisticService
 					.ThenBy(d => d.tag)
 					.Where(selector)
 					.Select(d =>
-						{
-							if (d.value.Contains("?version="))
-								return d.value.Substring(0, d.value.IndexOf("?version="));
-							return d.value;
-						})
+					{
+						if (d.value.Contains("?version="))
+							return d.value.Substring(0, d.value.IndexOf("?version="));
+						return d.value;
+					})
 					.FirstOrDefault() ?? String.Empty;
 			}
 		}

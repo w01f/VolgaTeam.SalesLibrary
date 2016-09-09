@@ -4,11 +4,13 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.Windows.Forms;
+using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraPrinting;
 using DevExpress.XtraTab;
 using SalesLibraries.ServiceConnector.StatisticService;
 using SalesLibraries.SiteManager.PresentationClasses.Common;
+using BorderSide = DevExpress.XtraPrinting.BorderSide;
 
 namespace SalesLibraries.SiteManager.PresentationClasses.Activities.FileActivityData
 {
@@ -31,7 +33,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Activities.FileActivity
 			}
 		}
 
-		public GroupControl(IEnumerable<FileActivityReportModel> records, DateTime startDate, DateTime endDate, bool showLibrary)
+		public GroupControl(IEnumerable<FileActivityReportModel> records, DateTime startDate, DateTime endDate, bool showDeatils)
 		{
 			InitializeComponent();
 			Dock = DockStyle.Fill;
@@ -43,7 +45,8 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Activities.FileActivity
 			_endDate = endDate;
 
 			gridControlData.DataSource = Records;
-			gridColumnLibraryName.Visible = showLibrary;
+			gridColumnFileDetail.Visible = showDeatils;
+			gridColumnLibraryName.Visible = showDeatils;
 		}
 
 		public PrintableComponentLink GetPrintLink()
@@ -70,12 +73,14 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Activities.FileActivity
 
 		private void OnCustomRowCellEdit(object sender, CustomRowCellEditEventArgs e)
 		{
-			if (e.Column != gridColumnFileName) return;
-			var dataRow = advBandedGridViewData.GetRow(e.RowHandle) as FileActivityReportModel;
-			if (dataRow != null && dataRow.IsUrl)
-				e.RepositoryItem = repositoryItemHyperLinkEdit;
-			else
-				e.RepositoryItem = repositoryItemButtonEdit;
+			if (e.Column == gridColumnFileName || e.Column == gridColumnFileDetail)
+			{
+				var dataRow = advBandedGridViewData.GetRow(e.RowHandle) as FileActivityReportModel;
+				if (dataRow != null && dataRow.IsUrl)
+					e.RepositoryItem = repositoryItemHyperLinkEdit;
+				else
+					e.RepositoryItem = repositoryItemButtonEdit;
+			}
 		}
 
 		private void OnGridViewShownEditor(object sender, EventArgs e)
@@ -95,6 +100,11 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Activities.FileActivity
 		{
 			advBandedGridViewData.HideEditor();
 			advBandedGridViewData.Focus();
+		}
+
+		private void OnOpenFileLink(object sender, OpenLinkEventArgs e)
+		{
+			e.EditValue = (advBandedGridViewData.GetFocusedRow() as FileActivityReportModel)?.FileLink;
 		}
 	}
 }

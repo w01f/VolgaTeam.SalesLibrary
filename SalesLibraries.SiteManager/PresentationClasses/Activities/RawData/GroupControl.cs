@@ -4,11 +4,13 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.Windows.Forms;
+using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraPrinting;
 using DevExpress.XtraTab;
 using SalesLibraries.ServiceConnector.StatisticService;
 using SalesLibraries.SiteManager.PresentationClasses.Common;
+using BorderSide = DevExpress.XtraPrinting.BorderSide;
 
 namespace SalesLibraries.SiteManager.PresentationClasses.Activities.RawData
 {
@@ -102,6 +104,11 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Activities.RawData
 		{
 			gridViewData.HideEditor();
 			gridViewData.Focus();
+		}
+
+		private void OnOpenFileLink(object sender, OpenLinkEventArgs e)
+		{
+			e.EditValue = (gridViewData.GetFocusedRow() as UserActivity)?.FileLink;
 		}
 	}
 }
