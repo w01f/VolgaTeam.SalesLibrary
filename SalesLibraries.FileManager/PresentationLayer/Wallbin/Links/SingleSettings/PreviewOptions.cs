@@ -7,7 +7,6 @@ using DevExpress.XtraTab;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.Common.Helpers;
-using SalesLibraries.CommonGUI.Common;
 using SalesLibraries.FileManager.Business.PreviewGenerators;
 using SalesLibraries.FileManager.Controllers;
 
@@ -58,9 +57,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 				buttonXOpenWV.Enabled = false;
 		}
 
-		public void SaveData()
-		{
-		}
+		public void SaveData() { }
 
 		private void buttonXRefreshPreview_Click(object sender, EventArgs e)
 		{

@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using Newtonsoft.Json;
+using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 
 namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
@@ -73,6 +76,37 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 		{
 			base.AfterConstruction();
 			RegularFontStyle = FontStyle.Regular;
+		}
+
+		public override void ResetToDefault(IList<LinkSettingsGroupType> groupsForReset)
+		{
+			base.ResetToDefault(groupsForReset);
+			foreach (var linkSettingsGroupType in groupsForReset)
+			{
+				switch (linkSettingsGroupType)
+				{
+					case LinkSettingsGroupType.HoverNote:
+						HoverNote = null;
+						break;
+					case LinkSettingsGroupType.TextFormatting:
+						RegularFontStyle = FontStyle.Regular;
+						IsSpecialFormat = false;
+						break;
+				}
+			}
+		}
+
+
+		public override IList<LinkSettingsGroupType> GetCustomizedSettigsGroups()
+		{
+			var customizedSettingsGroups = base.GetCustomizedSettigsGroups();
+
+			if (!String.IsNullOrEmpty(HoverNote))
+				customizedSettingsGroups.Add(LinkSettingsGroupType.HoverNote);
+			if (RegularFontStyle != FontStyle.Regular || IsSpecialFormat)
+				customizedSettingsGroups.Add(LinkSettingsGroupType.TextFormatting);
+
+			return customizedSettingsGroups.Distinct().ToList();
 		}
 	}
 }

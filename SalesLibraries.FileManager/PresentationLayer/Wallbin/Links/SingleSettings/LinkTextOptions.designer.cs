@@ -28,9 +28,8 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.components = new System.ComponentModel.Container();
 			this.colorEditLinkSpecialColor = new DevExpress.XtraEditors.ColorEdit();
-			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
+			this.styleController = new DevExpress.XtraEditors.StyleController();
 			this.buttonEditLinkSpecialFont = new DevExpress.XtraEditors.ButtonEdit();
 			this.labelControlTitle = new DevExpress.XtraEditors.LabelControl();
 			this.labelControlForeColor = new DevExpress.XtraEditors.LabelControl();
@@ -229,8 +228,8 @@
 			this.checkEditTextWordWrap.Location = new System.Drawing.Point(8, 219);
 			this.checkEditTextWordWrap.Name = "checkEditTextWordWrap";
 			this.checkEditTextWordWrap.Properties.AutoWidth = true;
-			this.checkEditTextWordWrap.Properties.Caption = "Word-Wrap this Link Text";
-			this.checkEditTextWordWrap.Size = new System.Drawing.Size(208, 20);
+			this.checkEditTextWordWrap.Properties.Caption = "Word-Wrap this Link Text  (make this text RESPONSIVE if you have LONG text)";
+			this.checkEditTextWordWrap.Size = new System.Drawing.Size(489, 20);
 			this.checkEditTextWordWrap.StyleController = this.styleController;
 			this.checkEditTextWordWrap.TabIndex = 44;
 			// 
@@ -247,7 +246,6 @@
 			this.Controls.Add(this.labelControlForeColor);
 			this.Controls.Add(this.labelControlTitle);
 			this.Controls.Add(this.buttonEditLinkSpecialFont);
-			this.Name = "LinkTextOptions";
 			this.Size = new System.Drawing.Size(531, 541);
 			((System.ComponentModel.ISupportInitialize)(this.colorEditLinkSpecialColor.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();

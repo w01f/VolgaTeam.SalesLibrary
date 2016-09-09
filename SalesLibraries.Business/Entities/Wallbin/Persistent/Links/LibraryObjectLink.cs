@@ -6,6 +6,7 @@ using System.Linq;
 using Newtonsoft.Json;
 using SalesLibraries.Business.Entities.Common;
 using SalesLibraries.Business.Entities.Helpers;
+using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings;
 
 namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
@@ -120,10 +121,23 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 			base.ApplyValues(link);
 		}
 
-		public override void ResetToDefault()
+		public override void ResetToDefault(IList<LinkSettingsGroupType> groupsForReset = null)
 		{
-			ExpirationEncoded = null;
-			base.ResetToDefault();
+			if (groupsForReset == null || groupsForReset.Contains(LinkSettingsGroupType.Expiration))
+				ExpirationEncoded = null;
+			base.ResetToDefault(groupsForReset);
+		}
+
+		public override IList<LinkSettingsGroupType> GetCustomizedSettigsGroups()
+		{
+			var customizedSettingsGroups = base.GetCustomizedSettigsGroups().ToList();
+
+			if (ExpirationSettings.Enable)
+				customizedSettingsGroups.Add(LinkSettingsGroupType.Expiration);
+
+			customizedSettingsGroups.Sort((x, y) => ((Int32)x).CompareTo((Int32)y));
+
+			return customizedSettingsGroups;
 		}
 
 		public override BaseLibraryLink Copy(bool forMove = false)

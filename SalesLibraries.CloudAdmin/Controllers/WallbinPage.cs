@@ -254,29 +254,25 @@ namespace SalesLibraries.CloudAdmin.Controllers
 		private void buttonItemHomeAddUrl_Click(object sender, EventArgs e)
 		{
 			var selectedFolder = MainController.Instance.WallbinViews.Selection.SelectedFolder;
-			if (selectedFolder == null) return;
-			selectedFolder.AddHyperLink();
+			selectedFolder?.AddHyperLink();
 		}
 
 		private void buttonItemHomeAddLineBreak_Click(object sender, EventArgs e)
 		{
 			var selectedFolder = MainController.Instance.WallbinViews.Selection.SelectedFolder;
-			if (selectedFolder == null) return;
-			selectedFolder.AddLineBreak();
+			selectedFolder?.AddLineBreak();
 		}
 
 		private void buttonItemHomeLinkOpen_Click(object sender, EventArgs e)
 		{
 			var selectedFolder = MainController.Instance.WallbinViews.Selection.SelectedFolder;
-			if (selectedFolder == null) return;
-			selectedFolder.OpenLink();
+			selectedFolder?.OpenLink();
 		}
 
 		private void buttonItemHomeLinkDelete_Click(object sender, EventArgs e)
 		{
 			var selectedFolder = MainController.Instance.WallbinViews.Selection.SelectedFolder;
-			if (selectedFolder == null) return;
-			selectedFolder.DeleteLink();
+			selectedFolder?.DeleteLink();
 		}
 
 		private void buttonItemHomeLinkSettings_Click(object sender, EventArgs e)
@@ -284,7 +280,7 @@ namespace SalesLibraries.CloudAdmin.Controllers
 			var selectedFolder = MainController.Instance.WallbinViews.Selection.SelectedFolder;
 			if (selectedFolder == null) return;
 			var button = sender as ButtonItem;
-			if (button == null || button.Tag == null) return;
+			if (button?.Tag == null) return;
 			var propertiesType = (LinkSettingsType)Enum.Parse(typeof(LinkSettingsType), (String)button.Tag);
 			selectedFolder.EditLinkSettings(propertiesType);
 		}

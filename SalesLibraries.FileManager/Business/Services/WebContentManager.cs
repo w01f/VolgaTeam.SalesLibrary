@@ -347,11 +347,8 @@ namespace SalesLibraries.FileManager.Business.Services
 				target.isSpecialFormat = objectSource.IsSpecialFormat;
 				if (objectSource.IsSpecialFormat)
 				{
-					if (source.Font != null)
-					{
-						target.font = new Font();
-						target.font.ImportData(source.Font);
-					}
+					target.font = new Font();
+					target.font.ImportData(source.Font);
 				}
 				else
 					target.font = null;

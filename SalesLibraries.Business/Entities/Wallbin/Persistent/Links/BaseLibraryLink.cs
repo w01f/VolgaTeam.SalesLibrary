@@ -53,6 +53,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		public string TagsEncoded { get; set; }
 		public string WidgetEncoded { get; set; }
 		public string BannerEncoded { get; set; }
+		public string ResetSettingsSchedulerEncoded { get; set; }
 		public virtual LibraryFolder Folder { get; set; }
 		#endregion
 
@@ -121,6 +122,14 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 				return _banner;
 			}
 			set { _banner = value; }
+		}
+
+		private ResetSettingsSchedulerSettings _resetSettingsScheduler;
+		[NotMapped, JsonIgnore]
+		public ResetSettingsSchedulerSettings ResetSettingsScheduler
+		{
+			get { return _resetSettingsScheduler ?? (_resetSettingsScheduler = SettingsContainer.CreateInstance<ResetSettingsSchedulerSettings>(this, ResetSettingsSchedulerEncoded)); }
+			set { _resetSettingsScheduler = value; }
 		}
 
 		[NotMapped, JsonIgnore]
@@ -214,6 +223,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 				TagsEncoded = Tags.Serialize();
 				WidgetEncoded = Widget.Serialize();
 				BannerEncoded = Banner.Serialize();
+				ResetSettingsSchedulerEncoded = ResetSettingsScheduler.Serialize();
 			}
 			base.BeforeSave();
 		}
@@ -225,6 +235,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 			Tags = null;
 			Widget = null;
 			Banner = null;
+			ResetSettingsScheduler = null;
 		}
 
 		public override void ResetParent()
@@ -251,18 +262,63 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 			TagsEncoded = link.TagsEncoded;
 			WidgetEncoded = link.WidgetEncoded;
 			BannerEncoded = link.BannerEncoded;
+			ResetSettingsSchedulerEncoded = link.ResetSettingsSchedulerEncoded;
 			MarkAsModified();
 			AfterSave();
 		}
 
-		public virtual void ResetToDefault()
+		public virtual void ResetToDefault(IList<LinkSettingsGroupType> groupsForReset = null)
 		{
-			SettingsEncoded = null;
-			SecurityEncoded = null;
-			WidgetEncoded = null;
-			BannerEncoded = null;
+			if (groupsForReset == null)
+			{
+				SettingsEncoded = null;
+				TagsEncoded = null;
+			}
+			else
+			{
+				Settings.ResetToDefault(groupsForReset);
+				SettingsEncoded = Settings.Serialize();
+
+				Tags.ResetToDefault(groupsForReset);
+				TagsEncoded = Tags.Serialize();
+			}
+
+			if (groupsForReset == null || groupsForReset.Contains(LinkSettingsGroupType.Security))
+				SecurityEncoded = null;
+			if (groupsForReset == null || groupsForReset.Contains(LinkSettingsGroupType.Widgets))
+				WidgetEncoded = null;
+			if (groupsForReset == null || groupsForReset.Contains(LinkSettingsGroupType.Banners))
+				BannerEncoded = null;
+			if (groupsForReset == null || groupsForReset.Contains(LinkSettingsGroupType.SearchTags))
+			{
+				TagsEncoded = null;
+			}
+
+			ResetSettingsSchedulerEncoded = null;
+
 			MarkAsModified();
 			AfterSave();
+		}
+
+		public virtual IList<LinkSettingsGroupType> GetCustomizedSettigsGroups()
+		{
+			var customizedSettingsGroups = new List<LinkSettingsGroupType>();
+
+			customizedSettingsGroups.AddRange(Settings.GetCustomizedSettigsGroups());
+
+			customizedSettingsGroups.AddRange(Tags.GetCustomizedSettigsGroups());
+
+			if (Security.HasSecuritySettings)
+				customizedSettingsGroups.Add(LinkSettingsGroupType.Security);
+
+			if (Widget.Enabled)
+				customizedSettingsGroups.Add(LinkSettingsGroupType.Widgets);
+			if (Banner.Enable)
+				customizedSettingsGroups.Add(LinkSettingsGroupType.Banners);
+
+			customizedSettingsGroups.Sort((x, y) => ((Int32)x).CompareTo((Int32)y));
+
+			return customizedSettingsGroups;
 		}
 
 		public virtual BaseLibraryLink Copy(bool forMove = false)
@@ -283,6 +339,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 			link.TagsEncoded = TagsEncoded;
 			link.WidgetEncoded = WidgetEncoded;
 			link.BannerEncoded = BannerEncoded;
+			link.ResetSettingsSchedulerEncoded = ResetSettingsSchedulerEncoded;
 
 			return link;
 		}

@@ -51,6 +51,9 @@
 			this.toolStripMenuItemFolderDeleteBanners = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItemFolderSort = new System.Windows.Forms.ToolStripMenuItem();
 			this.popupMenuLinkProperties = new DevExpress.XtraBars.PopupMenu(this.components);
+			this.barButtonItemLinkPropertiesCopy = new DevExpress.XtraBars.BarButtonItem();
+			this.barButtonItemLinkPropertiesCut = new DevExpress.XtraBars.BarButtonItem();
+			this.barButtonItemLinkPropertiesPaste = new DevExpress.XtraBars.BarButtonItem();
 			this.barButtonItemLinkPropertiesOpenLink = new DevExpress.XtraBars.BarButtonItem();
 			this.barButtonItemLinkPropertiesDelete = new DevExpress.XtraBars.BarButtonItem();
 			this.barButtonItemLinkPropertiesLinkSettings = new DevExpress.XtraBars.BarButtonItem();
@@ -69,9 +72,7 @@
 			this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
 			this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
 			this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
-			this.barButtonItemLinkPropertiesCopy = new DevExpress.XtraBars.BarButtonItem();
-			this.barButtonItemLinkPropertiesCut = new DevExpress.XtraBars.BarButtonItem();
-			this.barButtonItemLinkPropertiesPaste = new DevExpress.XtraBars.BarButtonItem();
+			this.barButtonItemLinkPropertiesResetSettings = new DevExpress.XtraBars.BarButtonItem();
 			this.pnHeader.SuspendLayout();
 			this.pnHeaderBorder.SuspendLayout();
 			this.pnBorders.SuspendLayout();
@@ -96,7 +97,7 @@
 			// 
 			// toolStripMenuItemSecuritySelectAll
 			// 
-			this.toolStripMenuItemSecuritySelectAll.Image = global::SalesLibraries.FileManager.Properties.Resources.SecurityMenuSelect;
+			this.toolStripMenuItemSecuritySelectAll.Image = global::SalesLibraries.CloudAdmin.Properties.Resources.SecurityMenuSelect;
 			this.toolStripMenuItemSecuritySelectAll.Name = "toolStripMenuItemSecuritySelectAll";
 			this.toolStripMenuItemSecuritySelectAll.Size = new System.Drawing.Size(240, 30);
 			this.toolStripMenuItemSecuritySelectAll.Text = "Select all Links in this Window";
@@ -104,7 +105,7 @@
 			// 
 			// toolStripMenuItemSecurityResetAll
 			// 
-			this.toolStripMenuItemSecurityResetAll.Image = global::SalesLibraries.FileManager.Properties.Resources.SecurityMenuReset;
+			this.toolStripMenuItemSecurityResetAll.Image = global::SalesLibraries.CloudAdmin.Properties.Resources.SecurityMenuReset;
 			this.toolStripMenuItemSecurityResetAll.Name = "toolStripMenuItemSecurityResetAll";
 			this.toolStripMenuItemSecurityResetAll.Size = new System.Drawing.Size(240, 30);
 			this.toolStripMenuItemSecurityResetAll.Text = "Reset all Links in this Window";
@@ -243,10 +244,32 @@
 			new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemLinkPropertiesTags),
 			new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemLinkPropertiesWidget),
 			new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemLinkPropertiesBanner),
+			new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemLinkPropertiesResetSettings, true),
 			new DevExpress.XtraBars.LinkPersistInfo(this.barSubItemLinkPropertiesAdvanced, true),
 			new DevExpress.XtraBars.LinkPersistInfo(this.barSubItemLinkPropertiesQuickTools, true)});
 			this.popupMenuLinkProperties.Manager = this.barManager;
 			this.popupMenuLinkProperties.Name = "popupMenuLinkProperties";
+			// 
+			// barButtonItemLinkPropertiesCopy
+			// 
+			this.barButtonItemLinkPropertiesCopy.Caption = "Copy";
+			this.barButtonItemLinkPropertiesCopy.Id = 30;
+			this.barButtonItemLinkPropertiesCopy.Name = "barButtonItemLinkPropertiesCopy";
+			this.barButtonItemLinkPropertiesCopy.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemLinkPropertiesCopy_ItemClick);
+			// 
+			// barButtonItemLinkPropertiesCut
+			// 
+			this.barButtonItemLinkPropertiesCut.Caption = "Cut";
+			this.barButtonItemLinkPropertiesCut.Id = 31;
+			this.barButtonItemLinkPropertiesCut.Name = "barButtonItemLinkPropertiesCut";
+			this.barButtonItemLinkPropertiesCut.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemLinkPropertiesCut_ItemClick);
+			// 
+			// barButtonItemLinkPropertiesPaste
+			// 
+			this.barButtonItemLinkPropertiesPaste.Caption = "Paste";
+			this.barButtonItemLinkPropertiesPaste.Id = 32;
+			this.barButtonItemLinkPropertiesPaste.Name = "barButtonItemLinkPropertiesPaste";
+			this.barButtonItemLinkPropertiesPaste.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemLinkPropertiesPaste_ItemClick);
 			// 
 			// barButtonItemLinkPropertiesOpenLink
 			// 
@@ -365,8 +388,9 @@
 			this.barSubItemLinkPropertiesAdvanced,
 			this.barButtonItemLinkPropertiesCopy,
 			this.barButtonItemLinkPropertiesCut,
-			this.barButtonItemLinkPropertiesPaste});
-			this.barManager.MaxItemId = 33;
+			this.barButtonItemLinkPropertiesPaste,
+			this.barButtonItemLinkPropertiesResetSettings});
+			this.barManager.MaxItemId = 34;
 			// 
 			// barDockControlTop
 			// 
@@ -396,26 +420,12 @@
 			this.barDockControlRight.Location = new System.Drawing.Point(311, 0);
 			this.barDockControlRight.Size = new System.Drawing.Size(0, 308);
 			// 
-			// barButtonItemLinkPropertiesCopy
+			// barButtonItemLinkPropertiesResetSettings
 			// 
-			this.barButtonItemLinkPropertiesCopy.Caption = "Copy";
-			this.barButtonItemLinkPropertiesCopy.Id = 30;
-			this.barButtonItemLinkPropertiesCopy.Name = "barButtonItemLinkPropertiesCopy";
-			this.barButtonItemLinkPropertiesCopy.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemLinkPropertiesCopy_ItemClick);
-			// 
-			// barButtonItemLinkPropertiesCut
-			// 
-			this.barButtonItemLinkPropertiesCut.Caption = "Cut";
-			this.barButtonItemLinkPropertiesCut.Id = 31;
-			this.barButtonItemLinkPropertiesCut.Name = "barButtonItemLinkPropertiesCut";
-			this.barButtonItemLinkPropertiesCut.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemLinkPropertiesCut_ItemClick);
-			// 
-			// barButtonItemLinkPropertiesPaste
-			// 
-			this.barButtonItemLinkPropertiesPaste.Caption = "Paste";
-			this.barButtonItemLinkPropertiesPaste.Id = 32;
-			this.barButtonItemLinkPropertiesPaste.Name = "barButtonItemLinkPropertiesPaste";
-			this.barButtonItemLinkPropertiesPaste.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemLinkPropertiesPaste_ItemClick);
+			this.barButtonItemLinkPropertiesResetSettings.Caption = "Reset this Link";
+			this.barButtonItemLinkPropertiesResetSettings.Id = 33;
+			this.barButtonItemLinkPropertiesResetSettings.Name = "barButtonItemLinkPropertiesResetSettings";
+			this.barButtonItemLinkPropertiesResetSettings.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemLinkPropertiesResetSettings_ItemClick);
 			// 
 			// ClassicFolderBox
 			// 
@@ -486,5 +496,6 @@
 		private DevExpress.XtraBars.BarButtonItem barButtonItemLinkPropertiesCopy;
 		private DevExpress.XtraBars.BarButtonItem barButtonItemLinkPropertiesCut;
 		private DevExpress.XtraBars.BarButtonItem barButtonItemLinkPropertiesPaste;
+		private DevExpress.XtraBars.BarButtonItem barButtonItemLinkPropertiesResetSettings;
 	}
 }

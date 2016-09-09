@@ -296,6 +296,18 @@
     <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\FormEditLinkWidget.designer.cs">
       <DependentUpon>FormEditLinkWidget.cs</DependentUpon>
     </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\FormResetLinkSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\FormResetLinkSettings.designer.cs">
+      <DependentUpon>FormResetLinkSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\FormResetLinkSettingsConfirmation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\FormResetLinkSettingsConfirmation.designer.cs">
+      <DependentUpon>FormResetLinkSettingsConfirmation.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\ILinkSettingsEditControl.cs" />
     <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\ILinkSettingsEditForm.cs" />
     <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LineBreakOptions.cs">
@@ -383,6 +395,12 @@
       <DependentUpon>PreviewOptions.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\QuickEditManager.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\ResetSettingsSchedulerOptions.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\ResetSettingsSchedulerOptions.designer.cs">
+      <DependentUpon>ResetSettingsSchedulerOptions.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\SecurityOptions.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -601,6 +619,12 @@
     <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\FormEditLinkWidget.resx">
       <DependentUpon>FormEditLinkWidget.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\FormResetLinkSettings.resx">
+      <DependentUpon>FormResetLinkSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\FormResetLinkSettingsConfirmation.resx">
+      <DependentUpon>FormResetLinkSettingsConfirmation.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\LineBreakOptions.resx">
       <DependentUpon>LineBreakOptions.cs</DependentUpon>
     </EmbeddedResource>
@@ -642,6 +666,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\PreviewOptions.resx">
       <DependentUpon>PreviewOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\ResetSettingsSchedulerOptions.resx">
+      <DependentUpon>ResetSettingsSchedulerOptions.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\SecurityOptions.resx">
       <DependentUpon>SecurityOptions.cs</DependentUpon>
@@ -732,6 +759,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\LinkSettingsResetSettingsScheduler.png" />
     <None Include="Resources\WallbinZoomOut.png" />
     <None Include="Resources\WallbinZoomIn.png" />
     <None Include="Resources\WallbinSettingsTabPages.png" />

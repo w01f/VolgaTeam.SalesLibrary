@@ -1,7 +1,0 @@
-db_version.sql
-library.sql
-preview_container.sql
-library_page.sql
-column_title.sql
-library_folder.sql
-library_link.sql

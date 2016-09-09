@@ -62,6 +62,7 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 				}));
 				UpdateFolderContent(targetLibrary, cancellationToken);
 				UpdatePowerPointInfo(targetLibrary, cancellationToken);
+				ProcessResetLinkSettingsShedulers(targetLibrary, cancellationToken);
 				UpdateFileDates(targetLibrary, cancellationToken);
 				UpdatePreviewContent(targetLibrary, cancellationToken);
 				targetLibrary.SyncDate = DateTime.Now;
@@ -84,6 +85,10 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 							Application.Exit();
 							return;
 						}
+						MainController.Instance.MainForm.WindowState = savedState;
+						MainController.Instance.MainForm.ribbonControl.Enabled = true;
+						MainController.Instance.TabWallbin.UpdateWallbin();
+						MainController.Instance.ActivateApplication();
 					})));
 			}
 			else
@@ -94,9 +99,11 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 					Application.Exit();
 					return;
 				}
+				MainController.Instance.MainForm.WindowState = savedState;
+				MainController.Instance.MainForm.ribbonControl.Enabled = true;
+				MainController.Instance.TabWallbin.UpdateWallbin();
+				MainController.Instance.ActivateApplication();
 			}
-			MainController.Instance.MainForm.WindowState = savedState;
-			MainController.Instance.MainForm.ribbonControl.Enabled = true;
 		}
 
 		public static void SyncSilent()
@@ -117,6 +124,7 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 				var cancellationToken = new CancellationToken();
 				UpdateFolderContent(targetLibrary, cancellationToken);
 				UpdatePowerPointInfo(targetLibrary, cancellationToken);
+				ProcessResetLinkSettingsShedulers(targetLibrary, cancellationToken);
 				UpdateFileDates(targetLibrary, cancellationToken);
 				UpdatePreviewContent(targetLibrary, cancellationToken);
 				targetLibrary.SyncDate = DateTime.Now;
@@ -155,9 +163,25 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 			ArchiveSyncResulst(resultFiles);
 		}
 
+		private static void ProcessResetLinkSettingsShedulers(Library library, CancellationToken cancellationToken)
+		{
+			var currentDateTime = DateTime.Now;
+			var libraryLinks = library.Pages
+				.SelectMany(p => p.AllLinks)
+				.Where(l => l.ResetSettingsScheduler.Enabled && l.ResetSettingsScheduler.ResetDate <= currentDateTime)
+				.ToList();
+			if (!libraryLinks.Any()) return;
+			if (cancellationToken.IsCancellationRequested) return;
+
+			libraryLinks.ForEach(libraryLink =>
+			{
+				libraryLink.ResetToDefault(libraryLink.ResetSettingsScheduler.SettingsGroups);
+			});
+		}
+
 		private static void UpdateFileDates(Library library, CancellationToken cancellationToken)
 		{
-			var fileLinks = library.Pages.SelectMany(p => p.AllLinks).OfType<LibraryFileLink>().Where(f=>!f.IsFolder).ToList();
+			var fileLinks = library.Pages.SelectMany(p => p.AllLinks).OfType<LibraryFileLink>().Where(f => !f.IsFolder).ToList();
 			if (!fileLinks.Any()) return;
 			if (cancellationToken.IsCancellationRequested) return;
 			fileLinks.ForEach(f => f.UpdateFileDate());

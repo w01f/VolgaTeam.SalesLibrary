@@ -17,6 +17,6 @@
 		public const string WindowsThumbnailFile = "thumbs.db";
 		public const string GoodSyncServiceFolderName = "_gsdata_";
 		public const string FilesDeletedFromFolderArchiveName = "z_archive";
-		public const string DatabaseConnectionStateInfoFileName = "_lock.txt";
+		public const string DatabaseConnectionStateInfoFileName = "z_library_LOCKED.txt";
 	}
 }

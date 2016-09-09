@@ -224,6 +224,26 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 			DataChanged?.Invoke(this, EventArgs.Empty);
 		}
 
+		public void ResetLinkSettings()
+		{
+			var selectedRow = SelectedLinkRow;
+			if (selectedRow == null) return;
+
+			using (var form = new FormResetLinkSettings(selectedRow.Source))
+			{
+				if (form.ShowDialog(MainController.Instance.MainForm) != DialogResult.OK) return;
+				var settingsGroupsForReset = form.SettingsGroups;
+				using (var confirmation = new FormResetLinkSettingsConfirmation(settingsGroupsForReset))
+				{
+					if (confirmation.ShowDialog(MainController.Instance.MainForm) != DialogResult.OK) return;
+					selectedRow.Source.ResetToDefault(settingsGroupsForReset);
+					selectedRow.Info.Recalc();
+					grFiles.Refresh();
+					DataChanged?.Invoke(this, EventArgs.Empty);
+				}
+			}
+		}
+
 		public void OpenLink()
 		{
 			var selectedRow = SelectedLinkRow;
@@ -259,7 +279,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 							break;
 						case DialogResult.Yes:
 							DataStateObserver.Instance.RaiseLinksDeleted(relatedLinks.Select(l => l.ExtId));
-							selectedRow.DeleteWithAllRelatedLinks();
+							selectedRow.SourceObject?.DeleteLinkAndRelatedLinks();
 							break;
 						default:
 							grFiles.ResumeLayout();
@@ -270,7 +290,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 			else
 			{
 				if (MainController.Instance.PopupMessages.ShowQuestion("Are You sure You want to remove this link/line break?") !=
-				    DialogResult.Yes)
+					DialogResult.Yes)
 				{
 					grFiles.ResumeLayout();
 					return;
@@ -946,6 +966,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 				barButtonItemLinkPropertiesTags.Visibility = BarItemVisibility.Never;
 				barButtonItemLinkPropertiesWidget.Visibility = BarItemVisibility.Never;
 				barButtonItemLinkPropertiesBanner.Visibility = BarItemVisibility.Never;
+				barButtonItemLinkPropertiesResetSettings.Visibility = BarItemVisibility.Never;
 				barSubItemLinkPropertiesAdvanced.Visibility = BarItemVisibility.Never;
 				barSubItemLinkPropertiesQuickTools.Visibility = BarItemVisibility.Never;
 
@@ -963,6 +984,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 				barButtonItemLinkPropertiesTags.Visibility = BarItemVisibility.Always;
 				barButtonItemLinkPropertiesWidget.Visibility = BarItemVisibility.Always;
 				barButtonItemLinkPropertiesBanner.Visibility = BarItemVisibility.Always;
+				barButtonItemLinkPropertiesResetSettings.Visibility = BarItemVisibility.Always;
 				barSubItemLinkPropertiesAdvanced.Visibility = BarItemVisibility.Always;
 				barSubItemLinkPropertiesQuickTools.Visibility = BarItemVisibility.Always;
 			}
@@ -976,12 +998,17 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 			var linkRow = (LinkRow)grFiles.Rows[e.RowIndex];
 			linkRow.Selected = true;
 			barButtonItemLinkPropertiesPaste.Visibility =
-				MainController.Instance.WallbinViews.LinksClipboard.IsPasteAvailable(linkRow.Source.ExtId)
-					? BarItemVisibility.Always
-					: BarItemVisibility.Never;
-			barButtonItemLinkPropertiesSecurity.Visibility = MainController.Instance.Settings.EditorSettings.EnableSecurityEdit
-				? BarItemVisibility.Always
-				: BarItemVisibility.Never;
+				MainController.Instance.WallbinViews.LinksClipboard.IsPasteAvailable(linkRow.Source.ExtId) ?
+					BarItemVisibility.Always :
+					BarItemVisibility.Never;
+			barButtonItemLinkPropertiesSecurity.Visibility =
+				MainController.Instance.Settings.EditorSettings.EnableSecurityEdit ?
+					BarItemVisibility.Always :
+					BarItemVisibility.Never;
+			barButtonItemLinkPropertiesResetSettings.Visibility =
+				linkRow.Source.GetCustomizedSettigsGroups().Any() ?
+					BarItemVisibility.Always :
+					BarItemVisibility.Never;
 			if (linkRow.Source is LineBreak)
 			{
 				barButtonItemLinkPropertiesOpenLink.Visibility = BarItemVisibility.Never;
@@ -993,6 +1020,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 
 				barButtonItemLinkPropertiesLinkSettings.Caption = "Line Break Settings";
 				barButtonItemLinkPropertiesDelete.Caption = "Delete this Line Break";
+				barButtonItemLinkPropertiesResetSettings.Caption = "Reset this Line Break";
 			}
 			else
 			{
@@ -1013,6 +1041,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 
 				barButtonItemLinkPropertiesLinkSettings.Caption = "Link Settings";
 				barButtonItemLinkPropertiesDelete.Caption = "Delete this Link";
+				barButtonItemLinkPropertiesResetSettings.Caption = "Reset this Link";
 			}
 			_quickEditor.LoadLinkSettings(linkRow.Source);
 			popupMenuLinkProperties.ShowPopup(Cursor.Position);
@@ -1089,6 +1118,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 		private void barButtonItemLinkPropertiesBanner_ItemClick(object sender, ItemClickEventArgs e)
 		{
 			EditLinkSettings(LinkSettingsType.Banner);
+		}
+
+		private void barButtonItemLinkPropertiesResetSettings_ItemClick(object sender, ItemClickEventArgs e)
+		{
+			ResetLinkSettings();
 		}
 
 		void OnLinkPropertiesMenuCloseUp(object sender, EventArgs e)

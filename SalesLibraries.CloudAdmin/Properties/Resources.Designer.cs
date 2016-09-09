@@ -373,6 +373,16 @@ namespace SalesLibraries.CloudAdmin.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap LinkSettingsResetSettingsScheduler {
+            get {
+                object obj = ResourceManager.GetObject("LinkSettingsResetSettingsScheduler", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap RetractableLogoSecurity {
             get {
                 object obj = ResourceManager.GetObject("RetractableLogoSecurity", resourceCulture);

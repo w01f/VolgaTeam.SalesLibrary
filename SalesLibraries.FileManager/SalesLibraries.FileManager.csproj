@@ -359,6 +359,24 @@
     <Compile Include="PresentationLayer\Wallbin\Links\GroupSettings\TagsCleaner.designer.cs">
       <DependentUpon>TagsCleaner.cs</DependentUpon>
     </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\FormResetLinkSettingsConfirmation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\FormResetLinkSettingsConfirmation.Designer.cs">
+      <DependentUpon>FormResetLinkSettingsConfirmation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\FormResetLinkSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\FormResetLinkSettings.Designer.cs">
+      <DependentUpon>FormResetLinkSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\ResetSettingsSchedulerOptions.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\ResetSettingsSchedulerOptions.designer.cs">
+      <DependentUpon>ResetSettingsSchedulerOptions.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\ExpiredDateOptions.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -730,6 +748,15 @@
     <EmbeddedResource Include="PresentationLayer\Wallbin\Links\GroupSettings\TagsCleaner.resx">
       <DependentUpon>TagsCleaner.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\FormResetLinkSettingsConfirmation.resx">
+      <DependentUpon>FormResetLinkSettingsConfirmation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\FormResetLinkSettings.resx">
+      <DependentUpon>FormResetLinkSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\ResetSettingsSchedulerOptions.resx">
+      <DependentUpon>ResetSettingsSchedulerOptions.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\ExpiredDateOptions.resx">
       <DependentUpon>ExpiredDateOptions.cs</DependentUpon>
     </EmbeddedResource>
@@ -912,6 +939,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\LinkSettingsResetSettingsScheduler.png" />
     <None Include="Resources\LinkAddInternal.png" />
     <None Include="Resources\DataSourceListXls.png" />
     <None Include="Resources\DataSourceListPpt.png" />

@@ -1,12 +1,18 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
 using Newtonsoft.Json;
 using SalesLibraries.Business.Entities.Common;
+using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 
 namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 {
 	public abstract class BaseLinkSettings : SettingsContainer
 	{
+		[JsonIgnore]
+		protected Font _defaultFont = new Font("Arial", 12, FontStyle.Regular, GraphicsUnit.Point);
+
 		public const string PredefinedNoteNone = "None";
 		public const string PredefinedNoteNew = "NEW!";
 		public const string PredefinedNoteSold = "SOLD!";
@@ -29,15 +35,16 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 			}
 		}
 
-		private Font _font = new Font("Arial", 12, FontStyle.Regular, GraphicsUnit.Point);
+		protected Font _font;
 		public Font Font
 		{
-			get { return _font; }
+			get { return _font ?? _defaultFont; }
 			set
 			{
 				if (_font != value)
 					OnSettingsChanged();
-				_font = value;
+				if (value != _defaultFont)
+					_font = value;
 			}
 		}
 
@@ -67,5 +74,35 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 
 		[JsonIgnore]
 		protected BaseLibraryLink ParentLink => (BaseLibraryLink)Parent;
+
+		public virtual void ResetToDefault(IList<LinkSettingsGroupType> groupsForReset)
+		{
+			foreach (var linkSettingsGroupType in groupsForReset)
+			{
+				switch (linkSettingsGroupType)
+				{
+					case LinkSettingsGroupType.TextNote:
+						Note = null;
+						break;
+					case LinkSettingsGroupType.TextFormatting:
+						Font = null;
+						ForeColor = null;
+						TextWordWrap = false;
+						break;
+				}
+			}
+		}
+
+		public virtual IList<LinkSettingsGroupType> GetCustomizedSettigsGroups()
+		{
+			var customizedSettingsGroups = new List<LinkSettingsGroupType>();
+
+			if (!String.IsNullOrEmpty(Note))
+				customizedSettingsGroups.Add(LinkSettingsGroupType.TextNote);
+			if ((_font != null && _font.Size != _defaultFont.Size && _font.Style != _defaultFont.Style && _font.Name != _defaultFont.Name) || ForeColor.HasValue || TextWordWrap)
+				customizedSettingsGroups.Add(LinkSettingsGroupType.TextFormatting);
+
+			return customizedSettingsGroups;
+		}
 	}
 }

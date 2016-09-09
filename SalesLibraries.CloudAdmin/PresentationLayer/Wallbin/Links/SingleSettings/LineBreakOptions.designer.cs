@@ -28,9 +28,8 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.components = new System.ComponentModel.Container();
 			this.memoEditNote = new DevExpress.XtraEditors.MemoEdit();
-			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
+			this.styleController = new DevExpress.XtraEditors.StyleController();
 			this.buttonEditLineBreakFont = new DevExpress.XtraEditors.ButtonEdit();
 			this.colorEditLineBreakFontColor = new DevExpress.XtraEditors.ColorEdit();
 			this.labelControlFont = new DevExpress.XtraEditors.LabelControl();
@@ -133,8 +132,8 @@
 			this.checkEditTextWordWrap.Location = new System.Drawing.Point(6, 109);
 			this.checkEditTextWordWrap.Name = "checkEditTextWordWrap";
 			this.checkEditTextWordWrap.Properties.AutoWidth = true;
-			this.checkEditTextWordWrap.Properties.Caption = "Word-Wrap this Line Break Text";
-			this.checkEditTextWordWrap.Size = new System.Drawing.Size(208, 20);
+			this.checkEditTextWordWrap.Properties.Caption = "Word-Wrap this Line Break Text (make this text RESPONSIVE if you have LONG text)";
+			this.checkEditTextWordWrap.Size = new System.Drawing.Size(523, 20);
 			this.checkEditTextWordWrap.StyleController = this.styleController;
 			this.checkEditTextWordWrap.TabIndex = 43;
 			// 

@@ -28,9 +28,8 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.components = new System.ComponentModel.Container();
 			this.colorEditLinkSpecialColor = new DevExpress.XtraEditors.ColorEdit();
-			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
+			this.styleController = new DevExpress.XtraEditors.StyleController();
 			this.buttonEditLinkSpecialFont = new DevExpress.XtraEditors.ButtonEdit();
 			this.labelControlTitle = new DevExpress.XtraEditors.LabelControl();
 			this.labelControlForeColor = new DevExpress.XtraEditors.LabelControl();
@@ -66,7 +65,7 @@
 			this.colorEditLinkSpecialColor.Properties.AppearanceDisabled.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
 			this.colorEditLinkSpecialColor.Properties.AppearanceDisabled.Options.UseBackColor = true;
 			this.colorEditLinkSpecialColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+			new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
 			this.colorEditLinkSpecialColor.Properties.ColorAlignment = DevExpress.Utils.HorzAlignment.Center;
 			this.colorEditLinkSpecialColor.Properties.ShowSystemColors = false;
 			this.colorEditLinkSpecialColor.Size = new System.Drawing.Size(105, 22);
@@ -90,8 +89,8 @@
 			// 
 			// buttonEditLinkSpecialFont
 			// 
-			this.buttonEditLinkSpecialFont.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonEditLinkSpecialFont.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+			| System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonEditLinkSpecialFont.Enabled = false;
 			this.buttonEditLinkSpecialFont.Location = new System.Drawing.Point(128, 110);
 			this.buttonEditLinkSpecialFont.Name = "buttonEditLinkSpecialFont";
@@ -102,7 +101,7 @@
 			this.buttonEditLinkSpecialFont.Properties.AppearanceDisabled.ForeColor = System.Drawing.Color.Gray;
 			this.buttonEditLinkSpecialFont.Properties.AppearanceDisabled.Options.UseForeColor = true;
 			this.buttonEditLinkSpecialFont.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton()});
+			new DevExpress.XtraEditors.Controls.EditorButton()});
 			this.buttonEditLinkSpecialFont.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
 			this.buttonEditLinkSpecialFont.Size = new System.Drawing.Size(400, 22);
 			this.buttonEditLinkSpecialFont.StyleController = this.styleController;
@@ -204,9 +203,9 @@
 			this.dateEditFakeDate.Location = new System.Drawing.Point(33, 506);
 			this.dateEditFakeDate.Name = "dateEditFakeDate";
 			this.dateEditFakeDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+			new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
 			this.dateEditFakeDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+			new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
 			this.dateEditFakeDate.Size = new System.Drawing.Size(129, 22);
 			this.dateEditFakeDate.StyleController = this.styleController;
 			this.dateEditFakeDate.TabIndex = 37;
@@ -229,8 +228,8 @@
 			this.checkEditTextWordWrap.Location = new System.Drawing.Point(8, 219);
 			this.checkEditTextWordWrap.Name = "checkEditTextWordWrap";
 			this.checkEditTextWordWrap.Properties.AutoWidth = true;
-			this.checkEditTextWordWrap.Properties.Caption = "Word-Wrap this Link Text";
-			this.checkEditTextWordWrap.Size = new System.Drawing.Size(208, 20);
+			this.checkEditTextWordWrap.Properties.Caption = "Word-Wrap this Link Text  (make this text RESPONSIVE if you have LONG text)";
+			this.checkEditTextWordWrap.Size = new System.Drawing.Size(489, 20);
 			this.checkEditTextWordWrap.StyleController = this.styleController;
 			this.checkEditTextWordWrap.TabIndex = 44;
 			// 
@@ -247,7 +246,6 @@
 			this.Controls.Add(this.labelControlForeColor);
 			this.Controls.Add(this.labelControlTitle);
 			this.Controls.Add(this.buttonEditLinkSpecialFont);
-			this.Name = "LinkTextOptions";
 			this.Size = new System.Drawing.Size(531, 541);
 			((System.ComponentModel.ISupportInitialize)(this.colorEditLinkSpecialColor.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();

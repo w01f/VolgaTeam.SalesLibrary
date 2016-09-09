@@ -8,6 +8,6 @@
 		Security,
 		Widget,
 		Banner,
-		AdvancedSettings,
+		AdvancedSettings
 	}
 }

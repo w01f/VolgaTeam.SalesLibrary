@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
 using SalesLibraries.Business.Entities.Common;
+using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Common.Objects.SearchTags;
 
 namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
@@ -48,6 +49,35 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 			Categories = new List<SearchGroup>();
 			Keywords = new List<SearchTag>();
 			SuperFilters = new List<string>();
+		}
+
+		public void ResetToDefault(IList<LinkSettingsGroupType> groupsForReset)
+		{
+			foreach (var linkSettingsGroupType in groupsForReset)
+			{
+				switch (linkSettingsGroupType)
+				{
+					case LinkSettingsGroupType.SearchTags:
+						Categories.Clear();
+						SuperFilters.Clear();
+						break;
+					case LinkSettingsGroupType.Keywords:
+						Keywords.Clear();
+						break;
+				}
+			}
+		}
+
+		public IList<LinkSettingsGroupType> GetCustomizedSettigsGroups()
+		{
+			var customizedSettingsGroups = new List<LinkSettingsGroupType>();
+
+			if (Categories.Any() || SuperFilters.Any())
+				customizedSettingsGroups.Add(LinkSettingsGroupType.SearchTags);
+			if (Keywords.Any())
+				customizedSettingsGroups.Add(LinkSettingsGroupType.Keywords);
+
+			return customizedSettingsGroups;
 		}
 	}
 }

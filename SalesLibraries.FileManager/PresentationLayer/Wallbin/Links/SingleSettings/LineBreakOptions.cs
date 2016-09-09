@@ -28,6 +28,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			InitializeComponent();
 			_data = data;
 
+			Text = "Line Break";
+
 			if ((CreateGraphics()).DpiX > 96)
 			{
 				var styleControllerFont = new Font(styleController.Appearance.Font.FontFamily, styleController.Appearance.Font.Size - 2, styleController.Appearance.Font.Style);

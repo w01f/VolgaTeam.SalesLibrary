@@ -105,6 +105,7 @@
     <Compile Include="Entities\Interfaces\IChangable.cs" />
     <Compile Include="Entities\Interfaces\IExtKeyHolder.cs" />
     <Compile Include="Entities\Wallbin\Common\Enums\FileTypes.cs" />
+    <Compile Include="Entities\Wallbin\Common\Enums\LinkSettingsGroupType.cs" />
     <Compile Include="Entities\Wallbin\Common\Enums\LinkSettingsType.cs" />
     <Compile Include="Entities\Wallbin\Common\Enums\WidgetType.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\AutoWidget.cs" />
@@ -123,6 +124,7 @@
     <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\HyperLinkSettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\LinkFileSettingsTemplate.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\LibraryFolderLinkSettings.cs" />
+    <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\ResetSettingsSchedulerSettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\SecuritySettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\BaseLinkSettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\LibraryFileLinkSettings.cs" />
@@ -186,6 +188,9 @@
     <Compile Include="Schema\Wallbin\Initialization\CloudlWallbinInitializer.cs" />
     <Compile Include="Schema\Wallbin\Initialization\LocalWallbinInitializer.cs" />
     <Compile Include="Schema\Wallbin\Initialization\WallbinInitializer.cs" />
+    <Content Include="Schema\Wallbin\Version2\library_link.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -225,7 +230,7 @@
     <Content Include="Schema\Wallbin\Base\library_page.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Schema\Wallbin\Base\sequense.txt">
+    <Content Include="Schema\Wallbin\Version2\sequense.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Schema\Wallbin\Base\library.sql">

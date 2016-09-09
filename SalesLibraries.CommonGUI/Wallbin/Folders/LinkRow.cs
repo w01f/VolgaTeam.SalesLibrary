@@ -44,12 +44,6 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 			Source.DeleteLink(fullDelete);
 		}
 
-		public void DeleteWithAllRelatedLinks()
-		{
-			RemoveFromGrid();
-			SourceObject?.DeleteLinkAndRelatedLinks();
-		}
-
 		public void RemoveFromGrid()
 		{
 			DataGridView.Rows.Remove(this);

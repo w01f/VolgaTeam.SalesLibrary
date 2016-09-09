@@ -106,7 +106,7 @@ namespace SalesLibraries.Business.Entities.Helpers
 
 		public static void ApplyNote(this IEnumerable<BaseLibraryLink> links, string note = null)
 		{
-			foreach (var libraryLink in links)
+			foreach (var libraryLink in links.OfType<LibraryObjectLink>())
 				libraryLink.Settings.Note = note;
 		}
 
@@ -118,7 +118,9 @@ namespace SalesLibraries.Business.Entities.Helpers
 		public static void ApplyHoverNote(this IEnumerable<BaseLibraryLink> links, string hoverNote = null)
 		{
 			foreach (var libraryLink in links.OfType<LibraryObjectLink>())
-				((LibraryObjectLinkSettings)libraryLink.Settings).HoverNote = hoverNote;	
+				((LibraryObjectLinkSettings)libraryLink.Settings).HoverNote = hoverNote;
+			foreach (var lineBreak in links.OfType<LineBreak>())
+				lineBreak.Settings.Note = hoverNote;
 		}
 
 		public static void ResetHoverNote(this IEnumerable<BaseLibraryLink> links)
