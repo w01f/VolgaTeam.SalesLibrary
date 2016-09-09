@@ -54,7 +54,7 @@
 					$pageItem->id = sprintf('link%s---%s', $link->id, $i);
 					$pageItem->index = $i;
 					$pageItem->title = sprintf('%s - %s %s of %s', $this->fileName, $this->pageItemName, ($i + 1), $count);
-					$pageItem->fileName = sprintf('%s-%s%s.%s', str_replace('.' . $link->fileExtension, '', $link->fileName), $this->pageItemName, ($i + 1), $link->fileExtension);
+					$pageItem->fileName = sprintf('%s-%s%s.%s', str_replace('.' . $link->fileExtension, '', $link->fileName), $this->pageItemName, ($i + 1), pathinfo($previewFile->path, PATHINFO_EXTENSION));
 					$pageItem->itemIndexInfo = sprintf('%s %s of %s', $this->pageItemName, ($i + 1), $count);
 					$pageItem->href = $previewFile->link;
 					$pageItem->path = $previewFile->path;
@@ -75,7 +75,7 @@
 					$pageItem->id = sprintf('link%s---%s', $link->id, $i);
 					$pageItem->index = $i;
 					$pageItem->title = sprintf('%s - %s %s of %s', $this->fileName, $this->pageItemName, ($i + 1), $count);
-					$pageItem->fileName = sprintf('%s-%s%s.%s', str_replace('.' . $link->fileExtension, '', $link->fileName), $this->pageItemName, ($i + 1), $link->fileExtension);
+					$pageItem->fileName = sprintf('%s-%s%s.%s', str_replace('.' . $link->fileExtension, '', $link->fileName), $this->pageItemName, ($i + 1), pathinfo($previewFile->path, PATHINFO_EXTENSION));
 					$pageItem->itemIndexInfo = sprintf('%s %s of %s', $this->pageItemName, ($i + 1), $count);
 					$pageItem->href = $previewFile->link;
 					$pageItem->path = $previewFile->path;

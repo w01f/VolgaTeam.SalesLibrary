@@ -34,7 +34,7 @@
 			foreach ($link->universalPreview->officeItems as $previewFile)
 			{
 				$pageItem = new PagePreviewItem();
-				$pageItem->fileName = sprintf('%s-%s%s.%s', str_replace('.' . $link->fileExtension, '', $link->fileName), $this->pageItemName, ($i + 1), $link->fileExtension);
+				$pageItem->fileName = sprintf('%s-%s%s.%s', str_replace('.' . $link->fileExtension, '', $link->fileName), $this->pageItemName, ($i + 1), pathinfo($previewFile->path, PATHINFO_EXTENSION));
 				$pageItem->href = $previewFile->link;
 				$pageItem->path = $previewFile->path;
 				$pageItem->size = FilePreviewData::formatFileSize($previewFile->size);
