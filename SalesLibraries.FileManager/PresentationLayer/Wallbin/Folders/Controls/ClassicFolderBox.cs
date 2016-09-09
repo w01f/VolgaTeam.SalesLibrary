@@ -643,6 +643,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 			{
 				using (var form = new FormEditLinkText())
 				{
+					form.Text = String.Format(form.Text, linkRow.Source is LineBreak ? "LINE BREAK" : "LINK");
 					form.EditedText = linkRow.Source.DisplayNameWithoutNote;
 					if (form.ShowDialog(MainController.Instance.MainForm) != DialogResult.OK) return;
 					var newLinkText = form.EditedText;

@@ -106,12 +106,13 @@
 			this.Controls.Add(this.buttonXOK);
 			this.DoubleBuffered = true;
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.ForeColor = System.Drawing.Color.Black;
 			this.MinimizeBox = false;
 			this.Name = "FormEditLinkText";
 			this.ShowIcon = false;
 			this.ShowInTaskbar = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-			this.Text = "Link text";
+			this.Text = "Responsive {0} Text";
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.memoEdit.Properties)).EndInit();
 			this.ResumeLayout(false);

@@ -28,8 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.components = new System.ComponentModel.Container();
-			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
+			this.styleController = new DevExpress.XtraEditors.StyleController();
 			this.buttonXCancel = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXOK = new DevComponents.DotNetBar.ButtonX();
 			this.memoEdit = new DevExpress.XtraEditors.MemoEdit();
@@ -111,7 +110,7 @@
 			this.ShowIcon = false;
 			this.ShowInTaskbar = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-			this.Text = "Link text";
+			this.Text = "Responsive {0} Text";
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.memoEdit.Properties)).EndInit();
 			this.ResumeLayout(false);
