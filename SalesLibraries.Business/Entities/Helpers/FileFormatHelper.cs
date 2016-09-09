@@ -15,6 +15,7 @@ namespace SalesLibraries.Business.Entities.Helpers
 			{
 				case ".PPT":
 				case ".PPTX":
+				case ".PPTM":
 					return true;
 				default:
 					return false;

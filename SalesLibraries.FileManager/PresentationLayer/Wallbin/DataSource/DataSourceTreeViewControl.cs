@@ -332,6 +332,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.DataSource
 				case ".PPTX":
 				case ".PPS":
 				case ".PPSX":
+				case ".PPTM":
 					return 6;
 				case ".MPEG":
 				case ".MPG":
