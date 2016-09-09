@@ -388,7 +388,9 @@
 
 		this.downloadFile = function (fileData)
 		{
-			window.location = window.BaseUrl + "preview/downloadFile?data=" + $.toJSON(fileData).replace(/&/g, '%26');
+			var jsonData = $.toJSON(fileData);
+			var base64Data = btoa(jsonData);
+			window.location = window.BaseUrl + "preview/downloadFile?data=" + base64Data;
 		};
 
 		var favoritesDialogObject = [];

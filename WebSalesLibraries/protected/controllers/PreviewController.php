@@ -202,7 +202,7 @@
 
 		public function actionDownloadFile()
 		{
-			$data = CJSON::decode(Yii::app()->request->getQuery('data'), false);
+			$data = CJSON::decode(base64_decode(Yii::app()->request->getQuery('data')), false);
 			Yii::app()->getRequest()->sendFile($data->name, @file_get_contents($data->path));
 			Yii::app()->end();
 		}
