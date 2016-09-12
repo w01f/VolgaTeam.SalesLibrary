@@ -91,7 +91,6 @@
 			$categoriesPath = Yii::app()->params['appRoot'] . DIRECTORY_SEPARATOR . 'SDSearch.xml';
 			$maxTags = 10;
 			$doTagCount = true;
-			$categoryRecords = array();
 			if (file_exists($categoriesPath))
 			{
 				$categoriesContent = file_get_contents($categoriesPath);
@@ -128,10 +127,15 @@
 				}
 			}
 			CategoryRecord::clearData();
-			CategoryRecord::loadData($categoryRecords);
-			MetaDataRecord::setData('link-categories', 'last-update', date(Yii::app()->params['sourceDateFormat'], filemtime($categoriesPath)));
-			MetaDataRecord::setData('link-categories', 'max-tags', $maxTags);
-			MetaDataRecord::setData('link-categories', 'tag-count', $doTagCount);
+			if (isset($categoryRecords))
+			{
+				CategoryRecord::loadData($categoryRecords);
+				MetaDataRecord::setData('link-categories', 'last-update', date(Yii::app()->params['sourceDateFormat'], filemtime($categoriesPath)));
+				MetaDataRecord::setData('link-categories', 'max-tags', $maxTags);
+				MetaDataRecord::setData('link-categories', 'tag-count', $doTagCount);
+			}
+			else
+				MetaDataRecord::setData('link-categories', 'last-update', date(Yii::app()->params['sourceDateFormat'], time()));
 
 			$superFiltersPath = Yii::app()->params['appRoot'] . DIRECTORY_SEPARATOR . 'superfilter.xml';
 			if (file_exists($superFiltersPath))
@@ -154,6 +158,8 @@
 				SuperFilterRecord::loadData($superFilterRecords);
 				MetaDataRecord::setData('link-super-filters', 'last-update', date(Yii::app()->params['sourceDateFormat'], filemtime($superFiltersPath)));
 			}
+			else
+				MetaDataRecord::setData('link-super-filters', 'last-update', date(Yii::app()->params['sourceDateFormat'], time()));
 
 			LibraryGroupRecord::clearData();
 			$libraryGroupFilePath = Yii::app()->params['appRoot'] . DIRECTORY_SEPARATOR . 'groups.txt';
