@@ -295,24 +295,28 @@
 		{
 			$tooltipList = array();
 
-			$isLineBreak = $this->isLineBreak;
-
-			if (!$isLineBreak && isset($this->extendedProperties->hoverNote) && $this->extendedProperties->hoverNote != '')
+			if($this->isLineBreak)
 			{
-				$tooltipList[] = $this->extendedProperties->hoverNote;
-				if (!$this->isFolder && isset($this->fileName))
-					$tooltipList[] = $this->fileName;
-				else if (!$this->isLineBreak)
-					$tooltipList[] = nl2br($this->name);
+				if(!empty($this->lineBreakProperties->note))
+				$tooltipList[] = nl2br($this->lineBreakProperties->note);
 			}
-			else if ($isLineBreak && isset($this->lineBreakProperties->note) && $this->lineBreakProperties->note != '')
-				$tooltipList[] = $this->lineBreakProperties->note;
+			else
+			{
+				if(!empty($this->extendedProperties->hoverNote))
+					$tooltipList[] = nl2br($this->extendedProperties->hoverNote);
 
-			if ($this->isFolder)
-				$tooltipList[] = 'Folder';
-			else if (!$isLineBreak && isset($this->originalFormat) && array_key_exists($this->originalFormat, \Yii::app()->params['tooltips']['wallbin']))
-				$tooltipList[] = \Yii::app()->params['tooltips']['wallbin'][$this->originalFormat];
-
+				if(!isset($this->extendedProperties->showOnlyCustomHoverNote) || !$this->extendedProperties->showOnlyCustomHoverNote)
+				{
+					if (!$this->isFolder && isset($this->fileName))
+						$tooltipList[] = $this->fileName;
+					else
+						$tooltipList[] = nl2br($this->name);
+					if ($this->isFolder)
+						$tooltipList[] = 'Folder';
+					else if (isset($this->originalFormat) && array_key_exists($this->originalFormat, \Yii::app()->params['tooltips']['wallbin']))
+						$tooltipList[] = \Yii::app()->params['tooltips']['wallbin'][$this->originalFormat];
+				}
+			}
 			if (count($tooltipList) > 0)
 				$this->tooltip = implode('<br><br>', $tooltipList);
 			else

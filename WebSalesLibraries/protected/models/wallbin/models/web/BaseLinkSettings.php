@@ -19,6 +19,11 @@
 		 * @var boolean
 		 * @soap
 		 */
+		public $showOnlyCustomHoverNote;
+		/**
+		 * @var boolean
+		 * @soap
+		 */
 		public $isBold;
 		/**
 		 * @var boolean
