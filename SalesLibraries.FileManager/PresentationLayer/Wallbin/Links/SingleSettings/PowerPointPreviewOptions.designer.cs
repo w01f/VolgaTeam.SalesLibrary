@@ -28,30 +28,25 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.labelControlTitle = new DevExpress.XtraEditors.LabelControl();
+			this.components = new System.ComponentModel.Container();
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PowerPointPreviewOptions));
 			this.laAdminTools = new System.Windows.Forms.Label();
 			this.buttonXOpenQV = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXRefreshPreview = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXOpenWV = new DevComponents.DotNetBar.ButtonX();
+			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
+			this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
+			this.labelControlTitle = new DevExpress.XtraEditors.LabelControl();
+			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).BeginInit();
 			this.SuspendLayout();
-			// 
-			// labelControlTitle
-			// 
-			this.labelControlTitle.Appearance.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.labelControlTitle.Appearance.ForeColor = System.Drawing.Color.DimGray;
-			this.labelControlTitle.Location = new System.Drawing.Point(8, 12);
-			this.labelControlTitle.Name = "labelControlTitle";
-			this.labelControlTitle.Size = new System.Drawing.Size(440, 34);
-			this.labelControlTitle.TabIndex = 24;
-			this.labelControlTitle.Text = "This is some serious Advanced Admin Ninja Stuff…\r\nDon’t mess with these, unless y" +
-    "ou really know what you are doing…";
 			// 
 			// laAdminTools
 			// 
 			this.laAdminTools.AutoSize = true;
 			this.laAdminTools.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.laAdminTools.ForeColor = System.Drawing.Color.Black;
-			this.laAdminTools.Location = new System.Drawing.Point(5, 73);
+			this.laAdminTools.Location = new System.Drawing.Point(14, 149);
 			this.laAdminTools.Name = "laAdminTools";
 			this.laAdminTools.Size = new System.Drawing.Size(83, 16);
 			this.laAdminTools.TabIndex = 10;
@@ -64,7 +59,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXOpenQV.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXOpenQV.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.buttonXOpenQV.Location = new System.Drawing.Point(78, 114);
+			this.buttonXOpenQV.Location = new System.Drawing.Point(87, 190);
 			this.buttonXOpenQV.Name = "buttonXOpenQV";
 			this.buttonXOpenQV.Size = new System.Drawing.Size(375, 30);
 			this.buttonXOpenQV.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -80,7 +75,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXRefreshPreview.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXRefreshPreview.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.buttonXRefreshPreview.Location = new System.Drawing.Point(78, 217);
+			this.buttonXRefreshPreview.Location = new System.Drawing.Point(87, 293);
 			this.buttonXRefreshPreview.Name = "buttonXRefreshPreview";
 			this.buttonXRefreshPreview.Size = new System.Drawing.Size(375, 30);
 			this.buttonXRefreshPreview.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -97,7 +92,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXOpenWV.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXOpenWV.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.buttonXOpenWV.Location = new System.Drawing.Point(78, 165);
+			this.buttonXOpenWV.Location = new System.Drawing.Point(87, 241);
 			this.buttonXOpenWV.Name = "buttonXOpenWV";
 			this.buttonXOpenWV.Size = new System.Drawing.Size(375, 30);
 			this.buttonXOpenWV.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -106,25 +101,69 @@
 			this.buttonXOpenWV.TextColor = System.Drawing.Color.Black;
 			this.buttonXOpenWV.Click += new System.EventHandler(this.buttonXOpenWV_Click);
 			// 
+			// styleController
+			// 
+			this.styleController.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.styleController.Appearance.Options.UseFont = true;
+			this.styleController.AppearanceDisabled.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.styleController.AppearanceDisabled.Options.UseFont = true;
+			this.styleController.AppearanceDropDown.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.styleController.AppearanceDropDown.Options.UseFont = true;
+			this.styleController.AppearanceDropDownHeader.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.styleController.AppearanceDropDownHeader.Options.UseFont = true;
+			this.styleController.AppearanceFocused.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.styleController.AppearanceFocused.Options.UseFont = true;
+			this.styleController.AppearanceReadOnly.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.styleController.AppearanceReadOnly.Options.UseFont = true;
+			// 
+			// pictureBoxLogo
+			// 
+			this.pictureBoxLogo.Image = global::SalesLibraries.FileManager.Properties.Resources.LinkSettingsPreviewOptions;
+			this.pictureBoxLogo.Location = new System.Drawing.Point(17, 18);
+			this.pictureBoxLogo.Name = "pictureBoxLogo";
+			this.pictureBoxLogo.Size = new System.Drawing.Size(64, 64);
+			this.pictureBoxLogo.TabIndex = 50;
+			this.pictureBoxLogo.TabStop = false;
+			// 
+			// labelControlTitle
+			// 
+			this.labelControlTitle.AllowHtmlString = true;
+			this.labelControlTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.labelControlTitle.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Top;
+			this.labelControlTitle.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+			this.labelControlTitle.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+			this.labelControlTitle.Location = new System.Drawing.Point(103, 18);
+			this.labelControlTitle.Name = "labelControlTitle";
+			this.labelControlTitle.Size = new System.Drawing.Size(406, 83);
+			this.labelControlTitle.StyleController = this.styleController;
+			this.labelControlTitle.TabIndex = 49;
+			this.labelControlTitle.Text = resources.GetString("labelControlTitle.Text");
+			// 
 			// PowerPointPreviewOptions
 			// 
+			this.Controls.Add(this.pictureBoxLogo);
+			this.Controls.Add(this.labelControlTitle);
 			this.Controls.Add(this.buttonXRefreshPreview);
 			this.Controls.Add(this.buttonXOpenWV);
 			this.Controls.Add(this.laAdminTools);
 			this.Controls.Add(this.buttonXOpenQV);
-			this.Controls.Add(this.labelControlTitle);
 			this.Name = "PowerPointPreviewOptions";
 			this.Size = new System.Drawing.Size(531, 541);
+			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
 		}
 
 		#endregion
-		private DevExpress.XtraEditors.LabelControl labelControlTitle;
 		public System.Windows.Forms.Label laAdminTools;
 		public DevComponents.DotNetBar.ButtonX buttonXOpenQV;
 		public DevComponents.DotNetBar.ButtonX buttonXRefreshPreview;
 		public DevComponents.DotNetBar.ButtonX buttonXOpenWV;
+		private DevExpress.XtraEditors.StyleController styleController;
+		private System.Windows.Forms.PictureBox pictureBoxLogo;
+		private DevExpress.XtraEditors.LabelControl labelControlTitle;
 	}
 }

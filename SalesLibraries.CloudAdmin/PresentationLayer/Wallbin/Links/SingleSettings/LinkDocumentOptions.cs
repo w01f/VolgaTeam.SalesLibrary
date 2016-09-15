@@ -8,24 +8,24 @@ using SalesLibraries.Common.Helpers;
 
 namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettings
 {
-	//public partial class LinkDocumentOptions : UserControl, ILinkProperties
 	[IntendForClass(typeof(DocumentLink))]
+	[IntendForClass(typeof(PowerPointLink))]
+	//public partial class LinkDocumentOptions : UserControl, ILinkProperties
 	public sealed partial class LinkDocumentOptions : XtraTabPage, ILinkSettingsEditControl
 	{
-		private readonly DocumentLink _data;
+		private readonly DocumentLinkSettings _settings;
 
 		public LinkSettingsType SettingsType => LinkSettingsType.Notes;
-		public int Order => 2;
+		public int Order => 6;
 		public bool AvailableForEmbedded => true;
 		public SettingsEditorHeaderInfo HeaderInfo => null;
 
 		public event EventHandler<EventArgs> ForceCloseRequested;
 
-		public LinkDocumentOptions(DocumentLink data)
+		public LinkDocumentOptions()
 		{
 			InitializeComponent();
 			Text = "Advanced";
-			_data = data;
 			if ((base.CreateGraphics()).DpiX > 96)
 			{
 				var styleControllerFont = new Font(styleController.Appearance.Font.FontFamily, styleController.Appearance.Font.Size - 2, styleController.Appearance.Font.Style);
@@ -38,16 +38,26 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 			}
 		}
 
+		public LinkDocumentOptions(DocumentLink data) : this()
+		{
+			_settings = (DocumentLinkSettings)data.Settings;
+		}
+
+		public LinkDocumentOptions(PowerPointLink data) : this()
+		{
+			_settings = (DocumentLinkSettings)data.Settings;
+		}
+
 		public void LoadData()
 		{
-			ckDoNotGeneratePreview.Checked = !((DocumentLinkSettings)_data.Settings).GeneratePreviewImages;
-			ckDoNotGenerateText.Checked = !((DocumentLinkSettings)_data.Settings).GenerateContentText;
+			ckDoNotGeneratePreview.Checked = !_settings.GeneratePreviewImages;
+			ckDoNotGenerateText.Checked = !_settings.GenerateContentText;
 		}
 
 		public void SaveData()
 		{
-			((DocumentLinkSettings)_data.Settings).GeneratePreviewImages = !ckDoNotGeneratePreview.Checked;
-			((DocumentLinkSettings)_data.Settings).GenerateContentText = !ckDoNotGenerateText.Checked;
+			_settings.GeneratePreviewImages = !ckDoNotGeneratePreview.Checked;
+			_settings.GenerateContentText = !ckDoNotGenerateText.Checked;
 		}
 	}
 }

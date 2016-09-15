@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using SalesLibraries.Business.Entities.Common;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent;
@@ -56,12 +57,12 @@ namespace SalesLibraries.Business.Entities.Helpers
 			links.ApplySecurity();
 		}
 
-		public static void ApplyExpirationSettings(this IEnumerable<BaseLibraryLink> links, LinkExpirationSettings securitySettings = null)
+		public static void ApplyExpirationSettings(this IEnumerable<BaseLibraryLink> links, LinkExpirationSettings expirationSettings = null)
 		{
 			foreach (var libraryLink in links.OfType<LibraryObjectLink>())
 			{
-				libraryLink.ExpirationSettings = securitySettings != null ?
-					securitySettings.Clone<LinkExpirationSettings>(libraryLink) :
+				libraryLink.ExpirationSettings = expirationSettings != null ?
+					expirationSettings.Clone<LinkExpirationSettings>(libraryLink) :
 					SettingsContainer.CreateInstance<LinkExpirationSettings>(libraryLink);
 				libraryLink.MarkAsModified();
 			}
@@ -70,6 +71,22 @@ namespace SalesLibraries.Business.Entities.Helpers
 		public static void ResetExpirationSettings(this IEnumerable<BaseLibraryLink> links)
 		{
 			links.ApplyExpirationSettings();
+		}
+
+		public static void ApplyQuickLinkSettings(this IEnumerable<BaseLibraryLink> links, QuickLinkSettings quickLinkSettings = null)
+		{
+			foreach (var libraryLink in links.OfType<LibraryObjectLink>())
+			{
+				libraryLink.QuickLinkSettings = quickLinkSettings != null ?
+					quickLinkSettings.Clone<QuickLinkSettings>(libraryLink) :
+					SettingsContainer.CreateInstance<QuickLinkSettings>(libraryLink);
+				libraryLink.MarkAsModified();
+			}
+		}
+
+		public static void ResetQuickLinkSettings(this IEnumerable<BaseLibraryLink> links)
+		{
+			links.ApplyQuickLinkSettings();
 		}
 
 		public static void ApplyWidgets(this IEnumerable<BaseLibraryLink> links, WidgetSettings widgetSettings = null)
@@ -115,10 +132,13 @@ namespace SalesLibraries.Business.Entities.Helpers
 			links.ApplyNote();
 		}
 
-		public static void ApplyHoverNote(this IEnumerable<BaseLibraryLink> links, string hoverNote = null)
+		public static void ApplyHoverNote(this IEnumerable<BaseLibraryLink> links, string hoverNote = null, bool showOnlyCustomHoverNote = false)
 		{
 			foreach (var libraryLink in links.OfType<LibraryObjectLink>())
+			{
 				((LibraryObjectLinkSettings)libraryLink.Settings).HoverNote = hoverNote;
+				((LibraryObjectLinkSettings)libraryLink.Settings).ShowOnlyCustomHoverNote = showOnlyCustomHoverNote;
+			}
 			foreach (var lineBreak in links.OfType<LineBreak>())
 				lineBreak.Settings.Note = hoverNote;
 		}
@@ -153,6 +173,48 @@ namespace SalesLibraries.Business.Entities.Helpers
 		public static IEnumerable<LibraryObjectLink> GetDisplayedLinks(this IEnumerable<BaseLibraryLink> links)
 		{
 			return links.OfType<LibraryObjectLink>().Where(link => !link.Security.IsForbidden);
+		}
+
+		public static string GetCommonTags(this IList<BaseLibraryLink> links)
+		{
+			var commonCategories = new List<SearchGroup>();
+			var allCategories = links.SelectMany(l => l.Tags.Categories).ToList();
+			foreach (var searchGroup in allCategories)
+			{
+				if (commonCategories.Any(c => c.Name == searchGroup.Name)) continue;
+				if (!links.All(l => l.Tags.Categories.Any(c => c.Name == searchGroup.Name))) continue;
+
+				var commonCategory = new SearchGroup { Name = searchGroup.Name };
+				foreach (var searchTag in allCategories
+					.Where(c => c.Name == commonCategory.Name)
+					.SelectMany(c => c.Tags)
+					.ToList())
+				{
+					if (commonCategory.Tags.Any(t => t.Name == searchTag.Name)) continue;
+					if (!links.All(l => l.Tags.Categories
+						.Where(c => c.Name == commonCategory.Name)
+						.SelectMany(c => c.Tags)
+						.Any(t => t.Name == searchTag.Name))) continue;
+					commonCategory.Tags.Add(new SearchTag { Name = searchTag.Name });
+				}
+				if (commonCategory.Tags.Any())
+					commonCategories.Add(commonCategory);
+			}
+
+
+			var commonKeywords = new List<SearchTag>();
+			var allKeywords = links.SelectMany(l => l.Tags.Keywords).ToList();
+			foreach (var searchTag in allKeywords)
+			{
+				if (commonKeywords.Any(t => t.Name == searchTag.Name)) continue;
+				if (!links.All(l => l.Tags.Keywords.Any(t => t.Name == searchTag.Name))) continue;
+				commonKeywords.Add(new SearchTag { Name = searchTag.Name });
+			}
+
+			return String.Join(", ",
+				commonCategories
+				.SelectMany(sg => sg.Tags.Select(t => t.Name))
+				.Union(commonKeywords.Select(t => t.Name)));
 		}
 	}
 }

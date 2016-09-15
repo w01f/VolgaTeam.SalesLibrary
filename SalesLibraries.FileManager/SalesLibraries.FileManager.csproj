@@ -272,6 +272,12 @@
     </Compile>
     <Compile Include="PresentationLayer\Wallbin\Links\Clipboard\LinkClipboardActionType.cs" />
     <Compile Include="PresentationLayer\Wallbin\Links\Clipboard\LinksClipboardManager.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\GroupSettings\CategoriesEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\GroupSettings\CategoriesEditor.designer.cs">
+      <DependentUpon>CategoriesEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\InternalLinkEditControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -327,12 +333,6 @@
     <Compile Include="PresentationLayer\Wallbin\Libraries\FormInactiveLinksNotification.designer.cs">
       <DependentUpon>FormInactiveLinksNotification.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Wallbin\Links\GroupSettings\CategoriesEditor.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="PresentationLayer\Wallbin\Links\GroupSettings\CategoriesEditor.designer.cs">
-      <DependentUpon>CategoriesEditor.cs</DependentUpon>
-    </Compile>
     <Compile Include="PresentationLayer\Wallbin\Links\GroupSettings\GroupSettingsManager.cs" />
     <Compile Include="PresentationLayer\Wallbin\Links\GroupSettings\IGroupSettingsEditor.cs" />
     <Compile Include="PresentationLayer\Wallbin\Links\GroupSettings\KeywordsEditor.cs">
@@ -370,6 +370,18 @@
     </Compile>
     <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\FormResetLinkSettings.Designer.cs">
       <DependentUpon>FormResetLinkSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkHoverNoteOptions.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkHoverNoteOptions.designer.cs">
+      <DependentUpon>LinkHoverNoteOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkQuickLinkOptions.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkQuickLinkOptions.designer.cs">
+      <DependentUpon>LinkQuickLinkOptions.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\ResetSettingsSchedulerOptions.cs">
       <SubType>Component</SubType>
@@ -706,6 +718,9 @@
     <EmbeddedResource Include="PresentationLayer\Wallbin\Folders\Controls\FormDeleteLink.resx">
       <DependentUpon>FormDeleteLink.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\GroupSettings\CategoriesEditor.resx">
+      <DependentUpon>CategoriesEditor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\InternalLinkEditControl.resx">
       <DependentUpon>InternalLinkEditControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -733,9 +748,6 @@
     <EmbeddedResource Include="PresentationLayer\Wallbin\Libraries\FormInactiveLinksNotification.resx">
       <DependentUpon>FormInactiveLinksNotification.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\GroupSettings\CategoriesEditor.resx">
-      <DependentUpon>CategoriesEditor.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Links\GroupSettings\KeywordsEditor.resx">
       <DependentUpon>KeywordsEditor.cs</DependentUpon>
     </EmbeddedResource>
@@ -753,6 +765,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\FormResetLinkSettings.resx">
       <DependentUpon>FormResetLinkSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkHoverNoteOptions.resx">
+      <DependentUpon>LinkHoverNoteOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkQuickLinkOptions.resx">
+      <DependentUpon>LinkQuickLinkOptions.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\ResetSettingsSchedulerOptions.resx">
       <DependentUpon>ResetSettingsSchedulerOptions.cs</DependentUpon>
@@ -939,6 +957,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\LinkSettingsTextNote.png" />
+    <None Include="Resources\LinkSettingsTextFormat.png" />
+    <None Include="Resources\LinkSettingsQuickLink.png" />
+    <None Include="Resources\LinkSettingsPreviewOptions.png" />
+    <None Include="Resources\LinkSettingsHoverNote.png" />
     <None Include="Resources\LinkSettingsResetSettingsScheduler.png" />
     <None Include="Resources\LinkAddInternal.png" />
     <None Include="Resources\DataSourceListXls.png" />

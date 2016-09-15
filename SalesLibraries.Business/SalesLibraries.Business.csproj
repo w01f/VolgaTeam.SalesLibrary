@@ -124,6 +124,7 @@
     <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\HyperLinkSettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\LinkFileSettingsTemplate.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\LibraryFolderLinkSettings.cs" />
+    <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\QuickLinkSettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\ResetSettingsSchedulerSettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\SecuritySettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\BaseLinkSettings.cs" />
@@ -188,6 +189,12 @@
     <Compile Include="Schema\Wallbin\Initialization\CloudlWallbinInitializer.cs" />
     <Compile Include="Schema\Wallbin\Initialization\LocalWallbinInitializer.cs" />
     <Compile Include="Schema\Wallbin\Initialization\WallbinInitializer.cs" />
+    <Content Include="Schema\Wallbin\Version3\library_link.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Schema\Wallbin\Version3\sequense.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Schema\Wallbin\Version2\library_link.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

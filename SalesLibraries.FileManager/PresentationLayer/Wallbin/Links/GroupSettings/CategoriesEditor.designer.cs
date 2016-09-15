@@ -28,161 +28,22 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
-			this.gridViewTags = new DevExpress.XtraGrid.Views.Grid.GridView();
-			this.gridColumnPageSelected = new DevExpress.XtraGrid.Columns.GridColumn();
-			this.repositoryItemCheckEditLibrary = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
-			this.gridColumnPageName = new DevExpress.XtraGrid.Columns.GridColumn();
-			this.gridControl = new DevExpress.XtraGrid.GridControl();
-			this.gridViewGroups = new DevExpress.XtraGrid.Views.Grid.GridView();
-			this.gridColumnLibraryName = new DevExpress.XtraGrid.Columns.GridColumn();
+			this.components = new System.ComponentModel.Container();
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CategoriesEditor));
 			this.pnMain = new System.Windows.Forms.Panel();
 			this.pnData = new System.Windows.Forms.Panel();
+			this.treeListCategories = new SalesLibraries.CommonGUI.CustomTreeList.EmptyImageTreeList();
+			this.treeListColumnName = new DevExpress.XtraTreeList.Columns.TreeListColumn();
+			this.imageList = new System.Windows.Forms.ImageList(this.components);
 			this.pnButtons = new System.Windows.Forms.Panel();
-			this.labelControlCategoryInfo = new DevExpress.XtraEditors.LabelControl();
 			this.buttonXReset = new DevComponents.DotNetBar.ButtonX();
-			((System.ComponentModel.ISupportInitialize)(this.gridViewTags)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEditLibrary)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.gridControl)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.gridViewGroups)).BeginInit();
+			this.buttonXExpand = new DevComponents.DotNetBar.ButtonX();
+			this.buttonXCollapse = new DevComponents.DotNetBar.ButtonX();
 			this.pnMain.SuspendLayout();
 			this.pnData.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.treeListCategories)).BeginInit();
 			this.pnButtons.SuspendLayout();
 			this.SuspendLayout();
-			// 
-			// gridViewTags
-			// 
-			this.gridViewTags.Appearance.FocusedCell.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.gridViewTags.Appearance.FocusedCell.Options.UseFont = true;
-			this.gridViewTags.Appearance.FocusedRow.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.gridViewTags.Appearance.FocusedRow.Options.UseFont = true;
-			this.gridViewTags.Appearance.HeaderPanel.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.gridViewTags.Appearance.HeaderPanel.Options.UseFont = true;
-			this.gridViewTags.Appearance.Row.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.gridViewTags.Appearance.Row.Options.UseFont = true;
-			this.gridViewTags.Appearance.SelectedRow.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.gridViewTags.Appearance.SelectedRow.Options.UseFont = true;
-			this.gridViewTags.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gridColumnPageSelected,
-            this.gridColumnPageName});
-			this.gridViewTags.GridControl = this.gridControl;
-			this.gridViewTags.Name = "gridViewTags";
-			this.gridViewTags.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
-			this.gridViewTags.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.False;
-			this.gridViewTags.OptionsBehavior.AutoPopulateColumns = false;
-			this.gridViewTags.OptionsBehavior.AutoSelectAllInEditor = false;
-			this.gridViewTags.OptionsBehavior.AutoUpdateTotalSummary = false;
-			this.gridViewTags.OptionsCustomization.AllowColumnMoving = false;
-			this.gridViewTags.OptionsCustomization.AllowColumnResizing = false;
-			this.gridViewTags.OptionsCustomization.AllowFilter = false;
-			this.gridViewTags.OptionsCustomization.AllowGroup = false;
-			this.gridViewTags.OptionsCustomization.AllowQuickHideColumns = false;
-			this.gridViewTags.OptionsCustomization.AllowSort = false;
-			this.gridViewTags.OptionsSelection.EnableAppearanceFocusedCell = false;
-			this.gridViewTags.OptionsSelection.EnableAppearanceFocusedRow = false;
-			this.gridViewTags.OptionsSelection.EnableAppearanceHideSelection = false;
-			this.gridViewTags.OptionsView.ShowColumnHeaders = false;
-			this.gridViewTags.OptionsView.ShowGroupPanel = false;
-			this.gridViewTags.OptionsView.ShowHorizontalLines = DevExpress.Utils.DefaultBoolean.False;
-			this.gridViewTags.OptionsView.ShowIndicator = false;
-			this.gridViewTags.OptionsView.ShowVerticalLines = DevExpress.Utils.DefaultBoolean.False;
-			this.gridViewTags.RowHeight = 35;
-			// 
-			// gridColumnPageSelected
-			// 
-			this.gridColumnPageSelected.Caption = "Selected";
-			this.gridColumnPageSelected.ColumnEdit = this.repositoryItemCheckEditLibrary;
-			this.gridColumnPageSelected.FieldName = "Selected";
-			this.gridColumnPageSelected.Name = "gridColumnPageSelected";
-			this.gridColumnPageSelected.OptionsColumn.FixedWidth = true;
-			this.gridColumnPageSelected.Visible = true;
-			this.gridColumnPageSelected.VisibleIndex = 0;
-			this.gridColumnPageSelected.Width = 30;
-			// 
-			// repositoryItemCheckEditLibrary
-			// 
-			this.repositoryItemCheckEditLibrary.AutoHeight = false;
-			this.repositoryItemCheckEditLibrary.Caption = "Check";
-			this.repositoryItemCheckEditLibrary.Name = "repositoryItemCheckEditLibrary";
-			this.repositoryItemCheckEditLibrary.CheckedChanged += new System.EventHandler(this.RepositoryItemCheckEditCheckedChanged);
-			this.repositoryItemCheckEditLibrary.EditValueChanging += new DevExpress.XtraEditors.Controls.ChangingEventHandler(this.repositoryItemCheckEditLibrary_EditValueChanging);
-			// 
-			// gridColumnPageName
-			// 
-			this.gridColumnPageName.Caption = "Name";
-			this.gridColumnPageName.FieldName = "Name";
-			this.gridColumnPageName.Name = "gridColumnPageName";
-			this.gridColumnPageName.OptionsColumn.AllowEdit = false;
-			this.gridColumnPageName.OptionsColumn.ReadOnly = true;
-			this.gridColumnPageName.Visible = true;
-			this.gridColumnPageName.VisibleIndex = 1;
-			// 
-			// gridControl
-			// 
-			this.gridControl.Cursor = System.Windows.Forms.Cursors.Default;
-			this.gridControl.Dock = System.Windows.Forms.DockStyle.Fill;
-			gridLevelNode1.LevelTemplate = this.gridViewTags;
-			gridLevelNode1.RelationName = "Tags";
-			this.gridControl.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
-            gridLevelNode1});
-			this.gridControl.Location = new System.Drawing.Point(0, 0);
-			this.gridControl.MainView = this.gridViewGroups;
-			this.gridControl.Name = "gridControl";
-			this.gridControl.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
-            this.repositoryItemCheckEditLibrary});
-			this.gridControl.Size = new System.Drawing.Size(350, 569);
-			this.gridControl.TabIndex = 1;
-			this.gridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridViewGroups,
-            this.gridViewTags});
-			// 
-			// gridViewGroups
-			// 
-			this.gridViewGroups.Appearance.FocusedCell.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.gridViewGroups.Appearance.FocusedCell.Options.UseFont = true;
-			this.gridViewGroups.Appearance.FocusedRow.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.gridViewGroups.Appearance.FocusedRow.Options.UseFont = true;
-			this.gridViewGroups.Appearance.HeaderPanel.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.gridViewGroups.Appearance.HeaderPanel.Options.UseFont = true;
-			this.gridViewGroups.Appearance.Row.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.gridViewGroups.Appearance.Row.Options.UseFont = true;
-			this.gridViewGroups.Appearance.SelectedRow.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.gridViewGroups.Appearance.SelectedRow.Options.UseFont = true;
-			this.gridViewGroups.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gridColumnLibraryName});
-			this.gridViewGroups.GridControl = this.gridControl;
-			this.gridViewGroups.Name = "gridViewGroups";
-			this.gridViewGroups.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
-			this.gridViewGroups.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.False;
-			this.gridViewGroups.OptionsBehavior.AutoPopulateColumns = false;
-			this.gridViewGroups.OptionsBehavior.AutoSelectAllInEditor = false;
-			this.gridViewGroups.OptionsBehavior.AutoUpdateTotalSummary = false;
-			this.gridViewGroups.OptionsCustomization.AllowColumnMoving = false;
-			this.gridViewGroups.OptionsCustomization.AllowColumnResizing = false;
-			this.gridViewGroups.OptionsCustomization.AllowFilter = false;
-			this.gridViewGroups.OptionsCustomization.AllowGroup = false;
-			this.gridViewGroups.OptionsCustomization.AllowQuickHideColumns = false;
-			this.gridViewGroups.OptionsCustomization.AllowSort = false;
-			this.gridViewGroups.OptionsDetail.AllowOnlyOneMasterRowExpanded = true;
-			this.gridViewGroups.OptionsDetail.ShowDetailTabs = false;
-			this.gridViewGroups.OptionsSelection.EnableAppearanceFocusedCell = false;
-			this.gridViewGroups.OptionsSelection.EnableAppearanceFocusedRow = false;
-			this.gridViewGroups.OptionsSelection.EnableAppearanceHideSelection = false;
-			this.gridViewGroups.OptionsView.ShowColumnHeaders = false;
-			this.gridViewGroups.OptionsView.ShowGroupPanel = false;
-			this.gridViewGroups.OptionsView.ShowIndicator = false;
-			this.gridViewGroups.RowHeight = 35;
-			// 
-			// gridColumnLibraryName
-			// 
-			this.gridColumnLibraryName.Caption = "Name";
-			this.gridColumnLibraryName.FieldName = "Name";
-			this.gridColumnLibraryName.Name = "gridColumnLibraryName";
-			this.gridColumnLibraryName.OptionsColumn.AllowEdit = false;
-			this.gridColumnLibraryName.OptionsColumn.ReadOnly = true;
-			this.gridColumnLibraryName.Visible = true;
-			this.gridColumnLibraryName.VisibleIndex = 0;
-			this.gridColumnLibraryName.Width = 355;
 			// 
 			// pnMain
 			// 
@@ -196,35 +57,79 @@
 			// 
 			// pnData
 			// 
-			this.pnData.Controls.Add(this.gridControl);
+			this.pnData.Controls.Add(this.treeListCategories);
 			this.pnData.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.pnData.Location = new System.Drawing.Point(0, 87);
+			this.pnData.Location = new System.Drawing.Point(0, 98);
 			this.pnData.Name = "pnData";
-			this.pnData.Size = new System.Drawing.Size(350, 569);
+			this.pnData.Size = new System.Drawing.Size(350, 558);
 			this.pnData.TabIndex = 1;
+			// 
+			// treeListCategories
+			// 
+			this.treeListCategories.Appearance.FocusedCell.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.treeListCategories.Appearance.FocusedCell.Options.UseFont = true;
+			this.treeListCategories.Appearance.FocusedRow.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.treeListCategories.Appearance.FocusedRow.Options.UseFont = true;
+			this.treeListCategories.Appearance.Row.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.treeListCategories.Appearance.Row.Options.UseFont = true;
+			this.treeListCategories.Appearance.SelectedRow.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.treeListCategories.Appearance.SelectedRow.Options.UseFont = true;
+			this.treeListCategories.Columns.AddRange(new DevExpress.XtraTreeList.Columns.TreeListColumn[] {
+            this.treeListColumnName});
+			this.treeListCategories.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.treeListCategories.Location = new System.Drawing.Point(0, 0);
+			this.treeListCategories.Name = "treeListCategories";
+			this.treeListCategories.OptionsBehavior.AutoChangeParent = false;
+			this.treeListCategories.OptionsBehavior.Editable = false;
+			this.treeListCategories.OptionsBehavior.ResizeNodes = false;
+			this.treeListCategories.OptionsLayout.AddNewColumns = false;
+			this.treeListCategories.OptionsMenu.EnableColumnMenu = false;
+			this.treeListCategories.OptionsMenu.EnableFooterMenu = false;
+			this.treeListCategories.OptionsSelection.EnableAppearanceFocusedCell = false;
+			this.treeListCategories.OptionsSelection.MultiSelect = true;
+			this.treeListCategories.OptionsView.FocusRectStyle = DevExpress.XtraTreeList.DrawFocusRectStyle.None;
+			this.treeListCategories.OptionsView.ShowCheckBoxes = true;
+			this.treeListCategories.OptionsView.ShowColumns = false;
+			this.treeListCategories.OptionsView.ShowHorzLines = false;
+			this.treeListCategories.OptionsView.ShowIndicator = false;
+			this.treeListCategories.OptionsView.ShowVertLines = false;
+			this.treeListCategories.RowHeight = 20;
+			this.treeListCategories.ShowButtonMode = DevExpress.XtraTreeList.ShowButtonModeEnum.ShowForFocusedRow;
+			this.treeListCategories.Size = new System.Drawing.Size(350, 558);
+			this.treeListCategories.StateImageList = this.imageList;
+			this.treeListCategories.TabIndex = 2;
+			this.treeListCategories.BeforeCollapse += new DevExpress.XtraTreeList.BeforeCollapseEventHandler(this.OnCategoriesBeforeCollapse);
+			this.treeListCategories.AfterExpand += new DevExpress.XtraTreeList.NodeEventHandler(this.OnCategoriesAfterExpand);
+			this.treeListCategories.AfterCollapse += new DevExpress.XtraTreeList.NodeEventHandler(this.OnCategoriesAfterCollapse);
+			this.treeListCategories.BeforeCheckNode += new DevExpress.XtraTreeList.CheckNodeEventHandler(this.OnCategoriesBeforeCheckNode);
+			this.treeListCategories.AfterCheckNode += new DevExpress.XtraTreeList.NodeEventHandler(this.OnCategoriesAfterCheckNode);
+			// 
+			// treeListColumnName
+			// 
+			this.treeListColumnName.Caption = "Name";
+			this.treeListColumnName.FieldName = "Name";
+			this.treeListColumnName.MinWidth = 49;
+			this.treeListColumnName.Name = "treeListColumnName";
+			this.treeListColumnName.Visible = true;
+			this.treeListColumnName.VisibleIndex = 0;
+			// 
+			// imageList
+			// 
+			this.imageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList.ImageStream")));
+			this.imageList.TransparentColor = System.Drawing.Color.Magenta;
+			this.imageList.Images.SetKeyName(0, "DataSourceListClosedFolder.png");
+			this.imageList.Images.SetKeyName(1, "DataSourceListOpenedFolder.png");
 			// 
 			// pnButtons
 			// 
-			this.pnButtons.Controls.Add(this.labelControlCategoryInfo);
+			this.pnButtons.Controls.Add(this.buttonXCollapse);
+			this.pnButtons.Controls.Add(this.buttonXExpand);
 			this.pnButtons.Controls.Add(this.buttonXReset);
 			this.pnButtons.Dock = System.Windows.Forms.DockStyle.Top;
 			this.pnButtons.Location = new System.Drawing.Point(0, 0);
 			this.pnButtons.Name = "pnButtons";
-			this.pnButtons.Size = new System.Drawing.Size(350, 87);
+			this.pnButtons.Size = new System.Drawing.Size(350, 98);
 			this.pnButtons.TabIndex = 0;
-			// 
-			// labelControlCategoryInfo
-			// 
-			this.labelControlCategoryInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.labelControlCategoryInfo.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.labelControlCategoryInfo.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-			this.labelControlCategoryInfo.Location = new System.Drawing.Point(5, 44);
-			this.labelControlCategoryInfo.Name = "labelControlCategoryInfo";
-			this.labelControlCategoryInfo.Size = new System.Drawing.Size(340, 35);
-			this.labelControlCategoryInfo.TabIndex = 1;
-			this.labelControlCategoryInfo.Text = "labelControl1";
 			// 
 			// buttonXReset
 			// 
@@ -241,6 +146,33 @@
 			this.buttonXReset.TextColor = System.Drawing.Color.Black;
 			this.buttonXReset.Click += new System.EventHandler(this.buttonXReset_Click);
 			// 
+			// buttonXExpand
+			// 
+			this.buttonXExpand.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXExpand.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXExpand.Location = new System.Drawing.Point(5, 55);
+			this.buttonXExpand.Name = "buttonXExpand";
+			this.buttonXExpand.Size = new System.Drawing.Size(139, 30);
+			this.buttonXExpand.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXExpand.TabIndex = 1;
+			this.buttonXExpand.Text = "Expand All";
+			this.buttonXExpand.TextColor = System.Drawing.Color.Black;
+			this.buttonXExpand.Click += new System.EventHandler(this.OnExpandClick);
+			// 
+			// buttonXCollapse
+			// 
+			this.buttonXCollapse.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXCollapse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonXCollapse.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXCollapse.Location = new System.Drawing.Point(206, 55);
+			this.buttonXCollapse.Name = "buttonXCollapse";
+			this.buttonXCollapse.Size = new System.Drawing.Size(139, 30);
+			this.buttonXCollapse.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXCollapse.TabIndex = 2;
+			this.buttonXCollapse.Text = "Collapse All";
+			this.buttonXCollapse.TextColor = System.Drawing.Color.Black;
+			this.buttonXCollapse.Click += new System.EventHandler(this.OnCollapseClick);
+			// 
 			// CategoriesEditor
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -249,12 +181,9 @@
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.Name = "CategoriesEditor";
 			this.Size = new System.Drawing.Size(350, 656);
-			((System.ComponentModel.ISupportInitialize)(this.gridViewTags)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEditLibrary)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.gridControl)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.gridViewGroups)).EndInit();
 			this.pnMain.ResumeLayout(false);
 			this.pnData.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.treeListCategories)).EndInit();
 			this.pnButtons.ResumeLayout(false);
 			this.ResumeLayout(false);
 
@@ -266,13 +195,10 @@
 		private System.Windows.Forms.Panel pnData;
 		private System.Windows.Forms.Panel pnButtons;
 		private DevComponents.DotNetBar.ButtonX buttonXReset;
-		private DevExpress.XtraGrid.GridControl gridControl;
-		private DevExpress.XtraGrid.Views.Grid.GridView gridViewTags;
-		private DevExpress.XtraGrid.Columns.GridColumn gridColumnPageSelected;
-		private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEditLibrary;
-		private DevExpress.XtraGrid.Columns.GridColumn gridColumnPageName;
-		private DevExpress.XtraGrid.Views.Grid.GridView gridViewGroups;
-		private DevExpress.XtraGrid.Columns.GridColumn gridColumnLibraryName;
-		private DevExpress.XtraEditors.LabelControl labelControlCategoryInfo;
+		private System.Windows.Forms.ImageList imageList;
+		private CommonGUI.CustomTreeList.EmptyImageTreeList treeListCategories;
+		private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumnName;
+		private DevComponents.DotNetBar.ButtonX buttonXCollapse;
+		private DevComponents.DotNetBar.ButtonX buttonXExpand;
 	}
 }

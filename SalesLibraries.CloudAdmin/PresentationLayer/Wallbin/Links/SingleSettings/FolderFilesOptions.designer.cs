@@ -52,7 +52,6 @@
 			this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
 			this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
 			this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
-			this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
 			((System.ComponentModel.ISupportInitialize)(this.gridControl)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.advBandedGridView)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditOperations)).BeginInit();
@@ -63,12 +62,12 @@
 			// 
 			this.gridControl.Cursor = System.Windows.Forms.Cursors.Default;
 			this.gridControl.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.gridControl.Location = new System.Drawing.Point(0, 47);
+			this.gridControl.Location = new System.Drawing.Point(0, 44);
 			this.gridControl.MainView = this.advBandedGridView;
 			this.gridControl.Name = "gridControl";
 			this.gridControl.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemButtonEditOperations});
-			this.gridControl.Size = new System.Drawing.Size(531, 494);
+			this.gridControl.Size = new System.Drawing.Size(531, 497);
 			this.gridControl.TabIndex = 0;
 			this.gridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.advBandedGridView});
@@ -178,14 +177,13 @@
             this.barLargeButtonItemSyncSettings,
             this.barLargeButtonItemTags,
             this.barSubItemSelectByType,
-            this.barButtonItem1,
             this.barLargeButtonItemSelectPowerPoint,
             this.barLargeButtonItemSelectPdf,
             this.barLargeButtonItemSelectWord,
             this.barLargeButtonItemSelectExcel,
             this.barLargeButtonItemSelectVideo,
             this.barLargeButtonItemSelectOther});
-			this.barManager.MaxItemId = 12;
+			this.barManager.MaxItemId = 14;
 			// 
 			// barToolbar
 			// 
@@ -291,7 +289,7 @@
 			this.barDockControlTop.CausesValidation = false;
 			this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
 			this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
-			this.barDockControlTop.Size = new System.Drawing.Size(531, 47);
+			this.barDockControlTop.Size = new System.Drawing.Size(531, 44);
 			// 
 			// barDockControlBottom
 			// 
@@ -304,21 +302,15 @@
 			// 
 			this.barDockControlLeft.CausesValidation = false;
 			this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
-			this.barDockControlLeft.Location = new System.Drawing.Point(0, 47);
-			this.barDockControlLeft.Size = new System.Drawing.Size(0, 494);
+			this.barDockControlLeft.Location = new System.Drawing.Point(0, 44);
+			this.barDockControlLeft.Size = new System.Drawing.Size(0, 497);
 			// 
 			// barDockControlRight
 			// 
 			this.barDockControlRight.CausesValidation = false;
 			this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-			this.barDockControlRight.Location = new System.Drawing.Point(531, 47);
-			this.barDockControlRight.Size = new System.Drawing.Size(0, 494);
-			// 
-			// barButtonItem1
-			// 
-			this.barButtonItem1.Caption = "barButtonItem1";
-			this.barButtonItem1.Id = 4;
-			this.barButtonItem1.Name = "barButtonItem1";
+			this.barDockControlRight.Location = new System.Drawing.Point(531, 44);
+			this.barDockControlRight.Size = new System.Drawing.Size(0, 497);
 			// 
 			// FolderFilesOptions
 			// 
@@ -328,13 +320,14 @@
 			this.Controls.Add(this.barDockControlBottom);
 			this.Controls.Add(this.barDockControlTop);
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.Name = "FolderFilesOptions";
 			this.Size = new System.Drawing.Size(531, 541);
-			this.Text = "Files";
 			((System.ComponentModel.ISupportInitialize)(this.gridControl)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.advBandedGridView)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditOperations)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.barManager)).EndInit();
 			this.ResumeLayout(false);
+			this.PerformLayout();
 
 		}
 
@@ -360,8 +353,6 @@
 		private DevExpress.XtraBars.BarLargeButtonItem barLargeButtonItemSelectWord;
 		private DevExpress.XtraBars.BarLargeButtonItem barLargeButtonItemSelectExcel;
 		private DevExpress.XtraBars.BarLargeButtonItem barLargeButtonItemSelectVideo;
-		private DevExpress.XtraBars.BarButtonItem barButtonItem1;
 		private DevExpress.XtraBars.BarLargeButtonItem barLargeButtonItemSelectOther;
-
 	}
 }

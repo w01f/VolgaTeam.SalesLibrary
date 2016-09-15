@@ -9,6 +9,7 @@
 		Keywords = 6,
 		Security = 7,
 		Expiration = 8,
+		QuickLink = 9,
 		Widgets = 0,
 		Banners = 1,
 	}

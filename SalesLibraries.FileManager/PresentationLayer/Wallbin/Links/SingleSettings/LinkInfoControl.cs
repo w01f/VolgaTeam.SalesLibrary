@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using DevExpress.XtraEditors;
+using SalesLibraries.Business.Entities.Helpers;
 using SalesLibraries.FileManager.Controllers;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSettings
@@ -16,16 +17,31 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		public void UpdateData()
 		{
 			var selectedFolder = MainController.Instance.WallbinViews.Selection.SelectedFolder;
-			var selectedLink = MainController.Instance.WallbinViews.Selection.SelectedLink;
-			Text = selectedFolder != null && selectedLink != null ?
-				String.Format("{0}{1}",
-					selectedLink.LinkInfoDisplayName,
-					selectedLink.Tags.HasCategories || selectedLink.Tags.HasKeywords ?
-						String.Format("{0}<size=-2><color=gray>({1})</color></size>",
-							Environment.NewLine,
-							selectedLink.Tags.AllTags) :
-						String.Empty) :
-				String.Empty;
+			if (selectedFolder == null)
+			{
+				Text = String.Empty;
+				return;
+			}
+
+			if (MainController.Instance.WallbinViews.Selection.SelectedLinksCount > 1)
+			{
+				Text = String.Format("<b>({0})</b> {1}",
+						MainController.Instance.WallbinViews.Selection.SelectedLinksCount,
+						MainController.Instance.WallbinViews.Selection.SelectedLinks.GetCommonTags());
+			}
+			else
+			{
+				var selectedLink = MainController.Instance.WallbinViews.Selection.SelectedLink;
+				Text = selectedLink != null
+					? String.Format("{0}{1}",
+						selectedLink.LinkInfoDisplayName,
+						selectedLink.Tags.HasCategories || selectedLink.Tags.HasKeywords
+							? String.Format("{0}<size=-2><color=gray>({1})</color></size>",
+								Environment.NewLine,
+								selectedLink.Tags.AllTags)
+							: String.Empty)
+					: String.Empty;
+			}
 		}
 	}
 }

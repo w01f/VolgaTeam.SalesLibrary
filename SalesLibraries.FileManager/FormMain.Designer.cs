@@ -221,8 +221,8 @@
 			this.ribbonControl.CanCustomize = false;
 			this.ribbonControl.CaptionVisible = true;
 			this.ribbonControl.Controls.Add(this.ribbonPanelHome);
-			this.ribbonControl.Controls.Add(this.ribbonPanelSecurity);
 			this.ribbonControl.Controls.Add(this.ribbonPanelTags);
+			this.ribbonControl.Controls.Add(this.ribbonPanelSecurity);
 			this.ribbonControl.Controls.Add(this.ribbonPanelVideo);
 			this.ribbonControl.Controls.Add(this.ribbonPanelProgramManager);
 			this.ribbonControl.Controls.Add(this.ribbonPanelCalendar);
@@ -3064,7 +3064,7 @@
 			this.pnContainer.Location = new System.Drawing.Point(5, 184);
 			this.pnContainer.Name = "pnContainer";
 			this.pnContainer.Padding = new System.Windows.Forms.Padding(0, 2, 0, 0);
-			this.pnContainer.Size = new System.Drawing.Size(995, 549);
+			this.pnContainer.Size = new System.Drawing.Size(995, 547);
 			this.pnContainer.TabIndex = 32;
 			// 
 			// defaultLookAndFeel
@@ -3079,7 +3079,7 @@
 			// FormMain
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-			this.ClientSize = new System.Drawing.Size(1005, 735);
+			this.ClientSize = new System.Drawing.Size(1005, 733);
 			this.Controls.Add(this.pnContainer);
 			this.Controls.Add(this.ribbonControl);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -3161,7 +3161,7 @@
 		public DevComponents.DotNetBar.ButtonItem buttonItemTagsClear;
 		private DevComponents.DotNetBar.RibbonBar ribbonBarTagsKeywords;
 		public DevComponents.DotNetBar.ButtonItem buttonItemTagsKeywords;
-		private DevComponents.DotNetBar.RibbonBar ribbonBarTagsSuperFilters;
+		public DevComponents.DotNetBar.RibbonBar ribbonBarTagsSuperFilters;
 		public DevComponents.DotNetBar.ButtonItem buttonItemTagsSuperFilters;
 		private DevComponents.DotNetBar.RibbonBar ribbonBarTagsCategories;
 		public DevComponents.DotNetBar.ButtonItem buttonItemTagsCategories;

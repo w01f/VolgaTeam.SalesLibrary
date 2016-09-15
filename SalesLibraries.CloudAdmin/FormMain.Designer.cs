@@ -2278,7 +2278,7 @@
 		public DevComponents.DotNetBar.ButtonItem buttonItemTagsClear;
 		private DevComponents.DotNetBar.RibbonBar ribbonBarTagsKeywords;
 		public DevComponents.DotNetBar.ButtonItem buttonItemTagsKeywords;
-		private DevComponents.DotNetBar.RibbonBar ribbonBarTagsSuperFilters;
+		public DevComponents.DotNetBar.RibbonBar ribbonBarTagsSuperFilters;
 		public DevComponents.DotNetBar.ButtonItem buttonItemTagsSuperFilters;
 		private DevComponents.DotNetBar.RibbonBar ribbonBarTagsCategories;
 		public DevComponents.DotNetBar.ButtonItem buttonItemTagsCategories;

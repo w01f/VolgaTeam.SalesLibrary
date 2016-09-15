@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
-using DevExpress.XtraGrid;
-using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraTreeList;
+using DevExpress.XtraTreeList.Nodes;
 using SalesLibraries.Business.Entities.Helpers;
 using SalesLibraries.Common.Extensions;
 using SalesLibraries.Common.Objects.SearchTags;
@@ -17,6 +17,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 	public sealed partial class CategoriesEditor : UserControl, IGroupSettingsEditor
 	{
 		private readonly List<SearchGroup> _groupTemplates = new List<SearchGroup>();
+		private TreeListNode _rootNode;
+		private bool _handleCheckEvens = false;
 
 		private SelectionManager Selection => MainController.Instance.WallbinViews.Selection;
 
@@ -27,85 +29,82 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 
 			_groupTemplates.AddRange(MainController.Instance.Lists.SearchTags.SearchGroups);
 
-			gridViewGroups.MasterRowEmpty += OnGroupChildListIsEmpty;
-			gridViewGroups.MasterRowGetRelationCount += OnGetGroupRelationCount;
-			gridViewGroups.MasterRowGetRelationName += OnGetGroupRelationName;
-			gridViewGroups.MasterRowGetChildList += OnGetGroupChildList;
-			gridControl.DataSource = _groupTemplates;
+			LoadTreeView();
 		}
 
 		#region IGroupSettingsEditor Members
-		public string Title => "Manage Search Tags";
+		public string Title => MainController.Instance.Lists.SearchTags.MaxTags > 0 ?
+					String.Format("Only {0} Search Tags are ALLOWED", MainController.Instance.Lists.SearchTags.MaxTags) :
+					"Manage Search Tags";
 
 		public event EventHandler<EventArgs> EditorChanged;
 
 		public void UpdateData()
 		{
-			buttonXReset.Enabled = false;
-			pnData.Enabled = false;
-			Enabled = false;
-			foreach (var group in _groupTemplates)
+			_handleCheckEvens = false;
+
+			treeListCategories.SuspendLayout();
+
+			_rootNode.Nodes.ToList().ForEach(groupNode =>
 			{
-				group.Selected = false;
-				group.Tags.ForEach(tag => tag.Selected = false);
-			}
-			gridViewGroups.CollapseAllDetails();
-			labelControlCategoryInfo.Text = String.Empty;
+				groupNode.Checked = false;
+				groupNode.Nodes.ToList().ForEach(tagNode => tagNode.Checked = false);
+			});
 
 			var defaultLink = Selection.SelectedLinks.FirstOrDefault(link => link.Tags.HasCategories) ?? Selection.SelectedLinks.FirstOrDefault();
 			Enabled = defaultLink != null;
-			if (defaultLink == null) return;
-
-			var noData = Selection.SelectedLinks.All(link => !link.Tags.HasCategories);
-			var sameData = Selection.SelectedLinks.All(link => link.Tags.Categories.Compare(defaultLink.Tags.Categories));
-
+			var noData = defaultLink != null && Selection.SelectedLinks.All(link => !link.Tags.HasCategories);
+			var sameData = defaultLink != null && Selection.SelectedLinks.All(link => link.Tags.Categories.Compare(defaultLink.Tags.Categories));
 			buttonXReset.Enabled = !noData;
+			buttonXExpand.Enabled = sameData || noData;
+			buttonXCollapse.Enabled = sameData || noData;
 			pnData.Enabled = sameData || noData;
 
 			if (sameData)
 			{
 				foreach (var group in defaultLink.Tags.Categories)
 				{
-					var groupTemplate = _groupTemplates.FirstOrDefault(x => x.Name.Equals(group.Name));
-					if (groupTemplate == null) continue;
-					groupTemplate.Selected = true;
-					foreach (var tagTemplate in groupTemplate.Tags.Where(tagTemplate => group.Tags.Any(tag => tag.Equals(tagTemplate))))
-						tagTemplate.Selected = true;
+					var groupNode = _rootNode.Nodes.FirstOrDefault(node => ((SearchGroup) node.Tag).Name == group.Name);
+					if (groupNode == null) continue;
+					groupNode.Checked = true;
+
+					foreach (var tag in group.Tags)
+					{
+						var tagNode = groupNode.Nodes.FirstOrDefault(node => ((SearchTag)node.Tag).Name == tag.Name);
+						if (tagNode == null) continue;
+						tagNode.Checked = true;
+					}
 				}
 			}
-			gridViewGroups.RefreshData();
-			if (gridViewGroups.FocusedRowHandle != GridControl.InvalidRowHandle && gridViewGroups.GetDetailView(gridViewGroups.FocusedRowHandle, 0) != null)
-				gridViewGroups.GetDetailView(gridViewGroups.FocusedRowHandle, 0).RefreshData();
 
-			UpdateCategoryInfo(sameData || noData);
-		}
+			_handleCheckEvens = true;
 
-		public void UpdateCategoryInfo(bool sameData)
-		{
-			var selectedTags = _groupTemplates.SelectMany(group => group.Tags).Where(tag => tag.Selected).ToList();
-			var totalTags = selectedTags.Count;
-			labelControlCategoryInfo.Text = String.Format("{0}{1}",
-				MainController.Instance.Lists.SearchTags.MaxTags > 0 ? String.Format("Only {0} Search Tags are ALLOWED{1}", MainController.Instance.Lists.SearchTags.MaxTags, Environment.NewLine) : String.Empty,
-				totalTags > 0 ? String.Join(", ", selectedTags.Select(t => t.Name)) : "No Tags Selected");
+			treeListCategories.ResumeLayout();
 		}
 
 		private void ApplyData()
 		{
-			gridViewGroups.CloseEditor();
-			gridViewTags.CloseEditor();
-			Selection.SelectedLinks.ApplyCategories(_groupTemplates
-				.Where(x => x.Selected)
-				.Select(g =>
+			Selection.SelectedLinks.ApplyCategories(_rootNode.Nodes
+				.Where(groupNode => groupNode.Checked)
+				.Select(groupNode =>
 				{
-					var searchGroup = new SearchGroup
+					var sourceGroup = (SearchGroup)groupNode.Tag;
+					var newGroup = new SearchGroup
 					{
-						Name = g.Name,
-						Description = g.Description,
+						Name = sourceGroup.Name,
+						Description = sourceGroup.Description
 					};
-					searchGroup.Tags.AddRange(g.Tags.Where(t => t.Selected));
-					return searchGroup;
+					newGroup.Tags.AddRange(groupNode.Nodes
+						.Where(tagNode => tagNode.Checked)
+						.Select(tagNode =>
+						{
+							var sourceTag = (SearchTag)tagNode.Tag;
+							var newTag = new SearchTag { Name = sourceTag.Name };
+							return newTag;
+						}));
+					return newGroup;
 				})
-				.Where(g=>g.Tags.Any())
+				.Where(g => g.Tags.Any())
 				.ToArray());
 			EditorChanged?.Invoke(this, new EventArgs());
 		}
@@ -119,57 +118,120 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 		}
 		#endregion
 
+		private void LoadTreeView()
+		{
+			treeListCategories.Nodes.Clear();
+
+			_rootNode = treeListCategories.AppendNode(new object[] { "Search Engine Tags" }, null);
+			_rootNode.StateImageIndex = 0;
+
+			foreach (var searchGroup in _groupTemplates)
+			{
+				var groupNode = treeListCategories.AppendNode(new object[] { searchGroup.Name }, _rootNode);
+				groupNode.Tag = searchGroup;
+				groupNode.StateImageIndex = 0;
+
+				foreach (var searchTag in searchGroup.Tags)
+				{
+					var tagNode = treeListCategories.AppendNode(new object[] { searchTag.Name }, groupNode);
+					tagNode.Tag = searchTag;
+				}
+			}
+			_rootNode.Expanded = true;
+		}
+
+		private void CollapseNode(TreeListNode node)
+		{
+			if (node.Tag is SearchTag) return;
+			foreach (TreeListNode childNode in node.Nodes)
+				CollapseNode(childNode);
+			if (node.Tag is SearchGroup)
+			{
+				node.Expanded = false;
+				node.StateImageIndex = 0;
+			}
+		}
+
+		private void ExpandNode(TreeListNode node)
+		{
+			node.ExpandAll();
+			node.StateImageIndex = 1;
+		}
+
 		private void buttonXReset_Click(object sender, EventArgs e)
 		{
 			ResetData();
 		}
 
-		private void OnGroupChildListIsEmpty(object sender, MasterRowEmptyEventArgs e)
+		private void OnCategoriesBeforeCheckNode(object sender, CheckNodeEventArgs e)
 		{
-			e.IsEmpty = !(e.RowHandle != GridControl.InvalidRowHandle && _groupTemplates[e.RowHandle].Tags.Count > 0);
+			if (!_handleCheckEvens) return;
+			if (e.State != CheckState.Checked) return;
+
+			var curentCheckedTagsCount = _rootNode.Nodes.SelectMany(node => node.Nodes).Count(node => node.Checked);
+			var newCheckedTagsCount = curentCheckedTagsCount;
+			if (e.Node.Tag is SearchGroup)
+				newCheckedTagsCount += e.Node.Nodes.Count;
+			else if (e.Node.Tag is SearchTag)
+				newCheckedTagsCount++;
+			if (newCheckedTagsCount <= MainController.Instance.Lists.SearchTags.MaxTags) return;
+
+			MainController.Instance.PopupMessages.ShowWarning(String.Format("Only {0} Search Tags are ALLOWED", MainController.Instance.Lists.SearchTags.MaxTags));
+			e.State = CheckState.Unchecked;
+			e.CanCheck = false;
 		}
 
-		private void OnGetGroupRelationCount(object sender, MasterRowGetRelationCountEventArgs e)
+		private void OnCategoriesAfterCheckNode(object sender, NodeEventArgs e)
 		{
-			e.RelationCount = 1;
-		}
+			if (!_handleCheckEvens) return;
 
-		private void OnGetGroupRelationName(object sender, MasterRowGetRelationNameEventArgs e)
-		{
-			e.RelationName = "Tags";
-		}
+			_handleCheckEvens = false;
 
-		private void OnGetGroupChildList(object sender, MasterRowGetChildListEventArgs e)
-		{
-			if (e.RowHandle == GridControl.InvalidRowHandle) return;
-			var group = gridViewGroups.GetRow(e.RowHandle) as SearchGroup;
-			e.ChildList = group != null ? group.Tags.ToArray() : new SearchTag[] { };
-		}
-
-		private void RepositoryItemCheckEditCheckedChanged(object sender, EventArgs e)
-		{
-			var focussedView = gridControl.FocusedView as GridView;
-			if (focussedView == null) return;
-			focussedView.CloseEditor();
-			var searchGroup = focussedView.SourceRow as SearchGroup;
-			var searchTag = focussedView.GetFocusedRow() as SearchTag;
-			if (searchGroup != null && searchTag != null && searchTag.Selected)
+			if (e.Node.Tag is SearchGroup)
 			{
-				searchGroup.Selected = searchTag.Selected;
-				gridControl.MainView.RefreshData();
+				foreach (TreeListNode childNode in e.Node.Nodes)
+					childNode.Checked = e.Node.Checked;
 			}
-			UpdateCategoryInfo(true);
+			else if (e.Node.Tag is SearchTag)
+			{
+				var parentNode = e.Node.ParentNode;
+				if (e.Node.Checked)
+					parentNode.Checked = true;
+				else
+				{
+					var checkedChildNodesCount = parentNode.Nodes.Count(n => n.Checked);
+					parentNode.Checked = checkedChildNodesCount > 0;
+				}
+			}
+
+			_handleCheckEvens = true;
+
 			ApplyData();
 		}
 
-		private void repositoryItemCheckEditLibrary_EditValueChanging(object sender, DevExpress.XtraEditors.Controls.ChangingEventArgs e)
+		private void OnCategoriesAfterCollapse(object sender, NodeEventArgs e)
 		{
-			var newValue = e.NewValue is bool && (bool)e.NewValue;
-			if (!newValue || MainController.Instance.Lists.SearchTags.MaxTags <= 0) return;
-			var totalTags = _groupTemplates.SelectMany(group => @group.Tags).Count(tag => tag.Selected);
-			if (totalTags < MainController.Instance.Lists.SearchTags.MaxTags) return;
-			MainController.Instance.PopupMessages.ShowWarning(String.Format("Only {0} Search Tags are ALLOWED", MainController.Instance.Lists.SearchTags.MaxTags));
-			e.Cancel = true;
+			e.Node.StateImageIndex = 0;
+		}
+
+		private void OnCategoriesAfterExpand(object sender, NodeEventArgs e)
+		{
+			e.Node.StateImageIndex = 1;
+		}
+
+		private void OnCategoriesBeforeCollapse(object sender, BeforeCollapseEventArgs e)
+		{
+			e.CanCollapse = e.Node.Tag is SearchGroup;
+		}
+
+		private void OnExpandClick(object sender, EventArgs e)
+		{
+			ExpandNode(_rootNode);
+		}
+
+		private void OnCollapseClick(object sender, EventArgs e)
+		{
+			CollapseNode(_rootNode);
 		}
 	}
 }

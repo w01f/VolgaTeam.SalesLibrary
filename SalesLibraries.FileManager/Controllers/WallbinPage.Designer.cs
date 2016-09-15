@@ -34,8 +34,8 @@
 			this.retractableBar = new SalesLibraries.CommonGUI.RetractableBar.RetractableBarLeft();
 			this.laEditorTitle = new System.Windows.Forms.Label();
 			this.pnHeader = new System.Windows.Forms.Panel();
-			this.linkInfoControl = new SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSettings.LinkInfoControl();
 			this.pnTagInfoContainer = new System.Windows.Forms.Panel();
+			this.linkInfoControl = new SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSettings.LinkInfoControl();
 			this.superFilterControl = new SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSettings.SuperFilterControl();
 			this.pnMain.SuspendLayout();
 			this.retractableBar.Header.SuspendLayout();
@@ -90,6 +90,7 @@
 			this.retractableBar.Header.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.retractableBar.Header.Location = new System.Drawing.Point(49, 2);
 			this.retractableBar.Header.Name = "Header";
+			this.retractableBar.Header.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
 			this.retractableBar.Header.Size = new System.Drawing.Size(257, 36);
 			this.retractableBar.Header.TabIndex = 2;
 			this.retractableBar.Location = new System.Drawing.Point(0, 47);
@@ -102,9 +103,9 @@
 			// 
 			this.laEditorTitle.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.laEditorTitle.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.laEditorTitle.Location = new System.Drawing.Point(0, 0);
+			this.laEditorTitle.Location = new System.Drawing.Point(10, 0);
 			this.laEditorTitle.Name = "laEditorTitle";
-			this.laEditorTitle.Size = new System.Drawing.Size(257, 36);
+			this.laEditorTitle.Size = new System.Drawing.Size(247, 36);
 			this.laEditorTitle.TabIndex = 1;
 			this.laEditorTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
@@ -120,6 +121,14 @@
 			this.pnHeader.Size = new System.Drawing.Size(988, 47);
 			this.pnHeader.TabIndex = 8;
 			// 
+			// pnTagInfoContainer
+			// 
+			this.pnTagInfoContainer.Dock = System.Windows.Forms.DockStyle.Right;
+			this.pnTagInfoContainer.Location = new System.Drawing.Point(618, 0);
+			this.pnTagInfoContainer.Name = "pnTagInfoContainer";
+			this.pnTagInfoContainer.Size = new System.Drawing.Size(370, 47);
+			this.pnTagInfoContainer.TabIndex = 1;
+			// 
 			// linkInfoControl
 			// 
 			this.linkInfoControl.AllowHtmlString = true;
@@ -132,14 +141,6 @@
 			this.linkInfoControl.Name = "linkInfoControl";
 			this.linkInfoControl.Size = new System.Drawing.Size(422, 47);
 			this.linkInfoControl.TabIndex = 2;
-			// 
-			// pnTagInfoContainer
-			// 
-			this.pnTagInfoContainer.Dock = System.Windows.Forms.DockStyle.Right;
-			this.pnTagInfoContainer.Location = new System.Drawing.Point(618, 0);
-			this.pnTagInfoContainer.Name = "pnTagInfoContainer";
-			this.pnTagInfoContainer.Size = new System.Drawing.Size(370, 47);
-			this.pnTagInfoContainer.TabIndex = 1;
 			// 
 			// superFilterControl
 			// 

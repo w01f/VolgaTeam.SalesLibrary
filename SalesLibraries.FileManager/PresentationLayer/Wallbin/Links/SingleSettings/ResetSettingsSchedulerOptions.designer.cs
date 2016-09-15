@@ -46,7 +46,6 @@
 			this.checkEditLinkSettingsGroupSecurity = new DevExpress.XtraEditors.CheckEdit();
 			this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
 			this.labelControlTitle = new DevExpress.XtraEditors.LabelControl();
-			this.labelControlDescription = new DevExpress.XtraEditors.LabelControl();
 			((System.ComponentModel.ISupportInitialize)(this.timeEditExpirationTime.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.dateEditExpirationDate.Properties.CalendarTimeProperties)).BeginInit();
@@ -259,10 +258,10 @@
 			// pictureBoxLogo
 			// 
 			this.pictureBoxLogo.Image = global::SalesLibraries.FileManager.Properties.Resources.LinkSettingsResetSettingsScheduler;
-			this.pictureBoxLogo.Location = new System.Drawing.Point(15, 12);
+			this.pictureBoxLogo.Location = new System.Drawing.Point(17, 18);
 			this.pictureBoxLogo.Name = "pictureBoxLogo";
-			this.pictureBoxLogo.Size = new System.Drawing.Size(67, 69);
-			this.pictureBoxLogo.TabIndex = 21;
+			this.pictureBoxLogo.Size = new System.Drawing.Size(64, 64);
+			this.pictureBoxLogo.TabIndex = 51;
 			this.pictureBoxLogo.TabStop = false;
 			// 
 			// labelControlTitle
@@ -270,38 +269,20 @@
 			this.labelControlTitle.AllowHtmlString = true;
 			this.labelControlTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+			this.labelControlTitle.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Top;
 			this.labelControlTitle.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
 			this.labelControlTitle.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-			this.labelControlTitle.Location = new System.Drawing.Point(102, 12);
+			this.labelControlTitle.Location = new System.Drawing.Point(103, 18);
 			this.labelControlTitle.Name = "labelControlTitle";
-			this.labelControlTitle.Size = new System.Drawing.Size(413, 69);
+			this.labelControlTitle.Size = new System.Drawing.Size(407, 132);
 			this.labelControlTitle.StyleController = this.styleController;
-			this.labelControlTitle.TabIndex = 22;
-			this.labelControlTitle.Text = "<size=+3>Enable a <b>Link Reset Timer</b> for the Following Custom Link Propertie" +
-    "s:</size>";
-			// 
-			// labelControlDescription
-			// 
-			this.labelControlDescription.AllowHtmlString = true;
-			this.labelControlDescription.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.labelControlDescription.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Top;
-			this.labelControlDescription.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-			this.labelControlDescription.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-			this.labelControlDescription.Location = new System.Drawing.Point(15, 96);
-			this.labelControlDescription.Name = "labelControlDescription";
-			this.labelControlDescription.Size = new System.Drawing.Size(500, 55);
-			this.labelControlDescription.StyleController = this.styleController;
-			this.labelControlDescription.TabIndex = 23;
-			this.labelControlDescription.Text = resources.GetString("labelControlDescription.Text");
+			this.labelControlTitle.TabIndex = 50;
+			this.labelControlTitle.Text = resources.GetString("labelControlTitle.Text");
 			// 
 			// ResetSettingsSchedulerOptions
 			// 
-			this.Appearance.PageClient.BackColor = System.Drawing.Color.White;
-			this.Appearance.PageClient.Options.UseBackColor = true;
-			this.Controls.Add(this.labelControlDescription);
-			this.Controls.Add(this.labelControlTitle);
 			this.Controls.Add(this.pictureBoxLogo);
+			this.Controls.Add(this.labelControlTitle);
 			this.Controls.Add(this.checkEditLinkSettingsGroupExpirationDate);
 			this.Controls.Add(this.checkEditLinkSettingsGroupSecurity);
 			this.Controls.Add(this.checkEditLinkSettingsGroupKeywords);
@@ -314,6 +295,7 @@
 			this.Controls.Add(this.checkEditEnableResetSettingsScheduler);
 			this.Controls.Add(this.timeEditExpirationTime);
 			this.Controls.Add(this.dateEditExpirationDate);
+			this.Name = "ResetSettingsSchedulerOptions";
 			this.Size = new System.Drawing.Size(531, 541);
 			((System.ComponentModel.ISupportInitialize)(this.timeEditExpirationTime.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
@@ -350,6 +332,5 @@
 		private DevExpress.XtraEditors.CheckEdit checkEditLinkSettingsGroupSecurity;
 		private System.Windows.Forms.PictureBox pictureBoxLogo;
 		private DevExpress.XtraEditors.LabelControl labelControlTitle;
-		private DevExpress.XtraEditors.LabelControl labelControlDescription;
 	}
 }

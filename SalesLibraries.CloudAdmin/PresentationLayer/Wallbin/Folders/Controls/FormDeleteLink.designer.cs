@@ -100,7 +100,7 @@
 			// 
 			// pbLogo
 			// 
-			this.pbLogo.Image = global::SalesLibraries.FileManager.Properties.Resources.LinkDelete;
+			this.pbLogo.Image = global::SalesLibraries.CloudAdmin.Properties.Resources.LinkDelete;
 			this.pbLogo.Location = new System.Drawing.Point(12, 12);
 			this.pbLogo.Name = "pbLogo";
 			this.pbLogo.Size = new System.Drawing.Size(49, 51);

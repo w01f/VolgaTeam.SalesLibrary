@@ -49,7 +49,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 			var folderSettings = (LibraryFolderLinkSettings)_parentFolderLink.Settings;
 			checkEditApplyForAll.Checked = folderSettings.SettingsTemplates
 				.Any(st => st.SettingsType == settingsType && st.FileType == _sourceLink.Type);
-
+			
 			AddOptionPages(
 				ObjectIntendHelper.GetObjectInstances(
 					typeof(ILinkSettingsEditControl),

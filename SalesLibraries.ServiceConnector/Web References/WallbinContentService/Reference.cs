@@ -1000,8 +1000,10 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         private string noteField;
         
         private string hoverNoteField;
-        
-        private bool isBoldField;
+
+		private bool showOnlyCustomHoverNoteField;
+
+		private bool isBoldField;
         
         private bool isItalicField;
         
@@ -1022,9 +1024,13 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         private string assignedUsersField;
         
         private string deniedUsersField;
-        
-        /// <remarks/>
-        public string qpageId {
+
+		private string quickLinkUrlField;
+
+		private string quickLinkTitleField;
+
+		/// <remarks/>
+		public string qpageId {
             get {
                 return this.qpageIdField;
             }
@@ -1062,9 +1068,22 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
                 this.hoverNoteField = value;
             }
         }
-        
-        /// <remarks/>
-        public bool isBold {
+
+		/// <remarks/>
+		public bool showOnlyCustomHoverNote
+		{
+			get
+			{
+				return this.showOnlyCustomHoverNoteField;
+			}
+			set
+			{
+				this.showOnlyCustomHoverNoteField = value;
+			}
+		}
+
+		/// <remarks/>
+		public bool isBold {
             get {
                 return this.isBoldField;
             }
@@ -1172,7 +1191,31 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
                 this.deniedUsersField = value;
             }
         }
-    }
+
+		public string quickLinkUrl
+		{
+			get
+			{
+				return this.quickLinkUrlField;
+			}
+			set
+			{
+				this.quickLinkUrlField = value;
+			}
+		}
+
+		public string quickLinkTitle
+		{
+			get
+			{
+				return this.quickLinkTitleField;
+			}
+			set
+			{
+				this.quickLinkTitleField = value;
+			}
+		}
+	}
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
@@ -1189,8 +1232,10 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         private string noteField;
         
         private string hoverNoteField;
-        
-        private bool isBoldField;
+
+		private bool showOnlyCustomHoverNoteField;
+
+		private bool isBoldField;
         
         private bool isItalicField;
         
@@ -1211,9 +1256,13 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         private string assignedUsersField;
         
         private string deniedUsersField;
-        
-        /// <remarks/>
-        public bool forceDownload {
+
+		private string quickLinkUrlField;
+
+		private string quickLinkTitleField;
+
+		/// <remarks/>
+		public bool forceDownload {
             get {
                 return this.forceDownloadField;
             }
@@ -1251,9 +1300,22 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
                 this.hoverNoteField = value;
             }
         }
-        
-        /// <remarks/>
-        public bool isBold {
+
+		/// <remarks/>
+		public bool showOnlyCustomHoverNote
+		{
+			get
+			{
+				return this.showOnlyCustomHoverNoteField;
+			}
+			set
+			{
+				this.showOnlyCustomHoverNoteField = value;
+			}
+		}
+
+		/// <remarks/>
+		public bool isBold {
             get {
                 return this.isBoldField;
             }
@@ -1361,7 +1423,31 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
                 this.deniedUsersField = value;
             }
         }
-    }
+
+		public string quickLinkUrl
+		{
+			get
+			{
+				return this.quickLinkUrlField;
+			}
+			set
+			{
+				this.quickLinkUrlField = value;
+			}
+		}
+
+		public string quickLinkTitle
+		{
+			get
+			{
+				return this.quickLinkTitleField;
+			}
+			set
+			{
+				this.quickLinkTitleField = value;
+			}
+		}
+	}
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
@@ -1384,8 +1470,10 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         private string noteField;
         
         private string hoverNoteField;
-        
-        private bool isBoldField;
+
+		private bool showOnlyCustomHoverNoteField;
+
+		private bool isBoldField;
         
         private bool isItalicField;
         
@@ -1406,9 +1494,13 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         private string assignedUsersField;
         
         private string deniedUsersField;
-        
-        /// <remarks/>
-        public string libraryName {
+
+		private string quickLinkUrlField;
+
+		private string quickLinkTitleField;
+
+		/// <remarks/>
+		public string libraryName {
             get {
                 return this.libraryNameField;
             }
@@ -1476,9 +1568,22 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
                 this.hoverNoteField = value;
             }
         }
-        
-        /// <remarks/>
-        public bool isBold {
+
+		/// <remarks/>
+		public bool showOnlyCustomHoverNote
+		{
+			get
+			{
+				return this.showOnlyCustomHoverNoteField;
+			}
+			set
+			{
+				this.showOnlyCustomHoverNoteField = value;
+			}
+		}
+
+		/// <remarks/>
+		public bool isBold {
             get {
                 return this.isBoldField;
             }
@@ -1586,7 +1691,31 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
                 this.deniedUsersField = value;
             }
         }
-    }
+
+		public string quickLinkUrl
+		{
+			get
+			{
+				return this.quickLinkUrlField;
+			}
+			set
+			{
+				this.quickLinkUrlField = value;
+			}
+		}
+
+		public string quickLinkTitle
+		{
+			get
+			{
+				return this.quickLinkTitleField;
+			}
+			set
+			{
+				this.quickLinkTitleField = value;
+			}
+		}
+	}
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
@@ -1601,8 +1730,10 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         private string noteField;
         
         private string hoverNoteField;
-        
-        private bool isBoldField;
+
+		private bool showOnlyCustomHoverNoteField;
+
+		private bool isBoldField;
         
         private bool isItalicField;
         
@@ -1623,9 +1754,13 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         private string assignedUsersField;
         
         private string deniedUsersField;
-        
-        /// <remarks/>
-        public string secondPath {
+
+		private string quickLinkUrlField;
+
+		private string quickLinkTitleField;
+		
+		/// <remarks/>
+		public string secondPath {
             get {
                 return this.secondPathField;
             }
@@ -1653,9 +1788,22 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
                 this.hoverNoteField = value;
             }
         }
-        
-        /// <remarks/>
-        public bool isBold {
+
+		/// <remarks/>
+		public bool showOnlyCustomHoverNote
+		{
+			get
+			{
+				return this.showOnlyCustomHoverNoteField;
+			}
+			set
+			{
+				this.showOnlyCustomHoverNoteField = value;
+			}
+		}
+
+		/// <remarks/>
+		public bool isBold {
             get {
                 return this.isBoldField;
             }
@@ -1763,7 +1911,31 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
                 this.deniedUsersField = value;
             }
         }
-    }
+
+		public string quickLinkUrl
+		{
+			get
+			{
+				return this.quickLinkUrlField;
+			}
+			set
+			{
+				this.quickLinkUrlField = value;
+			}
+		}
+
+		public string quickLinkTitle
+		{
+			get
+			{
+				return this.quickLinkTitleField;
+			}
+			set
+			{
+				this.quickLinkTitleField = value;
+			}
+		}
+	}
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
@@ -1780,8 +1952,10 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         private string noteField;
         
         private string hoverNoteField;
-        
-        private bool isBoldField;
+
+		private bool showOnlyCustomHoverNoteField;
+
+		private bool isBoldField;
         
         private bool isItalicField;
         
@@ -1802,9 +1976,13 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         private string assignedUsersField;
         
         private string deniedUsersField;
-        
-        /// <remarks/>
-        public float slideWidth {
+
+		private string quickLinkUrlField;
+
+		private string quickLinkTitleField;
+
+		/// <remarks/>
+		public float slideWidth {
             get {
                 return this.slideWidthField;
             }
@@ -1842,9 +2020,22 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
                 this.hoverNoteField = value;
             }
         }
-        
-        /// <remarks/>
-        public bool isBold {
+
+		/// <remarks/>
+		public bool showOnlyCustomHoverNote
+		{
+			get
+			{
+				return this.showOnlyCustomHoverNoteField;
+			}
+			set
+			{
+				this.showOnlyCustomHoverNoteField = value;
+			}
+		}
+
+		/// <remarks/>
+		public bool isBold {
             get {
                 return this.isBoldField;
             }
@@ -1952,7 +2143,31 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
                 this.deniedUsersField = value;
             }
         }
-    }
+
+		public string quickLinkUrl
+		{
+			get
+			{
+				return this.quickLinkUrlField;
+			}
+			set
+			{
+				this.quickLinkUrlField = value;
+			}
+		}
+
+		public string quickLinkTitle
+		{
+			get
+			{
+				return this.quickLinkTitleField;
+			}
+			set
+			{
+				this.quickLinkTitleField = value;
+			}
+		}
+	}
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
@@ -1967,8 +2182,10 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         private string noteField;
         
         private string hoverNoteField;
-        
-        private bool isBoldField;
+
+		private bool showOnlyCustomHoverNoteField;
+
+		private bool isBoldField;
         
         private bool isItalicField;
         
@@ -1989,9 +2206,13 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         private string assignedUsersField;
         
         private string deniedUsersField;
-        
-        /// <remarks/>
-        public bool forcePreview {
+
+		private string quickLinkUrlField;
+
+		private string quickLinkTitleField;
+
+		/// <remarks/>
+		public bool forcePreview {
             get {
                 return this.forcePreviewField;
             }
@@ -2019,9 +2240,22 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
                 this.hoverNoteField = value;
             }
         }
-        
-        /// <remarks/>
-        public bool isBold {
+
+		/// <remarks/>
+		public bool showOnlyCustomHoverNote
+		{
+			get
+			{
+				return this.showOnlyCustomHoverNoteField;
+			}
+			set
+			{
+				this.showOnlyCustomHoverNoteField = value;
+			}
+		}
+
+		/// <remarks/>
+		public bool isBold {
             get {
                 return this.isBoldField;
             }
@@ -2129,7 +2363,31 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
                 this.deniedUsersField = value;
             }
         }
-    }
+
+		public string quickLinkUrl
+		{
+			get
+			{
+				return this.quickLinkUrlField;
+			}
+			set
+			{
+				this.quickLinkUrlField = value;
+			}
+		}
+
+		public string quickLinkTitle
+		{
+			get
+			{
+				return this.quickLinkTitleField;
+			}
+			set
+			{
+				this.quickLinkTitleField = value;
+			}
+		}
+	}
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
@@ -2144,8 +2402,10 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         private string noteField;
         
         private string hoverNoteField;
-        
-        private bool isBoldField;
+
+		private bool showOnlyCustomHoverNoteField;
+
+		private bool isBoldField;
         
         private bool isItalicField;
         
@@ -2166,9 +2426,13 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         private string assignedUsersField;
         
         private string deniedUsersField;
-        
-        /// <remarks/>
-        public bool forcePreview {
+
+		private string quickLinkUrlField;
+
+		private string quickLinkTitleField;
+
+		/// <remarks/>
+		public bool forcePreview {
             get {
                 return this.forcePreviewField;
             }
@@ -2196,9 +2460,22 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
                 this.hoverNoteField = value;
             }
         }
-        
-        /// <remarks/>
-        public bool isBold {
+
+		/// <remarks/>
+		public bool showOnlyCustomHoverNote
+		{
+			get
+			{
+				return this.showOnlyCustomHoverNoteField;
+			}
+			set
+			{
+				this.showOnlyCustomHoverNoteField = value;
+			}
+		}
+
+		/// <remarks/>
+		public bool isBold {
             get {
                 return this.isBoldField;
             }
@@ -2306,7 +2583,31 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
                 this.deniedUsersField = value;
             }
         }
-    }
+
+		public string quickLinkUrl
+		{
+			get
+			{
+				return this.quickLinkUrlField;
+			}
+			set
+			{
+				this.quickLinkUrlField = value;
+			}
+		}
+
+		public string quickLinkTitle
+		{
+			get
+			{
+				return this.quickLinkTitleField;
+			}
+			set
+			{
+				this.quickLinkTitleField = value;
+			}
+		}
+	}
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
@@ -3381,8 +3682,10 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         private string noteField;
         
         private string hoverNoteField;
-        
-        private bool isBoldField;
+
+		private bool showOnlyCustomHoverNoteField;
+
+		private bool isBoldField;
         
         private bool isItalicField;
         
@@ -3403,9 +3706,13 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         private string assignedUsersField;
         
         private string deniedUsersField;
-        
-        /// <remarks/>
-        public string note {
+
+		private string quickLinkUrlField;
+
+		private string quickLinkTitleField;
+
+		/// <remarks/>
+		public string note {
             get {
                 return this.noteField;
             }
@@ -3423,9 +3730,22 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
                 this.hoverNoteField = value;
             }
         }
-        
-        /// <remarks/>
-        public bool isBold {
+
+		/// <remarks/>
+		public bool showOnlyCustomHoverNote
+		{
+			get
+			{
+				return this.showOnlyCustomHoverNoteField;
+			}
+			set
+			{
+				this.showOnlyCustomHoverNoteField = value;
+			}
+		}
+
+		/// <remarks/>
+		public bool isBold {
             get {
                 return this.isBoldField;
             }
@@ -3533,7 +3853,31 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
                 this.deniedUsersField = value;
             }
         }
-    }
+
+		public string quickLinkUrl
+		{
+			get
+			{
+				return this.quickLinkUrlField;
+			}
+			set
+			{
+				this.quickLinkUrlField = value;
+			}
+		}
+
+		public string quickLinkTitle
+		{
+			get
+			{
+				return this.quickLinkTitleField;
+			}
+			set
+			{
+				this.quickLinkTitleField = value;
+			}
+		}
+	}
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]

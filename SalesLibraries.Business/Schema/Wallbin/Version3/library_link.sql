@@ -1,0 +1,1 @@
+﻿ALTER TABLE [LibraryLink] ADD [QuickLinkEncoded] TEXT

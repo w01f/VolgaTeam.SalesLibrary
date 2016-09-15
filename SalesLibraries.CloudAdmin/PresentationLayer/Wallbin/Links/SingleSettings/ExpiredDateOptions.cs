@@ -9,8 +9,8 @@ using SalesLibraries.Common.Helpers;
 
 namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettings
 {
-	//public partial class ExpiredDateOptions : UserControl, ILinkProperties
 	[IntendForClass(typeof(LibraryObjectLink))]
+	//public partial class ExpiredDateOptions : UserControl, ILinkSettingsEditControl
 	public partial class ExpiredDateOptions : XtraTabPage, ILinkSettingsEditControl
 	{
 		private readonly LibraryObjectLink _data;

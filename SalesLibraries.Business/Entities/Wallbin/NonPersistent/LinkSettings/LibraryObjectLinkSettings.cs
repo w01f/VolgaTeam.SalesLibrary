@@ -19,6 +19,20 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 				if (_hoverNote != value)
 					OnSettingsChanged();
 				_hoverNote = value;
+				if (String.IsNullOrEmpty(_hoverNote))
+					ShowOnlyCustomHoverNote = false;
+			}
+		}
+
+		private bool _showOnlyCustomHoverNote;
+		public bool ShowOnlyCustomHoverNote
+		{
+			get { return _showOnlyCustomHoverNote; }
+			set
+			{
+				if (_showOnlyCustomHoverNote != value)
+					OnSettingsChanged();
+				_showOnlyCustomHoverNote = value;
 			}
 		}
 
@@ -87,6 +101,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 				{
 					case LinkSettingsGroupType.HoverNote:
 						HoverNote = null;
+						ShowOnlyCustomHoverNote = false;
 						break;
 					case LinkSettingsGroupType.TextFormatting:
 						RegularFontStyle = FontStyle.Regular;

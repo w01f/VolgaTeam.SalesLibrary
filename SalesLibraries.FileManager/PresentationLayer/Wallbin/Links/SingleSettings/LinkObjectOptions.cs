@@ -44,6 +44,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 				styleController.AppearanceDropDownHeader.Font = styleControllerFont;
 				styleController.AppearanceFocused.Font = styleControllerFont;
 				styleController.AppearanceReadOnly.Font = styleControllerFont;
+
 				rbAttention.Font = new Font(rbAttention.Font.FontFamily, rbAttention.Font.Size - 2, rbAttention.Font.Style);
 				rbCustomNote.Font = new Font(rbCustomNote.Font.FontFamily, rbCustomNote.Font.Size - 2, rbCustomNote.Font.Style);
 				rbNew.Font = new Font(rbNew.Font.FontFamily, rbNew.Font.Size - 2, rbNew.Font.Style);
@@ -51,13 +52,10 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 				rbSell.Font = new Font(rbSell.Font.FontFamily, rbSell.Font.Size - 2, rbSell.Font.Style);
 				rbSold.Font = new Font(rbSold.Font.FontFamily, rbSold.Font.Size - 2, rbSold.Font.Style);
 				rbUpdated.Font = new Font(rbUpdated.Font.FontFamily, rbUpdated.Font.Size - 2, rbUpdated.Font.Style);
-				laLinkHoverNote.Font = new Font(laLinkHoverNote.Font.FontFamily, laLinkHoverNote.Font.Size - 2, laLinkHoverNote.Font.Style);
-				labelControlTitle.Font = new Font(labelControlTitle.Font.FontFamily, labelControlTitle.Font.Size - 2, labelControlTitle.Font.Style);
-				labelControlHoverNoteDescription.Font = new Font(labelControlHoverNoteDescription.Font.FontFamily, labelControlHoverNoteDescription.Font.Size - 2, labelControlHoverNoteDescription.Font.Style);
 			}
-			textEditLinkHoverNote.Enter += EditorHelper.EditorEnter;
-			textEditLinkHoverNote.MouseUp += EditorHelper.EditorMouseUp;
-			textEditLinkHoverNote.MouseDown += EditorHelper.EditorMouseUp;
+			textEditCustomNote.Enter += EditorHelper.EditorEnter;
+			textEditCustomNote.MouseUp += EditorHelper.EditorMouseUp;
+			textEditCustomNote.MouseDown += EditorHelper.EditorMouseUp;
 		}
 
 		public void LoadData()
@@ -78,9 +76,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			else
 			{
 				rbCustomNote.Checked = true;
-				edCustomNote.Text = note;
+				textEditCustomNote.EditValue = note;
 			}
-			textEditLinkHoverNote.EditValue = ((LibraryObjectLinkSettings)_data.Settings).HoverNote;
 		}
 
 		public void SaveData()
@@ -96,15 +93,14 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			else if (rbAttention.Checked)
 				_data.Settings.Note = BaseLinkSettings.PredefinedNoteAttention;
 			else if (rbCustomNote.Checked)
-				_data.Settings.Note = edCustomNote.Text;
+				_data.Settings.Note = textEditCustomNote.EditValue as String;
 			else
 				_data.Settings.Note = String.Empty;
-			((LibraryObjectLinkSettings)_data.Settings).HoverNote = textEditLinkHoverNote.EditValue as String ?? String.Empty;
 		}
 
 		private void rbCustomNote_CheckedChanged(object sender, EventArgs e)
 		{
-			edCustomNote.Enabled = rbCustomNote.Checked;
+			textEditCustomNote.Enabled = rbCustomNote.Checked;
 		}
 	}
 }

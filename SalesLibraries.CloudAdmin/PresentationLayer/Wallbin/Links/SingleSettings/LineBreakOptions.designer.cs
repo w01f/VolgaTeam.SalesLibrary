@@ -46,9 +46,9 @@
 			// 
 			// memoEditNote
 			// 
-			this.memoEditNote.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-			| System.Windows.Forms.AnchorStyles.Left)
-			| System.Windows.Forms.AnchorStyles.Right)));
+			this.memoEditNote.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.memoEditNote.Enabled = false;
 			this.memoEditNote.Location = new System.Drawing.Point(6, 185);
 			this.memoEditNote.Name = "memoEditNote";
@@ -84,7 +84,7 @@
 			this.buttonEditLineBreakFont.Properties.Appearance.Options.UseBackColor = true;
 			this.buttonEditLineBreakFont.Properties.Appearance.Options.UseForeColor = true;
 			this.buttonEditLineBreakFont.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-			new DevExpress.XtraEditors.Controls.EditorButton()});
+            new DevExpress.XtraEditors.Controls.EditorButton()});
 			this.buttonEditLineBreakFont.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
 			this.buttonEditLineBreakFont.Size = new System.Drawing.Size(274, 22);
 			this.buttonEditLineBreakFont.StyleController = this.styleController;
@@ -102,7 +102,7 @@
 			this.colorEditLineBreakFontColor.Properties.Appearance.Options.UseBackColor = true;
 			this.colorEditLineBreakFontColor.Properties.Appearance.Options.UseForeColor = true;
 			this.colorEditLineBreakFontColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-			new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
 			this.colorEditLineBreakFontColor.Properties.ColorAlignment = DevExpress.Utils.HorzAlignment.Center;
 			this.colorEditLineBreakFontColor.Properties.ShowSystemColors = false;
 			this.colorEditLineBreakFontColor.Size = new System.Drawing.Size(146, 22);

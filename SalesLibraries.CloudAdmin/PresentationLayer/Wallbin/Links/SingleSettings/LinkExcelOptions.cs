@@ -11,13 +11,12 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 {
 	[IntendForClass(typeof(ExcelLink))]
 	//public partial class LinkExcelOptions : UserControl, ILinkSettingsEditControl
-
 	public sealed partial class LinkExcelOptions : XtraTabPage, ILinkSettingsEditControl
 	{
 		private readonly ExcelLink _data;
 
 		public LinkSettingsType SettingsType => LinkSettingsType.Notes;
-		public int Order => 2;
+		public int Order => 6;
 		public bool AvailableForEmbedded => true;
 		public SettingsEditorHeaderInfo HeaderInfo => null;
 

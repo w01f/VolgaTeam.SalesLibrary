@@ -18,7 +18,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 		private readonly LibraryObjectLink _data;
 
 		public LinkSettingsType SettingsType => LinkSettingsType.Notes;
-		public int Order => 1;
+		public int Order => 2;
 		public bool AvailableForEmbedded => false;
 		public SettingsEditorHeaderInfo HeaderInfo => null;
 
@@ -37,12 +37,6 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 				styleController.AppearanceDropDownHeader.Font = styleControllerFont;
 				styleController.AppearanceFocused.Font = styleControllerFont;
 				styleController.AppearanceReadOnly.Font = styleControllerFont;
-				labelControlTitle.Font = new Font(labelControlTitle.Font.FontFamily, labelControlTitle.Font.Size - 2, labelControlTitle.Font.Style);
-				checkEditBold.Font = new Font(checkEditBold.Font.FontFamily, checkEditBold.Font.Size - 2, checkEditBold.Font.Style);
-				checkEditItalic.Font = new Font(checkEditItalic.Font.FontFamily, checkEditItalic.Font.Size - 2, checkEditItalic.Font.Style);
-				checkEditUnderlined.Font = new Font(checkEditUnderlined.Font.FontFamily, checkEditUnderlined.Font.Size - 2, checkEditUnderlined.Font.Style);
-				checkEditSpecialFormat.Font = new Font(checkEditSpecialFormat.Font.FontFamily, checkEditSpecialFormat.Font.Size - 2, checkEditSpecialFormat.Font.Style);
-				labelControlForeColor.Font = new Font(labelControlForeColor.Font.FontFamily, labelControlForeColor.Font.Size - 2, labelControlForeColor.Font.Style);
 			}
 		}
 

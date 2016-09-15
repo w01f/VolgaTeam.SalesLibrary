@@ -17,7 +17,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		private readonly QuickSiteLink _data;
 
 		public LinkSettingsType SettingsType => LinkSettingsType.Notes;
-		public int Order => 2;
+		public int Order => 6;
 		public bool AvailableForEmbedded => true;
 		public SettingsEditorHeaderInfo HeaderInfo => new SettingsEditorHeaderInfo { Title = "QuickSite", Logo = Resources.LinkAddQuickSite };
 

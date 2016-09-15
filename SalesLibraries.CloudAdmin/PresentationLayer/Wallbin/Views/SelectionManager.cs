@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
-using SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders;
 using SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders.Controls;
 
 namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
@@ -11,18 +10,19 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 	public class SelectionManager
 	{
 		private bool _suspended;
-		private readonly List<BaseLibraryLink> _selectedLinks = new List<BaseLibraryLink>();
+		private readonly List<BaseLibraryLink> _selectedLinksCache = new List<BaseLibraryLink>();
 
 		public DateTime? LastUpdate { get; set; }
 		public ClassicFolderBox SelectedFolder { get; private set; }
-		public List<LibraryObjectLink> SelectedLinks { get; }
+		public List<BaseLibraryLink> SelectedLinks { get; }
 		public event EventHandler<SelectionEventArgs> SelectionChanged;
 
-		public BaseLibraryLink SelectedLink => _selectedLinks.Count == 1 ? _selectedLinks.First() : null;
+		public BaseLibraryLink SelectedLink => _selectedLinksCache.Count == 1 ? _selectedLinksCache.First() : null;
+		public int SelectedLinksCount => _selectedLinksCache.Count;
 
 		public SelectionManager()
 		{
-			SelectedLinks = new List<LibraryObjectLink>();
+			SelectedLinks = new List<BaseLibraryLink>();
 		}
 
 		public void SelectLinks(IEnumerable<BaseLibraryLink> links, Keys modifierKeys)
@@ -34,12 +34,12 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 				ResetLinks();
 			}
 			else
-				_selectedLinks.RemoveAll(link => link.Folder.ExtId == SelectedFolder.DataSource.ExtId);
+				_selectedLinksCache.RemoveAll(link => link.Folder.ExtId == SelectedFolder.DataSource.ExtId);
 
 			if (!links.Any()) return;
 
-			_selectedLinks.AddRange(links.Where(link => _selectedLinks.All(selectedLink => selectedLink.ExtId != link.ExtId)));
-			SelectedLinks.AddRange(_selectedLinks.OfType<LibraryObjectLink>());
+			_selectedLinksCache.AddRange(links.Where(link => _selectedLinksCache.All(selectedLink => selectedLink.ExtId != link.ExtId)));
+			SelectedLinks.AddRange(_selectedLinksCache.OfType<BaseLibraryLink>());
 			LastUpdate = DateTime.Now;
 			SelectionChanged?.Invoke(this, new SelectionEventArgs(SelectionEventType.LinkSelected));
 		}
@@ -67,7 +67,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 
 		private void ResetLinks()
 		{
-			_selectedLinks.Clear();
+			_selectedLinksCache.Clear();
 			SelectedLinks.Clear();
 		}
 
@@ -105,6 +105,4 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 			SelectionType = selectionType;
 		}
 	}
-
-
 }

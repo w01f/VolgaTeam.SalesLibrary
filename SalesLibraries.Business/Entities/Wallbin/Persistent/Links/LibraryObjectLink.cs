@@ -16,6 +16,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		#region Persistent Properties
 		public string RelativePath { get; set; }
 		public string ExpirationEncoded { get; set; }
+		public string QuickLinkEncoded { get; set; }
 		#endregion
 
 		#region Nonpersistent Properties
@@ -33,6 +34,14 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		{
 			get { return _expirationSettings ?? (_expirationSettings = SettingsContainer.CreateInstance<LinkExpirationSettings>(this, ExpirationEncoded)); }
 			set { _expirationSettings = value; }
+		}
+
+		private QuickLinkSettings _quickLinkSettings;
+		[NotMapped, JsonIgnore]
+		public QuickLinkSettings QuickLinkSettings
+		{
+			get { return _quickLinkSettings ?? (_quickLinkSettings = SettingsContainer.CreateInstance<QuickLinkSettings>(this, QuickLinkEncoded)); }
+			set { _quickLinkSettings = value; }
 		}
 
 		[NotMapped, JsonIgnore]
@@ -104,6 +113,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 			if (NeedToSave)
 			{
 				ExpirationEncoded = ExpirationSettings.Serialize();
+				QuickLinkEncoded = QuickLinkSettings.Serialize();
 			}
 			base.BeforeSave();
 		}
@@ -111,6 +121,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		public override void AfterSave()
 		{
 			ExpirationSettings = null;
+			QuickLinkSettings = null;
 			base.AfterSave();
 		}
 
@@ -118,6 +129,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		{
 			RelativePath = ((LibraryObjectLink)link).RelativePath;
 			ExpirationEncoded = ((LibraryObjectLink)link).ExpirationEncoded;
+			QuickLinkEncoded = ((LibraryObjectLink)link).QuickLinkEncoded;
 			base.ApplyValues(link);
 		}
 
@@ -125,6 +137,8 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		{
 			if (groupsForReset == null || groupsForReset.Contains(LinkSettingsGroupType.Expiration))
 				ExpirationEncoded = null;
+			if (groupsForReset == null || groupsForReset.Contains(LinkSettingsGroupType.QuickLink))
+				QuickLinkEncoded = null;
 			base.ResetToDefault(groupsForReset);
 		}
 
@@ -134,6 +148,9 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 
 			if (ExpirationSettings.Enable)
 				customizedSettingsGroups.Add(LinkSettingsGroupType.Expiration);
+
+			if (QuickLinkSettings.Enable)
+				customizedSettingsGroups.Add(LinkSettingsGroupType.QuickLink);
 
 			customizedSettingsGroups.Sort((x, y) => ((Int32)x).CompareTo((Int32)y));
 
@@ -145,6 +162,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 			var link = (LibraryObjectLink)base.Copy(forMove);
 			link.RelativePath = RelativePath;
 			link.ExpirationEncoded = ExpirationEncoded;
+			link.QuickLinkEncoded = QuickLinkEncoded;
 			return link;
 		}
 

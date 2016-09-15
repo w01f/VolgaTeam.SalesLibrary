@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 using DevComponents.DotNetBar;
 using SalesLibraries.Business.Entities.Helpers;
@@ -88,6 +89,10 @@ namespace SalesLibraries.CloudAdmin.Controllers
 			#endregion
 
 			#region Tags
+
+			MainController.Instance.MainForm.ribbonBarTagsSuperFilters.Visible =
+				MainController.Instance.Lists.SuperFilters.Items.Any();
+
 			MainController.Instance.MainForm.buttonItemTagsCategories.Click += buttonItemTagsSync_Click;
 			MainController.Instance.MainForm.buttonItemTagsCategories.CheckedChanged += buttonItemTagsCategories_CheckedChanged;
 			MainController.Instance.MainForm.buttonItemTagsKeywords.Click += buttonItemTagsSync_Click;

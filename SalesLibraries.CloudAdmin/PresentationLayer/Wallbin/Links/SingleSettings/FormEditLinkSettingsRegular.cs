@@ -13,6 +13,7 @@ using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.CloudAdmin.Controllers;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.Common.JsonConverters;
+using SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSettings;
 
 namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettings
 {

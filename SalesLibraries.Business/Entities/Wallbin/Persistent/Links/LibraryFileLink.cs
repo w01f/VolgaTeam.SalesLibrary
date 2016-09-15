@@ -97,10 +97,13 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 				var lines = new List<string>();
 				if (!String.IsNullOrEmpty(((LibraryObjectLinkSettings)Settings).HoverNote))
 					lines.Add(((LibraryObjectLinkSettings)Settings).HoverNote);
-				lines.Add(String.Format("{0}: {1}", HintTitle, NameWithExtension));
-				if (!String.Equals(NameWithExtension, RelativePath, StringComparison.OrdinalIgnoreCase))
-					lines.Add(WebPath?.Replace(NameWithExtension, String.Empty));
-				lines.Add(base.Hint);
+				if (!((LibraryObjectLinkSettings) Settings).ShowOnlyCustomHoverNote)
+				{
+					lines.Add(String.Format("{0}: {1}", HintTitle, NameWithExtension));
+					if (!String.Equals(NameWithExtension, RelativePath, StringComparison.OrdinalIgnoreCase))
+						lines.Add(WebPath?.Replace(NameWithExtension, String.Empty));
+					lines.Add(base.Hint);
+				}
 				return String.Join(Environment.NewLine, lines);
 			}
 		}

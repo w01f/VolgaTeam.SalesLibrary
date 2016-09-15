@@ -120,4 +120,7 @@
   <metadata name="styleController.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>607, 17</value>
   </metadata>
+  <data name="labelControlTitle.Text" xml:space="preserve">
+    <value>&lt;size=+2&gt;Admin Tools allow you to look at the specific server files that are generated for a link. This stuff is a little more advanced, and only click on these buttons if you know what you are doing…&lt;/size&gt;</value>
+  </data>
 </root>

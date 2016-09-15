@@ -23,8 +23,11 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 				var lines = new List<string>();
 				if (!String.IsNullOrEmpty(((LibraryObjectLinkSettings)Settings).HoverNote))
 					lines.Add(((LibraryObjectLinkSettings)Settings).HoverNote);
-				lines.Add(String.Format("Url: {0}", Url));
-				lines.Add(base.Hint);
+				if (!((LibraryObjectLinkSettings) Settings).ShowOnlyCustomHoverNote)
+				{
+					lines.Add(String.Format("Url: {0}", Url));
+					lines.Add(base.Hint);
+				}
 				return String.Join(Environment.NewLine, lines);
 			}
 		}

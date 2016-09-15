@@ -9,6 +9,9 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService
 		string hoverNote { get; set; }
 
 		/// <remarks/>
+		bool showOnlyCustomHoverNote { get; set; }
+
+		/// <remarks/>
 		bool isBold { get; set; }
 
 		/// <remarks/>
@@ -40,5 +43,11 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService
 
 		/// <remarks/>
 		string deniedUsers { get; set; }
+
+		/// <remarks/>
+		string quickLinkUrl { get; set; }
+
+		/// <remarks/>
+		string quickLinkTitle { get; set; }
 	}
 }

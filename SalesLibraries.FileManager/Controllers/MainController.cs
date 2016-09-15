@@ -129,13 +129,13 @@ namespace SalesLibraries.FileManager.Controllers
 				}
 
 				ProcessManager.RunStartProcess(
-					"Connecting adSALEScloud...",
-					cancellationToken => AsyncHelper.RunSync(async () =>
-					{
-						await AppProfileManager.Instance.LoadProfile();
-						await Configuration.RemoteResourceManager.Instance.LoadLocal();
-						Settings.LoadLocal();
-					}));
+						"Connecting adSALEScloud...",
+						cancellationToken => AsyncHelper.RunSync(async () =>
+						{
+							await AppProfileManager.Instance.LoadProfile();
+							await Configuration.RemoteResourceManager.Instance.LoadLocal();
+							Settings.LoadLocal();
+						}));
 
 				var progressTitle = String.Empty;
 				switch (FileStorageManager.Instance.DataState)

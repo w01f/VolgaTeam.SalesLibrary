@@ -373,9 +373,59 @@ namespace SalesLibraries.CloudAdmin.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap LinkSettingsHoverNote {
+            get {
+                object obj = ResourceManager.GetObject("LinkSettingsHoverNote", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap LinkSettingsPreviewOptions {
+            get {
+                object obj = ResourceManager.GetObject("LinkSettingsPreviewOptions", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap LinkSettingsQuickLink {
+            get {
+                object obj = ResourceManager.GetObject("LinkSettingsQuickLink", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap LinkSettingsResetSettingsScheduler {
             get {
                 object obj = ResourceManager.GetObject("LinkSettingsResetSettingsScheduler", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap LinkSettingsTextFormat {
+            get {
+                object obj = ResourceManager.GetObject("LinkSettingsTextFormat", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap LinkSettingsTextNote {
+            get {
+                object obj = ResourceManager.GetObject("LinkSettingsTextNote", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

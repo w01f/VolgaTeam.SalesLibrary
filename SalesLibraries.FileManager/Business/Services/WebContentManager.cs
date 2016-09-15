@@ -271,6 +271,8 @@ namespace SalesLibraries.FileManager.Business.Services
 				target.fileDate =
 					((LibraryObjectLinkSettings)sourceObject.Settings)
 						.FakeFileDate?.ToString("MM/dd/yyyy hh:mm:ss tt") ?? target.fileDate ?? target.dateAdd;
+
+				target.extendedProperties.ImportData(sourceObject.QuickLinkSettings);
 			}
 			if (source is PreviewableLink)
 			{
@@ -340,6 +342,7 @@ namespace SalesLibraries.FileManager.Business.Services
 
 				var objectSource = (LibraryObjectLinkSettings)source;
 				target.hoverNote = objectSource.HoverNote;
+				target.showOnlyCustomHoverNote = objectSource.ShowOnlyCustomHoverNote;
 				target.isBold = (objectSource.RegularFontStyle & FontStyle.Bold) == FontStyle.Bold;
 				target.isItalic = (objectSource.RegularFontStyle & FontStyle.Italic) == FontStyle.Italic;
 				target.isUnderline = (objectSource.RegularFontStyle & FontStyle.Underline) == FontStyle.Underline;
@@ -427,6 +430,14 @@ namespace SalesLibraries.FileManager.Business.Services
 			target.noShare = source.NoShare;
 			target.assignedUsers = source.AssignedUsers;
 			target.deniedUsers = source.DeniedUsers;
+		}
+
+		private static void ImportData(
+			this IBaseLinkSettings target,
+			QuickLinkSettings source)
+		{
+			target.quickLinkUrl = source.Url;
+			target.quickLinkTitle = source.Title;
 		}
 
 		private static void ImportData(

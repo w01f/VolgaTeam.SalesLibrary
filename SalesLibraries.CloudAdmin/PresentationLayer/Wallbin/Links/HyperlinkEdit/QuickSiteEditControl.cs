@@ -74,7 +74,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.HyperlinkEdi
 			}
 			if (templateEditor is YouTubeLinkInfo)
 			{
-				checkEditForcePreview.Checked = ((UrlLinkInfo)templateEditor).ForcePreview;
+				checkEditForcePreview.Checked = ((YouTubeLinkInfo)templateEditor).ForcePreview;
 			}
 			if (templateEditor is QuickSiteLinkInfo)
 			{
