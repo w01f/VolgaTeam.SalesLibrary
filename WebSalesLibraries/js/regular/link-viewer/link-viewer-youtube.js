@@ -63,6 +63,7 @@
 						dialogContent.find('.add-favorites').off('click.preview').on('click.preview', addToFavorites);
 						dialogContent.find('.action-container .action').off('click.preview').on('click.preview', processSaveAction);
 
+						dialogContent.find('.open-quick-link').off('click.preview').on('click.preview', openQuickLink);
 						dialogContent.find('.open-modal').off('click.preview').on('click.preview', showModal);
 						dialogContent.find('.open-fullscreen').off('click.preview').on('click.preview', showFullScreen);
 
@@ -133,6 +134,11 @@
 		{
 			$.fancybox.close();
 			$.SalesPortal.LinkManager.openFile(viewerData.url);
+		};
+
+		var openQuickLink = function ()
+		{
+			$.SalesPortal.LinkManager.openFile(viewerData.quickLinkUrl);
 		};
 
 		var processSaveAction = function ()

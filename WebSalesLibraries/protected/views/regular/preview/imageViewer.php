@@ -98,8 +98,27 @@
 						</div>
 					<? endif; ?>
 				</div>
+				<?
+					$offsetApplied = false;
+					$initialButtonsOffset = 0;
+					if (!$data->config->enableRating)
+						$initialButtonsOffset += 8;
+					if (!isset($data->quickLinkUrl))
+						$initialButtonsOffset++;
+				?>
+				<? if (isset($data->quickLinkUrl)): ?>
+					<div
+						class="col col-xs-1 <? echo !$offsetApplied ? ('col-xs-offset-' . $initialButtonsOffset . ' ') : '';
+							$offsetApplied = true; ?>text-center">
+						<div class="text-button log-action open-quick-link" data-log-action="Open Quick Link">
+							<span><? echo $data->quickLinkTitle; ?></span>
+						</div>
+					</div>
+				<? endif; ?>
 				<? if ($data->totalViews > 0): ?>
-					<div class="col col-xs-4 <? echo !$data->config->enableRating ? 'col-xs-offset-8 ' : ''; ?>text-right">
+					<div
+						class="col col-xs-3 <? echo !$offsetApplied && $initialButtonsOffset > 0 ? ('col-xs-offset-' . $initialButtonsOffset . ' ') : '';
+							$offsetApplied = true; ?>text-right">
 						<div class="text-label">Views: <? echo $data->totalViews; ?></div>
 					</div>
 				<? endif; ?>

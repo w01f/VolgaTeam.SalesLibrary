@@ -96,8 +96,27 @@
 						<div class="text-label">Views: <? echo $data->totalViews; ?></div>
 					</div>
 				<? endif; ?>
-				<div class="col col-xs-1  <? echo $data->totalViews == 0 ? 'col-xs-offset-7 ' : 'col-xs-offset-5 '; ?>text-center">
-					<div class="text-button log-action open-modal" data-log-action="Preview Modal">
+				<?
+					$offsetApplied = false;
+					$initialButtonsOffset = 4;
+					if ($data->totalViews == 0)
+						$initialButtonsOffset+=2;
+					if (!isset($data->quickLinkUrl))
+						$initialButtonsOffset++;
+
+				?>
+				<? if (isset($data->quickLinkUrl)): ?>
+					<div
+						class="col col-xs-1 <? echo !$offsetApplied ? ('col-xs-offset-' . $initialButtonsOffset . ' ') : '';
+							$offsetApplied = true; ?>text-center">
+						<div class="text-button log-action open-quick-link" data-log-action="Open Quick Link">
+							<span><? echo $data->quickLinkTitle; ?></span>
+						</div>
+					</div>
+				<? endif; ?>
+				<div class="col col-xs-1 <? echo !$offsetApplied ? ('col-xs-offset-' . $initialButtonsOffset . ' ') : '';
+					$offsetApplied = true; ?>text-center">
+					<div class="text-button log-action open-video-modal" data-log-action="Preview Modal">
 						<span>75%</span>
 					</div>
 				</div>

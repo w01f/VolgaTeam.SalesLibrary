@@ -72,6 +72,7 @@
 						dialogContent.find('.add-favorites').off('click.preview').on('click.preview', addToFavorites);
 						dialogContent.find('.action-container .action').off('click.preview').on('click.preview', processSaveAction);
 
+						dialogContent.find('.open-quick-link').off('click.preview').on('click.preview', openQuickLink);
 						dialogContent.find('.open-video-modal').off('click.preview').on('click.preview', showVideoModal);
 						dialogContent.find('.open-video-fullscreen-regular').off('click.preview').on('click.preview', showVideoFullScreenRegular);
 						dialogContent.find('.open-video-fullscreen-mobile').off('click.preview').on('click.preview', showVideoFullScreenMobile);
@@ -205,6 +206,11 @@
 				}
 			});
 			$('.fancybox-inner').css({'overflow': 'hidden'});
+		};
+
+		var openQuickLink = function ()
+		{
+			$.SalesPortal.LinkManager.openFile(viewerData.quickLinkUrl);
 		};
 
 		var processSaveAction = function ()

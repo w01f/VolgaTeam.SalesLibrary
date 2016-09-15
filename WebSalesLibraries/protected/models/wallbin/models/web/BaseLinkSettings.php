@@ -75,6 +75,16 @@
 		 * @soap
 		 */
 		public $deniedUsers;
+		/**
+		 * @var string
+		 * @soap
+		 */
+		public $quickLinkUrl;
+		/**
+		 * @var string
+		 * @soap
+		 */
+		public $quickLinkTitle;
 
 		/**
 		 * @param $linkRecord LinkRecord

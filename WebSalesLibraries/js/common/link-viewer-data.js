@@ -13,6 +13,7 @@
 		this.fileName = undefined;
 		this.filePath = undefined;
 		this.fileSize = undefined;
+		this.quickLinkUrl = undefined;
 		this.rateData = undefined;
 
 		for (var prop in source)
@@ -32,6 +33,7 @@
 		this.fileName = undefined;
 		this.filePath = undefined;
 		this.fileSize = undefined;
+		this.quickLinkUrl = undefined;
 		this.thumbWidth = undefined;
 		this.thumbHeight = undefined;
 		this.singlePage = undefined;
@@ -62,6 +64,7 @@
 		this.fileName = undefined;
 		this.filePath = undefined;
 		this.fileSize = undefined;
+		this.quickLinkUrl = undefined;
 
 		this.thumbImageSrc = undefined;
 		this.mp4Src = undefined;
@@ -82,6 +85,7 @@
 		this.tags = undefined;
 		this.url = undefined;
 		this.fileName = undefined;
+		this.quickLinkUrl = undefined;
 		this.youTubeId = undefined;
 		this.rateData = undefined;
 
@@ -150,6 +154,7 @@
 		this.tags = undefined;
 		this.url = undefined;
 		this.fileName = undefined;
+		this.quickLinkUrl = undefined;
 		this.isEOBrowser = undefined;
 		this.forceDownload = undefined;
 		this.forceOpen = undefined;

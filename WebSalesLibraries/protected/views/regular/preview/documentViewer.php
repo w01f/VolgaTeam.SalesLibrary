@@ -134,7 +134,8 @@
 					<? endif; ?>
 				</div>
 				<? if ($data->totalViews > 0): ?>
-					<div class="col col-xs-2 <? echo !$data->config->enableRating ? 'col-xs-offset-2 ' : ''; ?>text-center">
+					<div
+						class="col col-xs-2 <? echo !$data->config->enableRating ? 'col-xs-offset-2 ' : ''; ?>text-center">
 						<div class="text-label">Views: <? echo $data->totalViews; ?></div>
 					</div>
 				<? endif; ?>
@@ -145,14 +146,36 @@
 						        data-log-action="Preview Page"></select>
 					<? endif; ?>
 				</div>
+				<?
+					$offsetApplied = false;
+					$initialButtonsOffset = 1;
+					if (!isset($data->quickLinkUrl))
+						$initialButtonsOffset++;
+					if (!$data->config->allowPdf)
+						$initialButtonsOffset++;
+
+				?>
+				<? if (isset($data->quickLinkUrl)): ?>
+					<div
+						class="col col-xs-1 <? echo !$offsetApplied ? ('col-xs-offset-' . $initialButtonsOffset . ' ') : '';
+							$offsetApplied = true; ?>text-center">
+						<div class="text-button log-action open-quick-link" data-log-action="Open Quick Link">
+							<span><? echo $data->quickLinkTitle; ?></span>
+						</div>
+					</div>
+				<? endif; ?>
 				<? if ($data->config->allowPdf): ?>
-					<div class="col col-xs-1 col-xs-offset-2 text-center">
+					<div
+						class="col col-xs-1 <? echo !$offsetApplied ? ('col-xs-offset-' . $initialButtonsOffset . ' ') : '';
+							$offsetApplied = true; ?>text-center">
 						<div class="text-button log-action open-pdf" data-log-action="Open PDF">
 							<span>PDF</span>
 						</div>
 					</div>
 				<? endif; ?>
-				<div class="col col-xs-1<? if (!$data->config->allowPdf): ?> col-xs-offset-3<? endif; ?> text-center">
+				<div
+					class="col col-xs-1 <? echo !$offsetApplied ? ('col-xs-offset-' . $initialButtonsOffset . ' ') : '';
+						$offsetApplied = true; ?>text-center">
 					<div class="text-button log-action open-gallery-modal" data-log-action="Preview Modal">
 						<span>75%</span>
 					</div>

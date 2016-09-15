@@ -13,6 +13,9 @@
 		public $url;
 		public $linkTitle;
 
+		public $quickLinkUrl;
+		public $quickLinkTitle;
+
 		/**
 		 * @var BasePreviewConfig config
 		 */
@@ -43,6 +46,9 @@
 			$this->format = $link->originalFormat;
 			$this->tags = $link->getTagsString();
 			$this->url = str_replace('SalesLibraries/SalesLibraries', 'SalesLibraries', $link->fileLink);
+
+			$this->quickLinkUrl = isset($link->extendedProperties->quickLinkUrl) ? $link->extendedProperties->quickLinkUrl : null;
+			$this->quickLinkTitle = isset($link->extendedProperties->quickLinkTitle) ? $link->extendedProperties->quickLinkTitle : null;
 
 			$userId = UserIdentity::getCurrentUserId();
 			$this->rateData = LinkRateRecord::getRateData($link->id, $userId);

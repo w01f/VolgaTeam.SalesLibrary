@@ -68,6 +68,7 @@
 
 						updateImageViewer();
 
+						dialogContent.find('.open-quick-link').off('click.preview').on('click.preview', openQuickLink);
 						dialogContent.find('.open-pdf').off('click.preview').on('click.preview', openPdf);
 						dialogContent.find('.open-gallery-modal').off('click.preview').on('click.preview', showGalleryModal);
 						dialogContent.find('.open-gallery-fullscreen').off('click.preview').on('click.preview', showGalleryFullScreen);
@@ -143,6 +144,11 @@
 		var openPdf = function ()
 		{
 			$.SalesPortal.LinkManager.openFile(viewerData.documentInPdf.link);
+		};
+
+		var openQuickLink = function ()
+		{
+			$.SalesPortal.LinkManager.openFile(viewerData.quickLinkUrl);
 		};
 
 		var addToQuickSite = function ()

@@ -55,6 +55,8 @@
 						dialogContent.find('.add-quicksite').off('click.preview').on('click.preview', addToQuickSite);
 						dialogContent.find('.add-favorites').off('click.preview').on('click.preview', addToFavorites);
 
+						dialogContent.find('.open-quick-link').off('click.preview').on('click.preview', openQuickLink);
+
 						dialogContent.find('.action-container .action').off('click.preview').on('click.preview', processSaveAction);
 
 						new $.SalesPortal.RateManager().init(
@@ -94,6 +96,11 @@
 				viewerData.name,
 				viewerData.fileName,
 				viewerData.format);
+		};
+
+		var openQuickLink = function ()
+		{
+			$.SalesPortal.LinkManager.openFile(viewerData.quickLinkUrl);
 		};
 
 		var processSaveAction = function ()
