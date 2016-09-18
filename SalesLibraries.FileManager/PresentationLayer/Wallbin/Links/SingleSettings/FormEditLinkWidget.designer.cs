@@ -275,6 +275,7 @@
 			this.pnSearch.Name = "pnSearch";
 			this.pnSearch.Size = new System.Drawing.Size(362, 33);
 			this.pnSearch.TabIndex = 19;
+			this.pnSearch.Click += new System.EventHandler(this.OnFormClick);
 			// 
 			// checkEditInvert
 			// 
@@ -313,6 +314,7 @@
 			this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
 			this.Text = "Widget Gallery ({0})";
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormEditLinkSettings_FormClosing);
+			this.Click += new System.EventHandler(this.OnFormClick);
 			((System.ComponentModel.ISupportInitialize)(this.pbCustomWidget)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControlWidgets)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pbAutoWidget)).EndInit();

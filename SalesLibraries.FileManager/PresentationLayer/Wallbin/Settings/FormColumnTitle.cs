@@ -104,7 +104,12 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			_columnTitle.Settings.HeaderFont = (Font)buttonEditFont.Tag;
 
 			_widgetControl?.SaveData();
+			if (_bannerControl == null && _columnTitle.Widget.Enabled)
+				_columnTitle.Banner.Enable = false;
+
 			_bannerControl?.SaveData();
+			if (_widgetControl == null && _columnTitle.Banner.Enable)
+				_columnTitle.Widget.WidgetType = WidgetType.NoWidget;
 
 			_columnTitle.Page.ApplyColumnTitleSettings(_columnTitle);
 		}
@@ -122,13 +127,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 				_widgetControl.StateChanged += (o, e) =>
 				{
 					if (e.IsChecked)
-					{
-						if (_bannerControl != null)
-							_bannerControl.ChangeState(false);
-						else
-							_columnTitle.Banner.Enable = false;
-					}
+						_bannerControl?.ChangeState(false);
 				};
+				_widgetControl.ControlClicked += OnFormClick;
 				Cursor = Cursors.Default;
 			}
 			else if (pageArgs.Page == xtraTabPageBanner && _bannerControl == null)
@@ -142,13 +143,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 				_bannerControl.StateChanged += (o, e) =>
 				{
 					if (e.IsChecked)
-					{
-						if (_widgetControl != null)
-							_widgetControl.ChangeState(false);
-						else
-							_columnTitle.Widget.WidgetType = _columnTitle.Widget.DefaultWidgetType;
-					}
+						_widgetControl?.ChangeState(false);
 				};
+				_bannerControl.ControlClicked += OnFormClick;
 				Cursor = Cursors.Default;
 			}
 		}
@@ -214,6 +211,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 		{
 			if (DialogResult != DialogResult.OK) return;
 			SaveData();
+		}
+
+		private void OnFormClick(object sender, EventArgs e)
+		{
+			buttonXSave.Focus();
 		}
 	}
 }

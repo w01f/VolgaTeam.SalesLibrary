@@ -221,5 +221,10 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			if (e.KeyCode == Keys.Enter)
 				OnSearchButtonClick(sender, EventArgs.Empty);
 		}
+
+		private void OnFormClick(object sender, EventArgs e)
+		{
+			buttonXOK.Focus();
+		}
 	}
 }

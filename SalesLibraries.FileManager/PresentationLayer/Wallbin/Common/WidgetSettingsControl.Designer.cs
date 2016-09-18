@@ -128,6 +128,7 @@
 			this.pnSearch.Name = "pnSearch";
 			this.pnSearch.Size = new System.Drawing.Size(362, 36);
 			this.pnSearch.TabIndex = 21;
+			this.pnSearch.Click += new System.EventHandler(this.OnFormClick);
 			// 
 			// labelControlSearchTitle
 			// 
@@ -217,6 +218,7 @@
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.Name = "WidgetSettingsControl";
 			this.Size = new System.Drawing.Size(920, 542);
+			this.Click += new System.EventHandler(this.OnFormClick);
 			((System.ComponentModel.ISupportInitialize)(this.pbCustomWidget)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControlWidgets)).EndInit();
 			this.pnSearch.ResumeLayout(false);

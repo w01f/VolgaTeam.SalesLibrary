@@ -72,5 +72,10 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Settings
 			if (e.KeyCode == Keys.Enter)
 				OnSearchButtonClick(sender, EventArgs.Empty);
 		}
+
+		private void OnFormClick(object sender, EventArgs e)
+		{
+			buttonXOK.Focus();
+		}
 	}
 }

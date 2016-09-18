@@ -225,6 +225,7 @@
 			this.Controls.Add(this.buttonXOK);
 			this.DoubleBuffered = true;
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.ForeColor = System.Drawing.Color.Black;
 			this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
@@ -233,6 +234,7 @@
 			this.ShowInTaskbar = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Widget Gallery";
+			this.Click += new System.EventHandler(this.OnFormClick);
 			((System.ComponentModel.ISupportInitialize)(this.pbSelectedWidget)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControlWidgets)).EndInit();
 			this.pnSearch.ResumeLayout(false);

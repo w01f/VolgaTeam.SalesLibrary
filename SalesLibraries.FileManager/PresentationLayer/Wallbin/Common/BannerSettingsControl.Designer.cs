@@ -294,6 +294,7 @@
 			this.pnControls.Name = "pnControls";
 			this.pnControls.Size = new System.Drawing.Size(922, 608);
 			this.pnControls.TabIndex = 47;
+			this.pnControls.Click += new System.EventHandler(this.OnFormClick);
 			// 
 			// checkEditInvert
 			// 
@@ -319,6 +320,7 @@
 			this.pnSearch.Name = "pnSearch";
 			this.pnSearch.Size = new System.Drawing.Size(362, 33);
 			this.pnSearch.TabIndex = 47;
+			this.pnSearch.Click += new System.EventHandler(this.OnFormClick);
 			// 
 			// labelControlSearchTitle
 			// 
@@ -372,6 +374,7 @@
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.Name = "BannerSettingsControl";
 			this.Size = new System.Drawing.Size(916, 610);
+			this.Click += new System.EventHandler(this.OnFormClick);
 			((System.ComponentModel.ISupportInitialize)(this.pbSelectedBanner.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.colorEditBannerTextColor.Properties)).EndInit();

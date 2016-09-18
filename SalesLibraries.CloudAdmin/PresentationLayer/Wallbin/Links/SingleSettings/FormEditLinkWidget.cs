@@ -181,5 +181,10 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 			if (e.KeyCode == Keys.Enter)
 				OnSearchButtonClick(sender, EventArgs.Empty);
 		}
+
+		private void OnFormClick(object sender, EventArgs e)
+		{
+			buttonXOK.Focus();
+		}
 	}
 }

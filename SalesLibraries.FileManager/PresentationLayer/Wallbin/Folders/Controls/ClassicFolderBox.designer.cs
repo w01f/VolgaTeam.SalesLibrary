@@ -61,6 +61,7 @@
 			this.barButtonItemLinkPropertiesTags = new DevExpress.XtraBars.BarButtonItem();
 			this.barButtonItemLinkPropertiesWidget = new DevExpress.XtraBars.BarButtonItem();
 			this.barButtonItemLinkPropertiesBanner = new DevExpress.XtraBars.BarButtonItem();
+			this.barButtonItemLinkPropertiesResetSettings = new DevExpress.XtraBars.BarButtonItem();
 			this.barSubItemLinkPropertiesAdvanced = new DevExpress.XtraBars.BarSubItem();
 			this.barButtonItemLinkPropertiesFileLocation = new DevExpress.XtraBars.BarButtonItem();
 			this.barButtonItemLinkPropertiesRefreshPreview = new DevExpress.XtraBars.BarButtonItem();
@@ -72,7 +73,7 @@
 			this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
 			this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
 			this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
-			this.barButtonItemLinkPropertiesResetSettings = new DevExpress.XtraBars.BarButtonItem();
+			this.toolStripMenuItemFolderSeLinkTextWordWrap = new System.Windows.Forms.ToolStripMenuItem();
 			this.pnHeader.SuspendLayout();
 			this.pnHeaderBorder.SuspendLayout();
 			this.pnBorders.SuspendLayout();
@@ -145,9 +146,10 @@
             this.toolStripMenuItemFolderManageWidgetsAndBanners,
             this.toolStripMenuItemFolderDeleteSecurity,
             this.toolStripMenuItemFolderDeleteTags,
-            this.toolStripMenuItemFolderSort});
+            this.toolStripMenuItemFolderSort,
+            this.toolStripMenuItemFolderSeLinkTextWordWrap});
 			this.contextMenuStripFolderProperties.Name = "contextMenuStripLinkProperties";
-			this.contextMenuStripFolderProperties.Size = new System.Drawing.Size(349, 214);
+			this.contextMenuStripFolderProperties.Size = new System.Drawing.Size(349, 258);
 			// 
 			// toolStripMenuItemFolderSettings
 			// 
@@ -320,6 +322,13 @@
 			this.barButtonItemLinkPropertiesBanner.Name = "barButtonItemLinkPropertiesBanner";
 			this.barButtonItemLinkPropertiesBanner.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemLinkPropertiesBanner_ItemClick);
 			// 
+			// barButtonItemLinkPropertiesResetSettings
+			// 
+			this.barButtonItemLinkPropertiesResetSettings.Caption = "Reset this Link";
+			this.barButtonItemLinkPropertiesResetSettings.Id = 33;
+			this.barButtonItemLinkPropertiesResetSettings.Name = "barButtonItemLinkPropertiesResetSettings";
+			this.barButtonItemLinkPropertiesResetSettings.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemLinkPropertiesResetSettings_ItemClick);
+			// 
 			// barSubItemLinkPropertiesAdvanced
 			// 
 			this.barSubItemLinkPropertiesAdvanced.Caption = "Advanced Options";
@@ -420,12 +429,12 @@
 			this.barDockControlRight.Location = new System.Drawing.Point(311, 0);
 			this.barDockControlRight.Size = new System.Drawing.Size(0, 308);
 			// 
-			// barButtonItemLinkPropertiesResetSettings
+			// toolStripMenuItemFolderSeLinkTextWordWrap
 			// 
-			this.barButtonItemLinkPropertiesResetSettings.Caption = "Reset this Link";
-			this.barButtonItemLinkPropertiesResetSettings.Id = 33;
-			this.barButtonItemLinkPropertiesResetSettings.Name = "barButtonItemLinkPropertiesResetSettings";
-			this.barButtonItemLinkPropertiesResetSettings.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemLinkPropertiesResetSettings_ItemClick);
+			this.toolStripMenuItemFolderSeLinkTextWordWrap.Name = "toolStripMenuItemFolderSeLinkTextWordWrap";
+			this.toolStripMenuItemFolderSeLinkTextWordWrap.Size = new System.Drawing.Size(348, 22);
+			this.toolStripMenuItemFolderSeLinkTextWordWrap.Text = "Make all Links RESPONSIVE";
+			this.toolStripMenuItemFolderSeLinkTextWordWrap.Click += new System.EventHandler(this.toolStripMenuItemFolderSetLinkTextWordWrap_Click);
 			// 
 			// ClassicFolderBox
 			// 
@@ -497,5 +506,6 @@
 		private DevExpress.XtraBars.BarButtonItem barButtonItemLinkPropertiesCut;
 		private DevExpress.XtraBars.BarButtonItem barButtonItemLinkPropertiesPaste;
 		private DevExpress.XtraBars.BarButtonItem barButtonItemLinkPropertiesResetSettings;
+		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemFolderSeLinkTextWordWrap;
 	}
 }

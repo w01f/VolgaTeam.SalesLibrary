@@ -218,8 +218,15 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders.Controls
 			var selectedRow = SelectedLinkRow;
 			if (selectedRow == null) return;
 			if (SettingsEditorFactory.Run(selectedRow.Source, settingsType) != DialogResult.OK) return;
-			selectedRow.Info.Recalc();
-			grFiles.Refresh();
+
+			grFiles.SuspendLayout();
+			_outsideChangesInProgress = true;
+			foreach (var linkRow in grFiles.Rows.OfType<LinkRow>())
+				linkRow.Info.Recalc();
+			_outsideChangesInProgress = false;
+			UpdateGridSize();
+			grFiles.ResumeLayout(true);
+
 			DataChanged?.Invoke(this, EventArgs.Empty);
 		}
 
@@ -357,6 +364,13 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders.Controls
 			var rows = grFiles.Rows.OfType<LinkRow>().ToList();
 			grFiles.Rows.Clear();
 			grFiles.Rows.AddRange(rows.OrderBy(linkRow => linkRow.Source.Order).ToArray());
+			DataChanged?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void SetLinkTextWordWrap()
+		{
+			DataSource.AllLinks.SetLinkTextWordWrap();
+			UpdateContent(true);
 			DataChanged?.Invoke(this, EventArgs.Empty);
 		}
 
@@ -1179,6 +1193,11 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders.Controls
 		private void toolStripMenuItemFolderSort_Click(object sender, EventArgs e)
 		{
 			SortLinkByName();
+		}
+
+		private void toolStripMenuItemFolderSetLinkTextWordWrap_Click(object sender, EventArgs e)
+		{
+			SetLinkTextWordWrap();
 		}
 		#endregion
 

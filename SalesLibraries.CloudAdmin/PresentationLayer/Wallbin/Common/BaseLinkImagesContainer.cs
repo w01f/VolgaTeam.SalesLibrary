@@ -40,7 +40,6 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Common
 			imageListView.ItemDoubleClick += OnGalleryItemDoubleClick;
 			imageListView.ItemHover += OnGalleryItemHover;
 			imageListView.MouseDown += OnGalleryMouseDown;
-			imageListView.MouseMove += OnGalleryMouseMove;
 			Disposed += OnDisposed;
 		}
 
@@ -57,7 +56,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Common
 
 		public void Init()
 		{
-			if(_initialized) return;
+			if (_initialized) return;
 			Cursor = Cursors.WaitCursor;
 			Application.DoEvents();
 			InitPopupMenu();
@@ -101,15 +100,10 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Common
 		private void OnGalleryItemHover(object sender, ItemHoverEventArgs e)
 		{
 			toolTip.RemoveAll();
-			var sourceItem = e.Item != null ? e.Item.Tag as LinkImageSource : null;
+			var sourceItem = e.Item?.Tag as LinkImageSource;
 			if (sourceItem == null) return;
 			var toolTipText = sourceItem.FileName;
 			toolTip.SetToolTip(imageListView, toolTipText);
-		}
-
-		private void OnGalleryMouseMove(object sender, MouseEventArgs e)
-		{
-			imageListView.Focus();
 		}
 
 		private void OnGalleryMouseDown(object sender, MouseEventArgs e)

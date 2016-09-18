@@ -1,33 +1,33 @@
 ﻿namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Common
 {
 	partial class WidgetSettingsControl
-    {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
+	{
+		/// <summary>
+		/// Required designer variable.
+		/// </summary>
+		private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+		/// <summary>
+		/// Clean up any resources being used.
+		/// </summary>
+		/// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+		protected override void Dispose(bool disposing)
+		{
+			if (disposing && (components != null))
+			{
+				components.Dispose();
+			}
+			base.Dispose(disposing);
+		}
 
-        #region Windows Form Designer generated code
+		#region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent()
-        {
+		/// <summary>
+		/// Required method for Designer support - do not modify
+		/// the contents of this method with the code editor.
+		/// </summary>
+		private void InitializeComponent()
+		{
 			this.components = new System.ComponentModel.Container();
 			this.pbCustomWidget = new System.Windows.Forms.PictureBox();
 			this.xtraTabControlWidgets = new DevExpress.XtraTab.XtraTabControl();
@@ -62,9 +62,9 @@
 			// 
 			// xtraTabControlWidgets
 			// 
-			this.xtraTabControlWidgets.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			this.xtraTabControlWidgets.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+			| System.Windows.Forms.AnchorStyles.Left)
+			| System.Windows.Forms.AnchorStyles.Right)));
 			this.xtraTabControlWidgets.Appearance.BackColor = System.Drawing.Color.Transparent;
 			this.xtraTabControlWidgets.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.xtraTabControlWidgets.Appearance.Options.UseBackColor = true;
@@ -128,6 +128,7 @@
 			this.pnSearch.Name = "pnSearch";
 			this.pnSearch.Size = new System.Drawing.Size(362, 36);
 			this.pnSearch.TabIndex = 21;
+			this.pnSearch.Click += new System.EventHandler(this.OnFormClick);
 			// 
 			// labelControlSearchTitle
 			// 
@@ -217,6 +218,7 @@
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.Name = "WidgetSettingsControl";
 			this.Size = new System.Drawing.Size(920, 542);
+			this.Click += new System.EventHandler(this.OnFormClick);
 			((System.ComponentModel.ISupportInitialize)(this.pbCustomWidget)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControlWidgets)).EndInit();
 			this.pnSearch.ResumeLayout(false);
@@ -227,9 +229,9 @@
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
-        }
+		}
 
-        #endregion
+		#endregion
 
 		private System.Windows.Forms.PictureBox pbCustomWidget;
 		private DevExpress.XtraTab.XtraTabControl xtraTabControlWidgets;

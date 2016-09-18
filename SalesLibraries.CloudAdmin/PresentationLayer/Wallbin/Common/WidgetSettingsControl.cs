@@ -17,6 +17,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Common
 
 		public event EventHandler<CheckedChangedEventArgs> StateChanged;
 		public event EventHandler<EventArgs> DoubleClicked;
+		public event EventHandler<EventArgs> ControlClicked;
 
 		public WidgetSettingsControl(WidgetSettings data)
 		{
@@ -52,10 +53,9 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Common
 					return (XtraTabPage)tabPage;
 				}).ToArray()
 			);
-			xtraTabControlWidgets.SelectedPageChanging += (o, e) =>
+			xtraTabControlWidgets.SelectedPageChanged += (o, e) =>
 			{
-				if (e.Page != null && !(e.Page is SearchResultsImagesContainer))
-					((BaseLinkImagesContainer)e.Page).Init();
+				((BaseLinkImagesContainer)e.Page).Init();
 			};
 			((BaseLinkImagesContainer)xtraTabControlWidgets.SelectedTabPage).Init();
 
@@ -105,8 +105,8 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Common
 			pnSearch.Enabled = radioButtonWidgetTypeCustom.Checked;
 			checkEditInvert.Enabled = radioButtonWidgetTypeCustom.Checked;
 			xtraTabControlWidgets.Enabled = radioButtonWidgetTypeCustom.Checked;
-			if (!_loading && StateChanged != null)
-				StateChanged(this, new CheckedChangedEventArgs(radioButtonWidgetTypeCustom.Checked));
+			if (!_loading)
+				StateChanged?.Invoke(this, new CheckedChangedEventArgs(radioButtonWidgetTypeCustom.Checked));
 		}
 
 		private void OnSelectedWidgetChanged(object sender, LinkImageEventArgs e)
@@ -135,6 +135,11 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Common
 		{
 			if (e.KeyCode == Keys.Enter)
 				OnSearchButtonClick(sender, EventArgs.Empty);
+		}
+
+		private void OnFormClick(Object sender, EventArgs e)
+		{
+			ControlClicked?.Invoke(sender, e);
 		}
 	}
 }

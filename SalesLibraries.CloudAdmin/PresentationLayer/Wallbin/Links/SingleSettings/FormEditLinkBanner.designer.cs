@@ -326,6 +326,7 @@
 			this.pnControls.Name = "pnControls";
 			this.pnControls.Size = new System.Drawing.Size(922, 608);
 			this.pnControls.TabIndex = 47;
+			this.pnControls.Click += new System.EventHandler(this.OnFormClick);
 			// 
 			// checkEditInvert
 			// 
@@ -351,10 +352,12 @@
 			this.pnSearch.Name = "pnSearch";
 			this.pnSearch.Size = new System.Drawing.Size(362, 33);
 			this.pnSearch.TabIndex = 47;
+			this.pnSearch.Click += new System.EventHandler(this.OnFormClick);
 			// 
 			// labelControlSearchTitle
 			// 
 			this.labelControlSearchTitle.AllowHtmlString = true;
+			this.labelControlSearchTitle.Appearance.BackColor = System.Drawing.Color.White;
 			this.labelControlSearchTitle.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.labelControlSearchTitle.AppearanceDisabled.ForeColor = System.Drawing.Color.Gray;
 			this.labelControlSearchTitle.Location = new System.Drawing.Point(7, 9);
@@ -410,6 +413,7 @@
 			this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
 			this.Text = "Banner Gallery ({0})";
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormEditLinkSettings_FormClosing);
+			this.Click += new System.EventHandler(this.OnFormClick);
 			((System.ComponentModel.ISupportInitialize)(this.pbSelectedBanner.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.colorEditBannerTextColor.Properties)).EndInit();

@@ -303,7 +303,7 @@
 			this.xtraTabPageWidget.Appearance.PageClient.ForeColor = System.Drawing.Color.Black;
 			this.xtraTabPageWidget.Appearance.PageClient.Options.UseForeColor = true;
 			this.xtraTabPageWidget.Name = "xtraTabPageWidget";
-			this.xtraTabPageWidget.Size = new System.Drawing.Size(778, 542);
+			this.xtraTabPageWidget.Size = new System.Drawing.Size(836, 542);
 			this.xtraTabPageWidget.Text = "Widget";
 			// 
 			// xtraTabPageBanner
@@ -311,7 +311,7 @@
 			this.xtraTabPageBanner.Appearance.PageClient.ForeColor = System.Drawing.Color.Black;
 			this.xtraTabPageBanner.Appearance.PageClient.Options.UseForeColor = true;
 			this.xtraTabPageBanner.Name = "xtraTabPageBanner";
-			this.xtraTabPageBanner.Size = new System.Drawing.Size(778, 542);
+			this.xtraTabPageBanner.Size = new System.Drawing.Size(836, 542);
 			this.xtraTabPageBanner.Text = "Banner";
 			// 
 			// ckApplyForAllColumnTitles
@@ -338,6 +338,7 @@
 			this.pnBottom.Name = "pnBottom";
 			this.pnBottom.Size = new System.Drawing.Size(842, 55);
 			this.pnBottom.TabIndex = 26;
+			this.pnBottom.Click += new System.EventHandler(this.OnFormClick);
 			// 
 			// buttonXSave
 			// 
@@ -376,6 +377,7 @@
 			this.pnTop.Name = "pnTop";
 			this.pnTop.Size = new System.Drawing.Size(842, 34);
 			this.pnTop.TabIndex = 27;
+			this.pnTop.Click += new System.EventHandler(this.OnFormClick);
 			// 
 			// laLocation
 			// 
@@ -406,6 +408,7 @@
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Column Title Settings";
 			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormWindowSettings_FormClosed);
+			this.Click += new System.EventHandler(this.OnFormClick);
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControlWindowProperties)).EndInit();
 			this.xtraTabControlWindowProperties.ResumeLayout(false);
 			this.xtraTabPageAppearance.ResumeLayout(false);

@@ -1,33 +1,33 @@
 ﻿namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Common
 {
 	partial class BannerSettingsControl
-    {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
+	{
+		/// <summary>
+		/// Required designer variable.
+		/// </summary>
+		private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+		/// <summary>
+		/// Clean up any resources being used.
+		/// </summary>
+		/// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+		protected override void Dispose(bool disposing)
+		{
+			if (disposing && (components != null))
+			{
+				components.Dispose();
+			}
+			base.Dispose(disposing);
+		}
 
-        #region Windows Form Designer generated code
+		#region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent()
-        {
+		/// <summary>
+		/// Required method for Designer support - do not modify
+		/// the contents of this method with the code editor.
+		/// </summary>
+		private void InitializeComponent()
+		{
 			this.components = new System.ComponentModel.Container();
 			this.checkBoxEnableBanner = new System.Windows.Forms.CheckBox();
 			this.pbSelectedBanner = new DevExpress.XtraEditors.PictureEdit();
@@ -171,7 +171,7 @@
 			this.colorEditBannerTextColor.Properties.AppearanceDisabled.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
 			this.colorEditBannerTextColor.Properties.AppearanceDisabled.Options.UseBackColor = true;
 			this.colorEditBannerTextColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+			new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
 			this.colorEditBannerTextColor.Properties.ColorAlignment = DevExpress.Utils.HorzAlignment.Center;
 			this.colorEditBannerTextColor.Properties.ShowSystemColors = false;
 			this.colorEditBannerTextColor.Size = new System.Drawing.Size(105, 22);
@@ -192,7 +192,7 @@
 			this.buttonEditBannerTextFont.Properties.AppearanceDisabled.ForeColor = System.Drawing.Color.Gray;
 			this.buttonEditBannerTextFont.Properties.AppearanceDisabled.Options.UseForeColor = true;
 			this.buttonEditBannerTextFont.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton()});
+			new DevExpress.XtraEditors.Controls.EditorButton()});
 			this.buttonEditBannerTextFont.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
 			this.buttonEditBannerTextFont.Size = new System.Drawing.Size(234, 22);
 			this.buttonEditBannerTextFont.StyleController = this.styleController;
@@ -203,8 +203,8 @@
 			// 
 			// memoEditBannerText
 			// 
-			this.memoEditBannerText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			this.memoEditBannerText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+			| System.Windows.Forms.AnchorStyles.Right)));
 			this.memoEditBannerText.Enabled = false;
 			this.memoEditBannerText.Location = new System.Drawing.Point(16, 546);
 			this.memoEditBannerText.Name = "memoEditBannerText";
@@ -247,9 +247,9 @@
 			// 
 			// xtraTabControlBanners
 			// 
-			this.xtraTabControlBanners.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			this.xtraTabControlBanners.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+			| System.Windows.Forms.AnchorStyles.Left)
+			| System.Windows.Forms.AnchorStyles.Right)));
 			this.xtraTabControlBanners.Appearance.BackColor = System.Drawing.Color.Transparent;
 			this.xtraTabControlBanners.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.xtraTabControlBanners.Appearance.Options.UseBackColor = true;
@@ -271,9 +271,9 @@
 			// 
 			// pnControls
 			// 
-			this.pnControls.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			this.pnControls.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+			| System.Windows.Forms.AnchorStyles.Left)
+			| System.Windows.Forms.AnchorStyles.Right)));
 			this.pnControls.BackColor = System.Drawing.Color.Transparent;
 			this.pnControls.Controls.Add(this.checkEditInvert);
 			this.pnControls.Controls.Add(this.pnSearch);
@@ -294,6 +294,7 @@
 			this.pnControls.Name = "pnControls";
 			this.pnControls.Size = new System.Drawing.Size(922, 608);
 			this.pnControls.TabIndex = 47;
+			this.pnControls.Click += new System.EventHandler(this.OnFormClick);
 			// 
 			// checkEditInvert
 			// 
@@ -319,6 +320,7 @@
 			this.pnSearch.Name = "pnSearch";
 			this.pnSearch.Size = new System.Drawing.Size(362, 33);
 			this.pnSearch.TabIndex = 47;
+			this.pnSearch.Click += new System.EventHandler(this.OnFormClick);
 			// 
 			// labelControlSearchTitle
 			// 
@@ -372,6 +374,7 @@
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.Name = "BannerSettingsControl";
 			this.Size = new System.Drawing.Size(916, 610);
+			this.Click += new System.EventHandler(this.OnFormClick);
 			((System.ComponentModel.ISupportInitialize)(this.pbSelectedBanner.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.colorEditBannerTextColor.Properties)).EndInit();
@@ -387,9 +390,9 @@
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
-        }
+		}
 
-        #endregion
+		#endregion
 
 		private System.Windows.Forms.CheckBox checkBoxEnableBanner;
 		private DevExpress.XtraEditors.PictureEdit pbSelectedBanner;

@@ -22,6 +22,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Common
 
 		public event EventHandler<CheckedChangedEventArgs> StateChanged;
 		public event EventHandler<EventArgs> DoubleClicked;
+		public event EventHandler<EventArgs> ControlClicked;
 
 		public BannerSettingsControl(IBannerSettingsHolder bannerHolder)
 		{
@@ -66,10 +67,9 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Common
 					tabPage.OnImageDoubleClick += OnImageDoubleClick;
 					return (XtraTabPage)tabPage;
 				}).ToArray());
-			xtraTabControlBanners.SelectedPageChanging += (o, e) =>
+			xtraTabControlBanners.SelectedPageChanged += (o, e) =>
 			{
-				if (e.Page != null && !(e.Page is SearchResultsImagesContainer))
-					((BaseLinkImagesContainer)e.Page).Init();
+				((BaseLinkImagesContainer)e.Page).Init();
 			};
 			((BaseLinkImagesContainer)xtraTabControlBanners.SelectedTabPage).Init();
 
@@ -99,7 +99,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Common
 			buttonEditBannerTextFont.Tag = _bannerHolder.Banner.Font;
 			buttonEditBannerTextFont.EditValue = Utils.FontToString(_bannerHolder.Banner.Font);
 			colorEditBannerTextColor.Color = _bannerHolder.Banner.ForeColor;
-			memoEditBannerText.EditValue = !String.IsNullOrEmpty(_bannerHolder.Banner.Text)?_bannerHolder.Banner.Text: null;
+			memoEditBannerText.EditValue = !String.IsNullOrEmpty(_bannerHolder.Banner.Text) ? _bannerHolder.Banner.Text : null;
 			memoEditBannerText.Font = _bannerHolder.Banner.Font;
 			memoEditBannerText.Properties.Appearance.Font = _bannerHolder.Banner.Font;
 			memoEditBannerText.Properties.AppearanceDisabled.Font = _bannerHolder.Banner.Font;
@@ -208,6 +208,11 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Common
 		{
 			if (e.KeyCode == Keys.Enter)
 				OnSearchButtonClick(sender, EventArgs.Empty);
+		}
+
+		private void OnFormClick(object sender, EventArgs e)
+		{
+			ControlClicked?.Invoke(sender, e);
 		}
 	}
 }

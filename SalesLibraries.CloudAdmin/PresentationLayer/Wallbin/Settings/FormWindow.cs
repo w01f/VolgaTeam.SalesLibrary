@@ -155,10 +155,15 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Settings
 				_folder.Page.Library.Settings.ApplyAppearanceForAllWindows = ckApllyForAllWindowsAppearance.Checked;
 
 			_widgetControl?.SaveData();
+			if (_bannerControl == null && _folder.Widget.Enabled)
+				_folder.Banner.Enable = false;
+
 			if (_formParameters.Type == WindowPropertiesType.None)
 				_folder.Page.Library.Settings.ApplyWidgetForAllWindows = ckApllyForAllWindowsWidget.Checked;
 
 			_bannerControl?.SaveData();
+			if (_widgetControl == null && _folder.Banner.Enable)
+				_folder.Widget.WidgetType = WidgetType.NoWidget;
 			if (_formParameters.Type == WindowPropertiesType.None)
 				_folder.Page.Library.Settings.ApplyBannerForAllWindows = ckApllyForAllWindowsBanner.Checked;
 
@@ -186,13 +191,9 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Settings
 				_widgetControl.StateChanged += (o, e) =>
 				{
 					if (e.IsChecked)
-					{
-						if (_bannerControl != null)
-							_bannerControl.ChangeState(false);
-						else
-							_folder.Banner.Enable = false;
-					}
+						_bannerControl?.ChangeState(false);
 				};
+				_widgetControl.ControlClicked += OnFormClick;
 				pnApllyForAllWindowsWidget.Visible = _formParameters.Type == WindowPropertiesType.None;
 				ckApllyForAllWindowsWidget.Checked = _formParameters.Type == WindowPropertiesType.None && _folder.Page.Library.Settings.ApplyWidgetForAllWindows;
 				Cursor = Cursors.Default;
@@ -208,17 +209,18 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Settings
 				_bannerControl.StateChanged += (o, e) =>
 				{
 					if (e.IsChecked)
-					{
-						if (_widgetControl != null)
-							_widgetControl.ChangeState(false);
-						else
-							_folder.Widget.WidgetType = _folder.Widget.DefaultWidgetType;
-					}
+						_widgetControl?.ChangeState(false);
 				};
+				_bannerControl.ControlClicked += OnFormClick;
 				pnApllyForAllWindowsBanner.Visible = _formParameters.Type == WindowPropertiesType.None;
 				ckApllyForAllWindowsBanner.Checked = _formParameters.Type == WindowPropertiesType.None && _folder.Page.Library.Settings.ApplyBannerForAllWindows;
 				Cursor = Cursors.Default;
 			}
+		}
+
+		private void OnFormClick(object sender, EventArgs e)
+		{
+			buttonXSave.Focus();
 		}
 	}
 

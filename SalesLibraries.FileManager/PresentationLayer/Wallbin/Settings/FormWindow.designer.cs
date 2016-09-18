@@ -515,6 +515,7 @@
 			this.pnBottom.Name = "pnBottom";
 			this.pnBottom.Size = new System.Drawing.Size(564, 55);
 			this.pnBottom.TabIndex = 26;
+			this.pnBottom.Click += new System.EventHandler(this.OnFormClick);
 			// 
 			// buttonXSave
 			// 
@@ -552,6 +553,7 @@
 			this.pnTop.Name = "pnTop";
 			this.pnTop.Size = new System.Drawing.Size(564, 34);
 			this.pnTop.TabIndex = 27;
+			this.pnTop.Click += new System.EventHandler(this.OnFormClick);
 			// 
 			// laLocation
 			// 
@@ -582,6 +584,7 @@
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Window Settings";
 			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormWindowSettings_FormClosed);
+			this.Click += new System.EventHandler(this.OnFormClick);
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControlWindowProperties)).EndInit();
 			this.xtraTabControlWindowProperties.ResumeLayout(false);
 			this.xtraTabPageAppearance.ResumeLayout(false);

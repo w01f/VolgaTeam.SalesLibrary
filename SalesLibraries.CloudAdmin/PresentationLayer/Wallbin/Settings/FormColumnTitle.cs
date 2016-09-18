@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 using DevComponents.DotNetBar.Metro;
 using DevExpress.Utils;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.Persistent;
-using SalesLibraries.CloudAdmin.Controllers;
-using SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Common;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.CommonGUI.Common;
+using SalesLibraries.FileManager.Controllers;
+using SalesLibraries.FileManager.PresentationLayer.Wallbin.Common;
 
 namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Settings
 {
@@ -101,9 +102,14 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Settings
 			_columnTitle.Settings.ShowText = ckEnableText.Checked & !String.IsNullOrEmpty(_columnTitle.Settings.Text);
 			_columnTitle.Settings.ForeColor = colorEditForeColor.Color;
 			_columnTitle.Settings.HeaderFont = (Font)buttonEditFont.Tag;
-			
+
 			_widgetControl?.SaveData();
+			if (_bannerControl == null && _columnTitle.Widget.Enabled)
+				_columnTitle.Banner.Enable = false;
+
 			_bannerControl?.SaveData();
+			if (_widgetControl == null && _columnTitle.Banner.Enable)
+				_columnTitle.Widget.WidgetType = WidgetType.NoWidget;
 
 			_columnTitle.Page.ApplyColumnTitleSettings(_columnTitle);
 		}
@@ -121,13 +127,9 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Settings
 				_widgetControl.StateChanged += (o, e) =>
 				{
 					if (e.IsChecked)
-					{
-						if (_bannerControl != null)
-							_bannerControl.ChangeState(false);
-						else
-							_columnTitle.Banner.Enable = false;
-					}
+						_bannerControl?.ChangeState(false);
 				};
+				_widgetControl.ControlClicked += OnFormClick;
 				Cursor = Cursors.Default;
 			}
 			else if (pageArgs.Page == xtraTabPageBanner && _bannerControl == null)
@@ -141,13 +143,9 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Settings
 				_bannerControl.StateChanged += (o, e) =>
 				{
 					if (e.IsChecked)
-					{
-						if (_widgetControl != null)
-							_widgetControl.ChangeState(false);
-						else
-							_columnTitle.Widget.WidgetType = _columnTitle.Widget.DefaultWidgetType;
-					}
+						_widgetControl?.ChangeState(false);
 				};
+				_bannerControl.ControlClicked += OnFormClick;
 				Cursor = Cursors.Default;
 			}
 		}
@@ -213,6 +211,11 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Settings
 		{
 			if (DialogResult != DialogResult.OK) return;
 			SaveData();
+		}
+
+		private void OnFormClick(object sender, EventArgs e)
+		{
+			buttonXSave.Focus();
 		}
 	}
 }
