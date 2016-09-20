@@ -16,9 +16,9 @@ using SalesLibraries.FileManager.Controllers;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSettings
 {
-	public partial class FormEditLinkSettingsRegular : MetroForm, ILinkSettingsEditForm
+	public partial class FormEditLinkSettingsRegular : MetroForm, ILinkSetSettingsEditForm
 	{
-		private readonly BaseLibraryLink _sourceLink;
+		private readonly List<BaseLibraryLink> _sourceLinks = new List<BaseLibraryLink>();
 
 		public LinkSettingsType[] EditableSettings => new[]
 		{
@@ -29,9 +29,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			LinkSettingsType.Tags,
 		};
 
-		public FormEditLinkSettingsRegular(BaseLibraryLink sourceLink)
+		private FormEditLinkSettingsRegular()
 		{
-			_sourceLink = sourceLink;
 			InitializeComponent();
 			if ((CreateGraphics()).DpiX > 96)
 			{
@@ -42,16 +41,28 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			}
 		}
 
-		public void InitForm(LinkSettingsType settingsType)
+		public FormEditLinkSettingsRegular(BaseLibraryLink sourceLink) : this()
+		{
+			_sourceLinks.Add(sourceLink);
+		}
+
+		public FormEditLinkSettingsRegular(IEnumerable<BaseLibraryLink> sourceLinks) : this()
+		{
+			_sourceLinks.AddRange(sourceLinks);
+		}
+
+		public void InitForm<TEditControl>(LinkSettingsType settingsType) where TEditControl : ILinkSettingsEditControl
 		{
 			Width = 680;
 			Height = 630;
-			Text = _sourceLink.ToString();
+			var defaultLink = _sourceLinks.First();
+			Text = _sourceLinks.Count == 1 ? defaultLink.ToString() : "Multi-Link Settings";
 			StartPosition = FormStartPosition.CenterScreen;
 			AddOptionPages(
 				ObjectIntendHelper.GetObjectInstances(
-					typeof(ILinkSettingsEditControl),
-					EntitySettingsResolver.ExtractObjectTypeFromProxy(_sourceLink.GetType()), _sourceLink)
+						typeof(TEditControl),
+						EntitySettingsResolver.ExtractObjectTypeFromProxy(_sourceLinks.First().GetType()),
+						GetEditControlParams())
 					.OfType<ILinkSettingsEditControl>()
 					.Where(lp =>
 						lp.SettingsType == settingsType)
@@ -60,7 +71,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			var headerInfo = GetFormTitle(settingsType);
 			labelControlTitle.Text = String.Format("{0}{1}",
 				headerInfo.Logo != null ? "  " : String.Empty,
-				headerInfo.Title);
+				_sourceLinks.Count == 1 ?
+					headerInfo.Title :
+					String.Format("{0}: {1} Selected Links", headerInfo.Title, _sourceLinks.Count));
 			labelControlTitle.Appearance.Image = headerInfo.Logo;
 		}
 
@@ -99,6 +112,13 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			}
 			xtraTabControl.ShowTabHeader = optionPages.Length > 1 ? DefaultBoolean.True : DefaultBoolean.False;
 			xtraTabControl.TabPages.AddRange(optionPages.OfType<XtraTabPage>().ToArray());
+		}
+
+		private object[] GetEditControlParams()
+		{
+			return _sourceLinks.Count == 1 ?
+				new object[] { _sourceLinks.First() } :
+				new object[] { _sourceLinks };
 		}
 
 		private void SaveData()

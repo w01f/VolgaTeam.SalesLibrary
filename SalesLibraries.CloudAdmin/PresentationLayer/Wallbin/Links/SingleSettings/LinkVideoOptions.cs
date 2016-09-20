@@ -1,15 +1,19 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
+using System.IO;
+using System.Windows.Forms;
 using DevExpress.XtraTab;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
+using SalesLibraries.CloudAdmin.Controllers;
 using SalesLibraries.Common.Helpers;
 
 namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettings
 {
 	[IntendForClass(typeof(VideoLink))]
-	//public sealed partial class LinkVideoOptions : UserControl, ILinkProperties
+	//public sealed partial class LinkVideoOptions : UserControl, ILinkSettingsEditControl
 	public sealed partial class LinkVideoOptions : XtraTabPage, ILinkSettingsEditControl
 	{
 		private readonly VideoLink _data;
@@ -24,7 +28,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 		public LinkVideoOptions(VideoLink data)
 		{
 			InitializeComponent();
-			Text = "Advanced";
+			Text = "Admin";
 			_data = data;
 			if ((CreateGraphics()).DpiX > 96)
 			{
@@ -41,11 +45,41 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 		public void LoadData()
 		{
 			ckForcePreview.Checked = ((VideoLinkSettings)_data.Settings).ForcePreview;
+			if (Directory.Exists(_data.PreviewContainerPath))
+			{
+				buttonXOpenWV.Enabled = true;
+				buttonXOpenWV.Text = String.Format("!WV Folder ({0})", _data.PreviewContainerName);
+			}
+			else
+				buttonXOpenWV.Enabled = false;
 		}
 
 		public void SaveData()
 		{
 			((VideoLinkSettings)_data.Settings).ForcePreview = ckForcePreview.Checked;
+		}
+
+		private void buttonXRefreshPreview_Click(object sender, EventArgs e)
+		{
+			if (MainController.Instance.PopupMessages.ShowWarningQuestion(String.Format("Are you sure you want to refresh the server files for:{1}{0}?", _data.NameWithExtension, Environment.NewLine)) != DialogResult.Yes) return;
+
+			MainController.Instance.ProcessManager.Run("Updating Preview files...", cancelationToken =>
+			{
+				_data.ClearPreviewContainer();
+				var previewContainer = _data.GetPreviewContainer();
+				//var previewGenerator = previewContainer.GetPreviewGenerator();
+				//previewContainer.UpdateContent(previewGenerator, cancelationToken);
+			});
+			MainController.Instance.PopupMessages.ShowInfo(String.Format("{0}{1}Is now updated for the server!", _data.NameWithExtension, Environment.NewLine));
+		}
+
+		private void buttonXOpenWV_Click(object sender, EventArgs e)
+		{
+			try
+			{
+				Process.Start(_data.PreviewContainerPath);
+			}
+			catch { }
 		}
 	}
 }

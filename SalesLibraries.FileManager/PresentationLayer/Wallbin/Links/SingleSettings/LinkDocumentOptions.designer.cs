@@ -29,11 +29,18 @@
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LinkDocumentOptions));
 			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
-			this.labelControlTitle = new DevExpress.XtraEditors.LabelControl();
 			this.ckDoNotGeneratePreview = new System.Windows.Forms.CheckBox();
 			this.ckDoNotGenerateText = new System.Windows.Forms.CheckBox();
+			this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
+			this.labelControlTitleSettings = new DevExpress.XtraEditors.LabelControl();
+			this.buttonXRefreshPreview = new DevComponents.DotNetBar.ButtonX();
+			this.buttonXOpenWV = new DevComponents.DotNetBar.ButtonX();
+			this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
+			this.labelControlTitle = new DevExpress.XtraEditors.LabelControl();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// styleController
@@ -51,27 +58,16 @@
 			this.styleController.AppearanceReadOnly.Font = new System.Drawing.Font("Arial", 9.75F);
 			this.styleController.AppearanceReadOnly.Options.UseFont = true;
 			// 
-			// labelControlTitle
-			// 
-			this.labelControlTitle.Appearance.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.labelControlTitle.Appearance.ForeColor = System.Drawing.Color.DimGray;
-			this.labelControlTitle.Location = new System.Drawing.Point(8, 12);
-			this.labelControlTitle.Name = "labelControlTitle";
-			this.labelControlTitle.Size = new System.Drawing.Size(427, 17);
-			this.labelControlTitle.TabIndex = 24;
-			this.labelControlTitle.Text = "You may want to apply these special, advanced settings to the link";
-			// 
 			// ckDoNotGeneratePreview
 			// 
 			this.ckDoNotGeneratePreview.AutoSize = true;
 			this.ckDoNotGeneratePreview.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.ckDoNotGeneratePreview.ForeColor = System.Drawing.Color.Black;
-			this.ckDoNotGeneratePreview.Location = new System.Drawing.Point(8, 50);
+			this.ckDoNotGeneratePreview.Location = new System.Drawing.Point(30, 170);
 			this.ckDoNotGeneratePreview.Name = "ckDoNotGeneratePreview";
-			this.ckDoNotGeneratePreview.Size = new System.Drawing.Size(579, 20);
+			this.ckDoNotGeneratePreview.Size = new System.Drawing.Size(513, 20);
 			this.ckDoNotGeneratePreview.TabIndex = 27;
-			this.ckDoNotGeneratePreview.Text = "Do NOT Generate PNG and JPEG preview images (Always select this for Nielsen Books" +
-    ")";
+			this.ckDoNotGeneratePreview.Text = "Do NOT Generate PNG preview images (Always select this for Nielsen Books)";
 			this.ckDoNotGeneratePreview.UseVisualStyleBackColor = true;
 			// 
 			// ckDoNotGenerateText
@@ -79,23 +75,103 @@
 			this.ckDoNotGenerateText.AutoSize = true;
 			this.ckDoNotGenerateText.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.ckDoNotGenerateText.ForeColor = System.Drawing.Color.Black;
-			this.ckDoNotGenerateText.Location = new System.Drawing.Point(8, 80);
+			this.ckDoNotGenerateText.Location = new System.Drawing.Point(30, 200);
 			this.ckDoNotGenerateText.Name = "ckDoNotGenerateText";
 			this.ckDoNotGenerateText.Size = new System.Drawing.Size(452, 20);
 			this.ckDoNotGenerateText.TabIndex = 26;
 			this.ckDoNotGenerateText.Text = "Do NOT Create Full Data File (Always select this for Nielsen Books) ";
 			this.ckDoNotGenerateText.UseVisualStyleBackColor = true;
 			// 
-			// LinkSlideOptions
+			// labelControl1
+			// 
+			this.labelControl1.Location = new System.Drawing.Point(17, 263);
+			this.labelControl1.Name = "labelControl1";
+			this.labelControl1.Size = new System.Drawing.Size(121, 16);
+			this.labelControl1.StyleController = this.styleController;
+			this.labelControl1.TabIndex = 62;
+			this.labelControl1.Text = "Link Archive Folders:";
+			// 
+			// labelControlTitleSettings
+			// 
+			this.labelControlTitleSettings.Location = new System.Drawing.Point(17, 139);
+			this.labelControlTitleSettings.Name = "labelControlTitleSettings";
+			this.labelControlTitleSettings.Size = new System.Drawing.Size(140, 16);
+			this.labelControlTitleSettings.StyleController = this.styleController;
+			this.labelControlTitleSettings.TabIndex = 61;
+			this.labelControlTitleSettings.Text = "Link Archive Resources:";
+			// 
+			// buttonXRefreshPreview
+			// 
+			this.buttonXRefreshPreview.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXRefreshPreview.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonXRefreshPreview.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXRefreshPreview.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.buttonXRefreshPreview.Location = new System.Drawing.Point(78, 351);
+			this.buttonXRefreshPreview.Name = "buttonXRefreshPreview";
+			this.buttonXRefreshPreview.Size = new System.Drawing.Size(375, 30);
+			this.buttonXRefreshPreview.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXRefreshPreview.TabIndex = 60;
+			this.buttonXRefreshPreview.Text = "Refresh WV";
+			this.buttonXRefreshPreview.TextColor = System.Drawing.Color.Black;
+			this.buttonXRefreshPreview.Click += new System.EventHandler(this.buttonXRefreshPreview_Click);
+			// 
+			// buttonXOpenWV
+			// 
+			this.buttonXOpenWV.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXOpenWV.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonXOpenWV.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXOpenWV.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.buttonXOpenWV.Location = new System.Drawing.Point(78, 299);
+			this.buttonXOpenWV.Name = "buttonXOpenWV";
+			this.buttonXOpenWV.Size = new System.Drawing.Size(375, 30);
+			this.buttonXOpenWV.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXOpenWV.TabIndex = 59;
+			this.buttonXOpenWV.Text = "!WV Folder";
+			this.buttonXOpenWV.TextColor = System.Drawing.Color.Black;
+			this.buttonXOpenWV.Click += new System.EventHandler(this.buttonXOpenWV_Click);
+			// 
+			// pictureBoxLogo
+			// 
+			this.pictureBoxLogo.Image = global::SalesLibraries.FileManager.Properties.Resources.LinkSettingsPreviewOptions;
+			this.pictureBoxLogo.Location = new System.Drawing.Point(17, 18);
+			this.pictureBoxLogo.Name = "pictureBoxLogo";
+			this.pictureBoxLogo.Size = new System.Drawing.Size(64, 64);
+			this.pictureBoxLogo.TabIndex = 58;
+			this.pictureBoxLogo.TabStop = false;
+			// 
+			// labelControlTitle
+			// 
+			this.labelControlTitle.AllowHtmlString = true;
+			this.labelControlTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.labelControlTitle.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Top;
+			this.labelControlTitle.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+			this.labelControlTitle.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+			this.labelControlTitle.Location = new System.Drawing.Point(103, 18);
+			this.labelControlTitle.Name = "labelControlTitle";
+			this.labelControlTitle.Size = new System.Drawing.Size(406, 83);
+			this.labelControlTitle.StyleController = this.styleController;
+			this.labelControlTitle.TabIndex = 57;
+			this.labelControlTitle.Text = resources.GetString("labelControlTitle.Text");
+			// 
+			// LinkDocumentOptions
 			// 
 			this.BackColor = System.Drawing.Color.White;
-			this.Controls.Add(this.ckDoNotGeneratePreview);
-			this.Controls.Add(this.ckDoNotGenerateText);
+			this.Controls.Add(this.labelControl1);
+			this.Controls.Add(this.labelControlTitleSettings);
+			this.Controls.Add(this.buttonXRefreshPreview);
+			this.Controls.Add(this.buttonXOpenWV);
+			this.Controls.Add(this.pictureBoxLogo);
 			this.Controls.Add(this.labelControlTitle);
+			this.Controls.Add(this.ckDoNotGenerateText);
+			this.Controls.Add(this.ckDoNotGeneratePreview);
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.Name = "LinkSlideOptions";
+			this.Name = "LinkDocumentOptions";
 			this.Size = new System.Drawing.Size(531, 541);
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -104,8 +180,13 @@
 		#endregion
 
 		private DevExpress.XtraEditors.StyleController styleController;
-		private DevExpress.XtraEditors.LabelControl labelControlTitle;
 		public System.Windows.Forms.CheckBox ckDoNotGeneratePreview;
 		public System.Windows.Forms.CheckBox ckDoNotGenerateText;
+		private DevExpress.XtraEditors.LabelControl labelControl1;
+		private DevExpress.XtraEditors.LabelControl labelControlTitleSettings;
+		public DevComponents.DotNetBar.ButtonX buttonXRefreshPreview;
+		public DevComponents.DotNetBar.ButtonX buttonXOpenWV;
+		private System.Windows.Forms.PictureBox pictureBoxLogo;
+		private DevExpress.XtraEditors.LabelControl labelControlTitle;
 	}
 }

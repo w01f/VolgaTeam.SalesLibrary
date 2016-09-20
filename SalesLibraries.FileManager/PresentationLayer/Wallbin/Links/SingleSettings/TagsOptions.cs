@@ -5,11 +5,12 @@ using System.Linq;
 using System.Windows.Forms;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid;
+using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraTab;
+using SalesLibraries.Business.Entities.Helpers;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.Common.Helpers;
-using SalesLibraries.Common.Objects;
 using SalesLibraries.Common.Objects.SearchTags;
 using SalesLibraries.CommonGUI.Common;
 using SalesLibraries.FileManager.Controllers;
@@ -17,13 +18,15 @@ using SalesLibraries.FileManager.PresentationLayer.Wallbin.Common;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSettings
 {
-	//public partial class TagsOptions : UserControl, ILinkProperties
 	[IntendForClass(typeof(BaseLibraryLink))]
-	public partial class TagsOptions : XtraTabPage, ILinkSettingsEditControl
+	//public partial class TagsOptions : UserControl, ILinkSettingsEditControl
+	public partial class TagsOptions : XtraTabPage, ILinkSetSettingsEditControl
 	{
-		private readonly BaseLibraryLink _data;
 		private bool _loading;
+		private readonly List<BaseLibraryLink> _links = new List<BaseLibraryLink>();
+
 		private readonly List<SearchGroupContainer> _searchGroups = new List<SearchGroupContainer>();
+		private readonly List<KeywordModel> _keywords = new List<KeywordModel>();
 
 		public LinkSettingsType SettingsType => LinkSettingsType.Tags;
 		public int Order => 0;
@@ -32,61 +35,33 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 		public event EventHandler<EventArgs> ForceCloseRequested;
 
-		public TagsOptions(BaseLibraryLink data)
+		private TagsOptions()
 		{
 			InitializeComponent();
-			_data = data;
-
 			if ((CreateGraphics()).DpiX > 96)
 			{
 				buttonXAddKeyWord.Font = new Font(buttonXAddKeyWord.Font.FontFamily, buttonXAddKeyWord.Font.Size - 2, buttonXAddKeyWord.Font.Style);
 			}
+			repositoryItemButtonEditKeywordShared.Enter += EditorHelper.EditorEnter;
+			repositoryItemButtonEditKeywordShared.MouseUp += EditorHelper.EditorMouseUp;
+			repositoryItemButtonEditKeywordShared.MouseDown += EditorHelper.EditorMouseUp;
+		}
 
-			repositoryItemButtonEditKeyword.Enter += EditorHelper.EditorEnter;
-			repositoryItemButtonEditKeyword.MouseUp += EditorHelper.EditorMouseUp;
-			repositoryItemButtonEditKeyword.MouseDown += EditorHelper.EditorMouseUp;
+		public TagsOptions(BaseLibraryLink link) : this()
+		{
+			_links.Add(link);
+		}
+
+		public TagsOptions(IEnumerable<BaseLibraryLink> links) : this()
+		{
+			_links.AddRange(links);
 		}
 
 		public void LoadData()
 		{
 			_loading = true;
 
-			xtraScrollableControlSearchTagsCategories.Controls.Clear();
-			splitContainerSearchTagsCategories.Panel2.Controls.Clear();
-			_searchGroups.Clear();
-			_searchGroups.AddRange(MainController.Instance.Lists.SearchTags.SearchGroups.Select(sg => new SearchGroupContainer(sg)));
-			foreach (var searchGroup in _searchGroups)
-			{
-
-				searchGroup.ToggleButton.Dock = DockStyle.Top;
-				searchGroup.ToggleButton.Click += CategoriesGroup_Click;
-				searchGroup.ToggleButton.CheckedChanged += CategoriesGroup_CheckedChanged;
-				xtraScrollableControlSearchTagsCategories.Controls.Add(searchGroup.ToggleButton);
-				searchGroup.ToggleButton.BringToFront();
-
-				searchGroup.ListBox.ItemChecking += ListBox_ItemChecking;
-				searchGroup.ListBox.ItemCheck += (o, ea) => UpdateCategoriesHeader();
-				splitContainerSearchTagsCategories.Panel2.Controls.Add(searchGroup.ListBox);
-				searchGroup.ListBox.BringToFront();
-			}
-
-			_searchGroups.ForEach(g => g.ListBox.UnCheckAll());
-			foreach (var searchGroup in _searchGroups)
-			{
-				var group = _data.Tags.Categories.FirstOrDefault(catGroup => String.Equals(catGroup.Name, searchGroup.DataSource.Name));
-				if (group != null)
-					foreach (var item in searchGroup.ListBox.Items.Cast<CheckedListBoxItem>().Where(item => group.Tags.Select(x => x.Name).Contains(item.Value.ToString())))
-						item.CheckState = CheckState.Checked;
-			}
-			var firstGroup = _searchGroups.FirstOrDefault();
-			if (firstGroup != null)
-			{
-				firstGroup.ToggleButton.Checked = false;
-				CategoriesGroup_Click(firstGroup.ToggleButton, new EventArgs());
-			}
-			UpdateCategoriesHeader();
-
-
+			UpdateCategoriesDataSource();
 			UpdateKeywordsDataSource();
 
 			_loading = false;
@@ -94,48 +69,128 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 		public void SaveData()
 		{
-			_data.Tags.Categories.Clear();
-			foreach (var searchGroup in _searchGroups)
-			{
-				var group = new SearchGroup();
-				group.Name = searchGroup.DataSource.Name;
-				group.Description = searchGroup.DataSource.Description;
-				foreach (CheckedListBoxItem item in searchGroup.ListBox.Items)
-					if (item.CheckState == CheckState.Checked)
-						group.Tags.Add(new SearchTag { Name = item.Value.ToString() });
-				if (group.Tags.Any())
-					_data.Tags.Categories.Add(group);
-			}
-
+			SaveCategoriesDataSource();
 			SaveKeywordsDataSource();
 		}
 
 		#region Categories Processing
-		private void UpdateCategoriesHeader()
+		private void UpdateCategoriesDataSource()
 		{
-			var totalTags = _searchGroups.Sum(g => g.ListBox.CheckedItemsCount);
-			labelControlSearchTagsCategoriesHeader.Text = String.Format("{0}{1}",
-				MainController.Instance.Lists.SearchTags.MaxTags > 0 ? String.Format("Only {0} Search Tags are ALLOWED{1}", MainController.Instance.Lists.SearchTags.MaxTags, Environment.NewLine) : String.Empty,
-				totalTags > 0 ? String.Join(", ", _searchGroups.SelectMany(g => g.ListBox.Items.OfType<CheckedListBoxItem>().Where(it => it.CheckState == CheckState.Checked).Select(it => it.Value.ToString()))) : "No Tags Selected"
-				);
+			xtraScrollableControlSearchTagsCategories.Controls.Clear();
+			splitContainerSearchTagsCategories.Panel2.Controls.Clear();
+
+			_searchGroups.Clear();
+			_searchGroups.AddRange(MainController.Instance.Lists.SearchTags.SearchGroups.Select(sg => new SearchGroupContainer(sg)));
+			foreach (var searchGroup in _searchGroups)
+			{
+
+				searchGroup.ToggleButton.Dock = DockStyle.Top;
+				searchGroup.ToggleButton.Click += OnCategoriesGroupClick;
+				searchGroup.ToggleButton.CheckedChanged += OnCategoriesGroupCheckedChanged;
+				xtraScrollableControlSearchTagsCategories.Controls.Add(searchGroup.ToggleButton);
+				searchGroup.ToggleButton.BringToFront();
+
+				searchGroup.ListBox.ItemChecking += OnCategoriesListBoxItemChecking;
+				searchGroup.ListBox.ItemCheck += (o, ea) => UpdateCategoriesHeader();
+				splitContainerSearchTagsCategories.Panel2.Controls.Add(searchGroup.ListBox);
+				searchGroup.ListBox.BringToFront();
+			}
+
+			_searchGroups.ForEach(g => g.ListBox.UnCheckAll());
+			var commonCategories = _links.GetCommonCategories();
+			foreach (var link in _links)
+			{
+				foreach (var searchGroup in _searchGroups)
+				{
+					var linkGroup = link.Tags.Categories.FirstOrDefault(sg => sg.Equals(searchGroup.DataSource));
+					if (linkGroup != null)
+						foreach (var item in searchGroup.ListBox.Items
+							.Where(item => linkGroup.Tags
+								.Any(t => t.Equals((SearchTag)item.Value))))
+							item.CheckState = CheckState.Indeterminate;
+
+					var commonGroup = commonCategories.FirstOrDefault(sg => sg.Equals(searchGroup.DataSource));
+					if (commonGroup != null)
+						foreach (var item in searchGroup.ListBox.Items
+							.Where(item => commonGroup.Tags
+								.Any(t => t.Equals((SearchTag)item.Value))))
+							item.CheckState = CheckState.Checked;
+				}
+			}
+
+			var firstGroup = _searchGroups.FirstOrDefault();
+			if (firstGroup != null)
+			{
+				firstGroup.ToggleButton.Checked = false;
+				OnCategoriesGroupClick(firstGroup.ToggleButton, new EventArgs());
+			}
+
+			UpdateCategoriesHeader();
 		}
 
-		private void ListBox_ItemChecking(object sender, ItemCheckingEventArgs e)
+		private void SaveCategoriesDataSource()
+		{
+			var commonCategories = _searchGroups
+				.Select(sg =>
+					{
+						var searchGroup = new SearchGroup { Name = sg.DataSource.Name };
+						searchGroup.Tags.AddRange(sg.ListBox.Items
+							.Where(item => item.CheckState == CheckState.Checked)
+							.Select(item =>
+							{
+								var sourceTag = (SearchTag)item.Value;
+								var searchTag = new SearchTag { Name = sourceTag.Name };
+								return searchTag;
+							}));
+						return searchGroup;
+					})
+				.Where(searchGroup => searchGroup.Tags.Any())
+				.ToArray();
+			var partialCategories = _searchGroups
+				.Select(sg =>
+				{
+					var searchGroup = new SearchGroup { Name = sg.DataSource.Name };
+					searchGroup.Tags.AddRange(sg.ListBox.Items
+						.Where(item => item.CheckState == CheckState.Indeterminate)
+						.Select(item =>
+						{
+							var sourceTag = (SearchTag)item.Value;
+							var searchTag = new SearchTag { Name = sourceTag.Name };
+							return searchTag;
+						}));
+					return searchGroup;
+				})
+				.Where(searchGroup => searchGroup.Tags.Any())
+				.ToArray();
+			_links.ApplyCategories(commonCategories, partialCategories);
+		}
+
+		private void UpdateCategoriesHeader()
+		{
+			labelControlSearchTagsCategoriesHeader.Text =
+				MainController.Instance.Lists.SearchTags.MaxTags > 0 ?
+				String.Format("Only {0} Search Tags are ALLOWED{1}", MainController.Instance.Lists.SearchTags.MaxTags, Environment.NewLine) :
+				String.Empty;
+		}
+
+		private void OnCategoriesListBoxItemChecking(object sender, ItemCheckingEventArgs e)
 		{
 			if (_loading || MainController.Instance.Lists.SearchTags.MaxTags <= 0 || e.NewValue != CheckState.Checked) return;
-			var totalTags = _searchGroups.Sum(g => g.ListBox.CheckedItemsCount);
+			var totalTags = _searchGroups.SelectMany(g => g.ListBox.Items)
+				.Count(item => item.CheckState != CheckState.Unchecked);
 			if (totalTags < MainController.Instance.Lists.SearchTags.MaxTags) return;
-			MainController.Instance.PopupMessages.ShowWarning(String.Format("Only {0} Search Tags are ALLOWED", MainController.Instance.Lists.SearchTags.MaxTags));
+			MainController.Instance.PopupMessages.ShowWarning(String.Format("Only {0} Search Tags are ALLOWED",
+				MainController.Instance.Lists.SearchTags.MaxTags));
 			e.Cancel = true;
 		}
 
-		private void buttonXWipeTags_Click(object sender, EventArgs e)
+		private void OnWipeTagsClick(object sender, EventArgs e)
 		{
 			foreach (var searchGroup in _searchGroups)
 				searchGroup.ListBox.UnCheckAll();
 		}
 
-		private void CategoriesGroup_Click(object sender, EventArgs e)
+		private void OnCategoriesGroupClick(object sender, EventArgs e)
 		{
 			var button = sender as DevComponents.DotNetBar.ButtonX;
 			if (button == null || button.Checked) return;
@@ -143,7 +198,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			button.Checked = true;
 		}
 
-		private void CategoriesGroup_CheckedChanged(object sender, EventArgs e)
+		private void OnCategoriesGroupCheckedChanged(object sender, EventArgs e)
 		{
 			var button = sender as DevComponents.DotNetBar.ButtonX;
 			if (button == null || !button.Checked) return;
@@ -157,32 +212,66 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		#region Keyword processing
 		private void UpdateKeywordsDataSource()
 		{
-			gridControlSearchTagsKeywords.DataSource = _data.Tags.Keywords;
+			var commonKeywords = _links.GetCommonKeywords().ToList();
+			_keywords.AddRange(commonKeywords.Select(k => new KeywordModel { Name = k.Name, IsShared = true }));
+			foreach (var link in _links)
+			{
+				_keywords.AddRange(link.Tags.Keywords
+					.Where(k => !commonKeywords.Any(commonKeyword => commonKeyword.Equals(k)))
+						.Select(k => new KeywordModel { Name = k.Name, IsShared = false }));
+			}
+			gridControlSearchTagsKeywords.DataSource = _keywords;
 			gridViewSearchTagsKeywords.RefreshData();
 		}
 
 		private void SaveKeywordsDataSource()
 		{
 			gridViewSearchTagsKeywords.CloseEditor();
-			_data.Tags.Keywords.RemoveAll(tag => String.IsNullOrEmpty(tag.Name));
+			_keywords.RemoveAll(tag => String.IsNullOrEmpty(tag.Name));
+			_links.ApplyKeywords(_keywords.ToArray());
 		}
 
-		private void repositoryItemButtonEditKeyword_ButtonClick(object sender, ButtonPressedEventArgs e)
+		private void OnKeywordsEditorButtonClick(object sender, ButtonPressedEventArgs e)
 		{
 			gridViewSearchTagsKeywords.CloseEditor();
 			if (gridViewSearchTagsKeywords.FocusedRowHandle == GridControl.InvalidRowHandle) return;
-			_data.Tags.Keywords.RemoveAt(gridViewSearchTagsKeywords.GetDataSourceRowIndex(gridViewSearchTagsKeywords.FocusedRowHandle));
+			var keyword = (KeywordModel)gridViewSearchTagsKeywords.GetFocusedRow();
+			switch (e.Button.Tag as String)
+			{
+				case "Delete":
+					_keywords.Remove(keyword);
+					break;
+				case "MakeShared":
+					keyword.IsShared = true;
+					break;
+			}
 			gridViewSearchTagsKeywords.RefreshData();
 		}
 
-		private void buttonXAddKeyWord_Click(object sender, EventArgs e)
+		private void OnAddKeyWordClick(object sender, EventArgs e)
 		{
-			SaveKeywordsDataSource();
-			_data.Tags.Keywords.Add(new SearchTag());
+			gridViewSearchTagsKeywords.CloseEditor();
+			_keywords.Add(new KeywordModel { IsShared = true });
 			gridViewSearchTagsKeywords.RefreshData();
 			if (gridViewSearchTagsKeywords.RowCount <= 0) return;
 			gridViewSearchTagsKeywords.FocusedRowHandle = gridViewSearchTagsKeywords.RowCount - 1;
 			gridViewSearchTagsKeywords.MakeRowVisible(gridViewSearchTagsKeywords.FocusedRowHandle, true);
+		}
+
+		private void OnKeywordsGridCustomRowCellEdit(object sender, CustomRowCellEditEventArgs e)
+		{
+			var keyword = (KeywordModel)gridViewSearchTagsKeywords.GetRow(e.RowHandle);
+			e.RepositoryItem = keyword.IsShared ?
+				repositoryItemButtonEditKeywordShared :
+				repositoryItemButtonEditKeywordPartial;
+		}
+
+		private void OnKeywordsGridRowCellStyle(object sender, RowCellStyleEventArgs e)
+		{
+			var keyword = (KeywordModel)gridViewSearchTagsKeywords.GetRow(e.RowHandle);
+			e.Appearance.ForeColor = keyword.IsShared ?
+				Color.Black :
+				Color.Gray;
 		}
 		#endregion
 	}

@@ -309,6 +309,8 @@
     <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\FormResetLinkSettingsConfirmation.designer.cs">
       <DependentUpon>FormResetLinkSettingsConfirmation.cs</DependentUpon>
     </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\ILinkSetSettingsEditControl.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\ILinkSetSettingsEditForm.cs" />
     <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\ILinkSettingsEditControl.cs" />
     <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\ILinkSettingsEditForm.cs" />
     <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LineBreakOptions.cs">
@@ -365,6 +367,12 @@
     <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkObjectOptions.designer.cs">
       <DependentUpon>LinkObjectOptions.cs</DependentUpon>
     </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkPowerPointOptions.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkPowerPointOptions.designer.cs">
+      <DependentUpon>LinkPowerPointOptions.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkQuickLinkOptions.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -400,12 +408,6 @@
     </Compile>
     <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkYouTubeOptions.designer.cs">
       <DependentUpon>LinkYouTubeOptions.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\PreviewOptions.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\PreviewOptions.designer.cs">
-      <DependentUpon>PreviewOptions.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\QuickEditManager.cs" />
     <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\ResetSettingsSchedulerOptions.cs">
@@ -665,6 +667,9 @@
     <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkObjectOptions.resx">
       <DependentUpon>LinkObjectOptions.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkPowerPointOptions.resx">
+      <DependentUpon>LinkPowerPointOptions.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkQuickLinkOptions.resx">
       <DependentUpon>LinkQuickLinkOptions.cs</DependentUpon>
     </EmbeddedResource>
@@ -682,9 +687,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkYouTubeOptions.resx">
       <DependentUpon>LinkYouTubeOptions.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\PreviewOptions.resx">
-      <DependentUpon>PreviewOptions.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\ResetSettingsSchedulerOptions.resx">
       <DependentUpon>ResetSettingsSchedulerOptions.cs</DependentUpon>
@@ -778,6 +780,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\ButtonApplyForAll.png" />
     <None Include="Resources\LinkSettingsTextNote.png" />
     <None Include="Resources\LinkSettingsTextFormat.png" />
     <None Include="Resources\LinkSettingsQuickLink.png" />

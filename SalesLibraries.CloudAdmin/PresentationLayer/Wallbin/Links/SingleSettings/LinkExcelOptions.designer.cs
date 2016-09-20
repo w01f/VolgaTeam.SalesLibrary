@@ -29,12 +29,15 @@
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LinkExcelOptions));
 			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
-			this.labelControlTitle = new DevExpress.XtraEditors.LabelControl();
 			this.ckDoNotGenerateText = new System.Windows.Forms.CheckBox();
 			this.ckForceOpen = new System.Windows.Forms.CheckBox();
 			this.ckForceDownload = new System.Windows.Forms.CheckBox();
+			this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
+			this.labelControlTitle = new DevExpress.XtraEditors.LabelControl();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// styleController
@@ -52,22 +55,12 @@
 			this.styleController.AppearanceReadOnly.Font = new System.Drawing.Font("Arial", 9.75F);
 			this.styleController.AppearanceReadOnly.Options.UseFont = true;
 			// 
-			// labelControlTitle
-			// 
-			this.labelControlTitle.Appearance.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.labelControlTitle.Appearance.ForeColor = System.Drawing.Color.DimGray;
-			this.labelControlTitle.Location = new System.Drawing.Point(8, 12);
-			this.labelControlTitle.Name = "labelControlTitle";
-			this.labelControlTitle.Size = new System.Drawing.Size(427, 17);
-			this.labelControlTitle.TabIndex = 24;
-			this.labelControlTitle.Text = "You may want to apply these special, advanced settings to the link";
-			// 
 			// ckDoNotGenerateText
 			// 
 			this.ckDoNotGenerateText.AutoSize = true;
 			this.ckDoNotGenerateText.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.ckDoNotGenerateText.ForeColor = System.Drawing.Color.Black;
-			this.ckDoNotGenerateText.Location = new System.Drawing.Point(8, 50);
+			this.ckDoNotGenerateText.Location = new System.Drawing.Point(17, 139);
 			this.ckDoNotGenerateText.Name = "ckDoNotGenerateText";
 			this.ckDoNotGenerateText.Size = new System.Drawing.Size(452, 20);
 			this.ckDoNotGenerateText.TabIndex = 25;
@@ -79,7 +72,7 @@
 			this.ckForceOpen.AutoSize = true;
 			this.ckForceOpen.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.ckForceOpen.ForeColor = System.Drawing.Color.Black;
-			this.ckForceOpen.Location = new System.Drawing.Point(8, 143);
+			this.ckForceOpen.Location = new System.Drawing.Point(17, 232);
 			this.ckForceOpen.Name = "ckForceOpen";
 			this.ckForceOpen.Size = new System.Drawing.Size(334, 20);
 			this.ckForceOpen.TabIndex = 29;
@@ -91,24 +84,49 @@
 			this.ckForceDownload.AutoSize = true;
 			this.ckForceDownload.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.ckForceDownload.ForeColor = System.Drawing.Color.Black;
-			this.ckForceDownload.Location = new System.Drawing.Point(8, 95);
+			this.ckForceDownload.Location = new System.Drawing.Point(17, 184);
 			this.ckForceDownload.Name = "ckForceDownload";
 			this.ckForceDownload.Size = new System.Drawing.Size(351, 20);
 			this.ckForceDownload.TabIndex = 28;
 			this.ckForceDownload.Text = "Immediately Download this Excel file when clicked";
 			this.ckForceDownload.UseVisualStyleBackColor = true;
 			// 
+			// pictureBoxLogo
+			// 
+			this.pictureBoxLogo.Image = global::SalesLibraries.CloudAdmin.Properties.Resources.LinkSettingsPreviewOptions;
+			this.pictureBoxLogo.Location = new System.Drawing.Point(17, 18);
+			this.pictureBoxLogo.Name = "pictureBoxLogo";
+			this.pictureBoxLogo.Size = new System.Drawing.Size(64, 64);
+			this.pictureBoxLogo.TabIndex = 52;
+			this.pictureBoxLogo.TabStop = false;
+			// 
+			// labelControlTitle
+			// 
+			this.labelControlTitle.AllowHtmlString = true;
+			this.labelControlTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.labelControlTitle.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Top;
+			this.labelControlTitle.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+			this.labelControlTitle.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+			this.labelControlTitle.Location = new System.Drawing.Point(103, 18);
+			this.labelControlTitle.Name = "labelControlTitle";
+			this.labelControlTitle.Size = new System.Drawing.Size(406, 83);
+			this.labelControlTitle.StyleController = this.styleController;
+			this.labelControlTitle.TabIndex = 51;
+			this.labelControlTitle.Text = resources.GetString("labelControlTitle.Text");
+			// 
 			// LinkExcelOptions
 			// 
-			this.BackColor = System.Drawing.Color.White;
+			this.Appearance.PageClient.BackColor = System.Drawing.Color.White;
+			this.Appearance.PageClient.Options.UseBackColor = true;
+			this.Controls.Add(this.pictureBoxLogo);
+			this.Controls.Add(this.labelControlTitle);
 			this.Controls.Add(this.ckForceOpen);
 			this.Controls.Add(this.ckForceDownload);
 			this.Controls.Add(this.ckDoNotGenerateText);
-			this.Controls.Add(this.labelControlTitle);
-			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.Name = "LinkExcelOptions";
 			this.Size = new System.Drawing.Size(531, 541);
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -117,9 +135,10 @@
 		#endregion
 
 		private DevExpress.XtraEditors.StyleController styleController;
-		private DevExpress.XtraEditors.LabelControl labelControlTitle;
 		public System.Windows.Forms.CheckBox ckDoNotGenerateText;
 		public System.Windows.Forms.CheckBox ckForceOpen;
 		public System.Windows.Forms.CheckBox ckForceDownload;
+		private System.Windows.Forms.PictureBox pictureBoxLogo;
+		private DevExpress.XtraEditors.LabelControl labelControlTitle;
 	}
 }

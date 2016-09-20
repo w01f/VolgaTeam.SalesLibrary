@@ -1,19 +1,22 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
+using System.IO;
+using System.Windows.Forms;
 using DevExpress.XtraTab;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
+using SalesLibraries.CloudAdmin.Controllers;
 using SalesLibraries.Common.Helpers;
 
 namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettings
 {
 	[IntendForClass(typeof(DocumentLink))]
-	[IntendForClass(typeof(PowerPointLink))]
-	//public partial class LinkDocumentOptions : UserControl, ILinkProperties
+	//public partial class LinkDocumentOptions : UserControl, ILinkSettingsEditControl
 	public sealed partial class LinkDocumentOptions : XtraTabPage, ILinkSettingsEditControl
 	{
-		private readonly DocumentLinkSettings _settings;
+		private readonly DocumentLink _data;
 
 		public LinkSettingsType SettingsType => LinkSettingsType.Notes;
 		public int Order => 6;
@@ -25,7 +28,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 		public LinkDocumentOptions()
 		{
 			InitializeComponent();
-			Text = "Advanced";
+			Text = "Admin";
 			if ((base.CreateGraphics()).DpiX > 96)
 			{
 				var styleControllerFont = new Font(styleController.Appearance.Font.FontFamily, styleController.Appearance.Font.Size - 2, styleController.Appearance.Font.Style);
@@ -40,24 +43,50 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 
 		public LinkDocumentOptions(DocumentLink data) : this()
 		{
-			_settings = (DocumentLinkSettings)data.Settings;
-		}
-
-		public LinkDocumentOptions(PowerPointLink data) : this()
-		{
-			_settings = (DocumentLinkSettings)data.Settings;
+			_data = data;
 		}
 
 		public void LoadData()
 		{
-			ckDoNotGeneratePreview.Checked = !_settings.GeneratePreviewImages;
-			ckDoNotGenerateText.Checked = !_settings.GenerateContentText;
+			ckDoNotGeneratePreview.Checked = !((DocumentLinkSettings)_data.Settings).GeneratePreviewImages;
+			ckDoNotGenerateText.Checked = !((DocumentLinkSettings)_data.Settings).GenerateContentText;
+
+			if (Directory.Exists(_data.PreviewContainerPath))
+			{
+				buttonXOpenWV.Enabled = true;
+				buttonXOpenWV.Text = String.Format("!WV Folder ({0})", _data.PreviewContainerName);
+			}
+			else
+				buttonXOpenWV.Enabled = false;
 		}
 
 		public void SaveData()
 		{
-			_settings.GeneratePreviewImages = !ckDoNotGeneratePreview.Checked;
-			_settings.GenerateContentText = !ckDoNotGenerateText.Checked;
+			((DocumentLinkSettings)_data.Settings).GeneratePreviewImages = !ckDoNotGeneratePreview.Checked;
+			((DocumentLinkSettings)_data.Settings).GenerateContentText = !ckDoNotGenerateText.Checked;
+		}
+
+		private void buttonXRefreshPreview_Click(object sender, EventArgs e)
+		{
+			if (MainController.Instance.PopupMessages.ShowWarningQuestion(String.Format("Are you sure you want to refresh the server files for:{1}{0}?", _data.NameWithExtension, Environment.NewLine)) != DialogResult.Yes) return;
+
+			MainController.Instance.ProcessManager.Run("Updating Preview files...", cancelationToken =>
+			{
+				_data.ClearPreviewContainer();
+				var previewContainer = _data.GetPreviewContainer();
+				//var previewGenerator = previewContainer.GetPreviewGenerator();
+				//previewContainer.UpdateContent(previewGenerator, cancelationToken);
+			});
+			MainController.Instance.PopupMessages.ShowInfo(String.Format("{0}{1}Is now updated for the server!", _data.NameWithExtension, Environment.NewLine));
+		}
+
+		private void buttonXOpenWV_Click(object sender, EventArgs e)
+		{
+			try
+			{
+				Process.Start(_data.PreviewContainerPath);
+			}
+			catch { }
 		}
 	}
 }

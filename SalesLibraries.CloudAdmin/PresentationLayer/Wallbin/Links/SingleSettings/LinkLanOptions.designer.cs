@@ -31,15 +31,17 @@
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LinkLanOptions));
 			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
-			this.labelControlTitle = new DevExpress.XtraEditors.LabelControl();
 			this.labelControlName = new DevExpress.XtraEditors.LabelControl();
 			this.textEditName = new DevExpress.XtraEditors.TextEdit();
 			this.textEditPath = new DevExpress.XtraEditors.TextEdit();
 			this.labelControlPath = new DevExpress.XtraEditors.LabelControl();
 			this.labelControlWarning = new DevExpress.XtraEditors.LabelControl();
+			this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
+			this.labelControlTitle = new DevExpress.XtraEditors.LabelControl();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditName.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditPath.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// styleController
@@ -57,33 +59,23 @@
 			this.styleController.AppearanceReadOnly.Font = new System.Drawing.Font("Arial", 9.75F);
 			this.styleController.AppearanceReadOnly.Options.UseFont = true;
 			// 
-			// labelControlTitle
-			// 
-			this.labelControlTitle.Appearance.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.labelControlTitle.Appearance.ForeColor = System.Drawing.Color.DimGray;
-			this.labelControlTitle.Location = new System.Drawing.Point(8, 12);
-			this.labelControlTitle.Name = "labelControlTitle";
-			this.labelControlTitle.Size = new System.Drawing.Size(427, 17);
-			this.labelControlTitle.TabIndex = 24;
-			this.labelControlTitle.Text = "You may want to apply these special, advanced settings to the link";
-			// 
 			// labelControlName
 			// 
-			this.labelControlName.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.labelControlName.Location = new System.Drawing.Point(8, 55);
+			this.labelControlName.AllowHtmlString = true;
+			this.labelControlName.Location = new System.Drawing.Point(17, 149);
 			this.labelControlName.Name = "labelControlName";
-			this.labelControlName.Size = new System.Drawing.Size(68, 16);
+			this.labelControlName.Size = new System.Drawing.Size(120, 16);
 			this.labelControlName.StyleController = this.styleController;
 			this.labelControlName.TabIndex = 27;
-			this.labelControlName.Text = "Link Name";
+			this.labelControlName.Text = "<b>Link Name</b>";
 			// 
 			// textEditName
 			// 
 			this.textEditName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.textEditName.Location = new System.Drawing.Point(8, 77);
+			this.textEditName.Location = new System.Drawing.Point(17, 171);
 			this.textEditName.Name = "textEditName";
-			this.textEditName.Size = new System.Drawing.Size(513, 22);
+			this.textEditName.Size = new System.Drawing.Size(504, 22);
 			this.textEditName.StyleController = this.styleController;
 			this.textEditName.TabIndex = 28;
 			// 
@@ -91,21 +83,21 @@
 			// 
 			this.textEditPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.textEditPath.Location = new System.Drawing.Point(8, 143);
+			this.textEditPath.Location = new System.Drawing.Point(17, 237);
 			this.textEditPath.Name = "textEditPath";
-			this.textEditPath.Size = new System.Drawing.Size(513, 22);
+			this.textEditPath.Size = new System.Drawing.Size(504, 22);
 			this.textEditPath.StyleController = this.styleController;
 			this.textEditPath.TabIndex = 30;
 			// 
 			// labelControlPath
 			// 
-			this.labelControlPath.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.labelControlPath.Location = new System.Drawing.Point(8, 121);
+			this.labelControlPath.AllowHtmlString = true;
+			this.labelControlPath.Location = new System.Drawing.Point(17, 215);
 			this.labelControlPath.Name = "labelControlPath";
-			this.labelControlPath.Size = new System.Drawing.Size(111, 16);
+			this.labelControlPath.Size = new System.Drawing.Size(163, 16);
 			this.labelControlPath.StyleController = this.styleController;
 			this.labelControlPath.TabIndex = 29;
-			this.labelControlPath.Text = "Network Location";
+			this.labelControlPath.Text = "<b>Network Location</b>";
 			// 
 			// labelControlWarning
 			// 
@@ -116,26 +108,51 @@
 			this.labelControlWarning.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Bottom;
 			this.labelControlWarning.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
 			this.labelControlWarning.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-			this.labelControlWarning.Location = new System.Drawing.Point(8, 189);
+			this.labelControlWarning.Location = new System.Drawing.Point(17, 304);
 			this.labelControlWarning.Name = "labelControlWarning";
-			this.labelControlWarning.Size = new System.Drawing.Size(504, 349);
+			this.labelControlWarning.Size = new System.Drawing.Size(495, 234);
 			this.labelControlWarning.StyleController = this.styleController;
 			this.labelControlWarning.TabIndex = 34;
 			this.labelControlWarning.Text = resources.GetString("labelControlWarning.Text");
 			// 
+			// pictureBoxLogo
+			// 
+			this.pictureBoxLogo.Image = global::SalesLibraries.CloudAdmin.Properties.Resources.LinkSettingsPreviewOptions;
+			this.pictureBoxLogo.Location = new System.Drawing.Point(17, 18);
+			this.pictureBoxLogo.Name = "pictureBoxLogo";
+			this.pictureBoxLogo.Size = new System.Drawing.Size(64, 64);
+			this.pictureBoxLogo.TabIndex = 50;
+			this.pictureBoxLogo.TabStop = false;
+			// 
+			// labelControlTitle
+			// 
+			this.labelControlTitle.AllowHtmlString = true;
+			this.labelControlTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.labelControlTitle.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Top;
+			this.labelControlTitle.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+			this.labelControlTitle.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+			this.labelControlTitle.Location = new System.Drawing.Point(103, 18);
+			this.labelControlTitle.Name = "labelControlTitle";
+			this.labelControlTitle.Size = new System.Drawing.Size(406, 83);
+			this.labelControlTitle.StyleController = this.styleController;
+			this.labelControlTitle.TabIndex = 49;
+			this.labelControlTitle.Text = resources.GetString("labelControlTitle.Text");
+			// 
 			// LinkLanOptions
 			// 
+			this.Controls.Add(this.pictureBoxLogo);
+			this.Controls.Add(this.labelControlTitle);
 			this.Controls.Add(this.labelControlWarning);
 			this.Controls.Add(this.textEditPath);
 			this.Controls.Add(this.labelControlPath);
 			this.Controls.Add(this.textEditName);
 			this.Controls.Add(this.labelControlName);
-			this.Controls.Add(this.labelControlTitle);
-			this.Name = "LinkLanOptions";
 			this.Size = new System.Drawing.Size(531, 541);
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditName.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditPath.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -144,11 +161,12 @@
 		#endregion
 
 		private DevExpress.XtraEditors.StyleController styleController;
-		private DevExpress.XtraEditors.LabelControl labelControlTitle;
 		private DevExpress.XtraEditors.LabelControl labelControlName;
 		private DevExpress.XtraEditors.TextEdit textEditName;
 		private DevExpress.XtraEditors.TextEdit textEditPath;
 		private DevExpress.XtraEditors.LabelControl labelControlPath;
 		private DevExpress.XtraEditors.LabelControl labelControlWarning;
+		private System.Windows.Forms.PictureBox pictureBoxLogo;
+		private DevExpress.XtraEditors.LabelControl labelControlTitle;
 	}
 }

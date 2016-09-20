@@ -312,7 +312,7 @@
 			this.ShowIcon = false;
 			this.ShowInTaskbar = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-			this.Text = "Widget Gallery ({0})";
+			this.Text = "Widget Icon Gallery ({0})";
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormEditLinkSettings_FormClosing);
 			this.Click += new System.EventHandler(this.OnFormClick);
 			((System.ComponentModel.ISupportInitialize)(this.pbCustomWidget)).EndInit();

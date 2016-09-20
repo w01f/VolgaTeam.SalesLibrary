@@ -52,7 +52,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 
 		public override void SelectPage(IPageView pageView)
 		{
-			xtraTabControl.SelectedTabPage = (XtraTabPage) pageView;
+			xtraTabControl.SelectedTabPage = (XtraTabPage)pageView;
 		}
 
 		private void OnSelectedPageChanging(object sender, TabPageChangingEventArgs e)
@@ -82,7 +82,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 		private void OnTabMoved(Object sender, TabMoveEventArgs e)
 		{
 			((List<LibraryPage>)DataStorage.Library.Pages).ChangeItemPosition(
-				((IPageView)e.MovedPage).Page, 
+				((IPageView)e.MovedPage).Page,
 				((IPageView)e.TargetPage).Page.Order + (1 * e.Offset));
 			IsDataChanged = true;
 		}
@@ -202,7 +202,15 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 						LoadView(true);
 					})));
 			}
-			
+
+		}
+
+		private void toolStripMenuItemEditTags_Click(object sender, EventArgs e)
+		{
+			var selectedPage = _menuHitInfo.Page as TabPage;
+			if (selectedPage == null) return;
+			selectedPage.Content.EditTags();
+			IsDataChanged = true;
 		}
 		#endregion
 	}

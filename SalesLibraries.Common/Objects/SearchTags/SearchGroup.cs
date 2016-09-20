@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json;
-using SalesLibraries.Common.Extensions;
 
 namespace SalesLibraries.Common.Objects.SearchTags
 {
@@ -11,9 +9,6 @@ namespace SalesLibraries.Common.Objects.SearchTags
 		public string Name { get; set; }
 
 		public string Description { get; set; }
-
-		[JsonIgnore]
-		public bool Selected { get; set; }
 
 		public List<SearchTag> Tags { get; private set; }
 
@@ -24,7 +19,7 @@ namespace SalesLibraries.Common.Objects.SearchTags
 
 		public bool Equals(SearchGroup other)
 		{
-			return Tags.Compare(other.Tags);
+			return String.Equals(Name, other.Name, StringComparison.Ordinal);
 		}
 
 		public SearchGroup Clone()

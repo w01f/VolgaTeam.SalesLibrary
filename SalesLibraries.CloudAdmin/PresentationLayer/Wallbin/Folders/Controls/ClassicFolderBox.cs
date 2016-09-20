@@ -217,7 +217,15 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders.Controls
 		{
 			var selectedRow = SelectedLinkRow;
 			if (selectedRow == null) return;
-			if (SettingsEditorFactory.Run(selectedRow.Source, settingsType) != DialogResult.OK) return;
+			EditLinkSettings(new[] { selectedRow.Source }, settingsType);
+		}
+
+		public void EditLinkSettings(IList<BaseLibraryLink> links, LinkSettingsType settingsType)
+		{
+			var result = links.Count == 1 ?
+				SettingsEditorFactory.Run(links.First(), settingsType) :
+				SettingsEditorFactory.Run(links, settingsType);
+			if (result != DialogResult.OK) return;
 
 			grFiles.SuspendLayout();
 			_outsideChangesInProgress = true;
@@ -1033,6 +1041,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders.Controls
 
 				barButtonItemLinkPropertiesLinkSettings.Caption = "Line Break Settings";
 				barButtonItemLinkPropertiesDelete.Caption = "Delete this Line Break";
+				barButtonItemLinkPropertiesImages.Caption = "Line Break ART";
 				barButtonItemLinkPropertiesResetSettings.Caption = "Reset this Line Break";
 			}
 			else
@@ -1054,6 +1063,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders.Controls
 
 				barButtonItemLinkPropertiesLinkSettings.Caption = "Link Settings";
 				barButtonItemLinkPropertiesDelete.Caption = "Delete this Link";
+				barButtonItemLinkPropertiesImages.Caption = "Link ART";
 				barButtonItemLinkPropertiesResetSettings.Caption = "Reset this Link";
 			}
 			_quickEditor.LoadLinkSettings(linkRow.Source);
@@ -1153,6 +1163,11 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders.Controls
 		private void toolStripMenuItemFolderDeleteSecurity_Click(object sender, EventArgs e)
 		{
 			ResetSecurity();
+		}
+
+		private void toolStripMenuItemFolderEditTags_Click(object sender, EventArgs e)
+		{
+			EditLinkSettings(DataSource.Links.ToList(), LinkSettingsType.Tags);
 		}
 
 		private void toolStripMenuItemFolderDeleteTags_Click(object sender, EventArgs e)

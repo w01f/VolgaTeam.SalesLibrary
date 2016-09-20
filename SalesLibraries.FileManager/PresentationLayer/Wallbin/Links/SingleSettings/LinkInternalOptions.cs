@@ -26,7 +26,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		public LinkInternalOptions(InternalLink data)
 		{
 			InitializeComponent();
-			Text = "Advanced";
+			Text = "Admin";
 			_data = data;
 			if ((CreateGraphics()).DpiX > 96)
 			{
@@ -36,12 +36,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 				styleController.AppearanceDropDownHeader.Font = styleControllerFont;
 				styleController.AppearanceFocused.Font = styleControllerFont;
 				styleController.AppearanceReadOnly.Font = styleControllerFont;
-				labelControlTitle.Font = new Font(labelControlTitle.Font.FontFamily, labelControlTitle.Font.Size - 2, labelControlTitle.Font.Style);
-				labelControlName.Font = new Font(labelControlName.Font.FontFamily, labelControlName.Font.Size - 2, labelControlName.Font.Style);
-				labelControlLibraryName.Font = new Font(labelControlLibraryName.Font.FontFamily, labelControlLibraryName.Font.Size - 2, labelControlLibraryName.Font.Style);
-				labelControlPageName.Font = new Font(labelControlPageName.Font.FontFamily, labelControlPageName.Font.Size - 2, labelControlPageName.Font.Style);
-				labelControlWindowName.Font = new Font(labelControlWindowName.Font.FontFamily, labelControlWindowName.Font.Size - 2, labelControlWindowName.Font.Style);
-				labelControlLinkName.Font = new Font(labelControlLinkName.Font.FontFamily, labelControlLinkName.Font.Size - 2, labelControlLinkName.Font.Style);
 				ckForcePreview.Font = new Font(ckForcePreview.Font.FontFamily, ckForcePreview.Font.Size - 2, ckForcePreview.Font.Style);
 			}
 		}

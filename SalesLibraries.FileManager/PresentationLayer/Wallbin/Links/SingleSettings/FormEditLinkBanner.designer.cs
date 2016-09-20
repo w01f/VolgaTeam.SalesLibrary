@@ -98,15 +98,15 @@
 			this.checkBoxEnableBanner.ForeColor = System.Drawing.Color.Black;
 			this.checkBoxEnableBanner.Location = new System.Drawing.Point(12, 12);
 			this.checkBoxEnableBanner.Name = "checkBoxEnableBanner";
-			this.checkBoxEnableBanner.Size = new System.Drawing.Size(121, 20);
+			this.checkBoxEnableBanner.Size = new System.Drawing.Size(235, 20);
 			this.checkBoxEnableBanner.TabIndex = 7;
-			this.checkBoxEnableBanner.Text = "Enable Banner";
+			this.checkBoxEnableBanner.Text = "Enable Clipart Image for this link";
 			this.checkBoxEnableBanner.UseVisualStyleBackColor = false;
 			this.checkBoxEnableBanner.CheckedChanged += new System.EventHandler(this.checkBoxEnableBanner_CheckedChanged);
 			// 
 			// pbSelectedBanner
 			// 
-			this.pbSelectedBanner.Location = new System.Drawing.Point(143, 10);
+			this.pbSelectedBanner.Location = new System.Drawing.Point(257, 10);
 			this.pbSelectedBanner.Name = "pbSelectedBanner";
 			this.pbSelectedBanner.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
 			this.pbSelectedBanner.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
@@ -115,7 +115,7 @@
 			this.pbSelectedBanner.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
 			this.pbSelectedBanner.Properties.NullText = " ";
 			this.pbSelectedBanner.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Squeeze;
-			this.pbSelectedBanner.Size = new System.Drawing.Size(266, 59);
+			this.pbSelectedBanner.Size = new System.Drawing.Size(218, 59);
 			this.pbSelectedBanner.TabIndex = 36;
 			// 
 			// rbBannerAligmentRight
@@ -169,9 +169,9 @@
 			this.laBannerAligment.ForeColor = System.Drawing.Color.Black;
 			this.laBannerAligment.Location = new System.Drawing.Point(494, 10);
 			this.laBannerAligment.Name = "laBannerAligment";
-			this.laBannerAligment.Size = new System.Drawing.Size(127, 16);
+			this.laBannerAligment.Size = new System.Drawing.Size(121, 16);
 			this.laBannerAligment.TabIndex = 37;
-			this.laBannerAligment.Text = "Banner Alignment:";
+			this.laBannerAligment.Text = "Image Alignment:";
 			// 
 			// styleController
 			// 
@@ -406,12 +406,13 @@
 			this.Controls.Add(this.pnControls);
 			this.DoubleBuffered = true;
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.ForeColor = System.Drawing.Color.Black;
 			this.MinimizeBox = false;
 			this.Name = "FormEditLinkBanner";
 			this.ShowIcon = false;
 			this.ShowInTaskbar = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-			this.Text = "Banner Gallery ({0})";
+			this.Text = "Clipart Logo Gallery ({0})";
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormEditLinkSettings_FormClosing);
 			this.Click += new System.EventHandler(this.OnFormClick);
 			((System.ComponentModel.ISupportInitialize)(this.pbSelectedBanner.Properties)).EndInit();

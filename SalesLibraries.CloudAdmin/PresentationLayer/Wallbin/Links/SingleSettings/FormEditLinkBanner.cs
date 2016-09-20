@@ -57,7 +57,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 			}
 		}
 
-		public void InitForm(LinkSettingsType settingsType)
+		public void InitForm<TEditControl>(LinkSettingsType settingsType) where TEditControl : ILinkSettingsEditControl
 		{
 			Width = 970;
 			Height = 645;

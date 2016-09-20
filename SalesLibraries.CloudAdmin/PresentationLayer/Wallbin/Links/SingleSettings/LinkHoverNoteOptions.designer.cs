@@ -99,7 +99,7 @@
 			// 
 			// pictureBoxLogo
 			// 
-			this.pictureBoxLogo.Image = global::SalesLibraries.FileManager.Properties.Resources.LinkSettingsHoverNote;
+			this.pictureBoxLogo.Image = global::SalesLibraries.CloudAdmin.Properties.Resources.LinkSettingsHoverNote;
 			this.pictureBoxLogo.Location = new System.Drawing.Point(17, 18);
 			this.pictureBoxLogo.Name = "pictureBoxLogo";
 			this.pictureBoxLogo.Size = new System.Drawing.Size(64, 64);

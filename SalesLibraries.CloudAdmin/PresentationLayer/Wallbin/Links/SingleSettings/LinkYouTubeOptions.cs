@@ -26,7 +26,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 		public LinkYouTubeOptions(YouTubeLink data)
 		{
 			InitializeComponent();
-			Text = "Advanced";
+			Text = "Admin";
 			_data = data;
 			if ((CreateGraphics()).DpiX > 96)
 			{

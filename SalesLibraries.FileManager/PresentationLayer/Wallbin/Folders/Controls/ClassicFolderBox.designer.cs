@@ -49,7 +49,9 @@
 			this.toolStripMenuItemFolderBanner = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItemFolderDeleteWidgets = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItemFolderDeleteBanners = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItemFolderEditTags = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItemFolderSort = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItemFolderSeLinkTextWordWrap = new System.Windows.Forms.ToolStripMenuItem();
 			this.popupMenuLinkProperties = new DevExpress.XtraBars.PopupMenu(this.components);
 			this.barButtonItemLinkPropertiesCopy = new DevExpress.XtraBars.BarButtonItem();
 			this.barButtonItemLinkPropertiesCut = new DevExpress.XtraBars.BarButtonItem();
@@ -73,7 +75,7 @@
 			this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
 			this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
 			this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
-			this.toolStripMenuItemFolderSeLinkTextWordWrap = new System.Windows.Forms.ToolStripMenuItem();
+			this.barButtonItemLinkPropertiesImages = new DevExpress.XtraBars.BarSubItem();
 			this.pnHeader.SuspendLayout();
 			this.pnHeaderBorder.SuspendLayout();
 			this.pnBorders.SuspendLayout();
@@ -145,6 +147,7 @@
             this.toolStripSeparator3,
             this.toolStripMenuItemFolderManageWidgetsAndBanners,
             this.toolStripMenuItemFolderDeleteSecurity,
+            this.toolStripMenuItemFolderEditTags,
             this.toolStripMenuItemFolderDeleteTags,
             this.toolStripMenuItemFolderSort,
             this.toolStripMenuItemFolderSeLinkTextWordWrap});
@@ -226,12 +229,26 @@
 			this.toolStripMenuItemFolderDeleteBanners.Text = "Remove all Banners for all links in this window";
 			this.toolStripMenuItemFolderDeleteBanners.Click += new System.EventHandler(this.toolStripMenuItemFolderDeleteBanners_Click);
 			// 
+			// toolStripMenuItemFolderEditTags
+			// 
+			this.toolStripMenuItemFolderEditTags.Name = "toolStripMenuItemFolderEditTags";
+			this.toolStripMenuItemFolderEditTags.Size = new System.Drawing.Size(348, 22);
+			this.toolStripMenuItemFolderEditTags.Text = "Add Search Tag to all links in this window";
+			this.toolStripMenuItemFolderEditTags.Click += new System.EventHandler(this.toolStripMenuItemFolderEditTags_Click);
+			// 
 			// toolStripMenuItemFolderSort
 			// 
 			this.toolStripMenuItemFolderSort.Name = "toolStripMenuItemFolderSort";
 			this.toolStripMenuItemFolderSort.Size = new System.Drawing.Size(348, 22);
 			this.toolStripMenuItemFolderSort.Text = "Sort Links in this Window A-Z";
 			this.toolStripMenuItemFolderSort.Click += new System.EventHandler(this.toolStripMenuItemFolderSort_Click);
+			// 
+			// toolStripMenuItemFolderSeLinkTextWordWrap
+			// 
+			this.toolStripMenuItemFolderSeLinkTextWordWrap.Name = "toolStripMenuItemFolderSeLinkTextWordWrap";
+			this.toolStripMenuItemFolderSeLinkTextWordWrap.Size = new System.Drawing.Size(348, 22);
+			this.toolStripMenuItemFolderSeLinkTextWordWrap.Text = "Make all Links RESPONSIVE";
+			this.toolStripMenuItemFolderSeLinkTextWordWrap.Click += new System.EventHandler(this.toolStripMenuItemFolderSetLinkTextWordWrap_Click);
 			// 
 			// popupMenuLinkProperties
 			// 
@@ -244,8 +261,7 @@
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemLinkPropertiesLinkSettings, true),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemLinkPropertiesAdvancedSettings),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemLinkPropertiesTags),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemLinkPropertiesWidget),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemLinkPropertiesBanner),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemLinkPropertiesImages, true),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemLinkPropertiesResetSettings, true),
             new DevExpress.XtraBars.LinkPersistInfo(this.barSubItemLinkPropertiesAdvanced, true),
             new DevExpress.XtraBars.LinkPersistInfo(this.barSubItemLinkPropertiesQuickTools, true)});
@@ -310,14 +326,14 @@
 			// 
 			// barButtonItemLinkPropertiesWidget
 			// 
-			this.barButtonItemLinkPropertiesWidget.Caption = "Widget  (tiny)";
+			this.barButtonItemLinkPropertiesWidget.Caption = "Widget Icon (tiny)";
 			this.barButtonItemLinkPropertiesWidget.Id = 9;
 			this.barButtonItemLinkPropertiesWidget.Name = "barButtonItemLinkPropertiesWidget";
 			this.barButtonItemLinkPropertiesWidget.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemLinkPropertiesWidget_ItemClick);
 			// 
 			// barButtonItemLinkPropertiesBanner
 			// 
-			this.barButtonItemLinkPropertiesBanner.Caption = "Banner  (BIG)";
+			this.barButtonItemLinkPropertiesBanner.Caption = "Clipart Logo (BIG)";
 			this.barButtonItemLinkPropertiesBanner.Id = 10;
 			this.barButtonItemLinkPropertiesBanner.Name = "barButtonItemLinkPropertiesBanner";
 			this.barButtonItemLinkPropertiesBanner.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemLinkPropertiesBanner_ItemClick);
@@ -398,8 +414,9 @@
             this.barButtonItemLinkPropertiesCopy,
             this.barButtonItemLinkPropertiesCut,
             this.barButtonItemLinkPropertiesPaste,
-            this.barButtonItemLinkPropertiesResetSettings});
-			this.barManager.MaxItemId = 34;
+            this.barButtonItemLinkPropertiesResetSettings,
+            this.barButtonItemLinkPropertiesImages});
+			this.barManager.MaxItemId = 35;
 			// 
 			// barDockControlTop
 			// 
@@ -429,12 +446,14 @@
 			this.barDockControlRight.Location = new System.Drawing.Point(311, 0);
 			this.barDockControlRight.Size = new System.Drawing.Size(0, 308);
 			// 
-			// toolStripMenuItemFolderSeLinkTextWordWrap
+			// LinkPropertiesImages
 			// 
-			this.toolStripMenuItemFolderSeLinkTextWordWrap.Name = "toolStripMenuItemFolderSeLinkTextWordWrap";
-			this.toolStripMenuItemFolderSeLinkTextWordWrap.Size = new System.Drawing.Size(348, 22);
-			this.toolStripMenuItemFolderSeLinkTextWordWrap.Text = "Make all Links RESPONSIVE";
-			this.toolStripMenuItemFolderSeLinkTextWordWrap.Click += new System.EventHandler(this.toolStripMenuItemFolderSetLinkTextWordWrap_Click);
+			this.barButtonItemLinkPropertiesImages.Caption = "Link ART";
+			this.barButtonItemLinkPropertiesImages.Id = 34;
+			this.barButtonItemLinkPropertiesImages.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemLinkPropertiesWidget),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemLinkPropertiesBanner)});
+			this.barButtonItemLinkPropertiesImages.Name = "barButtonItemLinkPropertiesImages";
 			// 
 			// ClassicFolderBox
 			// 
@@ -507,5 +526,7 @@
 		private DevExpress.XtraBars.BarButtonItem barButtonItemLinkPropertiesPaste;
 		private DevExpress.XtraBars.BarButtonItem barButtonItemLinkPropertiesResetSettings;
 		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemFolderSeLinkTextWordWrap;
+		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemFolderEditTags;
+		private DevExpress.XtraBars.BarSubItem barButtonItemLinkPropertiesImages;
 	}
 }

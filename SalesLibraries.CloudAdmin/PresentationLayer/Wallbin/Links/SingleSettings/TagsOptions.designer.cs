@@ -28,21 +28,25 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.components = new System.ComponentModel.Container();
+			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
 			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
+			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
 			this.xtraTabControlSearchTags = new DevExpress.XtraTab.XtraTabControl();
 			this.xtraTabPageSearchTagsCategories = new DevExpress.XtraTab.XtraTabPage();
 			this.splitContainerSearchTagsCategories = new DevExpress.XtraEditors.SplitContainerControl();
 			this.xtraScrollableControlSearchTagsCategories = new DevExpress.XtraEditors.XtraScrollableControl();
 			this.pnSearchTagsCategoriesHeader = new System.Windows.Forms.Panel();
 			this.labelControlSearchTagsCategoriesHeader = new DevExpress.XtraEditors.LabelControl();
-			this.styleController = new DevExpress.XtraEditors.StyleController();
+			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
 			this.buttonXWipeTags = new DevComponents.DotNetBar.ButtonX();
 			this.xtraTabPageSearchTagsKeywords = new DevExpress.XtraTab.XtraTabPage();
 			this.buttonXAddKeyWord = new DevComponents.DotNetBar.ButtonX();
 			this.gridControlSearchTagsKeywords = new DevExpress.XtraGrid.GridControl();
 			this.gridViewSearchTagsKeywords = new DevExpress.XtraGrid.Views.Grid.GridView();
 			this.gridColumnSearchTagsKeywordsValue = new DevExpress.XtraGrid.Columns.GridColumn();
-			this.repositoryItemButtonEditKeyword = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
+			this.repositoryItemButtonEditKeywordShared = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
+			this.repositoryItemButtonEditKeywordPartial = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControlSearchTags)).BeginInit();
 			this.xtraTabControlSearchTags.SuspendLayout();
 			this.xtraTabPageSearchTagsCategories.SuspendLayout();
@@ -53,7 +57,8 @@
 			this.xtraTabPageSearchTagsKeywords.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.gridControlSearchTagsKeywords)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.gridViewSearchTagsKeywords)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditKeyword)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditKeywordShared)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditKeywordPartial)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// xtraTabControlSearchTags
@@ -185,7 +190,7 @@
 			this.buttonXWipeTags.TabIndex = 7;
 			this.buttonXWipeTags.Text = "Clear Tags";
 			this.buttonXWipeTags.TextColor = System.Drawing.Color.Black;
-			this.buttonXWipeTags.Click += new System.EventHandler(this.buttonXWipeTags_Click);
+			this.buttonXWipeTags.Click += new System.EventHandler(this.OnWipeTagsClick);
 			// 
 			// xtraTabPageSearchTagsKeywords
 			// 
@@ -212,7 +217,7 @@
 			this.buttonXAddKeyWord.Text = "Add New Keyword";
 			this.buttonXAddKeyWord.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
 			this.buttonXAddKeyWord.TextColor = System.Drawing.Color.Black;
-			this.buttonXAddKeyWord.Click += new System.EventHandler(this.buttonXAddKeyWord_Click);
+			this.buttonXAddKeyWord.Click += new System.EventHandler(this.OnAddKeyWordClick);
 			// 
 			// gridControlSearchTagsKeywords
 			// 
@@ -227,8 +232,9 @@
 			this.gridControlSearchTagsKeywords.MainView = this.gridViewSearchTagsKeywords;
 			this.gridControlSearchTagsKeywords.Name = "gridControlSearchTagsKeywords";
 			this.gridControlSearchTagsKeywords.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
-            this.repositoryItemButtonEditKeyword});
-			this.gridControlSearchTagsKeywords.Size = new System.Drawing.Size(575, 450);
+            this.repositoryItemButtonEditKeywordShared,
+            this.repositoryItemButtonEditKeywordPartial});
+			this.gridControlSearchTagsKeywords.Size = new System.Drawing.Size(504, 450);
 			this.gridControlSearchTagsKeywords.TabIndex = 0;
 			this.gridControlSearchTagsKeywords.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewSearchTagsKeywords});
@@ -265,41 +271,52 @@
 			this.gridViewSearchTagsKeywords.OptionsView.ShowIndicator = false;
 			this.gridViewSearchTagsKeywords.OptionsView.ShowPreviewRowLines = DevExpress.Utils.DefaultBoolean.False;
 			this.gridViewSearchTagsKeywords.RowHeight = 35;
+			this.gridViewSearchTagsKeywords.RowCellStyle += new DevExpress.XtraGrid.Views.Grid.RowCellStyleEventHandler(this.OnKeywordsGridRowCellStyle);
+			this.gridViewSearchTagsKeywords.CustomRowCellEdit += new DevExpress.XtraGrid.Views.Grid.CustomRowCellEditEventHandler(this.OnKeywordsGridCustomRowCellEdit);
 			// 
 			// gridColumnSearchTagsKeywordsValue
 			// 
 			this.gridColumnSearchTagsKeywordsValue.Caption = "Value";
-			this.gridColumnSearchTagsKeywordsValue.ColumnEdit = this.repositoryItemButtonEditKeyword;
+			this.gridColumnSearchTagsKeywordsValue.ColumnEdit = this.repositoryItemButtonEditKeywordShared;
 			this.gridColumnSearchTagsKeywordsValue.FieldName = "Name";
 			this.gridColumnSearchTagsKeywordsValue.Name = "gridColumnSearchTagsKeywordsValue";
 			this.gridColumnSearchTagsKeywordsValue.ShowButtonMode = DevExpress.XtraGrid.Views.Base.ShowButtonModeEnum.ShowAlways;
 			this.gridColumnSearchTagsKeywordsValue.Visible = true;
 			this.gridColumnSearchTagsKeywordsValue.VisibleIndex = 0;
 			// 
-			// repositoryItemButtonEditKeyword
+			// repositoryItemButtonEditKeywordShared
 			// 
-			this.repositoryItemButtonEditKeyword.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.repositoryItemButtonEditKeyword.Appearance.Options.UseFont = true;
-			this.repositoryItemButtonEditKeyword.AppearanceDisabled.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.repositoryItemButtonEditKeyword.AppearanceDisabled.Options.UseFont = true;
-			this.repositoryItemButtonEditKeyword.AppearanceFocused.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.repositoryItemButtonEditKeyword.AppearanceFocused.Options.UseFont = true;
-			this.repositoryItemButtonEditKeyword.AppearanceReadOnly.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.repositoryItemButtonEditKeyword.AppearanceReadOnly.Options.UseFont = true;
-			this.repositoryItemButtonEditKeyword.AutoHeight = false;
-			this.repositoryItemButtonEditKeyword.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::SalesLibraries.CloudAdmin.Properties.Resources.ButtonDelete, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "", null, null, true)});
-			this.repositoryItemButtonEditKeyword.Name = "repositoryItemButtonEditKeyword";
-			this.repositoryItemButtonEditKeyword.NullText = "Type Keyword...";
-			this.repositoryItemButtonEditKeyword.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.repositoryItemButtonEditKeyword_ButtonClick);
+			this.repositoryItemButtonEditKeywordShared.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.repositoryItemButtonEditKeywordShared.Appearance.Options.UseFont = true;
+			this.repositoryItemButtonEditKeywordShared.AppearanceDisabled.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.repositoryItemButtonEditKeywordShared.AppearanceDisabled.Options.UseFont = true;
+			this.repositoryItemButtonEditKeywordShared.AppearanceFocused.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.repositoryItemButtonEditKeywordShared.AppearanceFocused.Options.UseFont = true;
+			this.repositoryItemButtonEditKeywordShared.AppearanceReadOnly.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.repositoryItemButtonEditKeywordShared.AppearanceReadOnly.Options.UseFont = true;
+			this.repositoryItemButtonEditKeywordShared.AutoHeight = false;
+			this.repositoryItemButtonEditKeywordShared.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::SalesLibraries.CloudAdmin.Properties.Resources.ButtonDelete, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "Delete", "Delete", null, true)});
+			this.repositoryItemButtonEditKeywordShared.Name = "repositoryItemButtonEditKeywordShared";
+			this.repositoryItemButtonEditKeywordShared.NullText = "Type Keyword...";
+			this.repositoryItemButtonEditKeywordShared.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.OnKeywordsEditorButtonClick);
+			// 
+			// repositoryItemButtonEditKeywordPartial
+			// 
+			this.repositoryItemButtonEditKeywordPartial.AutoHeight = false;
+			this.repositoryItemButtonEditKeywordPartial.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::SalesLibraries.CloudAdmin.Properties.Resources.ButtonApplyForAll, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "Apply for ALL Links and Edit", "MakeShared", null, true),
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::SalesLibraries.CloudAdmin.Properties.Resources.ButtonDelete, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject3, "Delete", "Delete", null, true)});
+			this.repositoryItemButtonEditKeywordPartial.Name = "repositoryItemButtonEditKeywordPartial";
+			this.repositoryItemButtonEditKeywordPartial.NullText = "Type Keyword...";
+			this.repositoryItemButtonEditKeywordPartial.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+			this.repositoryItemButtonEditKeywordPartial.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.OnKeywordsEditorButtonClick);
 			// 
 			// TagsOptions
 			// 
-			this.Appearance.PageClient.BackColor = System.Drawing.Color.White;
-			this.Appearance.PageClient.Options.UseBackColor = true;
 			this.Controls.Add(this.xtraTabControlSearchTags);
+			this.Name = "TagsOptions";
 			this.Size = new System.Drawing.Size(531, 541);
-			this.Text = "Search Tags";
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControlSearchTags)).EndInit();
 			this.xtraTabControlSearchTags.ResumeLayout(false);
 			this.xtraTabPageSearchTagsCategories.ResumeLayout(false);
@@ -310,7 +327,8 @@
 			this.xtraTabPageSearchTagsKeywords.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.gridControlSearchTagsKeywords)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.gridViewSearchTagsKeywords)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditKeyword)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditKeywordShared)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditKeywordPartial)).EndInit();
 			this.ResumeLayout(false);
 
 		}
@@ -329,7 +347,8 @@
 		private DevExpress.XtraGrid.GridControl gridControlSearchTagsKeywords;
 		private DevExpress.XtraGrid.Views.Grid.GridView gridViewSearchTagsKeywords;
 		private DevExpress.XtraGrid.Columns.GridColumn gridColumnSearchTagsKeywordsValue;
-		private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repositoryItemButtonEditKeyword;
+		private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repositoryItemButtonEditKeywordShared;
 		private DevExpress.XtraEditors.StyleController styleController;
+		private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repositoryItemButtonEditKeywordPartial;
 	}
 }

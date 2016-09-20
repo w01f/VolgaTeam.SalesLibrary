@@ -25,7 +25,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 		public LinkLanOptions(NetworkLink data)
 		{
 			InitializeComponent();
-			Text = "Advanced";
+			Text = "Admin";
 			_data = data;
 			if ((CreateGraphics()).DpiX > 96)
 			{
@@ -35,9 +35,6 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 				styleController.AppearanceDropDownHeader.Font = styleControllerFont;
 				styleController.AppearanceFocused.Font = styleControllerFont;
 				styleController.AppearanceReadOnly.Font = styleControllerFont;
-				labelControlTitle.Font = new Font(labelControlTitle.Font.FontFamily, labelControlTitle.Font.Size - 2, labelControlTitle.Font.Style);
-				labelControlName.Font = new Font(labelControlName.Font.FontFamily, labelControlName.Font.Size - 2, labelControlName.Font.Style);
-				labelControlPath.Font = new Font(labelControlPath.Font.FontFamily, labelControlPath.Font.Size - 2, labelControlPath.Font.Style);
 			}
 		}
 

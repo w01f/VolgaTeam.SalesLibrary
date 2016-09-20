@@ -11,12 +11,37 @@ namespace SalesLibraries.Business.Entities.Helpers
 {
 	public static class BatchLinkProcessor
 	{
-		public static void ApplyCategories(this IEnumerable<BaseLibraryLink> links, SearchGroup[] searchGroups)
+		public static void ApplyCategories(this IEnumerable<BaseLibraryLink> links, SearchGroup[] sharedSearchGroups, SearchGroup[] partialSearchGroups = null)
 		{
 			foreach (var libraryLink in links)
 			{
-				libraryLink.Tags.Categories.Clear();
-				libraryLink.Tags.Categories.AddRange(searchGroups.Select(searchGroup => searchGroup.Clone()));
+				if (partialSearchGroups == null)
+				{
+					libraryLink.Tags.Categories.Clear();
+					libraryLink.Tags.Categories.AddRange(sharedSearchGroups.Select(searchGroup => searchGroup.Clone()));
+				}
+				else
+				{
+					libraryLink.Tags.Categories.RemoveAll(groupForRemove =>
+						!sharedSearchGroups.Any(g => g.Equals(groupForRemove)) &&
+						!partialSearchGroups.Any(g => g.Equals(groupForRemove)));
+
+					foreach (var searchGroup in libraryLink.Tags.Categories)
+					{
+						var partialGroup = partialSearchGroups.FirstOrDefault(g => g.Equals(searchGroup));
+						var sharedGroup = sharedSearchGroups.FirstOrDefault(g => g.Equals(searchGroup));
+
+						searchGroup.Tags.RemoveAll(tagForRemove =>
+							(sharedGroup == null || !sharedGroup.Tags.Any(t => t.Equals(tagForRemove))) &&
+							(partialGroup == null || !partialGroup.Tags.Any(t => t.Equals(tagForRemove))));
+
+						if (sharedGroup != null)
+							searchGroup.Tags.AddRange(sharedGroup.Tags.Where(tagToAdd => !searchGroup.Tags.Any(t => t.Equals(tagToAdd))));
+					}
+
+					libraryLink.Tags.Categories.AddRange(sharedSearchGroups.Where(groupForAdd => !libraryLink.Tags.Categories.Any(g => g.Equals(groupForAdd))));
+				}
+
 				libraryLink.MarkAsModified();
 			}
 		}
@@ -27,6 +52,19 @@ namespace SalesLibraries.Business.Entities.Helpers
 			{
 				libraryLink.Tags.Keywords.Clear();
 				libraryLink.Tags.Keywords.AddRange(keywords.Select(tag => new SearchTag { Name = tag.Name }));
+				libraryLink.MarkAsModified();
+			}
+		}
+
+		public static void ApplyKeywords(this IEnumerable<BaseLibraryLink> links, KeywordModel[] keywords)
+		{
+			foreach (var libraryLink in links)
+			{
+				libraryLink.Tags.Keywords.RemoveAll(tagForRemove =>
+					!keywords.Any(k => String.Equals(k.Name, tagForRemove.Name, StringComparison.OrdinalIgnoreCase)));
+				libraryLink.Tags.Keywords.AddRange(keywords
+					.Where(tagForAdd => tagForAdd.IsShared && !libraryLink.Tags.Keywords.Any(k => String.Equals(k.Name, tagForAdd.Name, StringComparison.OrdinalIgnoreCase)))
+					.Select(tag => new SearchTag { Name = tag.Name }));
 				libraryLink.MarkAsModified();
 			}
 		}
@@ -175,46 +213,61 @@ namespace SalesLibraries.Business.Entities.Helpers
 			return links.OfType<LibraryObjectLink>().Where(link => !link.Security.IsForbidden);
 		}
 
-		public static string GetCommonTags(this IList<BaseLibraryLink> links)
+		public static IList<SearchGroup> GetCommonCategories(this IList<BaseLibraryLink> links)
 		{
 			var commonCategories = new List<SearchGroup>();
 			var allCategories = links.SelectMany(l => l.Tags.Categories).ToList();
 			foreach (var searchGroup in allCategories)
 			{
-				if (commonCategories.Any(c => c.Name == searchGroup.Name)) continue;
-				if (!links.All(l => l.Tags.Categories.Any(c => c.Name == searchGroup.Name))) continue;
+				if (commonCategories.Any(c => c.Equals(searchGroup))) continue;
+				if (!links.All(l => l.Tags.Categories.Any(c => c.Equals(searchGroup)))) continue;
 
 				var commonCategory = new SearchGroup { Name = searchGroup.Name };
 				foreach (var searchTag in allCategories
-					.Where(c => c.Name == commonCategory.Name)
+					.Where(c => c.Equals(commonCategory))
 					.SelectMany(c => c.Tags)
 					.ToList())
 				{
-					if (commonCategory.Tags.Any(t => t.Name == searchTag.Name)) continue;
+					if (commonCategory.Tags.Any(t => t.Equals(searchTag))) continue;
 					if (!links.All(l => l.Tags.Categories
-						.Where(c => c.Name == commonCategory.Name)
+						.Where(c => c.Equals(commonCategory))
 						.SelectMany(c => c.Tags)
-						.Any(t => t.Name == searchTag.Name))) continue;
+						.Any(t => t.Equals(searchTag)))) continue;
 					commonCategory.Tags.Add(new SearchTag { Name = searchTag.Name });
 				}
 				if (commonCategory.Tags.Any())
 					commonCategories.Add(commonCategory);
 			}
+			return commonCategories;
+		}
 
-
+		public static IList<SearchTag> GetCommonKeywords(this IList<BaseLibraryLink> links)
+		{
 			var commonKeywords = new List<SearchTag>();
 			var allKeywords = links.SelectMany(l => l.Tags.Keywords).ToList();
 			foreach (var searchTag in allKeywords)
 			{
-				if (commonKeywords.Any(t => t.Name == searchTag.Name)) continue;
-				if (!links.All(l => l.Tags.Keywords.Any(t => t.Name == searchTag.Name))) continue;
+				if (commonKeywords.Any(t => t.Equals(searchTag))) continue;
+				if (!links.All(l => l.Tags.Keywords.Any(t => t.Equals(searchTag)))) continue;
 				commonKeywords.Add(new SearchTag { Name = searchTag.Name });
 			}
+			return commonKeywords;
+		}
 
+		public static string GetCommonTags(this IList<BaseLibraryLink> links)
+		{
+			var commonCategories = GetCommonCategories(links);
+			var commonKeywords = GetCommonKeywords(links);
 			return String.Join(", ",
 				commonCategories
 				.SelectMany(sg => sg.Tags.Select(t => t.Name))
 				.Union(commonKeywords.Select(t => t.Name)));
+		}
+
+		public static void SetLinkTextWordWrap(this IEnumerable<BaseLibraryLink> links)
+		{
+			foreach (var libraryLink in links)
+				libraryLink.Settings.TextWordWrap = true;
 		}
 	}
 }

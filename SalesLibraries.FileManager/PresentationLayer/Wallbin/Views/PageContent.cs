@@ -6,12 +6,14 @@ using System.Linq;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using SalesLibraries.Business.Entities.Helpers;
+using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.Persistent;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.Common.Objects.SearchTags;
 using SalesLibraries.CommonGUI.Wallbin.ColumnTitles;
 using SalesLibraries.FileManager.Controllers;
 using SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls;
+using SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSettings;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 {
@@ -75,6 +77,14 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 			_folderBoxes.ForEach(folderBoxControl => folderBoxControl.SelectAll(false));
 		}
 
+		public void EditTags()
+		{
+			MainController.Instance.WallbinViews.Selection.Reset();
+			SettingsEditorFactory.Run(PageContainer.Page.AllLinks.ToList(), LinkSettingsType.Tags, false);
+			MainController.Instance.ProcessManager.Run("Updating Page...",
+				cancelationToken => MainController.Instance.MainForm.Invoke(new MethodInvoker(UpdateContent)));
+		}
+
 		public void DeleteLinks()
 		{
 			PageContainer.Suspend();
@@ -99,7 +109,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 			PageContainer.Page.AllLinks.ResetExpirationSettings();
 			MainController.Instance.WallbinViews.Selection.Reset();
 			MainController.Instance.ProcessManager.Run("Updating Page...", cancelationToken => MainController.Instance.MainForm.Invoke(new MethodInvoker(UpdateContent)));
-			UpdateContent();
 		}
 
 		public void ResetSecurity()
@@ -107,17 +116,16 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 			PageContainer.Page.AllLinks.ResetSecurity();
 			MainController.Instance.WallbinViews.Selection.Reset();
 			MainController.Instance.ProcessManager.Run("Updating Page...", cancelationToken => MainController.Instance.MainForm.Invoke(new MethodInvoker(UpdateContent)));
-			UpdateContent();
 		}
 
 		public void ResetTags()
 		{
+			MainController.Instance.WallbinViews.Selection.Reset();
 			PageContainer.Page.AllLinks.ApplyCategories(new SearchGroup[] { });
 			PageContainer.Page.AllLinks.ApplyKeywords(new SearchTag[] { });
 			PageContainer.Page.AllLinks.ApplySuperFilters(new string[] { });
-			MainController.Instance.WallbinViews.Selection.Reset();
 			MainController.Instance.ProcessManager.Run("Updating Page...",
-				cancelationToken => MainController.Instance.MainForm.Invoke(new MethodInvoker(UpdateContent)));
+					cancelationToken => MainController.Instance.MainForm.Invoke(new MethodInvoker(UpdateContent)));
 		}
 
 		public void ResetWidgets()

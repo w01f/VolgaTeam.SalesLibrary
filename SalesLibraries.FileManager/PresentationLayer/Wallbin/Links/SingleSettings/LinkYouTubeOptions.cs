@@ -26,7 +26,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		public LinkYouTubeOptions(YouTubeLink data)
 		{
 			InitializeComponent();
-			Text = "Advanced";
+			Text = "Admin";
 			_data = data;
 			if ((CreateGraphics()).DpiX > 96)
 			{

@@ -11,16 +11,16 @@ using SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Libraries;
 namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 {
 	[ToolboxItem(false)]
-	public abstract partial class BaseWallbin : UserControl, IWallbinView
+	public partial class BaseWallbin : UserControl, IWallbinView
 	{
 		protected bool ReadyToUse { get; set; }
-		public LibraryContext DataStorage { get; private set; }
+		public LibraryContext DataStorage { get; }
 		public IPageView ActivePage { get; private set; }
-		public List<IPageView> Pages { get; private set; }
+		public List<IPageView> Pages { get; }
 		public event EventHandler<EventArgs> PageChanging;
 		public event EventHandler<EventArgs> PageChanged;
 		public event EventHandler<EventArgs> DataChanged;
-		public LibraryTagInfo TagInfoControl { get; private set; }
+		public LibraryTagInfo TagInfoControl { get; }
 
 		private bool _isDataChanged;
 		public bool IsDataChanged
@@ -35,12 +35,12 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 			}
 		}
 
-		protected BaseWallbin()
+		public BaseWallbin()
 		{
 			InitializeComponent();
 		}
 
-		protected BaseWallbin(LibraryContext dataStorage)
+		public BaseWallbin(LibraryContext dataStorage)
 		{
 			InitializeComponent();
 			Dock = DockStyle.Fill;
@@ -105,7 +105,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 			IsDataChanged = false;
 		}
 
-		protected abstract void InitControls();
+		protected virtual void InitControls() { }
 		#endregion
 
 		#region Pages Processing
@@ -131,7 +131,10 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 			SaveData();
 		}
 
-		public abstract void SelectPage(IPageView pageView);
+		public virtual void SelectPage(IPageView pageView)
+		{
+			throw new NotImplementedException();
+		}
 		#endregion
 	}
 }

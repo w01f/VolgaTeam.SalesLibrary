@@ -3,13 +3,14 @@ using System.Linq;
 using System.Windows.Forms;
 using DevComponents.DotNetBar;
 using DevExpress.XtraEditors;
+using DevExpress.XtraEditors.Controls;
 using SalesLibraries.Common.Objects.SearchTags;
 
 namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Common
 {
 	class SearchGroupContainer
 	{
-		public SearchGroup DataSource { get; private set; }
+		public SearchGroup DataSource { get; }
 		public CheckedListBoxControl ListBox { get; private set; }
 		public ButtonX ToggleButton { get; private set; }
 
@@ -28,7 +29,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Common
 			ListBox.ItemHeight = 30;
 			ListBox.SelectionMode = SelectionMode.None;
 			ListBox.Dock = DockStyle.Fill;
-			ListBox.Items.AddRange(DataSource.Tags.Select(tag => tag.Name).ToArray());
+			ListBox.Items.AddRange(DataSource.Tags.Select(t => new CheckedListBoxItem(t, t.Name, false)).ToArray());
 
 			ToggleButton = new ButtonX();
 			ToggleButton.AccessibleRole = AccessibleRole.PushButton;

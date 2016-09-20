@@ -5,6 +5,6 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 	public interface ILinkSettingsEditForm
 	{
 		LinkSettingsType[] EditableSettings { get; }
-		void InitForm(LinkSettingsType settingsType);
+		void InitForm<TEditControl>(LinkSettingsType settingsType) where TEditControl : ILinkSettingsEditControl;
 	}
 }

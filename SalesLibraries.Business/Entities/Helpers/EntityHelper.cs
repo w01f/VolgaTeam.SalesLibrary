@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
+using System.Linq;
 using Newtonsoft.Json;
 using SalesLibraries.Business.Entities.Interfaces;
 using SalesLibraries.Common.JsonConverters;
@@ -39,6 +41,25 @@ namespace SalesLibraries.Business.Entities.Helpers
 			if (!transtactionMethod(targetCopy)) return false;
 
 			commitMethod(context, target, targetCopy);
+			return true;
+		}
+
+		public static bool PerformTransaction<TContext, TEntity>(this IList<TEntity> targetList, TContext context, Func<IList<TEntity>, bool> transtactionMethod, Action<Action> copyWrapMethod, Action<TContext, IList<TEntity>, IList<TEntity>> commitMethod)
+			where TContext : DbContext
+			where TEntity : BaseEntity<TContext>, IChangable
+		{
+			var copyInnerMethod = new Func<IList<TEntity>>(() => targetList.Select(entity => entity.Clone<TContext, TEntity>()).ToList());
+
+			IList<TEntity> clonedList = null;
+			if (copyWrapMethod != null)
+				copyWrapMethod(() => { clonedList = copyInnerMethod(); });
+			else
+				clonedList = copyInnerMethod();
+
+			if (!transtactionMethod(clonedList)) return false;
+
+			commitMethod(context, targetList, clonedList);
+
 			return true;
 		}
 	}

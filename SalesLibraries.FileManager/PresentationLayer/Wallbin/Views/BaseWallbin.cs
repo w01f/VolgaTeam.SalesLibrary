@@ -12,17 +12,17 @@ using SalesLibraries.FileManager.PresentationLayer.Wallbin.Libraries;
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 {
 	[ToolboxItem(false)]
-	public abstract partial class BaseWallbin : UserControl, IWallbinView
+	public partial class BaseWallbin : UserControl, IWallbinView
 	{
 		protected bool ReadyToUse { get; set; }
-		public LibraryContext DataStorage { get; private set; }
+		public LibraryContext DataStorage { get; }
 		public IPageView ActivePage { get; private set; }
-		public List<IPageView> Pages { get; private set; }
+		public List<IPageView> Pages { get; }
 		public event EventHandler<EventArgs> PageChanging;
 		public event EventHandler<EventArgs> PageChanged;
 		public event EventHandler<EventArgs> DataChanged;
 		public DataSourceTreeViewControl DataSourcesControl { get; private set; }
-		public LibraryTagInfo TagInfoControl { get; private set; }
+		public LibraryTagInfo TagInfoControl { get; }
 
 		private bool _isDataChanged;
 		public bool IsDataChanged
@@ -98,8 +98,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 				DataSourcesControl.Dispose();
 				DataSourcesControl = null;
 			}
-			if (TagInfoControl != null)
-				TagInfoControl.ReleaseControl();
+			TagInfoControl?.ReleaseControl();
 		}
 
 		public void SaveData()
@@ -143,7 +142,10 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 			SaveData();
 		}
 
-		public abstract void SelectPage(IPageView pageView);
+		public virtual void SelectPage(IPageView pageView)
+		{
+			throw new NotImplementedException();
+		}
 		#endregion
 
 		#region Data Sources

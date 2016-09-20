@@ -371,6 +371,14 @@
     <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\FormResetLinkSettings.Designer.cs">
       <DependentUpon>FormResetLinkSettings.cs</DependentUpon>
     </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\ILinkSetSettingsEditForm.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\ILinkSetSettingsEditControl.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkPowerPointOptions.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkPowerPointOptions.designer.cs">
+      <DependentUpon>LinkPowerPointOptions.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkHoverNoteOptions.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -504,18 +512,6 @@
     </Compile>
     <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkWebOptions.designer.cs">
       <DependentUpon>LinkWebOptions.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\PowerPointPreviewOptions.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\PowerPointPreviewOptions.designer.cs">
-      <DependentUpon>PowerPointPreviewOptions.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\PreviewOptions.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\PreviewOptions.designer.cs">
-      <DependentUpon>PreviewOptions.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkInfoControl.cs">
       <SubType>Component</SubType>
@@ -766,6 +762,9 @@
     <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\FormResetLinkSettings.resx">
       <DependentUpon>FormResetLinkSettings.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkPowerPointOptions.resx">
+      <DependentUpon>LinkPowerPointOptions.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkHoverNoteOptions.resx">
       <DependentUpon>LinkHoverNoteOptions.cs</DependentUpon>
     </EmbeddedResource>
@@ -831,12 +830,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkWebOptions.resx">
       <DependentUpon>LinkWebOptions.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\PowerPointPreviewOptions.resx">
-      <DependentUpon>PowerPointPreviewOptions.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\PreviewOptions.resx">
-      <DependentUpon>PreviewOptions.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkInfoControl.resx">
       <DependentUpon>LinkInfoControl.cs</DependentUpon>
@@ -957,6 +950,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\ButtonApplyForAll.png" />
     <None Include="Resources\LinkSettingsTextNote.png" />
     <None Include="Resources\LinkSettingsTextFormat.png" />
     <None Include="Resources\LinkSettingsQuickLink.png" />

@@ -9,7 +9,6 @@ using DevExpress.XtraGrid;
 using SalesLibraries.Business.Entities.Helpers;
 using SalesLibraries.CloudAdmin.Controllers;
 using SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views;
-using SalesLibraries.Common.Extensions;
 using SalesLibraries.Common.Objects.SearchTags;
 using SalesLibraries.CommonGUI.Common;
 
@@ -18,7 +17,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.GroupSetting
 	[ToolboxItem(false)]
 	public sealed partial class KeywordsEditor : UserControl, IGroupSettingsEditor
 	{
-		private readonly List<SearchTag> _keywords = new List<SearchTag>();
+		private readonly List<KeywordModel> _keywords = new List<KeywordModel>();
 
 		private SelectionManager Selection => MainController.Instance.WallbinViews.Selection;
 
@@ -27,9 +26,9 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.GroupSetting
 			InitializeComponent();
 			Dock = DockStyle.Fill;
 
-			repositoryItemButtonEditKeyword.Enter += EditorHelper.EditorEnter;
-			repositoryItemButtonEditKeyword.MouseUp += EditorHelper.EditorMouseUp;
-			repositoryItemButtonEditKeyword.MouseDown += EditorHelper.EditorMouseUp;
+			repositoryItemButtonEditSharedKeyword.Enter += EditorHelper.EditorEnter;
+			repositoryItemButtonEditSharedKeyword.MouseUp += EditorHelper.EditorMouseUp;
+			repositoryItemButtonEditSharedKeyword.MouseDown += EditorHelper.EditorMouseUp;
 
 			if (!((CreateGraphics()).DpiX > 96)) return;
 			var styleControllerFont = new Font(styleController.Appearance.Font.FontFamily, styleController.Appearance.Font.Size - 2, styleController.Appearance.Font.Style);
@@ -49,24 +48,20 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.GroupSetting
 
 		public void UpdateData()
 		{
-			pnButtons.Enabled = false;
-			pnData.Enabled = false;
 			gridControl.DataSource = null;
 			_keywords.Clear();
 			Enabled = false;
 
-			var defaultLink = Selection.SelectedLinks.FirstOrDefault(link => link.Tags.HasKeywords) ?? Selection.SelectedLinks.FirstOrDefault();
-			Enabled = defaultLink != null;
-			if (defaultLink == null) return;
+			Enabled = Selection.SelectedLinks.Any();
 
-			var noData = Selection.SelectedLinks.All(link => link.Tags.Keywords.Any());
-			var sameData = Selection.SelectedLinks.All(link => link.Tags.Keywords.Compare(defaultLink.Tags.Keywords));
-
-			pnButtons.Enabled = !noData;
-			pnData.Enabled = sameData || noData;
-
-			if (sameData)
-				_keywords.AddRange(defaultLink.Tags.Keywords);
+			var commonKeywords = Selection.SelectedLinks.GetCommonKeywords().ToList();
+			_keywords.AddRange(commonKeywords.Select(k => new KeywordModel { Name = k.Name, IsShared = true }));
+			foreach (var link in Selection.SelectedLinks)
+			{
+				_keywords.AddRange(link.Tags.Keywords
+					.Where(k => !commonKeywords.Any(commonKeyword => commonKeyword.Equals(k)))
+						.Select(k => new KeywordModel { Name = k.Name, IsShared = false }));
+			}
 
 			gridControl.DataSource = _keywords;
 		}
@@ -75,7 +70,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.GroupSetting
 		{
 			gridView.CloseEditor();
 			_keywords.RemoveAll(tag => String.IsNullOrEmpty(tag.Name));
-			Selection.SelectedLinks.ApplyKeywords(_keywords.Where(tag => !String.IsNullOrEmpty(tag.Name)).ToArray());
+			Selection.SelectedLinks.ApplyKeywords(_keywords.ToArray());
 			EditorChanged?.Invoke(this, new EventArgs());
 		}
 
@@ -88,25 +83,16 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.GroupSetting
 		}
 		#endregion
 
-		private void buttonXReset_Click(object sender, EventArgs e)
+		private void OnResetClick(object sender, EventArgs e)
 		{
 			ResetData();
 		}
 
-		private void repositoryItemButtonEditKeyword_ButtonClick(object sender, ButtonPressedEventArgs e)
-		{
-			gridView.CloseEditor();
-			if (gridView.FocusedRowHandle == GridControl.InvalidRowHandle) return;
-			_keywords.RemoveAt(gridView.GetDataSourceRowIndex(gridView.FocusedRowHandle));
-			gridView.RefreshData();
-			ApplyData();
-		}
-
-		private void buttonXAdd_Click(object sender, EventArgs e)
+		private void OnAddClick(object sender, EventArgs e)
 		{
 			gridView.CloseEditor();
 			_keywords.RemoveAll(tag => string.IsNullOrEmpty(tag.Name));
-			_keywords.Add(new SearchTag());
+			_keywords.Add(new KeywordModel { IsShared = true });
 			gridView.RefreshData();
 			if (gridView.RowCount > 0)
 			{
@@ -115,9 +101,43 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.GroupSetting
 			}
 		}
 
-		private void gridView_HiddenEditor(object sender, EventArgs e)
+		private void OnKeywordEditorButtonClick(object sender, ButtonPressedEventArgs e)
+		{
+			gridView.CloseEditor();
+			if (gridView.FocusedRowHandle == GridControl.InvalidRowHandle) return;
+			var keyword = (KeywordModel)gridView.GetFocusedRow();
+			switch (e.Button.Tag as String)
+			{
+				case "Delete":
+					_keywords.Remove(keyword);
+					break;
+				case "MakeShared":
+					keyword.IsShared = true;
+					break;
+			}
+			gridView.RefreshData();
+			ApplyData();
+		}
+
+		private void OnHideEditor(object sender, EventArgs e)
 		{
 			ApplyData();
+		}
+
+		private void OnGridViewCustomRowCellEdit(object sender, DevExpress.XtraGrid.Views.Grid.CustomRowCellEditEventArgs e)
+		{
+			var keyword = (KeywordModel)gridView.GetRow(e.RowHandle);
+			e.RepositoryItem = keyword.IsShared ?
+				repositoryItemButtonEditSharedKeyword :
+				repositoryItemButtonEditPartialKeyword;
+		}
+
+		private void OnGridViewRowCellStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs e)
+		{
+			var keyword = (KeywordModel)gridView.GetRow(e.RowHandle);
+			e.Appearance.ForeColor = keyword.IsShared ?
+				Color.Black :
+				Color.Gray;
 		}
 	}
 }

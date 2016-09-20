@@ -6,7 +6,6 @@ using System.Windows.Forms;
 using DevExpress.XtraTreeList;
 using DevExpress.XtraTreeList.Nodes;
 using SalesLibraries.Business.Entities.Helpers;
-using SalesLibraries.Common.Extensions;
 using SalesLibraries.Common.Objects.SearchTags;
 using SalesLibraries.FileManager.Controllers;
 using SalesLibraries.FileManager.PresentationLayer.Wallbin.Views;
@@ -51,28 +50,27 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 				groupNode.Nodes.ToList().ForEach(tagNode => tagNode.Checked = false);
 			});
 
-			var defaultLink = Selection.SelectedLinks.FirstOrDefault(link => link.Tags.HasCategories) ?? Selection.SelectedLinks.FirstOrDefault();
-			Enabled = defaultLink != null;
-			var noData = defaultLink != null && Selection.SelectedLinks.All(link => !link.Tags.HasCategories);
-			var sameData = defaultLink != null && Selection.SelectedLinks.All(link => link.Tags.Categories.Compare(defaultLink.Tags.Categories));
-			buttonXReset.Enabled = !noData;
-			buttonXExpand.Enabled = sameData || noData;
-			buttonXCollapse.Enabled = sameData || noData;
-			pnData.Enabled = sameData || noData;
+			Enabled = Selection.SelectedLinks.Any();
 
-			if (sameData)
+			var commonCategories = Selection.SelectedLinks.GetCommonCategories();
+			foreach (var link in Selection.SelectedLinks)
 			{
-				foreach (var group in defaultLink.Tags.Categories)
+				foreach (var group in link.Tags.Categories)
 				{
-					var groupNode = _rootNode.Nodes.FirstOrDefault(node => ((SearchGroup) node.Tag).Name == group.Name);
+					var groupNode = _rootNode.Nodes.FirstOrDefault(node => ((SearchGroup)node.Tag).Equals(group));
 					if (groupNode == null) continue;
-					groupNode.Checked = true;
+					var isCommonGroup = commonCategories.Any(commonGroup => commonGroup.Equals(group));
+					groupNode.CheckState = isCommonGroup ? CheckState.Checked : CheckState.Indeterminate;
 
 					foreach (var tag in group.Tags)
 					{
-						var tagNode = groupNode.Nodes.FirstOrDefault(node => ((SearchTag)node.Tag).Name == tag.Name);
+						var tagNode = groupNode.Nodes.FirstOrDefault(node => ((SearchTag)node.Tag).Equals(tag));
 						if (tagNode == null) continue;
-						tagNode.Checked = true;
+						var isCommonTag = commonCategories
+							.Where(commonCategory => commonCategory.Equals(group))
+							.SelectMany(commonCategory => commonCategory.Tags)
+							.Any(commonTag => commonTag.Equals(tag));
+						tagNode.CheckState = isCommonTag ? CheckState.Checked : CheckState.Indeterminate;
 					}
 				}
 			}
@@ -84,8 +82,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 
 		private void ApplyData()
 		{
-			Selection.SelectedLinks.ApplyCategories(_rootNode.Nodes
-				.Where(groupNode => groupNode.Checked)
+			var sharedGroups = _rootNode.Nodes
+				.Where(groupNode => groupNode.CheckState == CheckState.Checked)
 				.Select(groupNode =>
 				{
 					var sourceGroup = (SearchGroup)groupNode.Tag;
@@ -95,7 +93,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 						Description = sourceGroup.Description
 					};
 					newGroup.Tags.AddRange(groupNode.Nodes
-						.Where(tagNode => tagNode.Checked)
+						.Where(tagNode => tagNode.CheckState == CheckState.Checked)
 						.Select(tagNode =>
 						{
 							var sourceTag = (SearchTag)tagNode.Tag;
@@ -105,7 +103,32 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 					return newGroup;
 				})
 				.Where(g => g.Tags.Any())
-				.ToArray());
+				.ToArray();
+
+			var partialGroups = _rootNode.Nodes
+				.Where(groupNode => groupNode.CheckState != CheckState.Unchecked)
+				.Select(groupNode =>
+				{
+					var sourceGroup = (SearchGroup)groupNode.Tag;
+					var newGroup = new SearchGroup
+					{
+						Name = sourceGroup.Name,
+						Description = sourceGroup.Description
+					};
+					newGroup.Tags.AddRange(groupNode.Nodes
+						.Where(tagNode => tagNode.CheckState == CheckState.Indeterminate)
+						.Select(tagNode =>
+						{
+							var sourceTag = (SearchTag)tagNode.Tag;
+							var newTag = new SearchTag { Name = sourceTag.Name };
+							return newTag;
+						}));
+					return newGroup;
+				})
+				.Where(g => g.Tags.Any())
+				.ToArray();
+
+			Selection.SelectedLinks.ApplyCategories(sharedGroups, partialGroups);
 			EditorChanged?.Invoke(this, new EventArgs());
 		}
 
@@ -158,9 +181,19 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 			node.StateImageIndex = 1;
 		}
 
-		private void buttonXReset_Click(object sender, EventArgs e)
+		private void OnResetClick(object sender, EventArgs e)
 		{
 			ResetData();
+		}
+
+		private void OnExpandClick(object sender, EventArgs e)
+		{
+			ExpandNode(_rootNode);
+		}
+
+		private void OnCollapseClick(object sender, EventArgs e)
+		{
+			CollapseNode(_rootNode);
 		}
 
 		private void OnCategoriesBeforeCheckNode(object sender, CheckNodeEventArgs e)
@@ -168,7 +201,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 			if (!_handleCheckEvens) return;
 			if (e.State != CheckState.Checked) return;
 
-			var curentCheckedTagsCount = _rootNode.Nodes.SelectMany(node => node.Nodes).Count(node => node.Checked);
+			var curentCheckedTagsCount = _rootNode.Nodes.SelectMany(node => node.Nodes).Count(node => node.CheckState != CheckState.Unchecked);
 			var newCheckedTagsCount = curentCheckedTagsCount;
 			if (e.Node.Tag is SearchGroup)
 				newCheckedTagsCount += e.Node.Nodes.Count;
@@ -177,8 +210,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 			if (newCheckedTagsCount <= MainController.Instance.Lists.SearchTags.MaxTags) return;
 
 			MainController.Instance.PopupMessages.ShowWarning(String.Format("Only {0} Search Tags are ALLOWED", MainController.Instance.Lists.SearchTags.MaxTags));
-			e.State = CheckState.Unchecked;
+
+			_handleCheckEvens = false;
+			e.State = e.PrevState;
 			e.CanCheck = false;
+			_handleCheckEvens = true;
 		}
 
 		private void OnCategoriesAfterCheckNode(object sender, NodeEventArgs e)
@@ -187,20 +223,24 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 
 			_handleCheckEvens = false;
 
-			if (e.Node.Tag is SearchGroup)
+			if (e.Node.Tag is SearchGroup && e.Node.CheckState != CheckState.Indeterminate)
 			{
 				foreach (TreeListNode childNode in e.Node.Nodes)
-					childNode.Checked = e.Node.Checked;
+					childNode.CheckState = e.Node.CheckState;
 			}
 			else if (e.Node.Tag is SearchTag)
 			{
 				var parentNode = e.Node.ParentNode;
-				if (e.Node.Checked)
-					parentNode.Checked = true;
+				if (e.Node.CheckState == CheckState.Checked)
+					parentNode.CheckState = CheckState.Checked;
 				else
 				{
-					var checkedChildNodesCount = parentNode.Nodes.Count(n => n.Checked);
-					parentNode.Checked = checkedChildNodesCount > 0;
+					if (parentNode.Nodes.Any(n => n.CheckState == CheckState.Checked))
+						parentNode.CheckState = CheckState.Checked;
+					else if (parentNode.Nodes.Any(n => n.CheckState == CheckState.Indeterminate))
+						parentNode.CheckState = CheckState.Indeterminate;
+					else
+						parentNode.CheckState = CheckState.Unchecked;
 				}
 			}
 
@@ -222,16 +262,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 		private void OnCategoriesBeforeCollapse(object sender, BeforeCollapseEventArgs e)
 		{
 			e.CanCollapse = e.Node.Tag is SearchGroup;
-		}
-
-		private void OnExpandClick(object sender, EventArgs e)
-		{
-			ExpandNode(_rootNode);
-		}
-
-		private void OnCollapseClick(object sender, EventArgs e)
-		{
-			CollapseNode(_rootNode);
 		}
 	}
 }

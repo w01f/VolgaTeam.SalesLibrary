@@ -144,7 +144,7 @@
 			this.buttonXReset.TabIndex = 0;
 			this.buttonXReset.Text = "RESET ALL TAGS for the Selected Links";
 			this.buttonXReset.TextColor = System.Drawing.Color.Black;
-			this.buttonXReset.Click += new System.EventHandler(this.buttonXReset_Click);
+			this.buttonXReset.Click += new System.EventHandler(this.OnResetClick);
 			// 
 			// buttonXExpand
 			// 
