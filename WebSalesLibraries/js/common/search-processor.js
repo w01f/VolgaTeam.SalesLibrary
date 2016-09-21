@@ -125,6 +125,7 @@
 							tags.push("youtube");
 							tags.push("lan");
 							tags.push("quicksite");
+							tags.push("html5");
 							tags.push("app");
 						}
 						if (this.showImages)
@@ -149,7 +150,7 @@
 								thatData.showPdf = true;
 							else if (value == 'video' || value == 'mp4' || value == 'wmv' || value == 'mp3')
 								thatData.showVideo = true;
-							else if (value == 'url' || value == 'youtube' || value == 'lan' || value == 'quicksite' || value == 'app' || value == 'internal')
+							else if (value == 'url' || value == 'youtube' || value == 'lan' || value == 'quicksite' || value == 'html5' || value == 'app' || value == 'internal')
 								thatData.showUrls = true;
 							else if (value == 'png' || value == 'jpeg')
 								thatData.showImages = true;

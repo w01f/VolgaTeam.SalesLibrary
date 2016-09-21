@@ -148,7 +148,7 @@
 			$this->isLineBreak = $this->originalFormat == 'line break' || ($this->type == 6 && isset($this->lineBreakProperties));
 			$this->isAppLink = $this->type == 15;
 
-			$this->isDirectUrl = ($this->type == 8 || $this->type == 17) && $this->extendedProperties->forcePreview;
+			$this->isDirectUrl = ($this->type == 8 || $this->type == 17 || $this->type == 18) && $this->extendedProperties->forcePreview;
 			$this->isExternalUrl = false;
 			if ($this->isDirectUrl)
 			{
@@ -224,6 +224,7 @@
 						case 'url':
 						case 'youtube':
 						case 'quicksite':
+						case 'html5':
 						case 'app':
 						case 'internal':
 							$fileName = 'url.png';
@@ -357,7 +358,7 @@
 
 			if (isset($this->fileLink))
 			{
-				if (in_array($this->originalFormat, array('url', 'quicksite', 'youtube')))
+				if (in_array($this->originalFormat, array('url', 'quicksite', 'html5', 'youtube')))
 				{
 					$downloadHeader = 'URL';
 					$downloadLink = $this->fileLink;

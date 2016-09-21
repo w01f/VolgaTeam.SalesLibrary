@@ -55,6 +55,7 @@
 						'youtube' => 'YouTube',
 						'lan' => 'LAN Link',
 						'quicksite' => 'QuickSite Link',
+						'html5' => 'HTML5 Link',
 						'internal' => 'Internal Link',
 						'app' => 'App Link',
 						'key' => 'Apple Keynote',

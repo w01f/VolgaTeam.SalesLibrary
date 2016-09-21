@@ -122,6 +122,7 @@
 					break;
 				case 'url':
 				case 'quicksite':
+				case 'html5':
 					$previewData = new UrlPreviewData($link);
 					break;
 				case 'youtube':

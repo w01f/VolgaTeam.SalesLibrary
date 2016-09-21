@@ -25,6 +25,9 @@
 				case 'quicksite':
 					$this->linkTitle = 'QuickSite';
 					break;
+				case 'html5':
+					$this->linkTitle = 'HTML5 URL';
+					break;
 				default:
 					$this->linkTitle = 'URL';
 					break;
@@ -37,6 +40,9 @@
 			{
 				case 'quicksite':
 					$linkTitle = 'QuickSite';
+					break;
+				case 'html5':
+					$linkTitle = 'HTML5 URL';
 					break;
 				default:
 					$linkTitle = 'URL';

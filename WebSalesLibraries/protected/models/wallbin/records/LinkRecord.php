@@ -344,6 +344,7 @@
 						case 'app':
 						case 'internal':
 						case 'lan':
+						case 'html5':
 							$link['file_type'] = base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'search-url.png'));
 							break;
 						case 'mp3':
