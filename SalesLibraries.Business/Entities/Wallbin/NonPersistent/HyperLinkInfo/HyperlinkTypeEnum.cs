@@ -7,6 +7,7 @@
 		Network,
 		QuickSite,
 		App,
-		Internal
+		Internal,
+		Html5
 	}
 }

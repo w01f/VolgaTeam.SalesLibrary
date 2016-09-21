@@ -16,6 +16,7 @@
 		AppLink = 15,
 		InternalLink = 16,
 		QPageLink = 17,
+		Html5 = 18,
 		Other = 999
 	}
 }

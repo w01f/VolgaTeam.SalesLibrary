@@ -80,6 +80,10 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.HyperlinkEd
 			{
 				checkEditForcePreview.Checked = ((QuickSiteLinkInfo)templateEditor).ForcePreview;
 			}
+			if (templateEditor is Html5LinkInfo)
+			{
+				checkEditForcePreview.Checked = ((Html5LinkInfo)templateEditor).ForcePreview;
+			}
 		}
 	}
 }

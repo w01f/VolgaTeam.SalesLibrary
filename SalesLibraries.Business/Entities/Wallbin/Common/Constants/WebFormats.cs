@@ -13,6 +13,7 @@
 		public const string Url = "url";
 		public const string YouTube = "youtube";
 		public const string QuickSite = "quicksite";
+		public const string Html5 = "html5";
 		public const string AppLink = "app";
 		public const string InternalLink = "internal";
 		public const string Lan = "lan";

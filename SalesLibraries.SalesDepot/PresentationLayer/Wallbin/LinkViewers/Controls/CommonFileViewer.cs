@@ -53,6 +53,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Contro
 					break;
 				case FileTypes.Url:
 				case FileTypes.YouTube:
+				case FileTypes.Html5:
 					Utils.OpenFile(((HyperLink)Link).Url);
 					break;
 				case FileTypes.Network:

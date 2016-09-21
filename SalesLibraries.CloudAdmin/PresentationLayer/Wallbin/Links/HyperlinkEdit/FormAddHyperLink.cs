@@ -27,6 +27,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.HyperlinkEdi
 				buttonXYouTube.Font = new Font(buttonXYouTube.Font.FontFamily, buttonXYouTube.Font.Size - 2, buttonXYouTube.Font.Style);
 				buttonXLan.Font = new Font(buttonXLan.Font.FontFamily, buttonXLan.Font.Size - 2, buttonXLan.Font.Style);
 				buttonXQuickSite.Font = new Font(buttonXQuickSite.Font.FontFamily, buttonXQuickSite.Font.Size - 2, buttonXQuickSite.Font.Style);
+				buttonXHtml5.Font = new Font(buttonXHtml5.Font.FontFamily, buttonXHtml5.Font.Size - 2, buttonXHtml5.Font.Style);
 				buttonXApp.Font = new Font(buttonXApp.Font.FontFamily, buttonXApp.Font.Size - 2, buttonXApp.Font.Style);
 				buttonXInternal.Font = new Font(buttonXInternal.Font.FontFamily, buttonXInternal.Font.Size - 2, buttonXInternal.Font.Style);
 				buttonXSave.Font = new Font(buttonXSave.Font.FontFamily, buttonXSave.Font.Size - 2, buttonXSave.Font.Style);
@@ -39,6 +40,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.HyperlinkEdi
 				buttonXYouTube,
 				buttonXLan,
 				buttonXQuickSite,
+				buttonXHtml5,
 				buttonXApp,
 				buttonXInternal
 			});
@@ -86,6 +88,9 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.HyperlinkEdi
 						break;
 					case HyperLinkTypeEnum.Internal:
 						SelectedEditor = new InternalLinkEditControl();
+						break;
+					case HyperLinkTypeEnum.Html5:
+						SelectedEditor = new Html5EditControl();
 						break;
 					default:
 						throw new ArgumentOutOfRangeException("Link type is not found");

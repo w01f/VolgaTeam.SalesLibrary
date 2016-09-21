@@ -224,6 +224,12 @@
     <Compile Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\FormAddHyperLink.designer.cs">
       <DependentUpon>FormAddHyperLink.cs</DependentUpon>
     </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\Html5EditControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\Html5EditControl.Designer.cs">
+      <DependentUpon>Html5EditControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\IHyperLinkEditControl.cs" />
     <Compile Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\InternalLinkEditControl.cs">
       <SubType>UserControl</SubType>
@@ -342,6 +348,12 @@
     </Compile>
     <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkHoverNoteOptions.designer.cs">
       <DependentUpon>LinkHoverNoteOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkHtml5Options.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkHtml5Options.designer.cs">
+      <DependentUpon>LinkHtml5Options.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkInfoControl.cs">
       <SubType>Component</SubType>
@@ -604,6 +616,9 @@
     <EmbeddedResource Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\FormAddHyperLink.resx">
       <DependentUpon>FormAddHyperLink.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\Html5EditControl.resx">
+      <DependentUpon>Html5EditControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\InternalLinkEditControl.resx">
       <DependentUpon>InternalLinkEditControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -660,6 +675,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkHoverNoteOptions.resx">
       <DependentUpon>LinkHoverNoteOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkHtml5Options.resx">
+      <DependentUpon>LinkHtml5Options.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkInfoControl.resx">
       <DependentUpon>LinkInfoControl.cs</DependentUpon>
@@ -789,6 +807,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\LinkAddHtml5.png" />
     <None Include="Resources\ButtonApplyForAll.png" />
     <None Include="Resources\LinkSettingsTextNote.png" />
     <None Include="Resources\LinkSettingsTextFormat.png" />

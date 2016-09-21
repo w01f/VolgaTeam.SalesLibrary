@@ -173,6 +173,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 							(InternalLinkInfo)form.SelectedEditor.GetHyperLinkInfo(),
 							DataSource);
 						break;
+					case HyperLinkTypeEnum.Html5:
+						newLink = Html5Link.Create(
+							(Html5LinkInfo)form.SelectedEditor.GetHyperLinkInfo(),
+							DataSource);
+						break;
 					default:
 						throw new ArgumentOutOfRangeException("Link type not found");
 				}

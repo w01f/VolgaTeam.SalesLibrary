@@ -224,6 +224,7 @@ namespace SalesLibraries.FileManager.Business.Services
 				case FileTypes.Url:
 				case FileTypes.YouTube:
 				case FileTypes.QPageLink:
+				case FileTypes.Html5:
 					if (source is QuickSiteLink)
 					{
 						target.extendedProperties = new QPageLinkSettings();
