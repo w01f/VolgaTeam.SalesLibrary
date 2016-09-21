@@ -50,10 +50,10 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.GroupSetting
 				groupNode.Nodes.ToList().ForEach(tagNode => tagNode.Checked = false);
 			});
 
-			Enabled = Selection.SelectedLinks.Any();
+			Enabled = Selection.SelectedObjects.Any();
 
-			var commonCategories = Selection.SelectedLinks.GetCommonCategories();
-			foreach (var link in Selection.SelectedLinks)
+			var commonCategories = Selection.SelectedObjects.GetCommonCategories();
+			foreach (var link in Selection.SelectedObjects)
 			{
 				foreach (var group in link.Tags.Categories)
 				{
@@ -128,14 +128,14 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.GroupSetting
 				.Where(g => g.Tags.Any())
 				.ToArray();
 
-			Selection.SelectedLinks.ApplyCategories(sharedGroups, partialGroups);
+			Selection.SelectedObjects.ApplyCategories(sharedGroups, partialGroups);
 			EditorChanged?.Invoke(this, new EventArgs());
 		}
 
 		public void ResetData()
 		{
 			if (MainController.Instance.PopupMessages.ShowWarningQuestion("Are you sure You want to DELETE ALL CATEGORY TAGS for the selected files?") != DialogResult.Yes) return;
-			Selection.SelectedLinks.ApplyCategories(new SearchGroup[] { });
+			Selection.SelectedObjects.ApplyCategories(new SearchGroup[] { });
 			EditorChanged?.Invoke(this, new EventArgs());
 			UpdateData();
 		}

@@ -448,6 +448,12 @@
     <Compile Include="PresentationLayer\Wallbin\Settings\FormAutoWidgets.designer.cs">
       <DependentUpon>FormAutoWidgets.cs</DependentUpon>
     </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Settings\FormClonePage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Settings\FormClonePage.designer.cs">
+      <DependentUpon>FormClonePage.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationLayer\Wallbin\Settings\FormColumns.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -705,6 +711,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Settings\FormAutoWidgets.resx">
       <DependentUpon>FormAutoWidgets.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Settings\FormClonePage.resx">
+      <DependentUpon>FormClonePage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Settings\FormColumns.resx">
       <DependentUpon>FormColumns.cs</DependentUpon>

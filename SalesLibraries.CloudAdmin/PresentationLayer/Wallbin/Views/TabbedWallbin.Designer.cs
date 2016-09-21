@@ -43,6 +43,10 @@
 			this.toolStripMenuItemDeleteExpirationDates = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItemDeleteSecurity = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItemEditTags = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItemClone = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+			this.toolStripMenuItemCloneWindowsAndLinks = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItemCloneWindows = new System.Windows.Forms.ToolStripMenuItem();
 			this.pnContainer.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControl)).BeginInit();
 			this.contextMenuStripPageProperties.SuspendLayout();
@@ -91,12 +95,14 @@
 			this.contextMenuStripPageProperties.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
 			this.toolStripMenuItemRename,
 			this.toolStripMenuItemDelete,
+			this.toolStripSeparator2,
+			this.toolStripMenuItemClone,
 			this.toolStripSeparator1,
 			this.toolStripMenuItemManageImages,
 			this.toolsToolStripMenuItemCleanupTools,
 			this.toolStripMenuItemEditTags});
 			this.contextMenuStripPageProperties.Name = "contextMenuStripLinkProperties";
-			this.contextMenuStripPageProperties.Size = new System.Drawing.Size(281, 142);
+			this.contextMenuStripPageProperties.Size = new System.Drawing.Size(281, 170);
 			// 
 			// toolStripMenuItemRename
 			// 
@@ -124,20 +130,20 @@
 			this.toolStripMenuItemDeleteBanners});
 			this.toolStripMenuItemManageImages.Name = "toolStripMenuItemManageImages";
 			this.toolStripMenuItemManageImages.Size = new System.Drawing.Size(280, 22);
-			this.toolStripMenuItemManageImages.Text = "Manage Widgets and Banners...";
+			this.toolStripMenuItemManageImages.Text = "Manage Link Artwork for this page";
 			// 
 			// toolStripMenuItemDeleteWidgets
 			// 
 			this.toolStripMenuItemDeleteWidgets.Name = "toolStripMenuItemDeleteWidgets";
-			this.toolStripMenuItemDeleteWidgets.Size = new System.Drawing.Size(317, 22);
-			this.toolStripMenuItemDeleteWidgets.Text = "Remove all Widgets for ALL Links on this page";
+			this.toolStripMenuItemDeleteWidgets.Size = new System.Drawing.Size(283, 22);
+			this.toolStripMenuItemDeleteWidgets.Text = "DELETE ALL Widget Icons on this page";
 			this.toolStripMenuItemDeleteWidgets.Click += new System.EventHandler(this.toolStripMenuItemDeleteWidgets_Click);
 			// 
 			// toolStripMenuItemDeleteBanners
 			// 
 			this.toolStripMenuItemDeleteBanners.Name = "toolStripMenuItemDeleteBanners";
-			this.toolStripMenuItemDeleteBanners.Size = new System.Drawing.Size(317, 22);
-			this.toolStripMenuItemDeleteBanners.Text = "Remove all Banners for ALL Links on this page";
+			this.toolStripMenuItemDeleteBanners.Size = new System.Drawing.Size(283, 22);
+			this.toolStripMenuItemDeleteBanners.Text = "DELETE ALL Clipart Images on this page";
 			this.toolStripMenuItemDeleteBanners.Click += new System.EventHandler(this.toolStripMenuItemDeleteBanners_Click);
 			// 
 			// toolsToolStripMenuItemCleanupTools
@@ -186,6 +192,34 @@
 			this.toolStripMenuItemEditTags.Text = "Add Search Tag to all links on this page";
 			this.toolStripMenuItemEditTags.Click += new System.EventHandler(this.toolStripMenuItemEditTags_Click);
 			// 
+			// toolStripMenuItemClone
+			// 
+			this.toolStripMenuItemClone.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+			this.toolStripMenuItemCloneWindowsAndLinks,
+			this.toolStripMenuItemCloneWindows});
+			this.toolStripMenuItemClone.Name = "toolStripMenuItemClone";
+			this.toolStripMenuItemClone.Size = new System.Drawing.Size(280, 22);
+			this.toolStripMenuItemClone.Text = "Clone this Page";
+			// 
+			// toolStripSeparator2
+			// 
+			this.toolStripSeparator2.Name = "toolStripSeparator2";
+			this.toolStripSeparator2.Size = new System.Drawing.Size(277, 6);
+			// 
+			// toolStripMenuItemCloneWindowsAndLinks
+			// 
+			this.toolStripMenuItemCloneWindowsAndLinks.Name = "toolStripMenuItemCloneWindowsAndLinks";
+			this.toolStripMenuItemCloneWindowsAndLinks.Size = new System.Drawing.Size(166, 22);
+			this.toolStripMenuItemCloneWindowsAndLinks.Text = "Windows && Links";
+			this.toolStripMenuItemCloneWindowsAndLinks.Click += new System.EventHandler(this.toolStripMenuItemCloneWindowsAndLinks_Click);
+			// 
+			// toolStripMenuItemCloneWindows
+			// 
+			this.toolStripMenuItemCloneWindows.Name = "toolStripMenuItemCloneWindows";
+			this.toolStripMenuItemCloneWindows.Size = new System.Drawing.Size(166, 22);
+			this.toolStripMenuItemCloneWindows.Text = "Windows Only";
+			this.toolStripMenuItemCloneWindows.Click += new System.EventHandler(this.toolStripMenuItemCloneWindows_Click);
+			// 
 			// TabbedWallbin
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -217,5 +251,9 @@
 		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemDeleteExpirationDates;
 		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemDeleteSecurity;
 		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemEditTags;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemClone;
+		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemCloneWindowsAndLinks;
+		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemCloneWindows;
 	}
 }

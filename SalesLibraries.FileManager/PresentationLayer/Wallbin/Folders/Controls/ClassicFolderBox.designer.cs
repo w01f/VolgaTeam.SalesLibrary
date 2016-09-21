@@ -35,8 +35,6 @@
 			this.toolStripMenuItemSecuritySelectAll = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItemSecurityResetAll = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItemFolderDeleteLinks = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolStripMenuItemFolderDeleteSecurity = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolStripMenuItemFolderDeleteTags = new System.Windows.Forms.ToolStripMenuItem();
 			this.contextMenuStripFolderProperties = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.toolStripMenuItemFolderSettings = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
@@ -50,6 +48,9 @@
 			this.toolStripMenuItemFolderDeleteWidgets = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItemFolderDeleteBanners = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItemFolderEditTags = new System.Windows.Forms.ToolStripMenuItem();
+			this.advancedWindowCleanupToolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItemFolderDeleteSecurity = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItemFolderDeleteTags = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItemFolderSort = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItemFolderSeLinkTextWordWrap = new System.Windows.Forms.ToolStripMenuItem();
 			this.popupMenuLinkProperties = new DevExpress.XtraBars.PopupMenu(this.components);
@@ -61,6 +62,7 @@
 			this.barButtonItemLinkPropertiesLinkSettings = new DevExpress.XtraBars.BarButtonItem();
 			this.barButtonItemLinkPropertiesAdvancedSettings = new DevExpress.XtraBars.BarButtonItem();
 			this.barButtonItemLinkPropertiesTags = new DevExpress.XtraBars.BarButtonItem();
+			this.barButtonItemLinkPropertiesImages = new DevExpress.XtraBars.BarSubItem();
 			this.barButtonItemLinkPropertiesWidget = new DevExpress.XtraBars.BarButtonItem();
 			this.barButtonItemLinkPropertiesBanner = new DevExpress.XtraBars.BarButtonItem();
 			this.barButtonItemLinkPropertiesResetSettings = new DevExpress.XtraBars.BarButtonItem();
@@ -75,7 +77,6 @@
 			this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
 			this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
 			this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
-			this.barButtonItemLinkPropertiesImages = new DevExpress.XtraBars.BarSubItem();
 			this.pnHeader.SuspendLayout();
 			this.pnHeaderBorder.SuspendLayout();
 			this.pnBorders.SuspendLayout();
@@ -117,9 +118,118 @@
 			// toolStripMenuItemFolderDeleteLinks
 			// 
 			this.toolStripMenuItemFolderDeleteLinks.Name = "toolStripMenuItemFolderDeleteLinks";
-			this.toolStripMenuItemFolderDeleteLinks.Size = new System.Drawing.Size(348, 22);
+			this.toolStripMenuItemFolderDeleteLinks.Size = new System.Drawing.Size(292, 22);
 			this.toolStripMenuItemFolderDeleteLinks.Text = "Delete ALL Links in this window";
 			this.toolStripMenuItemFolderDeleteLinks.Click += new System.EventHandler(this.toolStripMenuItemFolderDeleteLinks_Click);
+			// 
+			// contextMenuStripFolderProperties
+			// 
+			this.contextMenuStripFolderProperties.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItemFolderSettings,
+            this.toolStripSeparator2,
+            this.toolStripMenuItemFolderDeleteLinks,
+            this.toolStripMenuItemFolderDelete,
+            this.toolStripMenuItemFolderCopy,
+            this.toolStripMenuItemFolderMove,
+            this.toolStripSeparator3,
+            this.toolStripMenuItemFolderManageWidgetsAndBanners,
+            this.toolStripMenuItemFolderEditTags,
+            this.advancedWindowCleanupToolsToolStripMenuItem});
+			this.contextMenuStripFolderProperties.Name = "contextMenuStripLinkProperties";
+			this.contextMenuStripFolderProperties.Size = new System.Drawing.Size(293, 214);
+			// 
+			// toolStripMenuItemFolderSettings
+			// 
+			this.toolStripMenuItemFolderSettings.Name = "toolStripMenuItemFolderSettings";
+			this.toolStripMenuItemFolderSettings.Size = new System.Drawing.Size(292, 22);
+			this.toolStripMenuItemFolderSettings.Text = "Edit window settings";
+			this.toolStripMenuItemFolderSettings.Click += new System.EventHandler(this.toolStripMenuItemFolderSettings_Click);
+			// 
+			// toolStripSeparator2
+			// 
+			this.toolStripSeparator2.Name = "toolStripSeparator2";
+			this.toolStripSeparator2.Size = new System.Drawing.Size(289, 6);
+			// 
+			// toolStripMenuItemFolderDelete
+			// 
+			this.toolStripMenuItemFolderDelete.Name = "toolStripMenuItemFolderDelete";
+			this.toolStripMenuItemFolderDelete.Size = new System.Drawing.Size(292, 22);
+			this.toolStripMenuItemFolderDelete.Text = "Delete this window";
+			this.toolStripMenuItemFolderDelete.Click += new System.EventHandler(this.toolStripMenuItemFolderDelete_Click);
+			// 
+			// toolStripMenuItemFolderCopy
+			// 
+			this.toolStripMenuItemFolderCopy.Name = "toolStripMenuItemFolderCopy";
+			this.toolStripMenuItemFolderCopy.Size = new System.Drawing.Size(292, 22);
+			this.toolStripMenuItemFolderCopy.Text = "Copy this Window to a page…";
+			// 
+			// toolStripMenuItemFolderMove
+			// 
+			this.toolStripMenuItemFolderMove.Name = "toolStripMenuItemFolderMove";
+			this.toolStripMenuItemFolderMove.Size = new System.Drawing.Size(292, 22);
+			this.toolStripMenuItemFolderMove.Text = "Move this Window to a page…";
+			// 
+			// toolStripSeparator3
+			// 
+			this.toolStripSeparator3.Name = "toolStripSeparator3";
+			this.toolStripSeparator3.Size = new System.Drawing.Size(289, 6);
+			// 
+			// toolStripMenuItemFolderManageWidgetsAndBanners
+			// 
+			this.toolStripMenuItemFolderManageWidgetsAndBanners.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItemFolderWidget,
+            this.toolStripMenuItemFolderBanner,
+            this.toolStripMenuItemFolderDeleteWidgets,
+            this.toolStripMenuItemFolderDeleteBanners});
+			this.toolStripMenuItemFolderManageWidgetsAndBanners.Name = "toolStripMenuItemFolderManageWidgetsAndBanners";
+			this.toolStripMenuItemFolderManageWidgetsAndBanners.Size = new System.Drawing.Size(292, 22);
+			this.toolStripMenuItemFolderManageWidgetsAndBanners.Text = "Manage Link Artwork for this Window";
+			// 
+			// toolStripMenuItemFolderWidget
+			// 
+			this.toolStripMenuItemFolderWidget.Name = "toolStripMenuItemFolderWidget";
+			this.toolStripMenuItemFolderWidget.Size = new System.Drawing.Size(283, 22);
+			this.toolStripMenuItemFolderWidget.Text = "Add Widget-Icon to this Window";
+			this.toolStripMenuItemFolderWidget.Click += new System.EventHandler(this.toolStripMenuItemFolderWidget_Click);
+			// 
+			// toolStripMenuItemFolderBanner
+			// 
+			this.toolStripMenuItemFolderBanner.Name = "toolStripMenuItemFolderBanner";
+			this.toolStripMenuItemFolderBanner.Size = new System.Drawing.Size(283, 22);
+			this.toolStripMenuItemFolderBanner.Text = "Add Clipart Logo to this Window";
+			this.toolStripMenuItemFolderBanner.Click += new System.EventHandler(this.toolStripMenuItemFolderBanner_Click);
+			// 
+			// toolStripMenuItemFolderDeleteWidgets
+			// 
+			this.toolStripMenuItemFolderDeleteWidgets.Name = "toolStripMenuItemFolderDeleteWidgets";
+			this.toolStripMenuItemFolderDeleteWidgets.Size = new System.Drawing.Size(283, 22);
+			this.toolStripMenuItemFolderDeleteWidgets.Text = "Delete all Widget Icons in this Window";
+			this.toolStripMenuItemFolderDeleteWidgets.Click += new System.EventHandler(this.toolStripMenuItemFolderDeleteWidgets_Click);
+			// 
+			// toolStripMenuItemFolderDeleteBanners
+			// 
+			this.toolStripMenuItemFolderDeleteBanners.Name = "toolStripMenuItemFolderDeleteBanners";
+			this.toolStripMenuItemFolderDeleteBanners.Size = new System.Drawing.Size(283, 22);
+			this.toolStripMenuItemFolderDeleteBanners.Text = "Delete all Clipart Images in this Window";
+			this.toolStripMenuItemFolderDeleteBanners.Click += new System.EventHandler(this.toolStripMenuItemFolderDeleteBanners_Click);
+			// 
+			// toolStripMenuItemFolderEditTags
+			// 
+			this.toolStripMenuItemFolderEditTags.Name = "toolStripMenuItemFolderEditTags";
+			this.toolStripMenuItemFolderEditTags.Size = new System.Drawing.Size(292, 22);
+			this.toolStripMenuItemFolderEditTags.Text = "Add Search Tag to all links in this window";
+			this.toolStripMenuItemFolderEditTags.Click += new System.EventHandler(this.toolStripMenuItemFolderEditTags_Click);
+			// 
+			// advancedWindowCleanupToolsToolStripMenuItem
+			// 
+			this.advancedWindowCleanupToolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItemFolderDeleteSecurity,
+            this.toolStripMenuItemFolderDeleteTags,
+            this.toolStripMenuItemFolderSort,
+            this.toolStripMenuItemFolderSeLinkTextWordWrap});
+			this.advancedWindowCleanupToolsToolStripMenuItem.Name = "advancedWindowCleanupToolsToolStripMenuItem";
+			this.advancedWindowCleanupToolsToolStripMenuItem.Size = new System.Drawing.Size(292, 22);
+			this.advancedWindowCleanupToolsToolStripMenuItem.Text = "Advanced Window Cleanup Tools";
 			// 
 			// toolStripMenuItemFolderDeleteSecurity
 			// 
@@ -134,107 +244,6 @@
 			this.toolStripMenuItemFolderDeleteTags.Size = new System.Drawing.Size(348, 22);
 			this.toolStripMenuItemFolderDeleteTags.Text = "Wipe ALL Tags for ALL Links in this window";
 			this.toolStripMenuItemFolderDeleteTags.Click += new System.EventHandler(this.toolStripMenuItemFolderDeleteTags_Click);
-			// 
-			// contextMenuStripFolderProperties
-			// 
-			this.contextMenuStripFolderProperties.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItemFolderSettings,
-            this.toolStripSeparator2,
-            this.toolStripMenuItemFolderDeleteLinks,
-            this.toolStripMenuItemFolderDelete,
-            this.toolStripMenuItemFolderCopy,
-            this.toolStripMenuItemFolderMove,
-            this.toolStripSeparator3,
-            this.toolStripMenuItemFolderManageWidgetsAndBanners,
-            this.toolStripMenuItemFolderDeleteSecurity,
-            this.toolStripMenuItemFolderEditTags,
-            this.toolStripMenuItemFolderDeleteTags,
-            this.toolStripMenuItemFolderSort,
-            this.toolStripMenuItemFolderSeLinkTextWordWrap});
-			this.contextMenuStripFolderProperties.Name = "contextMenuStripLinkProperties";
-			this.contextMenuStripFolderProperties.Size = new System.Drawing.Size(349, 258);
-			// 
-			// toolStripMenuItemFolderSettings
-			// 
-			this.toolStripMenuItemFolderSettings.Name = "toolStripMenuItemFolderSettings";
-			this.toolStripMenuItemFolderSettings.Size = new System.Drawing.Size(348, 22);
-			this.toolStripMenuItemFolderSettings.Text = "Edit window settings";
-			this.toolStripMenuItemFolderSettings.Click += new System.EventHandler(this.toolStripMenuItemFolderSettings_Click);
-			// 
-			// toolStripSeparator2
-			// 
-			this.toolStripSeparator2.Name = "toolStripSeparator2";
-			this.toolStripSeparator2.Size = new System.Drawing.Size(345, 6);
-			// 
-			// toolStripMenuItemFolderDelete
-			// 
-			this.toolStripMenuItemFolderDelete.Name = "toolStripMenuItemFolderDelete";
-			this.toolStripMenuItemFolderDelete.Size = new System.Drawing.Size(348, 22);
-			this.toolStripMenuItemFolderDelete.Text = "Delete this window";
-			this.toolStripMenuItemFolderDelete.Click += new System.EventHandler(this.toolStripMenuItemFolderDelete_Click);
-			// 
-			// toolStripMenuItemFolderCopy
-			// 
-			this.toolStripMenuItemFolderCopy.Name = "toolStripMenuItemFolderCopy";
-			this.toolStripMenuItemFolderCopy.Size = new System.Drawing.Size(348, 22);
-			this.toolStripMenuItemFolderCopy.Text = "Copy this Window to a another page...";
-			// 
-			// toolStripMenuItemFolderMove
-			// 
-			this.toolStripMenuItemFolderMove.Name = "toolStripMenuItemFolderMove";
-			this.toolStripMenuItemFolderMove.Size = new System.Drawing.Size(348, 22);
-			this.toolStripMenuItemFolderMove.Text = "Move this Window to a another page...";
-			// 
-			// toolStripSeparator3
-			// 
-			this.toolStripSeparator3.Name = "toolStripSeparator3";
-			this.toolStripSeparator3.Size = new System.Drawing.Size(345, 6);
-			// 
-			// toolStripMenuItemFolderManageWidgetsAndBanners
-			// 
-			this.toolStripMenuItemFolderManageWidgetsAndBanners.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItemFolderWidget,
-            this.toolStripMenuItemFolderBanner,
-            this.toolStripMenuItemFolderDeleteWidgets,
-            this.toolStripMenuItemFolderDeleteBanners});
-			this.toolStripMenuItemFolderManageWidgetsAndBanners.Name = "toolStripMenuItemFolderManageWidgetsAndBanners";
-			this.toolStripMenuItemFolderManageWidgetsAndBanners.Size = new System.Drawing.Size(348, 22);
-			this.toolStripMenuItemFolderManageWidgetsAndBanners.Text = "Manage Widgets and Banners...";
-			// 
-			// toolStripMenuItemFolderWidget
-			// 
-			this.toolStripMenuItemFolderWidget.Name = "toolStripMenuItemFolderWidget";
-			this.toolStripMenuItemFolderWidget.Size = new System.Drawing.Size(318, 22);
-			this.toolStripMenuItemFolderWidget.Text = "Add a Widget to this window";
-			this.toolStripMenuItemFolderWidget.Click += new System.EventHandler(this.toolStripMenuItemFolderWidget_Click);
-			// 
-			// toolStripMenuItemFolderBanner
-			// 
-			this.toolStripMenuItemFolderBanner.Name = "toolStripMenuItemFolderBanner";
-			this.toolStripMenuItemFolderBanner.Size = new System.Drawing.Size(318, 22);
-			this.toolStripMenuItemFolderBanner.Text = "Add a Banner to this Window";
-			this.toolStripMenuItemFolderBanner.Click += new System.EventHandler(this.toolStripMenuItemFolderBanner_Click);
-			// 
-			// toolStripMenuItemFolderDeleteWidgets
-			// 
-			this.toolStripMenuItemFolderDeleteWidgets.Name = "toolStripMenuItemFolderDeleteWidgets";
-			this.toolStripMenuItemFolderDeleteWidgets.Size = new System.Drawing.Size(318, 22);
-			this.toolStripMenuItemFolderDeleteWidgets.Text = "Remove all Widgets for all links in this window";
-			this.toolStripMenuItemFolderDeleteWidgets.Click += new System.EventHandler(this.toolStripMenuItemFolderDeleteWidgets_Click);
-			// 
-			// toolStripMenuItemFolderDeleteBanners
-			// 
-			this.toolStripMenuItemFolderDeleteBanners.Name = "toolStripMenuItemFolderDeleteBanners";
-			this.toolStripMenuItemFolderDeleteBanners.Size = new System.Drawing.Size(318, 22);
-			this.toolStripMenuItemFolderDeleteBanners.Text = "Remove all Banners for all links in this window";
-			this.toolStripMenuItemFolderDeleteBanners.Click += new System.EventHandler(this.toolStripMenuItemFolderDeleteBanners_Click);
-			// 
-			// toolStripMenuItemFolderEditTags
-			// 
-			this.toolStripMenuItemFolderEditTags.Name = "toolStripMenuItemFolderEditTags";
-			this.toolStripMenuItemFolderEditTags.Size = new System.Drawing.Size(348, 22);
-			this.toolStripMenuItemFolderEditTags.Text = "Add Search Tag to all links in this window";
-			this.toolStripMenuItemFolderEditTags.Click += new System.EventHandler(this.toolStripMenuItemFolderEditTags_Click);
 			// 
 			// toolStripMenuItemFolderSort
 			// 
@@ -323,6 +332,15 @@
 			this.barButtonItemLinkPropertiesTags.Id = 6;
 			this.barButtonItemLinkPropertiesTags.Name = "barButtonItemLinkPropertiesTags";
 			this.barButtonItemLinkPropertiesTags.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemLinkPropertiesTags_ItemClick);
+			// 
+			// barButtonItemLinkPropertiesImages
+			// 
+			this.barButtonItemLinkPropertiesImages.Caption = "Link ART";
+			this.barButtonItemLinkPropertiesImages.Id = 34;
+			this.barButtonItemLinkPropertiesImages.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemLinkPropertiesWidget),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemLinkPropertiesBanner)});
+			this.barButtonItemLinkPropertiesImages.Name = "barButtonItemLinkPropertiesImages";
 			// 
 			// barButtonItemLinkPropertiesWidget
 			// 
@@ -446,15 +464,6 @@
 			this.barDockControlRight.Location = new System.Drawing.Point(311, 0);
 			this.barDockControlRight.Size = new System.Drawing.Size(0, 308);
 			// 
-			// LinkPropertiesImages
-			// 
-			this.barButtonItemLinkPropertiesImages.Caption = "Link ART";
-			this.barButtonItemLinkPropertiesImages.Id = 34;
-			this.barButtonItemLinkPropertiesImages.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemLinkPropertiesWidget),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemLinkPropertiesBanner)});
-			this.barButtonItemLinkPropertiesImages.Name = "barButtonItemLinkPropertiesImages";
-			// 
 			// ClassicFolderBox
 			// 
 			this.Controls.Add(this.barDockControlLeft);
@@ -487,12 +496,9 @@
 		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemSecuritySelectAll;
 		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemSecurityResetAll;
 		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemFolderDeleteLinks;
-		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemFolderDeleteSecurity;
-		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemFolderDeleteTags;
 		private System.Windows.Forms.ContextMenuStrip contextMenuStripFolderProperties;
 		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemFolderSettings;
 		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemFolderDelete;
-		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemFolderSort;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
 		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemFolderManageWidgetsAndBanners;
@@ -525,8 +531,12 @@
 		private DevExpress.XtraBars.BarButtonItem barButtonItemLinkPropertiesCut;
 		private DevExpress.XtraBars.BarButtonItem barButtonItemLinkPropertiesPaste;
 		private DevExpress.XtraBars.BarButtonItem barButtonItemLinkPropertiesResetSettings;
-		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemFolderSeLinkTextWordWrap;
 		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemFolderEditTags;
 		private DevExpress.XtraBars.BarSubItem barButtonItemLinkPropertiesImages;
+		private System.Windows.Forms.ToolStripMenuItem advancedWindowCleanupToolsToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemFolderDeleteSecurity;
+		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemFolderDeleteTags;
+		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemFolderSort;
+		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemFolderSeLinkTextWordWrap;
 	}
 }

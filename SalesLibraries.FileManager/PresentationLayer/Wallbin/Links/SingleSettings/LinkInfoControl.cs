@@ -23,11 +23,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 				return;
 			}
 
-			if (MainController.Instance.WallbinViews.Selection.SelectedLinksCount > 1)
+			if (MainController.Instance.WallbinViews.Selection.SelectedObjectsCount > 1)
 			{
 				Text = String.Format("<b>({0})</b> {1}",
-						MainController.Instance.WallbinViews.Selection.SelectedLinksCount,
-						MainController.Instance.WallbinViews.Selection.SelectedLinks.GetCommonTags());
+						MainController.Instance.WallbinViews.Selection.SelectedObjectsCount,
+						MainController.Instance.WallbinViews.Selection.SelectedObjects.GetCommonTags());
 			}
 			else
 			{

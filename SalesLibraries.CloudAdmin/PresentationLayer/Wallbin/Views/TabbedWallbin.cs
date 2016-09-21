@@ -40,8 +40,9 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 
 		protected override void InitControls()
 		{
+			base.InitControls();
 			xtraTabControl.TabPages.Clear();
-			xtraTabControl.TabPages.AddRange(Pages.Cast<XtraTabPage>().ToArray());
+			xtraTabControl.TabPages.AddRange(Pages.OfType<XtraTabPage>().ToArray());
 			xtraTabControl.SelectedTabPage = (XtraTabPage)ActivePage;
 			xtraTabControl.SelectedPageChanging += OnSelectedPageChanging;
 			xtraTabControl.SelectedPageChanged += OnSelectedPageChanged;
@@ -53,6 +54,23 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 		public override void SelectPage(IPageView pageView)
 		{
 			xtraTabControl.SelectedTabPage = (XtraTabPage)pageView;
+		}
+
+		private void ClonePage(TabPage sourceTabPage, bool cloneWithLinks)
+		{
+			using (var form = new FormClonePage(sourceTabPage.Page.Name))
+			{
+				if (form.ShowDialog(MainController.Instance.MainForm) != DialogResult.OK)
+					return;
+				var newPage = sourceTabPage.Page.Clone(form.NewPageName, cloneWithLinks);
+				var pageView = PageViewFactory.Create(newPage);
+				Pages.Add(pageView);
+				xtraTabControl.TabPages.Insert(xtraTabControl.SelectedTabPageIndex + 1, (XtraTabPage)pageView);
+
+				IsDataChanged = true;
+
+				SelectPage(pageView);
+			}
 		}
 
 		private void OnSelectedPageChanging(object sender, TabPageChangingEventArgs e)
@@ -202,7 +220,6 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 						LoadView(true);
 					})));
 			}
-
 		}
 
 		private void toolStripMenuItemEditTags_Click(object sender, EventArgs e)
@@ -211,6 +228,20 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 			if (selectedPage == null) return;
 			selectedPage.Content.EditTags();
 			IsDataChanged = true;
+		}
+
+		private void toolStripMenuItemCloneWindowsAndLinks_Click(object sender, EventArgs e)
+		{
+			var selectedPage = _menuHitInfo.Page as TabPage;
+			if (selectedPage == null) return;
+			ClonePage(selectedPage, true);
+		}
+
+		private void toolStripMenuItemCloneWindows_Click(object sender, EventArgs e)
+		{
+			var selectedPage = _menuHitInfo.Page as TabPage;
+			if (selectedPage == null) return;
+			ClonePage(selectedPage, false);
 		}
 		#endregion
 	}

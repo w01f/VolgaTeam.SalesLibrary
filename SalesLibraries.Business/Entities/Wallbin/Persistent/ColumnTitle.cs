@@ -97,6 +97,21 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 			Page = null;
 		}
 
+		public ColumnTitle Copy()
+		{
+			NeedToSave = true;
+
+			BeforeSave();
+
+			return CreateEntity<ColumnTitle>(columnTitle =>
+			{
+				columnTitle.ColumnOrder = CollectionOrder;
+				columnTitle.SettingsEncoded = SettingsEncoded;
+				columnTitle.BannerEncoded = BannerEncoded;
+				columnTitle.WidgetEncoded = WidgetEncoded;
+			});
+		}
+
 		public class ColumnTitleSettings : SettingsContainer
 		{
 			private bool _showText;

@@ -54,7 +54,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 		public TagsOptions(IEnumerable<BaseLibraryLink> links) : this()
 		{
-			_links.AddRange(links);
+			_links.AddRange(links.OfType<LibraryObjectLink>());
 		}
 
 		public void LoadData()

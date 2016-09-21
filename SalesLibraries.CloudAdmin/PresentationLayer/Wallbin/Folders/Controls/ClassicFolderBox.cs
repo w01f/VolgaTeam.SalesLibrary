@@ -92,6 +92,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders.Controls
 			grFiles.CellBeginEdit += OnGridCellBeginEdit;
 			grFiles.CellEndEdit += OnGridCellEndEdit;
 			grFiles.CellMouseClick += OnGridCellMouseClick;
+			grFiles.CellMouseDoubleClick += OnGridCellMouseDoubleClick;
 			grFiles.CellMouseDown += OnGridCellMouseDown;
 			grFiles.CellMouseLeave += OnGridCellMouseLeave;
 			grFiles.CellMouseMove += OnGridCellMouseMove;
@@ -524,8 +525,19 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders.Controls
 				FolderContainer.DeleteFolder(this);
 			var targetPageView = MainController.Instance.WallbinViews.ActiveWallbin.Pages
 				.FirstOrDefault(pageView => pageView.Page == e.TargetPage);
-			targetPageView.LoadPage(true);
-			MainController.Instance.WallbinViews.ActiveWallbin.SelectPage(targetPageView);
+			var isSamePage = MainController.Instance.WallbinViews.ActiveWallbin.ActivePage == targetPageView;
+			if (isSamePage)
+				MainController.Instance.ProcessManager.Run("Loading Page...",
+				cancelationToken => MainController.Instance.MainForm.Invoke(new MethodInvoker(() =>
+				{
+					MainController.Instance.WallbinViews.ActiveWallbin.ActivePage?.LoadPage(true);
+					MainController.Instance.WallbinViews.ActiveWallbin.ActivePage?.ShowPage();
+				})));
+			else
+			{
+				targetPageView?.LoadPage(true);
+				MainController.Instance.WallbinViews.ActiveWallbin.SelectPage(targetPageView);
+			}
 		}
 		#endregion
 
@@ -1068,6 +1080,16 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders.Controls
 			}
 			_quickEditor.LoadLinkSettings(linkRow.Source);
 			popupMenuLinkProperties.ShowPopup(Cursor.Position);
+		}
+
+		private void OnGridCellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+		{
+			if (FormatState.AllowEdit) return;
+			if (!IsActive) return;
+			var linkRow = (LinkRow)grFiles.Rows[e.RowIndex];
+			var sourceObject = linkRow.SourceObject;
+			if (sourceObject == null) return;
+			Utils.OpenFile(linkRow.SourceObject.OpenPaths);
 		}
 		#endregion
 

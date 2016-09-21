@@ -200,13 +200,13 @@ namespace SalesLibraries.FileManager.Controllers
 
 			MainController.Instance.MainForm.buttonItemHomeLinkDelete.Enabled =
 			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesNotes.Enabled =
-			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesTags.Enabled =
 			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesSecurity.Enabled =
 			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesWidget.Enabled =
 			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesBanner.Enabled =
 			MainController.Instance.MainForm.buttonItemHomeLinkOpen.Enabled = selectedLink != null;
 			MainController.Instance.MainForm.buttonItemHomeLinkOpen.Enabled = selectedLink != null && selectedLink.IsOpenable;
 
+			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesTags.Enabled =
 			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesExpirationDate.Enabled =
 				selectedLink != null &&
 				!(selectedLink.Source is LineBreak);
@@ -413,8 +413,8 @@ namespace SalesLibraries.FileManager.Controllers
 				form.WebSyncPath = MainController.Instance.Settings.WebPath;
 				if (form.ShowDialog(MainController.Instance.MainForm) != DialogResult.OK) return;
 				var backupChanged = !String.Equals(
-					MainController.Instance.Settings.BackupPath, 
-					form.BackupPath, 
+					MainController.Instance.Settings.BackupPath,
+					form.BackupPath,
 					StringComparison.InvariantCultureIgnoreCase);
 
 				if (backupChanged)

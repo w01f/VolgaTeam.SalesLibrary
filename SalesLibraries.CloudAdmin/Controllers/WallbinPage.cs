@@ -177,13 +177,14 @@ namespace SalesLibraries.CloudAdmin.Controllers
 
 			MainController.Instance.MainForm.buttonItemHomeLinkDelete.Enabled =
 			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesNotes.Enabled =
-			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesTags.Enabled =
+			
 			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesSecurity.Enabled =
 			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesWidget.Enabled =
 			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesBanner.Enabled =
 			MainController.Instance.MainForm.buttonItemHomeLinkOpen.Enabled = selectedLink != null;
 			MainController.Instance.MainForm.buttonItemHomeLinkOpen.Enabled = selectedLink != null && selectedLink.IsOpenable;
 
+			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesTags.Enabled =
 			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesExpirationDate.Enabled =
 				selectedLink != null &&
 				!(selectedLink.Source is LineBreak);

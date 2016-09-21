@@ -54,7 +54,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 
 		public TagsOptions(IEnumerable<BaseLibraryLink> links) : this()
 		{
-			_links.AddRange(links);
+			_links.AddRange(links.OfType<LibraryObjectLink>());
 		}
 
 		public void LoadData()
@@ -132,18 +132,18 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 		{
 			var commonCategories = _searchGroups
 				.Select(sg =>
-					{
-						var searchGroup = new SearchGroup { Name = sg.DataSource.Name };
-						searchGroup.Tags.AddRange(sg.ListBox.Items
-							.Where(item => item.CheckState == CheckState.Checked)
-							.Select(item =>
-							{
-								var sourceTag = (SearchTag)item.Value;
-								var searchTag = new SearchTag { Name = sourceTag.Name };
-								return searchTag;
-							}));
-						return searchGroup;
-					})
+				{
+					var searchGroup = new SearchGroup { Name = sg.DataSource.Name };
+					searchGroup.Tags.AddRange(sg.ListBox.Items
+						.Where(item => item.CheckState == CheckState.Checked)
+						.Select(item =>
+						{
+							var sourceTag = (SearchTag)item.Value;
+							var searchTag = new SearchTag { Name = sourceTag.Name };
+							return searchTag;
+						}));
+					return searchGroup;
+				})
 				.Where(searchGroup => searchGroup.Tags.Any())
 				.ToArray();
 			var partialCategories = _searchGroups

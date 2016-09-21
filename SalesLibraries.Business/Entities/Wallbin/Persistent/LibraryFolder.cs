@@ -115,12 +115,6 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 		}
 
 		[NotMapped, JsonIgnore]
-		public bool ContainLinkWidgets
-		{
-			get { return Links.Any(l => !l.Widget.Disabled && l.Widget.Image != null); }
-		}
-
-		[NotMapped, JsonIgnore]
 		public Color BannerBackColor => Settings.BackgroundHeaderColor;
 		#endregion
 
@@ -184,7 +178,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 			Links.Sort();
 		}
 
-		public LibraryFolder Copy(bool forMove = false)
+		public LibraryFolder Copy(bool forMove = false, bool withLinks = true)
 		{
 			NeedToSave = true;
 
@@ -199,12 +193,13 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 				folder.WidgetEncoded = WidgetEncoded;
 				folder.BannerEncoded = BannerEncoded;
 
-				foreach (var libraryLink in Links)
-				{
-					var newLink = libraryLink.Copy(forMove);
-					newLink.Folder = folder;
-					folder.Links.Add(newLink);
-				}
+				if (withLinks)
+					foreach (var libraryLink in Links)
+					{
+						var newLink = libraryLink.Copy(forMove);
+						newLink.Folder = folder;
+						folder.Links.Add(newLink);
+					}
 			});
 		}
 

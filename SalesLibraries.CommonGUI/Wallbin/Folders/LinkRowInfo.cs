@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Drawing;
-using System.IO;
 using System.Windows.Forms;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings;
@@ -139,7 +138,7 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 			else
 			{
 				imageLeft = 0;
-				imageWidth = Link is LineBreak || !Link.Folder.ContainLinkWidgets ? 0 : DefaultImageWidth;
+				imageWidth = 0;
 				imageHeight = DefaultImageHeight;
 			}
 			#endregion

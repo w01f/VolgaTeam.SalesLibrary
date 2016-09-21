@@ -1,9 +1,11 @@
 using System;
+using System.Drawing;
+using DevComponents.DotNetBar.Metro;
 using SalesLibraries.CommonGUI.Common;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 {
-	public partial class FormPageName : DevComponents.DotNetBar.Metro.MetroForm
+	public partial class FormPageName : MetroForm
 	{
 		public string PageName
 		{
@@ -18,6 +20,16 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			textEditPageName.MouseUp += EditorHelper.EditorMouseUp;
 			textEditPageName.Enter += EditorHelper.EditorEnter;
 			textEditPageName.Focus();
+
+			if (!((CreateGraphics()).DpiX > 96)) return;
+			var styleControllerFont = new Font(styleController.Appearance.Font.FontFamily, styleController.Appearance.Font.Size - 2, styleController.Appearance.Font.Style);
+			styleController.AppearanceDisabled.Font = styleControllerFont;
+			styleController.AppearanceDropDown.Font = styleControllerFont;
+			styleController.AppearanceDropDownHeader.Font = styleControllerFont;
+			styleController.AppearanceFocused.Font = styleControllerFont;
+			styleController.AppearanceReadOnly.Font = styleControllerFont;
+			buttonXApply.Font = new Font(buttonXApply.Font.FontFamily, buttonXApply.Font.Size - 2, buttonXApply.Font.Style);
+			buttonXCancel.Font = new Font(buttonXCancel.Font.FontFamily, buttonXCancel.Font.Size - 2, buttonXCancel.Font.Style);
 		}
 	}
 }

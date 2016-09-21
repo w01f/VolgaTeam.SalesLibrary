@@ -17,7 +17,8 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 		public event EventHandler<SelectionEventArgs> SelectionChanged;
 
 		public BaseLibraryLink SelectedLink => SelectedLinks.Count == 1 ? SelectedLinks.First() : null;
-		public int SelectedLinksCount => SelectedLinks.Count;
+		public List<BaseLibraryLink> SelectedObjects => SelectedLinks.OfType<LibraryObjectLink>().OfType<BaseLibraryLink>().ToList();
+		public int SelectedObjectsCount => SelectedObjects.Count;
 
 		public SelectionManager()
 		{

@@ -52,11 +52,11 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.GroupSetting
 			_keywords.Clear();
 			Enabled = false;
 
-			Enabled = Selection.SelectedLinks.Any();
+			Enabled = Selection.SelectedObjects.Any();
 
-			var commonKeywords = Selection.SelectedLinks.GetCommonKeywords().ToList();
+			var commonKeywords = Selection.SelectedObjects.GetCommonKeywords().ToList();
 			_keywords.AddRange(commonKeywords.Select(k => new KeywordModel { Name = k.Name, IsShared = true }));
-			foreach (var link in Selection.SelectedLinks)
+			foreach (var link in Selection.SelectedObjects)
 			{
 				_keywords.AddRange(link.Tags.Keywords
 					.Where(k => !commonKeywords.Any(commonKeyword => commonKeyword.Equals(k)))
@@ -70,14 +70,14 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.GroupSetting
 		{
 			gridView.CloseEditor();
 			_keywords.RemoveAll(tag => String.IsNullOrEmpty(tag.Name));
-			Selection.SelectedLinks.ApplyKeywords(_keywords.ToArray());
+			Selection.SelectedObjects.ApplyKeywords(_keywords.ToArray());
 			EditorChanged?.Invoke(this, new EventArgs());
 		}
 
 		public void ResetData()
 		{
 			if (MainController.Instance.PopupMessages.ShowWarningQuestion("Are you sure You want to DELETE ALL KEYWORD TAGS for the selected files?") != DialogResult.Yes) return;
-			Selection.SelectedLinks.ApplyKeywords(new SearchTag[] { });
+			Selection.SelectedObjects.ApplyKeywords(new SearchTag[] { });
 			EditorChanged?.Invoke(this, new EventArgs());
 			UpdateData();
 		}

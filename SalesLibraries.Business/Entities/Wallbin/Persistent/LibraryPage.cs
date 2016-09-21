@@ -11,6 +11,7 @@ using SalesLibraries.Business.Entities.Helpers;
 using SalesLibraries.Business.Entities.Interfaces;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
+using SalesLibraries.Common.Helpers;
 
 namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 {
@@ -212,11 +213,18 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 			Folders.AddItem(folder);
 		}
 
+		public void InsertFolder(LibraryFolder folder, int columnOrder, int rowOrder)
+		{
+			AddFolder(folder, columnOrder, rowOrder);
+			folder.RowOrder = rowOrder;
+			Folders.Sort();
+		}
+
 		public void AlignFoldersByColumns()
 		{
 			var rowOrder = 0;
 			var columnOrder = 0;
-			foreach (var folder in Folders.OrderBy(f => f.Name))
+			foreach (var folder in Folders.OrderBy(f => f.Name, new StringNaturalComparer()))
 			{
 				folder.RowOrder = rowOrder;
 				folder.ColumnOrder = columnOrder;
@@ -236,7 +244,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 			var rowCount = Math.Ceiling((Decimal)Folders.Count / ColumnsCount);
 			var rowOrder = 0;
 			var columnOrder = 0;
-			foreach (var folder in Folders.OrderBy(f => f.Name))
+			foreach (var folder in Folders.OrderBy(f => f.Name, new StringNaturalComparer()))
 			{
 				folder.RowOrder = rowOrder;
 				folder.ColumnOrder = columnOrder;
@@ -277,6 +285,44 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 				link.Delete(link.ParentLibrary.Context);
 			foreach (var libraryFolder in Folders)
 				libraryFolder.Links.Clear();
+		}
+
+		public LibraryPage Copy(bool cloneWithLinks)
+		{
+			NeedToSave = true;
+
+			BeforeSave();
+
+			return CreateEntity<LibraryPage>(page =>
+			{
+				page.Name = Name;
+				page.Order = Library.Pages.Count;
+				page.SettingsEncoded = SettingsEncoded;
+
+				foreach (var libraryFolder in Folders)
+				{
+					var folder = libraryFolder.Copy(withLinks: cloneWithLinks);
+					folder.Page = page;
+					page.Folders.Add(folder);
+				}
+
+				foreach (var columnTitle in ColumnTitles)
+				{
+					var newColumnTitle = columnTitle.Copy();
+					newColumnTitle.Page = page;
+					page.ColumnTitles.Add(newColumnTitle);
+				}
+			});
+		}
+
+		public LibraryPage Clone(string name, bool cloneWithLinks)
+		{
+			var copy = Copy(cloneWithLinks);
+			copy.Name = name;
+			copy.Library = Library;
+			Library.Pages.Add(copy);
+			((List<LibraryPage>)Library.Pages).ChangeItemPosition(copy, Order + 1);
+			return copy;
 		}
 
 		public class LibraryPageSettings : SettingsContainer
