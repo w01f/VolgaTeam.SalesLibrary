@@ -19,7 +19,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 		public LinkSettingsType SettingsType => LinkSettingsType.Notes;
 		public int Order => 0;
 		public bool AvailableForEmbedded => false;
-		public SettingsEditorHeaderInfo HeaderInfo => new SettingsEditorHeaderInfo { Title = "Line Break Settings" };
+		public SettingsEditorHeaderInfo HeaderInfo => new SettingsEditorHeaderInfo { Title = "<size=+4>Line Break Settings</size>" };
 
 		public event EventHandler<EventArgs> ForceCloseRequested;
 

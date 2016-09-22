@@ -6,18 +6,27 @@ namespace SalesLibraries.FileManager.Business.Services
 {
 	class TaggedLinksManager
 	{
-		private static readonly TaggedLinksManager _instance = new TaggedLinksManager();
+		public int TotalLibraryLinks { get; private set; }
+		public int TaggedLibraryLinks { get; private set; }
+		public int TotalPageLinks { get; private set; }
+		public int TaggedPageLinks { get; private set; }
 
-		public int TotalLinks { get; private set; }
-		public int TaggedLinks { get; private set; }
-
-		public static TaggedLinksManager Instance => _instance;
+		public static TaggedLinksManager Instance { get; } = new TaggedLinksManager();
 
 		public void Load(Library library)
 		{
 			var links = library.Pages.SelectMany(p => p.TopLevelLinks).OfType<LibraryObjectLink>().ToList();
-			TotalLinks = links.Count;
-			TaggedLinks = links.Count(l => l.Tags.HasCategories);
+			TotalLibraryLinks = links.Count;
+			TaggedLibraryLinks = links.Count(l => l.Tags.HasCategories);
+		}
+
+		public void Load(LibraryPage libraryPage)
+		{
+			Load(libraryPage.Library);
+
+			var links = libraryPage.TopLevelLinks.OfType<LibraryObjectLink>().ToList();
+			TotalPageLinks = links.Count;
+			TaggedPageLinks = links.Count(l => l.Tags.HasCategories);
 		}
 	}
 }

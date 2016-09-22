@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using DevExpress.XtraTab;
 using SalesLibraries.Business.Entities.Wallbin.Persistent;
 using SalesLibraries.CloudAdmin.Controllers;
+using SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Libraries;
 
 namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 {
@@ -11,8 +12,9 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 	public sealed partial class TabPage : XtraTabPage, IPageView
 	{
 		private bool _readyToUse;
-		public LibraryPage Page { get; private set; }
-		public PageContent Content { get; private set; }
+		public LibraryPage Page { get; }
+		public PageContent Content { get; }
+		public LibraryPageTagInfo TagInfoControl { get; }
 		public bool IsActive => MainController.Instance.WallbinViews.ActiveWallbin.ActivePage == this;
 
 		public TabPage(LibraryPage page)
@@ -23,6 +25,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 			Controls.Add(pnContainer);
 			Controls.Add(pnEmpty);
 			Content = new PageContent(this);
+			TagInfoControl = new LibraryPageTagInfo(Page);
 			Suspend();
 		}
 
@@ -40,6 +43,8 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 			Content.LoadContent();
 			if (!pnContainer.Controls.Contains(Content))
 				pnContainer.Controls.Add(Content);
+			if (!MainController.Instance.TabWallbin.pnTagInfoContainer.Controls.Contains(TagInfoControl))
+				MainController.Instance.TabWallbin.pnTagInfoContainer.Controls.Add(TagInfoControl);
 			_readyToUse = true;
 			MainController.Instance.WallbinViews.Selection.Resume();
 		}
@@ -48,12 +53,14 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 		{
 			pnContainer.Controls.Remove(Content);
 			Content.DisposeContent();
+			TagInfoControl?.ReleaseControl();
 		}
 
 		public void ShowPage()
 		{
 			UpdateView();
 			Content.Refresh();
+			TagInfoControl.BringToFront();
 		}
 
 		public void UpdateView()

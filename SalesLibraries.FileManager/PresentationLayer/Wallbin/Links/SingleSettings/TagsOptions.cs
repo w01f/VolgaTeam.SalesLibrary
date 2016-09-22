@@ -31,7 +31,12 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		public LinkSettingsType SettingsType => LinkSettingsType.Tags;
 		public int Order => 0;
 		public bool AvailableForEmbedded => true;
-		public SettingsEditorHeaderInfo HeaderInfo => null;
+		public SettingsEditorHeaderInfo HeaderInfo => new SettingsEditorHeaderInfo
+		{
+			Title = String.Format("{0}Max Tags allowed: <b><u>{1}</u></b>",
+						_links.Count == 1 ? String.Empty : String.Format("Links: <b><u>{0}</u></b>    ", _links.Count),
+						MainController.Instance.Lists.SearchTags.MaxTags)
+		};
 
 		public event EventHandler<EventArgs> ForceCloseRequested;
 
@@ -167,10 +172,15 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 		private void UpdateCategoriesHeader()
 		{
-			labelControlSearchTagsCategoriesHeader.Text =
-				MainController.Instance.Lists.SearchTags.MaxTags > 0 ?
-				String.Format("Only {0} Search Tags are ALLOWED{1}", MainController.Instance.Lists.SearchTags.MaxTags, Environment.NewLine) :
-				String.Empty;
+			labelControlSearchTagsCategoriesHeader.Text = String.Format("<color=gray><i>Tags added: {0}</i></color>",
+				String.Join(", ",
+					_searchGroups
+						.SelectMany(g => g.ListBox.Items)
+						.Where(item => item.CheckState == CheckState.Checked)
+						.Select(item => item.Value)
+						.OfType<SearchTag>()
+						.Select(t => t.Name)
+						));
 		}
 
 		private void OnCategoriesListBoxItemChecking(object sender, ItemCheckingEventArgs e)

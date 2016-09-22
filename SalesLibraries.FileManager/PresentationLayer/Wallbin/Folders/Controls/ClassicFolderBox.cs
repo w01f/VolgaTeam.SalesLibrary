@@ -231,7 +231,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 		{
 			var result = links.Count == 1 ?
 				SettingsEditorFactory.Run(links.First(), settingsType) :
-				SettingsEditorFactory.Run(links, settingsType);
+				SettingsEditorFactory.Run(links, settingsType, false);
 			if (result != DialogResult.OK) return;
 
 			grFiles.SuspendLayout();

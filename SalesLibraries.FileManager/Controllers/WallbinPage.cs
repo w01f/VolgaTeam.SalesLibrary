@@ -228,9 +228,6 @@ namespace SalesLibraries.FileManager.Controllers
 				if (!pnContainer.Controls.Contains((Control)activeWallbin))
 					pnContainer.Controls.Add((Control)activeWallbin);
 
-				if (!pnTagInfoContainer.Controls.Contains(activeWallbin.TagInfoControl))
-					pnTagInfoContainer.Controls.Add(activeWallbin.TagInfoControl);
-
 				activeWallbin.ShowView();
 				UpdateRetractableBarContent();
 				UpdateProgramDataSettings();

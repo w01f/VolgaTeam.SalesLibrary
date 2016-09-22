@@ -172,11 +172,11 @@
     <Compile Include="PresentationLayer\Wallbin\Folders\Controls\FormDeleteLink.designer.cs">
       <DependentUpon>FormDeleteLink.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Wallbin\Libraries\LibraryTagInfo.cs">
+    <Compile Include="PresentationLayer\Wallbin\Libraries\LibraryPageTagInfo.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Wallbin\Libraries\LibraryTagInfo.Designer.cs">
-      <DependentUpon>LibraryTagInfo.cs</DependentUpon>
+    <Compile Include="PresentationLayer\Wallbin\Libraries\LibraryPageTagInfo.Designer.cs">
+      <DependentUpon>LibraryPageTagInfo.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Wallbin\Links\Clipboard\LinkClipboardActionType.cs" />
     <Compile Include="PresentationLayer\Wallbin\Links\Clipboard\LinksClipboardManager.cs" />
@@ -592,8 +592,8 @@
     <EmbeddedResource Include="PresentationLayer\Wallbin\Folders\Controls\FormDeleteLink.resx">
       <DependentUpon>FormDeleteLink.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Wallbin\Libraries\LibraryTagInfo.resx">
-      <DependentUpon>LibraryTagInfo.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Libraries\LibraryPageTagInfo.resx">
+      <DependentUpon>LibraryPageTagInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Links\GroupSettings\CategoriesEditor.resx">
       <DependentUpon>CategoriesEditor.cs</DependentUpon>

@@ -19,7 +19,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 		public LinkSettingsType SettingsType => LinkSettingsType.Notes;
 		public int Order => 6;
 		public bool AvailableForEmbedded => true;
-		public SettingsEditorHeaderInfo HeaderInfo => new SettingsEditorHeaderInfo { Title = "URL", Logo = Resources.LinkAddUrl };
+		public SettingsEditorHeaderInfo HeaderInfo => new SettingsEditorHeaderInfo { Title = "<size=+4>URL</size>", Logo = Resources.LinkAddUrl };
 
 		public event EventHandler<EventArgs> ForceCloseRequested;
 

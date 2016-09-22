@@ -20,7 +20,6 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 		public event EventHandler<EventArgs> PageChanging;
 		public event EventHandler<EventArgs> PageChanged;
 		public event EventHandler<EventArgs> DataChanged;
-		public LibraryTagInfo TagInfoControl { get; }
 
 		private bool _isDataChanged;
 		public bool IsDataChanged
@@ -30,7 +29,6 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 			{
 				_isDataChanged = value;
 				if (!_isDataChanged) return;
-				TagInfoControl.UpdateInfo();
 				DataChanged?.Invoke(this, EventArgs.Empty);
 			}
 		}
@@ -50,7 +48,6 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 			DataStorage = dataStorage;
 			Pages = new List<IPageView>();
 			PageChanging += OnPageChanging;
-			TagInfoControl = new LibraryTagInfo(DataStorage.Library);
 		}
 
 		public override string ToString()
@@ -81,8 +78,6 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 			ActivePage.Resume();
 
 			pnContainer.BringToFront();
-
-			TagInfoControl.BringToFront();
 		}
 
 		public virtual void DisposeView()
@@ -90,7 +85,6 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 			Pages.ForEach(p => p.DisposePage());
 			Pages.Clear();
 			ActivePage = null;
-			TagInfoControl?.ReleaseControl();
 		}
 
 		public void SaveData()

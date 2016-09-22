@@ -564,11 +564,11 @@
     <Compile Include="PresentationLayer\Wallbin\Settings\FormPageName.designer.cs">
       <DependentUpon>FormPageName.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Wallbin\Libraries\LibraryTagInfo.cs">
+    <Compile Include="PresentationLayer\Wallbin\Libraries\LibraryPageTagInfo.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Wallbin\Libraries\LibraryTagInfo.Designer.cs">
-      <DependentUpon>LibraryTagInfo.cs</DependentUpon>
+    <Compile Include="PresentationLayer\Wallbin\Libraries\LibraryPageTagInfo.Designer.cs">
+      <DependentUpon>LibraryPageTagInfo.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Wallbin\Settings\FormPaths.cs">
       <SubType>Form</SubType>
@@ -915,8 +915,8 @@
     <EmbeddedResource Include="PresentationLayer\Wallbin\Views\BaseWallbin.resx">
       <DependentUpon>BaseWallbin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Wallbin\Libraries\LibraryTagInfo.resx">
-      <DependentUpon>LibraryTagInfo.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Libraries\LibraryPageTagInfo.resx">
+      <DependentUpon>LibraryPageTagInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Views\PageContent.resx">
       <DependentUpon>PageContent.cs</DependentUpon>

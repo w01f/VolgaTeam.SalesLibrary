@@ -28,7 +28,6 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.components = new System.ComponentModel.Container();
 			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
 			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
 			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
@@ -38,7 +37,7 @@
 			this.xtraScrollableControlSearchTagsCategories = new DevExpress.XtraEditors.XtraScrollableControl();
 			this.pnSearchTagsCategoriesHeader = new System.Windows.Forms.Panel();
 			this.labelControlSearchTagsCategoriesHeader = new DevExpress.XtraEditors.LabelControl();
-			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
+			this.styleController = new DevExpress.XtraEditors.StyleController();
 			this.buttonXWipeTags = new DevComponents.DotNetBar.ButtonX();
 			this.xtraTabPageSearchTagsKeywords = new DevExpress.XtraTab.XtraTabPage();
 			this.buttonXAddKeyWord = new DevComponents.DotNetBar.ButtonX();
@@ -104,7 +103,7 @@
 			this.splitContainerSearchTagsCategories.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.splitContainerSearchTagsCategories.Appearance.Options.UseForeColor = true;
 			this.splitContainerSearchTagsCategories.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.splitContainerSearchTagsCategories.Location = new System.Drawing.Point(0, 49);
+			this.splitContainerSearchTagsCategories.Location = new System.Drawing.Point(0, 64);
 			this.splitContainerSearchTagsCategories.Name = "splitContainerSearchTagsCategories";
 			this.splitContainerSearchTagsCategories.Panel1.Appearance.BackColor = System.Drawing.Color.White;
 			this.splitContainerSearchTagsCategories.Panel1.Appearance.ForeColor = System.Drawing.Color.Black;
@@ -120,7 +119,7 @@
 			this.splitContainerSearchTagsCategories.Panel2.Appearance.Options.UseForeColor = true;
 			this.splitContainerSearchTagsCategories.Panel2.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Default;
 			this.splitContainerSearchTagsCategories.Panel2.Text = "Panel2";
-			this.splitContainerSearchTagsCategories.Size = new System.Drawing.Size(525, 461);
+			this.splitContainerSearchTagsCategories.Size = new System.Drawing.Size(525, 446);
 			this.splitContainerSearchTagsCategories.SplitterPosition = 250;
 			this.splitContainerSearchTagsCategories.TabIndex = 1;
 			this.splitContainerSearchTagsCategories.Text = "splitContainerControl1";
@@ -134,7 +133,7 @@
 			this.xtraScrollableControlSearchTagsCategories.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.xtraScrollableControlSearchTagsCategories.Location = new System.Drawing.Point(0, 0);
 			this.xtraScrollableControlSearchTagsCategories.Name = "xtraScrollableControlSearchTagsCategories";
-			this.xtraScrollableControlSearchTagsCategories.Size = new System.Drawing.Size(246, 457);
+			this.xtraScrollableControlSearchTagsCategories.Size = new System.Drawing.Size(246, 442);
 			this.xtraScrollableControlSearchTagsCategories.TabIndex = 0;
 			// 
 			// pnSearchTagsCategoriesHeader
@@ -146,21 +145,24 @@
 			this.pnSearchTagsCategoriesHeader.Location = new System.Drawing.Point(0, 0);
 			this.pnSearchTagsCategoriesHeader.Name = "pnSearchTagsCategoriesHeader";
 			this.pnSearchTagsCategoriesHeader.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-			this.pnSearchTagsCategoriesHeader.Size = new System.Drawing.Size(525, 49);
+			this.pnSearchTagsCategoriesHeader.Size = new System.Drawing.Size(525, 64);
 			this.pnSearchTagsCategoriesHeader.TabIndex = 2;
 			// 
 			// labelControlSearchTagsCategoriesHeader
 			// 
+			this.labelControlSearchTagsCategoriesHeader.AllowHtmlString = true;
 			this.labelControlSearchTagsCategoriesHeader.Appearance.BackColor = System.Drawing.Color.White;
 			this.labelControlSearchTagsCategoriesHeader.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.labelControlSearchTagsCategoriesHeader.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Top;
+			this.labelControlSearchTagsCategoriesHeader.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
 			this.labelControlSearchTagsCategoriesHeader.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
 			this.labelControlSearchTagsCategoriesHeader.Dock = System.Windows.Forms.DockStyle.Left;
 			this.labelControlSearchTagsCategoriesHeader.Location = new System.Drawing.Point(5, 0);
 			this.labelControlSearchTagsCategoriesHeader.Name = "labelControlSearchTagsCategoriesHeader";
-			this.labelControlSearchTagsCategoriesHeader.Size = new System.Drawing.Size(376, 49);
+			this.labelControlSearchTagsCategoriesHeader.Size = new System.Drawing.Size(381, 64);
 			this.labelControlSearchTagsCategoriesHeader.StyleController = this.styleController;
 			this.labelControlSearchTagsCategoriesHeader.TabIndex = 0;
-			this.labelControlSearchTagsCategoriesHeader.Text = "Only 0 Tags are allowed\r\nNo Tags";
+			this.labelControlSearchTagsCategoriesHeader.Text = "Only 0 Tags are allowed\r\nNo Tags\r\nNo Tags";
 			// 
 			// styleController
 			// 
@@ -183,7 +185,7 @@
 			this.buttonXWipeTags.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXWipeTags.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXWipeTags.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.buttonXWipeTags.Location = new System.Drawing.Point(402, 7);
+			this.buttonXWipeTags.Location = new System.Drawing.Point(402, 15);
 			this.buttonXWipeTags.Name = "buttonXWipeTags";
 			this.buttonXWipeTags.Size = new System.Drawing.Size(120, 34);
 			this.buttonXWipeTags.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -315,7 +317,6 @@
 			// TagsOptions
 			// 
 			this.Controls.Add(this.xtraTabControlSearchTags);
-			this.Name = "TagsOptions";
 			this.Size = new System.Drawing.Size(531, 541);
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControlSearchTags)).EndInit();
 			this.xtraTabControlSearchTags.ResumeLayout(false);

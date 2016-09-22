@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+			this.components = new System.ComponentModel.Container();
 			this.xtraTabControl = new DevExpress.XtraTab.XtraTabControl();
 			this.buttonXOK = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXCancel = new DevComponents.DotNetBar.ButtonX();
@@ -35,10 +36,12 @@
 			this.pnBottom = new System.Windows.Forms.Panel();
 			this.pnTop = new System.Windows.Forms.Panel();
 			this.labelControlTitle = new DevExpress.XtraEditors.LabelControl();
+			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControl)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.hyperLinkEditRequestNewCategories.Properties)).BeginInit();
 			this.pnBottom.SuspendLayout();
 			this.pnTop.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// xtraTabControl
@@ -108,6 +111,7 @@
 			this.hyperLinkEditRequestNewCategories.Properties.Appearance.Options.UseForeColor = true;
 			this.hyperLinkEditRequestNewCategories.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
 			this.hyperLinkEditRequestNewCategories.Size = new System.Drawing.Size(251, 20);
+			this.hyperLinkEditRequestNewCategories.StyleController = this.styleController;
 			this.hyperLinkEditRequestNewCategories.TabIndex = 7;
 			this.hyperLinkEditRequestNewCategories.TabStop = false;
 			this.hyperLinkEditRequestNewCategories.Visible = false;
@@ -140,8 +144,8 @@
 			// 
 			// labelControlTitle
 			// 
+			this.labelControlTitle.AllowHtmlString = true;
 			this.labelControlTitle.Appearance.BackColor = System.Drawing.Color.White;
-			this.labelControlTitle.Appearance.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.labelControlTitle.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.labelControlTitle.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
 			this.labelControlTitle.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -149,8 +153,28 @@
 			this.labelControlTitle.Location = new System.Drawing.Point(10, 0);
 			this.labelControlTitle.Name = "labelControlTitle";
 			this.labelControlTitle.Size = new System.Drawing.Size(597, 52);
+			this.labelControlTitle.StyleController = this.styleController;
 			this.labelControlTitle.TabIndex = 0;
 			this.labelControlTitle.Text = "Link Settings";
+			// 
+			// styleController
+			// 
+			this.styleController.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.styleController.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.styleController.Appearance.Options.UseFont = true;
+			this.styleController.Appearance.Options.UseForeColor = true;
+			this.styleController.AppearanceDisabled.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.styleController.AppearanceDisabled.ForeColor = System.Drawing.Color.Gray;
+			this.styleController.AppearanceDisabled.Options.UseFont = true;
+			this.styleController.AppearanceDisabled.Options.UseForeColor = true;
+			this.styleController.AppearanceDropDown.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.styleController.AppearanceDropDown.Options.UseFont = true;
+			this.styleController.AppearanceDropDownHeader.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.styleController.AppearanceDropDownHeader.Options.UseFont = true;
+			this.styleController.AppearanceFocused.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.styleController.AppearanceFocused.Options.UseFont = true;
+			this.styleController.AppearanceReadOnly.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.styleController.AppearanceReadOnly.Options.UseFont = true;
 			// 
 			// FormEditLinkSettingsRegular
 			// 
@@ -173,6 +197,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.hyperLinkEditRequestNewCategories.Properties)).EndInit();
 			this.pnBottom.ResumeLayout(false);
 			this.pnTop.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
 			this.ResumeLayout(false);
 
         }
@@ -186,5 +211,6 @@
 		private System.Windows.Forms.Panel pnBottom;
 	    public System.Windows.Forms.Panel pnTop;
 		private DevExpress.XtraEditors.LabelControl labelControlTitle;
+		private DevExpress.XtraEditors.StyleController styleController;
 	}
 }

@@ -7,7 +7,6 @@ using SalesLibraries.Business.Contexts.Wallbin;
 using SalesLibraries.FileManager.Business.Services;
 using SalesLibraries.FileManager.Controllers;
 using SalesLibraries.FileManager.PresentationLayer.Wallbin.DataSource;
-using SalesLibraries.FileManager.PresentationLayer.Wallbin.Libraries;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 {
@@ -22,7 +21,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 		public event EventHandler<EventArgs> PageChanged;
 		public event EventHandler<EventArgs> DataChanged;
 		public DataSourceTreeViewControl DataSourcesControl { get; private set; }
-		public LibraryTagInfo TagInfoControl { get; }
 
 		private bool _isDataChanged;
 		public bool IsDataChanged
@@ -32,7 +30,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 			{
 				_isDataChanged = value;
 				if (!_isDataChanged) return;
-				TagInfoControl.UpdateInfo();
+				ActivePage?.TagInfoControl.UpdateInfo();
 				DataChanged?.Invoke(this, EventArgs.Empty);
 			}
 		}
@@ -52,7 +50,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 			DataStorage = dataStorage;
 			Pages = new List<IPageView>();
 			PageChanging += OnPageChanging;
-			TagInfoControl = new LibraryTagInfo(DataStorage.Library);
 		}
 
 		public override string ToString()
@@ -83,8 +80,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 			ActivePage.Resume();
 
 			pnContainer.BringToFront();
-
-			TagInfoControl.BringToFront();
 		}
 
 		public virtual void DisposeView()
@@ -98,7 +93,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 				DataSourcesControl.Dispose();
 				DataSourcesControl = null;
 			}
-			TagInfoControl?.ReleaseControl();
 		}
 
 		public void SaveData()

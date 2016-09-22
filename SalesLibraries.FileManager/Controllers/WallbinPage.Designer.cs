@@ -34,8 +34,8 @@
 			this.retractableBar = new SalesLibraries.CommonGUI.RetractableBar.RetractableBarLeft();
 			this.laEditorTitle = new System.Windows.Forms.Label();
 			this.pnHeader = new System.Windows.Forms.Panel();
-			this.pnTagInfoContainer = new System.Windows.Forms.Panel();
 			this.linkInfoControl = new SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSettings.LinkInfoControl();
+			this.pnTagInfoContainer = new System.Windows.Forms.Panel();
 			this.superFilterControl = new SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSettings.SuperFilterControl();
 			this.pnMain.SuspendLayout();
 			this.retractableBar.Header.SuspendLayout();
@@ -121,14 +121,6 @@
 			this.pnHeader.Size = new System.Drawing.Size(988, 47);
 			this.pnHeader.TabIndex = 8;
 			// 
-			// pnTagInfoContainer
-			// 
-			this.pnTagInfoContainer.Dock = System.Windows.Forms.DockStyle.Right;
-			this.pnTagInfoContainer.Location = new System.Drawing.Point(618, 0);
-			this.pnTagInfoContainer.Name = "pnTagInfoContainer";
-			this.pnTagInfoContainer.Size = new System.Drawing.Size(370, 47);
-			this.pnTagInfoContainer.TabIndex = 1;
-			// 
 			// linkInfoControl
 			// 
 			this.linkInfoControl.AllowHtmlString = true;
@@ -141,6 +133,15 @@
 			this.linkInfoControl.Name = "linkInfoControl";
 			this.linkInfoControl.Size = new System.Drawing.Size(422, 47);
 			this.linkInfoControl.TabIndex = 2;
+			// 
+			// pnTagInfoContainer
+			// 
+			this.pnTagInfoContainer.Dock = System.Windows.Forms.DockStyle.Right;
+			this.pnTagInfoContainer.Location = new System.Drawing.Point(618, 0);
+			this.pnTagInfoContainer.Name = "pnTagInfoContainer";
+			this.pnTagInfoContainer.Padding = new System.Windows.Forms.Padding(0, 0, 10, 0);
+			this.pnTagInfoContainer.Size = new System.Drawing.Size(370, 47);
+			this.pnTagInfoContainer.TabIndex = 1;
 			// 
 			// superFilterControl
 			// 
@@ -178,7 +179,7 @@
 		private System.Windows.Forms.Label laEditorTitle;
 		private System.Windows.Forms.Panel pnHeader;
 		private PresentationLayer.Wallbin.Links.SingleSettings.SuperFilterControl superFilterControl;
-		private System.Windows.Forms.Panel pnTagInfoContainer;
+		public System.Windows.Forms.Panel pnTagInfoContainer;
 		private PresentationLayer.Wallbin.Links.SingleSettings.LinkInfoControl linkInfoControl;
 	}
 }

@@ -82,14 +82,12 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 
 		public void SaveActiveWallbin()
 		{
-			if (ActiveWallbin == null) return;
-			ActiveWallbin.SaveData();
+			ActiveWallbin?.SaveData();
 		}
 
 		private void UpdateViewState(object sender, EventArgs e)
 		{
-			if (ActiveWallbin == null || ActiveWallbin.ActivePage == null) return;
-			ActiveWallbin.ActivePage.UpdateView();
+			ActiveWallbin?.ActivePage?.UpdateView();
 		}
 
 		#region Event Handlers
@@ -106,8 +104,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 		private void OnSelectedLibraryChanged(object sender, EventArgs eventArgs)
 		{
 			var editor = sender as ComboBoxEdit;
-			if (editor == null) return;
-			var selectedView = editor.EditValue as IWallbinView;
+			var selectedView = editor?.EditValue as IWallbinView;
 			if (selectedView == null) return;
 			MainController.Instance.ProcessManager.RunInQueue("Loading Library...",
 				() => MainController.Instance.MainForm.Invoke(new MethodInvoker(() => SetActiveWallbin(selectedView))));

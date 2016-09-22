@@ -138,6 +138,7 @@
 			this.pnTagInfoContainer.Dock = System.Windows.Forms.DockStyle.Right;
 			this.pnTagInfoContainer.Location = new System.Drawing.Point(618, 0);
 			this.pnTagInfoContainer.Name = "pnTagInfoContainer";
+			this.pnTagInfoContainer.Padding = new System.Windows.Forms.Padding(0, 0, 10, 0);
 			this.pnTagInfoContainer.Size = new System.Drawing.Size(370, 47);
 			this.pnTagInfoContainer.TabIndex = 1;
 			// 
@@ -177,7 +178,7 @@
 		private System.Windows.Forms.Label laEditorTitle;
 		private System.Windows.Forms.Panel pnHeader;
 		private PresentationLayer.Wallbin.Links.SingleSettings.SuperFilterControl superFilterControl;
-		private System.Windows.Forms.Panel pnTagInfoContainer;
 		private PresentationLayer.Wallbin.Links.SingleSettings.LinkInfoControl linkInfoControl;
+		public System.Windows.Forms.Panel pnTagInfoContainer;
 	}
 }

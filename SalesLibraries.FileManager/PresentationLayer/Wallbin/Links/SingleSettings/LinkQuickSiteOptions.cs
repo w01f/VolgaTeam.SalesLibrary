@@ -19,7 +19,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		public LinkSettingsType SettingsType => LinkSettingsType.Notes;
 		public int Order => 6;
 		public bool AvailableForEmbedded => true;
-		public SettingsEditorHeaderInfo HeaderInfo => new SettingsEditorHeaderInfo { Title = "QuickSite", Logo = Resources.LinkAddQuickSite };
+		public SettingsEditorHeaderInfo HeaderInfo => new SettingsEditorHeaderInfo { Title = "<size=+4>QuickSite</size>", Logo = Resources.LinkAddQuickSite };
 
 		public event EventHandler<EventArgs> ForceCloseRequested;
 

@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Windows.Forms;
 using SalesLibraries.Business.Entities.Wallbin.Persistent;
 using SalesLibraries.CloudAdmin.Controllers;
+using SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Libraries;
 
 namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 {
@@ -10,8 +11,10 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 	public partial class SimplePage : UserControl, IPageView
 	{
 		private bool _readyToUse;
-		public LibraryPage Page { get; private set; }
-		public PageContent Content { get; private set; }
+		public LibraryPage Page { get; }
+		public PageContent Content { get; }
+		public LibraryPageTagInfo TagInfoControl { get; }
+
 		public bool IsActive => MainController.Instance.WallbinViews.ActiveWallbin.ActivePage == this;
 
 		public SimplePage(LibraryPage page)
@@ -20,6 +23,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 			Dock = DockStyle.Fill;
 			Page = page;
 			Content = new PageContent(this);
+			TagInfoControl = new LibraryPageTagInfo(Page);
 			pnContainer.Controls.Add(Content);
 			Suspend();
 		}
@@ -35,18 +39,22 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 			if (force)
 				DisposePage();
 			Content.LoadContent();
+			if (!MainController.Instance.TabWallbin.pnTagInfoContainer.Controls.Contains(TagInfoControl))
+				MainController.Instance.TabWallbin.pnTagInfoContainer.Controls.Add(TagInfoControl);
 			_readyToUse = true;
 		}
 
 		public void DisposePage()
 		{
 			Content.DisposeContent();
+			TagInfoControl?.ReleaseControl();
 		}
 
 		public void ShowPage()
 		{
 			UpdateView();
 			BringToFront();
+			TagInfoControl.BringToFront();
 		}
 
 		public void UpdateView()

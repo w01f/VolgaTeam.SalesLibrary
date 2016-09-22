@@ -16,8 +16,8 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 			uncompletedTags = 0;
 			if (MainController.Instance.Settings.SyncLockByUntaggedLinks)
 			{
-				var totalLinks = TaggedLinksManager.Instance.TotalLinks;
-				var taggedLinks = TaggedLinksManager.Instance.TaggedLinks;
+				var totalLinks = TaggedLinksManager.Instance.TotalLibraryLinks;
+				var taggedLinks = TaggedLinksManager.Instance.TaggedLibraryLinks;
 				uncompletedTags = totalLinks - taggedLinks;
 			}
 			unconvertedVideos = MainController.Instance.Settings.SyncLockByUnconvertedVideo ?

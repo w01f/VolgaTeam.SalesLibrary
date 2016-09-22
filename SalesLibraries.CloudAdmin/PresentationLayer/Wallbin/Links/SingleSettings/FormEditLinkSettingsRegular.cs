@@ -13,7 +13,6 @@ using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.CloudAdmin.Controllers;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.Common.JsonConverters;
-using SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSettings;
 
 namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettings
 {
@@ -35,10 +34,22 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 			InitializeComponent();
 			if ((CreateGraphics()).DpiX > 96)
 			{
+				var font = new Font(styleController.Appearance.Font.FontFamily, styleController.Appearance.Font.Size - 2,
+					styleController.Appearance.Font.Style);
+				styleController.Appearance.Font = font;
+				styleController.AppearanceDisabled.Font = font;
+				styleController.AppearanceDropDown.Font = font;
+				styleController.AppearanceDropDownHeader.Font = font;
+				styleController.AppearanceFocused.Font = font;
+				styleController.AppearanceReadOnly.Font = font;
+
 				xtraTabControl.AppearancePage.HeaderActive.Font = new Font(xtraTabControl.AppearancePage.HeaderActive.Font.FontFamily, xtraTabControl.AppearancePage.HeaderActive.Font.Size - 2, xtraTabControl.AppearancePage.HeaderActive.Font.Style);
 				xtraTabControl.AppearancePage.Header.Font = new Font(xtraTabControl.AppearancePage.Header.Font.FontFamily, xtraTabControl.AppearancePage.Header.Font.Size - 2, xtraTabControl.AppearancePage.Header.Font.Style);
 				xtraTabControl.AppearancePage.HeaderDisabled.Font = new Font(xtraTabControl.AppearancePage.HeaderDisabled.Font.FontFamily, xtraTabControl.AppearancePage.HeaderDisabled.Font.Size - 2, xtraTabControl.AppearancePage.HeaderDisabled.Font.Style);
 				xtraTabControl.AppearancePage.HeaderHotTracked.Font = new Font(xtraTabControl.AppearancePage.HeaderHotTracked.Font.FontFamily, xtraTabControl.AppearancePage.HeaderHotTracked.Font.Size - 2, xtraTabControl.AppearancePage.HeaderHotTracked.Font.Style);
+
+				buttonXCancel.Font = new Font(buttonXCancel.Font.FontFamily, buttonXCancel.Font.Size - 2, buttonXCancel.Font.Style);
+				buttonXOK.Font = new Font(buttonXOK.Font.FontFamily, buttonXOK.Font.Size - 2, buttonXOK.Font.Style);
 			}
 		}
 
@@ -72,9 +83,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 			var headerInfo = GetFormTitle(settingsType);
 			labelControlTitle.Text = String.Format("{0}{1}",
 				headerInfo.Logo != null ? "  " : String.Empty,
-				_sourceLinks.Count == 1 ?
-					headerInfo.Title :
-					String.Format("{0}: {1} Selected Links", headerInfo.Title, _sourceLinks.Count));
+				headerInfo.Title);
 			labelControlTitle.Appearance.Image = headerInfo.Logo;
 		}
 
@@ -90,17 +99,17 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 			switch (settingsType)
 			{
 				case LinkSettingsType.AdvancedSettings:
-					return new SettingsEditorHeaderInfo { Title = "Advanced Settings" };
+					return new SettingsEditorHeaderInfo { Title = "<size=+4>Advanced Settings</size>" };
 				case LinkSettingsType.ExpirationDate:
-					return new SettingsEditorHeaderInfo { Title = "Do you want to set an Expiration Date?" };
+					return new SettingsEditorHeaderInfo { Title = "<size=+4>Do you want to set an Expiration Date?</size>" };
 				case LinkSettingsType.Notes:
-					return new SettingsEditorHeaderInfo { Title = "Link Settings" };
+					return new SettingsEditorHeaderInfo { Title = "<size=+4>Link Settings</size>" };
 				case LinkSettingsType.Security:
-					return new SettingsEditorHeaderInfo { Title = "Security" };
+					return new SettingsEditorHeaderInfo { Title = "<size=+4>Security</size>" };
 				case LinkSettingsType.Tags:
-					return new SettingsEditorHeaderInfo { Title = "Tags" };
+					return new SettingsEditorHeaderInfo { Title = "<size=+4>Tags</size>" };
 			}
-			return new SettingsEditorHeaderInfo { Title = "Link Settings" };
+			return new SettingsEditorHeaderInfo { Title = "<size=+4>Link Settings</size>" };
 		}
 
 		private void AddOptionPages(IEnumerable<ILinkSettingsEditControl> pages)
