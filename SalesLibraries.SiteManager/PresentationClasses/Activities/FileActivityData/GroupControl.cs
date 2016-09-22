@@ -45,6 +45,8 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Activities.FileActivity
 			_endDate = endDate;
 
 			gridControlData.DataSource = Records;
+			gridColumnExtension.Visible = showDeatils;
+			gridColumnExtensionGroup.Visible = showDeatils;
 			gridColumnFileDetail.Visible = showDeatils;
 			gridColumnLibraryName.Visible = showDeatils;
 		}

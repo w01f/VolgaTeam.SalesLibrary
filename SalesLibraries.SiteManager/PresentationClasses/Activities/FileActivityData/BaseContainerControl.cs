@@ -172,12 +172,13 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Activities.FileActivity
 				_records.Where(g => _filterControl.SelectedGroups.Contains(g.group)) :
 				_records);
 
-			var totalRecords = _records.GroupBy(r => new { r.fileType, r.fileName, r.fileLink, r.fileDetail, r.library }).Select(g => new FileActivityReportModel
+			var totalRecords = _records.GroupBy(r => new { r.fileType, r.fileName, r.fileLink, r.fileDetail, r.fileExtension, r.library }).Select(g => new FileActivityReportModel
 			{
 				fileType = g.Key.fileType,
 				fileName = g.Key.fileName,
 				fileLink = g.Key.fileLink,
 				fileDetail = g.Key.fileDetail,
+				fileExtension = g.Key.fileExtension,
 				library = g.Key.library,
 				group = "Total Summary",
 				activityCount = g.Sum(x => x.activityCount)

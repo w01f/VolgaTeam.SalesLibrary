@@ -846,6 +846,8 @@ namespace SalesLibraries.ServiceConnector.StatisticService {
         
         private string fileDetailField;
         
+        private string fileExtensionField;
+        
         private string libraryField;
         
         private int activityCountField;
@@ -889,6 +891,16 @@ namespace SalesLibraries.ServiceConnector.StatisticService {
             }
             set {
                 this.fileDetailField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string fileExtension {
+            get {
+                return this.fileExtensionField;
+            }
+            set {
+                this.fileExtensionField = value;
             }
         }
         
