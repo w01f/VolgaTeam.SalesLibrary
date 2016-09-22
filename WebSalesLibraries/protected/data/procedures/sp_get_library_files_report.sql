@@ -5,7 +5,7 @@ CREATE PROCEDURE sp_get_library_files_report()
     lib.last_update as library_date,
     l.name as link_name,
     l.file_name as file_name,
-    l.file_extension as file_type,
+    case when l.format='folder' or l.format='other' then 'other' else l.file_extension end as file_type,
     l.format as file_format,
     l.file_date as file_date
   from tbl_library lib

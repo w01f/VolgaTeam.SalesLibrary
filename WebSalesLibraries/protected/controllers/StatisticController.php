@@ -320,6 +320,7 @@
 					$reportRecord->fileName = base64_encode(str_replace('\/', '/', $resultRecord['file_name']));
 					$reportRecord->fileLink = base64_encode(str_replace('\/', '/', $resultRecord['file_link']));
 					$reportRecord->fileDetail = base64_encode(str_replace('\/', '/', $resultRecord['file_detail']));
+					$reportRecord->fileExtension = $resultRecord['file_extension'];
 					$reportRecord->library = isset($resultRecord['lib_name']) && $resultRecord['lib_name'] != '' ? $resultRecord['lib_name'] : 'URL';
 					$reportRecord->activityCount = $resultRecord['action_count'];
 					$reportRecords[] = $reportRecord;

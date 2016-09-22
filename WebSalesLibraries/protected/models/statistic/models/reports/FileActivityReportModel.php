@@ -26,6 +26,11 @@
 		 */
 		public $fileDetail;
 		/**
+		 * @var string fileExtension
+		 * @soap
+		 */
+		public $fileExtension;
+		/**
 		 * @var string library
 		 * @soap
 		 */
