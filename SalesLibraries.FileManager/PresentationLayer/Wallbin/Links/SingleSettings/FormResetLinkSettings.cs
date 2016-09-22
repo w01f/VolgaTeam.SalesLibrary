@@ -5,13 +5,14 @@ using System.Linq;
 using DevComponents.DotNetBar.Metro;
 using DevExpress.XtraEditors.Controls;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
+using SalesLibraries.Business.Entities.Wallbin.Persistent;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSettings
 {
 	public partial class FormResetLinkSettings : MetroForm
 	{
-		private readonly BaseLibraryLink _targetLink;
+		private readonly List<BaseLibraryLink> _targetLinks = new List<BaseLibraryLink>();
 
 		public IList<LinkSettingsGroupType> SettingsGroups =>
 			checkedListBoxControlOutputItems.CheckedItems
@@ -19,17 +20,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 				.Select(item => (LinkSettingsGroupType)item.Value)
 				.ToList();
 
-		public FormResetLinkSettings(BaseLibraryLink targetLink)
+		public FormResetLinkSettings()
 		{
 			InitializeComponent();
-
-			_targetLink = targetLink;
-
-			labelControlTitle.Text = String.Format(labelControlTitle.Text,
-				_targetLink.LinkInfoDisplayName,
-				(_targetLink as LibraryFileLink)?.NameWithExtension ?? (_targetLink as LibraryObjectLink)?.RelativePath ?? String.Empty);
-
-			LoadSettingsGroups();
 
 			if (CreateGraphics().DpiX > 96)
 			{
@@ -47,9 +40,48 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			}
 		}
 
+		public FormResetLinkSettings(BaseLibraryLink targetLink) : this()
+		{
+			_targetLinks.Add(targetLink);
+
+			Text = "Reset this Link";
+			labelControlTitle.Text = String.Format(labelControlTitle.Text,
+				targetLink.LinkInfoDisplayName,
+				(targetLink as LibraryFileLink)?.NameWithExtension ?? (targetLink as LibraryObjectLink)?.RelativePath ?? String.Empty);
+
+			LoadSettingsGroups();
+		}
+
+		public FormResetLinkSettings(LibraryPage targetPage) : this()
+		{
+			_targetLinks.AddRange(targetPage.AllLinks);
+
+			Text = "Reset all Links on this Page";
+			labelControlTitle.Text = String.Format(labelControlTitle.Text,
+				String.Format("Page: <b>{0}</b>", targetPage.Name),
+				String.Empty);
+
+			LoadSettingsGroups();
+		}
+
+		public FormResetLinkSettings(LibraryFolder targetFolder) : this()
+		{
+			_targetLinks.AddRange(targetFolder.AllLinks);
+
+			Text = "Reset all Links in this Window";
+			labelControlTitle.Text = String.Format(labelControlTitle.Text,
+				String.Format("Window: <b>{0}</b>", targetFolder.Name),
+				String.Empty);
+
+			LoadSettingsGroups();
+		}
+
 		private void LoadSettingsGroups()
 		{
-			var customizedSettingsGroups = _targetLink.GetCustomizedSettigsGroups();
+			var customizedSettingsGroups = _targetLinks
+				.SelectMany(link => link.GetCustomizedSettigsGroups())
+				.Distinct()
+				.ToList();
 			foreach (var linkSettingsGroupType in customizedSettingsGroups)
 			{
 				string itemName;

@@ -33,6 +33,10 @@
 			this.contextMenuStripPageProperties = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.toolStripMenuItemRename = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItemDelete = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+			this.toolStripMenuItemClone = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItemCloneWindowsAndLinks = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItemCloneWindows = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
 			this.toolStripMenuItemManageImages = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItemDeleteWidgets = new System.Windows.Forms.ToolStripMenuItem();
@@ -43,10 +47,9 @@
 			this.toolStripMenuItemDeleteExpirationDates = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItemDeleteSecurity = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItemEditTags = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolStripMenuItemClone = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-			this.toolStripMenuItemCloneWindowsAndLinks = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolStripMenuItemCloneWindows = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItemResetLinkSettings = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+			this.toolStripMenuItemMakeLinkTextWordWrap = new System.Windows.Forms.ToolStripMenuItem();
 			this.pnContainer.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControl)).BeginInit();
 			this.contextMenuStripPageProperties.SuspendLayout();
@@ -97,12 +100,14 @@
             this.toolStripMenuItemDelete,
             this.toolStripSeparator2,
             this.toolStripMenuItemClone,
+            this.toolStripSeparator3,
+            this.toolStripMenuItemResetLinkSettings,
             this.toolStripSeparator1,
             this.toolStripMenuItemManageImages,
             this.toolsToolStripMenuItemCleanupTools,
             this.toolStripMenuItemEditTags});
 			this.contextMenuStripPageProperties.Name = "contextMenuStripLinkProperties";
-			this.contextMenuStripPageProperties.Size = new System.Drawing.Size(281, 170);
+			this.contextMenuStripPageProperties.Size = new System.Drawing.Size(281, 198);
 			// 
 			// toolStripMenuItemRename
 			// 
@@ -117,6 +122,34 @@
 			this.toolStripMenuItemDelete.Size = new System.Drawing.Size(280, 22);
 			this.toolStripMenuItemDelete.Text = "Delete this page";
 			this.toolStripMenuItemDelete.Click += new System.EventHandler(this.toolStripMenuItemDelete_Click);
+			// 
+			// toolStripSeparator2
+			// 
+			this.toolStripSeparator2.Name = "toolStripSeparator2";
+			this.toolStripSeparator2.Size = new System.Drawing.Size(277, 6);
+			// 
+			// toolStripMenuItemClone
+			// 
+			this.toolStripMenuItemClone.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItemCloneWindowsAndLinks,
+            this.toolStripMenuItemCloneWindows});
+			this.toolStripMenuItemClone.Name = "toolStripMenuItemClone";
+			this.toolStripMenuItemClone.Size = new System.Drawing.Size(280, 22);
+			this.toolStripMenuItemClone.Text = "Clone this Page";
+			// 
+			// toolStripMenuItemCloneWindowsAndLinks
+			// 
+			this.toolStripMenuItemCloneWindowsAndLinks.Name = "toolStripMenuItemCloneWindowsAndLinks";
+			this.toolStripMenuItemCloneWindowsAndLinks.Size = new System.Drawing.Size(166, 22);
+			this.toolStripMenuItemCloneWindowsAndLinks.Text = "Windows && Links";
+			this.toolStripMenuItemCloneWindowsAndLinks.Click += new System.EventHandler(this.toolStripMenuItemCloneWindowsAndLinks_Click);
+			// 
+			// toolStripMenuItemCloneWindows
+			// 
+			this.toolStripMenuItemCloneWindows.Name = "toolStripMenuItemCloneWindows";
+			this.toolStripMenuItemCloneWindows.Size = new System.Drawing.Size(166, 22);
+			this.toolStripMenuItemCloneWindows.Text = "Windows Only";
+			this.toolStripMenuItemCloneWindows.Click += new System.EventHandler(this.toolStripMenuItemCloneWindows_Click);
 			// 
 			// toolStripSeparator1
 			// 
@@ -152,7 +185,8 @@
             this.toolStripMenuItemDeleteTags,
             this.toolStripMenuItemDeleteLinks,
             this.toolStripMenuItemDeleteExpirationDates,
-            this.toolStripMenuItemDeleteSecurity});
+            this.toolStripMenuItemDeleteSecurity,
+            this.toolStripMenuItemMakeLinkTextWordWrap});
 			this.toolsToolStripMenuItemCleanupTools.Name = "toolsToolStripMenuItemCleanupTools";
 			this.toolsToolStripMenuItemCleanupTools.Size = new System.Drawing.Size(280, 22);
 			this.toolsToolStripMenuItemCleanupTools.Text = "Advanced Page Cleanup Tools";
@@ -192,33 +226,24 @@
 			this.toolStripMenuItemEditTags.Text = "Add Search Tag to all links on this page";
 			this.toolStripMenuItemEditTags.Click += new System.EventHandler(this.toolStripMenuItemEditTags_Click);
 			// 
-			// toolStripMenuItemClone
+			// toolStripMenuItemResetLinkSettings
 			// 
-			this.toolStripMenuItemClone.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItemCloneWindowsAndLinks,
-            this.toolStripMenuItemCloneWindows});
-			this.toolStripMenuItemClone.Name = "toolStripMenuItemClone";
-			this.toolStripMenuItemClone.Size = new System.Drawing.Size(280, 22);
-			this.toolStripMenuItemClone.Text = "Clone this Page";
+			this.toolStripMenuItemResetLinkSettings.Name = "toolStripMenuItemResetLinkSettings";
+			this.toolStripMenuItemResetLinkSettings.Size = new System.Drawing.Size(280, 22);
+			this.toolStripMenuItemResetLinkSettings.Text = "Reset all Links on this page";
+			this.toolStripMenuItemResetLinkSettings.Click += new System.EventHandler(this.toolStripMenuItemResetLinkSettings_Click);
 			// 
-			// toolStripSeparator2
+			// toolStripSeparator3
 			// 
-			this.toolStripSeparator2.Name = "toolStripSeparator2";
-			this.toolStripSeparator2.Size = new System.Drawing.Size(277, 6);
+			this.toolStripSeparator3.Name = "toolStripSeparator3";
+			this.toolStripSeparator3.Size = new System.Drawing.Size(277, 6);
 			// 
-			// toolStripMenuItemCloneWindowsAndLinks
+			// toolStripMenuItemMakeLinkTextWordWrap
 			// 
-			this.toolStripMenuItemCloneWindowsAndLinks.Name = "toolStripMenuItemCloneWindowsAndLinks";
-			this.toolStripMenuItemCloneWindowsAndLinks.Size = new System.Drawing.Size(166, 22);
-			this.toolStripMenuItemCloneWindowsAndLinks.Text = "Windows && Links";
-			this.toolStripMenuItemCloneWindowsAndLinks.Click += new System.EventHandler(this.toolStripMenuItemCloneWindowsAndLinks_Click);
-			// 
-			// toolStripMenuItemCloneWindows
-			// 
-			this.toolStripMenuItemCloneWindows.Name = "toolStripMenuItemCloneWindows";
-			this.toolStripMenuItemCloneWindows.Size = new System.Drawing.Size(166, 22);
-			this.toolStripMenuItemCloneWindows.Text = "Windows Only";
-			this.toolStripMenuItemCloneWindows.Click += new System.EventHandler(this.toolStripMenuItemCloneWindows_Click);
+			this.toolStripMenuItemMakeLinkTextWordWrap.Name = "toolStripMenuItemMakeLinkTextWordWrap";
+			this.toolStripMenuItemMakeLinkTextWordWrap.Size = new System.Drawing.Size(336, 22);
+			this.toolStripMenuItemMakeLinkTextWordWrap.Text = "Make all Links on this Page RESPONSIVE";
+			this.toolStripMenuItemMakeLinkTextWordWrap.Click += new System.EventHandler(this.toolStripMenuItemMakeLinkTextWordWrap_Click);
 			// 
 			// TabbedWallbin
 			// 
@@ -255,5 +280,8 @@
 		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemClone;
 		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemCloneWindowsAndLinks;
 		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemCloneWindows;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemResetLinkSettings;
+		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemMakeLinkTextWordWrap;
 	}
 }

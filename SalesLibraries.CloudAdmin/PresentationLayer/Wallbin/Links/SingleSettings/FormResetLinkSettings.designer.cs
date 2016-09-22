@@ -91,10 +91,11 @@
 			// labelControlTitle
 			// 
 			this.labelControlTitle.AllowHtmlString = true;
-			this.labelControlTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			this.labelControlTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+			| System.Windows.Forms.AnchorStyles.Right)));
 			this.labelControlTitle.Appearance.BackColor = System.Drawing.Color.White;
 			this.labelControlTitle.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.labelControlTitle.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
 			this.labelControlTitle.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
 			this.labelControlTitle.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
 			this.labelControlTitle.Location = new System.Drawing.Point(12, 3);
@@ -103,6 +104,7 @@
 			this.labelControlTitle.StyleController = this.styleController;
 			this.labelControlTitle.TabIndex = 3;
 			this.labelControlTitle.Text = "{0}<br><color=gray>{1}</color>";
+			this.labelControlTitle.UseMnemonic = false;
 			// 
 			// buttonXSelectNone
 			// 
@@ -133,9 +135,9 @@
 			// 
 			// checkedListBoxControlOutputItems
 			// 
-			this.checkedListBoxControlOutputItems.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			this.checkedListBoxControlOutputItems.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+			| System.Windows.Forms.AnchorStyles.Left)
+			| System.Windows.Forms.AnchorStyles.Right)));
 			this.checkedListBoxControlOutputItems.Appearance.BackColor = System.Drawing.Color.White;
 			this.checkedListBoxControlOutputItems.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.checkedListBoxControlOutputItems.Appearance.ForeColor = System.Drawing.Color.Black;

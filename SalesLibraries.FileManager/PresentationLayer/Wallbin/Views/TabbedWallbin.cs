@@ -13,6 +13,7 @@ using SalesLibraries.Common.Helpers;
 using SalesLibraries.CommonGUI.Common;
 using SalesLibraries.CommonGUI.CustomDialog;
 using SalesLibraries.FileManager.Controllers;
+using SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSettings;
 using SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
@@ -244,6 +245,31 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 			var selectedPage = _menuHitInfo.Page as TabPage;
 			if (selectedPage == null) return;
 			ClonePage(selectedPage, false);
+		}
+
+		private void toolStripMenuItemResetLinkSettings_Click(object sender, EventArgs e)
+		{
+			var selectedPage = _menuHitInfo.Page as TabPage;
+			if (selectedPage == null) return;
+			using (var form = new FormResetLinkSettings(selectedPage.Page))
+			{
+				if (form.ShowDialog(MainController.Instance.MainForm) != DialogResult.OK) return;
+				var settingsGroupsForReset = form.SettingsGroups;
+				using (var confirmation = new FormResetLinkSettingsConfirmation(settingsGroupsForReset))
+				{
+					if (confirmation.ShowDialog(MainController.Instance.MainForm) != DialogResult.OK) return;
+					selectedPage.Content.ResetAllSettings(settingsGroupsForReset);
+					IsDataChanged = true;
+				}
+			}
+		}
+
+		private void toolStripMenuItemMakeLinkTextWordWrap_Click(object sender, EventArgs e)
+		{
+			var selectedPage = _menuHitInfo.Page as TabPage;
+			if (selectedPage == null) return;
+			selectedPage.Content.SetLinkTextWordWrap();
+			IsDataChanged = true;
 		}
 		#endregion
 	}

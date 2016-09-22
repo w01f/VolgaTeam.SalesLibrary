@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using SalesLibraries.Business.Entities.Common;
+using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
@@ -186,10 +187,10 @@ namespace SalesLibraries.Business.Entities.Helpers
 			links.ApplyHoverNote();
 		}
 
-		public static void ResetToDefault(this IEnumerable<BaseLibraryLink> links)
+		public static void ResetToDefault(this IEnumerable<BaseLibraryLink> links, IList<LinkSettingsGroupType> groupsForReset = null)
 		{
 			foreach (var libraryLink in links)
-				libraryLink.ResetToDefault();
+				libraryLink.ResetToDefault(groupsForReset);
 		}
 
 		public static IEnumerable<LibraryFileLink> GetDeadLinks(this IEnumerable<BaseLibraryLink> links)

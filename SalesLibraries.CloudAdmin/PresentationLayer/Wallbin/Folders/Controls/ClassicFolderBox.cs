@@ -264,6 +264,30 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders.Controls
 			}
 		}
 
+		public void ResetAllLinksInFolderSettings()
+		{
+			using (var form = new FormResetLinkSettings(DataSource))
+			{
+				if (form.ShowDialog(MainController.Instance.MainForm) != DialogResult.OK) return;
+				var settingsGroupsForReset = form.SettingsGroups;
+				using (var confirmation = new FormResetLinkSettingsConfirmation(settingsGroupsForReset))
+				{
+					if (confirmation.ShowDialog(MainController.Instance.MainForm) != DialogResult.OK) return;
+					DataSource.AllLinks.ResetToDefault(settingsGroupsForReset);
+
+					grFiles.SuspendLayout();
+					_outsideChangesInProgress = true;
+					foreach (var linkRow in grFiles.Rows.OfType<LinkRow>())
+						linkRow.Info.Recalc();
+					_outsideChangesInProgress = false;
+					UpdateGridSize();
+					grFiles.ResumeLayout(true);
+
+					DataChanged?.Invoke(this, EventArgs.Empty);
+				}
+			}
+		}
+
 		public void OpenLink()
 		{
 			var selectedRow = SelectedLinkRow;
@@ -1252,6 +1276,11 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders.Controls
 		private void toolStripMenuItemResetAll_Click(object sender, EventArgs e)
 		{
 			ResetSecurity();
+		}
+
+		private void toolStripMenuItemFolderResetLinkSetings_Click(object sender, EventArgs e)
+		{
+			ResetAllLinksInFolderSettings();
 		}
 		#endregion
 

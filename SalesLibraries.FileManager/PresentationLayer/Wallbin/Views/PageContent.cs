@@ -143,6 +143,22 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 			MainController.Instance.ProcessManager.Run("Updating Page...",
 				cancelationToken => MainController.Instance.MainForm.Invoke(new MethodInvoker(UpdateContent)));
 		}
+
+		public void ResetAllSettings(IList<LinkSettingsGroupType> groupsForReset)
+		{
+			PageContainer.Page.AllLinks.ResetToDefault(groupsForReset);
+			MainController.Instance.WallbinViews.Selection.Reset();
+			MainController.Instance.ProcessManager.Run("Updating Page...",
+				cancelationToken => MainController.Instance.MainForm.Invoke(new MethodInvoker(UpdateContent)));
+		}
+
+		public void SetLinkTextWordWrap()
+		{
+			PageContainer.Page.AllLinks.SetLinkTextWordWrap();
+			MainController.Instance.WallbinViews.Selection.Reset();
+			MainController.Instance.ProcessManager.Run("Updating Page...",
+				cancelationToken => MainController.Instance.MainForm.Invoke(new MethodInvoker(UpdateContent)));
+		}
 		#endregion
 		#endregion
 

@@ -80,7 +80,7 @@
 			this.buttonXReset.Size = new System.Drawing.Size(186, 34);
 			this.buttonXReset.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXReset.TabIndex = 1;
-			this.buttonXReset.Text = "Yep! RESET this Link!";
+			this.buttonXReset.Text = "Yep! RESET!";
 			this.buttonXReset.TextColor = System.Drawing.Color.Green;
 			// 
 			// labelControlTitle
@@ -98,8 +98,8 @@
 			this.labelControlTitle.Size = new System.Drawing.Size(461, 59);
 			this.labelControlTitle.StyleController = this.styleController;
 			this.labelControlTitle.TabIndex = 3;
-			this.labelControlTitle.Text = "<b>Are you SURE you want to reset the following properties for this link?</b><br>" +
-    "<color=gray>({0})</color>";
+			this.labelControlTitle.Text = "<b>Are you SURE you want to reset the following link properties?</b><br><color=gr" +
+    "ay>({0})</color>";
 			// 
 			// FormResetLinkSettingsConfirmation
 			// 
@@ -117,7 +117,7 @@
 			this.ShowIcon = false;
 			this.ShowInTaskbar = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-			this.Text = "Reset this Link";
+			this.Text = "Reset Links";
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
 			this.ResumeLayout(false);
 

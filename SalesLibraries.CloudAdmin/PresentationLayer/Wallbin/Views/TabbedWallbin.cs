@@ -10,6 +10,7 @@ using SalesLibraries.Business.Contexts.Wallbin;
 using SalesLibraries.Business.Entities.Helpers;
 using SalesLibraries.Business.Entities.Wallbin.Persistent;
 using SalesLibraries.CloudAdmin.Controllers;
+using SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettings;
 using SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Settings;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.CommonGUI.Common;
@@ -242,6 +243,31 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 			var selectedPage = _menuHitInfo.Page as TabPage;
 			if (selectedPage == null) return;
 			ClonePage(selectedPage, false);
+		}
+
+		private void toolStripMenuItemResetLinkSettings_Click(object sender, EventArgs e)
+		{
+			var selectedPage = _menuHitInfo.Page as TabPage;
+			if (selectedPage == null) return;
+			using (var form = new FormResetLinkSettings(selectedPage.Page))
+			{
+				if (form.ShowDialog(MainController.Instance.MainForm) != DialogResult.OK) return;
+				var settingsGroupsForReset = form.SettingsGroups;
+				using (var confirmation = new FormResetLinkSettingsConfirmation(settingsGroupsForReset))
+				{
+					if (confirmation.ShowDialog(MainController.Instance.MainForm) != DialogResult.OK) return;
+					selectedPage.Content.ResetAllSettings(settingsGroupsForReset);
+					IsDataChanged = true;
+				}
+			}
+		}
+
+		private void toolStripMenuItemMakeLinkTextWordWrap_Click(object sender, EventArgs e)
+		{
+			var selectedPage = _menuHitInfo.Page as TabPage;
+			if (selectedPage == null) return;
+			selectedPage.Content.SetLinkTextWordWrap();
+			IsDataChanged = true;
 		}
 		#endregion
 	}

@@ -77,6 +77,8 @@
 			this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
 			this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
 			this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
+			this.toolStripMenuItemFolderResetLinkSetings = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
 			this.pnHeader.SuspendLayout();
 			this.pnHeaderBorder.SuspendLayout();
 			this.pnBorders.SuspendLayout();
@@ -131,12 +133,14 @@
 			this.toolStripMenuItemFolderDelete,
 			this.toolStripMenuItemFolderCopy,
 			this.toolStripMenuItemFolderMove,
+			this.toolStripSeparator1,
+			this.toolStripMenuItemFolderResetLinkSetings,
 			this.toolStripSeparator3,
 			this.toolStripMenuItemFolderManageWidgetsAndBanners,
 			this.toolStripMenuItemFolderEditTags,
 			this.advancedWindowCleanupToolsToolStripMenuItem});
 			this.contextMenuStripFolderProperties.Name = "contextMenuStripLinkProperties";
-			this.contextMenuStripFolderProperties.Size = new System.Drawing.Size(293, 214);
+			this.contextMenuStripFolderProperties.Size = new System.Drawing.Size(293, 242);
 			// 
 			// toolStripMenuItemFolderSettings
 			// 
@@ -464,6 +468,18 @@
 			this.barDockControlRight.Location = new System.Drawing.Point(311, 0);
 			this.barDockControlRight.Size = new System.Drawing.Size(0, 308);
 			// 
+			// toolStripMenuItemFolderResetLinkSetings
+			// 
+			this.toolStripMenuItemFolderResetLinkSetings.Name = "toolStripMenuItemFolderResetLinkSetings";
+			this.toolStripMenuItemFolderResetLinkSetings.Size = new System.Drawing.Size(292, 22);
+			this.toolStripMenuItemFolderResetLinkSetings.Text = "Reset all Links for this Window";
+			this.toolStripMenuItemFolderResetLinkSetings.Click += new System.EventHandler(this.toolStripMenuItemFolderResetLinkSetings_Click);
+			// 
+			// toolStripSeparator1
+			// 
+			this.toolStripSeparator1.Name = "toolStripSeparator1";
+			this.toolStripSeparator1.Size = new System.Drawing.Size(289, 6);
+			// 
 			// ClassicFolderBox
 			// 
 			this.Controls.Add(this.barDockControlLeft);
@@ -538,5 +554,7 @@
 		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemFolderDeleteTags;
 		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemFolderSort;
 		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemFolderSeLinkTextWordWrap;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemFolderResetLinkSetings;
 	}
 }

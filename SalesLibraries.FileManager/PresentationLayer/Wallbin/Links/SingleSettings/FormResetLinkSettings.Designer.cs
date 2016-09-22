@@ -95,6 +95,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelControlTitle.Appearance.BackColor = System.Drawing.Color.White;
 			this.labelControlTitle.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.labelControlTitle.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
 			this.labelControlTitle.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
 			this.labelControlTitle.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
 			this.labelControlTitle.Location = new System.Drawing.Point(12, 3);
@@ -103,6 +104,7 @@
 			this.labelControlTitle.StyleController = this.styleController;
 			this.labelControlTitle.TabIndex = 3;
 			this.labelControlTitle.Text = "{0}<br><color=gray>{1}</color>";
+			this.labelControlTitle.UseMnemonic = false;
 			// 
 			// buttonXSelectNone
 			// 
