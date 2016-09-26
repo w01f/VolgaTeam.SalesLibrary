@@ -25,7 +25,6 @@
 				$this->viewerFormat = 'file';
 				$this->contentView = 'fileViewer';
 			}
-
 			$this->documentInPdf = new PreviewFile();
 			$this->documentInPdf->name = $this->fileName;
 			$this->documentInPdf->path = $this->filePath;

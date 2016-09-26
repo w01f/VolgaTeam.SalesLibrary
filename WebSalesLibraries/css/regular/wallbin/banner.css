@@ -1,20 +1,47 @@
-.banner-container{
+.banner-container
+{
     display: table;
-	width: 100%;
+    width: 100%;
 }
 
-.banner-image{
-    vertical-align: middle;
+.banner-image
+{
     display: table-cell;
-	max-width: none;
+    max-width: none;
 }
 
-.banner-text,.banner-text-link{
+.banner-image-top
+{
+    vertical-align: top;
+}
+
+.banner-image-middle
+{
     vertical-align: middle;
+}
+
+.banner-text
+{
     display: table-cell;
     padding-left: 5px;
 }
 
-.banner-text-link{
+.banner-text-top
+{
+    vertical-align: top;
+}
+
+.banner-text-middle
+{
+    vertical-align: middle;
+}
+
+.banner-text-link-no-wrap
+{
     white-space: nowrap;
+}
+
+.banner-text-link-wrap
+{
+    white-space: normal !important;
 }

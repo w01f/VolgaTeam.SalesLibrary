@@ -12,6 +12,7 @@
 		public $image;
 		public $showText;
 		public $imageAlignment;
+		public $imageVerticalAlignment;
 		public $text;
 		/**
 		 * @var \Font
@@ -31,6 +32,7 @@
 			$this->image = $bannerRecord->image;
 			$this->showText = $bannerRecord->show_text;
 			$this->imageAlignment = $bannerRecord->image_alignment;
+			$this->imageVerticalAlignment = $bannerRecord->image_vertical_alignment;
 			$this->text = $bannerRecord->text;
 			$this->foreColor = $bannerRecord->fore_color;
 			$this->font = new \Font();

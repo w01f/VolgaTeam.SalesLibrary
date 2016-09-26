@@ -23,7 +23,10 @@
 			$this->linkTitle ='Video';
 
 			$this->thumbImageSrc = $link->universalPreview->mp4Thumb->link;
-			$this->forcePreview = $link->extendedProperties->forcePreview;
+
+			/** @var  $linkSettings VideoLinkSettings */
+			$linkSettings = $this->link->extendedProperties;
+			$this->forcePreview = $linkSettings->forcePreview;
 
 			$this->mp4Src = new VideoPreviewItem();
 			$this->mp4Src->type = 'video/mp4';

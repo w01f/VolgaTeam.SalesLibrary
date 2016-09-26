@@ -23,6 +23,7 @@
 						'SoapLibraryLink' => 'SoapLibraryLink',
 						'BaseLinkSettings' => 'BaseLinkSettings',
 						'VideoLinkSettings' => 'VideoLinkSettings',
+						'DocumentLinkSettings' => 'DocumentLinkSettings',
 						'HyperLinkSettings' => 'HyperLinkSettings',
 						'PowerPointLinkSettings' => 'PowerPointLinkSettings',
 						'AppLinkSettings' => 'AppLinkSettings',
@@ -74,6 +75,15 @@
 		 * @soap
 		 */
 		public function mockPowerPointLinkSettings($settings)
+		{
+
+		}
+
+		/**
+		 * @param DocumentLinkSettings $settings
+		 * @soap
+		 */
+		public function mockPowerDocumentSettings($settings)
 		{
 
 		}

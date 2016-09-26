@@ -47,7 +47,12 @@
 <a class="<? echo $linkContainerClass; ?>" id="link<? echo $link->id; ?>"
    href="<? echo $link->isDirectUrl ? $link->fileLink : '#'; ?>" target="_blank">
 	<? if (!(isset($disableBanner) && $disableBanner) && isset($link->banner) && $link->banner->isEnabled): ?>
-		<? echo $this->renderFile(Yii::getPathOfAlias('application.views.regular.wallbin') . '/banner.php', array('banner' => $link->banner, 'isLinkBanner' => true, 'tooltip' => (isset($tooltip) ? $tooltip : null)), true); ?>
+		<? echo $this->renderFile(Yii::getPathOfAlias('application.views.regular.wallbin') . '/banner.php',
+			array(
+				'banner' => $link->banner,
+				'wrapText' => $link->extendedProperties->isTextWordWrap,
+				'tooltip' => (isset($tooltip) ? $tooltip : null)), true);
+		?>
 	<? else: ?>
 		<?
 		$widget = $link->getWidget();

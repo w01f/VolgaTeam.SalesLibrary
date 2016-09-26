@@ -21,7 +21,7 @@
 		public $order;
 		public $type;
 		/**
-		 * @var \BaseLinkSettings|\VideoLinkSettings|\HyperLinkSettings|\PowerPointLinkSettings|\AppLinkSettings|\InternalLinkSettings|\QPageLinkSettings|
+		 * @var \BaseLinkSettings|\VideoLinkSettings|\HyperLinkSettings|\DocumentLinkSettings|\PowerPointLinkSettings|\AppLinkSettings|\InternalLinkSettings|\QPageLinkSettings
 		 */
 		public $extendedProperties;
 		/**
@@ -148,7 +148,13 @@
 			$this->isLineBreak = $this->originalFormat == 'line break' || ($this->type == 6 && isset($this->lineBreakProperties));
 			$this->isAppLink = $this->type == 15;
 
-			$this->isDirectUrl = ($this->type == 8 || $this->type == 17 || $this->type == 18) && $this->extendedProperties->forcePreview;
+			$this->isDirectUrl =
+				($this->type == 8 ||
+					$this->type == 10 ||
+					$this->type == 12 ||
+					$this->type == 17 ||
+					$this->type == 18) &&
+				$this->extendedProperties->forcePreview;
 			$this->isExternalUrl = false;
 			if ($this->isDirectUrl)
 			{

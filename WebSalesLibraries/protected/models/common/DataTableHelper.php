@@ -82,7 +82,13 @@
 					$extendedProperties = CJSON::decode($linkRecord['extended_properties'], true);
 					$record['extended_properties'] = $extendedProperties;
 
-					$record['isHyperlink'] = ($type == 8 || $type == 17 || $type == 18) && $extendedProperties['forcePreview'] == true;
+					$record['isHyperlink'] =
+						($type == 8 ||
+							$type == 10 ||
+							$type == 12 ||
+							$type == 17 ||
+							$type == 18) &&
+						$extendedProperties['forcePreview'] == true;
 
 					$fileInfo = FileInfo::fromLinkData($type, $linkRecord['name'], $linkRecord['path'], $library);
 					$record['isDraggable'] = $fileInfo->isFile || in_array($linkRecord['format'], array('url', 'quicksite', 'youtube'));

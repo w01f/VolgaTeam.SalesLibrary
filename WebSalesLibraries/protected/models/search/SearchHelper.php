@@ -369,7 +369,7 @@
 			$dbCommnad = $dbCommnad->join('tbl_library lib', 'lib.id=link.id_library');
 			$dbCommnad = $dbCommnad->leftJoin("(select lcat.id_link, group_concat(lcat.tag separator ', ') as tag from tbl_link_category lcat where " . $categoryJoinCondition . " group by lcat.id_link) glcat", $joinText);
 			$dbCommnad = $dbCommnad->where($whereText);
-			$dbCommnad = $dbCommnad->group('link.file_relative_path, glcat.tag');
+			$dbCommnad = $dbCommnad->group('link.id');//$dbCommnad = $dbCommnad->group('link.file_relative_path, glcat.tag');
 			$queryRecords = $dbCommnad->queryAll();
 
 			return $queryRecords;

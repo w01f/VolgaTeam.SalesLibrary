@@ -38,6 +38,11 @@
 		 * @var string
 		 * @soap
 		 */
+		public $imageVerticalAlignment;
+		/**
+		 * @var string
+		 * @soap
+		 */
 		public $text;
 		/**
 		 * @var Font

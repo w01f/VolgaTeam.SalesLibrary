@@ -172,7 +172,6 @@
 			var images = viewerData.galleryPagesInPng;
 
 			$.fancybox.close();
-
 			$.fancybox(images,
 				{
 					openEffect: 'none',

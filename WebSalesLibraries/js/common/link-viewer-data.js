@@ -42,6 +42,7 @@
 		this.pagesInPng = undefined;
 		this.galleryPagesInPng = undefined;
 		this.rateData = undefined;
+		this.forcePreview = undefined;
 		this.slideWidth = undefined;
 		this.slideHeight = undefined;
 

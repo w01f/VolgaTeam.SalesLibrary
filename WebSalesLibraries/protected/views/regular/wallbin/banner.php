@@ -3,22 +3,28 @@
 
 	/**
 	 * @var $banner Banner
-	 * @var $isLinkBanner bool
+	 * @var $wrapText bool
 	 * @var $tooltip string
 	 */
 ?>
 <? if ($banner->showText): ?>
 <div class="banner-container mtTool" <? if (isset($tooltip)): ?>mtcontent="<? echo $tooltip; ?>"<? endif;?> style="width: auto">
-	<img class="banner-image" src="data:image/png;base64,<? echo $banner->image;?>">
-	<span class="<?echo $isLinkBanner ? 'banner-text-link' : 'banner-text';?>"
-	      style="font-family: <? echo $banner->font->name; ?>,serif;
-			  font-size: <? echo $banner->font->size; ?>pt;
-			  font-weight: <? echo $banner->font->isBold ? ' bold' : ' normal'; ?>;
-			  font-style: <? echo $banner->font->isItalic ? ' italic' : ' normal'; ?>;
-			  text-decoration: <? echo $banner->font->isUnderlined ? ' underline' : ' inherit'; ?>;
-			  color: <? echo $banner->foreColor; ?>;">
-			<?echo nl2br($banner->text);?>
-	</span>
+	<div class="banner-image  <?if($banner->imageVerticalAlignment=='top'):?>banner-image-top<?else:?>banner-image-middle<?endif;?>">
+		<img src="data:image/png;base64,<? echo $banner->image;?>">
+	</div>
+	<div class="banner-text <?if($banner->imageVerticalAlignment=='top'):?>banner-text-top<?else:?>banner-text-middle<?endif;?>">
+		<span class="<?echo $wrapText ?
+			'banner-text-link-wrap' :
+			'banner-text-link-no-wrap';?>"
+		      style="font-family: <? echo $banner->font->name; ?>,serif;
+				  font-size: <? echo $banner->font->size; ?>pt;
+				  font-weight: <? echo $banner->font->isBold ? ' bold' : ' normal'; ?>;
+				  font-style: <? echo $banner->font->isItalic ? ' italic' : ' normal'; ?>;
+				  text-decoration: <? echo $banner->font->isUnderlined ? ' underline' : ' inherit'; ?>;
+				  color: <? echo $banner->foreColor; ?>;">
+				<?echo nl2br($banner->text);?>
+		</span>
+	</div>
 </div>
 <? else: ?>
 <?

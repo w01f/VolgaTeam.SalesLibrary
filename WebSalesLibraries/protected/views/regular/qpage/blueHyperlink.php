@@ -33,7 +33,7 @@
 
 ?>
 <li>
-	<a href="<? echo $link->isDirectUrl ? $link->fileLink : '#'; ?>" target="_blank" id="link<?php echo $link->id; ?>"
+	<a href="<? echo $link->isDirectUrl ? $link->fileLink : '#'; ?>" target="_blank" id="link<? echo $link->id; ?>"
 	   class="<? echo $linkContainerClass; ?>"
 	   style="text-decoration: underline;">
 		<? echo nl2br($link->name); ?>

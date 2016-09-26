@@ -8,6 +8,7 @@
 	 * @property mixed image
 	 * @property mixed show_text
 	 * @property mixed image_alignment
+	 * @property mixed image_vertical_alignment
 	 * @property mixed text
 	 * @property mixed fore_color
 	 * @property mixed font_name
@@ -50,6 +51,9 @@
 			$bannerRecord->image = $banner['image'];
 			$bannerRecord->show_text = $banner['showText'];
 			$bannerRecord->image_alignment = $banner['imageAlignment'];
+			$bannerRecord->image_vertical_alignment = array_key_exists('imageVerticalAlignment', $banner) ?
+				$banner['imageVerticalAlignment'] :
+				null;
 			$bannerRecord->text = $banner['text'];
 			$bannerRecord->fore_color = $banner['foreColor'];
 			$bannerRecord->font_name = $banner['font']['name'];
