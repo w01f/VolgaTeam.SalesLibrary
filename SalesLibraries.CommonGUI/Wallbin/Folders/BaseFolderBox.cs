@@ -68,8 +68,13 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 			Disposed += OnDispose;
 
 			DataSource = dataSource;
+
 			RichTextControl = new RichTextBox();
+			RichTextControl.WordWrap = true;
+			RichTextControl.ScrollBars = RichTextBoxScrollBars.None;
+
 			UpdateFont();
+
 			grFiles.RowTemplate = new LinkRow();
 			grFiles.RowTemplate.CreateCells(grFiles);
 			SetupView();
@@ -175,21 +180,33 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 
 		protected void UpdateFont()
 		{
-			RegularRowFont = new Font(DataSource.Settings.WindowFont.FontFamily, FormatState.FontSize, DataSource.Settings.WindowFont.Style);
-			BoldRowFont = new Font(DataSource.Settings.WindowFont.FontFamily, FormatState.FontSize, FontStyle.Bold);
-			BoldItalicRowFont = new Font(DataSource.Settings.WindowFont.FontFamily, FormatState.FontSize, FontStyle.Bold | FontStyle.Italic);
-			BoldUnderlineRowFont = new Font(DataSource.Settings.WindowFont.FontFamily, FormatState.FontSize, FontStyle.Bold | FontStyle.Underline);
-			ItalicRowFont = new Font(DataSource.Settings.WindowFont.FontFamily, FormatState.FontSize, FontStyle.Italic);
-			ItalicUnderlineRowFont = new Font(DataSource.Settings.WindowFont.FontFamily, FormatState.FontSize, FontStyle.Italic | FontStyle.Underline);
-			UnderlineRowFont = new Font(DataSource.Settings.WindowFont.FontFamily, FormatState.FontSize, FontStyle.Underline);
-			BoldItalicUndrerlineRowFont = new Font(DataSource.Settings.WindowFont.FontFamily, FormatState.FontSize, FontStyle.Bold | FontStyle.Italic | FontStyle.Underline);
+			RegularRowFont = new Font(DataSource.Settings.WindowFont.FontFamily, FormatState.FontSize, DataSource.Settings.WindowFont.Style, GraphicsUnit.Point);
+			BoldRowFont = new Font(DataSource.Settings.WindowFont.FontFamily, FormatState.FontSize, FontStyle.Bold, GraphicsUnit.Point);
+			BoldItalicRowFont = new Font(DataSource.Settings.WindowFont.FontFamily, FormatState.FontSize, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+			BoldUnderlineRowFont = new Font(DataSource.Settings.WindowFont.FontFamily, FormatState.FontSize, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point);
+			ItalicRowFont = new Font(DataSource.Settings.WindowFont.FontFamily, FormatState.FontSize, FontStyle.Italic, GraphicsUnit.Point);
+			ItalicUnderlineRowFont = new Font(DataSource.Settings.WindowFont.FontFamily, FormatState.FontSize, FontStyle.Italic | FontStyle.Underline, GraphicsUnit.Point);
+			UnderlineRowFont = new Font(DataSource.Settings.WindowFont.FontFamily, FormatState.FontSize, FontStyle.Underline, GraphicsUnit.Point);
+			BoldItalicUndrerlineRowFont = new Font(DataSource.Settings.WindowFont.FontFamily, FormatState.FontSize, FontStyle.Bold | FontStyle.Italic | FontStyle.Underline, GraphicsUnit.Point);
+			grFiles.DefaultCellStyle.Font = BoldItalicUndrerlineRowFont;
+			grFiles.RowsDefaultCellStyle.Font = BoldItalicUndrerlineRowFont;
 		}
 
 		protected override void OnResize(EventArgs e)
 		{
 			base.OnResize(e);
-			foreach (var linkRow in grFiles.Rows.OfType<LinkRow>().Where(r=>r.Info.IsResponsible))
-				linkRow.Info.Recalc();
+
+			var textWordWrappedRows = grFiles.Rows.OfType<LinkRow>().Where(r => r.Info.IsResponsible).ToList();
+			if (textWordWrappedRows.Any())
+			{
+				grFiles.SuspendLayout();
+				_outsideChangesInProgress = true;
+				foreach (var linkRow in textWordWrappedRows)
+					linkRow.Info.Recalc();
+				_outsideChangesInProgress = false;
+				UpdateGridSize();
+				grFiles.ResumeLayout(true);
+			}
 		}
 		#endregion
 

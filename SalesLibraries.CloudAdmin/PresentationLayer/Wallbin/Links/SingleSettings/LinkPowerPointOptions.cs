@@ -38,7 +38,13 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 				styleController.AppearanceDropDownHeader.Font = styleControllerFont;
 				styleController.AppearanceFocused.Font = styleControllerFont;
 				styleController.AppearanceReadOnly.Font = styleControllerFont;
-				labelControlTitle.Font = new Font(labelControlTitle.Font.FontFamily, labelControlTitle.Font.Size - 2, labelControlTitle.Font.Style);
+
+				ckDoNotGeneratePreview.Font = new Font(ckDoNotGeneratePreview.Font.FontFamily, ckDoNotGeneratePreview.Font.Size - 2, ckDoNotGeneratePreview.Font.Style);
+				ckDoNotGenerateText.Font = new Font(ckDoNotGenerateText.Font.FontFamily, ckDoNotGenerateText.Font.Size - 2, ckDoNotGenerateText.Font.Style);
+
+				buttonXOpenQV.Font = new Font(buttonXOpenQV.Font.FontFamily, buttonXOpenQV.Font.Size - 2, buttonXOpenQV.Font.Style);
+				buttonXOpenWV.Font = new Font(buttonXOpenWV.Font.FontFamily, buttonXOpenWV.Font.Size - 2, buttonXOpenWV.Font.Style);
+				buttonXRefreshPreview.Font = new Font(buttonXRefreshPreview.Font.FontFamily, buttonXRefreshPreview.Font.Size - 2, buttonXRefreshPreview.Font.Style);
 			}
 		}
 
@@ -51,6 +57,15 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 		{
 			ckDoNotGeneratePreview.Checked = !((DocumentLinkSettings)_data.Settings).GeneratePreviewImages;
 			ckDoNotGenerateText.Checked = !((DocumentLinkSettings)_data.Settings).GenerateContentText;
+
+			if (Directory.Exists(((PowerPointLinkSettings)_data.Settings).ContainerPath))
+			{
+				buttonXOpenQV.Enabled = true;
+				buttonXOpenQV.Text = String.Format("!QV Folder ({0})", ((PowerPointLinkSettings)_data.Settings).Id.ToString("D"));
+			}
+			else
+				buttonXOpenQV.Enabled = false;
+
 
 			if (Directory.Exists(_data.PreviewContainerPath))
 			{
@@ -87,6 +102,15 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 				//previewContainer.UpdateContent(previewGenerator, cancelationToken);
 			});
 			MainController.Instance.PopupMessages.ShowInfo(String.Format("{0}{1}Is now updated for the server!", _data.NameWithExtension, Environment.NewLine));
+		}
+
+		private void buttonXOpenQV_Click(object sender, EventArgs e)
+		{
+			try
+			{
+				Process.Start(((PowerPointLinkSettings)_data.Settings).ContainerPath);
+			}
+			catch { }
 		}
 
 		private void buttonXOpenWV_Click(object sender, EventArgs e)

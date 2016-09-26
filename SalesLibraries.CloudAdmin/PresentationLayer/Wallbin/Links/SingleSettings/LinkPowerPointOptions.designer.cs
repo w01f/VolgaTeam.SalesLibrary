@@ -33,7 +33,7 @@
 			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
 			this.ckDoNotGeneratePreview = new System.Windows.Forms.CheckBox();
 			this.ckDoNotGenerateText = new System.Windows.Forms.CheckBox();
-			this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
+			this.labelControlTitleButtons = new DevExpress.XtraEditors.LabelControl();
 			this.labelControlTitleSettings = new DevExpress.XtraEditors.LabelControl();
 			this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
 			this.labelControlTitle = new DevExpress.XtraEditors.LabelControl();
@@ -83,14 +83,14 @@
 			this.ckDoNotGenerateText.Text = "Do NOT Create Full Data File (Always select this for Nielsen Books) ";
 			this.ckDoNotGenerateText.UseVisualStyleBackColor = true;
 			// 
-			// labelControl1
+			// labelControlTitleButtons
 			// 
-			this.labelControl1.Location = new System.Drawing.Point(17, 263);
-			this.labelControl1.Name = "labelControl1";
-			this.labelControl1.Size = new System.Drawing.Size(121, 16);
-			this.labelControl1.StyleController = this.styleController;
-			this.labelControl1.TabIndex = 62;
-			this.labelControl1.Text = "Link Archive Folders:";
+			this.labelControlTitleButtons.Location = new System.Drawing.Point(17, 263);
+			this.labelControlTitleButtons.Name = "labelControlTitleButtons";
+			this.labelControlTitleButtons.Size = new System.Drawing.Size(121, 16);
+			this.labelControlTitleButtons.StyleController = this.styleController;
+			this.labelControlTitleButtons.TabIndex = 62;
+			this.labelControlTitleButtons.Text = "Link Archive Folders:";
 			// 
 			// labelControlTitleSettings
 			// 
@@ -113,8 +113,8 @@
 			// labelControlTitle
 			// 
 			this.labelControlTitle.AllowHtmlString = true;
-			this.labelControlTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			this.labelControlTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+			| System.Windows.Forms.AnchorStyles.Right)));
 			this.labelControlTitle.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Top;
 			this.labelControlTitle.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
 			this.labelControlTitle.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
@@ -128,8 +128,8 @@
 			// buttonXRefreshPreview
 			// 
 			this.buttonXRefreshPreview.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-			this.buttonXRefreshPreview.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonXRefreshPreview.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+			| System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXRefreshPreview.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXRefreshPreview.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.buttonXRefreshPreview.Location = new System.Drawing.Point(77, 402);
@@ -145,8 +145,8 @@
 			// buttonXOpenWV
 			// 
 			this.buttonXOpenWV.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-			this.buttonXOpenWV.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonXOpenWV.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+			| System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXOpenWV.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXOpenWV.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.buttonXOpenWV.Location = new System.Drawing.Point(77, 351);
@@ -161,8 +161,8 @@
 			// buttonXOpenQV
 			// 
 			this.buttonXOpenQV.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-			this.buttonXOpenQV.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonXOpenQV.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+			| System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXOpenQV.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXOpenQV.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.buttonXOpenQV.Location = new System.Drawing.Point(77, 300);
@@ -172,21 +172,21 @@
 			this.buttonXOpenQV.TabIndex = 63;
 			this.buttonXOpenQV.Text = "!QV Folder";
 			this.buttonXOpenQV.TextColor = System.Drawing.Color.Black;
+			this.buttonXOpenQV.Click += new System.EventHandler(this.buttonXOpenQV_Click);
 			// 
 			// LinkPowerPointOptions
 			// 
-			this.BackColor = System.Drawing.Color.White;
+			this.Appearance.PageClient.BackColor = System.Drawing.Color.White;
+			this.Appearance.PageClient.Options.UseBackColor = true;
 			this.Controls.Add(this.buttonXRefreshPreview);
 			this.Controls.Add(this.buttonXOpenWV);
 			this.Controls.Add(this.buttonXOpenQV);
-			this.Controls.Add(this.labelControl1);
+			this.Controls.Add(this.labelControlTitleButtons);
 			this.Controls.Add(this.labelControlTitleSettings);
 			this.Controls.Add(this.pictureBoxLogo);
 			this.Controls.Add(this.labelControlTitle);
 			this.Controls.Add(this.ckDoNotGenerateText);
 			this.Controls.Add(this.ckDoNotGeneratePreview);
-			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.Name = "LinkPowerPointOptions";
 			this.Size = new System.Drawing.Size(531, 541);
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).EndInit();
@@ -200,7 +200,7 @@
 		private DevExpress.XtraEditors.StyleController styleController;
 		public System.Windows.Forms.CheckBox ckDoNotGeneratePreview;
 		public System.Windows.Forms.CheckBox ckDoNotGenerateText;
-		private DevExpress.XtraEditors.LabelControl labelControl1;
+		private DevExpress.XtraEditors.LabelControl labelControlTitleButtons;
 		private DevExpress.XtraEditors.LabelControl labelControlTitleSettings;
 		private System.Windows.Forms.PictureBox pictureBoxLogo;
 		private DevExpress.XtraEditors.LabelControl labelControlTitle;

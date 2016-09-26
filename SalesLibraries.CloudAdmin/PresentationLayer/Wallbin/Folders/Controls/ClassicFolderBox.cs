@@ -244,6 +244,17 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders.Controls
 			DataChanged?.Invoke(this, EventArgs.Empty);
 		}
 
+		private void EditImageSettings()
+		{
+			var selectedRow = SelectedLinkRow;
+			if (selectedRow == null) return;
+			if (!selectedRow.AllowEditImageSettings) return;
+			if (selectedRow.Source.Widget.Enabled || selectedRow.Source.Widget.HasAutoWidget)
+				EditLinkSettings(new[] { selectedRow.Source }, LinkSettingsType.Widget);
+			else if (selectedRow.Source.Banner.Enable)
+				EditLinkSettings(new[] { selectedRow.Source }, LinkSettingsType.Banner);
+		}
+
 		public void ResetLinkSettings()
 		{
 			var selectedRow = SelectedLinkRow;
@@ -498,6 +509,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders.Controls
 			using (var form = new FormWindow(DataSource, new TitleFormParams()))
 			{
 				if (form.ShowDialog(MainController.Instance.MainForm) != DialogResult.OK) return;
+				UpdateFont();
 				SetupView();
 				UpdateContent(true);
 				DataChanged?.Invoke(this, EventArgs.Empty);
@@ -699,7 +711,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders.Controls
 			e.Cancel = true;
 			if (!FormatState.AllowEdit) return;
 			var linkRow = (LinkRow)grFiles.Rows[e.RowIndex];
-			if (!linkRow.AllowEdit) return;
+			if (!linkRow.AllowEditLinkText) return;
 			if (linkRow.Info.WordWrap)
 			{
 				using (var form = new FormEditLinkText())
@@ -709,7 +721,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders.Controls
 					if (form.ShowDialog(MainController.Instance.MainForm) != DialogResult.OK) return;
 					var newLinkText = form.EditedText;
 					if (linkRow.Source.DisplayNameWithoutNote == newLinkText) return;
-					linkRow.Source.Name = newLinkText;
+					linkRow.Source.DisplayNameWithoutNote = newLinkText;
 					linkRow.Info.Recalc();
 					DataChanged?.Invoke(this, EventArgs.Empty);
 					e.Cancel = true;
@@ -727,7 +739,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders.Controls
 		{
 			if (!FormatState.AllowEdit) return;
 			var linkRow = (LinkRow)grFiles.Rows[e.RowIndex];
-			if (!linkRow.AllowEdit) return;
+			if (!linkRow.AllowEditLinkText) return;
 			var editValue = (grFiles.Rows[e.RowIndex].Cells[e.ColumnIndex].Value as String ?? String.Empty).Trim();
 			if (linkRow.Source.DisplayNameWithoutNote == editValue) return;
 			linkRow.Source.Name = editValue;
@@ -872,7 +884,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders.Controls
 			SelectionManager.SelectFolder(this);
 			if (IsSourceLinksDragged)
 			{
-				var droppedLinks = DataDraggedOver.GetData(DataFormats.Serializable, true) as SourceLink[];
+				var droppedLinks = DataDraggedOver?.GetData(DataFormats.Serializable, true) as SourceLink[] ?? new SourceLink[] { };
 				SelectionManager.SelectFolder(this);
 
 				var fileLinks = droppedLinks.OfType<FileLink>().ToList();
@@ -900,11 +912,11 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders.Controls
 					InsertLinks(droppedLinks, _mouseDragOverHitInfo.RowIndex);
 			}
 
-			var droppedRow = DataDraggedOver.GetData(typeof(LinkRow)) as LinkRow;
+			var droppedRow = DataDraggedOver?.GetData(typeof(LinkRow)) as LinkRow;
 			if (droppedRow != null)
 				ProcessRowMoving(droppedRow, _mouseDragOverHitInfo.RowIndex);
 
-			var droppedFolder = DataDraggedOver.GetData(typeof(ClassicFolderBox)) as ClassicFolderBox;
+			var droppedFolder = DataDraggedOver?.GetData(typeof(ClassicFolderBox)) as ClassicFolderBox;
 			if (droppedFolder != null && droppedFolder != this)
 				FolderContainer.ProcessFolderMoving(droppedFolder, DataSource.ColumnOrder, DataSource.RowOrder);
 
@@ -1024,10 +1036,10 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders.Controls
 				barButtonItemLinkPropertiesOpenLink.Visibility = BarItemVisibility.Never;
 				barButtonItemLinkPropertiesDelete.Visibility = BarItemVisibility.Never;
 				barButtonItemLinkPropertiesLinkSettings.Visibility = BarItemVisibility.Never;
+				barButtonItemLinkPropertiesImageSettings.Visibility = BarItemVisibility.Never;
 				barButtonItemLinkPropertiesAdvancedSettings.Visibility = BarItemVisibility.Never;
 				barButtonItemLinkPropertiesTags.Visibility = BarItemVisibility.Never;
-				barButtonItemLinkPropertiesWidget.Visibility = BarItemVisibility.Never;
-				barButtonItemLinkPropertiesBanner.Visibility = BarItemVisibility.Never;
+				barSubItemLinkPropertiesImages.Visibility = BarItemVisibility.Never;
 				barButtonItemLinkPropertiesResetSettings.Visibility = BarItemVisibility.Never;
 				barSubItemLinkPropertiesAdvanced.Visibility = BarItemVisibility.Never;
 				barSubItemLinkPropertiesQuickTools.Visibility = BarItemVisibility.Never;
@@ -1042,10 +1054,10 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders.Controls
 				barButtonItemLinkPropertiesOpenLink.Visibility = BarItemVisibility.Always;
 				barButtonItemLinkPropertiesDelete.Visibility = BarItemVisibility.Always;
 				barButtonItemLinkPropertiesLinkSettings.Visibility = BarItemVisibility.Always;
+				barButtonItemLinkPropertiesImageSettings.Visibility = BarItemVisibility.Always;
 				barButtonItemLinkPropertiesAdvancedSettings.Visibility = BarItemVisibility.Always;
 				barButtonItemLinkPropertiesTags.Visibility = BarItemVisibility.Always;
-				barButtonItemLinkPropertiesWidget.Visibility = BarItemVisibility.Always;
-				barButtonItemLinkPropertiesBanner.Visibility = BarItemVisibility.Always;
+				barSubItemLinkPropertiesImages.Visibility = BarItemVisibility.Always;
 				barButtonItemLinkPropertiesResetSettings.Visibility = BarItemVisibility.Always;
 				barSubItemLinkPropertiesAdvanced.Visibility = BarItemVisibility.Always;
 				barSubItemLinkPropertiesQuickTools.Visibility = BarItemVisibility.Always;
@@ -1063,6 +1075,9 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders.Controls
 				MainController.Instance.WallbinViews.LinksClipboard.IsPasteAvailable(linkRow.Source.ExtId) ?
 					BarItemVisibility.Always :
 					BarItemVisibility.Never;
+			barButtonItemLinkPropertiesImageSettings.Visibility = linkRow.AllowEditImageSettings ?
+				BarItemVisibility.Always :
+				BarItemVisibility.Never;
 			barButtonItemLinkPropertiesSecurity.Visibility =
 				MainController.Instance.Settings.EditorSettings.EnableSecurityEdit ?
 					BarItemVisibility.Always :
@@ -1082,7 +1097,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders.Controls
 
 				barButtonItemLinkPropertiesLinkSettings.Caption = "Line Break Settings";
 				barButtonItemLinkPropertiesDelete.Caption = "Delete this Line Break";
-				barButtonItemLinkPropertiesImages.Caption = "Line Break ART";
+				barSubItemLinkPropertiesImages.Caption = "Line Break ART";
 				barButtonItemLinkPropertiesResetSettings.Caption = "Reset this Line Break";
 			}
 			else
@@ -1104,7 +1119,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders.Controls
 
 				barButtonItemLinkPropertiesLinkSettings.Caption = "Link Settings";
 				barButtonItemLinkPropertiesDelete.Caption = "Delete this Link";
-				barButtonItemLinkPropertiesImages.Caption = "Link ART";
+				barSubItemLinkPropertiesImages.Caption = "Link ART";
 				barButtonItemLinkPropertiesResetSettings.Caption = "Reset this Link";
 			}
 			_quickEditor.LoadLinkSettings(linkRow.Source);
@@ -1157,6 +1172,11 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders.Controls
 		private void barButtonItemLinkPropertiesRefreshPreview_ItemClick(object sender, ItemClickEventArgs e)
 		{
 			RefreshPreviewFiles();
+		}
+
+		private void barButtonItemLinkPropertiesEditImageSettings_ItemClick(object sender, ItemClickEventArgs e)
+		{
+			EditImageSettings();
 		}
 
 		private void barButtonItemLinkPropertiesLinkSettings_ItemClick(object sender, ItemClickEventArgs e)
@@ -1282,6 +1302,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders.Controls
 		{
 			ResetAllLinksInFolderSettings();
 		}
+
 		#endregion
 
 		#endregion

@@ -7,6 +7,7 @@ using DevExpress.XtraTab;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.Common.Helpers;
+using SalesLibraries.CommonGUI.Common;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSettings
 {
@@ -29,6 +30,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			_data = data;
 
 			Text = "Line Break";
+
+			buttonEditLineBreakFont.ButtonClick += EditorHelper.FontEdit_ButtonClick;
+			buttonEditLineBreakFont.Click += EditorHelper.FontEdit_Click;
 
 			if ((CreateGraphics()).DpiX > 96)
 			{
@@ -58,24 +62,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 				_data.Settings.ForeColor = colorEditLineBreakFontColor.Color;
 			_data.Settings.TextWordWrap = checkEditTextWordWrap.Checked;
 			_data.Settings.Note = memoEditNote.EditValue as String;
-		}
-
-		private void FontEdit_Click(object sender, EventArgs e)
-		{
-			var fontEdit = sender as ButtonEdit;
-			if (fontEdit == null) return;
-			using (var dlgFont = new FontDialog())
-			{
-				dlgFont.Font = fontEdit.Tag as Font;
-				if (dlgFont.ShowDialog() != DialogResult.OK) return;
-				fontEdit.Tag = dlgFont.Font;
-				fontEdit.EditValue = Utils.FontToString(dlgFont.Font);
-			}
-		}
-
-		private void FontEdit_ButtonClick(object sender, ButtonPressedEventArgs e)
-		{
-			FontEdit_Click(this, null);
 		}
 
 		private void checkEditNote_CheckedChanged(object sender, EventArgs e)

@@ -17,7 +17,6 @@ namespace SalesLibraries.FileManager.Configuration
 
 		public bool EnableLocalSync => !String.IsNullOrEmpty(NetworkPath);
 
-		//----------------------------------------
 		public string SelectedLibrary { get; set; }
 		public string SelectedPage { get; set; }
 		public string SelectedCalendar { get; set; }
@@ -26,6 +25,7 @@ namespace SalesLibraries.FileManager.Configuration
 		public int CalendarFontSize { get; set; }
 		public bool TreeViewVisible { get; set; }
 		public bool MultitabView { get; set; }
+		public string DefaultLinkBannerSettingsEncoded { get; set; }
 		#endregion
 
 		#region Ribbon Settings
@@ -59,7 +59,7 @@ namespace SalesLibraries.FileManager.Configuration
 		public string WebServicePassword { get; private set; }
 		#endregion
 
-		public EditorsSettings EditorSettings { get; private set; }
+		public EditorsSettings EditorSettings { get; }
 
 		public SettingsManager()
 		{
@@ -137,6 +137,9 @@ namespace SalesLibraries.FileManager.Configuration
 			if (node != null)
 				if (bool.TryParse(node.InnerText, out tempBool))
 					MultitabView = tempBool;
+			node = document.SelectSingleNode(@"/LocalSettings/DefaultLinkBannerSettingsEncoded");
+			if (node != null)
+				DefaultLinkBannerSettingsEncoded = Encoding.UTF8.GetString(Convert.FromBase64String(node.InnerText));
 			#endregion
 		}
 
@@ -172,6 +175,8 @@ namespace SalesLibraries.FileManager.Configuration
 			xml.AppendLine(@"<CalendarFontSize>" + CalendarFontSize + @"</CalendarFontSize>");
 			xml.AppendLine(@"<TreeViewVisible>" + TreeViewVisible + @"</TreeViewVisible>");
 			xml.AppendLine(@"<MultitabView>" + MultitabView + @"</MultitabView>");
+			if (!String.IsNullOrEmpty(DefaultLinkBannerSettingsEncoded))
+				xml.AppendLine(@"<DefaultLinkBannerSettingsEncoded>" + Convert.ToBase64String(Encoding.UTF8.GetBytes(DefaultLinkBannerSettingsEncoded)) + @"</DefaultLinkBannerSettingsEncoded>");
 			#endregion
 
 			xml.AppendLine(@"</LocalSettings>");

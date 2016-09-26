@@ -8,6 +8,7 @@ using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.Common.Helpers;
+using SalesLibraries.CommonGUI.Common;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSettings
 {
@@ -29,6 +30,10 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			InitializeComponent();
 			Text = "Text Format";
 			_data = data;
+
+			buttonEditLinkSpecialFont.ButtonClick += EditorHelper.FontEdit_ButtonClick;
+			buttonEditLinkSpecialFont.Click += EditorHelper.FontEdit_Click;
+
 			if ((CreateGraphics()).DpiX > 96)
 			{
 				var styleControllerFont = new Font(styleController.Appearance.Font.FontFamily, styleController.Appearance.Font.Size - 2, styleController.Appearance.Font.Style);
@@ -96,24 +101,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 				checkEditItalic.Checked ||
 				checkEditUnderlined.Checked)
 				checkEditSpecialFormat.Checked = false;
-		}
-
-		private void FontEdit_Click(object sender, EventArgs e)
-		{
-			var fontEdit = sender as ButtonEdit;
-			if (fontEdit == null) return;
-			using (var dlgFont = new FontDialog())
-			{
-				dlgFont.Font = fontEdit.Tag as Font;
-				if (dlgFont.ShowDialog() != DialogResult.OK) return;
-				fontEdit.Tag = dlgFont.Font;
-				fontEdit.EditValue = Utils.FontToString(dlgFont.Font);
-			}
-		}
-
-		private void FontEdit_ButtonClick(object sender, ButtonPressedEventArgs e)
-		{
-			FontEdit_Click(sender, null);
 		}
 
 		private void checkEditFakeDate_CheckedChanged(object sender, EventArgs e)

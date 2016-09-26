@@ -68,7 +68,7 @@
 			this.colorEditLinkSpecialColor.Properties.AppearanceDisabled.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
 			this.colorEditLinkSpecialColor.Properties.AppearanceDisabled.Options.UseBackColor = true;
 			this.colorEditLinkSpecialColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+			new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
 			this.colorEditLinkSpecialColor.Properties.ColorAlignment = DevExpress.Utils.HorzAlignment.Center;
 			this.colorEditLinkSpecialColor.Properties.ShowSystemColors = false;
 			this.colorEditLinkSpecialColor.Size = new System.Drawing.Size(105, 22);
@@ -92,8 +92,8 @@
 			// 
 			// buttonEditLinkSpecialFont
 			// 
-			this.buttonEditLinkSpecialFont.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonEditLinkSpecialFont.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+			| System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonEditLinkSpecialFont.Enabled = false;
 			this.buttonEditLinkSpecialFont.Location = new System.Drawing.Point(137, 190);
 			this.buttonEditLinkSpecialFont.Name = "buttonEditLinkSpecialFont";
@@ -104,13 +104,11 @@
 			this.buttonEditLinkSpecialFont.Properties.AppearanceDisabled.ForeColor = System.Drawing.Color.Gray;
 			this.buttonEditLinkSpecialFont.Properties.AppearanceDisabled.Options.UseForeColor = true;
 			this.buttonEditLinkSpecialFont.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton()});
+			new DevExpress.XtraEditors.Controls.EditorButton()});
 			this.buttonEditLinkSpecialFont.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
 			this.buttonEditLinkSpecialFont.Size = new System.Drawing.Size(383, 22);
 			this.buttonEditLinkSpecialFont.StyleController = this.styleController;
 			this.buttonEditLinkSpecialFont.TabIndex = 30;
-			this.buttonEditLinkSpecialFont.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.FontEdit_ButtonClick);
-			this.buttonEditLinkSpecialFont.Click += new System.EventHandler(this.FontEdit_Click);
 			// 
 			// labelControlForeColor
 			// 
@@ -194,9 +192,9 @@
 			this.dateEditFakeDate.Location = new System.Drawing.Point(42, 504);
 			this.dateEditFakeDate.Name = "dateEditFakeDate";
 			this.dateEditFakeDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+			new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
 			this.dateEditFakeDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+			new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
 			this.dateEditFakeDate.Size = new System.Drawing.Size(129, 22);
 			this.dateEditFakeDate.StyleController = this.styleController;
 			this.dateEditFakeDate.TabIndex = 37;
@@ -236,8 +234,8 @@
 			// labelControlTitle
 			// 
 			this.labelControlTitle.AllowHtmlString = true;
-			this.labelControlTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			this.labelControlTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+			| System.Windows.Forms.AnchorStyles.Right)));
 			this.labelControlTitle.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Top;
 			this.labelControlTitle.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
 			this.labelControlTitle.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
@@ -247,7 +245,7 @@
 			this.labelControlTitle.StyleController = this.styleController;
 			this.labelControlTitle.TabIndex = 45;
 			this.labelControlTitle.Text = "<size=+2>Add and customize the unique text-formatting properties for a link. This" +
-    " is helpful if you really want to make a link <b>“POP”</b> on the page…</size>";
+	" is helpful if you really want to make a link <b>“POP”</b> on the page…</size>";
 			// 
 			// LinkTextOptions
 			// 

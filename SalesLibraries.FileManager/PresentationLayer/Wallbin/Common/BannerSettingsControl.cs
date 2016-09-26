@@ -8,9 +8,10 @@ using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraEditors.Filtering;
 using DevExpress.XtraTab;
 using SalesLibraries.Business.Entities.Interfaces;
+using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.FileManager.Controllers;
-using Alignment = SalesLibraries.Business.Entities.Wallbin.Common.Enums.Alignment;
+using HorizontalAlignment = SalesLibraries.Business.Entities.Wallbin.Common.Enums.HorizontalAlignment;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Common
 {
@@ -79,23 +80,23 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Common
 			pbSelectedBanner.Image = _bannerHolder.Banner.Enable ? _bannerHolder.Banner.Image : null;
 			switch (_bannerHolder.Banner.ImageAlignement)
 			{
-				case Alignment.Left:
+				case HorizontalAlignment.Left:
 					rbBannerAligmentLeft.Checked = true;
 					rbBannerAligmentCenter.Checked = false;
 					rbBannerAligmentRight.Checked = false;
 					break;
-				case Alignment.Center:
+				case HorizontalAlignment.Center:
 					rbBannerAligmentLeft.Checked = false;
 					rbBannerAligmentCenter.Checked = true;
 					rbBannerAligmentRight.Checked = false;
 					break;
-				case Alignment.Right:
+				case HorizontalAlignment.Right:
 					rbBannerAligmentLeft.Checked = false;
 					rbBannerAligmentCenter.Checked = false;
 					rbBannerAligmentRight.Checked = true;
 					break;
 			}
-			checkBoxBannerShowText.Checked = _bannerHolder.Banner.ShowText;
+			checkBoxBannerShowText.Checked = _bannerHolder.Banner.TextEnabled;
 			buttonEditBannerTextFont.Tag = _bannerHolder.Banner.Font;
 			buttonEditBannerTextFont.EditValue = Utils.FontToString(_bannerHolder.Banner.Font);
 			colorEditBannerTextColor.Color = _bannerHolder.Banner.ForeColor;
@@ -116,13 +117,13 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Common
 			_bannerHolder.Banner.Inverted = checkEditInvert.Checked;
 			_bannerHolder.Banner.Image = pbSelectedBanner.Image;
 			if (rbBannerAligmentLeft.Checked)
-				_bannerHolder.Banner.ImageAlignement = Alignment.Left;
+				_bannerHolder.Banner.ImageAlignement = HorizontalAlignment.Left;
 			else if (rbBannerAligmentCenter.Checked)
-				_bannerHolder.Banner.ImageAlignement = Alignment.Center;
+				_bannerHolder.Banner.ImageAlignement = HorizontalAlignment.Center;
 			else if (rbBannerAligmentRight.Checked)
-				_bannerHolder.Banner.ImageAlignement = Alignment.Right;
-			_bannerHolder.Banner.ShowText = checkBoxBannerShowText.Checked;
-			_bannerHolder.Banner.Text = _bannerHolder.Banner.ShowText ? memoEditBannerText.EditValue as String : null;
+				_bannerHolder.Banner.ImageAlignement = HorizontalAlignment.Right;
+			_bannerHolder.Banner.TextMode = checkBoxBannerShowText.Checked ? BannerTextMode.CustomText : BannerTextMode.NoText;
+			_bannerHolder.Banner.Text = _bannerHolder.Banner.TextEnabled ? memoEditBannerText.EditValue as String : null;
 			_bannerHolder.Banner.Font = buttonEditBannerTextFont.Tag as Font;
 			_bannerHolder.Banner.ForeColor = colorEditBannerTextColor.Color;
 		}

@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using DevExpress.Utils;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.Persistent;
+using HorizontalAlignment = SalesLibraries.Business.Entities.Wallbin.Common.Enums.HorizontalAlignment;
 
 namespace SalesLibraries.CommonGUI.Wallbin.ColumnTitles
 {
@@ -37,18 +38,18 @@ namespace SalesLibraries.CommonGUI.Wallbin.ColumnTitles
 				: Data.Settings.HeaderAlignment;
 			switch (alignment)
 			{
-				case Alignment.Left:
+				case HorizontalAlignment.Left:
 					labelControlText.Appearance.TextOptions.HAlignment = HorzAlignment.Near;
 					break;
-				case Alignment.Center:
+				case HorizontalAlignment.Center:
 					labelControlText.Appearance.TextOptions.HAlignment = HorzAlignment.Center;
 					break;
-				case Alignment.Right:
+				case HorizontalAlignment.Right:
 					labelControlText.Appearance.TextOptions.HAlignment = HorzAlignment.Far;
 					break;
 			}
 
-			if (Data.Banner.Enable && Data.Banner.ShowText && !String.IsNullOrEmpty(Data.Banner.Text.Trim()))
+			if (Data.Banner.Enable && Data.Banner.TextEnabled && !String.IsNullOrEmpty(Data.Banner.Text.Trim()))
 			{
 				labelControlText.Text = Data.Banner.Text;
 				labelControlText.Font = Data.Banner.Font;

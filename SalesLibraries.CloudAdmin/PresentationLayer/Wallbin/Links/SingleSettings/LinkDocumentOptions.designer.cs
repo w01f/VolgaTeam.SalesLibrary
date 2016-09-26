@@ -33,12 +33,13 @@
 			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
 			this.ckDoNotGeneratePreview = new System.Windows.Forms.CheckBox();
 			this.ckDoNotGenerateText = new System.Windows.Forms.CheckBox();
-			this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
+			this.labelControlTitleButtons = new DevExpress.XtraEditors.LabelControl();
 			this.labelControlTitleSettings = new DevExpress.XtraEditors.LabelControl();
 			this.buttonXRefreshPreview = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXOpenWV = new DevComponents.DotNetBar.ButtonX();
 			this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
 			this.labelControlTitle = new DevExpress.XtraEditors.LabelControl();
+			this.ckForcePreview = new System.Windows.Forms.CheckBox();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).BeginInit();
 			this.SuspendLayout();
@@ -82,14 +83,14 @@
 			this.ckDoNotGenerateText.Text = "Do NOT Create Full Data File (Always select this for Nielsen Books) ";
 			this.ckDoNotGenerateText.UseVisualStyleBackColor = true;
 			// 
-			// labelControl1
+			// labelControlTitleButtons
 			// 
-			this.labelControl1.Location = new System.Drawing.Point(17, 263);
-			this.labelControl1.Name = "labelControl1";
-			this.labelControl1.Size = new System.Drawing.Size(121, 16);
-			this.labelControl1.StyleController = this.styleController;
-			this.labelControl1.TabIndex = 62;
-			this.labelControl1.Text = "Link Archive Folders:";
+			this.labelControlTitleButtons.Location = new System.Drawing.Point(17, 278);
+			this.labelControlTitleButtons.Name = "labelControlTitleButtons";
+			this.labelControlTitleButtons.Size = new System.Drawing.Size(121, 16);
+			this.labelControlTitleButtons.StyleController = this.styleController;
+			this.labelControlTitleButtons.TabIndex = 62;
+			this.labelControlTitleButtons.Text = "Link Archive Folders:";
 			// 
 			// labelControlTitleSettings
 			// 
@@ -103,11 +104,11 @@
 			// buttonXRefreshPreview
 			// 
 			this.buttonXRefreshPreview.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-			this.buttonXRefreshPreview.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonXRefreshPreview.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+			| System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXRefreshPreview.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXRefreshPreview.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.buttonXRefreshPreview.Location = new System.Drawing.Point(78, 351);
+			this.buttonXRefreshPreview.Location = new System.Drawing.Point(78, 366);
 			this.buttonXRefreshPreview.Name = "buttonXRefreshPreview";
 			this.buttonXRefreshPreview.Size = new System.Drawing.Size(375, 30);
 			this.buttonXRefreshPreview.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -119,11 +120,11 @@
 			// buttonXOpenWV
 			// 
 			this.buttonXOpenWV.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-			this.buttonXOpenWV.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonXOpenWV.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+			| System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXOpenWV.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXOpenWV.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.buttonXOpenWV.Location = new System.Drawing.Point(78, 299);
+			this.buttonXOpenWV.Location = new System.Drawing.Point(78, 314);
 			this.buttonXOpenWV.Name = "buttonXOpenWV";
 			this.buttonXOpenWV.Size = new System.Drawing.Size(375, 30);
 			this.buttonXOpenWV.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -144,8 +145,8 @@
 			// labelControlTitle
 			// 
 			this.labelControlTitle.AllowHtmlString = true;
-			this.labelControlTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			this.labelControlTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+			| System.Windows.Forms.AnchorStyles.Right)));
 			this.labelControlTitle.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Top;
 			this.labelControlTitle.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
 			this.labelControlTitle.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
@@ -156,10 +157,23 @@
 			this.labelControlTitle.TabIndex = 57;
 			this.labelControlTitle.Text = resources.GetString("labelControlTitle.Text");
 			// 
+			// ckForcePreview
+			// 
+			this.ckForcePreview.AutoSize = true;
+			this.ckForcePreview.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.ckForcePreview.ForeColor = System.Drawing.Color.Black;
+			this.ckForcePreview.Location = new System.Drawing.Point(30, 230);
+			this.ckForcePreview.Name = "ckForcePreview";
+			this.ckForcePreview.Size = new System.Drawing.Size(343, 20);
+			this.ckForcePreview.TabIndex = 63;
+			this.ckForcePreview.Text = "Immediately Launch this PDF in new Browser Tab";
+			this.ckForcePreview.UseVisualStyleBackColor = true;
+			// 
 			// LinkDocumentOptions
 			// 
 			this.BackColor = System.Drawing.Color.White;
-			this.Controls.Add(this.labelControl1);
+			this.Controls.Add(this.ckForcePreview);
+			this.Controls.Add(this.labelControlTitleButtons);
 			this.Controls.Add(this.labelControlTitleSettings);
 			this.Controls.Add(this.buttonXRefreshPreview);
 			this.Controls.Add(this.buttonXOpenWV);
@@ -182,11 +196,12 @@
 		private DevExpress.XtraEditors.StyleController styleController;
 		public System.Windows.Forms.CheckBox ckDoNotGeneratePreview;
 		public System.Windows.Forms.CheckBox ckDoNotGenerateText;
-		private DevExpress.XtraEditors.LabelControl labelControl1;
+		private DevExpress.XtraEditors.LabelControl labelControlTitleButtons;
 		private DevExpress.XtraEditors.LabelControl labelControlTitleSettings;
 		public DevComponents.DotNetBar.ButtonX buttonXRefreshPreview;
 		public DevComponents.DotNetBar.ButtonX buttonXOpenWV;
 		private System.Windows.Forms.PictureBox pictureBoxLogo;
 		private DevExpress.XtraEditors.LabelControl labelControlTitle;
+		public System.Windows.Forms.CheckBox ckForcePreview;
 	}
 }

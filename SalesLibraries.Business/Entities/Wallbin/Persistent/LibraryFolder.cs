@@ -205,6 +205,9 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 
 		public class LibraryFolderSettings : SettingsContainer
 		{
+			[JsonIgnore]
+			public Font WindowFont { get; } = new Font("Arial", 12, FontStyle.Regular, GraphicsUnit.Point);
+
 			private Color _borderColor = Color.Black;
 			public Color BorderColor
 			{
@@ -265,18 +268,6 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 				}
 			}
 
-			private Font _windowFont = new Font("Arial", 14, FontStyle.Regular, GraphicsUnit.Point);
-			public Font WindowFont
-			{
-				get { return _windowFont; }
-				set
-				{
-					if (_windowFont != value)
-						OnSettingsChanged();
-					_windowFont = value;
-				}
-			}
-
 			private Font _headerFont = new Font("Arial", 12, FontStyle.Regular, GraphicsUnit.Point);
 			public Font HeaderFont
 			{
@@ -289,8 +280,8 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 				}
 			}
 
-			private Alignment _headerAlignment = Alignment.Center;
-			public Alignment HeaderAlignment
+			private HorizontalAlignment _headerAlignment = HorizontalAlignment.Center;
+			public HorizontalAlignment HeaderAlignment
 			{
 				get { return _headerAlignment; }
 				set

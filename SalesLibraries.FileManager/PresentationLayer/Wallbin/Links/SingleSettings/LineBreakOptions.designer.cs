@@ -89,8 +89,6 @@
 			this.buttonEditLineBreakFont.Size = new System.Drawing.Size(274, 22);
 			this.buttonEditLineBreakFont.StyleController = this.styleController;
 			this.buttonEditLineBreakFont.TabIndex = 36;
-			this.buttonEditLineBreakFont.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.FontEdit_ButtonClick);
-			this.buttonEditLineBreakFont.Click += new System.EventHandler(this.FontEdit_Click);
 			// 
 			// colorEditLineBreakFontColor
 			// 

@@ -41,7 +41,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.Clipboard
 
 			if (LastActionType == LinkClipboardActionType.Cut)
 			{
-				sourceLinks.ForEach(link => link.DeleteWithLink(true));
+				sourceLinks.ForEach(link => link.DeleteLink(true));
 				DataStateObserver.Instance.RaiseLinksDeleted(LinkIds);
 				LastActionType = LinkClipboardActionType.None;
 				LinkIds.Clear();

@@ -151,8 +151,25 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 			get
 			{
 				if (Banner.Enable)
-					return Banner.ShowText ? Banner.Text : String.Empty;
+				{
+					switch (Banner.TextMode)
+					{
+						case BannerTextMode.LinkName:
+							return Name;
+						case BannerTextMode.CustomText:
+							return Banner.Text;
+						default:
+							return String.Empty;
+					}
+				}
 				return Name;
+			}
+			set
+			{
+				if (Banner.Enable && Banner.TextMode == BannerTextMode.CustomText)
+					Banner.Text = value;
+				else
+					Name = value;
 			}
 		}
 
@@ -180,7 +197,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		{
 			get
 			{
-				if (Banner.Enable && Banner.ShowText)
+				if (Banner.Enable && Banner.TextEnabled)
 					return Banner.Font;
 				return null;
 			}
@@ -191,7 +208,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		{
 			get
 			{
-				if (Banner.Enable && Banner.ShowText)
+				if (Banner.Enable && Banner.TextEnabled)
 					return Banner.ForeColor;
 				if (Settings.ForeColor.HasValue)
 					return Settings.ForeColor.Value;

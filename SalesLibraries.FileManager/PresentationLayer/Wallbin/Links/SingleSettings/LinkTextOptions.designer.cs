@@ -109,8 +109,6 @@
 			this.buttonEditLinkSpecialFont.Size = new System.Drawing.Size(383, 22);
 			this.buttonEditLinkSpecialFont.StyleController = this.styleController;
 			this.buttonEditLinkSpecialFont.TabIndex = 30;
-			this.buttonEditLinkSpecialFont.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.FontEdit_ButtonClick);
-			this.buttonEditLinkSpecialFont.Click += new System.EventHandler(this.FontEdit_Click);
 			// 
 			// labelControlForeColor
 			// 

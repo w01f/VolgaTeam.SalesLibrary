@@ -15,7 +15,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 	{
 		protected bool ReadyToUse { get; set; }
 		public LibraryContext DataStorage { get; }
-		public IPageView ActivePage { get; private set; }
+		public IPageView ActivePage { get; protected set; }
 		public List<IPageView> Pages { get; }
 		public event EventHandler<EventArgs> PageChanging;
 		public event EventHandler<EventArgs> PageChanged;

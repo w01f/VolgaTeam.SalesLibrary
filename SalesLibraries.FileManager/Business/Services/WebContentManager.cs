@@ -22,6 +22,7 @@ using HyperLinkSettings = SalesLibraries.ServiceConnector.WallbinContentService.
 using InternalLinkSettings = SalesLibraries.ServiceConnector.WallbinContentService.InternalLinkSettings;
 using VideoLinkSettings = SalesLibraries.ServiceConnector.WallbinContentService.VideoLinkSettings;
 using PowerPointLinkSettings = SalesLibraries.ServiceConnector.WallbinContentService.PowerPointLinkSettings;
+using DocumentLinkSettings = SalesLibraries.ServiceConnector.WallbinContentService.DocumentLinkSettings;
 using ExcelLinkSettings = SalesLibraries.ServiceConnector.WallbinContentService.ExcelLinkSettings;
 using LineBreak = SalesLibraries.ServiceConnector.WallbinContentService.LineBreak;
 
@@ -215,6 +216,12 @@ namespace SalesLibraries.FileManager.Business.Services
 					target.extendedProperties = new PowerPointLinkSettings();
 					((PowerPointLinkSettings)target.extendedProperties).ImportData(
 						(SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings.PowerPointLinkSettings)source.Settings);
+					break;
+				case FileTypes.Word:
+				case FileTypes.Pdf:
+					target.extendedProperties = new DocumentLinkSettings();
+					((DocumentLinkSettings)target.extendedProperties).ImportData(
+						(SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings.DocumentLinkSettings)source.Settings);
 					break;
 				case FileTypes.Excel:
 					target.extendedProperties = new ExcelLinkSettings();
@@ -424,6 +431,14 @@ namespace SalesLibraries.FileManager.Business.Services
 		}
 
 		private static void ImportData(
+			this DocumentLinkSettings target,
+			SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings.DocumentLinkSettings source)
+		{
+			((IBaseLinkSettings)target).ImportData(source);
+			target.forcePreview = source.ForcePreview;
+		}
+
+		private static void ImportData(
 			this IBaseLinkSettings target,
 			SecuritySettings source)
 		{
@@ -548,9 +563,10 @@ namespace SalesLibraries.FileManager.Business.Services
 			target.id = Guid.NewGuid().ToString();
 			target.isEnabled = source.Enable;
 			target.image = Convert.ToBase64String((byte[])imageConverter.ConvertTo(source.DisplayedImage, typeof(byte[])));
-			target.showText = source.ShowText;
+			target.showText = source.TextEnabled;
 			target.imageAlignment = source.ImageAlignement.ToString().ToLower();
-			target.text = source.Text;
+			target.imageVerticalAlignment = source.ImageVerticalAlignement.ToString().ToLower();
+			target.text = source.TextEnabled ? source.DisplayedText : null;
 			target.foreColor = source.ForeColor.ToHex();
 			target.font = new Font();
 			target.font.ImportData(source.Font);

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 
 namespace SalesLibraries.CommonGUI.Wallbin.Folders
@@ -14,7 +15,9 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 
 		public LibraryObjectLink SourceObject => Source as LibraryObjectLink;
 
-		public bool AllowEdit => !Source.Banner.Enable;
+		public bool AllowEditLinkText => !Source.Banner.Enable || (Source.Banner.Enable && Source.Banner.TextMode == BannerTextMode.CustomText);
+
+		public bool AllowEditImageSettings => Source.Banner.Enable || Source.Widget.Enabled || Source.Widget.HasAutoWidget;
 
 		public bool IsTop => Index == 0;
 

@@ -174,8 +174,8 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 				}
 			}
 
-			private Alignment _headerAlignment = Alignment.Center;
-			public Alignment HeaderAlignment
+			private HorizontalAlignment _headerAlignment = HorizontalAlignment.Center;
+			public HorizontalAlignment HeaderAlignment
 			{
 				get { return _headerAlignment; }
 				set

@@ -120,9 +120,8 @@ namespace SalesLibraries.Business.Contexts.Wallbin.Local
 			target.Settings.BorderColor = legacy.BorderColor;
 			target.Settings.ForeHeaderColor = legacy.ForeHeaderColor;
 			target.Settings.ForeWindowColor = legacy.ForeWindowColor;
-			target.Settings.HeaderAlignment = (Alignment)(Int32)legacy.HeaderAlignment;
+			target.Settings.HeaderAlignment = (HorizontalAlignment)(Int32)legacy.HeaderAlignment;
 			target.Settings.HeaderFont = (Font)legacy.HeaderFont.Clone();
-			target.Settings.WindowFont = (Font)legacy.WindowFont.Clone();
 
 			target.Widget.WidgetType = legacy.EnableWidget ? WidgetType.CustomWidget : WidgetType.NoWidget;
 			target.Widget.Image = (Image)legacy.Widget?.Clone();
@@ -133,9 +132,9 @@ namespace SalesLibraries.Business.Contexts.Wallbin.Local
 				if (target.Banner.Enable)
 				{
 					target.Banner.Image = (Image)(legacy.BannerProperties.Image != null ? legacy.BannerProperties.Image.Clone() : null);
-					target.Banner.ImageAlignement = (Alignment)(Int32)legacy.BannerProperties.ImageAlignement;
-					target.Banner.ShowText = legacy.BannerProperties.ShowText;
-					if (target.Banner.ShowText)
+					target.Banner.ImageAlignement = (HorizontalAlignment)(Int32)legacy.BannerProperties.ImageAlignement;
+					target.Banner.TextMode = legacy.BannerProperties.ShowText ? BannerTextMode.CustomText : BannerTextMode.NoText;
+					if (target.Banner.TextMode == BannerTextMode.CustomText)
 					{
 						target.Banner.Font = (Font)legacy.BannerProperties.Font.Clone();
 						target.Banner.ForeColor = legacy.BannerProperties.ForeColor;
@@ -180,7 +179,7 @@ namespace SalesLibraries.Business.Contexts.Wallbin.Local
 			target.Settings.Text = legacy.Name;
 			target.Settings.BackgroundColor = legacy.BackgroundColor;
 			target.Settings.ForeColor = legacy.ForeColor;
-			target.Settings.HeaderAlignment = (Alignment)(Int32)legacy.HeaderAlignment;
+			target.Settings.HeaderAlignment = (HorizontalAlignment)(Int32)legacy.HeaderAlignment;
 			target.Settings.HeaderFont = (Font)legacy.HeaderFont.Clone();
 
 			target.Widget.WidgetType = legacy.EnableWidget ? WidgetType.CustomWidget : WidgetType.NoWidget;
@@ -192,9 +191,9 @@ namespace SalesLibraries.Business.Contexts.Wallbin.Local
 				if (target.Banner.Enable)
 				{
 					target.Banner.Image = (Image)(legacy.BannerProperties.Image != null ? legacy.BannerProperties.Image.Clone() : null);
-					target.Banner.ImageAlignement = (Alignment)(Int32)legacy.BannerProperties.ImageAlignement;
-					target.Banner.ShowText = legacy.BannerProperties.ShowText;
-					if (target.Banner.ShowText)
+					target.Banner.ImageAlignement = (HorizontalAlignment)(Int32)legacy.BannerProperties.ImageAlignement;
+					target.Banner.TextMode = legacy.BannerProperties.ShowText ? BannerTextMode.CustomText : BannerTextMode.NoText;
+					if (target.Banner.TextMode == BannerTextMode.CustomText)
 					{
 						target.Banner.Font = (Font)legacy.BannerProperties.Font.Clone();
 						target.Banner.ForeColor = legacy.BannerProperties.ForeColor;
@@ -237,9 +236,9 @@ namespace SalesLibraries.Business.Contexts.Wallbin.Local
 				if (target.Banner.Enable)
 				{
 					target.Banner.Image = (Image)(legacy.BannerProperties.Image != null ? legacy.BannerProperties.Image.Clone() : null);
-					target.Banner.ImageAlignement = (Alignment)(Int32)legacy.BannerProperties.ImageAlignement;
-					target.Banner.ShowText = legacy.BannerProperties.ShowText;
-					if (target.Banner.ShowText)
+					target.Banner.ImageAlignement = (HorizontalAlignment)(Int32)legacy.BannerProperties.ImageAlignement;
+					target.Banner.TextMode = legacy.BannerProperties.ShowText ? BannerTextMode.CustomText : BannerTextMode.NoText;
+					if (target.Banner.TextMode == BannerTextMode.CustomText)
 					{
 						target.Banner.Font = (Font)legacy.BannerProperties.Font.Clone();
 						target.Banner.ForeColor = legacy.BannerProperties.ForeColor;

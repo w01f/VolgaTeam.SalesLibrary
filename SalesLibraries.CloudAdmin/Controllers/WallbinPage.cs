@@ -205,10 +205,6 @@ namespace SalesLibraries.CloudAdmin.Controllers
 				if (activeWallbin == null) return;
 				if (!pnContainer.Controls.Contains((Control)activeWallbin))
 					pnContainer.Controls.Add((Control)activeWallbin);
-
-				if (!pnTagInfoContainer.Controls.Contains(activeWallbin.TagInfoControl))
-					pnTagInfoContainer.Controls.Add(activeWallbin.TagInfoControl);
-
 				activeWallbin.ShowView();
 				UpdateRetractableBarContent();
 				((Control)activeWallbin).BringToFront();

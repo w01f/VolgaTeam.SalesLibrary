@@ -28,8 +28,6 @@
         /// </summary>
         protected virtual void InitializeComponent()
         {
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.grFiles = new System.Windows.Forms.DataGridView();
 			this.colDisplayName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -56,20 +54,11 @@
 			this.grFiles.ColumnHeadersVisible = false;
 			this.grFiles.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colDisplayName});
-			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-			dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-			dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-			this.grFiles.DefaultCellStyle = dataGridViewCellStyle2;
 			this.grFiles.Dock = System.Windows.Forms.DockStyle.Top;
 			this.grFiles.Location = new System.Drawing.Point(1, 52);
 			this.grFiles.Name = "grFiles";
 			this.grFiles.ReadOnly = true;
 			this.grFiles.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-			this.grFiles.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
 			this.grFiles.RowHeadersVisible = false;
 			this.grFiles.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
 			this.grFiles.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;

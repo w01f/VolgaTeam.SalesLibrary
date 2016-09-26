@@ -11,6 +11,7 @@ using SalesLibraries.CloudAdmin.Controllers;
 using SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Common;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.CommonGUI.Common;
+using HorizontalAlignment = SalesLibraries.Business.Entities.Wallbin.Common.Enums.HorizontalAlignment;
 
 namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Settings
 {
@@ -122,13 +123,13 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Settings
 				buttonEditWindowHeaderFont.EditValue = string.Empty;
 			switch (_folder.Settings.HeaderAlignment)
 			{
-				case Alignment.Left:
+				case HorizontalAlignment.Left:
 					rbHeaderAlignmentLeft.Checked = true;
 					break;
-				case Alignment.Center:
+				case HorizontalAlignment.Center:
 					rbHeaderAlignmentCenter.Checked = true;
 					break;
-				case Alignment.Right:
+				case HorizontalAlignment.Right:
 					rbWindowHeaderAlignmentRight.Checked = true;
 					break;
 			}
@@ -146,11 +147,11 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Settings
 			_folder.Settings.BorderColor = colorEditWindowBorderColor.Color;
 			_folder.Settings.HeaderFont = buttonEditWindowHeaderFont.Tag as Font;
 			if (rbHeaderAlignmentLeft.Checked)
-				_folder.Settings.HeaderAlignment = Alignment.Left;
+				_folder.Settings.HeaderAlignment = HorizontalAlignment.Left;
 			else if (rbHeaderAlignmentCenter.Checked)
-				_folder.Settings.HeaderAlignment = Alignment.Center;
+				_folder.Settings.HeaderAlignment = HorizontalAlignment.Center;
 			else if (rbWindowHeaderAlignmentRight.Checked)
-				_folder.Settings.HeaderAlignment = Alignment.Right;
+				_folder.Settings.HeaderAlignment = HorizontalAlignment.Right;
 			if (_formParameters.Type == WindowPropertiesType.None)
 				_folder.Page.Library.Settings.ApplyAppearanceForAllWindows = ckApllyForAllWindowsAppearance.Checked;
 

@@ -10,6 +10,7 @@ using SalesLibraries.Common.Helpers;
 using SalesLibraries.CommonGUI.Common;
 using SalesLibraries.FileManager.Controllers;
 using SalesLibraries.FileManager.PresentationLayer.Wallbin.Common;
+using HorizontalAlignment = SalesLibraries.Business.Entities.Wallbin.Common.Enums.HorizontalAlignment;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 {
@@ -64,13 +65,13 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			colorEditBackColor.Color = _columnTitle.Settings.BackgroundColor;
 			switch (_columnTitle.Settings.HeaderAlignment)
 			{
-				case Alignment.Left:
+				case HorizontalAlignment.Left:
 					rbAlignmentLeft.Checked = true;
 					break;
-				case Alignment.Center:
+				case HorizontalAlignment.Center:
 					rbAlignmentCenter.Checked = true;
 					break;
-				case Alignment.Right:
+				case HorizontalAlignment.Right:
 					rbAlignmentRight.Checked = true;
 					break;
 			}
@@ -93,11 +94,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			_columnTitle.Page.Settings.ApplyForAllColumnTitles = ckApplyForAllColumnTitles.Checked;
 			_columnTitle.Settings.BackgroundColor = colorEditBackColor.Color;
 			if (rbAlignmentLeft.Checked)
-				_columnTitle.Settings.HeaderAlignment = Alignment.Left;
+				_columnTitle.Settings.HeaderAlignment = HorizontalAlignment.Left;
 			else if (rbAlignmentCenter.Checked)
-				_columnTitle.Settings.HeaderAlignment = Alignment.Center;
+				_columnTitle.Settings.HeaderAlignment = HorizontalAlignment.Center;
 			else if (rbAlignmentRight.Checked)
-				_columnTitle.Settings.HeaderAlignment = Alignment.Right;
+				_columnTitle.Settings.HeaderAlignment = HorizontalAlignment.Right;
 			_columnTitle.Settings.Text = ckEnableText.Checked & memoEditTitle.EditValue != null ? memoEditTitle.EditValue.ToString() : string.Empty;
 			_columnTitle.Settings.ShowText = ckEnableText.Checked & !String.IsNullOrEmpty(_columnTitle.Settings.Text);
 			_columnTitle.Settings.ForeColor = colorEditForeColor.Color;

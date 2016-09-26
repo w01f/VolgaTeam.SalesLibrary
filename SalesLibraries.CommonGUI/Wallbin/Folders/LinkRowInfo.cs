@@ -6,6 +6,7 @@ using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.Common.Objects.Graphics;
 using SalesLibraries.CommonGUI.Wallbin.Views;
+using HorizontalAlignment = SalesLibraries.Business.Entities.Wallbin.Common.Enums.HorizontalAlignment;
 
 namespace SalesLibraries.CommonGUI.Wallbin.Folders
 {
@@ -36,7 +37,7 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 			}
 		}
 
-		public bool IsResponsible => WordWrap || (Link != null && Link.Banner.Enable && Link.Banner.ImageAlignement != Alignment.Left);
+		public bool IsResponsible => WordWrap || (Link != null && Link.Banner.Enable && Link.Banner.ImageAlignement != HorizontalAlignment.Left);
 
 		protected BaseLibraryLink Link => _parent?.Source;
 
@@ -88,7 +89,7 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 			int imageHeight;
 			if (Link.Banner.Enable && Link.Banner.DisplayedImage != null)
 			{
-				if (Link.Banner.ShowText)
+				if (Link.Banner.TextEnabled)
 				{
 					imageLeft = 0;
 				}
@@ -96,15 +97,15 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 				{
 					switch (Link.Banner.ImageAlignement)
 					{
-						case Alignment.Left:
+						case HorizontalAlignment.Left:
 							imageLeft = 0;
 							break;
-						case Alignment.Center:
+						case HorizontalAlignment.Center:
 							imageLeft = (_parent.DataGridView.Width - Link.Banner.DisplayedImage.Width) / 2;
 							if (imageLeft < 0)
 								imageLeft = 0;
 							break;
-						case Alignment.Right:
+						case HorizontalAlignment.Right:
 							imageLeft = _parent.DataGridView.Width - Link.Banner.DisplayedImage.Width;
 							if (imageLeft < 0)
 								imageLeft = 0;
@@ -114,8 +115,8 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 							break;
 					}
 				}
-				imageWidth = Link.Banner.DisplayedImage.Width > DefaultImageWidth ? Link.Banner.DisplayedImage.Width : DefaultImageWidth;
-				imageHeight = Link.Banner.DisplayedImage.Height > DefaultImageHeight ? Link.Banner.DisplayedImage.Height : DefaultImageHeight;
+				imageWidth = Link.Banner.DisplayedImage.Width;
+				imageHeight = Link.Banner.DisplayedImage.Height;
 			}
 			else if ((FormatState.ShowCategoryTags ||
 					FormatState.ShowKeywordTags ||
@@ -149,11 +150,9 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 			#endregion
 
 			#region Font
-			Font fontForSizeCalculation;
 			if (Link.DisplayFont != null)
 			{
 				Font = Link.DisplayFont;
-				fontForSizeCalculation = Link.DisplayFont;
 			}
 			else if (Link is LibraryObjectLink)
 			{
@@ -193,46 +192,34 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 							break;
 					}
 				}
-				fontForSizeCalculation = _parent.FolderBox.BoldItalicUndrerlineRowFont;
 			}
 			else
-			{
 				Font = _parent.FolderBox.RegularRowFont;
-				fontForSizeCalculation = _parent.FolderBox.BoldRowFont;
-			}
 			#endregion
 
 			#region Text Size and Coordinates
-
 			int textLeft;
 			int textTop;
 			int textWidth;
 			int textHeight;
 
-			var textForCalculation = Text.Contains(Environment.NewLine) ?
-				String.Format("{0}{1}1", Text, Environment.NewLine) :
-				String.Format("{0}{1}1", Text, "          ");
-			var textSize = TextRenderer.MeasureText(
-				textForCalculation,
-				fontForSizeCalculation,
-				new Size(WordWrap ? _parent.DataGridView.Width - imageWidth - WidthMargin : Int32.MaxValue, Int32.MaxValue),
-				TextFormatFlags.ExpandTabs |
-					TextFormatFlags.Top | TextFormatFlags.Left |
-					TextFormatFlags.TextBoxControl |
-					TextFormatFlags.WordBreak
-				);
+			var textForCalculation = Text;
 
-			if (Link.Banner.Enable)
+			var fontForSizeCalculation = new Font(
+				Font.FontFamily,
+				(Int32)Math.Ceiling(Font.Size),
+				FontStyle.Bold | FontStyle.Italic | FontStyle.Underline,
+				GraphicsUnit.Point);
+
+			using (var g = Graphics.FromImage(new Bitmap(1, 1)))
 			{
-				textLeft = imageLeft + imageWidth;
-				textWidth = (Int32)textSize.Width;
-				textHeight = (Int32)textSize.Height;
-			}
-			else
-			{
+				var textSize = g.MeasureString(
+					textForCalculation,
+					fontForSizeCalculation,
+					new Size(WordWrap ? _parent.DataGridView.Width - imageWidth - WidthMargin : Int32.MaxValue, Int32.MaxValue));
 				textLeft = imageLeft + imageWidth + WidthMargin;
-				textWidth = (Int32)textSize.Width;
-				textHeight = (Int32)textSize.Height;
+				textWidth = (Int32)Math.Ceiling(textSize.Width);
+				textHeight = (Int32)Math.Ceiling(textSize.Height);
 			}
 			#endregion
 
@@ -244,7 +231,10 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 			if (textHeight > imageHeight)
 			{
 				textTop = 0;
-				imageTop = Link != null && !Link.Banner.Enable && WordWrap ? 0 : (textHeight - imageHeight) / 2;
+				if (Link != null && Link.Banner.Enable)
+					imageTop = Link.Banner.ImageVerticalAlignement == VerticalAlignment.Top ? 0 : (textHeight - imageHeight) / 2;
+				else
+					imageTop = WordWrap ? 0 : (textHeight - imageHeight) / 2;
 			}
 			else if (textHeight == imageHeight)
 			{
@@ -253,7 +243,10 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 			}
 			else
 			{
-				textTop = (imageHeight - textHeight) / 2;
+				if (Link != null && Link.Banner.Enable)
+					textTop = Link.Banner.ImageVerticalAlignement == VerticalAlignment.Top ? 0 : (imageHeight - textHeight) / 2;
+				else
+					textTop = (imageHeight - textHeight) / 2;
 				imageTop = 0;
 			}
 			#endregion

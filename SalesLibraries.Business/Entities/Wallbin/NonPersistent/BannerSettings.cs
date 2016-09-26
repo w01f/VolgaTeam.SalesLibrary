@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Drawing;
+using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using SalesLibraries.Business.Entities.Common;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
+using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.Common.Extensions;
 
 namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
@@ -62,20 +64,20 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 			}
 		}
 
-		private bool _showText;
-		public bool ShowText
+		private BannerTextMode _textMode;
+		public BannerTextMode TextMode
 		{
-			get { return _showText; }
+			get { return _textMode; }
 			set
 			{
-				if (_showText != value)
+				if (_textMode != value)
 					OnSettingsChanged();
-				_showText = value;
+				_textMode = value;
 			}
 		}
 
-		private Alignment _imageAlignement = Alignment.Left;
-		public Alignment ImageAlignement
+		private HorizontalAlignment _imageAlignement = HorizontalAlignment.Left;
+		public HorizontalAlignment ImageAlignement
 		{
 			get { return _imageAlignement; }
 			set
@@ -83,6 +85,18 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 				if (_imageAlignement != value)
 					OnSettingsChanged();
 				_imageAlignement = value;
+			}
+		}
+
+		private VerticalAlignment _imageVerticalAlignement = VerticalAlignment.Middle;
+		public VerticalAlignment ImageVerticalAlignement
+		{
+			get { return _imageVerticalAlignement; }
+			set
+			{
+				if (_imageVerticalAlignement != value)
+					OnSettingsChanged();
+				_imageVerticalAlignement = value;
 			}
 		}
 
@@ -122,11 +136,41 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 			}
 		}
 
+		[JsonIgnore]
+		public bool TextEnabled => TextMode == BannerTextMode.LinkName || TextMode == BannerTextMode.CustomText;
+
+		[JsonIgnore]
+		public string DisplayedText => TextMode == BannerTextMode.CustomText ?
+			Text :
+			(Parent as BaseLibraryLink)?.Name;
+
+
+		protected override void AfterConstruction()
+		{
+			base.AfterConstruction();
+			_textMode = BannerTextMode.NoText;
+		}
+
 		protected override void AfterCreate()
 		{
 			base.AfterCreate();
 			if (Font.Unit != GraphicsUnit.Point)
-				Font = new Font(Font.FontFamily, Font.Size, Font.Style, GraphicsUnit.Point);
+				_font = new Font(Font.FontFamily, Font.Size, Font.Style, GraphicsUnit.Point);
+			if (TextMode == BannerTextMode.Undefined)
+				_textMode = !String.IsNullOrEmpty(Text) ? BannerTextMode.CustomText : BannerTextMode.NoText;
+		}
+
+		public BannerSettings SaveAsTemplate()
+		{
+			var templateBanner = SettingsContainer.CreateInstance<BannerSettings>(Parent, null);
+			templateBanner.Enable = Enable;
+			templateBanner.Inverted = Inverted;
+			templateBanner.TextMode = TextMode;
+			templateBanner.ImageAlignement = ImageAlignement;
+			templateBanner.ImageVerticalAlignement = ImageVerticalAlignement;
+			templateBanner.ForeColor = ForeColor;
+			templateBanner.Font = Font;
+			return templateBanner;
 		}
 	}
 }

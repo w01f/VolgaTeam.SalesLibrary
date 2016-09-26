@@ -17,7 +17,7 @@ namespace SalesLibraries.CloudAdmin.Business.Services
 			if (!corruptedLinks.Any()) return;
 			DataStateObserver.Instance.RaiseLinksDeleted(corruptedLinks.Select(link => link.ExtId));
 			foreach (var libraryObjectLink in corruptedLinks)
-				libraryObjectLink.DeleteWithLink(true);
+				libraryObjectLink.DeleteLink(true);
 		}
 	}
 }

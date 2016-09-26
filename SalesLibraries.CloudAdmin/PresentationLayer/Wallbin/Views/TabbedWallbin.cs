@@ -211,6 +211,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 						selectedPage.Page.Delete(DataStorage);
 						DataStorage.Library.MarkAsModified();
 						DataStorage.Library.Pages.RemoveItem(selectedPage.Page);
+						ActivePage = null;
 					});
 				IsDataChanged = true;
 				SaveData();

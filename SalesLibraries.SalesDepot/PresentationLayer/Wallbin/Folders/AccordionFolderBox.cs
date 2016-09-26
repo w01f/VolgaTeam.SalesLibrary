@@ -54,7 +54,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.Folders
 		protected override void SetupView()
 		{
 			buttonXHeader.Text = String.Format("{0} <font color=\"#727272\">({1})</font>",
-				DataSource.Banner.Enable && DataSource.Banner.ShowText ? DataSource.Banner.Text : DataSource.Name,
+				DataSource.Banner.Enable && DataSource.Banner.TextEnabled ? DataSource.Banner.Text : DataSource.Name,
 				DataSource.Links.GetDisplayedLinks().Count()
 				);
 			base.SetupView();

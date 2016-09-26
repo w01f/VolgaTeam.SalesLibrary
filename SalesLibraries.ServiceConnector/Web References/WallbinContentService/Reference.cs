@@ -2388,9 +2388,272 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
 			}
 		}
 	}
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
+
+	/// <remarks/>
+	[System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
+	[System.SerializableAttribute()]
+	[System.Diagnostics.DebuggerStepThroughAttribute()]
+	[System.ComponentModel.DesignerCategoryAttribute("code")]
+	[System.Xml.Serialization.SoapTypeAttribute(Namespace = "urn:ContentControllerwsdl")]
+	public partial class DocumentLinkSettings
+	{
+
+		private bool forcePreviewField;
+
+		private string noteField;
+
+		private string hoverNoteField;
+
+		private bool showOnlyCustomHoverNoteField;
+
+		private bool isBoldField;
+
+		private bool isItalicField;
+
+		private bool isUnderlineField;
+
+		private bool isSpecialFormatField;
+
+		private Font fontField;
+
+		private string foreColorField;
+
+		private bool isTextWordWrapField;
+
+		private bool isRestrictedField;
+
+		private bool noShareField;
+
+		private string assignedUsersField;
+
+		private string deniedUsersField;
+
+		private string quickLinkUrlField;
+
+		private string quickLinkTitleField;
+
+		/// <remarks/>
+		public bool forcePreview
+		{
+			get
+			{
+				return this.forcePreviewField;
+			}
+			set
+			{
+				this.forcePreviewField = value;
+			}
+		}
+
+		/// <remarks/>
+		public string note
+		{
+			get
+			{
+				return this.noteField;
+			}
+			set
+			{
+				this.noteField = value;
+			}
+		}
+
+		/// <remarks/>
+		public string hoverNote
+		{
+			get
+			{
+				return this.hoverNoteField;
+			}
+			set
+			{
+				this.hoverNoteField = value;
+			}
+		}
+
+		/// <remarks/>
+		public bool showOnlyCustomHoverNote
+		{
+			get
+			{
+				return this.showOnlyCustomHoverNoteField;
+			}
+			set
+			{
+				this.showOnlyCustomHoverNoteField = value;
+			}
+		}
+
+		/// <remarks/>
+		public bool isBold
+		{
+			get
+			{
+				return this.isBoldField;
+			}
+			set
+			{
+				this.isBoldField = value;
+			}
+		}
+
+		/// <remarks/>
+		public bool isItalic
+		{
+			get
+			{
+				return this.isItalicField;
+			}
+			set
+			{
+				this.isItalicField = value;
+			}
+		}
+
+		/// <remarks/>
+		public bool isUnderline
+		{
+			get
+			{
+				return this.isUnderlineField;
+			}
+			set
+			{
+				this.isUnderlineField = value;
+			}
+		}
+
+		/// <remarks/>
+		public bool isSpecialFormat
+		{
+			get
+			{
+				return this.isSpecialFormatField;
+			}
+			set
+			{
+				this.isSpecialFormatField = value;
+			}
+		}
+
+		/// <remarks/>
+		public Font font
+		{
+			get
+			{
+				return this.fontField;
+			}
+			set
+			{
+				this.fontField = value;
+			}
+		}
+
+		/// <remarks/>
+		public string foreColor
+		{
+			get
+			{
+				return this.foreColorField;
+			}
+			set
+			{
+				this.foreColorField = value;
+			}
+		}
+
+		/// <remarks/>
+		public bool isTextWordWrap
+		{
+			get
+			{
+				return this.isTextWordWrapField;
+			}
+			set
+			{
+				this.isTextWordWrapField = value;
+			}
+		}
+
+		/// <remarks/>
+		public bool isRestricted
+		{
+			get
+			{
+				return this.isRestrictedField;
+			}
+			set
+			{
+				this.isRestrictedField = value;
+			}
+		}
+
+		/// <remarks/>
+		public bool noShare
+		{
+			get
+			{
+				return this.noShareField;
+			}
+			set
+			{
+				this.noShareField = value;
+			}
+		}
+
+		/// <remarks/>
+		public string assignedUsers
+		{
+			get
+			{
+				return this.assignedUsersField;
+			}
+			set
+			{
+				this.assignedUsersField = value;
+			}
+		}
+
+		/// <remarks/>
+		public string deniedUsers
+		{
+			get
+			{
+				return this.deniedUsersField;
+			}
+			set
+			{
+				this.deniedUsersField = value;
+			}
+		}
+
+		public string quickLinkUrl
+		{
+			get
+			{
+				return this.quickLinkUrlField;
+			}
+			set
+			{
+				this.quickLinkUrlField = value;
+			}
+		}
+
+		public string quickLinkTitle
+		{
+			get
+			{
+				return this.quickLinkTitleField;
+			}
+			set
+			{
+				this.quickLinkTitleField = value;
+			}
+		}
+	}
+
+	/// <remarks/>
+	[System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -3378,8 +3641,10 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         private bool showTextField;
         
         private string imageAlignmentField;
-        
-        private string textField;
+
+		private string imageVerticalAlignmentField;
+
+		private string textField;
         
         private Font fontField;
         
@@ -3446,9 +3711,21 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
                 this.imageAlignmentField = value;
             }
         }
-        
-        /// <remarks/>
-        public string text {
+
+		public string imageVerticalAlignment
+		{
+			get
+			{
+				return this.imageVerticalAlignmentField;
+			}
+			set
+			{
+				this.imageVerticalAlignmentField = value;
+			}
+		}
+
+		/// <remarks/>
+		public string text {
             get {
                 return this.textField;
             }

@@ -211,6 +211,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 						selectedPage.Page.Delete(DataStorage);
 						DataStorage.Library.MarkAsModified();
 						DataStorage.Library.Pages.RemoveItem(selectedPage.Page);
+						ActivePage = null;
 					});
 				IsDataChanged = true;
 				SaveData();
@@ -222,7 +223,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 						MainController.Instance.WallbinViews.SetActiveWallbin(this);
 					})));
 			}
-
 		}
 
 		private void toolStripMenuItemEditTags_Click(object sender, EventArgs e)

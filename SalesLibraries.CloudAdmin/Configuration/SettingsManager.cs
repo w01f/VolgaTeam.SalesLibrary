@@ -17,6 +17,7 @@ namespace SalesLibraries.CloudAdmin.Configuration
 		public string SelectedPage { get; set; }
 		public int FontSize { get; set; }
 		public bool MultitabView { get; set; }
+		public string DefaultLinkBannerSettingsEncoded { get; set; }
 		#endregion
 
 		#region Ribbon Settings
@@ -91,12 +92,15 @@ namespace SalesLibraries.CloudAdmin.Configuration
 			if (node != null)
 				if (int.TryParse(node.InnerText, out tempInt))
 					FontSize = tempInt;
-			node = document.SelectSingleNode(@"/LocalSettings/CalendarFontSize");
-			node = document.SelectSingleNode(@"/LocalSettings/TreeViewVisible");
+			//node = document.SelectSingleNode(@"/LocalSettings/CalendarFontSize");
+			//node = document.SelectSingleNode(@"/LocalSettings/TreeViewVisible");
 			node = document.SelectSingleNode(@"/LocalSettings/MultitabView");
 			if (node != null)
 				if (bool.TryParse(node.InnerText, out tempBool))
 					MultitabView = tempBool;
+			node = document.SelectSingleNode(@"/LocalSettings/DefaultLinkBannerSettingsEncoded");
+			if (node != null)
+				DefaultLinkBannerSettingsEncoded = Encoding.UTF8.GetString(Convert.FromBase64String(node.InnerText));
 			#endregion
 		}
 
@@ -111,6 +115,8 @@ namespace SalesLibraries.CloudAdmin.Configuration
 				xml.AppendLine(@"<SelectedPage>" + SelectedPage.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</SelectedPage>");
 			xml.AppendLine(@"<FontSize>" + FontSize + @"</FontSize>");
 			xml.AppendLine(@"<MultitabView>" + MultitabView + @"</MultitabView>");
+			if (!String.IsNullOrEmpty(DefaultLinkBannerSettingsEncoded))
+				xml.AppendLine(@"<DefaultLinkBannerSettingsEncoded>" + Convert.ToBase64String(Encoding.UTF8.GetBytes(DefaultLinkBannerSettingsEncoded)) + @"</DefaultLinkBannerSettingsEncoded>");
 			#endregion
 
 			xml.AppendLine(@"</LocalSettings>");

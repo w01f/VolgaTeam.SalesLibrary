@@ -101,7 +101,9 @@
     <Compile Include="Entities\Interfaces\ICollectionItem.cs" />
     <Compile Include="Entities\Wallbin\Common\Constants\PreviewFormats.cs" />
     <Compile Include="Entities\Wallbin\Common\Constants\WebFormats.cs" />
-    <Compile Include="Entities\Wallbin\Common\Enums\Alignment.cs" />
+    <Compile Include="Entities\Wallbin\Common\Enums\BannerTextMode.cs" />
+    <Compile Include="Entities\Wallbin\Common\Enums\VerticalAlignment.cs" />
+    <Compile Include="Entities\Wallbin\Common\Enums\HorizontalAlignment.cs" />
     <Compile Include="Entities\Interfaces\IChangable.cs" />
     <Compile Include="Entities\Interfaces\IExtKeyHolder.cs" />
     <Compile Include="Entities\Wallbin\Common\Enums\FileTypes.cs" />

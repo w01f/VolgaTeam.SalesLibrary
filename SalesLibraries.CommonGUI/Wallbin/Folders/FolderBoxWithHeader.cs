@@ -7,6 +7,7 @@ using DevExpress.Utils;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.Persistent;
 using SalesLibraries.Common.Objects.Graphics;
+using HorizontalAlignment = SalesLibraries.Business.Entities.Wallbin.Common.Enums.HorizontalAlignment;
 
 namespace SalesLibraries.CommonGUI.Wallbin.Folders
 {
@@ -38,13 +39,13 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 				
 				switch (DataSource.Banner.ImageAlignement)
 				{
-					case Alignment.Left:
+					case HorizontalAlignment.Left:
 						labelControlText.Appearance.TextOptions.HAlignment = HorzAlignment.Near;
 						break;
-					case Alignment.Center:
+					case HorizontalAlignment.Center:
 						labelControlText.Appearance.TextOptions.HAlignment = HorzAlignment.Center;
 						break;
-					case Alignment.Right:
+					case HorizontalAlignment.Right:
 						labelControlText.Appearance.TextOptions.HAlignment = HorzAlignment.Far;
 						break;
 				}
@@ -60,13 +61,13 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 
 				switch (DataSource.Settings.HeaderAlignment)
 				{
-					case Alignment.Left:
+					case HorizontalAlignment.Left:
 						labelControlText.Appearance.TextOptions.HAlignment = HorzAlignment.Near;
 						break;
-					case Alignment.Center:
+					case HorizontalAlignment.Center:
 						labelControlText.Appearance.TextOptions.HAlignment = HorzAlignment.Center;
 						break;
-					case Alignment.Right:
+					case HorizontalAlignment.Right:
 						labelControlText.Appearance.TextOptions.HAlignment = HorzAlignment.Far;
 						break;
 				}

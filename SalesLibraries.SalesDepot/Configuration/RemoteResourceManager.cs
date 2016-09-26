@@ -32,6 +32,7 @@ namespace SalesLibraries.SalesDepot.Configuration
 
 		public async Task Load()
 		{
+			await Common.Helpers.RemoteResourceManager.Instance.LoadLocal();
 			await Common.Helpers.RemoteResourceManager.Instance.LoadRemote();
 
 			#region Local
