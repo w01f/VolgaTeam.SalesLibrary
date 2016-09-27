@@ -205,6 +205,9 @@ namespace SalesLibraries.FileManager.Business.Services
 			target.banner.libraryId = source.ParentLibrary.ExtId.ToString();
 			target.banner.ImportData(source.Banner);
 
+			target.dateAdd = source.AddDate.ToString("MM/dd/yyyy hh:mm:ss tt");
+			target.dateModify = source.LastModified.ToString("MM/dd/yyyy hh:mm:ss tt");
+
 			switch (source.Type)
 			{
 				case FileTypes.Video:
@@ -334,9 +337,6 @@ namespace SalesLibraries.FileManager.Business.Services
 			if (keywords.Any())
 				target.tags = String.Join(" ", keywords.Select(x => x.Name).ToArray());
 			#endregion
-
-			target.dateAdd = source.AddDate.ToString("MM/dd/yyyy hh:mm:ss tt");
-			target.dateModify = source.LastModified.ToString("MM/dd/yyyy hh:mm:ss tt");
 		}
 
 		private static void ImportData(

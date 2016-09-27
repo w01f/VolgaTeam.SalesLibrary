@@ -47,6 +47,8 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 		{
 			get
 			{
+				if (ParentFileLink == null)
+					return null;
 				if (ParentFileLink.IsDead)
 					return null;
 				return ParentFileLink?.ParentLibrary.Settings.AutoWidgets
