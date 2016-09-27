@@ -240,7 +240,7 @@
 
 			if ($.SalesPortal.Content.isMobileDevice())
 			{
-				table.find('.link-file').hammer().on('tap', function ()
+				table.find('.link-file, .link-common').hammer().on('tap', function ()
 				{
 					var linkId = dataTable.api().row($(this).closest("tr")).data().id;
 					$.SalesPortal.LinkManager.requestViewDialog(linkId, false);
@@ -261,7 +261,7 @@
 					});
 				});
 
-				table.find('.link-file, .link-url').hammer().on('hold', function (event)
+				table.find('.link-file, .link-url, .link-common').hammer().on('hold', function (event)
 				{
 					var linkId = dataTable.api().row($(this).closest("tr")).data().id;
 					$.SalesPortal.LinkManager.requestLinkContextMenu(linkId, false, event.gesture.center.pageX, event.gesture.center.pageY);
@@ -271,7 +271,7 @@
 			}
 			else
 			{
-				table.on('click', '.link-file', function ()
+				table.on('click', '.link-file, .link-common', function ()
 				{
 					var linkId = dataTable.api().row($(this).closest("tr")).data().id;
 					$.SalesPortal.LinkManager.requestViewDialog(linkId, false);
@@ -292,7 +292,7 @@
 					});
 				});
 
-				table.on('contextmenu', '.link-file, .link-url-internal', function (event)
+				table.on('contextmenu', '.link-file, .link-url-internal, .link-common', function (event)
 				{
 					var linkId = dataTable.api().row($(this).closest("tr")).data().id;
 					$.SalesPortal.LinkManager.requestLinkContextMenu(linkId, false, event.clientX, event.clientY);
@@ -370,7 +370,10 @@
 						objectClass = ' link-file';
 					}
 					else
+					{
 						cellContent = '<span class="mtTool link-content" mtcontent="' + row.tooltip + '">' + displayValue + '</span>';
+						objectClass = ' link-common';
+					}
 				}
 			}
 			else
