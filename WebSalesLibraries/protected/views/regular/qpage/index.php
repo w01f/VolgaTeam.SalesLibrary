@@ -15,17 +15,32 @@
 	window.BaseUrl = '<?php echo Yii::app()->getBaseUrl(true); ?>' + '/qpage/';
 </script>
 <?
-	if (count($menuGroups) > 0)
-		$this->renderPartial('../menu/mainMenu', array(
-			'menuGroups' => $menuGroups,
-			'headerText' => $page->title,
-			'showMainSiteUrl' => true,
-			'mainSiteUrl' => $page->getUrl(),
-			'mainSiteName' => sprintf('Back to: %s', $page->title),
-			'mainSiteTarget'=>'_self'));
+	if ($page->is_email)
+		$headerText = trim(strip_tags($page->subtitle));
 	else
-		$this->renderPartial('../menu/singlePageMenu', array('headerText' => $page->title, 'showMainSiteUrl' => false));
+		$headerText = trim(strip_tags($page->title));
+
+	if (!empty($headerText))
+	{
+		if (count($menuGroups) > 0)
+			$this->renderPartial('../menu/mainMenu', array(
+				'menuGroups' => $menuGroups,
+				'headerText' => $headerText,
+				'showMainSiteUrl' => true,
+				'mainSiteUrl' => $page->getUrl(),
+				'mainSiteName' => sprintf('Back to: %s', $headerText),
+				'mainSiteTarget' => '_self'));
+		else
+			$this->renderPartial('../menu/singlePageMenu', array('headerText' => $headerText, 'showMainSiteUrl' => false));
+	}
 ?>
+<? if (empty($headerText)): ?>
+	<style>
+		body {
+			padding-top: 0 !important;
+		}
+	</style>
+<? endif; ?>
 <div id="content">
 	<div id="page-id" style="display: none;"><? echo $page->id; ?></div>
 	<? if (isset($page->logo) || $page->record_activity): ?>
@@ -52,8 +67,12 @@
 		</div>
 	<? endif; ?>
 	<div class="padding">
-		<div id="page-title"><? echo $page->subtitle; ?></div>
-		<div id="page-header"><? echo nl2br($page->header); ?></div>
+		<? if (!$page->is_email && !empty($page->subtitle)): ?>
+			<div id="page-title"><? echo $page->subtitle; ?></div>
+		<? endif; ?>
+		<? if (!empty($page->header)): ?>
+			<div id="page-header"><? echo nl2br($page->header); ?></div>
+		<? endif; ?>
 		<div id="page-links-container" class="folder-links-container">
 			<? if ($page->show_links_as_url): ?>
 			<ul class="nav nav-pills nav-stacked">

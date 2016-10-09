@@ -1,10 +1,3 @@
-#shortcut-action-menu,
-#shortcut-action-menu .main-level,
-#shortcut-action-menu .level
-{
-	background-color: #2C84EE;
-}
-
 #shortcut-action-menu .main-level,
 #shortcut-action-menu .level
 {
@@ -31,11 +24,6 @@
 #shortcut-action-menu .main-level .shortcut-menu-header.main-menu-active
 {
 	display: none;
-}
-
-#shortcut-action-menu .main-level .shortcut-menu-header:hover
-{
-	background-color: #2C84EE;
 }
 
 #shortcut-action-menu .main-level .menu .icon

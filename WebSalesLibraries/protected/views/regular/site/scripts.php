@@ -133,3 +133,23 @@
 		$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/data-table/bootstrap/js/datatables.min.js', CClientScript::POS_END);
 	}
 ?>
+<style>
+	.menu-back-colored {
+		background-color: <?echo '#'.Yii::app()->params['menu']['BarColor'];?> !important;
+	}
+
+	#shortcut-action-menu,
+	#shortcut-action-menu .main-level,
+	#shortcut-action-menu .level {
+		background-color: #<? echo Yii::app()->params['menu']['BarColor'];?>;
+	}
+
+	#shortcut-action-menu .main-level .shortcut-menu-header:hover {
+		background-color: #<? echo Yii::app()->params['menu']['BarColor'];?>;
+	}
+
+	#main-menu .shortcut-menu-group-item
+	{
+		margin-right: <? echo Yii::app()->params['menu']['IconSeparation'];?>px;
+	}
+</style>

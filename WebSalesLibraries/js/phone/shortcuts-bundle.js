@@ -61,7 +61,7 @@
 				if (hasPageContent == true && samePage == true)
 				{
 					e.preventDefault();
-					$.SalesPortal.ShortcutsManager.openShortcut(data, shortcutData.options.linkId);
+					$.SalesPortal.ShortcutsManager.openShortcutByMenuItemData(data, shortcutData.options.linkId);
 				}
 			});
 		};

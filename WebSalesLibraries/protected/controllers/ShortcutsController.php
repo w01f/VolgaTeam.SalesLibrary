@@ -35,6 +35,16 @@
 			echo CJSON::encode($this->buildShortcutPage($linkId, $linkParameters));
 		}
 
+		public function actionGetShortcutData()
+		{
+			$shortcutType = Yii::app()->request->getPost('shortcutType');
+			/** @var  $shortcutRecord ShortcutLinkRecord */
+			$shortcutRecord = ShortcutLinkRecord::model()->find('type=?',array($shortcutType));
+			/** @var  $shortcut BaseShortcut */
+			$shortcut = $shortcutRecord->getModel($this->isPhone);
+			echo $shortcut->getMenuItemData();
+		}
+
 		public function actionDownload()
 		{
 			$linkId = Yii::app()->request->getQuery('linkId');
@@ -71,6 +81,8 @@
 					case 'gridbundle':
 					case 'carouselbundle':
 					case 'library':
+					case 'page':
+					case 'window':
 					case 'search':
 						$defaultShortcutTagName = 'default-shortcut';
 						Yii::app()->session[$defaultShortcutTagName] = sprintf('%s', $shortcutRecord->getUniqueId());

@@ -60,7 +60,7 @@
 			shortcutActionsContainer.find('.search-app-clear').off('click.action').on('click.action', function ()
 			{
 				dataTable.clear();
-				$.SalesPortal.ShortcutsManager.openShortcut(
+				$.SalesPortal.ShortcutsManager.openShortcutByMenuItemData(
 					$('<div>' + appData.options.serviceData + '</div>'));
 			});
 

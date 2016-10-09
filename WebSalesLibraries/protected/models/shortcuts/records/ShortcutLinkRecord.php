@@ -75,7 +75,25 @@
 				case 'window':
 					return new WindowShortcut($this, $isPhone);
 				case 'page':
-					return new LibraryPageShortcut($this, $isPhone);
+					$shortcut =  new LibraryPageShortcut($this, $isPhone);
+					$needToUpdate = false;
+					$savedPageViewTypeTag = sprintf('PageViewType-%s', $shortcut->library->id);
+					if (isset($parameters) && array_key_exists('pageViewType', $parameters))
+					{
+						$shortcut->pageViewType = $parameters['pageViewType'];
+						$cookie = new CHttpCookie($savedPageViewTypeTag, $shortcut->pageViewType);
+						$cookie->expire = time() + (60 * 60 * 24 * 7);
+						Yii::app()->request->cookies[$savedPageViewTypeTag] = $cookie;
+						$needToUpdate = true;
+					}
+					else if (isset(Yii::app()->request->cookies[$savedPageViewTypeTag]))
+					{
+						$shortcut->pageViewType = Yii::app()->request->cookies[$savedPageViewTypeTag]->value;
+						$needToUpdate = true;
+					}
+					if ($needToUpdate)
+						$shortcut->updateAction();
+					return $shortcut;
 				case 'quicklist':
 					return new QuickListShortcut($this, $isPhone);
 				case 'search':
@@ -167,6 +185,8 @@
 					return new FavoritesShortcut($this, $isPhone);
 				case 'user_preferences':
 					return new FavoritesShortcut($this, $isPhone);
+				case 'youtube':
+					return new YouTubeShortcut($this, $isPhone);
 				default:
 					return new EmptyShortcut($this, $isPhone);
 			}

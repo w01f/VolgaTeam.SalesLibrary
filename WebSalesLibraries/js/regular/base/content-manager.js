@@ -1,7 +1,7 @@
 (function ($)
 {
 	window.BaseUrl = window.BaseUrl || '';
-	$.SalesPortal = $.SalesPortal || { };
+	$.SalesPortal = $.SalesPortal || {};
 	var ContentManager = function ()
 	{
 		var that = this;
@@ -24,7 +24,14 @@
 				{
 				};
 			$('body').find('.mtContent').remove();
-			that.getContentObject().html(content).find('img').on('load', loadCallback);
+
+			var contentObject = that.getContentObject();
+			contentObject.html(content);
+			var anchorImage = contentObject.find('img.wallbin-logo');
+			if (anchorImage.length > 0)
+				anchorImage.on('load', loadCallback);
+			else
+				loadCallback();
 			initHeader(headerOptions);
 			initShortcutActions(actions);
 		};

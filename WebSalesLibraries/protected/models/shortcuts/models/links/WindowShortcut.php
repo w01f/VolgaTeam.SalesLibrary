@@ -10,6 +10,7 @@
 	{
 		public $column;
 		public $windowViewType;
+		public $linksOnly;
 
 		/**
 		 * @param $linkRecord
@@ -28,6 +29,9 @@
 
 			$windowViewTags = $linkConfig->getElementsByTagName("WindowViewType");
 			$this->windowViewType = $windowViewTags->length > 0 ? trim($windowViewTags->item(0)->nodeValue) : 'columns';
+
+			$linksOnlyTags = $linkConfig->getElementsByTagName("LinksOnly");
+			$this->linksOnly = $linksOnlyTags->length > 0 ? filter_var(trim($linksOnlyTags->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : false;
 		}
 
 		/**

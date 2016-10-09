@@ -98,7 +98,7 @@
 			$this->loadData();
 			$this->loadFolders();
 			$path = \Yii::getPathOfAlias('application.views.regular.wallbin') . '/columnsView.php';
-			$content = $controller->renderFile($path, array('libraryPage' => $this), true);
+			$content = $controller->renderFile($path, array('libraryPage' => $this, 'showWindowHeaders' => true), true);
 			if (isset($content) && $content != '')
 			{
 				/** @var $cacheRecord \LibraryPageRecord */
@@ -123,7 +123,7 @@
 			$cachedPage = \phpQuery::newDocument($cachedPageContent);
 			$linkTags = $cachedPage['.link-container.restricted'];
 
-			$isAdmin =\UserIdentity::isUserAdmin();
+			$isAdmin = \UserIdentity::isUserAdmin();
 			$userId = \UserIdentity::getCurrentUserId();
 			if (!$isAdmin)
 			{

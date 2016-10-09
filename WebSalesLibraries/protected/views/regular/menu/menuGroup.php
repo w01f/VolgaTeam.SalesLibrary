@@ -2,7 +2,7 @@
 	/** @var $menuGroup ShortcutGroup */
 	$identifier = 'group-' . $menuGroup->id;
 ?>
-<div data-groupid="<? echo $identifier; ?>" class="om-ctrlitem menu-icon-holder">
+<div data-groupid="<? echo $identifier; ?>" class="om-ctrlitem menu-icon-holder shortcut-menu-group-item">
 	<? if ($menuGroup->useIcon == true): ?>
 		<i class="<? echo $menuGroup->iconClass; ?>"></i>
 	<? else: ?>

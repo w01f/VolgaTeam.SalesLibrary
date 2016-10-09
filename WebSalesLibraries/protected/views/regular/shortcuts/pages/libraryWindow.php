@@ -3,10 +3,15 @@
 
 	$window = $shortcut->getWindow();
 
-	if ($shortcut->windowViewType == 'columns')
-		$content = $this->renderFile(Yii::getPathOfAlias($this->pathPrefix . 'wallbin') . '/folderContainer.php', array('folder' => $window), true);
+	if(!$shortcut->linksOnly)
+	{
+		if ($shortcut->windowViewType == 'columns')
+			$content = $this->renderFile(Yii::getPathOfAlias($this->pathPrefix . 'wallbin') . '/folderContainer.php', array('folder' => $window, 'showHeader' => true), true);
+		else
+			$content = $this->renderFile(Yii::getPathOfAlias($this->pathPrefix . 'wallbin') . '/accordionFolder.php', array('folder' => $window), true);
+	}
 	else
-		$content = $this->renderFile(Yii::getPathOfAlias($this->pathPrefix . 'wallbin') . '/accordionFolder.php', array('folder' => $window), true);
+		$content = $this->renderFile(Yii::getPathOfAlias($this->pathPrefix . 'wallbin') . '/folderLinks.php', array('folder' => $window), true);
 ?>
 <div class='padding'>
 	<? if ($shortcut->column < 0): ?>

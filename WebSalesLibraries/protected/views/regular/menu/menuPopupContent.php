@@ -3,7 +3,7 @@
 	 * @var $menuGroups ShortcutGroup[]
 	 */
 ?>
-<div class="om-ctrlbar solid-blue-2">
+<div class="om-ctrlbar menu-back-colored">
 	<div class="om-controlitems">
 		<div class="om-controlitem om-closenav menu-icon-holder">
 			<i class="icon-close2"></i>

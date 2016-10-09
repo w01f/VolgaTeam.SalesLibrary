@@ -31,7 +31,7 @@
 							var url = dataItem.url;
 
 							if (hasPageContent && samePage)
-								$.SalesPortal.ShortcutsManager.openShortcut(shortcutData, {pushHistory: true});
+								$.SalesPortal.ShortcutsManager.openShortcutByMenuItemData(shortcutData, {pushHistory: true});
 							else
 								window.open(url.replace(/&amp;/g, '%26'), "_blank");
 						};
@@ -78,7 +78,7 @@
 
 			shortcutActionsContainer.find('.grid').off('click.action').on('click.action', function ()
 			{
-				$.SalesPortal.ShortcutsManager.openShortcut(
+				$.SalesPortal.ShortcutsManager.openShortcutByMenuItemData(
 					$('<div>' + carouselData.serviceData + '</div>'),
 					{
 						pageViewType: 'gridbundle'

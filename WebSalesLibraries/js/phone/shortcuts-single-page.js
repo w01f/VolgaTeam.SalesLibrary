@@ -9,7 +9,7 @@
 		{
 			var defaultShortcutData = $('.default-shortcut-data');
 			if (defaultShortcutData.length > 0)
-				$.SalesPortal.ShortcutsManager.openShortcut(defaultShortcutData);
+				$.SalesPortal.ShortcutsManager.openShortcutByMenuItemData(defaultShortcutData);
 
 			$('.logout-button').off('click').on('click', function (e)
 			{

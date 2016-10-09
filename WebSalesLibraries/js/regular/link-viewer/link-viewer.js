@@ -473,19 +473,35 @@
 							{
 								$.SalesPortal.Overlay.hide();
 							},
-							success: function (msg)
+							success: function ()
 							{
-								favoritesDialogObject.content = $(msg);
-								favoritesDialogObject.content.find('.accept-button').on('click', function ()
-								{
-									$.fancybox.close();
+								var modalDialog = new $.SalesPortal.ModalDialog({
+									title: 'SUCCESS!',
+									description: fileName + ' was saved to your favorites...',
+									buttons: [
+										{
+											tag: 'open_favorites',
+											title: 'Open Favorites',
+											width: 150,
+											clickHandler: function ()
+											{
+												modalDialog.close();
+												$.SalesPortal.ShortcutsManager.openStaticShortcutByType('favorites');
+											}
+										},
+										{
+											tag: 'close',
+											title: 'Return to Site',
+											width: 150,
+											clickHandler: function ()
+											{
+												modalDialog.close();
+											}
+										}
+									],
+									closeOnOutsideClick: true
 								});
-								$.fancybox({
-									content: favoritesDialogObject.content,
-									title: title,
-									openEffect: 'none',
-									closeEffect: 'none'
-								});
+								modalDialog.show();
 							},
 							error: function ()
 							{
@@ -562,6 +578,23 @@
 					$('#video-player').remove();
 					if (callbackAfterClose !== undefined)
 						callbackAfterClose();
+				}
+			});
+		};
+
+		this.playYouTube = function (title, youTubeId)
+		{
+			$.fancybox({
+				title: title,
+				content: '<iframe ' +
+				'height = "480" width="680" frameborder="0" allowfullscreen ' +
+				'src="https://www.youtube.com/embed/' + youTubeId + '?autoplay=1">' +
+				'</iframe>',
+				openEffect: 'none',
+				closeEffect: 'none',
+				afterShow: function ()
+				{
+					$('.fancybox-wrap').addClass('content-boxed');
 				}
 			});
 		};

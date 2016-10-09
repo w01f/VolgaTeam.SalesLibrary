@@ -1,7 +1,10 @@
 <?
 	use application\models\wallbin\models\web\LibraryPage as LibraryPage;
 
-	/** @var $libraryPage LibraryPage */
+	/**
+	 * @var $libraryPage LibraryPage
+	 * @var $showWindowHeaders bool
+	 */
 ?>
 <div class="page-container" id="page-<? echo $libraryPage->id; ?>">
 	<? if (isset($libraryPage->columns) && $libraryPage->enableColumns): ?>
@@ -55,7 +58,7 @@
 					<div class="page-column column<? echo $i; ?>">
 						<?
 							foreach ($folders as $folder)
-								echo $this->renderFile(Yii::getPathOfAlias('application.views.regular.wallbin') . '/folderContainer.php', array('folder' => $folder), true);
+								echo $this->renderFile(Yii::getPathOfAlias('application.views.regular.wallbin') . '/folderContainer.php', array('folder' => $folder, 'showHeader' => $showWindowHeaders), true);
 						?>
 					</div>
 				<? endif; ?>

@@ -25,6 +25,21 @@
 					$.SalesPortal.Wallbin.assignAccordionEvents(pageContent);
 					break;
 			}
+			initActionButtons();
+		};
+
+		var initActionButtons = function ()
+		{
+			var shortcutActionsContainer = $('#shortcut-action-container');
+			shortcutActionsContainer.find('.page-zoom-in').off('click.action').on('click.action', function ()
+			{
+				$.SalesPortal.Wallbin.zoomIn();
+			});
+
+			shortcutActionsContainer.find('.page-zoom-out').off('click.action').on('click.action', function ()
+			{
+				$.SalesPortal.Wallbin.zoomOut();
+			});
 		};
 	};
 })(jQuery);

@@ -36,7 +36,7 @@
 				if (hasPageContent == true && samePage == true)
 				{
 					e.preventDefault();
-					that.openShortcut(data);
+					that.openShortcutByMenuItemData(data);
 				}
 			});
 
@@ -48,7 +48,7 @@
 			});
 		};
 
-		this.openShortcut = function (data, parentShortcutId, customParameters)
+		this.openShortcutByMenuItemData = function (data, parentShortcutId, customParameters)
 		{
 			var shortcutId = data.find('.link-id').text();
 			var url = data.find('.url').text();

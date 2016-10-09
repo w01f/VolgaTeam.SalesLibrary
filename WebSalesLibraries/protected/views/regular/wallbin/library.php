@@ -5,6 +5,7 @@
 	 * @var $library Library
 	 * @var $pageSelectorMode string
 	 * @var $pageViewType string
+	 * @var $showLogo bool
 	 */
 	$savedSelectedPageIdTag = sprintf('SelectedLibraryPageId-%s', $library->id);
 	if (isset(Yii::app()->request->cookies[$savedSelectedPageIdTag]))
@@ -21,13 +22,16 @@
 		$selectedPage = $library->pages[0];
 ?>
 <div id="library-update-stamp">
-	<span class="text">Updated: <? echo date(Yii::app()->params['outputDateFormat'], strtotime($library->lastUpdate)); ?></span>
+	<span
+		class="text">Updated: <? echo date(Yii::app()->params['outputDateFormat'], strtotime($library->lastUpdate)); ?></span>
 </div>
 <div class="wallbin-header">
 	<div class="wallbin-logo-wrapper">
-		<img class="wallbin-logo" src="<? echo $selectedPage->logoContent; ?>">
+		<? if ($showLogo): ?>
+			<img class="wallbin-logo" src="<? echo $selectedPage->logoContent; ?>">
+		<? endif; ?>
 	</div>
-	<div class="page-selector-container">
+	<div class="page-selector-container<? if (!$showLogo): ?> page-selector-container-no-logo<? endif; ?>">
 		<? if ($pageSelectorMode == 'tabs'): ?>
 			<div class="tab-pages scroll_tabs_theme_light">
 				<? foreach ($library->pages as $page): ?>
@@ -38,9 +42,9 @@
 								<? echo CJSON::encode(array(
 										'id' => $page->id,
 										'name' => $page->name,
-										'logoContent' => $page->logoContent
+										'logoContent' => $showLogo ? $page->logoContent : ''
 									)
-								);?>
+								); ?>
 							</div>
 						</div>
 				</span>
@@ -52,12 +56,12 @@
 					<option value='<? echo base64_encode(CJSON::encode(array(
 							'id' => $page->id,
 							'name' => $page->name,
-							'logoContent' => $page->logoContent
+							'logoContent' => $showLogo ? $page->logoContent : ''
 						)
-					));?>' <? echo $selectedPage->id == $page->id ? 'selected' : ''; ?>><? echo $page->name; ?></option>
+					)); ?>' <? echo $selectedPage->id == $page->id ? 'selected' : ''; ?>><? echo $page->name; ?></option>
 				<? endforeach; ?>
 			</select>
-		<?endif; ?>
+		<? endif; ?>
 	</div>
 </div>
 <div class="wallbin-container">

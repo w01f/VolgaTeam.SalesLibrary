@@ -8,20 +8,17 @@
 
 		var storedTextSize = $.cookie("wallbinTextSize");
 		if (storedTextSize == null)
-			storedTextSize = 14;
+			storedTextSize = 12;
 		else
+		{
 			storedTextSize = parseInt(storedTextSize);
-
-		var storedTextSpace = $.cookie("wallbinTextSpace");
-		if (storedTextSpace == null)
-			storedTextSpace = 2;
-		else
-			storedTextSpace = parseInt(storedTextSpace);
+			if (!(storedTextSize == 14 || storedTextSize == 12 || storedTextSize == 10))
+				storedTextSize = 12
+		}
 
 		this.assignLinkEvents = function (container)
 		{
 			updateTextSize(storedTextSize);
-			updateTextSpace(storedTextSpace);
 			that.updateContentSize();
 
 			$.mtReInit();
@@ -365,55 +362,25 @@
 
 		this.zoomIn = function ()
 		{
-			if (storedTextSpace < 3)
+			if (storedTextSize < 14)
 			{
-				storedTextSpace++;
-				updateTextSpace(storedTextSpace);
-			}
-			if (storedTextSize < 17)
-			{
-				storedTextSize += 3;
+				storedTextSize += 2;
 				updateTextSize(storedTextSize);
 			}
 		};
 
 		this.zoomOut = function ()
 		{
-			if (storedTextSpace > 1)
+			if (storedTextSize > 10)
 			{
-				storedTextSpace--;
-				updateTextSpace(storedTextSpace);
-			}
-			if (storedTextSize > 11)
-			{
-				storedTextSize -= 3;
+				storedTextSize -= 2;
 				updateTextSize(storedTextSize);
 			}
 		};
 
-		var updateTextSpace = function (textSpace)
-		{
-			if (textSpace == 1)
-			{
-				$('.link-container').css('margin-bottom', '5px');
-			}
-			else if (textSpace == 2)
-			{
-				$('.link-container').css('margin-bottom', '9px');
-			}
-			else if (textSpace == 3)
-			{
-				$('.link-container').css('margin-bottom', '14px');
-			}
-
-			$.cookie("wallbinTextSpace", textSpace, {
-				expires: (60 * 60 * 24 * 7)
-			});
-		};
-
 		var updateTextSize = function (textSize)
 		{
-			$('.link-text-sized, .link-note-sized').css('font-size', textSize + 'pt');
+			$('.link-text-container-sized').css('font-size', textSize + 'pt');
 
 			$.cookie("wallbinTextSize", textSize, {
 				expires: (60 * 60 * 24 * 7)

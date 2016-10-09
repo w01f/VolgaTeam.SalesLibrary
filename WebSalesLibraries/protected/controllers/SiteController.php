@@ -37,6 +37,8 @@
 										case 'gridbundle':
 										case 'carouselbundle':
 										case 'library':
+										case 'page':
+										case 'window':
 										case 'search':
 											$defaultShortcut = $shortcut;
 											break;

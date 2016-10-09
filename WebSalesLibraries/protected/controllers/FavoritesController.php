@@ -23,8 +23,8 @@
 			{
 				$linkRecord = LinkRecord::getLinkById($linkId);
 				FavoritesLinkRecord::addLink($userId, $linkId, $linkName, $folderName, $linkRecord->id_library);
-				$this->renderPartial('successAddDialog', array('header' => 'SUCCESS!', 'content' => $linkRecord->file_name . ' was  saved to your favorites...'), false, true);
 			}
+			Yii::app()->end();
 		}
 
 		public function actionDeleteLink()

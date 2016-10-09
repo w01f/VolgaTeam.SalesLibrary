@@ -27,7 +27,7 @@
 			$this->tag = $tag;
 			$this->group = '';
 			$this->title = 'No Title';
-			$this->backColor = '008000';
+			$this->backColor = Yii::app()->params['menu']['BarColor'];
 			$this->textColor = 'FFF';
 			$this->iconColor = 'FFF';
 		}
@@ -221,6 +221,44 @@
 
 					$action = new ShortcutAction('page-zoom-out');
 					$action->order = 60;
+					$action->title = 'Zoom Out';
+					$action->iconClass = 'icon-zoomout';
+					$customActions[$action->tag] = $action;
+					break;
+				case 'page':
+					$action = new ShortcutAction('page-view-columns');
+					$action->order = 10;
+					$action->title = 'Show Columns';
+					$action->iconClass = 'icon-view_column';
+					$customActions[$action->tag] = $action;
+
+					$action = new ShortcutAction('page-view-accordion');
+					$action->order = 20;
+					$action->title = 'Show Accordion';
+					$action->iconClass = 'icon-grid';
+					$customActions[$action->tag] = $action;
+
+					$action = new ShortcutAction('page-zoom-in');
+					$action->order = 30;
+					$action->title = 'Zoom In';
+					$action->iconClass = 'icon-zoomin';
+					$customActions[$action->tag] = $action;
+
+					$action = new ShortcutAction('page-zoom-out');
+					$action->order = 40;
+					$action->title = 'Zoom Out';
+					$action->iconClass = 'icon-zoomout';
+					$customActions[$action->tag] = $action;
+					break;
+				case 'window':
+					$action = new ShortcutAction('page-zoom-in');
+					$action->order = 10;
+					$action->title = 'Zoom In';
+					$action->iconClass = 'icon-zoomin';
+					$customActions[$action->tag] = $action;
+
+					$action = new ShortcutAction('page-zoom-out');
+					$action->order = 20;
 					$action->title = 'Zoom Out';
 					$action->iconClass = 'icon-zoomout';
 					$customActions[$action->tag] = $action;

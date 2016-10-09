@@ -84,7 +84,7 @@
 				$this->defaultItemAppearance = new ShortcutAppearance();
 				$this->defaultItemAppearance->size = 'regular';
 				$this->defaultItemAppearance->textAlign = 'center';
-				$this->defaultItemAppearance->backColor = '2C84EE';
+				$this->defaultItemAppearance->backColor = Yii::app()->params['menu']['BarColor'];
 				$this->defaultItemAppearance->textColor = 'FFFFFF';
 				$this->defaultItemAppearance->iconColor = 'FFFFFF';
 				$this->defaultItemAppearance->shadowColor = 'FFFFFF';

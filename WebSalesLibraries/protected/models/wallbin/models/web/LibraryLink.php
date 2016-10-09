@@ -432,6 +432,6 @@
 		 */
 		public static function libraryChildLinkComparer($x, $y)
 		{
-			return strcasecmp($x->name, $y->name);
+			return strnatcasecmp($x->name, $y->name);
 		}
 	}

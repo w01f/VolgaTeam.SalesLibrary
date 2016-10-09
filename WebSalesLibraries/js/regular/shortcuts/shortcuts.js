@@ -39,13 +39,13 @@
 				if (hasPageContent == true && samePage == true)
 				{
 					e.preventDefault();
-					return that.openShortcut(data, {pushHistory: true});
+					return that.openShortcutByMenuItemData(data, {pushHistory: true});
 				}
 				return true;
 			});
 		};
 
-		this.openShortcut = function (data, customParameters)
+		this.openShortcutByMenuItemData = function (data, customParameters)
 		{
 			var shortcutId = data.find('.link-id').text();
 			var url = data.find('.url').text();
@@ -67,6 +67,9 @@
 				case 'gbookmark':
 					menu.find('div[data-groupid="group-' + data.find('.bookmark-id').text() + '"]').trigger('click');
 					return false;
+				case 'youtube':
+					$.SalesPortal.LinkManager.playYouTube(data.find('.youtube-title').text(), data.find('.youtube-id').text());
+					break;
 				default :
 					menu.find('.main-site-url').show();
 					$.ajax({
@@ -84,73 +87,7 @@
 						{
 							$.SalesPortal.Overlay.hide();
 						},
-						success: function (result)
-						{
-							switch (result.options.shortcutType)
-							{
-								case 'gridbundle':
-									$.SalesPortal.Content.fillContent(result.content,
-										{
-											title: result.options.headerTitle,
-											icon: result.options.headerIcon
-										},
-										result.actions);
-									new $.SalesPortal.ShortcutsGrid().init(result.options);
-									updatedAllContentNecessary = true;
-									break;
-								case 'carouselbundle':
-									$.SalesPortal.Content.fillContent(result.content,
-										{
-											title: result.options.headerTitle,
-											icon: result.options.headerIcon
-										},
-										result.actions);
-									new $.SalesPortal.ShortcutsCarousel().init(result.options);
-									updatedAllContentNecessary = true;
-									break;
-								case 'search':
-									$.SalesPortal.Content.fillContent(result.content,
-										{
-											title: result.options.headerTitle,
-											icon: result.options.headerIcon
-										},
-										result.actions);
-									$.SalesPortal.ShortcutsSearchLink($.SalesPortal.Content.getContentObject(), shortcutId).runSearch();
-									break;
-								case 'window':
-									new $.SalesPortal.ShortcutsLibraryWindow().init(result);
-									break;
-								case 'page':
-									new $.SalesPortal.ShortcutsLibraryPage().init(result);
-									break;
-								case 'library':
-									new $.SalesPortal.ShortcutsWallbin().init(result);
-									break;
-								case 'download':
-									new $.SalesPortal.ShortcutsDownload().init(result);
-									break;
-								case 'searchapp':
-									new $.SalesPortal.ShortcutsSearchApp().init(result);
-									break;
-								case 'qbuilder':
-									new $.SalesPortal.ShortcutsQBuilder().init(result);
-									break;
-								case 'quizzes':
-									new $.SalesPortal.ShortcutsQuizzes().init(result);
-									break;
-								case 'favorites':
-									new $.SalesPortal.ShortcutsFavorites().init(result);
-									break;
-								default :
-									$.SalesPortal.Content.fillContent(result.content,
-										{
-											title: result.options.headerTitle,
-											icon: result.options.headerIcon
-										},
-										result.actions);
-									break;
-							}
-						},
+						success: openShortcutOnSamePage,
 						error: function ()
 						{
 						},
@@ -163,6 +100,35 @@
 			$.SalesPortal.ShortcutsHistory.pushState(data, customParameters);
 
 			return true;
+		};
+
+		this.openStaticShortcutByType = function (type)
+		{
+			$.ajax({
+				type: "POST",
+				url: window.BaseUrl + "shortcuts/getShortcutData",
+				data: {
+					shortcutType: type
+				},
+				beforeSend: function ()
+				{
+					$.SalesPortal.Overlay.show(false);
+				},
+				complete: function ()
+				{
+					$.SalesPortal.Overlay.hide();
+				},
+				success: function (msg)
+				{
+					that.openShortcutByMenuItemData($('<div>' + msg + '</div>'));
+				},
+				error: function ()
+				{
+					$.SalesPortal.Overlay.hide();
+				},
+				async: true,
+				dataType: 'html'
+			});
 		};
 
 		this.trackActivity = function (activityData, action, operation)
@@ -202,6 +168,74 @@
 					]
 				});
 				modalDialog.show();
+			}
+		};
+
+		var openShortcutOnSamePage = function (result)
+		{
+			switch (result.options.shortcutType)
+			{
+				case 'gridbundle':
+					$.SalesPortal.Content.fillContent(result.content,
+						{
+							title: result.options.headerTitle,
+							icon: result.options.headerIcon
+						},
+						result.actions);
+					new $.SalesPortal.ShortcutsGrid().init(result.options);
+					updatedAllContentNecessary = true;
+					break;
+				case 'carouselbundle':
+					$.SalesPortal.Content.fillContent(result.content,
+						{
+							title: result.options.headerTitle,
+							icon: result.options.headerIcon
+						},
+						result.actions);
+					new $.SalesPortal.ShortcutsCarousel().init(result.options);
+					updatedAllContentNecessary = true;
+					break;
+				case 'search':
+					$.SalesPortal.Content.fillContent(result.content,
+						{
+							title: result.options.headerTitle,
+							icon: result.options.headerIcon
+						},
+						result.actions);
+					$.SalesPortal.ShortcutsSearchLink($.SalesPortal.Content.getContentObject(), result.options.linkId).runSearch();
+					break;
+				case 'window':
+					new $.SalesPortal.ShortcutsLibraryWindow().init(result);
+					break;
+				case 'page':
+					new $.SalesPortal.ShortcutsLibraryPage().init(result);
+					break;
+				case 'library':
+					new $.SalesPortal.ShortcutsWallbin().init(result);
+					break;
+				case 'download':
+					new $.SalesPortal.ShortcutsDownload().init(result);
+					break;
+				case 'searchapp':
+					new $.SalesPortal.ShortcutsSearchApp().init(result);
+					break;
+				case 'qbuilder':
+					new $.SalesPortal.ShortcutsQBuilder().init(result);
+					break;
+				case 'quizzes':
+					new $.SalesPortal.ShortcutsQuizzes().init(result);
+					break;
+				case 'favorites':
+					new $.SalesPortal.ShortcutsFavorites().init(result);
+					break;
+				default :
+					$.SalesPortal.Content.fillContent(result.content,
+						{
+							title: result.options.headerTitle,
+							icon: result.options.headerIcon
+						},
+						result.actions);
+					break;
 			}
 		};
 	};

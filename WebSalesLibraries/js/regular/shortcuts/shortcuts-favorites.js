@@ -114,7 +114,7 @@
 									complete: function ()
 									{
 										$.SalesPortal.Overlay.hide();
-										$.SalesPortal.ShortcutsManager.openShortcut($('<div>' + favoritesData.options.serviceData + '</div>'));
+										$.SalesPortal.ShortcutsManager.openShortcutByMenuItemData($('<div>' + favoritesData.options.serviceData + '</div>'));
 									},
 									async: true,
 									dataType: 'html'

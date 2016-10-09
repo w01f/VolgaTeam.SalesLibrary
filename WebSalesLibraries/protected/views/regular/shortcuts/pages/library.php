@@ -4,6 +4,7 @@
 	$this->renderPartial('../wallbin/library', array(
 		'library' => $library,
 		'pageSelectorMode' => $shortcut->pageSelectorMode,
-		'pageViewType' => $shortcut->pageViewType
+		'pageViewType' => $shortcut->pageViewType,
+		'showLogo' => $shortcut->showLogo,
 	));
 ?>

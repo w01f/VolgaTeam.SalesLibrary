@@ -1,7 +1,7 @@
 (function ($)
 {
 	window.BaseUrl = window.BaseUrl || '';
-	$.SalesPortal = $.SalesPortal || { };
+	$.SalesPortal = $.SalesPortal || {};
 	$.SalesPortal.ShortcutsWallbin = function ()
 	{
 		var libraryData = undefined;
@@ -97,7 +97,10 @@
 					},
 					success: function (result)
 					{
-						contentObject.find('.wallbin-logo-wrapper').html('<img class="wallbin-logo" src="' + pageData.logoContent + '">');
+						if (pageData.logoContent != '')
+							contentObject.find('.wallbin-logo-wrapper').html('<img class="wallbin-logo" src="' + pageData.logoContent + '">');
+						else
+							contentObject.find('.wallbin-logo-wrapper').html('');
 						libraryContent.append($(result));
 						selectedPage = libraryContent.find('#page-' + pageData.id);
 						selectedPage.show();
@@ -113,7 +116,10 @@
 			}
 			else
 			{
-				contentObject.find('.wallbin-logo-wrapper').html('<img class="wallbin-logo" src="' + pageData.logoContent + '">');
+				if (pageData.logoContent != '')
+					contentObject.find('.wallbin-logo-wrapper').html('<img class="wallbin-logo" src="' + pageData.logoContent + '">');
+				else
+					contentObject.find('.wallbin-logo-wrapper').html('');
 				selectedPage.show();
 				initPage();
 				updateContentSize();
@@ -148,7 +154,7 @@
 
 			shortcutActionsContainer.find('.page-select-tabs').off('click.action').on('click.action', function ()
 			{
-				$.SalesPortal.ShortcutsManager.openShortcut(
+				$.SalesPortal.ShortcutsManager.openShortcutByMenuItemData(
 					$('<div>' + libraryData.options.serviceData + '</div>'),
 					{
 						pageSelectorMode: 'tabs',
@@ -158,7 +164,7 @@
 			});
 			shortcutActionsContainer.find('.page-select-combo').off('click.action').on('click.action', function ()
 			{
-				$.SalesPortal.ShortcutsManager.openShortcut(
+				$.SalesPortal.ShortcutsManager.openShortcutByMenuItemData(
 					$('<div>' + libraryData.options.serviceData + '</div>'),
 					{
 						pageSelectorMode: 'combo',
@@ -168,7 +174,7 @@
 			});
 			shortcutActionsContainer.find('.page-view-columns').off('click.action').on('click.action', function ()
 			{
-				$.SalesPortal.ShortcutsManager.openShortcut(
+				$.SalesPortal.ShortcutsManager.openShortcutByMenuItemData(
 					$('<div>' + libraryData.options.serviceData + '</div>'),
 					{
 						pageSelectorMode: libraryData.options.pageSelectorMode,
@@ -178,7 +184,7 @@
 			});
 			shortcutActionsContainer.find('.page-view-accordion').off('click.action').on('click.action', function ()
 			{
-				$.SalesPortal.ShortcutsManager.openShortcut(
+				$.SalesPortal.ShortcutsManager.openShortcutByMenuItemData(
 					$('<div>' + libraryData.options.serviceData + '</div>'),
 					{
 						pageSelectorMode: libraryData.options.pageSelectorMode,

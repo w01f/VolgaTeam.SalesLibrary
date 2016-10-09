@@ -32,7 +32,7 @@
 
 			shortcutActionsContainer.find('.carousel').off('click.action').on('click.action', function ()
 			{
-				$.SalesPortal.ShortcutsManager.openShortcut(
+				$.SalesPortal.ShortcutsManager.openShortcutByMenuItemData(
 					$('<div>' + gridData.serviceData + '</div>'),
 					{
 						pageViewType: 'carouselbundle'

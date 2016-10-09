@@ -10,7 +10,7 @@
 			{
 				if (event.state && event.state.isShortcut)
 				{
-					$.SalesPortal.ShortcutsManager.openShortcut($(event.state.shortcutData), event.state.customParameters);
+					$.SalesPortal.ShortcutsManager.openShortcutByMenuItemData($(event.state.shortcutData), event.state.customParameters);
 					event.preventDefault();
 				}
 			};

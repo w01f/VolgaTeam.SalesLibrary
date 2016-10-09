@@ -84,17 +84,33 @@
 					$linkRecords = Yii::app()->db->createCommand()
 						->select('link.id, link.id_library,
 							link.name,
+							link.type,
 							link.file_name,
 							link.file_relative_path as path,
+							lib.name as lib_name,
 							' . $dateField . ',
 							(select (round(avg(lr.value)*2)/2) as value from tbl_link_rate lr where lr.id_link=link.id) as rate,
 							link.format,
 							link.settings as extended_properties,
 							glcat.tag as tag,
-							(select count(s_d.id) from tbl_statistic_detail s_d where s_d.tag = \'File\' and s_d.data = link.file_name) as total_views')
+							(select sum(aggr.link_views) from
+					           (select
+					              s_l.id_link as link_id,
+					              count(s_l.id) as link_views
+					            from tbl_statistic_link s_l
+					            group by s_l.id_link
+					            union
+					            select
+					              l_q.id_link as link_id,
+					              count(s_q.id) as link_views
+					            from tbl_statistic_qpage s_q
+					              join tbl_link_qpage l_q on l_q.id_qpage = s_q.id_qpage
+					            group by l_q.id_link
+					           ) aggr where aggr.link_id=link.id) as total_views')
 						->from('tbl_link link')
+						->join('tbl_library lib', 'lib.id=link.id_library')
 						->leftJoin("(select lcat.id_link, group_concat(lcat.tag separator ', ') as tag from tbl_link_category lcat group by lcat.id_link) glcat", "glcat.id_link=link.id")
-						->where("id in ('" . implode("', '", $linkIds) . "')")
+						->where("link.id in ('" . implode("', '", $linkIds) . "')")
 						->queryAll();
 					$links = DataTableHelper::formatRegularData($linkRecords);
 					foreach ($favoriteLinkRecords as $favoriteLinkRecord)

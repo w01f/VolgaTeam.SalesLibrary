@@ -10,6 +10,7 @@
 		public $libraryName;
 		public $pageSelectorMode;
 		public $pageViewType;
+		public $showLogo;
 
 		/** @var $library Library */
 		public $library;
@@ -27,6 +28,8 @@
 			$this->pageViewType = $pageTypeTags->length > 0 ? trim($pageTypeTags->item(0)->nodeValue) : 'columns';
 			$pageSelectorModeTags = $linkConfig->getElementsByTagName("PageSelectorMode");
 			$this->pageSelectorMode = $pageSelectorModeTags->length > 0 ? trim($pageSelectorModeTags->item(0)->nodeValue) : 'tabs';
+			$showLogoTags = $linkConfig->getElementsByTagName("ShowLogo");
+			$this->showLogo = $showLogoTags->length > 0 ? filter_var(trim($showLogoTags->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : true;
 
 			parent::__construct($linkRecord, $isPhone);
 

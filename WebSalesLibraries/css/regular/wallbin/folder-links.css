@@ -38,7 +38,6 @@
 {
 	display: inline-block;
 	vertical-align: middle;
-	margin-bottom: 9px;
 	min-height: 32px;
 	width: 100%;
 }
@@ -49,17 +48,59 @@
 	display: none;
 }
 
-.folder-links-container .link-container.line-break,
-.folder-links-container .link-container.line-break .banner-container
+.link-container:hover,
+.link-container:visited,
+.link-container:link,
+.link-container:active
+{
+    text-decoration: none;
+    outline : none;
+}
+
+.link-container
 {
 	cursor: default !important;
 }
 
-.link-text,
+/*this is legacy block*/
+.link-container > div.widget
+{
+	background: no-repeat;
+	padding-left: 32px;
+	line-height: 32px;
+}
+
+.link-container.clickable > div,
+.link-container.url > div,
+.link-container.folder-link > div
+{
+    cursor: pointer !important;
+}
+
+.link-container.line-break > div
+{
+    cursor: default !important;
+}
+
+.link-text-container
+{
+    display: table;
+}
+
+.link-text-container-sized
+{
+    font-size: 12pt;
+}
+
+.link-text
+{
+    display: table-cell;
+    vertical-align: middle;
+}
+
 .link-text-no-wrap
 {
-	white-space: nowrap;
-	line-height: 32px;
+    white-space: nowrap;
 }
 
 .link-text-wrap
@@ -67,37 +108,24 @@
 	white-space: normal !important;
 }
 
-.link-text-sized
-{
-	font-size: 12pt;
-}
-
-.link-line-break,
-.link-line-break-no-wrap
-{
-	white-space: nowrap;
-}
-
-.link-line-break-wrap
-{
-	white-space: normal !important;
-}
-
-.link-line-break .link-text
-{
-    cursor: default;
-}
-
 .link-note
 {
 	font-weight: bold;
 }
 
-.widget
+.link-widget
 {
-	padding-left: 32px;
-	background: no-repeat 0 0;
-	line-height: 20px;
+    display: table-cell;
+}
+
+.link-widget-wrap
+{
+    vertical-align: top;
+}
+
+.link-widget-no-wrap
+{
+    vertical-align: middle;
 }
 
 .view-dilog-content
@@ -110,20 +138,4 @@
 	margin-left: 32px;
 	margin-right: 5px;
 	display: none;
-}
-
-.link-container:hover,
-.link-container:visited,
-.link-container:link,
-.link-container:active
-{
-	text-decoration: none;
-	outline : none;
-}
-
-.link-container.clickable,
-.link-container.url,
-.link-container.folder-link
-{
-	cursor: pointer;
 }
