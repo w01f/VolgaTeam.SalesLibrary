@@ -41,6 +41,7 @@
 #shortcut-group .menu-items .menu-item i.logo
 {
 	font-size: 48px;
+	height: 48px;
 }
 
 #shortcut-group .menu-items .menu-item img.logo
@@ -53,38 +54,41 @@
 	font-size: 0.9em;
 }
 
+#shortcut-group .menu-items .menu-item i.default-icon
+{
+	background-color: #cdcdcd;
+}
+
 /*------------------------------------*/
 
 /*Bundle Content------------------------------------*/
-#shortcuts-links
+.shortcuts-link.cbp-item
 {
-	margin-bottom: 15px;
-}
-
-#shortcuts-links .cbp-item
-{
-	margin-top: 20px;
-	width: 256px;
-	height: 256px;
-}
-
-#shortcuts-links .cbp-item .logo
-{
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-.shortcuts-link
-{
-	display: block;
-	margin-top: 15px;
+	width: 96px;
+	height: 128px;
 	text-align: center;
 }
 
-.shortcuts-link img
+.shortcuts-link.cbp-item i.logo
 {
-	width: 250px;
+	font-size: 48px;
+	height: 48px;
 }
 
+.shortcuts-link.cbp-item img.logo
+{
+	height: 48px;
+	display: inline;
+}
+
+.shortcuts-link.cbp-item .title
+{
+	font-size: 0.9em;
+}
+
+.shortcuts-link.cbp-item i.default-icon
+{
+	background-color: #cdcdcd;
+	display: block;
+}
 /*------------------------------------*/

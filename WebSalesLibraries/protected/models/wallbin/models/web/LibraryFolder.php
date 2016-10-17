@@ -112,7 +112,7 @@
 					$link->load($linkRecord);
 					if ($usePermissionsFilter)
 						$link->extendedProperties->isRestricted = false;
-					if(!$usePermissionsFilter || !$link->isAppLink || ($link->isAppLink && \Yii::app()->browser->getBrowser() == \Browser::BROWSER_EO))
+					if (!$usePermissionsFilter || !$link->isAppLink || ($link->isAppLink && \Yii::app()->browser->getBrowser() == \Browser::BROWSER_EO))
 						$this->files[] = $link;
 				}
 
@@ -184,5 +184,4 @@
 			else
 				return ($x->rowOrder < $y->rowOrder) ? -1 : 1;
 		}
-
 	}

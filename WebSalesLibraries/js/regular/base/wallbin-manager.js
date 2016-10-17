@@ -51,12 +51,20 @@
 					event.gesture.preventDefault();
 				});
 
+				container.find('.url').hammer().on('tap', function (event)
+				{
+					event.gesture.stopPropagation();
+				});
 				container.find('.clickable, .folder-link, .line-break, .url').hammer().on('hold', function (event)
 				{
 					var linkId = $(this).attr('id').replace('link', '');
 					$.SalesPortal.LinkManager.requestLinkContextMenu(linkId, false, event.gesture.center.pageX, event.gesture.center.pageY);
 					event.gesture.stopPropagation();
 					event.gesture.preventDefault();
+				});
+				container.find('.url').hammer().on('tap', function (event)
+				{
+					event.gesture.stopPropagation();
 				});
 
 				container.find('.folder-link').on('click', function (event)
@@ -110,13 +118,16 @@
 					return false;
 				});
 
+				container.find('.url').off('click.open').on('click.open', function (event)
+				{
+					event.stopPropagation();
+				});
 				container.find('.url-internal').off('contextmenu').on('contextmenu', function (event)
 				{
 					var linkId = $(this).attr('id').replace('link', '');
 					$.SalesPortal.LinkManager.requestLinkContextMenu(linkId, false, event.clientX, event.clientY);
 					return false;
 				});
-
 				if (!$.SalesPortal.Content.isEOBrowser())
 				{
 					container.find('.url-external').off('contextmenu').on('contextmenu', function (event)

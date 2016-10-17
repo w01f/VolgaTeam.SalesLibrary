@@ -106,6 +106,7 @@
 					$defaultPage = $library->getPageById($pageId);
 				if (!isset($defaultPage))
 					$defaultPage = $library->pages[0];
+				$defaultPage->loadData();
 
 				$userId = UserIdentity::getCurrentUserId();
 				$tabPageExisted = UserTabRecord::isUserTabExists($userId, $library->id);
@@ -129,6 +130,7 @@
 			$library = $libraryManager->getLibraryById($pageRecord->id_library);
 			$pageModel = new LibraryPage($library);
 			$pageModel->load($pageRecord);
+			$pageModel->loadData();
 			$this->renderPartial('pageContent', array('page' => $pageModel));
 		}
 		//------Mobile Site API-----------------------------------------------

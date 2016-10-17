@@ -59,10 +59,30 @@
 			unset($this->folders);
 			$this->folders = array();
 			$minFolderHeaderHeight = 0;
-			foreach (\FolderRecord::model()->findAll('id_page=?', array($this->id)) as $folderRecord)
+
+			$folderRecords = \FolderRecord::model()->model()->findAll(array('order' => 'column_order asc, row_order asc', 'condition' => 'id_page=:id_page', 'params' => array(':id_page' => $this->id)));
+			$maxColumn0Row = 0;
+			$maxColumn1Row = 0;
+			$maxColumn2Row = 0;
+			foreach ($folderRecords as $folderRecord)
 			{
 				$folder = new LibraryFolder($this);
 				$folder->load($folderRecord);
+				switch ($folderRecord->column_order)
+				{
+					case 0:
+						$folder->rowOrder = $maxColumn0Row;
+						$maxColumn0Row++;
+						break;
+					case 1:
+						$folder->rowOrder = $maxColumn1Row;
+						$maxColumn1Row++;
+						break;
+					case 2:
+						$folder->rowOrder = $maxColumn2Row;
+						$maxColumn2Row++;
+						break;
+				}
 				if ($folder->headerHeight > $minFolderHeaderHeight)
 					$minFolderHeaderHeight = $folder->headerHeight;
 				$this->folders[] = $folder;

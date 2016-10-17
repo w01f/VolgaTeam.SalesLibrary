@@ -3,8 +3,7 @@
 
 	/**
 	 * @var $page LibraryPage
-	 * */
-	$page->loadData();
+	 */
 ?>
 <div data-role="collapsibleset" data-theme="a" data-content-theme="a" data-inset="false">
 	<? foreach ($page->folders as $folder): ?>

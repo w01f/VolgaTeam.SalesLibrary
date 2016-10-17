@@ -14,7 +14,7 @@
 				gridAdjustment: 'alignCenter'
 			});
 
-			$(window).on("pagechange", function (event, data)
+			$(window).off("pagechange.group").on("pagechange.group", function (event, data)
 			{
 				if (data.toPage.prop('id') == groupPage.prop('id') && (data.prevPage == undefined || data.prevPage.prop('id') != groupPage.prop('id')))
 				{

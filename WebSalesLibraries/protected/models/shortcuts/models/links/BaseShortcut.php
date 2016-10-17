@@ -78,12 +78,18 @@
 			$queryResult = $xpath->query('//Config/' . $visualSettingsSubSection . 'Description');
 			$this->description = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : '';
 
-			$this->useIcon = false;
+			$this->useIcon = true;
+			$this->iconClass = 'default-icon';
 			$queryResult = $xpath->query('//Config/' . $visualSettingsSubSection . 'Icon');
+			if ($queryResult->length == 0)
+				$queryResult = $xpath->query('//Config/Regular/Icon');
+			if ($queryResult->length == 0)
+				$queryResult = $xpath->query('//Config/Icon');
 			if ($queryResult->length > 0)
 			{
 				$iconValue = trim($queryResult->item(0)->nodeValue);
-				$this->useIcon = strpos($iconValue, '.png') === false;
+				if (strpos($iconValue, '.png') !== false)
+					$this->useIcon = false;
 				if ($this->useIcon)
 				{
 					$this->iconClass = $iconValue;

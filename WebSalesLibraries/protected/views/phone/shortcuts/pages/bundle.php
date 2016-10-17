@@ -1,26 +1,18 @@
 <? /** @var $shortcut BundleShortcut */ ?>
-<? if (Yii::app()->browser->isMobile() && !($this->browser == Browser::BROWSER_IPHONE || $this->browser == Browser::BROWSER_ANDROID_MOBILE)): ?>
-	<ul>
-		<? foreach ($shortcut->links as $link): ?>
-			<li class="cbp-item">
-				<a class="shortcuts-link" href="<? echo $link->getSourceLink(); ?>" data-ajax="false" target="_blank">
-					<img class="logo" src="<? echo $link->imageContent ?>" alt="" width="100%">
-					<div class="service-data">
-						<? echo $link->getMenuItemData(); ?>
-					</div>
-				</a>
-			</li>
-		<? endforeach; ?>
-	</ul>
-<? else: ?>
-	<div class="ui-grid-solo">
-		<? foreach ($shortcut->links as $link): ?>
-			<a class="ui-block-a shortcuts-link" href="<? echo $link->getSourceLink(); ?>" target="_blank">
-				<img src="<? echo $link->imageContent; ?>">
-				<div class="service-data">
-					<? echo $link->getMenuItemData(); ?>
-				</div>
-			</a>
-		<? endforeach; ?>
-	</div>
-<?endif; ?>
+<div class="cbp-l-grid-masonry">
+	<? foreach ($shortcut->links as $link): ?>
+		<a class="cbp-item shortcuts-link" href="<? echo $link->getSourceLink(); ?>" data-ajax="false" target="_blank">
+			<div class="cbp-caption">
+				<? if ($link->useIcon == true): ?>
+					<i class="logo <? echo $link->iconClass; ?>"></i>
+				<? elseif ($link->useIcon != true && isset($link->imageContent)): ?>
+					<img class="logo" src="<? echo $link->imageContent; ?>" alt=""/>
+				<? endif; ?>
+				<p class="title"><? echo $link->headerTitle; ?></p>
+			</div>
+			<div class="service-data">
+				<? echo $link->getMenuItemData(); ?>
+			</div>
+		</a>
+	<? endforeach; ?>
+</div>

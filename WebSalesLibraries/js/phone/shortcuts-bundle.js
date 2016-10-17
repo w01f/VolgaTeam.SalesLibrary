@@ -1,7 +1,7 @@
 (function ($)
 {
 	window.BaseUrl = window.BaseUrl || '';
-	$.SalesPortal = $.SalesPortal || { };
+	$.SalesPortal = $.SalesPortal || {};
 	$.SalesPortal.ShortcutsBundle = function (data)
 	{
 		var shortcutData = data;
@@ -9,36 +9,39 @@
 
 		this.init = function ()
 		{
-			$.mobile.pageContainer.pagecontainer("change", "#shortcut-link-page-" + shortcutData.options.linkId, {
-				transition: "slidefade"
-			});
-
-			if (contentContainer.find('ul').length > 0)
+			$(window).off("pagechange.bundle").on("pagechange.bundle", function ()
 			{
-				try
+				if (contentContainer.find('.cbp-l-grid-masonry').length > 0)
 				{
-					contentContainer.cubeportfolio({
-						gridAdjustment: 'alignCenter',
-						caption: ''
-					});
-					initPageContent();
-				}
-				catch (err)
-				{
-					contentContainer.cubeportfolio('destroy', function ()
+					try
 					{
 						contentContainer.cubeportfolio({
 							gridAdjustment: 'alignCenter',
 							caption: ''
 						});
 						initPageContent();
-					});
+					}
+					catch (err)
+					{
+						contentContainer.cubeportfolio('destroy', function ()
+						{
+							contentContainer.cubeportfolio({
+								gridAdjustment: 'alignCenter',
+								caption: ''
+							});
+							initPageContent();
+						});
+					}
 				}
-			}
-			else
-			{
-				initPageContent();
-			}
+				else
+				{
+					initPageContent();
+				}
+			});
+
+			$.mobile.pageContainer.pagecontainer("change", "#shortcut-link-page-" + shortcutData.options.linkId, {
+				transition: "slidefade"
+			});
 
 			$('.logout-button').off('click').on('click', function (e)
 			{
