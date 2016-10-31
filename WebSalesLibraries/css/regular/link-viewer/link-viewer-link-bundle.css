@@ -1,0 +1,119 @@
+.bundle-header-container
+{
+    height: 32px;
+    padding-left: 10px;
+}
+
+.bundle-header-container .bundle-header
+{
+    text-align: left;
+    color: #acacac;
+    font-weight: 500;
+    font-size: 1.5em;
+    padding-bottom: 30px;
+}
+
+.bundle-container
+{
+    width: 950px;
+}
+
+.bundle-container .link-viewer-container
+{
+    padding-left: 10px;
+    width: 100%;
+    vertical-align: top;
+    height: 505px;
+}
+
+.bundle-container .bundle-items-list
+{
+    vertical-align: top;
+}
+
+.bundle-container .bundle-items-list ul
+{
+    overflow-y: auto;
+    overflow-x: hidden;
+    width: 150px;
+    height: 565px;
+}
+
+.bundle-container .bundle-items-list li
+{
+    float: none;
+    text-align: center;
+}
+
+.bundle-container .bundle-items-list li a
+{
+    outline: none;
+    padding-bottom: 30px;
+}
+
+.bundle-container .bundle-items-list li a:focus
+{
+    background: inherit;
+}
+
+.bundle-container .bundle-items-list li a.selected,
+.bundle-container .bundle-items-list li a.selected:hover,
+.bundle-container .bundle-items-list li a.selected:focus
+{
+    background-color: #c6e2ff;
+}
+
+.bundle-container .bundle-items-list li .item-title
+{
+    text-align: center;
+    font-size: 0.9em;
+    color: #acacac;
+}
+
+.bundle-container .item-info .header
+{
+    font-size: 2.2em;
+    color: #acacac;
+    border-bottom: 1px solid #acacac;
+}
+
+.bundle-container .item-info .body
+{
+    overflow: auto;
+    padding-top: 40px;
+    height: 470px;
+}
+
+.bundle-container .item-info .table
+{
+    display: inline-table;
+    border-collapse: collapse
+}
+
+.bundle-container .item-info .table .row
+{
+    display: table-row;
+}
+
+.bundle-container .item-info .table .row::before
+{
+    content: inherit;
+}
+
+.bundle-container .item-info .table .row > div
+{
+    display: table-cell;
+    border: 1px solid #000;
+}
+
+.bundle-container .item-info .footer
+{
+    margin-top: 40px;
+}
+
+.bundle-container .item-info .footer .title
+{
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 10px;
+}

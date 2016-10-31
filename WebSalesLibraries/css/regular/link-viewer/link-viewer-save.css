@@ -1,15 +1,29 @@
+#tab-above-header-save .file-logo
+{
+	height: 48px;
+}
+
+#tab-above-header-save .file-name
+{
+	color: #c6c6c6;
+	width: 100%;
+}
+
+.link-viewer .action-container
+{
+	margin-top: 50px;
+}
+
+.link-viewer .action-container .row
+{
+	margin-bottom: 50px;
+}
+
 .link-viewer .action-container .action
 {
-	margin-bottom: 10px;
 }
 
 .link-viewer .action-container .action-logo
 {
-	height: 64px;
-}
-
-.link-viewer .action-container .action-text
-{
-	line-height: 64px;
-	margin-left: 10px;
+	height: 96px;
 }

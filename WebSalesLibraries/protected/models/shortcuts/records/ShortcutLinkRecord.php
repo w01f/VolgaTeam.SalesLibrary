@@ -100,6 +100,8 @@
 					return new SearchLinkShortcut($this, $isPhone);
 				case 'gbookmark':
 					return new GroupBookmarkShortcut($this, $isPhone);
+				case 'supergroup':
+					return new SuperGroupShortcut($this, $isPhone);
 				case 'gridbundle':
 				case 'carouselbundle':
 					if (!$isPhone)

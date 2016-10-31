@@ -5,7 +5,7 @@ CREATE PROCEDURE sp_get_file_activity_report(in start_date datetime,in end_date 
       l.file_name as file_name,
       l.file_name as file_link,
       l.id_preview as file_detail,
-      case when l.format='folder' or l.format='other' then 'other' else l.file_extension end as file_extension,
+      case when l.original_format='folder' or l.original_format='other' then 'other' else l.file_extension end as file_extension,
       count(slink.id_link) as action_count,
       lib.name as lib_name,
       g.name as group_name

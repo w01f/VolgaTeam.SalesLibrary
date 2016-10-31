@@ -34,6 +34,7 @@
 
 		this.show = function ()
 		{
+			$.fancybox.close();
 			var content = buildDialogContent();
 			$.fancybox({
 				content: content,

@@ -92,21 +92,4 @@
 
 			$this->galleryEnabled = count($this->pagesInPng) > 0;
 		}
-
-		/**
-		 * @return array
-		 */
-		public function getFullScreenGalleryImages()
-		{
-			$galleryLinks = array();
-			$originalImages = $this->galleryPagesInPng;
-			for ($i = 0; $i < count($originalImages); $i++)
-			{
-				$galleryLink = array('image' => $originalImages[$i]->href,
-					'title' => $originalImages[$i]->title,
-					'thumb' => $this->thumbnails[$i]->link);
-				$galleryLinks[] = $galleryLink;
-			}
-			return $galleryLinks;
-		}
 	}

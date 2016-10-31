@@ -191,6 +191,11 @@
 	width: 34%;
 }
 
+#content .wallbin-container .page-container .column-header-container img
+{
+	max-width: 100%;
+}
+
 #content .wallbin-container .page-container .column-widget
 {
 	vertical-align: middle;

@@ -124,6 +124,11 @@
 			{
 				$.SalesPortal.QBuilder.PageList.emailPage();
 			});
+
+			shortcutActionsContainer.find('.qbuilder-qsite-delete-all-links').off('click.action').on('click.action', function ()
+			{
+				$.SalesPortal.QBuilder.PageList.selectedPage.deleteAllLinks();
+			});
 		};
 
 		var updateContentSize = function ()

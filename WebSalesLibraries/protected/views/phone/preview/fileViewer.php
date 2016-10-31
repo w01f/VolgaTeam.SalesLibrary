@@ -28,7 +28,7 @@
 				<ul data-role="listview">
 					<? foreach ($data->dialogActions as $action): ?>
 						<li class="action">
-							<span class="action-text"><? echo $action->shortText; ?></span>
+							<span class="action-text"><? echo $action->text; ?></span>
 							<div class="service-data">
 								<div class="tag"><? echo $action->tag; ?></div>
 							</div>

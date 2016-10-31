@@ -10,7 +10,8 @@ CREATE TABLE IF NOT EXISTS `tbl_link` (
   `file_extension` varchar(8) NOT NULL,
   `file_date` datetime NULL,
   `file_size` int(11) NULL,
-  `format` varchar(256) NOT NULL,
+  `original_format` varchar(256) NOT NULL,
+  `search_format` varchar(256) NOT NULL,
   `order` int(11) NOT NULL,
   `type` int(11) NOT NULL,
   `widget_type` tinyint(1) NOT NULL,
@@ -32,6 +33,7 @@ CREATE TABLE IF NOT EXISTS `tbl_link` (
   KEY `id_folder` (`id_folder`),
   KEY `id_library` (`id_library`),
   KEY `is_restricted` (`is_restricted`),
-  KEY `format` (`format`),
+  KEY `original_format` (`original_format`),
+  KEY `search_format` (`search_format`),
   FULLTEXT KEY `content` (`name`,`file_name`,`tags`,`content`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1;

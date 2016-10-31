@@ -60,7 +60,7 @@
 			$this->folders = array();
 			$minFolderHeaderHeight = 0;
 
-			$folderRecords = \FolderRecord::model()->model()->findAll(array('order' => 'column_order asc, row_order asc', 'condition' => 'id_page=:id_page', 'params' => array(':id_page' => $this->id)));
+			$folderRecords = \FolderRecord::model()->model()->findAll(array('order' => 'column_order asc, row_order asc, name asc', 'condition' => 'id_page=:id_page', 'params' => array(':id_page' => $this->id)));
 			$maxColumn0Row = 0;
 			$maxColumn1Row = 0;
 			$maxColumn2Row = 0;

@@ -7,7 +7,12 @@
 .banner-image
 {
     display: table-cell;
-    max-width: none;
+    max-width: 100%;
+}
+
+.banner-image img
+{
+    max-width: 100%;
 }
 
 .banner-image-top

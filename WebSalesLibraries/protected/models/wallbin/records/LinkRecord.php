@@ -13,7 +13,8 @@
 	 * @property mixed file_extension
 	 * @property mixed file_date
 	 * @property mixed file_size
-	 * @property mixed format
+	 * @property mixed original_format
+	 * @property mixed search_format
 	 * @property mixed order
 	 * @property mixed type
 	 * @property int widget_type
@@ -86,7 +87,11 @@
 				$linkRecord->file_extension = $link['fileExtension'];
 				$linkRecord->file_date = date(Yii::app()->params['mysqlDateFormat'], strtotime($link['fileDate']));
 				$linkRecord->file_size = $link['fileSize'];
-				$linkRecord->format = $link['originalFormat'];
+				$linkRecord->original_format = $link['originalFormat'];
+				if (array_key_exists('searchFormat', $link))
+					$linkRecord->search_format = $link['searchFormat'];
+				else
+					$linkRecord->search_format = $link['originalFormat'];
 				$linkRecord->order = $link['order'];
 				$linkRecord->type = $link['type'];
 				$linkRecord->widget_type = $link['widgetType'];

@@ -89,7 +89,7 @@
 					</div>
 					<div class="form-group">
 						<div class="checkbox">
-							<label> <input type="checkbox" id="add-page-show-links-as-url" class="log-action" value="">Display
+							<label> <input type="checkbox" id="add-page-show-links-as-url" class="log-action" value="" checked="checked">Display
 								all Links as
 								<span class="text-primary"><u>Blue Hyperlinks</u></span></label>
 						</div>

@@ -6,14 +6,12 @@
 <div class="link-viewer<? if ($data->config->enableLogging): ?> logger-form<? endif; ?>" data-log-group="Link"
      data-log-action="Preview Activity">
 	<div class="row tab-above-header" id="tab-above-header-save">
-		<div class="col col-xs-10 text-left">
-			<span class="header-text">URL: <? echo $data->url; ?></span>
-		</div>
-		<? if ($data->totalViews > 0): ?>
-			<div class="col col-xs-2 text-right">
-				<span class="header-text">Views: <? echo $data->totalViews; ?></span>
+		<div class="col col-xs-12 text-left">
+			<div class="text-label">
+				<img class="text-item file-logo" src="<? echo $data->fileLogo;?>" style="height: 48px;">
+				<span class="text-item file-name"><? echo $data->fileName;?></span>
 			</div>
-		<? endif; ?>
+		</div>
 	</div>
 	<? if ($data->config->allowEmail): ?>
 		<div class="row tab-above-header" id="tab-above-header-email-public">

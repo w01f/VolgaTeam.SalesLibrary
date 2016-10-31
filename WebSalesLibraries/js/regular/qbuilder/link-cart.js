@@ -19,6 +19,10 @@
 			{
 				clear();
 			});
+			$('#link-cart-add-new-page').off('click.link-cart').on('click.link-cart', function ()
+			{
+				addNewPageWithLinks();
+			});
 			$('#link-cart-add-all').off('click.link-cart').on('click.link-cart', function ()
 			{
 				addAllLinksToPage();
@@ -101,8 +105,19 @@
 						description: succesDescription,
 						buttons: [
 							{
-								tag: 'ok',
-								title: 'OK',
+								tag: 'open_qbuilder',
+								title: 'Open QuickSites',
+								width: 150,
+								clickHandler: function ()
+								{
+									modalDialog.close();
+									$.SalesPortal.ShortcutsManager.openStaticShortcutByType('qbuilder');
+								}
+							},
+							{
+								tag: 'close',
+								title: 'Return to Site',
+								width: 150,
 								clickHandler: function ()
 								{
 									modalDialog.close();
@@ -144,8 +159,19 @@
 						description: 'Links were added to Link Cart',
 						buttons: [
 							{
-								tag: 'ok',
-								title: 'OK',
+								tag: 'open_qbuilder',
+								title: 'Open QuickSites',
+								width: 150,
+								clickHandler: function ()
+								{
+									modalDialog.close();
+									$.SalesPortal.ShortcutsManager.openStaticShortcutByType('qbuilder');
+								}
+							},
+							{
+								tag: 'close',
+								title: 'Return to Site',
+								width: 150,
 								clickHandler: function ()
 								{
 									modalDialog.close();
@@ -270,6 +296,12 @@
 				});
 				modalDialog.show();
 			}
+		};
+
+		var addNewPageWithLinks = function(){
+			$.SalesPortal.QBuilder.PageList.addPage({
+				populateFromLinkCart: true
+			});
 		};
 
 		var addAllLinksToPage = function ()

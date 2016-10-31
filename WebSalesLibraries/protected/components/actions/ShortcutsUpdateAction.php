@@ -12,7 +12,7 @@
 			ShortcutGroupRecord::clearData();
 			ShortcutLinkRecord::clearData();
 
-			$rootFolderPath = ShortcutGroupRecord::getShortcutsRoot();
+			$rootFolderPath = ShortcutsManager::getShortcutsRoot();
 			if (file_exists($rootFolderPath))
 			{
 				/** @var $rootFolder DirectoryIterator[] */

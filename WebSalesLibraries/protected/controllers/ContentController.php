@@ -1,4 +1,5 @@
 <?php
+
 	/**
 	 * Class ContentController
 	 */
@@ -30,6 +31,14 @@
 						'InternalLinkSettings' => 'InternalLinkSettings',
 						'ExcelLinkSettings' => 'ExcelLinkSettings',
 						'QPageLinkSettings' => 'QPageLinkSettings',
+						'LinkBundleLinkSettings' => 'LinkBundleLinkSettings',
+						'BaseLinkBundleItem' => 'BaseLinkBundleItem',
+						'LibraryLinkBundleItem' => 'LibraryLinkBundleItem',
+						'UrlLinkBundleItem' => 'UrlLinkBundleItem',
+						'LinkBundleInfoItem' => 'LinkBundleInfoItem',
+						'LinkBundleStrategyItem' => 'LinkBundleStrategyItem',
+						'LinkBundleRevenueItem' => 'LinkBundleRevenueItem',
+						'LinkBundleRevenueInfoItem' => 'LinkBundleRevenueInfoItem',
 						'LineBreak' => 'LineBreak',
 						'LinkCategory' => 'LinkCategory',
 						'LinkSuperFilter' => 'LinkSuperFilter',
@@ -120,6 +129,60 @@
 		 * @soap
 		 */
 		public function mockQPageLinkSettings($settings)
+		{
+
+		}
+
+		/**
+		 * @param LinkBundleLinkSettings $settings
+		 * @soap
+		 */
+		public function mockLinkBundleLinkSettings($settings)
+		{
+
+		}
+
+		/**
+		 * @param LibraryLinkBundleItem $item
+		 * @soap
+		 */
+		public function mockLibraryLinkBundleItem($item)
+		{
+
+		}
+
+		/**
+		 * @param UrlLinkBundleItem $item
+		 * @soap
+		 */
+		public function mockUrlLinkBundleItem($item)
+		{
+
+		}
+
+		/**
+		 * @param LinkBundleInfoItem $item
+		 * @soap
+		 */
+		public function mockLinkBundleInfoItem($item)
+		{
+
+		}
+
+		/**
+		 * @param LinkBundleStrategyItem $item
+		 * @soap
+		 */
+		public function mockLinkBundleStrategyItem($item)
+		{
+
+		}
+
+		/**
+		 * @param LinkBundleRevenueItem $item
+		 * @soap
+		 */
+		public function mockLinkBundleRevenueItem($item)
 		{
 
 		}

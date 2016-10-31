@@ -23,6 +23,8 @@
 			$this->viewerFormat = 'internal';
 			$this->contentView = 'internalLinkViewer';
 
+			$this->fileName = $link->fileName;
+
 			/** @var  $linkSettings InternalLinkSettings */
 			$linkSettings = $link->extendedProperties;
 
@@ -50,14 +52,6 @@
 				{
 					$libraryPageRecord = (object)$libraryPageRecord;
 					$this->pageId = $libraryPageRecord->id;
-
-					if(!$this->forcePreview)
-					{
-						$savedSelectedPageIdTag = sprintf('SelectedLibraryPageId-%s', $library->id);
-						$cookie = new CHttpCookie($savedSelectedPageIdTag, $this->pageId);
-						$cookie->expire = time() + (60 * 60 * 24 * 7);
-						Yii::app()->request->cookies[$savedSelectedPageIdTag] = $cookie;
-					}
 				}
 
 				if (isset($linkName) && isset($windowName))
@@ -76,6 +70,16 @@
 						$linkRecord = (object)$linkRecord;
 						$this->libraryLinkId = $linkRecord->id;
 					}
+				}
+				else
+					$this->forcePreview = false;
+
+				if(!$this->forcePreview)
+				{
+					$savedSelectedPageIdTag = sprintf('SelectedLibraryPageId-%s', $library->id);
+					$cookie = new CHttpCookie($savedSelectedPageIdTag, $this->pageId);
+					$cookie->expire = time() + (60 * 60 * 24 * 7);
+					Yii::app()->request->cookies[$savedSelectedPageIdTag] = $cookie;
 				}
 			}
 		}

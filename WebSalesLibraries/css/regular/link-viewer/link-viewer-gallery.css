@@ -1,7 +1,6 @@
 .link-viewer .preview-gallery
 {
-	padding-top: 15px;
-	padding-bottom: 15px;
+	margin-top: 15px;
 }
 
 .link-viewer .preview-gallery .nav-image-button
@@ -38,14 +37,15 @@
 	background: #A7C3E0;
 }
 
-.link-viewer .gallery-control-buttons .text-button,
-.link-viewer .gallery-control-buttons .text-label,
-.link-viewer .gallery-control-buttons .bootstrap-select
+.link-viewer .gallery-control-buttons
 {
-	margin-top: 20px;
+    margin-top: 15px;
 }
 
-.link-viewer .gallery-control-buttons .text-label
+.link-viewer .gallery-control-buttons .dropdown-button,
+.link-viewer .gallery-control-buttons .image-button,
+.link-viewer .gallery-control-buttons .text-label,
+.link-viewer .gallery-control-buttons .text-button
 {
-	line-height: 40px;
+    height: 64px;
 }

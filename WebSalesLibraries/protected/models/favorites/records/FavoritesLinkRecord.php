@@ -90,7 +90,7 @@
 							lib.name as lib_name,
 							' . $dateField . ',
 							(select (round(avg(lr.value)*2)/2) as value from tbl_link_rate lr where lr.id_link=link.id) as rate,
-							link.format,
+							link.original_format as format,
 							link.settings as extended_properties,
 							glcat.tag as tag,
 							(select sum(aggr.link_views) from

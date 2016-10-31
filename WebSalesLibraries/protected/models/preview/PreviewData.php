@@ -13,7 +13,11 @@
 		public $url;
 		public $linkTitle;
 
+		public $fileName;
+		public $fileLogo;
+
 		public $quickLinkUrl;
+		public $quickLinkLogo;
 		public $quickLinkTitle;
 
 		/**
@@ -47,8 +51,25 @@
 			$this->tags = $link->getTagsString();
 			$this->url = str_replace('SalesLibraries/SalesLibraries', 'SalesLibraries', $link->fileLink);
 
+			$this->fileLogo = sprintf('%s/images/preview/actions/file-logo-unknown.png?%s', Yii::app()->getBaseUrl(true), Yii::app()->params['version']);
+
 			$this->quickLinkUrl = isset($link->extendedProperties->quickLinkUrl) ? $link->extendedProperties->quickLinkUrl : null;
-			$this->quickLinkTitle = isset($link->extendedProperties->quickLinkTitle) ? $link->extendedProperties->quickLinkTitle : null;
+			$this->quickLinkTitle = 'view '.strtolower($link->extendedProperties->quickLinkTitle);
+			switch ($link->extendedProperties->quickLinkTitle)
+			{
+				case "Info":
+					$this->quickLinkLogo = sprintf('%s/images/preview/gallery/quick-link-info.png?%s', Yii::app()->getBaseUrl(true), Yii::app()->params['version']);
+					break;
+				case "HTML5":
+					$this->quickLinkLogo = sprintf('%s/images/preview/gallery/quick-link-html5.png?%s', Yii::app()->getBaseUrl(true), Yii::app()->params['version']);
+					break;
+				case "Link":
+					$this->quickLinkLogo = sprintf('%s/images/preview/gallery/quick-link-link.png?%s', Yii::app()->getBaseUrl(true), Yii::app()->params['version']);
+					break;
+				case "Resources":
+					$this->quickLinkLogo = sprintf('%s/images/preview/gallery/quick-link-resources.png?%s', Yii::app()->getBaseUrl(true), Yii::app()->params['version']);
+					break;
+			}
 
 			$userId = UserIdentity::getCurrentUserId();
 			$this->rateData = LinkRateRecord::getRateData($link->id, $userId);
@@ -73,8 +94,7 @@
 			{
 				$action = new PreviewAction();
 				$action->tag = 'quicksite';
-				$action->text = 'Add this file to a QUICKSITE...';
-				$action->shortText = 'Add to a QUICKSITE';
+				$action->text = 'Add to a QUICKSITE';
 				$action->logo = sprintf('%s/images/preview/actions/quicksite.png?%s', $imageUrlPrefix, Yii::app()->params['version']);
 				$this->dialogActions[] = $action;
 			}
@@ -83,8 +103,7 @@
 			{
 				$action = new PreviewAction();
 				$action->tag = 'favorites';
-				$action->text = 'Save a Copy of this file to your FAVORITES page...';
-				$action->shortText = 'Add to Favorites';
+				$action->text = 'Add to Favorites';
 				$action->logo = sprintf('%s/images/preview/actions/favorites.png?%s', $imageUrlPrefix, Yii::app()->params['version']);
 				$this->dialogActions[] = $action;
 			}
@@ -148,6 +167,9 @@
 					break;
 				case 'line break':
 					$previewData = new LineBreakPreviewData($link);
+					break;
+				case 'link bundle':
+					$previewData = new LinkBundlePreviewData($link);
 					break;
 				default:
 					if ($link->isFolder)

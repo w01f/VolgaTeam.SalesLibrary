@@ -41,7 +41,7 @@
 			$baseUrl = Yii::app()->getBaseUrl(true);
 			$noCatsCustomImagePath = $linkRecord->source_path . DIRECTORY_SEPARATOR . 'no_cats.png';
 			if (isset($noCatsCustomImagePath) && @getimagesize($noCatsCustomImagePath))
-				$this->conditionNotMatchLogoPath = $baseUrl . str_replace('\\', '/', str_replace(ShortcutGroupRecord::getShortcutsRoot(), '', $noCatsCustomImagePath)) . '?' . $linkRecord->id_group . $linkRecord->id;
+				$this->conditionNotMatchLogoPath = $baseUrl . str_replace('\\', '/', str_replace(ShortcutsManager::getShortcutsRoot(), '', $noCatsCustomImagePath)) . '?' . $linkRecord->id_group . $linkRecord->id;
 			else
 				$this->conditionNotMatchLogoPath = $baseUrl . '/images/shortcuts/no_cats.png' . '?' . $linkRecord->id_group . $linkRecord->id;
 

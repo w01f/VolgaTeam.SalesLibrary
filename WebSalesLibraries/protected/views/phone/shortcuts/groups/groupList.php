@@ -1,5 +1,5 @@
 <?
-	$menuGroups = ShortcutGroupRecord::getAvailableGroups($this->isPhone);
+	$menuGroups = ShortcutsManager::getAvailableGroups($this->isPhone);
 ?>
 <? foreach ($menuGroups as $group): ?>
 	<? if ($group->enabled == true): ?>

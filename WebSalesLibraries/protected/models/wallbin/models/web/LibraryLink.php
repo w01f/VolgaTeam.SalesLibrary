@@ -18,10 +18,11 @@
 		public $fileDate;
 		public $fileSize;
 		public $originalFormat;
+		public $searchFormat;
 		public $order;
 		public $type;
 		/**
-		 * @var \BaseLinkSettings|\VideoLinkSettings|\HyperLinkSettings|\DocumentLinkSettings|\PowerPointLinkSettings|\AppLinkSettings|\InternalLinkSettings|\QPageLinkSettings
+		 * @var \BaseLinkSettings|\VideoLinkSettings|\HyperLinkSettings|\DocumentLinkSettings|\PowerPointLinkSettings|\AppLinkSettings|\InternalLinkSettings|\QPageLinkSettings|\LinkBundleLinkSettings
 		 */
 		public $extendedProperties;
 		/**
@@ -91,8 +92,8 @@
 			$this->widgetType = $linkRecord->widget_type;
 			$this->widget = $linkRecord->widget;
 			$this->isDead = $linkRecord->is_dead;
-
-			$this->originalFormat = $linkRecord->format;
+			$this->originalFormat = $linkRecord->original_format;
+			$this->searchFormat = $linkRecord->search_format;
 			$this->extendedProperties = \BaseLinkSettings::createByLink($linkRecord);
 
 			$lineBreakRecord = \LineBreakRecord::model()->findByPk($linkRecord->id_line_break);

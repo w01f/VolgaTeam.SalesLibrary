@@ -6,7 +6,6 @@
 	 */
 	class LanPreviewData extends PreviewData
 	{
-		public $fileName;
 		public $isEOBrowser;
 
 		/**

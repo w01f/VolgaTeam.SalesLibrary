@@ -22,4 +22,4 @@ from tbl_link l
              group by cat.id_link) lcat on lcat.id_link = l.id
   left join tbl_preview prv on prv.id_container = l.id_preview and prv.type = 'mp4'
   left join tbl_preview thumb on thumb.id_container = l.id_preview and (thumb.type = 'mp4 thumb' or thumb.type = 'thumb')
-where l.format in ('video', 'mp4', 'wmv');
+where l.original_format in ('video', 'mp4', 'wmv');

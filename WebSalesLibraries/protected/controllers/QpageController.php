@@ -123,7 +123,7 @@
 			{
 				$this->pageTitle = $page->title;
 				if ($protected)
-					$menuGroups = ShortcutGroupRecord::getAvailableGroups($this->isPhone);
+					$menuGroups = ShortcutsManager::getAvailableGroups($this->isPhone);
 				else
 					$menuGroups = array();
 				$this->render('index', array('menuGroups' => $menuGroups, 'page' => $page));

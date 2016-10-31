@@ -6,8 +6,6 @@
 	 */
 	class UrlPreviewData extends PreviewData
 	{
-		public $fileName;
-
 		/**
 		 * @param $link LibraryLink
 		 */
@@ -53,17 +51,15 @@
 			$imageUrlPrefix = Yii::app()->getBaseUrl(true);
 			$action = new PreviewAction();
 			$action->tag = 'open';
-			$action->text = sprintf('OPEN this %s in a new browser window...', $linkTitle);
-			$action->shortText = sprintf('OPEN this %s<br>%s', $linkTitle, $this->url);
-			$action->logo = sprintf('%s/images/preview/actions/open-url.png?%s', $imageUrlPrefix, Yii::app()->params['version']);
+			$action->text = sprintf('OPEN this %s<br>%s', $linkTitle, $this->url);
+			$action->logo = sprintf('%s/images/preview/actions/download.png?%s', $imageUrlPrefix, Yii::app()->params['version']);
 			$this->dialogActions[] = $action;
 
 			if ($this->config->allowAddToQuickSite)
 			{
 				$action = new PreviewAction();
 				$action->tag = 'quicksite';
-				$action->text = sprintf('Save this %s to a Quick Site...', $linkTitle);
-				$action->shortText = sprintf('Email a Link to this %s', $linkTitle);
+				$action->text = sprintf('Email a Link to this %s', $linkTitle);
 				$action->logo = sprintf('%s/images/preview/actions/quicksite.png?%s', $imageUrlPrefix, Yii::app()->params['version']);
 				$this->dialogActions[] = $action;
 			}
@@ -72,8 +68,7 @@
 			{
 				$action = new PreviewAction();
 				$action->tag = 'favorites';
-				$action->text = sprintf('Add this %s to my Favorites...', $this->linkTitle);
-				$action->shortText = sprintf('Add to Favorites', $this->linkTitle);
+				$action->text = sprintf('Add to Favorites', $this->linkTitle);
 				$action->logo = sprintf('%s/images/preview/actions/favorites.png?%s', $imageUrlPrefix, Yii::app()->params['version']);
 				$this->dialogActions[] = $action;
 			}

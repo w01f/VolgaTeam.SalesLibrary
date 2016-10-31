@@ -4,45 +4,31 @@
 	 */
 
 	$imageUrlPrefix = Yii::app()->getBaseUrl(true);
-
-	$headerColumnSizeDivider = 0;
-	if ($data->config->allowAddToFavorites)
-		$headerColumnSizeDivider++;
-	if ($data->config->allowAddToQuickSite)
-		$headerColumnSizeDivider++;
-	if ($headerColumnSizeDivider > 0)
-		$headerColumnSize = 12 / $headerColumnSizeDivider;
-	else
-		$headerColumnSize = 0;
-	$enablePreviewHeader = $headerColumnSize > 0;
 ?>
 <div class="link-viewer<? if ($data->config->enableLogging): ?> logger-form<? endif; ?>" data-log-group="Link"
      data-log-action="Preview Activity">
-	<? if ($enablePreviewHeader): ?>
-		<div class="row row-buttons tab-above-header" id="tab-above-header-preview">
-			<? if ($data->config->allowAddToQuickSite): ?>
-				<div class="col col-xs-<? echo $headerColumnSize; ?> text-center" data-log-action="Add to QS">
-					<div class="text-button log-action add-quicksite">
-						<span>Quicksite</span>
-					</div>
-				</div>
-			<? endif; ?>
-			<? if ($data->config->allowAddToFavorites): ?>
-				<div class="col col-xs-<? echo $headerColumnSize; ?> text-center" data-log-action="Add to Favorites">
-					<div class="text-button log-action add-favorites">
-						<span>Favorites</span>
-					</div>
-				</div>
-			<? endif; ?>
+	<div class="row row-buttons tab-above-header" id="tab-above-header-preview">
+		<div class="col col-xs-10">
 		</div>
-	<? else: ?>
-		<div class="row tab-above-header" id="tab-above-header-preview">
-			<span class="header-text">YouTube Link...</span>
+		<div class="col col-xs-1 text-center">
+			<div class="image-button log-action open-video-modal" data-log-action="Preview Modal" title="Zoom">
+				<img src="<? echo sprintf('%s/images/preview/gallery/button-video-modal.png', $imageUrlPrefix); ?>">
+			</div>
 		</div>
-	<? endif; ?>
+		<div class="col col-xs-1 text-center">
+			<div class="image-button log-action open-video-fullscreen" data-log-action="Preview Fullscreen" title="view fullscreen">
+				<img src="<? echo sprintf('%s/images/preview/gallery/button-video-fullscreen.png', $imageUrlPrefix); ?>">
+			</div>
+		</div>
+	</div>
 	<? if ($data->config->allowSave): ?>
 		<div class="row tab-above-header" id="tab-above-header-save">
-			<span class="header-text">YouTube Link...</span>
+			<div class="col col-xs-12 text-left">
+				<div class="text-label">
+					<img class="text-item file-logo" src="<? echo $data->fileLogo;?>" style="height: 48px;">
+					<span class="text-item file-name"><? echo $data->fileName;?></span>
+				</div>
+			</div>
 		</div>
 	<? endif; ?>
 	<? if ($data->config->allowEmail): ?>
@@ -91,40 +77,49 @@
 						</div>
 					<? endif; ?>
 				</div>
-				<? if ($data->totalViews > 0): ?>
-					<div class="col col-xs-2 <? echo !$data->config->enableRating ? 'col-xs-offset-2 ' : ''; ?>text-center">
-						<div class="text-label">Views: <? echo $data->totalViews; ?></div>
-					</div>
-				<? endif; ?>
+				<div class="col col-xs-2"></div>
 				<?
-					$offsetApplied = false;
-					$initialButtonsOffset = 4;
-					if ($data->totalViews == 0)
-						$initialButtonsOffset+=2;
+					$footerGapSize = 4;
 					if (!isset($data->quickLinkUrl))
-						$initialButtonsOffset++;
-
+						$footerGapSize++;
+					if (!$data->config->allowAddToFavorites)
+						$footerGapSize++;
+					if (!$data->config->allowAddToQuickSite)
+						$footerGapSize++;
 				?>
+				<div class="col col-xs-<? echo $footerGapSize; ?>"></div>
 				<? if (isset($data->quickLinkUrl)): ?>
-					<div
-						class="col col-xs-1 <? echo !$offsetApplied ? ('col-xs-offset-' . $initialButtonsOffset . ' ') : '';
-							$offsetApplied = true; ?>text-center">
-						<div class="text-button log-action open-quick-link" data-log-action="Open Quick Link">
-							<span><? echo $data->quickLinkTitle; ?></span>
+					<div class="col col-xs-1 text-center">
+						<div class="image-button log-action open-quick-link" data-log-action="Open Quick Link"
+						     title="<? echo $data->quickLinkTitle; ?>">
+							<span class="text-item">
+								<img src="<? echo $data->quickLinkLogo; ?>">
+							</span>
 						</div>
 					</div>
 				<? endif; ?>
-				<div class="col col-xs-1 <? echo !$offsetApplied ? ('col-xs-offset-' . $initialButtonsOffset . ' ') : '';
-					$offsetApplied = true; ?>text-center">
-					<div class="text-button log-action open-video-modal" data-log-action="Preview Modal">
-						<span>75%</span>
+				<? if ($data->config->allowAddToFavorites): ?>
+					<div class="col col-xs-1 text-center">
+						<div class="image-button log-action add-favorites" data-log-action="Add to Favorites"
+						     title="save favorite">
+							<span class="text-item">
+								<img
+									src="<? echo sprintf('%s/images/preview/gallery/button-favorites.png', $imageUrlPrefix); ?>">
+							</span>
+						</div>
 					</div>
-				</div>
-				<div class="col col-xs-1 text-center">
-					<div class="text-button log-action open-fullscreen" data-log-action="Preview Fullscreen">
-						<span>YouTube</span>
+				<? endif; ?>
+				<? if ($data->config->allowAddToQuickSite): ?>
+					<div class="col col-xs-1 text-center">
+						<div class="image-button log-action add-quicksite" data-log-action="Add to QS"
+						     title="add to quickSITE">
+							<span class="text-item">
+								<img
+									src="<? echo sprintf('%s/images/preview/gallery/button-quicksite.png', $imageUrlPrefix); ?>">
+							</span>
+						</div>
 					</div>
-				</div>
+				<? endif; ?>
 			</div>
 		</div>
 		<? if ($data->config->allowSave): ?>

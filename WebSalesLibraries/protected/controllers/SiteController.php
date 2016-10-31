@@ -11,7 +11,7 @@
 
 		public function actionIndex()
 		{
-			$menuGroups = ShortcutGroupRecord::getAvailableGroups($this->isPhone);
+			$menuGroups = ShortcutsManager::getAvailableGroups($this->isPhone);
 			$this->pageTitle = Yii::app()->name;
 
 			if ($this->isPhone)
@@ -40,6 +40,10 @@
 										case 'page':
 										case 'window':
 										case 'search':
+										case 'searchapp':
+										case 'qbuilder':
+										case 'favorites':
+										case 'quizzes':
 											$defaultShortcut = $shortcut;
 											break;
 										default:
@@ -57,7 +61,7 @@
 
 		public function actionGetMenu()
 		{
-			$menuGroups = ShortcutGroupRecord::getAvailableGroups($this->isPhone);
+			$menuGroups = ShortcutsManager::getAvailableGroups($this->isPhone);
 			$this->renderPartial('../menu/menuPopupContent', array('menuGroups' => $menuGroups));
 		}
 

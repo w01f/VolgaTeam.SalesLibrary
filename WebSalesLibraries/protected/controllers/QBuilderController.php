@@ -20,23 +20,37 @@
 
 		public function actionAddPageDialog()
 		{
-			$clone = Yii::app()->request->getPost('clone');
-			$clone = isset($clone) && $clone == 'true';
-			$this->renderPartial('addPage', array('clone' => $clone), false, true);
+			$isCloning = Yii::app()->request->getPost('isCloning');
+			$isCloning = isset($isCloning) && $isCloning == 'true';
+			$this->renderPartial('addPage', array('isCloning' => $isCloning), false, true);
 		}
 
 		public function actionAddPage()
 		{
 			$title = Yii::app()->request->getPost('title');
 			$createDate = Yii::app()->request->getPost('createDate');
-			$clonePageId = Yii::app()->request->getPost('clonePageId');
+			$templatePageId = Yii::app()->request->getPost('templatePageId');
+			$populateFromLinkCart = Yii::app()->request->getPost('populateFromLinkCart');
+			$populateFromLinkCart = isset($populateFromLinkCart) && $populateFromLinkCart == 'true';
+
 			$userId = UserIdentity::getCurrentUserId();
 			if (isset($title) && $title != '' && isset($createDate))
 			{
-				if (isset($clonePageId))
-					echo QPageRecord::clonePage($userId, $title, $createDate, $clonePageId);
+				if (isset($templatePageId))
+					echo QPageRecord::clonePage($userId, $title, $createDate, $templatePageId);
 				else
-					echo QPageRecord::addPage($userId, $title, $createDate);
+				{
+					$linkCartIds = array();
+					if($populateFromLinkCart)
+					{
+						/** @var UserLinkCartRecord[] $linkRecords */
+						$linkRecords = UserLinkCartRecord::model()->findAll('id_user=?', array($userId));
+						foreach ($linkRecords as $linkRecord)
+							$linkCartIds[] = $linkRecord->id;
+					}
+
+					echo QPageRecord::addPage($userId, $title, $createDate, $linkCartIds);
+				}
 			}
 			Yii::app()->end();
 		}
@@ -244,6 +258,14 @@
 				$pageRecord = QPageRecord::model()->findByPk($pageId);
 				$pageRecord->rebuildLinkList(-1);
 			}
+			Yii::app()->end();
+		}
+
+		public function actionDeleteAllLinksFromPage()
+		{
+			$pageId = Yii::app()->request->getPost('pageId');
+			if (isset($pageId))
+				QPageLinkRecord::model()->deleteAll('id_page=?', array($pageId));
 			Yii::app()->end();
 		}
 

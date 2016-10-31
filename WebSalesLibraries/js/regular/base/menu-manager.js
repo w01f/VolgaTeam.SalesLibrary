@@ -4,6 +4,8 @@
 	$.SalesPortal = $.SalesPortal || {};
 	var MenuManager = function ()
 	{
+		var that = this;
+
 		this.init = function ()
 		{
 			var menuContainer = $('#main-menu');
@@ -33,39 +35,7 @@
 			setTimeout(checkIfShortcutsUpdated, 60000);
 		};
 
-		var checkIfShortcutsUpdated = function ()
-		{
-			$.ajax({
-				type: "POST",
-				url: window.BaseUrl + "shortcuts/checkShortcutsUpdated",
-				data: {
-					menuDate: $('#om-nav').data('last-update')
-				},
-				beforeSend: function ()
-				{
-				},
-				complete: function ()
-				{
-				},
-				success: function (result)
-				{
-					if (result.needUpdate)
-					{
-						$('#om-nav').data('last-update', result.lastUpdate);
-						updateShortcutsMenu();
-						$.SalesPortal.ShortcutsManager.updateCurrentShortcut();
-					}
-					setTimeout(checkIfShortcutsUpdated, 60000);
-				},
-				error: function ()
-				{
-				},
-				async: true,
-				dataType: 'json'
-			});
-		};
-
-		var updateShortcutsMenu = function ()
+		this.updateShortcutsMenu = function (afterUpdateCallback)
 		{
 			var menuContainer = $('#main-menu');
 			var menuItemsContainer = $('#om-nav');
@@ -87,12 +57,46 @@
 				{
 					menuItemsContainer.html(result);
 					$.SalesPortal.ShortcutsManager.assignShortcutItemHandlers(menuContainer.find('.om-itemholder .om-itemlist'));
+					if (afterUpdateCallback != undefined)
+						afterUpdateCallback();
 				},
 				error: function ()
 				{
 				},
 				async: true,
 				dataType: 'html'
+			});
+		};
+
+		var checkIfShortcutsUpdated = function ()
+		{
+			$.ajax({
+				type: "POST",
+				url: window.BaseUrl + "shortcuts/checkShortcutsUpdated",
+				data: {
+					menuDate: $('#om-nav').data('last-update')
+				},
+				beforeSend: function ()
+				{
+				},
+				complete: function ()
+				{
+				},
+				success: function (result)
+				{
+					if (result.needUpdate)
+					{
+						$('#om-nav').data('last-update', result.lastUpdate);
+						that.updateShortcutsMenu();
+						$.SalesPortal.ShortcutsManager.updateCurrentShortcut();
+					}
+					setTimeout(checkIfShortcutsUpdated, 60000);
+				},
+				error: function ()
+				{
+				},
+				async: true,
+				dataType: 'json'
 			});
 		};
 	};

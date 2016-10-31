@@ -15,6 +15,7 @@
 		this.fileSize = undefined;
 		this.quickLinkUrl = undefined;
 		this.rateData = undefined;
+		this.totalViews = undefined;
 
 		for (var prop in source)
 			if (source.hasOwnProperty(prop))
@@ -42,6 +43,7 @@
 		this.pagesInPng = undefined;
 		this.galleryPagesInPng = undefined;
 		this.rateData = undefined;
+		this.totalViews = undefined;
 		this.forcePreview = undefined;
 		this.slideWidth = undefined;
 		this.slideHeight = undefined;
@@ -72,6 +74,7 @@
 		this.forcePreview = undefined;
 
 		this.rateData = undefined;
+		this.totalViews = undefined;
 
 		for (var prop in source)
 			if (source.hasOwnProperty(prop))
@@ -89,6 +92,7 @@
 		this.quickLinkUrl = undefined;
 		this.youTubeId = undefined;
 		this.rateData = undefined;
+		this.totalViews = undefined;
 
 		for (var prop in source)
 			if (source.hasOwnProperty(prop))
@@ -105,6 +109,7 @@
 		this.fileName = undefined;
 		this.isEOBrowser = undefined;
 		this.rateData = undefined;
+		this.totalViews = undefined;
 
 		for (var prop in source)
 			if (source.hasOwnProperty(prop))
@@ -121,6 +126,7 @@
 		this.fileName = undefined;
 		this.secondPath = undefined;
 		this.rateData = undefined;
+		this.totalViews = undefined;
 
 		for (var prop in source)
 			if (source.hasOwnProperty(prop))
@@ -141,6 +147,7 @@
 		this.forcePreview = undefined;
 		this.runLinkPreview = undefined;
 		this.rateData = undefined;
+		this.totalViews = undefined;
 
 		for (var prop in source)
 			if (source.hasOwnProperty(prop))
@@ -160,6 +167,7 @@
 		this.forceDownload = undefined;
 		this.forceOpen = undefined;
 		this.rateData = undefined;
+		this.totalViews = undefined;
 
 		for (var prop in source)
 			if (source.hasOwnProperty(prop))

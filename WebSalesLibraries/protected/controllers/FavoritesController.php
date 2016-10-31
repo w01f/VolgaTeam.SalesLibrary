@@ -19,6 +19,12 @@
 			$folderName = Yii::app()->request->getPost('folderName');
 			if (isset($folderName) && $folderName == '')
 				$folderName = null;
+
+			$selectedFolderTagName = 'favorites-selected-folder-name';
+			$cookie = new CHttpCookie($selectedFolderTagName, $folderName);
+			$cookie->expire = time() + (60 * 60 * 24 * 7);
+			Yii::app()->request->cookies[$selectedFolderTagName] = $cookie;
+
 			if (isset($userId) && isset($linkId) && isset($linkName))
 			{
 				$linkRecord = LinkRecord::getLinkById($linkId);

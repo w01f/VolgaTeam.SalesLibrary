@@ -1,9 +1,10 @@
 <?
 	/**
 	 * @var $rootFolder FavoritesFolder
-	 * */
+	 * @var $selectedFolderId string
+	 */
 ?>
-<table id="favorites-container">
+<table id="favorites-container" style="table-layout:fixed;">
 	<tr>
 		<td id="favorites-panel-folders">
 			<div>
@@ -19,7 +20,14 @@
 							</a>
 						<?endif; ?>
 						<div class="service-data"></div>
-						<? if (isset($rootFolder->childFolders)) echo $this->renderFile(Yii::getPathOfAlias('application.views.regular.favorites') . '/favoritesFolders.php', array('folders' => $rootFolder->childFolders, 'selectedFolderId' => isset($selectedFolderId) ? $selectedFolderId : null), true); ?>
+						<?
+							if (isset($rootFolder->childFolders))
+								echo $this->renderFile(Yii::getPathOfAlias('application.views.regular.favorites') . '/favoritesFolders.php',
+									array(
+										'folders' => $rootFolder->childFolders,
+										'selectedFolderId' => isset($selectedFolderId) ? $selectedFolderId : null),
+									true);
+						?>
 					</li>
 				</ul>
 			</div>

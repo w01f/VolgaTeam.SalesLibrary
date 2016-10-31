@@ -36,7 +36,8 @@
 			switch ($type)
 			{
 				case 5:
-					$fileInfo->name = $relativePath;
+					$fileInfo->name = str_replace('\\', '', $relativePath);
+					$fileInfo->path = $parentLibrary->storagePath . str_replace('\\', '/', $relativePath);
 					break;
 				case 6:
 				case 16:

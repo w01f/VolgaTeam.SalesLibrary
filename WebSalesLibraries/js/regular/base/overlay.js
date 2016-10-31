@@ -23,7 +23,7 @@
 
 		this.hide = function ()
 		{
-			if (activeOverlays == 1)
+			if (activeOverlays <= 1)
 			{
 				$('#fancybox-loading').remove();
 				$('#content-overlay').fadeOut(0);

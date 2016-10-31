@@ -62,10 +62,11 @@
 		public static function formatUrl($url)
 		{
 			return htmlspecialchars(
-				str_replace('&', '%26',
-					str_replace('&amp;', '%26',
-						str_replace(' ', '%20',
-							str_replace('\\', '/', $url)))));
+				str_replace('#', '%23',
+					str_replace('&', '%26',
+						str_replace('&amp;', '%26',
+							str_replace(' ', '%20',
+								str_replace('\\', '/', $url))))));
 		}
 
 		/**

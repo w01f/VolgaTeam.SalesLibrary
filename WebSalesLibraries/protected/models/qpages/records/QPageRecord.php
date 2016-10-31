@@ -116,7 +116,7 @@
 		public function getPageLinks()
 		{
 			$linkRecords = Yii::app()->db->createCommand()
-				->select("concat('id',qpl.id,'---link',l.id) as id, l.id_library, l.name, l.file_name, l.format, l.type")
+				->select("concat('id',qpl.id,'---link',l.id) as id, l.id_library, l.name, l.file_name, l.original_format as format, l.type")
 				->from('tbl_link l')
 				->join('tbl_qpage_link qpl', 'qpl.id_link = l.id')
 				->where("qpl.id_page='" . $this->id . "'")
@@ -153,8 +153,8 @@
 		}
 
 		/**
-		 * @param $linkInCartId
-		 * @param $order
+		 * @param $linkInCartId string
+		 * @param $order int
 		 */
 		public function addLink($linkInCartId, $order)
 		{
@@ -207,9 +207,10 @@
 		 * @param $ownerId int
 		 * @param $pageTitle string
 		 * @param $createDate string
+		 * @param $linkCartIds string[]
 		 * @return string
 		 */
-		public static function addPage($ownerId, $pageTitle, $createDate)
+		public static function addPage($ownerId, $pageTitle, $createDate, $linkCartIds)
 		{
 			$pageRecord = new QPageRecord();
 			$pageRecord->id = uniqid();
@@ -217,8 +218,14 @@
 			$pageRecord->list_order = self::getMaxPageIndex() + 1;
 			$pageRecord->title = $pageTitle;
 			$pageRecord->create_date = date(Yii::app()->params['mysqlDateFormat'], strtotime($createDate));
+			$pageRecord->show_links_as_url = true;
 			$pageRecord->is_email = false;
 			$pageRecord->save();
+
+			if (!empty($linkCartIds))
+				foreach ($linkCartIds as $linkCartId)
+					$pageRecord->addLink($linkCartId, -1);
+
 			return $pageRecord->id;
 		}
 

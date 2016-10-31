@@ -61,6 +61,11 @@
 		 */
 		public $originalFormat;
 		/**
+		 * @var string
+		 * @soap
+		 */
+		public $searchFormat;
+		/**
 		 * @var int
 		 * @soap
 		 */

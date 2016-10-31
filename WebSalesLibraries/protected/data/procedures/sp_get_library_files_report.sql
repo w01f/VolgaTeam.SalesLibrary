@@ -5,11 +5,11 @@ CREATE PROCEDURE sp_get_library_files_report()
     lib.last_update as library_date,
     l.name as link_name,
     l.file_name as file_name,
-    case when l.format='folder' or l.format='other' then 'other' else l.file_extension end as file_type,
-    l.format as file_format,
+    case when l.original_format='folder' or l.original_format='other' then 'other' else l.file_extension end as file_type,
+    l.original_format as file_format,
     l.file_date as file_date
   from tbl_library lib
     join tbl_link l on l.id_library = lib.id
     left join tbl_preview p on p.id_container = l.id_preview
   where l.type in (0,1,3,4,10,11,12,999)
-  group by lib.id, l.id, l.name, l.format;
+  group by lib.id, l.id, l.name, l.original_format;

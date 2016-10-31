@@ -2,6 +2,7 @@
 .link-viewer
 {
 	width: 750px;
+	height: 505px;
 }
 
 .link-viewer .row
@@ -13,17 +14,6 @@
 .link-viewer .row .col
 {
 	padding: 0;
-}
-
-.link-viewer > .tab-content
-{
-	height: 410px;
-}
-
-.link-viewer .file-size,
-.link-viewer .page-size
-{
-	color: #c6c6c6;
 }
 
 #link-viewer-body-tabs
@@ -39,6 +29,7 @@
 .link-viewer .tab-above-header
 {
 	display: none;
+	height: 48px;
 }
 
 #tab-above-header-preview .header-text,
@@ -46,11 +37,9 @@
 #tab-above-header-email-protected .header-text,
 #tab-above-header-email-public .header-text
 {
-	line-height: 34px;
 	font-size: 1.5em;
 	white-space: nowrap;
 	text-overflow: ellipsis;
-	display: inline-block;
 	width: 100%;
 	overflow: hidden;
 }
@@ -76,10 +65,19 @@
 
 /*Buttons------------------------------------*/
 .link-viewer .image-button,
+.link-viewer .dropdown-button,
+.link-viewer .text-label,
+.link-viewer .text-button
+{
+	height: 48px;
+	display: table;
+	width: 100%;
+}
+
+.link-viewer .image-button,
 .link-viewer .text-button
 {
 	cursor: pointer;
-	padding: 4px;
 }
 
 .link-viewer .image-button:hover,
@@ -94,20 +92,55 @@
 	background: none;
 }
 
+.link-viewer .text-button.disabled
+{
+	color: #c6c6c6;
+}
+
+.link-viewer .image-button .text-item,
+.link-viewer .text-button .text-item,
+.link-viewer .text-label .text-item
+{
+	display: table-cell;
+	vertical-align: middle;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	padding-right: 5px;
+}
+
+.link-viewer .image-button
+{
+	padding: 0;
+}
+
 .link-viewer .image-button.disabled
 {
 	cursor: default;
 	opacity: 0.4;
 }
 
-.link-viewer .text-button.disabled
+.link-viewer .image-button img
 {
-	color: #c6c6c6;
+	height: 48px;
 }
 
-.link-viewer .row-buttons .text-button
+.link-viewer .dropdown-button .dropdown-container
 {
-	line-height: 26px;
+	display: table-cell;
+	vertical-align: middle;
+}
+/*------------------------------------*/
+/*Fancy Box Title-----------------------*/
+.fancybox-title.link-viewer-title
+{
+    right: inherit;
+	left: 0;
+	width: 100%;
 }
 
+.fancybox-title.link-viewer-title .child
+{
+    margin-right: inherit;
+	width: 100%;
+}
 /*------------------------------------*/

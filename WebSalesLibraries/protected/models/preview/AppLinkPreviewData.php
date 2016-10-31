@@ -6,7 +6,6 @@
 	 */
 	class AppLinkPreviewData extends PreviewData
 	{
-		public $fileName;
 		public $secondPath;
 
 		/**

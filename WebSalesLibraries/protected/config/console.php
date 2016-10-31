@@ -34,6 +34,8 @@ return array(
 	    'application.models.statistic.models.*',
 	    'application.models.statistic.records.*',
 	    'application.models.wallbin.models.web.*',
+	    'application.models.wallbin.models.web.link_settings.*',
+	    'application.models.wallbin.models.web.bundle_settings.*',
 	    'application.models.wallbin.models.cadmin.*',
 	    'application.models.wallbin.records.*',
 	    'application.models.search.*',

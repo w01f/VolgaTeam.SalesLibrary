@@ -29,7 +29,7 @@
 		/**
 		 * @param $userId
 		 * @param $folderName
-		 * @return CActiveRecord|FavoritesFolderRecord
+		 * @return FavoritesFolderRecord
 		 */
 		public static function getFolderByName($userId, $folderName)
 		{

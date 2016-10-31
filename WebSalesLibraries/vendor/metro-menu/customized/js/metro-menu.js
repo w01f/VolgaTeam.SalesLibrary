@@ -68,7 +68,7 @@ $(document).ready(function ()
 		var openingLevel = $("#" + el.attr('data-opening-id'));
 
 
-		openingLevel.css('display', 'table')
+		openingLevel.css('display', 'table');
 		setTimeout(function ()
 		{
 
@@ -81,6 +81,6 @@ $(document).ready(function ()
 	}
 
 
-})
+});
 
 

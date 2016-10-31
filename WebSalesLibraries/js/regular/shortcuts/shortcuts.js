@@ -59,10 +59,16 @@
 					$.SalesPortal.LinkManager.playVideo($.parseJSON(data.find('.links').text()));
 					break;
 				case 'libraryfile':
-					$.SalesPortal.LinkManager.requestViewDialog(data.find('.library-link-id').html(), false);
+					$.SalesPortal.LinkManager.requestViewDialog({
+						linkId: data.find('.library-link-id').html(),
+						isQuickSite: false
+					});
 					break;
 				case 'user_preferences':
 					new $.SalesPortal.ShortcutsUserPreferences().init();
+					break;
+				case 'supergroup':
+					new $.SalesPortal.ShortcutsSuperGroup().init(data.find('.super-group-tag').text());
 					break;
 				case 'gbookmark':
 					menu.find('div[data-groupid="group-' + data.find('.bookmark-id').text() + '"]').trigger('click');

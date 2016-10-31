@@ -29,7 +29,7 @@
 					->join('tbl_folder f', 'f.id = l.id_folder')
 					->join('tbl_page p', 'p.id = f.id_page')
 					->join('tbl_library lb', 'lb.id = p.id_library')
-					->where("l.file_name='" . $fileName . "' and f.name='" . $windowName . "' and p.name='" . $pageName . "' and lb.name='" . $libraryName . "'")
+					->where("(l.file_name='" . $fileName . "' or l.name='" . $fileName . "') and f.name='" . $windowName . "' and p.name='" . $pageName . "' and lb.name='" . $libraryName . "'")
 					->queryRow();
 				if ($linkRecord != false)
 				{

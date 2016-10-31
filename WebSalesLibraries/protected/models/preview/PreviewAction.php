@@ -6,6 +6,5 @@
 	{
 		public $tag;
 		public $text;
-		public $shortText;
 		public $logo;
 	}

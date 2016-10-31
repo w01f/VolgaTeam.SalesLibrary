@@ -53,7 +53,10 @@
 					{
 						var linkId = $(this).attr('id').replace('link', '');
 						recordActivity(linkId);
-						$.SalesPortal.LinkManager.requestViewDialog(linkId, true);
+						$.SalesPortal.LinkManager.requestViewDialog({
+							linkId: linkId,
+							isQuickSite: true
+						});
 					}
 					event.gesture.stopPropagation();
 					event.gesture.preventDefault();
@@ -103,7 +106,10 @@
 					{
 						var linkId = $(this).attr('id').replace('link', '');
 						recordActivity(linkId);
-						$.SalesPortal.LinkManager.requestViewDialog(linkId, true);
+						$.SalesPortal.LinkManager.requestViewDialog({
+							linkId: linkId,
+							isQuickSite: true
+						});
 					}
 					event.stopPropagation();
 					event.preventDefault();

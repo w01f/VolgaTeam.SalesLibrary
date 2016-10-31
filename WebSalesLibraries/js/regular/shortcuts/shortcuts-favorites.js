@@ -35,7 +35,7 @@
 				favoritesData.actions
 			);
 
-			loadFolders(null);
+			loadFolders(favoritesData.options.selectedFolderId);
 
 			initActionButtons();
 
@@ -249,34 +249,6 @@
 				complete: function ()
 				{
 					$.SalesPortal.Overlay.hide();
-//					var linkGridBody = favoriteLinksPanel.find(".links-grid-body");
-//					linkGridBody.find(".delete-link").off('click').on('click', function (e)
-//					{
-//						e.stopPropagation();
-//						e.preventDefault();
-//						var linkId = $(this).parent().parent().find('.link-id-column').html();
-//						deleteLink(linkId, folderId);
-//					});
-//					var isScrolling = false;
-//					linkGridBody.find(".delete-link").off('touchstart').off('touchmove').off('touchend').on('touchstart',
-//						function ()
-//						{
-//							isScrolling = false;
-//						}).on('touchmove',function ()
-//						{
-//							isScrolling = true;
-//						}).on('touchend', function (e)
-//						{
-//							e.stopPropagation();
-//							e.preventDefault();
-//
-//							if (!isScrolling)
-//							{
-//								var linkId = $(this).parent().parent().find('.link-id-column').html();
-//								deleteLink(linkId, folderId);
-//							}
-//							return false;
-//						});
 				},
 				success: function (result)
 				{
@@ -327,14 +299,17 @@
 		{
 			$.SalesPortal.Content.updateSize();
 
-			var height = $.SalesPortal.Content.getContentObject().height();
-			$('#favorites-panel-folders').find('> div').css({
-				'height': (height - 3) + 'px'
+			var content = $.SalesPortal.Content.getContentObject();
+
+			var favoritesContainer = $('#favorites-container');
+			var shortcutsSearchContainerWidth = content.width() - 17;
+			favoritesContainer.css({
+				'width': shortcutsSearchContainerWidth + 'px'
 			});
 
-			var favoriteLinks = $('#favorites-panel-links');
-			favoriteLinks.css({
-				'height': height + 'px'
+			var height = content.height();
+			$('#favorites-panel-folders').find('> div').css({
+				'height': (height - 3) + 'px'
 			});
 
 			dataTable.updateSize();

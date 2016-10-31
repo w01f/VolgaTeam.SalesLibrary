@@ -58,7 +58,6 @@
 
 			$this->order = $linkRecord->order;
 
-
 			$visualSettingsSubSection = $isPhone ? 'Mobile' : 'Regular';
 			$queryResult = $xpath->query('//Config/' . $visualSettingsSubSection);
 			if ($queryResult->length == 0)

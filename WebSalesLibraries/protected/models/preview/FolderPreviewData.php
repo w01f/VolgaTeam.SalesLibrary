@@ -12,6 +12,7 @@
 		public function __construct($link)
 		{
 			parent::__construct($link);
+			$this->fileName = $link->fileName;
 		}
 
 		public function initDialogActions()
@@ -22,6 +23,13 @@
 		public function initContextActions()
 		{
 			$this->contextActions = array();
+			if ($this->config->allowDownload)
+			{
+				$action = new PreviewAction();
+				$action->tag = 'zip';
+				$action->text = 'Zip & Download';
+				$this->contextActions[] = $action;
+			}
 			if ($this->config->allowAddToQuickSite)
 			{
 				$action = new PreviewAction();

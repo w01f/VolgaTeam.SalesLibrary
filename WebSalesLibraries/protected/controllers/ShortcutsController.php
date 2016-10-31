@@ -22,7 +22,7 @@
 
 			$this->pageTitle = sprintf('%s - %s', $shortcut->title, $shortcut->description);
 
-			$menuGroups = ShortcutGroupRecord::getAvailableGroups($this->isPhone);
+			$menuGroups = ShortcutsManager::getAvailableGroups($this->isPhone);
 
 			$this->render('pages/singlePage', array('menuGroups' => $menuGroups, 'shortcut' => $shortcut));
 		}
@@ -39,7 +39,7 @@
 		{
 			$shortcutType = Yii::app()->request->getPost('shortcutType');
 			/** @var  $shortcutRecord ShortcutLinkRecord */
-			$shortcutRecord = ShortcutLinkRecord::model()->find('type=?',array($shortcutType));
+			$shortcutRecord = ShortcutLinkRecord::model()->find('type=?', array($shortcutType));
 			/** @var  $shortcut BaseShortcut */
 			$shortcut = $shortcutRecord->getModel($this->isPhone);
 			echo $shortcut->getMenuItemData();
@@ -84,6 +84,10 @@
 					case 'page':
 					case 'window':
 					case 'search':
+					case 'searchapp':
+					case 'qbuilder':
+					case 'favorites':
+					case 'quizzes':
 						$defaultShortcutTagName = 'default-shortcut';
 						Yii::app()->session[$defaultShortcutTagName] = sprintf('%s', $shortcutRecord->getUniqueId());
 						break;
@@ -174,7 +178,7 @@
 		public function actionCheckShortcutsUpdated()
 		{
 			$menuDate = strtotime(Yii::app()->request->getPost('menuDate'));
-			$actualDate = ShortcutGroupRecord::getLastUpdate();
+			$actualDate = ShortcutsManager::getLastUpdate();
 			echo CJSON::encode(array(
 				'needUpdate' => $menuDate < $actualDate,
 				'lastUpdate' => date(Yii::app()->params['sourceDateFormat'])
@@ -244,7 +248,7 @@
 					$category = (object)$arrayItem;
 					$searchBar->conditions->categories[] = $category;
 				}
-				$menuGroups = ShortcutGroupRecord::getAvailableGroups($this->isPhone);
+				$menuGroups = ShortcutsManager::getAvailableGroups($this->isPhone);
 				$this->render('searchBar/searchBarResultsPage', array('menuGroups' => $menuGroups, 'searchBar' => $searchBar, 'bundleId' => $bundleId));
 			}
 		}
@@ -307,6 +311,12 @@
 		{
 			$this->renderPartial('searchBar/confirmation');
 		}
+
+		public function actionSetSuperGroup()
+		{
+			$superGroupTag = Yii::app()->request->getPost('superGroupTag');
+			ShortcutsManager::setSelectedSuperGroup($superGroupTag);
+		}
 		//------Regular Site API-------------------------------------------
 
 		//------Mobile Site API-----------------------------------------------
@@ -317,7 +327,7 @@
 			$groupRecord = ShortcutGroupRecord::model()->findByPk($groupId);
 			if (isset($groupRecord))
 			{
-				$groupModel = new ShortcutGroup($groupRecord, $this->isPhone);
+				$groupModel = new ShortcutGroup($groupRecord, null, $this->isPhone);
 				$this->render('groups/groupContent', array('group' => $groupModel));
 			}
 			else

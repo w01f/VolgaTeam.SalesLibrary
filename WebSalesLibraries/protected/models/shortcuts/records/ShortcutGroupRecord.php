@@ -50,37 +50,4 @@
 		{
 			self::model()->deleteAll();
 		}
-
-		public static function getLastUpdate()
-		{
-			return strtotime(Yii::app()->db->createCommand()
-				->select('max(date_modify)')
-				->from('tbl_shortcut_group')
-				->queryScalar());
-		}
-
-		/**
-	 	* @return string
-	 	*/
-		public static function getShortcutsRoot()
-		{
-			return Yii::app()->params['appRoot'] . DIRECTORY_SEPARATOR . Yii::app()->params['librariesRoot'] . DIRECTORY_SEPARATOR . 'Shortcuts';
-		}
-
-		/**
-		 * @param $isPhone boolean
-		 * @return ShortcutGroup[]
-		 */
-		public static function getAvailableGroups($isPhone)
-		{
-			$groups = array();
-			$groupRecords = self::model()->findAll(array('order' => '`order`'));
-			foreach ($groupRecords as $groupRecord)
-			{
-				$group = new ShortcutGroup($groupRecord, $isPhone);
-				if ($group->isAccessGranted)
-					$groups[] = $group;
-			}
-			return $groups;
-		}
 	}

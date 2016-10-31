@@ -24,9 +24,8 @@
 			$imageUrlPrefix = Yii::app()->getBaseUrl(true);
 			$action = new PreviewAction();
 			$action->tag = 'play';
-			$action->text = 'Play this file...';
-			$action->shortText = 'Play this file';
-			$action->logo = sprintf('%s/images/preview/actions/download-mp3.png?%s', $imageUrlPrefix, $this->format, Yii::app()->params['version']);
+			$action->text = 'Play this file';
+			$action->logo = sprintf('%s/images/preview/actions/download.png?%s', $imageUrlPrefix, Yii::app()->params['version']);
 
 			$this->dialogActions = CMap::mergeArray(array($action), $this->dialogActions);
 		}

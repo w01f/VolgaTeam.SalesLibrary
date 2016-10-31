@@ -32,7 +32,7 @@
 		public static function getLinksByUser($userId)
 		{
 			$linkRecords = Yii::app()->db->createCommand()
-				->select("concat('cart',lk.id,'---link',l.id) as id, l.id_library, l.name, l.file_name, l.format, l.type")
+				->select("concat('cart',lk.id,'---link',l.id) as id, l.id_library, l.name, l.file_name, l.original_format as format, l.type")
 				->from('tbl_link l')
 				->join('tbl_user_link_cart lk', 'lk.id_link = l.id')
 				->where("lk.id_user=" . $userId)

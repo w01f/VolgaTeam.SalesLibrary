@@ -6,27 +6,34 @@
 	{
 		var that = this;
 
-		this.requestViewDialog = function (linkId, isQuickSite)
+		this.requestViewDialog = function (dialogData)
 		{
+			if (dialogData == undefined)
+				dialogData = {
+					linkId: undefined,
+					isQuickSite: undefined,
+					viewContainer: undefined,
+					afterViewerOpenedCallback: undefined
+				};
 			$('body').find('.mtContent').remove();
 			that.cleanupContextMenu();
 			$.ajax({
 				type: "POST",
 				url: window.BaseUrl + "preview/getViewDialog",
 				data: {
-					linkId: linkId,
-					isQuickSite: isQuickSite
+					linkId: dialogData.linkId,
+					isQuickSite: dialogData.isQuickSite
 				},
 				beforeSend: function ()
 				{
 					$.SalesPortal.Overlay.show(false);
 				},
-				complete: function ()
-				{
-					$.SalesPortal.Overlay.hide();
-				},
 				success: function (parameters)
 				{
+					$.SalesPortal.Overlay.hide();
+
+					parameters.viewContainer = dialogData.viewContainer;
+					var openedViewer = undefined;
 					if (parameters.data.config.allowPreview)
 					{
 						if (parameters.data.config.enableLogging)
@@ -40,32 +47,34 @@
 									originalFormat: parameters.format
 								}
 							});
-
 						switch (parameters.format)
 						{
 							case 'document':
-								new $.SalesPortal.DocumentViewer(parameters).show();
+								openedViewer = new $.SalesPortal.DocumentViewer(parameters).show();
 								break;
 							case 'video':
-								new $.SalesPortal.VideoViewer(parameters).show();
+								openedViewer = new $.SalesPortal.VideoViewer(parameters).show();
 								break;
 							case 'youtube':
-								new $.SalesPortal.YouTubeViewer(parameters).show();
+								openedViewer = new $.SalesPortal.YouTubeViewer(parameters).show();
 								break;
 							case 'lan':
-								new $.SalesPortal.LanViewer(parameters).show();
+								openedViewer = new $.SalesPortal.LanViewer(parameters).show();
 								break;
 							case 'app':
-								new $.SalesPortal.AppLinkViewer(parameters).show();
+								openedViewer = new $.SalesPortal.AppLinkViewer(parameters).show();
 								break;
 							case 'internal':
-								new $.SalesPortal.InternalLinkViewer(parameters).show();
+								openedViewer = new $.SalesPortal.InternalLinkViewer(parameters).show();
 								break;
 							case 'image':
-								new $.SalesPortal.ImageViewer(parameters).show();
+								openedViewer = new $.SalesPortal.ImageViewer(parameters).show();
+								break;
+							case 'link bundle':
+								openedViewer = new $.SalesPortal.LinkBundleViewer(parameters).show();
 								break;
 							default :
-								new $.SalesPortal.FileViewer(parameters).show();
+								openedViewer = new $.SalesPortal.FileViewer(parameters).show();
 								break;
 						}
 					}
@@ -89,6 +98,9 @@
 						});
 						modalDialog.show();
 					}
+
+					if (dialogData.afterViewerOpenedCallback != undefined)
+						dialogData.afterViewerOpenedCallback(openedViewer);
 				},
 				error: function ()
 				{
@@ -167,7 +179,10 @@
 									switch (tag)
 									{
 										case 'open':
-											that.requestViewDialog(linkId, isQuickSite);
+											that.requestViewDialog({
+												linkId: linkId,
+												isQuickSite: isQuickSite
+											});
 											break;
 										case 'download':
 											that.downloadFile({
@@ -181,6 +196,9 @@
 										case 'quicksite':
 											that.requestEmailDialog(linkId);
 											break;
+										case 'zip':
+											that.zipAndDownloadLink(linkId);
+											break;
 										case 'favorites':
 											that.addToFavorites(
 												parameters.data.linkId,
@@ -190,7 +208,6 @@
 											break;
 										case 'rate':
 											that.requestRateDialog(parameters.data.linkId);
-											//$.SalesPortal.QBuilder.LinkCart.addLinks([parameters.data.linkId]);
 											break;
 									}
 								});
@@ -391,6 +408,13 @@
 			var jsonData = $.toJSON(fileData);
 			var base64Data = btoa(jsonData);
 			window.location = window.BaseUrl + "preview/downloadFile?data=" + base64Data;
+		};
+
+		this.zipAndDownloadLink = function (linkId)
+		{
+			var jsonData = $.toJSON({linkId: linkId});
+			var base64Data = btoa(jsonData);
+			window.location = window.BaseUrl + "preview/zipAndDownloadLink?data=" + base64Data;
 		};
 
 		var favoritesDialogObject = [];

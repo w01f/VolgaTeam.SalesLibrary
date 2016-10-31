@@ -59,6 +59,7 @@
 						'internal' => 'Internal Link',
 						'app' => 'App Link',
 						'key' => 'Apple Keynote',
+						'link bundle' => 'Link Bundle',
 						'other' => 'Undefined file'
 					),
 				),
@@ -83,6 +84,7 @@
 				'menu' => array(
 					'BarColor' => '2C84EE',
 					'IconSeparation' => 5,
+					'SaveSuperGroup' => true
 				),
 			),
 			'components' => array(

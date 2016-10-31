@@ -362,6 +362,12 @@
 					$action->title = 'Email';
 					$action->iconClass = 'icon-email';
 					$customActions[$action->tag] = $action;
+
+					$action = new ShortcutAction('qbuilder-qsite-delete-all-links');
+					$action->order = 70;
+					$action->title = 'Delete all Links';
+					$action->iconClass = 'icon-delete';
+					$customActions[$action->tag] = $action;
 					break;
 			}
 			return $customActions;

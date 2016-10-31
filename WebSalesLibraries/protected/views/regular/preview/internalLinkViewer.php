@@ -10,6 +10,7 @@
 	$this->renderPartial('../wallbin/library', array(
 		'library' => $library,
 		'pageSelectorMode' => 'tabs',
-		'pageViewType' => 'columns'
+		'pageViewType' => 'columns',
+		'showLogo' => true
 	));
 ?>

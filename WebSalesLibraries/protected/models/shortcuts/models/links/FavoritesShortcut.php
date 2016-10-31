@@ -31,6 +31,7 @@
 			{
 				$rootFolder = FavoritesFolderRecord::getRootFolder($userId);
 				$viewParameters['rootFolder'] = $rootFolder;
+				$viewParameters['selectedFolderId'] = $this->getSelectedFolderId();
 			}
 			return $viewParameters;
 		}
@@ -50,6 +51,25 @@
 		{
 			$data = parent::getPageData();
 			$data['serviceData'] = $this->getMenuItemData();
+			$data['selectedFolderId'] = $this->getSelectedFolderId();
 			return $data;
+		}
+
+		/**
+		 * @return string
+		 */
+		private function getSelectedFolderId()
+		{
+			$selectedFolderTagName = 'favorites-selected-folder-name';
+			$selectedFolderName = isset(Yii::app()->request->cookies[$selectedFolderTagName]) ?
+				Yii::app()->request->cookies[$selectedFolderTagName]->value :
+				null;
+			if (isset($selectedFolderName))
+			{
+				$userId = UserIdentity::getCurrentUserId();
+				$selectedFolder = FavoritesFolderRecord::getFolderByName($userId, $selectedFolderName);
+				return $selectedFolder->id;
+			}
+			return null;
 		}
 	}

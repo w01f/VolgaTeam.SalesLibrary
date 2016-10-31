@@ -56,9 +56,8 @@
 			{
 				$action = new PreviewAction();
 				$action->tag = 'download';
-				$action->text = 'DOWNLOAD this file to your Desktop or Mobile Device...';
-				$action->shortText = 'DOWNLOAD this file';
-				$action->logo = sprintf('%s/images/preview/actions/download-%s.png?%s', $imageUrlPrefix, $this->format, Yii::app()->params['version']);
+				$action->text = 'DOWNLOAD this file';
+				$action->logo = sprintf('%s/images/preview/actions/download.png?%s', $imageUrlPrefix, Yii::app()->params['version']);
 				$actions[] = $action;
 			}
 
@@ -66,9 +65,8 @@
 			{
 				$action = new PreviewAction();
 				$action->tag = 'download-pdf';
-				$action->text = 'Open PDF version of this file to your Desktop or Mobile Device...';
-				$action->shortText = 'Open PDF file';
-				$action->logo = sprintf('%s/images/preview/actions/download-pdf.png?%s', $imageUrlPrefix, $this->format, Yii::app()->params['version']);
+				$action->text = 'Open PDF file';
+				$action->logo = sprintf('%s/images/preview/actions/open-pdf.png?%s', $imageUrlPrefix, Yii::app()->params['version']);
 				$actions[] = $action;
 			}
 

@@ -21,10 +21,13 @@
 				});
 			}
 
-			if(viewerData.runLinkPreview)
+			if (viewerData.runLinkPreview)
 			{
 				if (viewerData.libraryLinkId != null)
-					$.SalesPortal.LinkManager.requestViewDialog(viewerData.libraryLinkId)
+					$.SalesPortal.LinkManager.requestViewDialog({
+						linkId: viewerData.libraryLinkId,
+						isQuickSite: false
+					});
 				else
 				{
 					var modalDialog = new $.SalesPortal.ModalDialog({

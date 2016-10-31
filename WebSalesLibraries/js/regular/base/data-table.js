@@ -243,7 +243,10 @@
 				table.find('.link-file, .link-common').hammer().on('tap', function ()
 				{
 					var linkId = dataTable.api().row($(this).closest("tr")).data().id;
-					$.SalesPortal.LinkManager.requestViewDialog(linkId, false);
+					$.SalesPortal.LinkManager.requestViewDialog({
+						linkId: linkId,
+						isQuickSite: false
+					});
 				});
 
 				table.find('.link-url').hammer().on('tap', function ()
@@ -274,7 +277,10 @@
 				table.on('click', '.link-file, .link-common', function ()
 				{
 					var linkId = dataTable.api().row($(this).closest("tr")).data().id;
-					$.SalesPortal.LinkManager.requestViewDialog(linkId, false);
+					$.SalesPortal.LinkManager.requestViewDialog({
+						linkId: linkId,
+						isQuickSite: false
+					});
 				});
 
 				table.on('click', '.link-url', function ()

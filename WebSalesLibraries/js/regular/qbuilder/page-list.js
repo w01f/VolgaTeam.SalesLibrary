@@ -1,8 +1,8 @@
 (function ($)
 {
 	window.BaseUrl = window.BaseUrl || '';
-	$.SalesPortal = $.SalesPortal || { };
-	$.SalesPortal.QBuilder = $.SalesPortal.QBuilder || { };
+	$.SalesPortal = $.SalesPortal || {};
+	$.SalesPortal.QBuilder = $.SalesPortal.QBuilder || {};
 	var PageListManager = function ()
 	{
 		var that = this;
@@ -45,13 +45,15 @@
 			});
 		};
 
-		this.addPage = function (clonePageId)
+		this.addPage = function (parameters)
 		{
+			if (parameters == undefined)
+				parameters = {};
 			$.ajax({
 				type: "POST",
 				url: window.BaseUrl + "qBuilder/addPageDialog",
 				data: {
-					clone: clonePageId != undefined
+					isCloning: parameters.templatePageId != undefined
 				},
 				beforeSend: function ()
 				{
@@ -80,7 +82,8 @@
 							data: {
 								title: $('#add-page-name').val(),
 								createDate: now.toLocaleDateString() + ' ' + now.toLocaleTimeString(),
-								clonePageId: clonePageId
+								templatePageId: parameters.templatePageId,
+								populateFromLinkCart: parameters.populateFromLinkCart != undefined && parameters.populateFromLinkCart ? parameters.populateFromLinkCart : false
 							},
 							beforeSend: function ()
 							{
@@ -93,6 +96,8 @@
 							success: function (msg)
 							{
 								that.load(msg);
+								if (parameters.populateFromLinkCart != undefined && parameters.populateFromLinkCart)
+									$.SalesPortal.QBuilder.LinkCart.load();
 							},
 							error: function ()
 							{
@@ -109,7 +114,7 @@
 
 					$.fancybox({
 						content: addPageContent,
-						title: clonePageId == undefined ? "Add quickSITE" : "Clone quickSITE",
+						title: parameters.templatePageId == undefined ? "Add quickSITE" : "Clone quickSITE",
 						scrolling: 'no',
 						autoSize: true,
 						openEffect: 'none',
@@ -300,7 +305,10 @@
 			pageList.find('.link-clone').off('click.qbuilder').on('click.qbuilder', function (event)
 			{
 				event.stopPropagation();
-				that.addPage($(this).parent().find('.link-id-column').html());
+				that.addPage({
+						templatePageId: $(this).parent().find('.link-id-column').text()
+					}
+				);
 			});
 			pageList.find('.link-up').off('click.qbuilder').on('click.qbuilder', function (event)
 			{
@@ -331,7 +339,7 @@
 			$.ajax({
 				type: "POST",
 				url: window.BaseUrl + "qBuilder/deletePagesDialog",
-				data: {    },
+				data: {},
 				beforeSend: function ()
 				{
 					$.SalesPortal.Overlay.show(false);

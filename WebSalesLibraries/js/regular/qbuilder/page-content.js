@@ -55,6 +55,51 @@
 			updateEditors();
 		};
 
+		this.deleteAllLinks = function ()
+		{
+			var modalDialog = new $.SalesPortal.ModalDialog({
+				title: 'Delete All Links',
+				description: 'Are you SURE you want to delete All Links from Page?',
+				buttons: [
+					{
+						tag: 'yes',
+						title: 'Yes',
+						clickHandler: function ()
+						{
+							modalDialog.close();
+							$.ajax({
+								type: "POST",
+								url: window.BaseUrl + "qBuilder/deleteAllLinksFromPage",
+								data: {
+									pageId: that.pageId
+								},
+								beforeSend: function ()
+								{
+									$.SalesPortal.Overlay.show(false);
+								},
+								complete: function ()
+								{
+									$.SalesPortal.Overlay.hide();
+									that.loadLinks();
+								},
+								async: true,
+								dataType: 'html'
+							});
+						}
+					},
+					{
+						tag: 'no',
+						title: 'No',
+						clickHandler: function ()
+						{
+							modalDialog.close();
+						}
+					}
+				]
+			});
+			modalDialog.show();
+		};
+
 		var load = function ()
 		{
 			var pageContent = $('#page-content');
@@ -183,7 +228,7 @@
 				e.preventDefault();
 				$.SalesPortal.QBuilder.PageList.savePage(function ()
 				{
-					window.open(pageUrl);
+					window.open(pageUrl,"_blank");
 				});
 			});
 
@@ -370,7 +415,10 @@
 			{
 				var ids = $(this).parent().find('.link-id-column').html().split('---');
 				var linkId = ids[1].replace('link', '');
-				$.SalesPortal.LinkManager.requestViewDialog(linkId, true);
+				$.SalesPortal.LinkManager.requestViewDialog({
+					linkId: linkId,
+					isQuickSite: true
+				});
 			});
 
 			pageLinks.find("td.click-mobile").off('touchstart').off('touchmove').off('touchend').on('touchstart', function ()
@@ -385,7 +433,10 @@
 				{
 					var ids = $(this).parent().find('.link-id-column').html().split('---');
 					var linkId = ids[1].replace('link', '');
-					$.SalesPortal.LinkManager.requestViewDialog(linkId, true);
+					$.SalesPortal.LinkManager.requestViewDialog({
+						linkId: linkId,
+						isQuickSite: true
+					});
 				}
 				e.stopPropagation();
 				e.preventDefault();

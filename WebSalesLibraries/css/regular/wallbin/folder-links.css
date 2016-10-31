@@ -12,6 +12,11 @@
 	vertical-align: middle;
 }
 
+.folder-header-container img
+{
+	max-width: 100%;
+}
+
 .folder-widget
 {
 	vertical-align: middle;

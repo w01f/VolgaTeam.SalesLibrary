@@ -604,7 +604,7 @@
 		hideLoading: function () {
 			D.unbind('.loading');
 
-			$('#fancybox-loading').remove();
+			$.SalesPortal.Overlay.hide();
 		},
 
 		showLoading: function () {

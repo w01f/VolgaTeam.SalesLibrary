@@ -46,7 +46,10 @@
 				container.find('.clickable').hammer().on('tap', function (event)
 				{
 					var linkId = $(this).attr('id').replace('link', '');
-					$.SalesPortal.LinkManager.requestViewDialog(linkId, false);
+					$.SalesPortal.LinkManager.requestViewDialog({
+						linkId: linkId,
+						isQuickSite: false
+					});
 					event.gesture.stopPropagation();
 					event.gesture.preventDefault();
 				});
@@ -105,7 +108,10 @@
 				container.find('.clickable').off('click.open').on('click.open', function (event)
 				{
 					var linkId = $(this).attr('id').replace('link', '');
-					$.SalesPortal.LinkManager.requestViewDialog(linkId, false);
+					$.SalesPortal.LinkManager.requestViewDialog({
+						linkId: linkId,
+						isQuickSite: false
+					});
 					event.stopPropagation();
 					event.preventDefault();
 				});

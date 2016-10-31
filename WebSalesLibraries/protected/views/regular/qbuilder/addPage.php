@@ -1,8 +1,8 @@
-<? /** @var $clone boolean */ ?>
+<? /** @var $isCloning boolean */ ?>
 <table class="tool-dialog logger-form" data-log-group="QBuilder" data-log-action="QBuilder Activity">
 	<tr class="title-row">
 		<td colspan="2">
-			<legend><? echo $clone ? 'Clone quickSITE' : 'Add quickSITE' ?></legend>
+			<legend><? echo $isCloning ? 'Clone quickSITE' : 'Add quickSITE' ?></legend>
 		</td>
 	</tr>
 	<tr>

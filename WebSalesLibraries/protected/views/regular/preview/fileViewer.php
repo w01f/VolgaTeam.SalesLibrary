@@ -7,14 +7,12 @@
      data-log-action="Preview Activity">
 	<? if ($data->config->allowSave): ?>
 		<div class="row tab-above-header" id="tab-above-header-save">
-			<div class="col col-xs-10 text-left">
-				<span class="header-text">Download or Save this file…</span>
-			</div>
-			<? if ($data->totalViews > 0): ?>
-				<div class="col col-xs-2 text-right">
-					<span class="header-text">Views: <? echo $data->totalViews; ?></span>
+			<div class="col col-xs-12 text-left">
+				<div class="text-label">
+					<img class="text-item file-logo" src="<? echo $data->fileLogo;?>" style="height: 48px;">
+					<span class="text-item file-name"><? echo $data->fileName;?></span>
 				</div>
-			<? endif; ?>
+			</div>
 		</div>
 	<? endif; ?>
 	<? if ($data->config->allowEmail): ?>
@@ -28,7 +26,7 @@
 	<ul class="nav nav-tabs" role="tablist" id="link-viewer-body-tabs">
 		<? if ($data->config->allowSave): ?>
 			<li>
-				<a class="log-action" href="#link-viewer-tab-save" role="tab" data-toggle="tab">Save</a>
+				<a class="log-action" href="#link-viewer-tab-save" role="tab" data-toggle="tab">File</a>
 			</li>
 		<? endif; ?>
 		<? if ($data->config->allowEmail): ?>

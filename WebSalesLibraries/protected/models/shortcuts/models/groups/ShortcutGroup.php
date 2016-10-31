@@ -22,9 +22,10 @@
 
 		/**
 		 * @param $groupRecord ShortcutGroupRecord
+		 * @param $currentSuperGroupTag string
 		 * @param $isPhone boolean
 		 */
-		public function __construct($groupRecord, $isPhone)
+		public function __construct($groupRecord, $currentSuperGroupTag, $isPhone)
 		{
 			$groupConfig = new DOMDocument();
 			$groupConfig->loadXML($groupRecord->config);
@@ -92,50 +93,69 @@
 			}
 
 			$this->isAccessGranted = true;
-
-			$approvedUsers = array();
-			$queryResult = $xpath->query('//Config/ApprovedUsers/User');
-			foreach ($queryResult as $groupNode)
-				$approvedUsers[] = trim($groupNode->nodeValue);
-
-			$excludedUsers = array();
-			$queryResult = $xpath->query('//Config/ExcludedUsers/User');
-			foreach ($queryResult as $groupNode)
-				$excludedUsers[] = trim($groupNode->nodeValue);
-
-			$approvedGroups = array();
-			$queryResult = $xpath->query('//Config/ApprovedGroups/Group');
-			foreach ($queryResult as $groupNode)
-				$approvedGroups[] = trim($groupNode->nodeValue);
-
-			$excludedGroups = array();
-			$queryResult = $xpath->query('//Config/ExcludedGroups/Group');
-			foreach ($queryResult as $groupNode)
-				$excludedGroups[] = trim($groupNode->nodeValue);
-
-			$user = Yii::app()->user;
-			$userGroups = UserIdentity::getCurrentUserGroups();
-
-			if (isset($user) && count($excludedUsers) > 0)
-				$this->isAccessGranted &= !in_array($user->login, $excludedUsers);
-			if (isset($user) && count($excludedGroups) > 0)
-				$this->isAccessGranted &= !array_intersect($userGroups, $excludedGroups);
-
-			if ($this->isAccessGranted && (count($approvedUsers) > 0 || count($approvedGroups) > 0))
+			$queryResult = $xpath->query('//Config/SuperGroups/Tag');
+			if (isset($currentSuperGroupTag) && $queryResult->length > 0)
 			{
 				$this->isAccessGranted = false;
-				if (isset($user))
+				foreach ($queryResult as $groupNode)
 				{
-					$this->isAccessGranted |= in_array($user->login, $approvedUsers);
-					if (count($userGroups) > 0)
-						$this->isAccessGranted |= array_intersect($userGroups, $approvedGroups);
+					$superGroupTag = trim($groupNode->nodeValue);
+					if ($superGroupTag == $currentSuperGroupTag)
+					{
+						$this->isAccessGranted = true;
+						break;
+					}
 				}
 			}
 
-			$this->menuItems = array();
-			$shortcuts = $groupRecord->getTopLevelLinks($isPhone);
-			foreach ($shortcuts as $shortcut)
-				$this->menuItems[] = new MenuItem($shortcut, $this);
+			if ($this->isAccessGranted)
+			{
+				$user = Yii::app()->user;
+				$userGroups = UserIdentity::getCurrentUserGroups();
+
+				$approvedUsers = array();
+				$queryResult = $xpath->query('//Config/ApprovedUsers/User');
+				foreach ($queryResult as $groupNode)
+					$approvedUsers[] = trim($groupNode->nodeValue);
+
+				$excludedUsers = array();
+				$queryResult = $xpath->query('//Config/ExcludedUsers/User');
+				foreach ($queryResult as $groupNode)
+					$excludedUsers[] = trim($groupNode->nodeValue);
+
+				$approvedGroups = array();
+				$queryResult = $xpath->query('//Config/ApprovedGroups/Group');
+				foreach ($queryResult as $groupNode)
+					$approvedGroups[] = trim($groupNode->nodeValue);
+
+				$excludedGroups = array();
+				$queryResult = $xpath->query('//Config/ExcludedGroups/Group');
+				foreach ($queryResult as $groupNode)
+					$excludedGroups[] = trim($groupNode->nodeValue);
+
+				$this->isAccessGranted = true;
+
+				if (isset($user) && count($excludedUsers) > 0)
+					$this->isAccessGranted &= !in_array($user->login, $excludedUsers);
+				if (isset($user) && count($excludedGroups) > 0)
+					$this->isAccessGranted &= !array_intersect($userGroups, $excludedGroups);
+
+				if ($this->isAccessGranted && (count($approvedUsers) > 0 || count($approvedGroups) > 0))
+				{
+					$this->isAccessGranted = false;
+					if (isset($user))
+					{
+						$this->isAccessGranted |= in_array($user->login, $approvedUsers);
+						if (count($userGroups) > 0)
+							$this->isAccessGranted |= array_intersect($userGroups, $approvedGroups);
+					}
+				}
+
+				$this->menuItems = array();
+				$shortcuts = $groupRecord->getTopLevelLinks($isPhone);
+				foreach ($shortcuts as $shortcut)
+					$this->menuItems[] = new MenuItem($shortcut, $this);
+			}
 		}
 
 		/** @return string */
