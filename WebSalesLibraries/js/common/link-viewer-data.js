@@ -141,11 +141,7 @@
 		this.tags = undefined;
 		this.url = undefined;
 		this.fileName = undefined;
-		this.libraryId = undefined;
-		this.pageId = undefined;
-		this.libraryLinkId = undefined;
-		this.forcePreview = undefined;
-		this.runLinkPreview = undefined;
+		this.previewInfo = undefined;
 		this.rateData = undefined;
 		this.totalViews = undefined;
 

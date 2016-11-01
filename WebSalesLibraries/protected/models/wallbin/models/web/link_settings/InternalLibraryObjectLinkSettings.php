@@ -1,9 +1,14 @@
 <?
 	/**
-	 * Class InternalLinkSettings
+	 * Class InternalLibraryObjectLinkSettings
 	 */
-	class InternalLinkSettings extends BaseLinkSettings
+	class InternalLibraryObjectLinkSettings extends BaseLinkSettings
 	{
+		/**
+		 * @var int
+		 * @soap
+		 */
+		public $internalLinkType;
 		/**
 		 * @var string
 		 * @soap
@@ -24,10 +29,4 @@
 		 * @soap
 		 */
 		public $linkName;
-		/**
-		 * @var boolean
-		 * @soap
-		 */
-		public $forcePreview;
-
 	}

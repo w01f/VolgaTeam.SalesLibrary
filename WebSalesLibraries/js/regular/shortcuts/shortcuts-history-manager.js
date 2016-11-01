@@ -1,7 +1,7 @@
 (function ($)
 {
 	window.BaseUrl = window.BaseUrl || '';
-	$.SalesPortal = $.SalesPortal || { };
+	$.SalesPortal = $.SalesPortal || {};
 	var ShortcutsHistoryManager = function ()
 	{
 		this.init = function ()
@@ -22,14 +22,14 @@
 			{
 				customParameters.pushHistory = false;
 
-				var activityData = $.parseJSON(data.find('.activity-data').text());
+				var title = data != undefined ? $.parseJSON(data.find('.activity-data').text()) : undefined;
 				window.history.pushState(
 					{
 						isShortcut: true,
-						shortcutData: ('<div class="service-data">' + data.html() + '</div>'),
+						shortcutData: data != undefined ? ('<div class="service-data">' + data.html() + '</div>') : undefined,
 						customParameters: customParameters
 					},
-					activityData.title
+					title
 				)
 			}
 		};

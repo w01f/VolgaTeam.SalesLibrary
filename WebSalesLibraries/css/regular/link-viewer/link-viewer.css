@@ -56,6 +56,13 @@
 	box-sizing: content-box !important;
 }
 
+.fancybox-title .child
+{
+	font-weight: normal;
+	white-space: normal;
+	background: rgba(0, 0, 0, 1)
+}
+
 .link-viewer .vjs-poster
 {
 	width: auto;

@@ -7,47 +7,82 @@
 		var viewerData = new $.SalesPortal.InternalLinkViewerData(parameters.data);
 		this.show = function ()
 		{
-			if (!viewerData.forcePreview || !viewerData.runLinkPreview)
+			switch (viewerData.previewInfo.internalLinkType)
 			{
-				new $.SalesPortal.ShortcutsWallbin().init({
-					content: parameters.content,
-					options: {
-						headerTitle: viewerData.name,
-						headerIcon: '',
-						libraryId: viewerData.libraryId,
-						pageSelectorMode: 'tabs',
-						pageViewType: 'columns'
-					}
-				});
-			}
-
-			if (viewerData.runLinkPreview)
-			{
-				if (viewerData.libraryLinkId != null)
-					$.SalesPortal.LinkManager.requestViewDialog({
-						linkId: viewerData.libraryLinkId,
-						isQuickSite: false
+				case 1:
+					new $.SalesPortal.ShortcutsWallbin().init({
+						content: parameters.content,
+						options: {
+							headerTitle: viewerData.previewInfo.showHeaderText ? viewerData.name : '',
+							headerIcon: viewerData.previewInfo.headerIcon,
+							libraryId: viewerData.previewInfo.libraryId,
+							pageSelectorMode: viewerData.previewInfo.pageSelectorType,
+							pageViewType: viewerData.previewInfo.pageViewType
+						}
 					});
-				else
-				{
-					var modalDialog = new $.SalesPortal.ModalDialog({
-						title: '<span class="text-danger">Sorry...</span>',
-						description: 'Link not found.',
-						buttons: [
-							{
-								tag: 'close',
-								title: 'Close',
-								width: 80,
-								clickHandler: function ()
+					$.SalesPortal.ShortcutsHistory.pushState(
+						undefined,
+						{
+							pushHistory: true
+						});
+					break;
+				case 2:
+					new $.SalesPortal.ShortcutsLibraryPage().init({
+						content: parameters.content,
+						options: {
+							headerTitle: viewerData.previewInfo.showHeaderText ? viewerData.name : '',
+							headerIcon: viewerData.previewInfo.headerIcon,
+							pageViewType: viewerData.previewInfo.pageViewType
+						}
+					});
+					$.SalesPortal.ShortcutsHistory.pushState(
+						undefined,
+						{
+							pushHistory: true
+						});
+					break;
+				case 3:
+					new $.SalesPortal.ShortcutsLibraryWindow().init({
+						content: parameters.content,
+						options: {
+							headerTitle: viewerData.previewInfo.showHeaderText ? viewerData.name : '',
+							headerIcon: viewerData.previewInfo.headerIcon,
+							windowViewType: viewerData.previewInfo.windowViewType
+						}
+					});
+					$.SalesPortal.ShortcutsHistory.pushState(
+						undefined,
+						{
+							pushHistory: true
+						});
+					break;
+				case 4:
+					if (viewerData.previewInfo.libraryLinkId != null)
+						$.SalesPortal.LinkManager.requestViewDialog({
+							linkId: viewerData.previewInfo.libraryLinkId,
+							isQuickSite: false
+						});
+					else
+					{
+						var modalDialog = new $.SalesPortal.ModalDialog({
+							title: '<span class="text-danger">Sorry...</span>',
+							description: 'Link not found.',
+							buttons: [
 								{
-									modalDialog.close();
+									tag: 'close',
+									title: 'Close',
+									width: 80,
+									clickHandler: function ()
+									{
+										modalDialog.close();
+									}
 								}
-							}
-						],
-						closeOnOutsideClick: true
-					});
-					modalDialog.show();
-				}
+							],
+							closeOnOutsideClick: true
+						});
+						modalDialog.show();
+					}
+					break;
 			}
 		};
 	};

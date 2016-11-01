@@ -22,7 +22,7 @@
 		public $order;
 		public $type;
 		/**
-		 * @var \BaseLinkSettings|\VideoLinkSettings|\HyperLinkSettings|\DocumentLinkSettings|\PowerPointLinkSettings|\AppLinkSettings|\InternalLinkSettings|\QPageLinkSettings|\LinkBundleLinkSettings
+		 * @var \BaseLinkSettings|\VideoLinkSettings|\HyperLinkSettings|\DocumentLinkSettings|\PowerPointLinkSettings|\AppLinkSettings|\InternalWallbinLinkSettings|\InternalLibraryPageLinkSettings|\InternalLibraryFolderLinkSettings|\InternalLibraryObjectLinkSettings|\QPageLinkSettings|\LinkBundleLinkSettings
 		 */
 		public $extendedProperties;
 		/**

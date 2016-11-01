@@ -111,7 +111,8 @@
 				</div>
 				<div class="col col-xs-2 text-center">
 					<? if ($data->config->allowDownload): ?>
-						<div class="text-button log-action download-file" data-log-action="Download File" title="download file">
+						<div class="text-button log-action download-file" data-log-action="Download File"
+						     title="download file">
 							<span class="text-muted text-item">file <span class="file-size"></span></span>
 						</div>
 					<? endif; ?>
@@ -128,14 +129,15 @@
 						</div>
 					<? endif; ?>
 				</div>
-				<? if ($data->config->allowDownload && !$data->singlePage): ?>
-					<div class="col col-xs-2 text-center">
-						<div class="text-button log-action download-page" data-log-action="Download File" title="download <? echo $pageItemName?>">
+				<div class="col col-xs-2 text-center">
+					<? if ($data->config->allowDownload && !$data->singlePage): ?>
+						<div class="text-button log-action download-page" data-log-action="Download File"
+						     title="download <? echo $pageItemName ?>">
 							<span class="text-muted text-item"><? echo $pageItemName; ?> <span
 									class="page-size"></span></span>
 						</div>
-					</div>
-				<? endif; ?>
+					<? endif; ?>
+				</div>
 				<?
 					$footerGapSize = 0;
 					if (!($data->config->allowDownload && !$data->singlePage))

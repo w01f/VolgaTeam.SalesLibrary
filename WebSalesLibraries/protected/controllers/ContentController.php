@@ -28,7 +28,10 @@
 						'HyperLinkSettings' => 'HyperLinkSettings',
 						'PowerPointLinkSettings' => 'PowerPointLinkSettings',
 						'AppLinkSettings' => 'AppLinkSettings',
-						'InternalLinkSettings' => 'InternalLinkSettings',
+						'InternalWallbinLinkSettings' => 'InternalWallbinLinkSettings',
+						'InternalLibraryPageLinkSettings' => 'InternalLibraryPageLinkSettings',
+						'InternalLibraryFolderLinkSettings' => 'InternalLibraryFolderLinkSettings',
+						'InternalLibraryObjectLinkSettings' => 'InternalLibraryObjectLinkSettings',
 						'ExcelLinkSettings' => 'ExcelLinkSettings',
 						'QPageLinkSettings' => 'QPageLinkSettings',
 						'LinkBundleLinkSettings' => 'LinkBundleLinkSettings',
@@ -107,10 +110,37 @@
 		}
 
 		/**
-		 * @param InternalLinkSettings $settings
+		 * @param InternalWallbinLinkSettings $settings
 		 * @soap
 		 */
-		public function mockInternalLinkSettings($settings)
+		public function mockInternalWallbinLinkSettings($settings)
+		{
+
+		}
+
+		/**
+		 * @param InternalLibraryPageLinkSettings $settings
+		 * @soap
+		 */
+		public function mockInternalLibraryPageLinkSettings($settings)
+		{
+
+		}
+
+		/**
+		 * @param InternalLibraryFolderLinkSettings $settings
+		 * @soap
+		 */
+		public function mockInternalLibraryFolderLinkSettings($settings)
+		{
+
+		}
+
+		/**
+		 * @param InternalLibraryObjectLinkSettings $settings
+		 * @soap
+		 */
+		public function mockInternalLibraryObjectLinkSettings($settings)
 		{
 
 		}
