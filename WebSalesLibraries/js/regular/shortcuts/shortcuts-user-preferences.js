@@ -35,11 +35,22 @@
 							var thisCheck = $(this);
 							if (thisCheck.is(':checked'))
 							{
+								settingsGroup.find('.checkbox.default input').prop('checked', false);
+								thisCheck.prop('checked', true);
+							}
+							else
+								settingsGroup.find('.checkbox.default input').prop('checked', settingsGroup.find('.checkbox input:checked').length == 0);
+						});
+						settingsGroup.find('.checkbox.default input').off('click.user-preferences').on('click.user-preferences', function ()
+						{
+							var thisCheck = $(this);
+							if (thisCheck.is(':checked'))
+							{
 								settingsGroup.find('.checkbox input').prop('checked', false);
 								thisCheck.prop('checked', true);
 							}
 							else
-								settingsGroup.find('.checkbox.default input').prop('checked', true);
+								thisCheck.prop('checked', true);
 						});
 					});
 
@@ -50,11 +61,26 @@
 							url: window.BaseUrl + "linkUserProfile/applyEditorValues",
 							data: {
 								userProfile: JSON.stringify({
-									powerPointSettings: {forceOpen: content.find('#user-link-preferences-power-point-force-open').prop('checked')},
-									docSettings: {forceOpen: content.find('#user-link-preferences-doc-force-open').prop('checked')},
-									xlsSettings: {forceOpen: content.find('#user-link-preferences-xls-force-open').prop('checked')},
-									pdfSettings: {forceOpen: content.find('#user-link-preferences-pdf-force-open').prop('checked')},
-									imageSettings: {forceOpen: content.find('#user-link-preferences-image-force-open').prop('checked')}
+									powerPointSettings: {
+										forceEOOpen: content.find('#user-link-preferences-power-point-force-EO-open').prop('checked'),
+										forceWebOpen: false
+									},
+									docSettings: {
+										forceEOOpen: content.find('#user-link-preferences-doc-force-EO-open').prop('checked'),
+										forceWebOpen: false
+									},
+									xlsSettings: {
+										forceEOOpen: content.find('#user-link-preferences-xls-force-EO-open').prop('checked'),
+										forceWebOpen: false
+									},
+									pdfSettings: {
+										forceEOOpen: content.find('#user-link-preferences-pdf-force-EO-open').prop('checked'),
+										forceWebOpen: content.find('#user-link-preferences-pdf-force-web-open').prop('checked')
+									},
+									imageSettings: {
+										forceEOOpen: content.find('#user-link-preferences-image-force-EO-open').prop('checked'),
+										forceWebOpen: content.find('#user-link-preferences-image-force-web-open').prop('checked')
+									}
 								})
 							},
 							async: true,
@@ -70,7 +96,7 @@
 
 					$.fancybox({
 						content: content,
-						width: 500,
+						width: 650,
 						autoSize: false,
 						autoHeight: true,
 						openEffect: 'none',

@@ -25,8 +25,6 @@
 
 		var assignLinkEvents = function (container)
 		{
-			$.mtReInit();
-
 			if ($.SalesPortal.Content.isMobileDevice())
 			{
 				container.find('.line-break').on('click', function (event)
@@ -217,8 +215,6 @@
 						success: function (msg)
 						{
 							folderLinkContent.html(msg);
-
-							$.mtReInit();
 
 							assignLinkEvents(folderLinkContent);
 							folderLinkContent.show("blind", {

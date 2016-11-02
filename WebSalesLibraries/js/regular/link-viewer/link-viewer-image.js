@@ -10,10 +10,12 @@
 
 		this.show = function ()
 		{
-			if (viewerData.config.isEOBrowser == true && viewerData.config.forceOpen == true)
+			if (viewerData.config.isEOBrowser == true && viewerData.config.forceEOOpen == true)
 				$.SalesPortal.SalesLibraryExtensions.openLink(viewerData);
 			else if (viewerData.config.forceDownload == true)
 				downloadFile();
+			else if (viewerData.config.forceWebOpen == true)
+				open();
 			else
 			{
 				if (parameters.viewContainer == undefined)
@@ -130,6 +132,11 @@
 				name: viewerData.fileName,
 				path: viewerData.filePath
 			});
+		};
+
+		var open = function ()
+		{
+			$.SalesPortal.LinkManager.openFile(viewerData.url, "_self");
 		};
 
 		var addToQuickSite = function ()

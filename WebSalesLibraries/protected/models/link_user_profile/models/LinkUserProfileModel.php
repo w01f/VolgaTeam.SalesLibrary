@@ -16,12 +16,12 @@
 		/** @var  LinkUserSettings */
 		public $imageSettings;
 
-		public function __construct(Array $properties = array())
+		public function __construct(array $properties = array())
 		{
 			foreach ($properties as $key => $value)
 			{
 				if (is_array($value))
-					$this->{$key} = CJSON::decode(CJSON::encode($value), false);
+					$this->{$key} = LinkUserSettings::fromJsonArray($value);
 				else
 					$this->{$key} = $value;
 			}
@@ -33,22 +33,11 @@
 		public static function getDefault()
 		{
 			$userProfileModel = new LinkUserProfileModel();
-
-			$userProfileModel->powerPointSettings = new LinkUserSettings();
-			$userProfileModel->powerPointSettings->forceOpen = false;
-
-			$userProfileModel->docSettings = new LinkUserSettings();
-			$userProfileModel->docSettings->forceOpen = false;
-
-			$userProfileModel->xlsSettings = new LinkUserSettings();
-			$userProfileModel->xlsSettings->forceOpen = false;
-
-			$userProfileModel->pdfSettings = new LinkUserSettings();
-			$userProfileModel->pdfSettings->forceOpen = false;
-
-			$userProfileModel->imageSettings = new LinkUserSettings();
-			$userProfileModel->imageSettings->forceOpen = false;
-
+			$userProfileModel->powerPointSettings = LinkUserSettings::getDefault();
+			$userProfileModel->docSettings = LinkUserSettings::getDefault();
+			$userProfileModel->xlsSettings = LinkUserSettings::getDefault();
+			$userProfileModel->pdfSettings = LinkUserSettings::getDefault();
+			$userProfileModel->imageSettings = LinkUserSettings::getDefault();
 			return $userProfileModel;
 		}
 	}

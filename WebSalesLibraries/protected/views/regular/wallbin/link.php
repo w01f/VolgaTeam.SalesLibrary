@@ -109,8 +109,8 @@
 		}
 		?>
 		<div
-			class="link-text-container<? echo $isLinkStaticFontSize != true ? ' link-text-container-sized' : ''; ?> mtTool"
-			<? if (isset($tooltip)): ?>mtcontent="<? echo $tooltip; ?>"<? endif; ?>
+			class="link-text-container<? echo $isLinkStaticFontSize != true ? ' link-text-container-sized' : ''; ?>"
+			<? if (isset($tooltip)): ?>title="<? echo $tooltip; ?>"<? endif; ?>
 			style="<? echo $linkFontProperties; ?>"
 		>
 			<? if ($displayWidget): ?>

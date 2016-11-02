@@ -31,8 +31,9 @@
 					$record['path'] = $linkRecord['path'];
 					$record['lib_name'] = $linkRecord['lib_name'];
 
-					$record['tooltip'] = sprintf('%s<br><br>%s',
-						isset($linkRecord['file_name']) && $linkRecord['file_name'] != '' ? $linkRecord['file_name'] : nl2br($linkRecord['name']),
+					$record['tooltip'] = sprintf('%s%s%s',
+						isset($linkRecord['file_name']) && $linkRecord['file_name'] != '' ? $linkRecord['file_name'] : $linkRecord['name'],
+						PHP_EOL,
 						array_key_exists($linkRecord['format'], Yii::app()->params['tooltips']['wallbin']) ? Yii::app()->params['tooltips']['wallbin'][$linkRecord['format']] : '');
 
 					$record['date'] = array(

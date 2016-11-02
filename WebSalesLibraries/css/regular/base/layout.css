@@ -165,12 +165,6 @@ button.active
 	border-bottom-left-radius: 0 !important;
 }
 
-.mtContent
-{
-	max-width: 250px;
-	z-index: 9000;
-}
-
 .service-data
 {
 	display: none;

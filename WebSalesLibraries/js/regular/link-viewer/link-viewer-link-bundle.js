@@ -13,7 +13,7 @@
 		{
 			$.fancybox({
 				content: parameters.content,
-				title: viewerData.name,
+				title: "Link Bundle",
 				autoSize: true,
 				openEffect: 'none',
 				closeEffect: 'none',

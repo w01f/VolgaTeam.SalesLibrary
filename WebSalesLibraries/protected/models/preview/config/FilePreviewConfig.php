@@ -7,7 +7,8 @@
 	class FilePreviewConfig extends BasePreviewConfig
 	{
 		public $forceDownload;
-		public $forceOpen;
+		public $forceEOOpen;
+		public $forceWebOpen;
 
 		/**
 		 * @param $libraryLink LibraryLink
@@ -25,7 +26,8 @@
 		protected function loadUserProfile($libraryLink)
 		{
 			$this->forceDownload = false;
-			$this->forceOpen = false;
+			$this->forceEOOpen = false;
+			$this->forceWebOpen = false;
 
 			if (UserIdentity::isUserAuthorized())
 			{
@@ -36,25 +38,30 @@
 				switch ($libraryLink->originalFormat)
 				{
 					case 'ppt':
-						$this->forceDownload = $userProfile->powerPointSettings->forceOpen;
-						$this->forceOpen = $userProfile->powerPointSettings->forceOpen;
+						$this->forceDownload = $userProfile->powerPointSettings->forceEOOpen;
+						$this->forceEOOpen = $userProfile->powerPointSettings->forceEOOpen;
+						$this->forceWebOpen = $userProfile->powerPointSettings->forceWebOpen;
 						break;
 					case 'doc':
-						$this->forceDownload = $userProfile->docSettings->forceOpen;
-						$this->forceOpen = $userProfile->docSettings->forceOpen;
+						$this->forceDownload = $userProfile->docSettings->forceEOOpen;
+						$this->forceEOOpen = $userProfile->docSettings->forceEOOpen;
+						$this->forceWebOpen = $userProfile->docSettings->forceWebOpen;
 						break;
 					case 'xls':
-						$this->forceDownload = $userProfile->xlsSettings->forceOpen;
-						$this->forceOpen = $userProfile->xlsSettings->forceOpen;
+						$this->forceDownload = $userProfile->xlsSettings->forceEOOpen;
+						$this->forceEOOpen = $userProfile->xlsSettings->forceEOOpen;
+						$this->forceWebOpen = $userProfile->xlsSettings->forceWebOpen;
 						break;
 					case 'pdf':
-						$this->forceDownload = $userProfile->pdfSettings->forceOpen;
-						$this->forceOpen = $userProfile->pdfSettings->forceOpen;
+						$this->forceDownload = $userProfile->pdfSettings->forceEOOpen;
+						$this->forceEOOpen = $userProfile->pdfSettings->forceEOOpen;
+						$this->forceWebOpen = $userProfile->pdfSettings->forceWebOpen;
 						break;
 					case 'png':
 					case 'jpeg':
-						$this->forceDownload = $userProfile->imageSettings->forceOpen;
-						$this->forceOpen = $userProfile->imageSettings->forceOpen;
+						$this->forceDownload = $userProfile->imageSettings->forceEOOpen;
+						$this->forceEOOpen = $userProfile->imageSettings->forceEOOpen;
+						$this->forceWebOpen = $userProfile->imageSettings->forceWebOpen;
 						break;
 				}
 			}

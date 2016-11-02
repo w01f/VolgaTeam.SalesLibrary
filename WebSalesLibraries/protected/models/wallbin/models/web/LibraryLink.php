@@ -306,19 +306,19 @@
 			if($this->isLineBreak)
 			{
 				if(!empty($this->lineBreakProperties->note))
-				$tooltipList[] = nl2br($this->lineBreakProperties->note);
+				$tooltipList[] = $this->lineBreakProperties->note;
 			}
 			else
 			{
 				if(!empty($this->extendedProperties->hoverNote))
-					$tooltipList[] = nl2br($this->extendedProperties->hoverNote);
+					$tooltipList[] = $this->extendedProperties->hoverNote;
 
 				if(!isset($this->extendedProperties->showOnlyCustomHoverNote) || !$this->extendedProperties->showOnlyCustomHoverNote)
 				{
 					if (!$this->isFolder && isset($this->fileName))
 						$tooltipList[] = $this->fileName;
 					else
-						$tooltipList[] = nl2br($this->name);
+						$tooltipList[] = $this->name;
 					if ($this->isFolder)
 						$tooltipList[] = 'Folder';
 					else if (isset($this->originalFormat) && array_key_exists($this->originalFormat, \Yii::app()->params['tooltips']['wallbin']))
@@ -326,7 +326,7 @@
 				}
 			}
 			if (count($tooltipList) > 0)
-				$this->tooltip = implode('<br><br>', $tooltipList);
+				$this->tooltip = implode(PHP_EOL, $tooltipList);
 			else
 				$this->tooltip = null;
 		}

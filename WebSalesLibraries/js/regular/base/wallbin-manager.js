@@ -21,8 +21,6 @@
 			updateTextSize(storedTextSize);
 			that.updateContentSize();
 
-			$.mtReInit();
-
 			if ($.SalesPortal.Content.isMobileDevice())
 			{
 				container.find('.line-break').on('click', function (event)
@@ -217,8 +215,6 @@
 						{
 							folderLinkContent.html(msg);
 
-							$.mtReInit();
-
 							that.assignLinkEvents(folderLinkContent);
 							folderLinkContent.show("blind", {
 								direction: "vertical"
@@ -249,7 +245,6 @@
 
 		var getWindowContextMenu = function (folderId, pointX, pointY)
 		{
-			$('body').find('.mtContent').remove();
 			$.SalesPortal.LinkManager.cleanupContextMenu();
 
 			$.ajax({
@@ -355,8 +350,6 @@
 					success: function (msg)
 					{
 						folderLinks.html(msg);
-
-						$.mtReInit();
 
 						that.assignLinkEvents(folderLinks);
 						folderLinks.show("blind", {

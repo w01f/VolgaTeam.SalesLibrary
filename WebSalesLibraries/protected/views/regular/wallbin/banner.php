@@ -8,7 +8,7 @@
 	 */
 ?>
 <? if ($banner->showText): ?>
-<div class="banner-container mtTool" <? if (isset($tooltip)): ?>mtcontent="<? echo $tooltip; ?>"<? endif;?> style="width: auto">
+<div class="banner-container" <? if (isset($tooltip)): ?>title="<? echo $tooltip; ?>"<? endif;?> style="width: auto">
 	<div class="banner-image  <?if($banner->imageVerticalAlignment=='top'):?>banner-image-top<?else:?>banner-image-middle<?endif;?>">
 		<img src="data:image/png;base64,<? echo $banner->image;?>">
 	</div>
@@ -46,7 +46,7 @@
 		$bannerMarginRight = '0px';
 	}
 	?>
-<div class="banner-container mtTool" <? if (isset($tooltip)): ?> mtcontent="<? echo $tooltip; ?>"<? endif;?>  style="text-align: <? echo $banner->imageAlignment; ?>;">
+<div class="banner-container" <? if (isset($tooltip)): ?> title="<? echo $tooltip; ?>"<? endif;?>  style="text-align: <? echo $banner->imageAlignment; ?>;">
 	<img class="banner-image" src="data:image/png;base64,<? echo $banner->image;?>" style="margin-left: <? echo $bannerMarginLeft; ?>; margin-right: <? echo $bannerMarginRight; ?>;">
 </div>
 <?endif; ?>

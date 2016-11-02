@@ -251,7 +251,6 @@
 
 				table.find('.link-url').hammer().on('tap', function ()
 				{
-					$('body').find('.mtContent').remove();
 					var linkId = dataTable.api().row($(this).closest("tr")).data().id;
 					var url = $(this).find('.link-content').prop('href');
 					$.SalesPortal.LogHelper.write({
@@ -285,7 +284,6 @@
 
 				table.on('click', '.link-url', function ()
 				{
-					$('body').find('.mtContent').remove();
 					var url = $(this).find('.link-content').prop('href');
 					var linkId = dataTable.api().row($(this).closest("tr")).data().id;
 					$.SalesPortal.LogHelper.write({
@@ -363,7 +361,7 @@
 				{
 					if (row.isHyperlink)
 					{
-						cellContent = '<a class="mtTool link-content" mtcontent="' + row.tooltip + '" href="' + row.url + '" target="_blank">' + displayValue + '</a>';
+						cellContent = '<a class="link-content" title="' + row.tooltip + '" href="' + row.url + '" target="_blank">' + displayValue + '</a>';
 						objectClass = ' link-url';
 						if (row.isExternalHyperlink)
 							objectClass += ' link-url-external';
@@ -372,12 +370,12 @@
 					}
 					else if (row.isDraggable)
 					{
-						cellContent = '<span class="mtTool link-content" draggable="true" data-url-header="' + row.url_header + '" data-url="' + row.url + '" mtcontent="' + row.tooltip + '">' + displayValue + '</span>';
+						cellContent = '<span class="link-content" draggable="true" data-url-header="' + row.url_header + '" data-url="' + row.url + '" title="' + row.tooltip + '">' + displayValue + '</span>';
 						objectClass = ' link-file';
 					}
 					else
 					{
-						cellContent = '<span class="mtTool link-content" mtcontent="' + row.tooltip + '">' + displayValue + '</span>';
+						cellContent = '<span class="link-content" title="' + row.tooltip + '">' + displayValue + '</span>';
 						objectClass = ' link-common';
 					}
 				}

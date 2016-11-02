@@ -15,7 +15,6 @@
 					viewContainer: undefined,
 					afterViewerOpenedCallback: undefined
 				};
-			$('body').find('.mtContent').remove();
 			that.cleanupContextMenu();
 			$.ajax({
 				type: "POST",
@@ -112,7 +111,6 @@
 
 		this.requestLinkContextMenu = function (linkId, isQuickSite, pointX, pointY)
 		{
-			$('body').find('.mtContent').remove();
 			that.cleanupContextMenu();
 			$.ajax({
 				type: "POST",
@@ -244,7 +242,6 @@
 
 		this.requestRateDialog = function (linkId, afterClose)
 		{
-			$('body').find('.mtContent').remove();
 			$.ajax({
 				type: "POST",
 				url: window.BaseUrl + "preview/getRateDialog",
@@ -329,7 +326,6 @@
 
 		this.requestEmailDialog = function (linkId)
 		{
-			$('body').find('.mtContent').remove();
 			that.cleanupContextMenu();
 			$.ajax({
 				type: "POST",

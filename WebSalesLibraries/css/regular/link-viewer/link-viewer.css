@@ -60,7 +60,9 @@
 {
 	font-weight: normal;
 	white-space: normal;
-	background: rgba(0, 0, 0, 1)
+	background: #7f7f7f;
+	color: #d9d9d9;
+	text-shadow: none;
 }
 
 .link-viewer .vjs-poster
@@ -142,6 +144,8 @@
 {
     right: inherit;
 	left: 0;
+	bottom: inherit;
+	margin-bottom: inherit;
 	width: 100%;
 }
 
@@ -149,5 +153,6 @@
 {
     margin-right: inherit;
 	width: 100%;
+	line-height: 16px;
 }
 /*------------------------------------*/

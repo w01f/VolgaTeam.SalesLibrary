@@ -29,7 +29,7 @@
 			/** @var  $linkSettings ExcelLinkSettings */
 			$linkSettings = $this->link->extendedProperties;
 
-			$previewConfig->forceOpen |= $linkSettings->forceOpen;
+			$previewConfig->forceEOOpen |= $linkSettings->forceOpen;
 			$previewConfig->forceDownload |= $linkSettings->forceDownload;
 		}
 	}

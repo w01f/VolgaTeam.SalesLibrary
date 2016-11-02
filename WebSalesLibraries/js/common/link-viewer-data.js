@@ -160,8 +160,6 @@
 		this.fileName = undefined;
 		this.quickLinkUrl = undefined;
 		this.isEOBrowser = undefined;
-		this.forceDownload = undefined;
-		this.forceOpen = undefined;
 		this.rateData = undefined;
 		this.totalViews = undefined;
 

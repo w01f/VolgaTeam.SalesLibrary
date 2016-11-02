@@ -9,12 +9,6 @@
 		this.init = function ()
 		{
 			$('a#view-dialog-link').fancybox();
-			if (!that.isMobileDevice())
-				$.MetroTooltipInit({
-					animation: "fadeInDown fast",
-					position: "top",
-					color: "#063BB3"
-				});
 		};
 
 		this.fillContent = function (content, headerOptions, actions, loadCallback)
@@ -23,8 +17,6 @@
 				loadCallback = function ()
 				{
 				};
-			$('body').find('.mtContent').remove();
-
 			var contentObject = that.getContentObject();
 			contentObject.html(content);
 			var anchorImage = contentObject.find('img.wallbin-logo');
