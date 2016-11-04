@@ -14,7 +14,6 @@ using SalesLibraries.FileManager.Business.Models.Connection;
 using SalesLibraries.FileManager.Business.Services;
 using SalesLibraries.FileManager.Business.Synchronization;
 using SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettings;
-using SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSettings;
 using SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings;
 using SalesLibraries.FileManager.PresentationLayer.Wallbin.Views;
 using SalesLibraries.FileManager.Properties;
@@ -63,6 +62,7 @@ namespace SalesLibraries.FileManager.Controllers
 			MainController.Instance.MainForm.buttonItemTagsSync.Click += OnSyncClick;
 			MainController.Instance.MainForm.buttonItemSecuritySync.Click += OnSyncClick;
 			MainController.Instance.MainForm.buttonItemSettingsSync.Click += OnSyncClick;
+			MainController.Instance.MainForm.buttonItemBundlesSync.Click += OnSyncClick;
 
 			#region Link Operations
 			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesTags.Visible = MainController.Instance.Settings.EditorSettings.EnableTagsEdit;
@@ -125,6 +125,10 @@ namespace SalesLibraries.FileManager.Controllers
 			MainController.Instance.MainForm.buttonItemProgramManagerSyncSettingsEnabled.CheckedChanged += buttonItemProgramManagerSync_CheckedChanged;
 			MainController.Instance.MainForm.buttonItemProgramManagerSyncSettingsDisabled.CheckedChanged += buttonItemProgramManagerSync_CheckedChanged;
 			MainController.Instance.MainForm.buttonEditProgramManagerLocation.ButtonClick += buttonEditProgramManagerLocation_ButtonClick;
+			#endregion
+
+			#region Link Bundles
+			MainController.Instance.MainForm.buttonItemBundlesNew.Click += OnBundlesNewClick;
 			#endregion
 
 			MainController.Instance.WallbinViews.FormatState.StateChanged += OnFormatStateChanged;
@@ -518,7 +522,36 @@ namespace SalesLibraries.FileManager.Controllers
 		{
 			retractableBar.Visible = true;
 			laEditorTitle.Text = String.Empty;
-			if (MainController.Instance.WallbinViews.FormatState.ShowTagsEditor)
+			if (MainController.Instance.WallbinViews.FormatState.ShowFiles)
+			{
+				retractableBar.AddButtons(new[]
+				{
+					new ButtonInfo
+					{
+						Logo = Resources.RetractableLogoFiles,
+						Tooltip = "Expand file list"
+					}
+				});
+				if (!retractableBar.Content.Controls.Contains(MainController.Instance.WallbinViews.ActiveWallbin.DataSourcesControl))
+					retractableBar.Content.Controls.Add(MainController.Instance.WallbinViews.ActiveWallbin.DataSourcesControl);
+				MainController.Instance.WallbinViews.ActiveWallbin.DataSourcesControl.BringToFront();
+			}
+			else if (MainController.Instance.WallbinViews.FormatState.ShowLinkBundles)
+			{
+				retractableBar.AddButtons(new[]
+				{
+					new ButtonInfo
+					{
+						Logo = Resources.RetractableLogoBundles,
+						Tooltip = "Expand link bundle list"
+					}
+				});
+				laEditorTitle.Text = "Saved Link Bundles";
+				if (!retractableBar.Content.Controls.Contains(MainController.Instance.WallbinViews.ActiveWallbin.LinkBundleListControl))
+					retractableBar.Content.Controls.Add(MainController.Instance.WallbinViews.ActiveWallbin.LinkBundleListControl);
+				MainController.Instance.WallbinViews.ActiveWallbin.LinkBundleListControl.BringToFront();
+			}
+			else if (MainController.Instance.WallbinViews.FormatState.ShowTagsEditor)
 			{
 				retractableBar.AddButtons(MainController.Instance.WallbinViews.FormatState.ShowSecurityTags ?
 					new[]
@@ -548,19 +581,7 @@ namespace SalesLibraries.FileManager.Controllers
 				}
 			}
 			else
-			{
-				retractableBar.AddButtons(new[]
-				{
-					new ButtonInfo
-					{
-						Logo = Resources.RetractableLogoFiles,
-						Tooltip = "Expand file list"
-					}
-				});
-				if (!retractableBar.Content.Controls.Contains(MainController.Instance.WallbinViews.ActiveWallbin.DataSourcesControl))
-					retractableBar.Content.Controls.Add(MainController.Instance.WallbinViews.ActiveWallbin.DataSourcesControl);
-				MainController.Instance.WallbinViews.ActiveWallbin.DataSourcesControl.BringToFront();
-			}
+				retractableBar.Visible = false;
 		}
 
 		private void OnRetractableBarStateChanged(object sender, StateChangedEventArgs e)
@@ -679,6 +700,13 @@ namespace SalesLibraries.FileManager.Controllers
 				library.ProgramData.Path = dialog.SelectedPath;
 				MainController.Instance.WallbinViews.ActiveWallbin.IsDataChanged = true;
 			}
+		}
+		#endregion
+
+		#region Link Bundles Processing
+		private void OnBundlesNewClick(object sender, EventArgs eventArgs)
+		{
+			MainController.Instance.WallbinViews.ActiveWallbin.LinkBundleListControl.AddBundle();
 		}
 		#endregion
 	}

@@ -117,8 +117,6 @@
 			// 
 			// LinkExcelOptions
 			// 
-			this.Appearance.PageClient.BackColor = System.Drawing.Color.White;
-			this.Appearance.PageClient.Options.UseBackColor = true;
 			this.Controls.Add(this.pictureBoxLogo);
 			this.Controls.Add(this.labelControlTitle);
 			this.Controls.Add(this.ckForceOpen);

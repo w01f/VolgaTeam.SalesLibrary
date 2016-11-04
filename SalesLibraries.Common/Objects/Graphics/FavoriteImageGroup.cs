@@ -7,7 +7,7 @@ namespace SalesLibraries.Common.Objects.Graphics
 	{
 		public FavoriteImageGroup(IImageSourceList parentList) : base(parentList) { }
 
-		public void AddImage<T>(string filePath) where T : LinkImageSource
+		public void AddImage<T>(string filePath) where T : BaseImageSource
 		{
 			if (!File.Exists(filePath)) return;
 			if (!ParentList.FavsFolder.ExistsLocal())
@@ -16,7 +16,7 @@ namespace SalesLibraries.Common.Objects.Graphics
 			LoadImages<T>(ParentList.FavsFolder.LocalPath);
 		}
 
-		public void RemoveImage<T>(string filePath) where T : LinkImageSource
+		public void RemoveImage<T>(string filePath) where T : BaseImageSource
 		{
 			if (!File.Exists(filePath)) return;
 			if (!ParentList.FavsFolder.ExistsLocal())

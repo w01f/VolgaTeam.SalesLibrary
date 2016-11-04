@@ -10,7 +10,6 @@ using SalesLibraries.Business.Entities.Wallbin.Persistent;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.CommonGUI.Common;
 using SalesLibraries.FileManager.Controllers;
-using SalesLibraries.FileManager.PresentationLayer.Wallbin.Common;
 using HorizontalAlignment = SalesLibraries.Business.Entities.Wallbin.Common.Enums.HorizontalAlignment;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
@@ -30,8 +29,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			Text = String.Format(_formParameters.Title, folder.Name);
 			Width = _formParameters.Width;
 			Height = _formParameters.Height;
-			LoadData();
-
+			Load += (o, e) => LoadData();
 			ckApllyForAllWindowsAppearance.Checked = _folder.Page.Library.Settings.ApplyAppearanceForAllWindows;
 			ckApllyForAllWindowsWidget.Checked = _folder.Page.Library.Settings.ApplyWidgetForAllWindows;
 			ckApllyForAllWindowsBanner.Checked = _folder.Page.Library.Settings.ApplyBannerForAllWindows;

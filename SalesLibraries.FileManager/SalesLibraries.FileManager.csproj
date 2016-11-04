@@ -136,6 +136,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Business\Dictionaries\LinkBundleImageList.cs" />
     <Compile Include="Business\Dictionaries\SearchTagList.cs" />
     <Compile Include="Business\Dictionaries\SuperFilterList.cs" />
     <Compile Include="Business\Models\Connection\ConnectionState.cs" />
@@ -149,6 +150,7 @@
     <Compile Include="Business\PreviewGenerators\PreviewGeneratorHelper.cs" />
     <Compile Include="Business\Services\CorruptedLinksHelper.cs" />
     <Compile Include="Business\Services\LicenseHelper.cs" />
+    <Compile Include="Business\Services\LinkBundleItemHelper.cs" />
     <Compile Include="Business\Services\PdfHelper.cs" />
     <Compile Include="Business\Services\DatabaseConnectionHelper.cs" />
     <Compile Include="Business\Synchronization\LibraryFilesSyncHelper.cs" />
@@ -216,32 +218,106 @@
     <Compile Include="PresentationLayer\Video\VideoContentEditor.Designer.cs">
       <DependentUpon>VideoContentEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Wallbin\Common\BannerSettingsControl.cs">
+    <Compile Include="PresentationLayer\Wallbin\LinkBundles\SingleBundle\FormAddUrl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\LinkBundles\SingleBundle\FormAddUrl.designer.cs">
+      <DependentUpon>FormAddUrl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\LinkBundles\SingleBundle\ILinkBundleInfoEditControl.cs" />
+    <Compile Include="PresentationLayer\Wallbin\LinkBundles\SingleBundle\RevenueEditControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\LinkBundles\SingleBundle\RevenueEditControl.Designer.cs">
+      <DependentUpon>RevenueEditControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\LinkBundles\SingleBundle\StrategyEditControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\LinkBundles\SingleBundle\StrategyEditControl.Designer.cs">
+      <DependentUpon>StrategyEditControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\LinkBundles\SingleBundle\InfoEditControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\LinkBundles\SingleBundle\InfoEditControl.Designer.cs">
+      <DependentUpon>InfoEditControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\IInternalLinkEditControl.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\InternalWallbinLinkEditControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Wallbin\Common\BannerSettingsControl.designer.cs">
+    <Compile Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\InternalWallbinLinkEditControl.Designer.cs">
+      <DependentUpon>InternalWallbinLinkEditControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\InternalLibraryPageLinkEditControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\InternalLibraryPageLinkEditControl.Designer.cs">
+      <DependentUpon>InternalLibraryPageLinkEditControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\InternalLibraryFolderLinkEditControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\InternalLibraryFolderLinkEditControl.Designer.cs">
+      <DependentUpon>InternalLibraryFolderLinkEditControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\InternalLibraryObjectLinkEditControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\InternalLibraryObjectLinkEditControl.Designer.cs">
+      <DependentUpon>InternalLibraryObjectLinkEditControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkBundleOptions.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkBundleOptions.designer.cs">
+      <DependentUpon>LinkBundleOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkInternalWallbinOptions.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkInternalWallbinOptions.designer.cs">
+      <DependentUpon>LinkInternalWallbinOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkInternalLibraryPageOptions.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkInternalLibraryPageOptions.designer.cs">
+      <DependentUpon>LinkInternalLibraryPageOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkInternalLibraryFolderOptions.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkInternalLibraryFolderOptions.designer.cs">
+      <DependentUpon>LinkInternalLibraryFolderOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Settings\BannerSettingsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Settings\BannerSettingsControl.designer.cs">
       <DependentUpon>BannerSettingsControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Wallbin\Common\SearchResultsImagesContainer.cs">
+    <Compile Include="PresentationLayer\Wallbin\ImageGallery\SearchResultsImagesContainer.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Wallbin\Common\RegularImagesContainer.cs">
+    <Compile Include="PresentationLayer\Wallbin\ImageGallery\RegularImagesContainer.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Wallbin\Common\FavoritesImagesContainer.cs">
+    <Compile Include="PresentationLayer\Wallbin\ImageGallery\FavoritesImagesContainer.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Wallbin\Common\SearchGroupContainer.cs" />
-    <Compile Include="PresentationLayer\Wallbin\Common\BaseLinkImagesContainer.cs">
+    <Compile Include="PresentationLayer\Wallbin\ImageGallery\SearchGroupContainer.cs" />
+    <Compile Include="PresentationLayer\Wallbin\ImageGallery\BaseLinkImagesContainer.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Wallbin\Common\BaseLinkImagesContainer.designer.cs">
+    <Compile Include="PresentationLayer\Wallbin\ImageGallery\BaseLinkImagesContainer.designer.cs">
       <DependentUpon>BaseLinkImagesContainer.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Wallbin\Common\WidgetSettingsControl.cs">
+    <Compile Include="PresentationLayer\Wallbin\Settings\WidgetSettingsControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Wallbin\Common\WidgetSettingsControl.designer.cs">
+    <Compile Include="PresentationLayer\Wallbin\Settings\WidgetSettingsControl.designer.cs">
       <DependentUpon>WidgetSettingsControl.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Wallbin\DataSource\DataSourceTreeViewControl.cs">
@@ -269,6 +345,30 @@
     </Compile>
     <Compile Include="PresentationLayer\Wallbin\Folders\Controls\FormDeleteLink.Designer.cs">
       <DependentUpon>FormDeleteLink.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\LinkBundles\BundleList\FormAddBundle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\LinkBundles\BundleList\FormAddBundle.designer.cs">
+      <DependentUpon>FormAddBundle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\LinkBundles\BundleList\LinkBundleListControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\LinkBundles\BundleList\LinkBundleListControl.Designer.cs">
+      <DependentUpon>LinkBundleListControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\ImageGallery\FormImageGallery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\ImageGallery\FormImageGallery.designer.cs">
+      <DependentUpon>FormImageGallery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\LinkBundles\SingleBundle\FormEditBundle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\LinkBundles\SingleBundle\FormEditBundle.Designer.cs">
+      <DependentUpon>FormEditBundle.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Wallbin\Links\Clipboard\LinkClipboardActionType.cs" />
     <Compile Include="PresentationLayer\Wallbin\Links\Clipboard\LinksClipboardManager.cs" />
@@ -459,11 +559,11 @@
     <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LineBreakOptions.designer.cs">
       <DependentUpon>LineBreakOptions.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkInternalOptions.cs">
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkInternalLibraryObjectOptions.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkInternalOptions.designer.cs">
-      <DependentUpon>LinkInternalOptions.cs</DependentUpon>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkInternalLibraryObjectOptions.designer.cs">
+      <DependentUpon>LinkInternalLibraryObjectOptions.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkAppOptions.cs">
       <SubType>Component</SubType>
@@ -711,13 +811,49 @@
     <EmbeddedResource Include="PresentationLayer\Video\VideoContentEditor.resx">
       <DependentUpon>VideoContentEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Wallbin\Common\BannerSettingsControl.resx">
+    <EmbeddedResource Include="PresentationLayer\Wallbin\LinkBundles\SingleBundle\FormAddUrl.resx">
+      <DependentUpon>FormAddUrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\LinkBundles\SingleBundle\RevenueEditControl.resx">
+      <DependentUpon>RevenueEditControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\LinkBundles\SingleBundle\StrategyEditControl.resx">
+      <DependentUpon>StrategyEditControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\LinkBundles\SingleBundle\InfoEditControl.resx">
+      <DependentUpon>InfoEditControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\InternalWallbinLinkEditControl.resx">
+      <DependentUpon>InternalWallbinLinkEditControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\InternalLibraryPageLinkEditControl.resx">
+      <DependentUpon>InternalLibraryPageLinkEditControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\InternalLibraryFolderLinkEditControl.resx">
+      <DependentUpon>InternalLibraryFolderLinkEditControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\InternalLibraryObjectLinkEditControl.resx">
+      <DependentUpon>InternalLibraryObjectLinkEditControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkBundleOptions.resx">
+      <DependentUpon>LinkBundleOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkInternalWallbinOptions.resx">
+      <DependentUpon>LinkInternalWallbinOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkInternalLibraryPageOptions.resx">
+      <DependentUpon>LinkInternalLibraryPageOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkInternalLibraryFolderOptions.resx">
+      <DependentUpon>LinkInternalLibraryFolderOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Settings\BannerSettingsControl.resx">
       <DependentUpon>BannerSettingsControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Wallbin\Common\BaseLinkImagesContainer.resx">
+    <EmbeddedResource Include="PresentationLayer\Wallbin\ImageGallery\BaseLinkImagesContainer.resx">
       <DependentUpon>BaseLinkImagesContainer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Wallbin\Common\WidgetSettingsControl.resx">
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Settings\WidgetSettingsControl.resx">
       <DependentUpon>WidgetSettingsControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\DataSource\DataSourceTreeViewControl.resx">
@@ -731,6 +867,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Folders\Controls\FormDeleteLink.resx">
       <DependentUpon>FormDeleteLink.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\LinkBundles\BundleList\FormAddBundle.resx">
+      <DependentUpon>FormAddBundle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\LinkBundles\BundleList\LinkBundleListControl.resx">
+      <DependentUpon>LinkBundleListControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\ImageGallery\FormImageGallery.resx">
+      <DependentUpon>FormImageGallery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\LinkBundles\SingleBundle\FormEditBundle.resx">
+      <DependentUpon>FormEditBundle.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Links\GroupSettings\CategoriesEditor.resx">
       <DependentUpon>CategoriesEditor.cs</DependentUpon>
@@ -822,8 +970,8 @@
     <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\LineBreakOptions.resx">
       <DependentUpon>LineBreakOptions.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkInternalOptions.resx">
-      <DependentUpon>LinkInternalOptions.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkInternalLibraryObjectOptions.resx">
+      <DependentUpon>LinkInternalLibraryObjectOptions.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkAppOptions.resx">
       <DependentUpon>LinkAppOptions.cs</DependentUpon>
@@ -977,6 +1125,20 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\BundlesEditorRevenueAdd.png" />
+    <None Include="Resources\BundlesEditorRevenueLogo.png" />
+    <None Include="Resources\BundlesEditorStrategyLogo.png" />
+    <None Include="Resources\BundlesEditorInfoLogo.png" />
+    <None Include="Resources\BundlesEditorUrlLogo.png" />
+    <None Include="Resources\BundlesEditorLinksAddUrl.png" />
+    <None Include="Resources\BundlesEditorLinksAddStrategy.png" />
+    <None Include="Resources\BundlesEditorLinksAddRevenue.png" />
+    <None Include="Resources\BundlesEditorLinksAddInfo.png" />
+    <None Include="Resources\BundlesEditorLinksAdd.png" />
+    <None Include="Resources\BundlesEditorLinksLogo.png" />
+    <None Include="Resources\BundlesFormNew.png" />
+    <None Include="Resources\RetractableLogoBundles.png" />
+    <None Include="Resources\BundlesRibbonNew.png" />
     <None Include="Resources\LinkAddHtml5.png" />
     <None Include="Resources\ButtonApplyForAll.png" />
     <None Include="Resources\LinkSettingsTextNote.png" />

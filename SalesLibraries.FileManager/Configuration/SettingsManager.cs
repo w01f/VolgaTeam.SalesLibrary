@@ -34,6 +34,7 @@ namespace SalesLibraries.FileManager.Configuration
 		public bool EnableIPadSettingsTab { get; private set; }
 		public bool EnableTagsTab { get; private set; }
 		public bool EnableSecurityTab { get; private set; }
+		public bool EnableLinkBundlesTab { get; private set; }
 		public bool ShowTagsCategories { get; set; }
 		public bool ShowTagsSuperFilters { get; set; }
 		public bool ShowTagsKeywords { get; set; }
@@ -84,6 +85,7 @@ namespace SalesLibraries.FileManager.Configuration
 			EnableIPadSettingsTab = true;
 			EnableTagsTab = true;
 			EnableSecurityTab = true;
+			EnableLinkBundlesTab = true;
 			ShowTagsCategories = true;
 			#endregion
 
@@ -218,6 +220,10 @@ namespace SalesLibraries.FileManager.Configuration
 			if (node != null)
 				if (bool.TryParse(node.InnerText, out tempBool))
 					EnableSecurityTab = tempBool;
+			node = document.SelectSingleNode(@"/ribbon/LinkBundles");
+			if (node != null)
+				if (bool.TryParse(node.InnerText, out tempBool))
+					EnableLinkBundlesTab = tempBool;
 		}
 
 		private void LoadCategoryRequestSettings()

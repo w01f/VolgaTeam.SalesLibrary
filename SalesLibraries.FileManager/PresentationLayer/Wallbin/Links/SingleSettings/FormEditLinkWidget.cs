@@ -7,7 +7,7 @@ using DevExpress.XtraTab;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.FileManager.Controllers;
-using SalesLibraries.FileManager.PresentationLayer.Wallbin.Common;
+using SalesLibraries.FileManager.PresentationLayer.Wallbin.ImageGallery;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSettings
 {

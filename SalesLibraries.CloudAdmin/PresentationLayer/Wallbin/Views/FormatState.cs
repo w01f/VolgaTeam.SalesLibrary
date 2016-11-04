@@ -80,6 +80,16 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 			}
 		}
 
+		private bool _showLinkBundles;
+		public bool ShowLinkBundles
+		{
+			get { return _showLinkBundles; }
+			set
+			{
+				_showLinkBundles = value;
+			}
+		}
+
 		public event EventHandler<EventArgs> StateChanged;
 		#endregion
 

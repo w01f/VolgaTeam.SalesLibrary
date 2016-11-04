@@ -5,7 +5,7 @@ using System.Windows.Forms;
 using DevComponents.DotNetBar.Metro;
 using DevExpress.XtraTab;
 using SalesLibraries.FileManager.Controllers;
-using SalesLibraries.FileManager.PresentationLayer.Wallbin.Common;
+using SalesLibraries.FileManager.PresentationLayer.Wallbin.ImageGallery;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 {

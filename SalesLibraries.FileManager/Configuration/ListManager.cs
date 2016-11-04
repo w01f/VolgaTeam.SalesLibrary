@@ -10,6 +10,7 @@ namespace SalesLibraries.FileManager.Configuration
 		public SearchTagList SearchTags { get; set; }
 		public SuperFilterList SuperFilters { get; }
 		public SecurityLists Security { get; }
+		public LinkBundleImageList LinkBundleImages { get; }
 
 		public ListManager()
 		{
@@ -18,6 +19,7 @@ namespace SalesLibraries.FileManager.Configuration
 			SearchTags = new SearchTagList();
 			SuperFilters = new SuperFilterList();
 			Security = new SecurityLists();
+			LinkBundleImages = new LinkBundleImageList();
 		}
 
 		public void Load()
@@ -27,6 +29,7 @@ namespace SalesLibraries.FileManager.Configuration
 			SearchTags.Load();
 			SuperFilters.Load();
 			Security.Load();
+			LinkBundleImages.Load();
 		}
 	}
 }

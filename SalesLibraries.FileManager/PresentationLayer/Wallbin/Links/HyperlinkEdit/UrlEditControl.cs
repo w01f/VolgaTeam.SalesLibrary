@@ -44,7 +44,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.HyperlinkEd
 			return true;
 		}
 
-		public BaseNetworkLink GetHyperLinkInfo()
+		public BaseNetworkLinkInfo GetHyperLinkInfo()
 		{
 			return new UrlLinkInfo
 			{
@@ -56,33 +56,33 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.HyperlinkEd
 			};
 		}
 
-		public void ApplySharedSettings(BaseNetworkLink templateEditor)
+		public void ApplySharedSettings(BaseNetworkLinkInfo templateInfo)
 		{
-			if (templateEditor != null)
+			if (templateInfo != null)
 			{
-				textEditName.EditValue = templateEditor.Name;
-				checkEditBlueHyperlink.Checked = templateEditor.FormatAsBluelink;
-				checkEditBold.Checked = templateEditor.FormatBold;
+				textEditName.EditValue = templateInfo.Name;
+				checkEditBlueHyperlink.Checked = templateInfo.FormatAsBluelink;
+				checkEditBold.Checked = templateInfo.FormatBold;
 			}
-			if (templateEditor is HyperLinkInfo)
+			if (templateInfo is HyperLinkInfo)
 			{
-				textEditPath.EditValue = ((HyperLinkInfo)templateEditor).Path;
+				textEditPath.EditValue = ((HyperLinkInfo)templateInfo).Path;
 			}
-			if (templateEditor is UrlLinkInfo)
+			if (templateInfo is UrlLinkInfo)
 			{
-				checkEditForcePreview.Checked = ((UrlLinkInfo)templateEditor).ForcePreview;
+				checkEditForcePreview.Checked = ((UrlLinkInfo)templateInfo).ForcePreview;
 			}
-			if (templateEditor is YouTubeLinkInfo)
+			if (templateInfo is YouTubeLinkInfo)
 			{
-				checkEditForcePreview.Checked = ((YouTubeLinkInfo)templateEditor).ForcePreview;
+				checkEditForcePreview.Checked = ((YouTubeLinkInfo)templateInfo).ForcePreview;
 			}
-			if (templateEditor is QuickSiteLinkInfo)
+			if (templateInfo is QuickSiteLinkInfo)
 			{
-				checkEditForcePreview.Checked = ((QuickSiteLinkInfo)templateEditor).ForcePreview;
+				checkEditForcePreview.Checked = ((QuickSiteLinkInfo)templateInfo).ForcePreview;
 			}
-			if (templateEditor is Html5LinkInfo)
+			if (templateInfo is Html5LinkInfo)
 			{
-				checkEditForcePreview.Checked = ((Html5LinkInfo)templateEditor).ForcePreview;
+				checkEditForcePreview.Checked = ((Html5LinkInfo)templateInfo).ForcePreview;
 			}
 		}
 	}

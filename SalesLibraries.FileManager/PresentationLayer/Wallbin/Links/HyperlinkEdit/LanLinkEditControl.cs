@@ -50,7 +50,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.HyperlinkEd
 			return true;
 		}
 
-		public BaseNetworkLink GetHyperLinkInfo()
+		public BaseNetworkLinkInfo GetHyperLinkInfo()
 		{
 			return new LanLinkInfo
 			{
@@ -61,17 +61,17 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.HyperlinkEd
 			};
 		}
 
-		public void ApplySharedSettings(BaseNetworkLink templateEditor)
+		public void ApplySharedSettings(BaseNetworkLinkInfo templateInfo)
 		{
-			if (templateEditor != null)
+			if (templateInfo != null)
 			{
-				textEditName.EditValue = templateEditor.Name;
-				checkEditBlueHyperlink.Checked = templateEditor.FormatAsBluelink;
-				checkEditBold.Checked = templateEditor.FormatBold;
+				textEditName.EditValue = templateInfo.Name;
+				checkEditBlueHyperlink.Checked = templateInfo.FormatAsBluelink;
+				checkEditBold.Checked = templateInfo.FormatBold;
 			}
-			if (templateEditor is HyperLinkInfo)
+			if (templateInfo is HyperLinkInfo)
 			{
-				textEditPath.EditValue = ((HyperLinkInfo)templateEditor).Path;
+				textEditPath.EditValue = ((HyperLinkInfo)templateInfo).Path;
 			}
 		}
 	}

@@ -9,5 +9,6 @@
 		Preferences,
 		Settings,
 		VideoManager,
+		Bundles,
 	}
 }

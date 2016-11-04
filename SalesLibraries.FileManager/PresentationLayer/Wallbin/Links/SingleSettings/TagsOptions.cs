@@ -14,7 +14,7 @@ using SalesLibraries.Common.Helpers;
 using SalesLibraries.Common.Objects.SearchTags;
 using SalesLibraries.CommonGUI.Common;
 using SalesLibraries.FileManager.Controllers;
-using SalesLibraries.FileManager.PresentationLayer.Wallbin.Common;
+using SalesLibraries.FileManager.PresentationLayer.Wallbin.ImageGallery;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSettings
 {

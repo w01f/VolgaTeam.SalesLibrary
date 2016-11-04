@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using SalesLibraries.Business.Contexts.Wallbin;
+using SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.LinkBundles.BundleList;
 
 namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 {
@@ -13,6 +14,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 		event EventHandler<EventArgs> PageChanging;
 		event EventHandler<EventArgs> PageChanged;
 		event EventHandler<EventArgs> DataChanged;
+		LinkBundleListControl LinkBundleListControl { get; }
 		void LoadView(bool force = false);
 		void ShowView();
 		void DisposeView();

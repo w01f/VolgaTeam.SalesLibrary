@@ -42,12 +42,10 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.GroupSetting
 			switch (e.SelectionType)
 			{
 				case SelectionEventType.SelectionReset:
-					if (ActiveEditor != null)
-						ActiveEditor.UpdateData();
+					ActiveEditor?.UpdateData();
 					break;
 				case SelectionEventType.LinkSelected:
-					if (ActiveEditor != null)
-						ActiveEditor.UpdateData();
+					ActiveEditor?.UpdateData();
 					break;
 			}
 		}
@@ -65,8 +63,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.GroupSetting
 				ActiveEditor = _securityEditor;
 			else if (MainController.Instance.WallbinViews.FormatState.ShowTagsCleaner)
 				ActiveEditor = _tagsCleaner;
-			if (ActiveEditor != null)
-				ActiveEditor.UpdateData();
+			ActiveEditor?.UpdateData();
 		}
 	}
 }

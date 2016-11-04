@@ -26,6 +26,7 @@ namespace SalesLibraries.FileManager
 			ribbonTabItemVideo.Visible = MainController.Instance.Settings.EnableIPadSettingsTab;
 			ribbonTabItemTags.Visible = MainController.Instance.Settings.EnableTagsTab;
 			ribbonTabItemSecurity.Visible = MainController.Instance.Settings.EnableSecurityTab;
+			ribbonTabItemBundles.Visible = MainController.Instance.Settings.EnableLinkBundlesTab;
 		}
 
 		private void FormMain_Shown(object sender, EventArgs e)
@@ -67,6 +68,8 @@ namespace SalesLibraries.FileManager
 				key = TabPageEnum.Calendar;
 			else if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemVideo)
 				key = TabPageEnum.VideoManager;
+			else if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemBundles)
+				key = TabPageEnum.Bundles;
 			MainController.Instance.ShowTab(key);
 		}
 	}

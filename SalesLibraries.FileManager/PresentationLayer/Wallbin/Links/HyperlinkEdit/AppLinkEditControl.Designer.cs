@@ -58,7 +58,7 @@
 			this.labelControllTitle.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
 			this.labelControllTitle.Location = new System.Drawing.Point(14, 14);
 			this.labelControllTitle.Name = "labelControllTitle";
-			this.labelControllTitle.Size = new System.Drawing.Size(326, 27);
+			this.labelControllTitle.Size = new System.Drawing.Size(457, 27);
 			this.labelControllTitle.StyleController = this.styleController;
 			this.labelControllTitle.TabIndex = 36;
 			this.labelControllTitle.Text = "<color=gray><i>Launch an application…</i></color>";
@@ -110,7 +110,7 @@
 			this.textEditPath.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.textEditPath.Properties.Appearance.Options.UseBackColor = true;
 			this.textEditPath.Properties.Appearance.Options.UseForeColor = true;
-			this.textEditPath.Size = new System.Drawing.Size(326, 22);
+			this.textEditPath.Size = new System.Drawing.Size(457, 22);
 			this.textEditPath.StyleController = this.styleController;
 			this.textEditPath.TabIndex = 1;
 			// 
@@ -124,7 +124,7 @@
 			this.textEditName.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.textEditName.Properties.Appearance.Options.UseBackColor = true;
 			this.textEditName.Properties.Appearance.Options.UseForeColor = true;
-			this.textEditName.Size = new System.Drawing.Size(326, 22);
+			this.textEditName.Size = new System.Drawing.Size(457, 22);
 			this.textEditName.StyleController = this.styleController;
 			this.textEditName.TabIndex = 0;
 			// 
@@ -170,7 +170,7 @@
 			this.textEditSecondPath.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.textEditSecondPath.Properties.Appearance.Options.UseBackColor = true;
 			this.textEditSecondPath.Properties.Appearance.Options.UseForeColor = true;
-			this.textEditSecondPath.Size = new System.Drawing.Size(326, 22);
+			this.textEditSecondPath.Size = new System.Drawing.Size(457, 22);
 			this.textEditSecondPath.StyleController = this.styleController;
 			this.textEditSecondPath.TabIndex = 45;
 			// 
@@ -183,9 +183,9 @@
 			this.labelControlWarning.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.labelControlWarning.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
 			this.labelControlWarning.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-			this.labelControlWarning.Location = new System.Drawing.Point(14, 253);
+			this.labelControlWarning.Location = new System.Drawing.Point(14, 337);
 			this.labelControlWarning.Name = "labelControlWarning";
-			this.labelControlWarning.Size = new System.Drawing.Size(326, 45);
+			this.labelControlWarning.Size = new System.Drawing.Size(457, 45);
 			this.labelControlWarning.StyleController = this.styleController;
 			this.labelControlWarning.TabIndex = 47;
 			this.labelControlWarning.Text = "<color=red><i>*This Link will only be visible with the adSALESapps browser app…</" +
@@ -207,7 +207,7 @@
 			this.Controls.Add(this.checkEditBlueHyperlink);
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.Name = "AppLinkEditControl";
-			this.Size = new System.Drawing.Size(350, 301);
+			this.Size = new System.Drawing.Size(481, 385);
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditPath.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditName.Properties)).EndInit();

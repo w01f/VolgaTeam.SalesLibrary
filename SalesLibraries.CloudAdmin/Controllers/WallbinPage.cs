@@ -53,6 +53,7 @@ namespace SalesLibraries.CloudAdmin.Controllers
 			MainController.Instance.MainForm.buttonItemTagsSync.Click += OnSyncClick;
 			MainController.Instance.MainForm.buttonItemSecuritySync.Click += OnSyncClick;
 			MainController.Instance.MainForm.buttonItemSettingsSync.Click += OnSyncClick;
+			MainController.Instance.MainForm.buttonItemBundlesSync.Click += OnSyncClick;
 
 			#region Link Operations
 			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesTags.Visible = MainController.Instance.Settings.EditorSettings.EnableTagsEdit;
@@ -106,6 +107,10 @@ namespace SalesLibraries.CloudAdmin.Controllers
 			#region Security
 			MainController.Instance.MainForm.buttonItemSecuritySelect.Click += buttonItemSecuritySelect_Click;
 			MainController.Instance.MainForm.buttonItemSecurityReset.Click += buttonItemSecurityReset_Click;
+			#endregion
+
+			#region Link Bundles
+			MainController.Instance.MainForm.buttonItemBundlesNew.Click += OnBundlesNewClick;
 			#endregion
 
 			MainController.Instance.WallbinViews.FormatState.StateChanged += OnFormatStateChanged;
@@ -440,10 +445,25 @@ namespace SalesLibraries.CloudAdmin.Controllers
 		#region Retractable Bar
 		private void UpdateRetractableBarContent()
 		{
+			retractableBar.Visible = true;
 			laEditorTitle.Text = String.Empty;
-			if (MainController.Instance.WallbinViews.FormatState.ShowTagsEditor)
+			if (MainController.Instance.WallbinViews.FormatState.ShowLinkBundles)
 			{
-				retractableBar.Visible = true;
+				retractableBar.AddButtons(new[]
+				{
+					new ButtonInfo
+					{
+						Logo = Resources.RetractableLogoBundles,
+						Tooltip = "Expand link bundle list"
+					}
+				});
+				laEditorTitle.Text = "Saved Link Bundles";
+				if (!retractableBar.Content.Controls.Contains(MainController.Instance.WallbinViews.ActiveWallbin.LinkBundleListControl))
+					retractableBar.Content.Controls.Add(MainController.Instance.WallbinViews.ActiveWallbin.LinkBundleListControl);
+				MainController.Instance.WallbinViews.ActiveWallbin.LinkBundleListControl.BringToFront();
+			}
+			else if (MainController.Instance.WallbinViews.FormatState.ShowTagsEditor)
+			{
 				retractableBar.AddButtons(MainController.Instance.WallbinViews.FormatState.ShowSecurityTags ?
 					new[]
 					{
@@ -472,9 +492,7 @@ namespace SalesLibraries.CloudAdmin.Controllers
 				}
 			}
 			else
-			{
 				retractableBar.Visible = false;
-			}
 		}
 		#endregion
 
@@ -537,6 +555,14 @@ namespace SalesLibraries.CloudAdmin.Controllers
 			if (MainController.Instance.WallbinViews.ActiveWallbin.ActivePage == null) return;
 			MainController.Instance.WallbinViews.ActiveWallbin.ActivePage.Content.ResetSecurity();
 			MainController.Instance.WallbinViews.ActiveWallbin.IsDataChanged = true;
+		}
+		#endregion
+
+
+		#region Link Bundles Processing
+		private void OnBundlesNewClick(object sender, EventArgs eventArgs)
+		{
+			MainController.Instance.WallbinViews.ActiveWallbin.LinkBundleListControl.AddBundle();
 		}
 		#endregion
 	}

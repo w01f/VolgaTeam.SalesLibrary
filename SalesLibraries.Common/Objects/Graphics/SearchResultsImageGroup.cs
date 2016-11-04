@@ -4,7 +4,7 @@ using SalesLibraries.Common.Helpers;
 
 namespace SalesLibraries.Common.Objects.Graphics
 {
-	public class SearchResultsImageGroup:LinkImageGroup
+	public class SearchResultsImageGroup:ImageSourceGroup
 	{
 		public SearchResultsImageGroup(IImageSourceList parentList) : base(parentList){}
 

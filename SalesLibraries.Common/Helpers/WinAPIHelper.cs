@@ -210,6 +210,13 @@ namespace SalesLibraries.Common.Helpers
 
 		[DllImport("user32.dll")]
 		public static extern int SetParent(IntPtr wndChild, IntPtr wndNewParent);
+
+		[DllImport("user32.dll")]
+		[return: MarshalAs(UnmanagedType.Bool)]
+		public static extern bool GetIconInfo(IntPtr hIcon, ref IconInfo pIconInfo);
+
+		[DllImport("user32.dll", SetLastError = true)]
+		public static extern IntPtr CreateIconIndirect([In] ref IconInfo icon);
 		#endregion
 
 		public static void MakeTopMost(IntPtr handle)
@@ -231,5 +238,14 @@ namespace SalesLibraries.Common.Helpers
 		{
 			SetWindowPos(handle, HWND_BOTTOM, 0, 0, 0, 0, TOPMOST_FLAGS);
 		}
+	}
+
+	public struct IconInfo
+	{
+		public bool IsIcon;
+		public int xHotspot;
+		public int yHotspot;
+		public IntPtr MaskBitmap;
+		public IntPtr ColorBitmap;
 	}
 }

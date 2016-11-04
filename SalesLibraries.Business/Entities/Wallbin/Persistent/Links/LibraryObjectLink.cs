@@ -5,7 +5,6 @@ using System.Drawing;
 using System.Linq;
 using Newtonsoft.Json;
 using SalesLibraries.Business.Entities.Common;
-using SalesLibraries.Business.Entities.Helpers;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings;
 

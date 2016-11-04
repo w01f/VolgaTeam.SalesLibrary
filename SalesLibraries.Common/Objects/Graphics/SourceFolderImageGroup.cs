@@ -6,13 +6,13 @@ using SalesLibraries.Common.Helpers;
 
 namespace SalesLibraries.Common.Objects.Graphics
 {
-	public abstract class SourceFolderImageGroup : LinkImageGroup
+	public abstract class SourceFolderImageGroup : ImageSourceGroup
 	{
 		protected const string IgnoredListFileName = "ignored.txt";
 
 		protected SourceFolderImageGroup(IImageSourceList parentList) : base(parentList) { }
 
-		public void LoadImages<T>(string sourcePath) where T : LinkImageSource
+		public void LoadImages<T>(string sourcePath) where T : BaseImageSource
 		{
 			_sourcePath = sourcePath;
 
@@ -41,7 +41,7 @@ namespace SalesLibraries.Common.Objects.Graphics
 			{
 				if (ignoredFiles.Any(ignoredFile => ignoredFile.Equals(Path.GetFileName(filePath), StringComparison.OrdinalIgnoreCase)))
 					continue;
-				var linkImageSource = Activator.CreateInstance(typeof(T), filePath) as LinkImageSource;
+				var linkImageSource = Activator.CreateInstance(typeof(T), filePath) as BaseImageSource;
 				linkImageSource.AddToFavs += (o, e) =>
 				{
 					var favoritesImagesGroup = ParentList.Items.OfType<FavoriteImageGroup>().FirstOrDefault();

@@ -20,6 +20,7 @@ using SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Settings;
 using SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views;
 using SalesLibraries.Common.DataState;
 using SalesLibraries.Common.Helpers;
+using SalesLibraries.Common.JsonConverters;
 using SalesLibraries.Common.Objects.SearchTags;
 using SalesLibraries.Common.OfficeInterops;
 using SalesLibraries.CommonGUI.CustomDialog;
@@ -140,7 +141,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders.Controls
 				_outsideChangesInProgress = true;
 
 				LibraryObjectLink newLink;
-				switch (form.SelctedEditorType)
+				switch (form.SelectedEditorType)
 				{
 					case HyperLinkTypeEnum.Url:
 						newLink = WebLink.Create(
@@ -168,9 +169,32 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders.Controls
 							DataSource);
 						break;
 					case HyperLinkTypeEnum.Internal:
-						newLink = InternalLink.Create(
-							(InternalLinkInfo)form.SelectedEditor.GetHyperLinkInfo(),
-							DataSource);
+						var internalLinkInfo = (InternalLinkInfo)form.SelectedEditor.GetHyperLinkInfo();
+						switch (internalLinkInfo.InternalLinkType)
+						{
+							case InternalLinkType.Wallbin:
+								newLink = InternalWallbinLink.Create(
+									(InternalWallbinLinkInfo)form.SelectedEditor.GetHyperLinkInfo(),
+									DataSource);
+								break;
+							case InternalLinkType.LibraryPage:
+								newLink = InternalLibraryPageLink.Create(
+									(InternalLibraryPageLinkInfo)form.SelectedEditor.GetHyperLinkInfo(),
+									DataSource);
+								break;
+							case InternalLinkType.LibraryFolder:
+								newLink = InternalLibraryFolderLink.Create(
+									(InternalLibraryFolderLinkInfo)form.SelectedEditor.GetHyperLinkInfo(),
+									DataSource);
+								break;
+							case InternalLinkType.LibraryObject:
+								newLink = InternalLibraryObjectLink.Create(
+									(InternalLibraryObjectLinkInfo)form.SelectedEditor.GetHyperLinkInfo(),
+									DataSource);
+								break;
+							default:
+								throw new ArgumentOutOfRangeException("Link type not found");
+						}
 						break;
 					case HyperLinkTypeEnum.Html5:
 						newLink = Html5Link.Create(
@@ -205,6 +229,28 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders.Controls
 
 			_outsideChangesInProgress = true;
 			var newLink = LineBreak.Create(DataSource);
+			if (position >= 0)
+				((List<BaseLibraryLink>)DataSource.Links).InsertItem(newLink, position);
+			else
+				DataSource.Links.AddItem(newLink);
+			var newRow = InsertLinkRow(newLink, position);
+			_outsideChangesInProgress = false;
+
+			UpdateGridSize();
+
+			newRow.Selected = true;
+
+			DataChanged?.Invoke(this, EventArgs.Empty);
+		}
+
+		public void AddLinkBundle(LinkBundle bundle, int position = -1)
+		{
+			var selectedLink = SelectedLinkRow;
+			if (selectedLink != null)
+				position = selectedLink.Index;
+
+			_outsideChangesInProgress = true;
+			var newLink = LinkBundleLink.Create(DataSource, bundle);
 			if (position >= 0)
 				((List<BaseLibraryLink>)DataSource.Links).InsertItem(newLink, position);
 			else
@@ -787,7 +833,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders.Controls
 			var linkRow = (LinkRow)grFiles.Rows[e.RowIndex];
 			base.OnGridCellPainting(sender, e);
 			if (DataSource.Links.Any() &&
-				(IsSourceLinksDragged || IsLinkRowDragged))
+				(IsSourceLinksDragged || IsLinkRowDragged || IsLinkBundleDragged))
 			{
 				if (_mouseDragOverHitInfo.Type == DataGridViewHitTestType.Cell && _mouseDragOverHitInfo.RowIndex == linkRow.Index)
 					e.Graphics.DrawLine(_rowDraggedIndicatorPen, 0, e.CellBounds.Top + 2, grFiles.Width, e.CellBounds.Top + 2);
@@ -830,9 +876,13 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders.Controls
 			}
 		}
 
+		protected bool IsLinkBundleDragged => IsDataDragged &&
+			DataDraggedOver.GetDataPresent(DataFormats.Serializable, true) &&
+			EntitySettingsResolver.ExtractObjectTypeFromProxy(DataDraggedOver.GetData(DataFormats.Serializable, true).GetType()) == typeof(LinkBundle);
+
 		private void ResetDragInfo()
 		{
-			bool needGridRefersh = IsSourceLinksDragged || IsLinkRowDragged;
+			bool needGridRefersh = IsSourceLinksDragged || IsLinkRowDragged || IsLinkBundleDragged;
 			DataDraggedOver = null;
 			_mouseDragOverHitInfo = DataGridView.HitTestInfo.Nowhere;
 			if (needGridRefersh)
@@ -851,6 +901,8 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders.Controls
 				e.Effect = DragDropEffects.Move;
 			else if (IsFolderBoxDragged)
 				e.Effect = DragDropEffects.Move;
+			else if (IsLinkBundleDragged)
+				e.Effect = DragDropEffects.Copy;
 			else
 			{
 				e.Effect = DragDropEffects.None;
@@ -910,6 +962,12 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders.Controls
 					}
 				if (confirmDrop)
 					InsertLinks(droppedLinks, _mouseDragOverHitInfo.RowIndex);
+			}
+
+			if (IsLinkBundleDragged)
+			{
+				var droppedLinkBundle = DataDraggedOver?.GetData(DataFormats.Serializable, true) as LinkBundle;
+				AddLinkBundle(droppedLinkBundle, _mouseDragOverHitInfo.RowIndex);
 			}
 
 			var droppedRow = DataDraggedOver?.GetData(typeof(LinkRow)) as LinkRow;
@@ -1099,6 +1157,18 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders.Controls
 				barButtonItemLinkPropertiesDelete.Caption = "Delete this Line Break";
 				barSubItemLinkPropertiesImages.Caption = "Line Break ART";
 				barButtonItemLinkPropertiesResetSettings.Caption = "Reset this Line Break";
+			}
+			else if (linkRow.Source is LinkBundleLink)
+			{
+				barButtonItemLinkPropertiesOpenLink.Visibility = BarItemVisibility.Never;
+				barButtonItemLinkPropertiesFileLocation.Visibility = BarItemVisibility.Never;
+				barButtonItemLinkPropertiesAdvancedSettings.Visibility = BarItemVisibility.Never;
+				barButtonItemLinkPropertiesRefreshPreview.Visibility = BarItemVisibility.Never;
+
+				barButtonItemLinkPropertiesLinkSettings.Caption = "Link Bundle Settings";
+				barButtonItemLinkPropertiesDelete.Caption = "Delete this Link Bundle";
+				barSubItemLinkPropertiesImages.Caption = "Link Bundle ART";
+				barButtonItemLinkPropertiesResetSettings.Caption = "Reset this Link Bundle";
 			}
 			else
 			{

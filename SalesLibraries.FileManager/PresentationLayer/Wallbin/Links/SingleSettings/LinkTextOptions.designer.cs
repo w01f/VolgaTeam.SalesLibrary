@@ -29,7 +29,7 @@
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
-			this.colorEditLinkSpecialColor = new DevExpress.XtraEditors.ColorEdit();
+			this.colorEditLinkSpecialColor = new CommonGUI.Common.HtmlColorEdit();
 			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
 			this.buttonEditLinkSpecialFont = new DevExpress.XtraEditors.ButtonEdit();
 			this.labelControlForeColor = new DevExpress.XtraEditors.LabelControl();
@@ -61,16 +61,8 @@
 			this.colorEditLinkSpecialColor.EditValue = System.Drawing.Color.Empty;
 			this.colorEditLinkSpecialColor.Location = new System.Drawing.Point(137, 249);
 			this.colorEditLinkSpecialColor.Name = "colorEditLinkSpecialColor";
-			this.colorEditLinkSpecialColor.Properties.Appearance.BackColor = System.Drawing.Color.White;
-			this.colorEditLinkSpecialColor.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-			this.colorEditLinkSpecialColor.Properties.Appearance.Options.UseBackColor = true;
-			this.colorEditLinkSpecialColor.Properties.Appearance.Options.UseForeColor = true;
-			this.colorEditLinkSpecialColor.Properties.AppearanceDisabled.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-			this.colorEditLinkSpecialColor.Properties.AppearanceDisabled.Options.UseBackColor = true;
 			this.colorEditLinkSpecialColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-			this.colorEditLinkSpecialColor.Properties.ColorAlignment = DevExpress.Utils.HorzAlignment.Center;
-			this.colorEditLinkSpecialColor.Properties.ShowSystemColors = false;
+			new DevExpress.XtraEditors.Controls.EditorButton () });
 			this.colorEditLinkSpecialColor.Size = new System.Drawing.Size(105, 22);
 			this.colorEditLinkSpecialColor.StyleController = this.styleController;
 			this.colorEditLinkSpecialColor.TabIndex = 31;
@@ -282,7 +274,7 @@
 
 		#endregion
 
-		public DevExpress.XtraEditors.ColorEdit colorEditLinkSpecialColor;
+		public CommonGUI.Common.HtmlColorEdit colorEditLinkSpecialColor;
 		public DevExpress.XtraEditors.ButtonEdit buttonEditLinkSpecialFont;
 		private DevExpress.XtraEditors.StyleController styleController;
 		private DevExpress.XtraEditors.LabelControl labelControlForeColor;

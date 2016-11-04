@@ -31,7 +31,7 @@
 			this.memoEditNote = new DevExpress.XtraEditors.MemoEdit();
 			this.styleController = new DevExpress.XtraEditors.StyleController();
 			this.buttonEditLineBreakFont = new DevExpress.XtraEditors.ButtonEdit();
-			this.colorEditLineBreakFontColor = new DevExpress.XtraEditors.ColorEdit();
+			this.colorEditLineBreakFontColor = new CommonGUI.Common.HtmlColorEdit();
 			this.labelControlFont = new DevExpress.XtraEditors.LabelControl();
 			this.labelControlFontColor = new DevExpress.XtraEditors.LabelControl();
 			this.checkEditTextWordWrap = new DevExpress.XtraEditors.CheckEdit();
@@ -46,9 +46,9 @@
 			// 
 			// memoEditNote
 			// 
-			this.memoEditNote.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-			| System.Windows.Forms.AnchorStyles.Left)
-			| System.Windows.Forms.AnchorStyles.Right)));
+			this.memoEditNote.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.memoEditNote.Enabled = false;
 			this.memoEditNote.Location = new System.Drawing.Point(6, 185);
 			this.memoEditNote.Name = "memoEditNote";
@@ -84,7 +84,7 @@
 			this.buttonEditLineBreakFont.Properties.Appearance.Options.UseBackColor = true;
 			this.buttonEditLineBreakFont.Properties.Appearance.Options.UseForeColor = true;
 			this.buttonEditLineBreakFont.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-			new DevExpress.XtraEditors.Controls.EditorButton()});
+            new DevExpress.XtraEditors.Controls.EditorButton()});
 			this.buttonEditLineBreakFont.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
 			this.buttonEditLineBreakFont.Size = new System.Drawing.Size(274, 22);
 			this.buttonEditLineBreakFont.StyleController = this.styleController;
@@ -95,14 +95,8 @@
 			this.colorEditLineBreakFontColor.EditValue = System.Drawing.Color.Empty;
 			this.colorEditLineBreakFontColor.Location = new System.Drawing.Point(94, 58);
 			this.colorEditLineBreakFontColor.Name = "colorEditLineBreakFontColor";
-			this.colorEditLineBreakFontColor.Properties.Appearance.BackColor = System.Drawing.Color.White;
-			this.colorEditLineBreakFontColor.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-			this.colorEditLineBreakFontColor.Properties.Appearance.Options.UseBackColor = true;
-			this.colorEditLineBreakFontColor.Properties.Appearance.Options.UseForeColor = true;
 			this.colorEditLineBreakFontColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-			new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-			this.colorEditLineBreakFontColor.Properties.ColorAlignment = DevExpress.Utils.HorzAlignment.Center;
-			this.colorEditLineBreakFontColor.Properties.ShowSystemColors = false;
+			new DevExpress.XtraEditors.Controls.EditorButton () });
 			this.colorEditLineBreakFontColor.Size = new System.Drawing.Size(146, 22);
 			this.colorEditLineBreakFontColor.StyleController = this.styleController;
 			this.colorEditLineBreakFontColor.TabIndex = 35;
@@ -171,7 +165,7 @@
 
 		private DevExpress.XtraEditors.MemoEdit memoEditNote;
 		private DevExpress.XtraEditors.ButtonEdit buttonEditLineBreakFont;
-		private DevExpress.XtraEditors.ColorEdit colorEditLineBreakFontColor;
+		private CommonGUI.Common.HtmlColorEdit colorEditLineBreakFontColor;
 		private DevExpress.XtraEditors.StyleController styleController;
 		private DevExpress.XtraEditors.LabelControl labelControlFont;
 		private DevExpress.XtraEditors.LabelControl labelControlFontColor;

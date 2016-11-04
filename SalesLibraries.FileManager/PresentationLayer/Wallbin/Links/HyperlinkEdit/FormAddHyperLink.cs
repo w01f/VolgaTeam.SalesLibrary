@@ -14,7 +14,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.HyperlinkEd
 		private readonly Dictionary<HyperLinkTypeEnum, IHyperLinkEditControl> _editors = new Dictionary<HyperLinkTypeEnum, IHyperLinkEditControl>();
 		private readonly List<ButtonX> _editorSelectors;
 
-		public HyperLinkTypeEnum SelctedEditorType { get; private set; }
+		public HyperLinkTypeEnum SelectedEditorType { get; private set; }
 		public IHyperLinkEditControl SelectedEditor { get; private set; }
 
 		public FormAddHyperLink()
@@ -66,10 +66,10 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.HyperlinkEd
 			var selectedButton = (ButtonX)sender;
 			if (!selectedButton.Checked) return;
 			var templateSettings = SelectedEditor?.GetHyperLinkInfo();
-			SelctedEditorType = (HyperLinkTypeEnum)Enum.Parse(typeof(HyperLinkTypeEnum), selectedButton.Tag.ToString());
-			if (!_editors.ContainsKey(SelctedEditorType))
+			SelectedEditorType = (HyperLinkTypeEnum)Enum.Parse(typeof(HyperLinkTypeEnum), selectedButton.Tag.ToString());
+			if (!_editors.ContainsKey(SelectedEditorType))
 			{
-				switch (SelctedEditorType)
+				switch (SelectedEditorType)
 				{
 					case HyperLinkTypeEnum.Url:
 						SelectedEditor = new UrlEditControl();
@@ -97,7 +97,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.HyperlinkEd
 				}
 			}
 			else
-				SelectedEditor = _editors[SelctedEditorType];
+				SelectedEditor = _editors[SelectedEditorType];
 			SelectedEditor.ApplySharedSettings(templateSettings);
 			var control = (Control)SelectedEditor;
 			if (!pnEditContainer.Controls.Contains(control))

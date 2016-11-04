@@ -33,7 +33,7 @@ namespace SalesLibraries.SalesDepot.Business.Services
 				if (!Guid.TryParse(xmlNode.InnerText, out linkId)) continue;
 				var link = MainController.Instance.Wallbin.Libraries
 					.SelectMany(libraryContext => libraryContext.Libraries)
-					.SelectMany(library => library.GetLinkById<LibraryFileLink>(linkId))
+					.Select(library => library.GetLinkById<LibraryFileLink>(linkId))
 					.FirstOrDefault();
 				if (link == null) continue;
 				if (link.CheckIfDead()) continue;

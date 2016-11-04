@@ -38,11 +38,11 @@
 			this.buttonEditFont = new DevExpress.XtraEditors.ButtonEdit();
 			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
 			this.laFont = new System.Windows.Forms.Label();
-			this.colorEditForeColor = new DevExpress.XtraEditors.ColorEdit();
+			this.colorEditForeColor = new SalesLibraries.CommonGUI.Common.HtmlColorEdit();
 			this.memoEditTitle = new DevExpress.XtraEditors.MemoEdit();
 			this.laForeColor = new System.Windows.Forms.Label();
 			this.laColumn1BackColor = new System.Windows.Forms.Label();
-			this.colorEditBackColor = new DevExpress.XtraEditors.ColorEdit();
+			this.colorEditBackColor = new SalesLibraries.CommonGUI.Common.HtmlColorEdit();
 			this.ckEnableText = new System.Windows.Forms.CheckBox();
 			this.xtraTabPageWidget = new DevExpress.XtraTab.XtraTabPage();
 			this.xtraTabPageBanner = new DevExpress.XtraTab.XtraTabPage();
@@ -212,18 +212,17 @@
 			// 
 			// colorEditForeColor
 			// 
-			this.colorEditForeColor.EditValue = System.Drawing.Color.Empty;
+			this.colorEditForeColor.Color = System.Drawing.Color.Empty;
+			this.colorEditForeColor.EditValue = "#000000";
 			this.colorEditForeColor.Enabled = false;
 			this.colorEditForeColor.Location = new System.Drawing.Point(95, 200);
 			this.colorEditForeColor.Name = "colorEditForeColor";
-			this.colorEditForeColor.Properties.Appearance.BackColor = System.Drawing.Color.White;
-			this.colorEditForeColor.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.colorEditForeColor.Properties.Appearance.BackColor = System.Drawing.Color.Black;
+			this.colorEditForeColor.Properties.Appearance.ForeColor = System.Drawing.Color.White;
 			this.colorEditForeColor.Properties.Appearance.Options.UseBackColor = true;
 			this.colorEditForeColor.Properties.Appearance.Options.UseForeColor = true;
 			this.colorEditForeColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-			this.colorEditForeColor.Properties.ColorAlignment = DevExpress.Utils.HorzAlignment.Center;
-			this.colorEditForeColor.Properties.ShowSystemColors = false;
+            new DevExpress.XtraEditors.Controls.EditorButton()});
 			this.colorEditForeColor.Size = new System.Drawing.Size(100, 22);
 			this.colorEditForeColor.StyleController = this.styleController;
 			this.colorEditForeColor.TabIndex = 54;
@@ -269,7 +268,8 @@
 			// 
 			// colorEditBackColor
 			// 
-			this.colorEditBackColor.EditValue = System.Drawing.Color.Empty;
+			this.colorEditBackColor.Color = System.Drawing.Color.Empty;
+			this.colorEditBackColor.EditValue = "#000000";
 			this.colorEditBackColor.Location = new System.Drawing.Point(95, 11);
 			this.colorEditBackColor.Name = "colorEditBackColor";
 			this.colorEditBackColor.Properties.Appearance.BackColor = System.Drawing.Color.White;
@@ -277,9 +277,7 @@
 			this.colorEditBackColor.Properties.Appearance.Options.UseBackColor = true;
 			this.colorEditBackColor.Properties.Appearance.Options.UseForeColor = true;
 			this.colorEditBackColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-			this.colorEditBackColor.Properties.ColorAlignment = DevExpress.Utils.HorzAlignment.Center;
-			this.colorEditBackColor.Properties.ShowSystemColors = false;
+            new DevExpress.XtraEditors.Controls.EditorButton()});
 			this.colorEditBackColor.Size = new System.Drawing.Size(100, 22);
 			this.colorEditBackColor.StyleController = this.styleController;
 			this.colorEditBackColor.TabIndex = 53;
@@ -444,11 +442,11 @@
 		private System.Windows.Forms.RadioButton rbAlignmentLeft;
 		private DevExpress.XtraEditors.ButtonEdit buttonEditFont;
 		private System.Windows.Forms.Label laFont;
-		private DevExpress.XtraEditors.ColorEdit colorEditForeColor;
+		private CommonGUI.Common.HtmlColorEdit colorEditForeColor;
 		private DevExpress.XtraEditors.MemoEdit memoEditTitle;
 		private System.Windows.Forms.Label laForeColor;
 		private System.Windows.Forms.Label laColumn1BackColor;
-		private DevExpress.XtraEditors.ColorEdit colorEditBackColor;
+		private CommonGUI.Common.HtmlColorEdit colorEditBackColor;
 		private System.Windows.Forms.CheckBox ckEnableText;
 	}
 }

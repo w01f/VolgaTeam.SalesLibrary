@@ -96,12 +96,16 @@
     <Compile Include="Entities\IDbEntity.cs" />
     <Compile Include="Entities\Interfaces\IBannerSettingsHolder.cs" />
     <Compile Include="Entities\Interfaces\IDataSource.cs" />
+    <Compile Include="Entities\Interfaces\ILinkBundleInfoItem.cs" />
     <Compile Include="Entities\Interfaces\IPreviewGenerator.cs" />
     <Compile Include="Entities\Interfaces\ITableItem.cs" />
     <Compile Include="Entities\Interfaces\ICollectionItem.cs" />
     <Compile Include="Entities\Wallbin\Common\Constants\PreviewFormats.cs" />
     <Compile Include="Entities\Wallbin\Common\Constants\WebFormats.cs" />
     <Compile Include="Entities\Wallbin\Common\Enums\BannerTextMode.cs" />
+    <Compile Include="Entities\Wallbin\Common\Enums\InternalLinkType.cs" />
+    <Compile Include="Entities\Wallbin\Common\Enums\LinkBundleItemType.cs" />
+    <Compile Include="Entities\Wallbin\Common\Enums\LinkBundleRevenueType.cs" />
     <Compile Include="Entities\Wallbin\Common\Enums\VerticalAlignment.cs" />
     <Compile Include="Entities\Wallbin\Common\Enums\HorizontalAlignment.cs" />
     <Compile Include="Entities\Interfaces\IChangable.cs" />
@@ -112,8 +116,12 @@
     <Compile Include="Entities\Wallbin\Common\Enums\WidgetType.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\AutoWidget.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\BannerSettings.cs" />
+    <Compile Include="Entities\Wallbin\NonPersistent\HyperLinkInfo\InternalLibraryObjectLinkInfo.cs" />
+    <Compile Include="Entities\Wallbin\NonPersistent\HyperLinkInfo\InternalLibraryFolderLinkInfo.cs" />
+    <Compile Include="Entities\Wallbin\NonPersistent\HyperLinkInfo\InternalLibraryPageLinkInfo.cs" />
+    <Compile Include="Entities\Wallbin\NonPersistent\HyperLinkInfo\InternalWallbinLinkInfo.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\HyperLinkInfo\InternalLinkInfo.cs" />
-    <Compile Include="Entities\Wallbin\NonPersistent\HyperLinkInfo\BaseNetworkLink.cs" />
+    <Compile Include="Entities\Wallbin\NonPersistent\HyperLinkInfo\BaseNetworkLinkInfo.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\HyperLinkInfo\HyperLinkTypeEnum.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\HyperLinkInfo\HyperLinkInfo.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\HyperLinkInfo\AppLinkInfo.cs" />
@@ -122,9 +130,21 @@
     <Compile Include="Entities\Wallbin\NonPersistent\HyperLinkInfo\Html5LinkInfo.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\HyperLinkInfo\YouTubeLinkInfo.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\HyperLinkInfo\UrlLinkInfo.cs" />
+    <Compile Include="Entities\Wallbin\NonPersistent\LinkBundleSettings\BaseBundleItem.cs" />
+    <Compile Include="Entities\Wallbin\NonPersistent\LinkBundleSettings\InfoItem.cs" />
+    <Compile Include="Entities\Wallbin\NonPersistent\LinkBundleSettings\LibraryLinkItem.cs" />
+    <Compile Include="Entities\Wallbin\NonPersistent\LinkBundleSettings\RevenueInfo.cs" />
+    <Compile Include="Entities\Wallbin\NonPersistent\LinkBundleSettings\RevenueItem.cs" />
+    <Compile Include="Entities\Wallbin\NonPersistent\LinkBundleSettings\StrategyItem.cs" />
+    <Compile Include="Entities\Wallbin\NonPersistent\LinkBundleSettings\UrlItem.cs" />
+    <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\InternalLibraryPageLinkSettings.cs" />
+    <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\InternalLibraryFolderLinkSettings.cs" />
+    <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\InternalLibraryObjectLinkSettings.cs" />
+    <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\InternalWallbinLinkSettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\InternalLinkSettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\AppLinkSettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\HyperLinkSettings.cs" />
+    <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\LinkBundleLinkSettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\LinkFileSettingsTemplate.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\LibraryFolderLinkSettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\QuickLinkSettings.cs" />
@@ -154,12 +174,18 @@
     <Compile Include="Entities\Wallbin\Persistent\ColumnTitle.cs" />
     <Compile Include="Entities\Wallbin\Persistent\Library.cs" />
     <Compile Include="Entities\Wallbin\Persistent\LibraryFolder.cs" />
+    <Compile Include="Entities\Wallbin\Persistent\LinkBundle.cs" />
+    <Compile Include="Entities\Wallbin\Persistent\Links\InternalLibraryObjectLink.cs" />
+    <Compile Include="Entities\Wallbin\Persistent\Links\InternalLibraryFolderLink.cs" />
+    <Compile Include="Entities\Wallbin\Persistent\Links\InternalLibraryPageLink.cs" />
+    <Compile Include="Entities\Wallbin\Persistent\Links\InternalWallbinLink.cs" />
     <Compile Include="Entities\Wallbin\Persistent\Links\InternalLink.cs" />
     <Compile Include="Entities\Wallbin\Persistent\Links\BaseLibraryLink.cs" />
     <Compile Include="Entities\Wallbin\Persistent\LibraryPage.cs" />
     <Compile Include="Entities\Wallbin\Persistent\Links\CommonFileLink.cs" />
     <Compile Include="Entities\Wallbin\Persistent\Links\LibraryFolderLink.cs" />
     <Compile Include="Entities\Wallbin\Persistent\Links\AppLink.cs" />
+    <Compile Include="Entities\Wallbin\Persistent\Links\LinkBundleLink.cs" />
     <Compile Include="Entities\Wallbin\Persistent\Links\PdfLink.cs" />
     <Compile Include="Entities\Wallbin\Persistent\Links\PreviewableLink.cs" />
     <Compile Include="Entities\Wallbin\Persistent\Links\VideoLink.cs" />
@@ -201,6 +227,18 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Schema\Wallbin\Version2\library_link.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Schema\Wallbin\Version4\link_bundle.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Schema\Wallbin\Version4\sequense.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Schema\Wallbin\Version5\library_link.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Schema\Wallbin\Version5\sequense.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

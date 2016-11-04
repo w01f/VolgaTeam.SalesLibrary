@@ -6,7 +6,7 @@ using System.Windows.Forms;
 using SalesLibraries.Business.Contexts.Wallbin;
 using SalesLibraries.CloudAdmin.Business.Services;
 using SalesLibraries.CloudAdmin.Controllers;
-using SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Libraries;
+using SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.LinkBundles.BundleList;
 
 namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 {
@@ -20,6 +20,8 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 		public event EventHandler<EventArgs> PageChanging;
 		public event EventHandler<EventArgs> PageChanged;
 		public event EventHandler<EventArgs> DataChanged;
+
+		public LinkBundleListControl LinkBundleListControl { get; private set; }
 
 		private bool _isDataChanged;
 		public bool IsDataChanged
@@ -85,6 +87,12 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 			Pages.ForEach(p => p.DisposePage());
 			Pages.Clear();
 			ActivePage = null;
+			if (LinkBundleListControl != null)
+			{
+				LinkBundleListControl.Parent = null;
+				LinkBundleListControl.Dispose();
+				LinkBundleListControl = null;
+			}
 		}
 
 		public void SaveData()
@@ -99,7 +107,10 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 			IsDataChanged = false;
 		}
 
-		protected virtual void InitControls() { }
+		protected virtual void InitControls()
+		{
+			LoadLinkBundles();
+		}
 		#endregion
 
 		#region Pages Processing
@@ -128,6 +139,15 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 		public virtual void SelectPage(IPageView pageView)
 		{
 			throw new NotImplementedException();
+		}
+		#endregion
+
+		#region Link Bundles
+		private void LoadLinkBundles()
+		{
+			if (LinkBundleListControl == null)
+				LinkBundleListControl = new LinkBundleListControl();
+			LinkBundleListControl.LoadData(DataStorage.Library);
 		}
 		#endregion
 	}

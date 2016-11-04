@@ -280,6 +280,7 @@ namespace SalesLibraries.CloudAdmin.Controllers
 			_tabPages.Add(TabPageEnum.Security, TabWallbin);
 			_tabPages.Add(TabPageEnum.Preferences, TabWallbin);
 			_tabPages.Add(TabPageEnum.Settings, TabWallbin);
+			_tabPages.Add(TabPageEnum.Bundles, TabWallbin);
 
 			//TabVideo = new VideoPage();
 			//_tabPages.Add(TabPageEnum.VideoManager, TabVideo);

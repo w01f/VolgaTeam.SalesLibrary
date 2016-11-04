@@ -17,6 +17,7 @@
 		InternalLink = 16,
 		QPageLink = 17,
 		Html5 = 18,
+		LinkBundle = 19,
 		Other = 999
 	}
 }

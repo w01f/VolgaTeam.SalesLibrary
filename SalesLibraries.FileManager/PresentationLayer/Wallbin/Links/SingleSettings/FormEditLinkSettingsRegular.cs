@@ -32,7 +32,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		private FormEditLinkSettingsRegular()
 		{
 			InitializeComponent();
-			if ((CreateGraphics()).DpiX > 96)
+			if (CreateGraphics().DpiX > 96)
 			{
 				var font = new Font(styleController.Appearance.Font.FontFamily, styleController.Appearance.Font.Size - 2,
 					styleController.Appearance.Font.Style);
@@ -66,7 +66,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		public void InitForm<TEditControl>(LinkSettingsType settingsType) where TEditControl : ILinkSettingsEditControl
 		{
 			Width = 680;
-			Height = 630;
+			Height = 670;
 			var defaultLink = _sourceLinks.First();
 			Text = _sourceLinks.Count == 1 ? defaultLink.ToString() : "Multi-Link Settings";
 			StartPosition = FormStartPosition.CenterScreen;

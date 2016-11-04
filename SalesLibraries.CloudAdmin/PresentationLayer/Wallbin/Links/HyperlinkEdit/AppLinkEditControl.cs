@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.HyperLinkInfo;
 using SalesLibraries.CloudAdmin.Controllers;
@@ -45,7 +46,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.HyperlinkEdi
 			return true;
 		}
 
-		public BaseNetworkLink GetHyperLinkInfo()
+		public BaseNetworkLinkInfo GetHyperLinkInfo()
 		{
 			return new AppLinkInfo
 			{
@@ -57,17 +58,17 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.HyperlinkEdi
 			};
 		}
 
-		public void ApplySharedSettings(BaseNetworkLink templateEditor)
+		public void ApplySharedSettings(BaseNetworkLinkInfo templateInfo)
 		{
-			if (templateEditor != null)
+			if (templateInfo != null)
 			{
-				textEditName.EditValue = templateEditor.Name;
-				checkEditBlueHyperlink.Checked = templateEditor.FormatAsBluelink;
-				checkEditBold.Checked = templateEditor.FormatBold;
+				textEditName.EditValue = templateInfo.Name;
+				checkEditBlueHyperlink.Checked = templateInfo.FormatAsBluelink;
+				checkEditBold.Checked = templateInfo.FormatBold;
 			}
-			if (templateEditor is HyperLinkInfo)
+			if (templateInfo is HyperLinkInfo)
 			{
-				textEditPath.EditValue = ((HyperLinkInfo)templateEditor).Path;
+				textEditPath.EditValue = ((HyperLinkInfo)templateInfo).Path;
 			}
 		}
 	}

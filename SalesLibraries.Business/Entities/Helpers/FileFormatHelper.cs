@@ -6,7 +6,7 @@ namespace SalesLibraries.Business.Entities.Helpers
 	{
 		private static string GetExtension(string filePath)
 		{
-			return Path.GetExtension(filePath).ToUpper();
+			return Path.GetExtension(filePath)?.ToUpper();
 		}
 
 		public static bool IsPowerPointFile(string filePath)

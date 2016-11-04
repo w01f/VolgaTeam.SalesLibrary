@@ -84,6 +84,16 @@
     <Compile Include="Models\Rest\Wallbin\Settings\LibraryPageSettings.cs" />
     <Compile Include="Models\Rest\Wallbin\Settings\LibrarySettings.cs" />
     <Compile Include="Models\Soap\Statistic\FileActivityReportModel.cs" />
+    <Compile Include="Models\Soap\WallbinContentService\InternalLibraryPageLinkSettings.cs" />
+    <Compile Include="Models\Soap\WallbinContentService\InternalLibraryFolderLinkSettings.cs" />
+    <Compile Include="Models\Soap\WallbinContentService\InternalLibraryObjectLinkSettings.cs" />
+    <Compile Include="Models\Soap\WallbinContentService\LinkBundleRevenueItem.cs" />
+    <Compile Include="Models\Soap\WallbinContentService\LinkBundleStrategyItem.cs" />
+    <Compile Include="Models\Soap\WallbinContentService\LinkBundleInfoItem.cs" />
+    <Compile Include="Models\Soap\WallbinContentService\UrlLinkBundleItem.cs" />
+    <Compile Include="Models\Soap\WallbinContentService\LibraryLinkBundleItem.cs" />
+    <Compile Include="Models\Soap\WallbinContentService\IBaseLinkBundleItem.cs" />
+    <Compile Include="Models\Soap\WallbinContentService\LinkBundleLinkSettings.cs" />
     <Compile Include="Models\Soap\WallbinContentService\DocumentLinkSettings.cs" />
     <Compile Include="Models\Soap\WallbinContentService\QPageLinkSettings.cs" />
     <Compile Include="Services\Rest\RestExtension.cs" />
@@ -109,7 +119,7 @@
     <Compile Include="Models\Soap\Statistic\UserActivity.cs" />
     <Compile Include="Models\Soap\Statistic\LibraryFilesModel.cs" />
     <Compile Include="Models\Soap\Statistic\VideoLinkInfo.cs" />
-    <Compile Include="Models\Soap\WallbinContentService\InternalLinkSettings.cs" />
+    <Compile Include="Models\Soap\WallbinContentService\InternalWallbinLinkSettings.cs" />
     <Compile Include="Models\Soap\WallbinContentService\AppLinkSettings.cs" />
     <Compile Include="Models\Soap\WallbinContentService\BaseLinkSettings.cs" />
     <Compile Include="Models\Soap\WallbinContentService\IBaseLinkSettings.cs" />

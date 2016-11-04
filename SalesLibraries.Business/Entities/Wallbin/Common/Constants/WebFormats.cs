@@ -1,6 +1,6 @@
 ﻿namespace SalesLibraries.Business.Entities.Wallbin.Common.Constants
 {
-	static class WebFormats
+	public static class WebFormats
 	{
 		public const string AppleDocument = "key";
 		public const string Excel = "xls";
@@ -21,5 +21,6 @@
 		public const string Word = "doc";
 		public const string Folder = "folder";
 		public const string LineBreak = "line break";
+		public const string LinkBundle = "link bundle";
 	}
 }

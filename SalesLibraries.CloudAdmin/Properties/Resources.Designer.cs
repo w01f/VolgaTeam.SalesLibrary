@@ -103,6 +103,136 @@ namespace SalesLibraries.CloudAdmin.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap BundlesEditorInfoLogo {
+            get {
+                object obj = ResourceManager.GetObject("BundlesEditorInfoLogo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap BundlesEditorLinksAdd {
+            get {
+                object obj = ResourceManager.GetObject("BundlesEditorLinksAdd", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap BundlesEditorLinksAddInfo {
+            get {
+                object obj = ResourceManager.GetObject("BundlesEditorLinksAddInfo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap BundlesEditorLinksAddRevenue {
+            get {
+                object obj = ResourceManager.GetObject("BundlesEditorLinksAddRevenue", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap BundlesEditorLinksAddStrategy {
+            get {
+                object obj = ResourceManager.GetObject("BundlesEditorLinksAddStrategy", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap BundlesEditorLinksAddUrl {
+            get {
+                object obj = ResourceManager.GetObject("BundlesEditorLinksAddUrl", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap BundlesEditorLinksLogo {
+            get {
+                object obj = ResourceManager.GetObject("BundlesEditorLinksLogo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap BundlesEditorRevenueAdd {
+            get {
+                object obj = ResourceManager.GetObject("BundlesEditorRevenueAdd", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap BundlesEditorRevenueLogo {
+            get {
+                object obj = ResourceManager.GetObject("BundlesEditorRevenueLogo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap BundlesEditorStrategyLogo {
+            get {
+                object obj = ResourceManager.GetObject("BundlesEditorStrategyLogo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap BundlesEditorUrlLogo {
+            get {
+                object obj = ResourceManager.GetObject("BundlesEditorUrlLogo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap BundlesFormNew {
+            get {
+                object obj = ResourceManager.GetObject("BundlesFormNew", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap BundlesRibbonNew {
+            get {
+                object obj = ResourceManager.GetObject("BundlesRibbonNew", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ButtonApplyForAll {
             get {
                 object obj = ResourceManager.GetObject("ButtonApplyForAll", resourceCulture);
@@ -446,6 +576,16 @@ namespace SalesLibraries.CloudAdmin.Properties {
         internal static System.Drawing.Bitmap LinkSettingsTextNote {
             get {
                 object obj = ResourceManager.GetObject("LinkSettingsTextNote", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap RetractableLogoBundles {
+            get {
+                object obj = ResourceManager.GetObject("RetractableLogoBundles", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -93,6 +93,16 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 			}
 		}
 
+		private bool _showLinkBundles;
+		public bool ShowLinkBundles
+		{
+			get { return _showLinkBundles; }
+			set
+			{
+				_showLinkBundles = value;
+			}
+		}
+
 		private bool _showTagsEditor;
 		public bool ShowTagsEditor
 		{
@@ -118,12 +128,14 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 			_allowEdit = true;
 			_allowMultiSelect = false;
 			_showFiles = true;
+			_showLinkBundles = false;
 			_showTagsEditor = false;
 			_showCategoryTags = false;
 			_showKeywordTags = false;
 			_showSuperFilterTags = false;
 			_showTagsCleaner = false;
 			_showSecurityTags = false;
+
 		}
 
 		public void Update()
@@ -139,6 +151,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 					_allowEdit = false;
 					_allowMultiSelect = true;
 					_showFiles = false;
+					_showLinkBundles = false;
 					_showTagsEditor = true;
 					_showCategoryTags = true;
 					_showKeywordTags = false;
@@ -150,6 +163,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 					_allowEdit = false;
 					_allowMultiSelect = true;
 					_showFiles = false;
+					_showLinkBundles = false;
 					_showTagsEditor = true;
 					_showCategoryTags = false;
 					_showKeywordTags = false;
@@ -157,10 +171,23 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 					_showTagsCleaner = false;
 					_showSecurityTags = true;
 					break;
+				case TabPageEnum.Bundles:
+					_allowEdit = true;
+					_allowMultiSelect = false;
+					_showFiles = false;
+					_showLinkBundles = true;
+					_showTagsEditor = false;
+					_showCategoryTags = false;
+					_showKeywordTags = false;
+					_showSuperFilterTags = false;
+					_showTagsCleaner = false;
+					_showSecurityTags = false;
+					break;
 				default:
 					_allowEdit = true;
 					_allowMultiSelect = false;
 					_showFiles = true;
+					_showLinkBundles = false;
 					_showTagsEditor = false;
 					_showCategoryTags = false;
 					_showKeywordTags = false;

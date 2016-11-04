@@ -9,7 +9,6 @@ using SalesLibraries.Business.Entities.Wallbin.Persistent;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.CommonGUI.Common;
 using SalesLibraries.FileManager.Controllers;
-using SalesLibraries.FileManager.PresentationLayer.Wallbin.Common;
 using HorizontalAlignment = SalesLibraries.Business.Entities.Wallbin.Common.Enums.HorizontalAlignment;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings

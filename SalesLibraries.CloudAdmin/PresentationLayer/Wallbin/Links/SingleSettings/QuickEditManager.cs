@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using DevExpress.Utils;
 using DevExpress.XtraBars;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
@@ -11,6 +10,7 @@ using DevExpress.XtraEditors.Repository;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.Common.Helpers;
+using SalesLibraries.CommonGUI.Common;
 
 namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettings
 {
@@ -74,15 +74,16 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 				((ButtonEdit)o).EditValue = null;
 			};
 
-			var colorEditor = new RepositoryItemColorEdit
+			var colorEditor = new RepositoryItemHtmlColorEdit
 			{
 				AutoHeight = false,
-				ColorAlignment = HorzAlignment.Center,
-				ShowSystemColors = false,
-				ShowWebColors = false
 			};
 			colorEditor.Buttons.Clear();
-			colorEditor.Buttons.AddRange(new[] { new EditorButton(ButtonPredefines.Combo) });
+			colorEditor.Buttons.AddRange(new[] { new EditorButton(ButtonPredefines.Ellipsis) });
+			colorEditor.OnColorSelected += (o, e) =>
+			{
+				_barManager.CloseMenus();
+			};
 
 			var fontEditor = new RepositoryItemButtonEdit()
 			{
@@ -297,13 +298,13 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 
 		class ObjectLinkSettingsManager : SettingsManager
 		{
-			public static readonly string[] PredefinedNotes =  { 
-				BaseLinkSettings.PredefinedNoteNone, 
+			public static readonly string[] PredefinedNotes =  {
+				BaseLinkSettings.PredefinedNoteNone,
 				BaseLinkSettings.PredefinedNoteNew,
 				BaseLinkSettings.PredefinedNoteSold,
-				BaseLinkSettings.PredefinedNoteUpdated, 
-				BaseLinkSettings.PredefinedNoteSellThis, 
-				BaseLinkSettings.PredefinedNoteAttention 
+				BaseLinkSettings.PredefinedNoteUpdated,
+				BaseLinkSettings.PredefinedNoteSellThis,
+				BaseLinkSettings.PredefinedNoteAttention
 			};
 
 
@@ -413,8 +414,8 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 				_loading = true;
 				_editManager._itemLineBreakFont.Tag = Settings.Font;
 				_editManager._itemLineBreakFont.EditValue = Utils.FontToString(Settings.Font);
-				_editManager._itemFontColor.EditValue = TargetLink.DisplayColor;
 				_editManager._itemHoverNote.EditValue = Settings.Note;
+				_editManager._itemFontColor.EditValue = TargetLink.DisplayColor;
 				_loading = false;
 			}
 

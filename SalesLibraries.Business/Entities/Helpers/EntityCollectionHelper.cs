@@ -5,7 +5,7 @@ using SalesLibraries.Business.Entities.Interfaces;
 
 namespace SalesLibraries.Business.Entities.Helpers
 {
-	static class EntityCollectionHelper
+	public static class EntityCollectionHelper
 	{
 		public static void Save<TContext, TEntity>(this ICollection<TEntity> originalCollection, ICollection<TEntity> currentCollection, TContext context)
 			where TContext : DbContext

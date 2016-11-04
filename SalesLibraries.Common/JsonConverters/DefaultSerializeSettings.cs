@@ -14,7 +14,8 @@ namespace SalesLibraries.Common.JsonConverters
 			ContractResolver = new EntitySettingsResolver();
 			Formatting = Formatting.None;
 
-			Converters.Add(new StringEnumConverter()
+			Converters.Add(new GuidConverter());
+			Converters.Add(new StringEnumConverter
 			{
 				AllowIntegerValues = true,
 				CamelCaseText = false

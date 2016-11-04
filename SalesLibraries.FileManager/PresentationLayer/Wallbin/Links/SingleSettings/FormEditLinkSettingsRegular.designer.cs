@@ -33,15 +33,15 @@
 			this.buttonXOK = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXCancel = new DevComponents.DotNetBar.ButtonX();
 			this.hyperLinkEditRequestNewCategories = new DevExpress.XtraEditors.HyperLinkEdit();
+			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
 			this.pnBottom = new System.Windows.Forms.Panel();
 			this.pnTop = new System.Windows.Forms.Panel();
 			this.labelControlTitle = new DevExpress.XtraEditors.LabelControl();
-			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControl)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.hyperLinkEditRequestNewCategories.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			this.pnBottom.SuspendLayout();
 			this.pnTop.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// xtraTabControl
@@ -66,7 +66,7 @@
 			this.xtraTabControl.Location = new System.Drawing.Point(0, 52);
 			this.xtraTabControl.Name = "xtraTabControl";
 			this.xtraTabControl.ShowTabHeader = DevExpress.Utils.DefaultBoolean.False;
-			this.xtraTabControl.Size = new System.Drawing.Size(607, 486);
+			this.xtraTabControl.Size = new System.Drawing.Size(607, 535);
 			this.xtraTabControl.TabIndex = 4;
 			this.xtraTabControl.SelectedPageChanged += new DevExpress.XtraTab.TabPageChangedEventHandler(this.xtraTabControl_SelectedPageChanged);
 			// 
@@ -117,6 +117,25 @@
 			this.hyperLinkEditRequestNewCategories.Visible = false;
 			this.hyperLinkEditRequestNewCategories.OpenLink += new DevExpress.XtraEditors.Controls.OpenLinkEventHandler(this.hyperLinkEditRequestNewCategories_OpenLink);
 			// 
+			// styleController
+			// 
+			this.styleController.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.styleController.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.styleController.Appearance.Options.UseFont = true;
+			this.styleController.Appearance.Options.UseForeColor = true;
+			this.styleController.AppearanceDisabled.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.styleController.AppearanceDisabled.ForeColor = System.Drawing.Color.Gray;
+			this.styleController.AppearanceDisabled.Options.UseFont = true;
+			this.styleController.AppearanceDisabled.Options.UseForeColor = true;
+			this.styleController.AppearanceDropDown.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.styleController.AppearanceDropDown.Options.UseFont = true;
+			this.styleController.AppearanceDropDownHeader.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.styleController.AppearanceDropDownHeader.Options.UseFont = true;
+			this.styleController.AppearanceFocused.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.styleController.AppearanceFocused.Options.UseFont = true;
+			this.styleController.AppearanceReadOnly.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.styleController.AppearanceReadOnly.Options.UseFont = true;
+			// 
 			// pnBottom
 			// 
 			this.pnBottom.BackColor = System.Drawing.Color.Transparent;
@@ -125,7 +144,7 @@
 			this.pnBottom.Controls.Add(this.buttonXOK);
 			this.pnBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
 			this.pnBottom.ForeColor = System.Drawing.Color.Black;
-			this.pnBottom.Location = new System.Drawing.Point(0, 538);
+			this.pnBottom.Location = new System.Drawing.Point(0, 587);
 			this.pnBottom.Name = "pnBottom";
 			this.pnBottom.Size = new System.Drawing.Size(607, 54);
 			this.pnBottom.TabIndex = 8;
@@ -157,30 +176,11 @@
 			this.labelControlTitle.TabIndex = 0;
 			this.labelControlTitle.Text = "Link Settings";
 			// 
-			// styleController
-			// 
-			this.styleController.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.styleController.Appearance.ForeColor = System.Drawing.Color.Black;
-			this.styleController.Appearance.Options.UseFont = true;
-			this.styleController.Appearance.Options.UseForeColor = true;
-			this.styleController.AppearanceDisabled.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.styleController.AppearanceDisabled.ForeColor = System.Drawing.Color.Gray;
-			this.styleController.AppearanceDisabled.Options.UseFont = true;
-			this.styleController.AppearanceDisabled.Options.UseForeColor = true;
-			this.styleController.AppearanceDropDown.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.styleController.AppearanceDropDown.Options.UseFont = true;
-			this.styleController.AppearanceDropDownHeader.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.styleController.AppearanceDropDownHeader.Options.UseFont = true;
-			this.styleController.AppearanceFocused.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.styleController.AppearanceFocused.Options.UseFont = true;
-			this.styleController.AppearanceReadOnly.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.styleController.AppearanceReadOnly.Options.UseFont = true;
-			// 
 			// FormEditLinkSettingsRegular
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
 			this.BackColor = System.Drawing.Color.White;
-			this.ClientSize = new System.Drawing.Size(607, 592);
+			this.ClientSize = new System.Drawing.Size(607, 641);
 			this.Controls.Add(this.xtraTabControl);
 			this.Controls.Add(this.pnTop);
 			this.Controls.Add(this.pnBottom);
@@ -195,9 +195,9 @@
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormEditLinkSettings_FormClosing);
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControl)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.hyperLinkEditRequestNewCategories.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
 			this.pnBottom.ResumeLayout(false);
 			this.pnTop.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
 			this.ResumeLayout(false);
 
         }

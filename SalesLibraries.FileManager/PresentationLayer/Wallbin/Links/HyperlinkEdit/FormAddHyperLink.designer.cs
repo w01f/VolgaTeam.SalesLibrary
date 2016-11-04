@@ -46,7 +46,7 @@
 			this.buttonXCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXCancel.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.buttonXCancel.Location = new System.Drawing.Point(782, 406);
+			this.buttonXCancel.Location = new System.Drawing.Point(782, 463);
 			this.buttonXCancel.Name = "buttonXCancel";
 			this.buttonXCancel.Size = new System.Drawing.Size(93, 32);
 			this.buttonXCancel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -60,7 +60,7 @@
 			this.buttonXSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXSave.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXSave.DialogResult = System.Windows.Forms.DialogResult.OK;
-			this.buttonXSave.Location = new System.Drawing.Point(673, 406);
+			this.buttonXSave.Location = new System.Drawing.Point(673, 463);
 			this.buttonXSave.Name = "buttonXSave";
 			this.buttonXSave.Size = new System.Drawing.Size(93, 32);
 			this.buttonXSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -77,7 +77,7 @@
 			this.pnEditContainer.ForeColor = System.Drawing.Color.Black;
 			this.pnEditContainer.Location = new System.Drawing.Point(0, 68);
 			this.pnEditContainer.Name = "pnEditContainer";
-			this.pnEditContainer.Size = new System.Drawing.Size(882, 328);
+			this.pnEditContainer.Size = new System.Drawing.Size(882, 385);
 			this.pnEditContainer.TabIndex = 33;
 			// 
 			// buttonXApp
@@ -175,7 +175,7 @@
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
 			this.BackColor = System.Drawing.Color.White;
-			this.ClientSize = new System.Drawing.Size(882, 445);
+			this.ClientSize = new System.Drawing.Size(882, 502);
 			this.Controls.Add(this.buttonXInternal);
 			this.Controls.Add(this.buttonXApp);
 			this.Controls.Add(this.buttonXQuickSite);
@@ -188,6 +188,7 @@
 			this.Controls.Add(this.buttonXHtml5);
 			this.DoubleBuffered = true;
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.ForeColor = System.Drawing.Color.Black;
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;

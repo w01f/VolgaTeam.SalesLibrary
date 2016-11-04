@@ -86,6 +86,7 @@
           <xsd:element name="image" type="xsd:string" />
           <xsd:element name="showText" type="xsd:boolean" />
           <xsd:element name="imageAlignment" type="xsd:string" />
+          <xsd:element name="imageVerticalAlignment" type="xsd:string" />
           <xsd:element name="text" type="xsd:string" />
           <xsd:element name="font" type="tns:Font" />
           <xsd:element name="foreColor" type="xsd:string" />
@@ -112,6 +113,7 @@
           <xsd:element name="fileDate" type="xsd:string" />
           <xsd:element name="fileSize" type="xsd:int" />
           <xsd:element name="originalFormat" type="xsd:string" />
+          <xsd:element name="searchFormat" type="xsd:string" />
           <xsd:element name="order" type="xsd:int" />
           <xsd:element name="type" type="xsd:int" />
           <xsd:element name="extendedProperties" type="tns:BaseLinkSettings" />
@@ -133,6 +135,7 @@
         <xsd:all>
           <xsd:element name="note" type="xsd:string" />
           <xsd:element name="hoverNote" type="xsd:string" />
+          <xsd:element name="showOnlyCustomHoverNote" type="xsd:boolean" />
           <xsd:element name="isBold" type="xsd:boolean" />
           <xsd:element name="isItalic" type="xsd:boolean" />
           <xsd:element name="isUnderline" type="xsd:boolean" />
@@ -144,6 +147,8 @@
           <xsd:element name="noShare" type="xsd:boolean" />
           <xsd:element name="assignedUsers" type="xsd:string" />
           <xsd:element name="deniedUsers" type="xsd:string" />
+          <xsd:element name="quickLinkUrl" type="xsd:string" />
+          <xsd:element name="quickLinkTitle" type="xsd:string" />
         </xsd:all>
       </xsd:complexType>
       <xsd:complexType name="LineBreak">
@@ -321,6 +326,7 @@
           <xsd:element name="forcePreview" type="xsd:boolean" />
           <xsd:element name="note" type="xsd:string" />
           <xsd:element name="hoverNote" type="xsd:string" />
+          <xsd:element name="showOnlyCustomHoverNote" type="xsd:boolean" />
           <xsd:element name="isBold" type="xsd:boolean" />
           <xsd:element name="isItalic" type="xsd:boolean" />
           <xsd:element name="isUnderline" type="xsd:boolean" />
@@ -332,6 +338,8 @@
           <xsd:element name="noShare" type="xsd:boolean" />
           <xsd:element name="assignedUsers" type="xsd:string" />
           <xsd:element name="deniedUsers" type="xsd:string" />
+          <xsd:element name="quickLinkUrl" type="xsd:string" />
+          <xsd:element name="quickLinkTitle" type="xsd:string" />
         </xsd:all>
       </xsd:complexType>
       <xsd:complexType name="HyperLinkSettings">
@@ -339,6 +347,7 @@
           <xsd:element name="forcePreview" type="xsd:boolean" />
           <xsd:element name="note" type="xsd:string" />
           <xsd:element name="hoverNote" type="xsd:string" />
+          <xsd:element name="showOnlyCustomHoverNote" type="xsd:boolean" />
           <xsd:element name="isBold" type="xsd:boolean" />
           <xsd:element name="isItalic" type="xsd:boolean" />
           <xsd:element name="isUnderline" type="xsd:boolean" />
@@ -350,6 +359,8 @@
           <xsd:element name="noShare" type="xsd:boolean" />
           <xsd:element name="assignedUsers" type="xsd:string" />
           <xsd:element name="deniedUsers" type="xsd:string" />
+          <xsd:element name="quickLinkUrl" type="xsd:string" />
+          <xsd:element name="quickLinkTitle" type="xsd:string" />
         </xsd:all>
       </xsd:complexType>
       <xsd:complexType name="PowerPointLinkSettings">
@@ -358,6 +369,7 @@
           <xsd:element name="slideHeight" type="xsd:float" />
           <xsd:element name="note" type="xsd:string" />
           <xsd:element name="hoverNote" type="xsd:string" />
+          <xsd:element name="showOnlyCustomHoverNote" type="xsd:boolean" />
           <xsd:element name="isBold" type="xsd:boolean" />
           <xsd:element name="isItalic" type="xsd:boolean" />
           <xsd:element name="isUnderline" type="xsd:boolean" />
@@ -369,6 +381,29 @@
           <xsd:element name="noShare" type="xsd:boolean" />
           <xsd:element name="assignedUsers" type="xsd:string" />
           <xsd:element name="deniedUsers" type="xsd:string" />
+          <xsd:element name="quickLinkUrl" type="xsd:string" />
+          <xsd:element name="quickLinkTitle" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="DocumentLinkSettings">
+        <xsd:all>
+          <xsd:element name="forcePreview" type="xsd:boolean" />
+          <xsd:element name="note" type="xsd:string" />
+          <xsd:element name="hoverNote" type="xsd:string" />
+          <xsd:element name="showOnlyCustomHoverNote" type="xsd:boolean" />
+          <xsd:element name="isBold" type="xsd:boolean" />
+          <xsd:element name="isItalic" type="xsd:boolean" />
+          <xsd:element name="isUnderline" type="xsd:boolean" />
+          <xsd:element name="isSpecialFormat" type="xsd:boolean" />
+          <xsd:element name="font" type="tns:Font" />
+          <xsd:element name="foreColor" type="xsd:string" />
+          <xsd:element name="isTextWordWrap" type="xsd:boolean" />
+          <xsd:element name="isRestricted" type="xsd:boolean" />
+          <xsd:element name="noShare" type="xsd:boolean" />
+          <xsd:element name="assignedUsers" type="xsd:string" />
+          <xsd:element name="deniedUsers" type="xsd:string" />
+          <xsd:element name="quickLinkUrl" type="xsd:string" />
+          <xsd:element name="quickLinkTitle" type="xsd:string" />
         </xsd:all>
       </xsd:complexType>
       <xsd:complexType name="AppLinkSettings">
@@ -376,6 +411,7 @@
           <xsd:element name="secondPath" type="xsd:string" />
           <xsd:element name="note" type="xsd:string" />
           <xsd:element name="hoverNote" type="xsd:string" />
+          <xsd:element name="showOnlyCustomHoverNote" type="xsd:boolean" />
           <xsd:element name="isBold" type="xsd:boolean" />
           <xsd:element name="isItalic" type="xsd:boolean" />
           <xsd:element name="isUnderline" type="xsd:boolean" />
@@ -387,17 +423,108 @@
           <xsd:element name="noShare" type="xsd:boolean" />
           <xsd:element name="assignedUsers" type="xsd:string" />
           <xsd:element name="deniedUsers" type="xsd:string" />
+          <xsd:element name="quickLinkUrl" type="xsd:string" />
+          <xsd:element name="quickLinkTitle" type="xsd:string" />
         </xsd:all>
       </xsd:complexType>
-      <xsd:complexType name="InternalLinkSettings">
+      <xsd:complexType name="InternalWallbinLinkSettings">
         <xsd:all>
+          <xsd:element name="internalLinkType" type="xsd:int" />
+          <xsd:element name="libraryName" type="xsd:string" />
+          <xsd:element name="pageName" type="xsd:string" />
+          <xsd:element name="headerIcon" type="xsd:string" />
+          <xsd:element name="showHeaderText" type="xsd:boolean" />
+          <xsd:element name="pageViewType" type="xsd:string" />
+          <xsd:element name="pageSelectorType" type="xsd:string" />
+          <xsd:element name="showLogo" type="xsd:boolean" />
+          <xsd:element name="note" type="xsd:string" />
+          <xsd:element name="hoverNote" type="xsd:string" />
+          <xsd:element name="showOnlyCustomHoverNote" type="xsd:boolean" />
+          <xsd:element name="isBold" type="xsd:boolean" />
+          <xsd:element name="isItalic" type="xsd:boolean" />
+          <xsd:element name="isUnderline" type="xsd:boolean" />
+          <xsd:element name="isSpecialFormat" type="xsd:boolean" />
+          <xsd:element name="font" type="tns:Font" />
+          <xsd:element name="foreColor" type="xsd:string" />
+          <xsd:element name="isTextWordWrap" type="xsd:boolean" />
+          <xsd:element name="isRestricted" type="xsd:boolean" />
+          <xsd:element name="noShare" type="xsd:boolean" />
+          <xsd:element name="assignedUsers" type="xsd:string" />
+          <xsd:element name="deniedUsers" type="xsd:string" />
+          <xsd:element name="quickLinkUrl" type="xsd:string" />
+          <xsd:element name="quickLinkTitle" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="InternalLibraryPageLinkSettings">
+        <xsd:all>
+          <xsd:element name="internalLinkType" type="xsd:int" />
+          <xsd:element name="libraryName" type="xsd:string" />
+          <xsd:element name="pageName" type="xsd:string" />
+          <xsd:element name="headerIcon" type="xsd:string" />
+          <xsd:element name="showHeaderText" type="xsd:boolean" />
+          <xsd:element name="pageViewType" type="xsd:string" />
+          <xsd:element name="showLogo" type="xsd:boolean" />
+          <xsd:element name="showText" type="xsd:boolean" />
+          <xsd:element name="showWindowHeaders" type="xsd:boolean" />
+          <xsd:element name="textColor" type="xsd:string" />
+          <xsd:element name="backColor" type="xsd:string" />
+          <xsd:element name="note" type="xsd:string" />
+          <xsd:element name="hoverNote" type="xsd:string" />
+          <xsd:element name="showOnlyCustomHoverNote" type="xsd:boolean" />
+          <xsd:element name="isBold" type="xsd:boolean" />
+          <xsd:element name="isItalic" type="xsd:boolean" />
+          <xsd:element name="isUnderline" type="xsd:boolean" />
+          <xsd:element name="isSpecialFormat" type="xsd:boolean" />
+          <xsd:element name="font" type="tns:Font" />
+          <xsd:element name="foreColor" type="xsd:string" />
+          <xsd:element name="isTextWordWrap" type="xsd:boolean" />
+          <xsd:element name="isRestricted" type="xsd:boolean" />
+          <xsd:element name="noShare" type="xsd:boolean" />
+          <xsd:element name="assignedUsers" type="xsd:string" />
+          <xsd:element name="deniedUsers" type="xsd:string" />
+          <xsd:element name="quickLinkUrl" type="xsd:string" />
+          <xsd:element name="quickLinkTitle" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="InternalLibraryFolderLinkSettings">
+        <xsd:all>
+          <xsd:element name="internalLinkType" type="xsd:int" />
+          <xsd:element name="libraryName" type="xsd:string" />
+          <xsd:element name="pageName" type="xsd:string" />
+          <xsd:element name="windowName" type="xsd:string" />
+          <xsd:element name="headerIcon" type="xsd:string" />
+          <xsd:element name="showHeaderText" type="xsd:boolean" />
+          <xsd:element name="windowViewType" type="xsd:string" />
+          <xsd:element name="column" type="xsd:int" />
+          <xsd:element name="linksOnly" type="xsd:boolean" />
+          <xsd:element name="note" type="xsd:string" />
+          <xsd:element name="hoverNote" type="xsd:string" />
+          <xsd:element name="showOnlyCustomHoverNote" type="xsd:boolean" />
+          <xsd:element name="isBold" type="xsd:boolean" />
+          <xsd:element name="isItalic" type="xsd:boolean" />
+          <xsd:element name="isUnderline" type="xsd:boolean" />
+          <xsd:element name="isSpecialFormat" type="xsd:boolean" />
+          <xsd:element name="font" type="tns:Font" />
+          <xsd:element name="foreColor" type="xsd:string" />
+          <xsd:element name="isTextWordWrap" type="xsd:boolean" />
+          <xsd:element name="isRestricted" type="xsd:boolean" />
+          <xsd:element name="noShare" type="xsd:boolean" />
+          <xsd:element name="assignedUsers" type="xsd:string" />
+          <xsd:element name="deniedUsers" type="xsd:string" />
+          <xsd:element name="quickLinkUrl" type="xsd:string" />
+          <xsd:element name="quickLinkTitle" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="InternalLibraryObjectLinkSettings">
+        <xsd:all>
+          <xsd:element name="internalLinkType" type="xsd:int" />
           <xsd:element name="libraryName" type="xsd:string" />
           <xsd:element name="pageName" type="xsd:string" />
           <xsd:element name="windowName" type="xsd:string" />
           <xsd:element name="linkName" type="xsd:string" />
-          <xsd:element name="forcePreview" type="xsd:boolean" />
           <xsd:element name="note" type="xsd:string" />
           <xsd:element name="hoverNote" type="xsd:string" />
+          <xsd:element name="showOnlyCustomHoverNote" type="xsd:boolean" />
           <xsd:element name="isBold" type="xsd:boolean" />
           <xsd:element name="isItalic" type="xsd:boolean" />
           <xsd:element name="isUnderline" type="xsd:boolean" />
@@ -409,6 +536,8 @@
           <xsd:element name="noShare" type="xsd:boolean" />
           <xsd:element name="assignedUsers" type="xsd:string" />
           <xsd:element name="deniedUsers" type="xsd:string" />
+          <xsd:element name="quickLinkUrl" type="xsd:string" />
+          <xsd:element name="quickLinkTitle" type="xsd:string" />
         </xsd:all>
       </xsd:complexType>
       <xsd:complexType name="ExcelLinkSettings">
@@ -417,6 +546,7 @@
           <xsd:element name="forceOpen" type="xsd:boolean" />
           <xsd:element name="note" type="xsd:string" />
           <xsd:element name="hoverNote" type="xsd:string" />
+          <xsd:element name="showOnlyCustomHoverNote" type="xsd:boolean" />
           <xsd:element name="isBold" type="xsd:boolean" />
           <xsd:element name="isItalic" type="xsd:boolean" />
           <xsd:element name="isUnderline" type="xsd:boolean" />
@@ -428,6 +558,8 @@
           <xsd:element name="noShare" type="xsd:boolean" />
           <xsd:element name="assignedUsers" type="xsd:string" />
           <xsd:element name="deniedUsers" type="xsd:string" />
+          <xsd:element name="quickLinkUrl" type="xsd:string" />
+          <xsd:element name="quickLinkTitle" type="xsd:string" />
         </xsd:all>
       </xsd:complexType>
       <xsd:complexType name="QPageLinkSettings">
@@ -436,6 +568,7 @@
           <xsd:element name="forcePreview" type="xsd:boolean" />
           <xsd:element name="note" type="xsd:string" />
           <xsd:element name="hoverNote" type="xsd:string" />
+          <xsd:element name="showOnlyCustomHoverNote" type="xsd:boolean" />
           <xsd:element name="isBold" type="xsd:boolean" />
           <xsd:element name="isItalic" type="xsd:boolean" />
           <xsd:element name="isUnderline" type="xsd:boolean" />
@@ -447,6 +580,119 @@
           <xsd:element name="noShare" type="xsd:boolean" />
           <xsd:element name="assignedUsers" type="xsd:string" />
           <xsd:element name="deniedUsers" type="xsd:string" />
+          <xsd:element name="quickLinkUrl" type="xsd:string" />
+          <xsd:element name="quickLinkTitle" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="LinkBundleLinkSettings">
+        <xsd:all>
+          <xsd:element name="customWebFormat" type="xsd:string" />
+          <xsd:element name="bundleItems" type="tns:BaseLinkBundleItemArray" />
+          <xsd:element name="note" type="xsd:string" />
+          <xsd:element name="hoverNote" type="xsd:string" />
+          <xsd:element name="showOnlyCustomHoverNote" type="xsd:boolean" />
+          <xsd:element name="isBold" type="xsd:boolean" />
+          <xsd:element name="isItalic" type="xsd:boolean" />
+          <xsd:element name="isUnderline" type="xsd:boolean" />
+          <xsd:element name="isSpecialFormat" type="xsd:boolean" />
+          <xsd:element name="font" type="tns:Font" />
+          <xsd:element name="foreColor" type="xsd:string" />
+          <xsd:element name="isTextWordWrap" type="xsd:boolean" />
+          <xsd:element name="isRestricted" type="xsd:boolean" />
+          <xsd:element name="noShare" type="xsd:boolean" />
+          <xsd:element name="assignedUsers" type="xsd:string" />
+          <xsd:element name="deniedUsers" type="xsd:string" />
+          <xsd:element name="quickLinkUrl" type="xsd:string" />
+          <xsd:element name="quickLinkTitle" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="BaseLinkBundleItemArray">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soap-enc:Array">
+            <xsd:attribute wsdl:arrayType="tns:BaseLinkBundleItem[]" ref="soap-enc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="BaseLinkBundleItem">
+        <xsd:all>
+          <xsd:element name="id" type="xsd:string" />
+          <xsd:element name="itemType" type="xsd:int" />
+          <xsd:element name="collectionOrder" type="xsd:int" />
+          <xsd:element name="image" type="xsd:string" />
+          <xsd:element name="title" type="xsd:string" />
+          <xsd:element name="hoverTip" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="LibraryLinkBundleItem">
+        <xsd:all>
+          <xsd:element name="libraryLinkId" type="xsd:string" />
+          <xsd:element name="id" type="xsd:string" />
+          <xsd:element name="itemType" type="xsd:int" />
+          <xsd:element name="collectionOrder" type="xsd:int" />
+          <xsd:element name="image" type="xsd:string" />
+          <xsd:element name="title" type="xsd:string" />
+          <xsd:element name="hoverTip" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="UrlLinkBundleItem">
+        <xsd:all>
+          <xsd:element name="url" type="xsd:string" />
+          <xsd:element name="id" type="xsd:string" />
+          <xsd:element name="itemType" type="xsd:int" />
+          <xsd:element name="collectionOrder" type="xsd:int" />
+          <xsd:element name="image" type="xsd:string" />
+          <xsd:element name="title" type="xsd:string" />
+          <xsd:element name="hoverTip" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="LinkBundleInfoItem">
+        <xsd:all>
+          <xsd:element name="header" type="xsd:string" />
+          <xsd:element name="body" type="xsd:string" />
+          <xsd:element name="id" type="xsd:string" />
+          <xsd:element name="itemType" type="xsd:int" />
+          <xsd:element name="collectionOrder" type="xsd:int" />
+          <xsd:element name="image" type="xsd:string" />
+          <xsd:element name="title" type="xsd:string" />
+          <xsd:element name="hoverTip" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="LinkBundleStrategyItem">
+        <xsd:all>
+          <xsd:element name="header" type="xsd:string" />
+          <xsd:element name="body" type="xsd:string" />
+          <xsd:element name="id" type="xsd:string" />
+          <xsd:element name="itemType" type="xsd:int" />
+          <xsd:element name="collectionOrder" type="xsd:int" />
+          <xsd:element name="image" type="xsd:string" />
+          <xsd:element name="title" type="xsd:string" />
+          <xsd:element name="hoverTip" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="LinkBundleRevenueItem">
+        <xsd:all>
+          <xsd:element name="revenueType" type="xsd:int" />
+          <xsd:element name="additionalInfo" type="xsd:string" />
+          <xsd:element name="infoItems" type="tns:LinkBundleRevenueInfoItemArray" />
+          <xsd:element name="id" type="xsd:string" />
+          <xsd:element name="itemType" type="xsd:int" />
+          <xsd:element name="collectionOrder" type="xsd:int" />
+          <xsd:element name="image" type="xsd:string" />
+          <xsd:element name="title" type="xsd:string" />
+          <xsd:element name="hoverTip" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="LinkBundleRevenueInfoItemArray">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soap-enc:Array">
+            <xsd:attribute wsdl:arrayType="tns:LinkBundleRevenueInfoItem[]" ref="soap-enc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="LinkBundleRevenueInfoItem">
+        <xsd:all>
+          <xsd:element name="infoType" type="xsd:string" />
+          <xsd:element name="value" type="xsd:float" />
         </xsd:all>
       </xsd:complexType>
     </xsd:schema>
@@ -467,14 +713,30 @@
     <wsdl:part name="settings" type="tns:PowerPointLinkSettings" />
   </wsdl:message>
   <wsdl:message name="mockPowerPointLinkSettingsOut" />
+  <wsdl:message name="mockPowerDocumentSettingsIn">
+    <wsdl:part name="settings" type="tns:DocumentLinkSettings" />
+  </wsdl:message>
+  <wsdl:message name="mockPowerDocumentSettingsOut" />
   <wsdl:message name="mockAppLinkSettingsIn">
     <wsdl:part name="settings" type="tns:AppLinkSettings" />
   </wsdl:message>
   <wsdl:message name="mockAppLinkSettingsOut" />
-  <wsdl:message name="mockInternalLinkSettingsIn">
-    <wsdl:part name="settings" type="tns:InternalLinkSettings" />
+  <wsdl:message name="mockInternalWallbinLinkSettingsIn">
+    <wsdl:part name="settings" type="tns:InternalWallbinLinkSettings" />
   </wsdl:message>
-  <wsdl:message name="mockInternalLinkSettingsOut" />
+  <wsdl:message name="mockInternalWallbinLinkSettingsOut" />
+  <wsdl:message name="mockInternalLibraryPageLinkSettingsIn">
+    <wsdl:part name="settings" type="tns:InternalLibraryPageLinkSettings" />
+  </wsdl:message>
+  <wsdl:message name="mockInternalLibraryPageLinkSettingsOut" />
+  <wsdl:message name="mockInternalLibraryFolderLinkSettingsIn">
+    <wsdl:part name="settings" type="tns:InternalLibraryFolderLinkSettings" />
+  </wsdl:message>
+  <wsdl:message name="mockInternalLibraryFolderLinkSettingsOut" />
+  <wsdl:message name="mockInternalLibraryObjectLinkSettingsIn">
+    <wsdl:part name="settings" type="tns:InternalLibraryObjectLinkSettings" />
+  </wsdl:message>
+  <wsdl:message name="mockInternalLibraryObjectLinkSettingsOut" />
   <wsdl:message name="mockExcelLinkSettingsIn">
     <wsdl:part name="settings" type="tns:ExcelLinkSettings" />
   </wsdl:message>
@@ -483,6 +745,30 @@
     <wsdl:part name="settings" type="tns:QPageLinkSettings" />
   </wsdl:message>
   <wsdl:message name="mockQPageLinkSettingsOut" />
+  <wsdl:message name="mockLinkBundleLinkSettingsIn">
+    <wsdl:part name="settings" type="tns:LinkBundleLinkSettings" />
+  </wsdl:message>
+  <wsdl:message name="mockLinkBundleLinkSettingsOut" />
+  <wsdl:message name="mockLibraryLinkBundleItemIn">
+    <wsdl:part name="item" type="tns:LibraryLinkBundleItem" />
+  </wsdl:message>
+  <wsdl:message name="mockLibraryLinkBundleItemOut" />
+  <wsdl:message name="mockUrlLinkBundleItemIn">
+    <wsdl:part name="item" type="tns:UrlLinkBundleItem" />
+  </wsdl:message>
+  <wsdl:message name="mockUrlLinkBundleItemOut" />
+  <wsdl:message name="mockLinkBundleInfoItemIn">
+    <wsdl:part name="item" type="tns:LinkBundleInfoItem" />
+  </wsdl:message>
+  <wsdl:message name="mockLinkBundleInfoItemOut" />
+  <wsdl:message name="mockLinkBundleStrategyItemIn">
+    <wsdl:part name="item" type="tns:LinkBundleStrategyItem" />
+  </wsdl:message>
+  <wsdl:message name="mockLinkBundleStrategyItemOut" />
+  <wsdl:message name="mockLinkBundleRevenueItemIn">
+    <wsdl:part name="item" type="tns:LinkBundleRevenueItem" />
+  </wsdl:message>
+  <wsdl:message name="mockLinkBundleRevenueItemOut" />
   <wsdl:message name="getSessionKeyIn">
     <wsdl:part name="login" type="xsd:string" />
     <wsdl:part name="password" type="xsd:string" />
@@ -515,17 +801,41 @@
       <wsdl:input message="tns:mockPowerPointLinkSettingsIn" />
       <wsdl:output message="tns:mockPowerPointLinkSettingsOut" />
     </wsdl:operation>
+    <wsdl:operation name="mockPowerDocumentSettings">
+      <wsdl:documentation>
+      </wsdl:documentation>
+      <wsdl:input message="tns:mockPowerDocumentSettingsIn" />
+      <wsdl:output message="tns:mockPowerDocumentSettingsOut" />
+    </wsdl:operation>
     <wsdl:operation name="mockAppLinkSettings">
       <wsdl:documentation>
       </wsdl:documentation>
       <wsdl:input message="tns:mockAppLinkSettingsIn" />
       <wsdl:output message="tns:mockAppLinkSettingsOut" />
     </wsdl:operation>
-    <wsdl:operation name="mockInternalLinkSettings">
+    <wsdl:operation name="mockInternalWallbinLinkSettings">
       <wsdl:documentation>
       </wsdl:documentation>
-      <wsdl:input message="tns:mockInternalLinkSettingsIn" />
-      <wsdl:output message="tns:mockInternalLinkSettingsOut" />
+      <wsdl:input message="tns:mockInternalWallbinLinkSettingsIn" />
+      <wsdl:output message="tns:mockInternalWallbinLinkSettingsOut" />
+    </wsdl:operation>
+    <wsdl:operation name="mockInternalLibraryPageLinkSettings">
+      <wsdl:documentation>
+      </wsdl:documentation>
+      <wsdl:input message="tns:mockInternalLibraryPageLinkSettingsIn" />
+      <wsdl:output message="tns:mockInternalLibraryPageLinkSettingsOut" />
+    </wsdl:operation>
+    <wsdl:operation name="mockInternalLibraryFolderLinkSettings">
+      <wsdl:documentation>
+      </wsdl:documentation>
+      <wsdl:input message="tns:mockInternalLibraryFolderLinkSettingsIn" />
+      <wsdl:output message="tns:mockInternalLibraryFolderLinkSettingsOut" />
+    </wsdl:operation>
+    <wsdl:operation name="mockInternalLibraryObjectLinkSettings">
+      <wsdl:documentation>
+      </wsdl:documentation>
+      <wsdl:input message="tns:mockInternalLibraryObjectLinkSettingsIn" />
+      <wsdl:output message="tns:mockInternalLibraryObjectLinkSettingsOut" />
     </wsdl:operation>
     <wsdl:operation name="mockExcelLinkSettings">
       <wsdl:documentation>
@@ -538,6 +848,42 @@
       </wsdl:documentation>
       <wsdl:input message="tns:mockQPageLinkSettingsIn" />
       <wsdl:output message="tns:mockQPageLinkSettingsOut" />
+    </wsdl:operation>
+    <wsdl:operation name="mockLinkBundleLinkSettings">
+      <wsdl:documentation>
+      </wsdl:documentation>
+      <wsdl:input message="tns:mockLinkBundleLinkSettingsIn" />
+      <wsdl:output message="tns:mockLinkBundleLinkSettingsOut" />
+    </wsdl:operation>
+    <wsdl:operation name="mockLibraryLinkBundleItem">
+      <wsdl:documentation>
+      </wsdl:documentation>
+      <wsdl:input message="tns:mockLibraryLinkBundleItemIn" />
+      <wsdl:output message="tns:mockLibraryLinkBundleItemOut" />
+    </wsdl:operation>
+    <wsdl:operation name="mockUrlLinkBundleItem">
+      <wsdl:documentation>
+      </wsdl:documentation>
+      <wsdl:input message="tns:mockUrlLinkBundleItemIn" />
+      <wsdl:output message="tns:mockUrlLinkBundleItemOut" />
+    </wsdl:operation>
+    <wsdl:operation name="mockLinkBundleInfoItem">
+      <wsdl:documentation>
+      </wsdl:documentation>
+      <wsdl:input message="tns:mockLinkBundleInfoItemIn" />
+      <wsdl:output message="tns:mockLinkBundleInfoItemOut" />
+    </wsdl:operation>
+    <wsdl:operation name="mockLinkBundleStrategyItem">
+      <wsdl:documentation>
+      </wsdl:documentation>
+      <wsdl:input message="tns:mockLinkBundleStrategyItemIn" />
+      <wsdl:output message="tns:mockLinkBundleStrategyItemOut" />
+    </wsdl:operation>
+    <wsdl:operation name="mockLinkBundleRevenueItem">
+      <wsdl:documentation>
+      </wsdl:documentation>
+      <wsdl:input message="tns:mockLinkBundleRevenueItemIn" />
+      <wsdl:output message="tns:mockLinkBundleRevenueItemOut" />
     </wsdl:operation>
     <wsdl:operation name="getSessionKey">
       <wsdl:documentation>
@@ -584,6 +930,15 @@
         <soap:body use="encoded" namespace="urn:ContentControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="mockPowerDocumentSettings">
+      <soap:operation soapAction="urn:ContentControllerwsdl#mockPowerDocumentSettings" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ContentControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ContentControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="mockAppLinkSettings">
       <soap:operation soapAction="urn:ContentControllerwsdl#mockAppLinkSettings" style="rpc" />
       <wsdl:input>
@@ -593,8 +948,35 @@
         <soap:body use="encoded" namespace="urn:ContentControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="mockInternalLinkSettings">
-      <soap:operation soapAction="urn:ContentControllerwsdl#mockInternalLinkSettings" style="rpc" />
+    <wsdl:operation name="mockInternalWallbinLinkSettings">
+      <soap:operation soapAction="urn:ContentControllerwsdl#mockInternalWallbinLinkSettings" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ContentControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ContentControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="mockInternalLibraryPageLinkSettings">
+      <soap:operation soapAction="urn:ContentControllerwsdl#mockInternalLibraryPageLinkSettings" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ContentControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ContentControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="mockInternalLibraryFolderLinkSettings">
+      <soap:operation soapAction="urn:ContentControllerwsdl#mockInternalLibraryFolderLinkSettings" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ContentControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ContentControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="mockInternalLibraryObjectLinkSettings">
+      <soap:operation soapAction="urn:ContentControllerwsdl#mockInternalLibraryObjectLinkSettings" style="rpc" />
       <wsdl:input>
         <soap:body use="encoded" namespace="urn:ContentControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
       </wsdl:input>
@@ -613,6 +995,60 @@
     </wsdl:operation>
     <wsdl:operation name="mockQPageLinkSettings">
       <soap:operation soapAction="urn:ContentControllerwsdl#mockQPageLinkSettings" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ContentControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ContentControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="mockLinkBundleLinkSettings">
+      <soap:operation soapAction="urn:ContentControllerwsdl#mockLinkBundleLinkSettings" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ContentControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ContentControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="mockLibraryLinkBundleItem">
+      <soap:operation soapAction="urn:ContentControllerwsdl#mockLibraryLinkBundleItem" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ContentControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ContentControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="mockUrlLinkBundleItem">
+      <soap:operation soapAction="urn:ContentControllerwsdl#mockUrlLinkBundleItem" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ContentControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ContentControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="mockLinkBundleInfoItem">
+      <soap:operation soapAction="urn:ContentControllerwsdl#mockLinkBundleInfoItem" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ContentControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ContentControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="mockLinkBundleStrategyItem">
+      <soap:operation soapAction="urn:ContentControllerwsdl#mockLinkBundleStrategyItem" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ContentControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ContentControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="mockLinkBundleRevenueItem">
+      <soap:operation soapAction="urn:ContentControllerwsdl#mockLinkBundleRevenueItem" style="rpc" />
       <wsdl:input>
         <soap:body use="encoded" namespace="urn:ContentControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
       </wsdl:input>

@@ -318,6 +318,7 @@ namespace SalesLibraries.FileManager.Controllers
 			_tabPages.Add(TabPageEnum.Preferences, TabWallbin);
 			_tabPages.Add(TabPageEnum.Settings, TabWallbin);
 			_tabPages.Add(TabPageEnum.ProgramManager, TabWallbin);
+			_tabPages.Add(TabPageEnum.Bundles, TabWallbin);
 
 			TabVideo = new VideoPage();
 			_tabPages.Add(TabPageEnum.VideoManager, TabVideo);

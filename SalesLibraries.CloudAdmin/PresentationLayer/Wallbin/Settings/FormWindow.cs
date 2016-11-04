@@ -7,10 +7,9 @@ using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraTab;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.Persistent;
-using SalesLibraries.CloudAdmin.Controllers;
-using SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Common;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.CommonGUI.Common;
+using SalesLibraries.CloudAdmin.Controllers;
 using HorizontalAlignment = SalesLibraries.Business.Entities.Wallbin.Common.Enums.HorizontalAlignment;
 
 namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Settings
@@ -30,8 +29,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Settings
 			Text = String.Format(_formParameters.Title, folder.Name);
 			Width = _formParameters.Width;
 			Height = _formParameters.Height;
-			LoadData();
-
+			Load += (o, e) => LoadData();
 			ckApllyForAllWindowsAppearance.Checked = _folder.Page.Library.Settings.ApplyAppearanceForAllWindows;
 			ckApllyForAllWindowsWidget.Checked = _folder.Page.Library.Settings.ApplyWidgetForAllWindows;
 			ckApllyForAllWindowsBanner.Checked = _folder.Page.Library.Settings.ApplyBannerForAllWindows;

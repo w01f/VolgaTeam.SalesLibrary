@@ -28,8 +28,9 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.components = new System.ComponentModel.Container();
 			this.labelControllTitle = new DevExpress.XtraEditors.LabelControl();
-			this.styleController = new DevExpress.XtraEditors.StyleController();
+			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
 			this.laPath = new System.Windows.Forms.Label();
 			this.laName = new System.Windows.Forms.Label();
 			this.textEditPath = new DevExpress.XtraEditors.TextEdit();
@@ -171,7 +172,7 @@
 			this.Controls.Add(this.checkEditBlueHyperlink);
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.Name = "Html5EditControl";
-			this.Size = new System.Drawing.Size(350, 280);
+			this.Size = new System.Drawing.Size(350, 385);
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditPath.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditName.Properties)).EndInit();

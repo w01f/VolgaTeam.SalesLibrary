@@ -25,6 +25,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 		public string CalendarEncoded { get; set; }
 		public virtual ICollection<LibraryPage> Pages { get; set; }
 		public virtual ICollection<BasePreviewContainer> PreviewContainers { get; set; }
+		public virtual ICollection<LinkBundle> LinkBundles { get; set; }
 		#endregion
 
 		#region Nonpersistent Properties
@@ -88,7 +89,8 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 		public Library()
 		{
 			Pages = new List<LibraryPage>();
-			PreviewContainers = new Collection<BasePreviewContainer>();
+			PreviewContainers = new List<BasePreviewContainer>();
+			LinkBundles = new List<LinkBundle>();
 		}
 
 		public override void BeforeSave()
@@ -105,6 +107,8 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 				libraryPage.BeforeSave();
 			foreach (var previewContainer in PreviewContainers)
 				previewContainer.BeforeSave();
+			foreach (var linkBundle in LinkBundles)
+				linkBundle.BeforeSave();
 			base.BeforeSave();
 		}
 
@@ -123,6 +127,8 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 			Pages.Save(currentLibrary.Pages, context);
 			Pages.Sort();
 			PreviewContainers.Save(currentLibrary.PreviewContainers, context);
+			LinkBundles.Save(currentLibrary.LinkBundles, context);
+			LinkBundles.Sort();
 			base.Save(context, current, withCommit);
 		}
 
@@ -179,21 +185,33 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 		#endregion
 
 		#region Links Processing
-		public IEnumerable<TLink> GetLinkById<TLink>(Guid extId, bool onlyTopLevel = false) where TLink : BaseLibraryLink
+		public TLink GetLinkById<TLink>(Guid extId, bool onlyTopLevel = false) where TLink : BaseLibraryLink
 		{
 			return Pages
 				.SelectMany(p => onlyTopLevel ? p.TopLevelLinks : p.AllLinks)
 				.OfType<TLink>()
-				.Where(link => link.ExtId == extId)
-				.ToList();
+				.FirstOrDefault(link => link.ExtId == extId);
 		}
 
-		public IEnumerable<BaseLibraryLink> GetLinkById(Guid extId, bool onlyTopLevel = false)
+		public BaseLibraryLink GetLinkById(Guid extId, bool onlyTopLevel = false)
 		{
 			return Pages
 				.SelectMany(p => onlyTopLevel ? p.TopLevelLinks : p.AllLinks)
-				.Where(link => link.ExtId == extId)
-				.ToList();
+				.FirstOrDefault(link => link.ExtId == extId);
+		}
+		#endregion
+
+		#region Link Bundles processing
+		public void AddLinkBundle(string name)
+		{
+			var linkBundle = CreateEntity<LinkBundle>(bundle =>
+			{
+				bundle.Library = this;
+				bundle.Order = LinkBundles.Count;
+			});
+			LinkBundles.AddItem(linkBundle);
+			linkBundle.Name = name;
+			MarkAsModified();
 		}
 		#endregion
 

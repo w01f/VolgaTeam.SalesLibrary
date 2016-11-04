@@ -172,7 +172,7 @@
 			this.Controls.Add(this.checkEditBlueHyperlink);
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.Name = "QuickSiteEditControl";
-			this.Size = new System.Drawing.Size(350, 280);
+			this.Size = new System.Drawing.Size(350, 385);
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditPath.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditName.Properties)).EndInit();

@@ -8,6 +8,7 @@ namespace SalesLibraries.Business.Entities.Common
 {
 	public abstract class SettingsContainer
 	{
+		[JsonIgnore]
 		protected IChangable Parent { get; set; }
 
 		[JsonIgnore]

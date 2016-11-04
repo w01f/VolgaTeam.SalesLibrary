@@ -7,6 +7,7 @@ using SalesLibraries.Business.Contexts.Wallbin;
 using SalesLibraries.FileManager.Business.Services;
 using SalesLibraries.FileManager.Controllers;
 using SalesLibraries.FileManager.PresentationLayer.Wallbin.DataSource;
+using SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.BundleList;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 {
@@ -21,6 +22,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 		public event EventHandler<EventArgs> PageChanged;
 		public event EventHandler<EventArgs> DataChanged;
 		public DataSourceTreeViewControl DataSourcesControl { get; private set; }
+		public LinkBundleListControl LinkBundleListControl { get; private set; }
 
 		private bool _isDataChanged;
 		public bool IsDataChanged
@@ -93,6 +95,12 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 				DataSourcesControl.Dispose();
 				DataSourcesControl = null;
 			}
+			if (LinkBundleListControl != null)
+			{
+				LinkBundleListControl.Parent = null;
+				LinkBundleListControl.Dispose();
+				LinkBundleListControl = null;
+			}
 		}
 
 		public void SaveData()
@@ -110,6 +118,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 		protected virtual void InitControls()
 		{
 			LoadDataSource();
+			LoadLinkBundles();
 		}
 		#endregion
 
@@ -143,11 +152,20 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 		#endregion
 
 		#region Data Sources
-		public void LoadDataSource()
+		private void LoadDataSource()
 		{
 			if (DataSourcesControl == null)
 				DataSourcesControl = new DataSourceTreeViewControl();
 			DataSourcesControl.LoadData(DataStorage.Library.GetDataSources());
+		}
+		#endregion
+
+		#region Link Bundles
+		private void LoadLinkBundles()
+		{
+			if (LinkBundleListControl == null)
+				LinkBundleListControl = new LinkBundleListControl();
+			LinkBundleListControl.LoadData(DataStorage.Library);
 		}
 		#endregion
 	}

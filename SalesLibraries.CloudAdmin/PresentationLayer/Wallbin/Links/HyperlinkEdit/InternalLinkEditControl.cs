@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
+using DevExpress.XtraEditors;
+using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.HyperLinkInfo;
 using SalesLibraries.CloudAdmin.Controllers;
 
@@ -8,6 +12,11 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.HyperlinkEdi
 {
 	public partial class InternalLinkEditControl : UserControl, IHyperLinkEditControl
 	{
+		private readonly Dictionary<InternalLinkType, IInternalLinkEditControl> _editors = new Dictionary<InternalLinkType, IInternalLinkEditControl>();
+
+		public InternalLinkType SelectedEditorType { get; private set; }
+		public IInternalLinkEditControl SelectedEditor { get; private set; }
+
 		public InternalLinkEditControl()
 		{
 			InitializeComponent();
@@ -24,12 +33,21 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.HyperlinkEdi
 				styleController.AppearanceReadOnly.Font = font;
 
 				laLinkName.Font = new Font(laLinkName.Font.FontFamily, laLinkName.Font.Size - 2, laLinkName.Font.Style);
-				laLibraryName.Font = new Font(laLibraryName.Font.FontFamily, laLibraryName.Font.Size - 2, laLibraryName.Font.Style);
-				laPageName.Font = new Font(laPageName.Font.FontFamily, laPageName.Font.Size - 2, laPageName.Font.Style);
-				laWindowName.Font = new Font(laWindowName.Font.FontFamily, laWindowName.Font.Size - 2, laWindowName.Font.Style);
-				laLibraryLinkName.Font = new Font(laLibraryLinkName.Font.FontFamily, laLibraryLinkName.Font.Size - 2, laLibraryLinkName.Font.Style);
-				laPageName.Font = new Font(laPageName.Font.FontFamily, laPageName.Font.Size - 2, laPageName.Font.Style);
+				laLinkType.Font = new Font(laLinkType.Font.FontFamily, laLinkType.Font.Size - 2, laLinkType.Font.Style);
 			}
+
+			var editorSelectors = new List<CheckEdit>(new[]
+			{
+				checkEditLinkTypeWallbin,
+				checkEditLinkTypeLibraryPage,
+				checkEditLinkTypeLibraryFolder,
+				checkEditLinkTypeLibraryObject,
+			});
+			editorSelectors.ForEach(checkEdit =>
+			{
+				checkEdit.CheckedChanged += OnSelectEditorChecked;
+			});
+			editorSelectors.First().Checked = true;
 		}
 
 		public bool ValidateLinkInfo()
@@ -40,55 +58,65 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.HyperlinkEdi
 				MainController.Instance.PopupMessages.ShowWarning("You should set the link name before saving");
 				return false;
 			}
-			if (String.IsNullOrEmpty(linkInfo.LibraryName))
-			{
-				MainController.Instance.PopupMessages.ShowWarning("You should set the target library before saving");
-				return false;
-			}
-			if (String.IsNullOrEmpty(linkInfo.PageName))
-			{
-				MainController.Instance.PopupMessages.ShowWarning("You should set the target page before saving");
-				return false;
-			}
-			if (!String.IsNullOrEmpty(linkInfo.WindowName) || !String.IsNullOrEmpty(linkInfo.LinkName))
-			{
-				if (String.IsNullOrEmpty(linkInfo.WindowName))
-				{
-					MainController.Instance.PopupMessages.ShowWarning("You should set the target window before saving");
-					return false;
-				}
-				if (String.IsNullOrEmpty(linkInfo.LinkName))
-				{
-					MainController.Instance.PopupMessages.ShowWarning("You should set the target link before saving");
-					return false;
-				}
-			}
-			return true;
+			var result = SelectedEditor?.ValidateLinkInfo();
+			return result.HasValue && result.Value;
 		}
 
-		public BaseNetworkLink GetHyperLinkInfo()
+		public BaseNetworkLinkInfo GetHyperLinkInfo()
 		{
-			return new InternalLinkInfo
+			var linkInfo = SelectedEditor?.GetHyperLinkInfo();
+			if (linkInfo != null)
 			{
-				Name = textEditLinkName.EditValue as String,
-				LibraryName = textEditLibraryName.EditValue as String,
-				PageName = textEditPageName.EditValue as String,
-				WindowName = textEditWindowName.EditValue as String,
-				LinkName = textEditLibraryLinkName.EditValue as String,
-				ForcePreview = checkEditForcePreview.Checked,
-				FormatAsBluelink = checkEditBlueHyperlink.Checked,
-				FormatBold = checkEditBold.Checked,
-			};
+				linkInfo.Name = textEditLinkName.EditValue as String;
+				linkInfo.FormatAsBluelink = checkEditBlueHyperlink.Checked;
+				linkInfo.FormatBold = checkEditBold.Checked;
+			}
+			return linkInfo;
 		}
 
-		public void ApplySharedSettings(BaseNetworkLink templateEditor)
+		public void ApplySharedSettings(BaseNetworkLinkInfo templateInfo)
 		{
-			if (templateEditor != null)
+			if (templateInfo != null)
 			{
-				textEditLinkName.EditValue = templateEditor.Name;
-				checkEditBlueHyperlink.Checked = templateEditor.FormatAsBluelink;
-				checkEditBold.Checked = templateEditor.FormatBold;
+				textEditLinkName.EditValue = templateInfo.Name;
+				checkEditBlueHyperlink.Checked = templateInfo.FormatAsBluelink;
+				checkEditBold.Checked = templateInfo.FormatBold;
 			}
+		}
+
+		private void OnSelectEditorChecked(object sender, EventArgs e)
+		{
+			var selectedToggle = (CheckEdit)sender;
+			if (!selectedToggle.Checked) return;
+			var templateSettings = SelectedEditor?.GetHyperLinkInfo();
+			SelectedEditorType = (InternalLinkType)Enum.Parse(typeof(InternalLinkType), selectedToggle.Tag.ToString());
+			if (!_editors.ContainsKey(SelectedEditorType))
+			{
+				switch (SelectedEditorType)
+				{
+					case InternalLinkType.Wallbin:
+						SelectedEditor = new InternalWallbinLinkEditControl();
+						break;
+					case InternalLinkType.LibraryPage:
+						SelectedEditor = new InternalLibraryPageLinkEditControl();
+						break;
+					case InternalLinkType.LibraryFolder:
+						SelectedEditor = new InternalLibraryFolderLinkEditControl();
+						break;
+					case InternalLinkType.LibraryObject:
+						SelectedEditor = new InternalLibraryObjectLinkEditControl();
+						break;
+					default:
+						throw new ArgumentOutOfRangeException("Link type is not found");
+				}
+			}
+			else
+				SelectedEditor = _editors[SelectedEditorType];
+			SelectedEditor.ApplySharedSettings(templateSettings);
+			var control = (Control)SelectedEditor;
+			if (!pnPropertyEditorsContainer.Controls.Contains(control))
+				pnPropertyEditorsContainer.Controls.Add(control);
+			control.BringToFront();
 		}
 	}
 }

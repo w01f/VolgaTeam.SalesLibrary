@@ -1,38 +1,38 @@
 ﻿namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettings
 {
 	partial class FormEditLinkBanner
-	{
-		/// <summary>
-		/// Required designer variable.
-		/// </summary>
-		private System.ComponentModel.IContainer components = null;
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
 
-		/// <summary>
-		/// Clean up any resources being used.
-		/// </summary>
-		/// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-		protected override void Dispose(bool disposing)
-		{
-			if (disposing && (components != null))
-			{
-				components.Dispose();
-			}
-			base.Dispose(disposing);
-		}
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
 
-		#region Windows Form Designer generated code
+        #region Windows Form Designer generated code
 
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent()
-		{
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
 			this.components = new System.ComponentModel.Container();
 			this.buttonXOK = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXCancel = new DevComponents.DotNetBar.ButtonX();
 			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
-			this.colorEditBannerTextColor = new DevExpress.XtraEditors.ColorEdit();
+			this.colorEditBannerTextColor = new CommonGUI.Common.HtmlColorEdit();
 			this.buttonEditBannerTextFont = new DevExpress.XtraEditors.ButtonEdit();
 			this.memoEditBannerText = new DevExpress.XtraEditors.MemoEdit();
 			this.xtraTabControlGallery = new DevExpress.XtraTab.XtraTabControl();
@@ -136,16 +136,8 @@
 			this.colorEditBannerTextColor.Enabled = false;
 			this.colorEditBannerTextColor.Location = new System.Drawing.Point(10, 444);
 			this.colorEditBannerTextColor.Name = "colorEditBannerTextColor";
-			this.colorEditBannerTextColor.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
-			this.colorEditBannerTextColor.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-			this.colorEditBannerTextColor.Properties.Appearance.Options.UseBackColor = true;
-			this.colorEditBannerTextColor.Properties.Appearance.Options.UseForeColor = true;
-			this.colorEditBannerTextColor.Properties.AppearanceDisabled.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-			this.colorEditBannerTextColor.Properties.AppearanceDisabled.Options.UseBackColor = true;
 			this.colorEditBannerTextColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-			new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-			this.colorEditBannerTextColor.Properties.ColorAlignment = DevExpress.Utils.HorzAlignment.Center;
-			this.colorEditBannerTextColor.Properties.ShowSystemColors = false;
+			new DevExpress.XtraEditors.Controls.EditorButton () });
 			this.colorEditBannerTextColor.Size = new System.Drawing.Size(131, 22);
 			this.colorEditBannerTextColor.StyleController = this.styleController;
 			this.colorEditBannerTextColor.TabIndex = 44;
@@ -164,7 +156,7 @@
 			this.buttonEditBannerTextFont.Properties.AppearanceDisabled.ForeColor = System.Drawing.Color.Gray;
 			this.buttonEditBannerTextFont.Properties.AppearanceDisabled.Options.UseForeColor = true;
 			this.buttonEditBannerTextFont.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-			new DevExpress.XtraEditors.Controls.EditorButton()});
+            new DevExpress.XtraEditors.Controls.EditorButton()});
 			this.buttonEditBannerTextFont.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
 			this.buttonEditBannerTextFont.Size = new System.Drawing.Size(234, 22);
 			this.buttonEditBannerTextFont.StyleController = this.styleController;
@@ -173,9 +165,9 @@
 			// 
 			// memoEditBannerText
 			// 
-			this.memoEditBannerText.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-			| System.Windows.Forms.AnchorStyles.Left)
-			| System.Windows.Forms.AnchorStyles.Right)));
+			this.memoEditBannerText.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.memoEditBannerText.Enabled = false;
 			this.memoEditBannerText.Location = new System.Drawing.Point(10, 114);
 			this.memoEditBannerText.Name = "memoEditBannerText";
@@ -190,9 +182,9 @@
 			// 
 			// xtraTabControlGallery
 			// 
-			this.xtraTabControlGallery.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-			| System.Windows.Forms.AnchorStyles.Left)
-			| System.Windows.Forms.AnchorStyles.Right)));
+			this.xtraTabControlGallery.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.xtraTabControlGallery.Appearance.BackColor = System.Drawing.Color.Transparent;
 			this.xtraTabControlGallery.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.xtraTabControlGallery.Appearance.Options.UseBackColor = true;
@@ -296,8 +288,8 @@
 			// labelControlTitle
 			// 
 			this.labelControlTitle.AllowHtmlString = true;
-			this.labelControlTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-			| System.Windows.Forms.AnchorStyles.Right)));
+			this.labelControlTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelControlTitle.Appearance.BackColor = System.Drawing.Color.White;
 			this.labelControlTitle.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.labelControlTitle.Appearance.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -345,9 +337,9 @@
 			// 
 			// xtraTabControlSettings
 			// 
-			this.xtraTabControlSettings.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-			| System.Windows.Forms.AnchorStyles.Left)
-			| System.Windows.Forms.AnchorStyles.Right)));
+			this.xtraTabControlSettings.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.xtraTabControlSettings.Appearance.BackColor = System.Drawing.Color.White;
 			this.xtraTabControlSettings.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.xtraTabControlSettings.Appearance.ForeColor = System.Drawing.Color.Black;
@@ -370,8 +362,8 @@
 			this.xtraTabControlSettings.Size = new System.Drawing.Size(966, 510);
 			this.xtraTabControlSettings.TabIndex = 51;
 			this.xtraTabControlSettings.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
-			this.xtraTabPageImage,
-			this.xtraTabPageText});
+            this.xtraTabPageImage,
+            this.xtraTabPageText});
 			// 
 			// xtraTabPageImage
 			// 
@@ -459,8 +451,8 @@
 			// labelControlImageDescription
 			// 
 			this.labelControlImageDescription.AllowHtmlString = true;
-			this.labelControlImageDescription.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-			| System.Windows.Forms.AnchorStyles.Right)));
+			this.labelControlImageDescription.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelControlImageDescription.Appearance.BackColor = System.Drawing.Color.Transparent;
 			this.labelControlImageDescription.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.labelControlImageDescription.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
@@ -608,8 +600,8 @@
 			// labelControlTextDescription
 			// 
 			this.labelControlTextDescription.AllowHtmlString = true;
-			this.labelControlTextDescription.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-			| System.Windows.Forms.AnchorStyles.Right)));
+			this.labelControlTextDescription.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelControlTextDescription.Appearance.BackColor = System.Drawing.Color.Transparent;
 			this.labelControlTextDescription.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.labelControlTextDescription.AppearanceDisabled.ForeColor = System.Drawing.Color.Gray;
@@ -625,8 +617,8 @@
 			// labelControlBottomDescription
 			// 
 			this.labelControlBottomDescription.AllowHtmlString = true;
-			this.labelControlBottomDescription.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-			| System.Windows.Forms.AnchorStyles.Right)));
+			this.labelControlBottomDescription.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelControlBottomDescription.Appearance.BackColor = System.Drawing.Color.Transparent;
 			this.labelControlBottomDescription.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.labelControlBottomDescription.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
@@ -636,8 +628,8 @@
 			this.labelControlBottomDescription.StyleController = this.styleController;
 			this.labelControlBottomDescription.TabIndex = 54;
 			this.labelControlBottomDescription.Text = "<size=+2><color=gray>You can use Clipart Images to help your links </color><b>POP" +
-	"</b></color><color=gray> or </color><color=black><b>STANDOUT</b></color><color=g" +
-	"ray> on the page…</color></size>";
+    "</b></color><color=gray> or </color><color=black><b>STANDOUT</b></color><color=g" +
+    "ray> on the page…</color></size>";
 			this.labelControlBottomDescription.UseMnemonic = false;
 			// 
 			// FormEditLinkBanner
@@ -686,14 +678,14 @@
 			((System.ComponentModel.ISupportInitialize)(this.checkEditTextWordWrap.Properties)).EndInit();
 			this.ResumeLayout(false);
 
-		}
+        }
 
-		#endregion
+        #endregion
 
 		private DevComponents.DotNetBar.ButtonX buttonXOK;
 		private DevComponents.DotNetBar.ButtonX buttonXCancel;
 		private DevExpress.XtraEditors.StyleController styleController;
-		private DevExpress.XtraEditors.ColorEdit colorEditBannerTextColor;
+		private CommonGUI.Common.HtmlColorEdit colorEditBannerTextColor;
 		private DevExpress.XtraEditors.ButtonEdit buttonEditBannerTextFont;
 		private DevExpress.XtraEditors.MemoEdit memoEditBannerText;
 		private DevExpress.XtraTab.XtraTabControl xtraTabControlGallery;

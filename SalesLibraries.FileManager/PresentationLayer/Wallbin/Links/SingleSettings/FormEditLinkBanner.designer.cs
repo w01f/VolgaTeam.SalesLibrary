@@ -32,7 +32,7 @@
 			this.buttonXOK = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXCancel = new DevComponents.DotNetBar.ButtonX();
 			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
-			this.colorEditBannerTextColor = new DevExpress.XtraEditors.ColorEdit();
+			this.colorEditBannerTextColor = new CommonGUI.Common.HtmlColorEdit();
 			this.buttonEditBannerTextFont = new DevExpress.XtraEditors.ButtonEdit();
 			this.memoEditBannerText = new DevExpress.XtraEditors.MemoEdit();
 			this.xtraTabControlGallery = new DevExpress.XtraTab.XtraTabControl();
@@ -136,16 +136,8 @@
 			this.colorEditBannerTextColor.Enabled = false;
 			this.colorEditBannerTextColor.Location = new System.Drawing.Point(10, 444);
 			this.colorEditBannerTextColor.Name = "colorEditBannerTextColor";
-			this.colorEditBannerTextColor.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
-			this.colorEditBannerTextColor.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-			this.colorEditBannerTextColor.Properties.Appearance.Options.UseBackColor = true;
-			this.colorEditBannerTextColor.Properties.Appearance.Options.UseForeColor = true;
-			this.colorEditBannerTextColor.Properties.AppearanceDisabled.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-			this.colorEditBannerTextColor.Properties.AppearanceDisabled.Options.UseBackColor = true;
 			this.colorEditBannerTextColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-			this.colorEditBannerTextColor.Properties.ColorAlignment = DevExpress.Utils.HorzAlignment.Center;
-			this.colorEditBannerTextColor.Properties.ShowSystemColors = false;
+			new DevExpress.XtraEditors.Controls.EditorButton () });
 			this.colorEditBannerTextColor.Size = new System.Drawing.Size(131, 22);
 			this.colorEditBannerTextColor.StyleController = this.styleController;
 			this.colorEditBannerTextColor.TabIndex = 44;
@@ -693,7 +685,7 @@
 		private DevComponents.DotNetBar.ButtonX buttonXOK;
 		private DevComponents.DotNetBar.ButtonX buttonXCancel;
 		private DevExpress.XtraEditors.StyleController styleController;
-		private DevExpress.XtraEditors.ColorEdit colorEditBannerTextColor;
+		private CommonGUI.Common.HtmlColorEdit colorEditBannerTextColor;
 		private DevExpress.XtraEditors.ButtonEdit buttonEditBannerTextFont;
 		private DevExpress.XtraEditors.MemoEdit memoEditBannerText;
 		private DevExpress.XtraTab.XtraTabControl xtraTabControlGallery;

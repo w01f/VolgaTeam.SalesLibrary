@@ -5,7 +5,7 @@ using System.Windows.Forms;
 using DevComponents.DotNetBar.Metro;
 using DevExpress.XtraTab;
 using SalesLibraries.CloudAdmin.Controllers;
-using SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Common;
+using SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.ImageGallery;
 
 namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Settings
 {

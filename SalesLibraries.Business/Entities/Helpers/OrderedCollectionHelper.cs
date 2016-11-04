@@ -23,7 +23,7 @@ namespace SalesLibraries.Business.Entities.Helpers
 			nextItem.CollectionOrder++;
 			targetItem.CollectionOrder--;
 			targetList.Sort();
-			targetItem.Parent.MarkAsModified();
+			targetItem.Parent?.MarkAsModified();
 		}
 
 		public static void DownItem<TItem>(this ICollection<TItem> targetCollection, TItem targetItem, Func<TItem, bool> filterCondition = null)
@@ -42,7 +42,7 @@ namespace SalesLibraries.Business.Entities.Helpers
 			nextItem.CollectionOrder--;
 			targetItem.CollectionOrder++;
 			targetList.Sort();
-			targetItem.Parent.MarkAsModified();
+			targetItem.Parent?.MarkAsModified();
 		}
 
 		public static void ResetItemsOrder<TItem>(this ICollection<TItem> targetCollection, Func<TItem, bool> filterCondition = null)
@@ -75,7 +75,7 @@ namespace SalesLibraries.Business.Entities.Helpers
 				targetItem.CollectionOrder = targetCollection.Max(item => item.CollectionOrder) + 1;
 			targetCollection.Add(targetItem);
 			targetCollection.ResetItemsOrder(filterCondition);
-			targetItem.Parent.MarkAsModified();
+			targetItem.Parent?.MarkAsModified();
 		}
 
 		public static void InsertItem<TItem>(this IList<TItem> targetCollection, TItem targetItem, int position, Func<TItem, bool> filterCondition = null)
@@ -87,7 +87,7 @@ namespace SalesLibraries.Business.Entities.Helpers
 			targetItem.CollectionOrder = position;
 			targetCollection.Insert(position, targetItem);
 			targetCollection.ResetItemsOrder(filterCondition);
-			targetItem.Parent.MarkAsModified();
+			targetItem.Parent?.MarkAsModified();
 		}
 
 		public static void ChangeItemPosition<TItem>(this IList<TItem> targetCollection, TItem targetItem, int newPosition, Func<TItem, bool> filterCondition = null)
@@ -98,7 +98,7 @@ namespace SalesLibraries.Business.Entities.Helpers
 				targetCollection[i].CollectionOrder += 1;
 			targetItem.CollectionOrder = newPosition;
 			targetCollection.ResetItemsOrder(filterCondition);
-			targetItem.Parent.MarkAsModified();
+			targetItem.Parent?.MarkAsModified();
 		}
 
 		public static void RemoveItem<TItem>(this ICollection<TItem> targetCollection, TItem targetItem, Func<TItem, bool> filterCondition = null)

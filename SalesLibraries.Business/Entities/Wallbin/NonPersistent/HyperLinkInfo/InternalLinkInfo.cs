@@ -1,11 +1,10 @@
-﻿namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.HyperLinkInfo
+﻿using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
+
+namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.HyperLinkInfo
 {
-	public class InternalLinkInfo : BaseNetworkLink
+	public abstract class InternalLinkInfo : BaseNetworkLinkInfo
 	{
+		public abstract InternalLinkType InternalLinkType { get; }
 		public string LibraryName { get; set; }
-		public string PageName { get; set; }
-		public string WindowName { get; set; }
-		public string LinkName { get; set; }
-		public bool ForcePreview { get; set; }
 	}
 }

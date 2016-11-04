@@ -14,13 +14,13 @@ namespace SalesLibraries.Common.Dictionaries
 		public StorageDirectory MainFolder { get; set; }
 		public StorageDirectory AdditionalFolder { get; set; }
 		public StorageDirectory FavsFolder { get; set; }
-		public List<LinkImageGroup> Items { get; private set; }
+		public List<ImageSourceGroup> Items { get; private set; }
 
 		public SearchResultsImageGroup SearchResults => Items.OfType<SearchResultsImageGroup>().Single();
 
 		public BannerList()
 		{
-			Items = new List<LinkImageGroup>();
+			Items = new List<ImageSourceGroup>();
 		}
 
 		public void Load()

@@ -10,9 +10,9 @@ using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraTab;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
-using SalesLibraries.CloudAdmin.Controllers;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.Common.JsonConverters;
+using SalesLibraries.CloudAdmin.Controllers;
 
 namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettings
 {
@@ -32,7 +32,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 		private FormEditLinkSettingsRegular()
 		{
 			InitializeComponent();
-			if ((CreateGraphics()).DpiX > 96)
+			if (CreateGraphics().DpiX > 96)
 			{
 				var font = new Font(styleController.Appearance.Font.FontFamily, styleController.Appearance.Font.Size - 2,
 					styleController.Appearance.Font.Style);
@@ -66,7 +66,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 		public void InitForm<TEditControl>(LinkSettingsType settingsType) where TEditControl : ILinkSettingsEditControl
 		{
 			Width = 680;
-			Height = 630;
+			Height = 670;
 			var defaultLink = _sourceLinks.First();
 			Text = _sourceLinks.Count == 1 ? defaultLink.ToString() : "Multi-Link Settings";
 			StartPosition = FormStartPosition.CenterScreen;

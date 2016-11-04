@@ -270,7 +270,6 @@ namespace SalesLibraries.Common.Helpers
 			{
 				return false;
 			}
-
 		}
 	}
 }

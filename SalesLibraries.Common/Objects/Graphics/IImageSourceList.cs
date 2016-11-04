@@ -8,6 +8,6 @@ namespace SalesLibraries.Common.Objects.Graphics
 		StorageDirectory MainFolder { get; }
 		StorageDirectory AdditionalFolder { get; }
 		StorageDirectory FavsFolder { get; }
-		List<LinkImageGroup> Items { get; }
+		List<ImageSourceGroup> Items { get; }
 	}
 }

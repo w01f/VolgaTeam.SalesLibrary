@@ -10,11 +10,11 @@ using DevExpress.XtraTab;
 using SalesLibraries.Business.Entities.Helpers;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
-using SalesLibraries.CloudAdmin.Controllers;
-using SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Common;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.Common.Objects.SearchTags;
 using SalesLibraries.CommonGUI.Common;
+using SalesLibraries.CloudAdmin.Controllers;
+using SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.ImageGallery;
 
 namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettings
 {
@@ -32,11 +32,11 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 		public int Order => 0;
 		public bool AvailableForEmbedded => true;
 		public SettingsEditorHeaderInfo HeaderInfo => new SettingsEditorHeaderInfo
-				{
-					Title = String.Format("{0}Max Tags allowed: <b><u>{1}</u></b>",
+		{
+			Title = String.Format("{0}Max Tags allowed: <b><u>{1}</u></b>",
 						_links.Count == 1 ? String.Empty : String.Format("Links: <b><u>{0}</u></b>    ", _links.Count),
 						MainController.Instance.Lists.SearchTags.MaxTags)
-				};
+		};
 
 		public event EventHandler<EventArgs> ForceCloseRequested;
 
@@ -137,18 +137,18 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 		{
 			var commonCategories = _searchGroups
 				.Select(sg =>
-				{
-					var searchGroup = new SearchGroup { Name = sg.DataSource.Name };
-					searchGroup.Tags.AddRange(sg.ListBox.Items
-						.Where(item => item.CheckState == CheckState.Checked)
-						.Select(item =>
-						{
-							var sourceTag = (SearchTag)item.Value;
-							var searchTag = new SearchTag { Name = sourceTag.Name };
-							return searchTag;
-						}));
-					return searchGroup;
-				})
+					{
+						var searchGroup = new SearchGroup { Name = sg.DataSource.Name };
+						searchGroup.Tags.AddRange(sg.ListBox.Items
+							.Where(item => item.CheckState == CheckState.Checked)
+							.Select(item =>
+							{
+								var sourceTag = (SearchTag)item.Value;
+								var searchTag = new SearchTag { Name = sourceTag.Name };
+								return searchTag;
+							}));
+						return searchGroup;
+					})
 				.Where(searchGroup => searchGroup.Tags.Any())
 				.ToArray();
 			var partialCategories = _searchGroups

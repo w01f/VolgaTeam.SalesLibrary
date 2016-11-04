@@ -37,12 +37,14 @@ namespace SalesLibraries.Business.Contexts.Wallbin
 		{
 			try
 			{
-				ChangeTracker.DetectChanges();
 				foreach (var library in Libraries)
 				{
 					library.BeforeSave();
 				}
 				BeforeSave?.Invoke(this, EventArgs.Empty);
+
+				ChangeTracker.DetectChanges();
+
 				var result = base.SaveChanges();
 				Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, "VACUUM;");
 				return result;

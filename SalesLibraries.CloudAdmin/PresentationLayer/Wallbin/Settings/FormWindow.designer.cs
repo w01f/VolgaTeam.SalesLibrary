@@ -34,7 +34,7 @@
 			this.textEditName = new DevExpress.XtraEditors.TextEdit();
 			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
 			this.laName = new System.Windows.Forms.Label();
-			this.colorEditWindowBorderColor = new DevExpress.XtraEditors.ColorEdit();
+			this.colorEditWindowBorderColor = new CommonGUI.Common.HtmlColorEdit();
 			this.laBorderColor = new System.Windows.Forms.Label();
 			this.rbWindowHeaderAlignmentRight = new System.Windows.Forms.RadioButton();
 			this.rbHeaderAlignmentCenter = new System.Windows.Forms.RadioButton();
@@ -42,14 +42,14 @@
 			this.laHeaderAlignment = new System.Windows.Forms.Label();
 			this.buttonEditWindowHeaderFont = new DevExpress.XtraEditors.ButtonEdit();
 			this.laHeaderFont = new System.Windows.Forms.Label();
-			this.colorEditWindowForeColor = new DevExpress.XtraEditors.ColorEdit();
+			this.colorEditWindowForeColor = new CommonGUI.Common.HtmlColorEdit();
 			this.laHeaderBackColor = new System.Windows.Forms.Label();
-			this.colorEditWindowBackColor = new DevExpress.XtraEditors.ColorEdit();
+			this.colorEditWindowBackColor = new CommonGUI.Common.HtmlColorEdit();
 			this.ckApllyForAllWindowsAppearance = new System.Windows.Forms.CheckBox();
 			this.laForeColor = new System.Windows.Forms.Label();
-			this.colorEditWindowHeaderBackColor = new DevExpress.XtraEditors.ColorEdit();
+			this.colorEditWindowHeaderBackColor = new CommonGUI.Common.HtmlColorEdit();
 			this.laBackColor = new System.Windows.Forms.Label();
-			this.colorEditWindowHeaderForeColor = new DevExpress.XtraEditors.ColorEdit();
+			this.colorEditWindowHeaderForeColor = new CommonGUI.Common.HtmlColorEdit();
 			this.laHeaderForeColor = new System.Windows.Forms.Label();
 			this.xtraTabPageWidget = new DevExpress.XtraTab.XtraTabPage();
 			this.pnWidgetContainer = new System.Windows.Forms.Panel();
@@ -196,9 +196,7 @@
 			this.colorEditWindowBorderColor.Properties.Appearance.Options.UseBackColor = true;
 			this.colorEditWindowBorderColor.Properties.Appearance.Options.UseForeColor = true;
 			this.colorEditWindowBorderColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-			this.colorEditWindowBorderColor.Properties.ColorAlignment = DevExpress.Utils.HorzAlignment.Center;
-			this.colorEditWindowBorderColor.Properties.ShowSystemColors = false;
+			new DevExpress.XtraEditors.Controls.EditorButton () });
 			this.colorEditWindowBorderColor.Size = new System.Drawing.Size(100, 22);
 			this.colorEditWindowBorderColor.StyleController = this.styleController;
 			this.colorEditWindowBorderColor.TabIndex = 34;
@@ -303,9 +301,7 @@
 			this.colorEditWindowForeColor.Properties.Appearance.Options.UseBackColor = true;
 			this.colorEditWindowForeColor.Properties.Appearance.Options.UseForeColor = true;
 			this.colorEditWindowForeColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-			this.colorEditWindowForeColor.Properties.ColorAlignment = DevExpress.Utils.HorzAlignment.Center;
-			this.colorEditWindowForeColor.Properties.ShowSystemColors = false;
+			new DevExpress.XtraEditors.Controls.EditorButton () });
 			this.colorEditWindowForeColor.Size = new System.Drawing.Size(100, 22);
 			this.colorEditWindowForeColor.StyleController = this.styleController;
 			this.colorEditWindowForeColor.TabIndex = 27;
@@ -332,9 +328,7 @@
 			this.colorEditWindowBackColor.Properties.Appearance.Options.UseBackColor = true;
 			this.colorEditWindowBackColor.Properties.Appearance.Options.UseForeColor = true;
 			this.colorEditWindowBackColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-			this.colorEditWindowBackColor.Properties.ColorAlignment = DevExpress.Utils.HorzAlignment.Center;
-			this.colorEditWindowBackColor.Properties.ShowSystemColors = false;
+			new DevExpress.XtraEditors.Controls.EditorButton () });
 			this.colorEditWindowBackColor.Size = new System.Drawing.Size(100, 22);
 			this.colorEditWindowBackColor.StyleController = this.styleController;
 			this.colorEditWindowBackColor.TabIndex = 26;
@@ -374,9 +368,7 @@
 			this.colorEditWindowHeaderBackColor.Properties.Appearance.Options.UseBackColor = true;
 			this.colorEditWindowHeaderBackColor.Properties.Appearance.Options.UseForeColor = true;
 			this.colorEditWindowHeaderBackColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-			this.colorEditWindowHeaderBackColor.Properties.ColorAlignment = DevExpress.Utils.HorzAlignment.Center;
-			this.colorEditWindowHeaderBackColor.Properties.ShowSystemColors = false;
+			new DevExpress.XtraEditors.Controls.EditorButton () });
 			this.colorEditWindowHeaderBackColor.Size = new System.Drawing.Size(100, 22);
 			this.colorEditWindowHeaderBackColor.StyleController = this.styleController;
 			this.colorEditWindowHeaderBackColor.TabIndex = 24;
@@ -403,9 +395,7 @@
 			this.colorEditWindowHeaderForeColor.Properties.Appearance.Options.UseBackColor = true;
 			this.colorEditWindowHeaderForeColor.Properties.Appearance.Options.UseForeColor = true;
 			this.colorEditWindowHeaderForeColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-			this.colorEditWindowHeaderForeColor.Properties.ColorAlignment = DevExpress.Utils.HorzAlignment.Center;
-			this.colorEditWindowHeaderForeColor.Properties.ShowSystemColors = false;
+			new DevExpress.XtraEditors.Controls.EditorButton () });
 			this.colorEditWindowHeaderForeColor.Size = new System.Drawing.Size(100, 22);
 			this.colorEditWindowHeaderForeColor.StyleController = this.styleController;
 			this.colorEditWindowHeaderForeColor.TabIndex = 25;
@@ -614,7 +604,7 @@
 
 		private DevExpress.XtraTab.XtraTabControl xtraTabControlWindowProperties;
 		private DevExpress.XtraTab.XtraTabPage xtraTabPageAppearance;
-		private DevExpress.XtraEditors.ColorEdit colorEditWindowBorderColor;
+		private CommonGUI.Common.HtmlColorEdit colorEditWindowBorderColor;
 		private System.Windows.Forms.Label laBorderColor;
 		private System.Windows.Forms.RadioButton rbWindowHeaderAlignmentRight;
 		private System.Windows.Forms.RadioButton rbHeaderAlignmentCenter;
@@ -622,14 +612,14 @@
 		private System.Windows.Forms.Label laHeaderAlignment;
 		private DevExpress.XtraEditors.ButtonEdit buttonEditWindowHeaderFont;
 		private System.Windows.Forms.Label laHeaderFont;
-		private DevExpress.XtraEditors.ColorEdit colorEditWindowForeColor;
+		private CommonGUI.Common.HtmlColorEdit colorEditWindowForeColor;
 		private System.Windows.Forms.Label laHeaderBackColor;
-		private DevExpress.XtraEditors.ColorEdit colorEditWindowBackColor;
+		private CommonGUI.Common.HtmlColorEdit colorEditWindowBackColor;
 		private System.Windows.Forms.CheckBox ckApllyForAllWindowsAppearance;
 		private System.Windows.Forms.Label laForeColor;
-		private DevExpress.XtraEditors.ColorEdit colorEditWindowHeaderBackColor;
+		private CommonGUI.Common.HtmlColorEdit colorEditWindowHeaderBackColor;
 		private System.Windows.Forms.Label laBackColor;
-		private DevExpress.XtraEditors.ColorEdit colorEditWindowHeaderForeColor;
+		private CommonGUI.Common.HtmlColorEdit colorEditWindowHeaderForeColor;
 		private System.Windows.Forms.Label laHeaderForeColor;
 		private DevExpress.XtraTab.XtraTabPage xtraTabPageWidget;
 		private System.Windows.Forms.CheckBox ckApllyForAllWindowsWidget;

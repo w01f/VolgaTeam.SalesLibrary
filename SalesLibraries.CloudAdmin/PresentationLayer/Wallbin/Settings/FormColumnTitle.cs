@@ -6,10 +6,9 @@ using DevComponents.DotNetBar.Metro;
 using DevExpress.Utils;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.Persistent;
-using SalesLibraries.CloudAdmin.Controllers;
-using SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Common;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.CommonGUI.Common;
+using SalesLibraries.CloudAdmin.Controllers;
 using HorizontalAlignment = SalesLibraries.Business.Entities.Wallbin.Common.Enums.HorizontalAlignment;
 
 namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Settings

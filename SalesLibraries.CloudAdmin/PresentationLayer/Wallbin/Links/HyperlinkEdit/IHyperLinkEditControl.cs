@@ -5,7 +5,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.HyperlinkEdi
 	public interface IHyperLinkEditControl
 	{
 		bool ValidateLinkInfo();
-		BaseNetworkLink GetHyperLinkInfo();
-		void ApplySharedSettings(BaseNetworkLink templateEditor);
+		BaseNetworkLinkInfo GetHyperLinkInfo();
+		void ApplySharedSettings(BaseNetworkLinkInfo templateInfo);
 	}
 }

@@ -8,23 +8,28 @@ using System.Text;
 using Newtonsoft.Json;
 using SalesLibraries.Business.Entities.Wallbin.Common.Constants;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
+using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkBundleSettings;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings;
 using SalesLibraries.Business.Entities.Wallbin.Persistent;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers;
 using SalesLibraries.Common.Configuration;
-using SalesLibraries.Common.Extensions;
+using SalesLibraries.Common.Helpers;
 using SalesLibraries.ServiceConnector.WallbinContentService;
 using AppLinkSettings = SalesLibraries.ServiceConnector.WallbinContentService.AppLinkSettings;
 using BaseLinkSettings = SalesLibraries.ServiceConnector.WallbinContentService.BaseLinkSettings;
 using Font = SalesLibraries.ServiceConnector.WallbinContentService.Font;
 using HyperLinkSettings = SalesLibraries.ServiceConnector.WallbinContentService.HyperLinkSettings;
-using InternalLinkSettings = SalesLibraries.ServiceConnector.WallbinContentService.InternalLinkSettings;
+using InternalWallbinLinkSettings = SalesLibraries.ServiceConnector.WallbinContentService.InternalWallbinLinkSettings;
+using InternalLibraryPageLinkSettings = SalesLibraries.ServiceConnector.WallbinContentService.InternalLibraryPageLinkSettings;
+using InternalLibraryFolderLinkSettings = SalesLibraries.ServiceConnector.WallbinContentService.InternalLibraryFolderLinkSettings;
+using InternalLibraryObjectLinkSettings = SalesLibraries.ServiceConnector.WallbinContentService.InternalLibraryObjectLinkSettings;
 using VideoLinkSettings = SalesLibraries.ServiceConnector.WallbinContentService.VideoLinkSettings;
 using PowerPointLinkSettings = SalesLibraries.ServiceConnector.WallbinContentService.PowerPointLinkSettings;
 using DocumentLinkSettings = SalesLibraries.ServiceConnector.WallbinContentService.DocumentLinkSettings;
 using ExcelLinkSettings = SalesLibraries.ServiceConnector.WallbinContentService.ExcelLinkSettings;
 using LineBreak = SalesLibraries.ServiceConnector.WallbinContentService.LineBreak;
+using LinkBundleLinkSettings = SalesLibraries.ServiceConnector.WallbinContentService.LinkBundleLinkSettings;
 
 namespace SalesLibraries.FileManager.Business.Services
 {
@@ -196,6 +201,7 @@ namespace SalesLibraries.FileManager.Business.Services
 			target.parentLinkId = source.ExtId != source.TopLevelLink.ExtId ? source.TopLevelLink.ExtId.ToString() : null;
 			target.name = source.Name;
 			target.originalFormat = source.WebFormat;
+			target.searchFormat = source.WebFormat;
 			target.order = source.Order;
 			target.type = (int)source.Type;
 			target.widgetType = (Int32)source.Widget.WidgetType;
@@ -254,9 +260,41 @@ namespace SalesLibraries.FileManager.Business.Services
 						(SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings.AppLinkSettings)source.Settings);
 					break;
 				case FileTypes.InternalLink:
-					target.extendedProperties = new InternalLinkSettings();
-					((InternalLinkSettings)target.extendedProperties).ImportData(
-						(SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings.InternalLinkSettings)source.Settings);
+					if (source is InternalWallbinLink)
+					{
+						target.extendedProperties = new InternalWallbinLinkSettings();
+						((InternalWallbinLinkSettings) target.extendedProperties).ImportData(
+							(SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings.InternalWallbinLinkSettings) source.Settings);
+					}
+					else if (source is InternalLibraryPageLink)
+					{
+						target.extendedProperties = new InternalLibraryPageLinkSettings();
+						((InternalLibraryPageLinkSettings) target.extendedProperties).ImportData(
+							(SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings.InternalLibraryPageLinkSettings)
+								source.Settings);
+					}
+					else if (source is InternalLibraryFolderLink)
+					{
+						target.extendedProperties = new InternalLibraryFolderLinkSettings();
+						((InternalLibraryFolderLinkSettings)target.extendedProperties).ImportData(
+							(SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings.InternalLibraryFolderLinkSettings)
+								source.Settings);
+					}
+					else if (source is InternalLibraryObjectLink)
+					{
+						target.extendedProperties = new InternalLibraryObjectLinkSettings();
+						((InternalLibraryObjectLinkSettings)target.extendedProperties).ImportData(
+							(SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings.InternalLibraryObjectLinkSettings)
+								source.Settings);
+					}
+					break;
+				case FileTypes.LinkBundle:
+					target.extendedProperties = new LinkBundleLinkSettings();
+					target.searchFormat =
+						((SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings.LinkBundleLinkSettings) source.Settings)
+							.CustomWebFormat;
+					((LinkBundleLinkSettings)target.extendedProperties).ImportData(
+						(SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings.LinkBundleLinkSettings)source.Settings);
 					break;
 				default:
 					target.extendedProperties = new BaseLinkSettings();
@@ -399,8 +437,7 @@ namespace SalesLibraries.FileManager.Business.Services
 			target.forcePreview = source.ForcePreview;
 			target.qpageId = source.QuickSiteId;
 		}
-
-
+		
 		private static void ImportData(
 			this AppLinkSettings target,
 			SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings.AppLinkSettings source)
@@ -410,15 +447,64 @@ namespace SalesLibraries.FileManager.Business.Services
 		}
 
 		private static void ImportData(
-			this InternalLinkSettings target,
-			SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings.InternalLinkSettings source)
+			this InternalWallbinLinkSettings target,
+			SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings.InternalWallbinLinkSettings source)
 		{
 			((IBaseLinkSettings)target).ImportData(source);
+			target.internalLinkType = (Int32)source.InternalLinkType;
+			target.libraryName = source.LibraryName;
+			target.pageName = source.PageName;
+			target.headerIcon = source.HeaderIcon;
+			target.showHeaderText = source.ShowHeaderText;
+			target.pageViewType = source.PageViewType;
+			target.pageSelectorType = source.PageSelectorType;
+			target.showLogo = source.ShowLogo;
+		}
+
+		private static void ImportData(
+			this InternalLibraryPageLinkSettings target,
+			SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings.InternalLibraryPageLinkSettings source)
+		{
+			((IBaseLinkSettings)target).ImportData(source);
+			target.internalLinkType = (Int32)source.InternalLinkType;
+			target.libraryName = source.LibraryName;
+			target.pageName = source.PageName;
+			target.headerIcon = source.HeaderIcon;
+			target.showHeaderText = source.ShowHeaderText;
+			target.pageViewType = source.PageViewType;
+			target.showLogo = source.ShowLogo;
+			target.showText = source.ShowText;
+			target.showWindowHeaders = source.ShowWindowHeaders;
+			target.textColor = source.TextColor?.ToHex() ;
+			target.backColor = source.BackColor?.ToHex(); ;
+		}
+
+		private static void ImportData(
+			this InternalLibraryFolderLinkSettings target,
+			SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings.InternalLibraryFolderLinkSettings source)
+		{
+			((IBaseLinkSettings)target).ImportData(source);
+			target.internalLinkType = (Int32)source.InternalLinkType;
+			target.libraryName = source.LibraryName;
+			target.pageName = source.PageName;
+			target.windowName = source.WindowName;
+			target.headerIcon = source.HeaderIcon;
+			target.showHeaderText = source.ShowHeaderText;
+			target.windowViewType = source.WindowViewType;
+			target.column = source.Column;
+			target.linksOnly = source.LinksOnly;
+		}
+
+		private static void ImportData(
+			this InternalLibraryObjectLinkSettings target,
+			SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings.InternalLibraryObjectLinkSettings source)
+		{
+			((IBaseLinkSettings)target).ImportData(source);
+			target.internalLinkType = (Int32)source.InternalLinkType;
 			target.libraryName = source.LibraryName;
 			target.pageName = source.PageName;
 			target.windowName = source.WindowName;
 			target.linkName = source.LinkName;
-			target.forcePreview = source.ForcePreview;
 		}
 
 		private static void ImportData(
@@ -465,6 +551,67 @@ namespace SalesLibraries.FileManager.Business.Services
 			target.font = new Font();
 			target.font.ImportData(source.Font);
 			target.dateModify = DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss tt");
+		}
+
+		private static void ImportData(
+			this LinkBundleLinkSettings target,
+			SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings.LinkBundleLinkSettings source)
+		{
+			var imageConverter = TypeDescriptor.GetConverter(typeof(Bitmap));
+
+			((IBaseLinkSettings)target).ImportData(source);
+			target.customWebFormat = source.CustomWebFormat;
+			target.bundleItems = source.Bundle.Settings.Items
+				.Where(sourceBundleItem => sourceBundleItem.Visible)
+				.Select(sourceBundleItem =>
+				{
+					IBaseLinkBundleItem linkItem;
+					switch (sourceBundleItem.ItemType)
+					{
+						case LinkBundleItemType.LibraryLink:
+							linkItem = new LibraryLinkBundleItem();
+							((LibraryLinkBundleItem)linkItem).libraryLinkId = ((LibraryLinkItem)sourceBundleItem).LinkId.ToString();
+							break;
+						case LinkBundleItemType.Url:
+							linkItem = new UrlLinkBundleItem();
+							((UrlLinkBundleItem)linkItem).url = ((UrlItem)sourceBundleItem).Url;
+							break;
+						case LinkBundleItemType.Info:
+							linkItem = new LinkBundleInfoItem();
+							((LinkBundleInfoItem)linkItem).header = ((InfoItem)sourceBundleItem).Header;
+							((LinkBundleInfoItem)linkItem).body = ((InfoItem)sourceBundleItem).Body;
+							break;
+						case LinkBundleItemType.Strategy:
+							linkItem = new LinkBundleStrategyItem();
+							((LinkBundleStrategyItem)linkItem).header = ((StrategyItem)sourceBundleItem).Header;
+							((LinkBundleStrategyItem)linkItem).body = ((StrategyItem)sourceBundleItem).Body;
+							break;
+						case LinkBundleItemType.Revenue:
+							linkItem = new LinkBundleRevenueItem();
+							((LinkBundleRevenueItem)linkItem).revenueType = (Int32)((RevenueItem)sourceBundleItem).RevenueType;
+							((LinkBundleRevenueItem)linkItem).infoItems = ((RevenueItem)sourceBundleItem).InfoItems
+								.Select(sourceInfoItem =>
+								{
+									var infoItem = new LinkBundleRevenueInfoItem();
+									infoItem.infoType = sourceInfoItem.Title;
+									infoItem.value = (float)sourceInfoItem.Value;
+									return infoItem;
+								})
+								.ToArray();
+							((LinkBundleRevenueItem)linkItem).additionalInfo = ((RevenueItem)sourceBundleItem).AdditionalInfo;
+							break;
+						default:
+							throw new ArgumentOutOfRangeException();
+					}
+					linkItem.id = sourceBundleItem.Id.ToString();
+					linkItem.itemType = (Int32)sourceBundleItem.ItemType;
+					linkItem.collectionOrder = sourceBundleItem.CollectionOrder;
+					linkItem.title = sourceBundleItem.Title;
+					linkItem.image = Convert.ToBase64String((byte[])imageConverter.ConvertTo(sourceBundleItem.Image, typeof(byte[])));
+					linkItem.hoverTip = sourceBundleItem.HoverTip;
+					return linkItem;
+				})
+				.ToArray();
 		}
 
 		private static void ImportData(
