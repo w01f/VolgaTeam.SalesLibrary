@@ -40,6 +40,11 @@
 #page-links-container
 {
 	overflow: auto;
-	margin-left: 10px;
+	margin: 0;
+}
+
+#page-links-container .nav > li > a
+{
+	padding-left: 0;
 }
 
