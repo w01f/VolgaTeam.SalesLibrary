@@ -9,4 +9,9 @@
 		 * @soap
 		 */
 		public $forcePreview;
+		/**
+		 * @var boolean
+		 * @soap
+		 */
+		public $downloadSource;
 	}

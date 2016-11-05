@@ -7,10 +7,12 @@
 	class VideoPreviewData extends FilePreviewData
 	{
 		public $forcePreview;
+		public $downloadSource;
 
 		public $thumbImageSrc;
 
 		public $mp4Src;
+
 
 		/**
 		 * @param $link LibraryLink
@@ -20,13 +22,14 @@
 			parent::__construct($link);
 			$this->viewerFormat = 'video';
 			$this->contentView = 'videoViewer';
-			$this->linkTitle ='Video';
+			$this->linkTitle = 'Video';
 
 			$this->thumbImageSrc = $link->universalPreview->mp4Thumb->link;
 
 			/** @var  $linkSettings VideoLinkSettings */
 			$linkSettings = $this->link->extendedProperties;
 			$this->forcePreview = $linkSettings->forcePreview;
+			$this->downloadSource = $linkSettings->downloadSource;
 
 			$this->mp4Src = new VideoPreviewItem();
 			$this->mp4Src->type = 'video/mp4';
@@ -35,12 +38,14 @@
 				$this->mp4Src->title = $link->universalPreview->mp4->name;
 				$this->mp4Src->href = $link->universalPreview->mp4->link;
 				$this->mp4Src->path = $link->universalPreview->mp4->path;
+				$this->mp4Src->size = self::formatFileSize($link->universalPreview->mp4->size);
 			}
 			else
 			{
 				$this->mp4Src->title = $this->fileName;
 				$this->mp4Src->href = $this->url;
 				$this->mp4Src->path = $this->filePath;
+				$this->mp4Src->size = self::formatFileSize($this->fileSize);
 			}
 		}
 	}

@@ -19,8 +19,10 @@
 			</div>
 		</div>
 		<div class="col col-xs-1 text-center">
-			<div class="image-button log-action open-video-fullscreen-<? echo $fullScreenSizeMode; ?>" data-log-action="Preview Fullscreen" title="view fullscreen">
-				<img src="<? echo sprintf('%s/images/preview/gallery/button-video-fullscreen.png', $imageUrlPrefix); ?>">
+			<div class="image-button log-action open-video-fullscreen-<? echo $fullScreenSizeMode; ?>"
+			     data-log-action="Preview Fullscreen" title="view fullscreen">
+				<img
+					src="<? echo sprintf('%s/images/preview/gallery/button-video-fullscreen.png', $imageUrlPrefix); ?>">
 			</div>
 		</div>
 	</div>
@@ -28,8 +30,8 @@
 		<div class="row tab-above-header" id="tab-above-header-save">
 			<div class="col col-xs-12 text-left">
 				<div class="text-label">
-					<img class="text-item file-logo" src="<? echo $data->fileLogo;?>" style="height: 48px;">
-					<span class="text-item file-name"><? echo $data->fileName;?></span>
+					<img class="text-item file-logo" src="<? echo $data->fileLogo; ?>" style="height: 48px;">
+					<span class="text-item file-name"><? echo $data->fileName; ?></span>
 				</div>
 			</div>
 		</div>
@@ -86,9 +88,11 @@
 				</div>
 				<div class="col col-xs-2"></div>
 				<?
-					$footerGapSize = 2;
+					$footerGapSize = 0;
 					if (!$data->config->allowDownload)
-						$headerGapSize += 2;
+						$footerGapSize += 2;
+					if (!($data->config->allowDownload && $data->downloadSource))
+						$footerGapSize += 2;
 					if (!isset($data->quickLinkUrl))
 						$footerGapSize++;
 					if (!$data->config->allowAddToFavorites)
@@ -99,8 +103,19 @@
 				<div class="col col-xs-<? echo $footerGapSize; ?>"></div>
 				<? if ($data->config->allowDownload): ?>
 					<div class="col col-xs-2 text-center">
-						<div class="text-button log-action download-file" data-log-action="Download File" title="download file">
-							<span class="text-muted text-item">file <span class="file-size"></span></span>
+						<div class="text-button log-action download-mp4-file" data-log-action="Download File"
+						     title="download mp4">
+							<span class="text-muted text-item">.mp4 <span
+									class="file-size">(<? echo $data->mp4Src->size; ?></span>)</span>
+						</div>
+					</div>
+				<? endif; ?>
+				<? if ($data->config->allowDownload && $data->downloadSource): ?>
+					<div class="col col-xs-2 text-center">
+						<div class="text-button log-action download-original-file" data-log-action="Download File"
+						     title="download hi-res">
+							<span class="text-muted text-item">.<? echo $data->fileExtension; ?> <span
+									class="file-size">(<? echo $data->fileSize; ?></span>)</span>
 						</div>
 					</div>
 				<? endif; ?>

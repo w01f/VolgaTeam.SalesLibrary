@@ -9,4 +9,5 @@
 		public $type;
 		public $href;
 		public $path;
+		public $size;
 	}

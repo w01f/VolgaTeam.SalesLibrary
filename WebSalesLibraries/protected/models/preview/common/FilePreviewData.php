@@ -8,6 +8,7 @@
 	{
 		public $filePath;
 		public $fileSize;
+		public $fileExtension;
 
 		/**
 		 * @param $link LibraryLink
@@ -23,6 +24,7 @@
 			$this->fileName = $link->fileName;
 			$this->filePath = $link->filePath;
 			$this->fileSize = self::formatFileSize($link->fileSize);
+			$this->fileExtension = $link->fileExtension;
 
 			switch ($this->format)
 			{

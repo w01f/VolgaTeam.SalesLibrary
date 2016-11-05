@@ -141,7 +141,7 @@
 				<?
 					$footerGapSize = 0;
 					if (!($data->config->allowDownload && !$data->singlePage))
-						$headerGapSize += 2;
+						$footerGapSize += 2;
 					if (!isset($data->quickLinkUrl))
 						$footerGapSize++;
 					if (!$data->config->allowAddToFavorites)

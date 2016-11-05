@@ -83,9 +83,8 @@
 				dialogContent.find('#tab-above-header-' + tabTag).addClass('active');
 			});
 
-			dialogContent.find('.file-size').html('(' + viewerData.fileSize + ')');
-
-			dialogContent.find('.download-file').off('click.preview').on('click.preview', downloadFile);
+			dialogContent.find('.download-mp4-file').off('click.preview').on('click.preview', downloadMp4File);
+			dialogContent.find('.download-original-file').off('click.preview').on('click.preview', downloadOriginalFile);
 			dialogContent.find('.add-quicksite').off('click.preview').on('click.preview', addToQuickSite);
 			dialogContent.find('.add-favorites').off('click.preview').on('click.preview', addToFavorites);
 			dialogContent.find('.action-container .action').off('click.preview').on('click.preview', processSaveAction);
@@ -156,11 +155,19 @@
 				$('.fancybox-title .child').html(title);
 		};
 
-		var downloadFile = function ()
+		var downloadMp4File = function ()
 		{
 			$.SalesPortal.LinkManager.downloadFile({
 				name: viewerData.mp4Src.title,
 				path: viewerData.mp4Src.path
+			});
+		};
+
+		var downloadOriginalFile = function ()
+		{
+			$.SalesPortal.LinkManager.downloadFile({
+				name: viewerData.fileName,
+				path: viewerData.filePath
 			});
 		};
 
