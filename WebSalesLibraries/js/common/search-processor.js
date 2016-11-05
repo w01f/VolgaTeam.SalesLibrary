@@ -1,7 +1,7 @@
 (function ($)
 {
 	window.BaseUrl = window.BaseUrl || '';
-	$.SalesPortal = $.SalesPortal || { };
+	$.SalesPortal = $.SalesPortal || {};
 	var SearchHelper = function ()
 	{
 		this.runSearch = function (searchCondition, beforeSearch, completeCallback, successCallBack)
@@ -95,14 +95,14 @@
 					selectedTypeTags: function ()
 					{
 						var tags = [];
-						if(this.showPowerPoint &&
+						if (this.showPowerPoint &&
 							this.showWord &&
 							this.showExcel &&
 							this.showPdf &&
 							this.showVideo &&
 							this.showUrls &&
 							this.showImages
-							)
+						)
 							return tags;
 						if (this.showPowerPoint)
 							tags.push("ppt");
@@ -148,9 +148,22 @@
 								thatData.showExcel = true;
 							else if (value == 'pdf')
 								thatData.showPdf = true;
-							else if (value == 'video' || value == 'mp4' || value == 'wmv' || value == 'mp3')
+							else if (value == 'video' ||
+								value == 'mp4' ||
+								value == 'wmv' ||
+								value == 'mp3')
 								thatData.showVideo = true;
-							else if (value == 'url' || value == 'youtube' || value == 'lan' || value == 'quicksite' || value == 'html5' || value == 'app' || value == 'internal')
+							else if (value == 'url' ||
+								value == 'youtube' ||
+								value == 'lan' ||
+								value == 'quicksite' ||
+								value == 'html5' ||
+								value == 'app' ||
+								value == 'internal library' ||
+								value == 'internal page' ||
+								value == 'internal window' ||
+								value == 'internal link' ||
+								value == 'internal')
 								thatData.showUrls = true;
 							else if (value == 'png' || value == 'jpeg')
 								thatData.showImages = true;

@@ -330,6 +330,7 @@
 							max(lib.name) as lib_name,
 							link.file_relative_path as path,
 							link.file_name as file_name,
+							link.file_extension as file_extension,
 							' . $dateField . ',
 							max(link.search_format) as format,
 							max(link.settings) as extended_properties,

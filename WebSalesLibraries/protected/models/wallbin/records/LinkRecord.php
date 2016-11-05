@@ -348,6 +348,10 @@
 						case 'quicksite':
 						case 'app':
 						case 'internal':
+						case 'internal library':
+						case 'internal page':
+						case 'internal window':
+						case 'internal link':
 						case 'lan':
 						case 'html5':
 							$link['file_type'] = base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'search-url.png'));

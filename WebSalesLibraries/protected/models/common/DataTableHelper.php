@@ -31,10 +31,13 @@
 					$record['path'] = $linkRecord['path'];
 					$record['lib_name'] = $linkRecord['lib_name'];
 
-					$record['tooltip'] = sprintf('%s%s%s',
-						isset($linkRecord['file_name']) && $linkRecord['file_name'] != '' ? $linkRecord['file_name'] : $linkRecord['name'],
-						PHP_EOL,
-						array_key_exists($linkRecord['format'], Yii::app()->params['tooltips']['wallbin']) ? Yii::app()->params['tooltips']['wallbin'][$linkRecord['format']] : '');
+					$record['tooltip'] = isset($linkRecord['file_name']) && $linkRecord['file_name'] != '' ? $linkRecord['file_name'] : $linkRecord['name'];
+					if (isset($linkRecord['format']) && $linkRecord['format'] != 'other')
+						$formatKey = $linkRecord['format'];
+					else
+						$formatKey = $linkRecord['file_extension'];
+					if (isset($formatKey) && array_key_exists($formatKey, \Yii::app()->params['tooltips']['wallbin']))
+						$record['tooltip'] = $record['tooltip'] . PHP_EOL . \Yii::app()->params['tooltips']['wallbin'][$formatKey];
 
 					$record['date'] = array(
 						'display' => date(Yii::app()->params['outputDateFormat'], strtotime($linkRecord['link_date'])),

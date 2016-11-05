@@ -40,6 +40,7 @@
 				),
 				'tooltips' => array(
 					'wallbin' => array(
+						//Base file link formats
 						'ppt' => 'PowerPoint',
 						'pps' => 'PowerPoint Show',
 						'doc' => 'Word',
@@ -48,19 +49,35 @@
 						'jpeg' => 'JPEG',
 						'pdf' => 'PDF',
 						'video' => 'Video',
-						'wmv' => 'WMV Video',
 						'mp3' => 'MP3 Track',
-						'mp4' => 'MP4 Video',
+						'key' => 'Apple Keynote',
+						//Non-file link formats
 						'url' => 'Web URL',
 						'youtube' => 'YouTube',
 						'lan' => 'LAN Link',
 						'quicksite' => 'QuickSite Link',
 						'html5' => 'HTML5 Link',
-						'internal' => 'Internal Link',
+						'internal library' => 'Library Link',
+						'internal page' => 'Page Link',
+						'internal window' => 'Window Link',
+						'internal link' => 'Link',
 						'app' => 'App Link',
-						'key' => 'Apple Keynote',
 						'link bundle' => 'Link Bundle',
-						'other' => 'Undefined file'
+						//Additional file formats
+						'xml' => 'XML File',
+						'eps' => 'Postscript Vector',
+						'svg' => 'Scalable Vector',
+						'rar' => 'WinRar Archive',
+						'7z' => '7Zip Archive',
+						'zip' => 'Zip File',
+						'ai' => 'Adobe Illustrator',
+						'ait' => 'Adobe Illustrator',
+						'psd' => 'Adobe Photoshop',
+						'pdd' => 'Adobe Photoshop',
+						'aep' => 'Adobe After Effects',
+						'aet' => 'Adobe After Effects',
+
+						'other' => 'Undefined file',
 					),
 				),
 				'email' => array(

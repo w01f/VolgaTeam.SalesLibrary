@@ -160,6 +160,10 @@
 					$previewData = new AppLinkPreviewData($link);
 					break;
 				case 'internal':
+				case 'internal library':
+				case 'internal page':
+				case 'internal window':
+				case 'internal link':
 					$previewData = new InternalLinkPreviewData($link);
 					break;
 				case 'folder':

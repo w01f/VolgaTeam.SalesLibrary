@@ -4,6 +4,7 @@
 	$.SalesPortal = $.SalesPortal || {};
 	$.SalesPortal.ShortcutsUserPreferences = function ()
 	{
+		var content = undefined;
 		this.init = function ()
 		{
 			$.ajax({
@@ -19,7 +20,7 @@
 				},
 				success: function (msg)
 				{
-					var content = $(msg);
+					content = $(msg);
 
 					var formLogger = new $.SalesPortal.FormLogger();
 					formLogger.init({
@@ -40,6 +41,7 @@
 							}
 							else
 								settingsGroup.find('.checkbox.default input').prop('checked', settingsGroup.find('.checkbox input:checked').length == 0);
+							updateWarningVisibility();
 						});
 						settingsGroup.find('.checkbox.default input').off('click.user-preferences').on('click.user-preferences', function ()
 						{
@@ -105,6 +107,8 @@
 							title: false
 						}
 					});
+
+					updateWarningVisibility();
 				},
 				error: function ()
 				{
@@ -112,6 +116,15 @@
 				async: true,
 				dataType: 'html'
 			});
+		};
+
+		var updateWarningVisibility = function ()
+		{
+			if (content.find('#user-link-preferences-pdf-force-web-open').prop('checked') ||
+				content.find('#user-link-preferences-image-force-web-open').prop('checked'))
+				content.find('.popup-blocker-warning').show();
+			else
+				content.find('.popup-blocker-warning').hide();
 		};
 	};
 })(jQuery);

@@ -86,6 +86,7 @@
 							link.name,
 							link.type,
 							link.file_name,
+							link.file_extension,
 							link.file_relative_path as path,
 							lib.name as lib_name,
 							' . $dateField . ',

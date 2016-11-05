@@ -234,6 +234,10 @@
 						case 'html5':
 						case 'app':
 						case 'internal':
+						case 'internal library':
+						case 'internal page':
+						case 'internal window':
+						case 'internal link':
 							$fileName = 'url.png';
 							break;
 						case 'mp3':
@@ -303,17 +307,17 @@
 		{
 			$tooltipList = array();
 
-			if($this->isLineBreak)
+			if ($this->isLineBreak)
 			{
-				if(!empty($this->lineBreakProperties->note))
-				$tooltipList[] = $this->lineBreakProperties->note;
+				if (!empty($this->lineBreakProperties->note))
+					$tooltipList[] = $this->lineBreakProperties->note;
 			}
 			else
 			{
-				if(!empty($this->extendedProperties->hoverNote))
+				if (!empty($this->extendedProperties->hoverNote))
 					$tooltipList[] = $this->extendedProperties->hoverNote;
 
-				if(!isset($this->extendedProperties->showOnlyCustomHoverNote) || !$this->extendedProperties->showOnlyCustomHoverNote)
+				if (!isset($this->extendedProperties->showOnlyCustomHoverNote) || !$this->extendedProperties->showOnlyCustomHoverNote)
 				{
 					if (!$this->isFolder && isset($this->fileName))
 						$tooltipList[] = $this->fileName;
@@ -321,8 +325,15 @@
 						$tooltipList[] = $this->name;
 					if ($this->isFolder)
 						$tooltipList[] = 'Folder';
-					else if (isset($this->originalFormat) && array_key_exists($this->originalFormat, \Yii::app()->params['tooltips']['wallbin']))
-						$tooltipList[] = \Yii::app()->params['tooltips']['wallbin'][$this->originalFormat];
+					else
+					{
+						if (isset($this->originalFormat) && $this->originalFormat != 'other')
+							$formatKey = $this->originalFormat;
+						else
+							$formatKey = $this->fileExtension;
+						if (isset($formatKey) && array_key_exists($formatKey, \Yii::app()->params['tooltips']['wallbin']))
+							$tooltipList[] = \Yii::app()->params['tooltips']['wallbin'][$formatKey];
+					}
 				}
 			}
 			if (count($tooltipList) > 0)
