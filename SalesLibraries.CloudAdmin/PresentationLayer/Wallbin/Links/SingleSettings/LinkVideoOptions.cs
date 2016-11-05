@@ -7,8 +7,8 @@ using DevExpress.XtraTab;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
-using SalesLibraries.CloudAdmin.Controllers;
 using SalesLibraries.Common.Helpers;
+using SalesLibraries.CloudAdmin.Controllers;
 
 namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettings
 {
@@ -38,13 +38,15 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 				styleController.AppearanceDropDownHeader.Font = styleControllerFont;
 				styleController.AppearanceFocused.Font = styleControllerFont;
 				styleController.AppearanceReadOnly.Font = styleControllerFont;
-				labelControlTitle.Font = new Font(labelControlTitle.Font.FontFamily, labelControlTitle.Font.Size - 2, labelControlTitle.Font.Style);
+				ckForcePreview.Font = new Font(ckForcePreview.Font.FontFamily, ckForcePreview.Font.Size - 2, ckForcePreview.Font.Style);
+				ckDownloadSource.Font = new Font(ckDownloadSource.Font.FontFamily, ckDownloadSource.Font.Size - 2, ckDownloadSource.Font.Style);
 			}
 		}
 
 		public void LoadData()
 		{
 			ckForcePreview.Checked = ((VideoLinkSettings)_data.Settings).ForcePreview;
+			ckDownloadSource.Checked = ((VideoLinkSettings)_data.Settings).DownloadSource;
 			if (Directory.Exists(_data.PreviewContainerPath))
 			{
 				buttonXOpenWV.Enabled = true;
@@ -57,6 +59,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 		public void SaveData()
 		{
 			((VideoLinkSettings)_data.Settings).ForcePreview = ckForcePreview.Checked;
+			((VideoLinkSettings)_data.Settings).DownloadSource = ckDownloadSource.Checked;
 		}
 
 		private void buttonXRefreshPreview_Click(object sender, EventArgs e)

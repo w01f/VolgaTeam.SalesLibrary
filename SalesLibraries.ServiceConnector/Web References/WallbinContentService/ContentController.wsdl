@@ -324,6 +324,7 @@
       <xsd:complexType name="VideoLinkSettings">
         <xsd:all>
           <xsd:element name="forcePreview" type="xsd:boolean" />
+          <xsd:element name="downloadSource" type="xsd:boolean" />
           <xsd:element name="note" type="xsd:string" />
           <xsd:element name="hoverNote" type="xsd:string" />
           <xsd:element name="showOnlyCustomHoverNote" type="xsd:boolean" />

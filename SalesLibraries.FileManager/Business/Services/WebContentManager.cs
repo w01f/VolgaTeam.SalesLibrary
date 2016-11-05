@@ -410,6 +410,7 @@ namespace SalesLibraries.FileManager.Business.Services
 		{
 			((IBaseLinkSettings)target).ImportData(source);
 			target.forcePreview = source.ForcePreview;
+			target.downloadSource = source.DownloadSource;
 		}
 
 		private static void ImportData(

@@ -39,13 +39,15 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 				styleController.AppearanceDropDownHeader.Font = styleControllerFont;
 				styleController.AppearanceFocused.Font = styleControllerFont;
 				styleController.AppearanceReadOnly.Font = styleControllerFont;
-				labelControlTitle.Font = new Font(labelControlTitle.Font.FontFamily, labelControlTitle.Font.Size - 2, labelControlTitle.Font.Style);
+				ckForcePreview.Font = new Font(ckForcePreview.Font.FontFamily, ckForcePreview.Font.Size - 2, ckForcePreview.Font.Style);
+				ckDownloadSource.Font = new Font(ckDownloadSource.Font.FontFamily, ckDownloadSource.Font.Size - 2, ckDownloadSource.Font.Style);
 			}
 		}
 
 		public void LoadData()
 		{
 			ckForcePreview.Checked = ((VideoLinkSettings)_data.Settings).ForcePreview;
+			ckDownloadSource.Checked = ((VideoLinkSettings)_data.Settings).DownloadSource;
 			if (Directory.Exists(_data.PreviewContainerPath))
 			{
 				buttonXOpenWV.Enabled = true;
@@ -58,6 +60,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		public void SaveData()
 		{
 			((VideoLinkSettings)_data.Settings).ForcePreview = ckForcePreview.Checked;
+			((VideoLinkSettings)_data.Settings).DownloadSource = ckDownloadSource.Checked;
 		}
 
 		private void buttonXRefreshPreview_Click(object sender, EventArgs e)

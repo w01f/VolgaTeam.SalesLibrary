@@ -4693,6 +4693,8 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         
         private bool forcePreviewField;
         
+        private bool downloadSourceField;
+        
         private string noteField;
         
         private string hoverNoteField;
@@ -4732,6 +4734,16 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
             }
             set {
                 this.forcePreviewField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool downloadSource {
+            get {
+                return this.downloadSourceField;
+            }
+            set {
+                this.downloadSourceField = value;
             }
         }
         
