@@ -45,7 +45,7 @@
 				$this->mp4Src->title = $this->fileName;
 				$this->mp4Src->href = $this->url;
 				$this->mp4Src->path = $this->filePath;
-				$this->mp4Src->size = self::formatFileSize($this->fileSize);
+				$this->mp4Src->size = $this->fileSize;
 			}
 		}
 	}
