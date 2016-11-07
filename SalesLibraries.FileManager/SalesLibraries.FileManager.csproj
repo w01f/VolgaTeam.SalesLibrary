@@ -1125,6 +1125,25 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\DataSourceListZip.png" />
+    <None Include="Resources\DataSourceListXml.png" />
+    <None Include="Resources\DataSourceListXlsx.png" />
+    <None Include="Resources\DataSourceListSvg.png" />
+    <None Include="Resources\DataSourceListRar.png" />
+    <None Include="Resources\DataSourceListPsd.png" />
+    <None Include="Resources\DataSourceListPptx.png" />
+    <None Include="Resources\DataSourceListPdd.png" />
+    <None Include="Resources\DataSourceListOther.png" />
+    <None Include="Resources\DataSourceListMov.png" />
+    <None Include="Resources\DataSourceListKey.png" />
+    <None Include="Resources\DataSourceListJpeg.png" />
+    <None Include="Resources\DataSourceListEps.png" />
+    <None Include="Resources\DataSourceListDocx.png" />
+    <None Include="Resources\DataSourceListAit.png" />
+    <None Include="Resources\DataSourceListAi.png" />
+    <None Include="Resources\DataSourceListAet.png" />
+    <None Include="Resources\DataSourceListAep.png" />
+    <None Include="Resources\DataSourceList7z.png" />
     <None Include="Resources\BundlesEditorRevenueAdd.png" />
     <None Include="Resources\BundlesEditorRevenueLogo.png" />
     <None Include="Resources\BundlesEditorStrategyLogo.png" />
@@ -1155,7 +1174,6 @@
     <None Include="Resources\DataSourceListOpenedFolder.png" />
     <None Include="Resources\DataSourceListMp4.png" />
     <None Include="Resources\DataSourceListMp3.png" />
-    <None Include="Resources\DataSourceListKeynote.png" />
     <None Include="Resources\DataSourceListDoc.png" />
     <None Include="Resources\DataSourceListClosedFolder.png" />
     <None Include="Resources\LinkAddQuickSite.png" />

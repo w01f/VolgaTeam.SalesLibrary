@@ -64,7 +64,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 		}
 
 		[JsonIgnore]
-		public bool Enabled => _widgetType == WidgetType.CustomWidget;
+		public bool Enabled => _widgetType != DefaultWidgetType;
 
 		[JsonIgnore]
 		public bool Disabled => _widgetType == WidgetType.NoWidget;

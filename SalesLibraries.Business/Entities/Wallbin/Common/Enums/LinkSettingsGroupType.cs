@@ -12,5 +12,6 @@
 		QuickLink = 9,
 		Widgets = 0,
 		Banners = 1,
+		AutoWidgets = 99,
 	}
 }

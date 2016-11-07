@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DataSourceTreeViewControl));
+			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
 			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
-			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
 			this.treeListAllFiles = new DevExpress.XtraTreeList.TreeList();
 			this.treeListColumnName = new DevExpress.XtraTreeList.Columns.TreeListColumn();
 			this.treeListColumnPath = new DevExpress.XtraTreeList.Columns.TreeListColumn();
@@ -117,7 +117,7 @@
 			this.treeListAllFiles.OptionsView.ShowIndicator = false;
 			this.treeListAllFiles.OptionsView.ShowVertLines = false;
 			this.treeListAllFiles.ShowButtonMode = DevExpress.XtraTreeList.ShowButtonModeEnum.ShowForFocusedRow;
-			this.treeListAllFiles.Size = new System.Drawing.Size(293, 386);
+			this.treeListAllFiles.Size = new System.Drawing.Size(297, 389);
 			this.treeListAllFiles.StateImageList = this.imageListFiles;
 			this.treeListAllFiles.TabIndex = 1;
 			this.treeListAllFiles.AfterExpand += new DevExpress.XtraTreeList.NodeEventHandler(this.treeListAllFiles_AfterExpand);
@@ -150,15 +150,32 @@
 			this.imageListFiles.TransparentColor = System.Drawing.Color.Magenta;
 			this.imageListFiles.Images.SetKeyName(0, "DataSourceListClosedFolder.png");
 			this.imageListFiles.Images.SetKeyName(1, "DataSourceListOpenedFolder.png");
-			this.imageListFiles.Images.SetKeyName(2, "All other Files.png");
-			this.imageListFiles.Images.SetKeyName(3, "DataSourceListXls.png");
-			this.imageListFiles.Images.SetKeyName(4, "DataSourceListPng.png");
-			this.imageListFiles.Images.SetKeyName(5, "DataSourceListPdf.png");
-			this.imageListFiles.Images.SetKeyName(6, "DataSourceListPpt.png");
-			this.imageListFiles.Images.SetKeyName(7, "DataSourceListMp4.png");
+			this.imageListFiles.Images.SetKeyName(2, "DataSourceListOther.png");
+			this.imageListFiles.Images.SetKeyName(3, "DataSourceList7z.png");
+			this.imageListFiles.Images.SetKeyName(4, "DataSourceListAep.png");
+			this.imageListFiles.Images.SetKeyName(5, "DataSourceListAet.png");
+			this.imageListFiles.Images.SetKeyName(6, "DataSourceListAi.png");
+			this.imageListFiles.Images.SetKeyName(7, "DataSourceListAit.png");
 			this.imageListFiles.Images.SetKeyName(8, "DataSourceListDoc.png");
-			this.imageListFiles.Images.SetKeyName(9, "DataSourceListKeynote.png");
-			this.imageListFiles.Images.SetKeyName(10, "DataSourceListMp3.png");
+			this.imageListFiles.Images.SetKeyName(9, "DataSourceListDocx.png");
+			this.imageListFiles.Images.SetKeyName(10, "DataSourceListEps.png");
+			this.imageListFiles.Images.SetKeyName(11, "DataSourceListJpeg.png");
+			this.imageListFiles.Images.SetKeyName(12, "DataSourceListKey.png");
+			this.imageListFiles.Images.SetKeyName(13, "DataSourceListMov.png");
+			this.imageListFiles.Images.SetKeyName(14, "DataSourceListMp3.png");
+			this.imageListFiles.Images.SetKeyName(15, "DataSourceListMp4.png");
+			this.imageListFiles.Images.SetKeyName(16, "DataSourceListPdd.png");
+			this.imageListFiles.Images.SetKeyName(17, "DataSourceListPdf.png");
+			this.imageListFiles.Images.SetKeyName(18, "DataSourceListPng.png");
+			this.imageListFiles.Images.SetKeyName(19, "DataSourceListPpt.png");
+			this.imageListFiles.Images.SetKeyName(20, "DataSourceListPptx.png");
+			this.imageListFiles.Images.SetKeyName(21, "DataSourceListPsd.png");
+			this.imageListFiles.Images.SetKeyName(22, "DataSourceListRar.png");
+			this.imageListFiles.Images.SetKeyName(23, "DataSourceListSvg.png");
+			this.imageListFiles.Images.SetKeyName(24, "DataSourceListXls.png");
+			this.imageListFiles.Images.SetKeyName(25, "DataSourceListXlsx.png");
+			this.imageListFiles.Images.SetKeyName(26, "DataSourceListXml.png");
+			this.imageListFiles.Images.SetKeyName(27, "DataSourceListZip.png");
 			// 
 			// treeListSearchFiles
 			// 
@@ -190,7 +207,7 @@
 			this.treeListSearchFiles.OptionsView.ShowIndicator = false;
 			this.treeListSearchFiles.OptionsView.ShowVertLines = false;
 			this.treeListSearchFiles.ShowButtonMode = DevExpress.XtraTreeList.ShowButtonModeEnum.ShowForFocusedRow;
-			this.treeListSearchFiles.Size = new System.Drawing.Size(293, 244);
+			this.treeListSearchFiles.Size = new System.Drawing.Size(297, 247);
 			this.treeListSearchFiles.StateImageList = this.imageListFiles;
 			this.treeListSearchFiles.TabIndex = 2;
 			this.treeListSearchFiles.MouseClick += new System.Windows.Forms.MouseEventHandler(this.treeListAllFiles_MouseClick);
@@ -222,7 +239,7 @@
 			this.pnKeyWord.Dock = System.Windows.Forms.DockStyle.Top;
 			this.pnKeyWord.Location = new System.Drawing.Point(0, 0);
 			this.pnKeyWord.Name = "pnKeyWord";
-			this.pnKeyWord.Size = new System.Drawing.Size(293, 142);
+			this.pnKeyWord.Size = new System.Drawing.Size(297, 142);
 			this.pnKeyWord.TabIndex = 0;
 			// 
 			// groupControlDateRange
@@ -236,7 +253,7 @@
 			this.groupControlDateRange.Location = new System.Drawing.Point(6, 69);
 			this.groupControlDateRange.Name = "groupControlDateRange";
 			this.groupControlDateRange.ShowCaption = false;
-			this.groupControlDateRange.Size = new System.Drawing.Size(278, 64);
+			this.groupControlDateRange.Size = new System.Drawing.Size(282, 64);
 			this.groupControlDateRange.TabIndex = 0;
 			// 
 			// laStartDate
@@ -253,13 +270,13 @@
 			// 
 			this.dateEditEndDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.dateEditEndDate.EditValue = null;
-			this.dateEditEndDate.Location = new System.Drawing.Point(153, 35);
+			this.dateEditEndDate.Location = new System.Drawing.Point(157, 35);
 			this.dateEditEndDate.Name = "dateEditEndDate";
 			this.dateEditEndDate.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
 			this.dateEditEndDate.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.dateEditEndDate.Properties.Appearance.Options.UseFont = true;
 			this.dateEditEndDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("dateEditEndDate.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject3, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("dateEditEndDate.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "", null, null, true)});
 			this.dateEditEndDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
 			this.dateEditEndDate.Properties.DisplayFormat.FormatString = "MM/dd/yyyy";
@@ -288,13 +305,13 @@
 			// 
 			this.dateEditStartDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.dateEditStartDate.EditValue = null;
-			this.dateEditStartDate.Location = new System.Drawing.Point(153, 7);
+			this.dateEditStartDate.Location = new System.Drawing.Point(157, 7);
 			this.dateEditStartDate.Name = "dateEditStartDate";
 			this.dateEditStartDate.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
 			this.dateEditStartDate.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.dateEditStartDate.Properties.Appearance.Options.UseFont = true;
 			this.dateEditStartDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("dateEditStartDate.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("dateEditStartDate.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject3, "", null, null, true)});
 			this.dateEditStartDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
 			this.dateEditStartDate.Properties.DisplayFormat.FormatString = "MM/dd/yyyy";
@@ -314,7 +331,7 @@
 			this.buttonXSearch.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
 			this.buttonXSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXSearch.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-			this.buttonXSearch.Location = new System.Drawing.Point(209, 37);
+			this.buttonXSearch.Location = new System.Drawing.Point(213, 37);
 			this.buttonXSearch.Name = "buttonXSearch";
 			this.buttonXSearch.Size = new System.Drawing.Size(75, 28);
 			this.buttonXSearch.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -345,7 +362,7 @@
 			this.textEditKeyWord.Location = new System.Drawing.Point(8, 7);
 			this.textEditKeyWord.Name = "textEditKeyWord";
 			this.textEditKeyWord.Properties.NullText = "Type keyword here...";
-			this.textEditKeyWord.Size = new System.Drawing.Size(276, 22);
+			this.textEditKeyWord.Size = new System.Drawing.Size(280, 22);
 			this.textEditKeyWord.StyleController = this.styleController;
 			this.textEditKeyWord.TabIndex = 3;
 			this.textEditKeyWord.KeyDown += new System.Windows.Forms.KeyEventHandler(this.edKeyWord_KeyDown);
@@ -439,7 +456,7 @@
 			// 
 			this.xtraTabPageRegular.Controls.Add(this.treeListAllFiles);
 			this.xtraTabPageRegular.Name = "xtraTabPageRegular";
-			this.xtraTabPageRegular.Size = new System.Drawing.Size(293, 386);
+			this.xtraTabPageRegular.Size = new System.Drawing.Size(297, 389);
 			this.xtraTabPageRegular.Text = "Tree View";
 			// 
 			// xtraTabPageSearch
@@ -447,7 +464,7 @@
 			this.xtraTabPageSearch.Controls.Add(this.treeListSearchFiles);
 			this.xtraTabPageSearch.Controls.Add(this.pnKeyWord);
 			this.xtraTabPageSearch.Name = "xtraTabPageSearch";
-			this.xtraTabPageSearch.Size = new System.Drawing.Size(293, 386);
+			this.xtraTabPageSearch.Size = new System.Drawing.Size(297, 389);
 			this.xtraTabPageSearch.Text = "Search";
 			// 
 			// pnTreeViewProgress

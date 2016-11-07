@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -13,96 +14,151 @@ namespace SalesLibraries.CommonGUI.Common
 	public class FormStateHelper
 	{
 		private const string StorageName = "Location.xml";
+
+		private static readonly Dictionary<string, FormState> SessionStates = new Dictionary<string, FormState>();
+
 		private readonly Form _form;
 		private readonly bool _showMaximized;
+		private readonly string _formKey;
 		private readonly StorageFile _stateStorageFile;
+		private readonly bool _saveSate;
 
-		private FormStateHelper(Form targetForm, StorageDirectory storagePath, string filePrefix, bool showMaximized)
+		private FormStateHelper(Form targetForm, StorageDirectory storagePath, string filePrefix, bool showMaximized, bool saveSate)
 		{
 			_form = targetForm;
+			_formKey = filePrefix;
 			_stateStorageFile = new StorageFile(storagePath.RelativePathParts.Merge(String.Format("{0}-{1}", filePrefix, StorageName)));
 			_showMaximized = showMaximized;
+			_saveSate = saveSate;
 			_form.WindowState = FormWindowState.Normal;
 			_form.Load += (o, e) => LoadState();
 			_form.FormClosed += (o, e) => SaveState();
 		}
 
-		public static FormStateHelper Init(Form targetForm, StorageDirectory storagePath, string filePrefix, bool showMaximized)
+		public static FormStateHelper Init(Form targetForm, StorageDirectory storagePath, string filePrefix, bool showMaximized, bool saveSate)
 		{
-			return new FormStateHelper(targetForm, storagePath, filePrefix, showMaximized);
+			return new FormStateHelper(targetForm, storagePath, filePrefix, showMaximized, saveSate);
 		}
 
 		public void LoadState()
 		{
-			int? x = null, y = null, width = null, height = null;
-			if (_stateStorageFile.ExistsLocal())
-			{
-				var document = new XmlDocument();
-				document.Load(_stateStorageFile.LocalPath);
 
-				var node = document.SelectSingleNode(@"/Location/X");
-				if (node != null)
-				{
-					int temp;
-					if (Int32.TryParse(node.InnerText, out temp))
-						x = temp;
-				}
-				node = document.SelectSingleNode(@"/Location/Y");
-				if (node != null)
-				{
-					int temp;
-					if (Int32.TryParse(node.InnerText, out temp))
-						y = temp;
-				}
-				node = document.SelectSingleNode(@"/Location/Width");
-				if (node != null)
-				{
-					int temp;
-					if (Int32.TryParse(node.InnerText, out temp))
-						width = temp;
-				}
-				node = document.SelectSingleNode(@"/Location/Height");
-				if (node != null)
-				{
-					int temp;
-					if (Int32.TryParse(node.InnerText, out temp))
-						height = temp;
-				}
-			}
-			if (x.HasValue && y.HasValue && Screen.AllScreens.Any(s => s.Bounds.Contains(x.Value, y.Value)))
-			{
-				_form.StartPosition = FormStartPosition.Manual;
-				_form.Location = new Point(x.Value, y.Value);
-				if (width.HasValue && height.HasValue)
-				{
-					_form.Width = width.Value;
-					_form.Height = height.Value;
-				}
-			}
+			FormState state;
+			if (SessionStates.ContainsKey(_formKey))
+				state = SessionStates[_formKey];
 			else
 			{
-				_form.StartPosition = FormStartPosition.CenterScreen;
-				if (_showMaximized)
-					_form.WindowState = FormWindowState.Maximized;
+				state = FormState.LoadFromFile(_stateStorageFile.LocalPath);
+				SessionStates.Add(_formKey, state);
+			}
+
+			_form.StartPosition = FormStartPosition.CenterScreen;
+			if (state.WindowState == FormWindowState.Maximized)
+				_form.WindowState = FormWindowState.Maximized;
+			else
+			{
+				_form.WindowState = _showMaximized ? FormWindowState.Maximized : FormWindowState.Normal;
+				if (state.Configured)
+				{
+					_form.StartPosition = FormStartPosition.Manual;
+					if (state.Left.HasValue && state.Top.HasValue)
+						_form.Location = new Point(state.Left.Value, state.Top.Value);
+					if (state.Width.HasValue && state.Height.HasValue)
+					{
+						_form.Width = state.Width.Value;
+						_form.Height = state.Height.Value;
+					}
+				}
 			}
 		}
 
 		private void SaveState()
 		{
-			var xml = new StringBuilder();
-			xml.AppendLine(@"<Location>");
-			if (_form.WindowState != FormWindowState.Maximized)
+			SessionStates[_formKey].WindowState = _form.WindowState;
+			SessionStates[_formKey].Left = _form.WindowState == FormWindowState.Normal ? _form.Location.X : (int?)null;
+			SessionStates[_formKey].Top = _form.WindowState == FormWindowState.Normal ? _form.Location.Y : (int?)null;
+			SessionStates[_formKey].Width = _form.WindowState == FormWindowState.Normal ? _form.Width : (int?)null;
+			SessionStates[_formKey].Height = _form.WindowState == FormWindowState.Normal ? _form.Height : (int?)null;
+			if (_saveSate)
+				SessionStates[_formKey].SaveToFile(_stateStorageFile.LocalPath);
+		}
+
+		internal class FormState
+		{
+			public int? Left { get; set; }
+			public int? Top { get; set; }
+			public int? Width { get; set; }
+			public int? Height { get; set; }
+			public FormWindowState? WindowState { get; set; }
+
+			public bool Configured => Left.HasValue && Top.HasValue && Width.HasValue && Height.HasValue;
+
+			public static FormState LoadFromFile(string filePath)
 			{
-				xml.AppendLine(@"<X>" + _form.Location.X + @"</X>");
-				xml.AppendLine(@"<Y>" + _form.Location.Y + @"</Y>");
-				xml.AppendLine(@"<Width>" + _form.Width + @"</Width>");
-				xml.AppendLine(@"<Height>" + _form.Height + @"</Height>");
+				var state = new FormState();
+				if (File.Exists(filePath))
+				{
+					var document = new XmlDocument();
+					document.Load(filePath);
+
+					var node = document.SelectSingleNode(@"/Location/X");
+					if (node != null)
+					{
+						int temp;
+						if (Int32.TryParse(node.InnerText, out temp))
+							state.Left = temp;
+					}
+					node = document.SelectSingleNode(@"/Location/Y");
+					if (node != null)
+					{
+						int temp;
+						if (Int32.TryParse(node.InnerText, out temp))
+							state.Top = temp;
+					}
+					node = document.SelectSingleNode(@"/Location/Width");
+					if (node != null)
+					{
+						int temp;
+						if (Int32.TryParse(node.InnerText, out temp))
+							state.Width = temp;
+					}
+					node = document.SelectSingleNode(@"/Location/Height");
+					if (node != null)
+					{
+						int temp;
+						if (Int32.TryParse(node.InnerText, out temp))
+							state.Height = temp;
+					}
+					node = document.SelectSingleNode(@"/Location/State");
+					if (node != null)
+					{
+						int temp;
+						if (Int32.TryParse(node.InnerText, out temp))
+							state.WindowState = (FormWindowState)temp;
+					}
+				}
+				return state;
 			}
-			xml.AppendLine(@"</Location>");
-			using (var sw = new StreamWriter(_stateStorageFile.LocalPath, false))
+
+			public void SaveToFile(string filePath)
 			{
-				sw.Write(xml);
-				sw.Flush();
+				var xml = new StringBuilder();
+				xml.AppendLine(@"<Location>");
+				if (WindowState.HasValue)
+					xml.AppendLine(@"<State>" + (Int32)WindowState + @"</State>");
+				if (WindowState != FormWindowState.Maximized)
+				{
+					xml.AppendLine(@"<X>" + Left + @"</X>");
+					xml.AppendLine(@"<Y>" + Top + @"</Y>");
+					xml.AppendLine(@"<Width>" + Width + @"</Width>");
+					xml.AppendLine(@"<Height>" + Height + @"</Height>");
+				}
+				xml.AppendLine(@"</Location>");
+				using (var sw = new StreamWriter(filePath, false))
+				{
+					sw.Write(xml);
+					sw.Flush();
+				}
 			}
 		}
 	}

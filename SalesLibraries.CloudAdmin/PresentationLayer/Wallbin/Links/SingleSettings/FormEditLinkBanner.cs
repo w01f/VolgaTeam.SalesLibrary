@@ -10,6 +10,7 @@ using SalesLibraries.Business.Entities.Common;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
+using SalesLibraries.Common.Extensions;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.CommonGUI.Common;
 using SalesLibraries.CloudAdmin.Controllers;
@@ -20,6 +21,9 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 {
 	public partial class FormEditLinkBanner : MetroForm, ILinkSettingsEditForm
 	{
+		private const string ImageTitleFormat = "<size=+4><b>{0}</b></size><br><color=gray>{1}</color>";
+		private const int BannerThumbnailHeight = 64;
+
 		private bool _allowHandleEvents;
 		private string _tempBannerText;
 		private readonly BaseLibraryLink _sourceLink;
@@ -34,7 +38,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 			_sourceLink = sourceLink;
 			InitializeComponent();
 
-			labelControlTitle.Text = String.Format(labelControlTitle.Text, _sourceLink.Name);
+			labelControlTitle.Text = String.Format(ImageTitleFormat, _sourceLink.LinkInfoDisplayName, String.Empty);
 
 			buttonEditBannerTextFont.ButtonClick += EditorHelper.FontEdit_ButtonClick;
 			buttonEditBannerTextFont.Click += EditorHelper.FontEdit_Click;
@@ -65,6 +69,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 		{
 			Width = 990;
 			Height = 670;
+			FormStateHelper.Init(this, RemoteResourceManager.Instance.AppAliasSettingsFolder, "Site Admin-Link-Banner", false, false);
 			Text = string.Format(Text, _sourceLink.Name);
 			LoadData();
 		}
@@ -117,7 +122,16 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 			checkEditInvert.Checked = banner.Inverted;
 			checkEditVerticalAlignmentTop1.Checked = banner.ImageVerticalAlignement == VerticalAlignment.Top;
 			checkEditVerticalAlignmentTop2.Checked = banner.ImageVerticalAlignement == VerticalAlignment.Top;
-			labelControlTitle.Appearance.Image = banner.Enable ? banner.Image : null;
+			if (banner.Enable && banner.Image != null)
+			{
+				labelControlTitle.Appearance.Image = banner.Image.Height > BannerThumbnailHeight ? banner.Image.Resize(new Size(banner.Image.Width, BannerThumbnailHeight)) : banner.Image;
+				labelControlTitle.Tag = banner.Image;
+			}
+			else
+			{
+				labelControlTitle.Appearance.Image = null;
+				labelControlTitle.Tag = null;
+			}
 			switch (banner.ImageAlignement)
 			{
 				case HorizontalAlignment.Left:
@@ -173,7 +187,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 				_sourceLink.Banner.ImageVerticalAlignement = checkEditVerticalAlignmentTop1.Checked
 					? VerticalAlignment.Top
 					: VerticalAlignment.Middle;
-				_sourceLink.Banner.Image = labelControlTitle.Appearance.Image;
+				_sourceLink.Banner.Image = labelControlTitle.Tag as Image;
 				if (checkEditHorizontalAlignmentLeft.Checked)
 					_sourceLink.Banner.ImageAlignement = HorizontalAlignment.Left;
 				else if (checkEditHorizontalAlignmentCenter.Checked)
@@ -238,7 +252,9 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 
 		private void OnSelectedBannerChanged(object sender, LinkImageEventArgs e)
 		{
-			labelControlTitle.Appearance.Image = e.Image;
+			labelControlTitle.Tag = e.Image;
+			labelControlTitle.Appearance.Image = e.Image.Height > BannerThumbnailHeight ? e.Image.Resize(new Size(e.Image.Width, BannerThumbnailHeight)) : e.Image;
+			labelControlTitle.Text = String.Format(ImageTitleFormat, _sourceLink.LinkInfoDisplayName, e.Text);
 		}
 
 		private void OnBannerHorizontalChanged(object sender, EventArgs e)

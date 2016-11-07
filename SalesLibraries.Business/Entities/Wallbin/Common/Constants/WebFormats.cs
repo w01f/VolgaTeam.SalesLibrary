@@ -15,7 +15,10 @@
 		public const string QuickSite = "quicksite";
 		public const string Html5 = "html5";
 		public const string AppLink = "app";
-		public const string InternalLink = "internal";
+		public const string InternalWallbin = "internal library";
+		public const string InternalLibraryPage= "internal page";
+		public const string InternalLibraryFolder = "internal window";
+		public const string InternalLibraryLink = "internal link";
 		public const string Lan = "lan";
 		public const string Video = "video";
 		public const string Word = "doc";

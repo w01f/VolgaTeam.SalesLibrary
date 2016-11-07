@@ -27,7 +27,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 			=> String.IsNullOrEmpty(base.DisplayNameWithoutNote) ? Settings.Note : base.DisplayNameWithoutNote;
 
 		[NotMapped, JsonIgnore]
-		public override string LinkInfoDisplayName => Settings.TextWordWrap ? "Line break" : Name;
+		public override string LinkInfoDisplayName => Settings.TextWordWrap ? "Line break" : (!String.IsNullOrEmpty(Name) ? Name : "Line break");
 
 		[NotMapped, JsonIgnore]
 		public override string Hint

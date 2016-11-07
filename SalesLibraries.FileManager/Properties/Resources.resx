@@ -130,9 +130,6 @@
   <data name="LinkDelete" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\LinkDelete.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="DataSourceListPng" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\DataSourceListPng.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="SecurityRibbonReset" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SecurityRibbonReset.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -153,9 +150,6 @@
   </data>
   <data name="LinkAddNetwork" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\LinkAddNetwork.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="DataSourceListMp3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\DataSourceListMp3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="SettingsAdvanced" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SettingsAdvanced.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -180,9 +174,6 @@
   </data>
   <data name="LinkSettingsPreviewOptions" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\LinkSettingsPreviewOptions.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="DataSourceListPpt" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\DataSourceListPpt.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ArrowRight" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ArrowRight.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -232,9 +223,6 @@
   <data name="LinkAddQuickSite" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\LinkAddQuickSite.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="DataSourceListDoc" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\DataSourceListDoc.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="SettingsEmailList" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SettingsEmailList.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -277,9 +265,6 @@
   <data name="LinkAddYoutube" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\LinkAddYoutube.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="DataSourceListKeynote" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\DataSourceListKeynote.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="ButtonDelete" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ButtonDelete.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -319,9 +304,6 @@
   <data name="CalendarFontUp" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CalendarFontUp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="DataSourceListMp4" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\DataSourceListMp4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Sync" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Sync.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -351,9 +333,6 @@
   </data>
   <data name="WallbinSettingsRibbon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\WallbinSettingsRibbon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="DataSourceListPdf" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\DataSourceListPdf.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="BundlesEditorLinksAddInfo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\BundlesEditorLinksAddInfo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -400,13 +379,88 @@
   <data name="LinkSettingsFolderTags" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\LinkSettingsFolderTags.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="DataSourceListXls" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\DataSourceListXls.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="SettingsSync" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SettingsSync.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="BundlesEditorRevenueAdd" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\BundlesEditorRevenueAdd.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DataSourceList7z" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DataSourceList7z.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DataSourceListAep" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DataSourceListAep.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DataSourceListAet" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DataSourceListAet.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DataSourceListAi" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DataSourceListAi.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DataSourceListAit" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DataSourceListAit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DataSourceListDoc" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DataSourceListDoc.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DataSourceListDocx" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DataSourceListDocx.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DataSourceListEps" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DataSourceListEps.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DataSourceListJpeg" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DataSourceListJpeg.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DataSourceListKey" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DataSourceListKey.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DataSourceListMov" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DataSourceListMov.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DataSourceListMp3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DataSourceListMp3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DataSourceListMp4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DataSourceListMp4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DataSourceListOther" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DataSourceListOther.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DataSourceListPdd" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DataSourceListPdd.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DataSourceListPdf" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DataSourceListPdf.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DataSourceListPng" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DataSourceListPng.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DataSourceListPpt" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DataSourceListPpt.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DataSourceListPptx" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DataSourceListPptx.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DataSourceListPsd" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DataSourceListPsd.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DataSourceListRar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DataSourceListRar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DataSourceListSvg" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DataSourceListSvg.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DataSourceListXls" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DataSourceListXls.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DataSourceListXlsx" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DataSourceListXlsx.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DataSourceListXml" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DataSourceListXml.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DataSourceListZip" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DataSourceListZip.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

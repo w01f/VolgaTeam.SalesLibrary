@@ -19,9 +19,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 					switch (linkSettingsGroupType)
 					{
 						case LinkSettingsGroupType.Banners:
-							return "Banner";
+							return "Clipart-Logo";
 						case LinkSettingsGroupType.Widgets:
-							return "Widget";
+							return "Widget-Icon";
 						case LinkSettingsGroupType.TextFormatting:
 							return "Text Formatting";
 						case LinkSettingsGroupType.TextNote:
@@ -36,6 +36,10 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 							return "Security";
 						case LinkSettingsGroupType.Expiration:
 							return "Expiration Date";
+						case LinkSettingsGroupType.QuickLink:
+							return "Quick Link";
+						case LinkSettingsGroupType.AutoWidgets:
+							return "Auto Widgets";
 						default:
 							throw new ArgumentOutOfRangeException("Undefined Settings Group");
 					}

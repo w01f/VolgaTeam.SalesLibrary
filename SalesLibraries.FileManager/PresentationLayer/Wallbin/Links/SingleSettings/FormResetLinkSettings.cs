@@ -12,8 +12,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 {
 	public partial class FormResetLinkSettings : MetroForm
 	{
-		private readonly List<BaseLibraryLink> _targetLinks = new List<BaseLibraryLink>();
-
 		public IList<LinkSettingsGroupType> SettingsGroups =>
 			checkedListBoxControlOutputItems.CheckedItems
 				.OfType<CheckedListBoxItem>()
@@ -42,56 +40,61 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 		public FormResetLinkSettings(BaseLibraryLink targetLink) : this()
 		{
-			_targetLinks.Add(targetLink);
-
 			Text = "Reset this Link";
 			labelControlTitle.Text = String.Format(labelControlTitle.Text,
 				targetLink.LinkInfoDisplayName,
 				(targetLink as LibraryFileLink)?.NameWithExtension ?? (targetLink as LibraryObjectLink)?.RelativePath ?? String.Empty);
 
-			LoadSettingsGroups();
+			LoadSettingsGroups(GetLinkCustomizedSettings(targetLink));
 		}
 
 		public FormResetLinkSettings(LibraryPage targetPage) : this()
 		{
-			_targetLinks.AddRange(targetPage.AllLinks);
-
 			Text = "Reset all Links on this Page";
 			labelControlTitle.Text = String.Format(labelControlTitle.Text,
 				String.Format("Page: <b>{0}</b>", targetPage.Name),
 				String.Empty);
 
-			LoadSettingsGroups();
+			LoadSettingsGroups(GetLinksCustomizedSettings(targetPage.AllLinks));
 		}
 
 		public FormResetLinkSettings(LibraryFolder targetFolder) : this()
 		{
-			_targetLinks.AddRange(targetFolder.AllLinks);
-
 			Text = "Reset all Links in this Window";
 			labelControlTitle.Text = String.Format(labelControlTitle.Text,
 				String.Format("Window: <b>{0}</b>", targetFolder.Name),
 				String.Empty);
 
-			LoadSettingsGroups();
+			LoadSettingsGroups(GetLinksCustomizedSettings(targetFolder.AllLinks));
 		}
 
-		private void LoadSettingsGroups()
+		private IList<LinkSettingsGroupType> GetLinkCustomizedSettings(BaseLibraryLink targetLink)
 		{
-			var customizedSettingsGroups = _targetLinks
+			return GetLinksCustomizedSettings(new[] { targetLink });
+		}
+
+		private IList<LinkSettingsGroupType> GetLinksCustomizedSettings(IEnumerable<BaseLibraryLink> targetLinks)
+		{
+			var customizedSettings = targetLinks
 				.SelectMany(link => link.GetCustomizedSettigsGroups())
 				.Distinct()
 				.ToList();
+			customizedSettings.Sort((x, y) => ((Int32)x).CompareTo((Int32)y));
+			return customizedSettings;
+		}
+
+		private void LoadSettingsGroups(IList<LinkSettingsGroupType> customizedSettingsGroups)
+		{
 			foreach (var linkSettingsGroupType in customizedSettingsGroups)
 			{
 				string itemName;
 				switch (linkSettingsGroupType)
 				{
 					case LinkSettingsGroupType.Banners:
-						itemName = "Banner";
+						itemName = "Clipart-Logo";
 						break;
 					case LinkSettingsGroupType.Widgets:
-						itemName = "Widget";
+						itemName = "Widget-Icon";
 						break;
 					case LinkSettingsGroupType.TextFormatting:
 						itemName = "Text Formatting";
@@ -113,6 +116,12 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 						break;
 					case LinkSettingsGroupType.Expiration:
 						itemName = "Expiration Date";
+						break;
+					case LinkSettingsGroupType.QuickLink:
+						itemName = "Quick Link";
+						break;
+					case LinkSettingsGroupType.AutoWidgets:
+						itemName = "Auto Widgets";
 						break;
 					default:
 						throw new ArgumentOutOfRangeException("Undefined Settings Group");

@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using SalesLibraries.Common.Extensions;
 using SalesLibraries.Common.Objects.RemoteStorage;
 
 namespace SalesLibraries.Common.Helpers
@@ -8,7 +9,8 @@ namespace SalesLibraries.Common.Helpers
 		public static RemoteResourceManager Instance { get; } = new RemoteResourceManager();
 
 		#region Local
-		public StorageDirectory AppSettingsFolder { get; private set; }
+		public StorageDirectory AppSharedSettingsFolder { get; private set; }
+		public StorageDirectory AppAliasSettingsFolder { get; private set; }
 		public StorageDirectory TempFolder { get; private set; }
 
 		public StorageFile AppSettingsFile { get; private set; }
@@ -38,12 +40,21 @@ namespace SalesLibraries.Common.Helpers
 			if (!TempFolder.ExistsLocal())
 				await StorageDirectory.CreateSubFolder(new string[] { }, "Temp");
 
-			AppSettingsFolder = new StorageDirectory(new object[]
+			AppSharedSettingsFolder = new StorageDirectory(new object[]
+			{
+				FileStorageManager.LocalFilesFolderName,
+				AppProfileManager.Instance.AppName,
+				"shared"
+			});
+			if (!await AppSharedSettingsFolder.Exists())
+				await StorageDirectory.CreateSubFolder(new[] { FileStorageManager.LocalFilesFolderName }, new[] { AppProfileManager.Instance.AppName, "shared" });
+
+			AppAliasSettingsFolder = new StorageDirectory(new object[]
 			{
 				FileStorageManager.LocalFilesFolderName,
 				AppProfileManager.Instance.AppNameSet,
 			});
-			if (!await AppSettingsFolder.Exists())
+			if (!await AppAliasSettingsFolder.Exists())
 				await StorageDirectory.CreateSubFolder(new[] { FileStorageManager.LocalFilesFolderName }, AppProfileManager.Instance.AppNameSet);
 
 			AppSettingsFile = new StorageFile(new object[]
@@ -60,9 +71,19 @@ namespace SalesLibraries.Common.Helpers
 			ArtworkFolder = new ArchiveDirectory(new object[]
 			{
 				FileStorageManager.IncomingFolderName,
-				AppProfileManager.Instance.AppNameSet,
+				AppProfileManager.Instance.AppName,
+				"shared_artwork",
 				"Artwork"
 			});
+			if (!await ArtworkFolder.Exists(true))
+			{
+				ArtworkFolder = new ArchiveDirectory(new object[]
+				{
+					FileStorageManager.IncomingFolderName,
+					AppProfileManager.Instance.AppNameSet,
+					"Artwork"
+				});
+			}
 			await ArtworkFolder.Download();
 
 			ThemesFolder = new ArchiveDirectory(new[]

@@ -312,44 +312,73 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.DataSource
 		{
 			switch (Path.GetExtension(filePath).ToUpper())
 			{
-				case ".XLS":
-				case ".XLT":
-				case ".XLTX":
-				case ".XLSX":
+				case ".7Z":
 					return 3;
-				case ".BMP":
-				case ".JPG":
-				case ".JPEG":
-				case ".PNG":
-				case ".GIF":
-				case ".TIF":
-				case ".TIFF":
-				case ".ICO":
+				case ".AEP":
 					return 4;
-				case ".PDF":
+				case ".AET":
 					return 5;
-				case ".PPT":
-				case ".PPTX":
-				case ".PPS":
-				case ".PPSX":
-				case ".PPTM":
+				case ".AI":
 					return 6;
+				case ".AIT":
+					return 7;
+				case ".DOC":
+					return 8;
+				case ".DOCX":
+					return 9;
+				case ".EPS":
+					return 10;
+				case ".JPEG":
+					return 11;
+				case ".KEY":
+					return 12;
+				case ".MOV":
+					return 13;
+				case ".MP3":
+					return 14;
+				case ".MP4":
 				case ".MPEG":
 				case ".MPG":
 				case ".WMV":
 				case ".ASF":
 				case ".AVI":
-				case ".MOV":
-				case ".MP4":
 				case ".M4V":
-					return 7;
-				case ".DOC":
-				case ".DOCX":
-					return 8;
-				case ".KEY":
-					return 9;
-				case ".MP3":
-					return 10;
+					return 15;
+				case ".PDD":
+					return 16;
+				case ".PDF":
+					return 17;
+				case ".PNG":
+				case ".BMP":
+				case ".JPG":
+				case ".GIF":
+				case ".TIF":
+				case ".TIFF":
+				case ".ICO":
+					return 18;
+				case ".PPT":
+				case ".PPS":
+				case ".PPSX":
+				case ".PPTM":
+					return 19;
+				case ".PPTX":
+					return 20;
+				case ".PSD":
+					return 21;
+				case ".RAR":
+					return 22;
+				case ".SVG":
+					return 23;
+				case ".XLS":
+				case ".XLT":
+				case ".XLTX":
+					return 24;
+				case ".XLSX":
+					return 25;
+				case ".XML":
+					return 26;
+				case ".ZIP":
+					return 27;
 				default:
 					return 2;
 			}

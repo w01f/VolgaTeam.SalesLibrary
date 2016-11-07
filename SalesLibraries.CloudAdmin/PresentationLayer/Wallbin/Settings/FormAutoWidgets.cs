@@ -54,6 +54,9 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Settings
 						if (form.ShowDialog() != DialogResult.OK) return;
 						autoWidget.Inverted = form.checkEditInvert.Checked;
 						autoWidget.Widget = form.pbSelectedWidget.Image;
+						gridViewAutoWidgets.UpdateCurrentRow();
+						gridViewAutoWidgets.RefreshData();
+						gridViewAutoWidgets.Focus();
 					}
 					break;
 			}

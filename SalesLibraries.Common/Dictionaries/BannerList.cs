@@ -27,7 +27,7 @@ namespace SalesLibraries.Common.Dictionaries
 		{
 			MainFolder = new StorageDirectory(RemoteResourceManager.Instance.ArtworkFolder.RelativePathParts.Merge("Banners"));
 			AdditionalFolder = new StorageDirectory(RemoteResourceManager.Instance.ArtworkFolder.RelativePathParts.Merge("Banners_2"));
-			FavsFolder = new StorageDirectory(RemoteResourceManager.Instance.AppSettingsFolder.RelativePathParts.Merge("Favorite_Banners"));
+			FavsFolder = new StorageDirectory(RemoteResourceManager.Instance.AppSharedSettingsFolder.RelativePathParts.Merge("Favorite_Banners"));
 
 			Items.Clear();
 

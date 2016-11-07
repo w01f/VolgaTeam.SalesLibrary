@@ -26,7 +26,7 @@ namespace SalesLibraries.Common.Dictionaries
 		{
 			MainFolder = new StorageDirectory(RemoteResourceManager.Instance.ArtworkFolder.RelativePathParts.Merge("Widgets"));
 			AdditionalFolder = new StorageDirectory(RemoteResourceManager.Instance.ArtworkFolder.RelativePathParts.Merge("Widgets_2"));
-			FavsFolder = new StorageDirectory(RemoteResourceManager.Instance.AppSettingsFolder.RelativePathParts.Merge("Favorite_Widgets"));
+			FavsFolder = new StorageDirectory(RemoteResourceManager.Instance.AppSharedSettingsFolder.RelativePathParts.Merge("Favorite_Widgets"));
 
 			Items.Clear();
 

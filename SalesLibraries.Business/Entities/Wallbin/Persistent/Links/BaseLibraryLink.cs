@@ -304,6 +304,11 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 				SecurityEncoded = null;
 			if (groupsForReset == null || groupsForReset.Contains(LinkSettingsGroupType.Widgets))
 				WidgetEncoded = null;
+			if (groupsForReset == null || groupsForReset.Contains(LinkSettingsGroupType.AutoWidgets))
+			{
+				Widget.WidgetType = WidgetType.NoWidget;
+				WidgetEncoded = Widget.Serialize();
+			}
 			if (groupsForReset == null || groupsForReset.Contains(LinkSettingsGroupType.Banners))
 				BannerEncoded = null;
 			if (groupsForReset == null || groupsForReset.Contains(LinkSettingsGroupType.SearchTags))
@@ -330,10 +335,10 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 
 			if (Widget.Enabled)
 				customizedSettingsGroups.Add(LinkSettingsGroupType.Widgets);
+			if (Widget.WidgetType == WidgetType.AutoWidget)
+				customizedSettingsGroups.Add(LinkSettingsGroupType.AutoWidgets);
 			if (Banner.Enable)
 				customizedSettingsGroups.Add(LinkSettingsGroupType.Banners);
-
-			customizedSettingsGroups.Sort((x, y) => ((Int32)x).CompareTo((Int32)y));
 
 			return customizedSettingsGroups;
 		}

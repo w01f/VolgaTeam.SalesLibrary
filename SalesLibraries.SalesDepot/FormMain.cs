@@ -60,7 +60,7 @@ namespace SalesLibraries.SalesDepot
 			RegistryHelper.SalesDepotHandle = Handle;
 			RegistryHelper.MaximizeSalesDepot = true;
 
-			FormStateHelper.Init(this, RemoteResourceManager.Instance.AppSettingsFolder, "Sales Depot", false).LoadState();
+			FormStateHelper.Init(this, RemoteResourceManager.Instance.AppAliasSettingsFolder, "Sales Depot", false, true);
 			ConfigureTabPages();
 
 			ribbonControl.SelectedRibbonTabChanged += ribbonControl_SelectedRibbonTabChanged;

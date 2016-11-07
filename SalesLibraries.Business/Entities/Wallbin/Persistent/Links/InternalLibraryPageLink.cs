@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Drawing;
 using Newtonsoft.Json;
 using SalesLibraries.Business.Entities.Common;
+using SalesLibraries.Business.Entities.Wallbin.Common.Constants;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.HyperLinkInfo;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings;
 
@@ -19,6 +20,9 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 			get { return _settings ?? (_settings = SettingsContainer.CreateInstance<InternalLibraryPageLinkSettings>(this, SettingsEncoded)); }
 			set { _settings = value as InternalLibraryPageLinkSettings; }
 		}
+
+		[NotMapped, JsonIgnore]
+		public override string WebFormat => WebFormats.InternalLibraryPage;
 
 		[NotMapped, JsonIgnore]
 		public override string Hint

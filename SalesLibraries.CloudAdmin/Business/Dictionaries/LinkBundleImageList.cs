@@ -34,7 +34,7 @@ namespace SalesLibraries.CloudAdmin.Business.Dictionaries
 		{
 			MainFolder = new StorageDirectory(RemoteResourceManager.Instance.ArtworkFolder.RelativePathParts.Merge("link_bundle_icons"));
 			AdditionalFolder = new StorageDirectory(RemoteResourceManager.Instance.ArtworkFolder.RelativePathParts.Merge("link_bundle_icons_2"));
-			FavsFolder = new StorageDirectory(RemoteResourceManager.Instance.AppSettingsFolder.RelativePathParts.Merge("Favorite Link Bundle Icons"));
+			FavsFolder = new StorageDirectory(RemoteResourceManager.Instance.AppAliasSettingsFolder.RelativePathParts.Merge("Favorite Link Bundle Icons"));
 
 			DefaultPowerPointLogo = new StorageFile(MainFolder.RelativePathParts.Merge("default_pptx.png"));
 			DefaultWordLogo = new StorageFile(MainFolder.RelativePathParts.Merge("default_docx.png"));

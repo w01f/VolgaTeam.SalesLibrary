@@ -7,15 +7,18 @@ namespace SalesLibraries.CloudAdmin
 {
 	public partial class FormMain : RibbonForm
 	{
+		private const string TitleTemplate = "Cloud Admin ({0})";
+
 		public FormMain()
 		{
 			InitializeComponent();
+			Text = String.Format(TitleTemplate, "First Time Setup");
 			ribbonControl.Enabled = false;
 		}
 
 		public void InitForm()
 		{
-			Text = String.Format(Text, AppProfileManager.Instance.LibraryAlias);
+			Text = String.Format(TitleTemplate, AppProfileManager.Instance.LibraryAlias);
 			ConfigureRibbon();
 		}
 

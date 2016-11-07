@@ -13,23 +13,22 @@ namespace SalesLibraries.Common.Helpers
 	{
 		public const string UserDataFolderName = "user_data";
 
-		private string _appName;
+		
 		private Guid _appID;
 		private StorageFile _localAppIdFile;
 
 		public static AppProfileManager Instance { get; } = new AppProfileManager();
 
 		public AppTypeEnum AppType { get; private set; }
-
+		public string AppName { get; private set; }
 		public string LibraryAlias { get; private set; }
-
 		public string[] AppNameSet
 		{
 			get
 			{
 				if (String.IsNullOrEmpty(LibraryAlias))
-					return new[] { _appName };
-				return new[] { _appName, LibraryAlias };
+					return new[] { AppName };
+				return new[] { AppName, LibraryAlias };
 			}
 		}
 
@@ -47,13 +46,13 @@ namespace SalesLibraries.Common.Helpers
 			switch (AppType)
 			{
 				case AppTypeEnum.FileManager:
-					_appName = "app_site_admin";
+					AppName = "app_site_admin";
 					break;
 				case AppTypeEnum.CloudAdmin:
-					_appName = "app_cloud_admin";
+					AppName = "app_cloud_admin";
 					break;
 				case AppTypeEnum.SalesDepot:
-					_appName = "app_sales_library";
+					AppName = "app_sales_library";
 					break;
 				default:
 					throw new InvalidEnumArgumentException("Storage Type Undefined");
@@ -63,8 +62,8 @@ namespace SalesLibraries.Common.Helpers
 		public async Task LoadProfile()
 		{
 			_localAppIdFile = String.IsNullOrEmpty(LibraryAlias) ?
-				new StorageFile(new[] { String.Format("{0}_app_id.xml", _appName) }) :
-				new StorageFile(new[] { String.Format("{0}_{1}_app_id.xml", _appName, LibraryAlias) });
+				new StorageFile(new[] { String.Format("{0}_app_id.xml", AppName) }) :
+				new StorageFile(new[] { String.Format("{0}_{1}_app_id.xml", AppName, LibraryAlias) });
 
 			_appID = Guid.Empty;
 			if (File.Exists(_localAppIdFile.LocalPath))
@@ -91,7 +90,7 @@ namespace SalesLibraries.Common.Helpers
 					await StorageDirectory.CreateSubFolder(new[]
 					{
 						FileStorageManager.OutgoingFolderName
-					}, _appName, true);
+					}, AppName, true);
 					await StorageDirectory.CreateSubFolder(new[]
 					{
 						FileStorageManager.OutgoingFolderName

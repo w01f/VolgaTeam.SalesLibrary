@@ -6,6 +6,8 @@ using DevComponents.DotNetBar.Metro;
 using DevExpress.XtraTab;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
+using SalesLibraries.Common.Helpers;
+using SalesLibraries.CommonGUI.Common;
 using SalesLibraries.CloudAdmin.Controllers;
 using SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.ImageGallery;
 
@@ -51,6 +53,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 		{
 			Width = 960;
 			Height = 590;
+			FormStateHelper.Init(this, RemoteResourceManager.Instance.AppAliasSettingsFolder, "Site Admin-Link-Widget", false, false);
 			Text = string.Format(Text, _sourceLink);
 			StartPosition = FormStartPosition.CenterScreen;
 

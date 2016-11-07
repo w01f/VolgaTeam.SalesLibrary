@@ -11,7 +11,13 @@ namespace SalesLibraries.FileManager.Business.Services
 		{
 			var connectionSateInfoFilePath = Path.Combine(databaseRoot, Constants.DatabaseConnectionStateInfoFileName);
 			if (File.Exists(connectionSateInfoFilePath))
-				return new ConnectionState { Type = ConnectionStateType.Busy, User = File.ReadAllText(connectionSateInfoFilePath) };
+			{
+				var connection = new ConnectionState { User = File.ReadAllText(connectionSateInfoFilePath) };
+				connection.Type = String.Equals(connection.User, Environment.UserName, StringComparison.OrdinalIgnoreCase)
+					? ConnectionStateType.Available
+					: ConnectionStateType.Busy;
+				return connection;
+			}
 			return new ConnectionState { Type = ConnectionStateType.Available };
 		}
 

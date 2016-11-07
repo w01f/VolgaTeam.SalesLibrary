@@ -227,7 +227,24 @@ namespace SalesLibraries.FileManager.Controllers
 				await AppProfileManager.Instance.LoadProfile();
 				await Configuration.RemoteResourceManager.Instance.LoadLocal();
 				Settings.LoadLocal();
+			});
 
+			if (!String.IsNullOrEmpty(Settings.BackupPath) && Directory.Exists(Settings.BackupPath))
+			{
+				var connectionState = DatabaseConnectionHelper.GetConnectionState(Settings.BackupPath);
+				if (connectionState.Type == ConnectionStateType.Busy)
+				{
+					PopupMessages.ShowWarning(
+						String.Format(
+							"{0} is currently updating the site.{1}Please try back again later, or ask the user to hurry up and finish…",
+							connectionState.User,
+							Environment.NewLine));
+					return;
+				}
+			}
+
+			AsyncHelper.RunSync(async () =>
+			{
 				await Configuration.RemoteResourceManager.Instance.LoadRemote();
 				Settings.LoadRemote();
 				InitBusinessObjects();

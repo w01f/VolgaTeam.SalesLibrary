@@ -1,6 +1,7 @@
 ﻿using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
+using Newtonsoft.Json;
 using Vintasoft.Imaging;
 using Vintasoft.Imaging.ImageProcessing.Color;
 
@@ -22,9 +23,11 @@ namespace SalesLibraries.Common.Extensions
 		{
 			var originalWidth = image.Width;
 			var originalHeight = image.Height;
-			var percentWidth = (float)size.Width / originalWidth;
-			var percentHeight = (float)size.Height / originalHeight;
+			var percentWidth = originalWidth != size.Width ? (float)size.Width / originalWidth : float.PositiveInfinity;
+			var percentHeight = originalHeight != size.Height ? (float)size.Height / originalHeight : float.PositiveInfinity;
 			var percent = percentHeight < percentWidth ? percentHeight : percentWidth;
+			if (float.IsInfinity(percent))
+				percent = 1;
 			var newWidth = (int)(originalWidth * percent);
 			var newHeight = (int)(originalHeight * percent);
 			Image newImage = new Bitmap(newWidth, newHeight);
@@ -69,21 +72,5 @@ namespace SalesLibraries.Common.Extensions
 				return vintasoftImage.GetAsBitmap();
 			}
 		}
-
-		//public static bool IsInverted(this Image image)
-		//{
-		//	using (var vintasoftImage = new VintasoftImage(image, true))
-		//	{
-		//		var command = new InvertCommand();
-		//		try
-		//		{
-		//			command.ExecuteInPlace(vintasoftImage);
-		//		}
-		//		catch
-		//		{
-		//		}
-		//		return vintasoftImage.GetAsBitmap();
-		//	}
-		//}
 	}
 }

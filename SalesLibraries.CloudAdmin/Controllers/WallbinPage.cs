@@ -304,7 +304,12 @@ namespace SalesLibraries.CloudAdmin.Controllers
 					using (var form = new FormPages())
 					{
 						form.Library = libraryCopy;
-						return form.ShowDialog(MainController.Instance.MainForm) == DialogResult.OK;
+						if (form.ShowDialog(MainController.Instance.MainForm) == DialogResult.OK)
+						{
+							libraryCopy.MarkAsModified();
+							return true;
+						}
+						return false;
 					}
 				},
 				copyMethod => MainController.Instance.ProcessManager.Run("Preparing Data...", cancelationToken => copyMethod()),
@@ -323,7 +328,12 @@ namespace SalesLibraries.CloudAdmin.Controllers
 					using (var form = new FormColumns())
 					{
 						form.Library = libraryCopy;
-						return form.ShowDialog(MainController.Instance.MainForm) == DialogResult.OK;
+						if (form.ShowDialog(MainController.Instance.MainForm) == DialogResult.OK)
+						{
+							libraryCopy.MarkAsModified();
+							return true;
+						}
+						return false;
 					}
 				},
 				copyMethod => MainController.Instance.ProcessManager.Run("Preparing Data...", cancelationToken => copyMethod()),
@@ -342,7 +352,12 @@ namespace SalesLibraries.CloudAdmin.Controllers
 					using (var form = new FormAutoWidgets())
 					{
 						form.Library = libraryCopy;
-						return form.ShowDialog(MainController.Instance.MainForm) == DialogResult.OK;
+						if (form.ShowDialog(MainController.Instance.MainForm) == DialogResult.OK)
+						{
+							libraryCopy.MarkAsModified();
+							return true;
+						}
+						return false;
 					}
 				},
 				copyMethod => MainController.Instance.ProcessManager.Run("Preparing Data...", cancelationToken => copyMethod()),
@@ -361,7 +376,12 @@ namespace SalesLibraries.CloudAdmin.Controllers
 					using (var form = new FormEmailList())
 					{
 						form.Library = libraryCopy;
-						return form.ShowDialog(MainController.Instance.MainForm) == DialogResult.OK;
+						if (form.ShowDialog(MainController.Instance.MainForm) == DialogResult.OK)
+						{
+							libraryCopy.MarkAsModified();
+							return true;
+						}
+						return false;
 					}
 				},
 				copyMethod => MainController.Instance.ProcessManager.Run("Preparing Data...", cancelationToken => copyMethod()),
@@ -378,7 +398,12 @@ namespace SalesLibraries.CloudAdmin.Controllers
 					using (var form = new FormSync())
 					{
 						form.Library = libraryCopy;
-						return form.ShowDialog(MainController.Instance.MainForm) == DialogResult.OK;
+						if (form.ShowDialog(MainController.Instance.MainForm) == DialogResult.OK)
+						{
+							libraryCopy.MarkAsModified();
+							return true;
+						}
+						return false;
 					}
 				},
 				copyMethod => MainController.Instance.ProcessManager.Run("Preparing Data...", cancelationToken => copyMethod()),
@@ -557,7 +582,6 @@ namespace SalesLibraries.CloudAdmin.Controllers
 			MainController.Instance.WallbinViews.ActiveWallbin.IsDataChanged = true;
 		}
 		#endregion
-
 
 		#region Link Bundles Processing
 		private void OnBundlesNewClick(object sender, EventArgs eventArgs)

@@ -12,6 +12,7 @@ using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.Common.JsonConverters;
+using SalesLibraries.CommonGUI.Common;
 using SalesLibraries.FileManager.Controllers;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSettings
@@ -67,6 +68,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		{
 			Width = 680;
 			Height = 670;
+			FormStateHelper.Init(this, RemoteResourceManager.Instance.AppAliasSettingsFolder, "Site Admin-Link-Settings", false, false);
 			var defaultLink = _sourceLinks.First();
 			Text = _sourceLinks.Count == 1 ? defaultLink.ToString() : "Multi-Link Settings";
 			StartPosition = FormStartPosition.CenterScreen;

@@ -151,8 +151,6 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 			if (QuickLinkSettings.Enable)
 				customizedSettingsGroups.Add(LinkSettingsGroupType.QuickLink);
 
-			customizedSettingsGroups.Sort((x, y) => ((Int32)x).CompareTo((Int32)y));
-
 			return customizedSettingsGroups;
 		}
 

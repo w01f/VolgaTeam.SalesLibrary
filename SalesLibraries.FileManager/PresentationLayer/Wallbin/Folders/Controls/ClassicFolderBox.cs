@@ -287,6 +287,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 			_outsideChangesInProgress = false;
 			UpdateGridSize();
 			grFiles.ResumeLayout(true);
+			grFiles.Refresh();
 
 			DataChanged?.Invoke(this, EventArgs.Empty);
 		}
