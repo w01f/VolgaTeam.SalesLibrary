@@ -10,64 +10,66 @@
 		public function run()
 		{
 			echo "Job started...\n";
-			$rootFolderPath = Yii::app()->params['appRoot'] . DIRECTORY_SEPARATOR . Yii::app()->params['librariesRoot'] . DIRECTORY_SEPARATOR . 'Libraries';
-			/** @var $rootFolder DirectoryIterator[] */
-			$rootFolder = new DirectoryIterator($rootFolderPath);
+			$rootFolderPath = \application\models\wallbin\models\web\LibraryManager::getLibrariesRootPath();
 			$libraryIds = array();
-			foreach ($rootFolder as $libraryFolder)
+			foreach (Yii::app()->params['stations']['locations'] as $libraryLocation)
 			{
-				if ($libraryFolder->isDir() && !$libraryFolder->isDot())
+				$librariesLocationPath = $rootFolderPath . DIRECTORY_SEPARATOR . $libraryLocation;
+				/** @var $libraryRootFolder DirectoryIterator[] */
+				$libraryRootFolder = new DirectoryIterator($librariesLocationPath);
+				foreach ($libraryRootFolder as $libraryFolder)
 				{
-					$libraryName = $libraryFolder->getBasename();
-
-					$originalStoragePath = $libraryFolder->getPathname();
-					$originalStorageLink = Yii::app()->baseUrl . '/' . Yii::app()->params['librariesRoot'] . '/Libraries/' . $libraryFolder->getBasename();
-
-					$storagePath = $originalStoragePath;
-					$storageLink = $originalStorageLink;
-					$storageFile = realpath($storagePath . DIRECTORY_SEPARATOR . 'z_library_data_cloud.json');
-					if (!file_exists($storageFile))
+					if ($libraryFolder->isDir() && !$libraryFolder->isDot())
 					{
-						$storagePath .= DIRECTORY_SEPARATOR . 'Primary Root';
-						$storageLink .= '/Primary Root';
-						$storageFile = realpath($storagePath . DIRECTORY_SEPARATOR . 'z_library_data_cloud.json');
-					}
-					if (!file_exists($storageFile))
-					{
+						$libraryName = $libraryFolder->getBasename();
+						$originalStoragePath = $libraryFolder->getPathname();
+						$originalStorageLink = \application\models\wallbin\models\web\LibraryManager::getLibrariesRootLink() . '/' . str_replace('\\', '/', $libraryLocation) . '/' . $libraryFolder->getBasename();
 						$storagePath = $originalStoragePath;
 						$storageLink = $originalStorageLink;
-						$storageFile = realpath($storagePath . DIRECTORY_SEPARATOR . 'SalesDepotCache.json');
-					}
-					if (!file_exists($storageFile))
-					{
-						$storagePath .= DIRECTORY_SEPARATOR . 'Primary Root';
-						$storageLink .= '/Primary Root';
-						$storageFile = realpath($storagePath . DIRECTORY_SEPARATOR . 'SalesDepotCache.json');
-					}
-					if (file_exists($storageFile))
-					{
-						$sourceDate = filemtime($storageFile);
-						$storageContent = file_get_contents($storageFile);
-						if ($storageContent)
+						$storageFile = realpath($storagePath . DIRECTORY_SEPARATOR . 'z_library_data_cloud.json');
+						if (!file_exists($storageFile))
 						{
-							$library = CJSON::decode($storageContent);
-							$library['name'] = $libraryName;
-							$libraryId = $library['id'];
-							$libraryIds[] = $libraryId;
-							$updated = LibraryRecord::updateDataFromSoap($library, $sourceDate, $storagePath);
-							if ($updated)
+							$storagePath .= DIRECTORY_SEPARATOR . 'Primary Root';
+							$storageLink .= '/Primary Root';
+							$storageFile = realpath($storagePath . DIRECTORY_SEPARATOR . 'z_library_data_cloud.json');
+						}
+						if (!file_exists($storageFile))
+						{
+							$storagePath = $originalStoragePath;
+							$storageLink = $originalStorageLink;
+							$storageFile = realpath($storagePath . DIRECTORY_SEPARATOR . 'SalesDepotCache.json');
+						}
+						if (!file_exists($storageFile))
+						{
+							$storagePath .= DIRECTORY_SEPARATOR . 'Primary Root';
+							$storageLink .= '/Primary Root';
+							$storageFile = realpath($storagePath . DIRECTORY_SEPARATOR . 'SalesDepotCache.json');
+						}
+						if (file_exists($storageFile))
+						{
+							$sourceDate = filemtime($storageFile);
+							$storageContent = file_get_contents($storageFile);
+							if ($storageContent)
 							{
-								echo "Updating HTML cache for " . $libraryName . "...\n";
-								$library = new Library();
-								$library->name = $libraryName;
-								$library->id = $libraryId;
-								$library->storagePath = $storagePath;
-								$library->storageLink = $storageLink;
-								$library->logoPath = Yii::app()->params['librariesRoot'] . "/Graphics/" . $libraryFolder->getBasename() . "/no_logo.png";
-								$library->load();
-								$library->buildCache($this->controller);
-								echo "HTML cache for " . $libraryName . " updated.\n";
-								unset($library);
+								$library = CJSON::decode($storageContent);
+								$library['name'] = $libraryName;
+								$libraryId = $library['id'];
+								$libraryIds[] = $libraryId;
+								$updated = LibraryRecord::updateDataFromSoap($library, $sourceDate, $storagePath);
+								if ($updated)
+								{
+									echo "Updating HTML cache for " . $libraryName . "...\n";
+									$library = new Library();
+									$library->name = $libraryName;
+									$library->id = $libraryId;
+									$library->storagePath = $storagePath;
+									$library->storageLink = $storageLink;
+									$library->logoPath = Yii::app()->params['librariesRoot'] . "/Graphics/" . $libraryFolder->getBasename() . "/no_logo.png";
+									$library->load();
+									$library->buildCache($this->controller);
+									echo "HTML cache for " . $libraryName . " updated.\n";
+									unset($library);
+								}
 							}
 						}
 					}

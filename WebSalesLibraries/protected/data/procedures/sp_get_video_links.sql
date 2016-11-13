@@ -9,7 +9,8 @@ select
   l.settings as properties,
   (case when prv.relative_path is null then l.file_relative_path else concat('/',prv.relative_path) end) as mp4_path,
   concat('/',thumb.relative_path) as thumb_path,
-  lb.name as station,
+  lb.name as station_name,
+  lb.path as station_path,
   l.date_modify as link_date,
   l.file_date as file_date
 from tbl_link l

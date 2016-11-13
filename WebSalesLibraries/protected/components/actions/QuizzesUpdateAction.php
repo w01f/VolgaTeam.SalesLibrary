@@ -11,7 +11,7 @@
 
 			QuizGroupRecord::clearData();
 
-			$rootFolderPath = Yii::app()->params['appRoot'] . DIRECTORY_SEPARATOR . Yii::app()->params['librariesRoot'] . DIRECTORY_SEPARATOR . 'quizzes';
+			$rootFolderPath = \application\models\wallbin\models\web\LibraryManager::getLibrariesRootPath() . DIRECTORY_SEPARATOR . 'quizzes';
 			if (file_exists($rootFolderPath))
 			{
 				$rootFolder = new DirectoryIterator($rootFolderPath);

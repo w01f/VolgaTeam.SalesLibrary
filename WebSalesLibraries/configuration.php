@@ -27,6 +27,9 @@
 				'stations' => array(
 					'tab_name' => 'Libraries',
 					'column_name' => 'Libraries',
+					'locations' => array(
+						'Libraries',
+					),
 				),
 				'tags' => array(
 					'visible' => true,

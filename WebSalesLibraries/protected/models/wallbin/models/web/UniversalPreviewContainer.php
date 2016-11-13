@@ -83,7 +83,7 @@
 				$this->libraryId = $record->id_library;
 				$previewFile = new PreviewFile();
 				$previewFile->link = Utils::formatUrl($this->parent->storageLink . '/' . $record->relative_path);
-				$previewFile->path = str_replace('\\', '/', $this->parent->storagePath . DIRECTORY_SEPARATOR . $record->relative_path);
+				$previewFile->path = str_replace('//', DIRECTORY_SEPARATOR, str_replace('\\', DIRECTORY_SEPARATOR, $this->parent->storagePath . DIRECTORY_SEPARATOR . $record->relative_path));
 				$previewFile->name = basename($previewFile->path);
 				$previewFile->size = file_exists($previewFile->path) ? filesize($previewFile->path) : 0;
 				$fileTime = file_exists($previewFile->path) ? filemtime($previewFile->path) : 'time_undefined';

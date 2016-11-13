@@ -5,6 +5,7 @@
 	 * @property mixed id
 	 * @property string id_group
 	 * @property string name
+	 * @property string path
 	 * @property int order
 	 * @property string settings
 	 * @property string last_update
@@ -88,6 +89,7 @@
 
 				$libraryRecord->id = $library['id'];
 				$libraryRecord->name = $library['name'];
+				$libraryRecord->path = str_replace(\application\models\wallbin\models\web\LibraryManager::getLibrariesRootPath() . DIRECTORY_SEPARATOR, '', $libraryRootPath);
 				$libraryRecord->last_update = date(Yii::app()->params['mysqlDateFormat'], $sourceDate);
 				$libraryRecord->save();
 

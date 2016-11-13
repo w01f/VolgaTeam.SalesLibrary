@@ -29,74 +29,77 @@
 				$availableLibraryIds = array();
 			if (!is_array($libraries))
 			{
-				$rootFolderPath = realpath(\Yii::app()->params['appRoot'] . DIRECTORY_SEPARATOR . \Yii::app()->params['librariesRoot'] . DIRECTORY_SEPARATOR . 'Libraries');
-				$rootFolder = new \DirectoryIterator($rootFolderPath);
-
 				$aliases = $this->getLibraryAliases();
-
-				/** @var $libraryFolder \DirectoryIterator */
-				foreach ($rootFolder as $libraryFolder)
+				$rootFolderPath = LibraryManager::getLibrariesRootPath();
+				foreach (\Yii::app()->params['stations']['locations'] as $libraryLocation)
 				{
-					if ($libraryFolder->isDir() && !$libraryFolder->isDot())
+					$librariesLocationPath = $rootFolderPath . DIRECTORY_SEPARATOR . $libraryLocation;
+					/** @var $libraryRootFolder \DirectoryIterator[] */
+					$libraryRootFolder = new \DirectoryIterator($librariesLocationPath);
+					foreach ($libraryRootFolder as $libraryFolder)
 					{
-						$libraryName = $libraryFolder->getBasename();
-
-						$originalStoragePath = $libraryFolder->getPathname();
-						$originalStorageLink = \Yii::app()->baseUrl . '/' . \Yii::app()->params['librariesRoot'] . '/Libraries/' . $libraryFolder->getBasename();
-
-						$storagePath = $originalStoragePath;
-						$storageLink = $originalStorageLink;
-						$storageFile = realpath($storagePath . DIRECTORY_SEPARATOR . 'z_library_data_info.xml');
-						if (!file_exists($storageFile))
+						/** @var $libraryFolder \DirectoryIterator */
+						if ($libraryFolder->isDir() && !$libraryFolder->isDot())
 						{
-							$storagePath .= DIRECTORY_SEPARATOR . 'Primary Root';
-							$storageLink .= '/Primary Root';
-							$storageFile = realpath($storagePath . DIRECTORY_SEPARATOR . 'z_library_data_info.xml');
-						}
-						if (!file_exists($storageFile))
-						{
+							$libraryName = $libraryFolder->getBasename();
+
+							$originalStoragePath = $libraryFolder->getPathname();
+							$originalStorageLink = LibraryManager::getLibrariesRootLink() . '/' . str_replace('\\', '/', $libraryLocation) . '/' . $libraryFolder->getBasename();
+
 							$storagePath = $originalStoragePath;
 							$storageLink = $originalStorageLink;
-							$storageFile = realpath($storagePath . DIRECTORY_SEPARATOR . 'SalesDepotCacheLight.xml');
-						}
-						if (!file_exists($storageFile))
-						{
-							$storagePath .= DIRECTORY_SEPARATOR . 'Primary Root';
-							$storageLink .= '/Primary Root';
-							$storageFile = realpath($storagePath . DIRECTORY_SEPARATOR . 'SalesDepotCacheLight.xml');
-						}
-						if (file_exists($storageFile))
-						{
-							$doc = new \DOMDocument();
-							$doc->load($storageFile);
-							$libraryId = trim($doc->getElementsByTagName("Identifier")->item(0)->nodeValue);
-							/** @var \LibraryRecord $libraryRecord */
-							$libraryRecord = \LibraryRecord::model()->findByPk($libraryId);
-							if (isset($libraryRecord))
+							$storageFile = realpath($storagePath . DIRECTORY_SEPARATOR . 'z_library_data_info.xml');
+							if (!file_exists($storageFile))
 							{
-								if (in_array($libraryId, $availableLibraryIds) || $isAdmin)
+								$storagePath .= DIRECTORY_SEPARATOR . 'Primary Root';
+								$storageLink .= '/Primary Root';
+								$storageFile = realpath($storagePath . DIRECTORY_SEPARATOR . 'z_library_data_info.xml');
+							}
+							if (!file_exists($storageFile))
+							{
+								$storagePath = $originalStoragePath;
+								$storageLink = $originalStorageLink;
+								$storageFile = realpath($storagePath . DIRECTORY_SEPARATOR . 'SalesDepotCacheLight.xml');
+							}
+							if (!file_exists($storageFile))
+							{
+								$storagePath .= DIRECTORY_SEPARATOR . 'Primary Root';
+								$storageLink .= '/Primary Root';
+								$storageFile = realpath($storagePath . DIRECTORY_SEPARATOR . 'SalesDepotCacheLight.xml');
+							}
+							if (file_exists($storageFile))
+							{
+								$doc = new \DOMDocument();
+								$doc->load($storageFile);
+								$libraryId = trim($doc->getElementsByTagName("Identifier")->item(0)->nodeValue);
+								/** @var \LibraryRecord $libraryRecord */
+								$libraryRecord = \LibraryRecord::model()->findByPk($libraryId);
+								if (isset($libraryRecord))
 								{
-									//$library = Yii::app()->cacheDB->get($libraryId);
-									//if (!isset($library))
-									//{
-									$library = new Library();
-									$library->name = $libraryName;
-									$library->id = $libraryId;
-									$library->groupId = $libraryRecord->id_group;
-									$library->order = $libraryRecord->order;
-									$library->lastUpdate = $libraryRecord->last_update;
-									$library->storagePath = $storagePath;
-									$library->storageLink = $storageLink;
-									$library->logoPath = \Yii::app()->params['librariesRoot'] . "/Graphics/" . $libraryFolder->getBasename() . "/no_logo.png";
+									if (in_array($libraryId, $availableLibraryIds) || $isAdmin)
+									{
+										//$library = Yii::app()->cacheDB->get($libraryId);
+										//if (!isset($library))
+										//{
+										$library = new Library();
+										$library->name = $libraryName;
+										$library->id = $libraryId;
+										$library->groupId = $libraryRecord->id_group;
+										$library->order = $libraryRecord->order;
+										$library->lastUpdate = $libraryRecord->last_update;
+										$library->storagePath = $storagePath;
+										$library->storageLink = $storageLink;
+										$library->logoPath = \Yii::app()->params['librariesRoot'] . "/Graphics/" . $libraryFolder->getBasename() . "/no_logo.png";
 
-									$library->alias = $libraryName;
-									if (array_key_exists($libraryName, $aliases))
-										$library->alias = $aliases[$libraryName];
+										$library->alias = $libraryName;
+										if (array_key_exists($libraryName, $aliases))
+											$library->alias = $aliases[$libraryName];
 
-									$library->load();
-									//Yii::app()->cacheDB->set($library->id, $library, (60 * 60 * 24 * 7));
-									//}
-									$libraries[] = $library;
+										$library->load();
+										//Yii::app()->cacheDB->set($library->id, $library, (60 * 60 * 24 * 7));
+										//}
+										$libraries[] = $library;
+									}
 								}
 							}
 						}
@@ -130,7 +133,7 @@
 			}
 			else
 				$availableLibraryIds = array();
-			/** @var  $libraryGroupRecords \LibraryGroupRecord[]*/
+			/** @var  $libraryGroupRecords \LibraryGroupRecord[] */
 			$libraryGroupRecords = \LibraryGroupRecord::model()->findAll();
 			if (isset($libraryGroupRecords) && count($libraryGroupRecords) > 0)
 			{
@@ -140,7 +143,7 @@
 					$libraryGroup->id = $libraryGroupRecord->id;
 					$libraryGroup->order = $libraryGroupRecord->order;
 					$libraryGroup->name = $libraryGroupRecord->name;
-					/** @var  $libraryRecords \LibraryRecord[]*/
+					/** @var  $libraryRecords \LibraryRecord[] */
 					$libraryRecords = \LibraryRecord::model()->findAll('id_group=?', array($libraryGroupRecord->id));
 					if (isset($libraryRecords) && count($libraryRecords) > 0)
 					{
@@ -169,7 +172,7 @@
 				$libraryGroup = new \LibraryGroup();
 				$libraryGroup->order = 0;
 				$libraryGroup->name = \Yii::app()->params['stations']['tab_name'];
-				/** @var  $libraryRecords \LibraryRecord[]*/
+				/** @var  $libraryRecords \LibraryRecord[] */
 				$libraryRecords = \LibraryRecord::model()->findAll();
 				if (isset($libraryRecords) && count($libraryRecords) > 0)
 				{
@@ -275,5 +278,17 @@
 			{
 			}
 			return $aliases;
+		}
+
+		/** @return string */
+		public static function getLibrariesRootPath()
+		{
+			return \Yii::app()->params['appRoot'] . DIRECTORY_SEPARATOR . \Yii::app()->params['librariesRoot'];
+		}
+
+		/** @return string */
+		public static function getLibrariesRootLink()
+		{
+			return \Yii::app()->getBaseUrl(true) . '/' . \Yii::app()->params['librariesRoot'];
 		}
 	}

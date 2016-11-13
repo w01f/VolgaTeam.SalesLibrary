@@ -4,6 +4,7 @@ CREATE TABLE IF NOT EXISTS `tbl_library` (
   `id_group` varchar(36) DEFAULT NULL,
   `order` int(11) DEFAULT NULL,
   `name` varchar(256) NOT NULL,
+  `path` varchar(256),
   `settings` longtext,
   `last_update` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),

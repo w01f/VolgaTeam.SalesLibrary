@@ -175,6 +175,12 @@
 					case "date":
 						$instance->sortColumn = "date_modify";
 						break;
+					case "rate":
+						$instance->sortColumn = "rate";
+						break;
+					case "views":
+						$instance->sortColumn = "views";
+						break;
 				}
 				break;
 			}

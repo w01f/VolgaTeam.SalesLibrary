@@ -274,7 +274,7 @@
 					$videoLinkInfo->categoryGroups = $resultRecord['category_groups'];
 					$videoLinkInfo->categoryTags = $resultRecord['category_tags'];
 					$videoLinkInfo->keywords = $resultRecord['keywords'];
-					$videoLinkInfo->station = $resultRecord['station'];
+					$videoLinkInfo->station = $resultRecord['station_name'];
 					$videoLinkInfo->linkDate = $resultRecord['link_date'];
 					$videoLinkInfo->fileDate = $resultRecord['file_date'];
 
@@ -283,11 +283,7 @@
 					$videoLinkInfo->linkNote = $extendedProperties->note;
 					$videoLinkInfo->hoverNote = $extendedProperties->hoverNote;
 
-					$rootPath = Yii::app()->basePath . DIRECTORY_SEPARATOR . '..';
-					$libraryRelativePath = DIRECTORY_SEPARATOR . Yii::app()->params['librariesRoot'] . DIRECTORY_SEPARATOR . 'Libraries' . DIRECTORY_SEPARATOR . $videoLinkInfo->station . DIRECTORY_SEPARATOR . 'Primary Root';
-					$libraryFolderPath = realpath($rootPath . $libraryRelativePath);
-					if (!file_exists($libraryFolderPath))
-						$libraryRelativePath = DIRECTORY_SEPARATOR . Yii::app()->params['librariesRoot'] . DIRECTORY_SEPARATOR . 'Libraries' . DIRECTORY_SEPARATOR . $videoLinkInfo->station;
+					$libraryRelativePath = DIRECTORY_SEPARATOR . Yii::app()->params['librariesRoot'] . DIRECTORY_SEPARATOR . $resultRecord['station_path'];
 					$videoLinkInfo->mp4Url = $resultRecord['mp4_path'] != '' ? Yii::app()->getBaseUrl(true) . Utils::formatUrl($libraryRelativePath . $resultRecord['mp4_path']) : '';
 					$videoLinkInfo->thumbUrl = $resultRecord['thumb_path'] != '' ? Yii::app()->getBaseUrl(true) . Utils::formatUrl($libraryRelativePath . $resultRecord['thumb_path']) : '';
 					$reportRecords[] = $videoLinkInfo;

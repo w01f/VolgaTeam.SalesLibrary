@@ -19,7 +19,7 @@
 		 */
 		public static function getShortcutsRoot()
 		{
-			return Yii::app()->params['appRoot'] . DIRECTORY_SEPARATOR . Yii::app()->params['librariesRoot'] . DIRECTORY_SEPARATOR . 'Shortcuts';
+			return \application\models\wallbin\models\web\LibraryManager::getLibrariesRootPath() . DIRECTORY_SEPARATOR . 'Shortcuts';
 		}
 
 		/**

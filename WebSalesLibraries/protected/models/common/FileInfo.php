@@ -1,5 +1,6 @@
 <?
 	use application\models\wallbin\models\web\Library as Library;
+
 	/**
 	 * Class FileInfo
 	 */
@@ -37,7 +38,7 @@
 			{
 				case 5:
 					$fileInfo->name = str_replace('\\', '', $relativePath);
-					$fileInfo->path = $parentLibrary->storagePath . str_replace('\\', '/', $relativePath);
+					$fileInfo->path = str_replace('//', DIRECTORY_SEPARATOR, str_replace('\\', DIRECTORY_SEPARATOR, $parentLibrary->storagePath . $relativePath));
 					break;
 				case 6:
 				case 16:
@@ -57,8 +58,8 @@
 					$fileInfo->link = str_replace('\\', '', $relativePath);
 					break;
 				default:
-					$fileInfo->path = $parentLibrary->storagePath . str_replace('\\', '/', $relativePath);
-					$fileInfo->link = Utils::formatUrl($parentLibrary->storageLink . str_replace('\\', '/', $relativePath));
+					$fileInfo->path = str_replace('//', DIRECTORY_SEPARATOR, str_replace('\\', DIRECTORY_SEPARATOR, $parentLibrary->storagePath . $relativePath));
+					$fileInfo->link = Utils::formatUrl($parentLibrary->storageLink . $relativePath);
 					$fileInfo->size = file_exists($fileInfo->path) ? filesize($fileInfo->path) : 0;
 					$fileInfo->isFile = true;
 					break;

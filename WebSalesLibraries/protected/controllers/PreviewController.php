@@ -196,7 +196,7 @@
 					$link->load($linkRecord);
 
 					$zipFile = $link->fileName . '.zip';
-					$zipPath = Yii::app()->params['appRoot'] . DIRECTORY_SEPARATOR . Yii::app()->params['librariesRoot'] . DIRECTORY_SEPARATOR . 'downloads' . DIRECTORY_SEPARATOR . $zipFile;
+					$zipPath = LibraryManager::getLibrariesRootPath() . DIRECTORY_SEPARATOR . 'downloads' . DIRECTORY_SEPARATOR . $zipFile;
 					$zip = new ZipArchive();
 					$zip->open($zipPath, ZipArchive::CREATE | ZipArchive::OVERWRITE);
 
