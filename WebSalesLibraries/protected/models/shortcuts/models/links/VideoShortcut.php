@@ -3,7 +3,7 @@
 	/**
 	 * Class VideoShortcut
 	 */
-	class VideoShortcut extends PageContentShortcut
+	class VideoShortcut extends CustomHandledShortcut
 	{
 		public $sourceLink;
 

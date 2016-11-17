@@ -20,6 +20,12 @@
 				'showWindowHeaders' => $previewInfo->showWindowHeaders
 			), true);
 ?>
+<style>
+	#content .wallbin-header > div
+	{
+		border-bottom: 1px #999 solid !important;
+	}
+</style>
 <div
 	class="wallbin-header<? if (!$previewInfo->showText && !$previewInfo->showLogo): ?> single-page-no-text-no-logo<? endif; ?>"
 	<? if ($previewInfo->showText || $previewInfo->showLogo): ?>style="background-color: <? echo $previewInfo->backColor; ?> !important;" <? endif; ?>>

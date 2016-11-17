@@ -133,7 +133,7 @@
 
 		var updatePageLinks = function ()
 		{
-			var content = $('#content');
+			var content = $.SalesPortal.Content.getContentObject();
 			var pageContent = $('#page-content');
 			var tabLinks = $('#page-content-tab-links');
 			var height = content.height() -
@@ -147,7 +147,7 @@
 
 		var updatePageLogos = function ()
 		{
-			var content = $('#content');
+			var content = $.SalesPortal.Content.getContentObject();
 			var pageContent = $('#page-content');
 			var tabLogo = $('#page-content-tab-logo');
 			var height = content.height() -
@@ -161,7 +161,7 @@
 
 		var updateEditors = function ()
 		{
-			var content = $('#content');
+			var content = $.SalesPortal.Content.getContentObject();
 			var pageContent = $('#page-content');
 			var containerHeight = content.height() -
 				pageContent.find('.page-title').outerHeight(true) -

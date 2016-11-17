@@ -30,10 +30,10 @@
 				var data = $(this).find('.service-data');
 				that.trackActivity(data);
 
-				var hasPageContent = data.find('.has-page-content').length > 0;
+				var hasCustomHandler = data.find('.has-custom-handler').length > 0;
 				var samePage = data.find('.same-page').length > 0;
 
-				if (hasPageContent == true && samePage == true)
+				if (hasCustomHandler == true && samePage == true)
 				{
 					e.preventDefault();
 					that.openShortcutByMenuItemData(data);

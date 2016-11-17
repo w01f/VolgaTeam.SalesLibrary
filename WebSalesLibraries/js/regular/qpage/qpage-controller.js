@@ -164,7 +164,7 @@
 				var header = $(this).find('.service-data .download-header').text();
 				var url = $(this).find('.service-data .download-link').text();
 				if (url != '')
-					event.originalEvent.dataTransfer.setData(header, url.replace('site_base_url_placeholder', window.BaseUrl).replace(/\/\/+/g, '/'));
+					event.originalEvent.dataTransfer.setData(header, url.replace(/\/\/+/g, '/'));
 			});
 
 			container.find('.log-activity').off('click.log').on('click.log', function ()

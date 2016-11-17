@@ -1,0 +1,44 @@
+#content .navigation-panel
+{
+    vertical-align: top;
+}
+
+#content .navigation-panel ul
+{
+    overflow-y: auto;
+    overflow-x: hidden;
+    width: 150px;
+}
+
+#content .navigation-panel li
+{
+    float: none;
+    text-align: center;
+}
+
+#content .navigation-panel li a
+{
+    outline: none;
+    padding-bottom: 30px;
+}
+
+#content .navigation-panel li a:hover,
+#content .navigation-panel li a:focus:hover
+{
+    background-color: #c6e2ff;
+}
+
+#content .navigation-panel li a:focus
+{
+    background: inherit;
+}
+
+#content .navigation-panel li .item-title
+{
+    text-align: center;
+}
+
+#content .navigation-panel li .item-icon
+{
+    height: 64px;
+}

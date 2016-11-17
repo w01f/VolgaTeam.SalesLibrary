@@ -1,7 +1,7 @@
 (function ($)
 {
 	window.BaseUrl = window.BaseUrl || '';
-	$.SalesPortal = $.SalesPortal || { };
+	$.SalesPortal = $.SalesPortal || {};
 	$.SalesPortal.ShortcutsQBuilder = function ()
 	{
 		var qBuilderData = undefined;
@@ -13,14 +13,15 @@
 			qBuilderData = data;
 			qBuilderData.options.trackActivityDelegate = trackActivity;
 
-			$.SalesPortal.Content.fillContent(
-				qBuilderData.content,
-				{
+			$.SalesPortal.Content.fillContent({
+				content: qBuilderData.content,
+				headerOptions: {
 					title: qBuilderData.options.headerTitle,
 					icon: qBuilderData.options.headerIcon
 				},
-				qBuilderData.actions
-			);
+				actions: qBuilderData.actions,
+				navigationPanel: qBuilderData.navigationPanel
+			});
 
 			servicePanel = $('#service-panel');
 
@@ -111,14 +112,14 @@
 			shortcutActionsContainer.find('.qbuilder-qsite-preview')
 				.prop('target', "_blank")
 				.off('click.action').on('click.action', function (e)
+			{
+				var url = $(this).attr('href');
+				e.preventDefault();
+				$.SalesPortal.QBuilder.PageList.savePage(function ()
 				{
-					var url = $(this).attr('href');
-					e.preventDefault();
-					$.SalesPortal.QBuilder.PageList.savePage(function ()
-					{
-						window.open(url);
-					});
+					window.open(url);
 				});
+			});
 
 			shortcutActionsContainer.find('.qbuilder-qsite-email').off('click.action').on('click.action', function ()
 			{

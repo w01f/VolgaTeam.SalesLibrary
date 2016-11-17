@@ -75,23 +75,26 @@
 			/** @var  $shortcut PageContentShortcut */
 			$shortcut = $shortcutRecord->getModel($this->isPhone, $parameters);
 
-			if ($shortcut->samePage)
-				switch ($shortcut->type)
-				{
-					case 'gridbundle':
-					case 'carouselbundle':
-					case 'library':
-					case 'page':
-					case 'window':
-					case 'search':
-					case 'searchapp':
-					case 'qbuilder':
-					case 'favorites':
-					case 'quizzes':
+
+			switch ($shortcut->type)
+			{
+				case 'gridbundle':
+				case 'carouselbundle':
+				case 'library':
+				case 'page':
+				case 'window':
+				case 'search':
+				case 'searchapp':
+				case 'qbuilder':
+				case 'favorites':
+				case 'quizzes':
+					if ($shortcut->samePage)
+					{
 						$defaultShortcutTagName = 'default-shortcut';
 						Yii::app()->session[$defaultShortcutTagName] = sprintf('%s', $shortcutRecord->getUniqueId());
-						break;
-				}
+					}
+					break;
+			}
 
 			$viewName = '';
 			$useMobileWrapper = true;
@@ -164,9 +167,20 @@
 				$actions = !$this->isPhone ?
 					$this->renderPartial('../menu/actionItems', array('actionContainer' => $shortcut), true) :
 					'';
+
+				$navigationPanel = '';
+				if ($shortcut instanceof PageContentShortcut)
+				{
+					/** @var PageContentShortcut $shortcut */
+					$navigationPanel = $shortcut->getNavigationPanel();
+					if (isset($navigationPanel))
+						$navigationPanel = $this->renderPartial('navigationPanel/itemsList', array('navigationPanel' => $navigationPanel), true);
+				}
+
 				$pageContentBundle = array(
 					'content' => $content,
 					'actions' => $actions,
+					'navigationPanel' => $navigationPanel,
 					'options' => $shortcut->getPageData()
 				);
 			}

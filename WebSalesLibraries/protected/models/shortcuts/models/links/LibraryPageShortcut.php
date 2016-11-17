@@ -16,6 +16,7 @@
 		public $showWindowHeaders;
 		public $textColor;
 		public $backColor;
+		public $headerBorderColor;
 
 		/** @var $library Library */
 		public $library;
@@ -49,6 +50,9 @@
 
 			$backColorTags = $linkConfig->getElementsByTagName("PageNameBackground");
 			$this->backColor = $backColorTags->length > 0 ? trim($backColorTags->item(0)->nodeValue) : 'inherite';
+
+			$topBorderColorTags = $linkConfig->getElementsByTagName("TopBorderColor");
+			$this->headerBorderColor = $topBorderColorTags->length > 0 ? trim($topBorderColorTags->item(0)->nodeValue) : '999';
 
 			parent::__construct($linkRecord, $isPhone);
 

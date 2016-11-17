@@ -23,6 +23,7 @@
 		'library' => $library,
 		'pageSelectorMode' => $previewInfo->pageSelectorType,
 		'pageViewType' => $previewInfo->pageViewType,
-		'showLogo' => $previewInfo->showLogo
+		'showLogo' => $previewInfo->showLogo,
+		'headerBorderColor' => 999
 	));
 ?>

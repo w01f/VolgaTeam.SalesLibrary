@@ -1,73 +1,62 @@
 /*Common------------------------------------*/
-.link-viewer
-{
-	width: 750px;
-	height: 505px;
+.link-viewer {
+    width: 750px;
+    height: 505px;
 }
 
-.link-viewer .row
-{
-	margin-left: 0;
-	margin-right: 0;
+.link-viewer .row {
+    margin-left: 0;
+    margin-right: 0;
 }
 
-.link-viewer .row .col
-{
-	padding: 0;
+.link-viewer .row .col {
+    padding: 0;
 }
 
-#link-viewer-body-tabs
-{
-	margin-top: 10px;
+#link-viewer-body-tabs {
+    margin-top: 10px;
 }
 
-#link-viewer-body-tabs li a
-{
-	color: #555;
+#link-viewer-body-tabs li a {
+    color: #555;
 }
 
-.link-viewer .tab-above-header
-{
-	display: none;
-	height: 48px;
+.link-viewer .tab-above-header {
+    display: none;
+    height: 48px;
 }
 
 #tab-above-header-preview .header-text,
 #tab-above-header-save .header-text,
 #tab-above-header-email-protected .header-text,
-#tab-above-header-email-public .header-text
-{
-	font-size: 1.5em;
-	white-space: nowrap;
-	text-overflow: ellipsis;
-	width: 100%;
-	overflow: hidden;
+#tab-above-header-email-public .header-text {
+    font-size: 1.5em;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 100%;
+    overflow: hidden;
 }
 
-.link-viewer .tab-above-header.active
-{
-	display: inherit;
+.link-viewer .tab-above-header.active {
+    display: inherit;
 }
 
-.fancybox-wrap.content-boxed, .fancybox-wrap.content-boxed *
-{
-	-moz-box-sizing: content-box !important;
-	-webkit-box-sizing: content-box !important;
-	box-sizing: content-box !important;
+.fancybox-wrap.content-boxed, .fancybox-wrap.content-boxed * {
+    -moz-box-sizing: content-box !important;
+    -webkit-box-sizing: content-box !important;
+    box-sizing: content-box !important;
 }
 
-.fancybox-title .child
-{
-	font-weight: normal;
-	white-space: normal;
-	background: #7f7f7f;
-	color: #d9d9d9;
-	text-shadow: none;
+.fancybox-title .child {
+    font-weight: normal;
+    white-space: normal;
+    background: #7f7f7f;
+    color: #d9d9d9;
+    text-shadow: none;
 }
 
-.link-viewer .vjs-poster
-{
-	width: auto;
+.link-viewer .vjs-poster {
+    width: auto;
 }
 
 /*------------------------------------*/
@@ -76,83 +65,77 @@
 .link-viewer .image-button,
 .link-viewer .dropdown-button,
 .link-viewer .text-label,
-.link-viewer .text-button
-{
-	height: 48px;
-	display: table;
-	width: 100%;
+.link-viewer .text-button {
+    height: 48px;
+    display: table;
+    width: 100%;
 }
 
 .link-viewer .image-button,
-.link-viewer .text-button
-{
-	cursor: pointer;
+.link-viewer .text-button {
+    cursor: pointer;
 }
 
 .link-viewer .image-button:hover,
-.link-viewer .text-button:hover
-{
-	background: #c6e2ff;
+.link-viewer .text-button:hover {
+    background: #c6e2ff;
 }
 
 .link-viewer .image-button.disabled:hover,
-.link-viewer .text-button.disabled:hover
-{
-	background: none;
+.link-viewer .text-button.disabled:hover {
+    background: none;
 }
 
-.link-viewer .text-button.disabled
-{
-	color: #c6c6c6;
+.link-viewer .text-button.disabled {
+    color: #c6c6c6;
 }
 
 .link-viewer .image-button .text-item,
 .link-viewer .text-button .text-item,
-.link-viewer .text-label .text-item
-{
-	display: table-cell;
-	vertical-align: middle;
-	white-space: nowrap;
-	text-overflow: ellipsis;
-	padding-right: 5px;
+.link-viewer .text-label .text-item {
+    display: table-cell;
+    vertical-align: middle;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    padding-right: 5px;
 }
 
-.link-viewer .image-button
-{
-	padding: 0;
+.link-viewer .image-button {
+    padding: 0;
 }
 
-.link-viewer .image-button.disabled
-{
-	cursor: default;
-	opacity: 0.4;
+.link-viewer .image-button.disabled {
+    cursor: default;
+    opacity: 0.4;
 }
 
-.link-viewer .image-button img
-{
-	height: 48px;
+.link-viewer .image-button img {
+    height: 48px;
 }
 
-.link-viewer .dropdown-button .dropdown-container
-{
-	display: table-cell;
-	vertical-align: middle;
+.link-viewer .dropdown-button .dropdown-container {
+    display: table-cell;
+    vertical-align: middle;
 }
+
 /*------------------------------------*/
 /*Fancy Box Title-----------------------*/
-.fancybox-title.link-viewer-title
-{
+.fancybox-title.link-viewer-title {
     right: inherit;
-	left: 0;
-	bottom: inherit;
-	margin-bottom: inherit;
-	width: 100%;
+    left: 0;
+    bottom: inherit;
+    margin-bottom: inherit;
+    width: 100%;
 }
 
-.fancybox-title.link-viewer-title .child
-{
+.fancybox-title.link-viewer-title .child {
     margin-right: inherit;
-	width: 100%;
-	line-height: 16px;
+    width: 100%;
+    line-height: 16px;
 }
+
 /*------------------------------------*/
+
+#m_excelEmbedRenderer_m_ewaEmbedViewerBar {
+    display: none !important;
+}

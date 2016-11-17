@@ -33,10 +33,10 @@
 				var activityData = $.parseJSON(data.find('.activity-data').text());
 				that.trackActivity(activityData);
 
-				var hasPageContent = data.find('.has-page-content').length > 0;
+				var hasCustomHandler = data.find('.has-custom-handler').length > 0;
 				var samePage = data.find('.same-page').length > 0;
 
-				if (hasPageContent == true && samePage == true)
+				if (hasCustomHandler == true && samePage == true)
 				{
 					e.preventDefault();
 					return that.openShortcutByMenuItemData(data, {pushHistory: true});
@@ -71,6 +71,7 @@
 					new $.SalesPortal.ShortcutsSuperGroup().init(data.find('.super-group-tag').text());
 					break;
 				case 'gbookmark':
+					menu.find('.onemenu').click();
 					menu.find('div[data-groupid="group-' + data.find('.bookmark-id').text() + '"]').trigger('click');
 					return false;
 				case 'youtube':
@@ -182,32 +183,41 @@
 			switch (result.options.shortcutType)
 			{
 				case 'gridbundle':
-					$.SalesPortal.Content.fillContent(result.content,
-						{
+					$.SalesPortal.Content.fillContent({
+						content: result.content,
+						headerOptions: {
 							title: result.options.headerTitle,
 							icon: result.options.headerIcon
 						},
-						result.actions);
+						actions: result.actions,
+						navigationPanel: result.navigationPanel
+					});
 					new $.SalesPortal.ShortcutsGrid().init(result.options);
 					updatedAllContentNecessary = true;
 					break;
 				case 'carouselbundle':
-					$.SalesPortal.Content.fillContent(result.content,
-						{
+					$.SalesPortal.Content.fillContent({
+						content: result.content,
+						headerOptions: {
 							title: result.options.headerTitle,
 							icon: result.options.headerIcon
 						},
-						result.actions);
+						actions: result.actions,
+						navigationPanel: result.navigationPanel
+					});
 					new $.SalesPortal.ShortcutsCarousel().init(result.options);
 					updatedAllContentNecessary = true;
 					break;
 				case 'search':
-					$.SalesPortal.Content.fillContent(result.content,
-						{
+					$.SalesPortal.Content.fillContent({
+						content: result.content,
+						headerOptions: {
 							title: result.options.headerTitle,
 							icon: result.options.headerIcon
 						},
-						result.actions);
+						actions: result.actions,
+						navigationPanel: result.navigationPanel
+					});
 					$.SalesPortal.ShortcutsSearchLink($.SalesPortal.Content.getContentObject(), result.options.linkId).runSearch();
 					break;
 				case 'window':
@@ -235,12 +245,20 @@
 					new $.SalesPortal.ShortcutsFavorites().init(result);
 					break;
 				default :
-					$.SalesPortal.Content.fillContent(result.content,
-						{
+					$.SalesPortal.Content.fillContent({
+						content: result.content,
+						headerOptions: {
 							title: result.options.headerTitle,
 							icon: result.options.headerIcon
 						},
-						result.actions);
+						actions: result.actions,
+						navigationPanel: result.navigationPanel,
+						loadCallback: function ()
+						{
+							$.SalesPortal.ShortcutsManager.updateContentSize();
+							$(window).off('resize.default-shortcut').on('resize.default-shortcut', $.SalesPortal.ShortcutsManager.updateContentSize);
+						}
+					});
 					break;
 			}
 		};

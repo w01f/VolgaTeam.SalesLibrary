@@ -12,7 +12,7 @@
 			ShortcutGroupRecord::clearData();
 			ShortcutLinkRecord::clearData();
 
-			$rootFolderPath = ShortcutsManager::getShortcutsRoot();
+			$rootFolderPath = ShortcutsManager::getShortcutsRootPath();
 			if (file_exists($rootFolderPath))
 			{
 				/** @var $rootFolder DirectoryIterator[] */
@@ -21,6 +21,9 @@
 				{
 					if ($groupFolder->isDir() && !$groupFolder->isDot())
 					{
+						$groupName = $groupFolder->getBasename();
+						if (in_array($groupName, ShortcutsManager::$excludeShortcutFolders))
+							continue;
 						$groupPath = $groupFolder->getPathname();
 						$groupConfigFile = realpath($groupPath . DIRECTORY_SEPARATOR . 'config.xml');
 						if (file_exists($groupConfigFile))

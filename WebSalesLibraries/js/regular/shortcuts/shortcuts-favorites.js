@@ -1,7 +1,7 @@
 (function ($)
 {
 	window.BaseUrl = window.BaseUrl || '';
-	$.SalesPortal = $.SalesPortal || { };
+	$.SalesPortal = $.SalesPortal || {};
 	$.SalesPortal.ShortcutsFavorites = function ()
 	{
 		var favoritesData = undefined;
@@ -26,14 +26,15 @@
 		{
 			favoritesData = data;
 
-			$.SalesPortal.Content.fillContent(
-				favoritesData.content,
-				{
+			$.SalesPortal.Content.fillContent({
+				content: favoritesData.content,
+				headerOptions: {
 					title: favoritesData.options.headerTitle,
 					icon: favoritesData.options.headerIcon
 				},
-				favoritesData.actions
-			);
+				actions: favoritesData.actions,
+				navigationPanel: favoritesData.navigationPanel
+			});
 
 			loadFolders(favoritesData.options.selectedFolderId);
 
@@ -141,9 +142,9 @@
 					helper: function ()
 					{
 						var folderId = $(this).parent().children('.service-data').children('.folder-id').html();
-						return  $('<span id="' + folderId + '" class="glyphicon glyphicon-folder-close"></span>');
+						return $('<span id="' + folderId + '" class="glyphicon glyphicon-folder-close"></span>');
 					},
-					cursorAt: { left: 1, top: 1 }
+					cursorAt: {left: 1, top: 1}
 				}
 			);
 			foldersPanel.find('.droppable').droppable({
@@ -200,13 +201,13 @@
 							},
 							success: function (msg)
 							{
-								$.SalesPortal.Content.fillContent(
-									msg,
-									{
+								$.SalesPortal.Content.fillContent({
+									content: msg,
+									headerOptions: {
 										title: 'Favorite Links',
 										icon: 'icon-favorite'
 									}
-								);
+								});
 								loadFolders(folderId);
 							},
 							error: function ()

@@ -6,5 +6,6 @@
 		'pageSelectorMode' => $shortcut->pageSelectorMode,
 		'pageViewType' => $shortcut->pageViewType,
 		'showLogo' => $shortcut->showLogo,
+		'headerBorderColor' => $shortcut->headerBorderColor
 	));
 ?>

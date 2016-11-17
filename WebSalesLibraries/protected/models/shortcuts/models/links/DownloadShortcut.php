@@ -3,7 +3,7 @@
 	/**
 	 * Class DownloadShortcut
 	 */
-	class DownloadShortcut extends PageContentShortcut
+	class DownloadShortcut extends CustomHandledShortcut
 	{
 		public $fileName;
 		public $sourcePath;
@@ -42,5 +42,13 @@
 		public function getTypeForActivityTracker()
 		{
 			return 'Download';
+		}
+
+		/**
+		 * @return string
+		 */
+		public function getSourceLink()
+		{
+			return Yii::app()->createAbsoluteUrl('shortcuts/getSamePage');
 		}
 	}

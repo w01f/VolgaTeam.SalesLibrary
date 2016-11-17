@@ -10,14 +10,15 @@
 		{
 			quizzesData = data;
 
-			$.SalesPortal.Content.fillContent(
-				quizzesData.content,
-				{
+			$.SalesPortal.Content.fillContent({
+				content: quizzesData.content,
+				headerOptions: {
 					title: quizzesData.options.headerTitle,
 					icon: quizzesData.options.headerIcon
 				},
-				quizzesData.actions
-			);
+				actions: quizzesData.actions,
+				navigationPanel: quizzesData.navigationPanel
+			});
 
 			$.SalesPortal.QuizManager.loadItems();
 

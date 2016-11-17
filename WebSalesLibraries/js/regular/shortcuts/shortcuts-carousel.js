@@ -5,6 +5,7 @@
 	$.SalesPortal.ShortcutsCarousel = function ()
 	{
 		var carouselData = undefined;
+		var carousel = undefined;
 		var justLoaded = true;
 
 		this.init = function (data)
@@ -14,7 +15,7 @@
 			new $.SalesPortal.ShortcutsSearchBar(carouselData);
 
 			FWDU3DCarUtils.checkIfHasTransforms();
-			var carousel = new FWDUltimate3DCarousel(carouselData.displayParameters);
+			carousel = new FWDUltimate3DCarousel(carouselData.displayParameters);
 			carouselData.displayParameters.predefinedDataList.forEach(function (category)
 			{
 				category.dataItems.forEach(function (dataItem)
@@ -26,11 +27,11 @@
 							var activityData = $.parseJSON(shortcutData.find('.activity-data').text());
 							$.SalesPortal.ShortcutsManager.trackActivity(activityData);
 
-							var hasPageContent = shortcutData.find('.has-page-content').length > 0;
+							var hasCustomHandler = shortcutData.find('.has-custom-handler').length > 0;
 							var samePage = dataItem.samePage;
 							var url = dataItem.url;
 
-							if (hasPageContent && samePage)
+							if (hasCustomHandler && samePage)
 								$.SalesPortal.ShortcutsManager.openShortcutByMenuItemData(shortcutData, {pushHistory: true});
 							else
 								window.open(url.replace(/&amp;/g, '%26'), "_blank");
@@ -41,7 +42,7 @@
 			{
 				updateContentSize();
 
-				if(!justLoaded)
+				if (!justLoaded)
 				{
 					var shortcutData = $('<div>' + carouselData.serviceData + '</div>');
 					$.SalesPortal.ShortcutsHistory.pushState(
@@ -90,6 +91,26 @@
 		var updateContentSize = function ()
 		{
 			$.SalesPortal.ShortcutsManager.updateContentSize();
+
+			var content = $.SalesPortal.Content.getContentObject();
+			var menu = $('#main-menu');
+			var navigationPanel = $.SalesPortal.Content.getNavigationPanel();
+
+			var width = $(window).width() - navigationPanel.width() - 20;
+			var height = $(window).height() - menu.height() - menu.offset().top;
+
+			content.css({
+				'max-width': width + 'px'
+			});
+
+			var carouselContainer = content.find('.shortcuts-links-carousel-view');
+			carouselContainer.css({
+				'max-width': width + 'px'
+			});
+
+			navigationPanel.find('ul').css({
+				'height': height + 'px'
+			});
 		};
 	};
 })(jQuery);

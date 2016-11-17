@@ -3,11 +3,12 @@
 	/**
 	 * Class PageContentShortcut
 	 */
-	abstract class PageContentShortcut extends BaseShortcut
+	abstract class PageContentShortcut extends CustomHandledShortcut
 	{
 		public $headerIcon;
-		public $samePage;
 		public $showMainSiteUrl;
+
+		public $showNavigationPanel;
 
 		/**
 		 * @param $linkRecord
@@ -30,7 +31,8 @@
 			$queryResult = $xpath->query('//Config/HeaderIcon');
 			$this->headerIcon = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : '';
 
-			$this->isContentPage = true;
+			$showLeftPanelTags = $linkConfig->getElementsByTagName("ShowLeftPanel");
+			$this->showNavigationPanel = $showLeftPanelTags->length > 0 ? filter_var(trim($showLeftPanelTags->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : false;
 		}
 
 		/**
@@ -56,18 +58,6 @@
 		}
 
 		/**
-		 * @return string
-		 */
-		public function getMenuItemData()
-		{
-			$result = parent::getMenuItemData();
-			$result .= '<div class="has-page-content"></div>';
-			if ($this->samePage)
-				$result .= '<div class="same-page"></div>';
-			return $result;
-		}
-
-		/**
 		 * @return array
 		 */
 		public function getPageData()
@@ -82,5 +72,13 @@
 			$data['headerIcon'] = $this->headerIcon;
 			$data['linkId'] = $this->id;
 			return $data;
+		}
+
+		/** @return NavigationPanel */
+		public function getNavigationPanel()
+		{
+			if ($this->showNavigationPanel)
+				return ShortcutsManager::getNavigationPanel();
+			return null;
 		}
 	}

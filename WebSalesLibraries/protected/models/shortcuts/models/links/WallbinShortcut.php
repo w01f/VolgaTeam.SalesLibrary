@@ -11,6 +11,7 @@
 		public $pageSelectorMode;
 		public $pageViewType;
 		public $showLogo;
+		public $headerBorderColor;
 
 		/** @var $library Library */
 		public $library;
@@ -30,6 +31,8 @@
 			$this->pageSelectorMode = $pageSelectorModeTags->length > 0 ? trim($pageSelectorModeTags->item(0)->nodeValue) : 'tabs';
 			$showLogoTags = $linkConfig->getElementsByTagName("ShowLogo");
 			$this->showLogo = $showLogoTags->length > 0 ? filter_var(trim($showLogoTags->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : true;
+			$topBorderColorTags = $linkConfig->getElementsByTagName("TopBorderColor");
+			$this->headerBorderColor = $topBorderColorTags->length > 0 ? trim($topBorderColorTags->item(0)->nodeValue) : '999';
 
 			parent::__construct($linkRecord, $isPhone);
 

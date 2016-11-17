@@ -136,6 +136,62 @@
 			});
 		};
 
+		var viewExcel = function ()
+		{
+			var content = '<style>' +
+				'.link-viewer {width: 100%; height: 100%;}' +
+				'.iframe-scroll-area {width: 100%; height: 100%; overflow: auto;}' +
+				'.link-viewer .iframe-container {width: 100%; height: 100%; -ms-zoom: 1;-webkit-transform: scale(1);-webkit-transform-origin: 0 0;}' +
+				'.link-viewer .iframe-container::after {background: #f9f9f9 none repeat scroll 0 0;bottom: 0;content: "";height: 30px;left: 0;position: absolute;width: 100%;}' +
+				'#excel-view-frame {width: 100%; height: 100%;}' +
+				'</style>' +
+				'<table class="link-viewer">' +
+				'<tr style="height: 100%"><td><div class="iframe-scroll-area"><div class="iframe-container"><iframe id="excel-view-frame" src="https://view.officeapps.live.com/op/embed.aspx?src=' + viewerData.url + '"></iframe></div></div></td></tr>' +
+				'<tr style="height: 64px;"><td>' +
+				'<div class="row">' +
+				'<div class="col-xs-10"></div>' +
+				'<div class="col-xs-1 text-center"><div class="image-button excel-view-zoom-in"><img src="' + window.BaseUrl + 'images/preview/gallery/button-zoom-in.png"></div></div>' +
+				'<div class="col-xs-1 text-center"><div class="image-button excel-view-zoom-out"><img src="' + window.BaseUrl + 'images/preview/gallery/button-zoom-out.png"></div></div>' +
+				'</div>' +
+				'</td></tr>' +
+				'</table>';
+
+			$.fancybox.close();
+			$.fancybox({
+				content: content,
+				width: $(window).width() - 100,
+				height: $(window).height() - 100,
+				autoSize: false,
+				openEffect: 'none',
+				closeEffect: 'none',
+				afterShow: function ()
+				{
+					var excelViewContent = $('.link-viewer');
+
+					var currentZoomFactor = 1;
+					var updateZoom = function ()
+					{
+						excelViewContent.find('.iframe-container').css({
+							'-ms-zoom': currentZoomFactor,
+							'-webkit-transform': 'scale(' + currentZoomFactor + ')'
+						});
+					};
+
+					excelViewContent.find(".excel-view-zoom-in").off('click').on('click', function ()
+					{
+						currentZoomFactor = currentZoomFactor + 0.1;
+						updateZoom();
+					});
+					excelViewContent.find(".excel-view-zoom-out").off('click').on('click', function ()
+					{
+						if (currentZoomFactor > 0.1)
+							currentZoomFactor = currentZoomFactor - 0.1;
+						updateZoom();
+					});
+				}
+			})
+		};
+
 
 		var addToQuickSite = function ()
 		{
@@ -169,6 +225,9 @@
 				case 'open':
 					$.fancybox.close();
 					$.SalesPortal.LinkManager.openFile(viewerData.url);
+					break;
+				case 'view':
+					viewExcel();
 					break;
 				case 'quicksite':
 					addToQuickSite();

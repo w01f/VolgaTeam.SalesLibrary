@@ -3,7 +3,7 @@
 	/**
 	 * Class YouTubeShortcut
 	 */
-	class YouTubeShortcut extends PageContentShortcut
+	class YouTubeShortcut extends CustomHandledShortcut
 	{
 		public $sourceLink;
 		public $youTubeId;

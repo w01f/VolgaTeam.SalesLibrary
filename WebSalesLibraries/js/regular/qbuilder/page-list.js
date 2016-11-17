@@ -258,7 +258,7 @@
 
 		this.updateContentSize = function ()
 		{
-			var height = $('#content').height() - $('#service-panel').find('.headers').outerHeight(true) - $('#page-list-buttons').outerHeight(true) - 5;
+			var height = $.SalesPortal.Content.getContentObject().height() - $('#service-panel').find('.headers').outerHeight(true) - $('#page-list-buttons').outerHeight(true) - 5;
 			$('#page-list-container').css({
 				'height': height + 'px'
 			});

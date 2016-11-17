@@ -386,7 +386,7 @@
 					$downloadHeader = 'DownloadURL';
 					$downloadLink = \FileInfo::getFileMIME($this->originalFormat) . ':' .
 						$this->fileName . ':' .
-						str_replace('SalesLibraries/SalesLibraries', 'SalesLibraries', 'site_base_url_placeholder' . $this->fileLink);
+						str_replace('SalesLibraries/SalesLibraries', 'SalesLibraries', $this->fileLink);
 				}
 				$result .= '<div class="download-header">' . $downloadHeader . '</div>';
 				$result .= '<div class="download-link">' . $downloadLink . '</div>';

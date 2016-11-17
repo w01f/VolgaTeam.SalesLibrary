@@ -5,6 +5,12 @@
 	 */
 	class ShortcutsManager
 	{
+		const NavigationPanelRootName = 'LeftPanel';
+
+		public static $excludeShortcutFolders = array(
+			self::NavigationPanelRootName
+		);
+
 		/** @return datetime */
 		public static function getLastUpdate()
 		{
@@ -17,9 +23,17 @@
 		/**
 		 * @return string
 		 */
-		public static function getShortcutsRoot()
+		public static function getShortcutsRootPath()
 		{
 			return \application\models\wallbin\models\web\LibraryManager::getLibrariesRootPath() . DIRECTORY_SEPARATOR . 'Shortcuts';
+		}
+
+		/**
+		 * @return string
+		 */
+		public static function getShortcutsRootLink()
+		{
+			return \application\models\wallbin\models\web\LibraryManager::getLibrariesRootLink() . '/' . 'Shortcuts';
 		}
 
 		/**
@@ -71,5 +85,24 @@
 				return isset(Yii::app()->session[$superGroupTagName]) ?
 					Yii::app()->session[$superGroupTagName] :
 					null;
+		}
+
+		/** @return NavigationPanel */
+		public static function getNavigationPanel()
+		{
+			$navigationPanel = null;
+			$configRootPath = self::getShortcutsRootPath() . DIRECTORY_SEPARATOR . self::NavigationPanelRootName;
+			$configRootLink = self::getShortcutsRootLink() . '/' . self::NavigationPanelRootName;
+			$configFilePath = $configRootPath . DIRECTORY_SEPARATOR . 'config.xml';
+			$configFile = realpath($configFilePath);
+			if (file_exists($configFile))
+			{
+				$configContent = file_get_contents($configFile);
+				$config = new DOMDocument();
+				$config->loadXML($configContent);
+				$xpath = new DomXPath($config);
+				$navigationPanel = NavigationPanel::fromXml($xpath, $configRootLink);
+			}
+			return $navigationPanel;
 		}
 	}

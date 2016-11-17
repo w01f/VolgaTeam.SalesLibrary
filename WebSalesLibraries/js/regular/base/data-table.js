@@ -393,7 +393,7 @@
 
 		var getBootstrapTableSize = function ()
 		{
-			var content = $('#content');
+			var content = $.SalesPortal.Content.getContentObject();
 
 			var topHeight = $('#data-table-content_length').closest('.row').outerHeight(true);
 			var bottomHeight = $('#data-table-content_info').closest('.row').outerHeight(true);
@@ -410,7 +410,7 @@
 
 		var getNativeTableSize = function ()
 		{
-			var content = $('#content');
+			var content = $.SalesPortal.Content.getContentObject();
 
 			var topHeight = $('#data-table-content_length').outerHeight(true);
 			var bottomHeight = $('#data-table-content_info').outerHeight(true);

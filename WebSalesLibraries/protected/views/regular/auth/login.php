@@ -16,101 +16,112 @@
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/base/overlay.js?' . Yii::app()->params['version'], CClientScript::POS_END);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/base/login.js?' . Yii::app()->params['version'], CClientScript::POS_END);
 ?>
-
-<div id="content">
-	<?
-		$form = $this->beginWidget('CActiveForm', array(
-			'id' => 'form-login-data',
-			'action' => Yii::app()->createUrl('auth/login'),
-			'htmlOptions' => array('role' => 'form')
-		));
-	?>
-	<table id="form-login">
+	<table id="content">
 		<tr>
-			<td colspan="2">
-				<?
-					$logoFolderPath = realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images';
-					$imageSource = 'data:image/png;base64,' . base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'logo.png'));
-				?>
-				<img id="image-logo" src="<? echo $imageSource; ?>"/>
-			</td>
-		</tr>
-		<tr>
-			<td colspan="2">
-				<?
-					echo $form->textField($formData, 'login'
-						, array(
-							'placeholder' => 'Username',
-							'class' => 'form-control')
-					);
-				?>
-			</td>
-		</tr>
-		<tr>
-			<td colspan="2">
-				<?
-					echo $form->textField($formData, 'password'
-						, array(
-							'placeholder' => 'Password',
-							'input type' => 'Password',
-							'class' => 'form-control')
-					);
-				?>
-			</td>
-		</tr>
-		<tr>
-			<td colspan="2" style="height: auto;">
-				<?
-					echo $form->error($formData, 'login'
-						, array('class' => 'error-message')
-					);
-					echo $form->error($formData, 'password'
-						, array('class' => 'error-message')
-					);
-				?>
-			</td>
-		</tr>
-		<tr>
-			<? if (Yii::app()->params['login']['rememberMeField']): ?>
-				<td style="text-align: left">
-					<div class="checkbox" style="margin-left: 20px;">
-						<?
-							echo $form->checkBox($formData, 'rememberMe');
-							echo $form->labelEx($formData, 'rememberMe'
-								, array('id' => 'label-remember')
-							);
-						?>
-					</div>
-				</td>
-			<? endif; ?>
-			<td style="text-align: right">
-				<button type="submit" id="button-login" class="btn btn-default">Log In</button>
-			</td>
-		</tr>
-		<? if (Yii::app()->browser->isMobile()): ?>
-			<tr>
-				<td colspan="2">
-					<div class="action-link-group">
-						<label class="ui-hide-label" for="button-switch-version"></label><input id="button-switch-version" type="checkbox" checked data-on-text="Desktop Site" data-off-text="Mobile Site">
-					</div>
-				</td>
-			</tr>
-		<? endif; ?>
-		<tr>
-			<td colspan="2">
-				<div class="action-link-group">
-					<? if (Yii::app()->params['login']['forgotPasswordField']): ?>
-						<a id="recover-password-link" class="action-link gray" href="#view-dialog-container">Site Help</a>
-					<? endif; ?>
-					<? if (Yii::app()->params['login']['complex_password']): ?>
-						<a id="password-requirements" class="action-link gray" href="#">Password Requirements</a>
-					<? endif; ?>
+			<td class="content-inner">
+				<div class="content-scrollable-area">
+					<?
+						$form = $this->beginWidget('CActiveForm', array(
+							'id' => 'form-login-data',
+							'action' => Yii::app()->createUrl('auth/login'),
+							'htmlOptions' => array('role' => 'form')
+						));
+					?>
+					<table id="form-login">
+						<tr>
+							<td colspan="2">
+								<?
+									$logoFolderPath = realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images';
+									$imageSource = 'data:image/png;base64,' . base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'logo.png'));
+								?>
+								<img id="image-logo" src="<? echo $imageSource; ?>"/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<?
+									echo $form->textField($formData, 'login'
+										, array(
+											'placeholder' => 'Username',
+											'class' => 'form-control')
+									);
+								?>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<?
+									echo $form->textField($formData, 'password'
+										, array(
+											'placeholder' => 'Password',
+											'input type' => 'Password',
+											'class' => 'form-control')
+									);
+								?>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2" style="height: auto;">
+								<?
+									echo $form->error($formData, 'login'
+										, array('class' => 'error-message')
+									);
+									echo $form->error($formData, 'password'
+										, array('class' => 'error-message')
+									);
+								?>
+							</td>
+						</tr>
+						<tr>
+							<? if (Yii::app()->params['login']['rememberMeField']): ?>
+								<td style="text-align: left">
+									<div class="checkbox" style="margin-left: 20px;">
+										<?
+											echo $form->checkBox($formData, 'rememberMe');
+											echo $form->labelEx($formData, 'rememberMe'
+												, array('id' => 'label-remember')
+											);
+										?>
+									</div>
+								</td>
+							<? endif; ?>
+							<td style="text-align: right">
+								<button type="submit" id="button-login" class="btn btn-default">Log In</button>
+							</td>
+						</tr>
+						<? if (Yii::app()->browser->isMobile()): ?>
+							<tr>
+								<td colspan="2">
+									<div class="action-link-group">
+										<label class="ui-hide-label" for="button-switch-version"></label><input
+											id="button-switch-version" type="checkbox" checked
+											data-on-text="Desktop Site"
+											data-off-text="Mobile Site">
+									</div>
+								</td>
+							</tr>
+						<? endif; ?>
+						<tr>
+							<td colspan="2">
+								<div class="action-link-group">
+									<? if (Yii::app()->params['login']['forgotPasswordField']): ?>
+										<a id="recover-password-link" class="action-link gray"
+										   href="#view-dialog-container">Site
+											Help</a>
+									<? endif; ?>
+									<? if (Yii::app()->params['login']['complex_password']): ?>
+										<a id="password-requirements" class="action-link gray" href="#">Password
+											Requirements</a>
+									<? endif; ?>
+								</div>
+							</td>
+						</tr>
+					</table>
+					<? $this->endWidget(); ?>
 				</div>
 			</td>
 		</tr>
 	</table>
-	<? $this->endWidget(); ?>
-</div>
 <? if (Yii::app()->params['login']['disclaimer'] == true): ?>
 	<div class="disclaimer-text"><? echo Yii::app()->params['login']['disclaimerText']; ?></div>
 <? endif; ?>

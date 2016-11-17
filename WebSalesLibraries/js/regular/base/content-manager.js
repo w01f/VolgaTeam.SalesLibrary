@@ -11,42 +11,72 @@
 			$('a#view-dialog-link').fancybox();
 		};
 
-		this.fillContent = function (content, headerOptions, actions, loadCallback)
+		this.fillContent = function (parameters)
 		{
-			if (loadCallback == undefined)
-				loadCallback = function ()
-				{
+			if (parameters == undefined)
+				parameters = {
+					content: undefined,
+					headerOptions: undefined,
+					actions: undefined,
+					navigationPanel: undefined,
+					loadCallback: undefined
 				};
+			parameters.content = parameters.content != undefined ? parameters.content : '';
+			parameters.headerOptions = parameters.headerOptions != undefined ? parameters.headerOptions : undefined;
+			parameters.actions = parameters.actions != undefined ? parameters.actions : undefined;
+			parameters.navigationPanel = parameters.navigationPanel != undefined ? parameters.navigationPanel : '';
+			parameters.loadCallback = parameters.loadCallback != undefined ? parameters.loadCallback : function ()
+			{
+			};
+
+			initHeader(parameters.headerOptions);
+			initShortcutActions(parameters.actions);
+			initNavigationPanel(parameters.navigationPanel);
+
 			var contentObject = that.getContentObject();
-			contentObject.html(content);
+			contentObject.html(parameters.content);
+
 			var anchorImage = contentObject.find('img.wallbin-logo');
 			if (anchorImage.length > 0)
-				anchorImage.on('load', loadCallback);
+				anchorImage.on('load', parameters.loadCallback);
 			else
-				loadCallback();
-			initHeader(headerOptions);
-			initShortcutActions(actions);
+				parameters.loadCallback();
 		};
 
 		this.clearContent = function ()
 		{
-			that.fillContent('');
+			that.fillContent();
 		};
 
 		this.getContentObject = function ()
 		{
-			return $('#content');
+			return $('#content').find('.content-inner .content-scrollable-area');
+		};
+
+		this.getNavigationPanel = function ()
+		{
+			return $('#content').find('.navigation-panel');
 		};
 
 		this.updateSize = function ()
 		{
-			var menu = $('#main-menu');
-			var height = $(window).height() - menu.height() - menu.offset().top;
 			$('body').css({
 				'height': 'auto'
 			});
+
 			var content = that.getContentObject();
+			var navigationPanel = that.getNavigationPanel();
+
+			var menu = $('#main-menu');
+			var height = $(window).height() - menu.outerHeight(true) - menu.offset().top;
+
 			content.css({
+				'max-width': 'none',
+				'width': '100%',
+				'height': height + 'px',
+			});
+
+			navigationPanel.find('ul').css({
 				'height': height + 'px'
 			});
 		};
@@ -122,6 +152,19 @@
 					}
 				}
 			});
+		};
+
+		var initNavigationPanel = function (navigationPanelContent)
+		{
+			var navigationPanelObject = that.getNavigationPanel();
+			navigationPanelObject.html(navigationPanelContent);
+			if (navigationPanelContent == '')
+				navigationPanelObject.hide();
+			else
+			{
+				navigationPanelObject.show();
+				$.SalesPortal.ShortcutsManager.assignShortcutItemHandlers(navigationPanelObject);
+			}
 		};
 	};
 	$.SalesPortal.Content = new ContentManager();

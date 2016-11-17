@@ -2,7 +2,7 @@
 	/**
 	 * Class GroupBookmarkShortcut
 	 */
-	class GroupBookmarkShortcut extends PageContentShortcut
+	class GroupBookmarkShortcut extends CustomHandledShortcut
 	{
 		public $bookmarkId;
 
@@ -38,5 +38,13 @@
 			$result = parent::getMenuItemData();
 			$result .= '<div class="bookmark-id">' . $this->bookmarkId . '</div>';
 			return $result;
+		}
+
+		/**
+		 * @return string
+		 */
+		public function getSourceLink()
+		{
+			return '#';
 		}
 	}

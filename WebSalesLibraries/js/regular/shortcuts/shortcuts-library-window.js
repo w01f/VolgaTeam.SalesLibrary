@@ -10,12 +10,15 @@
 		{
 			libraryWindowData = data;
 			var pageContent = $.SalesPortal.Content.getContentObject();
-			$.SalesPortal.Content.fillContent(libraryWindowData.content,
-				{
+			$.SalesPortal.Content.fillContent({
+				content: libraryWindowData.content,
+				headerOptions: {
 					title: libraryWindowData.options.headerTitle,
 					icon: libraryWindowData.options.headerIcon
 				},
-				libraryWindowData.actions);
+				actions: libraryWindowData.actions,
+				navigationPanel: libraryWindowData.navigationPanel
+			});
 			switch (libraryWindowData.options.windowViewType)
 			{
 				case 'columns':
@@ -26,6 +29,8 @@
 					break;
 			}
 			initActionButtons();
+			updateContentSize();
+			$(window).off('resize.library-page').on('resize.library-page', updateContentSize);
 		};
 
 		var initActionButtons = function ()
@@ -40,6 +45,11 @@
 			{
 				$.SalesPortal.Wallbin.zoomOut();
 			});
+		};
+
+		var updateContentSize = function ()
+		{
+			$.SalesPortal.ShortcutsManager.updateContentSize();
 		};
 	};
 })(jQuery);

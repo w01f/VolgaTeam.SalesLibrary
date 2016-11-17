@@ -1,7 +1,7 @@
 (function ($)
 {
 	window.BaseUrl = window.BaseUrl || '';
-	$.SalesPortal = $.SalesPortal || { };
+	$.SalesPortal = $.SalesPortal || {};
 	$.SalesPortal.ShortcutsLibraryPage = function ()
 	{
 		var libraryPageData = undefined;
@@ -10,14 +10,15 @@
 		{
 			libraryPageData = data;
 			var pageContent = $.SalesPortal.Content.getContentObject();
-			$.SalesPortal.Content.fillContent(
-				libraryPageData.content,
-				{
+			$.SalesPortal.Content.fillContent({
+				content: libraryPageData.content,
+				headerOptions: {
 					title: libraryPageData.options.headerTitle,
 					icon: libraryPageData.options.headerIcon
 				},
-				libraryPageData.actions,
-				function ()
+				actions: libraryPageData.actions,
+				navigationPanel: libraryPageData.navigationPanel,
+				loadCallback: function ()
 				{
 					switch (libraryPageData.options.pageViewType)
 					{
@@ -30,7 +31,7 @@
 					}
 					updateContentSize();
 				}
-			);
+			});
 			initActionButtons();
 			$(window).off('resize.library-page').on('resize.library-page', updateContentSize);
 		};

@@ -164,7 +164,7 @@
 				var header = $(this).find('.service-data .download-header').text();
 				var url = $(this).find('.service-data .download-link').text();
 				if (url != '')
-					event.originalEvent.dataTransfer.setData(header, url.replace('site_base_url_placeholder', window.BaseUrl).replace(/\/\/+/g, '/'));
+					event.originalEvent.dataTransfer.setData(header, url.replace(/\/\/+/g, '/'));
 			});
 
 			container.find('.log-activity').off('click.log').on('click.log', function ()
@@ -400,10 +400,11 @@
 		this.updateContentSize = function ()
 		{
 			var content = $.SalesPortal.Content.getContentObject();
+
 			var wallbinHeader = content.find('.wallbin-header');
 
-			var contentHeight = content.outerHeight();
-			var headerHeight = wallbinHeader.outerHeight();
+			var contentHeight = content.outerHeight(true);
+			var headerHeight = wallbinHeader.outerHeight(true) + 1;
 			var wallbinHeight = contentHeight - headerHeight;
 
 			var pageContainers = content.find('.page-container');
@@ -414,7 +415,7 @@
 			{
 				var pageContainer = $(this);
 
-				var headerHeight = pageContainer.find('.header-container').outerHeight();
+				var headerHeight = pageContainer.find('.header-container').outerHeight(true);
 				pageContainer.find('.content-container').css({
 					'height': (wallbinHeight - headerHeight) + 'px'
 				});
@@ -424,7 +425,6 @@
 			libraryUpdateStamp.css({
 				'left': ($('body').outerWidth() - libraryUpdateStamp.outerWidth()) + 'px'
 			});
-
 		};
 	};
 	$.SalesPortal.Wallbin = new WallbinManager();

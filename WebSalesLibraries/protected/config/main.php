@@ -32,6 +32,7 @@
 			'application.models.shortcuts.models.*',
 			'application.models.shortcuts.models.links.*',
 			'application.models.shortcuts.models.groups.*',
+			'application.models.shortcuts.models.navigation_panel.*',
 			'application.models.shortcuts.models.common.*',
 			'application.models.shortcuts.records.*',
 			'application.models.statistic.models.common.*',

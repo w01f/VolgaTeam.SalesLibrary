@@ -34,12 +34,15 @@
 
 			viewOptions = new $.SalesPortal.SearchViewOptions(appData.options.viewOptions);
 
-			$.SalesPortal.Content.fillContent(appData.content,
-				{
+			$.SalesPortal.Content.fillContent({
+				content: appData.content,
+				headerOptions: {
 					title: appData.options.headerTitle,
 					icon: appData.options.headerIcon
 				},
-				appData.actions);
+				actions: appData.actions,
+				navigationPanel: appData.navigationPanel
+			});
 
 			initActionButtons();
 			applySearchConditions();

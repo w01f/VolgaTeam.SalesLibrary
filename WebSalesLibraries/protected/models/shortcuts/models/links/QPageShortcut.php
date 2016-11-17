@@ -27,7 +27,7 @@
 			$result = parent::getMenuItemData();
 			if ($this->isPhone)
 			{
-				$result .= '<div class="has-page-content"></div>';
+				$result .= '<div class="has-custom-handler"></div>';
 				$result .= '<div class="same-page"></div>';
 			}
 			return $result;

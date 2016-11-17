@@ -10,17 +10,15 @@
 		{
 			libraryData = data;
 
-			$.SalesPortal.Content.fillContent(
-				libraryData.content,
-				{
+			$.SalesPortal.Content.fillContent({
+				content: libraryData.content,
+				headerOptions: {
 					title: libraryData.options.headerTitle,
 					icon: libraryData.options.headerIcon
 				},
-				libraryData.actions,
-				function ()
-				{
-				}
-			);
+				actions: libraryData.actions,
+				navigationPanel: libraryData.navigationPanel
+			});
 			initLibraryHeader();
 			$.SalesPortal.Content.getContentObject().find('.page-container').show();
 			initPage();
@@ -207,19 +205,6 @@
 		var updateContentSize = function ()
 		{
 			$.SalesPortal.ShortcutsManager.updateContentSize();
-
-			var content = $.SalesPortal.Content.getContentObject();
-			var contentHeight = content.height();
-
-			var wallbinHeader = content.find('.wallbin-header');
-			var headerHeight = wallbinHeader.outerHeight();
-
-			var wallbinContent = content.find('.wallbin-container');
-			var wallbinHeight = contentHeight - headerHeight;
-			wallbinContent.css({
-				'height': wallbinHeight + 'px'
-			});
-
 			$.SalesPortal.Wallbin.updateContentSize();
 		};
 	};

@@ -3,7 +3,7 @@
 	/**
 	 * Class SuperGroupShortcut
 	 */
-	class SuperGroupShortcut extends PageContentShortcut
+	class SuperGroupShortcut extends CustomHandledShortcut
 	{
 		public $superGroupTag;
 
@@ -41,5 +41,13 @@
 			if (isset($this->superGroupTag))
 				$result .= '<div class="super-group-tag">' . $this->superGroupTag . '</div>';
 			return $result;
+		}
+
+		/**
+		 * @return string
+		 */
+		public function getSourceLink()
+		{
+			return '#';
 		}
 	}

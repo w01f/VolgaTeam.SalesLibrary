@@ -6,6 +6,7 @@
 	 * @var $pageSelectorMode string
 	 * @var $pageViewType string
 	 * @var $showLogo bool
+	 * @var $headerBorderColor string
 	 */
 	$savedSelectedPageIdTag = sprintf('SelectedLibraryPageId-%s', $library->id);
 	if (isset(Yii::app()->request->cookies[$savedSelectedPageIdTag]))
@@ -21,6 +22,12 @@
 	if (!isset($selectedPage))
 		$selectedPage = $library->pages[0];
 ?>
+<style>
+	#content .wallbin-header > div
+	{
+		border-bottom: 1px #<? echo $headerBorderColor?> solid !important;
+	}
+</style>
 <div id="library-update-stamp">
 	<span
 		class="text">Updated: <? echo date(Yii::app()->params['outputDateFormat'], strtotime($library->lastUpdate)); ?></span>

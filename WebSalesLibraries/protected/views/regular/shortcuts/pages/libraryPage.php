@@ -7,6 +7,12 @@
 	else
 		$content = $this->renderPartial('../wallbin/columnsView', array('libraryPage' => $libraryPage, 'showWindowHeaders' => $shortcut->showWindowHeaders), true);
 ?>
+<style>
+	#content .wallbin-header > div
+	{
+		border-bottom: 1px #<? echo $shortcut->headerBorderColor?> solid !important;
+	}
+</style>
 <div
 	class="wallbin-header<? if (!$shortcut->showText && !$shortcut->showLogo): ?> single-page-no-text-no-logo<? endif; ?>"
 	<? if ($shortcut->showText || $shortcut->showLogo): ?>style="background-color: #<? echo $shortcut->backColor; ?> !important;" <? endif; ?>>
