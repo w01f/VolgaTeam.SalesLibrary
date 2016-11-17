@@ -2,6 +2,7 @@
 {
 	public class AppLinkInfo : HyperLinkInfo
 	{
+		public override HyperLinkTypeEnum LinkType => HyperLinkTypeEnum.App;
 		public string SecondPath { get; set; }
 	}
 }

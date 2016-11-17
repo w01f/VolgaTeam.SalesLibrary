@@ -42,11 +42,13 @@
 			this.laLocalSyncDesription = new System.Windows.Forms.Label();
 			this.laWebSyncDescription = new System.Windows.Forms.Label();
 			this.checkEditLocalSyncPath = new DevExpress.XtraEditors.CheckEdit();
+			this.checkEditWebSyncPath = new DevExpress.XtraEditors.CheckEdit();
 			((System.ComponentModel.ISupportInitialize)(this.buttonEditLocalSyncPath.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.buttonEditBackupFolder.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.buttonEditWebSyncPath.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditLocalSyncPath.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditWebSyncPath.Properties)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// laBackup
@@ -227,11 +229,26 @@
 			this.checkEditLocalSyncPath.TabIndex = 17;
 			this.checkEditLocalSyncPath.CheckedChanged += new System.EventHandler(this.checkEditLocalSyncPath_CheckedChanged);
 			// 
+			// checkEditWebSyncPath
+			// 
+			this.checkEditWebSyncPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.checkEditWebSyncPath.Location = new System.Drawing.Point(473, 195);
+			this.checkEditWebSyncPath.Name = "checkEditWebSyncPath";
+			this.checkEditWebSyncPath.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.checkEditWebSyncPath.Properties.Appearance.Options.UseForeColor = true;
+			this.checkEditWebSyncPath.Properties.Caption = "Enabled";
+			this.checkEditWebSyncPath.Properties.GlyphAlignment = DevExpress.Utils.HorzAlignment.Far;
+			this.checkEditWebSyncPath.Size = new System.Drawing.Size(75, 20);
+			this.checkEditWebSyncPath.StyleController = this.styleController;
+			this.checkEditWebSyncPath.TabIndex = 18;
+			this.checkEditWebSyncPath.CheckedChanged += new System.EventHandler(this.checkEditWebSyncPath_CheckedChanged);
+			// 
 			// FormPaths
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
 			this.BackColor = System.Drawing.Color.White;
 			this.ClientSize = new System.Drawing.Size(552, 334);
+			this.Controls.Add(this.checkEditWebSyncPath);
 			this.Controls.Add(this.checkEditLocalSyncPath);
 			this.Controls.Add(this.laWebSyncDescription);
 			this.Controls.Add(this.laLocalSyncDesription);
@@ -261,6 +278,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.buttonEditBackupFolder.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.buttonEditWebSyncPath.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditLocalSyncPath.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditWebSyncPath.Properties)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -281,5 +299,6 @@
 		private System.Windows.Forms.Label laLocalSyncDesription;
 		private System.Windows.Forms.Label laWebSyncDescription;
 		private DevExpress.XtraEditors.CheckEdit checkEditLocalSyncPath;
-    }
+		private DevExpress.XtraEditors.CheckEdit checkEditWebSyncPath;
+	}
 }

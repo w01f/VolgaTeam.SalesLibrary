@@ -35,8 +35,17 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 
 		public string WebSyncPath
 		{
-			get { return buttonEditWebSyncPath.EditValue as String; }
-			set { buttonEditWebSyncPath.EditValue = value; }
+			get
+			{
+				return checkEditWebSyncPath.Checked ?
+					buttonEditWebSyncPath.EditValue as String :
+					null;
+			}
+			set
+			{
+				buttonEditWebSyncPath.EditValue = value;
+				checkEditWebSyncPath.Checked = !String.IsNullOrEmpty(value);
+			}
 		}
 
 		public FormPaths()
@@ -92,12 +101,12 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 				MainController.Instance.PopupMessages.ShowWarning("Local Sync Folder is Incorrect");
 				return;
 			}
-			if (String.IsNullOrEmpty(WebSyncPath) || !Directory.Exists(WebSyncPath))
+			if (checkEditWebSyncPath.Checked && (String.IsNullOrEmpty(WebSyncPath) || !Directory.Exists(WebSyncPath)))
 			{
 				MainController.Instance.PopupMessages.ShowWarning("Web Sync Folder is Incorrect");
 				return;
 			}
-			if (BackupPath == LocalSyncPath || BackupPath == WebSyncPath || LocalSyncPath == WebSyncPath)
+			if (BackupPath == LocalSyncPath || BackupPath == WebSyncPath || (!String.IsNullOrEmpty(LocalSyncPath) && LocalSyncPath == WebSyncPath))
 			{
 				MainController.Instance.PopupMessages.ShowWarning(String.Format("DUDE! WTH?{0}Check your Paths…{0}Something is Really Screwed Up…", Environment.NewLine));
 				return;
@@ -112,6 +121,15 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			buttonEditLocalSyncPath.Enabled = checkEditLocalSyncPath.Checked;
 			if (!checkEditLocalSyncPath.Checked)
 				buttonEditLocalSyncPath.EditValue = null;
+		}
+
+		private void checkEditWebSyncPath_CheckedChanged(object sender, EventArgs e)
+		{
+			laWebSyncPath.Enabled = checkEditWebSyncPath.Checked;
+			laWebSyncDescription.Enabled = checkEditWebSyncPath.Checked;
+			buttonEditWebSyncPath.Enabled = checkEditWebSyncPath.Checked;
+			if (!checkEditWebSyncPath.Checked)
+				buttonEditWebSyncPath.EditValue = null;
 		}
 	}
 }

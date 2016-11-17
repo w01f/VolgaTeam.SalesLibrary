@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DataSourceTreeViewControl));
+			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
 			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
-			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
 			this.treeListAllFiles = new DevExpress.XtraTreeList.TreeList();
 			this.treeListColumnName = new DevExpress.XtraTreeList.Columns.TreeListColumn();
 			this.treeListColumnPath = new DevExpress.XtraTreeList.Columns.TreeListColumn();
@@ -169,13 +169,15 @@
 			this.imageListFiles.Images.SetKeyName(18, "DataSourceListPng.png");
 			this.imageListFiles.Images.SetKeyName(19, "DataSourceListPpt.png");
 			this.imageListFiles.Images.SetKeyName(20, "DataSourceListPptx.png");
-			this.imageListFiles.Images.SetKeyName(21, "DataSourceListPsd.png");
-			this.imageListFiles.Images.SetKeyName(22, "DataSourceListRar.png");
-			this.imageListFiles.Images.SetKeyName(23, "DataSourceListSvg.png");
-			this.imageListFiles.Images.SetKeyName(24, "DataSourceListXls.png");
-			this.imageListFiles.Images.SetKeyName(25, "DataSourceListXlsx.png");
-			this.imageListFiles.Images.SetKeyName(26, "DataSourceListXml.png");
-			this.imageListFiles.Images.SetKeyName(27, "DataSourceListZip.png");
+			this.imageListFiles.Images.SetKeyName(21, "DataSourceListPs.png");
+			this.imageListFiles.Images.SetKeyName(22, "DataSourceListPsd.png");
+			this.imageListFiles.Images.SetKeyName(23, "DataSourceListRar.png");
+			this.imageListFiles.Images.SetKeyName(24, "DataSourceListSvg.png");
+			this.imageListFiles.Images.SetKeyName(25, "DataSourceListUrl.png");
+			this.imageListFiles.Images.SetKeyName(26, "DataSourceListXls.png");
+			this.imageListFiles.Images.SetKeyName(27, "DataSourceListXlsx.png");
+			this.imageListFiles.Images.SetKeyName(28, "DataSourceListXml.png");
+			this.imageListFiles.Images.SetKeyName(29, "DataSourceListZip.png");
 			// 
 			// treeListSearchFiles
 			// 
@@ -276,7 +278,7 @@
 			this.dateEditEndDate.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.dateEditEndDate.Properties.Appearance.Options.UseFont = true;
 			this.dateEditEndDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("dateEditEndDate.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("dateEditEndDate.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true)});
 			this.dateEditEndDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
 			this.dateEditEndDate.Properties.DisplayFormat.FormatString = "MM/dd/yyyy";
@@ -311,7 +313,7 @@
 			this.dateEditStartDate.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.dateEditStartDate.Properties.Appearance.Options.UseFont = true;
 			this.dateEditStartDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("dateEditStartDate.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject3, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("dateEditStartDate.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "", null, null, true)});
 			this.dateEditStartDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
 			this.dateEditStartDate.Properties.DisplayFormat.FormatString = "MM/dd/yyyy";

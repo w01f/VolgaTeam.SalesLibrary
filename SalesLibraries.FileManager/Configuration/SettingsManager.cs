@@ -16,6 +16,7 @@ namespace SalesLibraries.FileManager.Configuration
 		public string WebPath { get; set; }
 
 		public bool EnableLocalSync => !String.IsNullOrEmpty(NetworkPath);
+		public bool EnableWebSync => !String.IsNullOrEmpty(WebPath);
 
 		public string SelectedLibrary { get; set; }
 		public string SelectedPage { get; set; }
@@ -165,7 +166,8 @@ namespace SalesLibraries.FileManager.Configuration
 			xml.AppendLine(@"<BackupPath>" + BackupPath.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</BackupPath>");
 			if (EnableLocalSync)
 				xml.AppendLine(@"<NetworkPath>" + NetworkPath.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</NetworkPath>");
-			xml.AppendLine(@"<WebPath>" + WebPath.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</WebPath>");
+			if (EnableWebSync)
+				xml.AppendLine(@"<WebPath>" + WebPath.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</WebPath>");
 			if (!String.IsNullOrEmpty(SelectedLibrary))
 				xml.AppendLine(@"<SelectedLibrary>" + SelectedLibrary.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</SelectedLibrary>");
 			if (!String.IsNullOrEmpty(SelectedPage))

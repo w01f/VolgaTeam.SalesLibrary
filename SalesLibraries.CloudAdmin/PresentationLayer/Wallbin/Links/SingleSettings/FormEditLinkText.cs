@@ -12,6 +12,12 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 			set { memoEdit.EditValue = value; }
 		}
 
+		public bool TextWordWrap
+		{
+			get { return checkEditTextWordWrap.Checked; }
+			set { checkEditTextWordWrap.Checked = value; }
+		}
+
 		public FormEditLinkText()
 		{
 			InitializeComponent();

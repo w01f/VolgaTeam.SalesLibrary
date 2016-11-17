@@ -17,7 +17,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.HyperlinkEdi
 		public HyperLinkTypeEnum SelectedEditorType { get; private set; }
 		public IHyperLinkEditControl SelectedEditor { get; private set; }
 
-		public FormAddHyperLink()
+		public FormAddHyperLink(BaseNetworkLinkInfo initialLinkInfo = null)
 		{
 			InitializeComponent();
 
@@ -50,7 +50,10 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.HyperlinkEdi
 				button.Click += OnSelectEditorClick;
 				button.CheckedChanged += OnSelectEditorChecked;
 			});
-			_editorSelectors.First().Checked = true;
+			var defaultSelector = _editorSelectors.FirstOrDefault(e => initialLinkInfo != null && (HyperLinkTypeEnum)Enum.Parse(typeof(HyperLinkTypeEnum), e.Tag.ToString()) == initialLinkInfo.LinkType) ?? _editorSelectors.First();
+			defaultSelector.Checked = true;
+			if (initialLinkInfo != null)
+				SelectedEditor.ApplySharedSettings(initialLinkInfo);
 		}
 
 		private void OnSelectEditorClick(Object sender, EventArgs e)

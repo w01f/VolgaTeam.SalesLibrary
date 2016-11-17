@@ -2,6 +2,7 @@
 {
 	public class QuickSiteLinkInfo : HyperLinkInfo
 	{
+		public override HyperLinkTypeEnum LinkType => HyperLinkTypeEnum.QuickSite;
 		public bool ForcePreview { get; set; }
 	}
 }

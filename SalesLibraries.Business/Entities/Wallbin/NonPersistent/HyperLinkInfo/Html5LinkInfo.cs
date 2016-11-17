@@ -2,6 +2,7 @@
 {
 	public class Html5LinkInfo : HyperLinkInfo
 	{
+		public override HyperLinkTypeEnum LinkType => HyperLinkTypeEnum.Html5;
 		public bool ForcePreview { get; set; }
 	}
 }

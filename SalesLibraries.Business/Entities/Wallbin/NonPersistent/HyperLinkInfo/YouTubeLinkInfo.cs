@@ -2,6 +2,7 @@
 {
 	public class YouTubeLinkInfo : HyperLinkInfo
 	{
+		public override HyperLinkTypeEnum LinkType => HyperLinkTypeEnum.YouTube;
 		public bool ForcePreview { get; set; }
 	}
 }

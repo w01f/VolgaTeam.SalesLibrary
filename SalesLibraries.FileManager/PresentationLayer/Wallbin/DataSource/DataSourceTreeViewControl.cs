@@ -363,22 +363,26 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.DataSource
 					return 19;
 				case ".PPTX":
 					return 20;
-				case ".PSD":
+				case ".PS":
 					return 21;
-				case ".RAR":
+				case ".PSD":
 					return 22;
-				case ".SVG":
+				case ".RAR":
 					return 23;
+				case ".SVG":
+					return 24;
+				case ".URL":
+					return 25;
 				case ".XLS":
 				case ".XLT":
 				case ".XLTX":
-					return 24;
-				case ".XLSX":
-					return 25;
-				case ".XML":
 					return 26;
-				case ".ZIP":
+				case ".XLSX":
 					return 27;
+				case ".XML":
+					return 28;
+				case ".ZIP":
+					return 29;
 				default:
 					return 2;
 			}

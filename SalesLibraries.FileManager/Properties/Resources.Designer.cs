@@ -553,6 +553,16 @@ namespace SalesLibraries.FileManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap DataSourceListPs {
+            get {
+                object obj = ResourceManager.GetObject("DataSourceListPs", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap DataSourceListPsd {
             get {
                 object obj = ResourceManager.GetObject("DataSourceListPsd", resourceCulture);
@@ -576,6 +586,16 @@ namespace SalesLibraries.FileManager.Properties {
         internal static System.Drawing.Bitmap DataSourceListSvg {
             get {
                 object obj = ResourceManager.GetObject("DataSourceListSvg", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap DataSourceListUrl {
+            get {
+                object obj = ResourceManager.GetObject("DataSourceListUrl", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

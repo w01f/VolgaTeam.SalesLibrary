@@ -148,10 +148,13 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 				syncLogs.Add(localSyncLog);
 			}
 
-			var webSyncLog = new SyncLog("iPad Sync Manual");
-			LibraryFilesSyncHelper.SyncLibraryWebFiles(library, webSyncLog, cancellationToken);
-			if (cancellationToken.IsCancellationRequested) return;
-			syncLogs.Add(webSyncLog);
+			if (MainController.Instance.Settings.EnableWebSync)
+			{
+				var webSyncLog = new SyncLog("iPad Sync Manual");
+				LibraryFilesSyncHelper.SyncLibraryWebFiles(library, webSyncLog, cancellationToken);
+				if (cancellationToken.IsCancellationRequested) return;
+				syncLogs.Add(webSyncLog);
+			}
 
 			var resultFiles = new List<string>();
 			var tempPath = Path.GetTempPath();

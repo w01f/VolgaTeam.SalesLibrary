@@ -333,7 +333,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 			if (Security.HasSecuritySettings)
 				customizedSettingsGroups.Add(LinkSettingsGroupType.Security);
 
-			if (Widget.Enabled)
+			if (Widget.WidgetType != Widget.DefaultWidgetType)
 				customizedSettingsGroups.Add(LinkSettingsGroupType.Widgets);
 			if (Widget.WidgetType == WidgetType.AutoWidget)
 				customizedSettingsGroups.Add(LinkSettingsGroupType.AutoWidgets);

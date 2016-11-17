@@ -138,6 +138,23 @@
     <Compile Include="PresentationLayer\Wallbin\ImageGallery\FormImageGallery.designer.cs">
       <DependentUpon>FormImageGallery.cs</DependentUpon>
     </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\BaseContextMenuEditor.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\BaseLibraryObjectLoader.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\BaseLineBreakLoader.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\BaseLinkLoader.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\DocumentSettingsEditor.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\DocumentSettingsLoader.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\ExcelSettingsEditor.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\ExcelSettingsLoader.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\ILinkLoader.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\LibraryObjectNotesEditor.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\LibraryObjectNotesLoader.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\LibraryObjectTextFormatEditor.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\LibraryObjectTextFormatLoader.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\LineBreakNotesEditor.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\LineBreakNotesLoader.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\LineBreakTextFormatEditor.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\LineBreakTextFormatLoader.cs" />
     <Compile Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\IInternalLinkEditControl.cs" />
     <Compile Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\InternalLibraryFolderLinkEditControl.cs">
       <SubType>UserControl</SubType>
@@ -521,7 +538,6 @@
     <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkYouTubeOptions.designer.cs">
       <DependentUpon>LinkYouTubeOptions.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\QuickEditManager.cs" />
     <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\ResetSettingsSchedulerOptions.cs">
       <SubType>Component</SubType>
     </Compile>
