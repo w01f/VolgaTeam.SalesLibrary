@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using SalesLibraries.Common.Extensions;
 using SalesLibraries.Common.Helpers;
 using SharpCompress.Common;
 using SharpCompress.Reader;
 using SharpCompress.Reader.Rar;
+using WebDAVClient.Helpers;
 
 namespace SalesLibraries.Common.Objects.RemoteStorage
 {
@@ -22,7 +24,19 @@ namespace SalesLibraries.Common.Objects.RemoteStorage
 
 		protected override async Task<bool> ExistsRemote()
 		{
-			return (await _parentFoder.GetRemoteFiles(itemName => itemName.StartsWith(Name, StringComparison.OrdinalIgnoreCase))).Any();
+			try
+			{
+				return (await _parentFoder.GetRemoteFiles(itemName => itemName.StartsWith(Name, StringComparison.OrdinalIgnoreCase))).Any();
+			}
+			catch (WebDAVException exception)
+			{
+				return false;
+			}
+			catch (HttpRequestException e)
+			{
+				FileStorageManager.Instance.SwitchToLocalMode();
+				return FileStorageManager.Instance.UseLocalMode;
+			}
 		}
 
 		public async Task Download()
