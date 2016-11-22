@@ -1,5 +1,7 @@
 <?
 	namespace application\models\wallbin\models\web;
+	use application\models\wallbin\models\web\style\WallbinPageStyle;
+
 	/**
 	 * Class LibraryPage
 	 */
@@ -118,7 +120,9 @@
 			$this->loadData();
 			$this->loadFolders();
 			$path = \Yii::getPathOfAlias('application.views.regular.wallbin') . '/columnsView.php';
-			$content = $controller->renderFile($path, array('libraryPage' => $this, 'showWindowHeaders' => true), true);
+			$style = WallbinPageStyle::createEmpty();
+			$content = $controller->renderFile($path, array('libraryPage' => $this, 'style' => $style), true);
+
 			if (isset($content) && $content != '')
 			{
 				/** @var $cacheRecord \LibraryPageRecord */

@@ -43,6 +43,7 @@
 			'application.models.wallbin.models.web.*',
 			'application.models.wallbin.models.web.link_settings.*',
 			'application.models.wallbin.models.web.bundle_settings.*',
+			'application.models.wallbin.models.web.style.*',
 			'application.models.wallbin.models.soap.*',
 			'application.models.wallbin.models.cadmin.*',
 			'application.models.wallbin.models.cadmin.entities.*',

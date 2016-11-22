@@ -188,6 +188,30 @@
 							currentZoomFactor = currentZoomFactor - 0.1;
 						updateZoom();
 					});
+
+					$(window).off('resize.excel-view').on('resize.excel-view', function ()
+					{
+						$('.fancybox-wrap').css({
+							'width': $(window).width() - 70 + 'px'
+						});
+						$('.fancybox-inner').css({
+							'width': $(window).width() - 100 + 'px',
+							'height': $(window).height() - 100 + 'px'
+						});
+						if ($.fancybox.isOpened)
+						{
+							if ($.fancybox.current)
+							{
+								$.fancybox.current.width = $(window).width() - 100;
+								$.fancybox.current.height = $(window).height() - 100;
+							}
+						}
+						$.fancybox.reposition();
+					});
+				},
+				afterClose: function ()
+				{
+					$(window).off('resize.excel-view');
 				}
 			})
 		};

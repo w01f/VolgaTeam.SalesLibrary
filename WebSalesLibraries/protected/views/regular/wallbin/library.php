@@ -1,13 +1,17 @@
 <?
 	use application\models\wallbin\models\web\Library as Library;
+	use application\models\wallbin\models\web\LibraryPage as LibraryPage;
 
 	/**
 	 * @var $library Library
 	 * @var $pageSelectorMode string
 	 * @var $pageViewType string
-	 * @var $showLogo bool
-	 * @var $headerBorderColor string
+	 * @var $style \application\models\wallbin\models\web\style\WallbinStyle
 	 */
+
+	/** @var LibraryPage $selectedPage */
+	$selectedPage = null;
+
 	$savedSelectedPageIdTag = sprintf('SelectedLibraryPageId-%s', $library->id);
 	if (isset(Yii::app()->request->cookies[$savedSelectedPageIdTag]))
 	{
@@ -23,9 +27,8 @@
 		$selectedPage = $library->pages[0];
 ?>
 <style>
-	#content .wallbin-header > div
-	{
-		border-bottom: 1px #<? echo $headerBorderColor?> solid !important;
+	#content .wallbin-header > div {
+		border-bottom: 1px #<? echo $style->header->headerBorderColor?> solid !important;
 	}
 </style>
 <div id="library-update-stamp">
@@ -34,11 +37,12 @@
 </div>
 <div class="wallbin-header">
 	<div class="wallbin-logo-wrapper">
-		<? if ($showLogo): ?>
+		<? if ($style->header->showLogo): ?>
 			<img class="wallbin-logo" src="<? echo $selectedPage->logoContent; ?>">
 		<? endif; ?>
 	</div>
-	<div class="page-selector-container<? if (!$showLogo): ?> page-selector-container-no-logo<? endif; ?>">
+	<div
+		class="page-selector-container<? if (!$style->header->showLogo): ?> page-selector-container-no-logo<? endif; ?>">
 		<? if ($pageSelectorMode == 'tabs'): ?>
 			<div class="tab-pages scroll_tabs_theme_light">
 				<? foreach ($library->pages as $page): ?>
@@ -49,7 +53,7 @@
 								<? echo CJSON::encode(array(
 										'id' => $page->id,
 										'name' => $page->name,
-										'logoContent' => $showLogo ? $page->logoContent : ''
+										'logoContent' => $style->header->showLogo ? $page->logoContent : ''
 									)
 								); ?>
 							</div>
@@ -63,7 +67,7 @@
 					<option value='<? echo base64_encode(CJSON::encode(array(
 							'id' => $page->id,
 							'name' => $page->name,
-							'logoContent' => $showLogo ? $page->logoContent : ''
+							'logoContent' => $style->header->showLogo ? $page->logoContent : ''
 						)
 					)); ?>' <? echo $selectedPage->id == $page->id ? 'selected' : ''; ?>><? echo $page->name; ?></option>
 				<? endforeach; ?>
@@ -77,6 +81,16 @@
 		{
 			$selectedPage->loadData();
 			$this->renderPartial('../wallbin/accordionView', array('libraryPage' => $selectedPage));
+		}
+		else if ($style->page->enabled)
+		{
+			$selectedPage->loadData();
+			$selectedPage->loadFolders();
+			$this->renderPartial('../wallbin/columnsView',
+				array(
+					'libraryPage' => $selectedPage,
+					'style' => $style->page
+				));
 		}
 		else
 			echo $selectedPage->getCache();

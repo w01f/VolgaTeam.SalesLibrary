@@ -64,12 +64,36 @@
 		//------Regular Site API-------------------------------------------
 		public function actionGetColumnsView()
 		{
+			$shortcutId = Yii::app()->request->getPost('shortcutId');
 			$libraryId = Yii::app()->request->getPost('libraryId');
 			$pageId = Yii::app()->request->getPost('pageId');
+
+			/** @var \application\models\wallbin\models\web\style\WallbinStyle $style */
+			$style = null;
+			if (isset($shortcutId))
+			{
+				/** @var  $shortcutRecord ShortcutLinkRecord */
+				$shortcutRecord = ShortcutLinkRecord::model()->findByPk($shortcutId);
+				/** @var  $shortcut WallbinShortcut */
+				$shortcut = $shortcutRecord->getModel($this->isPhone);
+				$style = $shortcut->style;
+			}
+
 			$libraryManager = new LibraryManager();
 			$library = $libraryManager->getLibraryById($libraryId);
 			$selectedPage = $library->getPageById($pageId);
-			echo $selectedPage->getCache();
+			if (isset($style) && $style->page->enabled)
+			{
+				$selectedPage->loadData();
+				$selectedPage->loadFolders();
+				$this->renderPartial('../wallbin/columnsView',
+					array(
+						'libraryPage' => $selectedPage,
+						'style' => $style->page
+					));
+			}
+			else
+				echo $selectedPage->getCache();
 		}
 
 		public function actionGetAccordionView()

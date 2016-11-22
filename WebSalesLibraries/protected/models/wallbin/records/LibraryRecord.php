@@ -82,7 +82,7 @@
 				$needToCreate = true;
 			}
 
-			if ($needToCreate || $needToUpdate)
+			if (isset($library['id']) && ($needToCreate || $needToUpdate))
 			{
 				Yii::app()->cacheDB->flush();
 				self::clearData($library['id']);

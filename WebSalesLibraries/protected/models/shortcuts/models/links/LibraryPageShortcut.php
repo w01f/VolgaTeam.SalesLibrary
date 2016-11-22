@@ -2,6 +2,7 @@
 	use application\models\wallbin\models\web\LibraryManager as LibraryManager;
 	use application\models\wallbin\models\web\LibraryPage as LibraryPage;
 	use application\models\wallbin\models\web\Library as Library;
+	use application\models\wallbin\models\web\style\WallbinStyle as WallbinStyle;
 
 	/**
 	 * Class LibraryPageShortcut
@@ -11,12 +12,9 @@
 		public $libraryName;
 		public $pageName;
 		public $pageViewType;
-		public $showLogo;
-		public $showText;
-		public $showWindowHeaders;
-		public $textColor;
-		public $backColor;
-		public $headerBorderColor;
+
+		/** @var  WallbinStyle */
+		public $style;
 
 		/** @var $library Library */
 		public $library;
@@ -29,32 +27,22 @@
 		{
 			$linkConfig = new DOMDocument();
 			$linkConfig->loadXML($linkRecord->config);
+			$xpath = new DomXPath($linkConfig);
 
-			$this->libraryName = trim($linkConfig->getElementsByTagName("Library")->item(0)->nodeValue);
-			$this->pageName = trim($linkConfig->getElementsByTagName("Page")->item(0)->nodeValue);
-
-			$pageTypeTags = $linkConfig->getElementsByTagName("PageViewType");
-			$this->pageViewType = $pageTypeTags->length > 0 ? trim($pageTypeTags->item(0)->nodeValue) : 'columns';
-
-			$showLogoTags = $linkConfig->getElementsByTagName("ShowLogo");
-			$this->showLogo = $showLogoTags->length > 0 ? filter_var(trim($showLogoTags->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : true;
-
-			$showTextTags = $linkConfig->getElementsByTagName("ShowPageName");
-			$this->showText = $showTextTags->length > 0 ? filter_var(trim($showTextTags->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : true;
-
-			$showWindowHeadersTags = $linkConfig->getElementsByTagName("WindowTitleBars");
-			$this->showWindowHeaders = $showWindowHeadersTags->length > 0 ? filter_var(trim($showWindowHeadersTags->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : true;
-
-			$textColorTags = $linkConfig->getElementsByTagName("PageNameColor");
-			$this->textColor = $textColorTags->length > 0 ? trim($textColorTags->item(0)->nodeValue) : 'inherite';
-
-			$backColorTags = $linkConfig->getElementsByTagName("PageNameBackground");
-			$this->backColor = $backColorTags->length > 0 ? trim($backColorTags->item(0)->nodeValue) : 'inherite';
-
-			$topBorderColorTags = $linkConfig->getElementsByTagName("TopBorderColor");
-			$this->headerBorderColor = $topBorderColorTags->length > 0 ? trim($topBorderColorTags->item(0)->nodeValue) : '999';
+			$queryResult = $xpath->query('//Config/Library');
+			$this->libraryName = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
+			$queryResult = $xpath->query('//Config/Page');
+			$this->pageName = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
+			$queryResult = $xpath->query('//Config/PageViewType');
+			$this->pageViewType = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : 'columns';
 
 			parent::__construct($linkRecord, $isPhone);
+
+			$queryResult = $xpath->query('//Config/WallbinStyle');
+			if ($queryResult->length > 0)
+				$this->style = WallbinStyle::fromXml($xpath, $queryResult->item(0));
+			else
+				$this->style = WallbinStyle::createEmpty();
 
 			$libraryManager = new LibraryManager();
 			$this->library = $libraryManager->getLibraryByName($this->libraryName);

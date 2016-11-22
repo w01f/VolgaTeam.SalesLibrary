@@ -145,8 +145,9 @@
 
 #content .wallbin-container .page-container .content-columns-container
 {
-    width: 100%;
     display: table;
+	width: 100%;
+	height: 100%;
     table-layout: fixed;
 }
 /*Columns------------------------------------*/
@@ -158,19 +159,17 @@
 	border-bottom: 1px #999 solid;
 }
 
+#content .page-column-outer
+{
+	display: table-row;
+}
+
 #content .page-column
 {
 	width: 33%;
     display: table-cell;
 	border: none;
-	margin-top: 0;
-	margin-left: -1px;
 	vertical-align: top;
-}
-
-#content .wallbin-container div.content-container > div.page-column
-{
-    float: left;
 }
 
 #content .page-column.column2
@@ -205,6 +204,16 @@
 {
 	vertical-align: middle;
 	padding-left: 5px;
+}
+
+#content .page-column .folder-body
+{
+	margin-left: -1px;
+}
+
+#content .page-column.column0 .folder-body
+{
+	margin-left: 0;
 }
 /*------------------------------------*/
 

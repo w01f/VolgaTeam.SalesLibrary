@@ -1,6 +1,7 @@
 <?
 	use application\models\wallbin\models\web\LibraryManager as LibraryManager;
 	use application\models\wallbin\models\web\Library as Library;
+	use application\models\wallbin\models\web\style\WallbinStyle as WallbinStyle;
 
 	/**
 	 * Class WallbinShortcut
@@ -10,8 +11,9 @@
 		public $libraryName;
 		public $pageSelectorMode;
 		public $pageViewType;
-		public $showLogo;
-		public $headerBorderColor;
+
+		/** @var  WallbinStyle */
+		public $style;
 
 		/** @var $library Library */
 		public $library;
@@ -24,20 +26,24 @@
 		{
 			$linkConfig = new DOMDocument();
 			$linkConfig->loadXML($linkRecord->config);
+			$xpath = new DomXPath($linkConfig);
 
-			$pageTypeTags = $linkConfig->getElementsByTagName("PageViewType");
-			$this->pageViewType = $pageTypeTags->length > 0 ? trim($pageTypeTags->item(0)->nodeValue) : 'columns';
-			$pageSelectorModeTags = $linkConfig->getElementsByTagName("PageSelectorMode");
-			$this->pageSelectorMode = $pageSelectorModeTags->length > 0 ? trim($pageSelectorModeTags->item(0)->nodeValue) : 'tabs';
-			$showLogoTags = $linkConfig->getElementsByTagName("ShowLogo");
-			$this->showLogo = $showLogoTags->length > 0 ? filter_var(trim($showLogoTags->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : true;
-			$topBorderColorTags = $linkConfig->getElementsByTagName("TopBorderColor");
-			$this->headerBorderColor = $topBorderColorTags->length > 0 ? trim($topBorderColorTags->item(0)->nodeValue) : '999';
+			$queryResult = $xpath->query('//Config/Library');
+			$this->libraryName = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
+			$queryResult = $xpath->query('//Config/PageViewType');
+			$this->pageViewType = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : 'columns';
+			$queryResult = $xpath->query('//Config/PageSelectorMode');
+			$this->pageSelectorMode = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : 'columns';
 
 			parent::__construct($linkRecord, $isPhone);
 
+			$queryResult = $xpath->query('//Config/WallbinStyle');
+			if ($queryResult->length > 0)
+				$this->style = WallbinStyle::fromXml($xpath, $queryResult->item(0));
+			else
+				$this->style = WallbinStyle::createEmpty();
+
 			$libraryManager = new LibraryManager();
-			$this->libraryName = trim($linkConfig->getElementsByTagName("Library")->item(0)->nodeValue);
 			$this->library = $libraryManager->getLibraryByName($this->libraryName);
 		}
 

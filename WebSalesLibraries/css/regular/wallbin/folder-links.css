@@ -111,6 +111,7 @@
 .link-text-wrap
 {
 	white-space: normal !important;
+	padding-bottom: 3px;
 }
 
 .link-note
@@ -126,6 +127,7 @@
 .link-widget-wrap
 {
     vertical-align: top;
+	padding-bottom: 3px;
 }
 
 .link-widget-no-wrap

@@ -5,7 +5,6 @@
 		'library' => $library,
 		'pageSelectorMode' => $shortcut->pageSelectorMode,
 		'pageViewType' => $shortcut->pageViewType,
-		'showLogo' => $shortcut->showLogo,
-		'headerBorderColor' => $shortcut->headerBorderColor
+		'style' => $shortcut->style
 	));
 ?>

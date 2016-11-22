@@ -82,6 +82,7 @@
 					type: "POST",
 					url: window.BaseUrl + viewPath,
 					data: {
+						shortcutId: libraryData.options.linkId,
 						libraryId: libraryData.options.libraryId,
 						pageId: pageData.id
 					},

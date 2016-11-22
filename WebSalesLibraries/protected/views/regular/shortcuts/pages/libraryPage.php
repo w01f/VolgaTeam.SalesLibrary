@@ -3,32 +3,39 @@
 
 	$libraryPage = $shortcut->getLibraryPage();
 	if ($shortcut->pageViewType == 'accordion')
-		$content = $this->renderPartial('../wallbin/accordionView', array('libraryPage' => $libraryPage), true);
+		$content = $this->renderPartial('../wallbin/accordionView',
+			array(
+				'libraryPage' => $libraryPage
+			), true);
 	else
-		$content = $this->renderPartial('../wallbin/columnsView', array('libraryPage' => $libraryPage, 'showWindowHeaders' => $shortcut->showWindowHeaders), true);
+		$content = $this->renderPartial('../wallbin/columnsView',
+			array(
+				'libraryPage' => $libraryPage,
+				'style' => $shortcut->style->page
+			), true);
 ?>
 <style>
 	#content .wallbin-header > div
 	{
-		border-bottom: 1px #<? echo $shortcut->headerBorderColor?> solid !important;
+		border-bottom: 1px #<? echo $shortcut->style->header->headerBorderColor?> solid !important;
 	}
 </style>
 <div
-	class="wallbin-header<? if (!$shortcut->showText && !$shortcut->showLogo): ?> single-page-no-text-no-logo<? endif; ?>"
-	<? if ($shortcut->showText || $shortcut->showLogo): ?>style="background-color: #<? echo $shortcut->backColor; ?> !important;" <? endif; ?>>
+	class="wallbin-header<? if (!$shortcut->style->header->showText && !$shortcut->style->header->showLogo): ?> single-page-no-text-no-logo<? endif; ?>"
+	<? if ($shortcut->style->header->showText || $shortcut->style->header->showLogo): ?>style="background-color: #<? echo $shortcut->style->header->backColor; ?> !important;" <? endif; ?>>
 	<div class="wallbin-logo-wrapper">
-		<? if ($shortcut->showLogo): ?>
+		<? if ($shortcut->style->header->showLogo): ?>
 			<img class="wallbin-logo" src="<? echo $libraryPage->logoContent; ?>">
 		<? endif; ?>
 	</div>
-	<div class="single-page-header<? if (!$shortcut->showLogo): ?> single-page-header-no-logo<? endif; ?>">
-		<? if ($shortcut->showText): ?>
-			<? if ($shortcut->showLogo): ?>
+	<div class="single-page-header<? if (!$shortcut->style->header->showLogo): ?> single-page-header-no-logo<? endif; ?>">
+		<? if ($shortcut->style->header->showText): ?>
+			<? if ($shortcut->style->header->showLogo): ?>
 				<h3 class="header-text"
-				    style="color: #<? echo $shortcut->textColor; ?> !important;"><? echo $libraryPage->name; ?></h3>
+				    style="color: #<? echo $shortcut->style->header->textColor; ?> !important;"><? echo $libraryPage->name; ?></h3>
 			<? else: ?>
 				<h4 class="header-text"
-				    style="color: #<? echo $shortcut->textColor; ?> !important;"><? echo $libraryPage->name; ?></h4>
+				    style="color: #<? echo $shortcut->style->header->textColor; ?> !important;"><? echo $libraryPage->name; ?></h4>
 			<? endif; ?>
 		<? endif; ?>
 	</div>

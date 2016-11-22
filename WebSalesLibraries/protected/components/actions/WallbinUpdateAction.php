@@ -51,7 +51,7 @@
 							$storageContent = file_get_contents($storageFile);
 							if ($storageContent)
 							{
-								$library = CJSON::decode($storageContent);
+								$library = CJSON::decode($storageContent, true);
 								$library['name'] = $libraryName;
 								$libraryId = $library['id'];
 								$libraryIds[] = $libraryId;

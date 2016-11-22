@@ -6,6 +6,14 @@
 	/** @var InternalLibraryPagePreviewInfo $previewInfo */
 	$previewInfo = $data->previewInfo;
 	$libraryPage = $previewInfo->getLibraryPage();
+
+	$style = \application\models\wallbin\models\web\style\WallbinPageStyle::createEmpty();
+	if(!$previewInfo->showWindowHeaders)
+	{
+		$style->enabled = true;
+		$style->showWindowHeaders = false;
+	}
+
 	if ($previewInfo->pageViewType == 'accordion')
 		$content = $this->renderPartial(
 			'../wallbin/accordionView',
@@ -17,7 +25,7 @@
 			'../wallbin/columnsView',
 			array(
 				'libraryPage' => $libraryPage,
-				'showWindowHeaders' => $previewInfo->showWindowHeaders
+				'style' => $style
 			), true);
 ?>
 <style>
