@@ -211,6 +211,7 @@
 				});
 			}
 		};
+
 		var afterLoad = function ()
 		{
 			var pageUrlControl = $('#page-content-url');

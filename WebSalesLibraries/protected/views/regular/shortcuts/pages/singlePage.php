@@ -9,7 +9,23 @@
 	$cs = Yii::app()->clientScript;
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/base/main-page-controller.js?' . Yii::app()->params['version'], CClientScript::POS_END);
 ?>
-<? $this->renderPartial('../menu/mainMenu', array('menuGroups' => $menuGroups, 'showMainSiteUrl' => $shortcut->showMainSiteUrl)); ?>
+<?
+	if (count($menuGroups) > 0)
+		$this->renderPartial('../menu/mainMenu',
+			array(
+				'menuGroups' => $menuGroups,
+				'showMainSiteUrl' => $shortcut->showMainSiteUrl
+			)
+		);
+	else
+		$this->renderPartial('../menu/singlePageMenu',
+			array(
+				'iconClass' => $shortcut->headerIcon,
+				'headerText' => $shortcut->headerTitle,
+				'showMainSiteUrl' => $shortcut->showMainSiteUrl
+			)
+		);
+?>
 <table id="content">
 	<tr>
 		<td class="navigation-panel">

@@ -7,6 +7,12 @@
 	 */
 	class FileManagerDataController extends LocalAppDataController
 	{
+		/** return boolean */
+		protected function getIsPublicController()
+		{
+			return true;
+		}
+
 		/**
 		 * @return array
 		 */

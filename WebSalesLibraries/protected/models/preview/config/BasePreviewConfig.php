@@ -41,12 +41,12 @@
 
 			$this->allowPreview = true;
 			$this->allowSave = true;
-			$this->allowEmail = !$isQuickSite;
+			$this->allowEmail = !$isQuickSite && $this->userAuthorized;
 
 			$this->allowDownload = true;
 			$this->allowPdf = true;
 			$this->allowAddToFavorites = $this->userAuthorized;
-			$this->allowAddToQuickSite = !$isQuickSite;
+			$this->allowAddToQuickSite = !$isQuickSite && $this->userAuthorized;
 
 			$this->enableLogging = $this->userAuthorized;
 			$this->enableRating = $this->userAuthorized;

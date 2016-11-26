@@ -380,11 +380,14 @@
 		{
 			$commonActions = array();
 
-			$logoutAction = new ShortcutAction('logout');
-			$logoutAction->order = 9999;
-			$logoutAction->title = 'Logout';
-			$logoutAction->iconClass = 'icon-exit2';
-			$commonActions[$logoutAction->tag] = $logoutAction;
+			if (UserIdentity::isUserAuthorized())
+			{
+				$logoutAction = new ShortcutAction('logout');
+				$logoutAction->order = 9999;
+				$logoutAction->title = 'Logout';
+				$logoutAction->iconClass = 'icon-exit2';
+				$commonActions[$logoutAction->tag] = $logoutAction;
+			}
 
 			return $commonActions;
 		}

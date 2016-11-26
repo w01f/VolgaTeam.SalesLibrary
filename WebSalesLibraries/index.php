@@ -24,4 +24,4 @@ else
     define('YII_DEBUG', false);
     require_once($webRoot . '/yii/framework/yii.php');
 }
-$app = Yii::createWebApplication($webRoot . '/configuration.php')->run();
+Yii::createWebApplication($webRoot . '/configuration.php')->run();

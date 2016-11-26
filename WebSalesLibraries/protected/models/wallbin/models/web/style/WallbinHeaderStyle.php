@@ -11,6 +11,7 @@
 		public $textColor;
 		public $backColor;
 		public $headerBorderColor;
+		public $paddingLeft;
 
 		/**
 		 * @param $xpath \DOMXPath
@@ -35,6 +36,9 @@
 
 			$queryResult = $xpath->query('TopBorderColor', $contextNode);
 			$headerStyle->headerBorderColor = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : '999';
+
+			$queryResult = $xpath->query('PaddingLeft', $contextNode);
+			$headerStyle->paddingLeft = $queryResult->length > 0 ? intval(trim($queryResult->item(0)->nodeValue)) : 0;
 
 			return $headerStyle;
 		}

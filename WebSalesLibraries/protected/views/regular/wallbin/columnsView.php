@@ -11,6 +11,7 @@
 		#content .content-columns-container {
 			border-collapse: separate;
 			border-spacing: 0 <? echo (max($style->column1Style->padding,$style->column2Style->padding,$style->column3Style->padding)*0.6).'px';?>;
+			height: <? echo $style->verticalBorderStretch?'100%':'auto';?>;
 		}
 
 		#content .page-column {

@@ -27,6 +27,16 @@
 		$selectedPage = $library->pages[0];
 ?>
 <style>
+	<?if($style->header->paddingLeft>0):?>
+		#content .wallbin-header {
+			margin-left: <? echo $style->header->paddingLeft;?>px;
+		}
+
+		#content .wallbin-header > div {
+			padding-left: 1px !important;
+		}
+	<?endif;?>
+
 	#content .wallbin-header > div {
 		border-bottom: 1px #<? echo $style->header->headerBorderColor?> solid !important;
 	}

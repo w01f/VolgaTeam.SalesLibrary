@@ -92,5 +92,4 @@
 			$this->addError('newInitialPassword', 'Error while changing password. Please contact to technical support');
 			return false;
 		}
-
 	}

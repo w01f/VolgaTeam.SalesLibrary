@@ -11,6 +11,15 @@
 	 */
 	class PreviewController extends IsdController
 	{
+		/** return array */
+		protected function getPublicActionIds()
+		{
+			return array(
+				'downloadFile',
+				'zipAndDownloadLink'
+			);
+		}
+
 		public function getViewPath()
 		{
 			return YiiBase::getPathOfAlias($this->pathPrefix . 'preview');

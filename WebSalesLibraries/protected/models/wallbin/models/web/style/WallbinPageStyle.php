@@ -13,6 +13,7 @@
 
 		public $verticalBorder1Color;
 		public $verticalBorder2Color;
+		public $verticalBorderStretch;
 
 		/** @var  PageColumnStyle */
 		public $column1Style;
@@ -39,6 +40,9 @@
 
 			$queryResult = $xpath->query('VerticalBorder2Color', $contextNode);
 			$pageStyle->verticalBorder2Color = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
+
+			$queryResult = $xpath->query('VerticalBorderStretch', $contextNode);
+			$pageStyle->verticalBorderStretch = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : true;
 
 			$queryResult = $xpath->query('Column1', $contextNode);
 			if ($queryResult->length > 0)

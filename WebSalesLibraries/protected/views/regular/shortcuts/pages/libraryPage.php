@@ -15,8 +15,17 @@
 			), true);
 ?>
 <style>
-	#content .wallbin-header > div
-	{
+	<?if($shortcut->style->header->paddingLeft>0):?>
+		#content .wallbin-header {
+			margin-left: <? echo $shortcut->style->header->paddingLeft;?>px;
+		}
+
+		#content .wallbin-header > div {
+			padding-left: 1px !important;
+		}
+	<?endif;?>
+
+	#content .wallbin-header > div {
 		border-bottom: 1px #<? echo $shortcut->style->header->headerBorderColor?> solid !important;
 	}
 </style>
@@ -28,7 +37,8 @@
 			<img class="wallbin-logo" src="<? echo $libraryPage->logoContent; ?>">
 		<? endif; ?>
 	</div>
-	<div class="single-page-header<? if (!$shortcut->style->header->showLogo): ?> single-page-header-no-logo<? endif; ?>">
+	<div
+		class="single-page-header<? if (!$shortcut->style->header->showLogo): ?> single-page-header-no-logo<? endif; ?>">
 		<? if ($shortcut->style->header->showText): ?>
 			<? if ($shortcut->style->header->showLogo): ?>
 				<h3 class="header-text"

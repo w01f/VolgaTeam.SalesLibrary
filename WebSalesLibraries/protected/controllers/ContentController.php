@@ -5,6 +5,12 @@
 	 */
 	class ContentController extends SoapController
 	{
+		/** return boolean */
+		protected function getIsPublicController()
+		{
+			return true;
+		}
+
 		/**
 		 * @return array
 		 */

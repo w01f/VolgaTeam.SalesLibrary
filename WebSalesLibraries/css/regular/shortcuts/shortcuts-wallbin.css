@@ -1,7 +1,6 @@
 /*Common Header------------------------------------*/
 #content .wallbin-header
 {
-	display: table-row;
 }
 
 #content .wallbin-header > div
@@ -147,7 +146,6 @@
 {
     display: table;
 	width: 100%;
-	height: 100%;
     table-layout: fixed;
 }
 /*Columns------------------------------------*/

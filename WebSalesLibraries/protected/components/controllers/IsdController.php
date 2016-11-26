@@ -1,5 +1,4 @@
-<?php
-
+<?
 	/**
 	 * Class IsdController
 	 */
@@ -8,6 +7,18 @@
 		public $browser;
 		public $pathPrefix;
 		public $isPhone;
+
+		/** return boolean */
+		protected function getIsPublicController()
+		{
+			return false;
+		}
+
+		/** return array */
+		protected function getPublicActionIds()
+		{
+			return array();
+		}
 
 		public function init()
 		{
@@ -38,5 +49,28 @@
 					}
 					break;
 			}
+		}
+
+		protected function beforeAction($action)
+		{
+			/** @var CHttpRequest $request */
+			$request = Yii::app()->request;
+
+			if ($request->getIsAjaxRequest())
+				return true;
+
+			if (UserIdentity::isUserAuthorized())
+				return true;
+
+			if ($this->getIsPublicController())
+				return true;
+
+			if (!(in_array($action->id, $this->getPublicActionIds())))
+			{
+				Yii::app()->user->loginRequired();
+				return false;
+			}
+
+			return true;
 		}
 	}

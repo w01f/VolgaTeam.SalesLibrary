@@ -5,6 +5,15 @@
 	 */
 	class QPageController extends IsdController
 	{
+		/** return array */
+		protected function getPublicActionIds()
+		{
+			return array(
+				'show',
+				'getPublic',
+			);
+		}
+
 		public function getViewPath()
 		{
 			return YiiBase::getPathOfAlias($this->pathPrefix . 'qpage');

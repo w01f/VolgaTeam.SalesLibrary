@@ -18,6 +18,8 @@
 
 		public $groupAppearance;
 
+		public $isAccessGranted;
+
 		public $menuItems;
 
 		/**
@@ -92,7 +94,7 @@
 				$this->defaultItemAppearance->useGradient = false;
 			}
 
-			$this->isAccessGranted = true;
+			$this->isAccessGranted = UserIdentity::isUserAuthorized();
 			$queryResult = $xpath->query('//Config/SuperGroups/Tag');
 			if (isset($currentSuperGroupTag) && $queryResult->length > 0)
 			{

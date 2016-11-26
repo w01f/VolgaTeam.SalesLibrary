@@ -4,6 +4,14 @@
 	 */
 	class QBuilderController extends SoapController
 	{
+		/** return array */
+		protected function getPublicActionIds()
+		{
+			return array(
+				'quote',
+			);
+		}
+
 		public function getViewPath()
 		{
 			return YiiBase::getPathOfAlias($this->pathPrefix . 'qbuilder');
@@ -183,7 +191,7 @@
 
 		public function actionClearLinkCart()
 		{
-			$userId = Yii::app()->user->getId();
+			$userId = UserIdentity::getCurrentUserId();
 			if (isset($userId))
 				UserLinkCartRecord::deleteLinksByUser($userId);
 			Yii::app()->end();

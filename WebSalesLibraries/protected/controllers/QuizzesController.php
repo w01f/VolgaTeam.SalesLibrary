@@ -12,7 +12,6 @@
 
 		public function actionGetQuizList()
 		{
-			$userId = UserIdentity::getCurrentUserId();
 			$parentId = Yii::app()->request->getPost('parentId');
 			if (isset($parentId))
 			{
@@ -45,7 +44,6 @@
 
 		public function actionGetQuizCover()
 		{
-			$userId = UserIdentity::getCurrentUserId();
 			$quizId = Yii::app()->request->getPost('quizId');
 			if (isset($quizId))
 			{
@@ -82,7 +80,7 @@
 					$to = $quiz->adminEmails;
 					$to[] = Yii::app()->user->email;
 					$message->to = $to;
-					$groups = UserRecord::getGroupNames(Yii::app()->user->id);
+					$groups = UserRecord::getGroupNames(UserIdentity::getCurrentUserId());
 					$message->subject = $quiz->title . ' - ' . Yii::app()->user->firstName . ' ' . Yii::app()->user->lastName . (count($groups) > 0 ? (' - ' . implode(', ', $groups)) : '');
 					$message->from = Yii::app()->params['email']['quiz']['from'];
 					if (Yii::app()->params['email']['quiz']['copy_enabled'])
@@ -97,7 +95,6 @@
 
 		public function actionGetQuizQuestion()
 		{
-			$userId = UserIdentity::getCurrentUserId();
 			$quizId = Yii::app()->request->getPost('quizId');
 			$quizQuestion = Yii::app()->request->getPost('quizQuestion');
 			if (isset($quizId) && isset($quizQuestion))

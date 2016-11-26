@@ -57,8 +57,8 @@
 		public function actionAddLinkDialog()
 		{
 			$linkId = Yii::app()->request->getPost('linkId');
-			$userId = Yii::app()->user->getId();
-			if (isset($userId) && isset($linkId))
+			$userId = UserIdentity::getCurrentUserId();
+			if (isset($linkId))
 			{
 				$linkRecord = LinkRecord::getLinkById($linkId);
 				$userFolderRecords = FavoritesFolderRecord::getAllFolderNames($userId);
@@ -91,8 +91,8 @@
 			$parentId = Yii::app()->request->getPost('parentId');
 			if (!isset($parentId) || (isset($parentId) && ($parentId == "" || $parentId == "null")))
 				$parentId = null;
-			$userId = Yii::app()->user->getId();
-			if (isset($folderId) && isset($userId))
+			$userId = UserIdentity::getCurrentUserId();
+			if (isset($folderId))
 			{
 				FavoritesFolderRecord::putFolderToFolder($folderId, $parentId);
 				$rootFolder = FavoritesFolderRecord::getRootFolder($userId);

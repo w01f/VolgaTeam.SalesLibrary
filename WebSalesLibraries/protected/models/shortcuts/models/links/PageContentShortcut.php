@@ -10,6 +10,9 @@
 
 		public $showNavigationPanel;
 
+		public $allowPublicAccess;
+		public $publicPassword;
+
 		/**
 		 * @param $linkRecord
 		 * @param $isPhone boolean
@@ -22,17 +25,23 @@
 			$linkConfig->loadXML($linkRecord->config);
 			$xpath = new DomXPath($linkConfig);
 
-			$samePageTags = $linkConfig->getElementsByTagName("OpenOnSamePage");
-			$this->samePage = $samePageTags->length > 0 ? filter_var(trim($samePageTags->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : true;
+			$queryResult = $xpath->query('//Config/OpenOnSamePage');
+			$this->samePage = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : true;
 
-			$showMainSiteUrlTags = $linkConfig->getElementsByTagName("Fullsitelink");
-			$this->showMainSiteUrl = $showMainSiteUrlTags->length > 0 ? filter_var(trim($showMainSiteUrlTags->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : false;
+			$queryResult = $xpath->query('//Config/Fullsitelink');
+			$this->showMainSiteUrl = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : false;
 
 			$queryResult = $xpath->query('//Config/HeaderIcon');
 			$this->headerIcon = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : '';
 
-			$showLeftPanelTags = $linkConfig->getElementsByTagName("ShowLeftPanel");
-			$this->showNavigationPanel = $showLeftPanelTags->length > 0 ? filter_var(trim($showLeftPanelTags->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : false;
+			$queryResult = $xpath->query('//Config/ShowLeftPanel');
+			$this->showNavigationPanel = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : false;
+
+			$queryResult = $xpath->query('//Config/AllowPublicAccess');
+			$this->allowPublicAccess = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : false;
+
+			$queryResult = $xpath->query('//Config/PublicPassword');
+			$this->publicPassword = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
 		}
 
 		/**

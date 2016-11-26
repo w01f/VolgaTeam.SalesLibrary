@@ -4,6 +4,15 @@
 	{
 		public $defaultAction = 'index';
 
+		/** return array */
+		protected function getPublicActionIds()
+		{
+			return array(
+				'login',
+				'badBrowser'
+			);
+		}
+
 		public function getViewPath()
 		{
 			return YiiBase::getPathOfAlias($this->pathPrefix . 'site');

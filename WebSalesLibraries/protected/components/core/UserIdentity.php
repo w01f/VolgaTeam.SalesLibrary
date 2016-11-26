@@ -115,8 +115,7 @@
 		 */
 		public static function isUserAuthorized()
 		{
-			$userId = self::getCurrentUserId();
-			return $userId != -1;
+			return !Yii::app()->user->isGuest;
 		}
 
 		/**

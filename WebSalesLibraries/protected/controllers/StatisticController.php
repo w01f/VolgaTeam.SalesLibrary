@@ -5,6 +5,14 @@
 	 */
 	class StatisticController extends SoapController
 	{
+		/** return array */
+		protected function getPublicActionIds()
+		{
+			return array(
+				'quote',
+			);
+		}
+
 		/**
 		 * @return array
 		 */

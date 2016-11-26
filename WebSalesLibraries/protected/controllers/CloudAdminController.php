@@ -5,6 +5,12 @@
 	 */
 	class CloudAdminController extends IsdController
 	{
+		/** return boolean */
+		protected function getIsPublicController()
+		{
+			return true;
+		}
+
 		public function actionGet()
 		{
 			$restParams = Yii::app()->request->getRestParams();
