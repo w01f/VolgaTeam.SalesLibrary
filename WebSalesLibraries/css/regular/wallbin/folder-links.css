@@ -2,10 +2,9 @@
 {
 	margin-top: -1px;
 	border: 1px solid;
-	min-height: 80px;
 }
 
-.folder-header-container
+.folder-header-container.regular
 {
 	border-bottom: 1px solid;
 	cursor: pointer;
@@ -30,7 +29,6 @@
 
 .folder-links-scroll-area
 {
-	min-height: 160px;
 	overflow-x: auto;
 }
 

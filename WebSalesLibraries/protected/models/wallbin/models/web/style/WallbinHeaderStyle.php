@@ -20,24 +20,24 @@
 		 */
 		public static function fromXml($xpath, $contextNode)
 		{
-			$headerStyle = self::createEmpty();
+			$headerStyle = self::createDefault();
 
-			$queryResult = $xpath->query('ShowLogo', $contextNode);
+			$queryResult = $xpath->query('.//ShowLogo', $contextNode);
 			$headerStyle->showLogo = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : true;
 
-			$queryResult = $xpath->query('ShowPageName', $contextNode);
+			$queryResult = $xpath->query('.//ShowPageName', $contextNode);
 			$headerStyle->showText = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : true;
 
-			$queryResult = $xpath->query('PageNameColor', $contextNode);
+			$queryResult = $xpath->query('.//PageNameColor', $contextNode);
 			$headerStyle->textColor = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : 'inherite';
 
-			$queryResult = $xpath->query('PageNameBackground', $contextNode);
+			$queryResult = $xpath->query('.//PageNameBackground', $contextNode);
 			$headerStyle->backColor = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : 'inherite';
 
-			$queryResult = $xpath->query('TopBorderColor', $contextNode);
+			$queryResult = $xpath->query('.//TopBorderColor', $contextNode);
 			$headerStyle->headerBorderColor = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : '999';
 
-			$queryResult = $xpath->query('PaddingLeft', $contextNode);
+			$queryResult = $xpath->query('.//PaddingLeft', $contextNode);
 			$headerStyle->paddingLeft = $queryResult->length > 0 ? intval(trim($queryResult->item(0)->nodeValue)) : 0;
 
 			return $headerStyle;
@@ -46,7 +46,7 @@
 		/**
 		 * @return WallbinHeaderStyle
 		 */
-		public static function createEmpty()
+		public static function createDefault()
 		{
 			$headerStyle = new WallbinHeaderStyle();
 			$headerStyle->showLogo = true;

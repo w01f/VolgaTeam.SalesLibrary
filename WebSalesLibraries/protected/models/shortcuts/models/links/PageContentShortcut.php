@@ -9,6 +9,7 @@
 		public $showMainSiteUrl;
 
 		public $showNavigationPanel;
+		public $navigationPanelId;
 
 		public $allowPublicAccess;
 		public $publicPassword;
@@ -36,6 +37,9 @@
 
 			$queryResult = $xpath->query('//Config/ShowLeftPanel');
 			$this->showNavigationPanel = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : false;
+
+			$queryResult = $xpath->query('//Config/LeftPanelID');
+			$this->navigationPanelId = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
 
 			$queryResult = $xpath->query('//Config/AllowPublicAccess');
 			$this->allowPublicAccess = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : false;
@@ -87,7 +91,7 @@
 		public function getNavigationPanel()
 		{
 			if ($this->showNavigationPanel)
-				return ShortcutsManager::getNavigationPanel();
+				return ShortcutsManager::getNavigationPanel($this->navigationPanelId);
 			return null;
 		}
 	}

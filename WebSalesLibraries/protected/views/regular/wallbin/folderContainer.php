@@ -1,14 +1,15 @@
 <?
 	use application\models\wallbin\models\web\LibraryFolder as LibraryFolder;
+	use application\models\wallbin\models\web\style\FolderStyle as FolderStyle;
 
 	/**
 	 * @var $folder LibraryFolder
-	 * @var $showHeader bool
+	 * @var $style FolderStyle
 	 */
 ?>
 <div class="folder-body" style="border-color: <? echo $folder->borderColor; ?>;">
-	<? if ($showHeader == true): ?>
-		<div class="folder-header-container" id="folder<? echo $folder->id; ?>"
+	<? if ($style->showRegularHeader): ?>
+		<div class="folder-header-container regular" id="folder<? echo $folder->id; ?>"
 		     style="font-family: <? echo isset($folder->banner) && $folder->banner->isEnabled ? $folder->banner->font->name : $folder->headerFont->name; ?>,serif;
 			     font-size: <? echo isset($folder->banner) && $folder->banner->isEnabled ? $folder->banner->font->size : $folder->headerFont->size; ?>pt;
 			     font-weight: <? echo (isset($folder->banner) && $folder->banner->isEnabled ? $folder->banner->font->isBold : $folder->headerFont->isBold) ? ' bold' : ' normal'; ?>;
@@ -40,6 +41,22 @@
 				<span class="folder-header"
 				      style="line-height: <? echo($folder->headerHeight - 1); ?>px;"><? echo $folder->name; ?></span>
 			<? endif; ?>
+		</div>
+	<? elseif ($style->showCustomTitle): ?>
+		<style>
+			#folder<? echo $folder->id; ?> {
+				font-family: <? echo $style->font->name; ?>, serif;
+				font-size: <? echo $style->font->size; ?>pt;
+				font-weight: <? echo $style->font->isBold ? 'bold' : 'normal'; ?>;
+				font-style: <? echo $style->font->isItalic ? 'italic' : 'normal'; ?>;
+				text-decoration: <? echo $style->font->isUnderlined ? 'underline' : 'inherit'; ?>;
+				text-align: <? echo $style->textAlign; ?>;
+				color: <? echo '#'.$style->textColor; ?>;
+				background-color: <? echo '#'.$style->backColor; ?>;
+			}
+		</style>
+		<div class="folder-header-container custom-title" id="folder<? echo $folder->id; ?>">
+			<? echo $folder->name; ?>
 		</div>
 	<? endif; ?>
 	<? echo $this->renderFile(Yii::getPathOfAlias('application.views.regular.wallbin') . '/folderLinks.php', array('folder' => $folder), true); ?>

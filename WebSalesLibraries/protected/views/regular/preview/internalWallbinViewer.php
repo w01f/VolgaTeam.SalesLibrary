@@ -19,7 +19,7 @@
 		Yii::app()->request->cookies[$savedSelectedPageIdTag] = $cookie;
 	}
 
-	$style = \application\models\wallbin\models\web\style\WallbinStyle::createEmpty();
+	$style = \application\models\wallbin\models\web\style\WallbinStyle::createDefault();
 	$style->header->showLogo = $previewInfo->showLogo;
 
 	$this->renderPartial('../wallbin/library', array(

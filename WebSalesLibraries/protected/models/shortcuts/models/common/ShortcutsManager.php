@@ -6,6 +6,7 @@
 	class ShortcutsManager
 	{
 		const NavigationPanelRootName = 'LeftPanel';
+		const NavigationPanelCommonId = 'common';
 
 		public static $excludeShortcutFolders = array(
 			self::NavigationPanelRootName
@@ -87,12 +88,17 @@
 					null;
 		}
 
-		/** @return NavigationPanel */
-		public static function getNavigationPanel()
+		/**
+		 * @var $id string
+		 * @return NavigationPanel
+		 */
+		public static function getNavigationPanel($id)
 		{
 			$navigationPanel = null;
-			$configRootPath = self::getShortcutsRootPath() . DIRECTORY_SEPARATOR . self::NavigationPanelRootName;
-			$configRootLink = self::getShortcutsRootLink() . '/' . self::NavigationPanelRootName;
+			if (!isset($id))
+				$id = self::NavigationPanelCommonId;
+			$configRootPath = self::getShortcutsRootPath() . DIRECTORY_SEPARATOR . self::NavigationPanelRootName . DIRECTORY_SEPARATOR . $id;
+			$configRootLink = self::getShortcutsRootLink() . '/' . self::NavigationPanelRootName . '/' . $id;
 			$configFilePath = $configRootPath . DIRECTORY_SEPARATOR . 'config.xml';
 			$configFile = realpath($configFilePath);
 			if (file_exists($configFile))

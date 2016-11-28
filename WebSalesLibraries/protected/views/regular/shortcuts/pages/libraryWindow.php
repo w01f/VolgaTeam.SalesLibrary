@@ -6,7 +6,12 @@
 	if(!$shortcut->linksOnly)
 	{
 		if ($shortcut->windowViewType == 'columns')
-			$content = $this->renderFile(Yii::getPathOfAlias($this->pathPrefix . 'wallbin') . '/folderContainer.php', array('folder' => $window, 'showHeader' => true), true);
+			$content = $this->renderFile(
+				Yii::getPathOfAlias($this->pathPrefix . 'wallbin') . '/folderContainer.php',
+				array(
+					'folder' => $window,
+					'style' => \application\models\wallbin\models\web\style\FolderStyle::createDefault()
+				), true);
 		else
 			$content = $this->renderFile(Yii::getPathOfAlias($this->pathPrefix . 'wallbin') . '/accordionFolder.php', array('folder' => $window), true);
 	}

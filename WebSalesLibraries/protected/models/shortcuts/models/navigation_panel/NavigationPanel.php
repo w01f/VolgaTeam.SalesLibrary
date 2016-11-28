@@ -8,6 +8,7 @@
 		public $itemsGap;
 		public $textSize;
 		public $textColor;
+		public $hoverColor;
 		public $backColor;
 		public $imagePadding;
 		public $dividerWidth;
@@ -35,6 +36,8 @@
 			$navigationPanel->textColor = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : '000000';
 			$queryResult = $xpath->query('//Config/Appearance/BackColor');
 			$navigationPanel->backColor = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : 'ffffff';
+			$queryResult = $xpath->query('//Config/Appearance/HoverColor');
+			$navigationPanel->hoverColor = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : 'c6e2ff';
 			$queryResult = $xpath->query('//Config/Appearance/ImagePadding');
 			$navigationPanel->imagePadding = $queryResult->length > 0 ? intval(trim($queryResult->item(0)->nodeValue)) : 0;
 			$queryResult = $xpath->query('//Config/Appearance/DividerWidth');

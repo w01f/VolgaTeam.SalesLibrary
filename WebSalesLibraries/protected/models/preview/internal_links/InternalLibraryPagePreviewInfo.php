@@ -60,7 +60,7 @@
 			$libraryPage->load($libraryPageRecord);
 			$libraryPage->loadData();
 			if ($this->pageViewType == 'columns')
-				$libraryPage->loadFolders();
+				$libraryPage->loadFolders(true);
 			return $libraryPage;
 		}
 	}

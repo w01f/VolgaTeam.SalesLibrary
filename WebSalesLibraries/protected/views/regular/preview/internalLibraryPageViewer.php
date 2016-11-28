@@ -7,7 +7,7 @@
 	$previewInfo = $data->previewInfo;
 	$libraryPage = $previewInfo->getLibraryPage();
 
-	$style = \application\models\wallbin\models\web\style\WallbinPageStyle::createEmpty();
+	$style = \application\models\wallbin\models\web\style\WallbinPageStyle::createDefault();
 	if(!$previewInfo->showWindowHeaders)
 	{
 		$style->enabled = true;

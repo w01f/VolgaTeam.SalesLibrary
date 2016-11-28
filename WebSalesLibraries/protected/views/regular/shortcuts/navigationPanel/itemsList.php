@@ -11,6 +11,12 @@
 		overflow-y: <?if($navigationPanel->showScroll):?>auto<?else:?>hidden <?endif;?>;
 	}
 
+	#content .navigation-panel li a:hover,
+	#content .navigation-panel li a:focus:hover
+	{
+		background-color: #<?echo $navigationPanel->hoverColor;?>;
+	}
+
 	#content .navigation-panel li a {
 		padding-bottom: <?echo $navigationPanel->itemsGap;?>px;
 	}

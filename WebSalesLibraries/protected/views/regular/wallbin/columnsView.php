@@ -5,69 +5,121 @@
 	 * @var $libraryPage LibraryPage
 	 * @var $style \application\models\wallbin\models\web\style\WallbinPageStyle
 	 */
+
+	$foldersByColumns = array();
+	for ($i = 0; $i < 3; $i++)
+		$foldersByColumns[$i] = $libraryPage->getFoldersByColumn($i);
+
+	$pageColumnInnerMargin = 1;
 ?>
 <? if ($style->columnStyleEnabled): ?>
 	<style>
-		#content .content-columns-container {
+		#page-<? echo $libraryPage->id; ?> .content-columns-container {
 			border-collapse: separate;
 			border-spacing: 0 <? echo (max($style->column1Style->padding,$style->column2Style->padding,$style->column3Style->padding)*0.6).'px';?>;
-			height: <? echo $style->verticalBorderStretch?'100%':'auto';?>;
 		}
 
-		#content .page-column {
+		#page-<? echo $libraryPage->id; ?> .page-column {
 			border-collapse: collapse;
 			border-spacing: 0;
 		}
 
 		<?if(isset($style->verticalBorder1Color)):?>
-		#content .page-column.column0 {
-			border-right: 1px solid #<?echo $style->verticalBorder1Color;?>;
+		<?if($style->verticalBorderStretch):?>
+		#page-<? echo $libraryPage->id; ?> .page-column.column0 {
+			border-right: 1px solid <?echo '#'.$style->verticalBorder1Color;?>;
 		}
 
+		<? else: ?>
+		#page-<? echo $libraryPage->id; ?> .page-column.column0 .page-column-inner {
+			border-right: 1px solid <?echo '#'.$style->verticalBorder1Color;?>;
+		}
+
+		#page-<? echo $libraryPage->id; ?> .page-column.column1 .page-column-inner {
+			border-left: 1px solid <?echo '#'.$style->verticalBorder1Color;?>;
+			margin-left: -<? echo $pageColumnInnerMargin; ?>px;
+		}
+
+		<?$pageColumnInnerMargin++;?>
+		<? endif; ?>
 		<? endif; ?>
 
 		<?if(isset($style->verticalBorder2Color)):?>
-		#content .page-column.column1 {
-			border-right: 1px solid #<?echo $style->verticalBorder2Color;?>;
+		<?if($style->verticalBorderStretch):?>
+		#page-<? echo $libraryPage->id; ?> .page-column.column1 {
+			border-right: 1px solid <?echo '#'.$style->verticalBorder2Color;?>;
 		}
 
+		<? else: ?>
+		#page-<? echo $libraryPage->id; ?> .page-column.column1 .page-column-inner {
+			border-right: 1px solid <?echo '#'.$style->verticalBorder2Color;?>;
+		}
+
+		#page-<? echo $libraryPage->id; ?> .page-column.column2 .page-column-inner {
+			border-left: 1px solid <?echo '#'.$style->verticalBorder2Color;?>;
+			margin-left: -<? echo $pageColumnInnerMargin; ?>px;
+		}
+
+		<? endif; ?>
 		<? endif; ?>
 
 		<? if ($style->column1Style->enabled): ?>
 
-		#content .page-column.column0 {
+		<?if($style->verticalBorderStretch):?>
+		#page-<? echo $libraryPage->id; ?> .page-column.column0 {
 			padding: 0 <? echo $style->column1Style->padding.'px';?> 0 <? echo $style->column1Style->padding.'px';?>;
 		}
 
-		#content .page-column.column0 .folder-body {
+		<? else: ?>
+		#page-<? echo $libraryPage->id; ?> .page-column.column0 .page-column-inner {
+			padding: 0 <? echo $style->column1Style->padding.'px';?> 0 <? echo $style->column1Style->padding.'px';?>;
+		}
+
+		<? endif; ?>
+
+		#page-<? echo $libraryPage->id; ?> .page-column.column0 .folder-body {
 			margin-bottom: <? echo ($style->column1Style->padding*0.6).'px';?>;
-			border-bottom: 1px solid #<?echo $style->column1Style->windowBorderColor;?> !important;
+			border-bottom: 1px solid <?echo '#'.$style->column1Style->windowBorderColor;?> !important;
 		}
 
 		<? endif; ?>
 
 		<? if ($style->column2Style->enabled): ?>
-
-		#content .page-column.column1 {
+		<?if($style->verticalBorderStretch):?>
+		#page-<? echo $libraryPage->id; ?> .page-column.column1 {
 			padding: 0 <? echo $style->column2Style->padding.'px';?> 0 <? echo $style->column2Style->padding.'px';?>;
 		}
 
-		#content .page-column.column1 .folder-body {
+		<? else: ?>
+		#page-<? echo $libraryPage->id; ?> .page-column.column1 .page-column-inner {
+			padding: 0 <? echo $style->column2Style->padding.'px';?> 0 <? echo $style->column2Style->padding.'px';?>;
+		}
+
+		<? endif; ?>
+
+		#page-<? echo $libraryPage->id; ?> .page-column.column1 .folder-body {
 			margin-bottom: <? echo ($style->column2Style->padding*0.6).'px';?>;
-			border-bottom: 1px solid #<?echo $style->column2Style->windowBorderColor;?> !important;
+			border-bottom: 1px solid <?echo '#'.$style->column2Style->windowBorderColor;?> !important;
 		}
 
 		<? endif; ?>
 
 		<? if ($style->column3Style->enabled): ?>
-
-		#content .page-column.column2 {
+		<?if($style->verticalBorderStretch):?>
+		#page-<? echo $libraryPage->id; ?> .page-column.column2 {
 			padding: 0 <? echo $style->column3Style->padding.'px';?> 0 <? echo $style->column3Style->padding.'px';?>;
 		}
 
-		#content .page-column.column2 .folder-body {
+		<? else: ?>
+		#page-<? echo $libraryPage->id; ?> .page-column.column2 .page-column-inner {
+			padding: 0 <? echo $style->column3Style->padding.'px';?> 0 <? echo $style->column3Style->padding.'px';?>;
+		}
+
+		<? endif; ?>
+
+		#page-<? echo $libraryPage->id; ?> .page-column.column2 .folder-body {
 			margin-bottom: <? echo ($style->column3Style->padding*0.6).'px';?>;
-			border-bottom: 1px solid #<?echo $style->column3Style->windowBorderColor;?> !important;
+			border-bottom: 1px solid <?echo '#'.$style->column3Style->windowBorderColor;?> !important;
 		}
 
 		<? endif; ?>
@@ -121,24 +173,37 @@
 		<div class="content-columns-container">
 			<div class="page-column-outer">
 				<? for ($i = 0; $i < 3; $i++): ?>
-					<? $folders = $libraryPage->getFoldersByColumn($i); ?>
-					<? if (isset($folders)): ?>
-						<div class="page-column column<? echo $i; ?>">
-							<?
-								foreach ($folders as $folder)
+					<? $folders = $foldersByColumns[$i]; ?>
+					<div class="page-column column<? echo $i; ?>">
+						<? if (!$style->verticalBorderStretch): ?>
+						<div class="page-column-inner"><? endif; ?>
+							<? foreach ($folders as $folder)
 								{
+									$folderStyle = \application\models\wallbin\models\web\style\FolderStyle::createDefault();
 									if ($style->columnStyleEnabled)
 										$folder->borderColor = '#ffffff';
+									switch ($i)
+									{
+										case 0:
+											$folderStyle = $style->column1Style->windowStyle;
+											break;
+										case 1:
+											$folderStyle = $style->column2Style->windowStyle;
+											break;
+										case 2:
+											$folderStyle = $style->column3Style->windowStyle;
+											break;
+									}
 									echo $this->renderFile(
 										Yii::getPathOfAlias('application.views.regular.wallbin') . '/folderContainer.php',
 										array(
 											'folder' => $folder,
-											'showHeader' => $style->showWindowHeaders
+											'style' => $folderStyle
 										), true);
 								}
 							?>
-						</div>
-					<? endif; ?>
+							<? if (!$style->verticalBorderStretch): ?></div><? endif; ?>
+					</div>
 				<? endfor; ?>
 			</div>
 		</div>

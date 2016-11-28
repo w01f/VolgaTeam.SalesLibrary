@@ -95,7 +95,7 @@
 		else if ($style->page->enabled)
 		{
 			$selectedPage->loadData();
-			$selectedPage->loadFolders();
+			$selectedPage->loadFolders(true);
 			$this->renderPartial('../wallbin/columnsView',
 				array(
 					'libraryPage' => $selectedPage,

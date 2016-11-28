@@ -18,7 +18,7 @@
 		 */
 		public static function fromXml($xpath, $contextNode)
 		{
-			$style = self::createEmpty();
+			$style = self::createDefault();
 
 			$queryResult = $xpath->query('Header', $contextNode);
 			if ($queryResult->length > 0)
@@ -34,11 +34,11 @@
 		/**
 		 * @return WallbinStyle
 		 */
-		public static function createEmpty()
+		public static function createDefault()
 		{
 			$style = new WallbinStyle();
-			$style->header = WallbinHeaderStyle::createEmpty();
-			$style->page = WallbinPageStyle::createEmpty();
+			$style->header = WallbinHeaderStyle::createDefault();
+			$style->page = WallbinPageStyle::createDefault();
 			return $style;
 		}
 	}

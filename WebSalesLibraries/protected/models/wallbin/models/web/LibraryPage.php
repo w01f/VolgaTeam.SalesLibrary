@@ -105,11 +105,14 @@
 				usort($this->columns, "application\\models\\wallbin\\models\\web\\Column::columnComparer");
 		}
 
-		public function loadFolders()
+		/**
+		 * @param $usePermissionsFilter boolean
+		 */
+		public function loadFolders($usePermissionsFilter)
 		{
 			if (isset($this->folders))
 				foreach ($this->folders as $folder)
-					$folder->loadFiles(false);
+					$folder->loadFiles($usePermissionsFilter);
 		}
 
 		/**
@@ -118,9 +121,9 @@
 		public function buildCache($controller)
 		{
 			$this->loadData();
-			$this->loadFolders();
+			$this->loadFolders(false);
 			$path = \Yii::getPathOfAlias('application.views.regular.wallbin') . '/columnsView.php';
-			$style = WallbinPageStyle::createEmpty();
+			$style = WallbinPageStyle::createDefault();
 			$content = $controller->renderFile($path, array('libraryPage' => $this, 'style' => $style), true);
 
 			if (isset($content) && $content != '')

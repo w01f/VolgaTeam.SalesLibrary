@@ -42,7 +42,7 @@
 			if ($queryResult->length > 0)
 				$this->style = WallbinStyle::fromXml($xpath, $queryResult->item(0));
 			else
-				$this->style = WallbinStyle::createEmpty();
+				$this->style = WallbinStyle::createDefault();
 
 			$libraryManager = new LibraryManager();
 			$this->library = $libraryManager->getLibraryByName($this->libraryName);
@@ -102,7 +102,7 @@
 			$libraryPage->load($libraryPageRecord);
 			$libraryPage->loadData();
 			if ($this->pageViewType == 'columns')
-				$libraryPage->loadFolders();
+				$libraryPage->loadFolders(true);
 			return $libraryPage;
 		}
 

@@ -22,12 +22,6 @@
     padding-bottom: 30px;
 }
 
-#content .navigation-panel li a:hover,
-#content .navigation-panel li a:focus:hover
-{
-    background-color: #c6e2ff;
-}
-
 #content .navigation-panel li a:focus
 {
     background: inherit;

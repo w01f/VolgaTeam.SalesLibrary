@@ -95,7 +95,7 @@
 			else if (isset($link->parent) && isset($link->parent->windowFont))
 				$font = $link->parent->windowFont;
 			else
-				$font = Font::getDefault();
+				$font = Font::createDefault();
 
 			if (!empty($link->extendedProperties->foreColor))
 				$color = $link->extendedProperties->foreColor;

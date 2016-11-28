@@ -15,7 +15,7 @@
 				Yii::getPathOfAlias($this->pathPrefix . 'wallbin') . '/folderContainer.php',
 				array(
 					'folder' => $window,
-					'showHeader' => true
+					'style' => \application\models\wallbin\models\web\style\FolderStyle::createDefault()
 				),
 				true);
 		else
