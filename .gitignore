@@ -64,3 +64,6 @@ WebSalesLibraries/.idea/workspace.xml
 Basic Configuration
 .idea
 packages
+/SalesLibraries.SalesDepot/Business/Services/LicenseHelper.cs
+/SalesLibraries.FileManager/Business/Services/LicenseHelper.cs
+/SalesLibraries.CloudAdmin/Business/Services/LicenseHelper.cs
