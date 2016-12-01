@@ -192,6 +192,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 									(InternalLibraryObjectLinkInfo)form.SelectedEditor.GetHyperLinkInfo(),
 									DataSource);
 								break;
+							case InternalLinkType.Shortcut:
+								newLink = InternalShortcutLink.Create(
+									(InternalShortcutLinkInfo)form.SelectedEditor.GetHyperLinkInfo(),
+									DataSource);
+								break;
 							default:
 								throw new ArgumentOutOfRangeException("Link type not found");
 						}

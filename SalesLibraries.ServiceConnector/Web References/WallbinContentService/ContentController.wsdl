@@ -541,6 +541,29 @@
           <xsd:element name="quickLinkTitle" type="xsd:string" />
         </xsd:all>
       </xsd:complexType>
+      <xsd:complexType name="InternalShortcutLinkSettings">
+        <xsd:all>
+          <xsd:element name="internalLinkType" type="xsd:int" />
+          <xsd:element name="shortcutId" type="xsd:string" />
+          <xsd:element name="openOnSamePage" type="xsd:boolean" />
+          <xsd:element name="note" type="xsd:string" />
+          <xsd:element name="hoverNote" type="xsd:string" />
+          <xsd:element name="showOnlyCustomHoverNote" type="xsd:boolean" />
+          <xsd:element name="isBold" type="xsd:boolean" />
+          <xsd:element name="isItalic" type="xsd:boolean" />
+          <xsd:element name="isUnderline" type="xsd:boolean" />
+          <xsd:element name="isSpecialFormat" type="xsd:boolean" />
+          <xsd:element name="font" type="tns:Font" />
+          <xsd:element name="foreColor" type="xsd:string" />
+          <xsd:element name="isTextWordWrap" type="xsd:boolean" />
+          <xsd:element name="isRestricted" type="xsd:boolean" />
+          <xsd:element name="noShare" type="xsd:boolean" />
+          <xsd:element name="assignedUsers" type="xsd:string" />
+          <xsd:element name="deniedUsers" type="xsd:string" />
+          <xsd:element name="quickLinkUrl" type="xsd:string" />
+          <xsd:element name="quickLinkTitle" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
       <xsd:complexType name="ExcelLinkSettings">
         <xsd:all>
           <xsd:element name="forceDownload" type="xsd:boolean" />
@@ -738,6 +761,10 @@
     <wsdl:part name="settings" type="tns:InternalLibraryObjectLinkSettings" />
   </wsdl:message>
   <wsdl:message name="mockInternalLibraryObjectLinkSettingsOut" />
+  <wsdl:message name="mockInternalShortcutLinkSettingsIn">
+    <wsdl:part name="settings" type="tns:InternalShortcutLinkSettings" />
+  </wsdl:message>
+  <wsdl:message name="mockInternalShortcutLinkSettingsOut" />
   <wsdl:message name="mockExcelLinkSettingsIn">
     <wsdl:part name="settings" type="tns:ExcelLinkSettings" />
   </wsdl:message>
@@ -837,6 +864,12 @@
       </wsdl:documentation>
       <wsdl:input message="tns:mockInternalLibraryObjectLinkSettingsIn" />
       <wsdl:output message="tns:mockInternalLibraryObjectLinkSettingsOut" />
+    </wsdl:operation>
+    <wsdl:operation name="mockInternalShortcutLinkSettings">
+      <wsdl:documentation>
+      </wsdl:documentation>
+      <wsdl:input message="tns:mockInternalShortcutLinkSettingsIn" />
+      <wsdl:output message="tns:mockInternalShortcutLinkSettingsOut" />
     </wsdl:operation>
     <wsdl:operation name="mockExcelLinkSettings">
       <wsdl:documentation>
@@ -978,6 +1011,15 @@
     </wsdl:operation>
     <wsdl:operation name="mockInternalLibraryObjectLinkSettings">
       <soap:operation soapAction="urn:ContentControllerwsdl#mockInternalLibraryObjectLinkSettings" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ContentControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ContentControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="mockInternalShortcutLinkSettings">
+      <soap:operation soapAction="urn:ContentControllerwsdl#mockInternalShortcutLinkSettings" style="rpc" />
       <wsdl:input>
         <soap:body use="encoded" namespace="urn:ContentControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
       </wsdl:input>

@@ -27,7 +27,6 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.HyperlinkEdi
 				laPageName.Font = new Font(laPageName.Font.FontFamily, laPageName.Font.Size - 2, laPageName.Font.Style);
 				laWindowName.Font = new Font(laWindowName.Font.FontFamily, laWindowName.Font.Size - 2, laWindowName.Font.Style);
 				laLibraryLinkName.Font = new Font(laLibraryLinkName.Font.FontFamily, laLibraryLinkName.Font.Size - 2, laLibraryLinkName.Font.Style);
-				laPageName.Font = new Font(laPageName.Font.FontFamily, laPageName.Font.Size - 2, laPageName.Font.Style);
 			}
 		}
 
@@ -70,16 +69,14 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.HyperlinkEdi
 
 		public void ApplySharedSettings(InternalLinkInfo templateInfo)
 		{
-			if (templateInfo != null)
-			{
-				textEditLibraryName.EditValue = templateInfo.LibraryName;
-			}
 			if (templateInfo is InternalLibraryPageLinkInfo)
 			{
+				textEditLibraryName.EditValue = ((InternalLibraryPageLinkInfo)templateInfo).LibraryName;
 				textEditPageName.EditValue = ((InternalLibraryPageLinkInfo)templateInfo).PageName;
 			}
 			if (templateInfo is InternalLibraryFolderLinkInfo)
 			{
+				textEditLibraryName.EditValue = ((InternalLibraryFolderLinkInfo)templateInfo).LibraryName;
 				textEditPageName.EditValue = ((InternalLibraryFolderLinkInfo)templateInfo).PageName;
 				textEditWindowName.EditValue = ((InternalLibraryFolderLinkInfo)templateInfo).WindowName;
 			}

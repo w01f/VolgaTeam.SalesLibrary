@@ -19,6 +19,7 @@
 		public const string InternalLibraryPage= "internal page";
 		public const string InternalLibraryFolder = "internal window";
 		public const string InternalLibraryLink = "internal link";
+		public const string InternalShortcutLink = "internal shortcut";
 		public const string Lan = "lan";
 		public const string Video = "video";
 		public const string Word = "doc";

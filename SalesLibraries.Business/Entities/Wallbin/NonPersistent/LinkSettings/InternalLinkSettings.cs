@@ -13,17 +13,5 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 
 		[JsonIgnore]
 		public abstract InternalLinkType InternalLinkType { get; }
-
-		private string _libraryName;
-		public string LibraryName
-		{
-			get { return _libraryName; }
-			set
-			{
-				if (_libraryName != value)
-					OnSettingsChanged();
-				_libraryName = value;
-			}
-		}
 	}
 }

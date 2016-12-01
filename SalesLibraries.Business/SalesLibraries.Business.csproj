@@ -116,6 +116,7 @@
     <Compile Include="Entities\Wallbin\Common\Enums\WidgetType.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\AutoWidget.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\BannerSettings.cs" />
+    <Compile Include="Entities\Wallbin\NonPersistent\HyperLinkInfo\InternalShortcutLinkInfo.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\HyperLinkInfo\InternalLibraryObjectLinkInfo.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\HyperLinkInfo\InternalLibraryFolderLinkInfo.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\HyperLinkInfo\InternalLibraryPageLinkInfo.cs" />
@@ -137,6 +138,7 @@
     <Compile Include="Entities\Wallbin\NonPersistent\LinkBundleSettings\RevenueItem.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\LinkBundleSettings\StrategyItem.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\LinkBundleSettings\UrlItem.cs" />
+    <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\InternalShortcutLinkSettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\InternalLibraryPageLinkSettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\InternalLibraryFolderLinkSettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\InternalLibraryObjectLinkSettings.cs" />
@@ -175,6 +177,7 @@
     <Compile Include="Entities\Wallbin\Persistent\Library.cs" />
     <Compile Include="Entities\Wallbin\Persistent\LibraryFolder.cs" />
     <Compile Include="Entities\Wallbin\Persistent\LinkBundle.cs" />
+    <Compile Include="Entities\Wallbin\Persistent\Links\InternalShortcutLink.cs" />
     <Compile Include="Entities\Wallbin\Persistent\Links\InternalLibraryObjectLink.cs" />
     <Compile Include="Entities\Wallbin\Persistent\Links\InternalLibraryFolderLink.cs" />
     <Compile Include="Entities\Wallbin\Persistent\Links\InternalLibraryPageLink.cs" />

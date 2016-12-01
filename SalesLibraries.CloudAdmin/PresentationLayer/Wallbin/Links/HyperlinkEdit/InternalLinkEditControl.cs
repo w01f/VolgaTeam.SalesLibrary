@@ -42,6 +42,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.HyperlinkEdi
 				checkEditLinkTypeLibraryPage,
 				checkEditLinkTypeLibraryFolder,
 				checkEditLinkTypeLibraryObject,
+				checkEditLinkTypeShortcut,
 			});
 			editorSelectors.ForEach(checkEdit =>
 			{
@@ -105,6 +106,9 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.HyperlinkEdi
 						break;
 					case InternalLinkType.LibraryObject:
 						SelectedEditor = new InternalLibraryObjectLinkEditControl();
+						break;
+					case InternalLinkType.Shortcut:
+						SelectedEditor = new InternalShortcutLinkEditControl();
 						break;
 					default:
 						throw new ArgumentOutOfRangeException("Link type is not found");

@@ -261,6 +261,12 @@
     <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\LineBreakNotesLoader.cs" />
     <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\LineBreakTextFormatLoader.cs" />
     <Compile Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\IInternalLinkEditControl.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\InternalShortcutLinkEditControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\InternalShortcutLinkEditControl.Designer.cs">
+      <DependentUpon>InternalShortcutLinkEditControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\InternalWallbinLinkEditControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -290,6 +296,12 @@
     </Compile>
     <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkBundleOptions.designer.cs">
       <DependentUpon>LinkBundleOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkInternalShortcutOptions.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkInternalShortcutOptions.designer.cs">
+      <DependentUpon>LinkInternalShortcutOptions.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkInternalWallbinOptions.cs">
       <SubType>Component</SubType>
@@ -839,6 +851,9 @@
     <EmbeddedResource Include="PresentationLayer\Wallbin\LinkBundles\SingleBundle\InfoEditControl.resx">
       <DependentUpon>InfoEditControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\InternalShortcutLinkEditControl.resx">
+      <DependentUpon>InternalShortcutLinkEditControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\InternalWallbinLinkEditControl.resx">
       <DependentUpon>InternalWallbinLinkEditControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -853,6 +868,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkBundleOptions.resx">
       <DependentUpon>LinkBundleOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkInternalShortcutOptions.resx">
+      <DependentUpon>LinkInternalShortcutOptions.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkInternalWallbinOptions.resx">
       <DependentUpon>LinkInternalWallbinOptions.cs</DependentUpon>

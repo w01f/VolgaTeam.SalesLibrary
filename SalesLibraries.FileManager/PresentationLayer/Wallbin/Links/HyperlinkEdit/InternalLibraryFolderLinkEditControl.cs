@@ -76,12 +76,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.HyperlinkEd
 
 		public void ApplySharedSettings(InternalLinkInfo templateInfo)
 		{
-			if (templateInfo != null)
-			{
-				textEditLibraryName.EditValue = templateInfo.LibraryName;
-			}
 			if (templateInfo is InternalWallbinLinkInfo)
 			{
+				textEditLibraryName.EditValue = ((InternalWallbinLinkInfo)templateInfo).LibraryName;
 				textEditPageName.EditValue = ((InternalWallbinLinkInfo)templateInfo).PageName;
 				textEditHeaderIcon.EditValue = ((InternalWallbinLinkInfo)templateInfo).HeaderIcon;
 				checkEditShowHeaderText.Checked = ((InternalWallbinLinkInfo)templateInfo).ShowHeaderText;
@@ -89,6 +86,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.HyperlinkEd
 			}
 			if (templateInfo is InternalLibraryPageLinkInfo)
 			{
+				textEditLibraryName.EditValue = ((InternalLibraryPageLinkInfo)templateInfo).LibraryName;
 				textEditPageName.EditValue = ((InternalLibraryPageLinkInfo)templateInfo).PageName;
 				textEditHeaderIcon.EditValue = ((InternalLibraryPageLinkInfo)templateInfo).HeaderIcon;
 				checkEditShowHeaderText.Checked = ((InternalLibraryPageLinkInfo)templateInfo).ShowHeaderText;
@@ -96,6 +94,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.HyperlinkEd
 			}
 			if (templateInfo is InternalLibraryObjectLinkInfo)
 			{
+				textEditLibraryName.EditValue = ((InternalLibraryObjectLinkInfo)templateInfo).LibraryName;
 				textEditPageName.EditValue = ((InternalLibraryObjectLinkInfo)templateInfo).PageName;
 				textEditWindowName.EditValue = ((InternalLibraryObjectLinkInfo)templateInfo).WindowName;
 			}

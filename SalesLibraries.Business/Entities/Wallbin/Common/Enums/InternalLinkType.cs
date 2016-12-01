@@ -6,6 +6,7 @@
 		Wallbin,
 		LibraryPage,
 		LibraryFolder,
-		LibraryObject
+		LibraryObject,
+		Shortcut
 	}
 }

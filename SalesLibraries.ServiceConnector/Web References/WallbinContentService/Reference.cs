@@ -61,6 +61,8 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         
         private System.Threading.SendOrPostCallback mockInternalLibraryObjectLinkSettingsOperationCompleted;
         
+        private System.Threading.SendOrPostCallback mockInternalShortcutLinkSettingsOperationCompleted;
+        
         private System.Threading.SendOrPostCallback mockExcelLinkSettingsOperationCompleted;
         
         private System.Threading.SendOrPostCallback mockQPageLinkSettingsOperationCompleted;
@@ -146,6 +148,9 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         
         /// <remarks/>
         public event mockInternalLibraryObjectLinkSettingsCompletedEventHandler mockInternalLibraryObjectLinkSettingsCompleted;
+        
+        /// <remarks/>
+        public event mockInternalShortcutLinkSettingsCompletedEventHandler mockInternalShortcutLinkSettingsCompleted;
         
         /// <remarks/>
         public event mockExcelLinkSettingsCompletedEventHandler mockExcelLinkSettingsCompleted;
@@ -451,6 +456,34 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
             if ((this.mockInternalLibraryObjectLinkSettingsCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.mockInternalLibraryObjectLinkSettingsCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:ContentControllerwsdl#mockInternalShortcutLinkSettings", RequestNamespace="urn:ContentControllerwsdl", ResponseNamespace="urn:ContentControllerwsdl")]
+        public void mockInternalShortcutLinkSettings(InternalShortcutLinkSettings settings) {
+            this.Invoke("mockInternalShortcutLinkSettings", new object[] {
+                        settings});
+        }
+        
+        /// <remarks/>
+        public void mockInternalShortcutLinkSettingsAsync(InternalShortcutLinkSettings settings) {
+            this.mockInternalShortcutLinkSettingsAsync(settings, null);
+        }
+        
+        /// <remarks/>
+        public void mockInternalShortcutLinkSettingsAsync(InternalShortcutLinkSettings settings, object userState) {
+            if ((this.mockInternalShortcutLinkSettingsOperationCompleted == null)) {
+                this.mockInternalShortcutLinkSettingsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnmockInternalShortcutLinkSettingsOperationCompleted);
+            }
+            this.InvokeAsync("mockInternalShortcutLinkSettings", new object[] {
+                        settings}, this.mockInternalShortcutLinkSettingsOperationCompleted, userState);
+        }
+        
+        private void OnmockInternalShortcutLinkSettingsOperationCompleted(object arg) {
+            if ((this.mockInternalShortcutLinkSettingsCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.mockInternalShortcutLinkSettingsCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -2455,6 +2488,243 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
             }
             set {
                 this.forceOpenField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string note {
+            get {
+                return this.noteField;
+            }
+            set {
+                this.noteField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string hoverNote {
+            get {
+                return this.hoverNoteField;
+            }
+            set {
+                this.hoverNoteField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool showOnlyCustomHoverNote {
+            get {
+                return this.showOnlyCustomHoverNoteField;
+            }
+            set {
+                this.showOnlyCustomHoverNoteField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool isBold {
+            get {
+                return this.isBoldField;
+            }
+            set {
+                this.isBoldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool isItalic {
+            get {
+                return this.isItalicField;
+            }
+            set {
+                this.isItalicField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool isUnderline {
+            get {
+                return this.isUnderlineField;
+            }
+            set {
+                this.isUnderlineField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool isSpecialFormat {
+            get {
+                return this.isSpecialFormatField;
+            }
+            set {
+                this.isSpecialFormatField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public Font font {
+            get {
+                return this.fontField;
+            }
+            set {
+                this.fontField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string foreColor {
+            get {
+                return this.foreColorField;
+            }
+            set {
+                this.foreColorField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool isTextWordWrap {
+            get {
+                return this.isTextWordWrapField;
+            }
+            set {
+                this.isTextWordWrapField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool isRestricted {
+            get {
+                return this.isRestrictedField;
+            }
+            set {
+                this.isRestrictedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool noShare {
+            get {
+                return this.noShareField;
+            }
+            set {
+                this.noShareField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string assignedUsers {
+            get {
+                return this.assignedUsersField;
+            }
+            set {
+                this.assignedUsersField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string deniedUsers {
+            get {
+                return this.deniedUsersField;
+            }
+            set {
+                this.deniedUsersField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string quickLinkUrl {
+            get {
+                return this.quickLinkUrlField;
+            }
+            set {
+                this.quickLinkUrlField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string quickLinkTitle {
+            get {
+                return this.quickLinkTitleField;
+            }
+            set {
+                this.quickLinkTitleField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:ContentControllerwsdl")]
+    public partial class InternalShortcutLinkSettings {
+        
+        private int internalLinkTypeField;
+        
+        private string shortcutIdField;
+        
+        private bool openOnSamePageField;
+        
+        private string noteField;
+        
+        private string hoverNoteField;
+        
+        private bool showOnlyCustomHoverNoteField;
+        
+        private bool isBoldField;
+        
+        private bool isItalicField;
+        
+        private bool isUnderlineField;
+        
+        private bool isSpecialFormatField;
+        
+        private Font fontField;
+        
+        private string foreColorField;
+        
+        private bool isTextWordWrapField;
+        
+        private bool isRestrictedField;
+        
+        private bool noShareField;
+        
+        private string assignedUsersField;
+        
+        private string deniedUsersField;
+        
+        private string quickLinkUrlField;
+        
+        private string quickLinkTitleField;
+        
+        /// <remarks/>
+        public int internalLinkType {
+            get {
+                return this.internalLinkTypeField;
+            }
+            set {
+                this.internalLinkTypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string shortcutId {
+            get {
+                return this.shortcutIdField;
+            }
+            set {
+                this.shortcutIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool openOnSamePage {
+            get {
+                return this.openOnSamePageField;
+            }
+            set {
+                this.openOnSamePageField = value;
             }
         }
         
@@ -6555,6 +6825,10 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
     public delegate void mockInternalLibraryObjectLinkSettingsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    public delegate void mockInternalShortcutLinkSettingsCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]

@@ -191,6 +191,11 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders.Controls
 									(InternalLibraryObjectLinkInfo)form.SelectedEditor.GetHyperLinkInfo(),
 									DataSource);
 								break;
+							case InternalLinkType.Shortcut:
+								newLink = InternalShortcutLink.Create(
+									(InternalShortcutLinkInfo)form.SelectedEditor.GetHyperLinkInfo(),
+									DataSource);
+								break;
 							default:
 								throw new ArgumentOutOfRangeException("Link type not found");
 						}
@@ -498,7 +503,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders.Controls
 					}
 				}
 				sourceLink.ClearPreviewContainer();
-				//var previewContainer = sourceLink.GetPreviewContainer();
+				var previewContainer = sourceLink.GetPreviewContainer();
 				//var previewGenerator = previewContainer.GetPreviewGenerator();
 				//previewContainer.UpdateContent(previewGenerator, cancelationToken);
 			});

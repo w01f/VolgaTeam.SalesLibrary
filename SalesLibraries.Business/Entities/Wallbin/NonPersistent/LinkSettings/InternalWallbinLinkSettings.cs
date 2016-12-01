@@ -8,6 +8,18 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 		[JsonIgnore]
 		public override InternalLinkType InternalLinkType => InternalLinkType.Wallbin;
 
+		private string _libraryName;
+		public string LibraryName
+		{
+			get { return _libraryName; }
+			set
+			{
+				if (_libraryName != value)
+					OnSettingsChanged();
+				_libraryName = value;
+			}
+		}
+
 		private string _pageName;
 		public string PageName
 		{

@@ -24,6 +24,7 @@ using InternalWallbinLinkSettings = SalesLibraries.ServiceConnector.WallbinConte
 using InternalLibraryPageLinkSettings = SalesLibraries.ServiceConnector.WallbinContentService.InternalLibraryPageLinkSettings;
 using InternalLibraryFolderLinkSettings = SalesLibraries.ServiceConnector.WallbinContentService.InternalLibraryFolderLinkSettings;
 using InternalLibraryObjectLinkSettings = SalesLibraries.ServiceConnector.WallbinContentService.InternalLibraryObjectLinkSettings;
+using InternalShortcutLinkSettings = SalesLibraries.ServiceConnector.WallbinContentService.InternalShortcutLinkSettings;
 using VideoLinkSettings = SalesLibraries.ServiceConnector.WallbinContentService.VideoLinkSettings;
 using PowerPointLinkSettings = SalesLibraries.ServiceConnector.WallbinContentService.PowerPointLinkSettings;
 using DocumentLinkSettings = SalesLibraries.ServiceConnector.WallbinContentService.DocumentLinkSettings;
@@ -287,6 +288,13 @@ namespace SalesLibraries.FileManager.Business.Services
 							(SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings.InternalLibraryObjectLinkSettings)
 								source.Settings);
 					}
+					else if (source is InternalShortcutLink)
+					{
+						target.extendedProperties = new InternalShortcutLinkSettings();
+						((InternalShortcutLinkSettings)target.extendedProperties).ImportData(
+							(SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings.InternalShortcutLinkSettings)
+								source.Settings);
+					}
 					break;
 				case FileTypes.LinkBundle:
 					target.extendedProperties = new LinkBundleLinkSettings();
@@ -506,6 +514,16 @@ namespace SalesLibraries.FileManager.Business.Services
 			target.pageName = source.PageName;
 			target.windowName = source.WindowName;
 			target.linkName = source.LinkName;
+		}
+
+		private static void ImportData(
+			this InternalShortcutLinkSettings target,
+			SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings.InternalShortcutLinkSettings source)
+		{
+			((IBaseLinkSettings)target).ImportData(source);
+			target.internalLinkType = (Int32)source.InternalLinkType;
+			target.shortcutId = source.ShortcutId;
+			target.openOnSamePage = source.OpenOnSamePage;
 		}
 
 		private static void ImportData(

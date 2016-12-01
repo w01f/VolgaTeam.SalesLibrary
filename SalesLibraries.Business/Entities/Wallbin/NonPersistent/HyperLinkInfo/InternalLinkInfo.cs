@@ -6,6 +6,5 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.HyperLinkInfo
 	{
 		public override HyperLinkTypeEnum LinkType => HyperLinkTypeEnum.Internal;
 		public abstract InternalLinkType InternalLinkType { get; }
-		public string LibraryName { get; set; }
 	}
 }

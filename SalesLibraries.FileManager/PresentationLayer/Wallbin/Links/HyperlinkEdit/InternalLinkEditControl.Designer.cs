@@ -41,6 +41,7 @@
 			this.checkEditLinkTypeLibraryFolder = new DevExpress.XtraEditors.CheckEdit();
 			this.checkEditLinkTypeLibraryObject = new DevExpress.XtraEditors.CheckEdit();
 			this.pnPropertyEditorsContainer = new System.Windows.Forms.Panel();
+			this.checkEditLinkTypeShortcut = new DevExpress.XtraEditors.CheckEdit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditLinkName.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditBold.Properties)).BeginInit();
@@ -49,6 +50,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.checkEditLinkTypeLibraryPage.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditLinkTypeLibraryFolder.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditLinkTypeLibraryObject.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditLinkTypeShortcut.Properties)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// labelControllTitle
@@ -205,12 +207,28 @@
 			this.pnPropertyEditorsContainer.Location = new System.Drawing.Point(0, 131);
 			this.pnPropertyEditorsContainer.Name = "pnPropertyEditorsContainer";
 			this.pnPropertyEditorsContainer.Size = new System.Drawing.Size(525, 220);
-			this.pnPropertyEditorsContainer.TabIndex = 57;
+			this.pnPropertyEditorsContainer.TabIndex = 58;
+			// 
+			// checkEditLinkTypeShortcut
+			// 
+			this.checkEditLinkTypeShortcut.Location = new System.Drawing.Point(406, 98);
+			this.checkEditLinkTypeShortcut.Name = "checkEditLinkTypeShortcut";
+			this.checkEditLinkTypeShortcut.Properties.AllowHtmlDraw = DevExpress.Utils.DefaultBoolean.True;
+			this.checkEditLinkTypeShortcut.Properties.AutoWidth = true;
+			this.checkEditLinkTypeShortcut.Properties.Caption = "Shortcut";
+			this.checkEditLinkTypeShortcut.Properties.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Radio;
+			this.checkEditLinkTypeShortcut.Properties.RadioGroupIndex = 1;
+			this.checkEditLinkTypeShortcut.Size = new System.Drawing.Size(71, 20);
+			this.checkEditLinkTypeShortcut.StyleController = this.styleController;
+			this.checkEditLinkTypeShortcut.TabIndex = 57;
+			this.checkEditLinkTypeShortcut.TabStop = false;
+			this.checkEditLinkTypeShortcut.Tag = "5";
 			// 
 			// InternalLinkEditControl
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
 			this.BackColor = System.Drawing.Color.White;
+			this.Controls.Add(this.checkEditLinkTypeShortcut);
 			this.Controls.Add(this.pnPropertyEditorsContainer);
 			this.Controls.Add(this.checkEditLinkTypeLibraryObject);
 			this.Controls.Add(this.checkEditLinkTypeLibraryFolder);
@@ -233,6 +251,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.checkEditLinkTypeLibraryPage.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditLinkTypeLibraryFolder.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditLinkTypeLibraryObject.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditLinkTypeShortcut.Properties)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -252,5 +271,6 @@
 		private DevExpress.XtraEditors.CheckEdit checkEditLinkTypeLibraryFolder;
 		private DevExpress.XtraEditors.CheckEdit checkEditLinkTypeLibraryObject;
 		private System.Windows.Forms.Panel pnPropertyEditorsContainer;
+		private DevExpress.XtraEditors.CheckEdit checkEditLinkTypeShortcut;
 	}
 }

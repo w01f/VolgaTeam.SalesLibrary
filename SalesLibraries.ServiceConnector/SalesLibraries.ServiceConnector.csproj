@@ -84,6 +84,7 @@
     <Compile Include="Models\Rest\Wallbin\Settings\LibraryPageSettings.cs" />
     <Compile Include="Models\Rest\Wallbin\Settings\LibrarySettings.cs" />
     <Compile Include="Models\Soap\Statistic\FileActivityReportModel.cs" />
+    <Compile Include="Models\Soap\WallbinContentService\InternalShortcutLinkSettings.cs" />
     <Compile Include="Models\Soap\WallbinContentService\InternalLibraryPageLinkSettings.cs" />
     <Compile Include="Models\Soap\WallbinContentService\InternalLibraryFolderLinkSettings.cs" />
     <Compile Include="Models\Soap\WallbinContentService\InternalLibraryObjectLinkSettings.cs" />

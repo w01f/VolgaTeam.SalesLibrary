@@ -73,12 +73,9 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.HyperlinkEdi
 
 		public void ApplySharedSettings(InternalLinkInfo templateInfo)
 		{
-			if (templateInfo != null)
-			{
-				textEditLibraryName.EditValue = templateInfo.LibraryName;
-			}
 			if (templateInfo is InternalWallbinLinkInfo)
 			{
+				textEditLibraryName.EditValue = ((InternalWallbinLinkInfo)templateInfo).LibraryName;
 				textEditPageName.EditValue = ((InternalWallbinLinkInfo)templateInfo).PageName;
 				textEditHeaderIcon.EditValue = ((InternalWallbinLinkInfo)templateInfo).HeaderIcon;
 				checkEditShowHeaderText.Checked = ((InternalWallbinLinkInfo)templateInfo).ShowHeaderText;
@@ -87,6 +84,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.HyperlinkEdi
 			}
 			if (templateInfo is InternalLibraryFolderLinkInfo)
 			{
+				textEditLibraryName.EditValue = ((InternalLibraryFolderLinkInfo)templateInfo).LibraryName;
 				textEditPageName.EditValue = ((InternalLibraryFolderLinkInfo)templateInfo).PageName;
 				textEditHeaderIcon.EditValue = ((InternalLibraryFolderLinkInfo)templateInfo).HeaderIcon;
 				checkEditShowHeaderText.Checked = ((InternalLibraryFolderLinkInfo)templateInfo).ShowHeaderText;
