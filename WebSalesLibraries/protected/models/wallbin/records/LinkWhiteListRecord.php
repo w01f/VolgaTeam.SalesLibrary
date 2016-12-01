@@ -59,7 +59,21 @@
 			$linkIds = array();
 			foreach (self::model()->findAll('id_user=?', array($userId)) as $userLink)
 			{
-				/** @var LinkBlackListRecord $userLink*/
+				/** @var LinkWhiteListRecord $userLink*/
+				$linkIds[] = $userLink->id_link;
+			}
+			return $linkIds;
+		}
+
+		/**
+		 * @return array
+		 */
+		public static function getWhiteListLinkIds()
+		{
+			$linkIds = array();
+			foreach (self::model()->findAll() as $userLink)
+			{
+				/** @var LinkWhiteListRecord $userLink*/
 				$linkIds[] = $userLink->id_link;
 			}
 			return $linkIds;

@@ -3,7 +3,7 @@
 	/**
 	 * Class BundleShortcut
 	 */
-	abstract class BundleShortcut extends PageContentShortcut
+	abstract class BundleShortcut extends PageContentShortcut implements ISearchBarContainer
 	{
 		public $viewName;
 		public $searchBar;
@@ -23,7 +23,7 @@
 			parent::__construct($linkRecord, $isPhone);
 
 			if ($isPhone != true)
-				$this->searchBar = new SearchBar($this);
+				$this->searchBar = SearchBar::fromShortcut($this);
 		}
 
 		/**
@@ -49,5 +49,11 @@
 				if (isset($shortcut) && $shortcut->isAccessGranted)
 					$this->links[] = $shortcut;
 			}
+		}
+
+		/** @return SearchBar */
+		public function getSearchBar()
+		{
+			return $this->searchBar;
 		}
 	}

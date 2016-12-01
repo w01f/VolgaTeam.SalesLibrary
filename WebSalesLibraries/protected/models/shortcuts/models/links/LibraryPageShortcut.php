@@ -7,11 +7,14 @@
 	/**
 	 * Class LibraryPageShortcut
 	 */
-	class LibraryPageShortcut extends PageContentShortcut
+	class LibraryPageShortcut extends PageContentShortcut implements ISearchBarContainer
 	{
 		public $libraryName;
 		public $pageName;
 		public $pageViewType;
+
+		/** @var SearchBar */
+		public $searchBar;
 
 		/** @var  WallbinStyle */
 		public $style;
@@ -46,6 +49,9 @@
 
 			$libraryManager = new LibraryManager();
 			$this->library = $libraryManager->getLibraryByName($this->libraryName);
+
+			if ($isPhone != true)
+				$this->searchBar = SearchBar::fromShortcut($this);
 		}
 
 		/**
@@ -131,5 +137,11 @@
 			$xpath = new DomXPath($linkConfig);
 			$queryResult = $xpath->query('//Config/Actions/Action');
 			$this->initActions($xpath, $queryResult);
+		}
+
+		/** @return SearchBar */
+		public function getSearchBar()
+		{
+			return $this->searchBar;
 		}
 	}

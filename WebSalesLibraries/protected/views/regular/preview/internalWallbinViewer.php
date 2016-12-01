@@ -27,5 +27,6 @@
 		'pageSelectorMode' => $previewInfo->pageSelectorType,
 		'pageViewType' => $previewInfo->pageViewType,
 		'style' => $style,
+		'searchBar'=> SearchBar::createEmpty()
 	));
 ?>

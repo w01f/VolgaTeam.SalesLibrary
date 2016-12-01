@@ -1,7 +1,7 @@
 (function ($)
 {
 	window.BaseUrl = window.BaseUrl || '';
-	$.SalesPortal = $.SalesPortal || { };
+	$.SalesPortal = $.SalesPortal || {};
 	$.SalesPortal.ShortcutsGrid = function ()
 	{
 		var gridData = undefined;
@@ -10,7 +10,9 @@
 		{
 			gridData = data;
 
-			new $.SalesPortal.ShortcutsSearchBar(gridData);
+			new $.SalesPortal.ShortcutsSearchBar({
+				shortcutData: gridData
+			});
 
 			var pageContent = $.SalesPortal.Content.getContentObject();
 			var grid = pageContent.find('.shortcuts-links-grid');
@@ -48,7 +50,7 @@
 			var content = $.SalesPortal.Content.getContentObject();
 
 			var shortcutsPage = content.find('.shortcuts-page-content');
-			var height = content.height() - content.find('.shortcuts-search-bar.open').height() - 20;
+			var height = content.outerHeight(true) - content.find('.shortcuts-search-bar-container').outerHeight(true) - 20;
 			shortcutsPage.css({
 				'height': height + 'px'
 			});

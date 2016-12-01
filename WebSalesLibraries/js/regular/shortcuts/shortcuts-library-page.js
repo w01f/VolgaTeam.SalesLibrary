@@ -29,6 +29,12 @@
 							$.SalesPortal.Wallbin.assignAccordionEvents(pageContent);
 							break;
 					}
+
+					new $.SalesPortal.ShortcutsSearchBar({
+						shortcutData: libraryPageData,
+						sizeChangedCallback: updateContentSize
+					});
+
 					updateContentSize();
 				}
 			});

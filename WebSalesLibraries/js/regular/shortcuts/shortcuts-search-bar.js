@@ -2,7 +2,7 @@
 {
 	window.BaseUrl = window.BaseUrl || '';
 	$.SalesPortal = $.SalesPortal || {};
-	$.SalesPortal.ShortcutsSearchBar = function (bundleData)
+	$.SalesPortal.ShortcutsSearchBar = function (parameters)
 	{
 		var searchBar = $('.shortcuts-search-bar');
 
@@ -103,7 +103,7 @@
 								'</div>');
 							$.SalesPortal.ShortcutsSearchLink(
 								options,
-								shortcutBundleData.linkId,
+								parentShortcutData.linkId,
 								function ()
 								{
 									location.reload();
@@ -138,7 +138,7 @@
 						}
 						else
 						{
-							window.open("shortcuts/GetQuickSearchResult?bundleId=" + shortcutBundleData.linkId +
+							window.open("shortcuts/GetQuickSearchResult?linkId=" + parentShortcutData.linkId +
 								"&text=" + searchBarConditions.get('text') +
 								"&textExactMatch=" + searchBarConditions.get('exactMatch') +
 								"&onlyFiles=" + searchBarConditions.get('onlyFileNames') +
@@ -204,11 +204,13 @@
 				categoryStr = categoriesStr;
 			else if (superFiltersStr != '')
 				categoryStr = superFiltersStr;
-			var selectedCategoryLabel = searchBar.find('.tag-condition-selected');
+			var selectedCategoryLabel = searchBar.find('.tag-condition-selected small');
 			if (categoryStr != "")
 				selectedCategoryLabel.html(searchBar.find('.tags-filter-panel-switcher').html() + ': ' + categoryStr);
 			else
 				selectedCategoryLabel.html('');
+
+			updateSize();
 		};
 
 		var setDefaultSettings = function ()
@@ -464,6 +466,7 @@
 				searchBar.addClass('open').show();
 			else
 				searchBar.removeClass('open').hide();
+			updateSize();
 		};
 
 		var updateSearchToggleButtonState = function ()
@@ -481,9 +484,15 @@
 			}
 		};
 
+		var updateSize = function ()
+		{
+			if (parameters.sizeChangedCallback != undefined)
+				parameters.sizeChangedCallback();
+		};
+
 		if (searchBar.length > 0)
 		{
-			var shortcutBundleData = bundleData;
+			var parentShortcutData = parameters.shortcutData;
 			var searchBarOptions = new $.SalesPortal.SearchOptions($.parseJSON(searchBar.find('.search-conditions .encoded-object').text()));
 			var searchViewOptions = new $.SalesPortal.SearchViewOptions($.parseJSON(searchBar.find('.search-view-options .encoded-object').text()));
 			var searchBarConditions = new $.SalesPortal.SearchConditions(function ()

@@ -84,10 +84,11 @@
 
 		/**
 		 * @param $userId
-		 * @return array|null
+		 * @return array
 		 */
 		public static function getLibraryIdsByUserAngHisGroups($userId)
 		{
+			$libraryIds = array();
 			$userLibraryRecords = self::model()->findAll('id_user=?', array($userId));
 			if (isset($userLibraryRecords))
 				foreach ($userLibraryRecords as $userLibraryRecord)
@@ -107,9 +108,7 @@
 					}
 				}
 
-			if (isset($libraryIds))
-				return array_unique($libraryIds);
-			return null;
+			return array_unique($libraryIds);
 		}
 
 		/**

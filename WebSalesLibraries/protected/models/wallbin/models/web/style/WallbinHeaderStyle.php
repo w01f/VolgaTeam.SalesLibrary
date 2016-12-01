@@ -29,10 +29,10 @@
 			$headerStyle->showText = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : true;
 
 			$queryResult = $xpath->query('.//PageNameColor', $contextNode);
-			$headerStyle->textColor = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : 'inherite';
+			$headerStyle->textColor = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : 'inherit';
 
 			$queryResult = $xpath->query('.//PageNameBackground', $contextNode);
-			$headerStyle->backColor = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : 'inherite';
+			$headerStyle->backColor = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : 'inherit';
 
 			$queryResult = $xpath->query('.//TopBorderColor', $contextNode);
 			$headerStyle->headerBorderColor = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : '999';

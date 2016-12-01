@@ -8,7 +8,7 @@
 	$libraryPage = $previewInfo->getLibraryPage();
 
 	$style = \application\models\wallbin\models\web\style\WallbinPageStyle::createDefault();
-	if(!$previewInfo->showWindowHeaders)
+	if (!$previewInfo->showWindowHeaders)
 	{
 		$style->enabled = true;
 		$style->showWindowHeaders = false;
@@ -29,29 +29,32 @@
 			), true);
 ?>
 <style>
-	#content .wallbin-header > div
-	{
+	#content .wallbin-header {
+		background-color: <? echo '#'.$previewInfo->backColor; ?> !important;
+	}
+
+	#content .wallbin-header .wallbin-header-cell {
 		border-bottom: 1px #999 solid !important;
 	}
+
+	#content .wallbin-header .single-page-header .header-text {
+		color: <? echo '#'.$previewInfo->textColor; ?> !important;
+	}
 </style>
-<div
-	class="wallbin-header<? if (!$previewInfo->showText && !$previewInfo->showLogo): ?> single-page-no-text-no-logo<? endif; ?>"
-	<? if ($previewInfo->showText || $previewInfo->showLogo): ?>style="background-color: <? echo $previewInfo->backColor; ?> !important;" <? endif; ?>>
-	<div class="wallbin-logo-wrapper">
-		<? if ($previewInfo->showLogo): ?>
-			<img class="wallbin-logo" src="<? echo $libraryPage->logoContent; ?>">
-		<? endif; ?>
-	</div>
-	<div class="single-page-header<? if (!$previewInfo->showLogo): ?> single-page-header-no-logo<? endif; ?>">
-		<? if ($previewInfo->showText): ?>
+<div class="wallbin-header-container">
+	<table class="wallbin-header">
+		<tr>
 			<? if ($previewInfo->showLogo): ?>
-				<h3 class="header-text"
-				    style="color: <? echo $previewInfo->textColor; ?> !important;"><? echo $libraryPage->name; ?></h3>
-			<? else: ?>
-				<h4 class="header-text"
-				    style="color: <? echo $previewInfo->textColor; ?> !important;"><? echo $libraryPage->name; ?></h4>
+				<td class="wallbin-header-cell wallbin-logo-wrapper">
+					<img class="wallbin-logo" src="<? echo $libraryPage->logoContent; ?>">
+				</td>
 			<? endif; ?>
-		<? endif; ?>
-	</div>
+			<? if ($previewInfo->showText): ?>
+				<td class="wallbin-header-cell single-page-header<? if (!$previewInfo->showLogo): ?> single-page-header-no-logo<? endif; ?>">
+					<h4 class="header-text"><? echo $libraryPage->name; ?></h4>
+				</td>
+			<? endif; ?>
+		</tr>
+	</table>
 </div>
 <div class="wallbin-container"><? echo $content; ?></div>

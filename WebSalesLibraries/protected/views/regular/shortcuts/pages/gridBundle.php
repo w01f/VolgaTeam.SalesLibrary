@@ -1,7 +1,18 @@
 <?
 	/** @var $shortcut GridBundleShortcut */
-	echo $this->renderPartial('searchBar/bar', array('searchBar' => $shortcut->searchBar, 'linkId' => $shortcut->id), true);
 ?>
+<? if ($shortcut->searchBar->configured): ?>
+	<style>
+		#content .shortcuts-search-bar-container
+		{
+			width: 100%;
+			padding: 20px 20px 20px;
+		}
+	</style>
+	<div class="shortcuts-search-bar-container">
+		<? echo $this->renderPartial('searchBar/bar', array('searchBar' => $shortcut->searchBar), true);	?>
+	</div>
+<? endif; ?>
 <div class="shortcuts-page-content">
 	<? if (count($shortcut->links) > 0): ?>
 		<div class="shortcuts-links-grid">

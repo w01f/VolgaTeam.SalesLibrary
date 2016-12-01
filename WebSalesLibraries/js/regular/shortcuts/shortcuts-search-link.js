@@ -354,7 +354,7 @@
 								categoryStr = categoriesStr;
 							else if (superFiltersStr != '')
 								categoryStr = superFiltersStr;
-							var selectedCategoryLabel = sideBar.find('.tag-condition-selected');
+							var selectedCategoryLabel = sideBar.find('.tag-condition-selected small');
 							if (categoryStr != "")
 								selectedCategoryLabel.html(sideBar.find('.tags-filter-panel-switcher').html() + ': ' + categoryStr);
 							else

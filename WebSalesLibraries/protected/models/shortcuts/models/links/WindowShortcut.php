@@ -6,11 +6,14 @@
 	/**
 	 * Class WindowShortcut
 	 */
-	class WindowShortcut extends PageContentShortcut
+	class WindowShortcut extends PageContentShortcut implements ISearchBarContainer
 	{
 		public $column;
 		public $windowViewType;
 		public $linksOnly;
+
+		/** @var SearchBar */
+		public $searchBar;
 
 		/**
 		 * @param $linkRecord
@@ -32,6 +35,9 @@
 
 			$linksOnlyTags = $linkConfig->getElementsByTagName("LinksOnly");
 			$this->linksOnly = $linksOnlyTags->length > 0 ? filter_var(trim($linksOnlyTags->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : false;
+
+			if ($isPhone != true)
+				$this->searchBar = SearchBar::fromShortcut($this);
 		}
 
 		/**
@@ -78,5 +84,11 @@
 		public function getTypeForActivityTracker()
 		{
 			return 'Window';
+		}
+
+		/** @return SearchBar */
+		public function getSearchBar()
+		{
+			return $this->searchBar;
 		}
 	}

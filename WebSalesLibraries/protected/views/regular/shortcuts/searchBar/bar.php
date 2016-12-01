@@ -1,7 +1,6 @@
 <?
 	/**
 	 * @var $searchBar SearchBar
-	 * @var $linkId string
 	 */
 ?>
 <? if ($searchBar->configured): ?>
@@ -36,8 +35,8 @@
 						</button>
 				  	</span>
 				</div>
-				<p class="text-muted">
-					<small class="tag-condition-selected">Fusce dapibus, tellus ac cursus commodo, tortor mauris nibh.</small>
+				<p class="tag-condition-selected text-muted">
+					<small>Fusce dapibus, tellus ac cursus commodo, tortor mauris nibh.</small>
 				</p>
 			</td>
 		</tr>

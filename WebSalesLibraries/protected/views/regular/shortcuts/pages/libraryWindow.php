@@ -18,6 +18,18 @@
 	else
 		$content = $this->renderFile(Yii::getPathOfAlias($this->pathPrefix . 'wallbin') . '/folderLinks.php', array('folder' => $window), true);
 ?>
+<? if ($shortcut->searchBar->configured): ?>
+	<style>
+		#content .shortcuts-search-bar-container
+		{
+			width: 100%;
+			padding: 20px 20px 20px;
+		}
+	</style>
+	<div class="shortcuts-search-bar-container">
+		<? echo $this->renderPartial('searchBar/bar', array('searchBar' => $shortcut->searchBar), true); ?>
+	</div>
+<? endif; ?>
 <div class='padding'>
 	<? if ($shortcut->column < 0): ?>
 		<? echo $content; ?>

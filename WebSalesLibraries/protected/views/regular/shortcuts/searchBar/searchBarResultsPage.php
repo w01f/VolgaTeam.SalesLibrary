@@ -2,7 +2,7 @@
 	/**
 	 * @var $menuGroups ShortcutGroup[]
 	 * @var $searchBar SearchBar
-	 * @var $bundleId string
+	 * @var $linkId string
 	 */
 
 	$this->renderPartial('../site/scripts');
@@ -16,7 +16,7 @@
 		<td class="content-inner">
 			<div class="content-scrollable-area">
 				<div class="service-data">
-					<div class="object-id" style="display: none;"><? echo $bundleId; ?></div>
+					<div class="object-id" style="display: none;"><? echo $linkId; ?></div>
 					<div class="search-bar-actions">
 						<? $this->renderPartial('../menu/actionItems', array('actionContainer' => $searchBar), false, true); ?>
 					</div>

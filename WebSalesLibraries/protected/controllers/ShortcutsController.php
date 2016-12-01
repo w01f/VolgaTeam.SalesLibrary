@@ -258,7 +258,7 @@
 
 		public function actionGetQuickSearchResult()
 		{
-			$bundleId = Yii::app()->request->getQuery('bundleId');
+			$linkId = Yii::app()->request->getQuery('linkId');
 			$text = Yii::app()->request->getQuery('text');
 			$onlyFiles = filter_var(trim(Yii::app()->request->getQuery('onlyFiles')), FILTER_VALIDATE_BOOLEAN);
 			$onlyNewFiles = filter_var(trim(Yii::app()->request->getQuery('onlyNewFiles')), FILTER_VALIDATE_BOOLEAN);
@@ -280,13 +280,13 @@
 			else
 				$categories = array();
 
-			if (isset($bundleId))
+			if (isset($linkId))
 			{
 				/** @var $linkRecord ShortcutLinkRecord */
-				$linkRecord = ShortcutLinkRecord::model()->findByPk($bundleId);
-				/** @var $bundle BundleShortcut */
-				$bundle = $linkRecord->getModel($this->isPhone);
-				$searchBar = $bundle->searchBar;
+				$linkRecord = ShortcutLinkRecord::model()->findByPk($linkId);
+				/** @var $searchBarContainer ISearchBarContainer */
+				$searchBarContainer = $linkRecord->getModel($this->isPhone);
+				$searchBar = $searchBarContainer->getSearchBar();
 				$this->pageTitle = $searchBar->title;
 				$searchBar->conditions->text = $text;
 				$searchBar->conditions->searchByContent = $onlyFiles;
@@ -307,7 +307,7 @@
 					$searchBar->conditions->categories[] = $category;
 				}
 				$menuGroups = ShortcutsManager::getAvailableGroups($this->isPhone);
-				$this->render('searchBar/searchBarResultsPage', array('menuGroups' => $menuGroups, 'searchBar' => $searchBar, 'bundleId' => $bundleId));
+				$this->render('searchBar/searchBarResultsPage', array('menuGroups' => $menuGroups, 'searchBar' => $searchBar, 'linkId' => $linkId));
 			}
 		}
 

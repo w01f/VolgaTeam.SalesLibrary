@@ -401,10 +401,10 @@
 		{
 			var content = $.SalesPortal.Content.getContentObject();
 
-			var wallbinHeader = content.find('.wallbin-header');
+			var wallbinHeader = content.find('.wallbin-header-container');
 
 			var contentHeight = content.outerHeight(true);
-			var headerHeight = wallbinHeader.outerHeight(true) + 1;
+			var headerHeight = wallbinHeader.outerHeight(true);
 			var wallbinHeight = contentHeight - headerHeight;
 
 			var pageContainers = content.find('.page-container');

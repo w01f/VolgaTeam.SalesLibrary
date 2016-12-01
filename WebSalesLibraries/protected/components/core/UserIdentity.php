@@ -126,6 +126,6 @@
 			if (isset(Yii::app()->user) && isset(Yii::app()->user->role))
 				return Yii::app()->user->role == 2;
 			else
-				return true;
+				return false;
 		}
 	}

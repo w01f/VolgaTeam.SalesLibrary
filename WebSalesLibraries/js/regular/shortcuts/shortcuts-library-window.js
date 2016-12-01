@@ -29,6 +29,12 @@
 					break;
 			}
 			initActionButtons();
+
+			new $.SalesPortal.ShortcutsSearchBar({
+				shortcutData: libraryWindowData,
+				sizeChangedCallback: updateContentSize
+			});
+
 			updateContentSize();
 			$(window).off('resize.library-page').on('resize.library-page', updateContentSize);
 		};

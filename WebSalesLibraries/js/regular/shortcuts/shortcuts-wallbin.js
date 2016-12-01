@@ -23,6 +23,12 @@
 			$.SalesPortal.Content.getContentObject().find('.page-container').show();
 			initPage();
 			initActionButtons();
+
+			new $.SalesPortal.ShortcutsSearchBar({
+				shortcutData: libraryData,
+				sizeChangedCallback: updateContentSize
+			});
+
 			updateContentSize();
 			$(window).off('resize.library').on('resize.library', updateContentSize);
 		};

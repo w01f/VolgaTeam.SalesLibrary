@@ -5,6 +5,7 @@
 		'library' => $library,
 		'pageSelectorMode' => $shortcut->pageSelectorMode,
 		'pageViewType' => $shortcut->pageViewType,
-		'style' => $shortcut->style
+		'style' => $shortcut->style,
+		'searchBar'=> $shortcut->getSearchBar()
 	));
 ?>

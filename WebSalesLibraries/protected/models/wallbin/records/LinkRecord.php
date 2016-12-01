@@ -230,19 +230,26 @@
 		 */
 		public static function applyPermissionsFilter($links)
 		{
-			$filteredLinks = array();
 			$isAdmin = UserIdentity::isUserAdmin();
 			$userId = UserIdentity::getCurrentUserId();
 			if (!$isAdmin)
 			{
+				$filteredLinks = array();
+				$whiteList = LinkWhiteListRecord::getWhiteListLinkIds();
 				foreach ($links as $link)
 				{
-					$availableLinkIds = LinkWhiteListRecord::getAvailableLinks($userId);
-					if (in_array($link->id, $availableLinkIds))
-						$filteredLinks[] = $link;
-					$deniedLinkIds = LinkBlackListRecord::getDeniedLinks($userId);
-					if (!in_array($link->id, $deniedLinkIds))
-						$filteredLinks[] = $link;
+					if (in_array($link->id, $whiteList))
+					{
+						$availableLinkIds = LinkWhiteListRecord::getAvailableLinks($userId);
+						if (in_array($link->id, $availableLinkIds))
+							$filteredLinks[] = $link;
+					}
+					else
+					{
+						$deniedLinkIds = LinkBlackListRecord::getDeniedLinks($userId);
+						if (!in_array($link->id, $deniedLinkIds))
+							$filteredLinks[] = $link;
+					}
 				}
 				return $filteredLinks;
 			}

@@ -32,7 +32,6 @@
 					),
 				),
 				'tags' => array(
-					'visible' => true,
 					'tab_name' => 'Tag',
 					'column_name' => 'Tag',
 				),

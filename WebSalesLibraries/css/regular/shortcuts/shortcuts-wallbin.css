@@ -1,27 +1,31 @@
 /*Common Header------------------------------------*/
-#content .wallbin-header
+#content .wallbin-header-container
 {
+	width: 100%;
 }
 
-#content .wallbin-header > div
+#content .wallbin-header
 {
-	display: table-cell;
+	width: 100%;
+}
+
+#content .wallbin-header .wallbin-header-cell
+{
 	vertical-align: middle;
-	padding: 5px;
 	border-bottom: 1px #999 solid;
+	padding-left: 5px;
 }
 
 #content .wallbin-header .wallbin-logo-wrapper
 {
-	padding-left: 5px;
-	padding-right: 0;
+	height: 90px;
 }
 
-#content .wallbin-header .page-selector-container
+#content .wallbin-header .page-selector-container,
+#content .wallbin-header .single-page-header
 {
 	width: 100%;
 	text-align: right;
-	padding-top: 25px;
 	padding-bottom: 15px;
 	padding-right: 10px;
 }
@@ -31,41 +35,11 @@
 	text-align: left;
 }
 
-#content .wallbin-header .page-selector-container.page-selector-container-no-logo .header-text
-{
-	color: #8a8a8a;
-}
-
-
-#content .wallbin-header .single-page-header
-{
-	width: 100%;
-	text-align: right;
-	padding-top: 25px;
-	padding-bottom: 15px;
-	padding-right: 10px;
-}
-
 #content .wallbin-header .single-page-header.single-page-header-no-logo
 {
 	text-align: left;
 	padding-top: 0;
 	padding-bottom: 0;
-}
-
-#content .wallbin-header .single-page-header.single-page-header-no-logo .header-text
-{
-	color: #8a8a8a;
-}
-
-#content .wallbin-header.single-page-no-text-no-logo
-{
-	background-color: #8a8a8a;
-}
-
-#content .wallbin-header.single-page-no-text-no-logo > div
-{
-	padding: 2px;
 }
 
 #library-update-stamp

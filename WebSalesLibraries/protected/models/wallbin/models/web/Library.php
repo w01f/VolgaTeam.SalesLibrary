@@ -28,6 +28,8 @@
 			}
 			else
 				$availablePageIds = array();
+
+			$this->pages = array();
 			foreach (\LibraryPageRecord::model()->findAll('id_library=?', array($this->id)) as $pageRecord)
 			{
 				$page = new LibraryPage($this);
@@ -35,8 +37,7 @@
 				if (in_array($page->id, $availablePageIds) || $isAdmin)
 					$this->pages[] = $page;
 			}
-			if (isset($this->pages))
-				usort($this->pages, "application\\models\\wallbin\\models\\web\\LibraryPage::libraryPageComparer");
+			usort($this->pages, "application\\models\\wallbin\\models\\web\\LibraryPage::libraryPageComparer");
 
 			foreach (\AutoWidgetRecord::model()->findAll('id_library=?', array($this->id)) as $autoWidgetRecord)
 			{

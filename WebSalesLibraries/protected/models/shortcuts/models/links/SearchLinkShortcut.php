@@ -58,7 +58,7 @@
 			usort($subSearchConditions, array($sortHelper, 'sort'));
 			$this->subConditions = $subSearchConditions;
 
-			$this->subSearchBar = new SearchBar($this);
+			$this->subSearchBar = SearchBar::fromShortcut($this);
 		}
 
 		/**
