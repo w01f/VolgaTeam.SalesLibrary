@@ -163,7 +163,7 @@
 								value == 'internal page' ||
 								value == 'internal window' ||
 								value == 'internal link' ||
-								value == 'internal')
+								value == 'internal shortcut')
 								thatData.showUrls = true;
 							else if (value == 'png' || value == 'jpeg')
 								thatData.showImages = true;

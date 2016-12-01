@@ -22,7 +22,7 @@
 		public $order;
 		public $type;
 		/**
-		 * @var \BaseLinkSettings|\VideoLinkSettings|\HyperLinkSettings|\DocumentLinkSettings|\PowerPointLinkSettings|\AppLinkSettings|\InternalWallbinLinkSettings|\InternalLibraryPageLinkSettings|\InternalLibraryFolderLinkSettings|\InternalLibraryObjectLinkSettings|\QPageLinkSettings|\LinkBundleLinkSettings
+		 * @var \BaseLinkSettings|\VideoLinkSettings|\HyperLinkSettings|\DocumentLinkSettings|\PowerPointLinkSettings|\AppLinkSettings|\InternalWallbinLinkSettings|\InternalLibraryPageLinkSettings|\InternalLibraryFolderLinkSettings|\InternalLibraryObjectLinkSettings|\InternalShortcutLinkSettings|\QPageLinkSettings|\LinkBundleLinkSettings
 		 */
 		public $extendedProperties;
 		/**
@@ -149,13 +149,8 @@
 			$this->isLineBreak = $this->originalFormat == 'line break' || ($this->type == 6 && isset($this->lineBreakProperties));
 			$this->isAppLink = $this->type == 15;
 
-			$this->isDirectUrl =
-				($this->type == 8 ||
-					$this->type == 10 ||
-					$this->type == 12 ||
-					$this->type == 17 ||
-					$this->type == 18) &&
-				$this->extendedProperties->forcePreview;
+			$this->isDirectUrl = self::isHyperlink($this->type, $this->extendedProperties);
+
 			$this->isExternalUrl = false;
 			if ($this->isDirectUrl)
 			{
@@ -233,11 +228,11 @@
 						case 'quicksite':
 						case 'html5':
 						case 'app':
-						case 'internal':
 						case 'internal library':
 						case 'internal page':
 						case 'internal window':
 						case 'internal link':
+						case 'internal shortcut':
 							$fileName = 'url.png';
 							break;
 						case 'mp3':
@@ -445,5 +440,37 @@
 		public static function libraryChildLinkComparer($x, $y)
 		{
 			return strnatcasecmp($x->name, $y->name);
+		}
+
+		/**
+		 * @param $type int
+		 * @param $extendedProperties \BaseLinkSettings
+		 * @return boolean
+		 */
+		public static function isHyperlink($type, $extendedProperties)
+		{
+			switch ($type)
+			{
+				case 8:
+				case 10:
+				case 12:
+				case 17:
+				case 18:
+					/** @var \VideoLinkSettings|\DocumentLinkSettings|\HyperLinkSettings $urlLinkSettings */
+					$urlLinkSettings = $extendedProperties;
+					return $urlLinkSettings->forcePreview;
+				case 16:
+					/** @var \InternalLibraryFolderLinkSettings|\InternalLibraryObjectLinkSettings|\InternalLibraryPageLinkSettings|\InternalShortcutLinkSettings|\InternalWallbinLinkSettings $internalLinkSettings */
+					$internalLinkSettings = $extendedProperties;
+					if ($internalLinkSettings->internalLinkType == 5)
+					{
+						/** @var \InternalShortcutLinkSettings $shortcutLinkSettings */
+						$shortcutLinkSettings = $internalLinkSettings;
+						return !$shortcutLinkSettings->openOnSamePage;
+					}
+					return false;
+				default:
+					return false;
+			}
 		}
 	}

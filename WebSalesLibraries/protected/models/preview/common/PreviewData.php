@@ -159,11 +159,11 @@
 				case 'app':
 					$previewData = new AppLinkPreviewData($link);
 					break;
-				case 'internal':
 				case 'internal library':
 				case 'internal page':
 				case 'internal window':
 				case 'internal link':
+				case 'internal shortcut':
 					$previewData = new InternalLinkPreviewData($link);
 					break;
 				case 'folder':

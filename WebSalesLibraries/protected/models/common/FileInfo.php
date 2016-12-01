@@ -20,17 +20,23 @@
 		 */
 		public static function fromLinkRecord($linkRecord, $parentLibrary)
 		{
-			return self::fromLinkData($linkRecord->type, $linkRecord->name, $linkRecord->file_relative_path, $parentLibrary);
+			return self::fromLinkData(
+				$linkRecord->type,
+				$linkRecord->name,
+				$linkRecord->file_relative_path,
+				BaseLinkSettings::createByLink($linkRecord),
+				$parentLibrary);
 		}
 
 		/**
 		 * @param int $type
 		 * @param string $name
 		 * @param string $relativePath
+		 * @param BaseLinkSettings $extendedProperties
 		 * @param Library $parentLibrary
 		 * @return FileInfo
 		 */
-		public static function fromLinkData($type, $name, $relativePath, $parentLibrary)
+		public static function fromLinkData($type, $name, $relativePath, $extendedProperties, $parentLibrary)
 		{
 			$fileInfo = new FileInfo();
 			$fileInfo->isFile = false;
@@ -41,7 +47,6 @@
 					$fileInfo->path = str_replace('//', DIRECTORY_SEPARATOR, str_replace('\\', DIRECTORY_SEPARATOR, $parentLibrary->storagePath . $relativePath));
 					break;
 				case 6:
-				case 16:
 					break;
 				case 8:
 				case 17:
@@ -56,6 +61,17 @@
 				case 14:
 					$fileInfo->name = $name;
 					$fileInfo->link = str_replace('\\', '', $relativePath);
+					break;
+				case 16:
+					$fileInfo->name = $name;
+					/** @var InternalLibraryFolderLinkSettings|InternalLibraryObjectLinkSettings|InternalLibraryPageLinkSettings|InternalShortcutLinkSettings|InternalWallbinLinkSettings $internalLinkSettings */
+					$internalLinkSettings = $extendedProperties;
+					if ($internalLinkSettings->internalLinkType == 5)
+					{
+						/** @var InternalShortcutLinkSettings */
+						$shortcutLinkSettings = $internalLinkSettings;
+						$fileInfo->link = PageContentShortcut::createShortcutUrl($shortcutLinkSettings->shortcutId, $shortcutLinkSettings->openOnSamePage);
+					}
 					break;
 				default:
 					$fileInfo->path = str_replace('//', DIRECTORY_SEPARATOR, str_replace('\\', DIRECTORY_SEPARATOR, $parentLibrary->storagePath . $relativePath));

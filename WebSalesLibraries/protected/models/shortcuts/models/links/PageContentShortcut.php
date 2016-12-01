@@ -53,10 +53,7 @@
 		 */
 		public function getSourceLink()
 		{
-			if ($this->samePage)
-				return Yii::app()->createAbsoluteUrl('shortcuts/getSamePage');
-			else
-				return Yii::app()->createAbsoluteUrl('shortcuts/getSinglePage', array('linkId' => $this->id));
+			return self::createShortcutUrl($this->id, $this->samePage);
 		}
 
 		/**
@@ -93,5 +90,18 @@
 			if ($this->showNavigationPanel)
 				return ShortcutsManager::getNavigationPanel($this->navigationPanelId);
 			return null;
+		}
+
+		/**
+		 * @var $linkId string
+		 * @param $samePage boolean
+		 * @return string
+		 */
+		public static function createShortcutUrl($linkId, $samePage)
+		{
+			if ($samePage)
+				return Yii::app()->createAbsoluteUrl('shortcuts/getSamePage');
+			else
+				return Yii::app()->createAbsoluteUrl('shortcuts/getSinglePage', array('linkId' => $linkId));
 		}
 	}

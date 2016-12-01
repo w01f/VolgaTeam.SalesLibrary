@@ -1,5 +1,6 @@
 <?
 	namespace application\models\wallbin\models\web;
+
 	use application\models\wallbin\models\web\style\WallbinPageStyle;
 
 	/**
@@ -150,10 +151,10 @@
 			$cachedPage = \phpQuery::newDocument($cachedPageContent);
 			$linkTags = $cachedPage['.link-container.restricted'];
 
-			$isAdmin = \UserIdentity::isUserAdmin();
-			$userId = \UserIdentity::getCurrentUserId();
-			if (!$isAdmin)
+			$useFilterByUser = \UserIdentity::isUserAuthorized() && !\UserIdentity::isUserAdmin();
+			if ($useFilterByUser)
 			{
+				$userId = \UserIdentity::getCurrentUserId();
 				foreach ($linkTags as $linkTag)
 				{
 					$linkId = str_replace('link', '', pq($linkTag)->attr('id'));

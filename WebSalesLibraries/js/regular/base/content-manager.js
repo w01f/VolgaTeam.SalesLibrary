@@ -73,7 +73,7 @@
 			content.css({
 				'max-width': 'none',
 				'width': '100%',
-				'height': height + 'px',
+				'height': height + 'px'
 			});
 
 			navigationPanel.find('ul').css({

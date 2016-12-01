@@ -20,8 +20,8 @@
 
 		public function load()
 		{
-			$isAdmin = \UserIdentity::isUserAdmin();
-			if (!$isAdmin)
+			$useLibraryByUserFilter = \UserIdentity::isUserAuthorized() && !\UserIdentity::isUserAdmin();
+			if ($useLibraryByUserFilter)
 			{
 				$userId = \UserIdentity::getCurrentUserId();
 				$availablePageIds = \UserLibraryRecord::getPageIdsByUserAngHisGroups($userId);
@@ -34,7 +34,7 @@
 			{
 				$page = new LibraryPage($this);
 				$page->load($pageRecord);
-				if (in_array($page->id, $availablePageIds) || $isAdmin)
+				if (!$useLibraryByUserFilter || in_array($page->id, $availablePageIds))
 					$this->pages[] = $page;
 			}
 			usort($this->pages, "application\\models\\wallbin\\models\\web\\LibraryPage::libraryPageComparer");

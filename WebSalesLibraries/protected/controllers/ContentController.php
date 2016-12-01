@@ -38,6 +38,7 @@
 						'InternalLibraryPageLinkSettings' => 'InternalLibraryPageLinkSettings',
 						'InternalLibraryFolderLinkSettings' => 'InternalLibraryFolderLinkSettings',
 						'InternalLibraryObjectLinkSettings' => 'InternalLibraryObjectLinkSettings',
+						'InternalShortcutLinkSettings' => 'InternalShortcutLinkSettings',
 						'ExcelLinkSettings' => 'ExcelLinkSettings',
 						'QPageLinkSettings' => 'QPageLinkSettings',
 						'LinkBundleLinkSettings' => 'LinkBundleLinkSettings',
@@ -147,6 +148,15 @@
 		 * @soap
 		 */
 		public function mockInternalLibraryObjectLinkSettings($settings)
+		{
+
+		}
+
+		/**
+		 * @param InternalShortcutLinkSettings $settings
+		 * @soap
+		 */
+		public function mockInternalShortcutLinkSettings($settings)
 		{
 
 		}

@@ -52,6 +52,6 @@
 		 */
 		public function getSourceLink()
 		{
-			return $this->isPhone ? parent::getSourceLink() : $this->sourceLink;
+			return $this->sourceLink;
 		}
 	}

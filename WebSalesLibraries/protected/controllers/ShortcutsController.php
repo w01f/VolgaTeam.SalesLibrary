@@ -213,7 +213,7 @@
 					'';
 
 				$navigationPanel = '';
-				if ($shortcut instanceof PageContentShortcut)
+				if (!$this->isPhone && $shortcut instanceof PageContentShortcut)
 				{
 					/** @var PageContentShortcut $shortcut */
 					$navigationPanel = $shortcut->getNavigationPanel();

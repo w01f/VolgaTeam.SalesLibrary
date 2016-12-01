@@ -10,11 +10,7 @@
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/regular/qpage/page-content.css?' . Yii::app()->params['version']);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/qpage/qpage-controller.js?' . Yii::app()->params['version'], CClientScript::POS_END);
 	$authorized = UserIdentity::isUserAuthorized();
-?>
-<script type="text/javascript">
-	window.BaseUrl = '<?php echo Yii::app()->getBaseUrl(true); ?>' + '/qpage/';
-</script>
-<?
+
 	if ($page->is_email)
 		$headerText = trim(strip_tags($page->subtitle));
 	else

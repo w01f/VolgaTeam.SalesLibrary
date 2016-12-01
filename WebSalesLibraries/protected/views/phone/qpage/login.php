@@ -8,9 +8,6 @@
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/mobile/js/jquery.mobile.js?' . Yii::app()->params['version'], CClientScript::POS_END);
 	$this->pageTitle = Yii::app()->name . ' - Login';
 ?>
-<script type="text/javascript">
-	window.BaseUrl = '<?php echo Yii::app()->getBaseUrl(true); ?>' + '/qpage/';
-</script>
 <div data-role="page" id="main" data-cache="never" data-dom-cache="false" data-ajax="false">
 	<div data-role="content" class="login-content">
 		<?

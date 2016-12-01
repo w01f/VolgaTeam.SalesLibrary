@@ -19,8 +19,8 @@
 				if (isset(\Yii::app()->session['libraries']))
 					$libraries = \Yii::app()->session['libraries'];
 			}
-			$isAdmin = \UserIdentity::isUserAdmin();
-			if (!$isAdmin)
+			$useLibraryByUserFilter = \UserIdentity::isUserAuthorized() && !\UserIdentity::isUserAdmin();
+			if ($useLibraryByUserFilter)
 			{
 				$userId = \UserIdentity::getCurrentUserId();
 				$availableLibraryIds = \UserLibraryRecord::getLibraryIdsByUserAngHisGroups($userId);
@@ -76,7 +76,7 @@
 								$libraryRecord = \LibraryRecord::model()->findByPk($libraryId);
 								if (isset($libraryRecord))
 								{
-									if (in_array($libraryId, $availableLibraryIds) || $isAdmin)
+									if (!$useLibraryByUserFilter || in_array($libraryId, $availableLibraryIds))
 									{
 										//$library = Yii::app()->cacheDB->get($libraryId);
 										//if (!isset($library))
@@ -125,8 +125,8 @@
 		public function getLibraryGroups()
 		{
 			$libraryGroups = array();
-			$isAdmin = \UserIdentity::isUserAdmin();
-			if (!$isAdmin)
+			$useLibraryByUserFilter = \UserIdentity::isUserAuthorized() && !\UserIdentity::isUserAdmin();
+			if ($useLibraryByUserFilter)
 			{
 				$userId = \UserIdentity::getCurrentUserId();
 				$availableLibraryIds = \UserLibraryRecord::getLibraryIdsByUserAngHisGroups($userId);
@@ -149,7 +149,7 @@
 					{
 						foreach ($libraryRecords as $libraryRecord)
 						{
-							if ((isset($availableLibraryIds) && in_array($libraryRecord->id, $availableLibraryIds)) || (!isset($userId) || (isset($isAdmin) && $isAdmin)))
+							if (!$useLibraryByUserFilter && in_array($libraryRecord->id, $availableLibraryIds))
 							{
 								$library = new Library();
 								$library->id = $libraryRecord->id;
@@ -178,7 +178,7 @@
 				{
 					foreach ($libraryRecords as $libraryRecord)
 					{
-						if (in_array($libraryRecord->id, $availableLibraryIds) || $isAdmin)
+						if (in_array($libraryRecord->id, $availableLibraryIds) || $useLibraryByUserFilter)
 						{
 							$library = new Library();
 							$library->id = $libraryRecord->id;

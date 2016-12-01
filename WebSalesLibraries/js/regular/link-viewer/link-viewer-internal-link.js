@@ -83,6 +83,15 @@
 						modalDialog.show();
 					}
 					break;
+				case 5:
+					var data = $(parameters.content);
+					var activityData = $.parseJSON(data.find('.activity-data').text());
+					$.SalesPortal.ShortcutsManager.trackActivity(activityData);
+
+					var hasCustomHandler = data.find('.has-custom-handler').length > 0;
+					if (hasCustomHandler == true)
+						$.SalesPortal.ShortcutsManager.openShortcutByMenuItemData(data, {pushHistory: true});
+					break;
 			}
 		};
 	};

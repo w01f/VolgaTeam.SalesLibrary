@@ -63,6 +63,7 @@
 						'internal page' => 'Page Link',
 						'internal window' => 'Window Link',
 						'internal link' => 'Link',
+						'internal shortcut' => 'Shortcut',
 						'app' => 'App Link',
 						'link bundle' => 'Link Bundle',
 						//Additional file formats

@@ -83,18 +83,17 @@
 							break;
 					}
 
-					$extendedProperties = CJSON::decode($linkRecord['extended_properties'], true);
-					$record['extended_properties'] = $extendedProperties;
+					$extendedProperties = BaseLinkSettings::createByContent($linkRecord['extended_properties']);
+					$record['extended_properties'] = CJSON::decode($linkRecord['extended_properties'], true);
 
-					$record['isHyperlink'] =
-						($type == 8 ||
-							$type == 10 ||
-							$type == 12 ||
-							$type == 17 ||
-							$type == 18) &&
-						$extendedProperties['forcePreview'] == true;
+					$record['isHyperlink'] = \application\models\wallbin\models\web\LibraryLink::isHyperlink($type, $extendedProperties);
 
-					$fileInfo = FileInfo::fromLinkData($type, $linkRecord['name'], $linkRecord['path'], $library);
+					$fileInfo = FileInfo::fromLinkData(
+						$type,
+						$linkRecord['name'],
+						$linkRecord['path'],
+						BaseLinkSettings::createByContent($linkRecord['extended_properties']),
+						$library);
 					$record['isDraggable'] = $fileInfo->isFile || in_array($linkRecord['format'], array('url', 'quicksite', 'youtube'));
 
 					if ($record['isHyperlink'])

@@ -230,10 +230,10 @@
 		 */
 		public static function applyPermissionsFilter($links)
 		{
-			$isAdmin = UserIdentity::isUserAdmin();
-			$userId = UserIdentity::getCurrentUserId();
-			if (!$isAdmin)
+			$useFilterByUser = \UserIdentity::isUserAuthorized() && !\UserIdentity::isUserAdmin();
+			if ($useFilterByUser)
 			{
+				$userId = UserIdentity::getCurrentUserId();
 				$filteredLinks = array();
 				$whiteList = LinkWhiteListRecord::getWhiteListLinkIds();
 				foreach ($links as $link)
@@ -354,11 +354,11 @@
 						case 'youtube':
 						case 'quicksite':
 						case 'app':
-						case 'internal':
 						case 'internal library':
 						case 'internal page':
 						case 'internal window':
 						case 'internal link':
+						case 'internal shortcut':
 						case 'lan':
 						case 'html5':
 							$link['file_type'] = base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'search-url.png'));

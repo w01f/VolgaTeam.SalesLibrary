@@ -20,7 +20,7 @@
 			$this->viewerFormat = 'internal';
 			$this->fileName = $link->fileName;
 
-			/** @var  $linkSettings InternalWallbinLinkSettings|InternalLibraryPageLinkSettings|InternalLibraryFolderLinkSettings|InternalLibraryObjectLinkSettings */
+			/** @var  $linkSettings InternalWallbinLinkSettings|InternalLibraryPageLinkSettings|InternalLibraryFolderLinkSettings|InternalLibraryObjectLinkSettings|InternalShortcutLinkSettings */
 			$linkSettings = $link->extendedProperties;
 			switch ($linkSettings->internalLinkType)
 			{
@@ -43,6 +43,11 @@
 					/** @var  $linkSettings InternalLibraryObjectLinkSettings */
 					$this->contentView = 'internalLibraryObjectViewer';
 					$this->previewInfo = new InternalLibraryObjectPreviewInfo($linkSettings);
+					break;
+				case 5:
+					/** @var  $linkSettings InternalShortcutLinkSettings */
+					$this->contentView = 'internalShortcutViewer';
+					$this->previewInfo = new InternalShortcutPreviewInfo($linkSettings);
 					break;
 			}
 		}
