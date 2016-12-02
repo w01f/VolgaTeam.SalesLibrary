@@ -101,19 +101,21 @@
 								'<div class="search-conditions" style="display: none;"><div class="encoded-object">' + $.toJSON(searchBarOptions) + '</div></div>' +
 								'<div class="search-view-options" style="display: none;"><div class="encoded-object">' + $.toJSON(searchViewOptions) + '</div></div>' +
 								'</div>');
-							$.SalesPortal.ShortcutsSearchLink(
-								options,
-								parentShortcutData.linkId,
-								function ()
+							$.SalesPortal.ShortcutsSearchLink({
+								optionsContainer: options,
+								options: {
+									linkId: parentShortcutData.linkId
+								},
+								backHandler: function ()
 								{
 									location.reload();
 								}
-							).runSearch(function (data)
+							}).runSearch(function (data)
 							{
 								if (data.dataset.length == 0)
 								{
 									var modalDialog = new $.SalesPortal.ModalDialog({
-										title: '<span><img src="images/shortcuts/search-bar/search-bar-no-results-warning.png"></span>' +
+										title: '<span><img src="/images/shortcuts/search-bar/search-bar-no-results-warning.png"></span>' +
 										'<span style="margin-left: 20px">Search: “<b>' + searchBarConditions.get('text') + '</b>”</span>',
 										description: 'Sorry, but there are no files on the site with this specific word or phrase.<br><br>' +
 										'You might want to try a simpler, more general keyword search.<br><br>' +
@@ -486,18 +488,28 @@
 
 		var updateSize = function ()
 		{
-			if (parameters.sizeChangedCallback != undefined)
-				parameters.sizeChangedCallback();
+			parameters.sizeChangedCallback();
 		};
 
 		if (searchBar.length > 0)
 		{
+			if (parameters == undefined)
+				parameters = {
+					shortcutData: undefined,
+					sizeChangedCallback: undefined
+				};
+			parameters.shortcutData = parameters.shortcutData != undefined ? parameters.shortcutData : null;
+			parameters.sizeChangedCallback = parameters.sizeChangedCallback != undefined ? parameters.sizeChangedCallback : function ()
+			{
+			};
+
 			var parentShortcutData = parameters.shortcutData;
 			var searchBarOptions = new $.SalesPortal.SearchOptions($.parseJSON(searchBar.find('.search-conditions .encoded-object').text()));
 			var searchViewOptions = new $.SalesPortal.SearchViewOptions($.parseJSON(searchBar.find('.search-view-options .encoded-object').text()));
 			var searchBarConditions = new $.SalesPortal.SearchConditions(function ()
 			{
 			});
+
 			setDefaultSettings();
 		}
 		init();

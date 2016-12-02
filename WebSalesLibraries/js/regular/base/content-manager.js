@@ -19,7 +19,8 @@
 					headerOptions: undefined,
 					actions: undefined,
 					navigationPanel: undefined,
-					loadCallback: undefined
+					loadCallback: undefined,
+					resizeCallback: undefined
 				};
 			parameters.content = parameters.content != undefined ? parameters.content : '';
 			parameters.headerOptions = parameters.headerOptions != undefined ? parameters.headerOptions : undefined;
@@ -28,10 +29,17 @@
 			parameters.loadCallback = parameters.loadCallback != undefined ? parameters.loadCallback : function ()
 			{
 			};
+			parameters.resizeCallback = parameters.resizeCallback != undefined ? parameters.resizeCallback : function ()
+			{
+			};
 
 			initHeader(parameters.headerOptions);
 			initShortcutActions(parameters.actions);
-			initNavigationPanel(parameters.navigationPanel);
+
+			new $.SalesPortal.ShortcutsNavigationPanel({
+				content: parameters.navigationPanel,
+				sizeChangedCallback: parameters.resizeCallback
+			});
 
 			var contentObject = that.getContentObject();
 			contentObject.html(parameters.content);
@@ -65,7 +73,6 @@
 			});
 
 			var content = that.getContentObject();
-			var navigationPanel = that.getNavigationPanel();
 
 			var menu = $('#main-menu');
 			var height = $(window).height() - menu.outerHeight(true) - menu.offset().top;
@@ -73,10 +80,6 @@
 			content.css({
 				'max-width': 'none',
 				'width': '100%',
-				'height': height + 'px'
-			});
-
-			navigationPanel.find('ul').css({
 				'height': height + 'px'
 			});
 		};
@@ -152,19 +155,6 @@
 					}
 				}
 			});
-		};
-
-		var initNavigationPanel = function (navigationPanelContent)
-		{
-			var navigationPanelObject = that.getNavigationPanel();
-			navigationPanelObject.html(navigationPanelContent);
-			if (navigationPanelContent == '')
-				navigationPanelObject.hide();
-			else
-			{
-				navigationPanelObject.show();
-				$.SalesPortal.ShortcutsManager.assignShortcutItemHandlers(navigationPanelObject);
-			}
 		};
 	};
 	$.SalesPortal.Content = new ContentManager();

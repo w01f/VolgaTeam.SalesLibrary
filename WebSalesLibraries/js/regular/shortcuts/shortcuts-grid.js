@@ -10,13 +10,24 @@
 		{
 			gridData = data;
 
+			$.SalesPortal.Content.fillContent({
+				content: gridData.content,
+				headerOptions: {
+					title: gridData.options.headerTitle,
+					icon: gridData.options.headerIcon
+				},
+				actions: gridData.actions,
+				navigationPanel: gridData.navigationPanel,
+				resizeCallback: updateContentSize
+			});
+
 			new $.SalesPortal.ShortcutsSearchBar({
-				shortcutData: gridData
+				shortcutData: gridData.options
 			});
 
 			var pageContent = $.SalesPortal.Content.getContentObject();
 			var grid = pageContent.find('.shortcuts-links-grid');
-			grid.cubeportfolio(gridData.displayParameters);
+			grid.cubeportfolio(gridData.options.displayParameters);
 
 			$.SalesPortal.ShortcutsManager.assignShortcutItemHandlers(grid);
 
@@ -35,7 +46,7 @@
 			shortcutActionsContainer.find('.carousel').off('click.action').on('click.action', function ()
 			{
 				$.SalesPortal.ShortcutsManager.openShortcutByMenuItemData(
-					$('<div>' + gridData.serviceData + '</div>'),
+					$('<div>' + gridData.options.serviceData + '</div>'),
 					{
 						pageViewType: 'carouselbundle'
 					}

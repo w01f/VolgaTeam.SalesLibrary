@@ -17,7 +17,8 @@
 					icon: libraryData.options.headerIcon
 				},
 				actions: libraryData.actions,
-				navigationPanel: libraryData.navigationPanel
+				navigationPanel: libraryData.navigationPanel,
+				resizeCallback: updateContentSize
 			});
 			initLibraryHeader();
 			$.SalesPortal.Content.getContentObject().find('.page-container').show();

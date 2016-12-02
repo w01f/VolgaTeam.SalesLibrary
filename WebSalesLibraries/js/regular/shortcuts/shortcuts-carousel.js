@@ -12,13 +12,24 @@
 		{
 			carouselData = data;
 
+			$.SalesPortal.Content.fillContent({
+				content: carouselData.content,
+				headerOptions: {
+					title: carouselData.options.headerTitle,
+					icon: carouselData.options.headerIcon
+				},
+				actions: carouselData.actions,
+				navigationPanel: carouselData.navigationPanel,
+				resizeCallback: updateContentSize
+			});
+
 			new $.SalesPortal.ShortcutsSearchBar({
-				shortcutData: carouselData
+				shortcutData: carouselData.options
 			});
 
 			FWDU3DCarUtils.checkIfHasTransforms();
-			carousel = new FWDUltimate3DCarousel(carouselData.displayParameters);
-			carouselData.displayParameters.predefinedDataList.forEach(function (category)
+			carousel = new FWDUltimate3DCarousel(carouselData.options.displayParameters);
+			carouselData.options.displayParameters.predefinedDataList.forEach(function (category)
 			{
 				category.dataItems.forEach(function (dataItem)
 				{
@@ -46,7 +57,7 @@
 
 				if (!justLoaded)
 				{
-					var shortcutData = $('<div>' + carouselData.serviceData + '</div>');
+					var shortcutData = $('<div>' + carouselData.options.serviceData + '</div>');
 					$.SalesPortal.ShortcutsHistory.pushState(
 						shortcutData,
 						{
@@ -62,7 +73,7 @@
 					type: 'Navigation',
 					subType: 'Carousel Group Select',
 					data: {
-						file: carouselData.displayParameters.predefinedDataList[ev.id].name
+						file: carouselData.options.displayParameters.predefinedDataList[ev.id].name
 					}
 				});
 			});
@@ -82,7 +93,7 @@
 			shortcutActionsContainer.find('.grid').off('click.action').on('click.action', function ()
 			{
 				$.SalesPortal.ShortcutsManager.openShortcutByMenuItemData(
-					$('<div>' + carouselData.serviceData + '</div>'),
+					$('<div>' + carouselData.options.serviceData + '</div>'),
 					{
 						pageViewType: 'gridbundle'
 					}

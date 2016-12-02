@@ -183,42 +183,15 @@
 			switch (result.options.shortcutType)
 			{
 				case 'gridbundle':
-					$.SalesPortal.Content.fillContent({
-						content: result.content,
-						headerOptions: {
-							title: result.options.headerTitle,
-							icon: result.options.headerIcon
-						},
-						actions: result.actions,
-						navigationPanel: result.navigationPanel
-					});
-					new $.SalesPortal.ShortcutsGrid().init(result.options);
+					new $.SalesPortal.ShortcutsGrid().init(result);
 					updatedAllContentNecessary = true;
 					break;
 				case 'carouselbundle':
-					$.SalesPortal.Content.fillContent({
-						content: result.content,
-						headerOptions: {
-							title: result.options.headerTitle,
-							icon: result.options.headerIcon
-						},
-						actions: result.actions,
-						navigationPanel: result.navigationPanel
-					});
-					new $.SalesPortal.ShortcutsCarousel().init(result.options);
+					new $.SalesPortal.ShortcutsCarousel().init(result);
 					updatedAllContentNecessary = true;
 					break;
 				case 'search':
-					$.SalesPortal.Content.fillContent({
-						content: result.content,
-						headerOptions: {
-							title: result.options.headerTitle,
-							icon: result.options.headerIcon
-						},
-						actions: result.actions,
-						navigationPanel: result.navigationPanel
-					});
-					$.SalesPortal.ShortcutsSearchLink($.SalesPortal.Content.getContentObject(), result.options.linkId).runSearch();
+					$.SalesPortal.ShortcutsSearchLink(result).runSearch();
 					break;
 				case 'window':
 					new $.SalesPortal.ShortcutsLibraryWindow().init(result);

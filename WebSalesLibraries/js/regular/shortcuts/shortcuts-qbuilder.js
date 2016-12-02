@@ -20,7 +20,8 @@
 					icon: qBuilderData.options.headerIcon
 				},
 				actions: qBuilderData.actions,
-				navigationPanel: qBuilderData.navigationPanel
+				navigationPanel: qBuilderData.navigationPanel,
+				resizeCallback: updateContentSize
 			});
 
 			servicePanel = $('#service-panel');

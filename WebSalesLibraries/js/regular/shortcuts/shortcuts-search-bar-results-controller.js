@@ -26,7 +26,12 @@
 					'<div class="search-conditions" style="display: none;"><div class="encoded-object">' + $.toJSON(searchBarOptions) + '</div></div>' +
 					'<div class="search-view-options" style="display: none;"><div class="encoded-object">' + $.toJSON(searchViewOptions) + '</div></div>' +
 					'</div>');
-				$.SalesPortal.ShortcutsSearchLink(options, objectId).runSearch();
+				$.SalesPortal.ShortcutsSearchLink({
+					optionsContainer: options,
+					options: {
+						linkId: objectId
+					}
+				}).runSearch();
 			}
 		}
 	});

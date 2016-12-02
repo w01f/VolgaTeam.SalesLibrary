@@ -33,7 +33,8 @@
 					icon: favoritesData.options.headerIcon
 				},
 				actions: favoritesData.actions,
-				navigationPanel: favoritesData.navigationPanel
+				navigationPanel: favoritesData.navigationPanel,
+				resizeCallback: updateContentSize
 			});
 
 			loadFolders(favoritesData.options.selectedFolderId);
@@ -206,7 +207,10 @@
 									headerOptions: {
 										title: 'Favorite Links',
 										icon: 'icon-favorite'
-									}
+									},
+									actions: favoritesData.actions,
+									navigationPanel: favoritesData.navigationPanel,
+									resizeCallback: updateContentSize
 								});
 								loadFolders(folderId);
 							},

@@ -2,10 +2,27 @@
 {
 	window.BaseUrl = window.BaseUrl || '';
 	$.SalesPortal = $.SalesPortal || {};
-	$.SalesPortal.ShortcutsSearchLink = function (optionsContainer, objectId, backHandler)
+	$.SalesPortal.ShortcutsSearchLink = function (data)
 	{
 		var that = this;
 
+		var parentSearchData = data;
+
+		if (parentSearchData.content != undefined)
+		{
+			$.SalesPortal.Content.fillContent({
+				content: parentSearchData.content,
+				headerOptions: {
+					title: parentSearchData.options.headerTitle,
+					icon: parentSearchData.options.headerIcon
+				},
+				actions: parentSearchData.actions,
+				navigationPanel: parentSearchData.navigationPanel,
+				resizeCallback: updateContentSize
+			});
+		}
+
+		var optionsContainer = data.optionsContainer != undefined ? data.optionsContainer : $.SalesPortal.Content.getContentObject();
 		var searchShortcutOptions = new $.SalesPortal.SearchOptions($.parseJSON(optionsContainer.find('.search-conditions .encoded-object').text()));
 		var searchViewOptions = new $.SalesPortal.SearchViewOptions($.parseJSON(optionsContainer.find('.search-view-options .encoded-object').text()));
 		var content = $.SalesPortal.Content.getContentObject();
@@ -15,7 +32,7 @@
 		var dataTable = new $.SalesPortal.SearchDataTable(
 			{
 				saveState: false,
-				backHandler: backHandler,
+				backHandler: parentSearchData.backHandler,
 				logHandler: function ()
 				{
 					$.SalesPortal.ShortcutsManager.trackActivity(
@@ -370,8 +387,8 @@
 				type: "POST",
 				url: window.BaseUrl + "shortcuts/getSubSearchCustomPanel",
 				data: {
-					bundleId: searchShortcutOptions.isSearchBar ? objectId : undefined,
-					linkId: searchShortcutOptions.isSearchBar ? undefined : objectId
+					bundleId: searchShortcutOptions.isSearchBar ? parentSearchData.options.linkId : undefined,
+					linkId: searchShortcutOptions.isSearchBar ? undefined : parentSearchData.options.linkId
 				},
 				beforeSend: function ()
 				{
@@ -484,8 +501,8 @@
 				type: "POST",
 				url: window.BaseUrl + "shortcuts/getSubSearchTemplatesPanel",
 				data: {
-					bundleId: searchShortcutOptions.isSearchBar ? objectId : undefined,
-					linkId: searchShortcutOptions.isSearchBar ? undefined : objectId
+					bundleId: searchShortcutOptions.isSearchBar ? parentSearchData.options.linkId : undefined,
+					linkId: searchShortcutOptions.isSearchBar ? undefined : parentSearchData.options.linkId
 				},
 				beforeSend: function ()
 				{

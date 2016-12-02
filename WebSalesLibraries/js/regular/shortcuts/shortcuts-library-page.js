@@ -36,7 +36,8 @@
 					});
 
 					updateContentSize();
-				}
+				},
+				resizeCallback: updateContentSize
 			});
 			initActionButtons();
 			$(window).off('resize.library-page').on('resize.library-page', updateContentSize);

@@ -17,7 +17,8 @@
 					icon: quizzesData.options.headerIcon
 				},
 				actions: quizzesData.actions,
-				navigationPanel: quizzesData.navigationPanel
+				navigationPanel: quizzesData.navigationPanel,
+				resizeCallback: updateContentSize
 			});
 
 			$.SalesPortal.QuizManager.loadItems();

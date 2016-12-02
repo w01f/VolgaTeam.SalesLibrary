@@ -17,7 +17,8 @@
 					icon: libraryWindowData.options.headerIcon
 				},
 				actions: libraryWindowData.actions,
-				navigationPanel: libraryWindowData.navigationPanel
+				navigationPanel: libraryWindowData.navigationPanel,
+				resizeCallback: updateContentSize
 			});
 			switch (libraryWindowData.options.windowViewType)
 			{

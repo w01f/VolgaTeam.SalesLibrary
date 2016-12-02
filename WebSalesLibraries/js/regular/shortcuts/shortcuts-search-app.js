@@ -41,7 +41,8 @@
 					icon: appData.options.headerIcon
 				},
 				actions: appData.actions,
-				navigationPanel: appData.navigationPanel
+				navigationPanel: appData.navigationPanel,
+				resizeCallback: updateContentSize
 			});
 
 			initActionButtons();

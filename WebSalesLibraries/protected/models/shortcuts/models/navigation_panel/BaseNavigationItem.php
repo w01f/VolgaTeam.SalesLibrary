@@ -8,7 +8,8 @@
 		public $type;
 		public $title;
 		public $tooltip;
-		public $iconUrl;
+		public $iconUrlExpanded;
+		public $iconUrlCollapsed;
 
 		public $contentView;
 
@@ -19,8 +20,10 @@
 		 */
 		public function __construct($xpath, $contextNode, $imagePath)
 		{
-			$queryResult = $xpath->query('Icon', $contextNode);
-			$this->iconUrl = $imagePath . '/' . ($queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : '');
+			$queryResult = $xpath->query('IconPanel', $contextNode);
+			$this->iconUrlExpanded = $imagePath . '/' . ($queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : '');
+			$queryResult = $xpath->query('IconBar', $contextNode);
+			$this->iconUrlCollapsed = $imagePath . '/' . ($queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : '');
 
 			$queryResult = $xpath->query('Text', $contextNode);
 			$this->title = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
