@@ -30,6 +30,11 @@
 		 */
 		public $order;
 		/**
+		 * @var SoapLibraryPageSettings settings
+		 * @soap
+		 */
+		public $settings;
+		/**
 		 * @var SoapLibraryFolder[]
 		 * @soap
 		 */

@@ -149,7 +149,7 @@
 			$this->isLineBreak = $this->originalFormat == 'line break' || ($this->type == 6 && isset($this->lineBreakProperties));
 			$this->isAppLink = $this->type == 15;
 
-			$this->isDirectUrl = self::isHyperlink($this->type, $this->extendedProperties);
+			$this->isDirectUrl = self::isOpenedAsHyperlink($this->type, $this->extendedProperties);
 
 			$this->isExternalUrl = false;
 			if ($this->isDirectUrl)
@@ -371,7 +371,7 @@
 
 			if (isset($this->fileLink))
 			{
-				if (in_array($this->originalFormat, array('url', 'quicksite', 'html5', 'youtube')))
+				if ($this->isDirectUrl)
 				{
 					$downloadHeader = 'URL';
 					$downloadLink = $this->fileLink;
@@ -447,16 +447,17 @@
 		 * @param $extendedProperties \BaseLinkSettings
 		 * @return boolean
 		 */
-		public static function isHyperlink($type, $extendedProperties)
+		public static function isOpenedAsHyperlink($type, $extendedProperties)
 		{
 			switch ($type)
 			{
 				case 8:
 				case 10:
 				case 12:
+				case 14:
 				case 17:
 				case 18:
-					/** @var \VideoLinkSettings|\DocumentLinkSettings|\HyperLinkSettings $urlLinkSettings */
+					/** @var \VideoLinkSettings|\VideoLinkSettings|\DocumentLinkSettings|\HyperLinkSettings $urlLinkSettings */
 					$urlLinkSettings = $extendedProperties;
 					return $urlLinkSettings->forcePreview;
 				case 16:

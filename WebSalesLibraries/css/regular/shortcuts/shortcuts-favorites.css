@@ -33,11 +33,6 @@
 	margin: 0;
 }
 
-#favorites-panel-links .link-delete-button
-{
-	height: 24px;
-}
-
 #favorites-panel-folders > div
 {
 	overflow: hidden;

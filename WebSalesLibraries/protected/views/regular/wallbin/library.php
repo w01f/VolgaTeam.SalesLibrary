@@ -93,7 +93,10 @@
 					<div class="tab-pages scroll_tabs_theme_light">
 						<? foreach ($library->pages as $page): ?>
 							<span class="page-tab-header<? echo $selectedPage->id == $page->id ? ' selected' : ''; ?>">
-					<? echo $page->name; ?>
+							<?if(isset($page->settings->icon)):?>
+								<i class="icomoon <? echo $page->settings->icon;?>" style="color: <? echo $page->settings->iconColor;?>"></i>
+							<?endif;?>
+							<? echo $page->name; ?>
 								<div class="service-data">
 									<div class="encoded-data">
 										<? echo CJSON::encode(array(

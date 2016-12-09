@@ -8,6 +8,7 @@
 		var viewOptions = undefined;
 		var dataTable = new $.SalesPortal.SearchDataTable(
 			{
+				tableContainerSelector:'#shortcuts-search-app',
 				saveState: true,
 				logHandler: function ()
 				{
@@ -640,12 +641,26 @@
 
 		var initDataTable = function ()
 		{
-			dataTable.init(existedSearchResults != undefined ? existedSearchResults.dataset : undefined, viewOptions);
+			dataTable.init({
+				dataset: existedSearchResults != undefined ? existedSearchResults.dataset : undefined,
+				dataOptions: viewOptions
+			});
 		};
 
 		var updateContentSize = function ()
 		{
 			$.SalesPortal.Content.updateSize();
+
+			var content = $.SalesPortal.Content.getContentObject();
+			var navigationPanel = $.SalesPortal.Content.getNavigationPanel();
+
+			var width = $(window).width() - navigationPanel.outerWidth(true);
+
+			content.css({
+				'max-width': width + 'px',
+				'width': width + 'px'
+			});
+
 			dataTable.updateSize();
 		};
 	};

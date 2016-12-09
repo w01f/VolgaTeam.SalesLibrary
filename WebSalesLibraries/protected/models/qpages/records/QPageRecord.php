@@ -111,18 +111,27 @@
 		}
 
 		/**
-		 * @return array|null
+		 * @return array
 		 */
 		public function getPageLinks()
 		{
-			$linkRecords = Yii::app()->db->createCommand()
-				->select("concat('id',qpl.id,'---link',l.id) as id, l.id_library, l.name, l.file_name, l.original_format as format, l.type")
-				->from('tbl_link l')
-				->join('tbl_qpage_link qpl', 'qpl.id_link = l.id')
-				->where("qpl.id_page='" . $this->id . "'")
-				->order('qpl.list_order, l.name')
-				->queryAll();
-			return LinkRecord::getLinksGrid($linkRecords);
+			/** @var CDbCommand $dbCommand */
+			$dbCommand = DataTableHelper::buildQuery(
+				'tbl_qpage_link qpl',
+				array(
+					'linkInPageId' => 'qpl.id as linkInPageId',
+					'listOrder' => 'qpl.list_order as listOrder'
+				),
+				array('tbl_link link' => 'qpl.id_link=link.id'),
+				array(
+					sprintf("qpl.id_page='%s'", $this->id)
+				),
+				null,
+				array('qpl.id'));
+			$dbCommand = $dbCommand->order('qpl.list_order, link.name');
+			$linkRecords = $dbCommand->queryAll();
+			$links = DataTableHelper::formatExtendedData($linkRecords, array('linkInPageId', 'listOrder'));
+			return $links;
 		}
 
 		/**
@@ -179,11 +188,11 @@
 		 */
 		public function setLinkOrder($linkInPageId, $order)
 		{
-			$this->rebuildLinkList($order);
 			/** @var $linkInPageRecord QPageLinkRecord */
 			$linkInPageRecord = QPageLinkRecord::model()->findByPk($linkInPageId);
 			$linkInPageRecord->list_order = $order;
 			$linkInPageRecord->save();
+			$this->rebuildLinkList($order);
 		}
 
 		/**
@@ -192,13 +201,15 @@
 		public function rebuildLinkList($shiftIndex)
 		{
 			$i = 0;
-			foreach (QPageLinkRecord::model()->findAll('id_page=? order by list_order', array($this->id)) as $pageLink)
+			$linksInPage = QPageLinkRecord::model()->findAll('id_page=? order by list_order', array($this->id));
+			foreach ($linksInPage as $pageLink)
 			{
-				if ($i == $shiftIndex)
-					$i++;
-				/** @var $pageLink QPageLinkRecord */
-				$pageLink->list_order = $i;
-				$pageLink->save();
+				if ($i != $shiftIndex)
+				{
+					/** @var $pageLink QPageLinkRecord */
+					$pageLink->list_order = $i;
+					$pageLink->save();
+				}
 				$i++;
 			}
 		}

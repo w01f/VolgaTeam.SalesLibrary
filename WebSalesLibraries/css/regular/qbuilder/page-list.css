@@ -9,31 +9,100 @@
 	overflow-y: auto;
 }
 
-#page-list tr
+#page-list .grid
+{
+	padding: 0;
+	margin: 0;
+	width: 100%;
+	border-collapse: collapse;
+}
+
+#page-list .grid tr
 {
 	cursor: pointer;
 	height: 40px;
 }
 
-#page-list td
+#page-list .grid td
 {
 	cursor: pointer;
 	height: 40px;
-	border: none !important;
+	color: #222222;
+	font-size: 10pt;
+	font-family: Verdana, Arial, sans-serif;
+	font-weight: normal;
+	text-align: left;
+	vertical-align: middle !important;
+	padding: 0 !important;
+	border: none;
+	border-right: none;
 }
 
-#page-list tr.selected td.link-delete img,
-#page-list tr.selected td.link-clone img,
-#page-list tr.selected td.link-up img,
-#page-list tr.selected td.link-down img
+#page-list .grid tr.even
+{
+	background: #F8F8F8;
+}
+
+#page-list .grid tr.odd
+{
+	background: #E5F1F4;
+}
+
+#page-list .grid tr.selected
+{
+	background: #C6E2FF !important;
+}
+
+#page-list .grid tr:hover
+{
+	background: #ECFBD4;
+}
+
+#page-list .grid td.page-delete
+{
+	width: 36px;
+	cursor: pointer;
+	text-align: center;
+}
+
+#page-list .grid td.page-up
+{
+	width: 36px;
+	cursor: pointer;
+	text-align: center;
+}
+
+#page-list .grid td.page-down
+{
+	width: 36px;
+	cursor: pointer;
+	text-align: center;
+}
+
+#page-list .grid td.page-clone
+{
+	width: 36px;
+	cursor: pointer;
+	text-align: center;
+}
+
+#page-list .grid td.page-id-column
+{
+	display: none;
+}
+
+#page-list .grid tr.selected td.page-delete img,
+#page-list .grid tr.selected td.page-clone img,
+#page-list .grid tr.selected td.page-up img,
+#page-list .grid tr.selected td.page-down img
 {
 	visibility: visible;
 }
 
-#page-list tr td.link-delete img,
-#page-list tr td.link-clone img,
-#page-list tr td.link-up img,
-#page-list tr td.link-down img
+#page-list .grid tr td.page-delete img,
+#page-list .grid tr td.page-clone img,
+#page-list .grid tr td.page-up img,
+#page-list .grid tr td.page-down img
 {
 	visibility: hidden;
 }

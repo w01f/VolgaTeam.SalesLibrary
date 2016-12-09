@@ -322,7 +322,6 @@
 				$additionalCategoryCondition,
 				$additionalOnlyWithCategoriesCondition);
 
-			$dateField = 'max(link.file_date) as link_date';
 			$selectText = 'max(link.id) as id,
 							max(link.id_library) as id_library,
 							max(link.name) as name,
@@ -331,7 +330,7 @@
 							link.file_relative_path as path,
 							link.file_name as file_name,
 							link.file_extension as file_extension,
-							' . $dateField . ',
+							max(link.file_date) as link_date,
 							max(link.search_format) as format,
 							max(link.settings) as extended_properties,
 							(select (round(avg(lr.value)*2)/2) as value from tbl_link_rate lr where lr.id_link=link.id) as rate,
@@ -350,27 +349,28 @@
 				              join tbl_link_qpage l_q on l_q.id_qpage = s_q.id_qpage
 				            group by l_q.id_link
 				           ) aggr where aggr.link_id=link.id) as total_views';
-			$joinText = "glcat.id_link=link.id";
-			$whereText = $contentCondition .
-				" and (" . $baseLinksCondition .
-				") and (" . $libraryCondition .
-				") and (" . $fileTypeCondition .
-				") and (" . $dateCondition .
-				") and (" . $categoryCondition .
-				") and (" . $superFilterCondition .
-				") and (" . $onlyWithCategoriesCondition .
-				") and (" . $folderCondition .
-				") and (" . $linkCondition .
-				") and link.is_dead=0 and link.is_preview_not_ready=0 and link.type<>5 and link.type<>6" . ($includeAppLinks ? '' : ' and link.type<>15');
+
+			$whereConditions = array(
+				$contentCondition,
+				$baseLinksCondition,
+				$libraryCondition,
+				$fileTypeCondition,
+				$dateCondition,
+				$categoryCondition,
+				$superFilterCondition,
+				$onlyWithCategoriesCondition,
+				$folderCondition,
+				$linkCondition
+			);
 
 			/** @var CDbCommand $dbCommnad */
-			$dbCommnad = Yii::app()->db->createCommand();
-			$dbCommnad = $dbCommnad->select($selectText);
-			$dbCommnad = $dbCommnad->from('tbl_link link');
-			$dbCommnad = $dbCommnad->join('tbl_library lib', 'lib.id=link.id_library');
-			$dbCommnad = $dbCommnad->leftJoin("(select lcat.id_link, group_concat(lcat.tag separator ', ') as tag from tbl_link_category lcat where " . $categoryJoinCondition . " group by lcat.id_link) glcat", $joinText);
-			$dbCommnad = $dbCommnad->where($whereText);
-			$dbCommnad = $dbCommnad->group('link.id');//$dbCommnad = $dbCommnad->group('link.file_relative_path, glcat.tag');
+			$dbCommnad = DataTableHelper::buildQuery(
+				null,
+				null,
+				null,
+				$whereConditions,
+				$categoryJoinCondition,
+				null);
 			$queryRecords = $dbCommnad->queryAll();
 
 			return $queryRecords;

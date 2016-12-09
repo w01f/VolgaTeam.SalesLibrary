@@ -31,7 +31,7 @@
       $(this.itemTag, this).last().addClass('scroll_tab_last');
       $(this.itemTag, this).first().addClass('scroll_tab_first');
       
-      $(this).html("<div class='scroll_tab_left_button'></div><div class='scroll_tab_inner'><span class='scroll_tab_left_finisher'>&nbsp;</span>"+$(this).html()+"<span class='scroll_tab_right_finisher'>&nbsp;</span></div><div class='scroll_tab_right_button'></div>");
+      $(this).html("<div class='scroll_tab_left_button'><span><i class='icomoon icon-arrow-left'></i></span></div><div class='scroll_tab_inner'><span class='scroll_tab_left_finisher'>&nbsp;</span>"+$(this).html()+"<span class='scroll_tab_right_finisher'>&nbsp;</span></div><div class='scroll_tab_right_button'><span><i class='icomoon icon-arrow-right'></i></span></div>");
       
       $('.scroll_tab_inner > span.scroll_tab_left_finisher', this).css({
         'display': 'none'
@@ -43,6 +43,9 @@
       
       
       var _this = this;
+      var downTime = new Date().getTime();
+      var upTime = new Date().getTime();
+      var clickTimer = null;
       
       $('.scroll_tab_inner', this).css({
         'margin': '0px',
@@ -62,11 +65,11 @@
         $('.scroll_tab_inner', this).mousewheel(function(event, delta){
           // Only do mousewheel scrolling if scrolling is necessary
           if($('.scroll_tab_right_button', _this).css('display') !== 'none'){
-            this.scrollLeft -= (delta * 30);
+            this.scrollLeft -= (delta * (delta.deltaWheel ? 10 : 30));
             state.scrollPos = this.scrollLeft;
             event.preventDefault();
           }
-        });
+        });            
       }
       
       // Set initial scroll position
@@ -112,7 +115,7 @@
           $('.scroll_tab_inner',_this).css({left: opts.left_arrow_size + 'px', right: opts.right_arrow_size + 'px'});
           $('.scroll_tab_left_finisher',_this).css('display','none');
           $('.scroll_tab_right_finisher',_this).css('display','none');
-
+          
           if($('.scroll_tab_inner', _this)[0].scrollWidth - panel_width == $('.scroll_tab_inner', _this).scrollLeft()){
             $('.scroll_tab_right_button', _this).addClass('scroll_arrow_disabled').addClass('scroll_tab_right_button_disabled');
           } else {
@@ -213,34 +216,71 @@
         }
       }).click(function(e){
         e.stopPropagation();
-        $('.tab_selected',_this).removeClass('tab_selected scroll_tab_first_selected scroll_tab_last_selected scroll_tab_left_finisher_selected scroll_tab_right_finisher_selected');
-        $(this).addClass('tab_selected');
+        $('.scroll_tab_inner',_this).find("span").removeClass("scroll_tab_transparent");
+        /*downTime = new Date().getTime();
+        clickTimer = setTimeout(function() {
+        	$('.scroll_tab_inner',_this).find("span").addClass("scroll_tab_transparent");
+        }, 1500);*/
         
-        var context_obj = this;
-        if($(this).hasClass('scroll_tab_left_finisher')){
-          context_obj = $('.scroll_tab_inner > '+_this.itemTag+'.scroll_tab_first', _this).addClass('tab_selected').addClass('scroll_tab_first_selected');
+      }).swipe( {
+        tap:function(e, target) {
+        	$('.scroll_tab_inner',_this).find("span").removeClass("scroll_tab_transparent");
+          $('.tab_selected',_this).removeClass('tab_selected scroll_tab_first_selected scroll_tab_last_selected scroll_tab_left_finisher_selected scroll_tab_right_finisher_selected');
+	        $(this).addClass('tab_selected');
+	        
+	        var context_obj = this;
+	        if($(this).hasClass('scroll_tab_left_finisher')){
+	          context_obj = $('.scroll_tab_inner > '+_this.itemTag+'.scroll_tab_first', _this).addClass('tab_selected').addClass('scroll_tab_first_selected');
+	        }
+	        if($(this).hasClass('scroll_tab_right_finisher')){
+	          context_obj = $('.scroll_tab_inner > '+_this.itemTag+'.scroll_tab_last', _this).addClass('tab_selected').addClass('scroll_tab_last_selected');
+	        }
+	        if($(this).hasClass('scroll_tab_first') || $('.scroll_tab_inner > '+_this.itemTag+'.scroll_tab_last', _this).hasClass('scroll_tab_first')){
+	          $('.scroll_tab_inner > span.scroll_tab_left_finisher', _this).addClass('tab_selected').addClass('scroll_tab_left_finisher_selected');
+	        }
+	        if($(this).hasClass('scroll_tab_last') || $('.scroll_tab_inner > '+_this.itemTag+'.scroll_tab_first', _this).hasClass('scroll_tab_last')){
+	          $('.scroll_tab_inner > span.scroll_tab_right_finisher', _this).addClass('tab_selected').addClass('scroll_tab_left_finisher_selected');
+	        }
+	        
+	        // "Slide" it into view if not fully visible.
+	        scroll_selected_into_view.call(_this, state);
+	        
+	        opts.click_callback.call(context_obj,e);
+        }, swipeStatus:function(e, phase, direction, distance, duration, fingers, fingerData) {
+        	 if(phase==$.fn.swipe.phases.PHASE_START) {
+	          $('.scroll_tab_inner',_this).find("span").addClass("scroll_tab_transparent");
+	        } 
+	        if(phase==$.fn.swipe.phases.PHASE_END || phase==$.fn.swipe.phases.PHASE_CANCEL) {
+	          $('.scroll_tab_inner',_this).find("span").removeClass("scroll_tab_transparent");
+	          console.log("cancel");
+	        } 	        
+        	
         }
-        if($(this).hasClass('scroll_tab_right_finisher')){
-          context_obj = $('.scroll_tab_inner > '+_this.itemTag+'.scroll_tab_last', _this).addClass('tab_selected').addClass('scroll_tab_last_selected');
-        }
-        if($(this).hasClass('scroll_tab_first') || $('.scroll_tab_inner > '+_this.itemTag+'.scroll_tab_last', _this).hasClass('scroll_tab_first')){
-          $('.scroll_tab_inner > span.scroll_tab_left_finisher', _this).addClass('tab_selected').addClass('scroll_tab_left_finisher_selected');
-        }
-        if($(this).hasClass('scroll_tab_last') || $('.scroll_tab_inner > '+_this.itemTag+'.scroll_tab_first', _this).hasClass('scroll_tab_last')){
-          $('.scroll_tab_inner > span.scroll_tab_right_finisher', _this).addClass('tab_selected').addClass('scroll_tab_left_finisher_selected');
-        }
-        
-        // "Slide" it into view if not fully visible.
-        scroll_selected_into_view.call(_this, state);
-        
-        opts.click_callback.call(context_obj,e);
-      });
+        })/*.mouseup(function(e) {
+      	upTime = new Date().getTime();
+
+      	if (upTime - downTime < 1500) {
+      		clearInterval(clickTimer);      		
+      		$('.tab_selected',_this).removeClass('tab_selected scroll_tab_first_selected scroll_tab_last_selected scroll_tab_left_finisher_selected scroll_tab_right_finisher_selected');
+        	$(this).addClass('tab_selected');        	
+      	}
+      	$('.scroll_tab_inner',_this).find("span").removeClass("scroll_tab_transparent");
+      	console.log(upTime - downTime);
+      });*/
+	
+		$(document).on("mouseup", function() {
+			$('.scroll_tab_inner',_this).find("span").removeClass("scroll_tab_transparent");
+		})
       
       // Check to set the edges as selected if needed
       if($('.scroll_tab_inner > '+_this.itemTag+'.scroll_tab_first', _this).hasClass('tab_selected'))
         $('.scroll_tab_inner > '+_this.itemTag+'.scroll_tab_left_finisher', _this).addClass('tab_selected').addClass('scroll_tab_left_finisher_selected');
       if($('.scroll_tab_inner > '+_this.itemTag+'.scroll_tab_last', _this).hasClass('tab_selected'))
         $('.scroll_tab_inner > '+_this.itemTag+'.scroll_tab_right_finisher', _this).addClass('tab_selected').addClass('scroll_tab_right_finisher_selected');
+    
+    	var id = "id" + new Date().getTime();
+    	$('.scroll_tab_inner', this).attr("id", id);
+    	new DragDivScroll( id, "NOMOUSEWHEEL" );
     };
     
     var scroll_selected_into_view = function(state){

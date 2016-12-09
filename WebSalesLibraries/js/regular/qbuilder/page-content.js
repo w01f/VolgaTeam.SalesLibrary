@@ -13,7 +13,6 @@
 
 		this.loadLinks = function ()
 		{
-			var pageLinksContainer = $('#page-content-links-container');
 			$.ajax({
 				type: "POST",
 				url: window.BaseUrl + "qBuilder/getPageLinks",
@@ -22,23 +21,25 @@
 				},
 				beforeSend: function ()
 				{
-					pageLinksContainer.html('');
 					$.SalesPortal.Overlay.show(false);
 				},
 				complete: function ()
 				{
 					$.SalesPortal.Overlay.hide();
 				},
-				success: function (msg)
+				success: function (result)
 				{
-					pageLinksContainer.html(msg);
+					pageLinksTable.init({
+						dataset: result.links,
+						dataOptions: result.viewOptions
+					});
 					afterLinksLoad();
 				},
 				error: function ()
 				{
 				},
 				async: true,
-				dataType: 'html'
+				dataType: 'json'
 			});
 		};
 
@@ -135,14 +136,24 @@
 		{
 			var content = $.SalesPortal.Content.getContentObject();
 			var pageContent = $('#page-content');
+			var servicePanel = $('#service-panel');
 			var tabLinks = $('#page-content-tab-links');
+			var width = $(window).width() - servicePanel.outerWidth(true) - 20;
 			var height = content.height() -
 				pageContent.find('.page-title').outerHeight(true) -
 				pageContent.find('#page-content-tabs-headers').outerHeight(true) -
 				tabLinks.find('.header').outerHeight(true) - 20;
+
+			pageContent.css({
+				'max-width': width + 'px'
+			});
+
 			$('#page-content-links-container').css({
+				'width': width + 'px',
 				'height': height + 'px'
 			});
+
+			pageLinksTable.updateSize();
 		};
 
 		var updatePageLogos = function ()
@@ -179,11 +190,12 @@
 
 		var dropableOptions = {
 			greedy: true,
-			accept: ".draggable-link",
-			hoverClass: "droppable-hover",
+			accept: ".link-cart-data-table-content-row",
+			hoverClass: "dt-rowReorder-moving",
 			drop: function (event, ui)
 			{
-				var order = $('#page-content-links-container').find('tr.page-link').index($(this));
+				var rowData = pageLinksTable.getTable().row($(this)).data();
+				var order = rowData != undefined ? rowData.extended_data.listOrder : -1;
 				var linkInCartId = ui.helper.attr('id');
 				$.ajax({
 					type: "POST",
@@ -229,7 +241,7 @@
 				e.preventDefault();
 				$.SalesPortal.QBuilder.PageList.savePage(function ()
 				{
-					window.open(pageUrl,"_blank");
+					window.open(pageUrl, "_blank");
 				});
 			});
 
@@ -388,174 +400,95 @@
 					$(this).addClass('opened');
 			});
 
-			$('#page-content-links-container, #page-content-links-container tr.page-link').droppable(dropableOptions);
+			that.loadLinks();
 
 			that.updateContentSize();
-
-			that.loadLinks();
 		};
 
 		var afterLinksLoad = function ()
 		{
-			var pageLinks = $('#page-content-links-container');
+			pageLinksTable.getTable().on('row-reorder', reorderLink);
 
-			var formLogger = new $.SalesPortal.FormLogger();
-			formLogger.init({
-				logObject: {name: qBuilderData.options.headerTitle},
-				formContent: pageLinks
-			});
+			var pageLinks = $('#page-links-data-table-content_wrapper');
+			pageLinks.find('.dataTables_scrollBody').droppable(dropableOptions);
+			pageLinks.find('tr').droppable(dropableOptions);
 
-			pageLinks.find('.link-delete').off('click.qbuilder').on('click.qbuilder', deleteLink);
-			pageLinks.find('.link-up').off('click.qbuilder').on('click.qbuilder', upLink);
-			pageLinks.find('.link-down').off('click.qbuilder').on('click.qbuilder', downLink);
-			$('#page-content-links-number').html(pageLinks.find('.link-delete').length);
-			pageLinks.find('tr.page-link').droppable(dropableOptions);
-
-			var clickableLinks = pageLinks.find("td.click-no-mobile");
-			clickableLinks.off('click.qbuilder').on('click.qbuilder', function ()
-			{
-				var ids = $(this).parent().find('.link-id-column').html().split('---');
-				var linkId = ids[1].replace('link', '');
-				$.SalesPortal.LinkManager.requestViewDialog({
-					linkId: linkId,
-					isQuickSite: true
-				});
-			});
-
-			pageLinks.find("td.click-mobile").off('touchstart').off('touchmove').off('touchend').on('touchstart', function ()
-			{
-				isScrolling = false;
-			}).on('touchmove', function ()
-			{
-				isScrolling = true;
-			}).on('touchend', function (e)
-			{
-				if (!isScrolling)
-				{
-					var ids = $(this).parent().find('.link-id-column').html().split('---');
-					var linkId = ids[1].replace('link', '');
-					$.SalesPortal.LinkManager.requestViewDialog({
-						linkId: linkId,
-						isQuickSite: true
-					});
-				}
-				e.stopPropagation();
-				e.preventDefault();
-				return false;
-			});
+			updatePageLinks();
 		};
 
-		var deleteLink = function ()
+		var deleteLink = function (linkInPageId)
 		{
-			var ids = $(this).parent().find('.link-id-column').html().split('---');
-			var linkInPageId = ids[0].replace('id', '');
-			if (linkInPageId != null)
-			{
-				var modalDialog = new $.SalesPortal.ModalDialog({
-					title: 'Delete Link',
-					description: 'Are you SURE you want to delete selected link from Page?',
-					buttons: [
+			var modalDialog = new $.SalesPortal.ModalDialog({
+				title: 'Delete Link',
+				description: 'Are you SURE you want to delete selected link from Page?',
+				buttons: [
+					{
+						tag: 'yes',
+						title: 'Yes',
+						clickHandler: function ()
 						{
-							tag: 'yes',
-							title: 'Yes',
-							clickHandler: function ()
-							{
-								modalDialog.close();
-								$.ajax({
-									type: "POST",
-									url: window.BaseUrl + "qBuilder/deleteLinkFromPage",
-									data: {
-										linkInPageId: linkInPageId
-									},
-									beforeSend: function ()
-									{
-										$.SalesPortal.Overlay.show(false);
-									},
-									complete: function ()
-									{
-										$.SalesPortal.Overlay.hide();
-										that.loadLinks();
-									},
-									async: true,
-									dataType: 'html'
-								});
-							}
-						},
-						{
-							tag: 'no',
-							title: 'No',
-							clickHandler: function ()
-							{
-								modalDialog.close();
-							}
+							modalDialog.close();
+							$.ajax({
+								type: "POST",
+								url: window.BaseUrl + "qBuilder/deleteLinkFromPage",
+								data: {
+									linkInPageId: linkInPageId
+								},
+								beforeSend: function ()
+								{
+									$.SalesPortal.Overlay.show(false);
+								},
+								complete: function ()
+								{
+									$.SalesPortal.Overlay.hide();
+									that.loadLinks();
+								},
+								async: true,
+								dataType: 'html'
+							});
 						}
-					]
-				});
-				modalDialog.show();
-			}
+					},
+					{
+						tag: 'no',
+						title: 'No',
+						clickHandler: function ()
+						{
+							modalDialog.close();
+						}
+					}
+				]
+			});
+			modalDialog.show();
 		};
 
-		var upLink = function ()
+		var reorderLink = function (e, diff, edit)
 		{
-			var ids = $(this).parent().find('.link-id-column').html().split('---');
-			var linkInPageId = ids[0].replace('id', '');
-			var rowIndex = $('#page-content-links-container').find('tr.page-link').index($(this).parent());
-			if (linkInPageId != null && rowIndex > 0)
+			var targetLinkInPageId = edit.triggerRow.data().extended_data.linkInPageId;
+			for (var i = 0, ien = diff.length; i < ien; i++)
 			{
+				var linkInPageId = pageLinksTable.getTable().row(diff[i].node).data().extended_data.linkInPageId;
+				if (targetLinkInPageId != linkInPageId)
+					continue;
+
 				$.ajax({
 					type: "POST",
 					url: window.BaseUrl + "qBuilder/setPageLinkOrder",
 					data: {
 						pageId: that.pageId,
 						linkInPageId: linkInPageId,
-						order: (rowIndex - 1)
+						order: parseInt(diff[i].newData) - (diff[i].newPosition < diff[i].oldPosition ? 1 : 0)
 					},
 					beforeSend: function ()
 					{
-						$.SalesPortal.Overlay.show(false);
 					},
 					complete: function ()
 					{
-						$.SalesPortal.Overlay.hide();
-						that.loadLinks();
 					},
 					async: true,
-					dataType: 'html'
+					dataType: 'json'
 				});
-			}
-		};
 
-		var downLink = function ()
-		{
-			var nextRow = $(this).parent().next();
-			if (nextRow.length > 0)
-			{
-				var ids = nextRow.find('.link-id-column').html().split('---');
-				var linkInPageId = ids[0].replace('id', '');
-				var rowIndex = $('#page-content-links-container').find('tr.page-link').index(nextRow);
-				if (linkInPageId != null)
-				{
-					$.ajax({
-						type: "POST",
-						url: window.BaseUrl + "qBuilder/setPageLinkOrder",
-						data: {
-							pageId: that.pageId,
-							linkInPageId: linkInPageId,
-							order: rowIndex > 0 ? (rowIndex - 1) : 0
-						},
-						beforeSend: function ()
-						{
-							$.SalesPortal.Overlay.show(false);
-						},
-						complete: function ()
-						{
-							$.SalesPortal.Overlay.hide();
-							that.loadLinks();
-						},
-						async: true,
-						dataType: 'html'
-					});
-				}
+				break;
 			}
 		};
 
@@ -570,6 +503,29 @@
 			else
 				expiredDateContainer.removeClass('has-error');
 		};
+
+		var trackActivity = function ()
+		{
+			var activityData = $.parseJSON($('<div>' + qBuilderData.options.serviceData + '</div>').find('.activity-data').text());
+			$.SalesPortal.ShortcutsManager.trackActivity(
+				activityData,
+				'QBuilder',
+				'QBuilder Activity');
+		};
+
+		var pageLinksTable = new $.SalesPortal.SearchDataTable(
+			{
+				tableIdentifier: 'page-links-data-table-content',
+				tableContainerSelector: '#page-content-links-container',
+				parentContainerSelector: '#page-content-links-container',
+				saveState: false,
+				deleteHandler: function (linkInfo)
+				{
+					deleteLink(linkInfo.extended_data.linkInPageId);
+				},
+				logHandler: trackActivity
+			}
+		);
 
 		load();
 	};

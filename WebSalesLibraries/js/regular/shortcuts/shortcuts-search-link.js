@@ -31,6 +31,7 @@
 
 		var dataTable = new $.SalesPortal.SearchDataTable(
 			{
+				tableContainerSelector: '.shortcuts-search-link-data-table-container',
 				saveState: false,
 				backHandler: parentSearchData.backHandler,
 				logHandler: function ()
@@ -65,7 +66,7 @@
 						$.SalesPortal.Content.getContentObject().html('<table id="shortcuts-search-container" style="table-layout:fixed;"><tr>' +
 							'<td id="right-navbar" style="display: none;"></td>' +
 							'<td>' +
-							'<div class="data-table-content-container shortcuts-data-table-content-container"></div>' +
+							'<div class="data-table-content-container shortcuts-search-link-data-table-container"></div>' +
 							'</td>' +
 							'</tr></table>');
 
@@ -108,11 +109,12 @@
 					function (data)
 					{
 						var searchResults = new $.SalesPortal.SearchResult(data.datasetKey, data.dataset);
-						dataTable.init(searchResults.dataset,
-							searchViewOptions,
-							searchShortcutOptions.conditions.sortColumn,
-							searchShortcutOptions.conditions.sortDirection
-						);
+						dataTable.init({
+							dataset: searchResults.dataset,
+							dataOptions: searchViewOptions,
+							sortColumnTag: searchShortcutOptions.conditions.sortColumn,
+							sortDirection: searchShortcutOptions.conditions.sortDirection
+						});
 						updateContentSize();
 					}
 				);
@@ -159,11 +161,12 @@
 					function (data)
 					{
 						var searchResults = new $.SalesPortal.SearchResult(data.datasetKey, data.dataset);
-						dataTable.init(searchResults.dataset,
-							searchViewOptions,
-							searchShortcutOptions.conditions.sortColumn,
-							searchShortcutOptions.conditions.sortDirection
-						);
+						dataTable.init({
+							dataset: searchResults.dataset,
+							dataOptions: searchViewOptions,
+							sortColumnTag: searchShortcutOptions.conditions.sortColumn,
+							sortDirection: searchShortcutOptions.conditions.sortDirection
+						});
 						updateContentSize();
 					}
 				);
@@ -462,15 +465,16 @@
 					function (data)
 					{
 						var searchResults = new $.SalesPortal.SearchResult(data.datasetKey, data.dataset);
-						dataTable.init(searchResults.dataset,
-							searchViewOptions,
-							selectedTemplateConditions.conditions.sortColumn != undefined ?
+						dataTable.init({
+							dataset: searchResults.dataset,
+							dataOptions: searchViewOptions,
+							sortColumnTag: selectedTemplateConditions.conditions.sortColumn != undefined ?
 								selectedTemplateConditions.conditions.sortColumn :
 								searchShortcutOptions.conditions.sortColumn,
-							selectedTemplateConditions.conditions.sortDirection != undefined ?
+							sortDirection: selectedTemplateConditions.conditions.sortDirection != undefined ?
 								selectedTemplateConditions.conditions.sortDirection :
 								searchShortcutOptions.conditions.sortDirection
-						);
+						});
 						updateContentSize();
 					}
 				);
@@ -573,15 +577,22 @@
 		{
 			$.SalesPortal.ShortcutsManager.updateContentSize();
 
-			var height = content.outerHeight(true);
+			var content = $.SalesPortal.Content.getContentObject();
+			var navigationPanel = $.SalesPortal.Content.getNavigationPanel();
+			var sideBar = content.find('#right-navbar');
 
-			var shortcutsSearchContainer = $('#shortcuts-search-container');
-			var shortcutsSearchContainerWidth = content.width() - 17;
-			shortcutsSearchContainer.css({
-				'width': shortcutsSearchContainerWidth + 'px'
+			var height = content.outerHeight(true);
+			var width = $(window).width() - navigationPanel.outerWidth(true);
+
+			content.css({
+				'max-width': width + 'px'
 			});
 
-			var sideBar = $('#right-navbar');
+			var shortcutsSearchContainer = $('#shortcuts-search-container');
+			shortcutsSearchContainer.css({
+				'width': width + 'px'
+			});
+
 			sideBar.find('.logo-list').css({
 				'height': height + 'px'
 			});

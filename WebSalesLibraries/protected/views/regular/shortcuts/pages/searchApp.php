@@ -1,7 +1,7 @@
 <?
 	/** @var $shortcut SearchAppShortcut */
 ?>
-<div class="data-table-content-container">
+<div id="shortcuts-search-app" class="data-table-content-container">
 	<table id="data-table-content" class="table table-striped table-bordered"></table>
 </div>
 <div class="search-app-footer">

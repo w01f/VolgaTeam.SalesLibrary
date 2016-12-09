@@ -2,10 +2,10 @@
 
 	/**
 	 * Class QPageLinkRecord
-	 * @property mixed id
-	 * @property mixed id_link
-	 * @property mixed id_page
-	 * @property mixed list_order
+	 * @property string id
+	 * @property string id_link
+	 * @property string id_page
+	 * @property int list_order
 	 */
 	class QPageLinkRecord extends CActiveRecord
 	{

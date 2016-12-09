@@ -31,9 +31,12 @@
 		}
 
 		<? else: ?>
+		<?if(!$style->column1Style->frozen):?>
 		#page-<? echo $libraryPage->id; ?> .page-column.column0 .page-column-inner {
 			border-right: 1px solid <?echo '#'.$style->verticalBorder1Color;?>;
 		}
+
+		<? endif; ?>
 
 		#page-<? echo $libraryPage->id; ?> .page-column.column1 .page-column-inner {
 			border-left: 1px solid <?echo '#'.$style->verticalBorder1Color;?>;
@@ -64,6 +67,14 @@
 		<? endif; ?>
 
 		<? if ($style->column1Style->enabled): ?>
+
+		<?if($style->column1Style->frozen):?>
+		#page-<? echo $libraryPage->id; ?> .page-column.column0 .page-column-inner {
+			position: fixed;
+			width: 30%;
+		}
+
+		<? endif; ?>
 
 		<?if($style->verticalBorderStretch):?>
 		#page-<? echo $libraryPage->id; ?> .page-column.column0 {

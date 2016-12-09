@@ -59,6 +59,7 @@
 				$pageRecord->name = $page['name'];
 				$pageRecord->order = $page['order'];
 				$pageRecord->has_columns = $page['enableColumns'];
+				$pageRecord->settings = array_key_exists('settings', $page) && isset($page['settings']) ? CJSON::encode($page['settings']) : null;
 				$pageRecord->date_modify = $pageDate;
 				$pageRecord->save();
 

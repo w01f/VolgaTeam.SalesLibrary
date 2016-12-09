@@ -23,6 +23,7 @@
 						'Font' => 'Font',
 						'SoapLibrary' => 'SoapLibrary',
 						'SoapLibraryPage' => 'SoapLibraryPage',
+						'SoapLibraryPageSettings' => 'SoapLibraryPageSettings',
 						'SoapAutoWidget' => 'SoapAutoWidget',
 						'SoapBanner' => 'SoapBanner',
 						'SoapColumn' => 'SoapColumn',

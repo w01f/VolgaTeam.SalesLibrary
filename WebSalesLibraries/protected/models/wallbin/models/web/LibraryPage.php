@@ -1,6 +1,5 @@
 <?
 	namespace application\models\wallbin\models\web;
-
 	use application\models\wallbin\models\web\style\WallbinPageStyle;
 
 	/**
@@ -14,6 +13,9 @@
 		public $name;
 		public $libraryName;
 		public $order;
+
+		/** @var  LibraryPageSettings */
+		public $settings;
 		/**
 		 * @var LibraryFolder[]
 		 */
@@ -37,7 +39,7 @@
 		}
 
 		/**
-		 * @param $pageRecord
+		 * @param $pageRecord \LibraryPageRecord
 		 */
 		public function load($pageRecord)
 		{
@@ -45,6 +47,7 @@
 			$this->libraryId = $pageRecord->id_library;
 			$this->name = $pageRecord->name;
 			$this->order = $pageRecord->order;
+			$this->settings = isset($pageRecord->settings) ? \CJSON::decode($pageRecord->settings, false) : new LibraryPageSettings();
 			$this->enableColumns = $pageRecord->has_columns;
 			$logoPath = \Yii::app()->params['librariesRoot'] . "/Graphics/" . $this->parent->name . "/page" . strval($this->order + 1) . ".png";
 			if (file_exists($logoPath))

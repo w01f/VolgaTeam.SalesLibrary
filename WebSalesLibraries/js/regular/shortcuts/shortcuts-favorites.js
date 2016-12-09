@@ -8,10 +8,11 @@
 
 		var dataTable = new $.SalesPortal.SearchDataTable(
 			{
+				tableContainerSelector:'#favorites-panel-links',
 				saveState: false,
-				deleteHandler: function (linkId)
+				deleteHandler: function (linkInfo)
 				{
-					deleteLink(linkId, currentFolderId);
+					deleteLink(linkInfo.id, currentFolderId);
 				},
 				logHandler: function ()
 				{
@@ -257,7 +258,10 @@
 				},
 				success: function (result)
 				{
-					dataTable.init(result.links, result.viewOptions);
+					dataTable.init({
+						dataset: result.links,
+						dataOptions: result.viewOptions
+					});
 					updateContentSize();
 				},
 				error: function ()
@@ -305,11 +309,17 @@
 			$.SalesPortal.Content.updateSize();
 
 			var content = $.SalesPortal.Content.getContentObject();
+			var navigationPanel = $.SalesPortal.Content.getNavigationPanel();
+
+			var width = $(window).width() - navigationPanel.outerWidth(true);
+
+			content.css({
+				'max-width': width + 'px'
+			});
 
 			var favoritesContainer = $('#favorites-container');
-			var shortcutsSearchContainerWidth = content.width() - 17;
 			favoritesContainer.css({
-				'width': shortcutsSearchContainerWidth + 'px'
+				'width': width + 'px'
 			});
 
 			var height = content.height();

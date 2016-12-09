@@ -8,9 +8,7 @@
 
 #page-content > div
 {
-	overflow-x: hidden;
-	overflow-y: auto;
-	padding-top: 5px;
+	overflow: hidden;
 	height: 100%;
 }
 
@@ -121,19 +119,11 @@ input[readonly]
 #page-content-links-container
 {
 	width: 100%;
-	background: #ffffff;
-	overflow-y: auto;
-	border: 1px #aaaaaa solid;
 }
 
 .page-link.droppable-hover
 {
 	border-top: 2px #df8505 solid !important;
-}
-
-#page-content-links-container li a
-{
-	color: #000000;
 }
 
 .ui-widget-content

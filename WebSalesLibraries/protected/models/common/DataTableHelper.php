@@ -9,9 +9,10 @@
 	{
 		/**
 		 * @param $linkQueryResult array
+		 * @param $extraColumns array
 		 * @return array
 		 */
-		public static function formatRegularData($linkQueryResult)
+		public static function formatRegularData($linkQueryResult, $extraColumns = array())
 		{
 			$dataset = array();
 			if (count($linkQueryResult) > 0)
@@ -83,20 +84,18 @@
 							break;
 					}
 
-					$extendedProperties = BaseLinkSettings::createByContent($linkRecord['extended_properties']);
-					$record['extended_properties'] = CJSON::decode($linkRecord['extended_properties'], true);
-
-					$record['isHyperlink'] = \application\models\wallbin\models\web\LibraryLink::isHyperlink($type, $extendedProperties);
-
 					$fileInfo = FileInfo::fromLinkData(
 						$type,
 						$linkRecord['name'],
 						$linkRecord['path'],
 						BaseLinkSettings::createByContent($linkRecord['extended_properties']),
 						$library);
-					$record['isDraggable'] = $fileInfo->isFile || in_array($linkRecord['format'], array('url', 'quicksite', 'youtube'));
+					$record['isFile'] = $fileInfo->isFile;
 
-					if ($record['isHyperlink'])
+					$extendedProperties = BaseLinkSettings::createByContent($linkRecord['extended_properties']);
+					$isHyperlink = \application\models\wallbin\models\web\LibraryLink::isOpenedAsHyperlink($type, $extendedProperties);
+					$record['isHyperlink'] = $isHyperlink;
+					if ($isHyperlink)
 					{
 						$record['url_header'] = 'URL';
 						$record['url'] = $fileInfo->link;
@@ -114,12 +113,7 @@
 									strpos($urlPath, 'public_links') ||
 									strpos($urlPath, 'getSinglePage')));
 					}
-					else if (in_array($linkRecord['format'], array('url', 'quicksite', 'youtube')))
-					{
-						$record['url_header'] = 'URL';
-						$record['url'] = $fileInfo->link;
-					}
-					else
+					else if ($fileInfo->isFile)
 					{
 						$record['url_header'] = 'DownloadURL';
 						$record['url'] = FileInfo::getFileMIME($linkRecord['format']) . ':' .
@@ -127,9 +121,114 @@
 							str_replace('SalesLibraries/SalesLibraries', 'SalesLibraries', Yii::app()->getBaseUrl(true) . $fileInfo->link);
 					}
 
+					$record['isDraggable'] = $fileInfo->isFile || $isHyperlink;
+
+					$record['extended_data'] = array();
+					foreach ($extraColumns as $column)
+						$record['extended_data'][$column] = $linkRecord[$column];
+
 					$dataset[] = $record;
 				}
 			}
 			return $dataset;
+		}
+
+		/**
+		 * @param $linkQueryResult array
+		 * @param $extraColumns array
+		 * @return array
+		 */
+		public static function formatExtendedData($linkQueryResult, $extraColumns)
+		{
+			return self::formatRegularData($linkQueryResult, $extraColumns);
+		}
+
+		/**
+		 * @param $from string
+		 * @param array $customQueryFields
+		 * @param array $customJoin
+		 * @param array $customWhereConditions
+		 * @param string $categoryWhereCondition
+		 * @param array $groupFields
+		 * @return CDbCommand
+		 */
+		public static function buildQuery(
+			$from,
+			$customQueryFields,
+			$customJoin,
+			$customWhereConditions,
+			$categoryWhereCondition,
+			$groupFields)
+		{
+			if (!isset($from))
+				$from = 'tbl_link link';
+			if (!isset($customQueryFields))
+				$customQueryFields = array();
+			if (!isset($customJoin))
+				$customJoin = array();
+			if (!isset($customWhereConditions))
+				$customWhereConditions = array();
+			if (!isset($categoryWhereCondition))
+				$categoryWhereCondition = '1=1';
+			if (!isset($groupFields))
+				$groupFields = array('link.id');
+
+			/** @var CDbCommand $dbCommnad */
+			$dbCommnad = Yii::app()->db->createCommand();
+
+			$queryFields = array(
+				'id' => 'max(link.id) as id',
+				'id_library' => 'max(link.id_library) as id_library',
+				'name' => 'max(link.name) as name',
+				'type' => 'max(link.type) as type',
+				'lib_name' => 'max(lib.name) as lib_name',
+				'path' => 'link.file_relative_path as path',
+				'file_name' => 'link.file_name as file_name',
+				'file_extension' => 'link.file_extension as file_extension',
+				'link_date' => 'max(link.file_date) as link_date',
+				'format' => 'max(link.search_format) as format',
+				'extended_properties' => 'max(link.settings) as extended_properties',
+				'rate' => '(select (round(avg(lr.value)*2)/2) as value from tbl_link_rate lr where lr.id_link=link.id) as rate',
+				'tag' => 'glcat.tag as tag',
+				'total_views' => '(select sum(aggr.link_views) from
+				           (select
+				              s_l.id_link as link_id,
+				              count(s_l.id) as link_views
+				            from tbl_statistic_link s_l
+				            group by s_l.id_link
+				            union
+				            select
+				              l_q.id_link as link_id,
+				              count(s_q.id) as link_views
+				            from tbl_statistic_qpage s_q
+				              join tbl_link_qpage l_q on l_q.id_qpage = s_q.id_qpage
+				            group by l_q.id_link
+				           ) aggr where aggr.link_id=link.id) as total_views',
+			);
+			$queryFields = array_merge($queryFields, $customQueryFields);
+
+			$joinParts = array(
+				'tbl_library lib' => 'lib.id=link.id_library'
+			);
+			$joinParts = array_merge($customJoin, $joinParts);
+
+			$whereConditions = array('AND',
+				'link.is_dead=0',
+				'link.is_preview_not_ready=0',
+				'link.type<>5',
+				'link.type<>6');
+			$includeAppLinks = Yii::app()->browser->getBrowser() == Browser::BROWSER_EO;
+			if ($includeAppLinks)
+				$whereConditions[] = 'link.type<>15';
+			$whereConditions = array_merge($whereConditions, $customWhereConditions);
+
+			$dbCommnad = $dbCommnad->select(array_values($queryFields));
+			$dbCommnad = $dbCommnad->from($from);
+			foreach ($joinParts as $table => $condition)
+				$dbCommnad = $dbCommnad->join($table, $condition);
+			$dbCommnad = $dbCommnad->leftJoin("(select lcat.id_link, group_concat(lcat.tag separator ', ') as tag from tbl_link_category lcat where " . $categoryWhereCondition . " group by lcat.id_link) glcat", 'glcat.id_link=link.id');
+			$dbCommnad = $dbCommnad->where($whereConditions);
+			$dbCommnad = $dbCommnad->group($groupFields);
+			return $dbCommnad;
 		}
 	}

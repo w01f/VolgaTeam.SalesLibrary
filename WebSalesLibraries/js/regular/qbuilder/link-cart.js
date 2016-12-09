@@ -1,8 +1,8 @@
 (function ($)
 {
 	window.BaseUrl = window.BaseUrl || '';
-	$.SalesPortal = $.SalesPortal || { };
-	$.SalesPortal.QBuilder = $.SalesPortal.QBuilder || { };
+	$.SalesPortal = $.SalesPortal || {};
+	$.SalesPortal.QBuilder = $.SalesPortal.QBuilder || {};
 	var LinkCartManager = function ()
 	{
 		var that = this;
@@ -33,30 +33,31 @@
 
 		this.load = function ()
 		{
-			var linkCartGrid = $('#link-cart-grid');
 			$.ajax({
 				type: "POST",
 				url: window.BaseUrl + "qBuilder/getLinkCart",
-				data: {    },
+				data: {},
 				beforeSend: function ()
 				{
-					linkCartGrid.html('');
 					$.SalesPortal.Overlay.show(false);
 				},
 				complete: function ()
 				{
 					$.SalesPortal.Overlay.hide();
 				},
-				success: function (msg)
+				success: function (result)
 				{
-					linkCartGrid.html(msg);
+					lincCartTable.init({
+						dataset: result.links,
+						dataOptions: result.viewOptions
+					});
 					initLinks();
 				},
 				error: function ()
 				{
 				},
 				async: true,
-				dataType: 'html'
+				dataType: 'json'
 			});
 		};
 
@@ -191,10 +192,24 @@
 
 		this.updateContentSize = function ()
 		{
-			var height = $.SalesPortal.Content.getContentObject().height() - $('#service-panel').find('.headers').outerHeight(true) - $('#link-cart-buttons').outerHeight(true) - 5;
+			var servicePanel = $('#service-panel');
+			var pageContent = $('#page-content');
+
+			var width = $(window).width() - pageContent.outerWidth(true) - 20;
+			var height = $.SalesPortal.Content.getContentObject().height() -
+				servicePanel.find('.headers').outerHeight(true) -
+				$('#link-cart-buttons').outerHeight(true) - 20;
+
+			servicePanel.css({
+				'max-width': width + 'px'
+			});
+
 			$('#link-cart-grid').css({
+				'width': width + 'px',
 				'height': height + 'px'
 			});
+
+			lincCartTable.updateSize();
 		};
 
 		var initLinks = function ()
@@ -207,38 +222,40 @@
 				formContent: linkCart
 			});
 
-			linkCart.find('.link-delete').off('click.link-cart').on('click.link-cart', deleteLink);
-			linkCart.find('.draggable-link').draggable({
+			linkCart.find('.link-cart-data-table-content-row').draggable({
 					revert: "invalid",
 					distance: 70,
 					delay: 500,
 					helper: function ()
 					{
-						var ids = $(this).find('.link-id-column').html().split('---');
-						var linkInCartId = ids[0].replace('cart', '');
-						return  $('<span id="' + linkInCartId + '" class="glyphicon glyphicon-file"></span>');
+						var linkInCartId = lincCartTable.getTable().row($(this)).data().extended_data.linkInCartId;
+						return $('<span id="' + linkInCartId + '" class="glyphicon glyphicon-file"></span>');
 					},
 					appendTo: "body",
-					cursorAt: { left: -10, top: 0 }
+					cursorAt: {left: -10, top: 0}
 				}
 			);
+
+			that.updateContentSize();
 		};
 
 		var clear = function ()
 		{
-			var linkCartGrid = $('#link-cart-grid');
 			$.ajax({
 				type: "POST",
 				url: window.BaseUrl + "qBuilder/clearLinkCart",
-				data: {    },
+				data: {},
 				beforeSend: function ()
 				{
-					linkCartGrid.html('');
 					$.SalesPortal.Overlay.show(false);
 				},
 				complete: function ()
 				{
 					$.SalesPortal.Overlay.hide();
+				},
+				success: function ()
+				{
+					that.load();
 				},
 				error: function ()
 				{
@@ -248,57 +265,53 @@
 			});
 		};
 
-		var deleteLink = function ()
+		var deleteLink = function (linkInCartId)
 		{
-			var ids = $(this).parent().find('.link-id-column').html().split('---');
-			var linkInCartId = ids[0].replace('cart', '');
-			if (linkInCartId != null)
-			{
-				var modalDialog = new $.SalesPortal.ModalDialog({
-					title: 'Delete Link',
-					description: 'Are you SURE you want to delete selected link from Cart?',
-					buttons: [
+			var modalDialog = new $.SalesPortal.ModalDialog({
+				title: 'Delete Link',
+				description: 'Are you SURE you want to delete selected link from Cart?',
+				buttons: [
+					{
+						tag: 'yes',
+						title: 'Yes',
+						clickHandler: function ()
 						{
-							tag: 'yes',
-							title: 'Yes',
-							clickHandler: function ()
-							{
-								modalDialog.close();
-								$.ajax({
-									type: "POST",
-									url: window.BaseUrl + "qBuilder/deleteLinkFromCart",
-									data: {
-										linkInCartId: linkInCartId
-									},
-									beforeSend: function ()
-									{
-										$.SalesPortal.Overlay.show(false);
-									},
-									complete: function ()
-									{
-										$.SalesPortal.Overlay.hide();
-										that.load();
-									},
-									async: true,
-									dataType: 'html'
-								});
-							}
-						},
-						{
-							tag: 'no',
-							title: 'No',
-							clickHandler: function ()
-							{
-								modalDialog.close();
-							}
+							modalDialog.close();
+							$.ajax({
+								type: "POST",
+								url: window.BaseUrl + "qBuilder/deleteLinkFromCart",
+								data: {
+									linkInCartId: linkInCartId
+								},
+								beforeSend: function ()
+								{
+									$.SalesPortal.Overlay.show(false);
+								},
+								complete: function ()
+								{
+									$.SalesPortal.Overlay.hide();
+									that.load();
+								},
+								async: true,
+								dataType: 'html'
+							});
 						}
-					]
-				});
-				modalDialog.show();
-			}
+					},
+					{
+						tag: 'no',
+						title: 'No',
+						clickHandler: function ()
+						{
+							modalDialog.close();
+						}
+					}
+				]
+			});
+			modalDialog.show();
 		};
 
-		var addNewPageWithLinks = function(){
+		var addNewPageWithLinks = function ()
+		{
 			$.SalesPortal.QBuilder.PageList.addPage({
 				populateFromLinkCart: true
 			});
@@ -332,7 +345,32 @@
 				async: true,
 				dataType: 'html'
 			});
-		}
+		};
+
+		var trackActivity = function ()
+		{
+			var activityData = $.parseJSON($('<div>' + that.qBuilderData.options.serviceData + '</div>').find('.activity-data').text());
+			$.SalesPortal.ShortcutsManager.trackActivity(
+				activityData,
+				'QBuilder',
+				'QBuilder Activity');
+		};
+
+		var lincCartTable = new $.SalesPortal.SearchDataTable(
+			{
+				tableIdentifier: 'link-cart-data-table-content',
+				tableContainerSelector: '#link-cart-grid',
+				parentContainerSelector: '#link-cart-grid',
+				saveState: false,
+				paginate: false,
+				subSearch: false,
+				deleteHandler: function (linkInfo)
+				{
+					deleteLink(linkInfo.extended_data.linkInCartId);
+				},
+				logHandler: trackActivity
+			}
+		);
 	};
 	$.SalesPortal.QBuilder.LinkCart = new LinkCartManager();
 })(jQuery);

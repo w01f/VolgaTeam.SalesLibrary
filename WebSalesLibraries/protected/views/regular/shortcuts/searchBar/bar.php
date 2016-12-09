@@ -31,7 +31,7 @@
 						<? endIf; ?>
 						<button class="btn btn-default log-action search-bar-options" type="button">Search Options</button>
 						<button class="btn btn-default search-bar-run" type="button">
-							<img src="<? echo Yii::app()->getBaseUrl(true) . '/images/search/search-shortcuts.png'; ?>">
+							<img src="<? echo Yii::app()->getBaseUrl(true) . '/images/shortcuts/search-bar/search.png'; ?>">
 						</button>
 				  	</span>
 				</div>

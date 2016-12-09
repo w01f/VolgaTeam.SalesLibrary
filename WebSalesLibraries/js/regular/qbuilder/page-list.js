@@ -186,7 +186,7 @@
 			var selectedPageRow = pageList.find('tr.selected');
 			var selectedPageId = that.selectedPage.pageId;
 			var title = $('#page-content-title').val();
-			selectedPageRow.find('td.link-name-column').html(title);
+			selectedPageRow.find('td.page-name-column').html(title);
 			$.ajax({
 				type: "POST",
 				url: window.BaseUrl + "qBuilder/savePage",
@@ -280,7 +280,7 @@
 				pageList.find('tr').first().addClass('selected');
 
 			if (pageList.find('tr').length > 0)
-				openPage(pageList.find('tr.selected').find('.link-id-column').html());
+				openPage(pageList.find('tr.selected').find('.page-id-column').html());
 			else
 			{
 				$('#shortcut-action-container').find('.qbuilder-qsite-preview').attr('href', '#');
@@ -292,30 +292,30 @@
 				{
 					pageList.find('tr').removeClass('selected');
 					$(this).addClass('selected');
-					var selectedPageId = $(this).find('.link-id-column').html();
+					var selectedPageId = $(this).find('.page-id-column').html();
 					openPage(selectedPageId);
 				}
 				event.stopPropagation();
 			});
-			pageList.find('.link-delete').off('click.qbuilder').on('click.qbuilder', function (event)
+			pageList.find('.page-delete').off('click.qbuilder').on('click.qbuilder', function (event)
 			{
 				event.stopPropagation();
-				that.deletePage($(this).parent().find('.link-id-column').html());
+				that.deletePage($(this).parent().find('.page-id-column').html());
 			});
-			pageList.find('.link-clone').off('click.qbuilder').on('click.qbuilder', function (event)
+			pageList.find('.page-clone').off('click.qbuilder').on('click.qbuilder', function (event)
 			{
 				event.stopPropagation();
 				that.addPage({
-						templatePageId: $(this).parent().find('.link-id-column').text()
+						templatePageId: $(this).parent().find('.page-id-column').text()
 					}
 				);
 			});
-			pageList.find('.link-up').off('click.qbuilder').on('click.qbuilder', function (event)
+			pageList.find('.page-up').off('click.qbuilder').on('click.qbuilder', function (event)
 			{
 				event.stopPropagation();
 				upPage($(this).parent());
 			});
-			pageList.find('.link-down').off('click.qbuilder').on('click.qbuilder', function (event)
+			pageList.find('.page-down').off('click.qbuilder').on('click.qbuilder', function (event)
 			{
 				event.stopPropagation();
 				downPage($(this).parent());
@@ -422,7 +422,7 @@
 
 		var upPage = function (row)
 		{
-			var pageId = row.find('.link-id-column').html();
+			var pageId = row.find('.page-id-column').html();
 			var rowIndex = $('#page-list').find('tr.page-list-item').index(row);
 			if (rowIndex > 0)
 			{
@@ -453,7 +453,7 @@
 			var nextRow = row.next();
 			if (nextRow.length > 0)
 			{
-				var pageId = nextRow.find('.link-id-column').html();
+				var pageId = nextRow.find('.page-id-column').html();
 				var rowIndex = $('#page-list').find('tr.page-list-item').index(nextRow);
 				$.ajax({
 					type: "POST",

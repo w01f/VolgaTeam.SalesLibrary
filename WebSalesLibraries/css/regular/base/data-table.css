@@ -1,36 +1,41 @@
-
-#data-table-content tr .clickable-area
+.link-data-table tr .clickable-area
 {
 	cursor: pointer;
 }
 
-#data-table-content tr .rate-image-container
+.link-data-table tr .rate-image-container
 {
     cursor: pointer;
 }
 
-#data-table-content tr .rate-image-container img
+.link-data-table tr .rate-image-container img
 {
 	height: 16px;
 }
 
-#data-table-content tr a.link-content,
-#data-table-content tr a.link-content:hover,
-#data-table-content tr a.link-content:visited,
-#data-table-content tr a.link-content:link,
-#data-table-content tr a.link-content:active
+.link-data-table tr a.link-content,
+.link-data-table tr a.link-content:hover,
+.link-data-table tr a.link-content:visited,
+.link-data-table tr a.link-content:link,
+.link-data-table tr a.link-content:active
 {
 	text-decoration: none;
 	outline : none;
 	color: #000000;
 }
 
-.data-table-content-container table tr .centered
+.link-data-table tr .centered
 {
 	text-align: center;
 }
 
-#data-table-content_info, #data-table-content_paginate
+.link-data-table tr .link-delete-button
 {
-	margin-top: 10px;
+	cursor: pointer;
+}
+
+.dataTables_info,
+.dataTables_paginate
+{
+	margin-top: 10px !important;
 }

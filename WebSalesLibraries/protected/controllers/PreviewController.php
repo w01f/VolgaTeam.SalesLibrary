@@ -185,10 +185,47 @@
 
 		public function actionDownloadFile()
 		{
-			$data = CJSON::decode(base64_decode(Yii::app()->request->getQuery('data')), false);
+			$data = CJSON::decode(Yii::app()->request->getPost('fileData'), false);
 			Yii::app()->getRequest()->sendFile($data->name, @file_get_contents($data->path));
 			Yii::app()->end();
 		}
+
+//		public function actionPrepareZipAndDownloadLink()
+//		{
+//			$linkId = Yii::app()->request->getPost('linkId');
+//			if (isset($linkId))
+//			{
+//				$linkRecord = LinkRecord::getLinkById($linkId);
+//				if (isset($linkRecord))
+//				{
+//					$libraryManager = new LibraryManager();
+//					$library = $libraryManager->getLibraryById($linkRecord->id_library);
+//					$link = new LibraryLink(new LibraryFolder(new LibraryPage($library)));
+//					$link->load($linkRecord);
+//					if ($link->isFolder)
+//					{
+//						$rootPath = realpath($link->filePath);
+//
+//						/** @var SplFileInfo[] $files */
+//						$files = new RecursiveIteratorIterator(
+//							new RecursiveDirectoryIterator($rootPath),
+//							RecursiveIteratorIterator::LEAVES_ONLY
+//						);
+//
+//						foreach ($files as $name => $file)
+//						{
+//							if (!$file->isDir())
+//							{
+//								$filePath = $file->getRealPath();
+//								$relativePath = substr($filePath, strlen($rootPath) + 1);
+//								$zip->addFile($filePath, $relativePath);
+//							}
+//						}
+//					}
+//				}
+//				$this->renderPartial('zipFiles', array('files' => $files), false, true);
+//			}
+//		}
 
 		public function actionZipAndDownloadLink()
 		{

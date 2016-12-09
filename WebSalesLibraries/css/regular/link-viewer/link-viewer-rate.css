@@ -1,7 +1,8 @@
 /*Common------------------------------------*/
-.link-viewer-rate
+.link-viewer.link-viewer-rate
 {
     width: 400px;
+    height: auto;
 }
 
 .link-viewer-rate .title

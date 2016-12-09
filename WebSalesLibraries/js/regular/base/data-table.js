@@ -2,67 +2,125 @@
 {
 	window.BaseUrl = window.BaseUrl || '';
 	$.SalesPortal = $.SalesPortal || {};
-	$.SalesPortal.SearchDataTable = function (options)
+	$.SalesPortal.SearchDataTable = function (tableOptions)
 	{
-		var saveState = options != undefined ? options.saveSate : undefined;
-		var deleteHandler = options != undefined ? options.deleteHandler : undefined;
-		var backHandler = options != undefined ? options.backHandler : undefined;
-		var logHandler = options != undefined ? options.logHandler : undefined;
+		var tableIdentifier = tableOptions != undefined && tableOptions.tableIdentifier != undefined ?
+			tableOptions.tableIdentifier :
+			'data-table-content';
+		var tableContainerSelector = tableOptions != undefined && tableOptions.tableContainerSelector != undefined ?
+			tableOptions.tableContainerSelector :
+			undefined;
+		var parentContainerSelector = tableOptions != undefined && tableOptions.parentContainerSelector != undefined ?
+			tableOptions.parentContainerSelector :
+			undefined;
+		var saveState = tableOptions != undefined && tableOptions.saveSate != undefined ?
+			tableOptions.saveSate :
+			false;
+		var usePaginate = tableOptions != undefined && tableOptions.paginate != undefined ?
+			tableOptions.paginate :
+			true;
+		var useSubSearch = tableOptions != undefined && tableOptions.subSearch != undefined ?
+			tableOptions.subSearch :
+			true;
+		var deleteHandler = tableOptions != undefined && tableOptions.deleteHandler != undefined ?
+			tableOptions.deleteHandler :
+			function ()
+			{
+			};
+		var backHandler = tableOptions != undefined && tableOptions.backHandler != undefined ?
+			tableOptions.backHandler :
+			undefined;
+		var logHandler = tableOptions != undefined && tableOptions.logHandler != undefined ?
+			tableOptions.logHandler :
+			function ()
+			{
+			};
 
 		var dataTable = undefined;
 
-		this.init = function (dataset, viewOptions, sortColumnTag, sortDirection)
+		this.init = function (data)
 		{
 			destroy();
 
-			dataset = dataset != undefined ? dataset : [];
+			if (data == undefined)
+				data = {
+					dataset: undefined,
+					dataOptions: undefined,
+					sortColumnTag: undefined,
+					sortDirection: undefined
+				};
+			data.dataset = data.dataset != undefined ? data.dataset : [];
+			data.dataOptions = data.dataOptions != undefined ? data.dataOptions : {
+				showCategory: false,
+				showLibraries: false,
+				showType: false,
+				showDate: false,
+				showRate: false,
+				showViewsCount: false,
+				showDeleteButton: false,
+				categoryColumnName: '',
+				librariesColumnName: '',
+				reorderSourceField: undefined
+			};
+			data.sortDirection = data.sortDirection != undefined ? data.sortDirection : 'asc';
 
-			var defaultSortColumnIndex = 1;
-			if (viewOptions.showCategory)
-				defaultSortColumnIndex++;
-			if (viewOptions.showLibraries)
-				defaultSortColumnIndex++;
 
-			var sortColumnIndex = defaultSortColumnIndex;
-			switch (sortColumnTag)
+			var sortColumnIndex = -1;
+			if (data.dataOptions.reorderSourceField == undefined)
 			{
-				case "library":
-					sortColumnIndex = 1;
-					break;
-				case "file_type":
-					sortColumnIndex = 2;
-					break;
-				case "name":
-					sortColumnIndex = 3;
-					break;
-				case "date_modify":
-					sortColumnIndex = 6;
-					break;
-				case "tag":
-					sortColumnIndex = 0;
-					break;
-				case "rate":
-					sortColumnIndex = 5;
-					break;
-				case "views":
-					sortColumnIndex = 4;
-					break;
+				var index = 0;
+				var sortColumnsIndexes = {};
+				if (data.dataOptions.showCategory)
+				{
+					sortColumnsIndexes['tag'] = index;
+					index++;
+				}
+				if (data.dataOptions.showLibraries)
+				{
+					sortColumnsIndexes['library'] = index;
+					index++;
+				}
+				if (data.dataOptions.showType)
+				{
+					sortColumnsIndexes['file_type'] = index;
+					index++;
+				}
+				sortColumnsIndexes['name'] = index;
+				index++;
+				if (data.dataOptions.showViewsCount)
+				{
+					sortColumnsIndexes['views'] = index;
+					index++;
+				}
+				if (data.dataOptions.showRate)
+				{
+					sortColumnsIndexes['rate'] = index;
+					index++;
+				}
+				if (data.dataOptions.showDate)
+				{
+					sortColumnsIndexes['date_modify'] = index;
+				}
+				sortColumnIndex = data.sortColumnTag != undefined ? sortColumnsIndexes[data.sortColumnTag] : -1;
 			}
+			else
+				sortColumnIndex = 0;
+
 
 			var content = $.SalesPortal.Content.getContentObject();
 
-			var tableContainer = content.find('.data-table-content-container');
+			var tableContainer = content.find(tableContainerSelector);
 
 			if (!$.SalesPortal.Content.isMobileDevice())
-				tableContainer.html('<table id="data-table-content" class="table table-striped table-bordered"></table>');
+				tableContainer.html('<table id="' + tableIdentifier + '" class="table link-data-table table-striped table-bordered"></table>');
 			else
-				tableContainer.html('<table id="data-table-content" class="table table-striped"></table>');
+				tableContainer.html('<table id="' + tableIdentifier + '" class="table link-data-table-table table-striped"></table>');
 
-			var table = $("#data-table-content");
+			var table = $("#" + tableIdentifier);
 
 			var hasCategories = false;
 
-			$.each(dataset, function (index, value)
+			$.each(data.dataset, function (index, value)
 			{
 				if (value.tag != null && value.tag != '')
 				{
@@ -72,85 +130,109 @@
 			});
 
 			var columnSettings = [];
-			if (viewOptions.showCategory && hasCategories)
+			if (data.dataOptions.reorderSourceField != undefined)
+				columnSettings.push({
+					"data": 'extended_data.' + data.dataOptions.reorderSourceField,
+					"visible": false,
+					"searchable": false,
+					"orderable": true
+				});
+
+			if (data.dataOptions.showCategory && hasCategories)
 				columnSettings.push({
 					"data": "tag",
-					"title": viewOptions.categoryColumnName,
+					"orderable": data.dataOptions.reorderSourceField == undefined,
+					"title": data.dataOptions.categoryColumnName,
+					"class": "allow-reorder",
 					"width": "15%",
 					"render": cellRenderer
 				});
-			if (viewOptions.showLibraries)
+			if (data.dataOptions.showLibraries)
 				columnSettings.push({
 					"data": "library.name",
-					"title": viewOptions.librariesColumnName,
-					"class": "centered",
+					"orderable": data.dataOptions.reorderSourceField == undefined,
+					"title": data.dataOptions.librariesColumnName,
+					"class": "centered allow-reorder",
 					"width": "10%",
 					"render": cellRenderer
 				});
-			columnSettings.push({
-				"data": "file_type",
-				"title": "Type",
-				"class": "centered",
-				"width": "50px",
-				"render": cellRenderer
-			});
+			if (data.dataOptions.showType)
+				columnSettings.push({
+					"data": "file_type",
+					"orderable": data.dataOptions.reorderSourceField == undefined,
+					"title": "Type",
+					"class": "centered allow-reorder",
+					"width": "50px",
+					"render": cellRenderer
+				});
 			columnSettings.push({
 				"data": "name",
+				"orderable": data.dataOptions.reorderSourceField == undefined,
 				"title": "Link",
+				"class": "allow-reorder",
 				"render": cellRenderer
 			});
-			columnSettings.push({
-				"data": "views",
-				"title": "Views",
-				"class": "centered",
-				"width": "50px",
-				"sType": "numeric",
-				"render": {
-					_: cellRenderer,
-					sort: 'value'
-				}
-			});
-			columnSettings.push({
-				"data": "rate",
-				"title": "Rating",
-				"width": "90px",
-				"class": "centered rate-image-container",
-				"render": {
-					_: function (data)
-					{
-						var cellContent = '';
-						if (data.image != '')
-							cellContent = '<img src="' + data.image + '">';
-						return cellContent;
-					},
-					sort: 'value'
-				}
-			});
-			columnSettings.push({
-				"data": "date",
-				"title": "Date",
-				"class": "centered",
-				"width": "80px",
-				"render": {
-					_: cellRenderer,
-					sort: 'value'
-				}
-			});
-			columnSettings.push({
-				"data": "date.value",
-				"title": "Date",
-				"visible": false,
-				"searchable": false,
-				"sType": "numeric"
-			});
-			if (viewOptions.showDeleteButton)
+			if (data.dataOptions.showViewsCount)
+				columnSettings.push({
+					"data": "views",
+					"orderable": data.dataOptions.reorderSourceField == undefined,
+					"title": "Views",
+					"class": "centered allow-reorder",
+					"width": "50px",
+					"sType": "numeric",
+					"render": {
+						_: cellRenderer,
+						sort: 'value'
+					}
+				});
+			if (data.dataOptions.showRate)
+				columnSettings.push({
+					"data": "rate",
+					"orderable": data.dataOptions.reorderSourceField == undefined,
+					"title": "Rating",
+					"width": "90px",
+					"class": "centered allow-reorder rate-image-container",
+					"render": {
+						_: function (columnData)
+						{
+							var cellContent = '';
+							if (columnData.image != '')
+								cellContent = '<img src="' + columnData.image + '">';
+							return cellContent;
+						},
+						sort: 'value'
+					}
+				});
+			if (data.dataOptions.showDate)
+			{
+				columnSettings.push({
+					"data": "date",
+					"orderable": data.dataOptions.reorderSourceField == undefined,
+					"title": "Date",
+					"class": "centered allow-reorder",
+					"width": "80px",
+					"render": {
+						_: cellRenderer,
+						sort: 'value'
+					}
+				});
+				columnSettings.push({
+					"data": "date.value",
+					"title": "Date",
+					"visible": false,
+					"searchable": false,
+					"sType": "numeric"
+				});
+			}
+			if (data.dataOptions.showDeleteButton)
 				columnSettings.push({
 					"data": null,
 					"title": '',
 					"width": "5px",
 					"orderable": false,
-					"defaultContent": '<img class="link-delete-button" src="' + window.BaseUrl + 'images/search/search-delete.png">'
+					"defaultContent": '<img class="link-delete-button" src="' + window.BaseUrl + 'images/grid/item-delete.png">'
 				});
+
 			columnSettings.push({
 				"data": "id",
 				"title": "Id",
@@ -158,13 +240,28 @@
 				"searchable": false
 			});
 
+			columnSettings.push({
+				"data": "extended_data",
+				"title": "extended_data",
+				"visible": false,
+				"searchable": false
+			});
+
 			dataTable = table.dataTable({
-				"data": dataset,
-				"columns": columnSettings,
+				"data": data.dataset,
+				columns: columnSettings,
 				stateSave: saveState,
-				"order": [
-					[sortColumnIndex, sortDirection != undefined ? sortDirection : "asc"]
-				],
+				paging: usePaginate,
+				searching: useSubSearch,
+				order: sortColumnIndex >= 0 ? [[sortColumnIndex, data.sortDirection]] : [],
+				rowReorder: data.dataOptions.reorderSourceField != undefined ?
+				{
+					update: true,
+					dataSrc: 'extended_data.' + data.dataOptions.reorderSourceField,
+					selector: 'td.allow-reorder',
+					snapX: 0
+				} :
+					false,
 				"scrollY": $.SalesPortal.Content.isMobileDevice() ? getNativeTableSize() : getBootstrapTableSize(),
 				"scrollCollapse": false,
 				"aLengthMenu": [
@@ -176,30 +273,35 @@
 					"sEmptyTable": "",
 					"sZeroRecords": ""
 				},
-				"dom": (dataset.length > 0 ?
+				"dom": (data.dataset.length > 0 ?
 					"<'row'<'col-xs-4'l><'col-xs-4 back-url text-center'><'col-xs-4'f>>" :
 					"<'row'<'col-xs-12 back-url text-center'>>") +
 				"<'row'<'col-xs-12'tr>>" +
-				"<'row'<'col-xs-5'i><'col-xs-7'p>>"
+				"<'row'<'col-xs-5'i><'col-xs-7'p>>",
+				"fnRowCallback": function (nRow, aData, iDisplayIndex)
+				{
+					$(nRow).addClass(tableIdentifier + '-row');
+					return nRow;
+				}
 			});
 			if (!$.SalesPortal.Content.isMobileDevice())
-				$("#data-table-content_length").find('select').selectpicker();
+				$("#" + tableIdentifier + "_length").find('select').selectpicker();
 
 			if (backHandler != undefined)
 			{
-				var backUrlContent = $("#data-table-content_wrapper").find('.back-url');
+				var backUrlContent = $("#" + tableIdentifier + "_wrapper").find('.back-url');
 				backUrlContent.html(
-					'<a href="#">Click <strong><u>HERE</u></strong> for a New Search</a>'
+					'<a href="#">Click <strong style="text-decoration: underline;">HERE</strong> for a New Search</a>'
 				);
 				backUrlContent.find('a').on('click', backHandler);
 			}
 
-			if (viewOptions.showDeleteButton && deleteHandler != undefined)
+			if (data.dataOptions.showDeleteButton)
 			{
 				table.on('click', '.link-delete-button', function (e)
 				{
-					var linkId = dataTable.api().row($(this).closest("tr")).data().id;
-					deleteHandler(linkId);
+					var linkInfo = dataTable.api().row($(this).closest("tr")).data();
+					deleteHandler(linkInfo);
 					e.stopPropagation();
 				});
 			}
@@ -313,27 +415,28 @@
 					});
 				}
 
-				table.on('dragstart', '.link-file', function (e)
+				table.on('dragstart', '.is-draggable', function (e)
 				{
 					var urlHeader = $(this).find('.link-content').data("url-header");
-					var url = $(this).find('.link-content').data("url");
+					var url = $(this).find('.link-content').data('url');
 					if (url != '')
 						e.originalEvent.dataTransfer.setData(urlHeader, url);
 				});
 			}
 
-			if (logHandler != undefined)
-			{
-				table.on('search.dt', logHandler).on('page.dt', logHandler).on('length.dt', logHandler);
-			}
+			table.on('search.dt', logHandler).on('page.dt', logHandler).on('length.dt', logHandler);
 		};
 
 		this.updateSize = function ()
 		{
 			if (dataTable != undefined)
 			{
+				var content = $.SalesPortal.Content.getContentObject();
+				if (parentContainerSelector != undefined)
+					content = $.SalesPortal.Content.getContentObject().find(parentContainerSelector);
+
 				var height = $.SalesPortal.Content.isMobileDevice() ? getNativeTableSize() : getBootstrapTableSize();
-				$('#data-table-content_wrapper').find('.dataTables_scrollBody').css({
+				content.find("#" + tableIdentifier + "_wrapper").find('.dataTables_scrollBody').css({
 					'height': height + 'px'
 				});
 				dataTable.fnSettings().oScroll.sY = height + 'px';
@@ -345,6 +448,11 @@
 		{
 			if (dataTable != undefined)
 				dataTable.api().state.clear();
+		};
+
+		this.getTable = function ()
+		{
+			return dataTable.api();
 		};
 
 		var cellRenderer = function (data, type, row)
@@ -359,24 +467,31 @@
 
 				if (row != '')
 				{
+					var dragData = '';
+					if (row.isDraggable)
+					{
+						objectClass += ' is-draggable';
+						dragData = 'draggable="true" data-url-header="' + row.url_header + '" data-url="' + row.url + '"';
+					}
+
 					if (row.isHyperlink)
 					{
-						cellContent = '<a class="link-content" title="' + row.tooltip + '" href="' + row.url + '" target="_blank">' + displayValue + '</a>';
+						cellContent = '<a class="link-content" title="' + row.tooltip + '" href="' + row.url + '" target="_blank" ' + dragData + '>' + displayValue + '</a>';
 						objectClass = ' link-url';
 						if (row.isExternalHyperlink)
 							objectClass += ' link-url-external';
 						else
 							objectClass += ' link-url-internal';
 					}
-					else if (row.isDraggable)
+					else if (row.isFile)
 					{
-						cellContent = '<span class="link-content" draggable="true" data-url-header="' + row.url_header + '" data-url="' + row.url + '" title="' + row.tooltip + '">' + displayValue + '</span>';
-						objectClass = ' link-file';
+						cellContent = '<span class="link-content" ' + dragData + ' title="' + row.tooltip + '">' + displayValue + '</span>';
+						objectClass += ' link-file';
 					}
 					else
 					{
-						cellContent = '<span class="link-content" title="' + row.tooltip + '">' + displayValue + '</span>';
-						objectClass = ' link-common';
+						cellContent = '<span class="link-content" ' + dragData + ' title="' + row.tooltip + '">' + displayValue + '</span>';
+						objectClass += ' link-common';
 					}
 				}
 			}
@@ -394,31 +509,49 @@
 		var getBootstrapTableSize = function ()
 		{
 			var content = $.SalesPortal.Content.getContentObject();
+			if (parentContainerSelector != undefined)
+				content = $.SalesPortal.Content.getContentObject().find(parentContainerSelector);
 
-			var topHeight = $('#data-table-content_length').closest('.row').outerHeight(true);
-			var bottomHeight = $('#data-table-content_info').closest('.row').outerHeight(true);
+			var topHeight = content.find("#" + tableIdentifier + "_length").closest('.row').outerHeight(true);
+			if (topHeight == undefined)
+				topHeight = content.find("#" + tableIdentifier + "_filter").closest('.row').outerHeight(true);
+			var bottomHeight = content.find("#" + tableIdentifier + "_info").closest('.row').outerHeight(true);
 
-			var tableHeaderHeight = $('#data-table-content_wrapper').find('.dataTables_scrollHead').outerHeight(true);
+			var tableHeaderHeight = content.find("#" + tableIdentifier + "_wrapper").find('.dataTables_scrollHead').outerHeight(true);
 
-			var containerOuterHeight = content.find('.data-table-content-container').outerHeight(true);
-			var containerInnerHeight = content.find('.data-table-content-container').height();
+			var containerOuterHeight = content.outerHeight(true);
+			var containerInnerHeight = content.height();
+			if (tableContainerSelector != parentContainerSelector)
+			{
+				containerOuterHeight = content.find(tableContainerSelector).outerHeight(true);
+				containerInnerHeight = content.find(tableContainerSelector).height();
+			}
 
 			var conditionDescriptionContent = content.find('.search-app-footer').outerHeight(true);
 
-			return content.height() - (topHeight + bottomHeight + tableHeaderHeight + conditionDescriptionContent + (containerOuterHeight - containerInnerHeight)) - 5;
+			return content.outerHeight(true) - (topHeight + bottomHeight + tableHeaderHeight + conditionDescriptionContent + (containerOuterHeight - containerInnerHeight));
 		};
 
 		var getNativeTableSize = function ()
 		{
 			var content = $.SalesPortal.Content.getContentObject();
+			if (parentContainerSelector != undefined)
+				content = $.SalesPortal.Content.getContentObject().find(parentContainerSelector);
 
-			var topHeight = $('#data-table-content_length').outerHeight(true);
-			var bottomHeight = $('#data-table-content_info').outerHeight(true);
+			var topHeight = content.find("#" + tableIdentifier + "_length").outerHeight(true);
+			if (topHeight == undefined)
+				topHeight = content.find("#" + tableIdentifier + "_filter").outerHeight(true);
+			var bottomHeight = content.find("#" + tableIdentifier + "_info").outerHeight(true);
 
-			var tableHeaderHeight = $('#data-table-content_wrapper').find('.dataTables_scrollHead').outerHeight(true);
+			var tableHeaderHeight = content.find("#" + tableIdentifier + "_wrapper").find('.dataTables_scrollHead').outerHeight(true);
 
-			var containerOuterHeight = content.find('.data-table-content-container').outerHeight(true);
-			var containerInnerHeight = content.find('.data-table-content-container').height();
+			var containerOuterHeight = content.outerHeight(true);
+			var containerInnerHeight = content.height();
+			if (tableContainerSelector != parentContainerSelector)
+			{
+				containerOuterHeight = content.find(tableContainerSelector).outerHeight(true);
+				containerInnerHeight = content.find(tableContainerSelector).height();
+			}
 
 			var conditionDescriptionContent = content.find('.search-app-footer').outerHeight(true);
 

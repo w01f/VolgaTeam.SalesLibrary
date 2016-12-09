@@ -6,6 +6,7 @@
 	$.SalesPortal.SimpleViewerData = function (source)
 	{
 		this.linkId = undefined;
+		this.folderId = undefined;
 		this.name = undefined;
 		this.format = undefined;
 		this.tags = undefined;
@@ -27,6 +28,7 @@
 		var that = this;
 
 		this.linkId = undefined;
+		this.folderId = undefined;
 		this.name = undefined;
 		this.format = undefined;
 		this.tags = undefined;
@@ -60,6 +62,7 @@
 	$.SalesPortal.VideoViewerData = function (source)
 	{
 		this.linkId = undefined;
+		this.folderId = undefined;
 		this.name = undefined;
 		this.format = undefined;
 		this.tags = undefined;
@@ -84,6 +87,7 @@
 	$.SalesPortal.YouTubeViewerData = function (source)
 	{
 		this.linkId = undefined;
+		this.folderId = undefined;
 		this.name = undefined;
 		this.format = undefined;
 		this.tags = undefined;
@@ -102,6 +106,7 @@
 	$.SalesPortal.LanViewerData = function (source)
 	{
 		this.linkId = undefined;
+		this.folderId = undefined;
 		this.name = undefined;
 		this.format = undefined;
 		this.tags = undefined;
@@ -119,6 +124,7 @@
 	$.SalesPortal.AppLinkViewerData = function (source)
 	{
 		this.linkId = undefined;
+		this.folderId = undefined;
 		this.name = undefined;
 		this.format = undefined;
 		this.tags = undefined;
@@ -136,6 +142,7 @@
 	$.SalesPortal.InternalLinkViewerData = function (source)
 	{
 		this.linkId = undefined;
+		this.folderId = undefined;
 		this.name = undefined;
 		this.format = undefined;
 		this.tags = undefined;
@@ -153,6 +160,7 @@
 	$.SalesPortal.ExcelViewerData = function (source)
 	{
 		this.linkId = undefined;
+		this.folderId = undefined;
 		this.name = undefined;
 		this.format = undefined;
 		this.tags = undefined;

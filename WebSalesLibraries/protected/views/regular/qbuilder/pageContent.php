@@ -64,11 +64,9 @@
 			<div id="page-content-tab-links" class="selected">
 				<div class="header">
 					<h4>DRAG your Links from the Cart & DROP them into the list below:</h4>
-					<div id="page-content-links-title">
-						Shared links:<span id="page-content-links-number">#</span>
-					</div>
 				</div>
-				<div id="page-content-links-container" class="link-grid-container">
+				<div id="page-content-links-container" class="data-table-content-container">
+					<table id="page-links-data-table-content" class="table table-striped table-bordered"></table>
 				</div>
 			</div>
 			<div id="page-content-tab-title">

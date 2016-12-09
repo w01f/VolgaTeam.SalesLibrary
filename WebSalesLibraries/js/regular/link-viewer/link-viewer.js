@@ -191,6 +191,9 @@
 										case 'linkcart':
 											$.SalesPortal.QBuilder.LinkCart.addLinks([parameters.data.linkId]);
 											break;
+										case 'linkcart-all-window':
+											$.SalesPortal.QBuilder.LinkCart.addFolder(parameters.data.folderId);
+											break;
 										case 'quicksite':
 											that.requestEmailDialog(linkId);
 											break;
@@ -401,9 +404,26 @@
 
 		this.downloadFile = function (fileData)
 		{
-			var jsonData = $.toJSON(fileData);
-			var base64Data = btoa(jsonData);
-			window.location = window.BaseUrl + "preview/downloadFile?data=" + base64Data;
+			var form = document.getElementById('form-download');
+			if (form == null)
+			{
+				form = document.createElement("form");
+				form.setAttribute("id", "form-download");
+				form.setAttribute("method", "post");
+				form.setAttribute("action", 'preview/downloadFile');
+				form._submit_function_ = form.submit;
+
+				var hiddenField = document.createElement("input");
+				hiddenField.setAttribute("id", "input-file-data");
+				hiddenField.setAttribute("type", "hidden");
+				hiddenField.setAttribute("name", 'fileData');
+				hiddenField.setAttribute("value", $.toJSON(fileData));
+				form.appendChild(hiddenField);
+				document.body.appendChild(form);
+			}
+			var fileDataField = document.getElementById('input-file-data');
+			fileDataField.setAttribute("value", $.toJSON(fileData));
+			form._submit_function_();
 		};
 
 		this.zipAndDownloadLink = function (linkId)

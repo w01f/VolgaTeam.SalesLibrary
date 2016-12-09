@@ -27,17 +27,26 @@
 
 		/**
 		 * @param $userId
-		 * @return array|null
+		 * @return array
 		 */
 		public static function getLinksByUser($userId)
 		{
-			$linkRecords = Yii::app()->db->createCommand()
-				->select("concat('cart',lk.id,'---link',l.id) as id, l.id_library, l.name, l.file_name, l.original_format as format, l.type")
-				->from('tbl_link l')
-				->join('tbl_user_link_cart lk', 'lk.id_link = l.id')
-				->where("lk.id_user=" . $userId)
-				->queryAll();
-			return LinkRecord::getLinksGrid($linkRecords);
+			/** @var CDbCommand $dbCommand */
+			$dbCommand = DataTableHelper::buildQuery(
+				'tbl_user_link_cart lk',
+				array(
+					'linkInCartId' => 'lk.id as linkInCartId',
+				),
+				array('tbl_link link' => 'lk.id_link=link.id'),
+				array(
+					sprintf("lk.id_user=%s", $userId)
+				),
+				null,
+				array('lk.id'));
+			$dbCommand = $dbCommand->order('link.name');
+			$linkRecords = $dbCommand->queryAll();
+			$links = DataTableHelper::formatExtendedData($linkRecords, array('linkInCartId'));
+			return $links;
 		}
 
 		/**

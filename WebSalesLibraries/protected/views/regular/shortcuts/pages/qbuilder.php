@@ -40,7 +40,8 @@
 					<button type="button" class="btn btn-default btn-block log-action" id="link-cart-add-new-page">Create Quicksite with these links</button>
 					<button type="button" class="btn btn-default btn-block log-action" id="link-cart-add-all">Add All Links to quickSITE</button>
 				</div>
-				<div id="link-cart-grid" class="link-grid-container logger-form" data-log-group="QBuilder" data-log-action="QBuilder Activity">
+				<div id="link-cart-grid" class="data-table-content-container">
+					<table id="linc-cart-data-table-content" class="table table-striped table-bordered"></table>
 				</div>
 			</div>
 		</div>

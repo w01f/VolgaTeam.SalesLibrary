@@ -8,6 +8,7 @@
 	{
 		public $enabled;
 
+		public $frozen;
 		public $padding;
 		public $windowBorderColor;
 
@@ -23,6 +24,9 @@
 		{
 			$columnStyle = self::createDefault();
 			$columnStyle->enabled = true;
+
+			$queryResult = $xpath->query('.//IsFrozen', $contextNode);
+			$columnStyle->frozen = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : false;
 
 			$queryResult = $xpath->query('.//Padding', $contextNode);
 			$columnStyle->padding = $queryResult->length > 0 ? intval(trim($queryResult->item(0)->nodeValue)) : 0;
@@ -44,6 +48,7 @@
 		{
 			$columnStyle = new PageColumnStyle();
 			$columnStyle->enabled = false;
+			$columnStyle->frozen = false;
 			$columnStyle->padding = 0;
 			$columnStyle->windowBorderColor = null;
 			$columnStyle->windowStyle = FolderStyle::createDefault();

@@ -109,7 +109,7 @@
 			var menu = $('#main-menu');
 			var navigationPanel = $.SalesPortal.Content.getNavigationPanel();
 
-			var width = $(window).width() - navigationPanel.width() - 20;
+			var width = $(window).width() - navigationPanel.outerWidth(true) - 20;
 			var height = $(window).height() - menu.height() - menu.offset().top;
 
 			content.css({

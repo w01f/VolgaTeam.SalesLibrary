@@ -1,4 +1,5 @@
 <?
+
 	/**
 	 * Class QBuilderController
 	 */
@@ -49,7 +50,7 @@
 				else
 				{
 					$linkCartIds = array();
-					if($populateFromLinkCart)
+					if ($populateFromLinkCart)
 					{
 						/** @var UserLinkCartRecord[] $linkRecords */
 						$linkRecords = UserLinkCartRecord::model()->findAll('id_user=?', array($userId));
@@ -186,7 +187,20 @@
 		{
 			$userId = UserIdentity::getCurrentUserId();
 			$links = UserLinkCartRecord::getLinksByUser($userId);
-			$this->renderPartial('linkCart', array('links' => $links), false, true);
+			echo CJSON::encode(array(
+				'links' => $links,
+				'viewOptions' => array(
+					'showCategory' => false,
+					'categoryColumnName' => Yii::app()->params['tags']['column_name'],
+					'showLibraries' => false,
+					'librariesColumnName' => Yii::app()->params['stations']['column_name'],
+					'showType' => true,
+					'showDate' => false,
+					'showRate' => false,
+					'showViewsCount' => false,
+					'showDeleteButton' => true
+				)
+			));
 		}
 
 		public function actionClearLinkCart()
@@ -310,8 +324,21 @@
 				/** @var $page QPageRecord */
 				$page = QPageRecord::model()->findByPk($selectedPageId);
 				$links = $page->getPageLinks();
-				if (isset($links))
-					$this->renderPartial('pageLinks', array('links' => $links), false, true);
+				echo CJSON::encode(array(
+					'links' => $links,
+					'viewOptions' => array(
+						'showCategory' => Yii::app()->params['search_options']['hide_tag'] != true,
+						'categoryColumnName' => Yii::app()->params['tags']['column_name'],
+						'showLibraries' => Yii::app()->params['search_options']['hide_libraries'] != true,
+						'librariesColumnName' => Yii::app()->params['stations']['column_name'],
+						'showType' => true,
+						'showDate' => true,
+						'showRate' => true,
+						'showViewsCount' => true,
+						'showDeleteButton' => true,
+						'reorderSourceField' => 'listOrder'
+					)
+				));
 			}
 		}
 

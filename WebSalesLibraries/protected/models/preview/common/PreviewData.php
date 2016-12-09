@@ -7,6 +7,7 @@
 	abstract class PreviewData
 	{
 		public $linkId;
+		public $folderId;
 		public $name;
 		public $format;
 		public $tags;
@@ -44,6 +45,7 @@
 		{
 			$this->link = $link;
 			$this->linkId = $link->id;
+			$this->folderId = $link->folderId;
 			$this->name = $link->extendedProperties->isTextWordWrap ?
 				$link->fileName :
 				$link->name;

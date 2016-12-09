@@ -339,6 +339,12 @@
 		this.categoryColumnName = undefined;
 		this.showLibraries = undefined;
 		this.librariesColumnName = undefined;
+		this.showType = undefined;
+		this.showDate = undefined;
+		this.showRate = undefined;
+		this.showViewsCount = undefined;
+		this.showDeleteButton = undefined;
+		this.reorderSourceField = undefined;
 
 		for (var prop in source)
 			if (source.hasOwnProperty(prop))

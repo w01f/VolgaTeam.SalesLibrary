@@ -24,12 +24,12 @@
 
 #search-results .content-data table th span.asc
 {
-	background: url(../../images/search/sort-asc.gif) right center no-repeat;
+	background: url(../../images/grid/sort-asc.gif) right center no-repeat;
 	padding-right: 10px;
 }
 
 #search-results .content-data table th span.desc
 {
-	background: url(../../images/search/sort-desc.gif) right center no-repeat;
+	background: url(../../images/grid/sort-desc.gif) right center no-repeat;
 	padding-right: 10px;
 }
