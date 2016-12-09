@@ -27,6 +27,7 @@
           <xsd:element name="name" type="xsd:string" />
           <xsd:element name="libraryName" type="xsd:string" />
           <xsd:element name="order" type="xsd:int" />
+          <xsd:element name="settings" type="tns:SoapLibraryPageSettings" />
           <xsd:element name="folders" type="tns:SoapLibraryFolderArray" />
           <xsd:element name="enableColumns" type="xsd:boolean" />
           <xsd:element name="columns" type="tns:SoapColumnArray" />
@@ -36,6 +37,12 @@
           <xsd:element name="allGroups" type="xsd:boolean" />
           <xsd:element name="users" type="tns:UserModelArray" />
           <xsd:element name="allUsers" type="xsd:boolean" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="SoapLibraryPageSettings">
+        <xsd:all>
+          <xsd:element name="icon" type="xsd:string" />
+          <xsd:element name="iconColor" type="xsd:string" />
         </xsd:all>
       </xsd:complexType>
       <xsd:complexType name="SoapLibraryFolderArray">

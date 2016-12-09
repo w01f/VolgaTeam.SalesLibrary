@@ -873,6 +873,8 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         
         private int orderField;
         
+        private SoapLibraryPageSettings settingsField;
+        
         private SoapLibraryFolder[] foldersField;
         
         private bool enableColumnsField;
@@ -938,6 +940,16 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
             }
             set {
                 this.orderField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public SoapLibraryPageSettings settings {
+            get {
+                return this.settingsField;
+            }
+            set {
+                this.settingsField = value;
             }
         }
         
@@ -1038,314 +1050,29 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:ContentControllerwsdl")]
-    public partial class SoapLibraryFolder {
+    public partial class SoapLibraryPageSettings {
         
-        private string idField;
+        private string iconField;
         
-        private string pageIdField;
-        
-        private string libraryIdField;
-        
-        private string nameField;
-        
-        private int rowOrderField;
-        
-        private int columnOrderField;
-        
-        private string borderColorField;
-        
-        private string windowBackColorField;
-        
-        private string windowForeColorField;
-        
-        private string headerBackColorField;
-        
-        private string headerForeColorField;
-        
-        private Font windowFontField;
-        
-        private Font headerFontField;
-        
-        private string headerAlignmentField;
-        
-        private bool enableWidgetField;
-        
-        private string widgetField;
-        
-        private SoapBanner bannerField;
-        
-        private SoapLibraryLink[] filesField;
-        
-        private string dateAddField;
-        
-        private string dateModifyField;
+        private string iconColorField;
         
         /// <remarks/>
-        public string id {
+        public string icon {
             get {
-                return this.idField;
+                return this.iconField;
             }
             set {
-                this.idField = value;
+                this.iconField = value;
             }
         }
         
         /// <remarks/>
-        public string pageId {
+        public string iconColor {
             get {
-                return this.pageIdField;
+                return this.iconColorField;
             }
             set {
-                this.pageIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string libraryId {
-            get {
-                return this.libraryIdField;
-            }
-            set {
-                this.libraryIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string name {
-            get {
-                return this.nameField;
-            }
-            set {
-                this.nameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int rowOrder {
-            get {
-                return this.rowOrderField;
-            }
-            set {
-                this.rowOrderField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int columnOrder {
-            get {
-                return this.columnOrderField;
-            }
-            set {
-                this.columnOrderField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string borderColor {
-            get {
-                return this.borderColorField;
-            }
-            set {
-                this.borderColorField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string windowBackColor {
-            get {
-                return this.windowBackColorField;
-            }
-            set {
-                this.windowBackColorField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string windowForeColor {
-            get {
-                return this.windowForeColorField;
-            }
-            set {
-                this.windowForeColorField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string headerBackColor {
-            get {
-                return this.headerBackColorField;
-            }
-            set {
-                this.headerBackColorField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string headerForeColor {
-            get {
-                return this.headerForeColorField;
-            }
-            set {
-                this.headerForeColorField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public Font windowFont {
-            get {
-                return this.windowFontField;
-            }
-            set {
-                this.windowFontField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public Font headerFont {
-            get {
-                return this.headerFontField;
-            }
-            set {
-                this.headerFontField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string headerAlignment {
-            get {
-                return this.headerAlignmentField;
-            }
-            set {
-                this.headerAlignmentField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool enableWidget {
-            get {
-                return this.enableWidgetField;
-            }
-            set {
-                this.enableWidgetField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string widget {
-            get {
-                return this.widgetField;
-            }
-            set {
-                this.widgetField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public SoapBanner banner {
-            get {
-                return this.bannerField;
-            }
-            set {
-                this.bannerField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public SoapLibraryLink[] files {
-            get {
-                return this.filesField;
-            }
-            set {
-                this.filesField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string dateAdd {
-            get {
-                return this.dateAddField;
-            }
-            set {
-                this.dateAddField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string dateModify {
-            get {
-                return this.dateModifyField;
-            }
-            set {
-                this.dateModifyField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:ContentControllerwsdl")]
-    public partial class Font {
-        
-        private string nameField;
-        
-        private int sizeField;
-        
-        private bool isBoldField;
-        
-        private bool isItalicField;
-        
-        private bool isUnderlinedField;
-        
-        /// <remarks/>
-        public string name {
-            get {
-                return this.nameField;
-            }
-            set {
-                this.nameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int size {
-            get {
-                return this.sizeField;
-            }
-            set {
-                this.sizeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool isBold {
-            get {
-                return this.isBoldField;
-            }
-            set {
-                this.isBoldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool isItalic {
-            get {
-                return this.isItalicField;
-            }
-            set {
-                this.isItalicField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool isUnderlined {
-            get {
-                return this.isUnderlinedField;
-            }
-            set {
-                this.isUnderlinedField = value;
+                this.iconColorField = value;
             }
         }
     }
@@ -2198,6 +1925,75 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
             }
             set {
                 this.quickLinkTitleField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:ContentControllerwsdl")]
+    public partial class Font {
+        
+        private string nameField;
+        
+        private int sizeField;
+        
+        private bool isBoldField;
+        
+        private bool isItalicField;
+        
+        private bool isUnderlinedField;
+        
+        /// <remarks/>
+        public string name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int size {
+            get {
+                return this.sizeField;
+            }
+            set {
+                this.sizeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool isBold {
+            get {
+                return this.isBoldField;
+            }
+            set {
+                this.isBoldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool isItalic {
+            get {
+                return this.isItalicField;
+            }
+            set {
+                this.isItalicField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool isUnderlined {
+            get {
+                return this.isUnderlinedField;
+            }
+            set {
+                this.isUnderlinedField = value;
             }
         }
     }
@@ -6782,6 +6578,255 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
             }
             set {
                 this.isDeadField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:ContentControllerwsdl")]
+    public partial class SoapLibraryFolder {
+        
+        private string idField;
+        
+        private string pageIdField;
+        
+        private string libraryIdField;
+        
+        private string nameField;
+        
+        private int rowOrderField;
+        
+        private int columnOrderField;
+        
+        private string borderColorField;
+        
+        private string windowBackColorField;
+        
+        private string windowForeColorField;
+        
+        private string headerBackColorField;
+        
+        private string headerForeColorField;
+        
+        private Font windowFontField;
+        
+        private Font headerFontField;
+        
+        private string headerAlignmentField;
+        
+        private bool enableWidgetField;
+        
+        private string widgetField;
+        
+        private SoapBanner bannerField;
+        
+        private SoapLibraryLink[] filesField;
+        
+        private string dateAddField;
+        
+        private string dateModifyField;
+        
+        /// <remarks/>
+        public string id {
+            get {
+                return this.idField;
+            }
+            set {
+                this.idField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string pageId {
+            get {
+                return this.pageIdField;
+            }
+            set {
+                this.pageIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string libraryId {
+            get {
+                return this.libraryIdField;
+            }
+            set {
+                this.libraryIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int rowOrder {
+            get {
+                return this.rowOrderField;
+            }
+            set {
+                this.rowOrderField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int columnOrder {
+            get {
+                return this.columnOrderField;
+            }
+            set {
+                this.columnOrderField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string borderColor {
+            get {
+                return this.borderColorField;
+            }
+            set {
+                this.borderColorField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string windowBackColor {
+            get {
+                return this.windowBackColorField;
+            }
+            set {
+                this.windowBackColorField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string windowForeColor {
+            get {
+                return this.windowForeColorField;
+            }
+            set {
+                this.windowForeColorField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string headerBackColor {
+            get {
+                return this.headerBackColorField;
+            }
+            set {
+                this.headerBackColorField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string headerForeColor {
+            get {
+                return this.headerForeColorField;
+            }
+            set {
+                this.headerForeColorField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public Font windowFont {
+            get {
+                return this.windowFontField;
+            }
+            set {
+                this.windowFontField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public Font headerFont {
+            get {
+                return this.headerFontField;
+            }
+            set {
+                this.headerFontField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string headerAlignment {
+            get {
+                return this.headerAlignmentField;
+            }
+            set {
+                this.headerAlignmentField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool enableWidget {
+            get {
+                return this.enableWidgetField;
+            }
+            set {
+                this.enableWidgetField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string widget {
+            get {
+                return this.widgetField;
+            }
+            set {
+                this.widgetField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public SoapBanner banner {
+            get {
+                return this.bannerField;
+            }
+            set {
+                this.bannerField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public SoapLibraryLink[] files {
+            get {
+                return this.filesField;
+            }
+            set {
+                this.filesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string dateAdd {
+            get {
+                return this.dateAddField;
+            }
+            set {
+                this.dateAddField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string dateModify {
+            get {
+                return this.dateModifyField;
+            }
+            set {
+                this.dateModifyField = value;
             }
         }
     }

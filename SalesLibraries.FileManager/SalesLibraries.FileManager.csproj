@@ -686,11 +686,11 @@
     <Compile Include="PresentationLayer\Wallbin\Settings\FormClonePage.designer.cs">
       <DependentUpon>FormClonePage.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Wallbin\Settings\FormPageName.cs">
+    <Compile Include="PresentationLayer\Wallbin\Settings\FormPageSettings.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Wallbin\Settings\FormPageName.designer.cs">
-      <DependentUpon>FormPageName.cs</DependentUpon>
+    <Compile Include="PresentationLayer\Wallbin\Settings\FormPageSettings.designer.cs">
+      <DependentUpon>FormPageSettings.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Wallbin\Libraries\LibraryPageTagInfo.cs">
       <SubType>Component</SubType>
@@ -1070,8 +1070,8 @@
     <EmbeddedResource Include="PresentationLayer\Wallbin\Settings\FormClonePage.resx">
       <DependentUpon>FormClonePage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Wallbin\Settings\FormPageName.resx">
-      <DependentUpon>FormPageName.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Settings\FormPageSettings.resx">
+      <DependentUpon>FormPageSettings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Settings\FormPages.resx">
       <DependentUpon>FormPages.cs</DependentUpon>

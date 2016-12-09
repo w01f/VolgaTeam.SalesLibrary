@@ -111,6 +111,11 @@ namespace SalesLibraries.FileManager.Business.Services
 			target.libraryId = source.Library.ExtId.ToString();
 			target.name = source.Name;
 			target.order = source.Order;
+			target.settings = new SoapLibraryPageSettings
+			{
+				icon = source.Settings.Icon,
+				iconColor = source.Settings.IconColor.ToHex()
+			};
 			target.enableColumns = source.Settings.EnableColumnTitles;
 			target.dateModify = source.LastModified.ToString("MM/dd/yyyy hh:mm:ss tt");
 

@@ -31,7 +31,7 @@
 			this.components = new System.ComponentModel.Container();
 			this.xtraTabControl = new DevExpress.XtraTab.XtraTabControl();
 			this.contextMenuStripPageProperties = new System.Windows.Forms.ContextMenuStrip(this.components);
-			this.toolStripMenuItemRename = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItemPageSettings = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItemDelete = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
 			this.toolStripMenuItemClone = new System.Windows.Forms.ToolStripMenuItem();
@@ -96,7 +96,7 @@
 			// contextMenuStripPageProperties
 			// 
 			this.contextMenuStripPageProperties.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItemRename,
+            this.toolStripMenuItemPageSettings,
             this.toolStripMenuItemDelete,
             this.toolStripSeparator2,
             this.toolStripMenuItemClone,
@@ -111,10 +111,10 @@
 			// 
 			// toolStripMenuItemRename
 			// 
-			this.toolStripMenuItemRename.Name = "toolStripMenuItemRename";
-			this.toolStripMenuItemRename.Size = new System.Drawing.Size(280, 22);
-			this.toolStripMenuItemRename.Text = "Rename this page";
-			this.toolStripMenuItemRename.Click += new System.EventHandler(this.toolStripMenuItemRename_Click);
+			this.toolStripMenuItemPageSettings.Name = "toolStripMenuItemPageSettings";
+			this.toolStripMenuItemPageSettings.Size = new System.Drawing.Size(280, 22);
+			this.toolStripMenuItemPageSettings.Text = "Edit Page Settings";
+			this.toolStripMenuItemPageSettings.Click += new System.EventHandler(this.toolStripMenuItemPageSettings_Click);
 			// 
 			// toolStripMenuItemDelete
 			// 
@@ -264,7 +264,7 @@
 
 		private DevExpress.XtraTab.XtraTabControl xtraTabControl;
 		private System.Windows.Forms.ContextMenuStrip contextMenuStripPageProperties;
-		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemRename;
+		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemPageSettings;
 		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemDelete;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
 		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemManageImages;

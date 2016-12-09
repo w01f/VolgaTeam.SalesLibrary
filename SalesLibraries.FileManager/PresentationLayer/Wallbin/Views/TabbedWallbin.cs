@@ -170,15 +170,19 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 			IsDataChanged = true;
 		}
 
-		private void toolStripMenuItemRename_Click(object sender, EventArgs e)
+		private void toolStripMenuItemPageSettings_Click(object sender, EventArgs e)
 		{
 			var selectedPage = _menuHitInfo.Page as TabPage;
 			if (selectedPage == null) return;
-			using (var form = new FormPageName())
+			using (var form = new FormPageSettings())
 			{
 				form.PageName = selectedPage.Page.Name;
+				form.Icon = selectedPage.Page.Settings.Icon;
+				form.IconColor = selectedPage.Page.Settings.IconColor;
 				if (form.ShowDialog(MainController.Instance.MainForm) != DialogResult.OK) return;
 				selectedPage.Page.Name = form.PageName;
+				selectedPage.Page.Settings.Icon = form.Icon;
+				selectedPage.Page.Settings.IconColor = form.IconColor;
 				selectedPage.Text = form.PageName;
 				IsDataChanged = true;
 			}

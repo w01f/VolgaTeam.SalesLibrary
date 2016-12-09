@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Drawing;
 using System.Linq;
 using Newtonsoft.Json;
 using SalesLibraries.Business.Contexts.Wallbin;
@@ -327,6 +328,30 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 
 		public class LibraryPageSettings : SettingsContainer
 		{
+			private string _icon;
+			public string Icon
+			{
+				get { return _icon; }
+				set
+				{
+					if (_icon != value)
+						OnSettingsChanged();
+					_icon = value;
+				}
+			}
+
+			private Color _iconColor = Color.Black;
+			public Color IconColor
+			{
+				get { return _iconColor; }
+				set
+				{
+					if (_iconColor != value)
+						OnSettingsChanged();
+					_iconColor = value;
+				}
+			}
+
 			private bool _enableColumnTitles;
 			public bool EnableColumnTitles
 			{
@@ -340,6 +365,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 			}
 
 			private bool _applyForAllColumnTitles;
+
 			public bool ApplyForAllColumnTitles
 			{
 				get { return _applyForAllColumnTitles; }
