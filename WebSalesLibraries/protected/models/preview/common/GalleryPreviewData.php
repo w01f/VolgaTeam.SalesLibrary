@@ -58,7 +58,7 @@
 					$pageItem->itemIndexInfo = sprintf('%s %s of %s', $this->pageItemName, ($i + 1), $count);
 					$pageItem->href = $previewFile->link;
 					$pageItem->path = $previewFile->path;
-					$pageItem->size = FilePreviewData::formatFileSize($previewFile->size);
+					$pageItem->size = FileInfo::formatFileSize($previewFile->size);
 					$this->pagesInPng[] = $pageItem;
 					$i++;
 				}
@@ -79,7 +79,7 @@
 					$pageItem->itemIndexInfo = sprintf('%s %s of %s', $this->pageItemName, ($i + 1), $count);
 					$pageItem->href = $previewFile->link;
 					$pageItem->path = $previewFile->path;
-					$pageItem->size = FilePreviewData::formatFileSize($previewFile->size);
+					$pageItem->size = FileInfo::formatFileSize($previewFile->size);
 					$this->galleryPagesInPng[] = $pageItem;
 					$i++;
 				}

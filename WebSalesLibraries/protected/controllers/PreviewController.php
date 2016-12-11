@@ -11,15 +11,6 @@
 	 */
 	class PreviewController extends IsdController
 	{
-		/** return array */
-		protected function getPublicActionIds()
-		{
-			return array(
-				'downloadFile',
-				'zipAndDownloadLink'
-			);
-		}
-
 		public function getViewPath()
 		{
 			return YiiBase::getPathOfAlias($this->pathPrefix . 'preview');
@@ -190,47 +181,9 @@
 			Yii::app()->end();
 		}
 
-//		public function actionPrepareZipAndDownloadLink()
-//		{
-//			$linkId = Yii::app()->request->getPost('linkId');
-//			if (isset($linkId))
-//			{
-//				$linkRecord = LinkRecord::getLinkById($linkId);
-//				if (isset($linkRecord))
-//				{
-//					$libraryManager = new LibraryManager();
-//					$library = $libraryManager->getLibraryById($linkRecord->id_library);
-//					$link = new LibraryLink(new LibraryFolder(new LibraryPage($library)));
-//					$link->load($linkRecord);
-//					if ($link->isFolder)
-//					{
-//						$rootPath = realpath($link->filePath);
-//
-//						/** @var SplFileInfo[] $files */
-//						$files = new RecursiveIteratorIterator(
-//							new RecursiveDirectoryIterator($rootPath),
-//							RecursiveIteratorIterator::LEAVES_ONLY
-//						);
-//
-//						foreach ($files as $name => $file)
-//						{
-//							if (!$file->isDir())
-//							{
-//								$filePath = $file->getRealPath();
-//								$relativePath = substr($filePath, strlen($rootPath) + 1);
-//								$zip->addFile($filePath, $relativePath);
-//							}
-//						}
-//					}
-//				}
-//				$this->renderPartial('zipFiles', array('files' => $files), false, true);
-//			}
-//		}
-
-		public function actionZipAndDownloadLink()
+		public function actionPrepareDownloadFolder()
 		{
-			$data = CJSON::decode(base64_decode(Yii::app()->request->getQuery('data')), false);
-			$linkId = $data->linkId;
+			$linkId = Yii::app()->request->getPost('linkId');
 			if (isset($linkId))
 			{
 				$linkRecord = LinkRecord::getLinkById($linkId);
@@ -240,42 +193,61 @@
 					$library = $libraryManager->getLibraryById($linkRecord->id_library);
 					$link = new LibraryLink(new LibraryFolder(new LibraryPage($library)));
 					$link->load($linkRecord);
-
-					$zipFile = $link->fileName . '.zip';
-					$zipPath = LibraryManager::getLibrariesRootPath() . DIRECTORY_SEPARATOR . 'downloads' . DIRECTORY_SEPARATOR . $zipFile;
-					$zip = new ZipArchive();
-					$zip->open($zipPath, ZipArchive::CREATE | ZipArchive::OVERWRITE);
-
 					if ($link->isFolder)
 					{
 						$rootPath = realpath($link->filePath);
 
-						/** @var SplFileInfo[] $files */
-						$files = new RecursiveIteratorIterator(
+						/** @var SplFileInfo[] $folderFies */
+						$folderFies = new RecursiveIteratorIterator(
 							new RecursiveDirectoryIterator($rootPath),
 							RecursiveIteratorIterator::LEAVES_ONLY
 						);
 
-						foreach ($files as $name => $file)
+						$folderFileInfoList = array();
+						foreach ($folderFies as $name => $file)
 						{
 							if (!$file->isDir())
 							{
-								$filePath = $file->getRealPath();
-								$relativePath = substr($filePath, strlen($rootPath) + 1);
-								$zip->addFile($filePath, $relativePath);
+								$fileInfo = new FileDownloadInfo();
+								$fileInfo->name = $file->getBasename();
+								$fileInfo->fullPath = $file->getRealPath();
+								$fileInfo->relativePath = substr($fileInfo->fullPath, strlen($rootPath) + 1);
+								$fileInfo->size = $file->getSize();
+								$folderFileInfoList[] = $fileInfo;
 							}
 						}
+						$this->renderPartial(
+							'zipFolder',
+							array(
+								'folderName' => $link->fileName,
+								'folderFileInfoList' => $folderFileInfoList
+							),
+							false, true);
 					}
-					else
-					{
-						$filePath = realpath($link->filePath);
-						$zip->addFile($filePath, $link->fileName);
-					}
-
-					$zip->close();
-					Yii::app()->getRequest()->sendFile($zipFile, @file_get_contents($zipPath));
 				}
 			}
+		}
+
+		public function actionDownloadFolder()
+		{
+			$folderName = Yii::app()->request->getPost('folderName');
+
+			/** @var FileDownloadInfo $folderFiles */
+			$folderFiles = CJSON::decode(Yii::app()->request->getPost('folderFiles'), false);
+
+			$zipFile = $folderName . '.zip';
+			$zipPath = LibraryManager::getLibrariesRootPath() . DIRECTORY_SEPARATOR . 'downloads' . DIRECTORY_SEPARATOR . $zipFile;
+			$zip = new ZipArchive();
+			$zip->open($zipPath, ZipArchive::CREATE | ZipArchive::OVERWRITE);
+
+			foreach ($folderFiles as $file)
+			{
+				$filePath = $file->fullPath;
+				$relativePath = $file->relativePath;
+				$zip->addFile($filePath, $relativePath);
+			}
+			$zip->close();
+			Yii::app()->getRequest()->sendFile($zipFile, @file_get_contents($zipPath));
 			Yii::app()->end();
 		}
 	}

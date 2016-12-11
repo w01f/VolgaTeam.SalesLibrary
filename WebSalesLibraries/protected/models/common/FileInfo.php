@@ -97,4 +97,43 @@
 					return 'application/octet-stream';
 			}
 		}
+
+		/**
+		 * @param $fileSize
+		 * @return string
+		 */
+		public static function formatFileSize($fileSize)
+		{
+			$type = '';
+			if (isset($fileSize))
+			{
+				if ($fileSize < 1073741824)
+				{
+					if ($fileSize < 1048576)
+						$type = 'kb';
+					else
+						$type = 'mb';
+				}
+				else
+					$type = 'gb';
+				switch ($type)
+				{
+					case "kb":
+						$fileSize = $fileSize * .0009765625; // bytes to KB
+						break;
+					case "mb":
+						$fileSize = ($fileSize * .0009765625) * .0009765625; // bytes to MB
+						break;
+					case "gb":
+						$fileSize = (($fileSize * .0009765625) * .0009765625) * .0009765625; // bytes to GB
+						break;
+				}
+			}
+			else
+				$fileSize = -1;
+			if ($fileSize <= 0)
+				return '';
+			else
+				return round($fileSize, 0) . $type;
+		}
 	}

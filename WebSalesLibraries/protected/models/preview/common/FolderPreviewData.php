@@ -26,7 +26,7 @@
 			if ($this->config->allowDownload)
 			{
 				$action = new PreviewAction();
-				$action->tag = 'zip';
+				$action->tag = 'zip-folder';
 				$action->text = 'Zip & Download';
 				$this->contextActions[] = $action;
 			}

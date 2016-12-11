@@ -38,7 +38,7 @@
 				$this->mp4Src->title = $link->universalPreview->mp4->name;
 				$this->mp4Src->href = $link->universalPreview->mp4->link;
 				$this->mp4Src->path = $link->universalPreview->mp4->path;
-				$this->mp4Src->size = self::formatFileSize($link->universalPreview->mp4->size);
+				$this->mp4Src->size = FileInfo::formatFileSize($link->universalPreview->mp4->size);
 			}
 			else
 			{

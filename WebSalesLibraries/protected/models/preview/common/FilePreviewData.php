@@ -23,7 +23,7 @@
 
 			$this->fileName = $link->fileName;
 			$this->filePath = $link->filePath;
-			$this->fileSize = self::formatFileSize($link->fileSize);
+			$this->fileSize = FileInfo::formatFileSize($link->fileSize);
 			$this->fileExtension = $link->fileExtension;
 
 			switch ($this->format)
@@ -152,44 +152,5 @@
 			}
 
 			return $actions;
-		}
-
-		/**
-		 * @param $fileSize
-		 * @return string
-		 */
-		protected static function formatFileSize($fileSize)
-		{
-			$type = '';
-			if (isset($fileSize))
-			{
-				if ($fileSize < 524288000)
-				{
-					if ($fileSize < 512000)
-						$type = 'kb';
-					else
-						$type = 'mb';
-				}
-				else
-					$type = 'gb';
-				switch ($type)
-				{
-					case "kb":
-						$fileSize = $fileSize * .0009765625; // bytes to KB
-						break;
-					case "mb":
-						$fileSize = ($fileSize * .0009765625) * .0009765625; // bytes to MB
-						break;
-					case "gb":
-						$fileSize = (($fileSize * .0009765625) * .0009765625) * .0009765625; // bytes to GB
-						break;
-				}
-			}
-			else
-				$fileSize = -1;
-			if ($fileSize <= 0)
-				return '';
-			else
-				return round($fileSize, 0) . $type;
 		}
 	}

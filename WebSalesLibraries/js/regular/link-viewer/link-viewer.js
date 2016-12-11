@@ -197,8 +197,8 @@
 										case 'quicksite':
 											that.requestEmailDialog(linkId);
 											break;
-										case 'zip':
-											that.zipAndDownloadLink(linkId);
+										case 'zip-folder':
+											$.SalesPortal.DownloadFolderHelper.run(parameters.data);
 											break;
 										case 'favorites':
 											that.addToFavorites(
@@ -404,11 +404,11 @@
 
 		this.downloadFile = function (fileData)
 		{
-			var form = document.getElementById('form-download');
+			var form = document.getElementById('form-download-file');
 			if (form == null)
 			{
 				form = document.createElement("form");
-				form.setAttribute("id", "form-download");
+				form.setAttribute("id", "form-download-file");
 				form.setAttribute("method", "post");
 				form.setAttribute("action", 'preview/downloadFile');
 				form._submit_function_ = form.submit;
@@ -417,20 +417,11 @@
 				hiddenField.setAttribute("id", "input-file-data");
 				hiddenField.setAttribute("type", "hidden");
 				hiddenField.setAttribute("name", 'fileData');
-				hiddenField.setAttribute("value", $.toJSON(fileData));
 				form.appendChild(hiddenField);
 				document.body.appendChild(form);
 			}
-			var fileDataField = document.getElementById('input-file-data');
-			fileDataField.setAttribute("value", $.toJSON(fileData));
+			document.getElementById('input-file-data').setAttribute("value", $.toJSON(fileData));
 			form._submit_function_();
-		};
-
-		this.zipAndDownloadLink = function (linkId)
-		{
-			var jsonData = $.toJSON({linkId: linkId});
-			var base64Data = btoa(jsonData);
-			window.location = window.BaseUrl + "preview/zipAndDownloadLink?data=" + base64Data;
 		};
 
 		var favoritesDialogObject = [];

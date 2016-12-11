@@ -105,6 +105,7 @@
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/link-viewer/link-viewer-gallery.js?' . Yii::app()->params['version'], CClientScript::POS_END);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/link-viewer/link-viewer-email.js?' . Yii::app()->params['version'], CClientScript::POS_END);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/link-viewer/link-viewer-bar.js?' . Yii::app()->params['version'], CClientScript::POS_END);
+	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/link-viewer/link-viewer-download-folder.js?' . Yii::app()->params['version'], CClientScript::POS_END);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/shortcuts/shortcuts-search-link.js?' . Yii::app()->params['version'], CClientScript::POS_END);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/shortcuts/shortcuts-search-app.js?' . Yii::app()->params['version'], CClientScript::POS_END);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/shortcuts/shortcuts-search-bar.js?' . Yii::app()->params['version'], CClientScript::POS_END);
@@ -145,15 +146,14 @@
 	#shortcut-action-menu,
 	#shortcut-action-menu .main-level,
 	#shortcut-action-menu .level {
-		background-color: #<? echo Yii::app()->params['menu']['BarColor'];?>;
+		background-color: <? echo '#'.Yii::app()->params['menu']['BarColor'];?>;
 	}
 
 	#shortcut-action-menu .main-level .shortcut-menu-header:hover {
-		background-color: #<? echo Yii::app()->params['menu']['BarColor'];?>;
+		background-color: <? echo '#'.Yii::app()->params['menu']['BarColor'];?>;
 	}
 
-	#main-menu .shortcut-menu-group-item
-	{
+	#main-menu .shortcut-menu-group-item {
 		margin-right: <? echo Yii::app()->params['menu']['IconSeparation'];?>px;
 	}
 </style>

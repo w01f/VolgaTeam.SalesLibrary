@@ -37,7 +37,7 @@
 				$pageItem->fileName = sprintf('%s-%s%s.%s', str_replace('.' . $link->fileExtension, '', $link->fileName), $this->pageItemName, ($i + 1), pathinfo($previewFile->path, PATHINFO_EXTENSION));
 				$pageItem->href = $previewFile->link;
 				$pageItem->path = $previewFile->path;
-				$pageItem->size = FilePreviewData::formatFileSize($previewFile->size);
+				$pageItem->size = FileInfo::formatFileSize($previewFile->size);
 				$this->pages[] = $pageItem;
 				$i++;
 			}
