@@ -29,31 +29,35 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 
 			if (result != SynchronizationResult.Completed || cancellationToken.IsCancellationRequested) return;
 
-			result = SyncSpecialFolder(
-				Path.Combine(library.Path, Constants.RegularPreviewContainersRootFolderName),
-				Path.Combine(GetLibrarySyncDestinationPath(library, false), Constants.RegularPreviewContainersRootFolderName),
-				syncLog,
-				cancellationToken);
-			if (result != SynchronizationResult.Completed || cancellationToken.IsCancellationRequested) return;
-
-			if (library.Calendar.Enabled)
+			var destinationPaths = GetLibrarySyncDestinationPaths(library, false);
+			foreach (var destinationPath in destinationPaths)
 			{
 				result = SyncSpecialFolder(
-					library.Calendar.Path,
-					Path.Combine(GetLibrarySyncDestinationPath(library, false), Constants.OvernightsCalendarRootFolderName),
+					Path.Combine(library.Path, Constants.RegularPreviewContainersRootFolderName),
+					Path.Combine(destinationPath, Constants.RegularPreviewContainersRootFolderName),
 					syncLog,
 					cancellationToken);
 				if (result != SynchronizationResult.Completed || cancellationToken.IsCancellationRequested) return;
-			}
 
-			if (library.ProgramData.Enable)
-			{
-				result = SyncSpecialFolder(
-					library.ProgramData.Path,
-					Path.Combine(GetLibrarySyncDestinationPath(library, false), Constants.ProgramManagerRootFolderName),
-					syncLog,
-					cancellationToken);
-				if (result != SynchronizationResult.Completed || cancellationToken.IsCancellationRequested) return;
+				if (library.Calendar.Enabled)
+				{
+					result = SyncSpecialFolder(
+						library.Calendar.Path,
+						Path.Combine(destinationPath, Constants.OvernightsCalendarRootFolderName),
+						syncLog,
+						cancellationToken);
+					if (result != SynchronizationResult.Completed || cancellationToken.IsCancellationRequested) return;
+				}
+
+				if (library.ProgramData.Enable)
+				{
+					result = SyncSpecialFolder(
+						library.ProgramData.Path,
+						Path.Combine(destinationPath, Constants.ProgramManagerRootFolderName),
+						syncLog,
+						cancellationToken);
+					if (result != SynchronizationResult.Completed || cancellationToken.IsCancellationRequested) return;
+				}
 			}
 
 			syncLog.FinishLoging();
@@ -74,12 +78,16 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 
 			if (result != SynchronizationResult.Completed || cancellationToken.IsCancellationRequested) return;
 
-			result = SyncSpecialFolder(
-				Path.Combine(library.Path, Constants.WebPreviewContainersRootFolderName),
-				Path.Combine(GetLibrarySyncDestinationPath(library, true), Constants.WebPreviewContainersRootFolderName),
-				syncLog,
-				cancellationToken);
-			if (result != SynchronizationResult.Completed || cancellationToken.IsCancellationRequested) return;
+			var destinationPaths = GetLibrarySyncDestinationPaths(library, true);
+			foreach (var destinationPath in destinationPaths)
+			{
+				result = SyncSpecialFolder(
+					Path.Combine(library.Path, Constants.WebPreviewContainersRootFolderName),
+					Path.Combine(destinationPath, Constants.WebPreviewContainersRootFolderName),
+					syncLog,
+					cancellationToken);
+				if (result != SynchronizationResult.Completed || cancellationToken.IsCancellationRequested) return;
+			}
 
 			syncLog.FinishLoging();
 		}
@@ -124,18 +132,26 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 				filesWhiteListItems.Add(Path.Combine(library.Path, Constants.ShortLibraryInfoFileName));
 			}
 
-			var destinationPath = GetLibrarySyncDestinationPath(library, isWebSync);
+			var destinationPaths = GetLibrarySyncDestinationPaths(library, isWebSync);
 
-			var syncOptions = new SynchronizationOptions(
-				new DirectoryInfo(library.Path),
-				new DirectoryInfo(destinationPath),
-				true);
-			syncOptions.FilterList = SyncFilterList.Create(filesWhiteListItems, SyncFilterType.ByWhiteList);
+			var result = SynchronizationResult.Completed;
+			foreach (var destinationPath in destinationPaths)
+			{
+				var syncOptions = new SynchronizationOptions(
+					new DirectoryInfo(library.Path),
+					new DirectoryInfo(destinationPath),
+					true);
+				syncOptions.FilterList = SyncFilterList.Create(filesWhiteListItems, SyncFilterType.ByWhiteList);
 
-			if (!Directory.Exists(destinationPath))
-				synchronizer.CreateFolder(destinationPath);
+				if (!Directory.Exists(destinationPath))
+					synchronizer.CreateFolder(destinationPath);
 
-			return synchronizer.SynchronizeFolder(syncOptions);
+				result = synchronizer.SynchronizeFolder(syncOptions);
+
+				if (result != SynchronizationResult.Completed)
+					return result;
+			}
+			return result;
 		}
 
 		private static SynchronizationResult SyncSpecialFolder(
@@ -189,14 +205,19 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 			return result;
 		}
 
-		private static string GetLibrarySyncDestinationPath(IDataSource library, bool isWebSync)
+		private static IEnumerable<string> GetLibrarySyncDestinationPaths(IDataSource library, bool isWebSync)
 		{
-			var destinationRoot = isWebSync ?
-				MainController.Instance.Settings.WebPath :
-				MainController.Instance.Settings.NetworkPath;
-			if (library.Name == Constants.PrimaryFileStorageName)
-				return destinationRoot;
-			return Path.Combine(destinationRoot, library.Name);
+			var destinationRoots = isWebSync ?
+				MainController.Instance.Settings.WebPaths :
+				MainController.Instance.Settings.NetworkPaths;
+
+			foreach (var destinationRoot in destinationRoots)
+			{
+				if (!Directory.Exists(destinationRoot)) continue;
+				if (library.Name == Constants.PrimaryFileStorageName)
+					yield return destinationRoot;
+				yield return Path.Combine(destinationRoot, library.Name);
+			}
 		}
 	}
 }

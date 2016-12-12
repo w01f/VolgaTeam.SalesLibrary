@@ -116,6 +116,9 @@
       <DependentUpon>YearControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Common\EditorHelper.cs" />
+    <Compile Include="Common\FolderBrowserDialogEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Common\GridDragDropHelper.cs" />
     <Compile Include="Common\HtmlColorEdit.cs">
       <SubType>Component</SubType>

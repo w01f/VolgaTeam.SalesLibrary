@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Xml;
 using SalesLibraries.Common.Configuration;
@@ -12,11 +14,11 @@ namespace SalesLibraries.FileManager.Configuration
 
 		#region FM Settings
 		public string BackupPath { get; set; }
-		public string NetworkPath { get; set; }
-		public string WebPath { get; set; }
+		public List<string> NetworkPaths { get; private set; }
+		public List<string> WebPaths { get; private set; }
 
-		public bool EnableLocalSync => !String.IsNullOrEmpty(NetworkPath);
-		public bool EnableWebSync => !String.IsNullOrEmpty(WebPath);
+		public bool EnableLocalSync => NetworkPaths.Any();
+		public bool EnableWebSync => WebPaths.Any();
 
 		public string SelectedLibrary { get; set; }
 		public string SelectedPage { get; set; }
@@ -69,8 +71,8 @@ namespace SalesLibraries.FileManager.Configuration
 
 			#region FM Settings
 			BackupPath = String.Empty;
-			NetworkPath = String.Empty;
-			WebPath = String.Empty;
+			NetworkPaths = new List<String>();
+			WebPaths = new List<String>();
 			SelectedLibrary = String.Empty;
 			SelectedPage = String.Empty;
 			SelectedCalendar = String.Empty;
@@ -98,6 +100,10 @@ namespace SalesLibraries.FileManager.Configuration
 			if (!Common.Helpers.RemoteResourceManager.Instance.AppSettingsFile.ExistsLocal()) return;
 			int tempInt;
 			bool tempBool;
+
+			NetworkPaths.Clear();
+			WebPaths.Clear();
+
 			var document = new XmlDocument();
 			document.Load(Common.Helpers.RemoteResourceManager.Instance.AppSettingsFile.LocalPath);
 
@@ -106,11 +112,11 @@ namespace SalesLibraries.FileManager.Configuration
 			if (node != null)
 				BackupPath = node.InnerText;
 			node = document.SelectSingleNode(@"/LocalSettings/NetworkPath");
-			if (node != null)
-				NetworkPath = node.InnerText;
+			if (node != null && !String.IsNullOrEmpty(node.InnerText))
+				NetworkPaths.AddRange(node.InnerText.Split('|'));
 			node = document.SelectSingleNode(@"/LocalSettings/WebPath");
-			if (node != null)
-				WebPath = node.InnerText;
+			if (node != null && !String.IsNullOrEmpty(node.InnerText))
+				WebPaths.AddRange(node.InnerText.Split('|'));
 			node = document.SelectSingleNode(@"/LocalSettings/SelectedLibrary");
 			if (node != null)
 				SelectedLibrary = node.InnerText;
@@ -165,9 +171,9 @@ namespace SalesLibraries.FileManager.Configuration
 			#region FM Settings
 			xml.AppendLine(@"<BackupPath>" + BackupPath.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</BackupPath>");
 			if (EnableLocalSync)
-				xml.AppendLine(@"<NetworkPath>" + NetworkPath.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</NetworkPath>");
+				xml.AppendLine(@"<NetworkPath>" + String.Join("|", NetworkPaths.Select(p=>p.Replace(@"&", "&#38;").Replace("\"", "&quot;"))) + @"</NetworkPath>");
 			if (EnableWebSync)
-				xml.AppendLine(@"<WebPath>" + WebPath.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</WebPath>");
+				xml.AppendLine(@"<WebPath>" + String.Join("|", WebPaths.Select(p => p.Replace(@"&", "&#38;").Replace("\"", "&quot;"))) + @"</WebPath>");
 			if (!String.IsNullOrEmpty(SelectedLibrary))
 				xml.AppendLine(@"<SelectedLibrary>" + SelectedLibrary.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</SelectedLibrary>");
 			if (!String.IsNullOrEmpty(SelectedPage))

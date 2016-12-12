@@ -434,20 +434,19 @@ namespace SalesLibraries.FileManager.Controllers
 			ProcessChanges();
 			using (var form = new FormPaths())
 			{
-				form.BackupPath = MainController.Instance.Settings.BackupPath;
-				form.LocalSyncPath = MainController.Instance.Settings.NetworkPath;
-				form.WebSyncPath = MainController.Instance.Settings.WebPath;
+				var oldBackupPath = MainController.Instance.Settings.BackupPath;
 				if (form.ShowDialog(MainController.Instance.MainForm) != DialogResult.OK) return;
+				MainController.Instance.Settings.Save();
 				var backupChanged = !String.Equals(
 					MainController.Instance.Settings.BackupPath,
-					form.BackupPath,
+					oldBackupPath,
 					StringComparison.InvariantCultureIgnoreCase);
 
 				if (backupChanged)
 				{
-					DatabaseConnectionHelper.Disconnect(MainController.Instance.Settings.BackupPath);
+					DatabaseConnectionHelper.Disconnect(oldBackupPath);
 
-					var connectionState = DatabaseConnectionHelper.GetConnectionState(form.BackupPath);
+					var connectionState = DatabaseConnectionHelper.GetConnectionState(MainController.Instance.Settings.BackupPath);
 					if (connectionState.Type == ConnectionStateType.Busy)
 					{
 						MainController.Instance.PopupMessages.ShowWarning(
@@ -457,14 +456,10 @@ namespace SalesLibraries.FileManager.Controllers
 								Environment.NewLine));
 						return;
 					}
+
+					NeedToUpdate = true;
+					MainController.Instance.ReloadData();
 				}
-				MainController.Instance.Settings.BackupPath = form.BackupPath;
-				MainController.Instance.Settings.NetworkPath = form.LocalSyncPath;
-				MainController.Instance.Settings.WebPath = form.WebSyncPath;
-				MainController.Instance.Settings.Save();
-				if (!backupChanged) return;
-				NeedToUpdate = true;
-				MainController.Instance.ReloadData();
 			}
 		}
 

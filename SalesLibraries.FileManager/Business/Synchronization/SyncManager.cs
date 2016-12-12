@@ -48,6 +48,10 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 				return;
 			}
 
+			if ((MainController.Instance.Settings.NetworkPaths.Any() && MainController.Instance.Settings.NetworkPaths.Any(p => !Directory.Exists(p))) ||
+				MainController.Instance.Settings.WebPaths.Any() && MainController.Instance.Settings.WebPaths.Any(p => !Directory.Exists(p)))
+				MainController.Instance.PopupMessages.ShowWarning("Some of your Upload Directories are Not connected.Your changes will still be saved in your Source Directory.");
+
 			InactiveLinkManager.Instance.NotifyAboutExpiredLinks(targetLibrary.InactiveLinksSettings);
 
 			MainController.Instance.MainForm.ribbonControl.Enabled = false;

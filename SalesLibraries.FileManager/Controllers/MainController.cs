@@ -170,9 +170,6 @@ namespace SalesLibraries.FileManager.Controllers
 							var mainForm = (Form)o;
 							if (form.ShowDialog(mainForm) == DialogResult.OK)
 							{
-								Settings.BackupPath = form.BackupPath;
-								Settings.NetworkPath = form.LocalSyncPath;
-								Settings.WebPath = form.WebSyncPath;
 								Settings.Save();
 							}
 							else
