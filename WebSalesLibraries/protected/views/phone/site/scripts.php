@@ -1,6 +1,6 @@
 <?
 	$cs = Yii::app()->clientScript;
-	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/vendor/icomoon/style.css?' . Yii::app()->params['version']);
+	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/vendor/icomoon/style.css?' . Yii::app()->params['icomoon']['version']);
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/vendor/mobile/css/jquery.mobile.ios.theme.css?' . Yii::app()->params['version']);
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/vendor/photoswipe/photoswipe.css?' . Yii::app()->params['version']);
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/vendor/slick-slider/slick.css?' . Yii::app()->params['version']);

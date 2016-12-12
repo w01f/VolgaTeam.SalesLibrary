@@ -141,6 +141,7 @@ div.scroll_tab_inner span.scroll_tab_transparent {
 }
 
 .scroll_tabs_theme_light .scroll_tab_right_button::before {
+  --content: "\25B6";
   line-height: 40px;
   padding-left: 5px;
 }
@@ -157,6 +158,10 @@ div.scroll_tab_inner span.scroll_tab_transparent {
 .scroll_tabs_theme_light div.scroll_tab_inner span.tab_selected, .scroll_tabs_theme_light div.scroll_tab_inner li.tab_selected {
   background-color: #AAAAAA;
 }
+
+/*.scroll_tabs_theme_light div.scroll_tab_inner span.scroll_tab_first_selected {
+  background-color: #AAAAAA;
+}*/
 
 .scrolltab-right {
   text-align: right;

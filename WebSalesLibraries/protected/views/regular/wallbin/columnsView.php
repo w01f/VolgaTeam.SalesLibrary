@@ -12,7 +12,19 @@
 
 	$pageColumnInnerMargin = 1;
 ?>
-<? if ($style->columnStyleEnabled): ?>
+<? if (!$style->columnStyleEnabled): ?>
+	<style>
+		.folder-body
+		{
+			min-height: 40px;
+		}
+
+		.folder-links-scroll-area
+		{
+			min-height: 80px;
+		}
+	</style>
+<? else: ?>
 	<style>
 		#page-<? echo $libraryPage->id; ?> .content-columns-container {
 			border-collapse: separate;

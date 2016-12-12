@@ -169,7 +169,6 @@
 				"data": "name",
 				"orderable": data.dataOptions.reorderSourceField == undefined,
 				"title": "Link",
-				"class": "allow-reorder",
 				"render": cellRenderer
 			});
 			if (data.dataOptions.showViewsCount)
@@ -191,7 +190,7 @@
 					"orderable": data.dataOptions.reorderSourceField == undefined,
 					"title": "Rating",
 					"width": "90px",
-					"class": "centered allow-reorder rate-image-container",
+					"class": "centered rate-image-container",
 					"render": {
 						_: function (columnData)
 						{
@@ -258,7 +257,7 @@
 				{
 					update: true,
 					dataSrc: 'extended_data.' + data.dataOptions.reorderSourceField,
-					selector: 'td.allow-reorder',
+					selector: '.allow-reorder',
 					snapX: 0
 				} :
 					false,

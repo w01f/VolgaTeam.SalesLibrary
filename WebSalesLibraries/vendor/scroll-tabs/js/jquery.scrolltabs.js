@@ -426,8 +426,8 @@
   $.fn.scrollTabs.defaultOptions = {
     scroll_distance: 300,
     scroll_duration: 300,
-    left_arrow_size: 26,
-    right_arrow_size: 26,
+    left_arrow_size: 42,
+    right_arrow_size: 42,
     click_callback: function(e){
       var val = $(this).attr('rel');
       if(val){

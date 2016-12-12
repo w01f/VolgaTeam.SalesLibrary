@@ -106,6 +106,9 @@
 					'IconSeparation' => 5,
 					'SaveSuperGroup' => true
 				),
+				'icomoon' => array(
+					'version' => 1
+				),
 			),
 			'components' => array(
 				'db' => array(
