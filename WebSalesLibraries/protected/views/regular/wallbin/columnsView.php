@@ -36,6 +36,10 @@
 			border-spacing: 0;
 		}
 
+		#page-<? echo $libraryPage->id; ?> .folder-links-container {
+			margin-bottom: 20px;
+		}
+
 		<?if(isset($style->verticalBorder1Color)):?>
 		<?if($style->verticalBorderStretch):?>
 		#page-<? echo $libraryPage->id; ?> .page-column.column0 {

@@ -81,8 +81,8 @@
 			dialogContent.find('.action-container .action').off('click.preview').on('click.preview', processSaveAction);
 
 			dialogContent.find('.open-quick-link').off('click.preview').on('click.preview', openQuickLink);
-			dialogContent.find('.open-modal').off('click.preview').on('click.preview', showModal);
-			dialogContent.find('.open-fullscreen').off('click.preview').on('click.preview', showFullScreen);
+			dialogContent.find('.open-video-modal').off('click.preview').on('click.preview', showModal);
+			dialogContent.find('.open-video-fullscreen').off('click.preview').on('click.preview', showFullScreen);
 
 			new $.SalesPortal.RateManager().init(
 				{
