@@ -71,27 +71,6 @@
 		 * @return string
 		 * @soap
 		 */
-		public function notifyDeadLinks($sessionKey)
-		{
-			$result = 'Error';
-			if ($this->authenticateBySession($sessionKey))
-			{
-				ob_start();
-
-				$action = Yii::createComponent('application.components.actions.NotifyDeadLinksAction', $this, 'notifyDeadLinks');
-				$action->run();
-
-				$result = ob_get_contents();
-				ob_end_clean();
-			}
-			return $result;
-		}
-
-		/**
-		 * @param string $sessionKey
-		 * @return string
-		 * @soap
-		 */
 		public function updateQuizzes($sessionKey)
 		{
 			$result = 'Error';

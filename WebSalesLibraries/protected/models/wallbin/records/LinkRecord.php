@@ -20,7 +20,6 @@
 	 * @property int widget_type
 	 * @property mixed widget
 	 * @property mixed tags
-	 * @property mixed is_dead
 	 * @property mixed date_add
 	 * @property mixed date_modify
 	 * @property mixed id_preview
@@ -98,8 +97,6 @@
 				$linkRecord->widget = $link['widget'];
 				if (array_key_exists('isPreviewNotReady', $link))
 					$linkRecord->is_preview_not_ready = $link['isPreviewNotReady'];
-				if (array_key_exists('isDead', $link))
-					$linkRecord->is_dead = $link['isDead'];
 				$linkRecord->date_add = date(Yii::app()->params['mysqlDateFormat'], strtotime($link['dateAdd']));
 				$linkRecord->date_modify = $linkDate;
 
@@ -171,7 +168,7 @@
 		{
 			/** @var  $linkRecord LinkRecord */
 			$linkRecord = self::model()->findByPk($linkId);
-			if (isset($linkRecord) && $linkRecord->is_dead == false && $linkRecord->is_preview_not_ready == false)
+			if (isset($linkRecord) && $linkRecord->is_preview_not_ready == false)
 				return $linkRecord;
 			return null;
 		}
@@ -200,7 +197,7 @@
 		 */
 		public static function getLinksByFolder($folderId)
 		{
-			return self::model()->findAll('id_folder=? and id_parent_link is null and is_dead=0 and is_preview_not_ready=0', array($folderId));
+			return self::model()->findAll('id_folder=? and id_parent_link is null and is_preview_not_ready=0', array($folderId));
 		}
 
 		/**
@@ -209,7 +206,7 @@
 		 */
 		public static function getLinksByParent($linkId)
 		{
-			$linkRecords = self::model()->findAll('id_parent_link=? and is_dead=0 and is_preview_not_ready=0 order by name', array($linkId));
+			$linkRecords = self::model()->findAll('id_parent_link=? and is_preview_not_ready=0 order by name', array($linkId));
 			if (isset($linkRecords))
 				return $linkRecords;
 			return null;

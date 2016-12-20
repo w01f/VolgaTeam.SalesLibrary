@@ -135,11 +135,6 @@
 		 * @soap
 		 */
 		public $contentPath;
-		/**
-		 * @var boolean
-		 * @soap
-		 */
-		public $isDead;
 		public $fileLink;
 		public $filePath;
 		public $universalPreview;

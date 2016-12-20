@@ -213,7 +213,6 @@
 			$joinParts = array_merge($customJoin, $joinParts);
 
 			$whereConditions = array('AND',
-				'link.is_dead=0',
 				'link.is_preview_not_ready=0',
 				'link.type<>5',
 				'link.type<>6');

@@ -48,7 +48,6 @@
 		public $dateAdd;
 		public $dateModify;
 		public $contentPath;
-		public $isDead;
 		public $fileLink;
 		public $filePath;
 		public $universalPreview;
@@ -91,7 +90,6 @@
 			$this->type = $linkRecord->type;
 			$this->widgetType = $linkRecord->widget_type;
 			$this->widget = $linkRecord->widget;
-			$this->isDead = $linkRecord->is_dead;
 			$this->originalFormat = $linkRecord->original_format;
 			$this->searchFormat = $linkRecord->search_format;
 			$this->extendedProperties = \BaseLinkSettings::createByLink($linkRecord);
@@ -175,7 +173,7 @@
 		{
 			unset($this->folderContent);
 			$this->folderContent = array();
-			foreach (\LinkRecord::model()->findAll('id_parent_link=? and is_dead=0 and is_preview_not_ready=0', array($this->id)) as $contentRecord)
+			foreach (\LinkRecord::model()->findAll('id_parent_link=? and is_preview_not_ready=0', array($this->id)) as $contentRecord)
 			{
 				/** @var  $contentRecord \LinkRecord */
 				$link = new LibraryLink($this->parent);
