@@ -28,7 +28,7 @@
 					case "pdf":
 					case "jpeg":
 					case "png":
-						path = (window.BaseUrl + viewerData.url).replace(/\/\/+/g, '/');
+						path = viewerData.url.replace(/\/\/+/g, '/');
 						break;
 					default:
 						path = viewerData.url;
@@ -51,16 +51,16 @@
 			{
 				var format = viewerData.format;
 				var fileName = viewerData.fileName;
-				var originalUrl = (window.BaseUrl + viewerData.url).replace(/\/\/+/g, '/');
+				var originalUrl = viewerData.url.replace(/\/\/+/g, '/');
 
 				var parts = [];
 				if (viewerData.pages !== undefined)
 					$.each(viewerData.pages, function (itemIndex, item)
 					{
-						parts.push((window.BaseUrl + item.href).replace(/\/\/+/g, '/'));
+						parts.push(item.href.replace(/\/\/+/g, '/'));
 					});
 				else if (viewerData.mp4Src !== undefined)
-					parts.push((window.BaseUrl + viewerData.mp4Src.href).replace(/\/\/+/g, '/'));
+					parts.push(viewerData.mp4Src.href.replace(/\/\/+/g, '/'));
 
 				var slideWidth = 0;
 				if (viewerData.slideWidth !== undefined)

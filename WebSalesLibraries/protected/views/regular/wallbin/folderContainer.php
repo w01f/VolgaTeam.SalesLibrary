@@ -9,55 +9,55 @@
 ?>
 <div class="folder-body" style="border-color: <? echo $folder->borderColor; ?>;">
 	<? if ($style->showRegularHeader): ?>
-		<div class="folder-header-container regular" id="folder<? echo $folder->id; ?>"
-		     style="font-family: <? echo isset($folder->banner) && $folder->banner->isEnabled ? $folder->banner->font->name : $folder->headerFont->name; ?>,serif;
-			     font-size: <? echo isset($folder->banner) && $folder->banner->isEnabled ? $folder->banner->font->size : $folder->headerFont->size; ?>pt;
-			     font-weight: <? echo (isset($folder->banner) && $folder->banner->isEnabled ? $folder->banner->font->isBold : $folder->headerFont->isBold) ? ' bold' : ' normal'; ?>;
-			     font-style: <? echo (isset($folder->banner) && $folder->banner->isEnabled ? $folder->banner->font->isItalic : $folder->headerFont->isItalic) ? ' italic' : ' normal'; ?>;
-			     text-decoration: <? echo (isset($folder->banner) && $folder->banner->isEnabled ? $folder->banner->font->isUnderlined : $folder->headerFont->isUnderlined) ? ' underline' : ' inherit'; ?>;
-			     text-align: <? echo isset($folder->banner) && $folder->banner->isEnabled ? $folder->banner->imageAlignment : $folder->headerAlignment; ?>;
-			     background-color: <? echo $folder->headerBackColor; ?>;
-			     color: <? echo isset($folder->banner) && $folder->banner->isEnabled ? $folder->banner->foreColor : $folder->headerForeColor; ?>;
-			     border-bottom-color: <? echo $folder->borderColor; ?>;
-			     min-height: <? echo $folder->headerHeight; ?>px;">
+        <div class="folder-header-container regular" id="folder<? echo $folder->id; ?>"
+             style="font-family: <? echo isset($folder->banner) && $folder->banner->isEnabled ? $folder->banner->font->name : $folder->headerFont->name; ?>,serif;
+                     font-size: <? echo isset($folder->banner) && $folder->banner->isEnabled ? $folder->banner->font->size : $folder->headerFont->size; ?>pt;
+                     font-weight: <? echo (isset($folder->banner) && $folder->banner->isEnabled ? $folder->banner->font->isBold : $folder->headerFont->isBold) ? ' bold' : ' normal'; ?>;
+                     font-style: <? echo (isset($folder->banner) && $folder->banner->isEnabled ? $folder->banner->font->isItalic : $folder->headerFont->isItalic) ? ' italic' : ' normal'; ?>;
+                     text-decoration: <? echo (isset($folder->banner) && $folder->banner->isEnabled ? $folder->banner->font->isUnderlined : $folder->headerFont->isUnderlined) ? ' underline' : ' inherit'; ?>;
+                     text-align: <? echo isset($folder->banner) && $folder->banner->isEnabled ? $folder->banner->imageAlignment : $folder->headerAlignment; ?>;
+                     background-color: <? echo $folder->headerBackColor; ?>;
+                     color: <? echo isset($folder->banner) && $folder->banner->isEnabled ? $folder->banner->foreColor : $folder->headerForeColor; ?>;
+                     border-bottom-color: <? echo $folder->borderColor; ?>;
+                     min-height: <? echo $folder->headerHeight; ?>px;">
 			<? if (isset($folder->banner) && $folder->banner->isEnabled): ?>
-				<table style="height: 100%; display: inline;">
-					<tr>
-						<td><img src="data:image/png;base64,<? echo $folder->banner->image; ?>"></td>
+                <table style="height: 100%; display: inline;">
+                    <tr>
+                        <td><img src="data:image/png;base64,<? echo $folder->banner->image; ?>"></td>
 						<? if ($folder->banner->showText): ?>
-							<td>
+                            <td>
 								<span style="text-align: <? echo $folder->banner->imageAlignment; ?>;">
 									<? echo $folder->banner->text; ?>
 								</span>
-							</td>
+                            </td>
 						<? endif; ?>
-					</tr>
-				</table>
+                    </tr>
+                </table>
 			<? else: ?>
 				<? $widget = $folder->getWidget(); ?>
 				<? if (isset($widget)): ?>
-					<img class="folder-widget" src="data:image/png;base64,<? echo $widget; ?>">
+                    <img class="folder-widget" src="data:image/png;base64,<? echo $widget; ?>">
 				<? endif; ?>
-				<span class="folder-header"
-				      style="line-height: <? echo($folder->headerHeight - 1); ?>px;"><? echo $folder->name; ?></span>
+                <span class="folder-header"
+                      style="line-height: <? echo($folder->headerHeight - 1); ?>px;"><? echo $folder->name; ?></span>
 			<? endif; ?>
-		</div>
-	<? elseif ($style->showCustomTitle): ?>
-		<style>
-			#folder<? echo $folder->id; ?> {
-				font-family: <? echo $style->font->name; ?>, serif;
-				font-size: <? echo $style->font->size; ?>pt;
-				font-weight: <? echo $style->font->isBold ? 'bold' : 'normal'; ?>;
-				font-style: <? echo $style->font->isItalic ? 'italic' : 'normal'; ?>;
-				text-decoration: <? echo $style->font->isUnderlined ? 'underline' : 'inherit'; ?>;
-				text-align: <? echo $style->textAlign; ?>;
-				color: <? echo '#'.$style->textColor; ?>;
-				background-color: <? echo '#'.$style->backColor; ?>;
-			}
-		</style>
-		<div class="folder-header-container custom-title" id="folder<? echo $folder->id; ?>">
+        </div>
+	<? elseif ($style->showCustomTitle && (!$style->hideTopFoldersCustomTitle || ($style->hideTopFoldersCustomTitle && $folder->rowOrder > 0))): ?>
+        <style>
+            #folder<? echo $folder->id; ?> {
+                font-family: <? echo $style->font->name; ?>, serif;
+                font-size: <? echo $style->font->size; ?>pt;
+                font-weight: <? echo $style->font->isBold ? 'bold' : 'normal'; ?>;
+                font-style: <? echo $style->font->isItalic ? 'italic' : 'normal'; ?>;
+                text-decoration: <? echo $style->font->isUnderlined ? 'underline' : 'inherit'; ?>;
+                text-align: <? echo $style->textAlign; ?>;
+                color: <? echo '#'.$style->textColor; ?>;
+                background-color: <? echo '#'.$style->backColor; ?>;
+            }
+        </style>
+        <div class="folder-header-container custom-title" id="folder<? echo $folder->id; ?>">
 			<? echo $folder->name; ?>
-		</div>
+        </div>
 	<? endif; ?>
 	<? echo $this->renderFile(Yii::getPathOfAlias('application.views.regular.wallbin') . '/folderLinks.php', array('folder' => $folder), true); ?>
 </div>
