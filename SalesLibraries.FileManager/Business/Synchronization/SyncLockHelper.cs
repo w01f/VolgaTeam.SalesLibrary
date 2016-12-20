@@ -8,14 +8,16 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 {
 	static class SyncLockHelper
 	{
-		public static bool IsLockedForSync(this Library library, 
-			out int uncompletedTags, 
-			out int unconvertedVideos, 
+		public static bool IsLockedForSync(this Library library,
+			out int uncompletedTags,
+			out int unconvertedVideos,
 			out int inactiveLinks)
 		{
 			uncompletedTags = 0;
 			if (MainController.Instance.Settings.SyncLockByUntaggedLinks)
 			{
+				TaggedLinksManager.Instance.Load(library);
+
 				var totalLinks = TaggedLinksManager.Instance.TotalLibraryLinks;
 				var taggedLinks = TaggedLinksManager.Instance.TaggedLibraryLinks;
 				uncompletedTags = totalLinks - taggedLinks;
@@ -28,7 +30,10 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 				0;
 			inactiveLinks = 0;
 			if (MainController.Instance.Settings.SyncLockByInactiveLinks)
+			{
+				InactiveLinkManager.Instance.Load(new[] { library });
 				inactiveLinks = InactiveLinkManager.Instance.DeadLinks.Count;
+			}
 
 			var locked = uncompletedTags > 0 || unconvertedVideos > 0 || inactiveLinks > 0;
 			return locked;

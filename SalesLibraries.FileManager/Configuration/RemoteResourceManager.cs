@@ -20,6 +20,7 @@ namespace SalesLibraries.FileManager.Configuration
 		public StorageFile ErrorEmailSettingsFile { get; private set; }
 		public StorageFile TabSettingsFile { get; private set; }
 		public StorageFile SyncLockSettingsFile { get; private set; }
+		public StorageFile ArchiveLinksSettingsFile { get; private set; }
 		#endregion
 
 		private RemoteResourceManager() { }
@@ -81,6 +82,12 @@ namespace SalesLibraries.FileManager.Configuration
 				"SyncLock.xml"
 				));
 			await SyncLockSettingsFile.Download();
+
+			ArchiveLinksSettingsFile = new StorageFile(appOutgoingFolder.RelativePathParts.Merge(
+			"ArchiveLinksSettings.xml"
+			));
+			if (await ArchiveLinksSettingsFile.Exists(true))
+				await ArchiveLinksSettingsFile.Download();
 		}
 	}
 }

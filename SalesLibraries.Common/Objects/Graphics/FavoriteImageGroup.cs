@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 
 namespace SalesLibraries.Common.Objects.Graphics
@@ -7,7 +9,21 @@ namespace SalesLibraries.Common.Objects.Graphics
 	{
 		public FavoriteImageGroup(IImageSourceList parentList) : base(parentList) { }
 
-		public void AddImage<T>(string filePath) where T : BaseImageSource
+		public void AddImageSource<T>(T imageSource) where T : BaseImageSource
+		{
+			var filePath = imageSource.FilePath;
+			AddImageFile<T>(filePath);
+		}
+
+		public void AddImage<T>(Image image, string name) where T : BaseImageSource
+		{
+			if (image == null) return;
+			var filePath = Path.Combine(Path.GetTempPath(), String.Format("{0}.png", name));
+			image.Save(filePath);
+			AddImageFile<T>(filePath);
+		}
+
+		public void AddImageFile<T>(string filePath) where T : BaseImageSource
 		{
 			if (!File.Exists(filePath)) return;
 			if (!ParentList.FavsFolder.ExistsLocal())
@@ -16,7 +32,7 @@ namespace SalesLibraries.Common.Objects.Graphics
 			LoadImages<T>(ParentList.FavsFolder.LocalPath);
 		}
 
-		public void RemoveImage<T>(string filePath) where T : BaseImageSource
+		public void RemoveImageFile<T>(string filePath) where T : BaseImageSource
 		{
 			if (!File.Exists(filePath)) return;
 			if (!ParentList.FavsFolder.ExistsLocal())

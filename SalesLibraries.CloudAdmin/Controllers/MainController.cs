@@ -104,7 +104,7 @@ namespace SalesLibraries.CloudAdmin.Controllers
 
 			if (FileStorageManager.Instance.Activated)
 			{
-				var progressTitle = String.Empty;
+				string progressTitle;
 				switch (FileStorageManager.Instance.DataState)
 				{
 					case DataActualityState.NotExisted:

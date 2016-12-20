@@ -116,6 +116,9 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 
 		[NotMapped, JsonIgnore]
 		public Color BannerBackColor => Settings.BackgroundHeaderColor;
+
+		[NotMapped, JsonIgnore]
+		public string ObjectDisplayName => "Window";
 		#endregion
 
 		public LibraryFolder()

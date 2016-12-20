@@ -51,8 +51,8 @@ namespace SalesLibraries.FileManager.Business.Services
 				var currentText = PdfTextExtractor.GetTextFromPage(pdfReader, page, strategy);
 				currentText = Encoding.UTF8.GetString(
 					Encoding.Convert(
-						Encoding.Default, 
-						Encoding.UTF8, 
+						Encoding.Default,
+						Encoding.UTF8,
 						Encoding.Default.GetBytes(currentText))
 					);
 				text.Append(currentText);

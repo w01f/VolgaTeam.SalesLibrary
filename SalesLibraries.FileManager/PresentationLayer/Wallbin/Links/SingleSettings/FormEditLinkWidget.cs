@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -6,16 +7,22 @@ using DevComponents.DotNetBar.Metro;
 using DevExpress.XtraTab;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
+using SalesLibraries.Common.Extensions;
 using SalesLibraries.Common.Helpers;
+using SalesLibraries.Common.Objects.Graphics;
 using SalesLibraries.CommonGUI.Common;
+using SalesLibraries.CommonGUI.RetractableBar;
 using SalesLibraries.FileManager.Controllers;
 using SalesLibraries.FileManager.PresentationLayer.Wallbin.ImageGallery;
+using SalesLibraries.FileManager.Properties;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSettings
 {
 	public partial class FormEditLinkWidget : MetroForm, ILinkSettingsEditForm
 	{
+		private bool _allowHandleEvents;
 		private readonly BaseLibraryLink _sourceLink;
+		private Image _originalImage;
 
 		public LinkSettingsType[] EditableSettings => new[]
 		{
@@ -26,6 +33,16 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		{
 			_sourceLink = sourceLink;
 			InitializeComponent();
+
+			retractableBarGallery.AddButtons(new[]
+				{
+					new ButtonInfo
+					{
+						Logo = Resources.RetractableLogoGallery,
+						Tooltip = "Expand gallery"
+					}
+				});
+
 			if (CreateGraphics().DpiX > 96)
 			{
 				var font = new Font(styleController.Appearance.Font.FontFamily, styleController.Appearance.Font.Size - 2,
@@ -62,8 +79,10 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 		private void LoadData()
 		{
-			xtraTabControlWidgets.TabPages.Clear();
-			xtraTabControlWidgets.TabPages.AddRange(
+			_allowHandleEvents = false;
+
+			xtraTabControlGallery.TabPages.Clear();
+			xtraTabControlGallery.TabPages.AddRange(
 				MainController.Instance.Lists.Widgets.Items.Select(imageGroup =>
 				{
 					var tabPage = BaseLinkImagesContainer.Create(imageGroup);
@@ -72,8 +91,40 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 					return (XtraTabPage)tabPage;
 				}).ToArray()
 			);
-			xtraTabControlWidgets.SelectedPageChanged += (o, e) => ((BaseLinkImagesContainer)e.Page).Init();
-			((BaseLinkImagesContainer)xtraTabControlWidgets.SelectedTabPage).Init();
+			xtraTabControlGallery.SelectedPageChanged += (o, e) =>
+			{
+				((BaseLinkImagesContainer)e.Page).Init();
+				var galleryNode = e.Page.Tag as TreeNode;
+				if (galleryNode == null)
+				{
+					galleryNode = treeViewGallery.Nodes.Insert(xtraTabControlGallery.TabPages.IndexOf(e.Page), e.Page.Text);
+					galleryNode.Tag = e.Page;
+					e.Page.Tag = galleryNode;
+					_allowHandleEvents = false;
+					treeViewGallery.SelectedNode = galleryNode;
+					_allowHandleEvents = true;
+				}
+			};
+			((BaseLinkImagesContainer)xtraTabControlGallery.SelectedTabPage).Init();
+			foreach (var galleryPage in xtraTabControlGallery.TabPages.OfType<BaseLinkImagesContainer>().ToList())
+			{
+				if (!galleryPage.PageVisible) continue;
+				var galleryNode = treeViewGallery.Nodes.Add(galleryPage.Text);
+				galleryNode.Tag = galleryPage;
+				galleryPage.Tag = galleryNode;
+				if (xtraTabControlGallery.SelectedTabPage == galleryPage)
+				{
+					treeViewGallery.SelectedNode = galleryNode;
+					labelControlSelectedGalleryName.Text = galleryPage.Text;
+				}
+			}
+			treeViewGallery.AfterSelect += (o, e) =>
+			{
+				var galleryPage = treeViewGallery.SelectedNode?.Tag as XtraTabPage;
+				labelControlSelectedGalleryName.Text = galleryPage?.Text;
+				if (!_allowHandleEvents) return;
+				xtraTabControlGallery.SelectedTabPage = galleryPage;
+			};
 
 			var fileLink = _sourceLink as LibraryFileLink;
 			if (fileLink != null)
@@ -99,7 +150,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			}
 
 			checkEditInvert.Checked = _sourceLink.Widget.Inverted;
-			pbCustomWidget.Image = _sourceLink.Widget.WidgetType == WidgetType.CustomWidget ? _sourceLink.Widget.Image : null;
+			colorEditInversionColor.EditValue = _sourceLink.Widget.InversionColor;
+			_originalImage = _sourceLink.Widget.WidgetType == WidgetType.CustomWidget ? _sourceLink.Widget.Image : null;
 			switch (_sourceLink.Widget.WidgetType)
 			{
 				case WidgetType.AutoWidget:
@@ -118,6 +170,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 					radioButtonWidgetTypeDisabled.Checked = true;
 					break;
 			}
+			UpdateCustomDisplayImage();
+
+			_allowHandleEvents = true;
 		}
 
 		private void SaveData()
@@ -131,7 +186,10 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			{
 				_sourceLink.Widget.WidgetType = WidgetType.CustomWidget;
 				_sourceLink.Widget.Inverted = checkEditInvert.Checked;
-				_sourceLink.Widget.Image = pbCustomWidget.Image;
+				_sourceLink.Widget.InversionColor = colorEditInversionColor.Color != GraphicObjectExtensions.DefaultInversionColor
+					? colorEditInversionColor.Color
+					: GraphicObjectExtensions.DefaultInversionColor;
+				_sourceLink.Widget.Image = _originalImage;
 			}
 			else if (radioButtonWidgetTypeDisabled.Checked)
 			{
@@ -139,6 +197,19 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 				_sourceLink.Widget.Image = null;
 			}
 			_sourceLink.Banner.Enable = !_sourceLink.Widget.Enabled && _sourceLink.Banner.Enable;
+		}
+
+		private void UpdateCustomDisplayImage()
+		{
+			if (_originalImage != null && checkEditInvert.Checked)
+			{
+				var imageClone = (Image)_originalImage.Clone();
+				pbCustomWidget.Image = colorEditInversionColor.Color != GraphicObjectExtensions.DefaultInversionColor
+					? imageClone.ReplaceColor(colorEditInversionColor.Color)
+					: imageClone.Invert();
+			}
+			else
+				pbCustomWidget.Image = _originalImage;
 		}
 
 		private void FormEditLinkSettings_FormClosing(object sender, FormClosingEventArgs e)
@@ -149,16 +220,31 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 		private void OnWidgetTypeChanged(object sender, EventArgs e)
 		{
-			pbCustomWidget.Enabled = radioButtonWidgetTypeCustom.Checked;
 			pbAutoWidget.Enabled = radioButtonWidgetTypeAuto.Checked;
-			xtraTabControlWidgets.Enabled = radioButtonWidgetTypeCustom.Checked;
+
+			pbCustomWidget.Enabled = radioButtonWidgetTypeCustom.Checked;
+			pnGallery.Enabled = radioButtonWidgetTypeCustom.Checked;
 			pnSearch.Enabled = radioButtonWidgetTypeCustom.Checked;
 			checkEditInvert.Enabled = radioButtonWidgetTypeCustom.Checked;
+			colorEditInversionColor.Enabled = radioButtonWidgetTypeCustom.Checked && checkEditInvert.Checked;
+
+			if (_allowHandleEvents)
+				UpdateCustomDisplayImage();
 		}
 
 		private void OnSelectedWidgetChanged(object sender, LinkImageEventArgs e)
 		{
-			pbCustomWidget.Image = e.Image;
+			if (_allowHandleEvents)
+			{
+				_originalImage = e.Image;
+				UpdateCustomDisplayImage();
+			}
+		}
+
+		private void colorEditInversionColor_EditValueChanged(object sender, EventArgs e)
+		{
+			if (_allowHandleEvents)
+				UpdateCustomDisplayImage();
 		}
 
 		private void OnImageDoubleClick(object sender, EventArgs e)
@@ -188,6 +274,18 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		private void OnFormClick(object sender, EventArgs e)
 		{
 			buttonXOK.Focus();
+		}
+
+		private void toolStripMenuItemImageAddToFavorites_Click(object sender, EventArgs e)
+		{
+			if (pbCustomWidget.Image == null) return;
+			var favoritesContainer = xtraTabControlGallery.TabPages.OfType<FavoritesImagesContainer>().FirstOrDefault();
+			((FavoriteImageGroup) favoritesContainer?.ParentImageGroup)?.AddImage<Widget>(pbCustomWidget.Image, String.Format("colorized_widget_{0:yyyyMMddhhmmss}", DateTime.Now));
+		}
+
+		private void contextMenuStripImage_Opening(object sender, CancelEventArgs e)
+		{
+			e.Cancel = !checkEditInvert.Checked || pbCustomWidget.Image == null || colorEditInversionColor.Color == Color.White;
 		}
 	}
 }

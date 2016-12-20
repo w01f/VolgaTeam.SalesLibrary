@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using Formatting = Newtonsoft.Json.Formatting;
 
 namespace SalesLibraries.Common.JsonConverters
 {
@@ -10,7 +9,6 @@ namespace SalesLibraries.Common.JsonConverters
 		{
 			ReferenceLoopHandling = ReferenceLoopHandling.Serialize;
 			PreserveReferencesHandling = PreserveReferencesHandling.Objects;
-			TypeNameHandling = TypeNameHandling.All;
 			ContractResolver = new EntitySettingsResolver();
 			Formatting = Formatting.None;
 
@@ -21,6 +19,7 @@ namespace SalesLibraries.Common.JsonConverters
 				CamelCaseText = false
 			});
 			Converters.Add(new ImageConverter());
+			TypeNameHandling = TypeNameHandling.All;
 		}
 	}
 }

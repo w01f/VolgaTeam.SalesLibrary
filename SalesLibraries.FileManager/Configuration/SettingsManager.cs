@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Xml;
+using SalesLibraries.Business.Contexts.Wallbin;
 using SalesLibraries.Common.Configuration;
 
 namespace SalesLibraries.FileManager.Configuration
@@ -28,7 +29,7 @@ namespace SalesLibraries.FileManager.Configuration
 		public int CalendarFontSize { get; set; }
 		public bool TreeViewVisible { get; set; }
 		public bool MultitabView { get; set; }
-		public string DefaultLinkBannerSettingsEncoded { get; set; }
+		public string DefaultBannerSettingsEncoded { get; set; }
 		#endregion
 
 		#region Ribbon Settings
@@ -146,9 +147,9 @@ namespace SalesLibraries.FileManager.Configuration
 			if (node != null)
 				if (bool.TryParse(node.InnerText, out tempBool))
 					MultitabView = tempBool;
-			node = document.SelectSingleNode(@"/LocalSettings/DefaultLinkBannerSettingsEncoded");
+			node = document.SelectSingleNode(@"/LocalSettings/DefaultBannerSettingsEncoded");
 			if (node != null)
-				DefaultLinkBannerSettingsEncoded = Encoding.UTF8.GetString(Convert.FromBase64String(node.InnerText));
+				DefaultBannerSettingsEncoded = Encoding.UTF8.GetString(Convert.FromBase64String(node.InnerText));
 			#endregion
 		}
 
@@ -158,6 +159,7 @@ namespace SalesLibraries.FileManager.Configuration
 			LoadCategoryRequestSettings();
 			LoadSalesDepotSyncSettings();
 			LoadServiceConnectionSettings();
+			LoadArchiveLinksSettings();
 
 			EditorSettings.Load();
 		}
@@ -171,7 +173,7 @@ namespace SalesLibraries.FileManager.Configuration
 			#region FM Settings
 			xml.AppendLine(@"<BackupPath>" + BackupPath.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</BackupPath>");
 			if (EnableLocalSync)
-				xml.AppendLine(@"<NetworkPath>" + String.Join("|", NetworkPaths.Select(p=>p.Replace(@"&", "&#38;").Replace("\"", "&quot;"))) + @"</NetworkPath>");
+				xml.AppendLine(@"<NetworkPath>" + String.Join("|", NetworkPaths.Select(p => p.Replace(@"&", "&#38;").Replace("\"", "&quot;"))) + @"</NetworkPath>");
 			if (EnableWebSync)
 				xml.AppendLine(@"<WebPath>" + String.Join("|", WebPaths.Select(p => p.Replace(@"&", "&#38;").Replace("\"", "&quot;"))) + @"</WebPath>");
 			if (!String.IsNullOrEmpty(SelectedLibrary))
@@ -185,8 +187,8 @@ namespace SalesLibraries.FileManager.Configuration
 			xml.AppendLine(@"<CalendarFontSize>" + CalendarFontSize + @"</CalendarFontSize>");
 			xml.AppendLine(@"<TreeViewVisible>" + TreeViewVisible + @"</TreeViewVisible>");
 			xml.AppendLine(@"<MultitabView>" + MultitabView + @"</MultitabView>");
-			if (!String.IsNullOrEmpty(DefaultLinkBannerSettingsEncoded))
-				xml.AppendLine(@"<DefaultLinkBannerSettingsEncoded>" + Convert.ToBase64String(Encoding.UTF8.GetBytes(DefaultLinkBannerSettingsEncoded)) + @"</DefaultLinkBannerSettingsEncoded>");
+			if (!String.IsNullOrEmpty(DefaultBannerSettingsEncoded))
+				xml.AppendLine(@"<DefaultBannerSettingsEncoded>" + Convert.ToBase64String(Encoding.UTF8.GetBytes(DefaultBannerSettingsEncoded)) + @"</DefaultBannerSettingsEncoded>");
 			#endregion
 
 			xml.AppendLine(@"</LocalSettings>");
@@ -281,6 +283,19 @@ namespace SalesLibraries.FileManager.Configuration
 			node = document.SelectSingleNode(@"/synclock/email");
 			if (node != null)
 				SyncSupportEmail = node.InnerText;
+		}
+
+		private void LoadArchiveLinksSettings()
+		{
+			if (!RemoteResourceManager.Instance.ArchiveLinksSettingsFile.ExistsLocal()) return;
+			var document = new XmlDocument();
+			document.Load(RemoteResourceManager.Instance.ArchiveLinksSettingsFile.LocalPath);
+			var node = document.SelectSingleNode(@"/Config/MaxPdfPages");
+			{
+				int temp;
+				if (node != null && Int32.TryParse(node.InnerText, out temp))
+					WallbinConfiguration.MaxPreviewPdfPagesCount = temp;
+			}
 		}
 
 		private void LoadServiceConnectionSettings()

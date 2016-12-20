@@ -28,9 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+			this.components = new System.ComponentModel.Container();
 			this.buttonXOK = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXCancel = new DevComponents.DotNetBar.ButtonX();
-			this.styleController = new DevExpress.XtraEditors.StyleController();
+			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
 			this.colorEditBannerTextColor = new SalesLibraries.CommonGUI.Common.HtmlColorEdit();
 			this.buttonEditBannerTextFont = new DevExpress.XtraEditors.ButtonEdit();
 			this.memoEditBannerText = new DevExpress.XtraEditors.MemoEdit();
@@ -46,21 +47,26 @@
 			this.buttonXDisable = new DevComponents.DotNetBar.ButtonX();
 			this.xtraTabControlSettings = new DevExpress.XtraTab.XtraTabControl();
 			this.xtraTabPageImage = new DevExpress.XtraTab.XtraTabPage();
+			this.colorEditInversionColor = new SalesLibraries.CommonGUI.Common.HtmlColorEdit();
 			this.labelControlImageAlignment = new DevExpress.XtraEditors.LabelControl();
 			this.checkEditHorizontalAlignmentRight = new DevExpress.XtraEditors.CheckEdit();
 			this.checkEditHorizontalAlignmentCenter = new DevExpress.XtraEditors.CheckEdit();
 			this.checkEditHorizontalAlignmentLeft = new DevExpress.XtraEditors.CheckEdit();
 			this.labelControlImageDescription = new DevExpress.XtraEditors.LabelControl();
+			this.pnGallery = new System.Windows.Forms.Panel();
+			this.retractableBarGallery = new SalesLibraries.CommonGUI.RetractableBar.RetractableBarLeft();
+			this.treeViewGallery = new SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.ImageGallery.GalleryTreeView();
+			this.labelControlSelectedGalleryName = new DevExpress.XtraEditors.LabelControl();
 			this.xtraTabPageText = new DevExpress.XtraTab.XtraTabPage();
 			this.checkEditVerticalAlignmentTop2 = new DevExpress.XtraEditors.CheckEdit();
 			this.checkEditSaveAsTemplate = new DevExpress.XtraEditors.CheckEdit();
 			this.checkEditTextWordWrap = new DevExpress.XtraEditors.CheckEdit();
 			this.labelControlTextColor = new DevExpress.XtraEditors.LabelControl();
 			this.labelControlTextFont = new DevExpress.XtraEditors.LabelControl();
+			this.labelControlTextDescription = new DevExpress.XtraEditors.LabelControl();
 			this.buttonXShowTextNone = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXShowTextLinkName = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXShowTextCustom = new DevComponents.DotNetBar.ButtonX();
-			this.labelControlTextDescription = new DevExpress.XtraEditors.LabelControl();
 			this.labelControlBottomDescription = new DevExpress.XtraEditors.LabelControl();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.colorEditBannerTextColor.Properties)).BeginInit();
@@ -74,9 +80,13 @@
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControlSettings)).BeginInit();
 			this.xtraTabControlSettings.SuspendLayout();
 			this.xtraTabPageImage.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.colorEditInversionColor.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditHorizontalAlignmentRight.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditHorizontalAlignmentCenter.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditHorizontalAlignmentLeft.Properties)).BeginInit();
+			this.pnGallery.SuspendLayout();
+			this.retractableBarGallery.Content.SuspendLayout();
+			this.retractableBarGallery.Header.SuspendLayout();
 			this.xtraTabPageText.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditVerticalAlignmentTop2.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditSaveAsTemplate.Properties)).BeginInit();
@@ -134,7 +144,7 @@
 			this.colorEditBannerTextColor.Color = System.Drawing.Color.Empty;
 			this.colorEditBannerTextColor.EditValue = System.Drawing.Color.Empty;
 			this.colorEditBannerTextColor.Enabled = false;
-			this.colorEditBannerTextColor.Location = new System.Drawing.Point(10, 447);
+			this.colorEditBannerTextColor.Location = new System.Drawing.Point(10, 444);
 			this.colorEditBannerTextColor.Name = "colorEditBannerTextColor";
 			this.colorEditBannerTextColor.Properties.Appearance.BackColor = System.Drawing.Color.White;
 			this.colorEditBannerTextColor.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
@@ -152,7 +162,7 @@
 			// 
 			this.buttonEditBannerTextFont.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.buttonEditBannerTextFont.Enabled = false;
-			this.buttonEditBannerTextFont.Location = new System.Drawing.Point(10, 388);
+			this.buttonEditBannerTextFont.Location = new System.Drawing.Point(10, 385);
 			this.buttonEditBannerTextFont.Name = "buttonEditBannerTextFont";
 			this.buttonEditBannerTextFont.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
 			this.buttonEditBannerTextFont.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
@@ -180,16 +190,13 @@
 			this.memoEditBannerText.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.memoEditBannerText.Properties.Appearance.Options.UseBackColor = true;
 			this.memoEditBannerText.Properties.Appearance.Options.UseForeColor = true;
-			this.memoEditBannerText.Size = new System.Drawing.Size(945, 246);
+			this.memoEditBannerText.Size = new System.Drawing.Size(941, 243);
 			this.memoEditBannerText.StyleController = this.styleController;
 			this.memoEditBannerText.TabIndex = 42;
 			this.memoEditBannerText.EditValueChanged += new System.EventHandler(this.OnBannerTextEditValueChanged);
 			// 
 			// xtraTabControlGallery
 			// 
-			this.xtraTabControlGallery.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
 			this.xtraTabControlGallery.Appearance.BackColor = System.Drawing.Color.Transparent;
 			this.xtraTabControlGallery.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.xtraTabControlGallery.Appearance.Options.UseBackColor = true;
@@ -204,15 +211,17 @@
 			this.xtraTabControlGallery.AppearancePage.HeaderHotTracked.Options.UseFont = true;
 			this.xtraTabControlGallery.AppearancePage.PageClient.Font = new System.Drawing.Font("Arial", 9.75F);
 			this.xtraTabControlGallery.AppearancePage.PageClient.Options.UseFont = true;
-			this.xtraTabControlGallery.Location = new System.Drawing.Point(10, 52);
+			this.xtraTabControlGallery.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.xtraTabControlGallery.Location = new System.Drawing.Point(249, 0);
 			this.xtraTabControlGallery.Name = "xtraTabControlGallery";
-			this.xtraTabControlGallery.Size = new System.Drawing.Size(948, 385);
+			this.xtraTabControlGallery.ShowTabHeader = DevExpress.Utils.DefaultBoolean.False;
+			this.xtraTabControlGallery.Size = new System.Drawing.Size(695, 382);
 			this.xtraTabControlGallery.TabIndex = 46;
 			// 
 			// checkEditVerticalAlignmentTop1
 			// 
 			this.checkEditVerticalAlignmentTop1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.checkEditVerticalAlignmentTop1.Location = new System.Drawing.Point(700, 452);
+			this.checkEditVerticalAlignmentTop1.Location = new System.Drawing.Point(696, 449);
 			this.checkEditVerticalAlignmentTop1.Name = "checkEditVerticalAlignmentTop1";
 			this.checkEditVerticalAlignmentTop1.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.checkEditVerticalAlignmentTop1.Properties.Appearance.Options.UseForeColor = true;
@@ -225,15 +234,16 @@
 			// checkEditInvert
 			// 
 			this.checkEditInvert.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.checkEditInvert.Location = new System.Drawing.Point(10, 452);
+			this.checkEditInvert.Location = new System.Drawing.Point(10, 449);
 			this.checkEditInvert.Name = "checkEditInvert";
 			this.checkEditInvert.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.checkEditInvert.Properties.Appearance.Options.UseForeColor = true;
 			this.checkEditInvert.Properties.AutoWidth = true;
-			this.checkEditInvert.Properties.Caption = "Invert";
-			this.checkEditInvert.Size = new System.Drawing.Size(52, 20);
+			this.checkEditInvert.Properties.Caption = "Colorize";
+			this.checkEditInvert.Size = new System.Drawing.Size(69, 20);
 			this.checkEditInvert.StyleController = this.styleController;
 			this.checkEditInvert.TabIndex = 48;
+			this.checkEditInvert.CheckedChanged += new System.EventHandler(this.OnInvertCheckedChanged);
 			// 
 			// pnSearch
 			// 
@@ -243,7 +253,7 @@
 			this.pnSearch.Controls.Add(this.buttonXSearch);
 			this.pnSearch.Controls.Add(this.textEditSearch);
 			this.pnSearch.ForeColor = System.Drawing.Color.Black;
-			this.pnSearch.Location = new System.Drawing.Point(596, 13);
+			this.pnSearch.Location = new System.Drawing.Point(592, 13);
 			this.pnSearch.Name = "pnSearch";
 			this.pnSearch.Size = new System.Drawing.Size(362, 33);
 			this.pnSearch.TabIndex = 47;
@@ -267,6 +277,7 @@
 			this.buttonXSearch.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
 			this.buttonXSearch.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXSearch.Enabled = false;
+			this.buttonXSearch.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.buttonXSearch.Location = new System.Drawing.Point(280, 5);
 			this.buttonXSearch.Name = "buttonXSearch";
 			this.buttonXSearch.Size = new System.Drawing.Size(77, 24);
@@ -376,18 +387,39 @@
 			// 
 			this.xtraTabPageImage.Appearance.PageClient.ForeColor = System.Drawing.Color.Black;
 			this.xtraTabPageImage.Appearance.PageClient.Options.UseForeColor = true;
+			this.xtraTabPageImage.Controls.Add(this.colorEditInversionColor);
 			this.xtraTabPageImage.Controls.Add(this.labelControlImageAlignment);
 			this.xtraTabPageImage.Controls.Add(this.checkEditHorizontalAlignmentRight);
 			this.xtraTabPageImage.Controls.Add(this.checkEditHorizontalAlignmentCenter);
 			this.xtraTabPageImage.Controls.Add(this.checkEditHorizontalAlignmentLeft);
 			this.xtraTabPageImage.Controls.Add(this.labelControlImageDescription);
 			this.xtraTabPageImage.Controls.Add(this.checkEditVerticalAlignmentTop1);
-			this.xtraTabPageImage.Controls.Add(this.xtraTabControlGallery);
 			this.xtraTabPageImage.Controls.Add(this.checkEditInvert);
 			this.xtraTabPageImage.Controls.Add(this.pnSearch);
+			this.xtraTabPageImage.Controls.Add(this.pnGallery);
 			this.xtraTabPageImage.Name = "xtraTabPageImage";
-			this.xtraTabPageImage.Size = new System.Drawing.Size(964, 482);
+			this.xtraTabPageImage.Size = new System.Drawing.Size(960, 479);
 			this.xtraTabPageImage.Text = "Image Gallery";
+			// 
+			// colorEditInversionColor
+			// 
+			this.colorEditInversionColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.colorEditInversionColor.Color = System.Drawing.Color.Empty;
+			this.colorEditInversionColor.EditValue = System.Drawing.Color.Empty;
+			this.colorEditInversionColor.Enabled = false;
+			this.colorEditInversionColor.Location = new System.Drawing.Point(82, 448);
+			this.colorEditInversionColor.Name = "colorEditInversionColor";
+			this.colorEditInversionColor.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.colorEditInversionColor.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.colorEditInversionColor.Properties.Appearance.Options.UseBackColor = true;
+			this.colorEditInversionColor.Properties.Appearance.Options.UseForeColor = true;
+			this.colorEditInversionColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+			this.colorEditInversionColor.Properties.Color = System.Drawing.Color.Empty;
+			this.colorEditInversionColor.Size = new System.Drawing.Size(88, 22);
+			this.colorEditInversionColor.StyleController = this.styleController;
+			this.colorEditInversionColor.TabIndex = 63;
+			this.colorEditInversionColor.EditValueChanged += new System.EventHandler(this.OnInversionColorEditValueChanged);
 			// 
 			// labelControlImageAlignment
 			// 
@@ -396,7 +428,7 @@
 			this.labelControlImageAlignment.Appearance.BackColor = System.Drawing.Color.Transparent;
 			this.labelControlImageAlignment.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.labelControlImageAlignment.AppearanceDisabled.ForeColor = System.Drawing.Color.Gray;
-			this.labelControlImageAlignment.Location = new System.Drawing.Point(286, 454);
+			this.labelControlImageAlignment.Location = new System.Drawing.Point(286, 451);
 			this.labelControlImageAlignment.Name = "labelControlImageAlignment";
 			this.labelControlImageAlignment.Size = new System.Drawing.Size(69, 16);
 			this.labelControlImageAlignment.StyleController = this.styleController;
@@ -407,7 +439,7 @@
 			// checkEditHorizontalAlignmentRight
 			// 
 			this.checkEditHorizontalAlignmentRight.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.checkEditHorizontalAlignmentRight.Location = new System.Drawing.Point(506, 452);
+			this.checkEditHorizontalAlignmentRight.Location = new System.Drawing.Point(506, 449);
 			this.checkEditHorizontalAlignmentRight.Name = "checkEditHorizontalAlignmentRight";
 			this.checkEditHorizontalAlignmentRight.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.checkEditHorizontalAlignmentRight.Properties.Appearance.Options.UseForeColor = true;
@@ -424,7 +456,7 @@
 			// checkEditHorizontalAlignmentCenter
 			// 
 			this.checkEditHorizontalAlignmentCenter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.checkEditHorizontalAlignmentCenter.Location = new System.Drawing.Point(429, 452);
+			this.checkEditHorizontalAlignmentCenter.Location = new System.Drawing.Point(429, 449);
 			this.checkEditHorizontalAlignmentCenter.Name = "checkEditHorizontalAlignmentCenter";
 			this.checkEditHorizontalAlignmentCenter.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.checkEditHorizontalAlignmentCenter.Properties.Appearance.Options.UseForeColor = true;
@@ -441,7 +473,7 @@
 			// checkEditHorizontalAlignmentLeft
 			// 
 			this.checkEditHorizontalAlignmentLeft.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.checkEditHorizontalAlignmentLeft.Location = new System.Drawing.Point(370, 452);
+			this.checkEditHorizontalAlignmentLeft.Location = new System.Drawing.Point(370, 449);
 			this.checkEditHorizontalAlignmentLeft.Name = "checkEditHorizontalAlignmentLeft";
 			this.checkEditHorizontalAlignmentLeft.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.checkEditHorizontalAlignmentLeft.Properties.Appearance.Options.UseForeColor = true;
@@ -465,11 +497,91 @@
 			this.labelControlImageDescription.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
 			this.labelControlImageDescription.Location = new System.Drawing.Point(10, 13);
 			this.labelControlImageDescription.Name = "labelControlImageDescription";
-			this.labelControlImageDescription.Size = new System.Drawing.Size(580, 33);
+			this.labelControlImageDescription.Size = new System.Drawing.Size(576, 33);
 			this.labelControlImageDescription.StyleController = this.styleController;
 			this.labelControlImageDescription.TabIndex = 50;
 			this.labelControlImageDescription.Text = "<size=+2><color=gray>Show a clipart image or logo with this link…</color></size>";
 			this.labelControlImageDescription.UseMnemonic = false;
+			// 
+			// pnGallery
+			// 
+			this.pnGallery.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.pnGallery.Controls.Add(this.xtraTabControlGallery);
+			this.pnGallery.Controls.Add(this.retractableBarGallery);
+			this.pnGallery.ForeColor = System.Drawing.Color.Black;
+			this.pnGallery.Location = new System.Drawing.Point(10, 52);
+			this.pnGallery.Name = "pnGallery";
+			this.pnGallery.Size = new System.Drawing.Size(944, 382);
+			this.pnGallery.TabIndex = 56;
+			// 
+			// retractableBarGallery
+			// 
+			this.retractableBarGallery.BackColor = System.Drawing.Color.White;
+			// 
+			// retractableBarGallery.Content
+			// 
+			this.retractableBarGallery.Content.Controls.Add(this.treeViewGallery);
+			this.retractableBarGallery.Content.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.retractableBarGallery.Content.ForeColor = System.Drawing.Color.Black;
+			this.retractableBarGallery.Content.Location = new System.Drawing.Point(2, 42);
+			this.retractableBarGallery.Content.Name = "Content";
+			this.retractableBarGallery.Content.Size = new System.Drawing.Size(245, 338);
+			this.retractableBarGallery.Content.TabIndex = 1;
+			this.retractableBarGallery.Dock = System.Windows.Forms.DockStyle.Left;
+			this.retractableBarGallery.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.retractableBarGallery.ForeColor = System.Drawing.Color.Black;
+			// 
+			// retractableBarGallery.Header
+			// 
+			this.retractableBarGallery.Header.Controls.Add(this.labelControlSelectedGalleryName);
+			this.retractableBarGallery.Header.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.retractableBarGallery.Header.ForeColor = System.Drawing.Color.Black;
+			this.retractableBarGallery.Header.Location = new System.Drawing.Point(49, 2);
+			this.retractableBarGallery.Header.Name = "Header";
+			this.retractableBarGallery.Header.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+			this.retractableBarGallery.Header.Size = new System.Drawing.Size(194, 36);
+			this.retractableBarGallery.Header.TabIndex = 2;
+			this.retractableBarGallery.Location = new System.Drawing.Point(0, 0);
+			this.retractableBarGallery.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+			this.retractableBarGallery.Name = "retractableBarGallery";
+			this.retractableBarGallery.Size = new System.Drawing.Size(249, 382);
+			this.retractableBarGallery.TabIndex = 47;
+			// 
+			// treeViewGallery
+			// 
+			this.treeViewGallery.BackColor = System.Drawing.Color.White;
+			this.treeViewGallery.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.treeViewGallery.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.treeViewGallery.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawText;
+			this.treeViewGallery.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.treeViewGallery.ForeColor = System.Drawing.Color.Black;
+			this.treeViewGallery.HideSelection = false;
+			this.treeViewGallery.Indent = 16;
+			this.treeViewGallery.ItemHeight = 25;
+			this.treeViewGallery.Location = new System.Drawing.Point(0, 0);
+			this.treeViewGallery.Name = "treeViewGallery";
+			this.treeViewGallery.ShowLines = false;
+			this.treeViewGallery.Size = new System.Drawing.Size(245, 338);
+			this.treeViewGallery.TabIndex = 0;
+			// 
+			// labelControlSelectedGalleryName
+			// 
+			this.labelControlSelectedGalleryName.AllowHtmlString = true;
+			this.labelControlSelectedGalleryName.Appearance.BackColor = System.Drawing.Color.Transparent;
+			this.labelControlSelectedGalleryName.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.labelControlSelectedGalleryName.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+			this.labelControlSelectedGalleryName.AppearanceDisabled.ForeColor = System.Drawing.Color.Gray;
+			this.labelControlSelectedGalleryName.AppearanceDisabled.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+			this.labelControlSelectedGalleryName.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+			this.labelControlSelectedGalleryName.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.labelControlSelectedGalleryName.Location = new System.Drawing.Point(10, 0);
+			this.labelControlSelectedGalleryName.Name = "labelControlSelectedGalleryName";
+			this.labelControlSelectedGalleryName.Size = new System.Drawing.Size(184, 36);
+			this.labelControlSelectedGalleryName.StyleController = this.styleController;
+			this.labelControlSelectedGalleryName.TabIndex = 52;
+			this.labelControlSelectedGalleryName.UseMnemonic = false;
 			// 
 			// xtraTabPageText
 			// 
@@ -480,21 +592,21 @@
 			this.xtraTabPageText.Controls.Add(this.checkEditTextWordWrap);
 			this.xtraTabPageText.Controls.Add(this.labelControlTextColor);
 			this.xtraTabPageText.Controls.Add(this.labelControlTextFont);
-			this.xtraTabPageText.Controls.Add(this.buttonXShowTextNone);
-			this.xtraTabPageText.Controls.Add(this.buttonXShowTextLinkName);
-			this.xtraTabPageText.Controls.Add(this.buttonXShowTextCustom);
 			this.xtraTabPageText.Controls.Add(this.labelControlTextDescription);
 			this.xtraTabPageText.Controls.Add(this.memoEditBannerText);
 			this.xtraTabPageText.Controls.Add(this.colorEditBannerTextColor);
 			this.xtraTabPageText.Controls.Add(this.buttonEditBannerTextFont);
+			this.xtraTabPageText.Controls.Add(this.buttonXShowTextNone);
+			this.xtraTabPageText.Controls.Add(this.buttonXShowTextLinkName);
+			this.xtraTabPageText.Controls.Add(this.buttonXShowTextCustom);
 			this.xtraTabPageText.Name = "xtraTabPageText";
-			this.xtraTabPageText.Size = new System.Drawing.Size(964, 482);
+			this.xtraTabPageText.Size = new System.Drawing.Size(960, 479);
 			this.xtraTabPageText.Text = "Show Text";
 			// 
 			// checkEditVerticalAlignmentTop2
 			// 
 			this.checkEditVerticalAlignmentTop2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.checkEditVerticalAlignmentTop2.Location = new System.Drawing.Point(390, 451);
+			this.checkEditVerticalAlignmentTop2.Location = new System.Drawing.Point(386, 448);
 			this.checkEditVerticalAlignmentTop2.Name = "checkEditVerticalAlignmentTop2";
 			this.checkEditVerticalAlignmentTop2.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.checkEditVerticalAlignmentTop2.Properties.Appearance.Options.UseForeColor = true;
@@ -507,7 +619,7 @@
 			// checkEditSaveAsTemplate
 			// 
 			this.checkEditSaveAsTemplate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.checkEditSaveAsTemplate.Location = new System.Drawing.Point(678, 451);
+			this.checkEditSaveAsTemplate.Location = new System.Drawing.Point(674, 448);
 			this.checkEditSaveAsTemplate.Name = "checkEditSaveAsTemplate";
 			this.checkEditSaveAsTemplate.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.checkEditSaveAsTemplate.Properties.Appearance.Options.UseForeColor = true;
@@ -520,7 +632,7 @@
 			// 
 			this.checkEditTextWordWrap.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.checkEditTextWordWrap.Enabled = false;
-			this.checkEditTextWordWrap.Location = new System.Drawing.Point(199, 451);
+			this.checkEditTextWordWrap.Location = new System.Drawing.Point(195, 448);
 			this.checkEditTextWordWrap.Name = "checkEditTextWordWrap";
 			this.checkEditTextWordWrap.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.checkEditTextWordWrap.Properties.Appearance.Options.UseForeColor = true;
@@ -537,7 +649,7 @@
 			this.labelControlTextColor.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.labelControlTextColor.AppearanceDisabled.ForeColor = System.Drawing.Color.Gray;
 			this.labelControlTextColor.Enabled = false;
-			this.labelControlTextColor.Location = new System.Drawing.Point(10, 425);
+			this.labelControlTextColor.Location = new System.Drawing.Point(10, 422);
 			this.labelControlTextColor.Name = "labelControlTextColor";
 			this.labelControlTextColor.Size = new System.Drawing.Size(70, 16);
 			this.labelControlTextColor.StyleController = this.styleController;
@@ -552,12 +664,29 @@
 			this.labelControlTextFont.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.labelControlTextFont.AppearanceDisabled.ForeColor = System.Drawing.Color.Gray;
 			this.labelControlTextFont.Enabled = false;
-			this.labelControlTextFont.Location = new System.Drawing.Point(10, 366);
+			this.labelControlTextFont.Location = new System.Drawing.Point(10, 363);
 			this.labelControlTextFont.Name = "labelControlTextFont";
 			this.labelControlTextFont.Size = new System.Drawing.Size(81, 16);
 			this.labelControlTextFont.StyleController = this.styleController;
 			this.labelControlTextFont.TabIndex = 55;
 			this.labelControlTextFont.Text = "<b>Format Text:</b>";
+			// 
+			// labelControlTextDescription
+			// 
+			this.labelControlTextDescription.AllowHtmlString = true;
+			this.labelControlTextDescription.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.labelControlTextDescription.Appearance.BackColor = System.Drawing.Color.Transparent;
+			this.labelControlTextDescription.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.labelControlTextDescription.AppearanceDisabled.ForeColor = System.Drawing.Color.Gray;
+			this.labelControlTextDescription.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+			this.labelControlTextDescription.Location = new System.Drawing.Point(10, 13);
+			this.labelControlTextDescription.Name = "labelControlTextDescription";
+			this.labelControlTextDescription.Size = new System.Drawing.Size(944, 33);
+			this.labelControlTextDescription.StyleController = this.styleController;
+			this.labelControlTextDescription.TabIndex = 51;
+			this.labelControlTextDescription.Text = "<size=+2>How do you want to show the <b>Link Text</b> with this image?</size>";
+			this.labelControlTextDescription.UseMnemonic = false;
 			// 
 			// buttonXShowTextNone
 			// 
@@ -603,23 +732,6 @@
 			this.buttonXShowTextCustom.TextColor = System.Drawing.Color.Black;
 			this.buttonXShowTextCustom.CheckedChanged += new System.EventHandler(this.OnTextModeButtonCheckedChanged);
 			this.buttonXShowTextCustom.Click += new System.EventHandler(this.OnTextModeButtonClick);
-			// 
-			// labelControlTextDescription
-			// 
-			this.labelControlTextDescription.AllowHtmlString = true;
-			this.labelControlTextDescription.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.labelControlTextDescription.Appearance.BackColor = System.Drawing.Color.Transparent;
-			this.labelControlTextDescription.Appearance.ForeColor = System.Drawing.Color.Black;
-			this.labelControlTextDescription.AppearanceDisabled.ForeColor = System.Drawing.Color.Gray;
-			this.labelControlTextDescription.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-			this.labelControlTextDescription.Location = new System.Drawing.Point(10, 13);
-			this.labelControlTextDescription.Name = "labelControlTextDescription";
-			this.labelControlTextDescription.Size = new System.Drawing.Size(948, 33);
-			this.labelControlTextDescription.StyleController = this.styleController;
-			this.labelControlTextDescription.TabIndex = 51;
-			this.labelControlTextDescription.Text = "<size=+2>How do you want to show the <b>Link Text</b> with this image?</size>";
-			this.labelControlTextDescription.UseMnemonic = false;
 			// 
 			// labelControlBottomDescription
 			// 
@@ -675,9 +787,13 @@
 			this.xtraTabControlSettings.ResumeLayout(false);
 			this.xtraTabPageImage.ResumeLayout(false);
 			this.xtraTabPageImage.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.colorEditInversionColor.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditHorizontalAlignmentRight.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditHorizontalAlignmentCenter.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditHorizontalAlignmentLeft.Properties)).EndInit();
+			this.pnGallery.ResumeLayout(false);
+			this.retractableBarGallery.Content.ResumeLayout(false);
+			this.retractableBarGallery.Header.ResumeLayout(false);
 			this.xtraTabPageText.ResumeLayout(false);
 			this.xtraTabPageText.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditVerticalAlignmentTop2.Properties)).EndInit();
@@ -723,5 +839,10 @@
 		private DevExpress.XtraEditors.LabelControl labelControlTextColor;
 		private DevExpress.XtraEditors.LabelControl labelControlTextFont;
 		private DevExpress.XtraEditors.CheckEdit checkEditVerticalAlignmentTop2;
+		private System.Windows.Forms.Panel pnGallery;
+		private CommonGUI.RetractableBar.RetractableBarLeft retractableBarGallery;
+		private DevExpress.XtraEditors.LabelControl labelControlSelectedGalleryName;
+		private ImageGallery.GalleryTreeView treeViewGallery;
+		public CommonGUI.Common.HtmlColorEdit colorEditInversionColor;
 	}
 }

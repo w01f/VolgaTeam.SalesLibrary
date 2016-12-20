@@ -17,9 +17,9 @@ namespace SalesLibraries.Business.Entities.Common
 		public static TSettings CreateInstance<TSettings>(IChangable parent, string encodedSource = "") where TSettings : SettingsContainer
 		{
 			var createNew = String.IsNullOrEmpty(encodedSource);
-			var serializerSettings = new DefaultSerializeSettings();
+			var deserializerSettings = new DefaultSerializeSettings() {TypeNameHandling = TypeNameHandling.None};
 			var settings = !createNew ?
-				JsonConvert.DeserializeObject<TSettings>(encodedSource, serializerSettings) :
+				JsonConvert.DeserializeObject<TSettings>(encodedSource, deserializerSettings) :
 				Activator.CreateInstance<TSettings>();
 			settings.Parent = parent;
 			if (createNew)

@@ -100,7 +100,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 			MainController.Instance.WallbinViews.Selection.Reset();
 			CorruptedLinksHelper.DeleteCorruptedLinks(DataStorage.Library);
 			if (!IsDataChanged) return;
-			MainController.Instance.ProcessManager.Run("Saving Changes...", cancelationToken =>
+			MainController.Instance.ProcessManager.RunInQueue("Saving Changes...", () =>
 			{
 				DataStorage.SaveChanges();
 			});

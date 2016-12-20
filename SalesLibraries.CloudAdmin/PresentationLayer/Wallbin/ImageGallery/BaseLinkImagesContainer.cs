@@ -13,9 +13,10 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.ImageGallery
 	//public partial class LinkImagesContainer : UserControl
 	public abstract partial class BaseLinkImagesContainer : XtraTabPage
 	{
-		protected ImageSourceGroup _parent;
 		protected ImageListView.HitInfo _menuHitInfo;
 		private bool _initialized;
+
+		public ImageSourceGroup ParentImageGroup { get; private set; }
 
 		public event EventHandler<LinkImageEventArgs> SelectedImageChanged;
 		public event EventHandler<EventArgs> OnImageDoubleClick;
@@ -33,9 +34,9 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.ImageGallery
 		protected BaseLinkImagesContainer(ImageSourceGroup parent)
 		{
 			InitializeComponent();
-			_parent = parent;
-			Text = _parent.Name;
-			_parent.DataChanged += OnParentImageGroupChanged;
+			ParentImageGroup = parent;
+			Text = ParentImageGroup.Name;
+			ParentImageGroup.DataChanged += OnParentImageGroupChanged;
 			imageListView.ItemClick += OnGalleryItemClick;
 			imageListView.ItemDoubleClick += OnGalleryItemDoubleClick;
 			imageListView.ItemHover += OnGalleryItemHover;
@@ -69,7 +70,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.ImageGallery
 		{
 			imageListView.ClearSelection();
 			imageListView.Items.Clear();
-			_parent = null;
+			ParentImageGroup = null;
 		}
 
 		protected abstract void InitPopupMenu();
@@ -77,12 +78,12 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.ImageGallery
 		protected virtual void LoadImages()
 		{
 			imageListView.Items.Clear();
-			imageListView.Items.AddRange(_parent.Images.Select(ims => new ImageListViewItem(ims.FilePath, ims.FileName) { Tag = ims }).ToArray());
+			imageListView.Items.AddRange(ParentImageGroup.Images.Select(ims => new ImageListViewItem(ims.FilePath, ims.FileName) { Tag = ims }).ToArray());
 		}
 
 		private void OnDisposed(object sender, EventArgs e)
 		{
-			_parent.DataChanged -= OnParentImageGroupChanged;
+			ParentImageGroup.DataChanged -= OnParentImageGroupChanged;
 		}
 
 		private void OnParentImageGroupChanged(Object sender, EventArgs e)

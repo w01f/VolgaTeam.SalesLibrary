@@ -35,8 +35,6 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 			var inactiveLinks = 0;
 			MainController.Instance.ProcessManager.Run("Checking library...", cancellationToken =>
 			{
-				TaggedLinksManager.Instance.Load(targetLibrary);
-				InactiveLinkManager.Instance.Load(new[] { targetLibrary });
 				isSyncLock = targetLibrary.IsLockedForSync(out uncompletedTags, out unconvertedVideos, out inactiveLinks);
 			});
 			if (isSyncLock)
@@ -119,8 +117,6 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 				int uncompletedTags;
 				int unconvertedVideos;
 				int inactiveLinks;
-				TaggedLinksManager.Instance.Load(targetLibrary);
-				InactiveLinkManager.Instance.Load(new[] { targetLibrary });
 				var isSyncLock = targetLibrary.IsLockedForSync(out uncompletedTags, out unconvertedVideos, out inactiveLinks);
 				if (isSyncLock)
 					return;

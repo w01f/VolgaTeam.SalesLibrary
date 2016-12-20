@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using DevExpress.XtraBars;
 using DevExpress.XtraTab;
 using DevExpress.XtraTab.ViewInfo;
 using SalesLibraries.Business.Contexts.Wallbin;
@@ -13,6 +14,7 @@ using SalesLibraries.Common.Helpers;
 using SalesLibraries.CommonGUI.Common;
 using SalesLibraries.CommonGUI.CustomDialog;
 using SalesLibraries.FileManager.Controllers;
+using SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.ContextMenuEdit.LinksGroup;
 using SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSettings;
 using SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings;
 
@@ -22,14 +24,15 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 	public partial class TabbedWallbin : BaseWallbin
 	{
 		private XtraTabDragDropHelper<TabPage> _tabDragDropHelper;
+		private readonly List<BaseContextMenuEditor> _linksGroupContextMenuEditors = new List<BaseContextMenuEditor>();
 
 		public TabbedWallbin(LibraryContext dataStorage)
 			: base(dataStorage)
 		{
 			InitializeComponent();
 
-			toolStripMenuItemDeleteSecurity.Visible = MainController.Instance.Settings.EditorSettings.EnableSecurityEdit;
-			toolStripMenuItemDeleteTags.Visible = MainController.Instance.Settings.EditorSettings.EnableTagsEdit;
+			barButtonItemPagePropertiesDeleteLinkSecurity.Visibility = MainController.Instance.Settings.EditorSettings.EnableSecurityEdit ? BarItemVisibility.Always : BarItemVisibility.Never;
+			barButtonItemPagePropertiesDeleteLinkTags.Visibility = MainController.Instance.Settings.EditorSettings.EnableTagsEdit ? BarItemVisibility.Always : BarItemVisibility.Never;
 		}
 
 		public override void DisposeView()
@@ -50,6 +53,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 
 			_tabDragDropHelper = new XtraTabDragDropHelper<TabPage>(xtraTabControl);
 			_tabDragDropHelper.TabMoved += OnTabMoved;
+
+			InitLinksGroupContextMenuEditors();
 		}
 
 		public override void SelectPage(IPageView pageView)
@@ -108,69 +113,55 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 
 		#region Page Context Menu Processing
 		private XtraTabHitInfo _menuHitInfo;
+
+		private void InitLinksGroupContextMenuEditors()
+		{
+			var pdfSettingsEditor = new PdfSettingsEditor(barSubItemPagePropertiesLinkPdfSettings);
+			pdfSettingsEditor.EditValueChanged += OnLinksGroupContextEditorValueChanged;
+			_linksGroupContextMenuEditors.Add(pdfSettingsEditor);
+
+			var excelSettingsEditor = new ExcelSettingsEditor(barSubItemPagePropertiesLinkExcelSettings);
+			excelSettingsEditor.EditValueChanged += OnLinksGroupContextEditorValueChanged;
+			_linksGroupContextMenuEditors.Add(excelSettingsEditor);
+		}
+
+		private void LoadLinksGroupContextMenuEditors()
+		{
+			var selectedPage = (TabPage)_menuHitInfo.Page;
+			_linksGroupContextMenuEditors.ForEach(e => e.LoadLinks(selectedPage.Page.AllLinks));
+		}
+
+		private void ApplyLinksGroupContextMenuEditorChanges()
+		{
+			_linksGroupContextMenuEditors.ForEach(e => e.ApplyChanges());
+		}
+
 		private void xtraTabControl_MouseDown(object sender, MouseEventArgs e)
 		{
 			if (e.Button != MouseButtons.Right) return;
 			_menuHitInfo = xtraTabControl.CalcHitInfo(new Point(e.X, e.Y));
 			if (_menuHitInfo.HitTest != XtraTabHitTest.PageHeader) return;
-			contextMenuStripPageProperties.Show((Control)sender, e.Location);
+
+			LoadLinksGroupContextMenuEditors();
+			barSubItemPagePropertiesLinkAdminSettings.Visibility =
+							barSubItemPagePropertiesLinkPdfSettings.Visibility == BarItemVisibility.Always ||
+							barSubItemPagePropertiesLinkExcelSettings.Visibility == BarItemVisibility.Always ?
+								BarItemVisibility.Always : BarItemVisibility.Never;
+
+			popupMenuPageProperties.ShowPopup(Cursor.Position);
 		}
 
-		private void toolStripMenuItemDeleteLinks_Click(object sender, EventArgs e)
+		private void popupMenuPageProperties_CloseUp(object sender, EventArgs e)
 		{
-			var selectedPage = _menuHitInfo.Page as TabPage;
-			if (selectedPage == null) return;
-			if (MainController.Instance.PopupMessages.ShowQuestion("Are You sure You want to remove links?") != DialogResult.Yes) return;
-			selectedPage.Content.DeleteLinks();
+			ApplyLinksGroupContextMenuEditorChanges();
+		}
+
+		private void OnLinksGroupContextEditorValueChanged(Object sender, EventArgs e)
+		{
 			IsDataChanged = true;
 		}
 
-		private void toolStripMenuItemDeleteExpirationDates_Click(object sender, EventArgs e)
-		{
-			var selectedPage = _menuHitInfo.Page as TabPage;
-			if (selectedPage == null) return;
-			if (MainController.Instance.PopupMessages.ShowQuestion("Are You sure You want to remove expiration dates?") != DialogResult.Yes) return;
-			selectedPage.Content.ResetExpirationDates();
-			IsDataChanged = true;
-		}
-
-		private void toolStripMenuItemDeleteSecurity_Click(object sender, EventArgs e)
-		{
-			var selectedPage = _menuHitInfo.Page as TabPage;
-			if (selectedPage == null) return;
-			if (MainController.Instance.PopupMessages.ShowQuestion("Are You sure You want to delete security settings?") != DialogResult.Yes) return;
-			selectedPage.Content.ResetSecurity();
-			IsDataChanged = true;
-		}
-
-		private void toolStripMenuItemDeleteTags_Click(object sender, EventArgs e)
-		{
-			var selectedPage = _menuHitInfo.Page as TabPage;
-			if (selectedPage == null) return;
-			if (MainController.Instance.PopupMessages.ShowQuestion("Are You sure You want to wipe tags?") != DialogResult.Yes) return;
-			selectedPage.Content.ResetTags();
-			IsDataChanged = true;
-		}
-
-		private void toolStripMenuItemDeleteWidgets_Click(object sender, EventArgs e)
-		{
-			var selectedPage = _menuHitInfo.Page as TabPage;
-			if (selectedPage == null) return;
-			if (MainController.Instance.PopupMessages.ShowQuestion("Are You sure You want to remove widgets?") != DialogResult.Yes) return;
-			selectedPage.Content.ResetWidgets();
-			IsDataChanged = true;
-		}
-
-		private void toolStripMenuItemDeleteBanners_Click(object sender, EventArgs e)
-		{
-			var selectedPage = _menuHitInfo.Page as TabPage;
-			if (selectedPage == null) return;
-			if (MainController.Instance.PopupMessages.ShowQuestion("Are You sure You want to remove banners?") != DialogResult.Yes) return;
-			selectedPage.Content.ResetBanners();
-			IsDataChanged = true;
-		}
-
-		private void toolStripMenuItemPageSettings_Click(object sender, EventArgs e)
+		private void barButtonItemPagePropertiesPageSettings_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
 		{
 			var selectedPage = _menuHitInfo.Page as TabPage;
 			if (selectedPage == null) return;
@@ -188,7 +179,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 			}
 		}
 
-		private void toolStripMenuItemDelete_Click(object sender, EventArgs e)
+		private void barButtonItemPagePropertiesDeletePage_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
 		{
 			var selectedPage = _menuHitInfo.Page as TabPage;
 			if (selectedPage == null) return;
@@ -229,29 +220,21 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 			}
 		}
 
-		private void toolStripMenuItemEditTags_Click(object sender, EventArgs e)
-		{
-			var selectedPage = _menuHitInfo.Page as TabPage;
-			if (selectedPage == null) return;
-			selectedPage.Content.EditTags();
-			IsDataChanged = true;
-		}
-
-		private void toolStripMenuItemCloneWindowsAndLinks_Click(object sender, EventArgs e)
+		private void barButtonItemPagePropertiesClonePageWindowsAndLinks_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
 		{
 			var selectedPage = _menuHitInfo.Page as TabPage;
 			if (selectedPage == null) return;
 			ClonePage(selectedPage, true);
 		}
 
-		private void toolStripMenuItemCloneWindows_Click(object sender, EventArgs e)
+		private void barButtonItemPagePropertiesClonePageOnlyWindows_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
 		{
 			var selectedPage = _menuHitInfo.Page as TabPage;
 			if (selectedPage == null) return;
 			ClonePage(selectedPage, false);
 		}
 
-		private void toolStripMenuItemResetLinkSettings_Click(object sender, EventArgs e)
+		private void barButtonItemPagePropertiesResetLinkSettings_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
 		{
 			var selectedPage = _menuHitInfo.Page as TabPage;
 			if (selectedPage == null) return;
@@ -268,11 +251,73 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 			}
 		}
 
-		private void toolStripMenuItemMakeLinkTextWordWrap_Click(object sender, EventArgs e)
+		private void barButtonItemPagePropertiesDeleteLinkWidgets_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+		{
+			var selectedPage = _menuHitInfo.Page as TabPage;
+			if (selectedPage == null) return;
+			if (MainController.Instance.PopupMessages.ShowQuestion("Are You sure You want to remove widgets?") != DialogResult.Yes) return;
+			selectedPage.Content.ResetWidgets();
+			IsDataChanged = true;
+		}
+
+		private void barButtonItemPagePropertiesDeleteLinkBanners_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+		{
+			var selectedPage = _menuHitInfo.Page as TabPage;
+			if (selectedPage == null) return;
+			if (MainController.Instance.PopupMessages.ShowQuestion("Are You sure You want to remove banners?") != DialogResult.Yes) return;
+			selectedPage.Content.ResetBanners();
+			IsDataChanged = true;
+		}
+
+		private void barButtonItemPagePropertiesDeleteLinkTags_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+		{
+			var selectedPage = _menuHitInfo.Page as TabPage;
+			if (selectedPage == null) return;
+			if (MainController.Instance.PopupMessages.ShowQuestion("Are You sure You want to wipe tags?") != DialogResult.Yes) return;
+			selectedPage.Content.ResetTags();
+			IsDataChanged = true;
+		}
+
+		private void barButtonItemPagePropertiesDeleteLinks_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+		{
+			var selectedPage = _menuHitInfo.Page as TabPage;
+			if (selectedPage == null) return;
+			if (MainController.Instance.PopupMessages.ShowQuestion("Are You sure You want to remove links?") != DialogResult.Yes) return;
+			selectedPage.Content.DeleteLinks();
+			IsDataChanged = true;
+		}
+
+		private void barButtonItemPagePropertiesResetLinkExpirationDates_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+		{
+			var selectedPage = _menuHitInfo.Page as TabPage;
+			if (selectedPage == null) return;
+			if (MainController.Instance.PopupMessages.ShowQuestion("Are You sure You want to remove expiration dates?") != DialogResult.Yes) return;
+			selectedPage.Content.ResetExpirationDates();
+			IsDataChanged = true;
+		}
+
+		private void barButtonItemPagePropertiesDeleteLinkSecurity_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+		{
+			var selectedPage = _menuHitInfo.Page as TabPage;
+			if (selectedPage == null) return;
+			if (MainController.Instance.PopupMessages.ShowQuestion("Are You sure You want to delete security settings?") != DialogResult.Yes) return;
+			selectedPage.Content.ResetSecurity();
+			IsDataChanged = true;
+		}
+
+		private void barButtonItemPagePropertiesSetLinkTextWordWrap_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
 		{
 			var selectedPage = _menuHitInfo.Page as TabPage;
 			if (selectedPage == null) return;
 			selectedPage.Content.SetLinkTextWordWrap();
+			IsDataChanged = true;
+		}
+
+		private void barButtonItemPagePropertiesEditLinkTags_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+		{
+			var selectedPage = _menuHitInfo.Page as TabPage;
+			if (selectedPage == null) return;
+			selectedPage.Content.EditTags();
 			IsDataChanged = true;
 		}
 		#endregion

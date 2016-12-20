@@ -3,9 +3,11 @@ using SalesLibraries.Business.Entities.Wallbin.NonPersistent;
 
 namespace SalesLibraries.Business.Entities.Interfaces
 {
-	public interface IBannerSettingsHolder
+	public interface IBannerSettingsHolder: IChangable
 	{
-		BannerSettings Banner { get; }
+		string Name { get; }
+		string ObjectDisplayName { get; }
+		BannerSettings Banner { get; set; }
 		Color BannerBackColor { get; }
 	}
 }

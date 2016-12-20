@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SalesLibraries.Common.Helpers;
 
 namespace SalesLibraries.CommonGUI.BackgroundProcesses
 {
@@ -117,7 +118,11 @@ namespace SalesLibraries.CommonGUI.BackgroundProcesses
 				Interlocked.Decrement(ref _processesInQueue);
 			if (currentProcess == null)
 			{
-				_mainForm.Invoke(new MethodInvoker(() => _formProgress.Hide()));
+				_mainForm.Invoke(new MethodInvoker(() =>
+				{
+					_formProgress.Hide();
+					Utils.ActivateForm(_mainForm.Handle, true, false);
+				}));
 				return;
 			}
 			if (!currentProcess.ShowProgress)
@@ -128,8 +133,8 @@ namespace SalesLibraries.CommonGUI.BackgroundProcesses
 				if (currentProcess.ShowProgress)
 					_mainForm.Invoke(new MethodInvoker(() =>
 					{
-						_formProgress.laProgress.Text = currentProcess.Title;
 						_formProgress.Visible = false;
+						_formProgress.laProgress.Text = currentProcess.Title;
 						_formProgress.Show(_mainForm);
 						_formProgress.laProgress.Refresh();
 						Application.DoEvents();

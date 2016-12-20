@@ -36,6 +36,7 @@
 			this.ckForceDownload = new System.Windows.Forms.CheckBox();
 			this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
 			this.labelControlTitle = new DevExpress.XtraEditors.LabelControl();
+			this.ckIsArchiveResource = new System.Windows.Forms.CheckBox();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).BeginInit();
 			this.SuspendLayout();
@@ -60,7 +61,7 @@
 			this.ckDoNotGenerateText.AutoSize = true;
 			this.ckDoNotGenerateText.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.ckDoNotGenerateText.ForeColor = System.Drawing.Color.Black;
-			this.ckDoNotGenerateText.Location = new System.Drawing.Point(17, 139);
+			this.ckDoNotGenerateText.Location = new System.Drawing.Point(17, 182);
 			this.ckDoNotGenerateText.Name = "ckDoNotGenerateText";
 			this.ckDoNotGenerateText.Size = new System.Drawing.Size(452, 20);
 			this.ckDoNotGenerateText.TabIndex = 25;
@@ -72,7 +73,7 @@
 			this.ckForceOpen.AutoSize = true;
 			this.ckForceOpen.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.ckForceOpen.ForeColor = System.Drawing.Color.Black;
-			this.ckForceOpen.Location = new System.Drawing.Point(17, 232);
+			this.ckForceOpen.Location = new System.Drawing.Point(17, 268);
 			this.ckForceOpen.Name = "ckForceOpen";
 			this.ckForceOpen.Size = new System.Drawing.Size(334, 20);
 			this.ckForceOpen.TabIndex = 29;
@@ -84,7 +85,7 @@
 			this.ckForceDownload.AutoSize = true;
 			this.ckForceDownload.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.ckForceDownload.ForeColor = System.Drawing.Color.Black;
-			this.ckForceDownload.Location = new System.Drawing.Point(17, 184);
+			this.ckForceDownload.Location = new System.Drawing.Point(17, 225);
 			this.ckForceDownload.Name = "ckForceDownload";
 			this.ckForceDownload.Size = new System.Drawing.Size(351, 20);
 			this.ckForceDownload.TabIndex = 28;
@@ -115,13 +116,28 @@
 			this.labelControlTitle.TabIndex = 51;
 			this.labelControlTitle.Text = resources.GetString("labelControlTitle.Text");
 			// 
+			// ckIsArchiveResource
+			// 
+			this.ckIsArchiveResource.AutoSize = true;
+			this.ckIsArchiveResource.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.ckIsArchiveResource.ForeColor = System.Drawing.Color.Black;
+			this.ckIsArchiveResource.Location = new System.Drawing.Point(17, 139);
+			this.ckIsArchiveResource.Name = "ckIsArchiveResource";
+			this.ckIsArchiveResource.Size = new System.Drawing.Size(175, 20);
+			this.ckIsArchiveResource.TabIndex = 65;
+			this.ckIsArchiveResource.Text = "Link Archive Resources";
+			this.ckIsArchiveResource.UseVisualStyleBackColor = true;
+			this.ckIsArchiveResource.CheckedChanged += new System.EventHandler(this.ckIsArchiveResource_CheckedChanged);
+			// 
 			// LinkExcelOptions
 			// 
+			this.Controls.Add(this.ckIsArchiveResource);
 			this.Controls.Add(this.pictureBoxLogo);
 			this.Controls.Add(this.labelControlTitle);
 			this.Controls.Add(this.ckForceOpen);
 			this.Controls.Add(this.ckForceDownload);
 			this.Controls.Add(this.ckDoNotGenerateText);
+			this.Name = "LinkExcelOptions";
 			this.Size = new System.Drawing.Size(531, 541);
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).EndInit();
@@ -138,5 +154,6 @@
 		public System.Windows.Forms.CheckBox ckForceDownload;
 		private System.Windows.Forms.PictureBox pictureBoxLogo;
 		private DevExpress.XtraEditors.LabelControl labelControlTitle;
+		public System.Windows.Forms.CheckBox ckIsArchiveResource;
 	}
 }

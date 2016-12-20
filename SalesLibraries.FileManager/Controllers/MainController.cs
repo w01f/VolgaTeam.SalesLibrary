@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using SalesLibraries.Business.Contexts.Wallbin.Local;
 using SalesLibraries.Common.Authorization;
@@ -137,7 +136,7 @@ namespace SalesLibraries.FileManager.Controllers
 							Settings.LoadLocal();
 						}));
 
-				var progressTitle = String.Empty;
+				string progressTitle;
 				switch (FileStorageManager.Instance.DataState)
 				{
 					case DataActualityState.NotExisted:

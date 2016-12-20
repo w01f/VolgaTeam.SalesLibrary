@@ -176,8 +176,6 @@
 			// 
 			// LinkPowerPointOptions
 			// 
-			this.Appearance.PageClient.BackColor = System.Drawing.Color.White;
-			this.Appearance.PageClient.Options.UseBackColor = true;
 			this.Controls.Add(this.buttonXRefreshPreview);
 			this.Controls.Add(this.buttonXOpenWV);
 			this.Controls.Add(this.buttonXOpenQV);

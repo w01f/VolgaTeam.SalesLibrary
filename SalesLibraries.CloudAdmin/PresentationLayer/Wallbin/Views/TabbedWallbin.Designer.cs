@@ -30,29 +30,35 @@
 		{
 			this.components = new System.ComponentModel.Container();
 			this.xtraTabControl = new DevExpress.XtraTab.XtraTabControl();
-			this.contextMenuStripPageProperties = new System.Windows.Forms.ContextMenuStrip(this.components);
-			this.toolStripMenuItemRename = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolStripMenuItemDelete = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-			this.toolStripMenuItemClone = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolStripMenuItemCloneWindowsAndLinks = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolStripMenuItemCloneWindows = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-			this.toolStripMenuItemManageImages = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolStripMenuItemDeleteWidgets = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolStripMenuItemDeleteBanners = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolsToolStripMenuItemCleanupTools = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolStripMenuItemDeleteTags = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolStripMenuItemDeleteLinks = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolStripMenuItemDeleteExpirationDates = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolStripMenuItemDeleteSecurity = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolStripMenuItemEditTags = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolStripMenuItemResetLinkSettings = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-			this.toolStripMenuItemMakeLinkTextWordWrap = new System.Windows.Forms.ToolStripMenuItem();
+			this.popupMenuPageProperties = new DevExpress.XtraBars.PopupMenu(this.components);
+			this.barButtonItemPagePropertiesPageSettings = new DevExpress.XtraBars.BarButtonItem();
+			this.barButtonItemPagePropertiesDeletePage = new DevExpress.XtraBars.BarButtonItem();
+			this.barSubItemPagePropertiesClonePage = new DevExpress.XtraBars.BarSubItem();
+			this.barButtonItemPagePropertiesClonePageWindowsAndLinks = new DevExpress.XtraBars.BarButtonItem();
+			this.barButtonItemPagePropertiesClonePageOnlyWindows = new DevExpress.XtraBars.BarButtonItem();
+			this.barButtonItemPagePropertiesResetLinkSettings = new DevExpress.XtraBars.BarButtonItem();
+			this.barSubItemPagePropertiesArtwork = new DevExpress.XtraBars.BarSubItem();
+			this.barButtonItemPagePropertiesDeleteLinkWidgets = new DevExpress.XtraBars.BarButtonItem();
+			this.barButtonItemPagePropertiesDeleteLinkBanners = new DevExpress.XtraBars.BarButtonItem();
+			this.barSubItemPagePropertiesTools = new DevExpress.XtraBars.BarSubItem();
+			this.barButtonItemPagePropertiesDeleteLinkTags = new DevExpress.XtraBars.BarButtonItem();
+			this.barButtonItemPagePropertiesDeleteLinks = new DevExpress.XtraBars.BarButtonItem();
+			this.barButtonItemPagePropertiesResetLinkExpirationDates = new DevExpress.XtraBars.BarButtonItem();
+			this.barButtonItemPagePropertiesDeleteLinkSecurity = new DevExpress.XtraBars.BarButtonItem();
+			this.barButtonItemPagePropertiesSetLinkTextWordWrap = new DevExpress.XtraBars.BarButtonItem();
+			this.barButtonItemPagePropertiesEditLinkTags = new DevExpress.XtraBars.BarButtonItem();
+			this.barManager = new DevExpress.XtraBars.BarManager(this.components);
+			this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
+			this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
+			this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
+			this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
+			this.barSubItemPagePropertiesLinkAdminSettings = new DevExpress.XtraBars.BarSubItem();
+			this.barSubItemPagePropertiesLinkPdfSettings = new DevExpress.XtraBars.BarSubItem();
+			this.barSubItemPagePropertiesLinkExcelSettings = new DevExpress.XtraBars.BarSubItem();
 			this.pnContainer.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControl)).BeginInit();
-			this.contextMenuStripPageProperties.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.popupMenuPageProperties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.barManager)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// pnEmpty
@@ -93,195 +99,309 @@
 			this.xtraTabControl.TabIndex = 0;
 			this.xtraTabControl.MouseDown += new System.Windows.Forms.MouseEventHandler(this.xtraTabControl_MouseDown);
 			// 
-			// contextMenuStripPageProperties
+			// popupMenuPageProperties
 			// 
-			this.contextMenuStripPageProperties.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-			this.toolStripMenuItemRename,
-			this.toolStripMenuItemDelete,
-			this.toolStripSeparator2,
-			this.toolStripMenuItemClone,
-			this.toolStripSeparator3,
-			this.toolStripMenuItemResetLinkSettings,
-			this.toolStripSeparator1,
-			this.toolStripMenuItemManageImages,
-			this.toolsToolStripMenuItemCleanupTools,
-			this.toolStripMenuItemEditTags});
-			this.contextMenuStripPageProperties.Name = "contextMenuStripLinkProperties";
-			this.contextMenuStripPageProperties.Size = new System.Drawing.Size(281, 198);
+			this.popupMenuPageProperties.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemPagePropertiesPageSettings),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemPagePropertiesDeletePage),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barSubItemPagePropertiesClonePage, true),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemPagePropertiesResetLinkSettings, true),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barSubItemPagePropertiesLinkAdminSettings, true),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barSubItemPagePropertiesArtwork, true),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barSubItemPagePropertiesTools),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemPagePropertiesEditLinkTags)});
+			this.popupMenuPageProperties.Manager = this.barManager;
+			this.popupMenuPageProperties.MenuAppearance.AppearanceMenu.Disabled.Options.UseTextOptions = true;
+			this.popupMenuPageProperties.MenuAppearance.AppearanceMenu.Disabled.TextOptions.HotkeyPrefix = DevExpress.Utils.HKeyPrefix.None;
+			this.popupMenuPageProperties.MenuAppearance.AppearanceMenu.Hovered.Options.UseTextOptions = true;
+			this.popupMenuPageProperties.MenuAppearance.AppearanceMenu.Hovered.TextOptions.HotkeyPrefix = DevExpress.Utils.HKeyPrefix.None;
+			this.popupMenuPageProperties.MenuAppearance.AppearanceMenu.Normal.Options.UseTextOptions = true;
+			this.popupMenuPageProperties.MenuAppearance.AppearanceMenu.Normal.TextOptions.HotkeyPrefix = DevExpress.Utils.HKeyPrefix.None;
+			this.popupMenuPageProperties.MenuAppearance.AppearanceMenu.Pressed.Options.UseTextOptions = true;
+			this.popupMenuPageProperties.MenuAppearance.AppearanceMenu.Pressed.TextOptions.HotkeyPrefix = DevExpress.Utils.HKeyPrefix.None;
+			this.popupMenuPageProperties.Name = "popupMenuPageProperties";
+			this.popupMenuPageProperties.CloseUp += new System.EventHandler(this.popupMenuPageProperties_CloseUp);
 			// 
-			// toolStripMenuItemRename
+			// barButtonItemPagePropertiesPageSettings
 			// 
-			this.toolStripMenuItemRename.Name = "toolStripMenuItemRename";
-			this.toolStripMenuItemRename.Size = new System.Drawing.Size(280, 22);
-			this.toolStripMenuItemRename.Text = "Rename this page";
-			this.toolStripMenuItemRename.Click += new System.EventHandler(this.toolStripMenuItemRename_Click);
+			this.barButtonItemPagePropertiesPageSettings.Caption = "Edit Page Settings";
+			this.barButtonItemPagePropertiesPageSettings.CategoryGuid = new System.Guid("ed4d5958-5302-4d8f-8d8d-ef1c5e91776f");
+			this.barButtonItemPagePropertiesPageSettings.Id = 0;
+			this.barButtonItemPagePropertiesPageSettings.Name = "barButtonItemPagePropertiesPageSettings";
+			this.barButtonItemPagePropertiesPageSettings.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemPagePropertiesPageSettings_ItemClick);
 			// 
-			// toolStripMenuItemDelete
+			// barButtonItemPagePropertiesDeletePage
 			// 
-			this.toolStripMenuItemDelete.Name = "toolStripMenuItemDelete";
-			this.toolStripMenuItemDelete.Size = new System.Drawing.Size(280, 22);
-			this.toolStripMenuItemDelete.Text = "Delete this page";
-			this.toolStripMenuItemDelete.Click += new System.EventHandler(this.toolStripMenuItemDelete_Click);
+			this.barButtonItemPagePropertiesDeletePage.Caption = "Delete this page";
+			this.barButtonItemPagePropertiesDeletePage.CategoryGuid = new System.Guid("ed4d5958-5302-4d8f-8d8d-ef1c5e91776f");
+			this.barButtonItemPagePropertiesDeletePage.Id = 1;
+			this.barButtonItemPagePropertiesDeletePage.Name = "barButtonItemPagePropertiesDeletePage";
+			this.barButtonItemPagePropertiesDeletePage.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemPagePropertiesDeletePage_ItemClick);
 			// 
-			// toolStripSeparator2
+			// barSubItemPagePropertiesClonePage
 			// 
-			this.toolStripSeparator2.Name = "toolStripSeparator2";
-			this.toolStripSeparator2.Size = new System.Drawing.Size(277, 6);
+			this.barSubItemPagePropertiesClonePage.Caption = "Clone this Page";
+			this.barSubItemPagePropertiesClonePage.CategoryGuid = new System.Guid("ed4d5958-5302-4d8f-8d8d-ef1c5e91776f");
+			this.barSubItemPagePropertiesClonePage.Id = 2;
+			this.barSubItemPagePropertiesClonePage.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemPagePropertiesClonePageWindowsAndLinks),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemPagePropertiesClonePageOnlyWindows)});
+			this.barSubItemPagePropertiesClonePage.Name = "barSubItemPagePropertiesClonePage";
 			// 
-			// toolStripMenuItemClone
+			// barButtonItemPagePropertiesClonePageWindowsAndLinks
 			// 
-			this.toolStripMenuItemClone.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-			this.toolStripMenuItemCloneWindowsAndLinks,
-			this.toolStripMenuItemCloneWindows});
-			this.toolStripMenuItemClone.Name = "toolStripMenuItemClone";
-			this.toolStripMenuItemClone.Size = new System.Drawing.Size(280, 22);
-			this.toolStripMenuItemClone.Text = "Clone this Page";
+			this.barButtonItemPagePropertiesClonePageWindowsAndLinks.Caption = "Windows & Links";
+			this.barButtonItemPagePropertiesClonePageWindowsAndLinks.CategoryGuid = new System.Guid("ed4d5958-5302-4d8f-8d8d-ef1c5e91776f");
+			this.barButtonItemPagePropertiesClonePageWindowsAndLinks.Id = 3;
+			this.barButtonItemPagePropertiesClonePageWindowsAndLinks.ItemInMenuAppearance.Disabled.Options.UseTextOptions = true;
+			this.barButtonItemPagePropertiesClonePageWindowsAndLinks.ItemInMenuAppearance.Disabled.TextOptions.HotkeyPrefix = DevExpress.Utils.HKeyPrefix.None;
+			this.barButtonItemPagePropertiesClonePageWindowsAndLinks.ItemInMenuAppearance.Hovered.Options.UseTextOptions = true;
+			this.barButtonItemPagePropertiesClonePageWindowsAndLinks.ItemInMenuAppearance.Hovered.TextOptions.HotkeyPrefix = DevExpress.Utils.HKeyPrefix.None;
+			this.barButtonItemPagePropertiesClonePageWindowsAndLinks.ItemInMenuAppearance.Normal.Options.UseTextOptions = true;
+			this.barButtonItemPagePropertiesClonePageWindowsAndLinks.ItemInMenuAppearance.Normal.TextOptions.HotkeyPrefix = DevExpress.Utils.HKeyPrefix.None;
+			this.barButtonItemPagePropertiesClonePageWindowsAndLinks.ItemInMenuAppearance.Pressed.Options.UseTextOptions = true;
+			this.barButtonItemPagePropertiesClonePageWindowsAndLinks.ItemInMenuAppearance.Pressed.TextOptions.HotkeyPrefix = DevExpress.Utils.HKeyPrefix.None;
+			this.barButtonItemPagePropertiesClonePageWindowsAndLinks.Name = "barButtonItemPagePropertiesClonePageWindowsAndLinks";
+			this.barButtonItemPagePropertiesClonePageWindowsAndLinks.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemPagePropertiesClonePageWindowsAndLinks_ItemClick);
 			// 
-			// toolStripMenuItemCloneWindowsAndLinks
+			// barButtonItemPagePropertiesClonePageOnlyWindows
 			// 
-			this.toolStripMenuItemCloneWindowsAndLinks.Name = "toolStripMenuItemCloneWindowsAndLinks";
-			this.toolStripMenuItemCloneWindowsAndLinks.Size = new System.Drawing.Size(166, 22);
-			this.toolStripMenuItemCloneWindowsAndLinks.Text = "Windows && Links";
-			this.toolStripMenuItemCloneWindowsAndLinks.Click += new System.EventHandler(this.toolStripMenuItemCloneWindowsAndLinks_Click);
+			this.barButtonItemPagePropertiesClonePageOnlyWindows.Caption = "Windows Only";
+			this.barButtonItemPagePropertiesClonePageOnlyWindows.CategoryGuid = new System.Guid("ed4d5958-5302-4d8f-8d8d-ef1c5e91776f");
+			this.barButtonItemPagePropertiesClonePageOnlyWindows.Id = 4;
+			this.barButtonItemPagePropertiesClonePageOnlyWindows.Name = "barButtonItemPagePropertiesClonePageOnlyWindows";
+			this.barButtonItemPagePropertiesClonePageOnlyWindows.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemPagePropertiesClonePageOnlyWindows_ItemClick);
 			// 
-			// toolStripMenuItemCloneWindows
+			// barButtonItemPagePropertiesResetLinkSettings
 			// 
-			this.toolStripMenuItemCloneWindows.Name = "toolStripMenuItemCloneWindows";
-			this.toolStripMenuItemCloneWindows.Size = new System.Drawing.Size(166, 22);
-			this.toolStripMenuItemCloneWindows.Text = "Windows Only";
-			this.toolStripMenuItemCloneWindows.Click += new System.EventHandler(this.toolStripMenuItemCloneWindows_Click);
+			this.barButtonItemPagePropertiesResetLinkSettings.Caption = "Reset all Links on this page";
+			this.barButtonItemPagePropertiesResetLinkSettings.CategoryGuid = new System.Guid("ed4d5958-5302-4d8f-8d8d-ef1c5e91776f");
+			this.barButtonItemPagePropertiesResetLinkSettings.Id = 5;
+			this.barButtonItemPagePropertiesResetLinkSettings.Name = "barButtonItemPagePropertiesResetLinkSettings";
+			this.barButtonItemPagePropertiesResetLinkSettings.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemPagePropertiesResetLinkSettings_ItemClick);
 			// 
-			// toolStripSeparator1
+			// barSubItemPagePropertiesArtwork
 			// 
-			this.toolStripSeparator1.Name = "toolStripSeparator1";
-			this.toolStripSeparator1.Size = new System.Drawing.Size(277, 6);
+			this.barSubItemPagePropertiesArtwork.Caption = "Manage Link Artwork for this page";
+			this.barSubItemPagePropertiesArtwork.CategoryGuid = new System.Guid("ed4d5958-5302-4d8f-8d8d-ef1c5e91776f");
+			this.barSubItemPagePropertiesArtwork.Id = 6;
+			this.barSubItemPagePropertiesArtwork.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemPagePropertiesDeleteLinkWidgets),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemPagePropertiesDeleteLinkBanners)});
+			this.barSubItemPagePropertiesArtwork.Name = "barSubItemPagePropertiesArtwork";
 			// 
-			// toolStripMenuItemManageImages
+			// barButtonItemPagePropertiesDeleteLinkWidgets
 			// 
-			this.toolStripMenuItemManageImages.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-			this.toolStripMenuItemDeleteWidgets,
-			this.toolStripMenuItemDeleteBanners});
-			this.toolStripMenuItemManageImages.Name = "toolStripMenuItemManageImages";
-			this.toolStripMenuItemManageImages.Size = new System.Drawing.Size(280, 22);
-			this.toolStripMenuItemManageImages.Text = "Manage Link Artwork for this page";
+			this.barButtonItemPagePropertiesDeleteLinkWidgets.Caption = "DELETE ALL Widget Icons on this page";
+			this.barButtonItemPagePropertiesDeleteLinkWidgets.CategoryGuid = new System.Guid("ed4d5958-5302-4d8f-8d8d-ef1c5e91776f");
+			this.barButtonItemPagePropertiesDeleteLinkWidgets.Id = 7;
+			this.barButtonItemPagePropertiesDeleteLinkWidgets.Name = "barButtonItemPagePropertiesDeleteLinkWidgets";
+			this.barButtonItemPagePropertiesDeleteLinkWidgets.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemPagePropertiesDeleteLinkWidgets_ItemClick);
 			// 
-			// toolStripMenuItemDeleteWidgets
+			// barButtonItemPagePropertiesDeleteLinkBanners
 			// 
-			this.toolStripMenuItemDeleteWidgets.Name = "toolStripMenuItemDeleteWidgets";
-			this.toolStripMenuItemDeleteWidgets.Size = new System.Drawing.Size(283, 22);
-			this.toolStripMenuItemDeleteWidgets.Text = "DELETE ALL Widget Icons on this page";
-			this.toolStripMenuItemDeleteWidgets.Click += new System.EventHandler(this.toolStripMenuItemDeleteWidgets_Click);
+			this.barButtonItemPagePropertiesDeleteLinkBanners.Caption = "DELETE ALL Clipart Images on this page";
+			this.barButtonItemPagePropertiesDeleteLinkBanners.CategoryGuid = new System.Guid("ed4d5958-5302-4d8f-8d8d-ef1c5e91776f");
+			this.barButtonItemPagePropertiesDeleteLinkBanners.Id = 8;
+			this.barButtonItemPagePropertiesDeleteLinkBanners.Name = "barButtonItemPagePropertiesDeleteLinkBanners";
+			this.barButtonItemPagePropertiesDeleteLinkBanners.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemPagePropertiesDeleteLinkBanners_ItemClick);
 			// 
-			// toolStripMenuItemDeleteBanners
+			// barSubItemPagePropertiesTools
 			// 
-			this.toolStripMenuItemDeleteBanners.Name = "toolStripMenuItemDeleteBanners";
-			this.toolStripMenuItemDeleteBanners.Size = new System.Drawing.Size(283, 22);
-			this.toolStripMenuItemDeleteBanners.Text = "DELETE ALL Clipart Images on this page";
-			this.toolStripMenuItemDeleteBanners.Click += new System.EventHandler(this.toolStripMenuItemDeleteBanners_Click);
+			this.barSubItemPagePropertiesTools.Caption = "Advanced Page Cleanup Tools";
+			this.barSubItemPagePropertiesTools.CategoryGuid = new System.Guid("ed4d5958-5302-4d8f-8d8d-ef1c5e91776f");
+			this.barSubItemPagePropertiesTools.Id = 9;
+			this.barSubItemPagePropertiesTools.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemPagePropertiesDeleteLinkTags),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemPagePropertiesDeleteLinks),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemPagePropertiesResetLinkExpirationDates),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemPagePropertiesDeleteLinkSecurity),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemPagePropertiesSetLinkTextWordWrap)});
+			this.barSubItemPagePropertiesTools.Name = "barSubItemPagePropertiesTools";
 			// 
-			// toolsToolStripMenuItemCleanupTools
+			// barButtonItemPagePropertiesDeleteLinkTags
 			// 
-			this.toolsToolStripMenuItemCleanupTools.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-			this.toolStripMenuItemDeleteTags,
-			this.toolStripMenuItemDeleteLinks,
-			this.toolStripMenuItemDeleteExpirationDates,
-			this.toolStripMenuItemDeleteSecurity,
-			this.toolStripMenuItemMakeLinkTextWordWrap});
-			this.toolsToolStripMenuItemCleanupTools.Name = "toolsToolStripMenuItemCleanupTools";
-			this.toolsToolStripMenuItemCleanupTools.Size = new System.Drawing.Size(280, 22);
-			this.toolsToolStripMenuItemCleanupTools.Text = "Advanced Page Cleanup Tools";
+			this.barButtonItemPagePropertiesDeleteLinkTags.Caption = "Wipe ALL Tags for ALL Links on this page";
+			this.barButtonItemPagePropertiesDeleteLinkTags.CategoryGuid = new System.Guid("ed4d5958-5302-4d8f-8d8d-ef1c5e91776f");
+			this.barButtonItemPagePropertiesDeleteLinkTags.Id = 10;
+			this.barButtonItemPagePropertiesDeleteLinkTags.Name = "barButtonItemPagePropertiesDeleteLinkTags";
+			this.barButtonItemPagePropertiesDeleteLinkTags.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemPagePropertiesDeleteLinkTags_ItemClick);
 			// 
-			// toolStripMenuItemDeleteTags
+			// barButtonItemPagePropertiesDeleteLinks
 			// 
-			this.toolStripMenuItemDeleteTags.Name = "toolStripMenuItemDeleteTags";
-			this.toolStripMenuItemDeleteTags.Size = new System.Drawing.Size(336, 22);
-			this.toolStripMenuItemDeleteTags.Text = "Wipe ALL Tags for ALL Links on this page";
-			this.toolStripMenuItemDeleteTags.Click += new System.EventHandler(this.toolStripMenuItemDeleteTags_Click);
+			this.barButtonItemPagePropertiesDeleteLinks.Caption = "Delete ALL links on this page";
+			this.barButtonItemPagePropertiesDeleteLinks.CategoryGuid = new System.Guid("ed4d5958-5302-4d8f-8d8d-ef1c5e91776f");
+			this.barButtonItemPagePropertiesDeleteLinks.Id = 11;
+			this.barButtonItemPagePropertiesDeleteLinks.Name = "barButtonItemPagePropertiesDeleteLinks";
+			this.barButtonItemPagePropertiesDeleteLinks.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemPagePropertiesDeleteLinks_ItemClick);
 			// 
-			// toolStripMenuItemDeleteLinks
+			// barButtonItemPagePropertiesResetLinkExpirationDates
 			// 
-			this.toolStripMenuItemDeleteLinks.Name = "toolStripMenuItemDeleteLinks";
-			this.toolStripMenuItemDeleteLinks.Size = new System.Drawing.Size(336, 22);
-			this.toolStripMenuItemDeleteLinks.Text = "Delete ALL links on this page";
-			this.toolStripMenuItemDeleteLinks.Click += new System.EventHandler(this.toolStripMenuItemDeleteLinks_Click);
+			this.barButtonItemPagePropertiesResetLinkExpirationDates.Caption = "Remove ALL Expiration Dates on this page";
+			this.barButtonItemPagePropertiesResetLinkExpirationDates.CategoryGuid = new System.Guid("ed4d5958-5302-4d8f-8d8d-ef1c5e91776f");
+			this.barButtonItemPagePropertiesResetLinkExpirationDates.Id = 12;
+			this.barButtonItemPagePropertiesResetLinkExpirationDates.Name = "barButtonItemPagePropertiesResetLinkExpirationDates";
+			this.barButtonItemPagePropertiesResetLinkExpirationDates.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemPagePropertiesResetLinkExpirationDates_ItemClick);
 			// 
-			// toolStripMenuItemDeleteExpirationDates
+			// barButtonItemPagePropertiesDeleteLinkSecurity
 			// 
-			this.toolStripMenuItemDeleteExpirationDates.Name = "toolStripMenuItemDeleteExpirationDates";
-			this.toolStripMenuItemDeleteExpirationDates.Size = new System.Drawing.Size(336, 22);
-			this.toolStripMenuItemDeleteExpirationDates.Text = "Remove ALL Expiration Dates on this page";
-			this.toolStripMenuItemDeleteExpirationDates.Click += new System.EventHandler(this.toolStripMenuItemDeleteExpirationDates_Click);
+			this.barButtonItemPagePropertiesDeleteLinkSecurity.Caption = "Delete Security Settings for ALL Links on this page";
+			this.barButtonItemPagePropertiesDeleteLinkSecurity.CategoryGuid = new System.Guid("ed4d5958-5302-4d8f-8d8d-ef1c5e91776f");
+			this.barButtonItemPagePropertiesDeleteLinkSecurity.Id = 13;
+			this.barButtonItemPagePropertiesDeleteLinkSecurity.Name = "barButtonItemPagePropertiesDeleteLinkSecurity";
+			this.barButtonItemPagePropertiesDeleteLinkSecurity.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemPagePropertiesDeleteLinkSecurity_ItemClick);
 			// 
-			// toolStripMenuItemDeleteSecurity
+			// barButtonItemPagePropertiesSetLinkTextWordWrap
 			// 
-			this.toolStripMenuItemDeleteSecurity.Name = "toolStripMenuItemDeleteSecurity";
-			this.toolStripMenuItemDeleteSecurity.Size = new System.Drawing.Size(336, 22);
-			this.toolStripMenuItemDeleteSecurity.Text = "Delete Security Settings for ALL Links on this page";
-			this.toolStripMenuItemDeleteSecurity.Click += new System.EventHandler(this.toolStripMenuItemDeleteSecurity_Click);
+			this.barButtonItemPagePropertiesSetLinkTextWordWrap.Caption = "Make all Links on this Page RESPONSIVE";
+			this.barButtonItemPagePropertiesSetLinkTextWordWrap.CategoryGuid = new System.Guid("ed4d5958-5302-4d8f-8d8d-ef1c5e91776f");
+			this.barButtonItemPagePropertiesSetLinkTextWordWrap.Id = 14;
+			this.barButtonItemPagePropertiesSetLinkTextWordWrap.Name = "barButtonItemPagePropertiesSetLinkTextWordWrap";
+			this.barButtonItemPagePropertiesSetLinkTextWordWrap.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemPagePropertiesSetLinkTextWordWrap_ItemClick);
 			// 
-			// toolStripMenuItemEditTags
+			// barButtonItemPagePropertiesEditLinkTags
 			// 
-			this.toolStripMenuItemEditTags.Name = "toolStripMenuItemEditTags";
-			this.toolStripMenuItemEditTags.Size = new System.Drawing.Size(280, 22);
-			this.toolStripMenuItemEditTags.Text = "Add Search Tag to all links on this page";
-			this.toolStripMenuItemEditTags.Click += new System.EventHandler(this.toolStripMenuItemEditTags_Click);
+			this.barButtonItemPagePropertiesEditLinkTags.Caption = "Add Search Tag to all links on this page";
+			this.barButtonItemPagePropertiesEditLinkTags.CategoryGuid = new System.Guid("ed4d5958-5302-4d8f-8d8d-ef1c5e91776f");
+			this.barButtonItemPagePropertiesEditLinkTags.Id = 15;
+			this.barButtonItemPagePropertiesEditLinkTags.Name = "barButtonItemPagePropertiesEditLinkTags";
+			this.barButtonItemPagePropertiesEditLinkTags.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemPagePropertiesEditLinkTags_ItemClick);
 			// 
-			// toolStripMenuItemResetLinkSettings
+			// barManager
 			// 
-			this.toolStripMenuItemResetLinkSettings.Name = "toolStripMenuItemResetLinkSettings";
-			this.toolStripMenuItemResetLinkSettings.Size = new System.Drawing.Size(280, 22);
-			this.toolStripMenuItemResetLinkSettings.Text = "Reset all Links on this page";
-			this.toolStripMenuItemResetLinkSettings.Click += new System.EventHandler(this.toolStripMenuItemResetLinkSettings_Click);
+			this.barManager.Categories.AddRange(new DevExpress.XtraBars.BarManagerCategory[] {
+            new DevExpress.XtraBars.BarManagerCategory("Page Properties", new System.Guid("ed4d5958-5302-4d8f-8d8d-ef1c5e91776f"))});
+			this.barManager.DockControls.Add(this.barDockControlTop);
+			this.barManager.DockControls.Add(this.barDockControlBottom);
+			this.barManager.DockControls.Add(this.barDockControlLeft);
+			this.barManager.DockControls.Add(this.barDockControlRight);
+			this.barManager.Form = this;
+			this.barManager.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
+            this.barButtonItemPagePropertiesPageSettings,
+            this.barButtonItemPagePropertiesDeletePage,
+            this.barSubItemPagePropertiesClonePage,
+            this.barButtonItemPagePropertiesClonePageWindowsAndLinks,
+            this.barButtonItemPagePropertiesClonePageOnlyWindows,
+            this.barButtonItemPagePropertiesResetLinkSettings,
+            this.barSubItemPagePropertiesArtwork,
+            this.barButtonItemPagePropertiesDeleteLinkWidgets,
+            this.barButtonItemPagePropertiesDeleteLinkBanners,
+            this.barSubItemPagePropertiesTools,
+            this.barButtonItemPagePropertiesDeleteLinkTags,
+            this.barButtonItemPagePropertiesDeleteLinks,
+            this.barButtonItemPagePropertiesResetLinkExpirationDates,
+            this.barButtonItemPagePropertiesDeleteLinkSecurity,
+            this.barButtonItemPagePropertiesSetLinkTextWordWrap,
+            this.barButtonItemPagePropertiesEditLinkTags,
+            this.barSubItemPagePropertiesLinkAdminSettings,
+            this.barSubItemPagePropertiesLinkPdfSettings,
+            this.barSubItemPagePropertiesLinkExcelSettings});
+			this.barManager.MaxItemId = 19;
 			// 
-			// toolStripSeparator3
+			// barDockControlTop
 			// 
-			this.toolStripSeparator3.Name = "toolStripSeparator3";
-			this.toolStripSeparator3.Size = new System.Drawing.Size(277, 6);
+			this.barDockControlTop.CausesValidation = false;
+			this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
+			this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
+			this.barDockControlTop.Size = new System.Drawing.Size(714, 0);
 			// 
-			// toolStripMenuItemMakeLinkTextWordWrap
+			// barDockControlBottom
 			// 
-			this.toolStripMenuItemMakeLinkTextWordWrap.Name = "toolStripMenuItemMakeLinkTextWordWrap";
-			this.toolStripMenuItemMakeLinkTextWordWrap.Size = new System.Drawing.Size(336, 22);
-			this.toolStripMenuItemMakeLinkTextWordWrap.Text = "Make all Links on this Page RESPONSIVE";
-			this.toolStripMenuItemMakeLinkTextWordWrap.Click += new System.EventHandler(this.toolStripMenuItemMakeLinkTextWordWrap_Click);
+			this.barDockControlBottom.CausesValidation = false;
+			this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+			this.barDockControlBottom.Location = new System.Drawing.Point(0, 502);
+			this.barDockControlBottom.Size = new System.Drawing.Size(714, 0);
+			// 
+			// barDockControlLeft
+			// 
+			this.barDockControlLeft.CausesValidation = false;
+			this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
+			this.barDockControlLeft.Location = new System.Drawing.Point(0, 0);
+			this.barDockControlLeft.Size = new System.Drawing.Size(0, 502);
+			// 
+			// barDockControlRight
+			// 
+			this.barDockControlRight.CausesValidation = false;
+			this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
+			this.barDockControlRight.Location = new System.Drawing.Point(714, 0);
+			this.barDockControlRight.Size = new System.Drawing.Size(0, 502);
+			// 
+			// barSubItemPagePropertiesLinkAdminSettings
+			// 
+			this.barSubItemPagePropertiesLinkAdminSettings.Caption = "Shared Admin Settings";
+			this.barSubItemPagePropertiesLinkAdminSettings.CategoryGuid = new System.Guid("ed4d5958-5302-4d8f-8d8d-ef1c5e91776f");
+			this.barSubItemPagePropertiesLinkAdminSettings.Id = 16;
+			this.barSubItemPagePropertiesLinkAdminSettings.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.barSubItemPagePropertiesLinkPdfSettings),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barSubItemPagePropertiesLinkExcelSettings)});
+			this.barSubItemPagePropertiesLinkAdminSettings.Name = "barSubItemPagePropertiesLinkAdminSettings";
+			// 
+			// barSubItemPagePropertiesLinkPdfSettings
+			// 
+			this.barSubItemPagePropertiesLinkPdfSettings.Caption = "PDF";
+			this.barSubItemPagePropertiesLinkPdfSettings.CategoryGuid = new System.Guid("ed4d5958-5302-4d8f-8d8d-ef1c5e91776f");
+			this.barSubItemPagePropertiesLinkPdfSettings.Id = 17;
+			this.barSubItemPagePropertiesLinkPdfSettings.Name = "barSubItemPagePropertiesLinkPdfSettings";
+			// 
+			// barSubItemPagePropertiesLinkExcelSettings
+			// 
+			this.barSubItemPagePropertiesLinkExcelSettings.Caption = "Excel";
+			this.barSubItemPagePropertiesLinkExcelSettings.CategoryGuid = new System.Guid("ed4d5958-5302-4d8f-8d8d-ef1c5e91776f");
+			this.barSubItemPagePropertiesLinkExcelSettings.Id = 18;
+			this.barSubItemPagePropertiesLinkExcelSettings.Name = "barSubItemPagePropertiesLinkExcelSettings";
 			// 
 			// TabbedWallbin
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
 			this.BackColor = System.Drawing.Color.White;
+			this.Controls.Add(this.barDockControlLeft);
+			this.Controls.Add(this.barDockControlRight);
+			this.Controls.Add(this.barDockControlBottom);
+			this.Controls.Add(this.barDockControlTop);
 			this.Name = "TabbedWallbin";
 			this.Size = new System.Drawing.Size(714, 502);
+			this.Controls.SetChildIndex(this.barDockControlTop, 0);
+			this.Controls.SetChildIndex(this.barDockControlBottom, 0);
+			this.Controls.SetChildIndex(this.barDockControlRight, 0);
+			this.Controls.SetChildIndex(this.barDockControlLeft, 0);
 			this.Controls.SetChildIndex(this.pnEmpty, 0);
 			this.Controls.SetChildIndex(this.pnContainer, 0);
 			this.pnContainer.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControl)).EndInit();
-			this.contextMenuStripPageProperties.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.popupMenuPageProperties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.barManager)).EndInit();
 			this.ResumeLayout(false);
+			this.PerformLayout();
 
 		}
 
 		#endregion
 
 		private DevExpress.XtraTab.XtraTabControl xtraTabControl;
-		private System.Windows.Forms.ContextMenuStrip contextMenuStripPageProperties;
-		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemRename;
-		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemDelete;
-		private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemManageImages;
-		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemDeleteWidgets;
-		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemDeleteBanners;
-		private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItemCleanupTools;
-		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemDeleteTags;
-		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemDeleteLinks;
-		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemDeleteExpirationDates;
-		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemDeleteSecurity;
-		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemEditTags;
-		private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemClone;
-		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemCloneWindowsAndLinks;
-		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemCloneWindows;
-		private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemResetLinkSettings;
-		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemMakeLinkTextWordWrap;
+		private DevExpress.XtraBars.PopupMenu popupMenuPageProperties;
+		private DevExpress.XtraBars.BarManager barManager;
+		private DevExpress.XtraBars.BarDockControl barDockControlTop;
+		private DevExpress.XtraBars.BarDockControl barDockControlBottom;
+		private DevExpress.XtraBars.BarDockControl barDockControlLeft;
+		private DevExpress.XtraBars.BarDockControl barDockControlRight;
+		private DevExpress.XtraBars.BarButtonItem barButtonItemPagePropertiesPageSettings;
+		private DevExpress.XtraBars.BarButtonItem barButtonItemPagePropertiesDeletePage;
+		private DevExpress.XtraBars.BarSubItem barSubItemPagePropertiesClonePage;
+		private DevExpress.XtraBars.BarButtonItem barButtonItemPagePropertiesClonePageWindowsAndLinks;
+		private DevExpress.XtraBars.BarButtonItem barButtonItemPagePropertiesClonePageOnlyWindows;
+		private DevExpress.XtraBars.BarButtonItem barButtonItemPagePropertiesResetLinkSettings;
+		private DevExpress.XtraBars.BarSubItem barSubItemPagePropertiesArtwork;
+		private DevExpress.XtraBars.BarButtonItem barButtonItemPagePropertiesDeleteLinkWidgets;
+		private DevExpress.XtraBars.BarButtonItem barButtonItemPagePropertiesDeleteLinkBanners;
+		private DevExpress.XtraBars.BarSubItem barSubItemPagePropertiesTools;
+		private DevExpress.XtraBars.BarButtonItem barButtonItemPagePropertiesDeleteLinkTags;
+		private DevExpress.XtraBars.BarButtonItem barButtonItemPagePropertiesDeleteLinks;
+		private DevExpress.XtraBars.BarButtonItem barButtonItemPagePropertiesResetLinkExpirationDates;
+		private DevExpress.XtraBars.BarButtonItem barButtonItemPagePropertiesDeleteLinkSecurity;
+		private DevExpress.XtraBars.BarButtonItem barButtonItemPagePropertiesSetLinkTextWordWrap;
+		private DevExpress.XtraBars.BarButtonItem barButtonItemPagePropertiesEditLinkTags;
+		private DevExpress.XtraBars.BarSubItem barSubItemPagePropertiesLinkAdminSettings;
+		private DevExpress.XtraBars.BarSubItem barSubItemPagePropertiesLinkPdfSettings;
+		private DevExpress.XtraBars.BarSubItem barSubItemPagePropertiesLinkExcelSettings;
 	}
 }

@@ -41,6 +41,10 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="itextsharp, Version=5.5.9.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.9\lib\itextsharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -80,6 +84,7 @@
     <Compile Include="Contexts\Wallbin\LibraryContext.cs" />
     <Compile Include="Contexts\Wallbin\Local\LocalWallbinManager.cs" />
     <Compile Include="Contexts\Wallbin\Local\LocalLibraryContext.cs" />
+    <Compile Include="Contexts\Wallbin\WallbinConfiguration.cs" />
     <Compile Include="Entities\BaseEntity.cs" />
     <Compile Include="Entities\Calendars\CalendarContainer.cs" />
     <Compile Include="Entities\Calendars\CalendarDay.cs" />
@@ -149,6 +154,7 @@
     <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\LinkBundleLinkSettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\LinkFileSettingsTemplate.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\LibraryFolderLinkSettings.cs" />
+    <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\PdfLinkSettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\QuickLinkSettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\ResetSettingsSchedulerSettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\SecuritySettings.cs" />

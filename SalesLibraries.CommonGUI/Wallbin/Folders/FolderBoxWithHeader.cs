@@ -2,9 +2,7 @@
 using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.Drawing;
-using System.Windows.Forms;
 using DevExpress.Utils;
-using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.Persistent;
 using SalesLibraries.Common.Objects.Graphics;
 using HorizontalAlignment = SalesLibraries.Business.Entities.Wallbin.Common.Enums.HorizontalAlignment;

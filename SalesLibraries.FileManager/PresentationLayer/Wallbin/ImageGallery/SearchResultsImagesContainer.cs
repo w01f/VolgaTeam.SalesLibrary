@@ -13,9 +13,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.ImageGallery
 		protected override void LoadImages()
 		{
 			base.LoadImages();
-			if (_parent.Images.Any())
+			if (ParentImageGroup.Images.Any())
 			{
-				PageVisible = _parent.Images.Any();
+				PageVisible = ParentImageGroup.Images.Any();
 				TabControl.SelectedTabPage = this;
 			}
 		}

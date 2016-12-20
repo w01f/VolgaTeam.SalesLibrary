@@ -261,7 +261,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.DataSource
 						var files = new List<string>();
 						files.AddRange(Directory.GetFiles(folderLink.Path));
 						files.Sort(WinAPIHelper.StrCmpLogicalW);
-						foreach (var file in Directory.GetFiles(folderLink.Path))
+						foreach (var file in files.Where(f => !f.ToLower().EndsWith(".ini")))
 						{
 							if (!GlobalSettings.HiddenObjects.Any(x => file.ToLower().Contains(x.ToLower())))
 							{
@@ -270,7 +270,12 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.DataSource
 								fileLink.Path = file;
 								childNode =
 									treeListAllFiles.AppendNode(
-										new[] { String.Format("{0} ({1})", fileLink.Name, File.GetLastWriteTime(file).ToString("MM/dd/yy hh:mm tt")) },
+										new[]
+										{
+											String.Format("{0} ({1:MM/dd/yy hh:mm tt})",
+											fileLink.Name,
+											File.GetLastWriteTime(file))
+										},
 										node, fileLink);
 								childNode.StateImageIndex = GetImageindex(file);
 							}

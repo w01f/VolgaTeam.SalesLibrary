@@ -42,7 +42,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 		public void InitForm(LinkSettingsType settingsType)
 		{
 			Width = 680;
-			Height = 400;
+			Height = 550;
 			Text = _sourceLink.ToString();
 			StartPosition = FormStartPosition.CenterScreen;
 

@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using System.Windows.Forms;
+using DevExpress.Utils;
+using DevExpress.XtraBars;
 using SalesLibraries.Business.Entities.Wallbin.Persistent;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Clipboard
@@ -8,15 +10,18 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Clipboard
 	class FolderClipboardManager
 	{
 		private readonly LibraryFolder _dataSource;
-		private readonly ToolStripMenuItem _copyContainer;
-		private readonly ToolStripMenuItem _moveContainer;
+		private readonly BarSubItem _copyContainer;
+		private readonly BarSubItem _moveContainer;
+
+		private readonly Dictionary<Guid, BarButtonItem> _pageForCopyBarItems = new Dictionary<Guid, BarButtonItem>();
+		private readonly Dictionary<Guid, BarButtonItem> _pageForMoveBarItems = new Dictionary<Guid, BarButtonItem>();
 
 		public event EventHandler<FolderMovingEventArgs> FolderMoved;
 
 		public FolderClipboardManager(
 			LibraryFolder dataSource,
-			ToolStripMenuItem copyContainer,
-			ToolStripMenuItem moveContainer)
+			BarSubItem copyContainer,
+			BarSubItem moveContainer)
 		{
 			_dataSource = dataSource;
 			_copyContainer = copyContainer;
@@ -25,23 +30,68 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Clipboard
 
 		public void UpdateTargets()
 		{
-			_copyContainer.DropDownItems.Clear();
-			_moveContainer.DropDownItems.Clear();
+			_copyContainer.LinksPersistInfo.Clear();
+			_moveContainer.LinksPersistInfo.Clear();
 
+			var barManager = _copyContainer.Manager;
+			var maxId = _copyContainer.Manager.MaxItemId + 1;
+
+			barManager.BeginInit();
 			foreach (var libraryPage in _dataSource.Page.Library.Pages.OrderBy(p => p.Order))
 			{
-				_copyContainer.DropDownItems.Add(
-					new ToolStripMenuItem(
-						libraryPage.Name.Replace("&", "&&"),
-						null,
-						(sender, args) => CopyFolder(libraryPage)));
+				BarButtonItem pageForCopyItem;
+				if (_pageForCopyBarItems.ContainsKey(libraryPage.ExtId))
+					pageForCopyItem = _pageForCopyBarItems[libraryPage.ExtId];
+				else
+				{
+					pageForCopyItem = new BarButtonItem
+					{
+						Id = maxId,
+						Caption = libraryPage.Name,
+						ItemInMenuAppearance =
+						{
+							Normal = { TextOptions = { HotkeyPrefix = HKeyPrefix.None}},
+							Disabled= { TextOptions = { HotkeyPrefix = HKeyPrefix.None}},
+							Pressed= { TextOptions = { HotkeyPrefix = HKeyPrefix.None}},
+							Hovered= { TextOptions = { HotkeyPrefix = HKeyPrefix.None}}
+						}
+					};
+					pageForCopyItem.ItemClick += (o, e) => CopyFolder(libraryPage);
+					barManager.Items.Add(pageForCopyItem);
+					_pageForCopyBarItems.Add(libraryPage.ExtId, pageForCopyItem);
+					maxId++;
+				}
+				_copyContainer.LinksPersistInfo.Add(new LinkPersistInfo(pageForCopyItem));
+
 				if (libraryPage != _dataSource.Page)
-					_moveContainer.DropDownItems.Add(
-						new ToolStripMenuItem(
-							libraryPage.Name.Replace("&", "&&"),
-							null,
-							(sender, args) => MoveFolder(libraryPage)));
+				{
+					BarButtonItem pageForMoveItem;
+					if (_pageForMoveBarItems.ContainsKey(libraryPage.ExtId))
+						pageForMoveItem = _pageForMoveBarItems[libraryPage.ExtId];
+					else
+					{
+						pageForMoveItem = new BarButtonItem
+						{
+							Id = maxId,
+							Caption = libraryPage.Name,
+							ItemInMenuAppearance =
+							{
+								Normal = { TextOptions = { HotkeyPrefix = HKeyPrefix.None}},
+								Disabled= { TextOptions = { HotkeyPrefix = HKeyPrefix.None}},
+								Pressed= { TextOptions = { HotkeyPrefix = HKeyPrefix.None}},
+								Hovered= { TextOptions = { HotkeyPrefix = HKeyPrefix.None}}
+							}
+						};
+						pageForMoveItem.ItemClick += (o, e) => MoveFolder(libraryPage);
+						barManager.Items.Add(pageForMoveItem);
+						_pageForMoveBarItems.Add(libraryPage.ExtId, pageForMoveItem);
+						maxId++;
+					}
+					_moveContainer.LinksPersistInfo.Add(new LinkPersistInfo(pageForMoveItem));
+				}
 			}
+			barManager.MaxItemId = maxId;
+			barManager.EndInit();
 		}
 
 		private void AddFolder(LibraryPage targetPage, bool moveFolder = false)

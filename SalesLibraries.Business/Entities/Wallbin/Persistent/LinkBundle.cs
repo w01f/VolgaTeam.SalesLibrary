@@ -124,6 +124,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 
 		public class LinkBundleSettings : SettingsContainer
 		{
+			[JsonProperty(ItemTypeNameHandling = TypeNameHandling.All)]
 			public List<BaseBundleItem> Items { get; private set; }
 
 			public LinkBundleSettings()

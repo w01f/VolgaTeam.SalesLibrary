@@ -7,8 +7,8 @@ using DevExpress.XtraTab;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
-using SalesLibraries.CloudAdmin.Controllers;
 using SalesLibraries.Common.Helpers;
+using SalesLibraries.CloudAdmin.Controllers;
 
 namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettings
 {
@@ -38,6 +38,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 				styleController.AppearanceFocused.Font = styleControllerFont;
 				styleController.AppearanceReadOnly.Font = styleControllerFont;
 
+				ckIsArchiveResource.Font = new Font(ckIsArchiveResource.Font.FontFamily, ckIsArchiveResource.Font.Size - 2, ckIsArchiveResource.Font.Style);
 				ckForcePreview.Font = new Font(ckForcePreview.Font.FontFamily, ckForcePreview.Font.Size - 2, ckForcePreview.Font.Style);
 				ckDoNotGeneratePreview.Font = new Font(ckDoNotGeneratePreview.Font.FontFamily, ckDoNotGeneratePreview.Font.Size - 2, ckDoNotGeneratePreview.Font.Style);
 				ckDoNotGenerateText.Font = new Font(ckDoNotGenerateText.Font.FontFamily, ckDoNotGenerateText.Font.Size - 2, ckDoNotGenerateText.Font.Style);
@@ -54,6 +55,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 
 		public void LoadData()
 		{
+			ckIsArchiveResource.Checked = ((DocumentLinkSettings)_data.Settings).IsArchiveResource;
 			ckDoNotGeneratePreview.Checked = !((DocumentLinkSettings)_data.Settings).GeneratePreviewImages;
 			ckDoNotGenerateText.Checked = !((DocumentLinkSettings)_data.Settings).GenerateContentText;
 			ckForcePreview.Checked = ((DocumentLinkSettings)_data.Settings).ForcePreview;
@@ -69,9 +71,32 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 
 		public void SaveData()
 		{
-			((DocumentLinkSettings)_data.Settings).GeneratePreviewImages = !ckDoNotGeneratePreview.Checked;
-			((DocumentLinkSettings)_data.Settings).GenerateContentText = !ckDoNotGenerateText.Checked;
-			((DocumentLinkSettings)_data.Settings).ForcePreview = ckForcePreview.Checked;
+			((DocumentLinkSettings)_data.Settings).IsArchiveResource = ckIsArchiveResource.Checked;
+			if (ckIsArchiveResource.Checked)
+			{
+				((DocumentLinkSettings)_data.Settings).GeneratePreviewImages = false;
+				((DocumentLinkSettings)_data.Settings).GenerateContentText = false;
+				((DocumentLinkSettings)_data.Settings).ForcePreview = true;
+			}
+			else
+			{
+				((DocumentLinkSettings)_data.Settings).GeneratePreviewImages = !ckDoNotGeneratePreview.Checked;
+				((DocumentLinkSettings)_data.Settings).GenerateContentText = !ckDoNotGenerateText.Checked;
+				((DocumentLinkSettings)_data.Settings).ForcePreview = ckForcePreview.Checked;
+			}
+		}
+
+		private void ckIsArchiveResource_CheckedChanged(object sender, EventArgs e)
+		{
+			ckDoNotGeneratePreview.Enabled =
+				ckDoNotGenerateText.Enabled =
+					ckForcePreview.Enabled = !ckIsArchiveResource.Checked;
+			if (ckIsArchiveResource.Checked)
+			{
+				ckDoNotGeneratePreview.Checked =
+				ckDoNotGenerateText.Checked =
+					ckForcePreview.Checked = true;
+			}
 		}
 
 		private void buttonXRefreshPreview_Click(object sender, EventArgs e)
@@ -81,7 +106,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 			MainController.Instance.ProcessManager.Run("Updating Preview files...", cancelationToken =>
 			{
 				_data.ClearPreviewContainer();
-				var previewContainer = _data.GetPreviewContainer();
+				//var previewContainer = _data.GetPreviewContainer();
 				//var previewGenerator = previewContainer.GetPreviewGenerator();
 				//previewContainer.UpdateContent(previewGenerator, cancelationToken);
 			});

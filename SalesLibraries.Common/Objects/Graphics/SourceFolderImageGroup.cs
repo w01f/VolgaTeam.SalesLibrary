@@ -41,18 +41,18 @@ namespace SalesLibraries.Common.Objects.Graphics
 			{
 				if (ignoredFiles.Any(ignoredFile => ignoredFile.Equals(Path.GetFileName(filePath), StringComparison.OrdinalIgnoreCase)))
 					continue;
-				var linkImageSource = Activator.CreateInstance(typeof(T), filePath) as BaseImageSource;
+				var linkImageSource = (T)Activator.CreateInstance(typeof(T), filePath);
 				linkImageSource.AddToFavs += (o, e) =>
 				{
 					var favoritesImagesGroup = ParentList.Items.OfType<FavoriteImageGroup>().FirstOrDefault();
 					if (favoritesImagesGroup == null) return;
-					favoritesImagesGroup.AddImage<T>(linkImageSource.FilePath);
+					favoritesImagesGroup.AddImageSource(linkImageSource);
 				};
 				linkImageSource.RemoveFromFavs += (o, e) =>
 				{
 					var favoritesImagesGroup = ParentList.Items.OfType<FavoriteImageGroup>().FirstOrDefault();
 					if (favoritesImagesGroup == null) return;
-					favoritesImagesGroup.RemoveImage<T>(linkImageSource.FilePath);
+					favoritesImagesGroup.RemoveImageFile<T>(linkImageSource.FilePath);
 				};
 				Images.Add(linkImageSource);
 			}

@@ -1,7 +1,6 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Drawing.Imaging;
-using Newtonsoft.Json;
 using Vintasoft.Imaging;
 using Vintasoft.Imaging.ImageProcessing.Color;
 
@@ -9,6 +8,8 @@ namespace SalesLibraries.Common.Extensions
 {
 	public static class GraphicObjectExtensions
 	{
+		public static Color DefaultInversionColor = Color.White;
+
 		public static Point GetCenter(this Rectangle control)
 		{
 			return new Point(control.X + (control.Width / 2), control.Y + (control.Height / 2));
@@ -62,6 +63,22 @@ namespace SalesLibraries.Common.Extensions
 			using (var vintasoftImage = new VintasoftImage(image, true))
 			{
 				var command = new InvertCommand();
+				try
+				{
+					command.ExecuteInPlace(vintasoftImage);
+				}
+				catch
+				{
+				}
+				return vintasoftImage.GetAsBitmap();
+			}
+		}
+
+		public static Image ReplaceColor(this Image image, Color color)
+		{
+			using (var vintasoftImage = new VintasoftImage(image, true))
+			{
+				var command = new ReplaceColorCommand(Color.Black, color, 512);
 				try
 				{
 					command.ExecuteInPlace(vintasoftImage);

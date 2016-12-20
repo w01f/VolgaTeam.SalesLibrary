@@ -15,12 +15,10 @@ namespace SalesLibraries.FileManager.Business.Services
 {
 	class InactiveLinkManager
 	{
-		private static readonly InactiveLinkManager _instance = new InactiveLinkManager();
+		public static InactiveLinkManager Instance { get; } = new InactiveLinkManager();
 
-		public static InactiveLinkManager Instance => _instance;
-
-		public List<LibraryFileLink> DeadLinks { get; private set; }
-		public List<LibraryObjectLink> ExpiredLinks { get; private set; }
+		public List<LibraryFileLink> DeadLinks { get; }
+		public List<LibraryObjectLink> ExpiredLinks { get; }
 
 		private InactiveLinkManager()
 		{

@@ -218,6 +218,9 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 
 		[NotMapped, JsonIgnore]
 		public Color BannerBackColor => Folder.Settings.BackgroundWindowColor;
+
+		[NotMapped, JsonIgnore]
+		public string ObjectDisplayName => "Link";
 		#endregion
 
 		protected BaseLibraryLink()

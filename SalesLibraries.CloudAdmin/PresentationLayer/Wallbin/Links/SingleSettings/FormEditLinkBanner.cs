@@ -13,8 +13,10 @@ using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.Common.Extensions;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.CommonGUI.Common;
+using SalesLibraries.CommonGUI.RetractableBar;
 using SalesLibraries.CloudAdmin.Controllers;
 using SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.ImageGallery;
+using SalesLibraries.CloudAdmin.Properties;
 using HorizontalAlignment = SalesLibraries.Business.Entities.Wallbin.Common.Enums.HorizontalAlignment;
 
 namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettings
@@ -42,6 +44,15 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 
 			buttonEditBannerTextFont.ButtonClick += EditorHelper.FontEdit_ButtonClick;
 			buttonEditBannerTextFont.Click += EditorHelper.FontEdit_Click;
+
+			retractableBarGallery.AddButtons(new[]
+				{
+					new ButtonInfo
+					{
+						Logo = Resources.RetractableLogoGallery,
+						Tooltip = "Expand gallery"
+					}
+				});
 
 			if (CreateGraphics().DpiX > 96)
 			{
@@ -87,8 +98,40 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 					tabPage.OnImageDoubleClick += OnImageDoubleClick;
 					return (XtraTabPage)tabPage;
 				}).ToArray());
-			xtraTabControlGallery.SelectedPageChanged += (o, e) => ((BaseLinkImagesContainer)e.Page).Init();
+			xtraTabControlGallery.SelectedPageChanged += (o, e) =>
+			{
+				((BaseLinkImagesContainer)e.Page).Init();
+				var galleryNode = e.Page.Tag as TreeNode;
+				if (galleryNode == null)
+				{
+					galleryNode = treeViewGallery.Nodes.Insert(xtraTabControlGallery.TabPages.IndexOf(e.Page), e.Page.Text);
+					galleryNode.Tag = e.Page;
+					e.Page.Tag = galleryNode;
+					_allowHandleEvents = false;
+					treeViewGallery.SelectedNode = galleryNode;
+					_allowHandleEvents = true;
+				}
+			};
 			((BaseLinkImagesContainer)xtraTabControlGallery.SelectedTabPage).Init();
+			foreach (var galleryPage in xtraTabControlGallery.TabPages.OfType<BaseLinkImagesContainer>().ToList())
+			{
+				if (!galleryPage.PageVisible) continue;
+				var galleryNode = treeViewGallery.Nodes.Add(galleryPage.Text);
+				galleryNode.Tag = galleryPage;
+				galleryPage.Tag = galleryNode;
+				if (xtraTabControlGallery.SelectedTabPage == galleryPage)
+				{
+					treeViewGallery.SelectedNode = galleryNode;
+					labelControlSelectedGalleryName.Text = galleryPage.Text;
+				}
+			}
+			treeViewGallery.AfterSelect += (o, e) =>
+			{
+				var galleryPage = treeViewGallery.SelectedNode?.Tag as XtraTabPage;
+				labelControlSelectedGalleryName.Text = galleryPage?.Text;
+				if (!_allowHandleEvents) return;
+				xtraTabControlGallery.SelectedTabPage = galleryPage;
+			};
 
 			buttonXEnable.Enabled = MainController.Instance.Lists.Banners.MainFolder.ExistsLocal();
 			memoEditBannerText.BackColor = _sourceLink.BannerBackColor;
@@ -103,7 +146,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 		private BannerSettings GetDefaultBanner()
 		{
 			var banner = SettingsContainer.CreateInstance<BannerSettings>(_sourceLink,
-				MainController.Instance.Settings.DefaultLinkBannerSettingsEncoded);
+				MainController.Instance.Settings.DefaultBannerSettingsEncoded);
 			banner.Text = _tempBannerText;
 			return banner;
 		}
@@ -120,18 +163,13 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 			buttonXEnable.Checked = banner.Enable && MainController.Instance.Lists.Banners.MainFolder.ExistsLocal();
 			buttonXDisable.Checked = !buttonXEnable.Checked;
 			checkEditInvert.Checked = banner.Inverted;
+			colorEditInversionColor.EditValue = banner.InversionColor;
 			checkEditVerticalAlignmentTop1.Checked = banner.ImageVerticalAlignement == VerticalAlignment.Top;
 			checkEditVerticalAlignmentTop2.Checked = banner.ImageVerticalAlignement == VerticalAlignment.Top;
 			if (banner.Enable && banner.Image != null)
-			{
-				labelControlTitle.Appearance.Image = banner.Image.Height > BannerThumbnailHeight ? banner.Image.Resize(new Size(banner.Image.Width, BannerThumbnailHeight)) : banner.Image;
 				labelControlTitle.Tag = banner.Image;
-			}
 			else
-			{
-				labelControlTitle.Appearance.Image = null;
 				labelControlTitle.Tag = null;
-			}
 			switch (banner.ImageAlignement)
 			{
 				case HorizontalAlignment.Left:
@@ -175,6 +213,8 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 			memoEditBannerText.Properties.AppearanceFocused.Font = banner.Font;
 			memoEditBannerText.Properties.AppearanceReadOnly.Font = banner.Font;
 			memoEditBannerText.ForeColor = banner.ForeColor;
+
+			UpdateCustomDisplayImage();
 		}
 
 		private void SaveData()
@@ -184,6 +224,9 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 				_sourceLink.Banner.Enable = true;
 
 				_sourceLink.Banner.Inverted = checkEditInvert.Checked;
+				_sourceLink.Banner.InversionColor = colorEditInversionColor.Color != GraphicObjectExtensions.DefaultInversionColor
+					? colorEditInversionColor.Color
+					: GraphicObjectExtensions.DefaultInversionColor;
 				_sourceLink.Banner.ImageVerticalAlignement = checkEditVerticalAlignmentTop1.Checked
 					? VerticalAlignment.Top
 					: VerticalAlignment.Middle;
@@ -207,7 +250,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 				_sourceLink.Banner.ForeColor = colorEditBannerTextColor.Color;
 
 				if (checkEditSaveAsTemplate.Checked)
-					MainController.Instance.Settings.DefaultLinkBannerSettingsEncoded =
+					MainController.Instance.Settings.DefaultBannerSettingsEncoded =
 						_sourceLink.Banner.SaveAsTemplate().Serialize();
 			}
 			else
@@ -216,6 +259,22 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 			}
 			_sourceLink.Banner.Text = _tempBannerText;
 			_sourceLink.Settings.TextWordWrap = checkEditTextWordWrap.Checked;
+		}
+
+		private void UpdateCustomDisplayImage()
+		{
+			var originalImage = labelControlTitle.Tag as Image;
+			var displayImage = originalImage != null && originalImage.Height > BannerThumbnailHeight ?
+				originalImage.Resize(new Size(originalImage.Width, BannerThumbnailHeight)) :
+				originalImage; ;
+			if (originalImage != null && checkEditInvert.Checked)
+			{
+				var imageClone = (Image)displayImage.Clone();
+				displayImage = colorEditInversionColor.Color != GraphicObjectExtensions.DefaultInversionColor
+					? imageClone.ReplaceColor(colorEditInversionColor.Color)
+					: imageClone.Invert();
+			}
+			labelControlTitle.Appearance.Image = displayImage;
 		}
 
 		private void OnFormClosing(object sender, FormClosingEventArgs e)
@@ -240,21 +299,32 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 			xtraTabControlSettings.Enabled = buttonXEnable.Checked;
 			if (_allowHandleEvents)
 			{
-				_allowHandleEvents = true;
-
+				_allowHandleEvents = false;
 				var banner = buttonXEnable.Checked ? GetDefaultBanner() : GetEmptyBanner();
 				banner.Enable = buttonXEnable.Checked;
 				LoadBanner(banner);
-
-				_allowHandleEvents = false;
+				_allowHandleEvents = true;
 			}
 		}
 
 		private void OnSelectedBannerChanged(object sender, LinkImageEventArgs e)
 		{
 			labelControlTitle.Tag = e.Image;
-			labelControlTitle.Appearance.Image = e.Image.Height > BannerThumbnailHeight ? e.Image.Resize(new Size(e.Image.Width, BannerThumbnailHeight)) : e.Image;
 			labelControlTitle.Text = String.Format(ImageTitleFormat, _sourceLink.LinkInfoDisplayName, e.Text);
+			UpdateCustomDisplayImage();
+		}
+
+		private void OnInvertCheckedChanged(object sender, EventArgs e)
+		{
+			colorEditInversionColor.Enabled = checkEditInvert.Checked;
+			if(_allowHandleEvents)
+				UpdateCustomDisplayImage();
+		}
+
+		private void OnInversionColorEditValueChanged(object sender, EventArgs e)
+		{
+			if (_allowHandleEvents)
+				UpdateCustomDisplayImage();
 		}
 
 		private void OnBannerHorizontalChanged(object sender, EventArgs e)

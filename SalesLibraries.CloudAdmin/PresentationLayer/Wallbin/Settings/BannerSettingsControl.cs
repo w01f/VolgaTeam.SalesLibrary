@@ -1,25 +1,32 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using DevExpress.XtraEditors;
-using DevExpress.XtraEditors.Controls;
+using DevComponents.DotNetBar;
 using DevExpress.XtraEditors.Filtering;
 using DevExpress.XtraTab;
+using SalesLibraries.Business.Entities.Common;
 using SalesLibraries.Business.Entities.Interfaces;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
+using SalesLibraries.Business.Entities.Wallbin.NonPersistent;
+using SalesLibraries.Common.Extensions;
+using SalesLibraries.Common.Helpers;
+using SalesLibraries.CommonGUI.Common;
+using SalesLibraries.CommonGUI.RetractableBar;
 using SalesLibraries.CloudAdmin.Controllers;
 using SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.ImageGallery;
-using SalesLibraries.Common.Helpers;
+using SalesLibraries.CloudAdmin.Properties;
 using HorizontalAlignment = SalesLibraries.Business.Entities.Wallbin.Common.Enums.HorizontalAlignment;
 
 namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Settings
 {
-	[ToolboxItem(false)]
 	public partial class BannerSettingsControl : UserControl
 	{
-		private bool _loading;
+		private const string ImageTitleFormat = "<size=+4><b>{0}</b></size><br><color=gray>{1}</color>";
+		private const int BannerThumbnailHeight = 64;
+
+		private bool _allowHandleEvents;
+		private string _tempBannerText;
 		private readonly IBannerSettingsHolder _bannerHolder;
 
 		public event EventHandler<CheckedChangedEventArgs> StateChanged;
@@ -30,6 +37,24 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Settings
 		{
 			_bannerHolder = bannerHolder;
 			InitializeComponent();
+
+			labelControlTitle.Text = String.Format(ImageTitleFormat, bannerHolder.Name, String.Empty);
+			labelControlImageDescription.Text = String.Format(labelControlImageDescription.Text, bannerHolder.ObjectDisplayName.ToLower());
+			labelControlTextDescription.Text = String.Format(labelControlTextDescription.Text, bannerHolder.ObjectDisplayName);
+			buttonXShowTextHolderObjectName.Text = String.Format(buttonXShowTextHolderObjectName.Text, bannerHolder.ObjectDisplayName);
+
+			buttonEditBannerTextFont.ButtonClick += EditorHelper.FontEdit_ButtonClick;
+			buttonEditBannerTextFont.Click += EditorHelper.FontEdit_Click;
+
+			retractableBarGallery.AddButtons(new[]
+				{
+					new ButtonInfo
+					{
+						Logo = Resources.RetractableLogoGallery,
+						Tooltip = "Expand gallery"
+					}
+				});
+
 			if (CreateGraphics().DpiX > 96)
 			{
 				var font = new Font(styleController.Appearance.Font.FontFamily, styleController.Appearance.Font.Size - 2,
@@ -41,27 +66,21 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Settings
 				styleController.AppearanceFocused.Font = font;
 				styleController.AppearanceReadOnly.Font = font;
 
-				checkBoxEnableBanner.Font = new Font(checkBoxEnableBanner.Font.FontFamily, checkBoxEnableBanner.Font.Size - 2,
-					checkBoxEnableBanner.Font.Style);
-				checkBoxBannerShowText.Font = new Font(checkBoxBannerShowText.Font.FontFamily, checkBoxBannerShowText.Font.Size - 2,
-					checkBoxBannerShowText.Font.Style);
-				rbBannerAligmentCenter.Font = new Font(rbBannerAligmentCenter.Font.FontFamily, rbBannerAligmentCenter.Font.Size - 2,
-					rbBannerAligmentCenter.Font.Style);
-				rbBannerAligmentLeft.Font = new Font(rbBannerAligmentLeft.Font.FontFamily, rbBannerAligmentLeft.Font.Size - 2,
-					rbBannerAligmentLeft.Font.Style);
-				rbBannerAligmentRight.Font = new Font(rbBannerAligmentRight.Font.FontFamily, rbBannerAligmentRight.Font.Size - 2,
-					rbBannerAligmentRight.Font.Style);
-				laBannerAligment.Font = new Font(laBannerAligment.Font.FontFamily, laBannerAligment.Font.Size - 2, laBannerAligment.Font.Style);
-				laTextFormat.Font = new Font(laTextFormat.Font.FontFamily, laTextFormat.Font.Size - 2, laTextFormat.Font.Style);
 				buttonXSearch.Font = new Font(buttonXSearch.Font.FontFamily, buttonXSearch.Font.Size - 2, buttonXSearch.Font.Style);
+				buttonXEnable.Font = new Font(buttonXEnable.Font.FontFamily, buttonXEnable.Font.Size - 2, buttonXEnable.Font.Style);
+				buttonXDisable.Font = new Font(buttonXDisable.Font.FontFamily, buttonXDisable.Font.Size - 2, buttonXDisable.Font.Style);
+				buttonXShowTextNone.Font = new Font(buttonXShowTextNone.Font.FontFamily, buttonXShowTextNone.Font.Size - 2, buttonXShowTextNone.Font.Style);
+				buttonXShowTextHolderObjectName.Font = new Font(buttonXShowTextHolderObjectName.Font.FontFamily, buttonXShowTextHolderObjectName.Font.Size - 2, buttonXShowTextHolderObjectName.Font.Style);
+				buttonXShowTextCustom.Font = new Font(buttonXShowTextCustom.Font.FontFamily, buttonXShowTextCustom.Font.Size - 2, buttonXShowTextCustom.Font.Style);
 			}
 		}
 
 		public void LoadData()
 		{
-			_loading = true;
-			xtraTabControlBanners.TabPages.Clear();
-			xtraTabControlBanners.TabPages.AddRange(
+			_allowHandleEvents = false;
+
+			xtraTabControlGallery.TabPages.Clear();
+			xtraTabControlGallery.TabPages.AddRange(
 				MainController.Instance.Lists.Banners.Items.Select(imageGroup =>
 				{
 					var tabPage = BaseLinkImagesContainer.Create(imageGroup);
@@ -69,100 +88,278 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Settings
 					tabPage.OnImageDoubleClick += OnImageDoubleClick;
 					return (XtraTabPage)tabPage;
 				}).ToArray());
-			xtraTabControlBanners.SelectedPageChanged += (o, e) =>
+			xtraTabControlGallery.SelectedPageChanged += (o, e) =>
 			{
 				((BaseLinkImagesContainer)e.Page).Init();
+				var galleryNode = e.Page.Tag as TreeNode;
+				if (galleryNode == null)
+				{
+					galleryNode = treeViewGallery.Nodes.Insert(xtraTabControlGallery.TabPages.IndexOf(e.Page), e.Page.Text);
+					galleryNode.Tag = e.Page;
+					e.Page.Tag = galleryNode;
+					_allowHandleEvents = false;
+					treeViewGallery.SelectedNode = galleryNode;
+					_allowHandleEvents = true;
+				}
 			};
-			((BaseLinkImagesContainer)xtraTabControlBanners.SelectedTabPage).Init();
-
-			checkBoxEnableBanner.Enabled = MainController.Instance.Lists.Banners.MainFolder.ExistsLocal();
-			checkBoxEnableBanner.Checked = _bannerHolder.Banner.Enable && MainController.Instance.Lists.Banners.MainFolder.ExistsLocal();
-			checkEditInvert.Checked = _bannerHolder.Banner.Inverted;
-			pbSelectedBanner.Image = _bannerHolder.Banner.Enable ? _bannerHolder.Banner.Image : null;
-			switch (_bannerHolder.Banner.ImageAlignement)
+			((BaseLinkImagesContainer)xtraTabControlGallery.SelectedTabPage).Init();
+			foreach (var galleryPage in xtraTabControlGallery.TabPages.OfType<BaseLinkImagesContainer>().ToList())
 			{
-				case HorizontalAlignment.Left:
-					rbBannerAligmentLeft.Checked = true;
-					rbBannerAligmentCenter.Checked = false;
-					rbBannerAligmentRight.Checked = false;
-					break;
-				case HorizontalAlignment.Center:
-					rbBannerAligmentLeft.Checked = false;
-					rbBannerAligmentCenter.Checked = true;
-					rbBannerAligmentRight.Checked = false;
-					break;
-				case HorizontalAlignment.Right:
-					rbBannerAligmentLeft.Checked = false;
-					rbBannerAligmentCenter.Checked = false;
-					rbBannerAligmentRight.Checked = true;
-					break;
+				if (!galleryPage.PageVisible) continue;
+				var galleryNode = treeViewGallery.Nodes.Add(galleryPage.Text);
+				galleryNode.Tag = galleryPage;
+				galleryPage.Tag = galleryNode;
+				if (xtraTabControlGallery.SelectedTabPage == galleryPage)
+				{
+					treeViewGallery.SelectedNode = galleryNode;
+					labelControlSelectedGalleryName.Text = galleryPage.Text;
+				}
 			}
-			checkBoxBannerShowText.Checked = _bannerHolder.Banner.TextEnabled;
-			buttonEditBannerTextFont.Tag = _bannerHolder.Banner.Font;
-			buttonEditBannerTextFont.EditValue = Utils.FontToString(_bannerHolder.Banner.Font);
-			colorEditBannerTextColor.Color = _bannerHolder.Banner.ForeColor;
-			memoEditBannerText.EditValue = !String.IsNullOrEmpty(_bannerHolder.Banner.Text) ? _bannerHolder.Banner.Text : null;
-			memoEditBannerText.Font = _bannerHolder.Banner.Font;
-			memoEditBannerText.Properties.Appearance.Font = _bannerHolder.Banner.Font;
-			memoEditBannerText.Properties.AppearanceDisabled.Font = _bannerHolder.Banner.Font;
-			memoEditBannerText.Properties.AppearanceFocused.Font = _bannerHolder.Banner.Font;
-			memoEditBannerText.Properties.AppearanceReadOnly.Font = _bannerHolder.Banner.Font;
-			memoEditBannerText.ForeColor = _bannerHolder.Banner.ForeColor;
+			treeViewGallery.AfterSelect += (o, e) =>
+			{
+				var galleryPage = treeViewGallery.SelectedNode?.Tag as XtraTabPage;
+				labelControlSelectedGalleryName.Text = galleryPage?.Text;
+				if (!_allowHandleEvents) return;
+				xtraTabControlGallery.SelectedTabPage = galleryPage;
+			};
+
+			buttonXEnable.Enabled = MainController.Instance.Lists.Banners.MainFolder.ExistsLocal();
 			memoEditBannerText.BackColor = _bannerHolder.BannerBackColor;
-			_loading = false;
+
+			LoadBanner(_bannerHolder.Banner);
+			_tempBannerText = _bannerHolder.Banner.Text;
+
+			_allowHandleEvents = true;
 		}
 
 		public void SaveData()
 		{
-			_bannerHolder.Banner.Enable = checkBoxEnableBanner.Checked;
-			_bannerHolder.Banner.Inverted = checkEditInvert.Checked;
-			_bannerHolder.Banner.Image = pbSelectedBanner.Image;
-			if (rbBannerAligmentLeft.Checked)
-				_bannerHolder.Banner.ImageAlignement = HorizontalAlignment.Left;
-			else if (rbBannerAligmentCenter.Checked)
-				_bannerHolder.Banner.ImageAlignement = HorizontalAlignment.Center;
-			else if (rbBannerAligmentRight.Checked)
-				_bannerHolder.Banner.ImageAlignement = HorizontalAlignment.Right;
-			_bannerHolder.Banner.TextMode = checkBoxBannerShowText.Checked?BannerTextMode.CustomText : BannerTextMode.NoText;
-			_bannerHolder.Banner.Text = _bannerHolder.Banner.TextEnabled ? memoEditBannerText.EditValue as String : null;
-			_bannerHolder.Banner.Font = buttonEditBannerTextFont.Tag as Font;
-			_bannerHolder.Banner.ForeColor = colorEditBannerTextColor.Color;
+			if (buttonXEnable.Checked)
+			{
+				_bannerHolder.Banner.Enable = true;
+
+				_bannerHolder.Banner.Inverted = checkEditInvert.Checked;
+				_bannerHolder.Banner.InversionColor = colorEditInversionColor.Color != GraphicObjectExtensions.DefaultInversionColor
+					? colorEditInversionColor.Color
+					: GraphicObjectExtensions.DefaultInversionColor;
+				_bannerHolder.Banner.Image = labelControlTitle.Tag as Image;
+				if (checkEditHorizontalAlignmentLeft.Checked)
+					_bannerHolder.Banner.ImageAlignement = HorizontalAlignment.Left;
+				else if (checkEditHorizontalAlignmentCenter.Checked)
+					_bannerHolder.Banner.ImageAlignement = HorizontalAlignment.Center;
+				else if (checkEditHorizontalAlignmentRight.Checked)
+					_bannerHolder.Banner.ImageAlignement = HorizontalAlignment.Right;
+
+				_bannerHolder.Banner.TextMode = BannerTextMode.NoText;
+				if (_bannerHolder.Banner.ImageAlignement == HorizontalAlignment.Left)
+				{
+					if (buttonXShowTextHolderObjectName.Checked)
+					{
+						_bannerHolder.Banner.TextMode = BannerTextMode.LinkName;
+						_bannerHolder.Banner.Text = _bannerHolder.Name;
+					}
+					else if (buttonXShowTextCustom.Checked)
+					{
+						_bannerHolder.Banner.TextMode = BannerTextMode.CustomText;
+						_bannerHolder.Banner.Text = _tempBannerText;
+					}
+				}
+				_bannerHolder.Banner.Font = buttonEditBannerTextFont.Tag as Font;
+				_bannerHolder.Banner.ForeColor = colorEditBannerTextColor.Color;
+
+				if (checkEditSaveAsTemplate.Checked)
+					MainController.Instance.Settings.DefaultBannerSettingsEncoded =
+						_bannerHolder.Banner.SaveAsTemplate().Serialize();
+			}
+			else
+			{
+				_bannerHolder.Banner = GetEmptyBanner();
+				_bannerHolder.Banner.Text = _tempBannerText;
+			}
 		}
 
 		public void ChangeState(bool enable)
 		{
-			_loading = true;
-			checkBoxEnableBanner.Checked = enable;
-			_loading = false;
+			_allowHandleEvents = true;
+			OnEnableButtonClick(enable ? buttonXEnable : buttonXDisable, EventArgs.Empty);
+			_allowHandleEvents = false;
 		}
 
-		private void checkBoxEnableBanner_CheckedChanged(object sender, EventArgs e)
+		private BannerSettings GetDefaultBanner()
 		{
-			pnControls.Enabled = checkBoxEnableBanner.Checked;
-			pnSearch.Enabled = checkBoxEnableBanner.Checked;
-			if (!_loading)
-				StateChanged?.Invoke(this, new CheckedChangedEventArgs(checkBoxEnableBanner.Checked));
+			var banner = SettingsContainer.CreateInstance<BannerSettings>(_bannerHolder,
+				MainController.Instance.Settings.DefaultBannerSettingsEncoded);
+			banner.Text = _tempBannerText;
+			return banner;
+		}
+
+		private BannerSettings GetEmptyBanner()
+		{
+			var banner = SettingsContainer.CreateInstance<BannerSettings>(_bannerHolder);
+			banner.Text = _tempBannerText;
+			return banner;
+		}
+
+		private void LoadBanner(BannerSettings banner)
+		{
+			buttonXEnable.Checked = banner.Enable && MainController.Instance.Lists.Banners.MainFolder.ExistsLocal();
+			buttonXDisable.Checked = !buttonXEnable.Checked;
+			checkEditInvert.Checked = banner.Inverted;
+			colorEditInversionColor.EditValue = banner.InversionColor;
+			if (banner.Enable && banner.Image != null)
+				labelControlTitle.Tag = banner.Image;
+			else
+				labelControlTitle.Tag = null;
+			switch (banner.ImageAlignement)
+			{
+				case HorizontalAlignment.Left:
+					checkEditHorizontalAlignmentLeft.Checked = true;
+					checkEditHorizontalAlignmentCenter.Checked = false;
+					checkEditHorizontalAlignmentRight.Checked = false;
+					break;
+				case HorizontalAlignment.Center:
+					checkEditHorizontalAlignmentLeft.Checked = false;
+					checkEditHorizontalAlignmentCenter.Checked = true;
+					checkEditHorizontalAlignmentRight.Checked = false;
+					break;
+				case HorizontalAlignment.Right:
+					checkEditHorizontalAlignmentLeft.Checked = false;
+					checkEditHorizontalAlignmentCenter.Checked = false;
+					checkEditHorizontalAlignmentRight.Checked = true;
+					break;
+			}
+			buttonXShowTextNone.Checked = banner.TextMode == BannerTextMode.NoText || banner.ImageAlignement != HorizontalAlignment.Left;
+			buttonXShowTextHolderObjectName.Checked = banner.ImageAlignement == HorizontalAlignment.Left && banner.TextMode == BannerTextMode.LinkName;
+			buttonXShowTextCustom.Checked = banner.ImageAlignement == HorizontalAlignment.Left && banner.TextMode == BannerTextMode.CustomText;
+			buttonEditBannerTextFont.Tag = banner.Font;
+			buttonEditBannerTextFont.EditValue = Utils.FontToString(banner.Font);
+			colorEditBannerTextColor.Color = banner.ForeColor;
+
+			switch (banner.TextMode)
+			{
+				case BannerTextMode.LinkName:
+					memoEditBannerText.EditValue = _bannerHolder.Name;
+					break;
+				case BannerTextMode.CustomText:
+					memoEditBannerText.EditValue = banner.Text;
+					break;
+				default:
+					memoEditBannerText.EditValue = null;
+					break;
+			}
+			memoEditBannerText.Font = banner.Font;
+			memoEditBannerText.Properties.Appearance.Font = banner.Font;
+			memoEditBannerText.Properties.AppearanceDisabled.Font = banner.Font;
+			memoEditBannerText.Properties.AppearanceFocused.Font = banner.Font;
+			memoEditBannerText.Properties.AppearanceReadOnly.Font = banner.Font;
+			memoEditBannerText.ForeColor = banner.ForeColor;
+
+			UpdateCustomDisplayImage();
+		}
+
+		private void UpdateCustomDisplayImage()
+		{
+			var originalImage = labelControlTitle.Tag as Image;
+			var displayImage = originalImage != null && originalImage.Height > BannerThumbnailHeight ?
+				originalImage.Resize(new Size(originalImage.Width, BannerThumbnailHeight)) :
+				originalImage; ;
+			if (originalImage != null && checkEditInvert.Checked)
+			{
+				var imageClone = (Image)displayImage.Clone();
+				displayImage = colorEditInversionColor.Color != GraphicObjectExtensions.DefaultInversionColor
+					? imageClone.ReplaceColor(colorEditInversionColor.Color)
+					: imageClone.Invert();
+			}
+			labelControlTitle.Appearance.Image = displayImage;
+		}
+
+		private void OnEnableButtonClick(object sender, EventArgs e)
+		{
+			var button = (ButtonX)sender;
+			if (button.Checked) return;
+			buttonXEnable.Checked = false;
+			buttonXDisable.Checked = false;
+			button.Checked = true;
+		}
+
+		private void OnEnableButtonCheckedChanged(object sender, EventArgs e)
+		{
+			var button = (ButtonX)sender;
+			if (!button.Checked) return;
+			xtraTabControlSettings.Enabled = buttonXEnable.Checked;
+			if (_allowHandleEvents)
+			{
+				_allowHandleEvents = false;
+				var banner = buttonXEnable.Checked ? GetDefaultBanner() : GetEmptyBanner();
+				banner.Enable = buttonXEnable.Checked;
+				LoadBanner(banner);
+				_allowHandleEvents = true; 
+			}
+			else
+				StateChanged?.Invoke(this, new CheckedChangedEventArgs(buttonXEnable.Checked));
 		}
 
 		private void OnSelectedBannerChanged(object sender, LinkImageEventArgs e)
 		{
-			pbSelectedBanner.Image = e.Image;
+			labelControlTitle.Tag = e.Image;
+			labelControlTitle.Text = String.Format(ImageTitleFormat, _bannerHolder.Name, e.Text);
+			UpdateCustomDisplayImage();
 		}
 
-		private void checkBoxBannerShowText_CheckedChanged(object sender, EventArgs e)
+		private void OnInvertCheckedChanged(object sender, EventArgs e)
 		{
-			laTextFormat.Enabled = checkBoxBannerShowText.Checked;
-			memoEditBannerText.Enabled = checkBoxBannerShowText.Checked;
-			buttonEditBannerTextFont.Enabled = checkBoxBannerShowText.Checked;
-			colorEditBannerTextColor.Enabled = checkBoxBannerShowText.Checked;
+			colorEditInversionColor.Enabled = checkEditInvert.Checked;
+			if (_allowHandleEvents)
+				UpdateCustomDisplayImage();
 		}
 
-		private void colorEditBannerTextColor_EditValueChanged(object sender, EventArgs e)
+		private void OnInversionColorEditValueChanged(object sender, EventArgs e)
+		{
+			if (_allowHandleEvents)
+				UpdateCustomDisplayImage();
+		}
+
+		private void OnBannerHorizontalChanged(object sender, EventArgs e)
+		{
+			var enableText = checkEditHorizontalAlignmentLeft.Checked;
+			xtraTabPageText.PageEnabled = enableText;
+			if (!enableText)
+				OnTextModeButtonClick(buttonXShowTextNone, EventArgs.Empty);
+		}
+
+		private void OnTextModeButtonClick(object sender, EventArgs e)
+		{
+			var button = (ButtonX)sender;
+			if (button.Checked) return;
+			buttonXShowTextNone.Checked = false;
+			buttonXShowTextHolderObjectName.Checked = false;
+			buttonXShowTextCustom.Checked = false;
+			button.Checked = true;
+		}
+
+		private void OnTextModeButtonCheckedChanged(object sender, EventArgs e)
+		{
+			labelControlTextFont.Enabled = buttonXShowTextHolderObjectName.Checked || buttonXShowTextCustom.Checked;
+			labelControlTextColor.Enabled = buttonXShowTextHolderObjectName.Checked || buttonXShowTextCustom.Checked;
+			memoEditBannerText.Enabled = buttonXShowTextHolderObjectName.Checked || buttonXShowTextCustom.Checked;
+			memoEditBannerText.ReadOnly = buttonXShowTextHolderObjectName.Checked;
+			buttonEditBannerTextFont.Enabled = buttonXShowTextHolderObjectName.Checked || buttonXShowTextCustom.Checked;
+			colorEditBannerTextColor.Enabled = buttonXShowTextHolderObjectName.Checked || buttonXShowTextCustom.Checked;
+
+			if (buttonXShowTextNone.Checked)
+				memoEditBannerText.EditValue = null;
+			else if (buttonXShowTextHolderObjectName.Checked)
+				memoEditBannerText.EditValue = _bannerHolder.Name;
+			else if (buttonXShowTextCustom.Checked && !String.IsNullOrEmpty(_tempBannerText))
+				memoEditBannerText.EditValue = _tempBannerText;
+		}
+
+		private void OnTextColorEditValueChanged(object sender, EventArgs e)
 		{
 			memoEditBannerText.ForeColor = colorEditBannerTextColor.Color;
 		}
 
-		private void buttonEditBannerTextFont_EditValueChanged(object sender, EventArgs e)
+		private void OnTextFontEditValueChanged(object sender, EventArgs e)
 		{
 			memoEditBannerText.Font = (Font)buttonEditBannerTextFont.Tag;
 			memoEditBannerText.Properties.Appearance.Font = memoEditBannerText.Font;
@@ -171,22 +368,10 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Settings
 			memoEditBannerText.Properties.AppearanceReadOnly.Font = memoEditBannerText.Font;
 		}
 
-		private void FontEdit_Click(object sender, EventArgs e)
+		private void OnBannerTextEditValueChanged(object sender, EventArgs e)
 		{
-			var fontEdit = sender as ButtonEdit;
-			if (fontEdit == null) return;
-			using (var dlgFont = new FontDialog())
-			{
-				dlgFont.Font = fontEdit.Tag as Font;
-				if (dlgFont.ShowDialog() != DialogResult.OK) return;
-				fontEdit.Tag = dlgFont.Font;
-				fontEdit.EditValue = Utils.FontToString(dlgFont.Font);
-			}
-		}
-
-		private void FontEdit_ButtonClick(object sender, ButtonPressedEventArgs e)
-		{
-			FontEdit_Click(sender, null);
+			if (buttonXShowTextCustom.Checked)
+				_tempBannerText = memoEditBannerText.EditValue as String ?? _tempBannerText;
 		}
 
 		private void OnImageDoubleClick(object sender, EventArgs e)

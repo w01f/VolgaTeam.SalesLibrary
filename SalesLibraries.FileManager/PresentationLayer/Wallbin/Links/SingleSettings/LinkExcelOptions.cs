@@ -35,6 +35,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 				styleController.AppearanceDropDownHeader.Font = styleControllerFont;
 				styleController.AppearanceFocused.Font = styleControllerFont;
 				styleController.AppearanceReadOnly.Font = styleControllerFont;
+
+				ckIsArchiveResource.Font = new Font(ckIsArchiveResource.Font.FontFamily, ckIsArchiveResource.Font.Size - 2, ckIsArchiveResource.Font.Style);
 				ckDoNotGenerateText.Font = new Font(ckDoNotGenerateText.Font.FontFamily, ckDoNotGenerateText.Font.Size - 2, ckDoNotGenerateText.Font.Style);
 				ckForceDownload.Font = new Font(ckForceDownload.Font.FontFamily, ckForceDownload.Font.Size - 2, ckForceDownload.Font.Style);
 				ckForceOpen.Font = new Font(ckForceOpen.Font.FontFamily, ckForceOpen.Font.Size - 2, ckForceOpen.Font.Style);
@@ -43,6 +45,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 		public void LoadData()
 		{
+			ckIsArchiveResource.Checked = ((ExcelLinkSettings)_data.Settings).IsArchiveResource;
 			ckDoNotGenerateText.Checked = !((ExcelLinkSettings)_data.Settings).GenerateContentText;
 			ckForceDownload.Checked = ((ExcelLinkSettings)_data.Settings).ForceDownload;
 			ckForceOpen.Checked = ((ExcelLinkSettings)_data.Settings).ForceOpen;
@@ -50,9 +53,29 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 		public void SaveData()
 		{
-			((ExcelLinkSettings)_data.Settings).GenerateContentText = !ckDoNotGenerateText.Checked;
-			((ExcelLinkSettings)_data.Settings).ForceDownload = ckForceDownload.Checked;
+			((ExcelLinkSettings)_data.Settings).IsArchiveResource = ckIsArchiveResource.Checked;
+			if (ckIsArchiveResource.Checked)
+			{
+				((ExcelLinkSettings)_data.Settings).GenerateContentText = false;
+				((ExcelLinkSettings)_data.Settings).ForceDownload = true;
+			}
+			else
+			{
+				((ExcelLinkSettings)_data.Settings).GenerateContentText = !ckDoNotGenerateText.Checked;
+				((ExcelLinkSettings)_data.Settings).ForceDownload = ckForceDownload.Checked;
+			}
 			((ExcelLinkSettings)_data.Settings).ForceOpen = ckForceOpen.Checked;
+		}
+
+		private void ckIsArchiveResource_CheckedChanged(object sender, EventArgs e)
+		{
+			ckDoNotGenerateText.Enabled =
+				ckForceDownload.Enabled = !ckIsArchiveResource.Checked;
+			if (ckIsArchiveResource.Checked)
+			{
+				ckDoNotGenerateText.Checked =
+					ckForceDownload.Checked = true;
+			}
 		}
 	}
 }

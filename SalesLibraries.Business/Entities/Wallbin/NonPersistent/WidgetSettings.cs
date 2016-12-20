@@ -27,11 +27,28 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 			set
 			{
 				if (_inverted != value)
+				{
+					_invertedImage = null;
 					OnSettingsChanged();
+				}
 				_inverted = value;
 			}
 		}
 
+		private Color _inversionColor = GraphicObjectExtensions.DefaultInversionColor;
+		public Color InversionColor
+		{
+			get { return _inversionColor; }
+			set
+			{
+				if (_inversionColor != value)
+				{
+					_invertedImage = null;
+					OnSettingsChanged();
+				}
+				_inversionColor = value;
+			}
+		}
 
 		protected Image _image;
 		public virtual Image Image
@@ -40,9 +57,11 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 			set
 			{
 				if (_image != value)
+				{
+					_invertedImage = null;
 					OnSettingsChanged();
+				}
 				_image = value;
-				_invertedImage = null;
 			}
 		}
 
@@ -56,7 +75,11 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 				if (WidgetType == WidgetType.CustomWidget && Inverted)
 				{
 					if (_invertedImage == null)
-						_invertedImage = ((Image)Image?.Clone()).Invert();
+					{
+						_invertedImage = InversionColor != GraphicObjectExtensions.DefaultInversionColor ?
+							((Image)Image?.Clone()).ReplaceColor(InversionColor) :
+							((Image)Image?.Clone()).Invert();
+					}
 					return _invertedImage;
 				}
 				return Image;

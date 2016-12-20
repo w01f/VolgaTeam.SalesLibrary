@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Xml;
+using SalesLibraries.Business.Contexts.Wallbin;
 using SalesLibraries.Common.Configuration;
 
 namespace SalesLibraries.CloudAdmin.Configuration
@@ -17,7 +18,7 @@ namespace SalesLibraries.CloudAdmin.Configuration
 		public string SelectedPage { get; set; }
 		public int FontSize { get; set; }
 		public bool MultitabView { get; set; }
-		public string DefaultLinkBannerSettingsEncoded { get; set; }
+		public string DefaultBannerSettingsEncoded { get; set; }
 		#endregion
 
 		#region Ribbon Settings
@@ -102,7 +103,7 @@ namespace SalesLibraries.CloudAdmin.Configuration
 					MultitabView = tempBool;
 			node = document.SelectSingleNode(@"/LocalSettings/DefaultLinkBannerSettingsEncoded");
 			if (node != null)
-				DefaultLinkBannerSettingsEncoded = Encoding.UTF8.GetString(Convert.FromBase64String(node.InnerText));
+				DefaultBannerSettingsEncoded = Encoding.UTF8.GetString(Convert.FromBase64String(node.InnerText));
 			#endregion
 		}
 
@@ -117,8 +118,8 @@ namespace SalesLibraries.CloudAdmin.Configuration
 				xml.AppendLine(@"<SelectedPage>" + SelectedPage.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</SelectedPage>");
 			xml.AppendLine(@"<FontSize>" + FontSize + @"</FontSize>");
 			xml.AppendLine(@"<MultitabView>" + MultitabView + @"</MultitabView>");
-			if (!String.IsNullOrEmpty(DefaultLinkBannerSettingsEncoded))
-				xml.AppendLine(@"<DefaultLinkBannerSettingsEncoded>" + Convert.ToBase64String(Encoding.UTF8.GetBytes(DefaultLinkBannerSettingsEncoded)) + @"</DefaultLinkBannerSettingsEncoded>");
+			if (!String.IsNullOrEmpty(DefaultBannerSettingsEncoded))
+				xml.AppendLine(@"<DefaultLinkBannerSettingsEncoded>" + Convert.ToBase64String(Encoding.UTF8.GetBytes(DefaultBannerSettingsEncoded)) + @"</DefaultLinkBannerSettingsEncoded>");
 			#endregion
 
 			xml.AppendLine(@"</LocalSettings>");
@@ -197,6 +198,19 @@ namespace SalesLibraries.CloudAdmin.Configuration
 			node = document.SelectSingleNode(@"/synclock/email");
 			if (node != null)
 				SyncSupportEmail = node.InnerText;
+		}
+
+		private void LoadArchiveLinksSettings()
+		{
+			if (!RemoteResourceManager.Instance.ArchiveLinksSettingsFile.ExistsLocal()) return;
+			var document = new XmlDocument();
+			document.Load(RemoteResourceManager.Instance.ArchiveLinksSettingsFile.LocalPath);
+			var node = document.SelectSingleNode(@"/Config/MaxPdfPages");
+			{
+				int temp;
+				if (node != null && Int32.TryParse(node.InnerText, out temp))
+					WallbinConfiguration.MaxPreviewPdfPagesCount = temp;
+			}
 		}
 
 		private void LoadServiceConnectionSettings()

@@ -216,7 +216,8 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 				if (!Directory.Exists(destinationRoot)) continue;
 				if (library.Name == Constants.PrimaryFileStorageName)
 					yield return destinationRoot;
-				yield return Path.Combine(destinationRoot, library.Name);
+				else
+					yield return Path.Combine(destinationRoot, library.Name);
 			}
 		}
 	}

@@ -32,7 +32,6 @@
 			this.buttonXOK = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXCancel = new DevComponents.DotNetBar.ButtonX();
 			this.pbCustomWidget = new System.Windows.Forms.PictureBox();
-			this.xtraTabControlWidgets = new DevExpress.XtraTab.XtraTabControl();
 			this.radioButtonWidgetTypeAuto = new System.Windows.Forms.RadioButton();
 			this.pbAutoWidget = new System.Windows.Forms.PictureBox();
 			this.radioButtonWidgetTypeCustom = new System.Windows.Forms.RadioButton();
@@ -45,14 +44,27 @@
 			this.buttonXSearch = new DevComponents.DotNetBar.ButtonX();
 			this.pnSearch = new System.Windows.Forms.Panel();
 			this.checkEditInvert = new DevExpress.XtraEditors.CheckEdit();
+			this.pnGallery = new System.Windows.Forms.Panel();
+			this.xtraTabControlGallery = new DevExpress.XtraTab.XtraTabControl();
+			this.retractableBarGallery = new SalesLibraries.CommonGUI.RetractableBar.RetractableBarLeft();
+			this.treeViewGallery = new SalesLibraries.FileManager.PresentationLayer.Wallbin.ImageGallery.GalleryTreeView();
+			this.labelControlSelectedGalleryName = new DevExpress.XtraEditors.LabelControl();
+			this.colorEditInversionColor = new SalesLibraries.CommonGUI.Common.HtmlColorEdit();
+			this.contextMenuStripImage = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.toolStripMenuItemImageAddToFavorites = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.pbCustomWidget)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.xtraTabControlWidgets)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pbAutoWidget)).BeginInit();
 			this.pnAutoWidget.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditSearch.Properties)).BeginInit();
 			this.pnSearch.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditInvert.Properties)).BeginInit();
+			this.pnGallery.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.xtraTabControlGallery)).BeginInit();
+			this.retractableBarGallery.Content.SuspendLayout();
+			this.retractableBarGallery.Header.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.colorEditInversionColor.Properties)).BeginInit();
+			this.contextMenuStripImage.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// buttonXOK
@@ -61,9 +73,9 @@
 			this.buttonXOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXOK.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-			this.buttonXOK.Location = new System.Drawing.Point(688, 498);
+			this.buttonXOK.Location = new System.Drawing.Point(742, 564);
 			this.buttonXOK.Name = "buttonXOK";
-			this.buttonXOK.Size = new System.Drawing.Size(111, 34);
+			this.buttonXOK.Size = new System.Drawing.Size(79, 34);
 			this.buttonXOK.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXOK.TabIndex = 5;
 			this.buttonXOK.Text = "OK";
@@ -75,9 +87,9 @@
 			this.buttonXCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXCancel.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.buttonXCancel.Location = new System.Drawing.Point(819, 498);
+			this.buttonXCancel.Location = new System.Drawing.Point(852, 564);
 			this.buttonXCancel.Name = "buttonXCancel";
-			this.buttonXCancel.Size = new System.Drawing.Size(111, 34);
+			this.buttonXCancel.Size = new System.Drawing.Size(79, 34);
 			this.buttonXCancel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXCancel.TabIndex = 6;
 			this.buttonXCancel.Text = "Cancel";
@@ -87,39 +99,15 @@
 			// 
 			this.pbCustomWidget.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.pbCustomWidget.BackColor = System.Drawing.Color.Transparent;
+			this.pbCustomWidget.ContextMenuStrip = this.contextMenuStripImage;
 			this.pbCustomWidget.Enabled = false;
 			this.pbCustomWidget.ForeColor = System.Drawing.Color.Black;
-			this.pbCustomWidget.Location = new System.Drawing.Point(242, 497);
+			this.pbCustomWidget.Location = new System.Drawing.Point(231, 562);
 			this.pbCustomWidget.Name = "pbCustomWidget";
 			this.pbCustomWidget.Size = new System.Drawing.Size(36, 36);
 			this.pbCustomWidget.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
 			this.pbCustomWidget.TabIndex = 8;
 			this.pbCustomWidget.TabStop = false;
-			// 
-			// xtraTabControlWidgets
-			// 
-			this.xtraTabControlWidgets.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.xtraTabControlWidgets.Appearance.BackColor = System.Drawing.Color.Transparent;
-			this.xtraTabControlWidgets.Appearance.ForeColor = System.Drawing.Color.Black;
-			this.xtraTabControlWidgets.Appearance.Options.UseBackColor = true;
-			this.xtraTabControlWidgets.Appearance.Options.UseForeColor = true;
-			this.xtraTabControlWidgets.AppearancePage.Header.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.xtraTabControlWidgets.AppearancePage.Header.Options.UseFont = true;
-			this.xtraTabControlWidgets.AppearancePage.HeaderActive.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.xtraTabControlWidgets.AppearancePage.HeaderActive.Options.UseFont = true;
-			this.xtraTabControlWidgets.AppearancePage.HeaderDisabled.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.xtraTabControlWidgets.AppearancePage.HeaderDisabled.Options.UseFont = true;
-			this.xtraTabControlWidgets.AppearancePage.HeaderHotTracked.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.xtraTabControlWidgets.AppearancePage.HeaderHotTracked.Options.UseFont = true;
-			this.xtraTabControlWidgets.AppearancePage.PageClient.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.xtraTabControlWidgets.AppearancePage.PageClient.Options.UseFont = true;
-			this.xtraTabControlWidgets.Enabled = false;
-			this.xtraTabControlWidgets.Location = new System.Drawing.Point(2, 37);
-			this.xtraTabControlWidgets.Name = "xtraTabControlWidgets";
-			this.xtraTabControlWidgets.Size = new System.Drawing.Size(928, 451);
-			this.xtraTabControlWidgets.TabIndex = 9;
 			// 
 			// radioButtonWidgetTypeAuto
 			// 
@@ -127,7 +115,7 @@
 			this.radioButtonWidgetTypeAuto.AutoSize = true;
 			this.radioButtonWidgetTypeAuto.BackColor = System.Drawing.Color.White;
 			this.radioButtonWidgetTypeAuto.ForeColor = System.Drawing.Color.Black;
-			this.radioButtonWidgetTypeAuto.Location = new System.Drawing.Point(309, 505);
+			this.radioButtonWidgetTypeAuto.Location = new System.Drawing.Point(473, 570);
 			this.radioButtonWidgetTypeAuto.Name = "radioButtonWidgetTypeAuto";
 			this.radioButtonWidgetTypeAuto.Size = new System.Drawing.Size(102, 20);
 			this.radioButtonWidgetTypeAuto.TabIndex = 10;
@@ -155,12 +143,12 @@
 			this.radioButtonWidgetTypeCustom.AutoSize = true;
 			this.radioButtonWidgetTypeCustom.BackColor = System.Drawing.Color.White;
 			this.radioButtonWidgetTypeCustom.ForeColor = System.Drawing.Color.Black;
-			this.radioButtonWidgetTypeCustom.Location = new System.Drawing.Point(121, 505);
+			this.radioButtonWidgetTypeCustom.Location = new System.Drawing.Point(150, 570);
 			this.radioButtonWidgetTypeCustom.Name = "radioButtonWidgetTypeCustom";
-			this.radioButtonWidgetTypeCustom.Size = new System.Drawing.Size(120, 20);
+			this.radioButtonWidgetTypeCustom.Size = new System.Drawing.Size(75, 20);
 			this.radioButtonWidgetTypeCustom.TabIndex = 12;
 			this.radioButtonWidgetTypeCustom.TabStop = true;
-			this.radioButtonWidgetTypeCustom.Text = "Custom Widget:";
+			this.radioButtonWidgetTypeCustom.Text = "Custom:";
 			this.radioButtonWidgetTypeCustom.UseVisualStyleBackColor = false;
 			this.radioButtonWidgetTypeCustom.CheckedChanged += new System.EventHandler(this.OnWidgetTypeChanged);
 			// 
@@ -170,7 +158,7 @@
 			this.radioButtonWidgetTypeDisabled.AutoSize = true;
 			this.radioButtonWidgetTypeDisabled.BackColor = System.Drawing.Color.White;
 			this.radioButtonWidgetTypeDisabled.ForeColor = System.Drawing.Color.Black;
-			this.radioButtonWidgetTypeDisabled.Location = new System.Drawing.Point(6, 505);
+			this.radioButtonWidgetTypeDisabled.Location = new System.Drawing.Point(6, 570);
 			this.radioButtonWidgetTypeDisabled.Name = "radioButtonWidgetTypeDisabled";
 			this.radioButtonWidgetTypeDisabled.Size = new System.Drawing.Size(87, 20);
 			this.radioButtonWidgetTypeDisabled.TabIndex = 13;
@@ -197,7 +185,7 @@
 			this.pnAutoWidget.Controls.Add(this.laExtension);
 			this.pnAutoWidget.Controls.Add(this.pbAutoWidget);
 			this.pnAutoWidget.ForeColor = System.Drawing.Color.Black;
-			this.pnAutoWidget.Location = new System.Drawing.Point(410, 497);
+			this.pnAutoWidget.Location = new System.Drawing.Point(574, 562);
 			this.pnAutoWidget.Name = "pnAutoWidget";
 			this.pnAutoWidget.Size = new System.Drawing.Size(162, 36);
 			this.pnAutoWidget.TabIndex = 15;
@@ -281,30 +269,172 @@
 			// 
 			this.checkEditInvert.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.checkEditInvert.Enabled = false;
-			this.checkEditInvert.Location = new System.Drawing.Point(576, 505);
+			this.checkEditInvert.Location = new System.Drawing.Point(283, 570);
 			this.checkEditInvert.Name = "checkEditInvert";
 			this.checkEditInvert.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.checkEditInvert.Properties.Appearance.Options.UseForeColor = true;
-			this.checkEditInvert.Properties.Caption = "Invert";
-			this.checkEditInvert.Size = new System.Drawing.Size(75, 20);
+			this.checkEditInvert.Properties.Caption = "Colorize";
+			this.checkEditInvert.Size = new System.Drawing.Size(72, 20);
 			this.checkEditInvert.StyleController = this.styleController;
 			this.checkEditInvert.TabIndex = 20;
+			this.checkEditInvert.CheckedChanged += new System.EventHandler(this.OnWidgetTypeChanged);
+			// 
+			// pnGallery
+			// 
+			this.pnGallery.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.pnGallery.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(211)))), ((int)(((byte)(211)))), ((int)(((byte)(211)))));
+			this.pnGallery.Controls.Add(this.xtraTabControlGallery);
+			this.pnGallery.Controls.Add(this.retractableBarGallery);
+			this.pnGallery.ForeColor = System.Drawing.Color.Black;
+			this.pnGallery.Location = new System.Drawing.Point(6, 37);
+			this.pnGallery.Name = "pnGallery";
+			this.pnGallery.Size = new System.Drawing.Size(925, 519);
+			this.pnGallery.TabIndex = 57;
+			// 
+			// xtraTabControlGallery
+			// 
+			this.xtraTabControlGallery.Appearance.BackColor = System.Drawing.Color.Transparent;
+			this.xtraTabControlGallery.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.xtraTabControlGallery.Appearance.Options.UseBackColor = true;
+			this.xtraTabControlGallery.Appearance.Options.UseForeColor = true;
+			this.xtraTabControlGallery.AppearancePage.Header.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.xtraTabControlGallery.AppearancePage.Header.Options.UseFont = true;
+			this.xtraTabControlGallery.AppearancePage.HeaderActive.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.xtraTabControlGallery.AppearancePage.HeaderActive.Options.UseFont = true;
+			this.xtraTabControlGallery.AppearancePage.HeaderDisabled.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.xtraTabControlGallery.AppearancePage.HeaderDisabled.Options.UseFont = true;
+			this.xtraTabControlGallery.AppearancePage.HeaderHotTracked.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.xtraTabControlGallery.AppearancePage.HeaderHotTracked.Options.UseFont = true;
+			this.xtraTabControlGallery.AppearancePage.PageClient.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.xtraTabControlGallery.AppearancePage.PageClient.Options.UseFont = true;
+			this.xtraTabControlGallery.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.xtraTabControlGallery.Location = new System.Drawing.Point(249, 0);
+			this.xtraTabControlGallery.Name = "xtraTabControlGallery";
+			this.xtraTabControlGallery.ShowTabHeader = DevExpress.Utils.DefaultBoolean.False;
+			this.xtraTabControlGallery.Size = new System.Drawing.Size(676, 519);
+			this.xtraTabControlGallery.TabIndex = 46;
+			// 
+			// retractableBarGallery
+			// 
+			this.retractableBarGallery.BackColor = System.Drawing.Color.White;
+			// 
+			// retractableBarGallery.Content
+			// 
+			this.retractableBarGallery.Content.Controls.Add(this.treeViewGallery);
+			this.retractableBarGallery.Content.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.retractableBarGallery.Content.ForeColor = System.Drawing.Color.Black;
+			this.retractableBarGallery.Content.Location = new System.Drawing.Point(2, 42);
+			this.retractableBarGallery.Content.Name = "Content";
+			this.retractableBarGallery.Content.Size = new System.Drawing.Size(245, 475);
+			this.retractableBarGallery.Content.TabIndex = 1;
+			this.retractableBarGallery.Dock = System.Windows.Forms.DockStyle.Left;
+			this.retractableBarGallery.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.retractableBarGallery.ForeColor = System.Drawing.Color.Black;
+			// 
+			// retractableBarGallery.Header
+			// 
+			this.retractableBarGallery.Header.Controls.Add(this.labelControlSelectedGalleryName);
+			this.retractableBarGallery.Header.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.retractableBarGallery.Header.ForeColor = System.Drawing.Color.Black;
+			this.retractableBarGallery.Header.Location = new System.Drawing.Point(49, 2);
+			this.retractableBarGallery.Header.Name = "Header";
+			this.retractableBarGallery.Header.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+			this.retractableBarGallery.Header.Size = new System.Drawing.Size(194, 36);
+			this.retractableBarGallery.Header.TabIndex = 2;
+			this.retractableBarGallery.Location = new System.Drawing.Point(0, 0);
+			this.retractableBarGallery.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+			this.retractableBarGallery.Name = "retractableBarGallery";
+			this.retractableBarGallery.Size = new System.Drawing.Size(249, 519);
+			this.retractableBarGallery.TabIndex = 47;
+			// 
+			// treeViewGallery
+			// 
+			this.treeViewGallery.BackColor = System.Drawing.Color.White;
+			this.treeViewGallery.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.treeViewGallery.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.treeViewGallery.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawText;
+			this.treeViewGallery.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.treeViewGallery.ForeColor = System.Drawing.Color.Black;
+			this.treeViewGallery.HideSelection = false;
+			this.treeViewGallery.Indent = 16;
+			this.treeViewGallery.ItemHeight = 25;
+			this.treeViewGallery.Location = new System.Drawing.Point(0, 0);
+			this.treeViewGallery.Name = "treeViewGallery";
+			this.treeViewGallery.ShowLines = false;
+			this.treeViewGallery.Size = new System.Drawing.Size(245, 475);
+			this.treeViewGallery.TabIndex = 1;
+			// 
+			// labelControlSelectedGalleryName
+			// 
+			this.labelControlSelectedGalleryName.AllowHtmlString = true;
+			this.labelControlSelectedGalleryName.Appearance.BackColor = System.Drawing.Color.Transparent;
+			this.labelControlSelectedGalleryName.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.labelControlSelectedGalleryName.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+			this.labelControlSelectedGalleryName.AppearanceDisabled.ForeColor = System.Drawing.Color.Gray;
+			this.labelControlSelectedGalleryName.AppearanceDisabled.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+			this.labelControlSelectedGalleryName.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+			this.labelControlSelectedGalleryName.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.labelControlSelectedGalleryName.Location = new System.Drawing.Point(10, 0);
+			this.labelControlSelectedGalleryName.Name = "labelControlSelectedGalleryName";
+			this.labelControlSelectedGalleryName.Size = new System.Drawing.Size(184, 36);
+			this.labelControlSelectedGalleryName.StyleController = this.styleController;
+			this.labelControlSelectedGalleryName.TabIndex = 53;
+			this.labelControlSelectedGalleryName.UseMnemonic = false;
+			// 
+			// colorEditInversionColor
+			// 
+			this.colorEditInversionColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.colorEditInversionColor.Color = System.Drawing.Color.Empty;
+			this.colorEditInversionColor.EditValue = System.Drawing.Color.Empty;
+			this.colorEditInversionColor.Enabled = false;
+			this.colorEditInversionColor.Location = new System.Drawing.Point(361, 569);
+			this.colorEditInversionColor.Name = "colorEditInversionColor";
+			this.colorEditInversionColor.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.colorEditInversionColor.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.colorEditInversionColor.Properties.Appearance.Options.UseBackColor = true;
+			this.colorEditInversionColor.Properties.Appearance.Options.UseForeColor = true;
+			this.colorEditInversionColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+			this.colorEditInversionColor.Properties.Color = System.Drawing.Color.Empty;
+			this.colorEditInversionColor.Size = new System.Drawing.Size(88, 22);
+			this.colorEditInversionColor.StyleController = this.styleController;
+			this.colorEditInversionColor.TabIndex = 58;
+			this.colorEditInversionColor.EditValueChanged += new System.EventHandler(this.colorEditInversionColor_EditValueChanged);
+			// 
+			// contextMenuStripImage
+			// 
+			this.contextMenuStripImage.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItemImageAddToFavorites});
+			this.contextMenuStripImage.Name = "contextMenuStripImage";
+			this.contextMenuStripImage.Size = new System.Drawing.Size(163, 48);
+			this.contextMenuStripImage.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStripImage_Opening);
+			// 
+			// toolStripMenuItemImageAddToFavorites
+			// 
+			this.toolStripMenuItemImageAddToFavorites.Image = global::SalesLibraries.FileManager.Properties.Resources.Favorites;
+			this.toolStripMenuItemImageAddToFavorites.Name = "toolStripMenuItemImageAddToFavorites";
+			this.toolStripMenuItemImageAddToFavorites.Size = new System.Drawing.Size(162, 22);
+			this.toolStripMenuItemImageAddToFavorites.Text = "Add To Favorites";
+			this.toolStripMenuItemImageAddToFavorites.Click += new System.EventHandler(this.toolStripMenuItemImageAddToFavorites_Click);
 			// 
 			// FormEditLinkWidget
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
 			this.BackColor = System.Drawing.Color.White;
-			this.ClientSize = new System.Drawing.Size(934, 542);
+			this.ClientSize = new System.Drawing.Size(934, 607);
+			this.Controls.Add(this.colorEditInversionColor);
+			this.Controls.Add(this.pnGallery);
 			this.Controls.Add(this.checkEditInvert);
 			this.Controls.Add(this.pnSearch);
-			this.Controls.Add(this.pnAutoWidget);
 			this.Controls.Add(this.radioButtonWidgetTypeDisabled);
 			this.Controls.Add(this.radioButtonWidgetTypeCustom);
-			this.Controls.Add(this.radioButtonWidgetTypeAuto);
-			this.Controls.Add(this.xtraTabControlWidgets);
 			this.Controls.Add(this.pbCustomWidget);
 			this.Controls.Add(this.buttonXCancel);
 			this.Controls.Add(this.buttonXOK);
+			this.Controls.Add(this.pnAutoWidget);
+			this.Controls.Add(this.radioButtonWidgetTypeAuto);
 			this.DoubleBuffered = true;
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.MinimizeBox = false;
@@ -316,7 +446,6 @@
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormEditLinkSettings_FormClosing);
 			this.Click += new System.EventHandler(this.OnFormClick);
 			((System.ComponentModel.ISupportInitialize)(this.pbCustomWidget)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.xtraTabControlWidgets)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pbAutoWidget)).EndInit();
 			this.pnAutoWidget.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
@@ -324,6 +453,12 @@
 			this.pnSearch.ResumeLayout(false);
 			this.pnSearch.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditInvert.Properties)).EndInit();
+			this.pnGallery.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.xtraTabControlGallery)).EndInit();
+			this.retractableBarGallery.Content.ResumeLayout(false);
+			this.retractableBarGallery.Header.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.colorEditInversionColor.Properties)).EndInit();
+			this.contextMenuStripImage.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -334,7 +469,6 @@
 		private DevComponents.DotNetBar.ButtonX buttonXOK;
 		private DevComponents.DotNetBar.ButtonX buttonXCancel;
 		private System.Windows.Forms.PictureBox pbCustomWidget;
-		private DevExpress.XtraTab.XtraTabControl xtraTabControlWidgets;
 		private System.Windows.Forms.RadioButton radioButtonWidgetTypeAuto;
 		private System.Windows.Forms.PictureBox pbAutoWidget;
 		private System.Windows.Forms.RadioButton radioButtonWidgetTypeCustom;
@@ -347,5 +481,13 @@
 		private DevComponents.DotNetBar.ButtonX buttonXSearch;
 		private System.Windows.Forms.Panel pnSearch;
 		private DevExpress.XtraEditors.CheckEdit checkEditInvert;
+		private System.Windows.Forms.Panel pnGallery;
+		private DevExpress.XtraTab.XtraTabControl xtraTabControlGallery;
+		private CommonGUI.RetractableBar.RetractableBarLeft retractableBarGallery;
+		private ImageGallery.GalleryTreeView treeViewGallery;
+		private DevExpress.XtraEditors.LabelControl labelControlSelectedGalleryName;
+		private CommonGUI.Common.HtmlColorEdit colorEditInversionColor;
+		private System.Windows.Forms.ContextMenuStrip contextMenuStripImage;
+		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemImageAddToFavorites;
 	}
 }

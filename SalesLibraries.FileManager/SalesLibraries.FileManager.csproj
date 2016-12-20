@@ -218,6 +218,9 @@
     <Compile Include="PresentationLayer\Video\VideoContentEditor.Designer.cs">
       <DependentUpon>VideoContentEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="PresentationLayer\Wallbin\ImageGallery\GalleryTreeView.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Wallbin\LinkBundles\SingleBundle\FormAddUrl.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -243,23 +246,33 @@
     <Compile Include="PresentationLayer\Wallbin\LinkBundles\SingleBundle\InfoEditControl.Designer.cs">
       <DependentUpon>InfoEditControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\BaseLineBreakLoader.cs" />
-    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\BaseLibraryObjectLoader.cs" />
-    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\BaseLinkLoader.cs" />
-    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\BaseContextMenuEditor.cs" />
-    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\ExcelSettingsLoader.cs" />
-    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\ExcelSettingsEditor.cs" />
-    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\LibraryObjectNotesLoader.cs" />
-    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\LibraryObjectNotesEditor.cs" />
-    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\DocumentSettingsEditor.cs" />
-    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\DocumentSettingsLoader.cs" />
-    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\LineBreakNotesEditor.cs" />
-    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\LineBreakTextFormatEditor.cs" />
-    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\LibraryObjectTextFormatEditor.cs" />
-    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\ILinkLoader.cs" />
-    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\LibraryObjectTextFormatLoader.cs" />
-    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\LineBreakNotesLoader.cs" />
-    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\LineBreakTextFormatLoader.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\LinksGroup\BaseContextMenuEditor.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\LinksGroup\BaseLibraryObjectsLoader.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\LinksGroup\BaseLinksLoader.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\LinksGroup\DocumentSettingsEditor.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\LinksGroup\DocumentSettingsLoader.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\LinksGroup\ExcelSettingsEditor.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\LinksGroup\ExcelSettingsLoader.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\LinksGroup\ILinksLoader.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\LinksGroup\LinksGroupChangedEventArgs.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\LinksGroup\PdfSettingsEditor.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\SingleLink\BaseLineBreakLoader.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\SingleLink\BaseLibraryObjectLoader.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\SingleLink\BaseLinkLoader.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\SingleLink\BaseContextMenuEditor.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\SingleLink\ExcelSettingsLoader.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\SingleLink\ExcelSettingsEditor.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\SingleLink\LibraryObjectNotesLoader.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\SingleLink\LibraryObjectNotesEditor.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\SingleLink\DocumentSettingsEditor.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\SingleLink\DocumentSettingsLoader.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\SingleLink\LineBreakNotesEditor.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\SingleLink\LineBreakTextFormatEditor.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\SingleLink\LibraryObjectTextFormatEditor.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\SingleLink\ILinkLoader.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\SingleLink\LibraryObjectTextFormatLoader.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\SingleLink\LineBreakNotesLoader.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\SingleLink\LineBreakTextFormatLoader.cs" />
     <Compile Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\IInternalLinkEditControl.cs" />
     <Compile Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\InternalShortcutLinkEditControl.cs">
       <SubType>UserControl</SubType>
@@ -324,7 +337,7 @@
     <Compile Include="PresentationLayer\Wallbin\Settings\BannerSettingsControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Wallbin\Settings\BannerSettingsControl.designer.cs">
+    <Compile Include="PresentationLayer\Wallbin\Settings\BannerSettingsControl.Designer.cs">
       <DependentUpon>BannerSettingsControl.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Wallbin\ImageGallery\SearchResultsImagesContainer.cs">
@@ -1159,6 +1172,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\RetractableLogoGallery.png" />
     <None Include="Resources\DataSourceListUrl.png" />
     <None Include="Resources\DataSourceListPs.png" />
     <None Include="Resources\DataSourceListZip.png" />

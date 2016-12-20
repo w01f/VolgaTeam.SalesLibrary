@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using Newtonsoft.Json;
 using SalesLibraries.Business.Entities.Common;
+using SalesLibraries.Business.Entities.Interfaces;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 
@@ -93,6 +94,8 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 			}
 		}
 
+		public virtual void ResetToEmpty() { }
+
 		public virtual IList<LinkSettingsGroupType> GetCustomizedSettigsGroups()
 		{
 			var customizedSettingsGroups = new List<LinkSettingsGroupType>();
@@ -103,6 +106,13 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 				customizedSettingsGroups.Add(LinkSettingsGroupType.TextFormatting);
 
 			return customizedSettingsGroups;
+		}
+
+		public static TSettings CreateEmpty<TSettings>(IChangable parent) where TSettings : BaseLinkSettings
+		{
+			var settings = SettingsContainer.CreateInstance<TSettings>(parent);
+			settings.ResetToEmpty();
+			return settings;
 		}
 	}
 }

@@ -34,12 +34,12 @@
 			this.ckDoNotGeneratePreview = new System.Windows.Forms.CheckBox();
 			this.ckDoNotGenerateText = new System.Windows.Forms.CheckBox();
 			this.labelControlTitleButtons = new DevExpress.XtraEditors.LabelControl();
-			this.labelControlTitleSettings = new DevExpress.XtraEditors.LabelControl();
 			this.buttonXRefreshPreview = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXOpenWV = new DevComponents.DotNetBar.ButtonX();
 			this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
 			this.labelControlTitle = new DevExpress.XtraEditors.LabelControl();
 			this.ckForcePreview = new System.Windows.Forms.CheckBox();
+			this.ckIsArchiveResource = new System.Windows.Forms.CheckBox();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).BeginInit();
 			this.SuspendLayout();
@@ -64,7 +64,7 @@
 			this.ckDoNotGeneratePreview.AutoSize = true;
 			this.ckDoNotGeneratePreview.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.ckDoNotGeneratePreview.ForeColor = System.Drawing.Color.Black;
-			this.ckDoNotGeneratePreview.Location = new System.Drawing.Point(30, 170);
+			this.ckDoNotGeneratePreview.Location = new System.Drawing.Point(17, 173);
 			this.ckDoNotGeneratePreview.Name = "ckDoNotGeneratePreview";
 			this.ckDoNotGeneratePreview.Size = new System.Drawing.Size(513, 20);
 			this.ckDoNotGeneratePreview.TabIndex = 27;
@@ -76,7 +76,7 @@
 			this.ckDoNotGenerateText.AutoSize = true;
 			this.ckDoNotGenerateText.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.ckDoNotGenerateText.ForeColor = System.Drawing.Color.Black;
-			this.ckDoNotGenerateText.Location = new System.Drawing.Point(30, 200);
+			this.ckDoNotGenerateText.Location = new System.Drawing.Point(17, 201);
 			this.ckDoNotGenerateText.Name = "ckDoNotGenerateText";
 			this.ckDoNotGenerateText.Size = new System.Drawing.Size(452, 20);
 			this.ckDoNotGenerateText.TabIndex = 26;
@@ -91,15 +91,6 @@
 			this.labelControlTitleButtons.StyleController = this.styleController;
 			this.labelControlTitleButtons.TabIndex = 62;
 			this.labelControlTitleButtons.Text = "Link Archive Folders:";
-			// 
-			// labelControlTitleSettings
-			// 
-			this.labelControlTitleSettings.Location = new System.Drawing.Point(17, 139);
-			this.labelControlTitleSettings.Name = "labelControlTitleSettings";
-			this.labelControlTitleSettings.Size = new System.Drawing.Size(140, 16);
-			this.labelControlTitleSettings.StyleController = this.styleController;
-			this.labelControlTitleSettings.TabIndex = 61;
-			this.labelControlTitleSettings.Text = "Link Archive Resources:";
 			// 
 			// buttonXRefreshPreview
 			// 
@@ -162,19 +153,32 @@
 			this.ckForcePreview.AutoSize = true;
 			this.ckForcePreview.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.ckForcePreview.ForeColor = System.Drawing.Color.Black;
-			this.ckForcePreview.Location = new System.Drawing.Point(30, 230);
+			this.ckForcePreview.Location = new System.Drawing.Point(17, 229);
 			this.ckForcePreview.Name = "ckForcePreview";
 			this.ckForcePreview.Size = new System.Drawing.Size(343, 20);
 			this.ckForcePreview.TabIndex = 63;
 			this.ckForcePreview.Text = "Immediately Launch this PDF in new Browser Tab";
 			this.ckForcePreview.UseVisualStyleBackColor = true;
 			// 
+			// ckIsArchiveResource
+			// 
+			this.ckIsArchiveResource.AutoSize = true;
+			this.ckIsArchiveResource.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.ckIsArchiveResource.ForeColor = System.Drawing.Color.Black;
+			this.ckIsArchiveResource.Location = new System.Drawing.Point(17, 145);
+			this.ckIsArchiveResource.Name = "ckIsArchiveResource";
+			this.ckIsArchiveResource.Size = new System.Drawing.Size(175, 20);
+			this.ckIsArchiveResource.TabIndex = 64;
+			this.ckIsArchiveResource.Text = "Link Archive Resources";
+			this.ckIsArchiveResource.UseVisualStyleBackColor = true;
+			this.ckIsArchiveResource.CheckedChanged += new System.EventHandler(this.ckIsArchiveResource_CheckedChanged);
+			// 
 			// LinkDocumentOptions
 			// 
 			this.BackColor = System.Drawing.Color.White;
+			this.Controls.Add(this.ckIsArchiveResource);
 			this.Controls.Add(this.ckForcePreview);
 			this.Controls.Add(this.labelControlTitleButtons);
-			this.Controls.Add(this.labelControlTitleSettings);
 			this.Controls.Add(this.buttonXRefreshPreview);
 			this.Controls.Add(this.buttonXOpenWV);
 			this.Controls.Add(this.pictureBoxLogo);
@@ -197,11 +201,11 @@
 		public System.Windows.Forms.CheckBox ckDoNotGeneratePreview;
 		public System.Windows.Forms.CheckBox ckDoNotGenerateText;
 		private DevExpress.XtraEditors.LabelControl labelControlTitleButtons;
-		private DevExpress.XtraEditors.LabelControl labelControlTitleSettings;
 		public DevComponents.DotNetBar.ButtonX buttonXRefreshPreview;
 		public DevComponents.DotNetBar.ButtonX buttonXOpenWV;
 		private System.Windows.Forms.PictureBox pictureBoxLogo;
 		private DevExpress.XtraEditors.LabelControl labelControlTitle;
 		public System.Windows.Forms.CheckBox ckForcePreview;
+		public System.Windows.Forms.CheckBox ckIsArchiveResource;
 	}
 }

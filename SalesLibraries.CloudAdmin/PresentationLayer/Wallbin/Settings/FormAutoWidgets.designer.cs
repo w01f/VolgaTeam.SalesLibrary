@@ -170,7 +170,7 @@
 			// 
 			this.gridColumnWidget.Caption = "Widget";
 			this.gridColumnWidget.ColumnEdit = this.repositoryItemPictureEdit;
-			this.gridColumnWidget.FieldName = "Widget";
+			this.gridColumnWidget.FieldName = "DisplayedImage";
 			this.gridColumnWidget.Name = "gridColumnWidget";
 			this.gridColumnWidget.OptionsColumn.FixedWidth = true;
 			this.gridColumnWidget.Visible = true;

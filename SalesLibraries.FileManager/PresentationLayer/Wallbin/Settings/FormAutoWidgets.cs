@@ -5,6 +5,7 @@ using DevComponents.DotNetBar.Metro;
 using DevExpress.XtraEditors.Controls;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent;
 using SalesLibraries.Business.Entities.Wallbin.Persistent;
+using SalesLibraries.Common.Extensions;
 using SalesLibraries.FileManager.Controllers;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
@@ -50,10 +51,12 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 					{
 						form.laWidgetDescription.Text = autoWidget.Extension.ToUpper();
 						form.checkEditInvert.Checked = autoWidget.Inverted;
-						form.pbSelectedWidget.Image = autoWidget.Widget;
+						form.colorEditInversionColor.Color = autoWidget.InversionColor;
+						form.OriginalImage = autoWidget.Widget;
 						if (form.ShowDialog() != DialogResult.OK) return;
 						autoWidget.Inverted = form.checkEditInvert.Checked;
-						autoWidget.Widget = form.pbSelectedWidget.Image;
+						autoWidget.InversionColor = form.checkEditInvert.Checked ? form.colorEditInversionColor.Color : GraphicObjectExtensions.DefaultInversionColor;
+						autoWidget.Widget = form.OriginalImage;
 						gridViewAutoWidgets.UpdateCurrentRow();
 						gridViewAutoWidgets.RefreshData();
 						gridViewAutoWidgets.Focus();

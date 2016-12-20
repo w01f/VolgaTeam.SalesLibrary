@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Drawing;
 using Newtonsoft.Json;
@@ -72,6 +73,12 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 
 		[NotMapped, JsonIgnore]
 		public Color BannerBackColor => Settings.BackgroundColor;
+
+		[NotMapped, JsonIgnore]
+		public String Name => ObjectDisplayName;
+
+		[NotMapped, JsonIgnore]
+		public string ObjectDisplayName => "Column";
 		#endregion
 
 		public override void BeforeSave()
