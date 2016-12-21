@@ -215,15 +215,35 @@
           $('.scroll_tab_inner > span.scroll_tab_right_finisher', _this).removeClass('scroll_tab_over').removeClass('scroll_tab_right_finisher_over');
         }
       }).click(function(e){
-        e.stopPropagation();
+        e.stopPropagation();        
         $('.scroll_tab_inner',_this).find("span").removeClass("scroll_tab_transparent");
-        /*downTime = new Date().getTime();
-        clickTimer = setTimeout(function() {
-        	$('.scroll_tab_inner',_this).find("span").addClass("scroll_tab_transparent");
-        }, 1500);*/
-        
+        if (!$('.scroll_tab_inner',_this).hasClass("tap_enabled")) {
+            $('.scroll_tab_inner',_this).find("span").removeClass("scroll_tab_transparent");
+            $('.tab_selected',_this).removeClass('tab_selected scroll_tab_first_selected scroll_tab_last_selected scroll_tab_left_finisher_selected scroll_tab_right_finisher_selected');
+            $(this).addClass('tab_selected');
+
+            var context_obj = this;
+            if($(this).hasClass('scroll_tab_left_finisher')){
+                context_obj = $('.scroll_tab_inner > '+_this.itemTag+'.scroll_tab_first', _this).addClass('tab_selected').addClass('scroll_tab_first_selected');
+            }
+            if($(this).hasClass('scroll_tab_right_finisher')){
+                context_obj = $('.scroll_tab_inner > '+_this.itemTag+'.scroll_tab_last', _this).addClass('tab_selected').addClass('scroll_tab_last_selected');
+            }
+            if($(this).hasClass('scroll_tab_first') || $('.scroll_tab_inner > '+_this.itemTag+'.scroll_tab_last', _this).hasClass('scroll_tab_first')){
+                $('.scroll_tab_inner > span.scroll_tab_left_finisher', _this).addClass('tab_selected').addClass('scroll_tab_left_finisher_selected');
+            }
+            if($(this).hasClass('scroll_tab_last') || $('.scroll_tab_inner > '+_this.itemTag+'.scroll_tab_first', _this).hasClass('scroll_tab_last')){
+                $('.scroll_tab_inner > span.scroll_tab_right_finisher', _this).addClass('tab_selected').addClass('scroll_tab_left_finisher_selected');
+            }
+
+            // "Slide" it into view if not fully visible.
+            scroll_selected_into_view.call(_this, state);
+
+            opts.click_callback.call(context_obj,e);
+        }              
       }).swipe( {
-        tap:function(e, target) {
+        tap:function(e, target) { 
+          $('.scroll_tab_inner',_this).addClass("tap_enabled");
         	$('.scroll_tab_inner',_this).find("span").removeClass("scroll_tab_transparent");
           $('.tab_selected',_this).removeClass('tab_selected scroll_tab_first_selected scroll_tab_last_selected scroll_tab_left_finisher_selected scroll_tab_right_finisher_selected');
 	        $(this).addClass('tab_selected');
@@ -426,8 +446,8 @@
   $.fn.scrollTabs.defaultOptions = {
     scroll_distance: 300,
     scroll_duration: 300,
-    left_arrow_size: 42,
-    right_arrow_size: 42,
+    left_arrow_size: 26,
+    right_arrow_size: 26,
     click_callback: function(e){
       var val = $(this).attr('rel');
       if(val){
