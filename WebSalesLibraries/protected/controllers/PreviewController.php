@@ -35,11 +35,13 @@
 					$link->load($linkRecord);
 
 					$previewData = $link->getPreviewData($isQuickSite);
-
+					$content = '';
+					if ($previewData->contentView != '')
+						$content = $this->renderPartial($previewData->contentView, array('data' => $previewData), true);
 					$dialogData = array(
 						'format' => $previewData->viewerFormat,
 						'data' => $previewData,
-						'content' => $this->renderPartial($previewData->contentView, array('data' => $previewData), true),
+						'content' => $content,
 					);
 				}
 			}

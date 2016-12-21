@@ -214,7 +214,6 @@
 
 			$whereConditions = array('AND',
 				'link.is_preview_not_ready=0',
-				'link.type<>5',
 				'link.type<>6');
 			$includeAppLinks = Yii::app()->browser->getBrowser() == Browser::BROWSER_EO;
 			if ($includeAppLinks)
