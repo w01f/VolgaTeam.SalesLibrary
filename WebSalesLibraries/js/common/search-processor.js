@@ -123,10 +123,16 @@
 						{
 							tags.push("url");
 							tags.push("youtube");
+							tags.push("vimeo");
 							tags.push("lan");
 							tags.push("quicksite");
 							tags.push("html5");
 							tags.push("app");
+							tags.push("internal library");
+							tags.push("internal page");
+							tags.push("internal window");
+							tags.push("internal link");
+							tags.push("internal shortcut");
 						}
 						if (this.showImages)
 						{
@@ -155,6 +161,7 @@
 								thatData.showVideo = true;
 							else if (value == 'url' ||
 								value == 'youtube' ||
+								value == 'vimeo' ||
 								value == 'lan' ||
 								value == 'quicksite' ||
 								value == 'html5' ||

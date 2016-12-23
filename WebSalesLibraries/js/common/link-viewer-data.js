@@ -103,6 +103,25 @@
 				this[prop] = source[prop];
 	};
 
+	$.SalesPortal.VimeoViewerData = function (source)
+	{
+		this.linkId = undefined;
+		this.folderId = undefined;
+		this.name = undefined;
+		this.format = undefined;
+		this.tags = undefined;
+		this.url = undefined;
+		this.fileName = undefined;
+		this.quickLinkUrl = undefined;
+		this.vimeoId = undefined;
+		this.rateData = undefined;
+		this.totalViews = undefined;
+
+		for (var prop in source)
+			if (source.hasOwnProperty(prop))
+				this[prop] = source[prop];
+	};
+
 	$.SalesPortal.LanViewerData = function (source)
 	{
 		this.linkId = undefined;

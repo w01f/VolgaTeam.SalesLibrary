@@ -149,6 +149,9 @@
 				case 'youtube':
 					$previewData = new YouTubePreviewData($link);
 					break;
+				case 'vimeo':
+					$previewData = new VimeoPreviewData($link);
+					break;
 				case 'lan':
 					$previewData = new LanPreviewData($link);
 					break;

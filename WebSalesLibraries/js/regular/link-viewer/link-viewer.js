@@ -57,6 +57,9 @@
 							case 'youtube':
 								openedViewer = new $.SalesPortal.YouTubeViewer(parameters).show();
 								break;
+							case 'vimeo':
+								openedViewer = new $.SalesPortal.VimeoViewer(parameters).show();
+								break;
 							case 'lan':
 								openedViewer = new $.SalesPortal.LanViewer(parameters).show();
 								break;

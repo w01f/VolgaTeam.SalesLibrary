@@ -56,6 +56,7 @@
 						//Non-file link formats
 						'url' => 'Web URL',
 						'youtube' => 'YouTube',
+						'vimeo' => 'Vimeo',
 						'lan' => 'LAN Link',
 						'quicksite' => 'QuickSite Link',
 						'html5' => 'HTML5 Link',

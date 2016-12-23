@@ -223,6 +223,7 @@
 							break;
 						case 'url':
 						case 'youtube':
+						case 'vimeo':
 						case 'quicksite':
 						case 'html5':
 						case 'app':
@@ -293,9 +294,6 @@
 			return $this->type == 6 && isset($this->lineBreakProperties);
 		}
 
-		/**
-		 * @return string
-		 */
 		private function getTooltip()
 		{
 			$tooltipList = array();
@@ -455,7 +453,8 @@
 				case 14:
 				case 17:
 				case 18:
-					/** @var \VideoLinkSettings|\VideoLinkSettings|\DocumentLinkSettings|\HyperLinkSettings $urlLinkSettings */
+				case 20:
+					/** @var \DocumentLinkSettings|\HyperLinkSettings $urlLinkSettings */
 					$urlLinkSettings = $extendedProperties;
 					return $urlLinkSettings->forcePreview;
 				case 16:
