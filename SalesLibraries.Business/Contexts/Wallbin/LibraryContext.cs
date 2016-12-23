@@ -24,7 +24,7 @@ namespace SalesLibraries.Business.Contexts.Wallbin
 		public event EventHandler<EventArgs> BeforeSave;
 
 		public Library Library => Libraries.Single();
-
+		
 		protected LibraryContext(string libraryName, string libraryPath, string libraryFileName)
 			: base(Path.Combine(libraryPath, libraryFileName))
 		{
@@ -75,7 +75,7 @@ namespace SalesLibraries.Business.Contexts.Wallbin
 			}
 			if (e.Entity is WallbinEntity)
 			{
-				((WallbinEntity) e.Entity).AllowToHandleChanges = true;
+				((WallbinEntity)e.Entity).AllowToHandleChanges = true;
 			}
 		}
 	}

@@ -53,10 +53,12 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 						form.checkEditInvert.Checked = autoWidget.Inverted;
 						form.colorEditInversionColor.Color = autoWidget.InversionColor;
 						form.OriginalImage = autoWidget.Widget;
+						form.OriginalImageName = autoWidget.WidgetName;
 						if (form.ShowDialog() != DialogResult.OK) return;
 						autoWidget.Inverted = form.checkEditInvert.Checked;
 						autoWidget.InversionColor = form.checkEditInvert.Checked ? form.colorEditInversionColor.Color : GraphicObjectExtensions.DefaultInversionColor;
 						autoWidget.Widget = form.OriginalImage;
+						autoWidget.WidgetName = form.OriginalImageName;
 						gridViewAutoWidgets.UpdateCurrentRow();
 						gridViewAutoWidgets.RefreshData();
 						gridViewAutoWidgets.Focus();

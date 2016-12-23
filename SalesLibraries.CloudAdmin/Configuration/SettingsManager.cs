@@ -38,12 +38,6 @@ namespace SalesLibraries.CloudAdmin.Configuration
 		public string CategoryRequestBody { get; set; }
 		#endregion
 
-		#region Sales Depot Sync Settings
-		public bool SyncLockByUntaggedLinks { get; private set; }
-		public bool SyncLockByUnconvertedVideo { get; private set; }
-		public string SyncSupportEmail { get; private set; }
-		#endregion
-
 		#region Service Connection Settings
 		public string WebServiceSite { get; private set; }
 		public string SiteLibrary { get; private set; }
@@ -76,8 +70,8 @@ namespace SalesLibraries.CloudAdmin.Configuration
 		{
 			LoadRibbonSettings();
 			LoadCategoryRequestSettings();
-			LoadSalesDepotSyncSettings();
 			LoadServiceConnectionSettings();
+			LoadArchiveLinksSettings();
 
 			EditorSettings.Load();
 
@@ -176,28 +170,6 @@ namespace SalesLibraries.CloudAdmin.Configuration
 				if (node != null)
 					CategoryRequestBody = node.InnerText;
 			}
-		}
-
-		private void LoadSalesDepotSyncSettings()
-		{
-			if (!RemoteResourceManager.Instance.SyncLockSettingsFile.ExistsLocal()) return;
-			var document = new XmlDocument();
-			document.Load(RemoteResourceManager.Instance.SyncLockSettingsFile.LocalPath);
-			var node = document.SelectSingleNode(@"/synclock/untaggedlink");
-			{
-				bool temp;
-				if (node != null && Boolean.TryParse(node.InnerText, out temp))
-					SyncLockByUntaggedLinks = temp;
-			}
-			node = document.SelectSingleNode(@"/synclock/unconvertedvideo");
-			{
-				bool temp;
-				if (node != null && Boolean.TryParse(node.InnerText, out temp))
-					SyncLockByUnconvertedVideo = temp;
-			}
-			node = document.SelectSingleNode(@"/synclock/email");
-			if (node != null)
-				SyncSupportEmail = node.InnerText;
 		}
 
 		private void LoadArchiveLinksSettings()

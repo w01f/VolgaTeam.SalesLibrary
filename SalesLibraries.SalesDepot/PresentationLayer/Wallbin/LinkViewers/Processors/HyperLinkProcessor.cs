@@ -7,6 +7,8 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Proces
 	[IntendForClass(typeof(WebLink))]
 	[IntendForClass(typeof(YouTubeLink))]
 	[IntendForClass(typeof(QuickSiteLink))]
+	[IntendForClass(typeof(Html5Link))]
+	[IntendForClass(typeof(VimeoLink))]
 	[IntendForClass(typeof(AppLink))]
 	class HyperLinkProcessor : ILinkViewProcessor
 	{

@@ -50,9 +50,9 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 			MainController.Instance.MainForm.ribbonPanelHome.PerformLayout();
 		}
 
-		public void SaveActiveWallbin()
+		public void SaveActiveWallbin(bool runInQueue)
 		{
-			ActiveWallbin?.SaveData();
+			ActiveWallbin?.SaveData(runInQueue);
 		}
 
 		private void UpdateViewState(object sender, EventArgs e)

@@ -26,5 +26,6 @@
 		public const string Folder = "folder";
 		public const string LineBreak = "line break";
 		public const string LinkBundle = "link bundle";
+		public const string Vimeo = "vimeo";
 	}
 }

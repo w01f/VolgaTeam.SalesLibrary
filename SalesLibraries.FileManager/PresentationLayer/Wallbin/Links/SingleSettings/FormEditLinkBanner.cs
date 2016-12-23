@@ -28,6 +28,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 		private bool _allowHandleEvents;
 		private string _tempBannerText;
+		private string _originalImageName;
 		private readonly BaseLibraryLink _sourceLink;
 
 		public LinkSettingsType[] EditableSettings => new[]
@@ -167,9 +168,15 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			checkEditVerticalAlignmentTop1.Checked = banner.ImageVerticalAlignement == VerticalAlignment.Top;
 			checkEditVerticalAlignmentTop2.Checked = banner.ImageVerticalAlignement == VerticalAlignment.Top;
 			if (banner.Enable && banner.Image != null)
+			{
 				labelControlTitle.Tag = banner.Image;
+				_originalImageName = banner.ImageName;
+			}
 			else
+			{
 				labelControlTitle.Tag = null;
+				_originalImageName = null;
+			}
 			switch (banner.ImageAlignement)
 			{
 				case HorizontalAlignment.Left:
@@ -231,6 +238,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 					? VerticalAlignment.Top
 					: VerticalAlignment.Middle;
 				_sourceLink.Banner.Image = labelControlTitle.Tag as Image;
+				_sourceLink.Banner.ImageName = _originalImageName;
 				if (checkEditHorizontalAlignmentLeft.Checked)
 					_sourceLink.Banner.ImageAlignement = HorizontalAlignment.Left;
 				else if (checkEditHorizontalAlignmentCenter.Checked)
@@ -275,6 +283,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 					: imageClone.Invert();
 			}
 			labelControlTitle.Appearance.Image = displayImage;
+			labelControlTitle.Text = String.Format(ImageTitleFormat, _sourceLink.LinkInfoDisplayName, _originalImageName);
 		}
 
 		private void OnFormClosing(object sender, FormClosingEventArgs e)
@@ -310,7 +319,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		private void OnSelectedBannerChanged(object sender, LinkImageEventArgs e)
 		{
 			labelControlTitle.Tag = e.Image;
-			labelControlTitle.Text = String.Format(ImageTitleFormat, _sourceLink.LinkInfoDisplayName, e.Text);
+			_originalImageName = e.Text;
 			UpdateCustomDisplayImage();
 		}
 

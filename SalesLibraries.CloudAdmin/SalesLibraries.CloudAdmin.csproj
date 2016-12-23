@@ -199,6 +199,12 @@
     <Compile Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\InternalWallbinLinkEditControl.designer.cs">
       <DependentUpon>InternalWallbinLinkEditControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\VimeoEditControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\VimeoEditControl.designer.cs">
+      <DependentUpon>VimeoEditControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkBundleOptions.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -234,6 +240,12 @@
     </Compile>
     <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkInternalWallbinOptions.designer.cs">
       <DependentUpon>LinkInternalWallbinOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkVimeoOptions.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkVimeoOptions.designer.cs">
+      <DependentUpon>LinkVimeoOptions.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Wallbin\Settings\BannerSettingsControl.cs">
       <SubType>UserControl</SubType>
@@ -625,12 +637,6 @@
     <Compile Include="PresentationLayer\Wallbin\Settings\FormColumnTitle.designer.cs">
       <DependentUpon>FormColumnTitle.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Wallbin\Settings\FormEmailList.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PresentationLayer\Wallbin\Settings\FormEmailList.designer.cs">
-      <DependentUpon>FormEmailList.cs</DependentUpon>
-    </Compile>
     <Compile Include="PresentationLayer\Wallbin\Settings\FormPages.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -736,6 +742,9 @@
     <EmbeddedResource Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\InternalWallbinLinkEditControl.resx">
       <DependentUpon>InternalWallbinLinkEditControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\VimeoEditControl.resx">
+      <DependentUpon>VimeoEditControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkBundleOptions.resx">
       <DependentUpon>LinkBundleOptions.cs</DependentUpon>
     </EmbeddedResource>
@@ -753,6 +762,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkInternalWallbinOptions.resx">
       <DependentUpon>LinkInternalWallbinOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkVimeoOptions.resx">
+      <DependentUpon>LinkVimeoOptions.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Settings\BannerSettingsControl.resx">
       <DependentUpon>BannerSettingsControl.cs</DependentUpon>
@@ -937,9 +949,6 @@
     <EmbeddedResource Include="PresentationLayer\Wallbin\Settings\FormColumnTitle.resx">
       <DependentUpon>FormColumnTitle.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Wallbin\Settings\FormEmailList.resx">
-      <DependentUpon>FormEmailList.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Settings\FormPages.resx">
       <DependentUpon>FormPages.cs</DependentUpon>
     </EmbeddedResource>
@@ -1002,6 +1011,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\LinkAddVimeo.png" />
     <None Include="Resources\RetractableLogoGallery.png" />
     <None Include="Resources\RetractableLogoBundles.png" />
     <None Include="Resources\BundlesRibbonNew.png" />
@@ -1040,7 +1050,6 @@
     <None Include="Resources\Sync.png" />
     <None Include="Resources\SettingsSync.png" />
     <None Include="Resources\SettingsPages.png" />
-    <None Include="Resources\SettingsEmailList.png" />
     <None Include="Resources\SettingsColumnTitle.png" />
     <None Include="Resources\SettingsColumnsAlignByRows.png" />
     <None Include="Resources\SettingsColumnsAlignByColumns.png" />

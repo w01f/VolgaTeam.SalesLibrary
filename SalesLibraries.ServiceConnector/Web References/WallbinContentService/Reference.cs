@@ -6309,8 +6309,6 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         
         private string contentPathField;
         
-        private bool isDeadField;
-        
         /// <remarks/>
         public string id {
             get {
@@ -6568,16 +6566,6 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
             }
             set {
                 this.contentPathField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool isDead {
-            get {
-                return this.isDeadField;
-            }
-            set {
-                this.isDeadField = value;
             }
         }
     }

@@ -45,6 +45,7 @@ namespace SalesLibraries.FileManager.Business.Services
 						case FileTypes.Url:
 						case FileTypes.Html5:
 						case FileTypes.YouTube:
+						case FileTypes.Vimeo:
 						case FileTypes.InternalLink:
 						case FileTypes.AppLink:
 						case FileTypes.QPageLink:

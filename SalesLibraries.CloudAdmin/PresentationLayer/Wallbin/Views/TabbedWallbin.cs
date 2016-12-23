@@ -209,7 +209,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 						ActivePage = null;
 					});
 				IsDataChanged = true;
-				SaveData();
+				SaveData(true);
 				pnEmpty.BringToFront();
 				MainController.Instance.ProcessManager.RunInQueue("Loading Library...",
 					() => MainController.Instance.MainForm.Invoke(new MethodInvoker(() =>

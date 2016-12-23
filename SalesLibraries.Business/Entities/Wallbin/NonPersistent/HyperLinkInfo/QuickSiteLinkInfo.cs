@@ -4,5 +4,11 @@
 	{
 		public override HyperLinkTypeEnum LinkType => HyperLinkTypeEnum.QuickSite;
 		public bool ForcePreview { get; set; }
+
+		public override void SetDefaults()
+		{
+			base.SetDefaults();
+			ForcePreview = true;
+		}
 	}
 }

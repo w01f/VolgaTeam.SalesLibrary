@@ -18,5 +18,7 @@
 		public const string GoodSyncServiceFolderName = "_gsdata_";
 		public const string FilesDeletedFromFolderArchiveName = "z_archive";
 		public const string DatabaseConnectionStateInfoFileName = "z_library_LOCKED.txt";
+		public const string DeadLinkInfoFileName = @"z_dead_links.txt";
+		public const string LogArchiveFolderName = @"zzzz_logs_never_delete";
 	}
 }

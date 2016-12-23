@@ -8,6 +8,7 @@
 		QuickSite,
 		App,
 		Internal,
-		Html5
+		Html5,
+		Vimeo
 	}
 }

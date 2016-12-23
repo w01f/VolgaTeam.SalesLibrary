@@ -743,6 +743,16 @@ namespace SalesLibraries.FileManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap LinkAddVimeo {
+            get {
+                object obj = ResourceManager.GetObject("LinkAddVimeo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap LinkAddYoutube {
             get {
                 object obj = ResourceManager.GetObject("LinkAddYoutube", resourceCulture);
@@ -983,16 +993,6 @@ namespace SalesLibraries.FileManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap SecurityRibbonLogo {
-            get {
-                object obj = ResourceManager.GetObject("SecurityRibbonLogo", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap SecurityRibbonReset {
             get {
                 object obj = ResourceManager.GetObject("SecurityRibbonReset", resourceCulture);
@@ -1056,26 +1056,6 @@ namespace SalesLibraries.FileManager.Properties {
         internal static System.Drawing.Bitmap SettingsColumnsAlignByRows {
             get {
                 object obj = ResourceManager.GetObject("SettingsColumnsAlignByRows", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap SettingsDeadLinks {
-            get {
-                object obj = ResourceManager.GetObject("SettingsDeadLinks", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap SettingsEmailList {
-            get {
-                object obj = ResourceManager.GetObject("SettingsEmailList", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

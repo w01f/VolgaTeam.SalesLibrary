@@ -57,25 +57,6 @@ namespace SalesLibraries.ServiceConnector.Services.Soap
 				message = "Couldn't complete operation.\nServer is unavailable.";
 		}
 
-		public void NotifyDeadLinks(out string message)
-		{
-			var client = GetUtilityClient();
-			if (client != null)
-			{
-				try
-				{
-					var sessionKey = client.getSessionKey(Login, Password);
-					message = !string.IsNullOrEmpty(sessionKey) ? client.notifyDeadLinks(sessionKey) : "Couldn't complete operation.\nLogin or password are not correct.";
-				}
-				catch (Exception ex)
-				{
-					message = string.Format("Couldn't complete operation.\n{0}.", ex.Message);
-				}
-			}
-			else
-				message = "Couldn't complete operation.\nServer is unavailable.";
-		}
-
 		public void UpdateQuizzes(out string message)
 		{
 			var client = GetUtilityClient();

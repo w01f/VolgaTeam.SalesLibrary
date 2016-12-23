@@ -20,7 +20,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 		void LoadView(bool force = false);
 		void ShowView();
 		void DisposeView();
-		void SaveData();
+		void SaveData(bool runInQueue);
 		void SelectPage(IPageView pageView);
 	}
 }

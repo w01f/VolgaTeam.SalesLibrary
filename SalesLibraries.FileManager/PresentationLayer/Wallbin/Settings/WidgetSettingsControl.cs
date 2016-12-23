@@ -8,6 +8,7 @@ using DevExpress.XtraTab;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent;
 using SalesLibraries.Common.Extensions;
+using SalesLibraries.Common.Helpers;
 using SalesLibraries.Common.Objects.Graphics;
 using SalesLibraries.CommonGUI.RetractableBar;
 using SalesLibraries.FileManager.Controllers;
@@ -21,6 +22,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 		private bool _loading;
 		private readonly WidgetSettings _data;
 		private Image _originalImage;
+		private string _originalImageName;
 
 		public event EventHandler<CheckedChangedEventArgs> StateChanged;
 		public event EventHandler<EventArgs> DoubleClicked;
@@ -108,6 +110,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			checkEditInvert.Checked = _data.Inverted;
 			colorEditInversionColor.EditValue = _data.InversionColor;
 			_originalImage = _data.WidgetType == WidgetType.CustomWidget ? _data.Image : null;
+			_originalImageName = _data.WidgetType == WidgetType.CustomWidget ? _data.ImageName : null;
 			switch (_data.WidgetType)
 			{
 				case WidgetType.CustomWidget:
@@ -136,11 +139,13 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 					? colorEditInversionColor.Color
 					: GraphicObjectExtensions.DefaultInversionColor;
 				_data.Image = _originalImage;
+				_data.ImageName = _originalImageName;
 			}
 			else if (radioButtonWidgetTypeDisabled.Checked)
 			{
 				_data.WidgetType = WidgetType.NoWidget;
 				_data.Image = null;
+				_data.ImageName = null;
 			}
 		}
 
@@ -184,6 +189,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			if (!_loading)
 			{
 				_originalImage = e.Image;
+				_originalImageName = e.Text;
 				UpdateCustomDisplayImage();
 			}
 		}
@@ -224,12 +230,14 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 
 		private void toolStripMenuItemImageAddToFavorites_Click(object sender, EventArgs e)
 		{
-
+			if (pbCustomWidget.Image == null) return;
+			var favoritesContainer = xtraTabControlGallery.TabPages.OfType<FavoritesImagesContainer>().FirstOrDefault();
+			((FavoriteImageGroup)favoritesContainer?.ParentImageGroup)?.AddImage<Widget>(pbCustomWidget.Image, String.Format("{0}_{1}", _originalImageName, colorEditInversionColor.Color.ToHex()));
 		}
 
 		private void contextMenuStripImage_Opening(object sender, CancelEventArgs e)
 		{
-
+			e.Cancel = !checkEditInvert.Checked || pbCustomWidget.Image == null || colorEditInversionColor.Color == Color.White;
 		}
 	}
 }

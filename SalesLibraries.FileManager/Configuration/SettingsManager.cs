@@ -15,8 +15,8 @@ namespace SalesLibraries.FileManager.Configuration
 
 		#region FM Settings
 		public string BackupPath { get; set; }
-		public List<string> NetworkPaths { get; private set; }
-		public List<string> WebPaths { get; private set; }
+		public List<string> NetworkPaths { get; }
+		public List<string> WebPaths { get; }
 
 		public bool EnableLocalSync => NetworkPaths.Any();
 		public bool EnableWebSync => WebPaths.Any();
@@ -49,13 +49,6 @@ namespace SalesLibraries.FileManager.Configuration
 		public string CategoryRequestRecipients { get; set; }
 		public string CategoryRequestSubject { get; set; }
 		public string CategoryRequestBody { get; set; }
-		#endregion
-
-		#region Sales Depot Sync Settings
-		public bool SyncLockByUntaggedLinks { get; private set; }
-		public bool SyncLockByInactiveLinks { get; private set; }
-		public bool SyncLockByUnconvertedVideo { get; private set; }
-		public string SyncSupportEmail { get; private set; }
 		#endregion
 
 		#region Service Connection Settings
@@ -157,7 +150,6 @@ namespace SalesLibraries.FileManager.Configuration
 		{
 			LoadRibbonSettings();
 			LoadCategoryRequestSettings();
-			LoadSalesDepotSyncSettings();
 			LoadServiceConnectionSettings();
 			LoadArchiveLinksSettings();
 
@@ -255,34 +247,6 @@ namespace SalesLibraries.FileManager.Configuration
 				if (node != null)
 					CategoryRequestBody = node.InnerText;
 			}
-		}
-
-		private void LoadSalesDepotSyncSettings()
-		{
-			if (!RemoteResourceManager.Instance.SyncLockSettingsFile.ExistsLocal()) return;
-			var document = new XmlDocument();
-			document.Load(RemoteResourceManager.Instance.SyncLockSettingsFile.LocalPath);
-			var node = document.SelectSingleNode(@"/synclock/untaggedlink");
-			{
-				bool temp;
-				if (node != null && Boolean.TryParse(node.InnerText, out temp))
-					SyncLockByUntaggedLinks = temp;
-			}
-			node = document.SelectSingleNode(@"/synclock/inactivelink");
-			{
-				bool temp;
-				if (node != null && Boolean.TryParse(node.InnerText, out temp))
-					SyncLockByInactiveLinks = temp;
-			}
-			node = document.SelectSingleNode(@"/synclock/unconvertedvideo");
-			{
-				bool temp;
-				if (node != null && Boolean.TryParse(node.InnerText, out temp))
-					SyncLockByUnconvertedVideo = temp;
-			}
-			node = document.SelectSingleNode(@"/synclock/email");
-			if (node != null)
-				SyncSupportEmail = node.InnerText;
 		}
 
 		private void LoadArchiveLinksSettings()

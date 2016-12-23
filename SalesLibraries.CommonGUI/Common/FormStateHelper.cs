@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
@@ -30,9 +29,7 @@ namespace SalesLibraries.CommonGUI.Common
 			_stateStorageFile = new StorageFile(storagePath.RelativePathParts.Merge(String.Format("{0}-{1}", filePrefix, StorageName)));
 			_showMaximized = showMaximized;
 			_saveSate = saveSate;
-			_form.WindowState = FormWindowState.Normal;
 			_form.Load += (o, e) => LoadState();
-			_form.FormClosed += (o, e) => SaveState();
 		}
 
 		public static FormStateHelper Init(Form targetForm, StorageDirectory storagePath, string filePrefix, bool showMaximized, bool saveSate)
@@ -42,7 +39,6 @@ namespace SalesLibraries.CommonGUI.Common
 
 		public void LoadState()
 		{
-
 			FormState state;
 			if (SessionStates.ContainsKey(_formKey))
 				state = SessionStates[_formKey];
@@ -52,33 +48,41 @@ namespace SalesLibraries.CommonGUI.Common
 				SessionStates.Add(_formKey, state);
 			}
 
-			_form.StartPosition = FormStartPosition.CenterScreen;
-			if (state.WindowState == FormWindowState.Maximized)
-				_form.WindowState = FormWindowState.Maximized;
+			if (state.Configured)
+			{
+				_form.StartPosition = FormStartPosition.Manual;
+				if (state.Left.HasValue && state.Top.HasValue)
+					_form.Location = new Point(state.Left.Value, state.Top.Value);
+				if (state.Width.HasValue && state.Height.HasValue)
+				{
+					_form.Width = state.Width.Value;
+					_form.Height = state.Height.Value;
+				}
+				_form.WindowState = state.WindowState ?? 
+					(_showMaximized ? FormWindowState.Maximized : FormWindowState.Normal);
+			}
 			else
 			{
+				_form.StartPosition = FormStartPosition.CenterScreen;
 				_form.WindowState = _showMaximized ? FormWindowState.Maximized : FormWindowState.Normal;
-				if (state.Configured)
-				{
-					_form.StartPosition = FormStartPosition.Manual;
-					if (state.Left.HasValue && state.Top.HasValue)
-						_form.Location = new Point(state.Left.Value, state.Top.Value);
-					if (state.Width.HasValue && state.Height.HasValue)
-					{
-						_form.Width = state.Width.Value;
-						_form.Height = state.Height.Value;
-					}
-				}
 			}
+
+
+			_form.FormClosed += (o, e) => SaveState();
+			_form.Resize += (o, e) => SaveState();
+			_form.LocationChanged += (o, e) => SaveState();
 		}
 
 		private void SaveState()
 		{
-			SessionStates[_formKey].WindowState = _form.WindowState;
-			SessionStates[_formKey].Left = _form.WindowState == FormWindowState.Normal ? _form.Location.X : (int?)null;
-			SessionStates[_formKey].Top = _form.WindowState == FormWindowState.Normal ? _form.Location.Y : (int?)null;
-			SessionStates[_formKey].Width = _form.WindowState == FormWindowState.Normal ? _form.Width : (int?)null;
-			SessionStates[_formKey].Height = _form.WindowState == FormWindowState.Normal ? _form.Height : (int?)null;
+			if (_form.WindowState != FormWindowState.Minimized)
+			{
+				SessionStates[_formKey].Left = _form.Location.X;
+				SessionStates[_formKey].Top = _form.Location.Y;
+				SessionStates[_formKey].Width = _form.WindowState == FormWindowState.Normal ? _form.Width : (int?)null;
+				SessionStates[_formKey].Height = _form.WindowState == FormWindowState.Normal ? _form.Height : (int?)null;
+				SessionStates[_formKey].WindowState = _form.WindowState;
+			}
 			if (_saveSate)
 				SessionStates[_formKey].SaveToFile(_stateStorageFile.LocalPath);
 		}
@@ -91,7 +95,7 @@ namespace SalesLibraries.CommonGUI.Common
 			public int? Height { get; set; }
 			public FormWindowState? WindowState { get; set; }
 
-			public bool Configured => Left.HasValue && Top.HasValue && Width.HasValue && Height.HasValue;
+			public bool Configured => Left.HasValue && Top.HasValue;
 
 			public static FormState LoadFromFile(string filePath)
 			{
@@ -146,13 +150,14 @@ namespace SalesLibraries.CommonGUI.Common
 				xml.AppendLine(@"<Location>");
 				if (WindowState.HasValue)
 					xml.AppendLine(@"<State>" + (Int32)WindowState + @"</State>");
-				if (WindowState != FormWindowState.Maximized)
-				{
+				if (Left.HasValue)
 					xml.AppendLine(@"<X>" + Left + @"</X>");
+				if (Top.HasValue)
 					xml.AppendLine(@"<Y>" + Top + @"</Y>");
+				if (Width.HasValue)
 					xml.AppendLine(@"<Width>" + Width + @"</Width>");
+				if (Height.HasValue)
 					xml.AppendLine(@"<Height>" + Height + @"</Height>");
-				}
 				xml.AppendLine(@"</Location>");
 				using (var sw = new StreamWriter(filePath, false))
 				{

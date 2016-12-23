@@ -23,7 +23,8 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 
 		public bool IsBottom => DataGridView != null && Index == DataGridView.RowCount - 1;
 
-		public bool IsOpenable => Source is LibraryObjectLink && !(Source is LinkBundleLink);
+		public bool Inaccessable => Source is LibraryFileLink && ((LibraryFileLink)Source).IsDead;
+		public bool IsOpenable => Source is LibraryObjectLink && !(Source is LinkBundleLink) && !Inaccessable;
 
 		public bool IsLinkBundleCompatible => Source is LibraryObjectLink && !(Source is LibraryFolderLink);
 

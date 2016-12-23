@@ -413,6 +413,16 @@ namespace SalesLibraries.CloudAdmin.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap LinkAddVimeo {
+            get {
+                object obj = ResourceManager.GetObject("LinkAddVimeo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap LinkAddYoutube {
             get {
                 object obj = ResourceManager.GetObject("LinkAddYoutube", resourceCulture);
@@ -726,16 +736,6 @@ namespace SalesLibraries.CloudAdmin.Properties {
         internal static System.Drawing.Bitmap SettingsColumnTitle {
             get {
                 object obj = ResourceManager.GetObject("SettingsColumnTitle", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap SettingsEmailList {
-            get {
-                object obj = ResourceManager.GetObject("SettingsEmailList", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

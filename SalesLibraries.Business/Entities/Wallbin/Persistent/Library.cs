@@ -20,7 +20,6 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 		public DateTime? SyncDate { get; set; }
 		public string SettingsEncoded { get; set; }
 		public string SyncSettingsEncoded { get; set; }
-		public string InactiveLinksEncoded { get; set; }
 		public string ProgramDataEncoded { get; set; }
 		public string CalendarEncoded { get; set; }
 		public virtual ICollection<LibraryPage> Pages { get; set; }
@@ -43,14 +42,6 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 		{
 			get { return _syncSettings ?? (_syncSettings = SettingsContainer.CreateInstance<SyncSettings>(this, SyncSettingsEncoded)); }
 			set { _syncSettings = value; }
-		}
-
-		private InactiveLinksSettings _inactiveLinksSettings;
-		[NotMapped, JsonIgnore]
-		public InactiveLinksSettings InactiveLinksSettings
-		{
-			get { return _inactiveLinksSettings ?? (_inactiveLinksSettings = SettingsContainer.CreateInstance<InactiveLinksSettings>(this, InactiveLinksEncoded)); }
-			set { _inactiveLinksSettings = value; }
 		}
 
 		private ProgramDataSettings _programData;
@@ -99,7 +90,6 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 			{
 				SettingsEncoded = Settings.Serialize();
 				SyncSettingsEncoded = SyncSettings.Serialize();
-				InactiveLinksEncoded = InactiveLinksSettings.Serialize();
 				ProgramDataEncoded = ProgramData.Serialize();
 				CalendarEncoded = Calendar.Serialize();
 			}
@@ -116,7 +106,6 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 		{
 			Settings = null;
 			SyncSettings = null;
-			InactiveLinksSettings = null;
 			ProgramData = null;
 			Calendar = null;
 		}

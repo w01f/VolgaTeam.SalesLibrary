@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using DevComponents.DotNetBar;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.FileManager.Controllers;
@@ -20,6 +21,23 @@ namespace SalesLibraries.FileManager
 		{
 			Text = String.Format(TitleTemplate, AppProfileManager.Instance.LibraryAlias);
 			ConfigureRibbon();
+		}
+
+		public void UpdateAppTitle()
+		{
+			var libraryDirectory = new DirectoryInfo(MainController.Instance.WallbinViews.ActiveWallbin.DataStorage.DataSourceFolderPath);
+
+			var title = !String.IsNullOrEmpty(libraryDirectory.Name) ? libraryDirectory.Name : "Site Admin";
+
+			ribbonBarHomeWallbin.Text = title;
+			ribbonBarPreferencesLogo.Text = title;
+			ribbonBarCalendarLogo.Text = title;
+			ribbonBarProgramManagerLogo.Text = title;
+			ribbonBarVideoLogo.Text = title;
+			ribbonBarTagsLogo.Text = title;
+			ribbonBarSecurityLogo.Text = title;
+			ribbonBarBundlesLogo.Text = title;
+			ribbonBarSettingsLogo.Text = title;
 		}
 
 		private void ConfigureRibbon()

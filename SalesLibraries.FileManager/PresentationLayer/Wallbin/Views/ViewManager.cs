@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using DevExpress.XtraEditors;
 using SalesLibraries.Common.DataState;
 using SalesLibraries.FileManager.Controllers;
 using SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.Clipboard;
@@ -80,9 +79,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 			DataStateObserver.Instance.RaiseLibrarySelected();
 		}
 
-		public void SaveActiveWallbin()
+		public void SaveActiveWallbin(bool runInQueue)
 		{
-			ActiveWallbin?.SaveData();
+			ActiveWallbin?.SaveData(runInQueue);
 		}
 
 		private void UpdateViewState(object sender, EventArgs e)
@@ -98,16 +97,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 
 		private void OnLibraryChanging(object sender, EventArgs e)
 		{
-			SaveActiveWallbin();
-		}
-
-		private void OnSelectedLibraryChanged(object sender, EventArgs eventArgs)
-		{
-			var editor = sender as ComboBoxEdit;
-			var selectedView = editor?.EditValue as IWallbinView;
-			if (selectedView == null) return;
-			MainController.Instance.ProcessManager.RunInQueue("Loading Library...",
-				() => MainController.Instance.MainForm.Invoke(new MethodInvoker(() => SetActiveWallbin(selectedView))));
+			SaveActiveWallbin(true);
 		}
 
 		private void OnLibraryDataChanged(object sender, EventArgs e)

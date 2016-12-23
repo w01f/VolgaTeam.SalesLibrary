@@ -32,13 +32,6 @@ namespace SalesLibraries.Business.Contexts.Wallbin.Local
 			target.SyncSettings.MinimizeOnSync = legacyLibrary.MinimizeOnSync;
 			target.SyncSettings.ShowProgress = legacyLibrary.ShowProgressDuringSync;
 
-			target.InactiveLinksSettings.Enable = legacyLibrary.EnableInactiveLinks;
-			target.InactiveLinksSettings.ShowBoldWarning = legacyLibrary.InactiveLinksBoldWarning;
-			target.InactiveLinksSettings.ShowMessageAtStartup = legacyLibrary.InactiveLinksMessageAtStartup;
-			target.InactiveLinksSettings.ReplaceInactiveLinksWithLineBreak = legacyLibrary.ReplaceInactiveLinksWithLineBreak;
-			target.InactiveLinksSettings.SendEmail = legacyLibrary.SendEmail;
-			target.InactiveLinksSettings.EmailList.AddRange(legacyLibrary.EmailList);
-
 			target.ProgramData.Enable = legacyLibrary.EnableProgramManagerSync;
 			target.ProgramData.Path = legacyLibrary.ProgramManagerLocation;
 

@@ -135,7 +135,6 @@
           <xsd:element name="dateAdd" type="xsd:string" />
           <xsd:element name="dateModify" type="xsd:string" />
           <xsd:element name="contentPath" type="xsd:string" />
-          <xsd:element name="isDead" type="xsd:boolean" />
         </xsd:all>
       </xsd:complexType>
       <xsd:complexType name="BaseLinkSettings">

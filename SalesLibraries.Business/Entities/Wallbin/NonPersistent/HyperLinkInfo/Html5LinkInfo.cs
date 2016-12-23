@@ -4,5 +4,11 @@
 	{
 		public override HyperLinkTypeEnum LinkType => HyperLinkTypeEnum.Html5;
 		public bool ForcePreview { get; set; }
+
+		public override void SetDefaults()
+		{
+			base.SetDefaults();
+			ForcePreview = true;
+		}
 	}
 }

@@ -54,6 +54,8 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Contro
 				case FileTypes.Url:
 				case FileTypes.YouTube:
 				case FileTypes.Html5:
+				case FileTypes.QPageLink:
+				case FileTypes.Vimeo:
 					Utils.OpenFile(((HyperLink)Link).Url);
 					break;
 				case FileTypes.Network:

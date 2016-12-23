@@ -34,7 +34,7 @@
 			this.textEditName = new DevExpress.XtraEditors.TextEdit();
 			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
 			this.laName = new System.Windows.Forms.Label();
-			this.colorEditWindowBorderColor = new CommonGUI.Common.HtmlColorEdit();
+			this.colorEditWindowBorderColor = new SalesLibraries.CommonGUI.Common.HtmlColorEdit();
 			this.laBorderColor = new System.Windows.Forms.Label();
 			this.rbWindowHeaderAlignmentRight = new System.Windows.Forms.RadioButton();
 			this.rbHeaderAlignmentCenter = new System.Windows.Forms.RadioButton();
@@ -42,14 +42,14 @@
 			this.laHeaderAlignment = new System.Windows.Forms.Label();
 			this.buttonEditWindowHeaderFont = new DevExpress.XtraEditors.ButtonEdit();
 			this.laHeaderFont = new System.Windows.Forms.Label();
-			this.colorEditWindowForeColor = new CommonGUI.Common.HtmlColorEdit();
+			this.colorEditWindowForeColor = new SalesLibraries.CommonGUI.Common.HtmlColorEdit();
 			this.laHeaderBackColor = new System.Windows.Forms.Label();
-			this.colorEditWindowBackColor = new CommonGUI.Common.HtmlColorEdit();
+			this.colorEditWindowBackColor = new SalesLibraries.CommonGUI.Common.HtmlColorEdit();
 			this.ckApllyForAllWindowsAppearance = new System.Windows.Forms.CheckBox();
 			this.laForeColor = new System.Windows.Forms.Label();
-			this.colorEditWindowHeaderBackColor = new CommonGUI.Common.HtmlColorEdit();
+			this.colorEditWindowHeaderBackColor = new SalesLibraries.CommonGUI.Common.HtmlColorEdit();
 			this.laBackColor = new System.Windows.Forms.Label();
-			this.colorEditWindowHeaderForeColor = new CommonGUI.Common.HtmlColorEdit();
+			this.colorEditWindowHeaderForeColor = new SalesLibraries.CommonGUI.Common.HtmlColorEdit();
 			this.laHeaderForeColor = new System.Windows.Forms.Label();
 			this.xtraTabPageWidget = new DevExpress.XtraTab.XtraTabPage();
 			this.pnWidgetContainer = new System.Windows.Forms.Panel();
@@ -143,7 +143,7 @@
 			this.xtraTabPageAppearance.Controls.Add(this.colorEditWindowHeaderForeColor);
 			this.xtraTabPageAppearance.Controls.Add(this.laHeaderForeColor);
 			this.xtraTabPageAppearance.Name = "xtraTabPageAppearance";
-			this.xtraTabPageAppearance.Size = new System.Drawing.Size(558, 272);
+			this.xtraTabPageAppearance.Size = new System.Drawing.Size(562, 275);
 			this.xtraTabPageAppearance.Text = "Appearance";
 			// 
 			// textEditName
@@ -156,7 +156,7 @@
 			this.textEditName.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.textEditName.Properties.Appearance.Options.UseBackColor = true;
 			this.textEditName.Properties.Appearance.Options.UseForeColor = true;
-			this.textEditName.Size = new System.Drawing.Size(392, 22);
+			this.textEditName.Size = new System.Drawing.Size(396, 22);
 			this.textEditName.StyleController = this.styleController;
 			this.textEditName.TabIndex = 36;
 			// 
@@ -188,6 +188,7 @@
 			// 
 			// colorEditWindowBorderColor
 			// 
+			this.colorEditWindowBorderColor.Color = System.Drawing.Color.Empty;
 			this.colorEditWindowBorderColor.EditValue = System.Drawing.Color.Empty;
 			this.colorEditWindowBorderColor.Location = new System.Drawing.Point(153, 112);
 			this.colorEditWindowBorderColor.Name = "colorEditWindowBorderColor";
@@ -196,7 +197,8 @@
 			this.colorEditWindowBorderColor.Properties.Appearance.Options.UseBackColor = true;
 			this.colorEditWindowBorderColor.Properties.Appearance.Options.UseForeColor = true;
 			this.colorEditWindowBorderColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-			new DevExpress.XtraEditors.Controls.EditorButton () });
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+			this.colorEditWindowBorderColor.Properties.Color = System.Drawing.Color.Empty;
 			this.colorEditWindowBorderColor.Size = new System.Drawing.Size(100, 22);
 			this.colorEditWindowBorderColor.StyleController = this.styleController;
 			this.colorEditWindowBorderColor.TabIndex = 34;
@@ -275,7 +277,7 @@
 			this.buttonEditWindowHeaderFont.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
 			this.buttonEditWindowHeaderFont.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-			this.buttonEditWindowHeaderFont.Size = new System.Drawing.Size(392, 22);
+			this.buttonEditWindowHeaderFont.Size = new System.Drawing.Size(396, 22);
 			this.buttonEditWindowHeaderFont.StyleController = this.styleController;
 			this.buttonEditWindowHeaderFont.TabIndex = 28;
 			// 
@@ -293,15 +295,17 @@
 			// colorEditWindowForeColor
 			// 
 			this.colorEditWindowForeColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.colorEditWindowForeColor.Color = System.Drawing.Color.Empty;
 			this.colorEditWindowForeColor.EditValue = System.Drawing.Color.Empty;
-			this.colorEditWindowForeColor.Location = new System.Drawing.Point(445, 75);
+			this.colorEditWindowForeColor.Location = new System.Drawing.Point(449, 75);
 			this.colorEditWindowForeColor.Name = "colorEditWindowForeColor";
 			this.colorEditWindowForeColor.Properties.Appearance.BackColor = System.Drawing.Color.White;
 			this.colorEditWindowForeColor.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.colorEditWindowForeColor.Properties.Appearance.Options.UseBackColor = true;
 			this.colorEditWindowForeColor.Properties.Appearance.Options.UseForeColor = true;
 			this.colorEditWindowForeColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-			new DevExpress.XtraEditors.Controls.EditorButton () });
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+			this.colorEditWindowForeColor.Properties.Color = System.Drawing.Color.Empty;
 			this.colorEditWindowForeColor.Size = new System.Drawing.Size(100, 22);
 			this.colorEditWindowForeColor.StyleController = this.styleController;
 			this.colorEditWindowForeColor.TabIndex = 27;
@@ -320,15 +324,17 @@
 			// colorEditWindowBackColor
 			// 
 			this.colorEditWindowBackColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.colorEditWindowBackColor.Color = System.Drawing.Color.Empty;
 			this.colorEditWindowBackColor.EditValue = System.Drawing.Color.Empty;
-			this.colorEditWindowBackColor.Location = new System.Drawing.Point(445, 41);
+			this.colorEditWindowBackColor.Location = new System.Drawing.Point(449, 41);
 			this.colorEditWindowBackColor.Name = "colorEditWindowBackColor";
 			this.colorEditWindowBackColor.Properties.Appearance.BackColor = System.Drawing.Color.White;
 			this.colorEditWindowBackColor.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.colorEditWindowBackColor.Properties.Appearance.Options.UseBackColor = true;
 			this.colorEditWindowBackColor.Properties.Appearance.Options.UseForeColor = true;
 			this.colorEditWindowBackColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-			new DevExpress.XtraEditors.Controls.EditorButton () });
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+			this.colorEditWindowBackColor.Properties.Color = System.Drawing.Color.Empty;
 			this.colorEditWindowBackColor.Size = new System.Drawing.Size(100, 22);
 			this.colorEditWindowBackColor.StyleController = this.styleController;
 			this.colorEditWindowBackColor.TabIndex = 26;
@@ -352,7 +358,7 @@
 			this.laForeColor.AutoSize = true;
 			this.laForeColor.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.laForeColor.ForeColor = System.Drawing.Color.Black;
-			this.laForeColor.Location = new System.Drawing.Point(299, 78);
+			this.laForeColor.Location = new System.Drawing.Point(303, 78);
 			this.laForeColor.Name = "laForeColor";
 			this.laForeColor.Size = new System.Drawing.Size(118, 16);
 			this.laForeColor.TabIndex = 12;
@@ -360,6 +366,7 @@
 			// 
 			// colorEditWindowHeaderBackColor
 			// 
+			this.colorEditWindowHeaderBackColor.Color = System.Drawing.Color.Empty;
 			this.colorEditWindowHeaderBackColor.EditValue = System.Drawing.Color.Empty;
 			this.colorEditWindowHeaderBackColor.Location = new System.Drawing.Point(153, 41);
 			this.colorEditWindowHeaderBackColor.Name = "colorEditWindowHeaderBackColor";
@@ -368,7 +375,8 @@
 			this.colorEditWindowHeaderBackColor.Properties.Appearance.Options.UseBackColor = true;
 			this.colorEditWindowHeaderBackColor.Properties.Appearance.Options.UseForeColor = true;
 			this.colorEditWindowHeaderBackColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-			new DevExpress.XtraEditors.Controls.EditorButton () });
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+			this.colorEditWindowHeaderBackColor.Properties.Color = System.Drawing.Color.Empty;
 			this.colorEditWindowHeaderBackColor.Size = new System.Drawing.Size(100, 22);
 			this.colorEditWindowHeaderBackColor.StyleController = this.styleController;
 			this.colorEditWindowHeaderBackColor.TabIndex = 24;
@@ -379,7 +387,7 @@
 			this.laBackColor.AutoSize = true;
 			this.laBackColor.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.laBackColor.ForeColor = System.Drawing.Color.Black;
-			this.laBackColor.Location = new System.Drawing.Point(299, 44);
+			this.laBackColor.Location = new System.Drawing.Point(303, 44);
 			this.laBackColor.Name = "laBackColor";
 			this.laBackColor.Size = new System.Drawing.Size(122, 16);
 			this.laBackColor.TabIndex = 9;
@@ -387,6 +395,7 @@
 			// 
 			// colorEditWindowHeaderForeColor
 			// 
+			this.colorEditWindowHeaderForeColor.Color = System.Drawing.Color.Empty;
 			this.colorEditWindowHeaderForeColor.EditValue = System.Drawing.Color.Empty;
 			this.colorEditWindowHeaderForeColor.Location = new System.Drawing.Point(153, 75);
 			this.colorEditWindowHeaderForeColor.Name = "colorEditWindowHeaderForeColor";
@@ -395,7 +404,8 @@
 			this.colorEditWindowHeaderForeColor.Properties.Appearance.Options.UseBackColor = true;
 			this.colorEditWindowHeaderForeColor.Properties.Appearance.Options.UseForeColor = true;
 			this.colorEditWindowHeaderForeColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-			new DevExpress.XtraEditors.Controls.EditorButton () });
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+			this.colorEditWindowHeaderForeColor.Properties.Color = System.Drawing.Color.Empty;
 			this.colorEditWindowHeaderForeColor.Size = new System.Drawing.Size(100, 22);
 			this.colorEditWindowHeaderForeColor.StyleController = this.styleController;
 			this.colorEditWindowHeaderForeColor.TabIndex = 25;
@@ -418,8 +428,8 @@
 			this.xtraTabPageWidget.Controls.Add(this.pnWidgetContainer);
 			this.xtraTabPageWidget.Controls.Add(this.pnApllyForAllWindowsWidget);
 			this.xtraTabPageWidget.Name = "xtraTabPageWidget";
-			this.xtraTabPageWidget.Size = new System.Drawing.Size(558, 272);
-			this.xtraTabPageWidget.Text = "Widget";
+			this.xtraTabPageWidget.Size = new System.Drawing.Size(562, 275);
+			this.xtraTabPageWidget.Text = "Widget Icon";
 			// 
 			// pnWidgetContainer
 			// 
@@ -427,7 +437,7 @@
 			this.pnWidgetContainer.ForeColor = System.Drawing.Color.Black;
 			this.pnWidgetContainer.Location = new System.Drawing.Point(0, 0);
 			this.pnWidgetContainer.Name = "pnWidgetContainer";
-			this.pnWidgetContainer.Size = new System.Drawing.Size(558, 242);
+			this.pnWidgetContainer.Size = new System.Drawing.Size(562, 245);
 			this.pnWidgetContainer.TabIndex = 35;
 			// 
 			// pnApllyForAllWindowsWidget
@@ -435,9 +445,9 @@
 			this.pnApllyForAllWindowsWidget.Controls.Add(this.ckApllyForAllWindowsWidget);
 			this.pnApllyForAllWindowsWidget.Dock = System.Windows.Forms.DockStyle.Bottom;
 			this.pnApllyForAllWindowsWidget.ForeColor = System.Drawing.Color.Black;
-			this.pnApllyForAllWindowsWidget.Location = new System.Drawing.Point(0, 242);
+			this.pnApllyForAllWindowsWidget.Location = new System.Drawing.Point(0, 245);
 			this.pnApllyForAllWindowsWidget.Name = "pnApllyForAllWindowsWidget";
-			this.pnApllyForAllWindowsWidget.Size = new System.Drawing.Size(558, 30);
+			this.pnApllyForAllWindowsWidget.Size = new System.Drawing.Size(562, 30);
 			this.pnApllyForAllWindowsWidget.TabIndex = 38;
 			// 
 			// ckApllyForAllWindowsWidget
@@ -448,9 +458,9 @@
 			this.ckApllyForAllWindowsWidget.ForeColor = System.Drawing.Color.Black;
 			this.ckApllyForAllWindowsWidget.Location = new System.Drawing.Point(7, 5);
 			this.ckApllyForAllWindowsWidget.Name = "ckApllyForAllWindowsWidget";
-			this.ckApllyForAllWindowsWidget.Size = new System.Drawing.Size(195, 20);
+			this.ckApllyForAllWindowsWidget.Size = new System.Drawing.Size(223, 20);
 			this.ckApllyForAllWindowsWidget.TabIndex = 34;
-			this.ckApllyForAllWindowsWidget.Text = "Apply Widget to All Windows";
+			this.ckApllyForAllWindowsWidget.Text = "Apply Widget Icon to All Windows";
 			this.ckApllyForAllWindowsWidget.UseVisualStyleBackColor = true;
 			// 
 			// xtraTabPageBanner
@@ -460,8 +470,8 @@
 			this.xtraTabPageBanner.Controls.Add(this.pnBannerContainer);
 			this.xtraTabPageBanner.Controls.Add(this.pnApllyForAllWindowsBanner);
 			this.xtraTabPageBanner.Name = "xtraTabPageBanner";
-			this.xtraTabPageBanner.Size = new System.Drawing.Size(558, 272);
-			this.xtraTabPageBanner.Text = "Banner";
+			this.xtraTabPageBanner.Size = new System.Drawing.Size(562, 275);
+			this.xtraTabPageBanner.Text = "Clipart Logo";
 			// 
 			// pnBannerContainer
 			// 
@@ -469,7 +479,7 @@
 			this.pnBannerContainer.ForeColor = System.Drawing.Color.Black;
 			this.pnBannerContainer.Location = new System.Drawing.Point(0, 0);
 			this.pnBannerContainer.Name = "pnBannerContainer";
-			this.pnBannerContainer.Size = new System.Drawing.Size(558, 242);
+			this.pnBannerContainer.Size = new System.Drawing.Size(562, 245);
 			this.pnBannerContainer.TabIndex = 36;
 			// 
 			// pnApllyForAllWindowsBanner
@@ -477,9 +487,9 @@
 			this.pnApllyForAllWindowsBanner.Controls.Add(this.ckApllyForAllWindowsBanner);
 			this.pnApllyForAllWindowsBanner.Dock = System.Windows.Forms.DockStyle.Bottom;
 			this.pnApllyForAllWindowsBanner.ForeColor = System.Drawing.Color.Black;
-			this.pnApllyForAllWindowsBanner.Location = new System.Drawing.Point(0, 242);
+			this.pnApllyForAllWindowsBanner.Location = new System.Drawing.Point(0, 245);
 			this.pnApllyForAllWindowsBanner.Name = "pnApllyForAllWindowsBanner";
-			this.pnApllyForAllWindowsBanner.Size = new System.Drawing.Size(558, 30);
+			this.pnApllyForAllWindowsBanner.Size = new System.Drawing.Size(562, 30);
 			this.pnApllyForAllWindowsBanner.TabIndex = 37;
 			// 
 			// ckApllyForAllWindowsBanner
@@ -489,9 +499,9 @@
 			this.ckApllyForAllWindowsBanner.ForeColor = System.Drawing.Color.Black;
 			this.ckApllyForAllWindowsBanner.Location = new System.Drawing.Point(7, 5);
 			this.ckApllyForAllWindowsBanner.Name = "ckApllyForAllWindowsBanner";
-			this.ckApllyForAllWindowsBanner.Size = new System.Drawing.Size(195, 20);
+			this.ckApllyForAllWindowsBanner.Size = new System.Drawing.Size(223, 20);
 			this.ckApllyForAllWindowsBanner.TabIndex = 33;
-			this.ckApllyForAllWindowsBanner.Text = "Apply Banner to All Windows";
+			this.ckApllyForAllWindowsBanner.Text = "Apply Clipart Logo to All Windows";
 			this.ckApllyForAllWindowsBanner.UseVisualStyleBackColor = true;
 			// 
 			// pnBottom

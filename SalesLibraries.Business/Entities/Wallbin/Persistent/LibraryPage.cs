@@ -192,19 +192,18 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 			return ColumnTitles;
 		}
 
-		public void AddFolder(int columnOrder)
+		public LibraryFolder AddFolder(int columnOrder)
 		{
 			var rowOrder = Folders.Any(f => f.ColumnOrder == columnOrder) ? Folders.Where(f => f.ColumnOrder == columnOrder).Max(f => f.RowOrder) + 1 : 0;
-			AddFolder(
-				CreateEntity<LibraryFolder>(folder =>
-				{
-					folder.Name = String.Format("Window {0}", (folder.RowOrder + 1).ToString("#,##0"));
-					var defaultFolder = Folders.FirstOrDefault();
-					if (defaultFolder != null)
-						ApplyFolderSettings(folder, defaultFolder);
-				}),
-				columnOrder,
-				rowOrder);
+			var newFolder = CreateEntity<LibraryFolder>(folder =>
+			{
+				folder.Name = String.Format("Window {0}", (folder.RowOrder + 1).ToString("#,##0"));
+				var defaultFolder = Folders.FirstOrDefault();
+				if (defaultFolder != null)
+					ApplyFolderSettings(folder, defaultFolder);
+			});
+			AddFolder(newFolder, columnOrder, rowOrder);
+			return newFolder;
 		}
 
 		public void AddFolder(LibraryFolder folder, int columnOrder, int rowOrder)

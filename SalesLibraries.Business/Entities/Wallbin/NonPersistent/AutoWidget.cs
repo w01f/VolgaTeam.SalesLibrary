@@ -45,6 +45,8 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 			}
 		}
 
+		public string WidgetName { get; set; }
+
 		private Image _invertedImage;
 		[JsonIgnore]
 		public Image DisplayedImage

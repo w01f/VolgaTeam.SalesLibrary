@@ -68,22 +68,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.HyperlinkEd
 			{
 				textEditPath.EditValue = ((HyperLinkInfo)templateInfo).Path;
 			}
-			if (templateInfo is UrlLinkInfo)
-			{
-				checkEditForcePreview.Checked = ((UrlLinkInfo)templateInfo).ForcePreview;
-			}
-			if (templateInfo is YouTubeLinkInfo)
-			{
-				checkEditForcePreview.Checked = ((YouTubeLinkInfo)templateInfo).ForcePreview;
-			}
-			if (templateInfo is QuickSiteLinkInfo)
-			{
-				checkEditForcePreview.Checked = ((QuickSiteLinkInfo)templateInfo).ForcePreview;
-			}
-			if (templateInfo is Html5LinkInfo)
-			{
-				checkEditForcePreview.Checked = ((Html5LinkInfo)templateInfo).ForcePreview;
-			}
 		}
 	}
 }

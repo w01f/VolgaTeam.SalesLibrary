@@ -160,6 +160,7 @@ namespace SalesLibraries.FileManager.Controllers
 						await FileStorageManager.Instance.FixDataState();
 					}));
 
+				FormStateHelper.Init(MainForm, Common.Helpers.RemoteResourceManager.Instance.AppAliasSettingsFolder, "Site Admin-Main-Form", false, true);
 				MainForm.Shown += (o, e) =>
 				{
 					if (String.IsNullOrEmpty(Settings.BackupPath) || !Directory.Exists(Settings.BackupPath))
@@ -178,7 +179,6 @@ namespace SalesLibraries.FileManager.Controllers
 					MainForm.InitForm();
 					LoadControllers();
 					LoadData();
-					ProcessInactiveLinks();
 					ProcessManager.RunInQueue("Loading Wallbin...",
 						() => MainForm.Invoke(new MethodInvoker(() => WallbinViews.Load())),
 						() => MainForm.Invoke(new MethodInvoker(() => ShowTab(TabPageEnum.Home))));
@@ -254,7 +254,6 @@ namespace SalesLibraries.FileManager.Controllers
 		{
 			MainForm.pnContainer.Controls.Clear();
 			LoadData();
-			ProcessInactiveLinks();
 			ProcessManager.RunInQueue("Loading Wallbin...",
 				() => MainForm.Invoke(new MethodInvoker(() => WallbinViews.Load())),
 				() => MainForm.Invoke(new MethodInvoker(() => ShowTab())));
@@ -345,21 +344,6 @@ namespace SalesLibraries.FileManager.Controllers
 				TabVideo.InitController();
 				TabCalendar.InitController();
 			})));
-		}
-
-		private void ProcessInactiveLinks()
-		{
-			var libraries = Wallbin.Libraries.Select(context => context.Library).ToList();
-			if (!libraries.Any(l => l.InactiveLinksSettings.Enable && l.InactiveLinksSettings.ShowMessageAtStartup)) return;
-			ProcessManager.Run("Checking Inactive Links...", cancelationToken => InactiveLinkManager.Instance.Load(libraries));
-			if (InactiveLinkManager.Instance.DeadLinks.Any() || InactiveLinkManager.Instance.ExpiredLinks.Any())
-			{
-				using (var warningForm = new FormInactiveLinksNotification())
-				{
-					if (warningForm.ShowDialog(MainForm) == DialogResult.OK)
-						InactiveLinkManager.Instance.FixLinks();
-				}
-			}
 		}
 	}
 }

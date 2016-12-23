@@ -23,6 +23,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 		private bool _allowHandleEvents;
 		private readonly BaseLibraryLink _sourceLink;
 		private Image _originalImage;
+		private string _originalImageName;
 
 		public LinkSettingsType[] EditableSettings => new[]
 		{
@@ -152,6 +153,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 			checkEditInvert.Checked = _sourceLink.Widget.Inverted;
 			colorEditInversionColor.EditValue = _sourceLink.Widget.InversionColor;
 			_originalImage = _sourceLink.Widget.WidgetType == WidgetType.CustomWidget ? _sourceLink.Widget.Image : null;
+			_originalImageName = _sourceLink.Widget.WidgetType == WidgetType.CustomWidget ? _sourceLink.Widget.ImageName : null;
 			switch (_sourceLink.Widget.WidgetType)
 			{
 				case WidgetType.AutoWidget:
@@ -181,6 +183,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 			{
 				_sourceLink.Widget.WidgetType = WidgetType.AutoWidget;
 				_sourceLink.Widget.Image = null;
+				_sourceLink.Widget.ImageName = null;
 			}
 			else if (radioButtonWidgetTypeCustom.Checked)
 			{
@@ -190,11 +193,13 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 					? colorEditInversionColor.Color
 					: GraphicObjectExtensions.DefaultInversionColor;
 				_sourceLink.Widget.Image = _originalImage;
+				_sourceLink.Widget.ImageName = _originalImageName;
 			}
 			else if (radioButtonWidgetTypeDisabled.Checked)
 			{
 				_sourceLink.Widget.WidgetType = WidgetType.NoWidget;
 				_sourceLink.Widget.Image = null;
+				_sourceLink.Widget.ImageName = null;
 			}
 			_sourceLink.Banner.Enable = !_sourceLink.Widget.Enabled && _sourceLink.Banner.Enable;
 		}
@@ -237,6 +242,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 			if (_allowHandleEvents)
 			{
 				_originalImage = e.Image;
+				_originalImageName = e.Text;
 				UpdateCustomDisplayImage();
 			}
 		}
@@ -280,7 +286,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 		{
 			if (pbCustomWidget.Image == null) return;
 			var favoritesContainer = xtraTabControlGallery.TabPages.OfType<FavoritesImagesContainer>().FirstOrDefault();
-			((FavoriteImageGroup) favoritesContainer?.ParentImageGroup)?.AddImage<Widget>(pbCustomWidget.Image, String.Format("colorized_widget_{0:yyyyMMddhhmmss}", DateTime.Now));
+			((FavoriteImageGroup)favoritesContainer?.ParentImageGroup)?.AddImage<Widget>(pbCustomWidget.Image, String.Format("{0}_{1}", _originalImageName, colorEditInversionColor.Color.ToHex()));
 		}
 
 		private void contextMenuStripImage_Opening(object sender, CancelEventArgs e)

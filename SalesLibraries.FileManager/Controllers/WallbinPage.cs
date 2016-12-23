@@ -93,8 +93,6 @@ namespace SalesLibraries.FileManager.Controllers
 			MainController.Instance.MainForm.buttonItemPreferencesPages.Click += buttonItemPreferencesPages_Click;
 			MainController.Instance.MainForm.buttonItemPreferencesColumns.Click += buttonItemPreferencesColumns_Click;
 			MainController.Instance.MainForm.buttonItemPreferencesAutoWidgets.Click += buttonItemPreferencesAutoWidgets_Click;
-			MainController.Instance.MainForm.buttonItemPreferencesDeadLinks.Click += buttonItemPreferencesDeadLinks_Click;
-			MainController.Instance.MainForm.buttonItemPreferencesEmailList.Click += buttonItemPreferencesEmailList_Click;
 			MainController.Instance.MainForm.buttonItemSettingsLibraries.Click += buttonItemSettingsLibraries_Click;
 			MainController.Instance.MainForm.buttonItemSettingsSyncSettings.Click += buttonItemSettingsSync_Click;
 			MainController.Instance.MainForm.buttonItemSettingsAdvanced.Click += buttonItemSettingsAdvanced_Click;
@@ -181,7 +179,7 @@ namespace SalesLibraries.FileManager.Controllers
 		public void ProcessChanges()
 		{
 			if (!IsActive) return;
-			MainController.Instance.WallbinViews.SaveActiveWallbin();
+			MainController.Instance.WallbinViews.SaveActiveWallbin(false);
 		}
 
 		public void UpdateWallbin()
@@ -202,17 +200,19 @@ namespace SalesLibraries.FileManager.Controllers
 			MainController.Instance.MainForm.buttonItemHomeAddUrl.Enabled =
 			MainController.Instance.MainForm.buttonItemHomeAddLineBreak.Enabled = selectedFolder != null;
 
-			MainController.Instance.MainForm.buttonItemHomeLinkDelete.Enabled =
+			MainController.Instance.MainForm.buttonItemHomeLinkOpen.Enabled = selectedLink != null && selectedLink.IsOpenable;
+			MainController.Instance.MainForm.buttonItemHomeLinkDelete.Enabled = selectedLink != null;
+
 			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesNotes.Enabled =
 			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesSecurity.Enabled =
 			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesWidget.Enabled =
 			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesBanner.Enabled =
-			MainController.Instance.MainForm.buttonItemHomeLinkOpen.Enabled = selectedLink != null;
-			MainController.Instance.MainForm.buttonItemHomeLinkOpen.Enabled = selectedLink != null && selectedLink.IsOpenable;
+			MainController.Instance.MainForm.buttonItemHomeLinkOpen.Enabled = selectedLink != null && !selectedLink.Inaccessable;
 
 			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesTags.Enabled =
 			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesExpirationDate.Enabled =
 				selectedLink != null &&
+				!selectedLink.Inaccessable &&
 				!(selectedLink.Source is LineBreak);
 		}
 
@@ -381,52 +381,6 @@ namespace SalesLibraries.FileManager.Controllers
 				(context, original, current) => MainController.Instance.ProcessManager.Run("Saving Changes...", cancelationToken => original.Save(context, current)));
 			if (!resut) return;
 			MainController.Instance.ProcessManager.RunInQueue("Loading Library...", () => MainController.Instance.MainForm.Invoke(new MethodInvoker(UpdateWallbin)));
-		}
-
-		private void buttonItemPreferencesDeadLinks_Click(object sender, EventArgs e)
-		{
-			ProcessChanges();
-			var library = MainController.Instance.WallbinViews.ActiveWallbin.DataStorage.Library;
-			var resut = library.PerformTransaction(MainController.Instance.WallbinViews.ActiveWallbin.DataStorage,
-				libraryCopy =>
-				{
-					using (var form = new FormDeadLinks())
-					{
-						form.Library = libraryCopy;
-						if (form.ShowDialog(MainController.Instance.MainForm) == DialogResult.OK)
-						{
-							libraryCopy.MarkAsModified();
-							return true;
-						}
-						return false;
-					}
-				},
-				copyMethod => MainController.Instance.ProcessManager.Run("Preparing Data...", cancelationToken => copyMethod()),
-				(context, original, current) => MainController.Instance.ProcessManager.Run("Saving Changes...", cancelationToken => original.Save(context, current)));
-			if (!resut) return;
-			MainController.Instance.ProcessManager.RunInQueue("Loading Library...", () => MainController.Instance.MainForm.Invoke(new MethodInvoker(UpdateWallbin)));
-		}
-
-		private void buttonItemPreferencesEmailList_Click(object sender, EventArgs e)
-		{
-			ProcessChanges();
-			var library = MainController.Instance.WallbinViews.ActiveWallbin.DataStorage.Library;
-			library.PerformTransaction(MainController.Instance.WallbinViews.ActiveWallbin.DataStorage,
-				libraryCopy =>
-				{
-					using (var form = new FormEmailList())
-					{
-						form.Library = libraryCopy;
-						if (form.ShowDialog(MainController.Instance.MainForm) == DialogResult.OK)
-						{
-							libraryCopy.MarkAsModified();
-							return true;
-						}
-						return false;
-					}
-				},
-				copyMethod => MainController.Instance.ProcessManager.Run("Preparing Data...", cancelationToken => copyMethod()),
-				(context, original, current) => MainController.Instance.ProcessManager.Run("Saving Changes...", cancelationToken => original.Save(context, current)));
 		}
 
 		private void buttonItemSettingsLibraries_Click(object sender, EventArgs e)

@@ -25,12 +25,13 @@ namespace SalesLibraries.CommonGUI.BackgroundProcesses
 			_mainForm = mainForm;
 			_title = title;
 		}
-		
+
 		public void Run(string title, Action<CancellationToken> process, Action afterComplete = null)
 		{
 			using (var form = new FormProgressCommon())
 			{
 				form.Title = title;
+				form.StartPosition = FormStartPosition.CenterParent;
 				RunWithProgress(form, false, process, cancellationToken => { afterComplete?.Invoke(); });
 			}
 		}
@@ -118,11 +119,13 @@ namespace SalesLibraries.CommonGUI.BackgroundProcesses
 				Interlocked.Decrement(ref _processesInQueue);
 			if (currentProcess == null)
 			{
-				_mainForm.Invoke(new MethodInvoker(() =>
-				{
-					_formProgress.Hide();
-					Utils.ActivateForm(_mainForm.Handle, true, false);
-				}));
+				if (!_mainForm.IsDisposed)
+					_mainForm.Invoke(new MethodInvoker(() =>
+					{
+						_formProgress.Hide();
+						if (_mainForm.WindowState != FormWindowState.Minimized)
+							Utils.ActivateForm(_mainForm.Handle, _mainForm.WindowState == FormWindowState.Maximized, false);
+					}));
 				return;
 			}
 			if (!currentProcess.ShowProgress)
@@ -130,11 +133,14 @@ namespace SalesLibraries.CommonGUI.BackgroundProcesses
 			Interlocked.Increment(ref _processesInQueue);
 			Task.Run(async () =>
 			{
-				if (currentProcess.ShowProgress)
+				if (currentProcess.ShowProgress && !_mainForm.IsDisposed)
 					_mainForm.Invoke(new MethodInvoker(() =>
 					{
 						_formProgress.Visible = false;
 						_formProgress.laProgress.Text = currentProcess.Title;
+						_formProgress.StartPosition = FormStartPosition.Manual;
+						_formProgress.Left = _mainForm.Left + (_mainForm.Width - _formProgress.Width) / 2;
+						_formProgress.Top = _mainForm.Top + (_mainForm.Height - _formProgress.Height) / 2;
 						_formProgress.Show(_mainForm);
 						_formProgress.laProgress.Refresh();
 						Application.DoEvents();

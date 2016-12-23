@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Drawing;
-using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using SalesLibraries.Business.Entities.Common;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
@@ -65,6 +64,18 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 					OnSettingsChanged();
 				}
 				_image = value;
+			}
+		}
+
+		private string _imageName;
+		public string ImageName
+		{
+			get { return _imageName; }
+			set
+			{
+				if (_imageName != value)
+					OnSettingsChanged();
+				_imageName = value;
 			}
 		}
 

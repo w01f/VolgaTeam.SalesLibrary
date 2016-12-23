@@ -15,10 +15,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 		{
 			get
 			{
-				if (ParentFileLink.IsDead &&
-					ParentLink.ParentLibrary.InactiveLinksSettings.Enable &&
-					(ParentLink.ParentLibrary.InactiveLinksSettings.ShowBoldWarning ||
-						ParentLink.ParentLibrary.InactiveLinksSettings.ReplaceInactiveLinksWithLineBreak))
+				if (ParentFileLink.IsDead)
 					return String.Empty;
 				return base.Note;
 			}
@@ -27,19 +24,6 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 				if (_note != value)
 					OnSettingsChanged();
 				_note = value;
-			}
-		}
-
-		[JsonIgnore]
-		public override bool DisplayAsBold
-		{
-			get
-			{
-				if (ParentFileLink.IsDead &&
-					ParentLink.ParentLibrary.InactiveLinksSettings.Enable &&
-					ParentLink.ParentLibrary.InactiveLinksSettings.ShowBoldWarning)
-					return true;
-				return base.DisplayAsBold;
 			}
 		}
 	}

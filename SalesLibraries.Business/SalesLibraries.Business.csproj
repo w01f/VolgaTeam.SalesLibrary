@@ -134,6 +134,7 @@
     <Compile Include="Entities\Wallbin\NonPersistent\HyperLinkInfo\LanLinkInfo.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\HyperLinkInfo\QuickSiteLinkInfo.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\HyperLinkInfo\Html5LinkInfo.cs" />
+    <Compile Include="Entities\Wallbin\NonPersistent\HyperLinkInfo\VimeoLinkInfo.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\HyperLinkInfo\YouTubeLinkInfo.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\HyperLinkInfo\UrlLinkInfo.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\LinkBundleSettings\BaseBundleItem.cs" />
@@ -165,6 +166,7 @@
     <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\TagSettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\QuickSiteSettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\Html5LinkSettings.cs" />
+    <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\VimeoSettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\YouTubeSettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\WebLinkSettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\VideoLinkSettings.cs" />
@@ -175,7 +177,6 @@
     <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\LibraryObjectLinkSettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\ProgramDataSettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\SourceLink.cs" />
-    <Compile Include="Entities\Wallbin\NonPersistent\InactiveLinksSettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\SyncSettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\CalendarSettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\WidgetSettings.cs" />
@@ -208,6 +209,7 @@
     <Compile Include="Entities\Wallbin\Persistent\Links\HyperLink.cs" />
     <Compile Include="Entities\Wallbin\Persistent\Links\QuickSiteLink.cs" />
     <Compile Include="Entities\Wallbin\Persistent\Links\Html5Link.cs" />
+    <Compile Include="Entities\Wallbin\Persistent\Links\VimeoLink.cs" />
     <Compile Include="Entities\Wallbin\Persistent\Links\YouTubeLink.cs" />
     <Compile Include="Entities\Wallbin\Persistent\Links\WebLink.cs" />
     <Compile Include="Entities\Wallbin\Persistent\Links\WordLink.cs" />
@@ -248,6 +250,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Schema\Wallbin\Version5\sequense.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Schema\Wallbin\Version6\library.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Schema\Wallbin\Version6\sequense.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

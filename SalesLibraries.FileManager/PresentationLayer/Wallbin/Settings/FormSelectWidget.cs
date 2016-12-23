@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using DevComponents.DotNetBar.Metro;
 using DevExpress.XtraTab;
 using SalesLibraries.Common.Extensions;
+using SalesLibraries.Common.Helpers;
 using SalesLibraries.Common.Objects.Graphics;
 using SalesLibraries.CommonGUI.RetractableBar;
 using SalesLibraries.FileManager.Controllers;
@@ -18,6 +19,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 	{
 		private bool _loading;
 		public Image OriginalImage { get; set; }
+		public string OriginalImageName { get; set; }
 
 		public FormSelectWidget()
 		{
@@ -119,7 +121,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 
 		private void OnSelectedWidgetChanged(object sender, LinkImageEventArgs e)
 		{
-			OriginalImage= e.Image;
+			OriginalImage = e.Image;
+			OriginalImageName = e.Text;
 			UpdateDisplayImage();
 		}
 
@@ -164,12 +167,14 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 
 		private void toolStripMenuItemImageAddToFavorites_Click(object sender, EventArgs e)
 		{
-
+			if (pbSelectedWidget.Image == null) return;
+			var favoritesContainer = xtraTabControlGallery.TabPages.OfType<FavoritesImagesContainer>().FirstOrDefault();
+			((FavoriteImageGroup)favoritesContainer?.ParentImageGroup)?.AddImage<Widget>(pbSelectedWidget.Image, String.Format("{0}_{1}", OriginalImageName, colorEditInversionColor.Color.ToHex()));
 		}
 
 		private void contextMenuStripImage_Opening(object sender, CancelEventArgs e)
 		{
-
+			e.Cancel = !checkEditInvert.Checked || pbSelectedWidget.Image == null || colorEditInversionColor.Color == Color.White;
 		}
 	}
 }

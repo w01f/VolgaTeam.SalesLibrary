@@ -38,6 +38,7 @@
 			this.buttonXUrl = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXInternal = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXHtml5 = new DevComponents.DotNetBar.ButtonX();
+			this.buttonXVimeo = new DevComponents.DotNetBar.ButtonX();
 			this.SuspendLayout();
 			// 
 			// buttonXCancel
@@ -46,7 +47,7 @@
 			this.buttonXCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXCancel.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.buttonXCancel.Location = new System.Drawing.Point(782, 463);
+			this.buttonXCancel.Location = new System.Drawing.Point(561, 537);
 			this.buttonXCancel.Name = "buttonXCancel";
 			this.buttonXCancel.Size = new System.Drawing.Size(93, 32);
 			this.buttonXCancel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -60,7 +61,7 @@
 			this.buttonXSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXSave.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXSave.DialogResult = System.Windows.Forms.DialogResult.OK;
-			this.buttonXSave.Location = new System.Drawing.Point(673, 463);
+			this.buttonXSave.Location = new System.Drawing.Point(452, 537);
 			this.buttonXSave.Name = "buttonXSave";
 			this.buttonXSave.Size = new System.Drawing.Size(93, 32);
 			this.buttonXSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -75,9 +76,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.pnEditContainer.BackColor = System.Drawing.Color.Transparent;
 			this.pnEditContainer.ForeColor = System.Drawing.Color.Black;
-			this.pnEditContainer.Location = new System.Drawing.Point(0, 68);
+			this.pnEditContainer.Location = new System.Drawing.Point(0, 142);
 			this.pnEditContainer.Name = "pnEditContainer";
-			this.pnEditContainer.Size = new System.Drawing.Size(882, 385);
+			this.pnEditContainer.Size = new System.Drawing.Size(661, 385);
 			this.pnEditContainer.TabIndex = 33;
 			// 
 			// buttonXApp
@@ -85,7 +86,7 @@
 			this.buttonXApp.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
 			this.buttonXApp.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXApp.Image = global::SalesLibraries.CloudAdmin.Properties.Resources.LinkAddApp;
-			this.buttonXApp.Location = new System.Drawing.Point(778, 12);
+			this.buttonXApp.Location = new System.Drawing.Point(556, 79);
 			this.buttonXApp.Name = "buttonXApp";
 			this.buttonXApp.Size = new System.Drawing.Size(103, 46);
 			this.buttonXApp.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -98,7 +99,7 @@
 			this.buttonXQuickSite.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
 			this.buttonXQuickSite.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXQuickSite.Image = global::SalesLibraries.CloudAdmin.Properties.Resources.LinkAddQuickSite;
-			this.buttonXQuickSite.Location = new System.Drawing.Point(260, 12);
+			this.buttonXQuickSite.Location = new System.Drawing.Point(556, 12);
 			this.buttonXQuickSite.Name = "buttonXQuickSite";
 			this.buttonXQuickSite.Size = new System.Drawing.Size(103, 46);
 			this.buttonXQuickSite.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -111,7 +112,7 @@
 			this.buttonXLan.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
 			this.buttonXLan.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXLan.Image = global::SalesLibraries.CloudAdmin.Properties.Resources.LinkAddNetwork;
-			this.buttonXLan.Location = new System.Drawing.Point(648, 12);
+			this.buttonXLan.Location = new System.Drawing.Point(370, 79);
 			this.buttonXLan.Name = "buttonXLan";
 			this.buttonXLan.Size = new System.Drawing.Size(103, 46);
 			this.buttonXLan.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -124,7 +125,7 @@
 			this.buttonXYouTube.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
 			this.buttonXYouTube.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXYouTube.Image = global::SalesLibraries.CloudAdmin.Properties.Resources.LinkAddYoutube;
-			this.buttonXYouTube.Location = new System.Drawing.Point(130, 12);
+			this.buttonXYouTube.Location = new System.Drawing.Point(186, 12);
 			this.buttonXYouTube.Name = "buttonXYouTube";
 			this.buttonXYouTube.Size = new System.Drawing.Size(103, 46);
 			this.buttonXYouTube.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -150,7 +151,7 @@
 			this.buttonXInternal.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
 			this.buttonXInternal.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXInternal.Image = global::SalesLibraries.CloudAdmin.Properties.Resources.LinkAddInternal;
-			this.buttonXInternal.Location = new System.Drawing.Point(518, 12);
+			this.buttonXInternal.Location = new System.Drawing.Point(186, 79);
 			this.buttonXInternal.Name = "buttonXInternal";
 			this.buttonXInternal.Size = new System.Drawing.Size(103, 46);
 			this.buttonXInternal.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -163,7 +164,7 @@
 			this.buttonXHtml5.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
 			this.buttonXHtml5.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXHtml5.Image = global::SalesLibraries.CloudAdmin.Properties.Resources.LinkAddHtml5;
-			this.buttonXHtml5.Location = new System.Drawing.Point(390, 12);
+			this.buttonXHtml5.Location = new System.Drawing.Point(0, 79);
 			this.buttonXHtml5.Name = "buttonXHtml5";
 			this.buttonXHtml5.Size = new System.Drawing.Size(103, 46);
 			this.buttonXHtml5.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -171,11 +172,25 @@
 			this.buttonXHtml5.Tag = "6";
 			this.buttonXHtml5.Text = "HTML5";
 			// 
+			// buttonXVimeo
+			// 
+			this.buttonXVimeo.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXVimeo.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXVimeo.Image = global::SalesLibraries.CloudAdmin.Properties.Resources.LinkAddVimeo;
+			this.buttonXVimeo.Location = new System.Drawing.Point(370, 12);
+			this.buttonXVimeo.Name = "buttonXVimeo";
+			this.buttonXVimeo.Size = new System.Drawing.Size(103, 46);
+			this.buttonXVimeo.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXVimeo.TabIndex = 38;
+			this.buttonXVimeo.Tag = "7";
+			this.buttonXVimeo.Text = "Vimeo";
+			// 
 			// FormAddHyperLink
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
 			this.BackColor = System.Drawing.Color.White;
-			this.ClientSize = new System.Drawing.Size(882, 502);
+			this.ClientSize = new System.Drawing.Size(661, 576);
+			this.Controls.Add(this.buttonXVimeo);
 			this.Controls.Add(this.buttonXInternal);
 			this.Controls.Add(this.buttonXApp);
 			this.Controls.Add(this.buttonXQuickSite);
@@ -213,5 +228,6 @@
 		private DevComponents.DotNetBar.ButtonX buttonXApp;
 		private DevComponents.DotNetBar.ButtonX buttonXInternal;
 		private DevComponents.DotNetBar.ButtonX buttonXHtml5;
+		private DevComponents.DotNetBar.ButtonX buttonXVimeo;
 	}
 }

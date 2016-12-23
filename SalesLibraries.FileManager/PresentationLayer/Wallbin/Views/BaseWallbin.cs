@@ -80,7 +80,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 			ActivePage.Suspend();
 			ActivePage.ShowPage();
 			ActivePage.Resume();
-
+			MainController.Instance.MainForm.UpdateAppTitle();
 			pnContainer.BringToFront();
 		}
 
@@ -103,15 +103,21 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 			}
 		}
 
-		public void SaveData()
+		public void SaveData(bool runInQueue)
 		{
 			MainController.Instance.WallbinViews.Selection.Reset();
 			CorruptedLinksHelper.DeleteCorruptedLinks(DataStorage.Library);
 			if (!IsDataChanged) return;
-			MainController.Instance.ProcessManager.RunInQueue("Saving Changes...",() =>
-			{
-				DataStorage.SaveChanges();
-			});
+			if (runInQueue)
+				MainController.Instance.ProcessManager.RunInQueue("Saving Changes...", () =>
+				 {
+					 DataStorage.SaveChanges();
+				 });
+			else
+				MainController.Instance.ProcessManager.Run("Saving Changes...", cancelletionToken =>
+				{
+					DataStorage.SaveChanges();
+				});
 			IsDataChanged = false;
 		}
 
@@ -142,7 +148,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 
 		private void OnPageChanging(object sender, EventArgs e)
 		{
-			SaveData();
+			SaveData(true);
 		}
 
 		public virtual void SelectPage(IPageView pageView)

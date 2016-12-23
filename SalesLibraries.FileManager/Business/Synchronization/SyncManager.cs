@@ -8,9 +8,7 @@ using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings;
 using SalesLibraries.Business.Entities.Wallbin.Persistent;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.Common.Configuration;
-using SalesLibraries.Common.Extensions;
 using SalesLibraries.Common.Helpers;
-using SalesLibraries.Common.Objects.RemoteStorage;
 using SalesLibraries.Common.OfficeInterops;
 using SalesLibraries.Common.Synchronization;
 using SalesLibraries.FileManager.Business.PreviewGenerators;
@@ -29,28 +27,9 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 			var targetContext = MainController.Instance.WallbinViews.ActiveWallbin.DataStorage;
 			var targetLibrary = targetContext.Library;
 
-			var isSyncLock = false;
-			var uncompletedTags = 0;
-			var unconvertedVideos = 0;
-			var inactiveLinks = 0;
-			MainController.Instance.ProcessManager.Run("Checking library...", cancellationToken =>
-			{
-				isSyncLock = targetLibrary.IsLockedForSync(out uncompletedTags, out unconvertedVideos, out inactiveLinks);
-			});
-			if (isSyncLock)
-			{
-				using (var form = new FormSyncLock(uncompletedTags, inactiveLinks, unconvertedVideos))
-				{
-					form.ShowDialog();
-				}
-				return;
-			}
-
 			if ((MainController.Instance.Settings.NetworkPaths.Any() && MainController.Instance.Settings.NetworkPaths.Any(p => !Directory.Exists(p))) ||
 				MainController.Instance.Settings.WebPaths.Any() && MainController.Instance.Settings.WebPaths.Any(p => !Directory.Exists(p)))
 				MainController.Instance.PopupMessages.ShowWarning("Some of your Upload Directories are Not connected.Your changes will still be saved in your Source Directory.");
-
-			InactiveLinkManager.Instance.NotifyAboutExpiredLinks(targetLibrary.InactiveLinksSettings);
 
 			MainController.Instance.MainForm.ribbonControl.Enabled = false;
 
@@ -62,11 +41,17 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 					if (targetLibrary.SyncSettings.MinimizeOnSync)
 						MainController.Instance.MainForm.WindowState = FormWindowState.Minimized;
 				}));
-				UpdateFolderContent(targetLibrary, cancellationToken);
-				UpdatePowerPointInfo(targetLibrary, cancellationToken);
+
 				ProcessResetLinkSettingsShedulers(targetLibrary, cancellationToken);
-				UpdateFileDates(targetLibrary, cancellationToken);
+
+				UpdateFolderContent(targetLibrary, cancellationToken);
+
+				ApplyOriginalFileStateChangesOnAssociatedLink(targetLibrary, cancellationToken);
+
+				UpdatePowerPointInfo(targetLibrary, cancellationToken);
+
 				UpdatePreviewContent(targetLibrary, cancellationToken);
+
 				targetLibrary.SyncDate = DateTime.Now;
 				targetContext.SaveChanges();
 				if (cancellationToken.IsCancellationRequested) return;
@@ -113,20 +98,18 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 			foreach (var targetContext in MainController.Instance.Wallbin.Libraries)
 			{
 				var targetLibrary = targetContext.Library;
-
-				int uncompletedTags;
-				int unconvertedVideos;
-				int inactiveLinks;
-				var isSyncLock = targetLibrary.IsLockedForSync(out uncompletedTags, out unconvertedVideos, out inactiveLinks);
-				if (isSyncLock)
-					return;
-
 				var cancellationToken = new CancellationToken();
-				UpdateFolderContent(targetLibrary, cancellationToken);
-				UpdatePowerPointInfo(targetLibrary, cancellationToken);
+
 				ProcessResetLinkSettingsShedulers(targetLibrary, cancellationToken);
-				UpdateFileDates(targetLibrary, cancellationToken);
+
+				UpdateFolderContent(targetLibrary, cancellationToken);
+
+				ApplyOriginalFileStateChangesOnAssociatedLink(targetLibrary, cancellationToken);
+
+				UpdatePowerPointInfo(targetLibrary, cancellationToken);
+
 				UpdatePreviewContent(targetLibrary, cancellationToken);
+
 				targetLibrary.SyncDate = DateTime.Now;
 				targetContext.SaveChanges();
 				if (cancellationToken.IsCancellationRequested) return;
@@ -156,14 +139,41 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 				syncLogs.Add(webSyncLog);
 			}
 
+			var deadLinksList = library.Pages
+				.SelectMany(p => p.AllLinks)
+				.OfType<LibraryFileLink>()
+				.Where(f => f.IsDead)
+				.Select(f => f.FullPath)
+				.ToList();
+			var deadLinksFile = Path.Combine(library.Path, Constants.DeadLinkInfoFileName);
+			if (deadLinksList.Any())
+				File.WriteAllLines(deadLinksFile, deadLinksList);
+			else if (File.Exists(deadLinksFile))
+				try
+				{
+					File.Delete(deadLinksFile);
+				}
+				catch
+				{
+				}
+
 			var resultFiles = new List<string>();
 			var tempPath = Path.GetTempPath();
 			resultFiles.AddRange(syncLogs.Select(log => log.Save(tempPath)));
 			resultFiles.Add(Path.Combine(library.Path, Constants.LocalStorageFileName));
 			resultFiles.Add(Path.Combine(library.Path, Constants.LibrariesJsonFileName));
 			resultFiles.Add(Path.Combine(library.Path, Constants.ShortLibraryInfoFileName));
+			if (File.Exists(deadLinksFile))
+				resultFiles.Add(deadLinksFile);
 			resultFiles.Add(RemoteResourceManager.Instance.AppSettingsFile.LocalPath);
-			ArchiveSyncResulst(resultFiles);
+			var archiveFolderPath = Path.Combine(library.Path, Constants.LogArchiveFolderName);
+			if (!Directory.Exists(archiveFolderPath))
+				Directory.CreateDirectory(archiveFolderPath);
+			var archiveDateTime = DateTime.Now;
+			var archiveFilePath = Path.Combine(
+				archiveFolderPath,
+				String.Format("{0}-{1:MMddyy}-{2:hhmmsstt}.zip", Environment.UserName, archiveDateTime, archiveDateTime));
+			Utils.CompressFiles(resultFiles, archiveFilePath);
 		}
 
 		private static void ProcessResetLinkSettingsShedulers(Library library, CancellationToken cancellationToken)
@@ -182,20 +192,24 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 			});
 		}
 
-		private static void UpdateFileDates(Library library, CancellationToken cancellationToken)
-		{
-			var fileLinks = library.Pages.SelectMany(p => p.AllLinks).OfType<LibraryFileLink>().Where(f => !f.IsFolder).ToList();
-			if (!fileLinks.Any()) return;
-			if (cancellationToken.IsCancellationRequested) return;
-			fileLinks.ForEach(f => f.UpdateFileDate());
-		}
-
 		private static void UpdateFolderContent(Library library, CancellationToken cancellationToken)
 		{
 			var folderLinks = library.Pages.SelectMany(p => p.AllLinks).OfType<LibraryFolderLink>().ToList();
 			if (!folderLinks.Any()) return;
 			if (cancellationToken.IsCancellationRequested) return;
 			folderLinks.ForEach(f => f.UpdateContent());
+		}
+
+
+		private static void ApplyOriginalFileStateChangesOnAssociatedLink(Library library, CancellationToken cancellationToken)
+		{
+			var fileLinks = library.Pages.SelectMany(p => p.AllLinks).OfType<LibraryFileLink>().Where(f => !f.IsFolder).ToList();
+			if (!fileLinks.Any()) return;
+			if (cancellationToken.IsCancellationRequested) return;
+			fileLinks.ForEach(f =>
+			{
+				f.ApplyOriginalFileStateChangesOnAssociatedLink();
+			});
 		}
 
 		private static void UpdatePowerPointInfo(Library library, CancellationToken cancellationToken)
@@ -254,16 +268,6 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 				var previewGenerator = previewContainer.GetPreviewGenerator();
 				previewContainer.UpdateContent(previewGenerator, cancellationToken);
 			}
-		}
-
-		private static void ArchiveSyncResulst(IEnumerable<string> resultFiles)
-		{
-			var archiveDateTime = DateTime.Now;
-			var archiveName = String.Format("{0}-{1}", archiveDateTime.ToString("MMddyy"), archiveDateTime.ToString("hhmmsstt"));
-			var archiveFolder = new ArchiveDirectory(Configuration.RemoteResourceManager.Instance.ArchiveFolder.RelativePathParts.Merge(archiveName));
-			AsyncHelper.RunSync(() => archiveFolder.Allocate(false));
-			archiveFolder.AddFiles(resultFiles);
-			AsyncHelper.RunSync(archiveFolder.Upload);
 		}
 	}
 }

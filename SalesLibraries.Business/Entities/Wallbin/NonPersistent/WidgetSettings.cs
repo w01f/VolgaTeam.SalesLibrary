@@ -65,6 +65,17 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 			}
 		}
 
+		private string _imageName;
+		public string ImageName
+		{
+			get { return _imageName; }
+			set
+			{
+				if (_imageName != value)
+					OnSettingsChanged();
+				_imageName = value;
+			}
+		}
 
 		private Image _invertedImage;
 		[JsonIgnore]

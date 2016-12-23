@@ -25,6 +25,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.HyperlinkEd
 			{
 				buttonXUrl.Font = new Font(buttonXUrl.Font.FontFamily, buttonXUrl.Font.Size - 2, buttonXUrl.Font.Style);
 				buttonXYouTube.Font = new Font(buttonXYouTube.Font.FontFamily, buttonXYouTube.Font.Size - 2, buttonXYouTube.Font.Style);
+				buttonXVimeo.Font = new Font(buttonXVimeo.Font.FontFamily, buttonXVimeo.Font.Size - 2, buttonXVimeo.Font.Style);
 				buttonXLan.Font = new Font(buttonXLan.Font.FontFamily, buttonXLan.Font.Size - 2, buttonXLan.Font.Style);
 				buttonXQuickSite.Font = new Font(buttonXQuickSite.Font.FontFamily, buttonXQuickSite.Font.Size - 2, buttonXQuickSite.Font.Style);
 				buttonXHtml5.Font = new Font(buttonXHtml5.Font.FontFamily, buttonXHtml5.Font.Size - 2, buttonXHtml5.Font.Style);
@@ -42,7 +43,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.HyperlinkEd
 				buttonXQuickSite,
 				buttonXHtml5,
 				buttonXApp,
-				buttonXInternal
+				buttonXInternal,
+				buttonXVimeo,
 			});
 
 			_editorSelectors.ForEach(button =>
@@ -95,9 +97,13 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.HyperlinkEd
 					case HyperLinkTypeEnum.Html5:
 						SelectedEditor = new Html5EditControl();
 						break;
+					case HyperLinkTypeEnum.Vimeo:
+						SelectedEditor = new VimeoEditControl();
+						break;
 					default:
 						throw new ArgumentOutOfRangeException("Link type is not found");
 				}
+				_editors.Add(SelectedEditorType, SelectedEditor);
 			}
 			else
 				SelectedEditor = _editors[SelectedEditorType];

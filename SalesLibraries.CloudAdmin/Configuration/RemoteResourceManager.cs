@@ -19,7 +19,6 @@ namespace SalesLibraries.CloudAdmin.Configuration
 		public StorageFile CategoryRequestSettingsFile { get; private set; }
 		public StorageFile ErrorEmailSettingsFile { get; private set; }
 		public StorageFile TabSettingsFile { get; private set; }
-		public StorageFile SyncLockSettingsFile { get; private set; }
 		public StorageFile ArchiveLinksSettingsFile { get; private set; }
 		#endregion
 
@@ -87,11 +86,6 @@ namespace SalesLibraries.CloudAdmin.Configuration
 				"RibbonTabs.xml"
 				));
 			await TabSettingsFile.Download();
-
-			SyncLockSettingsFile = new StorageFile(appOutgoingFolder.RelativePathParts.Merge(
-				"SyncLock.xml"
-				));
-			await SyncLockSettingsFile.Download();
 
 			ArchiveLinksSettingsFile = new StorageFile(appOutgoingFolder.RelativePathParts.Merge(
 			"ArchiveLinksSettings.xml"

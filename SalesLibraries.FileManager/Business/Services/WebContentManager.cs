@@ -36,7 +36,7 @@ namespace SalesLibraries.FileManager.Business.Services
 {
 	static class WebContentManager
 	{
-		public static void GenerateWebContent(SalesLibraries.Business.Entities.Wallbin.Persistent.Library sourceLibrary)
+		public static void GenerateWebContent(Library sourceLibrary)
 		{
 			var targetLibrary = new SoapLibrary();
 			targetLibrary.ImportData(sourceLibrary);
@@ -245,6 +245,7 @@ namespace SalesLibraries.FileManager.Business.Services
 					break;
 				case FileTypes.Url:
 				case FileTypes.YouTube:
+				case FileTypes.Vimeo:
 				case FileTypes.QPageLink:
 				case FileTypes.Html5:
 					if (source is QuickSiteLink)
@@ -322,7 +323,6 @@ namespace SalesLibraries.FileManager.Business.Services
 				target.fileName = sourceFile.NameWithExtension;
 				target.fileExtension = sourceFile.Extension.Replace(".", String.Empty).ToLower();
 				target.fileDate = File.GetLastWriteTime(sourceFile.FullPath).ToString("MM/dd/yyyy hh:mm:ss tt");
-				target.isDead = sourceFile.CheckIfDead();
 				if (!sourceFile.IsFolder)
 					target.fileSize = (Int32)new FileInfo(sourceFile.FullPath).Length;
 			}

@@ -27,6 +27,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 
 		private bool _allowHandleEvents;
 		private string _tempBannerText;
+		private string _originalImageName;
 		private readonly IBannerSettingsHolder _bannerHolder;
 
 		public event EventHandler<CheckedChangedEventArgs> StateChanged;
@@ -143,6 +144,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 					? colorEditInversionColor.Color
 					: GraphicObjectExtensions.DefaultInversionColor;
 				_bannerHolder.Banner.Image = labelControlTitle.Tag as Image;
+				_bannerHolder.Banner.ImageName = _originalImageName;
 				if (checkEditHorizontalAlignmentLeft.Checked)
 					_bannerHolder.Banner.ImageAlignement = HorizontalAlignment.Left;
 				else if (checkEditHorizontalAlignmentCenter.Checked)
@@ -207,9 +209,15 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			checkEditInvert.Checked = banner.Inverted;
 			colorEditInversionColor.EditValue = banner.InversionColor;
 			if (banner.Enable && banner.Image != null)
+			{
 				labelControlTitle.Tag = banner.Image;
+				_originalImageName = banner.ImageName;
+			}
 			else
+			{
 				labelControlTitle.Tag = null;
+				_originalImageName = null;
+			}
 			switch (banner.ImageAlignement)
 			{
 				case HorizontalAlignment.Left:
@@ -271,6 +279,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 					: imageClone.Invert();
 			}
 			labelControlTitle.Appearance.Image = displayImage;
+			labelControlTitle.Text = String.Format(ImageTitleFormat, _bannerHolder.Name, _originalImageName);
 		}
 
 		private void OnEnableButtonClick(object sender, EventArgs e)
@@ -293,7 +302,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 				var banner = buttonXEnable.Checked ? GetDefaultBanner() : GetEmptyBanner();
 				banner.Enable = buttonXEnable.Checked;
 				LoadBanner(banner);
-				_allowHandleEvents = true; 
+				_allowHandleEvents = true;
 			}
 			else
 				StateChanged?.Invoke(this, new CheckedChangedEventArgs(buttonXEnable.Checked));
@@ -302,7 +311,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 		private void OnSelectedBannerChanged(object sender, LinkImageEventArgs e)
 		{
 			labelControlTitle.Tag = e.Image;
-			labelControlTitle.Text = String.Format(ImageTitleFormat, _bannerHolder.Name, e.Text);
+			_originalImageName = e.Text;
 			UpdateCustomDisplayImage();
 		}
 

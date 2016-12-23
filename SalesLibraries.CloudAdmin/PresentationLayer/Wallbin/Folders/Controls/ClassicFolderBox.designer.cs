@@ -81,8 +81,17 @@
 			this.barSubItemFolderPropertiesLinkAdminSetings = new DevExpress.XtraBars.BarSubItem();
 			this.barSubItemFolderPropertiesLinkPdfSetings = new DevExpress.XtraBars.BarSubItem();
 			this.barSubItemFolderPropertiesLinkExcelSetings = new DevExpress.XtraBars.BarSubItem();
-			this.popupMenuFolderProperties = new DevExpress.XtraBars.PopupMenu(this.components);
 			this.barButtonItemFolderPropertiesImageSettings = new DevExpress.XtraBars.BarButtonItem();
+			this.popupMenuFolderProperties = new DevExpress.XtraBars.PopupMenu(this.components);
+			this.barSubItemLinkPropertiesAddHyperlink = new DevExpress.XtraBars.BarSubItem();
+			this.barSubItemLinkPropertiesAddHyperlinkUrl = new DevExpress.XtraBars.BarButtonItem();
+			this.barSubItemLinkPropertiesAddHyperlinkYouTube = new DevExpress.XtraBars.BarButtonItem();
+			this.barSubItemLinkPropertiesAddHyperlinkVimeo = new DevExpress.XtraBars.BarButtonItem();
+			this.barSubItemLinkPropertiesAddHyperlinkQuickSite = new DevExpress.XtraBars.BarButtonItem();
+			this.barSubItemLinkPropertiesAddHyperlinkHtml5 = new DevExpress.XtraBars.BarButtonItem();
+			this.barSubItemLinkPropertiesAddHyperlinkInternal = new DevExpress.XtraBars.BarButtonItem();
+			this.barSubItemLinkPropertiesAddHyperlinkLan = new DevExpress.XtraBars.BarButtonItem();
+			this.barSubItemLinkPropertiesAddHyperlinkApp = new DevExpress.XtraBars.BarButtonItem();
 			this.pnHeader.SuspendLayout();
 			this.pnHeaderBorder.SuspendLayout();
 			this.pnBorders.SuspendLayout();
@@ -127,6 +136,7 @@
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemLinkPropertiesCopy, true),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemLinkPropertiesCut),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemLinkPropertiesPaste),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barSubItemLinkPropertiesAddHyperlink, true),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemLinkPropertiesImageSettings, true),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemLinkPropertiesOpenLink, true),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemLinkPropertiesDelete),
@@ -365,8 +375,17 @@
             this.barSubItemFolderPropertiesLinkAdminSetings,
             this.barSubItemFolderPropertiesLinkPdfSetings,
             this.barSubItemFolderPropertiesLinkExcelSetings,
-            this.barButtonItemFolderPropertiesImageSettings});
-			this.barManager.MaxItemId = 61;
+            this.barButtonItemFolderPropertiesImageSettings,
+            this.barSubItemLinkPropertiesAddHyperlink,
+            this.barSubItemLinkPropertiesAddHyperlinkUrl,
+            this.barSubItemLinkPropertiesAddHyperlinkYouTube,
+            this.barSubItemLinkPropertiesAddHyperlinkVimeo,
+            this.barSubItemLinkPropertiesAddHyperlinkQuickSite,
+            this.barSubItemLinkPropertiesAddHyperlinkHtml5,
+            this.barSubItemLinkPropertiesAddHyperlinkInternal,
+            this.barSubItemLinkPropertiesAddHyperlinkLan,
+            this.barSubItemLinkPropertiesAddHyperlinkApp});
+			this.barManager.MaxItemId = 70;
 			// 
 			// barDockControlTop
 			// 
@@ -562,6 +581,13 @@
 			this.barSubItemFolderPropertiesLinkExcelSetings.Id = 59;
 			this.barSubItemFolderPropertiesLinkExcelSetings.Name = "barSubItemFolderPropertiesLinkExcelSetings";
 			// 
+			// barButtonItemFolderPropertiesImageSettings
+			// 
+			this.barButtonItemFolderPropertiesImageSettings.Caption = "Edit window title artwork";
+			this.barButtonItemFolderPropertiesImageSettings.Id = 60;
+			this.barButtonItemFolderPropertiesImageSettings.Name = "barButtonItemFolderPropertiesImageSettings";
+			this.barButtonItemFolderPropertiesImageSettings.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemFolderPropertiesImageSettings_ItemClick);
+			// 
 			// popupMenuFolderProperties
 			// 
 			this.popupMenuFolderProperties.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
@@ -579,12 +605,76 @@
 			this.popupMenuFolderProperties.Manager = this.barManager;
 			this.popupMenuFolderProperties.Name = "popupMenuFolderProperties";
 			// 
-			// barButtonItemFolderPropertiesImageSettings
+			// barSubItemLinkPropertiesAddHyperlink
 			// 
-			this.barButtonItemFolderPropertiesImageSettings.Caption = "Edit window title artwork";
-			this.barButtonItemFolderPropertiesImageSettings.Id = 60;
-			this.barButtonItemFolderPropertiesImageSettings.Name = "barButtonItemFolderPropertiesImageSettings";
-			this.barButtonItemFolderPropertiesImageSettings.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemFolderPropertiesImageSettings_ItemClick);
+			this.barSubItemLinkPropertiesAddHyperlink.Caption = "Hyperlink";
+			this.barSubItemLinkPropertiesAddHyperlink.Id = 61;
+			this.barSubItemLinkPropertiesAddHyperlink.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.barSubItemLinkPropertiesAddHyperlinkUrl),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barSubItemLinkPropertiesAddHyperlinkYouTube),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barSubItemLinkPropertiesAddHyperlinkVimeo),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barSubItemLinkPropertiesAddHyperlinkQuickSite),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barSubItemLinkPropertiesAddHyperlinkHtml5),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barSubItemLinkPropertiesAddHyperlinkInternal),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barSubItemLinkPropertiesAddHyperlinkLan),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barSubItemLinkPropertiesAddHyperlinkApp)});
+			this.barSubItemLinkPropertiesAddHyperlink.Name = "barSubItemLinkPropertiesAddHyperlink";
+			// 
+			// barSubItemLinkPropertiesAddHyperlinkUrl
+			// 
+			this.barSubItemLinkPropertiesAddHyperlinkUrl.Caption = "URL";
+			this.barSubItemLinkPropertiesAddHyperlinkUrl.Id = 62;
+			this.barSubItemLinkPropertiesAddHyperlinkUrl.Name = "barSubItemLinkPropertiesAddHyperlinkUrl";
+			this.barSubItemLinkPropertiesAddHyperlinkUrl.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barSubItemLinkPropertiesAddHyperlinkUrl_ItemClick);
+			// 
+			// barSubItemLinkPropertiesAddHyperlinkYouTube
+			// 
+			this.barSubItemLinkPropertiesAddHyperlinkYouTube.Caption = "YouTube";
+			this.barSubItemLinkPropertiesAddHyperlinkYouTube.Id = 63;
+			this.barSubItemLinkPropertiesAddHyperlinkYouTube.Name = "barSubItemLinkPropertiesAddHyperlinkYouTube";
+			this.barSubItemLinkPropertiesAddHyperlinkYouTube.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barSubItemLinkPropertiesAddHyperlinkYouTube_ItemClick);
+			// 
+			// barSubItemLinkPropertiesAddHyperlinkVimeo
+			// 
+			this.barSubItemLinkPropertiesAddHyperlinkVimeo.Caption = "Vimeo";
+			this.barSubItemLinkPropertiesAddHyperlinkVimeo.Id = 64;
+			this.barSubItemLinkPropertiesAddHyperlinkVimeo.Name = "barSubItemLinkPropertiesAddHyperlinkVimeo";
+			this.barSubItemLinkPropertiesAddHyperlinkVimeo.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barSubItemLinkPropertiesAddHyperlinkVimeo_ItemClick);
+			// 
+			// barSubItemLinkPropertiesAddHyperlinkQuickSite
+			// 
+			this.barSubItemLinkPropertiesAddHyperlinkQuickSite.Caption = "QuickSite";
+			this.barSubItemLinkPropertiesAddHyperlinkQuickSite.Id = 65;
+			this.barSubItemLinkPropertiesAddHyperlinkQuickSite.Name = "barSubItemLinkPropertiesAddHyperlinkQuickSite";
+			this.barSubItemLinkPropertiesAddHyperlinkQuickSite.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barSubItemLinkPropertiesAddHyperlinkQuickSite_ItemClick);
+			// 
+			// barSubItemLinkPropertiesAddHyperlinkHtml5
+			// 
+			this.barSubItemLinkPropertiesAddHyperlinkHtml5.Caption = "HTML5";
+			this.barSubItemLinkPropertiesAddHyperlinkHtml5.Id = 66;
+			this.barSubItemLinkPropertiesAddHyperlinkHtml5.Name = "barSubItemLinkPropertiesAddHyperlinkHtml5";
+			this.barSubItemLinkPropertiesAddHyperlinkHtml5.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barSubItemLinkPropertiesAddHyperlinkHtml5_ItemClick);
+			// 
+			// barSubItemLinkPropertiesAddHyperlinkInternal
+			// 
+			this.barSubItemLinkPropertiesAddHyperlinkInternal.Caption = "Internal";
+			this.barSubItemLinkPropertiesAddHyperlinkInternal.Id = 67;
+			this.barSubItemLinkPropertiesAddHyperlinkInternal.Name = "barSubItemLinkPropertiesAddHyperlinkInternal";
+			this.barSubItemLinkPropertiesAddHyperlinkInternal.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barSubItemLinkPropertiesAddHyperlinkInternal_ItemClick);
+			// 
+			// barSubItemLinkPropertiesAddHyperlinkLan
+			// 
+			this.barSubItemLinkPropertiesAddHyperlinkLan.Caption = "LAN Link";
+			this.barSubItemLinkPropertiesAddHyperlinkLan.Id = 68;
+			this.barSubItemLinkPropertiesAddHyperlinkLan.Name = "barSubItemLinkPropertiesAddHyperlinkLan";
+			this.barSubItemLinkPropertiesAddHyperlinkLan.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barSubItemLinkPropertiesAddHyperlinkLan_ItemClick);
+			// 
+			// barSubItemLinkPropertiesAddHyperlinkApp
+			// 
+			this.barSubItemLinkPropertiesAddHyperlinkApp.Caption = "App (Exe)";
+			this.barSubItemLinkPropertiesAddHyperlinkApp.Id = 69;
+			this.barSubItemLinkPropertiesAddHyperlinkApp.Name = "barSubItemLinkPropertiesAddHyperlinkApp";
+			this.barSubItemLinkPropertiesAddHyperlinkApp.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barSubItemLinkPropertiesAddHyperlinkApp_ItemClick);
 			// 
 			// ClassicFolderBox
 			// 
@@ -666,5 +756,14 @@
 		private DevExpress.XtraBars.BarSubItem barSubItemFolderPropertiesLinkPdfSetings;
 		private DevExpress.XtraBars.BarSubItem barSubItemFolderPropertiesLinkExcelSetings;
 		private DevExpress.XtraBars.BarButtonItem barButtonItemFolderPropertiesImageSettings;
+		private DevExpress.XtraBars.BarSubItem barSubItemLinkPropertiesAddHyperlink;
+		private DevExpress.XtraBars.BarButtonItem barSubItemLinkPropertiesAddHyperlinkUrl;
+		private DevExpress.XtraBars.BarButtonItem barSubItemLinkPropertiesAddHyperlinkYouTube;
+		private DevExpress.XtraBars.BarButtonItem barSubItemLinkPropertiesAddHyperlinkVimeo;
+		private DevExpress.XtraBars.BarButtonItem barSubItemLinkPropertiesAddHyperlinkQuickSite;
+		private DevExpress.XtraBars.BarButtonItem barSubItemLinkPropertiesAddHyperlinkHtml5;
+		private DevExpress.XtraBars.BarButtonItem barSubItemLinkPropertiesAddHyperlinkInternal;
+		private DevExpress.XtraBars.BarButtonItem barSubItemLinkPropertiesAddHyperlinkLan;
+		private DevExpress.XtraBars.BarButtonItem barSubItemLinkPropertiesAddHyperlinkApp;
 	}
 }

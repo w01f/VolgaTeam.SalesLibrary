@@ -138,7 +138,6 @@
 			// 
 			// checkEditForcePreview
 			// 
-			this.checkEditForcePreview.EditValue = true;
 			this.checkEditForcePreview.Location = new System.Drawing.Point(14, 175);
 			this.checkEditForcePreview.Name = "checkEditForcePreview";
 			this.checkEditForcePreview.Properties.AllowHtmlDraw = DevExpress.Utils.DefaultBoolean.True;

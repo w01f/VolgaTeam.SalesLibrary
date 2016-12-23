@@ -193,17 +193,6 @@ namespace SalesLibraries.Business.Entities.Helpers
 				libraryLink.ResetToDefault(groupsForReset);
 		}
 
-		public static IEnumerable<LibraryFileLink> GetDeadLinks(this IEnumerable<BaseLibraryLink> links)
-		{
-			foreach (var libraryLink in links.OfType<LibraryFileLink>())
-			{
-				var isDead = libraryLink.CheckIfDead();
-				if (isDead || libraryLink.IsDead)
-					libraryLink.IsDead = isDead;
-				if (isDead)
-					yield return libraryLink;
-			}
-		}
 		public static IEnumerable<LibraryObjectLink> GetExpiredLinks(this IEnumerable<BaseLibraryLink> links)
 		{
 			return links.OfType<LibraryObjectLink>().Where(link => link.ExpirationSettings.IsExpired);

@@ -206,6 +206,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 							(Html5LinkInfo)form.SelectedEditor.GetHyperLinkInfo(),
 							DataSource);
 						break;
+					case HyperLinkTypeEnum.Vimeo:
+						newLink = VimeoLink.Create(
+							(VimeoLinkInfo)form.SelectedEditor.GetHyperLinkInfo(),
+							DataSource);
+						break;
 					default:
 						throw new ArgumentOutOfRangeException("Link type not found");
 				}
@@ -572,15 +577,17 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 		#endregion
 
 		#region Folder Data Processing
-		private void EditFolderSettings()
+		public DialogResult EditFolderSettings()
 		{
-			using (var form = new FormWindow(DataSource, new TitleFormParams()))
+			using (var form = new FormWindow(DataSource, new BaseEditFormParams()))
 			{
-				if (form.ShowDialog(MainController.Instance.MainForm) != DialogResult.OK) return;
+				var dialogResult = form.ShowDialog(MainController.Instance.MainForm);
+				if (dialogResult != DialogResult.OK) return dialogResult;
 				UpdateFont();
 				SetupView();
 				UpdateContent(true);
 				DataChanged?.Invoke(this, EventArgs.Empty);
+				return dialogResult;
 			}
 		}
 
@@ -784,6 +791,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 		#region Link Row Events (Editing, Selection, Sizing)
 		private void OnGridCellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
 		{
+			if (e.Button != MouseButtons.Left) return;
 			if (!FormatState.AllowEdit) return;
 			var linkRow = (LinkRow)grFiles.Rows[e.RowIndex];
 			if (!linkRow.AllowEditLinkText) return;
@@ -1160,19 +1168,27 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 			if (e.Button != MouseButtons.Right) return;
 			var linkRow = (LinkRow)grFiles.Rows[e.RowIndex];
 			linkRow.Selected = true;
+
+			barButtonItemLinkPropertiesCopy.Visibility =
+			barButtonItemLinkPropertiesCut.Visibility = !linkRow.Inaccessable ?
+					BarItemVisibility.Always :
+					BarItemVisibility.Never;
 			barButtonItemLinkPropertiesPaste.Visibility =
 				MainController.Instance.WallbinViews.LinksClipboard.IsPasteAvailable(linkRow.Source.ExtId) ?
 					BarItemVisibility.Always :
 					BarItemVisibility.Never;
-			barButtonItemLinkPropertiesImageSettings.Visibility = linkRow.AllowEditImageSettings ?
+			barSubItemLinkPropertiesAddHyperlink.Visibility = !linkRow.Inaccessable ?
+					BarItemVisibility.Always :
+					BarItemVisibility.Never;
+			barButtonItemLinkPropertiesImageSettings.Visibility = !linkRow.Inaccessable && linkRow.AllowEditImageSettings ?
 				BarItemVisibility.Always :
 				BarItemVisibility.Never;
 			barButtonItemLinkPropertiesSecurity.Visibility =
-				MainController.Instance.Settings.EditorSettings.EnableSecurityEdit ?
+				!linkRow.Inaccessable && MainController.Instance.Settings.EditorSettings.EnableSecurityEdit ?
 					BarItemVisibility.Always :
 					BarItemVisibility.Never;
 			barButtonItemLinkPropertiesResetSettings.Visibility =
-				linkRow.Source.GetCustomizedSettigsGroups().Any() ?
+				!linkRow.Inaccessable && linkRow.Source.GetCustomizedSettigsGroups().Any() ?
 					BarItemVisibility.Always :
 					BarItemVisibility.Never;
 			if (linkRow.Source is LineBreak)
@@ -1205,23 +1221,38 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 			}
 			else
 			{
-				barButtonItemLinkPropertiesOpenLink.Visibility = BarItemVisibility.Always;
-				barButtonItemLinkPropertiesFileLocation.Visibility = linkRow.Source is LibraryFileLink
+				barButtonItemLinkPropertiesOpenLink.Visibility = !linkRow.Inaccessable ?
+					BarItemVisibility.Always :
+					BarItemVisibility.Never;
+				barButtonItemLinkPropertiesFileLocation.Visibility = !linkRow.Inaccessable && linkRow.Source is LibraryFileLink
 					? BarItemVisibility.Always
 					: BarItemVisibility.Never;
-				barButtonItemLinkPropertiesAdvancedSettings.Visibility = linkRow.Source is LibraryFolderLink
+				barButtonItemLinkPropertiesLinkSettings.Visibility = !linkRow.Inaccessable
 					? BarItemVisibility.Always
 					: BarItemVisibility.Never;
-				barButtonItemLinkPropertiesRefreshPreview.Visibility = linkRow.Source is PreviewableLink
+				barButtonItemLinkPropertiesAdvancedSettings.Visibility = !linkRow.Inaccessable && linkRow.Source is LibraryFolderLink
 					? BarItemVisibility.Always
 					: BarItemVisibility.Never;
-				barButtonItemLinkPropertiesTags.Visibility = MainController.Instance.Settings.EditorSettings.EnableTagsEdit
+				barButtonItemLinkPropertiesRefreshPreview.Visibility = !linkRow.Inaccessable && linkRow.Source is PreviewableLink
 					? BarItemVisibility.Always
 					: BarItemVisibility.Never;
-				barButtonItemLinkPropertiesExpirationDate.Visibility = BarItemVisibility.Always;
-				barSubItemLinkPropertiesAdminSettings.Visibility = linkRow.Source is DocumentLink ||
+				barButtonItemLinkPropertiesTags.Visibility = !linkRow.Inaccessable && MainController.Instance.Settings.EditorSettings.EnableTagsEdit
+					? BarItemVisibility.Always
+					: BarItemVisibility.Never;
+				barButtonItemLinkPropertiesExpirationDate.Visibility = !linkRow.Inaccessable ?
+					BarItemVisibility.Always :
+					BarItemVisibility.Never;
+				barSubItemLinkPropertiesAdminSettings.Visibility = !linkRow.Inaccessable && (linkRow.Source is DocumentLink ||
 					linkRow.Source is PowerPointLink ||
-					linkRow.Source is ExcelLink ? BarItemVisibility.Always : BarItemVisibility.Never;
+					linkRow.Source is ExcelLink) ?
+					BarItemVisibility.Always :
+					BarItemVisibility.Never;
+				barSubItemLinkPropertiesImages.Visibility =
+				barSubItemLinkPropertiesAdvanced.Visibility =
+				barSubItemLinkPropertiesNotes.Visibility =
+				barSubItemLinkPropertiesTextFormat.Visibility = !linkRow.Inaccessable
+					? BarItemVisibility.Always
+					: BarItemVisibility.Never;
 
 				barButtonItemLinkPropertiesLinkSettings.Caption = "Link Settings";
 				barButtonItemLinkPropertiesDelete.Caption = "Delete this Link";
@@ -1383,6 +1414,46 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 		private void OnLinkPropertiesMenuCloseUp(object sender, EventArgs e)
 		{
 			ApplySingleLinkContextMenuEditorChanges();
+		}
+
+		private void barSubItemLinkPropertiesAddHyperlinkUrl_ItemClick(object sender, ItemClickEventArgs e)
+		{
+			AddHyperLink(BaseNetworkLinkInfo.GetDefault<UrlLinkInfo>());
+		}
+
+		private void barSubItemLinkPropertiesAddHyperlinkYouTube_ItemClick(object sender, ItemClickEventArgs e)
+		{
+			AddHyperLink(BaseNetworkLinkInfo.GetDefault<YouTubeLinkInfo>());
+		}
+
+		private void barSubItemLinkPropertiesAddHyperlinkVimeo_ItemClick(object sender, ItemClickEventArgs e)
+		{
+			AddHyperLink(BaseNetworkLinkInfo.GetDefault<VimeoLinkInfo>());
+		}
+
+		private void barSubItemLinkPropertiesAddHyperlinkQuickSite_ItemClick(object sender, ItemClickEventArgs e)
+		{
+			AddHyperLink(BaseNetworkLinkInfo.GetDefault<QuickSiteLinkInfo>());
+		}
+
+		private void barSubItemLinkPropertiesAddHyperlinkHtml5_ItemClick(object sender, ItemClickEventArgs e)
+		{
+			AddHyperLink(BaseNetworkLinkInfo.GetDefault<Html5LinkInfo>());
+		}
+
+		private void barSubItemLinkPropertiesAddHyperlinkInternal_ItemClick(object sender, ItemClickEventArgs e)
+		{
+			AddHyperLink(BaseNetworkLinkInfo.GetDefault<InternalWallbinLinkInfo>());
+		}
+
+		private void barSubItemLinkPropertiesAddHyperlinkLan_ItemClick(object sender, ItemClickEventArgs e)
+		{
+			AddHyperLink(BaseNetworkLinkInfo.GetDefault<LanLinkInfo>());
+		}
+
+		private void barSubItemLinkPropertiesAddHyperlinkApp_ItemClick(object sender, ItemClickEventArgs e)
+		{
+			AddHyperLink(BaseNetworkLinkInfo.GetDefault<AppLinkInfo>());
 		}
 		#endregion
 

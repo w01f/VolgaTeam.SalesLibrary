@@ -12,8 +12,13 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.HyperLinkInfo
 		public static TLinkInfo GetDefault<TLinkInfo>() where TLinkInfo : BaseNetworkLinkInfo
 		{
 			var linkInfo = Activator.CreateInstance<TLinkInfo>();
-			linkInfo.FormatAsBluelink = true;
+			linkInfo.SetDefaults();
 			return linkInfo;
+		}
+
+		public virtual void SetDefaults()
+		{
+			FormatAsBluelink = true;
 		}
 	}
 }

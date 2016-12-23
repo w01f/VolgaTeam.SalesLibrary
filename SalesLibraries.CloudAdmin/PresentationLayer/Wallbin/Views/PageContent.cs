@@ -8,12 +8,12 @@ using DevExpress.XtraEditors;
 using SalesLibraries.Business.Entities.Helpers;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.Persistent;
-using SalesLibraries.CloudAdmin.Controllers;
-using SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders.Controls;
-using SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettings;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.Common.Objects.SearchTags;
 using SalesLibraries.CommonGUI.Wallbin.ColumnTitles;
+using SalesLibraries.CloudAdmin.Controllers;
+using SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders.Controls;
+using SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettings;
 
 namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 {
@@ -226,8 +226,9 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 
 		private void UpdateFoldersColumnSize(int columnIndex)
 		{
-
-			var width = columnIndex == (LibraryPage.ColumnsCount - 1) ? InnerWidth - (LibraryPage.ColumnsCount - 1) * (InnerWidth / LibraryPage.ColumnsCount) : (InnerWidth / LibraryPage.ColumnsCount);
+			var width = columnIndex == (LibraryPage.ColumnsCount - 1) ?
+				InnerWidth - (LibraryPage.ColumnsCount - 1) * (InnerWidth / LibraryPage.ColumnsCount) :
+				(InnerWidth / LibraryPage.ColumnsCount);
 			var top = _columnTitlePanel.PanelBottom;
 			var left = columnIndex * (InnerWidth / LibraryPage.ColumnsCount);
 			foreach (var folderBox in _folderBoxes
@@ -247,6 +248,23 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 			PageContainer.Page.MoveFolderToPosition(folderBox.DataSource, newColumnPosition, newRowPosition);
 			UpdateFoldersSize();
 			OnFolderDataChanged(this, EventArgs.Empty);
+		}
+
+		private void AddFolder(int columnIndex)
+		{
+			var libraryFolder = PageContainer.Page.AddFolder(columnIndex);
+
+			var folderBox = new ClassicFolderBox(libraryFolder);
+			folderBox.BoxSizeChanged += OnFolderSizeChanged;
+			folderBox.DataChanged += OnFolderDataChanged;
+
+			_folderBoxes.Add(folderBox);
+			Controls.Add(folderBox);
+			folderBox.UpdateContent(false);
+			UpdateFoldersColumnSize(columnIndex);
+			OnFolderDataChanged(this, EventArgs.Empty);
+
+			folderBox.EditFolderSettings();
 		}
 
 		public void DeleteFolder(ClassicFolderBox folderBox)
@@ -406,6 +424,28 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 			var width = _draggedOverColumnIndex == (LibraryPage.ColumnsCount - 1) ? InnerWidth - (LibraryPage.ColumnsCount - 1) * (InnerWidth / LibraryPage.ColumnsCount) : (InnerWidth / LibraryPage.ColumnsCount);
 			var left = width * _draggedOverColumnIndex;
 			e.Graphics.DrawLine(_pen, left, top, (left + width), top);
+		}
+		#endregion
+
+		#region Context Menu
+		private void toolStripMenuItemAddFolder_Click(object sender, EventArgs e)
+		{
+			var clickCoordinates = PointToClient(Cursor.Position);
+			var columnWidth = InnerWidth / LibraryPage.ColumnsCount;
+			int columnIndex;
+			if (clickCoordinates.X < columnWidth)
+				columnIndex = 0;
+			else if (clickCoordinates.X < columnWidth * 2)
+				columnIndex = 1;
+			else
+				columnIndex = 2;
+			AddFolder(columnIndex);
+		}
+
+		private void contextMenuStrip_Opening(object sender, CancelEventArgs e)
+		{
+			var clickCoordinates = PointToClient(Cursor.Position);
+			e.Cancel = _folderBoxes.Any(fb => fb.Bounds.Contains(clickCoordinates));
 		}
 		#endregion
 	}

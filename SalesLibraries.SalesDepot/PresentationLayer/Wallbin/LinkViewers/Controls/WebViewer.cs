@@ -7,6 +7,9 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Contro
 {
 	[IntendForClass(typeof(WebLink))]
 	[IntendForClass(typeof(YouTubeLink))]
+	[IntendForClass(typeof(Html5Link))]
+	[IntendForClass(typeof(QuickSiteLink))]
+	[IntendForClass(typeof(VimeoLink))]
 	[ToolboxItem(false)]
 	public partial class WebViewer : UserControl, ILinkViewer
 	{

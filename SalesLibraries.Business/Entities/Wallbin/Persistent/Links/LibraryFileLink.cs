@@ -77,19 +77,6 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		public override string LinkInfoDisplayName => Settings.TextWordWrap ? NameWithExtension : Name;
 
 		[NotMapped, JsonIgnore]
-		public override string DisplayNameWithoutNote
-		{
-			get
-			{
-				if (!IsDead || !ParentLibrary.InactiveLinksSettings.Enable)
-					return base.DisplayNameWithoutNote;
-				if (!ParentLibrary.InactiveLinksSettings.ShowBoldWarning)
-					return ParentLibrary.InactiveLinksSettings.ReplaceInactiveLinksWithLineBreak ? String.Empty : base.DisplayNameWithoutNote;
-				return String.Format("INACTIVE! {0}", base.DisplayNameWithoutNote);
-			}
-		}
-
-		[NotMapped, JsonIgnore]
 		public override string Hint
 		{
 			get
@@ -97,7 +84,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 				var lines = new List<string>();
 				if (!String.IsNullOrEmpty(((LibraryObjectLinkSettings)Settings).HoverNote))
 					lines.Add(((LibraryObjectLinkSettings)Settings).HoverNote);
-				if (!((LibraryObjectLinkSettings) Settings).ShowOnlyCustomHoverNote)
+				if (!((LibraryObjectLinkSettings)Settings).ShowOnlyCustomHoverNote)
 				{
 					lines.Add(String.Format("{0}: {1}", HintTitle, NameWithExtension));
 					if (!String.Equals(NameWithExtension, RelativePath, StringComparison.OrdinalIgnoreCase))
@@ -220,9 +207,14 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 			return CreateEntity<CommonFileLink>();
 		}
 
-		public void UpdateFileDate()
+		public void ApplyOriginalFileStateChangesOnAssociatedLink()
 		{
-			if (!File.Exists(FullPath)) return;
+			if (IsFolder) return;
+			if (!File.Exists(FullPath))
+			{
+				IsDead = true;
+				return;
+			}
 			var currentDate = new FileInfo(FullPath).LastWriteTime;
 			var savedDate = ((LibraryFileLinkSettings)Settings).FileDate;
 			if (savedDate.HasValue && savedDate < currentDate)

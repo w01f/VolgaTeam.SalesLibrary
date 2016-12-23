@@ -1,67 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:UtilityControllerwsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" xmlns="http://schemas.xmlsoap.org/wsdl/" name="UtilityController" targetNamespace="urn:UtilityControllerwsdl" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types />
-  <wsdl:message name="updateWallbinRequest">
+  <wsdl:message name="updateWallbinIn">
     <wsdl:part name="sessionKey" type="xsd:string" />
   </wsdl:message>
-  <wsdl:message name="updateWallbinResponse">
+  <wsdl:message name="updateWallbinOut">
     <wsdl:part name="return" type="xsd:string" />
   </wsdl:message>
-  <wsdl:message name="updateShortcutsRequest">
+  <wsdl:message name="updateShortcutsIn">
     <wsdl:part name="sessionKey" type="xsd:string" />
   </wsdl:message>
-  <wsdl:message name="updateShortcutsResponse">
+  <wsdl:message name="updateShortcutsOut">
     <wsdl:part name="return" type="xsd:string" />
   </wsdl:message>
-  <wsdl:message name="notifyDeadLinksRequest">
+  <wsdl:message name="updateQuizzesIn">
     <wsdl:part name="sessionKey" type="xsd:string" />
   </wsdl:message>
-  <wsdl:message name="notifyDeadLinksResponse">
+  <wsdl:message name="updateQuizzesOut">
     <wsdl:part name="return" type="xsd:string" />
   </wsdl:message>
-  <wsdl:message name="updateQuizzesRequest">
-    <wsdl:part name="sessionKey" type="xsd:string" />
-  </wsdl:message>
-  <wsdl:message name="updateQuizzesResponse">
-    <wsdl:part name="return" type="xsd:string" />
-  </wsdl:message>
-  <wsdl:message name="getSessionKeyRequest">
+  <wsdl:message name="getSessionKeyIn">
     <wsdl:part name="login" type="xsd:string" />
     <wsdl:part name="password" type="xsd:string" />
   </wsdl:message>
-  <wsdl:message name="getSessionKeyResponse">
+  <wsdl:message name="getSessionKeyOut">
     <wsdl:part name="return" type="xsd:string" />
   </wsdl:message>
   <wsdl:portType name="UtilityControllerPortType">
     <wsdl:operation name="updateWallbin">
       <wsdl:documentation>
       </wsdl:documentation>
-      <wsdl:input message="tns:updateWallbinRequest" />
-      <wsdl:output message="tns:updateWallbinResponse" />
+      <wsdl:input message="tns:updateWallbinIn" />
+      <wsdl:output message="tns:updateWallbinOut" />
     </wsdl:operation>
     <wsdl:operation name="updateShortcuts">
       <wsdl:documentation>
       </wsdl:documentation>
-      <wsdl:input message="tns:updateShortcutsRequest" />
-      <wsdl:output message="tns:updateShortcutsResponse" />
-    </wsdl:operation>
-    <wsdl:operation name="notifyDeadLinks">
-      <wsdl:documentation>
-      </wsdl:documentation>
-      <wsdl:input message="tns:notifyDeadLinksRequest" />
-      <wsdl:output message="tns:notifyDeadLinksResponse" />
+      <wsdl:input message="tns:updateShortcutsIn" />
+      <wsdl:output message="tns:updateShortcutsOut" />
     </wsdl:operation>
     <wsdl:operation name="updateQuizzes">
       <wsdl:documentation>
       </wsdl:documentation>
-      <wsdl:input message="tns:updateQuizzesRequest" />
-      <wsdl:output message="tns:updateQuizzesResponse" />
+      <wsdl:input message="tns:updateQuizzesIn" />
+      <wsdl:output message="tns:updateQuizzesOut" />
     </wsdl:operation>
     <wsdl:operation name="getSessionKey">
       <wsdl:documentation>
       </wsdl:documentation>
-      <wsdl:input message="tns:getSessionKeyRequest" />
-      <wsdl:output message="tns:getSessionKeyResponse" />
+      <wsdl:input message="tns:getSessionKeyIn" />
+      <wsdl:output message="tns:getSessionKeyOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="UtilityControllerBinding" type="tns:UtilityControllerPortType">
@@ -77,15 +65,6 @@
     </wsdl:operation>
     <wsdl:operation name="updateShortcuts">
       <soap:operation soapAction="urn:UtilityControllerwsdl#updateShortcuts" style="rpc" />
-      <wsdl:input>
-        <soap:body use="encoded" namespace="urn:UtilityControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="encoded" namespace="urn:UtilityControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="notifyDeadLinks">
-      <soap:operation soapAction="urn:UtilityControllerwsdl#notifyDeadLinks" style="rpc" />
       <wsdl:input>
         <soap:body use="encoded" namespace="urn:UtilityControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
       </wsdl:input>

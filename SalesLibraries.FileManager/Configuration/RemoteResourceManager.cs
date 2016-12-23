@@ -11,7 +11,6 @@ namespace SalesLibraries.FileManager.Configuration
 
 		#region Local
 		public StorageDirectory MetaDataCacheFolder { get; private set; }
-		public StorageDirectory ArchiveFolder { get; private set; }
 		#endregion
 
 		#region Remote
@@ -19,7 +18,6 @@ namespace SalesLibraries.FileManager.Configuration
 		public StorageFile CategoryRequestSettingsFile { get; private set; }
 		public StorageFile ErrorEmailSettingsFile { get; private set; }
 		public StorageFile TabSettingsFile { get; private set; }
-		public StorageFile SyncLockSettingsFile { get; private set; }
 		public StorageFile ArchiveLinksSettingsFile { get; private set; }
 		#endregion
 
@@ -41,10 +39,6 @@ namespace SalesLibraries.FileManager.Configuration
 					FileStorageManager.LocalFilesFolderName,
 					AppProfileManager.Instance.AppNameSet
 				}, "Cache");
-
-			ArchiveFolder = new StorageDirectory(AppProfileManager.Instance.ProfileFolder.RelativePathParts.Merge("Sync Archive"));
-			if (!await ArchiveFolder.Exists(true))
-				await StorageDirectory.CreateSubFolder(AppProfileManager.Instance.ProfileFolder.RelativePathParts, "Sync Archive", true);
 		}
 
 		public async Task LoadRemote()
@@ -77,11 +71,6 @@ namespace SalesLibraries.FileManager.Configuration
 				"RibbonTabs.xml"
 				));
 			await TabSettingsFile.Download();
-
-			SyncLockSettingsFile = new StorageFile(appOutgoingFolder.RelativePathParts.Merge(
-				"SyncLock.xml"
-				));
-			await SyncLockSettingsFile.Download();
 
 			ArchiveLinksSettingsFile = new StorageFile(appOutgoingFolder.RelativePathParts.Merge(
 			"ArchiveLinksSettings.xml"

@@ -18,6 +18,7 @@
 		QPageLink = 17,
 		Html5 = 18,
 		LinkBundle = 19,
+		Vimeo = 20,
 		Other = 999
 	}
 }
