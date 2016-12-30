@@ -18,7 +18,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 	{
 		private readonly VideoLink _data;
 
-		public LinkSettingsType SettingsType => LinkSettingsType.Notes;
+		public LinkSettingsType[] SupportedSettingsTypes => new[] { LinkSettingsType.Notes, LinkSettingsType.AdminSettings };
 		public int Order => 6;
 		public bool AvailableForEmbedded => true;
 		public SettingsEditorHeaderInfo HeaderInfo => null;
@@ -69,7 +69,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 			MainController.Instance.ProcessManager.Run("Updating Preview files...", cancelationToken =>
 			{
 				_data.ClearPreviewContainer();
-				var previewContainer = _data.GetPreviewContainer();
+				//var previewContainer = _data.GetPreviewContainer();
 				//var previewGenerator = previewContainer.GetPreviewGenerator();
 				//previewContainer.UpdateContent(previewGenerator, cancelationToken);
 			});

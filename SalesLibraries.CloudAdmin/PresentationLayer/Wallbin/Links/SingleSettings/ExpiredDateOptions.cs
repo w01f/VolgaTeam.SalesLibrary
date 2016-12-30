@@ -15,7 +15,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 	{
 		private readonly LibraryObjectLink _data;
 
-		public LinkSettingsType SettingsType => LinkSettingsType.ExpirationDate;
+		public LinkSettingsType[] SupportedSettingsTypes => new[] { LinkSettingsType.ExpirationDate };
 		public int Order => 0;
 		public bool AvailableForEmbedded => false;
 		public SettingsEditorHeaderInfo HeaderInfo => null;

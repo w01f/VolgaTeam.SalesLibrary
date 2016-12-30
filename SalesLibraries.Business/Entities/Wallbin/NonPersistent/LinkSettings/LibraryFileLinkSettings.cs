@@ -15,7 +15,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 		{
 			get
 			{
-				if (ParentFileLink.IsDead)
+				if (ParentFileLink == null || ParentFileLink.IsDead)
 					return String.Empty;
 				return base.Note;
 			}

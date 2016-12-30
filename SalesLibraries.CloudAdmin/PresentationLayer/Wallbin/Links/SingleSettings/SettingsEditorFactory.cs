@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using System.Linq;
 using System.Windows.Forms;
 using SalesLibraries.Business.Entities.Helpers;
+using SalesLibraries.Business.Entities.Interfaces;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
-using SalesLibraries.CloudAdmin.Controllers;
 using SalesLibraries.Common.Helpers;
+using SalesLibraries.CloudAdmin.Controllers;
 
 namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettings
 {
@@ -40,55 +41,23 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 			return dilogResult;
 		}
 
-		public static DialogResult Run(IList<BaseLibraryLink> links, LinkSettingsType settingsType, bool useTransaktion = true)
+		public static DialogResult Run(ILinksGroup linksGroup, LinkSettingsType settingsType, FileTypes? defaultLinkType = null)
 		{
 			var dilogResult = DialogResult.Cancel;
-			if (!links.Any())
-				return dilogResult;
-			if (useTransaktion)
-				links.PerformTransaction(links.First().ParentLibrary.Context,
-				copiedLinks =>
-				{
-					var editForm = ObjectIntendHelper.GetObjectInstances(typeof(ILinkSetSettingsEditForm), null, copiedLinks)
-						.OfType<ILinkSettingsEditForm>()
-						.FirstOrDefault(form => form.EditableSettings.Any(st => st == settingsType));
-					if (editForm != null)
-					{
-						editForm.InitForm<ILinkSetSettingsEditControl>(settingsType);
-						dilogResult = ((Form)editForm).ShowDialog(MainController.Instance.MainForm);
-						((Form)editForm).Dispose();
-						if (dilogResult == DialogResult.OK)
-							foreach (var copiedLink in copiedLinks)
-								copiedLink.MarkAsModified();
-						return dilogResult == DialogResult.OK;
-					}
-					return dilogResult == DialogResult.Cancel;
-				},
-				copyMethod => MainController.Instance.ProcessManager.Run("Preparing Data...", cancelationToken => copyMethod()),
-				(context, originalList, currentList) => MainController.Instance.ProcessManager.Run("Saving Changes...",
-					cancelationToken =>
-					{
-						foreach (var originalLink in originalList)
-						{
-							var currentLink = currentList.First(e => e.Id == originalLink.Id);
-							originalLink.Save(context, currentLink, false);
-						}
-					}));
-			else
+
+			var editForm = ObjectIntendHelper.GetObjectInstances(typeof(ILinkSetSettingsEditForm), null, linksGroup, defaultLinkType)
+					.OfType<ILinkSettingsEditForm>()
+					.FirstOrDefault(form => form.EditableSettings.Any(st => st == settingsType));
+			if (editForm != null)
 			{
-				var editForm = ObjectIntendHelper.GetObjectInstances(typeof(ILinkSetSettingsEditForm), null, links)
-						.OfType<ILinkSettingsEditForm>()
-						.FirstOrDefault(form => form.EditableSettings.Any(st => st == settingsType));
-				if (editForm != null)
-				{
-					editForm.InitForm<ILinkSetSettingsEditControl>(settingsType);
-					dilogResult = ((Form)editForm).ShowDialog(MainController.Instance.MainForm);
-					((Form)editForm).Dispose();
-					if (dilogResult == DialogResult.OK)
-						foreach (var copiedLink in links)
-							copiedLink.MarkAsModified();
-				}
+				editForm.InitForm<ILinkSetSettingsEditControl>(settingsType);
+				dilogResult = ((Form)editForm).ShowDialog(MainController.Instance.MainForm);
+				((Form)editForm).Dispose();
+				if (dilogResult == DialogResult.OK)
+					foreach (var link in linksGroup.AllLinks.Where(link => !defaultLinkType.HasValue || link.Type == defaultLinkType.Value))
+						link.MarkAsModified();
 			}
+
 			return dilogResult;
 		}
 

@@ -14,7 +14,6 @@ using SalesLibraries.FileManager.Business.Models.Connection;
 using SalesLibraries.FileManager.Business.Services;
 using SalesLibraries.FileManager.Business.Synchronization;
 using SalesLibraries.FileManager.Configuration;
-using SalesLibraries.FileManager.PresentationLayer.Wallbin.Libraries;
 using SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings;
 using SalesLibraries.FileManager.PresentationLayer.Wallbin.Views;
 using SalesLibraries.ServiceConnector.Services.Soap;
@@ -160,30 +159,40 @@ namespace SalesLibraries.FileManager.Controllers
 						await FileStorageManager.Instance.FixDataState();
 					}));
 
-				FormStateHelper.Init(MainForm, Common.Helpers.RemoteResourceManager.Instance.AppAliasSettingsFolder, "Site Admin-Main-Form", false, true);
-				MainForm.Shown += (o, e) =>
+				if (String.IsNullOrEmpty(Settings.BackupPath) || !Directory.Exists(Settings.BackupPath))
 				{
-					if (String.IsNullOrEmpty(Settings.BackupPath) || !Directory.Exists(Settings.BackupPath))
+					using (var form = new FormPaths())
 					{
-						using (var form = new FormPaths())
+						if (form.ShowDialog() == DialogResult.OK)
 						{
-							var mainForm = (Form)o;
-							if (form.ShowDialog(mainForm) == DialogResult.OK)
-							{
-								Settings.Save();
-							}
-							else
-								mainForm.Close();
+							Settings.Save();
 						}
+						else
+							appReady = false;
 					}
-					MainForm.InitForm();
-					LoadControllers();
-					LoadData();
-					ProcessManager.RunInQueue("Loading Wallbin...",
-						() => MainForm.Invoke(new MethodInvoker(() => WallbinViews.Load())),
-						() => MainForm.Invoke(new MethodInvoker(() => ShowTab(TabPageEnum.Home))));
-				};
-				Application.Run(MainForm);
+				}
+
+				if (appReady)
+				{
+					ProcessManager.RunStartProcess(
+						"Loading files...",
+						cancellationToken =>
+						{
+							DatabaseConnectionHelper.Connect(Settings.BackupPath);
+							Wallbin.LoadLibrary(Settings.BackupPath);
+						});
+
+					FormStateHelper.Init(MainForm, Common.Helpers.RemoteResourceManager.Instance.AppAliasSettingsFolder, "Site Admin-Main-Form", false, true);
+					MainForm.Shown += (o, e) =>
+					{
+						MainForm.InitForm();
+						LoadControllers();
+						ProcessManager.RunInQueue("Loading Wallbin...",
+							() => MainForm.Invoke(new MethodInvoker(() => WallbinViews.Load())),
+							() => MainForm.Invoke(new MethodInvoker(() => ShowTab(TabPageEnum.Home))));
+					};
+					Application.Run(MainForm);
+				}
 			}
 
 			if (!appReady)
@@ -253,7 +262,8 @@ namespace SalesLibraries.FileManager.Controllers
 		public void ReloadData()
 		{
 			MainForm.pnContainer.Controls.Clear();
-			LoadData();
+			DatabaseConnectionHelper.Connect(Settings.BackupPath);
+			ProcessManager.Run("Loading Files...", cancelationToken => Wallbin.LoadLibrary(Settings.BackupPath));
 			ProcessManager.RunInQueue("Loading Wallbin...",
 				() => MainForm.Invoke(new MethodInvoker(() => WallbinViews.Load())),
 				() => MainForm.Invoke(new MethodInvoker(() => ShowTab())));
@@ -312,12 +322,6 @@ namespace SalesLibraries.FileManager.Controllers
 			SoapServiceConnection.Load(Settings.WebServiceSite);
 			Lists.Load();
 			HelpManager.LoadHelpLinks();
-		}
-
-		private void LoadData()
-		{
-			DatabaseConnectionHelper.Connect(Settings.BackupPath);
-			ProcessManager.Run("Loading Files...", cancelationToken => Wallbin.LoadLibrary(Settings.BackupPath));
 		}
 
 		private void LoadControllers()

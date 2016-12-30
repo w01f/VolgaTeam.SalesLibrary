@@ -368,5 +368,18 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 
 			return link;
 		}
+
+		public static Type GetObjectTypeByLinkType(FileTypes linkType)
+		{
+			switch (linkType)
+			{
+				case FileTypes.Pdf:
+					return typeof(PdfLink);
+				case FileTypes.Excel:
+					return typeof(ExcelLink);
+				default:
+					return typeof(BaseLibraryLink);
+			}
+		}
 	}
 }

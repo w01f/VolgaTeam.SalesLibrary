@@ -1,9 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 using DevExpress.XtraTab;
+using SalesLibraries.Business.Entities.Common;
+using SalesLibraries.Business.Entities.Helpers;
+using SalesLibraries.Business.Entities.Interfaces;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
@@ -13,15 +18,17 @@ using SalesLibraries.CloudAdmin.Controllers;
 namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettings
 {
 	[IntendForClass(typeof(DocumentLink))]
-	//public partial class LinkDocumentOptions : UserControl, ILinkSettingsEditControl
-	public sealed partial class LinkDocumentOptions : XtraTabPage, ILinkSettingsEditControl
+	//public partial class LinkDocumentOptions : UserControl, ILinkSetSettingsEditControl
+	public sealed partial class LinkDocumentOptions : XtraTabPage, ILinkSetSettingsEditControl
 	{
-		private readonly DocumentLink _data;
+		private readonly ILinksGroup _linksGroup;
+		private readonly List<DocumentLink> _links = new List<DocumentLink>();
+		private readonly FileTypes? _defaultLinkType;
 
-		public LinkSettingsType SettingsType => LinkSettingsType.Notes;
+		public LinkSettingsType[] SupportedSettingsTypes => new[] { LinkSettingsType.Notes, LinkSettingsType.AdminSettings };
 		public int Order => 6;
 		public bool AvailableForEmbedded => true;
-		public SettingsEditorHeaderInfo HeaderInfo => null;
+		public SettingsEditorHeaderInfo HeaderInfo => new SettingsEditorHeaderInfo { Title = "<size=+4>Admin Settings</size>" };
 
 		public event EventHandler<EventArgs> ForceCloseRequested;
 
@@ -42,47 +49,129 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 				ckForcePreview.Font = new Font(ckForcePreview.Font.FontFamily, ckForcePreview.Font.Size - 2, ckForcePreview.Font.Style);
 				ckDoNotGeneratePreview.Font = new Font(ckDoNotGeneratePreview.Font.FontFamily, ckDoNotGeneratePreview.Font.Size - 2, ckDoNotGeneratePreview.Font.Style);
 				ckDoNotGenerateText.Font = new Font(ckDoNotGenerateText.Font.FontFamily, ckDoNotGenerateText.Font.Size - 2, ckDoNotGenerateText.Font.Style);
+				ckSaveAsTemplate.Font = new Font(ckSaveAsTemplate.Font.FontFamily, ckSaveAsTemplate.Font.Size - 2, ckSaveAsTemplate.Font.Style);
 
 				buttonXOpenWV.Font = new Font(buttonXOpenWV.Font.FontFamily, buttonXOpenWV.Font.Size - 2, buttonXOpenWV.Font.Style);
 				buttonXRefreshPreview.Font = new Font(buttonXRefreshPreview.Font.FontFamily, buttonXRefreshPreview.Font.Size - 2, buttonXRefreshPreview.Font.Style);
 			}
 		}
 
-		public LinkDocumentOptions(DocumentLink data) : this()
+		public LinkDocumentOptions(DocumentLink link) : this()
 		{
-			_data = data;
+			_links.Add(link);
+		}
+
+		public LinkDocumentOptions(ILinksGroup linksGroup, FileTypes? defaultLinkType = null) : this()
+		{
+			_linksGroup = linksGroup;
+			_links.AddRange(linksGroup.AllLinks.Where(link => !defaultLinkType.HasValue || link.Type == defaultLinkType.Value).OfType<DocumentLink>());
+			_defaultLinkType = defaultLinkType;
 		}
 
 		public void LoadData()
 		{
-			ckIsArchiveResource.Checked = ((DocumentLinkSettings)_data.Settings).IsArchiveResource;
-			ckDoNotGeneratePreview.Checked = !((DocumentLinkSettings)_data.Settings).GeneratePreviewImages;
-			ckDoNotGenerateText.Checked = !((DocumentLinkSettings)_data.Settings).GenerateContentText;
-			ckForcePreview.Checked = ((DocumentLinkSettings)_data.Settings).ForcePreview;
+			ckSaveAsTemplate.Visible = _linksGroup != null;
 
-			if (Directory.Exists(_data.PreviewContainerPath))
+			var settingsTemplate = _linksGroup?.LinkGroupSettingsContainer.GetSettingsTemplate<DocumentLinkSettings>(
+					LinkSettingsGroupType.AdminSettings, _defaultLinkType);
+			if (settingsTemplate != null)
+			{
+				ckIsArchiveResource.Checked = settingsTemplate.IsArchiveResource;
+				ckDoNotGeneratePreview.Checked = !settingsTemplate.GeneratePreviewImages;
+				ckDoNotGenerateText.Checked = !settingsTemplate.GenerateContentText;
+				ckForcePreview.Checked = settingsTemplate.ForcePreview;
+				ckSaveAsTemplate.Checked = true;
+			}
+			else if (_links.Any())
+			{
+				var linkSettings = _links.Select(link => link.Settings).OfType<DocumentLinkSettings>().ToList();
+
+				if (linkSettings.All(settings => settings.IsArchiveResource))
+					ckIsArchiveResource.CheckState = CheckState.Checked;
+				else if (linkSettings.Any(settings => settings.IsArchiveResource))
+					ckIsArchiveResource.CheckState = CheckState.Indeterminate;
+				else
+					ckIsArchiveResource.CheckState = CheckState.Unchecked;
+
+				if (linkSettings.All(settings => !settings.GeneratePreviewImages))
+					ckDoNotGeneratePreview.CheckState = CheckState.Checked;
+				else if (linkSettings.Any(settings => !settings.GeneratePreviewImages))
+					ckDoNotGeneratePreview.CheckState = CheckState.Indeterminate;
+				else
+					ckDoNotGeneratePreview.CheckState = CheckState.Unchecked;
+
+				if (linkSettings.All(settings => !settings.GenerateContentText))
+					ckDoNotGenerateText.CheckState = CheckState.Checked;
+				else if (linkSettings.Any(settings => !settings.GenerateContentText))
+					ckDoNotGenerateText.CheckState = CheckState.Indeterminate;
+				else
+					ckDoNotGenerateText.CheckState = CheckState.Unchecked;
+
+				if (linkSettings.All(settings => settings.ForcePreview))
+					ckForcePreview.CheckState = CheckState.Checked;
+				else if (linkSettings.Any(settings => settings.ForcePreview))
+					ckForcePreview.CheckState = CheckState.Indeterminate;
+				else
+					ckForcePreview.CheckState = CheckState.Unchecked;
+
+				ckSaveAsTemplate.Checked = false;
+			}
+
+			if (_links.Count == 1 && Directory.Exists(_links.First().PreviewContainerPath))
 			{
 				buttonXOpenWV.Enabled = true;
-				buttonXOpenWV.Text = String.Format("!WV Folder ({0})", _data.PreviewContainerName);
+				buttonXOpenWV.Text = String.Format("!WV Folder ({0})", _links.First().PreviewContainerName);
 			}
 			else
 				buttonXOpenWV.Enabled = false;
+
+			buttonXRefreshPreview.Enabled = _links.Any();
 		}
 
 		public void SaveData()
 		{
-			((DocumentLinkSettings)_data.Settings).IsArchiveResource = ckIsArchiveResource.Checked;
-			if (ckIsArchiveResource.Checked)
+			foreach (var link in _links)
 			{
-				((DocumentLinkSettings)_data.Settings).GeneratePreviewImages = false;
-				((DocumentLinkSettings)_data.Settings).GenerateContentText = false;
-				((DocumentLinkSettings)_data.Settings).ForcePreview = true;
+				((DocumentLinkSettings)link.Settings).IsArchiveResource = ckIsArchiveResource.CheckState != CheckState.Indeterminate ?
+					ckIsArchiveResource.Checked :
+					((DocumentLinkSettings)link.Settings).IsArchiveResource;
+				if (((DocumentLinkSettings)link.Settings).IsArchiveResource)
+				{
+					((DocumentLinkSettings)link.Settings).GeneratePreviewImages = false;
+					((DocumentLinkSettings)link.Settings).GenerateContentText = false;
+					((DocumentLinkSettings)link.Settings).ForcePreview = true;
+				}
+				else
+				{
+					((DocumentLinkSettings)link.Settings).GeneratePreviewImages = ckDoNotGeneratePreview.CheckState != CheckState.Indeterminate ?
+						!ckDoNotGeneratePreview.Checked :
+						((DocumentLinkSettings)link.Settings).GeneratePreviewImages;
+					((DocumentLinkSettings)link.Settings).GenerateContentText = ckDoNotGenerateText.CheckState != CheckState.Indeterminate ?
+						!ckDoNotGenerateText.Checked :
+						((DocumentLinkSettings)link.Settings).GenerateContentText;
+					((DocumentLinkSettings)link.Settings).ForcePreview = ckForcePreview.CheckState != CheckState.Indeterminate ?
+						ckForcePreview.Checked :
+						((DocumentLinkSettings)link.Settings).ForcePreview;
+				}
 			}
-			else
+
+			if (ckSaveAsTemplate.Checked)
 			{
-				((DocumentLinkSettings)_data.Settings).GeneratePreviewImages = !ckDoNotGeneratePreview.Checked;
-				((DocumentLinkSettings)_data.Settings).GenerateContentText = !ckDoNotGenerateText.Checked;
-				((DocumentLinkSettings)_data.Settings).ForcePreview = ckForcePreview.Checked;
+				var setttingsTemplate = SettingsContainer.CreateInstance<DocumentLinkSettings>(null);
+				setttingsTemplate.IsArchiveResource = ckIsArchiveResource.Checked;
+				if (setttingsTemplate.IsArchiveResource)
+				{
+					setttingsTemplate.GeneratePreviewImages = false;
+					setttingsTemplate.GenerateContentText = false;
+					setttingsTemplate.ForcePreview = true;
+				}
+				else
+				{
+					setttingsTemplate.GeneratePreviewImages = ckDoNotGeneratePreview.CheckState == CheckState.Unchecked;
+					setttingsTemplate.GenerateContentText = ckDoNotGenerateText.CheckState == CheckState.Unchecked;
+					setttingsTemplate.ForcePreview = ckForcePreview.CheckState != CheckState.Unchecked;
+				}
+				_linksGroup.LinkGroupSettingsContainer.SaveSettingsTemplate(LinkSettingsGroupType.AdminSettings, _defaultLinkType, setttingsTemplate);
 			}
 		}
 
@@ -90,8 +179,8 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 		{
 			ckDoNotGeneratePreview.Enabled =
 				ckDoNotGenerateText.Enabled =
-					ckForcePreview.Enabled = !ckIsArchiveResource.Checked;
-			if (ckIsArchiveResource.Checked)
+					ckForcePreview.Enabled = ckIsArchiveResource.CheckState != CheckState.Checked;
+			if (ckIsArchiveResource.CheckState == CheckState.Checked)
 			{
 				ckDoNotGeneratePreview.Checked =
 				ckDoNotGenerateText.Checked =
@@ -101,23 +190,26 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 
 		private void buttonXRefreshPreview_Click(object sender, EventArgs e)
 		{
-			if (MainController.Instance.PopupMessages.ShowWarningQuestion(String.Format("Are you sure you want to refresh the server files for:{1}{0}?", _data.NameWithExtension, Environment.NewLine)) != DialogResult.Yes) return;
+			if (MainController.Instance.PopupMessages.ShowWarningQuestion(String.Format("Are you sure you want to refresh the server files for:{1}{0}?", _links.Count == 1 ? _links.First().NameWithExtension : "links", Environment.NewLine)) != DialogResult.Yes) return;
 
 			MainController.Instance.ProcessManager.Run("Updating Preview files...", cancelationToken =>
 			{
-				_data.ClearPreviewContainer();
-				//var previewContainer = _data.GetPreviewContainer();
-				//var previewGenerator = previewContainer.GetPreviewGenerator();
-				//previewContainer.UpdateContent(previewGenerator, cancelationToken);
+				foreach (var link in _links)
+				{
+					link.ClearPreviewContainer();
+					//var previewContainer = link.GetPreviewContainer();
+					//var previewGenerator = previewContainer.GetPreviewGenerator();
+					//previewContainer.UpdateContent(previewGenerator, cancelationToken);
+				}
 			});
-			MainController.Instance.PopupMessages.ShowInfo(String.Format("{0}{1}Is now updated for the server!", _data.NameWithExtension, Environment.NewLine));
+			MainController.Instance.PopupMessages.ShowInfo(String.Format("{0}{1} now updated for the server!", _links.Count == 1 ? _links.First().NameWithExtension : "Links", Environment.NewLine));
 		}
 
 		private void buttonXOpenWV_Click(object sender, EventArgs e)
 		{
 			try
 			{
-				Process.Start(_data.PreviewContainerPath);
+				Process.Start(_links.First().PreviewContainerPath);
 			}
 			catch { }
 		}

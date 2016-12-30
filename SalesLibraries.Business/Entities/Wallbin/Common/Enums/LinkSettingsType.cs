@@ -8,6 +8,7 @@
 		Security,
 		Widget,
 		Banner,
-		AdvancedSettings
+		AdvancedSettings,
+		AdminSettings
 	}
 }

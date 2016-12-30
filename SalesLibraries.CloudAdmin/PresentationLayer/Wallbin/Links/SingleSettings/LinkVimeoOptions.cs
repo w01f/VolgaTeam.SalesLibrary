@@ -16,7 +16,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 	{
 		private readonly VimeoLink _data;
 
-		public LinkSettingsType SettingsType => LinkSettingsType.Notes;
+		public LinkSettingsType[] SupportedSettingsTypes => new[] { LinkSettingsType.Notes, LinkSettingsType.AdminSettings };
 		public int Order => 6;
 		public bool AvailableForEmbedded => true;
 		public SettingsEditorHeaderInfo HeaderInfo => new SettingsEditorHeaderInfo { Title = "<size=+4>Vimeo</size>", Logo = Resources.LinkAddVimeo };

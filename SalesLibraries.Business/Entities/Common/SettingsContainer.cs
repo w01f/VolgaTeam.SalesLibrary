@@ -17,7 +17,7 @@ namespace SalesLibraries.Business.Entities.Common
 		public static TSettings CreateInstance<TSettings>(IChangable parent, string encodedSource = "") where TSettings : SettingsContainer
 		{
 			var createNew = String.IsNullOrEmpty(encodedSource);
-			var deserializerSettings = new DefaultSerializeSettings() {TypeNameHandling = TypeNameHandling.None};
+			var deserializerSettings = new DefaultSerializeSettings {TypeNameHandling = TypeNameHandling.None};
 			var settings = !createNew ?
 				JsonConvert.DeserializeObject<TSettings>(encodedSource, deserializerSettings) :
 				Activator.CreateInstance<TSettings>();
@@ -35,7 +35,7 @@ namespace SalesLibraries.Business.Entities.Common
 			AllowToHandleChanges = true;
 		}
 
-		protected void OnSettingsChanged()
+		public void OnSettingsChanged()
 		{
 			if (AllowToHandleChanges)
 				Parent?.MarkAsModified();

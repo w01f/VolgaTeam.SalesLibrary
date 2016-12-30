@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using DevExpress.XtraEditors;
+using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraTab;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings;
@@ -16,7 +18,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 	{
 		private readonly LibraryObjectLink _data;
 
-		public LinkSettingsType SettingsType => LinkSettingsType.Notes;
+		public LinkSettingsType[] SupportedSettingsTypes => new[] { LinkSettingsType.Notes };
 		public int Order => 2;
 		public bool AvailableForEmbedded => false;
 		public SettingsEditorHeaderInfo HeaderInfo => null;

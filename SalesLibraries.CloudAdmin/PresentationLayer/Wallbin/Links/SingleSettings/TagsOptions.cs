@@ -8,6 +8,7 @@ using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraTab;
 using SalesLibraries.Business.Entities.Helpers;
+using SalesLibraries.Business.Entities.Interfaces;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.Common.Helpers;
@@ -19,7 +20,7 @@ using SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.ImageGallery;
 namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettings
 {
 	[IntendForClass(typeof(BaseLibraryLink))]
-	//public partial class TagsOptions : UserControl, ILinkSettingsEditControl
+	//public partial class TagsOptions : UserControl, ILinkSetSettingsEditControl
 	public partial class TagsOptions : XtraTabPage, ILinkSetSettingsEditControl
 	{
 		private bool _loading;
@@ -28,7 +29,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 		private readonly List<SearchGroupContainer> _searchGroups = new List<SearchGroupContainer>();
 		private readonly List<KeywordModel> _keywords = new List<KeywordModel>();
 
-		public LinkSettingsType SettingsType => LinkSettingsType.Tags;
+		public LinkSettingsType[] SupportedSettingsTypes => new[] { LinkSettingsType.Tags };
 		public int Order => 0;
 		public bool AvailableForEmbedded => true;
 		public SettingsEditorHeaderInfo HeaderInfo => new SettingsEditorHeaderInfo
@@ -57,9 +58,9 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 			_links.Add(link);
 		}
 
-		public TagsOptions(IEnumerable<BaseLibraryLink> links) : this()
+		public TagsOptions(ILinksGroup linkGroup, FileTypes? defaultLinkType = null) : this()
 		{
-			_links.AddRange(links.OfType<LibraryObjectLink>());
+			_links.AddRange(linkGroup.AllLinks.OfType<LibraryObjectLink>().Where(link => !defaultLinkType.HasValue || link.Type == defaultLinkType.Value));
 		}
 
 		public void LoadData()

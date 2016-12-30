@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.IO;
 using System.Linq;
@@ -23,23 +24,33 @@ namespace SalesLibraries.Business.Schema.Wallbin.Initialization
 		private void UpdateSchema()
 		{
 			var schemaFolderPath = Path.Combine(GlobalSettings.ApplicationRootPath, "Schema", "Wallbin");
+
+			var firstInitialization = false;
 			if (!File.Exists(_context.DataSourceFilePath))
 			{
 				_context.Database.CreateIfNotExists();
 				ApplySchemaVersion(Path.Combine(schemaFolderPath, "Base"));
-				Seed();
+				firstInitialization = true;
 			}
-			if (!_context.Versions.Any() || _context.Versions.Max(v => v.Revision) < CurrentRevision)
+			var newVersions = new List<int>();
+			if (firstInitialization || !_context.Versions.Any() || _context.Versions.Max(v => v.Revision) < CurrentRevision)
 			{
 				const string schemaVersionPrefix = "Version";
 				foreach (var versionPath in Directory.GetDirectories(schemaFolderPath, schemaVersionPrefix + "*").OrderBy(path => Convert.ToInt32(Path.GetFileName(path).Replace(schemaVersionPrefix, String.Empty))))
 				{
 					var releaseNumber = Convert.ToInt32(Path.GetFileName(versionPath).Replace(schemaVersionPrefix, String.Empty));
-					if (_context.Versions.Any(r => r.Revision == releaseNumber)) continue;
+					if (!firstInitialization && _context.Versions.Any(r => r.Revision == releaseNumber)) continue;
 					ApplySchemaVersion(versionPath);
-					_context.Versions.Add(new DBVersion { Revision = releaseNumber });
-					_context.SaveChanges();
+					newVersions.Add(releaseNumber);
 				}
+			}
+			if (firstInitialization)
+				Seed();
+			if (newVersions.Any())
+			{
+				foreach (var version in newVersions)
+					_context.Versions.Add(new DBVersion { Revision = version });
+				_context.SaveChanges();
 			}
 		}
 

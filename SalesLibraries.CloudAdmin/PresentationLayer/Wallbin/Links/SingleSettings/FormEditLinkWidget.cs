@@ -73,8 +73,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 			Height = 590;
 			FormStateHelper.Init(this, RemoteResourceManager.Instance.AppAliasSettingsFolder, "Site Admin-Link-Widget", false, false);
 			Text = string.Format(Text, _sourceLink);
-			StartPosition = FormStartPosition.CenterScreen;
-
+			StartPosition = FormStartPosition.CenterParent;
 			LoadData();
 		}
 

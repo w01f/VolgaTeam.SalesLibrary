@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using Newtonsoft.Json;
 using SalesLibraries.Business.Entities.Common;
+using SalesLibraries.Business.Entities.Helpers;
 using SalesLibraries.Business.Entities.Wallbin.Common.Constants;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings;
@@ -26,6 +27,22 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		public ExcelLink()
 		{
 			Type = FileTypes.Excel;
+		}
+
+		protected override void AfterCreate()
+		{
+			base.AfterCreate();
+
+			var settingsTemplate = Folder.Settings.GetSettingsTemplate<ExcelLinkSettings>(
+				LinkSettingsGroupType.AdminSettings,
+				Type);
+
+			if (settingsTemplate != null)
+			{
+				((ExcelLinkSettings)Settings).GenerateContentText = settingsTemplate.GenerateContentText;
+				((ExcelLinkSettings)Settings).ForceDownload = settingsTemplate.ForceDownload;
+				((ExcelLinkSettings)Settings).IsArchiveResource = settingsTemplate.IsArchiveResource;
+			}
 		}
 	}
 }

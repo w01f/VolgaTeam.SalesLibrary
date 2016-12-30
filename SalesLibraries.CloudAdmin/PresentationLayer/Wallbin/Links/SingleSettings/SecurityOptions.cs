@@ -8,9 +8,9 @@ using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraTab;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
+using SalesLibraries.Common.Helpers;
 using SalesLibraries.CloudAdmin.Business.Models.Security;
 using SalesLibraries.CloudAdmin.Controllers;
-using SalesLibraries.Common.Helpers;
 
 namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettings
 {
@@ -60,7 +60,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 			}
 		}
 
-		public LinkSettingsType SettingsType => LinkSettingsType.Security;
+		public LinkSettingsType[] SupportedSettingsTypes => new[] { LinkSettingsType.Security };
 		public int Order => 0;
 		public bool AvailableForEmbedded => true;
 		public SettingsEditorHeaderInfo HeaderInfo => null;

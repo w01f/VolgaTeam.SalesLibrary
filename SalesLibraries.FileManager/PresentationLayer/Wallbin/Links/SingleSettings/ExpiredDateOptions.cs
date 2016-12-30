@@ -15,7 +15,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 	{
 		private readonly LibraryObjectLink _data;
 
-		public LinkSettingsType SettingsType => LinkSettingsType.ExpirationDate;
+		public LinkSettingsType[] SupportedSettingsTypes => new[] { LinkSettingsType.ExpirationDate };
 		public int Order => 0;
 		public bool AvailableForEmbedded => false;
 		public SettingsEditorHeaderInfo HeaderInfo => null;

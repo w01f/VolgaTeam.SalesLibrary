@@ -11,12 +11,13 @@ using SalesLibraries.Business.Entities.Helpers;
 using SalesLibraries.Business.Entities.Interfaces;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent;
+using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkGroupSettings;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.Common.Helpers;
 
 namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 {
-	public class LibraryFolder : WallbinCollectionEntity, IBannerSettingsHolder
+	public class LibraryFolder : WallbinCollectionEntity, ILinksGroup, IBannerSettingsHolder
 	{
 		#region Persistent Properties
 		private string _name;
@@ -84,6 +85,9 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 			get { return _settings ?? (_settings = SettingsContainer.CreateInstance<LibraryFolderSettings>(this, SettingsEncoded)); }
 			set { _settings = value; }
 		}
+
+		[NotMapped, JsonIgnore]
+		public ILinkGroupSettingsContainer LinkGroupSettingsContainer => Settings;
 
 		private WidgetSettings _widget;
 		[NotMapped, JsonIgnore]
@@ -206,7 +210,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 			});
 		}
 
-		public class LibraryFolderSettings : SettingsContainer
+		public class LibraryFolderSettings : SettingsContainer, ILinkGroupSettingsContainer
 		{
 			[JsonIgnore]
 			public Font WindowFont { get; } = new Font("Arial", 12, FontStyle.Regular, GraphicsUnit.Point);
@@ -293,6 +297,19 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 						OnSettingsChanged();
 					_headerAlignment = value;
 				}
+			}
+
+			public List<LinkGroupSettingsTemplate> LinkSettingsTemplates { get; }
+
+			[JsonIgnore]
+			public LibraryFolder ParentFolder => Parent as LibraryFolder;
+
+			[JsonIgnore]
+			public ILinkGroupSettingsContainer ParentLinkSettingsContainer => ParentFolder?.Page.Settings;
+
+			public LibraryFolderSettings()
+			{
+				LinkSettingsTemplates = new List<LinkGroupSettingsTemplate>();
 			}
 		}
 	}

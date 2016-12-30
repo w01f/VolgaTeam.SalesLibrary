@@ -5,7 +5,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 {
 	public interface ILinkSettingsEditControl
 	{
-		LinkSettingsType SettingsType { get; }
+		LinkSettingsType[] SupportedSettingsTypes { get; }
 		int Order { get; }
 		bool AvailableForEmbedded { get; }
 		SettingsEditorHeaderInfo HeaderInfo { get; }

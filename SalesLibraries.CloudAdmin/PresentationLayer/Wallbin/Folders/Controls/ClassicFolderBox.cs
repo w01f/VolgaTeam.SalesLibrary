@@ -22,7 +22,6 @@ using SalesLibraries.CommonGUI.Wallbin.Folders;
 using SalesLibraries.CommonGUI.Wallbin.Views;
 using SalesLibraries.CloudAdmin.Controllers;
 using SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders.Clipboard;
-using SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.ContextMenuEdit.LinksGroup;
 using SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.ContextMenuEdit.SingleLink;
 using SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.HyperlinkEdit;
 using SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettings;
@@ -37,8 +36,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders.Controls
 		private readonly Pen _folderBoxDraggedIndicatorPen = new Pen(Color.Black, 8);
 		private readonly Pen _rowDraggedIndicatorPen = new Pen(Color.Black, 2);
 		private FolderClipboardManager _folderClipboardManager;
-		private readonly List<Links.ContextMenuEdit.SingleLink.BaseContextMenuEditor> _sigleLinkContextMenuEditors = new List<Links.ContextMenuEdit.SingleLink.BaseContextMenuEditor>();
-		private readonly List<Links.ContextMenuEdit.LinksGroup.BaseContextMenuEditor> _linksGroupContextMenuEditors = new List<Links.ContextMenuEdit.LinksGroup.BaseContextMenuEditor>();
+		private readonly List<BaseContextMenuEditor> _sigleLinkContextMenuEditors = new List<BaseContextMenuEditor>();
 
 		#region Public Properties
 		public override IWallbinViewFormat FormatState => MainController.Instance.WallbinViews.FormatState;
@@ -83,7 +81,6 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders.Controls
 				barSubItemFolderPropertiesFolderMove);
 			_folderClipboardManager.FolderMoved += OnFolderMoved;
 
-			InitLinksGroupContextMenuEditors();
 			InitSingleLinkContextMenuEditors();
 
 			// 
@@ -274,19 +271,12 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders.Controls
 			DataChanged?.Invoke(this, EventArgs.Empty);
 		}
 
-		public void EditLinkSettings(LinkSettingsType settingsType)
+		public void EditSingleLinkSettings(LinkSettingsType settingsType)
 		{
 			var selectedRow = SelectedLinkRow;
 			if (selectedRow == null) return;
-			EditLinkSettings(new[] { selectedRow.Source }, settingsType);
-		}
 
-		public void EditLinkSettings(IList<BaseLibraryLink> links, LinkSettingsType settingsType)
-		{
-			var result = links.Count == 1 ?
-				SettingsEditorFactory.Run(links.First(), settingsType) :
-				SettingsEditorFactory.Run(links, settingsType, false);
-			if (result != DialogResult.OK) return;
+			SettingsEditorFactory.Run(selectedRow.Source, settingsType);
 
 			grFiles.SuspendLayout();
 			_outsideChangesInProgress = true;
@@ -300,17 +290,32 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders.Controls
 			DataChanged?.Invoke(this, EventArgs.Empty);
 		}
 
+		public void EditLinksGroupSettings(LinkSettingsType settingsType, FileTypes? defaultLinkType = null)
+		{
+			SettingsEditorFactory.Run(DataSource, settingsType, defaultLinkType);
+
+			grFiles.SuspendLayout();
+			_outsideChangesInProgress = true;
+			foreach (var linkRow in grFiles.Rows.OfType<LinkRow>())
+				linkRow.Info.Recalc();
+			_outsideChangesInProgress = false;
+			UpdateGridSize();
+			grFiles.ResumeLayout(true);
+			grFiles.Refresh();
+			DataChanged?.Invoke(this, EventArgs.Empty);
+		}
+
 		private void EditImageSettings()
 		{
 			var selectedRow = SelectedLinkRow;
 			if (selectedRow == null) return;
 			if (!selectedRow.AllowEditImageSettings) return;
 			if (selectedRow.Source.Widget.Enabled)
-				EditLinkSettings(new[] { selectedRow.Source }, LinkSettingsType.Widget);
+				EditSingleLinkSettings(LinkSettingsType.Widget);
 			else if (selectedRow.Source.Banner.Enable)
-				EditLinkSettings(new[] { selectedRow.Source }, LinkSettingsType.Banner);
+				EditSingleLinkSettings(LinkSettingsType.Banner);
 			else if (selectedRow.Source.Widget.HasAutoWidget)
-				EditLinkSettings(new[] { selectedRow.Source }, LinkSettingsType.Widget);
+				EditSingleLinkSettings(LinkSettingsType.Widget);
 		}
 
 		public void ResetLinkSettings()
@@ -1061,14 +1066,9 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders.Controls
 					else
 					{
 						_folderClipboardManager.UpdateTargets();
-						LoadLinksGroupContextMenuEditors();
 						barButtonItemFolderPropertiesImageSettings.Visibility = DataSource.Widget.Enabled || DataSource.Banner.Enable ?
 							BarItemVisibility.Always :
 							BarItemVisibility.Never;
-						barSubItemFolderPropertiesLinkAdminSetings.Visibility =
-							barSubItemFolderPropertiesLinkPdfSetings.Visibility == BarItemVisibility.Always ||
-							barSubItemFolderPropertiesLinkExcelSetings.Visibility == BarItemVisibility.Always ?
-								BarItemVisibility.Always : BarItemVisibility.Never;
 						popupMenuFolderProperties.ShowPopup(Cursor.Position);
 					}
 					break;
@@ -1303,29 +1303,6 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders.Controls
 		{
 			_sigleLinkContextMenuEditors.ForEach(e => e.ApplyChanges());
 		}
-
-		private void InitLinksGroupContextMenuEditors()
-		{
-			var pdfSettingsEditor = new PdfSettingsEditor(barSubItemFolderPropertiesLinkPdfSetings);
-			pdfSettingsEditor.EditValueChanged += OnLinksGroupContextEditorValueChanged;
-			_linksGroupContextMenuEditors.Add(pdfSettingsEditor);
-
-			var excelSettingsEditor = new Links.ContextMenuEdit.LinksGroup.ExcelSettingsEditor(barSubItemFolderPropertiesLinkExcelSetings);
-			excelSettingsEditor.EditValueChanged += OnLinksGroupContextEditorValueChanged;
-			_linksGroupContextMenuEditors.Add(excelSettingsEditor);
-
-			popupMenuFolderProperties.CloseUp += OnFolderPropertiesMenuCloseUp;
-		}
-
-		private void LoadLinksGroupContextMenuEditors()
-		{
-			_linksGroupContextMenuEditors.ForEach(e => e.LoadLinks(DataSource.AllLinks));
-		}
-
-		private void ApplyLinksGroupContextMenuEditorChanges()
-		{
-			_linksGroupContextMenuEditors.ForEach(e => e.ApplyChanges());
-		}
 		#endregion
 
 		#region Link
@@ -1371,37 +1348,37 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders.Controls
 
 		private void barButtonItemLinkPropertiesLinkSettings_ItemClick(object sender, ItemClickEventArgs e)
 		{
-			EditLinkSettings(LinkSettingsType.Notes);
+			EditSingleLinkSettings(LinkSettingsType.Notes);
 		}
 
 		private void barButtonItemLinkPropertiesAdvancedSettings_ItemClick(object sender, ItemClickEventArgs e)
 		{
-			EditLinkSettings(LinkSettingsType.AdvancedSettings);
+			EditSingleLinkSettings(LinkSettingsType.AdvancedSettings);
 		}
 
 		private void barButtonItemLinkPropertiesTags_ItemClick(object sender, ItemClickEventArgs e)
 		{
-			EditLinkSettings(LinkSettingsType.Tags);
+			EditSingleLinkSettings(LinkSettingsType.Tags);
 		}
 
 		private void barButtonItemLinkPropertiesExpirationDate_ItemClick(object sender, ItemClickEventArgs e)
 		{
-			EditLinkSettings(LinkSettingsType.ExpirationDate);
+			EditSingleLinkSettings(LinkSettingsType.ExpirationDate);
 		}
 
 		private void barButtonItemLinkPropertiesSecurity_ItemClick(object sender, ItemClickEventArgs e)
 		{
-			EditLinkSettings(LinkSettingsType.Security);
+			EditSingleLinkSettings(LinkSettingsType.Security);
 		}
 
 		private void barButtonItemLinkPropertiesWidget_ItemClick(object sender, ItemClickEventArgs e)
 		{
-			EditLinkSettings(LinkSettingsType.Widget);
+			EditSingleLinkSettings(LinkSettingsType.Widget);
 		}
 
 		private void barButtonItemLinkPropertiesBanner_ItemClick(object sender, ItemClickEventArgs e)
 		{
-			EditLinkSettings(LinkSettingsType.Banner);
+			EditSingleLinkSettings(LinkSettingsType.Banner);
 		}
 
 		private void barButtonItemLinkPropertiesResetSettings_ItemClick(object sender, ItemClickEventArgs e)
@@ -1503,7 +1480,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders.Controls
 
 		private void barButtonItemFolderPropertiesEditLinkTags_ItemClick(object sender, ItemClickEventArgs e)
 		{
-			EditLinkSettings(DataSource.Links.ToList(), LinkSettingsType.Tags);
+			EditLinksGroupSettings(LinkSettingsType.Tags);
 		}
 
 		private void barButtonItemFolderPropertiesDeleteLinkSecurity_ItemClick(object sender, ItemClickEventArgs e)
@@ -1526,9 +1503,14 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders.Controls
 			SetLinkTextWordWrap();
 		}
 
-		private void OnFolderPropertiesMenuCloseUp(object sender, EventArgs e)
+		private void barButtonItemFolderPropertiesLinkAdminSetingsExcel_ItemClick(object sender, ItemClickEventArgs e)
 		{
-			ApplyLinksGroupContextMenuEditorChanges();
+			EditLinksGroupSettings(LinkSettingsType.AdminSettings, FileTypes.Excel);
+		}
+
+		private void barButtonItemFolderPropertiesLinkAdminSetingsPdf_ItemClick(object sender, ItemClickEventArgs e)
+		{
+			EditLinksGroupSettings(LinkSettingsType.AdminSettings, FileTypes.Pdf);
 		}
 		#endregion
 

@@ -2,16 +2,17 @@
 {
 	public enum LinkSettingsGroupType
 	{
+		Widgets = 0,
+		Banners = 1,
+		TextFormatting = 2,
 		TextNote = 3,
 		HoverNote = 4,
-		TextFormatting = 2,
 		SearchTags = 5,
 		Keywords = 6,
 		Security = 7,
 		Expiration = 8,
 		QuickLink = 9,
-		Widgets = 0,
-		Banners = 1,
+		AdminSettings = 98,
 		AutoWidgets = 99,
 	}
 }

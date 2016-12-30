@@ -11,12 +11,13 @@ using SalesLibraries.Business.Entities.Common;
 using SalesLibraries.Business.Entities.Helpers;
 using SalesLibraries.Business.Entities.Interfaces;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent;
+using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkGroupSettings;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.Common.Helpers;
 
 namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 {
-	public class LibraryPage : WallbinCollectionEntity
+	public class LibraryPage : WallbinCollectionEntity, ILinksGroup
 	{
 		public const int ColumnsCount = 3;
 
@@ -67,6 +68,9 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 			get { return _settings ?? (_settings = SettingsContainer.CreateInstance<LibraryPageSettings>(this, SettingsEncoded)); }
 			set { _settings = value; }
 		}
+
+		[NotMapped, JsonIgnore]
+		public ILinkGroupSettingsContainer LinkGroupSettingsContainer => Settings;
 
 		[NotMapped, JsonIgnore]
 		public override int CollectionOrder
@@ -325,7 +329,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 			return copy;
 		}
 
-		public class LibraryPageSettings : SettingsContainer
+		public class LibraryPageSettings : SettingsContainer, ILinkGroupSettingsContainer
 		{
 			private string _icon;
 			public string Icon
@@ -364,7 +368,6 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 			}
 
 			private bool _applyForAllColumnTitles;
-
 			public bool ApplyForAllColumnTitles
 			{
 				get { return _applyForAllColumnTitles; }
@@ -374,6 +377,16 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 						OnSettingsChanged();
 					_applyForAllColumnTitles = value;
 				}
+			}
+
+			public List<LinkGroupSettingsTemplate> LinkSettingsTemplates { get; }
+
+			[JsonIgnore]
+			public ILinkGroupSettingsContainer ParentLinkSettingsContainer => null;
+
+			public LibraryPageSettings()
+			{
+				LinkSettingsTemplates = new List<LinkGroupSettingsTemplate>();
 			}
 		}
 	}

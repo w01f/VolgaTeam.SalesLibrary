@@ -8,6 +8,7 @@ using DevComponents.DotNetBar.Metro;
 using DevExpress.Utils;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraTab;
+using SalesLibraries.Business.Entities.Interfaces;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.Common.Helpers;
@@ -19,7 +20,10 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 {
 	public partial class FormEditLinkSettingsRegular : MetroForm, ILinkSetSettingsEditForm
 	{
-		private readonly List<BaseLibraryLink> _sourceLinks = new List<BaseLibraryLink>();
+		private readonly BaseLibraryLink _sourceLink;
+		private readonly ILinksGroup _sourceLinkGroup;
+		private readonly FileTypes? _defaultLinkType;
+
 
 		public LinkSettingsType[] EditableSettings => new[]
 		{
@@ -28,6 +32,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			LinkSettingsType.Notes,
 			LinkSettingsType.Security,
 			LinkSettingsType.Tags,
+			LinkSettingsType.AdminSettings,
 		};
 
 		private FormEditLinkSettingsRegular()
@@ -56,12 +61,15 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 		public FormEditLinkSettingsRegular(BaseLibraryLink sourceLink) : this()
 		{
-			_sourceLinks.Add(sourceLink);
+			_sourceLink = sourceLink;
 		}
 
-		public FormEditLinkSettingsRegular(IEnumerable<BaseLibraryLink> sourceLinks) : this()
+		public FormEditLinkSettingsRegular(ILinksGroup linkGroup, FileTypes? defaultLinkType = null) : this()
 		{
-			_sourceLinks.AddRange(sourceLinks);
+			_sourceLinkGroup = linkGroup;
+			_sourceLink = _sourceLinkGroup.AllLinks
+				.FirstOrDefault(link => !defaultLinkType.HasValue || link.Type == defaultLinkType.Value);
+			_defaultLinkType = defaultLinkType;
 		}
 
 		public void InitForm<TEditControl>(LinkSettingsType settingsType) where TEditControl : ILinkSettingsEditControl
@@ -69,17 +77,18 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			Width = 680;
 			Height = 670;
 			FormStateHelper.Init(this, RemoteResourceManager.Instance.AppAliasSettingsFolder, "Site Admin-Link-Settings", false, false);
-			var defaultLink = _sourceLinks.First();
-			Text = _sourceLinks.Count == 1 ? defaultLink.ToString() : "Multi-Link Settings";
-			StartPosition = FormStartPosition.CenterScreen;
+			Text = _sourceLinkGroup == null ? _sourceLink.ToString() : "Multi-Link Settings";
+			StartPosition = FormStartPosition.CenterParent;
 			AddOptionPages(
 				ObjectIntendHelper.GetObjectInstances(
 						typeof(TEditControl),
-						EntitySettingsResolver.ExtractObjectTypeFromProxy(_sourceLinks.First().GetType()),
+						_sourceLink == null ?
+							_defaultLinkType.HasValue ? BaseLibraryLink.GetObjectTypeByLinkType(_defaultLinkType.Value) : null :
+							EntitySettingsResolver.ExtractObjectTypeFromProxy(_sourceLink.GetType()),
 						GetEditControlParams())
 					.OfType<ILinkSettingsEditControl>()
 					.Where(lp =>
-						lp.SettingsType == settingsType)
+						lp.SupportedSettingsTypes.Contains(settingsType))
 					.OrderBy(lp => lp.Order));
 
 			var headerInfo = GetFormTitle(settingsType);
@@ -128,9 +137,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 		private object[] GetEditControlParams()
 		{
-			return _sourceLinks.Count == 1 ?
-				new object[] { _sourceLinks.First() } :
-				new object[] { _sourceLinks };
+			return _sourceLinkGroup == null ?
+				new object[] { _sourceLink } :
+				new object[] { _sourceLinkGroup, _defaultLinkType };
 		}
 
 		private void SaveData()

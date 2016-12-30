@@ -37,6 +37,7 @@
 			this.barButtonItemPagePropertiesClonePageWindowsAndLinks = new DevExpress.XtraBars.BarButtonItem();
 			this.barButtonItemPagePropertiesClonePageOnlyWindows = new DevExpress.XtraBars.BarButtonItem();
 			this.barButtonItemPagePropertiesResetLinkSettings = new DevExpress.XtraBars.BarButtonItem();
+			this.barSubItemPagePropertiesLinkAdminSettings = new DevExpress.XtraBars.BarSubItem();
 			this.barSubItemPagePropertiesArtwork = new DevExpress.XtraBars.BarSubItem();
 			this.barButtonItemPagePropertiesDeleteLinkWidgets = new DevExpress.XtraBars.BarButtonItem();
 			this.barButtonItemPagePropertiesDeleteLinkBanners = new DevExpress.XtraBars.BarButtonItem();
@@ -52,9 +53,8 @@
 			this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
 			this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
 			this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
-			this.barSubItemPagePropertiesLinkAdminSettings = new DevExpress.XtraBars.BarSubItem();
-			this.barSubItemPagePropertiesLinkPdfSettings = new DevExpress.XtraBars.BarSubItem();
-			this.barSubItemPagePropertiesLinkExcelSettings = new DevExpress.XtraBars.BarSubItem();
+			this.barButtonItemPagePropertiesLinkAdminSettingsExcel = new DevExpress.XtraBars.BarButtonItem();
+			this.barButtonItemPagePropertiesLinkAdminSettingsPdf = new DevExpress.XtraBars.BarButtonItem();
 			this.pnContainer.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControl)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.popupMenuPageProperties)).BeginInit();
@@ -120,7 +120,6 @@
 			this.popupMenuPageProperties.MenuAppearance.AppearanceMenu.Pressed.Options.UseTextOptions = true;
 			this.popupMenuPageProperties.MenuAppearance.AppearanceMenu.Pressed.TextOptions.HotkeyPrefix = DevExpress.Utils.HKeyPrefix.None;
 			this.popupMenuPageProperties.Name = "popupMenuPageProperties";
-			this.popupMenuPageProperties.CloseUp += new System.EventHandler(this.popupMenuPageProperties_CloseUp);
 			// 
 			// barButtonItemPagePropertiesPageSettings
 			// 
@@ -179,6 +178,16 @@
 			this.barButtonItemPagePropertiesResetLinkSettings.Id = 5;
 			this.barButtonItemPagePropertiesResetLinkSettings.Name = "barButtonItemPagePropertiesResetLinkSettings";
 			this.barButtonItemPagePropertiesResetLinkSettings.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemPagePropertiesResetLinkSettings_ItemClick);
+			// 
+			// barSubItemPagePropertiesLinkAdminSettings
+			// 
+			this.barSubItemPagePropertiesLinkAdminSettings.Caption = "Shared Admin Settings";
+			this.barSubItemPagePropertiesLinkAdminSettings.CategoryGuid = new System.Guid("ed4d5958-5302-4d8f-8d8d-ef1c5e91776f");
+			this.barSubItemPagePropertiesLinkAdminSettings.Id = 16;
+			this.barSubItemPagePropertiesLinkAdminSettings.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemPagePropertiesLinkAdminSettingsExcel),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemPagePropertiesLinkAdminSettingsPdf)});
+			this.barSubItemPagePropertiesLinkAdminSettings.Name = "barSubItemPagePropertiesLinkAdminSettings";
 			// 
 			// barSubItemPagePropertiesArtwork
 			// 
@@ -294,9 +303,9 @@
             this.barButtonItemPagePropertiesSetLinkTextWordWrap,
             this.barButtonItemPagePropertiesEditLinkTags,
             this.barSubItemPagePropertiesLinkAdminSettings,
-            this.barSubItemPagePropertiesLinkPdfSettings,
-            this.barSubItemPagePropertiesLinkExcelSettings});
-			this.barManager.MaxItemId = 19;
+            this.barButtonItemPagePropertiesLinkAdminSettingsExcel,
+            this.barButtonItemPagePropertiesLinkAdminSettingsPdf});
+			this.barManager.MaxItemId = 21;
 			// 
 			// barDockControlTop
 			// 
@@ -326,29 +335,19 @@
 			this.barDockControlRight.Location = new System.Drawing.Point(714, 0);
 			this.barDockControlRight.Size = new System.Drawing.Size(0, 502);
 			// 
-			// barSubItemPagePropertiesLinkAdminSettings
+			// barButtonItemPagePropertiesLinkAdminSettingsExcel
 			// 
-			this.barSubItemPagePropertiesLinkAdminSettings.Caption = "Shared Admin Settings";
-			this.barSubItemPagePropertiesLinkAdminSettings.CategoryGuid = new System.Guid("ed4d5958-5302-4d8f-8d8d-ef1c5e91776f");
-			this.barSubItemPagePropertiesLinkAdminSettings.Id = 16;
-			this.barSubItemPagePropertiesLinkAdminSettings.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(this.barSubItemPagePropertiesLinkPdfSettings),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barSubItemPagePropertiesLinkExcelSettings)});
-			this.barSubItemPagePropertiesLinkAdminSettings.Name = "barSubItemPagePropertiesLinkAdminSettings";
+			this.barButtonItemPagePropertiesLinkAdminSettingsExcel.Caption = "Excel";
+			this.barButtonItemPagePropertiesLinkAdminSettingsExcel.Id = 19;
+			this.barButtonItemPagePropertiesLinkAdminSettingsExcel.Name = "barButtonItemPagePropertiesLinkAdminSettingsExcel";
+			this.barButtonItemPagePropertiesLinkAdminSettingsExcel.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemPagePropertiesLinkAdminSettingsExcel_ItemClick);
 			// 
-			// barSubItemPagePropertiesLinkPdfSettings
+			// barButtonItemPagePropertiesLinkAdminSettingsPdf
 			// 
-			this.barSubItemPagePropertiesLinkPdfSettings.Caption = "PDF";
-			this.barSubItemPagePropertiesLinkPdfSettings.CategoryGuid = new System.Guid("ed4d5958-5302-4d8f-8d8d-ef1c5e91776f");
-			this.barSubItemPagePropertiesLinkPdfSettings.Id = 17;
-			this.barSubItemPagePropertiesLinkPdfSettings.Name = "barSubItemPagePropertiesLinkPdfSettings";
-			// 
-			// barSubItemPagePropertiesLinkExcelSettings
-			// 
-			this.barSubItemPagePropertiesLinkExcelSettings.Caption = "Excel";
-			this.barSubItemPagePropertiesLinkExcelSettings.CategoryGuid = new System.Guid("ed4d5958-5302-4d8f-8d8d-ef1c5e91776f");
-			this.barSubItemPagePropertiesLinkExcelSettings.Id = 18;
-			this.barSubItemPagePropertiesLinkExcelSettings.Name = "barSubItemPagePropertiesLinkExcelSettings";
+			this.barButtonItemPagePropertiesLinkAdminSettingsPdf.Caption = "PDF";
+			this.barButtonItemPagePropertiesLinkAdminSettingsPdf.Id = 20;
+			this.barButtonItemPagePropertiesLinkAdminSettingsPdf.Name = "barButtonItemPagePropertiesLinkAdminSettingsPdf";
+			this.barButtonItemPagePropertiesLinkAdminSettingsPdf.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemPagePropertiesLinkAdminSettingsPdf_ItemClick);
 			// 
 			// TabbedWallbin
 			// 
@@ -401,7 +400,7 @@
 		private DevExpress.XtraBars.BarButtonItem barButtonItemPagePropertiesSetLinkTextWordWrap;
 		private DevExpress.XtraBars.BarButtonItem barButtonItemPagePropertiesEditLinkTags;
 		private DevExpress.XtraBars.BarSubItem barSubItemPagePropertiesLinkAdminSettings;
-		private DevExpress.XtraBars.BarSubItem barSubItemPagePropertiesLinkPdfSettings;
-		private DevExpress.XtraBars.BarSubItem barSubItemPagePropertiesLinkExcelSettings;
+		private DevExpress.XtraBars.BarButtonItem barButtonItemPagePropertiesLinkAdminSettingsExcel;
+		private DevExpress.XtraBars.BarButtonItem barButtonItemPagePropertiesLinkAdminSettingsPdf;
 	}
 }

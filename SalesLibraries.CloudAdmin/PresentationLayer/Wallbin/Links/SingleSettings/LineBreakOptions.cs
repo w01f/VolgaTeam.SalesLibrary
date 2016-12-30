@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using DevExpress.XtraEditors;
+using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraTab;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
@@ -15,7 +17,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 	{
 		private readonly LineBreak _data;
 
-		public LinkSettingsType SettingsType => LinkSettingsType.Notes;
+		public LinkSettingsType[] SupportedSettingsTypes => new[] { LinkSettingsType.Notes };
 		public int Order => 0;
 		public bool AvailableForEmbedded => false;
 		public SettingsEditorHeaderInfo HeaderInfo => new SettingsEditorHeaderInfo { Title = "<size=+4>Line Break Settings</size>" };

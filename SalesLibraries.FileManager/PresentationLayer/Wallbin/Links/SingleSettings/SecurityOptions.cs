@@ -60,7 +60,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			}
 		}
 
-		public LinkSettingsType SettingsType => LinkSettingsType.Security;
+		public LinkSettingsType[] SupportedSettingsTypes => new[] { LinkSettingsType.Security };
 		public int Order => 0;
 		public bool AvailableForEmbedded => true;
 		public SettingsEditorHeaderInfo HeaderInfo => null;

@@ -83,6 +83,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 			Height = 670;
 			FormStateHelper.Init(this, RemoteResourceManager.Instance.AppAliasSettingsFolder, "Site Admin-Link-Banner", false, false);
 			Text = string.Format(Text, _sourceLink.Name);
+			StartPosition = FormStartPosition.CenterParent;
 			LoadData();
 		}
 

@@ -15,7 +15,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		private readonly LibraryFolderLink _data;
 		private readonly List<LibraryFileLink> _files = new List<LibraryFileLink>();
 
-		public LinkSettingsType SettingsType => LinkSettingsType.AdvancedSettings;
+		public LinkSettingsType[] SupportedSettingsTypes => new[] { LinkSettingsType.AdvancedSettings };
 		public int Order => 0;
 		public bool AvailableForEmbedded => false;
 		public SettingsEditorHeaderInfo HeaderInfo => null;

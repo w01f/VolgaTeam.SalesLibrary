@@ -5,7 +5,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 {
 	public interface ILinkSettingsEditControl
 	{
-		LinkSettingsType SettingsType { get; }
+		LinkSettingsType[] SupportedSettingsTypes { get; }
 		int Order { get; }
 		bool AvailableForEmbedded { get; }
 		SettingsEditorHeaderInfo HeaderInfo { get; }

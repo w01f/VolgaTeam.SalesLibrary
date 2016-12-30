@@ -16,10 +16,10 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 	{
 		private readonly LibraryObjectLink _data;
 
-		public LinkSettingsType SettingsType => LinkSettingsType.Notes;
+		public LinkSettingsType[] SupportedSettingsTypes => new[] { LinkSettingsType.Notes };
 		public int Order => 0;
 		public bool AvailableForEmbedded => false;
-		public SettingsEditorHeaderInfo HeaderInfo => null;
+		public SettingsEditorHeaderInfo HeaderInfo => new SettingsEditorHeaderInfo { Title = "<size=+4>Link Settings</size>" };
 
 		public event EventHandler<EventArgs> ForceCloseRequested;
 

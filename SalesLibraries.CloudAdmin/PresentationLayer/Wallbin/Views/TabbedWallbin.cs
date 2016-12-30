@@ -9,12 +9,12 @@ using DevExpress.XtraTab;
 using DevExpress.XtraTab.ViewInfo;
 using SalesLibraries.Business.Contexts.Wallbin;
 using SalesLibraries.Business.Entities.Helpers;
+using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.Persistent;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.CommonGUI.Common;
 using SalesLibraries.CommonGUI.CustomDialog;
 using SalesLibraries.CloudAdmin.Controllers;
-using SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.ContextMenuEdit.LinksGroup;
 using SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettings;
 using SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Settings;
 
@@ -24,7 +24,6 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 	public partial class TabbedWallbin : BaseWallbin
 	{
 		private XtraTabDragDropHelper<TabPage> _tabDragDropHelper;
-		private readonly List<BaseContextMenuEditor> _linksGroupContextMenuEditors = new List<BaseContextMenuEditor>();
 
 		public TabbedWallbin(LibraryContext dataStorage)
 			: base(dataStorage)
@@ -53,8 +52,6 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 
 			_tabDragDropHelper = new XtraTabDragDropHelper<TabPage>(xtraTabControl);
 			_tabDragDropHelper.TabMoved += OnTabMoved;
-
-			InitLinksGroupContextMenuEditors();
 		}
 
 		public override void SelectPage(IPageView pageView)
@@ -103,7 +100,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 			newPage.Resume();
 		}
 
-		private void OnTabMoved(Object sender, TabMoveEventArgs e)
+		private void OnTabMoved(object sender, TabMoveEventArgs e)
 		{
 			((List<LibraryPage>)DataStorage.Library.Pages).ChangeItemPosition(
 				((IPageView)e.MovedPage).Page,
@@ -114,54 +111,15 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 		#region Page Context Menu Processing
 		private XtraTabHitInfo _menuHitInfo;
 
-		private void InitLinksGroupContextMenuEditors()
-		{
-			var pdfSettingsEditor = new PdfSettingsEditor(barSubItemPagePropertiesLinkPdfSettings);
-			pdfSettingsEditor.EditValueChanged += OnLinksGroupContextEditorValueChanged;
-			_linksGroupContextMenuEditors.Add(pdfSettingsEditor);
-
-			var excelSettingsEditor = new ExcelSettingsEditor(barSubItemPagePropertiesLinkExcelSettings);
-			excelSettingsEditor.EditValueChanged += OnLinksGroupContextEditorValueChanged;
-			_linksGroupContextMenuEditors.Add(excelSettingsEditor);
-		}
-
-		private void LoadLinksGroupContextMenuEditors()
-		{
-			var selectedPage = (TabPage)_menuHitInfo.Page;
-			_linksGroupContextMenuEditors.ForEach(e => e.LoadLinks(selectedPage.Page.AllLinks));
-		}
-
-		private void ApplyLinksGroupContextMenuEditorChanges()
-		{
-			_linksGroupContextMenuEditors.ForEach(e => e.ApplyChanges());
-		}
-
 		private void xtraTabControl_MouseDown(object sender, MouseEventArgs e)
 		{
 			if (e.Button != MouseButtons.Right) return;
 			_menuHitInfo = xtraTabControl.CalcHitInfo(new Point(e.X, e.Y));
 			if (_menuHitInfo.HitTest != XtraTabHitTest.PageHeader) return;
-
-			LoadLinksGroupContextMenuEditors();
-			barSubItemPagePropertiesLinkAdminSettings.Visibility =
-							barSubItemPagePropertiesLinkPdfSettings.Visibility == BarItemVisibility.Always ||
-							barSubItemPagePropertiesLinkExcelSettings.Visibility == BarItemVisibility.Always ?
-								BarItemVisibility.Always : BarItemVisibility.Never;
-
 			popupMenuPageProperties.ShowPopup(Cursor.Position);
 		}
 
-		private void popupMenuPageProperties_CloseUp(object sender, EventArgs e)
-		{
-			ApplyLinksGroupContextMenuEditorChanges();
-		}
-
-		private void OnLinksGroupContextEditorValueChanged(Object sender, EventArgs e)
-		{
-			IsDataChanged = true;
-		}
-
-		private void barButtonItemPagePropertiesPageSettings_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+		private void barButtonItemPagePropertiesPageSettings_ItemClick(object sender, ItemClickEventArgs e)
 		{
 			var selectedPage = _menuHitInfo.Page as TabPage;
 			if (selectedPage == null) return;
@@ -179,7 +137,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 			}
 		}
 
-		private void barButtonItemPagePropertiesDeletePage_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+		private void barButtonItemPagePropertiesDeletePage_ItemClick(object sender, ItemClickEventArgs e)
 		{
 			var selectedPage = _menuHitInfo.Page as TabPage;
 			if (selectedPage == null) return;
@@ -219,21 +177,21 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 			}
 		}
 
-		private void barButtonItemPagePropertiesClonePageWindowsAndLinks_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+		private void barButtonItemPagePropertiesClonePageWindowsAndLinks_ItemClick(object sender, ItemClickEventArgs e)
 		{
 			var selectedPage = _menuHitInfo.Page as TabPage;
 			if (selectedPage == null) return;
 			ClonePage(selectedPage, true);
 		}
 
-		private void barButtonItemPagePropertiesClonePageOnlyWindows_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+		private void barButtonItemPagePropertiesClonePageOnlyWindows_ItemClick(object sender, ItemClickEventArgs e)
 		{
 			var selectedPage = _menuHitInfo.Page as TabPage;
 			if (selectedPage == null) return;
 			ClonePage(selectedPage, false);
 		}
 
-		private void barButtonItemPagePropertiesResetLinkSettings_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+		private void barButtonItemPagePropertiesResetLinkSettings_ItemClick(object sender, ItemClickEventArgs e)
 		{
 			var selectedPage = _menuHitInfo.Page as TabPage;
 			if (selectedPage == null) return;
@@ -250,7 +208,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 			}
 		}
 
-		private void barButtonItemPagePropertiesDeleteLinkWidgets_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+		private void barButtonItemPagePropertiesDeleteLinkWidgets_ItemClick(object sender, ItemClickEventArgs e)
 		{
 			var selectedPage = _menuHitInfo.Page as TabPage;
 			if (selectedPage == null) return;
@@ -259,7 +217,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 			IsDataChanged = true;
 		}
 
-		private void barButtonItemPagePropertiesDeleteLinkBanners_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+		private void barButtonItemPagePropertiesDeleteLinkBanners_ItemClick(object sender, ItemClickEventArgs e)
 		{
 			var selectedPage = _menuHitInfo.Page as TabPage;
 			if (selectedPage == null) return;
@@ -268,7 +226,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 			IsDataChanged = true;
 		}
 
-		private void barButtonItemPagePropertiesDeleteLinkTags_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+		private void barButtonItemPagePropertiesDeleteLinkTags_ItemClick(object sender, ItemClickEventArgs e)
 		{
 			var selectedPage = _menuHitInfo.Page as TabPage;
 			if (selectedPage == null) return;
@@ -277,7 +235,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 			IsDataChanged = true;
 		}
 
-		private void barButtonItemPagePropertiesDeleteLinks_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+		private void barButtonItemPagePropertiesDeleteLinks_ItemClick(object sender, ItemClickEventArgs e)
 		{
 			var selectedPage = _menuHitInfo.Page as TabPage;
 			if (selectedPage == null) return;
@@ -286,7 +244,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 			IsDataChanged = true;
 		}
 
-		private void barButtonItemPagePropertiesResetLinkExpirationDates_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+		private void barButtonItemPagePropertiesResetLinkExpirationDates_ItemClick(object sender, ItemClickEventArgs e)
 		{
 			var selectedPage = _menuHitInfo.Page as TabPage;
 			if (selectedPage == null) return;
@@ -295,7 +253,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 			IsDataChanged = true;
 		}
 
-		private void barButtonItemPagePropertiesDeleteLinkSecurity_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+		private void barButtonItemPagePropertiesDeleteLinkSecurity_ItemClick(object sender, ItemClickEventArgs e)
 		{
 			var selectedPage = _menuHitInfo.Page as TabPage;
 			if (selectedPage == null) return;
@@ -304,7 +262,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 			IsDataChanged = true;
 		}
 
-		private void barButtonItemPagePropertiesSetLinkTextWordWrap_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+		private void barButtonItemPagePropertiesSetLinkTextWordWrap_ItemClick(object sender, ItemClickEventArgs e)
 		{
 			var selectedPage = _menuHitInfo.Page as TabPage;
 			if (selectedPage == null) return;
@@ -312,11 +270,27 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 			IsDataChanged = true;
 		}
 
-		private void barButtonItemPagePropertiesEditLinkTags_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+		private void barButtonItemPagePropertiesEditLinkTags_ItemClick(object sender, ItemClickEventArgs e)
 		{
 			var selectedPage = _menuHitInfo.Page as TabPage;
 			if (selectedPage == null) return;
-			selectedPage.Content.EditTags();
+			selectedPage.Content.EditLinksGroupSettings(LinkSettingsType.Tags);
+			IsDataChanged = true;
+		}
+
+		private void barButtonItemPagePropertiesLinkAdminSettingsExcel_ItemClick(object sender, ItemClickEventArgs e)
+		{
+			var selectedPage = _menuHitInfo.Page as TabPage;
+			if (selectedPage == null) return;
+			selectedPage.Content.EditLinksGroupSettings(LinkSettingsType.AdminSettings, FileTypes.Excel, false);
+			IsDataChanged = true;
+		}
+
+		private void barButtonItemPagePropertiesLinkAdminSettingsPdf_ItemClick(object sender, ItemClickEventArgs e)
+		{
+			var selectedPage = _menuHitInfo.Page as TabPage;
+			if (selectedPage == null) return;
+			selectedPage.Content.EditLinksGroupSettings(LinkSettingsType.AdminSettings, FileTypes.Pdf, false);
 			IsDataChanged = true;
 		}
 		#endregion

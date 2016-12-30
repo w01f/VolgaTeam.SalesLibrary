@@ -102,15 +102,18 @@
     <Compile Include="Entities\Interfaces\IBannerSettingsHolder.cs" />
     <Compile Include="Entities\Interfaces\IDataSource.cs" />
     <Compile Include="Entities\Interfaces\ILinkBundleInfoItem.cs" />
+    <Compile Include="Entities\Interfaces\ILinksGroup.cs" />
     <Compile Include="Entities\Interfaces\IPreviewGenerator.cs" />
     <Compile Include="Entities\Interfaces\ITableItem.cs" />
     <Compile Include="Entities\Interfaces\ICollectionItem.cs" />
     <Compile Include="Entities\Wallbin\Common\Constants\PreviewFormats.cs" />
     <Compile Include="Entities\Wallbin\Common\Constants\WebFormats.cs" />
     <Compile Include="Entities\Wallbin\Common\Enums\BannerTextMode.cs" />
+    <Compile Include="Entities\Interfaces\ILinkGroupSettingsContainer.cs" />
     <Compile Include="Entities\Wallbin\Common\Enums\InternalLinkType.cs" />
     <Compile Include="Entities\Wallbin\Common\Enums\LinkBundleItemType.cs" />
     <Compile Include="Entities\Wallbin\Common\Enums\LinkBundleRevenueType.cs" />
+    <Compile Include="Entities\Wallbin\Common\Enums\LinksGroupLevel.cs" />
     <Compile Include="Entities\Wallbin\Common\Enums\VerticalAlignment.cs" />
     <Compile Include="Entities\Wallbin\Common\Enums\HorizontalAlignment.cs" />
     <Compile Include="Entities\Interfaces\IChangable.cs" />
@@ -144,6 +147,7 @@
     <Compile Include="Entities\Wallbin\NonPersistent\LinkBundleSettings\RevenueItem.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\LinkBundleSettings\StrategyItem.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\LinkBundleSettings\UrlItem.cs" />
+    <Compile Include="Entities\Helpers\LinkGroupSettingsProcessor.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\InternalShortcutLinkSettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\InternalLibraryPageLinkSettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\InternalLibraryFolderLinkSettings.cs" />
@@ -155,6 +159,7 @@
     <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\LinkBundleLinkSettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\LinkFileSettingsTemplate.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\LibraryFolderLinkSettings.cs" />
+    <Compile Include="Entities\Wallbin\NonPersistent\LinkGroupSettings\LinkGroupSettingsTemplate.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\PdfLinkSettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\QuickLinkSettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\ResetSettingsSchedulerSettings.cs" />
@@ -231,6 +236,9 @@
     <Compile Include="Schema\Wallbin\Initialization\CloudlWallbinInitializer.cs" />
     <Compile Include="Schema\Wallbin\Initialization\LocalWallbinInitializer.cs" />
     <Compile Include="Schema\Wallbin\Initialization\WallbinInitializer.cs" />
+    <Content Include="Schema\Wallbin\Base\sequense.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Schema\Wallbin\Version3\library_link.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

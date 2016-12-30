@@ -16,7 +16,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 	{
 		private readonly InternalShortcutLink _data;
 
-		public LinkSettingsType SettingsType => LinkSettingsType.Notes;
+		public LinkSettingsType[] SupportedSettingsTypes => new[] { LinkSettingsType.Notes, LinkSettingsType.AdminSettings };
 		public int Order => 6;
 		public bool AvailableForEmbedded => true;
 		public SettingsEditorHeaderInfo HeaderInfo => new SettingsEditorHeaderInfo { Title = "<size=+4>Internal Link</size>", Logo = Resources.LinkAddInternal };
@@ -52,7 +52,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 		{
 			_data.Name = textEditName.EditValue as String;
 			((InternalShortcutLinkSettings)_data.Settings).ShortcutId = textEditShortcutId.EditValue as String;
-			((InternalShortcutLinkSettings) _data.Settings).OpenOnSamePage = !ckOpenOnSamePage.Checked;
+			((InternalShortcutLinkSettings)_data.Settings).OpenOnSamePage = !ckOpenOnSamePage.Checked;
 		}
 	}
 }

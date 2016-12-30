@@ -7,9 +7,9 @@ using DevExpress.XtraTab;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
-using SalesLibraries.CloudAdmin.Controllers;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.Common.OfficeInterops;
+using SalesLibraries.CloudAdmin.Controllers;
 
 namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettings
 {
@@ -19,7 +19,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 	{
 		private readonly PowerPointLink _data;
 
-		public LinkSettingsType SettingsType => LinkSettingsType.Notes;
+		public LinkSettingsType[] SupportedSettingsTypes => new[] { LinkSettingsType.Notes, LinkSettingsType.AdminSettings };
 		public int Order => 6;
 		public bool AvailableForEmbedded => true;
 		public SettingsEditorHeaderInfo HeaderInfo => null;
@@ -58,22 +58,23 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 			ckDoNotGeneratePreview.Checked = !((DocumentLinkSettings)_data.Settings).GeneratePreviewImages;
 			ckDoNotGenerateText.Checked = !((DocumentLinkSettings)_data.Settings).GenerateContentText;
 
-			if (Directory.Exists(((PowerPointLinkSettings)_data.Settings).ContainerPath))
-			{
-				buttonXOpenQV.Enabled = true;
-				buttonXOpenQV.Text = String.Format("!QV Folder ({0})", ((PowerPointLinkSettings)_data.Settings).Id.ToString("D"));
-			}
-			else
-				buttonXOpenQV.Enabled = false;
+			//if (MainController.Instance.Settings.EnableLocalSync &&
+			//	Directory.Exists(((PowerPointLinkSettings)_data.Settings).ContainerPath))
+			//{
+			//	buttonXOpenQV.Enabled = true;
+			//	buttonXOpenQV.Text = String.Format("!QV Folder ({0})", ((PowerPointLinkSettings)_data.Settings).Id.ToString("D"));
+			//}
+			//else
+			//	buttonXOpenQV.Enabled = false;
 
 
-			if (Directory.Exists(_data.PreviewContainerPath))
-			{
-				buttonXOpenWV.Enabled = true;
-				buttonXOpenWV.Text = String.Format("!WV Folder ({0})", _data.PreviewContainerName);
-			}
-			else
-				buttonXOpenWV.Enabled = false;
+			//if (Directory.Exists(_data.PreviewContainerPath))
+			//{
+			//	buttonXOpenWV.Enabled = true;
+			//	buttonXOpenWV.Text = String.Format("!WV Folder ({0})", _data.PreviewContainerName);
+			//}
+			//else
+			//	buttonXOpenWV.Enabled = false;
 		}
 
 		public void SaveData()
@@ -97,7 +98,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 				}
 
 				_data.ClearPreviewContainer();
-				var previewContainer = _data.GetPreviewContainer();
+				//var previewContainer = _data.GetPreviewContainer();
 				//var previewGenerator = previewContainer.GetPreviewGenerator();
 				//previewContainer.UpdateContent(previewGenerator, cancelationToken);
 			});

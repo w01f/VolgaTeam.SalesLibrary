@@ -16,7 +16,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 	{
 		private readonly LibraryObjectLink _data;
 
-		public LinkSettingsType SettingsType => LinkSettingsType.Notes;
+		public LinkSettingsType[] SupportedSettingsTypes => new[] { LinkSettingsType.Notes };
 		public int Order => 1;
 		public bool AvailableForEmbedded => false;
 		public SettingsEditorHeaderInfo HeaderInfo => null;
@@ -45,9 +45,9 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 
 		public void LoadData()
 		{
-			checkEditNote.Checked = !String.IsNullOrEmpty(((LibraryObjectLinkSettings) _data.Settings).HoverNote);
+			checkEditNote.Checked = !String.IsNullOrEmpty(((LibraryObjectLinkSettings)_data.Settings).HoverNote);
 			memoEditNote.EditValue = ((LibraryObjectLinkSettings)_data.Settings).HoverNote;
-			checkEditShowOnlyCustomNote.Checked = ((LibraryObjectLinkSettings) _data.Settings).ShowOnlyCustomHoverNote;
+			checkEditShowOnlyCustomNote.Checked = ((LibraryObjectLinkSettings)_data.Settings).ShowOnlyCustomHoverNote;
 		}
 
 		public void SaveData()

@@ -29,8 +29,9 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 
 		protected override void AfterCreate()
 		{
-			var powerPointSettings = (PdfLinkSettings)Settings;
-			powerPointSettings.CheckIfArchiveResouce();
+			var pdfLinkSettings = (PdfLinkSettings)Settings;
+			pdfLinkSettings.CheckIfArchiveResouce();
+
 			base.AfterCreate();
 		}
 	}

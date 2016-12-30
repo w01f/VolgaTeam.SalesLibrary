@@ -17,6 +17,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 	{
 		private readonly LibraryFileLink _sourceLink;
 		private readonly LibraryFolderLink _parentFolderLink;
+		private LinkSettingsType _editedSettingsType;
 
 		public LinkSettingsType[] EditableSettings => new[]
 		{
@@ -46,6 +47,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			Text = _sourceLink.ToString();
 			StartPosition = FormStartPosition.CenterScreen;
 
+			_editedSettingsType = settingsType;
+
 			var folderSettings = (LibraryFolderLinkSettings)_parentFolderLink.Settings;
 			checkEditApplyForAll.Checked = folderSettings.SettingsTemplates
 				.Any(st => st.SettingsType == settingsType && st.FileType == _sourceLink.Type);
@@ -56,7 +59,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 					EntitySettingsResolver.ExtractObjectTypeFromProxy(_sourceLink.GetType()), _sourceLink)
 					.OfType<ILinkSettingsEditControl>()
 					.Where(lp =>
-						lp.SettingsType == settingsType && lp.AvailableForEmbedded)
+						lp.SupportedSettingsTypes.Contains(settingsType) && lp.AvailableForEmbedded)
 					.OrderBy(lp => lp.Order));
 		}
 
@@ -79,8 +82,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			{
 				optionPage.SaveData();
 
-				var settingsType = optionPage.SettingsType;
-				folderSettings.ProcessUniverslaLinkSettings(settingsType, _sourceLink, checkEditApplyForAll.Checked);
+				folderSettings.ProcessUniverslaLinkSettings(_editedSettingsType, _sourceLink, checkEditApplyForAll.Checked);
 			}
 		}
 

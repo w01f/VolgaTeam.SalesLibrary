@@ -77,12 +77,13 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 			_folderBoxes.ForEach(folderBoxControl => folderBoxControl.SelectAll(false));
 		}
 
-		public void EditTags()
+		public void EditLinksGroupSettings(LinkSettingsType settingsType, FileTypes? defaultLinkType = null, bool updateContent = true)
 		{
 			MainController.Instance.WallbinViews.Selection.Reset();
-			SettingsEditorFactory.Run(PageContainer.Page.AllLinks.ToList(), LinkSettingsType.Tags, false);
-			MainController.Instance.ProcessManager.Run("Updating Page...",
-				cancelationToken => MainController.Instance.MainForm.Invoke(new MethodInvoker(UpdateContent)));
+			SettingsEditorFactory.Run(PageContainer.Page, settingsType, defaultLinkType);
+			if (updateContent)
+				MainController.Instance.ProcessManager.Run("Updating Page...",
+					cancelationToken => MainController.Instance.MainForm.Invoke(new MethodInvoker(UpdateContent)));
 		}
 
 		public void DeleteLinks()

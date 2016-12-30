@@ -306,7 +306,7 @@ namespace SalesLibraries.FileManager.Controllers
 			var button = sender as ButtonItem;
 			if (button?.Tag == null) return;
 			var propertiesType = (LinkSettingsType)Enum.Parse(typeof(LinkSettingsType), (String)button.Tag);
-			selectedFolder.EditLinkSettings(propertiesType);
+			selectedFolder.EditSingleLinkSettings(propertiesType);
 		}
 		#endregion
 

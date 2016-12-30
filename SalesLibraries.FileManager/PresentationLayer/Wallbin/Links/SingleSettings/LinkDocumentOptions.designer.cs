@@ -40,6 +40,7 @@
 			this.labelControlTitle = new DevExpress.XtraEditors.LabelControl();
 			this.ckForcePreview = new System.Windows.Forms.CheckBox();
 			this.ckIsArchiveResource = new System.Windows.Forms.CheckBox();
+			this.ckSaveAsTemplate = new System.Windows.Forms.CheckBox();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).BeginInit();
 			this.SuspendLayout();
@@ -173,9 +174,23 @@
 			this.ckIsArchiveResource.UseVisualStyleBackColor = true;
 			this.ckIsArchiveResource.CheckedChanged += new System.EventHandler(this.ckIsArchiveResource_CheckedChanged);
 			// 
+			// ckSaveAsTemplate
+			// 
+			this.ckSaveAsTemplate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.ckSaveAsTemplate.AutoSize = true;
+			this.ckSaveAsTemplate.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.ckSaveAsTemplate.ForeColor = System.Drawing.Color.Black;
+			this.ckSaveAsTemplate.Location = new System.Drawing.Point(17, 518);
+			this.ckSaveAsTemplate.Name = "ckSaveAsTemplate";
+			this.ckSaveAsTemplate.Size = new System.Drawing.Size(222, 20);
+			this.ckSaveAsTemplate.TabIndex = 65;
+			this.ckSaveAsTemplate.Text = "Save as template for new links";
+			this.ckSaveAsTemplate.UseVisualStyleBackColor = true;
+			// 
 			// LinkDocumentOptions
 			// 
 			this.BackColor = System.Drawing.Color.White;
+			this.Controls.Add(this.ckSaveAsTemplate);
 			this.Controls.Add(this.ckIsArchiveResource);
 			this.Controls.Add(this.ckForcePreview);
 			this.Controls.Add(this.labelControlTitleButtons);
@@ -207,5 +222,6 @@
 		private DevExpress.XtraEditors.LabelControl labelControlTitle;
 		public System.Windows.Forms.CheckBox ckForcePreview;
 		public System.Windows.Forms.CheckBox ckIsArchiveResource;
+		public System.Windows.Forms.CheckBox ckSaveAsTemplate;
 	}
 }
