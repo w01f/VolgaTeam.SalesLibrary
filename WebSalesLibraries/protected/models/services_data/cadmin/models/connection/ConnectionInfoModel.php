@@ -1,4 +1,5 @@
 <?
+	namespace application\models\services_data\cadmin\models\connection;
 
 	/**
 	 * Class ConnectionInfoModel

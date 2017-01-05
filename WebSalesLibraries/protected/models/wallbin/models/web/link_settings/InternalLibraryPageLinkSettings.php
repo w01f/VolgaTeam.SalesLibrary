@@ -30,34 +30,13 @@
 		 */
 		public $showHeaderText;
 		/**
-		 * @var string
-		 * @soap
-		 */
-		public $pageViewType;
-		/**
 		 * @var boolean
 		 * @soap
 		 */
-		public $showLogo;
-		/**
-		 * @var boolean
-		 * @soap
-		 */
-		public $showText;
-		/**
-		 * @var boolean
-		 * @soap
-		 */
-		public $showWindowHeaders;
+		public $openOnSamePage;
 		/**
 		 * @var string
 		 * @soap
 		 */
-		public $textColor;
-		/**
-		 * @var string
-		 * @soap
-		 */
-		public $backColor;
-
+		public $styleSettingsEncoded;
 	}

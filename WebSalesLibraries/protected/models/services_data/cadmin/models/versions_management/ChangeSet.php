@@ -1,4 +1,6 @@
 <?
+	namespace application\models\services_data\cadmin\models\versions_management;
+
 	use application\models\wallbin\models\cadmin\entities\VersionedObject;
 
 	/**

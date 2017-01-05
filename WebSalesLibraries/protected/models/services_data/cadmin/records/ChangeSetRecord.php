@@ -1,4 +1,6 @@
 <?
+	namespace application\models\services_data\cadmin\records;
+	use application\models\services_data\cadmin\models\versions_management\ChangeSet;
 
 	/**
 	 * Class ChangeSetRecord
@@ -10,11 +12,11 @@
 	 * @property int object_type
 	 * @property string object_data
 	 */
-	class ChangeSetRecord extends CActiveRecord
+	class ChangeSetRecord extends \CActiveRecord
 	{
 		/**
 		 * @param string $className
-		 * @return CActiveRecord
+		 * @return \CActiveRecord
 		 */
 		public static function model($className = __CLASS__)
 		{
@@ -36,7 +38,7 @@
 		{
 			$model = new ChangeSet();
 			$model->changeType = $this->change_type;
-			$model->changedObject = CJSON::decode($this->change_data, false);
+			$model->changedObject = \CJSON::decode($this->change_data, false);
 			return $model;
 		}
 
@@ -51,10 +53,10 @@
 			$changeSetRecord->id = uniqid();
 			$changeSetRecord->id_library = $idLibrary;
 			$changeSetRecord->user = $userName;
-			$changeSetRecord->change_date = date(Yii::app()->params['mysqlDateFormat'], strtotime($changeSetModel->changedObject->lastModified));
+			$changeSetRecord->change_date = date(\Yii::app()->params['mysqlDateFormat'], strtotime($changeSetModel->changedObject->lastModified));
 			$changeSetRecord->change_type = $changeSetModel->changeType;
 			$changeSetRecord->object_type = $changeSetModel->changedObject->objectType;
-			$changeSetRecord->object_data = CJSON::encode($changeSetModel->changedObject);
+			$changeSetRecord->object_data = \CJSON::encode($changeSetModel->changedObject);
 			$changeSetRecord->save();
 		}
 	}

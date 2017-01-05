@@ -1,4 +1,6 @@
 <?
+	namespace application\models\services_data\cadmin\records;
+	use application\models\services_data\cadmin\models\connection\ConnectionInfoModel;
 
 	/**
 	 * Class ConnectionInfoRecord
@@ -6,11 +8,11 @@
 	 * @property string user
 	 * @property string last_update
 	 */
-	class ConnectionInfoRecord extends CActiveRecord
+	class ConnectionInfoRecord extends \CActiveRecord
 	{
 		/**
 		 * @param string $className
-		 * @return CActiveRecord
+		 * @return \CActiveRecord
 		 */
 		public static function model($className = __CLASS__)
 		{
@@ -32,7 +34,7 @@
 		{
 			$model = new ConnectionInfoModel();
 			$model->user = $this->user;
-			$model->connectionTime = date(Yii::app()->params['outputDateFormat'], strtotime($this->last_update));
+			$model->connectionTime = date(\Yii::app()->params['outputDateFormat'], strtotime($this->last_update));
 			return $model;
 		}
 
@@ -59,10 +61,10 @@
 		 */
 		public static function addConnection($userName, $libraryName)
 		{
-			/** @var  $libraryRecord LibraryRecord */
-			$libraryRecord = LibraryRecord::model()->find('name=?', array($libraryName));
+			/** @var  $libraryRecord \LibraryRecord */
+			$libraryRecord = \LibraryRecord::model()->find('name=?', array($libraryName));
 			if (!isset($libraryRecord))
-				$libraryRecord = LibraryRecord::createEmptyLibrary($libraryName);
+				$libraryRecord = \LibraryRecord::createEmptyLibrary($libraryName);
 
 			$connectionInfo = self::getConnectionInfo($libraryRecord->id);
 			if (isset($connectionInfo))
@@ -76,7 +78,7 @@
 				$connectionRecord = new ConnectionInfoRecord();
 				$connectionRecord->id = $libraryRecord->id;
 				$connectionRecord->user = $userName;
-				$connectionRecord->last_update = date(Yii::app()->params['mysqlDateFormat']);
+				$connectionRecord->last_update = date(\Yii::app()->params['mysqlDateFormat']);
 				$connectionRecord->save();
 
 				$connectionInfo = $connectionRecord->getModel();
@@ -94,8 +96,8 @@
 		 */
 		public static function deleteConnection($userName, $libraryName)
 		{
-			/** @var  $libraryRecord LibraryRecord */
-			$libraryRecord = LibraryRecord::model()->find('name=?', array($libraryName));
+			/** @var  $libraryRecord \LibraryRecord */
+			$libraryRecord = \LibraryRecord::model()->find('name=?', array($libraryName));
 			if (!isset($libraryRecord))
 				return;
 			/** @var  $connectionRecord ConnectionInfoRecord */

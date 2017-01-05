@@ -35,19 +35,13 @@
 		 */
 		public $showHeaderText;
 		/**
-		 * @var string
-		 * @soap
-		 */
-		public $windowViewType;
-		/**
-		 * @var int
-		 * @soap
-		 */
-		public $column;
-		/**
 		 * @var boolean
 		 * @soap
 		 */
-		public $linksOnly;
-
+		public $openOnSamePage;
+		/**
+		 * @var string
+		 * @soap
+		 */
+		public $styleSettingsEncoded;
 	}

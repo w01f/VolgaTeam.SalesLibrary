@@ -15,9 +15,15 @@
 		public $windowName;
 		public $headerIcon;
 		public $showHeaderText;
+
 		public $windowViewType;
 		public $column;
 		public $linksOnly;
+
+		public $navigationPanel;
+
+		/** @var SearchBar */
+		public $searchBar;
 
 		/**
 		 * @param $linkSettings InternalLibraryFolderLinkSettings
@@ -31,9 +37,35 @@
 			$this->windowName = $linkSettings->windowName;
 			$this->headerIcon = $linkSettings->headerIcon;
 			$this->showHeaderText = $linkSettings->showHeaderText;
-			$this->windowViewType = $linkSettings->windowViewType;
-			$this->column = $linkSettings->column - 1;
-			$this->linksOnly = $linkSettings->linksOnly;
+
+			$this->column = -1;
+			$this->windowViewType = 'columns';
+			$this->linksOnly = false;
+			$this->searchBar = SearchBar::createEmpty();
+			if (!empty($linkSettings->styleSettingsEncoded))
+			{
+				$styleConfig = new DOMDocument();
+				$styleConfig->loadXML(base64_decode($linkSettings->styleSettingsEncoded));
+				$xpath = new DomXPath($styleConfig);
+
+				$queryResult = $xpath->query('//Config/Column');
+				$this->column = $queryResult->length > 0 ? intval(trim($queryResult->item(0)->nodeValue)) - 1 : $this->column;
+				$queryResult = $xpath->query('//Config/WindowViewType');
+				$this->windowViewType = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : $this->windowViewType;
+				$queryResult = $xpath->query('//Config/LinksOnly');
+				$this->linksOnly = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : $this->linksOnly;
+
+				$queryResult = $xpath->query('//Config/ShowLeftPanel');
+				$showNavigationPanel = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : false;
+				$queryResult = $xpath->query('//Config/LeftPanelID');
+				$navigationPanelId = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
+				if ($showNavigationPanel && isset($navigationPanelId))
+				{
+					$navigationPanelData = ShortcutsManager::getNavigationPanel($this->$navigationPanelId);
+					$viewPath = \Yii::getPathOfAlias('application.views.regular.shortcuts.navigationPanel') . '/itemsList.php';
+					$this->navigationPanel = \Yii::app()->controller->renderFile($viewPath, array('navigationPanel' => $navigationPanelData), true);
+				}
+			}
 		}
 
 		/** @return LibraryFolder */

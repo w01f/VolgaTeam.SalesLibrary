@@ -85,6 +85,7 @@
 					}
 
 					$fileInfo = FileInfo::fromLinkData(
+						$record['id'],
 						$type,
 						$linkRecord['name'],
 						$linkRecord['path'],
@@ -173,8 +174,8 @@
 			if (!isset($groupFields))
 				$groupFields = array('link.id');
 
-			/** @var CDbCommand $dbCommnad */
-			$dbCommnad = Yii::app()->db->createCommand();
+			/** @var CDbCommand $dbCommand */
+			$dbCommand = Yii::app()->db->createCommand();
 
 			$queryFields = array(
 				'id' => 'max(link.id) as id',
@@ -220,13 +221,13 @@
 				$whereConditions[] = 'link.type<>15';
 			$whereConditions = array_merge($whereConditions, $customWhereConditions);
 
-			$dbCommnad = $dbCommnad->select(array_values($queryFields));
-			$dbCommnad = $dbCommnad->from($from);
+			$dbCommand = $dbCommand->select(array_values($queryFields));
+			$dbCommand = $dbCommand->from($from);
 			foreach ($joinParts as $table => $condition)
-				$dbCommnad = $dbCommnad->join($table, $condition);
-			$dbCommnad = $dbCommnad->leftJoin("(select lcat.id_link, group_concat(lcat.tag separator ', ') as tag from tbl_link_category lcat where " . $categoryWhereCondition . " group by lcat.id_link) glcat", 'glcat.id_link=link.id');
-			$dbCommnad = $dbCommnad->where($whereConditions);
-			$dbCommnad = $dbCommnad->group($groupFields);
-			return $dbCommnad;
+				$dbCommand = $dbCommand->join($table, $condition);
+			$dbCommand = $dbCommand->leftJoin("(select lcat.id_link, group_concat(lcat.tag separator ', ') as tag from tbl_link_category lcat where " . $categoryWhereCondition . " group by lcat.id_link) glcat", 'glcat.id_link=link.id');
+			$dbCommand = $dbCommand->where($whereConditions);
+			$dbCommand = $dbCommand->group($groupFields);
+			return $dbCommand;
 		}
 	}

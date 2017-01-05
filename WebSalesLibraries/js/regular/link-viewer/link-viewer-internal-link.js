@@ -12,6 +12,7 @@
 				case 1:
 					new $.SalesPortal.ShortcutsWallbin().init({
 						content: parameters.content,
+						navigationPanel: viewerData.previewInfo.navigationPanel,
 						options: {
 							headerTitle: viewerData.previewInfo.showHeaderText ? viewerData.name : '',
 							headerIcon: viewerData.previewInfo.headerIcon,
@@ -29,6 +30,7 @@
 				case 2:
 					new $.SalesPortal.ShortcutsLibraryPage().init({
 						content: parameters.content,
+						navigationPanel: viewerData.previewInfo.navigationPanel,
 						options: {
 							headerTitle: viewerData.previewInfo.showHeaderText ? viewerData.name : '',
 							headerIcon: viewerData.previewInfo.headerIcon,
@@ -44,6 +46,7 @@
 				case 3:
 					new $.SalesPortal.ShortcutsLibraryWindow().init({
 						content: parameters.content,
+						navigationPanel: viewerData.previewInfo.navigationPanel,
 						options: {
 							headerTitle: viewerData.previewInfo.showHeaderText ? viewerData.name : '',
 							headerIcon: viewerData.previewInfo.headerIcon,

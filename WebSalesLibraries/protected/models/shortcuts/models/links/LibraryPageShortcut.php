@@ -94,6 +94,7 @@
 			$libraryName = trim($linkConfig->getElementsByTagName("Library")->item(0)->nodeValue);
 			$pageName = trim($linkConfig->getElementsByTagName("Page")->item(0)->nodeValue);
 			if (!(isset($libraryName) && isset($pageName))) return null;
+			/** @var LibraryPageRecord $libraryPageRecord */
 			$libraryPageRecord = Yii::app()->db->createCommand()
 				->select("p.*")
 				->from('tbl_page p')

@@ -51,8 +51,8 @@
                 font-style: <? echo $style->font->isItalic ? 'italic' : 'normal'; ?>;
                 text-decoration: <? echo $style->font->isUnderlined ? 'underline' : 'inherit'; ?>;
                 text-align: <? echo $style->textAlign; ?>;
-                color: <? echo '#'.$style->textColor; ?>;
-                background-color: <? echo '#'.$style->backColor; ?>;
+                color: <? echo (isset($style->textColor)?('#'.$style->textColor):(isset($folder->banner) && $folder->banner->isEnabled ? $folder->banner->foreColor : $folder->headerForeColor)); ?>;
+                background-color: <? echo (isset($style->backColor)?('#'.$style->backColor):$folder->headerBackColor); ?>;
             }
         </style>
         <div class="folder-header-container custom-title" id="folder<? echo $folder->id; ?>">

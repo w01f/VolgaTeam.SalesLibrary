@@ -13,7 +13,11 @@
 					'style' => \application\models\wallbin\models\web\style\FolderStyle::createDefault()
 				), true);
 		else
-			$content = $this->renderFile(Yii::getPathOfAlias($this->pathPrefix . 'wallbin') . '/accordionFolder.php', array('folder' => $window), true);
+			$content = $this->renderFile(
+			        Yii::getPathOfAlias($this->pathPrefix . 'wallbin') . '/accordionFolder.php',
+                array(
+                        'folder' => $window
+                ), true);
 	}
 	else
 		$content = $this->renderFile(Yii::getPathOfAlias($this->pathPrefix . 'wallbin') . '/folderLinks.php', array('folder' => $window), true);

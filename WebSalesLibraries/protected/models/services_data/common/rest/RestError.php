@@ -1,4 +1,6 @@
-<?php
+<?
+	namespace application\models\services_data\common\rest;
+
 	/**
 	 * Class RestError
 	 */

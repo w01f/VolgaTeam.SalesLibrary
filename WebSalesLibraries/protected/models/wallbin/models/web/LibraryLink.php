@@ -454,19 +454,11 @@
 				case 17:
 				case 18:
 				case 20:
-					/** @var \DocumentLinkSettings|\HyperLinkSettings $urlLinkSettings */
-					$urlLinkSettings = $extendedProperties;
-					return $urlLinkSettings->forcePreview;
+					/** @var \DocumentLinkSettings|\HyperLinkSettings $extendedProperties */
+					return $extendedProperties->forcePreview;
 				case 16:
-					/** @var \InternalLibraryFolderLinkSettings|\InternalLibraryObjectLinkSettings|\InternalLibraryPageLinkSettings|\InternalShortcutLinkSettings|\InternalWallbinLinkSettings $internalLinkSettings */
-					$internalLinkSettings = $extendedProperties;
-					if ($internalLinkSettings->internalLinkType == 5)
-					{
-						/** @var \InternalShortcutLinkSettings $shortcutLinkSettings */
-						$shortcutLinkSettings = $internalLinkSettings;
-						return !$shortcutLinkSettings->openOnSamePage;
-					}
-					return false;
+					/** @var \InternalLibraryFolderLinkSettings|\InternalLibraryObjectLinkSettings|\InternalLibraryPageLinkSettings|\InternalShortcutLinkSettings|\InternalWallbinLinkSettings $extendedProperties */
+					return $extendedProperties->internalLinkType != 4 && !$extendedProperties->openOnSamePage;
 				default:
 					return false;
 			}

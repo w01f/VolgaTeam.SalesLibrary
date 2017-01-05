@@ -252,4 +252,13 @@
 			Yii::app()->getRequest()->sendFile($zipFile, @file_get_contents($zipPath));
 			Yii::app()->end();
 		}
+
+		public function actionGetSingleInternalLink()
+		{
+			$linkId = Yii::app()->request->getQuery('linkId');
+			$linkRecord = LinkRecord::getLinkById($linkId);
+			$this->pageTitle = sprintf('%s', $linkRecord->name);
+			$menuGroups = ShortcutsManager::getAvailableGroups($this->isPhone);
+			$this->render('internalLinkSinglePage', array('menuGroups' => $menuGroups, 'linkId' => $linkId));
+		}
 	}

@@ -20,7 +20,7 @@
 		{
 			$style = self::createDefault();
 
-			$queryResult = $xpath->query('Header', $contextNode);
+			$queryResult = $xpath->query('.//Header', $contextNode);
 			if ($queryResult->length > 0)
 				$style->header = WallbinHeaderStyle::fromXml($xpath, $queryResult->item(0));
 

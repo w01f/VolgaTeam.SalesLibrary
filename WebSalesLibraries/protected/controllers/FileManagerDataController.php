@@ -1,11 +1,18 @@
 <?
-	use application\models\wallbin\models\web\Category as Category;
-	use application\models\wallbin\models\web\SuperFilter as SuperFilter;
+	use application\models\services_data\common\dictionaries\DictionariesManager;
+	use application\models\services_data\common\dictionaries\LibraryLinksGetRequestData;
+	use application\models\services_data\common\dictionaries\SearchCategoriesGetRequestData;
+	use application\models\services_data\common\dictionaries\SecurityGetRequestData;
+	use application\models\services_data\common\dictionaries\ShortcutLinksGetRequestData;
+	use application\models\services_data\common\dictionaries\SuperFiltersGetRequestData;
+	use application\models\services_data\common\meta_data\MetaDataGetRequestData;
+	use application\models\services_data\common\meta_data\MetaDataManager;
+	use application\models\services_data\common\rest\RestResponse;
 
 	/**
 	 * Class FileManagerDataController
 	 */
-	class FileManagerDataController extends LocalAppDataController
+	class FileManagerDataController extends RestController
 	{
 		/** return boolean */
 		protected function getIsPublicController()
@@ -13,108 +20,42 @@
 			return true;
 		}
 
-		/**
-		 * @return array
-		 */
-		public function actions()
+		public function actionGet()
 		{
-			return array(
-				'quote' => array(
-					'class' => 'CWebServiceAction',
-					'classMap' => array(
-						'GroupModel' => 'GroupModel',
-						'SoapCategory' => 'SoapCategory',
-						'SoapSuperFilter' => 'SoapSuperFilter',
-					),
-				),
-			);
-		}
-
-		/**
-		 * @param string $sessionKey
-		 * @return GroupModel[]
-		 * @soap
-		 */
-		public function getSecurityGroups($sessionKey)
-		{
-			$groups = array();
-			if ($this->authenticateBySession($sessionKey))
+			$restParams = Yii::app()->request->getRestParams();
+			$requestData = CJSON::decode($restParams['dataEncoded'], false);
+			$model = $_GET['model'];
+			switch ($model)
 			{
-				foreach (GroupRecord::model()->findAll() as $groupRecord)
-				{
-					/** @var $groupRecord GroupRecord */
-					$group = new GroupModel();
-					$group->id = $groupRecord->id;
-					$group->name = $groupRecord->name;
+				case 'metadata':
+					/** @var $requestData MetaDataGetRequestData */
+					$response = MetaDataManager::getData($requestData);
+					break;
+				case 'security':
+					/** @var $requestData SecurityGetRequestData */
+					$response = DictionariesManager::getSecurity();
+					break;
+				case 'searchcategories':
+					/** @var $requestData SearchCategoriesGetRequestData */
+					$response = DictionariesManager::getCategories();
+					break;
+				case 'superfilters':
+					/** @var $requestData SuperFiltersGetRequestData */
+					$response = DictionariesManager::getSuperFilters();
+					break;
+				case 'librarylinks':
+					/** @var $requestData LibraryLinksGetRequestData */
+					$response = DictionariesManager::getLibraryLinks();
+					break;
+				case 'shortcutlinks':
+					/** @var $requestData ShortcutLinksGetRequestData */
+					$response = DictionariesManager::getShortcutLinks();
+					break;
+				default:
+					$response = RestResponse::error(sprintf("Model '%s' is not recognized", $model));
+					break;
 
-					$userList = array();
-					$assignedUsers = UserGroupRecord::getUserIdsByGroup($groupRecord->id);
-					$totalUsers = UserRecord::model()->count('role<>2');
-					$group->allUsers = isset($assignedUsers) && $totalUsers == count($assignedUsers);
-					foreach ($assignedUsers as $userId)
-					{
-						/** @var $userRecord UserRecord */
-						$userRecord = UserRecord::model()->findByPk($userId);
-						if (isset($userRecord))
-						{
-							$user = new UserModel();
-							$user->id = $userRecord->id;
-							$user->login = $userRecord->login;
-							$user->firstName = $userRecord->first_name;
-							$user->lastName = $userRecord->last_name;
-							$user->email = $userRecord->email;
-							$userList[] = $user;
-						}
-					}
-					$sortHelper = new ObjectSortHelper('firstName', 'asc');
-					usort($userList, array($sortHelper, 'sort'));
-					$group->users = $userList;
-
-					$group->libraryIds = GroupLibraryRecord::getLibraryIdsByGroup($groupRecord->id);
-					$groups[] = $group;
-				}
 			}
-
-			Yii::app()->cacheDB->flush();
-			$sortHelper = new ObjectSortHelper('name', 'asc');
-			usort($groups, array($sortHelper, 'sort'));
-			return $groups;
-		}
-
-		/**
-		 * @param string $sessionKey
-		 * @return SoapCategory[]
-		 * @soap
-		 */
-		public function getCategories($sessionKey)
-		{
-			$soapCategories = array();
-			if ($this->authenticateBySession($sessionKey))
-			{
-				$categoryManager = new CategoryManager();
-				$categoryManager->loadCategories();
-				foreach ($categoryManager->categories as $category)
-					$soapCategories[] = SoapCategory::load($category);
-			}
-			return $soapCategories;
-		}
-
-		/**
-		 * @param string $sessionKey
-		 * @return SoapSuperFilter[]
-		 * @soap
-		 */
-		public function getSuperFilters($sessionKey)
-		{
-			$soapSuperFilters = array();
-			if ($this->authenticateBySession($sessionKey))
-			{
-				$categoryManager = new CategoryManager();
-				$categoryManager->loadCategories();
-
-				foreach ($categoryManager->superFilters as $superFilter)
-					$soapSuperFilters[] = SoapSuperFilter::load($superFilter);
-			}
-			return $soapSuperFilters;
+			$this->sendResponse(200, CJSON::encode($response));
 		}
 	}

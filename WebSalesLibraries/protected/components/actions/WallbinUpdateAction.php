@@ -69,6 +69,8 @@
 									$library->buildCache($this->controller);
 									echo "HTML cache for " . $libraryName . " updated.\n";
 									unset($library);
+
+									MetaDataRecord::setData('external-library-links', 'last-update', date(Yii::app()->params['sourceDateFormat'], time()));
 								}
 							}
 						}

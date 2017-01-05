@@ -1,5 +1,5 @@
 <?
-	namespace application\models\cadmin\models\library_data;
+	namespace application\models\services_data\cadmin\models\library_data;
 
 	use application\models\wallbin\models\cadmin\entities\Library;
 	use application\models\wallbin\models\cadmin\entities\LibraryPage;
@@ -47,7 +47,7 @@
 				$folderRecords = \FolderRecord::model()->findAll('id_library=? and id_page=?', array($libraryId, $pageRecord->id));
 				foreach ($folderRecords as $folderRecord)
 				{
-					$folderData
+					//$folderData
 				}
 			}
 			return $dataPackage;

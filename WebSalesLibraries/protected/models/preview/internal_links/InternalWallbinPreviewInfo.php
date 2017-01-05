@@ -1,5 +1,6 @@
 <?
 	use application\models\wallbin\models\web\LibraryManager as LibraryManager;
+	use application\models\wallbin\models\web\style\WallbinStyle;
 
 	/**
 	 * Class InternalWallbinPreviewInfo
@@ -16,7 +17,14 @@
 		public $showHeaderText;
 		public $pageViewType;
 		public $pageSelectorType;
-		public $showLogo;
+
+		public $navigationPanel;
+
+		/** @var SearchBar */
+		public $searchBar;
+
+		/** @var  WallbinStyle */
+		public $style;
 
 		/**
 		 * @param $linkSettings InternalWallbinLinkSettings
@@ -29,9 +37,37 @@
 			$this->pageName = $linkSettings->pageName;
 			$this->headerIcon = $linkSettings->headerIcon;
 			$this->showHeaderText = $linkSettings->showHeaderText;
-			$this->pageViewType = $linkSettings->pageViewType;
-			$this->pageSelectorType = $linkSettings->pageSelectorType;
-			$this->showLogo = $linkSettings->showLogo;
+
+			$this->pageViewType = 'columns';
+			$this->pageSelectorMode = 'tabs';
+			$this->style = WallbinStyle::createDefault();
+			$this->searchBar = SearchBar::createEmpty();
+			if (!empty($linkSettings->styleSettingsEncoded))
+			{
+				$styleConfig = new DOMDocument();
+				$styleConfig->loadXML(base64_decode($linkSettings->styleSettingsEncoded));
+				$xpath = new DomXPath($styleConfig);
+
+				$queryResult = $xpath->query('//Config/PageViewType');
+				$this->pageViewType = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : $this->pageViewType;
+				$queryResult = $xpath->query('//Config/PageSelectorMode');
+				$this->pageSelectorMode = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : $this->pageSelectorMode;
+
+				$queryResult = $xpath->query('//Config/WallbinStyle');
+				if ($queryResult->length > 0)
+					$this->style = WallbinStyle::fromXml($xpath, $queryResult->item(0));
+
+				$queryResult = $xpath->query('//Config/ShowLeftPanel');
+				$showNavigationPanel = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : false;
+				$queryResult = $xpath->query('//Config/LeftPanelID');
+				$navigationPanelId = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
+				if ($showNavigationPanel && isset($navigationPanelId))
+				{
+					$navigationPanelData = ShortcutsManager::getNavigationPanel($this->$navigationPanelId);
+					$viewPath = \Yii::getPathOfAlias('application.views.regular.shortcuts.navigationPanel') . '/itemsList.php';
+					$this->navigationPanel = \Yii::app()->controller->renderFile($viewPath, array('navigationPanel' => $navigationPanelData), true);
+				}
+			}
 
 			$libraryManager = new LibraryManager();
 			$library = $libraryManager->getLibraryByName($this->libraryName);

@@ -55,11 +55,13 @@
 			'application.models.preview.internal_links.*',
 			'application.models.preview.link_bundles.*',
 			'application.models.user_tabs.*',
-			'application.models.rest.*',
-			'application.models.cadmin.records.*',
-			'application.models.cadmin.models.connection.*',
-			'application.models.cadmin.models.library_data.*',
-			'application.models.cadmin.models.versions_management.*',
+			'application.models.services_data.common.dictionaries.*',
+			'application.models.services_data.common.meta_data.*',
+			'application.models.services_data.common.rest.*',
+			'application.models.services_data.cadmin.records.*',
+			'application.models.services_data.cadmin.models.connection.*',
+			'application.models.services_data.cadmin.models.library_data.*',
+			'application.models.services_data.cadmin.models.versions_management.*',
 		),
 		'behaviors' => array(
 			'onBeginRequest' => array(
@@ -80,14 +82,14 @@
 			'urlManager' => array(
 				'urlFormat' => 'path',
 				'showScriptName' => false,
+				'caseSensitive' => true,
 				'rules' => array(
 					// REST patterns
-					array('cloudadmin/get', 'pattern'=>'cloudadmin/<model:\w+>', 'verb'=>'POST'),
-					array('cloudadmin/set', 'pattern'=>'cloudadmin/<model:\w+>', 'verb'=>'PUT'),
+					array('fileManagerData/get', 'pattern' => 'FileManagerData/<model:\w+>', 'verb' => 'POST'),
+					array('cloudAdmin/get', 'pattern' => 'CloudAdmin/<model:\w+>', 'verb' => 'POST'),
+					array('cloudAdmin/set', 'pattern' => 'CloudAdmin/<model:\w+>', 'verb' => 'PUT'),
 					// Other patterns
-					'<controller:\w+>/<id:\d+>' => '<controller>/view',
 					'<controller:\w+>/<action:\w+>' => '<controller>/<action>',
-					'qpage/<controller:\w+>/<action:\w+>' => '<controller>/<action>',
 				)
 			),
 			'log' => array(

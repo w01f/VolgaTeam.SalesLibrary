@@ -58,8 +58,8 @@
 			$folderStyle->showCustomTitle = false;
 			$folderStyle->hideTopFoldersCustomTitle = false;
 			$folderStyle->textAlign = 'left';
-			$folderStyle->textColor = '000000';
-			$folderStyle->backColor = 'ffffff';
+			$folderStyle->textColor = null;
+			$folderStyle->backColor = null;
 			$folderStyle->font = \Font::createDefault();
 			return $folderStyle;
 		}

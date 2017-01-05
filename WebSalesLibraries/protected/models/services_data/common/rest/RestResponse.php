@@ -1,4 +1,5 @@
 <?
+	namespace application\models\services_data\common\rest;
 
 	/**
 	 * Class RestResponse
@@ -21,7 +22,7 @@
 			$error = new RestError();
 			$error->message = $errorMessage;
 			$response->resultCode = self::statusError;
-			$response->dataEncoded = CJSON::encode($error);
+			$response->dataEncoded = \CJSON::encode($error);
 			return $response;
 		}
 
@@ -33,7 +34,7 @@
 		{
 			$response = new RestResponse();
 			$response->resultCode = self::statusOK;
-			$response->dataEncoded = CJSON::encode($data);
+			$response->dataEncoded = \CJSON::encode($data);
 			return $response;
 		}
 	}

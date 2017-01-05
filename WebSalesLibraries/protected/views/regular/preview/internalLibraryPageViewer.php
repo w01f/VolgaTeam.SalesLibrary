@@ -7,13 +7,6 @@
 	$previewInfo = $data->previewInfo;
 	$libraryPage = $previewInfo->getLibraryPage();
 
-	$style = \application\models\wallbin\models\web\style\WallbinPageStyle::createDefault();
-	if (!$previewInfo->showWindowHeaders)
-	{
-		$style->enabled = true;
-		$style->showWindowHeaders = false;
-	}
-
 	if ($previewInfo->pageViewType == 'accordion')
 		$content = $this->renderPartial(
 			'../wallbin/accordionView',
@@ -25,36 +18,106 @@
 			'../wallbin/columnsView',
 			array(
 				'libraryPage' => $libraryPage,
-				'style' => $style
+				'style' => $previewInfo->style->page
 			), true);
 ?>
 <style>
-	#content .wallbin-header {
-		background-color: <? echo '#'.$previewInfo->backColor; ?> !important;
-	}
+    <?if($previewInfo->style->header->paddingLeft>0):?>
+    #content .wallbin-header-container {
+        padding-left: <? echo $previewInfo->style->header->paddingLeft;?>px;
+    }
 
-	#content .wallbin-header .wallbin-header-cell {
-		border-bottom: 1px #999 solid !important;
-	}
+    #content .wallbin-header .wallbin-header-cell {
+        padding-left: 0;
+    }
+    <?endif;?>
 
-	#content .wallbin-header .single-page-header .header-text {
-		color: <? echo '#'.$previewInfo->textColor; ?> !important;
-	}
+    #content .wallbin-header {
+        background-color: <? echo '#'.$previewInfo->style->header->backColor; ?> !important;
+    }
+
+    #content .wallbin-header .wallbin-header-cell {
+        border-bottom: 1px <? echo '#'.$previewInfo->style->header->headerBorderColor; ?> solid !important;
+    }
+
+    #content .wallbin-header .single-page-header .header-text {
+        color: <? echo '#'.$previewInfo->style->header->textColor; ?> !important;
+    }
+
+    <? if ($previewInfo->searchBar->configured): ?>
+    #content .wallbin-header .shortcuts-search-bar-container {
+        padding-right: 10px;
+        padding-top: 25px;
+        padding-bottom: 0;
+        vertical-align: top;
+    }
+
+    <? if ($previewInfo->style->header->showLogo && $previewInfo->style->header->showText): ?>
+    #content .wallbin-header .shortcuts-search-bar-container {
+        padding-bottom: 25px;
+        width: 100%;
+    }
+
+    <? else: ?>
+    #content .wallbin-header .shortcuts-search-bar-container {
+        width: 70%;
+    }
+
+    #content .wallbin-header .wallbin-logo-wrapper {
+        width: 30%;
+        vertical-align: top;
+    }
+
+    #content .wallbin-header .single-page-header.single-page-header-no-logo {
+        width: 30%;
+        padding-top: 30px;
+        vertical-align: top;
+    }
+
+    #content .wallbin-header .single-page-header.single-page-header-no-logo h4 {
+        margin: 0;
+    }
+
+    <? endif; ?>
+    <? endif; ?>
 </style>
 <div class="wallbin-header-container">
-	<table class="wallbin-header">
-		<tr>
-			<? if ($previewInfo->showLogo): ?>
-				<td class="wallbin-header-cell wallbin-logo-wrapper">
-					<img class="wallbin-logo" src="<? echo $libraryPage->logoContent; ?>">
-				</td>
+    <table class="wallbin-header">
+		<? if ($previewInfo->style->header->showLogo && $previewInfo->style->header->showText): ?>
+            <tr>
+                <td class="wallbin-logo-wrapper<? if (!$previewInfo->searchBar->configured): ?> wallbin-header-cell<? endif; ?>">
+                    <img class="wallbin-logo" src="<? echo $libraryPage->logoContent; ?>">
+                </td>
+                <td class="single-page-header<? if (!$previewInfo->searchBar->configured): ?> wallbin-header-cell<? endif; ?>">
+                    <h3 class="header-text"><? echo $libraryPage->name; ?></h3>
+                </td>
+            </tr>
+			<? if ($previewInfo->searchBar->configured): ?>
+                <tr>
+                    <td class="wallbin-header-cell shortcuts-search-bar-container" colspan="2">
+						<? echo $this->renderPartial('searchBar/bar', array('searchBar' => $previewInfo->searchBar), true); ?>
+                    </td>
+                </tr>
 			<? endif; ?>
-			<? if ($previewInfo->showText): ?>
-				<td class="wallbin-header-cell single-page-header<? if (!$previewInfo->showLogo): ?> single-page-header-no-logo<? endif; ?>">
-					<h4 class="header-text"><? echo $libraryPage->name; ?></h4>
-				</td>
-			<? endif; ?>
-		</tr>
-	</table>
+		<? else: ?>
+            <tr>
+				<? if ($previewInfo->style->header->showLogo): ?>
+                    <td class="wallbin-header-cell wallbin-logo-wrapper">
+                        <img class="wallbin-logo" src="<? echo $libraryPage->logoContent; ?>">
+                    </td>
+				<? endif; ?>
+				<? if ($previewInfo->style->header->showText): ?>
+                    <td class="wallbin-header-cell single-page-header single-page-header-no-logo">
+                        <h4 class="header-text"><? echo $libraryPage->name; ?></h4>
+                    </td>
+				<? endif; ?>
+				<? if ($previewInfo->searchBar->configured): ?>
+                    <td class="wallbin-header-cell shortcuts-search-bar-container">
+						<? echo $this->renderPartial('searchBar/bar', array('searchBar' => $previewInfo->searchBar), true); ?>
+                    </td>
+				<? endif; ?>
+            </tr>
+		<? endif; ?>
+    </table>
 </div>
 <div class="wallbin-container"><? echo $content; ?></div>

@@ -21,6 +21,7 @@
 			if (isset(Yii::app()->request->cookies[$cookieId]->value))
 				$selectedCategories = CJSON::decode(Yii::app()->request->cookies[$cookieId]->value);
 
+			$this->categories = array();
 			$categoryRecords = CategoryRecord::getData();
 			if (isset($categoryRecords))
 			{
@@ -48,6 +49,7 @@
 			if (isset(Yii::app()->request->cookies[$cookieId]->value))
 				$selectedSuperFilters = CJSON::decode(Yii::app()->request->cookies[$cookieId]->value);
 
+			$this->superFilters = array();
 			/** @var $superFilterRecords SuperFilterRecord */
 			$superFilterRecords = SuperFilterRecord::model()->findAll();
 			foreach ($superFilterRecords as $superFilterRecord)

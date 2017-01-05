@@ -115,6 +115,9 @@
 						}
 					}
 				}
+
+				MetaDataRecord::setData('shortcuts-links', 'last-update', date(Yii::app()->params['sourceDateFormat'], time()));
+
 				echo "Job completed...\n";
 			}
 		}

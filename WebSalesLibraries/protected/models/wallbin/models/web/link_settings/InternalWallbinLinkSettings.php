@@ -30,18 +30,13 @@
 		 */
 		public $showHeaderText;
 		/**
-		 * @var string
-		 * @soap
-		 */
-		public $pageViewType;
-		/**
-		 * @var string
-		 * @soap
-		 */
-		public $pageSelectorType;
-		/**
 		 * @var boolean
 		 * @soap
 		 */
-		public $showLogo;
+		public $openOnSamePage;
+		/**
+		 * @var string
+		 * @soap
+		 */
+		public $styleSettingsEncoded;
 	}

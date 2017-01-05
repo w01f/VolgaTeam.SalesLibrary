@@ -1,4 +1,8 @@
 <?
+	namespace application\models\services_data\cadmin\models\versions_management;
+
+	use application\models\services_data\cadmin\records\ChangeSetRecord;
+	use application\models\services_data\common\rest\RestResponse;
 	use \application\models\wallbin\models\cadmin\entities\VersionedObject as VersionedObject;
 	use \application\models\wallbin\models\cadmin\entities\Library as Library;
 	use \application\models\wallbin\models\cadmin\entities\LibraryPage as LibraryPage;
@@ -17,14 +21,14 @@
 			/** @var ChangeSetRecord[] $availableChangeSetRecords */
 			$availableChangeSetRecords = ChangeSetRecord::model()->findAll('id_library=? and change_date>?', array(
 				$changesRequestData->libraryId,
-				date(Yii::app()->params['mysqlDateFormat'], strtotime($changesRequestData->lastUpdate))));
+				date(\Yii::app()->params['mysqlDateFormat'], strtotime($changesRequestData->lastUpdate))));
 
 			$availableChangeSets = array();
 			foreach ($availableChangeSetRecords as $changeSetRecord)
 			{
 				$changeSet = new ChangeSet();
 				$changeSet->changeType = $changeSetRecord->change_type;
-				$changeSet->changedObject = CJSON::decode($changeSetRecord->object_data, false);
+				$changeSet->changedObject = \CJSON::decode($changeSetRecord->object_data, false);
 				$availableChangeSets[] = $changeSet;
 			}
 			return RestResponse::success($availableChangeSets);
@@ -44,14 +48,14 @@
 					case VersionedObject::ObjectTypeLibrary:
 						/** @var Library $library */
 						$library = $changeSet->changedObject;
-						LibraryRecord::updateDataFromChangeSet($library, $changeSet->changeType);
+						\LibraryRecord::updateDataFromChangeSet($library, $changeSet->changeType);
 						break;
 					case VersionedObject::ObjectTypeColumn:
 						break;
 					case VersionedObject::ObjectTypePage:
 						/** @var LibraryPage $libraryPage */
 						$libraryPage = $changeSet->changedObject;
-						LibraryPageRecord::updateDataFromChangeSet($libraryPage, $changeSet->changeType);
+						\LibraryPageRecord::updateDataFromChangeSet($libraryPage, $changeSet->changeType);
 						break;
 				}
 				ChangeSetRecord::saveChangeSet($changeSet, $changesRequestData->libraryId, $changesRequestData->user);

@@ -216,9 +216,9 @@
 				if (!$this->isPhone && $shortcut instanceof PageContentShortcut)
 				{
 					/** @var PageContentShortcut $shortcut */
-					$navigationPanel = $shortcut->getNavigationPanel();
-					if (isset($navigationPanel))
-						$navigationPanel = $this->renderPartial('navigationPanel/itemsList', array('navigationPanel' => $navigationPanel), true);
+					$navigationPanelData = $shortcut->getNavigationPanel();
+					if (isset($navigationPanelData))
+						$navigationPanel = $this->renderPartial('navigationPanel/itemsList', array('navigationPanel' => $navigationPanelData), true);
 				}
 
 				$pageContentBundle = array(

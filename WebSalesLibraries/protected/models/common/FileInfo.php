@@ -21,6 +21,7 @@
 		public static function fromLinkRecord($linkRecord, $parentLibrary)
 		{
 			return self::fromLinkData(
+				$linkRecord->id,
 				$linkRecord->type,
 				$linkRecord->name,
 				$linkRecord->file_relative_path,
@@ -29,6 +30,7 @@
 		}
 
 		/**
+		 * @param string $id
 		 * @param int $type
 		 * @param string $name
 		 * @param string $relativePath
@@ -36,7 +38,7 @@
 		 * @param Library $parentLibrary
 		 * @return FileInfo
 		 */
-		public static function fromLinkData($type, $name, $relativePath, $extendedProperties, $parentLibrary)
+		public static function fromLinkData($id, $type, $name, $relativePath, $extendedProperties, $parentLibrary)
 		{
 			$fileInfo = new FileInfo();
 			$fileInfo->isFile = false;
@@ -65,13 +67,18 @@
 					break;
 				case 16:
 					$fileInfo->name = $name;
-					/** @var InternalLibraryFolderLinkSettings|InternalLibraryObjectLinkSettings|InternalLibraryPageLinkSettings|InternalShortcutLinkSettings|InternalWallbinLinkSettings $internalLinkSettings */
-					$internalLinkSettings = $extendedProperties;
-					if ($internalLinkSettings->internalLinkType == 5)
+					/** @var InternalLibraryFolderLinkSettings|InternalLibraryObjectLinkSettings|InternalLibraryPageLinkSettings|InternalShortcutLinkSettings|InternalWallbinLinkSettings $extendedProperties */
+					switch ($extendedProperties->internalLinkType)
 					{
-						/** @var InternalShortcutLinkSettings */
-						$shortcutLinkSettings = $internalLinkSettings;
-						$fileInfo->link = PageContentShortcut::createShortcutUrl($shortcutLinkSettings->shortcutId, $shortcutLinkSettings->openOnSamePage);
+						case 4:
+							break;
+						case 5:
+							/** @var InternalShortcutLinkSettings $extendedProperties */
+							$fileInfo->link = PageContentShortcut::createShortcutUrl($extendedProperties->shortcutId, $extendedProperties->openOnSamePage);
+							break;
+						default:
+							$fileInfo->link = Yii::app()->createAbsoluteUrl('preview/getSingleInternalLink', array('linkId' => $id));
+							break;
 					}
 					break;
 				default:

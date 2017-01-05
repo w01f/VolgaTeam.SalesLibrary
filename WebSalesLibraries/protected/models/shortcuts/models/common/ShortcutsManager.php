@@ -12,7 +12,7 @@
 			self::NavigationPanelRootName
 		);
 
-		/** @return datetime */
+		/** @return int */
 		public static function getLastUpdate()
 		{
 			return strtotime(Yii::app()->db->createCommand()

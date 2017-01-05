@@ -1,4 +1,7 @@
 <?
+	namespace application\models\services_data\cadmin\models\connection;
+	use application\models\services_data\cadmin\records\ConnectionInfoRecord;
+	use application\models\services_data\common\rest\RestResponse;
 
 	/**
 	 * Class ConnectionManager

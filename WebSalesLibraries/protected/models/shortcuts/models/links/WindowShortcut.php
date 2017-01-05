@@ -27,14 +27,14 @@
 			$linkConfig->loadXML($linkRecord->config);
 			$xpath = new DomXPath($linkConfig);
 
-			$columnPositionTags = $xpath->query('//Config/Column');
-			$this->column = $columnPositionTags->length > 0 ? intval(trim($columnPositionTags->item(0)->nodeValue)) - 1 : -1;
+			$queryResult = $xpath->query('//Config/Column');
+			$this->column = $queryResult->length > 0 ? intval(trim($queryResult->item(0)->nodeValue)) - 1 : -1;
 
-			$windowViewTags = $linkConfig->getElementsByTagName("WindowViewType");
-			$this->windowViewType = $windowViewTags->length > 0 ? trim($windowViewTags->item(0)->nodeValue) : 'columns';
+			$queryResult = $xpath->query('//Config/WindowViewType');
+			$this->windowViewType = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : 'columns';
 
-			$linksOnlyTags = $linkConfig->getElementsByTagName("LinksOnly");
-			$this->linksOnly = $linksOnlyTags->length > 0 ? filter_var(trim($linksOnlyTags->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : false;
+			$queryResult = $xpath->query('//Config/LinksOnly');
+			$this->linksOnly = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : false;
 
 			if ($isPhone != true)
 				$this->searchBar = SearchBar::fromShortcut($this);
