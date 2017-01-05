@@ -30,6 +30,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			Width = _formParameters.Width;
 			Height = _formParameters.Height;
 			Load += (o, e) => LoadData();
+			Shown += (o, e) => textEditName.Focus();
 			ckApllyForAllWindowsAppearance.Checked = _folder.Page.Library.Settings.ApplyAppearanceForAllWindows;
 			ckApllyForAllWindowsWidget.Checked = _folder.Page.Library.Settings.ApplyWidgetForAllWindows;
 			ckApllyForAllWindowsBanner.Checked = _folder.Page.Library.Settings.ApplyBannerForAllWindows;
@@ -37,9 +38,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			xtraTabPageWidget.PageEnabled = MainController.Instance.Lists.Widgets.MainFolder.ExistsLocal();
 			buttonEditWindowHeaderFont.ButtonClick += EditorHelper.FontEdit_ButtonClick;
 			buttonEditWindowHeaderFont.Click += EditorHelper.FontEdit_Click;
-			textEditName.MouseDown += EditorHelper.EditorMouseDown;
-			textEditName.MouseUp += EditorHelper.EditorMouseUp;
-			textEditName.Enter += EditorHelper.EditorEnter;
+			textEditName.EnableSelectAll();
 			if ((base.CreateGraphics()).DpiX > 96)
 			{
 				laHeaderBackColor.Font = new Font(laHeaderBackColor.Font.FontFamily, laHeaderBackColor.Font.Size - 2, laHeaderBackColor.Font.Style);

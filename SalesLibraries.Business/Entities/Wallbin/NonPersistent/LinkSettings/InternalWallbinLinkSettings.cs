@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
+using SalesLibraries.Business.Entities.Wallbin.NonPersistent.HyperLinkInfo;
 
 namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 {
@@ -56,39 +57,27 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 			}
 		}
 
-		private string _pageViewType = InternalLinkSettings.PageViewTypeColumns;
-		public string PageViewType
+		private bool _openOnSamePage;
+		public bool OpenOnSamePage
 		{
-			get { return _pageViewType; }
+			get { return _openOnSamePage; }
 			set
 			{
-				if (_pageViewType != value)
+				if (_openOnSamePage != value)
 					OnSettingsChanged();
-				_pageViewType = value;
+				_openOnSamePage = value;
 			}
 		}
 
-		private string _pageSelectorType = InternalLinkSettings.PageSelectorTypeTabs;
-		public string PageSelectorType
+		private InternalLinkTemplate _styleSettings;
+		public InternalLinkTemplate StyleSettings
 		{
-			get { return _pageSelectorType; }
+			get { return _styleSettings; }
 			set
 			{
-				if (_pageSelectorType != value)
+				if (_styleSettings != value)
 					OnSettingsChanged();
-				_pageSelectorType = value;
-			}
-		}
-
-		private bool _showLogo = true;
-		public bool ShowLogo
-		{
-			get { return _showLogo; }
-			set
-			{
-				if (_showLogo != value)
-					OnSettingsChanged();
-				_showLogo = value;
+				_styleSettings = value;
 			}
 		}
 	}

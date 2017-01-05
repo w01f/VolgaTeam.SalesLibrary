@@ -10,7 +10,7 @@ namespace SalesLibraries.Common.Authorization
 
 		public void Init()
 		{
-			SettingsFile = new StorageFile(new[]
+			SettingsFile = new StorageFile(new object[]
 			{
 				FileStorageManager.LocalFilesFolderName,
 				FileStorageManager.CommonIncomingFolderName,

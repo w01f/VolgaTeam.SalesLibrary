@@ -1,6 +1,6 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
+using SalesLibraries.Business.Entities.Wallbin.NonPersistent.HyperLinkInfo;
 
 namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 {
@@ -18,30 +18,6 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 				if (_libraryName != value)
 					OnSettingsChanged();
 				_libraryName = value;
-			}
-		}
-
-		private string _headerIcon;
-		public string HeaderIcon
-		{
-			get { return _headerIcon; }
-			set
-			{
-				if (_headerIcon != value)
-					OnSettingsChanged();
-				_headerIcon = value;
-			}
-		}
-
-		private bool _showHeaderText = true;
-		public bool ShowHeaderText
-		{
-			get { return _showHeaderText; }
-			set
-			{
-				if (_showHeaderText != value)
-					OnSettingsChanged();
-				_showHeaderText = value;
 			}
 		}
 
@@ -69,39 +45,51 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 			}
 		}
 
-		private int _column;
-		public int Column
+		private string _headerIcon;
+		public string HeaderIcon
 		{
-			get { return _column; }
+			get { return _headerIcon; }
 			set
 			{
-				if (_column != value)
+				if (_headerIcon != value)
 					OnSettingsChanged();
-				_column = value;
+				_headerIcon = value;
 			}
 		}
 
-		private string _windowViewType = InternalLinkSettings.PageViewTypeColumns;
-		public string WindowViewType
+		private bool _showHeaderText = true;
+		public bool ShowHeaderText
 		{
-			get { return _windowViewType; }
+			get { return _showHeaderText; }
 			set
 			{
-				if (_windowViewType != value)
+				if (_showHeaderText != value)
 					OnSettingsChanged();
-				_windowViewType = value;
+				_showHeaderText = value;
 			}
 		}
 
-		private bool _linksOnly;
-		public bool LinksOnly
+		private bool _openOnSamePage;
+		public bool OpenOnSamePage
 		{
-			get { return _linksOnly; }
+			get { return _openOnSamePage; }
 			set
 			{
-				if (_linksOnly != value)
+				if (_openOnSamePage != value)
 					OnSettingsChanged();
-				_linksOnly = value;
+				_openOnSamePage = value;
+			}
+		}
+
+		private InternalLinkTemplate _styleSettings;
+		public InternalLinkTemplate StyleSettings
+		{
+			get { return _styleSettings; }
+			set
+			{
+				if (_styleSettings != value)
+					OnSettingsChanged();
+				_styleSettings = value;
 			}
 		}
 	}

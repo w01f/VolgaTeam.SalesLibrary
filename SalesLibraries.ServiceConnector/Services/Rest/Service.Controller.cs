@@ -1,4 +1,5 @@
-﻿using RestSharp;
+﻿using System;
+using RestSharp;
 using SalesLibraries.ServiceConnector.Json;
 using SalesLibraries.ServiceConnector.Models.Rest.Common;
 using RestResponse = SalesLibraries.ServiceConnector.Models.Rest.Common.RestResponse;
@@ -11,7 +12,7 @@ namespace SalesLibraries.ServiceConnector.Services.Rest
 		{
 			var client = GetClient();
 
-			var request = new RestRequest("cloudadmin/{model}", data.Method);
+			var request = new RestRequest(String.Format("{0}/{1}", Controller, "{model}"), data.Method);
 			SimpleJson.CurrentJsonSerializerStrategy = new RestJsonSerializationStrategy();
 
 			request.AddHeader("Content-Type", "application/json");
@@ -25,10 +26,30 @@ namespace SalesLibraries.ServiceConnector.Services.Rest
 			else
 				request.AddBody(new RequestBody { DataEncoded = data.Encode() });
 
-			request.AddParameter("XDEBUG_SESSION_START", "13413", ParameterType.QueryString);
-
+			request.AddParameter("XDEBUG_SESSION_START", "17155", ParameterType.QueryString);
+			
 			var response = client.Execute(request);
 			return response.Decode();
+		}
+
+		public RestResponse DoRequest(IRequestData data, string exceptionText)
+		{
+			RestResponse response;
+			try
+			{
+				response = DoRequest(data);
+				if (response == null) throw new Exception();
+			}
+			catch (Exception ex)
+			{
+				throw new RestServiceException(exceptionText, ex);
+			}
+			if (response.Result == ResponseResult.Error)
+			{
+				var error = response.GetData<RestError>();
+				throw new RestServiceException(error.Message);
+			}
+			return response;
 		}
 	}
 }

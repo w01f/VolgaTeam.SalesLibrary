@@ -23,7 +23,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		{
 			base.AfterCreate();
 
-			var settingsTemplate = Folder.Settings.GetSettingsTemplate<DocumentLinkSettings>(
+			var settingsTemplate = ParentFolder.Settings.GetSettingsTemplate<DocumentLinkSettings>(
 				LinkSettingsGroupType.AdminSettings,
 				Type);
 

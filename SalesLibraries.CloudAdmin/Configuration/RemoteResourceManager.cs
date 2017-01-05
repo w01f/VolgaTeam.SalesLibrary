@@ -20,6 +20,7 @@ namespace SalesLibraries.CloudAdmin.Configuration
 		public StorageFile ErrorEmailSettingsFile { get; private set; }
 		public StorageFile TabSettingsFile { get; private set; }
 		public StorageFile ArchiveLinksSettingsFile { get; private set; }
+		public ArchiveDirectory InternalLinkTemplatesFolder { get; private set; }
 		#endregion
 
 		private RemoteResourceManager() { }
@@ -92,6 +93,15 @@ namespace SalesLibraries.CloudAdmin.Configuration
 			));
 			if (await ArchiveLinksSettingsFile.Exists(true))
 				await ArchiveLinksSettingsFile.Download();
+
+			InternalLinkTemplatesFolder = new ArchiveDirectory(new object[]
+			{
+				FileStorageManager.IncomingFolderName,
+				AppProfileManager.Instance.AppName,
+				"shared",
+				"InternlalLinkTemplates"
+			});
+			await InternalLinkTemplatesFolder.Download();
 			#endregion
 		}
 	}

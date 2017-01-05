@@ -1,18 +1,20 @@
 ﻿using System;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
-using DevExpress.XtraTab;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
+using SalesLibraries.Business.Entities.Wallbin.NonPersistent.HyperLinkInfo;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.Common.Helpers;
+using SalesLibraries.FileManager.Controllers;
 using SalesLibraries.FileManager.Properties;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSettings
 {
 	[IntendForClass(typeof(InternalLibraryPageLink))]
 	//public sealed partial class LinkInternalLibraryPageOptions : UserControl, ILinkSettingsEditControl
-	public sealed partial class LinkInternalLibraryPageOptions : XtraTabPage, ILinkSettingsEditControl
+	public sealed partial class LinkInternalLibraryPageOptions : BaseInternalLibraryContentOptions, ILinkSettingsEditControl
 	{
 		private readonly InternalLibraryPageLink _data;
 
@@ -39,39 +41,55 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			}
 		}
 
-		public void LoadData()
+		public override void LoadData()
 		{
+			base.LoadData();
+
+			comboBoxEditLibraryName.Properties.Items.Clear();
+			comboBoxEditLibraryName.Properties.Items.AddRange(MainController.Instance.Lists.ExternalLibraryLinks.Libraries
+				.OrderBy(l => l.Name)
+				.Select(l => l.Name)
+				.ToArray());
+
+			comboBoxEditStyle.Properties.Items.Clear();
+			comboBoxEditStyle.Properties.Items.AddRange(
+				MainController.Instance.Lists.InternalLinkTemplates.Templates
+				.OrderBy(t => t.Name)
+				.Where(t => t.Type == InternlalLinkTemplateType.Page).ToArray());
+
 			textEditName.EditValue = _data.Name;
-			textEditLibraryName.EditValue = ((InternalLibraryPageLinkSettings)_data.Settings).LibraryName;
-			textEditPageName.EditValue = ((InternalLibraryPageLinkSettings)_data.Settings).PageName;
+			comboBoxEditLibraryName.EditValue = ((InternalLibraryPageLinkSettings)_data.Settings).LibraryName;
+			comboBoxEditPageName.EditValue = ((InternalLibraryPageLinkSettings)_data.Settings).PageName;
 
 			textEditHeaderIcon.EditValue = ((InternalLibraryPageLinkSettings)_data.Settings).HeaderIcon;
 			checkEditShowHeaderText.Checked = ((InternalLibraryPageLinkSettings)_data.Settings).ShowHeaderText;
-			comboBoxEditViewType.SelectedIndex = ((InternalLibraryPageLinkSettings)_data.Settings).PageViewType ==
-												 InternalLinkSettings.PageViewTypeColumns ? 0 : 1;
-			colorEditTextColor.Color = ((InternalLibraryPageLinkSettings)_data.Settings).TextColor ?? Color.Black;
-			colorEditBackColor.Color = ((InternalLibraryPageLinkSettings)_data.Settings).BackColor ?? Color.White;
-			checkEditShowLogo.Checked = ((InternalLibraryPageLinkSettings)_data.Settings).ShowLogo;
-			checkEditShowText.Checked = ((InternalLibraryPageLinkSettings)_data.Settings).ShowText;
-			checkEditShowWindowHeaders.Checked = ((InternalLibraryPageLinkSettings)_data.Settings).ShowWindowHeaders;
+			checkEditOpenOnSamePage.Checked = !((InternalLibraryPageLinkSettings)_data.Settings).OpenOnSamePage;
+			comboBoxEditStyle.EditValue = ((InternalLibraryPageLinkSettings)_data.Settings).StyleSettings;
 		}
 
 		public void SaveData()
 		{
 			_data.Name = textEditName.EditValue as String;
-			((InternalLibraryPageLinkSettings)_data.Settings).LibraryName = textEditLibraryName.EditValue as String;
-			((InternalLibraryPageLinkSettings)_data.Settings).PageName = textEditPageName.EditValue as String;
+			((InternalLibraryPageLinkSettings)_data.Settings).LibraryName = comboBoxEditLibraryName.EditValue as String;
+			((InternalLibraryPageLinkSettings)_data.Settings).PageName = comboBoxEditPageName.EditValue as String;
 
 			((InternalLibraryPageLinkSettings)_data.Settings).HeaderIcon = textEditHeaderIcon.EditValue as String;
 			((InternalLibraryPageLinkSettings)_data.Settings).ShowHeaderText = checkEditShowHeaderText.Checked;
-			((InternalLibraryPageLinkSettings)_data.Settings).PageViewType = comboBoxEditViewType.SelectedIndex == 0 ?
-												 InternalLinkSettings.PageViewTypeColumns :
-												 InternalLinkSettings.PageViewTypeAccording;
-			((InternalLibraryPageLinkSettings)_data.Settings).TextColor = colorEditTextColor.Color;
-			((InternalLibraryPageLinkSettings)_data.Settings).BackColor = colorEditBackColor.Color;
-			((InternalLibraryPageLinkSettings)_data.Settings).ShowLogo = checkEditShowLogo.Checked;
-			((InternalLibraryPageLinkSettings)_data.Settings).ShowText = checkEditShowText.Checked;
-			((InternalLibraryPageLinkSettings)_data.Settings).ShowWindowHeaders = checkEditShowWindowHeaders.Checked;
+			((InternalLibraryPageLinkSettings)_data.Settings).OpenOnSamePage = !checkEditOpenOnSamePage.Checked;
+			((InternalLibraryPageLinkSettings)_data.Settings).StyleSettings = comboBoxEditStyle.EditValue as InternalLinkTemplate;
+		}
+
+		private void OnLibraryChanged(object sender, EventArgs e)
+		{
+			comboBoxEditPageName.Properties.Items.Clear();
+			var libraryName = comboBoxEditLibraryName.EditValue as String;
+			var library = MainController.Instance.Lists.ExternalLibraryLinks.Libraries
+				.FirstOrDefault(l => String.Compare(l.Name, libraryName, StringComparison.OrdinalIgnoreCase) == 0);
+			if (library != null)
+				comboBoxEditPageName.Properties.Items.AddRange(library.Pages
+					.OrderBy(p => p.Order)
+					.Select(p => p.Name)
+					.ToArray());
 		}
 	}
 }

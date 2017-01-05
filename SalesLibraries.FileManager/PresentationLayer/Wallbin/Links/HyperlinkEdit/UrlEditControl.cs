@@ -56,7 +56,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.HyperlinkEd
 			};
 		}
 
-		public void ApplySharedSettings(BaseNetworkLinkInfo templateInfo)
+		public void ApplyDataFromTemplate(BaseNetworkLinkInfo templateInfo)
 		{
 			if (templateInfo != null)
 			{

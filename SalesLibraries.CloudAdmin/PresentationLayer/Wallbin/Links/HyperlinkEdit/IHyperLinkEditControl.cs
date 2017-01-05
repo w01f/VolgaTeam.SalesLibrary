@@ -6,6 +6,6 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.HyperlinkEdi
 	{
 		bool ValidateLinkInfo();
 		BaseNetworkLinkInfo GetHyperLinkInfo();
-		void ApplySharedSettings(BaseNetworkLinkInfo templateInfo);
+		void ApplyDataFromTemplate(BaseNetworkLinkInfo templateInfo);
 	}
 }

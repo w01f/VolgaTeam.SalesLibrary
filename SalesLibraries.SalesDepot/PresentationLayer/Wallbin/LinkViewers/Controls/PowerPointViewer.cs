@@ -106,7 +106,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Contro
 					SelectedThumbnail.Index,
 					printAction => MainController.Instance.ProcessManager.Run(
 						"Printing...",
-						cancellationToken => printAction()));
+						(cancelletionToken, formProgress) => printAction()));
 			}
 		}
 		#endregion
@@ -128,7 +128,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Contro
 				MainController.Instance.MainForm.FloaterLogo,
 				() => MainController.Instance.ProcessManager.Run(
 					"Inserting selected slide...",
-					cancellationToken =>
+					(cancelletionToken, formProgress) =>
 					{
 						PowerPointManager.Instance.ActivatePowerPoint();
 						PowerPointSingleton.Instance.OpenSlideSourcePresentation(_tempCopy);
@@ -153,7 +153,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Contro
 
 				MainController.Instance.ProcessManager.Run(
 					"Saving as PDF...",
-					cancellationToken =>
+					(cancelletionToken, formProgress) =>
 					{
 						PowerPointSingleton.Instance.OpenSlideSourcePresentation(_tempCopy);
 						PowerPointSingleton.Instance.ExportSlideAsPdf(wholeFile ? -1 : SelectedThumbnail.Index, destinationFileName);

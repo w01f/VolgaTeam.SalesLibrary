@@ -88,7 +88,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		{
 			if (MainController.Instance.PopupMessages.ShowWarningQuestion(String.Format("Are you sure you want to refresh the server files for:{1}{0}?", _data.NameWithExtension, Environment.NewLine)) != DialogResult.Yes) return;
 
-			MainController.Instance.ProcessManager.Run("Updating Preview files...", cancelationToken =>
+			MainController.Instance.ProcessManager.Run("Updating Preview files...", (cancelationToken, formProgess) =>
 			{
 				((PowerPointLinkSettings)_data.Settings).ClearQuickViewContent();
 				using (var powerPointProcessor = new PowerPointHidden())

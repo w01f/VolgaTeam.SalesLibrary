@@ -67,7 +67,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Forms
 				_previewData = new PresentationPreviewContainer(PowerPointLink);
 
 				var themeManager = new ThemeManager();
-				MainController.Instance.ProcessManager.Run("Loading Themes...", cancellationToken => themeManager.Load());
+				MainController.Instance.ProcessManager.Run("Loading Themes...", (cancelletionToken, formProgress) => themeManager.Load());
 				var availableThemes = themeManager.GetThemes(SlideType.SalesDepot).ToList();
 				if (availableThemes.Any())
 				{
@@ -83,7 +83,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Forms
 				var containerHeight = pnPreview.Height;
 				var containerWidth = pnPreview.Width;
 
-				MainController.Instance.ProcessManager.Run("Loading the presentation...", cancellationToken =>
+				MainController.Instance.ProcessManager.Run("Loading the presentation...", (cancelletionToken, formProgress) =>
 				{
 					PowerPointSingleton.Instance.OpenSlideSourcePresentation(_viewedFile);
 					PowerPointSingleton.Instance.ViewSlideShow();
@@ -116,7 +116,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Forms
 
 		private void FormQuickView_FormClosed(object sender, FormClosedEventArgs e)
 		{
-			MainController.Instance.ProcessManager.Run("Closing the presentation...", cancellationToken => PowerPointSingleton.Instance.ExitSlideShow());
+			MainController.Instance.ProcessManager.Run("Closing the presentation...", (cancelletionToken, formProgress) => PowerPointSingleton.Instance.ExitSlideShow());
 			try
 			{
 				_viewedFile.Delete();
@@ -134,7 +134,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Forms
 			var containerWidth = pnPreview.Width;
 
 			MainController.Instance.ProcessManager.Run("Resizing the presentation...",
-				cancellationToken =>
+				(cancelletionToken, formProgress) =>
 					PowerPointSingleton.Instance.ResizeSlideShow(
 						containerHandle,
 						(int)(containerHeight / _scaleK),
@@ -173,7 +173,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Forms
 
 				MainController.Instance.ProcessManager.Run(
 					"Saving as PDF...",
-					cancellationToken =>
+					(cancelletionToken, formProgress) =>
 						PowerPointSingleton.Instance.ExportSlideAsPdf(
 						wholeFile ? -1 : (comboBoxEditSlides.SelectedIndex + 1),
 						destinationFileName));
@@ -203,7 +203,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Forms
 					comboBoxEditSlides.SelectedIndex + 1,
 					printAction => MainController.Instance.ProcessManager.Run(
 						"Printing...",
-						cancellationToken => printAction()));
+						(cancelletionToken, formProgress) => printAction()));
 
 			}
 		}
@@ -290,7 +290,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Forms
 				MainController.Instance.MainForm.FloaterLogo,
 				() => MainController.Instance.ProcessManager.Run(
 					"Inserting selected slide...",
-					cancellationToken =>
+					(cancelletionToken, formProgress) =>
 					{
 						PowerPointManager.Instance.ActivatePowerPoint();
 						PowerPointSingleton.Instance.AppendSlide(

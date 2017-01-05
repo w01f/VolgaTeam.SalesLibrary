@@ -59,7 +59,7 @@ namespace SalesLibraries.CommonGUI.Calendars
 
 			if (!_readyToUse)
 			{
-				_calendarControl.RunProcessInBackground("Loading Calendar...", cancellationToken =>
+				_calendarControl.RunProcessInBackground("Loading Calendar...", (cancelationToken, formProgess) =>
 					_calendarControl.InvokeInContainer(new MethodInvoker(() =>
 					{
 						Build();
@@ -96,7 +96,7 @@ namespace SalesLibraries.CommonGUI.Calendars
 		{
 			if (!yearControl.ViewBuilded)
 			{
-				_calendarControl.RunProcessInBackground("Loading Calendar...", cancellationToken =>
+				_calendarControl.RunProcessInBackground("Loading Calendar...", (cancelationToken, formProgess) =>
 					_calendarControl.InvokeInContainer(new MethodInvoker(() =>
 					{
 						yearControl.BuildControls();
@@ -109,7 +109,7 @@ namespace SalesLibraries.CommonGUI.Calendars
 		{
 			if (_buildInProgress) return;
 			var selectedYear = (YearControl)e.Page;
-			_calendarControl.RunProcessInBackground("Loading Calendar...", cancellationToken =>
+			_calendarControl.RunProcessInBackground("Loading Calendar...", (cancelationToken, formProgess) =>
 				_calendarControl.InvokeInContainer(new MethodInvoker(() => ShowYear(selectedYear))));
 			ShowYear(selectedYear);
 			YearSelected?.Invoke(this, new CalendarYearSelectedEventArgs(selectedYear.Data.Year));

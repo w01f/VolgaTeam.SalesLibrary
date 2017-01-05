@@ -26,7 +26,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			if (MainController.Instance.PopupMessages.ShowWarningQuestion("Are you sure you want to delete all QV files?") != DialogResult.Yes) return;
 			var qvFolderPath = Path.Combine(_libraryPath, Constants.RegularPreviewContainersRootFolderName);
 			if (!Directory.Exists(qvFolderPath)) return;
-			MainController.Instance.ProcessManager.Run("Deleting Files...", cancelationToken =>
+			MainController.Instance.ProcessManager.Run("Deleting Files...", (cancelationToken, formProgess) =>
 			{
 				Utils.DeleteFolder(qvFolderPath);
 				try
@@ -42,7 +42,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			if (MainController.Instance.PopupMessages.ShowWarningQuestion("Are you sure you want to delete all WV files?") != DialogResult.Yes) return;
 			var wvFolderPath = Path.Combine(_libraryPath, Constants.WebPreviewContainersRootFolderName);
 			if (!Directory.Exists(wvFolderPath)) return;
-			MainController.Instance.ProcessManager.Run("Deleting Files...", cancelationToken =>
+			MainController.Instance.ProcessManager.Run("Deleting Files...", (cancelationToken, formProgess) =>
 			{
 				Utils.DeleteFolder(wvFolderPath);
 				try

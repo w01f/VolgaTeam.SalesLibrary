@@ -10,11 +10,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.HyperLinkInfo
 		public string PageName { get; set; }
 		public string HeaderIcon { get; set; }
 		public bool ShowHeaderText { get; set; }
-		public string PageViewType { get; set; }
-		public bool ShowLogo { get; set; }
-		public bool ShowText { get; set; }
-		public bool ShowWindowHeaders { get; set; }
-		public Color? TextColor { get; set; }
-		public Color? BackColor { get; set; }
+		public bool OpenOnSamePage { get; set; }
+		public InternalLinkTemplate StyleSettings { get; set; }
 	}
 }

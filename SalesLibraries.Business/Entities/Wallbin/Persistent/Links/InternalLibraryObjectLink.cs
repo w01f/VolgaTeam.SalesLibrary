@@ -57,7 +57,6 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		public string TargetLink => ((InternalLibraryObjectLinkSettings)Settings).LinkName;
 		#endregion
 
-
 		public static InternalLibraryObjectLink Create(InternalLibraryObjectLinkInfo linkInfo, LibraryFolder parentFolder)
 		{
 			var link = CreateEntity<InternalLibraryObjectLink>();

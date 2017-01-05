@@ -33,9 +33,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			ColumnOrder = columnOrder;
 			Text = String.Format("Column {0}", ColumnOrder + 1);
 			LoadData();
-			repositoryItemTextEdit.MouseDown += EditorHelper.EditorMouseDown;
-			repositoryItemTextEdit.MouseUp += EditorHelper.EditorMouseUp;
-			repositoryItemTextEdit.Enter += EditorHelper.EditorEnter;
+			repositoryItemTextEdit.EnableSelectAll();
 		}
 
 		public void LoadData()

@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 using RestSharp;
 using SalesLibraries.Common.JsonConverters;
 using SalesLibraries.ServiceConnector.Models.Rest.Common;
@@ -20,10 +21,12 @@ namespace SalesLibraries.ServiceConnector.Services.Rest
 			return JsonConvert.DeserializeObject<RestResponse>(target.Content, serializerSettings);
 		}
 
-		public static TData GetData<TData>(this RestResponse target) where TData : class
+		public static TData GetData<TData>(this RestResponse target)
 		{
 			var serializerSettings = new RestSerializeSettings();
-			return JsonConvert.DeserializeObject<TData>(target.DataEncoded, serializerSettings);
+			return !String.IsNullOrEmpty(target.DataEncoded) ?
+				JsonConvert.DeserializeObject<TData>(target.DataEncoded, serializerSettings) :
+				default(TData);
 		}
 	}
 }

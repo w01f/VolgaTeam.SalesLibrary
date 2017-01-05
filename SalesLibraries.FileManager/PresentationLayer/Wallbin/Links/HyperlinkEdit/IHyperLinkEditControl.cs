@@ -6,6 +6,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.HyperlinkEd
 	{
 		bool ValidateLinkInfo();
 		BaseNetworkLinkInfo GetHyperLinkInfo();
-		void ApplySharedSettings(BaseNetworkLinkInfo templateInfo);
+		void ApplyDataFromTemplate(BaseNetworkLinkInfo templateInfo);
 	}
 }

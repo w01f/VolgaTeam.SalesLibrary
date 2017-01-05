@@ -7,79 +7,112 @@ namespace SalesLibraries.CommonGUI.BackgroundProcesses
 {
 	public partial class FormStart : FormProgressBase
 	{
-		public event EventHandler<EventArgs> Trayed;
-		public event EventHandler<EventArgs> Activated;
+		private bool _minimized;
 
-		public FormStart(string title, bool trayed)
+		public FormStart(string title)
 		{
 			InitializeComponent();
 			if ((CreateGraphics()).DpiX > 96)
 			{
-				laTitle.Font = new Font(laTitle.Font.FontFamily, laTitle.Font.Size - 2, laTitle.Font.Style);
+				var font = new Font(styleController.Appearance.Font.FontFamily, styleController.Appearance.Font.Size - 2,
+					styleController.Appearance.Font.Style);
+				styleController.Appearance.Font = font;
+				styleController.AppearanceDisabled.Font = font;
+				styleController.AppearanceDropDown.Font = font;
+				styleController.AppearanceDropDownHeader.Font = font;
+				styleController.AppearanceFocused.Font = font;
+				styleController.AppearanceReadOnly.Font = font;
 			}
 
-			Left = Screen.PrimaryScreen.WorkingArea.Width - Width - 20;
-			Top = Screen.PrimaryScreen.WorkingArea.Height - Height - 20;
-
-			pbCancel.Buttonize();
+			pbCancelRegular.Buttonize();
 			notifyIcon.Text = title;
 			notifyIcon.BalloonTipText = title;
 			toolStripMenuItemKillApp.Text = String.Format(toolStripMenuItemKillApp.Text, title);
 
-			FormClosed += FormStart_FormClosed;
+			StartPosition = FormStartPosition.CenterScreen;
+			WindowState = FormWindowState.Normal;
+			notifyIcon.Visible = false;
+			Opacity = 1;
+			Width = 700;
+			Height = 370;
+			pnNormal.Visible = true;
+			pnMinimized.Visible = false;
 
-			if (trayed)
-			{
-				Opacity = 0;
-				notifyIcon.Visible = true;
-			}
-			else
-			{
-				notifyIcon.Visible = false;
-				Opacity = 1;
-			}
+			FormClosed += FormStart_FormClosed;
 		}
 
-		public void SetText(string text)
+		public void ProcessConnectionStage()
 		{
-			laTitle.Text = text;
+			pnProgressStages.SuspendLayout();
+			pnProgressStageWebConnection.Visible = true;
+			pnProgressStageWebConnection.BringToFront();
+			pnProgressStages.ResumeLayout();
+		}
+
+		public void ProcessSecurityStage()
+		{
+			pnProgressStages.SuspendLayout();
+			pnProgressStageSecurity.Visible = true;
+			pnProgressStageSecurity.BringToFront();
+			pnProgressStages.ResumeLayout();
+		}
+
+		public void ProcessLoadFilesStage()
+		{
+			pnProgressStages.SuspendLayout();
+			pnProgressStageFiles.Visible = true;
+			pnProgressStageFiles.BringToFront();
+			pnProgressStages.ResumeLayout();
 		}
 
 		private void ShowTrayIcon()
 		{
-			Opacity = 0;
-			notifyIcon.Visible = true;
-			notifyIcon.BalloonTipText = laTitle.Text;
-			notifyIcon.ShowBalloonTip(1);
+			if (!_minimized)
+			{
+				StartPosition = FormStartPosition.Manual;
+				Width = 440;
+				Height = 55;
+				Left = Screen.PrimaryScreen.WorkingArea.Width - Width - 20;
+				Top = Screen.PrimaryScreen.WorkingArea.Height - Height - 20;
+				pnNormal.Visible = false;
+				pnMinimized.Visible = true;
+				_minimized = true;
+			}
+			else
+			{
+				Opacity = 0;
+				notifyIcon.Visible = true;
+				notifyIcon.ShowBalloonTip(1);
+			}
+			Application.DoEvents();
 		}
 
 		private void HideTrayIcon()
 		{
 			notifyIcon.Visible = false;
 			Opacity = 1;
+			Application.DoEvents();
 		}
 
 		private void FormProgress_Shown(object sender, EventArgs e)
 		{
-			laTitle.Focus();
-			circularProgress.IsRunning = true;
+			circularProgressRegular.IsRunning = true;
+			circularProgressMinimized.IsRunning = true;
 		}
 
 		private void FormStart_FormClosed(object sender, FormClosedEventArgs e)
 		{
-			HideTrayIcon();
+			Invoke(new MethodInvoker(HideTrayIcon));
 		}
 
 		private void pbCancel_Click(object sender, EventArgs e)
 		{
-			ShowTrayIcon();
-			Trayed?.Invoke(this, EventArgs.Empty);
+			Invoke(new MethodInvoker(ShowTrayIcon));
 		}
 
 		private void toolStripMenuItemShowProgress_Click(object sender, EventArgs e)
 		{
-			HideTrayIcon();
-			Activated?.Invoke(this, EventArgs.Empty);
+			Invoke(new MethodInvoker(HideTrayIcon));
 		}
 
 		private void toolStripMenuItemKillApp_Click(object sender, EventArgs e)

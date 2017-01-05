@@ -2,6 +2,7 @@
 using System.Linq;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent;
 using SalesLibraries.Business.Entities.Wallbin.Persistent;
+using SalesLibraries.ServiceConnector.Models.Rest.Common;
 using SalesLibraries.ServiceConnector.Models.Rest.VersionsManagement;
 using SalesLibraries.ServiceConnector.Models.Rest.Wallbin;
 
@@ -25,7 +26,7 @@ namespace SalesLibraries.Business.Contexts.Wallbin.Cloud
 				((ServiceConnector.Models.Rest.Wallbin.Entities.LibraryPage)target).ExportCloudData((LibraryPage)source);
 			}
 			else
-				throw new CloudLibraryException("Local Entity type is undefined");
+				throw new RestServiceException("Local Entity type is undefined");
 			//if (source is LibraryFolder)
 			//	changeSet.ObjectType = ObjectType.Folder;
 			//if (source is BaseLibraryLink)

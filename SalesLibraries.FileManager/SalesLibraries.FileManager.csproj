@@ -136,11 +136,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Business\Dictionaries\ExternalShortcutsList.cs" />
+    <Compile Include="Business\Dictionaries\ExternalLibraryLinksList.cs" />
+    <Compile Include="Business\Dictionaries\InternalLinkTemplateList.cs" />
     <Compile Include="Business\Dictionaries\LinkBundleImageList.cs" />
     <Compile Include="Business\Dictionaries\SearchTagList.cs" />
     <Compile Include="Business\Dictionaries\SuperFilterList.cs" />
     <Compile Include="Business\Models\Connection\ConnectionState.cs" />
     <Compile Include="Business\Models\Connection\ConnectionStateType.cs" />
+    <Compile Include="Business\Models\ExternalLibraryLinks\Library.cs" />
+    <Compile Include="Business\Models\ExternalLibraryLinks\LibraryFolder.cs" />
+    <Compile Include="Business\Models\ExternalLibraryLinks\LibraryLink.cs" />
+    <Compile Include="Business\Models\ExternalLibraryLinks\LibraryPage.cs" />
+    <Compile Include="Business\Models\ExternalShortcuts\ShortcutLink.cs" />
     <Compile Include="Business\Models\Security\LibraryUser.cs" />
     <Compile Include="Business\PreviewGenerators\PowerPointPreviewGenerator.cs" />
     <Compile Include="Business\PreviewGenerators\ExcelPreviewGenerator.cs" />
@@ -254,6 +262,10 @@
     <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\SingleLink\LibraryObjectTextFormatLoader.cs" />
     <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\SingleLink\LineBreakNotesLoader.cs" />
     <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\SingleLink\LineBreakTextFormatLoader.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\BaseInternalLibraryContentEditControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\IHyperLinkEditComplexControl.cs" />
     <Compile Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\IInternalLinkEditControl.cs" />
     <Compile Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\InternalShortcutLinkEditControl.cs">
       <SubType>UserControl</SubType>
@@ -290,6 +302,9 @@
     </Compile>
     <Compile Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\VimeoEditControl.Designer.cs">
       <DependentUpon>VimeoEditControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\BaseInternalLibraryContentOptions.cs">
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkBundleOptions.cs">
       <SubType>Component</SubType>

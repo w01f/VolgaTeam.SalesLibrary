@@ -5,6 +5,10 @@ using System.Xml;
 using Newtonsoft.Json;
 using SalesLibraries.FileManager.Business.Models.Security;
 using SalesLibraries.FileManager.Controllers;
+using SalesLibraries.ServiceConnector.Models.Rest.AppMetaData;
+using SalesLibraries.ServiceConnector.Models.Rest.Common;
+using SalesLibraries.ServiceConnector.Models.Rest.Dictionaries;
+using SalesLibraries.ServiceConnector.Services.Rest;
 
 namespace SalesLibraries.FileManager.Configuration
 {
@@ -14,16 +18,17 @@ namespace SalesLibraries.FileManager.Configuration
 
 		public void Load()
 		{
-			string message;
+			RestResponse response;
 			var localMetaData = MetaDataContainer.Load(MetaDataConst.SecurityGroupsDataTag);
 			if (localMetaData != null)
 			{
-				DateTime? cloudLastUpdate = null;
-				DateTime tempDate;
-				var dateStr = MainController.Instance.SoapServiceConnection.GetMetaData(MetaDataConst.SecurityGroupsDataTag, MetaDataConst.LastUpdatePropertyName, out message);
-				if (DateTime.TryParse(dateStr, out tempDate))
-					cloudLastUpdate = tempDate;
-				if (!cloudLastUpdate.HasValue || cloudLastUpdate <= localMetaData.LastUpdate)
+				response = MainController.Instance.RestServiceConnection.DoRequest(new MetaDataGetRequestData
+				{
+					DataTag = MetaDataConst.SecurityGroupsDataTag,
+					PropertyName = MetaDataConst.LastUpdatePropertyName
+				},
+					"Error loading dictionaries updates from server");
+				var cloudLastUpdate = response.GetData<DateTime?>(); if (!cloudLastUpdate.HasValue || cloudLastUpdate <= localMetaData.LastUpdate)
 				{
 					_groups.AddRange(localMetaData.GetData<List<LibraryGroup>>());
 					return;
@@ -31,7 +36,10 @@ namespace SalesLibraries.FileManager.Configuration
 			}
 			else
 				localMetaData = new MetaDataContainer(MetaDataConst.SecurityGroupsDataTag);
-			_groups.AddRange(MainController.Instance.SoapServiceConnection.GetSecurityGroups(out message).Select(LibraryGroup.LoadFromCloudData));
+
+			response = MainController.Instance.RestServiceConnection.DoRequest(new SecurityGetRequestData(), "Error loading dictionaries updates from server");
+			var securityGroups = response.GetData<SiteUserGroup[]>();
+			_groups.AddRange(securityGroups.Select(LibraryGroup.LoadFromCloudData));
 			localMetaData.Content = JsonConvert.SerializeObject(_groups);
 			localMetaData.Save();
 		}

@@ -470,9 +470,8 @@ namespace SalesLibraries.FileManager.Business.Services
 			target.pageName = source.PageName;
 			target.headerIcon = source.HeaderIcon;
 			target.showHeaderText = source.ShowHeaderText;
-			target.pageViewType = source.PageViewType;
-			target.pageSelectorType = source.PageSelectorType;
-			target.showLogo = source.ShowLogo;
+			target.openOnSamePage = source.OpenOnSamePage;
+			target.styleSettingsEncoded = source.StyleSettings?.Serialize();
 		}
 
 		private static void ImportData(
@@ -485,12 +484,8 @@ namespace SalesLibraries.FileManager.Business.Services
 			target.pageName = source.PageName;
 			target.headerIcon = source.HeaderIcon;
 			target.showHeaderText = source.ShowHeaderText;
-			target.pageViewType = source.PageViewType;
-			target.showLogo = source.ShowLogo;
-			target.showText = source.ShowText;
-			target.showWindowHeaders = source.ShowWindowHeaders;
-			target.textColor = source.TextColor?.ToHex() ;
-			target.backColor = source.BackColor?.ToHex(); ;
+			target.openOnSamePage = source.OpenOnSamePage;
+			target.styleSettingsEncoded = source.StyleSettings?.Serialize();
 		}
 
 		private static void ImportData(
@@ -504,9 +499,8 @@ namespace SalesLibraries.FileManager.Business.Services
 			target.windowName = source.WindowName;
 			target.headerIcon = source.HeaderIcon;
 			target.showHeaderText = source.ShowHeaderText;
-			target.windowViewType = source.WindowViewType;
-			target.column = source.Column;
-			target.linksOnly = source.LinksOnly;
+			target.openOnSamePage = source.OpenOnSamePage;
+			target.styleSettingsEncoded = source.StyleSettings?.Serialize();
 		}
 
 		private static void ImportData(

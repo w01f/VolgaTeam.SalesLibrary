@@ -29,7 +29,6 @@
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
-			this.labelControllTitle = new DevExpress.XtraEditors.LabelControl();
 			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
 			this.laLinkName = new System.Windows.Forms.Label();
 			this.textEditLinkName = new DevExpress.XtraEditors.TextEdit();
@@ -53,21 +52,6 @@
 			((System.ComponentModel.ISupportInitialize)(this.checkEditLinkTypeShortcut.Properties)).BeginInit();
 			this.SuspendLayout();
 			// 
-			// labelControllTitle
-			// 
-			this.labelControllTitle.AllowHtmlString = true;
-			this.labelControllTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.labelControllTitle.Appearance.BackColor = System.Drawing.Color.White;
-			this.labelControllTitle.Appearance.ForeColor = System.Drawing.Color.Black;
-			this.labelControllTitle.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-			this.labelControllTitle.Location = new System.Drawing.Point(14, 14);
-			this.labelControllTitle.Name = "labelControllTitle";
-			this.labelControllTitle.Size = new System.Drawing.Size(501, 27);
-			this.labelControllTitle.StyleController = this.styleController;
-			this.labelControllTitle.TabIndex = 36;
-			this.labelControllTitle.Text = "<color=gray><i>Jump to a specific page or link on your site...</i></color>";
-			// 
 			// styleController
 			// 
 			this.styleController.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -88,7 +72,7 @@
 			this.laLinkName.AutoSize = true;
 			this.laLinkName.BackColor = System.Drawing.Color.White;
 			this.laLinkName.ForeColor = System.Drawing.Color.Black;
-			this.laLinkName.Location = new System.Drawing.Point(14, 60);
+			this.laLinkName.Location = new System.Drawing.Point(3, 6);
 			this.laLinkName.Name = "laLinkName";
 			this.laLinkName.Size = new System.Drawing.Size(70, 16);
 			this.laLinkName.TabIndex = 32;
@@ -98,19 +82,20 @@
 			// 
 			this.textEditLinkName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.textEditLinkName.Location = new System.Drawing.Point(105, 57);
+			this.textEditLinkName.Location = new System.Drawing.Point(79, 3);
 			this.textEditLinkName.Name = "textEditLinkName";
 			this.textEditLinkName.Properties.Appearance.BackColor = System.Drawing.Color.White;
 			this.textEditLinkName.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.textEditLinkName.Properties.Appearance.Options.UseBackColor = true;
 			this.textEditLinkName.Properties.Appearance.Options.UseForeColor = true;
-			this.textEditLinkName.Size = new System.Drawing.Size(410, 22);
+			this.textEditLinkName.Size = new System.Drawing.Size(443, 22);
 			this.textEditLinkName.StyleController = this.styleController;
 			this.textEditLinkName.TabIndex = 0;
 			// 
 			// checkEditBold
 			// 
-			this.checkEditBold.Location = new System.Drawing.Point(149, 357);
+			this.checkEditBold.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.checkEditBold.Location = new System.Drawing.Point(183, 402);
 			this.checkEditBold.Name = "checkEditBold";
 			this.checkEditBold.Properties.AllowHtmlDraw = DevExpress.Utils.DefaultBoolean.True;
 			this.checkEditBold.Properties.Caption = "<b>BOLD</b>";
@@ -120,8 +105,9 @@
 			// 
 			// checkEditBlueHyperlink
 			// 
+			this.checkEditBlueHyperlink.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.checkEditBlueHyperlink.EditValue = true;
-			this.checkEditBlueHyperlink.Location = new System.Drawing.Point(14, 357);
+			this.checkEditBlueHyperlink.Location = new System.Drawing.Point(6, 402);
 			this.checkEditBlueHyperlink.Name = "checkEditBlueHyperlink";
 			this.checkEditBlueHyperlink.Properties.AllowHtmlDraw = DevExpress.Utils.DefaultBoolean.True;
 			this.checkEditBlueHyperlink.Properties.Caption = "<color=blue><u>Blue Hyperlink</u></color>";
@@ -134,7 +120,7 @@
 			this.laLinkType.AutoSize = true;
 			this.laLinkType.BackColor = System.Drawing.Color.White;
 			this.laLinkType.ForeColor = System.Drawing.Color.Black;
-			this.laLinkType.Location = new System.Drawing.Point(14, 100);
+			this.laLinkType.Location = new System.Drawing.Point(3, 53);
 			this.laLinkType.Name = "laLinkType";
 			this.laLinkType.Size = new System.Drawing.Size(67, 16);
 			this.laLinkType.TabIndex = 52;
@@ -142,7 +128,7 @@
 			// 
 			// checkEditLinkTypeWallbin
 			// 
-			this.checkEditLinkTypeWallbin.Location = new System.Drawing.Point(105, 98);
+			this.checkEditLinkTypeWallbin.Location = new System.Drawing.Point(112, 51);
 			this.checkEditLinkTypeWallbin.Name = "checkEditLinkTypeWallbin";
 			this.checkEditLinkTypeWallbin.Properties.AllowHtmlDraw = DevExpress.Utils.DefaultBoolean.True;
 			this.checkEditLinkTypeWallbin.Properties.AutoWidth = true;
@@ -157,7 +143,7 @@
 			// 
 			// checkEditLinkTypeLibraryPage
 			// 
-			this.checkEditLinkTypeLibraryPage.Location = new System.Drawing.Point(184, 98);
+			this.checkEditLinkTypeLibraryPage.Location = new System.Drawing.Point(191, 51);
 			this.checkEditLinkTypeLibraryPage.Name = "checkEditLinkTypeLibraryPage";
 			this.checkEditLinkTypeLibraryPage.Properties.AllowHtmlDraw = DevExpress.Utils.DefaultBoolean.True;
 			this.checkEditLinkTypeLibraryPage.Properties.AutoWidth = true;
@@ -172,7 +158,7 @@
 			// 
 			// checkEditLinkTypeLibraryFolder
 			// 
-			this.checkEditLinkTypeLibraryFolder.Location = new System.Drawing.Point(258, 98);
+			this.checkEditLinkTypeLibraryFolder.Location = new System.Drawing.Point(265, 51);
 			this.checkEditLinkTypeLibraryFolder.Name = "checkEditLinkTypeLibraryFolder";
 			this.checkEditLinkTypeLibraryFolder.Properties.AllowHtmlDraw = DevExpress.Utils.DefaultBoolean.True;
 			this.checkEditLinkTypeLibraryFolder.Properties.AutoWidth = true;
@@ -187,7 +173,7 @@
 			// 
 			// checkEditLinkTypeLibraryObject
 			// 
-			this.checkEditLinkTypeLibraryObject.Location = new System.Drawing.Point(343, 98);
+			this.checkEditLinkTypeLibraryObject.Location = new System.Drawing.Point(350, 51);
 			this.checkEditLinkTypeLibraryObject.Name = "checkEditLinkTypeLibraryObject";
 			this.checkEditLinkTypeLibraryObject.Properties.AllowHtmlDraw = DevExpress.Utils.DefaultBoolean.True;
 			this.checkEditLinkTypeLibraryObject.Properties.AutoWidth = true;
@@ -204,14 +190,14 @@
 			// 
 			this.pnPropertyEditorsContainer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.pnPropertyEditorsContainer.Location = new System.Drawing.Point(0, 131);
+			this.pnPropertyEditorsContainer.Location = new System.Drawing.Point(0, 100);
 			this.pnPropertyEditorsContainer.Name = "pnPropertyEditorsContainer";
-			this.pnPropertyEditorsContainer.Size = new System.Drawing.Size(525, 220);
+			this.pnPropertyEditorsContainer.Size = new System.Drawing.Size(525, 280);
 			this.pnPropertyEditorsContainer.TabIndex = 58;
 			// 
 			// checkEditLinkTypeShortcut
 			// 
-			this.checkEditLinkTypeShortcut.Location = new System.Drawing.Point(406, 98);
+			this.checkEditLinkTypeShortcut.Location = new System.Drawing.Point(413, 51);
 			this.checkEditLinkTypeShortcut.Name = "checkEditLinkTypeShortcut";
 			this.checkEditLinkTypeShortcut.Properties.AllowHtmlDraw = DevExpress.Utils.DefaultBoolean.True;
 			this.checkEditLinkTypeShortcut.Properties.AutoWidth = true;
@@ -236,13 +222,12 @@
 			this.Controls.Add(this.checkEditLinkTypeWallbin);
 			this.Controls.Add(this.checkEditBold);
 			this.Controls.Add(this.textEditLinkName);
-			this.Controls.Add(this.labelControllTitle);
 			this.Controls.Add(this.checkEditBlueHyperlink);
 			this.Controls.Add(this.laLinkType);
 			this.Controls.Add(this.laLinkName);
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.Name = "InternalLinkEditControl";
-			this.Size = new System.Drawing.Size(525, 385);
+			this.Size = new System.Drawing.Size(525, 425);
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditLinkName.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditBold.Properties)).EndInit();
@@ -258,8 +243,6 @@
 		}
 
 		#endregion
-
-		private DevExpress.XtraEditors.LabelControl labelControllTitle;
 		private DevExpress.XtraEditors.StyleController styleController;
 		private System.Windows.Forms.Label laLinkName;
 		private DevExpress.XtraEditors.TextEdit textEditLinkName;

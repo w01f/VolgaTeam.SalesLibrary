@@ -1,6 +1,6 @@
 ﻿using System;
 using Newtonsoft.Json;
-using SalesLibraries.ServiceConnector.FileManagerResourcesService;
+using SalesLibraries.ServiceConnector.Models.Rest.Dictionaries;
 
 namespace SalesLibraries.FileManager.Business.Models.Security
 {
@@ -16,13 +16,13 @@ namespace SalesLibraries.FileManager.Business.Models.Security
 
 		public string FullName => String.Format("{0} {1}", FirstName, LastName);
 
-		public static LibraryUser LoadFromCloudData(UserModel cloudUser)
+		public static LibraryUser LoadFromCloudData(SiteUser cloudUser)
 		{
 			var user = new LibraryUser();
-			user.Id = cloudUser.id;
-			user.Login = cloudUser.login;
-			user.FirstName = cloudUser.firstName;
-			user.LastName = cloudUser.lastName;
+			user.Id = cloudUser.Id;
+			user.Login = cloudUser.Login;
+			user.FirstName = cloudUser.FirstName;
+			user.LastName = cloudUser.LastName;
 			return user;
 		}
 	}

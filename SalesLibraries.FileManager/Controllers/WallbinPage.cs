@@ -329,8 +329,8 @@ namespace SalesLibraries.FileManager.Controllers
 						return false;
 					}
 				},
-				copyMethod => MainController.Instance.ProcessManager.Run("Preparing Data...", cancelationToken => copyMethod()),
-				(context, original, current) => MainController.Instance.ProcessManager.Run("Saving Changes...", cancelationToken => original.Save(context, current)));
+				copyMethod => MainController.Instance.ProcessManager.Run("Preparing Data...", (cancelationToken, formProgess) => copyMethod()),
+				(context, original, current) => MainController.Instance.ProcessManager.Run("Saving Changes...", (cancelationToken, formProgess) => original.Save(context, current)));
 			if (!resut) return;
 			MainController.Instance.ProcessManager.RunInQueue("Loading Library...", () => MainController.Instance.MainForm.Invoke(new MethodInvoker(UpdateWallbin)));
 		}
@@ -353,8 +353,8 @@ namespace SalesLibraries.FileManager.Controllers
 						return false;
 					}
 				},
-				copyMethod => MainController.Instance.ProcessManager.Run("Preparing Data...", cancelationToken => copyMethod()),
-				(context, original, current) => MainController.Instance.ProcessManager.Run("Saving Changes...", cancelationToken => original.Save(context, current)));
+				copyMethod => MainController.Instance.ProcessManager.Run("Preparing Data...", (cancelationToken, formProgess) => copyMethod()),
+				(context, original, current) => MainController.Instance.ProcessManager.Run("Saving Changes...", (cancelationToken, formProgess) => original.Save(context, current)));
 			if (!resut) return;
 			MainController.Instance.ProcessManager.RunInQueue("Loading Library...", () => MainController.Instance.MainForm.Invoke(new MethodInvoker(UpdateWallbin)));
 		}
@@ -377,8 +377,8 @@ namespace SalesLibraries.FileManager.Controllers
 						return false;
 					}
 				},
-				copyMethod => MainController.Instance.ProcessManager.Run("Preparing Data...", cancelationToken => copyMethod()),
-				(context, original, current) => MainController.Instance.ProcessManager.Run("Saving Changes...", cancelationToken => original.Save(context, current)));
+				copyMethod => MainController.Instance.ProcessManager.Run("Preparing Data...", (cancelationToken, formProgess) => copyMethod()),
+				(context, original, current) => MainController.Instance.ProcessManager.Run("Saving Changes...", (cancelationToken, formProgess) => original.Save(context, current)));
 			if (!resut) return;
 			MainController.Instance.ProcessManager.RunInQueue("Loading Library...", () => MainController.Instance.MainForm.Invoke(new MethodInvoker(UpdateWallbin)));
 		}
@@ -430,7 +430,7 @@ namespace SalesLibraries.FileManager.Controllers
 						return form.ShowDialog(MainController.Instance.MainForm) == DialogResult.OK;
 					}
 				},
-				copyMethod => MainController.Instance.ProcessManager.Run("Preparing Data...", cancelationToken => copyMethod()),
+				copyMethod => MainController.Instance.ProcessManager.Run("Preparing Data...", (cancelationToken, formProgess) => copyMethod()),
 				(context, original, current) => MainController.Instance.ProcessManager.RunInQueue("Saving Changes...", () => original.Save(context, current)));
 		}
 

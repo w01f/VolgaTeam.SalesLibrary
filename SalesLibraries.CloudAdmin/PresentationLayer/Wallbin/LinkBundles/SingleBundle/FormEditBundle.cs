@@ -78,9 +78,9 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.LinkBundles.Single
 						return dilogResult == DialogResult.OK;
 					}
 				},
-				copyMethod => MainController.Instance.ProcessManager.Run("Preparing Data...", cancelationToken => copyMethod()),
+				copyMethod => MainController.Instance.ProcessManager.Run("Preparing Data...", (cancelationToken, formProgress) => copyMethod()),
 				(context, original, current) => MainController.Instance.ProcessManager.Run("Saving Changes...",
-					cancelationToken =>
+					(cancelationToken, formProgress) =>
 					{
 						original.Save(context, current, false);
 					}));

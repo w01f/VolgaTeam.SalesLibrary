@@ -54,8 +54,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.HyperlinkEd
 			});
 			var defaultSelector = _editorSelectors.FirstOrDefault(e => initialLinkInfo != null && (HyperLinkTypeEnum)Enum.Parse(typeof(HyperLinkTypeEnum), e.Tag.ToString()) == initialLinkInfo.LinkType) ?? _editorSelectors.First();
 			defaultSelector.Checked = true;
+
+			(SelectedEditor as IHyperLinkEditComplexControl)?.InitControl();
+
 			if (initialLinkInfo != null)
-				SelectedEditor.ApplySharedSettings(initialLinkInfo);
+				SelectedEditor.ApplyDataFromTemplate(initialLinkInfo);
 		}
 
 		private void OnSelectEditorClick(Object sender, EventArgs e)
@@ -107,11 +110,14 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.HyperlinkEd
 			}
 			else
 				SelectedEditor = _editors[SelectedEditorType];
-			SelectedEditor.ApplySharedSettings(templateSettings);
 			var control = (Control)SelectedEditor;
 			if (!pnEditContainer.Controls.Contains(control))
 				pnEditContainer.Controls.Add(control);
 			control.BringToFront();
+
+			(SelectedEditor as IHyperLinkEditComplexControl)?.InitControl();
+
+			SelectedEditor.ApplyDataFromTemplate(templateSettings);
 		}
 
 		private void AddLinkForm_FormClosing(object sender, FormClosingEventArgs e)

@@ -66,7 +66,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Forms
 				laFileInfo.Text = "File Added: " + PowerPointLink.AddDate.ToString("MM/dd/yy");
 
 				var themeManager = new ThemeManager();
-				MainController.Instance.ProcessManager.Run("Loading Themes...", cancellationToken => themeManager.Load());
+				MainController.Instance.ProcessManager.Run("Loading Themes...", (cancelletionToken, formProgress) => themeManager.Load());
 				var availableThemes = themeManager.GetThemes(SlideType.SalesDepot).ToList();
 				if (availableThemes.Any())
 				{
@@ -79,7 +79,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Forms
 					pnSlideTemplate.Visible = false;
 
 				_previewData = new PresentationPreviewContainer(PowerPointLink);
-				MainController.Instance.ProcessManager.Run("Loading Presentation...", cancellationToken => _previewData.GetPreviewImages());
+				MainController.Instance.ProcessManager.Run("Loading Presentation...", (cancelletionToken, formProgress) => _previewData.GetPreviewImages());
 
 				comboBoxEditSlides.SelectedIndexChanged -= comboBoxEditSlides_SelectedIndexChanged;
 				comboBoxEditSlides.Properties.Items.Clear();
@@ -135,7 +135,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Forms
 
 				MainController.Instance.ProcessManager.Run(
 					"Saving as PDF...",
-					cancellationToken =>
+					(cancelletionToken, formProgress) =>
 					{
 						PowerPointSingleton.Instance.OpenSlideSourcePresentation(_tempFileCopy);
 						PowerPointSingleton.Instance.ExportSlideAsPdf(wholeFile ? -1 : SelectedThumbnail.Index, destinationFileName);
@@ -168,7 +168,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Forms
 					SelectedThumbnail.Index,
 					printAction => MainController.Instance.ProcessManager.Run(
 						"Printing...",
-						cancellationToken => printAction()));
+						(cancelletionToken, formProgress) => printAction()));
 			}
 		}
 
@@ -262,7 +262,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Forms
 				MainController.Instance.MainForm.FloaterLogo,
 				() => MainController.Instance.ProcessManager.Run(
 					"Inserting selected slide...",
-					cancellationToken =>
+					(cancelletionToken, formProgress) =>
 					{
 						PowerPointManager.Instance.ActivatePowerPoint();
 						PowerPointSingleton.Instance.OpenSlideSourcePresentation(_tempFileCopy);

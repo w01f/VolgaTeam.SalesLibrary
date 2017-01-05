@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using DevComponents.DotNetBar;
 using SalesLibraries.Business.Entities.Calendars;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent;
+using SalesLibraries.CommonGUI.BackgroundProcesses;
 using SalesLibraries.CommonGUI.Calendars;
 using SalesLibraries.SalesDepot.Controllers;
 
@@ -78,7 +79,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Calendars
 			MainController.Instance.ActivateApplication();
 		}
 
-		public void RunProcessInBackground(string title, Action<CancellationToken> process)
+		public void RunProcessInBackground(string title, Action<CancellationToken, FormProgressCommon> process)
 		{
 			MainController.Instance.ProcessManager.Run(title, process);
 		}
@@ -99,7 +100,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Calendars
 
 		private void LoadControls()
 		{
-			MainController.Instance.ProcessManager.Run("Loading Overnights Data...", cancellationToken =>
+			MainController.Instance.ProcessManager.Run("Loading Overnights Data...", (cancellationToken, formProgress) =>
 			{
 				MainController.Instance.MainForm.Invoke(new MethodInvoker(() =>
 				{

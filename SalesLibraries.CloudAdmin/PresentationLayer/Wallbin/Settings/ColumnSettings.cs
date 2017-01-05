@@ -7,8 +7,8 @@ using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraTab;
 using SalesLibraries.Business.Entities.Helpers;
 using SalesLibraries.Business.Entities.Wallbin.Persistent;
-using SalesLibraries.CloudAdmin.Controllers;
 using SalesLibraries.CommonGUI.Common;
+using SalesLibraries.CloudAdmin.Controllers;
 
 namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Settings
 {
@@ -33,9 +33,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Settings
 			ColumnOrder = columnOrder;
 			Text = String.Format("Column {0}", ColumnOrder + 1);
 			LoadData();
-			repositoryItemTextEdit.MouseDown += EditorHelper.EditorMouseDown;
-			repositoryItemTextEdit.MouseUp += EditorHelper.EditorMouseUp;
-			repositoryItemTextEdit.Enter += EditorHelper.EditorEnter;
+			repositoryItemTextEdit.EnableSelectAll();
 		}
 
 		public void LoadData()

@@ -34,7 +34,7 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 			MainController.Instance.MainForm.ribbonControl.Enabled = false;
 
 			var savedState = MainController.Instance.MainForm.WindowState;
-			var mainAction = new Action<CancellationToken>(cancellationToken =>
+			var mainAction = new Action<CancellationToken, FormProgressSync>((cancellationToken, formProgress) =>
 			{
 				MainController.Instance.MainForm.Invoke(new MethodInvoker(() =>
 				{
@@ -80,7 +80,7 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 			}
 			else
 			{
-				mainAction(new CancellationTokenSource().Token);
+				mainAction(new CancellationTokenSource().Token, null);
 				if (targetLibrary.SyncSettings.CloseAfterSync)
 				{
 					Application.Exit();

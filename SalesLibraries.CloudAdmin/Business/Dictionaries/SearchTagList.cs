@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
-using SalesLibraries.CloudAdmin.Configuration;
-using SalesLibraries.CloudAdmin.Controllers;
 using SalesLibraries.Common.Dictionaries;
 using SalesLibraries.Common.Objects.SearchTags;
-using SalesLibraries.ServiceConnector.FileManagerResourcesService;
+using SalesLibraries.CloudAdmin.Configuration;
+using SalesLibraries.CloudAdmin.Controllers;
+using SalesLibraries.ServiceConnector.Models.Rest.AppMetaData;
+using SalesLibraries.ServiceConnector.Models.Rest.Common;
+using SalesLibraries.ServiceConnector.Models.Rest.Dictionaries;
+using SalesLibraries.ServiceConnector.Services.Rest;
 
 namespace SalesLibraries.CloudAdmin.Business.Dictionaries
 {
@@ -14,15 +17,17 @@ namespace SalesLibraries.CloudAdmin.Business.Dictionaries
 	{
 		public override void Load()
 		{
-			string message;
+			RestResponse response;
 			var localMetaData = MetaDataContainer.Load(MetaDataConst.CategoriesDataTag);
 			if (localMetaData != null)
 			{
-				DateTime? cloudLastUpdate = null;
-				DateTime tempDate;
-				var dateStr = MainController.Instance.SoapServiceConnection.GetMetaData(MetaDataConst.CategoriesDataTag, MetaDataConst.LastUpdatePropertyName, out message);
-				if (DateTime.TryParse(dateStr, out tempDate))
-					cloudLastUpdate = tempDate;
+				response = MainController.Instance.RestServiceConnection.DoRequest(new MetaDataGetRequestData
+				{
+					DataTag = MetaDataConst.CategoriesDataTag,
+					PropertyName = MetaDataConst.LastUpdatePropertyName
+				},
+					"Error loading dictionaries updates from server");
+				var cloudLastUpdate = response.GetData<DateTime?>();
 				if (!cloudLastUpdate.HasValue || cloudLastUpdate <= localMetaData.LastUpdate)
 				{
 					var localData = localMetaData.GetData<SearchTagList>();
@@ -35,28 +40,41 @@ namespace SalesLibraries.CloudAdmin.Business.Dictionaries
 			else
 				localMetaData = new MetaDataContainer(MetaDataConst.CategoriesDataTag);
 
-			SearchGroups.AddRange(LoadFromCloudData(MainController.Instance.SoapServiceConnection.GetCategories(out message)));
+			response = MainController.Instance.RestServiceConnection.DoRequest(new SearchCategoriesGetRequestData(), "Error loading dictionaries updates from server");
+			SearchGroups.AddRange(LoadFromCloudData(response.GetData<SearchCategory[]>()));
 
 			int tempInt;
-			if (Int32.TryParse(MainController.Instance.SoapServiceConnection.GetMetaData(MetaDataConst.CategoriesDataTag, MetaDataConst.MaxTagsPropertyName, out message), out tempInt))
+			response = MainController.Instance.RestServiceConnection.DoRequest(new MetaDataGetRequestData
+			{
+				DataTag = MetaDataConst.CategoriesDataTag,
+				PropertyName = MetaDataConst.MaxTagsPropertyName
+			},
+				"Error loading dictionaries updates from server");
+			if (Int32.TryParse(response.DataEncoded, out tempInt))
 				MaxTags = tempInt;
-			if (Int32.TryParse(MainController.Instance.SoapServiceConnection.GetMetaData(MetaDataConst.CategoriesDataTag, MetaDataConst.CountTagsPropertyName, out message), out tempInt))
+			response = MainController.Instance.RestServiceConnection.DoRequest(new MetaDataGetRequestData
+			{
+				DataTag = MetaDataConst.CategoriesDataTag,
+				PropertyName = MetaDataConst.CountTagsPropertyName
+			},
+				"Error loading dictionaries updates from server");
+			if (Int32.TryParse(response.DataEncoded, out tempInt))
 				TagCount = tempInt > 0;
 
 			localMetaData.Content = JsonConvert.SerializeObject(this);
 			localMetaData.Save();
 		}
 
-		private static IEnumerable<SearchGroup> LoadFromCloudData(IEnumerable<SoapCategory> cloudCategories)
+		private static IEnumerable<SearchGroup> LoadFromCloudData(IEnumerable<SearchCategory> cloudCategories)
 		{
-			return cloudCategories.GroupBy(cat => cat.category).Select(group =>
+			return cloudCategories.GroupBy(cat => cat.Category).Select(group =>
 			{
 				var searchGroup = new SearchGroup()
 				{
 					Name = group.Key,
-					Description = group.Select(g => g.description).FirstOrDefault()
+					Description = group.Select(g => g.Description).FirstOrDefault()
 				};
-				searchGroup.Tags.AddRange(group.Select(g => new SearchTag { Name = g.tag }));
+				searchGroup.Tags.AddRange(group.Select(g => new SearchTag { Name = g.Tag }));
 				return searchGroup;
 			});
 		}

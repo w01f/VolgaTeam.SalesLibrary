@@ -28,7 +28,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.ProgramSchedule
 			ActiveScheduleContext.StationChanged -= OnStationChanged;
 			ActiveScheduleContext.StationChanged += OnStationChanged;
 			if (ActiveScheduleContext.Initialized || !ActiveScheduleContext.HasData) return;
-			MainController.Instance.ProcessManager.Run("Loading Program Schedule...", cancellationToken => ActiveScheduleContext.LoadData());
+			MainController.Instance.ProcessManager.Run("Loading Program Schedule...", (cancelletionToken, formProgress) => ActiveScheduleContext.LoadData());
 		}
 
 		protected void LoadControls()
@@ -68,7 +68,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.ProgramSchedule
 		protected void LoadDay()
 		{
 			Day sheduleDay = null;
-			MainController.Instance.ProcessManager.Run("Loading Records...", cancellationToken =>
+			MainController.Instance.ProcessManager.Run("Loading Records...", (cancelletionToken, formProgress) =>
 			{
 				sheduleDay = ActiveScheduleContext.ActiveStation.GetDay(MainController.Instance.MainForm.dateEditProgramScheduleDay.DateTime.Date);
 			});
@@ -95,7 +95,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.ProgramSchedule
 				var selectedStation = form.Station;
 				var selectedWeeks = form.Weeks;
 				var useLandscape = form.Landscape;
-				MainController.Instance.ProcessManager.Run("Generating Program Schedule...", cancellationToken => 
+				MainController.Instance.ProcessManager.Run("Generating Program Schedule...", (cancelletionToken, formProgress) => 
 					ActiveScheduleContext.GenerateWeekScheduleReport(selectedStation,selectedWeeks , asPdf, useLandscape));
 			}
 		}

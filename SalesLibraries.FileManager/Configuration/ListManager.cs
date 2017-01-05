@@ -11,6 +11,9 @@ namespace SalesLibraries.FileManager.Configuration
 		public SuperFilterList SuperFilters { get; }
 		public SecurityLists Security { get; }
 		public LinkBundleImageList LinkBundleImages { get; }
+		public ExternalLibraryLinksList ExternalLibraryLinks { get; }
+		public ExternalShortcutsList ExternalShortcuts { get; }
+		public InternalLinkTemplateList InternalLinkTemplates { get; }
 
 		public ListManager()
 		{
@@ -20,6 +23,9 @@ namespace SalesLibraries.FileManager.Configuration
 			SuperFilters = new SuperFilterList();
 			Security = new SecurityLists();
 			LinkBundleImages = new LinkBundleImageList();
+			ExternalLibraryLinks = new ExternalLibraryLinksList();
+			ExternalShortcuts = new ExternalShortcutsList();
+			InternalLinkTemplates = new InternalLinkTemplateList();
 		}
 
 		public void Load()
@@ -30,6 +36,7 @@ namespace SalesLibraries.FileManager.Configuration
 			SuperFilters.Load();
 			Security.Load();
 			LinkBundleImages.Load();
+			InternalLinkTemplates.Load();
 		}
 	}
 }

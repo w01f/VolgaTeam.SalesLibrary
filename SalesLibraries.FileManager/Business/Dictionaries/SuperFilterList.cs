@@ -5,6 +5,10 @@ using Newtonsoft.Json;
 using SalesLibraries.Common.Dictionaries;
 using SalesLibraries.FileManager.Configuration;
 using SalesLibraries.FileManager.Controllers;
+using SalesLibraries.ServiceConnector.Models.Rest.AppMetaData;
+using SalesLibraries.ServiceConnector.Models.Rest.Common;
+using SalesLibraries.ServiceConnector.Models.Rest.Dictionaries;
+using SalesLibraries.ServiceConnector.Services.Rest;
 
 namespace SalesLibraries.FileManager.Business.Dictionaries
 {
@@ -12,25 +16,28 @@ namespace SalesLibraries.FileManager.Business.Dictionaries
 	{
 		public override void Load()
 		{
-			string message;
+			RestResponse response;
 			var localMetaData = MetaDataContainer.Load(MetaDataConst.SuperFiltersDataTag);
 			if (localMetaData != null)
 			{
-				DateTime? cloudLastUpdate = null;
-				DateTime tempDate;
-				var dateStr = MainController.Instance.SoapServiceConnection.GetMetaData(MetaDataConst.SuperFiltersDataTag, MetaDataConst.LastUpdatePropertyName, out message);
-				if (DateTime.TryParse(dateStr, out tempDate))
-					cloudLastUpdate = tempDate;
+				response = MainController.Instance.RestServiceConnection.DoRequest(new MetaDataGetRequestData
+				{
+					DataTag = MetaDataConst.SuperFiltersDataTag,
+					PropertyName = MetaDataConst.LastUpdatePropertyName
+				},
+					"Error loading dictionaries updates from server");
+				var cloudLastUpdate = response.GetData<DateTime?>();
 				if (!cloudLastUpdate.HasValue || cloudLastUpdate <= localMetaData.LastUpdate)
 				{
-					Items.AddRange(localMetaData.GetData<List<String>>());
+					Items.AddRange(localMetaData.GetData<List<string>>());
 					return;
 				}
 			}
 			else
 				localMetaData = new MetaDataContainer(MetaDataConst.SuperFiltersDataTag);
 
-			Items.AddRange(MainController.Instance.SoapServiceConnection.GetSuperFilters(out message).Select(cloudSuperFilter => cloudSuperFilter.value));
+			response = MainController.Instance.RestServiceConnection.DoRequest(new SuperFiltersGetRequestData(), "Error loading dictionaries updates from server");
+			Items.AddRange(response.GetData<SuperFilter[]>().Select(cloudSuperFilter => cloudSuperFilter.Value));
 
 			localMetaData.Content = JsonConvert.SerializeObject(Items);
 			localMetaData.Save();

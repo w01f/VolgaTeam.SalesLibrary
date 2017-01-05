@@ -30,7 +30,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.ProgramSchedule
 			ActiveScheduleContext.StationChanged -= OnStationChanged;
 			ActiveScheduleContext.StationChanged += OnStationChanged;
 			if (ActiveScheduleContext.Initialized || !ActiveScheduleContext.HasData) return;
-			MainController.Instance.ProcessManager.Run("Loading Program Schedule...", cancellationToken => ActiveScheduleContext.LoadData());
+			MainController.Instance.ProcessManager.Run("Loading Program Schedule...", (cancelletionToken, formProgress) => ActiveScheduleContext.LoadData());
 		}
 
 		protected void LoadControls()
@@ -73,7 +73,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.ProgramSchedule
 			var dateStart = MainController.Instance.MainForm.dateEditProgramSearchDateStart.DateTime;
 			var dateEnd = MainController.Instance.MainForm.dateEditProgramSearchDateEnd.DateTime;
 			var program = MainController.Instance.MainForm.comboBoxEditProgramSearchPrograms.EditValue as String;
-			MainController.Instance.ProcessManager.Run("Searching Programs...", cancellationToken =>
+			MainController.Instance.ProcessManager.Run("Searching Programs...", (cancelletionToken, formProgress) =>
 			{
 				searchResult = ActiveScheduleContext.ActiveStation.Search(dateStart, dateEnd, program);
 			});
@@ -100,7 +100,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.ProgramSchedule
 		protected void GenerateActivityListReport(bool asPdf)
 		{
 			var activities = (ProgramActivity[])gridControlPrograms.DataSource;
-			MainController.Instance.ProcessManager.Run("Generating Program List...", cancellationToken =>
+			MainController.Instance.ProcessManager.Run("Generating Program List...", (cancelletionToken, formProgress) =>
 				ActiveScheduleContext.GenerateActivityListReport(activities, asPdf));
 		}
 	}

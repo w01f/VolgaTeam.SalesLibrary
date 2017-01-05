@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.HyperLinkInfo;
 using SalesLibraries.CloudAdmin.Controllers;
 
 namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.HyperlinkEdit
 {
-	public partial class InternalLibraryObjectLinkEditControl : UserControl, IInternalLinkEditControl
+	public partial class InternalLibraryObjectLinkEditControl : BaseInternalLibraryContentEditControl, IInternalLinkEditControl
 	{
 		public InternalLibraryObjectLinkEditControl()
 		{
@@ -28,6 +29,18 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.HyperlinkEdi
 				laWindowName.Font = new Font(laWindowName.Font.FontFamily, laWindowName.Font.Size - 2, laWindowName.Font.Style);
 				laLibraryLinkName.Font = new Font(laLibraryLinkName.Font.FontFamily, laLibraryLinkName.Font.Size - 2, laLibraryLinkName.Font.Style);
 			}
+		}
+
+		public override void InitControl()
+		{
+			if (IsListsLoaded) return;
+			base.InitControl();
+
+			comboBoxEditLibraryName.Properties.Items.Clear();
+			comboBoxEditLibraryName.Properties.Items.AddRange(MainController.Instance.Lists.ExternalLibraryLinks.Libraries
+				.OrderBy(l => l.Name)
+				.Select(l => l.Name)
+				.ToArray());
 		}
 
 		public bool ValidateLinkInfo()
@@ -60,10 +73,10 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.HyperlinkEdi
 		{
 			return new InternalLibraryObjectLinkInfo
 			{
-				LibraryName = textEditLibraryName.EditValue as String,
-				PageName = textEditPageName.EditValue as String,
-				WindowName = textEditWindowName.EditValue as String,
-				LinkName = textEditLibraryLinkName.EditValue as String,
+				LibraryName = comboBoxEditLibraryName.EditValue as String,
+				PageName = comboBoxEditPageName.EditValue as String,
+				WindowName = comboBoxEditWindowName.EditValue as String,
+				LinkName = comboBoxEditLibraryLinkName.EditValue as String,
 			};
 		}
 
@@ -71,15 +84,67 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.HyperlinkEdi
 		{
 			if (templateInfo is InternalLibraryPageLinkInfo)
 			{
-				textEditLibraryName.EditValue = ((InternalLibraryPageLinkInfo)templateInfo).LibraryName;
-				textEditPageName.EditValue = ((InternalLibraryPageLinkInfo)templateInfo).PageName;
+				comboBoxEditLibraryName.EditValue = ((InternalLibraryPageLinkInfo)templateInfo).LibraryName;
+				comboBoxEditPageName.EditValue = ((InternalLibraryPageLinkInfo)templateInfo).PageName;
 			}
 			if (templateInfo is InternalLibraryFolderLinkInfo)
 			{
-				textEditLibraryName.EditValue = ((InternalLibraryFolderLinkInfo)templateInfo).LibraryName;
-				textEditPageName.EditValue = ((InternalLibraryFolderLinkInfo)templateInfo).PageName;
-				textEditWindowName.EditValue = ((InternalLibraryFolderLinkInfo)templateInfo).WindowName;
+				comboBoxEditLibraryName.EditValue = ((InternalLibraryFolderLinkInfo)templateInfo).LibraryName;
+				comboBoxEditPageName.EditValue = ((InternalLibraryFolderLinkInfo)templateInfo).PageName;
+				comboBoxEditWindowName.EditValue = ((InternalLibraryFolderLinkInfo)templateInfo).WindowName;
 			}
+		}
+
+		private void OnLibraryChanged(object sender, EventArgs e)
+		{
+			comboBoxEditPageName.Properties.Items.Clear();
+			var libraryName = comboBoxEditLibraryName.EditValue as String;
+			var library = MainController.Instance.Lists.ExternalLibraryLinks.Libraries
+				.FirstOrDefault(l => String.Compare(l.Name, libraryName, StringComparison.OrdinalIgnoreCase) == 0);
+			if (library != null)
+				comboBoxEditPageName.Properties.Items.AddRange(library.Pages
+					.OrderBy(p => p.Order)
+					.Select(p => p.Name)
+					.ToArray());
+			OnLibraryPageChanged(sender, e);
+			OnLibraryFolderChanged(sender, e);
+		}
+
+		private void OnLibraryPageChanged(object sender, EventArgs e)
+		{
+			comboBoxEditWindowName.Properties.Items.Clear();
+			var libraryName = comboBoxEditLibraryName.EditValue as String;
+			var libraryPageName = comboBoxEditPageName.EditValue as String;
+			var libraryPage = MainController.Instance.Lists.ExternalLibraryLinks.Libraries
+				.Where(l => String.Compare(l.Name, libraryName, StringComparison.OrdinalIgnoreCase) == 0)
+				.SelectMany(l => l.Pages)
+				.FirstOrDefault(p => String.Compare(p.Name, libraryPageName, StringComparison.OrdinalIgnoreCase) == 0);
+			if (libraryPage != null)
+				comboBoxEditWindowName.Properties.Items.AddRange(libraryPage.Folders
+					.OrderBy(f => f.Order)
+					.Select(f => f.Name)
+					.ToArray());
+			OnLibraryFolderChanged(sender, e);
+		}
+
+		private void OnLibraryFolderChanged(object sender, EventArgs e)
+		{
+			comboBoxEditLibraryLinkName.Properties.Items.Clear();
+			var libraryName = comboBoxEditLibraryName.EditValue as String;
+			var libraryPageName = comboBoxEditPageName.EditValue as String;
+			var libraryFolderName = comboBoxEditWindowName.EditValue as String;
+			var libraryFolder = MainController.Instance.Lists.ExternalLibraryLinks.Libraries
+				.Where(l => String.Compare(l.Name, libraryName, StringComparison.OrdinalIgnoreCase) == 0)
+				.SelectMany(l => l.Pages)
+				.Where(p => String.Compare(p.Name, libraryPageName, StringComparison.OrdinalIgnoreCase) == 0)
+				.SelectMany(p => p.Folders)
+				.FirstOrDefault(f => String.Compare(f.Name, libraryFolderName, StringComparison.OrdinalIgnoreCase) == 0);
+			if (libraryFolder != null)
+				comboBoxEditLibraryLinkName.Properties.Items.AddRange(libraryFolder.Links
+					.OrderBy(link=>link.Order)
+					.Select(link => link.FileName ?? link.Name)
+					.Where(item => !String.IsNullOrEmpty(item))
+					.ToArray());
 		}
 	}
 }

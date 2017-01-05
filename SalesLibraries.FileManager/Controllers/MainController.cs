@@ -16,7 +16,7 @@ using SalesLibraries.FileManager.Business.Synchronization;
 using SalesLibraries.FileManager.Configuration;
 using SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings;
 using SalesLibraries.FileManager.PresentationLayer.Wallbin.Views;
-using SalesLibraries.ServiceConnector.Services.Soap;
+using SalesLibraries.ServiceConnector.Services.Rest;
 
 namespace SalesLibraries.FileManager.Controllers
 {
@@ -29,7 +29,7 @@ namespace SalesLibraries.FileManager.Controllers
 
 		public SettingsManager Settings { get; }
 		public ListManager Lists { get; }
-		public SoapServiceConnection SoapServiceConnection { get; }
+		public RestServiceConnection RestServiceConnection { get; }
 		public LocalWallbinManager Wallbin { get; }
 		public HelpManager HelpManager { get; }
 
@@ -50,7 +50,7 @@ namespace SalesLibraries.FileManager.Controllers
 		{
 			Settings = new SettingsManager();
 			Lists = new ListManager();
-			SoapServiceConnection = new SoapServiceConnection();
+			RestServiceConnection = new RestServiceConnection();
 			Wallbin = new LocalWallbinManager();
 			HelpManager = new HelpManager();
 			WallbinViews = new ViewManager();
@@ -62,6 +62,7 @@ namespace SalesLibraries.FileManager.Controllers
 		public void RunApplication()
 		{
 			var stopRun = false;
+			var appReady = false;
 
 			LicenseHelper.Register();
 
@@ -95,107 +96,100 @@ namespace SalesLibraries.FileManager.Controllers
 
 			ProcessManager.RunStartProcess(
 				"Connecting to adSALEScloud…",
-				cancellationToken => AsyncHelper.RunSync(FileStorageManager.Instance.Init));
+				(cancellationToken, formProgress) =>
+				{
+					formProgress.Invoke(new MethodInvoker(() =>
+					{
+						formProgress.ProcessConnectionStage();
+						Application.DoEvents();
+					}));
+
+					AsyncHelper.RunSync(FileStorageManager.Instance.Init);
+
+					if (stopRun) return;
+
+					appReady = FileStorageManager.Instance.Activated;
+
+					if (!appReady) return;
+
+					formProgress.Invoke(new MethodInvoker(() =>
+					{
+						formProgress.ProcessSecurityStage();
+						Application.DoEvents();
+					}));
+
+					AsyncHelper.RunSync(AppProfileManager.Instance.LoadProfile);
+					AsyncHelper.RunSync(Configuration.RemoteResourceManager.Instance.LoadLocal);
+					Settings.LoadLocal();
+
+					if (!String.IsNullOrEmpty(Settings.BackupPath) && Directory.Exists(Settings.BackupPath))
+					{
+						var connectionState = DatabaseConnectionHelper.GetConnectionState(Settings.BackupPath);
+						if (connectionState.Type == ConnectionStateType.Busy)
+						{
+							ProcessManager.SuspendProcess();
+							PopupMessages.ShowWarning(
+								String.Format(
+									"{0} is currently updating the site.{1}Please try back again later, or ask the user to hurry up and finish…",
+									connectionState.User,
+									Environment.NewLine));
+							appReady = false;
+							stopRun = true;
+							return;
+						}
+					}
+
+					formProgress.Invoke(new MethodInvoker(() =>
+					{
+						formProgress.ProcessLoadFilesStage();
+						Application.DoEvents();
+					}));
+
+					AsyncHelper.RunSync(Configuration.RemoteResourceManager.Instance.LoadRemote);
+					Settings.LoadRemote();
+					InitBusinessObjects();
+					AsyncHelper.RunSync(FileStorageManager.Instance.FixDataState);
+
+					if (String.IsNullOrEmpty(Settings.BackupPath) || !Directory.Exists(Settings.BackupPath))
+					{
+						ProcessManager.SuspendProcess();
+						formProgress.Invoke(new MethodInvoker(() =>
+						{
+							using (var form = new FormPaths())
+							{
+								if (form.ShowDialog() == DialogResult.OK)
+								{
+									Settings.Save();
+								}
+								else
+									appReady = false;
+							}
+						}));
+						ProcessManager.ResumeProcess();
+					}
+
+					if (appReady)
+					{
+						DatabaseConnectionHelper.Connect(Settings.BackupPath);
+						Wallbin.LoadLibrary(Settings.BackupPath);
+					}
+				});
 
 			if (stopRun) return;
-
-			var appReady = FileStorageManager.Instance.Activated;
-
 			if (appReady)
 			{
-				ProcessManager.RunStartProcess(
-					"Connecting adSALEScloud...",
-					cancellationToken => AsyncHelper.RunSync(async () =>
-					{
-						await AppProfileManager.Instance.LoadProfile();
-						await Configuration.RemoteResourceManager.Instance.LoadLocal();
-						Settings.LoadLocal();
-					}));
-
-				if (!String.IsNullOrEmpty(Settings.BackupPath) && Directory.Exists(Settings.BackupPath))
+				FormStateHelper.Init(MainForm, Common.Helpers.RemoteResourceManager.Instance.AppAliasSettingsFolder, "Site Admin-Main-Form", true, true);
+				MainForm.Shown += (o, e) =>
 				{
-					var connectionState = DatabaseConnectionHelper.GetConnectionState(Settings.BackupPath);
-					if (connectionState.Type == ConnectionStateType.Busy)
-					{
-						PopupMessages.ShowWarning(
-							String.Format(
-								"{0} is currently updating the site.{1}Please try back again later, or ask the user to hurry up and finish…",
-								connectionState.User,
-								Environment.NewLine));
-						return;
-					}
-				}
-
-				ProcessManager.RunStartProcess(
-						"Connecting adSALEScloud...",
-						cancellationToken => AsyncHelper.RunSync(async () =>
-						{
-							await AppProfileManager.Instance.LoadProfile();
-							await Configuration.RemoteResourceManager.Instance.LoadLocal();
-							Settings.LoadLocal();
-						}));
-
-				string progressTitle;
-				switch (FileStorageManager.Instance.DataState)
-				{
-					case DataActualityState.NotExisted:
-						progressTitle = "Syncing adSALEScloud for the 1st time…";
-						break;
-					case DataActualityState.Outdated:
-						progressTitle = "Refreshing data from adSALEScloud…";
-						break;
-					default:
-						progressTitle = "Loading data...";
-						break;
-				}
-
-				ProcessManager.RunStartProcess(
-					progressTitle,
-					cancellationToken => AsyncHelper.RunSync(async () =>
-					{
-						await Configuration.RemoteResourceManager.Instance.LoadRemote();
-						Settings.LoadRemote();
-						InitBusinessObjects();
-						await FileStorageManager.Instance.FixDataState();
-					}));
-
-				if (String.IsNullOrEmpty(Settings.BackupPath) || !Directory.Exists(Settings.BackupPath))
-				{
-					using (var form = new FormPaths())
-					{
-						if (form.ShowDialog() == DialogResult.OK)
-						{
-							Settings.Save();
-						}
-						else
-							appReady = false;
-					}
-				}
-
-				if (appReady)
-				{
-					ProcessManager.RunStartProcess(
-						"Loading files...",
-						cancellationToken =>
-						{
-							DatabaseConnectionHelper.Connect(Settings.BackupPath);
-							Wallbin.LoadLibrary(Settings.BackupPath);
-						});
-
-					FormStateHelper.Init(MainForm, Common.Helpers.RemoteResourceManager.Instance.AppAliasSettingsFolder, "Site Admin-Main-Form", false, true);
-					MainForm.Shown += (o, e) =>
-					{
-						MainForm.InitForm();
-						LoadControllers();
-						ProcessManager.RunInQueue("Loading Wallbin...",
-							() => MainForm.Invoke(new MethodInvoker(() => WallbinViews.Load())),
-							() => MainForm.Invoke(new MethodInvoker(() => ShowTab(TabPageEnum.Home))));
-					};
-					Application.Run(MainForm);
-				}
+					MainForm.InitForm();
+					LoadControllers();
+					ProcessManager.RunInQueue("Loading Wallbin...",
+						() => MainForm.Invoke(new MethodInvoker(() => WallbinViews.Load())),
+						() => MainForm.Invoke(new MethodInvoker(() => ShowTab(TabPageEnum.Home))));
+				};
+				Application.Run(MainForm);
 			}
-
-			if (!appReady)
+			else
 				PopupMessages.ShowWarning("This app is not activated. Contact adSALESapps Support (help@adSALESapps.com)");
 		}
 
@@ -263,7 +257,7 @@ namespace SalesLibraries.FileManager.Controllers
 		{
 			MainForm.pnContainer.Controls.Clear();
 			DatabaseConnectionHelper.Connect(Settings.BackupPath);
-			ProcessManager.Run("Loading Files...", cancelationToken => Wallbin.LoadLibrary(Settings.BackupPath));
+			ProcessManager.Run("Loading Files...", (cancellationToken, formProgress) => Wallbin.LoadLibrary(Settings.BackupPath));
 			ProcessManager.RunInQueue("Loading Wallbin...",
 				() => MainForm.Invoke(new MethodInvoker(() => WallbinViews.Load())),
 				() => MainForm.Invoke(new MethodInvoker(() => ShowTab())));
@@ -319,7 +313,7 @@ namespace SalesLibraries.FileManager.Controllers
 
 		private void InitBusinessObjects()
 		{
-			SoapServiceConnection.Load(Settings.WebServiceSite);
+			RestServiceConnection.Load(Settings.WebServiceSite, "FileManagerData");
 			Lists.Load();
 			HelpManager.LoadHelpLinks();
 		}
@@ -342,7 +336,7 @@ namespace SalesLibraries.FileManager.Controllers
 			TabCalendar = new CalendarPage();
 			_tabPages.Add(TabPageEnum.Calendar, TabCalendar);
 
-			ProcessManager.Run("Loading Controls...", cancelationToken => MainForm.Invoke(new MethodInvoker(() =>
+			ProcessManager.Run("Loading Controls...", (cancellationToken, formProgress) => MainForm.Invoke(new MethodInvoker(() =>
 			{
 				TabWallbin.InitController();
 				TabVideo.InitController();

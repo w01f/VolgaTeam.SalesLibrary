@@ -22,12 +22,12 @@ namespace SalesLibraries.Business.Schema.Wallbin.Initialization
 			}
 			catch (Exception ex)
 			{
-				throw new CloudLibraryException("Error loading library data", ex);
+				throw new RestServiceException("Error loading library data", ex);
 			}
 			if (response.Result == ResponseResult.Error)
 			{
 				var error = response.GetData<RestError>();
-				throw new CloudLibraryException(error.Message);
+				throw new RestServiceException(error.Message);
 			}
 			try
 			{
@@ -37,7 +37,7 @@ namespace SalesLibraries.Business.Schema.Wallbin.Initialization
 			}
 			catch (Exception ex)
 			{
-				throw new CloudLibraryException("Error parsing library data", ex);
+				throw new RestServiceException("Error parsing library data", ex);
 			}
 		}
 	}

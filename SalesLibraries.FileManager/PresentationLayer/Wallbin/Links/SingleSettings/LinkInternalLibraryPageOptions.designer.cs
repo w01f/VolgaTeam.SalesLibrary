@@ -33,37 +33,27 @@
 			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
 			this.labelControlName = new DevExpress.XtraEditors.LabelControl();
 			this.textEditName = new DevExpress.XtraEditors.TextEdit();
-			this.textEditLibraryName = new DevExpress.XtraEditors.TextEdit();
 			this.labelControlLibraryName = new DevExpress.XtraEditors.LabelControl();
-			this.textEditPageName = new DevExpress.XtraEditors.TextEdit();
 			this.labelControlPageName = new DevExpress.XtraEditors.LabelControl();
 			this.labelControlHeaderIcon = new DevExpress.XtraEditors.LabelControl();
 			this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
 			this.labelControlTitle = new DevExpress.XtraEditors.LabelControl();
 			this.checkEditShowHeaderText = new DevExpress.XtraEditors.CheckEdit();
 			this.textEditHeaderIcon = new DevExpress.XtraEditors.TextEdit();
-			this.comboBoxEditViewType = new DevExpress.XtraEditors.ComboBoxEdit();
-			this.labelControlViewType = new DevExpress.XtraEditors.LabelControl();
-			this.colorEditBackColor = new CommonGUI.Common.HtmlColorEdit();
-			this.colorEditTextColor = new CommonGUI.Common.HtmlColorEdit();
-			this.checkEditShowWindowHeaders = new DevExpress.XtraEditors.CheckEdit();
-			this.checkEditShowLogo = new DevExpress.XtraEditors.CheckEdit();
-			this.checkEditShowText = new DevExpress.XtraEditors.CheckEdit();
-			this.labelControlTextColor = new DevExpress.XtraEditors.LabelControl();
-			this.labelControlBackColor = new DevExpress.XtraEditors.LabelControl();
+			this.comboBoxEditLibraryName = new DevExpress.XtraEditors.ComboBoxEdit();
+			this.comboBoxEditPageName = new DevExpress.XtraEditors.ComboBoxEdit();
+			this.checkEditOpenOnSamePage = new DevExpress.XtraEditors.CheckEdit();
+			this.comboBoxEditStyle = new DevExpress.XtraEditors.ComboBoxEdit();
+			this.labelControlStyle = new DevExpress.XtraEditors.LabelControl();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditName.Properties)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.textEditLibraryName.Properties)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.textEditPageName.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditShowHeaderText.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditHeaderIcon.Properties)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.comboBoxEditViewType.Properties)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.colorEditBackColor.Properties)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.colorEditTextColor.Properties)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.checkEditShowWindowHeaders.Properties)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.checkEditShowLogo.Properties)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.checkEditShowText.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.comboBoxEditLibraryName.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.comboBoxEditPageName.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditOpenOnSamePage.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.comboBoxEditStyle.Properties)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// styleController
@@ -101,16 +91,6 @@
 			this.textEditName.StyleController = this.styleController;
 			this.textEditName.TabIndex = 28;
 			// 
-			// textEditLibraryName
-			// 
-			this.textEditLibraryName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.textEditLibraryName.Location = new System.Drawing.Point(17, 228);
-			this.textEditLibraryName.Name = "textEditLibraryName";
-			this.textEditLibraryName.Size = new System.Drawing.Size(501, 22);
-			this.textEditLibraryName.StyleController = this.styleController;
-			this.textEditLibraryName.TabIndex = 30;
-			// 
 			// labelControlLibraryName
 			// 
 			this.labelControlLibraryName.AllowHtmlString = true;
@@ -120,16 +100,6 @@
 			this.labelControlLibraryName.StyleController = this.styleController;
 			this.labelControlLibraryName.TabIndex = 29;
 			this.labelControlLibraryName.Text = "<b>Target Library</b>";
-			// 
-			// textEditPageName
-			// 
-			this.textEditPageName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.textEditPageName.Location = new System.Drawing.Point(17, 278);
-			this.textEditPageName.Name = "textEditPageName";
-			this.textEditPageName.Size = new System.Drawing.Size(501, 22);
-			this.textEditPageName.StyleController = this.styleController;
-			this.textEditPageName.TabIndex = 32;
 			// 
 			// labelControlPageName
 			// 
@@ -197,140 +167,91 @@
 			this.textEditHeaderIcon.StyleController = this.styleController;
 			this.textEditHeaderIcon.TabIndex = 70;
 			// 
-			// comboBoxEditViewType
+			// comboBoxEditLibraryName
 			// 
-			this.comboBoxEditViewType.EditValue = "Columns";
-			this.comboBoxEditViewType.Location = new System.Drawing.Point(103, 366);
-			this.comboBoxEditViewType.Name = "comboBoxEditViewType";
-			this.comboBoxEditViewType.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+			this.comboBoxEditLibraryName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.comboBoxEditLibraryName.Location = new System.Drawing.Point(17, 228);
+			this.comboBoxEditLibraryName.Name = "comboBoxEditLibraryName";
+			this.comboBoxEditLibraryName.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-			this.comboBoxEditViewType.Properties.Items.AddRange(new object[] {
-            "Columns",
-            "Boxes"});
-			this.comboBoxEditViewType.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-			this.comboBoxEditViewType.Size = new System.Drawing.Size(140, 22);
-			this.comboBoxEditViewType.StyleController = this.styleController;
-			this.comboBoxEditViewType.TabIndex = 66;
+			this.comboBoxEditLibraryName.Size = new System.Drawing.Size(501, 22);
+			this.comboBoxEditLibraryName.StyleController = this.styleController;
+			this.comboBoxEditLibraryName.TabIndex = 82;
+			this.comboBoxEditLibraryName.EditValueChanged += new System.EventHandler(this.OnLibraryChanged);
 			// 
-			// labelControlViewType
+			// comboBoxEditPageName
 			// 
-			this.labelControlViewType.AllowHtmlString = true;
-			this.labelControlViewType.Location = new System.Drawing.Point(17, 367);
-			this.labelControlViewType.Name = "labelControlViewType";
-			this.labelControlViewType.Size = new System.Drawing.Size(67, 16);
-			this.labelControlViewType.StyleController = this.styleController;
-			this.labelControlViewType.TabIndex = 72;
-			this.labelControlViewType.Text = "<b>View Type</b>";
+			this.comboBoxEditPageName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.comboBoxEditPageName.Location = new System.Drawing.Point(17, 278);
+			this.comboBoxEditPageName.Name = "comboBoxEditPageName";
+			this.comboBoxEditPageName.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+			this.comboBoxEditPageName.Size = new System.Drawing.Size(501, 22);
+			this.comboBoxEditPageName.StyleController = this.styleController;
+			this.comboBoxEditPageName.TabIndex = 83;
 			// 
-			// colorEditBackColor
+			// checkEditOpenOnSamePage
 			// 
-			this.colorEditBackColor.EditValue = System.Drawing.Color.White;
-			this.colorEditBackColor.Location = new System.Drawing.Point(414, 406);
-			this.colorEditBackColor.Name = "colorEditBackColor";
-			this.colorEditBackColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-			new DevExpress.XtraEditors.Controls.EditorButton () });
-			this.colorEditBackColor.Size = new System.Drawing.Size(80, 22);
-			this.colorEditBackColor.StyleController = this.styleController;
-			this.colorEditBackColor.TabIndex = 79;
+			this.checkEditOpenOnSamePage.Location = new System.Drawing.Point(17, 413);
+			this.checkEditOpenOnSamePage.Name = "checkEditOpenOnSamePage";
+			this.checkEditOpenOnSamePage.Properties.Caption = "Launch this link in new Browser Tab";
+			this.checkEditOpenOnSamePage.Size = new System.Drawing.Size(505, 20);
+			this.checkEditOpenOnSamePage.StyleController = this.styleController;
+			this.checkEditOpenOnSamePage.TabIndex = 86;
 			// 
-			// colorEditTextColor
+			// comboBoxEditStyle
 			// 
-			this.colorEditTextColor.EditValue = System.Drawing.Color.Black;
-			this.colorEditTextColor.Location = new System.Drawing.Point(136, 406);
-			this.colorEditTextColor.Name = "colorEditTextColor";
-			this.colorEditTextColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-			new DevExpress.XtraEditors.Controls.EditorButton () });
-			this.colorEditTextColor.Size = new System.Drawing.Size(80, 22);
-			this.colorEditTextColor.StyleController = this.styleController;
-			this.colorEditTextColor.TabIndex = 78;
+			this.comboBoxEditStyle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.comboBoxEditStyle.Location = new System.Drawing.Point(103, 371);
+			this.comboBoxEditStyle.Name = "comboBoxEditStyle";
+			this.comboBoxEditStyle.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+			this.comboBoxEditStyle.Properties.NullText = "Select Style...";
+			this.comboBoxEditStyle.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+			this.comboBoxEditStyle.Size = new System.Drawing.Size(415, 22);
+			this.comboBoxEditStyle.StyleController = this.styleController;
+			this.comboBoxEditStyle.TabIndex = 85;
 			// 
-			// checkEditShowWindowHeaders
+			// labelControlStyle
 			// 
-			this.checkEditShowWindowHeaders.EditValue = true;
-			this.checkEditShowWindowHeaders.Location = new System.Drawing.Point(385, 449);
-			this.checkEditShowWindowHeaders.Name = "checkEditShowWindowHeaders";
-			this.checkEditShowWindowHeaders.Properties.Caption = "Window Title Bars";
-			this.checkEditShowWindowHeaders.Size = new System.Drawing.Size(133, 20);
-			this.checkEditShowWindowHeaders.StyleController = this.styleController;
-			this.checkEditShowWindowHeaders.TabIndex = 77;
-			// 
-			// checkEditShowLogo
-			// 
-			this.checkEditShowLogo.EditValue = true;
-			this.checkEditShowLogo.Location = new System.Drawing.Point(202, 449);
-			this.checkEditShowLogo.Name = "checkEditShowLogo";
-			this.checkEditShowLogo.Properties.Caption = "Show Page Logo";
-			this.checkEditShowLogo.Size = new System.Drawing.Size(133, 20);
-			this.checkEditShowLogo.StyleController = this.styleController;
-			this.checkEditShowLogo.TabIndex = 76;
-			// 
-			// checkEditShowText
-			// 
-			this.checkEditShowText.EditValue = true;
-			this.checkEditShowText.Location = new System.Drawing.Point(17, 449);
-			this.checkEditShowText.Name = "checkEditShowText";
-			this.checkEditShowText.Properties.Caption = "Show Page Name";
-			this.checkEditShowText.Size = new System.Drawing.Size(128, 20);
-			this.checkEditShowText.StyleController = this.styleController;
-			this.checkEditShowText.TabIndex = 75;
-			// 
-			// labelControlTextColor
-			// 
-			this.labelControlTextColor.AllowHtmlString = true;
-			this.labelControlTextColor.Location = new System.Drawing.Point(17, 408);
-			this.labelControlTextColor.Name = "labelControlTextColor";
-			this.labelControlTextColor.Size = new System.Drawing.Size(113, 16);
-			this.labelControlTextColor.StyleController = this.styleController;
-			this.labelControlTextColor.TabIndex = 80;
-			this.labelControlTextColor.Text = "<b>Page Name Color</b>";
-			// 
-			// labelControlBackColor
-			// 
-			this.labelControlBackColor.AllowHtmlString = true;
-			this.labelControlBackColor.Location = new System.Drawing.Point(254, 408);
-			this.labelControlBackColor.Name = "labelControlBackColor";
-			this.labelControlBackColor.Size = new System.Drawing.Size(154, 16);
-			this.labelControlBackColor.StyleController = this.styleController;
-			this.labelControlBackColor.TabIndex = 81;
-			this.labelControlBackColor.Text = "<b>Page Name Background</b>";
+			this.labelControlStyle.AllowHtmlString = true;
+			this.labelControlStyle.Location = new System.Drawing.Point(17, 374);
+			this.labelControlStyle.Name = "labelControlStyle";
+			this.labelControlStyle.Size = new System.Drawing.Size(32, 16);
+			this.labelControlStyle.StyleController = this.styleController;
+			this.labelControlStyle.TabIndex = 84;
+			this.labelControlStyle.Text = "<b>Style</b>";
 			// 
 			// LinkInternalLibraryPageOptions
 			// 
-			this.Controls.Add(this.labelControlBackColor);
-			this.Controls.Add(this.colorEditBackColor);
-			this.Controls.Add(this.colorEditTextColor);
-			this.Controls.Add(this.checkEditShowWindowHeaders);
-			this.Controls.Add(this.checkEditShowLogo);
-			this.Controls.Add(this.checkEditShowText);
-			this.Controls.Add(this.labelControlViewType);
+			this.Controls.Add(this.checkEditOpenOnSamePage);
+			this.Controls.Add(this.comboBoxEditStyle);
+			this.Controls.Add(this.labelControlStyle);
+			this.Controls.Add(this.comboBoxEditLibraryName);
+			this.Controls.Add(this.comboBoxEditPageName);
 			this.Controls.Add(this.checkEditShowHeaderText);
 			this.Controls.Add(this.textEditHeaderIcon);
-			this.Controls.Add(this.comboBoxEditViewType);
 			this.Controls.Add(this.pictureBoxLogo);
 			this.Controls.Add(this.labelControlTitle);
 			this.Controls.Add(this.labelControlHeaderIcon);
-			this.Controls.Add(this.textEditPageName);
 			this.Controls.Add(this.labelControlPageName);
-			this.Controls.Add(this.textEditLibraryName);
 			this.Controls.Add(this.labelControlLibraryName);
 			this.Controls.Add(this.textEditName);
 			this.Controls.Add(this.labelControlName);
-			this.Controls.Add(this.labelControlTextColor);
 			this.Name = "LinkInternalLibraryPageOptions";
 			this.Size = new System.Drawing.Size(531, 541);
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditName.Properties)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.textEditLibraryName.Properties)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.textEditPageName.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditShowHeaderText.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditHeaderIcon.Properties)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.comboBoxEditViewType.Properties)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.colorEditBackColor.Properties)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.colorEditTextColor.Properties)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.checkEditShowWindowHeaders.Properties)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.checkEditShowLogo.Properties)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.checkEditShowText.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.comboBoxEditLibraryName.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.comboBoxEditPageName.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditOpenOnSamePage.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.comboBoxEditStyle.Properties)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -341,23 +262,17 @@
 		private DevExpress.XtraEditors.StyleController styleController;
 		private DevExpress.XtraEditors.LabelControl labelControlName;
 		private DevExpress.XtraEditors.TextEdit textEditName;
-		private DevExpress.XtraEditors.TextEdit textEditLibraryName;
 		private DevExpress.XtraEditors.LabelControl labelControlLibraryName;
-		private DevExpress.XtraEditors.TextEdit textEditPageName;
 		private DevExpress.XtraEditors.LabelControl labelControlPageName;
 		private DevExpress.XtraEditors.LabelControl labelControlHeaderIcon;
 		private System.Windows.Forms.PictureBox pictureBoxLogo;
 		private DevExpress.XtraEditors.LabelControl labelControlTitle;
 		private DevExpress.XtraEditors.CheckEdit checkEditShowHeaderText;
 		private DevExpress.XtraEditors.TextEdit textEditHeaderIcon;
-		private DevExpress.XtraEditors.ComboBoxEdit comboBoxEditViewType;
-		private DevExpress.XtraEditors.LabelControl labelControlViewType;
-		private CommonGUI.Common.HtmlColorEdit colorEditBackColor;
-		private CommonGUI.Common.HtmlColorEdit colorEditTextColor;
-		private DevExpress.XtraEditors.CheckEdit checkEditShowWindowHeaders;
-		private DevExpress.XtraEditors.CheckEdit checkEditShowLogo;
-		private DevExpress.XtraEditors.CheckEdit checkEditShowText;
-		private DevExpress.XtraEditors.LabelControl labelControlTextColor;
-		private DevExpress.XtraEditors.LabelControl labelControlBackColor;
+		private DevExpress.XtraEditors.ComboBoxEdit comboBoxEditLibraryName;
+		private DevExpress.XtraEditors.ComboBoxEdit comboBoxEditPageName;
+		private DevExpress.XtraEditors.CheckEdit checkEditOpenOnSamePage;
+		private DevExpress.XtraEditors.ComboBoxEdit comboBoxEditStyle;
+		private DevExpress.XtraEditors.LabelControl labelControlStyle;
 	}
 }

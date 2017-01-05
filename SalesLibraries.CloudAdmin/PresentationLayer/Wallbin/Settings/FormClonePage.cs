@@ -2,8 +2,8 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 using DevComponents.DotNetBar.Metro;
-using SalesLibraries.CloudAdmin.Controllers;
 using SalesLibraries.CommonGUI.Common;
+using SalesLibraries.CloudAdmin.Controllers;
 
 namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Settings
 {
@@ -25,9 +25,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Settings
 
 			labelControlTitle1.Text = String.Format(labelControlTitle1.Text, _originalPageName);
 
-			textEditPageName.MouseDown += EditorHelper.EditorMouseDown;
-			textEditPageName.MouseUp += EditorHelper.EditorMouseUp;
-			textEditPageName.Enter += EditorHelper.EditorEnter;
+			textEditPageName.EnableSelectAll();
 			textEditPageName.Focus();
 
 			if (!((CreateGraphics()).DpiX > 96)) return;

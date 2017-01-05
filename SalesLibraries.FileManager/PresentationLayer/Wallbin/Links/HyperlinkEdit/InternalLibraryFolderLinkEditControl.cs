@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
+using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.HyperLinkInfo;
-using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings;
 using SalesLibraries.FileManager.Controllers;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.HyperlinkEdit
 {
-	public partial class InternalLibraryFolderLinkEditControl : UserControl, IInternalLinkEditControl
+	//public partial class InternalLibraryFolderLinkEditControl : UserControl, IInternalLinkEditControl
+	public partial class InternalLibraryFolderLinkEditControl : BaseInternalLibraryContentEditControl, IInternalLinkEditControl
 	{
 		public InternalLibraryFolderLinkEditControl()
 		{
@@ -28,9 +30,25 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.HyperlinkEd
 				laPageName.Font = new Font(laPageName.Font.FontFamily, laPageName.Font.Size - 2, laPageName.Font.Style);
 				laWindowName.Font = new Font(laWindowName.Font.FontFamily, laWindowName.Font.Size - 2, laWindowName.Font.Style);
 				laHeaderIcon.Font = new Font(laHeaderIcon.Font.FontFamily, laHeaderIcon.Font.Size - 2, laHeaderIcon.Font.Style);
-				laViewType.Font = new Font(laViewType.Font.FontFamily, laViewType.Font.Size - 2, laViewType.Font.Style);
-				laColumn.Font = new Font(laColumn.Font.FontFamily, laColumn.Font.Size - 2, laColumn.Font.Style);
 			}
+		}
+
+		public override void InitControl()
+		{
+			if (IsListsLoaded) return;
+			base.InitControl();
+
+			comboBoxEditLibraryName.Properties.Items.Clear();
+			comboBoxEditLibraryName.Properties.Items.AddRange(MainController.Instance.Lists.ExternalLibraryLinks.Libraries
+				.OrderBy(l => l.Name)
+				.Select(l => l.Name)
+				.ToArray());
+
+			comboBoxEditStyle.Properties.Items.Clear();
+			comboBoxEditStyle.Properties.Items.AddRange(
+				MainController.Instance.Lists.InternalLinkTemplates.Templates
+				.OrderBy(t => t.Name)
+				.Where(t => t.Type == InternlalLinkTemplateType.Folder).ToArray());
 		}
 
 		public bool ValidateLinkInfo()
@@ -51,11 +69,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.HyperlinkEd
 				MainController.Instance.PopupMessages.ShowWarning("You should set the target window before saving");
 				return false;
 			}
-			if (String.IsNullOrEmpty(linkInfo.HeaderIcon))
-			{
-				MainController.Instance.PopupMessages.ShowWarning("You should set the header icon before saving");
-				return false;
-			}
 			return true;
 		}
 
@@ -63,14 +76,13 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.HyperlinkEd
 		{
 			return new InternalLibraryFolderLinkInfo
 			{
-				LibraryName = textEditLibraryName.EditValue as String,
-				PageName = textEditPageName.EditValue as String,
-				WindowName = textEditWindowName.EditValue as String,
+				LibraryName = comboBoxEditLibraryName.EditValue as String,
+				PageName = comboBoxEditPageName.EditValue as String,
+				WindowName = comboBoxEditWindowName.EditValue as String,
 				HeaderIcon = textEditHeaderIcon.EditValue as String,
 				ShowHeaderText = checkEditShowHeaderText.Checked,
-				WindowViewType = comboBoxEditViewType.SelectedIndex == 0 ? InternalLinkSettings.PageViewTypeColumns : InternalLinkSettings.PageViewTypeAccording,
-				Column = (Int32)spinEditColumn.Value,
-				LinksOnly = checkEditLinksOnly.Checked
+				OpenOnSamePage = checkEditOpenOnSamePage.Checked,
+				StyleSettings = comboBoxEditStyle.EditValue as InternalLinkTemplate
 			};
 		}
 
@@ -78,26 +90,60 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.HyperlinkEd
 		{
 			if (templateInfo is InternalWallbinLinkInfo)
 			{
-				textEditLibraryName.EditValue = ((InternalWallbinLinkInfo)templateInfo).LibraryName;
-				textEditPageName.EditValue = ((InternalWallbinLinkInfo)templateInfo).PageName;
+				comboBoxEditLibraryName.EditValue = ((InternalWallbinLinkInfo)templateInfo).LibraryName;
+				comboBoxEditPageName.EditValue = ((InternalWallbinLinkInfo)templateInfo).PageName;
 				textEditHeaderIcon.EditValue = ((InternalWallbinLinkInfo)templateInfo).HeaderIcon;
 				checkEditShowHeaderText.Checked = ((InternalWallbinLinkInfo)templateInfo).ShowHeaderText;
-				comboBoxEditViewType.SelectedIndex = ((InternalWallbinLinkInfo)templateInfo).PageViewType == InternalLinkSettings.PageViewTypeColumns ? 0 : 1;
+				checkEditOpenOnSamePage.Checked = ((InternalWallbinLinkInfo)templateInfo).OpenOnSamePage;
 			}
 			if (templateInfo is InternalLibraryPageLinkInfo)
 			{
-				textEditLibraryName.EditValue = ((InternalLibraryPageLinkInfo)templateInfo).LibraryName;
-				textEditPageName.EditValue = ((InternalLibraryPageLinkInfo)templateInfo).PageName;
+				comboBoxEditLibraryName.EditValue = ((InternalLibraryPageLinkInfo)templateInfo).LibraryName;
+				comboBoxEditPageName.EditValue = ((InternalLibraryPageLinkInfo)templateInfo).PageName;
 				textEditHeaderIcon.EditValue = ((InternalLibraryPageLinkInfo)templateInfo).HeaderIcon;
 				checkEditShowHeaderText.Checked = ((InternalLibraryPageLinkInfo)templateInfo).ShowHeaderText;
-				comboBoxEditViewType.SelectedIndex = ((InternalLibraryPageLinkInfo)templateInfo).PageViewType == InternalLinkSettings.PageViewTypeColumns ? 0 : 1;
+				checkEditOpenOnSamePage.Checked = ((InternalLibraryPageLinkInfo)templateInfo).OpenOnSamePage;
 			}
 			if (templateInfo is InternalLibraryObjectLinkInfo)
 			{
-				textEditLibraryName.EditValue = ((InternalLibraryObjectLinkInfo)templateInfo).LibraryName;
-				textEditPageName.EditValue = ((InternalLibraryObjectLinkInfo)templateInfo).PageName;
-				textEditWindowName.EditValue = ((InternalLibraryObjectLinkInfo)templateInfo).WindowName;
+				comboBoxEditLibraryName.EditValue = ((InternalLibraryObjectLinkInfo)templateInfo).LibraryName;
+				comboBoxEditPageName.EditValue = ((InternalLibraryObjectLinkInfo)templateInfo).PageName;
+				comboBoxEditWindowName.EditValue = ((InternalLibraryObjectLinkInfo)templateInfo).WindowName;
 			}
+			if (templateInfo is InternalShortcutLinkInfo)
+			{
+				checkEditOpenOnSamePage.Checked = ((InternalShortcutLinkInfo)templateInfo).OpenOnSamePage;
+			}
+		}
+
+		private void OnLibraryChanged(object sender, EventArgs e)
+		{
+			comboBoxEditPageName.Properties.Items.Clear();
+			var libraryName = comboBoxEditLibraryName.EditValue as String;
+			var library = MainController.Instance.Lists.ExternalLibraryLinks.Libraries
+				.FirstOrDefault(l => String.Compare(l.Name, libraryName, StringComparison.OrdinalIgnoreCase) == 0);
+			if (library != null)
+				comboBoxEditPageName.Properties.Items.AddRange(library.Pages
+					.OrderBy(p => p.Order)
+					.Select(p => p.Name)
+					.ToArray());
+			OnLibraryPageChanged(sender, e);
+		}
+
+		private void OnLibraryPageChanged(object sender, EventArgs e)
+		{
+			comboBoxEditWindowName.Properties.Items.Clear();
+			var libraryName = comboBoxEditLibraryName.EditValue as String;
+			var libraryPageName = comboBoxEditPageName.EditValue as String;
+			var libraryPage = MainController.Instance.Lists.ExternalLibraryLinks.Libraries
+				.Where(l => String.Compare(l.Name, libraryName, StringComparison.OrdinalIgnoreCase) == 0)
+				.SelectMany(l => l.Pages)
+				.FirstOrDefault(p => String.Compare(p.Name, libraryPageName, StringComparison.OrdinalIgnoreCase) == 0);
+			if (libraryPage != null)
+				comboBoxEditWindowName.Properties.Items.AddRange(libraryPage.Folders
+					.OrderBy(f => f.Order)
+					.Select(f => f.Name)
+					.ToArray());
 		}
 	}
 }

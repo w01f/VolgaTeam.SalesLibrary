@@ -105,7 +105,7 @@ namespace SalesLibraries.SalesDepot.Controllers
 
 			ProcessManager.RunStartProcess(
 				"Connecting to adSALEScloud…",
-				cancellationToken => AsyncHelper.RunSync(FileStorageManager.Instance.Init));
+				(cancelletionToken, formProgress) => AsyncHelper.RunSync(FileStorageManager.Instance.Init));
 
 			if (stopRun) return;
 
@@ -128,13 +128,13 @@ namespace SalesLibraries.SalesDepot.Controllers
 
 				ProcessManager.RunStartProcess(
 					progressTitle,
-					cancellationToken => AsyncHelper.RunSync(InitBusinessObjects));
+					(cancelletionToken, formProgress) => AsyncHelper.RunSync(InitBusinessObjects));
 
 				ProcessManager.RunStartProcess(
 					FileStorageManager.Instance.DataState == DataActualityState.NotExisted ?
 						"Syncing Libraries for the 1st time…" :
 						"Syncing Sales Libraries…",
-					cancellationToken =>
+					(cancelletionToken, formProgress) =>
 					{
 						LibrariesSyncHelper.Sync(
 							File.ReadAllLines(Configuration.RemoteResourceManager.Instance.NetworkPathFile.LocalPath),
@@ -193,7 +193,7 @@ namespace SalesLibraries.SalesDepot.Controllers
 		private void LoadControllers()
 		{
 			_tabPages.Clear();
-			ProcessManager.Run("Loading Controls...", cancelationToken => MainForm.Invoke(new MethodInvoker(() =>
+			ProcessManager.Run("Loading Controls...", (cancelationToken, formProgress) => MainForm.Invoke(new MethodInvoker(() =>
 			{
 				TabWallbin = new WallbinPage();
 				_tabPages.Add(TabPageEnum.Home, TabWallbin);

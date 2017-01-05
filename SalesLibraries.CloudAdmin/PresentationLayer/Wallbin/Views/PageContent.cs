@@ -83,7 +83,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 			SettingsEditorFactory.Run(PageContainer.Page, settingsType, defaultLinkType);
 			if (updateContent)
 				MainController.Instance.ProcessManager.Run("Updating Page...",
-					cancelationToken => MainController.Instance.MainForm.Invoke(new MethodInvoker(UpdateContent)));
+					(cancelationToken, formProgress) => MainController.Instance.MainForm.Invoke(new MethodInvoker(UpdateContent)));
 		}
 
 		public void DeleteLinks()
@@ -91,13 +91,13 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 			PageContainer.Suspend();
 			MainController.Instance.WallbinViews.Selection.Reset();
 			MainController.Instance.ProcessManager.Run("Deleting Links...",
-			cancelationToken =>
+			(cancelationToken, formProgress) =>
 			{
 				MainController.Instance.MainForm.Invoke(new MethodInvoker(DisposeContent));
 				PageContainer.Page.RemoveLinks();
 			});
 			MainController.Instance.ProcessManager.Run("Loading Page...",
-				cancelationToken => MainController.Instance.MainForm.Invoke(new MethodInvoker(() =>
+				(cancelationToken, formProgress) => MainController.Instance.MainForm.Invoke(new MethodInvoker(() =>
 				{
 					PageContainer.LoadPage(true);
 					PageContainer.ShowPage();
@@ -109,14 +109,14 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 		{
 			PageContainer.Page.AllLinks.ResetExpirationSettings();
 			MainController.Instance.WallbinViews.Selection.Reset();
-			MainController.Instance.ProcessManager.Run("Updating Page...", cancelationToken => MainController.Instance.MainForm.Invoke(new MethodInvoker(UpdateContent)));
+			MainController.Instance.ProcessManager.Run("Updating Page...", (cancelationToken, formProgress) => MainController.Instance.MainForm.Invoke(new MethodInvoker(UpdateContent)));
 		}
 
 		public void ResetSecurity()
 		{
 			PageContainer.Page.AllLinks.ResetSecurity();
 			MainController.Instance.WallbinViews.Selection.Reset();
-			MainController.Instance.ProcessManager.Run("Updating Page...", cancelationToken => MainController.Instance.MainForm.Invoke(new MethodInvoker(UpdateContent)));
+			MainController.Instance.ProcessManager.Run("Updating Page...", (cancelationToken, formProgress) => MainController.Instance.MainForm.Invoke(new MethodInvoker(UpdateContent)));
 		}
 
 		public void ResetTags()
@@ -126,7 +126,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 			PageContainer.Page.AllLinks.ApplyKeywords(new SearchTag[] { });
 			PageContainer.Page.AllLinks.ApplySuperFilters(new string[] { });
 			MainController.Instance.ProcessManager.Run("Updating Page...",
-					cancelationToken => MainController.Instance.MainForm.Invoke(new MethodInvoker(UpdateContent)));
+					(cancelationToken, formProgress) => MainController.Instance.MainForm.Invoke(new MethodInvoker(UpdateContent)));
 		}
 
 		public void ResetWidgets()
@@ -134,7 +134,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 			PageContainer.Page.AllLinks.ResetWidgets();
 			MainController.Instance.WallbinViews.Selection.Reset();
 			MainController.Instance.ProcessManager.Run("Updating Page...",
-				cancelationToken => MainController.Instance.MainForm.Invoke(new MethodInvoker(UpdateContent)));
+				(cancelationToken, formProgress) => MainController.Instance.MainForm.Invoke(new MethodInvoker(UpdateContent)));
 		}
 
 		public void ResetBanners()
@@ -142,7 +142,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 			PageContainer.Page.AllLinks.ResetBanners();
 			MainController.Instance.WallbinViews.Selection.Reset();
 			MainController.Instance.ProcessManager.Run("Updating Page...",
-				cancelationToken => MainController.Instance.MainForm.Invoke(new MethodInvoker(UpdateContent)));
+				(cancelationToken, formProgress) => MainController.Instance.MainForm.Invoke(new MethodInvoker(UpdateContent)));
 		}
 
 		public void ResetAllSettings(IList<LinkSettingsGroupType> groupsForReset)
@@ -150,7 +150,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 			PageContainer.Page.AllLinks.ResetToDefault(groupsForReset);
 			MainController.Instance.WallbinViews.Selection.Reset();
 			MainController.Instance.ProcessManager.Run("Updating Page...",
-				cancelationToken => MainController.Instance.MainForm.Invoke(new MethodInvoker(UpdateContent)));
+				(cancelationToken, formProgress) => MainController.Instance.MainForm.Invoke(new MethodInvoker(UpdateContent)));
 		}
 
 		public void SetLinkTextWordWrap()
@@ -158,7 +158,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 			PageContainer.Page.AllLinks.SetLinkTextWordWrap();
 			MainController.Instance.WallbinViews.Selection.Reset();
 			MainController.Instance.ProcessManager.Run("Updating Page...",
-				cancelationToken => MainController.Instance.MainForm.Invoke(new MethodInvoker(UpdateContent)));
+				(cancelationToken, formProgress) => MainController.Instance.MainForm.Invoke(new MethodInvoker(UpdateContent)));
 		}
 		#endregion
 		#endregion

@@ -4,6 +4,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.HyperlinkEdi
 {
 	public interface IInternalLinkEditControl
 	{
+		void InitControl();
 		bool ValidateLinkInfo();
 		InternalLinkInfo GetHyperLinkInfo();
 		void ApplySharedSettings(InternalLinkInfo templateInfo);

@@ -63,19 +63,29 @@
       <Link>Json\RestSerializeSettings.cs</Link>
     </Compile>
     <Compile Include="Json\RestJsonSerializationStrategy.cs" />
+    <Compile Include="Models\Rest\AppMetaData\MetaDataGetRequestData.cs" />
     <Compile Include="Models\Rest\Common\RequestBody.cs" />
     <Compile Include="Models\Rest\Connection\ConnectionGetRequestData.cs" />
     <Compile Include="Models\Rest\Common\IRequestData.cs" />
     <Compile Include="Models\Rest\Connection\ConnectionInfo.cs" />
     <Compile Include="Models\Rest\Connection\ConnectionRequestType.cs" />
     <Compile Include="Models\Rest\Connection\ConnectionState.cs" />
+    <Compile Include="Models\Rest\Dictionaries\ShortcutLinksGetRequestData.cs" />
+    <Compile Include="Models\Rest\Dictionaries\LibraryLinksGetRequestData.cs" />
+    <Compile Include="Models\Rest\Dictionaries\SecurityGetRequestData.cs" />
+    <Compile Include="Models\Rest\Dictionaries\SiteUser.cs" />
+    <Compile Include="Models\Rest\Dictionaries\SiteUserGroup.cs" />
+    <Compile Include="Models\Rest\Dictionaries\SuperFilter.cs" />
+    <Compile Include="Models\Rest\Dictionaries\SuperFiltersGetRequestData.cs" />
+    <Compile Include="Models\Rest\Dictionaries\SearchCategoriesGetRequestData.cs" />
+    <Compile Include="Models\Rest\Dictionaries\SearchCategory.cs" />
     <Compile Include="Models\Rest\VersionsManagement\ChangeSet.cs" />
     <Compile Include="Models\Rest\VersionsManagement\ChangesSetRequestData.cs" />
     <Compile Include="Models\Rest\VersionsManagement\ChangeType.cs" />
     <Compile Include="Models\Rest\VersionsManagement\ChangesGetRequestData.cs" />
     <Compile Include="Models\Rest\VersionsManagement\IVersioned.cs" />
     <Compile Include="Models\Rest\VersionsManagement\ObjectType.cs" />
-    <Compile Include="Models\Rest\Wallbin\CloudLibraryException.cs" />
+    <Compile Include="Models\Rest\Common\RestServiceException.cs" />
     <Compile Include="Models\Rest\Wallbin\LibraryGetRequestData.cs" />
     <Compile Include="Models\Rest\Wallbin\LibraryDataPackage.cs" />
     <Compile Include="Models\Rest\Wallbin\Entities\Library.cs" />
@@ -137,9 +147,7 @@
     <Compile Include="Services\Rest\Service.Controller.cs" />
     <Compile Include="Services\Rest\Service.Common.cs" />
     <Compile Include="Services\Rest\Service.Credentials.cs" />
-    <Compile Include="Services\Soap\Service.Authorization.cs" />
     <Compile Include="Services\Soap\Service.Common.cs" />
-    <Compile Include="Services\Soap\Service.FileManagerResources.cs" />
     <Compile Include="Services\Soap\Service.Admin.Libraries.cs" />
     <Compile Include="Services\Soap\Service.Admin.Groups.cs" />
     <Compile Include="Services\Soap\Service.Admin.Users.cs" />
@@ -152,11 +160,6 @@
     <Compile Include="Services\Soap\Service.Statistic.cs" />
     <Compile Include="Services\Soap\Service.Utility.cs" />
     <Compile Include="Web References\AdminService\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.map</DependentUpon>
-    </Compile>
-    <Compile Include="Web References\FileManagerResourcesService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -220,17 +223,6 @@
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>SalesLibraries_ServiceConnector_WallbinContentService_ContentControllerService</CachedSettingsPropName>
-    </WebReferenceUrl>
-    <WebReferenceUrl Include="http://localhost/SalesLibraries/FileManagerData/quote">
-      <UrlBehavior>Dynamic</UrlBehavior>
-      <RelPath>Web References\FileManagerResourcesService\</RelPath>
-      <UpdateFromURL>http://localhost/SalesLibraries/FileManagerData/quote</UpdateFromURL>
-      <ServiceLocationURL>
-      </ServiceLocationURL>
-      <CachedDynamicPropName>
-      </CachedDynamicPropName>
-      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
-      <CachedSettingsPropName>SalesLibraries_ServiceConnector_FileManagerResourcesService_FileManagerDataControllerService</CachedSettingsPropName>
     </WebReferenceUrl>
     <WebReferenceUrl Include="http://localhost/SalesLibraries/InactiveUsers/quote">
       <UrlBehavior>Dynamic</UrlBehavior>
@@ -310,20 +302,6 @@
       <DependentUpon>Reference.map</DependentUpon>
     </None>
     <None Include="Web References\AdminService\UserModel.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\FileManagerResourcesService\FileManagerDataController.wsdl" />
-    <None Include="Web References\FileManagerResourcesService\GroupModel.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\FileManagerResourcesService\Reference.map">
-      <Generator>MSDiscoCodeGenerator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Web References\FileManagerResourcesService\SoapCategory.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\FileManagerResourcesService\SoapSuperFilter.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
     <None Include="Web References\InactiveUsersService\InactiveUsersController.wsdl" />

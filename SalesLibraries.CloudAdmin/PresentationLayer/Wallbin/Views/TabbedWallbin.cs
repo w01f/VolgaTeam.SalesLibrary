@@ -81,7 +81,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 			var newPage = e.Page as IPageView;
 			if (newPage == null) return;
 			MainController.Instance.ProcessManager.Run("Loading Page...",
-				cancelationToken => MainController.Instance.MainForm.Invoke(new MethodInvoker(() =>
+				(cancelationToken, formProgress) => MainController.Instance.MainForm.Invoke(new MethodInvoker(() =>
 				{
 					if (e.PrevPage != null)
 						WinAPIHelper.SendMessage(e.PrevPage.Handle, 11, IntPtr.Zero, IntPtr.Zero);
@@ -159,7 +159,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 				if (form.ShowDialog(MainController.Instance.MainForm) != DialogResult.OK) return;
 				selectedPage.DisposePage();
 				MainController.Instance.ProcessManager.Run("Deleting Page...",
-					cancelationToken =>
+					(cancelationToken, formProgress) =>
 					{
 						selectedPage.Page.Delete(DataStorage);
 						DataStorage.Library.MarkAsModified();

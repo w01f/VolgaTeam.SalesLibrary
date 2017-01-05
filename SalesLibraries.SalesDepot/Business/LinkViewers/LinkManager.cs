@@ -227,7 +227,7 @@ namespace SalesLibraries.SalesDepot.Business.LinkViewers
 					MainController.Instance.MainForm.FloaterLogo,
 					() => MainController.Instance.ProcessManager.Run(
 						"Inserting the video...",
-						cancellationToken => PowerPointSingleton.Instance.InsertVideoIntoActivePresentation(file.FullPath))
+						(cancelletionToken, formProgress) => PowerPointSingleton.Instance.InsertVideoIntoActivePresentation(file.FullPath))
 					);
 			}
 			else

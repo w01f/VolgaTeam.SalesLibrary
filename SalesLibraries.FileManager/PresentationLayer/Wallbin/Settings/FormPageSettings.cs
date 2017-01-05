@@ -28,9 +28,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 		public FormPageSettings()
 		{
 			InitializeComponent();
-			textEditPageName.MouseDown += EditorHelper.EditorMouseDown;
-			textEditPageName.MouseUp += EditorHelper.EditorMouseUp;
-			textEditPageName.Enter += EditorHelper.EditorEnter;
+			textEditPageName.EnableSelectAll();
 			textEditPageName.Focus();
 
 			if (!((CreateGraphics()).DpiX > 96)) return;

@@ -61,7 +61,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.HyperlinkEdi
 			};
 		}
 
-		public void ApplySharedSettings(BaseNetworkLinkInfo templateInfo)
+		public void ApplyDataFromTemplate(BaseNetworkLinkInfo templateInfo)
 		{
 			if (templateInfo != null)
 			{

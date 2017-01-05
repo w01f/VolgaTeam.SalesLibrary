@@ -58,23 +58,13 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 			ckDoNotGeneratePreview.Checked = !((DocumentLinkSettings)_data.Settings).GeneratePreviewImages;
 			ckDoNotGenerateText.Checked = !((DocumentLinkSettings)_data.Settings).GenerateContentText;
 
-			//if (MainController.Instance.Settings.EnableLocalSync &&
-			//	Directory.Exists(((PowerPointLinkSettings)_data.Settings).ContainerPath))
-			//{
-			//	buttonXOpenQV.Enabled = true;
-			//	buttonXOpenQV.Text = String.Format("!QV Folder ({0})", ((PowerPointLinkSettings)_data.Settings).Id.ToString("D"));
-			//}
-			//else
-			//	buttonXOpenQV.Enabled = false;
-
-
-			//if (Directory.Exists(_data.PreviewContainerPath))
-			//{
-			//	buttonXOpenWV.Enabled = true;
-			//	buttonXOpenWV.Text = String.Format("!WV Folder ({0})", _data.PreviewContainerName);
-			//}
-			//else
-			//	buttonXOpenWV.Enabled = false;
+			if (Directory.Exists(_data.PreviewContainerPath))
+			{
+				buttonXOpenWV.Enabled = true;
+				buttonXOpenWV.Text = String.Format("!WV Folder ({0})", _data.PreviewContainerName);
+			}
+			else
+				buttonXOpenWV.Enabled = false;
 		}
 
 		public void SaveData()
@@ -87,7 +77,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 		{
 			if (MainController.Instance.PopupMessages.ShowWarningQuestion(String.Format("Are you sure you want to refresh the server files for:{1}{0}?", _data.NameWithExtension, Environment.NewLine)) != DialogResult.Yes) return;
 
-			MainController.Instance.ProcessManager.Run("Updating Preview files...", cancelationToken =>
+			MainController.Instance.ProcessManager.Run("Updating Preview files...", (cancelationToken, formProgess) =>
 			{
 				((PowerPointLinkSettings)_data.Settings).ClearQuickViewContent();
 				using (var powerPointProcessor = new PowerPointHidden())

@@ -1,13 +1,17 @@
 ﻿using System;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.HyperLinkInfo;
+using SalesLibraries.CloudAdmin.Business.Models.ExternalShortcuts;
 using SalesLibraries.CloudAdmin.Controllers;
 
 namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.HyperlinkEdit
 {
 	public partial class InternalShortcutLinkEditControl : UserControl, IInternalLinkEditControl
 	{
+		private bool IsListsLoaded { get; set; }
+
 		public InternalShortcutLinkEditControl()
 		{
 			InitializeComponent();
@@ -22,9 +26,29 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.HyperlinkEdi
 				styleController.AppearanceDropDownHeader.Font = font;
 				styleController.AppearanceFocused.Font = font;
 				styleController.AppearanceReadOnly.Font = font;
-
-				laShortcutId.Font = new Font(laShortcutId.Font.FontFamily, laShortcutId.Font.Size - 2, laShortcutId.Font.Style);
 			}
+		}
+
+		public void InitControl()
+		{
+			if (IsListsLoaded) return;
+			if (!MainController.Instance.Lists.ExternalShortcuts.IsLoaded)
+			{
+				MainController.Instance.ProcessManager.Run(
+					"Loading Shortcut Links...",
+					(cancelationToken, formProgess) =>
+					{
+						MainController.Instance.Lists.ExternalShortcuts.Load();
+					});
+				IsListsLoaded = true;
+			}
+
+			comboBoxEditShortcutGroup.Properties.Items.Clear();
+			comboBoxEditShortcutGroup.Properties.Items.AddRange(MainController.Instance.Lists.ExternalShortcuts.ShortcutLinks
+				.OrderBy(s => s.GroupOrder)
+				.Select(s => s.GroupFolder)
+				.Distinct()
+				.ToArray());
 		}
 
 		public bool ValidateLinkInfo()
@@ -42,11 +66,49 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.HyperlinkEdi
 		{
 			return new InternalShortcutLinkInfo
 			{
-				ShortcutId = textEditShortcutId.EditValue as String,
+				ShortcutId = (comboBoxEditShortcutLink.EditValue as ShortcutLink)?.Id,
 				OpenOnSamePage = !checkEditOpenOnSamePage.Checked
 			};
 		}
 
-		public void ApplySharedSettings(InternalLinkInfo templateInfo) { }
+		public void ApplySharedSettings(InternalLinkInfo templateInfo)
+		{
+			if (templateInfo is InternalWallbinLinkInfo)
+			{
+				checkEditOpenOnSamePage.Checked = ((InternalWallbinLinkInfo)templateInfo).OpenOnSamePage;
+			}
+			if (templateInfo is InternalLibraryPageLinkInfo)
+			{
+				checkEditOpenOnSamePage.Checked = ((InternalLibraryPageLinkInfo)templateInfo).OpenOnSamePage;
+			}
+			if (templateInfo is InternalLibraryFolderLinkInfo)
+			{
+				checkEditOpenOnSamePage.Checked = ((InternalLibraryFolderLinkInfo)templateInfo).OpenOnSamePage;
+			}
+		}
+
+		private void OnShortcutGroupChanged(object sender, EventArgs e)
+		{
+			comboBoxEditShortcutLink.Properties.Items.Clear();
+			comboBoxEditShortcutLink.EditValue = null;
+			var groupFolder = comboBoxEditShortcutGroup.EditValue as String;
+			var shortcutLinks = MainController.Instance.Lists.ExternalShortcuts.ShortcutLinks
+				.Where(link => String.Compare(link.GroupFolder, groupFolder, StringComparison.OrdinalIgnoreCase) == 0)
+				.OrderBy(link => link.Order)
+				.ToArray();
+			comboBoxEditShortcutLink.Properties.Items.AddRange(shortcutLinks);
+		}
+
+		private void OnShortcutLinkChanged(object sender, EventArgs e)
+		{
+			var shortcutLink = comboBoxEditShortcutLink.EditValue as ShortcutLink;
+			if (shortcutLink != null)
+				labelControlShortcutDescription.Text = String.Format("<color=gray>Static ID: {0}        {1}</color>",
+					shortcutLink.Id,
+					!String.IsNullOrEmpty(shortcutLink.Title) ? String.Format("Title: {0}", shortcutLink.Title) : String.Empty
+				);
+			else
+				labelControlShortcutDescription.Text = String.Empty;
+		}
 	}
 }

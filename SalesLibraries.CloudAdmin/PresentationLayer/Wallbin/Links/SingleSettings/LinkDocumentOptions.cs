@@ -192,7 +192,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 		{
 			if (MainController.Instance.PopupMessages.ShowWarningQuestion(String.Format("Are you sure you want to refresh the server files for:{1}{0}?", _links.Count == 1 ? _links.First().NameWithExtension : "links", Environment.NewLine)) != DialogResult.Yes) return;
 
-			MainController.Instance.ProcessManager.Run("Updating Preview files...", cancelationToken =>
+			MainController.Instance.ProcessManager.Run("Updating Preview files...", (cancelationToken, formProgess) =>
 			{
 				foreach (var link in _links)
 				{

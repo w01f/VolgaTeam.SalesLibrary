@@ -106,7 +106,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 					DataStorage.SaveChanges();
 				});
 			else
-				MainController.Instance.ProcessManager.Run("Saving Changes...", cancelletionToken =>
+				MainController.Instance.ProcessManager.Run("Saving Changes...", (cancelletionToken, formProgress) =>
 				{
 					DataStorage.SaveChanges();
 				});

@@ -3,9 +3,9 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using SalesLibraries.Business.Entities.Helpers;
-using SalesLibraries.CloudAdmin.Controllers;
 using SalesLibraries.Common.Configuration;
 using SalesLibraries.Common.Helpers;
+using SalesLibraries.CloudAdmin.Controllers;
 
 namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Settings
 {
@@ -16,23 +16,8 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Settings
 		{
 			InitializeComponent();
 			_libraryPath = libraryPath;
-			buttonXResetSecurity.Enabled = MainController.Instance.Settings.EditorSettings.EnableSecurityEdit;
-		}
 
-		private void buttonXResetQV_Click(object sender, EventArgs e)
-		{
-			if (MainController.Instance.PopupMessages.ShowWarningQuestion("Are you sure you want to delete all QV files?") != DialogResult.Yes) return;
-			var qvFolderPath = Path.Combine(_libraryPath, Constants.RegularPreviewContainersRootFolderName);
-			if (!Directory.Exists(qvFolderPath)) return;
-			MainController.Instance.ProcessManager.Run("Deleting Files...", cancelationToken =>
-			{
-				Utils.DeleteFolder(qvFolderPath);
-				try
-				{
-					Directory.Delete(qvFolderPath);
-				}
-				catch { }
-			});
+			buttonXResetSecurity.Enabled = MainController.Instance.Settings.EditorSettings.EnableSecurityEdit;
 		}
 
 		private void buttonXResetWV_Click(object sender, EventArgs e)
@@ -40,7 +25,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Settings
 			if (MainController.Instance.PopupMessages.ShowWarningQuestion("Are you sure you want to delete all WV files?") != DialogResult.Yes) return;
 			var wvFolderPath = Path.Combine(_libraryPath, Constants.WebPreviewContainersRootFolderName);
 			if (!Directory.Exists(wvFolderPath)) return;
-			MainController.Instance.ProcessManager.Run("Deleting Files...", cancelationToken =>
+			MainController.Instance.ProcessManager.Run("Deleting Files...", (cancelationToken, formProgess) =>
 			{
 				Utils.DeleteFolder(wvFolderPath);
 				try

@@ -15,7 +15,6 @@ namespace SalesLibraries.CommonGUI.BackgroundProcesses
 		private readonly string _title;
 
 		private int _processesInQueue;
-		private bool _startFormTrayed;
 
 		public event EventHandler<EventArgs> Suspended;
 		public event EventHandler<EventArgs> Resumed;
@@ -26,7 +25,7 @@ namespace SalesLibraries.CommonGUI.BackgroundProcesses
 			_title = title;
 		}
 
-		public void Run(string title, Action<CancellationToken> process, Action afterComplete = null)
+		public void Run(string title, Action<CancellationToken, FormProgressCommon> process, Action afterComplete = null)
 		{
 			using (var form = new FormProgressCommon())
 			{
@@ -36,13 +35,10 @@ namespace SalesLibraries.CommonGUI.BackgroundProcesses
 			}
 		}
 
-		public void RunStartProcess(string text, Action<CancellationToken> process, Action afterComplete = null)
+		public void RunStartProcess(string text, Action<CancellationToken, FormStart> process, Action afterComplete = null)
 		{
-			using (var form = new FormStart(_title, _startFormTrayed))
+			using (var form = new FormStart(_title))
 			{
-				form.SetText(text);
-				form.Trayed += (o, e) => _startFormTrayed = true;
-				form.Activated += (o, e) => _startFormTrayed = false;
 				RunWithProgress(form, false, process, cancellationToken =>
 				{
 					afterComplete?.Invoke();
@@ -50,7 +46,12 @@ namespace SalesLibraries.CommonGUI.BackgroundProcesses
 			}
 		}
 
-		public void RunWithProgress(FormProgressBase formProgress, bool showAsync, Action<CancellationToken> process, Action<CancellationToken> afterComplete = null)
+		public void RunWithProgress<TForm>(
+			TForm formProgress,
+			bool showAsync,
+			Action<CancellationToken, TForm> process,
+			Action<CancellationToken> afterComplete = null)
+			where TForm : FormProgressBase
 		{
 			var cancellationTokenSource = new CancellationTokenSource();
 
@@ -72,7 +73,7 @@ namespace SalesLibraries.CommonGUI.BackgroundProcesses
 
 			formProgress.Shown += async (sender, args) =>
 			{
-				await Task.Run(() => process(cancellationTokenSource.Token), cancellationTokenSource.Token);
+				await Task.Run(() => process(cancellationTokenSource.Token, formProgress), cancellationTokenSource.Token);
 				afterComplete?.Invoke(cancellationTokenSource.Token);
 				_mainForm.Invoke(new MethodInvoker(formProgress.Close));
 				cancellationTokenSource.Dispose();

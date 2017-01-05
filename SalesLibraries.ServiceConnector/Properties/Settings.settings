@@ -8,9 +8,6 @@
     <Setting Name="SalesLibraries_ServiceConnector_WallbinContentService_ContentControllerService" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://localhost/SalesLibraries/content/quote?ws=1</Value>
     </Setting>
-    <Setting Name="SalesLibraries_ServiceConnector_FileManagerResourcesService_FileManagerDataControllerService" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://localhost/SalesLibraries/fileManagerData/quote?ws=1</Value>
-    </Setting>
     <Setting Name="SalesLibraries_ServiceConnector_UtilityService_UtilityControllerService" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://localhost/SalesLibraries/utility/quote?ws=1</Value>
     </Setting>

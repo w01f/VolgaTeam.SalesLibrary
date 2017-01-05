@@ -15,9 +15,7 @@ using SalesLibraries.CommonGUI.BackgroundProcesses;
 using SalesLibraries.CommonGUI.Common;
 using SalesLibraries.ServiceConnector.Models.Rest.Common;
 using SalesLibraries.ServiceConnector.Models.Rest.Connection;
-using SalesLibraries.ServiceConnector.Models.Rest.Wallbin;
 using SalesLibraries.ServiceConnector.Services.Rest;
-using SalesLibraries.ServiceConnector.Services.Soap;
 
 namespace SalesLibraries.CloudAdmin.Controllers
 {
@@ -31,9 +29,8 @@ namespace SalesLibraries.CloudAdmin.Controllers
 		public SettingsManager Settings { get; }
 		public ListManager Lists { get; }
 		public AuthManager AuthManager { get; }
-		public SoapServiceConnection SoapServiceConnection { get; }
 		public RestServiceConnection RestServiceConnection { get; }
-		public CloudWallbinManager Wallbin { get; private set; }
+		public CloudWallbinManager Wallbin { get; }
 		public HelpManager HelpManager { get; }
 
 		public ViewManager WallbinViews { get; }
@@ -53,7 +50,6 @@ namespace SalesLibraries.CloudAdmin.Controllers
 			Settings = new SettingsManager();
 			Lists = new ListManager();
 			AuthManager = new AuthManager();
-			SoapServiceConnection = new SoapServiceConnection();
 			RestServiceConnection = new RestServiceConnection();
 			Wallbin = new CloudWallbinManager(RestServiceConnection);
 			HelpManager = new HelpManager();
@@ -98,7 +94,7 @@ namespace SalesLibraries.CloudAdmin.Controllers
 
 			ProcessManager.RunStartProcess(
 				"Connecting to adSALEScloud…",
-				cancellationToken => AsyncHelper.RunSync(FileStorageManager.Instance.Init));
+				(cancellationToken, formProgress) => AsyncHelper.RunSync(FileStorageManager.Instance.Init));
 
 			if (stopRun) return;
 
@@ -120,7 +116,7 @@ namespace SalesLibraries.CloudAdmin.Controllers
 
 				ProcessManager.RunStartProcess(
 					progressTitle,
-					cancellationToken => AsyncHelper.RunSync(InitBusinessObjects));
+					(cancellationToken, formProgress) => AsyncHelper.RunSync(InitBusinessObjects));
 			}
 			else
 			{
@@ -131,7 +127,7 @@ namespace SalesLibraries.CloudAdmin.Controllers
 			RestResponse connectionResponce = null;
 			ProcessManager.RunStartProcess(
 					String.Format("Connecting to {0}", Settings.SiteLibrary),
-					cancellationToken =>
+					(cancellationToken, formProgress) =>
 					{
 						connectionResponce = RestServiceConnection.DoRequest(new ConnectionGetRequestData
 						{
@@ -165,7 +161,7 @@ namespace SalesLibraries.CloudAdmin.Controllers
 			var libraryLoaded = false;
 			ProcessManager.RunStartProcess(
 					"Loading Library",
-					cancellationToken =>
+					(cancellationToken, formProgress) =>
 					{
 						try
 						{
@@ -173,7 +169,7 @@ namespace SalesLibraries.CloudAdmin.Controllers
 							Wallbin.CheckoutData();
 							libraryLoaded = true;
 						}
-						catch (CloudLibraryException ex)
+						catch (RestServiceException ex)
 						{
 							PopupMessages.ShowWarning(ex.ServiceErrorMessage);
 						}
@@ -195,13 +191,13 @@ namespace SalesLibraries.CloudAdmin.Controllers
 					  ProcessChanges();
 					  ProcessManager.RunStartProcess(
 						  String.Format("Syncing changes with {0}", Settings.SiteLibrary),
-						  cancellationToken =>
+						  (cancellationToken, formProgress) =>
 						  {
 							  Wallbin.CheckinData();
 						  });
 					  ProcessManager.RunStartProcess(
 						  String.Format("Closing Connection to {0}", Settings.SiteLibrary),
-						  cancellationToken =>
+						  (cancellationToken, formProgress) =>
 						  {
 							  connectionResponce = RestServiceConnection.DoRequest(new ConnectionGetRequestData
 							  {
@@ -263,8 +259,7 @@ namespace SalesLibraries.CloudAdmin.Controllers
 			await Configuration.RemoteResourceManager.Instance.LoadRemote();
 
 			Settings.Load();
-			SoapServiceConnection.Load(Settings.WebServiceSite);
-			RestServiceConnection.Load(Settings.WebServiceSite);
+			RestServiceConnection.Load(Settings.WebServiceSite,"CloudAdmin");
 			Lists.Load();
 			HelpManager.LoadHelpLinks();
 
@@ -285,7 +280,7 @@ namespace SalesLibraries.CloudAdmin.Controllers
 			//TabVideo = new VideoPage();
 			//_tabPages.Add(TabPageEnum.VideoManager, TabVideo);
 
-			ProcessManager.Run("Loading Controls...", cancelationToken => MainForm.Invoke(new MethodInvoker(() =>
+			ProcessManager.Run("Loading Controls...", (cancellationToken, formProgress) => MainForm.Invoke(new MethodInvoker(() =>
 			{
 				TabWallbin.InitController();
 				//TabVideo.InitController();

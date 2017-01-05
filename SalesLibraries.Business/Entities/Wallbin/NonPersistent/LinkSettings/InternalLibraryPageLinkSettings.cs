@@ -1,7 +1,6 @@
-﻿using System;
-using System.Drawing;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
+using SalesLibraries.Business.Entities.Wallbin.NonPersistent.HyperLinkInfo;
 
 namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 {
@@ -58,75 +57,27 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 			}
 		}
 
-		private string _pageViewType = InternalLinkSettings.PageViewTypeColumns;
-		public string PageViewType
+		private bool _openOnSamePage;
+		public bool OpenOnSamePage
 		{
-			get { return _pageViewType; }
+			get { return _openOnSamePage; }
 			set
 			{
-				if (_pageViewType != value)
+				if (_openOnSamePage != value)
 					OnSettingsChanged();
-				_pageViewType = value;
+				_openOnSamePage = value;
 			}
 		}
 
-		private bool _showLogo = true;
-		public bool ShowLogo
+		private InternalLinkTemplate _styleSettings;
+		public InternalLinkTemplate StyleSettings
 		{
-			get { return _showLogo; }
+			get { return _styleSettings; }
 			set
 			{
-				if (_showLogo != value)
+				if (_styleSettings != value)
 					OnSettingsChanged();
-				_showLogo = value;
-			}
-		}
-
-		private bool _showText = true;
-		public bool ShowText
-		{
-			get { return _showText; }
-			set
-			{
-				if (_showText != value)
-					OnSettingsChanged();
-				_showText = value;
-			}
-		}
-
-		private bool _showWindowHeaders = true;
-		public bool ShowWindowHeaders
-		{
-			get { return _showWindowHeaders; }
-			set
-			{
-				if (_showWindowHeaders != value)
-					OnSettingsChanged();
-				_showWindowHeaders = value;
-			}
-		}
-
-		private Color? _textColor;
-		public Color? TextColor
-		{
-			get { return _textColor; }
-			set
-			{
-				if (_textColor != value)
-					OnSettingsChanged();
-				_textColor = value;
-			}
-		}
-
-		private Color? _backColor;
-		public Color? BackColor
-		{
-			get { return _backColor; }
-			set
-			{
-				if (_backColor != value)
-					OnSettingsChanged();
-				_backColor = value;
+				_styleSettings = value;
 			}
 		}
 	}

@@ -96,7 +96,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Video
 		public void ProcessChanges()
 		{
 			if (!_isDataChanged) return;
-			MainController.Instance.ProcessManager.Run("Saving Changes...", cancelationToken =>
+			MainController.Instance.ProcessManager.Run("Saving Changes...", (cancelationToken, formProgess) =>
 			{
 				_libraryContext.SaveChanges();
 			});
@@ -124,12 +124,12 @@ namespace SalesLibraries.FileManager.PresentationLayer.Video
 			if (_libraryContext.Library.SyncSettings.MinimizeOnSync)
 				MainController.Instance.MainForm.WindowState = FormWindowState.Minimized;
 			MainController.Instance.ProcessManager.RunWithProgress(form, true,
-				cancellationToken =>
+				(cancelationToken, formProgess) =>
 				{
 					foreach (var videoInfo in videoInfos)
 					{
-						if (cancellationToken.IsCancellationRequested) return;
-						videoInfo.UpdateContent(cancellationToken);
+						if (cancelationToken.IsCancellationRequested) return;
+						videoInfo.UpdateContent(cancelationToken);
 					}
 				},
 				cancellationToken => MainController.Instance.MainForm.Invoke(new MethodInvoker(() =>
@@ -158,11 +158,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Video
 		private void Delete(IEnumerable<VideoInfo> videoInfos)
 		{
 			ProcessChanges();
-			MainController.Instance.ProcessManager.Run("Deleting Video...", cancellationToken => MainController.Instance.MainForm.Invoke(new MethodInvoker(() =>
+			MainController.Instance.ProcessManager.Run("Deleting Video...", (cancelationToken, formProgess) => MainController.Instance.MainForm.Invoke(new MethodInvoker(() =>
 			{
 				foreach (var videoInfo in videoInfos)
 				{
-					if (cancellationToken.IsCancellationRequested) return;
+					if (cancelationToken.IsCancellationRequested) return;
 					videoInfo.DeleteWithLinks();
 					Application.DoEvents();
 				}
@@ -174,7 +174,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Video
 		private void ClearContent(IEnumerable<VideoInfo> videoInfos)
 		{
 			MainController.Instance.ProcessManager.Run("Deleting Video...",
-				cancelationToken => videoInfos.ToList().ForEach(vi => vi.ClearContent()));
+				(cancelationToken, formProgess) => videoInfos.ToList().ForEach(vi => vi.ClearContent()));
 			_isDataChanged = true;
 		}
 

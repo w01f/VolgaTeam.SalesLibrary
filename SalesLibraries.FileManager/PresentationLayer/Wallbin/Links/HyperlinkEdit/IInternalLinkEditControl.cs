@@ -4,6 +4,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.HyperlinkEd
 {
 	public interface IInternalLinkEditControl
 	{
+		void InitControl();
 		bool ValidateLinkInfo();
 		InternalLinkInfo GetHyperLinkInfo();
 		void ApplySharedSettings(InternalLinkInfo templateInfo);

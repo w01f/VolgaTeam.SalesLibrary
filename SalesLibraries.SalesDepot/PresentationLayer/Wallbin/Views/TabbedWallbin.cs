@@ -40,7 +40,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.Views
 			var newPage = e.Page as IPageView;
 			if (newPage == null) return;
 			MainController.Instance.ProcessManager.Run("Loading Page...",
-				cancelationToken => MainController.Instance.MainForm.Invoke(new MethodInvoker(() =>
+				(cancelationToken, formProgress) => MainController.Instance.MainForm.Invoke(new MethodInvoker(() =>
 				{
 					if (e.PrevPage != null)
 						WinAPIHelper.SendMessage(e.PrevPage.Handle, 11, IntPtr.Zero, IntPtr.Zero);

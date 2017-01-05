@@ -51,12 +51,12 @@ namespace SalesLibraries.Business.Contexts.Wallbin.Cloud
 				}
 				catch (Exception ex)
 				{
-					throw new CloudLibraryException("Error loading library updates from server", ex);
+					throw new RestServiceException("Error loading library updates from server", ex);
 				}
 				if (response.Result == ResponseResult.Error)
 				{
 					var error = response.GetData<RestError>();
-					throw new CloudLibraryException(error.Message);
+					throw new RestServiceException(error.Message);
 				}
 				try
 				{
@@ -65,7 +65,7 @@ namespace SalesLibraries.Business.Contexts.Wallbin.Cloud
 				}
 				catch (Exception ex)
 				{
-					throw new CloudLibraryException("Error loading library updates from server", ex);
+					throw new RestServiceException("Error loading library updates from server", ex);
 				}
 
 				CreateLocalContext();
@@ -77,14 +77,14 @@ namespace SalesLibraries.Business.Contexts.Wallbin.Cloud
 			var syncContextFilePath = Path.Combine(_localPath, Constants.RemoteStorageFileName);
 			var localContextFilePath = Path.Combine(_localPath, Constants.LocalStorageFileName);
 			if (!File.Exists(syncContextFilePath))
-				throw new CloudLibraryException("Sync context absent");
+				throw new RestServiceException("Sync context absent");
 			try
 			{
 				File.Copy(syncContextFilePath, localContextFilePath, true);
 			}
 			catch (Exception ex)
 			{
-				throw new CloudLibraryException("Error creating local context", ex);
+				throw new RestServiceException("Error creating local context", ex);
 			}
 			LocalContext = new CloudLibraryLocalContext(ConnectionInfo.LibraryName, _localPath, this);
 			LocalContext.BeforeSave += OnLocalContextBeforeSave;
@@ -110,26 +110,26 @@ namespace SalesLibraries.Business.Contexts.Wallbin.Cloud
 			}
 			catch (Exception ex)
 			{
-				throw new CloudLibraryException("Error uploading changes on server", ex);
+				throw new RestServiceException("Error uploading changes on server", ex);
 			}
 			if (response.Result == ResponseResult.Error)
 			{
 				var error = response.GetData<RestError>();
-				throw new CloudLibraryException(error.Message);
+				throw new RestServiceException(error.Message);
 			}
 			PendingChanges.Clear();
 
 			var syncContextFilePath = Path.Combine(_localPath, Constants.RemoteStorageFileName);
 			var localContextFilePath = Path.Combine(_localPath, Constants.LocalStorageFileName);
 			if (!File.Exists(localContextFilePath))
-				throw new CloudLibraryException("Local context absent");
+				throw new RestServiceException("Local context absent");
 			try
 			{
 				File.Copy(localContextFilePath, syncContextFilePath, true);
 			}
 			catch (Exception ex)
 			{
-				throw new CloudLibraryException("Error syncing changes", ex);
+				throw new RestServiceException("Error syncing changes", ex);
 			}
 		}
 
@@ -150,7 +150,7 @@ namespace SalesLibraries.Business.Contexts.Wallbin.Cloud
 			{
 				var wallbinEntity = entry.Entity as WallbinEntity;
 				if (wallbinEntity == null)
-					throw new CloudLibraryException("Undefined entity type");
+					throw new RestServiceException("Undefined entity type");
 				var changeSet = PendingChanges
 					.FirstOrDefault(existedChangeSet => existedChangeSet.ChangedObject.Id == wallbinEntity.ExtId);
 				if (changeSet == null)
@@ -168,7 +168,7 @@ namespace SalesLibraries.Business.Contexts.Wallbin.Cloud
 							changeSet.ChangeType = ChangeType.Delete;
 							break;
 						default:
-							throw new CloudLibraryException("Undefined entity change state");
+							throw new RestServiceException("Undefined entity change state");
 					}
 					PendingChanges.Add(changeSet);
 				}

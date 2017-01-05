@@ -49,7 +49,6 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		public string TargetPage => ((InternalLibraryPageLinkSettings)Settings).PageName;
 		#endregion
 
-
 		public static InternalLibraryPageLink Create(InternalLibraryPageLinkInfo linkInfo, LibraryFolder parentFolder)
 		{
 			var link = CreateEntity<InternalLibraryPageLink>();
@@ -59,12 +58,8 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 			((InternalLibraryPageLinkSettings)link.Settings).PageName = linkInfo.PageName;
 			((InternalLibraryPageLinkSettings)link.Settings).HeaderIcon = linkInfo.HeaderIcon;
 			((InternalLibraryPageLinkSettings)link.Settings).ShowHeaderText = linkInfo.ShowHeaderText;
-			((InternalLibraryPageLinkSettings)link.Settings).PageViewType = linkInfo.PageViewType;
-			((InternalLibraryPageLinkSettings)link.Settings).ShowLogo = linkInfo.ShowLogo;
-			((InternalLibraryPageLinkSettings)link.Settings).ShowText = linkInfo.ShowText;
-			((InternalLibraryPageLinkSettings)link.Settings).ShowWindowHeaders = linkInfo.ShowWindowHeaders;
-			((InternalLibraryPageLinkSettings)link.Settings).TextColor = linkInfo.TextColor;
-			((InternalLibraryPageLinkSettings)link.Settings).BackColor = linkInfo.BackColor;
+			((InternalLibraryPageLinkSettings)link.Settings).OpenOnSamePage = linkInfo.OpenOnSamePage;
+			((InternalLibraryPageLinkSettings)link.Settings).StyleSettings = linkInfo.StyleSettings;
 			if (linkInfo.FormatAsBluelink)
 			{
 				((LibraryObjectLinkSettings)link.Settings).RegularFontStyle = ((LibraryObjectLinkSettings)link.Settings).RegularFontStyle | FontStyle.Underline;

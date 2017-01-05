@@ -29,37 +29,23 @@
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
-			this.labelControllTitle = new DevExpress.XtraEditors.LabelControl();
 			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
+			this.styleController1 = new DevExpress.XtraEditors.StyleController(this.components);
+			this.checkEditBold = new DevExpress.XtraEditors.CheckEdit();
+			this.textEditName = new DevExpress.XtraEditors.TextEdit();
 			this.laPath = new System.Windows.Forms.Label();
 			this.laName = new System.Windows.Forms.Label();
 			this.textEditPath = new DevExpress.XtraEditors.TextEdit();
-			this.textEditName = new DevExpress.XtraEditors.TextEdit();
-			this.checkEditBold = new DevExpress.XtraEditors.CheckEdit();
 			this.checkEditForcePreview = new DevExpress.XtraEditors.CheckEdit();
 			this.checkEditBlueHyperlink = new DevExpress.XtraEditors.CheckEdit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.textEditPath.Properties)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.textEditName.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.styleController1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditBold.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.textEditName.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.textEditPath.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditForcePreview.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditBlueHyperlink.Properties)).BeginInit();
 			this.SuspendLayout();
-			// 
-			// labelControllTitle
-			// 
-			this.labelControllTitle.AllowHtmlString = true;
-			this.labelControllTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.labelControllTitle.Appearance.BackColor = System.Drawing.Color.White;
-			this.labelControllTitle.Appearance.ForeColor = System.Drawing.Color.Black;
-			this.labelControllTitle.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-			this.labelControllTitle.Location = new System.Drawing.Point(14, 14);
-			this.labelControllTitle.Name = "labelControllTitle";
-			this.labelControllTitle.Size = new System.Drawing.Size(326, 27);
-			this.labelControllTitle.StyleController = this.styleController;
-			this.labelControllTitle.TabIndex = 36;
-			this.labelControllTitle.Text = "<color=gray><i>Embed a YouTube video link…</i></color>";
 			// 
 			// styleController
 			// 
@@ -76,86 +62,101 @@
 			this.styleController.AppearanceReadOnly.Font = new System.Drawing.Font("Arial", 9.75F);
 			this.styleController.AppearanceReadOnly.Options.UseFont = true;
 			// 
+			// styleController1
+			// 
+			this.styleController1.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.styleController1.Appearance.Options.UseFont = true;
+			this.styleController1.AppearanceDisabled.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.styleController1.AppearanceDisabled.Options.UseFont = true;
+			this.styleController1.AppearanceDropDown.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.styleController1.AppearanceDropDown.Options.UseFont = true;
+			this.styleController1.AppearanceDropDownHeader.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.styleController1.AppearanceDropDownHeader.Options.UseFont = true;
+			this.styleController1.AppearanceFocused.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.styleController1.AppearanceFocused.Options.UseFont = true;
+			this.styleController1.AppearanceReadOnly.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.styleController1.AppearanceReadOnly.Options.UseFont = true;
+			// 
+			// checkEditBold
+			// 
+			this.checkEditBold.Location = new System.Drawing.Point(147, 279);
+			this.checkEditBold.Name = "checkEditBold";
+			this.checkEditBold.Properties.AllowHtmlDraw = DevExpress.Utils.DefaultBoolean.True;
+			this.checkEditBold.Properties.Caption = "<b>BOLD</b>";
+			this.checkEditBold.Size = new System.Drawing.Size(87, 20);
+			this.checkEditBold.StyleController = this.styleController1;
+			this.checkEditBold.TabIndex = 49;
+			// 
+			// textEditName
+			// 
+			this.textEditName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.textEditName.Location = new System.Drawing.Point(79, 3);
+			this.textEditName.Name = "textEditName";
+			this.textEditName.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.textEditName.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.textEditName.Properties.Appearance.Options.UseBackColor = true;
+			this.textEditName.Properties.Appearance.Options.UseForeColor = true;
+			this.textEditName.Size = new System.Drawing.Size(268, 22);
+			this.textEditName.StyleController = this.styleController1;
+			this.textEditName.TabIndex = 43;
+			// 
 			// laPath
 			// 
 			this.laPath.AutoSize = true;
 			this.laPath.BackColor = System.Drawing.Color.White;
 			this.laPath.ForeColor = System.Drawing.Color.Black;
-			this.laPath.Location = new System.Drawing.Point(11, 113);
+			this.laPath.Location = new System.Drawing.Point(3, 89);
 			this.laPath.Name = "laPath";
-			this.laPath.Size = new System.Drawing.Size(174, 16);
-			this.laPath.TabIndex = 33;
-			this.laPath.Text = "Specific YouTube Video URL";
+			this.laPath.Size = new System.Drawing.Size(124, 16);
+			this.laPath.TabIndex = 46;
+			this.laPath.Text = "Specific Vimeo URL";
 			// 
 			// laName
 			// 
 			this.laName.AutoSize = true;
 			this.laName.BackColor = System.Drawing.Color.White;
 			this.laName.ForeColor = System.Drawing.Color.Black;
-			this.laName.Location = new System.Drawing.Point(11, 60);
+			this.laName.Location = new System.Drawing.Point(3, 6);
 			this.laName.Name = "laName";
 			this.laName.Size = new System.Drawing.Size(70, 16);
-			this.laName.TabIndex = 32;
+			this.laName.TabIndex = 45;
 			this.laName.Text = "Link Name";
 			// 
 			// textEditPath
 			// 
 			this.textEditPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.textEditPath.Location = new System.Drawing.Point(14, 132);
+			this.textEditPath.Location = new System.Drawing.Point(3, 108);
 			this.textEditPath.Name = "textEditPath";
 			this.textEditPath.Properties.Appearance.BackColor = System.Drawing.Color.White;
 			this.textEditPath.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.textEditPath.Properties.Appearance.Options.UseBackColor = true;
 			this.textEditPath.Properties.Appearance.Options.UseForeColor = true;
-			this.textEditPath.Size = new System.Drawing.Size(326, 22);
-			this.textEditPath.StyleController = this.styleController;
-			this.textEditPath.TabIndex = 1;
-			// 
-			// textEditName
-			// 
-			this.textEditName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.textEditName.Location = new System.Drawing.Point(14, 79);
-			this.textEditName.Name = "textEditName";
-			this.textEditName.Properties.Appearance.BackColor = System.Drawing.Color.White;
-			this.textEditName.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-			this.textEditName.Properties.Appearance.Options.UseBackColor = true;
-			this.textEditName.Properties.Appearance.Options.UseForeColor = true;
-			this.textEditName.Size = new System.Drawing.Size(326, 22);
-			this.textEditName.StyleController = this.styleController;
-			this.textEditName.TabIndex = 0;
-			// 
-			// checkEditBold
-			// 
-			this.checkEditBold.Location = new System.Drawing.Point(158, 214);
-			this.checkEditBold.Name = "checkEditBold";
-			this.checkEditBold.Properties.AllowHtmlDraw = DevExpress.Utils.DefaultBoolean.True;
-			this.checkEditBold.Properties.Caption = "<b>BOLD</b>";
-			this.checkEditBold.Size = new System.Drawing.Size(87, 20);
-			this.checkEditBold.StyleController = this.styleController;
-			this.checkEditBold.TabIndex = 42;
+			this.textEditPath.Size = new System.Drawing.Size(344, 22);
+			this.textEditPath.StyleController = this.styleController1;
+			this.textEditPath.TabIndex = 44;
 			// 
 			// checkEditForcePreview
 			// 
-			this.checkEditForcePreview.Location = new System.Drawing.Point(14, 175);
+			this.checkEditForcePreview.Location = new System.Drawing.Point(3, 192);
 			this.checkEditForcePreview.Name = "checkEditForcePreview";
 			this.checkEditForcePreview.Properties.AllowHtmlDraw = DevExpress.Utils.DefaultBoolean.True;
 			this.checkEditForcePreview.Properties.Caption = "<b>Immediately Launch this URL when clicked</b>";
 			this.checkEditForcePreview.Size = new System.Drawing.Size(326, 20);
-			this.checkEditForcePreview.StyleController = this.styleController;
-			this.checkEditForcePreview.TabIndex = 41;
+			this.checkEditForcePreview.StyleController = this.styleController1;
+			this.checkEditForcePreview.TabIndex = 48;
 			// 
 			// checkEditBlueHyperlink
 			// 
 			this.checkEditBlueHyperlink.EditValue = true;
-			this.checkEditBlueHyperlink.Location = new System.Drawing.Point(14, 214);
+			this.checkEditBlueHyperlink.Location = new System.Drawing.Point(3, 279);
 			this.checkEditBlueHyperlink.Name = "checkEditBlueHyperlink";
 			this.checkEditBlueHyperlink.Properties.AllowHtmlDraw = DevExpress.Utils.DefaultBoolean.True;
 			this.checkEditBlueHyperlink.Properties.Caption = "<color=blue><u>Blue Hyperlink</u></color>";
 			this.checkEditBlueHyperlink.Size = new System.Drawing.Size(118, 20);
-			this.checkEditBlueHyperlink.StyleController = this.styleController;
-			this.checkEditBlueHyperlink.TabIndex = 40;
+			this.checkEditBlueHyperlink.StyleController = this.styleController1;
+			this.checkEditBlueHyperlink.TabIndex = 47;
 			// 
 			// YouTubeEditControl
 			// 
@@ -163,7 +164,6 @@
 			this.BackColor = System.Drawing.Color.White;
 			this.Controls.Add(this.checkEditBold);
 			this.Controls.Add(this.textEditName);
-			this.Controls.Add(this.labelControllTitle);
 			this.Controls.Add(this.laPath);
 			this.Controls.Add(this.laName);
 			this.Controls.Add(this.textEditPath);
@@ -171,11 +171,12 @@
 			this.Controls.Add(this.checkEditBlueHyperlink);
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.Name = "YouTubeEditControl";
-			this.Size = new System.Drawing.Size(350, 385);
+			this.Size = new System.Drawing.Size(350, 425);
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.textEditPath.Properties)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.textEditName.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.styleController1)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditBold.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.textEditName.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.textEditPath.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditForcePreview.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditBlueHyperlink.Properties)).EndInit();
 			this.ResumeLayout(false);
@@ -184,14 +185,13 @@
 		}
 
 		#endregion
-
-		private DevExpress.XtraEditors.LabelControl labelControllTitle;
 		private DevExpress.XtraEditors.StyleController styleController;
+		private DevExpress.XtraEditors.StyleController styleController1;
+		private DevExpress.XtraEditors.CheckEdit checkEditBold;
+		private DevExpress.XtraEditors.TextEdit textEditName;
 		private System.Windows.Forms.Label laPath;
 		private System.Windows.Forms.Label laName;
 		private DevExpress.XtraEditors.TextEdit textEditPath;
-		private DevExpress.XtraEditors.TextEdit textEditName;
-		private DevExpress.XtraEditors.CheckEdit checkEditBold;
 		private DevExpress.XtraEditors.CheckEdit checkEditForcePreview;
 		private DevExpress.XtraEditors.CheckEdit checkEditBlueHyperlink;
 	}

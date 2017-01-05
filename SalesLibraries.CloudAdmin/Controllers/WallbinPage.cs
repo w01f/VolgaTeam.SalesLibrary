@@ -250,7 +250,7 @@ namespace SalesLibraries.CloudAdmin.Controllers
 			MainController.Instance.ProcessChanges();
 			MainController.Instance.ProcessManager.RunStartProcess(
 				String.Format("Syncing changes with {0}", MainController.Instance.Settings.SiteLibrary),
-				cancellationToken =>
+				(cancelationToken, formProgress) =>
 				{
 					MainController.Instance.Wallbin.CheckinData();
 				});
@@ -311,8 +311,8 @@ namespace SalesLibraries.CloudAdmin.Controllers
 						return false;
 					}
 				},
-				copyMethod => MainController.Instance.ProcessManager.Run("Preparing Data...", cancelationToken => copyMethod()),
-				(context, original, current) => MainController.Instance.ProcessManager.Run("Saving Changes...", cancelationToken => original.Save(context, current)));
+				copyMethod => MainController.Instance.ProcessManager.Run("Preparing Data...", (cancelationToken, formProgress) => copyMethod()),
+				(context, original, current) => MainController.Instance.ProcessManager.Run("Saving Changes...", (cancelationToken, formProgress) => original.Save(context, current)));
 			if (!resut) return;
 			MainController.Instance.ProcessManager.RunInQueue("Loading Library...", () => MainController.Instance.MainForm.Invoke(new MethodInvoker(UpdateWallbin)));
 		}
@@ -335,8 +335,8 @@ namespace SalesLibraries.CloudAdmin.Controllers
 						return false;
 					}
 				},
-				copyMethod => MainController.Instance.ProcessManager.Run("Preparing Data...", cancelationToken => copyMethod()),
-				(context, original, current) => MainController.Instance.ProcessManager.Run("Saving Changes...", cancelationToken => original.Save(context, current)));
+				copyMethod => MainController.Instance.ProcessManager.Run("Preparing Data...", (cancelationToken, formProgress) => copyMethod()),
+				(context, original, current) => MainController.Instance.ProcessManager.Run("Saving Changes...", (cancelationToken, formProgress) => original.Save(context, current)));
 			if (!resut) return;
 			MainController.Instance.ProcessManager.RunInQueue("Loading Library...", () => MainController.Instance.MainForm.Invoke(new MethodInvoker(UpdateWallbin)));
 		}
@@ -359,8 +359,8 @@ namespace SalesLibraries.CloudAdmin.Controllers
 						return false;
 					}
 				},
-				copyMethod => MainController.Instance.ProcessManager.Run("Preparing Data...", cancelationToken => copyMethod()),
-				(context, original, current) => MainController.Instance.ProcessManager.Run("Saving Changes...", cancelationToken => original.Save(context, current)));
+				copyMethod => MainController.Instance.ProcessManager.Run("Preparing Data...", (cancelationToken, formProgress) => copyMethod()),
+				(context, original, current) => MainController.Instance.ProcessManager.Run("Saving Changes...", (cancelationToken, formProgress) => original.Save(context, current)));
 			if (!resut) return;
 			MainController.Instance.ProcessManager.RunInQueue("Loading Library...", () => MainController.Instance.MainForm.Invoke(new MethodInvoker(UpdateWallbin)));
 		}
@@ -383,7 +383,7 @@ namespace SalesLibraries.CloudAdmin.Controllers
 						return false;
 					}
 				},
-				copyMethod => MainController.Instance.ProcessManager.Run("Preparing Data...", cancelationToken => copyMethod()),
+				copyMethod => MainController.Instance.ProcessManager.Run("Preparing Data...", (cancelationToken, formProgress) => copyMethod()),
 				(context, original, current) => MainController.Instance.ProcessManager.RunInQueue("Saving Changes...", () => original.Save(context, current)));
 		}
 

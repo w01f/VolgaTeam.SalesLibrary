@@ -71,7 +71,7 @@ namespace SalesLibraries.Common.Helpers
 			{
 				FileStorageManager.IncomingFolderName,
 				AppProfileManager.Instance.AppName,
-				"shared_artwork",
+				"shared",
 				"Artwork"
 			});
 			if (!await ArtworkFolder.Exists(true))

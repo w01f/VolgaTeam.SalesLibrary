@@ -31,7 +31,7 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.LinkViewers.Forms
 			{
 				Text = String.Format("Preview - {0}", Link.Name);
 
-				MainController.Instance.ProcessManager.Run("Loading preview...", cancellationToken =>
+				MainController.Instance.ProcessManager.Run("Loading preview...", (cancelletionToken, formProgress) =>
 					Invoke((MethodInvoker)delegate
 					{
 						try

@@ -1,5 +1,5 @@
-﻿using SalesLibraries.CloudAdmin.Business.Dictionaries;
-using SalesLibraries.Common.Dictionaries;
+﻿using SalesLibraries.Common.Dictionaries;
+using SalesLibraries.CloudAdmin.Business.Dictionaries;
 
 namespace SalesLibraries.CloudAdmin.Configuration
 {
@@ -11,6 +11,9 @@ namespace SalesLibraries.CloudAdmin.Configuration
 		public SuperFilterList SuperFilters { get; }
 		public SecurityLists Security { get; }
 		public LinkBundleImageList LinkBundleImages { get; }
+		public ExternalLibraryLinksList ExternalLibraryLinks { get; }
+		public ExternalShortcutsList ExternalShortcuts { get; }
+		public InternalLinkTemplateList InternalLinkTemplates { get; }
 
 		public ListManager()
 		{
@@ -20,6 +23,9 @@ namespace SalesLibraries.CloudAdmin.Configuration
 			SuperFilters = new SuperFilterList();
 			Security = new SecurityLists();
 			LinkBundleImages = new LinkBundleImageList();
+			ExternalLibraryLinks = new ExternalLibraryLinksList();
+			ExternalShortcuts = new ExternalShortcutsList();
+			InternalLinkTemplates = new InternalLinkTemplateList();
 		}
 
 		public void Load()
@@ -30,6 +36,7 @@ namespace SalesLibraries.CloudAdmin.Configuration
 			SuperFilters.Load();
 			Security.Load();
 			LinkBundleImages.Load();
+			InternalLinkTemplates.Load();
 		}
 	}
 }

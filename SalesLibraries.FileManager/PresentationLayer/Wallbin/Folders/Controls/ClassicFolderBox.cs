@@ -222,6 +222,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 				UpdateGridSize();
 
 				newRow.Selected = true;
+				if (DataSource.Links.Count <= 1)
+					OnGridSelectionChanged(grFiles, EventArgs.Empty);
 
 				DataChanged?.Invoke(this, EventArgs.Empty);
 			}
@@ -246,6 +248,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 			UpdateGridSize();
 
 			newRow.Selected = true;
+			if (DataSource.Links.Count <= 1)
+				OnGridSelectionChanged(grFiles, EventArgs.Empty);
 
 			DataChanged?.Invoke(this, EventArgs.Empty);
 		}
@@ -268,6 +272,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 			UpdateGridSize();
 
 			newRow.Selected = true;
+			if (DataSource.Links.Count <= 1)
+				OnGridSelectionChanged(grFiles, EventArgs.Empty);
 
 			DataChanged?.Invoke(this, EventArgs.Empty);
 		}
@@ -497,25 +503,12 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 			DataChanged?.Invoke(this, EventArgs.Empty);
 		}
 
-		private void OnLinksGroupContextEditorValueChanged(object sender, EventArgs e)
-		{
-			grFiles.SuspendLayout();
-			_outsideChangesInProgress = true;
-			foreach (var linkRow in grFiles.Rows.OfType<LinkRow>())
-				linkRow.Info.Recalc();
-			_outsideChangesInProgress = false;
-			UpdateGridSize();
-			grFiles.ResumeLayout(true);
-
-			DataChanged?.Invoke(this, EventArgs.Empty);
-		}
-
 		private void RefreshPreviewFiles()
 		{
 			var sourceLink = SelectedLinkRow?.Source as PreviewableLink;
 			if (sourceLink == null) return;
 			if (MainController.Instance.PopupMessages.ShowWarningQuestion(String.Format("Are you sure you want to refresh the server files for:{1}{0}?", sourceLink.NameWithExtension, Environment.NewLine)) != DialogResult.Yes) return;
-			MainController.Instance.ProcessManager.Run("Updating Preview files...", cancelationToken =>
+			MainController.Instance.ProcessManager.Run("Updating Preview files...", (cancelationToken, formProgess) =>
 			{
 				if (sourceLink.Type == FileTypes.PowerPoint)
 				{
@@ -657,7 +650,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 			var isSamePage = MainController.Instance.WallbinViews.ActiveWallbin.ActivePage == targetPageView;
 			if (isSamePage)
 				MainController.Instance.ProcessManager.Run("Loading Page...",
-				cancelationToken => MainController.Instance.MainForm.Invoke(new MethodInvoker(() =>
+				(cancelationToken, formProgess) => MainController.Instance.MainForm.Invoke(new MethodInvoker(() =>
 				{
 					MainController.Instance.WallbinViews.ActiveWallbin.ActivePage?.LoadPage(true);
 					MainController.Instance.WallbinViews.ActiveWallbin.ActivePage?.ShowPage();
@@ -674,7 +667,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 		private BaseLibraryLink InsertFileLink(SourceLink sourceLink, int position = -1)
 		{
 			BaseLibraryLink link = null;
-			MainController.Instance.ProcessManager.Run("Adding Link...", cancelationToken =>
+			MainController.Instance.ProcessManager.Run("Adding Link...", (cancelationToken, formProgess) =>
 			{
 				link = LibraryFileLink.Create(sourceLink, DataSource);
 				if (position >= 0)

@@ -44,8 +44,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		[NotMapped, JsonIgnore]
 		public string TargetLibrary => ((InternalWallbinLinkSettings)Settings).LibraryName;
 		#endregion
-
-
+		
 		public static InternalWallbinLink Create(InternalWallbinLinkInfo linkInfo, LibraryFolder parentFolder)
 		{
 			var link = CreateEntity<InternalWallbinLink>();
@@ -55,9 +54,8 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 			((InternalWallbinLinkSettings)link.Settings).PageName = linkInfo.PageName;
 			((InternalWallbinLinkSettings)link.Settings).HeaderIcon = linkInfo.HeaderIcon;
 			((InternalWallbinLinkSettings)link.Settings).ShowHeaderText = linkInfo.ShowHeaderText;
-			((InternalWallbinLinkSettings)link.Settings).PageSelectorType = linkInfo.PageSelectorType;
-			((InternalWallbinLinkSettings)link.Settings).PageViewType = linkInfo.PageViewType;
-			((InternalWallbinLinkSettings)link.Settings).ShowLogo = linkInfo.ShowLogo;
+			((InternalWallbinLinkSettings)link.Settings).OpenOnSamePage = linkInfo.OpenOnSamePage;
+			((InternalWallbinLinkSettings)link.Settings).StyleSettings = linkInfo.StyleSettings;
 			if (linkInfo.FormatAsBluelink)
 			{
 				((LibraryObjectLinkSettings)link.Settings).RegularFontStyle = ((LibraryObjectLinkSettings)link.Settings).RegularFontStyle | FontStyle.Underline;

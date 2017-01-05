@@ -19,7 +19,7 @@ namespace SalesLibraries.CloudAdmin.Business.Dictionaries
 		public StorageFile DefaultPdfLogo { get; private set; }
 		public StorageFile DefaultVideoLogo { get; private set; }
 		public StorageFile DefaultImageLogo { get; private set; }
-
+		
 		public StorageFile DefaultInfoLogo { get; private set; }
 		public StorageFile DefaultRevenueLogo { get; private set; }
 		public StorageFile DefaultStrategyLogo { get; private set; }

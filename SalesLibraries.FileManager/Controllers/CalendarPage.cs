@@ -76,7 +76,7 @@ namespace SalesLibraries.FileManager.Controllers
 		{
 			if (!_isDataChanged) return;
 			if (ActiveLibraryContext == null) return;
-			MainController.Instance.ProcessManager.Run("Saving Changes...", cancelationToken =>
+			MainController.Instance.ProcessManager.Run("Saving Changes...", (cancelationToken, formProgess) =>
 			{
 				ActiveLibraryContext.SaveChanges();
 			});
@@ -226,9 +226,9 @@ namespace SalesLibraries.FileManager.Controllers
 					}
 					return dilogResult == DialogResult.OK;
 				},
-				copyMethod => MainController.Instance.ProcessManager.Run("Preparing Data...", cancelationToken => copyMethod()),
+				copyMethod => MainController.Instance.ProcessManager.Run("Preparing Data...", (cancelationToken, formProgess) => copyMethod()),
 				(context, original, current) => MainController.Instance.ProcessManager.Run("Saving Changes...",
-					cancelationToken =>
+					(cancelationToken, formProgess) =>
 					{
 						original.Calendar = current.Calendar.Clone<CalendarSettings>(original);
 					}));

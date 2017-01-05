@@ -112,7 +112,7 @@
 			this.xtraTabControlWindowProperties.Name = "xtraTabControlWindowProperties";
 			this.xtraTabControlWindowProperties.SelectedTabPage = this.xtraTabPageAppearance;
 			this.xtraTabControlWindowProperties.Size = new System.Drawing.Size(564, 303);
-			this.xtraTabControlWindowProperties.TabIndex = 25;
+			this.xtraTabControlWindowProperties.TabIndex = 0;
 			this.xtraTabControlWindowProperties.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.xtraTabPageAppearance,
             this.xtraTabPageWidget,
@@ -158,7 +158,7 @@
 			this.textEditName.Properties.Appearance.Options.UseForeColor = true;
 			this.textEditName.Size = new System.Drawing.Size(396, 22);
 			this.textEditName.StyleController = this.styleController;
-			this.textEditName.TabIndex = 36;
+			this.textEditName.TabIndex = 0;
 			// 
 			// styleController
 			// 
@@ -201,7 +201,7 @@
 			this.colorEditWindowBorderColor.Properties.Color = System.Drawing.Color.Empty;
 			this.colorEditWindowBorderColor.Size = new System.Drawing.Size(100, 22);
 			this.colorEditWindowBorderColor.StyleController = this.styleController;
-			this.colorEditWindowBorderColor.TabIndex = 34;
+			this.colorEditWindowBorderColor.TabIndex = 5;
 			// 
 			// laBorderColor
 			// 
@@ -222,7 +222,7 @@
 			this.rbWindowHeaderAlignmentRight.Location = new System.Drawing.Point(365, 187);
 			this.rbWindowHeaderAlignmentRight.Name = "rbWindowHeaderAlignmentRight";
 			this.rbWindowHeaderAlignmentRight.Size = new System.Drawing.Size(56, 20);
-			this.rbWindowHeaderAlignmentRight.TabIndex = 32;
+			this.rbWindowHeaderAlignmentRight.TabIndex = 9;
 			this.rbWindowHeaderAlignmentRight.TabStop = true;
 			this.rbWindowHeaderAlignmentRight.Text = "Right";
 			this.rbWindowHeaderAlignmentRight.UseVisualStyleBackColor = true;
@@ -235,7 +235,7 @@
 			this.rbHeaderAlignmentCenter.Location = new System.Drawing.Point(260, 187);
 			this.rbHeaderAlignmentCenter.Name = "rbHeaderAlignmentCenter";
 			this.rbHeaderAlignmentCenter.Size = new System.Drawing.Size(64, 20);
-			this.rbHeaderAlignmentCenter.TabIndex = 31;
+			this.rbHeaderAlignmentCenter.TabIndex = 8;
 			this.rbHeaderAlignmentCenter.TabStop = true;
 			this.rbHeaderAlignmentCenter.Text = "Center";
 			this.rbHeaderAlignmentCenter.UseVisualStyleBackColor = true;
@@ -248,7 +248,7 @@
 			this.rbHeaderAlignmentLeft.Location = new System.Drawing.Point(153, 187);
 			this.rbHeaderAlignmentLeft.Name = "rbHeaderAlignmentLeft";
 			this.rbHeaderAlignmentLeft.Size = new System.Drawing.Size(47, 20);
-			this.rbHeaderAlignmentLeft.TabIndex = 30;
+			this.rbHeaderAlignmentLeft.TabIndex = 7;
 			this.rbHeaderAlignmentLeft.TabStop = true;
 			this.rbHeaderAlignmentLeft.Text = "Left";
 			this.rbHeaderAlignmentLeft.UseVisualStyleBackColor = true;
@@ -279,7 +279,7 @@
 			this.buttonEditWindowHeaderFont.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
 			this.buttonEditWindowHeaderFont.Size = new System.Drawing.Size(396, 22);
 			this.buttonEditWindowHeaderFont.StyleController = this.styleController;
-			this.buttonEditWindowHeaderFont.TabIndex = 28;
+			this.buttonEditWindowHeaderFont.TabIndex = 6;
 			// 
 			// laHeaderFont
 			// 
@@ -308,7 +308,7 @@
 			this.colorEditWindowForeColor.Properties.Color = System.Drawing.Color.Empty;
 			this.colorEditWindowForeColor.Size = new System.Drawing.Size(100, 22);
 			this.colorEditWindowForeColor.StyleController = this.styleController;
-			this.colorEditWindowForeColor.TabIndex = 27;
+			this.colorEditWindowForeColor.TabIndex = 4;
 			// 
 			// laHeaderBackColor
 			// 
@@ -337,7 +337,7 @@
 			this.colorEditWindowBackColor.Properties.Color = System.Drawing.Color.Empty;
 			this.colorEditWindowBackColor.Size = new System.Drawing.Size(100, 22);
 			this.colorEditWindowBackColor.StyleController = this.styleController;
-			this.colorEditWindowBackColor.TabIndex = 26;
+			this.colorEditWindowBackColor.TabIndex = 2;
 			// 
 			// ckApllyForAllWindowsAppearance
 			// 
@@ -348,7 +348,7 @@
 			this.ckApllyForAllWindowsAppearance.Location = new System.Drawing.Point(7, 250);
 			this.ckApllyForAllWindowsAppearance.Name = "ckApllyForAllWindowsAppearance";
 			this.ckApllyForAllWindowsAppearance.Size = new System.Drawing.Size(222, 20);
-			this.ckApllyForAllWindowsAppearance.TabIndex = 15;
+			this.ckApllyForAllWindowsAppearance.TabIndex = 10;
 			this.ckApllyForAllWindowsAppearance.Text = "Apply Appearance to All Windows";
 			this.ckApllyForAllWindowsAppearance.UseVisualStyleBackColor = true;
 			// 
@@ -379,7 +379,7 @@
 			this.colorEditWindowHeaderBackColor.Properties.Color = System.Drawing.Color.Empty;
 			this.colorEditWindowHeaderBackColor.Size = new System.Drawing.Size(100, 22);
 			this.colorEditWindowHeaderBackColor.StyleController = this.styleController;
-			this.colorEditWindowHeaderBackColor.TabIndex = 24;
+			this.colorEditWindowHeaderBackColor.TabIndex = 1;
 			// 
 			// laBackColor
 			// 
@@ -408,7 +408,7 @@
 			this.colorEditWindowHeaderForeColor.Properties.Color = System.Drawing.Color.Empty;
 			this.colorEditWindowHeaderForeColor.Size = new System.Drawing.Size(100, 22);
 			this.colorEditWindowHeaderForeColor.StyleController = this.styleController;
-			this.colorEditWindowHeaderForeColor.TabIndex = 25;
+			this.colorEditWindowHeaderForeColor.TabIndex = 3;
 			// 
 			// laHeaderForeColor
 			// 
@@ -527,7 +527,7 @@
 			this.buttonXSave.Name = "buttonXSave";
 			this.buttonXSave.Size = new System.Drawing.Size(102, 33);
 			this.buttonXSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.buttonXSave.TabIndex = 1;
+			this.buttonXSave.TabIndex = 99;
 			this.buttonXSave.Text = "Save";
 			// 
 			// buttonXCancel
@@ -540,7 +540,7 @@
 			this.buttonXCancel.Name = "buttonXCancel";
 			this.buttonXCancel.Size = new System.Drawing.Size(102, 33);
 			this.buttonXCancel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.buttonXCancel.TabIndex = 0;
+			this.buttonXCancel.TabIndex = 100;
 			this.buttonXCancel.Text = "Cancel";
 			// 
 			// pnTop

@@ -318,7 +318,30 @@
   <ItemGroup>
     <None Include="Resources\StartLogo.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\ProgressStartRegularHeader.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ProgressStartRegularBrand.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ProgressStartCancel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ProgressStartRegularWebConnection.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ProgressStartRegularSecurity.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ProgressStartRegularFiles.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ProgressStartMinimizedFisrtStart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ProgressStartMinimizedRegularStart.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

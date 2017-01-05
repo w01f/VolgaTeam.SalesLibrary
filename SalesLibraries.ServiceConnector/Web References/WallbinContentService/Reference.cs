@@ -2966,11 +2966,9 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         
         private bool showHeaderTextField;
         
-        private string windowViewTypeField;
+        private bool openOnSamePageField;
         
-        private int columnField;
-        
-        private bool linksOnlyField;
+        private string styleSettingsEncodedField;
         
         private string noteField;
         
@@ -3065,32 +3063,22 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         }
         
         /// <remarks/>
-        public string windowViewType {
+        public bool openOnSamePage {
             get {
-                return this.windowViewTypeField;
+                return this.openOnSamePageField;
             }
             set {
-                this.windowViewTypeField = value;
+                this.openOnSamePageField = value;
             }
         }
         
         /// <remarks/>
-        public int column {
+        public string styleSettingsEncoded {
             get {
-                return this.columnField;
+                return this.styleSettingsEncodedField;
             }
             set {
-                this.columnField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool linksOnly {
-            get {
-                return this.linksOnlyField;
-            }
-            set {
-                this.linksOnlyField = value;
+                this.styleSettingsEncodedField = value;
             }
         }
         
@@ -3273,17 +3261,9 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         
         private bool showHeaderTextField;
         
-        private string pageViewTypeField;
+        private bool openOnSamePageField;
         
-        private bool showLogoField;
-        
-        private bool showTextField;
-        
-        private bool showWindowHeadersField;
-        
-        private string textColorField;
-        
-        private string backColorField;
+        private string styleSettingsEncodedField;
         
         private string noteField;
         
@@ -3368,62 +3348,22 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         }
         
         /// <remarks/>
-        public string pageViewType {
+        public bool openOnSamePage {
             get {
-                return this.pageViewTypeField;
+                return this.openOnSamePageField;
             }
             set {
-                this.pageViewTypeField = value;
+                this.openOnSamePageField = value;
             }
         }
         
         /// <remarks/>
-        public bool showLogo {
+        public string styleSettingsEncoded {
             get {
-                return this.showLogoField;
+                return this.styleSettingsEncodedField;
             }
             set {
-                this.showLogoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool showText {
-            get {
-                return this.showTextField;
-            }
-            set {
-                this.showTextField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool showWindowHeaders {
-            get {
-                return this.showWindowHeadersField;
-            }
-            set {
-                this.showWindowHeadersField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string textColor {
-            get {
-                return this.textColorField;
-            }
-            set {
-                this.textColorField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string backColor {
-            get {
-                return this.backColorField;
-            }
-            set {
-                this.backColorField = value;
+                this.styleSettingsEncodedField = value;
             }
         }
         
@@ -3606,11 +3546,9 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         
         private bool showHeaderTextField;
         
-        private string pageViewTypeField;
+        private bool openOnSamePageField;
         
-        private string pageSelectorTypeField;
-        
-        private bool showLogoField;
+        private string styleSettingsEncodedField;
         
         private string noteField;
         
@@ -3695,32 +3633,22 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         }
         
         /// <remarks/>
-        public string pageViewType {
+        public bool openOnSamePage {
             get {
-                return this.pageViewTypeField;
+                return this.openOnSamePageField;
             }
             set {
-                this.pageViewTypeField = value;
+                this.openOnSamePageField = value;
             }
         }
         
         /// <remarks/>
-        public string pageSelectorType {
+        public string styleSettingsEncoded {
             get {
-                return this.pageSelectorTypeField;
+                return this.styleSettingsEncodedField;
             }
             set {
-                this.pageSelectorTypeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool showLogo {
-            get {
-                return this.showLogoField;
-            }
-            set {
-                this.showLogoField = value;
+                this.styleSettingsEncodedField = value;
             }
         }
         

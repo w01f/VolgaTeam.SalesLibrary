@@ -10,7 +10,7 @@ using SalesLibraries.CloudAdmin.Controllers;
 
 namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.HyperlinkEdit
 {
-	public partial class InternalLinkEditControl : UserControl, IHyperLinkEditControl
+	public partial class InternalLinkEditControl : UserControl, IHyperLinkEditComplexControl
 	{
 		private readonly Dictionary<InternalLinkType, IInternalLinkEditControl> _editors = new Dictionary<InternalLinkType, IInternalLinkEditControl>();
 
@@ -35,7 +35,10 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.HyperlinkEdi
 				laLinkName.Font = new Font(laLinkName.Font.FontFamily, laLinkName.Font.Size - 2, laLinkName.Font.Style);
 				laLinkType.Font = new Font(laLinkType.Font.FontFamily, laLinkType.Font.Size - 2, laLinkType.Font.Style);
 			}
+		}
 
+		public void InitControl()
+		{
 			var editorSelectors = new List<CheckEdit>(new[]
 			{
 				checkEditLinkTypeWallbin,
@@ -48,6 +51,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.HyperlinkEdi
 			{
 				checkEdit.CheckedChanged += OnSelectEditorChecked;
 			});
+
 			editorSelectors.First().Checked = true;
 		}
 
@@ -75,7 +79,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.HyperlinkEdi
 			return linkInfo;
 		}
 
-		public void ApplySharedSettings(BaseNetworkLinkInfo templateInfo)
+		public void ApplyDataFromTemplate(BaseNetworkLinkInfo templateInfo)
 		{
 			if (templateInfo != null)
 			{
@@ -116,11 +120,13 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.HyperlinkEdi
 			}
 			else
 				SelectedEditor = _editors[SelectedEditorType];
-			SelectedEditor.ApplySharedSettings(templateSettings);
 			var control = (Control)SelectedEditor;
 			if (!pnPropertyEditorsContainer.Controls.Contains(control))
 				pnPropertyEditorsContainer.Controls.Add(control);
 			control.BringToFront();
+
+			SelectedEditor.InitControl();
+			SelectedEditor.ApplySharedSettings(templateSettings);
 		}
 	}
 }

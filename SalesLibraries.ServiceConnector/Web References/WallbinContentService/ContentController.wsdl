@@ -441,9 +441,8 @@
           <xsd:element name="pageName" type="xsd:string" />
           <xsd:element name="headerIcon" type="xsd:string" />
           <xsd:element name="showHeaderText" type="xsd:boolean" />
-          <xsd:element name="pageViewType" type="xsd:string" />
-          <xsd:element name="pageSelectorType" type="xsd:string" />
-          <xsd:element name="showLogo" type="xsd:boolean" />
+          <xsd:element name="openOnSamePage" type="xsd:boolean" />
+          <xsd:element name="styleSettingsEncoded" type="xsd:string" />
           <xsd:element name="note" type="xsd:string" />
           <xsd:element name="hoverNote" type="xsd:string" />
           <xsd:element name="showOnlyCustomHoverNote" type="xsd:boolean" />
@@ -469,12 +468,8 @@
           <xsd:element name="pageName" type="xsd:string" />
           <xsd:element name="headerIcon" type="xsd:string" />
           <xsd:element name="showHeaderText" type="xsd:boolean" />
-          <xsd:element name="pageViewType" type="xsd:string" />
-          <xsd:element name="showLogo" type="xsd:boolean" />
-          <xsd:element name="showText" type="xsd:boolean" />
-          <xsd:element name="showWindowHeaders" type="xsd:boolean" />
-          <xsd:element name="textColor" type="xsd:string" />
-          <xsd:element name="backColor" type="xsd:string" />
+          <xsd:element name="openOnSamePage" type="xsd:boolean" />
+          <xsd:element name="styleSettingsEncoded" type="xsd:string" />
           <xsd:element name="note" type="xsd:string" />
           <xsd:element name="hoverNote" type="xsd:string" />
           <xsd:element name="showOnlyCustomHoverNote" type="xsd:boolean" />
@@ -501,9 +496,8 @@
           <xsd:element name="windowName" type="xsd:string" />
           <xsd:element name="headerIcon" type="xsd:string" />
           <xsd:element name="showHeaderText" type="xsd:boolean" />
-          <xsd:element name="windowViewType" type="xsd:string" />
-          <xsd:element name="column" type="xsd:int" />
-          <xsd:element name="linksOnly" type="xsd:boolean" />
+          <xsd:element name="openOnSamePage" type="xsd:boolean" />
+          <xsd:element name="styleSettingsEncoded" type="xsd:string" />
           <xsd:element name="note" type="xsd:string" />
           <xsd:element name="hoverNote" type="xsd:string" />
           <xsd:element name="showOnlyCustomHoverNote" type="xsd:boolean" />
