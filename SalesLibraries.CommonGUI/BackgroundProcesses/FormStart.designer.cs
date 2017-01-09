@@ -28,46 +28,47 @@
         /// </summary>
         private void InitializeComponent()
         {
+			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormStart));
 			this.panelEx = new DevComponents.DotNetBar.PanelEx();
-			this.pbCancelRegular = new System.Windows.Forms.PictureBox();
 			this.pnNormal = new System.Windows.Forms.Panel();
 			this.circularProgressRegular = new DevComponents.DotNetBar.Controls.CircularProgress();
 			this.pnProgressStages = new System.Windows.Forms.Panel();
 			this.pnProgressStageFiles = new System.Windows.Forms.Panel();
-			this.pbProgressStageFiles = new System.Windows.Forms.PictureBox();
 			this.pnProgressStageSecurity = new System.Windows.Forms.Panel();
-			this.pbProgressStageSecurity = new System.Windows.Forms.PictureBox();
 			this.pnProgressStageWebConnection = new System.Windows.Forms.Panel();
-			this.pbProgressStageWebSite = new System.Windows.Forms.PictureBox();
-			this.pbHeaderRegular = new System.Windows.Forms.PictureBox();
-			this.pbBrand = new System.Windows.Forms.PictureBox();
 			this.pnMinimized = new System.Windows.Forms.Panel();
 			this.pnSeparator = new System.Windows.Forms.Panel();
-			this.pbHeaderMinimized = new System.Windows.Forms.PictureBox();
 			this.circularProgressMinimized = new DevComponents.DotNetBar.Controls.CircularProgress();
-			this.notifyIcon = new System.Windows.Forms.NotifyIcon();
-			this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip();
+			this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
+			this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.toolStripMenuItemShowProgress = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
 			this.toolStripMenuItemKillApp = new System.Windows.Forms.ToolStripMenuItem();
-			this.styleController = new DevExpress.XtraEditors.StyleController();
+			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
+			this.pbCancelRegular = new System.Windows.Forms.PictureBox();
+			this.pbProgressStageFiles = new System.Windows.Forms.PictureBox();
+			this.pbProgressStageSecurity = new System.Windows.Forms.PictureBox();
+			this.pbProgressStageWebSite = new System.Windows.Forms.PictureBox();
+			this.pbHeaderRegular = new System.Windows.Forms.PictureBox();
+			this.pbBrand = new System.Windows.Forms.PictureBox();
+			this.pbHeaderMinimized = new System.Windows.Forms.PictureBox();
 			this.panelEx.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.pbCancelRegular)).BeginInit();
 			this.pnNormal.SuspendLayout();
 			this.pnProgressStages.SuspendLayout();
 			this.pnProgressStageFiles.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.pbProgressStageFiles)).BeginInit();
 			this.pnProgressStageSecurity.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.pbProgressStageSecurity)).BeginInit();
 			this.pnProgressStageWebConnection.SuspendLayout();
+			this.pnMinimized.SuspendLayout();
+			this.contextMenuStrip.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.pbCancelRegular)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.pbProgressStageFiles)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.pbProgressStageSecurity)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pbProgressStageWebSite)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pbHeaderRegular)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pbBrand)).BeginInit();
-			this.pnMinimized.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pbHeaderMinimized)).BeginInit();
-			this.contextMenuStrip.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// panelEx
@@ -89,19 +90,6 @@
 			this.panelEx.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
 			this.panelEx.Style.GradientAngle = 90;
 			this.panelEx.TabIndex = 4;
-			// 
-			// pbCancelRegular
-			// 
-			this.pbCancelRegular.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.pbCancelRegular.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.pbCancelRegular.Image = global::SalesLibraries.CommonGUI.Properties.Resources.ProgressStartCancel;
-			this.pbCancelRegular.Location = new System.Drawing.Point(706, 2);
-			this.pbCancelRegular.Name = "pbCancelRegular";
-			this.pbCancelRegular.Size = new System.Drawing.Size(25, 25);
-			this.pbCancelRegular.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-			this.pbCancelRegular.TabIndex = 0;
-			this.pbCancelRegular.TabStop = false;
-			this.pbCancelRegular.Click += new System.EventHandler(this.pbCancel_Click);
 			// 
 			// pnNormal
 			// 
@@ -159,16 +147,6 @@
 			this.pnProgressStageFiles.TabIndex = 21;
 			this.pnProgressStageFiles.Visible = false;
 			// 
-			// pbProgressStageFiles
-			// 
-			this.pbProgressStageFiles.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.pbProgressStageFiles.Image = global::SalesLibraries.CommonGUI.Properties.Resources.ProgressStartRegularFiles;
-			this.pbProgressStageFiles.Location = new System.Drawing.Point(0, 0);
-			this.pbProgressStageFiles.Name = "pbProgressStageFiles";
-			this.pbProgressStageFiles.Size = new System.Drawing.Size(663, 50);
-			this.pbProgressStageFiles.TabIndex = 26;
-			this.pbProgressStageFiles.TabStop = false;
-			// 
 			// pnProgressStageSecurity
 			// 
 			this.pnProgressStageSecurity.Controls.Add(this.pbProgressStageSecurity);
@@ -180,16 +158,6 @@
 			this.pnProgressStageSecurity.TabIndex = 20;
 			this.pnProgressStageSecurity.Visible = false;
 			// 
-			// pbProgressStageSecurity
-			// 
-			this.pbProgressStageSecurity.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.pbProgressStageSecurity.Image = global::SalesLibraries.CommonGUI.Properties.Resources.ProgressStartRegularSecurity;
-			this.pbProgressStageSecurity.Location = new System.Drawing.Point(0, 0);
-			this.pbProgressStageSecurity.Name = "pbProgressStageSecurity";
-			this.pbProgressStageSecurity.Size = new System.Drawing.Size(663, 50);
-			this.pbProgressStageSecurity.TabIndex = 25;
-			this.pbProgressStageSecurity.TabStop = false;
-			// 
 			// pnProgressStageWebConnection
 			// 
 			this.pnProgressStageWebConnection.Controls.Add(this.pbProgressStageWebSite);
@@ -200,37 +168,6 @@
 			this.pnProgressStageWebConnection.Size = new System.Drawing.Size(663, 70);
 			this.pnProgressStageWebConnection.TabIndex = 19;
 			this.pnProgressStageWebConnection.Visible = false;
-			// 
-			// pbProgressStageWebSite
-			// 
-			this.pbProgressStageWebSite.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.pbProgressStageWebSite.Image = global::SalesLibraries.CommonGUI.Properties.Resources.ProgressStartRegularWebConnection;
-			this.pbProgressStageWebSite.Location = new System.Drawing.Point(0, 0);
-			this.pbProgressStageWebSite.Name = "pbProgressStageWebSite";
-			this.pbProgressStageWebSite.Size = new System.Drawing.Size(663, 50);
-			this.pbProgressStageWebSite.TabIndex = 24;
-			this.pbProgressStageWebSite.TabStop = false;
-			// 
-			// pbHeaderRegular
-			// 
-			this.pbHeaderRegular.Dock = System.Windows.Forms.DockStyle.Top;
-			this.pbHeaderRegular.Image = global::SalesLibraries.CommonGUI.Properties.Resources.ProgressStartRegularHeader;
-			this.pbHeaderRegular.Location = new System.Drawing.Point(10, 10);
-			this.pbHeaderRegular.Name = "pbHeaderRegular";
-			this.pbHeaderRegular.Size = new System.Drawing.Size(713, 95);
-			this.pbHeaderRegular.TabIndex = 22;
-			this.pbHeaderRegular.TabStop = false;
-			// 
-			// pbBrand
-			// 
-			this.pbBrand.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.pbBrand.Image = global::SalesLibraries.CommonGUI.Properties.Resources.ProgressStartRegularBrand;
-			this.pbBrand.Location = new System.Drawing.Point(448, 329);
-			this.pbBrand.Name = "pbBrand";
-			this.pbBrand.Size = new System.Drawing.Size(211, 35);
-			this.pbBrand.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-			this.pbBrand.TabIndex = 23;
-			this.pbBrand.TabStop = false;
 			// 
 			// pnMinimized
 			// 
@@ -251,16 +188,6 @@
 			this.pnSeparator.Name = "pnSeparator";
 			this.pnSeparator.Size = new System.Drawing.Size(5, 45);
 			this.pnSeparator.TabIndex = 27;
-			// 
-			// pbHeaderMinimized
-			// 
-			this.pbHeaderMinimized.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.pbHeaderMinimized.Image = global::SalesLibraries.CommonGUI.Properties.Resources.ProgressStartMinimizedRegularStart;
-			this.pbHeaderMinimized.Location = new System.Drawing.Point(35, 5);
-			this.pbHeaderMinimized.Name = "pbHeaderMinimized";
-			this.pbHeaderMinimized.Size = new System.Drawing.Size(693, 45);
-			this.pbHeaderMinimized.TabIndex = 25;
-			this.pbHeaderMinimized.TabStop = false;
 			// 
 			// circularProgressMinimized
 			// 
@@ -331,6 +258,79 @@
 			this.styleController.AppearanceReadOnly.Font = new System.Drawing.Font("Arial", 9.75F);
 			this.styleController.AppearanceReadOnly.Options.UseFont = true;
 			// 
+			// pbCancelRegular
+			// 
+			this.pbCancelRegular.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.pbCancelRegular.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.pbCancelRegular.Image = global::SalesLibraries.CommonGUI.Properties.Resources.ProgressStartCancel;
+			this.pbCancelRegular.Location = new System.Drawing.Point(696, 2);
+			this.pbCancelRegular.Name = "pbCancelRegular";
+			this.pbCancelRegular.Size = new System.Drawing.Size(32, 32);
+			this.pbCancelRegular.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+			this.pbCancelRegular.TabIndex = 0;
+			this.pbCancelRegular.TabStop = false;
+			this.pbCancelRegular.Click += new System.EventHandler(this.pbCancel_Click);
+			// 
+			// pbProgressStageFiles
+			// 
+			this.pbProgressStageFiles.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.pbProgressStageFiles.Image = global::SalesLibraries.CommonGUI.Properties.Resources.ProgressStartRegularFiles;
+			this.pbProgressStageFiles.Location = new System.Drawing.Point(0, 0);
+			this.pbProgressStageFiles.Name = "pbProgressStageFiles";
+			this.pbProgressStageFiles.Size = new System.Drawing.Size(663, 50);
+			this.pbProgressStageFiles.TabIndex = 26;
+			this.pbProgressStageFiles.TabStop = false;
+			// 
+			// pbProgressStageSecurity
+			// 
+			this.pbProgressStageSecurity.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.pbProgressStageSecurity.Image = global::SalesLibraries.CommonGUI.Properties.Resources.ProgressStartRegularSecurity;
+			this.pbProgressStageSecurity.Location = new System.Drawing.Point(0, 0);
+			this.pbProgressStageSecurity.Name = "pbProgressStageSecurity";
+			this.pbProgressStageSecurity.Size = new System.Drawing.Size(663, 50);
+			this.pbProgressStageSecurity.TabIndex = 25;
+			this.pbProgressStageSecurity.TabStop = false;
+			// 
+			// pbProgressStageWebSite
+			// 
+			this.pbProgressStageWebSite.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.pbProgressStageWebSite.Image = global::SalesLibraries.CommonGUI.Properties.Resources.ProgressStartRegularWebConnection;
+			this.pbProgressStageWebSite.Location = new System.Drawing.Point(0, 0);
+			this.pbProgressStageWebSite.Name = "pbProgressStageWebSite";
+			this.pbProgressStageWebSite.Size = new System.Drawing.Size(663, 50);
+			this.pbProgressStageWebSite.TabIndex = 24;
+			this.pbProgressStageWebSite.TabStop = false;
+			// 
+			// pbHeaderRegular
+			// 
+			this.pbHeaderRegular.Dock = System.Windows.Forms.DockStyle.Top;
+			this.pbHeaderRegular.Image = global::SalesLibraries.CommonGUI.Properties.Resources.ProgressStartRegularHeader;
+			this.pbHeaderRegular.Location = new System.Drawing.Point(10, 10);
+			this.pbHeaderRegular.Name = "pbHeaderRegular";
+			this.pbHeaderRegular.Size = new System.Drawing.Size(713, 95);
+			this.pbHeaderRegular.TabIndex = 22;
+			this.pbHeaderRegular.TabStop = false;
+			// 
+			// pbBrand
+			// 
+			this.pbBrand.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.pbBrand.Image = global::SalesLibraries.CommonGUI.Properties.Resources.ProgressStartRegularBrand;
+			this.pbBrand.Location = new System.Drawing.Point(436, 321);
+			this.pbBrand.Name = "pbBrand";
+			this.pbBrand.Size = new System.Drawing.Size(230, 49);
+			this.pbBrand.TabIndex = 23;
+			this.pbBrand.TabStop = false;
+			// 
+			// pbHeaderMinimized
+			// 
+			this.pbHeaderMinimized.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.pbHeaderMinimized.Image = global::SalesLibraries.CommonGUI.Properties.Resources.ProgressStartMinimizedRegularStart;
+			this.pbHeaderMinimized.Location = new System.Drawing.Point(35, 5);
+			this.pbHeaderMinimized.Name = "pbHeaderMinimized";
+			this.pbHeaderMinimized.Size = new System.Drawing.Size(693, 45);
+			this.pbHeaderMinimized.TabIndex = 25;
+			this.pbHeaderMinimized.TabStop = false;
+			// 
 			// FormStart
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -348,22 +348,21 @@
 			this.TopMost = true;
 			this.Shown += new System.EventHandler(this.FormProgress_Shown);
 			this.panelEx.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.pbCancelRegular)).EndInit();
 			this.pnNormal.ResumeLayout(false);
-			this.pnNormal.PerformLayout();
 			this.pnProgressStages.ResumeLayout(false);
 			this.pnProgressStageFiles.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.pbProgressStageFiles)).EndInit();
 			this.pnProgressStageSecurity.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.pbProgressStageSecurity)).EndInit();
 			this.pnProgressStageWebConnection.ResumeLayout(false);
+			this.pnMinimized.ResumeLayout(false);
+			this.contextMenuStrip.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.pbCancelRegular)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.pbProgressStageFiles)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.pbProgressStageSecurity)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pbProgressStageWebSite)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pbHeaderRegular)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pbBrand)).EndInit();
-			this.pnMinimized.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.pbHeaderMinimized)).EndInit();
-			this.contextMenuStrip.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
 			this.ResumeLayout(false);
 
         }
