@@ -33,7 +33,10 @@
 		public $viewerFormat;
 		public $contentView;
 
+		/** @var  PreviewAction[] */
 		public $dialogActions;
+
+		/** @var  PreviewAction[] */
 		public $contextActions;
 
 		protected $link;

@@ -172,10 +172,9 @@
 									top: getMenuPosition(menu, pointY, 'height', 'scrollTop')
 								})
 								.off('click')
-								.on('click', 'a', function ()
+								.on('click', 'a.regular-open', function ()
 								{
 									menu.hide();
-
 									var tag = $(this).find('.service-data .tag').text();
 									switch (tag)
 									{
@@ -413,7 +412,7 @@
 				form = document.createElement("form");
 				form.setAttribute("id", "form-download-file");
 				form.setAttribute("method", "post");
-				form.setAttribute("action", 'preview/downloadFile');
+				form.setAttribute("action", window.BaseUrl + 'preview/downloadFile');
 				form._submit_function_ = form.submit;
 
 				var hiddenField = document.createElement("input");

@@ -67,7 +67,7 @@
 							form = document.createElement("form");
 							form.setAttribute("id", "form-download-folder");
 							form.setAttribute("method", "post");
-							form.setAttribute("action", 'preview/downloadFolder');
+							form.setAttribute("action", window.BaseUrl + 'preview/downloadFolder');
 							form._submit_function_ = form.submit;
 
 							var hiddenField = document.createElement("input");

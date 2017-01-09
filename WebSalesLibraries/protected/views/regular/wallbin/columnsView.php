@@ -28,7 +28,7 @@
 	<style>
 		#page-<? echo $libraryPage->id; ?> .content-columns-container {
 			border-collapse: separate;
-			border-spacing: 0 <? echo (max($style->column1Style->padding,$style->column2Style->padding,$style->column3Style->padding)*0.6).'px';?>;
+			border-spacing: 0 <? echo (max($style->column1Style->padding,$style->column2Style->padding,$style->column3Style->padding)* 1.2).'px';?>;
 		}
 
 		#page-<? echo $libraryPage->id; ?> .page-column {

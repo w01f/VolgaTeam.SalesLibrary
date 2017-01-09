@@ -110,6 +110,9 @@
 				'icomoon' => array(
 					'version' => 1
 				),
+				'froala_editor' => array(
+					'key' => 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+				),
 			),
 			'components' => array(
 				'db' => array(

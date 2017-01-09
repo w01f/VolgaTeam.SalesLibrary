@@ -351,6 +351,7 @@
 				           ) aggr where aggr.link_id=link.id) as total_views';
 
 			$whereConditions = array(
+				'link.type<>6',
 				$contentCondition,
 				$baseLinksCondition,
 				$libraryCondition,

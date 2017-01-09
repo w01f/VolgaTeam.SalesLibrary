@@ -119,7 +119,6 @@
 			/** @var  $shortcut PageContentShortcut */
 			$shortcut = $shortcutRecord->getModel($this->isPhone, $parameters);
 
-
 			switch ($shortcut->type)
 			{
 				case 'gridbundle':

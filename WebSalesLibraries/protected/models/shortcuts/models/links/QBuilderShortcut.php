@@ -5,13 +5,20 @@
 	 */
 	class QBuilderShortcut extends PageContentShortcut
 	{
+		public $showLinkCart;
+
 		/**
-		 * @param $linkRecord
+		 * @param ShortcutLinkRecord $linkRecord
 		 * @param $isPhone boolean
+		 * @param $parameters array
 		 */
-		public function __construct($linkRecord, $isPhone)
+		public function __construct($linkRecord, $isPhone, $parameters = null)
 		{
 			parent::__construct($linkRecord, $isPhone);
+			if (isset($parameters) && array_key_exists('showLinkCart', $parameters))
+				$this->showLinkCart = filter_var($parameters['showLinkCart'], FILTER_VALIDATE_BOOLEAN);
+			else
+				$this->showLinkCart = false;
 		}
 
 		/**

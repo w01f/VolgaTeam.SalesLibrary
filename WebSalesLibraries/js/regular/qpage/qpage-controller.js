@@ -71,6 +71,10 @@
 					event.gesture.stopPropagation();
 					event.gesture.preventDefault();
 				});
+				container.find('.url').hammer().on('tap', function (event)
+				{
+					event.gesture.stopPropagation();
+				});
 
 
 				container.find('.folder-link').on('click', function (event)
@@ -124,6 +128,10 @@
 					return false;
 				});
 
+				container.find('.url').off('click.open').on('click.open', function (event)
+				{
+					event.stopPropagation();
+				});
 				container.find('.url-internal').off('contextmenu').on('contextmenu', function (event)
 				{
 					if (checkEmail())

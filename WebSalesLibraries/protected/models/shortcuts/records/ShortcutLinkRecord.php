@@ -44,9 +44,9 @@
 
 		public function getUniqueId()
 		{
-			/** @var  $groupRecord ShortcutGroupRecord*/
+			/** @var  $groupRecord ShortcutGroupRecord */
 			$groupRecord = ShortcutGroupRecord::model()->findByPk($this->id_group);
-			/** @var  $parentRecord ShortcutLinkRecord*/
+			/** @var  $parentRecord ShortcutLinkRecord */
 			$parentRecord = ShortcutLinkRecord::model()->findByPk($this->id_parent);
 			return sprintf('group%s-parent%s-link%s', $groupRecord->order, isset($parentRecord) ? $parentRecord->order : '', $this->order);
 		}
@@ -75,24 +75,27 @@
 				case 'window':
 					return new WindowShortcut($this, $isPhone);
 				case 'page':
-					$shortcut =  new LibraryPageShortcut($this, $isPhone);
-					$needToUpdate = false;
-					$savedPageViewTypeTag = sprintf('PageViewType-%s', $shortcut->library->id);
-					if (isset($parameters) && array_key_exists('pageViewType', $parameters))
+					$shortcut = new LibraryPageShortcut($this, $isPhone);
+					if (isset($shortcut->library->id))
 					{
-						$shortcut->pageViewType = $parameters['pageViewType'];
-						$cookie = new CHttpCookie($savedPageViewTypeTag, $shortcut->pageViewType);
-						$cookie->expire = time() + (60 * 60 * 24 * 7);
-						Yii::app()->request->cookies[$savedPageViewTypeTag] = $cookie;
-						$needToUpdate = true;
+						$needToUpdate = false;
+						$savedPageViewTypeTag = sprintf('PageViewType-%s', $shortcut->library->id);
+						if (isset($parameters) && array_key_exists('pageViewType', $parameters))
+						{
+							$shortcut->pageViewType = $parameters['pageViewType'];
+							$cookie = new CHttpCookie($savedPageViewTypeTag, $shortcut->pageViewType);
+							$cookie->expire = time() + (60 * 60 * 24 * 7);
+							Yii::app()->request->cookies[$savedPageViewTypeTag] = $cookie;
+							$needToUpdate = true;
+						}
+						else if (isset(Yii::app()->request->cookies[$savedPageViewTypeTag]))
+						{
+							$shortcut->pageViewType = Yii::app()->request->cookies[$savedPageViewTypeTag]->value;
+							$needToUpdate = true;
+						}
+						if ($needToUpdate)
+							$shortcut->updateAction();
 					}
-					else if (isset(Yii::app()->request->cookies[$savedPageViewTypeTag]))
-					{
-						$shortcut->pageViewType = Yii::app()->request->cookies[$savedPageViewTypeTag]->value;
-						$needToUpdate = true;
-					}
-					if ($needToUpdate)
-						$shortcut->updateAction();
 					return $shortcut;
 				case 'quicklist':
 					return new QuickListShortcut($this, $isPhone);
@@ -107,7 +110,7 @@
 					if (!$isPhone)
 					{
 						$savedBundleModeTagName = $this->getUniqueId();
-						$parametersHaveBeenSet =isset($parameters);
+						$parametersHaveBeenSet = isset($parameters);
 
 						if ($parametersHaveBeenSet && array_key_exists('pageViewType', $parameters))
 						{
@@ -180,7 +183,7 @@
 				case 'searchapp':
 					return new SearchAppShortcut($this, $isPhone);
 				case 'qbuilder':
-					return new QBuilderShortcut($this, $isPhone);
+					return new QBuilderShortcut($this, $isPhone, $parameters);
 				case 'quizzes':
 					return new QuizzesShortcut($this, $isPhone);
 				case 'favorites':
@@ -208,14 +211,14 @@
 
 			$withArray = array();
 			$withArray['group'] = array(
-					'select' => false,
-					'condition' => "group.order = " . $groupOrder
-					);
+				'select' => false,
+				'condition' => "group.order = " . $groupOrder
+			);
 			if ($parentOrder != '')
 				$withArray['parent'] = array(
-						'select' => false,
-						'condition' => "parent.order = " . $parentOrder,
-					);
+					'select' => false,
+					'condition' => "parent.order = " . $parentOrder,
+				);
 
 			/** @var $record ShortcutLinkRecord */
 			$record = self::model()

@@ -38,6 +38,11 @@
 				$this->contextActions[] = $action;
 
 				$action = new PreviewAction();
+				$action->tag = 'linkcart-all-window';
+				$action->text = 'Add all links in this window…';
+				$this->contextActions[] = $action;
+
+				$action = new PreviewAction();
 				$action->tag = 'quicksite';
 				$action->text = 'Email this Folder Link';
 				$this->contextActions[] = $action;

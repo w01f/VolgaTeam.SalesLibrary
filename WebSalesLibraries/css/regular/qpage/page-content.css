@@ -48,3 +48,13 @@
 	padding-left: 0;
 }
 
+#page-links-container .nav > li > a:focus
+{
+	background-color: #FFFFFF;
+}
+
+#page-links-container .nav > li > a:focus:hover
+{
+	background-color: #EEEEEE;
+}
+

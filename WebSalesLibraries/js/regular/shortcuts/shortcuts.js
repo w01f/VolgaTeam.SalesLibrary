@@ -109,7 +109,7 @@
 			return true;
 		};
 
-		this.openStaticShortcutByType = function (type)
+		this.openStaticShortcutByType = function (type, parameters)
 		{
 			$.ajax({
 				type: "POST",
@@ -127,7 +127,7 @@
 				},
 				success: function (msg)
 				{
-					that.openShortcutByMenuItemData($('<div>' + msg + '</div>'));
+					that.openShortcutByMenuItemData($('<div>' + msg + '</div>'), parameters);
 				},
 				error: function ()
 				{

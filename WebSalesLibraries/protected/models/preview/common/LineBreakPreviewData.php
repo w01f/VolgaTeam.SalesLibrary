@@ -28,6 +28,11 @@
 				$action->tag = 'linkcart';
 				$action->text = 'Add this Line Break to my QuickSites Cart';
 				$this->contextActions[] = $action;
+
+				$action = new PreviewAction();
+				$action->tag = 'linkcart-all-window';
+				$action->text = 'Add all links in this window…';
+				$this->contextActions[] = $action;
 			}
 		}
 	}

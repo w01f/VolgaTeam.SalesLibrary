@@ -162,7 +162,7 @@
 					"orderable": data.dataOptions.reorderSourceField == undefined,
 					"title": "Type",
 					"class": "centered allow-reorder",
-					"width": "50px",
+					"width": "70px",
 					"render": cellRenderer
 				});
 			columnSettings.push({

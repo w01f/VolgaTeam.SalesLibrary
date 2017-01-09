@@ -63,10 +63,6 @@
 					event.gesture.stopPropagation();
 					event.gesture.preventDefault();
 				});
-				container.find('.url').hammer().on('tap', function (event)
-				{
-					event.gesture.stopPropagation();
-				});
 
 				container.find('.folder-link').on('click', function (event)
 				{

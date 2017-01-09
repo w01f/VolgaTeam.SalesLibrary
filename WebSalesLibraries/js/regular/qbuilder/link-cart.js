@@ -102,7 +102,7 @@
 						succesDescription = 'Link was added to Link Cart';
 					var modalDialog = new $.SalesPortal.ModalDialog({
 						title: 'Success!',
-						logo: window.BaseUrl + 'images/qpages/add.png',
+						logo: window.BaseUrl + 'images/qpages/add-complete.png',
 						description: succesDescription,
 						buttons: [
 							{
@@ -112,7 +112,7 @@
 								clickHandler: function ()
 								{
 									modalDialog.close();
-									$.SalesPortal.ShortcutsManager.openStaticShortcutByType('qbuilder');
+									$.SalesPortal.ShortcutsManager.openStaticShortcutByType('qbuilder', {showLinkCart: true});
 								}
 							},
 							{
@@ -140,7 +140,7 @@
 		{
 			$.ajax({
 				type: "POST",
-				url: window.BaseUrl + "qBuilder/addLinksToCart",
+				url: window.BaseUrl + "qBuilder/prepareFolderToAddToLinkCart",
 				data: {
 					folderId: folderId
 				},
@@ -152,35 +152,52 @@
 				{
 					$.SalesPortal.Overlay.hide();
 				},
-				success: function ()
+				success: function (msg)
 				{
-					var modalDialog = new $.SalesPortal.ModalDialog({
-						title: 'Success!',
-						logo: window.BaseUrl + 'images/qpages/add.png',
-						description: 'Links were added to Link Cart',
-						buttons: [
-							{
-								tag: 'open_qbuilder',
-								title: 'Open QuickSites',
-								width: 150,
-								clickHandler: function ()
-								{
-									modalDialog.close();
-									$.SalesPortal.ShortcutsManager.openStaticShortcutByType('qbuilder');
-								}
-							},
-							{
-								tag: 'close',
-								title: 'Return to Site',
-								width: 150,
-								clickHandler: function ()
-								{
-									modalDialog.close();
-								}
-							}
-						]
+					var prepareLinkCartContent = $(msg);
+
+					var folderName = prepareLinkCartContent.find('.service-data .folder-name').text();
+
+					var formLogger = new $.SalesPortal.FormLogger();
+					formLogger.init({
+						logObject: {
+							name: folderName
+						},
+						formContent: prepareLinkCartContent
 					});
-					modalDialog.show();
+
+					prepareLinkCartContent.find('#prepare-link-cart-select-links').on('change', function ()
+					{
+						prepareLinkCartContent.find('.link-item.link input').prop('checked', $(this).prop('checked'));
+					});
+					prepareLinkCartContent.find('#prepare-link-cart-select-linebreaks').on('change', function ()
+					{
+						prepareLinkCartContent.find('.link-item.line-break input').prop('checked', $(this).prop('checked'));
+					});
+
+					prepareLinkCartContent.find('.btn.accept-button').on('click.preview', function ()
+					{
+						var selectedLinkIds = [];
+						prepareLinkCartContent.find('.link-item input:checked').each(function ()
+						{
+							selectedLinkIds.push($(this).val());
+						});
+						$.fancybox.close();
+						that.addLinks(selectedLinkIds);
+					});
+					prepareLinkCartContent.find('.btn.cancel-button').on('click.preview', function ()
+					{
+						$.fancybox.close();
+					});
+					$.fancybox({
+						content: prepareLinkCartContent,
+						width: 430,
+						scrolling: 'no',
+						autoSize: false,
+						autoHeight: true,
+						openEffect: 'none',
+						closeEffect: 'none'
+					});
 				},
 				error: function ()
 				{

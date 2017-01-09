@@ -36,7 +36,7 @@
 	{
 		/**
 		 * @param string $className
-		 * @return FolderRecord
+		 * @return CActiveRecord
 		 */
 		public static function model($className = __CLASS__)
 		{
@@ -62,22 +62,19 @@
 		}
 
 		/**
-		 * @param $folderId
-		 * @return array
+		 * @return LinkRecord[]
 		 */
-		public function getChildLinkIds($folderId)
+		public function getChildLinkIds()
 		{
-			$linkIds = array();
 			$criteria = new CDbCriteria;
 			$criteria->condition = 't.id=:id and links.id_parent_link is null and links.type<>9 and no_share=0 and is_restricted=0';
-			$criteria->params = array(':id' => $folderId);
+			$criteria->params = array(':id' => $this->id);
 			$criteria->order = 'links.order ASC';
 			/** @var FolderRecord $result */
 			$result = $this->with('links')->find($criteria);
 			if (isset($result))
-				foreach ($result->links as $link)
-					$linkIds[] = $link->id;
-			return $linkIds;
+				return $result->links;
+			return array();
 		}
 
 		/**

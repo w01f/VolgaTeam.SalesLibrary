@@ -41,7 +41,7 @@
 						$record['tooltip'] = $record['tooltip'] . PHP_EOL . \Yii::app()->params['tooltips']['wallbin'][$formatKey];
 
 					$record['date'] = array(
-						'display' => date(Yii::app()->params['outputDateFormat'], strtotime($linkRecord['link_date'])),
+						'display' => $type != 6 ? date(Yii::app()->params['outputDateFormat'], strtotime($linkRecord['link_date'])) : '',
 						'value' => strtotime($linkRecord['link_date'])
 					);
 
@@ -204,7 +204,7 @@
 				            from tbl_statistic_qpage s_q
 				              join tbl_link_qpage l_q on l_q.id_qpage = s_q.id_qpage
 				            group by l_q.id_link
-				           ) aggr where aggr.link_id=link.id) as total_views',
+				           ) aggr where aggr.link_id=link.id and link.type<>6) as total_views',
 			);
 			$queryFields = array_merge($queryFields, $customQueryFields);
 
@@ -214,8 +214,7 @@
 			$joinParts = array_merge($customJoin, $joinParts);
 
 			$whereConditions = array('AND',
-				'link.is_preview_not_ready=0',
-				'link.type<>6');
+				'link.is_preview_not_ready=0');
 			$includeAppLinks = Yii::app()->browser->getBrowser() == Browser::BROWSER_EO;
 			if ($includeAppLinks)
 				$whereConditions[] = 'link.type<>15';

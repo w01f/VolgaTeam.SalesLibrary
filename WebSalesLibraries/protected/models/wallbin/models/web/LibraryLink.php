@@ -185,9 +185,10 @@
 		}
 
 		/**
+		 * @param $backColor string
 		 * @return string
 		 */
-		public function getWidget()
+		public function getWidget($backColor = null)
 		{
 			if (isset($this->parentLinkId) && isset($this->originalFormat))
 			{
@@ -250,7 +251,8 @@
 					}
 					if (isset($fileName))
 					{
-						$backColor = $this->parent->windowBackColor;
+						if (!isset($backColor))
+							$backColor = $this->parent->windowBackColor;
 						$colorPrefix = \Utils::isColorLight($backColor) ? 'white' : 'black';
 						return base64_encode(file_get_contents(realpath(\Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'folder-file-icons' . DIRECTORY_SEPARATOR . $colorPrefix . DIRECTORY_SEPARATOR . $fileName));
 					}
@@ -278,7 +280,8 @@
 				}
 				if (!isset($widget) && $this->isFolder)
 				{
-					$backColor = $this->parent->windowBackColor;
+					if (!isset($backColor))
+						$backColor = $this->parent->windowBackColor;
 					$colorPrefix = \Utils::isColorLight($backColor) ? 'white' : 'black';
 					$widget = base64_encode(file_get_contents(realpath(\Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'folder-file-icons' . DIRECTORY_SEPARATOR . $colorPrefix . DIRECTORY_SEPARATOR . 'folder.png'));
 				}

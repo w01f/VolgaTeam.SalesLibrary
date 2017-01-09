@@ -67,6 +67,7 @@
 
 			$action = new PreviewAction();
 			$action->tag = 'open';
+			$action->url = $this->link->isDirectUrl ? $this->url : $action->url;
 			$action->text = 'Open this URL Link';
 			$this->contextActions[] = $action;
 

@@ -211,19 +211,18 @@
 			Yii::app()->end();
 		}
 
+		public function actionPrepareFolderToAddToLinkCart()
+		{
+			$folderId = Yii::app()->request->getPost('folderId');
+			$folderRecord = FolderRecord::model()->findByPk($folderId);
+			$this->renderPartial('prepareLinkCart', array('folder' => $folderRecord), false, true);
+		}
+
 		public function actionAddLinksToCart()
 		{
 			$linkIds = Yii::app()->request->getPost('linkIds');
-			$folderId = Yii::app()->request->getPost('folderId');
 			$userId = UserIdentity::getCurrentUserId();
-			if (isset($folderId))
-			{
-				$linkIds = FolderRecord::model()->getChildLinkIds($folderId);
-				if (isset($linkIds))
-					foreach ($linkIds as $linkId)
-						UserLinkCartRecord::addLink($userId, $linkId);
-			}
-			else if (isset($linkIds))
+			if (isset($linkIds))
 				foreach ($linkIds as $linkId)
 					UserLinkCartRecord::addLink($userId, $linkId);
 			Yii::app()->end();

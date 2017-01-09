@@ -67,13 +67,13 @@
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/touch-swipe/jquery.touchSwipe.min.js?' . Yii::app()->params['version'], CClientScript::POS_END);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/cubeportfolio/js/jquery.cubeportfolio.min.js?' . Yii::app()->params['version'], CClientScript::POS_END);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/carousel/java/FWDUltimate3DCarousel.js?' . Yii::app()->params['version'], CClientScript::POS_END);
-	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/froala-editor/js/froala_editor.min.js', CClientScript::POS_END);
-	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/froala-editor/js/plugins/tables.min.js', CClientScript::POS_END);
-	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/froala-editor/js/plugins/lists.min.js', CClientScript::POS_END);
-	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/froala-editor/js/plugins/colors.min.js', CClientScript::POS_END);
-	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/froala-editor/js/plugins/font_family.min.js', CClientScript::POS_END);
-	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/froala-editor/js/plugins/font_size.min.js', CClientScript::POS_END);
-	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/froala-editor/js/plugins/block_styles.min.js', CClientScript::POS_END);
+	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/froala-editor/js/froala_editor.min.js', CClientScript::POS_BEGIN);
+	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/froala-editor/js/plugins/tables.min.js', CClientScript::POS_BEGIN);
+	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/froala-editor/js/plugins/lists.min.js', CClientScript::POS_BEGIN);
+	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/froala-editor/js/plugins/colors.min.js', CClientScript::POS_BEGIN);
+	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/froala-editor/js/plugins/font_family.min.js', CClientScript::POS_BEGIN);
+	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/froala-editor/js/plugins/font_size.min.js', CClientScript::POS_BEGIN);
+	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/froala-editor/js/plugins/block_styles.min.js', CClientScript::POS_BEGIN);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/star-rating/js/star-rating.min.js', CClientScript::POS_END);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/combobox/js/bootstrap-select.min.js', CClientScript::POS_END);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/scroll-tabs/js/dragdivscroll.js?' . Yii::app()->params['version'], CClientScript::POS_END);
@@ -158,3 +158,6 @@
 		margin-right: <? echo Yii::app()->params['menu']['IconSeparation'];?>px;
 	}
 </style>
+<script type="text/javascript">
+	$.Editable.DEFAULTS.key = '<?echo Yii::app()->params['froala_editor']['key'];?>';
+</script>
