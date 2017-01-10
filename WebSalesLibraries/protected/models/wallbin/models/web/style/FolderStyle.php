@@ -9,6 +9,7 @@
 		public $showRegularHeader;
 
 		public $showCustomTitle;
+		public $showWidget;
 		public $hideTopFoldersCustomTitle;
 		public $textAlign;
 		public $textColor;
@@ -28,6 +29,9 @@
 			$queryResult = $xpath->query('.//ShowTitle', $contextNode);
 			$folderStyle->showCustomTitle = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : $folderStyle->showCustomTitle;
 			$folderStyle->showRegularHeader &= !$folderStyle->showCustomTitle;
+
+			$queryResult = $xpath->query('.//ShowWidget', $contextNode);
+			$folderStyle->showWidget = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : $folderStyle->showWidget;
 
 			$queryResult = $xpath->query('.//HideWindow1Title', $contextNode);
 			$folderStyle->hideTopFoldersCustomTitle = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : $folderStyle->hideTopFoldersCustomTitle;
@@ -56,6 +60,7 @@
 			$folderStyle = new FolderStyle();
 			$folderStyle->showRegularHeader = true;
 			$folderStyle->showCustomTitle = false;
+			$folderStyle->showWidget = false;
 			$folderStyle->hideTopFoldersCustomTitle = false;
 			$folderStyle->textAlign = 'left';
 			$folderStyle->textColor = null;

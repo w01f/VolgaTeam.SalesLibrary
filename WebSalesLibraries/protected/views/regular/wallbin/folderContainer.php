@@ -54,9 +54,27 @@
                 color: <? echo (isset($style->textColor)?('#'.$style->textColor):(isset($folder->banner) && $folder->banner->isEnabled ? $folder->banner->foreColor : $folder->headerForeColor)); ?>;
                 background-color: <? echo (isset($style->backColor)?('#'.$style->backColor):$folder->headerBackColor); ?>;
             }
+
+            .folder-header-container.custom-title img.folder-widget {
+                height: 32px;
+            }
+
+            .folder-header-container.custom-title span.folder-header {
+                line-height: 32px;
+            }
         </style>
         <div class="folder-header-container custom-title" id="folder<? echo $folder->id; ?>">
-			<? echo $folder->name; ?>
+			<? if ($style->showWidget): ?>
+				<? $widget = $folder->getWidget(); ?>
+				<? if (isset($widget)): ?>
+                    <img class="folder-widget" src="data:image/png;base64,<? echo $widget; ?>">
+                    <span class="folder-header"><? echo $folder->name; ?></span>
+				<? else: ?>
+					<? echo $folder->name; ?>
+				<? endif; ?>
+			<? else: ?>
+				<? echo $folder->name; ?>
+			<? endif; ?>
         </div>
 	<? endif; ?>
 	<? echo $this->renderFile(Yii::getPathOfAlias('application.views.regular.wallbin') . '/folderLinks.php', array('folder' => $folder), true); ?>
