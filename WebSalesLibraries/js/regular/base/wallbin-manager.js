@@ -210,11 +210,12 @@
 						success: function (msg)
 						{
 							folderLinkContent.html(msg);
-
 							that.assignLinkEvents(folderLinkContent);
 							folderLinkContent.show("blind", {
 								direction: "vertical"
 							}, 500);
+							linkObject.children('.link-text-container').find('.base-image').hide();
+							linkObject.children('.link-text-container').find('.alternative-image').show();
 						},
 						error: function ()
 						{
@@ -225,10 +226,13 @@
 					});
 				}
 				else
+				{
 					folderLinkContent.show("blind", {
 						direction: "vertical"
 					}, 500);
-
+					linkObject.children('.link-text-container').find('.base-image').hide();
+					linkObject.children('.link-text-container').find('.alternative-image').show();
+				}
 			}
 			else
 			{
@@ -236,6 +240,8 @@
 					direction: "vertical"
 				}, 500);
 				linkObject.removeClass('active').blur();
+				linkObject.children('.link-text-container').find('.alternative-image').hide();
+				linkObject.children('.link-text-container').find('.base-image').show();
 			}
 		};
 

@@ -61,7 +61,7 @@
 		?>
 	<? else: ?>
 		<?
-		$widget = $link->getWidget();
+		$widgetData = $link->getWidgetData();
 		$isLinkStaticFontSize = false;
 		if ($isLineBreak)
 		{
@@ -71,7 +71,7 @@
 				$color = $link->parent->windowForeColor;
 			else
 				$color = '#000000';
-			$displayWidget = !(isset($disableWidget) && $disableWidget) && isset($widget) && $widget != '';
+			$displayWidget = !(isset($disableWidget) && $disableWidget) && isset($widgetData['base']) && $widgetData['base'] != '';
 			$linkFontProperties = 'font-family: ' . $link->lineBreakProperties->font->name . '; '
 				. 'font-size: ' . $link->lineBreakProperties->font->size . 'pt; '
 				. 'font-weight: ' . ($link->lineBreakProperties->font->isBold ? ' bold' : ' normal') . '; '
@@ -83,7 +83,7 @@
 		}
 		else
 		{
-			$displayWidget = isset($link->files) ? $link->parent->displayLinkWidgets : (!(isset($disableWidget) && $disableWidget) && isset($widget) && $widget != '');
+			$displayWidget = isset($link->files) ? $link->parent->displayLinkWidgets : (!(isset($disableWidget) && $disableWidget) && isset($widgetData['base']) && $widgetData['base'] != '');
 
 			$isDefaultFont = true;
 			if ($link->extendedProperties->isSpecialFormat && isset($link->extendedProperties->font))
@@ -113,32 +113,32 @@
 				. (!$link->extendedProperties->isTextWordWrap ? 'white-space: nowrap; ' : '');
 		}
 		?>
-		<div
-			class="link-text-container<? echo $isLinkStaticFontSize != true ? ' link-text-container-sized' : ''; ?>"
-			<? if (isset($tooltip)): ?>title="<? echo $tooltip; ?>"<? endif; ?>
-			style="<? echo $linkFontProperties; ?>"
-		>
+        <div class="link-text-container<? echo $isLinkStaticFontSize != true ? ' link-text-container-sized' : ''; ?>"
+		     <? if (isset($tooltip)): ?>title="<? echo $tooltip; ?>"<? endif; ?>
+             style="<? echo $linkFontProperties; ?>">
 			<? if ($displayWidget): ?>
-				<div
-					class="link-widget<? echo !$link->extendedProperties->isTextWordWrap ? ' link-widget-no-wrap' : ' link-widget-wrap'; ?>">
-					<img src="data:image/png;base64,<? echo $widget; ?>">
-				</div>
+                <div class="link-widget<? echo !$link->extendedProperties->isTextWordWrap ? ' link-widget-no-wrap' : ' link-widget-wrap'; ?>">
+                    <img class="base-image" src="data:image/png;base64,<? echo $widgetData['base']; ?>">
+					<? if ($link->isFolder && isset($widgetData['alternative'])): ?>
+                        <img class="alternative-image"
+                             src="data:image/png;base64,<? echo $widgetData['alternative']; ?>" style="display: none;">
+					<? endif; ?>
+                </div>
 			<? endif; ?>
-			<div
-				class="link-text<? echo !$link->extendedProperties->isTextWordWrap ? ' link-text-no-wrap' : ' link-text-wrap'; ?>">
+            <div class="link-text<? echo !$link->extendedProperties->isTextWordWrap ? ' link-text-no-wrap' : ' link-text-wrap'; ?>">
 				<? echo nl2br($link->name); ?>
 				<? if (isset($link->extendedProperties->note) && $link->extendedProperties->note != ""): ?>
-					<span class="link-note">
+                    <span class="link-note">
 						<? echo ' - ' . $link->extendedProperties->note; ?>
 					</span>
 				<? endif; ?>
-			</div>
-		</div>
+            </div>
+        </div>
 	<? endif; ?>
 	<? if ($link->isFolder): ?>
-		<div class="folder-link-content" id="folder-link-content<? echo $link->id; ?>"></div>
+        <div class="folder-link-content" id="folder-link-content<? echo $link->id; ?>"></div>
 	<? endif; ?>
-	<div class="service-data">
+    <div class="service-data">
 		<? echo $link->getLinkData(); ?>
-	</div>
+    </div>
 </a>

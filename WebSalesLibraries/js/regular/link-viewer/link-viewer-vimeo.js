@@ -152,7 +152,7 @@
 				title: viewerData.name,
 				content: '<iframe ' +
 				'height = "480" width="680" frameborder="0" allowfullscreen ' +
-				'src="https://player.vimeo.com/video/' + viewerData.vimeoId + '?autoplay=1">' +
+				'src="' + viewerData.playerUrl + '?autoplay=1">' +
 				'</iframe>',
 				openEffect: 'none',
 				closeEffect: 'none',

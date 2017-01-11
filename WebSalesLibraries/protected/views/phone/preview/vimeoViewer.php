@@ -35,7 +35,7 @@
 						</div>
 					</div>
 				</div>
-				<iframe width="100%" src="https://player.vimeo.com/video/<? echo $data->vimeoId; ?>" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+				<iframe width="100%" src="<? echo $data->playerUrl; ?>" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 			<? else: ?>
 				<p>Sorry...</p>
 				<p>You are not authorized to view this link.</p>

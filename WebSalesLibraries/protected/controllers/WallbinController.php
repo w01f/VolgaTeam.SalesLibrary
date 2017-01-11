@@ -26,12 +26,12 @@
 				$folderRecord = FolderRecord::model()->findByPk($folderId);
 				$libraryManager = new LibraryManager();
 				$library = $libraryManager->getLibraryById($folderRecord->id_library);
+				/** @var LibraryPageRecord $pageRecord */
 				$pageRecord = LibraryPageRecord::model()->findByPk($folderRecord->id_page);
 				$page = new LibraryPage($library);
 				$page->load($pageRecord);
 				$folder = new LibraryFolder($page);
 				$folder->load($folderRecord);
-				$folder->displayLinkWidgets = true;
 				$folder->loadFiles(true);
 				$this->renderPartial('folderLinks', array('folder' => $folder), false, true);
 			}
@@ -51,7 +51,6 @@
 					$folderRecord = FolderRecord::model()->findByPk($linkRecord->id_folder);
 					$folder = new LibraryFolder(new LibraryPage($library));
 					$folder->load($folderRecord);
-					$folder->displayLinkWidgets = true;
 					$link = new LibraryLink($folder);
 					$link->load($linkRecord);
 					$link->loadFolderContent();

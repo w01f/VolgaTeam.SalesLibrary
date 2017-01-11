@@ -6,7 +6,7 @@
 	 */
 	class VimeoPreviewData extends PreviewData
 	{
-		public $vimeoId;
+		public $playerUrl;
 		public $forcePreview;
 
 		/**
@@ -21,12 +21,12 @@
 			$this->contentView = 'vimeoViewer';
 
 			$this->fileName = $link->fileName;
-			if (preg_match('/https?:\/\/(?:www\.|player\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|video\/|)(\d+)(?:$|\/|\?)/', $this->url, $match))
-			{
-				$this->vimeoId = $match[3];
-			}
+			if (preg_match('/https?:\/\/(?:www\.|player\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|video\/|(\w*\/)*review\/|)(\d+)(?:$|\/|\?)/', $this->url, $match))
+				$this->playerUrl = 'https://player.vimeo.com/video/'.$match[4];
+			else
+				$this->playerUrl = $this->url;
 
-			$this->forcePreview = $link->extendedProperties->forcePreview;
+				$this->forcePreview = $link->extendedProperties->forcePreview;
 		}
 
 		public function initDialogActions()

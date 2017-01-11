@@ -39,10 +39,14 @@
        style="text-decoration: underline;">
         <div class="link-text-container">
 			<? if (!$disableWidget): ?>
-				<? $widget = $link->getWidget('#ffffff'); ?>
-				<? if (isset($widget) && $widget != ''): ?>
+				<? $widgetData = $link->getWidgetData('#ffffff'); ?>
+				<? if (isset($widgetData['base']) && $widgetData['base'] != ''): ?>
                     <div class="link-widget link-widget-no-wrap">
-                        <img src="data:image/png;base64,<? echo $widget; ?>">
+                        <img class="base-image" src="data:image/png;base64,<? echo $widgetData['base']; ?>">
+	                    <? if ($link->isFolder && isset($widgetData['alternative'])): ?>
+                            <img class="alternative-image"
+                                 src="data:image/png;base64,<? echo $widgetData['alternative']; ?>" style="display: none;">
+	                    <? endif; ?>
                     </div>
 				<? endif; ?>
 			<? endif; ?>

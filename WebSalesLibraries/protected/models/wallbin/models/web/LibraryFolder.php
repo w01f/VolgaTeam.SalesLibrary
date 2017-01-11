@@ -37,7 +37,6 @@
 		public $files;
 		public $dateAdd;
 		public $dateModify;
-		public $displayLinkWidgets;
 		public $headerHeight;
 
 		public function __construct($page)
@@ -117,18 +116,6 @@
 				}
 
 			usort($this->files, "application\\models\\wallbin\\models\\web\\LibraryLink::libraryLinkComparer");
-
-			$this->displayLinkWidgets = false;
-			foreach ($this->files as $file)
-			{
-				/** @var  $file LibraryLink */
-				$widget = $file->getWidget();
-				if ($widget != null && $widget != '')
-				{
-					$this->displayLinkWidgets = true;
-					break;
-				}
-			}
 		}
 
 		/**

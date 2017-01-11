@@ -113,7 +113,7 @@
 		this.url = undefined;
 		this.fileName = undefined;
 		this.quickLinkUrl = undefined;
-		this.vimeoId = undefined;
+		this.playerUrl = undefined;
 		this.rateData = undefined;
 		this.totalViews = undefined;
 

@@ -186,107 +186,112 @@
 
 		/**
 		 * @param $backColor string
-		 * @return string
+		 * @return array
 		 */
-		public function getWidget($backColor = null)
+		public function getWidgetData($backColor = null)
 		{
-			if (isset($this->parentLinkId) && isset($this->originalFormat))
+			$baseImage = null;
+			$alternativeImage = null;
+			switch ($this->widgetType)
 			{
-				if (isset($this->originalFormat))
-				{
-					$fileName = null;
-					switch ($this->originalFormat)
+				case 1:
+					$baseImage = $alternativeImage = $baseImage;
+					break;
+				case 2:
+					if ($this->isFolder)
 					{
-						case 'ppt':
-							$fileName = 'pptx.png';
-							break;
-						case 'doc':
-							$fileName = 'docx.png';
-							break;
-						case 'xls':
-							$fileName = 'xlsx.png';
-							break;
-						case 'pdf':
-							$fileName = 'pdf.png';
-							break;
-						case 'video':
-						case 'wmv':
-							$fileName = 'wmv.png';
-							break;
-						case 'mp4':
-							$fileName = 'mp4.png';
-							break;
-						case 'png':
-							$fileName = 'png.png';
-							break;
-						case 'jpeg':
-							$fileName = 'jpeg.png';
-							break;
-						case 'url':
-						case 'youtube':
-						case 'vimeo':
-						case 'quicksite':
-						case 'html5':
-						case 'app':
-						case 'internal library':
-						case 'internal page':
-						case 'internal window':
-						case 'internal link':
-						case 'internal shortcut':
-							$fileName = 'url.png';
-							break;
-						case 'mp3':
-							$fileName = 'mp3.png';
-							break;
-						case 'key':
-							$fileName = 'keynote.png';
-							break;
-						case 'folder':
-							$fileName = 'folder.png';
-							break;
-						default:
-							if ($this->isFolder)
-								$fileName = 'folder.png';
-							break;
-					}
-					if (isset($fileName))
-					{
-						if (!isset($backColor))
-							$backColor = $this->parent->windowBackColor;
-						$colorPrefix = \Utils::isColorLight($backColor) ? 'white' : 'black';
-						return base64_encode(file_get_contents(realpath(\Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'folder-file-icons' . DIRECTORY_SEPARATOR . $colorPrefix . DIRECTORY_SEPARATOR . $fileName));
+						$baseImage = $this->parent->parent->parent->getAutoWidget('folder_closed');
+						$alternativeImage = $this->parent->parent->parent->getAutoWidget('folder_open');
+
+						if (!isset($baseImage))
+						{
+							if (!isset($backColor))
+								$backColor = $this->parent->windowBackColor;
+							$colorPrefix = \Utils::isColorLight($backColor) ? 'white' : 'black';
+							$baseImage = $alternativeImage = base64_encode(
+								file_get_contents(
+									realpath(\Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'folder-file-icons' . DIRECTORY_SEPARATOR . $colorPrefix . DIRECTORY_SEPARATOR . 'folder.png'));
+						}
 					}
 					else
-						return $this->parent->parent->parent->getAutoWidget($this->fileExtension);
-				}
-				return null;
+						$baseImage = $alternativeImage = $this->parent->parent->parent->getAutoWidget($this->fileExtension);
+
+					if (!isset($baseImage) && isset($this->parentLinkId) && isset($this->originalFormat))
+					{
+						$fileName = null;
+						switch ($this->originalFormat)
+						{
+							case 'ppt':
+								$fileName = 'pptx.png';
+								break;
+							case 'doc':
+								$fileName = 'docx.png';
+								break;
+							case 'xls':
+								$fileName = 'xlsx.png';
+								break;
+							case 'pdf':
+								$fileName = 'pdf.png';
+								break;
+							case 'video':
+							case 'wmv':
+								$fileName = 'wmv.png';
+								break;
+							case 'mp4':
+								$fileName = 'mp4.png';
+								break;
+							case 'png':
+								$fileName = 'png.png';
+								break;
+							case 'jpeg':
+								$fileName = 'jpeg.png';
+								break;
+							case 'url':
+							case 'youtube':
+							case 'vimeo':
+							case 'quicksite':
+							case 'html5':
+							case 'app':
+							case 'internal library':
+							case 'internal page':
+							case 'internal window':
+							case 'internal link':
+							case 'internal shortcut':
+								$fileName = 'url.png';
+								break;
+							case 'mp3':
+								$fileName = 'mp3.png';
+								break;
+							case 'key':
+								$fileName = 'keynote.png';
+								break;
+							case 'folder':
+								$fileName = 'folder.png';
+								break;
+							default:
+								if ($this->isFolder)
+									$fileName = 'folder.png';
+								break;
+						}
+						if (isset($fileName))
+						{
+							if (!isset($backColor))
+								$backColor = $this->parent->windowBackColor;
+							$colorPrefix = \Utils::isColorLight($backColor) ? 'white' : 'black';
+							$baseImage = base64_encode(file_get_contents(realpath(\Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'folder-file-icons' . DIRECTORY_SEPARATOR . $colorPrefix . DIRECTORY_SEPARATOR . $fileName));
+						}
+						if (!isset($alternativeImage))
+							$alternativeImage = $baseImage;
+					}
+					break;
+				case 3:
+					$baseImage = $alternativeImage = isset($this->widget) && $this->widget != '' ? $this->widget : null;
+					break;
 			}
-			else
-			{
-				$widget = null;
-				switch ($this->widgetType)
-				{
-					case 1:
-						$widget = null;
-						break;
-					case 2:
-						$widget = $this->parent->parent->parent->getAutoWidget($this->fileExtension);
-						break;
-					case 3:
-						$widget = isset($this->widget) && $this->widget != '' ? $this->widget : null;
-						break;
-					default:
-						$widget = null;
-				}
-				if (!isset($widget) && $this->isFolder)
-				{
-					if (!isset($backColor))
-						$backColor = $this->parent->windowBackColor;
-					$colorPrefix = \Utils::isColorLight($backColor) ? 'white' : 'black';
-					$widget = base64_encode(file_get_contents(realpath(\Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'folder-file-icons' . DIRECTORY_SEPARATOR . $colorPrefix . DIRECTORY_SEPARATOR . 'folder.png'));
-				}
-				return $widget;
-			}
+			return array(
+				'base' => $baseImage,
+				'alternative' => $alternativeImage,
+			);
 		}
 
 		/**

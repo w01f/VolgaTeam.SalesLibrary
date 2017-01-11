@@ -63,7 +63,7 @@
 		<div role="tabpanel" class="tab-pane" id="link-viewer-tab-preview">
 			<div class="row preview-gallery">
 				<div class="col col-xs-12 text-center">
-					<iframe height="305" width="750" src="https://player.vimeo.com/video/<? echo $data->vimeoId; ?>"
+					<iframe height="305" width="750" src="<? echo $data->playerUrl; ?>"
 					        frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 				</div>
 			</div>
