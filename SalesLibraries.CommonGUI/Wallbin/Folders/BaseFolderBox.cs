@@ -84,6 +84,8 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 		#region Public Methods
 		public virtual void UpdateContent(bool handleEvents)
 		{
+			SetupView();
+
 			UpdateFont();
 
 			_outsideChangesInProgress = !handleEvents;

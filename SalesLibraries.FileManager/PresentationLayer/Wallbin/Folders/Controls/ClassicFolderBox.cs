@@ -581,10 +581,20 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 			{
 				var dialogResult = form.ShowDialog(MainController.Instance.MainForm);
 				if (dialogResult != DialogResult.OK) return dialogResult;
-				UpdateFont();
-				SetupView();
-				UpdateContent(true);
 				DataChanged?.Invoke(this, EventArgs.Empty);
+				if (DataSource.Page.Library.Settings.ApplyAppearanceForAllWindows ||
+					DataSource.Page.Library.Settings.ApplyWidgetForAllWindows ||
+					DataSource.Page.Library.Settings.ApplyBannerForAllWindows)
+				{
+					MainController.Instance.ProcessManager.Run("Updating Page...",
+						(cancelationToken, formProgess) => MainController.Instance.MainForm.Invoke(new MethodInvoker(FolderContainer.UpdateContent)));
+				}
+				else
+				{
+					UpdateFont();
+					SetupView();
+					UpdateContent(true);
+				}
 				return dialogResult;
 			}
 		}
@@ -594,9 +604,18 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 			using (var form = new FormWindow(DataSource, new BannerFormParams()))
 			{
 				if (form.ShowDialog(MainController.Instance.MainForm) != DialogResult.OK) return;
-				SetupView();
-				UpdateGridSize();
 				DataChanged?.Invoke(this, EventArgs.Empty);
+				if (DataSource.Page.Library.Settings.ApplyBannerForAllWindows)
+				{
+					MainController.Instance.ProcessManager.Run("Updating Page...",
+						(cancelationToken, formProgess) =>
+							MainController.Instance.MainForm.Invoke(new MethodInvoker(FolderContainer.UpdateContent)));
+				}
+				else
+				{
+					SetupView();
+					UpdateGridSize();
+				}
 			}
 		}
 
@@ -613,9 +632,18 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 			using (var form = new FormWindow(DataSource, new WidgetFormParams()))
 			{
 				if (form.ShowDialog(MainController.Instance.MainForm) != DialogResult.OK) return;
-				SetupView();
-				UpdateGridSize();
 				DataChanged?.Invoke(this, EventArgs.Empty);
+				if (DataSource.Page.Library.Settings.ApplyWidgetForAllWindows)
+				{
+					MainController.Instance.ProcessManager.Run("Updating Page...",
+						(cancelationToken, formProgess) =>
+							MainController.Instance.MainForm.Invoke(new MethodInvoker(FolderContainer.UpdateContent)));
+				}
+				else
+				{
+					SetupView();
+					UpdateGridSize();
+				}
 			}
 		}
 
@@ -1235,8 +1263,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 				barButtonItemLinkPropertiesExpirationDate.Visibility = !linkRow.Inaccessable ?
 					BarItemVisibility.Always :
 					BarItemVisibility.Never;
-				barSubItemLinkPropertiesAdminSettings.Visibility = !linkRow.Inaccessable && (linkRow.Source is DocumentLink ||
-					linkRow.Source is PowerPointLink ||
+				barSubItemLinkPropertiesAdminSettings.Visibility = !linkRow.Inaccessable && (linkRow.Source is PdfLink ||
 					linkRow.Source is ExcelLink) ?
 					BarItemVisibility.Always :
 					BarItemVisibility.Never;
@@ -1278,11 +1305,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 			lineBreakFormatEditor.EditValueChanged += OnSingleLinkContextEditorValueChanged;
 			_sigleLinkContextMenuEditors.Add(lineBreakFormatEditor);
 
-			var documentSettingsEditor = new Links.ContextMenuEdit.SingleLink.DocumentSettingsEditor(barSubItemLinkPropertiesAdminSettings);
+			var documentSettingsEditor = new DocumentSettingsEditor(barSubItemLinkPropertiesAdminSettings);
 			documentSettingsEditor.EditValueChanged += OnSingleLinkContextEditorValueChanged;
 			_sigleLinkContextMenuEditors.Add(documentSettingsEditor);
 
-			var excelSettingsEditor = new Links.ContextMenuEdit.SingleLink.ExcelSettingsEditor(barSubItemLinkPropertiesAdminSettings);
+			var excelSettingsEditor = new ExcelSettingsEditor(barSubItemLinkPropertiesAdminSettings);
 			excelSettingsEditor.EditValueChanged += OnSingleLinkContextEditorValueChanged;
 			_sigleLinkContextMenuEditors.Add(excelSettingsEditor);
 

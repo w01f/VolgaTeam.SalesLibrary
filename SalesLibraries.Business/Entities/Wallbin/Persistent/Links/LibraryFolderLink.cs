@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.IO;
 using System.Linq;
@@ -31,6 +32,9 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		}
 
 		[NotMapped, JsonIgnore]
+		public override string WebFormat => WebFormats.Folder;
+
+		[NotMapped, JsonIgnore]
 		public IEnumerable<LibraryFileLink> AllLinks
 		{
 			get { return Links.Union(Links.OfType<LibraryFolderLink>().SelectMany(lf => lf.AllLinks)); }
@@ -43,7 +47,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		public override bool IsFolder => true;
 
 		[NotMapped, JsonIgnore]
-		public override string WebFormat => WebFormats.Folder;
+		public override string AutoWidgetKey => "folder_closed";
 		#endregion
 
 		public LibraryFolderLink()

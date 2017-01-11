@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using DevComponents.DotNetBar;
 using DevComponents.DotNetBar.Metro;
 using DevExpress.XtraEditors;
+using DevExpress.XtraEditors.ViewInfo;
 using DevExpress.XtraTab;
 using SalesLibraries.Business.Entities.Common;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
@@ -12,11 +13,13 @@ using SalesLibraries.Business.Entities.Wallbin.NonPersistent;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.Common.Extensions;
 using SalesLibraries.Common.Helpers;
+using SalesLibraries.Common.Objects.Graphics;
 using SalesLibraries.CommonGUI.Common;
 using SalesLibraries.CommonGUI.RetractableBar;
 using SalesLibraries.FileManager.Controllers;
 using SalesLibraries.FileManager.PresentationLayer.Wallbin.ImageGallery;
 using SalesLibraries.FileManager.Properties;
+using Font = System.Drawing.Font;
 using HorizontalAlignment = SalesLibraries.Business.Entities.Wallbin.Common.Enums.HorizontalAlignment;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSettings
@@ -327,7 +330,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		private void OnInvertCheckedChanged(object sender, EventArgs e)
 		{
 			colorEditInversionColor.Enabled = checkEditInvert.Checked;
-			if(_allowHandleEvents)
+			if (_allowHandleEvents)
 				UpdateCustomDisplayImage();
 		}
 
@@ -432,6 +435,22 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		private void OnFormClick(object sender, EventArgs e)
 		{
 			buttonXOK.Focus();
+		}
+
+		private void labelControlTitle_MouseClick(object sender, MouseEventArgs e)
+		{
+			if (e.Button != MouseButtons.Right) return;
+			var viewInfo = labelControlTitle.GetViewInfo() as LabelControlViewInfo;
+			if (viewInfo == null) return;
+			if (viewInfo.ImageBounds.Contains(e.Location) && checkEditInvert.Checked && labelControlTitle.Appearance.Image != null && colorEditInversionColor.Color != Color.White)
+				contextMenuStripImage.Show(Cursor.Position);
+		}
+
+		private void toolStripMenuItemImageAddToFavorites_Click(object sender, EventArgs e)
+		{
+			if (labelControlTitle.Appearance.Image == null) return;
+			var favoritesContainer = xtraTabControlGallery.TabPages.OfType<FavoritesImagesContainer>().FirstOrDefault();
+			((FavoriteImageGroup)favoritesContainer?.ParentImageGroup)?.AddImage<Banner>(labelControlTitle.Appearance.Image, String.Format("{0}_{1}", _originalImageName, colorEditInversionColor.Color.ToHex()));
 		}
 	}
 }

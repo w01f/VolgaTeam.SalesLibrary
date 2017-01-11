@@ -52,6 +52,8 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 
 				UpdatePreviewContent(targetLibrary, cancellationToken);
 
+				DeleteDeadLinks(targetLibrary, cancellationToken);
+
 				targetLibrary.SyncDate = DateTime.Now;
 				targetContext.SaveChanges();
 				if (cancellationToken.IsCancellationRequested) return;
@@ -110,6 +112,8 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 
 				UpdatePreviewContent(targetLibrary, cancellationToken);
 
+				DeleteDeadLinks(targetLibrary, cancellationToken);
+
 				targetLibrary.SyncDate = DateTime.Now;
 				targetContext.SaveChanges();
 				if (cancellationToken.IsCancellationRequested) return;
@@ -139,32 +143,17 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 				syncLogs.Add(webSyncLog);
 			}
 
-			var deadLinksList = library.Pages
-				.SelectMany(p => p.AllLinks)
-				.OfType<LibraryFileLink>()
-				.Where(f => f.IsDead)
-				.Select(f => f.FullPath)
-				.ToList();
-			var deadLinksFile = Path.Combine(library.Path, Constants.DeadLinkInfoFileName);
-			if (deadLinksList.Any())
-				File.WriteAllLines(deadLinksFile, deadLinksList);
-			else if (File.Exists(deadLinksFile))
-				try
-				{
-					File.Delete(deadLinksFile);
-				}
-				catch
-				{
-				}
-
 			var resultFiles = new List<string>();
 			var tempPath = Path.GetTempPath();
 			resultFiles.AddRange(syncLogs.Select(log => log.Save(tempPath)));
 			resultFiles.Add(Path.Combine(library.Path, Constants.LocalStorageFileName));
 			resultFiles.Add(Path.Combine(library.Path, Constants.LibrariesJsonFileName));
 			resultFiles.Add(Path.Combine(library.Path, Constants.ShortLibraryInfoFileName));
+
+			var deadLinksFile = Path.Combine(library.Path, Constants.DeadLinkInfoFileName);
 			if (File.Exists(deadLinksFile))
 				resultFiles.Add(deadLinksFile);
+
 			resultFiles.Add(RemoteResourceManager.Instance.AppSettingsFile.LocalPath);
 			var archiveFolderPath = Path.Combine(library.Path, Constants.LogArchiveFolderName);
 			if (!Directory.Exists(archiveFolderPath))
@@ -268,6 +257,30 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 				var previewGenerator = previewContainer.GetPreviewGenerator();
 				previewContainer.UpdateContent(previewGenerator, cancellationToken);
 			}
+		}
+
+
+		private static void DeleteDeadLinks(Library library, CancellationToken cancellationToken)
+		{
+			var deadLinksList = library.Pages
+				.SelectMany(p => p.AllLinks)
+				.OfType<LibraryFileLink>()
+				.Where(f => f.IsDead)
+				.ToList();
+
+			var deadLinksFile = Path.Combine(library.Path, Constants.DeadLinkInfoFileName);
+			if (deadLinksList.Any())
+				File.WriteAllLines(deadLinksFile, deadLinksList.Select(f => f.FullPath));
+			else if (File.Exists(deadLinksFile))
+				try
+				{
+					File.Delete(deadLinksFile);
+				}
+				catch
+				{
+				}
+
+			deadLinksList.ForEach(link => link.DeleteLink(true));
 		}
 	}
 }

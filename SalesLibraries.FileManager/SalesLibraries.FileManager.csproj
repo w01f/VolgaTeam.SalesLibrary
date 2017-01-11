@@ -166,6 +166,7 @@
     <Compile Include="Business\Services\WebContentManager.cs" />
     <Compile Include="Business\Models\Security\LibraryGroup.cs" />
     <Compile Include="Configuration\EditorsSettings.cs" />
+    <Compile Include="Configuration\ImageResourcesManager.cs" />
     <Compile Include="Configuration\ListManager.cs" />
     <Compile Include="Configuration\MetaDataConst.cs" />
     <Compile Include="Configuration\MetaDataContainer.cs" />

@@ -49,7 +49,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 				case 1:
 					using (var form = new FormSelectWidget())
 					{
-						form.laWidgetDescription.Text = autoWidget.Extension.ToUpper();
+						form.labelControlExtension.Text =String.Format(form.labelControlExtension.Text, autoWidget.Extension.ToUpper()) ;
 						form.checkEditInvert.Checked = autoWidget.Inverted;
 						form.colorEditInversionColor.Color = autoWidget.InversionColor;
 						form.OriginalImage = autoWidget.Widget;

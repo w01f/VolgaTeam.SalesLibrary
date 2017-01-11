@@ -116,6 +116,8 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		[NotMapped, JsonIgnore]
 		public virtual bool IsFolder => false;
 
+		[NotMapped, JsonIgnore]
+		public virtual string AutoWidgetKey => Extension.Replace(".", String.Empty);
 		#endregion
 
 		public override string ToString()

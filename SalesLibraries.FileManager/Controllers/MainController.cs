@@ -32,6 +32,7 @@ namespace SalesLibraries.FileManager.Controllers
 		public RestServiceConnection RestServiceConnection { get; }
 		public LocalWallbinManager Wallbin { get; }
 		public HelpManager HelpManager { get; }
+		public ImageResourcesManager ImageResources { get; }
 
 		public ViewManager WallbinViews { get; }
 
@@ -53,6 +54,7 @@ namespace SalesLibraries.FileManager.Controllers
 			RestServiceConnection = new RestServiceConnection();
 			Wallbin = new LocalWallbinManager();
 			HelpManager = new HelpManager();
+			ImageResources = new ImageResourcesManager();
 			WallbinViews = new ViewManager();
 			MainForm = new FormMain();
 			ProcessManager = new BackgroundProcessManager(MainForm, "Site Admin");
@@ -65,6 +67,8 @@ namespace SalesLibraries.FileManager.Controllers
 			var appReady = false;
 
 			LicenseHelper.Register();
+
+			ImageResources.LoadLocal();
 
 			AppProfileManager.Instance.InitApplication(AppTypeEnum.FileManager);
 
@@ -95,7 +99,7 @@ namespace SalesLibraries.FileManager.Controllers
 			};
 
 			ProcessManager.RunStartProcess(
-				"Connecting to adSALEScloud…",
+				MainController.Instance.ImageResources.AppSplashLogo,
 				(cancellationToken, formProgress) =>
 				{
 					formProgress.Invoke(new MethodInvoker(() =>
@@ -147,6 +151,7 @@ namespace SalesLibraries.FileManager.Controllers
 
 					AsyncHelper.RunSync(Configuration.RemoteResourceManager.Instance.LoadRemote);
 					Settings.LoadRemote();
+					ImageResources.LoadRemote();
 					InitBusinessObjects();
 					AsyncHelper.RunSync(FileStorageManager.Instance.FixDataState);
 

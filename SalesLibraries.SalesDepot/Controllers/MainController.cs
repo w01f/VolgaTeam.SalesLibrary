@@ -72,6 +72,7 @@ namespace SalesLibraries.SalesDepot.Controllers
 		public void RunApplication()
 		{
 			var stopRun = false;
+			var appReady = false;
 
 			LicenseHelper.Register();
 
@@ -104,37 +105,33 @@ namespace SalesLibraries.SalesDepot.Controllers
 			};
 
 			ProcessManager.RunStartProcess(
-				"Connecting to adSALEScloud…",
-				(cancelletionToken, formProgress) => AsyncHelper.RunSync(FileStorageManager.Instance.Init));
-
-			if (stopRun) return;
-
-			var appReady = FileStorageManager.Instance.Activated;
-			if (appReady)
-			{
-				var progressTitle = String.Empty;
-				switch (FileStorageManager.Instance.DataState)
+				null,
+				(cancellationToken, formProgress) =>
 				{
-					case DataActualityState.NotExisted:
-						progressTitle = "Syncing adSALEScloud for the 1st time…";
-						break;
-					case DataActualityState.Outdated:
-						progressTitle = "Refreshing data from adSALEScloud…";
-						break;
-					default:
-						progressTitle = "Loading data...";
-						break;
-				}
+					formProgress.Invoke(new MethodInvoker(() =>
+					{
+						formProgress.ProcessConnectionStage();
+						Application.DoEvents();
+					}));
 
-				ProcessManager.RunStartProcess(
-					progressTitle,
-					(cancelletionToken, formProgress) => AsyncHelper.RunSync(InitBusinessObjects));
+					AsyncHelper.RunSync(FileStorageManager.Instance.Init);
 
-				ProcessManager.RunStartProcess(
-					FileStorageManager.Instance.DataState == DataActualityState.NotExisted ?
-						"Syncing Libraries for the 1st time…" :
-						"Syncing Sales Libraries…",
-					(cancelletionToken, formProgress) =>
+					if (stopRun) return;
+
+					appReady = FileStorageManager.Instance.Activated;
+
+					if (!appReady) return;
+
+					formProgress.Invoke(new MethodInvoker(() =>
+					{
+						formProgress.ProcessSecurityStage();
+						formProgress.ProcessLoadFilesStage();
+						Application.DoEvents();
+					}));
+
+					AsyncHelper.RunSync(InitBusinessObjects);
+
+					if (appReady)
 					{
 						LibrariesSyncHelper.Sync(
 							File.ReadAllLines(Configuration.RemoteResourceManager.Instance.NetworkPathFile.LocalPath),
@@ -142,25 +139,22 @@ namespace SalesLibraries.SalesDepot.Controllers
 							);
 						Wallbin.LoadLibraries(Configuration.RemoteResourceManager.Instance.LocalLibraryFolder.LocalPath);
 						EmailBin.Load();
-					});
 
-				appReady &= Wallbin.Libraries.Any();
-				if (appReady)
-				{
-					if (Settings.RunPowerPointWhenNeeded.HasValue && Settings.RunPowerPointWhenNeeded.Value)
-						PowerPointManager.Instance.RunPowerPointLoader();
+						appReady &= Wallbin.Libraries.Any();
+					}
+				});
 
-					ActivityManager.AddUserActivity("Application started");
-
-					LoadControllers();
-
-					MainForm.InitForm();
-
-					Application.Run(MainForm);
-
-				}
+			if (stopRun) return;
+			if (appReady)
+			{
+				if (Settings.RunPowerPointWhenNeeded.HasValue && Settings.RunPowerPointWhenNeeded.Value)
+					PowerPointManager.Instance.RunPowerPointLoader();
+				ActivityManager.AddUserActivity("Application started");
+				MainForm.InitForm();
+				LoadControllers();
+				Application.Run(MainForm);
 			}
-			if (!appReady)
+			else
 				PopupMessages.ShowWarning("This app is not activated. Contact adSALESapps Support (help@adSALESapps.com)");
 		}
 
@@ -313,7 +307,7 @@ namespace SalesLibraries.SalesDepot.Controllers
 
 		public bool CheckPowerPointRunning(Func<bool> beforeRun = null)
 		{
-			if (PowerPointSingleton.Instance.Connect()) 
+			if (PowerPointSingleton.Instance.Connect())
 				return true;
 			if (beforeRun != null && !beforeRun()) return false;
 			FloaterManager.Instance.ShowFloater(

@@ -119,6 +119,7 @@
     <Compile Include="Business\Services\LinkBundleItemHelper.cs" />
     <Compile Include="Business\Services\TaggedLinksManager.cs" />
     <Compile Include="Configuration\EditorsSettings.cs" />
+    <Compile Include="Configuration\ImageResourcesManager.cs" />
     <Compile Include="Configuration\ListManager.cs" />
     <Compile Include="Configuration\MetaDataConst.cs" />
     <Compile Include="Configuration\MetaDataContainer.cs" />

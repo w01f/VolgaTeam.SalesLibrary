@@ -62,6 +62,8 @@
 			this.buttonXDisable = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXEnable = new DevComponents.DotNetBar.ButtonX();
 			this.labelControlTitle = new DevExpress.XtraEditors.LabelControl();
+			this.contextMenuStripImage = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.toolStripMenuItemImageAddToFavorites = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControlSettings)).BeginInit();
 			this.xtraTabControlSettings.SuspendLayout();
 			this.xtraTabPageImage.SuspendLayout();
@@ -82,6 +84,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.memoEditBannerText.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.colorEditBannerTextColor.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.buttonEditBannerTextFont.Properties)).BeginInit();
+			this.contextMenuStripImage.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// xtraTabControlSettings
@@ -289,7 +292,7 @@
 			// checkEditHorizontalAlignmentRight
 			// 
 			this.checkEditHorizontalAlignmentRight.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.checkEditHorizontalAlignmentRight.Location = new System.Drawing.Point(671, 424);
+			this.checkEditHorizontalAlignmentRight.Location = new System.Drawing.Point(666, 424);
 			this.checkEditHorizontalAlignmentRight.Name = "checkEditHorizontalAlignmentRight";
 			this.checkEditHorizontalAlignmentRight.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.checkEditHorizontalAlignmentRight.Properties.Appearance.Options.UseForeColor = true;
@@ -306,7 +309,7 @@
 			// checkEditHorizontalAlignmentCenter
 			// 
 			this.checkEditHorizontalAlignmentCenter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.checkEditHorizontalAlignmentCenter.Location = new System.Drawing.Point(590, 424);
+			this.checkEditHorizontalAlignmentCenter.Location = new System.Drawing.Point(584, 424);
 			this.checkEditHorizontalAlignmentCenter.Name = "checkEditHorizontalAlignmentCenter";
 			this.checkEditHorizontalAlignmentCenter.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.checkEditHorizontalAlignmentCenter.Properties.Appearance.Options.UseForeColor = true;
@@ -323,7 +326,7 @@
 			// checkEditHorizontalAlignmentLeft
 			// 
 			this.checkEditHorizontalAlignmentLeft.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.checkEditHorizontalAlignmentLeft.Location = new System.Drawing.Point(547, 424);
+			this.checkEditHorizontalAlignmentLeft.Location = new System.Drawing.Point(545, 424);
 			this.checkEditHorizontalAlignmentLeft.Name = "checkEditHorizontalAlignmentLeft";
 			this.checkEditHorizontalAlignmentLeft.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.checkEditHorizontalAlignmentLeft.Properties.Appearance.Options.UseForeColor = true;
@@ -653,6 +656,22 @@
 			this.labelControlTitle.TabIndex = 52;
 			this.labelControlTitle.Text = "<size=+4><b>{0}</b></size>";
 			this.labelControlTitle.UseMnemonic = false;
+			this.labelControlTitle.MouseClick += new System.Windows.Forms.MouseEventHandler(this.labelControlTitle_MouseClick);
+			// 
+			// contextMenuStripImage
+			// 
+			this.contextMenuStripImage.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItemImageAddToFavorites});
+			this.contextMenuStripImage.Name = "contextMenuStripImage";
+			this.contextMenuStripImage.Size = new System.Drawing.Size(163, 48);
+			// 
+			// toolStripMenuItemImageAddToFavorites
+			// 
+			this.toolStripMenuItemImageAddToFavorites.Image = global::SalesLibraries.CloudAdmin.Properties.Resources.Favorites;
+			this.toolStripMenuItemImageAddToFavorites.Name = "toolStripMenuItemImageAddToFavorites";
+			this.toolStripMenuItemImageAddToFavorites.Size = new System.Drawing.Size(162, 22);
+			this.toolStripMenuItemImageAddToFavorites.Text = "Add To Favorites";
+			this.toolStripMenuItemImageAddToFavorites.Click += new System.EventHandler(this.toolStripMenuItemImageAddToFavorites_Click);
 			// 
 			// BannerSettingsControl
 			// 
@@ -689,6 +708,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.memoEditBannerText.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.colorEditBannerTextColor.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.buttonEditBannerTextFont.Properties)).EndInit();
+			this.contextMenuStripImage.ResumeLayout(false);
 			this.ResumeLayout(false);
 
 		}
@@ -728,5 +748,7 @@
 		private ImageGallery.GalleryTreeView treeViewGallery;
 		private DevExpress.XtraEditors.LabelControl labelControlSelectedGalleryName;
 		public CommonGUI.Common.HtmlColorEdit colorEditInversionColor;
+		private System.Windows.Forms.ContextMenuStrip contextMenuStripImage;
+		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemImageAddToFavorites;
 	}
 }

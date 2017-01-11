@@ -249,7 +249,7 @@ namespace SalesLibraries.CloudAdmin.Controllers
 		{
 			MainController.Instance.ProcessChanges();
 			MainController.Instance.ProcessManager.RunStartProcess(
-				String.Format("Syncing changes with {0}", MainController.Instance.Settings.SiteLibrary),
+				null, //String.Format("Syncing changes with {0}", MainController.Instance.Settings.SiteLibrary),
 				(cancelationToken, formProgress) =>
 				{
 					MainController.Instance.Wallbin.CheckinData();

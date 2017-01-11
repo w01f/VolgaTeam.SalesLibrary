@@ -53,7 +53,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 					return null;
 				return ParentFileLink?.ParentLibrary.Settings.AutoWidgets
 					.Where(autoWidget =>
-						String.Compare(autoWidget.Extension, ParentFileLink.Extension.Replace(".", String.Empty), StringComparison.OrdinalIgnoreCase) == 0)
+						String.Compare(autoWidget.Extension, ParentFileLink.AutoWidgetKey, StringComparison.OrdinalIgnoreCase) == 0)
 					.Select(a => a.DisplayedImage).FirstOrDefault();
 			}
 		}

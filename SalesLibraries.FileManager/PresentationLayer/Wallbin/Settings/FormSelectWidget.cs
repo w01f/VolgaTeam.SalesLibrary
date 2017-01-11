@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using DevComponents.DotNetBar.Metro;
+using DevExpress.XtraEditors.ViewInfo;
 using DevExpress.XtraTab;
 using SalesLibraries.Common.Extensions;
 using SalesLibraries.Common.Helpers;
@@ -92,7 +93,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 				styleController.AppearanceFocused.Font = font;
 				styleController.AppearanceReadOnly.Font = font;
 
-				laWidgetDescription.Font = new Font(laWidgetDescription.Font.FontFamily, laWidgetDescription.Font.Size - 2, laWidgetDescription.Font.Style);
 				buttonXCancel.Font = new Font(buttonXCancel.Font.FontFamily, buttonXCancel.Font.Size - 2, buttonXCancel.Font.Style);
 				buttonXOK.Font = new Font(buttonXOK.Font.FontFamily, buttonXOK.Font.Size - 2, buttonXOK.Font.Style);
 				buttonXSearch.Font = new Font(buttonXSearch.Font.FontFamily, buttonXSearch.Font.Size - 2, buttonXSearch.Font.Style);
@@ -106,12 +106,12 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			if (OriginalImage != null && checkEditInvert.Checked)
 			{
 				var imageClone = (Image)OriginalImage.Clone();
-				pbSelectedWidget.Image = colorEditInversionColor.Color != GraphicObjectExtensions.DefaultInversionColor
+				labelControlExtension.Appearance.Image = colorEditInversionColor.Color != GraphicObjectExtensions.DefaultInversionColor
 					? imageClone.ReplaceColor(colorEditInversionColor.Color)
 					: imageClone.Invert();
 			}
 			else
-				pbSelectedWidget.Image = OriginalImage;
+				labelControlExtension.Appearance.Image = OriginalImage;
 		}
 
 		private void OnImageDoubleClick(object sender, EventArgs e)
@@ -167,14 +167,18 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 
 		private void toolStripMenuItemImageAddToFavorites_Click(object sender, EventArgs e)
 		{
-			if (pbSelectedWidget.Image == null) return;
+			if (labelControlExtension.Appearance.Image == null) return;
 			var favoritesContainer = xtraTabControlGallery.TabPages.OfType<FavoritesImagesContainer>().FirstOrDefault();
-			((FavoriteImageGroup)favoritesContainer?.ParentImageGroup)?.AddImage<Widget>(pbSelectedWidget.Image, String.Format("{0}_{1}", OriginalImageName, colorEditInversionColor.Color.ToHex()));
+			((FavoriteImageGroup)favoritesContainer?.ParentImageGroup)?.AddImage<Widget>(labelControlExtension.Appearance.Image, String.Format("{0}_{1}", OriginalImageName, colorEditInversionColor.Color.ToHex()));
 		}
 
-		private void contextMenuStripImage_Opening(object sender, CancelEventArgs e)
+		private void labelControlExtension_MouseClick(object sender, MouseEventArgs e)
 		{
-			e.Cancel = !checkEditInvert.Checked || pbSelectedWidget.Image == null || colorEditInversionColor.Color == Color.White;
+			if (e.Button != MouseButtons.Right) return;
+			var viewInfo = labelControlExtension.GetViewInfo() as LabelControlViewInfo;
+			if (viewInfo == null) return;
+			if (viewInfo.ImageBounds.Contains(e.Location) && checkEditInvert.Checked && labelControlExtension.Appearance.Image != null && colorEditInversionColor.Color != Color.White)
+				contextMenuStripImage.Show(Cursor.Position);
 		}
 	}
 }

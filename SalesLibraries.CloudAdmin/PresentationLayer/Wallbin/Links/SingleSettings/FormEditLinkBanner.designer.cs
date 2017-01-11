@@ -68,6 +68,8 @@
 			this.buttonXShowTextLinkName = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXShowTextCustom = new DevComponents.DotNetBar.ButtonX();
 			this.labelControlBottomDescription = new DevExpress.XtraEditors.LabelControl();
+			this.contextMenuStripImage = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.toolStripMenuItemImageAddToFavorites = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.colorEditBannerTextColor.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.buttonEditBannerTextFont.Properties)).BeginInit();
@@ -91,6 +93,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.checkEditVerticalAlignmentTop2.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditSaveAsTemplate.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditTextWordWrap.Properties)).BeginInit();
+			this.contextMenuStripImage.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// buttonXOK
@@ -320,6 +323,7 @@
 			this.labelControlTitle.TabIndex = 48;
 			this.labelControlTitle.Text = "<size=+4><b>{0}</b></size>";
 			this.labelControlTitle.UseMnemonic = false;
+			this.labelControlTitle.MouseClick += new System.Windows.Forms.MouseEventHandler(this.labelControlTitle_MouseClick);
 			// 
 			// buttonXEnable
 			// 
@@ -751,6 +755,21 @@
     "ray> on the page…</color></size>";
 			this.labelControlBottomDescription.UseMnemonic = false;
 			// 
+			// contextMenuStripImage
+			// 
+			this.contextMenuStripImage.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItemImageAddToFavorites});
+			this.contextMenuStripImage.Name = "contextMenuStripImage";
+			this.contextMenuStripImage.Size = new System.Drawing.Size(163, 48);
+			// 
+			// toolStripMenuItemImageAddToFavorites
+			// 
+			this.toolStripMenuItemImageAddToFavorites.Image = global::SalesLibraries.CloudAdmin.Properties.Resources.Favorites;
+			this.toolStripMenuItemImageAddToFavorites.Name = "toolStripMenuItemImageAddToFavorites";
+			this.toolStripMenuItemImageAddToFavorites.Size = new System.Drawing.Size(162, 22);
+			this.toolStripMenuItemImageAddToFavorites.Text = "Add To Favorites";
+			this.toolStripMenuItemImageAddToFavorites.Click += new System.EventHandler(this.toolStripMenuItemImageAddToFavorites_Click);
+			// 
 			// FormEditLinkBanner
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
@@ -799,6 +818,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.checkEditVerticalAlignmentTop2.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditSaveAsTemplate.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditTextWordWrap.Properties)).EndInit();
+			this.contextMenuStripImage.ResumeLayout(false);
 			this.ResumeLayout(false);
 
         }
@@ -844,5 +864,7 @@
 		private DevExpress.XtraEditors.LabelControl labelControlSelectedGalleryName;
 		private ImageGallery.GalleryTreeView treeViewGallery;
 		public CommonGUI.Common.HtmlColorEdit colorEditInversionColor;
+		private System.Windows.Forms.ContextMenuStrip contextMenuStripImage;
+		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemImageAddToFavorites;
 	}
 }

@@ -32,6 +32,7 @@ namespace SalesLibraries.CloudAdmin.Controllers
 		public RestServiceConnection RestServiceConnection { get; }
 		public CloudWallbinManager Wallbin { get; }
 		public HelpManager HelpManager { get; }
+		public ImageResourcesManager ImageResources { get; }
 
 		public ViewManager WallbinViews { get; }
 
@@ -53,6 +54,7 @@ namespace SalesLibraries.CloudAdmin.Controllers
 			RestServiceConnection = new RestServiceConnection();
 			Wallbin = new CloudWallbinManager(RestServiceConnection);
 			HelpManager = new HelpManager();
+			ImageResources = new ImageResourcesManager();
 			WallbinViews = new ViewManager();
 			MainForm = new FormMain();
 			ProcessManager = new BackgroundProcessManager(MainForm, "Site Admin");
@@ -62,8 +64,11 @@ namespace SalesLibraries.CloudAdmin.Controllers
 		public void RunApplication()
 		{
 			var stopRun = false;
+			var appReady = false;
 
 			LicenseHelper.Register();
+
+			ImageResources.LoadLocal();
 
 			AppProfileManager.Instance.InitApplication(AppTypeEnum.CloudAdmin);
 
@@ -92,122 +97,126 @@ namespace SalesLibraries.CloudAdmin.Controllers
 				AuthManager.Auth(e);
 			};
 
+
 			ProcessManager.RunStartProcess(
-				"Connecting to adSALEScloud…",
-				(cancellationToken, formProgress) => AsyncHelper.RunSync(FileStorageManager.Instance.Init));
-
-			if (stopRun) return;
-
-			if (FileStorageManager.Instance.Activated)
-			{
-				string progressTitle;
-				switch (FileStorageManager.Instance.DataState)
+				MainController.Instance.ImageResources.AppSplashLogo,
+				(cancellationToken, formProgress) =>
 				{
-					case DataActualityState.NotExisted:
-						progressTitle = "Syncing adSALEScloud for the 1st time…";
-						break;
-					case DataActualityState.Outdated:
-						progressTitle = "Refreshing data from adSALEScloud…";
-						break;
-					default:
-						progressTitle = "Loading data...";
-						break;
-				}
-
-				ProcessManager.RunStartProcess(
-					progressTitle,
-					(cancellationToken, formProgress) => AsyncHelper.RunSync(InitBusinessObjects));
-			}
-			else
-			{
-				PopupMessages.ShowWarning("This app is not activated. Contact adSALESapps Support (help@adSALESapps.com)");
-				return;
-			}
-
-			RestResponse connectionResponce = null;
-			ProcessManager.RunStartProcess(
-					String.Format("Connecting to {0}", Settings.SiteLibrary),
-					(cancellationToken, formProgress) =>
+					formProgress.Invoke(new MethodInvoker(() =>
 					{
-						connectionResponce = RestServiceConnection.DoRequest(new ConnectionGetRequestData
+						formProgress.ProcessConnectionStage();
+						Application.DoEvents();
+					}));
+
+					AsyncHelper.RunSync(FileStorageManager.Instance.Init);
+
+					if (stopRun) return;
+
+					appReady = FileStorageManager.Instance.Activated;
+
+					if (appReady)
+					{
+
+						formProgress.Invoke(new MethodInvoker(() =>
+						{
+							formProgress.ProcessSecurityStage();
+							Application.DoEvents();
+						}));
+
+						formProgress.Invoke(new MethodInvoker(() =>
+						{
+							formProgress.ProcessLoadFilesStage();
+							Application.DoEvents();
+						}));
+
+						AsyncHelper.RunSync(InitBusinessObjects);
+						ImageResources.LoadRemote();
+
+
+						var connectionResponce = RestServiceConnection.DoRequest(new ConnectionGetRequestData
 						{
 							RequestType = ConnectionRequestType.Connect,
 							LibraryName = Settings.SiteLibrary,
 							UserName = AuthManager.Settings.Login
 						});
-					});
-			if (connectionResponce == null)
-			{
-				PopupMessages.ShowWarning("Connection Error. Contact adSALESapps Support (help@adSALESapps.com)");
-				return;
-			}
-			if (connectionResponce.Result == ResponseResult.Error)
-			{
-				var error = connectionResponce.GetData<RestError>();
-				PopupMessages.ShowWarning(error.Message);
-				return;
-			}
-			var connectionInfo = connectionResponce.GetData<ConnectionInfo>();
-			if (connectionInfo.State == ConnectionState.Busy)
-			{
-				PopupMessages.ShowWarning(
-					String.Format("The library {0} is busy by user: {1}",
-						Settings.SiteLibrary,
-						connectionInfo.User
-						));
-				return;
-			}
+						if (connectionResponce == null)
+						{
+							PopupMessages.ShowWarning("Connection Error. Contact adSALESapps Support (help@adSALESapps.com)");
+							stopRun = true;
+							return;
+						}
+						if (connectionResponce.Result == ResponseResult.Error)
+						{
+							var error = connectionResponce.GetData<RestError>();
+							PopupMessages.ShowWarning(error.Message);
+							stopRun = true;
+							return;
+						}
+						var connectionInfo = connectionResponce.GetData<ConnectionInfo>();
+						if (connectionInfo.State == ConnectionState.Busy)
+						{
+							ProcessManager.SuspendProcess();
+							PopupMessages.ShowWarning(
+								String.Format("The library {0} is busy by user: {1}",
+									Settings.SiteLibrary,
+									connectionInfo.User
+								));
+							stopRun = true;
+							return;
+						}
 
-			var libraryLoaded = false;
-			ProcessManager.RunStartProcess(
-					"Loading Library",
-					(cancellationToken, formProgress) =>
-					{
 						try
 						{
 							Wallbin.Init(connectionInfo, Configuration.RemoteResourceManager.Instance.LocalLibraryCacheFolder.LocalPath);
 							Wallbin.CheckoutData();
-							libraryLoaded = true;
 						}
 						catch (RestServiceException ex)
 						{
+							ProcessManager.SuspendProcess();
 							PopupMessages.ShowWarning(ex.ServiceErrorMessage);
+							stopRun = true;
 						}
-					});
-			if (!libraryLoaded)
-				return;
+					}
+				});
 
-			MainForm.Shown += (o, e) =>
+			if (stopRun) return;
+
+			if (appReady)
+			{
+				FormStateHelper.Init(MainForm, Common.Helpers.RemoteResourceManager.Instance.AppAliasSettingsFolder, "Cloud Admin-Main-Form", true, true);
+				MainForm.Shown += (o, e) =>
 				{
 					MainForm.InitForm();
 					LoadControllers();
-
 					ProcessManager.RunInQueue("Loading Wallbin...",
 						() => MainForm.Invoke(new MethodInvoker(() => WallbinViews.Load())),
 						() => MainForm.Invoke(new MethodInvoker(() => ShowTab(TabPageEnum.Home))));
 				};
-			MainForm.Closing += (o, e) =>
-				  {
-					  ProcessChanges();
-					  ProcessManager.RunStartProcess(
-						  String.Format("Syncing changes with {0}", Settings.SiteLibrary),
-						  (cancellationToken, formProgress) =>
-						  {
-							  Wallbin.CheckinData();
-						  });
-					  ProcessManager.RunStartProcess(
-						  String.Format("Closing Connection to {0}", Settings.SiteLibrary),
-						  (cancellationToken, formProgress) =>
-						  {
-							  connectionResponce = RestServiceConnection.DoRequest(new ConnectionGetRequestData
-							  {
-								  RequestType = ConnectionRequestType.Disconnect,
-								  LibraryName = Settings.SiteLibrary,
-								  UserName = AuthManager.Settings.Login
-							  });
-						  });
-				  };
-			Application.Run(MainForm);
+				MainForm.Closing += (o, e) =>
+				{
+					ProcessChanges();
+					ProcessManager.RunStartProcess(
+						null,//String.Format("Syncing changes with {0}", Settings.SiteLibrary),
+						(cancellationToken, formProgress) =>
+						{
+							Wallbin.CheckinData();
+						});
+					ProcessManager.RunStartProcess(
+						null,//String.Format("Closing Connection to {0}", Settings.SiteLibrary),
+						(cancellationToken, formProgress) =>
+						{
+							RestServiceConnection.DoRequest(new ConnectionGetRequestData
+							{
+								RequestType = ConnectionRequestType.Disconnect,
+								LibraryName = Settings.SiteLibrary,
+								UserName = AuthManager.Settings.Login
+							});
+						});
+				};
+				Application.Run(MainForm);
+			}
+			else
+				PopupMessages.ShowWarning("This app is not activated. Contact adSALESapps Support (help@adSALESapps.com)");
 		}
 
 		public void ReloadWallbinViews()
@@ -259,7 +268,7 @@ namespace SalesLibraries.CloudAdmin.Controllers
 			await Configuration.RemoteResourceManager.Instance.LoadRemote();
 
 			Settings.Load();
-			RestServiceConnection.Load(Settings.WebServiceSite,"CloudAdmin");
+			RestServiceConnection.Load(Settings.WebServiceSite, "CloudAdmin");
 			Lists.Load();
 			HelpManager.LoadHelpLinks();
 

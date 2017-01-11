@@ -20,6 +20,44 @@ namespace SalesLibraries.FileManager
 		public void InitForm()
 		{
 			Text = String.Format(TitleTemplate, AppProfileManager.Instance.LibraryAlias);
+			Icon = MainController.Instance.ImageResources.AppIcon ?? Icon;
+
+			labelItemHomeLogo.Image = MainController.Instance.ImageResources.AppRibbonLogo ?? labelItemHomeLogo.Image;
+			ribbonBarHomeWallbin.RecalcLayout();
+			ribbonPanelHome.PerformLayout();
+
+			labelItemPreferencesLogo.Image = MainController.Instance.ImageResources.AppRibbonLogo ?? labelItemHomeLogo.Image;
+			ribbonBarPreferencesLogo.RecalcLayout();
+			ribbonPanelPreferences.PerformLayout();
+
+			labelItemCalendarLogo.Image = MainController.Instance.ImageResources.AppRibbonLogo ?? labelItemHomeLogo.Image;
+			ribbonBarCalendarLogo.RecalcLayout();
+			ribbonPanelCalendar.PerformLayout();
+
+			labelItemProgramManagerLogo.Image = MainController.Instance.ImageResources.AppRibbonLogo ?? labelItemHomeLogo.Image;
+			ribbonBarProgramManagerLogo.RecalcLayout();
+			ribbonPanelProgramManager.PerformLayout();
+
+			labelItemVideoLogo.Image = MainController.Instance.ImageResources.AppRibbonLogo ?? labelItemHomeLogo.Image;
+			ribbonBarVideoLogo.RecalcLayout();
+			ribbonPanelVideo.PerformLayout();
+
+			labelItemTagsLogo.Image = MainController.Instance.ImageResources.AppRibbonLogo ?? labelItemHomeLogo.Image;
+			ribbonBarTagsLogo.RecalcLayout();
+			ribbonPanelTags.PerformLayout();
+
+			labelItemSecurityLogo.Image = MainController.Instance.ImageResources.AppRibbonLogo ?? labelItemHomeLogo.Image;
+			ribbonBarSecurityLogo.RecalcLayout();
+			ribbonPanelSecurity.PerformLayout();
+
+			labelItemBundlesLogo.Image = MainController.Instance.ImageResources.AppRibbonLogo ?? labelItemHomeLogo.Image;
+			ribbonBarBundlesLogo.RecalcLayout();
+			ribbonPanelBundles.PerformLayout();
+
+			labelItemSettingsLogo.Image = MainController.Instance.ImageResources.AppRibbonLogo ?? labelItemHomeLogo.Image;
+			ribbonBarSettingsLogo.RecalcLayout();
+			ribbonPanelSettings.PerformLayout();
+
 			ConfigureRibbon();
 		}
 

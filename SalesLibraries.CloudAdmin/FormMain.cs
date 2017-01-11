@@ -19,6 +19,16 @@ namespace SalesLibraries.CloudAdmin
 		public void InitForm()
 		{
 			Text = String.Format(TitleTemplate, AppProfileManager.Instance.LibraryAlias);
+			Icon = MainController.Instance.ImageResources.AppIcon ?? Icon;
+
+			labelItemHomeLogo.Image = MainController.Instance.ImageResources.AppRibbonLogo ?? labelItemHomeLogo.Image;
+			ribbonBarHomeWallbin.RecalcLayout();
+			ribbonPanelHome.PerformLayout();
+
+			labelItemSecurityLogo.Image = MainController.Instance.ImageResources.AppRibbonLogo ?? labelItemHomeLogo.Image;
+			ribbonBarSecurityLogo.RecalcLayout();
+			ribbonPanelSecurity.PerformLayout();
+
 			ConfigureRibbon();
 		}
 

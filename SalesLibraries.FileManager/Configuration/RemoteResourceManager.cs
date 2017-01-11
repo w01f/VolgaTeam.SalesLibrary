@@ -20,6 +20,7 @@ namespace SalesLibraries.FileManager.Configuration
 		public StorageFile TabSettingsFile { get; private set; }
 		public StorageFile ArchiveLinksSettingsFile { get; private set; }
 
+		public ArchiveDirectory ImageResourcesFolder { get; private set; }
 		public ArchiveDirectory InternalLinkTemplatesFolder { get; private set; }
 		#endregion
 
@@ -79,6 +80,15 @@ namespace SalesLibraries.FileManager.Configuration
 			));
 			if (await ArchiveLinksSettingsFile.Exists(true))
 				await ArchiveLinksSettingsFile.Download();
+
+			ImageResourcesFolder = new ArchiveDirectory(new object[]
+			{
+				FileStorageManager.IncomingFolderName,
+				AppProfileManager.Instance.AppNameSet,
+				"Resources"
+			});
+			if (await ImageResourcesFolder.Exists(true))
+				await ImageResourcesFolder.Download();
 
 			InternalLinkTemplatesFolder = new ArchiveDirectory(new object[]
 			{

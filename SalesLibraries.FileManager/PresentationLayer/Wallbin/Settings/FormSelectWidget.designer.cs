@@ -31,8 +31,8 @@
 			this.components = new System.ComponentModel.Container();
 			this.buttonXOK = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXCancel = new DevComponents.DotNetBar.ButtonX();
-			this.pbSelectedWidget = new System.Windows.Forms.PictureBox();
-			this.laWidgetDescription = new System.Windows.Forms.Label();
+			this.contextMenuStripImage = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.toolStripMenuItemImageAddToFavorites = new System.Windows.Forms.ToolStripMenuItem();
 			this.pnSearch = new System.Windows.Forms.Panel();
 			this.labelControlSearchTitle = new DevExpress.XtraEditors.LabelControl();
 			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
@@ -45,9 +45,8 @@
 			this.retractableBarGallery = new SalesLibraries.CommonGUI.RetractableBar.RetractableBarLeft();
 			this.treeViewGallery = new SalesLibraries.FileManager.PresentationLayer.Wallbin.ImageGallery.GalleryTreeView();
 			this.labelControlSelectedGalleryName = new DevExpress.XtraEditors.LabelControl();
-			this.contextMenuStripImage = new System.Windows.Forms.ContextMenuStrip(this.components);
-			this.toolStripMenuItemImageAddToFavorites = new System.Windows.Forms.ToolStripMenuItem();
-			((System.ComponentModel.ISupportInitialize)(this.pbSelectedWidget)).BeginInit();
+			this.labelControlExtension = new DevExpress.XtraEditors.LabelControl();
+			this.contextMenuStripImage.SuspendLayout();
 			this.pnSearch.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditSearch.Properties)).BeginInit();
@@ -57,7 +56,6 @@
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControlGallery)).BeginInit();
 			this.retractableBarGallery.Content.SuspendLayout();
 			this.retractableBarGallery.Header.SuspendLayout();
-			this.contextMenuStripImage.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// buttonXOK
@@ -88,31 +86,20 @@
 			this.buttonXCancel.Text = "Cancel";
 			this.buttonXCancel.TextColor = System.Drawing.Color.Black;
 			// 
-			// pbSelectedWidget
+			// contextMenuStripImage
 			// 
-			this.pbSelectedWidget.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.pbSelectedWidget.BackColor = System.Drawing.Color.White;
-			this.pbSelectedWidget.ContextMenuStrip = this.contextMenuStripImage;
-			this.pbSelectedWidget.ForeColor = System.Drawing.Color.Black;
-			this.pbSelectedWidget.Location = new System.Drawing.Point(57, 510);
-			this.pbSelectedWidget.Name = "pbSelectedWidget";
-			this.pbSelectedWidget.Size = new System.Drawing.Size(36, 36);
-			this.pbSelectedWidget.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-			this.pbSelectedWidget.TabIndex = 3;
-			this.pbSelectedWidget.TabStop = false;
+			this.contextMenuStripImage.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItemImageAddToFavorites});
+			this.contextMenuStripImage.Name = "contextMenuStripImage";
+			this.contextMenuStripImage.Size = new System.Drawing.Size(163, 26);
 			// 
-			// laWidgetDescription
+			// toolStripMenuItemImageAddToFavorites
 			// 
-			this.laWidgetDescription.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.laWidgetDescription.BackColor = System.Drawing.Color.White;
-			this.laWidgetDescription.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.laWidgetDescription.ForeColor = System.Drawing.Color.Black;
-			this.laWidgetDescription.Location = new System.Drawing.Point(5, 510);
-			this.laWidgetDescription.Name = "laWidgetDescription";
-			this.laWidgetDescription.Size = new System.Drawing.Size(46, 36);
-			this.laWidgetDescription.TabIndex = 0;
-			this.laWidgetDescription.Text = "DOCX";
-			this.laWidgetDescription.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.toolStripMenuItemImageAddToFavorites.Image = global::SalesLibraries.FileManager.Properties.Resources.Favorites;
+			this.toolStripMenuItemImageAddToFavorites.Name = "toolStripMenuItemImageAddToFavorites";
+			this.toolStripMenuItemImageAddToFavorites.Size = new System.Drawing.Size(162, 22);
+			this.toolStripMenuItemImageAddToFavorites.Text = "Add To Favorites";
+			this.toolStripMenuItemImageAddToFavorites.Click += new System.EventHandler(this.toolStripMenuItemImageAddToFavorites_Click);
 			// 
 			// pnSearch
 			// 
@@ -191,7 +178,7 @@
 			// checkEditInvert
 			// 
 			this.checkEditInvert.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.checkEditInvert.Location = new System.Drawing.Point(145, 518);
+			this.checkEditInvert.Location = new System.Drawing.Point(171, 521);
 			this.checkEditInvert.Name = "checkEditInvert";
 			this.checkEditInvert.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.checkEditInvert.Properties.Appearance.Options.UseForeColor = true;
@@ -207,7 +194,7 @@
 			this.colorEditInversionColor.Color = System.Drawing.Color.Empty;
 			this.colorEditInversionColor.EditValue = System.Drawing.Color.Empty;
 			this.colorEditInversionColor.Enabled = false;
-			this.colorEditInversionColor.Location = new System.Drawing.Point(220, 516);
+			this.colorEditInversionColor.Location = new System.Drawing.Point(248, 520);
 			this.colorEditInversionColor.Name = "colorEditInversionColor";
 			this.colorEditInversionColor.Properties.Appearance.BackColor = System.Drawing.Color.White;
 			this.colorEditInversionColor.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
@@ -325,33 +312,32 @@
 			this.labelControlSelectedGalleryName.TabIndex = 55;
 			this.labelControlSelectedGalleryName.UseMnemonic = false;
 			// 
-			// contextMenuStripImage
+			// labelControlExtension
 			// 
-			this.contextMenuStripImage.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItemImageAddToFavorites});
-			this.contextMenuStripImage.Name = "contextMenuStripImage";
-			this.contextMenuStripImage.Size = new System.Drawing.Size(163, 26);
-			this.contextMenuStripImage.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStripImage_Opening);
-			// 
-			// toolStripMenuItemImageAddToFavorites
-			// 
-			this.toolStripMenuItemImageAddToFavorites.Image = global::SalesLibraries.FileManager.Properties.Resources.Favorites;
-			this.toolStripMenuItemImageAddToFavorites.Name = "toolStripMenuItemImageAddToFavorites";
-			this.toolStripMenuItemImageAddToFavorites.Size = new System.Drawing.Size(162, 22);
-			this.toolStripMenuItemImageAddToFavorites.Text = "Add To Favorites";
-			this.toolStripMenuItemImageAddToFavorites.Click += new System.EventHandler(this.toolStripMenuItemImageAddToFavorites_Click);
+			this.labelControlExtension.AllowHtmlString = true;
+			this.labelControlExtension.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.labelControlExtension.Appearance.BackColor = System.Drawing.Color.White;
+			this.labelControlExtension.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.labelControlExtension.Appearance.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+			this.labelControlExtension.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+			this.labelControlExtension.Location = new System.Drawing.Point(8, 514);
+			this.labelControlExtension.Name = "labelControlExtension";
+			this.labelControlExtension.Size = new System.Drawing.Size(157, 32);
+			this.labelControlExtension.StyleController = this.styleController;
+			this.labelControlExtension.TabIndex = 62;
+			this.labelControlExtension.Text = "<size=+1><b>{0}</b></size>";
+			this.labelControlExtension.MouseClick += new System.Windows.Forms.MouseEventHandler(this.labelControlExtension_MouseClick);
 			// 
 			// FormSelectWidget
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
 			this.BackColor = System.Drawing.Color.White;
 			this.ClientSize = new System.Drawing.Size(941, 555);
+			this.Controls.Add(this.labelControlExtension);
 			this.Controls.Add(this.pnGallery);
 			this.Controls.Add(this.colorEditInversionColor);
 			this.Controls.Add(this.checkEditInvert);
 			this.Controls.Add(this.pnSearch);
-			this.Controls.Add(this.pbSelectedWidget);
-			this.Controls.Add(this.laWidgetDescription);
 			this.Controls.Add(this.buttonXCancel);
 			this.Controls.Add(this.buttonXOK);
 			this.DoubleBuffered = true;
@@ -366,7 +352,7 @@
 			this.Text = "Widget Gallery";
 			this.Load += new System.EventHandler(this.FormSelectWidget_Load);
 			this.Click += new System.EventHandler(this.OnFormClick);
-			((System.ComponentModel.ISupportInitialize)(this.pbSelectedWidget)).EndInit();
+			this.contextMenuStripImage.ResumeLayout(false);
 			this.pnSearch.ResumeLayout(false);
 			this.pnSearch.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
@@ -377,7 +363,6 @@
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControlGallery)).EndInit();
 			this.retractableBarGallery.Content.ResumeLayout(false);
 			this.retractableBarGallery.Header.ResumeLayout(false);
-			this.contextMenuStripImage.ResumeLayout(false);
 			this.ResumeLayout(false);
 
 		}
@@ -386,8 +371,6 @@
 
 		private DevComponents.DotNetBar.ButtonX buttonXOK;
 		private DevComponents.DotNetBar.ButtonX buttonXCancel;
-		public System.Windows.Forms.PictureBox pbSelectedWidget;
-		public System.Windows.Forms.Label laWidgetDescription;
 		private System.Windows.Forms.Panel pnSearch;
 		private DevExpress.XtraEditors.LabelControl labelControlSearchTitle;
 		private DevComponents.DotNetBar.ButtonX buttonXSearch;
@@ -402,5 +385,6 @@
 		private ImageGallery.GalleryTreeView treeViewGallery;
 		private System.Windows.Forms.ContextMenuStrip contextMenuStripImage;
 		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemImageAddToFavorites;
+		public DevExpress.XtraEditors.LabelControl labelControlExtension;
 	}
 }

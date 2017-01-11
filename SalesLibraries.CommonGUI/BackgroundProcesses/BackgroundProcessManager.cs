@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
+using System.Drawing;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -35,10 +36,11 @@ namespace SalesLibraries.CommonGUI.BackgroundProcesses
 			}
 		}
 
-		public void RunStartProcess(string text, Action<CancellationToken, FormStart> process, Action afterComplete = null)
+		public void RunStartProcess(Image logo, Action<CancellationToken, FormStart> process, Action afterComplete = null)
 		{
 			using (var form = new FormStart(_title))
 			{
+				form.pbHeaderRegular.Image = logo ?? form.pbHeaderRegular.Image;
 				RunWithProgress(form, false, process, cancellationToken =>
 				{
 					afterComplete?.Invoke();
