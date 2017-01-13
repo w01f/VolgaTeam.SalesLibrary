@@ -17,7 +17,7 @@
 							headerTitle: viewerData.previewInfo.showHeaderText ? viewerData.name : '',
 							headerIcon: viewerData.previewInfo.headerIcon,
 							libraryId: viewerData.previewInfo.libraryId,
-							pageSelectorMode: viewerData.previewInfo.pageSelectorType,
+							pageSelectorMode: viewerData.previewInfo.pageSelectorMode,
 							pageViewType: viewerData.previewInfo.pageViewType
 						}
 					});

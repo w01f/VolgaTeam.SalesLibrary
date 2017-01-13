@@ -16,7 +16,7 @@
 		public $headerIcon;
 		public $showHeaderText;
 		public $pageViewType;
-		public $pageSelectorType;
+		public $pageSelectorMode;
 
 		public $navigationPanel;
 
