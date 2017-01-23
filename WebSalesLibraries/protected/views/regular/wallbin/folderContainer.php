@@ -70,7 +70,7 @@
                     <img class="folder-widget" src="data:image/png;base64,<? echo $widget; ?>">
                     <span class="folder-header"><? echo $folder->name; ?></span>
 				<? else: ?>
-					<? echo $folder->name; ?>
+                    <span class="folder-header"><? echo $folder->name; ?></span>
 				<? endif; ?>
 			<? else: ?>
 				<? echo $folder->name; ?>

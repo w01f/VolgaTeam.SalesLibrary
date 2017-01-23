@@ -191,6 +191,7 @@ class Browser
     const BROWSER_IPAD = 'iPad';                              // http://apple.com
     const BROWSER_CHROME = 'Chrome';                          // http://www.google.com/chrome
 	const BROWSER_EO = 'EO';           			              //
+	const BROWSER_EDGE = 'Edge';       			              //
     const BROWSER_ANDROID = 'Android';                        // http://www.android.com/
     const BROWSER_ANDROID_MOBILE = 'Android Mobile';          // http://www.android.com/
     const BROWSER_GOOGLEBOT = 'GoogleBot';                    // http://en.wikipedia.org/wiki/Googlebot
@@ -477,6 +478,7 @@ class Browser
             $this->checkBrowserFirefox() ||
 			$this->checkBrowserEssentialObjects() ||
             $this->checkBrowserChrome() ||
+			$this->checkBrowserEdge() ||
             $this->checkBrowserOmniWeb() ||
             // common bots
             $this->checkBrowserGoogleBot() ||
@@ -652,6 +654,13 @@ class Browser
             $this->setVersion(str_replace(array('(', ')', ';'), '', $aresult[1]));
             return true;
         }
+        // Test for versions > 1.5
+        else if (stripos($this->_agent, 'trident/7.0; rv') !== false)
+        {
+	        $this->setBrowser(self::BROWSER_IE);
+	        $this->setVersion('11');
+	        return true;
+        }
         // Test for Pocket IE
         else if (stripos($this->_agent, 'mspie') !== false || stripos($this->_agent, 'pocket') !== false)
         {
@@ -728,7 +737,7 @@ class Browser
      */
     protected function checkBrowserChrome()
     {
-        if (stripos($this->_agent, 'Chrome') !== false)
+        if (stripos($this->_agent, 'Chrome') !== false && stripos($this->_agent, 'Edge') === false)
         {
             $aresult = explode('/', stristr($this->_agent, 'Chrome'));
             $aversion = explode(' ', $aresult[1]);
@@ -738,6 +747,23 @@ class Browser
         }
         return false;
     }
+
+	/**
+	 * Determine if the browser is Chrome or not (last updated 1.7)
+	 * @return boolean True if the browser is Chrome otherwise false
+	 */
+	protected function checkBrowserEdge()
+	{
+		if (stripos($this->_agent, 'Edge') !== false)
+		{
+			$aresult = explode('/', stristr($this->_agent, 'Edge'));
+			$aversion = explode(' ', $aresult[1]);
+			$this->setVersion($aversion[0]);
+			$this->setBrowser(self::BROWSER_EDGE);
+			return true;
+		}
+		return false;
+	}
 
 	/**
 	 * Determine if the browser is Essential Objects or not (last updated 1.7)
@@ -1011,7 +1037,14 @@ class Browser
      */
     protected function checkBrowserMozilla()
     {
-        if (stripos($this->_agent, 'mozilla') !== false && preg_match('/rv:[0-9].[0-9][a-b]?/i', $this->_agent) && stripos($this->_agent, 'netscape') === false)
+	    if (stripos($this->_agent, 'mozilla') !== false && preg_match('/rv:[0-9].[0-9][a-b]?/i', $this->_agent) && stripos($this->_agent, 'trident') !== false)
+	    {
+		    $aversion = explode('', stristr($this->_agent, 'rv:'));
+		    $this->setVersion(str_replace('rv:', '', $aversion[0]));
+		    $this->setBrowser(self::BROWSER_IE);
+		    return true;
+	    }
+        else if (stripos($this->_agent, 'mozilla') !== false && preg_match('/rv:[0-9].[0-9][a-b]?/i', $this->_agent) && stripos($this->_agent, 'netscape') === false)
         {
             $aversion = explode(' ', stristr($this->_agent, 'rv:'));
             preg_match('/rv:[0-9].[0-9][a-b]?/i', $this->_agent, $aversion);

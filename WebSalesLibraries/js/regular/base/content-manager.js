@@ -49,6 +49,14 @@
 				anchorImage.on('load', parameters.loadCallback);
 			else
 				parameters.loadCallback();
+
+			$('#content').css({
+				'overflow': ''
+			});
+
+			contentObject.css({
+				'overflow': ''
+			});
 		};
 
 		this.clearContent = function ()

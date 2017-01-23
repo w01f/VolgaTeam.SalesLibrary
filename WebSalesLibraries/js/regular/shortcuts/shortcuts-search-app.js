@@ -656,9 +656,14 @@
 
 			var width = $(window).width() - navigationPanel.outerWidth(true);
 
+			$('#content').css({
+				'overflow': 'hidden'
+			});
+
 			content.css({
 				'max-width': width + 'px',
-				'width': width + 'px'
+				'width': width + 'px',
+				'overflow': 'hidden'
 			});
 
 			dataTable.updateSize();

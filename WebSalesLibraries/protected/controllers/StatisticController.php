@@ -55,17 +55,20 @@
 					$activity->date = $activityRecord->date_time;
 					$activity->type = $activityRecord->type;
 					$activity->subType = $activityRecord->sub_type;
-					$activity->login = isset($activityRecord->userActivity->login) && $activityRecord->userActivity->login != '' ?
-						$activityRecord->userActivity->login :
-						'public user';
-					$activity->firstName = $activityRecord->userActivity->first_name;
-					$activity->lastName = $activityRecord->userActivity->last_name;
-					$activity->email = $activityRecord->userActivity->email;
-					$activity->phone = $activityRecord->userActivity->phone;
-					$activity->ip = $activityRecord->userActivity->ip;
-					$activity->os = $activityRecord->userActivity->os;
-					$activity->device = $activityRecord->userActivity->device;
-					$activity->browser = $activityRecord->userActivity->browser;
+					if(isset($activityRecord->userActivity))
+					{
+						$activity->login = isset($activityRecord->userActivity->login) && $activityRecord->userActivity->login != '' ?
+							$activityRecord->userActivity->login :
+							'public user';
+						$activity->firstName = $activityRecord->userActivity->first_name;
+						$activity->lastName = $activityRecord->userActivity->last_name;
+						$activity->email = $activityRecord->userActivity->email;
+						$activity->phone = $activityRecord->userActivity->phone;
+						$activity->ip = $activityRecord->userActivity->ip;
+						$activity->os = $activityRecord->userActivity->os;
+						$activity->device = $activityRecord->userActivity->device;
+						$activity->browser = $activityRecord->userActivity->browser;
+					}
 
 					unset($groups);
 					foreach ($activityRecord->groupActivities as $groupRecord)

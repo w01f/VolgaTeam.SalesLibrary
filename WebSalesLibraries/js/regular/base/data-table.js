@@ -51,17 +51,17 @@
 				};
 			data.dataset = data.dataset != undefined ? data.dataset : [];
 			data.dataOptions = data.dataOptions != undefined ? data.dataOptions : {
-				showCategory: false,
-				showLibraries: false,
-				showType: false,
-				showDate: false,
-				showRate: false,
-				showViewsCount: false,
-				showDeleteButton: false,
-				categoryColumnName: '',
-				librariesColumnName: '',
-				reorderSourceField: undefined
-			};
+					showCategory: false,
+					showLibraries: false,
+					showType: false,
+					showDate: false,
+					showRate: false,
+					showViewsCount: false,
+					showDeleteButton: false,
+					categoryColumnName: '',
+					librariesColumnName: '',
+					reorderSourceField: undefined
+				};
 			data.sortDirection = data.sortDirection != undefined ? data.sortDirection : 'asc';
 
 
@@ -254,12 +254,12 @@
 				searching: useSubSearch,
 				order: sortColumnIndex >= 0 ? [[sortColumnIndex, data.sortDirection]] : [],
 				rowReorder: data.dataOptions.reorderSourceField != undefined ?
-				{
-					update: true,
-					dataSrc: 'extended_data.' + data.dataOptions.reorderSourceField,
-					selector: '.allow-reorder',
-					snapX: 0
-				} :
+					{
+						update: true,
+						dataSrc: 'extended_data.' + data.dataOptions.reorderSourceField,
+						selector: '.allow-reorder',
+						snapX: 0
+					} :
 					false,
 				"scrollY": $.SalesPortal.Content.isMobileDevice() ? getNativeTableSize() : getBootstrapTableSize(),
 				"scrollCollapse": false,
@@ -438,7 +438,9 @@
 				content.find("#" + tableIdentifier + "_wrapper").find('.dataTables_scrollBody').css({
 					'height': height + 'px'
 				});
-				dataTable.fnSettings().oScroll.sY = height + 'px';
+				var oSettings = dataTable.fnSettings();
+				if (oSettings)
+					oSettings.oScroll.sY = height + 'px';
 				dataTable.api().columns.adjust().draw();
 			}
 		};

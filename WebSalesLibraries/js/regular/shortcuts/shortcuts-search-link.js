@@ -18,7 +18,10 @@
 				},
 				actions: parentSearchData.actions,
 				navigationPanel: parentSearchData.navigationPanel,
-				resizeCallback: updateContentSize
+				resizeCallback: function ()
+				{
+					updateContentSize();
+				}
 			});
 		}
 
@@ -187,13 +190,13 @@
 
 				sideBar.find('.search-bar-text')
 					.off('input').on('input', function ()
-					{
-						var text = $(this).val();
-						if (text != '')
-							customSearchData.set('text', text);
-						else
-							customSearchData.set('text', null);
-					})
+				{
+					var text = $(this).val();
+					if (text != '')
+						customSearchData.set('text', text);
+					else
+						customSearchData.set('text', null);
+				})
 					.off('keypress').on('keypress', function (e)
 				{
 					if (e.which == 13)
@@ -582,10 +585,16 @@
 			var sideBar = content.find('#right-navbar');
 
 			var height = content.outerHeight(true);
-			var width = $(window).width() - navigationPanel.outerWidth(true);
+			var width = $(window).width() - navigationPanel.outerWidth(true) - 5;
+
+			$('#content').css({
+				'overflow': 'hidden'
+			});
 
 			content.css({
-				'max-width': width + 'px'
+				'max-width': width + 'px',
+				'width': width + 'px',
+				'overflow': 'hidden'
 			});
 
 			var shortcutsSearchContainer = $('#shortcuts-search-container');
