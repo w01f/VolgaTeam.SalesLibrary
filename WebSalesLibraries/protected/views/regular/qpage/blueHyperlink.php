@@ -27,11 +27,8 @@
 	}
 	if ($link->isAppLink)
 		$linkContainerClass .= ' hidden-app-link';
-	if ($link->extendedProperties->isRestricted)
-		$linkContainerClass .= ' restricted';
 	if ($authorized)
 		$linkContainerClass .= ' log-activity';
-
 ?>
 <li>
     <a href="<? echo $link->isDirectUrl ? $link->fileLink : '#'; ?>" target="_blank" id="link<? echo $link->id; ?>"

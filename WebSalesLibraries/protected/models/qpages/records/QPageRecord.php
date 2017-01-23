@@ -155,6 +155,7 @@
 					$link = new LibraryLink(new LibraryFolder(new LibraryPage($library)));
 					$link->browser = Utils::getBrowser();
 					$link->load($linkRecord);
+					$link->extendedProperties->isRestricted = false;
 					$links[] = $link;
 				}
 			}
