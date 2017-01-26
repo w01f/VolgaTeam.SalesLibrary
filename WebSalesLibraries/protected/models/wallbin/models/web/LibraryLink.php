@@ -214,8 +214,14 @@
 						}
 					}
 					else
-						$baseImage = $alternativeImage = $this->parent->parent->parent->getAutoWidget($this->fileExtension);
-
+						switch ($this->originalFormat)
+						{
+							case 'url':
+								$baseImage = $alternativeImage = $this->parent->parent->parent->getAutoWidget('url');
+								break;
+							default:
+								$baseImage = $alternativeImage = $this->parent->parent->parent->getAutoWidget($this->fileExtension);
+						}
 					if (!isset($baseImage) && isset($this->parentLinkId) && isset($this->originalFormat))
 					{
 						$fileName = null;
