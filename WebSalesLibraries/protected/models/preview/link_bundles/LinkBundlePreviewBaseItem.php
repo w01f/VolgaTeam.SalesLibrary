@@ -78,6 +78,10 @@
 					/** @var UrlLinkBundleItem $bundleItem */
 					$bundlePreviewItem = LinkBundlePreviewUrlItem::fromUrlLinkBundleItem($bundleItem);
 					break;
+				case 6:
+					/** @var LinkBundleLaunchScreenItem $bundleItem */
+					$bundlePreviewItem = new LinkBundlePreviewLaunchScreenItem($bundleItem);
+					break;
 			}
 			return $bundlePreviewItem;
 		}

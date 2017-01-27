@@ -7,7 +7,15 @@
 	{
 		public $header;
 		public $additionalInfo;
+		public $foreColor;
+		public $backColor;
+		/**
+		 * @var \Font
+		 */
+		public $font;
+
 		public $revenueItems;
+
 
 		/**
 		 * @param $bundleItem LinkBundleRevenueItem
@@ -28,6 +36,10 @@
 			}
 
 			$this->additionalInfo = $bundleItem->additionalInfo;
+
+			$this->foreColor = $bundleItem->foreColor;
+			$this->backColor = $bundleItem->backColor;
+			$this->font = $bundleItem->font;
 
 			$this->revenueItems = array();
 			foreach ($bundleItem->infoItems as $infoItem)

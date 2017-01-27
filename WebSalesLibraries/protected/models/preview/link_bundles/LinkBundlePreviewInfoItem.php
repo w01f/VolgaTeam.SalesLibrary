@@ -6,6 +6,12 @@
 	{
 		public $header;
 		public $body;
+		public $foreColor;
+		public $backColor;
+		/**
+		 * @var \Font
+		 */
+		public $font;
 
 		/**
 		 * @param $bundleItem LinkBundleInfoItem
@@ -16,5 +22,9 @@
 			$this->contentView = 'linkBundleInfoContent';
 			$this->header = $bundleItem->header;
 			$this->body = $bundleItem->body;
+
+			$this->foreColor = $bundleItem->foreColor;
+			$this->backColor = $bundleItem->backColor;
+			$this->font = $bundleItem->font;
 		}
 	}

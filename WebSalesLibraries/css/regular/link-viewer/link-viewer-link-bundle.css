@@ -117,3 +117,13 @@
     font-weight: bold;
     margin-bottom: 10px;
 }
+
+.bundle-container .item-info.launch-screen .top-row
+{
+    margin-bottom: 50px;
+}
+
+.bundle-container .item-info.launch-screen .bottom-row
+{
+    margin-top: 50px;
+}
