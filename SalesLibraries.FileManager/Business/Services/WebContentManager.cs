@@ -594,15 +594,40 @@ namespace SalesLibraries.FileManager.Business.Services
 							linkItem = new UrlLinkBundleItem();
 							((UrlLinkBundleItem)linkItem).url = ((UrlItem)sourceBundleItem).Url;
 							break;
+						case LinkBundleItemType.LaunchScreen:
+							linkItem = new LinkBundleLaunchScreenItem();
+							((LinkBundleLaunchScreenItem)linkItem).header = ((LaunchScreenItem)sourceBundleItem).Header;
+							((LinkBundleLaunchScreenItem)linkItem).footer = ((LaunchScreenItem)sourceBundleItem).Footer;
+							((LinkBundleLaunchScreenItem)linkItem).logo = Convert.ToBase64String((byte[])imageConverter.ConvertTo(((LaunchScreenItem)sourceBundleItem).Logo, typeof(byte[])));
+							((LinkBundleLaunchScreenItem)linkItem).banner = Convert.ToBase64String((byte[])imageConverter.ConvertTo(((LaunchScreenItem)sourceBundleItem).Banner, typeof(byte[])));
+
+							((LinkBundleLaunchScreenItem)linkItem).headerForeColor = ((LaunchScreenItem)sourceBundleItem).HeaderForeColor.ToHex();
+							((LinkBundleLaunchScreenItem)linkItem).headerBackColor = ((LaunchScreenItem)sourceBundleItem).HeaderBackColor.ToHex();
+							((LinkBundleLaunchScreenItem)linkItem).headerFont = new Font();
+							((LinkBundleLaunchScreenItem)linkItem).headerFont.ImportData(((LaunchScreenItem)sourceBundleItem).HeaderFont);
+
+							((LinkBundleLaunchScreenItem)linkItem).footerForeColor = ((LaunchScreenItem)sourceBundleItem).FooterForeColor.ToHex();
+							((LinkBundleLaunchScreenItem)linkItem).footerBackColor = ((LaunchScreenItem)sourceBundleItem).FooterBackColor.ToHex();
+							((LinkBundleLaunchScreenItem)linkItem).footerFont = new Font();
+							((LinkBundleLaunchScreenItem)linkItem).footerFont.ImportData(((LaunchScreenItem)sourceBundleItem).FooterFont);
+							break;
 						case LinkBundleItemType.Info:
 							linkItem = new LinkBundleInfoItem();
 							((LinkBundleInfoItem)linkItem).header = ((InfoItem)sourceBundleItem).Header;
 							((LinkBundleInfoItem)linkItem).body = ((InfoItem)sourceBundleItem).Body;
+							((LinkBundleInfoItem)linkItem).foreColor = ((InfoItem)sourceBundleItem).ForeColor.ToHex();
+							((LinkBundleInfoItem)linkItem).backColor = ((InfoItem)sourceBundleItem).BackColor.ToHex();
+							((LinkBundleInfoItem)linkItem).font = new Font();
+							((LinkBundleInfoItem)linkItem).font.ImportData(((InfoItem)sourceBundleItem).Font);
 							break;
 						case LinkBundleItemType.Strategy:
 							linkItem = new LinkBundleStrategyItem();
 							((LinkBundleStrategyItem)linkItem).header = ((StrategyItem)sourceBundleItem).Header;
 							((LinkBundleStrategyItem)linkItem).body = ((StrategyItem)sourceBundleItem).Body;
+							((LinkBundleStrategyItem)linkItem).foreColor = ((StrategyItem)sourceBundleItem).ForeColor.ToHex();
+							((LinkBundleStrategyItem)linkItem).backColor = ((StrategyItem)sourceBundleItem).BackColor.ToHex();
+							((LinkBundleStrategyItem)linkItem).font = new Font();
+							((LinkBundleStrategyItem)linkItem).font.ImportData(((StrategyItem)sourceBundleItem).Font);
 							break;
 						case LinkBundleItemType.Revenue:
 							linkItem = new LinkBundleRevenueItem();
@@ -617,6 +642,10 @@ namespace SalesLibraries.FileManager.Business.Services
 								})
 								.ToArray();
 							((LinkBundleRevenueItem)linkItem).additionalInfo = ((RevenueItem)sourceBundleItem).AdditionalInfo;
+							((LinkBundleRevenueItem)linkItem).foreColor = ((RevenueItem)sourceBundleItem).ForeColor.ToHex();
+							((LinkBundleRevenueItem)linkItem).backColor = ((RevenueItem)sourceBundleItem).BackColor.ToHex();
+							((LinkBundleRevenueItem)linkItem).font = new Font();
+							((LinkBundleRevenueItem)linkItem).font.ImportData(((RevenueItem)sourceBundleItem).Font);
 							break;
 						default:
 							throw new ArgumentOutOfRangeException();

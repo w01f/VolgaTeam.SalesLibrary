@@ -280,7 +280,7 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 				{
 				}
 
-			deadLinksList.ForEach(link => link.DeleteLink(true));
+			deadLinksList.ForEach(link => link.DeleteLink());
 		}
 	}
 }

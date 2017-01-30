@@ -108,6 +108,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			};
 
 			checkEditInvert.Checked = _data.Inverted;
+			checkEditUseTextColor.Checked = _data.WidgetHolder != null && _data.WidgetHolder.UseTextColorForWidget;
+			checkEditUseTextColor.Enabled = radioButtonWidgetTypeCustom.Checked && checkEditInvert.Checked;
+			colorEditInversionColor.Enabled = radioButtonWidgetTypeCustom.Checked && checkEditInvert.Checked && !checkEditUseTextColor.Checked;
 			colorEditInversionColor.EditValue = _data.InversionColor;
 			_originalImage = _data.WidgetType == WidgetType.CustomWidget ? _data.Image : null;
 			_originalImageName = _data.WidgetType == WidgetType.CustomWidget ? _data.ImageName : null;
@@ -117,7 +120,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 					radioButtonWidgetTypeCustom.Checked = true;
 					radioButtonWidgetTypeDisabled.Checked = false;
 					break;
-				case WidgetType.NoWidget:
+				default:
 					radioButtonWidgetTypeCustom.Checked = false;
 					radioButtonWidgetTypeDisabled.Checked = true;
 					break;
@@ -135,6 +138,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			{
 				_data.WidgetType = WidgetType.CustomWidget;
 				_data.Inverted = checkEditInvert.Checked;
+				if (_data.WidgetHolder != null)
+					_data.WidgetHolder.UseTextColorForWidget = checkEditUseTextColor.Checked;
 				_data.InversionColor = colorEditInversionColor.Color != GraphicObjectExtensions.DefaultInversionColor
 					? colorEditInversionColor.Color
 					: GraphicObjectExtensions.DefaultInversionColor;
@@ -157,6 +162,13 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			_loading = false;
 		}
 
+		public void UpdateColor(Color? textColor)
+		{
+			checkEditUseTextColor.Checked = textColor.HasValue;
+			colorEditInversionColor.Enabled = radioButtonWidgetTypeCustom.Checked && checkEditInvert.Checked && !checkEditUseTextColor.Checked;
+			colorEditInversionColor.EditValue = checkEditUseTextColor.Checked ? textColor : _data.InversionColor;
+		}
+
 		private void UpdateCustomDisplayImage()
 		{
 			if (_originalImage != null && checkEditInvert.Checked)
@@ -175,7 +187,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			pbCustomWidget.Enabled = radioButtonWidgetTypeCustom.Checked;
 			pnSearch.Enabled = radioButtonWidgetTypeCustom.Checked;
 			checkEditInvert.Enabled = radioButtonWidgetTypeCustom.Checked;
-			colorEditInversionColor.Enabled = radioButtonWidgetTypeCustom.Checked && checkEditInvert.Checked;
+			checkEditUseTextColor.Enabled = radioButtonWidgetTypeCustom.Checked && checkEditInvert.Checked;
+			colorEditInversionColor.Enabled = radioButtonWidgetTypeCustom.Checked && checkEditInvert.Checked && !checkEditUseTextColor.Checked;
 			pnGallery.Enabled = radioButtonWidgetTypeCustom.Checked;
 			if (!_loading)
 			{
@@ -196,8 +209,14 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 
 		private void colorEditInversionColor_EditValueChanged(object sender, EventArgs e)
 		{
-			if(!_loading)
+			if (!_loading)
 				UpdateCustomDisplayImage();
+		}
+
+		private void checkEditUseTextColor_CheckedChanged(object sender, EventArgs e)
+		{
+			if (!_loading)
+				StateChanged?.Invoke(this, new CheckedChangedEventArgs(radioButtonWidgetTypeCustom.Checked));
 		}
 
 		private void OnImageDoubleClick(object sender, EventArgs e)
@@ -239,5 +258,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 		{
 			e.Cancel = !checkEditInvert.Checked || pbCustomWidget.Image == null || colorEditInversionColor.Color == Color.White;
 		}
+
+
 	}
 }

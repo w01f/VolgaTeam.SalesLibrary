@@ -109,7 +109,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Settings
 
 			_bannerControl?.SaveData();
 			if (_widgetControl == null && _columnTitle.Banner.Enable)
-				_columnTitle.Widget.WidgetType = WidgetType.NoWidget;
+				_columnTitle.Widget.WidgetType = _columnTitle.Widget.DefaultWidgetType;
 
 			_columnTitle.Page.ApplyColumnTitleSettings(_columnTitle);
 		}

@@ -281,9 +281,10 @@
 			this.labelControlImageAlignment.Appearance.BackColor = System.Drawing.Color.Transparent;
 			this.labelControlImageAlignment.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.labelControlImageAlignment.AppearanceDisabled.ForeColor = System.Drawing.Color.Gray;
-			this.labelControlImageAlignment.Location = new System.Drawing.Point(471, 426);
+			this.labelControlImageAlignment.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+			this.labelControlImageAlignment.Location = new System.Drawing.Point(412, 424);
 			this.labelControlImageAlignment.Name = "labelControlImageAlignment";
-			this.labelControlImageAlignment.Size = new System.Drawing.Size(69, 16);
+			this.labelControlImageAlignment.Size = new System.Drawing.Size(91, 19);
 			this.labelControlImageAlignment.StyleController = this.styleController;
 			this.labelControlImageAlignment.TabIndex = 55;
 			this.labelControlImageAlignment.Text = "<b>Alignment:</b>";
@@ -292,7 +293,7 @@
 			// checkEditHorizontalAlignmentRight
 			// 
 			this.checkEditHorizontalAlignmentRight.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.checkEditHorizontalAlignmentRight.Location = new System.Drawing.Point(666, 424);
+			this.checkEditHorizontalAlignmentRight.Location = new System.Drawing.Point(661, 424);
 			this.checkEditHorizontalAlignmentRight.Name = "checkEditHorizontalAlignmentRight";
 			this.checkEditHorizontalAlignmentRight.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.checkEditHorizontalAlignmentRight.Properties.Appearance.Options.UseForeColor = true;
@@ -309,7 +310,7 @@
 			// checkEditHorizontalAlignmentCenter
 			// 
 			this.checkEditHorizontalAlignmentCenter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.checkEditHorizontalAlignmentCenter.Location = new System.Drawing.Point(584, 424);
+			this.checkEditHorizontalAlignmentCenter.Location = new System.Drawing.Point(578, 424);
 			this.checkEditHorizontalAlignmentCenter.Name = "checkEditHorizontalAlignmentCenter";
 			this.checkEditHorizontalAlignmentCenter.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.checkEditHorizontalAlignmentCenter.Properties.Appearance.Options.UseForeColor = true;
@@ -326,7 +327,7 @@
 			// checkEditHorizontalAlignmentLeft
 			// 
 			this.checkEditHorizontalAlignmentLeft.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.checkEditHorizontalAlignmentLeft.Location = new System.Drawing.Point(545, 424);
+			this.checkEditHorizontalAlignmentLeft.Location = new System.Drawing.Point(509, 424);
 			this.checkEditHorizontalAlignmentLeft.Name = "checkEditHorizontalAlignmentLeft";
 			this.checkEditHorizontalAlignmentLeft.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.checkEditHorizontalAlignmentLeft.Properties.Appearance.Options.UseForeColor = true;
@@ -663,7 +664,7 @@
 			this.contextMenuStripImage.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItemImageAddToFavorites});
 			this.contextMenuStripImage.Name = "contextMenuStripImage";
-			this.contextMenuStripImage.Size = new System.Drawing.Size(163, 48);
+			this.contextMenuStripImage.Size = new System.Drawing.Size(163, 26);
 			// 
 			// toolStripMenuItemImageAddToFavorites
 			// 

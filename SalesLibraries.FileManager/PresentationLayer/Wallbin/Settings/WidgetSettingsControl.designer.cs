@@ -30,6 +30,8 @@
         {
 			this.components = new System.ComponentModel.Container();
 			this.pbCustomWidget = new System.Windows.Forms.PictureBox();
+			this.contextMenuStripImage = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.toolStripMenuItemImageAddToFavorites = new System.Windows.Forms.ToolStripMenuItem();
 			this.radioButtonWidgetTypeCustom = new System.Windows.Forms.RadioButton();
 			this.radioButtonWidgetTypeDisabled = new System.Windows.Forms.RadioButton();
 			this.pnSearch = new System.Windows.Forms.Panel();
@@ -44,9 +46,9 @@
 			this.labelControlSelectedGalleryName = new DevExpress.XtraEditors.LabelControl();
 			this.colorEditInversionColor = new SalesLibraries.CommonGUI.Common.HtmlColorEdit();
 			this.checkEditInvert = new DevExpress.XtraEditors.CheckEdit();
-			this.contextMenuStripImage = new System.Windows.Forms.ContextMenuStrip(this.components);
-			this.toolStripMenuItemImageAddToFavorites = new System.Windows.Forms.ToolStripMenuItem();
+			this.checkEditUseTextColor = new DevExpress.XtraEditors.CheckEdit();
 			((System.ComponentModel.ISupportInitialize)(this.pbCustomWidget)).BeginInit();
+			this.contextMenuStripImage.SuspendLayout();
 			this.pnSearch.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditSearch.Properties)).BeginInit();
@@ -56,7 +58,7 @@
 			this.retractableBarGallery.Header.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.colorEditInversionColor.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditInvert.Properties)).BeginInit();
-			this.contextMenuStripImage.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditUseTextColor.Properties)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// pbCustomWidget
@@ -66,12 +68,28 @@
 			this.pbCustomWidget.ContextMenuStrip = this.contextMenuStripImage;
 			this.pbCustomWidget.Enabled = false;
 			this.pbCustomWidget.ForeColor = System.Drawing.Color.Black;
-			this.pbCustomWidget.Location = new System.Drawing.Point(293, 497);
+			this.pbCustomWidget.Location = new System.Drawing.Point(263, 497);
 			this.pbCustomWidget.Name = "pbCustomWidget";
 			this.pbCustomWidget.Size = new System.Drawing.Size(36, 36);
 			this.pbCustomWidget.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
 			this.pbCustomWidget.TabIndex = 8;
 			this.pbCustomWidget.TabStop = false;
+			// 
+			// contextMenuStripImage
+			// 
+			this.contextMenuStripImage.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItemImageAddToFavorites});
+			this.contextMenuStripImage.Name = "contextMenuStripImage";
+			this.contextMenuStripImage.Size = new System.Drawing.Size(163, 26);
+			this.contextMenuStripImage.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStripImage_Opening);
+			// 
+			// toolStripMenuItemImageAddToFavorites
+			// 
+			this.toolStripMenuItemImageAddToFavorites.Image = global::SalesLibraries.FileManager.Properties.Resources.Favorites;
+			this.toolStripMenuItemImageAddToFavorites.Name = "toolStripMenuItemImageAddToFavorites";
+			this.toolStripMenuItemImageAddToFavorites.Size = new System.Drawing.Size(162, 22);
+			this.toolStripMenuItemImageAddToFavorites.Text = "Add To Favorites";
+			this.toolStripMenuItemImageAddToFavorites.Click += new System.EventHandler(this.toolStripMenuItemImageAddToFavorites_Click);
 			// 
 			// radioButtonWidgetTypeCustom
 			// 
@@ -79,7 +97,7 @@
 			this.radioButtonWidgetTypeCustom.AutoSize = true;
 			this.radioButtonWidgetTypeCustom.BackColor = System.Drawing.Color.White;
 			this.radioButtonWidgetTypeCustom.ForeColor = System.Drawing.Color.Black;
-			this.radioButtonWidgetTypeCustom.Location = new System.Drawing.Point(172, 505);
+			this.radioButtonWidgetTypeCustom.Location = new System.Drawing.Point(142, 505);
 			this.radioButtonWidgetTypeCustom.Name = "radioButtonWidgetTypeCustom";
 			this.radioButtonWidgetTypeCustom.Size = new System.Drawing.Size(120, 20);
 			this.radioButtonWidgetTypeCustom.TabIndex = 12;
@@ -112,9 +130,9 @@
 			this.pnSearch.Controls.Add(this.textEditSearch);
 			this.pnSearch.Enabled = false;
 			this.pnSearch.ForeColor = System.Drawing.Color.Black;
-			this.pnSearch.Location = new System.Drawing.Point(555, 497);
+			this.pnSearch.Location = new System.Drawing.Point(610, 497);
 			this.pnSearch.Name = "pnSearch";
-			this.pnSearch.Size = new System.Drawing.Size(362, 36);
+			this.pnSearch.Size = new System.Drawing.Size(307, 36);
 			this.pnSearch.TabIndex = 21;
 			this.pnSearch.Click += new System.EventHandler(this.OnFormClick);
 			// 
@@ -154,9 +172,10 @@
 			// buttonXSearch
 			// 
 			this.buttonXSearch.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXSearch.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXSearch.Enabled = false;
-			this.buttonXSearch.Location = new System.Drawing.Point(280, 6);
+			this.buttonXSearch.Location = new System.Drawing.Point(225, 6);
 			this.buttonXSearch.Name = "buttonXSearch";
 			this.buttonXSearch.Size = new System.Drawing.Size(77, 24);
 			this.buttonXSearch.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -167,13 +186,15 @@
 			// 
 			// textEditSearch
 			// 
+			this.textEditSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.textEditSearch.Location = new System.Drawing.Point(72, 7);
 			this.textEditSearch.Name = "textEditSearch";
 			this.textEditSearch.Properties.Appearance.BackColor = System.Drawing.Color.White;
 			this.textEditSearch.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.textEditSearch.Properties.Appearance.Options.UseBackColor = true;
 			this.textEditSearch.Properties.Appearance.Options.UseForeColor = true;
-			this.textEditSearch.Size = new System.Drawing.Size(191, 22);
+			this.textEditSearch.Size = new System.Drawing.Size(136, 22);
 			this.textEditSearch.StyleController = this.styleController;
 			this.textEditSearch.TabIndex = 17;
 			this.textEditSearch.EditValueChanged += new System.EventHandler(this.OnSearchEditValueChanged);
@@ -288,7 +309,7 @@
 			this.colorEditInversionColor.Color = System.Drawing.Color.Empty;
 			this.colorEditInversionColor.EditValue = System.Drawing.Color.Empty;
 			this.colorEditInversionColor.Enabled = false;
-			this.colorEditInversionColor.Location = new System.Drawing.Point(409, 504);
+			this.colorEditInversionColor.Location = new System.Drawing.Point(379, 504);
 			this.colorEditInversionColor.Name = "colorEditInversionColor";
 			this.colorEditInversionColor.Properties.Appearance.BackColor = System.Drawing.Color.White;
 			this.colorEditInversionColor.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
@@ -306,7 +327,7 @@
 			// 
 			this.checkEditInvert.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.checkEditInvert.Enabled = false;
-			this.checkEditInvert.Location = new System.Drawing.Point(335, 505);
+			this.checkEditInvert.Location = new System.Drawing.Point(305, 505);
 			this.checkEditInvert.Name = "checkEditInvert";
 			this.checkEditInvert.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.checkEditInvert.Properties.Appearance.Options.UseForeColor = true;
@@ -316,26 +337,25 @@
 			this.checkEditInvert.TabIndex = 61;
 			this.checkEditInvert.CheckedChanged += new System.EventHandler(this.OnWidgetTypeChanged);
 			// 
-			// contextMenuStripImage
+			// checkEditUseTextColor
 			// 
-			this.contextMenuStripImage.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItemImageAddToFavorites});
-			this.contextMenuStripImage.Name = "contextMenuStripImage";
-			this.contextMenuStripImage.Size = new System.Drawing.Size(163, 26);
-			this.contextMenuStripImage.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStripImage_Opening);
-			// 
-			// toolStripMenuItemImageAddToFavorites
-			// 
-			this.toolStripMenuItemImageAddToFavorites.Image = global::SalesLibraries.FileManager.Properties.Resources.Favorites;
-			this.toolStripMenuItemImageAddToFavorites.Name = "toolStripMenuItemImageAddToFavorites";
-			this.toolStripMenuItemImageAddToFavorites.Size = new System.Drawing.Size(162, 22);
-			this.toolStripMenuItemImageAddToFavorites.Text = "Add To Favorites";
-			this.toolStripMenuItemImageAddToFavorites.Click += new System.EventHandler(this.toolStripMenuItemImageAddToFavorites_Click);
+			this.checkEditUseTextColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.checkEditUseTextColor.Enabled = false;
+			this.checkEditUseTextColor.Location = new System.Drawing.Point(473, 505);
+			this.checkEditUseTextColor.Name = "checkEditUseTextColor";
+			this.checkEditUseTextColor.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.checkEditUseTextColor.Properties.Appearance.Options.UseForeColor = true;
+			this.checkEditUseTextColor.Properties.Caption = "Use Text Color";
+			this.checkEditUseTextColor.Size = new System.Drawing.Size(118, 20);
+			this.checkEditUseTextColor.StyleController = this.styleController;
+			this.checkEditUseTextColor.TabIndex = 63;
+			this.checkEditUseTextColor.CheckedChanged += new System.EventHandler(this.checkEditUseTextColor_CheckedChanged);
 			// 
 			// WidgetSettingsControl
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
 			this.BackColor = System.Drawing.Color.White;
+			this.Controls.Add(this.checkEditUseTextColor);
 			this.Controls.Add(this.colorEditInversionColor);
 			this.Controls.Add(this.checkEditInvert);
 			this.Controls.Add(this.pnGallery);
@@ -349,6 +369,7 @@
 			this.Size = new System.Drawing.Size(920, 542);
 			this.Click += new System.EventHandler(this.OnFormClick);
 			((System.ComponentModel.ISupportInitialize)(this.pbCustomWidget)).EndInit();
+			this.contextMenuStripImage.ResumeLayout(false);
 			this.pnSearch.ResumeLayout(false);
 			this.pnSearch.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
@@ -359,7 +380,7 @@
 			this.retractableBarGallery.Header.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.colorEditInversionColor.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditInvert.Properties)).EndInit();
-			this.contextMenuStripImage.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.checkEditUseTextColor.Properties)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -384,5 +405,6 @@
 		public DevExpress.XtraEditors.CheckEdit checkEditInvert;
 		private System.Windows.Forms.ContextMenuStrip contextMenuStripImage;
 		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemImageAddToFavorites;
+		public DevExpress.XtraEditors.CheckEdit checkEditUseTextColor;
 	}
 }

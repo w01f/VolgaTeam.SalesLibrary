@@ -28,12 +28,13 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.components = new System.ComponentModel.Container();
 			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
 			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
 			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
-			this.styleManager = new DevComponents.DotNetBar.StyleManager();
-			this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel();
+			this.styleManager = new DevComponents.DotNetBar.StyleManager(this.components);
+			this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
 			this.superTooltip = new DevComponents.DotNetBar.SuperTooltip();
 			this.buttonItemProgramScheduleBrowseDay = new DevComponents.DotNetBar.ButtonItem();
 			this.buttonItemProgramScheduleBrowseWeek = new DevComponents.DotNetBar.ButtonItem();
@@ -121,7 +122,7 @@
 			this.ribbonBarHomeSettings = new DevComponents.DotNetBar.RibbonBar();
 			this.ribbonBarHomeWallbin = new DevComponents.DotNetBar.RibbonBar();
 			this.comboBoxEditHomeLibrary = new DevExpress.XtraEditors.ComboBoxEdit();
-			this.styleController = new DevExpress.XtraEditors.StyleController();
+			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
 			this.comboBoxEditHomePage = new DevExpress.XtraEditors.ComboBoxEdit();
 			this.itemContainerHomeBrandLogo = new DevComponents.DotNetBar.ItemContainer();
 			this.labelItemHomeWallbinLogo = new DevComponents.DotNetBar.LabelItem();
@@ -257,7 +258,7 @@
 			// 
 			// styleManager
 			// 
-			this.styleManager.ManagerStyle = DevComponents.DotNetBar.eStyle.Office2013;
+			this.styleManager.ManagerStyle = DevComponents.DotNetBar.eStyle.Metro;
 			this.styleManager.MetroColorParameters = new DevComponents.DotNetBar.Metro.ColorTables.MetroColorGeneratorParameters(System.Drawing.Color.White, System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(87)))), ((int)(((byte)(154))))));
 			// 
 			// defaultLookAndFeel
@@ -3499,7 +3500,7 @@
 			this.pnContainer.Location = new System.Drawing.Point(5, 186);
 			this.pnContainer.Name = "pnContainer";
 			this.pnContainer.Padding = new System.Windows.Forms.Padding(0, 2, 0, 0);
-			this.pnContainer.Size = new System.Drawing.Size(998, 438);
+			this.pnContainer.Size = new System.Drawing.Size(998, 436);
 			this.pnContainer.TabIndex = 2;
 			// 
 			// pnEmpty
@@ -3507,13 +3508,13 @@
 			this.pnEmpty.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.pnEmpty.Location = new System.Drawing.Point(5, 186);
 			this.pnEmpty.Name = "pnEmpty";
-			this.pnEmpty.Size = new System.Drawing.Size(998, 438);
+			this.pnEmpty.Size = new System.Drawing.Size(998, 436);
 			this.pnEmpty.TabIndex = 4;
 			// 
 			// FormMain
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-			this.ClientSize = new System.Drawing.Size(1008, 626);
+			this.ClientSize = new System.Drawing.Size(1008, 624);
 			this.Controls.Add(this.pnEmpty);
 			this.Controls.Add(this.pnContainer);
 			this.Controls.Add(this.ribbonControl);

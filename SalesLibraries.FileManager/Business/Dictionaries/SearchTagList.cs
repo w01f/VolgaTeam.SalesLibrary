@@ -43,13 +43,14 @@ namespace SalesLibraries.FileManager.Business.Dictionaries
 			response = MainController.Instance.RestServiceConnection.DoRequest(new SearchCategoriesGetRequestData(), "Error loading dictionaries updates from server");
 			SearchGroups.AddRange(LoadFromCloudData(response.GetData<SearchCategory[]>()));
 
-			int tempInt;
+			
 			response = MainController.Instance.RestServiceConnection.DoRequest(new MetaDataGetRequestData
 			{
 				DataTag = MetaDataConst.CategoriesDataTag,
 				PropertyName = MetaDataConst.MaxTagsPropertyName
 			},
 				"Error loading dictionaries updates from server");
+			int tempInt;
 			if (Int32.TryParse(response.DataEncoded, out tempInt))
 				MaxTags = tempInt;
 			response = MainController.Instance.RestServiceConnection.DoRequest(new MetaDataGetRequestData
@@ -58,8 +59,9 @@ namespace SalesLibraries.FileManager.Business.Dictionaries
 				PropertyName = MetaDataConst.CountTagsPropertyName
 			},
 				"Error loading dictionaries updates from server");
-			if (Int32.TryParse(response.DataEncoded, out tempInt))
-				TagCount = tempInt > 0;
+			bool tempBool;
+			if (Boolean.TryParse(response.DataEncoded, out tempBool))
+				TagCount = tempBool;
 
 			localMetaData.Content = JsonConvert.SerializeObject(this);
 			localMetaData.Save();

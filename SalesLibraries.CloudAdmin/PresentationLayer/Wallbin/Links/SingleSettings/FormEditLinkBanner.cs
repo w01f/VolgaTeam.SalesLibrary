@@ -8,6 +8,7 @@ using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.ViewInfo;
 using DevExpress.XtraTab;
 using SalesLibraries.Business.Entities.Common;
+using SalesLibraries.Business.Entities.Interfaces;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
@@ -24,7 +25,7 @@ using HorizontalAlignment = SalesLibraries.Business.Entities.Wallbin.Common.Enum
 
 namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettings
 {
-	public partial class FormEditLinkBanner : MetroForm, ILinkSettingsEditForm
+	public partial class FormEditLinkBanner : MetroForm, ILinkSetSettingsEditForm
 	{
 		private const string ImageTitleFormat = "<size=+4><b>{0}</b></size><br><color=gray>{1}</color>";
 		private const int BannerThumbnailHeight = 64;
@@ -33,18 +34,22 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 		private string _tempBannerText;
 		private string _originalImageName;
 		private readonly BaseLibraryLink _sourceLink;
+		private readonly ILinksGroup _sourceLinkGroup;
 
 		public LinkSettingsType[] EditableSettings => new[]
 		{
 			LinkSettingsType.Banner,
 		};
 
-		public FormEditLinkBanner(BaseLibraryLink sourceLink)
-		{
-			_sourceLink = sourceLink;
-			InitializeComponent();
+		private string BannerTitle
+			=>
+				_sourceLinkGroup != null
+					? String.Format("Library links ({0})", _sourceLinkGroup.AllLinks.Count())
+					: _sourceLink.LinkInfoDisplayName;
 
-			labelControlTitle.Text = String.Format(ImageTitleFormat, _sourceLink.LinkInfoDisplayName, String.Empty);
+		private FormEditLinkBanner()
+		{
+			InitializeComponent();
 
 			buttonEditBannerTextFont.ButtonClick += EditorHelper.FontEdit_ButtonClick;
 			buttonEditBannerTextFont.Click += EditorHelper.FontEdit_Click;
@@ -80,12 +85,29 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 			}
 		}
 
+		public FormEditLinkBanner(BaseLibraryLink sourceLink) : this()
+		{
+			_sourceLink = sourceLink;
+			labelControlTitle.Text = String.Format(ImageTitleFormat, BannerTitle, String.Empty);
+		}
+
+		public FormEditLinkBanner(ILinksGroup linkGroup, FileTypes? defaultLinkType = null) : this()
+		{
+			_sourceLinkGroup = linkGroup;
+			_sourceLink = _sourceLinkGroup.AllLinks
+				.FirstOrDefault(link => !defaultLinkType.HasValue || link.Type == defaultLinkType.Value);
+			labelControlTitle.Text = String.Format(ImageTitleFormat, BannerTitle, String.Empty);
+		}
+
 		public void InitForm<TEditControl>(LinkSettingsType settingsType) where TEditControl : ILinkSettingsEditControl
 		{
 			Width = 990;
 			Height = 670;
 			FormStateHelper.Init(this, RemoteResourceManager.Instance.AppAliasSettingsFolder, "Site Admin-Link-Banner", false, false);
-			Text = string.Format(Text, _sourceLink.Name);
+			Text = String.Format(Text,
+				_sourceLinkGroup != null ?
+					String.Format("{0} links", _sourceLinkGroup.AllLinks.Count()) :
+					_sourceLink.ToString());
 			StartPosition = FormStartPosition.CenterParent;
 			LoadData();
 		}
@@ -156,9 +178,9 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 			return banner;
 		}
 
-		private BannerSettings GetEmptyBanner()
+		private BannerSettings GetEmptyBanner(BaseLibraryLink parentLink)
 		{
-			var banner = SettingsContainer.CreateInstance<BannerSettings>(_sourceLink);
+			var banner = SettingsContainer.CreateInstance<BannerSettings>(parentLink);
 			banner.Text = _tempBannerText;
 			return banner;
 		}
@@ -230,47 +252,53 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 
 		private void SaveData()
 		{
-			if (buttonXEnable.Checked)
+			foreach (var link in (_sourceLinkGroup?.AllLinks ?? new[] { _sourceLink }).ToList())
 			{
-				_sourceLink.Banner.Enable = true;
-
-				_sourceLink.Banner.Inverted = checkEditInvert.Checked;
-				_sourceLink.Banner.InversionColor = colorEditInversionColor.Color != GraphicObjectExtensions.DefaultInversionColor
-					? colorEditInversionColor.Color
-					: GraphicObjectExtensions.DefaultInversionColor;
-				_sourceLink.Banner.ImageVerticalAlignement = checkEditVerticalAlignmentTop1.Checked
-					? VerticalAlignment.Top
-					: VerticalAlignment.Middle;
-				_sourceLink.Banner.Image = labelControlTitle.Tag as Image;
-				_sourceLink.Banner.ImageName = _originalImageName;
-				if (checkEditHorizontalAlignmentLeft.Checked)
-					_sourceLink.Banner.ImageAlignement = HorizontalAlignment.Left;
-				else if (checkEditHorizontalAlignmentCenter.Checked)
-					_sourceLink.Banner.ImageAlignement = HorizontalAlignment.Center;
-				else if (checkEditHorizontalAlignmentRight.Checked)
-					_sourceLink.Banner.ImageAlignement = HorizontalAlignment.Right;
-
-				_sourceLink.Banner.TextMode = BannerTextMode.NoText;
-				if (_sourceLink.Banner.ImageAlignement == HorizontalAlignment.Left)
+				if (buttonXEnable.Checked)
 				{
-					if (buttonXShowTextLinkName.Checked)
-						_sourceLink.Banner.TextMode = BannerTextMode.LinkName;
-					else if (buttonXShowTextCustom.Checked)
-						_sourceLink.Banner.TextMode = BannerTextMode.CustomText;
-				}
-				_sourceLink.Banner.Font = buttonEditBannerTextFont.Tag as Font;
-				_sourceLink.Banner.ForeColor = colorEditBannerTextColor.Color;
+					link.Banner.Enable = true;
 
-				if (checkEditSaveAsTemplate.Checked)
-					MainController.Instance.Settings.DefaultBannerSettingsEncoded =
-						_sourceLink.Banner.SaveAsTemplate().Serialize();
+					link.Banner.Inverted = checkEditInvert.Checked;
+					link.Banner.InversionColor = colorEditInversionColor.Color != GraphicObjectExtensions.DefaultInversionColor
+						? colorEditInversionColor.Color
+						: GraphicObjectExtensions.DefaultInversionColor;
+					link.Banner.ImageVerticalAlignement = checkEditVerticalAlignmentTop1.Checked
+						? VerticalAlignment.Top
+						: VerticalAlignment.Middle;
+					link.Banner.Image = labelControlTitle.Tag as Image;
+					link.Banner.ImageName = _originalImageName;
+					if (checkEditHorizontalAlignmentLeft.Checked)
+						link.Banner.ImageAlignement = HorizontalAlignment.Left;
+					else if (checkEditHorizontalAlignmentCenter.Checked)
+						link.Banner.ImageAlignement = HorizontalAlignment.Center;
+					else if (checkEditHorizontalAlignmentRight.Checked)
+						link.Banner.ImageAlignement = HorizontalAlignment.Right;
+
+					link.Banner.TextMode = BannerTextMode.NoText;
+					if (link.Banner.ImageAlignement == HorizontalAlignment.Left)
+					{
+						if (buttonXShowTextLinkName.Checked)
+							link.Banner.TextMode = BannerTextMode.LinkName;
+						else if (buttonXShowTextCustom.Checked)
+							link.Banner.TextMode = BannerTextMode.CustomText;
+					}
+					link.Banner.Font = buttonEditBannerTextFont.Tag as Font;
+					link.Banner.ForeColor = colorEditBannerTextColor.Color;
+
+
+				}
+				else
+				{
+					link.Banner = GetEmptyBanner(link);
+				}
+				link.Banner.Text = _tempBannerText;
+				link.Settings.TextWordWrap = checkEditTextWordWrap.Checked;
+				link.Widget.WidgetType = _sourceLink.Banner.Enable ? link.Widget.DefaultWidgetType : link.Widget.WidgetType;
 			}
-			else
-			{
-				_sourceLink.Banner = GetEmptyBanner();
-			}
-			_sourceLink.Banner.Text = _tempBannerText;
-			_sourceLink.Settings.TextWordWrap = checkEditTextWordWrap.Checked;
+
+			if (buttonXEnable.Checked && checkEditSaveAsTemplate.Checked)
+				MainController.Instance.Settings.DefaultBannerSettingsEncoded =
+					_sourceLink.Banner.SaveAsTemplate().Serialize();
 		}
 
 		private void UpdateCustomDisplayImage()
@@ -287,7 +315,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 					: imageClone.Invert();
 			}
 			labelControlTitle.Appearance.Image = displayImage;
-			labelControlTitle.Text = String.Format(ImageTitleFormat, _sourceLink.LinkInfoDisplayName, _originalImageName);
+			labelControlTitle.Text = String.Format(ImageTitleFormat, BannerTitle, _originalImageName);
 		}
 
 		private void OnFormClosing(object sender, FormClosingEventArgs e)
@@ -313,7 +341,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 			if (_allowHandleEvents)
 			{
 				_allowHandleEvents = false;
-				var banner = buttonXEnable.Checked ? GetDefaultBanner() : GetEmptyBanner();
+				var banner = buttonXEnable.Checked ? GetDefaultBanner() : GetEmptyBanner(_sourceLink);
 				banner.Enable = buttonXEnable.Checked;
 				LoadBanner(banner);
 				_allowHandleEvents = true;

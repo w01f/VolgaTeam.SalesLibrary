@@ -2,6 +2,7 @@
 using System.IO;
 using DevComponents.DotNetBar;
 using SalesLibraries.Common.Helpers;
+using SalesLibraries.CommonGUI.Floater;
 using SalesLibraries.FileManager.Controllers;
 
 namespace SalesLibraries.FileManager
@@ -96,6 +97,11 @@ namespace SalesLibraries.FileManager
 		private void OnFormClosing(object sender, System.Windows.Forms.FormClosingEventArgs e)
 		{
 			MainController.Instance.ProcessClose();
+		}
+
+		private void buttonItemFloater_Click(object sender, EventArgs e)
+		{
+			FloaterManager.Instance.ShowFloater(this, Text, MainController.Instance.ImageResources.AppRibbonLogo ?? labelItemHomeLogo.Image, null);
 		}
 
 		private void buttonItemExit_Click(object sender, EventArgs e)

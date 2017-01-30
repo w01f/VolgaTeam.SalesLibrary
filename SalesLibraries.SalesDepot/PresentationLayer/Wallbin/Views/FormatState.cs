@@ -28,7 +28,8 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.Views
 		}
 
 		public bool AllowEdit => false;
-		public bool AllowMultiSelect => false;
+
+		public bool ShowSelectedFolder => false;
 
 		public bool ShowCategoryTags => false;
 
@@ -43,8 +44,8 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.Views
 
 		public bool ClassicView
 		{
-			get { return MainController.Instance.Settings.WallbinViewSettings.ClassicView; } 
-			private set { MainController.Instance.Settings.WallbinViewSettings.ClassicView = value; } 
+			get { return MainController.Instance.Settings.WallbinViewSettings.ClassicView; }
+			private set { MainController.Instance.Settings.WallbinViewSettings.ClassicView = value; }
 		}
 		public bool ListView
 		{

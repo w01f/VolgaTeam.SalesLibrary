@@ -5,6 +5,7 @@ using System.Linq;
 using System.Windows.Forms;
 using DevComponents.DotNetBar.Metro;
 using DevExpress.XtraTab;
+using SalesLibraries.Business.Entities.Interfaces;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.Common.Extensions;
@@ -18,21 +19,21 @@ using SalesLibraries.CloudAdmin.Properties;
 
 namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettings
 {
-	public partial class FormEditLinkWidget : MetroForm, ILinkSettingsEditForm
+	public partial class FormEditLinkWidget : MetroForm, ILinkSetSettingsEditForm
 	{
 		private bool _allowHandleEvents;
-		private readonly BaseLibraryLink _sourceLink;
 		private Image _originalImage;
 		private string _originalImageName;
+		private readonly BaseLibraryLink _sourceLink;
+		private readonly ILinksGroup _sourceLinkGroup;
 
 		public LinkSettingsType[] EditableSettings => new[]
 		{
 			LinkSettingsType.Widget,
 		};
 
-		public FormEditLinkWidget(BaseLibraryLink sourceLink)
+		public FormEditLinkWidget()
 		{
-			_sourceLink = sourceLink;
 			InitializeComponent();
 
 			retractableBarGallery.AddButtons(new[]
@@ -67,12 +68,27 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 			}
 		}
 
+		public FormEditLinkWidget(BaseLibraryLink sourceLink) : this()
+		{
+			_sourceLink = sourceLink;
+		}
+
+		public FormEditLinkWidget(ILinksGroup linkGroup, FileTypes? defaultLinkType = null) : this()
+		{
+			_sourceLinkGroup = linkGroup;
+			_sourceLink = _sourceLinkGroup.AllLinks
+				.FirstOrDefault(link => !defaultLinkType.HasValue || link.Type == defaultLinkType.Value);
+		}
+
 		public void InitForm<TEditControl>(LinkSettingsType settingsType) where TEditControl : ILinkSettingsEditControl
 		{
 			Width = 960;
 			Height = 590;
 			FormStateHelper.Init(this, RemoteResourceManager.Instance.AppAliasSettingsFolder, "Site Admin-Link-Widget", false, false);
-			Text = string.Format(Text, _sourceLink);
+			Text = String.Format(Text,
+				_sourceLinkGroup != null ?
+					String.Format("{0} links", _sourceLinkGroup.AllLinks.Count()) :
+					_sourceLink.ToString());
 			StartPosition = FormStartPosition.CenterParent;
 			LoadData();
 		}
@@ -126,16 +142,24 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 				xtraTabControlGallery.SelectedTabPage = galleryPage;
 			};
 
-			var fileLink = _sourceLink as LibraryFileLink;
-			if (fileLink != null)
+			LibraryObjectLink objectLink;
+			if (_sourceLinkGroup != null)
+			{
+				objectLink = _sourceLinkGroup.AllLinks.All(link => link.Type == _sourceLink.Type)
+					? _sourceLink as LibraryObjectLink
+					: null;
+			}
+			else
+				objectLink = _sourceLink as LibraryObjectLink;
+			if (!String.IsNullOrEmpty(objectLink?.AutoWidgetKey))
 			{
 				radioButtonWidgetTypeAuto.Visible = true;
 				pnAutoWidget.Visible = true;
-				if (fileLink.Widget.HasAutoWidget)
+				if (objectLink.Widget.HasAutoWidget)
 				{
 					pbAutoWidget.Visible = true;
-					pbAutoWidget.Image = fileLink.Widget.AutoWidget;
-					laExtension.Text = fileLink.Extension.Replace(".", String.Empty).ToLower();
+					pbAutoWidget.Image = objectLink.Widget.AutoWidget;
+					laExtension.Text = objectLink.AutoWidgetKey.ToLower();
 				}
 				else
 				{
@@ -178,29 +202,32 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 
 		private void SaveData()
 		{
-			if (radioButtonWidgetTypeAuto.Checked)
+			foreach (var link in (_sourceLinkGroup?.AllLinks ?? new[] { _sourceLink }).ToList())
 			{
-				_sourceLink.Widget.WidgetType = WidgetType.AutoWidget;
-				_sourceLink.Widget.Image = null;
-				_sourceLink.Widget.ImageName = null;
+				if (radioButtonWidgetTypeAuto.Checked)
+				{
+					link.Widget.WidgetType = WidgetType.AutoWidget;
+					link.Widget.Image = null;
+					link.Widget.ImageName = null;
+				}
+				else if (radioButtonWidgetTypeCustom.Checked)
+				{
+					link.Widget.WidgetType = WidgetType.CustomWidget;
+					link.Widget.Inverted = checkEditInvert.Checked;
+					link.Widget.InversionColor = colorEditInversionColor.Color != GraphicObjectExtensions.DefaultInversionColor
+						? colorEditInversionColor.Color
+						: GraphicObjectExtensions.DefaultInversionColor;
+					link.Widget.Image = _originalImage;
+					link.Widget.ImageName = _originalImageName;
+				}
+				else if (radioButtonWidgetTypeDisabled.Checked)
+				{
+					link.Widget.WidgetType = WidgetType.NoWidget;
+					link.Widget.Image = null;
+					link.Widget.ImageName = null;
+				}
+				link.Banner.Enable = !link.Widget.Enabled && link.Banner.Enable;
 			}
-			else if (radioButtonWidgetTypeCustom.Checked)
-			{
-				_sourceLink.Widget.WidgetType = WidgetType.CustomWidget;
-				_sourceLink.Widget.Inverted = checkEditInvert.Checked;
-				_sourceLink.Widget.InversionColor = colorEditInversionColor.Color != GraphicObjectExtensions.DefaultInversionColor
-					? colorEditInversionColor.Color
-					: GraphicObjectExtensions.DefaultInversionColor;
-				_sourceLink.Widget.Image = _originalImage;
-				_sourceLink.Widget.ImageName = _originalImageName;
-			}
-			else if (radioButtonWidgetTypeDisabled.Checked)
-			{
-				_sourceLink.Widget.WidgetType = WidgetType.NoWidget;
-				_sourceLink.Widget.Image = null;
-				_sourceLink.Widget.ImageName = null;
-			}
-			_sourceLink.Banner.Enable = !_sourceLink.Widget.Enabled && _sourceLink.Banner.Enable;
 		}
 
 		private void UpdateCustomDisplayImage()

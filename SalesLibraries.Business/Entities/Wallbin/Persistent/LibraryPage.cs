@@ -157,11 +157,21 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 			if (Library.Settings.ApplyAppearanceForAllWindows)
 			{
 				targetFolder.Settings = templateFolder.Settings.Clone<LibraryFolder.LibraryFolderSettings>(targetFolder);
+				if(targetFolder.UseTextColorForWidget)
+					targetFolder.Widget.ResetImage();
 				targetFolder.MarkAsModified();
 			}
 			if (Library.Settings.ApplyWidgetForAllWindows)
 			{
+				targetFolder.Settings.UseForeHeaderColorForWidget = templateFolder.UseTextColorForWidget;
 				targetFolder.Widget = templateFolder.Widget.Clone<WidgetSettings>(targetFolder);
+				targetFolder.MarkAsModified();
+			}
+			if (Library.Settings.ApplyWidgetColorForAllWindows)
+			{
+				targetFolder.Settings.UseForeHeaderColorForWidget = templateFolder.UseTextColorForWidget;
+				targetFolder.Widget.Inverted = templateFolder.Widget.Inverted;
+				targetFolder.Widget.InversionColor = templateFolder.Widget.InversionColor;
 				targetFolder.MarkAsModified();
 			}
 			if (Library.Settings.ApplyBannerForAllWindows)

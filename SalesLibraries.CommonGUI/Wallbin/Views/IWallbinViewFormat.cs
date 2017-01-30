@@ -7,7 +7,7 @@ namespace SalesLibraries.CommonGUI.Wallbin.Views
 		int FontSize { get; }
 		int RowSpace { get; }
 		bool AllowEdit { get; }
-		bool AllowMultiSelect { get; }
+		bool ShowSelectedFolder { get; }
 		bool ShowCategoryTags { get; }
 		bool ShowSuperFilterTags { get; }
 		bool ShowKeywordTags { get; }

@@ -99,7 +99,7 @@ namespace SalesLibraries.FileManager.Business.Models.VideoInfo
 			{
 				DataStateObserver.Instance.RaiseLinksDeleted(topLevelLinks.Select(l => l.ExtId));
 				foreach (var previewableLink in topLevelLinks)
-					previewableLink.DeleteLink(true);
+					previewableLink.DeleteLink();
 			}
 			if (topLevelLinks.Count == allLinks.Count)
 				_previewContainer.DeleteContainer();

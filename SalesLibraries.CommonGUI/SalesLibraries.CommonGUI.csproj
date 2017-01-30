@@ -70,12 +70,6 @@
     <Compile Include="BackgroundProcesses\FormProgressBase.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="BackgroundProcesses\FormStart.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="BackgroundProcesses\FormStart.designer.cs">
-      <DependentUpon>FormStart.cs</DependentUpon>
-    </Compile>
     <Compile Include="BackgroundProcesses\FormProgressWithAbort.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -212,9 +206,6 @@
     <EmbeddedResource Include="BackgroundProcesses\FormProgressCommon.resx">
       <DependentUpon>FormProgressCommon.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="BackgroundProcesses\FormStart.resx">
-      <DependentUpon>FormStart.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="BackgroundProcesses\FormProgressWithAbort.resx">
       <DependentUpon>FormProgressWithAbort.cs</DependentUpon>
     </EmbeddedResource>
@@ -317,30 +308,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\StartLogo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ProgressStartRegularHeader.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ProgressStartRegularBrand.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ProgressStartCancel.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ProgressStartRegularWebConnection.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ProgressStartRegularSecurity.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ProgressStartRegularFiles.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ProgressStartMinimizedFisrtStart.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ProgressStartMinimizedRegularStart.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

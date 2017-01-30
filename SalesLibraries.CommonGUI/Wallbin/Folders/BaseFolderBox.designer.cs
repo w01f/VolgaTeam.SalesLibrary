@@ -55,9 +55,9 @@
 			this.grFiles.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colDisplayName});
 			this.grFiles.Dock = System.Windows.Forms.DockStyle.Top;
+			this.grFiles.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
 			this.grFiles.Location = new System.Drawing.Point(1, 52);
 			this.grFiles.Name = "grFiles";
-			this.grFiles.ReadOnly = true;
 			this.grFiles.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
 			this.grFiles.RowHeadersVisible = false;
 			this.grFiles.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
@@ -72,7 +72,6 @@
 			this.colDisplayName.DefaultCellStyle = dataGridViewCellStyle1;
 			this.colDisplayName.HeaderText = "Display Name and Note";
 			this.colDisplayName.Name = "colDisplayName";
-			this.colDisplayName.ReadOnly = true;
 			this.colDisplayName.Width = 5;
 			// 
 			// pnHeaderBorder

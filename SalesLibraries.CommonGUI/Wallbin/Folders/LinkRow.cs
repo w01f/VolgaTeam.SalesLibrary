@@ -44,10 +44,16 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 			FolderBox = folderBox;
 		}
 
-		public void DeleteWithSourceLink(bool fullDelete = false)
+		public void DeleteWithSourceLink()
 		{
 			RemoveFromGrid();
-			Source.DeleteLink(fullDelete);
+			Source.DeleteLink();
+		}
+
+		public void DeleteFromFolder()
+		{
+			RemoveFromGrid();
+			Source.UnlinkLink();
 		}
 
 		public void RemoveFromGrid()

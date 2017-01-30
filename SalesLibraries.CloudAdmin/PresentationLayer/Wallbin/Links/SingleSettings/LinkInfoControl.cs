@@ -16,20 +16,13 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 
 		public void UpdateData()
 		{
-			var selectedFolder = MainController.Instance.WallbinViews.Selection.SelectedFolder;
-			if (selectedFolder == null)
+			if (MainController.Instance.WallbinViews.Selection.SelectedLinks.Count > 1)
 			{
-				Text = String.Empty;
-				return;
-			}
-
-			if (MainController.Instance.WallbinViews.Selection.SelectedObjectsCount > 1)
-			{
-				Text = String.Format("<b>({0})</b> {1}",
-						MainController.Instance.WallbinViews.Selection.SelectedObjectsCount,
+				Text = String.Format("<b>(Selected Links: {0})</b> {1}",
+						MainController.Instance.WallbinViews.Selection.SelectedLinks.Count,
 						MainController.Instance.WallbinViews.Selection.SelectedObjects.GetCommonTags());
 			}
-			else
+			else if (MainController.Instance.WallbinViews.Selection.SelectedLinks.Count == 1)
 			{
 				var selectedLink = MainController.Instance.WallbinViews.Selection.SelectedLink;
 				Text = selectedLink != null
@@ -41,6 +34,10 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 								selectedLink.Tags.AllTags)
 							: String.Empty)
 					: String.Empty;
+			}
+			else
+			{
+				Text = String.Empty;
 			}
 		}
 	}

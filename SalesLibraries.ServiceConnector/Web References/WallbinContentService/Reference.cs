@@ -73,6 +73,8 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         
         private System.Threading.SendOrPostCallback mockUrlLinkBundleItemOperationCompleted;
         
+        private System.Threading.SendOrPostCallback mockLinkBundleLaunchScreenItemOperationCompleted;
+        
         private System.Threading.SendOrPostCallback mockLinkBundleInfoItemOperationCompleted;
         
         private System.Threading.SendOrPostCallback mockLinkBundleStrategyItemOperationCompleted;
@@ -166,6 +168,9 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         
         /// <remarks/>
         public event mockUrlLinkBundleItemCompletedEventHandler mockUrlLinkBundleItemCompleted;
+        
+        /// <remarks/>
+        public event mockLinkBundleLaunchScreenItemCompletedEventHandler mockLinkBundleLaunchScreenItemCompleted;
         
         /// <remarks/>
         public event mockLinkBundleInfoItemCompletedEventHandler mockLinkBundleInfoItemCompleted;
@@ -624,6 +629,34 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
             if ((this.mockUrlLinkBundleItemCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.mockUrlLinkBundleItemCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:ContentControllerwsdl#mockLinkBundleLaunchScreenItem", RequestNamespace="urn:ContentControllerwsdl", ResponseNamespace="urn:ContentControllerwsdl")]
+        public void mockLinkBundleLaunchScreenItem(LinkBundleLaunchScreenItem item) {
+            this.Invoke("mockLinkBundleLaunchScreenItem", new object[] {
+                        item});
+        }
+        
+        /// <remarks/>
+        public void mockLinkBundleLaunchScreenItemAsync(LinkBundleLaunchScreenItem item) {
+            this.mockLinkBundleLaunchScreenItemAsync(item, null);
+        }
+        
+        /// <remarks/>
+        public void mockLinkBundleLaunchScreenItemAsync(LinkBundleLaunchScreenItem item, object userState) {
+            if ((this.mockLinkBundleLaunchScreenItemOperationCompleted == null)) {
+                this.mockLinkBundleLaunchScreenItemOperationCompleted = new System.Threading.SendOrPostCallback(this.OnmockLinkBundleLaunchScreenItemOperationCompleted);
+            }
+            this.InvokeAsync("mockLinkBundleLaunchScreenItem", new object[] {
+                        item}, this.mockLinkBundleLaunchScreenItemOperationCompleted, userState);
+        }
+        
+        private void OnmockLinkBundleLaunchScreenItemOperationCompleted(object arg) {
+            if ((this.mockLinkBundleLaunchScreenItemCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.mockLinkBundleLaunchScreenItemCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -1124,6 +1157,12 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         
         private LinkBundleRevenueInfoItem[] infoItemsField;
         
+        private string foreColorField;
+        
+        private string backColorField;
+        
+        private Font fontField;
+        
         private string idField;
         
         private int itemTypeField;
@@ -1163,6 +1202,36 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
             }
             set {
                 this.infoItemsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string foreColor {
+            get {
+                return this.foreColorField;
+            }
+            set {
+                this.foreColorField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string backColor {
+            get {
+                return this.backColorField;
+            }
+            set {
+                this.backColorField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public Font font {
+            get {
+                return this.fontField;
+            }
+            set {
+                this.fontField = value;
             }
         }
         
@@ -1233,11 +1302,86 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:ContentControllerwsdl")]
+    public partial class Font {
+        
+        private string nameField;
+        
+        private int sizeField;
+        
+        private bool isBoldField;
+        
+        private bool isItalicField;
+        
+        private bool isUnderlinedField;
+        
+        /// <remarks/>
+        public string name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int size {
+            get {
+                return this.sizeField;
+            }
+            set {
+                this.sizeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool isBold {
+            get {
+                return this.isBoldField;
+            }
+            set {
+                this.isBoldField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool isItalic {
+            get {
+                return this.isItalicField;
+            }
+            set {
+                this.isItalicField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool isUnderlined {
+            get {
+                return this.isUnderlinedField;
+            }
+            set {
+                this.isUnderlinedField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:ContentControllerwsdl")]
     public partial class LinkBundleStrategyItem {
         
         private string headerField;
         
         private string bodyField;
+        
+        private string foreColorField;
+        
+        private string backColorField;
+        
+        private Font fontField;
         
         private string idField;
         
@@ -1268,6 +1412,36 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
             }
             set {
                 this.bodyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string foreColor {
+            get {
+                return this.foreColorField;
+            }
+            set {
+                this.foreColorField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string backColor {
+            get {
+                return this.backColorField;
+            }
+            set {
+                this.backColorField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public Font font {
+            get {
+                return this.fontField;
+            }
+            set {
+                this.fontField = value;
             }
         }
         
@@ -1344,6 +1518,12 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         
         private string bodyField;
         
+        private string foreColorField;
+        
+        private string backColorField;
+        
+        private Font fontField;
+        
         private string idField;
         
         private int itemTypeField;
@@ -1373,6 +1553,237 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
             }
             set {
                 this.bodyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string foreColor {
+            get {
+                return this.foreColorField;
+            }
+            set {
+                this.foreColorField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string backColor {
+            get {
+                return this.backColorField;
+            }
+            set {
+                this.backColorField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public Font font {
+            get {
+                return this.fontField;
+            }
+            set {
+                this.fontField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string id {
+            get {
+                return this.idField;
+            }
+            set {
+                this.idField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int itemType {
+            get {
+                return this.itemTypeField;
+            }
+            set {
+                this.itemTypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int collectionOrder {
+            get {
+                return this.collectionOrderField;
+            }
+            set {
+                this.collectionOrderField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string image {
+            get {
+                return this.imageField;
+            }
+            set {
+                this.imageField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string title {
+            get {
+                return this.titleField;
+            }
+            set {
+                this.titleField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string hoverTip {
+            get {
+                return this.hoverTipField;
+            }
+            set {
+                this.hoverTipField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:ContentControllerwsdl")]
+    public partial class LinkBundleLaunchScreenItem {
+        
+        private string headerField;
+        
+        private string footerField;
+        
+        private string logoField;
+        
+        private string bannerField;
+        
+        private string headerForeColorField;
+        
+        private string headerBackColorField;
+        
+        private Font headerFontField;
+        
+        private string footerForeColorField;
+        
+        private string footerBackColorField;
+        
+        private Font footerFontField;
+        
+        private string idField;
+        
+        private int itemTypeField;
+        
+        private int collectionOrderField;
+        
+        private string imageField;
+        
+        private string titleField;
+        
+        private string hoverTipField;
+        
+        /// <remarks/>
+        public string header {
+            get {
+                return this.headerField;
+            }
+            set {
+                this.headerField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string footer {
+            get {
+                return this.footerField;
+            }
+            set {
+                this.footerField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string logo {
+            get {
+                return this.logoField;
+            }
+            set {
+                this.logoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string banner {
+            get {
+                return this.bannerField;
+            }
+            set {
+                this.bannerField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string headerForeColor {
+            get {
+                return this.headerForeColorField;
+            }
+            set {
+                this.headerForeColorField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string headerBackColor {
+            get {
+                return this.headerBackColorField;
+            }
+            set {
+                this.headerBackColorField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public Font headerFont {
+            get {
+                return this.headerFontField;
+            }
+            set {
+                this.headerFontField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string footerForeColor {
+            get {
+                return this.footerForeColorField;
+            }
+            set {
+                this.footerForeColorField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string footerBackColor {
+            get {
+                return this.footerBackColorField;
+            }
+            set {
+                this.footerBackColorField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public Font footerFont {
+            get {
+                return this.footerFontField;
+            }
+            set {
+                this.footerFontField = value;
             }
         }
         
@@ -1925,75 +2336,6 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
             }
             set {
                 this.quickLinkTitleField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:ContentControllerwsdl")]
-    public partial class Font {
-        
-        private string nameField;
-        
-        private int sizeField;
-        
-        private bool isBoldField;
-        
-        private bool isItalicField;
-        
-        private bool isUnderlinedField;
-        
-        /// <remarks/>
-        public string name {
-            get {
-                return this.nameField;
-            }
-            set {
-                this.nameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int size {
-            get {
-                return this.sizeField;
-            }
-            set {
-                this.sizeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool isBold {
-            get {
-                return this.isBoldField;
-            }
-            set {
-                this.isBoldField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool isItalic {
-            get {
-                return this.isItalicField;
-            }
-            set {
-                this.isItalicField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool isUnderlined {
-            get {
-                return this.isUnderlinedField;
-            }
-            set {
-                this.isUnderlinedField = value;
             }
         }
     }
@@ -6810,6 +7152,10 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
     public delegate void mockUrlLinkBundleItemCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    public delegate void mockLinkBundleLaunchScreenItemCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]

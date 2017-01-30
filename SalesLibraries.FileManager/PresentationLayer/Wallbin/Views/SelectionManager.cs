@@ -18,7 +18,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 
 		public BaseLibraryLink SelectedLink => SelectedLinks.Count == 1 ? SelectedLinks.First() : null;
 		public List<BaseLibraryLink> SelectedObjects => SelectedLinks.OfType<LibraryObjectLink>().OfType<BaseLibraryLink>().ToList();
-		public int SelectedObjectsCount => SelectedObjects.Count;
 
 		public SelectionManager()
 		{
@@ -34,9 +33,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 				ResetLinks();
 			}
 			else
-				SelectedLinks.RemoveAll(link => link.Folder.ExtId == SelectedFolder.DataSource.ExtId);
+				SelectedLinks.RemoveAll(link => link == null || link.Folder.ExtId == SelectedFolder.DataSource.ExtId);
 
-			SelectedLinks.AddRange(links.Where(link => SelectedLinks.All(selectedLink => selectedLink.ExtId != link.ExtId)));
+			SelectedLinks.AddRange(links.Where(link => link != null && SelectedLinks.All(selectedLink => selectedLink.ExtId != link.ExtId)));
 			LastUpdate = DateTime.Now;
 			SelectionChanged?.Invoke(this, new SelectionEventArgs(SelectionEventType.LinkSelected));
 		}
@@ -46,8 +45,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 			if (_suspended) return;
 			if (SelectedFolder == folder) return;
 			SelectedFolder = folder;
-			if (SelectedFolder.FormatState?.AllowMultiSelect != true)
-				ResetLinks();
 			LastUpdate = DateTime.Now;
 			SelectionChanged?.Invoke(this, new SelectionEventArgs(SelectionEventType.FolderSelected));
 		}

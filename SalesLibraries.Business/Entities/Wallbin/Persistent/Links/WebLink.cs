@@ -23,6 +23,8 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		[NotMapped, JsonIgnore]
 		public override string WebFormat => WebFormats.Url;
 
+		[NotMapped, JsonIgnore]
+		public override string AutoWidgetKey => "url";
 		#endregion
 
 		public WebLink()

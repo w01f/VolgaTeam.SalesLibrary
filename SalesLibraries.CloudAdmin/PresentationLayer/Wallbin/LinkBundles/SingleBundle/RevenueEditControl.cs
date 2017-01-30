@@ -60,6 +60,9 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.LinkBundles.Single
 				itemId++;
 				barSubItemInfoAdd.LinksPersistInfo.Add(new LinkPersistInfo(barButton));
 			}
+
+			buttonEditTextFont.ButtonClick += EditorHelper.FontEdit_ButtonClick;
+			buttonEditTextFont.Click += EditorHelper.FontEdit_Click;
 		}
 
 		public void LoadData()
@@ -79,6 +82,11 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.LinkBundles.Single
 			checkEditAdditionalInfo.Checked = !String.IsNullOrEmpty(_bundleItem.AdditionalInfo);
 			memoEditAdditionalInfo.EditValue = _bundleItem.AdditionalInfo;
 
+			colorEditTextColor.Color = _bundleItem.ForeColor;
+			colorEditBackColor.Color = _bundleItem.BackColor;
+			buttonEditTextFont.Tag = _bundleItem.Font;
+			buttonEditTextFont.EditValue = Utils.FontToString(_bundleItem.Font);
+
 			LoadInfoItems();
 		}
 
@@ -89,6 +97,11 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.LinkBundles.Single
 			else if (checkEditRevenueGoal.Checked)
 				_bundleItem.RevenueType = LinkBundleRevenueType.Goal;
 			_bundleItem.AdditionalInfo = memoEditAdditionalInfo.EditValue as String;
+
+			_bundleItem.ForeColor = colorEditTextColor.Color;
+			_bundleItem.BackColor = colorEditBackColor.Color;
+			_bundleItem.Font = buttonEditTextFont.Tag as Font;
+
 			SaveInfoItems();
 		}
 
@@ -152,6 +165,12 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.LinkBundles.Single
 		private void OnAdditionalInfoCheckedChanged(object sender, EventArgs e)
 		{
 			memoEditAdditionalInfo.Enabled = checkEditAdditionalInfo.Checked;
+			labelControlTextColor.Enabled = checkEditAdditionalInfo.Checked;
+			colorEditTextColor.Enabled = checkEditAdditionalInfo.Checked;
+			labelControlBackColor.Enabled = checkEditAdditionalInfo.Checked;
+			colorEditBackColor.Enabled = checkEditAdditionalInfo.Checked;
+			labelControlTextFont.Enabled = checkEditAdditionalInfo.Checked;
+			buttonEditTextFont.Enabled = checkEditAdditionalInfo.Checked;
 			if (!checkEditAdditionalInfo.Checked)
 				memoEditAdditionalInfo.EditValue = null;
 		}
@@ -164,6 +183,25 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.LinkBundles.Single
 					DeleteInfoItem();
 					break;
 			}
+		}
+
+		private void OnTextColorEditValueChanged(object sender, EventArgs e)
+		{
+			memoEditAdditionalInfo.ForeColor = colorEditTextColor.Color;
+		}
+
+		private void OnBackColorEditValueChanged(object sender, EventArgs e)
+		{
+			memoEditAdditionalInfo.BackColor = colorEditBackColor.Color;
+		}
+
+		private void OnFontEditValueChanged(object sender, EventArgs e)
+		{
+			memoEditAdditionalInfo.Font = (Font)buttonEditTextFont.Tag;
+			memoEditAdditionalInfo.Properties.Appearance.Font = memoEditAdditionalInfo.Font;
+			memoEditAdditionalInfo.Properties.AppearanceDisabled.Font = memoEditAdditionalInfo.Font;
+			memoEditAdditionalInfo.Properties.AppearanceFocused.Font = memoEditAdditionalInfo.Font;
+			memoEditAdditionalInfo.Properties.AppearanceReadOnly.Font = memoEditAdditionalInfo.Font;
 		}
 	}
 }

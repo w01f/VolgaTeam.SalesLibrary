@@ -108,9 +108,9 @@
 			this.laPath.ForeColor = System.Drawing.Color.Black;
 			this.laPath.Location = new System.Drawing.Point(3, 89);
 			this.laPath.Name = "laPath";
-			this.laPath.Size = new System.Drawing.Size(124, 16);
+			this.laPath.Size = new System.Drawing.Size(137, 16);
 			this.laPath.TabIndex = 46;
-			this.laPath.Text = "Specific Vimeo URL";
+			this.laPath.Text = "Specific YouTube URL";
 			// 
 			// laName
 			// 

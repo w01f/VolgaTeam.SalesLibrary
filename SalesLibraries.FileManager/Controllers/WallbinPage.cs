@@ -193,27 +193,23 @@ namespace SalesLibraries.FileManager.Controllers
 		private void UpdateLinkButtons()
 		{
 			var selectedFolder = MainController.Instance.WallbinViews.Selection.SelectedFolder;
-			var selectedLink = selectedFolder != null ?
-				MainController.Instance.WallbinViews.Selection.SelectedFolder.SelectedLinkRow :
-				null;
+			var selectedLinks = MainController.Instance.WallbinViews.Selection.SelectedLinks.ToList();
 
 			MainController.Instance.MainForm.buttonItemHomeAddUrl.Enabled =
 			MainController.Instance.MainForm.buttonItemHomeAddLineBreak.Enabled = selectedFolder != null;
 
-			MainController.Instance.MainForm.buttonItemHomeLinkOpen.Enabled = selectedLink != null && selectedLink.IsOpenable;
-			MainController.Instance.MainForm.buttonItemHomeLinkDelete.Enabled = selectedLink != null;
-
 			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesNotes.Enabled =
+			MainController.Instance.MainForm.buttonItemHomeLinkOpen.Enabled = selectedLinks.Count == 1 && selectedFolder?.SelectedLinkRow != null && !selectedFolder.SelectedLinkRow.Inaccessable;
+
+			MainController.Instance.MainForm.buttonItemHomeLinkDelete.Enabled = selectedLinks.Any();
+
 			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesSecurity.Enabled =
 			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesWidget.Enabled =
-			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesBanner.Enabled =
-			MainController.Instance.MainForm.buttonItemHomeLinkOpen.Enabled = selectedLink != null && !selectedLink.Inaccessable;
+			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesBanner.Enabled = selectedLinks.Any(l => !(l is LibraryFileLink) || !((LibraryFileLink)l).IsDead);
 
 			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesTags.Enabled =
 			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesExpirationDate.Enabled =
-				selectedLink != null &&
-				!selectedLink.Inaccessable &&
-				!(selectedLink.Source is LineBreak);
+				selectedLinks.Any(l => !(l is LineBreak) && (!(l is LibraryFileLink) || !((LibraryFileLink)l).IsDead));
 		}
 
 		public void OnLibraryChanged(object sender, EventArgs e)
@@ -296,7 +292,11 @@ namespace SalesLibraries.FileManager.Controllers
 		private void buttonItemHomeLinkDelete_Click(object sender, EventArgs e)
 		{
 			var selectedFolder = MainController.Instance.WallbinViews.Selection.SelectedFolder;
-			selectedFolder?.DeleteLink();
+			var selectedLinks = MainController.Instance.WallbinViews.Selection.SelectedLinks.ToList();
+			if (selectedLinks.Count > 1)
+				selectedFolder?.DeleteMultiLinks(selectedLinks);
+			else
+				selectedFolder.DeleteSingleLink();
 		}
 
 		private void buttonItemHomeLinkSettings_Click(object sender, EventArgs e)
@@ -306,7 +306,12 @@ namespace SalesLibraries.FileManager.Controllers
 			var button = sender as ButtonItem;
 			if (button?.Tag == null) return;
 			var propertiesType = (LinkSettingsType)Enum.Parse(typeof(LinkSettingsType), (String)button.Tag);
-			selectedFolder.EditSingleLinkSettings(propertiesType);
+
+			var selectedLinks = MainController.Instance.WallbinViews.Selection.SelectedLinks.ToList();
+			if (selectedLinks.Count > 1)
+				selectedFolder.EditLinksGroupSettings(selectedLinks.ToMultiLinkSet(), propertiesType);
+			else
+				selectedFolder.EditSingleLinkSettings(propertiesType);
 		}
 		#endregion
 

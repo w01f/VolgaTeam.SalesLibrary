@@ -32,7 +32,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 			{
 				_isDataChanged = value;
 				if (!_isDataChanged) return;
-				ActivePage?.TagInfoControl.UpdateInfo();
+				foreach (var pageView in Pages)
+					pageView.TagInfoControl?.UpdateInfo();
 				DataChanged?.Invoke(this, EventArgs.Empty);
 			}
 		}

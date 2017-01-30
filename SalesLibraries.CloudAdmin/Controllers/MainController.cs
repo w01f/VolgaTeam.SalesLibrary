@@ -98,9 +98,24 @@ namespace SalesLibraries.CloudAdmin.Controllers
 			};
 
 
-			ProcessManager.RunStartProcess(
-				MainController.Instance.ImageResources.AppSplashLogo,
-				(cancellationToken, formProgress) =>
+			using (var form = new FormStart("Site Admin"))
+			{
+				form.pbHeaderRegular.Image = MainController.Instance.ImageResources.AppSplashLogo ?? form.pbHeaderRegular.Image;
+
+				FileStorageManager.Instance.Downloading += (o, e) =>
+				{
+					form.SetDownloadInfo(e.ProgressPercent < 100
+						? String.Format("Loading {0} - {1}%", e.FileName, e.ProgressPercent)
+						: String.Empty);
+				};
+				FileStorageManager.Instance.Extracting += (o, e) =>
+				{
+					form.SetDownloadInfo(e.ProgressPercent < 100
+						? String.Format("Extracting {0} - {1}%", e.FileName, e.ProgressPercent)
+						: String.Empty);
+				};
+
+				ProcessManager.RunWithProgress(form, false, (cancellationToken, formProgress) =>
 				{
 					formProgress.Invoke(new MethodInvoker(() =>
 					{
@@ -178,6 +193,7 @@ namespace SalesLibraries.CloudAdmin.Controllers
 						}
 					}
 				});
+			}
 
 			if (stopRun) return;
 
@@ -195,23 +211,23 @@ namespace SalesLibraries.CloudAdmin.Controllers
 				MainForm.Closing += (o, e) =>
 				{
 					ProcessChanges();
-					ProcessManager.RunStartProcess(
-						null,//String.Format("Syncing changes with {0}", Settings.SiteLibrary),
-						(cancellationToken, formProgress) =>
-						{
-							Wallbin.CheckinData();
-						});
-					ProcessManager.RunStartProcess(
-						null,//String.Format("Closing Connection to {0}", Settings.SiteLibrary),
-						(cancellationToken, formProgress) =>
-						{
-							RestServiceConnection.DoRequest(new ConnectionGetRequestData
-							{
-								RequestType = ConnectionRequestType.Disconnect,
-								LibraryName = Settings.SiteLibrary,
-								UserName = AuthManager.Settings.Login
-							});
-						});
+					//ProcessManager.RunStartProcess(
+					//	null,//String.Format("Syncing changes with {0}", Settings.SiteLibrary),
+					//	(cancellationToken, formProgress) =>
+					//	{
+					//		Wallbin.CheckinData();
+					//	});
+					//ProcessManager.RunStartProcess(
+					//	null,//String.Format("Closing Connection to {0}", Settings.SiteLibrary),
+					//	(cancellationToken, formProgress) =>
+					//	{
+					//		RestServiceConnection.DoRequest(new ConnectionGetRequestData
+					//		{
+					//			RequestType = ConnectionRequestType.Disconnect,
+					//			LibraryName = Settings.SiteLibrary,
+					//			UserName = AuthManager.Settings.Login
+					//		});
+					//	});
 				};
 				Application.Run(MainForm);
 			}

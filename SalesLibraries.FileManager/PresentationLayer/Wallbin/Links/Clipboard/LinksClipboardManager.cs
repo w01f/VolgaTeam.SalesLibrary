@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using SalesLibraries.Business.Entities.Helpers;
+using SalesLibraries.Business.Entities.Wallbin.Persistent;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.Common.DataState;
 using SalesLibraries.FileManager.Controllers;
@@ -31,18 +33,31 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.Clipboard
 			LinkIds.AddRange(linkIds);
 		}
 
-		public IEnumerable<BaseLibraryLink> Paste()
+		public IEnumerable<BaseLibraryLink> Paste(LibraryFolder parentFolder, int position)
 		{
 			var sourceLinks = MainController.Instance.WallbinViews.ActiveWallbin.DataStorage.Library.Pages
 					.SelectMany(p => p.TopLevelLinks)
 					.Where(link => LinkIds.Any(id => link.ExtId.Equals(id)))
 					.ToList();
-			var pastedLinks = sourceLinks.Select(libraryLink => libraryLink.Copy(LastActionType == LinkClipboardActionType.Cut)).ToList();
+
+			var pastedLinks = new List<BaseLibraryLink>();
+			foreach (var sourceLink in sourceLinks)
+			{
+				var pastedLink = sourceLink.Copy();
+				pastedLink.Folder = parentFolder;
+				if (position >= 0)
+					((List<BaseLibraryLink>)parentFolder.Links).InsertItem(pastedLink, position);
+				else
+					parentFolder.Links.Add(pastedLink);
+				pastedLinks.Add(pastedLink);
+				if (position != -1)
+					position++;
+			}
 
 			if (LastActionType == LinkClipboardActionType.Cut)
 			{
-				sourceLinks.ForEach(link => link.DeleteLink(true));
 				DataStateObserver.Instance.RaiseLinksDeleted(LinkIds);
+				sourceLinks.ForEach(link => link.DeleteLink());
 				LastActionType = LinkClipboardActionType.None;
 				LinkIds.Clear();
 			}

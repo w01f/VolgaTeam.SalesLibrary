@@ -30,7 +30,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 
 			if (!String.IsNullOrEmpty(Note))
 				customizedSettingsGroups.Add(LinkSettingsGroupType.HoverNote);
-			if ((_font != null && _font.Size != _defaultFont.Size && _font.Style != _defaultFont.Style && _font.Name != _defaultFont.Name) || ForeColor.HasValue || TextWordWrap)
+			if ((_font != null && _font.Size != DefaultFont.Size && _font.Style != DefaultFont.Style && _font.Name != DefaultFont.Name) || ForeColor.HasValue || TextWordWrap)
 				customizedSettingsGroups.Add(LinkSettingsGroupType.TextFormatting);
 
 			return customizedSettingsGroups;

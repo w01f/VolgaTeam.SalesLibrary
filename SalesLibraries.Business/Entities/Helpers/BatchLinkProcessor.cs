@@ -259,5 +259,10 @@ namespace SalesLibraries.Business.Entities.Helpers
 			foreach (var libraryLink in links)
 				libraryLink.Settings.TextWordWrap = true;
 		}
+
+		public static MultiLinkSet ToMultiLinkSet(this IEnumerable<BaseLibraryLink> links)
+		{
+			return new MultiLinkSet(links);
+		}
 	}
 }

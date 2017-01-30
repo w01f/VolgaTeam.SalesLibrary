@@ -24,7 +24,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		private readonly ILinksGroup _sourceLinkGroup;
 		private readonly FileTypes? _defaultLinkType;
 
-
 		public LinkSettingsType[] EditableSettings => new[]
 		{
 			LinkSettingsType.AdvancedSettings,

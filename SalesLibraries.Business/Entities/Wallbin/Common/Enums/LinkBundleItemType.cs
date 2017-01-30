@@ -8,5 +8,6 @@
 		Revenue,
 		Strategy,
 		Url,
+		LaunchScreen,
 	}
 }

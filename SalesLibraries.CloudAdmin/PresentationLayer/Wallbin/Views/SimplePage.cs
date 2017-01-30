@@ -14,7 +14,6 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 		public LibraryPage Page { get; }
 		public PageContent Content { get; }
 		public LibraryPageTagInfo TagInfoControl { get; }
-
 		public bool IsActive => MainController.Instance.WallbinViews.ActiveWallbin.ActivePage == this;
 
 		public SimplePage(LibraryPage page)
@@ -23,7 +22,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 			Dock = DockStyle.Fill;
 			Page = page;
 			Content = new PageContent(this);
-			TagInfoControl = new LibraryPageTagInfo(Page);
+			TagInfoControl = new LibraryPageTagInfo();
 			pnContainer.Controls.Add(Content);
 			Suspend();
 		}
@@ -39,6 +38,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 			if (force)
 				DisposePage();
 			Content.LoadContent();
+			TagInfoControl.LoadData(Page);
 			if (!MainController.Instance.TabWallbin.pnTagInfoContainer.Controls.Contains(TagInfoControl))
 				MainController.Instance.TabWallbin.pnTagInfoContainer.Controls.Add(TagInfoControl);
 			_readyToUse = true;

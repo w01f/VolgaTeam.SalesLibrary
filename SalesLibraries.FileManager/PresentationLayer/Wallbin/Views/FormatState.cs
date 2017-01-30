@@ -30,13 +30,13 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 			}
 		}
 
-		private bool _allowMultiSelect;
-		public bool AllowMultiSelect
+		private bool _showSelectedFolder;
+		public bool ShowSelectedFolder
 		{
-			get { return _allowMultiSelect; }
+			get { return _showSelectedFolder; }
 			set
 			{
-				_allowMultiSelect = value;
+				_showSelectedFolder = value;
 			}
 		}
 
@@ -126,7 +126,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 		public FormatState()
 		{
 			_allowEdit = true;
-			_allowMultiSelect = false;
 			_showFiles = true;
 			_showLinkBundles = false;
 			_showTagsEditor = false;
@@ -149,7 +148,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 			{
 				case TabPageEnum.Tags:
 					_allowEdit = false;
-					_allowMultiSelect = true;
+					_showSelectedFolder = false;
 					_showFiles = false;
 					_showLinkBundles = false;
 					_showTagsEditor = true;
@@ -161,7 +160,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 					break;
 				case TabPageEnum.Security:
 					_allowEdit = false;
-					_allowMultiSelect = true;
+					_showSelectedFolder = false;
 					_showFiles = false;
 					_showLinkBundles = false;
 					_showTagsEditor = true;
@@ -173,7 +172,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 					break;
 				case TabPageEnum.Bundles:
 					_allowEdit = true;
-					_allowMultiSelect = false;
+					_showSelectedFolder = false;
 					_showFiles = false;
 					_showLinkBundles = true;
 					_showTagsEditor = false;
@@ -185,7 +184,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 					break;
 				default:
 					_allowEdit = true;
-					_allowMultiSelect = false;
+					_showSelectedFolder = true;
 					_showFiles = true;
 					_showLinkBundles = false;
 					_showTagsEditor = false;

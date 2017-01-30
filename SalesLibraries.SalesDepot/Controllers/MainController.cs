@@ -72,7 +72,6 @@ namespace SalesLibraries.SalesDepot.Controllers
 		public void RunApplication()
 		{
 			var stopRun = false;
-			var appReady = false;
 
 			LicenseHelper.Register();
 
@@ -104,57 +103,69 @@ namespace SalesLibraries.SalesDepot.Controllers
 				authManager.Auth(e);
 			};
 
-			ProcessManager.RunStartProcess(
-				null,
-				(cancellationToken, formProgress) =>
+			var appReady = false;
+
+			using (var form = new FormStart(Settings.SalesDepotName, false))
+			{
+				ProcessManager.RunWithProgress(form, false, (cancelletionToken, formProgress) =>
 				{
-					formProgress.Invoke(new MethodInvoker(() =>
-					{
-						formProgress.ProcessConnectionStage();
-						Application.DoEvents();
-					}));
+					form.Invoke(new MethodInvoker(() => form.SetText("Connecting to adSALEScloud…")));
 
 					AsyncHelper.RunSync(FileStorageManager.Instance.Init);
 
 					if (stopRun) return;
 
 					appReady = FileStorageManager.Instance.Activated;
-
-					if (!appReady) return;
-
-					formProgress.Invoke(new MethodInvoker(() =>
-					{
-						formProgress.ProcessSecurityStage();
-						formProgress.ProcessLoadFilesStage();
-						Application.DoEvents();
-					}));
-
-					AsyncHelper.RunSync(InitBusinessObjects);
-
 					if (appReady)
 					{
+						var progressTitle = String.Empty;
+						switch (FileStorageManager.Instance.DataState)
+						{
+							case DataActualityState.NotExisted:
+								progressTitle = "Syncing adSALEScloud for the 1st time…";
+								break;
+							case DataActualityState.Outdated:
+								progressTitle = "Refreshing data from adSALEScloud…";
+								break;
+							default:
+								progressTitle = "Loading data...";
+								break;
+						}
+						form.Invoke(new MethodInvoker(() => form.SetText(progressTitle)));
+
+						AsyncHelper.RunSync(InitBusinessObjects);
+
+						form.Invoke(
+							new MethodInvoker(() => form.SetText(FileStorageManager.Instance.DataState == DataActualityState.NotExisted
+								? "Syncing Libraries for the 1st time…"
+								: "Syncing Sales Libraries…")));
+
 						LibrariesSyncHelper.Sync(
 							File.ReadAllLines(Configuration.RemoteResourceManager.Instance.NetworkPathFile.LocalPath),
 							Configuration.RemoteResourceManager.Instance.LocalLibraryFolder.LocalPath
-							);
+						);
 						Wallbin.LoadLibraries(Configuration.RemoteResourceManager.Instance.LocalLibraryFolder.LocalPath);
 						EmailBin.Load();
-
-						appReady &= Wallbin.Libraries.Any();
 					}
 				});
+			}
 
-			if (stopRun) return;
+			appReady &= Wallbin.Libraries.Any();
 			if (appReady)
 			{
 				if (Settings.RunPowerPointWhenNeeded.HasValue && Settings.RunPowerPointWhenNeeded.Value)
 					PowerPointManager.Instance.RunPowerPointLoader();
+
 				ActivityManager.AddUserActivity("Application started");
-				MainForm.InitForm();
+
 				LoadControllers();
+
+				MainForm.InitForm();
+
 				Application.Run(MainForm);
 			}
-			else
+
+			if (!appReady)
 				PopupMessages.ShowWarning("This app is not activated. Contact adSALESapps Support (help@adSALESapps.com)");
 		}
 

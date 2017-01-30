@@ -24,7 +24,6 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 		private readonly ILinksGroup _sourceLinkGroup;
 		private readonly FileTypes? _defaultLinkType;
 
-
 		public LinkSettingsType[] EditableSettings => new[]
 		{
 			LinkSettingsType.AdvancedSettings,

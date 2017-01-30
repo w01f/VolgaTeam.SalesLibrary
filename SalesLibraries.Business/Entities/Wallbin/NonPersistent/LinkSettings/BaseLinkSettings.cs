@@ -11,15 +11,15 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 {
 	public abstract class BaseLinkSettings : SettingsContainer
 	{
-		[JsonIgnore]
-		protected Font _defaultFont = new Font("Arial", 12, FontStyle.Regular, GraphicsUnit.Point);
-
 		public const string PredefinedNoteNone = "None";
 		public const string PredefinedNoteNew = "NEW!";
 		public const string PredefinedNoteSold = "SOLD!";
 		public const string PredefinedNoteUpdated = "UPDATED!";
 		public const string PredefinedNoteSellThis = "SELL THIS!";
 		public const string PredefinedNoteAttention = "ATTENTION!";
+
+		[JsonIgnore]
+		public static Font DefaultFont { get; } = new Font("Arial", 12, FontStyle.Regular, GraphicsUnit.Point);
 
 		protected string _note;
 		public virtual string Note
@@ -39,12 +39,12 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 		protected Font _font;
 		public Font Font
 		{
-			get { return _font ?? _defaultFont; }
+			get { return _font ?? DefaultFont; }
 			set
 			{
 				if (_font != value)
 					OnSettingsChanged();
-				if (value != _defaultFont)
+				if (value != DefaultFont)
 					_font = value;
 			}
 		}
@@ -102,7 +102,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 
 			if (!String.IsNullOrEmpty(Note))
 				customizedSettingsGroups.Add(LinkSettingsGroupType.TextNote);
-			if ((_font != null && _font.Size != _defaultFont.Size && _font.Style != _defaultFont.Style && _font.Name != _defaultFont.Name) || ForeColor.HasValue || TextWordWrap)
+			if ((_font != null && _font.Size != DefaultFont.Size && _font.Style != DefaultFont.Style && _font.Name != DefaultFont.Name) || ForeColor.HasValue || TextWordWrap)
 				customizedSettingsGroups.Add(LinkSettingsGroupType.TextFormatting);
 
 			return customizedSettingsGroups;

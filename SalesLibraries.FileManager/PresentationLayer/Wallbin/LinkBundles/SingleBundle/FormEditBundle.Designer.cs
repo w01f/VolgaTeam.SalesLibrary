@@ -28,12 +28,11 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.components = new System.ComponentModel.Container();
-			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
+			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
 			this.pnBottom = new System.Windows.Forms.Panel();
 			this.buttonXCancel = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXOK = new DevComponents.DotNetBar.ButtonX();
-			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
+			this.styleController = new DevExpress.XtraEditors.StyleController();
 			this.xtraTabControl = new DevExpress.XtraTab.XtraTabControl();
 			this.xtraTabPageLinks = new DevExpress.XtraTab.XtraTabPage();
 			this.pnLinksMain = new System.Windows.Forms.Panel();
@@ -58,13 +57,14 @@
 			this.pnLinksTop = new DevExpress.XtraEditors.PanelControl();
 			this.labelControlLinksTitle = new DevExpress.XtraEditors.LabelControl();
 			this.pictureBoxLinksLogo = new System.Windows.Forms.PictureBox();
-			this.barManager = new DevExpress.XtraBars.BarManager(this.components);
+			this.barManager = new DevExpress.XtraBars.BarManager();
 			this.barToolbar = new DevExpress.XtraBars.Bar();
 			this.barSubItemLinksAdd = new DevExpress.XtraBars.BarSubItem();
 			this.barLargeButtonItemLinksAddInfo = new DevExpress.XtraBars.BarLargeButtonItem();
 			this.barLargeButtonItemLinksAddRevenue = new DevExpress.XtraBars.BarLargeButtonItem();
 			this.barLargeButtonItemLinksAddStrategy = new DevExpress.XtraBars.BarLargeButtonItem();
 			this.barLargeButtonItemLinksAddUrls = new DevExpress.XtraBars.BarLargeButtonItem();
+			this.barLargeButtonItemLinksAddLaunchScreen = new DevExpress.XtraBars.BarLargeButtonItem();
 			this.pnBottom.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControl)).BeginInit();
@@ -178,7 +178,7 @@
 			this.xtraTabPageLinks.Controls.Add(this.pnLinksMain);
 			this.xtraTabPageLinks.Controls.Add(this.pnLinksTop);
 			this.xtraTabPageLinks.Name = "xtraTabPageLinks";
-			this.xtraTabPageLinks.Size = new System.Drawing.Size(928, 494);
+			this.xtraTabPageLinks.Size = new System.Drawing.Size(932, 497);
 			this.xtraTabPageLinks.Text = "Links";
 			// 
 			// pnLinksMain
@@ -192,7 +192,7 @@
 			this.pnLinksMain.ForeColor = System.Drawing.Color.Black;
 			this.pnLinksMain.Location = new System.Drawing.Point(0, 77);
 			this.pnLinksMain.Name = "pnLinksMain";
-			this.pnLinksMain.Size = new System.Drawing.Size(928, 417);
+			this.pnLinksMain.Size = new System.Drawing.Size(932, 420);
 			this.pnLinksMain.TabIndex = 3;
 			// 
 			// gridControlBundleItems
@@ -204,7 +204,7 @@
 			this.gridControlBundleItems.EmbeddedNavigator.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.gridControlBundleItems.EmbeddedNavigator.Appearance.Options.UseBackColor = true;
 			this.gridControlBundleItems.EmbeddedNavigator.Appearance.Options.UseForeColor = true;
-			this.gridControlBundleItems.Location = new System.Drawing.Point(0, 47);
+			this.gridControlBundleItems.Location = new System.Drawing.Point(0, 44);
 			this.gridControlBundleItems.MainView = this.gridViewBundleItems;
 			this.gridControlBundleItems.Name = "gridControlBundleItems";
 			this.gridControlBundleItems.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
@@ -214,7 +214,7 @@
             this.repositoryItemMemoEditBundleItems,
             this.repositoryItemCheckEditBundleItems,
             this.repositoryItemButtonEditBundleItemsDisabledText});
-			this.gridControlBundleItems.Size = new System.Drawing.Size(928, 370);
+			this.gridControlBundleItems.Size = new System.Drawing.Size(932, 376);
 			this.gridControlBundleItems.TabIndex = 2;
 			this.gridControlBundleItems.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewBundleItems});
@@ -375,7 +375,7 @@
 			this.repositoryItemButtonEditBundleItemsActions.AppearanceReadOnly.Options.UseFont = true;
 			this.repositoryItemButtonEditBundleItemsActions.AutoHeight = false;
 			this.repositoryItemButtonEditBundleItemsActions.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::SalesLibraries.FileManager.Properties.Resources.ButtonDelete, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "Delete", "Delete", null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::SalesLibraries.FileManager.Properties.Resources.ButtonDelete, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "Delete", "Delete", null, true)});
 			this.repositoryItemButtonEditBundleItemsActions.Name = "repositoryItemButtonEditBundleItemsActions";
 			this.repositoryItemButtonEditBundleItemsActions.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
 			this.repositoryItemButtonEditBundleItemsActions.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.OnGridBundleItemsActionsButtonClick);
@@ -392,24 +392,24 @@
 			this.barDockControlLeft.CausesValidation = false;
 			this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
 			this.barDockControlLeft.ForeColor = System.Drawing.Color.Black;
-			this.barDockControlLeft.Location = new System.Drawing.Point(0, 47);
-			this.barDockControlLeft.Size = new System.Drawing.Size(0, 370);
+			this.barDockControlLeft.Location = new System.Drawing.Point(0, 44);
+			this.barDockControlLeft.Size = new System.Drawing.Size(0, 376);
 			// 
 			// barDockControlRight
 			// 
 			this.barDockControlRight.CausesValidation = false;
 			this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
 			this.barDockControlRight.ForeColor = System.Drawing.Color.Black;
-			this.barDockControlRight.Location = new System.Drawing.Point(928, 47);
-			this.barDockControlRight.Size = new System.Drawing.Size(0, 370);
+			this.barDockControlRight.Location = new System.Drawing.Point(932, 44);
+			this.barDockControlRight.Size = new System.Drawing.Size(0, 376);
 			// 
 			// barDockControlBottom
 			// 
 			this.barDockControlBottom.CausesValidation = false;
 			this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
 			this.barDockControlBottom.ForeColor = System.Drawing.Color.Black;
-			this.barDockControlBottom.Location = new System.Drawing.Point(0, 417);
-			this.barDockControlBottom.Size = new System.Drawing.Size(928, 0);
+			this.barDockControlBottom.Location = new System.Drawing.Point(0, 420);
+			this.barDockControlBottom.Size = new System.Drawing.Size(932, 0);
 			// 
 			// barDockControlTop
 			// 
@@ -417,7 +417,7 @@
 			this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
 			this.barDockControlTop.ForeColor = System.Drawing.Color.Black;
 			this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
-			this.barDockControlTop.Size = new System.Drawing.Size(928, 47);
+			this.barDockControlTop.Size = new System.Drawing.Size(932, 44);
 			// 
 			// pnLinksTop
 			// 
@@ -430,7 +430,7 @@
 			this.pnLinksTop.Dock = System.Windows.Forms.DockStyle.Top;
 			this.pnLinksTop.Location = new System.Drawing.Point(0, 0);
 			this.pnLinksTop.Name = "pnLinksTop";
-			this.pnLinksTop.Size = new System.Drawing.Size(928, 77);
+			this.pnLinksTop.Size = new System.Drawing.Size(932, 77);
 			this.pnLinksTop.TabIndex = 4;
 			// 
 			// labelControlLinksTitle
@@ -446,7 +446,7 @@
 			this.labelControlLinksTitle.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
 			this.labelControlLinksTitle.Location = new System.Drawing.Point(87, 6);
 			this.labelControlLinksTitle.Name = "labelControlLinksTitle";
-			this.labelControlLinksTitle.Size = new System.Drawing.Size(833, 64);
+			this.labelControlLinksTitle.Size = new System.Drawing.Size(837, 64);
 			this.labelControlLinksTitle.StyleController = this.styleController;
 			this.labelControlLinksTitle.TabIndex = 1;
 			this.labelControlLinksTitle.Text = "<size=+4>Drag & Drop the <b><u>Link Order:</u></b></size>";
@@ -477,8 +477,9 @@
             this.barLargeButtonItemLinksAddInfo,
             this.barLargeButtonItemLinksAddRevenue,
             this.barLargeButtonItemLinksAddStrategy,
-            this.barLargeButtonItemLinksAddUrls});
-			this.barManager.MaxItemId = 14;
+            this.barLargeButtonItemLinksAddUrls,
+            this.barLargeButtonItemLinksAddLaunchScreen});
+			this.barManager.MaxItemId = 15;
 			// 
 			// barToolbar
 			// 
@@ -503,6 +504,7 @@
 			this.barSubItemLinksAdd.Id = 3;
 			this.barSubItemLinksAdd.ItemClickFireMode = DevExpress.XtraBars.BarItemEventFireMode.Immediate;
 			this.barSubItemLinksAdd.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.barLargeButtonItemLinksAddLaunchScreen),
             new DevExpress.XtraBars.LinkPersistInfo(this.barLargeButtonItemLinksAddInfo),
             new DevExpress.XtraBars.LinkPersistInfo(this.barLargeButtonItemLinksAddRevenue),
             new DevExpress.XtraBars.LinkPersistInfo(this.barLargeButtonItemLinksAddStrategy),
@@ -540,6 +542,14 @@
 			this.barLargeButtonItemLinksAddUrls.Id = 8;
 			this.barLargeButtonItemLinksAddUrls.Name = "barLargeButtonItemLinksAddUrls";
 			this.barLargeButtonItemLinksAddUrls.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.OnAddUrlsItemClick);
+			// 
+			// barLargeButtonItemLinksAddLaunchScreen
+			// 
+			this.barLargeButtonItemLinksAddLaunchScreen.Caption = "Launch Screen";
+			this.barLargeButtonItemLinksAddLaunchScreen.Glyph = global::SalesLibraries.FileManager.Properties.Resources.BundlesEditorLinksAddInfo;
+			this.barLargeButtonItemLinksAddLaunchScreen.Id = 14;
+			this.barLargeButtonItemLinksAddLaunchScreen.Name = "barLargeButtonItemLinksAddLaunchScreen";
+			this.barLargeButtonItemLinksAddLaunchScreen.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.OnAddLaunchScreebItemClick);
 			// 
 			// FormEditBundle
 			// 
@@ -619,5 +629,6 @@
 		private System.Windows.Forms.Panel pnLinksMain;
 		private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repositoryItemButtonEditBundleItemsDisabledText;
 		private DevExpress.XtraEditors.PanelControl pnLinksTop;
+		private DevExpress.XtraBars.BarLargeButtonItem barLargeButtonItemLinksAddLaunchScreen;
 	}
 }

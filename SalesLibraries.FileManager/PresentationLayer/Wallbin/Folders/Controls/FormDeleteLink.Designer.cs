@@ -33,8 +33,8 @@
 			this.buttonXCancel = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXDeleteLink = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXDeleteLinkAndRelatedLinks = new DevComponents.DotNetBar.ButtonX();
-			this.pbLogo = new System.Windows.Forms.PictureBox();
 			this.labelControlTitle = new DevExpress.XtraEditors.LabelControl();
+			this.pbLogo = new System.Windows.Forms.PictureBox();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pbLogo)).BeginInit();
 			this.SuspendLayout();
@@ -98,20 +98,13 @@
 			this.buttonXDeleteLinkAndRelatedLinks.Text = "Delete this Link\r\nEverywhere\r\n";
 			this.buttonXDeleteLinkAndRelatedLinks.TextColor = System.Drawing.Color.Black;
 			// 
-			// pbLogo
-			// 
-			this.pbLogo.Image = global::SalesLibraries.FileManager.Properties.Resources.LinkDelete;
-			this.pbLogo.Location = new System.Drawing.Point(12, 12);
-			this.pbLogo.Name = "pbLogo";
-			this.pbLogo.Size = new System.Drawing.Size(49, 51);
-			this.pbLogo.TabIndex = 4;
-			this.pbLogo.TabStop = false;
-			// 
 			// labelControlTitle
 			// 
 			this.labelControlTitle.AllowHtmlString = true;
 			this.labelControlTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+			this.labelControlTitle.Appearance.BackColor = System.Drawing.Color.White;
+			this.labelControlTitle.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.labelControlTitle.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Top;
 			this.labelControlTitle.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
 			this.labelControlTitle.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
@@ -122,6 +115,16 @@
 			this.labelControlTitle.TabIndex = 5;
 			this.labelControlTitle.Text = "<size=+3>Before you delete:<br>This link is also on other pages in your site…<br>" +
     "<br><i>What do you want to do?</i></size>";
+			// 
+			// pbLogo
+			// 
+			this.pbLogo.BackColor = System.Drawing.Color.White;
+			this.pbLogo.ForeColor = System.Drawing.Color.Black;
+			this.pbLogo.Location = new System.Drawing.Point(12, 12);
+			this.pbLogo.Name = "pbLogo";
+			this.pbLogo.Size = new System.Drawing.Size(49, 51);
+			this.pbLogo.TabIndex = 4;
+			this.pbLogo.TabStop = false;
 			// 
 			// FormDeleteLink
 			// 
@@ -134,6 +137,7 @@
 			this.Controls.Add(this.buttonXDeleteLink);
 			this.DoubleBuffered = true;
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.ForeColor = System.Drawing.Color.Black;
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;

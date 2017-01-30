@@ -118,9 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="ProgressStartRegularWebConnection" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ProgressStartRegularWebConnection.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="TagsWidgetSecurityWhiteList" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\TagsWidgetSecurityWhiteList.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -130,20 +127,11 @@
   <data name="RetractableBarExpand" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\RetractableBarExpand.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ProgressStartCancel" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ProgressStartCancel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="TagsWidgetKeywords" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\TagsWidgetKeywords.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ProgressStartRegularSecurity" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ProgressStartRegularSecurity.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="ProgressCancel" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ProgressCancel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ProgressStartRegularHeader" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ProgressStartRegularHeader.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="TagsWidgetSecurityHidden" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\TagsWidgetSecurityHidden.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -151,14 +139,8 @@
   <data name="TagsWidgetCategories" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\TagsWidgetCategories.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ProgressStartRegularFiles" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ProgressStartRegularFiles.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="StartLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\StartLogo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ProgressStartMinimizedFisrtStart" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ProgressStartMinimizedFisrtStart.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="TagsWidgetSecurityLocal" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\TagsWidgetSecurityLocal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -175,16 +157,10 @@
   <data name="TagsWidgetSecurityVisible" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\TagsWidgetSecurityVisible.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ProgressStartRegularBrand" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ProgressStartRegularBrand.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="RetractableBarCollapse" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\RetractableBarCollapse.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="TagsWidgetSecurity" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\TagsWidgetSecurity.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ProgressStartMinimizedRegularStart" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ProgressStartMinimizedRegularStart.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

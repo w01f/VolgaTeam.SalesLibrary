@@ -17,7 +17,7 @@ using SalesLibraries.Common.Helpers;
 
 namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 {
-	public class LibraryFolder : WallbinCollectionEntity, ILinksGroup, IBannerSettingsHolder
+	public class LibraryFolder : WallbinCollectionEntity, ILinksGroup, IBannerSettingsHolder, IWidgetSetingsHolder
 	{
 		#region Persistent Properties
 		private string _name;
@@ -123,6 +123,16 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 
 		[NotMapped, JsonIgnore]
 		public string ObjectDisplayName => "Window";
+
+		[NotMapped, JsonIgnore]
+		public bool UseTextColorForWidget
+		{
+			get { return Settings.UseForeHeaderColorForWidget; }
+			set { Settings.UseForeHeaderColorForWidget = value; }
+		}
+
+		[NotMapped, JsonIgnore]
+		public Color TextColor => Settings.ForeHeaderColor;
 		#endregion
 
 		public LibraryFolder()
@@ -203,7 +213,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 				if (withLinks)
 					foreach (var libraryLink in Links)
 					{
-						var newLink = libraryLink.Copy(forMove);
+						var newLink = libraryLink.Copy();
 						newLink.Folder = folder;
 						folder.Links.Add(newLink);
 					}
@@ -270,8 +280,27 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 				set
 				{
 					if (_foreHeaderColor != value)
+					{
+						if(UseForeHeaderColorForWidget)
+							ParentFolder.Widget.ResetImage();
 						OnSettingsChanged();
+					}
 					_foreHeaderColor = value;
+				}
+			}
+
+			private bool _useForeHeaderColorForWidget;
+			public bool UseForeHeaderColorForWidget
+			{
+				get { return _useForeHeaderColorForWidget; }
+				set
+				{
+					if (_useForeHeaderColorForWidget != value)
+					{
+						ParentFolder?.Widget.ResetImage();
+						OnSettingsChanged();
+					}
+					_useForeHeaderColorForWidget = value;
 				}
 			}
 

@@ -20,7 +20,6 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 		public event EventHandler<EventArgs> PageChanging;
 		public event EventHandler<EventArgs> PageChanged;
 		public event EventHandler<EventArgs> DataChanged;
-
 		public LinkBundleListControl LinkBundleListControl { get; private set; }
 
 		private bool _isDataChanged;
@@ -31,6 +30,8 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 			{
 				_isDataChanged = value;
 				if (!_isDataChanged) return;
+				foreach (var pageView in Pages)
+					pageView.TagInfoControl?.UpdateInfo();
 				DataChanged?.Invoke(this, EventArgs.Empty);
 			}
 		}
@@ -78,7 +79,6 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 			ActivePage.Suspend();
 			ActivePage.ShowPage();
 			ActivePage.Resume();
-
 			pnContainer.BringToFront();
 		}
 
@@ -102,11 +102,11 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 			if (!IsDataChanged) return;
 			if (runInQueue)
 				MainController.Instance.ProcessManager.RunInQueue("Saving Changes...", () =>
-				{
-					DataStorage.SaveChanges();
-				});
+				 {
+					 DataStorage.SaveChanges();
+				 });
 			else
-				MainController.Instance.ProcessManager.Run("Saving Changes...", (cancelletionToken, formProgress) =>
+				MainController.Instance.ProcessManager.Run("Saving Changes...", (cancelationToken, formProgess) =>
 				{
 					DataStorage.SaveChanges();
 				});

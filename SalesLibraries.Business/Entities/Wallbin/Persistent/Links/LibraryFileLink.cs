@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -63,7 +64,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 			{
 				var dataSourcePath = ParentLibrary.GetDataSources()
 					.Where(ds => ds.DataSourceId.Equals(DataSourceId))
-					.Select(ds => ds.GetFilePath()).FirstOrDefault();
+					.Select(ds => ds.GetRootPath()).FirstOrDefault();
 				return String.IsNullOrEmpty(dataSourcePath) ?
 					null :
 					Path.Combine(dataSourcePath, RelativePath);
@@ -96,6 +97,19 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		}
 
 		[NotMapped, JsonIgnore]
+		public override Color DisplayColor
+		{
+			get
+			{
+				if (Banner.Enable && Banner.TextEnabled)
+					return Banner.ForeColor;
+				if (Settings.ForeColor.HasValue)
+					return Settings.ForeColor.Value;
+				return ParentFolder.Settings.ForeWindowColor;
+			}
+		}
+
+		[NotMapped, JsonIgnore]
 		public virtual string HintTitle => "File";
 
 		[NotMapped, JsonIgnore]
@@ -117,7 +131,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		public virtual bool IsFolder => false;
 
 		[NotMapped, JsonIgnore]
-		public virtual string AutoWidgetKey => Extension.Replace(".", String.Empty);
+		public override string AutoWidgetKey => Extension.Replace(".", String.Empty);
 		#endregion
 
 		public override string ToString()
@@ -125,10 +139,12 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 			return NameWithExtension;
 		}
 
-		public override void DeleteLink(bool fullDelete = false)
+		public override void DeleteLink()
 		{
+			if (this.IsLinkExternal())
+				this.DeleteExternalLink();
 			FolderLink?.Links.RemoveItem(this);
-			base.DeleteLink(fullDelete);
+			base.DeleteLink();
 		}
 
 		public override void ResetParent()
@@ -151,11 +167,22 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 			base.ApplyValues(link);
 		}
 
-		public override BaseLibraryLink Copy(bool forMove = false)
+		public override BaseLibraryLink Copy()
 		{
-			var link = (LibraryFileLink)base.Copy(forMove);
+			var link = (LibraryFileLink)base.Copy();
 			link.IsDead = IsDead;
 			link.DataSourceId = DataSourceId;
+
+			if (this.IsLinkExternal() && FolderLink == null)
+			{
+				var destinationPath = ExternalLinksHelper.CopyExternalFiles(FullPath, ParentLibrary.Path, link.ExtId);
+				var relativePath = destinationPath.Replace(ParentLibrary.Path, String.Empty);
+				relativePath = relativePath.StartsWith(Path.DirectorySeparatorChar.ToString(CultureInfo.InvariantCulture))
+					? relativePath.Substring(1)
+					: relativePath;
+				link.RelativePath = relativePath;
+			}
+
 			return link;
 		}
 
@@ -184,10 +211,18 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 				link = CreateEntity<LibraryFolderLink>();
 			link.Name = sourceLink.NameWithoutExtension;
 			link.DataSourceId = sourceLink.RootId;
+
 			var dataSourcePath = parentLibrary.GetDataSources().Where(ds => ds.DataSourceId == sourceLink.RootId).Select(ds => ds.Path).FirstOrDefault();
+
 			if (dataSourcePath != null)
 			{
-				var relativePath = sourceLink.Path.Replace(dataSourcePath, String.Empty);
+				var sourcePath = sourceLink.Path;
+				if (sourceLink.IsExternal)
+					if (sourceLink is FileLink)
+						sourcePath = ExternalLinksHelper.CopyExternalFile(sourceLink.Path, dataSourcePath, link.ExtId);
+					else
+						sourcePath = ExternalLinksHelper.CopyExternalFolder(sourceLink.Path, dataSourcePath, link.ExtId, ((FolderLink)sourceLink).SelectedFiles.Select(fileInfo => fileInfo.FullName).ToList());
+				var relativePath = sourcePath.Replace(dataSourcePath, String.Empty);
 				relativePath = relativePath.StartsWith(Path.DirectorySeparatorChar.ToString(CultureInfo.InvariantCulture)) ? relativePath.Substring(1) : relativePath;
 				link.RelativePath = relativePath;
 			}

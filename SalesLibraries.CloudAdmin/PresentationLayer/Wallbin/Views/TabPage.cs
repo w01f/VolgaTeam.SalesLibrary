@@ -14,18 +14,18 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 		private bool _readyToUse;
 		public LibraryPage Page { get; }
 		public PageContent Content { get; }
-		public LibraryPageTagInfo TagInfoControl { get; }
+		public LibraryPageTagInfo TagInfoControl { get; private set; }
 		public bool IsActive => MainController.Instance.WallbinViews.ActiveWallbin.ActivePage == this;
 
 		public TabPage(LibraryPage page)
 		{
 			InitializeComponent();
 			Page = page;
-			Text = Page.Name.Replace("&", "&&");
+			Text = Page.Name;
 			Controls.Add(pnContainer);
 			Controls.Add(pnEmpty);
 			Content = new PageContent(this);
-			TagInfoControl = new LibraryPageTagInfo(Page);
+			TagInfoControl = new LibraryPageTagInfo();
 			Suspend();
 		}
 
@@ -41,6 +41,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 			if (force)
 				DisposePage();
 			Content.LoadContent();
+			TagInfoControl.LoadData(Page);
 			if (!pnContainer.Controls.Contains(Content))
 				pnContainer.Controls.Add(Content);
 			if (!MainController.Instance.TabWallbin.pnTagInfoContainer.Controls.Contains(TagInfoControl))

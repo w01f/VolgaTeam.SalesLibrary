@@ -86,7 +86,7 @@
 			this.xtraTabControlWindowProperties.Location = new System.Drawing.Point(0, 34);
 			this.xtraTabControlWindowProperties.Name = "xtraTabControlWindowProperties";
 			this.xtraTabControlWindowProperties.SelectedTabPage = this.xtraTabPageAppearance;
-			this.xtraTabControlWindowProperties.Size = new System.Drawing.Size(842, 573);
+			this.xtraTabControlWindowProperties.Size = new System.Drawing.Size(982, 573);
 			this.xtraTabControlWindowProperties.TabIndex = 25;
 			this.xtraTabControlWindowProperties.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.xtraTabPageAppearance,
@@ -111,7 +111,7 @@
 			this.xtraTabPageAppearance.Controls.Add(this.colorEditBackColor);
 			this.xtraTabPageAppearance.Controls.Add(this.ckEnableText);
 			this.xtraTabPageAppearance.Name = "xtraTabPageAppearance";
-			this.xtraTabPageAppearance.Size = new System.Drawing.Size(836, 542);
+			this.xtraTabPageAppearance.Size = new System.Drawing.Size(976, 542);
 			this.xtraTabPageAppearance.Text = "Appearance";
 			// 
 			// laColumn1Alignment
@@ -178,7 +178,7 @@
 			this.buttonEditFont.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
 			this.buttonEditFont.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-			this.buttonEditFont.Size = new System.Drawing.Size(735, 22);
+			this.buttonEditFont.Size = new System.Drawing.Size(875, 22);
 			this.buttonEditFont.StyleController = this.styleController;
 			this.buttonEditFont.TabIndex = 55;
 			this.buttonEditFont.EditValueChanged += new System.EventHandler(this.buttonEditFont_EditValueChanged);
@@ -212,17 +212,18 @@
 			// 
 			// colorEditForeColor
 			// 
-			this.colorEditForeColor.Color = System.Drawing.Color.Empty;
-			this.colorEditForeColor.EditValue = "#000000";
+			this.colorEditForeColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+			this.colorEditForeColor.EditValue = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
 			this.colorEditForeColor.Enabled = false;
 			this.colorEditForeColor.Location = new System.Drawing.Point(95, 200);
 			this.colorEditForeColor.Name = "colorEditForeColor";
-			this.colorEditForeColor.Properties.Appearance.BackColor = System.Drawing.Color.Black;
-			this.colorEditForeColor.Properties.Appearance.ForeColor = System.Drawing.Color.White;
+			this.colorEditForeColor.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.colorEditForeColor.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.colorEditForeColor.Properties.Appearance.Options.UseBackColor = true;
 			this.colorEditForeColor.Properties.Appearance.Options.UseForeColor = true;
 			this.colorEditForeColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
+			this.colorEditForeColor.Properties.Color = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
 			this.colorEditForeColor.Size = new System.Drawing.Size(100, 22);
 			this.colorEditForeColor.StyleController = this.styleController;
 			this.colorEditForeColor.TabIndex = 54;
@@ -239,7 +240,7 @@
 			this.memoEditTitle.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.memoEditTitle.Properties.Appearance.Options.UseBackColor = true;
 			this.memoEditTitle.Properties.Appearance.Options.UseForeColor = true;
-			this.memoEditTitle.Size = new System.Drawing.Size(821, 54);
+			this.memoEditTitle.Size = new System.Drawing.Size(961, 54);
 			this.memoEditTitle.StyleController = this.styleController;
 			this.memoEditTitle.TabIndex = 49;
 			// 
@@ -268,8 +269,8 @@
 			// 
 			// colorEditBackColor
 			// 
-			this.colorEditBackColor.Color = System.Drawing.Color.Empty;
-			this.colorEditBackColor.EditValue = "#000000";
+			this.colorEditBackColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+			this.colorEditBackColor.EditValue = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
 			this.colorEditBackColor.Location = new System.Drawing.Point(95, 11);
 			this.colorEditBackColor.Name = "colorEditBackColor";
 			this.colorEditBackColor.Properties.Appearance.BackColor = System.Drawing.Color.White;
@@ -278,6 +279,7 @@
 			this.colorEditBackColor.Properties.Appearance.Options.UseForeColor = true;
 			this.colorEditBackColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
+			this.colorEditBackColor.Properties.Color = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
 			this.colorEditBackColor.Size = new System.Drawing.Size(100, 22);
 			this.colorEditBackColor.StyleController = this.styleController;
 			this.colorEditBackColor.TabIndex = 53;
@@ -318,7 +320,7 @@
 			this.ckApplyForAllColumnTitles.AutoSize = true;
 			this.ckApplyForAllColumnTitles.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.ckApplyForAllColumnTitles.ForeColor = System.Drawing.Color.Black;
-			this.ckApplyForAllColumnTitles.Location = new System.Drawing.Point(689, 7);
+			this.ckApplyForAllColumnTitles.Location = new System.Drawing.Point(829, 7);
 			this.ckApplyForAllColumnTitles.Name = "ckApplyForAllColumnTitles";
 			this.ckApplyForAllColumnTitles.Size = new System.Drawing.Size(148, 20);
 			this.ckApplyForAllColumnTitles.TabIndex = 35;
@@ -334,7 +336,7 @@
 			this.pnBottom.ForeColor = System.Drawing.Color.Black;
 			this.pnBottom.Location = new System.Drawing.Point(0, 607);
 			this.pnBottom.Name = "pnBottom";
-			this.pnBottom.Size = new System.Drawing.Size(842, 55);
+			this.pnBottom.Size = new System.Drawing.Size(982, 55);
 			this.pnBottom.TabIndex = 26;
 			this.pnBottom.Click += new System.EventHandler(this.OnFormClick);
 			// 
@@ -344,7 +346,7 @@
 			this.buttonXSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXSave.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXSave.DialogResult = System.Windows.Forms.DialogResult.OK;
-			this.buttonXSave.Location = new System.Drawing.Point(594, 10);
+			this.buttonXSave.Location = new System.Drawing.Point(734, 10);
 			this.buttonXSave.Name = "buttonXSave";
 			this.buttonXSave.Size = new System.Drawing.Size(102, 33);
 			this.buttonXSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -357,7 +359,7 @@
 			this.buttonXCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXCancel.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.buttonXCancel.Location = new System.Drawing.Point(728, 10);
+			this.buttonXCancel.Location = new System.Drawing.Point(868, 10);
 			this.buttonXCancel.Name = "buttonXCancel";
 			this.buttonXCancel.Size = new System.Drawing.Size(102, 33);
 			this.buttonXCancel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -373,7 +375,7 @@
 			this.pnTop.ForeColor = System.Drawing.Color.Black;
 			this.pnTop.Location = new System.Drawing.Point(0, 0);
 			this.pnTop.Name = "pnTop";
-			this.pnTop.Size = new System.Drawing.Size(842, 34);
+			this.pnTop.Size = new System.Drawing.Size(982, 34);
 			this.pnTop.TabIndex = 27;
 			this.pnTop.Click += new System.EventHandler(this.OnFormClick);
 			// 
@@ -392,7 +394,7 @@
 			// FormColumnTitle
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-			this.ClientSize = new System.Drawing.Size(842, 662);
+			this.ClientSize = new System.Drawing.Size(982, 662);
 			this.Controls.Add(this.xtraTabControlWindowProperties);
 			this.Controls.Add(this.pnBottom);
 			this.Controls.Add(this.pnTop);

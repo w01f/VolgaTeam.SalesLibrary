@@ -8,6 +8,6 @@ namespace SalesLibraries.Business.Entities.Interfaces
 		string Path { get; }
 		string Name { get; }
 		int Order { get; }
-		string GetFilePath();
+		string GetRootPath();
 	}
 }

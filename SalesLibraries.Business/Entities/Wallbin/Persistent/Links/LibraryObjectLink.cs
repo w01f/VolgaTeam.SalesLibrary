@@ -105,6 +105,8 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		[NotMapped, JsonIgnore]
 		public bool IsCorrupted => !Banner.Enable && String.IsNullOrEmpty(DisplayName);
 
+		[NotMapped, JsonIgnore]
+		public virtual string AutoWidgetKey => String.Empty;
 		#endregion
 
 		public override void BeforeSave()
@@ -154,9 +156,9 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 			return customizedSettingsGroups;
 		}
 
-		public override BaseLibraryLink Copy(bool forMove = false)
+		public override BaseLibraryLink Copy()
 		{
-			var link = (LibraryObjectLink)base.Copy(forMove);
+			var link = (LibraryObjectLink)base.Copy();
 			link.RelativePath = RelativePath;
 			link.ExpirationEncoded = ExpirationEncoded;
 			link.QuickLinkEncoded = QuickLinkEncoded;
@@ -176,7 +178,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		{
 			var relatedLinks = GetRelatedLinks();
 			foreach (var libraryObjectLink in relatedLinks)
-				libraryObjectLink.DeleteLink(true);
+				libraryObjectLink.DeleteLink();
 		}
 	}
 }

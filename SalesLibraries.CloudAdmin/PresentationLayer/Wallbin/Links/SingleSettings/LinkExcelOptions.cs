@@ -25,7 +25,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 		public LinkSettingsType[] SupportedSettingsTypes => new[] { LinkSettingsType.Notes, LinkSettingsType.AdminSettings };
 		public int Order => 6;
 		public bool AvailableForEmbedded => true;
-		public SettingsEditorHeaderInfo HeaderInfo => new SettingsEditorHeaderInfo { Title = "<size=+4>Admin Settings</size>" };
+		public SettingsEditorHeaderInfo HeaderInfo => new SettingsEditorHeaderInfo { Title = "<size=+4>Excel Settings</size>" };
 
 		public event EventHandler<EventArgs> ForceCloseRequested;
 

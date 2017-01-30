@@ -92,9 +92,9 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 			return !Directory.Exists(FullPath);
 		}
 
-		public override BaseLibraryLink Copy(bool forMove = false)
+		public override BaseLibraryLink Copy()
 		{
-			var folderLink = (LibraryFolderLink)base.Copy(forMove);
+			var folderLink = (LibraryFolderLink)base.Copy();
 
 			foreach (var libraryLink in Links.OfType<LibraryFileLink>())
 			{
@@ -121,7 +121,8 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 					newLinks.Add(folderLink);
 				}
 				foreach (var filePath in Directory.GetFiles(FullPath)
-					.Where(filePath => GlobalSettings.HiddenObjects.All(item => !filePath.ToUpper().Contains(item.ToUpper()))))
+					.Where(filePath => filePath.ToUpper().Contains(Constants.ExternalFilesRootFolderName.ToUpper()) || 
+						GlobalSettings.HiddenObjects.All(item => !filePath.ToUpper().Contains(item.ToUpper()))))
 				{
 					existedPaths.Add(filePath);
 					if (Links.Any(link => link.FullPath.ToLower().Equals(filePath.ToLower()))) continue;

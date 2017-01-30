@@ -6,7 +6,7 @@ namespace SalesLibraries.Common.Synchronization
 	{
 		public DirectoryInfo SourceDirectory { get; private set; }
 		public DirectoryInfo DestinationDirectory { get; private set; }
-		public bool DeleteExtraFilesInDestination { get; private set; }
+		public bool DeleteExtraFilesInDestination { get; }
 		public SyncFilterList FilterList { get; set; }
 
 

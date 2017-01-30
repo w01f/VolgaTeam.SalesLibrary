@@ -363,6 +363,16 @@ namespace SalesLibraries.CloudAdmin.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap LinkAddExternalFolder {
+            get {
+                object obj = ResourceManager.GetObject("LinkAddExternalFolder", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap LinkAddHtml5 {
             get {
                 object obj = ResourceManager.GetObject("LinkAddHtml5", resourceCulture);
@@ -586,6 +596,106 @@ namespace SalesLibraries.CloudAdmin.Properties {
         internal static System.Drawing.Bitmap LinkSettingsTextNote {
             get {
                 object obj = ResourceManager.GetObject("LinkSettingsTextNote", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ProgressStartCancel {
+            get {
+                object obj = ResourceManager.GetObject("ProgressStartCancel", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ProgressStartMinimizedFisrtStart {
+            get {
+                object obj = ResourceManager.GetObject("ProgressStartMinimizedFisrtStart", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ProgressStartMinimizedRegularStart {
+            get {
+                object obj = ResourceManager.GetObject("ProgressStartMinimizedRegularStart", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ProgressStartRegularBrand {
+            get {
+                object obj = ResourceManager.GetObject("ProgressStartRegularBrand", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ProgressStartRegularFiles {
+            get {
+                object obj = ResourceManager.GetObject("ProgressStartRegularFiles", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ProgressStartRegularHeader {
+            get {
+                object obj = ResourceManager.GetObject("ProgressStartRegularHeader", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ProgressStartRegularSecurity {
+            get {
+                object obj = ResourceManager.GetObject("ProgressStartRegularSecurity", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ProgressStartRegularWebConnection {
+            get {
+                object obj = ResourceManager.GetObject("ProgressStartRegularWebConnection", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap QatFloater {
+            get {
+                object obj = ResourceManager.GetObject("QatFloater", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap QatHelp {
+            get {
+                object obj = ResourceManager.GetObject("QatHelp", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

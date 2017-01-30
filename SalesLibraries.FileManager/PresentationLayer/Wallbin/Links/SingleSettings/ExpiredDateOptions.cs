@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using DevExpress.XtraTab;
+using SalesLibraries.Business.Entities.Interfaces;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.Common.Helpers;
@@ -10,10 +11,11 @@ using SalesLibraries.Common.Helpers;
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSettings
 {
 	[IntendForClass(typeof(LibraryObjectLink))]
-	//public partial class ExpiredDateOptions : UserControl, ILinkSettingsEditControl
-	public partial class ExpiredDateOptions : XtraTabPage, ILinkSettingsEditControl
+	//public partial class ExpiredDateOptions : UserControl, ILinkSetSettingsEditControl
+	public partial class ExpiredDateOptions : XtraTabPage, ILinkSetSettingsEditControl
 	{
-		private readonly LibraryObjectLink _data;
+		private readonly LibraryObjectLink _sourceLink;
+		private readonly ILinksGroup _sourceLinkGroup;
 
 		public LinkSettingsType[] SupportedSettingsTypes => new[] { LinkSettingsType.ExpirationDate };
 		public int Order => 0;
@@ -22,10 +24,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 		public event EventHandler<EventArgs> ForceCloseRequested;
 
-		public ExpiredDateOptions(LibraryObjectLink data)
+		private ExpiredDateOptions()
 		{
 			InitializeComponent();
-			_data = data;
 
 			dateEditExpirationDate.Properties.NullDate = DateTime.MinValue;
 			if ((CreateGraphics()).DpiX > 96)
@@ -38,22 +39,39 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			}
 		}
 
+		public ExpiredDateOptions(LibraryObjectLink sourceLink) : this()
+		{
+			_sourceLink = sourceLink;
+		}
+
+		public ExpiredDateOptions(ILinksGroup linkGroup, FileTypes? defaultLinkType = null) : this()
+		{
+			_sourceLinkGroup = linkGroup;
+			_sourceLink = _sourceLinkGroup.AllLinks.OfType<LibraryObjectLink>()
+				.FirstOrDefault(link => !defaultLinkType.HasValue || link.Type == defaultLinkType.Value);
+		}
+
 		public void LoadData()
 		{
-			laAddDateValue.Text = String.Format(laAddDateValue.Text, _data.AddDate.ToString("M/dd/yy"));
-			dateEditExpirationDate.DateTime = _data.ExpirationSettings.ExpirationDate;
-			timeEditExpirationTime.Time = _data.ExpirationSettings.ExpirationDate;
-			checkBoxSendEmailWhenDelete.Checked = _data.ExpirationSettings.SendEmailOnSync;
-			checkBoxLabelLink.Checked = _data.ExpirationSettings.MarkWhenExpired;
-			checkBoxEnableExpiredLinks.Checked = _data.ExpirationSettings.Enable;
+			laAddDateValue.Text = String.Format(laAddDateValue.Text, _sourceLink.AddDate.ToString("M/dd/yy"));
+			dateEditExpirationDate.DateTime = _sourceLink.ExpirationSettings.ExpirationDate;
+			timeEditExpirationTime.Time = _sourceLink.ExpirationSettings.ExpirationDate;
+			checkBoxSendEmailWhenDelete.Checked = _sourceLink.ExpirationSettings.SendEmailOnSync;
+			checkBoxLabelLink.Checked = _sourceLink.ExpirationSettings.MarkWhenExpired;
+			checkBoxEnableExpiredLinks.Checked = _sourceLink.ExpirationSettings.Enable;
 		}
 
 		public void SaveData()
 		{
-			_data.ExpirationSettings.ExpirationDate = new DateTime(dateEditExpirationDate.DateTime.Year, dateEditExpirationDate.DateTime.Month, dateEditExpirationDate.DateTime.Day, timeEditExpirationTime.Time.Hour, timeEditExpirationTime.Time.Minute, timeEditExpirationTime.Time.Second);
-			_data.ExpirationSettings.SendEmailOnSync = checkBoxSendEmailWhenDelete.Checked;
-			_data.ExpirationSettings.MarkWhenExpired = checkBoxLabelLink.Checked;
-			_data.ExpirationSettings.Enable = checkBoxEnableExpiredLinks.Checked;
+			foreach (var link in (_sourceLinkGroup?.AllLinks ?? new[] {_sourceLink}).OfType<LibraryObjectLink>().ToList())
+			{
+				link.ExpirationSettings.ExpirationDate = new DateTime(dateEditExpirationDate.DateTime.Year,
+					dateEditExpirationDate.DateTime.Month, dateEditExpirationDate.DateTime.Day, timeEditExpirationTime.Time.Hour,
+					timeEditExpirationTime.Time.Minute, timeEditExpirationTime.Time.Second);
+				link.ExpirationSettings.SendEmailOnSync = checkBoxSendEmailWhenDelete.Checked;
+				link.ExpirationSettings.MarkWhenExpired = checkBoxLabelLink.Checked;
+				link.ExpirationSettings.Enable = checkBoxEnableExpiredLinks.Checked;
+			}
 		}
 
 		private void checkBoxEnableExpiredLinks_CheckedChanged(object sender, EventArgs e)
@@ -68,8 +86,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 				checkBoxEnableExpiredLinks.ForeColor = Color.Black;
 				dateEditExpirationDate.ForeColor = Color.Black;
 				timeEditExpirationTime.ForeColor = Color.Black;
-				dateEditExpirationDate.DateTime = _data.ExpirationSettings.ExpirationDate;
-				timeEditExpirationTime.Time = _data.ExpirationSettings.ExpirationDate;
+				dateEditExpirationDate.DateTime = _sourceLink.ExpirationSettings.ExpirationDate;
+				timeEditExpirationTime.Time = _sourceLink.ExpirationSettings.ExpirationDate;
 			}
 			else
 			{

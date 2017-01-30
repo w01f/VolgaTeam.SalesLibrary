@@ -11,6 +11,9 @@
 		public const string PrimaryFileStorageName = @"Source Directory";
 		public const string RegularPreviewContainersRootFolderName = @"!QV";
 		public const string WebPreviewContainersRootFolderName = @"!WV";
+		public const string ExternalFilesRootFolderName = @"!WV_Wildcards";
+		public const string ExternalFilesStorageFolderName = @"files";
+		public const string ExternalFilesTrashFolderName = @"trash";
 		public const string LibraryLogoFolder = @"!SD-Graphics";
 		public const string OvernightsCalendarRootFolderName = @"!OC";
 		public const string ProgramManagerRootFolderName = @"!PM";

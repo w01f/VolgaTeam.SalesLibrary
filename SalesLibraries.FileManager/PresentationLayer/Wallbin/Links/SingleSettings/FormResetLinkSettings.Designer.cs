@@ -36,8 +36,12 @@
 			this.buttonXSelectNone = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXSelectAll = new DevComponents.DotNetBar.ButtonX();
 			this.checkedListBoxControlOutputItems = new DevExpress.XtraEditors.CheckedListBoxControl();
+			this.pnMain = new System.Windows.Forms.Panel();
+			this.pnMiddle = new System.Windows.Forms.Panel();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkedListBoxControlOutputItems)).BeginInit();
+			this.pnMain.SuspendLayout();
+			this.pnMiddle.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// styleController
@@ -91,16 +95,15 @@
 			// labelControlTitle
 			// 
 			this.labelControlTitle.AllowHtmlString = true;
-			this.labelControlTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelControlTitle.Appearance.BackColor = System.Drawing.Color.White;
 			this.labelControlTitle.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.labelControlTitle.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
 			this.labelControlTitle.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
 			this.labelControlTitle.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-			this.labelControlTitle.Location = new System.Drawing.Point(12, 3);
+			this.labelControlTitle.Dock = System.Windows.Forms.DockStyle.Top;
+			this.labelControlTitle.Location = new System.Drawing.Point(0, 0);
 			this.labelControlTitle.Name = "labelControlTitle";
-			this.labelControlTitle.Size = new System.Drawing.Size(405, 42);
+			this.labelControlTitle.Size = new System.Drawing.Size(410, 42);
 			this.labelControlTitle.StyleController = this.styleController;
 			this.labelControlTitle.TabIndex = 3;
 			this.labelControlTitle.Text = "{0}<br><color=gray>{1}</color>";
@@ -111,7 +114,7 @@
 			this.buttonXSelectNone.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
 			this.buttonXSelectNone.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXSelectNone.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-			this.buttonXSelectNone.Location = new System.Drawing.Point(321, 51);
+			this.buttonXSelectNone.Location = new System.Drawing.Point(311, 6);
 			this.buttonXSelectNone.Name = "buttonXSelectNone";
 			this.buttonXSelectNone.Size = new System.Drawing.Size(96, 35);
 			this.buttonXSelectNone.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -124,7 +127,7 @@
 			// 
 			this.buttonXSelectAll.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
 			this.buttonXSelectAll.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-			this.buttonXSelectAll.Location = new System.Drawing.Point(12, 51);
+			this.buttonXSelectAll.Location = new System.Drawing.Point(3, 6);
 			this.buttonXSelectAll.Name = "buttonXSelectAll";
 			this.buttonXSelectAll.Size = new System.Drawing.Size(96, 35);
 			this.buttonXSelectAll.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -146,22 +149,43 @@
 			this.checkedListBoxControlOutputItems.Appearance.Options.UseForeColor = true;
 			this.checkedListBoxControlOutputItems.CheckOnClick = true;
 			this.checkedListBoxControlOutputItems.ItemHeight = 25;
-			this.checkedListBoxControlOutputItems.Location = new System.Drawing.Point(12, 92);
+			this.checkedListBoxControlOutputItems.Location = new System.Drawing.Point(3, 47);
 			this.checkedListBoxControlOutputItems.Name = "checkedListBoxControlOutputItems";
 			this.checkedListBoxControlOutputItems.SelectionMode = System.Windows.Forms.SelectionMode.None;
-			this.checkedListBoxControlOutputItems.Size = new System.Drawing.Size(405, 234);
+			this.checkedListBoxControlOutputItems.Size = new System.Drawing.Size(404, 243);
 			this.checkedListBoxControlOutputItems.StyleController = this.styleController;
 			this.checkedListBoxControlOutputItems.TabIndex = 19;
 			this.checkedListBoxControlOutputItems.ItemCheck += new DevExpress.XtraEditors.Controls.ItemCheckEventHandler(this.OnItemCheck);
+			// 
+			// pnMain
+			// 
+			this.pnMain.BackColor = System.Drawing.Color.Transparent;
+			this.pnMain.Controls.Add(this.pnMiddle);
+			this.pnMain.Controls.Add(this.labelControlTitle);
+			this.pnMain.ForeColor = System.Drawing.Color.Black;
+			this.pnMain.Location = new System.Drawing.Point(9, 2);
+			this.pnMain.Name = "pnMain";
+			this.pnMain.Size = new System.Drawing.Size(410, 335);
+			this.pnMain.TabIndex = 22;
+			// 
+			// pnMiddle
+			// 
+			this.pnMiddle.BackColor = System.Drawing.Color.Transparent;
+			this.pnMiddle.Controls.Add(this.buttonXSelectAll);
+			this.pnMiddle.Controls.Add(this.buttonXSelectNone);
+			this.pnMiddle.Controls.Add(this.checkedListBoxControlOutputItems);
+			this.pnMiddle.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.pnMiddle.ForeColor = System.Drawing.Color.Black;
+			this.pnMiddle.Location = new System.Drawing.Point(0, 42);
+			this.pnMiddle.Name = "pnMiddle";
+			this.pnMiddle.Size = new System.Drawing.Size(410, 293);
+			this.pnMiddle.TabIndex = 23;
 			// 
 			// FormResetLinkSettings
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
 			this.ClientSize = new System.Drawing.Size(429, 389);
-			this.Controls.Add(this.buttonXSelectNone);
-			this.Controls.Add(this.buttonXSelectAll);
-			this.Controls.Add(this.checkedListBoxControlOutputItems);
-			this.Controls.Add(this.labelControlTitle);
+			this.Controls.Add(this.pnMain);
 			this.Controls.Add(this.buttonXReset);
 			this.Controls.Add(this.buttonXCancel);
 			this.DoubleBuffered = true;
@@ -176,6 +200,8 @@
 			this.Text = "Reset this Link";
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkedListBoxControlOutputItems)).EndInit();
+			this.pnMain.ResumeLayout(false);
+			this.pnMiddle.ResumeLayout(false);
 			this.ResumeLayout(false);
 
 		}
@@ -189,5 +215,7 @@
 		public DevComponents.DotNetBar.ButtonX buttonXSelectNone;
 		public DevComponents.DotNetBar.ButtonX buttonXSelectAll;
 		public DevExpress.XtraEditors.CheckedListBoxControl checkedListBoxControlOutputItems;
+		private System.Windows.Forms.Panel pnMain;
+		private System.Windows.Forms.Panel pnMiddle;
 	}
 }

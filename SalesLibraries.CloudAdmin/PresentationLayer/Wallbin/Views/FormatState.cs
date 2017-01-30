@@ -1,6 +1,6 @@
 ﻿using System;
-using SalesLibraries.CloudAdmin.Controllers;
 using SalesLibraries.CommonGUI.Wallbin.Views;
+using SalesLibraries.CloudAdmin.Controllers;
 
 namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 {
@@ -30,13 +30,13 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 			}
 		}
 
-		private bool _allowMultiSelect;
-		public bool AllowMultiSelect
+		private bool _showSelectedFolder;
+		public bool ShowSelectedFolder
 		{
-			get { return _allowMultiSelect; }
+			get { return _showSelectedFolder; }
 			set
 			{
-				_allowMultiSelect = value;
+				_showSelectedFolder = value;
 			}
 		}
 
@@ -80,16 +80,6 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 			}
 		}
 
-		private bool _showLinkBundles;
-		public bool ShowLinkBundles
-		{
-			get { return _showLinkBundles; }
-			set
-			{
-				_showLinkBundles = value;
-			}
-		}
-
 		public event EventHandler<EventArgs> StateChanged;
 		#endregion
 
@@ -100,6 +90,16 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 			set
 			{
 				_showFiles = value;
+			}
+		}
+
+		private bool _showLinkBundles;
+		public bool ShowLinkBundles
+		{
+			get { return _showLinkBundles; }
+			set
+			{
+				_showLinkBundles = value;
 			}
 		}
 
@@ -126,14 +126,15 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 		public FormatState()
 		{
 			_allowEdit = true;
-			_allowMultiSelect = false;
 			_showFiles = true;
+			_showLinkBundles = false;
 			_showTagsEditor = false;
 			_showCategoryTags = false;
 			_showKeywordTags = false;
 			_showSuperFilterTags = false;
 			_showTagsCleaner = false;
 			_showSecurityTags = false;
+
 		}
 
 		public void Update()
@@ -147,8 +148,9 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 			{
 				case TabPageEnum.Tags:
 					_allowEdit = false;
-					_allowMultiSelect = true;
+					_showSelectedFolder = false;
 					_showFiles = false;
+					_showLinkBundles = false;
 					_showTagsEditor = true;
 					_showCategoryTags = true;
 					_showKeywordTags = false;
@@ -158,8 +160,9 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 					break;
 				case TabPageEnum.Security:
 					_allowEdit = false;
-					_allowMultiSelect = true;
+					_showSelectedFolder = false;
 					_showFiles = false;
+					_showLinkBundles = false;
 					_showTagsEditor = true;
 					_showCategoryTags = false;
 					_showKeywordTags = false;
@@ -167,10 +170,23 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 					_showTagsCleaner = false;
 					_showSecurityTags = true;
 					break;
+				case TabPageEnum.Bundles:
+					_allowEdit = true;
+					_showSelectedFolder = false;
+					_showFiles = false;
+					_showLinkBundles = true;
+					_showTagsEditor = false;
+					_showCategoryTags = false;
+					_showKeywordTags = false;
+					_showSuperFilterTags = false;
+					_showTagsCleaner = false;
+					_showSecurityTags = false;
+					break;
 				default:
 					_allowEdit = true;
-					_allowMultiSelect = false;
+					_showSelectedFolder = true;
 					_showFiles = true;
+					_showLinkBundles = false;
 					_showTagsEditor = false;
 					_showCategoryTags = false;
 					_showKeywordTags = false;

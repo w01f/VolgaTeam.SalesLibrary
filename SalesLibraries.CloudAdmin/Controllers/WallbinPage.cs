@@ -179,18 +179,19 @@ namespace SalesLibraries.CloudAdmin.Controllers
 			MainController.Instance.MainForm.buttonItemHomeAddUrl.Enabled =
 			MainController.Instance.MainForm.buttonItemHomeAddLineBreak.Enabled = selectedFolder != null;
 
-			MainController.Instance.MainForm.buttonItemHomeLinkDelete.Enabled =
-			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesNotes.Enabled =
+			MainController.Instance.MainForm.buttonItemHomeLinkOpen.Enabled = selectedLink != null && selectedLink.IsOpenable;
+			MainController.Instance.MainForm.buttonItemHomeLinkDelete.Enabled = selectedLink != null;
 
+			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesNotes.Enabled =
 			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesSecurity.Enabled =
 			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesWidget.Enabled =
 			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesBanner.Enabled =
-			MainController.Instance.MainForm.buttonItemHomeLinkOpen.Enabled = selectedLink != null;
-			MainController.Instance.MainForm.buttonItemHomeLinkOpen.Enabled = selectedLink != null && selectedLink.IsOpenable;
+			MainController.Instance.MainForm.buttonItemHomeLinkOpen.Enabled = selectedLink != null && !selectedLink.Inaccessable;
 
 			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesTags.Enabled =
 			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesExpirationDate.Enabled =
 				selectedLink != null &&
+				!selectedLink.Inaccessable &&
 				!(selectedLink.Source is LineBreak);
 		}
 
@@ -247,13 +248,13 @@ namespace SalesLibraries.CloudAdmin.Controllers
 
 		private void OnSyncClick(object sender, EventArgs e)
 		{
-			MainController.Instance.ProcessChanges();
-			MainController.Instance.ProcessManager.RunStartProcess(
-				null, //String.Format("Syncing changes with {0}", MainController.Instance.Settings.SiteLibrary),
-				(cancelationToken, formProgress) =>
-				{
-					MainController.Instance.Wallbin.CheckinData();
-				});
+			//MainController.Instance.ProcessChanges();
+			//MainController.Instance.ProcessManager.RunStartProcess(
+			//	null, //String.Format("Syncing changes with {0}", MainController.Instance.Settings.SiteLibrary),
+			//	(cancelationToken, formProgress) =>
+			//	{
+			//		MainController.Instance.Wallbin.CheckinData();
+			//	});
 		}
 
 		#region Link Operations Processing
@@ -278,7 +279,11 @@ namespace SalesLibraries.CloudAdmin.Controllers
 		private void buttonItemHomeLinkDelete_Click(object sender, EventArgs e)
 		{
 			var selectedFolder = MainController.Instance.WallbinViews.Selection.SelectedFolder;
-			selectedFolder?.DeleteLink();
+			var selectedLinks = MainController.Instance.WallbinViews.Selection.SelectedLinks.ToList();
+			if (selectedLinks.Count > 1)
+				selectedFolder?.DeleteMultiLinks(selectedLinks);
+			else
+				selectedFolder.DeleteSingleLink();
 		}
 
 		private void buttonItemHomeLinkSettings_Click(object sender, EventArgs e)
@@ -288,7 +293,12 @@ namespace SalesLibraries.CloudAdmin.Controllers
 			var button = sender as ButtonItem;
 			if (button?.Tag == null) return;
 			var propertiesType = (LinkSettingsType)Enum.Parse(typeof(LinkSettingsType), (String)button.Tag);
-			selectedFolder.EditSingleLinkSettings(propertiesType);
+
+			var selectedLinks = MainController.Instance.WallbinViews.Selection.SelectedLinks.ToList();
+			if (selectedLinks.Count > 1)
+				selectedFolder.EditLinksGroupSettings(selectedLinks.ToMultiLinkSet(), propertiesType);
+			else
+				selectedFolder.EditSingleLinkSettings(propertiesType);
 		}
 		#endregion
 

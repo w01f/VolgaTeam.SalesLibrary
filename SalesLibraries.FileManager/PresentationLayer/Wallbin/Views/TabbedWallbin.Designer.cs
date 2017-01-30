@@ -28,33 +28,44 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.components = new System.ComponentModel.Container();
 			this.xtraTabControl = new DevExpress.XtraTab.XtraTabControl();
-			this.popupMenuPageProperties = new DevExpress.XtraBars.PopupMenu(this.components);
+			this.popupMenuPageProperties = new DevExpress.XtraBars.PopupMenu();
 			this.barButtonItemPagePropertiesPageSettings = new DevExpress.XtraBars.BarButtonItem();
 			this.barButtonItemPagePropertiesDeletePage = new DevExpress.XtraBars.BarButtonItem();
 			this.barSubItemPagePropertiesClonePage = new DevExpress.XtraBars.BarSubItem();
 			this.barButtonItemPagePropertiesClonePageWindowsAndLinks = new DevExpress.XtraBars.BarButtonItem();
 			this.barButtonItemPagePropertiesClonePageOnlyWindows = new DevExpress.XtraBars.BarButtonItem();
-			this.barButtonItemPagePropertiesResetLinkSettings = new DevExpress.XtraBars.BarButtonItem();
+			this.barSubItemPagePropertiesMultiLinks = new DevExpress.XtraBars.BarSubItem();
+			this.barButtonItemPagePropertiesMultiLinksResetSettings = new DevExpress.XtraBars.BarButtonItem();
+			this.barButtonItemPagePropertiesMultiLinksDelete = new DevExpress.XtraBars.BarButtonItem();
+			this.barSubItemPagePropertiesMultiLinksImageSettings = new DevExpress.XtraBars.BarSubItem();
+			this.barButtonItemPagePropertiesMultiLinksWidget = new DevExpress.XtraBars.BarButtonItem();
+			this.barButtonItemPagePropertiesMultiLinksBanner = new DevExpress.XtraBars.BarButtonItem();
+			this.barSubItemPagePropertiesMultiLinksNotesObject = new DevExpress.XtraBars.BarSubItem();
+			this.barSubItemPagePropertiesMultiLinksNotesLineBreak = new DevExpress.XtraBars.BarSubItem();
+			this.barButtonItemPagePropertiesMultiLinksTags = new DevExpress.XtraBars.BarButtonItem();
+			this.barSubItemPagePropertiesMultiLinksFormatObject = new DevExpress.XtraBars.BarSubItem();
+			this.barSubItemPagePropertiesMultiLinksFormatLineBreak = new DevExpress.XtraBars.BarSubItem();
+			this.barButtonItemPagePropertiesMultiLinksSecurity = new DevExpress.XtraBars.BarButtonItem();
+			this.barButtonItemPagePropertiesMultiLinksExpirationDate = new DevExpress.XtraBars.BarButtonItem();
+			this.barButtonItemPagePropertiesMultiLinksRefreshPreviewFiles = new DevExpress.XtraBars.BarButtonItem();
 			this.barSubItemPagePropertiesLinkAdminSettings = new DevExpress.XtraBars.BarSubItem();
+			this.barButtonItemPagePropertiesLinkAdminSettingsExcel = new DevExpress.XtraBars.BarButtonItem();
+			this.barButtonItemPagePropertiesLinkAdminSettingsPdf = new DevExpress.XtraBars.BarButtonItem();
 			this.barSubItemPagePropertiesArtwork = new DevExpress.XtraBars.BarSubItem();
 			this.barButtonItemPagePropertiesDeleteLinkWidgets = new DevExpress.XtraBars.BarButtonItem();
 			this.barButtonItemPagePropertiesDeleteLinkBanners = new DevExpress.XtraBars.BarButtonItem();
 			this.barSubItemPagePropertiesTools = new DevExpress.XtraBars.BarSubItem();
 			this.barButtonItemPagePropertiesDeleteLinkTags = new DevExpress.XtraBars.BarButtonItem();
-			this.barButtonItemPagePropertiesDeleteLinks = new DevExpress.XtraBars.BarButtonItem();
 			this.barButtonItemPagePropertiesResetLinkExpirationDates = new DevExpress.XtraBars.BarButtonItem();
 			this.barButtonItemPagePropertiesDeleteLinkSecurity = new DevExpress.XtraBars.BarButtonItem();
 			this.barButtonItemPagePropertiesSetLinkTextWordWrap = new DevExpress.XtraBars.BarButtonItem();
-			this.barButtonItemPagePropertiesEditLinkTags = new DevExpress.XtraBars.BarButtonItem();
-			this.barManager = new DevExpress.XtraBars.BarManager(this.components);
+			this.barManager = new DevExpress.XtraBars.BarManager();
 			this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
 			this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
 			this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
 			this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
-			this.barButtonItemPagePropertiesLinkAdminSettingsExcel = new DevExpress.XtraBars.BarButtonItem();
-			this.barButtonItemPagePropertiesLinkAdminSettingsPdf = new DevExpress.XtraBars.BarButtonItem();
+			this.barButtonItemPagePropertiesDeleteAllLinks = new DevExpress.XtraBars.BarButtonItem();
 			this.pnContainer.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControl)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.popupMenuPageProperties)).BeginInit();
@@ -105,11 +116,11 @@
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemPagePropertiesPageSettings),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemPagePropertiesDeletePage),
             new DevExpress.XtraBars.LinkPersistInfo(this.barSubItemPagePropertiesClonePage, true),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemPagePropertiesResetLinkSettings, true),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barSubItemPagePropertiesMultiLinks, true),
             new DevExpress.XtraBars.LinkPersistInfo(this.barSubItemPagePropertiesLinkAdminSettings, true),
             new DevExpress.XtraBars.LinkPersistInfo(this.barSubItemPagePropertiesArtwork, true),
             new DevExpress.XtraBars.LinkPersistInfo(this.barSubItemPagePropertiesTools),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemPagePropertiesEditLinkTags)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemPagePropertiesDeleteAllLinks)});
 			this.popupMenuPageProperties.Manager = this.barManager;
 			this.popupMenuPageProperties.MenuAppearance.AppearanceMenu.Disabled.Options.UseTextOptions = true;
 			this.popupMenuPageProperties.MenuAppearance.AppearanceMenu.Disabled.TextOptions.HotkeyPrefix = DevExpress.Utils.HKeyPrefix.None;
@@ -171,23 +182,152 @@
 			this.barButtonItemPagePropertiesClonePageOnlyWindows.Name = "barButtonItemPagePropertiesClonePageOnlyWindows";
 			this.barButtonItemPagePropertiesClonePageOnlyWindows.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemPagePropertiesClonePageOnlyWindows_ItemClick);
 			// 
-			// barButtonItemPagePropertiesResetLinkSettings
+			// barSubItemPagePropertiesMultiLinks
 			// 
-			this.barButtonItemPagePropertiesResetLinkSettings.Caption = "Reset all Links on this page";
-			this.barButtonItemPagePropertiesResetLinkSettings.CategoryGuid = new System.Guid("ed4d5958-5302-4d8f-8d8d-ef1c5e91776f");
-			this.barButtonItemPagePropertiesResetLinkSettings.Id = 5;
-			this.barButtonItemPagePropertiesResetLinkSettings.Name = "barButtonItemPagePropertiesResetLinkSettings";
-			this.barButtonItemPagePropertiesResetLinkSettings.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemPagePropertiesResetLinkSettings_ItemClick);
+			this.barSubItemPagePropertiesMultiLinks.Caption = "Apply to All links on this page";
+			this.barSubItemPagePropertiesMultiLinks.CategoryGuid = new System.Guid("ed4d5958-5302-4d8f-8d8d-ef1c5e91776f");
+			this.barSubItemPagePropertiesMultiLinks.Id = 21;
+			this.barSubItemPagePropertiesMultiLinks.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemPagePropertiesMultiLinksResetSettings),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemPagePropertiesMultiLinksDelete),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barSubItemPagePropertiesMultiLinksImageSettings, true),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barSubItemPagePropertiesMultiLinksNotesObject),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barSubItemPagePropertiesMultiLinksNotesLineBreak),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemPagePropertiesMultiLinksTags),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barSubItemPagePropertiesMultiLinksFormatObject),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barSubItemPagePropertiesMultiLinksFormatLineBreak),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemPagePropertiesMultiLinksSecurity, true),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemPagePropertiesMultiLinksExpirationDate),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemPagePropertiesMultiLinksRefreshPreviewFiles)});
+			this.barSubItemPagePropertiesMultiLinks.Name = "barSubItemPagePropertiesMultiLinks";
+			// 
+			// barButtonItemPagePropertiesMultiLinksResetSettings
+			// 
+			this.barButtonItemPagePropertiesMultiLinksResetSettings.Caption = "Reset these links";
+			this.barButtonItemPagePropertiesMultiLinksResetSettings.CategoryGuid = new System.Guid("ed4d5958-5302-4d8f-8d8d-ef1c5e91776f");
+			this.barButtonItemPagePropertiesMultiLinksResetSettings.Id = 22;
+			this.barButtonItemPagePropertiesMultiLinksResetSettings.Name = "barButtonItemPagePropertiesMultiLinksResetSettings";
+			this.barButtonItemPagePropertiesMultiLinksResetSettings.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemPagePropertiesMultiLinksResetSettings_ItemClick);
+			// 
+			// barButtonItemPagePropertiesMultiLinksDelete
+			// 
+			this.barButtonItemPagePropertiesMultiLinksDelete.Caption = "Delete these links";
+			this.barButtonItemPagePropertiesMultiLinksDelete.CategoryGuid = new System.Guid("ed4d5958-5302-4d8f-8d8d-ef1c5e91776f");
+			this.barButtonItemPagePropertiesMultiLinksDelete.Id = 23;
+			this.barButtonItemPagePropertiesMultiLinksDelete.Name = "barButtonItemPagePropertiesMultiLinksDelete";
+			this.barButtonItemPagePropertiesMultiLinksDelete.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemPagePropertiesMultiLinksDelete_ItemClick);
+			// 
+			// barSubItemPagePropertiesMultiLinksImageSettings
+			// 
+			this.barSubItemPagePropertiesMultiLinksImageSettings.Caption = "Link ART";
+			this.barSubItemPagePropertiesMultiLinksImageSettings.CategoryGuid = new System.Guid("ed4d5958-5302-4d8f-8d8d-ef1c5e91776f");
+			this.barSubItemPagePropertiesMultiLinksImageSettings.Id = 24;
+			this.barSubItemPagePropertiesMultiLinksImageSettings.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemPagePropertiesMultiLinksWidget),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemPagePropertiesMultiLinksBanner)});
+			this.barSubItemPagePropertiesMultiLinksImageSettings.Name = "barSubItemPagePropertiesMultiLinksImageSettings";
+			// 
+			// barButtonItemPagePropertiesMultiLinksWidget
+			// 
+			this.barButtonItemPagePropertiesMultiLinksWidget.Caption = "Widget Icon (tiny)";
+			this.barButtonItemPagePropertiesMultiLinksWidget.CategoryGuid = new System.Guid("ed4d5958-5302-4d8f-8d8d-ef1c5e91776f");
+			this.barButtonItemPagePropertiesMultiLinksWidget.Id = 34;
+			this.barButtonItemPagePropertiesMultiLinksWidget.Name = "barButtonItemPagePropertiesMultiLinksWidget";
+			this.barButtonItemPagePropertiesMultiLinksWidget.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemPagePropertiesMultiLinksWidget_ItemClick);
+			// 
+			// barButtonItemPagePropertiesMultiLinksBanner
+			// 
+			this.barButtonItemPagePropertiesMultiLinksBanner.Caption = "Clipart Logo (BIG)";
+			this.barButtonItemPagePropertiesMultiLinksBanner.CategoryGuid = new System.Guid("ed4d5958-5302-4d8f-8d8d-ef1c5e91776f");
+			this.barButtonItemPagePropertiesMultiLinksBanner.Id = 35;
+			this.barButtonItemPagePropertiesMultiLinksBanner.Name = "barButtonItemPagePropertiesMultiLinksBanner";
+			this.barButtonItemPagePropertiesMultiLinksBanner.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemPagePropertiesMultiLinksBanner_ItemClick);
+			// 
+			// barSubItemPagePropertiesMultiLinksNotesObject
+			// 
+			this.barSubItemPagePropertiesMultiLinksNotesObject.Caption = "Link Notes";
+			this.barSubItemPagePropertiesMultiLinksNotesObject.CategoryGuid = new System.Guid("ed4d5958-5302-4d8f-8d8d-ef1c5e91776f");
+			this.barSubItemPagePropertiesMultiLinksNotesObject.Id = 25;
+			this.barSubItemPagePropertiesMultiLinksNotesObject.Name = "barSubItemPagePropertiesMultiLinksNotesObject";
+			// 
+			// barSubItemPagePropertiesMultiLinksNotesLineBreak
+			// 
+			this.barSubItemPagePropertiesMultiLinksNotesLineBreak.Caption = "Line Break Notes";
+			this.barSubItemPagePropertiesMultiLinksNotesLineBreak.CategoryGuid = new System.Guid("ed4d5958-5302-4d8f-8d8d-ef1c5e91776f");
+			this.barSubItemPagePropertiesMultiLinksNotesLineBreak.Id = 26;
+			this.barSubItemPagePropertiesMultiLinksNotesLineBreak.Name = "barSubItemPagePropertiesMultiLinksNotesLineBreak";
+			// 
+			// barButtonItemPagePropertiesMultiLinksTags
+			// 
+			this.barButtonItemPagePropertiesMultiLinksTags.Caption = "Search Tag";
+			this.barButtonItemPagePropertiesMultiLinksTags.CategoryGuid = new System.Guid("ed4d5958-5302-4d8f-8d8d-ef1c5e91776f");
+			this.barButtonItemPagePropertiesMultiLinksTags.Id = 27;
+			this.barButtonItemPagePropertiesMultiLinksTags.Name = "barButtonItemPagePropertiesMultiLinksTags";
+			this.barButtonItemPagePropertiesMultiLinksTags.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemPagePropertiesMultiLinksTags_ItemClick);
+			// 
+			// barSubItemPagePropertiesMultiLinksFormatObject
+			// 
+			this.barSubItemPagePropertiesMultiLinksFormatObject.Caption = "Format Link";
+			this.barSubItemPagePropertiesMultiLinksFormatObject.CategoryGuid = new System.Guid("ed4d5958-5302-4d8f-8d8d-ef1c5e91776f");
+			this.barSubItemPagePropertiesMultiLinksFormatObject.Id = 28;
+			this.barSubItemPagePropertiesMultiLinksFormatObject.Name = "barSubItemPagePropertiesMultiLinksFormatObject";
+			// 
+			// barSubItemPagePropertiesMultiLinksFormatLineBreak
+			// 
+			this.barSubItemPagePropertiesMultiLinksFormatLineBreak.Caption = "Format Line Break";
+			this.barSubItemPagePropertiesMultiLinksFormatLineBreak.CategoryGuid = new System.Guid("ed4d5958-5302-4d8f-8d8d-ef1c5e91776f");
+			this.barSubItemPagePropertiesMultiLinksFormatLineBreak.Id = 29;
+			this.barSubItemPagePropertiesMultiLinksFormatLineBreak.Name = "barSubItemPagePropertiesMultiLinksFormatLineBreak";
+			// 
+			// barButtonItemPagePropertiesMultiLinksSecurity
+			// 
+			this.barButtonItemPagePropertiesMultiLinksSecurity.Caption = "Link Security";
+			this.barButtonItemPagePropertiesMultiLinksSecurity.CategoryGuid = new System.Guid("ed4d5958-5302-4d8f-8d8d-ef1c5e91776f");
+			this.barButtonItemPagePropertiesMultiLinksSecurity.Id = 30;
+			this.barButtonItemPagePropertiesMultiLinksSecurity.Name = "barButtonItemPagePropertiesMultiLinksSecurity";
+			this.barButtonItemPagePropertiesMultiLinksSecurity.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemPagePropertiesMultiLinksSecurity_ItemClick);
+			// 
+			// barButtonItemPagePropertiesMultiLinksExpirationDate
+			// 
+			this.barButtonItemPagePropertiesMultiLinksExpirationDate.Caption = "Expiration Date";
+			this.barButtonItemPagePropertiesMultiLinksExpirationDate.CategoryGuid = new System.Guid("ed4d5958-5302-4d8f-8d8d-ef1c5e91776f");
+			this.barButtonItemPagePropertiesMultiLinksExpirationDate.Id = 31;
+			this.barButtonItemPagePropertiesMultiLinksExpirationDate.Name = "barButtonItemPagePropertiesMultiLinksExpirationDate";
+			this.barButtonItemPagePropertiesMultiLinksExpirationDate.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemPagePropertiesMultiLinksExpirationDate_ItemClick);
+			// 
+			// barButtonItemPagePropertiesMultiLinksRefreshPreviewFiles
+			// 
+			this.barButtonItemPagePropertiesMultiLinksRefreshPreviewFiles.Caption = "Refresh these links";
+			this.barButtonItemPagePropertiesMultiLinksRefreshPreviewFiles.CategoryGuid = new System.Guid("ed4d5958-5302-4d8f-8d8d-ef1c5e91776f");
+			this.barButtonItemPagePropertiesMultiLinksRefreshPreviewFiles.Id = 33;
+			this.barButtonItemPagePropertiesMultiLinksRefreshPreviewFiles.Name = "barButtonItemPagePropertiesMultiLinksRefreshPreviewFiles";
+			this.barButtonItemPagePropertiesMultiLinksRefreshPreviewFiles.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemPagePropertiesMultiLinksRefreshPreviewFiles_ItemClick);
 			// 
 			// barSubItemPagePropertiesLinkAdminSettings
 			// 
-			this.barSubItemPagePropertiesLinkAdminSettings.Caption = "Shared Admin Settings";
+			this.barSubItemPagePropertiesLinkAdminSettings.Caption = "PDF & Excel Settings";
 			this.barSubItemPagePropertiesLinkAdminSettings.CategoryGuid = new System.Guid("ed4d5958-5302-4d8f-8d8d-ef1c5e91776f");
 			this.barSubItemPagePropertiesLinkAdminSettings.Id = 16;
 			this.barSubItemPagePropertiesLinkAdminSettings.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemPagePropertiesLinkAdminSettingsExcel),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemPagePropertiesLinkAdminSettingsPdf)});
 			this.barSubItemPagePropertiesLinkAdminSettings.Name = "barSubItemPagePropertiesLinkAdminSettings";
+			// 
+			// barButtonItemPagePropertiesLinkAdminSettingsExcel
+			// 
+			this.barButtonItemPagePropertiesLinkAdminSettingsExcel.Caption = "Excel";
+			this.barButtonItemPagePropertiesLinkAdminSettingsExcel.CategoryGuid = new System.Guid("ed4d5958-5302-4d8f-8d8d-ef1c5e91776f");
+			this.barButtonItemPagePropertiesLinkAdminSettingsExcel.Id = 19;
+			this.barButtonItemPagePropertiesLinkAdminSettingsExcel.Name = "barButtonItemPagePropertiesLinkAdminSettingsExcel";
+			this.barButtonItemPagePropertiesLinkAdminSettingsExcel.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemPagePropertiesLinkAdminSettingsExcel_ItemClick);
+			// 
+			// barButtonItemPagePropertiesLinkAdminSettingsPdf
+			// 
+			this.barButtonItemPagePropertiesLinkAdminSettingsPdf.Caption = "PDF";
+			this.barButtonItemPagePropertiesLinkAdminSettingsPdf.CategoryGuid = new System.Guid("ed4d5958-5302-4d8f-8d8d-ef1c5e91776f");
+			this.barButtonItemPagePropertiesLinkAdminSettingsPdf.Id = 20;
+			this.barButtonItemPagePropertiesLinkAdminSettingsPdf.Name = "barButtonItemPagePropertiesLinkAdminSettingsPdf";
+			this.barButtonItemPagePropertiesLinkAdminSettingsPdf.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemPagePropertiesLinkAdminSettingsPdf_ItemClick);
 			// 
 			// barSubItemPagePropertiesArtwork
 			// 
@@ -222,7 +362,6 @@
 			this.barSubItemPagePropertiesTools.Id = 9;
 			this.barSubItemPagePropertiesTools.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemPagePropertiesDeleteLinkTags),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemPagePropertiesDeleteLinks),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemPagePropertiesResetLinkExpirationDates),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemPagePropertiesDeleteLinkSecurity),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemPagePropertiesSetLinkTextWordWrap)});
@@ -235,14 +374,6 @@
 			this.barButtonItemPagePropertiesDeleteLinkTags.Id = 10;
 			this.barButtonItemPagePropertiesDeleteLinkTags.Name = "barButtonItemPagePropertiesDeleteLinkTags";
 			this.barButtonItemPagePropertiesDeleteLinkTags.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemPagePropertiesDeleteLinkTags_ItemClick);
-			// 
-			// barButtonItemPagePropertiesDeleteLinks
-			// 
-			this.barButtonItemPagePropertiesDeleteLinks.Caption = "Delete ALL links on this page";
-			this.barButtonItemPagePropertiesDeleteLinks.CategoryGuid = new System.Guid("ed4d5958-5302-4d8f-8d8d-ef1c5e91776f");
-			this.barButtonItemPagePropertiesDeleteLinks.Id = 11;
-			this.barButtonItemPagePropertiesDeleteLinks.Name = "barButtonItemPagePropertiesDeleteLinks";
-			this.barButtonItemPagePropertiesDeleteLinks.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemPagePropertiesDeleteLinks_ItemClick);
 			// 
 			// barButtonItemPagePropertiesResetLinkExpirationDates
 			// 
@@ -268,14 +399,6 @@
 			this.barButtonItemPagePropertiesSetLinkTextWordWrap.Name = "barButtonItemPagePropertiesSetLinkTextWordWrap";
 			this.barButtonItemPagePropertiesSetLinkTextWordWrap.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemPagePropertiesSetLinkTextWordWrap_ItemClick);
 			// 
-			// barButtonItemPagePropertiesEditLinkTags
-			// 
-			this.barButtonItemPagePropertiesEditLinkTags.Caption = "Add Search Tag to all links on this page";
-			this.barButtonItemPagePropertiesEditLinkTags.CategoryGuid = new System.Guid("ed4d5958-5302-4d8f-8d8d-ef1c5e91776f");
-			this.barButtonItemPagePropertiesEditLinkTags.Id = 15;
-			this.barButtonItemPagePropertiesEditLinkTags.Name = "barButtonItemPagePropertiesEditLinkTags";
-			this.barButtonItemPagePropertiesEditLinkTags.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemPagePropertiesEditLinkTags_ItemClick);
-			// 
 			// barManager
 			// 
 			this.barManager.Categories.AddRange(new DevExpress.XtraBars.BarManagerCategory[] {
@@ -291,21 +414,33 @@
             this.barSubItemPagePropertiesClonePage,
             this.barButtonItemPagePropertiesClonePageWindowsAndLinks,
             this.barButtonItemPagePropertiesClonePageOnlyWindows,
-            this.barButtonItemPagePropertiesResetLinkSettings,
             this.barSubItemPagePropertiesArtwork,
             this.barButtonItemPagePropertiesDeleteLinkWidgets,
             this.barButtonItemPagePropertiesDeleteLinkBanners,
             this.barSubItemPagePropertiesTools,
             this.barButtonItemPagePropertiesDeleteLinkTags,
-            this.barButtonItemPagePropertiesDeleteLinks,
             this.barButtonItemPagePropertiesResetLinkExpirationDates,
             this.barButtonItemPagePropertiesDeleteLinkSecurity,
             this.barButtonItemPagePropertiesSetLinkTextWordWrap,
-            this.barButtonItemPagePropertiesEditLinkTags,
             this.barSubItemPagePropertiesLinkAdminSettings,
             this.barButtonItemPagePropertiesLinkAdminSettingsExcel,
-            this.barButtonItemPagePropertiesLinkAdminSettingsPdf});
-			this.barManager.MaxItemId = 21;
+            this.barButtonItemPagePropertiesLinkAdminSettingsPdf,
+            this.barSubItemPagePropertiesMultiLinks,
+            this.barButtonItemPagePropertiesMultiLinksResetSettings,
+            this.barButtonItemPagePropertiesMultiLinksDelete,
+            this.barSubItemPagePropertiesMultiLinksImageSettings,
+            this.barSubItemPagePropertiesMultiLinksNotesObject,
+            this.barSubItemPagePropertiesMultiLinksNotesLineBreak,
+            this.barButtonItemPagePropertiesMultiLinksTags,
+            this.barSubItemPagePropertiesMultiLinksFormatObject,
+            this.barSubItemPagePropertiesMultiLinksFormatLineBreak,
+            this.barButtonItemPagePropertiesMultiLinksSecurity,
+            this.barButtonItemPagePropertiesMultiLinksExpirationDate,
+            this.barButtonItemPagePropertiesMultiLinksRefreshPreviewFiles,
+            this.barButtonItemPagePropertiesMultiLinksWidget,
+            this.barButtonItemPagePropertiesMultiLinksBanner,
+            this.barButtonItemPagePropertiesDeleteAllLinks});
+			this.barManager.MaxItemId = 37;
 			// 
 			// barDockControlTop
 			// 
@@ -335,19 +470,12 @@
 			this.barDockControlRight.Location = new System.Drawing.Point(714, 0);
 			this.barDockControlRight.Size = new System.Drawing.Size(0, 502);
 			// 
-			// barButtonItemPagePropertiesLinkAdminSettingsExcel
+			// barButtonItemPagePropertiesDeleteAllLinks
 			// 
-			this.barButtonItemPagePropertiesLinkAdminSettingsExcel.Caption = "Excel";
-			this.barButtonItemPagePropertiesLinkAdminSettingsExcel.Id = 19;
-			this.barButtonItemPagePropertiesLinkAdminSettingsExcel.Name = "barButtonItemPagePropertiesLinkAdminSettingsExcel";
-			this.barButtonItemPagePropertiesLinkAdminSettingsExcel.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemPagePropertiesLinkAdminSettingsExcel_ItemClick);
-			// 
-			// barButtonItemPagePropertiesLinkAdminSettingsPdf
-			// 
-			this.barButtonItemPagePropertiesLinkAdminSettingsPdf.Caption = "PDF";
-			this.barButtonItemPagePropertiesLinkAdminSettingsPdf.Id = 20;
-			this.barButtonItemPagePropertiesLinkAdminSettingsPdf.Name = "barButtonItemPagePropertiesLinkAdminSettingsPdf";
-			this.barButtonItemPagePropertiesLinkAdminSettingsPdf.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemPagePropertiesLinkAdminSettingsPdf_ItemClick);
+			this.barButtonItemPagePropertiesDeleteAllLinks.Caption = "Delete all links on this page";
+			this.barButtonItemPagePropertiesDeleteAllLinks.Id = 36;
+			this.barButtonItemPagePropertiesDeleteAllLinks.Name = "barButtonItemPagePropertiesDeleteAllLinks";
+			this.barButtonItemPagePropertiesDeleteAllLinks.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemPagePropertiesDeleteAllLinks_ItemClick);
 			// 
 			// TabbedWallbin
 			// 
@@ -388,19 +516,31 @@
 		private DevExpress.XtraBars.BarSubItem barSubItemPagePropertiesClonePage;
 		private DevExpress.XtraBars.BarButtonItem barButtonItemPagePropertiesClonePageWindowsAndLinks;
 		private DevExpress.XtraBars.BarButtonItem barButtonItemPagePropertiesClonePageOnlyWindows;
-		private DevExpress.XtraBars.BarButtonItem barButtonItemPagePropertiesResetLinkSettings;
 		private DevExpress.XtraBars.BarSubItem barSubItemPagePropertiesArtwork;
 		private DevExpress.XtraBars.BarButtonItem barButtonItemPagePropertiesDeleteLinkWidgets;
 		private DevExpress.XtraBars.BarButtonItem barButtonItemPagePropertiesDeleteLinkBanners;
 		private DevExpress.XtraBars.BarSubItem barSubItemPagePropertiesTools;
 		private DevExpress.XtraBars.BarButtonItem barButtonItemPagePropertiesDeleteLinkTags;
-		private DevExpress.XtraBars.BarButtonItem barButtonItemPagePropertiesDeleteLinks;
 		private DevExpress.XtraBars.BarButtonItem barButtonItemPagePropertiesResetLinkExpirationDates;
 		private DevExpress.XtraBars.BarButtonItem barButtonItemPagePropertiesDeleteLinkSecurity;
 		private DevExpress.XtraBars.BarButtonItem barButtonItemPagePropertiesSetLinkTextWordWrap;
-		private DevExpress.XtraBars.BarButtonItem barButtonItemPagePropertiesEditLinkTags;
 		private DevExpress.XtraBars.BarSubItem barSubItemPagePropertiesLinkAdminSettings;
 		private DevExpress.XtraBars.BarButtonItem barButtonItemPagePropertiesLinkAdminSettingsExcel;
 		private DevExpress.XtraBars.BarButtonItem barButtonItemPagePropertiesLinkAdminSettingsPdf;
+		private DevExpress.XtraBars.BarSubItem barSubItemPagePropertiesMultiLinks;
+		private DevExpress.XtraBars.BarButtonItem barButtonItemPagePropertiesMultiLinksResetSettings;
+		private DevExpress.XtraBars.BarButtonItem barButtonItemPagePropertiesMultiLinksDelete;
+		private DevExpress.XtraBars.BarSubItem barSubItemPagePropertiesMultiLinksImageSettings;
+		private DevExpress.XtraBars.BarButtonItem barButtonItemPagePropertiesMultiLinksWidget;
+		private DevExpress.XtraBars.BarButtonItem barButtonItemPagePropertiesMultiLinksBanner;
+		private DevExpress.XtraBars.BarSubItem barSubItemPagePropertiesMultiLinksNotesObject;
+		private DevExpress.XtraBars.BarSubItem barSubItemPagePropertiesMultiLinksNotesLineBreak;
+		private DevExpress.XtraBars.BarButtonItem barButtonItemPagePropertiesMultiLinksTags;
+		private DevExpress.XtraBars.BarSubItem barSubItemPagePropertiesMultiLinksFormatObject;
+		private DevExpress.XtraBars.BarSubItem barSubItemPagePropertiesMultiLinksFormatLineBreak;
+		private DevExpress.XtraBars.BarButtonItem barButtonItemPagePropertiesMultiLinksSecurity;
+		private DevExpress.XtraBars.BarButtonItem barButtonItemPagePropertiesMultiLinksExpirationDate;
+		private DevExpress.XtraBars.BarButtonItem barButtonItemPagePropertiesMultiLinksRefreshPreviewFiles;
+		private DevExpress.XtraBars.BarButtonItem barButtonItemPagePropertiesDeleteAllLinks;
 	}
 }

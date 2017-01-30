@@ -194,6 +194,12 @@
     <Compile Include="Business\Models\VideoInfo\VideoInfo.cs" />
     <Compile Include="Business\Services\TaggedLinksManager.cs" />
     <Compile Include="Business\Services\VideoHelper.cs" />
+    <Compile Include="FormStart.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormStart.designer.cs">
+      <DependentUpon>FormStart.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationLayer\Calendars\CalendarContainerControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -218,6 +224,36 @@
     <Compile Include="PresentationLayer\Video\VideoContentEditor.Designer.cs">
       <DependentUpon>VideoContentEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Folders\Controls\ClassicFolderBox.Folder.ContextMenu.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Folders\Controls\ClassicFolderBox.Folder.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Folders\Controls\ClassicFolderBox.DragAndDrop.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Folders\Controls\ClassicFolderBox.Links.Settings.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Folders\Controls\ClassicFolderBox.Links.ContextMenu.Security.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Folders\Controls\ClassicFolderBox.Links.ContextMenu.Multi.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Folders\Controls\ClassicFolderBox.Links.ContextMenu.Single.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Folders\Controls\ClassicFolderBox.Links.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Folders\Controls\FormAddExternalFolder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Folders\Controls\FormAddExternalFolder.Designer.cs">
+      <DependentUpon>FormAddExternalFolder.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationLayer\Wallbin\ImageGallery\GalleryTreeView.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -228,6 +264,12 @@
       <DependentUpon>FormAddUrl.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Wallbin\LinkBundles\SingleBundle\ILinkBundleInfoEditControl.cs" />
+    <Compile Include="PresentationLayer\Wallbin\LinkBundles\SingleBundle\LaunchScreenEditControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\LinkBundles\SingleBundle\LaunchScreenEditControl.Designer.cs">
+      <DependentUpon>LaunchScreenEditControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationLayer\Wallbin\LinkBundles\SingleBundle\RevenueEditControl.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -246,23 +288,23 @@
     <Compile Include="PresentationLayer\Wallbin\LinkBundles\SingleBundle\InfoEditControl.Designer.cs">
       <DependentUpon>InfoEditControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\SingleLink\BaseLineBreakLoader.cs" />
-    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\SingleLink\BaseLibraryObjectLoader.cs" />
-    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\SingleLink\BaseLinkLoader.cs" />
-    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\SingleLink\BaseContextMenuEditor.cs" />
-    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\SingleLink\ExcelSettingsLoader.cs" />
-    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\SingleLink\ExcelSettingsEditor.cs" />
-    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\SingleLink\LibraryObjectNotesLoader.cs" />
-    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\SingleLink\LibraryObjectNotesEditor.cs" />
-    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\SingleLink\DocumentSettingsEditor.cs" />
-    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\SingleLink\DocumentSettingsLoader.cs" />
-    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\SingleLink\LineBreakNotesEditor.cs" />
-    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\SingleLink\LineBreakTextFormatEditor.cs" />
-    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\SingleLink\LibraryObjectTextFormatEditor.cs" />
-    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\SingleLink\ILinkLoader.cs" />
-    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\SingleLink\LibraryObjectTextFormatLoader.cs" />
-    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\SingleLink\LineBreakNotesLoader.cs" />
-    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\SingleLink\LineBreakTextFormatLoader.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\BaseLineBreakLoader.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\BaseLibraryObjectLoader.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\BaseLinkLoader.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\BaseContextMenuEditor.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\ExcelSettingsLoader.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\ExcelSettingsEditor.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\LibraryObjectNotesLoader.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\LibraryObjectNotesEditor.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\DocumentSettingsEditor.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\DocumentSettingsLoader.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\LineBreakNotesEditor.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\LineBreakTextFormatEditor.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\LibraryObjectTextFormatEditor.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\ILinkLoader.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\LibraryObjectTextFormatLoader.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\LineBreakNotesLoader.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\ContextMenuEdit\LineBreakTextFormatLoader.cs" />
     <Compile Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\BaseInternalLibraryContentEditControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -825,6 +867,9 @@
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormStart.resx">
+      <DependentUpon>FormStart.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Calendars\CalendarContainerControl.resx">
       <DependentUpon>CalendarContainerControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -834,8 +879,14 @@
     <EmbeddedResource Include="PresentationLayer\Video\VideoContentEditor.resx">
       <DependentUpon>VideoContentEditor.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Folders\Controls\FormAddExternalFolder.resx">
+      <DependentUpon>FormAddExternalFolder.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\LinkBundles\SingleBundle\FormAddUrl.resx">
       <DependentUpon>FormAddUrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\LinkBundles\SingleBundle\LaunchScreenEditControl.resx">
+      <DependentUpon>LaunchScreenEditControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\LinkBundles\SingleBundle\RevenueEditControl.resx">
       <DependentUpon>RevenueEditControl.cs</DependentUpon>
@@ -1152,6 +1203,17 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\QatHelp.png" />
+    <None Include="Resources\QatFloater.png" />
+    <None Include="Resources\LinkAddExternalFolder.png" />
+    <None Include="Resources\ProgressStartRegularWebConnection.png" />
+    <None Include="Resources\ProgressStartRegularSecurity.png" />
+    <None Include="Resources\ProgressStartRegularHeader.png" />
+    <None Include="Resources\ProgressStartRegularFiles.png" />
+    <None Include="Resources\ProgressStartRegularBrand.png" />
+    <None Include="Resources\ProgressStartMinimizedRegularStart.png" />
+    <None Include="Resources\ProgressStartMinimizedFisrtStart.png" />
+    <None Include="Resources\ProgressStartCancel.png" />
     <None Include="Resources\LinkAddVimeo.png" />
     <None Include="Resources\RetractableLogoGallery.png" />
     <None Include="Resources\DataSourceListUrl.png" />
@@ -1266,7 +1328,6 @@
     <None Include="Resources\ArrowLeft.png" />
     <None Include="Resources\ArrowDown.png" />
     <None Include="Resources\Sync.png" />
-    <None Include="Resources\Help.png" />
     <None Include="Resources\Exit.png" />
   </ItemGroup>
   <ItemGroup />

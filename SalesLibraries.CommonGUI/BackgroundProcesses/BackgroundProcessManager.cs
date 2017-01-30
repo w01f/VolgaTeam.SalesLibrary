@@ -13,7 +13,6 @@ namespace SalesLibraries.CommonGUI.BackgroundProcesses
 		private readonly ConcurrentQueue<BackgroundProcess> _tasks = new ConcurrentQueue<BackgroundProcess>();
 		private readonly FormProgressCommon _formProgress = new FormProgressCommon();
 		private readonly Form _mainForm;
-		private readonly string _title;
 
 		private int _processesInQueue;
 
@@ -23,7 +22,6 @@ namespace SalesLibraries.CommonGUI.BackgroundProcesses
 		public BackgroundProcessManager(Form mainForm, string title)
 		{
 			_mainForm = mainForm;
-			_title = title;
 		}
 
 		public void Run(string title, Action<CancellationToken, FormProgressCommon> process, Action afterComplete = null)
@@ -33,18 +31,6 @@ namespace SalesLibraries.CommonGUI.BackgroundProcesses
 				form.Title = title;
 				form.StartPosition = FormStartPosition.CenterParent;
 				RunWithProgress(form, false, process, cancellationToken => { afterComplete?.Invoke(); });
-			}
-		}
-
-		public void RunStartProcess(Image logo, Action<CancellationToken, FormStart> process, Action afterComplete = null)
-		{
-			using (var form = new FormStart(_title))
-			{
-				form.pbHeaderRegular.Image = logo ?? form.pbHeaderRegular.Image;
-				RunWithProgress(form, false, process, cancellationToken =>
-				{
-					afterComplete?.Invoke();
-				});
 			}
 		}
 

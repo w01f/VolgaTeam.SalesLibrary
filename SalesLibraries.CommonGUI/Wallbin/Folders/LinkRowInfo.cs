@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Drawing;
-using System.Windows.Forms;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
@@ -31,9 +30,9 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 		{
 			get
 			{
-				if (!_parent.Selected)
-					return Link.Folder.Settings.BackgroundWindowColor;
-				return _parent.FolderBox.SelectedRowBackColor;
+				if (_parent.Selected)
+					return _parent.FolderBox.SelectedRowBackColor; 
+				return Link.Folder.Settings.BackgroundWindowColor;
 			}
 		}
 

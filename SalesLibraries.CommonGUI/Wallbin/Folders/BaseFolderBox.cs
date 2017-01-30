@@ -34,7 +34,7 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 		public Font BoldItalicUndrerlineRowFont { get; private set; }
 
 
-		public RichTextBox RichTextControl { get; private set; }
+		public RichTextBox RichTextControl { get; }
 
 		public event EventHandler<EventArgs> BoxSizeChanged;
 
@@ -43,15 +43,7 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 			get { throw new NotImplementedException(); }
 		}
 
-		public virtual Color SelectedRowBackColor
-		{
-			get
-			{
-				if (FormatState.AllowMultiSelect)
-					return Color.Wheat;
-				return DataSource.Settings.BackgroundWindowColor;
-			}
-		}
+		public virtual Color SelectedRowBackColor => DataSource.Settings.BackgroundWindowColor;
 		#endregion
 
 		public BaseFolderBox()
@@ -278,6 +270,7 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 						linkRow.Info.TextBorder.Width,
 						linkRow.Info.TextBorder.Height));
 			#endregion
+
 			e.Handled = true;
 		}
 		#endregion

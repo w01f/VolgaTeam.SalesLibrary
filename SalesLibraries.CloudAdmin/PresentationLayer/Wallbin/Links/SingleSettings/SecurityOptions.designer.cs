@@ -399,8 +399,6 @@
 			// 
 			// SecurityOptions
 			// 
-			this.Appearance.PageClient.BackColor = System.Drawing.Color.White;
-			this.Appearance.PageClient.Options.UseBackColor = true;
 			this.Controls.Add(this.groupBoxSecurity);
 			this.Padding = new System.Windows.Forms.Padding(5);
 			this.Size = new System.Drawing.Size(531, 541);

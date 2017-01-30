@@ -3,7 +3,6 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 using DevExpress.Utils;
-using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.Persistent;
 using HorizontalAlignment = SalesLibraries.Business.Entities.Wallbin.Common.Enums.HorizontalAlignment;
 
@@ -12,7 +11,7 @@ namespace SalesLibraries.CommonGUI.Wallbin.ColumnTitles
 	[ToolboxItem(false)]
 	public partial class ColumnTitleControl : UserControl
 	{
-		public ColumnTitle Data { get; private set; }
+		public ColumnTitle Data { get; }
 
 		public ColumnTitleControl(ColumnTitle data)
 		{

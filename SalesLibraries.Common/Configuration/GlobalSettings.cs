@@ -17,6 +17,7 @@ namespace SalesLibraries.Common.Configuration
 				Constants.GoodSyncServiceFolderName,
 				Constants.RegularPreviewContainersRootFolderName,
 				Constants.WebPreviewContainersRootFolderName,
+				Constants.ExternalFilesRootFolderName,
 				Constants.OvernightsCalendarRootFolderName,
 				Constants.ProgramManagerRootFolderName,
 				Constants.LocalStorageFileName,

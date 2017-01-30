@@ -37,13 +37,20 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			Reset();
 
 			_loading = true;
-			var selectedFolder = MainController.Instance.WallbinViews.Selection.SelectedFolder;
-			var selectedLink = MainController.Instance.WallbinViews.Selection.SelectedLink;
-			if (selectedFolder != null && selectedLink != null)
+			var selectedLinks = MainController.Instance.WallbinViews.Selection.SelectedLinks;
+			if (selectedLinks.Any())
 			{
 				Enabled = true;
 				foreach (CheckedListBoxItem item in checkedListBoxControl.Items)
-					item.CheckState = selectedLink.Tags.SuperFilters.Contains(item.Value.ToString()) ? CheckState.Checked : CheckState.Unchecked;
+				{
+					var superFilter = item.Value.ToString();
+					if (selectedLinks.All(link => link.Tags.SuperFilters.Any(tag => String.Equals(tag, superFilter, StringComparison.OrdinalIgnoreCase))))
+						item.CheckState = CheckState.Checked;
+					else if (selectedLinks.Any(link => link.Tags.SuperFilters.Any(tag => String.Equals(tag, superFilter, StringComparison.OrdinalIgnoreCase))))
+						item.CheckState = CheckState.Indeterminate;
+					else
+						item.CheckState = CheckState.Unchecked;
+				}
 			}
 			else
 				Enabled = false;
@@ -64,10 +71,23 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		private void checkedListBoxControl_ItemCheck(object sender, DevExpress.XtraEditors.Controls.ItemCheckEventArgs e)
 		{
 			if (_loading) return;
-			var selectedLink = MainController.Instance.WallbinViews.Selection.SelectedLink;
-			selectedLink.Tags.SuperFilters.Clear();
-			selectedLink.Tags.SuperFilters.AddRange(checkedListBoxControl.Items.OfType<CheckedListBoxItem>().Where(it => it.CheckState == CheckState.Checked).Select(it => it.Value.ToString()));
-			selectedLink.MarkAsModified();
+			var filtersToRemove =
+				checkedListBoxControl.Items
+					.OfType<CheckedListBoxItem>()
+					.Where(it => it.CheckState != CheckState.Indeterminate)
+					.Select(it => it.Value.ToString());
+			var filtersToAdd =
+				checkedListBoxControl.Items
+					.OfType<CheckedListBoxItem>()
+					.Where(it => it.CheckState == CheckState.Checked)
+					.Select(it => it.Value.ToString());
+			foreach (var link in MainController.Instance.WallbinViews.Selection.SelectedLinks)
+			{
+				link.Tags.SuperFilters.RemoveAll(
+					item => filtersToRemove.Any(filter => String.Equals(filter, item, StringComparison.OrdinalIgnoreCase)));
+				link.Tags.SuperFilters.AddRange(filtersToAdd);
+				link.MarkAsModified();
+			}
 			EditorChanged?.Invoke(this, EventArgs.Empty);
 		}
 	}

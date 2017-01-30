@@ -1,6 +1,7 @@
 ﻿using System.Drawing;
 using Newtonsoft.Json;
 using SalesLibraries.Business.Entities.Common;
+using SalesLibraries.Business.Entities.Interfaces;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Common.Extensions;
 
@@ -38,9 +39,16 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 		private Color _inversionColor = GraphicObjectExtensions.DefaultInversionColor;
 		public Color InversionColor
 		{
-			get { return _inversionColor; }
+			get
+			{
+				if (WidgetHolder != null && WidgetHolder.UseTextColorForWidget)
+					return WidgetHolder.TextColor;
+				return _inversionColor;
+			}
 			set
 			{
+				if (WidgetHolder != null && WidgetHolder.UseTextColorForWidget)
+					return;
 				if (_inversionColor != value)
 				{
 					_invertedImage = null;
@@ -106,10 +114,18 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 		[JsonIgnore]
 		public virtual WidgetType DefaultWidgetType => WidgetType.NoWidget;
 
+		[JsonIgnore]
+		public IWidgetSetingsHolder WidgetHolder => Parent as IWidgetSetingsHolder;
+
 		protected override void AfterConstruction()
 		{
 			base.AfterConstruction();
 			_widgetType = DefaultWidgetType;
+		}
+
+		public void ResetImage()
+		{
+			_invertedImage = null;
 		}
 	}
 }

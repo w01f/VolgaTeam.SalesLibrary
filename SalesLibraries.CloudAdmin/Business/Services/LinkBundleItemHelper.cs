@@ -62,6 +62,11 @@ namespace SalesLibraries.CloudAdmin.Business.Services
 							break;
 					}
 					break;
+				case LinkBundleItemType.LaunchScreen:
+					target.Image = MainController.Instance.Lists.LinkBundleImages.DefaultInfoLogo.ExistsLocal()
+						? Image.FromFile(MainController.Instance.Lists.LinkBundleImages.DefaultInfoLogo.LocalPath)
+						: null;
+					break;
 				case LinkBundleItemType.Info:
 					target.Image = MainController.Instance.Lists.LinkBundleImages.DefaultInfoLogo.ExistsLocal()
 						? Image.FromFile(MainController.Instance.Lists.LinkBundleImages.DefaultInfoLogo.LocalPath)

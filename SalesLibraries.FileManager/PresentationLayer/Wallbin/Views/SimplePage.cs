@@ -22,7 +22,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 			Dock = DockStyle.Fill;
 			Page = page;
 			Content = new PageContent(this);
-			TagInfoControl = new LibraryPageTagInfo(Page);
+			TagInfoControl = new LibraryPageTagInfo();
 			pnContainer.Controls.Add(Content);
 			Suspend();
 		}
@@ -38,6 +38,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 			if (force)
 				DisposePage();
 			Content.LoadContent();
+			TagInfoControl.LoadData(Page);
 			if (!MainController.Instance.TabWallbin.pnTagInfoContainer.Controls.Contains(TagInfoControl))
 				MainController.Instance.TabWallbin.pnTagInfoContainer.Controls.Add(TagInfoControl);
 			_readyToUse = true;

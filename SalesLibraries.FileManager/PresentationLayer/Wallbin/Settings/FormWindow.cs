@@ -5,7 +5,6 @@ using DevComponents.DotNetBar.Metro;
 using DevExpress.Utils;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraTab;
-using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.Persistent;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.CommonGUI.Common;
@@ -111,6 +110,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			colorEditWindowBackColor.Color = _folder.Settings.BackgroundWindowColor;
 			colorEditWindowForeColor.Color = _folder.Settings.ForeWindowColor;
 			colorEditWindowBorderColor.Color = _folder.Settings.BorderColor;
+			checkEditUseForeHeaderColorForWidget.Checked = _folder.Settings.UseForeHeaderColorForWidget;
 			if (_folder.Settings.HeaderFont != null)
 			{
 				buttonEditWindowHeaderFont.Tag = _folder.Settings.HeaderFont;
@@ -143,6 +143,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			_folder.Settings.ForeWindowColor = colorEditWindowForeColor.Color;
 			_folder.Settings.BorderColor = colorEditWindowBorderColor.Color;
 			_folder.Settings.HeaderFont = buttonEditWindowHeaderFont.Tag as Font;
+			_folder.Settings.UseForeHeaderColorForWidget = checkEditUseForeHeaderColorForWidget.Checked;
 			if (rbHeaderAlignmentLeft.Checked)
 				_folder.Settings.HeaderAlignment = HorizontalAlignment.Left;
 			else if (rbHeaderAlignmentCenter.Checked)
@@ -156,17 +157,15 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			if (_bannerControl == null && _folder.Widget.Enabled)
 				_folder.Banner.Enable = false;
 
-			if (_formParameters.Type == WindowPropertiesType.None)
-				_folder.Page.Library.Settings.ApplyWidgetForAllWindows = ckApllyForAllWindowsWidget.Checked;
+			_folder.Page.Library.Settings.ApplyWidgetForAllWindows = ckApllyForAllWindowsWidget.Checked;
+			_folder.Page.Library.Settings.ApplyWidgetColorForAllWindows = ckApllyForAllWindowsWidgetColor.Checked;
 
 			_bannerControl?.SaveData();
 			if (_widgetControl == null && _folder.Banner.Enable)
-				_folder.Widget.WidgetType = WidgetType.NoWidget;
-			if (_formParameters.Type == WindowPropertiesType.None)
-				_folder.Page.Library.Settings.ApplyBannerForAllWindows = ckApllyForAllWindowsBanner.Checked;
+				_folder.Widget.WidgetType = _folder.Widget.DefaultWidgetType;
+			_folder.Page.Library.Settings.ApplyBannerForAllWindows = ckApllyForAllWindowsBanner.Checked;
 
-			if (_formParameters.Type == WindowPropertiesType.None)
-				_folder.Page.ApplyFolderSettings(_folder);
+			_folder.Page.ApplyFolderSettings(_folder);
 			_folder.BeforeSave();
 		}
 
@@ -178,23 +177,28 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 
 		private void OnSelectedPageChanging(object sender, TabPageChangingEventArgs pageArgs)
 		{
-			if (pageArgs.Page == xtraTabPageWidget && _widgetControl == null)
+			if (pageArgs.Page == xtraTabPageWidget)
 			{
-				Cursor = Cursors.WaitCursor;
-				Application.DoEvents();
-				_widgetControl = new WidgetSettingsControl(_folder.Widget);
-				_widgetControl.Dock = DockStyle.Fill;
-				pnWidgetContainer.Controls.Add(_widgetControl);
-				_widgetControl.LoadData();
-				_widgetControl.StateChanged += (o, e) =>
+				if (_widgetControl == null)
 				{
-					if (e.IsChecked)
-						_bannerControl?.ChangeState(false);
-				};
-				_widgetControl.ControlClicked += OnFormClick;
-				pnApllyForAllWindowsWidget.Visible = _formParameters.Type == WindowPropertiesType.None;
-				ckApllyForAllWindowsWidget.Checked = _formParameters.Type == WindowPropertiesType.None && _folder.Page.Library.Settings.ApplyWidgetForAllWindows;
-				Cursor = Cursors.Default;
+					Cursor = Cursors.WaitCursor;
+					Application.DoEvents();
+					_widgetControl = new WidgetSettingsControl(_folder.Widget);
+					_widgetControl.Dock = DockStyle.Fill;
+					pnWidgetContainer.Controls.Add(_widgetControl);
+					_widgetControl.LoadData();
+					_widgetControl.StateChanged += (o, e) =>
+					{
+						if (e.IsChecked)
+							_bannerControl?.ChangeState(false);
+						checkEditUseForeHeaderColorForWidget.Checked = _widgetControl.checkEditUseTextColor.Checked;
+					};
+					_widgetControl.ControlClicked += OnFormClick;
+					_widgetControl.UpdateColor(checkEditUseForeHeaderColorForWidget.Checked ? colorEditWindowHeaderForeColor.Color : (Color?)null);
+					ckApllyForAllWindowsWidget.Checked = _folder.Page.Library.Settings.ApplyWidgetForAllWindows;
+					ckApllyForAllWindowsWidgetColor.Checked = _folder.Page.Library.Settings.ApplyWidgetColorForAllWindows;
+					Cursor = Cursors.Default;
+				}
 			}
 			else if (pageArgs.Page == xtraTabPageBanner && _bannerControl == null)
 			{
@@ -210,8 +214,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 						_widgetControl?.ChangeState(false);
 				};
 				_bannerControl.ControlClicked += OnFormClick;
-				pnApllyForAllWindowsBanner.Visible = _formParameters.Type == WindowPropertiesType.None;
-				ckApllyForAllWindowsBanner.Checked = _formParameters.Type == WindowPropertiesType.None && _folder.Page.Library.Settings.ApplyBannerForAllWindows;
+				ckApllyForAllWindowsBanner.Checked = _folder.Page.Library.Settings.ApplyBannerForAllWindows;
 				Cursor = Cursors.Default;
 			}
 		}
@@ -219,6 +222,16 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 		private void OnFormClick(object sender, EventArgs e)
 		{
 			buttonXSave.Focus();
+		}
+
+		private void colorEditWindowHeaderForeColor_EditValueChanged(object sender, EventArgs e)
+		{
+			_widgetControl?.UpdateColor(checkEditUseForeHeaderColorForWidget.Checked ? colorEditWindowHeaderForeColor.Color : (Color?)null);
+		}
+
+		private void checkEditUseForeHeaderColorForWidget_CheckedChanged(object sender, EventArgs e)
+		{
+			_widgetControl?.UpdateColor(checkEditUseForeHeaderColorForWidget.Checked ? colorEditWindowHeaderForeColor.Color : (Color?)null);
 		}
 	}
 

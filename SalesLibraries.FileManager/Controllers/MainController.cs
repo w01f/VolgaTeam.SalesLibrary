@@ -98,15 +98,30 @@ namespace SalesLibraries.FileManager.Controllers
 				authManager.Auth(e);
 			};
 
-			ProcessManager.RunStartProcess(
-				MainController.Instance.ImageResources.AppSplashLogo,
-				(cancellationToken, formProgress) =>
+			using (var form = new FormStart("Site Admin"))
+			{
+				form.pbHeaderRegular.Image = MainController.Instance.ImageResources.AppSplashLogo ?? form.pbHeaderRegular.Image;
+
+				FileStorageManager.Instance.Downloading += (o, e) =>
+				{
+					form.SetDownloadInfo(e.ProgressPercent < 100
+						? String.Format("Loading {0} - {1}%", e.FileName, e.ProgressPercent)
+						: String.Empty);
+				};
+				FileStorageManager.Instance.Extracting += (o, e) =>
+				{
+					form.SetDownloadInfo(e.ProgressPercent < 100
+						? String.Format("Extracting {0} - {1}%", e.FileName, e.ProgressPercent)
+						: String.Empty);
+				};
+
+				ProcessManager.RunWithProgress(form, false, (cancellationToken, formProgress) =>
 				{
 					formProgress.Invoke(new MethodInvoker(() =>
-					{
-						formProgress.ProcessConnectionStage();
-						Application.DoEvents();
-					}));
+						{
+							formProgress.ProcessConnectionStage();
+							Application.DoEvents();
+						}));
 
 					AsyncHelper.RunSync(FileStorageManager.Instance.Init);
 
@@ -160,9 +175,9 @@ namespace SalesLibraries.FileManager.Controllers
 						ProcessManager.SuspendProcess();
 						formProgress.Invoke(new MethodInvoker(() =>
 						{
-							using (var form = new FormPaths())
+							using (var formPath = new FormPaths())
 							{
-								if (form.ShowDialog() == DialogResult.OK)
+								if (formPath.ShowDialog() == DialogResult.OK)
 								{
 									Settings.Save();
 								}
@@ -179,6 +194,7 @@ namespace SalesLibraries.FileManager.Controllers
 						Wallbin.LoadLibrary(Settings.BackupPath);
 					}
 				});
+			}
 
 			if (stopRun) return;
 			if (appReady)

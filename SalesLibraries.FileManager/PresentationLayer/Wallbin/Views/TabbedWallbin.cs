@@ -11,10 +11,12 @@ using SalesLibraries.Business.Contexts.Wallbin;
 using SalesLibraries.Business.Entities.Helpers;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.Persistent;
+using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.CommonGUI.Common;
 using SalesLibraries.CommonGUI.CustomDialog;
 using SalesLibraries.FileManager.Controllers;
+using SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.ContextMenuEdit;
 using SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSettings;
 using SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings;
 
@@ -52,6 +54,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 
 			_tabDragDropHelper = new XtraTabDragDropHelper<TabPage>(xtraTabControl);
 			_tabDragDropHelper.TabMoved += OnTabMoved;
+
+			InitLinksContextMenuEditors();
 		}
 
 		public override void SelectPage(IPageView pageView)
@@ -111,11 +115,78 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 		#region Page Context Menu Processing
 		private XtraTabHitInfo _menuHitInfo;
 
+		private readonly List<BaseContextMenuEditor> _linksContextMenuEditors = new List<BaseContextMenuEditor>();
+
+		private void InitLinksContextMenuEditors()
+		{
+			var libraryObjectNotesEditor = new LibraryObjectNotesEditor(barSubItemPagePropertiesMultiLinksNotesObject);
+			libraryObjectNotesEditor.EditValueChanged += OnLinksContextEditorValueChanged;
+			_linksContextMenuEditors.Add(libraryObjectNotesEditor);
+
+			var lineBreakNotesEditor = new LineBreakNotesEditor(barSubItemPagePropertiesMultiLinksNotesLineBreak);
+			lineBreakNotesEditor.EditValueChanged += OnLinksContextEditorValueChanged;
+			_linksContextMenuEditors.Add(lineBreakNotesEditor);
+
+			var libraryObjectFormatEditor = new LibraryObjectTextFormatEditor(barSubItemPagePropertiesMultiLinksFormatObject);
+			libraryObjectFormatEditor.EditValueChanged += OnLinksContextEditorValueChanged;
+			_linksContextMenuEditors.Add(libraryObjectFormatEditor);
+
+			var lineBreakFormatEditor = new LineBreakTextFormatEditor(barSubItemPagePropertiesMultiLinksFormatLineBreak);
+			lineBreakFormatEditor.EditValueChanged += OnLinksContextEditorValueChanged;
+			_linksContextMenuEditors.Add(lineBreakFormatEditor);
+
+			popupMenuPageProperties.CloseUp += OnLinkPropertiesMenuCloseUp;
+		}
+
+		private void LoadLinksContextMenuEditors(IList<BaseLibraryLink> links)
+		{
+			_linksContextMenuEditors.ForEach(e => e.LoadLinks(links));
+		}
+
+		private void ApplyLinksContextMenuEditorChanges()
+		{
+			_linksContextMenuEditors.ForEach(e => e.ApplyChanges());
+		}
+
+		private void OnLinksContextEditorValueChanged(object sender, EventArgs e)
+		{
+			IsDataChanged = true;
+
+			var selectedPage = _menuHitInfo.Page as TabPage;
+			if (selectedPage == null) return;
+			MainController.Instance.ProcessManager.Run("Updating Page...",
+				(cancelationToken, formProgess) => MainController.Instance.MainForm.Invoke(new MethodInvoker(selectedPage.Content.UpdateContent)));
+		}
+
+		private void OnLinkPropertiesMenuCloseUp(object sender, EventArgs e)
+		{
+			ApplyLinksContextMenuEditorChanges();
+		}
+
 		private void xtraTabControl_MouseDown(object sender, MouseEventArgs e)
 		{
 			if (e.Button != MouseButtons.Right) return;
 			_menuHitInfo = xtraTabControl.CalcHitInfo(new Point(e.X, e.Y));
 			if (_menuHitInfo.HitTest != XtraTabHitTest.PageHeader) return;
+
+			var selectedPage = _menuHitInfo.Page as TabPage;
+			if (selectedPage == null) return;
+
+			barButtonItemPagePropertiesMultiLinksSecurity.Visibility = MainController.Instance.Settings.EditorSettings.EnableSecurityEdit
+				? BarItemVisibility.Always
+				: BarItemVisibility.Never;
+			barButtonItemPagePropertiesMultiLinksTags.Visibility = MainController.Instance.Settings.EditorSettings.EnableTagsEdit && selectedPage.Page.AllLinks.OfType<LibraryObjectLink>().Any()
+					? BarItemVisibility.Always
+					: BarItemVisibility.Never;
+			barButtonItemPagePropertiesMultiLinksExpirationDate.Visibility = selectedPage.Page.AllLinks.OfType<LibraryObjectLink>().Any()
+					? BarItemVisibility.Always
+					: BarItemVisibility.Never;
+			barButtonItemPagePropertiesMultiLinksRefreshPreviewFiles.Visibility = selectedPage.Page.AllLinks.OfType<PreviewableLink>().Any()
+					? BarItemVisibility.Always
+					: BarItemVisibility.Never;
+
+			LoadLinksContextMenuEditors(selectedPage.Page.AllLinks.ToList());
+
 			popupMenuPageProperties.ShowPopup(Cursor.Position);
 		}
 
@@ -192,23 +263,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 			ClonePage(selectedPage, false);
 		}
 
-		private void barButtonItemPagePropertiesResetLinkSettings_ItemClick(object sender, ItemClickEventArgs e)
-		{
-			var selectedPage = _menuHitInfo.Page as TabPage;
-			if (selectedPage == null) return;
-			using (var form = new FormResetLinkSettings(selectedPage.Page))
-			{
-				if (form.ShowDialog(MainController.Instance.MainForm) != DialogResult.OK) return;
-				var settingsGroupsForReset = form.SettingsGroups;
-				using (var confirmation = new FormResetLinkSettingsConfirmation(settingsGroupsForReset))
-				{
-					if (confirmation.ShowDialog(MainController.Instance.MainForm) != DialogResult.OK) return;
-					selectedPage.Content.ResetAllSettings(settingsGroupsForReset);
-					IsDataChanged = true;
-				}
-			}
-		}
-
 		private void barButtonItemPagePropertiesDeleteLinkWidgets_ItemClick(object sender, ItemClickEventArgs e)
 		{
 			var selectedPage = _menuHitInfo.Page as TabPage;
@@ -233,15 +287,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 			if (selectedPage == null) return;
 			if (MainController.Instance.PopupMessages.ShowQuestion("Are You sure You want to wipe tags?") != DialogResult.Yes) return;
 			selectedPage.Content.ResetTags();
-			IsDataChanged = true;
-		}
-
-		private void barButtonItemPagePropertiesDeleteLinks_ItemClick(object sender, ItemClickEventArgs e)
-		{
-			var selectedPage = _menuHitInfo.Page as TabPage;
-			if (selectedPage == null) return;
-			if (MainController.Instance.PopupMessages.ShowQuestion("Are You sure You want to remove links?") != DialogResult.Yes) return;
-			selectedPage.Content.DeleteLinks();
 			IsDataChanged = true;
 		}
 
@@ -271,14 +316,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 			IsDataChanged = true;
 		}
 
-		private void barButtonItemPagePropertiesEditLinkTags_ItemClick(object sender, ItemClickEventArgs e)
-		{
-			var selectedPage = _menuHitInfo.Page as TabPage;
-			if (selectedPage == null) return;
-			selectedPage.Content.EditLinksGroupSettings(LinkSettingsType.Tags);
-			IsDataChanged = true;
-		}
-
 		private void barButtonItemPagePropertiesLinkAdminSettingsExcel_ItemClick(object sender, ItemClickEventArgs e)
 		{
 			var selectedPage = _menuHitInfo.Page as TabPage;
@@ -293,6 +330,86 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 			if (selectedPage == null) return;
 			selectedPage.Content.EditLinksGroupSettings(LinkSettingsType.AdminSettings, FileTypes.Pdf, false);
 			IsDataChanged = true;
+		}
+
+		private void barButtonItemPagePropertiesMultiLinksResetSettings_ItemClick(object sender, ItemClickEventArgs e)
+		{
+			var selectedPage = _menuHitInfo.Page as TabPage;
+			if (selectedPage == null) return;
+			using (var form = new FormResetLinkSettings(selectedPage.Page))
+			{
+				if (form.ShowDialog(MainController.Instance.MainForm) != DialogResult.OK) return;
+				var settingsGroupsForReset = form.SettingsGroups;
+				using (var confirmation = new FormResetLinkSettingsConfirmation(settingsGroupsForReset))
+				{
+					if (confirmation.ShowDialog(MainController.Instance.MainForm) != DialogResult.OK) return;
+					selectedPage.Content.ResetAllSettings(settingsGroupsForReset);
+					IsDataChanged = true;
+				}
+			}
+		}
+
+		private void barButtonItemPagePropertiesMultiLinksDelete_ItemClick(object sender, ItemClickEventArgs e)
+		{
+			var selectedPage = _menuHitInfo.Page as TabPage;
+			if (selectedPage == null) return;
+			if (MainController.Instance.PopupMessages.ShowQuestion("Are You sure You want to remove links?") != DialogResult.Yes) return;
+			selectedPage.Content.DeleteLinks();
+			IsDataChanged = true;
+		}
+
+		private void barButtonItemPagePropertiesMultiLinksWidget_ItemClick(object sender, ItemClickEventArgs e)
+		{
+			var selectedPage = _menuHitInfo.Page as TabPage;
+			if (selectedPage == null) return;
+			selectedPage.Content.EditLinksGroupSettings(LinkSettingsType.Widget);
+			IsDataChanged = true;
+		}
+
+		private void barButtonItemPagePropertiesMultiLinksBanner_ItemClick(object sender, ItemClickEventArgs e)
+		{
+			var selectedPage = _menuHitInfo.Page as TabPage;
+			if (selectedPage == null) return;
+			selectedPage.Content.EditLinksGroupSettings(LinkSettingsType.Banner);
+			IsDataChanged = true;
+		}
+
+		private void barButtonItemPagePropertiesMultiLinksTags_ItemClick(object sender, ItemClickEventArgs e)
+		{
+			var selectedPage = _menuHitInfo.Page as TabPage;
+			if (selectedPage == null) return;
+			selectedPage.Content.EditLinksGroupSettings(LinkSettingsType.Tags, updateContent: false);
+			IsDataChanged = true;
+		}
+
+		private void barButtonItemPagePropertiesMultiLinksSecurity_ItemClick(object sender, ItemClickEventArgs e)
+		{
+			var selectedPage = _menuHitInfo.Page as TabPage;
+			if (selectedPage == null) return;
+			selectedPage.Content.EditLinksGroupSettings(LinkSettingsType.Security, updateContent: false);
+			IsDataChanged = true;
+		}
+
+		private void barButtonItemPagePropertiesMultiLinksExpirationDate_ItemClick(object sender, ItemClickEventArgs e)
+		{
+			var selectedPage = _menuHitInfo.Page as TabPage;
+			if (selectedPage == null) return;
+			selectedPage.Content.EditLinksGroupSettings(LinkSettingsType.Tags);
+			IsDataChanged = true;
+		}
+
+		private void barButtonItemPagePropertiesMultiLinksRefreshPreviewFiles_ItemClick(object sender, ItemClickEventArgs e)
+		{
+			var selectedPage = _menuHitInfo.Page as TabPage;
+			if (selectedPage == null) return;
+			if (MainController.Instance.PopupMessages.ShowWarningQuestion("Are you sure you want to refresh the server files for links on this page?") != DialogResult.Yes) return;
+			selectedPage.Content.RefreshPreviewFiles();
+			MainController.Instance.PopupMessages.ShowInfo("Links are now updated for the server!");
+		}
+
+		private void barButtonItemPagePropertiesDeleteAllLinks_ItemClick(object sender, ItemClickEventArgs e)
+		{
+			barButtonItemPagePropertiesMultiLinksDelete_ItemClick(sender, e);
 		}
 		#endregion
 	}

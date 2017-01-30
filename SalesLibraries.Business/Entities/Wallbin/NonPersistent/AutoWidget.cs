@@ -16,7 +16,10 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 			set
 			{
 				if (_inverted != value)
+				{
+					WidgetKey = DateTime.Now.ToString("yyyyMMddhhmmss");
 					_invertedImage = null;
+				}
 				_inverted = value;
 			}
 		}
@@ -28,7 +31,10 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 			set
 			{
 				if (_inversionColor != value)
+				{
+					WidgetKey = DateTime.Now.ToString("yyyyMMddhhmmss");
 					_invertedImage = null;
+				}
 				_inversionColor = value;
 			}
 		}
@@ -40,12 +46,18 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 			set
 			{
 				if (_widget != value)
+				{
+					WidgetKey = DateTime.Now.ToString("yyyyMMddhhmmss");
 					_invertedImage = null;
+				}
 				_widget = value;
 			}
 		}
 
 		public string WidgetName { get; set; }
+
+		[JsonIgnore]
+		public string WidgetKey { get; set; }
 
 		private Image _invertedImage;
 		[JsonIgnore]

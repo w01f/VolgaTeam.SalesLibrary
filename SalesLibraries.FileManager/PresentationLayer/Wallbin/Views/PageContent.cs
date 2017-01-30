@@ -7,10 +7,14 @@ using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using SalesLibraries.Business.Entities.Helpers;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
+using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings;
 using SalesLibraries.Business.Entities.Wallbin.Persistent;
+using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.Common.Objects.SearchTags;
+using SalesLibraries.Common.OfficeInterops;
 using SalesLibraries.CommonGUI.Wallbin.ColumnTitles;
+using SalesLibraries.FileManager.Business.PreviewGenerators;
 using SalesLibraries.FileManager.Controllers;
 using SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls;
 using SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSettings;
@@ -80,8 +84,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 		public void EditLinksGroupSettings(LinkSettingsType settingsType, FileTypes? defaultLinkType = null, bool updateContent = true)
 		{
 			MainController.Instance.WallbinViews.Selection.Reset();
-			SettingsEditorFactory.Run(PageContainer.Page, settingsType, defaultLinkType);
-			if (updateContent)
+			if (SettingsEditorFactory.Run(PageContainer.Page, settingsType, defaultLinkType) == DialogResult.OK && updateContent)
 				MainController.Instance.ProcessManager.Run("Updating Page...",
 					(cancelationToken, formProgess) => MainController.Instance.MainForm.Invoke(new MethodInvoker(UpdateContent)));
 		}
@@ -103,6 +106,36 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 					PageContainer.ShowPage();
 				})));
 			PageContainer.Resume();
+		}
+
+		public void RefreshPreviewFiles()
+		{
+			var links = PageContainer.Page.AllLinks.OfType<PreviewableLink>().ToList();
+			MainController.Instance.ProcessManager.Run("Updating Preview files...", (cancelationToken, formProgess) =>
+			{
+				var powerPointLinks = links.OfType<PowerPointLink>().ToList();
+				if (powerPointLinks.Any())
+				{
+					using (var powerPointProcessor = new PowerPointHidden())
+					{
+						if (!powerPointProcessor.Connect(true)) return;
+						foreach (var powerPointLink in powerPointLinks)
+						{
+							((PowerPointLinkSettings)powerPointLink.Settings).ClearQuickViewContent();
+							((PowerPointLinkSettings)powerPointLink.Settings).UpdateQuickViewContent(powerPointProcessor);
+							((PowerPointLinkSettings)powerPointLink.Settings).UpdatePresentationInfo(powerPointProcessor);
+						}
+					}
+				}
+
+				foreach (var link in links)
+				{
+					link.ClearPreviewContainer();
+					var previewContainer = link.GetPreviewContainer();
+					var previewGenerator = previewContainer.GetPreviewGenerator();
+					previewContainer.UpdateContent(previewGenerator, cancelationToken);
+				}
+			});
 		}
 
 		public void ResetExpirationDates()
@@ -195,6 +228,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 						var folderBox = new ClassicFolderBox(libraryFolder);
 						folderBox.BoxSizeChanged += OnFolderSizeChanged;
 						folderBox.DataChanged += OnFolderDataChanged;
+						folderBox.MultiLinksSettingsChanged += OnMultiLinksSettingsChanged;
 						Application.DoEvents();
 						return folderBox;
 					})
@@ -258,6 +292,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 			var folderBox = new ClassicFolderBox(libraryFolder);
 			folderBox.BoxSizeChanged += OnFolderSizeChanged;
 			folderBox.DataChanged += OnFolderDataChanged;
+			folderBox.MultiLinksSettingsChanged += OnMultiLinksSettingsChanged;
 
 			_folderBoxes.Add(folderBox);
 			Controls.Add(folderBox);
@@ -292,6 +327,12 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 			UpdateFoldersColumnSize(folder.DataSource.ColumnOrder);
 			WinAPIHelper.SendMessage(Handle, 11, new IntPtr(1), IntPtr.Zero);
 			Refresh();
+		}
+
+		private void OnMultiLinksSettingsChanged(object sender, EventArgs e)
+		{
+			MainController.Instance.ProcessManager.Run("Updating Page...",
+				(cancelationToken, formProgess) => MainController.Instance.MainForm.Invoke(new MethodInvoker(UpdateContent)));
 		}
 		#endregion
 

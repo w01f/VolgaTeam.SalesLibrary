@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using Newtonsoft.Json;
 using SalesLibraries.Business.Entities.Interfaces;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
@@ -32,6 +33,42 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkBundleSetti
 				if (_additionalInfo != value)
 					OnSettingsChanged();
 				_additionalInfo = value;
+			}
+		}
+
+		private Color _foreColor = Color.Black;
+		public Color ForeColor
+		{
+			get { return _foreColor; }
+			set
+			{
+				if (_foreColor != value)
+					OnSettingsChanged();
+				_foreColor = value;
+			}
+		}
+
+		private Color _backColor = Color.White;
+		public Color BackColor
+		{
+			get { return _backColor; }
+			set
+			{
+				if (_backColor != value)
+					OnSettingsChanged();
+				_backColor = value;
+			}
+		}
+
+		private Font _font = new Font("Arial", 10, FontStyle.Regular, GraphicsUnit.Point);
+		public Font Font
+		{
+			get { return _font; }
+			set
+			{
+				if (_font != value)
+					OnSettingsChanged();
+				_font = value;
 			}
 		}
 

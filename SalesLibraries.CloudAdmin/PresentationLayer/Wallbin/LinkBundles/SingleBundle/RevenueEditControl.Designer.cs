@@ -28,9 +28,8 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.components = new System.ComponentModel.Container();
-			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
-			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
+			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
+			this.styleController = new DevExpress.XtraEditors.StyleController();
 			this.pnTop = new DevExpress.XtraEditors.PanelControl();
 			this.labelControlTitle = new DevExpress.XtraEditors.LabelControl();
 			this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
@@ -50,9 +49,15 @@
 			this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
 			this.checkEditRevenueGenerated = new DevExpress.XtraEditors.CheckEdit();
 			this.checkEditRevenueGoal = new DevExpress.XtraEditors.CheckEdit();
-			this.barManager = new DevExpress.XtraBars.BarManager(this.components);
+			this.barManager = new DevExpress.XtraBars.BarManager();
 			this.barToolbar = new DevExpress.XtraBars.Bar();
 			this.barSubItemInfoAdd = new DevExpress.XtraBars.BarSubItem();
+			this.labelControlBackColor = new DevExpress.XtraEditors.LabelControl();
+			this.colorEditBackColor = new SalesLibraries.CommonGUI.Common.HtmlColorEdit();
+			this.labelControlTextColor = new DevExpress.XtraEditors.LabelControl();
+			this.labelControlTextFont = new DevExpress.XtraEditors.LabelControl();
+			this.colorEditTextColor = new SalesLibraries.CommonGUI.Common.HtmlColorEdit();
+			this.buttonEditTextFont = new DevExpress.XtraEditors.ButtonEdit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pnTop)).BeginInit();
 			this.pnTop.SuspendLayout();
@@ -68,6 +73,9 @@
 			((System.ComponentModel.ISupportInitialize)(this.checkEditRevenueGenerated.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditRevenueGoal.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.barManager)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.colorEditBackColor.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.colorEditTextColor.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.buttonEditTextFont.Properties)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// styleController
@@ -152,7 +160,7 @@
 			this.memoEditAdditionalInfo.Enabled = false;
 			this.memoEditAdditionalInfo.Location = new System.Drawing.Point(375, 129);
 			this.memoEditAdditionalInfo.Name = "memoEditAdditionalInfo";
-			this.memoEditAdditionalInfo.Size = new System.Drawing.Size(362, 389);
+			this.memoEditAdditionalInfo.Size = new System.Drawing.Size(362, 299);
 			this.memoEditAdditionalInfo.StyleController = this.styleController;
 			this.memoEditAdditionalInfo.TabIndex = 9;
 			// 
@@ -184,13 +192,13 @@
 			this.gridControlInfoItems.EmbeddedNavigator.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.gridControlInfoItems.EmbeddedNavigator.Appearance.Options.UseBackColor = true;
 			this.gridControlInfoItems.EmbeddedNavigator.Appearance.Options.UseForeColor = true;
-			this.gridControlInfoItems.Location = new System.Drawing.Point(2, 49);
+			this.gridControlInfoItems.Location = new System.Drawing.Point(2, 46);
 			this.gridControlInfoItems.MainView = this.gridViewInfoItems;
 			this.gridControlInfoItems.Name = "gridControlInfoItems";
 			this.gridControlInfoItems.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemButtonEditInfoItemsActions,
             this.repositoryItemSpinEditInfoItems});
-			this.gridControlInfoItems.Size = new System.Drawing.Size(350, 341);
+			this.gridControlInfoItems.Size = new System.Drawing.Size(350, 344);
 			this.gridControlInfoItems.TabIndex = 7;
 			this.gridControlInfoItems.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewInfoItems});
@@ -291,7 +299,7 @@
 			this.repositoryItemButtonEditInfoItemsActions.AppearanceReadOnly.Options.UseFont = true;
 			this.repositoryItemButtonEditInfoItemsActions.AutoHeight = false;
 			this.repositoryItemButtonEditInfoItemsActions.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::SalesLibraries.CloudAdmin.Properties.Resources.ButtonDelete, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "Delete", "Delete", null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::SalesLibraries.CloudAdmin.Properties.Resources.ButtonDelete, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "Delete", "Delete", null, true)});
 			this.repositoryItemButtonEditInfoItemsActions.Name = "repositoryItemButtonEditInfoItemsActions";
 			this.repositoryItemButtonEditInfoItemsActions.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
 			this.repositoryItemButtonEditInfoItemsActions.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.OnInfoItemsActionsButtonClick);
@@ -301,16 +309,16 @@
 			this.barDockControlLeft.CausesValidation = false;
 			this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
 			this.barDockControlLeft.ForeColor = System.Drawing.Color.Black;
-			this.barDockControlLeft.Location = new System.Drawing.Point(2, 49);
-			this.barDockControlLeft.Size = new System.Drawing.Size(0, 341);
+			this.barDockControlLeft.Location = new System.Drawing.Point(2, 46);
+			this.barDockControlLeft.Size = new System.Drawing.Size(0, 344);
 			// 
 			// barDockControlRight
 			// 
 			this.barDockControlRight.CausesValidation = false;
 			this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
 			this.barDockControlRight.ForeColor = System.Drawing.Color.Black;
-			this.barDockControlRight.Location = new System.Drawing.Point(352, 49);
-			this.barDockControlRight.Size = new System.Drawing.Size(0, 341);
+			this.barDockControlRight.Location = new System.Drawing.Point(352, 46);
+			this.barDockControlRight.Size = new System.Drawing.Size(0, 344);
 			// 
 			// barDockControlBottom
 			// 
@@ -326,7 +334,7 @@
 			this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
 			this.barDockControlTop.ForeColor = System.Drawing.Color.Black;
 			this.barDockControlTop.Location = new System.Drawing.Point(2, 2);
-			this.barDockControlTop.Size = new System.Drawing.Size(350, 47);
+			this.barDockControlTop.Size = new System.Drawing.Size(350, 44);
 			// 
 			// checkEditRevenueGenerated
 			// 
@@ -391,9 +399,120 @@
 			this.barSubItemInfoAdd.ItemClickFireMode = DevExpress.XtraBars.BarItemEventFireMode.Immediate;
 			this.barSubItemInfoAdd.Name = "barSubItemInfoAdd";
 			// 
+			// labelControlBackColor
+			// 
+			this.labelControlBackColor.AllowHtmlString = true;
+			this.labelControlBackColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.labelControlBackColor.Appearance.BackColor = System.Drawing.Color.Transparent;
+			this.labelControlBackColor.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.labelControlBackColor.AppearanceDisabled.ForeColor = System.Drawing.Color.Gray;
+			this.labelControlBackColor.Enabled = false;
+			this.labelControlBackColor.Location = new System.Drawing.Point(575, 445);
+			this.labelControlBackColor.Name = "labelControlBackColor";
+			this.labelControlBackColor.Size = new System.Drawing.Size(65, 16);
+			this.labelControlBackColor.StyleController = this.styleController;
+			this.labelControlBackColor.TabIndex = 68;
+			this.labelControlBackColor.Text = "Back Color";
+			// 
+			// colorEditBackColor
+			// 
+			this.colorEditBackColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.colorEditBackColor.Color = System.Drawing.Color.Empty;
+			this.colorEditBackColor.EditValue = System.Drawing.Color.Empty;
+			this.colorEditBackColor.Enabled = false;
+			this.colorEditBackColor.Location = new System.Drawing.Point(646, 442);
+			this.colorEditBackColor.Name = "colorEditBackColor";
+			this.colorEditBackColor.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.colorEditBackColor.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.colorEditBackColor.Properties.Appearance.Options.UseBackColor = true;
+			this.colorEditBackColor.Properties.Appearance.Options.UseForeColor = true;
+			this.colorEditBackColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+			this.colorEditBackColor.Properties.Color = System.Drawing.Color.Empty;
+			this.colorEditBackColor.Size = new System.Drawing.Size(91, 22);
+			this.colorEditBackColor.StyleController = this.styleController;
+			this.colorEditBackColor.TabIndex = 67;
+			this.colorEditBackColor.EditValueChanged += new System.EventHandler(this.OnBackColorEditValueChanged);
+			// 
+			// labelControlTextColor
+			// 
+			this.labelControlTextColor.AllowHtmlString = true;
+			this.labelControlTextColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.labelControlTextColor.Appearance.BackColor = System.Drawing.Color.Transparent;
+			this.labelControlTextColor.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.labelControlTextColor.AppearanceDisabled.ForeColor = System.Drawing.Color.Gray;
+			this.labelControlTextColor.Enabled = false;
+			this.labelControlTextColor.Location = new System.Drawing.Point(375, 445);
+			this.labelControlTextColor.Name = "labelControlTextColor";
+			this.labelControlTextColor.Size = new System.Drawing.Size(60, 16);
+			this.labelControlTextColor.StyleController = this.styleController;
+			this.labelControlTextColor.TabIndex = 66;
+			this.labelControlTextColor.Text = "Text Color";
+			// 
+			// labelControlTextFont
+			// 
+			this.labelControlTextFont.AllowHtmlString = true;
+			this.labelControlTextFont.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.labelControlTextFont.Appearance.BackColor = System.Drawing.Color.Transparent;
+			this.labelControlTextFont.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.labelControlTextFont.AppearanceDisabled.ForeColor = System.Drawing.Color.Gray;
+			this.labelControlTextFont.Enabled = false;
+			this.labelControlTextFont.Location = new System.Drawing.Point(375, 495);
+			this.labelControlTextFont.Name = "labelControlTextFont";
+			this.labelControlTextFont.Size = new System.Drawing.Size(30, 16);
+			this.labelControlTextFont.StyleController = this.styleController;
+			this.labelControlTextFont.TabIndex = 65;
+			this.labelControlTextFont.Text = "Font:";
+			// 
+			// colorEditTextColor
+			// 
+			this.colorEditTextColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.colorEditTextColor.Color = System.Drawing.Color.Empty;
+			this.colorEditTextColor.EditValue = System.Drawing.Color.Empty;
+			this.colorEditTextColor.Enabled = false;
+			this.colorEditTextColor.Location = new System.Drawing.Point(441, 442);
+			this.colorEditTextColor.Name = "colorEditTextColor";
+			this.colorEditTextColor.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.colorEditTextColor.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.colorEditTextColor.Properties.Appearance.Options.UseBackColor = true;
+			this.colorEditTextColor.Properties.Appearance.Options.UseForeColor = true;
+			this.colorEditTextColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+			this.colorEditTextColor.Properties.Color = System.Drawing.Color.Empty;
+			this.colorEditTextColor.Size = new System.Drawing.Size(91, 22);
+			this.colorEditTextColor.StyleController = this.styleController;
+			this.colorEditTextColor.TabIndex = 64;
+			this.colorEditTextColor.EditValueChanged += new System.EventHandler(this.OnTextColorEditValueChanged);
+			// 
+			// buttonEditTextFont
+			// 
+			this.buttonEditTextFont.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonEditTextFont.Enabled = false;
+			this.buttonEditTextFont.Location = new System.Drawing.Point(441, 492);
+			this.buttonEditTextFont.Name = "buttonEditTextFont";
+			this.buttonEditTextFont.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.buttonEditTextFont.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.buttonEditTextFont.Properties.Appearance.Options.UseBackColor = true;
+			this.buttonEditTextFont.Properties.Appearance.Options.UseForeColor = true;
+			this.buttonEditTextFont.Properties.AppearanceDisabled.ForeColor = System.Drawing.Color.Gray;
+			this.buttonEditTextFont.Properties.AppearanceDisabled.Options.UseForeColor = true;
+			this.buttonEditTextFont.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+			this.buttonEditTextFont.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+			this.buttonEditTextFont.Size = new System.Drawing.Size(296, 22);
+			this.buttonEditTextFont.StyleController = this.styleController;
+			this.buttonEditTextFont.TabIndex = 63;
+			this.buttonEditTextFont.EditValueChanged += new System.EventHandler(this.OnFontEditValueChanged);
+			// 
 			// RevenueEditControl
 			// 
 			this.BackColor = System.Drawing.Color.White;
+			this.Controls.Add(this.labelControlBackColor);
+			this.Controls.Add(this.colorEditBackColor);
+			this.Controls.Add(this.labelControlTextColor);
+			this.Controls.Add(this.labelControlTextFont);
+			this.Controls.Add(this.colorEditTextColor);
+			this.Controls.Add(this.buttonEditTextFont);
 			this.Controls.Add(this.checkEditRevenueGoal);
 			this.Controls.Add(this.checkEditRevenueGenerated);
 			this.Controls.Add(this.pnRevenueInfo);
@@ -420,6 +539,9 @@
 			((System.ComponentModel.ISupportInitialize)(this.checkEditRevenueGenerated.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditRevenueGoal.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.barManager)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.colorEditBackColor.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.colorEditTextColor.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.buttonEditTextFont.Properties)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -450,5 +572,11 @@
 		private DevExpress.XtraGrid.Columns.GridColumn gridColumnInfoItemsActions;
 		private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repositoryItemButtonEditInfoItemsActions;
 		private DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit repositoryItemSpinEditInfoItems;
+		private DevExpress.XtraEditors.LabelControl labelControlBackColor;
+		private CommonGUI.Common.HtmlColorEdit colorEditBackColor;
+		private DevExpress.XtraEditors.LabelControl labelControlTextColor;
+		private DevExpress.XtraEditors.LabelControl labelControlTextFont;
+		private CommonGUI.Common.HtmlColorEdit colorEditTextColor;
+		private DevExpress.XtraEditors.ButtonEdit buttonEditTextFont;
 	}
 }

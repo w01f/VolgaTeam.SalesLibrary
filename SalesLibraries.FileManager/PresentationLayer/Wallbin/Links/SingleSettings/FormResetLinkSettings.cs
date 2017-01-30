@@ -48,6 +48,14 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			LoadSettingsGroups(GetLinkCustomizedSettings(targetLink));
 		}
 
+		public FormResetLinkSettings(IList<BaseLibraryLink> targetLinks) : this()
+		{
+			Text = "Reset these Links";
+			labelControlTitle.Visible = false;
+
+			LoadSettingsGroups(GetLinksCustomizedSettings(targetLinks));
+		}
+
 		public FormResetLinkSettings(LibraryPage targetPage) : this()
 		{
 			Text = "Reset all Links on this Page";

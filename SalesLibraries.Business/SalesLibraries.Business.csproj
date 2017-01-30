@@ -96,6 +96,7 @@
     <Compile Include="Entities\Helpers\EntityHelper.cs" />
     <Compile Include="Entities\Common\SettingsContainer.cs" />
     <Compile Include="Entities\Helpers\EntityCollectionHelper.cs" />
+    <Compile Include="Entities\Helpers\ExternalLinksHelper.cs" />
     <Compile Include="Entities\Helpers\FileFormatHelper.cs" />
     <Compile Include="Entities\Helpers\OrderedCollectionHelper.cs" />
     <Compile Include="Entities\IDbEntity.cs" />
@@ -106,6 +107,7 @@
     <Compile Include="Entities\Interfaces\IPreviewGenerator.cs" />
     <Compile Include="Entities\Interfaces\ITableItem.cs" />
     <Compile Include="Entities\Interfaces\ICollectionItem.cs" />
+    <Compile Include="Entities\Interfaces\IWidgetSetingsHolder.cs" />
     <Compile Include="Entities\Wallbin\Common\Constants\PreviewFormats.cs" />
     <Compile Include="Entities\Wallbin\Common\Constants\WebFormats.cs" />
     <Compile Include="Entities\Wallbin\Common\Enums\BannerTextMode.cs" />
@@ -143,6 +145,7 @@
     <Compile Include="Entities\Wallbin\NonPersistent\HyperLinkInfo\YouTubeLinkInfo.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\HyperLinkInfo\UrlLinkInfo.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\LinkBundleSettings\BaseBundleItem.cs" />
+    <Compile Include="Entities\Wallbin\NonPersistent\LinkBundleSettings\LaunchScreenItem.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\LinkBundleSettings\InfoItem.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\LinkBundleSettings\LibraryLinkItem.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\LinkBundleSettings\RevenueInfo.cs" />
@@ -182,6 +185,7 @@
     <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\ExcelLinkSettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\DocumentLinkSettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\LinkSettings\LibraryObjectLinkSettings.cs" />
+    <Compile Include="Entities\Wallbin\NonPersistent\MultiLinkSet.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\ProgramDataSettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\SourceLink.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\SyncSettings.cs" />

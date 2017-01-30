@@ -39,6 +39,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.LinkBundles.Single
 			repositoryItemTextEditBundleItems.EnableSelectAll();
 			repositoryItemMemoEditBundleItems.EnableSelectAll();
 
+			barLargeButtonItemLinksAddLaunchScreen.Caption = LaunchScreenItem.ItemName;
 			barLargeButtonItemLinksAddInfo.Caption = InfoItem.ItemName;
 			barLargeButtonItemLinksAddRevenue.Caption = RevenueItem.ItemName;
 			barLargeButtonItemLinksAddStrategy.Caption = StrategyItem.ItemName;
@@ -78,9 +79,9 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.LinkBundles.Single
 						return dilogResult == DialogResult.OK;
 					}
 				},
-				copyMethod => MainController.Instance.ProcessManager.Run("Preparing Data...", (cancelationToken, formProgress) => copyMethod()),
+				copyMethod => MainController.Instance.ProcessManager.Run("Preparing Data...", (cancelationToken, formProgess) => copyMethod()),
 				(context, original, current) => MainController.Instance.ProcessManager.Run("Saving Changes...",
-					(cancelationToken, formProgress) =>
+					(cancelationToken, formProgess) =>
 					{
 						original.Save(context, current, false);
 					}));
@@ -189,9 +190,16 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.LinkBundles.Single
 
 		private void UpdateItemsAvailableToAdd()
 		{
+			barLargeButtonItemLinksAddLaunchScreen.Enabled = !_linkBundle.Settings.Items.OfType<LaunchScreenItem>().Any();
 			barLargeButtonItemLinksAddInfo.Enabled = !_linkBundle.Settings.Items.OfType<InfoItem>().Any();
 			barLargeButtonItemLinksAddRevenue.Enabled = !_linkBundle.Settings.Items.OfType<RevenueItem>().Any();
 			barLargeButtonItemLinksAddStrategy.Enabled = !_linkBundle.Settings.Items.OfType<StrategyItem>().Any();
+		}
+
+		private void OnAddLaunchScreebItemClick(object sender, ItemClickEventArgs e)
+		{
+			_linkBundle.AddBundleItem<LaunchScreenItem>().AssignDefaultImage();
+			LoadBundleItems();
 		}
 
 		private void OnAddInfoItemClick(object sender, ItemClickEventArgs e)
@@ -280,6 +288,9 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.LinkBundles.Single
 		{
 			switch (SelectedBundleItem.ItemType)
 			{
+				case LinkBundleItemType.LaunchScreen:
+					xtraTabControl.SelectedTabPage = xtraTabControl.TabPages.OfType<LaunchScreenEditControl>().FirstOrDefault();
+					break;
 				case LinkBundleItemType.Info:
 					xtraTabControl.SelectedTabPage = xtraTabControl.TabPages.OfType<InfoEditControl>().FirstOrDefault();
 					break;

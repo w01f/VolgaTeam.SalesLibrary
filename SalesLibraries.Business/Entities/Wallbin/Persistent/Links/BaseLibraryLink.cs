@@ -204,7 +204,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		}
 
 		[NotMapped, JsonIgnore]
-		public Color DisplayColor
+		public virtual Color DisplayColor
 		{
 			get
 			{
@@ -263,10 +263,14 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 			Folder = null;
 		}
 
-		public virtual void DeleteLink(bool fullDelete = false)
+		public virtual void DeleteLink()
 		{
-			if (fullDelete)
-				Delete(ParentLibrary.Context);
+			Delete(ParentLibrary.Context);
+			UnlinkLink();
+		}
+
+		public virtual void UnlinkLink()
+		{
 			Folder?.Links.RemoveItem(this);
 			ResetParent();
 		}
@@ -346,15 +350,13 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 			return customizedSettingsGroups;
 		}
 
-		public virtual BaseLibraryLink Copy(bool forMove = false)
+		public virtual BaseLibraryLink Copy()
 		{
 			NeedToSave = true;
 
 			BeforeSave();
 
 			var link = (BaseLibraryLink)Activator.CreateInstance(GetType());
-			if (forMove)
-				link.ExtId = ExtId;
 			link.Type = Type;
 			link.Name = Name;
 			link.Order = Order;

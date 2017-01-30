@@ -98,6 +98,7 @@
     <Compile Include="Models\Soap\WallbinContentService\InternalLibraryPageLinkSettings.cs" />
     <Compile Include="Models\Soap\WallbinContentService\InternalLibraryFolderLinkSettings.cs" />
     <Compile Include="Models\Soap\WallbinContentService\InternalLibraryObjectLinkSettings.cs" />
+    <Compile Include="Models\Soap\WallbinContentService\LinkBundleLaunchScreenItem.cs" />
     <Compile Include="Models\Soap\WallbinContentService\LinkBundleRevenueItem.cs" />
     <Compile Include="Models\Soap\WallbinContentService\LinkBundleStrategyItem.cs" />
     <Compile Include="Models\Soap\WallbinContentService\LinkBundleInfoItem.cs" />

@@ -367,4 +367,37 @@
   <data name="LinkAddVimeo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\LinkAddVimeo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="ProgressStartCancel" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ProgressStartCancel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ProgressStartMinimizedFisrtStart" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ProgressStartMinimizedFisrtStart.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ProgressStartMinimizedRegularStart" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ProgressStartMinimizedRegularStart.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ProgressStartRegularBrand" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ProgressStartRegularBrand.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ProgressStartRegularFiles" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ProgressStartRegularFiles.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ProgressStartRegularHeader" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ProgressStartRegularHeader.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ProgressStartRegularSecurity" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ProgressStartRegularSecurity.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ProgressStartRegularWebConnection" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ProgressStartRegularWebConnection.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="QatFloater" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\QatFloater.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="QatHelp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\QatHelp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LinkAddExternalFolder" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LinkAddExternalFolder.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

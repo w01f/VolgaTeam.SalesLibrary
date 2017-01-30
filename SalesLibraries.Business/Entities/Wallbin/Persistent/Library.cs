@@ -123,7 +123,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 
 		public override void ResetParent() { }
 
-		public string GetFilePath()
+		public string GetRootPath()
 		{
 			return Path;
 		}
@@ -208,6 +208,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 		{
 			public bool ApplyAppearanceForAllWindows { get; set; }
 			public bool ApplyWidgetForAllWindows { get; set; }
+			public bool ApplyWidgetColorForAllWindows { get; set; }
 			public bool ApplyBannerForAllWindows { get; set; }
 
 			public List<AutoWidget> AutoWidgets { get; private set; }
