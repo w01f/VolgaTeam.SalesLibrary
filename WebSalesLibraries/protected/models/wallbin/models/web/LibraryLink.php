@@ -35,6 +35,10 @@
 		 * @var Banner
 		 */
 		public $banner;
+		/**
+		 * @var Thumbnail
+		 */
+		public $thumbnail;
 		public $previewId;
 		/**
 		 * @var \LinkSuperFilter[]
@@ -93,6 +97,7 @@
 			$this->originalFormat = $linkRecord->original_format;
 			$this->searchFormat = $linkRecord->search_format;
 			$this->extendedProperties = \BaseLinkSettings::createByLink($linkRecord);
+			$this->thumbnail = Thumbnail::createByContent($linkRecord->thumbnail);
 
 			$lineBreakRecord = \LineBreakRecord::model()->findByPk($linkRecord->id_line_break);
 			if ($lineBreakRecord !== null)

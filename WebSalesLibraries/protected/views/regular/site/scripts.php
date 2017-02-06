@@ -28,6 +28,7 @@
 	if ($isEOBrowser)
 		$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/regular/wallbin/folder-links-eo.css?' . Yii::app()->params['version']);
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/regular/wallbin/banner.css?' . Yii::app()->params['version']);
+	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/regular/wallbin/thumbnail.css?' . Yii::app()->params['version']);
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/regular/link-viewer/link-viewer.css?' . Yii::app()->params['version']);
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/regular/link-viewer/link-viewer-video.css?' . Yii::app()->params['version']);
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/regular/link-viewer/link-viewer-link-bundle.css?' . Yii::app()->params['version']);

@@ -59,6 +59,12 @@
 				'wrapText' => $link->extendedProperties->isTextWordWrap,
 				'tooltip' => (isset($tooltip) ? $tooltip : null)), true);
 		?>
+	<? elseif (!(isset($disableBanner) && $disableBanner) && isset($link->thumbnail) && $link->thumbnail->isEnabled): ?>
+		<? echo $this->renderFile(Yii::getPathOfAlias('application.views.regular.wallbin') . '/thumbnail.php',
+			array(
+				'thumbnail' => $link->thumbnail,
+				'tooltip' => (isset($tooltip) ? $tooltip : null)), true);
+		?>
 	<? else: ?>
 		<?
 		$widgetData = $link->getWidgetData();

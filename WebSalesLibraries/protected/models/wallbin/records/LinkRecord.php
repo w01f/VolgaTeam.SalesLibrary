@@ -25,6 +25,7 @@
 	 * @property mixed id_preview
 	 * @property mixed content
 	 * @property mixed settings
+	 * @property mixed thumbnail
 	 * @property mixed id_banner
 	 * @property mixed id_line_break
 	 * @property mixed id
@@ -116,7 +117,11 @@
 				BannerRecord::updateData($link['banner']);
 			}
 
-			if (array_key_exists('extendedProperties', $link) && isset($link['extendedProperties']))
+			if (array_key_exists('thumbnail', $link) && !empty($link['thumbnail']))
+				$linkRecord->thumbnail = CJSON::encode($link['thumbnail']);
+
+			if (array_key_exists('extendedProperties', $link) && !empty($link['extendedProperties']))
+			{
 				foreach ($link['extendedProperties'] as $key => $value)
 				{
 					if (!isset($value)) continue;
@@ -138,8 +143,9 @@
 							LinkQPageRecord::addLinkQPageRelation($linkRecord->id, $value);
 							break;
 					}
-					$linkRecord->settings = CJSON::encode($link['extendedProperties']);
 				}
+				$linkRecord->settings = CJSON::encode($link['extendedProperties']);
+			}
 
 			if (array_key_exists('lineBreakProperties', $link) && isset($link['lineBreakProperties']))
 			{

@@ -22,6 +22,7 @@ CREATE TABLE IF NOT EXISTS `tbl_link` (
   `tags` varchar(512) NULL,
   `content` longtext,
   `settings` longtext,
+  `thumbnail` longtext,
   `is_preview_not_ready` tinyint(1) NOT NULL DEFAULT 0,
   `is_restricted` tinyint(1) NOT NULL DEFAULT 0,
   `no_share` tinyint(1) NOT NULL DEFAULT 0,

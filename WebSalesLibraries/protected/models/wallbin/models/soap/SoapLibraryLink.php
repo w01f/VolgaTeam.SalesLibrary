@@ -101,6 +101,11 @@
 		 */
 		public $banner;
 		/**
+		 * @var SoapThumbnail
+		 * @soap
+		 */
+		public $thumbnail;
+		/**
 		 * @var string
 		 * @soap
 		 */
