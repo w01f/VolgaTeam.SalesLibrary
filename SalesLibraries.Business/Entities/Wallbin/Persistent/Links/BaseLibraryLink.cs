@@ -53,6 +53,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		public string TagsEncoded { get; set; }
 		public string WidgetEncoded { get; set; }
 		public string BannerEncoded { get; set; }
+		public string ThumbnailEncoded { get; set; }
 		public string ResetSettingsSchedulerEncoded { get; set; }
 		public virtual LibraryFolder Folder { get; set; }
 		#endregion
@@ -124,6 +125,14 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 			set { _banner = value; }
 		}
 
+		private ThumbnailSettings _thumbnail;
+		[NotMapped, JsonIgnore]
+		public ThumbnailSettings Thumbnail
+		{
+			get { return _thumbnail ?? (_thumbnail = SettingsContainer.CreateInstance<ThumbnailSettings>(this, ThumbnailEncoded)); }
+			set { _thumbnail = value; }
+		}
+
 		private ResetSettingsSchedulerSettings _resetSettingsScheduler;
 		[NotMapped, JsonIgnore]
 		public ResetSettingsSchedulerSettings ResetSettingsScheduler
@@ -162,12 +171,26 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 							return String.Empty;
 					}
 				}
+				if (Thumbnail.Enable)
+				{
+					switch (Thumbnail.TextMode)
+					{
+						case ThumbnailTextMode.LinkName:
+							return Name;
+						case ThumbnailTextMode.CustomText:
+							return Thumbnail.Text;
+						default:
+							return String.Empty;
+					}
+				}
 				return Name;
 			}
 			set
 			{
 				if (Banner.Enable && Banner.TextMode == BannerTextMode.CustomText)
 					Banner.Text = value;
+				else if (Thumbnail.Enable && Thumbnail.TextMode == ThumbnailTextMode.CustomText)
+					Thumbnail.Text = value;
 				else
 					Name = value;
 			}
@@ -199,6 +222,8 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 			{
 				if (Banner.Enable && Banner.TextEnabled)
 					return Banner.Font;
+				if (Thumbnail.Enable && Thumbnail.TextEnabled)
+					return Thumbnail.Font;
 				return null;
 			}
 		}
@@ -210,6 +235,8 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 			{
 				if (Banner.Enable && Banner.TextEnabled)
 					return Banner.ForeColor;
+				if (Thumbnail.Enable && Thumbnail.TextEnabled)
+					return Thumbnail.ForeColor;
 				if (Settings.ForeColor.HasValue)
 					return Settings.ForeColor.Value;
 				return Folder.Settings.ForeWindowColor;
@@ -243,6 +270,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 				TagsEncoded = Tags.Serialize();
 				WidgetEncoded = Widget.Serialize();
 				BannerEncoded = Banner.Serialize();
+				ThumbnailEncoded = Thumbnail.Serialize();
 				ResetSettingsSchedulerEncoded = ResetSettingsScheduler.Serialize();
 			}
 			base.BeforeSave();
@@ -255,6 +283,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 			Tags = null;
 			Widget = null;
 			Banner = null;
+			Thumbnail = null;
 			ResetSettingsScheduler = null;
 		}
 
@@ -286,6 +315,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 			TagsEncoded = link.TagsEncoded;
 			WidgetEncoded = link.WidgetEncoded;
 			BannerEncoded = link.BannerEncoded;
+			ThumbnailEncoded = link.ThumbnailEncoded;
 			ResetSettingsSchedulerEncoded = link.ResetSettingsSchedulerEncoded;
 			MarkAsModified();
 			AfterSave();
@@ -318,6 +348,8 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 			}
 			if (groupsForReset == null || groupsForReset.Contains(LinkSettingsGroupType.Banners))
 				BannerEncoded = null;
+			if (groupsForReset == null || groupsForReset.Contains(LinkSettingsGroupType.Thumbnails))
+				ThumbnailEncoded = null;
 			if (groupsForReset == null || groupsForReset.Contains(LinkSettingsGroupType.SearchTags))
 			{
 				TagsEncoded = null;
@@ -346,6 +378,8 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 				customizedSettingsGroups.Add(LinkSettingsGroupType.AutoWidgets);
 			if (Banner.Enable)
 				customizedSettingsGroups.Add(LinkSettingsGroupType.Banners);
+			if (Thumbnail.Enable)
+				customizedSettingsGroups.Add(LinkSettingsGroupType.Thumbnails);
 
 			return customizedSettingsGroups;
 		}
@@ -366,6 +400,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 			link.TagsEncoded = TagsEncoded;
 			link.WidgetEncoded = WidgetEncoded;
 			link.BannerEncoded = BannerEncoded;
+			link.ThumbnailEncoded = ThumbnailEncoded;
 			link.ResetSettingsSchedulerEncoded = ResetSettingsSchedulerEncoded;
 
 			return link;

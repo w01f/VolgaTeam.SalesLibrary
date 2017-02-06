@@ -294,6 +294,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 				link.Banner.Text = _tempBannerText;
 				link.Settings.TextWordWrap = checkEditTextWordWrap.Checked;
 				link.Widget.WidgetType = _sourceLink.Banner.Enable ? link.Widget.DefaultWidgetType : link.Widget.WidgetType;
+				link.Thumbnail.Enable = !link.Banner.Enable && link.Thumbnail.Enable;
 			}
 
 			if (buttonXEnable.Checked && checkEditSaveAsTemplate.Checked)

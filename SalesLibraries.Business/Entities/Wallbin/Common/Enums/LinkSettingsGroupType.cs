@@ -12,6 +12,7 @@
 		Security = 7,
 		Expiration = 8,
 		QuickLink = 9,
+		Thumbnails = 10,
 		AdminSettings = 98,
 		AutoWidgets = 99,
 	}

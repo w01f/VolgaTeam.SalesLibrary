@@ -224,6 +224,21 @@
     <Compile Include="PresentationLayer\Video\VideoContentEditor.Designer.cs">
       <DependentUpon>VideoContentEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="PresentationLayer\Wallbin\DataSource\DataSourceTreeViewControl.Common.TreeList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\DataSource\DataSourceTreeViewControl.Common.ContextMenu.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\DataSource\DataSourceTreeViewControl.External.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\DataSource\DataSourceTreeViewControl.Search.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\DataSource\DataSourceTreeViewControl.Regular.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Wallbin\Folders\Controls\ClassicFolderBox.Folder.ContextMenu.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -348,6 +363,12 @@
     </Compile>
     <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\BaseInternalLibraryContentOptions.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\FormEditLinkThumbnail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\FormEditLinkThumbnail.designer.cs">
+      <DependentUpon>FormEditLinkThumbnail.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkBundleOptions.cs">
       <SubType>Component</SubType>
@@ -914,6 +935,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\VimeoEditControl.resx">
       <DependentUpon>VimeoEditControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\FormEditLinkThumbnail.resx">
+      <DependentUpon>FormEditLinkThumbnail.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkBundleOptions.resx">
       <DependentUpon>LinkBundleOptions.cs</DependentUpon>

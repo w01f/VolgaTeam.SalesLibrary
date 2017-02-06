@@ -130,13 +130,18 @@ namespace SalesLibraries.FileManager.Business.Services
 		{
 			var allowToExit = false;
 			var converterPath = Path.Combine(MainController.Instance.Settings.FFMpegPackagePath, "ffmpeg.exe");
-			var tmpOutputFilePath = Path.Combine(destinationPath, Path.ChangeExtension(Path.GetFileName(Path.GetTempFileName()), ".png"));
-			var destinationOutputFilePath = Path.Combine(destinationPath, Path.ChangeExtension(Path.GetFileName(sourceFilePath), ".png"));
+			var destinationOutputFilePath = Path.Combine(destinationPath, String.Format("{0}%d.png",Path.GetFileNameWithoutExtension(sourceFilePath)));
 			if (!File.Exists(sourceFilePath) || !File.Exists(converterPath)) return;
 			var videoConverter = new Process
 			{
-				StartInfo = new ProcessStartInfo(converterPath, String.Format("-i \"{0}\" -ss {2} -vframes 1 -y \"{1}\"", sourceFilePath, tmpOutputFilePath,
-					(int)Math.Floor(ffMpegData.Duration / 100.0 * 25)))
+				StartInfo = new ProcessStartInfo(
+					converterPath, 
+					String.Format("-i \"{0}\" -vf fps=1/{2} \"{1}\"", 
+						sourceFilePath, 
+						destinationOutputFilePath,
+						(int)Math.Floor(ffMpegData.Duration / 4)
+						)
+					)
 				{
 					UseShellExecute = false,
 					RedirectStandardError = false,
@@ -148,14 +153,6 @@ namespace SalesLibraries.FileManager.Business.Services
 			};
 			videoConverter.Exited += (converterSender, converterE) =>
 			{
-				if (!File.Exists(destinationOutputFilePath) && File.Exists(tmpOutputFilePath))
-					File.Copy(tmpOutputFilePath, destinationOutputFilePath, true);
-				if (File.Exists(tmpOutputFilePath))
-					try
-					{
-						File.Delete(tmpOutputFilePath);
-					}
-					catch { }
 				allowToExit = true;
 			};
 			videoConverter.Start();

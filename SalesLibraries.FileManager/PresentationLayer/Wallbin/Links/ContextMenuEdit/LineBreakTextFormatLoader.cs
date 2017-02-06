@@ -46,7 +46,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.ContextMenu
 			if (_loading) return;
 
 			var font = (Font)TextFormatEditor.ItemFont.Tag;
-			var linkSettings = TargetLinks.Select(link => link.Settings).OfType<LibraryObjectLinkSettings>().ToList();
+			var linkSettings = TargetLinks.Select(link => link.Settings).OfType<LineBreakSettings>().ToList();
 			foreach (var linkSetting in linkSettings)
 				linkSetting.Font = font;
 

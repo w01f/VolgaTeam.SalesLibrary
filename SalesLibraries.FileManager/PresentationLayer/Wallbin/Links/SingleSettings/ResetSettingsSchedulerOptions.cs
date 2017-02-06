@@ -76,6 +76,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 							break;
 						case LinkSettingsGroupType.Widgets:
 						case LinkSettingsGroupType.Banners:
+						case LinkSettingsGroupType.Thumbnails:
 							checkEditLinkSettingsGroupWidgetsAndBanners.Checked = true;
 							break;
 					}
@@ -99,6 +100,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 				{
 					_data.ResetSettingsScheduler.SettingsGroups.Add(LinkSettingsGroupType.Widgets);
 					_data.ResetSettingsScheduler.SettingsGroups.Add(LinkSettingsGroupType.Banners);
+					_data.ResetSettingsScheduler.SettingsGroups.Add(LinkSettingsGroupType.Thumbnails);
 				}
 				if (checkEditLinkSettingsGroupExpirationDate.Checked)
 					_data.ResetSettingsScheduler.SettingsGroups.Add(LinkSettingsGroupType.Expiration);

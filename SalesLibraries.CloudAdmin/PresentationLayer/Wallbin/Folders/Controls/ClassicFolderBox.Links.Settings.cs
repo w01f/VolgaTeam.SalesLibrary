@@ -47,6 +47,8 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders.Controls
 				EditSingleLinkSettings(LinkSettingsType.Widget);
 			else if (selectedRow.Source.Banner.Enable)
 				EditSingleLinkSettings(LinkSettingsType.Banner);
+			else if (selectedRow.Source.Thumbnail.Enable)
+				EditSingleLinkSettings(LinkSettingsType.Thumbnail);
 			else if (selectedRow.Source.Widget.HasAutoWidget)
 				EditSingleLinkSettings(LinkSettingsType.Widget);
 		}

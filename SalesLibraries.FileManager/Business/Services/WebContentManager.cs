@@ -217,6 +217,9 @@ namespace SalesLibraries.FileManager.Business.Services
 			target.banner.libraryId = source.ParentLibrary.ExtId.ToString();
 			target.banner.ImportData(source.Banner);
 
+			target.thumbnail = new SoapThumbnail();
+			target.thumbnail.ImportData(source.Thumbnail);
+
 			target.dateAdd = source.AddDate.ToString("MM/dd/yyyy hh:mm:ss tt");
 			target.dateModify = source.LastModified.ToString("MM/dd/yyyy hh:mm:ss tt");
 
@@ -765,6 +768,24 @@ namespace SalesLibraries.FileManager.Business.Services
 			target.font = new Font();
 			target.font.ImportData(source.Font);
 			target.dateModify = DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss tt");
+		}
+
+		private static void ImportData(
+			this SoapThumbnail target,
+			SalesLibraries.Business.Entities.Wallbin.NonPersistent.ThumbnailSettings source)
+		{
+			var imageConverter = TypeDescriptor.GetConverter(typeof(Bitmap));
+			target.isEnabled = source.Enable;
+			target.image = Convert.ToBase64String((byte[])imageConverter.ConvertTo(source.Image, typeof(byte[])));
+			target.imageAlignment = source.ImageAlignement.ToString().ToLower();
+			target.imagePadding = source.ImagePadding;
+			target.showText = source.TextEnabled;
+			target.text = source.TextEnabled ? source.DisplayedText : null;
+			target.foreColor = source.ForeColor.ToHex();
+			target.font = new Font();
+			target.font.ImportData(source.Font);
+			target.textPosition = source.TextPosition.ToString().ToLower();
+			target.textAlignment = source.TextAlignement.ToString().ToLower();
 		}
 
 		private static void ImportData(

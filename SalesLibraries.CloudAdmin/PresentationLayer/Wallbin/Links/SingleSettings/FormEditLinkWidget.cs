@@ -227,6 +227,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 					link.Widget.ImageName = null;
 				}
 				link.Banner.Enable = !link.Widget.Enabled && link.Banner.Enable;
+				link.Thumbnail.Enable = !link.Widget.Enabled && link.Thumbnail.Enable;
 			}
 		}
 

@@ -760,7 +760,7 @@
 			this.contextMenuStripImage.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItemImageAddToFavorites});
 			this.contextMenuStripImage.Name = "contextMenuStripImage";
-			this.contextMenuStripImage.Size = new System.Drawing.Size(163, 48);
+			this.contextMenuStripImage.Size = new System.Drawing.Size(163, 26);
 			// 
 			// toolStripMenuItemImageAddToFavorites
 			// 

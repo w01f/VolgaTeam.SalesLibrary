@@ -6243,6 +6243,135 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:ContentControllerwsdl")]
+    public partial class SoapThumbnail {
+        
+        private bool isEnabledField;
+        
+        private string imageField;
+        
+        private int imagePaddingField;
+        
+        private string imageAlignmentField;
+        
+        private bool showTextField;
+        
+        private string textField;
+        
+        private Font fontField;
+        
+        private string foreColorField;
+        
+        private string textPositionField;
+        
+        private string textAlignmentField;
+        
+        /// <remarks/>
+        public bool isEnabled {
+            get {
+                return this.isEnabledField;
+            }
+            set {
+                this.isEnabledField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string image {
+            get {
+                return this.imageField;
+            }
+            set {
+                this.imageField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int imagePadding {
+            get {
+                return this.imagePaddingField;
+            }
+            set {
+                this.imagePaddingField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string imageAlignment {
+            get {
+                return this.imageAlignmentField;
+            }
+            set {
+                this.imageAlignmentField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool showText {
+            get {
+                return this.showTextField;
+            }
+            set {
+                this.showTextField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string text {
+            get {
+                return this.textField;
+            }
+            set {
+                this.textField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public Font font {
+            get {
+                return this.fontField;
+            }
+            set {
+                this.fontField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string foreColor {
+            get {
+                return this.foreColorField;
+            }
+            set {
+                this.foreColorField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string textPosition {
+            get {
+                return this.textPositionField;
+            }
+            set {
+                this.textPositionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string textAlignment {
+            get {
+                return this.textAlignmentField;
+            }
+            set {
+                this.textAlignmentField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:ContentControllerwsdl")]
     public partial class LineBreak {
         
         private string idField;
@@ -6565,6 +6694,8 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         
         private SoapBanner bannerField;
         
+        private SoapThumbnail thumbnailField;
+        
         private string previewIdField;
         
         private LinkSuperFilter[] superFiltersField;
@@ -6766,6 +6897,16 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
             }
             set {
                 this.bannerField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public SoapThumbnail thumbnail {
+            get {
+                return this.thumbnailField;
+            }
+            set {
+                this.thumbnailField = value;
             }
         }
         

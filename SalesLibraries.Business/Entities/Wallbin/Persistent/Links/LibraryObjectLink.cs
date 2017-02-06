@@ -59,6 +59,8 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 			{
 				if (Banner.Enable)
 					return base.DisplayNameWithoutNote;
+				if (Thumbnail.Enable)
+					return base.DisplayNameWithoutNote;
 				return String.Format("{0}{1}",
 						DisplayNameWithoutNote,
 						!String.IsNullOrEmpty(Settings.Note) ? String.Format(" - {0}", Settings.Note) : String.Empty);
@@ -103,7 +105,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 												null);
 
 		[NotMapped, JsonIgnore]
-		public bool IsCorrupted => !Banner.Enable && String.IsNullOrEmpty(DisplayName);
+		public bool IsCorrupted => !Banner.Enable && !Thumbnail.Enable && String.IsNullOrEmpty(DisplayName);
 
 		[NotMapped, JsonIgnore]
 		public virtual string AutoWidgetKey => String.Empty;

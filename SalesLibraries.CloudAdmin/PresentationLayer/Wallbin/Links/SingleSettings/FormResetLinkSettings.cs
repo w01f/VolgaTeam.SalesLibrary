@@ -104,6 +104,9 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 					case LinkSettingsGroupType.Widgets:
 						itemName = "Widget-Icon";
 						break;
+					case LinkSettingsGroupType.Thumbnails:
+						itemName = "Thumbnail";
+						break;
 					case LinkSettingsGroupType.TextFormatting:
 						itemName = "Text Formatting";
 						break;

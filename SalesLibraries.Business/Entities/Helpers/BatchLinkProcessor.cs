@@ -155,6 +155,17 @@ namespace SalesLibraries.Business.Entities.Helpers
 			}
 		}
 
+		public static void ApplyThumbnails(this IEnumerable<BaseLibraryLink> links, ThumbnailSettings thumbnailSettings = null)
+		{
+			foreach (var libraryLink in links)
+			{
+				libraryLink.Thumbnail = thumbnailSettings != null ?
+					thumbnailSettings.Clone<ThumbnailSettings>(libraryLink) :
+					SettingsContainer.CreateInstance<ThumbnailSettings>(libraryLink);
+				libraryLink.MarkAsModified();
+			}
+		}
+
 		public static void ResetBanners(this IEnumerable<BaseLibraryLink> links)
 		{
 			links.ApplyBanners();

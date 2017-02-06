@@ -32,13 +32,12 @@
 			this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.toolTip = new System.Windows.Forms.ToolTip(this.components);
 			this.imageListView = new Manina.Windows.Forms.ImageListView();
-			this.contextMenuStrip.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// contextMenuStrip
 			// 
 			this.contextMenuStrip.Name = "contextMenuStrip";
-			this.contextMenuStrip.Size = new System.Drawing.Size(174, 36);
+			this.contextMenuStrip.Size = new System.Drawing.Size(61, 4);
 			// 
 			// toolTip
 			// 
@@ -63,12 +62,11 @@
 			this.imageListView.TabIndex = 40;
 			this.imageListView.ThumbnailSize = new System.Drawing.Size(64, 64);
 			// 
-			// LinkImagesContainer
+			// BaseLinkImagesContainer
 			// 
 			this.Controls.Add(this.imageListView);
 			this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.Size = new System.Drawing.Size(667, 503);
-			this.contextMenuStrip.ResumeLayout(false);
 			this.ResumeLayout(false);
 
 		}

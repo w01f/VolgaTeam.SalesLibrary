@@ -15,9 +15,13 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 
 		public LibraryObjectLink SourceObject => Source as LibraryObjectLink;
 
-		public bool AllowEditLinkText => !Source.Banner.Enable || (Source.Banner.Enable && Source.Banner.TextMode == BannerTextMode.CustomText);
+		public bool AllowEditLinkText => !Source.Banner.Enable ||
+			(Source.Banner.Enable && Source.Banner.TextMode == BannerTextMode.CustomText);
 
-		public bool AllowEditImageSettings => Source.Banner.Enable || Source.Widget.Enabled || Source.Widget.HasAutoWidget;
+		public bool AllowEditImageSettings => Source.Banner.Enable ||
+			Source.Widget.Enabled ||
+			Source.Widget.HasAutoWidget ||
+			Source.Thumbnail.Enable;
 
 		public bool IsTop => Index == 0;
 

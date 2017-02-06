@@ -12,7 +12,7 @@ namespace SalesLibraries.Business.Schema.Wallbin.Initialization
 	abstract class WallbinInitializer<TLibraryContext> : IDatabaseInitializer<TLibraryContext>
 		where TLibraryContext : LibraryContext
 	{
-		private const int CurrentRevision = 6;
+		private const int CurrentRevision = 7;
 		protected TLibraryContext _context;
 
 		public void InitializeDatabase(TLibraryContext context)

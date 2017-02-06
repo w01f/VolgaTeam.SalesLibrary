@@ -22,6 +22,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 							return "Clipart-Logo";
 						case LinkSettingsGroupType.Widgets:
 							return "Widget-Icon";
+						case LinkSettingsGroupType.Thumbnails:
+							return "Thumbnail";
 						case LinkSettingsGroupType.TextFormatting:
 							return "Text Formatting";
 						case LinkSettingsGroupType.TextNote:

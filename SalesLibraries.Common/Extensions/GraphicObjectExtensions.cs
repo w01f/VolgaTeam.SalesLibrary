@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Windows.Forms;
 using Vintasoft.Imaging;
 using Vintasoft.Imaging.ImageProcessing.Color;
 
@@ -20,22 +21,27 @@ namespace SalesLibraries.Common.Extensions
 			return new Point(point.X + x, point.Y + y);
 		}
 
-		public static Image Resize(this Image image, Size size)
+		public static Image Resize(this Image image, Size size, Padding padding = new Padding())
 		{
 			var originalWidth = image.Width;
 			var originalHeight = image.Height;
 			var percentWidth = originalWidth != size.Width ? (float)size.Width / originalWidth : float.PositiveInfinity;
 			var percentHeight = originalHeight != size.Height ? (float)size.Height / originalHeight : float.PositiveInfinity;
-			var percent = percentHeight < percentWidth ? percentHeight : percentWidth;
+			var percent = Math.Min(percentHeight, percentWidth);
 			if (float.IsInfinity(percent))
 				percent = 1;
 			var newWidth = (int)(originalWidth * percent);
 			var newHeight = (int)(originalHeight * percent);
-			Image newImage = new Bitmap(newWidth, newHeight);
+			Image newImage = new Bitmap(newWidth + padding.Left + padding.Right, newHeight + padding.Top + padding.Bottom);
 			using (var graphicsHandle = Graphics.FromImage(newImage))
 			{
 				graphicsHandle.InterpolationMode = InterpolationMode.HighQualityBicubic;
-				graphicsHandle.DrawImage(image, 0, 0, newWidth, newHeight);
+				graphicsHandle.DrawImage(
+					image,
+					0 + padding.Left,
+					0 + padding.Top,
+					newWidth,
+					newHeight);
 			}
 			return newImage;
 		}

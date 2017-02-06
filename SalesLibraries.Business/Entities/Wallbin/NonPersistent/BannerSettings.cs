@@ -179,7 +179,6 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 			Text :
 			(Parent as BaseLibraryLink)?.Name;
 
-
 		protected override void AfterConstruction()
 		{
 			base.AfterConstruction();

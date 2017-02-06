@@ -28,13 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DataSourceTreeViewControl));
 			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
 			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
-			this.treeListAllFiles = new DevExpress.XtraTreeList.TreeList();
+			this.treeListRegularFiles = new DevExpress.XtraTreeList.TreeList();
 			this.treeListColumnName = new DevExpress.XtraTreeList.Columns.TreeListColumn();
 			this.treeListColumnPath = new DevExpress.XtraTreeList.Columns.TreeListColumn();
-			this.imageListFiles = new System.Windows.Forms.ImageList();
+			this.imageListFiles = new System.Windows.Forms.ImageList(this.components);
 			this.treeListSearchFiles = new DevExpress.XtraTreeList.TreeList();
 			this.treeListColumn1 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
 			this.treeListColumn2 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
@@ -46,24 +47,28 @@
 			this.dateEditStartDate = new DevExpress.XtraEditors.DateEdit();
 			this.buttonXSearch = new DevComponents.DotNetBar.ButtonX();
 			this.checkEditDateRange = new DevExpress.XtraEditors.CheckEdit();
-			this.styleController = new DevExpress.XtraEditors.StyleController();
+			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
 			this.textEditKeyWord = new DevExpress.XtraEditors.TextEdit();
 			this.pnRefresh = new System.Windows.Forms.Panel();
 			this.buttonXRefresh = new DevComponents.DotNetBar.ButtonX();
 			this.laDoubleClick = new System.Windows.Forms.Label();
-			this.contextMenuStripFile = new System.Windows.Forms.ContextMenuStrip();
+			this.contextMenuStripFile = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.tmiFileOpen = new System.Windows.Forms.ToolStripMenuItem();
 			this.tmiFileDelete = new System.Windows.Forms.ToolStripMenuItem();
 			this.xtraTabControlFiles = new DevExpress.XtraTab.XtraTabControl();
 			this.xtraTabPageRegular = new DevExpress.XtraTab.XtraTabPage();
+			this.xtraTabPageExternal = new DevExpress.XtraTab.XtraTabPage();
+			this.treeListExternalFiles = new DevExpress.XtraTreeList.TreeList();
+			this.treeListColumn3 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
+			this.treeListColumn4 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
 			this.xtraTabPageSearch = new DevExpress.XtraTab.XtraTabPage();
 			this.pnTreeViewProgress = new System.Windows.Forms.Panel();
 			this.laTreeViewProgressLabel = new System.Windows.Forms.Label();
 			this.circularProgressTreeView = new DevComponents.DotNetBar.Controls.CircularProgress();
 			this.pnMain = new System.Windows.Forms.Panel();
-			this.contextMenuStripFolder = new System.Windows.Forms.ContextMenuStrip();
+			this.contextMenuStripFolder = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.tmiFolderCreate = new System.Windows.Forms.ToolStripMenuItem();
-			((System.ComponentModel.ISupportInitialize)(this.treeListAllFiles)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.treeListRegularFiles)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.treeListSearchFiles)).BeginInit();
 			this.pnKeyWord.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.groupControlDateRange)).BeginInit();
@@ -80,54 +85,56 @@
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControlFiles)).BeginInit();
 			this.xtraTabControlFiles.SuspendLayout();
 			this.xtraTabPageRegular.SuspendLayout();
+			this.xtraTabPageExternal.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.treeListExternalFiles)).BeginInit();
 			this.xtraTabPageSearch.SuspendLayout();
 			this.pnTreeViewProgress.SuspendLayout();
 			this.pnMain.SuspendLayout();
 			this.contextMenuStripFolder.SuspendLayout();
 			this.SuspendLayout();
 			// 
-			// treeListAllFiles
+			// treeListRegularFiles
 			// 
-			this.treeListAllFiles.AllowDrop = true;
-			this.treeListAllFiles.Appearance.FocusedCell.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.treeListAllFiles.Appearance.FocusedCell.Options.UseFont = true;
-			this.treeListAllFiles.Appearance.FocusedRow.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.treeListAllFiles.Appearance.FocusedRow.Options.UseFont = true;
-			this.treeListAllFiles.Appearance.Row.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.treeListAllFiles.Appearance.Row.Options.UseFont = true;
-			this.treeListAllFiles.Appearance.SelectedRow.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.treeListAllFiles.Appearance.SelectedRow.Options.UseFont = true;
-			this.treeListAllFiles.Columns.AddRange(new DevExpress.XtraTreeList.Columns.TreeListColumn[] {
+			this.treeListRegularFiles.AllowDrop = true;
+			this.treeListRegularFiles.Appearance.FocusedCell.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.treeListRegularFiles.Appearance.FocusedCell.Options.UseFont = true;
+			this.treeListRegularFiles.Appearance.FocusedRow.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.treeListRegularFiles.Appearance.FocusedRow.Options.UseFont = true;
+			this.treeListRegularFiles.Appearance.Row.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.treeListRegularFiles.Appearance.Row.Options.UseFont = true;
+			this.treeListRegularFiles.Appearance.SelectedRow.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.treeListRegularFiles.Appearance.SelectedRow.Options.UseFont = true;
+			this.treeListRegularFiles.Columns.AddRange(new DevExpress.XtraTreeList.Columns.TreeListColumn[] {
             this.treeListColumnName,
             this.treeListColumnPath});
-			this.treeListAllFiles.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.treeListAllFiles.Location = new System.Drawing.Point(0, 0);
-			this.treeListAllFiles.Name = "treeListAllFiles";
-			this.treeListAllFiles.OptionsBehavior.AutoChangeParent = false;
-			this.treeListAllFiles.OptionsBehavior.Editable = false;
-			this.treeListAllFiles.OptionsBehavior.ResizeNodes = false;
-			this.treeListAllFiles.OptionsLayout.AddNewColumns = false;
-			this.treeListAllFiles.OptionsMenu.EnableColumnMenu = false;
-			this.treeListAllFiles.OptionsMenu.EnableFooterMenu = false;
-			this.treeListAllFiles.OptionsSelection.EnableAppearanceFocusedCell = false;
-			this.treeListAllFiles.OptionsSelection.MultiSelect = true;
-			this.treeListAllFiles.OptionsView.FocusRectStyle = DevExpress.XtraTreeList.DrawFocusRectStyle.None;
-			this.treeListAllFiles.OptionsView.ShowColumns = false;
-			this.treeListAllFiles.OptionsView.ShowHorzLines = false;
-			this.treeListAllFiles.OptionsView.ShowIndicator = false;
-			this.treeListAllFiles.OptionsView.ShowVertLines = false;
-			this.treeListAllFiles.ShowButtonMode = DevExpress.XtraTreeList.ShowButtonModeEnum.ShowForFocusedRow;
-			this.treeListAllFiles.Size = new System.Drawing.Size(297, 389);
-			this.treeListAllFiles.StateImageList = this.imageListFiles;
-			this.treeListAllFiles.TabIndex = 1;
-			this.treeListAllFiles.AfterExpand += new DevExpress.XtraTreeList.NodeEventHandler(this.treeListAllFiles_AfterExpand);
-			this.treeListAllFiles.AfterCollapse += new DevExpress.XtraTreeList.NodeEventHandler(this.treeListAllFiles_AfterCollapse);
-			this.treeListAllFiles.DragDrop += new System.Windows.Forms.DragEventHandler(this.treeListAllFiles_DragDrop);
-			this.treeListAllFiles.DragOver += new System.Windows.Forms.DragEventHandler(this.treeListAllFiles_DragOver);
-			this.treeListAllFiles.MouseClick += new System.Windows.Forms.MouseEventHandler(this.treeListAllFiles_MouseClick);
-			this.treeListAllFiles.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.treeListAllFiles_MouseDoubleClick);
-			this.treeListAllFiles.MouseDown += new System.Windows.Forms.MouseEventHandler(this.treeList_MouseDown);
-			this.treeListAllFiles.MouseMove += new System.Windows.Forms.MouseEventHandler(this.treeList_MouseMove);
+			this.treeListRegularFiles.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.treeListRegularFiles.Location = new System.Drawing.Point(0, 0);
+			this.treeListRegularFiles.Name = "treeListRegularFiles";
+			this.treeListRegularFiles.OptionsBehavior.AutoChangeParent = false;
+			this.treeListRegularFiles.OptionsBehavior.Editable = false;
+			this.treeListRegularFiles.OptionsBehavior.ResizeNodes = false;
+			this.treeListRegularFiles.OptionsLayout.AddNewColumns = false;
+			this.treeListRegularFiles.OptionsMenu.EnableColumnMenu = false;
+			this.treeListRegularFiles.OptionsMenu.EnableFooterMenu = false;
+			this.treeListRegularFiles.OptionsSelection.EnableAppearanceFocusedCell = false;
+			this.treeListRegularFiles.OptionsSelection.MultiSelect = true;
+			this.treeListRegularFiles.OptionsView.FocusRectStyle = DevExpress.XtraTreeList.DrawFocusRectStyle.None;
+			this.treeListRegularFiles.OptionsView.ShowColumns = false;
+			this.treeListRegularFiles.OptionsView.ShowHorzLines = false;
+			this.treeListRegularFiles.OptionsView.ShowIndicator = false;
+			this.treeListRegularFiles.OptionsView.ShowVertLines = false;
+			this.treeListRegularFiles.ShowButtonMode = DevExpress.XtraTreeList.ShowButtonModeEnum.ShowForFocusedRow;
+			this.treeListRegularFiles.Size = new System.Drawing.Size(293, 386);
+			this.treeListRegularFiles.StateImageList = this.imageListFiles;
+			this.treeListRegularFiles.TabIndex = 1;
+			this.treeListRegularFiles.AfterExpand += new DevExpress.XtraTreeList.NodeEventHandler(this.OnFilesTreeViewAfterExpand);
+			this.treeListRegularFiles.AfterCollapse += new DevExpress.XtraTreeList.NodeEventHandler(this.OnFilesTreeViewAfterCollapse);
+			this.treeListRegularFiles.DragDrop += new System.Windows.Forms.DragEventHandler(this.OnFilesTreeViewDragDrop);
+			this.treeListRegularFiles.DragOver += new System.Windows.Forms.DragEventHandler(this.OnFilesTreeViewDragOver);
+			this.treeListRegularFiles.MouseClick += new System.Windows.Forms.MouseEventHandler(this.OnFilesTreeViewMouseClick);
+			this.treeListRegularFiles.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.OnFilesTreeViewMouseDoubleClick);
+			this.treeListRegularFiles.MouseDown += new System.Windows.Forms.MouseEventHandler(this.OnFilesTreeViewMouseDown);
+			this.treeListRegularFiles.MouseMove += new System.Windows.Forms.MouseEventHandler(this.OnFilesTreeViewMouseMove);
 			// 
 			// treeListColumnName
 			// 
@@ -209,13 +216,13 @@
 			this.treeListSearchFiles.OptionsView.ShowIndicator = false;
 			this.treeListSearchFiles.OptionsView.ShowVertLines = false;
 			this.treeListSearchFiles.ShowButtonMode = DevExpress.XtraTreeList.ShowButtonModeEnum.ShowForFocusedRow;
-			this.treeListSearchFiles.Size = new System.Drawing.Size(297, 247);
+			this.treeListSearchFiles.Size = new System.Drawing.Size(293, 244);
 			this.treeListSearchFiles.StateImageList = this.imageListFiles;
 			this.treeListSearchFiles.TabIndex = 2;
-			this.treeListSearchFiles.MouseClick += new System.Windows.Forms.MouseEventHandler(this.treeListAllFiles_MouseClick);
-			this.treeListSearchFiles.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.treeListAllFiles_MouseDoubleClick);
-			this.treeListSearchFiles.MouseDown += new System.Windows.Forms.MouseEventHandler(this.treeList_MouseDown);
-			this.treeListSearchFiles.MouseMove += new System.Windows.Forms.MouseEventHandler(this.treeList_MouseMove);
+			this.treeListSearchFiles.MouseClick += new System.Windows.Forms.MouseEventHandler(this.OnFilesTreeViewMouseClick);
+			this.treeListSearchFiles.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.OnFilesTreeViewMouseDoubleClick);
+			this.treeListSearchFiles.MouseDown += new System.Windows.Forms.MouseEventHandler(this.OnFilesTreeViewMouseDown);
+			this.treeListSearchFiles.MouseMove += new System.Windows.Forms.MouseEventHandler(this.OnFilesTreeViewMouseMove);
 			// 
 			// treeListColumn1
 			// 
@@ -241,7 +248,7 @@
 			this.pnKeyWord.Dock = System.Windows.Forms.DockStyle.Top;
 			this.pnKeyWord.Location = new System.Drawing.Point(0, 0);
 			this.pnKeyWord.Name = "pnKeyWord";
-			this.pnKeyWord.Size = new System.Drawing.Size(297, 142);
+			this.pnKeyWord.Size = new System.Drawing.Size(293, 142);
 			this.pnKeyWord.TabIndex = 0;
 			// 
 			// groupControlDateRange
@@ -255,7 +262,7 @@
 			this.groupControlDateRange.Location = new System.Drawing.Point(6, 69);
 			this.groupControlDateRange.Name = "groupControlDateRange";
 			this.groupControlDateRange.ShowCaption = false;
-			this.groupControlDateRange.Size = new System.Drawing.Size(282, 64);
+			this.groupControlDateRange.Size = new System.Drawing.Size(278, 64);
 			this.groupControlDateRange.TabIndex = 0;
 			// 
 			// laStartDate
@@ -272,7 +279,7 @@
 			// 
 			this.dateEditEndDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.dateEditEndDate.EditValue = null;
-			this.dateEditEndDate.Location = new System.Drawing.Point(157, 35);
+			this.dateEditEndDate.Location = new System.Drawing.Point(153, 35);
 			this.dateEditEndDate.Name = "dateEditEndDate";
 			this.dateEditEndDate.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
 			this.dateEditEndDate.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -307,7 +314,7 @@
 			// 
 			this.dateEditStartDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.dateEditStartDate.EditValue = null;
-			this.dateEditStartDate.Location = new System.Drawing.Point(157, 7);
+			this.dateEditStartDate.Location = new System.Drawing.Point(153, 7);
 			this.dateEditStartDate.Name = "dateEditStartDate";
 			this.dateEditStartDate.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
 			this.dateEditStartDate.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -333,13 +340,13 @@
 			this.buttonXSearch.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
 			this.buttonXSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXSearch.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-			this.buttonXSearch.Location = new System.Drawing.Point(213, 37);
+			this.buttonXSearch.Location = new System.Drawing.Point(209, 37);
 			this.buttonXSearch.Name = "buttonXSearch";
 			this.buttonXSearch.Size = new System.Drawing.Size(75, 28);
 			this.buttonXSearch.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXSearch.TabIndex = 5;
 			this.buttonXSearch.Text = "Search";
-			this.buttonXSearch.Click += new System.EventHandler(this.btSearch_Click);
+			this.buttonXSearch.Click += new System.EventHandler(this.OnSearchClick);
 			// 
 			// checkEditDateRange
 			// 
@@ -350,7 +357,7 @@
 			this.checkEditDateRange.Size = new System.Drawing.Size(114, 20);
 			this.checkEditDateRange.StyleController = this.styleController;
 			this.checkEditDateRange.TabIndex = 4;
-			this.checkEditDateRange.CheckedChanged += new System.EventHandler(this.ckDateRange_CheckedChanged);
+			this.checkEditDateRange.CheckedChanged += new System.EventHandler(this.OnDateRangeCheckedChanged);
 			// 
 			// styleController
 			// 
@@ -364,10 +371,10 @@
 			this.textEditKeyWord.Location = new System.Drawing.Point(8, 7);
 			this.textEditKeyWord.Name = "textEditKeyWord";
 			this.textEditKeyWord.Properties.NullText = "Type keyword here...";
-			this.textEditKeyWord.Size = new System.Drawing.Size(280, 22);
+			this.textEditKeyWord.Size = new System.Drawing.Size(276, 22);
 			this.textEditKeyWord.StyleController = this.styleController;
 			this.textEditKeyWord.TabIndex = 3;
-			this.textEditKeyWord.KeyDown += new System.Windows.Forms.KeyEventHandler(this.edKeyWord_KeyDown);
+			this.textEditKeyWord.KeyDown += new System.Windows.Forms.KeyEventHandler(this.OnKeywordEditKeyDown);
 			// 
 			// pnRefresh
 			// 
@@ -390,7 +397,7 @@
 			this.buttonXRefresh.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXRefresh.TabIndex = 4;
 			this.buttonXRefresh.Text = "Refresh";
-			this.buttonXRefresh.Click += new System.EventHandler(this.Refresh_Click);
+			this.buttonXRefresh.Click += new System.EventHandler(this.OnRefreshRegularFilesClick);
 			// 
 			// laDoubleClick
 			// 
@@ -419,7 +426,7 @@
 			this.tmiFileOpen.Name = "tmiFileOpen";
 			this.tmiFileOpen.Size = new System.Drawing.Size(175, 22);
 			this.tmiFileOpen.Text = "Open";
-			this.tmiFileOpen.Click += new System.EventHandler(this.tmiFileOpen_Click);
+			this.tmiFileOpen.Click += new System.EventHandler(this.OnMenuItemFileOpenClick);
 			// 
 			// tmiFileDelete
 			// 
@@ -427,7 +434,7 @@
 			this.tmiFileDelete.Name = "tmiFileDelete";
 			this.tmiFileDelete.Size = new System.Drawing.Size(175, 22);
 			this.tmiFileDelete.Text = "Delete this source file";
-			this.tmiFileDelete.Click += new System.EventHandler(this.tmiFileDelete_Click);
+			this.tmiFileDelete.Click += new System.EventHandler(this.OnMenuItemFileDeleteClick);
 			// 
 			// xtraTabControlFiles
 			// 
@@ -451,22 +458,88 @@
 			this.xtraTabControlFiles.TabIndex = 7;
 			this.xtraTabControlFiles.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.xtraTabPageRegular,
+            this.xtraTabPageExternal,
             this.xtraTabPageSearch});
-			this.xtraTabControlFiles.SelectedPageChanged += new DevExpress.XtraTab.TabPageChangedEventHandler(this.xtraTabControlFiles_SelectedPageChanged);
+			this.xtraTabControlFiles.SelectedPageChanged += new DevExpress.XtraTab.TabPageChangedEventHandler(this.OnXtraTabControlFilesSelectedPageChanged);
 			// 
 			// xtraTabPageRegular
 			// 
-			this.xtraTabPageRegular.Controls.Add(this.treeListAllFiles);
+			this.xtraTabPageRegular.Controls.Add(this.treeListRegularFiles);
 			this.xtraTabPageRegular.Name = "xtraTabPageRegular";
-			this.xtraTabPageRegular.Size = new System.Drawing.Size(297, 389);
-			this.xtraTabPageRegular.Text = "Tree View";
+			this.xtraTabPageRegular.Size = new System.Drawing.Size(293, 386);
+			this.xtraTabPageRegular.Text = "Source Directory";
+			// 
+			// xtraTabPageExternal
+			// 
+			this.xtraTabPageExternal.Controls.Add(this.treeListExternalFiles);
+			this.xtraTabPageExternal.Name = "xtraTabPageExternal";
+			this.xtraTabPageExternal.Size = new System.Drawing.Size(293, 386);
+			this.xtraTabPageExternal.Text = "Computer";
+			// 
+			// treeListExternalFiles
+			// 
+			this.treeListExternalFiles.AllowDrop = true;
+			this.treeListExternalFiles.Appearance.FocusedCell.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.treeListExternalFiles.Appearance.FocusedCell.Options.UseFont = true;
+			this.treeListExternalFiles.Appearance.FocusedRow.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.treeListExternalFiles.Appearance.FocusedRow.Options.UseFont = true;
+			this.treeListExternalFiles.Appearance.Row.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.treeListExternalFiles.Appearance.Row.Options.UseFont = true;
+			this.treeListExternalFiles.Appearance.SelectedRow.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.treeListExternalFiles.Appearance.SelectedRow.Options.UseFont = true;
+			this.treeListExternalFiles.Columns.AddRange(new DevExpress.XtraTreeList.Columns.TreeListColumn[] {
+            this.treeListColumn3,
+            this.treeListColumn4});
+			this.treeListExternalFiles.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.treeListExternalFiles.Location = new System.Drawing.Point(0, 0);
+			this.treeListExternalFiles.Name = "treeListExternalFiles";
+			this.treeListExternalFiles.OptionsBehavior.AutoChangeParent = false;
+			this.treeListExternalFiles.OptionsBehavior.Editable = false;
+			this.treeListExternalFiles.OptionsBehavior.ResizeNodes = false;
+			this.treeListExternalFiles.OptionsLayout.AddNewColumns = false;
+			this.treeListExternalFiles.OptionsMenu.EnableColumnMenu = false;
+			this.treeListExternalFiles.OptionsMenu.EnableFooterMenu = false;
+			this.treeListExternalFiles.OptionsSelection.EnableAppearanceFocusedCell = false;
+			this.treeListExternalFiles.OptionsSelection.MultiSelect = true;
+			this.treeListExternalFiles.OptionsView.FocusRectStyle = DevExpress.XtraTreeList.DrawFocusRectStyle.None;
+			this.treeListExternalFiles.OptionsView.ShowColumns = false;
+			this.treeListExternalFiles.OptionsView.ShowHorzLines = false;
+			this.treeListExternalFiles.OptionsView.ShowIndicator = false;
+			this.treeListExternalFiles.OptionsView.ShowVertLines = false;
+			this.treeListExternalFiles.ShowButtonMode = DevExpress.XtraTreeList.ShowButtonModeEnum.ShowForFocusedRow;
+			this.treeListExternalFiles.Size = new System.Drawing.Size(293, 386);
+			this.treeListExternalFiles.StateImageList = this.imageListFiles;
+			this.treeListExternalFiles.TabIndex = 2;
+			this.treeListExternalFiles.AfterExpand += new DevExpress.XtraTreeList.NodeEventHandler(this.OnFilesTreeViewAfterExpand);
+			this.treeListExternalFiles.AfterCollapse += new DevExpress.XtraTreeList.NodeEventHandler(this.OnFilesTreeViewAfterCollapse);
+			this.treeListExternalFiles.DragDrop += new System.Windows.Forms.DragEventHandler(this.OnFilesTreeViewDragDrop);
+			this.treeListExternalFiles.DragOver += new System.Windows.Forms.DragEventHandler(this.OnFilesTreeViewDragOver);
+			this.treeListExternalFiles.MouseClick += new System.Windows.Forms.MouseEventHandler(this.OnFilesTreeViewMouseClick);
+			this.treeListExternalFiles.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.OnFilesTreeViewMouseDoubleClick);
+			this.treeListExternalFiles.MouseDown += new System.Windows.Forms.MouseEventHandler(this.OnFilesTreeViewMouseDown);
+			this.treeListExternalFiles.MouseMove += new System.Windows.Forms.MouseEventHandler(this.OnFilesTreeViewMouseMove);
+			// 
+			// treeListColumn3
+			// 
+			this.treeListColumn3.Caption = "treeListColumn1";
+			this.treeListColumn3.FieldName = "treeListColumn1";
+			this.treeListColumn3.MinWidth = 33;
+			this.treeListColumn3.Name = "treeListColumn3";
+			this.treeListColumn3.Visible = true;
+			this.treeListColumn3.VisibleIndex = 0;
+			// 
+			// treeListColumn4
+			// 
+			this.treeListColumn4.Caption = "treeListColumn1";
+			this.treeListColumn4.FieldName = "treeListColumn1";
+			this.treeListColumn4.Name = "treeListColumn4";
 			// 
 			// xtraTabPageSearch
 			// 
 			this.xtraTabPageSearch.Controls.Add(this.treeListSearchFiles);
 			this.xtraTabPageSearch.Controls.Add(this.pnKeyWord);
 			this.xtraTabPageSearch.Name = "xtraTabPageSearch";
-			this.xtraTabPageSearch.Size = new System.Drawing.Size(297, 389);
+			this.xtraTabPageSearch.Size = new System.Drawing.Size(293, 386);
 			this.xtraTabPageSearch.Text = "Search";
 			// 
 			// pnTreeViewProgress
@@ -479,6 +552,7 @@
 			this.pnTreeViewProgress.Padding = new System.Windows.Forms.Padding(5);
 			this.pnTreeViewProgress.Size = new System.Drawing.Size(299, 40);
 			this.pnTreeViewProgress.TabIndex = 13;
+			this.pnTreeViewProgress.Visible = false;
 			// 
 			// laTreeViewProgressLabel
 			// 
@@ -534,7 +608,7 @@
 			this.tmiFolderCreate.Name = "tmiFolderCreate";
 			this.tmiFolderCreate.Size = new System.Drawing.Size(186, 22);
 			this.tmiFolderCreate.Text = "Create a New Subfolder";
-			this.tmiFolderCreate.Click += new System.EventHandler(this.tmiFolderCreate_Click);
+			this.tmiFolderCreate.Click += new System.EventHandler(this.OnMenuItemFolderCreateClick);
 			// 
 			// DataSourceTreeViewControl
 			// 
@@ -544,7 +618,7 @@
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.Name = "DataSourceTreeViewControl";
 			this.Size = new System.Drawing.Size(299, 500);
-			((System.ComponentModel.ISupportInitialize)(this.treeListAllFiles)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.treeListRegularFiles)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.treeListSearchFiles)).EndInit();
 			this.pnKeyWord.ResumeLayout(false);
 			this.pnKeyWord.PerformLayout();
@@ -563,6 +637,8 @@
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControlFiles)).EndInit();
 			this.xtraTabControlFiles.ResumeLayout(false);
 			this.xtraTabPageRegular.ResumeLayout(false);
+			this.xtraTabPageExternal.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.treeListExternalFiles)).EndInit();
 			this.xtraTabPageSearch.ResumeLayout(false);
 			this.pnTreeViewProgress.ResumeLayout(false);
 			this.pnMain.ResumeLayout(false);
@@ -581,7 +657,7 @@
         private System.Windows.Forms.Label laEndDate;
         private System.Windows.Forms.Label laStartDate;
         private System.Windows.Forms.ImageList imageListFiles;
-        private DevExpress.XtraTreeList.TreeList treeListAllFiles;
+        private DevExpress.XtraTreeList.TreeList treeListRegularFiles;
         private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumnName;
         private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumnPath;
         private DevExpress.XtraTreeList.TreeList treeListSearchFiles;
@@ -605,5 +681,9 @@
 		private System.Windows.Forms.ToolStripMenuItem tmiFileDelete;
 		private System.Windows.Forms.ContextMenuStrip contextMenuStripFolder;
 		private System.Windows.Forms.ToolStripMenuItem tmiFolderCreate;
+		private DevExpress.XtraTab.XtraTabPage xtraTabPageExternal;
+		private DevExpress.XtraTreeList.TreeList treeListExternalFiles;
+		private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn3;
+		private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn4;
 	}
 }

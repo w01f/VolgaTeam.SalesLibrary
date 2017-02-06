@@ -128,6 +128,7 @@
           <xsd:element name="widgetType" type="xsd:int" />
           <xsd:element name="widget" type="xsd:string" />
           <xsd:element name="banner" type="tns:SoapBanner" />
+          <xsd:element name="thumbnail" type="tns:SoapThumbnail" />
           <xsd:element name="previewId" type="xsd:string" />
           <xsd:element name="superFilters" type="tns:LinkSuperFilterArray" />
           <xsd:element name="categories" type="tns:LinkCategoryArray" />
@@ -165,6 +166,20 @@
           <xsd:element name="foreColor" type="xsd:string" />
           <xsd:element name="note" type="xsd:string" />
           <xsd:element name="dateModify" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="SoapThumbnail">
+        <xsd:all>
+          <xsd:element name="isEnabled" type="xsd:boolean" />
+          <xsd:element name="image" type="xsd:string" />
+          <xsd:element name="imagePadding" type="xsd:int" />
+          <xsd:element name="imageAlignment" type="xsd:string" />
+          <xsd:element name="showText" type="xsd:boolean" />
+          <xsd:element name="text" type="xsd:string" />
+          <xsd:element name="font" type="tns:Font" />
+          <xsd:element name="foreColor" type="xsd:string" />
+          <xsd:element name="textPosition" type="xsd:string" />
+          <xsd:element name="textAlignment" type="xsd:string" />
         </xsd:all>
       </xsd:complexType>
       <xsd:complexType name="LinkSuperFilterArray">

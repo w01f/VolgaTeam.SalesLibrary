@@ -107,9 +107,12 @@
     <Compile Include="Entities\Interfaces\IPreviewGenerator.cs" />
     <Compile Include="Entities\Interfaces\ITableItem.cs" />
     <Compile Include="Entities\Interfaces\ICollectionItem.cs" />
+    <Compile Include="Entities\Interfaces\IThumbnailSettingsHolder.cs" />
     <Compile Include="Entities\Interfaces\IWidgetSetingsHolder.cs" />
     <Compile Include="Entities\Wallbin\Common\Constants\PreviewFormats.cs" />
     <Compile Include="Entities\Wallbin\Common\Constants\WebFormats.cs" />
+    <Compile Include="Entities\Wallbin\Common\Enums\ThumbnailTextMode.cs" />
+    <Compile Include="Entities\Wallbin\Common\Enums\ThumbnailTextPosition.cs" />
     <Compile Include="Entities\Wallbin\Common\Enums\BannerTextMode.cs" />
     <Compile Include="Entities\Interfaces\ILinkGroupSettingsContainer.cs" />
     <Compile Include="Entities\Wallbin\Common\Enums\InternalLinkType.cs" />
@@ -125,6 +128,7 @@
     <Compile Include="Entities\Wallbin\Common\Enums\LinkSettingsType.cs" />
     <Compile Include="Entities\Wallbin\Common\Enums\WidgetType.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\AutoWidget.cs" />
+    <Compile Include="Entities\Wallbin\NonPersistent\ThumbnailSettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\BannerSettings.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\HyperLinkInfo\InternalLinkTemplate.cs" />
     <Compile Include="Entities\Wallbin\NonPersistent\HyperLinkInfo\InternalShortcutLinkInfo.cs" />
@@ -270,6 +274,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Schema\Wallbin\Version6\sequense.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Schema\Wallbin\Version7\library_link.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Schema\Wallbin\Version7\sequense.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

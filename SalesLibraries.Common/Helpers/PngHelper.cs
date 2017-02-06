@@ -15,11 +15,11 @@ namespace SalesLibraries.Common.Helpers
 			_utilityPath = Path.Combine(GlobalSettings.ApplicationRootPath, "assets", "pngquant", "pngquant.exe");
 		}
 
-		public static void ConvertFiles(string targetPath)
+		public static void ConvertFiles(string targetFolderPath)
 		{
-			if (!Directory.Exists(targetPath)) return;
+			if (!Directory.Exists(targetFolderPath)) return;
 			if (!File.Exists(_utilityPath)) return;
-			foreach (var pngFilePath in GetPngFiles(targetPath))
+			foreach (var pngFilePath in GetPngFiles(targetFolderPath))
 			{
 				var filePath = pngFilePath;
 				if (Path.GetExtension(filePath) == ".PNG")

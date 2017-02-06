@@ -39,7 +39,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 
 		protected bool IsSourceLinksDragged => IsDataDragged &&
 			DataDraggedOver.GetDataPresent(DataFormats.Serializable, true) &&
-			DataDraggedOver.GetData(DataFormats.Serializable, true) is SourceLink[];
+			DataDraggedOver.GetData(DataFormats.Serializable, true) is SourceLink[] &&
+			((SourceLink[])DataDraggedOver.GetData(DataFormats.Serializable, true)).Any(link => !link.IsExternal);
 
 		protected bool IsLinkRowDragged => IsDataDragged && DataDraggedOver.GetDataPresent(typeof(LinkRow));
 
@@ -56,9 +57,13 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 			DataDraggedOver.GetDataPresent(DataFormats.Serializable, true) &&
 			EntitySettingsResolver.ExtractObjectTypeFromProxy(DataDraggedOver.GetData(DataFormats.Serializable, true).GetType()) == typeof(LinkBundle);
 
-		protected bool IsNativeFilesDragged => IsDataDragged &&
-			DataDraggedOver.GetDataPresent(DataFormats.FileDrop, true) &&
-			DataDraggedOver.GetData(DataFormats.FileDrop, true) is String[];
+		protected bool IsNativeFilesDragged =>
+			IsDataDragged &&
+			((DataDraggedOver.GetDataPresent(DataFormats.FileDrop, true) &&
+			DataDraggedOver.GetData(DataFormats.FileDrop, true) is String[]) ||
+			(DataDraggedOver.GetDataPresent(DataFormats.Serializable, true) &&
+			DataDraggedOver.GetData(DataFormats.Serializable, true) is SourceLink[] &&
+			((SourceLink[])DataDraggedOver.GetData(DataFormats.Serializable, true)).Any(link => link.IsExternal)));
 
 		private void ResetDragInfo()
 		{
@@ -116,47 +121,67 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 			FolderContainer.ProcessScrollOnDragLeave(sender, e);
 			if (!FormatState.AllowEdit) return;
 			SelectionManager.SelectFolder(this);
-			if (IsSourceLinksDragged)
+			if (IsSourceLinksDragged || IsNativeFilesDragged)
 			{
-				var sourceLinks = (DataDraggedOver?.GetData(DataFormats.Serializable, true) as SourceLink[] ?? new SourceLink[] { }).ToList();
-				var confirmDrop = true;
-				if (!sourceLinks.OfType<FolderLink>().Any() && sourceLinks.OfType<FileLink>().Count() == 1 && FileFormatHelper.IsUrlFile(sourceLinks.OfType<FileLink>().Single().Path))
+				if (IsSourceLinksDragged)
 				{
-					AddHyperLink(UrlLinkInfo.FromFile(sourceLinks.OfType<FileLink>().Single().Path));
-					confirmDrop = false;
-				}
-				else if (sourceLinks.OfType<FolderLink>().Any(folderLink => sourceLinks.OfType<FileLink>().Any(fileLink => fileLink.Path.Contains(folderLink.Path))))
-				{
-					using (var form = new FormCustomDialog(
-						String.Format("{0}{1}",
-							"<size=+4>Are you SURE you want to Drag the Folder AND all the Files into this Window?</size><br>",
-							"<br>It might look kind of strange to have the entire folder in this window…"
-							),
-						new[]
-						{
-							new CustomDialogButtonInfo {Title = "Yep!", DialogResult = DialogResult.OK, Width = 100},
-							new CustomDialogButtonInfo {Title = "CANCEL", DialogResult = DialogResult.Cancel, Width = 100}
-						}
-						))
+					var sourceLinks =
+						(DataDraggedOver?.GetData(DataFormats.Serializable, true) as SourceLink[] ?? new SourceLink[] { })
+						.Where(link => !link.IsExternal)
+						.ToList();
+					if (sourceLinks.Any())
 					{
-						form.Width = 500;
-						form.Height = 160;
-						confirmDrop = form.ShowDialog(MainController.Instance.MainForm) == DialogResult.OK;
+						var confirmDrop = true;
+						if (!sourceLinks.OfType<FolderLink>().Any() && sourceLinks.OfType<FileLink>().Count() == 1 &&
+						    FileFormatHelper.IsUrlFile(sourceLinks.OfType<FileLink>().Single().Path))
+						{
+							AddHyperLink(UrlLinkInfo.FromFile(sourceLinks.OfType<FileLink>().Single().Path));
+							confirmDrop = false;
+						}
+						else if (
+							sourceLinks.OfType<FolderLink>()
+								.Any(folderLink => sourceLinks.OfType<FileLink>().Any(fileLink => fileLink.Path.Contains(folderLink.Path))))
+						{
+							using (var form = new FormCustomDialog(
+								String.Format("{0}{1}",
+									"<size=+4>Are you SURE you want to Drag the Folder AND all the Files into this Window?</size><br>",
+									"<br>It might look kind of strange to have the entire folder in this window…"
+								),
+								new[]
+								{
+									new CustomDialogButtonInfo {Title = "Yep!", DialogResult = DialogResult.OK, Width = 100},
+									new CustomDialogButtonInfo {Title = "CANCEL", DialogResult = DialogResult.Cancel, Width = 100}
+								}
+							))
+							{
+								form.Width = 500;
+								form.Height = 160;
+								confirmDrop = form.ShowDialog(MainController.Instance.MainForm) == DialogResult.OK;
+							}
+						}
+						if (confirmDrop)
+							InsertDataSourceLinks(sourceLinks, _mouseDragOverHitInfo.RowIndex);
 					}
 				}
-				if (confirmDrop)
-					InsertDataSourceLinks(sourceLinks, _mouseDragOverHitInfo.RowIndex);
-			}
-			else if (IsNativeFilesDragged)
-			{
-				var droppedItemsPaths = (e.Data.GetData(DataFormats.FileDrop) as String[] ?? new string[] { }).ToList();
-				var sourceLinks = droppedItemsPaths.Select(itemPath => SourceLink.FromExternalPath(itemPath, DataSource.Page.Library)).ToList();
-				var confirmDrop = true;
-				foreach (var folderLink in sourceLinks.OfType<FolderLink>().ToList())
-					using (var form = new FormAddExternalFolder(folderLink))
-						confirmDrop = form.ShowDialog(MainController.Instance.MainForm) == DialogResult.OK;
-				if (confirmDrop)
-					InsertDataSourceLinks(sourceLinks, _mouseDragOverHitInfo.RowIndex);
+				if (IsNativeFilesDragged)
+				{
+					var sourceLinks = (DataDraggedOver?.GetData(DataFormats.Serializable, true) as SourceLink[] ?? new SourceLink[] { }).ToList();
+					if (!sourceLinks.Any())
+					{
+						var droppedItemsPaths = (e.Data.GetData(DataFormats.FileDrop) as String[] ?? new string[] { }).ToList();
+						sourceLinks =
+							droppedItemsPaths.Select(itemPath => SourceLink.FromExternalPath(itemPath, DataSource.Page.Library)).ToList();
+					}
+					if (sourceLinks.Any(link => link.IsExternal))
+					{
+						var confirmDrop = true;
+						foreach (var folderLink in sourceLinks.OfType<FolderLink>().ToList())
+							using (var form = new FormAddExternalFolder(folderLink))
+								confirmDrop = form.ShowDialog(MainController.Instance.MainForm) == DialogResult.OK;
+						if (confirmDrop)
+							InsertDataSourceLinks(sourceLinks, _mouseDragOverHitInfo.RowIndex);
+					}
+				}
 			}
 			else if (IsLinkBundleDragged)
 			{

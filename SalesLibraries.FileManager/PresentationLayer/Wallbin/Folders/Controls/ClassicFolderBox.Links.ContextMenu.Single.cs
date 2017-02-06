@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using DevExpress.XtraBars;
+using SalesLibraries.Business.Entities.Interfaces;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.HyperLinkInfo;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
@@ -154,6 +155,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 				barButtonItemSingleLinkPropertiesTags.Visibility = BarItemVisibility.Never;
 				barButtonItemSingleLinkPropertiesExpirationDate.Visibility = BarItemVisibility.Never;
 				barSubItemSingleLinkPropertiesAdminSettings.Visibility = BarItemVisibility.Never;
+				barButtonItemSingleLinkPropertiesThumbnail.Visibility = BarItemVisibility.Never;
 
 				barButtonItemSingleLinkPropertiesLinkSettings.Caption = "Line Break Settings";
 				barButtonItemSingleLinkPropertiesDelete.Caption = "Delete this Line Break";
@@ -167,6 +169,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 				barButtonItemSingleLinkPropertiesAdvancedSettings.Visibility = BarItemVisibility.Never;
 				barButtonItemSingleLinkPropertiesRefreshPreview.Visibility = BarItemVisibility.Never;
 				barSubItemSingleLinkPropertiesAdminSettings.Visibility = BarItemVisibility.Never;
+				barButtonItemSingleLinkPropertiesThumbnail.Visibility = BarItemVisibility.Never;
 				barButtonItemSingleLinkPropertiesTags.Visibility = !linkRow.Inaccessable &&
 											 MainController.Instance.Settings.EditorSettings.EnableTagsEdit
 					? BarItemVisibility.Always
@@ -206,7 +209,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 																							 linkRow.Source is ExcelLink)
 					? BarItemVisibility.Always
 					: BarItemVisibility.Never;
-
+				barButtonItemSingleLinkPropertiesThumbnail.Visibility = !linkRow.Inaccessable &&
+																		 linkRow.Source is IThumbnailSettingsHolder
+					? BarItemVisibility.Always
+					: BarItemVisibility.Never;
+				
 				barButtonItemSingleLinkPropertiesLinkSettings.Caption = "Link Settings";
 				barButtonItemSingleLinkPropertiesDelete.Caption = "Delete this Link";
 				barSubItemSingleLinkPropertiesImages.Caption = "Link ART";
@@ -311,6 +318,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 		private void barButtonItemLinkPropertiesBanner_ItemClick(object sender, ItemClickEventArgs e)
 		{
 			EditSingleLinkSettings(LinkSettingsType.Banner);
+		}
+
+		private void barButtonItemSingleLinkPropertiesThumbnail_ItemClick(object sender, ItemClickEventArgs e)
+		{
+			EditSingleLinkSettings(LinkSettingsType.Thumbnail);
 		}
 
 		private void barButtonItemLinkPropertiesResetSettings_ItemClick(object sender, ItemClickEventArgs e)

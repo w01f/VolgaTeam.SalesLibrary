@@ -30,10 +30,11 @@
 		protected override void InitializeComponent()
 		{
 			base.InitializeComponent();
-			this.contextMenuStripSecurity = new System.Windows.Forms.ContextMenuStrip();
+			this.components = new System.ComponentModel.Container();
+			this.contextMenuStripSecurity = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.toolStripMenuItemSecuritySelectAll = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItemSecurityResetAll = new System.Windows.Forms.ToolStripMenuItem();
-			this.popupMenuSingleLinkProperties = new DevExpress.XtraBars.PopupMenu();
+			this.popupMenuSingleLinkProperties = new DevExpress.XtraBars.PopupMenu(this.components);
 			this.barButtonItemSingleLinkPropertiesCopy = new DevExpress.XtraBars.BarButtonItem();
 			this.barButtonItemSingleLinkPropertiesCut = new DevExpress.XtraBars.BarButtonItem();
 			this.barButtonItemSingleLinkPropertiesPaste = new DevExpress.XtraBars.BarButtonItem();
@@ -55,6 +56,7 @@
 			this.barSubItemSingleLinkPropertiesImages = new DevExpress.XtraBars.BarSubItem();
 			this.barButtonItemSingleLinkPropertiesWidget = new DevExpress.XtraBars.BarButtonItem();
 			this.barButtonItemSingleLinkPropertiesBanner = new DevExpress.XtraBars.BarButtonItem();
+			this.barButtonItemSingleLinkPropertiesThumbnail = new DevExpress.XtraBars.BarButtonItem();
 			this.barSubItemSingleLinkPropertiesLineBreakNotes = new DevExpress.XtraBars.BarSubItem();
 			this.barSubItemSingleLinkPropertiesObjectNotes = new DevExpress.XtraBars.BarSubItem();
 			this.barSubItemSingleLinkPropertiesAdminSettings = new DevExpress.XtraBars.BarSubItem();
@@ -66,7 +68,7 @@
 			this.barButtonItemSingleLinkPropertiesSecurity = new DevExpress.XtraBars.BarButtonItem();
 			this.barSubItemSingleLinkPropertiesObjectTextFormat = new DevExpress.XtraBars.BarSubItem();
 			this.barSubItemSingleLinkPropertiesLineBreakTextFormat = new DevExpress.XtraBars.BarSubItem();
-			this.barManager = new DevExpress.XtraBars.BarManager();
+			this.barManager = new DevExpress.XtraBars.BarManager(this.components);
 			this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
 			this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
 			this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
@@ -117,8 +119,8 @@
 			this.barButtonItemFolderPropertiesMultiLinksExpirationDate = new DevExpress.XtraBars.BarButtonItem();
 			this.barButtonItemFolderPropertiesMultiLinksRefreshPreviewFiles = new DevExpress.XtraBars.BarButtonItem();
 			this.barButtonItembarSubItemFolderPropertiesDeleteAllLinks = new DevExpress.XtraBars.BarButtonItem();
-			this.popupMenuFolderProperties = new DevExpress.XtraBars.PopupMenu();
-			this.popupMenuMultiLinkProperties = new DevExpress.XtraBars.PopupMenu();
+			this.popupMenuFolderProperties = new DevExpress.XtraBars.PopupMenu(this.components);
+			this.popupMenuMultiLinkProperties = new DevExpress.XtraBars.PopupMenu(this.components);
 			this.pnHeader.SuspendLayout();
 			this.pnHeaderBorder.SuspendLayout();
 			this.pnBorders.SuspendLayout();
@@ -341,7 +343,8 @@
 			this.barSubItemSingleLinkPropertiesImages.Id = 34;
 			this.barSubItemSingleLinkPropertiesImages.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemSingleLinkPropertiesWidget),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemSingleLinkPropertiesBanner)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemSingleLinkPropertiesBanner),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemSingleLinkPropertiesThumbnail)});
 			this.barSubItemSingleLinkPropertiesImages.Name = "barSubItemSingleLinkPropertiesImages";
 			// 
 			// barButtonItemSingleLinkPropertiesWidget
@@ -359,6 +362,14 @@
 			this.barButtonItemSingleLinkPropertiesBanner.Id = 10;
 			this.barButtonItemSingleLinkPropertiesBanner.Name = "barButtonItemSingleLinkPropertiesBanner";
 			this.barButtonItemSingleLinkPropertiesBanner.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemLinkPropertiesBanner_ItemClick);
+			// 
+			// barButtonItemSingleLinkPropertiesThumbnail
+			// 
+			this.barButtonItemSingleLinkPropertiesThumbnail.Caption = "Thumbnail";
+			this.barButtonItemSingleLinkPropertiesThumbnail.CategoryGuid = new System.Guid("0399476a-ad4e-415d-bbb8-97162e27fa1a");
+			this.barButtonItemSingleLinkPropertiesThumbnail.Id = 106;
+			this.barButtonItemSingleLinkPropertiesThumbnail.Name = "barButtonItemSingleLinkPropertiesThumbnail";
+			this.barButtonItemSingleLinkPropertiesThumbnail.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemSingleLinkPropertiesThumbnail_ItemClick);
 			// 
 			// barSubItemSingleLinkPropertiesLineBreakNotes
 			// 
@@ -536,8 +547,9 @@
             this.barButtonItemFolderPropertiesMultiLinksRefreshPreviewFiles,
             this.barButtonItemFolderPropertiesMultiLinksWidget,
             this.barButtonItemFolderPropertiesMultiLinksBanner,
-            this.barButtonItembarSubItemFolderPropertiesDeleteAllLinks});
-			this.barManager.MaxItemId = 106;
+            this.barButtonItembarSubItemFolderPropertiesDeleteAllLinks,
+            this.barButtonItemSingleLinkPropertiesThumbnail});
+			this.barManager.MaxItemId = 107;
 			// 
 			// barDockControlTop
 			// 
@@ -945,6 +957,7 @@
 			// barButtonItembarSubItemFolderPropertiesDeleteAllLinks
 			// 
 			this.barButtonItembarSubItemFolderPropertiesDeleteAllLinks.Caption = "Delete all links in this window";
+			this.barButtonItembarSubItemFolderPropertiesDeleteAllLinks.CategoryGuid = new System.Guid("3a966d5d-4343-449c-8447-c9c627653e09");
 			this.barButtonItembarSubItemFolderPropertiesDeleteAllLinks.Id = 105;
 			this.barButtonItembarSubItemFolderPropertiesDeleteAllLinks.Name = "barButtonItembarSubItemFolderPropertiesDeleteAllLinks";
 			this.barButtonItembarSubItemFolderPropertiesDeleteAllLinks.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItembarSubItemFolderPropertiesDeleteAllLinks_ItemClick);
@@ -1116,5 +1129,6 @@
 		private DevExpress.XtraBars.BarButtonItem barButtonItemFolderPropertiesMultiLinksExpirationDate;
 		private DevExpress.XtraBars.BarButtonItem barButtonItemFolderPropertiesMultiLinksRefreshPreviewFiles;
 		private DevExpress.XtraBars.BarButtonItem barButtonItembarSubItemFolderPropertiesDeleteAllLinks;
+		private DevExpress.XtraBars.BarButtonItem barButtonItemSingleLinkPropertiesThumbnail;
 	}
 }

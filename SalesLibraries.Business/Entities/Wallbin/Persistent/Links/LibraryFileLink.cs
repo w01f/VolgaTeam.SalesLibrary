@@ -103,6 +103,8 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 			{
 				if (Banner.Enable && Banner.TextEnabled)
 					return Banner.ForeColor;
+				if (Thumbnail.Enable && Thumbnail.TextEnabled)
+					return Thumbnail.ForeColor;
 				if (Settings.ForeColor.HasValue)
 					return Settings.ForeColor.Value;
 				return ParentFolder.Settings.ForeWindowColor;
