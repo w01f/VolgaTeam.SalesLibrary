@@ -20,11 +20,6 @@
 		 */
 		public $pageName;
 		/**
-		 * @var string
-		 * @soap
-		 */
-		public $headerIcon;
-		/**
 		 * @var boolean
 		 * @soap
 		 */

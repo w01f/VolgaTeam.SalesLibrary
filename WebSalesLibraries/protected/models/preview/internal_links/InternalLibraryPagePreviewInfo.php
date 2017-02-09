@@ -39,7 +39,6 @@
 
 			$this->libraryName = $linkSettings->libraryName;
 			$this->pageName = $linkSettings->pageName;
-			$this->headerIcon = $linkSettings->headerIcon;
 			$this->showHeaderText = $linkSettings->showHeaderText;
 
 			$this->pageViewType = 'columns';
@@ -58,13 +57,16 @@
 				if ($queryResult->length > 0)
 					$this->style = WallbinStyle::fromXml($xpath, $queryResult->item(0));
 
+				$queryResult = $xpath->query('//Config/HeaderIcon');
+				$this->headerIcon = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : $this->headerIcon;
+
 				$queryResult = $xpath->query('//Config/ShowLeftPanel');
 				$showNavigationPanel = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : false;
 				$queryResult = $xpath->query('//Config/LeftPanelID');
 				$navigationPanelId = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
-				if ($showNavigationPanel && isset($navigationPanelId))
+				if ($showNavigationPanel)
 				{
-					$navigationPanelData = ShortcutsManager::getNavigationPanel($this->$navigationPanelId);
+					$navigationPanelData = ShortcutsManager::getNavigationPanel($navigationPanelId);
 					$viewPath = \Yii::getPathOfAlias('application.views.regular.shortcuts.navigationPanel') . '/itemsList.php';
 					$this->navigationPanel = \Yii::app()->controller->renderFile($viewPath, array('navigationPanel' => $navigationPanelData), true);
 				}

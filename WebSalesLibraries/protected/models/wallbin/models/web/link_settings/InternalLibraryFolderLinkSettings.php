@@ -25,11 +25,6 @@
 		 */
 		public $windowName;
 		/**
-		 * @var string
-		 * @soap
-		 */
-		public $headerIcon;
-		/**
 		 * @var boolean
 		 * @soap
 		 */
