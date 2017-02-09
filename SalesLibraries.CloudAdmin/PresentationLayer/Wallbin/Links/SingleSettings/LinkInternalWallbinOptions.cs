@@ -61,7 +61,6 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 			comboBoxEditLibraryName.EditValue = ((InternalWallbinLinkSettings)_data.Settings).LibraryName;
 			comboBoxEditPageName.EditValue = ((InternalWallbinLinkSettings)_data.Settings).PageName;
 
-			textEditHeaderIcon.EditValue = ((InternalWallbinLinkSettings)_data.Settings).HeaderIcon;
 			checkEditShowHeaderText.Checked = ((InternalWallbinLinkSettings)_data.Settings).ShowHeaderText;
 			checkEditOpenOnSamePage.Checked = !((InternalWallbinLinkSettings)_data.Settings).OpenOnSamePage;
 			comboBoxEditStyle.EditValue = ((InternalWallbinLinkSettings)_data.Settings).StyleSettings;
@@ -73,7 +72,6 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 			((InternalWallbinLinkSettings)_data.Settings).LibraryName = comboBoxEditLibraryName.EditValue as String;
 			((InternalWallbinLinkSettings)_data.Settings).PageName = comboBoxEditPageName.EditValue as String;
 
-			((InternalWallbinLinkSettings)_data.Settings).HeaderIcon = textEditHeaderIcon.EditValue as String;
 			((InternalWallbinLinkSettings)_data.Settings).ShowHeaderText = checkEditShowHeaderText.Checked;
 			((InternalWallbinLinkSettings)_data.Settings).OpenOnSamePage = !checkEditOpenOnSamePage.Checked;
 			((InternalWallbinLinkSettings)_data.Settings).StyleSettings = comboBoxEditStyle.EditValue as InternalLinkTemplate;

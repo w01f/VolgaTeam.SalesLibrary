@@ -224,6 +224,20 @@
     <Compile Include="PresentationLayer\Video\VideoContentEditor.Designer.cs">
       <DependentUpon>VideoContentEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="PresentationLayer\Wallbin\CompactWallbin\FormCompactWallbin.Links.ContextMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\CompactWallbin\FormCompactWallbin.DragAndDrop.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\CompactWallbin\FormCompactWallbin.Links.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\CompactWallbin\FormCompactWallbin.TreeList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\CompactWallbin\WallbinItem.cs" />
+    <Compile Include="PresentationLayer\Wallbin\CompactWallbin\WallbinItemType.cs" />
     <Compile Include="PresentationLayer\Wallbin\DataSource\DataSourceTreeViewControl.Common.TreeList.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -789,6 +803,13 @@
     <Compile Include="PresentationLayer\Wallbin\Settings\FormWallbinSettings.designer.cs">
       <DependentUpon>FormWallbinSettings.cs</DependentUpon>
     </Compile>
+    <Compile Include="PresentationLayer\Wallbin\CompactWallbin\BackToRegularWallbinEventArgs.cs" />
+    <Compile Include="PresentationLayer\Wallbin\CompactWallbin\FormCompactWallbin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\CompactWallbin\FormCompactWallbin.Designer.cs">
+      <DependentUpon>FormCompactWallbin.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationLayer\Wallbin\Views\IPageView.cs" />
     <Compile Include="PresentationLayer\Wallbin\Views\PageViewFactory.cs" />
     <Compile Include="PresentationLayer\Wallbin\Views\SelectionManager.cs" />
@@ -1164,6 +1185,9 @@
     <EmbeddedResource Include="PresentationLayer\Wallbin\Libraries\LibraryPageTagInfo.resx">
       <DependentUpon>LibraryPageTagInfo.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\CompactWallbin\FormCompactWallbin.resx">
+      <DependentUpon>FormCompactWallbin.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Views\PageContent.resx">
       <DependentUpon>PageContent.cs</DependentUpon>
     </EmbeddedResource>
@@ -1227,6 +1251,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\CompactWallbinPageOpen.png" />
+    <None Include="Resources\CompactWallbinPageClosed.png" />
+    <None Include="Resources\CompactWallbinLineBreak.png" />
+    <None Include="Resources\CompactWallbinFolderOpen.png" />
+    <None Include="Resources\CompactWallbinFolderClosed.png" />
+    <None Include="Resources\QatCompactWallbin.png" />
     <None Include="Resources\QatHelp.png" />
     <None Include="Resources\QatFloater.png" />
     <None Include="Resources\LinkAddExternalFolder.png" />

@@ -30,7 +30,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 			}
 			sourceLink.Path = path;
 			sourceLink.RootId = dataSource.DataSourceId;
-			sourceLink.IsExternal = true;
+			sourceLink.IsExternal = !path.Contains(dataSource.Path);
 			return sourceLink;
 		}
 	}

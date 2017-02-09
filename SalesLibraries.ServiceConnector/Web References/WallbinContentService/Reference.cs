@@ -3304,8 +3304,6 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         
         private string windowNameField;
         
-        private string headerIconField;
-        
         private bool showHeaderTextField;
         
         private bool openOnSamePageField;
@@ -3381,16 +3379,6 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
             }
             set {
                 this.windowNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string headerIcon {
-            get {
-                return this.headerIconField;
-            }
-            set {
-                this.headerIconField = value;
             }
         }
         
@@ -3599,8 +3587,6 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         
         private string pageNameField;
         
-        private string headerIconField;
-        
         private bool showHeaderTextField;
         
         private bool openOnSamePageField;
@@ -3666,16 +3652,6 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
             }
             set {
                 this.pageNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string headerIcon {
-            get {
-                return this.headerIconField;
-            }
-            set {
-                this.headerIconField = value;
             }
         }
         
@@ -3884,8 +3860,6 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         
         private string pageNameField;
         
-        private string headerIconField;
-        
         private bool showHeaderTextField;
         
         private bool openOnSamePageField;
@@ -3951,16 +3925,6 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
             }
             set {
                 this.pageNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string headerIcon {
-            get {
-                return this.headerIconField;
-            }
-            set {
-                this.headerIconField = value;
             }
         }
         

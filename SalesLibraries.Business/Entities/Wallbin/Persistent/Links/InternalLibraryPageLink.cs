@@ -56,7 +56,6 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 			link.Folder = parentFolder;
 			((InternalLibraryPageLinkSettings)link.Settings).LibraryName = linkInfo.LibraryName;
 			((InternalLibraryPageLinkSettings)link.Settings).PageName = linkInfo.PageName;
-			((InternalLibraryPageLinkSettings)link.Settings).HeaderIcon = linkInfo.HeaderIcon;
 			((InternalLibraryPageLinkSettings)link.Settings).ShowHeaderText = linkInfo.ShowHeaderText;
 			((InternalLibraryPageLinkSettings)link.Settings).OpenOnSamePage = linkInfo.OpenOnSamePage;
 			((InternalLibraryPageLinkSettings)link.Settings).StyleSettings = linkInfo.StyleSettings;

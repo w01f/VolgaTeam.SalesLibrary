@@ -89,7 +89,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Calendars
 
 		public void InvokeInContainer(Delegate method)
 		{
-			MainController.Instance.MainForm.Invoke(method);
+			MainController.Instance.MainForm.ActiveForm.Invoke(method);
 		}
 
 		public void RunProcessInBackground(string title, Action<CancellationToken, FormProgressCommon> process)
@@ -115,7 +115,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Calendars
 		{
 			MainController.Instance.ProcessManager.Run("Loading Overnights Data...", (cancellationToken, formProgress) =>
 			{
-				MainController.Instance.MainForm.Invoke(new MethodInvoker(() =>
+				MainController.Instance.MainForm.ActiveForm.Invoke(new MethodInvoker(() =>
 				{
 					ContainerControl.Controls.Clear();
 					CalendarToggles.Clear();
@@ -125,7 +125,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Calendars
 				if (!_currentSettings.Enabled) return;
 				var dataContainer = CalendarContainer.Create(_currentSettings);
 				if (!dataContainer.Parts.Any()) return;
-				MainController.Instance.MainForm.Invoke(new MethodInvoker(() =>
+				MainController.Instance.MainForm.ActiveForm.Invoke(new MethodInvoker(() =>
 				{
 					foreach (var calendarPart in dataContainer.Parts)
 					{

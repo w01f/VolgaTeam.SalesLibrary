@@ -85,7 +85,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 			var newPage = e.Page as IPageView;
 			if (newPage == null) return;
 			MainController.Instance.ProcessManager.Run("Loading Page...",
-				(cancelationToken, formProgess) => MainController.Instance.MainForm.Invoke(new MethodInvoker(() =>
+				(cancelationToken, formProgess) => MainController.Instance.MainForm.ActiveForm.Invoke(new MethodInvoker(() =>
 				{
 					if (e.PrevPage != null)
 						WinAPIHelper.SendMessage(e.PrevPage.Handle, 11, IntPtr.Zero, IntPtr.Zero);
@@ -155,7 +155,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 			var selectedPage = _menuHitInfo.Page as TabPage;
 			if (selectedPage == null) return;
 			MainController.Instance.ProcessManager.Run("Updating Page...",
-				(cancelationToken, formProgess) => MainController.Instance.MainForm.Invoke(new MethodInvoker(selectedPage.Content.UpdateContent)));
+				(cancelationToken, formProgess) => MainController.Instance.MainForm.ActiveForm.Invoke(new MethodInvoker(selectedPage.Content.UpdateContent)));
 		}
 
 		private void OnLinkPropertiesMenuCloseUp(object sender, EventArgs e)
@@ -241,7 +241,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 				SaveData(true);
 				pnEmpty.BringToFront();
 				MainController.Instance.ProcessManager.RunInQueue("Loading Library...",
-					() => MainController.Instance.MainForm.Invoke(new MethodInvoker(() =>
+					() => MainController.Instance.MainForm.ActiveForm.Invoke(new MethodInvoker(() =>
 					{
 						LoadView(true);
 						MainController.Instance.WallbinViews.SetActiveWallbin(this);

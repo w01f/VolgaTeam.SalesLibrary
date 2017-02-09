@@ -57,7 +57,7 @@ namespace SalesLibraries.CloudAdmin.Controllers
 			ImageResources = new ImageResourcesManager();
 			WallbinViews = new ViewManager();
 			MainForm = new FormMain();
-			ProcessManager = new BackgroundProcessManager(MainForm, "Site Admin");
+			ProcessManager = new BackgroundProcessManager(() => MainForm.ActiveForm);
 			PopupMessages = new PopupMessageHelper("Site Admin");
 		}
 
@@ -205,8 +205,8 @@ namespace SalesLibraries.CloudAdmin.Controllers
 					MainForm.InitForm();
 					LoadControllers();
 					ProcessManager.RunInQueue("Loading Wallbin...",
-						() => MainForm.Invoke(new MethodInvoker(() => WallbinViews.Load())),
-						() => MainForm.Invoke(new MethodInvoker(() => ShowTab(TabPageEnum.Home))));
+						() => MainForm.ActiveForm.Invoke(new MethodInvoker(() => WallbinViews.Load())),
+						() => MainForm.ActiveForm.Invoke(new MethodInvoker(() => ShowTab(TabPageEnum.Home))));
 				};
 				MainForm.Closing += (o, e) =>
 				{
@@ -239,8 +239,8 @@ namespace SalesLibraries.CloudAdmin.Controllers
 		{
 			MainForm.pnContainer.Controls.Clear();
 			ProcessManager.RunInQueue("Loading Wallbin...",
-					() => MainForm.Invoke(new MethodInvoker(() => WallbinViews.Load())),
-					() => MainForm.Invoke(new MethodInvoker(() => ShowTab())));
+					() => MainForm.ActiveForm.Invoke(new MethodInvoker(() => WallbinViews.Load())),
+					() => MainForm.ActiveForm.Invoke(new MethodInvoker(() => ShowTab())));
 		}
 
 		public void ShowTab(TabPageEnum tabPage = TabPageEnum.None)
@@ -305,7 +305,7 @@ namespace SalesLibraries.CloudAdmin.Controllers
 			//TabVideo = new VideoPage();
 			//_tabPages.Add(TabPageEnum.VideoManager, TabVideo);
 
-			ProcessManager.Run("Loading Controls...", (cancellationToken, formProgress) => MainForm.Invoke(new MethodInvoker(() =>
+			ProcessManager.Run("Loading Controls...", (cancellationToken, formProgress) => MainForm.ActiveForm.Invoke(new MethodInvoker(() =>
 			{
 				TabWallbin.InitController();
 				//TabVideo.InitController();

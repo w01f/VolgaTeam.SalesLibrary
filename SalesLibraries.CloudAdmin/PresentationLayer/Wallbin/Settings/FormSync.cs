@@ -18,7 +18,6 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Settings
 		{
 			ckMinimizeOnSync.Checked = Library.SyncSettings.MinimizeOnSync;
 			ckCloseAfterSync.Checked = Library.SyncSettings.CloseAfterSync;
-			ckShowSyncStatus.Checked = Library.SyncSettings.ShowProgress;
 		}
 
 		private void FormSync_FormClosed(object sender, FormClosedEventArgs e)
@@ -26,7 +25,6 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Settings
 			if (DialogResult != DialogResult.OK) return;
 			Library.SyncSettings.MinimizeOnSync = ckMinimizeOnSync.Checked;
 			Library.SyncSettings.CloseAfterSync = ckCloseAfterSync.Checked;
-			Library.SyncSettings.ShowProgress = ckShowSyncStatus.Checked;
 		}
 	}
 }

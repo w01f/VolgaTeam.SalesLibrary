@@ -52,7 +52,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Video
 			_videoInfoList.Clear();
 			MainController.Instance.ProcessManager.RunInQueue("Loading Video...",
 				LoadVideoInfoInternal,
-					() => MainController.Instance.MainForm.Invoke(new MethodInvoker(() =>
+					() => MainController.Instance.MainForm.ActiveForm.Invoke(new MethodInvoker(() =>
 					{
 						gridControlVideo.DataSource = _videoInfoList;
 						gridViewVideo.RefreshData();
@@ -132,7 +132,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Video
 						videoInfo.UpdateContent(cancelationToken);
 					}
 				},
-				cancellationToken => MainController.Instance.MainForm.Invoke(new MethodInvoker(() =>
+				cancellationToken => MainController.Instance.MainForm.ActiveForm.Invoke(new MethodInvoker(() =>
 				{
 					MainController.Instance.MainForm.WindowState = savedState;
 					LoadVideoInfo();
@@ -158,7 +158,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Video
 		private void Delete(IEnumerable<VideoInfo> videoInfos)
 		{
 			ProcessChanges();
-			MainController.Instance.ProcessManager.Run("Deleting Video...", (cancelationToken, formProgess) => MainController.Instance.MainForm.Invoke(new MethodInvoker(() =>
+			MainController.Instance.ProcessManager.Run("Deleting Video...", (cancelationToken, formProgess) => MainController.Instance.MainForm.ActiveForm.Invoke(new MethodInvoker(() =>
 			{
 				foreach (var videoInfo in videoInfos)
 				{

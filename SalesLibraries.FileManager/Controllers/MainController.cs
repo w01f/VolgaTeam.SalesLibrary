@@ -57,7 +57,7 @@ namespace SalesLibraries.FileManager.Controllers
 			ImageResources = new ImageResourcesManager();
 			WallbinViews = new ViewManager();
 			MainForm = new FormMain();
-			ProcessManager = new BackgroundProcessManager(MainForm, "Site Admin");
+			ProcessManager = new BackgroundProcessManager(() => MainForm.ActiveForm);
 			PopupMessages = new PopupMessageHelper("Site Admin");
 		}
 
@@ -205,8 +205,8 @@ namespace SalesLibraries.FileManager.Controllers
 					MainForm.InitForm();
 					LoadControllers();
 					ProcessManager.RunInQueue("Loading Wallbin...",
-						() => MainForm.Invoke(new MethodInvoker(() => WallbinViews.Load())),
-						() => MainForm.Invoke(new MethodInvoker(() => ShowTab(TabPageEnum.Home))));
+						() => MainForm.ActiveForm.Invoke(new MethodInvoker(() => WallbinViews.Load())),
+						() => MainForm.ActiveForm.Invoke(new MethodInvoker(() => ShowTab(TabPageEnum.Home))));
 				};
 				Application.Run(MainForm);
 			}
@@ -280,16 +280,16 @@ namespace SalesLibraries.FileManager.Controllers
 			DatabaseConnectionHelper.Connect(Settings.BackupPath);
 			ProcessManager.Run("Loading Files...", (cancellationToken, formProgress) => Wallbin.LoadLibrary(Settings.BackupPath));
 			ProcessManager.RunInQueue("Loading Wallbin...",
-				() => MainForm.Invoke(new MethodInvoker(() => WallbinViews.Load())),
-				() => MainForm.Invoke(new MethodInvoker(() => ShowTab())));
+				() => MainForm.ActiveForm.Invoke(new MethodInvoker(() => WallbinViews.Load())),
+				() => MainForm.ActiveForm.Invoke(new MethodInvoker(() => ShowTab())));
 		}
 
 		public void ReloadWallbinViews()
 		{
 			MainForm.pnContainer.Controls.Clear();
 			ProcessManager.RunInQueue("Loading Wallbin...",
-					() => MainForm.Invoke(new MethodInvoker(() => WallbinViews.Load())),
-					() => MainForm.Invoke(new MethodInvoker(() => ShowTab())));
+					() => MainForm.ActiveForm.Invoke(new MethodInvoker(() => WallbinViews.Load())),
+					() => MainForm.ActiveForm.Invoke(new MethodInvoker(() => ShowTab())));
 		}
 
 		public void ShowTab(TabPageEnum tabPage = TabPageEnum.None)
@@ -322,7 +322,7 @@ namespace SalesLibraries.FileManager.Controllers
 		public void ActivateApplication()
 		{
 			var mainFormHandle = IntPtr.Zero;
-			foreach (var process in Process.GetProcesses().Where(x => x.ProcessName.Contains("FileManager")))
+			foreach (var process in Process.GetProcesses().Where(x => x.ProcessName.Contains("Site Admin")))
 			{
 				if (process.MainWindowHandle.ToInt32() == 0) continue;
 				mainFormHandle = process.MainWindowHandle;
@@ -357,7 +357,7 @@ namespace SalesLibraries.FileManager.Controllers
 			TabCalendar = new CalendarPage();
 			_tabPages.Add(TabPageEnum.Calendar, TabCalendar);
 
-			ProcessManager.Run("Loading Controls...", (cancellationToken, formProgress) => MainForm.Invoke(new MethodInvoker(() =>
+			ProcessManager.Run("Loading Controls...", (cancellationToken, formProgress) => MainForm.ActiveForm.Invoke(new MethodInvoker(() =>
 			{
 				TabWallbin.InitController();
 				TabVideo.InitController();

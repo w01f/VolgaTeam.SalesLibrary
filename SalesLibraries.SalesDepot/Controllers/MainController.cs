@@ -28,7 +28,7 @@ namespace SalesLibraries.SalesDepot.Controllers
 		public TabPageEnum ActiveTab { get; private set; }
 
 		public SettingsManager Settings { get; }
-		public ListManager Lists { get; private set; }
+		public ListManager Lists { get; }
 		public EmailBinManager EmailBin { get; }
 
 		public LocalWallbinManager Wallbin { get; }
@@ -65,7 +65,7 @@ namespace SalesLibraries.SalesDepot.Controllers
 			WallbinViews = new ViewManager();
 
 			MainForm = new FormMain();
-			ProcessManager = new BackgroundProcessManager(MainForm, Settings.SalesDepotName);
+			ProcessManager = new BackgroundProcessManager(() => MainForm);
 			PopupMessages = new PopupMessageHelper(Settings.SalesDepotName);
 		}
 

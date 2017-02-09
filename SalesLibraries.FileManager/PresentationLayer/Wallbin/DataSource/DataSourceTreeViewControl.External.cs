@@ -13,8 +13,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.DataSource
 			treeListExternalFiles.Enabled = false;
 			treeListExternalFiles.SuspendLayout();
 			treeListExternalFiles.Nodes.Clear();
-			var expandNode = treeListExternalFiles.AppendNode(new object[] { "Expand All" }, null);
-			expandNode.StateImageIndex = 0;
 
 			var defaultDataSource = _dataSources.First();
 			await Task.Run(() => Invoke(new MethodInvoker(() =>
@@ -26,6 +24,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.DataSource
 					FillNode(rootNode, expandAll);
 				}
 			})));
+
 			treeListExternalFiles.ResumeLayout();
 			treeListExternalFiles.Enabled = true;
 		}

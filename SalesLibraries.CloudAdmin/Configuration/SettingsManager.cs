@@ -18,6 +18,7 @@ namespace SalesLibraries.CloudAdmin.Configuration
 		public string SelectedPage { get; set; }
 		public int FontSize { get; set; }
 		public bool MultitabView { get; set; }
+		public bool ShowCompactWallbin { get; set; }
 		public string DefaultBannerSettingsEncoded { get; set; }
 		#endregion
 
@@ -95,6 +96,10 @@ namespace SalesLibraries.CloudAdmin.Configuration
 			if (node != null)
 				if (bool.TryParse(node.InnerText, out tempBool))
 					MultitabView = tempBool;
+			node = document.SelectSingleNode(@"/LocalSettings/ShowCompactWallbin");
+			if (node != null)
+				if (bool.TryParse(node.InnerText, out tempBool))
+					ShowCompactWallbin = tempBool;
 			node = document.SelectSingleNode(@"/LocalSettings/DefaultLinkBannerSettingsEncoded");
 			if (node != null)
 				DefaultBannerSettingsEncoded = Encoding.UTF8.GetString(Convert.FromBase64String(node.InnerText));
@@ -112,6 +117,7 @@ namespace SalesLibraries.CloudAdmin.Configuration
 				xml.AppendLine(@"<SelectedPage>" + SelectedPage.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</SelectedPage>");
 			xml.AppendLine(@"<FontSize>" + FontSize + @"</FontSize>");
 			xml.AppendLine(@"<MultitabView>" + MultitabView + @"</MultitabView>");
+			xml.AppendLine(@"<ShowCompactWallbin>" + ShowCompactWallbin + @"</ShowCompactWallbin>");
 			if (!String.IsNullOrEmpty(DefaultBannerSettingsEncoded))
 				xml.AppendLine(@"<DefaultLinkBannerSettingsEncoded>" + Convert.ToBase64String(Encoding.UTF8.GetBytes(DefaultBannerSettingsEncoded)) + @"</DefaultLinkBannerSettingsEncoded>");
 			#endregion

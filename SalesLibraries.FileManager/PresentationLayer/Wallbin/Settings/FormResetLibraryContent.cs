@@ -60,7 +60,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			MainController.Instance.WallbinViews.ActiveWallbin.DataStorage.Library.Pages.SelectMany(page => page.AllLinks).ResetWidgets();
 			MainController.Instance.WallbinViews.ActiveWallbin.IsDataChanged = true;
 			MainController.Instance.ProcessChanges();
-			MainController.Instance.ProcessManager.RunInQueue("Loading Library...", () => MainController.Instance.MainForm.Invoke(new MethodInvoker(MainController.Instance.TabWallbin.UpdateWallbin)));
+			MainController.Instance.ProcessManager.RunInQueue("Loading Library...", () => MainController.Instance.MainForm.ActiveForm.Invoke(new MethodInvoker(MainController.Instance.TabWallbin.UpdateWallbin)));
 		}
 
 		private void buttonXResetBanners_Click(object sender, EventArgs e)
@@ -70,7 +70,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			MainController.Instance.WallbinViews.ActiveWallbin.DataStorage.Library.Pages.SelectMany(page => page.AllLinks).ResetBanners();
 			MainController.Instance.WallbinViews.ActiveWallbin.IsDataChanged = true;
 			MainController.Instance.ProcessChanges();
-			MainController.Instance.ProcessManager.RunInQueue("Loading Library...", () => MainController.Instance.MainForm.Invoke(new MethodInvoker(MainController.Instance.TabWallbin.UpdateWallbin)));
+			MainController.Instance.ProcessManager.RunInQueue("Loading Library...", () => MainController.Instance.MainForm.ActiveForm.Invoke(new MethodInvoker(MainController.Instance.TabWallbin.UpdateWallbin)));
 		}
 
 		private void buttonXResetNotes_Click(object sender, EventArgs e)
@@ -80,7 +80,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			MainController.Instance.WallbinViews.ActiveWallbin.DataStorage.Library.Pages.SelectMany(page => page.AllLinks).ResetNote();
 			MainController.Instance.WallbinViews.ActiveWallbin.IsDataChanged = true;
 			MainController.Instance.ProcessChanges();
-			MainController.Instance.ProcessManager.RunInQueue("Loading Library...", () => MainController.Instance.MainForm.Invoke(new MethodInvoker(MainController.Instance.TabWallbin.UpdateWallbin)));
+			MainController.Instance.ProcessManager.RunInQueue("Loading Library...", () => MainController.Instance.MainForm.ActiveForm.Invoke(new MethodInvoker(MainController.Instance.TabWallbin.UpdateWallbin)));
 		}
 
 		private void buttonXResetHoverNotes_Click(object sender, EventArgs e)
@@ -90,7 +90,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			MainController.Instance.WallbinViews.ActiveWallbin.DataStorage.Library.Pages.SelectMany(page => page.AllLinks).ResetHoverNote();
 			MainController.Instance.WallbinViews.ActiveWallbin.IsDataChanged = true;
 			MainController.Instance.ProcessChanges();
-			MainController.Instance.ProcessManager.RunInQueue("Loading Library...", () => MainController.Instance.MainForm.Invoke(new MethodInvoker(MainController.Instance.TabWallbin.UpdateWallbin)));
+			MainController.Instance.ProcessManager.RunInQueue("Loading Library...", () => MainController.Instance.MainForm.ActiveForm.Invoke(new MethodInvoker(MainController.Instance.TabWallbin.UpdateWallbin)));
 		}
 
 		private void buttonXResetExpirationDates_Click(object sender, EventArgs e)
@@ -100,7 +100,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			MainController.Instance.WallbinViews.ActiveWallbin.DataStorage.Library.Pages.SelectMany(page => page.AllLinks).ResetExpirationSettings();
 			MainController.Instance.WallbinViews.ActiveWallbin.IsDataChanged = true;
 			MainController.Instance.ProcessChanges();
-			MainController.Instance.ProcessManager.RunInQueue("Loading Library...", () => MainController.Instance.MainForm.Invoke(new MethodInvoker(MainController.Instance.TabWallbin.UpdateWallbin)));
+			MainController.Instance.ProcessManager.RunInQueue("Loading Library...", () => MainController.Instance.MainForm.ActiveForm.Invoke(new MethodInvoker(MainController.Instance.TabWallbin.UpdateWallbin)));
 		}
 
 		private void buttonXResetSecurity_Click(object sender, EventArgs e)
@@ -110,7 +110,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			MainController.Instance.WallbinViews.ActiveWallbin.DataStorage.Library.Pages.SelectMany(page => page.AllLinks).ResetSecurity();
 			MainController.Instance.WallbinViews.ActiveWallbin.IsDataChanged = true;
 			MainController.Instance.ProcessChanges();
-			MainController.Instance.ProcessManager.RunInQueue("Loading Library...", () => MainController.Instance.MainForm.Invoke(new MethodInvoker(MainController.Instance.TabWallbin.UpdateWallbin)));
+			MainController.Instance.ProcessManager.RunInQueue("Loading Library...", () => MainController.Instance.MainForm.ActiveForm.Invoke(new MethodInvoker(MainController.Instance.TabWallbin.UpdateWallbin)));
 		}
 
 		private void buttonXResetLinks_Click(object sender, EventArgs e)
@@ -120,7 +120,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			MainController.Instance.WallbinViews.ActiveWallbin.DataStorage.Library.Pages.SelectMany(page => page.AllLinks).ResetToDefault();
 			MainController.Instance.WallbinViews.ActiveWallbin.IsDataChanged = true;
 			MainController.Instance.ProcessChanges();
-			MainController.Instance.ProcessManager.RunInQueue("Loading Library...", () => MainController.Instance.MainForm.Invoke(new MethodInvoker(MainController.Instance.TabWallbin.UpdateWallbin)));
+			MainController.Instance.ProcessManager.RunInQueue("Loading Library...", () => MainController.Instance.MainForm.ActiveForm.Invoke(new MethodInvoker(MainController.Instance.TabWallbin.UpdateWallbin)));
 		}
 	}
 }

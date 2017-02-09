@@ -202,7 +202,7 @@ namespace SalesLibraries.CloudAdmin.Controllers
 				NeedToUpdate = true;
 				return;
 			}
-			MainController.Instance.ProcessManager.RunInQueue("Loading Library...", () => MainController.Instance.MainForm.Invoke(new MethodInvoker(() =>
+			MainController.Instance.ProcessManager.RunInQueue("Loading Library...", () => MainController.Instance.MainForm.ActiveForm.Invoke(new MethodInvoker(() =>
 			{
 				_isLoading = true;
 				pnEmpty.BringToFront();
@@ -324,7 +324,7 @@ namespace SalesLibraries.CloudAdmin.Controllers
 				copyMethod => MainController.Instance.ProcessManager.Run("Preparing Data...", (cancelationToken, formProgress) => copyMethod()),
 				(context, original, current) => MainController.Instance.ProcessManager.Run("Saving Changes...", (cancelationToken, formProgress) => original.Save(context, current)));
 			if (!resut) return;
-			MainController.Instance.ProcessManager.RunInQueue("Loading Library...", () => MainController.Instance.MainForm.Invoke(new MethodInvoker(UpdateWallbin)));
+			MainController.Instance.ProcessManager.RunInQueue("Loading Library...", () => MainController.Instance.MainForm.ActiveForm.Invoke(new MethodInvoker(UpdateWallbin)));
 		}
 
 		private void buttonItemPreferencesColumns_Click(object sender, EventArgs e)
@@ -348,7 +348,7 @@ namespace SalesLibraries.CloudAdmin.Controllers
 				copyMethod => MainController.Instance.ProcessManager.Run("Preparing Data...", (cancelationToken, formProgress) => copyMethod()),
 				(context, original, current) => MainController.Instance.ProcessManager.Run("Saving Changes...", (cancelationToken, formProgress) => original.Save(context, current)));
 			if (!resut) return;
-			MainController.Instance.ProcessManager.RunInQueue("Loading Library...", () => MainController.Instance.MainForm.Invoke(new MethodInvoker(UpdateWallbin)));
+			MainController.Instance.ProcessManager.RunInQueue("Loading Library...", () => MainController.Instance.MainForm.ActiveForm.Invoke(new MethodInvoker(UpdateWallbin)));
 		}
 
 		private void buttonItemPreferencesAutoWidgets_Click(object sender, EventArgs e)
@@ -372,7 +372,7 @@ namespace SalesLibraries.CloudAdmin.Controllers
 				copyMethod => MainController.Instance.ProcessManager.Run("Preparing Data...", (cancelationToken, formProgress) => copyMethod()),
 				(context, original, current) => MainController.Instance.ProcessManager.Run("Saving Changes...", (cancelationToken, formProgress) => original.Save(context, current)));
 			if (!resut) return;
-			MainController.Instance.ProcessManager.RunInQueue("Loading Library...", () => MainController.Instance.MainForm.Invoke(new MethodInvoker(UpdateWallbin)));
+			MainController.Instance.ProcessManager.RunInQueue("Loading Library...", () => MainController.Instance.MainForm.ActiveForm.Invoke(new MethodInvoker(UpdateWallbin)));
 		}
 
 		private void buttonItemSettingsSync_Click(object sender, EventArgs e)

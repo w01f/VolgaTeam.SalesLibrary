@@ -27,7 +27,6 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.HyperlinkEdi
 
 				laLibraryName.Font = new Font(laLibraryName.Font.FontFamily, laLibraryName.Font.Size - 2, laLibraryName.Font.Style);
 				laPageName.Font = new Font(laPageName.Font.FontFamily, laPageName.Font.Size - 2, laPageName.Font.Style);
-				laHeaderIcon.Font = new Font(laHeaderIcon.Font.FontFamily, laHeaderIcon.Font.Size - 2, laHeaderIcon.Font.Style);
 			}
 		}
 
@@ -66,9 +65,8 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.HyperlinkEdi
 			{
 				LibraryName = comboBoxEditLibraryName.EditValue as String,
 				PageName = comboBoxEditPageName.EditValue as String,
-				HeaderIcon = textEditHeaderIcon.EditValue as String,
 				ShowHeaderText = checkEditShowHeaderText.Checked,
-				OpenOnSamePage = checkEditOpenOnSamePage.Checked,
+				OpenOnSamePage = !checkEditOpenOnSamePage.Checked,
 				StyleSettings = comboBoxEditStyle.EditValue as InternalLinkTemplate
 			};
 		}
@@ -79,7 +77,6 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.HyperlinkEdi
 			{
 				comboBoxEditLibraryName.EditValue = ((InternalLibraryPageLinkInfo) templateInfo).LibraryName;
 				comboBoxEditPageName.EditValue = ((InternalLibraryPageLinkInfo) templateInfo).PageName;
-				textEditHeaderIcon.EditValue = ((InternalLibraryPageLinkInfo) templateInfo).HeaderIcon;
 				checkEditShowHeaderText.Checked = ((InternalLibraryPageLinkInfo) templateInfo).ShowHeaderText;
 				checkEditOpenOnSamePage.Checked = ((InternalLibraryPageLinkInfo) templateInfo).OpenOnSamePage;
 			}
@@ -87,7 +84,6 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.HyperlinkEdi
 			{
 				comboBoxEditLibraryName.EditValue = ((InternalLibraryFolderLinkInfo) templateInfo).LibraryName;
 				comboBoxEditPageName.EditValue = ((InternalLibraryFolderLinkInfo) templateInfo).PageName;
-				textEditHeaderIcon.EditValue = ((InternalLibraryFolderLinkInfo) templateInfo).HeaderIcon;
 				checkEditShowHeaderText.Checked = ((InternalLibraryFolderLinkInfo) templateInfo).ShowHeaderText;
 				checkEditOpenOnSamePage.Checked = ((InternalLibraryFolderLinkInfo) templateInfo).OpenOnSamePage;
 			}

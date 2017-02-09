@@ -62,6 +62,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 			grFiles.CellMouseClick += ProcessSingleLinkContextMenu;
 			grFiles.CellMouseClick += ProcessMultiLinksContextMenu;
 			grFiles.CellMouseDoubleClick += ProcessLinkTextEdit;
+			grFiles.CellMouseDoubleClick += ProcessLinkOpen;
 			grFiles.CellMouseDown += OnGridCellMouseDown;
 			grFiles.CellMouseLeave += OnGridCellMouseLeave;
 			grFiles.CellMouseMove += OnGridCellMouseMove;

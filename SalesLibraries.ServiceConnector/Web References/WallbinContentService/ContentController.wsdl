@@ -454,7 +454,6 @@
           <xsd:element name="internalLinkType" type="xsd:int" />
           <xsd:element name="libraryName" type="xsd:string" />
           <xsd:element name="pageName" type="xsd:string" />
-          <xsd:element name="headerIcon" type="xsd:string" />
           <xsd:element name="showHeaderText" type="xsd:boolean" />
           <xsd:element name="openOnSamePage" type="xsd:boolean" />
           <xsd:element name="styleSettingsEncoded" type="xsd:string" />
@@ -481,7 +480,6 @@
           <xsd:element name="internalLinkType" type="xsd:int" />
           <xsd:element name="libraryName" type="xsd:string" />
           <xsd:element name="pageName" type="xsd:string" />
-          <xsd:element name="headerIcon" type="xsd:string" />
           <xsd:element name="showHeaderText" type="xsd:boolean" />
           <xsd:element name="openOnSamePage" type="xsd:boolean" />
           <xsd:element name="styleSettingsEncoded" type="xsd:string" />
@@ -509,7 +507,6 @@
           <xsd:element name="libraryName" type="xsd:string" />
           <xsd:element name="pageName" type="xsd:string" />
           <xsd:element name="windowName" type="xsd:string" />
-          <xsd:element name="headerIcon" type="xsd:string" />
           <xsd:element name="showHeaderText" type="xsd:boolean" />
           <xsd:element name="openOnSamePage" type="xsd:boolean" />
           <xsd:element name="styleSettingsEncoded" type="xsd:string" />

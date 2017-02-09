@@ -59,7 +59,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 			var selectedPage = editor.EditValue as IPageView;
 			if (selectedPage == null) return;
 			MainController.Instance.ProcessManager.RunInQueue("Loading Page...",
-				() => MainController.Instance.MainForm.Invoke(new MethodInvoker(() =>
+				() => MainController.Instance.MainForm.ActiveForm.Invoke(new MethodInvoker(() =>
 				{
 					pnEmpty.BringToFront();
 					Application.DoEvents();

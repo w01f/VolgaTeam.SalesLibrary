@@ -27,17 +27,5 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 				_closeAfterSync = value;
 			}
 		}
-
-		private bool _showProgress;
-		public bool ShowProgress
-		{
-			get { return _showProgress; }
-			set
-			{
-				if (_showProgress != value)
-					OnSettingsChanged();
-				_showProgress = value;
-			}
-		}
 	}
 }

@@ -343,6 +343,56 @@ namespace SalesLibraries.FileManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap CompactWallbinFolderClosed {
+            get {
+                object obj = ResourceManager.GetObject("CompactWallbinFolderClosed", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CompactWallbinFolderOpen {
+            get {
+                object obj = ResourceManager.GetObject("CompactWallbinFolderOpen", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CompactWallbinLineBreak {
+            get {
+                object obj = ResourceManager.GetObject("CompactWallbinLineBreak", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CompactWallbinPageClosed {
+            get {
+                object obj = ResourceManager.GetObject("CompactWallbinPageClosed", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CompactWallbinPageOpen {
+            get {
+                object obj = ResourceManager.GetObject("CompactWallbinPageOpen", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap DataSourceList7z {
             get {
                 object obj = ResourceManager.GetObject("DataSourceList7z", resourceCulture);
@@ -996,6 +1046,16 @@ namespace SalesLibraries.FileManager.Properties {
         internal static System.Drawing.Bitmap ProgressStartRegularWebConnection {
             get {
                 object obj = ResourceManager.GetObject("ProgressStartRegularWebConnection", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap QatCompactWallbin {
+            get {
+                object obj = ResourceManager.GetObject("QatCompactWallbin", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

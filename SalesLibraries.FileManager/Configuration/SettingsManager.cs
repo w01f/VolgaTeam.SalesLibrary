@@ -29,6 +29,7 @@ namespace SalesLibraries.FileManager.Configuration
 		public int CalendarFontSize { get; set; }
 		public bool TreeViewVisible { get; set; }
 		public bool MultitabView { get; set; }
+		public bool ShowCompactWallbin { get; set; }
 		public string DefaultBannerSettingsEncoded { get; set; }
 		#endregion
 
@@ -140,6 +141,10 @@ namespace SalesLibraries.FileManager.Configuration
 			if (node != null)
 				if (bool.TryParse(node.InnerText, out tempBool))
 					MultitabView = tempBool;
+			node = document.SelectSingleNode(@"/LocalSettings/ShowCompactWallbin");
+			if (node != null)
+				if (bool.TryParse(node.InnerText, out tempBool))
+					ShowCompactWallbin = tempBool;
 			node = document.SelectSingleNode(@"/LocalSettings/DefaultBannerSettingsEncoded");
 			if (node != null)
 				DefaultBannerSettingsEncoded = Encoding.UTF8.GetString(Convert.FromBase64String(node.InnerText));
@@ -179,6 +184,7 @@ namespace SalesLibraries.FileManager.Configuration
 			xml.AppendLine(@"<CalendarFontSize>" + CalendarFontSize + @"</CalendarFontSize>");
 			xml.AppendLine(@"<TreeViewVisible>" + TreeViewVisible + @"</TreeViewVisible>");
 			xml.AppendLine(@"<MultitabView>" + MultitabView + @"</MultitabView>");
+			xml.AppendLine(@"<ShowCompactWallbin>" + ShowCompactWallbin + @"</ShowCompactWallbin>");
 			if (!String.IsNullOrEmpty(DefaultBannerSettingsEncoded))
 				xml.AppendLine(@"<DefaultBannerSettingsEncoded>" + Convert.ToBase64String(Encoding.UTF8.GetBytes(DefaultBannerSettingsEncoded)) + @"</DefaultBannerSettingsEncoded>");
 			#endregion

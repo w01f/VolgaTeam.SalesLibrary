@@ -20,79 +20,29 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 {
 	static class SyncManager
 	{
-		public static void SyncRegular()
+		public static void SyncRegular(CancellationToken cancellationToken)
 		{
-			MainController.Instance.ProcessChanges();
-			if (MainController.Instance.WallbinViews.ActiveWallbin == null) return;
 			var targetContext = MainController.Instance.WallbinViews.ActiveWallbin.DataStorage;
 			var targetLibrary = targetContext.Library;
 
-			if ((MainController.Instance.Settings.NetworkPaths.Any() && MainController.Instance.Settings.NetworkPaths.Any(p => !Directory.Exists(p))) ||
-				MainController.Instance.Settings.WebPaths.Any() && MainController.Instance.Settings.WebPaths.Any(p => !Directory.Exists(p)))
-				MainController.Instance.PopupMessages.ShowWarning("Some of your Upload Directories are Not connected.Your changes will still be saved in your Source Directory.");
+			ProcessResetLinkSettingsShedulers(targetLibrary, cancellationToken);
 
-			MainController.Instance.MainForm.ribbonControl.Enabled = false;
+			UpdateFolderContent(targetLibrary, cancellationToken);
 
-			var savedState = MainController.Instance.MainForm.WindowState;
-			var mainAction = new Action<CancellationToken, FormProgressSync>((cancellationToken, formProgress) =>
-			{
-				MainController.Instance.MainForm.Invoke(new MethodInvoker(() =>
-				{
-					if (targetLibrary.SyncSettings.MinimizeOnSync)
-						MainController.Instance.MainForm.WindowState = FormWindowState.Minimized;
-				}));
+			ApplyOriginalFileStateChangesOnAssociatedLink(targetLibrary, cancellationToken);
 
-				ProcessResetLinkSettingsShedulers(targetLibrary, cancellationToken);
+			UpdatePowerPointInfo(targetLibrary, cancellationToken);
 
-				UpdateFolderContent(targetLibrary, cancellationToken);
+			UpdatePreviewContent(targetLibrary, cancellationToken);
 
-				ApplyOriginalFileStateChangesOnAssociatedLink(targetLibrary, cancellationToken);
+			DeleteDeadLinks(targetLibrary, cancellationToken);
 
-				UpdatePowerPointInfo(targetLibrary, cancellationToken);
-
-				UpdatePreviewContent(targetLibrary, cancellationToken);
-
-				DeleteDeadLinks(targetLibrary, cancellationToken);
-
-				targetLibrary.SyncDate = DateTime.Now;
-				targetContext.SaveChanges();
-				if (cancellationToken.IsCancellationRequested) return;
-				WebContentManager.GenerateWebContent(targetLibrary);
-				if (cancellationToken.IsCancellationRequested) return;
-				SyncLibrary(targetLibrary, cancellationToken);
-			});
-
-			if (targetLibrary.SyncSettings.ShowProgress)
-			{
-				var formProgressSync = new FormProgressSync();
-				MainController.Instance.ProcessManager.RunWithProgress(formProgressSync, true,
-					mainAction,
-					cancellationToken => MainController.Instance.MainForm.Invoke(new MethodInvoker(() =>
-					{
-						if (!cancellationToken.IsCancellationRequested && targetLibrary.SyncSettings.CloseAfterSync)
-						{
-							Application.Exit();
-							return;
-						}
-						MainController.Instance.MainForm.WindowState = savedState;
-						MainController.Instance.MainForm.ribbonControl.Enabled = true;
-						MainController.Instance.TabWallbin.UpdateWallbin();
-						MainController.Instance.ActivateApplication();
-					})));
-			}
-			else
-			{
-				mainAction(new CancellationTokenSource().Token, null);
-				if (targetLibrary.SyncSettings.CloseAfterSync)
-				{
-					Application.Exit();
-					return;
-				}
-				MainController.Instance.MainForm.WindowState = savedState;
-				MainController.Instance.MainForm.ribbonControl.Enabled = true;
-				MainController.Instance.TabWallbin.UpdateWallbin();
-				MainController.Instance.ActivateApplication();
-			}
+			targetLibrary.SyncDate = DateTime.Now;
+			targetContext.SaveChanges();
+			if (cancellationToken.IsCancellationRequested) return;
+			WebContentManager.GenerateWebContent(targetLibrary);
+			if (cancellationToken.IsCancellationRequested) return;
+			SyncLibrary(targetLibrary, cancellationToken);
 		}
 
 		public static void SyncSilent()

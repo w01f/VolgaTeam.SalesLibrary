@@ -20,7 +20,7 @@ namespace SalesLibraries.CommonGUI.Floater
 			var isSenderMaximazed = sender.WindowState == FormWindowState.Maximized;
 			var x = _floaterPositionX == Int32.MinValue ? sender.Left + sender.Width - 50 : _floaterPositionX;
 			var y = _floaterPositionY == Int32.MinValue ? sender.Top + 50 : _floaterPositionY;
-			foreach (var openForm in Application.OpenForms.OfType<Form>())
+			foreach (Form openForm in Application.OpenForms)
 				openForm.Opacity = 0;
 			using (var form = new FormFloater(x, y, caption, logo))
 			{

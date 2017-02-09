@@ -334,6 +334,13 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders.Controls
 			}
 		}
 
+		private void ProcessLinkOpen(object sender, DataGridViewCellMouseEventArgs e)
+		{
+			if (e.Button != MouseButtons.Left) return;
+			if (FormatState.AllowEdit) return;
+			OpenLink();
+		}
+
 		private void OnLinksDeleted(object sender, DataChangeEventArgs e)
 		{
 			if (e.ChangeType != DataChangeType.LinksDeleted) return;

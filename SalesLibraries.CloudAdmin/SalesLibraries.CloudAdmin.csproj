@@ -147,6 +147,27 @@
     <Compile Include="FormStart.designer.cs">
       <DependentUpon>FormStart.cs</DependentUpon>
     </Compile>
+    <Compile Include="PresentationLayer\Wallbin\CompactWallbin\BackToRegularWallbinEventArgs.cs" />
+    <Compile Include="PresentationLayer\Wallbin\CompactWallbin\FormCompactWallbin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\CompactWallbin\FormCompactWallbin.designer.cs">
+      <DependentUpon>FormCompactWallbin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\CompactWallbin\FormCompactWallbin.DragAndDrop.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\CompactWallbin\FormCompactWallbin.Links.ContextMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\CompactWallbin\FormCompactWallbin.Links.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\CompactWallbin\FormCompactWallbin.TreeList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\CompactWallbin\WallbinItem.cs" />
+    <Compile Include="PresentationLayer\Wallbin\CompactWallbin\WallbinItemType.cs" />
     <Compile Include="PresentationLayer\Wallbin\Folders\Controls\ClassicFolderBox.DragAndDrop.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -781,6 +802,9 @@
     <EmbeddedResource Include="FormStart.resx">
       <DependentUpon>FormStart.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\CompactWallbin\FormCompactWallbin.resx">
+      <DependentUpon>FormCompactWallbin.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Folders\Controls\FormAddExternalFolder.resx">
       <DependentUpon>FormAddExternalFolder.cs</DependentUpon>
     </EmbeddedResource>
@@ -1051,6 +1075,7 @@
     <EmbeddedResource Include="PresentationLayer\Wallbin\Views\TabPage.resx">
       <DependentUpon>TabPage.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -1077,9 +1102,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\CompactWallbinPageOpen.png" />
+    <None Include="Resources\CompactWallbinPageClosed.png" />
+    <None Include="Resources\CompactWallbinLineBreak.png" />
+    <None Include="Resources\CompactWallbinFolderOpen.png" />
+    <None Include="Resources\CompactWallbinFolderClosed.png" />
     <None Include="Resources\LinkAddExternalFolder.png" />
     <None Include="Resources\QatHelp.png" />
-    <None Include="Resources\QatFloater.png" />
     <None Include="Resources\ProgressStartRegularWebConnection.png" />
     <None Include="Resources\ProgressStartRegularSecurity.png" />
     <None Include="Resources\ProgressStartRegularHeader.png" />

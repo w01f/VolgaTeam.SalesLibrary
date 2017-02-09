@@ -25,7 +25,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders.Controls
 					DataSource.Page.Library.Settings.ApplyBannerForAllWindows)
 				{
 					MainController.Instance.ProcessManager.Run("Updating Page...",
-						(cancelationToken, formProgess) => MainController.Instance.MainForm.Invoke(new MethodInvoker(FolderContainer.UpdateContent)));
+						(cancelationToken, formProgess) => MainController.Instance.MainForm.ActiveForm.Invoke(new MethodInvoker(FolderContainer.UpdateContent)));
 				}
 				else
 				{
@@ -47,7 +47,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders.Controls
 				{
 					MainController.Instance.ProcessManager.Run("Updating Page...",
 						(cancelationToken, formProgess) =>
-							MainController.Instance.MainForm.Invoke(new MethodInvoker(FolderContainer.UpdateContent)));
+							MainController.Instance.MainForm.ActiveForm.Invoke(new MethodInvoker(FolderContainer.UpdateContent)));
 				}
 				else
 				{
@@ -75,7 +75,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders.Controls
 				{
 					MainController.Instance.ProcessManager.Run("Updating Page...",
 						(cancelationToken, formProgess) =>
-							MainController.Instance.MainForm.Invoke(new MethodInvoker(FolderContainer.UpdateContent)));
+							MainController.Instance.MainForm.ActiveForm.Invoke(new MethodInvoker(FolderContainer.UpdateContent)));
 				}
 				else
 				{
@@ -116,7 +116,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders.Controls
 			var isSamePage = MainController.Instance.WallbinViews.ActiveWallbin.ActivePage == targetPageView;
 			if (isSamePage)
 				MainController.Instance.ProcessManager.Run("Loading Page...",
-				(cancelationToken, formProgess) => MainController.Instance.MainForm.Invoke(new MethodInvoker(() =>
+				(cancelationToken, formProgess) => MainController.Instance.MainForm.ActiveForm.Invoke(new MethodInvoker(() =>
 				{
 					MainController.Instance.WallbinViews.ActiveWallbin.ActivePage?.LoadPage(true);
 					MainController.Instance.WallbinViews.ActiveWallbin.ActivePage?.ShowPage();

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.Drawing;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -12,16 +11,16 @@ namespace SalesLibraries.CommonGUI.BackgroundProcesses
 	{
 		private readonly ConcurrentQueue<BackgroundProcess> _tasks = new ConcurrentQueue<BackgroundProcess>();
 		private readonly FormProgressCommon _formProgress = new FormProgressCommon();
-		private readonly Form _mainForm;
+		private readonly Func<Form> _mainFormAccessor;
 
 		private int _processesInQueue;
 
 		public event EventHandler<EventArgs> Suspended;
 		public event EventHandler<EventArgs> Resumed;
 
-		public BackgroundProcessManager(Form mainForm, string title)
+		public BackgroundProcessManager(Func<Form> mainFormAccessor)
 		{
-			_mainForm = mainForm;
+			_mainFormAccessor = mainFormAccessor;
 		}
 
 		public void Run(string title, Action<CancellationToken, FormProgressCommon> process, Action afterComplete = null)
@@ -63,14 +62,14 @@ namespace SalesLibraries.CommonGUI.BackgroundProcesses
 			{
 				await Task.Run(() => process(cancellationTokenSource.Token, formProgress), cancellationTokenSource.Token);
 				afterComplete?.Invoke(cancellationTokenSource.Token);
-				_mainForm.Invoke(new MethodInvoker(formProgress.Close));
+				_mainFormAccessor().Invoke(new MethodInvoker(formProgress.Close));
 				cancellationTokenSource.Dispose();
 			};
 			formProgress.ProcessAborted += (o, e) => cancellationTokenSource.Cancel();
 			if (showAsync)
 				formProgress.Show();
 			else
-				formProgress.ShowDialog(_mainForm);
+				formProgress.ShowDialog(_mainFormAccessor());
 
 			Suspended -= onSuspended;
 			Resumed -= onResumed;
@@ -108,29 +107,29 @@ namespace SalesLibraries.CommonGUI.BackgroundProcesses
 				Interlocked.Decrement(ref _processesInQueue);
 			if (currentProcess == null)
 			{
-				if (!_mainForm.IsDisposed)
-					_mainForm.Invoke(new MethodInvoker(() =>
+				if (!_mainFormAccessor().IsDisposed)
+					_mainFormAccessor().Invoke(new MethodInvoker(() =>
 					{
 						_formProgress.Hide();
-						if (_mainForm.WindowState != FormWindowState.Minimized)
-							Utils.ActivateForm(_mainForm.Handle, _mainForm.WindowState == FormWindowState.Maximized, false);
+						if (_mainFormAccessor().WindowState != FormWindowState.Minimized)
+							Utils.ActivateForm(_mainFormAccessor().Handle, _mainFormAccessor().WindowState == FormWindowState.Maximized, false);
 					}));
 				return;
 			}
 			if (!currentProcess.ShowProgress)
-				_mainForm.Invoke(new MethodInvoker(() => _formProgress.Hide()));
+				_mainFormAccessor().Invoke(new MethodInvoker(() => _formProgress.Hide()));
 			Interlocked.Increment(ref _processesInQueue);
 			Task.Run(async () =>
 			{
-				if (currentProcess.ShowProgress && !_mainForm.IsDisposed)
-					_mainForm.Invoke(new MethodInvoker(() =>
+				if (currentProcess.ShowProgress && !_mainFormAccessor().IsDisposed)
+					_mainFormAccessor().Invoke(new MethodInvoker(() =>
 					{
 						_formProgress.Visible = false;
 						_formProgress.laProgress.Text = currentProcess.Title;
 						_formProgress.StartPosition = FormStartPosition.Manual;
-						_formProgress.Left = _mainForm.Left + (_mainForm.Width - _formProgress.Width) / 2;
-						_formProgress.Top = _mainForm.Top + (_mainForm.Height - _formProgress.Height) / 2;
-						_formProgress.Show(_mainForm);
+						_formProgress.Left = _mainFormAccessor().Left + (_mainFormAccessor().Width - _formProgress.Width) / 2;
+						_formProgress.Top = _mainFormAccessor().Top + (_mainFormAccessor().Height - _formProgress.Height) / 2;
+						_formProgress.Show();
 						_formProgress.laProgress.Refresh();
 						Application.DoEvents();
 					}));

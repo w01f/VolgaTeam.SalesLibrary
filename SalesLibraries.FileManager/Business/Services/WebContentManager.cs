@@ -471,7 +471,6 @@ namespace SalesLibraries.FileManager.Business.Services
 			target.internalLinkType = (Int32)source.InternalLinkType;
 			target.libraryName = source.LibraryName;
 			target.pageName = source.PageName;
-			target.headerIcon = source.HeaderIcon;
 			target.showHeaderText = source.ShowHeaderText;
 			target.openOnSamePage = source.OpenOnSamePage;
 			target.styleSettingsEncoded = source.StyleSettings?.Serialize();
@@ -485,7 +484,6 @@ namespace SalesLibraries.FileManager.Business.Services
 			target.internalLinkType = (Int32)source.InternalLinkType;
 			target.libraryName = source.LibraryName;
 			target.pageName = source.PageName;
-			target.headerIcon = source.HeaderIcon;
 			target.showHeaderText = source.ShowHeaderText;
 			target.openOnSamePage = source.OpenOnSamePage;
 			target.styleSettingsEncoded = source.StyleSettings?.Serialize();
@@ -500,7 +498,6 @@ namespace SalesLibraries.FileManager.Business.Services
 			target.libraryName = source.LibraryName;
 			target.pageName = source.PageName;
 			target.windowName = source.WindowName;
-			target.headerIcon = source.HeaderIcon;
 			target.showHeaderText = source.ShowHeaderText;
 			target.openOnSamePage = source.OpenOnSamePage;
 			target.styleSettingsEncoded = source.StyleSettings?.Serialize();

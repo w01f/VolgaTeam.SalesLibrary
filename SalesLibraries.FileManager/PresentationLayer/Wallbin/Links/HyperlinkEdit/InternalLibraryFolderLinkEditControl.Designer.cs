@@ -33,9 +33,7 @@
 			this.laLibraryName = new System.Windows.Forms.Label();
 			this.laPageName = new System.Windows.Forms.Label();
 			this.laWindowName = new System.Windows.Forms.Label();
-			this.laHeaderIcon = new System.Windows.Forms.Label();
 			this.checkEditShowHeaderText = new DevExpress.XtraEditors.CheckEdit();
-			this.textEditHeaderIcon = new DevExpress.XtraEditors.TextEdit();
 			this.comboBoxEditLibraryName = new DevExpress.XtraEditors.ComboBoxEdit();
 			this.comboBoxEditWindowName = new DevExpress.XtraEditors.ComboBoxEdit();
 			this.comboBoxEditPageName = new DevExpress.XtraEditors.ComboBoxEdit();
@@ -44,7 +42,6 @@
 			this.comboBoxEditStyle = new DevExpress.XtraEditors.ComboBoxEdit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditShowHeaderText.Properties)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.textEditHeaderIcon.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.comboBoxEditLibraryName.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.comboBoxEditWindowName.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.comboBoxEditPageName.Properties)).BeginInit();
@@ -100,38 +97,15 @@
 			this.laWindowName.TabIndex = 50;
 			this.laWindowName.Text = "Target Window";
 			// 
-			// laHeaderIcon
-			// 
-			this.laHeaderIcon.AutoSize = true;
-			this.laHeaderIcon.BackColor = System.Drawing.Color.White;
-			this.laHeaderIcon.ForeColor = System.Drawing.Color.Black;
-			this.laHeaderIcon.Location = new System.Drawing.Point(3, 162);
-			this.laHeaderIcon.Name = "laHeaderIcon";
-			this.laHeaderIcon.Size = new System.Drawing.Size(77, 16);
-			this.laHeaderIcon.TabIndex = 61;
-			this.laHeaderIcon.Text = "Header Icon";
-			// 
 			// checkEditShowHeaderText
 			// 
 			this.checkEditShowHeaderText.EditValue = true;
-			this.checkEditShowHeaderText.Location = new System.Drawing.Point(311, 160);
+			this.checkEditShowHeaderText.Location = new System.Drawing.Point(6, 160);
 			this.checkEditShowHeaderText.Name = "checkEditShowHeaderText";
 			this.checkEditShowHeaderText.Properties.Caption = "Show Link Name in Header";
 			this.checkEditShowHeaderText.Size = new System.Drawing.Size(214, 20);
 			this.checkEditShowHeaderText.StyleController = this.styleController;
 			this.checkEditShowHeaderText.TabIndex = 64;
-			// 
-			// textEditHeaderIcon
-			// 
-			this.textEditHeaderIcon.Location = new System.Drawing.Point(109, 159);
-			this.textEditHeaderIcon.Name = "textEditHeaderIcon";
-			this.textEditHeaderIcon.Properties.Appearance.BackColor = System.Drawing.Color.White;
-			this.textEditHeaderIcon.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-			this.textEditHeaderIcon.Properties.Appearance.Options.UseBackColor = true;
-			this.textEditHeaderIcon.Properties.Appearance.Options.UseForeColor = true;
-			this.textEditHeaderIcon.Size = new System.Drawing.Size(140, 22);
-			this.textEditHeaderIcon.StyleController = this.styleController;
-			this.textEditHeaderIcon.TabIndex = 63;
 			// 
 			// comboBoxEditLibraryName
 			// 
@@ -210,21 +184,18 @@
 			this.Controls.Add(this.labelControlStyle);
 			this.Controls.Add(this.comboBoxEditStyle);
 			this.Controls.Add(this.checkEditOpenOnSamePage);
-			this.Controls.Add(this.checkEditShowHeaderText);
-			this.Controls.Add(this.textEditHeaderIcon);
-			this.Controls.Add(this.laHeaderIcon);
 			this.Controls.Add(this.laWindowName);
 			this.Controls.Add(this.laPageName);
 			this.Controls.Add(this.laLibraryName);
 			this.Controls.Add(this.comboBoxEditLibraryName);
 			this.Controls.Add(this.comboBoxEditWindowName);
 			this.Controls.Add(this.comboBoxEditPageName);
+			this.Controls.Add(this.checkEditShowHeaderText);
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.Name = "InternalLibraryFolderLinkEditControl";
 			this.Size = new System.Drawing.Size(525, 280);
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditShowHeaderText.Properties)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.textEditHeaderIcon.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.comboBoxEditLibraryName.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.comboBoxEditWindowName.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.comboBoxEditPageName.Properties)).EndInit();
@@ -240,9 +211,7 @@
 		private System.Windows.Forms.Label laLibraryName;
 		private System.Windows.Forms.Label laPageName;
 		private System.Windows.Forms.Label laWindowName;
-		private System.Windows.Forms.Label laHeaderIcon;
 		private DevExpress.XtraEditors.CheckEdit checkEditShowHeaderText;
-		private DevExpress.XtraEditors.TextEdit textEditHeaderIcon;
 		private DevExpress.XtraEditors.ComboBoxEdit comboBoxEditLibraryName;
 		private DevExpress.XtraEditors.ComboBoxEdit comboBoxEditWindowName;
 		private DevExpress.XtraEditors.ComboBoxEdit comboBoxEditPageName;

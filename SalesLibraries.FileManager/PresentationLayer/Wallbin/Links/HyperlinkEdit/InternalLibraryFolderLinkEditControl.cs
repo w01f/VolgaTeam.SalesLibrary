@@ -29,7 +29,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.HyperlinkEd
 				laLibraryName.Font = new Font(laLibraryName.Font.FontFamily, laLibraryName.Font.Size - 2, laLibraryName.Font.Style);
 				laPageName.Font = new Font(laPageName.Font.FontFamily, laPageName.Font.Size - 2, laPageName.Font.Style);
 				laWindowName.Font = new Font(laWindowName.Font.FontFamily, laWindowName.Font.Size - 2, laWindowName.Font.Style);
-				laHeaderIcon.Font = new Font(laHeaderIcon.Font.FontFamily, laHeaderIcon.Font.Size - 2, laHeaderIcon.Font.Style);
 			}
 		}
 
@@ -79,9 +78,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.HyperlinkEd
 				LibraryName = comboBoxEditLibraryName.EditValue as String,
 				PageName = comboBoxEditPageName.EditValue as String,
 				WindowName = comboBoxEditWindowName.EditValue as String,
-				HeaderIcon = textEditHeaderIcon.EditValue as String,
 				ShowHeaderText = checkEditShowHeaderText.Checked,
-				OpenOnSamePage = checkEditOpenOnSamePage.Checked,
+				OpenOnSamePage = !checkEditOpenOnSamePage.Checked,
 				StyleSettings = comboBoxEditStyle.EditValue as InternalLinkTemplate
 			};
 		}
@@ -92,7 +90,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.HyperlinkEd
 			{
 				comboBoxEditLibraryName.EditValue = ((InternalWallbinLinkInfo)templateInfo).LibraryName;
 				comboBoxEditPageName.EditValue = ((InternalWallbinLinkInfo)templateInfo).PageName;
-				textEditHeaderIcon.EditValue = ((InternalWallbinLinkInfo)templateInfo).HeaderIcon;
 				checkEditShowHeaderText.Checked = ((InternalWallbinLinkInfo)templateInfo).ShowHeaderText;
 				checkEditOpenOnSamePage.Checked = ((InternalWallbinLinkInfo)templateInfo).OpenOnSamePage;
 			}
@@ -100,7 +97,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.HyperlinkEd
 			{
 				comboBoxEditLibraryName.EditValue = ((InternalLibraryPageLinkInfo)templateInfo).LibraryName;
 				comboBoxEditPageName.EditValue = ((InternalLibraryPageLinkInfo)templateInfo).PageName;
-				textEditHeaderIcon.EditValue = ((InternalLibraryPageLinkInfo)templateInfo).HeaderIcon;
 				checkEditShowHeaderText.Checked = ((InternalLibraryPageLinkInfo)templateInfo).ShowHeaderText;
 				checkEditOpenOnSamePage.Checked = ((InternalLibraryPageLinkInfo)templateInfo).OpenOnSamePage;
 			}

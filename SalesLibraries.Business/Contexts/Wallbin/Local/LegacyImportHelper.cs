@@ -30,8 +30,7 @@ namespace SalesLibraries.Business.Contexts.Wallbin.Local
 
 			target.SyncSettings.CloseAfterSync = legacyLibrary.CloseAfterSync;
 			target.SyncSettings.MinimizeOnSync = legacyLibrary.MinimizeOnSync;
-			target.SyncSettings.ShowProgress = legacyLibrary.ShowProgressDuringSync;
-
+			
 			target.ProgramData.Enable = legacyLibrary.EnableProgramManagerSync;
 			target.ProgramData.Path = legacyLibrary.ProgramManagerLocation;
 

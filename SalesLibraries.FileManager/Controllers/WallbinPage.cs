@@ -13,6 +13,7 @@ using SalesLibraries.CommonGUI.RetractableBar;
 using SalesLibraries.FileManager.Business.Models.Connection;
 using SalesLibraries.FileManager.Business.Services;
 using SalesLibraries.FileManager.Business.Synchronization;
+using SalesLibraries.FileManager.PresentationLayer.Sync;
 using SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettings;
 using SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings;
 using SalesLibraries.FileManager.PresentationLayer.Wallbin.Views;
@@ -219,7 +220,7 @@ namespace SalesLibraries.FileManager.Controllers
 				NeedToUpdate = true;
 				return;
 			}
-			MainController.Instance.ProcessManager.RunInQueue("Loading Library...", () => MainController.Instance.MainForm.Invoke(new MethodInvoker(() =>
+			MainController.Instance.ProcessManager.RunInQueue("Loading Library...", () => MainController.Instance.MainForm.ActiveForm.Invoke(new MethodInvoker(() =>
 			{
 				_isLoading = true;
 				pnEmpty.BringToFront();
@@ -267,7 +268,36 @@ namespace SalesLibraries.FileManager.Controllers
 
 		private void OnSyncClick(object sender, EventArgs e)
 		{
-			SyncManager.SyncRegular();
+			MainController.Instance.ProcessChanges();
+
+			var targetContext = MainController.Instance.WallbinViews.ActiveWallbin.DataStorage;
+			var targetLibrary = targetContext.Library;
+			if ((MainController.Instance.Settings.NetworkPaths.Any() && MainController.Instance.Settings.NetworkPaths.Any(p => !Directory.Exists(p))) ||
+				MainController.Instance.Settings.WebPaths.Any() && MainController.Instance.Settings.WebPaths.Any(p => !Directory.Exists(p)))
+				MainController.Instance.PopupMessages.ShowWarning("Some of your Upload Directories are Not connected. Your changes will still be saved in your Source Directory.");
+
+			MainController.Instance.MainForm.ribbonControl.Enabled = false;
+			var savedState = MainController.Instance.MainForm.WindowState;
+			if (targetLibrary.SyncSettings.MinimizeOnSync)
+				MainController.Instance.MainForm.WindowState = FormWindowState.Minimized;
+
+			var formProgressSync = new FormProgressSync();
+			MainController.Instance.ProcessManager.RunWithProgress(
+				formProgressSync,
+				true,
+				(cancellationToken, formProgress) => SyncManager.SyncRegular(cancellationToken),
+				cancellationToken => MainController.Instance.MainForm.ActiveForm.Invoke(new MethodInvoker(() =>
+				{
+					if (!cancellationToken.IsCancellationRequested && targetLibrary.SyncSettings.CloseAfterSync)
+					{
+						Application.Exit();
+						return;
+					}
+					MainController.Instance.MainForm.WindowState = savedState;
+					MainController.Instance.MainForm.ribbonControl.Enabled = true;
+					MainController.Instance.TabWallbin.UpdateWallbin();
+					MainController.Instance.ActivateApplication();
+				})));
 		}
 
 		#region Link Operations Processing
@@ -337,7 +367,7 @@ namespace SalesLibraries.FileManager.Controllers
 				copyMethod => MainController.Instance.ProcessManager.Run("Preparing Data...", (cancelationToken, formProgess) => copyMethod()),
 				(context, original, current) => MainController.Instance.ProcessManager.Run("Saving Changes...", (cancelationToken, formProgess) => original.Save(context, current)));
 			if (!resut) return;
-			MainController.Instance.ProcessManager.RunInQueue("Loading Library...", () => MainController.Instance.MainForm.Invoke(new MethodInvoker(UpdateWallbin)));
+			MainController.Instance.ProcessManager.RunInQueue("Loading Library...", () => MainController.Instance.MainForm.ActiveForm.Invoke(new MethodInvoker(UpdateWallbin)));
 		}
 
 		private void buttonItemPreferencesColumns_Click(object sender, EventArgs e)
@@ -361,7 +391,7 @@ namespace SalesLibraries.FileManager.Controllers
 				copyMethod => MainController.Instance.ProcessManager.Run("Preparing Data...", (cancelationToken, formProgess) => copyMethod()),
 				(context, original, current) => MainController.Instance.ProcessManager.Run("Saving Changes...", (cancelationToken, formProgess) => original.Save(context, current)));
 			if (!resut) return;
-			MainController.Instance.ProcessManager.RunInQueue("Loading Library...", () => MainController.Instance.MainForm.Invoke(new MethodInvoker(UpdateWallbin)));
+			MainController.Instance.ProcessManager.RunInQueue("Loading Library...", () => MainController.Instance.MainForm.ActiveForm.Invoke(new MethodInvoker(UpdateWallbin)));
 		}
 
 		private void buttonItemPreferencesAutoWidgets_Click(object sender, EventArgs e)
@@ -385,7 +415,7 @@ namespace SalesLibraries.FileManager.Controllers
 				copyMethod => MainController.Instance.ProcessManager.Run("Preparing Data...", (cancelationToken, formProgess) => copyMethod()),
 				(context, original, current) => MainController.Instance.ProcessManager.Run("Saving Changes...", (cancelationToken, formProgess) => original.Save(context, current)));
 			if (!resut) return;
-			MainController.Instance.ProcessManager.RunInQueue("Loading Library...", () => MainController.Instance.MainForm.Invoke(new MethodInvoker(UpdateWallbin)));
+			MainController.Instance.ProcessManager.RunInQueue("Loading Library...", () => MainController.Instance.MainForm.ActiveForm.Invoke(new MethodInvoker(UpdateWallbin)));
 		}
 
 		private void buttonItemSettingsLibraries_Click(object sender, EventArgs e)

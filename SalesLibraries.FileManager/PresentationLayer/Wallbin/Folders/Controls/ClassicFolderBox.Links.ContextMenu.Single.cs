@@ -170,13 +170,10 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 				barButtonItemSingleLinkPropertiesRefreshPreview.Visibility = BarItemVisibility.Never;
 				barSubItemSingleLinkPropertiesAdminSettings.Visibility = BarItemVisibility.Never;
 				barButtonItemSingleLinkPropertiesThumbnail.Visibility = BarItemVisibility.Never;
-				barButtonItemSingleLinkPropertiesTags.Visibility = !linkRow.Inaccessable &&
-											 MainController.Instance.Settings.EditorSettings.EnableTagsEdit
+				barButtonItemSingleLinkPropertiesTags.Visibility = MainController.Instance.Settings.EditorSettings.EnableTagsEdit
 					? BarItemVisibility.Always
 					: BarItemVisibility.Never;
-				barButtonItemSingleLinkPropertiesExpirationDate.Visibility = !linkRow.Inaccessable
-					? BarItemVisibility.Always
-					: BarItemVisibility.Never;
+				barButtonItemSingleLinkPropertiesExpirationDate.Visibility = BarItemVisibility.Always;
 
 				barButtonItemSingleLinkPropertiesLinkSettings.Caption = "Link Bundle Settings";
 				barButtonItemSingleLinkPropertiesDelete.Caption = "Delete this Link Bundle";

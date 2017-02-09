@@ -61,7 +61,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			comboBoxEditLibraryName.EditValue = ((InternalLibraryPageLinkSettings)_data.Settings).LibraryName;
 			comboBoxEditPageName.EditValue = ((InternalLibraryPageLinkSettings)_data.Settings).PageName;
 
-			textEditHeaderIcon.EditValue = ((InternalLibraryPageLinkSettings)_data.Settings).HeaderIcon;
 			checkEditShowHeaderText.Checked = ((InternalLibraryPageLinkSettings)_data.Settings).ShowHeaderText;
 			checkEditOpenOnSamePage.Checked = !((InternalLibraryPageLinkSettings)_data.Settings).OpenOnSamePage;
 			comboBoxEditStyle.EditValue = ((InternalLibraryPageLinkSettings)_data.Settings).StyleSettings;
@@ -73,7 +72,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			((InternalLibraryPageLinkSettings)_data.Settings).LibraryName = comboBoxEditLibraryName.EditValue as String;
 			((InternalLibraryPageLinkSettings)_data.Settings).PageName = comboBoxEditPageName.EditValue as String;
 
-			((InternalLibraryPageLinkSettings)_data.Settings).HeaderIcon = textEditHeaderIcon.EditValue as String;
 			((InternalLibraryPageLinkSettings)_data.Settings).ShowHeaderText = checkEditShowHeaderText.Checked;
 			((InternalLibraryPageLinkSettings)_data.Settings).OpenOnSamePage = !checkEditOpenOnSamePage.Checked;
 			((InternalLibraryPageLinkSettings)_data.Settings).StyleSettings = comboBoxEditStyle.EditValue as InternalLinkTemplate;

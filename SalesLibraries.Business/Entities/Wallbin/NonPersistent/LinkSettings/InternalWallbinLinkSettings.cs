@@ -33,18 +33,6 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 			}
 		}
 
-		private string _headerIcon;
-		public string HeaderIcon
-		{
-			get { return _headerIcon; }
-			set
-			{
-				if (_headerIcon != value)
-					OnSettingsChanged();
-				_headerIcon = value;
-			}
-		}
-
 		private bool _showHeaderText = true;
 		public bool ShowHeaderText
 		{

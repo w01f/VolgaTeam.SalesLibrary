@@ -28,25 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-			this.ckShowSyncStatus = new System.Windows.Forms.CheckBox();
 			this.ckCloseAfterSync = new System.Windows.Forms.CheckBox();
 			this.ckMinimizeOnSync = new System.Windows.Forms.CheckBox();
 			this.buttonXCancel = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXOK = new DevComponents.DotNetBar.ButtonX();
 			this.SuspendLayout();
-			// 
-			// ckShowSyncStatus
-			// 
-			this.ckShowSyncStatus.AutoSize = true;
-			this.ckShowSyncStatus.BackColor = System.Drawing.Color.White;
-			this.ckShowSyncStatus.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.ckShowSyncStatus.ForeColor = System.Drawing.Color.Black;
-			this.ckShowSyncStatus.Location = new System.Drawing.Point(12, 96);
-			this.ckShowSyncStatus.Name = "ckShowSyncStatus";
-			this.ckShowSyncStatus.Size = new System.Drawing.Size(198, 20);
-			this.ckShowSyncStatus.TabIndex = 20;
-			this.ckShowSyncStatus.Text = "Show Status Bar during Sync";
-			this.ckShowSyncStatus.UseVisualStyleBackColor = false;
 			// 
 			// ckCloseAfterSync
 			// 
@@ -80,7 +66,7 @@
 			this.buttonXCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.buttonXCancel.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.buttonXCancel.Location = new System.Drawing.Point(151, 141);
+			this.buttonXCancel.Location = new System.Drawing.Point(151, 94);
 			this.buttonXCancel.Name = "buttonXCancel";
 			this.buttonXCancel.Size = new System.Drawing.Size(93, 32);
 			this.buttonXCancel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -94,7 +80,7 @@
 			this.buttonXOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.buttonXOK.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-			this.buttonXOK.Location = new System.Drawing.Point(44, 141);
+			this.buttonXOK.Location = new System.Drawing.Point(44, 94);
 			this.buttonXOK.Name = "buttonXOK";
 			this.buttonXOK.Size = new System.Drawing.Size(93, 32);
 			this.buttonXOK.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -106,15 +92,13 @@
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
 			this.BackColor = System.Drawing.Color.White;
-			this.ClientSize = new System.Drawing.Size(279, 185);
-			this.Controls.Add(this.ckShowSyncStatus);
+			this.ClientSize = new System.Drawing.Size(279, 138);
 			this.Controls.Add(this.buttonXCancel);
 			this.Controls.Add(this.ckCloseAfterSync);
 			this.Controls.Add(this.ckMinimizeOnSync);
 			this.Controls.Add(this.buttonXOK);
 			this.DoubleBuffered = true;
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.ForeColor = System.Drawing.Color.Black;
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.MaximizeBox = false;
@@ -131,8 +115,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.CheckBox ckShowSyncStatus;
         private System.Windows.Forms.CheckBox ckCloseAfterSync;
         private System.Windows.Forms.CheckBox ckMinimizeOnSync;
         private DevComponents.DotNetBar.ButtonX buttonXCancel;
