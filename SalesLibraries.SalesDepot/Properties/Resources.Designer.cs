@@ -83,9 +83,9 @@ namespace SalesLibraries.SalesDepot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap CalendarDisclaimerLogo {
+        internal static System.Drawing.Bitmap CalendarLogo {
             get {
-                object obj = ResourceManager.GetObject("CalendarDisclaimerLogo", resourceCulture);
+                object obj = ResourceManager.GetObject("CalendarLogo", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -316,76 +316,6 @@ namespace SalesLibraries.SalesDepot.Properties {
         internal static System.Drawing.Bitmap PowerPointWarning {
             get {
                 object obj = ResourceManager.GetObject("PowerPointWarning", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap ProgramAddWeek {
-            get {
-                object obj = ResourceManager.GetObject("ProgramAddWeek", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap ProgramBrowseBackward {
-            get {
-                object obj = ResourceManager.GetObject("ProgramBrowseBackward", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap ProgramBrowseForward {
-            get {
-                object obj = ResourceManager.GetObject("ProgramBrowseForward", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap ProgramOutputExcel {
-            get {
-                object obj = ResourceManager.GetObject("ProgramOutputExcel", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap ProgramOutputPDF {
-            get {
-                object obj = ResourceManager.GetObject("ProgramOutputPDF", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap ProgramSearch {
-            get {
-                object obj = ResourceManager.GetObject("ProgramSearch", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap ProgramShowInfo {
-            get {
-                object obj = ResourceManager.GetObject("ProgramShowInfo", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

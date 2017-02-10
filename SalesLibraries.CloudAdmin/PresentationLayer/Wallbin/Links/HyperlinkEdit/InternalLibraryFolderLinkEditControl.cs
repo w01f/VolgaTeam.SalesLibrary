@@ -91,14 +91,12 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.HyperlinkEdi
 				comboBoxEditLibraryName.EditValue = ((InternalWallbinLinkInfo)templateInfo).LibraryName;
 				comboBoxEditPageName.EditValue = ((InternalWallbinLinkInfo)templateInfo).PageName;
 				checkEditShowHeaderText.Checked = ((InternalWallbinLinkInfo)templateInfo).ShowHeaderText;
-				checkEditOpenOnSamePage.Checked = ((InternalWallbinLinkInfo)templateInfo).OpenOnSamePage;
 			}
 			if (templateInfo is InternalLibraryPageLinkInfo)
 			{
 				comboBoxEditLibraryName.EditValue = ((InternalLibraryPageLinkInfo)templateInfo).LibraryName;
 				comboBoxEditPageName.EditValue = ((InternalLibraryPageLinkInfo)templateInfo).PageName;
 				checkEditShowHeaderText.Checked = ((InternalLibraryPageLinkInfo)templateInfo).ShowHeaderText;
-				checkEditOpenOnSamePage.Checked = ((InternalLibraryPageLinkInfo)templateInfo).OpenOnSamePage;
 			}
 			if (templateInfo is InternalLibraryObjectLinkInfo)
 			{
@@ -108,7 +106,6 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.HyperlinkEdi
 			}
 			if (templateInfo is InternalShortcutLinkInfo)
 			{
-				checkEditOpenOnSamePage.Checked = ((InternalShortcutLinkInfo)templateInfo).OpenOnSamePage;
 			}
 		}
 

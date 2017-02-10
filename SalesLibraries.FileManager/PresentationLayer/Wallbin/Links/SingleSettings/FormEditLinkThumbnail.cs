@@ -6,7 +6,6 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using DevComponents.DotNetBar;
 using DevComponents.DotNetBar.Metro;
-using DevExpress.Utils;
 using Manina.Windows.Forms;
 using SalesLibraries.Business.Entities.Common;
 using SalesLibraries.Business.Entities.Interfaces;
@@ -96,17 +95,17 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 		private void LoadData()
 		{
+			retractableBarGallery.Visible = _sourceLink.ShowSourceFilesList;
+
 			buttonXEnable.Enabled = MainController.Instance.Lists.Banners.MainFolder.ExistsLocal();
 
 			buttonXEnable.Checked = _sourceLink.Thumbnail.Enable;
 			buttonXDisable.Checked = !buttonXEnable.Checked;
 
 			pictureBoxImage.Image = _sourceLink.Thumbnail.Image ?? pictureBoxImage.Image;
+
 			switch (_sourceLink.Thumbnail.ImageWidth)
 			{
-				case 100:
-					checkEditImageSize100.Checked = true;
-					break;
 				case 200:
 					checkEditImageSize200.Checked = true;
 					break;
@@ -116,14 +115,12 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 				case 400:
 					checkEditImageSize400.Checked = true;
 					break;
-				case 500:
-					checkEditImageSize500.Checked = true;
-					break;
 				default:
 					checkEditImageSizeCustom.Checked = true;
 					spinEditImageSize.EditValue = _sourceLink.Thumbnail.ImageWidth;
 					break;
 			}
+
 			switch (_sourceLink.Thumbnail.ImagePadding)
 			{
 				case 0:
@@ -143,6 +140,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 					spinEditImagePadding.EditValue = _sourceLink.Thumbnail.ImagePadding;
 					break;
 			}
+
 			switch (_sourceLink.Thumbnail.ImageAlignement)
 			{
 				case HorizontalAlignment.Left:
@@ -155,6 +153,34 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 					checkEditImageAlignmentRight.Checked = true;
 					break;
 			}
+
+			switch (_sourceLink.Thumbnail.BorderSize)
+			{
+				case 0:
+					checkEditBorderSizeNone.Checked = true;
+					break;
+				case 2:
+					checkEditBorderSize2.Checked = true;
+					break;
+				case 10:
+					checkEditBorderSize10.Checked = true;
+					break;
+			}
+
+			if (_sourceLink.Thumbnail.BorderColor == Color.Black)
+				checkEditBorderColorBlack.Checked = true;
+			else
+				checkEditBorderColorCustom.Checked = true;
+			colorEditBorderColor.Color = _sourceLink.Thumbnail.BorderColor;
+
+			if (_sourceLink.Thumbnail.ShadowColor == Color.White)
+				checkEditShadowColorNone.Checked = true;
+			else if (_sourceLink.Thumbnail.ShadowColor == Color.Black)
+				checkEditShadowColorBlack.Checked = true;
+			else
+				checkEditShadowColorCustom.Checked = true;
+			colorEditShadowColor.Color = _sourceLink.Thumbnail.ShadowColor;
+
 
 			memoEditBannerText.BackColor = _sourceLink.ThumbnailBackColor;
 			buttonXShowTextNone.Checked = _sourceLink.Thumbnail.TextMode == ThumbnailTextMode.NoText;
@@ -225,18 +251,15 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 				_sourceLink.Thumbnail.Image = (Image)pictureBoxImage.Image.Clone();
 				_sourceLink.Thumbnail.SourcePath = imageListView.SelectedItems.Select(item => item.FileName).FirstOrDefault();
 
-				if (checkEditImageSize100.Checked)
-					_sourceLink.Thumbnail.ImageWidth = 100;
-				else if (checkEditImageSize200.Checked)
+				if (checkEditImageSize200.Checked)
 					_sourceLink.Thumbnail.ImageWidth = 200;
 				else if (checkEditImageSize300.Checked)
 					_sourceLink.Thumbnail.ImageWidth = 300;
 				else if (checkEditImageSize400.Checked)
 					_sourceLink.Thumbnail.ImageWidth = 400;
-				else if (checkEditImageSize500.Checked)
-					_sourceLink.Thumbnail.ImageWidth = 500;
 				else
 					_sourceLink.Thumbnail.ImageWidth = (Int32)spinEditImageSize.Value;
+
 				if (checkEditImagePaddingNone.Checked)
 					_sourceLink.Thumbnail.ImagePadding = 0;
 				else if (checkEditImagePadding6.Checked)
@@ -247,12 +270,36 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 					_sourceLink.Thumbnail.ImagePadding = 10;
 				else
 					_sourceLink.Thumbnail.ImagePadding = (Int32)spinEditImagePadding.Value;
+
 				if (checkEditImageAlignmentLeft.Checked)
 					_sourceLink.Thumbnail.ImageAlignement = HorizontalAlignment.Left;
 				else if (checkEditImageAlignmentCenter.Checked)
 					_sourceLink.Thumbnail.ImageAlignement = HorizontalAlignment.Center;
 				else if (checkEditImageAlignmentRight.Checked)
 					_sourceLink.Thumbnail.ImageAlignement = HorizontalAlignment.Right;
+
+				if (checkEditBorderSizeNone.Checked)
+					_sourceLink.Thumbnail.BorderSize = 0;
+				else if (checkEditBorderSize2.Checked)
+					_sourceLink.Thumbnail.BorderSize = 2;
+				else if (checkEditBorderSize10.Checked)
+					_sourceLink.Thumbnail.BorderSize = 10;
+
+				if (!checkEditBorderSizeNone.Checked && checkEditBorderColorBlack.Checked)
+					_sourceLink.Thumbnail.BorderColor = Color.Black;
+				else if (!checkEditBorderSizeNone.Checked && checkEditBorderColorCustom.Checked)
+					_sourceLink.Thumbnail.BorderColor = colorEditBorderColor.Color;
+				else
+					_sourceLink.Thumbnail.BorderColor = Color.Black;
+
+				if (checkEditShadowColorNone.Checked)
+					_sourceLink.Thumbnail.ShadowColor = Color.White;
+				else if (checkEditShadowColorBlack.Checked)
+					_sourceLink.Thumbnail.ShadowColor = Color.Black;
+				else if (checkEditShadowColorCustom.Checked)
+					_sourceLink.Thumbnail.ShadowColor = colorEditShadowColor.Color;
+				else
+					_sourceLink.Thumbnail.ShadowColor = Color.White;
 
 				if (buttonXShowTextLinkName.Checked)
 					_sourceLink.Thumbnail.TextMode = ThumbnailTextMode.LinkName;
@@ -298,7 +345,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 				}).ToArray());
 			imageListView.SelectionChanged -= OnSourceImagesSelectionChanged;
 			imageListView.SelectionChanged += OnSourceImagesSelectionChanged;
-			buttonXPreviewImage.Enabled = imageListView.SelectedItems.Any();
+			buttonXPreviewImage.Enabled = buttonXEnable.Checked && imageListView.SelectedItems.Any();
 		}
 
 		private void GeneratePreview()
@@ -308,17 +355,25 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 			using (var tempImage = Image.FromFile(selectedImageFilePath))
 			{
-				using (var changedImage = tempImage.Resize(new Size(_sourceLink.Thumbnail.ImageWidth, tempImage.Height),
-					_sourceLink.Thumbnail.TextEnabled ?
+				var tranformAction = new Func<Image, Image>(image =>
+				{
+					image = image.Resize(new Size(_sourceLink.Thumbnail.ImageWidth, tempImage.Height));
+					if (_sourceLink.Thumbnail.BorderSize > 0)
+						image = image.DrawBorder(_sourceLink.Thumbnail.BorderSize, _sourceLink.Thumbnail.BorderColor);
+					if (_sourceLink.Thumbnail.ShadowColor != Color.White)
+						image = image.DrawShadow(ThumbnailSettings.DefaultShadowSize, _sourceLink.Thumbnail.ShadowColor);
+					if (_sourceLink.Thumbnail.ImagePadding > 0)
+						image = image.DrawPadding(_sourceLink.Thumbnail.TextEnabled ?
 						new Padding(
 							_sourceLink.Thumbnail.ImagePadding,
 							_sourceLink.Thumbnail.TextPosition == ThumbnailTextPosition.Top ? 0 : _sourceLink.Thumbnail.ImagePadding,
 							_sourceLink.Thumbnail.ImagePadding,
 							_sourceLink.Thumbnail.TextPosition == ThumbnailTextPosition.Bottom ? 0 : _sourceLink.Thumbnail.ImagePadding) :
-						new Padding(_sourceLink.Thumbnail.ImagePadding)))
-				{
+						new Padding(_sourceLink.Thumbnail.ImagePadding));
+					return image;
+				});
+				using (var changedImage = tranformAction(tempImage))
 					pictureBoxImage.Image = (Image)changedImage.Clone();
-				}
 			}
 		}
 
@@ -348,6 +403,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			var button = (ButtonX)sender;
 			if (!button.Checked) return;
 			xtraTabControlSettings.Enabled = buttonXEnable.Checked;
+			buttonXPreviewImage.Enabled = buttonXEnable.Checked && imageListView.SelectedItems.Any();
 			if (buttonXEnable.Checked && !imageListView.Items.Any())
 				OnRefreshSourceFilesClick(sender, EventArgs.Empty);
 		}
@@ -362,9 +418,28 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			spinEditImagePadding.Enabled = checkEditImagePaddingCustom.Checked;
 		}
 
+		private void OnBorderSizeCheckedChanged(object sender, EventArgs e)
+		{
+			labelControlBorderColor.Enabled =
+				checkEditBorderColorBlack.Enabled =
+					checkEditBorderColorCustom.Enabled =
+						!checkEditBorderSizeNone.Checked;
+			colorEditBorderColor.Enabled = !checkEditBorderSizeNone.Checked && checkEditBorderColorCustom.Checked;
+		}
+
+		private void OnBorderColorCheckedChanged(object sender, EventArgs e)
+		{
+			colorEditBorderColor.Enabled = checkEditBorderColorCustom.Checked;
+		}
+
+		private void OnShadowColorCheckedChanged(object sender, EventArgs e)
+		{
+			colorEditShadowColor.Enabled = checkEditShadowColorCustom.Checked;
+		}
+
 		private void OnSourceImagesSelectionChanged(object sender, EventArgs e)
 		{
-			buttonXPreviewImage.Enabled = imageListView.SelectedItems.Any();
+			buttonXPreviewImage.Enabled = buttonXEnable.Checked && imageListView.SelectedItems.Any();
 		}
 
 		private void OnPreviewImageClick(object sender, EventArgs e)
@@ -451,6 +526,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 				defaultItem.Selected = true;
 				GeneratePreview();
 			}
+		}
+
+		private void OnTabControlSettingsSelectedPageChanged(object sender, DevExpress.XtraTab.TabPageChangedEventArgs e)
+		{
+			buttonXPreviewImage.Visible = xtraTabControlSettings.SelectedTabPage == xtraTabPageImage;
 		}
 	}
 }

@@ -243,6 +243,10 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 				return CreateEntity<ExcelLink>();
 			if (FileFormatHelper.IsVideoFile(filePath))
 				return CreateEntity<VideoLink>();
+			if (FileFormatHelper.IsPngFile(filePath) ||
+				FileFormatHelper.IsJpegFile(filePath) ||
+				FileFormatHelper.IsGifFile(filePath))
+				return CreateEntity<ImageLink>();
 			return CreateEntity<CommonFileLink>();
 		}
 

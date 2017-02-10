@@ -21,7 +21,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.DataSource
 					treeListExternalFiles.AppendNode(new[] { driveInfo.Name }, null, new FolderLink { RootId = defaultDataSource.DataSourceId, Path = driveInfo.Name })))
 				{
 					rootNode.StateImageIndex = 0;
-					FillNode(rootNode, expandAll);
 				}
 			})));
 

@@ -48,16 +48,6 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 						cancellationToken);
 					if (result != SynchronizationResult.Completed || cancellationToken.IsCancellationRequested) return;
 				}
-
-				if (library.ProgramData.Enable)
-				{
-					result = SyncSpecialFolder(
-						library.ProgramData.Path,
-						Path.Combine(destinationPath, Constants.ProgramManagerRootFolderName),
-						syncLog,
-						cancellationToken);
-					if (result != SynchronizationResult.Completed || cancellationToken.IsCancellationRequested) return;
-				}
 			}
 
 			syncLog.FinishLoging();
@@ -195,9 +185,6 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 
 			if (library.Calendar.Enabled)
 				result.Add(Constants.OvernightsCalendarRootFolderName);
-
-			if (library.ProgramData.Enable)
-				result.Add(Constants.ProgramManagerRootFolderName);
 
 			if (isWebSync)
 				result.Add(Constants.GoodSyncServiceFolderName);

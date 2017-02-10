@@ -4,7 +4,6 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
 using SalesLibraries.Business.Contexts.Wallbin;
-using SalesLibraries.SalesDepot.Business.ProgramSchedule;
 using SalesLibraries.SalesDepot.Controllers;
 
 namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.Views
@@ -14,7 +13,6 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.Views
 	{
 		protected bool ReadyToUse { get; set; }
 		public LibraryContext DataStorage { get; private set; }
-		public ProgramScheduleContext ProgramSchedule { get; private set; }
 		public IPageView ActivePage { get; private set; }
 		public List<IPageView> Pages { get; private set; }
 		public event EventHandler<EventArgs> PageChanged;
@@ -32,7 +30,6 @@ namespace SalesLibraries.SalesDepot.PresentationLayer.Wallbin.Views
 			pnContainer.Dock = DockStyle.Fill;
 			pnEmpty.BringToFront();
 			DataStorage = dataStorage;
-			ProgramSchedule = new ProgramScheduleContext(DataStorage.DataSourceFolderPath);
 			Pages = new List<IPageView>();
 		}
 

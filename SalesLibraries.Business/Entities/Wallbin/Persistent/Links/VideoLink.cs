@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Drawing;
 using System.IO;
@@ -28,6 +29,9 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 
 		[NotMapped, JsonIgnore]
 		public Color ThumbnailBackColor => Folder.Settings.BackgroundWindowColor;
+
+		[NotMapped, JsonIgnore]
+		public bool ShowSourceFilesList => true;
 		#endregion
 
 		public VideoLink()

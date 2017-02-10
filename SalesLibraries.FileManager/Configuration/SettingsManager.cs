@@ -35,7 +35,6 @@ namespace SalesLibraries.FileManager.Configuration
 
 		#region Ribbon Settings
 		public bool EnableOvernightsCalendarTab { get; private set; }
-		public bool EnableProgramManagerTab { get; private set; }
 		public bool EnableIPadSettingsTab { get; private set; }
 		public bool EnableTagsTab { get; private set; }
 		public bool EnableSecurityTab { get; private set; }
@@ -79,7 +78,6 @@ namespace SalesLibraries.FileManager.Configuration
 
 			#region Ribbon Settings
 			EnableOvernightsCalendarTab = true;
-			EnableProgramManagerTab = true;
 			EnableIPadSettingsTab = true;
 			EnableTagsTab = true;
 			EnableSecurityTab = true;
@@ -209,11 +207,6 @@ namespace SalesLibraries.FileManager.Configuration
 			if (node != null)
 				if (bool.TryParse(node.InnerText, out tempBool))
 					EnableOvernightsCalendarTab = tempBool;
-
-			node = document.SelectSingleNode(@"/ribbon/ProgramSchedule");
-			if (node != null)
-				if (bool.TryParse(node.InnerText, out tempBool))
-					EnableProgramManagerTab = tempBool;
 
 			node = document.SelectSingleNode(@"/ribbon/iPadsettings");
 			if (node != null)

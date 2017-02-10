@@ -6,8 +6,6 @@
 		Home,
 		Search,
 		Calendar,
-		ProgramsView,
-		ProgramsSearch,
 		Settings,
 		Gallery1,
 		Gallery2,

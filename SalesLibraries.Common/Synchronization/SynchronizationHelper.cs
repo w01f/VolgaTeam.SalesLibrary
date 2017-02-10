@@ -47,10 +47,7 @@ namespace SalesLibraries.Common.Synchronization
 			}
 			catch (Exception ex)
 			{
-				if (SynchronizationCompleting == null)
-					return SynchronizationResult.AbortedDueToError;
-
-				SynchronizationCompleting(
+				SynchronizationCompleting?.Invoke(
 					this,
 					new SynchronizationCompletingEventArgs(SynchronizationResult.AbortedDueToError, ex));
 
@@ -221,8 +218,6 @@ namespace SalesLibraries.Common.Synchronization
 					return childResult;
 			}
 
-			// NOTE: this logic is not correct. We will end up deleting even files
-			// whose extension is not present in the "extensions" parameter (if not null).
 			if (options.DeleteExtraFilesInDestination)
 			{
 				foreach (var dstSubDir in dstDirs)

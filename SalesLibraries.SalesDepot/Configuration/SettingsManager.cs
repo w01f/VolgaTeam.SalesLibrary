@@ -20,7 +20,6 @@ namespace SalesLibraries.SalesDepot.Configuration
 		public WallbinViewSettings WallbinViewSettings { get; }
 		public WallbinButtonsSettings WallbinButtonsSettings { get; }
 		public CalendarViewSettings CalendarViewSettings { get; }
-		public ProgramScheduleSettings ProgramScheduleSettings { get; private set; }
 		public EmailBinSettings EmailBinSettings { get; private set; }
 		public LinkLaunchSettings LinkLaunchSettings { get; private set; }
 		public KeyWordFileFilters KeyWordFilters { get; private set; }
@@ -57,7 +56,6 @@ namespace SalesLibraries.SalesDepot.Configuration
 			WallbinViewSettings = new WallbinViewSettings();
 			WallbinButtonsSettings = new WallbinButtonsSettings();
 			CalendarViewSettings = new CalendarViewSettings();
-			ProgramScheduleSettings = new ProgramScheduleSettings();
 			EmailBinSettings = new EmailBinSettings();
 			LinkLaunchSettings = new LinkLaunchSettings();
 			KeyWordFilters = new KeyWordFileFilters();
@@ -91,10 +89,6 @@ namespace SalesLibraries.SalesDepot.Configuration
 			node = document.SelectSingleNode(@"/LocalSettings/CalendarViewSettings");
 			if (node != null)
 				CalendarViewSettings.Deserialize(node);
-
-			node = document.SelectSingleNode(@"/LocalSettings/ProgramScheduleSettings");
-			if (node != null)
-				ProgramScheduleSettings.Deserialize(node);
 
 			node = document.SelectSingleNode(@"/LocalSettings/EmailBinSettings");
 			if (node != null)
@@ -139,7 +133,6 @@ namespace SalesLibraries.SalesDepot.Configuration
 
 			xml.AppendLine(@"<WallbinViewSettings>" + WallbinViewSettings.Serialize() + @"</WallbinViewSettings>");
 			xml.AppendLine(@"<CalendarViewSettings>" + CalendarViewSettings.Serialize() + @"</CalendarViewSettings>");
-			xml.AppendLine(@"<ProgramScheduleSettings>" + ProgramScheduleSettings.Serialize() + @"</ProgramScheduleSettings>");
 			xml.AppendLine(@"<EmailBinSettings>" + EmailBinSettings.Serialize() + @"</EmailBinSettings>");
 			xml.AppendLine(@"<KeyWordFilters>" + KeyWordFilters.Serialize() + @"</KeyWordFilters>");
 			xml.AppendLine(@"<LinkLaunchSettings>" + LinkLaunchSettings.Serialize() + @"</LinkLaunchSettings>");

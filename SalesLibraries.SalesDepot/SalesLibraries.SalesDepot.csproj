@@ -161,38 +161,11 @@
     <Compile Include="Business\Gallery\SnapshotCollection.cs" />
     <Compile Include="Business\Gallery\SnapshotItem.cs" />
     <Compile Include="Business\LinkViewers\FilePreviewShortcut.cs" />
-    <Compile Include="Business\ProgramSchedule\ProgramScheduleContext.cs" />
-    <Compile Include="Business\ProgramSchedule\ProgramScheduleReportHelper.cs" />
-    <Compile Include="Configuration\ProgramScheduleSettings.cs" />
-    <Compile Include="Controllers\ProgramScheduleSearchPage.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controllers\ProgramScheduleViewPage.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Include="FormStart.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormStart.designer.cs">
       <DependentUpon>FormStart.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationLayer\ProgramSchedule\FormOutputParameters.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PresentationLayer\ProgramSchedule\FormOutputParameters.designer.cs">
-      <DependentUpon>FormOutputParameters.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationLayer\ProgramSchedule\ScheduleViewControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="PresentationLayer\ProgramSchedule\ScheduleViewControl.designer.cs">
-      <DependentUpon>ScheduleViewControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationLayer\ProgramSchedule\ScheduleSearchControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="PresentationLayer\ProgramSchedule\ScheduleSearchControl.designer.cs">
-      <DependentUpon>ScheduleSearchControl.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Settings\FormWallbinSettings.cs">
       <SubType>Form</SubType>
@@ -541,15 +514,6 @@
     <EmbeddedResource Include="PresentationLayer\Gallery\GalleryControl.resx">
       <DependentUpon>GalleryControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\ProgramSchedule\FormOutputParameters.resx">
-      <DependentUpon>FormOutputParameters.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\ProgramSchedule\ScheduleViewControl.resx">
-      <DependentUpon>ScheduleViewControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\ProgramSchedule\ScheduleSearchControl.resx">
-      <DependentUpon>ScheduleSearchControl.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Settings\BaseSettingsControl.resx">
       <DependentUpon>BaseSettingsControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -739,27 +703,6 @@
     <None Include="Resources\SettingsLogo.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\ProgramBrowseBackward.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ProgramBrowseForward.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ProgramOutputExcel.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ProgramOutputPDF.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ProgramSearch.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ProgramShowInfo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\CalendarDisclaimerLogo.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\SettingsEmail.png" />
   </ItemGroup>
   <ItemGroup>
@@ -875,10 +818,8 @@
     <None Include="Resources\ButtonCalendar.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\ProgramAddWeek.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\CalendarLogo.png" />
     <None Include="Resources\WallbinZoomOut.png" />
     <None Include="Resources\WallbinZoomIn.png" />
     <None Include="Resources\WallbinSettingsTabPages.png" />

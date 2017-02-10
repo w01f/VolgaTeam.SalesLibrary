@@ -13,7 +13,7 @@ namespace SalesLibraries.Common.Extensions
 
 		public static Point GetCenter(this Rectangle control)
 		{
-			return new Point(control.X + (control.Width / 2), control.Y + (control.Height / 2));
+			return new Point(control.X + control.Width / 2, control.Y + control.Height / 2);
 		}
 
 		public static Point GetOffset(this Point point, int x, int y)
@@ -21,7 +21,7 @@ namespace SalesLibraries.Common.Extensions
 			return new Point(point.X + x, point.Y + y);
 		}
 
-		public static Image Resize(this Image image, Size size, Padding padding = new Padding())
+		public static Image Resize(this Image image, Size size)
 		{
 			var originalWidth = image.Width;
 			var originalHeight = image.Height;
@@ -32,7 +32,26 @@ namespace SalesLibraries.Common.Extensions
 				percent = 1;
 			var newWidth = (int)(originalWidth * percent);
 			var newHeight = (int)(originalHeight * percent);
-			Image newImage = new Bitmap(newWidth + padding.Left + padding.Right, newHeight + padding.Top + padding.Bottom);
+			Image newImage = new Bitmap(newWidth, newHeight);
+			using (var graphicsHandle = Graphics.FromImage(newImage))
+			{
+				graphicsHandle.InterpolationMode = InterpolationMode.HighQualityBicubic;
+				graphicsHandle.DrawImage(
+					image,
+					0,
+					0,
+					newWidth,
+					newHeight);
+			}
+			return newImage;
+		}
+
+		public static Image DrawPadding(this Image image, Padding padding)
+		{
+			Image newImage = new Bitmap(
+				image.Width + padding.Left + padding.Right,
+				image.Height + padding.Top + padding.Bottom
+				);
 			using (var graphicsHandle = Graphics.FromImage(newImage))
 			{
 				graphicsHandle.InterpolationMode = InterpolationMode.HighQualityBicubic;
@@ -40,26 +59,69 @@ namespace SalesLibraries.Common.Extensions
 					image,
 					0 + padding.Left,
 					0 + padding.Top,
-					newWidth,
-					newHeight);
+					image.Width,
+					image.Height);
 			}
 			return newImage;
 		}
 
-		public static Image DrawBorder(this Image image)
+		public static Image DrawBorder(this Image image, int borderSize = 1, Color? borderColor = null)
 		{
-			const int borderWidth = 1;
+			if (!borderColor.HasValue)
+				borderColor = Color.Black;
 			var originalWidth = image.Width;
 			var originalHeight = image.Height;
-			var newWidth = (originalWidth + borderWidth * 4);
-			var newHeight = (originalHeight + borderWidth * 4);
+			var newWidth = originalWidth + borderSize * 2;
+			var newHeight = originalHeight + borderSize * 2;
 			Image newImage = new Bitmap(newWidth, newHeight);
 			using (var graphicsHandle = Graphics.FromImage(newImage))
-			using (var pen = new Pen(Color.DimGray, borderWidth))
 			{
 				graphicsHandle.InterpolationMode = InterpolationMode.HighQualityBicubic;
-				graphicsHandle.DrawImage(image, borderWidth, borderWidth);
-				graphicsHandle.DrawRectangle(pen, 0, 0, originalWidth, originalHeight);
+				graphicsHandle.DrawImage(
+					image,
+					borderSize,
+					borderSize,
+					originalWidth,
+					originalHeight);
+				using (var pen = new Pen(borderColor.Value, borderSize))
+					graphicsHandle.DrawRectangle(pen, borderSize / 2, borderSize / 2, originalWidth + borderSize,
+						originalHeight + borderSize);
+			}
+			return newImage;
+		}
+
+		public static Image DrawShadow(this Image image, int shadowSize = 1, Color? shadowColor = null)
+		{
+			if (!shadowColor.HasValue)
+				shadowColor = Color.Black;
+			var originalWidth = image.Width;
+			var originalHeight = image.Height;
+			var newWidth = originalWidth + shadowSize;
+			var newHeight = originalHeight + shadowSize;
+			Image newImage = new Bitmap(newWidth, newHeight);
+			using (var graphicsHandle = Graphics.FromImage(newImage))
+			{
+				var alphaIncreemet = 32 / shadowSize;
+				var alpha = alphaIncreemet;
+				for (var shadowX = 0; shadowX < shadowSize; shadowX++)
+				{
+					using (Brush brush = new SolidBrush(Color.FromArgb(alpha, shadowColor.Value)))
+						graphicsHandle.FillRectangle(
+							brush,
+							shadowX,
+							shadowSize - shadowX,
+							originalWidth,
+							originalHeight);
+					alpha += alphaIncreemet;
+				}
+
+				graphicsHandle.InterpolationMode = InterpolationMode.HighQualityBicubic;
+				graphicsHandle.DrawImage(
+					image,
+					shadowSize,
+					0,
+					originalWidth,
+					originalHeight);
 			}
 			return newImage;
 		}

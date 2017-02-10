@@ -39,6 +39,9 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 
 		[NotMapped, JsonIgnore]
 		public Color ThumbnailBackColor => Folder.Settings.BackgroundWindowColor;
+
+		[NotMapped, JsonIgnore]
+		public bool ShowSourceFilesList => true;
 		#endregion
 
 		public PowerPointLink()

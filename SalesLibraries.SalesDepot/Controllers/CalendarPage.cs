@@ -40,7 +40,6 @@ namespace SalesLibraries.SalesDepot.Controllers
 				OnLibraryChanged(o, e);
 			};
 
-			MainController.Instance.MainForm.labelItemCalendarDisclaimerLogo.Click += labelItemCalendarDisclaimerLogo_Click;
 			MainController.Instance.MainForm.buttonItemCalendarFontSizeLarger.Click += buttonItemCalendarFontUp_Click;
 			MainController.Instance.MainForm.buttonItemCalendarFontSizeSmaler.Click += buttonItemCalendarFontDown_Click;
 			MainController.Instance.MainForm.buttonItemCalendarHelp.Click += buttonItemCalendarHelp_Click;
@@ -107,11 +106,6 @@ namespace SalesLibraries.SalesDepot.Controllers
 		{
 			MainController.Instance.MainForm.buttonItemCalendarFontSizeLarger.Enabled = MainController.Instance.Settings.CalendarViewSettings.FontSize < 14;
 			MainController.Instance.MainForm.buttonItemCalendarFontSizeSmaler.Enabled = MainController.Instance.Settings.CalendarViewSettings.FontSize > 10;
-		}
-
-		private void labelItemCalendarDisclaimerLogo_Click(object sender, EventArgs e)
-		{
-			Utils.OpenFile(Configuration.RemoteResourceManager.Instance.CalendarDisclaimerFile.LocalPath);
 		}
 
 		private void buttonItemCalendarFontUp_Click(object sender, EventArgs e)

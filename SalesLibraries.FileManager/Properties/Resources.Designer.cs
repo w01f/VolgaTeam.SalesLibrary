@@ -223,16 +223,6 @@ namespace SalesLibraries.FileManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap BundlesRibbonNew {
-            get {
-                object obj = ResourceManager.GetObject("BundlesRibbonNew", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap ButtonApplyForAll {
             get {
                 object obj = ResourceManager.GetObject("ButtonApplyForAll", resourceCulture);
@@ -306,16 +296,6 @@ namespace SalesLibraries.FileManager.Properties {
         internal static System.Drawing.Bitmap ButtonVideoReset {
             get {
                 object obj = ResourceManager.GetObject("ButtonVideoReset", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap CalendarColors {
-            get {
-                object obj = ResourceManager.GetObject("CalendarColors", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -693,16 +673,6 @@ namespace SalesLibraries.FileManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Exit {
-            get {
-                object obj = ResourceManager.GetObject("Exit", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap Favorites {
             get {
                 object obj = ResourceManager.GetObject("Favorites", resourceCulture);
@@ -816,16 +786,6 @@ namespace SalesLibraries.FileManager.Properties {
         internal static System.Drawing.Bitmap LinkDelete {
             get {
                 object obj = ResourceManager.GetObject("LinkDelete", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap LinkOpen {
-            get {
-                object obj = ResourceManager.GetObject("LinkOpen", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1053,19 +1013,9 @@ namespace SalesLibraries.FileManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap QatCompactWallbin {
+        internal static System.Drawing.Bitmap ProgressWallbinLogo {
             get {
-                object obj = ResourceManager.GetObject("QatCompactWallbin", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap QatFloater {
-            get {
-                object obj = ResourceManager.GetObject("QatFloater", resourceCulture);
+                object obj = ResourceManager.GetObject("ProgressWallbinLogo", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1133,6 +1083,286 @@ namespace SalesLibraries.FileManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap RibbonBundlesNew {
+            get {
+                object obj = ResourceManager.GetObject("RibbonBundlesNew", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap RibbonCalendarColors {
+            get {
+                object obj = ResourceManager.GetObject("RibbonCalendarColors", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap RibbonCompactWallbin {
+            get {
+                object obj = ResourceManager.GetObject("RibbonCompactWallbin", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap RibbonExit {
+            get {
+                object obj = ResourceManager.GetObject("RibbonExit", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap RibbonFloater {
+            get {
+                object obj = ResourceManager.GetObject("RibbonFloater", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap RibbonLinkAddLineBreak {
+            get {
+                object obj = ResourceManager.GetObject("RibbonLinkAddLineBreak", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap RibbonLinkAddUrl {
+            get {
+                object obj = ResourceManager.GetObject("RibbonLinkAddUrl", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap RibbonLinkDelete {
+            get {
+                object obj = ResourceManager.GetObject("RibbonLinkDelete", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap RibbonLinkImage {
+            get {
+                object obj = ResourceManager.GetObject("RibbonLinkImage", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap RibbonLinkOpen {
+            get {
+                object obj = ResourceManager.GetObject("RibbonLinkOpen", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap RibbonLinkSettings {
+            get {
+                object obj = ResourceManager.GetObject("RibbonLinkSettings", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap RibbonLinkTags {
+            get {
+                object obj = ResourceManager.GetObject("RibbonLinkTags", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap RibbonSecurityReset {
+            get {
+                object obj = ResourceManager.GetObject("RibbonSecurityReset", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap RibbonSecuritySelect {
+            get {
+                object obj = ResourceManager.GetObject("RibbonSecuritySelect", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap RibbonSettingsAdvanced {
+            get {
+                object obj = ResourceManager.GetObject("RibbonSettingsAdvanced", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap RibbonSettingsAutoWidgets {
+            get {
+                object obj = ResourceManager.GetObject("RibbonSettingsAutoWidgets", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap RibbonSettingsColumns {
+            get {
+                object obj = ResourceManager.GetObject("RibbonSettingsColumns", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap RibbonSettingsLibraries {
+            get {
+                object obj = ResourceManager.GetObject("RibbonSettingsLibraries", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap RibbonSettingsPages {
+            get {
+                object obj = ResourceManager.GetObject("RibbonSettingsPages", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap RibbonSettingsSync {
+            get {
+                object obj = ResourceManager.GetObject("RibbonSettingsSync", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap RibbonSettingsWallbin {
+            get {
+                object obj = ResourceManager.GetObject("RibbonSettingsWallbin", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap RibbonSync {
+            get {
+                object obj = ResourceManager.GetObject("RibbonSync", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap RibbonTagsCategories {
+            get {
+                object obj = ResourceManager.GetObject("RibbonTagsCategories", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap RibbonTagsClear {
+            get {
+                object obj = ResourceManager.GetObject("RibbonTagsClear", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap RibbonTagsKeywords {
+            get {
+                object obj = ResourceManager.GetObject("RibbonTagsKeywords", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap RibbonTagsSuperFIlters {
+            get {
+                object obj = ResourceManager.GetObject("RibbonTagsSuperFIlters", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap RibbonVideoConvert {
+            get {
+                object obj = ResourceManager.GetObject("RibbonVideoConvert", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap RibbonVideoDelete {
+            get {
+                object obj = ResourceManager.GetObject("RibbonVideoDelete", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap SecurityMenuReset {
             get {
                 object obj = ResourceManager.GetObject("SecurityMenuReset", resourceCulture);
@@ -1146,46 +1376,6 @@ namespace SalesLibraries.FileManager.Properties {
         internal static System.Drawing.Bitmap SecurityMenuSelect {
             get {
                 object obj = ResourceManager.GetObject("SecurityMenuSelect", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap SecurityRibbonReset {
-            get {
-                object obj = ResourceManager.GetObject("SecurityRibbonReset", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap SecurityRibbonSelect {
-            get {
-                object obj = ResourceManager.GetObject("SecurityRibbonSelect", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap SettingsAdvanced {
-            get {
-                object obj = ResourceManager.GetObject("SettingsAdvanced", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap SettingsAutoWidgets {
-            get {
-                object obj = ResourceManager.GetObject("SettingsAutoWidgets", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1223,116 +1413,6 @@ namespace SalesLibraries.FileManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap SettingsLibraries {
-            get {
-                object obj = ResourceManager.GetObject("SettingsLibraries", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap SettingsPages {
-            get {
-                object obj = ResourceManager.GetObject("SettingsPages", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap SettingsSync {
-            get {
-                object obj = ResourceManager.GetObject("SettingsSync", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Sync {
-            get {
-                object obj = ResourceManager.GetObject("Sync", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap TagsRibbonCategories {
-            get {
-                object obj = ResourceManager.GetObject("TagsRibbonCategories", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap TagsRibbonClear {
-            get {
-                object obj = ResourceManager.GetObject("TagsRibbonClear", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap TagsRibbonKeywords {
-            get {
-                object obj = ResourceManager.GetObject("TagsRibbonKeywords", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap TagsRibbonSave {
-            get {
-                object obj = ResourceManager.GetObject("TagsRibbonSave", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap TagsRibbonSuperFIlters {
-            get {
-                object obj = ResourceManager.GetObject("TagsRibbonSuperFIlters", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap VideoConvert {
-            get {
-                object obj = ResourceManager.GetObject("VideoConvert", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap VideoDelete {
-            get {
-                object obj = ResourceManager.GetObject("VideoDelete", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap WallbinSettingsComboboxes {
             get {
                 object obj = ResourceManager.GetObject("WallbinSettingsComboboxes", resourceCulture);
@@ -1343,39 +1423,9 @@ namespace SalesLibraries.FileManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap WallbinSettingsRibbon {
-            get {
-                object obj = ResourceManager.GetObject("WallbinSettingsRibbon", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap WallbinSettingsTabPages {
             get {
                 object obj = ResourceManager.GetObject("WallbinSettingsTabPages", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap WallbinZoomIn {
-            get {
-                object obj = ResourceManager.GetObject("WallbinZoomIn", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap WallbinZoomOut {
-            get {
-                object obj = ResourceManager.GetObject("WallbinZoomOut", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

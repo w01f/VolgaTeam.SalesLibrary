@@ -9,7 +9,6 @@
 		Preferences,
 		Settings,
 		Calendar,
-		ProgramManager,
 		VideoManager,
 		Bundles,
 	}

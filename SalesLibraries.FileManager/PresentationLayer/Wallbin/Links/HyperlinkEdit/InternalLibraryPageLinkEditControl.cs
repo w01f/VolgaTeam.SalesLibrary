@@ -83,14 +83,12 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.HyperlinkEd
 				comboBoxEditLibraryName.EditValue = ((InternalWallbinLinkInfo)templateInfo).LibraryName;
 				comboBoxEditPageName.EditValue = ((InternalWallbinLinkInfo)templateInfo).PageName;
 				checkEditShowHeaderText.Checked = ((InternalWallbinLinkInfo)templateInfo).ShowHeaderText;
-				checkEditOpenOnSamePage.Checked = ((InternalWallbinLinkInfo)templateInfo).OpenOnSamePage;
 			}
 			if (templateInfo is InternalLibraryFolderLinkInfo)
 			{
 				comboBoxEditLibraryName.EditValue = ((InternalLibraryFolderLinkInfo)templateInfo).LibraryName;
 				comboBoxEditPageName.EditValue = ((InternalLibraryFolderLinkInfo)templateInfo).PageName;
 				checkEditShowHeaderText.Checked = ((InternalLibraryFolderLinkInfo)templateInfo).ShowHeaderText;
-				checkEditOpenOnSamePage.Checked = ((InternalLibraryFolderLinkInfo)templateInfo).OpenOnSamePage;
 			}
 			if (templateInfo is InternalLibraryObjectLinkInfo)
 			{
@@ -98,7 +96,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.HyperlinkEd
 			}
 			if (templateInfo is InternalShortcutLinkInfo)
 			{
-				checkEditOpenOnSamePage.Checked = ((InternalShortcutLinkInfo)templateInfo).OpenOnSamePage;
 			}
 		}
 

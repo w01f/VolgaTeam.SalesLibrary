@@ -46,7 +46,7 @@ namespace SalesLibraries.SalesDepot.Business.Themes
 			{
 				Logo = new Bitmap(bigLogoFile.LocalPath);
 				BrowseLogo = Logo.GetThumbnailImage(((Logo.Width * 144) / Logo.Height) + 10, 144, null, IntPtr.Zero);
-				var borderedLogo = Logo.DrawBorder();
+				var borderedLogo = Logo.DrawBorder(2, Color.DimGray);
 				RibbonLogo = borderedLogo.GetThumbnailImage(((borderedLogo.Width * 72) / borderedLogo.Height) + 10, 72, null, IntPtr.Zero);
 			}
 

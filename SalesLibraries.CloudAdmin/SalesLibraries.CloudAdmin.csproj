@@ -755,6 +755,12 @@
       <DependentUpon>BaseWallbin.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Wallbin\Views\FormatState.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Views\FormProgressWallbin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Views\FormProgressWallbin.designer.cs">
+      <DependentUpon>FormProgressWallbin.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationLayer\Wallbin\Views\IPageView.cs" />
     <Compile Include="PresentationLayer\Wallbin\Views\IWallbinView.cs" />
     <Compile Include="PresentationLayer\Wallbin\Views\PageContent.cs">
@@ -1060,6 +1066,9 @@
     <EmbeddedResource Include="PresentationLayer\Wallbin\Views\BaseWallbin.resx">
       <DependentUpon>BaseWallbin.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Views\FormProgressWallbin.resx">
+      <DependentUpon>FormProgressWallbin.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Views\PageContent.resx">
       <DependentUpon>PageContent.cs</DependentUpon>
     </EmbeddedResource>
@@ -1102,6 +1111,33 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\ProgressWallbinLogo.png" />
+    <None Include="Resources\RibbonBundlesNew.png" />
+    <None Include="Resources\RibbonFloater.png" />
+    <None Include="Resources\RibbonExit.png" />
+    <None Include="Resources\RibbonCompactWallbin.png" />
+    <None Include="Resources\RibbonVideoDelete.png" />
+    <None Include="Resources\RibbonVideoConvert.png" />
+    <None Include="Resources\RibbonTagsSuperFIlters.png" />
+    <None Include="Resources\RibbonTagsKeywords.png" />
+    <None Include="Resources\RibbonTagsClear.png" />
+    <None Include="Resources\RibbonTagsCategories.png" />
+    <None Include="Resources\RibbonSync.png" />
+    <None Include="Resources\RibbonSettingsWallbin.png" />
+    <None Include="Resources\RibbonSettingsSync.png" />
+    <None Include="Resources\RibbonSettingsPages.png" />
+    <None Include="Resources\RibbonSettingsColumns.png" />
+    <None Include="Resources\RibbonSettingsAutoWidgets.png" />
+    <None Include="Resources\RibbonSettingsAdvanced.png" />
+    <None Include="Resources\RibbonSecuritySelect.png" />
+    <None Include="Resources\RibbonSecurityReset.png" />
+    <None Include="Resources\RibbonLinkTags.png" />
+    <None Include="Resources\RibbonLinkSettings.png" />
+    <None Include="Resources\RibbonLinkOpen.png" />
+    <None Include="Resources\RibbonLinkImage.png" />
+    <None Include="Resources\RibbonLinkDelete.png" />
+    <None Include="Resources\RibbonLinkAddUrl.png" />
+    <None Include="Resources\RibbonLinkAddLineBreak.png" />
     <None Include="Resources\CompactWallbinPageOpen.png" />
     <None Include="Resources\CompactWallbinPageClosed.png" />
     <None Include="Resources\CompactWallbinLineBreak.png" />
@@ -1141,29 +1177,12 @@
     <None Include="Resources\LinkSettingsPreviewOptions.png" />
     <None Include="Resources\LinkSettingsHoverNote.png" />
     <None Include="Resources\LinkSettingsResetSettingsScheduler.png" />
-    <None Include="Resources\WallbinZoomOut.png" />
-    <None Include="Resources\WallbinZoomIn.png" />
     <None Include="Resources\WallbinSettingsTabPages.png" />
-    <None Include="Resources\WallbinSettingsRibbon.png" />
     <None Include="Resources\WallbinSettingsComboboxes.png" />
-    <None Include="Resources\VideoDelete.png" />
-    <None Include="Resources\VideoConvert.png" />
-    <None Include="Resources\TagsRibbonSuperFIlters.png" />
-    <None Include="Resources\TagsRibbonSave.png" />
-    <None Include="Resources\TagsRibbonKeywords.png" />
-    <None Include="Resources\TagsRibbonClear.png" />
-    <None Include="Resources\TagsRibbonCategories.png" />
-    <None Include="Resources\Sync.png" />
-    <None Include="Resources\SettingsSync.png" />
-    <None Include="Resources\SettingsPages.png" />
     <None Include="Resources\SettingsColumnTitle.png" />
     <None Include="Resources\SettingsColumnsAlignByRows.png" />
     <None Include="Resources\SettingsColumnsAlignByColumns.png" />
     <None Include="Resources\SettingsColumns.png" />
-    <None Include="Resources\SettingsAutoWidgets.png" />
-    <None Include="Resources\SettingsAdvanced.png" />
-    <None Include="Resources\SecurityRibbonSelect.png" />
-    <None Include="Resources\SecurityRibbonReset.png" />
     <None Include="Resources\SecurityRibbonLogo.png" />
     <None Include="Resources\SecurityMenuSelect.png" />
     <None Include="Resources\SecurityMenuReset.png" />
@@ -1177,7 +1196,6 @@
     <None Include="Resources\LinkSettingsFolderPptx.png" />
     <None Include="Resources\LinkSettingsFolderPdf.png" />
     <None Include="Resources\LinkSettingsFolderDocx.png" />
-    <None Include="Resources\LinkOpen.png" />
     <None Include="Resources\LinkDelete.png" />
     <None Include="Resources\LinkAddYoutube.png" />
     <None Include="Resources\LinkAddUrl.png" />
@@ -1186,9 +1204,7 @@
     <None Include="Resources\LinkAddInternal.png" />
     <None Include="Resources\LinkAddApp.png" />
     <None Include="Resources\HomeLogo.png" />
-    <None Include="Resources\Help.png" />
     <None Include="Resources\Favorites.png" />
-    <None Include="Resources\Exit.png" />
     <None Include="Resources\ButtonVideoReset.png" />
     <None Include="Resources\ButtonVideoConvert.png" />
     <None Include="Resources\ButtonSettings.png" />

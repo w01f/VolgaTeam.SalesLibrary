@@ -117,7 +117,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.HyperlinkEd
 					default:
 						throw new ArgumentOutOfRangeException("Link type is not found");
 				}
-			}
+				_editors.Add(SelectedEditorType, SelectedEditor);}
 			else
 				SelectedEditor = _editors[SelectedEditorType];
 			var control = (Control)SelectedEditor;

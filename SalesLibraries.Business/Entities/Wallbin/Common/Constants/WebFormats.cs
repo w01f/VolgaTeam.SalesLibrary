@@ -9,6 +9,7 @@
 		public const string Other = "other";
 		public const string Pdf = "pdf";
 		public const string Png = "png";
+		public const string Gif = "gif";
 		public const string PowerPoint = "ppt";
 		public const string Url = "url";
 		public const string YouTube = "youtube";

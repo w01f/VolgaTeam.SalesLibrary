@@ -108,9 +108,9 @@
 			this.labelControlTitle.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Top;
 			this.labelControlTitle.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
 			this.labelControlTitle.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-			this.labelControlTitle.Location = new System.Drawing.Point(78, 12);
+			this.labelControlTitle.Location = new System.Drawing.Point(90, 12);
 			this.labelControlTitle.Name = "labelControlTitle";
-			this.labelControlTitle.Size = new System.Drawing.Size(396, 92);
+			this.labelControlTitle.Size = new System.Drawing.Size(384, 92);
 			this.labelControlTitle.StyleController = this.styleController;
 			this.labelControlTitle.TabIndex = 5;
 			this.labelControlTitle.Text = "<size=+3>Before you delete:<br>This link is also on other pages in your site…<br>" +
@@ -120,9 +120,10 @@
 			// 
 			this.pbLogo.BackColor = System.Drawing.Color.White;
 			this.pbLogo.ForeColor = System.Drawing.Color.Black;
+			this.pbLogo.Image = global::SalesLibraries.FileManager.Properties.Resources.LinkDelete;
 			this.pbLogo.Location = new System.Drawing.Point(12, 12);
 			this.pbLogo.Name = "pbLogo";
-			this.pbLogo.Size = new System.Drawing.Size(49, 51);
+			this.pbLogo.Size = new System.Drawing.Size(72, 92);
 			this.pbLogo.TabIndex = 4;
 			this.pbLogo.TabStop = false;
 			// 
@@ -137,7 +138,6 @@
 			this.Controls.Add(this.buttonXDeleteLink);
 			this.DoubleBuffered = true;
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.ForeColor = System.Drawing.Color.Black;
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;

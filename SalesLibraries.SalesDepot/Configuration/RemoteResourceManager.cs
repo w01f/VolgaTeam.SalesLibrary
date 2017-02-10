@@ -21,7 +21,6 @@ namespace SalesLibraries.SalesDepot.Configuration
 		public StorageFile DefaultViewFile { get; private set; }
 		public StorageFile ViewButtonsFile { get; private set; }
 		public StorageFile TabSettingsFile { get; private set; }
-		public StorageFile CalendarDisclaimerFile { get; private set; }
 		public StorageFile Gallery1ConfigFile { get; private set; }
 		public StorageFile Gallery2ConfigFile { get; private set; }
 		public StorageFile CalendarRibbonLogoFile { get; private set; }
@@ -80,14 +79,6 @@ namespace SalesLibraries.SalesDepot.Configuration
 				"SDTabNames.xml"
 				));
 			await TabSettingsFile.Download();
-
-			CalendarDisclaimerFile = new StorageFile(new object[]
-			{
-				FileStorageManager.IncomingFolderName,
-				AppProfileManager.Instance.AppNameSet,
-				"Nielsen Permissible Use.pdf"
-			});
-			await CalendarDisclaimerFile.Download();
 
 			Gallery1ConfigFile = new StorageFile(appOutgoingFolder.RelativePathParts.Merge(
 				"Gallery1.xml"

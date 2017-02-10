@@ -33,7 +33,7 @@ namespace SalesLibraries.FileManager
 			Icon = MainController.Instance.ImageResources.AppIcon ?? Icon;
 
 			labelItemHomeLogo.Image = MainController.Instance.ImageResources.AppRibbonLogo ?? labelItemHomeLogo.Image;
-			ribbonBarHomeWallbin.RecalcLayout();
+			ribbonBarHomeLogo.RecalcLayout();
 			ribbonPanelHome.PerformLayout();
 
 			labelItemPreferencesLogo.Image = MainController.Instance.ImageResources.AppRibbonLogo ?? labelItemHomeLogo.Image;
@@ -43,10 +43,6 @@ namespace SalesLibraries.FileManager
 			labelItemCalendarLogo.Image = MainController.Instance.ImageResources.AppRibbonLogo ?? labelItemHomeLogo.Image;
 			ribbonBarCalendarLogo.RecalcLayout();
 			ribbonPanelCalendar.PerformLayout();
-
-			labelItemProgramManagerLogo.Image = MainController.Instance.ImageResources.AppRibbonLogo ?? labelItemHomeLogo.Image;
-			ribbonBarProgramManagerLogo.RecalcLayout();
-			ribbonPanelProgramManager.PerformLayout();
 
 			labelItemVideoLogo.Image = MainController.Instance.ImageResources.AppRibbonLogo ?? labelItemHomeLogo.Image;
 			ribbonBarVideoLogo.RecalcLayout();
@@ -91,21 +87,40 @@ namespace SalesLibraries.FileManager
 
 			var title = !String.IsNullOrEmpty(libraryDirectory.Name) ? libraryDirectory.Name : "Site Admin";
 
-			ribbonBarHomeWallbin.Text = title;
-			ribbonBarPreferencesLogo.Text = title;
-			ribbonBarCalendarLogo.Text = title;
-			ribbonBarProgramManagerLogo.Text = title;
-			ribbonBarVideoLogo.Text = title;
-			ribbonBarTagsLogo.Text = title;
-			ribbonBarSecurityLogo.Text = title;
-			ribbonBarBundlesLogo.Text = title;
+			ribbonBarHomeLogo.Text = 
+			ribbonBarPreferencesLogo.Text = 
+			ribbonBarCalendarLogo.Text = 
+			ribbonBarVideoLogo.Text = 
+			ribbonBarTagsLogo.Text = 
+			ribbonBarSecurityLogo.Text = 
+			ribbonBarBundlesLogo.Text = 
 			ribbonBarSettingsLogo.Text = title;
+
+			ribbonBarHomeLogo.RecalcLayout();
+			ribbonPanelHome.PerformLayout();
+			ribbonBarPreferencesLogo.RecalcLayout();
+			ribbonPanelPreferences.PerformLayout();
+			ribbonBarCalendarLogo.RecalcLayout();
+			ribbonPanelCalendar.PerformLayout();
+			ribbonBarVideoLogo.RecalcLayout();
+			ribbonPanelVideo.PerformLayout();
+			ribbonBarTagsLogo.RecalcLayout();
+			ribbonPanelTags.PerformLayout();
+			ribbonBarSecurityLogo.RecalcLayout();
+			ribbonPanelSecurity.PerformLayout();
+			ribbonBarBundlesLogo.RecalcLayout();
+			ribbonPanelBundles.PerformLayout();
+			ribbonBarSettingsLogo.RecalcLayout();
+			ribbonPanelSettings.PerformLayout();
+
+			ribbonBarHomeLinkSettings.OverflowButtonText = "Link Tools";
+			ribbonBarHomeLinkSettings.RecalcLayout();
+			ribbonPanelHome.PerformLayout();
 		}
 
 		private void ConfigureRibbon()
 		{
 			ribbonTabItemCalendar.Visible = MainController.Instance.Settings.EnableOvernightsCalendarTab;
-			ribbonTabItemProgramManager.Visible = MainController.Instance.Settings.EnableProgramManagerTab;
 			ribbonTabItemVideo.Visible = MainController.Instance.Settings.EnableIPadSettingsTab;
 			ribbonTabItemTags.Visible = MainController.Instance.Settings.EnableTagsTab;
 			ribbonTabItemSecurity.Visible = MainController.Instance.Settings.EnableSecurityTab;
@@ -197,8 +212,6 @@ namespace SalesLibraries.FileManager
 				key = TabPageEnum.Preferences;
 			else if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemSettings)
 				key = TabPageEnum.Settings;
-			else if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemProgramManager)
-				key = TabPageEnum.ProgramManager;
 			else if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemCalendar)
 				key = TabPageEnum.Calendar;
 			else if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemVideo)
@@ -206,6 +219,16 @@ namespace SalesLibraries.FileManager
 			else if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemBundles)
 				key = TabPageEnum.Bundles;
 			MainController.Instance.ShowTab(key);
+		}
+
+		private void buttonItemHomeAddUrl_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void buttonItemHomeLinkPropertiesNotes_Click(object sender, EventArgs e)
+		{
+
 		}
 	}
 }

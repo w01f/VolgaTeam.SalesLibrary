@@ -1,11 +1,12 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using DevComponents.DotNetBar;
-using DevExpress.XtraEditors.Controls;
 using SalesLibraries.Business.Entities.Helpers;
+using SalesLibraries.Business.Entities.Interfaces;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.Common.DataState;
@@ -38,6 +39,18 @@ namespace SalesLibraries.FileManager.Controllers
 			pnContainer.Dock = DockStyle.Fill;
 			pnEmpty.BringToFront();
 			NeedToUpdate = true;
+
+			if (CreateGraphics().DpiX > 96)
+			{
+				var font = new Font(styleController.Appearance.Font.FontFamily, styleController.Appearance.Font.Size - 2,
+					styleController.Appearance.Font.Style);
+				styleController.Appearance.Font = font;
+				styleController.AppearanceDisabled.Font = font;
+				styleController.AppearanceDropDown.Font = font;
+				styleController.AppearanceDropDownHeader.Font = font;
+				styleController.AppearanceFocused.Font = font;
+				styleController.AppearanceReadOnly.Font = font;
+			}
 		}
 
 		public void InitController()
@@ -58,7 +71,6 @@ namespace SalesLibraries.FileManager.Controllers
 			MainController.Instance.MainForm.buttonItemHomeSync.Click += OnSyncClick;
 			MainController.Instance.MainForm.buttonItemPreferencesSync.Click += OnSyncClick;
 			MainController.Instance.MainForm.buttonItemCalendarSync.Click += OnSyncClick;
-			MainController.Instance.MainForm.buttonItemProgramManagerSync.Click += OnSyncClick;
 			MainController.Instance.MainForm.buttonItemVideoSync.Click += OnSyncClick;
 			MainController.Instance.MainForm.buttonItemTagsSync.Click += OnSyncClick;
 			MainController.Instance.MainForm.buttonItemSecuritySync.Click += OnSyncClick;
@@ -67,7 +79,6 @@ namespace SalesLibraries.FileManager.Controllers
 
 			#region Link Operations
 			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesTags.Visible = MainController.Instance.Settings.EditorSettings.EnableTagsEdit;
-			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesSecurity.Visible = MainController.Instance.Settings.EditorSettings.EnableSecurityEdit;
 
 			MainController.Instance.MainForm.buttonItemHomeAddUrl.Click += buttonItemHomeAddUrl_Click;
 			MainController.Instance.MainForm.buttonItemHomeAddLineBreak.Click += buttonItemHomeAddLineBreak_Click;
@@ -77,17 +88,9 @@ namespace SalesLibraries.FileManager.Controllers
 
 			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesNotes.Click += buttonItemHomeLinkSettings_Click;
 			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesTags.Click += buttonItemHomeLinkSettings_Click;
-			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesExpirationDate.Click += buttonItemHomeLinkSettings_Click;
-			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesSecurity.Click += buttonItemHomeLinkSettings_Click;
 			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesWidget.Click += buttonItemHomeLinkSettings_Click;
 			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesBanner.Click += buttonItemHomeLinkSettings_Click;
-			#endregion
-
-			#region Wallbin Settings
-			MainController.Instance.MainForm.buttonItemHomeSettings.Click += OnWallbinSettingsClick;
-			MainController.Instance.MainForm.buttonItemHomeZoomIn.Click += OnWallbinFontUpClick;
-			MainController.Instance.MainForm.buttonItemHomeZoomOut.Click += OnWallbinFontDownClick;
-			UpdateFontButtons();
+			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesThumbnail.Click += buttonItemHomeLinkSettings_Click;
 			#endregion
 
 			#region General Settings
@@ -97,6 +100,7 @@ namespace SalesLibraries.FileManager.Controllers
 			MainController.Instance.MainForm.buttonItemSettingsLibraries.Click += buttonItemSettingsLibraries_Click;
 			MainController.Instance.MainForm.buttonItemSettingsSyncSettings.Click += buttonItemSettingsSync_Click;
 			MainController.Instance.MainForm.buttonItemSettingsAdvanced.Click += buttonItemSettingsAdvanced_Click;
+			MainController.Instance.MainForm.buttonItemSettingsWallbin.Click += OnWallbinSettingsClick;
 			#endregion
 
 			#region Tags
@@ -116,14 +120,6 @@ namespace SalesLibraries.FileManager.Controllers
 			#region Security
 			MainController.Instance.MainForm.buttonItemSecuritySelect.Click += buttonItemSecuritySelect_Click;
 			MainController.Instance.MainForm.buttonItemSecurityReset.Click += buttonItemSecurityReset_Click;
-			#endregion
-
-			#region Program Data
-			MainController.Instance.MainForm.buttonItemProgramManagerSyncSettingsEnabled.Click += buttonItemProgramManagerSync_Click;
-			MainController.Instance.MainForm.buttonItemProgramManagerSyncSettingsDisabled.Click += buttonItemProgramManagerSync_Click;
-			MainController.Instance.MainForm.buttonItemProgramManagerSyncSettingsEnabled.CheckedChanged += buttonItemProgramManagerSync_CheckedChanged;
-			MainController.Instance.MainForm.buttonItemProgramManagerSyncSettingsDisabled.CheckedChanged += buttonItemProgramManagerSync_CheckedChanged;
-			MainController.Instance.MainForm.buttonEditProgramManagerLocation.ButtonClick += buttonEditProgramManagerLocation_ButtonClick;
 			#endregion
 
 			#region Link Bundles
@@ -204,12 +200,13 @@ namespace SalesLibraries.FileManager.Controllers
 
 			MainController.Instance.MainForm.buttonItemHomeLinkDelete.Enabled = selectedLinks.Any();
 
-			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesSecurity.Enabled =
+			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesImage.Enabled =
 			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesWidget.Enabled =
 			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesBanner.Enabled = selectedLinks.Any(l => !(l is LibraryFileLink) || !((LibraryFileLink)l).IsDead);
 
+			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesThumbnail.Enabled = selectedLinks.Any(l => l is IThumbnailSettingsHolder && !((LibraryFileLink)l).IsDead);
+
 			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesTags.Enabled =
-			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesExpirationDate.Enabled =
 				selectedLinks.Any(l => !(l is LineBreak) && (!(l is LibraryFileLink) || !((LibraryFileLink)l).IsDead));
 		}
 
@@ -231,7 +228,6 @@ namespace SalesLibraries.FileManager.Controllers
 
 				activeWallbin.ShowView();
 				UpdateRetractableBarContent();
-				UpdateProgramDataSettings();
 				((Control)activeWallbin).BringToFront();
 				pnContainer.BringToFront();
 				_isLoading = false;
@@ -477,6 +473,17 @@ namespace SalesLibraries.FileManager.Controllers
 				form.ShowDialog(MainController.Instance.MainForm);
 			}
 		}
+
+		private void OnWallbinSettingsClick(object sender, EventArgs e)
+		{
+			using (var form = new FormWallbinSettings())
+			{
+				if (form.ShowDialog(MainController.Instance.MainForm) != DialogResult.OK) return;
+				ProcessChanges();
+				NeedToUpdate = true;
+				MainController.Instance.ReloadWallbinViews();
+			}
+		}
 		#endregion
 
 		#region Link Settings
@@ -492,37 +499,6 @@ namespace SalesLibraries.FileManager.Controllers
 		{
 			if (MainController.Instance.WallbinViews.ActiveWallbin == null) return;
 			MainController.Instance.WallbinViews.ActiveWallbin.IsDataChanged = true;
-		}
-		#endregion
-
-		#region Wallbin Settings
-		private void UpdateFontButtons()
-		{
-			MainController.Instance.MainForm.buttonItemHomeZoomIn.Enabled = MainController.Instance.WallbinViews.FormatState.FontSize < 20;
-			MainController.Instance.MainForm.buttonItemHomeZoomOut.Enabled = MainController.Instance.WallbinViews.FormatState.FontSize > 8;
-		}
-
-		private void OnWallbinFontUpClick(object sender, EventArgs e)
-		{
-			MainController.Instance.WallbinViews.FormatState.FontSize += 2;
-			UpdateFontButtons();
-		}
-
-		private void OnWallbinFontDownClick(object sender, EventArgs e)
-		{
-			MainController.Instance.WallbinViews.FormatState.FontSize -= 2;
-			UpdateFontButtons();
-		}
-
-		private void OnWallbinSettingsClick(object sender, EventArgs e)
-		{
-			using (var form = new FormWallbinSettings())
-			{
-				if (form.ShowDialog(MainController.Instance.MainForm) != DialogResult.OK) return;
-				ProcessChanges();
-				NeedToUpdate = true;
-				MainController.Instance.ReloadWallbinViews();
-			}
 		}
 		#endregion
 
@@ -659,56 +635,6 @@ namespace SalesLibraries.FileManager.Controllers
 			if (MainController.Instance.WallbinViews.ActiveWallbin.ActivePage == null) return;
 			MainController.Instance.WallbinViews.ActiveWallbin.ActivePage.Content.ResetSecurity();
 			MainController.Instance.WallbinViews.ActiveWallbin.IsDataChanged = true;
-		}
-		#endregion
-
-		#region Program Data Processing
-		private void UpdateProgramDataSettings()
-		{
-			var library = MainController.Instance.WallbinViews.ActiveWallbin.DataStorage.Library;
-			MainController.Instance.MainForm.buttonItemProgramManagerSyncSettingsEnabled.Checked = library.ProgramData.Enable;
-			MainController.Instance.MainForm.buttonItemProgramManagerSyncSettingsDisabled.Checked = !library.ProgramData.Enable;
-			MainController.Instance.MainForm.ribbonBarProgramManagerLocation.Enabled = library.ProgramData.Enable;
-			MainController.Instance.MainForm.buttonEditProgramManagerLocation.EditValue = library.ProgramData.Path;
-		}
-
-		private void buttonItemProgramManagerSync_Click(object sender, EventArgs e)
-		{
-			var buttonItem = (ButtonItem)sender;
-			if (buttonItem.Checked) return;
-			MainController.Instance.MainForm.buttonItemProgramManagerSyncSettingsDisabled.Checked = false;
-			MainController.Instance.MainForm.buttonItemProgramManagerSyncSettingsEnabled.Checked = false;
-			buttonItem.Checked = true;
-		}
-
-		private void buttonItemProgramManagerSync_CheckedChanged(object sender, EventArgs e)
-		{
-			if (_isLoading) return;
-			var library = MainController.Instance.WallbinViews.ActiveWallbin.DataStorage.Library;
-			library.ProgramData.Enable = MainController.Instance.MainForm.buttonItemProgramManagerSyncSettingsEnabled.Checked;
-			MainController.Instance.MainForm.ribbonBarProgramManagerLocation.Enabled = library.ProgramData.Enable;
-			if (!library.ProgramData.Enable)
-			{
-				MainController.Instance.MainForm.buttonEditProgramManagerLocation.EditValue = null;
-				library.ProgramData.Path = null;
-			}
-			MainController.Instance.WallbinViews.ActiveWallbin.IsDataChanged = true;
-		}
-
-		private void buttonEditProgramManagerLocation_ButtonClick(object sender, ButtonPressedEventArgs e)
-		{
-			var library = MainController.Instance.WallbinViews.ActiveWallbin.DataStorage.Library;
-			using (var dialog = new FolderBrowserDialog())
-			{
-				dialog.SelectedPath = !String.IsNullOrEmpty(library.ProgramData.Path) ?
-					library.ProgramData.Path :
-					Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-				if (dialog.ShowDialog() != DialogResult.OK) return;
-				if (!Directory.Exists(dialog.SelectedPath)) return;
-				MainController.Instance.MainForm.buttonEditProgramManagerLocation.EditValue = dialog.SelectedPath;
-				library.ProgramData.Path = dialog.SelectedPath;
-				MainController.Instance.WallbinViews.ActiveWallbin.IsDataChanged = true;
-			}
 		}
 		#endregion
 

@@ -78,18 +78,15 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.HyperlinkEd
 				comboBoxEditLibraryName.EditValue = ((InternalLibraryPageLinkInfo) templateInfo).LibraryName;
 				comboBoxEditPageName.EditValue = ((InternalLibraryPageLinkInfo) templateInfo).PageName;
 				checkEditShowHeaderText.Checked = ((InternalLibraryPageLinkInfo) templateInfo).ShowHeaderText;
-				checkEditOpenOnSamePage.Checked = ((InternalLibraryPageLinkInfo) templateInfo).OpenOnSamePage;
 			}
 			if (templateInfo is InternalLibraryFolderLinkInfo)
 			{
 				comboBoxEditLibraryName.EditValue = ((InternalLibraryFolderLinkInfo) templateInfo).LibraryName;
 				comboBoxEditPageName.EditValue = ((InternalLibraryFolderLinkInfo) templateInfo).PageName;
 				checkEditShowHeaderText.Checked = ((InternalLibraryFolderLinkInfo) templateInfo).ShowHeaderText;
-				checkEditOpenOnSamePage.Checked = ((InternalLibraryFolderLinkInfo) templateInfo).OpenOnSamePage;
 			}
 			if (templateInfo is InternalShortcutLinkInfo)
 			{
-				checkEditOpenOnSamePage.Checked = ((InternalShortcutLinkInfo) templateInfo).OpenOnSamePage;
 			}
 		}
 

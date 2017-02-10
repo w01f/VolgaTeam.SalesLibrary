@@ -31,9 +31,6 @@ namespace SalesLibraries.Business.Contexts.Wallbin.Local
 			target.SyncSettings.CloseAfterSync = legacyLibrary.CloseAfterSync;
 			target.SyncSettings.MinimizeOnSync = legacyLibrary.MinimizeOnSync;
 			
-			target.ProgramData.Enable = legacyLibrary.EnableProgramManagerSync;
-			target.ProgramData.Path = legacyLibrary.ProgramManagerLocation;
-
 			target.Calendar.Enabled = legacyLibrary.OvernightsCalendar.Enabled;
 			target.Calendar.Path = legacyLibrary.OvernightsCalendar.RootFolder?.FullName;
 			target.Calendar.CalendarBackColor = legacyLibrary.OvernightsCalendar.CalendarBackColor;

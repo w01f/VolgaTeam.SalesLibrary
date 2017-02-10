@@ -9,6 +9,8 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 {
 	public class ThumbnailSettings : SettingsContainer
 	{
+		public const int DefaultShadowSize = 7;
+
 		private bool _enable;
 		public bool Enable
 		{
@@ -78,6 +80,42 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 				if (_imageAlignement != value)
 					OnSettingsChanged();
 				_imageAlignement = value;
+			}
+		}
+
+		private int _borderSize = 0;
+		public int BorderSize
+		{
+			get { return _borderSize; }
+			set
+			{
+				if (_borderSize != value)
+					OnSettingsChanged();
+				_borderSize = value;
+			}
+		}
+
+		private Color _borderColor = Color.Black;
+		public Color BorderColor
+		{
+			get { return _borderColor; }
+			set
+			{
+				if (_borderColor != value)
+					OnSettingsChanged();
+				_borderColor = value;
+			}
+		}
+
+		private Color _shadowColor = Color.White;
+		public Color ShadowColor
+		{
+			get { return _shadowColor; }
+			set
+			{
+				if (_shadowColor != value)
+					OnSettingsChanged();
+				_shadowColor = value;
 			}
 		}
 

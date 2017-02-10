@@ -129,6 +129,17 @@ namespace SalesLibraries.Business.Entities.Helpers
 			}
 		}
 
+		public static bool IsGifFile(string filePath)
+		{
+			switch (GetExtension(filePath))
+			{
+				case ".GIF":
+					return true;
+				default:
+					return false;
+			}
+		}
+
 		public static bool IsMp3File(string filePath)
 		{
 			switch (GetExtension(filePath))

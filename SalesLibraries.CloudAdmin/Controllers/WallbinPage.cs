@@ -1,18 +1,20 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using DevComponents.DotNetBar;
 using SalesLibraries.Business.Entities.Helpers;
+using SalesLibraries.Business.Entities.Interfaces;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
+using SalesLibraries.Common.DataState;
+using SalesLibraries.CommonGUI.RetractableBar;
 using SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.GroupSettings;
 using SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Settings;
 using SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views;
 using SalesLibraries.CloudAdmin.Properties;
-using SalesLibraries.Common.DataState;
-using SalesLibraries.CommonGUI.RetractableBar;
 
 namespace SalesLibraries.CloudAdmin.Controllers
 {
@@ -33,6 +35,18 @@ namespace SalesLibraries.CloudAdmin.Controllers
 			pnContainer.Dock = DockStyle.Fill;
 			pnEmpty.BringToFront();
 			NeedToUpdate = true;
+
+			if (CreateGraphics().DpiX > 96)
+			{
+				var font = new Font(styleController.Appearance.Font.FontFamily, styleController.Appearance.Font.Size - 2,
+					styleController.Appearance.Font.Style);
+				styleController.Appearance.Font = font;
+				styleController.AppearanceDisabled.Font = font;
+				styleController.AppearanceDropDown.Font = font;
+				styleController.AppearanceDropDownHeader.Font = font;
+				styleController.AppearanceFocused.Font = font;
+				styleController.AppearanceReadOnly.Font = font;
+			}
 		}
 
 		public void InitController()
@@ -41,6 +55,9 @@ namespace SalesLibraries.CloudAdmin.Controllers
 			{
 				switch (e.ChangeType)
 				{
+					case DataChangeType.LibrarySelected:
+						OnLibraryChanged(o, e);
+						break;
 					case DataChangeType.LinksDeleted:
 						MainController.Instance.WallbinViews.ActiveWallbin.IsDataChanged = true;
 						break;
@@ -49,6 +66,7 @@ namespace SalesLibraries.CloudAdmin.Controllers
 
 			MainController.Instance.MainForm.buttonItemHomeSync.Click += OnSyncClick;
 			MainController.Instance.MainForm.buttonItemPreferencesSync.Click += OnSyncClick;
+			MainController.Instance.MainForm.buttonItemCalendarSync.Click += OnSyncClick;
 			MainController.Instance.MainForm.buttonItemVideoSync.Click += OnSyncClick;
 			MainController.Instance.MainForm.buttonItemTagsSync.Click += OnSyncClick;
 			MainController.Instance.MainForm.buttonItemSecuritySync.Click += OnSyncClick;
@@ -57,7 +75,6 @@ namespace SalesLibraries.CloudAdmin.Controllers
 
 			#region Link Operations
 			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesTags.Visible = MainController.Instance.Settings.EditorSettings.EnableTagsEdit;
-			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesSecurity.Visible = MainController.Instance.Settings.EditorSettings.EnableSecurityEdit;
 
 			MainController.Instance.MainForm.buttonItemHomeAddUrl.Click += buttonItemHomeAddUrl_Click;
 			MainController.Instance.MainForm.buttonItemHomeAddLineBreak.Click += buttonItemHomeAddLineBreak_Click;
@@ -67,17 +84,9 @@ namespace SalesLibraries.CloudAdmin.Controllers
 
 			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesNotes.Click += buttonItemHomeLinkSettings_Click;
 			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesTags.Click += buttonItemHomeLinkSettings_Click;
-			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesExpirationDate.Click += buttonItemHomeLinkSettings_Click;
-			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesSecurity.Click += buttonItemHomeLinkSettings_Click;
 			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesWidget.Click += buttonItemHomeLinkSettings_Click;
 			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesBanner.Click += buttonItemHomeLinkSettings_Click;
-			#endregion
-
-			#region Wallbin Settings
-			MainController.Instance.MainForm.buttonItemHomeSettings.Click += OnWallbinSettingsClick;
-			MainController.Instance.MainForm.buttonItemHomeZoomIn.Click += OnWallbinFontUpClick;
-			MainController.Instance.MainForm.buttonItemHomeZoomOut.Click += OnWallbinFontDownClick;
-			UpdateFontButtons();
+			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesThumbnail.Click += buttonItemHomeLinkSettings_Click;
 			#endregion
 
 			#region General Settings
@@ -86,10 +95,10 @@ namespace SalesLibraries.CloudAdmin.Controllers
 			MainController.Instance.MainForm.buttonItemPreferencesAutoWidgets.Click += buttonItemPreferencesAutoWidgets_Click;
 			MainController.Instance.MainForm.buttonItemSettingsSyncSettings.Click += buttonItemSettingsSync_Click;
 			MainController.Instance.MainForm.buttonItemSettingsAdvanced.Click += buttonItemSettingsAdvanced_Click;
+			MainController.Instance.MainForm.buttonItemSettingsWallbin.Click += OnWallbinSettingsClick;
 			#endregion
 
 			#region Tags
-
 			MainController.Instance.MainForm.ribbonBarTagsSuperFilters.Visible =
 				MainController.Instance.Lists.SuperFilters.Items.Any();
 
@@ -115,8 +124,6 @@ namespace SalesLibraries.CloudAdmin.Controllers
 			MainController.Instance.WallbinViews.FormatState.StateChanged += OnFormatStateChanged;
 			MainController.Instance.WallbinViews.Selection.SelectionChanged += OnSelectionChanged;
 			MainController.Instance.WallbinViews.DataChanged += OnLibraryDataChanged;
-
-			retractableBar.Collapse(true);
 
 			_groupSettingsManager = new GroupSettingsManager();
 			_groupSettingsManager.ChangesMade += OnLinkGroupChangesMade;
@@ -172,27 +179,24 @@ namespace SalesLibraries.CloudAdmin.Controllers
 		private void UpdateLinkButtons()
 		{
 			var selectedFolder = MainController.Instance.WallbinViews.Selection.SelectedFolder;
-			var selectedLink = selectedFolder != null ?
-				MainController.Instance.WallbinViews.Selection.SelectedFolder.SelectedLinkRow :
-				null;
+			var selectedLinks = MainController.Instance.WallbinViews.Selection.SelectedLinks.ToList();
 
 			MainController.Instance.MainForm.buttonItemHomeAddUrl.Enabled =
 			MainController.Instance.MainForm.buttonItemHomeAddLineBreak.Enabled = selectedFolder != null;
 
-			MainController.Instance.MainForm.buttonItemHomeLinkOpen.Enabled = selectedLink != null && selectedLink.IsOpenable;
-			MainController.Instance.MainForm.buttonItemHomeLinkDelete.Enabled = selectedLink != null;
-
 			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesNotes.Enabled =
-			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesSecurity.Enabled =
+			MainController.Instance.MainForm.buttonItemHomeLinkOpen.Enabled = selectedLinks.Count == 1 && selectedFolder?.SelectedLinkRow != null && !selectedFolder.SelectedLinkRow.Inaccessable;
+
+			MainController.Instance.MainForm.buttonItemHomeLinkDelete.Enabled = selectedLinks.Any();
+
+			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesImage.Enabled =
 			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesWidget.Enabled =
-			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesBanner.Enabled =
-			MainController.Instance.MainForm.buttonItemHomeLinkOpen.Enabled = selectedLink != null && !selectedLink.Inaccessable;
+			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesBanner.Enabled = selectedLinks.Any(l => !(l is LibraryFileLink) || !((LibraryFileLink)l).IsDead);
+
+			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesThumbnail.Enabled = selectedLinks.Any(l => l is IThumbnailSettingsHolder && !((LibraryFileLink)l).IsDead);
 
 			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesTags.Enabled =
-			MainController.Instance.MainForm.buttonItemHomeLinkPropertiesExpirationDate.Enabled =
-				selectedLink != null &&
-				!selectedLink.Inaccessable &&
-				!(selectedLink.Source is LineBreak);
+				selectedLinks.Any(l => !(l is LineBreak) && (!(l is LibraryFileLink) || !((LibraryFileLink)l).IsDead));
 		}
 
 		public void OnLibraryChanged(object sender, EventArgs e)
@@ -210,6 +214,7 @@ namespace SalesLibraries.CloudAdmin.Controllers
 				if (activeWallbin == null) return;
 				if (!pnContainer.Controls.Contains((Control)activeWallbin))
 					pnContainer.Controls.Add((Control)activeWallbin);
+
 				activeWallbin.ShowView();
 				UpdateRetractableBarContent();
 				((Control)activeWallbin).BringToFront();
@@ -249,12 +254,35 @@ namespace SalesLibraries.CloudAdmin.Controllers
 		private void OnSyncClick(object sender, EventArgs e)
 		{
 			//MainController.Instance.ProcessChanges();
-			//MainController.Instance.ProcessManager.RunStartProcess(
-			//	null, //String.Format("Syncing changes with {0}", MainController.Instance.Settings.SiteLibrary),
-			//	(cancelationToken, formProgress) =>
+
+			//var targetContext = MainController.Instance.WallbinViews.ActiveWallbin.DataStorage;
+			//var targetLibrary = targetContext.Library;
+			//if ((MainController.Instance.Settings.NetworkPaths.Any() && MainController.Instance.Settings.NetworkPaths.Any(p => !Directory.Exists(p))) ||
+			//	MainController.Instance.Settings.WebPaths.Any() && MainController.Instance.Settings.WebPaths.Any(p => !Directory.Exists(p)))
+			//	MainController.Instance.PopupMessages.ShowWarning("Some of your Upload Directories are Not connected. Your changes will still be saved in your Source Directory.");
+
+			//MainController.Instance.MainForm.ribbonControl.Enabled = false;
+			//var savedState = MainController.Instance.MainForm.WindowState;
+			//if (targetLibrary.SyncSettings.MinimizeOnSync)
+			//	MainController.Instance.MainForm.WindowState = FormWindowState.Minimized;
+
+			//var formProgressSync = new FormProgressSync();
+			//MainController.Instance.ProcessManager.RunWithProgress(
+			//	formProgressSync,
+			//	true,
+			//	(cancellationToken, formProgress) => SyncManager.SyncRegular(cancellationToken),
+			//	cancellationToken => MainController.Instance.MainForm.ActiveForm.Invoke(new MethodInvoker(() =>
 			//	{
-			//		MainController.Instance.Wallbin.CheckinData();
-			//	});
+			//		if (!cancellationToken.IsCancellationRequested && targetLibrary.SyncSettings.CloseAfterSync)
+			//		{
+			//			Application.Exit();
+			//			return;
+			//		}
+			//		MainController.Instance.MainForm.WindowState = savedState;
+			//		MainController.Instance.MainForm.ribbonControl.Enabled = true;
+			//		MainController.Instance.TabWallbin.UpdateWallbin();
+			//		MainController.Instance.ActivateApplication();
+			//	})));
 		}
 
 		#region Link Operations Processing
@@ -321,8 +349,8 @@ namespace SalesLibraries.CloudAdmin.Controllers
 						return false;
 					}
 				},
-				copyMethod => MainController.Instance.ProcessManager.Run("Preparing Data...", (cancelationToken, formProgress) => copyMethod()),
-				(context, original, current) => MainController.Instance.ProcessManager.Run("Saving Changes...", (cancelationToken, formProgress) => original.Save(context, current)));
+				copyMethod => MainController.Instance.ProcessManager.Run("Preparing Data...", (cancelationToken, formProgess) => copyMethod()),
+				(context, original, current) => MainController.Instance.ProcessManager.Run("Saving Changes...", (cancelationToken, formProgess) => original.Save(context, current)));
 			if (!resut) return;
 			MainController.Instance.ProcessManager.RunInQueue("Loading Library...", () => MainController.Instance.MainForm.ActiveForm.Invoke(new MethodInvoker(UpdateWallbin)));
 		}
@@ -345,8 +373,8 @@ namespace SalesLibraries.CloudAdmin.Controllers
 						return false;
 					}
 				},
-				copyMethod => MainController.Instance.ProcessManager.Run("Preparing Data...", (cancelationToken, formProgress) => copyMethod()),
-				(context, original, current) => MainController.Instance.ProcessManager.Run("Saving Changes...", (cancelationToken, formProgress) => original.Save(context, current)));
+				copyMethod => MainController.Instance.ProcessManager.Run("Preparing Data...", (cancelationToken, formProgess) => copyMethod()),
+				(context, original, current) => MainController.Instance.ProcessManager.Run("Saving Changes...", (cancelationToken, formProgess) => original.Save(context, current)));
 			if (!resut) return;
 			MainController.Instance.ProcessManager.RunInQueue("Loading Library...", () => MainController.Instance.MainForm.ActiveForm.Invoke(new MethodInvoker(UpdateWallbin)));
 		}
@@ -369,8 +397,8 @@ namespace SalesLibraries.CloudAdmin.Controllers
 						return false;
 					}
 				},
-				copyMethod => MainController.Instance.ProcessManager.Run("Preparing Data...", (cancelationToken, formProgress) => copyMethod()),
-				(context, original, current) => MainController.Instance.ProcessManager.Run("Saving Changes...", (cancelationToken, formProgress) => original.Save(context, current)));
+				copyMethod => MainController.Instance.ProcessManager.Run("Preparing Data...", (cancelationToken, formProgess) => copyMethod()),
+				(context, original, current) => MainController.Instance.ProcessManager.Run("Saving Changes...", (cancelationToken, formProgess) => original.Save(context, current)));
 			if (!resut) return;
 			MainController.Instance.ProcessManager.RunInQueue("Loading Library...", () => MainController.Instance.MainForm.ActiveForm.Invoke(new MethodInvoker(UpdateWallbin)));
 		}
@@ -385,15 +413,10 @@ namespace SalesLibraries.CloudAdmin.Controllers
 					using (var form = new FormSync())
 					{
 						form.Library = libraryCopy;
-						if (form.ShowDialog(MainController.Instance.MainForm) == DialogResult.OK)
-						{
-							libraryCopy.MarkAsModified();
-							return true;
-						}
-						return false;
+						return form.ShowDialog(MainController.Instance.MainForm) == DialogResult.OK;
 					}
 				},
-				copyMethod => MainController.Instance.ProcessManager.Run("Preparing Data...", (cancelationToken, formProgress) => copyMethod()),
+				copyMethod => MainController.Instance.ProcessManager.Run("Preparing Data...", (cancelationToken, formProgess) => copyMethod()),
 				(context, original, current) => MainController.Instance.ProcessManager.RunInQueue("Saving Changes...", () => original.Save(context, current)));
 		}
 
@@ -403,6 +426,17 @@ namespace SalesLibraries.CloudAdmin.Controllers
 			using (var form = new FormResetLibraryContent(library.Path))
 			{
 				form.ShowDialog(MainController.Instance.MainForm);
+			}
+		}
+
+		private void OnWallbinSettingsClick(object sender, EventArgs e)
+		{
+			using (var form = new FormWallbinSettings())
+			{
+				if (form.ShowDialog(MainController.Instance.MainForm) != DialogResult.OK) return;
+				ProcessChanges();
+				NeedToUpdate = true;
+				MainController.Instance.ReloadWallbinViews();
 			}
 		}
 		#endregion
@@ -420,37 +454,6 @@ namespace SalesLibraries.CloudAdmin.Controllers
 		{
 			if (MainController.Instance.WallbinViews.ActiveWallbin == null) return;
 			MainController.Instance.WallbinViews.ActiveWallbin.IsDataChanged = true;
-		}
-		#endregion
-
-		#region Wallbin Settings
-		private void UpdateFontButtons()
-		{
-			MainController.Instance.MainForm.buttonItemHomeZoomIn.Enabled = MainController.Instance.WallbinViews.FormatState.FontSize < 20;
-			MainController.Instance.MainForm.buttonItemHomeZoomOut.Enabled = MainController.Instance.WallbinViews.FormatState.FontSize > 8;
-		}
-
-		private void OnWallbinFontUpClick(object sender, EventArgs e)
-		{
-			MainController.Instance.WallbinViews.FormatState.FontSize += 2;
-			UpdateFontButtons();
-		}
-
-		private void OnWallbinFontDownClick(object sender, EventArgs e)
-		{
-			MainController.Instance.WallbinViews.FormatState.FontSize -= 2;
-			UpdateFontButtons();
-		}
-
-		private void OnWallbinSettingsClick(object sender, EventArgs e)
-		{
-			using (var form = new FormWallbinSettings())
-			{
-				if (form.ShowDialog(MainController.Instance.MainForm) != DialogResult.OK) return;
-				ProcessChanges();
-				NeedToUpdate = true;
-				MainController.Instance.ReloadWallbinViews();
-			}
 		}
 		#endregion
 

@@ -205,7 +205,7 @@
 			// 
 			this.barLargeButtonItemSync.Alignment = DevExpress.XtraBars.BarItemLinkAlignment.Right;
 			this.barLargeButtonItemSync.Caption = "Sync";
-			this.barLargeButtonItemSync.Glyph = global::SalesLibraries.CloudAdmin.Properties.Resources.Sync;
+			this.barLargeButtonItemSync.Glyph = global::SalesLibraries.CloudAdmin.Properties.Resources.RibbonSync;
 			this.barLargeButtonItemSync.Id = 14;
 			this.barLargeButtonItemSync.Name = "barLargeButtonItemSync";
 			this.barLargeButtonItemSync.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.OnSyncClick);

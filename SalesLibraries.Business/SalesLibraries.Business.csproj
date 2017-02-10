@@ -199,6 +199,7 @@
     <Compile Include="Entities\Wallbin\Persistent\Library.cs" />
     <Compile Include="Entities\Wallbin\Persistent\LibraryFolder.cs" />
     <Compile Include="Entities\Wallbin\Persistent\LinkBundle.cs" />
+    <Compile Include="Entities\Wallbin\Persistent\Links\ImageLink.cs" />
     <Compile Include="Entities\Wallbin\Persistent\Links\InternalShortcutLink.cs" />
     <Compile Include="Entities\Wallbin\Persistent\Links\InternalLibraryObjectLink.cs" />
     <Compile Include="Entities\Wallbin\Persistent\Links\InternalLibraryFolderLink.cs" />

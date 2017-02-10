@@ -810,6 +810,12 @@
     <Compile Include="PresentationLayer\Wallbin\CompactWallbin\FormCompactWallbin.Designer.cs">
       <DependentUpon>FormCompactWallbin.cs</DependentUpon>
     </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Views\FormProgressWallbin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Views\FormProgressWallbin.designer.cs">
+      <DependentUpon>FormProgressWallbin.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationLayer\Wallbin\Views\IPageView.cs" />
     <Compile Include="PresentationLayer\Wallbin\Views\PageViewFactory.cs" />
     <Compile Include="PresentationLayer\Wallbin\Views\SelectionManager.cs" />
@@ -1188,6 +1194,9 @@
     <EmbeddedResource Include="PresentationLayer\Wallbin\CompactWallbin\FormCompactWallbin.resx">
       <DependentUpon>FormCompactWallbin.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Views\FormProgressWallbin.resx">
+      <DependentUpon>FormProgressWallbin.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Views\PageContent.resx">
       <DependentUpon>PageContent.cs</DependentUpon>
     </EmbeddedResource>
@@ -1205,14 +1214,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
@@ -1221,6 +1225,11 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -1251,14 +1260,41 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\RibbonSettingsWallbin.png" />
+    <None Include="Resources\RibbonSettingsAdvanced.png" />
+    <None Include="Resources\RibbonSettingsSync.png" />
+    <None Include="Resources\RibbonSettingsLibraries.png" />
+    <None Include="Resources\RibbonBundlesNew.png" />
+    <None Include="Resources\RibbonSecurityReset.png" />
+    <None Include="Resources\RibbonSecuritySelect.png" />
+    <None Include="Resources\RibbonTagsClear.png" />
+    <None Include="Resources\RibbonTagsKeywords.png" />
+    <None Include="Resources\RibbonTagsSuperFIlters.png" />
+    <None Include="Resources\RibbonTagsCategories.png" />
+    <None Include="Resources\RibbonVideoConvert.png" />
+    <None Include="Resources\RibbonVideoDelete.png" />
+    <None Include="Resources\RibbonCalendarColors.png" />
+    <None Include="Resources\RibbonSettingsAutoWidgets.png" />
+    <None Include="Resources\RibbonSettingsColumns.png" />
+    <None Include="Resources\RibbonSettingsPages.png" />
+    <None Include="Resources\RibbonExit.png" />
+    <None Include="Resources\RibbonSync.png" />
+    <None Include="Resources\RibbonLinkImage.png" />
+    <None Include="Resources\RibbonLinkTags.png" />
+    <None Include="Resources\RibbonLinkSettings.png" />
+    <None Include="Resources\RibbonLinkDelete.png" />
+    <None Include="Resources\RibbonLinkOpen.png" />
+    <None Include="Resources\RibbonLinkAddUrl.png" />
+    <None Include="Resources\RibbonLinkAddLineBreak.png" />
+    <None Include="Resources\RibbonFloater.png" />
+    <None Include="Resources\RibbonCompactWallbin.png" />
+    <None Include="Resources\ProgressWallbinLogo.png" />
     <None Include="Resources\CompactWallbinPageOpen.png" />
     <None Include="Resources\CompactWallbinPageClosed.png" />
     <None Include="Resources\CompactWallbinLineBreak.png" />
     <None Include="Resources\CompactWallbinFolderOpen.png" />
     <None Include="Resources\CompactWallbinFolderClosed.png" />
-    <None Include="Resources\QatCompactWallbin.png" />
     <None Include="Resources\QatHelp.png" />
-    <None Include="Resources\QatFloater.png" />
     <None Include="Resources\LinkAddExternalFolder.png" />
     <None Include="Resources\ProgressStartRegularWebConnection.png" />
     <None Include="Resources\ProgressStartRegularSecurity.png" />
@@ -1304,7 +1340,6 @@
     <None Include="Resources\BundlesEditorLinksLogo.png" />
     <None Include="Resources\BundlesFormNew.png" />
     <None Include="Resources\RetractableLogoBundles.png" />
-    <None Include="Resources\BundlesRibbonNew.png" />
     <None Include="Resources\LinkAddHtml5.png" />
     <None Include="Resources\ButtonApplyForAll.png" />
     <None Include="Resources\LinkSettingsTextNote.png" />
@@ -1328,17 +1363,11 @@
     <None Include="Resources\LinkAddYoutube.png" />
     <None Include="Resources\WallbinSettingsTabPages.png" />
     <None Include="Resources\WallbinSettingsComboboxes.png" />
-    <None Include="Resources\WallbinZoomOut.png" />
-    <None Include="Resources\WallbinZoomIn.png" />
-    <None Include="Resources\WallbinSettingsRibbon.png" />
     <None Include="Resources\SettingsColumnsAlignByRows.png" />
     <None Include="Resources\SettingsColumnsAlignByColumns.png" />
     <None Include="Resources\HomeLogo.png" />
     <None Include="Resources\CalendarFontUp.png" />
     <None Include="Resources\CalendarFontDown.png" />
-    <None Include="Resources\CalendarColors.png" />
-    <None Include="Resources\VideoDelete.png" />
-    <None Include="Resources\VideoConvert.png" />
     <None Include="Resources\ButtonVideoReset.png" />
     <None Include="Resources\ButtonVideoConvert.png" />
     <None Include="Resources\ButtonOpen.png" />
@@ -1352,37 +1381,22 @@
     <None Include="Resources\LinkSettingsFolderDocx.png" />
     <None Include="Resources\LinkAddUrl.png" />
     <None Include="Resources\LinkAddNetwork.png" />
-    <None Include="Resources\LinkOpen.png" />
     <None Include="Resources\LinkDelete.png" />
-    <None Include="Resources\TagsRibbonSuperFIlters.png" />
-    <None Include="Resources\TagsRibbonSave.png" />
-    <None Include="Resources\TagsRibbonKeywords.png" />
-    <None Include="Resources\TagsRibbonClear.png" />
-    <None Include="Resources\TagsRibbonCategories.png" />
-    <None Include="Resources\SecurityRibbonSelect.png" />
-    <None Include="Resources\SecurityRibbonReset.png" />
     <None Include="Resources\SecurityMenuSelect.png" />
     <None Include="Resources\SecurityMenuReset.png" />
     <None Include="Resources\RetractableLogoTags.png" />
     <None Include="Resources\RetractableLogoSecurity.png" />
     <None Include="Resources\RetractableLogoFiles.png" />
     <None Include="Resources\ButtonAutoWidgets.png" />
-    <None Include="Resources\SettingsSync.png" />
-    <None Include="Resources\SettingsLibraries.png" />
-    <None Include="Resources\SettingsAdvanced.png" />
     <None Include="Resources\ButtonSettings.png" />
     <None Include="Resources\Favorites.png" />
-    <None Include="Resources\SettingsPages.png" />
     <None Include="Resources\SettingsColumns.png" />
-    <None Include="Resources\SettingsAutoWidgets.png" />
     <None Include="Resources\ButtonPlus.png" />
     <None Include="Resources\ButtonDelete.png" />
     <None Include="Resources\ArrowUp.png" />
     <None Include="Resources\ArrowRight.png" />
     <None Include="Resources\ArrowLeft.png" />
     <None Include="Resources\ArrowDown.png" />
-    <None Include="Resources\Sync.png" />
-    <None Include="Resources\Exit.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -33,7 +33,7 @@ namespace SalesLibraries.CloudAdmin
 			Icon = MainController.Instance.ImageResources.AppIcon ?? Icon;
 
 			labelItemHomeLogo.Image = MainController.Instance.ImageResources.AppRibbonLogo ?? labelItemHomeLogo.Image;
-			ribbonBarHomeWallbin.RecalcLayout();
+			ribbonBarHomeLogo.RecalcLayout();
 			ribbonPanelHome.PerformLayout();
 
 			labelItemPreferencesLogo.Image = MainController.Instance.ImageResources.AppRibbonLogo ?? labelItemHomeLogo.Image;
@@ -43,10 +43,6 @@ namespace SalesLibraries.CloudAdmin
 			labelItemCalendarLogo.Image = MainController.Instance.ImageResources.AppRibbonLogo ?? labelItemHomeLogo.Image;
 			ribbonBarCalendarLogo.RecalcLayout();
 			ribbonPanelCalendar.PerformLayout();
-
-			labelItemProgramManagerLogo.Image = MainController.Instance.ImageResources.AppRibbonLogo ?? labelItemHomeLogo.Image;
-			ribbonBarProgramManagerLogo.RecalcLayout();
-			ribbonPanelProgramManager.PerformLayout();
 
 			labelItemVideoLogo.Image = MainController.Instance.ImageResources.AppRibbonLogo ?? labelItemHomeLogo.Image;
 			ribbonBarVideoLogo.RecalcLayout();
@@ -91,15 +87,35 @@ namespace SalesLibraries.CloudAdmin
 
 			var title = !String.IsNullOrEmpty(libraryDirectory.Name) ? libraryDirectory.Name : "Site Admin";
 
-			ribbonBarHomeWallbin.Text = title;
-			ribbonBarPreferencesLogo.Text = title;
-			ribbonBarCalendarLogo.Text = title;
-			ribbonBarProgramManagerLogo.Text = title;
-			ribbonBarVideoLogo.Text = title;
-			ribbonBarTagsLogo.Text = title;
-			ribbonBarSecurityLogo.Text = title;
-			ribbonBarBundlesLogo.Text = title;
+			ribbonBarHomeLogo.Text = 
+			ribbonBarPreferencesLogo.Text = 
+			ribbonBarCalendarLogo.Text = 
+			ribbonBarVideoLogo.Text = 
+			ribbonBarTagsLogo.Text = 
+			ribbonBarSecurityLogo.Text = 
+			ribbonBarBundlesLogo.Text = 
 			ribbonBarSettingsLogo.Text = title;
+
+			ribbonBarHomeLogo.RecalcLayout();
+			ribbonPanelHome.PerformLayout();
+			ribbonBarPreferencesLogo.RecalcLayout();
+			ribbonPanelPreferences.PerformLayout();
+			ribbonBarCalendarLogo.RecalcLayout();
+			ribbonPanelCalendar.PerformLayout();
+			ribbonBarVideoLogo.RecalcLayout();
+			ribbonPanelVideo.PerformLayout();
+			ribbonBarTagsLogo.RecalcLayout();
+			ribbonPanelTags.PerformLayout();
+			ribbonBarSecurityLogo.RecalcLayout();
+			ribbonPanelSecurity.PerformLayout();
+			ribbonBarBundlesLogo.RecalcLayout();
+			ribbonPanelBundles.PerformLayout();
+			ribbonBarSettingsLogo.RecalcLayout();
+			ribbonPanelSettings.PerformLayout();
+
+			ribbonBarHomeLinkSettings.OverflowButtonText = "Link Tools";
+			ribbonBarHomeLinkSettings.RecalcLayout();
+			ribbonPanelHome.PerformLayout();
 		}
 
 		private void ConfigureRibbon()
@@ -200,6 +216,16 @@ namespace SalesLibraries.CloudAdmin
 			else if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemBundles)
 				key = TabPageEnum.Bundles;
 			MainController.Instance.ShowTab(key);
+		}
+
+		private void buttonItemHomeAddUrl_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void buttonItemHomeLinkPropertiesNotes_Click(object sender, EventArgs e)
+		{
+
 		}
 	}
 }

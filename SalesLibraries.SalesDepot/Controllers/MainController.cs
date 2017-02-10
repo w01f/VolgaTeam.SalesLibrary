@@ -45,8 +45,6 @@ namespace SalesLibraries.SalesDepot.Controllers
 		#region Tab Pages
 		private WallbinPage TabWallbin { get; set; }
 		private CalendarPage TabCalendar { get; set; }
-		private ProgramScheduleViewPage TabProgramScheduleView { get; set; }
-		private ProgramScheduleSearchPage TabProgramScheduleSearch { get; set; }
 		private SettingsPage TabSettings { get; set; }
 		private Gallery1Page TabGallery1 { get; set; }
 		private Gallery2Page TabGallery2 { get; set; }
@@ -208,14 +206,6 @@ namespace SalesLibraries.SalesDepot.Controllers
 				_tabPages.Add(TabPageEnum.Calendar, TabCalendar);
 				Application.DoEvents();
 
-				TabProgramScheduleView = new ProgramScheduleViewPage();
-				_tabPages.Add(TabPageEnum.ProgramsView, TabProgramScheduleView);
-				Application.DoEvents();
-
-				TabProgramScheduleSearch = new ProgramScheduleSearchPage();
-				_tabPages.Add(TabPageEnum.ProgramsSearch, TabProgramScheduleSearch);
-				Application.DoEvents();
-
 				TabSettings = new SettingsPage();
 				_tabPages.Add(TabPageEnum.Settings, TabSettings);
 				Application.DoEvents();
@@ -231,10 +221,6 @@ namespace SalesLibraries.SalesDepot.Controllers
 				TabWallbin.InitController();
 				Application.DoEvents();
 				TabCalendar.InitController();
-				Application.DoEvents();
-				TabProgramScheduleView.InitController();
-				Application.DoEvents();
-				TabProgramScheduleSearch.InitController();
 				Application.DoEvents();
 				TabSettings.InitController();
 				Application.DoEvents();

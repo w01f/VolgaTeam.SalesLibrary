@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
+using SalesLibraries.Common.DataState;
 using SalesLibraries.CloudAdmin.Controllers;
 using SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.Clipboard;
 
@@ -16,6 +18,8 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 
 		public IWallbinView ActiveWallbin { get; private set; }
 
+		public event EventHandler<EventArgs> LibraryChanging;
+		public event EventHandler<EventArgs> BeforeLoad;
 		public event EventHandler<EventArgs> DataChanged;
 
 		public ViewManager()
@@ -26,28 +30,48 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 			Selection = new SelectionManager();
 			LinksClipboard = new LinksClipboardManager();
 			Views = new List<IWallbinView>();
+
+			BeforeLoad += OnViewBeforeLoad;
+			LibraryChanging += OnLibraryChanging;
 		}
 
 		public void Load()
 		{
-			if (ActiveWallbin != null)
+			BeforeLoad?.Invoke(this, EventArgs.Empty);
+			Views.ForEach(v =>
 			{
-				ActiveWallbin.DataChanged -= OnLibraryDataChanged;
-				ActiveWallbin.DisposeView();
-				((Control)ActiveWallbin).Parent = null;
-				((Control)ActiveWallbin).Dispose();
-			}
-			ActiveWallbin = WallbinViewFactory.Create(MainController.Instance.Wallbin.LocalContext);
-			ActiveWallbin.DataChanged += OnLibraryDataChanged;
-			ActiveWallbin.LoadView();
+				v.DisposeView();
+				((Control)v).Parent = null;
+				((Control)v).Dispose();
+			});
+			Views.Clear();
+			ActiveWallbin = null;
+				var view = WallbinViewFactory.Create(MainController.Instance.Wallbin.LocalContext);
+				view.DataChanged += OnLibraryDataChanged;
+				Views.Add(view);
+			SetActiveWallbin();
 			InitControls();
 		}
 
 		private void InitControls()
 		{
-			MainController.Instance.MainForm.itemContainerHomeWallbin.Visible = !MainController.Instance.Settings.MultitabView;
-			MainController.Instance.MainForm.ribbonBarHomeWallbin.RecalcLayout();
+			MainController.Instance.TabWallbin.pnPageSelector.Visible = !MainController.Instance.Settings.MultitabView;
+			MainController.Instance.MainForm.ribbonBarHomeLogo.RecalcLayout();
 			MainController.Instance.MainForm.ribbonPanelHome.PerformLayout();
+		}
+
+		private void SetActiveWallbin()
+		{
+			SetActiveWallbin(Views.FirstOrDefault());
+		}
+
+		public void SetActiveWallbin(IWallbinView wallbinView)
+		{
+			LibraryChanging?.Invoke(this, EventArgs.Empty);
+			ActiveWallbin = wallbinView;
+			if (ActiveWallbin == null) return;
+			ActiveWallbin.LoadView();
+			DataStateObserver.Instance.RaiseLibrarySelected();
 		}
 
 		public void SaveActiveWallbin(bool runInQueue)
@@ -61,6 +85,16 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 		}
 
 		#region Event Handlers
+		private void OnViewBeforeLoad(object sender, EventArgs e)
+		{
+			LibraryChanging?.Invoke(this, EventArgs.Empty);
+		}
+
+		private void OnLibraryChanging(object sender, EventArgs e)
+		{
+			SaveActiveWallbin(true);
+		}
+
 		private void OnLibraryDataChanged(object sender, EventArgs e)
 		{
 			DataChanged?.Invoke(sender, e);

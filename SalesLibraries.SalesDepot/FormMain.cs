@@ -35,8 +35,6 @@ namespace SalesLibraries.SalesDepot
 					floaterLogo = labelItemSearchLogo.Image;
 				else if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemCalendar)
 					floaterLogo = new Bitmap(Configuration.RemoteResourceManager.Instance.CalendarRibbonLogoFile.LocalPath);
-				else if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemProgramSchedule || ribbonControl.SelectedRibbonTabItem == ribbonTabItemProgramSearch)
-					floaterLogo = labelItemProgramScheduleStationLogo.Image;
 				return floaterLogo;
 			}
 		}
@@ -87,14 +85,6 @@ namespace SalesLibraries.SalesDepot
 						ribbonTabItemCalendar.Text = tabPageConfig.Name;
 						tabPages.Add(ribbonTabItemCalendar);
 						break;
-					case "ProgramSchedule":
-						ribbonTabItemProgramSchedule.Text = tabPageConfig.Name;
-						tabPages.Add(ribbonTabItemProgramSchedule);
-						break;
-					case "ProgramSearch":
-						ribbonTabItemProgramSearch.Text = tabPageConfig.Name;
-						tabPages.Add(ribbonTabItemProgramSearch);
-						break;
 					case "Gallery1":
 						ribbonTabItemGallery1.Text = tabPageConfig.Name;
 						tabPages.Add(ribbonTabItemGallery1);
@@ -144,10 +134,6 @@ namespace SalesLibraries.SalesDepot
 				key = TabPageEnum.Search;
 			if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemCalendar)
 				key = TabPageEnum.Calendar;
-			if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemProgramSchedule)
-				key = TabPageEnum.ProgramsView;
-			if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemProgramSearch)
-				key = TabPageEnum.ProgramsSearch;
 			else if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemSettings)
 				key = TabPageEnum.Settings;
 			else if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemGallery1)

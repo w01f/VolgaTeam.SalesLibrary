@@ -75,15 +75,12 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.HyperlinkEdi
 		{
 			if (templateInfo is InternalWallbinLinkInfo)
 			{
-				checkEditOpenOnSamePage.Checked = ((InternalWallbinLinkInfo)templateInfo).OpenOnSamePage;
 			}
 			if (templateInfo is InternalLibraryPageLinkInfo)
 			{
-				checkEditOpenOnSamePage.Checked = ((InternalLibraryPageLinkInfo)templateInfo).OpenOnSamePage;
 			}
 			if (templateInfo is InternalLibraryFolderLinkInfo)
 			{
-				checkEditOpenOnSamePage.Checked = ((InternalLibraryFolderLinkInfo)templateInfo).OpenOnSamePage;
 			}
 		}
 

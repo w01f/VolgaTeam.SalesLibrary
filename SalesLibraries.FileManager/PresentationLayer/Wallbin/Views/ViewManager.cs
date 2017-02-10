@@ -58,8 +58,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 
 		private void InitControls()
 		{
-			MainController.Instance.MainForm.itemContainerHomeWallbin.Visible = !MainController.Instance.Settings.MultitabView;
-			MainController.Instance.MainForm.ribbonBarHomeWallbin.RecalcLayout();
+			MainController.Instance.TabWallbin.pnPageSelector.Visible = !MainController.Instance.Settings.MultitabView;
+			MainController.Instance.MainForm.ribbonBarHomeLogo.RecalcLayout();
 			MainController.Instance.MainForm.ribbonPanelHome.PerformLayout();
 		}
 

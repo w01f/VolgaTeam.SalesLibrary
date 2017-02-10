@@ -195,7 +195,7 @@ namespace SalesLibraries.FileManager.Controllers
 					}
 				});
 			}
-
+			
 			if (stopRun) return;
 			if (appReady)
 			{
@@ -203,10 +203,16 @@ namespace SalesLibraries.FileManager.Controllers
 				MainForm.Shown += (o, e) =>
 				{
 					MainForm.InitForm();
-					LoadControllers();
-					ProcessManager.RunInQueue("Loading Wallbin...",
-						() => MainForm.ActiveForm.Invoke(new MethodInvoker(() => WallbinViews.Load())),
-						() => MainForm.ActiveForm.Invoke(new MethodInvoker(() => ShowTab(TabPageEnum.Home))));
+					using (var form = new FormProgressWallbin())
+					{
+						ProcessManager.RunWithProgress(form, false, (cancellationToken, formProgress) =>
+						 MainForm.ActiveForm.Invoke(new MethodInvoker(() =>
+						 {
+							 LoadControllers();
+							 WallbinViews.Load();
+						 })));
+					}
+					ShowTab(TabPageEnum.Home);
 				};
 				Application.Run(MainForm);
 			}
@@ -287,9 +293,17 @@ namespace SalesLibraries.FileManager.Controllers
 		public void ReloadWallbinViews()
 		{
 			MainForm.pnContainer.Controls.Clear();
-			ProcessManager.RunInQueue("Loading Wallbin...",
-					() => MainForm.ActiveForm.Invoke(new MethodInvoker(() => WallbinViews.Load())),
-					() => MainForm.ActiveForm.Invoke(new MethodInvoker(() => ShowTab())));
+			foreach (var pageController in _tabPages.Where(pageController => pageController.Key == _activeTab))
+				pageController.Value.IsActive = false;
+			using (var form = new FormProgressWallbin())
+			{
+				ProcessManager.RunWithProgress(form, false, (cancellationToken, formProgress) =>
+				 MainForm.ActiveForm.Invoke(new MethodInvoker(() =>
+				 {
+					 WallbinViews.Load();
+				 })));
+			}
+			ShowTab();
 		}
 
 		public void ShowTab(TabPageEnum tabPage = TabPageEnum.None)
@@ -348,7 +362,6 @@ namespace SalesLibraries.FileManager.Controllers
 			_tabPages.Add(TabPageEnum.Security, TabWallbin);
 			_tabPages.Add(TabPageEnum.Preferences, TabWallbin);
 			_tabPages.Add(TabPageEnum.Settings, TabWallbin);
-			_tabPages.Add(TabPageEnum.ProgramManager, TabWallbin);
 			_tabPages.Add(TabPageEnum.Bundles, TabWallbin);
 
 			TabVideo = new VideoPage();
@@ -357,12 +370,9 @@ namespace SalesLibraries.FileManager.Controllers
 			TabCalendar = new CalendarPage();
 			_tabPages.Add(TabPageEnum.Calendar, TabCalendar);
 
-			ProcessManager.Run("Loading Controls...", (cancellationToken, formProgress) => MainForm.ActiveForm.Invoke(new MethodInvoker(() =>
-			{
-				TabWallbin.InitController();
-				TabVideo.InitController();
-				TabCalendar.InitController();
-			})));
+			TabWallbin.InitController();
+			TabVideo.InitController();
+			TabCalendar.InitController();
 		}
 	}
 }

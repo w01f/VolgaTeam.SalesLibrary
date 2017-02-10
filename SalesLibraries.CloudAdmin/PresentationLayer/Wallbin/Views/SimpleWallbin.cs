@@ -28,14 +28,14 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views
 
 		protected override void InitControls()
 		{
-			MainController.Instance.MainForm.itemContainerHomeWallbin.Visible = Pages.Any();
-			_pageSelector = MainController.Instance.MainForm.comboBoxEditHomePage;
+			base.InitControls();
+			_pageSelector = MainController.Instance.TabWallbin.comboBoxEditPages;
 			_pageSelector.Enabled = Pages.Count > 1;
 			_pageSelector.Properties.Items.Clear();
 			_pageSelector.Properties.Items.AddRange(Pages);
 			_pageSelector.EditValue = ActivePage;
 			_pageSelector.EditValueChanged += OnSelectedPageChanged;
-			MainController.Instance.MainForm.ribbonBarHomeWallbin.RecalcLayout();
+			MainController.Instance.MainForm.ribbonBarHomeLogo.RecalcLayout();
 			MainController.Instance.MainForm.ribbonPanelHome.PerformLayout();
 		}
 

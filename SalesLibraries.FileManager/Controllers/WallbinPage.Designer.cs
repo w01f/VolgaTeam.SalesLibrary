@@ -28,6 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.components = new System.ComponentModel.Container();
 			this.pnContainer = new System.Windows.Forms.Panel();
 			this.pnEmpty = new System.Windows.Forms.Panel();
 			this.pnMain = new System.Windows.Forms.Panel();
@@ -37,9 +38,15 @@
 			this.linkInfoControl = new SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSettings.LinkInfoControl();
 			this.pnTagInfoContainer = new System.Windows.Forms.Panel();
 			this.superFilterControl = new SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSettings.SuperFilterControl();
+			this.pnPageSelector = new System.Windows.Forms.Panel();
+			this.comboBoxEditPages = new DevExpress.XtraEditors.ComboBoxEdit();
+			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
 			this.pnMain.SuspendLayout();
 			this.retractableBar.Header.SuspendLayout();
 			this.pnHeader.SuspendLayout();
+			this.pnPageSelector.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.comboBoxEditPages.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// pnContainer
@@ -115,6 +122,7 @@
 			this.pnHeader.Controls.Add(this.linkInfoControl);
 			this.pnHeader.Controls.Add(this.pnTagInfoContainer);
 			this.pnHeader.Controls.Add(this.superFilterControl);
+			this.pnHeader.Controls.Add(this.pnPageSelector);
 			this.pnHeader.Dock = System.Windows.Forms.DockStyle.Top;
 			this.pnHeader.Location = new System.Drawing.Point(0, 0);
 			this.pnHeader.Name = "pnHeader";
@@ -131,16 +139,16 @@
 			this.linkInfoControl.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.linkInfoControl.Location = new System.Drawing.Point(196, 0);
 			this.linkInfoControl.Name = "linkInfoControl";
-			this.linkInfoControl.Size = new System.Drawing.Size(422, 47);
+			this.linkInfoControl.Size = new System.Drawing.Size(254, 47);
 			this.linkInfoControl.TabIndex = 2;
 			// 
 			// pnTagInfoContainer
 			// 
 			this.pnTagInfoContainer.Dock = System.Windows.Forms.DockStyle.Right;
-			this.pnTagInfoContainer.Location = new System.Drawing.Point(618, 0);
+			this.pnTagInfoContainer.Location = new System.Drawing.Point(450, 0);
 			this.pnTagInfoContainer.Name = "pnTagInfoContainer";
 			this.pnTagInfoContainer.Padding = new System.Windows.Forms.Padding(0, 0, 10, 0);
-			this.pnTagInfoContainer.Size = new System.Drawing.Size(370, 47);
+			this.pnTagInfoContainer.Size = new System.Drawing.Size(340, 47);
 			this.pnTagInfoContainer.TabIndex = 1;
 			// 
 			// superFilterControl
@@ -152,6 +160,45 @@
 			this.superFilterControl.Name = "superFilterControl";
 			this.superFilterControl.Size = new System.Drawing.Size(196, 47);
 			this.superFilterControl.TabIndex = 0;
+			// 
+			// pnPageSelector
+			// 
+			this.pnPageSelector.Controls.Add(this.comboBoxEditPages);
+			this.pnPageSelector.Dock = System.Windows.Forms.DockStyle.Right;
+			this.pnPageSelector.Location = new System.Drawing.Point(790, 0);
+			this.pnPageSelector.Name = "pnPageSelector";
+			this.pnPageSelector.Size = new System.Drawing.Size(198, 47);
+			this.pnPageSelector.TabIndex = 3;
+			this.pnPageSelector.Visible = false;
+			// 
+			// comboBoxEditPages
+			// 
+			this.comboBoxEditPages.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.comboBoxEditPages.Enabled = false;
+			this.comboBoxEditPages.Location = new System.Drawing.Point(40, 12);
+			this.comboBoxEditPages.Name = "comboBoxEditPages";
+			this.comboBoxEditPages.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+			this.comboBoxEditPages.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+			this.comboBoxEditPages.Size = new System.Drawing.Size(152, 22);
+			this.comboBoxEditPages.StyleController = this.styleController;
+			this.comboBoxEditPages.TabIndex = 2;
+			// 
+			// styleController
+			// 
+			this.styleController.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.styleController.Appearance.Options.UseFont = true;
+			this.styleController.AppearanceDisabled.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.styleController.AppearanceDisabled.Options.UseFont = true;
+			this.styleController.AppearanceDropDown.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.styleController.AppearanceDropDown.Options.UseFont = true;
+			this.styleController.AppearanceDropDownHeader.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.styleController.AppearanceDropDownHeader.Options.UseFont = true;
+			this.styleController.AppearanceFocused.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.styleController.AppearanceFocused.Options.UseFont = true;
+			this.styleController.AppearanceReadOnly.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.styleController.AppearanceReadOnly.Options.UseFont = true;
 			// 
 			// WallbinPage
 			// 
@@ -166,6 +213,9 @@
 			this.pnMain.ResumeLayout(false);
 			this.retractableBar.Header.ResumeLayout(false);
 			this.pnHeader.ResumeLayout(false);
+			this.pnPageSelector.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.comboBoxEditPages.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
 			this.ResumeLayout(false);
 
 		}
@@ -181,5 +231,8 @@
 		private PresentationLayer.Wallbin.Links.SingleSettings.SuperFilterControl superFilterControl;
 		public System.Windows.Forms.Panel pnTagInfoContainer;
 		private PresentationLayer.Wallbin.Links.SingleSettings.LinkInfoControl linkInfoControl;
+		public DevExpress.XtraEditors.ComboBoxEdit comboBoxEditPages;
+		public System.Windows.Forms.Panel pnPageSelector;
+		private DevExpress.XtraEditors.StyleController styleController;
 	}
 }
