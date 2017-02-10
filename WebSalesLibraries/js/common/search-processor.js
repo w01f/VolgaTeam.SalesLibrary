@@ -138,6 +138,7 @@
 						{
 							tags.push("png");
 							tags.push("jpeg");
+							tags.push("gif");
 						}
 						return tags;
 					},
@@ -172,7 +173,7 @@
 								value == 'internal link' ||
 								value == 'internal shortcut')
 								thatData.showUrls = true;
-							else if (value == 'png' || value == 'jpeg')
+							else if (value == 'png' || value == 'jpeg'|| value == 'gif')
 								thatData.showImages = true;
 
 						});

@@ -28,6 +28,7 @@
 					case "pdf":
 					case "jpeg":
 					case "png":
+					case "gif":
 						path = viewerData.url.replace(/\/\/+/g, '/');
 						break;
 					default:

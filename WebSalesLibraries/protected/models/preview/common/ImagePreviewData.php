@@ -23,6 +23,9 @@
 				case 'jpeg':
 					$this->linkTitle ='JPEG File';
 					break;
+				case 'gif':
+					$this->linkTitle ='GIF File';
+					break;
 			}
 		}
 	}

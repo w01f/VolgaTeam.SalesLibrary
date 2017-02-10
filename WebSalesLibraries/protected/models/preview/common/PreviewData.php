@@ -142,6 +142,7 @@
 					break;
 				case 'png':
 				case 'jpeg':
+				case 'gif':
 					$previewData = new ImagePreviewData($link);
 					break;
 				case 'url':

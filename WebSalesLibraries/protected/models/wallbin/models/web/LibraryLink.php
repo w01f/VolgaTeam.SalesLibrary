@@ -252,6 +252,7 @@
 								$fileName = 'mp4.png';
 								break;
 							case 'png':
+							case 'gif':
 								$fileName = 'png.png';
 								break;
 							case 'jpeg':

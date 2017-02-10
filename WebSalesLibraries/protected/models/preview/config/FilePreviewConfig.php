@@ -59,6 +59,7 @@
 						break;
 					case 'png':
 					case 'jpeg':
+					case 'gif':
 						$this->forceDownload = $userProfile->imageSettings->forceEOOpen;
 						$this->forceEOOpen = $userProfile->imageSettings->forceEOOpen;
 						$this->forceWebOpen = $userProfile->imageSettings->forceWebOpen;

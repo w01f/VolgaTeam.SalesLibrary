@@ -110,6 +110,7 @@
 					case 'image':
 						$instance->fileTypes[] = 'png';
 						$instance->fileTypes[] = 'jpeg';
+						$instance->fileTypes[] = 'gif';
 						break;
 					default:
 						$instance->fileTypes[] = $fileTypeDescription;
