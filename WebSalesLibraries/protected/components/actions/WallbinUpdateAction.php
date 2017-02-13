@@ -71,6 +71,8 @@
 									unset($library);
 
 									MetaDataRecord::setData('external-library-links', 'last-update', date(Yii::app()->params['sourceDateFormat'], time()));
+
+									Yii::app()->cacheDB->flush();
 								}
 							}
 						}

@@ -53,6 +53,7 @@
                 text-align: <? echo $style->textAlign; ?>;
                 color: <? echo (isset($style->textColor)?('#'.$style->textColor):(isset($folder->banner) && $folder->banner->isEnabled ? $folder->banner->foreColor : $folder->headerForeColor)); ?>;
                 background-color: <? echo (isset($style->backColor)?('#'.$style->backColor):$folder->headerBackColor); ?>;
+                padding: <? echo $style->customTitlePadding; ?>px;
             }
 
             .folder-header-container.custom-title img.folder-widget {
