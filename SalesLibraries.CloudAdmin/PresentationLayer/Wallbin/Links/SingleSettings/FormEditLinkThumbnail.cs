@@ -16,6 +16,7 @@ using SalesLibraries.Common.Extensions;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.CommonGUI.Common;
 using SalesLibraries.CommonGUI.RetractableBar;
+using SalesLibraries.CloudAdmin.Business.PreviewGenerators;
 using SalesLibraries.CloudAdmin.Controllers;
 using SalesLibraries.CloudAdmin.Properties;
 using Font = System.Drawing.Font;
@@ -101,7 +102,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 			buttonXEnable.Checked = _sourceLink.Thumbnail.Enable;
 			buttonXDisable.Checked = !buttonXEnable.Checked;
 
-			pictureBoxImage.Image = _sourceLink.Thumbnail.Image ?? pictureBoxImage.Image;
+			pictureEditImage.Image = _sourceLink.Thumbnail.Image ?? pictureEditImage.Image;
 
 			switch (_sourceLink.Thumbnail.ImageWidth)
 			{
@@ -234,7 +235,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 				imageListView.Items.FirstOrDefault();
 			if (defaultItem != null)
 				defaultItem.Selected = true;
-			if (pictureBoxImage.Image == null)
+			if (pictureEditImage.Image == null)
 				GeneratePreview();
 			imageListView.Focus();
 		}
@@ -247,7 +248,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 			{
 				_sourceLink.Thumbnail.Enable = true;
 
-				_sourceLink.Thumbnail.Image = (Image)pictureBoxImage.Image.Clone();
+				_sourceLink.Thumbnail.Image = (Image)pictureEditImage.Image.Clone();
 				_sourceLink.Thumbnail.SourcePath = imageListView.SelectedItems.Select(item => item.FileName).FirstOrDefault();
 
 				if (checkEditImageSize200.Checked)
@@ -372,7 +373,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 					return image;
 				});
 				using (var changedImage = tranformAction(tempImage))
-					pictureBoxImage.Image = (Image)changedImage.Clone();
+					pictureEditImage.Image = (Image)changedImage.Clone();
 			}
 		}
 
@@ -512,14 +513,14 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 			{
 				var previewableLink = (PreviewableLink)_sourceLink;
 				previewableLink.ClearPreviewContainer();
-				//var previewContainer = previewableLink.GetPreviewContainer();
-				//var previewGenerator = previewContainer.GetPreviewGenerator();
-				//previewContainer.UpdateContent(previewGenerator, cancelationToken);
+				var previewContainer = previewableLink.GetPreviewContainer();
+				var previewGenerator = previewContainer.GetPreviewGenerator();
+				previewContainer.UpdateContent(previewGenerator, cancelationToken);
 			});
 
 			LoadSourceImages();
 
-			if (pictureBoxImage.Image == null)
+			if (pictureEditImage.Image == null)
 			{
 				var defaultItem = imageListView.Items.First();
 				defaultItem.Selected = true;

@@ -102,7 +102,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			buttonXEnable.Checked = _sourceLink.Thumbnail.Enable;
 			buttonXDisable.Checked = !buttonXEnable.Checked;
 
-			pictureBoxImage.Image = _sourceLink.Thumbnail.Image ?? pictureBoxImage.Image;
+			pictureEditImage.Image = _sourceLink.Thumbnail.Image ?? pictureEditImage.Image;
 
 			switch (_sourceLink.Thumbnail.ImageWidth)
 			{
@@ -235,7 +235,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 				imageListView.Items.FirstOrDefault();
 			if (defaultItem != null)
 				defaultItem.Selected = true;
-			if (pictureBoxImage.Image == null)
+			if (pictureEditImage.Image == null)
 				GeneratePreview();
 			imageListView.Focus();
 		}
@@ -248,7 +248,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			{
 				_sourceLink.Thumbnail.Enable = true;
 
-				_sourceLink.Thumbnail.Image = (Image)pictureBoxImage.Image.Clone();
+				_sourceLink.Thumbnail.Image = (Image)pictureEditImage.Image.Clone();
 				_sourceLink.Thumbnail.SourcePath = imageListView.SelectedItems.Select(item => item.FileName).FirstOrDefault();
 
 				if (checkEditImageSize200.Checked)
@@ -373,7 +373,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 					return image;
 				});
 				using (var changedImage = tranformAction(tempImage))
-					pictureBoxImage.Image = (Image)changedImage.Clone();
+					pictureEditImage.Image = (Image)changedImage.Clone();
 			}
 		}
 
@@ -520,7 +520,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 			LoadSourceImages();
 
-			if (pictureBoxImage.Image == null)
+			if (pictureEditImage.Image == null)
 			{
 				var defaultItem = imageListView.Items.First();
 				defaultItem.Selected = true;
