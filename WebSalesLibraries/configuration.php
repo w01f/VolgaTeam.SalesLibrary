@@ -85,18 +85,18 @@
 					),
 				),
 				'email' => array(
-					'from' => 'bcaudill@raycommedia.com',
+					'from' => 'user1@domem.com',
 					'copy_enabled' => true,
-					'copy' => 'billy@adsalesapp.com',
+					'copy' => 'user2@domem.com',
 					'new_user' => array(
-						'subject' => 'RaycomResults.tv',
-						'body' => 'You have a new account at RaycomResults.tv',
+						'subject' => 'Company',
+						'body' => 'You have a new account at site',
 					),
-					'help_request_address' => 'billy@newlocaldirect.com',
+					'help_request_address' => 'user1@domem.com',
 					'quiz' => array(
-						'from' => 'help@adsalesapps.com',
+						'from' => 'user2@domem.com',
 						'copy_enabled' => true,
-						'copy' => 'help@adsalesapps.com'
+						'copy' => 'user3@domem.com'
 					),
 				),
 				'android_tablets' => array(
