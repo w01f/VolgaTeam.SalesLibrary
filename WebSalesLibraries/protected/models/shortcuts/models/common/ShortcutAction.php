@@ -224,6 +224,18 @@
 					$action->title = 'Zoom Out';
 					$action->iconClass = 'icon-zoomout';
 					$customActions[$action->tag] = $action;
+
+					$action = new ShortcutAction('show-search');
+					$action->order = 70;
+					$action->title = 'Show Search';
+					$action->iconClass = 'icon-search32';
+					$customActions[$action->tag] = $action;
+
+					$action = new ShortcutAction('hide-search');
+					$action->order = 70;
+					$action->title = 'Hide Search';
+					$action->iconClass = 'icon-search32';
+					$customActions[$action->tag] = $action;
 					break;
 				case 'page':
 					$action = new ShortcutAction('page-view-columns');
@@ -249,6 +261,18 @@
 					$action->title = 'Zoom Out';
 					$action->iconClass = 'icon-zoomout';
 					$customActions[$action->tag] = $action;
+
+					$action = new ShortcutAction('show-search');
+					$action->order = 50;
+					$action->title = 'Show Search';
+					$action->iconClass = 'icon-search32';
+					$customActions[$action->tag] = $action;
+
+					$action = new ShortcutAction('hide-search');
+					$action->order = 60;
+					$action->title = 'Hide Search';
+					$action->iconClass = 'icon-search32';
+					$customActions[$action->tag] = $action;
 					break;
 				case 'window':
 					$action = new ShortcutAction('page-zoom-in');
@@ -261,6 +285,18 @@
 					$action->order = 20;
 					$action->title = 'Zoom Out';
 					$action->iconClass = 'icon-zoomout';
+					$customActions[$action->tag] = $action;
+
+					$action = new ShortcutAction('show-search');
+					$action->order = 30;
+					$action->title = 'Show Search';
+					$action->iconClass = 'icon-search32';
+					$customActions[$action->tag] = $action;
+
+					$action = new ShortcutAction('hide-search');
+					$action->order = 40;
+					$action->title = 'Hide Search';
+					$action->iconClass = 'icon-search32';
 					$customActions[$action->tag] = $action;
 					break;
 				case 'searchapp':

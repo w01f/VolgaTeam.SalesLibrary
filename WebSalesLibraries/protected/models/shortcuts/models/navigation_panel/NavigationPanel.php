@@ -39,7 +39,7 @@
 			$queryResult = $xpath->query('//Config/Appearance/TextSize');
 			$navigationPanel->textSize = $queryResult->length > 0 ? intval(trim($queryResult->item(0)->nodeValue)) : 12;
 			$queryResult = $xpath->query('//Config/Appearance/TextColor');
-			$navigationPanel->textColor = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : '000000';
+			$navigationPanel->textColor = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : 'eee';
 
 			$queryResult = $xpath->query('//Config/Appearance/ImagePadding');
 			$navigationPanel->imagePadding = $queryResult->length > 0 ? intval(trim($queryResult->item(0)->nodeValue)) : 0;
@@ -73,7 +73,7 @@
 			$queryResult = $xpath->query('//Config/Items/Item');
 			foreach ($queryResult as $itemConfigNode)
 			{
-				$navigationItem = BaseNavigationItem::fromXml($xpath, $itemConfigNode, $imagePath);
+				$navigationItem = BaseNavigationItem::fromXml($navigationPanel, $xpath, $itemConfigNode, $imagePath);
 				if (isset($navigationItem))
 					$navigationPanel->items[] = $navigationItem;
 			}

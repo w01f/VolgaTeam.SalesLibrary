@@ -77,6 +77,9 @@
 				case 'youtube':
 					$.SalesPortal.LinkManager.playYouTube(data.find('.youtube-title').text(), data.find('.youtube-id').text());
 					break;
+				case 'vimeo':
+					$.SalesPortal.LinkManager.playVimeo(data.find('.player-title').text(), data.find('.player-url').text());
+					break;
 				default :
 					menu.find('.main-site-url').show();
 					$.ajax({

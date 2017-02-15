@@ -135,6 +135,21 @@
 
 		var updateContentSize = function ()
 		{
+			var content = $.SalesPortal.Content.getContentObject();
+			var navigationPanel = $.SalesPortal.Content.getNavigationPanel();
+
+			var width = $(window).width() - navigationPanel.outerWidth(true) - 5;
+
+			$('#content').css({
+				'overflow': 'hidden'
+			});
+
+			content.css({
+				'max-width': width + 'px',
+				'width': width + 'px',
+				'overflow': 'hidden'
+			});
+
 			$.SalesPortal.ShortcutsManager.updateContentSize();
 			$.SalesPortal.QBuilder.PageList.updateContentSize();
 			$.SalesPortal.QBuilder.LinkCart.updateContentSize();

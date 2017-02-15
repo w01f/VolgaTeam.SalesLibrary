@@ -135,10 +135,11 @@
 		var updatePageLinks = function ()
 		{
 			var content = $.SalesPortal.Content.getContentObject();
+			var navigationPanel = $.SalesPortal.Content.getNavigationPanel();
 			var pageContent = $('#page-content');
 			var servicePanel = $('#service-panel');
 			var tabLinks = $('#page-content-tab-links');
-			var width = $(window).width() - servicePanel.outerWidth(true) - 20;
+			var width = $(window).width() - navigationPanel.outerWidth(true) - servicePanel.outerWidth(true) - 25;
 			var height = content.height() -
 				pageContent.find('.page-title').outerHeight(true) -
 				pageContent.find('#page-content-tabs-headers').outerHeight(true) -

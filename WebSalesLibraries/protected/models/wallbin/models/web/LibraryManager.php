@@ -18,8 +18,6 @@
 			{
 				if (isset(\Yii::app()->session['libraries']))
 					$libraries = \Yii::app()->session['libraries'];
-				else
-					$libraries = $librariesCache;
 			}
 			$useLibraryByUserFilter = \UserIdentity::isUserAuthorized() && !\UserIdentity::isUserAdmin();
 			if ($useLibraryByUserFilter)
@@ -111,7 +109,7 @@
 				{
 					usort($libraries, "application\\models\\wallbin\\models\\web\\Library::libraryComparerByName");
 					\Yii::app()->session['libraries'] = $libraries;
-					\Yii::app()->cacheDB->set(\Yii::app()->session['sessionKey'], $libraries, (60 * 60 * 24 * 7));
+					\Yii::app()->cacheDB->set(\Yii::app()->session['sessionKey'], 'libraries', (60 * 60 * 24 * 7));
 				}
 				else
 					unset(\Yii::app()->session['libraries']);
@@ -151,7 +149,7 @@
 					{
 						foreach ($libraryRecords as $libraryRecord)
 						{
-							if (!$useLibraryByUserFilter && in_array($libraryRecord->id, $availableLibraryIds))
+							if (!$useLibraryByUserFilter || in_array($libraryRecord->id, $availableLibraryIds))
 							{
 								$library = new Library();
 								$library->id = $libraryRecord->id;

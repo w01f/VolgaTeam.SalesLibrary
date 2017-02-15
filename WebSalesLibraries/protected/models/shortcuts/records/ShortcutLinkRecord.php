@@ -192,6 +192,8 @@
 					return new FavoritesShortcut($this, $isPhone);
 				case 'youtube':
 					return new YouTubeShortcut($this, $isPhone);
+				case 'vimeo':
+					return new VimeoShortcut($this, $isPhone);
 				default:
 					return new EmptyShortcut($this, $isPhone);
 			}

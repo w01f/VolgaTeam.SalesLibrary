@@ -632,6 +632,23 @@
 			});
 		};
 
+		this.playVimeo = function (title, playerUrl)
+		{
+			$.fancybox({
+				title: title,
+				content: '<iframe ' +
+				'height = "480" width="680" frameborder="0" allowfullscreen ' +
+				'src="' + playerUrl + '?autoplay=1">' +
+				'</iframe>',
+				openEffect: 'none',
+				closeEffect: 'none',
+				afterShow: function ()
+				{
+					$('.fancybox-wrap').addClass('content-boxed');
+				}
+			});
+		};
+
 		this.cleanupContextMenu = function ()
 		{
 			var body = $('body');

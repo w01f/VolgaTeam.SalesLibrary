@@ -1,14 +1,14 @@
 (function ($)
 {
 	window.BaseUrl = window.BaseUrl || '';
-	$.SalesPortal = $.SalesPortal || { };
+	$.SalesPortal = $.SalesPortal || {};
 	$.SalesPortal.ShortcutsSearchApp = function ()
 	{
 		var appData = undefined;
 		var viewOptions = undefined;
 		var dataTable = new $.SalesPortal.SearchDataTable(
 			{
-				tableContainerSelector:'#shortcuts-search-app',
+				tableContainerSelector: '#shortcuts-search-app',
 				saveState: true,
 				logHandler: function ()
 				{
@@ -654,7 +654,7 @@
 			var content = $.SalesPortal.Content.getContentObject();
 			var navigationPanel = $.SalesPortal.Content.getNavigationPanel();
 
-			var width = $(window).width() - navigationPanel.outerWidth(true);
+			var width = $(window).width() - navigationPanel.outerWidth(true) - 5;
 
 			$('#content').css({
 				'overflow': 'hidden'

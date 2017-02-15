@@ -28,6 +28,7 @@
 		 */
 		public function __construct($linkRecord, $isPhone)
 		{
+			$this->linkRecord = $linkRecord;
 			$linkConfig = new DOMDocument();
 			$linkConfig->loadXML($linkRecord->config);
 			$xpath = new DomXPath($linkConfig);
@@ -39,6 +40,11 @@
 			$queryResult = $xpath->query('//Config/PageViewType');
 			$this->pageViewType = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : 'columns';
 
+			if ($isPhone != true)
+				$this->searchBar = SearchBar::fromShortcut($this);
+			else
+				$this->searchBar = SearchBar::createEmpty();
+
 			parent::__construct($linkRecord, $isPhone);
 
 			$queryResult = $xpath->query('//Config/WallbinStyle');
@@ -49,9 +55,6 @@
 
 			$libraryManager = new LibraryManager();
 			$this->library = $libraryManager->getLibraryByName($this->libraryName);
-
-			if ($isPhone != true)
-				$this->searchBar = SearchBar::fromShortcut($this);
 		}
 
 		/**
@@ -129,6 +132,10 @@
 				$actionsByKey['page-zoom-in']->enabled = $actionsByKey['page-zoom-in']->enabled && $this->pageViewType == 'columns';
 			if (array_key_exists('page-zoom-out', $actionsByKey))
 				$actionsByKey['page-zoom-out']->enabled = $actionsByKey['page-zoom-out']->enabled && $this->pageViewType == 'columns';
+			if (array_key_exists('show-search', $actionsByKey))
+				$actionsByKey['show-search']->enabled = $actionsByKey['show-search']->enabled && $this->searchBar->configured;
+			if (array_key_exists('hide-search', $actionsByKey))
+				$actionsByKey['hide-search']->enabled = $actionsByKey['hide-search']->enabled && $this->searchBar->configured;
 		}
 
 		public function updateAction()

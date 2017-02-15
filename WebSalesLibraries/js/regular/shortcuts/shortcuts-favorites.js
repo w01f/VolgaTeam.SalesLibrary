@@ -311,7 +311,7 @@
 			var content = $.SalesPortal.Content.getContentObject();
 			var navigationPanel = $.SalesPortal.Content.getNavigationPanel();
 
-			var width = $(window).width() - navigationPanel.outerWidth(true);
+			var width = $(window).width() - navigationPanel.outerWidth(true) - 5;
 
 			$('#content').css({
 				'overflow': 'hidden'

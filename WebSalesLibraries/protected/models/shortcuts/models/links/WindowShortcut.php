@@ -21,6 +21,12 @@
 		 */
 		public function __construct($linkRecord, $isPhone)
 		{
+			$this->linkRecord = $linkRecord;
+			if ($isPhone != true)
+				$this->searchBar = SearchBar::fromShortcut($this);
+			else
+				$this->searchBar = SearchBar::createEmpty();
+
 			parent::__construct($linkRecord, $isPhone);
 
 			$linkConfig = new DOMDocument();
@@ -35,9 +41,6 @@
 
 			$queryResult = $xpath->query('//Config/LinksOnly');
 			$this->linksOnly = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : false;
-
-			if ($isPhone != true)
-				$this->searchBar = SearchBar::fromShortcut($this);
 		}
 
 		/**
@@ -76,6 +79,20 @@
 			$folder->load($windowRecord);
 			$folder->loadFiles(true);
 			return $folder;
+		}
+
+		/**
+		 * @param $actionsByKey array
+		 * @param $xpath DOMXPath
+		 * @param $actionConfigNodes DOMNodeList
+		 */
+		protected function customizeActions($actionsByKey, $xpath, $actionConfigNodes)
+		{
+			parent::customizeActions($actionsByKey, $xpath, $actionConfigNodes);
+			if (array_key_exists('show-search', $actionsByKey))
+				$actionsByKey['show-search']->enabled = $actionsByKey['show-search']->enabled && $this->searchBar->configured;
+			if (array_key_exists('hide-search', $actionsByKey))
+				$actionsByKey['hide-search']->enabled = $actionsByKey['hide-search']->enabled && $this->searchBar->configured;
 		}
 
 		/**
