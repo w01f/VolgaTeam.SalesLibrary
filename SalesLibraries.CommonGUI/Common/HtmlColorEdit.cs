@@ -120,6 +120,8 @@ namespace SalesLibraries.CommonGUI.Common
 	[ToolboxItem(true)]
 	public class HtmlColorEdit : ButtonEdit
 	{
+		public static Color DisabledColor = Color.LightGray;
+
 		[DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
 		public new RepositoryItemHtmlColorEdit Properties => base.Properties as RepositoryItemHtmlColorEdit;
 
@@ -164,6 +166,12 @@ namespace SalesLibraries.CommonGUI.Common
 		public HtmlColorEdit()
 		{
 			CustomDisplayText += OnCustomDisplayText;
+			EnabledChanged += OnEnabledChanged;
+		}
+
+		private void OnEnabledChanged(object sender, EventArgs e)
+		{
+			UpdateAppearance();
 		}
 
 		private void OnCustomDisplayText(Object sender, CustomDisplayTextEventArgs e)
@@ -173,8 +181,16 @@ namespace SalesLibraries.CommonGUI.Common
 
 		private void UpdateAppearance()
 		{
-			BackColor = (Color)EditValue;
-			ForeColor = BackColor.GetNegativeColor();
+			if (Enabled)
+			{
+				BackColor = (Color)EditValue;
+				ForeColor = BackColor.GetNegativeColor();
+			}
+			else
+			{
+				BackColor = DisabledColor;
+				ForeColor = DisabledColor;
+			}
 		}
 
 		private static Color ParseHtmlColor(string hexColorCode)
@@ -205,10 +221,19 @@ namespace SalesLibraries.CommonGUI.Common
 		protected override void DrawContent(ControlGraphicsInfoArgs info)
 		{
 			var viewInfo = (HtmlColorEditViewInfo)info.ViewInfo;
-			var color = (Color)viewInfo.EditValue;
-			viewInfo.PaintAppearance.BackColor = color;
-			viewInfo.PaintAppearance.ForeColor = color.GetNegativeColor();
-			viewInfo.ColorHexValue = color.ToHex();
+			if ((viewInfo.OwnerEdit?.Enabled ?? true))
+			{
+				var color = (Color)viewInfo.EditValue;
+				viewInfo.PaintAppearance.BackColor = color;
+				viewInfo.PaintAppearance.ForeColor = color.GetNegativeColor();
+				viewInfo.ColorHexValue = color.ToHex();
+			}
+			else
+			{
+				viewInfo.PaintAppearance.BackColor = HtmlColorEdit.DisabledColor;
+				viewInfo.PaintAppearance.ForeColor = HtmlColorEdit.DisabledColor;
+				viewInfo.ColorHexValue = Color.Black.ToHex();
+			}
 			base.DrawContent(info);
 		}
 	}

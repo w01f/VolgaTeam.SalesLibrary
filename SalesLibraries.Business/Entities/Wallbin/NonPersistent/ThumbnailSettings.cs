@@ -119,7 +119,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 			}
 		}
 
-		private ThumbnailTextMode _textMode;
+		private ThumbnailTextMode _textMode = ThumbnailTextMode.LinkName;
 		public ThumbnailTextMode TextMode
 		{
 			get { return _textMode; }
@@ -131,7 +131,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 			}
 		}
 
-		private ThumbnailTextPosition _textPosition;
+		private ThumbnailTextPosition _textPosition = ThumbnailTextPosition.Top;
 		public ThumbnailTextPosition TextPosition
 		{
 			get { return _textPosition; }
@@ -198,11 +198,5 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 		public string DisplayedText => TextMode == ThumbnailTextMode.CustomText ?
 			Text :
 			(Parent as BaseLibraryLink)?.Name;
-
-		protected override void AfterConstruction()
-		{
-			base.AfterConstruction();
-			_textMode = ThumbnailTextMode.NoText;
-		}
 	}
 }

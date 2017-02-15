@@ -188,7 +188,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 			buttonXShowTextCustom.Checked = _sourceLink.Thumbnail.TextMode == ThumbnailTextMode.CustomText;
 			buttonEditBannerTextFont.Tag = _sourceLink.Thumbnail.Font;
 			buttonEditBannerTextFont.EditValue = Utils.FontToString(_sourceLink.Thumbnail.Font);
-			colorEditBannerTextColor.Color = _sourceLink.Thumbnail.ForeColor;
+			colorEditTextColor.Color = _sourceLink.Thumbnail.ForeColor;
 			switch (_sourceLink.Thumbnail.TextMode)
 			{
 				case ThumbnailTextMode.LinkName:
@@ -311,7 +311,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 				else
 					_sourceLink.Thumbnail.TextMode = ThumbnailTextMode.NoText;
 				_sourceLink.Thumbnail.Font = buttonEditBannerTextFont.Tag as Font;
-				_sourceLink.Thumbnail.ForeColor = colorEditBannerTextColor.Color;
+				_sourceLink.Thumbnail.ForeColor = colorEditTextColor.Color;
 				if (checkEditTextPositionTop.Checked)
 					_sourceLink.Thumbnail.TextPosition = ThumbnailTextPosition.Top;
 				else if (checkEditTextPositionBottom.Checked)
@@ -467,7 +467,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 			memoEditBannerText.Enabled = buttonXShowTextLinkName.Checked || buttonXShowTextCustom.Checked;
 			memoEditBannerText.ReadOnly = buttonXShowTextLinkName.Checked;
 			buttonEditBannerTextFont.Enabled = buttonXShowTextLinkName.Checked || buttonXShowTextCustom.Checked;
-			colorEditBannerTextColor.Enabled = buttonXShowTextLinkName.Checked || buttonXShowTextCustom.Checked;
+			colorEditTextColor.Enabled = buttonXShowTextLinkName.Checked || buttonXShowTextCustom.Checked;
 			checkEditTextPositionTop.Enabled = buttonXShowTextLinkName.Checked || buttonXShowTextCustom.Checked;
 			checkEditTextPositionBottom.Enabled = buttonXShowTextLinkName.Checked || buttonXShowTextCustom.Checked;
 			checkEditTextAlignmentLeft.Enabled = buttonXShowTextLinkName.Checked || buttonXShowTextCustom.Checked;
@@ -484,7 +484,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 
 		private void OnTextColorEditValueChanged(object sender, EventArgs e)
 		{
-			memoEditBannerText.ForeColor = colorEditBannerTextColor.Color;
+			memoEditBannerText.ForeColor = colorEditTextColor.Color;
 		}
 
 		private void OnTextFontEditValueChanged(object sender, EventArgs e)

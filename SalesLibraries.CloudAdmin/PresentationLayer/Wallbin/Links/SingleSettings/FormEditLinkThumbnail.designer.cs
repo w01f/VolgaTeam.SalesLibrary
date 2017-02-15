@@ -33,7 +33,7 @@
 			this.buttonXOK = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXCancel = new DevComponents.DotNetBar.ButtonX();
 			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
-			this.colorEditBannerTextColor = new SalesLibraries.CommonGUI.Common.HtmlColorEdit();
+			this.colorEditTextColor = new SalesLibraries.CommonGUI.Common.HtmlColorEdit();
 			this.buttonEditBannerTextFont = new DevExpress.XtraEditors.ButtonEdit();
 			this.memoEditBannerText = new DevExpress.XtraEditors.MemoEdit();
 			this.buttonXEnable = new DevComponents.DotNetBar.ButtonX();
@@ -42,6 +42,7 @@
 			this.xtraTabPageImage = new DevExpress.XtraTab.XtraTabPage();
 			this.pnGallery = new System.Windows.Forms.Panel();
 			this.panelExGalleryInner = new DevComponents.DotNetBar.PanelEx();
+			this.pictureEditImage = new DevExpress.XtraEditors.PictureEdit();
 			this.retractableBarGallery = new SalesLibraries.CommonGUI.RetractableBar.RetractableBarLeft();
 			this.imageListView = new Manina.Windows.Forms.ImageListView();
 			this.hyperlinkLabelControlRefreshSourceFiles = new DevExpress.XtraEditors.HyperlinkLabelControl();
@@ -92,9 +93,8 @@
 			this.buttonXShowTextLinkName = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXShowTextCustom = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXPreviewImage = new DevComponents.DotNetBar.ButtonX();
-			this.pictureEditImage = new DevExpress.XtraEditors.PictureEdit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.colorEditBannerTextColor.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.colorEditTextColor.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.buttonEditBannerTextFont.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.memoEditBannerText.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControlSettings)).BeginInit();
@@ -102,6 +102,7 @@
 			this.xtraTabPageImage.SuspendLayout();
 			this.pnGallery.SuspendLayout();
 			this.panelExGalleryInner.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.pictureEditImage.Properties)).BeginInit();
 			this.retractableBarGallery.Content.SuspendLayout();
 			this.retractableBarGallery.Header.SuspendLayout();
 			this.pnImageTop.SuspendLayout();
@@ -135,7 +136,6 @@
 			((System.ComponentModel.ISupportInitialize)(this.checkEditTextAlignmentLeft.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditTextPositionBottom.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditTextPositionTop.Properties)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.pictureEditImage.Properties)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// buttonXOK
@@ -183,25 +183,25 @@
 			this.styleController.AppearanceReadOnly.Font = new System.Drawing.Font("Arial", 9.75F);
 			this.styleController.AppearanceReadOnly.Options.UseFont = true;
 			// 
-			// colorEditBannerTextColor
+			// colorEditTextColor
 			// 
-			this.colorEditBannerTextColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.colorEditBannerTextColor.Color = System.Drawing.Color.Empty;
-			this.colorEditBannerTextColor.EditValue = System.Drawing.Color.Empty;
-			this.colorEditBannerTextColor.Enabled = false;
-			this.colorEditBannerTextColor.Location = new System.Drawing.Point(275, 474);
-			this.colorEditBannerTextColor.Name = "colorEditBannerTextColor";
-			this.colorEditBannerTextColor.Properties.Appearance.BackColor = System.Drawing.Color.White;
-			this.colorEditBannerTextColor.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-			this.colorEditBannerTextColor.Properties.Appearance.Options.UseBackColor = true;
-			this.colorEditBannerTextColor.Properties.Appearance.Options.UseForeColor = true;
-			this.colorEditBannerTextColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+			this.colorEditTextColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.colorEditTextColor.Color = System.Drawing.Color.Empty;
+			this.colorEditTextColor.EditValue = System.Drawing.Color.Empty;
+			this.colorEditTextColor.Enabled = false;
+			this.colorEditTextColor.Location = new System.Drawing.Point(275, 474);
+			this.colorEditTextColor.Name = "colorEditTextColor";
+			this.colorEditTextColor.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.colorEditTextColor.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.colorEditTextColor.Properties.Appearance.Options.UseBackColor = true;
+			this.colorEditTextColor.Properties.Appearance.Options.UseForeColor = true;
+			this.colorEditTextColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
-			this.colorEditBannerTextColor.Properties.Color = System.Drawing.Color.Empty;
-			this.colorEditBannerTextColor.Size = new System.Drawing.Size(131, 22);
-			this.colorEditBannerTextColor.StyleController = this.styleController;
-			this.colorEditBannerTextColor.TabIndex = 44;
-			this.colorEditBannerTextColor.EditValueChanged += new System.EventHandler(this.OnTextColorEditValueChanged);
+			this.colorEditTextColor.Properties.Color = System.Drawing.Color.Empty;
+			this.colorEditTextColor.Size = new System.Drawing.Size(131, 22);
+			this.colorEditTextColor.StyleController = this.styleController;
+			this.colorEditTextColor.TabIndex = 44;
+			this.colorEditTextColor.EditValueChanged += new System.EventHandler(this.OnTextColorEditValueChanged);
 			// 
 			// buttonEditBannerTextFont
 			// 
@@ -344,6 +344,24 @@
 			this.panelExGalleryInner.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
 			this.panelExGalleryInner.Style.GradientAngle = 90;
 			this.panelExGalleryInner.TabIndex = 81;
+			// 
+			// pictureEditImage
+			// 
+			this.pictureEditImage.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.pictureEditImage.Location = new System.Drawing.Point(0, 1);
+			this.pictureEditImage.Name = "pictureEditImage";
+			this.pictureEditImage.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.pictureEditImage.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.pictureEditImage.Properties.Appearance.Options.UseBackColor = true;
+			this.pictureEditImage.Properties.Appearance.Options.UseForeColor = true;
+			this.pictureEditImage.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+			this.pictureEditImage.Properties.NullText = " ";
+			this.pictureEditImage.Properties.ReadOnly = true;
+			this.pictureEditImage.Properties.ShowCameraMenuItem = DevExpress.XtraEditors.Controls.CameraMenuItemVisibility.Auto;
+			this.pictureEditImage.Properties.ShowMenu = false;
+			this.pictureEditImage.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Squeeze;
+			this.pictureEditImage.Size = new System.Drawing.Size(545, 388);
+			this.pictureEditImage.TabIndex = 49;
 			// 
 			// retractableBarGallery
 			// 
@@ -956,7 +974,7 @@
 			this.xtraTabPageText.Controls.Add(this.labelControlTextFont);
 			this.xtraTabPageText.Controls.Add(this.labelControlTextDescription);
 			this.xtraTabPageText.Controls.Add(this.memoEditBannerText);
-			this.xtraTabPageText.Controls.Add(this.colorEditBannerTextColor);
+			this.xtraTabPageText.Controls.Add(this.colorEditTextColor);
 			this.xtraTabPageText.Controls.Add(this.buttonEditBannerTextFont);
 			this.xtraTabPageText.Controls.Add(this.buttonXShowTextNone);
 			this.xtraTabPageText.Controls.Add(this.buttonXShowTextLinkName);
@@ -1186,20 +1204,6 @@
 			this.buttonXPreviewImage.TextColor = System.Drawing.Color.Black;
 			this.buttonXPreviewImage.Click += new System.EventHandler(this.OnPreviewImageClick);
 			// 
-			// pictureEditImage
-			// 
-			this.pictureEditImage.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.pictureEditImage.Location = new System.Drawing.Point(0, 1);
-			this.pictureEditImage.Name = "pictureEditImage";
-			this.pictureEditImage.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-			this.pictureEditImage.Properties.NullText = " ";
-			this.pictureEditImage.Properties.ReadOnly = true;
-			this.pictureEditImage.Properties.ShowCameraMenuItem = DevExpress.XtraEditors.Controls.CameraMenuItemVisibility.Auto;
-			this.pictureEditImage.Properties.ShowMenu = false;
-			this.pictureEditImage.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Squeeze;
-			this.pictureEditImage.Size = new System.Drawing.Size(545, 388);
-			this.pictureEditImage.TabIndex = 49;
-			// 
 			// FormEditLinkThumbnail
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
@@ -1222,7 +1226,7 @@
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OnFormClosing);
 			this.Click += new System.EventHandler(this.OnFormClick);
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.colorEditBannerTextColor.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.colorEditTextColor.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.buttonEditBannerTextFont.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.memoEditBannerText.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControlSettings)).EndInit();
@@ -1230,6 +1234,7 @@
 			this.xtraTabPageImage.ResumeLayout(false);
 			this.pnGallery.ResumeLayout(false);
 			this.panelExGalleryInner.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.pictureEditImage.Properties)).EndInit();
 			this.retractableBarGallery.Content.ResumeLayout(false);
 			this.retractableBarGallery.Header.ResumeLayout(false);
 			this.pnImageTop.ResumeLayout(false);
@@ -1265,7 +1270,6 @@
 			((System.ComponentModel.ISupportInitialize)(this.checkEditTextAlignmentLeft.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditTextPositionBottom.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditTextPositionTop.Properties)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.pictureEditImage.Properties)).EndInit();
 			this.ResumeLayout(false);
 
 		}
@@ -1275,7 +1279,7 @@
 		private DevComponents.DotNetBar.ButtonX buttonXOK;
 		private DevComponents.DotNetBar.ButtonX buttonXCancel;
 		private DevExpress.XtraEditors.StyleController styleController;
-		private CommonGUI.Common.HtmlColorEdit colorEditBannerTextColor;
+		private CommonGUI.Common.HtmlColorEdit colorEditTextColor;
 		private DevExpress.XtraEditors.ButtonEdit buttonEditBannerTextFont;
 		private DevExpress.XtraEditors.MemoEdit memoEditBannerText;
 		private DevComponents.DotNetBar.ButtonX buttonXEnable;
