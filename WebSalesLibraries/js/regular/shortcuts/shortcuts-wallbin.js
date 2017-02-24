@@ -14,7 +14,9 @@
 				content: libraryData.content,
 				headerOptions: {
 					title: libraryData.options.headerTitle,
-					icon: libraryData.options.headerIcon
+					icon: libraryData.options.headerIcon,
+					titleHideCondition: libraryData.options.headerTitleHideCondition,
+					iconHideCondition: libraryData.options.headerIconHideCondition
 				},
 				actions: libraryData.actions,
 				navigationPanel: libraryData.navigationPanel,

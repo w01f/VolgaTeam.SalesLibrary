@@ -1,7 +1,7 @@
 (function ($)
 {
 	window.BaseUrl = window.BaseUrl || '';
-	$.SalesPortal = $.SalesPortal || { };
+	$.SalesPortal = $.SalesPortal || {};
 	var ShortcutsGroup = function ()
 	{
 		var that = this;
@@ -10,41 +10,58 @@
 		{
 			var groupPage = $('#shortcut-group');
 
-			groupPage.find('.menu-items').cubeportfolio({
-				gridAdjustment: 'alignCenter'
-			});
-
-			$(window).off("pagechange.group").on("pagechange.group", function (event, data)
+			var initGroup = function ()
 			{
-				if (data.toPage.prop('id') == groupPage.prop('id') && (data.prevPage == undefined || data.prevPage.prop('id') != groupPage.prop('id')))
+				groupPage.find('.menu-item').off('click').on('click', function (e)
 				{
-					groupPage.find('.menu-items').cubeportfolio('destroy');
-					groupPage.find('.menu-items').cubeportfolio({
-						gridAdjustment: 'alignCenter'
-					});
-				}
-			});
+					var data = $(this).find('.service-data');
+					that.trackActivity(data);
 
-			groupPage.find('.menu-item').off('click').on('click', function (e)
-			{
-				var data = $(this).find('.service-data');
-				that.trackActivity(data);
+					var hasCustomHandler = data.find('.has-custom-handler').length > 0;
+					var samePage = data.find('.same-page').length > 0;
 
-				var hasCustomHandler = data.find('.has-custom-handler').length > 0;
-				var samePage = data.find('.same-page').length > 0;
+					if (hasCustomHandler == true && samePage == true)
+					{
+						e.preventDefault();
+						that.openShortcutByMenuItemData(data, '#' + groupPage.prop('id'));
+					}
+				});
 
-				if (hasCustomHandler == true && samePage == true)
+				$('.logout-button').off('click').on('click', function (e)
 				{
+					e.stopPropagation();
 					e.preventDefault();
-					that.openShortcutByMenuItemData(data);
-				}
-			});
+					$.SalesPortal.Auth.logout();
+				});
+			};
 
-			$('.logout-button').off('click').on('click', function (e)
+			$(window).off("pagecontainerchange.group").on("pagecontainerchange.group", function (event, ui)
 			{
-				e.stopPropagation();
-				e.preventDefault();
-				$.SalesPortal.Auth.logout();
+				if ((ui.toPage != undefined && ui.toPage.prop('id') == groupPage.prop('id')) || ui.options.target == groupPage.prop('id'))
+				{
+					if (groupPage.find('.cbp-l-grid-masonry').length > 0)
+					{
+						try
+						{
+							groupPage.find('.menu-items').cubeportfolio({
+								gridAdjustment: 'alignCenter'
+							});
+							initGroup();
+						}
+						catch (err)
+						{
+							groupPage.find('.menu-items').cubeportfolio('destroy', function ()
+							{
+								groupPage.find('.menu-items').cubeportfolio({
+									gridAdjustment: 'alignCenter'
+								});
+								initGroup();
+							});
+						}
+					}
+					else
+						initGroup();
+				}
 			});
 		};
 
@@ -61,7 +78,7 @@
 					$.SalesPortal.LinkManager.requestViewDialog(
 						data.find('.library-link-id').text(),
 						{
-							id: parentShortcutId == undefined ? '#shortcut-group' : ('#shortcut-link-page-' + parentShortcutId),
+							id: parentShortcutId,
 							name: shortcutLinkTitle
 						},
 						false
@@ -71,7 +88,7 @@
 					if (parentShortcutId == undefined)
 						$('#shortcuts-link-download-warning-popup').popup('open');
 					else
-						$('#shortcuts-link-download-warning-popup-' + parentShortcutId).popup('open');
+						$(parentShortcutId + '-download-warning-popup').popup('open');
 					break;
 				default :
 					$.ajax({
@@ -99,13 +116,42 @@
 						{
 							cleanupPreviousInstance(parentShortcutId);
 
-							$('body').append($(result.content));
+							var pageContent = $(result.content);
+							$('body').append(pageContent);
+
+							if (parentShortcutId !== undefined)
+								pageContent.find('.main-content .content-header .back a').prop('href', parentShortcutId);
+
+							var navigationToggleButton = pageContent.find('.navigation-panel-toggle');
+							var navigationItemsConteiner = pageContent.find('.navigation-items-container');
+							if (result.navigationPanel == '')
+								navigationToggleButton.hide();
+							navigationItemsConteiner.html(result.navigationPanel);
+							$(window).one("pagecontainerchange.navigation-items", function (event, ui)
+							{
+								navigationItemsConteiner.find('.shortcuts-link').off('click').on('click', function (e)
+								{
+									var data = $(this).find('.service-data');
+									$.SalesPortal.ShortcutsManager.trackActivity(data);
+
+									var hasCustomHandler = data.find('.has-custom-handler').length > 0;
+									var samePage = data.find('.same-page').length > 0;
+
+									if (hasCustomHandler == true && samePage == true)
+									{
+										e.preventDefault();
+										$.SalesPortal.ShortcutsManager.openShortcutByMenuItemData(data, '#' + $('.shortcut-link-page.ui-page-active').prop('id'));
+									}
+								});
+							});
+
 							$.mobile.initializePage();
 
 							switch (result.options.shortcutType)
 							{
 								case 'gridbundle':
 								case 'carouselbundle':
+								case 'landing':
 									new $.SalesPortal.ShortcutsBundle(result).init();
 									break;
 								case 'search':
@@ -151,7 +197,7 @@
 			if (parentShortcutId == undefined)
 				$('body .shortcut-link-page').remove();
 			else
-				$('body .shortcut-link-page').not('#shortcut-link-page-' + parentShortcutId).remove();
+				$('body .shortcut-link-page').not(parentShortcutId).remove();
 		};
 
 		this.trackActivity = function (dataObject)

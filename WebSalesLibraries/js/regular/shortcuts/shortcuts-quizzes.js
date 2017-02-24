@@ -14,7 +14,9 @@
 				content: quizzesData.content,
 				headerOptions: {
 					title: quizzesData.options.headerTitle,
-					icon: quizzesData.options.headerIcon
+					icon: quizzesData.options.headerIcon,
+					titleHideCondition: quizzesData.options.headerTitleHideCondition,
+					iconHideCondition: quizzesData.options.headerIconHideCondition
 				},
 				actions: quizzesData.actions,
 				navigationPanel: quizzesData.navigationPanel,

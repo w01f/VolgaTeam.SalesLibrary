@@ -30,7 +30,9 @@
 				$availablePageIds = array();
 
 			$this->pages = array();
-			foreach (\LibraryPageRecord::model()->findAll('id_library=?', array($this->id)) as $pageRecord)
+			/** @var \LibraryPageRecord[] $pageRecords */
+			$pageRecords = \LibraryPageRecord::model()->findAll('id_library=?', array($this->id));
+			foreach ($pageRecords as $pageRecord)
 			{
 				$page = new LibraryPage($this);
 				$page->load($pageRecord);

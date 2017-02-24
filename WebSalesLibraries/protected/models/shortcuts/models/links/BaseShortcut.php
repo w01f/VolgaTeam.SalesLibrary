@@ -23,6 +23,7 @@
 
 		public $isAccessGranted;
 
+		/** @var ShortcutAppearance  */
 		public $appearance;
 
 		public $isPhone;

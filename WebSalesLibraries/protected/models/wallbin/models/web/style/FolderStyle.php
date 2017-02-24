@@ -11,10 +11,11 @@
 		public $showCustomTitle;
 		public $showWidget;
 		public $hideTopFoldersCustomTitle;
-		public $customTitlePadding;
 		public $textAlign;
 		public $textColor;
 		public $backColor;
+		/** @var  \Padding */
+		public $customTitlePadding;
 		/** @var  \Font */
 		public $font;
 
@@ -38,7 +39,8 @@
 			$folderStyle->hideTopFoldersCustomTitle = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : $folderStyle->hideTopFoldersCustomTitle;
 
 			$queryResult = $xpath->query('.//HeaderPadding', $contextNode);
-			$folderStyle->customTitlePadding = $queryResult->length > 0 ? intval(trim($queryResult->item(0)->nodeValue)) : $folderStyle->customTitlePadding;
+			if ($queryResult->length > 0)
+				$folderStyle->customTitlePadding = \Padding::fromXml($xpath, $queryResult->item(0));
 
 			$queryResult = $xpath->query('.//TextAlignment', $contextNode);
 			$folderStyle->textAlign = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : $folderStyle->textAlign;
@@ -66,7 +68,7 @@
 			$folderStyle->showCustomTitle = false;
 			$folderStyle->showWidget = false;
 			$folderStyle->hideTopFoldersCustomTitle = false;
-			$folderStyle->customTitlePadding = 5;
+			$folderStyle->customTitlePadding = new \Padding(5);
 			$folderStyle->textAlign = 'left';
 			$folderStyle->textColor = null;
 			$folderStyle->backColor = null;

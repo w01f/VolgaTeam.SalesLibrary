@@ -5,37 +5,41 @@
 	$.SalesPortal.ShortcutsBundle = function (data)
 	{
 		var shortcutData = data;
-		var contentContainer = $('#shortcut-link-page-' + shortcutData.options.linkId).find('.content-data');
+		var pageIdentifier = '#shortcut-link-page-' + shortcutData.options.linkId;
+		var contentContainer = $(pageIdentifier).find('.content-data');
 
 		this.init = function ()
 		{
-			$(window).off("pagechange.bundle").on("pagechange.bundle", function ()
+			$(window).off("pagecontainerchange.bundle").on("pagecontainerchange.bundle", function (event, ui)
 			{
-				if (contentContainer.find('.cbp-l-grid-masonry').length > 0)
+				if ((ui.toPage != undefined && ui.options.target == pageIdentifier) || ui.options.target == pageIdentifier)
 				{
-					try
+					if (contentContainer.find('.cbp-l-grid-masonry').length > 0)
 					{
-						contentContainer.cubeportfolio({
-							gridAdjustment: 'alignCenter',
-							caption: ''
-						});
-						initPageContent();
-					}
-					catch (err)
-					{
-						contentContainer.cubeportfolio('destroy', function ()
+						try
 						{
 							contentContainer.cubeportfolio({
 								gridAdjustment: 'alignCenter',
 								caption: ''
 							});
 							initPageContent();
-						});
+						}
+						catch (err)
+						{
+							contentContainer.cubeportfolio('destroy', function ()
+							{
+								contentContainer.cubeportfolio({
+									gridAdjustment: 'alignCenter',
+									caption: ''
+								});
+								initPageContent();
+							});
+						}
 					}
-				}
-				else
-				{
-					initPageContent();
+					else
+					{
+						initPageContent();
+					}
 				}
 			});
 
@@ -64,7 +68,7 @@
 				if (hasCustomHandler == true && samePage == true)
 				{
 					e.preventDefault();
-					$.SalesPortal.ShortcutsManager.openShortcutByMenuItemData(data, shortcutData.options.linkId);
+					$.SalesPortal.ShortcutsManager.openShortcutByMenuItemData(data, "#shortcut-link-page-" + shortcutData.options.linkId);
 				}
 			});
 		};

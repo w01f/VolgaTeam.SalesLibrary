@@ -1,4 +1,4 @@
-<? /** @var $shortcut BundleShortcut */ ?>
+<? /** @var $shortcut ContainerShortcut */ ?>
 <div class="cbp-l-grid-masonry">
 	<? foreach ($shortcut->links as $link): ?>
 		<a class="cbp-item shortcuts-link" href="<? echo $link->getSourceLink(); ?>" data-ajax="false" target="_blank">

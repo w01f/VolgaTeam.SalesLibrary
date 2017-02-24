@@ -24,6 +24,9 @@
 
 		public $showScroll;
 
+		/** @var  HideCondition */
+		public $hideCondition;
+
 		/** @var  BaseNavigationItem[] */
 		public $items;
 
@@ -68,6 +71,12 @@
 			$navigationPanel->dividerWidthCollapsed = $queryResult->length > 0 ? intval(trim($queryResult->item(0)->nodeValue)) : 0;
 			$queryResult = $xpath->query('//Config/Appearance/Bar/DividerColor');
 			$navigationPanel->dividerColorCollapsed = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : '000000';
+
+			$queryResult = $xpath->query('//Config/Appearance/Hide');
+			if ($queryResult->length > 0)
+				$navigationPanel->hideCondition = HideCondition::fromXml($xpath, $queryResult->item(0));
+			else
+				$navigationPanel->hideCondition = new HideCondition();
 
 			$navigationPanel->items = array();
 			$queryResult = $xpath->query('//Config/Items/Item');

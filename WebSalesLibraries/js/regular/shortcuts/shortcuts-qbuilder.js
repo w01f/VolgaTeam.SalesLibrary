@@ -17,7 +17,9 @@
 				content: qBuilderData.content,
 				headerOptions: {
 					title: qBuilderData.options.headerTitle,
-					icon: qBuilderData.options.headerIcon
+					icon: qBuilderData.options.headerIcon,
+					titleHideCondition: qBuilderData.options.headerTitleHideCondition,
+					iconHideCondition: qBuilderData.options.headerIconHideCondition
 				},
 				actions: qBuilderData.actions,
 				navigationPanel: qBuilderData.navigationPanel,

@@ -82,6 +82,7 @@
 					break;
 				default :
 					menu.find('.main-site-url').show();
+					$.SalesPortal.ShortcutsHistory.pushState(data, customParameters);
 					$.ajax({
 						type: "POST",
 						url: url,
@@ -97,7 +98,13 @@
 						{
 							$.SalesPortal.Overlay.hide();
 						},
-						success: openShortcutOnSamePage,
+						success: function (result)
+						{
+							openShortcutOnSamePage(result);
+							var scrollPosition = customParameters.scrollPosition;
+							if (scrollPosition)
+								$.SalesPortal.Content.getContentObject().scrollTop(scrollPosition);
+						},
 						error: function ()
 						{
 						},
@@ -106,9 +113,6 @@
 					});
 					break;
 			}
-
-			$.SalesPortal.ShortcutsHistory.pushState(data, customParameters);
-
 			return true;
 		};
 
@@ -220,12 +224,18 @@
 				case 'favorites':
 					new $.SalesPortal.ShortcutsFavorites().init(result);
 					break;
+				case 'landing':
+					new $.SalesPortal.ShortcutsLandingPage().init(result);
+					updatedAllContentNecessary = true;
+					break;
 				default :
 					$.SalesPortal.Content.fillContent({
 						content: result.content,
 						headerOptions: {
 							title: result.options.headerTitle,
-							icon: result.options.headerIcon
+							icon: result.options.headerIcon,
+							titleHideCondition: result.options.headerTitleHideCondition,
+							iconHideCondition: result.options.headerIconHideCondition
 						},
 						actions: result.actions,
 						navigationPanel: result.navigationPanel,

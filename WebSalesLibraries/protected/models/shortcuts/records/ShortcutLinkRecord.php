@@ -194,6 +194,8 @@
 					return new YouTubeShortcut($this, $isPhone);
 				case 'vimeo':
 					return new VimeoShortcut($this, $isPhone);
+				case 'landing':
+					return new LandingPageShortcut($this, $isPhone);
 				default:
 					return new EmptyShortcut($this, $isPhone);
 			}
@@ -212,10 +214,11 @@
 			$linkOrder = str_replace('link', '', $idArray[2]);
 
 			$withArray = array();
-			$withArray['group'] = array(
-				'select' => false,
-				'condition' => "group.order = " . $groupOrder
-			);
+			if ($groupOrder != '')
+				$withArray['group'] = array(
+					'select' => false,
+					'condition' => "group.order = " . $groupOrder
+				);
 			if ($parentOrder != '')
 				$withArray['parent'] = array(
 					'select' => false,

@@ -14,6 +14,11 @@
 		public $allowPublicAccess;
 		public $publicPassword;
 
+		/** @var  HideCondition */
+		public $hideIconCondition;
+		/** @var  HideCondition */
+		public $hideTextCondition;
+
 		/**
 		 * @param $linkRecord
 		 * @param $isPhone boolean
@@ -34,6 +39,18 @@
 
 			$queryResult = $xpath->query('//Config/HeaderIcon');
 			$this->headerIcon = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : '';
+
+			$queryResult = $xpath->query('//Config/Regular/HideHeaderIcon');
+			if ($queryResult->length > 0)
+				$this->hideIconCondition = HideCondition::fromXml($xpath, $queryResult->item(0));
+			else
+				$this->hideIconCondition = new HideCondition();
+
+			$queryResult = $xpath->query('//Config/Regular/HideHeaderTitle');
+			if ($queryResult->length > 0)
+				$this->hideTextCondition = HideCondition::fromXml($xpath, $queryResult->item(0));
+			else
+				$this->hideTextCondition = new HideCondition();
 
 			$queryResult = $xpath->query('//Config/ShowLeftPanel');
 			$this->showNavigationPanel = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : false;
@@ -68,6 +85,16 @@
 		}
 
 		/**
+		 * @return string
+		 */
+		public function getMenuItemData()
+		{
+			$result = parent::getMenuItemData();
+			$result .= '<div class="push-history"></div>';
+			return $result;
+		}
+
+		/**
 		 * @return array
 		 */
 		public function getPageData()
@@ -80,6 +107,21 @@
 			else
 				$data['headerTitle'] = $this->description;
 			$data['headerIcon'] = $this->headerIcon;
+
+			$data['headerIconHideCondition'] = array(
+				'extraSmall' => $this->hideIconCondition->extraSmall,
+				'small' => $this->hideIconCondition->small,
+				'medium' => $this->hideIconCondition->medium,
+				'large' => $this->hideIconCondition->large,
+			);
+
+			$data['headerTitleHideCondition'] = array(
+				'extraSmall' => $this->hideTextCondition->extraSmall,
+				'small' => $this->hideTextCondition->small,
+				'medium' => $this->hideTextCondition->medium,
+				'large' => $this->hideTextCondition->large,
+			);
+
 			$data['linkId'] = $this->id;
 			return $data;
 		}

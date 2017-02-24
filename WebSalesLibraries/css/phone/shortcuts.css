@@ -92,3 +92,23 @@
 	display: block;
 }
 /*------------------------------------*/
+
+/*Navigation Panel------------------------------------*/
+.navigation-item
+{
+	display: table-cell;
+}
+
+.navigation-item .logo,
+.navigation-item .title
+{
+	display: inline-block;
+	vertical-align: middle;
+	margin-right: 5px;
+}
+
+.navigation-item img.logo
+{
+	height: 32px;
+}
+/*------------------------------------*/

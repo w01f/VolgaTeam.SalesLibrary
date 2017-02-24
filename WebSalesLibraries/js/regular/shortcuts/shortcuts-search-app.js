@@ -39,7 +39,9 @@
 				content: appData.content,
 				headerOptions: {
 					title: appData.options.headerTitle,
-					icon: appData.options.headerIcon
+					icon: appData.options.headerIcon,
+					titleHideCondition: appData.options.headerTitleHideCondition,
+					iconHideCondition: appData.options.headerIconHideCondition
 				},
 				actions: appData.actions,
 				navigationPanel: appData.navigationPanel,

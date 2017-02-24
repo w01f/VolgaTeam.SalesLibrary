@@ -40,7 +40,6 @@ return array(
 	    'application.models.wallbin.records.*',
 	    'application.models.search.*',
 	    'application.models.preview.*',
-	    'application.models.user_tabs.*',
     ),
     'components' => array(
         'db' => array(

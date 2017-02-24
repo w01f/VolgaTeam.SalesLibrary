@@ -25,24 +25,28 @@
 			parameters.content = parameters.content != undefined ? parameters.content : '';
 			parameters.headerOptions = parameters.headerOptions != undefined ? parameters.headerOptions : undefined;
 			parameters.actions = parameters.actions != undefined ? parameters.actions : undefined;
-			parameters.navigationPanel = parameters.navigationPanel != undefined ? parameters.navigationPanel : '';
+			parameters.navigationPanel = parameters.navigationPanel != undefined ? parameters.navigationPanel : undefined;
 			parameters.loadCallback = parameters.loadCallback != undefined ? parameters.loadCallback : function ()
-			{
-			};
+				{
+				};
 			parameters.resizeCallback = parameters.resizeCallback != undefined ? parameters.resizeCallback : function ()
-			{
-			};
+				{
+				};
 
 			initHeader(parameters.headerOptions);
 			initShortcutActions(parameters.actions);
 
 			new $.SalesPortal.ShortcutsNavigationPanel({
-				content: parameters.navigationPanel,
+				content: parameters.navigationPanel !== undefined ? parameters.navigationPanel.content : '',
+				options: parameters.navigationPanel !== undefined ? parameters.navigationPanel.options : undefined,
 				sizeChangedCallback: parameters.resizeCallback
 			});
 
+			var contentRoot = $('#content');
 			var contentObject = that.getContentObject();
+			contentObject.scrollTop(0);
 			contentObject.html(parameters.content);
+
 
 			var anchorImage = contentObject.find('img.wallbin-logo');
 			if (anchorImage.length > 0)
@@ -50,7 +54,7 @@
 			else
 				parameters.loadCallback();
 
-			$('#content').css({
+			contentRoot.css({
 				'overflow': ''
 			});
 
@@ -120,6 +124,32 @@
 				{
 					headerIcon.addClass(headerOptions.icon);
 				}
+
+				headerIcon.removeClass('hidden-xs');
+				if (headerOptions.iconHideCondition.extraSmall == true)
+					headerIcon.addClass('hidden-xs');
+				headerIcon.removeClass('hidden-sm');
+				if (headerOptions.iconHideCondition.small == true)
+					headerIcon.addClass('hidden-sm');
+				headerIcon.removeClass('hidden-md');
+				if (headerOptions.iconHideCondition.medium == true)
+					headerIcon.addClass('hidden-md');
+				headerIcon.removeClass('hidden-lg');
+				if (headerOptions.iconHideCondition.large == true)
+					headerIcon.addClass('hidden-lg');
+
+				headerTitle.removeClass('hidden-xs');
+				if (headerOptions.titleHideCondition.extraSmall == true)
+					headerTitle.addClass('hidden-xs');
+				headerTitle.removeClass('hidden-sm');
+				if (headerOptions.titleHideCondition.small == true)
+					headerTitle.addClass('hidden-sm');
+				headerTitle.removeClass('hidden-md');
+				if (headerOptions.titleHideCondition.medium == true)
+					headerTitle.addClass('hidden-md');
+				headerTitle.removeClass('hidden-lg');
+				if (headerOptions.titleHideCondition.large == true)
+					headerTitle.addClass('hidden-lg');
 			}
 		};
 

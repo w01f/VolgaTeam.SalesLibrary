@@ -11,7 +11,7 @@
 	$libraryManager = new LibraryManager();
 	$library = $libraryManager->getLibraryById($previewInfo->libraryId);
 
-	if(isset($previewInfo->pageId))
+	if(!empty($previewInfo->pageId))
 	{
 		$savedSelectedPageIdTag = sprintf('SelectedLibraryPageId-%s', $library->id);
 		$cookie = new CHttpCookie($savedSelectedPageIdTag, $previewInfo->pageId);

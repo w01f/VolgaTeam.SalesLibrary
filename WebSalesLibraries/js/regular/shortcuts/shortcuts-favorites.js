@@ -31,7 +31,9 @@
 				content: favoritesData.content,
 				headerOptions: {
 					title: favoritesData.options.headerTitle,
-					icon: favoritesData.options.headerIcon
+					icon: favoritesData.options.headerIcon,
+					titleHideCondition: favoritesData.options.headerTitleHideCondition,
+					iconHideCondition: favoritesData.options.headerIconHideCondition
 				},
 				actions: favoritesData.actions,
 				navigationPanel: favoritesData.navigationPanel,
@@ -206,8 +208,10 @@
 								$.SalesPortal.Content.fillContent({
 									content: msg,
 									headerOptions: {
-										title: 'Favorite Links',
-										icon: 'icon-favorite'
+										title: favoritesData.options.headerTitle,
+										icon: favoritesData.options.headerIcon,
+										titleHideCondition: favoritesData.options.headerTitleHideCondition,
+										iconHideCondition: favoritesData.options.headerIconHideCondition
 									},
 									actions: favoritesData.actions,
 									navigationPanel: favoritesData.navigationPanel,

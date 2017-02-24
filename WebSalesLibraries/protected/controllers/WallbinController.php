@@ -131,13 +131,9 @@
 					$defaultPage = $library->pages[0];
 				$defaultPage->loadData();
 
-				$userId = UserIdentity::getCurrentUserId();
-				$tabPageExisted = UserTabRecord::isUserTabExists($userId, $library->id);
-
 				$this->render('libraryWrapper', array(
 					'library' => $library,
-					'defaultPage' => $defaultPage,
-					'tabPageExisted' => $tabPageExisted
+					'defaultPage' => $defaultPage
 				));
 			}
 			else

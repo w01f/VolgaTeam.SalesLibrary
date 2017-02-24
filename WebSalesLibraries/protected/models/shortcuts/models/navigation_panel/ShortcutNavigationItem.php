@@ -31,4 +31,16 @@
 					$this->shortcut = $shortcutRecord->getModel(false, null);
 			}
 		}
+
+		/** @return string */
+		public function getUrl()
+		{
+			return $this->shortcut->getSourceLink();
+		}
+
+		/** @return string */
+		public function getItemData()
+		{
+			return $this->shortcut->getMenuItemData();
+		}
 	}

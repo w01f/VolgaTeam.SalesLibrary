@@ -14,7 +14,9 @@
 				content: gridData.content,
 				headerOptions: {
 					title: gridData.options.headerTitle,
-					icon: gridData.options.headerIcon
+					icon: gridData.options.headerIcon,
+					titleHideCondition: gridData.options.headerTitleHideCondition,
+					iconHideCondition: gridData.options.headerIconHideCondition
 				},
 				actions: gridData.actions,
 				navigationPanel: gridData.navigationPanel,

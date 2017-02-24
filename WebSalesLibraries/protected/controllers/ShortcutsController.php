@@ -131,6 +131,7 @@
 				case 'qbuilder':
 				case 'favorites':
 				case 'quizzes':
+				case 'landing':
 					if ($shortcut->samePage)
 					{
 						$defaultShortcutTagName = 'default-shortcut';
@@ -192,6 +193,9 @@
 					$useMobileWrapper = false;
 					$viewName = 'favorites';
 					break;
+				case 'landing':
+					$viewName = 'landingPage';
+					break;
 			}
 
 			if ($viewName != '')
@@ -212,12 +216,24 @@
 					'';
 
 				$navigationPanel = '';
-				if (!$this->isPhone && $shortcut instanceof PageContentShortcut)
+				if ($shortcut instanceof PageContentShortcut)
 				{
 					/** @var PageContentShortcut $shortcut */
 					$navigationPanelData = $shortcut->getNavigationPanel();
 					if (isset($navigationPanelData))
-						$navigationPanel = $this->renderPartial('navigationPanel/itemsList', array('navigationPanel' => $navigationPanelData), true);
+					{
+						$navigationPanel = array(
+							'content' => $this->renderPartial('navigationPanel/itemsList', array('navigationPanel' => $navigationPanelData), true),
+							'options' => array(
+								'hideCondition' => array(
+									'extraSmall' => $navigationPanelData->hideCondition->extraSmall,
+									'small' => $navigationPanelData->hideCondition->small,
+									'medium' => $navigationPanelData->hideCondition->medium,
+									'large' => $navigationPanelData->hideCondition->large,
+								)
+							)
+						);
+					}
 				}
 
 				$pageContentBundle = array(

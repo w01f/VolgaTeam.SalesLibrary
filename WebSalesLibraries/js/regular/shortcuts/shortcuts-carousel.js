@@ -16,7 +16,9 @@
 				content: carouselData.content,
 				headerOptions: {
 					title: carouselData.options.headerTitle,
-					icon: carouselData.options.headerIcon
+					icon: carouselData.options.headerIcon,
+					titleHideCondition: carouselData.options.headerTitleHideCondition,
+					iconHideCondition: carouselData.options.headerIconHideCondition
 				},
 				actions: carouselData.actions,
 				navigationPanel: carouselData.navigationPanel,

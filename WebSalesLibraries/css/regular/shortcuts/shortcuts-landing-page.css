@@ -1,0 +1,16 @@
+#content .shortcuts-page-content.landing-page
+{
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+#content .landing-page .landing-url,
+#content .landing-page .landing-url:hover,
+#content .landing-page .landing-url:link,
+#content .landing-page .landing-url:focus
+{
+    display: block;
+    color: inherit;
+    text-decoration: inherit;
+    outline: none;
+}

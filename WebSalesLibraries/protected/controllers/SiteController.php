@@ -53,6 +53,7 @@
 										case 'qbuilder':
 										case 'favorites':
 										case 'quizzes':
+										case 'landing':
 											$defaultShortcut = $shortcut;
 											break;
 										default:

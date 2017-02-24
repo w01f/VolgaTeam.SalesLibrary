@@ -18,10 +18,25 @@
 
 		this.pushState = function (data, customParameters)
 		{
-			if (customParameters && customParameters.pushHistory)
+			var pushHistory = data.find('.push-history').length > 0;
+			if (pushHistory && customParameters && customParameters.pushHistory)
 			{
-				customParameters.pushHistory = false;
+				var currentSate = window.history.state;
+				if (currentSate && currentSate.isShortcut)
+				{
+					var newParameters = currentSate.customParameters;
+					newParameters.scrollPosition = $.SalesPortal.Content.getContentObject().scrollTop();
+					var newSate = {
+						isShortcut: true,
+						shortcutData: currentSate.shortcutData,
+						customParameters: newParameters
+					};
+					var prevTitle = currentSate.shortcutData != undefined ? $.parseJSON($(currentSate.shortcutData).find('.activity-data').text()) : undefined;
+					if (prevTitle != undefined)
+						window.history.replaceState(newSate, prevTitle);
+				}
 
+				customParameters.pushHistory = false;
 				var title = data != undefined ? $.parseJSON(data.find('.activity-data').text()) : undefined;
 				window.history.pushState(
 					{

@@ -14,7 +14,9 @@
 				content: parentSearchData.content,
 				headerOptions: {
 					title: parentSearchData.options.headerTitle,
-					icon: parentSearchData.options.headerIcon
+					icon: parentSearchData.options.headerIcon,
+					titleHideCondition: parentSearchData.options.headerTitleHideCondition,
+					iconHideCondition: parentSearchData.options.headerIconHideCondition
 				},
 				actions: parentSearchData.actions,
 				navigationPanel: parentSearchData.navigationPanel,

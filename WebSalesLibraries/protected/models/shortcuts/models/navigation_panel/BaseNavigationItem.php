@@ -5,6 +5,7 @@
 	 */
 	abstract class BaseNavigationItem
 	{
+		public $id;
 		public $type;
 		public $title;
 		public $tooltip;
@@ -22,6 +23,8 @@
 		 */
 		public function __construct($parent, $xpath, $contextNode, $imagePath)
 		{
+			$this->id = uniqid();
+
 			$queryResult = $xpath->query('IconPanel', $contextNode);
 			$this->iconUrlExpanded = $imagePath . '/' . ($queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : '');
 			$queryResult = $xpath->query('IconBar', $contextNode);
@@ -36,6 +39,12 @@
 			$queryResult = $xpath->query('IconPanelColor', $contextNode);
 			$this->textColor = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : $parent->textColor;
 		}
+
+		/** @return string */
+		public abstract function getUrl();
+
+		/** @return string */
+		public abstract function getItemData();
 
 		/**
 		 * @param $parent NavigationPanel

@@ -1,0 +1,144 @@
+span.glyphicon
+{
+    margin-right: 3px;
+}
+
+select.bootstrapped
+{
+    border-radius: 0;
+    border: 1px solid #CCC;
+    padding: 4px 6px;
+    cursor: pointer;
+    height: 30px;
+    color: #555;
+}
+
+div.checkbox > label > input[type=checkbox]
+{
+    float: left !important;
+    margin-right: 3px;
+}
+
+form.form-horizontal, form.form-horizontal *
+{
+    -moz-box-sizing: border-box !important;
+    -webkit-box-sizing: border-box !important;
+    -safari-box-sizing: border-box !important;
+    box-sizing: border-box !important;
+}
+
+.btn-default
+{
+    background-color: #ffffff;
+}
+
+.btn.disabled
+{
+    background-color: #eee;
+}
+
+.btn:hover
+{
+    background-color: #C6E2FF;
+}
+
+button.active
+{
+    background-color: #C6E2FF !important;
+}
+
+.dropdown-toggle.btn-default
+{
+    background-color: #ffffff !important;
+    outline: 0 !important;
+}
+
+.btn-group.open .dropdown-toggle
+{
+    box-shadow: none !important;
+}
+
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus
+{
+    background-color: #C6E2FF;
+}
+
+.ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button
+{
+    font-family: inherit !important;
+    font-size: 14px;
+}
+
+.input-group.has-error input
+{
+    border-color: #B94A48;
+    color: #B94A48;
+}
+
+.input-group.has-error .input-group-btn button
+{
+    color: #B94A48;
+    background-color: #F2DEDE;
+    border-color: #B94A48;
+}
+
+.tab-content .form-horizontal > .form-group
+{
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 5px;
+}
+
+.radio label, .checkbox label
+{
+    line-height: 20px;
+}
+
+.ui-dialog .ui-dialog-titlebar-close
+{
+    top: 40% !important;
+    width: 25px !important;
+    height: 26px !important;
+}
+
+.vcenter
+{
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}
+
+.pagination > li:first-child > a, .pagination > li:first-child > span
+{
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+}
+
+.service-data
+{
+    display: none;
+}
+
+.input-group-addon,
+.btn,
+.nav-tabs > li > a,
+.form-control,
+.pagination,
+.list-group-item:first-child,
+.list-group-item:last-child
+{
+    border-radius: 0 !important;
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6
+{
+    font-family: "Source Sans Pro",Calibri,Candara,Arial,sans-serif;
+    font-weight: 300;
+    line-height: 1.1;
+    color: inherit;
+}
+
+.list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus
+{
+    background-color: #2780e3;
+}

@@ -303,9 +303,7 @@
 
 			$matchCondition = 'link.name,link.file_name,link.tags,link.content';
 			if ($searchConditions->onlyByName)
-				$matchCondition = 'link.name,link.file_name,link.tags';
-
-			$includeAppLinks = Yii::app()->browser->getBrowser() == Browser::BROWSER_EO;
+				$matchCondition = 'link.name,link.file_name';
 
 			$contentCondition = "1=1";
 			if (count($textConditions) > 0)

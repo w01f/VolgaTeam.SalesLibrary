@@ -13,26 +13,11 @@
 			$('#library-popup-panel-pages').find('.page-item a').off('click').on('click', function ()
 			{
 				var pageId = $(this).find('.service-data .page-id').text();
-				libraryPage.find('.content-header .title').html($(this).find('span').html());
-				libraryPage.find('.content-header .logo img').prop('src', $(this).find('.service-data .page-logo').text());
+				libraryPage.find('.content-header .title .page-name').html($(this).find('span').html());
 				pageChanged(pageId);
 			});
 
 			that.initPageContent(libraryPage.find('.content-data'), '#library');
-
-			var addTabPagePopup = $('#library-popup-add-tab-page');
-			addTabPagePopup.find('.accept-action').off('click').on('click', function ()
-			{
-				addTabPagePopup.popup('close');
-				addLibraryAsTabPage();
-			});
-
-			var deleteTabPagePopup = $('#library-popup-delete-tab-page');
-			deleteTabPagePopup.find('.accept-action').off('click').on('click', function ()
-			{
-				deleteTabPagePopup.popup('close');
-				deleteLibraryAsTabPage();
-			});
 
 			$('.logout-button').off('click').on('click', function (e)
 			{
@@ -178,74 +163,6 @@
 				},
 				async: true,
 				dataType: 'html'
-			});
-		};
-
-		var addLibraryAsTabPage = function ()
-		{
-			$.ajax({
-				type: "POST",
-				url: window.BaseUrl + "userTab/addLibraryTab",
-				data: {
-					libraryId: $('#library').find('.service-data .library-id').text()
-				},
-				beforeSend: function ()
-				{
-					$.mobile.loading('show', {
-						textVisible: false,
-						html: ""
-					});
-				},
-				complete: function ()
-				{
-					$.mobile.loading('hide', {
-						textVisible: false,
-						html: ""
-					});
-				},
-				success: function ()
-				{
-					var libraryPage = $('#library');
-					libraryPage.find('.main-footer .library-action').removeClass('active-action');
-					libraryPage.find('.main-footer .library-action.delete-library-page').addClass('active-action');
-				},
-				error: undefined,
-				async: true,
-				dataType: 'json'
-			});
-		};
-
-		var deleteLibraryAsTabPage = function ()
-		{
-			$.ajax({
-				type: "POST",
-				url: window.BaseUrl + "userTab/deleteLibraryTab",
-				data: {
-					libraryId: $('#library').find('.service-data .library-id').text()
-				},
-				beforeSend: function ()
-				{
-					$.mobile.loading('show', {
-						textVisible: false,
-						html: ""
-					});
-				},
-				complete: function ()
-				{
-					$.mobile.loading('hide', {
-						textVisible: false,
-						html: ""
-					});
-				},
-				success: function ()
-				{
-					var libraryPage = $('#library');
-					libraryPage.find('.main-footer .library-action').removeClass('active-action');
-					libraryPage.find('.main-footer .library-action.add-library-page').addClass('active-action');
-				},
-				error: undefined,
-				async: true,
-				dataType: 'json'
 			});
 		};
 	};

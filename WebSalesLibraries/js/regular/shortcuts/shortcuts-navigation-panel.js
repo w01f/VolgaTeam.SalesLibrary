@@ -7,9 +7,11 @@
 		if (parameters == undefined)
 			parameters = {
 				content: undefined,
+				options: undefined,
 				sizeChangedCallback: undefined
 			};
 		parameters.content = parameters.content != undefined ? parameters.content : '';
+		parameters.options = parameters.options != undefined ? parameters.options : undefined;
 		parameters.sizeChangedCallback = parameters.sizeChangedCallback != undefined ? parameters.sizeChangedCallback : function ()
 		{
 		};
@@ -29,6 +31,19 @@
 				navigationPanelObject.show();
 				$.SalesPortal.ShortcutsManager.assignShortcutItemHandlers(navigationPanelObject);
 			}
+
+			navigationPanelObject.removeClass('hidden-xs');
+			if (parameters.options && parameters.options.hideCondition && parameters.options.hideCondition.extraSmall == true)
+				navigationPanelObject.addClass('hidden-xs');
+			navigationPanelObject.removeClass('hidden-sm');
+			if (parameters.options && parameters.options.hideCondition && parameters.options.hideCondition.small == true)
+				navigationPanelObject.addClass('hidden-sm');
+			navigationPanelObject.removeClass('hidden-md');
+			if (parameters.options && parameters.options.hideCondition && parameters.options.hideCondition.medium == true)
+				navigationPanelObject.addClass('hidden-md');
+			navigationPanelObject.removeClass('hidden-lg');
+			if (parameters.options && parameters.options.hideCondition && parameters.options.hideCondition == true)
+				navigationPanelObject.addClass('hidden-lg');
 
 			navigationPanelObject.find('.control-bar .button').off('click').on('click', function ()
 			{

@@ -80,11 +80,6 @@
     cursor: pointer !important;
 }
 
-.link-container.line-break
-{
-	margin-bottom: 5px;
-}
-
 .link-container.line-break > div
 {
     cursor: default !important;
@@ -109,12 +104,13 @@
 .link-text-no-wrap
 {
     white-space: nowrap;
+	line-height: 32px;
 }
 
 .link-text-wrap
 {
 	white-space: normal !important;
-	padding-bottom: 3px;
+	padding-bottom: 5px;
 }
 
 .link-note
@@ -130,7 +126,7 @@
 .link-widget-wrap
 {
     vertical-align: top;
-	padding-bottom: 3px;
+	padding-bottom: 5px;
 }
 
 .link-widget-no-wrap

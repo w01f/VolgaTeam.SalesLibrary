@@ -405,6 +405,20 @@
 					$action->iconClass = 'icon-delete';
 					$customActions[$action->tag] = $action;
 					break;
+				case 'landing':
+					$action = new ShortcutAction('show-search');
+					$action->order = 10;
+					$action->title = 'Show Search';
+					$action->iconClass = 'icon-search32';
+					$customActions[$action->tag] = $action;
+
+					$action = new ShortcutAction('hide-search');
+					$action->order = 20;
+					$action->title = 'Hide Search';
+					$action->iconClass = 'icon-search32';
+					$customActions[$action->tag] = $action;
+					break;
+
 			}
 			return $customActions;
 		}

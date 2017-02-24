@@ -14,7 +14,9 @@
 				content: libraryWindowData.content,
 				headerOptions: {
 					title: libraryWindowData.options.headerTitle,
-					icon: libraryWindowData.options.headerIcon
+					icon: libraryWindowData.options.headerIcon,
+					titleHideCondition: libraryWindowData.options.headerTitleHideCondition,
+					iconHideCondition: libraryWindowData.options.headerIconHideCondition
 				},
 				actions: libraryWindowData.actions,
 				navigationPanel: libraryWindowData.navigationPanel,
