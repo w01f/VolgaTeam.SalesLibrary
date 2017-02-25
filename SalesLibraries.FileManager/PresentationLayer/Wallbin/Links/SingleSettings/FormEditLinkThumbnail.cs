@@ -522,9 +522,12 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 			if (pictureEditImage.Image == null)
 			{
-				var defaultItem = imageListView.Items.First();
-				defaultItem.Selected = true;
-				GeneratePreview();
+				var defaultItem = imageListView.Items.FirstOrDefault();
+				if (defaultItem != null)
+				{
+					defaultItem.Selected = true;
+					GeneratePreview();
+				}
 			}
 		}
 
