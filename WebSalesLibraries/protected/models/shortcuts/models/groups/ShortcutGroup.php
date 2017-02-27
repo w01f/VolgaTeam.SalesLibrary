@@ -153,10 +153,16 @@
 					}
 				}
 
-				$this->menuItems = array();
-				$shortcuts = $groupRecord->getTopLevelLinks($isPhone);
-				foreach ($shortcuts as $shortcut)
-					$this->menuItems[] = new MenuItem($shortcut, $this);
+				if ($this->isAccessGranted)
+				{
+					$this->menuItems = array();
+					$shortcuts = $groupRecord->getTopLevelLinks($isPhone);
+					foreach ($shortcuts as $shortcut)
+					{
+						if ($shortcut->enabled)
+							$this->menuItems[] = new MenuItem($shortcut, $this);
+					}
+				}
 			}
 		}
 

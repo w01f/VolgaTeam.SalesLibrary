@@ -35,33 +35,32 @@
 				if (!isset($defaultShortcut))
 					foreach ($menuGroups as $menuGroup)
 					{
-						if ($menuGroup->enabled == true)
-							foreach ($menuGroup->menuItems as $menuItem)
-							{
-								/** @var  $shortcut PageContentShortcut */
-								$shortcut = $menuItem->shortcut;
-								if ($shortcut->enabled == true)
-									switch ($shortcut->type)
-									{
-										case 'gridbundle':
-										case 'carouselbundle':
-										case 'library':
-										case 'page':
-										case 'window':
-										case 'search':
-										case 'searchapp':
-										case 'qbuilder':
-										case 'favorites':
-										case 'quizzes':
-										case 'landing':
-											$defaultShortcut = $shortcut;
-											break;
-										default:
-											continue;
-									}
-								if (isset($defaultShortcut))
-									break;
-							}
+						foreach ($menuGroup->menuItems as $menuItem)
+						{
+							/** @var  $shortcut PageContentShortcut */
+							$shortcut = $menuItem->shortcut;
+							if ($shortcut->enabled == true)
+								switch ($shortcut->type)
+								{
+									case 'gridbundle':
+									case 'carouselbundle':
+									case 'library':
+									case 'page':
+									case 'window':
+									case 'search':
+									case 'searchapp':
+									case 'qbuilder':
+									case 'favorites':
+									case 'quizzes':
+									case 'landing':
+										$defaultShortcut = $shortcut;
+										break;
+									default:
+										continue;
+								}
+							if (isset($defaultShortcut))
+								break;
+						}
 						if (isset($defaultShortcut))
 							break;
 					}

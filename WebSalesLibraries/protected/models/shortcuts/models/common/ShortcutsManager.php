@@ -50,7 +50,7 @@
 			foreach ($groupRecords as $groupRecord)
 			{
 				$group = new ShortcutGroup($groupRecord, $selectedSuperGroupTag, $isPhone);
-				if ($group->isAccessGranted)
+				if ($group->enabled && $group->isAccessGranted)
 					$groups[] = $group;
 			}
 			return $groups;

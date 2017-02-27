@@ -27,8 +27,15 @@
 		{
 			parent::configureFromXml($xpath, $contextNode);
 
-			$queryResult = $xpath->query('./ContentBlock', $contextNode);
-			foreach ($queryResult as $node)
-				$this->items[] = ContentBlock::fromXml($this->parentShortcut, $this, $xpath, $node);
+			if ($this->isAccessGranted)
+			{
+				$queryResult = $xpath->query('./ContentBlock', $contextNode);
+				foreach ($queryResult as $node)
+				{
+					$contentBlock = ContentBlock::fromXml($this->parentShortcut, $this, $xpath, $node);
+					if ($contentBlock->isAccessGranted)
+						$this->items[] = $contentBlock;
+				}
+			}
 		}
 	}

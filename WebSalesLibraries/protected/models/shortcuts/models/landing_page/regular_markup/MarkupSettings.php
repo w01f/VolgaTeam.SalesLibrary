@@ -21,7 +21,11 @@
 
 			$queryResult = $xpath->query('./ContentBlock', $contextNode);
 			foreach ($queryResult as $node)
-				$markupSettings->contentBlocks[] = ContentBlock::fromXml($parentShortcut, null, $xpath, $node);
+			{
+				$contentBlock = ContentBlock::fromXml($parentShortcut, null, $xpath, $node);
+				if ($contentBlock->isAccessGranted)
+					$markupSettings->contentBlocks[] = $contentBlock;
+			}
 
 			return $markupSettings;
 		}
