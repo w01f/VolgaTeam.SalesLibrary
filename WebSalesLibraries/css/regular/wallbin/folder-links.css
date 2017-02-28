@@ -121,17 +121,19 @@
 .link-widget
 {
     display: table-cell;
+	padding-bottom: 4px;
+	padding-right: 6px;
 }
 
 .link-widget-wrap
 {
     vertical-align: top;
-	padding-bottom: 5px;
 }
 
 .link-widget-no-wrap
 {
     vertical-align: middle;
+	padding-top: 4px;
 }
 
 .view-dilog-content
