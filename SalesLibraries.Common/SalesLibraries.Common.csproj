@@ -142,6 +142,7 @@
     <Compile Include="Objects\RemoteStorage\StorageFile.cs" />
     <Compile Include="Objects\SearchTags\SearchGroup.cs" />
     <Compile Include="Objects\SearchTags\KeywordModel.cs" />
+    <Compile Include="Objects\SearchTags\SearchSuperGroup.cs" />
     <Compile Include="Objects\SearchTags\SearchTag.cs" />
     <Compile Include="Objects\RemoteStorage\StorageItem.cs" />
     <Compile Include="Objects\Graphics\Widget.cs" />

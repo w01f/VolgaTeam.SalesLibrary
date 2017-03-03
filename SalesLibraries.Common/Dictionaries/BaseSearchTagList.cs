@@ -7,11 +7,11 @@ namespace SalesLibraries.Common.Dictionaries
 	{
 		public int MaxTags { get; set; }
 		public bool TagCount { get; set; }
-		public List<SearchGroup> SearchGroups { get; set; }
+		public List<SearchSuperGroup> SearchSuperGroups { get; set; }
 
 		protected BaseSearchTagList()
 		{
-			SearchGroups = new List<SearchGroup>();
+			SearchSuperGroups = new List<SearchSuperGroup>();
 		}
 
 		public abstract void Load();

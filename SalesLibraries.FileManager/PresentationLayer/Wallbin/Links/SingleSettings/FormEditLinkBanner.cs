@@ -228,6 +228,79 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			buttonEditBannerTextFont.EditValue = Utils.FontToString(banner.Font);
 			colorEditBannerTextColor.Color = banner.ForeColor;
 
+			switch (banner.ImagePaddingLeft)
+			{
+				case 0:
+					checkEditPaddingLeftNone.Checked = true;
+					break;
+				case 2:
+					checkEditPaddingLeft2.Checked = true;
+					break;
+				case 6:
+					checkEditPaddingLeft6.Checked = true;
+					break;
+				case 10:
+					checkEditPaddingLeft10.Checked = true;
+					break;
+				default:
+					checkEditPaddingLeft2.Checked = true;
+					break;
+			}
+			switch (banner.ImagePaddingTop)
+			{
+				case 0:
+					checkEditPaddingTopNone.Checked = true;
+					break;
+				case 2:
+					checkEditPaddingTop2.Checked = true;
+					break;
+				case 6:
+					checkEditPaddingTop6.Checked = true;
+					break;
+				case 10:
+					checkEditPaddingTop10.Checked = true;
+					break;
+				default:
+					checkEditPaddingTop2.Checked = true;
+					break;
+			}
+			switch (banner.ImagePaddingRight)
+			{
+				case 0:
+					checkEditPaddingRightNone.Checked = true;
+					break;
+				case 2:
+					checkEditPaddingRight2.Checked = true;
+					break;
+				case 6:
+					checkEditPaddingRight6.Checked = true;
+					break;
+				case 10:
+					checkEditPaddingRight10.Checked = true;
+					break;
+				default:
+					checkEditPaddingRight2.Checked = true;
+					break;
+			}
+			switch (banner.ImagePaddingBottom)
+			{
+				case 0:
+					checkEditPaddingBottomNone.Checked = true;
+					break;
+				case 2:
+					checkEditPaddingBottom2.Checked = true;
+					break;
+				case 6:
+					checkEditPaddingBottom6.Checked = true;
+					break;
+				case 10:
+					checkEditPaddingBottom10.Checked = true;
+					break;
+				default:
+					checkEditPaddingBottom2.Checked = true;
+					break;
+			}
+
 			switch (banner.TextMode)
 			{
 				case BannerTextMode.LinkName:
@@ -273,6 +346,48 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 						link.Banner.ImageAlignement = HorizontalAlignment.Center;
 					else if (checkEditHorizontalAlignmentRight.Checked)
 						link.Banner.ImageAlignement = HorizontalAlignment.Right;
+
+					if (checkEditPaddingLeftNone.Checked)
+						_sourceLink.Banner.ImagePaddingLeft = 0;
+					else if (checkEditPaddingLeft2.Checked)
+						_sourceLink.Banner.ImagePaddingLeft = 2;
+					else if (checkEditPaddingLeft6.Checked)
+						_sourceLink.Banner.ImagePaddingLeft = 6;
+					else if (checkEditPaddingLeft10.Checked)
+						_sourceLink.Banner.ImagePaddingLeft = 10;
+					else
+						_sourceLink.Banner.ImagePaddingLeft = 2;
+					if (checkEditPaddingTopNone.Checked)
+						_sourceLink.Banner.ImagePaddingTop = 0;
+					else if (checkEditPaddingTop2.Checked)
+						_sourceLink.Banner.ImagePaddingTop = 2;
+					else if (checkEditPaddingTop6.Checked)
+						_sourceLink.Banner.ImagePaddingTop = 6;
+					else if (checkEditPaddingTop10.Checked)
+						_sourceLink.Banner.ImagePaddingTop = 10;
+					else
+						_sourceLink.Banner.ImagePaddingTop = 2;
+					if (checkEditPaddingRightNone.Checked)
+						_sourceLink.Banner.ImagePaddingRight = 0;
+					else if (checkEditPaddingRight2.Checked)
+						_sourceLink.Banner.ImagePaddingRight = 2;
+					else if (checkEditPaddingRight6.Checked)
+						_sourceLink.Banner.ImagePaddingRight = 6;
+					else if (checkEditPaddingRight10.Checked)
+						_sourceLink.Banner.ImagePaddingRight = 10;
+					else
+						_sourceLink.Banner.ImagePaddingRight = 2;
+					if (checkEditPaddingBottomNone.Checked)
+						_sourceLink.Banner.ImagePaddingBottom = 0;
+					else if (checkEditPaddingBottom2.Checked)
+						_sourceLink.Banner.ImagePaddingBottom = 2;
+					else if (checkEditPaddingBottom6.Checked)
+						_sourceLink.Banner.ImagePaddingBottom = 6;
+					else if (checkEditPaddingBottom10.Checked)
+						_sourceLink.Banner.ImagePaddingBottom = 10;
+					else
+						_sourceLink.Banner.ImagePaddingBottom = 2;
+
 
 					link.Banner.TextMode = BannerTextMode.NoText;
 					if (link.Banner.ImageAlignement == HorizontalAlignment.Left)

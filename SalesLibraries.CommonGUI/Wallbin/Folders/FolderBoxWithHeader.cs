@@ -2,8 +2,10 @@
 using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.Drawing;
+using System.Windows.Forms;
 using DevExpress.Utils;
 using SalesLibraries.Business.Entities.Wallbin.Persistent;
+using SalesLibraries.Common.Extensions;
 using SalesLibraries.Common.Objects.Graphics;
 using HorizontalAlignment = SalesLibraries.Business.Entities.Wallbin.Common.Enums.HorizontalAlignment;
 
@@ -51,7 +53,7 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 			else
 			{
 				if (DataSource.Widget.Enabled && DataSource.Widget.DisplayedImage != null)
-					labelControlText.Appearance.Image = DataSource.Widget.DisplayedImage;
+					labelControlText.Appearance.Image = DataSource.Widget.DisplayedImage.DrawPadding(new Padding(4));
 
 				labelControlText.Text = DataSource.Name;
 				labelControlText.Font = DataSource.Settings.HeaderFont;
@@ -97,7 +99,7 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 								labelControlText.Font,
 								new Size((labelControlText.Width < MinHeaderWidth ? MinHeaderWidth : labelControlText.Width) - DataSource.Widget.DisplayedImage.Width, Int32.MaxValue))
 							.Height + 10;
-					pnHeaderBorder.Height = DataSource.Widget.DisplayedImage.Height > textHeight ? DataSource.Widget.DisplayedImage.Height : (textHeight > Widget.DefaultHeight ? textHeight : Widget.DefaultHeight);
+					pnHeaderBorder.Height = labelControlText.Appearance.Image.Height > textHeight ? labelControlText.Appearance.Image.Height : (textHeight > Widget.DefaultHeight ? textHeight : Widget.DefaultHeight);
 				}
 				else
 				{

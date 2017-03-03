@@ -156,7 +156,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Business\Dictionaries\SearchTagList.cs" />
     <Compile Include="Business\Gallery\GalleryImageSource.cs" />
     <Compile Include="Business\Gallery\SnapshotCollection.cs" />
     <Compile Include="Business\Gallery\SnapshotItem.cs" />
@@ -217,7 +216,6 @@
     <Compile Include="Configuration\RemoteResourceManager.cs" />
     <Compile Include="Configuration\Enums.cs" />
     <Compile Include="Configuration\KeywordFileFilters.cs" />
-    <Compile Include="Configuration\ListManager.cs" />
     <Compile Include="Configuration\SettingsManager.cs" />
     <Compile Include="Configuration\EmailBinSettings.cs" />
     <Compile Include="Configuration\WallbinViewSettings.cs" />
@@ -828,6 +826,9 @@
     <None Include="Resources\WallbinSettingsComboboxes.png" />
     <None Include="Resources\WallbinSettingsColumns.png" />
     <None Include="Resources\WallbinSettingsAccordion.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Business\Dictionaries\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

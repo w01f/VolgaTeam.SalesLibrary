@@ -331,6 +331,7 @@ namespace SalesLibraries.FileManager.Controllers
 		{
 			ProcessChanges();
 			DatabaseConnectionHelper.Disconnect(Settings.BackupPath);
+			ProcessManager.Release();
 		}
 
 		public void ActivateApplication()

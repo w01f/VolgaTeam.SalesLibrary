@@ -6,18 +6,18 @@ using System.Windows.Forms;
 using DevExpress.XtraTreeList;
 using DevExpress.XtraTreeList.Nodes;
 using SalesLibraries.Business.Entities.Helpers;
+using SalesLibraries.Common.Objects.SearchTags;
 using SalesLibraries.CloudAdmin.Controllers;
 using SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Views;
-using SalesLibraries.Common.Objects.SearchTags;
 
 namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.GroupSettings
 {
 	[ToolboxItem(false)]
 	public sealed partial class CategoriesEditor : UserControl, IGroupSettingsEditor
 	{
-		private readonly List<SearchGroup> _groupTemplates = new List<SearchGroup>();
+		private readonly List<SearchSuperGroup> _groupTemplates = new List<SearchSuperGroup>();
 		private TreeListNode _rootNode;
-		private bool _handleCheckEvens = false;
+		private bool _handleCheckEvens;
 
 		private SelectionManager Selection => MainController.Instance.WallbinViews.Selection;
 
@@ -26,7 +26,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.GroupSetting
 			InitializeComponent();
 			Dock = DockStyle.Fill;
 
-			_groupTemplates.AddRange(MainController.Instance.Lists.SearchTags.SearchGroups);
+			_groupTemplates.AddRange(MainController.Instance.Lists.SearchTags.SearchSuperGroups);
 
 			LoadTreeView();
 		}
@@ -44,10 +44,11 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.GroupSetting
 
 			treeListCategories.SuspendLayout();
 
-			_rootNode.Nodes.ToList().ForEach(groupNode =>
+			_rootNode.Nodes.ToList().ForEach(superGroupNode =>
 			{
-				groupNode.Checked = false;
-				groupNode.Nodes.ToList().ForEach(tagNode => tagNode.Checked = false);
+				superGroupNode.Checked = false;
+				superGroupNode.Nodes.ToList().ForEach(groupNode => groupNode.Checked = false);
+				superGroupNode.Nodes.SelectMany(groupNode => groupNode.Nodes).ToList().ForEach(tagNode => tagNode.Checked = false);
 			});
 
 			Enabled = Selection.SelectedObjects.Any();
@@ -57,7 +58,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.GroupSetting
 			{
 				foreach (var group in link.Tags.Categories)
 				{
-					var groupNode = _rootNode.Nodes.FirstOrDefault(node => ((SearchGroup)node.Tag).Equals(group));
+					var groupNode = _rootNode.Nodes.SelectMany(sgNode => sgNode.Nodes).FirstOrDefault(node => ((SearchGroup)node.Tag).Equals(group));
 					if (groupNode == null) continue;
 					var isCommonGroup = commonCategories.Any(commonGroup => commonGroup.Equals(group));
 					groupNode.CheckState = isCommonGroup ? CheckState.Checked : CheckState.Indeterminate;
@@ -82,7 +83,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.GroupSetting
 
 		private void ApplyData()
 		{
-			var sharedGroups = _rootNode.Nodes
+			var sharedGroups = _rootNode.Nodes.SelectMany(superGroupNode => superGroupNode.Nodes)
 				.Where(groupNode => groupNode.CheckState == CheckState.Checked)
 				.Select(groupNode =>
 				{
@@ -105,7 +106,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.GroupSetting
 				.Where(g => g.Tags.Any())
 				.ToArray();
 
-			var partialGroups = _rootNode.Nodes
+			var partialGroups = _rootNode.Nodes.SelectMany(superGroupNode => superGroupNode.Nodes)
 				.Where(groupNode => groupNode.CheckState != CheckState.Unchecked)
 				.Select(groupNode =>
 				{
@@ -148,17 +149,25 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.GroupSetting
 			_rootNode = treeListCategories.AppendNode(new object[] { "Search Engine Tags" }, null);
 			_rootNode.StateImageIndex = 0;
 
-			foreach (var searchGroup in _groupTemplates)
+			foreach (var searchSuperGroup in _groupTemplates)
 			{
-				var groupNode = treeListCategories.AppendNode(new object[] { searchGroup.Name }, _rootNode);
-				groupNode.Tag = searchGroup;
-				groupNode.StateImageIndex = 0;
+				var superGroupNode = treeListCategories.AppendNode(new object[] { searchSuperGroup.Name }, _rootNode);
+				superGroupNode.StateImageIndex = 0;
 
-				foreach (var searchTag in searchGroup.Tags)
+				foreach (var searchGroup in searchSuperGroup.Groups)
 				{
-					var tagNode = treeListCategories.AppendNode(new object[] { searchTag.Name }, groupNode);
-					tagNode.Tag = searchTag;
+					var groupNode = treeListCategories.AppendNode(new object[] { searchGroup.Name }, superGroupNode);
+					groupNode.Tag = searchGroup;
+					groupNode.StateImageIndex = 0;
+
+					foreach (var searchTag in searchGroup.Tags)
+					{
+						var tagNode = treeListCategories.AppendNode(new object[] { searchTag.Name }, groupNode);
+						tagNode.Tag = searchTag;
+					}
 				}
+
+				superGroupNode.Expanded = true;
 			}
 			_rootNode.Expanded = true;
 		}
@@ -168,7 +177,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.GroupSetting
 			if (node.Tag is SearchTag) return;
 			foreach (TreeListNode childNode in node.Nodes)
 				CollapseNode(childNode);
-			if (node.Tag is SearchGroup)
+			if (node.Tag is SearchGroup || node.Tag is SearchSuperGroup)
 			{
 				node.Expanded = false;
 				node.StateImageIndex = 0;
@@ -224,23 +233,21 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.GroupSetting
 			_handleCheckEvens = false;
 
 			if (e.Node.Tag is SearchGroup && e.Node.CheckState != CheckState.Indeterminate)
-			{
 				foreach (TreeListNode childNode in e.Node.Nodes)
 					childNode.CheckState = e.Node.CheckState;
-			}
 			else if (e.Node.Tag is SearchTag)
 			{
-				var parentNode = e.Node.ParentNode;
+				var groupNode = e.Node.ParentNode;
 				if (e.Node.CheckState == CheckState.Checked)
-					parentNode.CheckState = CheckState.Checked;
+					groupNode.CheckState = CheckState.Checked;
 				else
 				{
-					if (parentNode.Nodes.Any(n => n.CheckState == CheckState.Checked))
-						parentNode.CheckState = CheckState.Checked;
-					else if (parentNode.Nodes.Any(n => n.CheckState == CheckState.Indeterminate))
-						parentNode.CheckState = CheckState.Indeterminate;
+					if (groupNode.Nodes.Any(n => n.CheckState == CheckState.Checked))
+						groupNode.CheckState = CheckState.Checked;
+					else if (groupNode.Nodes.Any(n => n.CheckState == CheckState.Indeterminate))
+						groupNode.CheckState = CheckState.Indeterminate;
 					else
-						parentNode.CheckState = CheckState.Unchecked;
+						groupNode.CheckState = CheckState.Unchecked;
 				}
 			}
 
@@ -261,7 +268,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.GroupSetting
 
 		private void OnCategoriesBeforeCollapse(object sender, BeforeCollapseEventArgs e)
 		{
-			e.CanCollapse = e.Node.Tag is SearchGroup;
+			e.CanCollapse = !(e.Node.Tag is SearchTag);
 		}
 	}
 }

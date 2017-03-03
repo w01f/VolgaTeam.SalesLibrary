@@ -18,7 +18,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 		{
 			if (MainController.Instance.WallbinViews.Selection.SelectedLinks.Count > 1)
 			{
-				Text = String.Format("<b>(Selected Links: {0})</b> {1}",
+				Text = String.Format("<b>(Selected Links: {0})</b> <color=gray>{1}</color>",
 						MainController.Instance.WallbinViews.Selection.SelectedLinks.Count,
 						MainController.Instance.WallbinViews.Selection.SelectedObjects.GetCommonTags());
 			}

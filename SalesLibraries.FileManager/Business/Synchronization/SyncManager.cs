@@ -14,7 +14,6 @@ using SalesLibraries.Common.Synchronization;
 using SalesLibraries.FileManager.Business.PreviewGenerators;
 using SalesLibraries.FileManager.Business.Services;
 using SalesLibraries.FileManager.Controllers;
-using SalesLibraries.FileManager.PresentationLayer.Sync;
 
 namespace SalesLibraries.FileManager.Business.Synchronization
 {

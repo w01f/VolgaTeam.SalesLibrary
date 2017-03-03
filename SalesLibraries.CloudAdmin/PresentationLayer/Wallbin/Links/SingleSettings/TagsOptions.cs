@@ -7,6 +7,8 @@ using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraTab;
+using DevExpress.XtraTreeList;
+using DevExpress.XtraTreeList.Nodes;
 using SalesLibraries.Business.Entities.Helpers;
 using SalesLibraries.Business.Entities.Interfaces;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
@@ -28,6 +30,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 
 		private readonly List<SearchGroupContainer> _searchGroups = new List<SearchGroupContainer>();
 		private readonly List<KeywordModel> _keywords = new List<KeywordModel>();
+		private TreeListNode _rootNode;
 
 		public LinkSettingsType[] SupportedSettingsTypes => new[] { LinkSettingsType.Tags };
 		public int Order => 0;
@@ -82,27 +85,10 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 		#region Categories Processing
 		private void UpdateCategoriesDataSource()
 		{
-			xtraScrollableControlSearchTagsCategories.Controls.Clear();
 			splitContainerSearchTagsCategories.Panel2.Controls.Clear();
 
-			_searchGroups.Clear();
-			_searchGroups.AddRange(MainController.Instance.Lists.SearchTags.SearchGroups.Select(sg => new SearchGroupContainer(sg)));
-			foreach (var searchGroup in _searchGroups)
-			{
+			LoadTreeView();
 
-				searchGroup.ToggleButton.Dock = DockStyle.Top;
-				searchGroup.ToggleButton.Click += OnCategoriesGroupClick;
-				searchGroup.ToggleButton.CheckedChanged += OnCategoriesGroupCheckedChanged;
-				xtraScrollableControlSearchTagsCategories.Controls.Add(searchGroup.ToggleButton);
-				searchGroup.ToggleButton.BringToFront();
-
-				searchGroup.ListBox.ItemChecking += OnCategoriesListBoxItemChecking;
-				searchGroup.ListBox.ItemCheck += (o, ea) => UpdateCategoriesHeader();
-				splitContainerSearchTagsCategories.Panel2.Controls.Add(searchGroup.ListBox);
-				searchGroup.ListBox.BringToFront();
-			}
-
-			_searchGroups.ForEach(g => g.ListBox.UnCheckAll());
 			var commonCategories = _links.GetCommonCategories();
 			foreach (var link in _links)
 			{
@@ -124,11 +110,16 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 				}
 			}
 
-			var firstGroup = _searchGroups.FirstOrDefault();
-			if (firstGroup != null)
+			var firstSuperGroupNode = _rootNode.Nodes.FirstOrDefault();
+			if (firstSuperGroupNode != null)
 			{
-				firstGroup.ToggleButton.Checked = false;
-				OnCategoriesGroupClick(firstGroup.ToggleButton, new EventArgs());
+				firstSuperGroupNode.Expanded = false;
+				var firstGroupNode = firstSuperGroupNode.Nodes.FirstOrDefault();
+				if (firstGroupNode != null)
+				{
+					treeListCategories.FocusedNode = firstGroupNode;
+					firstGroupNode.Selected = true;
+				}
 			}
 
 			UpdateCategoriesHeader();
@@ -184,6 +175,36 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 						));
 		}
 
+		private void LoadTreeView()
+		{
+			treeListCategories.Nodes.Clear();
+			_searchGroups.Clear();
+
+			_rootNode = treeListCategories.AppendNode(new object[] { "Search Engine Tags" }, null);
+			_rootNode.StateImageIndex = 0;
+
+			foreach (var searchSuperGroup in MainController.Instance.Lists.SearchTags.SearchSuperGroups)
+			{
+				var superGroupNode = treeListCategories.AppendNode(new object[] { searchSuperGroup.Name }, _rootNode);
+				superGroupNode.Tag = searchSuperGroup;
+				superGroupNode.StateImageIndex = 0;
+
+				foreach (var searchGroup in searchSuperGroup.Groups)
+				{
+					var groupNode = treeListCategories.AppendNode(new object[] { searchGroup.Name }, superGroupNode);
+					var searchGroupContainer = new SearchGroupContainer(searchGroup);
+					searchGroupContainer.ListBox.UnCheckAll();
+					searchGroupContainer.ListBox.ItemChecking += OnCategoriesListBoxItemChecking;
+					searchGroupContainer.ListBox.ItemCheck += (o, ea) => UpdateCategoriesHeader();
+					splitContainerSearchTagsCategories.Panel2.Controls.Add(searchGroupContainer.ListBox);
+					_searchGroups.Add(searchGroupContainer);
+					groupNode.Tag = searchGroupContainer;
+					groupNode.StateImageIndex = 0;
+				}
+			}
+			_rootNode.Expanded = true;
+		}
+
 		private void OnCategoriesListBoxItemChecking(object sender, ItemCheckingEventArgs e)
 		{
 			if (_loading || MainController.Instance.Lists.SearchTags.MaxTags <= 0 || e.NewValue != CheckState.Checked) return;
@@ -201,22 +222,33 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 				searchGroup.ListBox.UnCheckAll();
 		}
 
-		private void OnCategoriesGroupClick(object sender, EventArgs e)
+		private void OnCategoriesAfterCollapse(object sender, NodeEventArgs e)
 		{
-			var button = sender as DevComponents.DotNetBar.ButtonX;
-			if (button == null || button.Checked) return;
-			_searchGroups.ForEach(g => g.ToggleButton.Checked = false);
-			button.Checked = true;
+			e.Node.StateImageIndex = 0;
 		}
 
-		private void OnCategoriesGroupCheckedChanged(object sender, EventArgs e)
+		private void OnCategoriesAfterExpand(object sender, NodeEventArgs e)
 		{
-			var button = sender as DevComponents.DotNetBar.ButtonX;
-			if (button == null || !button.Checked) return;
-			var assignedControl = button.Tag as Control;
-			if (assignedControl == null) return;
-			assignedControl.Dock = DockStyle.Fill;
-			assignedControl.BringToFront();
+			e.Node.StateImageIndex = 1;
+		}
+
+		private void OnCategoriesBeforeCollapse(object sender, BeforeCollapseEventArgs e)
+		{
+			e.CanCollapse = e.Node.Tag is SearchSuperGroup;
+		}
+
+		private void OnCategoriesBeforeFocusNode(object sender, BeforeFocusNodeEventArgs e)
+		{
+			if (e.Node == _rootNode)
+				e.CanFocus = false;
+			else if (e.Node?.Tag is SearchSuperGroup)
+				e.CanFocus = false;
+		}
+
+		private void OnCategoriesFocusedNodeChanged(object sender, FocusedNodeChangedEventArgs e)
+		{
+			var searchGroup = e.Node?.Tag as SearchGroupContainer;
+			searchGroup?.ListBox.BringToFront();
 		}
 		#endregion
 
@@ -284,6 +316,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 				Color.Black :
 				Color.Gray;
 		}
+
 		#endregion
 	}
 }

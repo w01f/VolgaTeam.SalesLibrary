@@ -75,7 +75,7 @@
 			this.treeListCategories.Appearance.SelectedRow.Font = new System.Drawing.Font("Arial", 9.75F);
 			this.treeListCategories.Appearance.SelectedRow.Options.UseFont = true;
 			this.treeListCategories.Columns.AddRange(new DevExpress.XtraTreeList.Columns.TreeListColumn[] {
-			this.treeListColumnName});
+            this.treeListColumnName});
 			this.treeListCategories.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.treeListCategories.Location = new System.Drawing.Point(0, 0);
 			this.treeListCategories.Name = "treeListCategories";
@@ -134,8 +134,8 @@
 			// buttonXReset
 			// 
 			this.buttonXReset.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-			this.buttonXReset.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-			| System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonXReset.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXReset.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXReset.Location = new System.Drawing.Point(5, 8);
 			this.buttonXReset.Name = "buttonXReset";

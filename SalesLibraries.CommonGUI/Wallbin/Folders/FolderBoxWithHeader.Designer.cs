@@ -28,7 +28,6 @@
 		/// </summary>
 		protected override void InitializeComponent()
 		{
-
 			base.InitializeComponent();
 			this.labelControlText = new DevExpress.XtraEditors.LabelControl();
 			this.pnHeader.SuspendLayout();

@@ -16,7 +16,6 @@ using SalesLibraries.Common.Extensions;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.CommonGUI.Common;
 using SalesLibraries.CommonGUI.RetractableBar;
-using SalesLibraries.CloudAdmin.Business.PreviewGenerators;
 using SalesLibraries.CloudAdmin.Controllers;
 using SalesLibraries.CloudAdmin.Properties;
 using Font = System.Drawing.Font;
@@ -514,8 +513,8 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 				var previewableLink = (PreviewableLink)_sourceLink;
 				previewableLink.ClearPreviewContainer();
 				var previewContainer = previewableLink.GetPreviewContainer();
-				var previewGenerator = previewContainer.GetPreviewGenerator();
-				previewContainer.UpdateContent(previewGenerator, cancelationToken);
+				//var previewGenerator = previewContainer.GetPreviewGenerator();
+				//previewContainer.UpdateContent(previewGenerator, cancelationToken);
 			});
 
 			LoadSourceImages();

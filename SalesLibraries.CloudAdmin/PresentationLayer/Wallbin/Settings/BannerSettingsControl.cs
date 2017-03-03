@@ -42,7 +42,6 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Settings
 			InitializeComponent();
 
 			labelControlTitle.Text = String.Format(ImageTitleFormat, bannerHolder.Name, String.Empty);
-			labelControlImageDescription.Text = String.Format(labelControlImageDescription.Text, bannerHolder.ObjectDisplayName.ToLower());
 			labelControlTextDescription.Text = String.Format(labelControlTextDescription.Text, bannerHolder.ObjectDisplayName);
 			buttonXShowTextHolderObjectName.Text = String.Format(buttonXShowTextHolderObjectName.Text, bannerHolder.ObjectDisplayName);
 
@@ -154,6 +153,47 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Settings
 				else if (checkEditHorizontalAlignmentRight.Checked)
 					_bannerHolder.Banner.ImageAlignement = HorizontalAlignment.Right;
 
+				if (checkEditPaddingLeftNone.Checked)
+					_bannerHolder.Banner.ImagePaddingLeft = 0;
+				else if (checkEditPaddingLeft2.Checked)
+					_bannerHolder.Banner.ImagePaddingLeft = 2;
+				else if (checkEditPaddingLeft6.Checked)
+					_bannerHolder.Banner.ImagePaddingLeft = 6;
+				else if (checkEditPaddingLeft10.Checked)
+					_bannerHolder.Banner.ImagePaddingLeft = 10;
+				else
+					_bannerHolder.Banner.ImagePaddingLeft = 2;
+				if (checkEditPaddingTopNone.Checked)
+					_bannerHolder.Banner.ImagePaddingTop = 0;
+				else if (checkEditPaddingTop2.Checked)
+					_bannerHolder.Banner.ImagePaddingTop = 2;
+				else if (checkEditPaddingTop6.Checked)
+					_bannerHolder.Banner.ImagePaddingTop = 6;
+				else if (checkEditPaddingTop10.Checked)
+					_bannerHolder.Banner.ImagePaddingTop = 10;
+				else
+					_bannerHolder.Banner.ImagePaddingTop = 2;
+				if (checkEditPaddingRightNone.Checked)
+					_bannerHolder.Banner.ImagePaddingRight = 0;
+				else if (checkEditPaddingRight2.Checked)
+					_bannerHolder.Banner.ImagePaddingRight = 2;
+				else if (checkEditPaddingRight6.Checked)
+					_bannerHolder.Banner.ImagePaddingRight = 6;
+				else if (checkEditPaddingRight10.Checked)
+					_bannerHolder.Banner.ImagePaddingRight = 10;
+				else
+					_bannerHolder.Banner.ImagePaddingRight = 2;
+				if (checkEditPaddingBottomNone.Checked)
+					_bannerHolder.Banner.ImagePaddingBottom = 0;
+				else if (checkEditPaddingBottom2.Checked)
+					_bannerHolder.Banner.ImagePaddingBottom = 2;
+				else if (checkEditPaddingBottom6.Checked)
+					_bannerHolder.Banner.ImagePaddingBottom = 6;
+				else if (checkEditPaddingBottom10.Checked)
+					_bannerHolder.Banner.ImagePaddingBottom = 10;
+				else
+					_bannerHolder.Banner.ImagePaddingBottom = 2;
+
 				_bannerHolder.Banner.TextMode = BannerTextMode.NoText;
 				if (_bannerHolder.Banner.ImageAlignement == HorizontalAlignment.Left)
 				{
@@ -238,6 +278,80 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Settings
 					checkEditHorizontalAlignmentRight.Checked = true;
 					break;
 			}
+
+			switch (banner.ImagePaddingLeft)
+			{
+				case 0:
+					checkEditPaddingLeftNone.Checked = true;
+					break;
+				case 2:
+					checkEditPaddingLeft2.Checked = true;
+					break;
+				case 6:
+					checkEditPaddingLeft6.Checked = true;
+					break;
+				case 10:
+					checkEditPaddingLeft10.Checked = true;
+					break;
+				default:
+					checkEditPaddingLeft2.Checked = true;
+					break;
+			}
+			switch (banner.ImagePaddingTop)
+			{
+				case 0:
+					checkEditPaddingTopNone.Checked = true;
+					break;
+				case 2:
+					checkEditPaddingTop2.Checked = true;
+					break;
+				case 6:
+					checkEditPaddingTop6.Checked = true;
+					break;
+				case 10:
+					checkEditPaddingTop10.Checked = true;
+					break;
+				default:
+					checkEditPaddingTop2.Checked = true;
+					break;
+			}
+			switch (banner.ImagePaddingRight)
+			{
+				case 0:
+					checkEditPaddingRightNone.Checked = true;
+					break;
+				case 2:
+					checkEditPaddingRight2.Checked = true;
+					break;
+				case 6:
+					checkEditPaddingRight6.Checked = true;
+					break;
+				case 10:
+					checkEditPaddingRight10.Checked = true;
+					break;
+				default:
+					checkEditPaddingRight2.Checked = true;
+					break;
+			}
+			switch (banner.ImagePaddingBottom)
+			{
+				case 0:
+					checkEditPaddingBottomNone.Checked = true;
+					break;
+				case 2:
+					checkEditPaddingBottom2.Checked = true;
+					break;
+				case 6:
+					checkEditPaddingBottom6.Checked = true;
+					break;
+				case 10:
+					checkEditPaddingBottom10.Checked = true;
+					break;
+				default:
+					checkEditPaddingBottom2.Checked = true;
+					break;
+			}
+
 			buttonXShowTextNone.Checked = banner.TextMode == BannerTextMode.NoText || banner.ImageAlignement != HorizontalAlignment.Left;
 			buttonXShowTextHolderObjectName.Checked = banner.ImageAlignement == HorizontalAlignment.Left && banner.TextMode == BannerTextMode.LinkName;
 			buttonXShowTextCustom.Checked = banner.ImageAlignement == HorizontalAlignment.Left && banner.TextMode == BannerTextMode.CustomText;

@@ -10,7 +10,7 @@ namespace SalesLibraries.CommonGUI.BackgroundProcesses
 	public class BackgroundProcessManager
 	{
 		private readonly ConcurrentQueue<BackgroundProcess> _tasks = new ConcurrentQueue<BackgroundProcess>();
-		private readonly FormProgressCommon _formProgress = new FormProgressCommon();
+		private FormProgressCommon _formProgress = new FormProgressCommon();
 		private readonly Func<Form> _mainFormAccessor;
 
 		private int _processesInQueue;
@@ -21,6 +21,16 @@ namespace SalesLibraries.CommonGUI.BackgroundProcesses
 		public BackgroundProcessManager(Func<Form> mainFormAccessor)
 		{
 			_mainFormAccessor = mainFormAccessor;
+		}
+
+		public void Release()
+		{
+			try
+			{
+				_formProgress?.Dispose();
+				_formProgress = null;
+			}
+			catch{}
 		}
 
 		public void Run(string title, Action<CancellationToken, FormProgressCommon> process, Action afterComplete = null)

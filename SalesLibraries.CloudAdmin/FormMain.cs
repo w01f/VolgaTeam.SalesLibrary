@@ -25,6 +25,9 @@ namespace SalesLibraries.CloudAdmin
 
 			Opacity = 0;
 			ActiveForm = this;
+
+			KeyPreview = true;
+			KeyUp += OnFormKeyUp;
 		}
 
 		public void InitForm()
@@ -154,7 +157,7 @@ namespace SalesLibraries.CloudAdmin
 
 		private void OnFormClosing(object sender, FormClosingEventArgs e)
 		{
-			//MainController.Instance.ProcessClose();
+			MainController.Instance.ProcessClose();
 		}
 
 		private void OnFloaterClick(object sender, EventArgs e)
@@ -198,6 +201,12 @@ namespace SalesLibraries.CloudAdmin
 			MainController.Instance.HelpManager.OpenHelpLink("Ribbon");
 		}
 
+		private void OnFormKeyUp(object sender, KeyEventArgs e)
+		{
+			if (e.KeyCode == Keys.Escape)
+				MainController.Instance.WallbinViews.Selection.Reset();
+		}
+
 		private void ribbonControl_SelectedRibbonTabChanged(object sender, EventArgs e)
 		{
 			var key = TabPageEnum.Home;
@@ -216,16 +225,6 @@ namespace SalesLibraries.CloudAdmin
 			else if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemBundles)
 				key = TabPageEnum.Bundles;
 			MainController.Instance.ShowTab(key);
-		}
-
-		private void buttonItemHomeAddUrl_Click(object sender, EventArgs e)
-		{
-
-		}
-
-		private void buttonItemHomeLinkPropertiesNotes_Click(object sender, EventArgs e)
-		{
-
 		}
 	}
 }

@@ -24,7 +24,6 @@ namespace SalesLibraries.SalesDepot.Configuration
 		public StorageFile Gallery1ConfigFile { get; private set; }
 		public StorageFile Gallery2ConfigFile { get; private set; }
 		public StorageFile CalendarRibbonLogoFile { get; private set; }
-		public StorageFile SDSearchFile { get; private set; }
 		#endregion
 
 		private RemoteResourceManager() { }
@@ -94,15 +93,6 @@ namespace SalesLibraries.SalesDepot.Configuration
 				"oc_logo.png"
 				));
 			await CalendarRibbonLogoFile.Download();
-
-			SDSearchFile = new StorageFile(new object[]
-			{
-				FileStorageManager.IncomingFolderName,
-				AppProfileManager.Instance.AppNameSet,
-				"Data",
-				"SDSearch.xml"
-			});
-			await SDSearchFile.Download();
 			#endregion
 		}
 	}

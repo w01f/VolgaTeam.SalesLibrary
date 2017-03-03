@@ -216,7 +216,7 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 			}
 			else if (!Link.Widget.Disabled && Link.Widget.DisplayedImage != null)
 			{
-				imageLeft = 0;
+				imageLeft = WidthMargin;
 				imageWidth = Link.Widget.DisplayedImage.Width > DefaultImageWidth ? Link.Widget.DisplayedImage.Width : DefaultImageWidth;
 				imageHeight = Link.Widget.DisplayedImage.Height > DefaultImageHeight ? Link.Widget.DisplayedImage.Height : DefaultImageHeight;
 			}

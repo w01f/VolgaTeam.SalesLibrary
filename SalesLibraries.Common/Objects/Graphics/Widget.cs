@@ -2,7 +2,7 @@
 {
 	public class Widget : BaseImageSource
 	{
-		public const int DefaultHeight = 26;
+		public const int DefaultHeight = 32;
 		public Widget(string filePath) : base(filePath) { }
 	}
 }

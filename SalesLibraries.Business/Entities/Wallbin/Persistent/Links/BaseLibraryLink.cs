@@ -205,8 +205,6 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 			get
 			{
 				var lines = new List<string>();
-				if (Tags.Categories.Any(c => c.Tags.Any()))
-					lines.Add(String.Format("Category Tags: {0}", Tags.AllCategories));
 				if (Tags.Keywords.Any(k => !String.IsNullOrEmpty(k.Name)))
 					lines.Add(String.Format("Keyword Tags: {0}", Tags.AllKeywords));
 				if (Security.HasSecuritySettings)

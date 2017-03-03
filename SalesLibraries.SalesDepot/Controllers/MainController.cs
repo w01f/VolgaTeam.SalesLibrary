@@ -28,7 +28,6 @@ namespace SalesLibraries.SalesDepot.Controllers
 		public TabPageEnum ActiveTab { get; private set; }
 
 		public SettingsManager Settings { get; }
-		public ListManager Lists { get; }
 		public EmailBinManager EmailBin { get; }
 
 		public LocalWallbinManager Wallbin { get; }
@@ -53,7 +52,6 @@ namespace SalesLibraries.SalesDepot.Controllers
 		private MainController()
 		{
 			Settings = new SettingsManager();
-			Lists = new ListManager();
 
 			Wallbin = new LocalWallbinManager();
 
@@ -183,7 +181,6 @@ namespace SalesLibraries.SalesDepot.Controllers
 			PowerPointManager.Instance.Init();
 
 			Settings.LoadSettings();
-			Lists.Load();
 			SelectActiveTab();
 
 			ActivityManager = ActivityManager.OpenStorage<ActivityManager>();

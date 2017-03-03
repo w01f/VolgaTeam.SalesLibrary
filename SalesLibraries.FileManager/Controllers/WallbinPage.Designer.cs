@@ -126,6 +126,7 @@
 			this.pnHeader.Dock = System.Windows.Forms.DockStyle.Top;
 			this.pnHeader.Location = new System.Drawing.Point(0, 0);
 			this.pnHeader.Name = "pnHeader";
+			this.pnHeader.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
 			this.pnHeader.Size = new System.Drawing.Size(988, 47);
 			this.pnHeader.TabIndex = 8;
 			// 
@@ -137,9 +138,9 @@
 			this.linkInfoControl.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
 			this.linkInfoControl.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
 			this.linkInfoControl.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.linkInfoControl.Location = new System.Drawing.Point(196, 0);
+			this.linkInfoControl.Location = new System.Drawing.Point(201, 0);
 			this.linkInfoControl.Name = "linkInfoControl";
-			this.linkInfoControl.Size = new System.Drawing.Size(254, 47);
+			this.linkInfoControl.Size = new System.Drawing.Size(249, 47);
 			this.linkInfoControl.TabIndex = 2;
 			// 
 			// pnTagInfoContainer
@@ -156,7 +157,7 @@
 			this.superFilterControl.BackColor = System.Drawing.Color.White;
 			this.superFilterControl.Dock = System.Windows.Forms.DockStyle.Left;
 			this.superFilterControl.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.superFilterControl.Location = new System.Drawing.Point(0, 0);
+			this.superFilterControl.Location = new System.Drawing.Point(5, 0);
 			this.superFilterControl.Name = "superFilterControl";
 			this.superFilterControl.Size = new System.Drawing.Size(196, 47);
 			this.superFilterControl.TabIndex = 0;

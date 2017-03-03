@@ -277,23 +277,22 @@ namespace SalesLibraries.FileManager.Controllers
 			if (targetLibrary.SyncSettings.MinimizeOnSync)
 				MainController.Instance.MainForm.WindowState = FormWindowState.Minimized;
 
-			var formProgressSync = new FormProgressSync();
-			MainController.Instance.ProcessManager.RunWithProgress(
-				formProgressSync,
-				true,
-				(cancellationToken, formProgress) => SyncManager.SyncRegular(cancellationToken),
-				cancellationToken => MainController.Instance.MainForm.ActiveForm.Invoke(new MethodInvoker(() =>
+			using (var formProgressSync = new FormProgressSync())
+			{
+				MainController.Instance.ProcessManager.RunWithProgress(
+					formProgressSync,
+					false,
+					(cancellationToken, formProgress) => SyncManager.SyncRegular(cancellationToken));
+				if (targetLibrary.SyncSettings.CloseAfterSync)
+					MainController.Instance.MainForm.Close();
+				else
 				{
-					if (!cancellationToken.IsCancellationRequested && targetLibrary.SyncSettings.CloseAfterSync)
-					{
-						Application.Exit();
-						return;
-					}
 					MainController.Instance.MainForm.WindowState = savedState;
 					MainController.Instance.MainForm.ribbonControl.Enabled = true;
 					MainController.Instance.TabWallbin.UpdateWallbin();
 					MainController.Instance.ActivateApplication();
-				})));
+				}
+			}
 		}
 
 		#region Link Operations Processing

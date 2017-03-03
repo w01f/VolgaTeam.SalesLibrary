@@ -31,7 +31,7 @@ namespace SalesLibraries.FileManager.Business.Dictionaries
 				if (!cloudLastUpdate.HasValue || cloudLastUpdate <= localMetaData.LastUpdate)
 				{
 					var localData = localMetaData.GetData<SearchTagList>();
-					SearchGroups.AddRange(localData.SearchGroups);
+					SearchSuperGroups.AddRange(localData.SearchSuperGroups);
 					MaxTags = localData.MaxTags;
 					TagCount = localData.TagCount;
 					return;
@@ -41,9 +41,9 @@ namespace SalesLibraries.FileManager.Business.Dictionaries
 				localMetaData = new MetaDataContainer(MetaDataConst.CategoriesDataTag);
 
 			response = MainController.Instance.RestServiceConnection.DoRequest(new SearchCategoriesGetRequestData(), "Error loading dictionaries updates from server");
-			SearchGroups.AddRange(LoadFromCloudData(response.GetData<SearchCategory[]>()));
+			SearchSuperGroups.AddRange(LoadFromCloudData(response.GetData<SearchCategory[]>()));
 
-			
+
 			response = MainController.Instance.RestServiceConnection.DoRequest(new MetaDataGetRequestData
 			{
 				DataTag = MetaDataConst.CategoriesDataTag,
@@ -67,18 +67,26 @@ namespace SalesLibraries.FileManager.Business.Dictionaries
 			localMetaData.Save();
 		}
 
-		private static IEnumerable<SearchGroup> LoadFromCloudData(IEnumerable<SearchCategory> cloudCategories)
+		private static IEnumerable<SearchSuperGroup> LoadFromCloudData(IEnumerable<SearchCategory> cloudCategories)
 		{
-			return cloudCategories.GroupBy(cat => cat.Category).Select(group =>
-			{
-				var searchGroup = new SearchGroup()
-				{
-					Name = group.Key,
-					Description = group.Select(g => g.Description).FirstOrDefault()
-				};
-				searchGroup.Tags.AddRange(group.Select(g => new SearchTag { Name = g.Tag }));
-				return searchGroup;
-			});
+			return cloudCategories.GroupBy(cat => new { cat.Group }).Select(superGroup =>
+			  {
+				  var searchSuperGroup = new SearchSuperGroup
+				  {
+					  Name = superGroup.Key.Group
+				  };
+				  searchSuperGroup.Groups.AddRange(superGroup.GroupBy(group => new { group.Category }).Select(group =>
+					 {
+						 var searchGroup = new SearchGroup
+						 {
+							 Name = group.Key.Category,
+							 Description = group.Select(g => g.Description).FirstOrDefault()
+						 };
+						 searchGroup.Tags.AddRange(group.Select(g => new SearchTag { Name = g.Tag }));
+						 return searchGroup;
+					 }));
+				  return searchSuperGroup;
+			  });
 		}
 	}
 }

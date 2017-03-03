@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Drawing;
+using System.Windows.Forms;
 using Newtonsoft.Json;
 using SalesLibraries.Business.Entities.Common;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.Common.Extensions;
+using HorizontalAlignment = SalesLibraries.Business.Entities.Wallbin.Common.Enums.HorizontalAlignment;
 
 namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 {
@@ -85,17 +87,18 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 		{
 			get
 			{
+				if (Image == null) return null;
 				if (Inverted)
 				{
 					if (_invertedImage == null)
 					{
-						_invertedImage = InversionColor != GraphicObjectExtensions.DefaultInversionColor ?
+						_invertedImage = (InversionColor != GraphicObjectExtensions.DefaultInversionColor ?
 							((Image)Image?.Clone()).ReplaceColor(InversionColor) :
-							((Image)Image?.Clone()).Invert();
+							((Image)Image?.Clone()).Invert()).DrawPadding(new Padding(ImagePaddingLeft, ImagePaddingTop, ImagePaddingRight, ImagePaddingBottom));
 					}
 					return _invertedImage;
 				}
-				return Image;
+				return ((Image)Image?.Clone()).DrawPadding(new Padding(ImagePaddingLeft, ImagePaddingTop, ImagePaddingRight, ImagePaddingBottom));
 			}
 		}
 
@@ -168,6 +171,66 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent
 				if (_font != value)
 					OnSettingsChanged();
 				_font = value;
+			}
+		}
+
+		private int _imagePaddingLeft = 2;
+		public int ImagePaddingLeft
+		{
+			get { return _imagePaddingLeft; }
+			set
+			{
+				if (_imagePaddingLeft != value)
+				{
+					_invertedImage = null;
+					OnSettingsChanged();
+				}
+				_imagePaddingLeft = value;
+			}
+		}
+
+		private int _imagePaddingTop = 2;
+		public int ImagePaddingTop
+		{
+			get { return _imagePaddingTop; }
+			set
+			{
+				if (_imagePaddingTop != value)
+				{
+					_invertedImage = null;
+					OnSettingsChanged();
+				}
+				_imagePaddingTop = value;
+			}
+		}
+
+		private int _imagePaddingRight = 2;
+		public int ImagePaddingRight
+		{
+			get { return _imagePaddingRight; }
+			set
+			{
+				if (_imagePaddingRight != value)
+				{
+					_invertedImage = null;
+					OnSettingsChanged();
+				}
+				_imagePaddingRight = value;
+			}
+		}
+
+		private int _imagePaddingBottom = 2;
+		public int ImagePaddingBottom
+		{
+			get { return _imagePaddingBottom; }
+			set
+			{
+				if (_imagePaddingBottom != value)
+				{
+					_invertedImage = null;
+					OnSettingsChanged();
+				}
+				_imagePaddingBottom = value;
 			}
 		}
 

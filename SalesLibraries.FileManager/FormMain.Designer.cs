@@ -636,7 +636,6 @@
 			this.buttonItemHomeAddUrl.Name = "buttonItemHomeAddUrl";
 			this.superTooltip.SetSuperTooltip(this.buttonItemHomeAddUrl, new DevComponents.DotNetBar.SuperTooltipInfo("Add a Hyperlink", "", "Create links to websites, files and apps...", null, null, DevComponents.DotNetBar.eTooltipColor.Default, true, false, new System.Drawing.Size(0, 0)));
 			this.buttonItemHomeAddUrl.Text = "Hyperlink";
-			this.buttonItemHomeAddUrl.Click += new System.EventHandler(this.buttonItemHomeAddUrl_Click);
 			// 
 			// ribbonBarHomeLogo
 			// 
@@ -2571,7 +2570,7 @@
 			// 
 			// buttonEditCalendarLocation
 			// 
-			this.buttonEditCalendarLocation.Location = new System.Drawing.Point(4, 50);
+			this.buttonEditCalendarLocation.Location = new System.Drawing.Point(4, 51);
 			this.buttonEditCalendarLocation.Name = "buttonEditCalendarLocation";
 			this.buttonEditCalendarLocation.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
@@ -3095,7 +3094,7 @@
 			this.pnContainer.Location = new System.Drawing.Point(5, 157);
 			this.pnContainer.Name = "pnContainer";
 			this.pnContainer.Padding = new System.Windows.Forms.Padding(0, 2, 0, 0);
-			this.pnContainer.Size = new System.Drawing.Size(1258, 519);
+			this.pnContainer.Size = new System.Drawing.Size(1258, 514);
 			this.pnContainer.TabIndex = 32;
 			// 
 			// defaultLookAndFeel
@@ -3110,7 +3109,7 @@
 			// FormMain
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-			this.ClientSize = new System.Drawing.Size(1268, 678);
+			this.ClientSize = new System.Drawing.Size(1268, 673);
 			this.Controls.Add(this.pnContainer);
 			this.Controls.Add(this.ribbonControl);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

@@ -29,13 +29,16 @@
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TagsOptions));
 			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
 			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
 			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
 			this.xtraTabControlSearchTags = new DevExpress.XtraTab.XtraTabControl();
 			this.xtraTabPageSearchTagsCategories = new DevExpress.XtraTab.XtraTabPage();
 			this.splitContainerSearchTagsCategories = new DevExpress.XtraEditors.SplitContainerControl();
-			this.xtraScrollableControlSearchTagsCategories = new DevExpress.XtraEditors.XtraScrollableControl();
+			this.treeListCategories = new SalesLibraries.CommonGUI.CustomTreeList.EmptyImageTreeList();
+			this.treeListColumnName = new DevExpress.XtraTreeList.Columns.TreeListColumn();
+			this.imageList = new System.Windows.Forms.ImageList(this.components);
 			this.pnSearchTagsCategoriesHeader = new System.Windows.Forms.Panel();
 			this.labelControlSearchTagsCategoriesHeader = new DevExpress.XtraEditors.LabelControl();
 			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
@@ -52,6 +55,7 @@
 			this.xtraTabPageSearchTagsCategories.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainerSearchTagsCategories)).BeginInit();
 			this.splitContainerSearchTagsCategories.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.treeListCategories)).BeginInit();
 			this.pnSearchTagsCategoriesHeader.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			this.xtraTabPageSearchTagsKeywords.SuspendLayout();
@@ -111,7 +115,7 @@
 			this.splitContainerSearchTagsCategories.Panel1.Appearance.Options.UseBackColor = true;
 			this.splitContainerSearchTagsCategories.Panel1.Appearance.Options.UseForeColor = true;
 			this.splitContainerSearchTagsCategories.Panel1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Default;
-			this.splitContainerSearchTagsCategories.Panel1.Controls.Add(this.xtraScrollableControlSearchTagsCategories);
+			this.splitContainerSearchTagsCategories.Panel1.Controls.Add(this.treeListCategories);
 			this.splitContainerSearchTagsCategories.Panel1.MinSize = 250;
 			this.splitContainerSearchTagsCategories.Panel1.Text = "Panel1";
 			this.splitContainerSearchTagsCategories.Panel2.Appearance.BackColor = System.Drawing.Color.White;
@@ -125,17 +129,59 @@
 			this.splitContainerSearchTagsCategories.TabIndex = 1;
 			this.splitContainerSearchTagsCategories.Text = "splitContainerControl1";
 			// 
-			// xtraScrollableControlSearchTagsCategories
+			// treeListCategories
 			// 
-			this.xtraScrollableControlSearchTagsCategories.Appearance.BackColor = System.Drawing.Color.White;
-			this.xtraScrollableControlSearchTagsCategories.Appearance.ForeColor = System.Drawing.Color.Black;
-			this.xtraScrollableControlSearchTagsCategories.Appearance.Options.UseBackColor = true;
-			this.xtraScrollableControlSearchTagsCategories.Appearance.Options.UseForeColor = true;
-			this.xtraScrollableControlSearchTagsCategories.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.xtraScrollableControlSearchTagsCategories.Location = new System.Drawing.Point(0, 0);
-			this.xtraScrollableControlSearchTagsCategories.Name = "xtraScrollableControlSearchTagsCategories";
-			this.xtraScrollableControlSearchTagsCategories.Size = new System.Drawing.Size(246, 442);
-			this.xtraScrollableControlSearchTagsCategories.TabIndex = 0;
+			this.treeListCategories.Appearance.FocusedCell.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.treeListCategories.Appearance.FocusedCell.Options.UseFont = true;
+			this.treeListCategories.Appearance.FocusedRow.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.treeListCategories.Appearance.FocusedRow.Options.UseFont = true;
+			this.treeListCategories.Appearance.Row.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.treeListCategories.Appearance.Row.Options.UseFont = true;
+			this.treeListCategories.Appearance.SelectedRow.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.treeListCategories.Appearance.SelectedRow.Options.UseFont = true;
+			this.treeListCategories.Columns.AddRange(new DevExpress.XtraTreeList.Columns.TreeListColumn[] {
+            this.treeListColumnName});
+			this.treeListCategories.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.treeListCategories.Location = new System.Drawing.Point(0, 0);
+			this.treeListCategories.Name = "treeListCategories";
+			this.treeListCategories.OptionsBehavior.AutoChangeParent = false;
+			this.treeListCategories.OptionsBehavior.Editable = false;
+			this.treeListCategories.OptionsBehavior.ResizeNodes = false;
+			this.treeListCategories.OptionsLayout.AddNewColumns = false;
+			this.treeListCategories.OptionsMenu.EnableColumnMenu = false;
+			this.treeListCategories.OptionsMenu.EnableFooterMenu = false;
+			this.treeListCategories.OptionsSelection.EnableAppearanceFocusedCell = false;
+			this.treeListCategories.OptionsView.FocusRectStyle = DevExpress.XtraTreeList.DrawFocusRectStyle.None;
+			this.treeListCategories.OptionsView.ShowColumns = false;
+			this.treeListCategories.OptionsView.ShowHorzLines = false;
+			this.treeListCategories.OptionsView.ShowIndicator = false;
+			this.treeListCategories.OptionsView.ShowVertLines = false;
+			this.treeListCategories.RowHeight = 20;
+			this.treeListCategories.ShowButtonMode = DevExpress.XtraTreeList.ShowButtonModeEnum.ShowForFocusedRow;
+			this.treeListCategories.Size = new System.Drawing.Size(246, 442);
+			this.treeListCategories.StateImageList = this.imageList;
+			this.treeListCategories.TabIndex = 3;
+			this.treeListCategories.BeforeCollapse += new DevExpress.XtraTreeList.BeforeCollapseEventHandler(this.OnCategoriesBeforeCollapse);
+			this.treeListCategories.BeforeFocusNode += new DevExpress.XtraTreeList.BeforeFocusNodeEventHandler(this.OnCategoriesBeforeFocusNode);
+			this.treeListCategories.AfterExpand += new DevExpress.XtraTreeList.NodeEventHandler(this.OnCategoriesAfterExpand);
+			this.treeListCategories.AfterCollapse += new DevExpress.XtraTreeList.NodeEventHandler(this.OnCategoriesAfterCollapse);
+			this.treeListCategories.FocusedNodeChanged += new DevExpress.XtraTreeList.FocusedNodeChangedEventHandler(this.OnCategoriesFocusedNodeChanged);
+			// 
+			// treeListColumnName
+			// 
+			this.treeListColumnName.Caption = "Name";
+			this.treeListColumnName.FieldName = "Name";
+			this.treeListColumnName.MinWidth = 49;
+			this.treeListColumnName.Name = "treeListColumnName";
+			this.treeListColumnName.Visible = true;
+			this.treeListColumnName.VisibleIndex = 0;
+			// 
+			// imageList
+			// 
+			this.imageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList.ImageStream")));
+			this.imageList.TransparentColor = System.Drawing.Color.Magenta;
+			this.imageList.Images.SetKeyName(0, "DataSourceListClosedFolder.png");
+			this.imageList.Images.SetKeyName(1, "DataSourceListOpenedFolder.png");
 			// 
 			// pnSearchTagsCategoriesHeader
 			// 
@@ -324,6 +370,7 @@
 			this.xtraTabPageSearchTagsCategories.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.splitContainerSearchTagsCategories)).EndInit();
 			this.splitContainerSearchTagsCategories.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.treeListCategories)).EndInit();
 			this.pnSearchTagsCategoriesHeader.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
 			this.xtraTabPageSearchTagsKeywords.ResumeLayout(false);
@@ -340,7 +387,6 @@
 		public DevExpress.XtraTab.XtraTabControl xtraTabControlSearchTags;
 		private DevExpress.XtraTab.XtraTabPage xtraTabPageSearchTagsCategories;
 		private DevExpress.XtraEditors.SplitContainerControl splitContainerSearchTagsCategories;
-		private DevExpress.XtraEditors.XtraScrollableControl xtraScrollableControlSearchTagsCategories;
 		private System.Windows.Forms.Panel pnSearchTagsCategoriesHeader;
 		private DevExpress.XtraEditors.LabelControl labelControlSearchTagsCategoriesHeader;
 		private DevComponents.DotNetBar.ButtonX buttonXWipeTags;
@@ -352,5 +398,8 @@
 		private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repositoryItemButtonEditKeywordShared;
 		private DevExpress.XtraEditors.StyleController styleController;
 		private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repositoryItemButtonEditKeywordPartial;
+		private CommonGUI.CustomTreeList.EmptyImageTreeList treeListCategories;
+		private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumnName;
+		private System.Windows.Forms.ImageList imageList;
 	}
 }

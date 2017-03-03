@@ -28,7 +28,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Libraries
 			var taggedLibraryLinks = TaggedLinksManager.Instance.TaggedLibraryLinks;
 
 			var linksRequireToTag = totalLibraryLinks - taggedLibraryLinks;
-			Text = String.Format("<size=-1><color={0}>Total Links: {1}    </color><color=gray>Links: {3}    </color><color={0}>Tagged: {2}    </color><color=gray>Tagged: {4}</color></size>",
+			Text = String.Format("<size=-1><color={0}>Total Links: {1}    </color><color={0}>Tagged: {2}    </color><color=gray>Links: {3}    </color><color=gray>Tagged: {4}</color></size>",
 				linksRequireToTag > 0 ? "red" : "green",
 				totalLibraryLinks,
 				taggedLibraryLinks,

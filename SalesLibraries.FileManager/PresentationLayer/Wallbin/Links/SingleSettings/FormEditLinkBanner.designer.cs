@@ -70,6 +70,27 @@
 			this.labelControlBottomDescription = new DevExpress.XtraEditors.LabelControl();
 			this.contextMenuStripImage = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.toolStripMenuItemImageAddToFavorites = new System.Windows.Forms.ToolStripMenuItem();
+			this.labelControlPadding = new DevExpress.XtraEditors.LabelControl();
+			this.labelControlPaddingLeft = new DevExpress.XtraEditors.LabelControl();
+			this.labelControlPaddingTop = new DevExpress.XtraEditors.LabelControl();
+			this.checkEditPaddingLeftNone = new DevExpress.XtraEditors.CheckEdit();
+			this.checkEditPaddingLeft6 = new DevExpress.XtraEditors.CheckEdit();
+			this.checkEditPaddingLeft2 = new DevExpress.XtraEditors.CheckEdit();
+			this.checkEditPaddingLeft10 = new DevExpress.XtraEditors.CheckEdit();
+			this.checkEditPaddingTopNone = new DevExpress.XtraEditors.CheckEdit();
+			this.checkEditPaddingTop10 = new DevExpress.XtraEditors.CheckEdit();
+			this.checkEditPaddingTop6 = new DevExpress.XtraEditors.CheckEdit();
+			this.checkEditPaddingTop2 = new DevExpress.XtraEditors.CheckEdit();
+			this.checkEditPaddingBottomNone = new DevExpress.XtraEditors.CheckEdit();
+			this.checkEditPaddingBottom10 = new DevExpress.XtraEditors.CheckEdit();
+			this.checkEditPaddingBottom6 = new DevExpress.XtraEditors.CheckEdit();
+			this.checkEditPaddingBottom2 = new DevExpress.XtraEditors.CheckEdit();
+			this.checkEditPaddingRightNone = new DevExpress.XtraEditors.CheckEdit();
+			this.checkEditPaddingRight10 = new DevExpress.XtraEditors.CheckEdit();
+			this.checkEditPaddingRight6 = new DevExpress.XtraEditors.CheckEdit();
+			this.checkEditPaddingRight2 = new DevExpress.XtraEditors.CheckEdit();
+			this.labelControlPaddingBottom = new DevExpress.XtraEditors.LabelControl();
+			this.labelControlPaddingRight = new DevExpress.XtraEditors.LabelControl();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.colorEditBannerTextColor.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.buttonEditBannerTextFont.Properties)).BeginInit();
@@ -94,6 +115,22 @@
 			((System.ComponentModel.ISupportInitialize)(this.checkEditSaveAsTemplate.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditTextWordWrap.Properties)).BeginInit();
 			this.contextMenuStripImage.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditPaddingLeftNone.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditPaddingLeft6.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditPaddingLeft2.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditPaddingLeft10.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditPaddingTopNone.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditPaddingTop10.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditPaddingTop6.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditPaddingTop2.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditPaddingBottomNone.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditPaddingBottom10.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditPaddingBottom6.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditPaddingBottom2.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditPaddingRightNone.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditPaddingRight10.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditPaddingRight6.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditPaddingRight2.Properties)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// buttonXOK
@@ -218,13 +255,13 @@
 			this.xtraTabControlGallery.Location = new System.Drawing.Point(249, 0);
 			this.xtraTabControlGallery.Name = "xtraTabControlGallery";
 			this.xtraTabControlGallery.ShowTabHeader = DevExpress.Utils.DefaultBoolean.False;
-			this.xtraTabControlGallery.Size = new System.Drawing.Size(695, 382);
+			this.xtraTabControlGallery.Size = new System.Drawing.Size(695, 356);
 			this.xtraTabControlGallery.TabIndex = 46;
 			// 
 			// checkEditVerticalAlignmentTop1
 			// 
 			this.checkEditVerticalAlignmentTop1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.checkEditVerticalAlignmentTop1.Location = new System.Drawing.Point(696, 449);
+			this.checkEditVerticalAlignmentTop1.Location = new System.Drawing.Point(682, 456);
 			this.checkEditVerticalAlignmentTop1.Name = "checkEditVerticalAlignmentTop1";
 			this.checkEditVerticalAlignmentTop1.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.checkEditVerticalAlignmentTop1.Properties.Appearance.Options.UseForeColor = true;
@@ -236,8 +273,8 @@
 			// 
 			// checkEditInvert
 			// 
-			this.checkEditInvert.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.checkEditInvert.Location = new System.Drawing.Point(10, 449);
+			this.checkEditInvert.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.checkEditInvert.Location = new System.Drawing.Point(403, 20);
 			this.checkEditInvert.Name = "checkEditInvert";
 			this.checkEditInvert.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.checkEditInvert.Properties.Appearance.Options.UseForeColor = true;
@@ -391,6 +428,27 @@
 			// 
 			this.xtraTabPageImage.Appearance.PageClient.ForeColor = System.Drawing.Color.Black;
 			this.xtraTabPageImage.Appearance.PageClient.Options.UseForeColor = true;
+			this.xtraTabPageImage.Controls.Add(this.checkEditPaddingBottomNone);
+			this.xtraTabPageImage.Controls.Add(this.checkEditPaddingBottom10);
+			this.xtraTabPageImage.Controls.Add(this.checkEditPaddingBottom6);
+			this.xtraTabPageImage.Controls.Add(this.checkEditPaddingBottom2);
+			this.xtraTabPageImage.Controls.Add(this.checkEditPaddingRightNone);
+			this.xtraTabPageImage.Controls.Add(this.checkEditPaddingRight10);
+			this.xtraTabPageImage.Controls.Add(this.checkEditPaddingRight6);
+			this.xtraTabPageImage.Controls.Add(this.checkEditPaddingRight2);
+			this.xtraTabPageImage.Controls.Add(this.labelControlPaddingBottom);
+			this.xtraTabPageImage.Controls.Add(this.labelControlPaddingRight);
+			this.xtraTabPageImage.Controls.Add(this.checkEditPaddingTopNone);
+			this.xtraTabPageImage.Controls.Add(this.checkEditPaddingTop10);
+			this.xtraTabPageImage.Controls.Add(this.checkEditPaddingTop6);
+			this.xtraTabPageImage.Controls.Add(this.checkEditPaddingTop2);
+			this.xtraTabPageImage.Controls.Add(this.checkEditPaddingLeftNone);
+			this.xtraTabPageImage.Controls.Add(this.checkEditPaddingLeft10);
+			this.xtraTabPageImage.Controls.Add(this.checkEditPaddingLeft6);
+			this.xtraTabPageImage.Controls.Add(this.checkEditPaddingLeft2);
+			this.xtraTabPageImage.Controls.Add(this.labelControlPaddingTop);
+			this.xtraTabPageImage.Controls.Add(this.labelControlPaddingLeft);
+			this.xtraTabPageImage.Controls.Add(this.labelControlPadding);
 			this.xtraTabPageImage.Controls.Add(this.colorEditInversionColor);
 			this.xtraTabPageImage.Controls.Add(this.labelControlImageAlignment);
 			this.xtraTabPageImage.Controls.Add(this.checkEditHorizontalAlignmentRight);
@@ -407,11 +465,11 @@
 			// 
 			// colorEditInversionColor
 			// 
-			this.colorEditInversionColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.colorEditInversionColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.colorEditInversionColor.Color = System.Drawing.Color.Empty;
 			this.colorEditInversionColor.EditValue = System.Drawing.Color.Empty;
 			this.colorEditInversionColor.Enabled = false;
-			this.colorEditInversionColor.Location = new System.Drawing.Point(82, 448);
+			this.colorEditInversionColor.Location = new System.Drawing.Point(475, 19);
 			this.colorEditInversionColor.Name = "colorEditInversionColor";
 			this.colorEditInversionColor.Properties.Appearance.BackColor = System.Drawing.Color.White;
 			this.colorEditInversionColor.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
@@ -428,11 +486,11 @@
 			// labelControlImageAlignment
 			// 
 			this.labelControlImageAlignment.AllowHtmlString = true;
-			this.labelControlImageAlignment.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.labelControlImageAlignment.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelControlImageAlignment.Appearance.BackColor = System.Drawing.Color.Transparent;
 			this.labelControlImageAlignment.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.labelControlImageAlignment.AppearanceDisabled.ForeColor = System.Drawing.Color.Gray;
-			this.labelControlImageAlignment.Location = new System.Drawing.Point(286, 451);
+			this.labelControlImageAlignment.Location = new System.Drawing.Point(682, 416);
 			this.labelControlImageAlignment.Name = "labelControlImageAlignment";
 			this.labelControlImageAlignment.Size = new System.Drawing.Size(69, 16);
 			this.labelControlImageAlignment.StyleController = this.styleController;
@@ -442,8 +500,8 @@
 			// 
 			// checkEditHorizontalAlignmentRight
 			// 
-			this.checkEditHorizontalAlignmentRight.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.checkEditHorizontalAlignmentRight.Location = new System.Drawing.Point(506, 449);
+			this.checkEditHorizontalAlignmentRight.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.checkEditHorizontalAlignmentRight.Location = new System.Drawing.Point(902, 414);
 			this.checkEditHorizontalAlignmentRight.Name = "checkEditHorizontalAlignmentRight";
 			this.checkEditHorizontalAlignmentRight.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.checkEditHorizontalAlignmentRight.Properties.Appearance.Options.UseForeColor = true;
@@ -459,8 +517,8 @@
 			// 
 			// checkEditHorizontalAlignmentCenter
 			// 
-			this.checkEditHorizontalAlignmentCenter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.checkEditHorizontalAlignmentCenter.Location = new System.Drawing.Point(429, 449);
+			this.checkEditHorizontalAlignmentCenter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.checkEditHorizontalAlignmentCenter.Location = new System.Drawing.Point(825, 414);
 			this.checkEditHorizontalAlignmentCenter.Name = "checkEditHorizontalAlignmentCenter";
 			this.checkEditHorizontalAlignmentCenter.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.checkEditHorizontalAlignmentCenter.Properties.Appearance.Options.UseForeColor = true;
@@ -476,8 +534,8 @@
 			// 
 			// checkEditHorizontalAlignmentLeft
 			// 
-			this.checkEditHorizontalAlignmentLeft.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.checkEditHorizontalAlignmentLeft.Location = new System.Drawing.Point(370, 449);
+			this.checkEditHorizontalAlignmentLeft.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.checkEditHorizontalAlignmentLeft.Location = new System.Drawing.Point(766, 414);
 			this.checkEditHorizontalAlignmentLeft.Name = "checkEditHorizontalAlignmentLeft";
 			this.checkEditHorizontalAlignmentLeft.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.checkEditHorizontalAlignmentLeft.Properties.Appearance.Options.UseForeColor = true;
@@ -501,7 +559,7 @@
 			this.labelControlImageDescription.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
 			this.labelControlImageDescription.Location = new System.Drawing.Point(10, 13);
 			this.labelControlImageDescription.Name = "labelControlImageDescription";
-			this.labelControlImageDescription.Size = new System.Drawing.Size(576, 33);
+			this.labelControlImageDescription.Size = new System.Drawing.Size(369, 33);
 			this.labelControlImageDescription.StyleController = this.styleController;
 			this.labelControlImageDescription.TabIndex = 50;
 			this.labelControlImageDescription.Text = "<size=+2><color=gray>Show a clipart image or logo with this link…</color></size>";
@@ -517,7 +575,7 @@
 			this.pnGallery.ForeColor = System.Drawing.Color.Black;
 			this.pnGallery.Location = new System.Drawing.Point(10, 52);
 			this.pnGallery.Name = "pnGallery";
-			this.pnGallery.Size = new System.Drawing.Size(944, 382);
+			this.pnGallery.Size = new System.Drawing.Size(944, 356);
 			this.pnGallery.TabIndex = 56;
 			// 
 			// retractableBarGallery
@@ -531,7 +589,7 @@
 			this.retractableBarGallery.Content.ForeColor = System.Drawing.Color.Black;
 			this.retractableBarGallery.Content.Location = new System.Drawing.Point(2, 42);
 			this.retractableBarGallery.Content.Name = "Content";
-			this.retractableBarGallery.Content.Size = new System.Drawing.Size(245, 338);
+			this.retractableBarGallery.Content.Size = new System.Drawing.Size(245, 312);
 			this.retractableBarGallery.Content.TabIndex = 1;
 			this.retractableBarGallery.Dock = System.Windows.Forms.DockStyle.Left;
 			this.retractableBarGallery.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -550,7 +608,7 @@
 			this.retractableBarGallery.Location = new System.Drawing.Point(0, 0);
 			this.retractableBarGallery.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.retractableBarGallery.Name = "retractableBarGallery";
-			this.retractableBarGallery.Size = new System.Drawing.Size(249, 382);
+			this.retractableBarGallery.Size = new System.Drawing.Size(249, 356);
 			this.retractableBarGallery.TabIndex = 47;
 			// 
 			// treeViewGallery
@@ -567,7 +625,7 @@
 			this.treeViewGallery.Location = new System.Drawing.Point(0, 0);
 			this.treeViewGallery.Name = "treeViewGallery";
 			this.treeViewGallery.ShowLines = false;
-			this.treeViewGallery.Size = new System.Drawing.Size(245, 338);
+			this.treeViewGallery.Size = new System.Drawing.Size(245, 312);
 			this.treeViewGallery.TabIndex = 0;
 			// 
 			// labelControlSelectedGalleryName
@@ -770,6 +828,321 @@
 			this.toolStripMenuItemImageAddToFavorites.Text = "Add To Favorites";
 			this.toolStripMenuItemImageAddToFavorites.Click += new System.EventHandler(this.toolStripMenuItemImageAddToFavorites_Click);
 			// 
+			// labelControlPadding
+			// 
+			this.labelControlPadding.AllowHtmlString = true;
+			this.labelControlPadding.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.labelControlPadding.Appearance.BackColor = System.Drawing.Color.Transparent;
+			this.labelControlPadding.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.labelControlPadding.AppearanceDisabled.ForeColor = System.Drawing.Color.Gray;
+			this.labelControlPadding.Location = new System.Drawing.Point(12, 418);
+			this.labelControlPadding.Name = "labelControlPadding";
+			this.labelControlPadding.Size = new System.Drawing.Size(53, 16);
+			this.labelControlPadding.StyleController = this.styleController;
+			this.labelControlPadding.TabIndex = 64;
+			this.labelControlPadding.Text = "<b>Padding</b>";
+			this.labelControlPadding.UseMnemonic = false;
+			// 
+			// labelControlPaddingLeft
+			// 
+			this.labelControlPaddingLeft.AllowHtmlString = true;
+			this.labelControlPaddingLeft.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.labelControlPaddingLeft.Appearance.BackColor = System.Drawing.Color.Transparent;
+			this.labelControlPaddingLeft.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.labelControlPaddingLeft.AppearanceDisabled.ForeColor = System.Drawing.Color.Gray;
+			this.labelControlPaddingLeft.Location = new System.Drawing.Point(77, 418);
+			this.labelControlPaddingLeft.Name = "labelControlPaddingLeft";
+			this.labelControlPaddingLeft.Size = new System.Drawing.Size(25, 16);
+			this.labelControlPaddingLeft.StyleController = this.styleController;
+			this.labelControlPaddingLeft.TabIndex = 65;
+			this.labelControlPaddingLeft.Text = "Left:";
+			this.labelControlPaddingLeft.UseMnemonic = false;
+			// 
+			// labelControlPaddingTop
+			// 
+			this.labelControlPaddingTop.AllowHtmlString = true;
+			this.labelControlPaddingTop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.labelControlPaddingTop.Appearance.BackColor = System.Drawing.Color.Transparent;
+			this.labelControlPaddingTop.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.labelControlPaddingTop.AppearanceDisabled.ForeColor = System.Drawing.Color.Gray;
+			this.labelControlPaddingTop.Location = new System.Drawing.Point(77, 455);
+			this.labelControlPaddingTop.Name = "labelControlPaddingTop";
+			this.labelControlPaddingTop.Size = new System.Drawing.Size(25, 16);
+			this.labelControlPaddingTop.StyleController = this.styleController;
+			this.labelControlPaddingTop.TabIndex = 66;
+			this.labelControlPaddingTop.Text = "Top:";
+			this.labelControlPaddingTop.UseMnemonic = false;
+			// 
+			// checkEditImagePaddingLeftNone
+			// 
+			this.checkEditPaddingLeftNone.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.checkEditPaddingLeftNone.Location = new System.Drawing.Point(110, 417);
+			this.checkEditPaddingLeftNone.Name = "checkEditPaddingLeftNone";
+			this.checkEditPaddingLeftNone.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.checkEditPaddingLeftNone.Properties.Appearance.Options.UseForeColor = true;
+			this.checkEditPaddingLeftNone.Properties.Caption = "None";
+			this.checkEditPaddingLeftNone.Properties.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Radio;
+			this.checkEditPaddingLeftNone.Properties.RadioGroupIndex = 2;
+			this.checkEditPaddingLeftNone.Size = new System.Drawing.Size(57, 20);
+			this.checkEditPaddingLeftNone.StyleController = this.styleController;
+			this.checkEditPaddingLeftNone.TabIndex = 80;
+			this.checkEditPaddingLeftNone.TabStop = false;
+			// 
+			// checkEditImagePaddingLeft6
+			// 
+			this.checkEditPaddingLeft6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.checkEditPaddingLeft6.Location = new System.Drawing.Point(213, 417);
+			this.checkEditPaddingLeft6.Name = "checkEditPaddingLeft6";
+			this.checkEditPaddingLeft6.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.checkEditPaddingLeft6.Properties.Appearance.Options.UseForeColor = true;
+			this.checkEditPaddingLeft6.Properties.Caption = "6";
+			this.checkEditPaddingLeft6.Properties.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Radio;
+			this.checkEditPaddingLeft6.Properties.RadioGroupIndex = 2;
+			this.checkEditPaddingLeft6.Size = new System.Drawing.Size(36, 20);
+			this.checkEditPaddingLeft6.StyleController = this.styleController;
+			this.checkEditPaddingLeft6.TabIndex = 78;
+			this.checkEditPaddingLeft6.TabStop = false;
+			// 
+			// checkEditImagePaddingLeft2
+			// 
+			this.checkEditPaddingLeft2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.checkEditPaddingLeft2.Location = new System.Drawing.Point(171, 417);
+			this.checkEditPaddingLeft2.Name = "checkEditPaddingLeft2";
+			this.checkEditPaddingLeft2.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.checkEditPaddingLeft2.Properties.Appearance.Options.UseForeColor = true;
+			this.checkEditPaddingLeft2.Properties.Caption = "2";
+			this.checkEditPaddingLeft2.Properties.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Radio;
+			this.checkEditPaddingLeft2.Properties.RadioGroupIndex = 2;
+			this.checkEditPaddingLeft2.Size = new System.Drawing.Size(36, 20);
+			this.checkEditPaddingLeft2.StyleController = this.styleController;
+			this.checkEditPaddingLeft2.TabIndex = 77;
+			this.checkEditPaddingLeft2.TabStop = false;
+			// 
+			// checkEditImagePaddingLeft10
+			// 
+			this.checkEditPaddingLeft10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.checkEditPaddingLeft10.Location = new System.Drawing.Point(255, 417);
+			this.checkEditPaddingLeft10.Name = "checkEditPaddingLeft10";
+			this.checkEditPaddingLeft10.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.checkEditPaddingLeft10.Properties.Appearance.Options.UseForeColor = true;
+			this.checkEditPaddingLeft10.Properties.Caption = "10";
+			this.checkEditPaddingLeft10.Properties.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Radio;
+			this.checkEditPaddingLeft10.Properties.RadioGroupIndex = 2;
+			this.checkEditPaddingLeft10.Size = new System.Drawing.Size(36, 20);
+			this.checkEditPaddingLeft10.StyleController = this.styleController;
+			this.checkEditPaddingLeft10.TabIndex = 79;
+			this.checkEditPaddingLeft10.TabStop = false;
+			// 
+			// checkEditPaddingTopNone
+			// 
+			this.checkEditPaddingTopNone.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.checkEditPaddingTopNone.Location = new System.Drawing.Point(110, 453);
+			this.checkEditPaddingTopNone.Name = "checkEditPaddingTopNone";
+			this.checkEditPaddingTopNone.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.checkEditPaddingTopNone.Properties.Appearance.Options.UseForeColor = true;
+			this.checkEditPaddingTopNone.Properties.Caption = "None";
+			this.checkEditPaddingTopNone.Properties.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Radio;
+			this.checkEditPaddingTopNone.Properties.RadioGroupIndex = 4;
+			this.checkEditPaddingTopNone.Size = new System.Drawing.Size(57, 20);
+			this.checkEditPaddingTopNone.StyleController = this.styleController;
+			this.checkEditPaddingTopNone.TabIndex = 84;
+			this.checkEditPaddingTopNone.TabStop = false;
+			// 
+			// checkEditPaddingTop10
+			// 
+			this.checkEditPaddingTop10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.checkEditPaddingTop10.Location = new System.Drawing.Point(255, 453);
+			this.checkEditPaddingTop10.Name = "checkEditPaddingTop10";
+			this.checkEditPaddingTop10.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.checkEditPaddingTop10.Properties.Appearance.Options.UseForeColor = true;
+			this.checkEditPaddingTop10.Properties.Caption = "10";
+			this.checkEditPaddingTop10.Properties.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Radio;
+			this.checkEditPaddingTop10.Properties.RadioGroupIndex = 4;
+			this.checkEditPaddingTop10.Size = new System.Drawing.Size(36, 20);
+			this.checkEditPaddingTop10.StyleController = this.styleController;
+			this.checkEditPaddingTop10.TabIndex = 83;
+			this.checkEditPaddingTop10.TabStop = false;
+			// 
+			// checkEditPaddingTop6
+			// 
+			this.checkEditPaddingTop6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.checkEditPaddingTop6.Location = new System.Drawing.Point(213, 453);
+			this.checkEditPaddingTop6.Name = "checkEditPaddingTop6";
+			this.checkEditPaddingTop6.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.checkEditPaddingTop6.Properties.Appearance.Options.UseForeColor = true;
+			this.checkEditPaddingTop6.Properties.Caption = "6";
+			this.checkEditPaddingTop6.Properties.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Radio;
+			this.checkEditPaddingTop6.Properties.RadioGroupIndex = 4;
+			this.checkEditPaddingTop6.Size = new System.Drawing.Size(36, 20);
+			this.checkEditPaddingTop6.StyleController = this.styleController;
+			this.checkEditPaddingTop6.TabIndex = 82;
+			this.checkEditPaddingTop6.TabStop = false;
+			// 
+			// checkEditPaddingTop2
+			// 
+			this.checkEditPaddingTop2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.checkEditPaddingTop2.Location = new System.Drawing.Point(171, 453);
+			this.checkEditPaddingTop2.Name = "checkEditPaddingTop2";
+			this.checkEditPaddingTop2.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.checkEditPaddingTop2.Properties.Appearance.Options.UseForeColor = true;
+			this.checkEditPaddingTop2.Properties.Caption = "2";
+			this.checkEditPaddingTop2.Properties.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Radio;
+			this.checkEditPaddingTop2.Properties.RadioGroupIndex = 4;
+			this.checkEditPaddingTop2.Size = new System.Drawing.Size(36, 20);
+			this.checkEditPaddingTop2.StyleController = this.styleController;
+			this.checkEditPaddingTop2.TabIndex = 81;
+			this.checkEditPaddingTop2.TabStop = false;
+			// 
+			// checkEditPaddingBottomNone
+			// 
+			this.checkEditPaddingBottomNone.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.checkEditPaddingBottomNone.Location = new System.Drawing.Point(372, 453);
+			this.checkEditPaddingBottomNone.Name = "checkEditPaddingBottomNone";
+			this.checkEditPaddingBottomNone.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.checkEditPaddingBottomNone.Properties.Appearance.Options.UseForeColor = true;
+			this.checkEditPaddingBottomNone.Properties.Caption = "None";
+			this.checkEditPaddingBottomNone.Properties.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Radio;
+			this.checkEditPaddingBottomNone.Properties.RadioGroupIndex = 5;
+			this.checkEditPaddingBottomNone.Size = new System.Drawing.Size(57, 20);
+			this.checkEditPaddingBottomNone.StyleController = this.styleController;
+			this.checkEditPaddingBottomNone.TabIndex = 94;
+			this.checkEditPaddingBottomNone.TabStop = false;
+			// 
+			// checkEditPaddingBottom10
+			// 
+			this.checkEditPaddingBottom10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.checkEditPaddingBottom10.Location = new System.Drawing.Point(517, 453);
+			this.checkEditPaddingBottom10.Name = "checkEditPaddingBottom10";
+			this.checkEditPaddingBottom10.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.checkEditPaddingBottom10.Properties.Appearance.Options.UseForeColor = true;
+			this.checkEditPaddingBottom10.Properties.Caption = "10";
+			this.checkEditPaddingBottom10.Properties.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Radio;
+			this.checkEditPaddingBottom10.Properties.RadioGroupIndex = 5;
+			this.checkEditPaddingBottom10.Size = new System.Drawing.Size(36, 20);
+			this.checkEditPaddingBottom10.StyleController = this.styleController;
+			this.checkEditPaddingBottom10.TabIndex = 93;
+			this.checkEditPaddingBottom10.TabStop = false;
+			// 
+			// checkEditPaddingBottom6
+			// 
+			this.checkEditPaddingBottom6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.checkEditPaddingBottom6.Location = new System.Drawing.Point(475, 453);
+			this.checkEditPaddingBottom6.Name = "checkEditPaddingBottom6";
+			this.checkEditPaddingBottom6.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.checkEditPaddingBottom6.Properties.Appearance.Options.UseForeColor = true;
+			this.checkEditPaddingBottom6.Properties.Caption = "6";
+			this.checkEditPaddingBottom6.Properties.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Radio;
+			this.checkEditPaddingBottom6.Properties.RadioGroupIndex = 5;
+			this.checkEditPaddingBottom6.Size = new System.Drawing.Size(36, 20);
+			this.checkEditPaddingBottom6.StyleController = this.styleController;
+			this.checkEditPaddingBottom6.TabIndex = 92;
+			this.checkEditPaddingBottom6.TabStop = false;
+			// 
+			// checkEditPaddingBottom2
+			// 
+			this.checkEditPaddingBottom2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.checkEditPaddingBottom2.Location = new System.Drawing.Point(433, 453);
+			this.checkEditPaddingBottom2.Name = "checkEditPaddingBottom2";
+			this.checkEditPaddingBottom2.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.checkEditPaddingBottom2.Properties.Appearance.Options.UseForeColor = true;
+			this.checkEditPaddingBottom2.Properties.Caption = "2";
+			this.checkEditPaddingBottom2.Properties.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Radio;
+			this.checkEditPaddingBottom2.Properties.RadioGroupIndex = 5;
+			this.checkEditPaddingBottom2.Size = new System.Drawing.Size(36, 20);
+			this.checkEditPaddingBottom2.StyleController = this.styleController;
+			this.checkEditPaddingBottom2.TabIndex = 91;
+			this.checkEditPaddingBottom2.TabStop = false;
+			// 
+			// checkEditPaddingRightNone
+			// 
+			this.checkEditPaddingRightNone.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.checkEditPaddingRightNone.Location = new System.Drawing.Point(372, 417);
+			this.checkEditPaddingRightNone.Name = "checkEditPaddingRightNone";
+			this.checkEditPaddingRightNone.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.checkEditPaddingRightNone.Properties.Appearance.Options.UseForeColor = true;
+			this.checkEditPaddingRightNone.Properties.Caption = "None";
+			this.checkEditPaddingRightNone.Properties.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Radio;
+			this.checkEditPaddingRightNone.Properties.RadioGroupIndex = 3;
+			this.checkEditPaddingRightNone.Size = new System.Drawing.Size(57, 20);
+			this.checkEditPaddingRightNone.StyleController = this.styleController;
+			this.checkEditPaddingRightNone.TabIndex = 90;
+			this.checkEditPaddingRightNone.TabStop = false;
+			// 
+			// checkEditPaddingRight10
+			// 
+			this.checkEditPaddingRight10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.checkEditPaddingRight10.Location = new System.Drawing.Point(517, 417);
+			this.checkEditPaddingRight10.Name = "checkEditPaddingRight10";
+			this.checkEditPaddingRight10.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.checkEditPaddingRight10.Properties.Appearance.Options.UseForeColor = true;
+			this.checkEditPaddingRight10.Properties.Caption = "10";
+			this.checkEditPaddingRight10.Properties.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Radio;
+			this.checkEditPaddingRight10.Properties.RadioGroupIndex = 3;
+			this.checkEditPaddingRight10.Size = new System.Drawing.Size(36, 20);
+			this.checkEditPaddingRight10.StyleController = this.styleController;
+			this.checkEditPaddingRight10.TabIndex = 89;
+			this.checkEditPaddingRight10.TabStop = false;
+			// 
+			// checkEditPaddingRight6
+			// 
+			this.checkEditPaddingRight6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.checkEditPaddingRight6.Location = new System.Drawing.Point(475, 417);
+			this.checkEditPaddingRight6.Name = "checkEditPaddingRight6";
+			this.checkEditPaddingRight6.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.checkEditPaddingRight6.Properties.Appearance.Options.UseForeColor = true;
+			this.checkEditPaddingRight6.Properties.Caption = "6";
+			this.checkEditPaddingRight6.Properties.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Radio;
+			this.checkEditPaddingRight6.Properties.RadioGroupIndex = 3;
+			this.checkEditPaddingRight6.Size = new System.Drawing.Size(36, 20);
+			this.checkEditPaddingRight6.StyleController = this.styleController;
+			this.checkEditPaddingRight6.TabIndex = 88;
+			this.checkEditPaddingRight6.TabStop = false;
+			// 
+			// checkEditPaddingRight2
+			// 
+			this.checkEditPaddingRight2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.checkEditPaddingRight2.Location = new System.Drawing.Point(433, 417);
+			this.checkEditPaddingRight2.Name = "checkEditPaddingRight2";
+			this.checkEditPaddingRight2.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.checkEditPaddingRight2.Properties.Appearance.Options.UseForeColor = true;
+			this.checkEditPaddingRight2.Properties.Caption = "2";
+			this.checkEditPaddingRight2.Properties.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Radio;
+			this.checkEditPaddingRight2.Properties.RadioGroupIndex = 3;
+			this.checkEditPaddingRight2.Size = new System.Drawing.Size(36, 20);
+			this.checkEditPaddingRight2.StyleController = this.styleController;
+			this.checkEditPaddingRight2.TabIndex = 87;
+			this.checkEditPaddingRight2.TabStop = false;
+			// 
+			// labelControlPaddingBottom
+			// 
+			this.labelControlPaddingBottom.AllowHtmlString = true;
+			this.labelControlPaddingBottom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.labelControlPaddingBottom.Appearance.BackColor = System.Drawing.Color.Transparent;
+			this.labelControlPaddingBottom.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.labelControlPaddingBottom.AppearanceDisabled.ForeColor = System.Drawing.Color.Gray;
+			this.labelControlPaddingBottom.Location = new System.Drawing.Point(320, 455);
+			this.labelControlPaddingBottom.Name = "labelControlPaddingBottom";
+			this.labelControlPaddingBottom.Size = new System.Drawing.Size(46, 16);
+			this.labelControlPaddingBottom.StyleController = this.styleController;
+			this.labelControlPaddingBottom.TabIndex = 86;
+			this.labelControlPaddingBottom.Text = "Bottom:";
+			this.labelControlPaddingBottom.UseMnemonic = false;
+			// 
+			// labelControlPaddingRight
+			// 
+			this.labelControlPaddingRight.AllowHtmlString = true;
+			this.labelControlPaddingRight.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.labelControlPaddingRight.Appearance.BackColor = System.Drawing.Color.Transparent;
+			this.labelControlPaddingRight.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.labelControlPaddingRight.AppearanceDisabled.ForeColor = System.Drawing.Color.Gray;
+			this.labelControlPaddingRight.Location = new System.Drawing.Point(320, 418);
+			this.labelControlPaddingRight.Name = "labelControlPaddingRight";
+			this.labelControlPaddingRight.Size = new System.Drawing.Size(34, 16);
+			this.labelControlPaddingRight.StyleController = this.styleController;
+			this.labelControlPaddingRight.TabIndex = 85;
+			this.labelControlPaddingRight.Text = "Right:";
+			this.labelControlPaddingRight.UseMnemonic = false;
+			// 
 			// FormEditLinkBanner
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
@@ -784,6 +1157,7 @@
 			this.Controls.Add(this.buttonXOK);
 			this.DoubleBuffered = true;
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.ForeColor = System.Drawing.Color.Black;
 			this.MinimizeBox = false;
 			this.Name = "FormEditLinkBanner";
 			this.ShowIcon = false;
@@ -819,6 +1193,22 @@
 			((System.ComponentModel.ISupportInitialize)(this.checkEditSaveAsTemplate.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditTextWordWrap.Properties)).EndInit();
 			this.contextMenuStripImage.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.checkEditPaddingLeftNone.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditPaddingLeft6.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditPaddingLeft2.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditPaddingLeft10.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditPaddingTopNone.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditPaddingTop10.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditPaddingTop6.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditPaddingTop2.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditPaddingBottomNone.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditPaddingBottom10.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditPaddingBottom6.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditPaddingBottom2.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditPaddingRightNone.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditPaddingRight10.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditPaddingRight6.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditPaddingRight2.Properties)).EndInit();
 			this.ResumeLayout(false);
 
         }
@@ -866,5 +1256,26 @@
 		public CommonGUI.Common.HtmlColorEdit colorEditInversionColor;
 		private System.Windows.Forms.ContextMenuStrip contextMenuStripImage;
 		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemImageAddToFavorites;
+		private DevExpress.XtraEditors.LabelControl labelControlPadding;
+		private DevExpress.XtraEditors.LabelControl labelControlPaddingTop;
+		private DevExpress.XtraEditors.LabelControl labelControlPaddingLeft;
+		private DevExpress.XtraEditors.CheckEdit checkEditPaddingLeftNone;
+		private DevExpress.XtraEditors.CheckEdit checkEditPaddingLeft6;
+		private DevExpress.XtraEditors.CheckEdit checkEditPaddingLeft2;
+		private DevExpress.XtraEditors.CheckEdit checkEditPaddingLeft10;
+		private DevExpress.XtraEditors.CheckEdit checkEditPaddingBottomNone;
+		private DevExpress.XtraEditors.CheckEdit checkEditPaddingBottom10;
+		private DevExpress.XtraEditors.CheckEdit checkEditPaddingBottom6;
+		private DevExpress.XtraEditors.CheckEdit checkEditPaddingBottom2;
+		private DevExpress.XtraEditors.CheckEdit checkEditPaddingRightNone;
+		private DevExpress.XtraEditors.CheckEdit checkEditPaddingRight10;
+		private DevExpress.XtraEditors.CheckEdit checkEditPaddingRight6;
+		private DevExpress.XtraEditors.CheckEdit checkEditPaddingRight2;
+		private DevExpress.XtraEditors.LabelControl labelControlPaddingBottom;
+		private DevExpress.XtraEditors.LabelControl labelControlPaddingRight;
+		private DevExpress.XtraEditors.CheckEdit checkEditPaddingTopNone;
+		private DevExpress.XtraEditors.CheckEdit checkEditPaddingTop10;
+		private DevExpress.XtraEditors.CheckEdit checkEditPaddingTop6;
+		private DevExpress.XtraEditors.CheckEdit checkEditPaddingTop2;
 	}
 }

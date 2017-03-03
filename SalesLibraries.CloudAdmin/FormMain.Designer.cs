@@ -636,7 +636,6 @@
 			this.buttonItemHomeAddUrl.Name = "buttonItemHomeAddUrl";
 			this.superTooltip.SetSuperTooltip(this.buttonItemHomeAddUrl, new DevComponents.DotNetBar.SuperTooltipInfo("Add a Hyperlink", "", "Create links to websites, files and apps...", null, null, DevComponents.DotNetBar.eTooltipColor.Default, true, false, new System.Drawing.Size(0, 0)));
 			this.buttonItemHomeAddUrl.Text = "Hyperlink";
-			this.buttonItemHomeAddUrl.Click += new System.EventHandler(this.buttonItemHomeAddUrl_Click);
 			// 
 			// ribbonBarHomeLogo
 			// 

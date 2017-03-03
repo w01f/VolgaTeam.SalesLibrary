@@ -264,6 +264,12 @@ namespace SalesLibraries.CloudAdmin.Controllers
 				pageController.Value.ProcessChanges();
 		}
 
+		public void ProcessClose()
+		{
+			ProcessChanges();
+			ProcessManager.Release();
+		}
+
 		public void ActivateApplication()
 		{
 			var mainFormHandle = IntPtr.Zero;

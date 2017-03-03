@@ -7,7 +7,6 @@ namespace SalesLibraries.Common.Objects.SearchTags
 	public class SearchGroup : IEquatable<SearchGroup>
 	{
 		public string Name { get; set; }
-
 		public string Description { get; set; }
 
 		public List<SearchTag> Tags { get; private set; }
