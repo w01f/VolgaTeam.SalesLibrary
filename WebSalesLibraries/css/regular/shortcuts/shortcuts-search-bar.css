@@ -39,12 +39,18 @@
 
 .search-bar-modal .buttons-area
 {
-	margin-top: 30px;
+	margin-top: 10px;
 	text-align: center;
 }
 
-.search-bar-modal .buttons-area .btn
+.search-bar-modal .category-filter-list
 {
-	width: 100px;
+	padding: 5px;
+	border: #bababa 1px solid;
+}
+
+.search-bar-modal .category-list-container
+{
+	border: #bababa 1px solid;
 }
 /*------------------------------------*/

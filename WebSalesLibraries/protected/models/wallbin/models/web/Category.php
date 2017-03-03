@@ -6,6 +6,7 @@
 	 */
 	class Category
 	{
+		public $group;
 		public $category;
 		public $description;
 		public $tag;
@@ -15,6 +16,7 @@
 		public function load($categoryRecord)
 		{
 			$this->id = uniqid();
+			$this->group = $categoryRecord->group;
 			$this->category = $categoryRecord->category;
 			$this->description = $categoryRecord->description;
 			$this->tag = $categoryRecord->tag;

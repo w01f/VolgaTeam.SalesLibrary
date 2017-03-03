@@ -262,7 +262,7 @@
 							formContent: innerContent
 						});
 
-						var categoriesContent = innerContent.find(".tag-list");
+						var categoriesContent = innerContent.find(".category-list");
 						var categories = customSearchData.getCategorySettings();
 						var groupsCount = categoriesContent.find('.group-selector-container').length;
 						if (categories.length > 0)

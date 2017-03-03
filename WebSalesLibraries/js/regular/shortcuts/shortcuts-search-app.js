@@ -245,9 +245,57 @@
 				editSearchConditions('categories',
 					function (content)
 					{
+
+						var categoryFilters = currentSearchConditions.getCategoryFilters();
+						var categoriesFiltersContent = content.find(".category-filter-list");
 						var categories = currentSearchConditions.getCategorySettings();
-						var categoriesPane = content.find('#search-filter-edit-categories');
+						var categoriesPane = content.find('.category-list');
 						var groupsCount = categoriesPane.find('.group-selector-container').length;
+
+						var updateCategoryItemsAccordingFilter = function ()
+						{
+							var allFilterItems = categoriesFiltersContent.find('li');
+							$.each(allFilterItems, function ()
+							{
+								var filterText = $(this).find('a').text();
+								var isSelected = $(this).hasClass('active');
+								var underlinedCategoryItems = categoriesPane.find('.category-item-header[data-category="' + filterText + '"]');
+								$.each(underlinedCategoryItems, function ()
+								{
+									var categoryItem = $(this);
+									if (!isSelected && categoryItem.hasClass('ui-state-active'))
+									{
+										categoryItem.siblings('.checkbox').find('input:checkbox').prop('checked', false);
+										categoryItem.click();
+									}
+									if(isSelected)
+										categoryItem.show();
+									else
+										categoryItem.hide();
+								});
+							});
+						};
+
+						if (categoryFilters.length > 0)
+						{
+							$.each(categoryFilters, function (index, value)
+							{
+								categoriesFiltersContent.find('li:contains("' + value + '")').addClass('active');
+							});
+						}
+						else
+							categoriesFiltersContent.find('li').addClass('active');
+
+						categoriesFiltersContent.find('li').off('click').on('click', function ()
+						{
+							var listItem = $(this);
+							if (listItem.hasClass('active'))
+								listItem.removeClass('active');
+							else
+								listItem.addClass('active');
+
+							updateCategoryItemsAccordingFilter();
+						});
 
 						if (categories.length > 0)
 						{
@@ -279,7 +327,7 @@
 							});
 						}
 
-						categoriesPane.accordion({
+						content.find('.accordion').accordion({
 							heightStyle: "content",
 							active: groupsCount > 1 ? false : 0,
 							collapsible: groupsCount > 1,
@@ -301,8 +349,19 @@
 					},
 					function (content)
 					{
+						var selectedCategoryFilters = [];
+						var categoriesFiltersContent = content.find(".category-filter-list");
+						var allCategoriesFilterItems = categoriesFiltersContent.find('li');
+						var selectedCategoriesFilterItems = categoriesFiltersContent.find('li.active');
+						if (allCategoriesFilterItems.length != selectedCategoriesFilterItems.length)
+							$.each(selectedCategoriesFilterItems, function ()
+							{
+								selectedCategoryFilters.push($(this).find('a').text());
+							});
+						currentSearchConditions.setCategoryFilters(selectedCategoryFilters);
+
 						var categories = [];
-						var categoriesPane = content.find('#search-filter-edit-categories');
+						var categoriesPane = content.find('.category-list');
 						var allCheckBoxes = categoriesPane.find('.tag-selector');
 						var selectedCheckBoxes = categoriesPane.find('.tag-selector-container :checked');
 						if (allCheckBoxes.length != selectedCheckBoxes.length)

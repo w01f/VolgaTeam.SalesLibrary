@@ -126,30 +126,36 @@
 				}
 
 				headerIcon.removeClass('hidden-xs');
-				if (headerOptions.iconHideCondition.extraSmall == true)
-					headerIcon.addClass('hidden-xs');
-				headerIcon.removeClass('hidden-sm');
-				if (headerOptions.iconHideCondition.small == true)
-					headerIcon.addClass('hidden-sm');
-				headerIcon.removeClass('hidden-md');
-				if (headerOptions.iconHideCondition.medium == true)
-					headerIcon.addClass('hidden-md');
-				headerIcon.removeClass('hidden-lg');
-				if (headerOptions.iconHideCondition.large == true)
-					headerIcon.addClass('hidden-lg');
+				if (headerOptions.iconHideCondition)
+				{
+					if (headerOptions.iconHideCondition.extraSmall == true)
+						headerIcon.addClass('hidden-xs');
+					headerIcon.removeClass('hidden-sm');
+					if (headerOptions.iconHideCondition.small == true)
+						headerIcon.addClass('hidden-sm');
+					headerIcon.removeClass('hidden-md');
+					if (headerOptions.iconHideCondition.medium == true)
+						headerIcon.addClass('hidden-md');
+					headerIcon.removeClass('hidden-lg');
+					if (headerOptions.iconHideCondition.large == true)
+						headerIcon.addClass('hidden-lg');
+				}
 
 				headerTitle.removeClass('hidden-xs');
-				if (headerOptions.titleHideCondition.extraSmall == true)
-					headerTitle.addClass('hidden-xs');
-				headerTitle.removeClass('hidden-sm');
-				if (headerOptions.titleHideCondition.small == true)
-					headerTitle.addClass('hidden-sm');
-				headerTitle.removeClass('hidden-md');
-				if (headerOptions.titleHideCondition.medium == true)
-					headerTitle.addClass('hidden-md');
-				headerTitle.removeClass('hidden-lg');
-				if (headerOptions.titleHideCondition.large == true)
-					headerTitle.addClass('hidden-lg');
+				if (headerOptions.titleHideCondition)
+				{
+					if (headerOptions.titleHideCondition.extraSmall == true)
+						headerTitle.addClass('hidden-xs');
+					headerTitle.removeClass('hidden-sm');
+					if (headerOptions.titleHideCondition.small == true)
+						headerTitle.addClass('hidden-sm');
+					headerTitle.removeClass('hidden-md');
+					if (headerOptions.titleHideCondition.medium == true)
+						headerTitle.addClass('hidden-md');
+					headerTitle.removeClass('hidden-lg');
+					if (headerOptions.titleHideCondition.large == true)
+						headerTitle.addClass('hidden-lg');
+				}
 			}
 		};
 

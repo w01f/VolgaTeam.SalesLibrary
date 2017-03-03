@@ -49,11 +49,11 @@
 		</div>
 	</div>
 	<div class="row buttons-area">
-		<div class="col-xs-6">
-			<button class="btn btn-default log-action accept-button" type="button">OK</button>
+		<div class="col-xs-4 col-xs-offset-1">
+			<button class="btn btn-default btn-block log-action accept-button" type="button">OK</button>
 		</div>
-		<div class="col-xs-6">
-			<button class="btn btn-default log-action cancel-button" type="button">Cancel</button>
+		<div class="col-xs-4 col-xs-offset-2">
+			<button class="btn btn-default btn-block log-action cancel-button" type="button">Cancel</button>
 		</div>
 	</div>
 </div>

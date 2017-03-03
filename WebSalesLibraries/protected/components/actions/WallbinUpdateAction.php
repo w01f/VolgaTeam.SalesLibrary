@@ -97,6 +97,7 @@
 			$categoriesPath = Yii::app()->params['appRoot'] . DIRECTORY_SEPARATOR . 'SDSearch.xml';
 			$maxTags = 10;
 			$doTagCount = true;
+			$categoryRecords = array();
 			if (file_exists($categoriesPath))
 			{
 				$categoriesContent = file_get_contents($categoriesPath);
@@ -111,14 +112,16 @@
 					foreach ($queryResult as $node)
 					{
 						/** @var $node DOMElement */
-						$groupName = $node->getAttribute('Name');
+						$groupName = $node->getAttribute('Group');
+						$categoryName = $node->getAttribute('Name');
 						$groupDescription = $node->getAttribute('Description');
 						/** @var $tagNodes DOMElement[] */
 						$tagNodes = $node->getElementsByTagName('Tag');
 						foreach ($tagNodes as $tagNode)
 						{
 							$categoryRecord = new Category();
-							$categoryRecord->category = $groupName;
+							$categoryRecord->group = $groupName;
+							$categoryRecord->category = $categoryName;
 							$categoryRecord->description = $groupDescription;
 							$categoryRecord->tag = trim($tagNode->getAttribute('Value'));
 							$categoryRecords[] = $categoryRecord;
@@ -133,15 +136,10 @@
 				}
 			}
 			CategoryRecord::clearData();
-			if (isset($categoryRecords))
-			{
-				CategoryRecord::loadData($categoryRecords);
-				MetaDataRecord::setData('link-categories', 'last-update', date(Yii::app()->params['sourceDateFormat'], filemtime($categoriesPath)));
-				MetaDataRecord::setData('link-categories', 'max-tags', $maxTags);
-				MetaDataRecord::setData('link-categories', 'tag-count', $doTagCount);
-			}
-			else
-				MetaDataRecord::setData('link-categories', 'last-update', date(Yii::app()->params['sourceDateFormat'], time()));
+			CategoryRecord::loadData($categoryRecords);
+			MetaDataRecord::setData('link-categories', 'last-update', date(Yii::app()->params['sourceDateFormat'], filemtime($categoriesPath)));
+			MetaDataRecord::setData('link-categories', 'max-tags', $maxTags);
+			MetaDataRecord::setData('link-categories', 'tag-count', $doTagCount);
 
 			$superFiltersPath = Yii::app()->params['appRoot'] . DIRECTORY_SEPARATOR . 'superfilter.xml';
 			if (file_exists($superFiltersPath))

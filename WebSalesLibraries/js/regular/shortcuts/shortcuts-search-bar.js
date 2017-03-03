@@ -326,8 +326,56 @@
 						formContent: innerContent
 					});
 
-					var categoriesContent = innerContent.find(".tag-list");
+					var categoryFilters = searchBarConditions.getCategoryFilters();
+					var categoriesFiltersContent = innerContent.find(".category-filter-list");
+					var categoriesContent = innerContent.find(".category-list");
 					var categories = searchBarConditions.getCategorySettings();
+
+					var updateCategoryItemsAccordingFilter = function ()
+					{
+						var allFilterItems = categoriesFiltersContent.find('li');
+						$.each(allFilterItems, function ()
+						{
+							var filterText = $(this).find('a').text();
+							var isSelected = $(this).hasClass('active');
+							var underlinedCategoryItems = categoriesContent.find('.category-item-header[data-category="' + filterText + '"]');
+							$.each(underlinedCategoryItems, function ()
+							{
+								var categoryItem = $(this);
+								if (!isSelected && categoryItem.hasClass('ui-state-active'))
+								{
+									categoryItem.siblings('.checkbox').find('input:checkbox').prop('checked', false);
+									categoryItem.click();
+								}
+								if(isSelected)
+									categoryItem.show();
+								else
+									categoryItem.hide();
+							});
+						});
+					};
+
+					if (categoryFilters.length > 0)
+					{
+						$.each(categoryFilters, function (index, value)
+						{
+							categoriesFiltersContent.find('li:contains("' + value + '")').addClass('active');
+						});
+					}
+					else
+						categoriesFiltersContent.find('li').addClass('active');
+
+					categoriesFiltersContent.find('li').off('click').on('click', function ()
+					{
+						var listItem = $(this);
+						if (listItem.hasClass('active'))
+							listItem.removeClass('active');
+						else
+							listItem.addClass('active');
+
+						updateCategoryItemsAccordingFilter();
+					});
+
 					var groupsCount = categoriesContent.find('.group-selector-container').length;
 					if (categories.length > 0)
 					{
@@ -357,6 +405,8 @@
 								}
 							});
 						});
+
+						updateCategoryItemsAccordingFilter();
 					}
 					categoriesContent.find('.group-selector').off('change').on('change', function ()
 					{
@@ -397,15 +447,15 @@
 
 					innerContent.find('.accept-button').on('click.search-bar', function ()
 					{
-						var selectedSuperFilters = [];
-						var allSuperFilterButtons = superFiltersContent.find('.btn');
-						var selectedSuperFilterButtons = superFiltersContent.find('.btn.active');
-						if (allSuperFilterButtons.length != selectedSuperFilterButtons.length)
-							$.each(selectedSuperFilterButtons, function ()
+						var selectedCategoryFilters = [];
+						var allCategoriesFilterItems = categoriesFiltersContent.find('li');
+						var selectedCategoriesFilterItems = categoriesFiltersContent.find('li.active');
+						if (allCategoriesFilterItems.length != selectedCategoriesFilterItems.length)
+							$.each(selectedCategoriesFilterItems, function ()
 							{
-								selectedSuperFilters.push($(this).text());
+								selectedCategoryFilters.push($(this).find('a').text());
 							});
-						searchBarConditions.setSuperFiltersSettings(selectedSuperFilters);
+						searchBarConditions.setCategoryFilters(selectedCategoryFilters);
 
 						var selectedCategories = [];
 						var allCategoryTagCheckBoxes = categoriesContent.find('.tag-selector');
@@ -433,6 +483,16 @@
 								}
 							});
 						searchBarConditions.setCategorySettings(selectedCategories);
+
+						var selectedSuperFilters = [];
+						var allSuperFilterButtons = superFiltersContent.find('.btn');
+						var selectedSuperFilterButtons = superFiltersContent.find('.btn.active');
+						if (allSuperFilterButtons.length != selectedSuperFilterButtons.length)
+							$.each(selectedSuperFilterButtons, function ()
+							{
+								selectedSuperFilters.push($(this).text());
+							});
+						searchBarConditions.setSuperFiltersSettings(selectedSuperFilters);
 
 						updateSearchButtonState();
 						updateSelectedCategories();
@@ -500,8 +560,8 @@
 				};
 			parameters.shortcutData = parameters.shortcutData != undefined ? parameters.shortcutData : null;
 			parameters.sizeChangedCallback = parameters.sizeChangedCallback != undefined ? parameters.sizeChangedCallback : function ()
-			{
-			};
+				{
+				};
 
 			var parentShortcutData = parameters.shortcutData;
 			var searchBarOptions = new $.SalesPortal.SearchOptions($.parseJSON(searchBar.find('.search-conditions .encoded-object').text()));

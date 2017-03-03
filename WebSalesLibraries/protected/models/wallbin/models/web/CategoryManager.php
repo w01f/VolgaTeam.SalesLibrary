@@ -8,6 +8,10 @@
 	class CategoryManager
 	{
 		public $superFilters;
+
+		/** @var  Category[] */
+		public $tags;
+
 		public $categories;
 		public $groups;
 
@@ -21,13 +25,16 @@
 			if (isset(Yii::app()->request->cookies[$cookieId]->value))
 				$selectedCategories = CJSON::decode(Yii::app()->request->cookies[$cookieId]->value);
 
+			$this->tags = array();
 			$this->categories = array();
+			$this->groups = array();
 			$categoryRecords = CategoryRecord::getData();
 			if (isset($categoryRecords))
 			{
 				foreach ($categoryRecords as $categoryRecord)
 				{
 					$category = new Category();
+					$category->group = $categoryRecord->group;
 					$category->category = $categoryRecord->category;
 					$category->description = $categoryRecord->description;
 					$category->tag = $categoryRecord->tag;
@@ -39,10 +46,12 @@
 								$category->selected = true;
 								break;
 							}
-					$this->categories[] = $category;
+					$this->tags[] = $category;
 
-					if (!(isset($this->groups) && in_array($category->category, $this->groups)))
-						$this->groups[] = $category->category;
+					if (!in_array($category->category, $this->categories))
+						$this->categories[] = $category->category;
+					if (!in_array($category->group, $this->groups))
+						$this->groups[] = $category->group;
 				}
 			}
 			$cookieId = 'selectedSuperFilters' . $selectedTab;
@@ -63,38 +72,43 @@
 
 		/**
 		 * @param $group
-		 * @return array|null
+		 * @return array
 		 */
-		public function getTagsByGroup($group)
+		public function getCategoriesByGroup($group)
 		{
-			if (isset($this->groups) && isset($this->categories))
-			{
-				foreach ($this->categories as $category)
-					if ($category->category == $group)
-						$tags[] = array('tag' => $category->tag, 'selected' => $category->selected);
-				if (isset($tags))
-					return $tags;
-			}
-			return null;
+			$categories = array();
+			foreach ($this->tags as $tagItem)
+				if ($tagItem->group == $group && !in_array($tagItem->category, $categories))
+					$categories[] = $tagItem->category;
+			return $categories;
 		}
 
 		/**
-		 * @param $group
+		 * @param $category
+		 * @return array
+		 */
+		public function getTagsByCategory($category)
+		{
+			$tags = array();
+			foreach ($this->tags as $tagItem)
+				if ($tagItem->category == $category)
+					$tags[] = array('tag' => $tagItem->tag, 'selected' => $tagItem->selected);
+			return $tags;
+		}
+
+		/**
+		 * @param $category
 		 * @return bool
 		 */
-		public function isGroupSelected($group)
+		public function isCategorySelected($category)
 		{
-			if (isset($this->groups) && isset($this->categories))
-			{
-				$groupSelected = true;
-				foreach ($this->categories as $category)
-					if ($category->category == $group && !$category->selected)
-					{
-						$groupSelected = false;
-						break;
-					}
-				return $groupSelected;
-			}
-			return false;
+			$groupSelected = true;
+			foreach ($this->tags as $tagItem)
+				if ($tagItem->category == $category && !$tagItem->selected)
+				{
+					$groupSelected = false;
+					break;
+				}
+			return $groupSelected;
 		}
 	}

@@ -59,7 +59,7 @@
 		{
 			$categoryManager = new \CategoryManager();
 			$categoryManager->loadCategories();
-			return RestResponse::success($categoryManager->categories);
+			return RestResponse::success($categoryManager->tags);
 		}
 
 		/**

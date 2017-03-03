@@ -3,8 +3,8 @@
 
 	/** @var $shortcut SearchAppShortcut */
 
-	$categories = new CategoryManager();
-	$categories->loadCategories();
+	$categoryManager = new CategoryManager();
+	$categoryManager->loadCategories();
 
 	$libraryManager = new LibraryManager();
 	$libraries = $libraryManager->getLibraries();
@@ -95,9 +95,9 @@
 				<div id="search-tab-categories" class="ui-content search-tab-content">
 					<legend>Specific Categories:</legend>
 					<div class="category-group-buttons">
-						<? foreach ($categories->groups as $group): ?>
-							<? $groupCode = hash('md5', $group); ?>
-							<a href="#search-category-group-panel-<? echo $groupCode; ?>" id="search-category-group-toggle-<? echo $groupCode; ?>" class="category-group-button" data-role="button" data-mini="true" data-inline="true" data-ajax="false"><? echo $group; ?></a>
+						<? foreach ($categoryManager->categories as $category): ?>
+							<? $categoryCode = hash('md5', $category); ?>
+							<a href="#search-category-group-panel-<? echo $categoryCode; ?>" id="search-category-group-toggle-<? echo $categoryCode; ?>" class="category-group-button" data-role="button" data-mini="true" data-inline="true" data-ajax="false"><? echo $category; ?></a>
 						<? endforeach; ?>
 					</div>
 				</div>
@@ -109,7 +109,7 @@
 						<? if (Yii::app()->params['search_options']['hide_libraries'] != true): ?>
 							<a href="#search-library-panel" id="search-filter-library-button" class="advanced-filter-button" data-role="button" data-theme="a">Search specific libraries?</a>
 						<? endif; ?>
-						<? if (Yii::app()->params['search_options']['hide_supertag'] != true && isset($categories->superFilters)): ?>
+						<? if (Yii::app()->params['search_options']['hide_supertag'] != true && isset($categoryManager->superFilters)): ?>
 							<a href="#search-super-filter-panel" id="search-super-filter-button" class="advanced-filter-button" data-role="button" data-theme="a">Search for special tags?</a>
 						<? endif; ?>
 					</div>
@@ -146,11 +146,11 @@
         </ul>
 	</div>
 	<? if (Yii::app()->params['search_options']['hide_tag'] != true): ?>
-		<? foreach ($categories->groups as $group): ?>
-			<? $groupCode = hash('md5', $group); ?>
-			<div id="search-category-group-panel-<? echo $groupCode; ?>" class="search-category-group-panel" data-role="panel" data-display="overlay" data-position="right">
+		<? foreach ($categoryManager->categories as $category): ?>
+			<? $categoryCode = hash('md5', $category); ?>
+			<div id="search-category-group-panel-<? echo $categoryCode; ?>" class="search-category-group-panel" data-role="panel" data-display="overlay" data-position="right">
 				<div data-role='header'>
-					<h3><span class="group-name"><? echo $group; ?></span>:</h3>
+					<h3><span class="group-name"><? echo $category; ?></span>:</h3>
 				</div>
 				<div data-role='content'>
 					<div class="ui-grid-a buttons">
@@ -163,7 +163,7 @@
 					</div>
 					<fieldset data-role="controlgroup">
 						<legend>What categories do you want to look for?</legend>
-						<? foreach ($categories->getTagsByGroup($group) as $tag): ?>
+						<? foreach ($categoryManager->getTagsByCategory($category) as $tag): ?>
 							<? $tagCode = hash('md5', $tag['tag']); ?>
 							<label for="search-category-tag-<? echo $tagCode; ?>" class="ios-checkbox ui-icon-ion-checkmark"><? echo $tag['tag']; ?></label>
 							<input type="checkbox" id="search-category-tag-<? echo $tagCode; ?>" class="search-category-tag-toggle">
@@ -176,7 +176,7 @@
 					</div>
 				</div>
 				<div class="service-data">
-					<div class="category-group-code"><? echo $groupCode; ?></div>
+					<div class="category-group-code"><? echo $categoryCode; ?></div>
 				</div>
 			</div>
 		<? endforeach; ?>
@@ -184,10 +184,10 @@
 	<? if (Yii::app()->params['search_options']['hide_libraries'] != true): ?>
 		<div id="search-library-panel" data-role="panel" data-display="overlay" data-position="right">
 			<div data-role='content'>
-				<? foreach ($libraryGroups as $group): ?>
+				<? foreach ($libraryGroups as $category): ?>
 					<fieldset data-role="controlgroup">
-						<legend><? echo $group->name; ?>:</legend>
-						<? foreach ($group->libraries as $library): ?>
+						<legend><? echo $category->name; ?>:</legend>
+						<? foreach ($category->libraries as $library): ?>
 							<label for="search-library-item-<? echo $library->id; ?>" class="ios-checkbox ui-icon-ion-checkmark"><? echo $library->name; ?></label>
 							<input type="checkbox" id="search-library-item-<? echo $library->id; ?>" class="search-filter-library-toggle" value="<? echo $library->id; ?>">
 						<? endforeach; ?>
@@ -201,7 +201,7 @@
 			</div>
 		</div>
 	<? endif; ?>
-	<? if (Yii::app()->params['search_options']['hide_supertag'] != true && isset($categories->superFilters)): ?>
+	<? if (Yii::app()->params['search_options']['hide_supertag'] != true && isset($categoryManager->superFilters)): ?>
 		<div id="search-super-filter-panel" data-role="panel" data-display="overlay" data-position="right">
 			<div data-role='header'>
 				<h3>Super Tags:</h3>
@@ -209,9 +209,9 @@
 			<div data-role='content'>
 				<fieldset data-role="controlgroup">
 					<legend>Search for files with these special tags...</legend>
-					<? $count = count($categories->superFilters); ?>
+					<? $count = count($categoryManager->superFilters); ?>
 					<? for ($i = 0; $i < $count; $i++): ?>
-						<label for="search-super-filter-item-<? echo $i; ?>" class="ios-checkbox ui-icon-ion-checkmark"><? echo $categories->superFilters[$i]->value; ?></label>
+						<label for="search-super-filter-item-<? echo $i; ?>" class="ios-checkbox ui-icon-ion-checkmark"><? echo $categoryManager->superFilters[$i]->value; ?></label>
 						<input type="checkbox" id="search-super-filter-item-<? echo $i; ?>" class="search-super-filter-toggle">
 					<? endfor; ?>
 				</fieldset>

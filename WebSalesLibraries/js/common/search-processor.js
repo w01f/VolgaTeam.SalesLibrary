@@ -180,6 +180,8 @@
 					}
 				},
 
+				categoryFilters:[],
+
 				categories: {
 					items: [],
 					selectedCategoriesDescriptions: function ()
@@ -285,6 +287,17 @@
 			data.fileTypes.showExcel = fileTypeSettings.showExcel;
 			data.fileTypes.showImages = fileTypeSettings.showImages;
 			data.fileTypes.showUrls = fileTypeSettings.showUrls;
+			that.raiseOnChange();
+		};
+
+		this.getCategoryFilters = function ()
+		{
+			return data.categoryFilters;
+		};
+
+		this.setCategoryFilters = function (items)
+		{
+			data.categoryFilters = items;
 			that.raiseOnChange();
 		};
 

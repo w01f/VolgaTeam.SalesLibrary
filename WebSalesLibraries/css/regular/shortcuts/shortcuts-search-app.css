@@ -97,7 +97,18 @@
 	padding-top: 0;
 }
 
-.tag-list .group-selector-container
+.search-filter-editors .category-filter-list
+{
+	padding: 5px;
+	border: #bababa 1px solid;
+}
+
+.search-filter-editors .category-list
+{
+	margin-top: 30px;
+}
+
+.search-filter-editors .category-list .group-selector-container
 {
 	font-weight: bold;
 	padding-left: 5px;

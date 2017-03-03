@@ -3,6 +3,7 @@
 	/**
 	 * Class CategoryRecord
 	 * @property int id
+	 * @property string group
 	 * @property string category
 	 * @property string description
 	 * @property string tag
@@ -27,7 +28,7 @@
 		}
 
 		/**
-		 * @param $categories
+		 * @param \application\models\wallbin\models\web\Category[] $categories
 		 */
 		public static function loadData($categories)
 		{
@@ -36,6 +37,7 @@
 			{
 				$categoryRecord = new CategoryRecord();
 				$categoryRecord->id = $i;
+				$categoryRecord->group = $category->group;
 				$categoryRecord->category = $category->category;
 				$categoryRecord->description = $category->description;
 				$categoryRecord->tag = $category->tag;
