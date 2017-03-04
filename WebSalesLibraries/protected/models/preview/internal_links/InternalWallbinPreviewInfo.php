@@ -5,46 +5,36 @@
 	/**
 	 * Class InternalWallbinPreviewInfo
 	 */
-	class InternalWallbinPreviewInfo
+	class InternalWallbinPreviewInfo extends InternalLibraryContentPreviewInfo
 	{
-		public $internalLinkType;
-
 		public $libraryName;
 		public $pageName;
 		public $libraryId;
 		public $pageId;
-		public $headerIcon;
-		public $showHeaderText;
 		public $pageViewType;
 		public $pageSelectorMode;
-
-		public $navigationPanel;
-
-		/** @var SearchBar */
-		public $searchBar;
 
 		/** @var  WallbinStyle */
 		public $style;
 
 		/**
 		 * @param $linkSettings InternalWallbinLinkSettings
+		 * @param bool $isPhone
 		 */
-		public function __construct($linkSettings)
+		public function __construct($linkSettings, $isPhone)
 		{
-			$this->internalLinkType = $linkSettings->internalLinkType;
+			parent::__construct($linkSettings, $isPhone);
 
 			$this->libraryName = $linkSettings->libraryName;
 			$this->pageName = $linkSettings->pageName;
-			$this->showHeaderText = $linkSettings->showHeaderText;
 
 			$this->pageViewType = 'columns';
 			$this->pageSelectorMode = 'tabs';
 			$this->style = WallbinStyle::createDefault();
-			$this->searchBar = SearchBar::createEmpty();
-			if (!empty($linkSettings->styleSettingsEncoded))
+			if (!empty($this->styleSettingsEncoded))
 			{
 				$styleConfig = new DOMDocument();
-				$styleConfig->loadXML(base64_decode($linkSettings->styleSettingsEncoded));
+				$styleConfig->loadXML($this->styleSettingsEncoded);
 				$xpath = new DomXPath($styleConfig);
 
 				$queryResult = $xpath->query('//Config/PageViewType');
@@ -56,19 +46,8 @@
 				if ($queryResult->length > 0)
 					$this->style = WallbinStyle::fromXml($xpath, $queryResult->item(0));
 
-				$queryResult = $xpath->query('//Config/HeaderIcon');
-				$this->headerIcon = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : $this->headerIcon;
-
-				$queryResult = $xpath->query('//Config/ShowLeftPanel');
-				$showNavigationPanel = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : false;
-				$queryResult = $xpath->query('//Config/LeftPanelID');
-				$navigationPanelId = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
-				if ($showNavigationPanel)
-				{
-					$navigationPanelData = ShortcutsManager::getNavigationPanel($navigationPanelId);
-					$viewPath = \Yii::getPathOfAlias('application.views.regular.shortcuts.navigationPanel') . '/itemsList.php';
-					$this->navigationPanel = \Yii::app()->controller->renderFile($viewPath, array('navigationPanel' => $navigationPanelData), true);
-				}
+				$queryResult = $xpath->query('//Config/Actions/Action');
+				$this->initActions($xpath, $queryResult);
 			}
 
 			$libraryManager = new LibraryManager();
@@ -86,5 +65,31 @@
 				$libraryPageRecord = (object)$libraryPageRecord;
 				$this->pageId = $libraryPageRecord->id;
 			}
+		}
+
+		/**
+		 * @param $actionsByKey array
+		 * @param $xpath DOMXPath
+		 * @param $actionConfigNodes DOMNodeList
+		 */
+		protected function customizeActions($actionsByKey, $xpath, $actionConfigNodes)
+		{
+			parent::customizeActions($actionsByKey, $xpath, $actionConfigNodes);
+			if (array_key_exists('page-select-tabs', $actionsByKey))
+				$actionsByKey['page-select-tabs']->enabled = $actionsByKey['page-select-tabs']->enabled && $this->pageSelectorMode != 'tabs';
+			if (array_key_exists('page-select-combo', $actionsByKey))
+				$actionsByKey['page-select-combo']->enabled = $actionsByKey['page-select-combo']->enabled && $this->pageSelectorMode != 'combo';
+			if (array_key_exists('page-view-columns', $actionsByKey))
+				$actionsByKey['page-view-columns']->enabled = $actionsByKey['page-view-columns']->enabled && $this->pageViewType != 'columns';
+			if (array_key_exists('page-view-accordion', $actionsByKey))
+				$actionsByKey['page-view-accordion']->enabled = $actionsByKey['page-view-accordion']->enabled && $this->pageViewType != 'accordion';
+			if (array_key_exists('page-zoom-in', $actionsByKey))
+				$actionsByKey['page-zoom-in']->enabled = $actionsByKey['page-zoom-in']->enabled && $this->pageViewType == 'columns';
+			if (array_key_exists('page-zoom-out', $actionsByKey))
+				$actionsByKey['page-zoom-out']->enabled = $actionsByKey['page-zoom-out']->enabled && $this->pageViewType == 'columns';
+			if (array_key_exists('show-search', $actionsByKey))
+				$actionsByKey['show-search']->enabled = $actionsByKey['show-search']->enabled && $this->searchBar->configured;
+			if (array_key_exists('hide-search', $actionsByKey))
+				$actionsByKey['hide-search']->enabled = $actionsByKey['hide-search']->enabled && $this->searchBar->configured;
 		}
 	}

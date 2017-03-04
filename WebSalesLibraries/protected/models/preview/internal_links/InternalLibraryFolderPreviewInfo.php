@@ -6,45 +6,35 @@
 	/**
 	 * Class InternalLibraryFolderPreviewInfo
 	 */
-	class InternalLibraryFolderPreviewInfo
+	class InternalLibraryFolderPreviewInfo extends InternalLibraryContentPreviewInfo
 	{
-		public $internalLinkType;
-
 		public $libraryName;
 		public $pageName;
 		public $windowName;
-		public $headerIcon;
-		public $showHeaderText;
 
 		public $windowViewType;
 		public $column;
 		public $linksOnly;
 
-		public $navigationPanel;
-
-		/** @var SearchBar */
-		public $searchBar;
-
 		/**
 		 * @param $linkSettings InternalLibraryFolderLinkSettings
+		 * @param bool $isPhone
 		 */
-		public function __construct($linkSettings)
+		public function __construct($linkSettings, $isPhone)
 		{
-			$this->internalLinkType = $linkSettings->internalLinkType;
+			parent::__construct($linkSettings, $isPhone);
 
 			$this->libraryName = $linkSettings->libraryName;
 			$this->pageName = $linkSettings->pageName;
 			$this->windowName = $linkSettings->windowName;
-			$this->showHeaderText = $linkSettings->showHeaderText;
 
 			$this->column = -1;
 			$this->windowViewType = 'columns';
 			$this->linksOnly = false;
-			$this->searchBar = SearchBar::createEmpty();
-			if (!empty($linkSettings->styleSettingsEncoded))
+			if (!empty($this->styleSettingsEncoded))
 			{
 				$styleConfig = new DOMDocument();
-				$styleConfig->loadXML(base64_decode($linkSettings->styleSettingsEncoded));
+				$styleConfig->loadXML($this->styleSettingsEncoded);
 				$xpath = new DomXPath($styleConfig);
 
 				$queryResult = $xpath->query('//Config/Column');
@@ -54,19 +44,8 @@
 				$queryResult = $xpath->query('//Config/LinksOnly');
 				$this->linksOnly = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : $this->linksOnly;
 
-				$queryResult = $xpath->query('//Config/HeaderIcon');
-				$this->headerIcon = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : $this->headerIcon;
-
-				$queryResult = $xpath->query('//Config/ShowLeftPanel');
-				$showNavigationPanel = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : false;
-				$queryResult = $xpath->query('//Config/LeftPanelID');
-				$navigationPanelId = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
-				if ($showNavigationPanel)
-				{
-					$navigationPanelData = ShortcutsManager::getNavigationPanel($navigationPanelId);
-					$viewPath = \Yii::getPathOfAlias('application.views.regular.shortcuts.navigationPanel') . '/itemsList.php';
-					$this->navigationPanel = \Yii::app()->controller->renderFile($viewPath, array('navigationPanel' => $navigationPanelData), true);
-				}
+				$queryResult = $xpath->query('//Config/Actions/Action');
+				$this->initActions($xpath, $queryResult);
 			}
 		}
 
@@ -89,5 +68,19 @@
 			$folder->load($windowRecord);
 			$folder->loadFiles(true);
 			return $folder;
+		}
+
+		/**
+		 * @param $actionsByKey array
+		 * @param $xpath DOMXPath
+		 * @param $actionConfigNodes DOMNodeList
+		 */
+		protected function customizeActions($actionsByKey, $xpath, $actionConfigNodes)
+		{
+			parent::customizeActions($actionsByKey, $xpath, $actionConfigNodes);
+			if (array_key_exists('show-search', $actionsByKey))
+				$actionsByKey['show-search']->enabled = $actionsByKey['show-search']->enabled && $this->searchBar->configured;
+			if (array_key_exists('hide-search', $actionsByKey))
+				$actionsByKey['hide-search']->enabled = $actionsByKey['hide-search']->enabled && $this->searchBar->configured;
 		}
 	}

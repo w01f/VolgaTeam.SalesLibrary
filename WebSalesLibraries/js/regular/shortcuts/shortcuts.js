@@ -82,7 +82,7 @@
 					break;
 				default :
 					menu.find('.main-site-url').show();
-					$.SalesPortal.ShortcutsHistory.pushState(data, customParameters);
+					$.SalesPortal.HistoryManager.pushShortcut(data, customParameters);
 					$.ajax({
 						type: "POST",
 						url: url,

@@ -77,7 +77,7 @@
 					</td>
 				<? endif; ?>
 				<td class="shortcuts-search-bar-container">
-					<? echo $this->renderPartial('searchBar/bar', array('searchBar' => $searchBar), true); ?>
+					<? echo $this->renderPartial('../shortcuts/searchBar/bar', array('searchBar' => $searchBar), true); ?>
 				</td>
 			</tr>
 		<? endif; ?>

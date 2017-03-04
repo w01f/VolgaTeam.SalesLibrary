@@ -95,6 +95,7 @@
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/base/link-rate.js?' . Yii::app()->params['version'], CClientScript::POS_END);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/base/quiz-manager.js?' . Yii::app()->params['version'], CClientScript::POS_END);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/base/content-manager.js?' . Yii::app()->params['version'], CClientScript::POS_END);
+	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/base/history-manager.js?' . Yii::app()->params['version'], CClientScript::POS_END);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/link-viewer/link-viewer.js?' . Yii::app()->params['version'], CClientScript::POS_END);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/link-viewer/link-viewer-file.js?' . Yii::app()->params['version'], CClientScript::POS_END);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/link-viewer/link-viewer-document.js?' . Yii::app()->params['version'], CClientScript::POS_END);
@@ -125,7 +126,6 @@
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/shortcuts/shortcuts-favorites.js?' . Yii::app()->params['version'], CClientScript::POS_END);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/shortcuts/shortcuts-super-group.js?' . Yii::app()->params['version'], CClientScript::POS_END);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/shortcuts/shortcuts-user-preferences.js?' . Yii::app()->params['version'], CClientScript::POS_END);
-	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/shortcuts/shortcuts-history-manager.js?' . Yii::app()->params['version'], CClientScript::POS_END);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/shortcuts/shortcuts-navigation-panel.js?' . Yii::app()->params['version'], CClientScript::POS_END);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/shortcuts/shortcuts.js?' . Yii::app()->params['version'], CClientScript::POS_END);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/qbuilder/page-list.js?' . Yii::app()->params['version'], CClientScript::POS_END);

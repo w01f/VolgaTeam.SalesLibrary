@@ -4,6 +4,7 @@
 	 */
 	$lastCharFromTagsName = substr(Yii::app()->params['tags']['column_name'], -1);
 	$tagsName = $lastCharFromTagsName == "y" ? substr_replace(Yii::app()->params['tags']['column_name'], "ies", -1) : (Yii::app()->params['tags']['column_name'] . "s");
+	$searchBar->categoryManager->loadCategories();
 ?>
 <div class="sub-search-conditions-pane logger-form" data-log-group="Shortcut Tile" data-log-action="Search Activity">
 	<div class="search-conditions" style="display: none;">

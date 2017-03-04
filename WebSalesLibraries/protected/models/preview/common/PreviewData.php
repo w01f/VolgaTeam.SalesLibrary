@@ -59,7 +59,7 @@
 			$this->fileLogo = sprintf('%s/images/preview/actions/file-logo-unknown.png?%s', Yii::app()->getBaseUrl(true), Yii::app()->params['version']);
 
 			$this->quickLinkUrl = isset($link->extendedProperties->quickLinkUrl) ? $link->extendedProperties->quickLinkUrl : null;
-			$this->quickLinkTitle = 'view '.strtolower($link->extendedProperties->quickLinkTitle);
+			$this->quickLinkTitle = 'view ' . strtolower($link->extendedProperties->quickLinkTitle);
 			switch ($link->extendedProperties->quickLinkTitle)
 			{
 				case "Info":
@@ -119,9 +119,10 @@
 		/**
 		 * @param $link LibraryLink
 		 * @param $isQuickSite boolean
+		 * @param $isPhone boolean
 		 * @return PreviewData
 		 */
-		public static function getInstance($link, $isQuickSite)
+		public static function getInstance($link, $isQuickSite, $isPhone)
 		{
 			$previewData = null;
 			switch ($link->originalFormat)
@@ -173,7 +174,7 @@
 				case 'internal window':
 				case 'internal link':
 				case 'internal shortcut':
-					$previewData = new InternalLinkPreviewData($link);
+					$previewData = new InternalLinkPreviewData($link, $isPhone);
 					break;
 				case 'folder':
 					$previewData = new FolderPreviewData($link);

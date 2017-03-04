@@ -105,6 +105,15 @@
 		}
 
 		/**
+		 * @param $previewInfo InternalLibraryContentPreviewInfo
+		 * @return array[]
+		 */
+		public static function getInternalLinkActions($previewInfo)
+		{
+			return self::getActionsByShortcutType($previewInfo->getShortcutActionsTag());
+		}
+
+		/**
 		 * @param $shortcutType string
 		 * @return array[]
 		 */

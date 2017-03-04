@@ -36,7 +36,7 @@
         }
     </style>
     <div class="shortcuts-search-bar-container">
-		<? echo $this->renderPartial('searchBar/bar', array('searchBar' => $previewInfo->searchBar), true); ?>
+		<? echo $this->renderPartial('../shortcuts/searchBar/bar', array('searchBar' => $previewInfo->searchBar), true); ?>
     </div>
 <? endif; ?>
 <div class='padding'>

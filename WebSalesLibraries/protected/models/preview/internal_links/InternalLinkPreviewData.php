@@ -12,8 +12,9 @@
 
 		/**
 		 * @param $link LibraryLink
+		 * @param $isPhone boolean
 		 */
-		public function __construct($link)
+		public function __construct($link, $isPhone)
 		{
 			parent::__construct($link);
 
@@ -27,17 +28,17 @@
 				case 1:
 					/** @var  $linkSettings InternalWallbinLinkSettings */
 					$this->contentView = 'internalWallbinViewer';
-					$this->previewInfo = new InternalWallbinPreviewInfo($linkSettings);
+					$this->previewInfo = new InternalWallbinPreviewInfo($linkSettings, $isPhone);
 					break;
 				case 2:
 					/** @var  $linkSettings InternalLibraryPageLinkSettings */
 					$this->contentView = 'internalLibraryPageViewer';
-					$this->previewInfo = new InternalLibraryPagePreviewInfo($linkSettings);
+					$this->previewInfo = new InternalLibraryPagePreviewInfo($linkSettings, $isPhone);
 					break;
 				case 3:
 					/** @var  $linkSettings InternalLibraryFolderLinkSettings */
 					$this->contentView = 'internalLibraryFolderViewer';
-					$this->previewInfo = new InternalLibraryFolderPreviewInfo($linkSettings);
+					$this->previewInfo = new InternalLibraryFolderPreviewInfo($linkSettings, $isPhone);
 					break;
 				case 4:
 					/** @var  $linkSettings InternalLibraryObjectLinkSettings */

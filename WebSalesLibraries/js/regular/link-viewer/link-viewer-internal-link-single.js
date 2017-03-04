@@ -15,7 +15,7 @@
 	{
 		$.SalesPortal.MainMenu.init();
 		$.SalesPortal.Content.init();
-		$.SalesPortal.ShortcutsHistory.init();
+		$.SalesPortal.HistoryManager.init();
 		openLink();
 	});
 })(jQuery);

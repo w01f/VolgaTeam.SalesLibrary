@@ -60,7 +60,7 @@
 				if (!justLoaded)
 				{
 					var shortcutData = $('<div>' + carouselData.options.serviceData + '</div>');
-					$.SalesPortal.ShortcutsHistory.pushState(
+					$.SalesPortal.HistoryManager.pushShortcut(
 						shortcutData,
 						{
 							pushHistory: true,

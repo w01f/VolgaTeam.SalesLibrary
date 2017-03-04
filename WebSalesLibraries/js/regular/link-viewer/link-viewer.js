@@ -32,6 +32,7 @@
 					$.SalesPortal.Overlay.hide();
 
 					parameters.viewContainer = dialogData.viewContainer;
+					parameters.data.doNotPushHistory = dialogData.doNotPushHistory;
 					var openedViewer = undefined;
 					if (parameters.data.config.allowPreview)
 					{

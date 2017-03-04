@@ -95,7 +95,7 @@
 			<? if ($previewInfo->searchBar->configured): ?>
                 <tr>
                     <td class="wallbin-header-cell shortcuts-search-bar-container" colspan="2">
-						<? echo $this->renderPartial('searchBar/bar', array('searchBar' => $previewInfo->searchBar), true); ?>
+						<? echo $this->renderPartial('../shortcuts/searchBar/bar', array('searchBar' => $previewInfo->searchBar), true); ?>
                     </td>
                 </tr>
 			<? endif; ?>
@@ -113,7 +113,7 @@
 				<? endif; ?>
 				<? if ($previewInfo->searchBar->configured): ?>
                     <td class="wallbin-header-cell shortcuts-search-bar-container">
-						<? echo $this->renderPartial('searchBar/bar', array('searchBar' => $previewInfo->searchBar), true); ?>
+						<? echo $this->renderPartial('../shortcuts/searchBar/bar', array('searchBar' => $previewInfo->searchBar), true); ?>
                     </td>
 				<? endif; ?>
             </tr>

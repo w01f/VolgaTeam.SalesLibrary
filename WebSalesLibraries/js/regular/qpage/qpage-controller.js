@@ -11,7 +11,7 @@
 			$('#main-menu').find('.main-site-url').hide();
 
 			$.SalesPortal.Content.init();
-			$.SalesPortal.ShortcutsHistory.init();
+			$.SalesPortal.HistoryManager.init();
 			assignLinkEvents($('#page-links-container'));
 			initActionButtons();
 			updateSize();

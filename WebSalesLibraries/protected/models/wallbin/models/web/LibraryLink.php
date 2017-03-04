@@ -371,11 +371,12 @@
 
 		/**
 		 * @param $isQuickSite boolean
+		 * @param $isPhone boolean
 		 * @return \PreviewData
 		 */
-		public function getPreviewData($isQuickSite)
+		public function getPreviewData($isQuickSite, $isPhone)
 		{
-			return \PreviewData::getInstance($this, $isQuickSite);
+			return \PreviewData::getInstance($this, $isQuickSite, $isPhone);
 		}
 
 		/**

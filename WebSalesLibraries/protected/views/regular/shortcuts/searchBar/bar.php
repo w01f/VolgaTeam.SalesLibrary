@@ -7,13 +7,14 @@
 	<?
 	$lastCharFromTagsName = substr(Yii::app()->params['tags']['column_name'], -1);
 	$tagsName = $lastCharFromTagsName == "y" ? substr_replace(Yii::app()->params['tags']['column_name'], "ies", -1) : (Yii::app()->params['tags']['column_name'] . "s");
+	$searchBar->categoryManager->loadCategories();
 	?>
 	<table class="shortcuts-search-bar logger-form open" data-log-group="Shortcut Tile" data-log-action="Search Bar" style="text-align: <? echo $searchBar->alignment; ?>;">
 		<tr>
 			<td>
-				<? $this->renderPartial('searchConditions', array('searchContainer' => $searchBar)); ?>
+				<? $this->renderPartial('../shortcuts/searchConditions', array('searchContainer' => $searchBar)); ?>
 				<div class="tag-condition-selector-wrapper">
-					<? $this->renderPartial('categorySelector', array('categoryManager' => $searchBar->categoryManager), false, true); ?>
+					<? $this->renderPartial('../shortcuts/categorySelector', array('categoryManager' => $searchBar->categoryManager), false, true); ?>
 				</div>
 				<div class="search-bar-actions">
 					<? $this->renderPartial('../menu/actionItems', array('actionContainer' => $searchBar), false, true); ?>

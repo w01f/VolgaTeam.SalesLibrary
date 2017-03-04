@@ -10,54 +10,69 @@
 			switch (viewerData.previewInfo.internalLinkType)
 			{
 				case 1:
+					if (!parameters.data.doNotPushHistory)
+						$.SalesPortal.HistoryManager.pushPreviewLink(
+							viewerData,
+							{
+								linkId: viewerData.linkId,
+								isQuickSite: false
+							});
 					new $.SalesPortal.ShortcutsWallbin().init({
 						content: parameters.content,
+						actions: viewerData.previewInfo.actionsContent,
 						navigationPanel: viewerData.previewInfo.navigationPanel,
 						options: {
 							headerTitle: viewerData.previewInfo.showHeaderText ? viewerData.name : '',
 							headerIcon: viewerData.previewInfo.headerIcon,
+							headerTitleHideCondition: viewerData.previewInfo.hideTextCondition,
+							headerIconHideCondition: viewerData.previewInfo.hideIconCondition,
 							libraryId: viewerData.previewInfo.libraryId,
 							pageSelectorMode: viewerData.previewInfo.pageSelectorMode,
 							pageViewType: viewerData.previewInfo.pageViewType
 						}
 					});
-					$.SalesPortal.ShortcutsHistory.pushState(
-						undefined,
-						{
-							pushHistory: true
-						});
 					break;
 				case 2:
+					if (!parameters.data.doNotPushHistory)
+						$.SalesPortal.HistoryManager.pushPreviewLink(
+							viewerData,
+							{
+								linkId: viewerData.linkId,
+								isQuickSite: false
+							});
 					new $.SalesPortal.ShortcutsLibraryPage().init({
 						content: parameters.content,
+						actions: viewerData.previewInfo.actionsContent,
 						navigationPanel: viewerData.previewInfo.navigationPanel,
 						options: {
 							headerTitle: viewerData.previewInfo.showHeaderText ? viewerData.name : '',
 							headerIcon: viewerData.previewInfo.headerIcon,
+							headerTitleHideCondition: viewerData.previewInfo.hideTextCondition,
+							headerIconHideCondition: viewerData.previewInfo.hideIconCondition,
 							pageViewType: viewerData.previewInfo.pageViewType
 						}
 					});
-					$.SalesPortal.ShortcutsHistory.pushState(
-						undefined,
-						{
-							pushHistory: true
-						});
 					break;
 				case 3:
+					if (!parameters.data.doNotPushHistory)
+						$.SalesPortal.HistoryManager.pushPreviewLink(
+							viewerData,
+							{
+								linkId: viewerData.linkId,
+								isQuickSite: false
+							});
 					new $.SalesPortal.ShortcutsLibraryWindow().init({
 						content: parameters.content,
+						actions: viewerData.previewInfo.actionsContent,
 						navigationPanel: viewerData.previewInfo.navigationPanel,
 						options: {
 							headerTitle: viewerData.previewInfo.showHeaderText ? viewerData.name : '',
 							headerIcon: viewerData.previewInfo.headerIcon,
+							headerTitleHideCondition: viewerData.previewInfo.hideTextCondition,
+							headerIconHideCondition: viewerData.previewInfo.hideIconCondition,
 							windowViewType: viewerData.previewInfo.windowViewType
 						}
 					});
-					$.SalesPortal.ShortcutsHistory.pushState(
-						undefined,
-						{
-							pushHistory: true
-						});
 					break;
 				case 4:
 					if (viewerData.previewInfo.libraryLinkId != null)

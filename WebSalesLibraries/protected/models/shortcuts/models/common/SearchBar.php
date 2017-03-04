@@ -21,7 +21,59 @@
 		public $subSearchDefaultView;
 		public $subConditions;
 
+		/** @var  CategoryManager */
 		public $categoryManager;
+
+
+		public function __construct()
+		{
+			$this->categoryManager = new CategoryManager();
+		}
+
+		/**
+		 * @param $configEncoded string
+		 * @param null string $subSearchTemplatesImagePath
+		 */
+		protected function configureFromXml($configEncoded, $subSearchTemplatesImagePath = null)
+		{
+			$config = new DOMDocument();
+			$config->loadXML($configEncoded);
+			$xpath = new DomXPath($config);
+			$queryResult = $xpath->query('//SearchBar');
+			$this->configured = $queryResult->length > 0;
+			$queryResult = $xpath->query('//SearchBar/Alignment');
+			$this->alignment = $queryResult->length > 0 ? strtolower(trim($queryResult->item(0)->nodeValue)) : 'left';
+			$queryResult = $xpath->query('//SearchBar/Title');
+			$this->title = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : '';
+			$queryResult = $xpath->query('//SearchBar/Defaultlabel');
+			$this->defaultLabel = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : '';
+			$queryResult = $xpath->query('//SearchBar/OpenOnSamePage');
+			$this->samePage = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : true;
+			$queryResult = $xpath->query('//SearchBar/ShowTagsSelector');
+			$this->showTagsSelector = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : true;
+
+			$xpath->query('//Config/SearchCondition');
+			$this->conditions = SearchConditions::fromXml($xpath, $xpath->query('//Config/SearchBar/SearchCondition')->item(0));
+
+			$queryResult = $xpath->query('//SearchBar/EnableSubSearch');
+			$this->enableSubSearch = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : false;
+			$queryResult = $xpath->query('//SearchBar/AllButtonVisible');
+			$this->showSubSearchAll = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : true;
+			$queryResult = $xpath->query('//SearchBar/SearchButtonVisible');
+			$this->showSubSearchSearch = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : true;
+			$queryResult = $xpath->query('//SearchBar/LinksButtonVisible');
+			$this->showSubSearchTemplates = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : true;
+			$queryResult = $xpath->query('//SearchBar/SubSearchDefault');
+			$this->subSearchDefaultView = $queryResult->length > 0 ? strtolower(trim($queryResult->item(0)->nodeValue)) : 'all';
+
+			$subSearchConditions = array();
+			$subSearchConditionNodes = $xpath->query('//Config/SearchBar/SubSearchCondition/Item');
+			foreach ($subSearchConditionNodes as $conditionNode)
+				$subSearchConditions[] = new SubSearchTemplate($xpath, $conditionNode, $subSearchTemplatesImagePath);
+			$sortHelper = new ObjectSortHelper('imageName', 'asc');
+			usort($subSearchConditions, array($sortHelper, 'sort'));
+			$this->subConditions = $subSearchConditions;
+		}
 
 		/**
 		 * @param $shortcut BaseShortcut
@@ -30,50 +82,18 @@
 		public static function fromShortcut($shortcut)
 		{
 			$searchBar = self::createEmpty();
+			$searchBar->configureFromXml($shortcut->linkRecord->config, Yii::app()->getBaseUrl(true) . $shortcut->relativeLink);
+			return $searchBar;
+		}
 
-			$config = new DOMDocument();
-			$config->loadXML($shortcut->linkRecord->config);
-			$xpath = new DomXPath($config);
-			$queryResult = $xpath->query('//SearchBar');
-			$searchBar->configured = $queryResult->length > 0;
-			$queryResult = $xpath->query('//SearchBar/Alignment');
-			$searchBar->alignment = $queryResult->length > 0 ? strtolower(trim($queryResult->item(0)->nodeValue)) : 'left';
-			$queryResult = $xpath->query('//SearchBar/Title');
-			$searchBar->title = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : '';
-			$queryResult = $xpath->query('//SearchBar/Defaultlabel');
-			$searchBar->defaultLabel = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : '';
-			$queryResult = $xpath->query('//SearchBar/OpenOnSamePage');
-			$searchBar->samePage = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : true;
-			$queryResult = $xpath->query('//SearchBar/ShowTagsSelector');
-			$searchBar->showTagsSelector = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : true;
-
-			$xpath->query('//Config/SearchCondition');
-			$searchBar->conditions = SearchConditions::fromXml($xpath, $xpath->query('//Config/SearchBar/SearchCondition')->item(0));
-
-			$queryResult = $xpath->query('//SearchBar/EnableSubSearch');
-			$searchBar->enableSubSearch = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : false;
-			$queryResult = $xpath->query('//SearchBar/AllButtonVisible');
-			$searchBar->showSubSearchAll = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : true;
-			$queryResult = $xpath->query('//SearchBar/SearchButtonVisible');
-			$searchBar->showSubSearchSearch = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : true;
-			$queryResult = $xpath->query('//SearchBar/LinksButtonVisible');
-			$searchBar->showSubSearchTemplates = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : true;
-			$queryResult = $xpath->query('//SearchBar/SubSearchDefault');
-			$searchBar->subSearchDefaultView = $queryResult->length > 0 ? strtolower(trim($queryResult->item(0)->nodeValue)) : 'all';
-
-			$subSearchConditions = array();
-			$subSearchConditionNodes = $xpath->query('//Config/SearchBar/SubSearchCondition/Item');
-			foreach ($subSearchConditionNodes as $conditionNode)
-				$subSearchConditions[] = new SubSearchTemplate($xpath, $conditionNode, Yii::app()->getBaseUrl(true) . $shortcut->relativeLink);
-			foreach ($subSearchConditions as $subSearchCondition)
-				$subSearchCondition->image_path .= '?' . $shortcut->id;
-			$sortHelper = new ObjectSortHelper('imageName', 'asc');
-			usort($subSearchConditions, array($sortHelper, 'sort'));
-			$searchBar->subConditions = $subSearchConditions;
-
-			$searchBar->categoryManager = new CategoryManager();
-			$searchBar->categoryManager->loadCategories();
-
+		/**
+		 * @param $internalLinkInfo InternalLibraryContentPreviewInfo
+		 * @return SearchBar
+		 */
+		public static function fromInternalLink($internalLinkInfo)
+		{
+			$searchBar = self::createEmpty();
+			$searchBar->configureFromXml($internalLinkInfo->styleSettingsEncoded);
 			return $searchBar;
 		}
 

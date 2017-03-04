@@ -33,8 +33,7 @@
 					$library = $libraryManager->getLibraryById($linkRecord->id_library);
 					$link = new LibraryLink(new LibraryFolder(new LibraryPage($library)));
 					$link->load($linkRecord);
-
-					$previewData = $link->getPreviewData($isQuickSite);
+					$previewData = $link->getPreviewData($isQuickSite, $this->isPhone);
 					$content = '';
 					if ($previewData->contentView != '')
 						$content = $this->renderPartial($previewData->contentView, array('data' => $previewData), true);
@@ -63,7 +62,7 @@
 					$link = new LibraryLink(new LibraryFolder(new LibraryPage($library)));
 					$link->load($linkRecord);
 
-					$previewData = $link->getPreviewData(false);
+					$previewData = $link->getPreviewData(false, $this->isPhone);
 
 					$dialogData = array(
 						'format' => $previewData->viewerFormat,
@@ -94,7 +93,7 @@
 					$link = new LibraryLink(new LibraryFolder(new LibraryPage($library)));
 					$link->load($linkRecord);
 
-					$previewData = $link->getPreviewData($isQuickSite);
+					$previewData = $link->getPreviewData($isQuickSite, $this->isPhone);
 
 					$menuData = array(
 						'format' => $previewData->viewerFormat,
@@ -163,7 +162,7 @@
 					$link = new LibraryLink(new LibraryFolder(new LibraryPage($library)));
 					$link->load($linkRecord);
 
-					$previewData = $link->getPreviewData(false);
+					$previewData = $link->getPreviewData(false, $this->isPhone);
 
 					$dialogData = array(
 						'format' => $previewData->viewerFormat,
