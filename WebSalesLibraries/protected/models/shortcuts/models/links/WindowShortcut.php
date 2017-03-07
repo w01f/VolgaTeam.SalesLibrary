@@ -6,7 +6,7 @@
 	/**
 	 * Class WindowShortcut
 	 */
-	class WindowShortcut extends PageContentShortcut implements ISearchBarContainer
+	class WindowShortcut extends PageContentShortcut
 	{
 		public $column;
 		public $windowViewType;
@@ -15,22 +15,17 @@
 		/** @var SearchBar */
 		public $searchBar;
 
-		/**
-		 * @param $linkRecord
-		 * @param $isPhone boolean
-		 */
-		public function __construct($linkRecord, $isPhone)
+		public function loadPageConfig()
 		{
-			$this->linkRecord = $linkRecord;
-			if ($isPhone != true)
+			if ($this->isPhone != true)
 				$this->searchBar = SearchBar::fromShortcut($this);
 			else
 				$this->searchBar = SearchBar::createEmpty();
 
-			parent::__construct($linkRecord, $isPhone);
+			parent::loadPageConfig();
 
 			$linkConfig = new DOMDocument();
-			$linkConfig->loadXML($linkRecord->config);
+			$linkConfig->loadXML($this->linkRecord->config);
 			$xpath = new DomXPath($linkConfig);
 
 			$queryResult = $xpath->query('//Config/Column');

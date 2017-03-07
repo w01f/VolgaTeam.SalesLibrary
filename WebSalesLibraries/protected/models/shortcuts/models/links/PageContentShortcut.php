@@ -3,10 +3,13 @@
 	/**
 	 * Class PageContentShortcut
 	 */
-	abstract class PageContentShortcut extends CustomHandledShortcut
+	abstract class PageContentShortcut extends CustomHandledShortcut implements IShortcutActionContainer
 	{
 		public $headerIcon;
 		public $showMainSiteUrl;
+
+		/** @var  ShortcutAction[] */
+		public $actions;
 
 		public $showNavigationPanel;
 		public $navigationPanelId;
@@ -19,16 +22,10 @@
 		/** @var  HideCondition */
 		public $hideTextCondition;
 
-		/**
-		 * @param $linkRecord
-		 * @param $isPhone boolean
-		 */
-		public function __construct($linkRecord, $isPhone)
+		public function loadPageConfig()
 		{
-			parent::__construct($linkRecord, $isPhone);
-
 			$linkConfig = new DOMDocument();
-			$linkConfig->loadXML($linkRecord->config);
+			$linkConfig->loadXML($this->linkRecord->config);
 			$xpath = new DomXPath($linkConfig);
 
 			$queryResult = $xpath->query('//Config/OpenOnSamePage');
@@ -63,6 +60,55 @@
 
 			$queryResult = $xpath->query('//Config/PublicPassword');
 			$this->publicPassword = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
+
+			$queryResult = $xpath->query('//Config/Actions/Action');
+			$this->initActions($xpath, $queryResult);
+		}
+
+		/**
+		 * @param $xpath DOMXPath
+		 * @param $actionConfigNodes DOMNodeList
+		 */
+		protected function initActions($xpath, $actionConfigNodes)
+		{
+			$actionsByKey = ShortcutAction::getShortcutActions($this);
+			$this->customizeActions($actionsByKey, $xpath, $actionConfigNodes);
+
+			$actions = array();
+			foreach ($actionsByKey as $action)
+			{
+				/** @var $action ShortcutAction */
+				if ($action->enabled == true)
+					$actions[] = $action;
+			}
+			$sortHelper = new ObjectSortHelper('order', 'asc');
+			usort($actions, array($sortHelper, 'sort'));
+			$this->actions = $actions;
+		}
+
+		/**
+		 * @return ShortcutAction[]
+		 */
+		public function getActions()
+		{
+			return $this->actions;
+		}
+
+		/**
+		 * @param $actionsByKey array
+		 * @param $xpath DOMXPath
+		 * @param $actionConfigNodes DOMNodeList
+		 */
+		protected function customizeActions($actionsByKey, $xpath, $actionConfigNodes)
+		{
+			foreach ($actionConfigNodes as $configNode)
+			{
+				$queryResult = $xpath->query('Tag', $configNode);
+				if ($queryResult->length == 0) continue;
+				$tag = trim($queryResult->item(0)->nodeValue);
+				if (array_key_exists($tag, $actionsByKey))
+					ShortcutAction::configureFromXml($actionsByKey[$tag], $xpath, $configNode);
+			}
 		}
 
 		/**

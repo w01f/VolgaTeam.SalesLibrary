@@ -75,6 +75,7 @@
 				$shortcutRecord = ShortcutLinkRecord::model()->findByPk($shortcutId);
 				/** @var  $shortcut WallbinShortcut */
 				$shortcut = $shortcutRecord->getModel($this->isPhone);
+				$shortcut->loadPageConfig();
 				$style = $shortcut->style;
 			}
 

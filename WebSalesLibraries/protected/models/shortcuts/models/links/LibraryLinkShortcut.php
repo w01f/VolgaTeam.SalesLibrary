@@ -3,7 +3,7 @@
 	/**
 	 * Class LibraryLinkShortcut
 	 */
-	class LibraryLinkShortcut extends PageContentShortcut
+	class LibraryLinkShortcut extends CustomHandledShortcut
 	{
 		public $linkId;
 
@@ -56,5 +56,13 @@
 		public function getTypeForActivityTracker()
 		{
 			return 'Libraryfile';
+		}
+
+		/**
+		 * @return string
+		 */
+		public function getSourceLink()
+		{
+			return '#';
 		}
 	}

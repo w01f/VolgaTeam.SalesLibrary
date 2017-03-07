@@ -6,7 +6,7 @@
 	/**
 	 * Class WallbinShortcut
 	 */
-	class WallbinShortcut extends PageContentShortcut implements ISearchBarContainer
+	class WallbinShortcut extends PageContentShortcut
 	{
 		public $libraryName;
 		public $pageSelectorMode;
@@ -27,9 +27,10 @@
 		 */
 		public function __construct($linkRecord, $isPhone)
 		{
-			$this->linkRecord = $linkRecord;
+			parent::__construct($linkRecord, $isPhone);
+
 			$linkConfig = new DOMDocument();
-			$linkConfig->loadXML($linkRecord->config);
+			$linkConfig->loadXML($this->linkRecord->config);
 			$xpath = new DomXPath($linkConfig);
 
 			$queryResult = $xpath->query('//Config/Library');
@@ -38,14 +39,20 @@
 			$this->pageViewType = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : 'columns';
 			$queryResult = $xpath->query('//Config/PageSelectorMode');
 			$this->pageSelectorMode = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : 'columns';
+		}
 
-			if ($isPhone != true)
+		public function loadPageConfig()
+		{
+			if ($this->isPhone != true)
 				$this->searchBar = SearchBar::fromShortcut($this);
 			else
 				$this->searchBar = SearchBar::createEmpty();
 
-			parent::__construct($linkRecord, $isPhone);
+			parent::loadPageConfig();
 
+			$linkConfig = new DOMDocument();
+			$linkConfig->loadXML($this->linkRecord->config);
+			$xpath = new DomXPath($linkConfig);
 			$queryResult = $xpath->query('//Config/WallbinStyle');
 			if ($queryResult->length > 0)
 				$this->style = WallbinStyle::fromXml($xpath, $queryResult->item(0));

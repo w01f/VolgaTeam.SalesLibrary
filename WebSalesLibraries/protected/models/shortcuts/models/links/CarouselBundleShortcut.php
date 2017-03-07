@@ -17,18 +17,23 @@
 		{
 			parent::__construct($linkRecord, $isPhone);
 
+			$this->defaultCategoryIndex = $defaultCategoryIndex;
+
 			$this->type = 'carouselbundle';
 			$this->viewName = $this->isPhone ? 'bundle' : 'carouselBundle';
+		}
 
-			$this->config = $linkRecord->config;
+		public function loadPageConfig()
+		{
+			parent::loadPageConfig();
+
+			$this->config = $this->linkRecord->config;
 			$config = new DOMDocument();
 			$config->loadXML($this->config);
 			$xpath = new DomXPath($config);
 
 			$allowSwitchViewTags = $xpath->query('//Config/TileToggle');
 			$this->allowSwitchView = $allowSwitchViewTags->length > 0 ? filter_var(trim($allowSwitchViewTags->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : false;
-
-			$this->defaultCategoryIndex = $defaultCategoryIndex;
 		}
 
 		/**

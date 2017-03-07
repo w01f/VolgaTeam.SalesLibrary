@@ -3,7 +3,7 @@
 	/**
 	 * Class BaseShortcut
 	 */
-	abstract class BaseShortcut implements IShortcutActionContainer
+	abstract class BaseShortcut
 	{
 		public $id;
 		public $groupId;
@@ -30,8 +30,6 @@
 
 		public $relativePath;
 		public $relativeLink;
-
-		public $actions;
 
 		/** @var $linkRecord ShortcutLinkRecord */
 		public $linkRecord;
@@ -158,9 +156,6 @@
 				}
 			}
 
-			$queryResult = $xpath->query('//Config/Actions/Action');
-			$this->initActions($xpath, $queryResult);
-
 			$this->isPhone = $isPhone;
 		}
 
@@ -237,51 +232,5 @@
 			return isset($this->title) && $this->title != '' ?
 				$this->title :
 				(isset($this->headerTitle) && $this->headerTitle != '' ? $this->headerTitle : $this->description);
-		}
-
-		/**
-		 * @param $xpath DOMXPath
-		 * @param $actionConfigNodes DOMNodeList
-		 */
-		protected function initActions($xpath, $actionConfigNodes)
-		{
-			$actionsByKey = ShortcutAction::getShortcutActions($this);
-			$this->customizeActions($actionsByKey, $xpath, $actionConfigNodes);
-
-			$actions = array();
-			foreach ($actionsByKey as $action)
-			{
-				/** @var $action ShortcutAction */
-				if ($action->enabled == true)
-					$actions[] = $action;
-			}
-			$sortHelper = new ObjectSortHelper('order', 'asc');
-			usort($actions, array($sortHelper, 'sort'));
-			$this->actions = $actions;
-		}
-
-		/**
-		 * @return ShortcutAction[]
-		 */
-		public function getActions()
-		{
-			return $this->actions;
-		}
-
-		/**
-		 * @param $actionsByKey array
-		 * @param $xpath DOMXPath
-		 * @param $actionConfigNodes DOMNodeList
-		 */
-		protected function customizeActions($actionsByKey, $xpath, $actionConfigNodes)
-		{
-			foreach ($actionConfigNodes as $configNode)
-			{
-				$queryResult = $xpath->query('Tag', $configNode);
-				if ($queryResult->length == 0) continue;
-				$tag = trim($queryResult->item(0)->nodeValue);
-				if (array_key_exists($tag, $actionsByKey))
-					ShortcutAction::configureFromXml($actionsByKey[$tag], $xpath, $configNode);
-			}
 		}
 	}

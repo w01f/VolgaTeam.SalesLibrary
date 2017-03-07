@@ -5,6 +5,7 @@
 	 */
 	abstract class ContainerShortcut extends PageContentShortcut implements ISearchBarContainer
 	{
+		/** @var  SearchBar */
 		public $searchBar;
 
 		/**
@@ -12,19 +13,14 @@
 		 */
 		public $links;
 
-		/**
-		 * @param $linkRecord
-		 * @param $isPhone boolean
-		 */
-		public function __construct($linkRecord, $isPhone)
+		public function loadPageConfig()
 		{
-			$this->linkRecord = $linkRecord;
-			if ($isPhone != true)
+			if ($this->isPhone != true)
 				$this->searchBar = SearchBar::fromShortcut($this);
 			else
 				$this->searchBar = SearchBar::createEmpty();
 
-			parent::__construct($linkRecord, $isPhone);
+			parent::loadPageConfig();
 		}
 
 		public function getLinks()

@@ -7,15 +7,12 @@
 	{
 		public $fileLinks;
 
-		/**
-		 * @param $linkRecord
-		 * @param $isPhone boolean
-		 */
-		public function __construct($linkRecord, $isPhone)
+		public function loadPageConfig()
 		{
-			parent::__construct($linkRecord, $isPhone);
+			parent::loadPageConfig();
+
 			$linkConfig = new DOMDocument();
-			$linkConfig->loadXML($linkRecord->config);
+			$linkConfig->loadXML($this->linkRecord->config);
 
 			$baseUrl = Yii::app()->getBaseUrl(true);
 			$quickListPath = $baseUrl . str_replace('\\', '/', $this->relativePath . DIRECTORY_SEPARATOR . 'quicklist' . DIRECTORY_SEPARATOR);

@@ -2,7 +2,7 @@
 	/**
 	 * Class LandingPageShortcut
 	 */
-	class LandingPageShortcut extends ContainerShortcut implements ISearchBarContainer
+	class LandingPageShortcut extends ContainerShortcut
 	{
 		/** @var  \application\models\shortcuts\models\landing_page\regular_markup\MarkupSettings */
 		public $markupSettings;
@@ -10,17 +10,12 @@
 		/** @var  \application\models\shortcuts\models\landing_page\mobile_items\MobileSettings */
 		public $mobileSettings;
 
-		/**
-		 * @param $linkRecord
-		 * @param $isPhone boolean
-		 */
-		public function __construct($linkRecord, $isPhone)
+		public function loadPageConfig()
 		{
-			parent::__construct($linkRecord, $isPhone);
+			parent::loadPageConfig();
 
-			$this->linkRecord = $linkRecord;
 			$linkConfig = new DOMDocument();
-			$linkConfig->loadXML($linkRecord->config);
+			$linkConfig->loadXML($this->linkRecord->config);
 			$xpath = new DomXPath($linkConfig);
 
 			if ($this->isPhone)

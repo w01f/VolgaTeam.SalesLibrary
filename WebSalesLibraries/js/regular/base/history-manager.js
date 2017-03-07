@@ -46,7 +46,7 @@
 			if (pushHistory && customParameters && customParameters.pushHistory)
 			{
 				var currentSate = window.history.state;
-				if (currentSate && currentSate.isShortcut)
+				if (currentSate && currentSate.itemType == HistoryShortcutItem)
 				{
 					var newParameters = currentSate.customParameters;
 					newParameters.scrollPosition = $.SalesPortal.Content.getContentObject().scrollTop();

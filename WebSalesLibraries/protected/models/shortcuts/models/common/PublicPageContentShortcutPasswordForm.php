@@ -36,6 +36,7 @@
 			$shortcutRecord = ShortcutLinkRecord::model()->findByPk($this->shortcutId);
 			/** @var  $shortcut PageContentShortcut */
 			$shortcut = $shortcutRecord->getModel($this->isPhone);
+			$shortcut->loadPageConfig();
 			if (!isset($this->password) || !(isset($this->password) && $this->password == $shortcut->publicPassword))
 				$this->addError('password', 'Incorrect Password');
 		}

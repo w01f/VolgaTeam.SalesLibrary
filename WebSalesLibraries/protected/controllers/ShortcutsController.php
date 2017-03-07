@@ -27,6 +27,7 @@
 			$shortcutRecord = ShortcutLinkRecord::model()->findByPk($shortcutId);
 			/** @var  $shortcut PageContentShortcut */
 			$shortcut = $shortcutRecord->getModel($this->isPhone);
+			$shortcut->loadPageConfig();
 
 			if (UserIdentity::isUserAuthorized() || ($shortcut->allowPublicAccess && !isset($shortcut->publicPassword)))
 				$this->renderSinglePage($shortcut);
@@ -118,6 +119,7 @@
 			$shortcutRecord = ShortcutLinkRecord::model()->findByPk($linkId);
 			/** @var  $shortcut PageContentShortcut */
 			$shortcut = $shortcutRecord->getModel($this->isPhone, $parameters);
+			$shortcut->loadPageConfig();
 
 			switch ($shortcut->type)
 			{
@@ -299,8 +301,9 @@
 			{
 				/** @var $linkRecord ShortcutLinkRecord */
 				$linkRecord = ShortcutLinkRecord::model()->findByPk($linkId);
-				/** @var $searchBarContainer ISearchBarContainer */
+				/** @var $searchBarContainer ContainerShortcut */
 				$searchBarContainer = $linkRecord->getModel($this->isPhone);
+				$searchBarContainer->loadPageConfig();
 				$searchBar = $searchBarContainer->getSearchBar();
 				$this->pageTitle = $searchBar->title;
 				$searchBar->conditions->text = $text;
@@ -335,9 +338,10 @@
 			{
 				/** @var $linkRecord ShortcutLinkRecord */
 				$linkRecord = ShortcutLinkRecord::model()->findByPk($bundleId);
-				/** @var $bundle BundleShortcut */
-				$bundle = $linkRecord->getModel($this->isPhone);
-				$searchBar = $bundle->searchBar;
+				/** @var $searchBarContainer ContainerShortcut */
+				$searchBarContainer = $linkRecord->getModel($this->isPhone);
+				$searchBarContainer->loadPageConfig();
+				$searchBar = $searchBarContainer->searchBar;
 			}
 			else
 			{
@@ -345,6 +349,7 @@
 				$linkRecord = ShortcutLinkRecord::model()->findByPk($linkId);
 				/** @var $searchLink SearchLinkShortcut */
 				$searchLink = $linkRecord->getModel($this->isPhone);
+				$searchLink->loadPageConfig();
 				$searchBar = $searchLink->subSearchBar;
 			}
 			$this->renderPartial('subSearchBar/customSearchPanel', array('searchBar' => $searchBar));
@@ -359,9 +364,10 @@
 			{
 				/** @var $linkRecord ShortcutLinkRecord */
 				$linkRecord = ShortcutLinkRecord::model()->findByPk($bundleId);
-				/** @var $bundle BundleShortcut */
-				$bundle = $linkRecord->getModel($this->isPhone);
-				$templates = $bundle->searchBar->subConditions;
+				/** @var $searchBarContainer ContainerShortcut */
+				$searchBarContainer = $linkRecord->getModel($this->isPhone);
+				$searchBarContainer->loadPageConfig();
+				$templates = $searchBarContainer->searchBar->subConditions;
 				$id = $bundleId;
 			}
 			else
@@ -369,6 +375,7 @@
 				/** @var $linkRecord ShortcutLinkRecord */
 				$linkRecord = ShortcutLinkRecord::model()->findByPk($linkId);
 				$link = new SearchLinkShortcut($linkRecord, $this->isPhone);
+				$link->loadPageConfig();
 				$templates = $link->subConditions;
 				$id = $linkId;
 			}

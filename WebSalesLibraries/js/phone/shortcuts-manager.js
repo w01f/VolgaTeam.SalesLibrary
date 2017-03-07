@@ -124,9 +124,9 @@
 
 							var navigationToggleButton = pageContent.find('.navigation-panel-toggle');
 							var navigationItemsConteiner = pageContent.find('.navigation-items-container');
-							if (result.navigationPanel == '')
+							if (!(result.navigationPanel && result.navigationPanel.content != ''))
 								navigationToggleButton.hide();
-							navigationItemsConteiner.html(result.navigationPanel);
+							navigationItemsConteiner.html(result.navigationPanel.content);
 							$(window).one("pagecontainerchange.navigation-items", function (event, ui)
 							{
 								navigationItemsConteiner.find('.shortcuts-link').off('click').on('click', function (e)

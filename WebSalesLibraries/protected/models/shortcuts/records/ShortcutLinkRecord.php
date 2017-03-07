@@ -79,7 +79,7 @@
 					if (isset($shortcut->library->id))
 					{
 						$needToUpdate = false;
-						$savedPageViewTypeTag = sprintf('PageViewType-%s', $shortcut->library->id);
+						$savedPageViewTypeTag = sprintf('PageViewType-%s', $shortcut->libraryName);
 						if (isset($parameters) && array_key_exists('pageViewType', $parameters))
 						{
 							$shortcut->pageViewType = $parameters['pageViewType'];
@@ -144,8 +144,9 @@
 						return new GridBundleShortcut($this, $isPhone);
 				case 'library':
 					$shortcut = new WallbinShortcut($this, $isPhone);
+
 					$needToUpdate = false;
-					$savedPageViewTypeTag = sprintf('PageViewType-%s', $shortcut->library->id);
+					$savedPageViewTypeTag = sprintf('PageViewType-%s', $shortcut->libraryName);
 					if (isset($parameters) && array_key_exists('pageViewType', $parameters))
 					{
 						$shortcut->pageViewType = $parameters['pageViewType'];
@@ -160,7 +161,7 @@
 						$needToUpdate = true;
 					}
 
-					$savedPageSelectorModeTag = sprintf('PageSelectorMode-%s', $shortcut->library->id);
+					$savedPageSelectorModeTag = sprintf('PageSelectorMode-%s', $shortcut->libraryName);
 					if (isset($parameters) && array_key_exists('pageSelectorMode', $parameters))
 					{
 						$shortcut->pageSelectorMode = $parameters['pageSelectorMode'];

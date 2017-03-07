@@ -16,14 +16,10 @@
 		public $subSearchBar;
 		public $conditionNotMatchLogoPath;
 
-		/**
-		 * @param $linkRecord
-		 * @param $isPhone boolean
-		 */
-		public function __construct($linkRecord, $isPhone)
+		public function loadPageConfig()
 		{
 			$linkConfig = new DOMDocument();
-			$linkConfig->loadXML($linkRecord->config);
+			$linkConfig->loadXML($this->linkRecord->config);
 
 			$enableSubSearchTags = $linkConfig->getElementsByTagName("EnableSubSearch");
 			$this->enableSubSearch = $enableSubSearchTags->length > 0 ? filter_var(trim($enableSubSearchTags->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : false;
@@ -36,14 +32,14 @@
 			$subSearchDefaultViewTags = $linkConfig->getElementsByTagName("SubSearchDefault");
 			$this->subSearchDefaultView = $subSearchDefaultViewTags->length > 0 ? strtolower(trim($subSearchDefaultViewTags->item(0)->nodeValue)) : 'all';
 
-			parent::__construct($linkRecord, $isPhone);
+			parent::loadPageConfig();
 
 			$baseUrl = Yii::app()->getBaseUrl(true);
-			$noCatsCustomImagePath = $linkRecord->source_path . DIRECTORY_SEPARATOR . 'no_cats.png';
+			$noCatsCustomImagePath = $this->linkRecord->source_path . DIRECTORY_SEPARATOR . 'no_cats.png';
 			if (isset($noCatsCustomImagePath) && @getimagesize($noCatsCustomImagePath))
-				$this->conditionNotMatchLogoPath = $baseUrl . str_replace('\\', '/', str_replace(ShortcutsManager::getShortcutsRootPath(), '', $noCatsCustomImagePath)) . '?' . $linkRecord->id_group . $linkRecord->id;
+				$this->conditionNotMatchLogoPath = $baseUrl . str_replace('\\', '/', str_replace(ShortcutsManager::getShortcutsRootPath(), '', $noCatsCustomImagePath)) . '?' . $this->linkRecord->id_group . $this->linkRecord->id;
 			else
-				$this->conditionNotMatchLogoPath = $baseUrl . '/images/shortcuts/no_cats.png' . '?' . $linkRecord->id_group . $linkRecord->id;
+				$this->conditionNotMatchLogoPath = $baseUrl . '/images/shortcuts/no_cats.png' . '?' . $this->linkRecord->id_group . $this->linkRecord->id;
 
 			$xpath = new DomXPath($linkConfig);
 			$this->conditions = SearchConditions::fromXml($xpath, $xpath->query('//Config/SearchCondition')->item(0));
@@ -53,7 +49,7 @@
 			foreach ($subSearchConditionNodes as $conditionNode)
 				$subSearchConditions[] = new SubSearchTemplate($xpath, $conditionNode, $baseUrl . $this->relativeLink);
 			foreach ($subSearchConditions as $subSearchCondition)
-				$subSearchCondition->image_path .= '?' . $linkRecord->id_group . $linkRecord->id;
+				$subSearchCondition->image_path .= '?' . $this->linkRecord->id_group . $this->linkRecord->id;
 			$sortHelper = new ObjectSortHelper('imageName', 'asc');
 			usort($subSearchConditions, array($sortHelper, 'sort'));
 			$this->subConditions = $subSearchConditions;

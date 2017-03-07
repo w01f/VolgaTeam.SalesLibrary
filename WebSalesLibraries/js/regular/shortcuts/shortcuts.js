@@ -101,9 +101,8 @@
 						success: function (result)
 						{
 							openShortcutOnSamePage(result);
-							var scrollPosition = customParameters.scrollPosition;
-							if (scrollPosition)
-								$.SalesPortal.Content.getContentObject().scrollTop(scrollPosition);
+							if (customParameters && customParameters.scrollPosition)
+								$.SalesPortal.Content.getContentObject().scrollTop(customParameters.scrollPosition);
 						},
 						error: function ()
 						{

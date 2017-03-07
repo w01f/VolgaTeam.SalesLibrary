@@ -6,15 +6,6 @@
 	class FavoritesShortcut extends PageContentShortcut
 	{
 		/**
-		 * @param $linkRecord
-		 * @param $isPhone boolean
-		 */
-		public function __construct($linkRecord, $isPhone)
-		{
-			parent::__construct($linkRecord, $isPhone);
-		}
-
-		/**
 		 * @return array
 		 */
 		public function getViewParameters()

@@ -3,7 +3,7 @@
 	/**
 	 * Class BundleShortcut
 	 */
-	abstract class BundleShortcut extends ContainerShortcut implements ISearchBarContainer
+	abstract class BundleShortcut extends ContainerShortcut
 	{
 		public $viewName;
 		public $allowSwitchView;
