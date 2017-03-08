@@ -115,7 +115,7 @@
 		 */
 		public static function isUserAuthorized()
 		{
-			return !Yii::app()->user->isGuest;
+			return !(isset(Yii::app()->user) && Yii::app()->user->isGuest);
 		}
 
 		/**

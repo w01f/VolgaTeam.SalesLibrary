@@ -145,7 +145,7 @@
 				if ($this->isAccessGranted && (count($approvedUsers) > 0 || count($approvedGroups) > 0))
 				{
 					$this->isAccessGranted = false;
-					if (isset($user))
+					if (isset($user) && isset($user->login))
 					{
 						$this->isAccessGranted |= in_array($user->login, $approvedUsers);
 						if (count($userGroups) > 0)

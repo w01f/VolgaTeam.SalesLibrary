@@ -26,7 +26,7 @@
 		var initControls = function ()
 		{
 			searchConditionsPage = $('#search');
-			searchResultsPage = $('#search-results');
+			searchResultsPage = $('#search-results-search');
 
 			$('#search-tab-filters-text').off('input').on('input', function ()
 			{
@@ -195,6 +195,10 @@
 				},
 				function ()
 				{
+					$.mobile.pageContainer.pagecontainer("change", "#search-results-search", {
+						transition: "slidefade"
+					});
+
 					$.mobile.loading('show', {
 						textVisible: false,
 						html: ""
@@ -211,16 +215,12 @@
 				{
 					searchResultsPage.find('.entities-count span').html(data.dataset.length + ' Links');
 
-					$.mobile.pageContainer.pagecontainer("change", "#search-results", {
-						transition: "slidefade"
-					});
-
 					new $.SalesPortal.SearchDataTable(
 						data.dataset,
 						undefined,
 						undefined,
 						{
-							id: '#search-results',
+							id: '#search-results-search',
 							name: 'Search Results'
 						}
 					);

@@ -10,8 +10,13 @@
 		{
 			var searchShortcutOptions = new $.SalesPortal.SearchOptions(shortcutData.options.searchOptions);
 			var shortcutLinkTitle = shortcutData.options.headerTitle;
-			var searchResultsPage = $('#search-results');
+			var pageIdentifier = '#search-results-'+shortcutData.options.linkId;
+			var searchResultsPage = $(pageIdentifier);
 			searchResultsPage.find('.page-header .header-title').html(shortcutLinkTitle);
+
+			$.mobile.pageContainer.pagecontainer("change", pageIdentifier, {
+				transition: "slidefade"
+			});
 
 			$.SalesPortal.SearchHelper.runSearch(
 				{
@@ -36,16 +41,12 @@
 				{
 					searchResultsPage.find('.entities-count span').html(data.dataset.length + ' Links');
 
-					$.mobile.pageContainer.pagecontainer("change", "#search-results", {
-						transition: "slidefade"
-					});
-
 					new $.SalesPortal.SearchDataTable(
 						data.dataset,
 						searchShortcutOptions.conditions.sortColumn,
 						searchShortcutOptions.conditions.sortDirection,
 						{
-							id: '#search-results',
+							id: pageIdentifier,
 							name: shortcutLinkTitle
 						}
 					);

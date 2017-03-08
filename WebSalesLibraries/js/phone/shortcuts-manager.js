@@ -197,7 +197,18 @@
 			if (parentShortcutId == undefined)
 				$('body .shortcut-link-page').remove();
 			else
-				$('body .shortcut-link-page').not(parentShortcutId).remove();
+			{
+				var parentIds = [];
+				var currentParentId = parentShortcutId;
+				while (currentParentId)
+				{
+					parentIds.push(currentParentId);
+					currentParentId = $(currentParentId).find('.back a').prop('href');
+					if (currentParentId)
+						currentParentId = currentParentId.substr(currentParentId.indexOf("#"))
+				}
+				$('body .shortcut-link-page').not(parentIds.join(', ')).remove();
+			}
 		};
 
 		this.trackActivity = function (dataObject)

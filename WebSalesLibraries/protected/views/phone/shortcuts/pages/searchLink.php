@@ -1,8 +1,15 @@
 <?
 	/** @var $shortcut SearchLinkShortcut */
 	if ($shortcut->samePage)
-		$parentId = isset($shortcut->bundleId) ? ('shortcut-link-page-' . $shortcut->bundleId) : 'shortcut-group';
+	{
+		$parentShortcutId = $shortcut->id;
+		$parentPageId = isset($shortcut->bundleId) ? ('shortcut-link-page-' . $shortcut->bundleId) : 'shortcut-group';
+	}
 	else
-		$parentId = null;
-	$this->renderPartial('../search/searchResultPage', array('parentId' => $parentId));
+	{
+		$parentShortcutId = '';
+		$parentPageId = null;
+	}
+
+	$this->renderPartial('../search/searchResultPage', array('parentShortcutId' => $parentShortcutId, 'backPageId' => $parentPageId));
 ?>

@@ -6,13 +6,14 @@
 	{
 		var shortcutData = data;
 		var pageIdentifier = '#shortcut-link-page-' + shortcutData.options.linkId;
-		var contentContainer = $(pageIdentifier).find('.content-data');
+		var bundlePage = $(pageIdentifier);
+		var contentContainer = bundlePage.find('.content-data');
 
 		this.init = function ()
 		{
 			$(window).off("pagecontainerchange.bundle").on("pagecontainerchange.bundle", function (event, ui)
 			{
-				if ((ui.toPage != undefined && ui.options.target == pageIdentifier) || ui.options.target == pageIdentifier)
+				if ((ui.toPage != undefined && ui.toPage.prop('id') == bundlePage.prop('id')) || ui.options.target == bundlePage.prop('id'))
 				{
 					if (contentContainer.find('.cbp-l-grid-masonry').length > 0)
 					{

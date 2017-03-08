@@ -5,9 +5,9 @@
 	$.SalesPortal.SearchDataTable = function (searchResults, sortColumnTag, sortDirection, parentPageData)
 	{
 		var dataset = searchResults;
-		var pageContainer = $('#search-results');
-		var tableContainer = parentPageData.id;
+		var pageContainer = $('.search-results-page.ui-page-active');
 		var contentHeaderContainer = pageContainer.find('.content-header');
+		var tableContainer = undefined;
 
 		var populateTable = function (dataArray, columnTag, direction)
 		{

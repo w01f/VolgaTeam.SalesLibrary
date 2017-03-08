@@ -359,7 +359,7 @@
 		{
 			$bundleId = Yii::app()->request->getPost('bundleId');
 			$linkId = Yii::app()->request->getPost('linkId');
-
+			$templates = array();
 			if (isset($bundleId) && !isset($linkId))
 			{
 				/** @var $linkRecord ShortcutLinkRecord */

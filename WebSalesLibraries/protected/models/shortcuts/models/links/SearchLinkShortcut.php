@@ -12,9 +12,24 @@
 		public $showSubSearchSearch;
 		public $showSubSearchTemplates;
 		public $subSearchDefaultView;
+
+		/** @var  SubSearchTemplate[] */
 		public $subConditions;
+		/** @var  SearchBar */
 		public $subSearchBar;
+
 		public $conditionNotMatchLogoPath;
+
+		/**
+		 * @param $linkRecord
+		 * @param $isPhone boolean
+		 */
+		public function __construct($linkRecord, $isPhone)
+		{
+			parent::__construct($linkRecord, $isPhone);
+			$this->subConditions = array();
+			$this->subSearchBar = SearchBar::createEmpty();
+		}
 
 		public function loadPageConfig()
 		{
