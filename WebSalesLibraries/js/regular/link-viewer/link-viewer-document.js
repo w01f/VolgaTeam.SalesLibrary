@@ -8,7 +8,8 @@
 		var viewerData = new $.SalesPortal.DocumentViewerData(parameters.data);
 		var dialogContent = undefined;
 		var imageViewer = undefined;
-		var imageViewerStartIndex = viewerData.startIndex;
+
+		var imageViewerStartIndex = viewerData.savedState && viewerData.savedState.startIndex ? viewerData.savedState.startIndex : 0;
 
 		this.show = function ()
 		{
@@ -223,16 +224,17 @@
 			$.fancybox(images,
 				{
 					openEffect: 'none',
+					index: imageViewerStartIndex,
 					closeEffect: 'none',
 					tpl: $.SalesPortal.Content.isMobileDevice() ?
-					{
-						next: '<a title="Next" class="fancybox-nav fancybox-next" href="javascript:;"></a>',
-						prev: '<a title="Previous" class="fancybox-nav fancybox-prev" href="javascript:;"></a>'
-					} :
-					{
-						next: '<a title="Next" class="fancybox-nav fancybox-next" href="javascript:;"><span></span></a>',
-						prev: '<a title="Previous" class="fancybox-nav fancybox-prev" href="javascript:;"><span></span></a>'
-					},
+						{
+							next: '<a title="Next" class="fancybox-nav fancybox-next" href="javascript:;"></a>',
+							prev: '<a title="Previous" class="fancybox-nav fancybox-prev" href="javascript:;"></a>'
+						} :
+						{
+							next: '<a title="Next" class="fancybox-nav fancybox-next" href="javascript:;"><span></span></a>',
+							prev: '<a title="Previous" class="fancybox-nav fancybox-prev" href="javascript:;"><span></span></a>'
+						},
 					afterShow: function ()
 					{
 						$.SalesPortal.SalesLibraryExtensions.sendLinkData(viewerData);
@@ -245,7 +247,8 @@
 					onUpdate: function ()
 					{
 						$.SalesPortal.SalesLibraryExtensions.switchDocumentPage(this.index);
-						documentBar.resize();
+						imageViewerStartIndex = this.index;
+							documentBar.resize();
 						if (viewerData.config.enableLogging)
 						{
 							$.SalesPortal.LogHelper.write({
@@ -271,9 +274,9 @@
 			documentBar.show({
 				returnCallback: function ()
 				{
-					viewerData.startIndex = imageViewerStartIndex;
-					parameters.data = viewerData;
-					new $.SalesPortal.DocumentViewer(parameters).show();
+					var parentPreviewParameters = parameters.parentPreviewParameters;
+					parentPreviewParameters.data.savedState = {startIndex: imageViewerStartIndex};
+					$.SalesPortal.LinkManager.openViewerDialog(parentPreviewParameters);
 					if (viewerData.config.enableLogging)
 					{
 						$.SalesPortal.LogHelper.write({

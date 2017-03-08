@@ -50,7 +50,7 @@
 		this.slideWidth = undefined;
 		this.slideHeight = undefined;
 
-		this.startIndex = 0;
+		this.savedState = undefined;
 
 		for (var prop in source)
 			if (source.hasOwnProperty(prop))

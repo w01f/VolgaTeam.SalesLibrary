@@ -211,9 +211,8 @@
 				returnCallback: function ()
 				{
 					$.fancybox.close();
-					viewerData.forcePreview = false;
-					parameters.data = viewerData;
-					new $.SalesPortal.VideoViewer(parameters).show();
+					var parentPreviewParameters = parameters.parentPreviewParameters;
+					$.SalesPortal.LinkManager.openViewerDialog(parentPreviewParameters);
 				}
 			});
 		};

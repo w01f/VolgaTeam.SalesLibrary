@@ -9,6 +9,8 @@
 		/** @var LinkBundlePreviewBaseItem[] */
 		public $bundleItems;
 
+		public $defaultItemId;
+
 		/**
 		 * @param $link LibraryLink
 		 */
@@ -30,7 +32,7 @@
 				$previewItem = LinkBundlePreviewBaseItem::Create($bundleItem);
 				if (!$hasDefault && $previewItem->itemType != 'url')
 				{
-					$previewItem->isDefault = true;
+					$this->defaultItemId = $previewItem->id;
 					$hasDefault = true;
 				}
 				$this->bundleItems[] = $previewItem;

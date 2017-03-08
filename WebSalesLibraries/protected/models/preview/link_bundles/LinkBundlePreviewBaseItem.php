@@ -9,6 +9,7 @@
 	 */
 	abstract class LinkBundlePreviewBaseItem
 	{
+		public $id;
 		public $itemType;
 		public $isDefault;
 
@@ -24,6 +25,7 @@
 		 */
 		public function __construct($bundleItem)
 		{
+			$this->id = uniqid();
 			$this->image = $bundleItem->image;
 			$this->title = $bundleItem->title;
 			$this->hoverTip = $bundleItem->hoverTip;
@@ -35,6 +37,7 @@
 		public function getItemData()
 		{
 			$result = '';
+			$result .= '<div class="item-id">' . $this->id . '</div>';
 			$result .= '<div class="item-type">' . $this->itemType . '</div>';
 			$result .= '<div class="item-title">' . $this->title . '</div>';
 			return $result;

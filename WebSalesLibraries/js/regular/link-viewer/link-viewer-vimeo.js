@@ -169,9 +169,8 @@
 				returnCallback: function ()
 				{
 					$.fancybox.close();
-					viewerData.forcePreview = false;
-					parameters.data = viewerData;
-					new $.SalesPortal.VimeoViewer(parameters).show();
+					var parentPreviewParameters = parameters.parentPreviewParameters;
+					$.SalesPortal.LinkManager.openViewerDialog(parentPreviewParameters);
 				}
 			});
 		};

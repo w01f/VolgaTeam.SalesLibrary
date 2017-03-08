@@ -6,13 +6,15 @@
 	{
 		var that = this;
 
-		this.requestViewDialog = function (dialogData)
+		this.requestViewDialog = function (requestData)
 		{
-			if (dialogData == undefined)
-				dialogData = {
+			if (requestData == undefined)
+				requestData = {
 					linkId: undefined,
 					isQuickSite: undefined,
 					viewContainer: undefined,
+					parentPreviewParameters: undefined,
+					savedState: undefined,
 					afterViewerOpenedCallback: undefined
 				};
 			that.cleanupContextMenu();
@@ -20,8 +22,8 @@
 				type: "POST",
 				url: window.BaseUrl + "preview/getViewDialog",
 				data: {
-					linkId: dialogData.linkId,
-					isQuickSite: dialogData.isQuickSite
+					linkId: requestData.linkId,
+					isQuickSite: requestData.isQuickSite
 				},
 				beforeSend: function ()
 				{
@@ -31,79 +33,23 @@
 				{
 					$.SalesPortal.Overlay.hide();
 
-					parameters.viewContainer = dialogData.viewContainer;
-					parameters.data.doNotPushHistory = dialogData.doNotPushHistory;
-					var openedViewer = undefined;
-					if (parameters.data.config.allowPreview)
-					{
-						if (parameters.data.config.enableLogging)
-							$.SalesPortal.LogHelper.write({
-								type: 'Link',
-								subType: 'Preview Options',
-								linkId: parameters.data.linkId,
-								data: {
-									name: parameters.data.name,
-									file: parameters.data.fileName,
-									originalFormat: parameters.format
-								}
-							});
-						switch (parameters.format)
-						{
-							case 'document':
-								openedViewer = new $.SalesPortal.DocumentViewer(parameters).show();
-								break;
-							case 'video':
-								openedViewer = new $.SalesPortal.VideoViewer(parameters).show();
-								break;
-							case 'youtube':
-								openedViewer = new $.SalesPortal.YouTubeViewer(parameters).show();
-								break;
-							case 'vimeo':
-								openedViewer = new $.SalesPortal.VimeoViewer(parameters).show();
-								break;
-							case 'lan':
-								openedViewer = new $.SalesPortal.LanViewer(parameters).show();
-								break;
-							case 'app':
-								openedViewer = new $.SalesPortal.AppLinkViewer(parameters).show();
-								break;
-							case 'internal':
-								openedViewer = new $.SalesPortal.InternalLinkViewer(parameters).show();
-								break;
-							case 'image':
-								openedViewer = new $.SalesPortal.ImageViewer(parameters).show();
-								break;
-							case 'link bundle':
-								openedViewer = new $.SalesPortal.LinkBundleViewer(parameters).show();
-								break;
-							default :
-								openedViewer = new $.SalesPortal.FileViewer(parameters).show();
-								break;
-						}
-					}
-					else
-					{
-						var modalDialog = new $.SalesPortal.ModalDialog({
-							title: '<span class="text-danger">Sorry...</span>',
-							description: 'You are not authorized to view this link.',
-							buttons: [
-								{
-									tag: 'close',
-									title: 'Close',
-									width: 80,
-									clickHandler: function ()
-									{
-										modalDialog.close();
-									}
-								}
-							],
-							closeOnOutsideClick: true
-						});
-						modalDialog.show();
-					}
+					var previewParameters = parameters;
+					previewParameters.viewContainer = requestData.viewContainer;
+					previewParameters.afterViewerOpenedCallback = requestData.afterViewerOpenedCallback;
 
-					if (dialogData.afterViewerOpenedCallback != undefined)
-						dialogData.afterViewerOpenedCallback(openedViewer);
+					previewParameters.data.doNotPushHistory = requestData.doNotPushHistory;
+
+					if (requestData.parentPreviewParameters)
+						previewParameters.parentPreviewParameters = requestData.parentPreviewParameters;
+					else
+						previewParameters.parentPreviewParameters = previewParameters;
+
+					if (requestData.parentPreviewParameters && requestData.parentPreviewParameters.data && requestData.parentPreviewParameters.data.savedState)
+						previewParameters.data.savedState = requestData.parentPreviewParameters.data.savedState;
+					else
+						previewParameters.data.savedState = requestData.savedState;
+
+					that.openViewerDialog(previewParameters)
 				},
 				error: function ()
 				{
@@ -111,6 +57,81 @@
 				async: true,
 				dataType: 'json'
 			});
+		};
+
+		this.openViewerDialog = function (previewParameters)
+		{
+			var openedViewer = undefined;
+			if (previewParameters.data.config.allowPreview)
+			{
+				if (previewParameters.data.config.enableLogging)
+					$.SalesPortal.LogHelper.write({
+						type: 'Link',
+						subType: 'Preview Options',
+						linkId: previewParameters.data.linkId,
+						data: {
+							name: previewParameters.data.name,
+							file: previewParameters.data.fileName,
+							originalFormat: previewParameters.format
+						}
+					});
+				switch (previewParameters.format)
+				{
+					case 'document':
+						openedViewer = new $.SalesPortal.DocumentViewer(previewParameters).show();
+						break;
+					case 'video':
+						openedViewer = new $.SalesPortal.VideoViewer(previewParameters).show();
+						break;
+					case 'youtube':
+						openedViewer = new $.SalesPortal.YouTubeViewer(previewParameters).show();
+						break;
+					case 'vimeo':
+						openedViewer = new $.SalesPortal.VimeoViewer(previewParameters).show();
+						break;
+					case 'lan':
+						openedViewer = new $.SalesPortal.LanViewer(previewParameters).show();
+						break;
+					case 'app':
+						openedViewer = new $.SalesPortal.AppLinkViewer(previewParameters).show();
+						break;
+					case 'internal':
+						openedViewer = new $.SalesPortal.InternalLinkViewer(previewParameters).show();
+						break;
+					case 'image':
+						openedViewer = new $.SalesPortal.ImageViewer(previewParameters).show();
+						break;
+					case 'link bundle':
+						openedViewer = new $.SalesPortal.LinkBundleViewer(previewParameters).show();
+						break;
+					default :
+						openedViewer = new $.SalesPortal.FileViewer(previewParameters).show();
+						break;
+				}
+			}
+			else
+			{
+				var modalDialog = new $.SalesPortal.ModalDialog({
+					title: '<span class="text-danger">Sorry...</span>',
+					description: 'You are not authorized to view this link.',
+					buttons: [
+						{
+							tag: 'close',
+							title: 'Close',
+							width: 80,
+							clickHandler: function ()
+							{
+								modalDialog.close();
+							}
+						}
+					],
+					closeOnOutsideClick: true
+				});
+				modalDialog.show();
+			}
+
+			if (previewParameters.afterViewerOpenedCallback != undefined)
+				previewParameters.afterViewerOpenedCallback(openedViewer);
 		};
 
 		this.requestLinkContextMenu = function (linkId, isQuickSite, pointX, pointY)

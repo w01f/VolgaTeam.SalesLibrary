@@ -5,7 +5,6 @@
 	$.SalesPortal.LinkBundleViewer = function (parameters)
 	{
 		var that = this;
-		var viewerData = new $.SalesPortal.LanViewerData(parameters.data);
 		var dialogContent = undefined;
 		var openedViewer = undefined;
 
@@ -27,9 +26,12 @@
 			dialogContent = $('.bundle-container');
 
 			dialogContent.find('.content-item').off('click.preview').on('click.preview', processBundleItem);
-			var defaultItem = dialogContent.find('.content-item.default');
+
+			var defaultItemId = parameters.data.defaultItemId;
+			var defaultItem = dialogContent.find('#bundle-item-' + defaultItemId);
 			defaultItem.find('a').addClass('selected');
 			var defaultItemData = defaultItem.find('.service-data');
+
 			openBundleItem(defaultItemData);
 		};
 
@@ -50,6 +52,8 @@
 		{
 			releaseOpenedBundleItem();
 
+			parameters.data.defaultItemId = itemData.find('.item-id').text();
+
 			var itemType = itemData.find('.item-type').text();
 			var itemTitle = itemData.find('.item-title').text();
 			var fancyBoxTitleArea = $('.fancybox-title .child');
@@ -68,6 +72,7 @@
 						linkId: libraryLinkId,
 						isQuickSite: false,
 						viewContainer: dialogContent.find('.link-viewer-container'),
+						parentPreviewParameters: parameters,
 						afterViewerOpenedCallback: function (viewer)
 						{
 							openedViewer = viewer;
