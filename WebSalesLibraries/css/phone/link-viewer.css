@@ -65,3 +65,28 @@
 }
 
 /*------------------------------------*/
+
+/*Link Bundle------------------------------------*/
+#link-bundle-viewer .main-content.link-bundle-content .content-header .title.gray
+{
+	font-size: 1em;
+}
+
+
+#link-bundle-viewer .main-content.link-bundle-content
+{
+	text-align: left;
+}
+
+#link-bundle-viewer .main-content.link-bundle-content .link-bundle-section
+{
+	margin-top: 20px;
+	padding-left: 10px;
+}
+
+#link-bundle-viewer .main-content.link-bundle-content .link-bundle-section .link-bundle-item
+{
+	margin-bottom: 20px;
+}
+
+/*------------------------------------*/

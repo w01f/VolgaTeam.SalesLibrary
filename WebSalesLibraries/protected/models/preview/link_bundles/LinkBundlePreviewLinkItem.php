@@ -6,6 +6,7 @@
 	class LinkBundlePreviewLinkItem extends LinkBundlePreviewBaseItem
 	{
 		public $libraryLinkId;
+		public $libraryLinkFormat;
 
 		/**
 		 * @param $bundleItem LibraryLinkBundleItem
@@ -17,6 +18,12 @@
 			$this->hasContent = true;
 			$this->contentView = 'linkBundleLinkContent';
 			$this->libraryLinkId = $bundleItem->libraryLinkId;
+			if (isset($this->libraryLinkId))
+			{
+				$linkRecord = LinkRecord::getLinkById($this->libraryLinkId);
+				if (isset($linkRecord))
+					$this->libraryLinkFormat = $linkRecord->original_format;
+			}
 		}
 
 		/**

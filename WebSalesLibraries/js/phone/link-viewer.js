@@ -34,6 +34,9 @@
 						case 'document':
 							new $.SalesPortal.DocumentViewer(parameters, parentPageData).show();
 							break;
+						case 'link bundle':
+							new $.SalesPortal.LinkBundleViewer(parameters, parentPageData).show();
+							break;
 						default :
 							new $.SalesPortal.FileViewer(parameters, parentPageData).show();
 							break;
