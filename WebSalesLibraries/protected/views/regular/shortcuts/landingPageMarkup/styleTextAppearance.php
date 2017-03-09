@@ -12,7 +12,7 @@
         text-align: <? echo $textAppearance->alignment; ?> !important;
 	<? endif; ?>
 	<? if (isset($textAppearance->font)): ?>
-        font-family: <? echo $textAppearance->font->name; ?> !important;
+        font-family: <? echo FontReplacementHelper::replaceFont($textAppearance->font->name); ?> !important;
         font-size: <? echo $textAppearance->font->size; ?>pt !important;
         font-weight: <? echo $textAppearance->font->isBold ? 'bold' : 'normal'; ?> !important;
         font-style: <? echo $textAppearance->font->isItalic ? 'italic' : 'normal'; ?> !important;

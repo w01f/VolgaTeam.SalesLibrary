@@ -56,7 +56,7 @@
 				url: window.BaseUrl + "shortcuts/confirmSearchBarSearch",
 				beforeSend: function ()
 				{
-					$.SalesPortal.Overlay.show(false);
+					$.SalesPortal.Overlay.show();
 				},
 				complete: function ()
 				{
@@ -239,7 +239,7 @@
 				url: window.BaseUrl + "shortcuts/editSearchBarSettings",
 				beforeSend: function ()
 				{
-					$.SalesPortal.Overlay.show(false);
+					$.SalesPortal.Overlay.show();
 				},
 				complete: function ()
 				{

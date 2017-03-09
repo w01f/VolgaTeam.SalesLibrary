@@ -16,7 +16,7 @@
 		<span class="<?echo $wrapText ?
 			'banner-text-link-wrap' :
 			'banner-text-link-no-wrap';?>"
-		      style="font-family: <? echo $banner->font->name; ?>,serif;
+		      style="font-family: <? echo FontReplacementHelper::replaceFont($banner->font->name); ?>,serif;
 				  font-size: <? echo $banner->font->size; ?>pt;
 				  font-weight: <? echo $banner->font->isBold ? ' bold' : ' normal'; ?>;
 				  font-style: <? echo $banner->font->isItalic ? ' italic' : ' normal'; ?>;

@@ -32,7 +32,7 @@
                             <div class="col-xs-<? echo $mainColumnSize; ?>">
                                 <div style="color: <? echo $itemData->headerForeColor; ?>;
                                         <? if ($itemData->headerBackColor !== '#FFFFFF'): ?>background-color: <? echo $itemData->headerBackColor; ?>;<? endif; ?>
-                                        font-family: <? echo $itemData->headerFont->name; ?>;
+                                        font-family: <? echo FontReplacementHelper::replaceFont($itemData->headerFont->name); ?>;
                                         font-size: <? echo $itemData->headerFont->size; ?>pt;
                                         font-weight: <? echo $itemData->headerFont->isBold ? 'bold' : 'normal'; ?>;
                                         font-style: <? echo $itemData->headerFont->isItalic ? 'italic' : 'normal'; ?>;
@@ -55,7 +55,7 @@
                         <div class="col-xs-<? echo $mainColumnSize; ?> col-xs-offset-<? echo $offset; ?>">
                             <div style="color: <? echo $itemData->footerForeColor; ?>;
                                     <? if ($itemData->footerBackColor !== '#FFFFFF'): ?>background-color: <? echo $itemData->footerBackColor; ?>;<? endif; ?>
-                                    font-family: <? echo $itemData->footerFont->name; ?>;
+                                    font-family: <? echo FontReplacementHelper::replaceFont($itemData->footerFont->name); ?>;
                                     font-size: <? echo $itemData->footerFont->size; ?>pt;
                                     font-weight: <? echo $itemData->footerFont->isBold ? 'bold' : 'normal'; ?>;
                                     font-style: <? echo $itemData->footerFont->isItalic ? 'italic' : 'normal'; ?>;

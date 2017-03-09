@@ -39,7 +39,7 @@
 				data: {},
 				beforeSend: function ()
 				{
-					$.SalesPortal.Overlay.show(false);
+					$.SalesPortal.Overlay.show();
 				},
 				complete: function ()
 				{
@@ -87,7 +87,7 @@
 				},
 				beforeSend: function ()
 				{
-					$.SalesPortal.Overlay.show(false);
+					$.SalesPortal.Overlay.show();
 				},
 				complete: function ()
 				{
@@ -146,7 +146,7 @@
 				},
 				beforeSend: function ()
 				{
-					$.SalesPortal.Overlay.show(false);
+					$.SalesPortal.Overlay.show();
 				},
 				complete: function ()
 				{
@@ -265,7 +265,7 @@
 				data: {},
 				beforeSend: function ()
 				{
-					$.SalesPortal.Overlay.show(false);
+					$.SalesPortal.Overlay.show();
 				},
 				complete: function ()
 				{
@@ -303,7 +303,7 @@
 								},
 								beforeSend: function ()
 								{
-									$.SalesPortal.Overlay.show(false);
+									$.SalesPortal.Overlay.show();
 								},
 								complete: function ()
 								{
@@ -346,7 +346,7 @@
 				},
 				beforeSend: function ()
 				{
-					$.SalesPortal.Overlay.show(false);
+					$.SalesPortal.Overlay.show();
 				},
 				complete: function ()
 				{

@@ -497,7 +497,7 @@
 				},
 				function ()
 				{
-					$.SalesPortal.Overlay.show(false);
+					$.SalesPortal.Overlay.show();
 				},
 				function ()
 				{
@@ -522,7 +522,7 @@
 				},
 				beforeSend: function ()
 				{
-					$.SalesPortal.Overlay.show(false);
+					$.SalesPortal.Overlay.show();
 				},
 				complete: function ()
 				{

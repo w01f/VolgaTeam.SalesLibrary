@@ -92,6 +92,16 @@
 						'style' => $style->page
 					));
 			}
+			else if ($this->isIOSDevice)
+			{
+				$selectedPage->loadData();
+				$selectedPage->loadFolders(true);
+				$this->renderPartial('../wallbin/columnsView',
+					array(
+						'libraryPage' => $selectedPage,
+						'style' => \application\models\wallbin\models\web\style\WallbinStyle::createDefault()
+					));
+			}
 			else
 				echo $selectedPage->getCache();
 		}

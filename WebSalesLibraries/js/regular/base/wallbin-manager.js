@@ -200,7 +200,7 @@
 						},
 						beforeSend: function ()
 						{
-							$.SalesPortal.Overlay.show(false);
+							$.SalesPortal.Overlay.show();
 							folderLinkContent.html('');
 						},
 						complete: function ()
@@ -257,7 +257,7 @@
 				},
 				beforeSend: function ()
 				{
-					$.SalesPortal.Overlay.show(false);
+					$.SalesPortal.Overlay.show();
 				},
 				complete: function ()
 				{
@@ -342,7 +342,7 @@
 					},
 					beforeSend: function ()
 					{
-						$.SalesPortal.Overlay.show(false);
+						$.SalesPortal.Overlay.show();
 						folderLinks.html('');
 					},
 					complete: function ()

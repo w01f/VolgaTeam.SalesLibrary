@@ -58,7 +58,7 @@
 				},
 				function ()
 				{
-					$.SalesPortal.Overlay.show(false);
+					$.SalesPortal.Overlay.show();
 				},
 				function ()
 				{
@@ -105,7 +105,7 @@
 					function ()
 					{
 						sideBar.hide();
-						$.SalesPortal.Overlay.show(false);
+						$.SalesPortal.Overlay.show();
 					},
 					function ()
 					{
@@ -157,7 +157,7 @@
 					},
 					function ()
 					{
-						$.SalesPortal.Overlay.show(false);
+						$.SalesPortal.Overlay.show();
 					},
 					function ()
 					{
@@ -400,7 +400,7 @@
 				},
 				beforeSend: function ()
 				{
-					$.SalesPortal.Overlay.show(false);
+					$.SalesPortal.Overlay.show();
 				},
 				complete: function ()
 				{
@@ -461,7 +461,7 @@
 					},
 					function ()
 					{
-						$.SalesPortal.Overlay.show(false);
+						$.SalesPortal.Overlay.show();
 					},
 					function ()
 					{
@@ -515,7 +515,7 @@
 				},
 				beforeSend: function ()
 				{
-					$.SalesPortal.Overlay.show(false);
+					$.SalesPortal.Overlay.show();
 				},
 				complete: function ()
 				{

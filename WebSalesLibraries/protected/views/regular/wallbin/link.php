@@ -78,7 +78,7 @@
 			else
 				$color = '#000000';
 			$displayWidget = !(isset($disableWidget) && $disableWidget) && isset($widgetData['base']) && $widgetData['base'] != '';
-			$linkFontProperties = 'font-family: ' . $link->lineBreakProperties->font->name . '; '
+			$linkFontProperties = 'font-family: ' . FontReplacementHelper::replaceFont($link->lineBreakProperties->font->name) . '; '
 				. 'font-size: ' . $link->lineBreakProperties->font->size . 'pt; '
 				. 'font-weight: ' . ($link->lineBreakProperties->font->isBold ? ' bold' : ' normal') . '; '
 				. 'font-style: ' . ($link->lineBreakProperties->font->isItalic ? ' italic' : ' normal') . '; '
@@ -110,7 +110,7 @@
 			else
 				$color = '#000000';
 
-			$linkFontProperties = 'font-family: ' . $font->name . '; '
+			$linkFontProperties = 'font-family: ' . FontReplacementHelper::replaceFont($font->name) . '; '
 				. (!$isDefaultFont ? 'font-size: ' . $font->size . 'pt; ' : ' ')
 				. 'font-weight: ' . ($link->extendedProperties->isBold ? ' bold' : ($font->isBold ? ' bold' : ' normal')) . '; '
 				. 'font-style: ' . ($link->extendedProperties->isItalic ? ' italic' : ($font->isItalic ? ' italic' : ' normal')) . '; '

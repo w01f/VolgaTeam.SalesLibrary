@@ -65,7 +65,7 @@
 					dialogContent.find('.link-viewer-container').html(itemContent);
 					break;
 				case 'link':
-					$.SalesPortal.Overlay.show(false);
+					$.SalesPortal.Overlay.show();
 					fancyBoxTitleArea.html(itemTitle);
 					var libraryLinkId = itemData.find('.library-link-id').text();
 					$.SalesPortal.LinkManager.requestViewDialog({

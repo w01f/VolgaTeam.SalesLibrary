@@ -1,22 +1,52 @@
 (function ($)
 {
-	$.SalesPortal = $.SalesPortal || { };
+	$.SalesPortal = $.SalesPortal || {};
 	var OverlayHelper = function ()
 	{
 		var activeOverlays = 0;
-		this.show = function (withBackground)
+
+		var overlayBar = null;
+		var overlayTimerId = null;
+
+		this.show = function ()
 		{
 			if (activeOverlays == 0)
 			{
-				if (withBackground)
+				$('<div id="progress-bar"></div>').appendTo('body');
+				$('#content').addClass('overlay');
+				overlayBar = new ProgressBar.Circle('#progress-bar', {
+					strokeWidth: 9,
+					duration: 4800,
+					color: '#919191',
+					trailColor: '#919191',
+					trailWidth: 1,
+					svgStyle: null
+				});
+				overlayBar.animate(1.0);
+				overlayTimerId = setInterval(function ()
 				{
-					$('#content-overlay').css({
-						'width': $(window).width() + 'px'
-					}).css({
-						'height': $(window).height() + 'px'
-					}).fadeIn(0);
-				}
-				$('<div id="fancybox-loading"><div></div></div>').appendTo('body');
+					if (overlayBar)
+						try
+						{
+							overlayBar.destroy();
+						}
+						catch (ex)
+						{
+						}
+						finally
+						{
+							overlayBar = null;
+						}
+					overlayBar = new ProgressBar.Circle('#progress-bar', {
+						strokeWidth: 9,
+						duration: 4800,
+						color: '#919191',
+						trailColor: '#919191',
+						trailWidth: 1,
+						svgStyle: null
+					});
+					overlayBar.animate(1.0);
+				}, 4850);
 			}
 			activeOverlays++;
 		};
@@ -25,8 +55,22 @@
 		{
 			if (activeOverlays <= 1)
 			{
-				$('#fancybox-loading').remove();
-				$('#content-overlay').fadeOut(0);
+				if (overlayTimerId)
+					clearTimeout(overlayTimerId);
+				if (overlayBar)
+					try
+					{
+						overlayBar.destroy();
+					}
+					catch (ex)
+					{
+					}
+					finally
+					{
+						overlayBar = null;
+					}
+				$('#progress-bar').remove();
+				$('#content').removeClass('overlay');
 			}
 			if (activeOverlays > 0)
 				activeOverlays--;

@@ -10,7 +10,7 @@
 <div class="folder-body" style="border-color: <? echo $folder->borderColor; ?>;">
 	<? if ($style->showRegularHeader): ?>
         <div class="folder-header-container regular" id="folder<? echo $folder->id; ?>"
-             style="font-family: <? echo isset($folder->banner) && $folder->banner->isEnabled ? $folder->banner->font->name : $folder->headerFont->name; ?>,serif;
+             style="font-family: <? echo FontReplacementHelper::replaceFont(isset($folder->banner) && $folder->banner->isEnabled ? $folder->banner->font->name : $folder->headerFont->name); ?>;
                      font-size: <? echo isset($folder->banner) && $folder->banner->isEnabled ? $folder->banner->font->size : $folder->headerFont->size; ?>pt;
                      font-weight: <? echo (isset($folder->banner) && $folder->banner->isEnabled ? $folder->banner->font->isBold : $folder->headerFont->isBold) ? ' bold' : ' normal'; ?>;
                      font-style: <? echo (isset($folder->banner) && $folder->banner->isEnabled ? $folder->banner->font->isItalic : $folder->headerFont->isItalic) ? ' italic' : ' normal'; ?>;
@@ -45,7 +45,7 @@
 	<? elseif ($style->showCustomTitle && (!$style->hideTopFoldersCustomTitle || ($style->hideTopFoldersCustomTitle && $folder->rowOrder > 0))): ?>
         <style>
             #folder<? echo $folder->id; ?> {
-                font-family: <? echo $style->font->name; ?>, serif;
+                font-family: <? echo FontReplacementHelper::replaceFont($style->font->name); ?>;
                 font-size: <? echo $style->font->size; ?>pt;
                 font-weight: <? echo $style->font->isBold ? 'bold' : 'normal'; ?>;
                 font-style: <? echo $style->font->isItalic ? 'italic' : 'normal'; ?>;

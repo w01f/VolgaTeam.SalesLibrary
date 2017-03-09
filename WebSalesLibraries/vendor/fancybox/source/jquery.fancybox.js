@@ -610,28 +610,7 @@
 		showLoading: function () {
 			var el, viewport;
 
-			F.hideLoading();
-
-			el = $('<div id="fancybox-loading"><div></div></div>').click(F.cancel).appendTo('body');
-
-			// If user will press the escape-button, the request will be canceled
-			D.bind('keydown.loading', function(e) {
-				if ((e.which || e.keyCode) === 27) {
-					e.preventDefault();
-
-					F.cancel();
-				}
-			});
-
-			if (!F.defaults.fixed) {
-				viewport = F.getViewport();
-
-				el.css({
-					position : 'absolute',
-					top  : (viewport.h * 0.5) + viewport.y,
-					left : (viewport.w * 0.5) + viewport.x
-				});
-			}
+			$.SalesPortal.Overlay.show();
 		},
 
 		getViewport: function () {

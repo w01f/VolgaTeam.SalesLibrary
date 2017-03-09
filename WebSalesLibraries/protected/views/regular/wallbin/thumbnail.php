@@ -23,7 +23,7 @@
                     padding-top: 8px;
                     padding-bottom: 8px;
                     display: inline-block">
-                <span style="font-family: <? echo $thumbnail->font->name; ?>,serif;
+                <span style="font-family: <? echo FontReplacementHelper::replaceFont($thumbnail->font->name); ?>,serif;
                         font-size: <? echo $thumbnail->font->size; ?>pt;
                         font-weight: <? echo $thumbnail->font->isBold ? ' bold' : ' normal'; ?>;
                         font-style: <? echo $thumbnail->font->isItalic ? ' italic' : ' normal'; ?>;

@@ -31,6 +31,11 @@ body
 	background: #eee;
 }
 
+#content.overlay
+{
+	opacity: 0.3;
+}
+
 #content-overlay.main-menu-opened,
 #content-overlay.action-menu-opened,
 #content-overlay.splash
@@ -57,4 +62,15 @@ body
 #view-dialog-wrapper, #view-dialog-link
 {
 	display: none;
+}
+
+#progress-bar{
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	width: 100px;
+	height: 100px;
+	margin-top: -50px;
+	margin-left: -50px;
+	z-index: 8060;
 }
