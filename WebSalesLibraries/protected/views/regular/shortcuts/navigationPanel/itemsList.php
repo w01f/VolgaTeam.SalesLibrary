@@ -55,7 +55,7 @@
         <img src="<? echo Yii::app()->getBaseUrl(true) . '/images/shortcuts/left-panel/expand_panel.svg'; ?>">
     </a>
 </div>
-<ul class="nav nav-pills">
+<ul class="nav nav-pills navigation-item-list">
 	<? foreach ($navigationPanel->items as $navigationItem): ?>
         <li class="navigation-item" <? if (!Yii::app()->browser->isMobile() && !empty($navigationItem->tooltip)): ?> title="<? echo $navigationItem->tooltip; ?>"<? endif; ?>>
 			<?

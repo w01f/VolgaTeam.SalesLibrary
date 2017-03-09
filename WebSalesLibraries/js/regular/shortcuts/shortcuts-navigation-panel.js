@@ -13,13 +13,36 @@
 		parameters.content = parameters.content != undefined ? parameters.content : '';
 		parameters.options = parameters.options != undefined ? parameters.options : undefined;
 		parameters.sizeChangedCallback = parameters.sizeChangedCallback != undefined ? parameters.sizeChangedCallback : function ()
-		{
-		};
+			{
+			};
 
 		var init = function ()
 		{
 			var navigationPanelObject = $.SalesPortal.Content.getNavigationPanel();
+			var navigationItemList = navigationPanelObject.find('.navigation-item-list');
+
+			var previousStateKey = navigationItemList.data('id');
+			if (previousStateKey)
+			{
+				var previousSavedState = {
+					scrollPosition: navigationItemList.scrollTop()
+				};
+				localStorage.setItem('navigation-panel-' + previousStateKey, JSON.stringify(previousSavedState));
+				navigationItemList.data('id', null);
+			}
+
 			navigationPanelObject.html(parameters.content);
+			navigationItemList = navigationPanelObject.find('.navigation-item-list');
+
+			if (parameters.options)
+			{
+				var currentStateKey = parameters.options.id;
+				var currentSavedState = localStorage.getItem('navigation-panel-' + currentStateKey);
+				if (currentSavedState)
+					currentSavedState = JSON.parse(currentSavedState);
+				navigationItemList.data('id', parameters.options.id);
+			}
+
 			if (parameters.content == '')
 				navigationPanelObject.hide();
 			else
@@ -66,6 +89,10 @@
 			});
 
 			updateSize();
+
+			if (currentSavedState)
+				navigationItemList.scrollTop(currentSavedState.scrollPosition);
+
 			$(window).off('resize.navigation-panel').on('resize.navigation-panel', updateSize);
 		};
 

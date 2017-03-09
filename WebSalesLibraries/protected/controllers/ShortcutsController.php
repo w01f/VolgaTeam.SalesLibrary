@@ -227,6 +227,7 @@
 						$navigationPanel = array(
 							'content' => $this->renderPartial('navigationPanel/itemsList', array('navigationPanel' => $navigationPanelData), true),
 							'options' => array(
+								'id' => $navigationPanelData->id,
 								'hideCondition' => array(
 									'extraSmall' => $navigationPanelData->hideCondition->extraSmall,
 									'small' => $navigationPanelData->hideCondition->small,

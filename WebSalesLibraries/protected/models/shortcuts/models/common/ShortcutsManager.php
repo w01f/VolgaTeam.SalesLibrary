@@ -108,6 +108,7 @@
 				$config->loadXML($configContent);
 				$xpath = new DomXPath($config);
 				$navigationPanel = NavigationPanel::fromXml($xpath, $configRootLink);
+				$navigationPanel->id = $id;
 			}
 			return $navigationPanel;
 		}

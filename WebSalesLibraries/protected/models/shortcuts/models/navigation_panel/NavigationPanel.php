@@ -5,6 +5,8 @@
 	 */
 	class NavigationPanel
 	{
+		public $id;
+
 		public $textColor;
 		public $textSize;
 
