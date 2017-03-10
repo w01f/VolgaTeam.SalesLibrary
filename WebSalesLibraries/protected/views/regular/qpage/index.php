@@ -5,6 +5,8 @@
 	 */
 
 	$this->renderPartial('../site/scripts');
+	if (UserIdentity::isUserAuthorized())
+		$this->renderPartial('../site/chat');
 
 	$cs = Yii::app()->clientScript;
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/regular/qpage/page-content.css?' . Yii::app()->params['version']);

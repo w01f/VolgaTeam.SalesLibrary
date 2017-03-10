@@ -6,6 +6,8 @@
 	 */
 
 	$this->renderPartial('../site/scripts');
+	if (UserIdentity::isUserAuthorized())
+		$this->renderPartial('../site/chat');
 
 	$cs = Yii::app()->clientScript;
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/shortcuts/shortcuts-search-bar-results-controller.js?' . Yii::app()->params['version'], CClientScript::POS_END);

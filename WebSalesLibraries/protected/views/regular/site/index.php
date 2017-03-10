@@ -5,6 +5,8 @@
 	 */
 
 	$this->renderPartial('scripts');
+	if (UserIdentity::isUserAuthorized())
+		$this->renderPartial('chat');
 
 	$cs = Yii::app()->clientScript;
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/base/main-page-controller.js?' . Yii::app()->params['version'], CClientScript::POS_END);

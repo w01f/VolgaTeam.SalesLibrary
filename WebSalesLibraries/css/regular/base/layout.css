@@ -1,6 +1,7 @@
 body
 {
 	line-height: inherit;
+	overflow: hidden;
 }
 
 #content

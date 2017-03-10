@@ -5,6 +5,8 @@
 	 */
 
 	$this->renderPartial('../site/scripts');
+	if (UserIdentity::isUserAuthorized())
+		$this->renderPartial('../site/chat');
 
 	$cs = Yii::app()->clientScript;
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/link-viewer/link-viewer-internal-link-single.js?' . Yii::app()->params['version'], CClientScript::POS_END);
