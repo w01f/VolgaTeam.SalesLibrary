@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using DevComponents.DotNetBar.Metro;
 using DevExpress.Utils;
-using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraTab;
 using SalesLibraries.Business.Entities.Interfaces;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
@@ -14,7 +12,6 @@ using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.Common.JsonConverters;
 using SalesLibraries.CommonGUI.Common;
-using SalesLibraries.FileManager.Controllers;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSettings
 {
@@ -157,27 +154,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		{
 			if (DialogResult == DialogResult.OK)
 				SaveData();
-		}
-
-		private void xtraTabControl_SelectedPageChanged(object sender, TabPageChangedEventArgs e)
-		{
-			hyperLinkEditRequestNewCategories.Visible = e.Page is TagsOptions &&
-				!String.IsNullOrEmpty(MainController.Instance.Settings.CategoryRequestRecipients) &&
-				!String.IsNullOrEmpty(MainController.Instance.Settings.CategoryRequestSubject) &&
-				!String.IsNullOrEmpty(MainController.Instance.Settings.CategoryRequestBody);
-		}
-
-		private void hyperLinkEditRequestNewCategories_OpenLink(object sender, OpenLinkEventArgs e)
-		{
-			try
-			{
-				Process.Start(String.Format("mailto:{0}?subject={1}&body={2}",
-					MainController.Instance.Settings.CategoryRequestRecipients,
-					MainController.Instance.Settings.CategoryRequestSubject,
-					MainController.Instance.Settings.CategoryRequestBody));
-			}
-			catch { }
-			e.Handled = true;
 		}
 	}
 }

@@ -274,6 +274,12 @@
     <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\BaseInternalLibraryContentOptions.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\FormEditLinkTags.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\FormEditLinkTags.designer.cs">
+      <DependentUpon>FormEditLinkTags.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\FormEditLinkThumbnail.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -315,6 +321,12 @@
     </Compile>
     <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkInternalWallbinOptions.designer.cs">
       <DependentUpon>LinkInternalWallbinOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkTagsInfoControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkTagsInfoControl.designer.cs">
+      <DependentUpon>LinkTagsInfoControl.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkVimeoOptions.cs">
       <SubType>Component</SubType>
@@ -446,12 +458,6 @@
     </Compile>
     <Compile Include="PresentationLayer\Wallbin\Links\GroupSettings\SuperFiltersEditor.designer.cs">
       <DependentUpon>SuperFiltersEditor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationLayer\Wallbin\Links\GroupSettings\TagsCleaner.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="PresentationLayer\Wallbin\Links\GroupSettings\TagsCleaner.designer.cs">
-      <DependentUpon>TagsCleaner.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\AppLinkEditControl.cs">
       <SubType>UserControl</SubType>
@@ -676,12 +682,6 @@
     <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\SuperFilterControl.designer.cs">
       <DependentUpon>SuperFilterControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\TagsOptions.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\TagsOptions.designer.cs">
-      <DependentUpon>TagsOptions.cs</DependentUpon>
-    </Compile>
     <Compile Include="PresentationLayer\Wallbin\Settings\ColumnSettings.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -838,6 +838,9 @@
     <EmbeddedResource Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\VimeoEditControl.resx">
       <DependentUpon>VimeoEditControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\FormEditLinkTags.resx">
+      <DependentUpon>FormEditLinkTags.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\FormEditLinkThumbnail.resx">
       <DependentUpon>FormEditLinkThumbnail.cs</DependentUpon>
     </EmbeddedResource>
@@ -858,6 +861,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkInternalWallbinOptions.resx">
       <DependentUpon>LinkInternalWallbinOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkTagsInfoControl.resx">
+      <DependentUpon>LinkTagsInfoControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkVimeoOptions.resx">
       <DependentUpon>LinkVimeoOptions.cs</DependentUpon>
@@ -915,9 +921,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Links\GroupSettings\SuperFiltersEditor.resx">
       <DependentUpon>SuperFiltersEditor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\GroupSettings\TagsCleaner.resx">
-      <DependentUpon>TagsCleaner.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\AppLinkEditControl.resx">
       <DependentUpon>AppLinkEditControl.cs</DependentUpon>
@@ -1027,9 +1030,6 @@
     <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\SuperFilterControl.resx">
       <DependentUpon>SuperFilterControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\TagsOptions.resx">
-      <DependentUpon>TagsOptions.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Settings\ColumnSettings.resx">
       <DependentUpon>ColumnSettings.cs</DependentUpon>
     </EmbeddedResource>
@@ -1084,7 +1084,6 @@
     <EmbeddedResource Include="PresentationLayer\Wallbin\Views\TabPage.resx">
       <DependentUpon>TabPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -1111,6 +1110,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\LinkSettingsTagsLogoKeywords.png" />
+    <None Include="Resources\LinkSettingsTagsLogoCategories.png" />
+    <None Include="Resources\LinkSettingsTagsIconCategories.png" />
     <None Include="Resources\ProgressWallbinLogo.png" />
     <None Include="Resources\RibbonBundlesNew.png" />
     <None Include="Resources\RibbonFloater.png" />
@@ -1120,7 +1122,6 @@
     <None Include="Resources\RibbonVideoConvert.png" />
     <None Include="Resources\RibbonTagsSuperFIlters.png" />
     <None Include="Resources\RibbonTagsKeywords.png" />
-    <None Include="Resources\RibbonTagsClear.png" />
     <None Include="Resources\RibbonTagsCategories.png" />
     <None Include="Resources\RibbonSync.png" />
     <None Include="Resources\RibbonSettingsWallbin.png" />

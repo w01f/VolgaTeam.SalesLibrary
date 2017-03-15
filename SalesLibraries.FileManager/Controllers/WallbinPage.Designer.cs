@@ -32,21 +32,22 @@
 			this.pnContainer = new System.Windows.Forms.Panel();
 			this.pnEmpty = new System.Windows.Forms.Panel();
 			this.pnMain = new System.Windows.Forms.Panel();
-			this.retractableBar = new SalesLibraries.CommonGUI.RetractableBar.RetractableBarLeft();
-			this.laEditorTitle = new System.Windows.Forms.Label();
 			this.pnHeader = new System.Windows.Forms.Panel();
-			this.linkInfoControl = new SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSettings.LinkInfoControl();
 			this.pnTagInfoContainer = new System.Windows.Forms.Panel();
-			this.superFilterControl = new SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSettings.SuperFilterControl();
 			this.pnPageSelector = new System.Windows.Forms.Panel();
 			this.comboBoxEditPages = new DevExpress.XtraEditors.ComboBoxEdit();
 			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
+			this.retractableBar = new SalesLibraries.CommonGUI.RetractableBar.RetractableBarLeft();
+			this.laEditorTitle = new System.Windows.Forms.Label();
+			this.linkInfoControl = new SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSettings.LinkInfoControl();
+			this.superFilterControl = new SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSettings.SuperFilterControl();
+			this.linkTagsInfoControl = new SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSettings.LinkTagsInfoControl();
 			this.pnMain.SuspendLayout();
-			this.retractableBar.Header.SuspendLayout();
 			this.pnHeader.SuspendLayout();
 			this.pnPageSelector.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.comboBoxEditPages.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
+			this.retractableBar.Header.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// pnContainer
@@ -72,49 +73,8 @@
 			this.pnMain.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.pnMain.Location = new System.Drawing.Point(312, 47);
 			this.pnMain.Name = "pnMain";
-			this.pnMain.Size = new System.Drawing.Size(676, 647);
+			this.pnMain.Size = new System.Drawing.Size(676, 598);
 			this.pnMain.TabIndex = 2;
-			// 
-			// retractableBar
-			// 
-			this.retractableBar.AnimationDelay = 0;
-			this.retractableBar.BackColor = System.Drawing.Color.Transparent;
-			// 
-			// retractableBar.Content
-			// 
-			this.retractableBar.Content.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.retractableBar.Content.Location = new System.Drawing.Point(2, 42);
-			this.retractableBar.Content.Name = "Content";
-			this.retractableBar.Content.Size = new System.Drawing.Size(308, 603);
-			this.retractableBar.Content.TabIndex = 1;
-			this.retractableBar.ContentSize = 350;
-			this.retractableBar.Dock = System.Windows.Forms.DockStyle.Left;
-			this.retractableBar.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			// 
-			// retractableBar.Header
-			// 
-			this.retractableBar.Header.Controls.Add(this.laEditorTitle);
-			this.retractableBar.Header.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.retractableBar.Header.Location = new System.Drawing.Point(49, 2);
-			this.retractableBar.Header.Name = "Header";
-			this.retractableBar.Header.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-			this.retractableBar.Header.Size = new System.Drawing.Size(257, 36);
-			this.retractableBar.Header.TabIndex = 2;
-			this.retractableBar.Location = new System.Drawing.Point(0, 47);
-			this.retractableBar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-			this.retractableBar.Name = "retractableBar";
-			this.retractableBar.Size = new System.Drawing.Size(312, 647);
-			this.retractableBar.TabIndex = 7;
-			// 
-			// laEditorTitle
-			// 
-			this.laEditorTitle.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.laEditorTitle.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.laEditorTitle.Location = new System.Drawing.Point(10, 0);
-			this.laEditorTitle.Name = "laEditorTitle";
-			this.laEditorTitle.Size = new System.Drawing.Size(247, 36);
-			this.laEditorTitle.TabIndex = 1;
-			this.laEditorTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// pnHeader
 			// 
@@ -130,19 +90,6 @@
 			this.pnHeader.Size = new System.Drawing.Size(988, 47);
 			this.pnHeader.TabIndex = 8;
 			// 
-			// linkInfoControl
-			// 
-			this.linkInfoControl.AllowHtmlString = true;
-			this.linkInfoControl.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.linkInfoControl.Appearance.ForeColor = System.Drawing.SystemColors.ControlText;
-			this.linkInfoControl.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-			this.linkInfoControl.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-			this.linkInfoControl.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.linkInfoControl.Location = new System.Drawing.Point(201, 0);
-			this.linkInfoControl.Name = "linkInfoControl";
-			this.linkInfoControl.Size = new System.Drawing.Size(249, 47);
-			this.linkInfoControl.TabIndex = 2;
-			// 
 			// pnTagInfoContainer
 			// 
 			this.pnTagInfoContainer.Dock = System.Windows.Forms.DockStyle.Right;
@@ -151,16 +98,6 @@
 			this.pnTagInfoContainer.Padding = new System.Windows.Forms.Padding(0, 0, 10, 0);
 			this.pnTagInfoContainer.Size = new System.Drawing.Size(340, 47);
 			this.pnTagInfoContainer.TabIndex = 1;
-			// 
-			// superFilterControl
-			// 
-			this.superFilterControl.BackColor = System.Drawing.Color.White;
-			this.superFilterControl.Dock = System.Windows.Forms.DockStyle.Left;
-			this.superFilterControl.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.superFilterControl.Location = new System.Drawing.Point(5, 0);
-			this.superFilterControl.Name = "superFilterControl";
-			this.superFilterControl.Size = new System.Drawing.Size(196, 47);
-			this.superFilterControl.TabIndex = 0;
 			// 
 			// pnPageSelector
 			// 
@@ -201,6 +138,79 @@
 			this.styleController.AppearanceReadOnly.Font = new System.Drawing.Font("Arial", 9.75F);
 			this.styleController.AppearanceReadOnly.Options.UseFont = true;
 			// 
+			// retractableBar
+			// 
+			this.retractableBar.AnimationDelay = 0;
+			this.retractableBar.BackColor = System.Drawing.Color.Transparent;
+			// 
+			// retractableBar.Content
+			// 
+			this.retractableBar.Content.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.retractableBar.Content.Location = new System.Drawing.Point(2, 42);
+			this.retractableBar.Content.Name = "Content";
+			this.retractableBar.Content.Size = new System.Drawing.Size(308, 554);
+			this.retractableBar.Content.TabIndex = 1;
+			this.retractableBar.ContentSize = 350;
+			this.retractableBar.Dock = System.Windows.Forms.DockStyle.Left;
+			this.retractableBar.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			// 
+			// retractableBar.Header
+			// 
+			this.retractableBar.Header.Controls.Add(this.laEditorTitle);
+			this.retractableBar.Header.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.retractableBar.Header.Location = new System.Drawing.Point(49, 2);
+			this.retractableBar.Header.Name = "Header";
+			this.retractableBar.Header.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+			this.retractableBar.Header.Size = new System.Drawing.Size(257, 36);
+			this.retractableBar.Header.TabIndex = 2;
+			this.retractableBar.Location = new System.Drawing.Point(0, 47);
+			this.retractableBar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+			this.retractableBar.Name = "retractableBar";
+			this.retractableBar.Size = new System.Drawing.Size(312, 598);
+			this.retractableBar.TabIndex = 7;
+			// 
+			// laEditorTitle
+			// 
+			this.laEditorTitle.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.laEditorTitle.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.laEditorTitle.Location = new System.Drawing.Point(10, 0);
+			this.laEditorTitle.Name = "laEditorTitle";
+			this.laEditorTitle.Size = new System.Drawing.Size(247, 36);
+			this.laEditorTitle.TabIndex = 1;
+			this.laEditorTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// linkInfoControl
+			// 
+			this.linkInfoControl.AllowHtmlString = true;
+			this.linkInfoControl.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.linkInfoControl.Appearance.ForeColor = System.Drawing.SystemColors.ControlText;
+			this.linkInfoControl.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+			this.linkInfoControl.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+			this.linkInfoControl.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.linkInfoControl.Location = new System.Drawing.Point(201, 0);
+			this.linkInfoControl.Name = "linkInfoControl";
+			this.linkInfoControl.Size = new System.Drawing.Size(249, 47);
+			this.linkInfoControl.TabIndex = 2;
+			// 
+			// superFilterControl
+			// 
+			this.superFilterControl.BackColor = System.Drawing.Color.White;
+			this.superFilterControl.Dock = System.Windows.Forms.DockStyle.Left;
+			this.superFilterControl.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.superFilterControl.Location = new System.Drawing.Point(5, 0);
+			this.superFilterControl.Name = "superFilterControl";
+			this.superFilterControl.Size = new System.Drawing.Size(196, 47);
+			this.superFilterControl.TabIndex = 0;
+			// 
+			// linkTagsInfoControl
+			// 
+			this.linkTagsInfoControl.Dock = System.Windows.Forms.DockStyle.Bottom;
+			this.linkTagsInfoControl.Location = new System.Drawing.Point(0, 645);
+			this.linkTagsInfoControl.Name = "linkTagsInfoControl";
+			this.linkTagsInfoControl.Size = new System.Drawing.Size(988, 49);
+			this.linkTagsInfoControl.TabIndex = 9;
+			this.linkTagsInfoControl.Visible = false;
+			// 
 			// WallbinPage
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -208,15 +218,16 @@
 			this.Controls.Add(this.pnMain);
 			this.Controls.Add(this.retractableBar);
 			this.Controls.Add(this.pnHeader);
+			this.Controls.Add(this.linkTagsInfoControl);
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.Name = "WallbinPage";
 			this.Size = new System.Drawing.Size(988, 694);
 			this.pnMain.ResumeLayout(false);
-			this.retractableBar.Header.ResumeLayout(false);
 			this.pnHeader.ResumeLayout(false);
 			this.pnPageSelector.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.comboBoxEditPages.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
+			this.retractableBar.Header.ResumeLayout(false);
 			this.ResumeLayout(false);
 
 		}
@@ -235,5 +246,6 @@
 		public DevExpress.XtraEditors.ComboBoxEdit comboBoxEditPages;
 		public System.Windows.Forms.Panel pnPageSelector;
 		private DevExpress.XtraEditors.StyleController styleController;
+		private PresentationLayer.Wallbin.Links.SingleSettings.LinkTagsInfoControl linkTagsInfoControl;
 	}
 }

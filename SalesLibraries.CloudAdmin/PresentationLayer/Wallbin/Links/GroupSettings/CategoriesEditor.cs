@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using DevExpress.XtraTreeList;
@@ -28,6 +29,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.GroupSetting
 
 			_groupTemplates.AddRange(MainController.Instance.Lists.SearchTags.SearchSuperGroups);
 
+			treeListCategories.AllowCheckMinLevel = 2;
 			LoadTreeView();
 		}
 
@@ -152,6 +154,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.GroupSetting
 			foreach (var searchSuperGroup in _groupTemplates)
 			{
 				var superGroupNode = treeListCategories.AppendNode(new object[] { searchSuperGroup.Name }, _rootNode);
+				superGroupNode.Tag = searchSuperGroup;
 				superGroupNode.StateImageIndex = 0;
 
 				foreach (var searchGroup in searchSuperGroup.Groups)
@@ -269,6 +272,23 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.GroupSetting
 		private void OnCategoriesBeforeCollapse(object sender, BeforeCollapseEventArgs e)
 		{
 			e.CanCollapse = !(e.Node.Tag is SearchTag);
+		}
+
+		private void OnCategoriesNodeCellStyle(object sender, GetCustomNodeCellStyleEventArgs e)
+		{
+			if (e.Node.Tag is SearchSuperGroup)
+			{
+				if (e.Node.Nodes.Any(n => n.CheckState != CheckState.Unchecked))
+				{
+					e.Appearance.ForeColor = Color.Green;
+					e.Appearance.Font = new Font(e.Appearance.Font.Name, e.Appearance.Font.Size, FontStyle.Bold);
+				}
+				else
+				{
+					e.Appearance.ForeColor = Color.Black;
+					e.Appearance.Font = new Font(e.Appearance.Font.Name, e.Appearance.Font.Size, FontStyle.Regular);
+				}
+			}
 		}
 	}
 }

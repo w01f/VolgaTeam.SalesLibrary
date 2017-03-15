@@ -6,6 +6,8 @@ namespace SalesLibraries.CommonGUI.CustomTreeList
 {
 	public class EmptyImageTreeList : TreeList
 	{
+		public int AllowCheckMinLevel { get; set; } = 0;
+
 		protected override TreeListViewInfo CreateViewInfo()
 		{
 			return new EmptyImageTreeListInfo(this);
@@ -31,7 +33,7 @@ namespace SalesLibraries.CommonGUI.CustomTreeList
 
 		public bool CanCheckNode(TreeListNode node)
 		{
-			return node.Tag != null;
+			return node.Tag != null && node.Level >= AllowCheckMinLevel;
 		}
 	}
 }

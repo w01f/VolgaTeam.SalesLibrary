@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Drawing;
-using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using DevComponents.DotNetBar;
@@ -108,8 +107,6 @@ namespace SalesLibraries.CloudAdmin.Controllers
 			MainController.Instance.MainForm.buttonItemTagsKeywords.CheckedChanged += buttonItemTagsKeywords_CheckedChanged;
 			MainController.Instance.MainForm.buttonItemTagsSuperFilters.Click += buttonItemTagsSync_Click;
 			MainController.Instance.MainForm.buttonItemTagsSuperFilters.CheckedChanged += buttonItemTagsSuperFilters_CheckedChanged;
-			MainController.Instance.MainForm.buttonItemTagsClear.Click += buttonItemTagsSync_Click;
-			MainController.Instance.MainForm.buttonItemTagsClear.CheckedChanged += buttonItemTagsClear_CheckedChanged;
 			#endregion
 
 			#region Security
@@ -155,7 +152,6 @@ namespace SalesLibraries.CloudAdmin.Controllers
 			MainController.Instance.MainForm.buttonItemTagsCategories.Checked = MainController.Instance.WallbinViews.FormatState.ShowCategoryTags;
 			MainController.Instance.MainForm.buttonItemTagsKeywords.Checked = MainController.Instance.WallbinViews.FormatState.ShowKeywordTags;
 			MainController.Instance.MainForm.buttonItemTagsSuperFilters.Checked = MainController.Instance.WallbinViews.FormatState.ShowSuperFilterTags;
-			MainController.Instance.MainForm.buttonItemTagsClear.Checked = MainController.Instance.WallbinViews.FormatState.ShowTagsCleaner;
 
 			UpdateLinkButtons();
 
@@ -226,6 +222,7 @@ namespace SalesLibraries.CloudAdmin.Controllers
 		private void OnLibraryDataChanged(object sender, EventArgs e)
 		{
 			linkInfoControl.UpdateData();
+			linkTagsInfoControl.UpdateData();
 		}
 
 		private void OnFormatStateChanged(object sender, EventArgs e)
@@ -233,12 +230,14 @@ namespace SalesLibraries.CloudAdmin.Controllers
 			UpdateRetractableBarContent();
 			superFilterControl.UpdateData();
 			linkInfoControl.UpdateData();
+			linkTagsInfoControl.UpdateData();
 		}
 
 		private void OnSelectionChanged(object sender, SelectionEventArgs e)
 		{
 			UpdateLinkButtons();
 			linkInfoControl.UpdateData();
+			linkTagsInfoControl.UpdateData();
 			switch (e.SelectionType)
 			{
 				case SelectionEventType.SelectionReset:
@@ -519,7 +518,6 @@ namespace SalesLibraries.CloudAdmin.Controllers
 			MainController.Instance.MainForm.buttonItemTagsCategories.Checked = false;
 			MainController.Instance.MainForm.buttonItemTagsKeywords.Checked = false;
 			MainController.Instance.MainForm.buttonItemTagsSuperFilters.Checked = false;
-			MainController.Instance.MainForm.buttonItemTagsClear.Checked = false;
 			button.Checked = true;
 		}
 
@@ -545,14 +543,6 @@ namespace SalesLibraries.CloudAdmin.Controllers
 			var button = sender as ButtonItem;
 			if (button == null || !button.Checked) return;
 			MainController.Instance.WallbinViews.FormatState.ShowSuperFilters();
-		}
-
-		private void buttonItemTagsClear_CheckedChanged(object sender, EventArgs e)
-		{
-			if (_isLoading) return;
-			var button = sender as ButtonItem;
-			if (button == null || !button.Checked) return;
-			MainController.Instance.WallbinViews.FormatState.ShowCleaner();
 		}
 		#endregion
 

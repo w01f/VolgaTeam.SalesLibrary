@@ -384,11 +384,23 @@
     <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\FormEditLinkThumbnail.designer.cs">
       <DependentUpon>FormEditLinkThumbnail.cs</DependentUpon>
     </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\FormEditLinkTags.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\FormEditLinkTags.designer.cs">
+      <DependentUpon>FormEditLinkTags.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkBundleOptions.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkBundleOptions.designer.cs">
       <DependentUpon>LinkBundleOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkTagsInfoControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkTagsInfoControl.Designer.cs">
+      <DependentUpon>LinkTagsInfoControl.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkInternalShortcutOptions.cs">
       <SubType>Component</SubType>
@@ -575,12 +587,6 @@
     <Compile Include="PresentationLayer\Wallbin\Links\GroupSettings\SuperFiltersEditor.designer.cs">
       <DependentUpon>SuperFiltersEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Wallbin\Links\GroupSettings\TagsCleaner.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="PresentationLayer\Wallbin\Links\GroupSettings\TagsCleaner.designer.cs">
-      <DependentUpon>TagsCleaner.cs</DependentUpon>
-    </Compile>
     <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\FormResetLinkSettingsConfirmation.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -760,12 +766,6 @@
     </Compile>
     <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\SuperFilterControl.designer.cs">
       <DependentUpon>SuperFilterControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\TagsOptions.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\TagsOptions.designer.cs">
-      <DependentUpon>TagsOptions.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Wallbin\Settings\FormClonePage.cs">
       <SubType>Form</SubType>
@@ -966,8 +966,14 @@
     <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\FormEditLinkThumbnail.resx">
       <DependentUpon>FormEditLinkThumbnail.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\FormEditLinkTags.resx">
+      <DependentUpon>FormEditLinkTags.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkBundleOptions.resx">
       <DependentUpon>LinkBundleOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkTagsInfoControl.resx">
+      <DependentUpon>LinkTagsInfoControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkInternalShortcutOptions.resx">
       <DependentUpon>LinkInternalShortcutOptions.cs</DependentUpon>
@@ -1052,9 +1058,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Links\GroupSettings\SuperFiltersEditor.resx">
       <DependentUpon>SuperFiltersEditor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\GroupSettings\TagsCleaner.resx">
-      <DependentUpon>TagsCleaner.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\FormResetLinkSettingsConfirmation.resx">
       <DependentUpon>FormResetLinkSettingsConfirmation.cs</DependentUpon>
@@ -1142,9 +1145,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\SuperFilterControl.resx">
       <DependentUpon>SuperFilterControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\TagsOptions.resx">
-      <DependentUpon>TagsOptions.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Settings\ColumnSettings.resx">
       <DependentUpon>ColumnSettings.cs</DependentUpon>
@@ -1260,6 +1260,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\LinkSettingsTagsIconCategories.png" />
+    <None Include="Resources\LinkSettingsTagsLogoKeywords.png" />
+    <None Include="Resources\LinkSettingsTagsLogoCategories.png" />
     <None Include="Resources\RibbonSettingsWallbin.png" />
     <None Include="Resources\RibbonSettingsAdvanced.png" />
     <None Include="Resources\RibbonSettingsSync.png" />
@@ -1267,7 +1270,6 @@
     <None Include="Resources\RibbonBundlesNew.png" />
     <None Include="Resources\RibbonSecurityReset.png" />
     <None Include="Resources\RibbonSecuritySelect.png" />
-    <None Include="Resources\RibbonTagsClear.png" />
     <None Include="Resources\RibbonTagsKeywords.png" />
     <None Include="Resources\RibbonTagsSuperFIlters.png" />
     <None Include="Resources\RibbonTagsCategories.png" />

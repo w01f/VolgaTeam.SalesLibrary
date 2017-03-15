@@ -442,9 +442,6 @@
   <data name="RetractableLogoBundles" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\RetractableLogoBundles.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="RibbonTagsClear" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\RibbonTagsClear.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="RibbonVideoDelete" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\RibbonVideoDelete.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -528,5 +525,14 @@
   </data>
   <data name="RibbonSettingsWallbin" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\RibbonSettingsWallbin.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LinkSettingsTagsIconCategories" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LinkSettingsTagsIconCategories.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LinkSettingsTagsLogoCategories" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LinkSettingsTagsLogoCategories.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LinkSettingsTagsLogoKeywords" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LinkSettingsTagsLogoKeywords.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

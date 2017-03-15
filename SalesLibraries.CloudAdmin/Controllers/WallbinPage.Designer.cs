@@ -41,6 +41,7 @@
 			this.pnPageSelector = new System.Windows.Forms.Panel();
 			this.comboBoxEditPages = new DevExpress.XtraEditors.ComboBoxEdit();
 			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
+			this.linkTagsInfoControl = new SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettings.LinkTagsInfoControl();
 			this.pnMain.SuspendLayout();
 			this.retractableBar.Header.SuspendLayout();
 			this.pnHeader.SuspendLayout();
@@ -72,7 +73,7 @@
 			this.pnMain.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.pnMain.Location = new System.Drawing.Point(312, 47);
 			this.pnMain.Name = "pnMain";
-			this.pnMain.Size = new System.Drawing.Size(676, 647);
+			this.pnMain.Size = new System.Drawing.Size(676, 601);
 			this.pnMain.TabIndex = 2;
 			// 
 			// retractableBar
@@ -85,7 +86,7 @@
 			this.retractableBar.Content.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.retractableBar.Content.Location = new System.Drawing.Point(2, 42);
 			this.retractableBar.Content.Name = "Content";
-			this.retractableBar.Content.Size = new System.Drawing.Size(308, 603);
+			this.retractableBar.Content.Size = new System.Drawing.Size(308, 557);
 			this.retractableBar.Content.TabIndex = 1;
 			this.retractableBar.ContentSize = 350;
 			this.retractableBar.Dock = System.Windows.Forms.DockStyle.Left;
@@ -103,7 +104,7 @@
 			this.retractableBar.Location = new System.Drawing.Point(0, 47);
 			this.retractableBar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.retractableBar.Name = "retractableBar";
-			this.retractableBar.Size = new System.Drawing.Size(312, 647);
+			this.retractableBar.Size = new System.Drawing.Size(312, 601);
 			this.retractableBar.TabIndex = 7;
 			// 
 			// laEditorTitle
@@ -200,6 +201,14 @@
 			this.styleController.AppearanceReadOnly.Font = new System.Drawing.Font("Arial", 9.75F);
 			this.styleController.AppearanceReadOnly.Options.UseFont = true;
 			// 
+			// linkTagsInfoControl
+			// 
+			this.linkTagsInfoControl.Dock = System.Windows.Forms.DockStyle.Bottom;
+			this.linkTagsInfoControl.Location = new System.Drawing.Point(0, 648);
+			this.linkTagsInfoControl.Name = "linkTagsInfoControl";
+			this.linkTagsInfoControl.Size = new System.Drawing.Size(988, 46);
+			this.linkTagsInfoControl.TabIndex = 9;
+			// 
 			// WallbinPage
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -207,6 +216,7 @@
 			this.Controls.Add(this.pnMain);
 			this.Controls.Add(this.retractableBar);
 			this.Controls.Add(this.pnHeader);
+			this.Controls.Add(this.linkTagsInfoControl);
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.Name = "WallbinPage";
 			this.Size = new System.Drawing.Size(988, 694);
@@ -234,5 +244,6 @@
 		public DevExpress.XtraEditors.ComboBoxEdit comboBoxEditPages;
 		public System.Windows.Forms.Panel pnPageSelector;
 		private DevExpress.XtraEditors.StyleController styleController;
+		private PresentationLayer.Wallbin.Links.SingleSettings.LinkTagsInfoControl linkTagsInfoControl;
 	}
 }

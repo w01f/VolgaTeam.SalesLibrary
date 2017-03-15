@@ -113,8 +113,6 @@ namespace SalesLibraries.FileManager.Controllers
 			MainController.Instance.MainForm.buttonItemTagsKeywords.CheckedChanged += buttonItemTagsKeywords_CheckedChanged;
 			MainController.Instance.MainForm.buttonItemTagsSuperFilters.Click += buttonItemTagsSync_Click;
 			MainController.Instance.MainForm.buttonItemTagsSuperFilters.CheckedChanged += buttonItemTagsSuperFilters_CheckedChanged;
-			MainController.Instance.MainForm.buttonItemTagsClear.Click += buttonItemTagsSync_Click;
-			MainController.Instance.MainForm.buttonItemTagsClear.CheckedChanged += buttonItemTagsClear_CheckedChanged;
 			#endregion
 
 			#region Security
@@ -166,7 +164,6 @@ namespace SalesLibraries.FileManager.Controllers
 			MainController.Instance.MainForm.buttonItemTagsCategories.Checked = MainController.Instance.WallbinViews.FormatState.ShowCategoryTags;
 			MainController.Instance.MainForm.buttonItemTagsKeywords.Checked = MainController.Instance.WallbinViews.FormatState.ShowKeywordTags;
 			MainController.Instance.MainForm.buttonItemTagsSuperFilters.Checked = MainController.Instance.WallbinViews.FormatState.ShowSuperFilterTags;
-			MainController.Instance.MainForm.buttonItemTagsClear.Checked = MainController.Instance.WallbinViews.FormatState.ShowTagsCleaner;
 
 			UpdateLinkButtons();
 
@@ -237,6 +234,7 @@ namespace SalesLibraries.FileManager.Controllers
 		private void OnLibraryDataChanged(object sender, EventArgs e)
 		{
 			linkInfoControl.UpdateData();
+			linkTagsInfoControl.UpdateData();
 		}
 
 		private void OnFormatStateChanged(object sender, EventArgs e)
@@ -244,12 +242,14 @@ namespace SalesLibraries.FileManager.Controllers
 			UpdateRetractableBarContent();
 			superFilterControl.UpdateData();
 			linkInfoControl.UpdateData();
+			linkTagsInfoControl.UpdateData();
 		}
 
 		private void OnSelectionChanged(object sender, SelectionEventArgs e)
 		{
 			UpdateLinkButtons();
 			linkInfoControl.UpdateData();
+			linkTagsInfoControl.UpdateData();
 			switch (e.SelectionType)
 			{
 				case SelectionEventType.SelectionReset:
@@ -583,7 +583,6 @@ namespace SalesLibraries.FileManager.Controllers
 			MainController.Instance.MainForm.buttonItemTagsCategories.Checked = false;
 			MainController.Instance.MainForm.buttonItemTagsKeywords.Checked = false;
 			MainController.Instance.MainForm.buttonItemTagsSuperFilters.Checked = false;
-			MainController.Instance.MainForm.buttonItemTagsClear.Checked = false;
 			button.Checked = true;
 		}
 
@@ -609,14 +608,6 @@ namespace SalesLibraries.FileManager.Controllers
 			var button = sender as ButtonItem;
 			if (button == null || !button.Checked) return;
 			MainController.Instance.WallbinViews.FormatState.ShowSuperFilters();
-		}
-
-		private void buttonItemTagsClear_CheckedChanged(object sender, EventArgs e)
-		{
-			if (_isLoading) return;
-			var button = sender as ButtonItem;
-			if (button == null || !button.Checked) return;
-			MainController.Instance.WallbinViews.FormatState.ShowCleaner();
 		}
 		#endregion
 

@@ -603,6 +603,36 @@ namespace SalesLibraries.CloudAdmin.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap LinkSettingsTagsIconCategories {
+            get {
+                object obj = ResourceManager.GetObject("LinkSettingsTagsIconCategories", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap LinkSettingsTagsLogoCategories {
+            get {
+                object obj = ResourceManager.GetObject("LinkSettingsTagsLogoCategories", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap LinkSettingsTagsLogoKeywords {
+            get {
+                object obj = ResourceManager.GetObject("LinkSettingsTagsLogoKeywords", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap LinkSettingsTextFormat {
             get {
                 object obj = ResourceManager.GetObject("LinkSettingsTextFormat", resourceCulture);
@@ -976,16 +1006,6 @@ namespace SalesLibraries.CloudAdmin.Properties {
         internal static System.Drawing.Bitmap RibbonTagsCategories {
             get {
                 object obj = ResourceManager.GetObject("RibbonTagsCategories", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap RibbonTagsClear {
-            get {
-                object obj = ResourceManager.GetObject("RibbonTagsClear", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

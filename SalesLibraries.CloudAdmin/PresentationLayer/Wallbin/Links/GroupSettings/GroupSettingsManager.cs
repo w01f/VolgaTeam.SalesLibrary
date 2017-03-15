@@ -10,7 +10,6 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.GroupSetting
 		private readonly KeywordsEditor _keywordsEditor;
 		private readonly SuperFiltersEditor _superFiltersEditor;
 		private readonly SecurityEditor _securityEditor;
-		private readonly TagsCleaner _tagsCleaner;
 
 		public IGroupSettingsEditor ActiveEditor { get; private set; }
 
@@ -28,8 +27,6 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.GroupSetting
 			_superFiltersEditor.EditorChanged += OnEditorChanged;
 			_securityEditor = new SecurityEditor();
 			_securityEditor.EditorChanged += OnEditorChanged;
-			_tagsCleaner = new TagsCleaner();
-			_tagsCleaner.EditorChanged += OnEditorChanged;
 		}
 
 		private void OnEditorChanged(object sender, EventArgs e)
@@ -61,8 +58,6 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.GroupSetting
 				ActiveEditor = _superFiltersEditor;
 			else if (MainController.Instance.WallbinViews.FormatState.ShowSecurityTags)
 				ActiveEditor = _securityEditor;
-			else if (MainController.Instance.WallbinViews.FormatState.ShowTagsCleaner)
-				ActiveEditor = _tagsCleaner;
 			ActiveEditor?.UpdateData();
 		}
 	}

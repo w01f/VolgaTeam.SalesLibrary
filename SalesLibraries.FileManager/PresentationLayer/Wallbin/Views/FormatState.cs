@@ -113,16 +113,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 			}
 		}
 
-		private bool _showTagsCleaner;
-		public bool ShowTagsCleaner
-		{
-			get { return _showTagsCleaner; }
-			set
-			{
-				_showTagsCleaner = value;
-			}
-		}
-
 		public FormatState()
 		{
 			_allowEdit = true;
@@ -132,7 +122,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 			_showCategoryTags = false;
 			_showKeywordTags = false;
 			_showSuperFilterTags = false;
-			_showTagsCleaner = false;
 			_showSecurityTags = false;
 
 		}
@@ -155,7 +144,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 					_showCategoryTags = true;
 					_showKeywordTags = false;
 					_showSuperFilterTags = false;
-					_showTagsCleaner = false;
 					_showSecurityTags = false;
 					break;
 				case TabPageEnum.Security:
@@ -167,7 +155,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 					_showCategoryTags = false;
 					_showKeywordTags = false;
 					_showSuperFilterTags = false;
-					_showTagsCleaner = false;
 					_showSecurityTags = true;
 					break;
 				case TabPageEnum.Bundles:
@@ -179,7 +166,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 					_showCategoryTags = false;
 					_showKeywordTags = false;
 					_showSuperFilterTags = false;
-					_showTagsCleaner = false;
 					_showSecurityTags = false;
 					break;
 				default:
@@ -191,7 +177,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 					_showCategoryTags = false;
 					_showKeywordTags = false;
 					_showSuperFilterTags = false;
-					_showTagsCleaner = false;
 					_showSecurityTags = false;
 					break;
 			}
@@ -203,7 +188,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 			_showCategoryTags = true;
 			_showKeywordTags = false;
 			_showSuperFilterTags = false;
-			_showTagsCleaner = false;
 			Update();
 		}
 
@@ -212,7 +196,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 			_showCategoryTags = false;
 			_showKeywordTags = true;
 			_showSuperFilterTags = false;
-			_showTagsCleaner = false;
 			Update();
 		}
 
@@ -221,16 +204,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 			_showCategoryTags = false;
 			_showKeywordTags = false;
 			_showSuperFilterTags = true;
-			_showTagsCleaner = false;
-			Update();
-		}
-
-		public void ShowCleaner()
-		{
-			_showCategoryTags = false;
-			_showKeywordTags = false;
-			_showSuperFilterTags = false;
-			_showTagsCleaner = true;
 			Update();
 		}
 	}

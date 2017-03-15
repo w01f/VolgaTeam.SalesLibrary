@@ -36,9 +36,9 @@
 			this.treeListColumnName = new DevExpress.XtraTreeList.Columns.TreeListColumn();
 			this.imageList = new System.Windows.Forms.ImageList(this.components);
 			this.pnButtons = new System.Windows.Forms.Panel();
-			this.buttonXReset = new DevComponents.DotNetBar.ButtonX();
-			this.buttonXExpand = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXCollapse = new DevComponents.DotNetBar.ButtonX();
+			this.buttonXExpand = new DevComponents.DotNetBar.ButtonX();
+			this.buttonXReset = new DevComponents.DotNetBar.ButtonX();
 			this.pnMain.SuspendLayout();
 			this.pnData.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.treeListCategories)).BeginInit();
@@ -98,6 +98,7 @@
 			this.treeListCategories.Size = new System.Drawing.Size(350, 558);
 			this.treeListCategories.StateImageList = this.imageList;
 			this.treeListCategories.TabIndex = 2;
+			this.treeListCategories.NodeCellStyle += new DevExpress.XtraTreeList.GetCustomNodeCellStyleEventHandler(this.OnCategoriesNodeCellStyle);
 			this.treeListCategories.BeforeCollapse += new DevExpress.XtraTreeList.BeforeCollapseEventHandler(this.OnCategoriesBeforeCollapse);
 			this.treeListCategories.AfterExpand += new DevExpress.XtraTreeList.NodeEventHandler(this.OnCategoriesAfterExpand);
 			this.treeListCategories.AfterCollapse += new DevExpress.XtraTreeList.NodeEventHandler(this.OnCategoriesAfterCollapse);
@@ -131,20 +132,19 @@
 			this.pnButtons.Size = new System.Drawing.Size(350, 98);
 			this.pnButtons.TabIndex = 0;
 			// 
-			// buttonXReset
+			// buttonXCollapse
 			// 
-			this.buttonXReset.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-			this.buttonXReset.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonXReset.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-			this.buttonXReset.Location = new System.Drawing.Point(5, 8);
-			this.buttonXReset.Name = "buttonXReset";
-			this.buttonXReset.Size = new System.Drawing.Size(340, 30);
-			this.buttonXReset.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.buttonXReset.TabIndex = 0;
-			this.buttonXReset.Text = "RESET ALL TAGS for the Selected Links";
-			this.buttonXReset.TextColor = System.Drawing.Color.Black;
-			this.buttonXReset.Click += new System.EventHandler(this.OnResetClick);
+			this.buttonXCollapse.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXCollapse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonXCollapse.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXCollapse.Location = new System.Drawing.Point(206, 55);
+			this.buttonXCollapse.Name = "buttonXCollapse";
+			this.buttonXCollapse.Size = new System.Drawing.Size(139, 30);
+			this.buttonXCollapse.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXCollapse.TabIndex = 2;
+			this.buttonXCollapse.Text = "Collapse All";
+			this.buttonXCollapse.TextColor = System.Drawing.Color.Black;
+			this.buttonXCollapse.Click += new System.EventHandler(this.OnCollapseClick);
 			// 
 			// buttonXExpand
 			// 
@@ -159,19 +159,20 @@
 			this.buttonXExpand.TextColor = System.Drawing.Color.Black;
 			this.buttonXExpand.Click += new System.EventHandler(this.OnExpandClick);
 			// 
-			// buttonXCollapse
+			// buttonXReset
 			// 
-			this.buttonXCollapse.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-			this.buttonXCollapse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonXCollapse.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-			this.buttonXCollapse.Location = new System.Drawing.Point(206, 55);
-			this.buttonXCollapse.Name = "buttonXCollapse";
-			this.buttonXCollapse.Size = new System.Drawing.Size(139, 30);
-			this.buttonXCollapse.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.buttonXCollapse.TabIndex = 2;
-			this.buttonXCollapse.Text = "Collapse All";
-			this.buttonXCollapse.TextColor = System.Drawing.Color.Black;
-			this.buttonXCollapse.Click += new System.EventHandler(this.OnCollapseClick);
+			this.buttonXReset.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXReset.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonXReset.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXReset.Location = new System.Drawing.Point(5, 8);
+			this.buttonXReset.Name = "buttonXReset";
+			this.buttonXReset.Size = new System.Drawing.Size(340, 30);
+			this.buttonXReset.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXReset.TabIndex = 0;
+			this.buttonXReset.Text = "RESET ALL TAGS for the Selected Links";
+			this.buttonXReset.TextColor = System.Drawing.Color.Black;
+			this.buttonXReset.Click += new System.EventHandler(this.OnResetClick);
 			// 
 			// CategoriesEditor
 			// 
