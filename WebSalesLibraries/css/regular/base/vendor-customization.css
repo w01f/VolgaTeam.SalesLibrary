@@ -147,3 +147,29 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6
 {
     border-radius: 0 !important;
 }
+
+.ifc.ifc-popup #ifc-app .ifc-chat-list-container .ifc-chat-list .ifc-chat-list-roster
+{
+    height: 388px !important;
+}
+
+.ifc #ifc-app-container .ifc-chat-list .ifc-chat-list-roster .ifc-chat-list-roster-item .ifc-chat-list-roster-item-avatar .ifc-chat-list-roster-item-avatar-img, .ifc #ifc-app-container .ifc-chat-window .ifc-chat-list-roster .ifc-chat-list-roster-item .ifc-chat-list-roster-item-avatar .ifc-chat-list-roster-item-avatar-img
+{
+    border-radius: 0 !important;
+}
+
+.ifc #ifc-app-container .ifc-chat-window .ifc-chat-window-footer
+{
+    height: 172px !important;
+}
+
+.ifc #ifc-app-container .ifc-chat-window .ifc-chat-window-footer .ifc-chat-window-textbox
+{
+    height: 136px !important;
+}
+
+.ifc #ifc-app-container .ifc-chat-window .ifc-chat-window-footer .ifc-chat-window-textbox .ifc-chat-window-textbox-input
+{
+    padding-top: 10px  !important;
+    font-size: 14px  !important;
+}

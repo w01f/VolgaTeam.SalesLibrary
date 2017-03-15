@@ -74,9 +74,12 @@ class iFlyChat
     {
         $r = '';
         if ($this->settings['popup'] === true) {
-            $r .= '<script>var iFlyChatDiv = document.createElement("div");';
+            $r .= '<script>var iFlyChatDivContainer = document.createElement("div");';
+	        $r .= 'iFlyChatDivContainer.className = \'hidden-xs\';';
+	        $r .= 'document.body.appendChild(iFlyChatDivContainer);';
+	        $r .= 'var iFlyChatDiv = document.createElement("div");';
             $r .= 'iFlyChatDiv.className = \'iflychat-popup\';';
-            $r .= 'document.body.appendChild(iFlyChatDiv);';
+            $r .= 'iFlyChatDivContainer.appendChild(iFlyChatDiv);';
             $r .= '</script>';
         }
         $token = $this->getTokenWrapper();
