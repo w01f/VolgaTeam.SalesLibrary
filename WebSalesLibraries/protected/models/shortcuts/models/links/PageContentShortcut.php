@@ -22,14 +22,27 @@
 		/** @var  HideCondition */
 		public $hideTextCondition;
 
-		public function loadPageConfig()
+		/**
+		 * @param $linkRecord
+		 * @param $isPhone boolean
+		 */
+		public function __construct($linkRecord, $isPhone)
 		{
+			parent::__construct($linkRecord, $isPhone);
+
 			$linkConfig = new DOMDocument();
 			$linkConfig->loadXML($this->linkRecord->config);
 			$xpath = new DomXPath($linkConfig);
 
 			$queryResult = $xpath->query('//Config/OpenOnSamePage');
 			$this->samePage = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : true;
+		}
+
+		public function loadPageConfig()
+		{
+			$linkConfig = new DOMDocument();
+			$linkConfig->loadXML($this->linkRecord->config);
+			$xpath = new DomXPath($linkConfig);
 
 			$queryResult = $xpath->query('//Config/Fullsitelink');
 			$this->showMainSiteUrl = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : false;
