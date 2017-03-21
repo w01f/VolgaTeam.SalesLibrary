@@ -72,19 +72,13 @@
 			if (!isset($folderId) || (isset($folderId) && ($folderId == "" || $folderId == "null")))
 				$folderId = null;
 			$userId = UserIdentity::getCurrentUserId();
-			$links = FavoritesLinkRecord::getLinksByFolder($userId, $folderId);
+			$columnSettings = TableColumnSettings::createEmpty();
+			$links = FavoritesLinkRecord::getLinksByFolder($userId, $folderId, $columnSettings);
 			echo CJSON::encode(array(
 				'links' => $links,
 				'viewOptions' => array(
-					'showCategory' => Yii::app()->params['search_options']['hide_tag'] != true,
-					'categoryColumnName' => Yii::app()->params['tags']['column_name'],
-					'showLibraries' => Yii::app()->params['search_options']['hide_libraries'] != true,
-					'librariesColumnName' => Yii::app()->params['stations']['column_name'],
-					'showType' => true,
-					'showDate' => true,
-					'showRate' => true,
-					'showViewsCount' => true,
-					'showDeleteButton' => true,
+					'columnSettings' => $columnSettings,
+					'showDeleteButton' => true
 				)
 			));
 		}
@@ -126,7 +120,8 @@
 				$folderId = null;
 			$userId = UserIdentity::getCurrentUserId();
 			$folders = FavoritesFolderRecord::getChildFolders($userId, $folderId);
-			$links = FavoritesLinkRecord::getLinksByFolder($userId, $folderId, false, 'name', 'asc');
+			$columnSettings = TableColumnSettings::createEmpty();
+			$links = FavoritesLinkRecord::getLinksByFolder($userId, $folderId, $columnSettings);
 			$this->renderPartial('foldersAndLinks', array('folders' => $folders, 'links' => $links, 'topLevel' => false), false, true);
 		}
 		//------Mobile Site API-----------------------------------------------

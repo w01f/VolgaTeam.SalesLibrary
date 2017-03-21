@@ -10,5 +10,6 @@ CREATE TABLE IF NOT EXISTS `tbl_preview` (
   PRIMARY KEY (`id`),
   KEY `id_container` (`id_container`),
   KEY `id_library` (`id_library`),
+  KEY `type_container` (`id_container`,`type`),
   KEY `type` (`type`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;

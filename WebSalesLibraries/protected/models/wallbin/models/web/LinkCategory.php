@@ -19,6 +19,11 @@
 		 * @var string
 		 * @soap
 		 */
+		public $group;
+		/**
+		 * @var string
+		 * @soap
+		 */
 		public $category;
 		/**
 		 * @var string

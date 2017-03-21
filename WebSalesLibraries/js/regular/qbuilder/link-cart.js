@@ -213,7 +213,7 @@
 			var servicePanel = $('#service-panel');
 			var pageContent = $('#page-content');
 
-			var width = $(window).width() - navigationPanel.outerWidth(true) - pageContent.outerWidth(true) - 20;
+			var width = $(window).width() - navigationPanel.outerWidth(true) - pageContent.outerWidth(true);
 			var height = $.SalesPortal.Content.getContentObject().height() -
 				servicePanel.find('.headers').outerHeight(true) -
 				$('#link-cart-buttons').outerHeight(true) - 20;

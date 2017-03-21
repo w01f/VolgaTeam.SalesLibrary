@@ -117,8 +117,8 @@
 						dataTable.init({
 							dataset: searchResults.dataset,
 							dataOptions: searchViewOptions,
-							sortColumnTag: searchShortcutOptions.conditions.sortColumn,
-							sortDirection: searchShortcutOptions.conditions.sortDirection
+							sortColumnTag: searchShortcutOptions.conditions.sortSettings.columnTag,
+							sortDirection: searchShortcutOptions.conditions.sortSettings.order
 						});
 						updateContentSize();
 					}
@@ -169,8 +169,8 @@
 						dataTable.init({
 							dataset: searchResults.dataset,
 							dataOptions: searchViewOptions,
-							sortColumnTag: searchShortcutOptions.conditions.sortColumn,
-							sortDirection: searchShortcutOptions.conditions.sortDirection
+							sortColumnTag: searchShortcutOptions.conditions.sortSettings.columnTag,
+							sortDirection: searchShortcutOptions.conditions.sortSettings.order
 						});
 						updateContentSize();
 					}
@@ -473,12 +473,12 @@
 						dataTable.init({
 							dataset: searchResults.dataset,
 							dataOptions: searchViewOptions,
-							sortColumnTag: selectedTemplateConditions.conditions.sortColumn != undefined ?
-								selectedTemplateConditions.conditions.sortColumn :
-								searchShortcutOptions.conditions.sortColumn,
-							sortDirection: selectedTemplateConditions.conditions.sortDirection != undefined ?
-								selectedTemplateConditions.conditions.sortDirection :
-								searchShortcutOptions.conditions.sortDirection
+							sortColumnTag: selectedTemplateConditions.conditions.sortSettings.isConfigured ?
+								selectedTemplateConditions.conditions.sortSettings.columnTag :
+								searchShortcutOptions.conditions.sortSettings.columnTag,
+							sortDirection: selectedTemplateConditions.conditions.sortSettings.isConfigured ?
+								selectedTemplateConditions.conditions.sortSettings.order :
+								searchShortcutOptions.conditions.sortSettings.order
 						});
 						updateContentSize();
 					}

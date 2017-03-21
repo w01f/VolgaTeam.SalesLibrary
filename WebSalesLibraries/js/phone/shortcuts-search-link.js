@@ -43,8 +43,8 @@
 
 					new $.SalesPortal.SearchDataTable(
 						data.dataset,
-						searchShortcutOptions.conditions.sortColumn,
-						searchShortcutOptions.conditions.sortDirection,
+						searchShortcutOptions.conditions.sortSettings.columnTag,
+						searchShortcutOptions.conditions.sortSettings.order,
 						{
 							id: pageIdentifier,
 							name: shortcutLinkTitle
@@ -58,7 +58,6 @@
 	$.SalesPortal.SearchOptions = function (data)
 	{
 		this.title = undefined;
-		this.isPage = undefined;
 		this.openInSamePage = undefined;
 
 		this.enableSubSearch = undefined;

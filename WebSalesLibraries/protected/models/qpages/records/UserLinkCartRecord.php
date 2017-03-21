@@ -27,25 +27,29 @@
 
 		/**
 		 * @param $userId
+		 * @param array $columnSettings
 		 * @return array
 		 */
-		public static function getLinksByUser($userId)
+		public static function getLinksByUser($userId, $columnSettings)
 		{
+			$querySettings = QuerySettings::prepareQuery(
+				array(
+					QuerySettings::SettingsTagFrom => 'tbl_user_link_cart lk',
+					QuerySettings::SettingsTagQueryFields => array(
+						'linkInCartId' => 'lk.id as linkInCartId',
+					),
+					QuerySettings::SettingsTagInnerJoin => array('tbl_link link' => 'lk.id_link=link.id'),
+					QuerySettings::SettingsTagWhere => array(
+						sprintf("lk.id_user=%s", $userId)
+					),
+					QuerySettings::SettingsTagGroup => array('lk.id'),
+					QuerySettings::SettingsTagColumns => $columnSettings
+				));
 			/** @var CDbCommand $dbCommand */
-			$dbCommand = DataTableHelper::buildQuery(
-				'tbl_user_link_cart lk',
-				array(
-					'linkInCartId' => 'lk.id as linkInCartId',
-				),
-				array('tbl_link link' => 'lk.id_link=link.id'),
-				array(
-					sprintf("lk.id_user=%s", $userId)
-				),
-				null,
-				array('lk.id'));
+			$dbCommand = DataTableHelper::buildQuery($querySettings);
 			$dbCommand = $dbCommand->order('link.name');
 			$linkRecords = $dbCommand->queryAll();
-			$links = DataTableHelper::formatExtendedData($linkRecords, array('linkInCartId'));
+			$links = DataTableHelper::formatExtendedData($linkRecords, $columnSettings, array('linkInCartId'));
 			return $links;
 		}
 

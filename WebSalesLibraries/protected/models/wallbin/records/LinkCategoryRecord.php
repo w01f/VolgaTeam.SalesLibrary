@@ -3,6 +3,7 @@
 	/**
 	 * @property mixed id_link
 	 * @property mixed id_library
+	 * @property mixed group
 	 * @property mixed category
 	 * @property mixed tag
 	 */
@@ -33,6 +34,7 @@
 			$categoryRecord = new LinkCategoryRecord();
 			$categoryRecord->id_link = $category['linkId'];
 			$categoryRecord->id_library = $category['libraryId'];
+			$categoryRecord->group = $category['group'];
 			$categoryRecord->category = $category['category'];
 			$categoryRecord->tag = $category['tag'];
 			$categoryRecord->save();

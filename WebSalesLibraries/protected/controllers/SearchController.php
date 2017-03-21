@@ -22,10 +22,10 @@
 			if (!isset($datasetKey))
 				$datasetKey = uniqid();
 
-
 			$conditionsEncoded = Yii::app()->request->getPost('conditions');
+
 			$conditions = isset($conditionsEncoded) ?
-				CJSON::decode($conditionsEncoded, false) :
+				SearchConditions::fromJson($conditionsEncoded) :
 				new SearchConditions();
 
 			$resultDataset = SearchHelper::getDatasetByCondition($conditions, $datasetKey);

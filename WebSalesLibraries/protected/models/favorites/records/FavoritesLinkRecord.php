@@ -61,24 +61,28 @@
 		/**
 		 * @param $userId
 		 * @param $folderId
+		 * @param $columnSettings
 		 * @return array
 		 */
-		public static function getLinksByFolder($userId, $folderId)
+		public static function getLinksByFolder($userId, $folderId, $columnSettings)
 		{
-			/** @var CDbCommand $dbCommand */
-			$dbCommand = DataTableHelper::buildQuery(
-				'tbl_favorites_link flink',
-				array('name' => 'flink.name as name'),
-				array('tbl_link link' => 'flink.id_link=link.id'),
+			$querySettings = QuerySettings::prepareQuery(
 				array(
-					sprintf('flink.id_user=%s', $userId),
-					isset($folderId) ? sprintf("flink.id_folder='%s'", $folderId) : "flink.id_folder is null"
-				),
-				null,
-				array('flink.id'));
+					QuerySettings::SettingsTagFrom => 'tbl_favorites_link flink',
+					QuerySettings::SettingsTagQueryFields => array('name' => 'flink.name as name'),
+					QuerySettings::SettingsTagInnerJoin => array('tbl_link link' => 'flink.id_link=link.id'),
+					QuerySettings::SettingsTagWhere => array(
+						sprintf('flink.id_user=%s', $userId),
+						isset($folderId) ? sprintf("flink.id_folder='%s'", $folderId) : "flink.id_folder is null"
+					),
+					QuerySettings::SettingsTagGroup => array('flink.id'),
+					QuerySettings::SettingsTagColumns => $columnSettings
+				));
+			/** @var CDbCommand $dbCommand */
+			$dbCommand = DataTableHelper::buildQuery($querySettings);
 			$linkRecords = $dbCommand->queryAll();
 
-			$links = DataTableHelper::formatRegularData($linkRecords);
+			$links = DataTableHelper::formatRegularData($linkRecords, $columnSettings);
 			return $links;
 		}
 

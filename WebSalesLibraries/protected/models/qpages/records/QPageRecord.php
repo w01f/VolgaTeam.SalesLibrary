@@ -111,26 +111,30 @@
 		}
 
 		/**
+		 * @param $columnSettings
 		 * @return array
 		 */
-		public function getPageLinks()
+		public function getPageLinks($columnSettings)
 		{
+			$querySettings = QuerySettings::prepareQuery(
+				array(
+					QuerySettings::SettingsTagFrom => 'tbl_qpage_link qpl',
+					QuerySettings::SettingsTagQueryFields => array(
+						'linkInPageId' => 'qpl.id as linkInPageId',
+						'listOrder' => 'qpl.list_order as listOrder'
+					),
+					QuerySettings::SettingsTagInnerJoin => array('tbl_link link' => 'qpl.id_link=link.id'),
+					QuerySettings::SettingsTagWhere => array(
+						sprintf("qpl.id_page='%s'", $this->id)
+					),
+					QuerySettings::SettingsTagGroup => array('qpl.id'),
+					QuerySettings::SettingsTagColumns => $columnSettings
+				));
 			/** @var CDbCommand $dbCommand */
-			$dbCommand = DataTableHelper::buildQuery(
-				'tbl_qpage_link qpl',
-				array(
-					'linkInPageId' => 'qpl.id as linkInPageId',
-					'listOrder' => 'qpl.list_order as listOrder'
-				),
-				array('tbl_link link' => 'qpl.id_link=link.id'),
-				array(
-					sprintf("qpl.id_page='%s'", $this->id)
-				),
-				null,
-				array('qpl.id'));
+			$dbCommand = DataTableHelper::buildQuery($querySettings);
 			$dbCommand = $dbCommand->order('qpl.list_order, link.name');
 			$linkRecords = $dbCommand->queryAll();
-			$links = DataTableHelper::formatExtendedData($linkRecords, array('linkInPageId', 'listOrder'));
+			$links = DataTableHelper::formatExtendedData($linkRecords, $columnSettings, array('linkInPageId', 'listOrder'));
 			return $links;
 		}
 

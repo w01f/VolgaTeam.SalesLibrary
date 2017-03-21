@@ -4,6 +4,15 @@
 	$.SalesPortal = $.SalesPortal || {};
 	$.SalesPortal.SearchDataTable = function (tableOptions)
 	{
+		const ColumnTagCategory = 'tag';
+		const ColumnTagLibrary = 'library';
+		const ColumnTagType = 'type';
+		const ColumnTagName = 'link';
+		const ColumnTagThumbnail = 'thumbnail';
+		const ColumnTagViews = 'views';
+		const ColumnTagRate = 'rate';
+		const ColumnTagDate = 'date';
+
 		var tableIdentifier = tableOptions != undefined && tableOptions.tableIdentifier != undefined ?
 			tableOptions.tableIdentifier :
 			'data-table-content';
@@ -51,66 +60,16 @@
 				};
 			data.dataset = data.dataset != undefined ? data.dataset : [];
 			data.dataOptions = data.dataOptions != undefined ? data.dataOptions : {
-					showCategory: false,
-					showLibraries: false,
-					showType: false,
-					showDate: false,
-					showRate: false,
-					showViewsCount: false,
+					columnSettings: undefined,
 					showDeleteButton: false,
-					categoryColumnName: '',
-					librariesColumnName: '',
 					reorderSourceField: undefined
 				};
+			data.sortColumnTag = data.sortColumnTag != undefined ? data.sortColumnTag : ColumnTagName;
 			data.sortDirection = data.sortDirection != undefined ? data.sortDirection : 'asc';
 
 
-			var sortColumnIndex = -1;
-			if (data.dataOptions.reorderSourceField == undefined)
-			{
-				var index = 0;
-				var sortColumnsIndexes = {};
-				if (data.dataOptions.showCategory)
-				{
-					sortColumnsIndexes['tag'] = index;
-					index++;
-				}
-				if (data.dataOptions.showLibraries)
-				{
-					sortColumnsIndexes['library'] = index;
-					index++;
-				}
-				if (data.dataOptions.showType)
-				{
-					sortColumnsIndexes['file_type'] = index;
-					index++;
-				}
-				sortColumnsIndexes['name'] = index;
-				index++;
-				if (data.dataOptions.showViewsCount)
-				{
-					sortColumnsIndexes['views'] = index;
-					index++;
-				}
-				if (data.dataOptions.showRate)
-				{
-					sortColumnsIndexes['rate'] = index;
-					index++;
-				}
-				if (data.dataOptions.showDate)
-				{
-					sortColumnsIndexes['date_modify'] = index;
-				}
-				sortColumnIndex = data.sortColumnTag != undefined ? sortColumnsIndexes[data.sortColumnTag] : -1;
-			}
-			else
-				sortColumnIndex = 0;
-
-
 			var content = $.SalesPortal.Content.getContentObject();
-
 			var tableContainer = content.find(tableContainerSelector);
-
 			if (!$.SalesPortal.Content.isMobileDevice())
 				tableContainer.html('<table id="' + tableIdentifier + '" class="table link-data-table table-striped table-bordered"></table>');
 			else
@@ -119,17 +78,18 @@
 			var table = $("#" + tableIdentifier);
 
 			var hasCategories = false;
-
-			$.each(data.dataset, function (index, value)
-			{
-				if (value.tag != null && value.tag != '')
+			if (data.dataOptions.columnSettings[ColumnTagCategory].enable)
+				$.each(data.dataset, function (index, value)
 				{
-					hasCategories = true;
-					return false;
-				}
-			});
+					if (value.tag != null && value.tag != '')
+					{
+						hasCategories = true;
+						return false;
+					}
+				});
 
 			var columnSettings = [];
+
 			if (data.dataOptions.reorderSourceField != undefined)
 				columnSettings.push({
 					"data": 'extended_data.' + data.dataOptions.reorderSourceField,
@@ -138,91 +98,153 @@
 					"orderable": true
 				});
 
-			if (data.dataOptions.showCategory && hasCategories)
-				columnSettings.push({
-					"data": "tag",
-					"orderable": data.dataOptions.reorderSourceField == undefined,
-					"title": data.dataOptions.categoryColumnName,
-					"class": "allow-reorder",
-					"width": "15%",
-					"render": cellRenderer
-				});
-			if (data.dataOptions.showLibraries)
-				columnSettings.push({
-					"data": "library.name",
-					"orderable": data.dataOptions.reorderSourceField == undefined,
-					"title": data.dataOptions.librariesColumnName,
-					"class": "centered allow-reorder",
-					"width": "10%",
-					"render": cellRenderer
-				});
-			if (data.dataOptions.showType)
-				columnSettings.push({
-					"data": "file_type",
-					"orderable": data.dataOptions.reorderSourceField == undefined,
-					"title": "Type",
-					"class": "centered allow-reorder",
-					"width": "70px",
-					"render": cellRenderer
-				});
-			columnSettings.push({
-				"data": "name",
-				"orderable": data.dataOptions.reorderSourceField == undefined,
-				"title": "Link",
-				"render": cellRenderer
-			});
-			if (data.dataOptions.showViewsCount)
-				columnSettings.push({
-					"data": "views",
-					"orderable": data.dataOptions.reorderSourceField == undefined,
-					"title": "Views",
-					"class": "centered allow-reorder",
-					"width": "50px",
-					"sType": "numeric",
-					"render": {
-						_: cellRenderer,
-						sort: 'value'
-					}
-				});
-			if (data.dataOptions.showRate)
-				columnSettings.push({
-					"data": "rate",
-					"orderable": data.dataOptions.reorderSourceField == undefined,
-					"title": "Rating",
-					"width": "90px",
-					"class": "centered rate-image-container",
-					"render": {
-						_: function (columnData)
-						{
-							var cellContent = '';
-							if (columnData.image != '')
-								cellContent = '<img src="' + columnData.image + '">';
-							return cellContent;
-						},
-						sort: 'value'
-					}
-				});
-			if (data.dataOptions.showDate)
+			var sortColumnIndex = 0;
+			var columnIndex = 0;
+			$.each(data.dataOptions.columnSettings, function (key, value)
 			{
-				columnSettings.push({
-					"data": "date",
-					"orderable": data.dataOptions.reorderSourceField == undefined,
-					"title": "Date",
-					"class": "centered allow-reorder",
-					"width": "80px",
-					"render": {
-						_: cellRenderer,
-						sort: 'value'
-					}
-				});
-				columnSettings.push({
-					"data": "date.value",
-					"title": "Date",
-					"visible": false,
-					"searchable": false,
-					"sType": "numeric"
-				});
-			}
+				if (data.dataOptions.reorderSourceField == undefined && key == data.sortColumnTag)
+					sortColumnIndex = columnIndex;
+				switch (key)
+				{
+					case ColumnTagCategory:
+						if (value.enable && hasCategories)
+						{
+							columnSettings.push({
+								"data": "tag",
+								"orderable": data.dataOptions.reorderSourceField == undefined,
+								"title": value.title,
+								"class": "tag-text-container allow-reorder" + (value.fullWidth ? ' none' : ' all'),
+								"width": value.width > 0 ? (value.width + "px") : "15%",
+								"render": cellRenderer
+							});
+							columnIndex++;
+						}
+						break;
+					case ColumnTagLibrary:
+						if (value.enable)
+						{
+							columnSettings.push({
+								"data": "library.name",
+								"orderable": data.dataOptions.reorderSourceField == undefined,
+								"title": value.title,
+								"class": "centered allow-reorder" + (value.fullWidth ? ' none' : ' all'),
+								"width": value.width > 0 ? (value.width + "px") : "10%",
+								"render": cellRenderer
+							});
+							columnIndex++;
+						}
+						break;
+					case ColumnTagType:
+						if (value.enable)
+						{
+							columnSettings.push({
+								"data": "file_type",
+								"orderable": data.dataOptions.reorderSourceField == undefined,
+								"title": value.title,
+								"class": "centered allow-reorder" + (value.fullWidth ? ' none' : ' all'),
+								"width": value.width > 0 ? (value.width + "px") : "70px",
+								"render": cellRenderer
+							});
+							columnIndex++;
+						}
+						break;
+					case ColumnTagName:
+						if (value.enable)
+						{
+							columnSettings.push({
+								"data": "name",
+								"orderable": data.dataOptions.reorderSourceField == undefined,
+								"title": value.title,
+								"class": "link-name-text-container" + (value.fullWidth ? ' none' : ' all'),
+								"width": value.width > 0 ? (value.width + "px") : null,
+								"render": cellRenderer
+							});
+							columnIndex++;
+						}
+						break;
+					case ColumnTagThumbnail:
+						if (value.enable)
+						{
+							columnSettings.push({
+								"data": "thumbnail",
+								"orderable": data.dataOptions.reorderSourceField == undefined,
+								"title": value.title,
+								"width": value.width > 0 ? (value.width + "px") : "90px",
+								"class": "centered" + (value.fullWidth ? ' none' : ' all'),
+								"render": cellRenderer
+							});
+							columnIndex++;
+						}
+						break;
+					case ColumnTagViews:
+						if (value.enable)
+						{
+							columnSettings.push({
+								"data": "views",
+								"orderable": data.dataOptions.reorderSourceField == undefined,
+								"title": value.title,
+								"class": "centered allow-reorder" + (value.fullWidth ? ' none' : ' all'),
+								"width": value.width > 0 ? (value.width + "px") : "50px",
+								"sType": "numeric",
+								"render": {
+									_: cellRenderer,
+									sort: 'value'
+								}
+							});
+							columnIndex++;
+						}
+						break;
+					case ColumnTagRate:
+						if (value.enable)
+						{
+							columnSettings.push({
+								"data": "rate",
+								"orderable": data.dataOptions.reorderSourceField == undefined,
+								"title": value.title,
+								"width": value.width > 0 ? (value.width + "px") : "90px",
+								"class": "centered rate-image-container" + (value.fullWidth ? ' none' : ' all'),
+								"render": {
+									_: function (columnData)
+									{
+										var cellContent = '';
+										if (columnData.image != '')
+											cellContent = '<img src="' + columnData.image + '">';
+										return cellContent;
+									},
+									sort: 'value'
+								}
+							});
+							columnIndex++;
+						}
+						break;
+					case ColumnTagDate:
+						if (value.enable)
+						{
+							columnSettings.push({
+								"data": "date",
+								"orderable": data.dataOptions.reorderSourceField == undefined,
+								"title": value.title,
+								"class": "centered allow-reorder" + (value.fullWidth ? ' none' : ' all'),
+								"width": value.width > 0 ? (value.width + "px") : "80px",
+								"render": {
+									_: cellRenderer,
+									sort: 'value'
+								}
+							});
+							columnSettings.push({
+								"data": "date.value",
+								"title": value.title,
+								"visible": false,
+								"searchable": false,
+								"sType": "numeric"
+							});
+
+							columnIndex++;
+						}
+						break;
+				}
+			});
+
 			if (data.dataOptions.showDeleteButton)
 				columnSettings.push({
 					"data": null,
@@ -246,6 +268,13 @@
 				"searchable": false
 			});
 
+			$.extend($.fn.dataTableExt.oStdClasses, {
+				"sFilterInput": "form-control",
+				"sLengthSelect": "form-control"
+			});
+
+			var tableHeaderItemClass = backHandler ? 'col-sm-3' : 'col-sm-4';
+
 			dataTable = table.dataTable({
 				"data": data.dataset,
 				columns: columnSettings,
@@ -261,23 +290,37 @@
 						snapX: 0
 					} :
 					false,
+				responsive: {
+					details: {
+						display: $.fn.dataTable.Responsive.display.childRowImmediate,
+						type: ''
+					}
+				},
 				"scrollY": $.SalesPortal.Content.isMobileDevice() ? getNativeTableSize() : getBootstrapTableSize(),
 				"scrollCollapse": false,
-				"aLengthMenu": [
-					[15, 25, 50, 100, -1],
-					[15, 25, 50, 100, "All"]
-				],
+				"aLengthMenu": data.dataset.length < 500 ?
+					[
+						[15, 25, 50, 100, -1],
+						[15, 25, 50, 100, "All"]
+					] :
+					[
+						[15, 25, 50, 100, 200],
+						[15, 25, 50, 100, 200]
+					],
 				"iDisplayLength": 15,
 				"oLanguage": {
 					"sEmptyTable": "",
-					"sZeroRecords": ""
+					"sZeroRecords": "",
+					"sSearch": "Filter:"
 				},
 				"dom": (data.dataset.length > 0 ?
-					"<'row'<'col-xs-4'l><'col-xs-4 back-url text-center'><'col-xs-4'f>>" :
+					"<'row table-header-row'<'" + tableHeaderItemClass + " col-xs-12'l><'" + tableHeaderItemClass + " col-xs-12'f>" +
+					(backHandler ? "<'" + tableHeaderItemClass + " col-xs-12 back-url text-center'>" : "") +
+					"<'" + tableHeaderItemClass + " col-xs-12'p>>" :
 					"<'row'<'col-xs-12 back-url text-center'>>") +
-				"<'row'<'col-xs-12'tr>>" +
-				"<'row'<'col-xs-5'i><'col-xs-7'p>>",
-				"fnRowCallback": function (nRow, aData, iDisplayIndex)
+				"<'row table-content-row'<'col-xs-12'tr>>" +
+				"<'row table-footer-row'<'col-xs-6'i>>",
+				"fnRowCallback": function (nRow)
 				{
 					$(nRow).addClass(tableIdentifier + '-row');
 					return nRow;
@@ -290,7 +333,7 @@
 			{
 				var backUrlContent = $("#" + tableIdentifier + "_wrapper").find('.back-url');
 				backUrlContent.html(
-					'<a href="#">Click <strong style="text-decoration: underline;">HERE</strong> for a New Search</a>'
+					'<a href="#" style="text-decoration: underline">New Search</a>'
 				);
 				backUrlContent.find('a').on('click', backHandler);
 			}
@@ -299,7 +342,7 @@
 			{
 				table.on('click', '.link-delete-button', function (e)
 				{
-					var linkInfo = dataTable.api().row($(this).closest("tr")).data();
+					var linkInfo = dataTable.api().row(getDataRowElement($(this))).data();
 					deleteHandler(linkInfo);
 					e.stopPropagation();
 				});
@@ -309,7 +352,7 @@
 			{
 				e.stopPropagation();
 
-				var linkRow = dataTable.api().row($(this).closest("tr"));
+				var linkRow = dataTable.api().row(getDataRowElement($(this)));
 				var linkData = linkRow.data();
 				var linkId = linkData.id;
 
@@ -343,7 +386,7 @@
 			{
 				table.find('.link-file, .link-common').hammer().on('tap', function ()
 				{
-					var linkId = dataTable.api().row($(this).closest("tr")).data().id;
+					var linkId = dataTable.api().row(getDataRowElement($(this))).data().id;
 					$.SalesPortal.LinkManager.requestViewDialog({
 						linkId: linkId,
 						isQuickSite: false
@@ -352,7 +395,7 @@
 
 				table.find('.link-url').hammer().on('tap', function ()
 				{
-					var linkId = dataTable.api().row($(this).closest("tr")).data().id;
+					var linkId = dataTable.api().row(getDataRowElement($(this))).data().id;
 					var url = $(this).find('.link-content').prop('href');
 					$.SalesPortal.LogHelper.write({
 						type: 'Link',
@@ -366,7 +409,7 @@
 
 				table.find('.link-file, .link-url, .link-common').hammer().on('hold', function (event)
 				{
-					var linkId = dataTable.api().row($(this).closest("tr")).data().id;
+					var linkId = dataTable.api().row(getDataRowElement($(this))).data().id;
 					$.SalesPortal.LinkManager.requestLinkContextMenu(linkId, false, event.gesture.center.pageX, event.gesture.center.pageY);
 					event.gesture.stopPropagation();
 					event.gesture.preventDefault();
@@ -376,7 +419,7 @@
 			{
 				table.on('click', '.link-file, .link-common', function ()
 				{
-					var linkId = dataTable.api().row($(this).closest("tr")).data().id;
+					var linkId = dataTable.api().row(getDataRowElement($(this))).data().id;
 					$.SalesPortal.LinkManager.requestViewDialog({
 						linkId: linkId,
 						isQuickSite: false
@@ -386,7 +429,7 @@
 				table.on('click', '.link-url', function ()
 				{
 					var url = $(this).find('.link-content').prop('href');
-					var linkId = dataTable.api().row($(this).closest("tr")).data().id;
+					var linkId = dataTable.api().row(getDataRowElement($(this))).data().id;
 					$.SalesPortal.LogHelper.write({
 						type: 'Link',
 						subType: 'Open',
@@ -399,7 +442,7 @@
 
 				table.on('contextmenu', '.link-file, .link-url-internal, .link-common', function (event)
 				{
-					var linkId = dataTable.api().row($(this).closest("tr")).data().id;
+					var linkId = dataTable.api().row(getDataRowElement($(this))).data().id;
 					$.SalesPortal.LinkManager.requestLinkContextMenu(linkId, false, event.clientX, event.clientY);
 					return false;
 				});
@@ -408,7 +451,7 @@
 				{
 					table.on('contextmenu', '.link-url-external', function (event)
 					{
-						var linkId = dataTable.api().row($(this).closest("tr")).data().id;
+						var linkId = dataTable.api().row(getDataRowElement($(this))).data().id;
 						$.SalesPortal.LinkManager.requestLinkContextMenu(linkId, false, event.clientX, event.clientY);
 						return false;
 					});
@@ -456,18 +499,26 @@
 			return dataTable.api();
 		};
 
-		var cellRenderer = function (data, type, row)
+		var getDataRowElement = function (cellItem)
 		{
-			var cellContent = '';
-			var objectClass = '';
+			var tableRow = cellItem.closest("tr");
+			if (tableRow.hasClass('child'))
+				return tableRow.prev('tr.parent');
+			return tableRow;
+		};
 
+		var cellRenderer = function (data, type, row, meta)
+		{
 			if (type == "display")
 			{
-				var displayValue = typeof data === 'object' && data != null ? data.display : data;
-				displayValue = displayValue != null ? displayValue : '';
+				var content = '';
+				var objectClass = '';
 
-				if (row != '')
+				if (row && row != '')
 				{
+					var displayValue = data && typeof data === 'object' ? data.display : data;
+					displayValue = displayValue != null ? displayValue : '';
+
 					var dragData = '';
 					if (row.isDraggable)
 					{
@@ -477,7 +528,7 @@
 
 					if (row.isHyperlink)
 					{
-						cellContent = '<a class="link-content" title="' + row.tooltip + '" href="' + row.url + '" target="_blank" ' + dragData + '>' + displayValue + '</a>';
+						content = '<a class="link-content" title="' + row.tooltip + '" href="' + row.url + '" target="_blank" ' + dragData + '>' + displayValue + '</a>';
 						objectClass = ' link-url';
 						if (row.isExternalHyperlink)
 							objectClass += ' link-url-external';
@@ -486,19 +537,19 @@
 					}
 					else if (row.isFile)
 					{
-						cellContent = '<span class="link-content" ' + dragData + ' title="' + row.tooltip + '">' + displayValue + '</span>';
+						content = '<span class="link-content" ' + dragData + ' title="' + row.tooltip + '">' + displayValue + '</span>';
 						objectClass += ' link-file';
 					}
 					else
 					{
-						cellContent = '<span class="link-content" ' + dragData + ' title="' + row.tooltip + '">' + displayValue + '</span>';
+						content = '<span class="link-content" ' + dragData + ' title="' + row.tooltip + '">' + displayValue + '</span>';
 						objectClass += ' link-common';
 					}
 				}
+				return '<span class="clickable-area' + objectClass + '">' + content + '</span>';
 			}
 			else
-				cellContent = data;
-			return '<span class="clickable-area' + objectClass + '">' + cellContent + '</span>';
+				return data;
 		};
 
 		var destroy = function ()
@@ -513,10 +564,8 @@
 			if (parentContainerSelector != undefined)
 				content = $.SalesPortal.Content.getContentObject().find(parentContainerSelector);
 
-			var topHeight = content.find("#" + tableIdentifier + "_length").closest('.row').outerHeight(true);
-			if (topHeight == undefined)
-				topHeight = content.find("#" + tableIdentifier + "_filter").closest('.row').outerHeight(true);
-			var bottomHeight = content.find("#" + tableIdentifier + "_info").closest('.row').outerHeight(true);
+			var topHeight = content.find("#" + tableIdentifier + "_wrapper .table-header-row").outerHeight(true);
+			var bottomHeight = content.find("#" + tableIdentifier + "_wrapper .table-footer-row").outerHeight(true);
 
 			var tableHeaderHeight = content.find("#" + tableIdentifier + "_wrapper").find('.dataTables_scrollHead').outerHeight(true);
 
@@ -539,10 +588,8 @@
 			if (parentContainerSelector != undefined)
 				content = $.SalesPortal.Content.getContentObject().find(parentContainerSelector);
 
-			var topHeight = content.find("#" + tableIdentifier + "_length").outerHeight(true);
-			if (topHeight == undefined)
-				topHeight = content.find("#" + tableIdentifier + "_filter").outerHeight(true);
-			var bottomHeight = content.find("#" + tableIdentifier + "_info").outerHeight(true);
+			var topHeight = content.find("#" + tableIdentifier + "_wrapper .table-header-row").outerHeight(true);
+			var bottomHeight = content.find("#" + tableIdentifier + "_wrapper .table-footer-row").outerHeight(true);
 
 			var tableHeaderHeight = content.find("#" + tableIdentifier + "_wrapper").find('.dataTables_scrollHead').outerHeight(true);
 

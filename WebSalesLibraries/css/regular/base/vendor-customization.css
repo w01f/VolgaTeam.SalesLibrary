@@ -108,17 +108,12 @@ button.active
     float: none;
 }
 
-.pagination > li:first-child > a, .pagination > li:first-child > span
-{
-    border-top-left-radius: 0 !important;
-    border-bottom-left-radius: 0 !important;
-}
-
 .service-data
 {
     display: none;
 }
 
+/*Bootstrap Borders---------------------------------------------------------------*/
 .input-group-addon,
 .btn,
 .nav-tabs > li > a,
@@ -148,12 +143,25 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6
     border-radius: 0 !important;
 }
 
+.pagination > li:first-child > a, .pagination > li:first-child > span,
+.pagination > li:last-child > a, .pagination > li:last-child > span
+{
+    border-radius: 0;
+}
+/*-------------------------------------------------------------------------------------------*/
+
+/*iFlyChat-----------------------------------------------------------------*/
 .ifc.ifc-popup #ifc-app .ifc-chat-list-container .ifc-chat-list .ifc-chat-list-roster
 {
     height: 388px !important;
 }
 
 .ifc #ifc-app-container .ifc-chat-list .ifc-chat-list-roster .ifc-chat-list-roster-item .ifc-chat-list-roster-item-avatar .ifc-chat-list-roster-item-avatar-img, .ifc #ifc-app-container .ifc-chat-window .ifc-chat-list-roster .ifc-chat-list-roster-item .ifc-chat-list-roster-item-avatar .ifc-chat-list-roster-item-avatar-img
+{
+    border-radius: 0 !important;
+}
+
+.ifc #ifc-app-container .ifc-chat-window .ifc-chat-window-content .ifc-chat-window-message-wrapper-compact .ifc-chat-window-message-avatar-holder .ifc-chat-window-message-avatar .ifc-chat-window-message-avatar-img
 {
     border-radius: 0 !important;
 }
@@ -173,3 +181,4 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6
     padding-top: 10px  !important;
     font-size: 14px  !important;
 }
+/*-------------------------------------------------------------------------------*/

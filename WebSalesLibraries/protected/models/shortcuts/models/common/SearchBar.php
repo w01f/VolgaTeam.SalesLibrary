@@ -10,9 +10,11 @@
 		public $alignment;
 		public $title;
 		public $defaultLabel;
-		public $conditions;
 		public $samePage;
 		public $showTagsSelector;
+
+		/** @var  SearchConditions */
+		public $conditions;
 
 		public $enableSubSearch;
 		public $showSubSearchAll;

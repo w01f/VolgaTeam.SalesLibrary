@@ -52,6 +52,7 @@
 			'application.models.wallbin.models.cadmin.settings.*',
 			'application.models.wallbin.records.*',
 			'application.models.search.*',
+			'application.models.data_table.*',
 			'application.models.preview.common.*',
 			'application.models.preview.config.*',
 			'application.models.preview.internal_links.*',

@@ -1,4 +1,4 @@
-<?php
+<?
 
 	/**
 	 * Class SearchConditions
@@ -6,22 +6,32 @@
 	class SearchConditions
 	{
 		public $text;
-		public $textExactMatch;
 		public $fileTypes;
 		public $startDate;
 		public $endDate;
 		public $libraries;
 		public $superFilters;
 		public $categories;
+
+		public $textExactMatch;
 		public $onlyWithCategories;
 		public $onlyByName;
+		public $searchByContent;
 
-		public $sortColumn;
-		public $sortDirection;
+		/** @var  array */
+		public $columnSettings;
+
+		/** @var  TableSortSettings */
+		public $sortSettings;
+
+		/** @var  SearchCategorySettings */
+		public $categorySettings;
+		/** @var  SearchViewCountSettings */
+		public $viewCountSettings;
+		/** @var  SearchThumbnailSettings */
+		public $thumbnailSettings;
 
 		public $baseDatasetKey;
-
-		public $searchByContent;
 
 		public function __construct()
 		{
@@ -29,8 +39,36 @@
 			$this->libraries = array();
 			$this->superFilters = array();
 			$this->categories = array();
+
+			$this->columnSettings = TableColumnSettings::createEmpty();
+
+			$this->categorySettings = new SearchCategorySettings();
+			$this->viewCountSettings = new SearchViewCountSettings();
+			$this->thumbnailSettings = new SearchThumbnailSettings();
+
+			$this->sortSettings = new TableSortSettings();
+
 			$this->onlyWithCategories = false;
 			$this->onlyByName = false;
+		}
+
+		/**
+		 * @param string $encodedContent
+		 * @return SearchConditions
+		 */
+		public static function fromJson($encodedContent)
+		{
+			$instance = new self();
+
+			$data = CJSON::decode($encodedContent, true);
+			foreach ($data as $key => $value)
+			{
+				if (is_array($value))
+					$value = CJSON::decode(CJSON::encode($value), false);
+				$instance->{$key} = $value;
+			}
+
+			return $instance;
 		}
 
 		/**
@@ -42,14 +80,11 @@
 		{
 			$instance = new self();
 			/** @var $queryResult DOMNodeList */
-			$queryResult = $xpath->query('Text', $contextNode);
+			$queryResult = $xpath->query('./Text', $contextNode);
 			$instance->text = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
 
-			$queryResult = $xpath->query('TextExactMatch', $contextNode);
-			$instance->textExactMatch = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : false;
-
 			$today = date(Yii::app()->params['outputDateFormat']);
-			$queryResult = $xpath->query('StartDate', $contextNode);
+			$queryResult = $xpath->query('./StartDate', $contextNode);
 			$startDateText = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
 			if (isset($startDateText))
 			{
@@ -72,7 +107,7 @@
 				}
 			}
 
-			$queryResult = $xpath->query('EndDate', $contextNode);
+			$queryResult = $xpath->query('./EndDate', $contextNode);
 			$endDateText = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
 			if (isset($endDateText))
 			{
@@ -95,7 +130,7 @@
 				}
 			}
 
-			$queryResult = $xpath->query('FileType', $contextNode);
+			$queryResult = $xpath->query('./FileType', $contextNode);
 			foreach ($queryResult as $node)
 			{
 				$fileTypeDescription = trim($node->nodeValue);
@@ -118,7 +153,7 @@
 				}
 			}
 
-			$queryResult = $xpath->query('Library', $contextNode);
+			$queryResult = $xpath->query('./Library', $contextNode);
 			if ($queryResult->length > 0)
 				foreach ($queryResult as $node)
 				{
@@ -133,11 +168,11 @@
 					}
 				}
 
-			$queryResult = $xpath->query('SuperFilter', $contextNode);
+			$queryResult = $xpath->query('./SuperFilter', $contextNode);
 			foreach ($queryResult as $node)
 				$instance->superFilters[] = trim($node->nodeValue);
 
-			$queryResult = $xpath->query('Categories/Category', $contextNode);
+			$queryResult = $xpath->query('./Categories/Category', $contextNode);
 			/** @var $node DOMElement */
 			foreach ($queryResult as $node)
 			{
@@ -150,56 +185,34 @@
 				$instance->categories[] = $category;
 			}
 
-			$queryResult = $xpath->query('HideIfNoTag', $contextNode);
+			$queryResult = $xpath->query('./TextExactMatch', $contextNode);
+			$instance->textExactMatch = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : false;
+
+			$queryResult = $xpath->query('./HideIfNoTag', $contextNode);
 			$instance->onlyWithCategories = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : false;
 
-			$queryResult = $xpath->query('SearchByName', $contextNode);
+			$queryResult = $xpath->query('./SearchByName', $contextNode);
 			$instance->onlyByName = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : false;
 
-			$queryResult = $xpath->query('SortBy', $contextNode);
-			foreach ($queryResult as $node)
-			{
-				switch (strtolower(trim($node->nodeValue)))
-				{
-					case "tag":
-						$instance->sortColumn = "tag";
-						break;
-					case "station":
-						$instance->sortColumn = "library";
-						break;
-					case "type":
-						$instance->sortColumn = "file_type";
-						break;
-					case "link":
-						$instance->sortColumn = "name";
-						break;
-					case "date":
-						$instance->sortColumn = "date_modify";
-						break;
-					case "rate":
-						$instance->sortColumn = "rate";
-						break;
-					case "views":
-						$instance->sortColumn = "views";
-						break;
-				}
-				break;
-			}
+			$queryResult = $xpath->query('./ColumnSettings', $contextNode);
+			if ($queryResult->length > 0)
+				$instance->columnSettings = TableColumnSettings::loadColumnsFromXml($xpath, $queryResult->item(0));
 
-			$queryResult = $xpath->query('Sortorder', $contextNode);
-			foreach ($queryResult as $node)
-			{
-				switch (strtolower(trim($node->nodeValue)))
-				{
-					case "ascending":
-						$instance->sortDirection = "asc";
-						break;
-					case "descending":
-						$instance->sortDirection = "desc";
-						break;
-				}
-				break;
-			}
+			$queryResult = $xpath->query('./CategorySettings', $contextNode);
+			if ($queryResult->length > 0)
+				$instance->categorySettings = SearchCategorySettings::fromXml($xpath, $queryResult->item(0));
+
+			$queryResult = $xpath->query('./LinkViewsSettings', $contextNode);
+			if ($queryResult->length > 0)
+				$instance->viewCountSettings = SearchViewCountSettings::fromXml($xpath, $queryResult->item(0));
+
+			$queryResult = $xpath->query('./ThumbnailSettings', $contextNode);
+			if ($queryResult->length > 0)
+				$instance->thumbnailSettings = SearchThumbnailSettings::fromXml($xpath, $queryResult->item(0));
+
+			$queryResult = $xpath->query('./SortSettings', $contextNode);
+			if ($queryResult->length > 0)
+				$instance->sortSettings->configureFromXml($xpath, $queryResult->item(0));
 
 			return $instance;
 		}

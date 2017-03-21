@@ -117,7 +117,7 @@
 			if (!isset($linksEncoded))
 			{
 				$queryRecords = self::queryLinksByCondition($searchConditions);
-				$links = DataTableHelper::formatRegularData($queryRecords);
+				$links = DataTableHelper::formatRegularData($queryRecords, $searchConditions->columnSettings);
 				Yii::app()->session[$datasetKey] = CJSON::encode($links);
 			}
 			else
@@ -320,36 +320,8 @@
 				$additionalCategoryCondition,
 				$additionalOnlyWithCategoriesCondition);
 
-			$selectText = 'max(link.id) as id,
-							max(link.id_library) as id_library,
-							max(link.name) as name,
-							max(link.type) as type,
-							max(lib.name) as lib_name,
-							link.file_relative_path as path,
-							link.file_name as file_name,
-							link.file_extension as file_extension,
-							max(link.file_date) as link_date,
-							max(link.search_format) as format,
-							max(link.settings) as extended_properties,
-							(select (round(avg(lr.value)*2)/2) as value from tbl_link_rate lr where lr.id_link=link.id) as rate,
-							glcat.tag as tag,
-						   (select sum(aggr.link_views) from
-				           (select
-				              s_l.id_link as link_id,
-				              count(s_l.id) as link_views
-				            from tbl_statistic_link s_l
-				            group by s_l.id_link
-				            union
-				            select
-				              l_q.id_link as link_id,
-				              count(s_q.id) as link_views
-				            from tbl_statistic_qpage s_q
-				              join tbl_link_qpage l_q on l_q.id_qpage = s_q.id_qpage
-				            group by l_q.id_link
-				           ) aggr where aggr.link_id=link.id) as total_views';
-
 			$whereConditions = array(
-				'link.type<>6',
+				'link.type not in (5,6)',
 				$contentCondition,
 				$baseLinksCondition,
 				$libraryCondition,
@@ -362,14 +334,17 @@
 				$linkCondition
 			);
 
+			$querySettings = QuerySettings::prepareQuery(
+				array(
+					QuerySettings::SettingsTagWhere => $whereConditions,
+					QuerySettings::SettingsTagCategoryWhere => $categoryJoinCondition,
+					QuerySettings::SettingsTagColumns => $searchConditions->columnSettings,
+					QuerySettings::SettingsTagCategory => $searchConditions->categorySettings,
+					QuerySettings::SettingsTagViewsCount => $searchConditions->viewCountSettings,
+					QuerySettings::SettingsTagThumbnails => $searchConditions->thumbnailSettings,
+				));
 			/** @var CDbCommand $dbCommnad */
-			$dbCommnad = DataTableHelper::buildQuery(
-				null,
-				null,
-				null,
-				$whereConditions,
-				$categoryJoinCondition,
-				null);
+			$dbCommnad = DataTableHelper::buildQuery($querySettings);
 			$queryRecords = $dbCommnad->queryAll();
 
 			return $queryRecords;

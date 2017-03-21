@@ -3,6 +3,11 @@
 	cursor: pointer;
 }
 
+.link-data-table tr td.link-name-text-container
+{
+	font-size: 1.2em;
+}
+
 .link-data-table tr .rate-image-container
 {
     cursor: pointer;
@@ -34,8 +39,47 @@
 	cursor: pointer;
 }
 
-.dataTables_info,
-.dataTables_paginate
+.link-data-table tr.child .dtr-title
+{
+	display: none !important;
+}
+
+.link-data-table tr.child .dtr-data,
+.link-data-table tr.child .dtr-data *
+{
+	color: #a6a6a6 !important;
+}
+
+.table-header-row
+{
+	line-height: 34px !important;
+}
+
+.dataTables_info
 {
 	margin-top: 10px !important;
+}
+
+.dataTables_filter
+{
+	text-align: center !important;
+}
+
+.dataTables_length .bootstrap-select
+{
+	width: auto !important;
+}
+
+.table-striped > tbody > tr.even,
+.table-striped > tbody > tr.even + tr.child,
+.table-striped > tbody > tr.even + tr.child:hover
+{
+	background-color: #ffffff !important;
+}
+
+.table-striped > tbody > tr.odd,
+.table-striped > tbody > tr.odd + tr.child,
+.table-striped > tbody > tr.odd + tr.child:hover
+{
+	background-color: #ebebeb !important;
 }

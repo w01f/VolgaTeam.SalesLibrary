@@ -9,8 +9,10 @@
 			var passwordRequirementsTag = $('#password-requirements');
 			var passwordField = $('#edit-field-password');
 
-			$('#recover-password-link').fancybox().off('click').on('click', function ()
+			$('#recover-password-link').fancybox().off('click').on('click', function (e)
 			{
+				e.preventDefault();
+				e.stopPropagation();
 				resetPassword();
 			});
 

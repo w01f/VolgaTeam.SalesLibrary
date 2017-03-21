@@ -186,18 +186,12 @@
 		public function actionGetLinkCart()
 		{
 			$userId = UserIdentity::getCurrentUserId();
-			$links = UserLinkCartRecord::getLinksByUser($userId);
+			$columnSettings = TableColumnSettings::createLinkCartColumns();
+			$links = UserLinkCartRecord::getLinksByUser($userId, $columnSettings);
 			echo CJSON::encode(array(
 				'links' => $links,
 				'viewOptions' => array(
-					'showCategory' => false,
-					'categoryColumnName' => Yii::app()->params['tags']['column_name'],
-					'showLibraries' => false,
-					'librariesColumnName' => Yii::app()->params['stations']['column_name'],
-					'showType' => true,
-					'showDate' => false,
-					'showRate' => false,
-					'showViewsCount' => false,
+					'columnSettings' => $columnSettings,
 					'showDeleteButton' => true
 				)
 			));
@@ -322,18 +316,12 @@
 			{
 				/** @var $page QPageRecord */
 				$page = QPageRecord::model()->findByPk($selectedPageId);
-				$links = $page->getPageLinks();
+				$columnSettings = TableColumnSettings::createEmpty();
+				$links = $page->getPageLinks($columnSettings);
 				echo CJSON::encode(array(
 					'links' => $links,
 					'viewOptions' => array(
-						'showCategory' => Yii::app()->params['search_options']['hide_tag'] != true,
-						'categoryColumnName' => Yii::app()->params['tags']['column_name'],
-						'showLibraries' => Yii::app()->params['search_options']['hide_libraries'] != true,
-						'librariesColumnName' => Yii::app()->params['stations']['column_name'],
-						'showType' => true,
-						'showDate' => true,
-						'showRate' => true,
-						'showViewsCount' => true,
+						'columnSettings' => $columnSettings,
 						'showDeleteButton' => true,
 						'reorderSourceField' => 'listOrder'
 					)
