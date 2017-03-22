@@ -6,5 +6,5 @@ return array(
 	'outputDateFormat'=>'m/d/y',
 	'outputTimeFormat'=>'h:i A',
 	'mysqlDateFormat'=>'Y-m-d H:i:s',
-	'version'=>'3.2.173',
+	'version'=>'3.2.174',
 );

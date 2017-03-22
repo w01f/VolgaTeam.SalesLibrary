@@ -102,10 +102,12 @@
 			var navigationPanelObject = $.SalesPortal.Content.getNavigationPanel();
 			var controlBar = navigationPanelObject.find('.control-bar');
 			var height = $(window).height() - menu.outerHeight(true) - menu.offset().top - controlBar.outerHeight(true);
-			navigationPanelObject.find('ul').css({
+			navigationPanelObject.find('.navigation-item-list-container').css({
 				'height': height + 'px'
 			});
-			//parameters.sizeChangedCallback();
+			navigationPanelObject.find('.navigation-item-list').css({
+				'height': height + 'px'
+			});
 		};
 
 		init();

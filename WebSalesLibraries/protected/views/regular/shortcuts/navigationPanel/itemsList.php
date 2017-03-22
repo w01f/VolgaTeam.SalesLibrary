@@ -55,13 +55,17 @@
         <img src="<? echo Yii::app()->getBaseUrl(true) . '/images/shortcuts/left-panel/expand_panel.svg'; ?>">
     </a>
 </div>
-<ul class="nav nav-pills navigation-item-list">
-	<? foreach ($navigationPanel->items as $navigationItem): ?>
-        <li class="navigation-item" <? if (!Yii::app()->browser->isMobile() && !empty($navigationItem->tooltip)): ?> title="<? echo $navigationItem->tooltip; ?>"<? endif; ?>>
-			<?
-				$viewPath = \Yii::getPathOfAlias('application.views.regular.shortcuts.navigationPanel') . '/' . $navigationItem->contentView . '.php';
-				echo $this->renderFile($viewPath, array('itemData' => $navigationItem), true);
-			?>
-        </li>
-	<? endforeach; ?>
-</ul>
+<div class="navigation-item-list-container">
+    <div class="navigation-item-list">
+        <ul class="nav nav-pills">
+			<? foreach ($navigationPanel->items as $navigationItem): ?>
+                <li class="navigation-item" <? if (!Yii::app()->browser->isMobile() && !empty($navigationItem->tooltip)): ?> title="<? echo $navigationItem->tooltip; ?>"<? endif; ?>>
+					<?
+						$viewPath = \Yii::getPathOfAlias('application.views.regular.shortcuts.navigationPanel') . '/' . $navigationItem->contentView . '.php';
+						echo $this->renderFile($viewPath, array('itemData' => $navigationItem), true);
+					?>
+                </li>
+			<? endforeach; ?>
+        </ul>
+    </div>
+</div>
