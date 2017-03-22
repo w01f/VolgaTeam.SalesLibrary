@@ -93,6 +93,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 					var newGroup = new SearchGroup
 					{
 						Name = sourceGroup.Name,
+						SuperGroup = sourceGroup.SuperGroup,
 						Description = sourceGroup.Description
 					};
 					newGroup.Tags.AddRange(groupNode.Nodes
@@ -116,6 +117,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 					var newGroup = new SearchGroup
 					{
 						Name = sourceGroup.Name,
+						SuperGroup = sourceGroup.SuperGroup,
 						Description = sourceGroup.Description
 					};
 					newGroup.Tags.AddRange(groupNode.Nodes

@@ -139,8 +139,6 @@ namespace SalesLibraries.FileManager.Controllers
 
 			superFilterControl.Init();
 			superFilterControl.EditorChanged += OnLinkSuperFilterChanged;
-
-			pnTagInfoContainer.Visible = MainController.Instance.Lists.SearchTags.TagCount;
 		}
 
 		public void ShowPage(TabPageEnum pageType)

@@ -6111,6 +6111,8 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         
         private string libraryIdField;
         
+        private string groupField;
+        
         private string categoryField;
         
         private string tagField;
@@ -6132,6 +6134,16 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
             }
             set {
                 this.libraryIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string group {
+            get {
+                return this.groupField;
+            }
+            set {
+                this.groupField = value;
             }
         }
         

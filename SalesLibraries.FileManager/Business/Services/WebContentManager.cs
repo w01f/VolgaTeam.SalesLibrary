@@ -380,6 +380,7 @@ namespace SalesLibraries.FileManager.Business.Services
 					var category = new LinkCategory();
 					category.libraryId = source.ParentLibrary.ExtId.ToString();
 					category.linkId = source.ExtId.ToString();
+					category.group = searchGroup.SuperGroup;
 					category.category = searchGroup.Name;
 					category.tag = tag.Name;
 					fileCategories.Add(category);

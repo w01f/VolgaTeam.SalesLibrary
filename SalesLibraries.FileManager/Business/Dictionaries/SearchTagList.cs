@@ -75,11 +75,12 @@ namespace SalesLibraries.FileManager.Business.Dictionaries
 				  {
 					  Name = superGroup.Key.Group
 				  };
-				  searchSuperGroup.Groups.AddRange(superGroup.GroupBy(group => new { group.Category }).Select(group =>
+				  searchSuperGroup.Groups.AddRange(superGroup.GroupBy(group => new { group.Group, group.Category }).Select(group =>
 					 {
 						 var searchGroup = new SearchGroup
 						 {
 							 Name = group.Key.Category,
+							 SuperGroup = group.Key.Group,
 							 Description = group.Select(g => g.Description).FirstOrDefault()
 						 };
 						 searchGroup.Tags.AddRange(group.Select(g => new SearchTag { Name = g.Tag }));

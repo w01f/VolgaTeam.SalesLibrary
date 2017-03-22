@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Threading;
 using Newtonsoft.Json;
+using SalesLibraries.Business.Entities.Interfaces;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers;
 
 namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
@@ -27,6 +29,12 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 		{
 			MarkAsModified();
 			GetPreviewContainer().ClearContent();
+		}
+
+		public void UpddatePreviewContainer(IPreviewGenerator generator, CancellationToken cancelationToken)
+		{
+			ClearPreviewContainer();
+			GetPreviewContainer().UpdateContent(new[] { this }, generator, cancelationToken);
 		}
 	}
 }

@@ -207,6 +207,7 @@
         <xsd:all>
           <xsd:element name="linkId" type="xsd:string" />
           <xsd:element name="libraryId" type="xsd:string" />
+          <xsd:element name="group" type="xsd:string" />
           <xsd:element name="category" type="xsd:string" />
           <xsd:element name="tag" type="xsd:string" />
         </xsd:all>

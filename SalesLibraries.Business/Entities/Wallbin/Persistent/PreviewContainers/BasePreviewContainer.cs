@@ -85,6 +85,13 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.PreviewContainers
 			if (generator == null)
 				throw new NotImplementedException("Preview Generator is not implemented for that file format");
 			var associatedLinks = Library.GetPreviewableLinksBySourcePath(SourcePath).ToList();
+			UpdateContent(associatedLinks, generator, cancellationToken);
+		}
+
+		public void UpdateContent(IList<PreviewableLink> associatedLinks, IPreviewGenerator generator, CancellationToken cancellationToken)
+		{
+			if (generator == null)
+				throw new NotImplementedException("Preview Generator is not implemented for that file format");
 			UpdateState(associatedLinks);
 			if (IsUpToDate)
 				return;

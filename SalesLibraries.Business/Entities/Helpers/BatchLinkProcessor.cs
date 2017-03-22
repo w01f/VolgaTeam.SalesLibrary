@@ -223,7 +223,11 @@ namespace SalesLibraries.Business.Entities.Helpers
 				if (commonCategories.Any(c => c.Equals(searchGroup))) continue;
 				if (!links.All(l => l.Tags.Categories.Any(c => c.Equals(searchGroup)))) continue;
 
-				var commonCategory = new SearchGroup { Name = searchGroup.Name };
+				var commonCategory = new SearchGroup
+				{
+					Name = searchGroup.Name,
+					SuperGroup = searchGroup.SuperGroup
+				};
 				foreach (var searchTag in allCategories
 					.Where(c => c.Equals(commonCategory))
 					.SelectMany(c => c.Tags)

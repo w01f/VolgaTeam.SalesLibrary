@@ -11,6 +11,7 @@ using SalesLibraries.Business.Entities.Common;
 using SalesLibraries.Business.Entities.Interfaces;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent;
+using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.Common.Extensions;
 using SalesLibraries.Common.Helpers;
@@ -512,10 +513,15 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			MainController.Instance.ProcessManager.Run("Updating Images...", (cancelationToken, formProgess) =>
 			{
 				var previewableLink = (PreviewableLink)_sourceLink;
-				previewableLink.ClearPreviewContainer();
-				var previewContainer = previewableLink.GetPreviewContainer();
-				var previewGenerator = previewContainer.GetPreviewGenerator();
-				previewContainer.UpdateContent(previewGenerator, cancelationToken);
+				var settings = previewableLink.Settings as DocumentLinkSettings;
+				if (settings != null)
+				{
+					settings.IsArchiveResource = false;
+					settings.GeneratePreviewImages = true;
+				}
+
+				var previewGenerator = previewableLink.GetPreviewContainer().GetPreviewGenerator();
+				previewableLink.UpddatePreviewContainer(previewGenerator, cancelationToken);
 			});
 
 			LoadSourceImages();

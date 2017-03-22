@@ -187,7 +187,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			var commonCategories = _searchGroups
 				.Select(sg =>
 				{
-					var searchGroup = new SearchGroup { Name = sg.DataSource.Name };
+					var searchGroup = new SearchGroup
+					{
+						Name = sg.DataSource.Name,
+						SuperGroup = sg.DataSource.SuperGroup
+					};
 					searchGroup.Tags.AddRange(sg.ListBox.Items
 						.Where(item => item.CheckState == CheckState.Checked)
 						.Select(item =>
@@ -203,7 +207,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			var partialCategories = _searchGroups
 				.Select(sg =>
 				{
-					var searchGroup = new SearchGroup { Name = sg.DataSource.Name };
+					var searchGroup = new SearchGroup
+					{
+						Name = sg.DataSource.Name,
+						SuperGroup = sg.DataSource.SuperGroup
+					};
 					searchGroup.Tags.AddRange(sg.ListBox.Items
 						.Where(item => item.CheckState == CheckState.Indeterminate)
 						.Select(item =>

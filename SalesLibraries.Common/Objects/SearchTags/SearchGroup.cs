@@ -7,6 +7,7 @@ namespace SalesLibraries.Common.Objects.SearchTags
 	public class SearchGroup : IEquatable<SearchGroup>
 	{
 		public string Name { get; set; }
+		public string SuperGroup { get; set; }
 		public string Description { get; set; }
 
 		public List<SearchTag> Tags { get; private set; }
@@ -25,6 +26,7 @@ namespace SalesLibraries.Common.Objects.SearchTags
 		{
 			var result = new SearchGroup();
 			result.Name = Name;
+			result.SuperGroup = SuperGroup;
 			result.Description = Description;
 			result.Tags.AddRange(Tags.Select(searchTag => new SearchTag() { Name = searchTag.Name }));
 			return result;

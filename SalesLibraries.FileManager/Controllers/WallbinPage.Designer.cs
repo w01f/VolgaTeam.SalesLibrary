@@ -33,14 +33,14 @@
 			this.pnEmpty = new System.Windows.Forms.Panel();
 			this.pnMain = new System.Windows.Forms.Panel();
 			this.pnHeader = new System.Windows.Forms.Panel();
+			this.linkInfoControl = new SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSettings.LinkInfoControl();
 			this.pnTagInfoContainer = new System.Windows.Forms.Panel();
+			this.superFilterControl = new SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSettings.SuperFilterControl();
 			this.pnPageSelector = new System.Windows.Forms.Panel();
 			this.comboBoxEditPages = new DevExpress.XtraEditors.ComboBoxEdit();
 			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
 			this.retractableBar = new SalesLibraries.CommonGUI.RetractableBar.RetractableBarLeft();
 			this.laEditorTitle = new System.Windows.Forms.Label();
-			this.linkInfoControl = new SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSettings.LinkInfoControl();
-			this.superFilterControl = new SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSettings.SuperFilterControl();
 			this.linkTagsInfoControl = new SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSettings.LinkTagsInfoControl();
 			this.pnMain.SuspendLayout();
 			this.pnHeader.SuspendLayout();
@@ -90,14 +90,37 @@
 			this.pnHeader.Size = new System.Drawing.Size(988, 47);
 			this.pnHeader.TabIndex = 8;
 			// 
+			// linkInfoControl
+			// 
+			this.linkInfoControl.AllowHtmlString = true;
+			this.linkInfoControl.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.linkInfoControl.Appearance.ForeColor = System.Drawing.SystemColors.ControlText;
+			this.linkInfoControl.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+			this.linkInfoControl.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+			this.linkInfoControl.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.linkInfoControl.Location = new System.Drawing.Point(201, 0);
+			this.linkInfoControl.Name = "linkInfoControl";
+			this.linkInfoControl.Size = new System.Drawing.Size(219, 47);
+			this.linkInfoControl.TabIndex = 2;
+			// 
 			// pnTagInfoContainer
 			// 
 			this.pnTagInfoContainer.Dock = System.Windows.Forms.DockStyle.Right;
-			this.pnTagInfoContainer.Location = new System.Drawing.Point(450, 0);
+			this.pnTagInfoContainer.Location = new System.Drawing.Point(420, 0);
 			this.pnTagInfoContainer.Name = "pnTagInfoContainer";
 			this.pnTagInfoContainer.Padding = new System.Windows.Forms.Padding(0, 0, 10, 0);
-			this.pnTagInfoContainer.Size = new System.Drawing.Size(340, 47);
+			this.pnTagInfoContainer.Size = new System.Drawing.Size(370, 47);
 			this.pnTagInfoContainer.TabIndex = 1;
+			// 
+			// superFilterControl
+			// 
+			this.superFilterControl.BackColor = System.Drawing.Color.White;
+			this.superFilterControl.Dock = System.Windows.Forms.DockStyle.Left;
+			this.superFilterControl.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.superFilterControl.Location = new System.Drawing.Point(5, 0);
+			this.superFilterControl.Name = "superFilterControl";
+			this.superFilterControl.Size = new System.Drawing.Size(196, 47);
+			this.superFilterControl.TabIndex = 0;
 			// 
 			// pnPageSelector
 			// 
@@ -178,29 +201,6 @@
 			this.laEditorTitle.Size = new System.Drawing.Size(247, 36);
 			this.laEditorTitle.TabIndex = 1;
 			this.laEditorTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// linkInfoControl
-			// 
-			this.linkInfoControl.AllowHtmlString = true;
-			this.linkInfoControl.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.linkInfoControl.Appearance.ForeColor = System.Drawing.SystemColors.ControlText;
-			this.linkInfoControl.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-			this.linkInfoControl.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-			this.linkInfoControl.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.linkInfoControl.Location = new System.Drawing.Point(201, 0);
-			this.linkInfoControl.Name = "linkInfoControl";
-			this.linkInfoControl.Size = new System.Drawing.Size(249, 47);
-			this.linkInfoControl.TabIndex = 2;
-			// 
-			// superFilterControl
-			// 
-			this.superFilterControl.BackColor = System.Drawing.Color.White;
-			this.superFilterControl.Dock = System.Windows.Forms.DockStyle.Left;
-			this.superFilterControl.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.superFilterControl.Location = new System.Drawing.Point(5, 0);
-			this.superFilterControl.Name = "superFilterControl";
-			this.superFilterControl.Size = new System.Drawing.Size(196, 47);
-			this.superFilterControl.TabIndex = 0;
 			// 
 			// linkTagsInfoControl
 			// 

@@ -2,6 +2,7 @@
 using DevExpress.XtraEditors;
 using SalesLibraries.Business.Entities.Wallbin.Persistent;
 using SalesLibraries.FileManager.Business.Services;
+using SalesLibraries.FileManager.Controllers;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Libraries
 {
@@ -28,12 +29,18 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Libraries
 			var taggedLibraryLinks = TaggedLinksManager.Instance.TaggedLibraryLinks;
 
 			var linksRequireToTag = totalLibraryLinks - taggedLibraryLinks;
-			Text = String.Format("<size=-1><color={0}>Total Links: {1}    </color><color={0}>Tagged: {2}    </color><color=gray>Links: {3}    </color><color=gray>Tagged: {4}</color></size>",
-				linksRequireToTag > 0 ? "red" : "green",
-				totalLibraryLinks,
-				taggedLibraryLinks,
-				TaggedLinksManager.Instance.TotalPageLinks,
-				TaggedLinksManager.Instance.TaggedPageLinks);
+			if (MainController.Instance.Lists.SearchTags.TagCount && MainController.Instance.Settings.EnableTagsTab)
+				Text = String.Format("<size=-1><color={0}>Total Links: {1}    </color><color={0}>Tagged: {2}    </color><color=gray>Page Links: {3}    </color><color=gray>Tagged: {4}</color></size>",
+					linksRequireToTag > 0 ? "red" : "green",
+					totalLibraryLinks,
+					taggedLibraryLinks,
+					TaggedLinksManager.Instance.TotalPageLinks,
+					TaggedLinksManager.Instance.TaggedPageLinks);
+			else
+				Text = String.Format("<size=-1><color={0}>Total Links: {1}    </color><color=gray>Page Links: {2}    </color></size>",
+					linksRequireToTag > 0 ? "red" : "green",
+					totalLibraryLinks,
+					TaggedLinksManager.Instance.TotalPageLinks);
 		}
 
 		public void ReleaseControl()
