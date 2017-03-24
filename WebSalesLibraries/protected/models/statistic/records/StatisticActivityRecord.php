@@ -98,7 +98,7 @@
 		{
 			$activityRecord = new StatisticActivityRecord();
 			$activityRecord->id = $activityId;
-			$activityRecord->date_time = date(Yii::app()->params['mysqlDateFormat'], time());
+			$activityRecord->date_time = date(Yii::app()->params['mysqlDateTimeFormat'], time());
 			$activityRecord->type = $activityType;
 			$activityRecord->sub_type = $activitySubType;
 			$activityRecord->save();

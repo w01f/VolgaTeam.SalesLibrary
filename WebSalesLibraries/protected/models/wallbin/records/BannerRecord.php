@@ -61,7 +61,7 @@
 			$bannerRecord->font_bold = $banner['font']['isBold'];
 			$bannerRecord->font_italic = $banner['font']['isItalic'];
 			$bannerRecord->font_underline = $banner['font']['isUnderlined'];
-			$bannerRecord->date_modify = date(Yii::app()->params['mysqlDateFormat'], strtotime($banner['dateModify']));
+			$bannerRecord->date_modify = date(Yii::app()->params['mysqlDateTimeFormat'], strtotime($banner['dateModify']));
 			$bannerRecord->save();
 		}
 

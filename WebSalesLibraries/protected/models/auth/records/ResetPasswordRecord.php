@@ -41,7 +41,7 @@
 					$resetPassword = new ResetPasswordRecord();
 					$resetPassword->login = $user->login;
 				}
-				$resetPassword->initial_date = date(Yii::app()->params['mysqlDateFormat'], strtotime(date('y:m:d')));
+				$resetPassword->initial_date = date(Yii::app()->params['mysqlDateFormat']);
 				$resetPassword->save();
 
 				if ($email)

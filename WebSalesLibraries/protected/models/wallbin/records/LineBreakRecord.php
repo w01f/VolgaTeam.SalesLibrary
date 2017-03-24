@@ -47,7 +47,7 @@
 			$lineBreakRecord->font_bold = $lineBreak['font']['isBold'];
 			$lineBreakRecord->font_italic = $lineBreak['font']['isItalic'];
 			$lineBreakRecord->font_underline = $lineBreak['font']['isUnderlined'];
-			$lineBreakRecord->date_modify = date(Yii::app()->params['mysqlDateFormat'], strtotime($lineBreak['dateModify']));
+			$lineBreakRecord->date_modify = date(Yii::app()->params['mysqlDateTimeFormat'], strtotime($lineBreak['dateModify']));
 			$lineBreakRecord->save();
 		}
 

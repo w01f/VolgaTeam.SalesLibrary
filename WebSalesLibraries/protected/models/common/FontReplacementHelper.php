@@ -9,7 +9,7 @@
 
 		public static function replaceFont($originalFontName)
 		{
-			$browser = Yii::app()->browser->getBrowser();
+			$browser = isset(Yii::app()->browser) ? Yii::app()->browser->getBrowser() : null;
 			if ($browser !== Browser::BROWSER_IPAD)
 				return $originalFontName;
 

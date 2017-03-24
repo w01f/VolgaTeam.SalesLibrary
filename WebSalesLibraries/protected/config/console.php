@@ -61,6 +61,9 @@ return array(
                 ),
             ),
         ),
+	    'browser' => array(
+		    'class' => 'application.extensions.browser.CBrowserComponent',
+	    ),
         'cacheDB' => array(
             'class' => 'system.caching.CDbCache',
             'connectionID' => 'db',

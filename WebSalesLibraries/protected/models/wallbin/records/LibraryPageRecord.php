@@ -41,7 +41,7 @@
 			$needToCreate = false;
 			/** @var $pageRecord LibraryPageRecord */
 			$pageRecord = LibraryPageRecord::model()->findByPk($page['id']);
-			$pageDate = date(Yii::app()->params['mysqlDateFormat'], strtotime($page['dateModify']));
+			$pageDate = date(Yii::app()->params['mysqlDateTimeFormat'], strtotime($page['dateModify']));
 			if ($pageRecord !== null)
 			{
 				if ($pageRecord->date_modify != null)
@@ -98,7 +98,7 @@
 					}
 					$libraryPageRecord->name = $libraryPage->name;
 					$libraryPageRecord->order = $libraryPage->order;
-					$libraryPageRecord->date_modify = date(Yii::app()->params['mysqlDateFormat'], strtotime($libraryPage->lastModified));
+					$libraryPageRecord->date_modify = date(Yii::app()->params['mysqlDateTimeFormat'], strtotime($libraryPage->lastModified));
 					$libraryPageRecord->settings = CJSON::encode($libraryPage->settings);
 					$libraryPageRecord->save();
 					break;

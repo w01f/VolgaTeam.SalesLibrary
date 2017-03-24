@@ -54,11 +54,11 @@
 				{
 					$user = new UserRecord();
 					$user->login = $login;
-					$user->date_add = date(Yii::app()->params['mysqlDateFormat'], strtotime(date("Y-m-d H:i:s")));
+					$user->date_add = date(Yii::app()->params['mysqlDateTimeFormat']);
 					$newUser = TRUE;
 				}
 				else
-					$user->date_modify = date(Yii::app()->params['mysqlDateFormat'], strtotime(date("Y-m-d H:i:s")));
+					$user->date_modify = date(Yii::app()->params['mysqlDateTimeFormat']);
 				$user->first_name = $firstName;
 				$user->last_name = $lastName;
 				$user->email = $email;

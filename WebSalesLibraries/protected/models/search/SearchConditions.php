@@ -96,6 +96,12 @@
 					case "yesterday":
 						$instance->startDate = date(Yii::app()->params['outputDateFormat'], strtotime($today . ' - 1 days'));
 						break;
+					case "current week":
+						$instance->startDate = date(Yii::app()->params['outputDateFormat'], strtotime("last Monday"));
+						break;
+					case "current month":
+						$instance->startDate = date(Yii::app()->params['outputDateFormat'], strtotime(date('Y-m-1')));
+						break;
 					default:
 						if (strstr($startDateText, ' days ago'))
 						{
@@ -114,6 +120,8 @@
 				switch ($endDateText)
 				{
 					case "today":
+					case "current week":
+					case "current month":
 						$instance->endDate = date(Yii::app()->params['outputDateFormat'], strtotime($today . ' + 1 days'));
 						break;
 					case "yesterday":

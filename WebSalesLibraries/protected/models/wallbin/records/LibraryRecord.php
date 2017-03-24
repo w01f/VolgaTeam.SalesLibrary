@@ -37,7 +37,7 @@
 		public static function createEmptyLibrary($libraryName)
 		{
 			$libraryId = Utils::getGUID();
-			$createDate = date(Yii::app()->params['mysqlDateFormat']);
+			$createDate = date(Yii::app()->params['mysqlDateTimeFormat']);
 
 			/** @var $libraryRecord LibraryRecord */
 			$libraryRecord = new LibraryRecord();
@@ -74,7 +74,7 @@
 			if ($libraryRecord !== null)
 			{
 				if ($libraryRecord->last_update != null)
-					if ($libraryRecord->last_update != date(Yii::app()->params['mysqlDateFormat'], $sourceDate))
+					if ($libraryRecord->last_update != date(Yii::app()->params['mysqlDateTimeFormat'], $sourceDate))
 						$needToUpdate = true;
 			}
 			else
@@ -91,7 +91,7 @@
 				$libraryRecord->id = $library['id'];
 				$libraryRecord->name = $library['name'];
 				$libraryRecord->path = str_replace(\application\models\wallbin\models\web\LibraryManager::getLibrariesRootPath() . DIRECTORY_SEPARATOR, '', $libraryRootPath);
-				$libraryRecord->last_update = date(Yii::app()->params['mysqlDateFormat'], $sourceDate);
+				$libraryRecord->last_update = date(Yii::app()->params['mysqlDateTimeFormat'], $sourceDate);
 				$libraryRecord->save();
 
 				foreach ($library['autoWidgets'] as $autoWidget)
@@ -135,7 +135,7 @@
 						$libraryRecord->id = $library->id;
 					}
 					$libraryRecord->name = $library->name;
-					$libraryRecord->last_update = date(Yii::app()->params['mysqlDateFormat'], strtotime($library->lastModified));
+					$libraryRecord->last_update = date(Yii::app()->params['mysqlDateTimeFormat'], strtotime($library->lastModified));
 					$libraryRecord->settings = CJSON::encode($library->settings);
 					$libraryRecord->save();
 					break;

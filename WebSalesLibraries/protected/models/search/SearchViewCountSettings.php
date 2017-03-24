@@ -36,14 +36,23 @@
 					case "yesterday":
 						$instance->startDate = date(Yii::app()->params['mysqlDateFormat'], strtotime($today . ' - 1 days'));
 						break;
+					case "current week":
+						$instance->startDate = date(Yii::app()->params['mysqlDateFormat'], strtotime("last Monday"));
+						break;
+					case "current month":
+						$instance->startDate = date(Yii::app()->params['mysqlDateFormat'], strtotime(date('Y-m-1')));
+						break;
 					default:
 						if (strstr($startDateText, ' days ago'))
 						{
-							$startDateText = str_replace(' days ago', '', $startDateText);
-							$instance->startDate = date(Yii::app()->params['mysqlDateFormat'], strtotime($today . ' - ' . $startDateText . ' days'));
+							$daysCount = intval(str_replace(' days ago', '', $startDateText));
+							if ($daysCount > 0)
+								$instance->startDate = date(Yii::app()->params['mysqlDateFormat'], strtotime($today . ' - ' . $daysCount . ' days'));
+							else
+								$instance->startDate = $today;
 						}
-						else
-							$instance->startDate = $startDateText;
+						else if (!empty($startDateText))
+							$instance->startDate = date(Yii::app()->params['mysqlDateFormat'], strtotime($startDateText));
 				}
 				$instance->useDateRange = true;
 			}
@@ -54,6 +63,8 @@
 				switch ($endDateText)
 				{
 					case "today":
+					case "current week":
+					case "current month":
 						$instance->endDate = date(Yii::app()->params['mysqlDateFormat'], strtotime($today . ' + 1 days'));
 						break;
 					case "yesterday":
@@ -62,11 +73,14 @@
 					default:
 						if (strstr($endDateText, ' days ago'))
 						{
-							$endDateText = str_replace(' days ago', '', $endDateText);
-							$instance->endDate = date(Yii::app()->params['mysqlDateFormat'], strtotime($today . ' - ' . $endDateText . ' days'));
+							$daysCount = intval(str_replace(' days ago', '', $endDateText));
+							if ($daysCount > 0)
+								$instance->endDate = date(Yii::app()->params['mysqlDateFormat'], strtotime($today . ' - ' . $daysCount . ' days'));
+							else
+								$instance->endDate = $today;
 						}
-						else
-							$instance->endDate = $endDateText;
+						else if (!empty($endDateText))
+							$instance->endDate = date(Yii::app()->params['mysqlDateFormat'], strtotime($endDateText));
 				}
 			}
 

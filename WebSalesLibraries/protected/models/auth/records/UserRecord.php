@@ -61,7 +61,7 @@
 			if (isset($user))
 			{
 				$user->password = self::hashPassword($password);
-				$user->date_modify = date(Yii::app()->params['mysqlDateFormat'], strtotime(date("Y-m-d H:i:s")));
+				$user->date_modify = date(Yii::app()->params['mysqlDateTimeFormat']);
 				$user->save();
 			}
 		}

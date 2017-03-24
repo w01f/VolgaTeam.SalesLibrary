@@ -62,7 +62,7 @@
 			$needToCreate = false;
 			/** @var $linkRecord LinkRecord */
 			$linkRecord = LinkRecord::model()->findByPk($link['id']);
-			$linkDate = date(Yii::app()->params['mysqlDateFormat'], strtotime($link['dateModify']));
+			$linkDate = date(Yii::app()->params['mysqlDateTimeFormat'], strtotime($link['dateModify']));
 			if ($linkRecord !== null)
 			{
 				if ($linkRecord->date_modify != null)
@@ -85,7 +85,7 @@
 				$linkRecord->file_relative_path = $link['fileRelativePath'];
 				$linkRecord->file_name = $link['fileName'];
 				$linkRecord->file_extension = $link['fileExtension'];
-				$linkRecord->file_date = date(Yii::app()->params['mysqlDateFormat'], strtotime($link['fileDate']));
+				$linkRecord->file_date = date(Yii::app()->params['mysqlDateTimeFormat'], strtotime($link['fileDate']));
 				$linkRecord->file_size = $link['fileSize'];
 				$linkRecord->original_format = $link['originalFormat'];
 				if (array_key_exists('searchFormat', $link))
@@ -98,7 +98,7 @@
 				$linkRecord->widget = $link['widget'];
 				if (array_key_exists('isPreviewNotReady', $link))
 					$linkRecord->is_preview_not_ready = $link['isPreviewNotReady'];
-				$linkRecord->date_add = date(Yii::app()->params['mysqlDateFormat'], strtotime($link['dateAdd']));
+				$linkRecord->date_add = date(Yii::app()->params['mysqlDateTimeFormat'], strtotime($link['dateAdd']));
 				$linkRecord->date_modify = $linkDate;
 
 				$contentPath = str_replace('\\', '/', $libraryRootPath . DIRECTORY_SEPARATOR . $link['contentPath']);

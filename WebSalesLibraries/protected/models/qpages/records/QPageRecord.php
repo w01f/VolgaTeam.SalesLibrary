@@ -233,7 +233,7 @@
 			$pageRecord->id_owner = $ownerId;
 			$pageRecord->list_order = self::getMaxPageIndex() + 1;
 			$pageRecord->title = $pageTitle;
-			$pageRecord->create_date = date(Yii::app()->params['mysqlDateFormat'], strtotime($createDate));
+			$pageRecord->create_date = date(Yii::app()->params['mysqlDateTimeFormat'], strtotime($createDate));
 			$pageRecord->show_links_as_url = true;
 			$pageRecord->is_email = false;
 			$pageRecord->save();
@@ -270,7 +270,7 @@
 			$pageRecord->title = 'Shared Link';
 			$pageRecord->subtitle = '<h1>' . $subtitle . '<h1>';
 			$pageRecord->logo = $logo;
-			$pageRecord->create_date = date(Yii::app()->params['mysqlDateFormat'], strtotime($createDate));
+			$pageRecord->create_date = date(Yii::app()->params['mysqlDateTimeFormat'], strtotime($createDate));
 			if (isset($expirationDate))
 				$pageRecord->expiration_date = $expirationDate;
 			$pageRecord->is_email = true;
@@ -311,7 +311,7 @@
 				$pageRecord->list_order = self::getMaxPageIndex() + 1;
 				$pageRecord->title = $pageTitle;
 				$pageRecord->subtitle = $clonedPageRecord->subtitle;
-				$pageRecord->create_date = date(Yii::app()->params['mysqlDateFormat'], strtotime($createDate));
+				$pageRecord->create_date = date(Yii::app()->params['mysqlDateTimeFormat'], strtotime($createDate));
 				$pageRecord->expiration_date = $clonedPageRecord->expiration_date;
 				$pageRecord->logo = $clonedPageRecord->logo;
 				$pageRecord->header = $clonedPageRecord->header;

@@ -104,9 +104,13 @@
 						break;
 					case TableColumnSettings::ColumnTagViewsCount:
 						if ($value->enable)
-							$this->baseQueryFields['total_views'] = '(select sum(aggr.link_views) from
+						{
+							if (!empty($this->viewCountQuerySettings['startDate']) && !empty($this->viewCountQuerySettings['endDate']))
+							{
+								$this->baseQueryFields['total_views'] = 'link_views_set.link_views as total_views';
+								$this->innerJoin['(select aggr.id_link as id_link, sum(aggr.link_views) as link_views from
 														           (select
-														              s_l.id_link as link_id,
+														              s_l.id_link as id_link,
 														              count(s_l.id) as link_views
 														            from tbl_statistic_link s_l ' .
 								(!empty($this->viewCountQuerySettings['startDate']) ? 'join tbl_statistic_activity sa on s_l.id_activity=sa.id ' : '') .
@@ -114,25 +118,32 @@
 								. 'group by s_l.id_link
 														            union
 														            select
-														              l_q.id_link as link_id,
+														              l_q.id_link as id_link,
 														              count(s_q.id) as link_views
 														            from tbl_statistic_qpage s_q
 														              join tbl_link_qpage l_q on l_q.id_qpage = s_q.id_qpage ' .
 								(!empty($this->viewCountQuerySettings['startDate']) ? 'join tbl_statistic_activity sa on s_q.id_activity=sa.id ' : '') .
 								(!empty($this->viewCountQuerySettings['startDate']) ? 'where sa.date_time>=\'' . $this->viewCountQuerySettings['startDate'] . '\' and sa.date_time<=\'' . $this->viewCountQuerySettings['endDate'] . '\' ' : '')
-								. 'group by l_q.id_link
+								. 'group by l_q.id_link) aggr group by aggr.id_link) link_views_set'] = 'link_views_set.id_link=link.id';
+							}
+							else
+							{
+								$this->baseQueryFields['total_views'] = '(select sum(aggr.link_views) from
+														           (select
+														              s_l.id_link as link_id,
+														              count(s_l.id) as link_views
+														            from tbl_statistic_link s_l 
+														            group by s_l.id_link
+														            union
+														            select
+														              l_q.id_link as link_id,
+														              count(s_q.id) as link_views
+														            from tbl_statistic_qpage s_q
+														              join tbl_link_qpage l_q on l_q.id_qpage = s_q.id_qpage  
+														              group by l_q.id_link
 														           ) aggr where aggr.link_id=link.id and link.type<>6
 																) as total_views';
-						if (!empty($this->viewCountQuerySettings['startDate']) && !empty($this->viewCountQuerySettings['endDate']))
-						{
-							$this->leftJoin['tbl_statistic_link s_l'] = 's_l.id_link=link.id';
-							$this->leftJoin['tbl_statistic_activity sa_l'] = 'sa_l.id=s_l.id_activity and sa_l.date_time>=\'' . $this->viewCountQuerySettings['startDate'] . '\' and sa_l.date_time<=\'' . $this->viewCountQuerySettings['endDate'] . '\'';
-							$this->whereConditions[] = 'link.original_format= \'quicksite\' or sa_l.id is not null';
-
-							$this->leftJoin['tbl_statistic_qpage s_q'] = 's_l.id_link=link.id';
-							$this->leftJoin['tbl_link_qpage l_q'] = 'l_q.id_qpage = s_q.id_qpage';
-							$this->leftJoin['tbl_statistic_activity sa_q'] = 'sa_q.id=s_q.id_activity and sa_q.date_time>=\'' . $this->viewCountQuerySettings['startDate'] . '\' and sa_q.date_time<=\'' . $this->viewCountQuerySettings['endDate'] . '\'';
-							$this->whereConditions[] = 'link.original_format<> \'quicksite\' or sa_q.id is not null';
+							}
 						}
 						break;
 					case TableColumnSettings::ColumnTagThumbnail:

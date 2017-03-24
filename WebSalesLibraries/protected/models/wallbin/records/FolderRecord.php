@@ -87,7 +87,7 @@
 			$needToCreate = false;
 			/** @var $folderRecord FolderRecord */
 			$folderRecord = self::model()->findByPk($folder['id']);
-			$folderDate = date(Yii::app()->params['mysqlDateFormat'], strtotime($folder['dateModify']));
+			$folderDate = date(Yii::app()->params['mysqlDateTimeFormat'], strtotime($folder['dateModify']));
 			if ($folderRecord !== null)
 			{
 				if ($folderRecord->date_modify != null)
@@ -125,7 +125,7 @@
 				$folderRecord->header_alignment = $folder['headerAlignment'];
 				$folderRecord->enable_widget = $folder['enableWidget'];
 				$folderRecord->widget = $folder['widget'];
-				$folderRecord->date_add = date(Yii::app()->params['mysqlDateFormat'], strtotime($folder['dateAdd']));
+				$folderRecord->date_add = date(Yii::app()->params['mysqlDateTimeFormat'], strtotime($folder['dateAdd']));
 				$folderRecord->date_modify = $folderDate;
 
 				echo 'Window ' . ($needToCreate ? 'created' : 'updated') . ': ' . $folder['name'] . "\n";

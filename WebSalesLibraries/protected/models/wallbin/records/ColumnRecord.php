@@ -60,7 +60,7 @@
 			$columnRecord->alignment = $column['alignment'];
 			$columnRecord->enable_widget = $column['enableWidget'];
 			$columnRecord->widget = $column['widget'];
-			$columnRecord->date_modify = date(Yii::app()->params['mysqlDateFormat'], strtotime($column['dateModify']));;
+			$columnRecord->date_modify = date(Yii::app()->params['mysqlDateTimeFormat'], strtotime($column['dateModify']));;
 
 			$columnRecord->id_banner = $column['banner']['id'];
 			BannerRecord::updateData($column['banner']);
