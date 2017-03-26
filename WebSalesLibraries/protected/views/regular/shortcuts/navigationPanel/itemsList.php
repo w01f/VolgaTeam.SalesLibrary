@@ -59,7 +59,7 @@
     <div class="navigation-item-list">
         <ul class="nav nav-pills">
 			<? foreach ($navigationPanel->items as $navigationItem): ?>
-                <li class="navigation-item" <? if (!Yii::app()->browser->isMobile() && !empty($navigationItem->tooltip)): ?> title="<? echo $navigationItem->tooltip; ?>"<? endif; ?>>
+                <li class="navigation-item<? if (!$navigationItem->enabled): ?> disabled<? endif; ?>" <? if (!Yii::app()->browser->isMobile() && !empty($navigationItem->tooltip)): ?> title="<? echo $navigationItem->tooltip; ?>"<? endif; ?>>
 					<?
 						$viewPath = \Yii::getPathOfAlias('application.views.regular.shortcuts.navigationPanel') . '/' . $navigationItem->contentView . '.php';
 						echo $this->renderFile($viewPath, array('itemData' => $navigationItem), true);

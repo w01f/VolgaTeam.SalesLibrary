@@ -7,6 +7,7 @@
 	{
 		public $id;
 		public $type;
+		public $enabled;
 		public $title;
 		public $tooltip;
 		public $iconUrlExpanded;
@@ -24,6 +25,9 @@
 		public function __construct($parent, $xpath, $contextNode, $imagePath)
 		{
 			$this->id = uniqid();
+
+			$queryResult = $xpath->query('Enabled', $contextNode);
+			$this->enabled = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : true;
 
 			$queryResult = $xpath->query('IconPanel', $contextNode);
 			$this->iconUrlExpanded = $imagePath . '/' . ($queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : '');

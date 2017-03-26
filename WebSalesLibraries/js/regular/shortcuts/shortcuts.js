@@ -36,7 +36,7 @@
 				var hasCustomHandler = data.find('.has-custom-handler').length > 0;
 				var samePage = data.find('.same-page').length > 0;
 
-				if (hasCustomHandler == true && samePage == true)
+				if (hasCustomHandler === true && samePage === true)
 				{
 					e.preventDefault();
 					return that.openShortcutByMenuItemData(data, {pushHistory: true});
@@ -147,10 +147,10 @@
 		this.trackActivity = function (activityData, action, operation)
 		{
 			var details = activityData.details;
-			details['Operation'] = operation == undefined ? 'Open' : operation;
+			details['Operation'] = operation === undefined ? 'Open' : operation;
 			$.SalesPortal.LogHelper.write({
 				type: 'Shortcut Tile',
-				subType: action == undefined ? activityData.action : action,
+				subType: action === undefined ? activityData.action : action,
 				data: details
 			});
 		};

@@ -20,14 +20,14 @@
 
 			parent::__construct($parent, $xpath, $contextNode, $imagePath);
 
-			$queryResult = $xpath->query('Url',$contextNode);
+			$queryResult = $xpath->query('Url', $contextNode);
 			$this->url = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
 		}
 
 		/** @return string */
 		public function getUrl()
 		{
-			return $this->url;
+			return $this->enabled ? $this->url : '#';
 		}
 
 		/** @return string */

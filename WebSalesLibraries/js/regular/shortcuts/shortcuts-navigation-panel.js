@@ -4,17 +4,17 @@
 	$.SalesPortal = $.SalesPortal || {};
 	$.SalesPortal.ShortcutsNavigationPanel = function (parameters)
 	{
-		if (parameters == undefined)
+		if (parameters === undefined)
 			parameters = {
 				content: undefined,
 				options: undefined,
 				sizeChangedCallback: undefined
 			};
-		parameters.content = parameters.content != undefined ? parameters.content : '';
-		parameters.options = parameters.options != undefined ? parameters.options : undefined;
-		parameters.sizeChangedCallback = parameters.sizeChangedCallback != undefined ? parameters.sizeChangedCallback : function ()
-			{
-			};
+		parameters.content = parameters.content !== undefined ? parameters.content : '';
+		parameters.options = parameters.options !== undefined ? parameters.options : undefined;
+		parameters.sizeChangedCallback = parameters.sizeChangedCallback !== undefined ? parameters.sizeChangedCallback : function ()
+		{
+		};
 
 		var init = function ()
 		{
@@ -43,29 +43,34 @@
 				navigationItemList.data('id', parameters.options.id);
 			}
 
-			if (parameters.content == '')
+			if (parameters.content === '')
 				navigationPanelObject.hide();
 			else
 			{
 				var navigationPanelSate = $.cookie("navigationPanelState");
-				if (navigationPanelSate == null)
+				if (navigationPanelSate === null)
 					navigationPanelSate = 'expanded';
 				navigationPanelObject.addClass(navigationPanelSate);
 				navigationPanelObject.show();
+
 				$.SalesPortal.ShortcutsManager.assignShortcutItemHandlers(navigationPanelObject);
+				navigationPanelObject.find('li.disabled a').off('click').on('click', function (e)
+				{
+					e.preventDefault();
+				});
 			}
 
 			navigationPanelObject.removeClass('hidden-xs');
-			if (parameters.options && parameters.options.hideCondition && parameters.options.hideCondition.extraSmall == true)
+			if (parameters.options && parameters.options.hideCondition && parameters.options.hideCondition.extraSmall === true)
 				navigationPanelObject.addClass('hidden-xs');
 			navigationPanelObject.removeClass('hidden-sm');
-			if (parameters.options && parameters.options.hideCondition && parameters.options.hideCondition.small == true)
+			if (parameters.options && parameters.options.hideCondition && parameters.options.hideCondition.small === true)
 				navigationPanelObject.addClass('hidden-sm');
 			navigationPanelObject.removeClass('hidden-md');
-			if (parameters.options && parameters.options.hideCondition && parameters.options.hideCondition.medium == true)
+			if (parameters.options && parameters.options.hideCondition && parameters.options.hideCondition.medium === true)
 				navigationPanelObject.addClass('hidden-md');
 			navigationPanelObject.removeClass('hidden-lg');
-			if (parameters.options && parameters.options.hideCondition && parameters.options.hideCondition == true)
+			if (parameters.options && parameters.options.hideCondition && parameters.options.hideCondition === true)
 				navigationPanelObject.addClass('hidden-lg');
 
 			navigationPanelObject.find('.control-bar .button').off('click').on('click', function ()

@@ -35,7 +35,7 @@
 		/** @return string */
 		public function getUrl()
 		{
-			return $this->shortcut->getSourceLink();
+			return $this->enabled ? $this->shortcut->getSourceLink() : '#';
 		}
 
 		/** @return string */

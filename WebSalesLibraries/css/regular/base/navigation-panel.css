@@ -130,3 +130,10 @@
 {
     display: none;
 }
+
+#content .navigation-panel.collapsed li.disabled
+{
+    cursor: not-allowed;
+}
+
+
