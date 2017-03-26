@@ -269,6 +269,53 @@ namespace SalesLibraries.Business.Entities.Helpers
 				.Union(commonKeywords.Select(t => t.Name)));
 		}
 
+		public static IList<SearchGroup> GetAllCategories(this IList<BaseLibraryLink> links)
+		{
+			var distinctCategories = new List<SearchGroup>();
+			var allCategories = links.SelectMany(l => l.Tags.Categories).ToList();
+			foreach (var searchGroup in allCategories)
+			{
+				if (distinctCategories.Any(c => c.Equals(searchGroup))) continue;
+				var distinctCategory = new SearchGroup
+				{
+					Name = searchGroup.Name,
+					SuperGroup = searchGroup.SuperGroup
+				};
+				foreach (var searchTag in allCategories
+					.Where(c => c.Equals(distinctCategory))
+					.SelectMany(c => c.Tags)
+					.ToList())
+				{
+					if (distinctCategory.Tags.Any(t => t.Equals(searchTag))) continue;
+					distinctCategory.Tags.Add(new SearchTag { Name = searchTag.Name });
+				}
+				distinctCategories.Add(distinctCategory);
+			}
+			return distinctCategories;
+		}
+
+		public static IList<SearchTag> GetAllKeywords(this IList<BaseLibraryLink> links)
+		{
+			var distinctKeywords = new List<SearchTag>();
+			var allKeywords = links.SelectMany(l => l.Tags.Keywords).ToList();
+			foreach (var searchTag in allKeywords)
+			{
+				if (distinctKeywords.Any(t => t.Equals(searchTag))) continue;
+				distinctKeywords.Add(new SearchTag { Name = searchTag.Name });
+			}
+			return distinctKeywords;
+		}
+
+		public static string GetAllTags(this IList<BaseLibraryLink> links)
+		{
+			var allCategories = GetAllCategories(links);
+			var allKeywords = GetAllKeywords(links);
+			return String.Join(", ",
+				allCategories
+				.SelectMany(sg => sg.Tags.Select(t => t.Name))
+				.Union(allKeywords.Select(t => t.Name)));
+		}
+
 		public static void SetLinkTextWordWrap(this IEnumerable<BaseLibraryLink> links)
 		{
 			foreach (var libraryLink in links)

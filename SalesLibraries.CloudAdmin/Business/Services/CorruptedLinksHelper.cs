@@ -10,7 +10,7 @@ namespace SalesLibraries.CloudAdmin.Business.Services
 		public static void DeleteCorruptedLinks(Library targetLibrary)
 		{
 			var corruptedLinks = targetLibrary.Pages
-				.SelectMany(page => page.AllLinks)
+				.SelectMany(page => page.AllGroupLinks)
 				.OfType<LibraryObjectLink>()
 				.Where(link => link.IsCorrupted)
 				.ToList();

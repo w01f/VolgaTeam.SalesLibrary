@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -14,8 +15,9 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 	//public partial class ExpiredDateOptions : UserControl, ILinkSetSettingsEditControl
 	public partial class ExpiredDateOptions : XtraTabPage, ILinkSetSettingsEditControl
 	{
-		private readonly LibraryObjectLink _sourceLink;
-		private readonly ILinksGroup _sourceLinkGroup;
+		private readonly List<LibraryObjectLink> _sourceLinks = new List<LibraryObjectLink>();
+
+		private LibraryObjectLink DefaultLink => _sourceLinks.First();
 
 		public LinkSettingsType[] SupportedSettingsTypes => new[] { LinkSettingsType.ExpirationDate };
 		public int Order => 0;
@@ -24,7 +26,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 
 		public event EventHandler<EventArgs> ForceCloseRequested;
 
-		private ExpiredDateOptions()
+		public ExpiredDateOptions()
 		{
 			InitializeComponent();
 
@@ -39,31 +41,38 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 			}
 		}
 
-		public ExpiredDateOptions(LibraryObjectLink sourceLink) : this()
+		public ExpiredDateOptions(ILinksGroup linksGroup, FileTypes? defaultLinkType = null) : this() { }
+
+		public void LoadData(BaseLibraryLink sourceLink)
 		{
-			_sourceLink = sourceLink;
+			_sourceLinks.Clear();
+			_sourceLinks.Add((LibraryObjectLink)sourceLink);
+
+			LoadData();
 		}
 
-		public ExpiredDateOptions(ILinksGroup linkGroup, FileTypes? defaultLinkType = null) : this()
+		public void LoadData(IEnumerable<BaseLibraryLink> sourceLinks)
 		{
-			_sourceLinkGroup = linkGroup;
-			_sourceLink = _sourceLinkGroup.AllLinks.OfType<LibraryObjectLink>()
-				.FirstOrDefault(link => !defaultLinkType.HasValue || link.Type == defaultLinkType.Value);
+			_sourceLinks.Clear();
+			_sourceLinks.AddRange(sourceLinks.OfType<LibraryObjectLink>());
+
+			LoadData();
 		}
 
-		public void LoadData()
+		private void LoadData()
 		{
-			laAddDateValue.Text = String.Format(laAddDateValue.Text, _sourceLink.AddDate.ToString("M/dd/yy"));
-			dateEditExpirationDate.DateTime = _sourceLink.ExpirationSettings.ExpirationDate;
-			timeEditExpirationTime.Time = _sourceLink.ExpirationSettings.ExpirationDate;
-			checkBoxSendEmailWhenDelete.Checked = _sourceLink.ExpirationSettings.SendEmailOnSync;
-			checkBoxLabelLink.Checked = _sourceLink.ExpirationSettings.MarkWhenExpired;
-			checkBoxEnableExpiredLinks.Checked = _sourceLink.ExpirationSettings.Enable;
+			laAddDateValue.Text = String.Format(laAddDateValue.Text, DefaultLink.AddDate.ToString("M/dd/yy"));
+			dateEditExpirationDate.DateTime = DefaultLink.ExpirationSettings.ExpirationDate;
+			timeEditExpirationTime.Time = DefaultLink.ExpirationSettings.ExpirationDate;
+			checkBoxSendEmailWhenDelete.Checked = DefaultLink.ExpirationSettings.SendEmailOnSync;
+			checkBoxLabelLink.Checked = DefaultLink.ExpirationSettings.MarkWhenExpired;
+			checkBoxEnableExpiredLinks.Checked = DefaultLink.ExpirationSettings.Enable;
 		}
 
 		public void SaveData()
 		{
-			foreach (var link in (_sourceLinkGroup?.AllLinks ?? new[] {_sourceLink}).OfType<LibraryObjectLink>().ToList())
+			if (!_sourceLinks.Any()) return;
+			foreach (var link in _sourceLinks)
 			{
 				link.ExpirationSettings.ExpirationDate = new DateTime(dateEditExpirationDate.DateTime.Year,
 					dateEditExpirationDate.DateTime.Month, dateEditExpirationDate.DateTime.Day, timeEditExpirationTime.Time.Hour,
@@ -86,8 +95,8 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 				checkBoxEnableExpiredLinks.ForeColor = Color.Black;
 				dateEditExpirationDate.ForeColor = Color.Black;
 				timeEditExpirationTime.ForeColor = Color.Black;
-				dateEditExpirationDate.DateTime = _sourceLink.ExpirationSettings.ExpirationDate;
-				timeEditExpirationTime.Time = _sourceLink.ExpirationSettings.ExpirationDate;
+				dateEditExpirationDate.DateTime = DefaultLink.ExpirationSettings.ExpirationDate;
+				timeEditExpirationTime.Time = DefaultLink.ExpirationSettings.ExpirationDate;
 			}
 			else
 			{

@@ -26,7 +26,7 @@ namespace SalesLibraries.Cloner
 						libraryFolder.ExtId = Guid.NewGuid();
 					foreach (var columnTitle in libraryPage.ColumnTitles)
 						columnTitle.ExtId = Guid.NewGuid();
-					foreach (var libraryLink in libraryPage.AllLinks)
+					foreach (var libraryLink in libraryPage.AllGroupLinks)
 					{
 						libraryLink.ExtId = Guid.NewGuid();
 						if (libraryLink is LibraryFileLink)

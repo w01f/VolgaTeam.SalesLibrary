@@ -63,7 +63,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 				String.Format("Page: <b>{0}</b>", targetPage.Name),
 				String.Empty);
 
-			LoadSettingsGroups(GetLinksCustomizedSettings(targetPage.AllLinks));
+			LoadSettingsGroups(GetLinksCustomizedSettings(targetPage.AllGroupLinks));
 		}
 
 		public FormResetLinkSettings(LibraryFolder targetFolder) : this()
@@ -73,7 +73,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 				String.Format("Window: <b>{0}</b>", targetFolder.Name),
 				String.Empty);
 
-			LoadSettingsGroups(GetLinksCustomizedSettings(targetFolder.AllLinks));
+			LoadSettingsGroups(GetLinksCustomizedSettings(targetFolder.AllGroupLinks));
 		}
 
 		private IList<LinkSettingsGroupType> GetLinkCustomizedSettings(BaseLibraryLink targetLink)

@@ -171,8 +171,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 						tagNode.Tag = searchTag;
 					}
 				}
-
-				superGroupNode.Expanded = true;
 			}
 			_rootNode.Expanded = true;
 		}

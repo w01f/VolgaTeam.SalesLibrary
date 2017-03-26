@@ -110,7 +110,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 
 		public void RefreshPreviewFiles()
 		{
-			var links = PageContainer.Page.AllLinks.OfType<PreviewableLink>().ToList();
+			var links = PageContainer.Page.AllGroupLinks.OfType<PreviewableLink>().ToList();
 			MainController.Instance.ProcessManager.Run("Updating Preview files...", (cancelationToken, formProgess) =>
 			{
 				var powerPointLinks = links.OfType<PowerPointLink>().ToList();
@@ -140,14 +140,14 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 
 		public void ResetExpirationDates()
 		{
-			PageContainer.Page.AllLinks.ResetExpirationSettings();
+			PageContainer.Page.AllGroupLinks.ResetExpirationSettings();
 			MainController.Instance.WallbinViews.Selection.Reset();
 			MainController.Instance.ProcessManager.Run("Updating Page...", (cancelationToken, formProgess) => MainController.Instance.MainForm.ActiveForm.Invoke(new MethodInvoker(UpdateContent)));
 		}
 
 		public void ResetSecurity()
 		{
-			PageContainer.Page.AllLinks.ResetSecurity();
+			PageContainer.Page.AllGroupLinks.ResetSecurity();
 			MainController.Instance.WallbinViews.Selection.Reset();
 			MainController.Instance.ProcessManager.Run("Updating Page...", (cancelationToken, formProgess) => MainController.Instance.MainForm.ActiveForm.Invoke(new MethodInvoker(UpdateContent)));
 		}
@@ -155,16 +155,16 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 		public void ResetTags()
 		{
 			MainController.Instance.WallbinViews.Selection.Reset();
-			PageContainer.Page.AllLinks.ApplyCategories(new SearchGroup[] { });
-			PageContainer.Page.AllLinks.ApplyKeywords(new SearchTag[] { });
-			PageContainer.Page.AllLinks.ApplySuperFilters(new string[] { });
+			PageContainer.Page.AllGroupLinks.ApplyCategories(new SearchGroup[] { });
+			PageContainer.Page.AllGroupLinks.ApplyKeywords(new SearchTag[] { });
+			PageContainer.Page.AllGroupLinks.ApplySuperFilters(new string[] { });
 			MainController.Instance.ProcessManager.Run("Updating Page...",
 					(cancelationToken, formProgess) => MainController.Instance.MainForm.ActiveForm.Invoke(new MethodInvoker(UpdateContent)));
 		}
 
 		public void ResetWidgets()
 		{
-			PageContainer.Page.AllLinks.ResetWidgets();
+			PageContainer.Page.AllGroupLinks.ResetWidgets();
 			MainController.Instance.WallbinViews.Selection.Reset();
 			MainController.Instance.ProcessManager.Run("Updating Page...",
 				(cancelationToken, formProgess) => MainController.Instance.MainForm.ActiveForm.Invoke(new MethodInvoker(UpdateContent)));
@@ -172,7 +172,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 
 		public void ResetBanners()
 		{
-			PageContainer.Page.AllLinks.ResetBanners();
+			PageContainer.Page.AllGroupLinks.ResetBanners();
 			MainController.Instance.WallbinViews.Selection.Reset();
 			MainController.Instance.ProcessManager.Run("Updating Page...",
 				(cancelationToken, formProgess) => MainController.Instance.MainForm.ActiveForm.Invoke(new MethodInvoker(UpdateContent)));
@@ -180,7 +180,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 
 		public void ResetAllSettings(IList<LinkSettingsGroupType> groupsForReset)
 		{
-			PageContainer.Page.AllLinks.ResetToDefault(groupsForReset);
+			PageContainer.Page.AllGroupLinks.ResetToDefault(groupsForReset);
 			MainController.Instance.WallbinViews.Selection.Reset();
 			MainController.Instance.ProcessManager.Run("Updating Page...",
 				(cancelationToken, formProgess) => MainController.Instance.MainForm.ActiveForm.Invoke(new MethodInvoker(UpdateContent)));
@@ -188,7 +188,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 
 		public void SetLinkTextWordWrap()
 		{
-			PageContainer.Page.AllLinks.SetLinkTextWordWrap();
+			PageContainer.Page.AllGroupLinks.SetLinkTextWordWrap();
 			MainController.Instance.WallbinViews.Selection.Reset();
 			MainController.Instance.ProcessManager.Run("Updating Page...",
 				(cancelationToken, formProgess) => MainController.Instance.MainForm.ActiveForm.Invoke(new MethodInvoker(UpdateContent)));

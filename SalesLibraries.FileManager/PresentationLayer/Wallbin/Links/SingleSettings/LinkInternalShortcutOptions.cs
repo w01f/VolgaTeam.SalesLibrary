@@ -17,7 +17,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 	//public sealed partial class LinkInternalShortcutOptions : UserControl, ILinkSettingsEditControl
 	public sealed partial class LinkInternalShortcutOptions : XtraTabPage, ILinkSettingsEditControl
 	{
-		private readonly InternalShortcutLink _data;
+		private InternalShortcutLink _data;
 
 		public LinkSettingsType[] SupportedSettingsTypes => new[] { LinkSettingsType.Notes, LinkSettingsType.AdminSettings };
 		public int Order => 6;
@@ -26,11 +26,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 		public event EventHandler<EventArgs> ForceCloseRequested;
 
-		public LinkInternalShortcutOptions(InternalShortcutLink data)
+		public LinkInternalShortcutOptions()
 		{
 			InitializeComponent();
 			Text = "Admin";
-			_data = data;
+
 			if ((CreateGraphics()).DpiX > 96)
 			{
 				var styleControllerFont = new Font(styleController.Appearance.Font.FontFamily, styleController.Appearance.Font.Size - 2, styleController.Appearance.Font.Style);
@@ -44,8 +44,10 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			}
 		}
 
-		public void LoadData()
+		public void LoadData(BaseLibraryLink sourceLink)
 		{
+			_data = (InternalShortcutLink)sourceLink;
+
 			if (!MainController.Instance.Lists.ExternalShortcuts.IsLoaded)
 			{
 				MainController.Instance.ProcessManager.Run(

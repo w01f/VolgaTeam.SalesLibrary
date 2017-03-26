@@ -1,15 +1,26 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using SalesLibraries.Business.Entities.Interfaces;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
+using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkGroupSettings;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 
 namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings
 {
-	public class LibraryFolderLinkSettings : LibraryFileLinkSettings
+	public class LibraryFolderLinkSettings : LibraryFileLinkSettings, ILinkGroupSettingsContainer
 	{
 		public List<LinkFileSettingsTemplate> SettingsTemplates { get; set; }
 
 		private LibraryFolderLink ParentFolder => (LibraryFolderLink)Parent;
+
+		public ILinkGroupSettingsContainer ParentLinkSettingsContainer => ParentFolder.ParentFolder.Settings;
+
+		public List<LinkGroupSettingsTemplate> LinkSettingsTemplates { get; }
+
+		public LibraryFolderLinkSettings()
+		{
+			LinkSettingsTemplates = new List<LinkGroupSettingsTemplate>();
+		}
 
 		protected override void AfterConstruction()
 		{

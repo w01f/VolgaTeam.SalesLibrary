@@ -14,7 +14,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 	//public partial class LinkQuickLinkOptions : UserControl, ILinkSettingsEditControl
 	public sealed partial class LinkQuickLinkOptions : XtraTabPage, ILinkSettingsEditControl
 	{
-		private readonly LibraryObjectLink _data;
+		private LibraryObjectLink _data;
 
 		public LinkSettingsType[] SupportedSettingsTypes => new[] { LinkSettingsType.Notes };
 		public int Order => 3;
@@ -23,11 +23,10 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 
 		public event EventHandler<EventArgs> ForceCloseRequested;
 
-		public LinkQuickLinkOptions(LibraryObjectLink data)
+		public LinkQuickLinkOptions()
 		{
 			InitializeComponent();
 			Text = "Quick Link";
-			_data = data;
 
 			checkEditTitleInfo.Text = QuickLinkSettings.PredefinedQuickLinkTitleInfo;
 			checkEditTitleHtml5.Text = QuickLinkSettings.PredefinedQuickLinkTitleHtml5;
@@ -48,8 +47,10 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 			textEditUrl.MouseDown += EditorHelper.EditorMouseUp;
 		}
 
-		public void LoadData()
+		public void LoadData(BaseLibraryLink sourceLink)
 		{
+			_data = (LibraryObjectLink)sourceLink;
+
 			checkEditEnable.Checked = !String.IsNullOrEmpty(_data.QuickLinkSettings.Url);
 			textEditUrl.EditValue = _data.QuickLinkSettings.Url;
 			var title = _data.QuickLinkSettings.Title;

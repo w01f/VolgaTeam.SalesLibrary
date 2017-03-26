@@ -18,8 +18,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 	//public partial class LinkExcelOptions : UserControl, ILinkSetSettingsEditControl
 	public sealed partial class LinkExcelOptions : XtraTabPage, ILinkSetSettingsEditControl
 	{
+		private readonly List<ExcelLink> _sourceLinks = new List<ExcelLink>();
 		private readonly ILinksGroup _linksGroup;
-		private readonly List<ExcelLink> _links = new List<ExcelLink>();
 		private readonly FileTypes? _defaultLinkType;
 
 		public LinkSettingsType[] SupportedSettingsTypes => new[] { LinkSettingsType.Notes, LinkSettingsType.AdminSettings };
@@ -50,19 +50,29 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			}
 		}
 
-		public LinkExcelOptions(ExcelLink link) : this()
-		{
-			_links.Add(link);
-		}
-
 		public LinkExcelOptions(ILinksGroup linksGroup, FileTypes? defaultLinkType = null) : this()
 		{
 			_linksGroup = linksGroup;
-			_links.AddRange(linksGroup.AllLinks.Where(link => !defaultLinkType.HasValue || link.Type == defaultLinkType.Value).OfType<ExcelLink>());
 			_defaultLinkType = defaultLinkType;
 		}
 
-		public void LoadData()
+		public void LoadData(BaseLibraryLink sourceLink)
+		{
+			_sourceLinks.Clear();
+			_sourceLinks.Add((ExcelLink)sourceLink);
+
+			LoadData();
+		}
+
+		public void LoadData(IEnumerable<BaseLibraryLink> sourceLinks)
+		{
+			_sourceLinks.Clear();
+			_sourceLinks.AddRange(sourceLinks.OfType<ExcelLink>());
+
+			LoadData();
+		}
+
+		private void LoadData()
 		{
 			ckSaveAsTemplate.Visible = _linksGroup != null;
 
@@ -76,9 +86,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 				ckForceOpen.Checked = settingsTemplate.ForceOpen;
 				ckSaveAsTemplate.Checked = true;
 			}
-			else if (_links.Any())
+			else if (_sourceLinks.Any())
 			{
-				var linkSettings = _links.Select(link => link.Settings).OfType<ExcelLinkSettings>().ToList();
+				var linkSettings = _sourceLinks.Select(link => link.Settings).OfType<ExcelLinkSettings>().ToList();
 
 				if (linkSettings.All(settings => settings.IsArchiveResource))
 					ckIsArchiveResource.CheckState = CheckState.Checked;
@@ -114,7 +124,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 		public void SaveData()
 		{
-			foreach (var link in _links)
+			if (!_sourceLinks.Any()) return;
+			foreach (var link in _sourceLinks)
 			{
 				((ExcelLinkSettings)link.Settings).IsArchiveResource = ckIsArchiveResource.CheckState != CheckState.Indeterminate ?
 					ckIsArchiveResource.Checked :
@@ -160,8 +171,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 		private void ckIsArchiveResource_CheckedChanged(object sender, EventArgs e)
 		{
-				ckDoNotGenerateText.Enabled =
-					ckForceDownload.Enabled = ckIsArchiveResource.CheckState != CheckState.Checked;
+			ckDoNotGenerateText.Enabled =
+				ckForceDownload.Enabled = ckIsArchiveResource.CheckState != CheckState.Checked;
 			if (ckIsArchiveResource.CheckState == CheckState.Checked)
 			{
 				ckDoNotGenerateText.Checked =

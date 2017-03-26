@@ -13,7 +13,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 	//public sealed partial class LinkLanOptions : UserControl, ILinkSettingsEditControl
 	public sealed partial class LinkLanOptions : XtraTabPage, ILinkSettingsEditControl
 	{
-		private readonly NetworkLink _data;
+		private NetworkLink _data;
 
 		public LinkSettingsType[] SupportedSettingsTypes => new[] { LinkSettingsType.Notes, LinkSettingsType.AdminSettings };
 		public int Order => 6;
@@ -22,11 +22,11 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 
 		public event EventHandler<EventArgs> ForceCloseRequested;
 
-		public LinkLanOptions(NetworkLink data)
+		public LinkLanOptions()
 		{
 			InitializeComponent();
 			Text = "Admin";
-			_data = data;
+
 			if ((CreateGraphics()).DpiX > 96)
 			{
 				var styleControllerFont = new Font(styleController.Appearance.Font.FontFamily, styleController.Appearance.Font.Size - 2, styleController.Appearance.Font.Style);
@@ -38,8 +38,10 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 			}
 		}
 
-		public void LoadData()
+		public void LoadData(BaseLibraryLink sourceLink)
 		{
+			_data = (NetworkLink)sourceLink;
+
 			textEditName.EditValue = _data.Name;
 			textEditPath.EditValue = _data.RelativePath;
 		}

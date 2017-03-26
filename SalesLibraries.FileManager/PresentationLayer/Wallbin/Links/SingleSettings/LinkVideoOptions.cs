@@ -17,7 +17,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 	//public sealed partial class LinkVideoOptions : UserControl, ILinkSettingsEditControl
 	public sealed partial class LinkVideoOptions : XtraTabPage, ILinkSettingsEditControl
 	{
-		private readonly VideoLink _data;
+		private VideoLink _data;
 
 		public LinkSettingsType[] SupportedSettingsTypes => new[] { LinkSettingsType.Notes, LinkSettingsType.AdminSettings };
 		public int Order => 6;
@@ -26,11 +26,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 		public event EventHandler<EventArgs> ForceCloseRequested;
 
-		public LinkVideoOptions(VideoLink data)
+		public LinkVideoOptions()
 		{
 			InitializeComponent();
 			Text = "Admin";
-			_data = data;
+
 			if ((CreateGraphics()).DpiX > 96)
 			{
 				var styleControllerFont = new Font(styleController.Appearance.Font.FontFamily, styleController.Appearance.Font.Size - 2, styleController.Appearance.Font.Style);
@@ -44,8 +44,10 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			}
 		}
 
-		public void LoadData()
+		public void LoadData(BaseLibraryLink sourceLink)
 		{
+			_data = (VideoLink)sourceLink;
+
 			ckForcePreview.Checked = ((VideoLinkSettings)_data.Settings).ForcePreview;
 			ckDownloadSource.Checked = ((VideoLinkSettings)_data.Settings).DownloadSource;
 			if (Directory.Exists(_data.PreviewContainerPath))

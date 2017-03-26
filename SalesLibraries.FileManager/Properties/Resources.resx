@@ -184,9 +184,6 @@
   <data name="RibbonTagsCategories" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\RibbonTagsCategories.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="LinkSettingsFolderDocx" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\LinkSettingsFolderDocx.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="RibbonLinkDelete" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\RibbonLinkDelete.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -219,9 +216,6 @@
   </data>
   <data name="RibbonSettingsAdvanced" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\RibbonSettingsAdvanced.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="LinkSettingsFolderSync" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\LinkSettingsFolderSync.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="SettingsColumnsAlignByRows" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SettingsColumnsAlignByRows.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -261,9 +255,6 @@
   </data>
   <data name="CompactWallbinLineBreak" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CompactWallbinLineBreak.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="LinkSettingsFolderPptx" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\LinkSettingsFolderPptx.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="CompactWallbinFolderOpen" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CompactWallbinFolderOpen.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -322,9 +313,6 @@
   <data name="RibbonSecurityReset" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\RibbonSecurityReset.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="LinkSettingsFolderSelectByType" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\LinkSettingsFolderSelectByType.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="QatHelp" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\QatHelp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -375,9 +363,6 @@
   </data>
   <data name="BundlesEditorLinksAddRevenue" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\BundlesEditorLinksAddRevenue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="LinkSettingsFolderXlsx" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\LinkSettingsFolderXlsx.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Favorites" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Favorites.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -496,23 +481,14 @@
   <data name="RibbonSync" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\RibbonSync.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="LinkSettingsFolderPdf" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\LinkSettingsFolderPdf.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="LinkAddNetwork" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\LinkAddNetwork.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="LinkSettingsFolderWmv" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\LinkSettingsFolderWmv.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="DataSourceListPpt" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\DataSourceListPpt.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="LinkSettingsTextFormat" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\LinkSettingsTextFormat.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="LinkSettingsFolderTags" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\LinkSettingsFolderTags.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="DataSourceListXls" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\DataSourceListXls.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

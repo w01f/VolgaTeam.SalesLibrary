@@ -5,7 +5,7 @@ using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
 using SalesLibraries.Common.Objects.SearchTags;
 
-namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.ImageGallery
+namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSettings
 {
 	class SearchGroupContainer
 	{

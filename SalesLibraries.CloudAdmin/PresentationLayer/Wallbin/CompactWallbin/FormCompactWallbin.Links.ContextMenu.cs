@@ -78,7 +78,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.CompactWallbin
 			var hitPoint = new Point(e.X, e.Y);
 			var hitInfo = treeList.CalcHitInfo(hitPoint);
 			_contextMenuTargetNode = hitInfo.Node;
-			var wallbinItem = (WallbinItem) _contextMenuTargetNode?.Tag;
+			var wallbinItem = (WallbinItem)_contextMenuTargetNode?.Tag;
 			if (wallbinItem?.Type != WallbinItemType.Link) return;
 			var sourceLink = wallbinItem.Source as BaseLibraryLink;
 			if (sourceLink == null) return;
@@ -105,7 +105,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.CompactWallbin
 			{
 				barButtonItemSingleLinkPropertiesOpenLink.Visibility = BarItemVisibility.Never;
 				barButtonItemSingleLinkPropertiesFileLocation.Visibility = BarItemVisibility.Never;
-				barButtonItemSingleLinkPropertiesAdvancedSettings.Visibility = BarItemVisibility.Never;
+				barSubItemSingleLinkPropertiesFolderLinkSettings.Visibility = BarItemVisibility.Never;
 				barButtonItemSingleLinkPropertiesRefreshPreview.Visibility = BarItemVisibility.Never;
 				barButtonItemSingleLinkPropertiesTags.Visibility = BarItemVisibility.Never;
 				barButtonItemSingleLinkPropertiesExpirationDate.Visibility = BarItemVisibility.Never;
@@ -121,7 +121,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.CompactWallbin
 			{
 				barButtonItemSingleLinkPropertiesOpenLink.Visibility = BarItemVisibility.Never;
 				barButtonItemSingleLinkPropertiesFileLocation.Visibility = BarItemVisibility.Never;
-				barButtonItemSingleLinkPropertiesAdvancedSettings.Visibility = BarItemVisibility.Never;
+				barSubItemSingleLinkPropertiesFolderLinkSettings.Visibility = BarItemVisibility.Never;
 				barButtonItemSingleLinkPropertiesRefreshPreview.Visibility = BarItemVisibility.Never;
 				barSubItemSingleLinkPropertiesAdminSettings.Visibility = BarItemVisibility.Never;
 				barButtonItemSingleLinkPropertiesThumbnail.Visibility = BarItemVisibility.Never;
@@ -143,9 +143,18 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.CompactWallbin
 				barButtonItemSingleLinkPropertiesFileLocation.Visibility = !isLinkInaccessable && sourceLink is LibraryFileLink
 					? BarItemVisibility.Always
 					: BarItemVisibility.Never;
-				barButtonItemSingleLinkPropertiesAdvancedSettings.Visibility = !isLinkInaccessable && sourceLink is LibraryFolderLink
+				barSubItemSingleLinkPropertiesFolderLinkSettings.Visibility = !isLinkInaccessable && sourceLink is LibraryFolderLink &&
+																		 ((LibraryFolderLink)sourceLink).AllLinks.Any(l => l.Type == FileTypes.Excel || l.Type == FileTypes.Pdf)
 					? BarItemVisibility.Always
 					: BarItemVisibility.Never;
+				barButtonItemSingleLinkPropertiesFolderLinkPdfSettings.Enabled = !isLinkInaccessable &&
+																				 sourceLink is LibraryFolderLink &&
+																				 ((LibraryFolderLink)sourceLink).AllLinks.Any(
+																					 l => l.Type == FileTypes.Pdf);
+				barButtonItemSingleLinkPropertiesFolderLinkExcelSettings.Enabled = !isLinkInaccessable &&
+																				 sourceLink is LibraryFolderLink &&
+																				 ((LibraryFolderLink)sourceLink).AllLinks.Any(
+																					 l => l.Type == FileTypes.Excel);
 				barButtonItemSingleLinkPropertiesRefreshPreview.Visibility = !isLinkInaccessable && sourceLink is PreviewableLink
 					? BarItemVisibility.Always
 					: BarItemVisibility.Never;
@@ -205,11 +214,6 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.CompactWallbin
 			EditSingleLinkSettings(_contextMenuTargetNode, LinkSettingsType.Notes);
 		}
 
-		private void barButtonItemSingleLinkPropertiesAdvancedSettings_ItemClick(object sender, ItemClickEventArgs e)
-		{
-			EditSingleLinkSettings(_contextMenuTargetNode, LinkSettingsType.AdvancedSettings);
-		}
-
 		private void barButtonItemSingleLinkPropertiesTags_ItemClick(object sender, ItemClickEventArgs e)
 		{
 			EditSingleLinkSettings(_contextMenuTargetNode, LinkSettingsType.Tags);
@@ -253,6 +257,16 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.CompactWallbin
 		private void barButtonItemSingleLinkPropertiesSecurity_ItemClick(object sender, ItemClickEventArgs e)
 		{
 			EditSingleLinkSettings(_contextMenuTargetNode, LinkSettingsType.Security);
+		}
+
+		private void barButtonItemSingleLinkPropertiesFolderLinkExcelSettings_ItemClick(object sender, ItemClickEventArgs e)
+		{
+			EditSingleLinkSettings(_contextMenuTargetNode, LinkSettingsType.AdminSettings, FileTypes.Excel);
+		}
+
+		private void barButtonItemSingleLinkPropertiesFolderLinkPdfSettings_ItemClick(object sender, ItemClickEventArgs e)
+		{
+			EditSingleLinkSettings(_contextMenuTargetNode, LinkSettingsType.AdminSettings, FileTypes.Pdf);
 		}
 	}
 }

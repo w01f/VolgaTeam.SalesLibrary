@@ -20,8 +20,11 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 	public partial class SecurityOptions : XtraTabPage, ILinkSetSettingsEditControl
 	{
 		private bool _dataLoading;
-		private readonly BaseLibraryLink _sourceLink;
-		private readonly ILinksGroup _sourceLinkGroup;
+
+		private readonly List<BaseLibraryLink> _sourceLinks = new List<BaseLibraryLink>();
+
+		private BaseLibraryLink DefaultLink => _sourceLinks.First();
+
 		private readonly List<LibraryGroup> _securityGroups = new List<LibraryGroup>();
 		private readonly List<string> _assignedUsers = new List<string>();
 		private readonly List<string> _deniedUsers = new List<string>();
@@ -77,7 +80,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 
 		public event EventHandler<EventArgs> ForceCloseRequested;
 
-		private SecurityOptions()
+		public SecurityOptions()
 		{
 			InitializeComponent();
 
@@ -96,37 +99,43 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 			}
 		}
 
-		public SecurityOptions(BaseLibraryLink sourceLink) : this()
+		public SecurityOptions(ILinksGroup linksGroup, FileTypes? defaultLinkType = null) : this() { }
+
+		public void LoadData(BaseLibraryLink sourceLink)
 		{
-			_sourceLink = sourceLink;
+			_sourceLinks.Clear();
+			_sourceLinks.Add(sourceLink);
+
+			LoadData();
 		}
 
-		public SecurityOptions(ILinksGroup linkGroup, FileTypes? defaultLinkType = null) : this()
+		public void LoadData(IEnumerable<BaseLibraryLink> sourceLinks)
 		{
-			_sourceLinkGroup = linkGroup;
-			_sourceLink = _sourceLinkGroup.AllLinks
-				.FirstOrDefault(link => !defaultLinkType.HasValue || link.Type == defaultLinkType.Value);
+			_sourceLinks.Clear();
+			_sourceLinks.AddRange(sourceLinks);
+
+			LoadData();
 		}
 
-		public void LoadData()
+		private void LoadData()
 		{
 			_dataLoading = true;
-			rbSecurityAllowed.Checked = !_sourceLink.Security.IsRestricted;
-			rbSecurityDenied.Checked = _sourceLink.Security.IsRestricted &&
-				String.IsNullOrEmpty(_sourceLink.Security.AssignedUsers) &&
-				String.IsNullOrEmpty(_sourceLink.Security.DeniedUsers);
-			rbSecurityWhiteList.Checked = _sourceLink.Security.IsRestricted &&
-				!String.IsNullOrEmpty(_sourceLink.Security.AssignedUsers);
-			rbSecurityBlackList.Checked = _sourceLink.Security.IsRestricted &&
-				!String.IsNullOrEmpty(_sourceLink.Security.DeniedUsers);
-			rbSecurityForbidden.Checked = _sourceLink.Security.IsForbidden;
-			AssignedUsers = _sourceLink.Security.IsRestricted &&
-				!String.IsNullOrEmpty(_sourceLink.Security.AssignedUsers) ? _sourceLink.Security.AssignedUsers : null;
-			DeniedUsers = _sourceLink.Security.IsRestricted &&
-				!String.IsNullOrEmpty(_sourceLink.Security.DeniedUsers) ? _sourceLink.Security.DeniedUsers : null;
-			ckSecurityShareLink.Checked = !_sourceLink.Security.NoShare;
+			rbSecurityAllowed.Checked = !DefaultLink.Security.IsRestricted;
+			rbSecurityDenied.Checked = DefaultLink.Security.IsRestricted &&
+				String.IsNullOrEmpty(DefaultLink.Security.AssignedUsers) &&
+				String.IsNullOrEmpty(DefaultLink.Security.DeniedUsers);
+			rbSecurityWhiteList.Checked = DefaultLink.Security.IsRestricted &&
+				!String.IsNullOrEmpty(DefaultLink.Security.AssignedUsers);
+			rbSecurityBlackList.Checked = DefaultLink.Security.IsRestricted &&
+				!String.IsNullOrEmpty(DefaultLink.Security.DeniedUsers);
+			rbSecurityForbidden.Checked = DefaultLink.Security.IsForbidden;
+			AssignedUsers = DefaultLink.Security.IsRestricted &&
+				!String.IsNullOrEmpty(DefaultLink.Security.AssignedUsers) ? DefaultLink.Security.AssignedUsers : null;
+			DeniedUsers = DefaultLink.Security.IsRestricted &&
+				!String.IsNullOrEmpty(DefaultLink.Security.DeniedUsers) ? DefaultLink.Security.DeniedUsers : null;
+			ckSecurityShareLink.Checked = !DefaultLink.Security.NoShare;
 
-			LoadSecurityGroups(_sourceLink.ParentLibrary.ExtId);
+			LoadSecurityGroups(DefaultLink.ParentLibrary.ExtId);
 
 			pnSecurityUserList.Enabled = pnSecurityUserList.Enabled && (rbSecurityWhiteList.Checked || rbSecurityBlackList.Checked);
 
@@ -135,9 +144,10 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 
 		public void SaveData()
 		{
+			if (!_sourceLinks.Any()) return;
 			var assignedUsers = AssignedUsers;
 			var deniedUsers = DeniedUsers;
-			foreach (var link in (_sourceLinkGroup?.AllLinks ?? new[] { _sourceLink }).ToList())
+			foreach (var link in _sourceLinks)
 			{
 				link.Security.IsRestricted = rbSecurityDenied.Checked ||
 													rbSecurityWhiteList.Checked ||

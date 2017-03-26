@@ -175,17 +175,17 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Views
 			barButtonItemPagePropertiesMultiLinksSecurity.Visibility = MainController.Instance.Settings.EditorSettings.EnableSecurityEdit
 				? BarItemVisibility.Always
 				: BarItemVisibility.Never;
-			barButtonItemPagePropertiesMultiLinksTags.Visibility = MainController.Instance.Settings.EditorSettings.EnableTagsEdit && selectedPage.Page.AllLinks.OfType<LibraryObjectLink>().Any()
+			barButtonItemPagePropertiesMultiLinksTags.Visibility = MainController.Instance.Settings.EditorSettings.EnableTagsEdit && selectedPage.Page.AllGroupLinks.OfType<LibraryObjectLink>().Any()
 					? BarItemVisibility.Always
 					: BarItemVisibility.Never;
-			barButtonItemPagePropertiesMultiLinksExpirationDate.Visibility = selectedPage.Page.AllLinks.OfType<LibraryObjectLink>().Any()
+			barButtonItemPagePropertiesMultiLinksExpirationDate.Visibility = selectedPage.Page.AllGroupLinks.OfType<LibraryObjectLink>().Any()
 					? BarItemVisibility.Always
 					: BarItemVisibility.Never;
-			barButtonItemPagePropertiesMultiLinksRefreshPreviewFiles.Visibility = selectedPage.Page.AllLinks.OfType<PreviewableLink>().Any()
+			barButtonItemPagePropertiesMultiLinksRefreshPreviewFiles.Visibility = selectedPage.Page.AllGroupLinks.OfType<PreviewableLink>().Any()
 					? BarItemVisibility.Always
 					: BarItemVisibility.Never;
 
-			LoadLinksContextMenuEditors(selectedPage.Page.AllLinks.ToList());
+			LoadLinksContextMenuEditors(selectedPage.Page.AllGroupLinks.ToList());
 
 			popupMenuPageProperties.ShowPopup(Cursor.Position);
 		}

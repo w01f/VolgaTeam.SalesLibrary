@@ -23,11 +23,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 		public LinkSettingsType[] EditableSettings => new[]
 		{
-			LinkSettingsType.AdvancedSettings,
 			LinkSettingsType.ExpirationDate,
 			LinkSettingsType.Notes,
 			LinkSettingsType.Security,
-			LinkSettingsType.Tags,
 			LinkSettingsType.AdminSettings,
 		};
 
@@ -58,23 +56,31 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		public FormEditLinkSettingsRegular(BaseLibraryLink sourceLink) : this()
 		{
 			_sourceLink = sourceLink;
+
+			Width = 680;
+			panelFilesContainer.Visible = false;
 		}
 
 		public FormEditLinkSettingsRegular(ILinksGroup linkGroup, FileTypes? defaultLinkType = null) : this()
 		{
 			_sourceLinkGroup = linkGroup;
-			_sourceLink = _sourceLinkGroup.AllLinks
+			_sourceLink = _sourceLinkGroup.AllGroupLinks
 				.FirstOrDefault(link => !defaultLinkType.HasValue || link.Type == defaultLinkType.Value);
 			_defaultLinkType = defaultLinkType;
+
+			Width = 880;
+			panelFilesContainer.Visible = true;
 		}
 
 		public void InitForm<TEditControl>(LinkSettingsType settingsType) where TEditControl : ILinkSettingsEditControl
 		{
-			Width = 680;
 			Height = 670;
-			FormStateHelper.Init(this, RemoteResourceManager.Instance.AppAliasSettingsFolder, "Site Admin-Link-Settings", false, false);
-			Text = _sourceLinkGroup == null ? _sourceLink.ToString() : "Multi-Link Settings";
 			StartPosition = FormStartPosition.CenterParent;
+
+			FormStateHelper.Init(this, RemoteResourceManager.Instance.AppAliasSettingsFolder, String.Format("Site Admin-Link-Settings-{0}", _sourceLinkGroup != null ? "Link-Group" : "Single-Link"), false, false);
+
+			Text = _sourceLinkGroup == null ? _sourceLink.ToString() : _sourceLinkGroup.LinkGroupName ?? "Multi-Link Settings";
+
 			AddOptionPages(
 				ObjectIntendHelper.GetObjectInstances(
 						typeof(TEditControl),
@@ -92,6 +98,20 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 				headerInfo.Logo != null ? "  " : String.Empty,
 				headerInfo.Title);
 			labelControlTitle.Appearance.Image = headerInfo.Logo;
+
+			if (_sourceLinkGroup != null)
+			{
+				linksTreeSelector.LinkSelected += (o, e) =>
+				{
+					SaveData();
+					foreach (var settingsEditControl in xtraTabControl.TabPages.OfType<ILinkSetSettingsEditControl>())
+						settingsEditControl.LoadData(linksTreeSelector.SelectedLinks);
+				};
+				linksTreeSelector.LoadData(_sourceLinkGroup, _defaultLinkType);
+			}
+			else
+				foreach (var settingsEditControl in xtraTabControl.TabPages.OfType<ILinkSettingsEditControl>())
+					settingsEditControl.LoadData(_sourceLink);
 		}
 
 		private SettingsEditorHeaderInfo GetFormTitle(LinkSettingsType settingsType)
@@ -101,32 +121,28 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 				.Where(editor => editor.HeaderInfo != null)
 				.Select(editor => editor.HeaderInfo)
 				.FirstOrDefault();
+
 			if (customEditorHeaderInfo != null)
 				return customEditorHeaderInfo;
+
 			switch (settingsType)
 			{
-				case LinkSettingsType.AdvancedSettings:
-					return new SettingsEditorHeaderInfo { Title = "<size=+4>Advanced Settings</size>" };
 				case LinkSettingsType.ExpirationDate:
 					return new SettingsEditorHeaderInfo { Title = "<size=+4>Do you want to set an Expiration Date?</size>" };
 				case LinkSettingsType.Notes:
 					return new SettingsEditorHeaderInfo { Title = "<size=+4>Link Settings</size>" };
 				case LinkSettingsType.Security:
 					return new SettingsEditorHeaderInfo { Title = "<size=+4>Security</size>" };
-				case LinkSettingsType.Tags:
-					return new SettingsEditorHeaderInfo { Title = "<size=+4>Tags</size>" };
+				default:
+					return new SettingsEditorHeaderInfo { Title = "<size=+4>Link Settings</size>" };
 			}
-			return new SettingsEditorHeaderInfo { Title = "<size=+4>Link Settings</size>" };
 		}
 
 		private void AddOptionPages(IEnumerable<ILinkSettingsEditControl> pages)
 		{
 			var optionPages = pages.ToArray();
 			foreach (var optionPage in optionPages)
-			{
-				optionPage.LoadData();
 				optionPage.ForceCloseRequested += (o, e) => ForceClose();
-			}
 			xtraTabControl.ShowTabHeader = optionPages.Length > 1 ? DefaultBoolean.True : DefaultBoolean.False;
 			xtraTabControl.TabPages.AddRange(optionPages.OfType<XtraTabPage>().ToArray());
 		}
@@ -134,7 +150,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		private object[] GetEditControlParams()
 		{
 			return _sourceLinkGroup == null ?
-				new object[] { _sourceLink } :
+				null :
 				new object[] { _sourceLinkGroup, _defaultLinkType };
 		}
 

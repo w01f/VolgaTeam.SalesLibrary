@@ -14,7 +14,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 	//public partial class LinkObjectOptions : UserControl, ILinkSettingsEditControl
 	public sealed partial class LinkObjectOptions : XtraTabPage, ILinkSettingsEditControl
 	{
-		private readonly LibraryObjectLink _data;
+		private LibraryObjectLink _data;
 
 		public LinkSettingsType[] SupportedSettingsTypes => new[] { LinkSettingsType.Notes };
 		public int Order => 0;
@@ -23,11 +23,10 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 		public event EventHandler<EventArgs> ForceCloseRequested;
 
-		public LinkObjectOptions(LibraryObjectLink data)
+		public LinkObjectOptions()
 		{
 			InitializeComponent();
 			Text = "Link Notes";
-			_data = data;
 
 			rbNone.Text = BaseLinkSettings.PredefinedNoteNone;
 			rbNew.Text = BaseLinkSettings.PredefinedNoteNew;
@@ -58,8 +57,10 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			textEditCustomNote.MouseDown += EditorHelper.EditorMouseUp;
 		}
 
-		public void LoadData()
+		public void LoadData(BaseLibraryLink sourceLink)
 		{
+			_data = (LibraryObjectLink)sourceLink;
+
 			var note = _data.Settings.Note;
 			if (String.IsNullOrEmpty(note))
 				rbNone.Checked = true;

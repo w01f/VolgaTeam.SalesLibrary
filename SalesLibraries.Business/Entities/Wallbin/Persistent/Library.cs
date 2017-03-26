@@ -141,7 +141,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 		public IEnumerable<PreviewableLink> GetPreviewableLinksBySourcePath(string sourcePath, bool onlyTopLevel = false)
 		{
 			return Pages
-				.SelectMany(p => onlyTopLevel ? p.TopLevelLinks : p.AllLinks)
+				.SelectMany(p => onlyTopLevel ? p.TopLevelLinks : p.AllGroupLinks)
 				.OfType<PreviewableLink>()
 				.Where(link => String.Equals(link.FullPath, sourcePath, StringComparison.InvariantCultureIgnoreCase));
 		}
@@ -166,7 +166,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 		public TLink GetLinkById<TLink>(Guid extId, bool onlyTopLevel = false) where TLink : BaseLibraryLink
 		{
 			return Pages
-				.SelectMany(p => onlyTopLevel ? p.TopLevelLinks : p.AllLinks)
+				.SelectMany(p => onlyTopLevel ? p.TopLevelLinks : p.AllGroupLinks)
 				.OfType<TLink>()
 				.FirstOrDefault(link => link.ExtId == extId);
 		}
@@ -174,7 +174,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 		public BaseLibraryLink GetLinkById(Guid extId, bool onlyTopLevel = false)
 		{
 			return Pages
-				.SelectMany(p => onlyTopLevel ? p.TopLevelLinks : p.AllLinks)
+				.SelectMany(p => onlyTopLevel ? p.TopLevelLinks : p.AllGroupLinks)
 				.FirstOrDefault(link => link.ExtId == extId);
 		}
 		#endregion

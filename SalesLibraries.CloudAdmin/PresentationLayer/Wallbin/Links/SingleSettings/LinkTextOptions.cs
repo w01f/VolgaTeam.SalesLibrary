@@ -16,7 +16,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 	//public partial class LinkTextOptions : UserControl, ILinkSettingsEditControl
 	public sealed partial class LinkTextOptions : XtraTabPage, ILinkSettingsEditControl
 	{
-		private readonly LibraryObjectLink _data;
+		private LibraryObjectLink _data;
 
 		public LinkSettingsType[] SupportedSettingsTypes => new[] { LinkSettingsType.Notes };
 		public int Order => 2;
@@ -25,11 +25,10 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 
 		public event EventHandler<EventArgs> ForceCloseRequested;
 
-		public LinkTextOptions(LibraryObjectLink data)
+		public LinkTextOptions()
 		{
 			InitializeComponent();
 			Text = "Text Format";
-			_data = data;
 
 			buttonEditLinkSpecialFont.ButtonClick += EditorHelper.FontEdit_ButtonClick;
 			buttonEditLinkSpecialFont.Click += EditorHelper.FontEdit_Click;
@@ -45,8 +44,10 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 			}
 		}
 
-		public void LoadData()
+		public void LoadData(BaseLibraryLink sourceLink)
 		{
+			_data = (LibraryObjectLink)sourceLink;
+
 			var regularFontStyle = ((LibraryObjectLinkSettings)_data.Settings).RegularFontStyle;
 			checkEditBold.Checked = (regularFontStyle & FontStyle.Bold) == FontStyle.Bold;
 			checkEditItalic.Checked = (regularFontStyle & FontStyle.Italic) == FontStyle.Italic;

@@ -265,13 +265,13 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Folders.Controls
 						barButtonItemFolderPropertiesMultiLinksSecurity.Visibility = MainController.Instance.Settings.EditorSettings.EnableSecurityEdit
 							? BarItemVisibility.Always
 							: BarItemVisibility.Never;
-						barButtonItemFolderPropertiesMultiLinksTags.Visibility = MainController.Instance.Settings.EditorSettings.EnableTagsEdit && DataSource.AllLinks.OfType<LibraryObjectLink>().Any()
+						barButtonItemFolderPropertiesMultiLinksTags.Visibility = MainController.Instance.Settings.EditorSettings.EnableTagsEdit && DataSource.AllGroupLinks.OfType<LibraryObjectLink>().Any()
 								? BarItemVisibility.Always
 								: BarItemVisibility.Never;
-						barButtonItemFolderPropertiesMultiLinksExpirationDate.Visibility = DataSource.AllLinks.OfType<LibraryObjectLink>().Any()
+						barButtonItemFolderPropertiesMultiLinksExpirationDate.Visibility = DataSource.AllGroupLinks.OfType<LibraryObjectLink>().Any()
 								? BarItemVisibility.Always
 								: BarItemVisibility.Never;
-						barButtonItemFolderPropertiesMultiLinksRefreshPreviewFiles.Visibility = DataSource.AllLinks.OfType<PreviewableLink>().Any()
+						barButtonItemFolderPropertiesMultiLinksRefreshPreviewFiles.Visibility = DataSource.AllGroupLinks.OfType<PreviewableLink>().Any()
 								? BarItemVisibility.Always
 								: BarItemVisibility.Never;
 

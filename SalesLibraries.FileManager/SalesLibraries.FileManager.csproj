@@ -375,6 +375,7 @@
     <Compile Include="PresentationLayer\Wallbin\Links\HyperlinkEdit\VimeoEditControl.Designer.cs">
       <DependentUpon>VimeoEditControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\LinksTreeSelector\LinksFormatTreeGroup.cs" />
     <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\BaseInternalLibraryContentOptions.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -432,6 +433,12 @@
     <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkVimeoOptions.designer.cs">
       <DependentUpon>LinkVimeoOptions.cs</DependentUpon>
     </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\LinksTreeSelector\LinksTreeSelectorControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Wallbin\Links\LinksTreeSelector\LinksTreeSelectorControl.Designer.cs">
+      <DependentUpon>LinksTreeSelectorControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationLayer\Wallbin\Settings\BannerSettingsControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -447,7 +454,7 @@
     <Compile Include="PresentationLayer\Wallbin\ImageGallery\FavoritesImagesContainer.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Wallbin\ImageGallery\SearchGroupContainer.cs" />
+    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\SearchGroupContainer.cs" />
     <Compile Include="PresentationLayer\Wallbin\ImageGallery\BaseLinkImagesContainer.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -637,12 +644,6 @@
     <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\ExpiredDateOptions.designer.cs">
       <DependentUpon>ExpiredDateOptions.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\FolderFilesOptions.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\FolderFilesOptions.designer.cs">
-      <DependentUpon>FolderFilesOptions.cs</DependentUpon>
-    </Compile>
     <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\FormEditLinkText.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -654,12 +655,6 @@
     </Compile>
     <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\FormEditLinkWidget.designer.cs">
       <DependentUpon>FormEditLinkWidget.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\FormEditLinkSettingsEmbedded.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\FormEditLinkSettingsEmbedded.designer.cs">
-      <DependentUpon>FormEditLinkSettingsEmbedded.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Wallbin\Links\SingleSettings\FormEditLinkBanner.cs">
       <SubType>Form</SubType>
@@ -990,6 +985,9 @@
     <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\LinkVimeoOptions.resx">
       <DependentUpon>LinkVimeoOptions.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\LinksTreeSelector\LinksTreeSelectorControl.resx">
+      <DependentUpon>LinksTreeSelectorControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Settings\BannerSettingsControl.resx">
       <DependentUpon>BannerSettingsControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -1083,17 +1081,11 @@
     <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\ExpiredDateOptions.resx">
       <DependentUpon>ExpiredDateOptions.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\FolderFilesOptions.resx">
-      <DependentUpon>FolderFilesOptions.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\FormEditLinkText.resx">
       <DependentUpon>FormEditLinkText.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\FormEditLinkWidget.resx">
       <DependentUpon>FormEditLinkWidget.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\FormEditLinkSettingsEmbedded.resx">
-      <DependentUpon>FormEditLinkSettingsEmbedded.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Wallbin\Links\SingleSettings\FormEditLinkBanner.resx">
       <DependentUpon>FormEditLinkBanner.cs</DependentUpon>
@@ -1373,14 +1365,6 @@
     <None Include="Resources\ButtonVideoReset.png" />
     <None Include="Resources\ButtonVideoConvert.png" />
     <None Include="Resources\ButtonOpen.png" />
-    <None Include="Resources\LinkSettingsFolderXlsx.png" />
-    <None Include="Resources\LinkSettingsFolderWmv.png" />
-    <None Include="Resources\LinkSettingsFolderTags.png" />
-    <None Include="Resources\LinkSettingsFolderSync.png" />
-    <None Include="Resources\LinkSettingsFolderSelectByType.png" />
-    <None Include="Resources\LinkSettingsFolderPptx.png" />
-    <None Include="Resources\LinkSettingsFolderPdf.png" />
-    <None Include="Resources\LinkSettingsFolderDocx.png" />
     <None Include="Resources\LinkAddUrl.png" />
     <None Include="Resources\LinkAddNetwork.png" />
     <None Include="Resources\LinkDelete.png" />

@@ -36,10 +36,13 @@
 			this.pnBottom = new System.Windows.Forms.Panel();
 			this.pnTop = new System.Windows.Forms.Panel();
 			this.labelControlTitle = new DevExpress.XtraEditors.LabelControl();
+			this.panelFilesContainer = new System.Windows.Forms.Panel();
+			this.linksTreeSelector = new SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.LinksTreeSelector.LinksTreeSelectorControl();
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControl)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			this.pnBottom.SuspendLayout();
 			this.pnTop.SuspendLayout();
+			this.panelFilesContainer.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// xtraTabControl
@@ -61,10 +64,10 @@
 			this.xtraTabControl.AppearancePage.PageClient.Font = new System.Drawing.Font("Arial", 9.75F);
 			this.xtraTabControl.AppearancePage.PageClient.Options.UseFont = true;
 			this.xtraTabControl.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.xtraTabControl.Location = new System.Drawing.Point(0, 52);
+			this.xtraTabControl.Location = new System.Drawing.Point(300, 52);
 			this.xtraTabControl.Name = "xtraTabControl";
 			this.xtraTabControl.ShowTabHeader = DevExpress.Utils.DefaultBoolean.False;
-			this.xtraTabControl.Size = new System.Drawing.Size(607, 535);
+			this.xtraTabControl.Size = new System.Drawing.Size(534, 535);
 			this.xtraTabControl.TabIndex = 4;
 			// 
 			// buttonXOK
@@ -73,7 +76,7 @@
 			this.buttonXOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXOK.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-			this.buttonXOK.Location = new System.Drawing.Point(358, 10);
+			this.buttonXOK.Location = new System.Drawing.Point(585, 10);
 			this.buttonXOK.Name = "buttonXOK";
 			this.buttonXOK.Size = new System.Drawing.Size(111, 34);
 			this.buttonXOK.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -87,7 +90,7 @@
 			this.buttonXCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXCancel.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.buttonXCancel.Location = new System.Drawing.Point(489, 10);
+			this.buttonXCancel.Location = new System.Drawing.Point(716, 10);
 			this.buttonXCancel.Name = "buttonXCancel";
 			this.buttonXCancel.Size = new System.Drawing.Size(111, 34);
 			this.buttonXCancel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -123,7 +126,7 @@
 			this.pnBottom.ForeColor = System.Drawing.Color.Black;
 			this.pnBottom.Location = new System.Drawing.Point(0, 587);
 			this.pnBottom.Name = "pnBottom";
-			this.pnBottom.Size = new System.Drawing.Size(607, 54);
+			this.pnBottom.Size = new System.Drawing.Size(834, 54);
 			this.pnBottom.TabIndex = 8;
 			// 
 			// pnTop
@@ -135,7 +138,7 @@
 			this.pnTop.Location = new System.Drawing.Point(0, 0);
 			this.pnTop.Name = "pnTop";
 			this.pnTop.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-			this.pnTop.Size = new System.Drawing.Size(607, 52);
+			this.pnTop.Size = new System.Drawing.Size(834, 52);
 			this.pnTop.TabIndex = 9;
 			// 
 			// labelControlTitle
@@ -148,17 +151,42 @@
 			this.labelControlTitle.ImageAlignToText = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
 			this.labelControlTitle.Location = new System.Drawing.Point(10, 0);
 			this.labelControlTitle.Name = "labelControlTitle";
-			this.labelControlTitle.Size = new System.Drawing.Size(597, 52);
+			this.labelControlTitle.Size = new System.Drawing.Size(824, 52);
 			this.labelControlTitle.StyleController = this.styleController;
 			this.labelControlTitle.TabIndex = 0;
 			this.labelControlTitle.Text = "Link Settings";
+			// 
+			// panelFilesContainer
+			// 
+			this.panelFilesContainer.BackColor = System.Drawing.Color.Transparent;
+			this.panelFilesContainer.Controls.Add(this.linksTreeSelector);
+			this.panelFilesContainer.Dock = System.Windows.Forms.DockStyle.Left;
+			this.panelFilesContainer.ForeColor = System.Drawing.Color.Black;
+			this.panelFilesContainer.Location = new System.Drawing.Point(0, 52);
+			this.panelFilesContainer.Name = "panelFilesContainer";
+			this.panelFilesContainer.Padding = new System.Windows.Forms.Padding(0, 0, 4, 0);
+			this.panelFilesContainer.Size = new System.Drawing.Size(300, 535);
+			this.panelFilesContainer.TabIndex = 55;
+			// 
+			// linksTreeSelector
+			// 
+			this.linksTreeSelector.BackColor = System.Drawing.Color.Transparent;
+			this.linksTreeSelector.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.linksTreeSelector.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.linksTreeSelector.ForeColor = System.Drawing.Color.Black;
+			this.linksTreeSelector.Location = new System.Drawing.Point(0, 0);
+			this.linksTreeSelector.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+			this.linksTreeSelector.Name = "linksTreeSelector";
+			this.linksTreeSelector.Size = new System.Drawing.Size(296, 535);
+			this.linksTreeSelector.TabIndex = 0;
 			// 
 			// FormEditLinkSettingsRegular
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
 			this.BackColor = System.Drawing.Color.White;
-			this.ClientSize = new System.Drawing.Size(607, 641);
+			this.ClientSize = new System.Drawing.Size(834, 641);
 			this.Controls.Add(this.xtraTabControl);
+			this.Controls.Add(this.panelFilesContainer);
 			this.Controls.Add(this.pnTop);
 			this.Controls.Add(this.pnBottom);
 			this.DoubleBuffered = true;
@@ -174,6 +202,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
 			this.pnBottom.ResumeLayout(false);
 			this.pnTop.ResumeLayout(false);
+			this.panelFilesContainer.ResumeLayout(false);
 			this.ResumeLayout(false);
 
         }
@@ -187,5 +216,7 @@
 	    public System.Windows.Forms.Panel pnTop;
 		private DevExpress.XtraEditors.LabelControl labelControlTitle;
 		private DevExpress.XtraEditors.StyleController styleController;
+		private System.Windows.Forms.Panel panelFilesContainer;
+		private LinksTreeSelector.LinksTreeSelectorControl linksTreeSelector;
 	}
 }

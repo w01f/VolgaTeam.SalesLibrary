@@ -16,7 +16,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 	//public sealed partial class LinkInternalLibraryPageOptions : UserControl, ILinkSettingsEditControl
 	public sealed partial class LinkInternalLibraryPageOptions : BaseInternalLibraryContentOptions, ILinkSettingsEditControl
 	{
-		private readonly InternalLibraryPageLink _data;
+		private InternalLibraryPageLink _data;
 
 		public LinkSettingsType[] SupportedSettingsTypes => new[] { LinkSettingsType.Notes, LinkSettingsType.AdminSettings };
 		public int Order => 6;
@@ -25,11 +25,11 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 
 		public event EventHandler<EventArgs> ForceCloseRequested;
 
-		public LinkInternalLibraryPageOptions(InternalLibraryPageLink data)
+		public LinkInternalLibraryPageOptions()
 		{
 			InitializeComponent();
 			Text = "Admin";
-			_data = data;
+
 			if ((CreateGraphics()).DpiX > 96)
 			{
 				var styleControllerFont = new Font(styleController.Appearance.Font.FontFamily, styleController.Appearance.Font.Size - 2, styleController.Appearance.Font.Style);
@@ -41,8 +41,10 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 			}
 		}
 
-		public override void LoadData()
+		public void LoadData(BaseLibraryLink sourceLink)
 		{
+			_data = (InternalLibraryPageLink)sourceLink;
+
 			base.LoadData();
 
 			comboBoxEditLibraryName.Properties.Items.Clear();

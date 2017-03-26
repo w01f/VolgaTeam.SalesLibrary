@@ -7,14 +7,14 @@ namespace SalesLibraries.Common.Helpers
 {
 	public static class ObjectIntendHelper
 	{
-		private static readonly List<Assembly> _loadedAssemblies = new List<Assembly>();
-		private static readonly Dictionary<string, IEnumerable<Type>> _typesDictionary = new Dictionary<string, IEnumerable<Type>>();
+		private static readonly List<Assembly> LoadedAssemblies = new List<Assembly>();
+		private static readonly Dictionary<string, IEnumerable<Type>> TypesDictionary = new Dictionary<string, IEnumerable<Type>>();
 
 		private static IEnumerable<object> FindObjectsForType(Type baseType, Type intendedClass, IEnumerable<Type> assemblyTypes, object[] parameters)
 		{
 			var lKey = baseType.FullName + (intendedClass != null ? intendedClass.FullName : "Undefined");
-			if (_typesDictionary.ContainsKey(lKey))
-				return _typesDictionary[lKey].Select(t => Activator.CreateInstance(t, parameters));
+			if (TypesDictionary.ContainsKey(lKey))
+				return TypesDictionary[lKey].Select(t => Activator.CreateInstance(t, parameters));
 
 			var targetTypes = new List<Type>();
 			foreach (var type in assemblyTypes)
@@ -33,8 +33,8 @@ namespace SalesLibraries.Common.Helpers
 				}
 			}
 			if (targetTypes.Any())
-				_typesDictionary.Add(lKey, targetTypes);
-			return targetTypes.Select(t => Activator.CreateInstance(t, parameters));
+				TypesDictionary.Add(lKey, targetTypes);
+			return targetTypes.Select(t => parameters != null ? Activator.CreateInstance(t, parameters) : Activator.CreateInstance(t));
 		}
 
 		public static IEnumerable<object> GetObjectInstances(
@@ -42,10 +42,10 @@ namespace SalesLibraries.Common.Helpers
 			Type intendedClass,
 			params object[] parameters)
 		{
-			if (!_loadedAssemblies.Any())
-				_loadedAssemblies.AddRange(AppDomain.CurrentDomain.GetAssemblies());
+			if (!LoadedAssemblies.Any())
+				LoadedAssemblies.AddRange(AppDomain.CurrentDomain.GetAssemblies());
 			var assemblyTypes = new List<Type>();
-			foreach (var assembly in _loadedAssemblies)
+			foreach (var assembly in LoadedAssemblies)
 			{
 				assemblyTypes.Clear();
 				try

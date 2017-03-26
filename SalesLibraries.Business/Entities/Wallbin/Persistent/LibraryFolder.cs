@@ -113,7 +113,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 		}
 
 		[NotMapped, JsonIgnore]
-		public IEnumerable<BaseLibraryLink> AllLinks
+		public IEnumerable<BaseLibraryLink> AllGroupLinks
 		{
 			get { return Links.Union(Links.OfType<LibraryFolderLink>().SelectMany(lf => lf.AllLinks)); }
 		}
@@ -133,6 +133,9 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 
 		[NotMapped, JsonIgnore]
 		public Color TextColor => Settings.ForeHeaderColor;
+
+		[NotMapped, JsonIgnore]
+		public string LinkGroupName => Name;
 		#endregion
 
 		public LibraryFolder()

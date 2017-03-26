@@ -51,7 +51,9 @@
 			this.barButtonItemSingleLinkPropertiesOpenLink = new DevExpress.XtraBars.BarButtonItem();
 			this.barButtonItemSingleLinkPropertiesDelete = new DevExpress.XtraBars.BarButtonItem();
 			this.barButtonItemSingleLinkPropertiesLinkSettings = new DevExpress.XtraBars.BarButtonItem();
-			this.barButtonItemSingleLinkPropertiesAdvancedSettings = new DevExpress.XtraBars.BarButtonItem();
+			this.barSubItemSingleLinkPropertiesFolderLinkSettings = new DevExpress.XtraBars.BarSubItem();
+			this.barButtonItemSingleLinkPropertiesFolderLinkExcelSettings = new DevExpress.XtraBars.BarButtonItem();
+			this.barButtonItemSingleLinkPropertiesFolderLinkPdfSettings = new DevExpress.XtraBars.BarButtonItem();
 			this.barButtonItemSingleLinkPropertiesTags = new DevExpress.XtraBars.BarButtonItem();
 			this.barSubItemSingleLinkPropertiesImages = new DevExpress.XtraBars.BarSubItem();
 			this.barButtonItemSingleLinkPropertiesWidget = new DevExpress.XtraBars.BarButtonItem();
@@ -171,7 +173,7 @@
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemSingleLinkPropertiesOpenLink, true),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemSingleLinkPropertiesDelete),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemSingleLinkPropertiesLinkSettings, true),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemSingleLinkPropertiesAdvancedSettings),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barSubItemSingleLinkPropertiesFolderLinkSettings),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemSingleLinkPropertiesTags),
             new DevExpress.XtraBars.LinkPersistInfo(this.barSubItemSingleLinkPropertiesImages, true),
             new DevExpress.XtraBars.LinkPersistInfo(this.barSubItemSingleLinkPropertiesLineBreakNotes),
@@ -320,13 +322,47 @@
 			this.barButtonItemSingleLinkPropertiesLinkSettings.Name = "barButtonItemSingleLinkPropertiesLinkSettings";
 			this.barButtonItemSingleLinkPropertiesLinkSettings.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemLinkPropertiesLinkSettings_ItemClick);
 			// 
-			// barButtonItemSingleLinkPropertiesAdvancedSettings
+			// barSubItemSingleLinkPropertiesFolderLinkSettings
 			// 
-			this.barButtonItemSingleLinkPropertiesAdvancedSettings.Caption = "Advanced Settings";
-			this.barButtonItemSingleLinkPropertiesAdvancedSettings.CategoryGuid = new System.Guid("0399476a-ad4e-415d-bbb8-97162e27fa1a");
-			this.barButtonItemSingleLinkPropertiesAdvancedSettings.Id = 5;
-			this.barButtonItemSingleLinkPropertiesAdvancedSettings.Name = "barButtonItemSingleLinkPropertiesAdvancedSettings";
-			this.barButtonItemSingleLinkPropertiesAdvancedSettings.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemLinkPropertiesAdvancedSettings_ItemClick);
+			this.barSubItemSingleLinkPropertiesFolderLinkSettings.Caption = "PDF & Excel Settings";
+			this.barSubItemSingleLinkPropertiesFolderLinkSettings.CategoryGuid = new System.Guid("0399476a-ad4e-415d-bbb8-97162e27fa1a");
+			this.barSubItemSingleLinkPropertiesFolderLinkSettings.Id = 107;
+			this.barSubItemSingleLinkPropertiesFolderLinkSettings.ItemAppearance.Disabled.Options.UseTextOptions = true;
+			this.barSubItemSingleLinkPropertiesFolderLinkSettings.ItemAppearance.Disabled.TextOptions.HotkeyPrefix = DevExpress.Utils.HKeyPrefix.None;
+			this.barSubItemSingleLinkPropertiesFolderLinkSettings.ItemAppearance.Hovered.Options.UseTextOptions = true;
+			this.barSubItemSingleLinkPropertiesFolderLinkSettings.ItemAppearance.Hovered.TextOptions.HotkeyPrefix = DevExpress.Utils.HKeyPrefix.None;
+			this.barSubItemSingleLinkPropertiesFolderLinkSettings.ItemAppearance.Normal.Options.UseTextOptions = true;
+			this.barSubItemSingleLinkPropertiesFolderLinkSettings.ItemAppearance.Normal.TextOptions.HotkeyPrefix = DevExpress.Utils.HKeyPrefix.None;
+			this.barSubItemSingleLinkPropertiesFolderLinkSettings.ItemAppearance.Pressed.Options.UseTextOptions = true;
+			this.barSubItemSingleLinkPropertiesFolderLinkSettings.ItemAppearance.Pressed.TextOptions.HotkeyPrefix = DevExpress.Utils.HKeyPrefix.None;
+			this.barSubItemSingleLinkPropertiesFolderLinkSettings.ItemInMenuAppearance.Disabled.Options.UseTextOptions = true;
+			this.barSubItemSingleLinkPropertiesFolderLinkSettings.ItemInMenuAppearance.Disabled.TextOptions.HotkeyPrefix = DevExpress.Utils.HKeyPrefix.None;
+			this.barSubItemSingleLinkPropertiesFolderLinkSettings.ItemInMenuAppearance.Hovered.Options.UseTextOptions = true;
+			this.barSubItemSingleLinkPropertiesFolderLinkSettings.ItemInMenuAppearance.Hovered.TextOptions.HotkeyPrefix = DevExpress.Utils.HKeyPrefix.None;
+			this.barSubItemSingleLinkPropertiesFolderLinkSettings.ItemInMenuAppearance.Normal.Options.UseTextOptions = true;
+			this.barSubItemSingleLinkPropertiesFolderLinkSettings.ItemInMenuAppearance.Normal.TextOptions.HotkeyPrefix = DevExpress.Utils.HKeyPrefix.None;
+			this.barSubItemSingleLinkPropertiesFolderLinkSettings.ItemInMenuAppearance.Pressed.Options.UseTextOptions = true;
+			this.barSubItemSingleLinkPropertiesFolderLinkSettings.ItemInMenuAppearance.Pressed.TextOptions.HotkeyPrefix = DevExpress.Utils.HKeyPrefix.None;
+			this.barSubItemSingleLinkPropertiesFolderLinkSettings.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemSingleLinkPropertiesFolderLinkExcelSettings),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemSingleLinkPropertiesFolderLinkPdfSettings)});
+			this.barSubItemSingleLinkPropertiesFolderLinkSettings.Name = "barSubItemSingleLinkPropertiesFolderLinkSettings";
+			// 
+			// barButtonItemSingleLinkPropertiesFolderLinkExcelSettings
+			// 
+			this.barButtonItemSingleLinkPropertiesFolderLinkExcelSettings.Caption = "Excel";
+			this.barButtonItemSingleLinkPropertiesFolderLinkExcelSettings.CategoryGuid = new System.Guid("0399476a-ad4e-415d-bbb8-97162e27fa1a");
+			this.barButtonItemSingleLinkPropertiesFolderLinkExcelSettings.Id = 108;
+			this.barButtonItemSingleLinkPropertiesFolderLinkExcelSettings.Name = "barButtonItemSingleLinkPropertiesFolderLinkExcelSettings";
+			this.barButtonItemSingleLinkPropertiesFolderLinkExcelSettings.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemSingleLinkPropertiesFolderLinkExcelSettings_ItemClick);
+			// 
+			// barButtonItemSingleLinkPropertiesFolderLinkPdfSettings
+			// 
+			this.barButtonItemSingleLinkPropertiesFolderLinkPdfSettings.Caption = "PDF";
+			this.barButtonItemSingleLinkPropertiesFolderLinkPdfSettings.CategoryGuid = new System.Guid("0399476a-ad4e-415d-bbb8-97162e27fa1a");
+			this.barButtonItemSingleLinkPropertiesFolderLinkPdfSettings.Id = 109;
+			this.barButtonItemSingleLinkPropertiesFolderLinkPdfSettings.Name = "barButtonItemSingleLinkPropertiesFolderLinkPdfSettings";
+			this.barButtonItemSingleLinkPropertiesFolderLinkPdfSettings.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemSingleLinkPropertiesFolderLinkPdfSettings_ItemClick);
 			// 
 			// barButtonItemSingleLinkPropertiesTags
 			// 
@@ -475,7 +511,6 @@
             this.barButtonItemSingleLinkPropertiesDelete,
             this.barButtonItemSingleLinkPropertiesRefreshPreview,
             this.barButtonItemSingleLinkPropertiesLinkSettings,
-            this.barButtonItemSingleLinkPropertiesAdvancedSettings,
             this.barButtonItemSingleLinkPropertiesTags,
             this.barButtonItemSingleLinkPropertiesExpirationDate,
             this.barButtonItemSingleLinkPropertiesSecurity,
@@ -548,8 +583,11 @@
             this.barButtonItemFolderPropertiesMultiLinksWidget,
             this.barButtonItemFolderPropertiesMultiLinksBanner,
             this.barButtonItembarSubItemFolderPropertiesDeleteAllLinks,
-            this.barButtonItemSingleLinkPropertiesThumbnail});
-			this.barManager.MaxItemId = 107;
+            this.barButtonItemSingleLinkPropertiesThumbnail,
+            this.barSubItemSingleLinkPropertiesFolderLinkSettings,
+            this.barButtonItemSingleLinkPropertiesFolderLinkExcelSettings,
+            this.barButtonItemSingleLinkPropertiesFolderLinkPdfSettings});
+			this.barManager.MaxItemId = 110;
 			// 
 			// barDockControlTop
 			// 
@@ -1054,7 +1092,6 @@
 		private DevExpress.XtraBars.BarButtonItem barButtonItemSingleLinkPropertiesDelete;
 		private DevExpress.XtraBars.BarButtonItem barButtonItemSingleLinkPropertiesRefreshPreview;
 		private DevExpress.XtraBars.BarButtonItem barButtonItemSingleLinkPropertiesLinkSettings;
-		private DevExpress.XtraBars.BarButtonItem barButtonItemSingleLinkPropertiesAdvancedSettings;
 		private DevExpress.XtraBars.BarButtonItem barButtonItemSingleLinkPropertiesTags;
 		private DevExpress.XtraBars.BarButtonItem barButtonItemSingleLinkPropertiesExpirationDate;
 		private DevExpress.XtraBars.BarButtonItem barButtonItemSingleLinkPropertiesSecurity;
@@ -1130,5 +1167,8 @@
 		private DevExpress.XtraBars.BarButtonItem barButtonItemFolderPropertiesMultiLinksRefreshPreviewFiles;
 		private DevExpress.XtraBars.BarButtonItem barButtonItembarSubItemFolderPropertiesDeleteAllLinks;
 		private DevExpress.XtraBars.BarButtonItem barButtonItemSingleLinkPropertiesThumbnail;
+		private DevExpress.XtraBars.BarSubItem barSubItemSingleLinkPropertiesFolderLinkSettings;
+		private DevExpress.XtraBars.BarButtonItem barButtonItemSingleLinkPropertiesFolderLinkExcelSettings;
+		private DevExpress.XtraBars.BarButtonItem barButtonItemSingleLinkPropertiesFolderLinkPdfSettings;
 	}
 }

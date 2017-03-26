@@ -171,8 +171,6 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.GroupSetting
 						tagNode.Tag = searchTag;
 					}
 				}
-
-				superGroupNode.Expanded = true;
 			}
 			_rootNode.Expanded = true;
 		}

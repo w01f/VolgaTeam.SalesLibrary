@@ -183,7 +183,7 @@ namespace SalesLibraries.FileManager.Business.Services
 
 			#region Files
 			var links = new List<SoapLibraryLink>();
-			foreach (var sourceLink in source.AllLinks.Where(link =>
+			foreach (var sourceLink in source.AllGroupLinks.Where(link =>
 				!(link is LibraryFileLink && ((LibraryFileLink)link).IsDead) &&
 				!link.Security.IsForbidden &&
 				(!link.Security.IsRestricted || !String.IsNullOrEmpty(link.Security.AssignedUsers) || !String.IsNullOrEmpty(link.Security.DeniedUsers))))

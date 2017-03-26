@@ -118,7 +118,7 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 		{
 			var currentDateTime = DateTime.Now;
 			var libraryLinks = library.Pages
-				.SelectMany(p => p.AllLinks)
+				.SelectMany(p => p.AllGroupLinks)
 				.Where(l => l.ResetSettingsScheduler.Enabled && l.ResetSettingsScheduler.ResetDate <= currentDateTime)
 				.ToList();
 			if (!libraryLinks.Any()) return;
@@ -132,7 +132,7 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 
 		private static void UpdateFolderContent(Library library, CancellationToken cancellationToken)
 		{
-			var folderLinks = library.Pages.SelectMany(p => p.AllLinks).OfType<LibraryFolderLink>().ToList();
+			var folderLinks = library.Pages.SelectMany(p => p.AllGroupLinks).OfType<LibraryFolderLink>().ToList();
 			if (!folderLinks.Any()) return;
 			if (cancellationToken.IsCancellationRequested) return;
 			folderLinks.ForEach(f => f.UpdateContent());
@@ -141,7 +141,7 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 
 		private static void ApplyOriginalFileStateChangesOnAssociatedLink(Library library, CancellationToken cancellationToken)
 		{
-			var fileLinks = library.Pages.SelectMany(p => p.AllLinks).OfType<LibraryFileLink>().Where(f => !f.IsFolder).ToList();
+			var fileLinks = library.Pages.SelectMany(p => p.AllGroupLinks).OfType<LibraryFileLink>().Where(f => !f.IsFolder).ToList();
 			if (!fileLinks.Any()) return;
 			if (cancellationToken.IsCancellationRequested) return;
 			fileLinks.ForEach(f =>
@@ -152,7 +152,7 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 
 		private static void UpdatePowerPointInfo(Library library, CancellationToken cancellationToken)
 		{
-			var powerPointFiles = library.Pages.SelectMany(p => p.AllLinks).OfType<PowerPointLink>().ToList();
+			var powerPointFiles = library.Pages.SelectMany(p => p.AllGroupLinks).OfType<PowerPointLink>().ToList();
 			if (!powerPointFiles.Any()) return;
 			using (var powerPointProcessor = new PowerPointHidden())
 			{
@@ -184,7 +184,7 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 				return;
 			}
 
-			var powerPointFiles = library.Pages.SelectMany(p => p.AllLinks).OfType<PowerPointLink>().ToList();
+			var powerPointFiles = library.Pages.SelectMany(p => p.AllGroupLinks).OfType<PowerPointLink>().ToList();
 			if (!powerPointFiles.Any()) return;
 			using (var powerPointProcessor = new PowerPointHidden())
 			{
@@ -212,7 +212,7 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 		private static void DeleteDeadLinks(Library library, CancellationToken cancellationToken)
 		{
 			var deadLinksList = library.Pages
-				.SelectMany(p => p.AllLinks)
+				.SelectMany(p => p.AllGroupLinks)
 				.OfType<LibraryFileLink>()
 				.Where(f => f.IsDead)
 				.ToList();

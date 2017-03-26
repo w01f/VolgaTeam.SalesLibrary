@@ -109,7 +109,7 @@ namespace SalesLibraries.FileManager.Business.Synchronization
 			};
 
 			var filesWhiteListItems = library.Pages
-				.SelectMany(p => p.AllLinks)
+				.SelectMany(p => p.AllGroupLinks)
 				.OfType<LibraryFileLink>()
 				.Where(link => link.DataSourceId == library.DataSourceId)
 				.Select(link => link.FullPath)

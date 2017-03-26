@@ -15,7 +15,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 	//public sealed partial class LinkInternalLibraryObjectOptions : UserControl, ILinkSettingsEditControl
 	public sealed partial class LinkInternalLibraryObjectOptions : BaseInternalLibraryContentOptions, ILinkSettingsEditControl
 	{
-		private readonly InternalLibraryObjectLink _data;
+		private InternalLibraryObjectLink _data;
 
 		public LinkSettingsType[] SupportedSettingsTypes => new[] { LinkSettingsType.Notes, LinkSettingsType.AdminSettings };
 		public int Order => 6;
@@ -24,11 +24,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 		public event EventHandler<EventArgs> ForceCloseRequested;
 
-		public LinkInternalLibraryObjectOptions(InternalLibraryObjectLink data)
+		public LinkInternalLibraryObjectOptions()
 		{
 			InitializeComponent();
 			Text = "Admin";
-			_data = data;
+
 			if ((CreateGraphics()).DpiX > 96)
 			{
 				var styleControllerFont = new Font(styleController.Appearance.Font.FontFamily, styleController.Appearance.Font.Size - 2, styleController.Appearance.Font.Style);
@@ -40,8 +40,10 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			}
 		}
 
-		public override void LoadData()
+		public void LoadData(BaseLibraryLink sourceLink)
 		{
+			_data = (InternalLibraryObjectLink)sourceLink;
+
 			base.LoadData();
 
 			comboBoxEditLibraryName.Properties.Items.Clear();

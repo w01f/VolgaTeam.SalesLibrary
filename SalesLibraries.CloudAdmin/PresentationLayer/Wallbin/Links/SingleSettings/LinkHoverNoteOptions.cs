@@ -14,7 +14,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 	//public partial class LinkHoverNoteOptions : UserControl, ILinkSettingsEditControl
 	public sealed partial class LinkHoverNoteOptions : XtraTabPage, ILinkSettingsEditControl
 	{
-		private readonly LibraryObjectLink _data;
+		private LibraryObjectLink _data;
 
 		public LinkSettingsType[] SupportedSettingsTypes => new[] { LinkSettingsType.Notes };
 		public int Order => 1;
@@ -23,11 +23,10 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 
 		public event EventHandler<EventArgs> ForceCloseRequested;
 
-		public LinkHoverNoteOptions(LibraryObjectLink data)
+		public LinkHoverNoteOptions()
 		{
 			InitializeComponent();
 			Text = "Hover Note";
-			_data = data;
 
 			if ((base.CreateGraphics()).DpiX > 96)
 			{
@@ -43,8 +42,10 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 			memoEditNote.MouseDown += EditorHelper.EditorMouseUp;
 		}
 
-		public void LoadData()
+		public void LoadData(BaseLibraryLink sourceLink)
 		{
+			_data = (LibraryObjectLink)sourceLink;
+
 			checkEditNote.Checked = !String.IsNullOrEmpty(((LibraryObjectLinkSettings)_data.Settings).HoverNote);
 			memoEditNote.EditValue = ((LibraryObjectLinkSettings)_data.Settings).HoverNote;
 			checkEditShowOnlyCustomNote.Checked = ((LibraryObjectLinkSettings)_data.Settings).ShowOnlyCustomHoverNote;

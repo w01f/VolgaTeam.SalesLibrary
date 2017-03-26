@@ -14,7 +14,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 	//public sealed partial class LinkAppOptions : UserControl, ILinkSettingsEditControl
 	public sealed partial class LinkAppOptions : XtraTabPage, ILinkSettingsEditControl
 	{
-		private readonly AppLink _data;
+		private AppLink _data;
 
 		public LinkSettingsType[] SupportedSettingsTypes => new[] { LinkSettingsType.Notes, LinkSettingsType.AdminSettings };
 		public int Order => 6;
@@ -23,11 +23,10 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 		public event EventHandler<EventArgs> ForceCloseRequested;
 
-		public LinkAppOptions(AppLink data)
+		public LinkAppOptions()
 		{
 			InitializeComponent();
 			Text = "Admin";
-			_data = data;
 			if ((CreateGraphics()).DpiX > 96)
 			{
 				var styleControllerFont = new Font(styleController.Appearance.Font.FontFamily, styleController.Appearance.Font.Size - 2, styleController.Appearance.Font.Style);
@@ -39,8 +38,10 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			}
 		}
 
-		public void LoadData()
+		public void LoadData(BaseLibraryLink sourceLink)
 		{
+			_data = (AppLink)sourceLink;
+
 			textEditName.EditValue = _data.Name;
 			textEditPath.EditValue = _data.RelativePath;
 			textEditSecondPath.EditValue = ((AppLinkSettings)_data.Settings).SecondPath;

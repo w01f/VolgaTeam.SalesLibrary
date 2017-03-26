@@ -13,11 +13,18 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 {
 	public partial class ClassicFolderBox
 	{
-		public void EditSingleLinkSettings(LinkSettingsType settingsType)
+		private static readonly LinkSettingsType[] LinkGroupSettings = {
+			LinkSettingsType.Tags,
+			LinkSettingsType.AdminSettings, 
+		};
+
+		public void EditSingleLinkSettings(LinkSettingsType settingsType, FileTypes? defaultLinkType = null)
 		{
 			var selectedRow = SelectedLinkRow;
 			if (selectedRow == null) return;
-			if (SettingsEditorFactory.Run(selectedRow.Source, settingsType) == DialogResult.OK)
+			if ((selectedRow.Source is ILinksGroup && LinkGroupSettings.Contains(settingsType) ?
+				SettingsEditorFactory.Run((ILinksGroup)selectedRow.Source, settingsType, defaultLinkType) :
+				SettingsEditorFactory.Run(selectedRow.Source, settingsType)) == DialogResult.OK)
 			{
 				UpdateContent(true);
 				DataChanged?.Invoke(this, EventArgs.Empty);
@@ -99,7 +106,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 				using (var confirmation = new FormResetLinkSettingsConfirmation(settingsGroupsForReset))
 				{
 					if (confirmation.ShowDialog(MainController.Instance.MainForm) != DialogResult.OK) return;
-					DataSource.AllLinks.ResetToDefault(settingsGroupsForReset);
+					DataSource.AllGroupLinks.ResetToDefault(settingsGroupsForReset);
 					UpdateContent(true);
 					DataChanged?.Invoke(this, EventArgs.Empty);
 				}
@@ -109,7 +116,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 		private void ResetSecurity()
 		{
 			if (MainController.Instance.PopupMessages.ShowQuestion("Are You sure You want to delete security settings?") != DialogResult.Yes) return;
-			DataSource.AllLinks.ApplySecurity(new SecuritySettings());
+			DataSource.AllGroupLinks.ApplySecurity(new SecuritySettings());
 			UpdateContent(true);
 			DataChanged?.Invoke(this, EventArgs.Empty);
 		}
@@ -117,9 +124,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 		private void ResetTags()
 		{
 			if (MainController.Instance.PopupMessages.ShowQuestion("Are You sure You want to wipe tags?") != DialogResult.Yes) return;
-			DataSource.AllLinks.ApplyCategories(new SearchGroup[] { });
-			DataSource.AllLinks.ApplyKeywords(new SearchTag[] { });
-			DataSource.AllLinks.ApplySuperFilters(new string[] { });
+			DataSource.AllGroupLinks.ApplyCategories(new SearchGroup[] { });
+			DataSource.AllGroupLinks.ApplyKeywords(new SearchTag[] { });
+			DataSource.AllGroupLinks.ApplySuperFilters(new string[] { });
 			UpdateContent(true);
 			DataChanged?.Invoke(this, EventArgs.Empty);
 		}
@@ -127,7 +134,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 		private void ResetWidgets()
 		{
 			if (MainController.Instance.PopupMessages.ShowQuestion("Are You sure You want to remove widgets?") != DialogResult.Yes) return;
-			DataSource.AllLinks.ResetWidgets();
+			DataSource.AllGroupLinks.ResetWidgets();
 			UpdateContent(true);
 			DataChanged?.Invoke(this, EventArgs.Empty);
 		}
@@ -135,14 +142,14 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 		private void ResetBanners()
 		{
 			if (MainController.Instance.PopupMessages.ShowQuestion("Are You sure You want to remove banners?") != DialogResult.Yes) return;
-			DataSource.AllLinks.ResetBanners();
+			DataSource.AllGroupLinks.ResetBanners();
 			UpdateContent(true);
 			DataChanged?.Invoke(this, EventArgs.Empty);
 		}
 
 		private void SetLinkTextWordWrap()
 		{
-			DataSource.AllLinks.SetLinkTextWordWrap();
+			DataSource.AllGroupLinks.SetLinkTextWordWrap();
 			UpdateContent(true);
 			DataChanged?.Invoke(this, EventArgs.Empty);
 		}

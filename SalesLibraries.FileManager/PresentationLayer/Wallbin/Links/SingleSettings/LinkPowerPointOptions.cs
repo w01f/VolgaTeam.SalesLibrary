@@ -18,7 +18,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 	//public partial class LinkPowerPointOptions : UserControl, ILinkSettingsEditControl
 	public sealed partial class LinkPowerPointOptions : XtraTabPage, ILinkSettingsEditControl
 	{
-		private readonly PowerPointLink _data;
+		private PowerPointLink _data;
 
 		public LinkSettingsType[] SupportedSettingsTypes => new[] { LinkSettingsType.Notes, LinkSettingsType.AdminSettings };
 		public int Order => 6;
@@ -49,13 +49,10 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			}
 		}
 
-		public LinkPowerPointOptions(PowerPointLink data) : this()
+		public void LoadData(BaseLibraryLink sourceLink)
 		{
-			_data = data;
-		}
+			_data = (PowerPointLink)sourceLink;
 
-		public void LoadData()
-		{
 			ckDoNotGeneratePreview.Checked = !((DocumentLinkSettings)_data.Settings).GeneratePreviewImages;
 			ckDoNotGenerateText.Checked = !((DocumentLinkSettings)_data.Settings).GenerateContentText;
 

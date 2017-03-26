@@ -5,7 +5,8 @@ namespace SalesLibraries.Business.Entities.Interfaces
 {
 	public interface ILinksGroup
 	{
+		string LinkGroupName { get; }
 		ILinkGroupSettingsContainer LinkGroupSettingsContainer { get; }
-		IEnumerable<BaseLibraryLink> AllLinks { get; }
+		IEnumerable<BaseLibraryLink> AllGroupLinks { get; }
 	}
 }

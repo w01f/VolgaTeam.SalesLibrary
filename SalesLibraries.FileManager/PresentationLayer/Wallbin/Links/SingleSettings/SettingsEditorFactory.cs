@@ -46,7 +46,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			var dilogResult = DialogResult.Cancel;
 
 			var editForm = ObjectIntendHelper.GetObjectInstances(typeof(ILinkSetSettingsEditForm), null, linksGroup, defaultLinkType)
-					.OfType<ILinkSettingsEditForm>()
+					.OfType<ILinkSetSettingsEditForm>()
 					.FirstOrDefault(form => form.EditableSettings.Any(st => st == settingsType));
 			if (editForm != null)
 			{
@@ -54,35 +54,10 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 				dilogResult = ((Form)editForm).ShowDialog(MainController.Instance.MainForm);
 				((Form)editForm).Dispose();
 				if (dilogResult == DialogResult.OK)
-					foreach (var link in linksGroup.AllLinks.Where(link => !defaultLinkType.HasValue || link.Type == defaultLinkType.Value))
+					foreach (var link in linksGroup.AllGroupLinks.Where(link => !defaultLinkType.HasValue || link.Type == defaultLinkType.Value))
 						link.MarkAsModified();
 			}
 
-			return dilogResult;
-		}
-
-		public static DialogResult RunEmbedded(LibraryFileLink link, LibraryFolderLink parentLink, LinkSettingsType settingsType)
-		{
-			var dilogResult = DialogResult.Cancel;
-			link.PerformTransaction(link.ParentLibrary.Context,
-				linkCopy =>
-				{
-					using (var editForm = new FormEditLinkSettingsEmbedded(linkCopy, parentLink))
-					{
-						editForm.InitForm(settingsType);
-						dilogResult = editForm.ShowDialog();
-						if (dilogResult == DialogResult.OK)
-							linkCopy.MarkAsModified();
-						return dilogResult == DialogResult.OK;
-					}
-				},
-				copyMethod => MainController.Instance.ProcessManager.Run("Preparing Data...", (cancelationToken, formProgess) => copyMethod()),
-				(context, original, current) => MainController.Instance.ProcessManager.Run("Saving Changes...",
-					(cancelationToken, formProgess) =>
-					{
-						current.BeforeSave();
-						original.ApplyValues(current);
-					}));
 			return dilogResult;
 		}
 	}

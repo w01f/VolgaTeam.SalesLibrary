@@ -44,7 +44,6 @@
 			this.barButtonItemSingleLinkPropertiesDelete = new DevExpress.XtraBars.BarButtonItem();
 			this.barButtonItemSingleLinkPropertiesRefreshPreview = new DevExpress.XtraBars.BarButtonItem();
 			this.barButtonItemSingleLinkPropertiesLinkSettings = new DevExpress.XtraBars.BarButtonItem();
-			this.barButtonItemSingleLinkPropertiesAdvancedSettings = new DevExpress.XtraBars.BarButtonItem();
 			this.barButtonItemSingleLinkPropertiesTags = new DevExpress.XtraBars.BarButtonItem();
 			this.barButtonItemSingleLinkPropertiesExpirationDate = new DevExpress.XtraBars.BarButtonItem();
 			this.barButtonItemSingleLinkPropertiesSecurity = new DevExpress.XtraBars.BarButtonItem();
@@ -89,6 +88,9 @@
 			this.buttonXCollapse = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXExpand = new DevComponents.DotNetBar.ButtonX();
 			this.popupMenuSingleLinkProperties = new DevExpress.XtraBars.PopupMenu(this.components);
+			this.barSubItemSingleLinkPropertiesFolderLinkSettings = new DevExpress.XtraBars.BarSubItem();
+			this.barButtonItemSingleLinkPropertiesFolderLinkExcelSettings = new DevExpress.XtraBars.BarButtonItem();
+			this.barButtonItemSingleLinkPropertiesFolderLinkPdfSettings = new DevExpress.XtraBars.BarButtonItem();
 			((System.ComponentModel.ISupportInitialize)(this.barManager)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
@@ -146,7 +148,6 @@
             this.barButtonItemSingleLinkPropertiesDelete,
             this.barButtonItemSingleLinkPropertiesRefreshPreview,
             this.barButtonItemSingleLinkPropertiesLinkSettings,
-            this.barButtonItemSingleLinkPropertiesAdvancedSettings,
             this.barButtonItemSingleLinkPropertiesTags,
             this.barButtonItemSingleLinkPropertiesExpirationDate,
             this.barButtonItemSingleLinkPropertiesSecurity,
@@ -170,8 +171,11 @@
             this.barSubItemSingleLinkPropertiesAddHyperlinkApp,
             this.barSubItemSingleLinkPropertiesLineBreakTextFormat,
             this.barSubItemSingleLinkPropertiesLineBreakNotes,
-            this.barButtonItemSingleLinkPropertiesThumbnail});
-			this.barManager.MaxItemId = 17;
+            this.barButtonItemSingleLinkPropertiesThumbnail,
+            this.barSubItemSingleLinkPropertiesFolderLinkSettings,
+            this.barButtonItemSingleLinkPropertiesFolderLinkExcelSettings,
+            this.barButtonItemSingleLinkPropertiesFolderLinkPdfSettings});
+			this.barManager.MaxItemId = 20;
 			this.barManager.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemPictureEdit1});
 			// 
@@ -216,7 +220,7 @@
 			this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
 			this.barDockControlTop.ForeColor = System.Drawing.Color.Black;
 			this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
-			this.barDockControlTop.Size = new System.Drawing.Size(398, 105);
+			this.barDockControlTop.Size = new System.Drawing.Size(398, 95);
 			// 
 			// barDockControlBottom
 			// 
@@ -231,16 +235,16 @@
 			this.barDockControlLeft.CausesValidation = false;
 			this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
 			this.barDockControlLeft.ForeColor = System.Drawing.Color.Black;
-			this.barDockControlLeft.Location = new System.Drawing.Point(0, 105);
-			this.barDockControlLeft.Size = new System.Drawing.Size(0, 450);
+			this.barDockControlLeft.Location = new System.Drawing.Point(0, 95);
+			this.barDockControlLeft.Size = new System.Drawing.Size(0, 460);
 			// 
 			// barDockControlRight
 			// 
 			this.barDockControlRight.CausesValidation = false;
 			this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
 			this.barDockControlRight.ForeColor = System.Drawing.Color.Black;
-			this.barDockControlRight.Location = new System.Drawing.Point(398, 105);
-			this.barDockControlRight.Size = new System.Drawing.Size(0, 450);
+			this.barDockControlRight.Location = new System.Drawing.Point(398, 95);
+			this.barDockControlRight.Size = new System.Drawing.Size(0, 460);
 			// 
 			// barButtonItemSingleLinkPropertiesOpenLink
 			// 
@@ -281,14 +285,6 @@
 			this.barButtonItemSingleLinkPropertiesLinkSettings.Id = 4;
 			this.barButtonItemSingleLinkPropertiesLinkSettings.Name = "barButtonItemSingleLinkPropertiesLinkSettings";
 			this.barButtonItemSingleLinkPropertiesLinkSettings.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemSingleLinkPropertiesLinkSettings_ItemClick);
-			// 
-			// barButtonItemSingleLinkPropertiesAdvancedSettings
-			// 
-			this.barButtonItemSingleLinkPropertiesAdvancedSettings.Caption = "Advanced Settings";
-			this.barButtonItemSingleLinkPropertiesAdvancedSettings.CategoryGuid = new System.Guid("0399476a-ad4e-415d-bbb8-97162e27fa1a");
-			this.barButtonItemSingleLinkPropertiesAdvancedSettings.Id = 5;
-			this.barButtonItemSingleLinkPropertiesAdvancedSettings.Name = "barButtonItemSingleLinkPropertiesAdvancedSettings";
-			this.barButtonItemSingleLinkPropertiesAdvancedSettings.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemSingleLinkPropertiesAdvancedSettings_ItemClick);
 			// 
 			// barButtonItemSingleLinkPropertiesTags
 			// 
@@ -524,9 +520,9 @@
 			this.panelMain.Controls.Add(this.pnTreeViewProgress);
 			this.panelMain.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panelMain.ForeColor = System.Drawing.Color.Black;
-			this.panelMain.Location = new System.Drawing.Point(0, 149);
+			this.panelMain.Location = new System.Drawing.Point(0, 139);
 			this.panelMain.Name = "panelMain";
-			this.panelMain.Size = new System.Drawing.Size(398, 361);
+			this.panelMain.Size = new System.Drawing.Size(398, 371);
 			this.panelMain.TabIndex = 16;
 			// 
 			// treeListWallbinItems
@@ -561,7 +557,7 @@
 			this.treeListWallbinItems.OptionsView.ShowIndicator = false;
 			this.treeListWallbinItems.OptionsView.ShowVertLines = false;
 			this.treeListWallbinItems.ShowButtonMode = DevExpress.XtraTreeList.ShowButtonModeEnum.ShowForFocusedRow;
-			this.treeListWallbinItems.Size = new System.Drawing.Size(398, 241);
+			this.treeListWallbinItems.Size = new System.Drawing.Size(398, 251);
 			this.treeListWallbinItems.StateImageList = this.imageList;
 			this.treeListWallbinItems.TabIndex = 2;
 			this.treeListWallbinItems.CalcNodeHeight += new DevExpress.XtraTreeList.CalcNodeHeightEventHandler(this.OnTreeViewCalcNodeHeight);
@@ -599,7 +595,7 @@
 			this.panelSyncProgress.Controls.Add(this.circularProgressSyncProgress);
 			this.panelSyncProgress.Dock = System.Windows.Forms.DockStyle.Bottom;
 			this.panelSyncProgress.ForeColor = System.Drawing.Color.Black;
-			this.panelSyncProgress.Location = new System.Drawing.Point(0, 241);
+			this.panelSyncProgress.Location = new System.Drawing.Point(0, 251);
 			this.panelSyncProgress.Name = "panelSyncProgress";
 			this.panelSyncProgress.Padding = new System.Windows.Forms.Padding(5);
 			this.panelSyncProgress.Size = new System.Drawing.Size(398, 40);
@@ -644,7 +640,7 @@
 			this.panelSyncInfo.Controls.Add(this.labelControlSyncInfo);
 			this.panelSyncInfo.Dock = System.Windows.Forms.DockStyle.Bottom;
 			this.panelSyncInfo.ForeColor = System.Drawing.Color.Black;
-			this.panelSyncInfo.Location = new System.Drawing.Point(0, 281);
+			this.panelSyncInfo.Location = new System.Drawing.Point(0, 291);
 			this.panelSyncInfo.Name = "panelSyncInfo";
 			this.panelSyncInfo.Padding = new System.Windows.Forms.Padding(5);
 			this.panelSyncInfo.Size = new System.Drawing.Size(398, 40);
@@ -672,7 +668,7 @@
 			this.pnTreeViewProgress.Controls.Add(this.circularProgressTreeView);
 			this.pnTreeViewProgress.Dock = System.Windows.Forms.DockStyle.Bottom;
 			this.pnTreeViewProgress.ForeColor = System.Drawing.Color.Black;
-			this.pnTreeViewProgress.Location = new System.Drawing.Point(0, 321);
+			this.pnTreeViewProgress.Location = new System.Drawing.Point(0, 331);
 			this.pnTreeViewProgress.Name = "pnTreeViewProgress";
 			this.pnTreeViewProgress.Padding = new System.Windows.Forms.Padding(5);
 			this.pnTreeViewProgress.Size = new System.Drawing.Size(398, 40);
@@ -715,7 +711,7 @@
 			this.panelTop.Controls.Add(this.buttonXExpand);
 			this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
 			this.panelTop.ForeColor = System.Drawing.Color.Black;
-			this.panelTop.Location = new System.Drawing.Point(0, 105);
+			this.panelTop.Location = new System.Drawing.Point(0, 95);
 			this.panelTop.Name = "panelTop";
 			this.panelTop.Size = new System.Drawing.Size(398, 44);
 			this.panelTop.TabIndex = 21;
@@ -755,7 +751,7 @@
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemSingleLinkPropertiesOpenLink, true),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemSingleLinkPropertiesDelete),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemSingleLinkPropertiesLinkSettings, true),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemSingleLinkPropertiesAdvancedSettings),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barSubItemSingleLinkPropertiesFolderLinkSettings),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemSingleLinkPropertiesTags),
             new DevExpress.XtraBars.LinkPersistInfo(this.barSubItemSingleLinkPropertiesImages, true),
             new DevExpress.XtraBars.LinkPersistInfo(this.barSubItemSingleLinkPropertiesLineBreakNotes),
@@ -768,6 +764,45 @@
 			this.popupMenuSingleLinkProperties.Manager = this.barManager;
 			this.popupMenuSingleLinkProperties.Name = "popupMenuSingleLinkProperties";
 			this.popupMenuSingleLinkProperties.CloseUp += new System.EventHandler(this.OnSingleLinkPropertiesMenuCloseUp);
+			// 
+			// barSubItemSingleLinkPropertiesFolderLinkSettings
+			// 
+			this.barSubItemSingleLinkPropertiesFolderLinkSettings.Caption = "PDF & Excel Settings";
+			this.barSubItemSingleLinkPropertiesFolderLinkSettings.Id = 17;
+			this.barSubItemSingleLinkPropertiesFolderLinkSettings.ItemAppearance.Disabled.Options.UseTextOptions = true;
+			this.barSubItemSingleLinkPropertiesFolderLinkSettings.ItemAppearance.Disabled.TextOptions.HotkeyPrefix = DevExpress.Utils.HKeyPrefix.None;
+			this.barSubItemSingleLinkPropertiesFolderLinkSettings.ItemAppearance.Hovered.Options.UseTextOptions = true;
+			this.barSubItemSingleLinkPropertiesFolderLinkSettings.ItemAppearance.Hovered.TextOptions.HotkeyPrefix = DevExpress.Utils.HKeyPrefix.None;
+			this.barSubItemSingleLinkPropertiesFolderLinkSettings.ItemAppearance.Normal.Options.UseTextOptions = true;
+			this.barSubItemSingleLinkPropertiesFolderLinkSettings.ItemAppearance.Normal.TextOptions.HotkeyPrefix = DevExpress.Utils.HKeyPrefix.None;
+			this.barSubItemSingleLinkPropertiesFolderLinkSettings.ItemAppearance.Pressed.Options.UseTextOptions = true;
+			this.barSubItemSingleLinkPropertiesFolderLinkSettings.ItemAppearance.Pressed.TextOptions.HotkeyPrefix = DevExpress.Utils.HKeyPrefix.None;
+			this.barSubItemSingleLinkPropertiesFolderLinkSettings.ItemInMenuAppearance.Disabled.Options.UseTextOptions = true;
+			this.barSubItemSingleLinkPropertiesFolderLinkSettings.ItemInMenuAppearance.Disabled.TextOptions.HotkeyPrefix = DevExpress.Utils.HKeyPrefix.None;
+			this.barSubItemSingleLinkPropertiesFolderLinkSettings.ItemInMenuAppearance.Hovered.Options.UseTextOptions = true;
+			this.barSubItemSingleLinkPropertiesFolderLinkSettings.ItemInMenuAppearance.Hovered.TextOptions.HotkeyPrefix = DevExpress.Utils.HKeyPrefix.None;
+			this.barSubItemSingleLinkPropertiesFolderLinkSettings.ItemInMenuAppearance.Normal.Options.UseTextOptions = true;
+			this.barSubItemSingleLinkPropertiesFolderLinkSettings.ItemInMenuAppearance.Normal.TextOptions.HotkeyPrefix = DevExpress.Utils.HKeyPrefix.None;
+			this.barSubItemSingleLinkPropertiesFolderLinkSettings.ItemInMenuAppearance.Pressed.Options.UseTextOptions = true;
+			this.barSubItemSingleLinkPropertiesFolderLinkSettings.ItemInMenuAppearance.Pressed.TextOptions.HotkeyPrefix = DevExpress.Utils.HKeyPrefix.None;
+			this.barSubItemSingleLinkPropertiesFolderLinkSettings.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemSingleLinkPropertiesFolderLinkExcelSettings),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemSingleLinkPropertiesFolderLinkPdfSettings)});
+			this.barSubItemSingleLinkPropertiesFolderLinkSettings.Name = "barSubItemSingleLinkPropertiesFolderLinkSettings";
+			// 
+			// barButtonItemSingleLinkPropertiesFolderLinkExcelSettings
+			// 
+			this.barButtonItemSingleLinkPropertiesFolderLinkExcelSettings.Caption = "Excel";
+			this.barButtonItemSingleLinkPropertiesFolderLinkExcelSettings.Id = 18;
+			this.barButtonItemSingleLinkPropertiesFolderLinkExcelSettings.Name = "barButtonItemSingleLinkPropertiesFolderLinkExcelSettings";
+			this.barButtonItemSingleLinkPropertiesFolderLinkExcelSettings.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemSingleLinkPropertiesFolderLinkExcelSettings_ItemClick);
+			// 
+			// barButtonItemSingleLinkPropertiesFolderLinkPdfSettings
+			// 
+			this.barButtonItemSingleLinkPropertiesFolderLinkPdfSettings.Caption = "PDF";
+			this.barButtonItemSingleLinkPropertiesFolderLinkPdfSettings.Id = 19;
+			this.barButtonItemSingleLinkPropertiesFolderLinkPdfSettings.Name = "barButtonItemSingleLinkPropertiesFolderLinkPdfSettings";
+			this.barButtonItemSingleLinkPropertiesFolderLinkPdfSettings.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemSingleLinkPropertiesFolderLinkPdfSettings_ItemClick);
 			// 
 			// FormCompactWallbin
 			// 
@@ -837,7 +872,6 @@
 		private DevExpress.XtraBars.BarButtonItem barButtonItemSingleLinkPropertiesDelete;
 		private DevExpress.XtraBars.BarButtonItem barButtonItemSingleLinkPropertiesRefreshPreview;
 		private DevExpress.XtraBars.BarButtonItem barButtonItemSingleLinkPropertiesLinkSettings;
-		private DevExpress.XtraBars.BarButtonItem barButtonItemSingleLinkPropertiesAdvancedSettings;
 		private DevExpress.XtraBars.BarButtonItem barButtonItemSingleLinkPropertiesTags;
 		private DevExpress.XtraBars.BarButtonItem barButtonItemSingleLinkPropertiesExpirationDate;
 		private DevExpress.XtraBars.BarButtonItem barButtonItemSingleLinkPropertiesSecurity;
@@ -867,5 +901,8 @@
 		private System.Windows.Forms.Panel panelSyncProgress;
 		private DevExpress.XtraEditors.LabelControl labelControlSyncProgress;
 		private DevComponents.DotNetBar.Controls.CircularProgress circularProgressSyncProgress;
+		private DevExpress.XtraBars.BarSubItem barSubItemSingleLinkPropertiesFolderLinkSettings;
+		private DevExpress.XtraBars.BarButtonItem barButtonItemSingleLinkPropertiesFolderLinkExcelSettings;
+		private DevExpress.XtraBars.BarButtonItem barButtonItemSingleLinkPropertiesFolderLinkPdfSettings;
 	}
 }

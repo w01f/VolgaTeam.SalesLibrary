@@ -37,6 +37,8 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			this.buttonXResetExpirationDates = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXResetSecurity = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXResetLinks = new DevComponents.DotNetBar.ButtonX();
+			this.buttonXResetKeywords = new DevComponents.DotNetBar.ButtonX();
+			this.buttonXResetCategories = new DevComponents.DotNetBar.ButtonX();
 			this.SuspendLayout();
 			// 
 			// buttonXResetQV
@@ -70,7 +72,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			// 
 			this.buttonXResetWidgets.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
 			this.buttonXResetWidgets.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-			this.buttonXResetWidgets.Location = new System.Drawing.Point(12, 88);
+			this.buttonXResetWidgets.Location = new System.Drawing.Point(12, 87);
 			this.buttonXResetWidgets.Name = "buttonXResetWidgets";
 			this.buttonXResetWidgets.Size = new System.Drawing.Size(252, 44);
 			this.buttonXResetWidgets.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -84,7 +86,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			this.buttonXResetBanners.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
 			this.buttonXResetBanners.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXResetBanners.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-			this.buttonXResetBanners.Location = new System.Drawing.Point(305, 88);
+			this.buttonXResetBanners.Location = new System.Drawing.Point(305, 87);
 			this.buttonXResetBanners.Name = "buttonXResetBanners";
 			this.buttonXResetBanners.Size = new System.Drawing.Size(252, 44);
 			this.buttonXResetBanners.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -97,7 +99,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			// 
 			this.buttonXResetNotes.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
 			this.buttonXResetNotes.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-			this.buttonXResetNotes.Location = new System.Drawing.Point(12, 164);
+			this.buttonXResetNotes.Location = new System.Drawing.Point(12, 162);
 			this.buttonXResetNotes.Name = "buttonXResetNotes";
 			this.buttonXResetNotes.Size = new System.Drawing.Size(252, 44);
 			this.buttonXResetNotes.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -111,7 +113,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			this.buttonXResetHoverNotes.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
 			this.buttonXResetHoverNotes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXResetHoverNotes.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-			this.buttonXResetHoverNotes.Location = new System.Drawing.Point(305, 164);
+			this.buttonXResetHoverNotes.Location = new System.Drawing.Point(305, 162);
 			this.buttonXResetHoverNotes.Name = "buttonXResetHoverNotes";
 			this.buttonXResetHoverNotes.Size = new System.Drawing.Size(252, 44);
 			this.buttonXResetHoverNotes.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -124,7 +126,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			// 
 			this.buttonXResetExpirationDates.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
 			this.buttonXResetExpirationDates.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-			this.buttonXResetExpirationDates.Location = new System.Drawing.Point(12, 240);
+			this.buttonXResetExpirationDates.Location = new System.Drawing.Point(12, 237);
 			this.buttonXResetExpirationDates.Name = "buttonXResetExpirationDates";
 			this.buttonXResetExpirationDates.Size = new System.Drawing.Size(252, 44);
 			this.buttonXResetExpirationDates.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -138,7 +140,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			this.buttonXResetSecurity.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
 			this.buttonXResetSecurity.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXResetSecurity.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-			this.buttonXResetSecurity.Location = new System.Drawing.Point(305, 240);
+			this.buttonXResetSecurity.Location = new System.Drawing.Point(305, 237);
 			this.buttonXResetSecurity.Name = "buttonXResetSecurity";
 			this.buttonXResetSecurity.Size = new System.Drawing.Size(252, 44);
 			this.buttonXResetSecurity.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -154,7 +156,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXResetLinks.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXResetLinks.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.buttonXResetLinks.Location = new System.Drawing.Point(158, 349);
+			this.buttonXResetLinks.Location = new System.Drawing.Point(158, 392);
 			this.buttonXResetLinks.Name = "buttonXResetLinks";
 			this.buttonXResetLinks.Size = new System.Drawing.Size(252, 44);
 			this.buttonXResetLinks.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -163,10 +165,39 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 			this.buttonXResetLinks.TextColor = System.Drawing.Color.Red;
 			this.buttonXResetLinks.Click += new System.EventHandler(this.buttonXResetLinks_Click);
 			// 
+			// buttonXResetKeywords
+			// 
+			this.buttonXResetKeywords.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXResetKeywords.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonXResetKeywords.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXResetKeywords.Location = new System.Drawing.Point(305, 312);
+			this.buttonXResetKeywords.Name = "buttonXResetKeywords";
+			this.buttonXResetKeywords.Size = new System.Drawing.Size(252, 44);
+			this.buttonXResetKeywords.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXResetKeywords.TabIndex = 11;
+			this.buttonXResetKeywords.Text = "Wipe ALL Keyword Tags";
+			this.buttonXResetKeywords.TextColor = System.Drawing.Color.Red;
+			this.buttonXResetKeywords.Click += new System.EventHandler(this.buttonXResetKeywords_Click);
+			// 
+			// buttonXResetCategories
+			// 
+			this.buttonXResetCategories.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXResetCategories.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXResetCategories.Location = new System.Drawing.Point(12, 312);
+			this.buttonXResetCategories.Name = "buttonXResetCategories";
+			this.buttonXResetCategories.Size = new System.Drawing.Size(252, 44);
+			this.buttonXResetCategories.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXResetCategories.TabIndex = 10;
+			this.buttonXResetCategories.Text = "Wipe ALL Category Tags";
+			this.buttonXResetCategories.TextColor = System.Drawing.Color.Red;
+			this.buttonXResetCategories.Click += new System.EventHandler(this.buttonXResetCategories_Click);
+			// 
 			// FormResetLibraryContent
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-			this.ClientSize = new System.Drawing.Size(569, 404);
+			this.ClientSize = new System.Drawing.Size(569, 447);
+			this.Controls.Add(this.buttonXResetKeywords);
+			this.Controls.Add(this.buttonXResetCategories);
 			this.Controls.Add(this.buttonXResetLinks);
 			this.Controls.Add(this.buttonXResetSecurity);
 			this.Controls.Add(this.buttonXResetExpirationDates);
@@ -201,5 +232,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Settings
 		private DevComponents.DotNetBar.ButtonX buttonXResetExpirationDates;
 		private DevComponents.DotNetBar.ButtonX buttonXResetSecurity;
 		private DevComponents.DotNetBar.ButtonX buttonXResetLinks;
+		private DevComponents.DotNetBar.ButtonX buttonXResetKeywords;
+		private DevComponents.DotNetBar.ButtonX buttonXResetCategories;
 	}
 }

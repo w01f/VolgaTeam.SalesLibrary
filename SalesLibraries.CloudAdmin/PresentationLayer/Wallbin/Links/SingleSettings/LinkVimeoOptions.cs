@@ -14,7 +14,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 	//public sealed partial class LinkVimeoOptions : UserControl, ILinkSettingsEditControl
 	public sealed partial class LinkVimeoOptions : XtraTabPage, ILinkSettingsEditControl
 	{
-		private readonly VimeoLink _data;
+		private VimeoLink _data;
 
 		public LinkSettingsType[] SupportedSettingsTypes => new[] { LinkSettingsType.Notes, LinkSettingsType.AdminSettings };
 		public int Order => 6;
@@ -23,11 +23,11 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 
 		public event EventHandler<EventArgs> ForceCloseRequested;
 
-		public LinkVimeoOptions(VimeoLink data)
+		public LinkVimeoOptions()
 		{
 			InitializeComponent();
 			Text = "Admin";
-			_data = data;
+
 			if ((CreateGraphics()).DpiX > 96)
 			{
 				var styleControllerFont = new Font(styleController.Appearance.Font.FontFamily, styleController.Appearance.Font.Size - 2, styleController.Appearance.Font.Style);
@@ -43,8 +43,10 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 			}
 		}
 
-		public void LoadData()
+		public void LoadData(BaseLibraryLink sourceLink)
 		{
+			_data = (VimeoLink)sourceLink;
+
 			textEditName.EditValue = _data.Name;
 			textEditPath.EditValue = _data.RelativePath;
 			ckForcePreview.Checked = ((HyperLinkSettings)_data.Settings).ForcePreview;

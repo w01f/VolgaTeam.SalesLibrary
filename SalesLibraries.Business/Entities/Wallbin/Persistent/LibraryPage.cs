@@ -86,10 +86,13 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 		}
 
 		[NotMapped, JsonIgnore]
-		public IEnumerable<BaseLibraryLink> AllLinks
+		public IEnumerable<BaseLibraryLink> AllGroupLinks
 		{
-			get { return Folders.SelectMany(f => f.AllLinks); }
+			get { return Folders.SelectMany(f => f.AllGroupLinks); }
 		}
+
+		[NotMapped, JsonIgnore]
+		public string LinkGroupName => Name;
 		#endregion
 
 		public LibraryPage()

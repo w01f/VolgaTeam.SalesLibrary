@@ -17,7 +17,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 	//public partial class LinkPowerPointOptions : UserControl, ILinkSettingsEditControl
 	public sealed partial class LinkPowerPointOptions : XtraTabPage, ILinkSettingsEditControl
 	{
-		private readonly PowerPointLink _data;
+		private PowerPointLink _data;
 
 		public LinkSettingsType[] SupportedSettingsTypes => new[] { LinkSettingsType.Notes, LinkSettingsType.AdminSettings };
 		public int Order => 6;
@@ -48,15 +48,22 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 			}
 		}
 
-		public LinkPowerPointOptions(PowerPointLink data) : this()
+		public void LoadData(BaseLibraryLink sourceLink)
 		{
-			_data = data;
-		}
+			_data = (PowerPointLink)sourceLink;
 
-		public void LoadData()
-		{
 			ckDoNotGeneratePreview.Checked = !((DocumentLinkSettings)_data.Settings).GeneratePreviewImages;
 			ckDoNotGenerateText.Checked = !((DocumentLinkSettings)_data.Settings).GenerateContentText;
+
+			if (//MainController.Instance.Settings.EnableLocalSync &&
+				Directory.Exists(((PowerPointLinkSettings)_data.Settings).ContainerPath))
+			{
+				buttonXOpenQV.Enabled = true;
+				buttonXOpenQV.Text = String.Format("!QV Folder ({0})", ((PowerPointLinkSettings)_data.Settings).Id.ToString("D"));
+			}
+			else
+				buttonXOpenQV.Enabled = false;
+
 
 			if (Directory.Exists(_data.PreviewContainerPath))
 			{
@@ -87,7 +94,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 					((PowerPointLinkSettings)_data.Settings).UpdatePresentationInfo(powerPointProcessor);
 				}
 
-				_data.ClearPreviewContainer();
+				//_data.ClearPreviewContainer();
 				//var previewContainer = _data.GetPreviewContainer();
 				//var previewGenerator = previewContainer.GetPreviewGenerator();
 				//previewContainer.UpdateContent(previewGenerator, cancelationToken);

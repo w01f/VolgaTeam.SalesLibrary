@@ -18,7 +18,6 @@ using SalesLibraries.Common.Helpers;
 using SalesLibraries.Common.Objects.SearchTags;
 using SalesLibraries.CommonGUI.Common;
 using SalesLibraries.FileManager.Controllers;
-using SalesLibraries.FileManager.PresentationLayer.Wallbin.ImageGallery;
 using SalesLibraries.FileManager.Properties;
 
 namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSettings
@@ -28,7 +27,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		private const string HeaderTitleTemplate = "<size=+4>{0}</size>";
 
 		private bool _allowHandleEvents;
-		private readonly List<BaseLibraryLink> _links = new List<BaseLibraryLink>();
+		private readonly ILinksGroup _linkGroup;
+		private readonly FileTypes? _defaultLinkType;
+		private readonly List<BaseLibraryLink> _selectedLinks = new List<BaseLibraryLink>();
 
 		public LinkSettingsType[] EditableSettings => new[]
 		{
@@ -63,21 +64,43 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 		public FormEditLinkTags(BaseLibraryLink sourceLink) : this()
 		{
-			_links.Add(sourceLink);
+			_selectedLinks.Add(sourceLink);
+			panelFilesContainer.Visible = false;
+			Width = 950;
 		}
 
 		public FormEditLinkTags(ILinksGroup linkGroup, FileTypes? defaultLinkType = null) : this()
 		{
-			_links.AddRange(linkGroup.AllLinks.OfType<LibraryObjectLink>().Where(link => !defaultLinkType.HasValue || link.Type == defaultLinkType.Value));
+			_linkGroup = linkGroup;
+			_defaultLinkType = defaultLinkType;
+			panelFilesContainer.Visible = true;
+			Width = 1150;
 		}
 
 		public void InitForm<TEditControl>(LinkSettingsType settingsType) where TEditControl : ILinkSettingsEditControl
 		{
-			Width = 960;
 			Height = 590;
-			FormStateHelper.Init(this, RemoteResourceManager.Instance.AppAliasSettingsFolder, "Site Admin-Link-Tags", false, false);
+			FormStateHelper.Init(this, RemoteResourceManager.Instance.AppAliasSettingsFolder, String.Format("Site Admin-Link-Tags-{0}", _linkGroup != null ? "Link-Group" : "Single-Link"), false, false);
 			StartPosition = FormStartPosition.CenterParent;
-			LoadData();
+
+			LoadTreeView();
+
+			if (_linkGroup != null)
+			{
+				linksTreeSelector.LinkSelected += (o, e) =>
+				{
+					if (_allowHandleEvents)
+						SaveData();
+
+					_selectedLinks.Clear();
+					_selectedLinks.AddRange(linksTreeSelector.SelectedLinks);
+
+					LoadData();
+				};
+				linksTreeSelector.LoadData(_linkGroup, _defaultLinkType);
+			}
+			else
+				LoadData();
 		}
 
 		private void LoadData()
@@ -105,9 +128,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 				? Resources.LinkSettingsTagsLogoCategories
 				: Resources.LinkSettingsTagsLogoKeywords;
 			labelControlTitle.Text = String.Format(HeaderTitleTemplate,
-				_links.Count > 1 ?
-					String.Format("{0} links", _links.Count) :
-					_links.FirstOrDefault()?.ToString());
+				_selectedLinks.Count > 1 ?
+					linksTreeSelector.SelectedGroup?.Title :
+					_selectedLinks.FirstOrDefault()?.ToString());
 		}
 
 		private void UpdateControlPanels()
@@ -142,12 +165,10 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 		private void UpdateCategoriesDataSource()
 		{
-			splitContainerCategories.Panel2.Controls.Clear();
+			_searchGroups.ForEach(searchGroup => searchGroup.ListBox.UnCheckAll());
 
-			LoadTreeView();
-
-			var commonCategories = _links.GetCommonCategories();
-			foreach (var link in _links)
+			var commonCategories = _selectedLinks.GetCommonCategories();
+			foreach (var link in _selectedLinks)
 			{
 				foreach (var searchGroup in _searchGroups)
 				{
@@ -155,30 +176,25 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 					if (linkGroup != null)
 						foreach (var item in searchGroup.ListBox.Items
 							.Where(item => linkGroup.Tags
-								.Any(t => t.Equals((SearchTag)item.Value))))
+								.Any(t => t.Equals((SearchTag) item.Value))))
+						{
 							item.CheckState = CheckState.Indeterminate;
+							searchGroup.ListBox.BringToFront();
+						}
 
 					var commonGroup = commonCategories.FirstOrDefault(sg => sg.Equals(searchGroup.DataSource));
 					if (commonGroup != null)
 						foreach (var item in searchGroup.ListBox.Items
 							.Where(item => commonGroup.Tags
-								.Any(t => t.Equals((SearchTag)item.Value))))
+								.Any(t => t.Equals((SearchTag) item.Value))))
+						{
 							item.CheckState = CheckState.Checked;
+							searchGroup.ListBox.BringToFront();
+						}
 				}
 			}
 
-			var firstSuperGroupNode = _rootNode.Nodes.FirstOrDefault();
-			if (firstSuperGroupNode != null)
-			{
-				firstSuperGroupNode.Expanded = false;
-				var firstGroupNode = firstSuperGroupNode.Nodes.FirstOrDefault();
-				if (firstGroupNode != null)
-				{
-					treeListCategories.FocusedNode = firstGroupNode;
-					firstGroupNode.Selected = true;
-				}
-			}
-
+			UpdateSuperGroupNodes();
 			UpdateCategoryInfo();
 		}
 
@@ -224,11 +240,12 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 				})
 				.Where(searchGroup => searchGroup.Tags.Any())
 				.ToArray();
-			_links.ApplyCategories(commonCategories, partialCategories);
+			_selectedLinks.ApplyCategories(commonCategories, partialCategories);
 		}
 
 		private void LoadTreeView()
 		{
+			splitContainerCategories.Panel2.Controls.Clear();
 			treeListCategories.Nodes.Clear();
 			_searchGroups.Clear();
 
@@ -245,10 +262,10 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 				{
 					var groupNode = treeListCategories.AppendNode(new object[] { searchGroup.Name }, superGroupNode);
 					var searchGroupContainer = new SearchGroupContainer(searchGroup);
-					searchGroupContainer.ListBox.UnCheckAll();
 					searchGroupContainer.ListBox.ItemChecking += OnCategoriesListBoxItemChecking;
 					searchGroupContainer.ListBox.ItemCheck += (o, ea) =>
 					{
+						if (!_allowHandleEvents) return;
 						UpdateSuperGroupNodes();
 						UpdateCategoryInfo();
 					};
@@ -375,6 +392,16 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			catch { }
 			e.Handled = true;
 		}
+
+		private void buttonXCategoriesExpandAll_Click(object sender, EventArgs e)
+		{
+			treeListCategories.ExpandAll();
+		}
+
+		private void buttonXCategoriesCollapseAll_Click(object sender, EventArgs e)
+		{
+			treeListCategories.CollapseAll();
+		}
 		#endregion
 
 		#region Keywords
@@ -383,9 +410,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 		private void UpdateKeywordsDataSource()
 		{
-			var commonKeywords = _links.GetCommonKeywords().ToList();
+			_keywords.Clear();
+
+			var commonKeywords = _selectedLinks.GetCommonKeywords().ToList();
 			_keywords.AddRange(commonKeywords.Select(k => new KeywordModel { Name = k.Name, IsShared = true }));
-			foreach (var link in _links)
+			foreach (var link in _selectedLinks)
 			{
 				_keywords.AddRange(link.Tags.Keywords
 					.Where(k => !commonKeywords.Any(commonKeyword => commonKeyword.Equals(k)))
@@ -401,7 +430,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		{
 			gridViewKeywords.CloseEditor();
 			_keywords.RemoveAll(tag => String.IsNullOrEmpty(tag.Name));
-			_links.ApplyKeywords(_keywords.ToArray());
+			_selectedLinks.ApplyKeywords(_keywords.ToArray());
 		}
 
 		private void UpdateKeywordsInfo()

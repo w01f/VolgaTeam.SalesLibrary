@@ -1,5 +1,6 @@
 ﻿using System;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
+using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 
 namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettings
 {
@@ -10,7 +11,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 		bool AvailableForEmbedded { get; }
 		SettingsEditorHeaderInfo HeaderInfo { get; }
 		event EventHandler<EventArgs> ForceCloseRequested;
-		void LoadData();
+		void LoadData(BaseLibraryLink sourceLink);
 		void SaveData();
 	}
 }

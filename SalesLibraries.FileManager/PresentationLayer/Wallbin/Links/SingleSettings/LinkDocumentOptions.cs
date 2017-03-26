@@ -22,14 +22,16 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 	//public partial class LinkDocumentOptions : UserControl, ILinkSetSettingsEditControl
 	public sealed partial class LinkDocumentOptions : XtraTabPage, ILinkSetSettingsEditControl
 	{
+		private readonly List<DocumentLink> _sourceLinks = new List<DocumentLink>();
 		private readonly ILinksGroup _linksGroup;
-		private readonly List<DocumentLink> _links = new List<DocumentLink>();
 		private readonly FileTypes? _defaultLinkType;
+
+		private DocumentLink DefaultLink => _sourceLinks.First();
 
 		public LinkSettingsType[] SupportedSettingsTypes => new[] { LinkSettingsType.Notes, LinkSettingsType.AdminSettings };
 		public int Order => 6;
 		public bool AvailableForEmbedded => true;
-		public SettingsEditorHeaderInfo HeaderInfo => new SettingsEditorHeaderInfo { Title = String.Format("<size=+4>{0} Settings</size>", _links.Any() && _links.First().Type == FileTypes.Pdf ? "PDF" : "Document") };
+		public SettingsEditorHeaderInfo HeaderInfo => new SettingsEditorHeaderInfo { Title = String.Format("<size=+4>{0} Settings</size>", _defaultLinkType == FileTypes.Pdf ? "PDF" : "Document") };
 
 		public event EventHandler<EventArgs> ForceCloseRequested;
 
@@ -57,19 +59,29 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			}
 		}
 
-		public LinkDocumentOptions(DocumentLink link) : this()
-		{
-			_links.Add(link);
-		}
-
 		public LinkDocumentOptions(ILinksGroup linksGroup, FileTypes? defaultLinkType = null) : this()
 		{
 			_linksGroup = linksGroup;
-			_links.AddRange(linksGroup.AllLinks.Where(link => !defaultLinkType.HasValue || link.Type == defaultLinkType.Value).OfType<DocumentLink>());
 			_defaultLinkType = defaultLinkType;
 		}
 
-		public void LoadData()
+		public void LoadData(BaseLibraryLink sourceLink)
+		{
+			_sourceLinks.Clear();
+			_sourceLinks.Add((DocumentLink)sourceLink);
+
+			LoadData();
+		}
+
+		public void LoadData(IEnumerable<BaseLibraryLink> sourceLinks)
+		{
+			_sourceLinks.Clear();
+			_sourceLinks.AddRange(sourceLinks.OfType<DocumentLink>());
+
+			LoadData();
+		}
+
+		private void LoadData()
 		{
 			ckSaveAsTemplate.Visible = _linksGroup != null;
 
@@ -83,9 +95,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 				ckForcePreview.Checked = settingsTemplate.ForcePreview;
 				ckSaveAsTemplate.Checked = true;
 			}
-			else if (_links.Any())
+			else if (_sourceLinks.Any())
 			{
-				var linkSettings = _links.Select(link => link.Settings).OfType<DocumentLinkSettings>().ToList();
+				var linkSettings = _sourceLinks.Select(link => link.Settings).OfType<DocumentLinkSettings>().ToList();
 
 				if (linkSettings.All(settings => settings.IsArchiveResource))
 					ckIsArchiveResource.CheckState = CheckState.Checked;
@@ -118,20 +130,21 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 				ckSaveAsTemplate.Checked = false;
 			}
 
-			if (_links.Count == 1 && Directory.Exists(_links.First().PreviewContainerPath))
+			if (_sourceLinks.Count == 1 && Directory.Exists(_sourceLinks.First().PreviewContainerPath))
 			{
 				buttonXOpenWV.Enabled = true;
-				buttonXOpenWV.Text = String.Format("!WV Folder ({0})", _links.First().PreviewContainerName);
+				buttonXOpenWV.Text = String.Format("!WV Folder ({0})", _sourceLinks.First().PreviewContainerName);
 			}
 			else
 				buttonXOpenWV.Enabled = false;
 
-			buttonXRefreshPreview.Enabled = _links.Any();
+			buttonXRefreshPreview.Enabled = _sourceLinks.Any();
 		}
 
 		public void SaveData()
 		{
-			foreach (var link in _links)
+			if (!_sourceLinks.Any()) return;
+			foreach (var link in _sourceLinks)
 			{
 				((DocumentLinkSettings)link.Settings).IsArchiveResource = ckIsArchiveResource.CheckState != CheckState.Indeterminate ?
 					ckIsArchiveResource.Checked :
@@ -191,11 +204,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 		private void buttonXRefreshPreview_Click(object sender, EventArgs e)
 		{
-			if (MainController.Instance.PopupMessages.ShowWarningQuestion(String.Format("Are you sure you want to refresh the server files for:{1}{0}?", _links.Count == 1 ? _links.First().NameWithExtension : "links", Environment.NewLine)) != DialogResult.Yes) return;
+			if (MainController.Instance.PopupMessages.ShowWarningQuestion(String.Format("Are you sure you want to refresh the server files for:{1}{0}?", _sourceLinks.Count == 1 ? _sourceLinks.First().NameWithExtension : "links", Environment.NewLine)) != DialogResult.Yes) return;
 
 			MainController.Instance.ProcessManager.Run("Updating Preview files...", (cancelationToken, formProgess) =>
 			{
-				foreach (var link in _links)
+				foreach (var link in _sourceLinks)
 				{
 					link.ClearPreviewContainer();
 					var previewContainer = link.GetPreviewContainer();
@@ -203,14 +216,14 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 					previewContainer.UpdateContent(previewGenerator, cancelationToken);
 				}
 			});
-			MainController.Instance.PopupMessages.ShowInfo(String.Format("{0}{1} now updated for the server!", _links.Count == 1 ? _links.First().NameWithExtension : "Links", Environment.NewLine));
+			MainController.Instance.PopupMessages.ShowInfo(String.Format("{0}{1} now updated for the server!", _sourceLinks.Count == 1 ? _sourceLinks.First().NameWithExtension : "Links", Environment.NewLine));
 		}
 
 		private void buttonXOpenWV_Click(object sender, EventArgs e)
 		{
 			try
 			{
-				Process.Start(_links.First().PreviewContainerPath);
+				Process.Start(_sourceLinks.First().PreviewContainerPath);
 			}
 			catch { }
 		}

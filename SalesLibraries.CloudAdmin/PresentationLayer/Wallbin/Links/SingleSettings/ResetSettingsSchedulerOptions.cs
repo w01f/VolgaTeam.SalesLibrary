@@ -12,7 +12,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 	//public partial class ResetSettingsSchedulerOptions : UserControl, ILinkSettingsEditControl
 	public partial class ResetSettingsSchedulerOptions : XtraTabPage, ILinkSettingsEditControl
 	{
-		private readonly BaseLibraryLink _data;
+		private BaseLibraryLink _data;
 
 		public LinkSettingsType[] SupportedSettingsTypes => new[] { LinkSettingsType.Notes };
 		public int Order => 4;
@@ -21,10 +21,9 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 
 		public event EventHandler<EventArgs> ForceCloseRequested;
 
-		public ResetSettingsSchedulerOptions(BaseLibraryLink data)
+		public ResetSettingsSchedulerOptions()
 		{
 			InitializeComponent();
-			_data = data;
 
 			Text = "Link RESET Timer";
 
@@ -42,8 +41,10 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 			}
 		}
 
-		public void LoadData()
+		public void LoadData(BaseLibraryLink sourceLink)
 		{
+			_data = sourceLink;
+
 			checkEditEnableResetSettingsScheduler.Checked = _data.ResetSettingsScheduler.Enabled;
 			dateEditExpirationDate.EditValue = _data.ResetSettingsScheduler.ResetDate;
 			timeEditExpirationTime.EditValue = _data.ResetSettingsScheduler.ResetDate ?? DateTime.MinValue;

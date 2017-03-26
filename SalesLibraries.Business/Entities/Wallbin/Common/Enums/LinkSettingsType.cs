@@ -9,7 +9,6 @@
 		Widget,
 		Banner,
 		Thumbnail,
-		AdvancedSettings,
 		AdminSettings
 	}
 }

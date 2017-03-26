@@ -159,7 +159,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 		private void barButtonItemFolderPropertiesMultiLinksRefreshPreview_ItemClick(object sender, ItemClickEventArgs e)
 		{
 			if (MainController.Instance.PopupMessages.ShowWarningQuestion("Are you sure you want to refresh the server files for links in this window?") != DialogResult.Yes) return;
-			RefreshPreviewFiles(DataSource.AllLinks.OfType<PreviewableLink>().ToList());
+			RefreshPreviewFiles(DataSource.AllGroupLinks.OfType<PreviewableLink>().ToList());
 			MainController.Instance.PopupMessages.ShowInfo("Links are now updated for the server!");
 		}
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using DevExpress.XtraTreeList.Nodes;
+using SalesLibraries.Business.Entities.Interfaces;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
@@ -18,6 +19,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.CompactWallbin
 {
 	public partial class FormCompactWallbin
 	{
+		private static readonly LinkSettingsType[] LinkGroupSettings = {
+			LinkSettingsType.Tags,
+			LinkSettingsType.AdminSettings,
+		};
+
 		private void OpenLink(TreeListNode targetLinkNode)
 		{
 			var sourceLink = (targetLinkNode?.Tag as WallbinItem)?.Source as LibraryObjectLink;
@@ -113,11 +119,13 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.CompactWallbin
 		}
 
 
-		private void EditSingleLinkSettings(TreeListNode targetLinkNode, LinkSettingsType settingsType)
+		private void EditSingleLinkSettings(TreeListNode targetLinkNode, LinkSettingsType settingsType, FileTypes? defaultLinkType = null)
 		{
 			var sourceLink = (targetLinkNode?.Tag as WallbinItem)?.Source as BaseLibraryLink;
 			if (sourceLink == null) return;
-			if (SettingsEditorFactory.Run(sourceLink, settingsType) == DialogResult.OK)
+			if ((sourceLink is ILinksGroup && LinkGroupSettings.Contains(settingsType) ?
+				SettingsEditorFactory.Run((ILinksGroup)sourceLink, settingsType, defaultLinkType) :
+				SettingsEditorFactory.Run(sourceLink, settingsType)) == DialogResult.OK)
 			{
 				targetLinkNode.TreeList.InvalidateNode(targetLinkNode);
 				RaiseDataChanged();

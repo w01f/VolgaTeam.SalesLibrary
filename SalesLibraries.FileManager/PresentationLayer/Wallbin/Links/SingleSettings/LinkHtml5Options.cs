@@ -14,7 +14,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 	//public sealed partial class LinkHtml5Options : UserControl, ILinkSettingsEditControl
 	public sealed partial class LinkHtml5Options : XtraTabPage, ILinkSettingsEditControl
 	{
-		private readonly Html5Link _data;
+		private Html5Link _data;
 
 		public LinkSettingsType[] SupportedSettingsTypes => new[] { LinkSettingsType.Notes, LinkSettingsType.AdminSettings };
 		public int Order => 6;
@@ -23,11 +23,11 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 		public event EventHandler<EventArgs> ForceCloseRequested;
 
-		public LinkHtml5Options(Html5Link data)
+		public LinkHtml5Options()
 		{
 			InitializeComponent();
 			Text = "Admin";
-			_data = data;
+
 			if ((CreateGraphics()).DpiX > 96)
 			{
 				var styleControllerFont = new Font(styleController.Appearance.Font.FontFamily, styleController.Appearance.Font.Size - 2, styleController.Appearance.Font.Style);
@@ -40,8 +40,10 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			}
 		}
 
-		public void LoadData()
+		public void LoadData(BaseLibraryLink sourceLink)
 		{
+			_data = (Html5Link)sourceLink;
+
 			textEditName.EditValue = _data.Name;
 			textEditPath.EditValue = _data.RelativePath;
 			ckForcePreview.Checked = ((HyperLinkSettings)_data.Settings).ForcePreview;

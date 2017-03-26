@@ -15,7 +15,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 	//public partial class LineBreakOptions : UserControl, ILinkSettingsEditControl
 	public partial class LineBreakOptions : XtraTabPage, ILinkSettingsEditControl
 	{
-		private readonly LineBreak _data;
+		private LineBreak _data;
 
 		public LinkSettingsType[] SupportedSettingsTypes => new[] { LinkSettingsType.Notes };
 		public int Order => 0;
@@ -24,10 +24,9 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 		public event EventHandler<EventArgs> ForceCloseRequested;
 
-		public LineBreakOptions(LineBreak data)
+		public LineBreakOptions()
 		{
 			InitializeComponent();
-			_data = data;
 
 			Text = "Line Break";
 
@@ -45,8 +44,10 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			}
 		}
 
-		public void LoadData()
+		public void LoadData(BaseLibraryLink sourceLink)
 		{
+			_data = (LineBreak)sourceLink;
+
 			buttonEditLineBreakFont.Tag = _data.Settings.Font;
 			buttonEditLineBreakFont.EditValue = Utils.FontToString(_data.Settings.Font);
 			colorEditLineBreakFontColor.Color = _data.DisplayColor;

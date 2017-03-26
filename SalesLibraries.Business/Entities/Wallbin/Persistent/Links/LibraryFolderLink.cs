@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using SalesLibraries.Business.Contexts.Wallbin;
 using SalesLibraries.Business.Entities.Common;
 using SalesLibraries.Business.Entities.Helpers;
+using SalesLibraries.Business.Entities.Interfaces;
 using SalesLibraries.Business.Entities.Wallbin.Common.Constants;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent;
@@ -15,7 +16,7 @@ using SalesLibraries.Common.Configuration;
 
 namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 {
-	public class LibraryFolderLink : LibraryFileLink
+	public class LibraryFolderLink : LibraryFileLink, ILinksGroup
 	{
 		#region Persistent Properties
 		[InverseProperty("FolderLink")]
@@ -48,6 +49,15 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 
 		[NotMapped, JsonIgnore]
 		public override string AutoWidgetKey => "folder_closed";
+
+		[NotMapped, JsonIgnore]
+		public String LinkGroupName => LinkInfoDisplayName;
+
+		[NotMapped, JsonIgnore]
+		public ILinkGroupSettingsContainer LinkGroupSettingsContainer => (LibraryFolderLinkSettings)Settings;
+
+		[NotMapped, JsonIgnore]
+		public IEnumerable<BaseLibraryLink> AllGroupLinks => new[] { this }.Union(AllLinks);
 		#endregion
 
 		public LibraryFolderLink()
@@ -121,7 +131,7 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 					newLinks.Add(folderLink);
 				}
 				foreach (var filePath in Directory.GetFiles(FullPath)
-					.Where(filePath => filePath.ToUpper().Contains(Constants.ExternalFilesRootFolderName.ToUpper()) || 
+					.Where(filePath => filePath.ToUpper().Contains(Constants.ExternalFilesRootFolderName.ToUpper()) ||
 						GlobalSettings.HiddenObjects.All(item => !filePath.ToUpper().Contains(item.ToUpper()))))
 				{
 					existedPaths.Add(filePath);

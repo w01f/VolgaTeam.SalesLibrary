@@ -84,7 +84,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 				barButtonItemSingleLinkPropertiesImageSettings.Visibility = BarItemVisibility.Never;
 				barSubItemSingleLinkPropertiesObjectNotes.Visibility = BarItemVisibility.Never;
 				barSubItemSingleLinkPropertiesAdminSettings.Visibility = BarItemVisibility.Never;
-				barButtonItemSingleLinkPropertiesAdvancedSettings.Visibility = BarItemVisibility.Never;
+				barSubItemSingleLinkPropertiesFolderLinkSettings.Visibility = BarItemVisibility.Never;
 				barButtonItemSingleLinkPropertiesTags.Visibility = BarItemVisibility.Never;
 				barSubItemSingleLinkPropertiesImages.Visibility = BarItemVisibility.Never;
 				barButtonItemSingleLinkPropertiesResetSettings.Visibility = BarItemVisibility.Never;
@@ -104,7 +104,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 				barButtonItemSingleLinkPropertiesImageSettings.Visibility = BarItemVisibility.Always;
 				barSubItemSingleLinkPropertiesObjectNotes.Visibility = BarItemVisibility.Always;
 				barSubItemSingleLinkPropertiesAdminSettings.Visibility = BarItemVisibility.Always;
-				barButtonItemSingleLinkPropertiesAdvancedSettings.Visibility = BarItemVisibility.Always;
+				barSubItemSingleLinkPropertiesFolderLinkSettings.Visibility = BarItemVisibility.Always;
 				barButtonItemSingleLinkPropertiesTags.Visibility = BarItemVisibility.Always;
 				barSubItemSingleLinkPropertiesImages.Visibility = BarItemVisibility.Always;
 				barButtonItemSingleLinkPropertiesResetSettings.Visibility = BarItemVisibility.Always;
@@ -150,7 +150,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 			{
 				barButtonItemSingleLinkPropertiesOpenLink.Visibility = BarItemVisibility.Never;
 				barButtonItemSingleLinkPropertiesFileLocation.Visibility = BarItemVisibility.Never;
-				barButtonItemSingleLinkPropertiesAdvancedSettings.Visibility = BarItemVisibility.Never;
+				barSubItemSingleLinkPropertiesFolderLinkSettings.Visibility = BarItemVisibility.Never;
 				barButtonItemSingleLinkPropertiesRefreshPreview.Visibility = BarItemVisibility.Never;
 				barButtonItemSingleLinkPropertiesTags.Visibility = BarItemVisibility.Never;
 				barButtonItemSingleLinkPropertiesExpirationDate.Visibility = BarItemVisibility.Never;
@@ -166,7 +166,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 			{
 				barButtonItemSingleLinkPropertiesOpenLink.Visibility = BarItemVisibility.Never;
 				barButtonItemSingleLinkPropertiesFileLocation.Visibility = BarItemVisibility.Never;
-				barButtonItemSingleLinkPropertiesAdvancedSettings.Visibility = BarItemVisibility.Never;
+				barSubItemSingleLinkPropertiesFolderLinkSettings.Visibility = BarItemVisibility.Never;
 				barButtonItemSingleLinkPropertiesRefreshPreview.Visibility = BarItemVisibility.Never;
 				barSubItemSingleLinkPropertiesAdminSettings.Visibility = BarItemVisibility.Never;
 				barButtonItemSingleLinkPropertiesThumbnail.Visibility = BarItemVisibility.Never;
@@ -188,10 +188,19 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 				barButtonItemSingleLinkPropertiesFileLocation.Visibility = !linkRow.Inaccessable && linkRow.Source is LibraryFileLink
 					? BarItemVisibility.Always
 					: BarItemVisibility.Never;
-				barButtonItemSingleLinkPropertiesAdvancedSettings.Visibility = !linkRow.Inaccessable &&
-																		 linkRow.Source is LibraryFolderLink
+				barSubItemSingleLinkPropertiesFolderLinkSettings.Visibility = !linkRow.Inaccessable &&
+																		 linkRow.Source is LibraryFolderLink &&
+																		 ((LibraryFolderLink)linkRow.Source).AllLinks.Any(l => l.Type == FileTypes.Excel || l.Type == FileTypes.Pdf)
 					? BarItemVisibility.Always
 					: BarItemVisibility.Never;
+				barButtonItemSingleLinkPropertiesFolderLinkPdfSettings.Enabled = !linkRow.Inaccessable &&
+																				 linkRow.Source is LibraryFolderLink &&
+																				 ((LibraryFolderLink)linkRow.Source).AllLinks.Any(
+																					 l => l.Type == FileTypes.Pdf);
+				barButtonItemSingleLinkPropertiesFolderLinkExcelSettings.Enabled = !linkRow.Inaccessable &&
+																				 linkRow.Source is LibraryFolderLink &&
+																				 ((LibraryFolderLink)linkRow.Source).AllLinks.Any(
+																					 l => l.Type == FileTypes.Excel);
 				barButtonItemSingleLinkPropertiesRefreshPreview.Visibility = !linkRow.Inaccessable && linkRow.Source is PreviewableLink
 					? BarItemVisibility.Always
 					: BarItemVisibility.Never;
@@ -210,7 +219,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 																		 linkRow.Source is IThumbnailSettingsHolder
 					? BarItemVisibility.Always
 					: BarItemVisibility.Never;
-				
+
 				barButtonItemSingleLinkPropertiesLinkSettings.Caption = "Link Settings";
 				barButtonItemSingleLinkPropertiesDelete.Caption = "Delete this Link";
 				barSubItemSingleLinkPropertiesImages.Caption = "Link ART";
@@ -287,11 +296,6 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 			EditSingleLinkSettings(LinkSettingsType.Notes);
 		}
 
-		private void barButtonItemLinkPropertiesAdvancedSettings_ItemClick(object sender, ItemClickEventArgs e)
-		{
-			EditSingleLinkSettings(LinkSettingsType.AdvancedSettings);
-		}
-
 		private void barButtonItemLinkPropertiesTags_ItemClick(object sender, ItemClickEventArgs e)
 		{
 			EditSingleLinkSettings(LinkSettingsType.Tags);
@@ -365,6 +369,16 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Folders.Controls
 		private void barSubItemLinkPropertiesAddHyperlinkApp_ItemClick(object sender, ItemClickEventArgs e)
 		{
 			AddHyperLink(BaseNetworkLinkInfo.GetDefault<AppLinkInfo>());
+		}
+
+		private void barButtonItemSingleLinkPropertiesFolderLinkPdfSettings_ItemClick(object sender, ItemClickEventArgs e)
+		{
+			EditSingleLinkSettings(LinkSettingsType.AdminSettings, FileTypes.Pdf);
+		}
+
+		private void barButtonItemSingleLinkPropertiesFolderLinkExcelSettings_ItemClick(object sender, ItemClickEventArgs e)
+		{
+			EditSingleLinkSettings(LinkSettingsType.AdminSettings, FileTypes.Excel);
 		}
 	}
 }

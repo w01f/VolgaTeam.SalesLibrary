@@ -76,7 +76,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 		public FormEditLinkWidget(ILinksGroup linkGroup, FileTypes? defaultLinkType = null) : this()
 		{
 			_sourceLinkGroup = linkGroup;
-			_sourceLink = _sourceLinkGroup.AllLinks
+			_sourceLink = _sourceLinkGroup.AllGroupLinks
 				.FirstOrDefault(link => !defaultLinkType.HasValue || link.Type == defaultLinkType.Value);
 		}
 
@@ -87,7 +87,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			FormStateHelper.Init(this, RemoteResourceManager.Instance.AppAliasSettingsFolder, "Site Admin-Link-Widget", false, false);
 			Text = String.Format(Text,
 				_sourceLinkGroup != null ?
-					String.Format("{0} links", _sourceLinkGroup.AllLinks.Count()) :
+					String.Format("{0} links", _sourceLinkGroup.AllGroupLinks.Count()) :
 					_sourceLink.ToString());
 			StartPosition = FormStartPosition.CenterParent;
 			LoadData();
@@ -145,7 +145,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 			LibraryObjectLink objectLink;
 			if (_sourceLinkGroup != null)
 			{
-				objectLink = _sourceLinkGroup.AllLinks.All(link => link.Type == _sourceLink.Type)
+				objectLink = _sourceLinkGroup.AllGroupLinks.All(link => link.Type == _sourceLink.Type)
 					? _sourceLink as LibraryObjectLink
 					: null;
 			}
@@ -202,7 +202,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 		private void SaveData()
 		{
-			foreach (var link in (_sourceLinkGroup?.AllLinks ?? new[] { _sourceLink }).ToList())
+			foreach (var link in (_sourceLinkGroup?.AllGroupLinks ?? new[] { _sourceLink }).ToList())
 			{
 				if (radioButtonWidgetTypeAuto.Checked)
 				{
