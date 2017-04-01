@@ -79,12 +79,12 @@
 			libraryContent.find('.page-container').hide();
 
 			var selectedPage = libraryContent.find('#page-' + pageData.id);
-			if (selectedPage.length == 0)
+			if (selectedPage.length === 0)
 			{
 				var viewPath = undefined;
-				if (libraryData.options.pageViewType == 'columns')
+				if (libraryData.options.pageViewType === 'columns')
 					viewPath = "wallbin/getColumnsView";
-				else if (libraryData.options.pageViewType == 'accordion')
+				else if (libraryData.options.pageViewType === 'accordion')
 					viewPath = "wallbin/getAccordionView";
 
 				$.ajax({
@@ -105,7 +105,7 @@
 					},
 					success: function (result)
 					{
-						if (pageData.logoContent != '')
+						if (pageData.logoContent !== '')
 							contentObject.find('.wallbin-logo-wrapper').html('<img class="wallbin-logo" src="' + pageData.logoContent + '">');
 						else
 							contentObject.find('.wallbin-logo-wrapper').html('');
@@ -124,7 +124,7 @@
 			}
 			else
 			{
-				if (pageData.logoContent != '')
+				if (pageData.logoContent !== '')
 					contentObject.find('.wallbin-logo-wrapper').html('<img class="wallbin-logo" src="' + pageData.logoContent + '">');
 				else
 					contentObject.find('.wallbin-logo-wrapper').html('');

@@ -8,7 +8,7 @@
 
 		var parentSearchData = data;
 
-		if (parentSearchData.content != undefined)
+		if (parentSearchData.content !== undefined)
 		{
 			$.SalesPortal.Content.fillContent({
 				content: parentSearchData.content,
@@ -27,7 +27,7 @@
 			});
 		}
 
-		var optionsContainer = data.optionsContainer != undefined ? data.optionsContainer : $.SalesPortal.Content.getContentObject();
+		var optionsContainer = data.optionsContainer !== undefined ? data.optionsContainer : $.SalesPortal.Content.getContentObject();
 		var searchShortcutOptions = new $.SalesPortal.SearchOptions($.parseJSON(optionsContainer.find('.search-conditions .encoded-object').text()));
 		var searchViewOptions = new $.SalesPortal.SearchViewOptions($.parseJSON(optionsContainer.find('.search-view-options .encoded-object').text()));
 		var content = $.SalesPortal.Content.getContentObject();
@@ -76,17 +76,17 @@
 							'</tr></table>');
 
 						baseDatasetKey = data.datasetKey;
-						if (searchShortcutOptions.subSearchDefaultView == 'all')
+						if (searchShortcutOptions.subSearchDefaultView === 'all')
 							SimpleSearch(content);
-						else if (searchShortcutOptions.subSearchDefaultView == 'search')
+						else if (searchShortcutOptions.subSearchDefaultView === 'search')
 							SubSearchCustom(content);
-						else if (searchShortcutOptions.subSearchDefaultView == 'links')
+						else if (searchShortcutOptions.subSearchDefaultView === 'links')
 							SubSearchByTemplates(content);
 
 						initActionButtons();
 						$(window).off('resize.search-link').on('resize.search-link', updateContentSize);
 					}
-					if (resultCallback != undefined)
+					if (resultCallback !== undefined)
 						resultCallback(data);
 				}
 			);
@@ -194,14 +194,14 @@
 					.off('input').on('input', function ()
 				{
 					var text = $(this).val();
-					if (text != '')
+					if (text !== '')
 						customSearchData.set('text', text);
 					else
 						customSearchData.set('text', null);
 				})
 					.off('keypress').on('keypress', function (e)
 				{
-					if (e.which == 13)
+					if (e.which === 13)
 						getSearchResults();
 				});
 
@@ -274,9 +274,9 @@
 								var groupCheckBoxItems = groupCheckBoxContainer.find('.checkbox');
 								$.each(categories, function (groupIndex, group)
 								{
-									if (group.name == groupName)
+									if (group.name === groupName)
 									{
-										if (group.items.length == groupCheckBoxItems.length)
+										if (group.items.length === groupCheckBoxItems.length)
 											groupCheckBoxItems.find('.tag-selector').prop('checked', true);
 										else
 											$.each(groupCheckBoxItems, function ()
@@ -286,7 +286,7 @@
 												var tagName = tagCheckBoxContainer.find('.name').text();
 												$.each(group.items, function (itemIndex, item)
 												{
-													if (item == tagName)
+													if (item === tagName)
 														tagCheckBox.prop('checked', true);
 												});
 											});
@@ -336,7 +336,7 @@
 							var selectedSuperFilters = [];
 							var allSuperFilterButtons = superFiltersContent.find('.btn');
 							var selectedSuperFilterButtons = superFiltersContent.find('.btn.active');
-							if (allSuperFilterButtons.length != selectedSuperFilterButtons.length)
+							if (allSuperFilterButtons.length !== selectedSuperFilterButtons.length)
 								$.each(selectedSuperFilterButtons, function ()
 								{
 									selectedSuperFilters.push($(this).text());
@@ -346,7 +346,7 @@
 							var selectedCategories = [];
 							var allCategoryTagCheckBoxes = categoriesContent.find('.tag-selector');
 							var selectedCategoryTagCheckBoxes = categoriesContent.find('.tag-selector-container :checked');
-							if (allCategoryTagCheckBoxes.length != selectedCategoryTagCheckBoxes.length)
+							if (allCategoryTagCheckBoxes.length !== selectedCategoryTagCheckBoxes.length)
 								$.each(categoriesContent.find('>.checkbox'), function ()
 								{
 									var groupCheckBoxContainer = $(this);
@@ -359,7 +359,7 @@
 										{
 											var tagCheckBoxContainer = $(this);
 											var tagCheckBox = tagCheckBoxContainer.find('.tag-selector');
-											if (tagCheckBox.prop('checked') == true)
+											if (tagCheckBox.prop('checked') === true)
 												tags.push(tagCheckBoxContainer.find('.name').text());
 										});
 										selectedCategories.push({
@@ -373,14 +373,14 @@
 							var superFiltersStr = customSearchData.getSuperFiltersSettings().join(', ');
 							var categoriesStr = customSearchData.getCategoryDescription().join(', ');
 							var categoryStr = '';
-							if (categoriesStr != '' || superFiltersStr != '')
+							if (categoriesStr !== '' || superFiltersStr !== '')
 								categoryStr = [superFiltersStr, categoriesStr].join(', ');
-							else if (categoriesStr != '')
+							else if (categoriesStr !== '')
 								categoryStr = categoriesStr;
-							else if (superFiltersStr != '')
+							else if (superFiltersStr !== '')
 								categoryStr = superFiltersStr;
 							var selectedCategoryLabel = sideBar.find('.tag-condition-selected small');
-							if (categoryStr != "")
+							if (categoryStr !== "")
 								selectedCategoryLabel.html(sideBar.find('.tags-filter-panel-switcher').html() + ': ' + categoryStr);
 							else
 								selectedCategoryLabel.html('');
@@ -496,7 +496,7 @@
 				});
 				var selectorItems = logoSelector.find('li.enabled a');
 				var firstItem = selectorItems.first();
-				if (firstItem != null)
+				if (firstItem !== null)
 					firstItem.addClass('opened');
 				selectorItems.on('click.search-app', function ()
 				{
@@ -544,11 +544,11 @@
 			if (searchShortcutOptions.enableSubSearch)
 			{
 				shortcutActionsContainer.find('.sub-search-action').show();
-				if (searchShortcutOptions.subSearchDefaultView == 'all')
+				if (searchShortcutOptions.subSearchDefaultView === 'all')
 					shortcutActionsContainer.find('.sub-search-all').hide();
-				else if (searchShortcutOptions.subSearchDefaultView == 'search')
+				else if (searchShortcutOptions.subSearchDefaultView === 'search')
 					shortcutActionsContainer.find('.sub-search-criteria').hide();
-				else if (searchShortcutOptions.subSearchDefaultView == 'links')
+				else if (searchShortcutOptions.subSearchDefaultView === 'links')
 					shortcutActionsContainer.find('.sub-search-links').hide();
 
 				shortcutActionsContainer.find('.sub-search-all').off('click.action').on('click.action', function ()
@@ -612,21 +612,5 @@
 		};
 
 		return that;
-	};
-
-	$.SalesPortal.SearchOptions = function (data)
-	{
-		this.title = undefined;
-		this.isSearchBar = undefined;
-		this.openInSamePage = undefined;
-
-		this.enableSubSearch = undefined;
-		this.subSearchDefaultView = undefined;
-
-		this.conditions = undefined;
-
-		for (var property in data)
-			if (data.hasOwnProperty(property))
-				this[property] = data[property];
 	};
 })(jQuery);

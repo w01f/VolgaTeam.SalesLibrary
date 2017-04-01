@@ -64,6 +64,7 @@
 			'application.models.services_data.cadmin.models.connection.*',
 			'application.models.services_data.cadmin.models.library_data.*',
 			'application.models.services_data.cadmin.models.versions_management.*',
+			'application.models.trending.*',
 		),
 		'behaviors' => array(
 			'onBeginRequest' => array(

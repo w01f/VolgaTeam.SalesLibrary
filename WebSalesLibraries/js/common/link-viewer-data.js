@@ -56,7 +56,7 @@
 			if (source.hasOwnProperty(prop))
 				this[prop] = source[prop];
 
-		this.isPdf = this.format == 'pdf';
+		this.isPdf = this.format === 'pdf';
 	};
 
 	$.SalesPortal.VideoViewerData = function (source)

@@ -37,16 +37,6 @@ form.form-horizontal, form.form-horizontal *
     background-color: #eee;
 }
 
-.btn:hover
-{
-    background-color: #C6E2FF;
-}
-
-button.active
-{
-    background-color: #C6E2FF !important;
-}
-
 .dropdown-toggle.btn-default
 {
     background-color: #ffffff !important;

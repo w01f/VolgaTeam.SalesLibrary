@@ -35,7 +35,7 @@
 			{
 				category.dataItems.forEach(function (dataItem)
 				{
-					if (dataItem.mediaType == 'func')
+					if (dataItem.mediaType === 'func')
 						dataItem.onClick = function ()
 						{
 							var shortcutData = $('<div>' + dataItem.dataContent + '</div>');

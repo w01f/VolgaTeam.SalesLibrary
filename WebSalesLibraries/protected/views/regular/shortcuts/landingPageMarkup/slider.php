@@ -4,7 +4,7 @@
 	/** @var \application\models\shortcuts\models\landing_page\regular_markup\SlideBlock[] $slides */
 	$slides = $contentBlock->items;
 ?>
-<div id="carousel<? echo $contentBlock->id; ?>" class="carousel slide <? if ($contentBlock->slideShow): ?>carousel-slide-show<? endif; ?>"
+<div id="carousel<? echo $contentBlock->id; ?>" class="carousel landing-carousel slide <? if ($contentBlock->slideShow): ?>carousel-slide-show<? endif; ?>"
      <? if ($contentBlock->slideShow): ?>data-interval="<? echo $contentBlock->slideShowInterval;?>"<? endif; ?>
      style="<? echo $this->renderPartial('landingPageMarkup/stylePadding', array('padding' => $contentBlock->padding), true); ?>
      <? echo $this->renderPartial('landingPageMarkup/styleMargin', array('margin' => $contentBlock->margin), true); ?>

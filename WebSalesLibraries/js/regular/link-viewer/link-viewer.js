@@ -8,7 +8,7 @@
 
 		this.requestViewDialog = function (requestData)
 		{
-			if (requestData == undefined)
+			if (requestData === undefined)
 				requestData = {
 					linkId: undefined,
 					isQuickSite: undefined,
@@ -130,7 +130,7 @@
 				modalDialog.show();
 			}
 
-			if (previewParameters.afterViewerOpenedCallback != undefined)
+			if (previewParameters.afterViewerOpenedCallback !== undefined)
 				previewParameters.afterViewerOpenedCallback(openedViewer);
 		};
 
@@ -167,7 +167,7 @@
 									originalFormat: parameters.format
 								}
 							});
-						if (parameters.content != '')
+						if (parameters.content !== '')
 						{
 							var menu = $(parameters.content);
 							$('body').append(menu);
@@ -429,7 +429,7 @@
 		this.downloadFile = function (fileData)
 		{
 			var form = document.getElementById('form-download-file');
-			if (form == null)
+			if (form === null)
 			{
 				form = document.createElement("form");
 				form.setAttribute("id", "form-download-file");
@@ -628,7 +628,7 @@
 				},
 				afterClose: function ()
 				{
-					if (viewerBar != undefined)
+					if (viewerBar !== undefined)
 						viewerBar.close();
 					$('#video-player').remove();
 					if (callbackAfterClose !== undefined)

@@ -13,6 +13,7 @@
 			'ai',
 			'ait',
 			'eps',
+			'gif',
 			'pdd',
 			'pps',
 			'psd',

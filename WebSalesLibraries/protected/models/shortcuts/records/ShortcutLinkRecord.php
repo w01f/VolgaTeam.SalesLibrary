@@ -145,7 +145,6 @@
 				case 'library':
 					$shortcut = new WallbinShortcut($this, $isPhone);
 
-					$needToUpdate = false;
 					$savedPageViewTypeTag = sprintf('PageViewType-%s', $shortcut->libraryName);
 					if (isset($parameters) && array_key_exists('pageViewType', $parameters))
 					{
@@ -153,12 +152,10 @@
 						$cookie = new CHttpCookie($savedPageViewTypeTag, $shortcut->pageViewType);
 						$cookie->expire = time() + (60 * 60 * 24 * 7);
 						Yii::app()->request->cookies[$savedPageViewTypeTag] = $cookie;
-						$needToUpdate = true;
 					}
 					else if (isset(Yii::app()->request->cookies[$savedPageViewTypeTag]))
 					{
 						$shortcut->pageViewType = Yii::app()->request->cookies[$savedPageViewTypeTag]->value;
-						$needToUpdate = true;
 					}
 
 					$savedPageSelectorModeTag = sprintf('PageSelectorMode-%s', $shortcut->libraryName);
@@ -168,16 +165,11 @@
 						$cookie = new CHttpCookie($savedPageSelectorModeTag, $shortcut->pageSelectorMode);
 						$cookie->expire = time() + (60 * 60 * 24 * 7);
 						Yii::app()->request->cookies[$savedPageSelectorModeTag] = $cookie;
-						$needToUpdate = true;
 					}
 					else if (isset(Yii::app()->request->cookies[$savedPageSelectorModeTag]))
 					{
 						$shortcut->pageSelectorMode = Yii::app()->request->cookies[$savedPageSelectorModeTag]->value;
-						$needToUpdate = true;
 					}
-
-					if ($needToUpdate)
-						$shortcut->updateAction();
 
 					return $shortcut;
 					break;

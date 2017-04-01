@@ -142,6 +142,8 @@
 					return 'searchBar';
 				case 'slider':
 					return 'slider';
+				case 'trending':
+					return 'trending';
 				default:
 					return 'undefinedBlock';
 			}
@@ -204,6 +206,10 @@
 					$slideBlock = new SlideBlock($parentShortcut, $parentBlock);
 					$slideBlock->configureFromXml($xpath, $contextNode);
 					return $slideBlock;
+				case "trending":
+					$trendingBlock = new TrendingBlock($parentShortcut, $parentBlock);
+					$trendingBlock->configureFromXml($xpath, $contextNode);
+					return $trendingBlock;
 				default:
 					return new UndefinedBlock($parentShortcut, $parentBlock);
 			}

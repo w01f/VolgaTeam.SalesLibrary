@@ -147,33 +147,33 @@
 							var thatData = this;
 							$.each(tags, function (index, value)
 							{
-								if (value == 'ppt')
+								if (value === 'ppt')
 									thatData.showPowerPoint = true;
-								else if (value == 'doc')
+								else if (value === 'doc')
 									thatData.showWord = true;
-								else if (value == 'xls')
+								else if (value === 'xls')
 									thatData.showExcel = true;
-								else if (value == 'pdf')
+								else if (value === 'pdf')
 									thatData.showPdf = true;
-								else if (value == 'video' ||
-									value == 'mp4' ||
-									value == 'wmv' ||
-									value == 'mp3')
+								else if (value === 'video' ||
+									value === 'mp4' ||
+									value === 'wmv' ||
+									value === 'mp3')
 									thatData.showVideo = true;
-								else if (value == 'url' ||
-									value == 'youtube' ||
-									value == 'vimeo' ||
-									value == 'lan' ||
-									value == 'quicksite' ||
-									value == 'html5' ||
-									value == 'app' ||
-									value == 'internal library' ||
-									value == 'internal page' ||
-									value == 'internal window' ||
-									value == 'internal link' ||
-									value == 'internal shortcut')
+								else if (value === 'url' ||
+									value === 'youtube' ||
+									value === 'vimeo' ||
+									value === 'lan' ||
+									value === 'quicksite' ||
+									value === 'html5' ||
+									value === 'app' ||
+									value === 'internal library' ||
+									value === 'internal page' ||
+									value === 'internal window' ||
+									value === 'internal link' ||
+									value === 'internal shortcut')
 									thatData.showUrls = true;
-								else if (value == 'png' || value == 'jpeg' || value == 'gif')
+								else if (value === 'png' || value === 'jpeg' || value === 'gif')
 									thatData.showImages = true;
 
 							});
@@ -186,7 +186,7 @@
 						items: [],
 						selectedCategoriesDescriptions: function ()
 						{
-							if (this.items.length == 0)
+							if (this.items.length === 0)
 								return [];
 							var categories = [];
 							$.each(this.items, function (groupIndex, group)
@@ -205,7 +205,7 @@
 						items: [],
 						selectedLibrariesDescriptions: function ()
 						{
-							if (this.items.length == 0)
+							if (this.items.length === 0)
 								return [];
 							var libraryNames = [];
 							$.each(this.items, function (index, value)
@@ -217,13 +217,13 @@
 					}
 				};
 
-			if (onChangeHandler != undefined)
+			if (onChangeHandler !== undefined)
 				onChangeHandler();
 		};
 
 		this.raiseOnChange = function ()
 		{
-			if (onChangeHandler != undefined)
+			if (onChangeHandler !== undefined)
 				onChangeHandler();
 		};
 
@@ -231,9 +231,9 @@
 		{
 			var startDate = data.simpleProperties.dateStart;
 			var endDate = data.simpleProperties.dateEnd;
-			if (startDate == null &&
-				endDate == null &&
-				data.simpleProperties.onlyNewFiles == true)
+			if (startDate === null &&
+				endDate === null &&
+				data.simpleProperties.onlyNewFiles === true)
 			{
 				var currentDate = new Date();
 				endDate = currentDate.toLocaleDateString();
@@ -253,6 +253,7 @@
 				onlyByName: data.simpleProperties.onlyFileNames,
 
 				columnSettings: data.columnSettings,
+				dateSettings: data.dateSettings,
 				categorySettings: data.categorySettings,
 				viewCountSettings: data.viewCountSettings,
 				thumbnailSettings: data.thumbnailSettings,
@@ -275,6 +276,7 @@
 			data.simpleProperties.onlyFileNames = source.onlyByName;
 
 			data.columnSettings = source.columnSettings;
+			data.dateSettings = source.dateSettings;
 			data.categorySettings = source.categorySettings;
 			data.viewCountSettings = source.viewCountSettings;
 			data.thumbnailSettings = source.thumbnailSettings;
@@ -377,6 +379,22 @@
 		for (var prop in source)
 			if (source.hasOwnProperty(prop))
 				this[prop] = source[prop];
+	};
+
+	$.SalesPortal.SearchOptions = function (data)
+	{
+		this.title = undefined;
+		this.isSearchBar = undefined;
+		this.openInSamePage = undefined;
+
+		this.enableSubSearch = undefined;
+		this.subSearchDefaultView = undefined;
+
+		this.conditions = undefined;
+
+		for (var property in data)
+			if (data.hasOwnProperty(property))
+				this[property] = data[property];
 	};
 
 })(jQuery);

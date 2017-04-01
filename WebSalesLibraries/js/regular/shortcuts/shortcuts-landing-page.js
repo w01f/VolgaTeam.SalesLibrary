@@ -32,11 +32,30 @@
 
 			$.SalesPortal.ShortcutsManager.assignShortcutItemHandlers(landingPage);
 
-			landingPage.find('[data-bs-hover-animate]')
-				.mouseenter( function(){ var elem = $(this); elem.addClass('animated ' + elem.attr('data-bs-hover-animate')) })
-				.mouseleave( function(){ var elem = $(this); elem.removeClass('animated ' + elem.attr('data-bs-hover-animate')) });
+			$.each(landingPage.find('.trending-bar'), function (key, value)
+			{
+				var trendingBar = $(value);
+				var barId = trendingBar.prop('id').replace('trending-bar-', '');
+				var trendingSettings = $.parseJSON(trendingBar.find('.service-data .encoded-object').text());
+				new $.SalesPortal.TrendingBar({
+					containerId: barId,
+					settings: trendingSettings
+				}).init();
+			});
 
-			landingPage.find('.carousel-slide-show').carousel();
+			landingPage.find('[data-bs-hover-animate]')
+				.mouseenter(function ()
+				{
+					var elem = $(this);
+					elem.addClass('animated ' + elem.attr('data-bs-hover-animate'))
+				})
+				.mouseleave(function ()
+				{
+					var elem = $(this);
+					elem.removeClass('animated ' + elem.attr('data-bs-hover-animate'))
+				});
+
+			landingPage.find('.landing-carousel.carousel-slide-show').carousel();
 
 			initActionButtons();
 

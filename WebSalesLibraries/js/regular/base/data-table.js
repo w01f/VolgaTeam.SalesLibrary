@@ -13,33 +13,33 @@
 		const ColumnTagRate = 'rate';
 		const ColumnTagDate = 'date';
 
-		var tableIdentifier = tableOptions != undefined && tableOptions.tableIdentifier != undefined ?
+		var tableIdentifier = tableOptions !== undefined && tableOptions.tableIdentifier !== undefined ?
 			tableOptions.tableIdentifier :
 			'data-table-content';
-		var tableContainerSelector = tableOptions != undefined && tableOptions.tableContainerSelector != undefined ?
+		var tableContainerSelector = tableOptions !== undefined && tableOptions.tableContainerSelector !== undefined ?
 			tableOptions.tableContainerSelector :
 			undefined;
-		var parentContainerSelector = tableOptions != undefined && tableOptions.parentContainerSelector != undefined ?
+		var parentContainerSelector = tableOptions !== undefined && tableOptions.parentContainerSelector !== undefined ?
 			tableOptions.parentContainerSelector :
 			undefined;
-		var saveState = tableOptions != undefined && tableOptions.saveSate != undefined ?
+		var saveState = tableOptions !== undefined && tableOptions.saveSate !== undefined ?
 			tableOptions.saveSate :
 			false;
-		var usePaginate = tableOptions != undefined && tableOptions.paginate != undefined ?
+		var usePaginate = tableOptions !== undefined && tableOptions.paginate !== undefined ?
 			tableOptions.paginate :
 			true;
-		var useSubSearch = tableOptions != undefined && tableOptions.subSearch != undefined ?
+		var useSubSearch = tableOptions !== undefined && tableOptions.subSearch !== undefined ?
 			tableOptions.subSearch :
 			true;
-		var deleteHandler = tableOptions != undefined && tableOptions.deleteHandler != undefined ?
+		var deleteHandler = tableOptions !== undefined && tableOptions.deleteHandler !== undefined ?
 			tableOptions.deleteHandler :
 			function ()
 			{
 			};
-		var backHandler = tableOptions != undefined && tableOptions.backHandler != undefined ?
+		var backHandler = tableOptions !== undefined && tableOptions.backHandler !== undefined ?
 			tableOptions.backHandler :
 			undefined;
-		var logHandler = tableOptions != undefined && tableOptions.logHandler != undefined ?
+		var logHandler = tableOptions !== undefined && tableOptions.logHandler !== undefined ?
 			tableOptions.logHandler :
 			function ()
 			{
@@ -51,21 +51,21 @@
 		{
 			destroy();
 
-			if (data == undefined)
+			if (data === undefined)
 				data = {
 					dataset: undefined,
 					dataOptions: undefined,
 					sortColumnTag: undefined,
 					sortDirection: undefined
 				};
-			data.dataset = data.dataset != undefined ? data.dataset : [];
-			data.dataOptions = data.dataOptions != undefined ? data.dataOptions : {
+			data.dataset = data.dataset !== undefined ? data.dataset : [];
+			data.dataOptions = data.dataOptions !== undefined ? data.dataOptions : {
 					columnSettings: undefined,
 					showDeleteButton: false,
 					reorderSourceField: undefined
 				};
-			data.sortColumnTag = data.sortColumnTag != undefined ? data.sortColumnTag : ColumnTagName;
-			data.sortDirection = data.sortDirection != undefined ? data.sortDirection : 'asc';
+			data.sortColumnTag = data.sortColumnTag !== undefined ? data.sortColumnTag : ColumnTagName;
+			data.sortDirection = data.sortDirection !== undefined ? data.sortDirection : 'asc';
 
 
 			var content = $.SalesPortal.Content.getContentObject();
@@ -81,7 +81,7 @@
 			if (data.dataOptions.columnSettings[ColumnTagCategory].enable)
 				$.each(data.dataset, function (index, value)
 				{
-					if (value.tag != null && value.tag != '')
+					if (value.tag !== null && value.tag !== '')
 					{
 						hasCategories = true;
 						return false;
@@ -90,7 +90,7 @@
 
 			var columnSettings = [];
 
-			if (data.dataOptions.reorderSourceField != undefined)
+			if (data.dataOptions.reorderSourceField !== undefined)
 				columnSettings.push({
 					"data": 'extended_data.' + data.dataOptions.reorderSourceField,
 					"visible": false,
@@ -102,7 +102,7 @@
 			var columnIndex = 0;
 			$.each(data.dataOptions.columnSettings, function (key, value)
 			{
-				if (data.dataOptions.reorderSourceField == undefined && key == data.sortColumnTag)
+				if (data.dataOptions.reorderSourceField === undefined && key === data.sortColumnTag)
 					sortColumnIndex = columnIndex;
 				switch (key)
 				{
@@ -111,7 +111,7 @@
 						{
 							columnSettings.push({
 								"data": "tag",
-								"orderable": data.dataOptions.reorderSourceField == undefined,
+								"orderable": data.dataOptions.reorderSourceField === undefined,
 								"title": value.title,
 								"class": "tag-text-container allow-reorder" + (value.fullWidth ? ' none' : ' all'),
 								"width": value.width > 0 ? (value.width + "px") : "15%",
@@ -125,7 +125,7 @@
 						{
 							columnSettings.push({
 								"data": "library.name",
-								"orderable": data.dataOptions.reorderSourceField == undefined,
+								"orderable": data.dataOptions.reorderSourceField === undefined,
 								"title": value.title,
 								"class": "centered allow-reorder" + (value.fullWidth ? ' none' : ' all'),
 								"width": value.width > 0 ? (value.width + "px") : "10%",
@@ -139,7 +139,7 @@
 						{
 							columnSettings.push({
 								"data": "file_type",
-								"orderable": data.dataOptions.reorderSourceField == undefined,
+								"orderable": data.dataOptions.reorderSourceField === undefined,
 								"title": value.title,
 								"class": "centered allow-reorder" + (value.fullWidth ? ' none' : ' all'),
 								"width": value.width > 0 ? (value.width + "px") : "70px",
@@ -153,7 +153,7 @@
 						{
 							columnSettings.push({
 								"data": "name",
-								"orderable": data.dataOptions.reorderSourceField == undefined,
+								"orderable": data.dataOptions.reorderSourceField === undefined,
 								"title": value.title,
 								"class": "link-name-text-container" + (value.fullWidth ? ' none' : ' all'),
 								"width": value.width > 0 ? (value.width + "px") : null,
@@ -167,7 +167,7 @@
 						{
 							columnSettings.push({
 								"data": "thumbnail",
-								"orderable": data.dataOptions.reorderSourceField == undefined,
+								"orderable": data.dataOptions.reorderSourceField === undefined,
 								"title": value.title,
 								"width": value.width > 0 ? (value.width + "px") : "90px",
 								"class": "centered" + (value.fullWidth ? ' none' : ' all'),
@@ -181,7 +181,7 @@
 						{
 							columnSettings.push({
 								"data": "views",
-								"orderable": data.dataOptions.reorderSourceField == undefined,
+								"orderable": data.dataOptions.reorderSourceField === undefined,
 								"title": value.title,
 								"class": "centered allow-reorder" + (value.fullWidth ? ' none' : ' all'),
 								"width": value.width > 0 ? (value.width + "px") : "50px",
@@ -199,7 +199,7 @@
 						{
 							columnSettings.push({
 								"data": "rate",
-								"orderable": data.dataOptions.reorderSourceField == undefined,
+								"orderable": data.dataOptions.reorderSourceField === undefined,
 								"title": value.title,
 								"width": value.width > 0 ? (value.width + "px") : "90px",
 								"class": "centered rate-image-container" + (value.fullWidth ? ' none' : ' all'),
@@ -207,7 +207,7 @@
 									_: function (columnData)
 									{
 										var cellContent = '';
-										if (columnData.image != '')
+										if (columnData.image !== '')
 											cellContent = '<img src="' + columnData.image + '">';
 										return cellContent;
 									},
@@ -222,7 +222,7 @@
 						{
 							columnSettings.push({
 								"data": "date",
-								"orderable": data.dataOptions.reorderSourceField == undefined,
+								"orderable": data.dataOptions.reorderSourceField === undefined,
 								"title": value.title,
 								"class": "centered allow-reorder" + (value.fullWidth ? ' none' : ' all'),
 								"width": value.width > 0 ? (value.width + "px") : "80px",
@@ -273,7 +273,10 @@
 				"sLengthSelect": "form-control"
 			});
 
-			var tableHeaderItemClass = backHandler ? 'col-sm-3' : 'col-sm-4';
+			var tableHeaderLengthItemClass = backHandler ? 'col-lg-2 col-md-2 col-sm-4 hidden-xs' : 'col-lg-3 col-md-3 col-sm-4 hidden-xs';
+			var tableHeaderFilterItemClass = backHandler ? 'col-lg-3 col-md-2 hidden-sm hidden-xs' : 'col-lg-3 col-md-3 hidden-sm hidden-xs';
+			var tableHeaderBackItemClass = 'col-lg-3 col-md-2 hidden-sm hidden-xs';
+			var tableHeaderPaginationItemClass = backHandler ? 'col-lg-4 col-md-6 col-sm-8 col-xs-12' : 'col-lg-6 col-md-6 col-sm-8 col-xs-12';
 
 			dataTable = table.dataTable({
 				"data": data.dataset,
@@ -282,7 +285,7 @@
 				paging: usePaginate,
 				searching: useSubSearch,
 				order: sortColumnIndex >= 0 ? [[sortColumnIndex, data.sortDirection]] : [],
-				rowReorder: data.dataOptions.reorderSourceField != undefined ?
+				rowReorder: data.dataOptions.reorderSourceField !== undefined ?
 					{
 						update: true,
 						dataSrc: 'extended_data.' + data.dataOptions.reorderSourceField,
@@ -314,9 +317,9 @@
 					"sSearch": "Filter:"
 				},
 				"dom": (data.dataset.length > 0 ?
-					"<'row table-header-row'<'" + tableHeaderItemClass + " col-xs-12'l><'" + tableHeaderItemClass + " col-xs-12'f>" +
-					(backHandler ? "<'" + tableHeaderItemClass + " col-xs-12 back-url text-center'>" : "") +
-					"<'" + tableHeaderItemClass + " col-xs-12'p>>" :
+					"<'row table-header-row'<'" + tableHeaderLengthItemClass + "'l><'" + tableHeaderFilterItemClass + "'f>" +
+					(backHandler ? "<'" + tableHeaderBackItemClass + " back-url text-right'>" : "") +
+					"<'" + tableHeaderPaginationItemClass + "'p>>" :
 					"<'row'<'col-xs-12 back-url text-center'>>") +
 				"<'row table-content-row'<'col-xs-12'tr>>" +
 				"<'row table-footer-row'<'col-xs-6'i>>",
@@ -329,7 +332,7 @@
 			if (!$.SalesPortal.Content.isMobileDevice())
 				$("#" + tableIdentifier + "_length").find('select').selectpicker();
 
-			if (backHandler != undefined)
+			if (backHandler !== undefined)
 			{
 				var backUrlContent = $("#" + tableIdentifier + "_wrapper").find('.back-url');
 				backUrlContent.html(
@@ -461,7 +464,7 @@
 				{
 					var urlHeader = $(this).find('.link-content').data("url-header");
 					var url = $(this).find('.link-content').data('url');
-					if (url != '')
+					if (url !== '')
 						e.originalEvent.dataTransfer.setData(urlHeader, url);
 				});
 			}
@@ -471,10 +474,10 @@
 
 		this.updateSize = function ()
 		{
-			if (dataTable != undefined)
+			if (dataTable !== undefined)
 			{
 				var content = $.SalesPortal.Content.getContentObject();
-				if (parentContainerSelector != undefined)
+				if (parentContainerSelector !== undefined)
 					content = $.SalesPortal.Content.getContentObject().find(parentContainerSelector);
 
 				var height = $.SalesPortal.Content.isMobileDevice() ? getNativeTableSize() : getBootstrapTableSize();
@@ -490,7 +493,7 @@
 
 		this.clear = function ()
 		{
-			if (dataTable != undefined)
+			if (dataTable !== undefined)
 				dataTable.api().state.clear();
 		};
 
@@ -509,15 +512,15 @@
 
 		var cellRenderer = function (data, type, row, meta)
 		{
-			if (type == "display")
+			if (type === "display")
 			{
 				var content = '';
 				var objectClass = '';
 
-				if (row && row != '')
+				if (row && row !== '')
 				{
 					var displayValue = data && typeof data === 'object' ? data.display : data;
-					displayValue = displayValue != null ? displayValue : '';
+					displayValue = displayValue !== null ? displayValue : '';
 
 					var dragData = '';
 					if (row.isDraggable)
@@ -554,14 +557,14 @@
 
 		var destroy = function ()
 		{
-			if (dataTable != undefined)
+			if (dataTable !== undefined)
 				dataTable.fnDestroy();
 		};
 
 		var getBootstrapTableSize = function ()
 		{
 			var content = $.SalesPortal.Content.getContentObject();
-			if (parentContainerSelector != undefined)
+			if (parentContainerSelector !== undefined)
 				content = $.SalesPortal.Content.getContentObject().find(parentContainerSelector);
 
 			var topHeight = content.find("#" + tableIdentifier + "_wrapper .table-header-row").outerHeight(true);
@@ -571,7 +574,7 @@
 
 			var containerOuterHeight = content.outerHeight(true);
 			var containerInnerHeight = content.height();
-			if (tableContainerSelector != parentContainerSelector)
+			if (tableContainerSelector !== parentContainerSelector)
 			{
 				containerOuterHeight = content.find(tableContainerSelector).outerHeight(true);
 				containerInnerHeight = content.find(tableContainerSelector).height();
@@ -585,7 +588,7 @@
 		var getNativeTableSize = function ()
 		{
 			var content = $.SalesPortal.Content.getContentObject();
-			if (parentContainerSelector != undefined)
+			if (parentContainerSelector !== undefined)
 				content = $.SalesPortal.Content.getContentObject().find(parentContainerSelector);
 
 			var topHeight = content.find("#" + tableIdentifier + "_wrapper .table-header-row").outerHeight(true);
@@ -595,7 +598,7 @@
 
 			var containerOuterHeight = content.outerHeight(true);
 			var containerInnerHeight = content.height();
-			if (tableContainerSelector != parentContainerSelector)
+			if (tableContainerSelector !== parentContainerSelector)
 			{
 				containerOuterHeight = content.find(tableContainerSelector).outerHeight(true);
 				containerInnerHeight = content.find(tableContainerSelector).height();

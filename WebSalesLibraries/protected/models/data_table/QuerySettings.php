@@ -15,6 +15,7 @@
 
 		const SettingsTagColumns = 'columnsSettings';
 
+		const SettingsTagDate = 'dateQuery';
 		const SettingsTagCategory = 'categoryQuery';
 		const SettingsTagViewsCount = 'viewsCountQuery';
 		const SettingsTagThumbnails = 'thumbnailsQuery';
@@ -35,6 +36,8 @@
 		public $groupFields;
 
 		/** @var array */
+		public $dateQuerySettings;
+		/** @var array */
 		public $categoryQuerySettings;
 		/** @var array */
 		public $viewCountQuerySettings;
@@ -53,7 +56,6 @@
 				'path' => 'link.file_relative_path as path',
 				'file_name' => 'link.file_name as file_name',
 				'file_extension' => 'link.file_extension as file_extension',
-				'link_date' => 'max(link.file_date) as link_date',
 				'format' => 'max(link.search_format) as format',
 				'extended_properties' => 'max(link.settings) as extended_properties',
 			);
@@ -63,6 +65,11 @@
 			$this->leftJoin = array();
 			$this->whereConditions = array();
 			$this->groupFields = array('link.id');
+
+			$defaultDateSettings = new SearchDateSettings();
+			$this->dateQuerySettings = array(
+				'field' => SearchDateSettings::getDateColumnName($defaultDateSettings->dateMode)
+			);
 
 			$defaultCategorySettings = new SearchCategorySettings();
 			$this->categoryQuerySettings = array(
@@ -83,8 +90,13 @@
 			);
 		}
 
+		private function configureQueryFromDateSettings()
+		{
+			$this->baseQueryFields['link_date'] = sprintf('max(link.%s) as link_date', $this->dateQuerySettings['field']);
+		}
+
 		/** @param  array $columnSettingsList */
-		private function configureFromColumnSettings($columnSettingsList)
+		private function configureQueryFromColumnSettings($columnSettingsList)
 		{
 			foreach ($columnSettingsList as $key => $value)
 			{
@@ -156,7 +168,14 @@
 								$thumbnailCondition = 'order by pv.relative_path limit 1';
 								break;
 						}
-						$this->baseQueryFields['thumbnail'] = "(select pv.relative_path from tbl_preview pv where pv.id_container=link.id_preview and ((link.original_format<>'video' and pv.type='thumbs_phone') or (link.original_format='video' and pv.type='mp4 thumb')) " . $thumbnailCondition . ") as thumbnail";
+						$this->baseQueryFields['thumbnail'] = "case 
+							when link.original_format='jpeg' or link.original_format='gif' or link.original_format='png' then
+								link.file_relative_path
+							when link.original_format='video' then
+								(select pv.relative_path from tbl_preview pv where pv.id_container=link.id_preview and pv.type='mp4 thumb' " . $thumbnailCondition . ")										
+							when link.original_format='ppt' or link.original_format='doc' or link.original_format='pdf' then
+								(select pv.relative_path from tbl_preview pv where pv.id_container=link.id_preview and pv.type='thumbs_phone' " . $thumbnailCondition . ")
+							end as thumbnail";
 						break;
 				}
 			}
@@ -203,6 +222,12 @@
 						$columnSettingsList = $value;
 						break;
 
+					case self::SettingsTagDate:
+						/** @var SearchDateSettings $dateSettings */
+						$dateSettings = $value;
+						$instance->dateQuerySettings['field'] = SearchDateSettings::getDateColumnName($dateSettings->dateMode);
+						break;
+
 					case self::SettingsTagCategory:
 						/** @var SearchCategorySettings $categorySettings */
 						$categorySettings = $value;
@@ -225,7 +250,9 @@
 				}
 			}
 
-			$instance->configureFromColumnSettings($columnSettingsList);
+			$instance->configureQueryFromDateSettings();
+
+			$instance->configureQueryFromColumnSettings($columnSettingsList);
 
 			return $instance;
 		}

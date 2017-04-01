@@ -6,14 +6,14 @@
 	class SearchHelper
 	{
 		/**
-		 * @param $condition
+		 * @param $condition string
 		 * @param $exactMatch boolean
 		 * @return array
 		 */
 		public static function prepareTextCondition($condition, $exactMatch)
 		{
 			$result = array();
-			if (!isset($condition) || $condition == '') return $result;
+			if (empty($condition)) return $result;
 
 			$conditionArray = is_array($condition) ? $condition : array($condition);
 
@@ -174,9 +174,9 @@
 
 			$dateCondition = '1 = 1';
 			$additionalDateCondition = '';
-			if (isset($searchConditions->startDate) && isset($searchConditions->endDate) && $searchConditions->startDate != '' && $searchConditions->endDate != '')
+			if (!empty($searchConditions->startDate) && !empty($searchConditions->endDate))
 			{
-				$dateColumn = 'link.file_date';
+				$dateColumn = sprintf('link.%s', SearchDateSettings::getDateColumnName($searchConditions->dateSettings->dateMode));
 				$dateCondition = sprintf('%1$s >= \'%2$s\' and %1$s <= \'%3$s\'',
 					$dateColumn,
 					date(Yii::app()->params['mysqlDateFormat'], strtotime($searchConditions->startDate)),
@@ -339,6 +339,7 @@
 					QuerySettings::SettingsTagWhere => $whereConditions,
 					QuerySettings::SettingsTagCategoryWhere => $categoryJoinCondition,
 					QuerySettings::SettingsTagColumns => $searchConditions->columnSettings,
+					QuerySettings::SettingsTagDate => $searchConditions->dateSettings,
 					QuerySettings::SettingsTagCategory => $searchConditions->categorySettings,
 					QuerySettings::SettingsTagViewsCount => $searchConditions->viewCountSettings,
 					QuerySettings::SettingsTagThumbnails => $searchConditions->thumbnailSettings,

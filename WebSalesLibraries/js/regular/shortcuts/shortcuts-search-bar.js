@@ -13,7 +13,7 @@
 				searchBar.find('.search-bar-text').keypress(function (e)
 				{
 					updateSearchButtonState();
-					if (e.which == 13)
+					if (e.which === 13)
 						search();
 				});
 				searchBar.find('.search-bar-run').on('click.search-bar', search);
@@ -112,7 +112,7 @@
 								}
 							}).runSearch(function (data)
 							{
-								if (data.dataset.length == 0)
+								if (data.dataset.length === 0)
 								{
 									var modalDialog = new $.SalesPortal.ModalDialog({
 										title: '<span><img src="/images/shortcuts/search-bar/search-bar-no-results-warning.png"></span>' +
@@ -175,7 +175,7 @@
 
 		var updateSearchButtonState = function ()
 		{
-			var hasKeyword = $('.shortcuts-search-bar .search-bar-text').val() != "";
+			var hasKeyword = $('.shortcuts-search-bar .search-bar-text').val() !== "";
 			var hasSuperFilters = searchBarConditions.getSuperFiltersSettings().length > 0;
 			var hasCategories = searchBarConditions.getCategorySettings().length > 0;
 			var fileSettings = searchBarConditions.getFileTypesSettings();
@@ -200,14 +200,14 @@
 			var superFiltersStr = searchBarConditions.getSuperFiltersSettings().join(', ');
 			var categoriesStr = searchBarConditions.getCategoryDescription().join(', ');
 			var categoryStr = '';
-			if (categoriesStr != '' || superFiltersStr != '')
+			if (categoriesStr !== '' || superFiltersStr !== '')
 				categoryStr = [superFiltersStr, categoriesStr].join(', ');
-			else if (categoriesStr != '')
+			else if (categoriesStr !== '')
 				categoryStr = categoriesStr;
-			else if (superFiltersStr != '')
+			else if (superFiltersStr !== '')
 				categoryStr = superFiltersStr;
 			var selectedCategoryLabel = searchBar.find('.tag-condition-selected small');
-			if (categoryStr != "")
+			if (categoryStr !== "")
 				selectedCategoryLabel.html(searchBar.find('.tags-filter-panel-switcher').html() + ': ' + categoryStr);
 			else
 				selectedCategoryLabel.html('');
@@ -386,9 +386,9 @@
 							var groupCheckBoxItems = groupCheckBoxContainer.find('.checkbox');
 							$.each(categories, function (groupIndex, group)
 							{
-								if (group.name == groupName)
+								if (group.name === groupName)
 								{
-									if (group.items.length == groupCheckBoxItems.length)
+									if (group.items.length === groupCheckBoxItems.length)
 										groupCheckBoxItems.find('.tag-selector').prop('checked', true);
 									else
 										$.each(groupCheckBoxItems, function ()
@@ -398,7 +398,7 @@
 											var tagName = tagCheckBoxContainer.find('.name').text();
 											$.each(group.items, function (itemIndex, item)
 											{
-												if (item == tagName)
+												if (item === tagName)
 													tagCheckBox.prop('checked', true);
 											});
 										});
@@ -450,7 +450,7 @@
 						var selectedCategoryFilters = [];
 						var allCategoriesFilterItems = categoriesFiltersContent.find('li');
 						var selectedCategoriesFilterItems = categoriesFiltersContent.find('li.active');
-						if (allCategoriesFilterItems.length != selectedCategoriesFilterItems.length)
+						if (allCategoriesFilterItems.length !== selectedCategoriesFilterItems.length)
 							$.each(selectedCategoriesFilterItems, function ()
 							{
 								selectedCategoryFilters.push($(this).find('a').text());
@@ -460,7 +460,7 @@
 						var selectedCategories = [];
 						var allCategoryTagCheckBoxes = categoriesContent.find('.tag-selector');
 						var selectedCategoryTagCheckBoxes = categoriesContent.find('.tag-selector-container :checked');
-						if (allCategoryTagCheckBoxes.length != selectedCategoryTagCheckBoxes.length)
+						if (allCategoryTagCheckBoxes.length !== selectedCategoryTagCheckBoxes.length)
 							$.each(categoriesContent.find('>.checkbox'), function ()
 							{
 								var groupCheckBoxContainer = $(this);
@@ -473,7 +473,7 @@
 									{
 										var tagCheckBoxContainer = $(this);
 										var tagCheckBox = tagCheckBoxContainer.find('.tag-selector');
-										if (tagCheckBox.prop('checked') == true)
+										if (tagCheckBox.prop('checked') === true)
 											tags.push(tagCheckBoxContainer.find('.name').text());
 									});
 									selectedCategories.push({
@@ -487,7 +487,7 @@
 						var selectedSuperFilters = [];
 						var allSuperFilterButtons = superFiltersContent.find('.btn');
 						var selectedSuperFilterButtons = superFiltersContent.find('.btn.active');
-						if (allSuperFilterButtons.length != selectedSuperFilterButtons.length)
+						if (allSuperFilterButtons.length !== selectedSuperFilterButtons.length)
 							$.each(selectedSuperFilterButtons, function ()
 							{
 								selectedSuperFilters.push($(this).text());
@@ -553,13 +553,13 @@
 
 		if (searchBar.length > 0)
 		{
-			if (parameters == undefined)
+			if (parameters === undefined)
 				parameters = {
 					shortcutData: undefined,
 					sizeChangedCallback: undefined
 				};
-			parameters.shortcutData = parameters.shortcutData != undefined ? parameters.shortcutData : null;
-			parameters.sizeChangedCallback = parameters.sizeChangedCallback != undefined ? parameters.sizeChangedCallback : function ()
+			parameters.shortcutData = parameters.shortcutData !== undefined ? parameters.shortcutData : null;
+			parameters.sizeChangedCallback = parameters.sizeChangedCallback !== undefined ? parameters.sizeChangedCallback : function ()
 				{
 				};
 

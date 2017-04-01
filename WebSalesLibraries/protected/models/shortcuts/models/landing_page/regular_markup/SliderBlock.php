@@ -17,7 +17,7 @@
 		{
 			parent::__construct($parentShortcut, $parentBlock);
 			$this->type = 'slider';
-			$this->id = $parentShortcut->id;
+			$this->id = uniqid();
 		}
 
 		/**

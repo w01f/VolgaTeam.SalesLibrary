@@ -54,19 +54,4 @@
 			);
 		};
 	};
-
-	$.SalesPortal.SearchOptions = function (data)
-	{
-		this.title = undefined;
-		this.openInSamePage = undefined;
-
-		this.enableSubSearch = undefined;
-		this.subSearchDefaultView = undefined;
-
-		this.conditions = undefined;
-
-		for (var property in data)
-			if (data.hasOwnProperty(property))
-				this[property] = data[property];
-	};
 })(jQuery);

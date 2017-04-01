@@ -62,7 +62,7 @@
 
 .dataTables_filter
 {
-	text-align: center !important;
+	text-align: right !important;
 }
 
 .dataTables_length .bootstrap-select

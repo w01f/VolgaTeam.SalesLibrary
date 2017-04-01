@@ -13,15 +13,15 @@
 
 		this.show = function ()
 		{
-			if (viewerData.config.isEOBrowser == true && viewerData.config.forceEOOpen == true)
+			if (viewerData.config.isEOBrowser === true && viewerData.config.forceEOOpen === true)
 				$.SalesPortal.SalesLibraryExtensions.openLink(viewerData);
-			else if (viewerData.config.forceDownload == true)
+			else if (viewerData.config.forceDownload === true)
 				downloadFile();
-			else if (viewerData.config.forceWebOpen == true)
+			else if (viewerData.config.forceWebOpen === true)
 				open();
 			else
 			{
-				if (parameters.viewContainer == undefined)
+				if (parameters.viewContainer === undefined)
 					$.fancybox({
 						content: parameters.content,
 						title: viewerData.name,
@@ -175,7 +175,7 @@
 
 		var downloadPage = function ()
 		{
-			if (imageViewer != undefined)
+			if (imageViewer !== undefined)
 			{
 				var page = viewerData.pages[imageViewer.currentPageIndex];
 				$.SalesPortal.LinkManager.downloadFile({

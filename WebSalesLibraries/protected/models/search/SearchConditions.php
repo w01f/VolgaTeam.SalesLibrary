@@ -24,6 +24,8 @@
 		/** @var  TableSortSettings */
 		public $sortSettings;
 
+		/** @var  SearchDateSettings */
+		public $dateSettings;
 		/** @var  SearchCategorySettings */
 		public $categorySettings;
 		/** @var  SearchViewCountSettings */
@@ -42,6 +44,7 @@
 
 			$this->columnSettings = TableColumnSettings::createEmpty();
 
+			$this->dateSettings = new SearchDateSettings();
 			$this->categorySettings = new SearchCategorySettings();
 			$this->viewCountSettings = new SearchViewCountSettings();
 			$this->thumbnailSettings = new SearchThumbnailSettings();
@@ -99,6 +102,9 @@
 					case "current week":
 						$instance->startDate = date(Yii::app()->params['outputDateFormat'], strtotime("last Monday"));
 						break;
+					case "last week":
+						$instance->startDate = date(Yii::app()->params['outputDateFormat'], strtotime("Monday last week"));
+						break;
 					case "current month":
 						$instance->startDate = date(Yii::app()->params['outputDateFormat'], strtotime(date('Y-m-1')));
 						break;
@@ -125,7 +131,10 @@
 						$instance->endDate = date(Yii::app()->params['outputDateFormat'], strtotime($today . ' + 1 days'));
 						break;
 					case "yesterday":
-						$instance->endDate = date(Yii::app()->params['outputDateFormat'], strtotime($today . ' - 1 days'));
+						$instance->endDate = $today;
+						break;
+					case "last week":
+						$instance->startDate = date(Yii::app()->params['outputDateFormat'], strtotime("Sunday last week"));
 						break;
 					default:
 						if (strstr($endDateText, ' days ago'))
@@ -205,6 +214,10 @@
 			$queryResult = $xpath->query('./ColumnSettings', $contextNode);
 			if ($queryResult->length > 0)
 				$instance->columnSettings = TableColumnSettings::loadColumnsFromXml($xpath, $queryResult->item(0));
+
+			$queryResult = $xpath->query('./DateSettings', $contextNode);
+			if ($queryResult->length > 0)
+				$instance->dateSettings = SearchDateSettings::fromXml($xpath, $queryResult->item(0));
 
 			$queryResult = $xpath->query('./CategorySettings', $contextNode);
 			if ($queryResult->length > 0)
