@@ -176,7 +176,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 					if (linkGroup != null)
 						foreach (var item in searchGroup.ListBox.Items
 							.Where(item => linkGroup.Tags
-								.Any(t => t.Equals((SearchTag) item.Value))))
+								.Any(t => t.Equals((SearchTag)item.Value))))
 						{
 							item.CheckState = CheckState.Indeterminate;
 							searchGroup.ListBox.BringToFront();
@@ -186,7 +186,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 					if (commonGroup != null)
 						foreach (var item in searchGroup.ListBox.Items
 							.Where(item => commonGroup.Tags
-								.Any(t => t.Equals((SearchTag) item.Value))))
+								.Any(t => t.Equals((SearchTag)item.Value))))
 						{
 							item.CheckState = CheckState.Checked;
 							searchGroup.ListBox.BringToFront();
@@ -303,6 +303,11 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 		{
 			foreach (TreeListNode node in _rootNode.Nodes)
 			{
+				foreach (TreeListNode childNode in node.Nodes)
+				{
+					treeListCategories.InvalidateNode(childNode);
+					treeListCategories.RefreshNode(childNode);
+				}
 				treeListCategories.InvalidateNode(node);
 				treeListCategories.RefreshNode(node);
 			}
@@ -352,11 +357,25 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 		{
 			if (e.Node.Tag is SearchSuperGroup)
 			{
-				var groupContainer = e.Node.Nodes
+				var groupContainers = e.Node.Nodes
 					.Select(n => n.Tag)
 					.OfType<SearchGroupContainer>()
 					.ToList();
-				if (groupContainer.Any(g => g.ListBox.Items.Any(item => item.CheckState != CheckState.Unchecked)))
+				if (groupContainers.Any(g => g.ListBox.Items.Any(item => item.CheckState != CheckState.Unchecked)))
+				{
+					e.Appearance.ForeColor = Color.Green;
+					e.Appearance.Font = new Font(e.Appearance.Font.Name, e.Appearance.Font.Size, FontStyle.Bold);
+				}
+				else
+				{
+					e.Appearance.ForeColor = Color.Black;
+					e.Appearance.Font = new Font(e.Appearance.Font.Name, e.Appearance.Font.Size, FontStyle.Regular);
+				}
+			}
+			else if (e.Node.Tag is SearchGroupContainer)
+			{
+				var groupContainer = (SearchGroupContainer)e.Node.Tag;
+				if (groupContainer.ListBox.Items.Any(item => item.CheckState != CheckState.Unchecked))
 				{
 					e.Appearance.ForeColor = Color.Green;
 					e.Appearance.Font = new Font(e.Appearance.Font.Name, e.Appearance.Font.Size, FontStyle.Bold);
