@@ -196,7 +196,7 @@
 			drop: function (event, ui)
 			{
 				var rowData = pageLinksTable.getTable().row($(this)).data();
-				var order = rowData != undefined ? rowData.extended_data.listOrder : -1;
+				var order = rowData !== undefined ? rowData.extended_data.listOrder : -1;
 				var linkInCartId = ui.helper.attr('id');
 				$.ajax({
 					type: "POST",
@@ -264,7 +264,7 @@
 				inlineMode: false,
 				height: '100%'
 			});
-			if (pageDescription.val() == '')
+			if (pageDescription.val() === '')
 				pageDescription.editable('disable');
 			pageDescription.on('editable.click', function ()
 			{
@@ -285,7 +285,7 @@
 			pageHeader.editable({
 				inlineMode: false
 			});
-			if (pageHeader.val() == '')
+			if (pageHeader.val() === '')
 				pageHeader.editable('disable');
 			pageHeader.on('editable.click', function ()
 			{
@@ -306,7 +306,7 @@
 			pageFooter.editable({
 				inlineMode: false
 			});
-			if (pageFooter.val() == '')
+			if (pageFooter.val() === '')
 				pageFooter.editable('disable');
 			pageFooter.on('editable.click', function ()
 			{
@@ -358,7 +358,7 @@
 
 			$("#page-content-access-code").keydown(function (event)
 			{
-				if (event.keyCode == 46 || event.keyCode == 8)
+				if (event.keyCode === 46 || event.keyCode === 8)
 				{
 				}
 				else
@@ -468,7 +468,7 @@
 			for (var i = 0, ien = diff.length; i < ien; i++)
 			{
 				var linkInPageId = pageLinksTable.getTable().row(diff[i].node).data().extended_data.linkInPageId;
-				if (targetLinkInPageId != linkInPageId)
+				if (targetLinkInPageId !== linkInPageId)
 					continue;
 
 				$.ajax({
@@ -498,7 +498,7 @@
 			var expiredDateContainer = $('#page-content-expiration-date-container');
 			var expiredDateString = $('#page-content-expiration-date').val();
 			var today = moment().endOf('day');
-			var expiredDate = expiredDateString != '' ? moment(expiredDateString, dateFormat).endOf('day') : today;
+			var expiredDate = expiredDateString !== '' ? moment(expiredDateString, dateFormat).endOf('day') : today;
 			if (expiredDate < today)
 				expiredDateContainer.addClass('has-error');
 			else
@@ -520,6 +520,7 @@
 				tableContainerSelector: '#page-content-links-container',
 				parentContainerSelector: '#page-content-links-container',
 				saveState: false,
+				excelExport: false,
 				deleteHandler: function (linkInfo)
 				{
 					deleteLink(linkInfo.extended_data.linkInPageId);

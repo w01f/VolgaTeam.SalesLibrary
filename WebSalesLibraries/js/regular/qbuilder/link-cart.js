@@ -382,6 +382,7 @@
 				saveState: false,
 				paginate: false,
 				subSearch: false,
+				excelExport: false,
 				deleteHandler: function (linkInfo)
 				{
 					deleteLink(linkInfo.extended_data.linkInCartId);

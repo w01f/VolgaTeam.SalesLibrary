@@ -65,6 +65,11 @@
 	text-align: right !important;
 }
 
+.dataTables_filter input
+{
+	width: 100px !important;
+}
+
 .dataTables_length .bootstrap-select
 {
 	width: auto !important;

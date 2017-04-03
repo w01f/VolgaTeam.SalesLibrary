@@ -31,6 +31,9 @@
 		var useSubSearch = tableOptions !== undefined && tableOptions.subSearch !== undefined ?
 			tableOptions.subSearch :
 			true;
+		var useExcelExport = tableOptions !== undefined && tableOptions.excelExport !== undefined ?
+			tableOptions.excelExport :
+			true;
 		var deleteHandler = tableOptions !== undefined && tableOptions.deleteHandler !== undefined ?
 			tableOptions.deleteHandler :
 			function ()
@@ -60,10 +63,10 @@
 				};
 			data.dataset = data.dataset !== undefined ? data.dataset : [];
 			data.dataOptions = data.dataOptions !== undefined ? data.dataOptions : {
-					columnSettings: undefined,
-					showDeleteButton: false,
-					reorderSourceField: undefined
-				};
+				columnSettings: undefined,
+				showDeleteButton: false,
+				reorderSourceField: undefined
+			};
 			data.sortColumnTag = data.sortColumnTag !== undefined ? data.sortColumnTag : ColumnTagName;
 			data.sortDirection = data.sortDirection !== undefined ? data.sortDirection : 'asc';
 
@@ -89,6 +92,7 @@
 				});
 
 			var columnSettings = [];
+			var exportColumnsIndexes = [];
 
 			if (data.dataOptions.reorderSourceField !== undefined)
 				columnSettings.push({
@@ -104,6 +108,10 @@
 			{
 				if (data.dataOptions.reorderSourceField === undefined && key === data.sortColumnTag)
 					sortColumnIndex = columnIndex;
+				if (value.enable)
+				{
+					exportColumnsIndexes[key] = (columnIndex + (data.dataOptions.reorderSourceField === undefined ? 0 : 1));
+				}
 				switch (key)
 				{
 					case ColumnTagCategory:
@@ -113,7 +121,7 @@
 								"data": "tag",
 								"orderable": data.dataOptions.reorderSourceField === undefined,
 								"title": value.title,
-								"class": "tag-text-container allow-reorder" + (value.fullWidth ? ' none' : ' all'),
+								"class": "tag-text-container allow-export allow-reorder" + (value.fullWidth ? ' none' : ' all'),
 								"width": value.width > 0 ? (value.width + "px") : "15%",
 								"render": cellRenderer
 							});
@@ -127,7 +135,7 @@
 								"data": "library.name",
 								"orderable": data.dataOptions.reorderSourceField === undefined,
 								"title": value.title,
-								"class": "centered allow-reorder" + (value.fullWidth ? ' none' : ' all'),
+								"class": "centered allow-export allow-reorder" + (value.fullWidth ? ' none' : ' all'),
 								"width": value.width > 0 ? (value.width + "px") : "10%",
 								"render": cellRenderer
 							});
@@ -141,7 +149,7 @@
 								"data": "file_type",
 								"orderable": data.dataOptions.reorderSourceField === undefined,
 								"title": value.title,
-								"class": "centered allow-reorder" + (value.fullWidth ? ' none' : ' all'),
+								"class": "centered allow-export allow-reorder" + (value.fullWidth ? ' none' : ' all'),
 								"width": value.width > 0 ? (value.width + "px") : "70px",
 								"render": cellRenderer
 							});
@@ -155,7 +163,7 @@
 								"data": "name",
 								"orderable": data.dataOptions.reorderSourceField === undefined,
 								"title": value.title,
-								"class": "link-name-text-container" + (value.fullWidth ? ' none' : ' all'),
+								"class": "link-name-text-container allow-export" + (value.fullWidth ? ' none' : ' all'),
 								"width": value.width > 0 ? (value.width + "px") : null,
 								"render": cellRenderer
 							});
@@ -183,7 +191,7 @@
 								"data": "views",
 								"orderable": data.dataOptions.reorderSourceField === undefined,
 								"title": value.title,
-								"class": "centered allow-reorder" + (value.fullWidth ? ' none' : ' all'),
+								"class": "centered allow-reorder allow-export" + (value.fullWidth ? ' none' : ' all'),
 								"width": value.width > 0 ? (value.width + "px") : "50px",
 								"sType": "numeric",
 								"render": {
@@ -224,7 +232,7 @@
 								"data": "date",
 								"orderable": data.dataOptions.reorderSourceField === undefined,
 								"title": value.title,
-								"class": "centered allow-reorder" + (value.fullWidth ? ' none' : ' all'),
+								"class": "centered allow-reorder allow-export" + (value.fullWidth ? ' none' : ' all'),
 								"width": value.width > 0 ? (value.width + "px") : "80px",
 								"render": {
 									_: cellRenderer,
@@ -273,10 +281,11 @@
 				"sLengthSelect": "form-control"
 			});
 
-			var tableHeaderLengthItemClass = backHandler ? 'col-lg-2 col-md-2 col-sm-4 hidden-xs' : 'col-lg-3 col-md-3 col-sm-4 hidden-xs';
-			var tableHeaderFilterItemClass = backHandler ? 'col-lg-3 col-md-2 hidden-sm hidden-xs' : 'col-lg-3 col-md-3 hidden-sm hidden-xs';
-			var tableHeaderBackItemClass = 'col-lg-3 col-md-2 hidden-sm hidden-xs';
-			var tableHeaderPaginationItemClass = backHandler ? 'col-lg-4 col-md-6 col-sm-8 col-xs-12' : 'col-lg-6 col-md-6 col-sm-8 col-xs-12';
+			var tableHeaderLengthItemClass = backHandler ? 'col-lg-2 col-md-2 col-sm-4 hidden-xs' : 'col-lg-2 col-md-2 col-sm-4 hidden-xs';
+			var tableHeaderFilterItemClass = backHandler ? 'col-lg-3 col-md-2 hidden-sm hidden-xs' : 'col-lg-3 col-md-2 hidden-sm hidden-xs';
+			var tableHeaderButtonsItemClass = backHandler ? 'col-lg-2 col-md-1 hidden-sm hidden-xs' : 'col-lg-3 col-md-2 hidden-sm hidden-xs';
+			var tableHeaderBackItemClass = useExcelExport ? 'col-lg-1 col-md-1 hidden-sm hidden-xs' : 'col-lg-3 col-md-2 hidden-sm hidden-xs';
+			var tableHeaderPaginationItemClass = backHandler ? 'col-lg-4 col-md-6 col-sm-8 col-xs-12' : (useExcelExport ? 'col-lg-4 col-md-6 col-sm-8 col-xs-12' : 'col-lg-7 col-md-8 col-sm-8 col-xs-12');
 
 			dataTable = table.dataTable({
 				"data": data.dataset,
@@ -299,6 +308,19 @@
 						type: ''
 					}
 				},
+				buttons: [{
+					extend: 'excelHtml5',
+					exportOptions: {
+						columns: '.allow-export'
+					},
+					customize: function (xlsx)
+					{
+						var sheet = xlsx.xl.worksheets['sheet1.xml'];
+						var col = $('col', sheet);
+						$(col[exportColumnsIndexes[ColumnTagCategory]]).attr('width', 50);
+						$(col[exportColumnsIndexes[ColumnTagName]]).attr('width', 50);
+					}
+				}],
 				"scrollY": $.SalesPortal.Content.isMobileDevice() ? getNativeTableSize() : getBootstrapTableSize(),
 				"scrollCollapse": false,
 				"aLengthMenu": data.dataset.length < 500 ?
@@ -318,6 +340,7 @@
 				},
 				"dom": (data.dataset.length > 0 ?
 					"<'row table-header-row'<'" + tableHeaderLengthItemClass + "'l><'" + tableHeaderFilterItemClass + "'f>" +
+					(useExcelExport ? "<'" + tableHeaderButtonsItemClass + " excel-export-action text-center'B>" : "") +
 					(backHandler ? "<'" + tableHeaderBackItemClass + " back-url text-right'>" : "") +
 					"<'" + tableHeaderPaginationItemClass + "'p>>" :
 					"<'row'<'col-xs-12 back-url text-center'>>") +
@@ -332,9 +355,22 @@
 			if (!$.SalesPortal.Content.isMobileDevice())
 				$("#" + tableIdentifier + "_length").find('select').selectpicker();
 
+			var tableWrapper = $("#" + tableIdentifier + "_wrapper");
+
+			if (useExcelExport)
+			{
+				var excelExportActionContent = tableWrapper.find('.excel-export-action');
+				excelExportActionContent.append('<a href="#" style="color: green">Excel (Beta)</a>');
+				excelExportActionContent.find('.dt-buttons').hide();
+				excelExportActionContent.find('>a').on('click', function ()
+				{
+					excelExportActionContent.find('.buttons-excel').click();
+				});
+			}
+
 			if (backHandler !== undefined)
 			{
-				var backUrlContent = $("#" + tableIdentifier + "_wrapper").find('.back-url');
+				var backUrlContent = tableWrapper.find('.back-url');
 				backUrlContent.html(
 					'<a href="#" style="text-decoration: underline">New Search</a>'
 				);

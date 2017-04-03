@@ -138,12 +138,12 @@
 	if (Yii::app()->browser->isMobile())
 	{
 		$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/vendor/data-table/native/css/datatables.min.css?' . Yii::app()->params['version']);
-		$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/data-table/native/js/datatables.min.js', CClientScript::POS_END);
+		$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/data-table/native/js/datatables.min.js?' . Yii::app()->params['version'], CClientScript::POS_END);
 	}
 	else
 	{
 		$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/vendor/data-table/bootstrap/css/datatables.min.css?' . Yii::app()->params['version']);
-		$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/data-table/bootstrap/js/datatables.min.js', CClientScript::POS_END);
+		$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/data-table/bootstrap/js/datatables.min.js?' . Yii::app()->params['version'], CClientScript::POS_END);
 	}
 ?>
 <style>
