@@ -89,7 +89,7 @@
 			$today = date(Yii::app()->params['outputDateFormat']);
 			$queryResult = $xpath->query('./StartDate', $contextNode);
 			$startDateText = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
-			if (isset($startDateText))
+			if (!empty($startDateText))
 			{
 				switch ($startDateText)
 				{
@@ -121,7 +121,7 @@
 
 			$queryResult = $xpath->query('./EndDate', $contextNode);
 			$endDateText = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
-			if (isset($endDateText))
+			if (!empty($endDateText))
 			{
 				switch ($endDateText)
 				{
@@ -134,7 +134,7 @@
 						$instance->endDate = $today;
 						break;
 					case "last week":
-						$instance->startDate = date(Yii::app()->params['outputDateFormat'], strtotime("Sunday last week"));
+						$instance->endDate = date(Yii::app()->params['outputDateFormat'], strtotime("Sunday last week"));
 						break;
 					default:
 						if (strstr($endDateText, ' days ago'))

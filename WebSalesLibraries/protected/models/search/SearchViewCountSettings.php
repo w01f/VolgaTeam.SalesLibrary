@@ -26,7 +26,7 @@
 			$today = date(Yii::app()->params['mysqlDateFormat']);
 			$queryResult = $xpath->query('./StartDate', $contextNode);
 			$startDateText = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
-			if (isset($startDateText))
+			if (!empty($startDateText))
 			{
 				switch ($startDateText)
 				{
@@ -61,7 +61,7 @@
 			}
 			$queryResult = $xpath->query('./EndDate', $contextNode);
 			$endDateText = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : ($instance->useDateRange ? 'today' : null);
-			if (isset($endDateText))
+			if (!empty($endDateText))
 			{
 				switch ($endDateText)
 				{
