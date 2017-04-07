@@ -27,10 +27,10 @@
                 class="item<? if ($i == 0): ?> active<? endif; ?>"<? if (!empty($slideBlock->hoverText)): ?> title="<? echo $slideBlock->hoverText; ?>"<? endif; ?>>
 		<? elseif ($slideBlock->type === 'shortcut'): ?>
 			<? /** @var \application\models\shortcuts\models\landing_page\regular_markup\SlideShortcutBlock $slideBlock */ ?>
-            <a href="<? echo $slideBlock->shortcut->getSourceLink(); ?>"
-               class="item<? if ($i == 0): ?> active<? endif; ?> shortcuts-link"<? if (!empty($slideBlock->hoverText)): ?> title="<? echo $slideBlock->hoverText; ?>"<? endif; ?>>
+            <a href="<? echo isset($slideBlock->shortcut) ? $slideBlock->shortcut->getSourceLink() : '#'; ?>"
+               class="item<? if ($i == 0): ?> active<? endif; ?> shortcuts-link<?if(!isset($slideBlock->shortcut)):?> disabled<?endif;?>"<? if (!empty($slideBlock->hoverText)): ?> title="<? echo $slideBlock->hoverText; ?>"<? endif; ?>>
                 <div class="service-data">
-					<? echo $slideBlock->shortcut->getMenuItemData(); ?>
+	                <? echo isset($slideBlock->shortcut) ? $slideBlock->shortcut->getMenuItemData() : '<div class="same-page"></div><div class="has-custom-handler"></div>'; ?>
                 </div>
 		<? else: ?>
            <a href="#"

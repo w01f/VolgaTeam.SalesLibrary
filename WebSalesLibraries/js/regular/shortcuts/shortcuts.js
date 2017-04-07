@@ -30,8 +30,12 @@
 			shortcutsContainer.find('.shortcuts-link').off('click.shortcut').on('click.shortcut', function (e)
 			{
 				var data = $(this).find('.service-data');
-				var activityData = $.parseJSON(data.find('.activity-data').text());
-				that.trackActivity(activityData);
+				var activityTag = data.find('.activity-data');
+				if(activityTag.length>0)
+				{
+					var activityData = $.parseJSON(activityTag.text());
+					that.trackActivity(activityData);
+				}
 
 				var hasCustomHandler = data.find('.has-custom-handler').length > 0;
 				var samePage = data.find('.same-page').length > 0;
@@ -81,35 +85,38 @@
 					$.SalesPortal.LinkManager.playVimeo(data.find('.player-title').text(), data.find('.player-url').text());
 					break;
 				default :
-					menu.find('.main-site-url').show();
-					$.SalesPortal.HistoryManager.pushShortcut(data, customParameters);
-					$.ajax({
-						type: "POST",
-						url: url,
-						data: {
-							linkId: shortcutId,
-							parameters: customParameters
-						},
-						beforeSend: function ()
-						{
-							$.SalesPortal.Overlay.show();
-						},
-						complete: function ()
-						{
-							$.SalesPortal.Overlay.hide();
-						},
-						success: function (result)
-						{
-							openShortcutOnSamePage(result);
-							if (customParameters && customParameters.scrollPosition)
-								$.SalesPortal.Content.getContentObject().scrollTop(customParameters.scrollPosition);
-						},
-						error: function ()
-						{
-						},
-						async: true,
-						dataType: 'json'
-					});
+					if(shortcutId)
+					{
+						menu.find('.main-site-url').show();
+						$.SalesPortal.HistoryManager.pushShortcut(data, customParameters);
+						$.ajax({
+							type: "POST",
+							url: url,
+							data: {
+								linkId: shortcutId,
+								parameters: customParameters
+							},
+							beforeSend: function ()
+							{
+								$.SalesPortal.Overlay.show();
+							},
+							complete: function ()
+							{
+								$.SalesPortal.Overlay.hide();
+							},
+							success: function (result)
+							{
+								openShortcutOnSamePage(result);
+								if (customParameters && customParameters.scrollPosition)
+									$.SalesPortal.Content.getContentObject().scrollTop(customParameters.scrollPosition);
+							},
+							error: function ()
+							{
+							},
+							async: true,
+							dataType: 'json'
+						});
+					}
 					break;
 			}
 			return true;

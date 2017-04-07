@@ -43,6 +43,17 @@
 				}).init();
 			});
 
+			$.each(landingPage.find('.news-block'), function (key, value)
+			{
+				var newsBlock = $(value);
+				var newsId = newsBlock.prop('id').replace('news-block-', '');
+				var newsBlockSettings = $.parseJSON(newsBlock.find('>.service-data .encoded-object').text());
+				new $.SalesPortal.NewsBlock({
+					containerId: newsId,
+					settings: newsBlockSettings
+				}).init();
+			});
+
 			landingPage.find('[data-bs-hover-animate]')
 				.mouseenter(function ()
 				{

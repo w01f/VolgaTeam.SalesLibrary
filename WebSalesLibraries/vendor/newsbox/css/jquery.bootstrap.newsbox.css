@@ -1,0 +1,48 @@
+﻿.news-block .glyphicon {
+    margin-right: 4px !important; /*override*/
+}
+
+.news-block .pagination .glyphicon {
+    margin-right: 0 !important; /*override*/
+}
+
+.news-block .pagination a {
+    color: #555 !important;
+}
+
+.news-block ul {
+    padding: 0 !important;
+    margin: 0 !important;
+    list-style: none !important;
+}
+
+.news-block .news-item {
+    padding: 4px 4px !important;
+    margin: 0 !important;
+    border-bottom: 1px dotted #555 !important;
+}
+
+.news-block .news-item .content {
+    display: table;
+    color: black;
+    text-decoration: none;
+}
+
+.news-block .news-item .content.simple-block {
+    cursor: default;
+}
+
+.news-block .news-item .content .image,
+.news-block .news-item .content .text {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.news-block .news-item .content .image {
+    min-width: 60px;
+    padding-right: 10px;
+}
+
+.news-block .news-item .content .text {
+    width: 100%;
+}

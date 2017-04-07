@@ -144,6 +144,8 @@
 					return 'slider';
 				case 'trending':
 					return 'trending';
+				case 'news':
+					return 'news';
 				default:
 					return 'undefinedBlock';
 			}
@@ -210,6 +212,14 @@
 					$trendingBlock = new TrendingBlock($parentShortcut, $parentBlock);
 					$trendingBlock->configureFromXml($xpath, $contextNode);
 					return $trendingBlock;
+				case "news":
+					$newsBlock = new NewsBlock($parentShortcut, $parentBlock);
+					$newsBlock->configureFromXml($xpath, $contextNode);
+					return $newsBlock;
+				case "news block":
+					$newsItem = new NewsItem($parentShortcut, $parentBlock);
+					$newsItem->configureFromXml($xpath, $contextNode);
+					return $newsItem;
 				default:
 					return new UndefinedBlock($parentShortcut, $parentBlock);
 			}

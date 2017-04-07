@@ -14,3 +14,8 @@
     text-decoration: inherit;
     outline: none;
 }
+
+#content .shortcuts-page-content.landing-page .shortcuts-link.disabled
+{
+    cursor: not-allowed;
+}

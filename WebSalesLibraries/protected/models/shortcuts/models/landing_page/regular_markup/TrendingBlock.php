@@ -12,6 +12,8 @@
 	class TrendingBlock extends BlockContainer
 	{
 		public $id;
+
+		/** @var  TrendingSettings */
 		public $settings;
 
 		/**
