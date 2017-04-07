@@ -97,7 +97,7 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.SingleSetti
 
 					LoadData();
 				};
-				linksTreeSelector.LoadData(_linkGroup, _defaultLinkType);
+				linksTreeSelector.LoadData(_linkGroup, _defaultLinkType, new[] { FileTypes.LineBreak });
 			}
 			else
 				LoadData();

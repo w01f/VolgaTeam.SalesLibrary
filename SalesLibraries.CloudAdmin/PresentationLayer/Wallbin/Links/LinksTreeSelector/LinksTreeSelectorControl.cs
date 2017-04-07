@@ -28,13 +28,13 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.LinksTreeSel
 			}
 		}
 
-		public void LoadData(ILinksGroup linkGroup, FileTypes? defaultLinkType = null)
+		public void LoadData(ILinksGroup linkGroup, FileTypes? defaultLinkType = null, IList<FileTypes> excludeFileTypes = null)
 		{
 			var rootGroup = new RootTreeGroup(linkGroup, defaultLinkType);
 			var linksTreeGroups = new List<LinksFormatTreeGroup>();
 			linksTreeGroups.AddRange(LinksFormatTreeGroup.GetDefaultGroups());
 
-			foreach (var libraryLink in linkGroup.AllGroupLinks.Where(link => link != linkGroup && (defaultLinkType == null || link.Type == defaultLinkType.Value)).ToList())
+			foreach (var libraryLink in linkGroup.AllGroupLinks.Where(link => link != linkGroup && (defaultLinkType == null || link.Type == defaultLinkType.Value) && (excludeFileTypes == null || !excludeFileTypes.Contains(link.Type))).ToList())
 			{
 				var targetLinkGroup = linksTreeGroups.FirstOrDefault(g => g.TargetLinkFormats.Contains(libraryLink.WebFormat)) ??
 					linksTreeGroups.OfType<UndefinedTreeGroup>().First();

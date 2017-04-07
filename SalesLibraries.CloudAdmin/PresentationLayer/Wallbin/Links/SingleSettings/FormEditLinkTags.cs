@@ -97,7 +97,7 @@ namespace SalesLibraries.CloudAdmin.PresentationLayer.Wallbin.Links.SingleSettin
 
 					LoadData();
 				};
-				linksTreeSelector.LoadData(_linkGroup, _defaultLinkType);
+				linksTreeSelector.LoadData(_linkGroup, _defaultLinkType, new[] { FileTypes.LineBreak });
 			}
 			else
 				LoadData();
