@@ -54,6 +54,8 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 
 		public void Recalc()
 		{
+			if (Link == null) return;
+
 			#region Image
 			Image = null;
 			if (Link.Banner.Enable && Link.Banner.DisplayedImage != null)

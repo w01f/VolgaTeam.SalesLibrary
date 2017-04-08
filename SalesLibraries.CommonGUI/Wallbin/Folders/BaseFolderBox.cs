@@ -232,6 +232,7 @@ namespace SalesLibraries.CommonGUI.Wallbin.Folders
 		{
 			if (e.ColumnIndex != 0) return;
 			var linkRow = (LinkRow)grFiles.Rows[e.RowIndex];
+			if (linkRow.Source == null) return;
 			e.PaintBackground(e.CellBounds, true);
 
 			#region Build RichTextControl
