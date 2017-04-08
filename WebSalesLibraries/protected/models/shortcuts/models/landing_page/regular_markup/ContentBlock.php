@@ -146,6 +146,8 @@
 					return 'trending';
 				case 'news':
 					return 'news';
+				case 'scroll-stripe':
+					return 'scrollStripe';
 				default:
 					return 'undefinedBlock';
 			}
@@ -220,6 +222,10 @@
 					$newsItem = new NewsItem($parentShortcut, $parentBlock);
 					$newsItem->configureFromXml($xpath, $contextNode);
 					return $newsItem;
+				case "scroll-tab":
+					$scrollStripeBlock = new ScrollStripeBlock($parentShortcut, $parentBlock);
+					$scrollStripeBlock->configureFromXml($xpath, $contextNode);
+					return $scrollStripeBlock;
 				default:
 					return new UndefinedBlock($parentShortcut, $parentBlock);
 			}

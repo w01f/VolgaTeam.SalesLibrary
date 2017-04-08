@@ -19,3 +19,24 @@
 {
     cursor: not-allowed;
 }
+
+#content .shortcuts-page-content.landing-page .scroll-stripe a.item
+{
+    text-decoration: inherit;
+    outline: none;
+    color: inherit;
+    display: block;
+    -moz-user-select: none;
+}
+
+#content .shortcuts-page-content.landing-page .scroll-stripe div.scroll_tab_inner > span.tab_selected,
+#content .shortcuts-page-content.landing-page .scroll-stripe div.scroll_tab_inner li.tab_selected
+{
+    background-color: #ffffff !important;
+}
+
+#content .shortcuts-page-content.landing-page .scroll-stripe div.scroll_tab_inner > span.tab_selected:hover,
+#content .shortcuts-page-content.landing-page .scroll-stripe div.scroll_tab_inner li.tab_selected:hover
+{
+    background-color: #aaaaaa !important;
+}

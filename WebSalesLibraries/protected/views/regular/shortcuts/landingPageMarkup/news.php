@@ -1,6 +1,7 @@
 <?
 	/** @var $contentBlock \application\models\shortcuts\models\landing_page\regular_markup\NewsBlock */
 
+	/** @var \application\models\shortcuts\models\landing_page\regular_markup\NewsItem[] $newsItems */
 	$newsItems = $contentBlock->items;
 ?>
 <div id="news-block-<? echo $contentBlock->id; ?>" class="news-block">

@@ -13,7 +13,7 @@
   margin-left: 42px !important;
 }
 
-.scroll_tabs_theme_light div.scroll_tab_inner span, .scroll_tabs_theme_light div.scroll_tab_inner li {
+.scroll_tabs_theme_light div.scroll_tab_inner > span, .scroll_tabs_theme_light div.scroll_tab_inner li {
   padding-left: 20px;
   padding-right: 20px;
   line-height: 40px;
@@ -26,17 +26,17 @@
   cursor: pointer;
 }
 
-.scroll_tabs_theme_light div.scroll_tab_inner span.scroll_tab_first, .scroll_tabs_theme_light div.scroll_tab_inner li.scroll_tab_first {
+.scroll_tabs_theme_light div.scroll_tab_inner > span.scroll_tab_first, .scroll_tabs_theme_light div.scroll_tab_inner li.scroll_tab_first {
   border-left: 0px;
 }
 
-.scroll_tabs_theme_light div.scroll_tab_inner span.scroll_tab_left_finisher {
+.scroll_tabs_theme_light div.scroll_tab_inner > span.scroll_tab_left_finisher {
   padding: 0px;
   width: 10px;
   background-color: #ffffff;  
 }
 
-.scroll_tabs_theme_light div.scroll_tab_inner span.scroll_tab_right_finisher {
+.scroll_tabs_theme_light div.scroll_tab_inner > span.scroll_tab_right_finisher {
   padding: 0px;
   width: 10px;
   background-color: #ffffff;
@@ -44,31 +44,35 @@
   border-right: 1px solid #999999;
 }
 
-.scroll_tabs_theme_light div.scroll_tab_inner span.scroll_tab_over, .scroll_tabs_theme_light div.scroll_tab_inner li.scroll_tab_over {
+.scroll_tabs_theme_light div.scroll_tab_inner > span.scroll_tab_over, .scroll_tabs_theme_light div.scroll_tab_inner li.scroll_tab_over {
   background-color: #999999;
 }
 
-div.scroll_tab_inner span.scroll_tab_transparent {
+div.scroll_tab_inner > span.scroll_tab_transparent {
   background-color: #ffffff !important;
 }
 
-/*.scroll_tabs_theme_light div.scroll_tab_inner span.scroll_tab_first_over {
+div.scroll_tab_inner > span .icomoon-wrap {
+  display: inline-block;
+}
+
+/*.scroll_tabs_theme_light div.scroll_tab_inner > span.scroll_tab_first_over {
   background-color: #999999;
 }
 
-.scroll_tabs_theme_light div.scroll_tab_inner span.scroll_tab_left_finisher_over {
+.scroll_tabs_theme_light div.scroll_tab_inner > span.scroll_tab_left_finisher_over {
   background-color: #999999;
 }
 
-.scroll_tabs_theme_light div.scroll_tab_inner span.scroll_tab_right_finisher_over {
+.scroll_tabs_theme_light div.scroll_tab_inner > span.scroll_tab_right_finisher_over {
   background-color: #999999;
 }*/
 
-/*.scroll_tabs_theme_light div.scroll_tab_inner span.scroll_tab_left_finisher_selected {
+/*.scroll_tabs_theme_light div.scroll_tab_inner > span.scroll_tab_left_finisher_selected {
   background-color: #AAAAAA;
 }
 
-.scroll_tabs_theme_light div.scroll_tab_inner span.scroll_tab_right_finisher_selected {
+.scroll_tabs_theme_light div.scroll_tab_inner > span.scroll_tab_right_finisher_selected {
   background-color: #AAAAAA;
 }*/
 
@@ -77,7 +81,7 @@ div.scroll_tab_inner span.scroll_tab_transparent {
   height: 42px;
   width: 42px !important;
   display: block;
-  z-index: 9;
+  z-index: 99;
   background-color: #ffffff;
   border: 1px solid #999999;
   -webkit-touch-callout: none;
@@ -88,7 +92,7 @@ div.scroll_tab_inner span.scroll_tab_transparent {
   user-select: none;
 }
 
-.scroll_tabs_theme_light .scroll_tab_left_button span {
+.scroll_tabs_theme_light .scroll_tab_left_button > span {
     cursor: pointer;
     text-align: center;
     width: 42px;
@@ -118,7 +122,7 @@ div.scroll_tab_inner span.scroll_tab_transparent {
   height: 42px;
   width: 42px !important;
   display: block;
-  z-index: 9;
+  z-index: 99;
   background-color: #ffffff;
   border: 1px solid #999999;
   -webkit-touch-callout: none;
@@ -129,7 +133,7 @@ div.scroll_tab_inner span.scroll_tab_transparent {
   user-select: none;
 }
 
-.scroll_tabs_theme_light .scroll_tab_right_button span {
+.scroll_tabs_theme_light .scroll_tab_right_button > span {
     cursor: pointer;
     text-align: center;
     width: 42px;
@@ -155,11 +159,11 @@ div.scroll_tab_inner span.scroll_tab_transparent {
   background-color: #ffffff;
 }
 
-.scroll_tabs_theme_light div.scroll_tab_inner span.tab_selected, .scroll_tabs_theme_light div.scroll_tab_inner li.tab_selected {
+.scroll_tabs_theme_light div.scroll_tab_inner > span.tab_selected, .scroll_tabs_theme_light div.scroll_tab_inner li.tab_selected {
   background-color: #AAAAAA;
 }
 
-/*.scroll_tabs_theme_light div.scroll_tab_inner span.scroll_tab_first_selected {
+/*.scroll_tabs_theme_light div.scroll_tab_inner > span.scroll_tab_first_selected {
   background-color: #AAAAAA;
 }*/
 
@@ -171,4 +175,150 @@ div.scroll_tab_inner span.scroll_tab_transparent {
 }
 .scrolltab-center {
   text-align: center;
+}
+
+/* Size config of scrolltab*/
+.scrolltab-medium {
+  height: 62px;
+}
+
+.scrolltab-medium div.scroll_tab_inner {
+  height: 62px;
+  left: 62px !important;
+  right: 62px !important;
+}
+
+.scrolltab-medium div.scroll_tab_inner > span {
+  line-height: 60px;
+}
+
+.scrolltab-medium .scroll_tab_left_button,
+.scrolltab-medium .scroll_tab_right_button {
+  width: 62px !important;
+  height: 62px !important;
+  text-align: center;
+}
+
+.scrolltab-medium .scroll_tab_left_button > span,
+.scrolltab-medium .scroll_tab_right_button > span {
+  line-height: 58px;
+}
+
+.scrolltab-large {
+  height: 82px;
+}
+
+.scrolltab-large div.scroll_tab_inner {
+  height: 82px;
+  left: 82px !important;
+  right: 82px !important;
+}
+
+.scrolltab-large div.scroll_tab_inner > span {
+  line-height: 80px;
+}
+
+.scrolltab-large .scroll_tab_left_button,
+.scrolltab-large .scroll_tab_right_button {
+  width: 82px !important;
+  height: 82px !important;
+  text-align: center;
+}
+
+.scrolltab-large .scroll_tab_left_button > span,
+.scrolltab-large .scroll_tab_right_button > span {
+  line-height: 78px;
+}
+.scrolltab-right {
+  text-align: right;
+}
+.scrolltab-left {
+  text-align: left;
+}
+.scrolltab-center {
+  text-align: center;
+}
+.icomoon {
+  margin-left: 5px;
+  margin-right: 5px;
+  font-size: 1em;
+  vertical-align: middle;
+}
+.icomoon-lg {
+  font-size: 1.33333333em;
+}
+.icomoon-2x {
+  font-size: 2em;
+}
+.icomoon-3x {
+  font-size: 3em;
+}
+.icomoon-4x {
+  font-size: 4em;
+}
+.text-red {
+  color: #ff0000 !important;
+}
+.text-blue {
+  color: #0089ff !important;
+}
+.text-green {
+  color: #00ea00 !important;
+}
+.text-yellow {
+  color: #e1e616 !important;
+}
+.text-violet {
+  color: #bf00ec !important;
+}
+/* Font size config */
+.scrolltab-text-medium div.scroll_tab_inner > span, 
+.scrolltab-text-medium div.scroll_tab_inner li {
+  font-size: 20px;
+}
+.scrolltab-text-medium .icomoon {
+  font-size: 1.5em
+}
+.scrolltab-text-large div.scroll_tab_inner > span, 
+.scrolltab-text-large div.scroll_tab_inner li {
+  font-size: 24px;
+}
+.scrolltab-text-large .icomoon {
+  font-size: 2em
+}
+
+/* Icon stack */
+.scrolltab-large.center-stack div.scroll_tab_inner > span {
+  line-height: 40px;
+}
+.scrolltab-medium.center-stack div.scroll_tab_inner > span {
+  line-height: 30px;
+}
+.center-stack div.scroll_tab_inner > span {
+  line-height: 20px;
+}
+.scrolltab-medium.center-stack div.scroll_tab_inner > span, 
+.scrolltab-medium.center-stack div.scroll_tab_inner li {
+  font-size: 20px;
+}
+.scrolltab-medium.center-stack .icomoon {
+  font-size: 1.2em
+}
+.scrolltab-large.center-stack div.scroll_tab_inner > span, 
+.scrolltab-large.center-stack div.scroll_tab_inner li {
+  font-size: 24px;
+}
+.scrolltab-large.center-stack .icomoon {
+  font-size: 1.5em
+}
+.center-stack div.scroll_tab_inner > span, 
+.center-stack div.scroll_tab_inner li {
+  font-size: 12px;
+}
+.scrolltab-text-medium .icomoon {
+  font-size: 1em
+}
+.center-stack div.scroll_tab_inner > span .icomoon-wrap {
+  text-align: center;
+  display: block;
 }

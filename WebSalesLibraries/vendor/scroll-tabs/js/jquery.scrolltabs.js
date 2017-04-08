@@ -104,6 +104,19 @@
         '-o-user-select': 'none',
         'user-select': 'none'
       });
+
+      // Assign relative position for empty text iconmoon
+      $('.scroll_tab_inner > '+_this.itemTag, _this).each(function(index, el) {
+        if (!$(el).text()) {
+          var height = $(el).height();
+          var iconHeight = $(el).find("i.icomoon").height();
+          $(el).find(".icomoon-wrap").after("&nbsp;");
+          $(el).find("i.icomoon").css({
+            position: 'relative',
+            top: iconHeight/2 + 'px'
+          });
+        }
+      });
       
       
       var size_checking = function(){
@@ -446,8 +459,8 @@
   $.fn.scrollTabs.defaultOptions = {
     scroll_distance: 300,
     scroll_duration: 300,
-    left_arrow_size: 26,
-    right_arrow_size: 26,
+    left_arrow_size: 42,
+    right_arrow_size: 42,
     click_callback: function(e){
       var val = $(this).attr('rel');
       if(val){

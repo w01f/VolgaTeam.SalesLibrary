@@ -54,6 +54,13 @@
 				}).init();
 			});
 
+			$.each(landingPage.find('.scroll-stripe'), function (key, value)
+			{
+				var stripeBlock = $(value);
+				stripeBlock.scrollTabs();
+				$.SalesPortal.ShortcutsManager.assignShortcutItemHandlers(stripeBlock);
+			});
+
 			landingPage.find('[data-bs-hover-animate]')
 				.mouseenter(function ()
 				{
