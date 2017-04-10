@@ -53,15 +53,15 @@
 					$record['lib_name'] = isset($library) ? $library->name : '';
 
 					$record['tooltip'] = isset($linkRecord['file_name']) && $linkRecord['file_name'] != '' ? $linkRecord['file_name'] : $linkRecord['name'];
-					if (isset($linkRecord['format']) && $linkRecord['format'] != 'other')
-						$formatKey = $linkRecord['format'];
+					if (isset($linkRecord['search_format']) && $linkRecord['search_format'] != 'other')
+						$formatKey = $linkRecord['search_format'];
 					else
 						$formatKey = $linkRecord['file_extension'];
 					if (isset($formatKey) && array_key_exists($formatKey, \Yii::app()->params['tooltips']['wallbin']))
 						$record['tooltip'] = $record['tooltip'] . PHP_EOL . \Yii::app()->params['tooltips']['wallbin'][$formatKey];
 
 					$type = $linkRecord['type'];
-					switch ($linkRecord['format'])
+					switch ($linkRecord['search_format'])
 					{
 						case 'video':
 						case 'wmv':
@@ -69,7 +69,7 @@
 							$record['file_type'] = 'video';
 							break;
 						case 'quicksite':
-							$record['file_type'] = $linkRecord['format'];
+							$record['file_type'] = $linkRecord['search_format'];
 							break;
 						default:
 							if ($type == 5)
@@ -77,7 +77,7 @@
 							if ($type == 8)
 								$record['file_type'] = 'url';
 							else
-								$record['file_type'] = $linkRecord['format'];
+								$record['file_type'] = $linkRecord['search_format'];
 							break;
 					}
 
@@ -119,7 +119,7 @@
 					else if ($fileInfo->isFile)
 					{
 						$record['url_header'] = 'DownloadURL';
-						$record['url'] = FileInfo::getFileMIME($linkRecord['format']) . ':' .
+						$record['url'] = FileInfo::getFileMIME($linkRecord['original_format']) . ':' .
 							(isset($fileInfo->name) ? $fileInfo->name : $linkRecord['file_name']) . ':' .
 							str_replace('SalesLibraries/SalesLibraries', 'SalesLibraries', Yii::app()->getBaseUrl(true) . $fileInfo->link);
 					}
@@ -163,7 +163,7 @@
 									else
 									{
 										$imageFileName = null;
-										switch ($linkRecord['format'])
+										switch ($linkRecord['search_format'])
 										{
 											case 'app':
 											case 'doc':
@@ -185,7 +185,7 @@
 											case 'internal shortcut':
 											case 'internal window':
 											case 'internal link':
-												$imageFileName = $linkRecord['format'];
+												$imageFileName = $linkRecord['search_format'];
 												break;
 											default:
 												$fileExtension = $linkRecord['file_extension'];

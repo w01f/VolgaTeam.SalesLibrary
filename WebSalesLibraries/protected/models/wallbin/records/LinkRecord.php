@@ -142,6 +142,9 @@
 						case 'qpageId':
 							LinkQPageRecord::addLinkQPageRelation($linkRecord->id, $value);
 							break;
+						case 'bundleItems':
+							LinkBundleRecord::updateData($link['id'], $link['libraryId'], $value);
+							break;
 					}
 				}
 				$linkRecord->settings = CJSON::encode($link['extendedProperties']);

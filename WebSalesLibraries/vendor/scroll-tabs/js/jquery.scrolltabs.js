@@ -117,6 +117,18 @@
           });
         }
       });
+
+      $('.scroll_tab_inner > '+_this.itemTag, _this).each(function(index, el) {
+          if (!$(el).find('.item-text').text()) {
+              var height = $(el).height();
+              var iconHeight = $(el).find("i.icomoon").height();
+              $(el).find(".icomoon-wrap").after("&nbsp;");
+              $(el).find("i.icomoon").css({
+                  position: 'relative',
+                  top: iconHeight/2 + 'px'
+              });
+          }
+      });
       
       
       var size_checking = function(){

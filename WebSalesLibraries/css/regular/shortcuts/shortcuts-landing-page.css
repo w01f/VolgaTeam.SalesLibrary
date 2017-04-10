@@ -25,7 +25,7 @@
     text-decoration: inherit;
     outline: none;
     color: inherit;
-    display: block;
+    display: inline;
     -moz-user-select: none;
 }
 

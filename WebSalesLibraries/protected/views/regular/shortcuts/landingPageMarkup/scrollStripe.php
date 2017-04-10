@@ -33,13 +33,13 @@
                         <? if ($contentBlock->iconPosition == \application\models\shortcuts\models\landing_page\regular_markup\ScrollStripeBlock::IconPositionTop): ?>
                             <div class="icomoon-wrap">
                         <? endif; ?>
-                        <i class="icomoon<? if (!empty($stripeItem->iconSize)): ?>icomoon-<? echo $stripeItem->iconSize; ?><? endif; ?> <? echo $stripeItem->icon; ?>"
+                        <i class="icomoon<? if (!empty($stripeItem->iconSize)): ?> icomoon-<? echo $stripeItem->iconSize; ?><? endif; ?> <? echo $stripeItem->icon; ?>"
                            style="color: <? echo '#'.$stripeItem->iconColor; ?>"></i>
                         <? if ($contentBlock->iconPosition == \application\models\shortcuts\models\landing_page\regular_markup\ScrollStripeBlock::IconPositionTop): ?>
                             </div>
                         <? endif; ?>
                     <? endif; ?>
-                    <span style="<? echo $this->renderPartial('landingPageMarkup/styleTextAppearance', array('textAppearance' => $stripeItem->getTextAppearance()), true); ?>"><? echo $stripeItem->text;?></span>
+                    <span class="item-text" style="<? echo $this->renderPartial('landingPageMarkup/styleTextAppearance', array('textAppearance' => $stripeItem->getTextAppearance()), true); ?>"><? echo $stripeItem->text;?></span>
                 </a>
           </span>
 	<? endforeach; ?>

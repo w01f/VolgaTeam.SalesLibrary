@@ -34,4 +34,9 @@
 		 * @soap
 		 */
 		public $hoverTip;
+		/**
+		 * @var bool
+		 * @soap
+		 */
+		public $useAsThumbnail;
 	}

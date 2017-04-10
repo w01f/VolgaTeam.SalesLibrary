@@ -56,7 +56,8 @@
 				'path' => 'link.file_relative_path as path',
 				'file_name' => 'link.file_name as file_name',
 				'file_extension' => 'link.file_extension as file_extension',
-				'format' => 'max(link.search_format) as format',
+				'original_format' => 'max(link.original_format) as original_format',
+				'search_format' => 'max(link.search_format) as search_format',
 				'extended_properties' => 'max(link.settings) as extended_properties',
 			);
 
@@ -175,6 +176,8 @@
 								(select pv.relative_path from tbl_preview pv where pv.id_container=link.id_preview and pv.type='mp4 thumb' " . $thumbnailCondition . ")										
 							when link.original_format='ppt' or link.original_format='doc' or link.original_format='pdf' then
 								(select pv.relative_path from tbl_preview pv where pv.id_container=link.id_preview and pv.type='thumbs_phone' " . $thumbnailCondition . ")
+							when link.original_format='link bundle' then
+								(select pv.relative_path from tbl_preview pv join tbl_link child_link on child_link.id_preview=pv.id_container join tbl_link_bundle lb on lb.id_link=child_link.id where lb.id_bundle=link.id and lb.use_as_thumbnail=1 and (pv.type='thumbs_phone' or pv.type='mp4 thumb') " . $thumbnailCondition . ")
 							end as thumbnail";
 						break;
 				}
