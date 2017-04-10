@@ -19,5 +19,8 @@
 
 		/// <remarks/>
 		string hoverTip { get; set; }
+
+		/// <remarks/>
+		bool useAsThumbnail { get; set; }
 	}
 }

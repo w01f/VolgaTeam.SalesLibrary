@@ -1175,6 +1175,8 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         
         private string hoverTipField;
         
+        private bool useAsThumbnailField;
+        
         /// <remarks/>
         public int revenueType {
             get {
@@ -1294,6 +1296,16 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
                 this.hoverTipField = value;
             }
         }
+        
+        /// <remarks/>
+        public bool useAsThumbnail {
+            get {
+                return this.useAsThumbnailField;
+            }
+            set {
+                this.useAsThumbnailField = value;
+            }
+        }
     }
     
     /// <remarks/>
@@ -1395,6 +1407,8 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         
         private string hoverTipField;
         
+        private bool useAsThumbnailField;
+        
         /// <remarks/>
         public string header {
             get {
@@ -1502,6 +1516,16 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
             }
             set {
                 this.hoverTipField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool useAsThumbnail {
+            get {
+                return this.useAsThumbnailField;
+            }
+            set {
+                this.useAsThumbnailField = value;
             }
         }
     }
@@ -1536,6 +1560,8 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         
         private string hoverTipField;
         
+        private bool useAsThumbnailField;
+        
         /// <remarks/>
         public string header {
             get {
@@ -1643,6 +1669,16 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
             }
             set {
                 this.hoverTipField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool useAsThumbnail {
+            get {
+                return this.useAsThumbnailField;
+            }
+            set {
+                this.useAsThumbnailField = value;
             }
         }
     }
@@ -1686,6 +1722,8 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         private string titleField;
         
         private string hoverTipField;
+        
+        private bool useAsThumbnailField;
         
         /// <remarks/>
         public string header {
@@ -1846,6 +1884,16 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
                 this.hoverTipField = value;
             }
         }
+        
+        /// <remarks/>
+        public bool useAsThumbnail {
+            get {
+                return this.useAsThumbnailField;
+            }
+            set {
+                this.useAsThumbnailField = value;
+            }
+        }
     }
     
     /// <remarks/>
@@ -1869,6 +1917,8 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         private string titleField;
         
         private string hoverTipField;
+        
+        private bool useAsThumbnailField;
         
         /// <remarks/>
         public string url {
@@ -1939,6 +1989,16 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
                 this.hoverTipField = value;
             }
         }
+        
+        /// <remarks/>
+        public bool useAsThumbnail {
+            get {
+                return this.useAsThumbnailField;
+            }
+            set {
+                this.useAsThumbnailField = value;
+            }
+        }
     }
     
     /// <remarks/>
@@ -1962,6 +2022,8 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         private string titleField;
         
         private string hoverTipField;
+        
+        private bool useAsThumbnailField;
         
         /// <remarks/>
         public string libraryLinkId {
@@ -2032,6 +2094,16 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
                 this.hoverTipField = value;
             }
         }
+        
+        /// <remarks/>
+        public bool useAsThumbnail {
+            get {
+                return this.useAsThumbnailField;
+            }
+            set {
+                this.useAsThumbnailField = value;
+            }
+        }
     }
     
     /// <remarks/>
@@ -2053,6 +2125,8 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
         private string titleField;
         
         private string hoverTipField;
+        
+        private bool useAsThumbnailField;
         
         /// <remarks/>
         public string id {
@@ -2111,6 +2185,16 @@ namespace SalesLibraries.ServiceConnector.WallbinContentService {
             }
             set {
                 this.hoverTipField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool useAsThumbnail {
+            get {
+                return this.useAsThumbnailField;
+            }
+            set {
+                this.useAsThumbnailField = value;
             }
         }
     }

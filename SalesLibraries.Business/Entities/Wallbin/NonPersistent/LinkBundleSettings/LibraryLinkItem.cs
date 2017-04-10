@@ -22,6 +22,9 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkBundleSetti
 		[JsonIgnore]
 		public bool IsDead => TargetLink == null;
 
+		[JsonIgnore]
+		public bool ThumbnailAvailable => (TargetLink is PreviewableLink && !(TargetLink is ExcelLink)) || TargetLink is ImageLink;
+
 		public LibraryLinkItem()
 		{
 			ItemType = LinkBundleItemType.LibraryLink;

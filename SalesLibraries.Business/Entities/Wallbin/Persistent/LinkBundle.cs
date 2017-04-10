@@ -111,7 +111,9 @@ namespace SalesLibraries.Business.Entities.Wallbin.Persistent
 
 		public LibraryLinkItem AddLibraryLink(LibraryObjectLink libraryObjectLink)
 		{
+			var defaulUseAsThumbnail = Settings.Items.All(item => !item.UseAsThumbnail);
 			var libraryLinkItem = AddBundleItem<LibraryLinkItem>(libraryObjectLink.ExtId);
+			libraryLinkItem.UseAsThumbnail = defaulUseAsThumbnail && libraryLinkItem.ThumbnailAvailable;
 			return libraryLinkItem;
 		}
 

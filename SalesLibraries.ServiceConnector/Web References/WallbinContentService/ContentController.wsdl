@@ -658,6 +658,7 @@
           <xsd:element name="image" type="xsd:string" />
           <xsd:element name="title" type="xsd:string" />
           <xsd:element name="hoverTip" type="xsd:string" />
+          <xsd:element name="useAsThumbnail" type="xsd:boolean" />
         </xsd:all>
       </xsd:complexType>
       <xsd:complexType name="LibraryLinkBundleItem">
@@ -669,6 +670,7 @@
           <xsd:element name="image" type="xsd:string" />
           <xsd:element name="title" type="xsd:string" />
           <xsd:element name="hoverTip" type="xsd:string" />
+          <xsd:element name="useAsThumbnail" type="xsd:boolean" />
         </xsd:all>
       </xsd:complexType>
       <xsd:complexType name="UrlLinkBundleItem">
@@ -680,6 +682,7 @@
           <xsd:element name="image" type="xsd:string" />
           <xsd:element name="title" type="xsd:string" />
           <xsd:element name="hoverTip" type="xsd:string" />
+          <xsd:element name="useAsThumbnail" type="xsd:boolean" />
         </xsd:all>
       </xsd:complexType>
       <xsd:complexType name="LinkBundleLaunchScreenItem">
@@ -700,6 +703,7 @@
           <xsd:element name="image" type="xsd:string" />
           <xsd:element name="title" type="xsd:string" />
           <xsd:element name="hoverTip" type="xsd:string" />
+          <xsd:element name="useAsThumbnail" type="xsd:boolean" />
         </xsd:all>
       </xsd:complexType>
       <xsd:complexType name="LinkBundleInfoItem">
@@ -715,6 +719,7 @@
           <xsd:element name="image" type="xsd:string" />
           <xsd:element name="title" type="xsd:string" />
           <xsd:element name="hoverTip" type="xsd:string" />
+          <xsd:element name="useAsThumbnail" type="xsd:boolean" />
         </xsd:all>
       </xsd:complexType>
       <xsd:complexType name="LinkBundleStrategyItem">
@@ -730,6 +735,7 @@
           <xsd:element name="image" type="xsd:string" />
           <xsd:element name="title" type="xsd:string" />
           <xsd:element name="hoverTip" type="xsd:string" />
+          <xsd:element name="useAsThumbnail" type="xsd:boolean" />
         </xsd:all>
       </xsd:complexType>
       <xsd:complexType name="LinkBundleRevenueItem">
@@ -746,6 +752,7 @@
           <xsd:element name="image" type="xsd:string" />
           <xsd:element name="title" type="xsd:string" />
           <xsd:element name="hoverTip" type="xsd:string" />
+          <xsd:element name="useAsThumbnail" type="xsd:boolean" />
         </xsd:all>
       </xsd:complexType>
       <xsd:complexType name="LinkBundleRevenueInfoItemArray">

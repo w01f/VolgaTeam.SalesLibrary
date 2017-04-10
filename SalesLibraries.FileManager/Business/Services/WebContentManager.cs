@@ -657,6 +657,7 @@ namespace SalesLibraries.FileManager.Business.Services
 					linkItem.title = sourceBundleItem.Title;
 					linkItem.image = Convert.ToBase64String((byte[])imageConverter.ConvertTo(sourceBundleItem.Image, typeof(byte[])));
 					linkItem.hoverTip = sourceBundleItem.HoverTip;
+					linkItem.useAsThumbnail = sourceBundleItem.UseAsThumbnail;
 					return linkItem;
 				})
 				.ToArray();

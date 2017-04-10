@@ -8,7 +8,7 @@ using SalesLibraries.Business.Entities.Wallbin.Common.Constants;
 
 namespace SalesLibraries.Business.Entities.Wallbin.Persistent.Links
 {
-	class ImageLink : LibraryFileLink, IThumbnailSettingsHolder
+	public class ImageLink : LibraryFileLink, IThumbnailSettingsHolder
 	{
 		#region Nonpersistent Properties
 		[NotMapped, JsonIgnore]

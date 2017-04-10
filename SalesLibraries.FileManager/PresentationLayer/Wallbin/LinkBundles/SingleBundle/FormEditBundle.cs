@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -7,6 +8,7 @@ using DevComponents.DotNetBar.Metro;
 using DevExpress.XtraBars;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid;
+using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using DevExpress.XtraTab;
@@ -15,6 +17,7 @@ using SalesLibraries.Business.Entities.Interfaces;
 using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkBundleSettings;
 using SalesLibraries.Business.Entities.Wallbin.Persistent;
+using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.Common.Helpers;
 using SalesLibraries.CommonGUI.Common;
 using SalesLibraries.CommonGUI.CustomDialog;
@@ -232,12 +235,33 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Singl
 
 		private void OnBundleItemsCustomRowCellEdit(object sender, CustomRowCellEditEventArgs e)
 		{
-			if (e.Column != gridColumnBundleItemsName) return;
 			var bundleItem = gridViewBundleItems.GetRow(e.RowHandle);
-			if (bundleItem is UrlItem)
-				e.RepositoryItem = repositoryItemTextEditBundleItems;
-			else
-				e.RepositoryItem = repositoryItemButtonEditBundleItemsDisabledText;
+			if (e.Column == gridColumnBundleItemsName)
+			{
+				if (bundleItem is UrlItem)
+					e.RepositoryItem = repositoryItemTextEditBundleItems;
+				else
+					e.RepositoryItem = repositoryItemButtonEditBundleItemsDisabledText;
+			}
+			if (e.Column == gridColumnBundleItemsUseAsThumbnail)
+			{
+				if (bundleItem is LibraryLinkItem && ((LibraryLinkItem)bundleItem).ThumbnailAvailable)
+					e.RepositoryItem = repositoryItemCheckEditBundleItems;
+				else
+				{
+					repositoryItemCheckEditBundleItemsDisabled.Enabled = false;
+					e.RepositoryItem = repositoryItemCheckEditBundleItemsDisabled;
+				}
+			}
+		}
+
+		private void OnBundleItemsShowingEditor(object sender, CancelEventArgs e)
+		{
+			if (gridViewBundleItems.FocusedColumn == gridColumnBundleItemsUseAsThumbnail)
+			{
+				var bundleItem = gridViewBundleItems.GetFocusedRow();
+				e.Cancel = !(bundleItem is LibraryLinkItem && ((LibraryLinkItem)bundleItem).ThumbnailAvailable);
+			}
 		}
 
 		private void OnBundleItemsRowAfterDrop(object sender, DragEventArgs e)
@@ -301,6 +325,25 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.LinkBundles.Singl
 					xtraTabControl.SelectedTabPage = xtraTabControl.TabPages.OfType<StrategyEditControl>().FirstOrDefault();
 					break;
 			}
+		}
+
+		private void OnBundleItemsCellValueChanged(object sender, CellValueChangedEventArgs e)
+		{
+			if (e.Column == gridColumnBundleItemsUseAsThumbnail)
+			{
+				var bundleItem = gridViewBundleItems.GetRow(e.RowHandle) as BaseBundleItem;
+				if (bundleItem != null && bundleItem.UseAsThumbnail)
+				{
+					foreach (var item in _linkBundle.Settings.Items.Where(item => item != bundleItem).ToList())
+						item.UseAsThumbnail = false;
+					gridViewBundleItems.RefreshData();
+				}
+			}
+		}
+
+		private void repositoryItemCheckEditBundleItems_CheckedChanged(object sender, EventArgs e)
+		{
+			gridViewBundleItems.CloseEditor();
 		}
 		#endregion
 	}

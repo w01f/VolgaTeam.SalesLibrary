@@ -61,6 +61,18 @@ namespace SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkBundleSetti
 			}
 		}
 
+		private bool _useAsThumbnail;
+		public bool UseAsThumbnail
+		{
+			get { return _useAsThumbnail; }
+			set
+			{
+				if (_useAsThumbnail != value)
+					OnSettingsChanged();
+				_useAsThumbnail = value;
+			}
+		}
+
 		public bool Visible { get; set; }
 
 		[JsonIgnore]
