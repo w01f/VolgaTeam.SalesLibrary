@@ -72,7 +72,7 @@
 			if (!isset($folderId) || (isset($folderId) && ($folderId == "" || $folderId == "null")))
 				$folderId = null;
 			$userId = UserIdentity::getCurrentUserId();
-			$columnSettings = TableColumnSettings::createEmpty();
+			$columnSettings = DataColumnSettings::createEmpty();
 			$links = FavoritesLinkRecord::getLinksByFolder($userId, $folderId, $columnSettings);
 			echo CJSON::encode(array(
 				'links' => $links,
@@ -120,7 +120,7 @@
 				$folderId = null;
 			$userId = UserIdentity::getCurrentUserId();
 			$folders = FavoritesFolderRecord::getChildFolders($userId, $folderId);
-			$columnSettings = TableColumnSettings::createEmpty();
+			$columnSettings = DataColumnSettings::createEmpty();
 			$links = FavoritesLinkRecord::getLinksByFolder($userId, $folderId, $columnSettings);
 			$this->renderPartial('foldersAndLinks', array('folders' => $folders, 'links' => $links, 'topLevel' => false), false, true);
 		}

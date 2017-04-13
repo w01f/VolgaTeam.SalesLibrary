@@ -25,8 +25,8 @@
 			$conditionsEncoded = Yii::app()->request->getPost('conditions');
 
 			$conditions = isset($conditionsEncoded) ?
-				SearchConditions::fromJson($conditionsEncoded) :
-				new SearchConditions();
+				TableSearchConditions::fromJson($conditionsEncoded) :
+				new TableSearchConditions();
 
 			$resultDataset = SearchHelper::getDatasetByCondition($conditions, $datasetKey);
 

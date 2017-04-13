@@ -13,7 +13,7 @@
 		public $samePage;
 		public $showTagsSelector;
 
-		/** @var  SearchConditions */
+		/** @var  TableSearchConditions */
 		public $conditions;
 
 		public $enableSubSearch;
@@ -22,6 +22,8 @@
 		public $showSubSearchTemplates;
 		public $subSearchDefaultView;
 		public $subConditions;
+
+		public $buttonColor;
 
 		/** @var  CategoryManager */
 		public $categoryManager;
@@ -54,8 +56,8 @@
 			$queryResult = $xpath->query('//SearchBar/ShowTagsSelector');
 			$this->showTagsSelector = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : true;
 
-			$xpath->query('//Config/SearchCondition');
-			$this->conditions = SearchConditions::fromXml($xpath, $xpath->query('//Config/SearchBar/SearchCondition')->item(0));
+			$queryResult = $xpath->query('//SearchBar/SearchCondition');
+			$this->conditions = TableSearchConditions::fromXml($xpath, $queryResult->item(0));
 
 			$queryResult = $xpath->query('//SearchBar/EnableSubSearch');
 			$this->enableSubSearch = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : false;
@@ -67,6 +69,9 @@
 			$this->showSubSearchTemplates = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : true;
 			$queryResult = $xpath->query('//SearchBar/SubSearchDefault');
 			$this->subSearchDefaultView = $queryResult->length > 0 ? strtolower(trim($queryResult->item(0)->nodeValue)) : 'all';
+
+			$queryResult = $xpath->query('//SearchBar/ButtonColor');
+			$this->buttonColor = $queryResult->length > 0 ? strtolower(trim($queryResult->item(0)->nodeValue)) : null;
 
 			$subSearchConditions = array();
 			$subSearchConditionNodes = $xpath->query('//Config/SearchBar/SubSearchCondition/Item');

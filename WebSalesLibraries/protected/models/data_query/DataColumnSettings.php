@@ -1,28 +1,19 @@
 <?
 
 	/**
-	 * Class TableColumnSettings
+	 * Class DataColumnSettings
 	 */
-	class TableColumnSettings
+	class DataColumnSettings
 	{
-		const ColumnTagCategory = 'tag';
-		const ColumnTagLibrary = 'library';
-		const ColumnTagFileType = 'type';
-		const ColumnTagFileName = 'link';
-		const ColumnTagThumbnail = 'thumbnail';
-		const ColumnTagViewsCount = 'views';
-		const ColumnTagRate = 'rate';
-		const ColumnTagDate = 'date';
-
 		private static $columnTags = array(
-			self::ColumnTagCategory,
-			self::ColumnTagLibrary,
-			self::ColumnTagFileType,
-			self::ColumnTagFileName,
-			self::ColumnTagThumbnail,
-			self::ColumnTagViewsCount,
-			self::ColumnTagRate,
-			self::ColumnTagDate,
+			QuerySettings::DataTagCategory,
+			QuerySettings::DataTagLibrary,
+			QuerySettings::DataTagFileType,
+			QuerySettings::DataTagFileName,
+			QuerySettings::DataTagThumbnail,
+			QuerySettings::DataTagViewsCount,
+			QuerySettings::DataTagRate,
+			QuerySettings::DataTagDate,
 		);
 
 		public $enable;
@@ -40,42 +31,42 @@
 			$this->fullWidth = false;
 			switch ($tag)
 			{
-				case self::ColumnTagCategory:
+				case QuerySettings::DataTagCategory:
 					$this->enable = Yii::app()->params['search_options']['hide_tag'] != true;
 					$this->order = 1;
 					$this->title = Yii::app()->params['tags']['column_name'];
 					break;
-				case self::ColumnTagLibrary:
+				case QuerySettings::DataTagLibrary:
 					$this->enable = Yii::app()->params['search_options']['hide_libraries'] != true;
 					$this->order = 2;
 					$this->title = Yii::app()->params['stations']['column_name'];
 					break;
-				case self::ColumnTagFileType:
+				case QuerySettings::DataTagFileType:
 					$this->enable = true;
 					$this->order = 3;
 					$this->title = 'Type';
 					break;
-				case self::ColumnTagFileName:
+				case QuerySettings::DataTagFileName:
 					$this->enable = true;
 					$this->order = 4;
 					$this->title = 'Link';
 					break;
-				case self::ColumnTagThumbnail:
+				case QuerySettings::DataTagThumbnail:
 					$this->enable = false;
 					$this->order = 9999;
 					$this->title = 'Thumbnail';
 					break;
-				case self::ColumnTagViewsCount:
+				case QuerySettings::DataTagViewsCount:
 					$this->enable = true;
 					$this->order = 6;
 					$this->title = 'Views';
 					break;
-				case self::ColumnTagRate:
+				case QuerySettings::DataTagRate:
 					$this->enable = true;
 					$this->order = 7;
 					$this->title = 'Rating';
 					break;
-				case self::ColumnTagDate:
+				case QuerySettings::DataTagDate:
 					$this->enable = true;
 					$this->order = 8;
 					$this->title = 'Date';
@@ -164,12 +155,46 @@
 			{
 				switch ($key)
 				{
-					case self::ColumnTagCategory:
-					case self::ColumnTagLibrary:
-					case self::ColumnTagViewsCount:
-					case self::ColumnTagRate:
-					case self::ColumnTagDate:
-					case self::ColumnTagThumbnail:
+					case QuerySettings::DataTagCategory:
+					case QuerySettings::DataTagLibrary:
+					case QuerySettings::DataTagViewsCount:
+					case QuerySettings::DataTagRate:
+					case QuerySettings::DataTagDate:
+					case QuerySettings::DataTagThumbnail:
+						$value->enable = false;
+						break;
+					case QuerySettings::DataTagFileType:
+					case QuerySettings::DataTagFileName:
+						$value->enable = true;
+						break;
+
+				}
+			}
+
+			return $columnSettingsList;
+		}
+
+		/**
+		 * @return array()
+		 */
+		public static function createLinkFeedColumns()
+		{
+			$columnSettingsList = self::createEmpty();
+
+			foreach ($columnSettingsList as $key => $value)
+			{
+				switch ($key)
+				{
+					case QuerySettings::DataTagCategory:
+					case QuerySettings::DataTagLibrary:
+					case QuerySettings::DataTagFileType:
+					case QuerySettings::DataTagFileName:
+					case QuerySettings::DataTagThumbnail:
+					case QuerySettings::DataTagViewsCount:
+					case QuerySettings::DataTagDate:
+						$value->enable = true;
+						break;
+					case QuerySettings::DataTagRate:
 						$value->enable = false;
 						break;
 				}

@@ -79,7 +79,7 @@
 					QuerySettings::SettingsTagColumns => $columnSettings
 				));
 			/** @var CDbCommand $dbCommand */
-			$dbCommand = DataTableHelper::buildQuery($querySettings);
+			$dbCommand = DataQueryHelper::buildQuery($querySettings);
 			$linkRecords = $dbCommand->queryAll();
 
 			$links = DataTableHelper::formatRegularData($linkRecords, $columnSettings);

@@ -5,16 +5,16 @@
 	use application\models\link_feed\LinkFeedItem;
 	use application\models\link_feed\LinkFeedManager;
 	use application\models\link_feed\LinkFeedSettings;
-	use application\models\link_feed\TrendingFeedSettings;
+	use application\models\link_feed\SearchFeedSettings;
 
 	/**
-	 * Class TrendingBlock
+	 * Class SearchFeedBlock
 	 */
-	class TrendingBlock extends BlockContainer
+	class SearchFeedBlock extends BlockContainer
 	{
 		public $id;
 
-		/** @var  TrendingFeedSettings */
+		/** @var  SearchFeedSettings */
 		public $settings;
 
 		/**
@@ -24,7 +24,7 @@
 		public function __construct($parentShortcut, $parentBlock)
 		{
 			parent::__construct($parentShortcut, $parentBlock);
-			$this->type = 'trending';
+			$this->type = 'search-feed';
 			$this->id = uniqid();
 		}
 
@@ -35,7 +35,7 @@
 		protected function configureFromXml($xpath, $contextNode)
 		{
 			ContentBlock::configureFromXml($xpath, $contextNode);
-			$this->settings = LinkFeedSettings::fromXml(LinkFeedSettings::FeedTypeTrending, $xpath, $contextNode);
+			$this->settings = LinkFeedSettings::fromXml(LinkFeedSettings::FeedTypeSearch, $xpath, $contextNode);
 		}
 
 		/** @return LinkFeedItem[] */

@@ -1,23 +1,16 @@
 <?
-	namespace application\models\trending;
+	namespace application\models\link_feed;
 
 	/**
-	 * Class TrendingControlSettings
+	 * Class FeedControlSettings
 	 */
-	class TrendingControlSettings
+	abstract class FeedControlSettings
 	{
-		const ControlTagDateToday = 'today';
-		const ControlTagDateWeek = 'week';
-		const ControlTagDateMonth = 'month';
-
 		const ControlTagLinkFormatPowerPoint = 'ppt';
 		const ControlTagLinkFormatVideo = 'video';
 		const ControlTagLinkFormatDocuments = 'document';
 
 		public static $tags = array(
-			self::ControlTagDateToday,
-			self::ControlTagDateWeek,
-			self::ControlTagDateMonth,
 			self::ControlTagLinkFormatPowerPoint,
 			self::ControlTagLinkFormatDocuments,
 			self::ControlTagLinkFormatVideo
@@ -27,43 +20,24 @@
 		public $title;
 
 		/**
-		 * @param $tag
-		 * @return TrendingControlSettings
+		 * @param $tag string
 		 */
-		public static function createDefault($tag)
-		{
-			$instance = new self();
-
+		protected function initDefaults($tag){
 			switch ($tag)
 			{
-				case self::ControlTagDateToday:
-					$instance->enabled = true;
-					$instance->title = 'today';
-					break;
-				case self::ControlTagDateWeek:
-					$instance->enabled = true;
-					$instance->title = 'this week';
-					break;
-				case self::ControlTagDateMonth:
-					$instance->enabled = true;
-					$instance->title = 'this month';
-					break;
-
 				case self::ControlTagLinkFormatPowerPoint:
-					$instance->enabled = true;
-					$instance->title = 'presentations';
+					$this->enabled = true;
+					$this->title = 'presentations';
 					break;
 				case self::ControlTagLinkFormatDocuments:
-					$instance->enabled = true;
-					$instance->title = 'documents';
+					$this->enabled = true;
+					$this->title = 'documents';
 					break;
 				case self::ControlTagLinkFormatVideo:
-					$instance->enabled = true;
-					$instance->title = 'video';
+					$this->enabled = true;
+					$this->title = 'video';
 					break;
 			}
-
-			return $instance;
 		}
 
 		/**

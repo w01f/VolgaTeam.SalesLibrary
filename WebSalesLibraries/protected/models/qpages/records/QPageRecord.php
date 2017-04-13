@@ -131,7 +131,7 @@
 					QuerySettings::SettingsTagColumns => $columnSettings
 				));
 			/** @var CDbCommand $dbCommand */
-			$dbCommand = DataTableHelper::buildQuery($querySettings);
+			$dbCommand = DataQueryHelper::buildQuery($querySettings);
 			$dbCommand = $dbCommand->order('qpl.list_order, link.name');
 			$linkRecords = $dbCommand->queryAll();
 			$links = DataTableHelper::formatExtendedData($linkRecords, $columnSettings, array('linkInPageId', 'listOrder'));

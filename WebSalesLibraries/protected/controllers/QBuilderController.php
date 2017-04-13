@@ -186,7 +186,7 @@
 		public function actionGetLinkCart()
 		{
 			$userId = UserIdentity::getCurrentUserId();
-			$columnSettings = TableColumnSettings::createLinkCartColumns();
+			$columnSettings = DataColumnSettings::createLinkCartColumns();
 			$links = UserLinkCartRecord::getLinksByUser($userId, $columnSettings);
 			echo CJSON::encode(array(
 				'links' => $links,
@@ -316,7 +316,7 @@
 			{
 				/** @var $page QPageRecord */
 				$page = QPageRecord::model()->findByPk($selectedPageId);
-				$columnSettings = TableColumnSettings::createEmpty();
+				$columnSettings = DataColumnSettings::createEmpty();
 				$links = $page->getPageLinks($columnSettings);
 				echo CJSON::encode(array(
 					'links' => $links,

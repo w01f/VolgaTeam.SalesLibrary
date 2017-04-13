@@ -52,7 +52,7 @@
 			'application.models.wallbin.models.cadmin.settings.*',
 			'application.models.wallbin.records.*',
 			'application.models.search.*',
-			'application.models.data_table.*',
+			'application.models.data_query.*',
 			'application.models.preview.common.*',
 			'application.models.preview.config.*',
 			'application.models.preview.internal_links.*',
@@ -64,7 +64,7 @@
 			'application.models.services_data.cadmin.models.connection.*',
 			'application.models.services_data.cadmin.models.library_data.*',
 			'application.models.services_data.cadmin.models.versions_management.*',
-			'application.models.trending.*',
+			'application.models.link_feed.*',
 			'application.models.news_block.*',
 		),
 		'behaviors' => array(

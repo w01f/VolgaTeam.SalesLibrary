@@ -32,14 +32,14 @@
 
 			$.SalesPortal.ShortcutsManager.assignShortcutItemHandlers(landingPage);
 
-			$.each(landingPage.find('.trending-bar'), function (key, value)
+			$.each(landingPage.find('.link-feed'), function (key, value)
 			{
-				var trendingBar = $(value);
-				var barId = trendingBar.prop('id').replace('trending-bar-', '');
-				var trendingSettings = $.parseJSON(trendingBar.find('.service-data .encoded-object').text());
-				new $.SalesPortal.TrendingBar({
-					containerId: barId,
-					settings: trendingSettings
+				var linkFeed = $(value);
+				var feedId = linkFeed.prop('id').replace('link-feed-', '');
+				var feedSettings = $.parseJSON(linkFeed.find('.service-data .encoded-object').text());
+				new $.SalesPortal.LinkFeed({
+					containerId: feedId,
+					settings: feedSettings
 				}).init();
 			});
 

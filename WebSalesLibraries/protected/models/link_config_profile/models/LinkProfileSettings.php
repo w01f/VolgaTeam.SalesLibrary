@@ -121,7 +121,7 @@
 		 */
 		public function getAffectedLinks()
 		{
-			$searchConditions = new SearchConditions();
+			$searchConditions = new TableSearchConditions();
 			$searchConditions->text = $this->libraryLinkTags;
 			$searchConditions->textExactMatch = true;
 			$searchConditions->libraries = isset($this->libraryReferences) ? $this->libraryReferences : array();

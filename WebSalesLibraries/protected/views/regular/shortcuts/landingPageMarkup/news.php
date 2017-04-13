@@ -4,15 +4,47 @@
 	/** @var \application\models\shortcuts\models\landing_page\regular_markup\NewsItem[] $newsItems */
 	$newsItems = $contentBlock->items;
 ?>
+<style>
+    #news-block-<? echo $contentBlock->id; ?> .panel-footer .pagination a
+    {
+        <?if(!empty($contentBlock->settings->style->buttonBackColor)):?>
+            background-color: <? echo '#'.$contentBlock->settings->style->buttonBackColor;?> !important;
+        <?endif;?>
+        <?if(!empty($contentBlock->settings->style->buttonBorderColor)):?>
+            border-color: <? echo '#'.$contentBlock->settings->style->buttonBorderColor;?> !important;
+        <?endif;?>
+    }
+
+    #news-block-<? echo $contentBlock->id; ?> .panel-footer .pagination a .glyphicon
+    {
+        <?if(!empty($contentBlock->settings->style->buttonIconColor)):?>
+            color: <? echo '#'.$contentBlock->settings->style->buttonIconColor;?> !important;
+        <?endif;?>
+    }
+
+    #news-block-<? echo $contentBlock->id; ?> .news-item
+    {
+        <?if(!empty($contentBlock->settings->style->dividerColor)):?>
+            border-bottom-color: <? echo '#'.$contentBlock->settings->style->dividerColor;?> !important;
+        <?endif;?>
+    }
+</style>
 <div id="news-block-<? echo $contentBlock->id; ?>" class="news-block">
     <div class="service-data">
         <div class="encoded-object">
 			<? echo CJSON::encode($contentBlock->settings); ?>
         </div>
     </div>
-    <div class="panel panel-default">
-        <div class="panel-heading"><span
-                    class="glyphicon glyphicon-list-alt"></span><b><? echo $contentBlock->settings->title; ?></b></div>
+    <div class="panel panel-default"
+         style="<? if (!empty($contentBlock->settings->style->outsideBorderColor)): ?>border-color: <? echo '#' . $contentBlock->settings->style->outsideBorderColor; ?>;<? endif; ?>">
+        <div class="panel-heading" style="<? if (!empty($contentBlock->settings->style->headerColor)): ?>background-color: <? echo '#' . $contentBlock->settings->style->headerColor; ?>;<? endif; ?>">
+	        <? if (!empty($contentBlock->settings->icon)): ?>
+                <i class="icomoon icomoon-lg <? echo $contentBlock->settings->icon; ?>" style="<? if (!empty($contentBlock->settings->style->headerIconColor)): ?>color: <? echo '#' . $contentBlock->settings->style->headerIconColor; ?>;<? endif; ?>"></i>
+	        <? else: ?>
+                <span class="glyphicon glyphicon-list-alt"></span>
+	        <? endif; ?>
+            <strong style="<? if (!empty($contentBlock->settings->style->headerTextColor)): ?>color: <? echo '#' . $contentBlock->settings->style->headerTextColor; ?>;<? endif; ?>"><? echo $contentBlock->settings->title; ?></strong>
+        </div>
         <div class="panel-body">
             <div class="row">
                 <div class="col-xs-12">
@@ -46,6 +78,6 @@
                 </div>
             </div>
         </div>
-        <div class="panel-footer"></div>
+        <div class="panel-footer" style="<? if (!empty($contentBlock->settings->style->footerColor)): ?>background-color: <? echo '#' . $contentBlock->settings->style->footerColor; ?>;<? endif; ?>"></div>
     </div>
 </div>

@@ -2,8 +2,8 @@
 	/** @var $contentBlock \application\models\shortcuts\models\landing_page\regular_markup\TrendingBlock */
 ?>
 
-<? echo $this->renderPartial('../trending/bar', array(
-	'barId' => $contentBlock->id,
-	'trendingSettings' => $contentBlock->settings,
-	'trendingLinks' => $contentBlock->getTrendingLinks(),
+<? echo $this->renderPartial('../link_feed/trendingFeedContainer', array(
+	'feedId' => $contentBlock->id,
+	'feedSettings' => $contentBlock->settings,
+	'feedItems' => $contentBlock->getFeedItems(),
 ), true); ?>

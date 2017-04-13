@@ -37,7 +37,7 @@
 						$instance->startDate = date(Yii::app()->params['mysqlDateFormat'], strtotime($today . ' - 1 days'));
 						break;
 					case "current week":
-						$instance->startDate = date(Yii::app()->params['mysqlDateFormat'], strtotime("last Monday"));
+						$instance->startDate = date(Yii::app()->params['mysqlDateFormat'], strtotime('last monday', strtotime('tomorrow')));
 						break;
 					case "last week":
 						$instance->startDate = date(Yii::app()->params['mysqlDateFormat'], strtotime("Monday last week"));
@@ -74,7 +74,7 @@
 						$instance->endDate = $today;
 						break;
 					case "last week":
-						$instance->endDate = date(Yii::app()->params['mysqlDateFormat'], strtotime("last Monday"));
+						$instance->endDate = date(Yii::app()->params['mysqlDateFormat'], strtotime('last monday', strtotime('tomorrow')));
 						break;
 					default:
 						if (strstr($endDateText, ' days ago'))

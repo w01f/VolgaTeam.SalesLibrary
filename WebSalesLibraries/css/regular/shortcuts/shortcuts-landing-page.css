@@ -40,3 +40,13 @@
 {
     background-color: #aaaaaa !important;
 }
+
+#content .shortcuts-page-content.landing-page .form-control
+{
+    height: 42px;
+}
+
+#content .shortcuts-page-content.landing-page .btn
+{
+    line-height: 2;
+}

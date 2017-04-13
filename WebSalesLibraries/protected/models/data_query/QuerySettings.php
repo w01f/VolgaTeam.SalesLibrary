@@ -5,6 +5,15 @@
 	 */
 	class QuerySettings
 	{
+		const DataTagCategory = 'tag';
+		const DataTagLibrary = 'library';
+		const DataTagFileType = 'type';
+		const DataTagFileName = 'link';
+		const DataTagThumbnail = 'thumbnail';
+		const DataTagViewsCount = 'views';
+		const DataTagRate = 'rate';
+		const DataTagDate = 'date';
+
 		const SettingsTagFrom = 'from';
 		const SettingsTagQueryFields = 'queryFields';
 		const SettingsTagInnerJoin = 'innerJoin';
@@ -12,6 +21,8 @@
 		const SettingsTagWhere = 'where';
 		const SettingsTagCategoryWhere = 'categoryWhere';
 		const SettingsTagGroup = 'group';
+		const SettingsTagSort = 'sort';
+		const SettingsTagLimit = 'limit';
 
 		const SettingsTagColumns = 'columnsSettings';
 
@@ -34,6 +45,8 @@
 		public $whereConditions;
 		/** @var array */
 		public $groupFields;
+		/** @var int */
+		public $limit;
 
 		/** @var array */
 		public $dateQuerySettings;
@@ -44,6 +57,10 @@
 		/** @var array */
 		public $thumbnailQuerySettings;
 
+		/** @var array */
+		public $sortSettings;
+
+
 		public function __construct()
 		{
 			$this->from = 'tbl_link link';
@@ -51,6 +68,7 @@
 			$this->baseQueryFields = array(
 				'id' => 'max(link.id) as id',
 				'id_library' => 'max(link.id_library) as id_library',
+				'library_name' => 'max(lib.name) as library_name',
 				'name' => 'max(link.name) as name',
 				'type' => 'max(link.type) as type',
 				'path' => 'link.file_relative_path as path',
@@ -62,10 +80,13 @@
 			);
 
 			$this->customQueryFields = array();
-			$this->innerJoin = array();
+			$this->innerJoin = array(
+				'tbl_library lib' => 'lib.id = link.id_library'
+			);
 			$this->leftJoin = array();
 			$this->whereConditions = array();
 			$this->groupFields = array('link.id');
+			$this->limit = 0;
 
 			$defaultDateSettings = new SearchDateSettings();
 			$this->dateQuerySettings = array(
@@ -89,6 +110,8 @@
 			$this->thumbnailQuerySettings = array(
 				'mode' => $defaultThumbnailSettings->mode
 			);
+
+			$this->sortSettings = array();
 		}
 
 		private function configureQueryFromDateSettings()
@@ -103,7 +126,7 @@
 			{
 				switch ($key)
 				{
-					case TableColumnSettings::ColumnTagCategory:
+					case self::DataTagCategory:
 						if ($value->enable)
 						{
 							$this->baseQueryFields['tag'] = 'glcat.tag as tag';
@@ -111,11 +134,11 @@
 								'glcat.id_link=link.id';
 						}
 						break;
-					case TableColumnSettings::ColumnTagRate:
+					case self::DataTagRate:
 						if ($value->enable)
 							$this->baseQueryFields['rate'] = '(select (round(avg(lr.value)*2)/2) as value from tbl_link_rate lr where lr.id_link=link.id) as rate';
 						break;
-					case TableColumnSettings::ColumnTagViewsCount:
+					case self::DataTagViewsCount:
 						if ($value->enable)
 						{
 							if (!empty($this->viewCountQuerySettings['startDate']) && !empty($this->viewCountQuerySettings['endDate']))
@@ -159,7 +182,7 @@
 							}
 						}
 						break;
-					case TableColumnSettings::ColumnTagThumbnail:
+					case self::DataTagThumbnail:
 						switch ($this->thumbnailQuerySettings['mode'])
 						{
 							case SearchThumbnailSettings::ThumbnailModeRandom:
@@ -175,9 +198,9 @@
 							when link.original_format='video' then
 								(select pv.relative_path from tbl_preview pv where pv.id_container=link.id_preview and pv.type='mp4 thumb' " . $thumbnailCondition . ")										
 							when link.original_format='ppt' or link.original_format='doc' or link.original_format='pdf' then
-								(select pv.relative_path from tbl_preview pv where pv.id_container=link.id_preview and pv.type='thumbs_phone' " . $thumbnailCondition . ")
+								(select pv.relative_path from tbl_preview pv where pv.id_container=link.id_preview and pv.type='png_phone' " . $thumbnailCondition . ")
 							when link.original_format='link bundle' then
-								(select pv.relative_path from tbl_preview pv join tbl_link child_link on child_link.id_preview=pv.id_container join tbl_link_bundle lb on lb.id_link=child_link.id where lb.id_bundle=link.id and lb.use_as_thumbnail=1 and (pv.type='thumbs_phone' or pv.type='mp4 thumb') " . $thumbnailCondition . ")
+								(select pv.relative_path from tbl_preview pv join tbl_link child_link on child_link.id_preview=pv.id_container join tbl_link_bundle lb on lb.id_link=child_link.id where lb.id_bundle=link.id and lb.use_as_thumbnail=1 and (pv.type='png_phone' or pv.type='mp4 thumb') " . $thumbnailCondition . ")
 							end as thumbnail";
 						break;
 				}
@@ -193,7 +216,7 @@
 			/** @var QuerySettings $instance */
 			$instance = new self();
 
-			$columnSettingsList = TableColumnSettings::createEmpty();
+			$columnSettingsList = DataColumnSettings::createEmpty();
 
 			foreach ($params as $key => $value)
 			{
@@ -206,7 +229,8 @@
 						$instance->customQueryFields = $value;
 						break;
 					case self::SettingsTagInnerJoin:
-						$instance->innerJoin = $value;
+						if (count($value) > 0)
+							$instance->innerJoin = array_merge($value, $instance->innerJoin);
 						break;
 					case self::SettingsTagLeftJoin:
 						$instance->leftJoin = $value;
@@ -250,6 +274,47 @@
 						$thumbnailSettings = $value;
 						$instance->thumbnailQuerySettings['mode'] = $thumbnailSettings->mode;
 						break;
+
+					case self::SettingsTagLimit:
+						$instance->limit = $value;
+						break;
+
+					case self::SettingsTagSort:
+						/** @var QuerySortSettings $sortSettings */
+						$sortSettings = $value;
+						if ($sortSettings->isConfigured)
+						{
+							switch ($sortSettings->columnTag)
+							{
+								case self::DataTagCategory:
+									$instance->sortSettings['field'] = 'tag';
+									break;
+								case self::DataTagDate:
+									$instance->sortSettings['field'] = 'link_date';
+									break;
+								case self::DataTagFileName:
+									$instance->sortSettings['field'] = 'name';
+									break;
+								case self::DataTagFileType:
+									$instance->sortSettings['field'] = 'type';
+									break;
+								case self::DataTagLibrary:
+									$instance->sortSettings['field'] = 'library_name';
+									break;
+								case self::DataTagRate:
+									$instance->sortSettings['field'] = 'rate';
+									break;
+								case self::DataTagThumbnail:
+									$instance->sortSettings['field'] = 'thumbnail';
+									break;
+								case self::DataTagViewsCount:
+									$instance->sortSettings['field'] = 'total_views';
+									break;
+							}
+							$instance->sortSettings['order'] = $sortSettings->order;
+						}
+						break;
+
 				}
 			}
 

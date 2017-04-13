@@ -1,4 +1,5 @@
 <?
+
 	namespace application\models\shortcuts\models\landing_page\regular_markup;
 
 	/**
@@ -6,10 +7,10 @@
 	 */
 	abstract class ContentBlock
 	{
-		/** @var \LandingPageShortcut  */
+		/** @var \LandingPageShortcut */
 		protected $parentShortcut;
 
-		/** @var BlockContainer  */
+		/** @var BlockContainer */
 		protected $parentBlock;
 
 		public $type;
@@ -144,6 +145,10 @@
 					return 'slider';
 				case 'trending':
 					return 'trending';
+				case 'search-feed':
+					return 'searchFeed';
+				case 'specific-links-feed':
+					return 'specificLinkFeed';
 				case 'news':
 					return 'news';
 				case 'scroll-stripe':
@@ -214,6 +219,14 @@
 					$trendingBlock = new TrendingBlock($parentShortcut, $parentBlock);
 					$trendingBlock->configureFromXml($xpath, $contextNode);
 					return $trendingBlock;
+				case "search-feed":
+					$searchFeedBlock = new SearchFeedBlock($parentShortcut, $parentBlock);
+					$searchFeedBlock->configureFromXml($xpath, $contextNode);
+					return $searchFeedBlock;
+				case "specific-links-feed":
+					$specificLinksFeedBlock = new SpecificLinkFeedBlock($parentShortcut, $parentBlock);
+					$specificLinksFeedBlock->configureFromXml($xpath, $contextNode);
+					return $specificLinksFeedBlock;
 				case "news":
 					$newsBlock = new NewsBlock($parentShortcut, $parentBlock);
 					$newsBlock->configureFromXml($xpath, $contextNode);

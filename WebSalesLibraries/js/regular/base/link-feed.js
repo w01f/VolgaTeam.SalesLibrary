@@ -2,15 +2,15 @@
 {
 	window.BaseUrl = window.BaseUrl || '';
 	$.SalesPortal = $.SalesPortal || {};
-	$.SalesPortal.TrendingBar = function (parameters)
+	$.SalesPortal.LinkFeed = function (parameters)
 	{
 		var containerId = parameters.containerId;
-		var trendingSettings = new TrendingSettings(parameters.settings);
-		var trendingContainer = undefined;
+		var linkFeedSettings = new LinkFeedSettings(parameters.settings);
+		var linkFeedContainer = undefined;
 
 		this.init = function ()
 		{
-			trendingContainer = $('#trending-bar-' + containerId);
+			linkFeedContainer = $('#link-feed-' + containerId);
 
 			initToggles();
 			initCarouselControls();
@@ -26,10 +26,11 @@
 		{
 			$.ajax({
 				type: "POST",
-				url: window.BaseUrl + "trending/getItems",
+				url: window.BaseUrl + "linkFeed/getItems",
 				data: {
-					barId: containerId,
-					settings: trendingSettings
+					feedId: containerId,
+					feedType: linkFeedSettings.feedType,
+					settings: linkFeedSettings
 				},
 				beforeSend: function ()
 				{
@@ -40,7 +41,7 @@
 				{
 					$.SalesPortal.Overlay.hide();
 
-					trendingContainer.find('.carousel-container').html(msg);
+					linkFeedContainer.find('.carousel-container').html(msg);
 
 					initSlider();
 				},
@@ -55,16 +56,16 @@
 
 		var initToggles = function ()
 		{
-			trendingContainer.find('.date-range-toggle a').off('click.trending-bar').on('click.trending-bar', function ()
+			linkFeedContainer.find('.date-range-toggle a').off('click.link-feed').on('click.link-feed', function ()
 			{
 				var dateRangeTitle = $(this).text();
-				trendingContainer.find('.date-range-toggle-group>button .title').text(dateRangeTitle);
-				trendingSettings.dateRangeType = $(this).closest('.date-range-toggle').find('>.service-data .date-range-tag').text();
+				linkFeedContainer.find('.date-range-toggle-group>button .title').text(dateRangeTitle);
+				linkFeedSettings.dateRangeType = $(this).closest('.date-range-toggle').find('>.service-data .date-range-tag').text();
 
 				reloadLinks(true);
 			});
 
-			trendingContainer.find('.link-format-toggle').off('click').on('click', function ()
+			linkFeedContainer.find('.link-format-toggle').off('click').on('click', function ()
 			{
 				$(this).blur();
 				if ($(this).hasClass('active'))
@@ -72,11 +73,11 @@
 				else
 					$(this).addClass('active');
 
-				trendingSettings.linkFormats = [];
-				$.each(trendingContainer.find('.link-format-toggle.active'), function ()
+				linkFeedSettings.linkFormats = [];
+				$.each(linkFeedContainer.find('.link-format-toggle.active'), function ()
 				{
 					var button = $(this);
-					trendingSettings.linkFormats.push(button.find('.service-data .link-format-tag').text());
+					linkFeedSettings.linkFormats.push(button.find('.service-data .link-format-tag').text());
 				});
 
 				reloadLinks(true);
@@ -85,21 +86,21 @@
 
 		var initCarouselControls = function ()
 		{
-			trendingContainer.find('.portfolio_utube_carousel_control_left').off('click').on('click', function ()
+			linkFeedContainer.find('.portfolio_utube_carousel_control_left').off('click').on('click', function ()
 			{
-				trendingContainer.find('.carousel').carousel('prev');
+				linkFeedContainer.find('.carousel').carousel('prev');
 			});
-			trendingContainer.find('.portfolio_utube_carousel_control_right').off('click').on('click', function ()
+			linkFeedContainer.find('.portfolio_utube_carousel_control_right').off('click').on('click', function ()
 			{
-				trendingContainer.find('.carousel').carousel('next');
+				linkFeedContainer.find('.carousel').carousel('next');
 			})
 		};
 
 		var initSlider = function ()
 		{
-			trendingContainer.find('.carousel-slide-show').carousel();
+			linkFeedContainer.find('.carousel-slide-show').carousel();
 
-			trendingContainer.find('.carousel .carousel-inner').swipe({
+			linkFeedContainer.find('.carousel .carousel-inner').swipe({
 				swipeLeft: function ()
 				{
 					$(this).parent().carousel('next');
@@ -111,11 +112,11 @@
 				threshold: 0
 			});
 
-			var oneMoveItems = trendingContainer.find('.carousel.one-link-move .item');
+			var oneMoveItems = linkFeedContainer.find('.carousel.one-link-move .item');
 			oneMoveItems.each(function ()
 			{
 				var itemToClone = $(this);
-				for (var i = 1; i < (oneMoveItems.length > trendingSettings.linksPerSlide ? trendingSettings.linksPerSlide : oneMoveItems.length); i++)
+				for (var i = 1; i < (oneMoveItems.length > linkFeedSettings.linksPerSlide ? linkFeedSettings.linksPerSlide : oneMoveItems.length); i++)
 				{
 					itemToClone = itemToClone.next();
 					if (!itemToClone.length)
@@ -128,7 +129,7 @@
 				}
 			});
 
-			trendingContainer.find('.carousel .item .portfolio_utube_item').off('click').on('click', function (e)
+			linkFeedContainer.find('.carousel .item .portfolio_utube_item').off('click').on('click', function (e)
 			{
 				e.stopPropagation();
 				var linkId = $(this).find('.service-data .link-id').text();
@@ -141,8 +142,9 @@
 	};
 
 
-	var TrendingSettings = function (data)
+	var LinkFeedSettings = function (data)
 	{
+		this.feedType = undefined;
 		this.linksPerSlide = undefined;
 		this.maxLinks = undefined;
 		this.linksScrollMode = undefined;
@@ -152,7 +154,10 @@
 		this.thumbnailMode = undefined;
 		this.slideShow = undefined;
 		this.slideShowInterval = undefined;
+		this.dataItemSettings = undefined;
 		this.controlSettings = undefined;
+		this.conditions = undefined;
+		this.linkConditions = undefined;
 		this.controlActiveColor = undefined;
 
 		for (var property in data)

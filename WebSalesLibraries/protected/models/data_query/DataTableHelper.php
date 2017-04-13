@@ -132,29 +132,29 @@
 
 					foreach ($baseColumnSettings as $key => $value)
 					{
-						/** @var TableColumnSettings $columnSettings */
+						/** @var DataColumnSettings $columnSettings */
 						$columnSettings = $value;
 						switch ($key)
 						{
-							case TableColumnSettings::ColumnTagCategory:
+							case QuerySettings::DataTagCategory:
 								if ($columnSettings->enable)
 									$record['tag'] = $linkRecord['tag'];
 								break;
-							case TableColumnSettings::ColumnTagRate:
+							case QuerySettings::DataTagRate:
 								if ($columnSettings->enable)
 									$record['rate'] = array(
 										'value' => $linkRecord['rate'],
 										'image' => LinkRateRecord::getStarImage(floatval($linkRecord['rate']))
 									);
 								break;
-							case TableColumnSettings::ColumnTagViewsCount:
+							case QuerySettings::DataTagViewsCount:
 								if ($columnSettings->enable)
 									$record['views'] = array(
 										'value' => intval($linkRecord['total_views']),
 										'display' => $linkRecord['total_views'] == 0 ? '' : $linkRecord['total_views']
 									);
 								break;
-							case TableColumnSettings::ColumnTagThumbnail:
+							case QuerySettings::DataTagThumbnail:
 								if ($columnSettings->enable)
 								{
 									$imageUrl = null;
@@ -197,7 +197,7 @@
 											$imageUrl = Utils::formatUrl(Yii::app()->getBaseUrl(true) . '/images/grid/thumbnail-placeholder/' . $imageFileName . '.png');
 									}
 									if (!empty($imageUrl))
-										$record['thumbnail'] = sprintf('<img src="%s" style="' . ($columnSettings->width > 0 ? ('max-width:' . $columnSettings->width . 'px;') : ''). ($columnSettings->height > 0 ? ('max-height:' . $columnSettings->height . 'px;') : '') . '">', $imageUrl);
+										$record['thumbnail'] = sprintf('<img src="%s" style="' . ($columnSettings->width > 0 ? ('max-width:' . $columnSettings->width . 'px;') : '') . ($columnSettings->height > 0 ? ('max-height:' . $columnSettings->height . 'px;') : '') . '">', $imageUrl);
 									else
 										$record['thumbnail'] = 'Not found';
 								}
@@ -219,37 +219,5 @@
 		public static function formatExtendedData($linkQueryResult, $baseColumnSettings, $extraColumns)
 		{
 			return self::formatRegularData($linkQueryResult, $baseColumnSettings, $extraColumns);
-		}
-
-		/**
-		 * @param $querySettings QuerySettings
-		 * @return CDbCommand
-		 */
-		public static function buildQuery($querySettings)
-		{
-			/** @var CDbCommand $dbCommand */
-			$dbCommand = Yii::app()->db->createCommand();
-
-			$dbCommand = $dbCommand->from($querySettings->from);
-
-			$queryFields = array_merge($querySettings->baseQueryFields, $querySettings->customQueryFields);
-			$dbCommand = $dbCommand->select(array_values($queryFields));
-
-			foreach ($querySettings->innerJoin as $table => $condition)
-				$dbCommand = $dbCommand->join($table, $condition);
-
-			foreach ($querySettings->leftJoin as $table => $condition)
-				$dbCommand = $dbCommand->leftJoin($table, $condition);
-
-			$whereConditions = array('AND',
-				'link.is_preview_not_ready=0');
-			$includeAppLinks = Yii::app()->browser->getBrowser() == Browser::BROWSER_EO;
-			if ($includeAppLinks)
-				$whereConditions[] = 'link.type<>15';
-			$whereConditions = array_merge($whereConditions, $querySettings->whereConditions);
-			$dbCommand = $dbCommand->where($whereConditions);
-
-			$dbCommand = $dbCommand->group($querySettings->groupFields);
-			return $dbCommand;
 		}
 	}

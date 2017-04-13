@@ -13,7 +13,7 @@
 			$data = parent::getPageData();
 			$data['serviceData'] = $this->getMenuItemData();
 			$data['viewOptions'] = array(
-				'columnSettings' => TableColumnSettings::createEmpty(),
+				'columnSettings' => DataColumnSettings::createEmpty(),
 				'showDeleteButton' => false
 			);
 			return $data;

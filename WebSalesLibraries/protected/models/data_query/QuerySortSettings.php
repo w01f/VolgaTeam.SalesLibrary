@@ -3,7 +3,7 @@
 	/**
 	 * Class TableSortSettings
 	 */
-	class TableSortSettings
+	class QuerySortSettings
 	{
 		public $isConfigured;
 		public $columnTag;
@@ -12,7 +12,7 @@
 		public function __construct()
 		{
 			$this->isConfigured = false;
-			$this->columnTag = TableColumnSettings::ColumnTagFileName;
+			$this->columnTag = QuerySettings::DataTagFileName;
 			$this->order = 'asc';
 		}
 

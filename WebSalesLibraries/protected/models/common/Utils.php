@@ -85,4 +85,34 @@
 				. substr($charid, 20, 12);
 			return strtolower($uuid);
 		}
+
+		/**
+		 * @param $target object
+		 * @param $encodedContent string
+		 */
+		public static function loadFromJson($target, $encodedContent)
+		{
+			$encodedContent = str_replace('"true"', 'true', $encodedContent);
+			$encodedContent = str_replace('"false"', 'false', $encodedContent);
+			$data = \CJSON::decode($encodedContent, true);
+			foreach ($data as $key => $value)
+			{
+				if (isset($value))
+				{
+					if (is_array($value) && count($value) > 0 && array_keys($value) !== range(0, count($value) - 1))
+					{
+						$subObject = new stdClass();
+						foreach ($value as $subKey => $subValue)
+						{
+							$subObject->{$subKey} = \CJSON::decode(\CJSON::encode($subValue), false);
+						}
+						$value = $subObject;
+					}
+					else if (is_array($value))
+						$value = \CJSON::decode(\CJSON::encode($value), false);
+					$target->{$key} = $value;
+				}
+
+			}
+		}
 	}

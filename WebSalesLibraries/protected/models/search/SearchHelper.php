@@ -107,7 +107,7 @@
 		}
 
 		/**
-		 * @param $searchConditions SearchConditions
+		 * @param $searchConditions BaseSearchConditions
 		 * @param $datasetKey string
 		 * @return array
 		 */
@@ -126,14 +126,14 @@
 		}
 
 		/**
-		 * @param $searchConditions SearchConditions
+		 * @param $searchConditions BaseSearchConditions
 		 * @return array
 		 */
 		public static function queryLinksByCondition($searchConditions)
 		{
 			$baseLinksEncoded = Yii::app()->session[$searchConditions->baseDatasetKey];
 			$baseLinksCondition = '1=1';
-			if (isset($baseLinksEncoded))
+			if (!empty($baseLinksEncoded))
 			{
 				$baseLinks = CJSON::decode($baseLinksEncoded);
 				$availableLinkIds = array();
@@ -151,7 +151,7 @@
 				return array();
 
 			$libraryCondition = '1 = 1';
-			if (count($searchConditions->libraries) > 0)
+			if (isset($searchConditions->libraries) && count($searchConditions->libraries) > 0)
 			{
 				$libraryIds = array();
 				foreach ($searchConditions->libraries as $library)
@@ -188,7 +188,7 @@
 
 			$superFilterCondition = '1 = 1';
 			$additionalSuperFilterCondition = '';
-			if (count($searchConditions->superFilters) > 0)
+			if (isset($searchConditions->superFilters) && count($searchConditions->superFilters) > 0)
 			{
 				foreach ($searchConditions->superFilters as $superFilter)
 					$superFilterSelector[] = sprintf("(link.id in (select id_link from tbl_link_super_filter where value = '%s'))", $superFilter);
@@ -343,10 +343,12 @@
 					QuerySettings::SettingsTagCategory => $searchConditions->categorySettings,
 					QuerySettings::SettingsTagViewsCount => $searchConditions->viewCountSettings,
 					QuerySettings::SettingsTagThumbnails => $searchConditions->thumbnailSettings,
+					QuerySettings::SettingsTagSort => $searchConditions->sortSettings,
+					QuerySettings::SettingsTagLimit => $searchConditions->limit,
 				));
-			/** @var CDbCommand $dbCommnad */
-			$dbCommnad = DataTableHelper::buildQuery($querySettings);
-			$queryRecords = $dbCommnad->queryAll();
+			/** @var CDbCommand $dbCommand */
+			$dbCommand = DataQueryHelper::buildQuery($querySettings);
+			$queryRecords = $dbCommand->queryAll();
 
 			return $queryRecords;
 		}

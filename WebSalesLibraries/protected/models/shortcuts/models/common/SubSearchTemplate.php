@@ -9,6 +9,8 @@
 		public $disabled;
 		public $imageName;
 		public $imagePath;
+
+		/** @var TableSearchConditions */
 		public $conditions;
 
 		/**
@@ -27,7 +29,7 @@
 			$this->disabled = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : false;
 			$queryResult = $xpath->query('SearchCondition', $contextNode);
 			if ($queryResult->length > 0)
-				$this->conditions = SearchConditions::fromXml($xpath, $queryResult->item(0));
+				$this->conditions = TableSearchConditions::fromXml($xpath, $queryResult->item(0));
 		}
 
 		public function getSearchOptions()

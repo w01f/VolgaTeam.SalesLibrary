@@ -19,7 +19,7 @@
 		public $emptyResultLogo;
 
 		/**
-		 * @var $searchConditions SearchConditions
+		 * @var $searchConditions TableSearchConditions
 		 */
 		public $conditions;
 	}

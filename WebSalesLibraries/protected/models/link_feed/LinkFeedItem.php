@@ -1,11 +1,11 @@
 <?
 
-	namespace application\models\trending;
+	namespace application\models\link_feed;
 
 	/**
-	 * Class TrendingLink
+	 * Class LinkFeedItem
 	 */
-	class TrendingLink
+	class LinkFeedItem
 	{
 		public $linkName;
 		public $libraryName;
