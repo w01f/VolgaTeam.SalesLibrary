@@ -78,6 +78,7 @@
                 </div>
             </div>
         </div>
-        <div class="panel-footer" style="<? if (!empty($contentBlock->settings->style->footerColor)): ?>background-color: <? echo '#' . $contentBlock->settings->style->footerColor; ?>;<? endif; ?>"></div>
+        <div class="panel-footer"
+             style="<? if ($contentBlock->settings->hideFooter): ?>display: none;<? endif; ?><? if (!empty($contentBlock->settings->style->footerColor)): ?>background-color: <? echo '#' . $contentBlock->settings->style->footerColor; ?>;<? endif; ?>"></div>
     </div>
 </div>

@@ -16,6 +16,7 @@
 		public $autoPlay;
 		public $direction;
 		public $tickerInterval;
+		public $hideFooter;
 
 		/** @var  NewsBlockStyle */
 		public $style;
@@ -28,6 +29,7 @@
 			$this->autoPlay = true;
 			$this->direction = self::NewsScrollDirectionUp;
 			$this->tickerInterval = 4000;
+			$this->hideFooter = false;
 			$this->style = new NewsBlockStyle();
 		}
 
@@ -59,6 +61,9 @@
 
 			$queryResult = $xpath->query('./TickerInterval', $contextNode);
 			$instance->tickerInterval = $queryResult->length > 0 ? intval(trim($queryResult->item(0)->nodeValue)) : $instance->itemsCount;
+
+			$queryResult = $xpath->query('./HideFooter', $contextNode);
+			$instance->hideFooter = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : $instance->hideFooter;
 
 			$queryResult = $xpath->query('./Style', $contextNode);
 			if ($queryResult->length > 0)

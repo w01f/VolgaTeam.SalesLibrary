@@ -183,7 +183,7 @@
 			$this->controlActiveColor = $queryResult->length > 0 ? strtolower(trim($queryResult->item(0)->nodeValue)) : null;
 
 			$queryResult = $xpath->query('./MaxThumbnailHeight', $contextNode);
-			$this->maxThumbnailHeight = $queryResult->length > 0 ? intval(trim($queryResult->item(0)->nodeValue)) : $this->maxLinks;
+			$this->maxThumbnailHeight = $queryResult->length > 0 ? intval(trim($queryResult->item(0)->nodeValue)) : $this->maxThumbnailHeight;
 		}
 
 		protected abstract function initDefaultControlSettings();
