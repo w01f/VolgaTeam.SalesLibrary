@@ -117,9 +117,10 @@
 
 			/** @var  $shortcutRecord ShortcutLinkRecord */
 			$shortcutRecord = ShortcutLinkRecord::model()->findByPk($linkId);
-			/** @var  $shortcut PageContentShortcut */
+			/** @var  $shortcut CustomHandledShortcut */
 			$shortcut = $shortcutRecord->getModel($this->isPhone, $parameters);
-			$shortcut->loadPageConfig();
+			if ($shortcut instanceof PageContentShortcut)
+				$shortcut->loadPageConfig();
 
 			switch ($shortcut->type)
 			{
@@ -213,29 +214,34 @@
 				else
 					$content = $this->renderPartial('pages/' . $viewName, $shortcut->getViewParameters(), true);
 
-				$actions = !$this->isPhone ?
-					$this->renderPartial('../menu/actionItems', array('actionContainer' => $shortcut), true) :
-					'';
-
+				$actions = null;
 				$navigationPanel = '';
+
 				if ($shortcut instanceof PageContentShortcut)
 				{
-					/** @var PageContentShortcut $shortcut */
-					$navigationPanelData = $shortcut->getNavigationPanel();
-					if (isset($navigationPanelData))
+					$actions = !$this->isPhone ?
+						$this->renderPartial('../menu/actionItems', array('actionContainer' => $shortcut), true) :
+						'';
+
+					if ($shortcut instanceof PageContentShortcut)
 					{
-						$navigationPanel = array(
-							'content' => $this->renderPartial('navigationPanel/itemsList', array('navigationPanel' => $navigationPanelData), true),
-							'options' => array(
-								'id' => $navigationPanelData->id,
-								'hideCondition' => array(
-									'extraSmall' => $navigationPanelData->hideCondition->extraSmall,
-									'small' => $navigationPanelData->hideCondition->small,
-									'medium' => $navigationPanelData->hideCondition->medium,
-									'large' => $navigationPanelData->hideCondition->large,
+						/** @var PageContentShortcut $shortcut */
+						$navigationPanelData = $shortcut->getNavigationPanel();
+						if (isset($navigationPanelData))
+						{
+							$navigationPanel = array(
+								'content' => $this->renderPartial('navigationPanel/itemsList', array('navigationPanel' => $navigationPanelData), true),
+								'options' => array(
+									'id' => $navigationPanelData->id,
+									'hideCondition' => array(
+										'extraSmall' => $navigationPanelData->hideCondition->extraSmall,
+										'small' => $navigationPanelData->hideCondition->small,
+										'medium' => $navigationPanelData->hideCondition->medium,
+										'large' => $navigationPanelData->hideCondition->large,
+									)
 								)
-							)
-						);
+							);
+						}
 					}
 				}
 
@@ -360,7 +366,6 @@
 		{
 			$bundleId = Yii::app()->request->getPost('bundleId');
 			$linkId = Yii::app()->request->getPost('linkId');
-			$templates = array();
 			if (isset($bundleId) && !isset($linkId))
 			{
 				/** @var $linkRecord ShortcutLinkRecord */
