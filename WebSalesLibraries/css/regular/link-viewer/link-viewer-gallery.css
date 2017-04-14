@@ -17,6 +17,7 @@
 .link-viewer .preview-image-container .single-preview-image
 {
 	max-height: 310px;
+	max-width: 99%;
 }
 
 .link-viewer .preview-image-container .image-format-helper
