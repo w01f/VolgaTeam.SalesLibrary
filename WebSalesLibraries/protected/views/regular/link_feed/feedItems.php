@@ -9,7 +9,14 @@
 	$itemColumnClass = '';
 	switch ($feedSettings->linksPerSlide)
 	{
-		case \application\models\link_feed\LinkFeedSettings::LinksPerSlide3:
+		case \application\models\link_feed\LinkFeedSettings::LinksPerSlide1:
+			$itemColumnClass = 'col-xs-12 col-sm-12 col-md-12';
+			break;
+		case \application\models\link_feed\LinkFeedSettings::LinksPerSlide2:
+			$itemColumnClass = 'col-xs-12 col-sm-6 col-md-6';
+			$carouseOneMoveClass .= ' two_shows_one_move';
+			break;
+	    case \application\models\link_feed\LinkFeedSettings::LinksPerSlide3:
 			$itemColumnClass = 'col-xs-12 col-sm-4 col-md-4';
 			$carouseOneMoveClass .= ' three_shows_one_move';
 			break;
@@ -27,6 +34,14 @@
 		$feedSettings->linksPerSlide :
 		1;
 ?>
+<style>
+    <?if($feedSettings->maxThumbnailHeight>0):?>
+        #link-feed-carousel-<? echo $feedId; ?> .portfolio_utube_item_image > img
+        {
+            max-height: <?echo $feedSettings->maxThumbnailHeight;?>px;
+        }
+    <?endif;?>
+</style>
 <div id="link-feed-carousel-<? echo $feedId; ?>"
      class="col-xs-12 carousel slide portfolio_utube_carousel_wrapper<? echo $feedSettings->linksScrollMode === \application\models\link_feed\LinkFeedSettings::LinksScrollModeLink ? (' ' . $carouseOneMoveClass) : ''; ?><? if ($feedSettings->slideShow == true): ?> carousel-slide-show<? endif; ?>"
      <? if ($feedSettings->slideShow == true): ?>data-interval="<? echo $feedSettings->slideShowInterval; ?>"<? endif; ?>>

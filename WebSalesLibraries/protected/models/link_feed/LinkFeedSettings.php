@@ -7,6 +7,8 @@
 	 */
 	abstract class LinkFeedSettings
 	{
+		const LinksPerSlide1 = 1;
+		const LinksPerSlide2 = 2;
 		const LinksPerSlide3 = 3;
 		const LinksPerSlide4 = 4;
 		const LinksPerSlide6 = 6;
@@ -37,6 +39,7 @@
 		public $slideShow;
 		public $slideShowInterval;
 		public $controlActiveColor;
+		public $maxThumbnailHeight;
 
 		/** @var  FeedItemSettings[] */
 		public $dataItemSettings;
@@ -50,6 +53,7 @@
 			$this->thumbnailMode = self::ThumbnailModeTop;
 			$this->slideShow = false;
 			$this->slideShowInterval = 5000;
+			$this->maxThumbnailHeight = 0;
 
 			$this->initDefaultDataItemSettings();
 
@@ -120,7 +124,7 @@
 			/** @var $queryResult \DOMNodeList */
 			$queryResult = $xpath->query('./LinksPerSlide', $contextNode);
 			$linksPerSlide = $queryResult->length > 0 ? intval(trim($queryResult->item(0)->nodeValue)) : $this->linksPerSlide;
-			if (in_array($linksPerSlide, array(self::LinksPerSlide3, self::LinksPerSlide4, self::LinksPerSlide6)))
+			if (in_array($linksPerSlide, array(self::LinksPerSlide1, self::LinksPerSlide2, self::LinksPerSlide3, self::LinksPerSlide4, self::LinksPerSlide6)))
 				$this->linksPerSlide = $linksPerSlide;
 
 			$queryResult = $xpath->query('./MaxLinks', $contextNode);
@@ -177,6 +181,9 @@
 
 			$queryResult = $xpath->query('./ControlActiveColor', $contextNode);
 			$this->controlActiveColor = $queryResult->length > 0 ? strtolower(trim($queryResult->item(0)->nodeValue)) : null;
+
+			$queryResult = $xpath->query('./MaxThumbnailHeight', $contextNode);
+			$this->maxThumbnailHeight = $queryResult->length > 0 ? intval(trim($queryResult->item(0)->nodeValue)) : $this->maxLinks;
 		}
 
 		protected abstract function initDefaultControlSettings();

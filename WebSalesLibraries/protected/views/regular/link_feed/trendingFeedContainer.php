@@ -139,19 +139,21 @@
 					<? endif; ?>
                 </div>
             </div>
-            <div class="carousel-controls-container col-md-2 col-sm-12 col-xs-12 text-right">
-                <button class="btn btn-default portfolio_utube_carousel_control_left"
-                        role="button" data-slide="prev">
-                    <span class="fa fa-angle-left portfolio_utube_carousel_control_icons" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </button>
-                <button class="btn btn-default portfolio_utube_carousel_control_right"
-                        role="button" data-slide="next">
+			<? if (count($feedItems) > 1): ?>
+                <div class="carousel-controls-container col-md-2 col-sm-12 col-xs-12 text-right">
+                    <button class="btn btn-default portfolio_utube_carousel_control_left"
+                            role="button" data-slide="prev">
+                        <span class="fa fa-angle-left portfolio_utube_carousel_control_icons" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </button>
+                    <button class="btn btn-default portfolio_utube_carousel_control_right"
+                            role="button" data-slide="next">
                         <span class="fa fa-angle-right portfolio_utube_carousel_control_icons"
                               aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </button>
-            </div>
+                        <span class="sr-only">Next</span>
+                    </button>
+                </div>
+			<? endif; ?>
         </div>
     </div>
     <div class="row carousel-container">

@@ -116,7 +116,7 @@
     position: relative;
 }
 .portfolio_utube_item_image> img {
-    width: 100%;
+    max-width: 100%;
     border: solid 1px #DEDEDE;
 }
 .portfolio_utube_item_image>a,
