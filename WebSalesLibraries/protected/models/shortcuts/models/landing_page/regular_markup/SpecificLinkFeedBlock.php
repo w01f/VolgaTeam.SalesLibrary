@@ -12,8 +12,6 @@
 	 */
 	class SpecificLinkFeedBlock extends BlockContainer
 	{
-		public $id;
-
 		/** @var  SpecificLinkFeedSettings */
 		public $settings;
 
@@ -25,7 +23,6 @@
 		{
 			parent::__construct($parentShortcut, $parentBlock);
 			$this->type = 'specific-links-feed';
-			$this->id = uniqid();
 		}
 
 		/**

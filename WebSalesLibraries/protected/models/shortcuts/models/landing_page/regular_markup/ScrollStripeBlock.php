@@ -12,7 +12,6 @@
 		const StripeSizeMedium = 'medium';
 		const StripeSizeLarge = 'large';
 
-		public $id;
 		public $iconPosition;
 		public $stripeSize;
 
@@ -23,7 +22,6 @@
 		public function __construct($parentShortcut, $parentBlock)
 		{
 			parent::__construct($parentShortcut, $parentBlock);
-			$this->id = uniqid();
 			$this->type = 'scroll-stripe';
 
 			$this->iconPosition = self::IconPositionLeft;

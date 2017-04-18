@@ -50,3 +50,13 @@
 {
     line-height: 2;
 }
+
+#content .shortcuts-page-content.landing-page .masonry-container
+{
+    padding: 0;
+}
+
+#content .shortcuts-page-content.landing-page .cbp-l-filters-buttonCenter
+{
+    text-align: left;
+}

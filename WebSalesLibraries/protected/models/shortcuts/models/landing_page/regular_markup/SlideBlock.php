@@ -5,7 +5,6 @@
 	 */
 	class SlideBlock extends BlockContainer
 	{
-		public $id;
 		/** @var  ImageBlock */
 		public $imageSettings;
 
@@ -16,7 +15,6 @@
 		public function __construct($parentShortcut, $parentBlock)
 		{
 			parent::__construct($parentShortcut, $parentBlock);
-			$this->id = uniqid();
 			$this->type = 'slide';
 		}
 

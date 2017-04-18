@@ -11,8 +11,6 @@
 		const IconSize3x = '3x';
 		const IconSize4x = '4x';
 
-		public $id;
-
 		public $text;
 
 		public $icon;
@@ -26,7 +24,6 @@
 		public function __construct($parentShortcut, $parentBlock)
 		{
 			parent::__construct($parentShortcut, $parentBlock);
-			$this->id = uniqid();
 			$this->type = 'scroll-stripe-item';
 
 			$this->iconColor = '000000';

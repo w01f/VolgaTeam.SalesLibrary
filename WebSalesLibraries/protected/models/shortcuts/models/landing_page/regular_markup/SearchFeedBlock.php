@@ -12,8 +12,6 @@
 	 */
 	class SearchFeedBlock extends BlockContainer
 	{
-		public $id;
-
 		/** @var  SearchFeedSettings */
 		public $settings;
 
@@ -25,7 +23,6 @@
 		{
 			parent::__construct($parentShortcut, $parentBlock);
 			$this->type = 'search-feed';
-			$this->id = uniqid();
 		}
 
 		/**

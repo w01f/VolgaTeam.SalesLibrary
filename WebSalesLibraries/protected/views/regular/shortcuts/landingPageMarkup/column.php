@@ -6,12 +6,10 @@
     <? if ($contentBlock->hideCondition->medium): ?> hidden-md<? endif; ?>
     <? if ($contentBlock->hideCondition->small): ?> hidden-sm<? endif; ?>
     <? if ($contentBlock->hideCondition->extraSmall): ?> hidden-xs<? endif; ?>"
-    style="<? echo $this->renderPartial('landingPageMarkup/styleTextAppearance', array('textAppearance' => $contentBlock->getTextAppearance()), true); ?>
+     style="<? echo $this->renderPartial('landingPageMarkup/styleTextAppearance', array('textAppearance' => $contentBlock->getTextAppearance()), true); ?>
      <? echo $this->renderPartial('landingPageMarkup/stylePadding', array('padding' => $contentBlock->padding), true); ?>
      <? echo $this->renderPartial('landingPageMarkup/styleMargin', array('margin' => $contentBlock->margin), true); ?>
      <? echo $this->renderPartial('landingPageMarkup/styleBorder', array('border' => $contentBlock->border), true); ?>"
 	<? if (!empty($contentBlock->hoverText)): ?> title="<? echo $contentBlock->hoverText; ?>"<? endif; ?>>
-    <div>
-		<? echo $this->renderPartial('landingPageMarkup/blockContainer', array('contentBlocks' => $contentBlock->items), true); ?>
-    </div>
+	<? echo $this->renderPartial('landingPageMarkup/blockContainer', array('contentBlocks' => $contentBlock->items), true); ?>
 </div>

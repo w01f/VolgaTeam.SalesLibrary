@@ -6,18 +6,17 @@
 	 */
 	abstract class FeedControlSettings
 	{
+		const ControlTagScrollButton = 'scroll';
+
 		const ControlTagLinkFormatPowerPoint = 'ppt';
 		const ControlTagLinkFormatVideo = 'video';
 		const ControlTagLinkFormatDocuments = 'document';
 
-		public static $tags = array(
-			self::ControlTagLinkFormatPowerPoint,
-			self::ControlTagLinkFormatDocuments,
-			self::ControlTagLinkFormatVideo
-		);
-
 		public $enabled;
 		public $title;
+
+		/** @var  \HideCondition */
+		public $hideCondition;
 
 		/**
 		 * @param $tag string
@@ -38,6 +37,7 @@
 					$this->title = 'video';
 					break;
 			}
+			$this->hideCondition = new \HideCondition();
 		}
 
 		/**
@@ -51,5 +51,9 @@
 
 			$queryResult = $xpath->query('./Title', $contextNode);
 			$this->title = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : $this->title;
+
+			$queryResult = $xpath->query('./Hide', $contextNode);
+			if ($queryResult->length > 0)
+				$this->hideCondition = \HideCondition::fromXml($xpath, $queryResult->item(0));
 		}
 	}

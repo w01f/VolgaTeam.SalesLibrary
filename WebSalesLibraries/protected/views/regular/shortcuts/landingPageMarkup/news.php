@@ -37,7 +37,7 @@
     </div>
     <div class="panel panel-default"
          style="<? if (!empty($contentBlock->settings->style->outsideBorderColor)): ?>border-color: <? echo '#' . $contentBlock->settings->style->outsideBorderColor; ?>;<? endif; ?>">
-        <div class="panel-heading" style="<? if (!empty($contentBlock->settings->style->headerColor)): ?>background-color: <? echo '#' . $contentBlock->settings->style->headerColor; ?>;<? endif; ?>">
+        <div class="panel-heading" style="<? if ($contentBlock->settings->hideHeader): ?>display: none;<? endif; ?><? if (!empty($contentBlock->settings->style->headerColor)): ?>background-color: <? echo '#' . $contentBlock->settings->style->headerColor; ?>;<? endif; ?>">
 	        <? if (!empty($contentBlock->settings->icon)): ?>
                 <i class="icomoon icomoon-lg <? echo $contentBlock->settings->icon; ?>" style="<? if (!empty($contentBlock->settings->style->headerIconColor)): ?>color: <? echo '#' . $contentBlock->settings->style->headerIconColor; ?>;<? endif; ?>"></i>
 	        <? else: ?>

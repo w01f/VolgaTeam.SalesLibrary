@@ -12,8 +12,6 @@
 	 */
 	class TrendingBlock extends BlockContainer
 	{
-		public $id;
-
 		/** @var  TrendingFeedSettings */
 		public $settings;
 
@@ -25,7 +23,6 @@
 		{
 			parent::__construct($parentShortcut, $parentBlock);
 			$this->type = 'trending';
-			$this->id = uniqid();
 		}
 
 		/**

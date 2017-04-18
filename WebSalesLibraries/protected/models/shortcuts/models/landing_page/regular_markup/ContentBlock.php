@@ -7,6 +7,8 @@
 	 */
 	abstract class ContentBlock
 	{
+		public $id;
+
 		/** @var \LandingPageShortcut */
 		protected $parentShortcut;
 
@@ -34,6 +36,8 @@
 		 */
 		protected function __construct($parentShortcut, $parentBlock)
 		{
+			$this->id = uniqid();
+
 			$this->parentShortcut = $parentShortcut;
 			$this->parentBlock = $parentBlock;
 
@@ -153,6 +157,8 @@
 					return 'news';
 				case 'scroll-stripe':
 					return 'scrollStripe';
+				case 'masonry':
+					return 'masonry';
 				default:
 					return 'undefinedBlock';
 			}
@@ -239,6 +245,10 @@
 					$scrollStripeBlock = new ScrollStripeBlock($parentShortcut, $parentBlock);
 					$scrollStripeBlock->configureFromXml($xpath, $contextNode);
 					return $scrollStripeBlock;
+				case "masonry":
+					$masonryBlock = new MasonryBlock($parentShortcut, $parentBlock);
+					$masonryBlock->configureFromXml($xpath, $contextNode);
+					return $masonryBlock;
 				default:
 					return new UndefinedBlock($parentShortcut, $parentBlock);
 			}

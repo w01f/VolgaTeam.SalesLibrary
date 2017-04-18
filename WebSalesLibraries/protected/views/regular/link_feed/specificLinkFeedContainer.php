@@ -31,7 +31,7 @@
     </div>
     <div class="col-xs-12">
         <div class="row">
-            <div class="link-feed-controls-container col-md-10 hidden-xs hidden-sm">
+            <div class="link-feed-controls-container col-md-8 hidden-xs hidden-sm">
                 <div class="btn-group" role="group">
 					<?
 						/** @var \application\models\link_feed\FeedControlSettings $control */
@@ -74,8 +74,16 @@
 					<? endif; ?>
                 </div>
             </div>
-			<? if (count($feedItems) > 1): ?>
-                <div class="carousel-controls-container col-md-2 col-sm-12 col-xs-12 text-right">
+	        <?
+		        /** @var \application\models\link_feed\FeedControlSettings $control */
+		        $control = $feedSettings->controlSettings->{\application\models\link_feed\FeedControlSettings::ControlTagScrollButton};
+	        ?>
+	        <? if ($control->enabled && count($feedItems) > 1): ?>
+                <div class="carousel-controls-container col-md-4 col-sm-12 col-xs-12 text-right
+                    <? if ($control->hideCondition->large): ?> hidden-lg<? endif; ?>
+                    <? if ($control->hideCondition->medium): ?> hidden-md<? endif; ?>
+                    <? if ($control->hideCondition->small): ?> hidden-sm<? endif; ?>
+                    <? if ($control->hideCondition->extraSmall): ?> hidden-xs<? endif; ?>">
                     <button class="btn btn-default portfolio_utube_carousel_control_left"
                             role="button" data-slide="prev">
                         <span class="fa fa-angle-left portfolio_utube_carousel_control_icons" aria-hidden="true"></span>
@@ -88,7 +96,7 @@
                         <span class="sr-only">Next</span>
                     </button>
                 </div>
-			<? endif; ?>
+	        <? endif; ?>
         </div>
     </div>
     <div class="row carousel-container">

@@ -8,6 +8,7 @@
 	class SearchFeedControlSettings extends FeedControlSettings
 	{
 		public static $tags = array(
+			self::ControlTagScrollButton,
 			self::ControlTagLinkFormatPowerPoint,
 			self::ControlTagLinkFormatDocuments,
 			self::ControlTagLinkFormatVideo

@@ -61,6 +61,29 @@
 				$.SalesPortal.ShortcutsManager.assignShortcutItemHandlers(stripeBlock);
 			});
 
+			$.each(landingPage.find('.masonry-container'), function (key, value)
+			{
+				var masonryBlock = $(value);
+				var masonryId = masonryBlock.prop('id').replace('masonry-container-', '');
+				var masonrySettings = masonryBlock.find('>.service-data');
+				var horizontalGap = parseInt(masonrySettings.find('.horizontal-gap').text());
+				var verticalGap = parseInt(masonrySettings.find('.vertical-gap').text());
+				var grid = $('#masonry-grid-' + masonryId);
+				grid.cubeportfolio({
+					filters: '#masonry-filter-' + masonryId,
+					layoutMode: 'grid',
+					defaultFilter: '*',
+					animationType: 'quicksand',
+					gapHorizontal: horizontalGap,
+					gapVertical: verticalGap,
+					gridAdjustment: 'responsive',
+					caption: 'zoom',
+					displayType: 'fadeIn',
+					displayTypeSpeed: 100
+				});
+				$.SalesPortal.ShortcutsManager.assignShortcutItemHandlers(grid);
+			});
+
 			landingPage.find('[data-bs-hover-animate]')
 				.mouseenter(function ()
 				{

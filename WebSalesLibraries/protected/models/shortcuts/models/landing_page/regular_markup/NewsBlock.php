@@ -8,8 +8,6 @@
 	 */
 	class NewsBlock extends BlockContainer
 	{
-		public $id;
-
 		/** @var  NewsBlockSettings */
 		public $settings;
 
@@ -21,7 +19,6 @@
 		{
 			parent::__construct($parentShortcut, $parentBlock);
 			$this->type = 'news';
-			$this->id = uniqid();
 		}
 
 		/**

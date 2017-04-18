@@ -5,7 +5,6 @@
 	 */
 	class SliderBlock extends BlockContainer
 	{
-		public $id;
 		public $slideShow;
 		public $slideShowInterval;
 
@@ -17,7 +16,6 @@
 		{
 			parent::__construct($parentShortcut, $parentBlock);
 			$this->type = 'slider';
-			$this->id = uniqid();
 		}
 
 		/**

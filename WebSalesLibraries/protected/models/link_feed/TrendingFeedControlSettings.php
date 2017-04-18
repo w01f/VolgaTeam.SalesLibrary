@@ -12,6 +12,7 @@
 		const ControlTagDateMonth = 'month';
 
 		public static $tags = array(
+			self::ControlTagScrollButton,
 			self::ControlTagDateToday,
 			self::ControlTagDateWeek,
 			self::ControlTagDateMonth,
