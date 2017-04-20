@@ -1,10 +1,12 @@
 <?
+	use application\models\shortcuts\models\landing_page\regular_markup\common\MarkupSettings;
+
 	/**
 	 * Class LandingPageShortcut
 	 */
 	class LandingPageShortcut extends ContainerShortcut
 	{
-		/** @var  \application\models\shortcuts\models\landing_page\regular_markup\MarkupSettings */
+		/** @var  MarkupSettings */
 		public $markupSettings;
 
 		/** @var  \application\models\shortcuts\models\landing_page\mobile_items\MobileSettings */
@@ -28,7 +30,7 @@
 			{
 				$queryResult = $xpath->query('//Config/MarkupSettings');
 				if ($queryResult->length > 0)
-					$this->markupSettings = \application\models\shortcuts\models\landing_page\regular_markup\MarkupSettings::fromXml($this, $xpath, $queryResult->item(0));
+					$this->markupSettings = MarkupSettings::fromXml($this, $xpath, $queryResult->item(0));
 			}
 		}
 

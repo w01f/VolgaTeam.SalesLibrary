@@ -15,8 +15,26 @@ in thumbnail_mode varchar(32))
       lib.name as lib_name,
       count(s_a.id) as link_views,
       case when thumbnail_mode = 'top'
-        then (select pv.relative_path from tbl_preview pv where pv.id_container=l.id_preview and ((l.search_format<>'video' and pv.type='png_phone') or (l.search_format='video' and pv.type='mp4 thumb')) order by pv.relative_path limit 1)
-      else (select pv.relative_path from tbl_preview pv where pv.id_container=l.id_preview and ((l.search_format<>'video' and pv.type='png_phone') or (l.search_format='video' and pv.type='mp4 thumb')) order by rand() limit 1)
+        then (case
+              when l.original_format='jpeg' or l.original_format='gif' or l.original_format='png' then
+                l.file_relative_path
+              when l.original_format='video' then
+                (select pv.relative_path from tbl_preview pv where pv.id_container=l.id_preview and pv.type='mp4 thumb' order by pv.relative_path limit 1)
+              when l.original_format='ppt' or l.original_format='doc' or l.original_format='pdf' then
+                (select pv.relative_path from tbl_preview pv where pv.id_container=l.id_preview and pv.type='png_phone' order by pv.relative_path limit 1)
+              when l.original_format='link bundle' then
+                (select pv.relative_path from tbl_preview pv join tbl_link child_link on child_link.id_preview=pv.id_container join tbl_link_bundle lb on lb.id_link=child_link.id where lb.id_bundle=l.id and lb.use_as_thumbnail=1 and (pv.type='png_phone' or pv.type='mp4 thumb') order by pv.relative_path limit 1)
+              end)
+      else (case
+            when l.original_format='jpeg' or l.original_format='gif' or l.original_format='png' then
+              l.file_relative_path
+            when l.original_format='video' then
+              (select pv.relative_path from tbl_preview pv where pv.id_container=l.id_preview and pv.type='mp4 thumb' order by rand() limit 1)
+            when l.original_format='ppt' or l.original_format='doc' or l.original_format='pdf' then
+              (select pv.relative_path from tbl_preview pv where pv.id_container=l.id_preview and pv.type='png_phone' order by rand() limit 1)
+            when l.original_format='link bundle' then
+              (select pv.relative_path from tbl_preview pv join tbl_link child_link on child_link.id_preview=pv.id_container join tbl_link_bundle lb on lb.id_link=child_link.id where lb.id_bundle=l.id and lb.use_as_thumbnail=1 and (pv.type='png_phone' or pv.type='mp4 thumb') order by rand() limit 1)
+            end)
       end as thumbnail
     from tbl_link l
       join tbl_library lib on lib.id = l.id_library

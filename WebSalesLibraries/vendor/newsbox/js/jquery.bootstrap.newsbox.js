@@ -67,6 +67,20 @@ if (typeof Object.create !== 'function') {
             }
         },
 
+        recalcHeight:function(){
+	        var self = this;
+	        //get height of the very first self.options.newsPerPage news
+	        var height = 0;
+
+	        $.map(self.$elem.find(self.newsTagName), function( newsItem, index ) {
+		        if ( index < self.options.newsPerPage ) {
+			        height = parseInt(height) + parseInt($(newsItem).outerHeight(true));
+		        }
+	        });
+
+	        $(self.elem).css({"overflow-y": "hidden", "height": height});
+        },
+
         prepareLayout: function() {
             var self = this;
 
@@ -94,17 +108,8 @@ if (typeof Object.create !== 'function') {
             if( self.$elem.find(self.newsTagName).length < self.options.newsPerPage ) {
                 self.options.newsPerPage = self.$elem.find(self.newsTagName).length;
             }
-            
-            //get height of the very first self.options.newsPerPage news
-            var height = 0;
 
-            $.map(self.$elem.find(self.newsTagName), function( newsItem, index ) {
-                if ( index < self.options.newsPerPage ) {
-                    height = parseInt(height) + parseInt($(newsItem).height()) + 10;
-                }
-            });
-
-            $(self.elem).css({"overflow-y": "hidden", "height": height});
+            self.recalcHeight();
 
             //recalculate news box height for responsive interfaces
             $( w ).resize(function() {
@@ -226,6 +231,7 @@ if (typeof Object.create !== 'function') {
             $(self.$elem).find(self.newsTagName +':nth-child(' + parseInt(self.options.newsPerPage + 1) + ')').slideUp(self.options.animationSpeed, function(){
                 self.animationStarted = false;
                 self.onReset(self.isHovered);
+	            self.recalcHeight();
             });
 
             $(self.elem).find('.'+self.newsClassName).on('mouseenter', function(){
@@ -260,6 +266,7 @@ if (typeof Object.create !== 'function') {
             $(self.$elem).find(self.newsTagName +':nth-child(' + parseInt(self.options.newsPerPage + 1) + ')').slideDown(self.options.animationSpeed, function(){
                 self.animationStarted = false;
                 self.onReset(self.isHovered);
+	            self.recalcHeight();
             });
 
             $(self.elem).find('.'+self.newsClassName).on('mouseenter', function(){

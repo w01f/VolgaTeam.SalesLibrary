@@ -1,4 +1,6 @@
 <?
+	use application\models\data_query\common\DataColumnSettings;
+	use application\models\data_query\common\QuerySortSettings;
 
 	/**
 	 * Class BaseSearchConditions

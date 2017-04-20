@@ -1,0 +1,65 @@
+<?
+
+	namespace application\models\shortcuts\models\landing_page\regular_markup\masonry;
+
+	use application\models\shortcuts\models\landing_page\regular_markup\common\BlockContainer;
+	use application\models\shortcuts\models\landing_page\regular_markup\common\ContentBlock;
+
+	/**
+	 * Class MasonryItem
+	 */
+	class MasonryItem extends ContentBlock
+	{
+		public $imagePath;
+		public $imageWidth;
+		public $imageHeight;
+
+		public $title;
+		public $description;
+
+		/** @var  array */
+		public $filterTags;
+
+		/**
+		 * @param $parentShortcut \LandingPageShortcut
+		 * @param $parentBlock BlockContainer
+		 */
+		public function __construct($parentShortcut, $parentBlock)
+		{
+			parent::__construct($parentShortcut, $parentBlock);
+			$this->type = 'masonry-item';
+
+			$this->imageWidth = 0;
+			$this->imageHeight = 0;
+			$this->filterTags = array();
+		}
+
+		/**
+		 * @param $xpath \DOMXPath
+		 * @param $contextNode \DOMNode
+		 */
+		protected function configureFromXml($xpath, $contextNode)
+		{
+			ContentBlock::configureFromXml($xpath, $contextNode);
+
+			$queryResult = $xpath->query('./Image', $contextNode);
+			$fileName = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
+			$this->imagePath = \Utils::formatUrl(\Yii::app()->getBaseUrl(true) . $this->parentShortcut->relativeLink . '/images/' . $fileName);
+
+			$queryResult = $xpath->query('./ImageWidth', $contextNode);
+			$this->imageWidth = $queryResult->length > 0 ? intval(trim($queryResult->item(0)->nodeValue)) : $this->imageWidth;
+
+			$queryResult = $xpath->query('./ImageHeight', $contextNode);
+			$this->imageHeight = $queryResult->length > 0 ? intval(trim($queryResult->item(0)->nodeValue)) : $this->imageHeight;
+
+			$queryResult = $xpath->query('./Title', $contextNode);
+			$this->title = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
+
+			$queryResult = $xpath->query('./Description', $contextNode);
+			$this->description = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
+
+			$queryResult = $xpath->query('./FilterTag', $contextNode);
+			foreach ($queryResult as $node)
+				$this->filterTags[] = trim($node->nodeValue);
+		}
+	}

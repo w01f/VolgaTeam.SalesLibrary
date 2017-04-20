@@ -32,23 +32,25 @@
 
 			$.SalesPortal.ShortcutsManager.assignShortcutItemHandlers(landingPage);
 
-			$.each(landingPage.find('.link-feed'), function (key, value)
+			$.each(landingPage.find('.horizontal-feed'), function (key, value)
 			{
 				var linkFeed = $(value);
-				var feedId = linkFeed.prop('id').replace('link-feed-', '');
-				var feedSettings = $.parseJSON(linkFeed.find('.service-data .encoded-object').text());
-				new $.SalesPortal.LinkFeed({
+				var feedId = linkFeed.prop('id').replace('horizontal-feed-', '');
+				var querySettings = $.parseJSON(linkFeed.find('.service-data .encoded-object .query-settings').text());
+				var viewSettings = $.parseJSON(linkFeed.find('.service-data .encoded-object .view-settings').text());
+				new $.SalesPortal.HorizontalFeed({
 					containerId: feedId,
-					settings: feedSettings
+					querySettings: querySettings,
+					viewSettings: viewSettings
 				}).init();
 			});
 
-			$.each(landingPage.find('.news-block'), function (key, value)
+			$.each(landingPage.find('.vertical-feed'), function (key, value)
 			{
 				var newsBlock = $(value);
-				var newsId = newsBlock.prop('id').replace('news-block-', '');
+				var newsId = newsBlock.prop('id').replace('vertical-feed-', '');
 				var newsBlockSettings = $.parseJSON(newsBlock.find('>.service-data .encoded-object').text());
-				new $.SalesPortal.NewsBlock({
+				new $.SalesPortal.VerticalFeed({
 					containerId: newsId,
 					settings: newsBlockSettings
 				}).init();

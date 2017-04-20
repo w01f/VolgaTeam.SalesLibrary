@@ -1,4 +1,5 @@
 <?php
+	use application\models\data_query\common\DataColumnSettings;
 
 	/**
 	 * Class FavoritesController

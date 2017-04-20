@@ -1,4 +1,7 @@
 <?
+	use application\models\data_query\common\DataQueryHelper;
+	use application\models\data_query\common\QuerySettings;
+	use application\models\data_query\data_table\DataTableHelper;
 	use application\models\wallbin\models\web\LibraryManager as LibraryManager;
 	use application\models\wallbin\models\web\LibraryPage as LibraryPage;
 	use application\models\wallbin\models\web\LibraryFolder as LibraryFolder;
