@@ -10,6 +10,9 @@
 		public $htmlTag;
 		public $htmlClass;
 
+		/** @var  \HideCondition */
+		public $hideCondition;
+
 		/**
 		 * @param $parentShortcut \LandingPageShortcut
 		 * @param $parentBlock BlockContainer
@@ -18,6 +21,7 @@
 		{
 			parent::__construct($parentShortcut, $parentBlock);
 			$this->type = 'text';
+			$this->hideCondition = new \HideCondition();
 		}
 
 		/**
@@ -36,5 +40,9 @@
 
 			$queryResult = $xpath->query('./HtmlClass', $contextNode);
 			$this->htmlClass = $queryResult->length > 0 ? strtolower(trim($queryResult->item(0)->nodeValue)) : null;
+
+			$queryResult = $xpath->query('./Hide', $contextNode);
+			if ($queryResult->length > 0)
+				$this->hideCondition = \HideCondition::fromXml($xpath, $queryResult->item(0));
 		}
 	}

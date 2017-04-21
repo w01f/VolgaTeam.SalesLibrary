@@ -10,6 +10,9 @@
 		public $floatSide;
 		public $animation;
 
+		/** @var  \HideCondition */
+		public $hideCondition;
+
 		/**
 		 * @param $parentShortcut \LandingPageShortcut
 		 * @param $parentBlock BlockContainer
@@ -18,6 +21,7 @@
 		{
 			parent::__construct($parentShortcut, $parentBlock);
 			$this->type = 'image';
+			$this->hideCondition = new \HideCondition();
 		}
 
 		/**
@@ -37,5 +41,9 @@
 
 			$queryResult = $xpath->query('./Animation', $contextNode);
 			$this->animation = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
+
+			$queryResult = $xpath->query('./Hide', $contextNode);
+			if ($queryResult->length > 0)
+				$this->hideCondition = \HideCondition::fromXml($xpath, $queryResult->item(0));
 		}
 	}

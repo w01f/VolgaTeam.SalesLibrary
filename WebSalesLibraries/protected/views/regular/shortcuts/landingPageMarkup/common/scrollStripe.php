@@ -44,7 +44,16 @@
                             </div>
                         <? endif; ?>
                     <? endif; ?>
-                    <span class="item-text" style="<? echo $this->renderPartial('landingPageMarkup/style/styleTextAppearance', array('textAppearance' => $stripeItem->getTextAppearance()), true); ?>"><? echo $stripeItem->text;?></span>
+	                <?
+                        $stripeTextId = sprintf("stripe-item-text-%s", $stripeItem->id);
+                        echo $this->renderPartial('landingPageMarkup/style/styleTextAppearance',
+	                        array(
+		                        'textAppearance' => $stripeItem->getTextAppearance(),
+		                        'blockId' => $stripeTextId
+	                        )
+	                        , true);
+                    ?>
+                    <span id="<? echo $stripeTextId; ?>" class="item-text"><? echo $stripeItem->text;?></span>
                 </a>
           </span>
 	<? endforeach; ?>

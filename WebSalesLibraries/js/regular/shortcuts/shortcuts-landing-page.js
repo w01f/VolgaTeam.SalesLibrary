@@ -70,16 +70,18 @@
 				var masonrySettings = masonryBlock.find('>.service-data');
 				var horizontalGap = parseInt(masonrySettings.find('.horizontal-gap').text());
 				var verticalGap = parseInt(masonrySettings.find('.vertical-gap').text());
+				var caption = masonrySettings.find('.caption').text();
+				var defaultFilter = masonrySettings.find('.default-filter').text();
 				var grid = $('#masonry-grid-' + masonryId);
 				grid.cubeportfolio({
 					filters: '#masonry-filter-' + masonryId,
 					layoutMode: 'grid',
-					defaultFilter: '*',
+					defaultFilter: defaultFilter,
 					animationType: 'quicksand',
 					gapHorizontal: horizontalGap,
 					gapVertical: verticalGap,
 					gridAdjustment: 'responsive',
-					caption: 'zoom',
+					caption: caption,
 					displayType: 'fadeIn',
 					displayTypeSpeed: 100
 				});

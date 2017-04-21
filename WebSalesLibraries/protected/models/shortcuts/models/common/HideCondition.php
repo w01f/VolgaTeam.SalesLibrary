@@ -5,6 +5,8 @@
 	 */
 	class HideCondition
 	{
+		public $isConfigured;
+
 		public $extraSmall;
 		public $small;
 		public $medium;
@@ -12,6 +14,7 @@
 
 		public function __construct()
 		{
+			$this->isConfigured = false;
 			$this->extraSmall = false;
 			$this->small = false;
 			$this->medium = false;
@@ -38,6 +41,8 @@
 
 			$queryResult = $xpath->query('./Large', $contextNode);
 			$hideCondition->large = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : $hideCondition->large;
+
+			$hideCondition->isConfigured = $hideCondition->extraSmall || $hideCondition->small || $hideCondition->medium || $hideCondition->large;
 
 			return $hideCondition;
 		}

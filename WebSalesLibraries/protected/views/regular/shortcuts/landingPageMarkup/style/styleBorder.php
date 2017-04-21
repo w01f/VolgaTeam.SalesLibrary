@@ -1,12 +1,52 @@
 <?
-	/** @var $border BorderStyle */
-
 	use application\models\shortcuts\models\landing_page\regular_markup\common\BorderStyle;
+
+	/**
+	 * @var $blockId string
+	 * @var $border BorderStyle
+	 */
 ?>
 <? if (isset($border)): ?>
-    border-top: <? echo $border->size->top; ?>px <? echo '#' . $border->color; ?> solid !important;
-    border-left: <? echo $border->size->left; ?>px <? echo '#' . $border->color; ?> solid !important;
-    border-bottom: <? echo $border->size->bottom; ?>px <? echo '#' . $border->color; ?> solid !important;
-    border-right: <? echo $border->size->right; ?>px <? echo '#' . $border->color; ?> solid !important;
+    <style>
+        <?echo '#'.$blockId;?> {
+            border-top: <? echo $border->size->top; ?>px <? echo '#' . $border->color; ?> solid;
+            border-left: <? echo $border->size->left; ?>px <? echo '#' . $border->color; ?> solid;
+            border-bottom: <? echo $border->size->bottom; ?>px <? echo '#' . $border->color; ?> solid;
+            border-right: <? echo $border->size->right; ?>px <? echo '#' . $border->color; ?> solid;
+        }
+        <?if($border->hideCondition->isConfigured):?>
+            <?if($border->hideCondition->extraSmall):?>
+                @media (max-width: 767px) {
+                    <?echo '#'.$blockId;?> {
+                        border: none !important;
+                    }
+                }
+            <? endif; ?>
+            <?if($border->hideCondition->small):?>
+                @media (min-width: 768px) and (max-width: 991px) {
+                    <?echo '#'.$blockId;?> {
+                        border: none !important;
+                    }
+                }
+            <? endif; ?>
+            <?if($border->hideCondition->medium):?>
+                @media (min-width: 992px) and (max-width: 1199px) {
+                    <?echo '#'.$blockId;?> {
+                        border: none !important;
+                    }
+                }
+            <? endif; ?>
+            <?if($border->hideCondition->large):?>
+                @media (min-width: 1200px) {
+                    <?echo '#'.$blockId;?> {
+                        border: none !important;
+                    }
+                }
+            <? endif; ?>
+        <? endif; ?>
+    </style>
 <? endif; ?>
+
+
+
 

@@ -7,6 +7,7 @@
 	class TextAppearance
 	{
 		public $color;
+		public $hoverColor;
 		public $alignment;
 		public $lineHeight;
 
@@ -24,6 +25,9 @@
 
 			$queryResult = $xpath->query('./Color', $contextNode);
 			$textAppearance->color = $queryResult->length > 0 ? strtolower(trim($queryResult->item(0)->nodeValue)) : null;
+
+			$queryResult = $xpath->query('./HoverColor', $contextNode);
+			$textAppearance->hoverColor = $queryResult->length > 0 ? strtolower(trim($queryResult->item(0)->nodeValue)) : null;
 
 			$queryResult = $xpath->query('./TextAlign', $contextNode);
 			$textAppearance->alignment = $queryResult->length > 0 ? strtolower(trim($queryResult->item(0)->nodeValue)) : null;

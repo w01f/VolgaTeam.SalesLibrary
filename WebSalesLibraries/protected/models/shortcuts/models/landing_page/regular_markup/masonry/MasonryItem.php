@@ -4,6 +4,7 @@
 
 	use application\models\shortcuts\models\landing_page\regular_markup\common\BlockContainer;
 	use application\models\shortcuts\models\landing_page\regular_markup\common\ContentBlock;
+	use application\models\shortcuts\models\landing_page\regular_markup\common\TextAppearance;
 
 	/**
 	 * Class MasonryItem
@@ -16,6 +17,12 @@
 
 		public $title;
 		public $description;
+
+		/** @var  TextAppearance */
+		public $titleTextAppearance;
+
+		/** @var  TextAppearance */
+		public $descriptionTextAppearance;
 
 		/** @var  array */
 		public $filterTags;
@@ -57,6 +64,14 @@
 
 			$queryResult = $xpath->query('./Description', $contextNode);
 			$this->description = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
+
+			$queryResult = $xpath->query('./TitleStyle', $contextNode);
+			if ($queryResult->length > 0)
+				$this->titleTextAppearance = TextAppearance::fromXml($xpath, $queryResult->item(0));
+
+			$queryResult = $xpath->query('./DescriptionStyle', $contextNode);
+			if ($queryResult->length > 0)
+				$this->descriptionTextAppearance = TextAppearance::fromXml($xpath, $queryResult->item(0));
 
 			$queryResult = $xpath->query('./FilterTag', $contextNode);
 			foreach ($queryResult as $node)

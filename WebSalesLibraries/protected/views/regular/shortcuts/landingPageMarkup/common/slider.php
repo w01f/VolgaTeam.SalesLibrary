@@ -6,14 +6,22 @@
 
 	/** @var $contentBlock SliderBlock */
 
+	$blockId = sprintf('carousel%s', $contentBlock->id);
+
 	/** @var SlideBlock[] $slides */
 	$slides = $contentBlock->items;
+
+	echo $this->renderPartial('landingPageMarkup/style/styleBorder',
+		array(
+			'border' => $contentBlock->border,
+			'blockId' => $blockId
+		)
+		, true);
 ?>
-<div id="carousel<? echo $contentBlock->id; ?>" class="carousel landing-carousel slide <? if ($contentBlock->slideShow): ?>carousel-slide-show<? endif; ?>"
+<div id="<? echo $blockId; ?>" class="carousel landing-carousel slide <? if ($contentBlock->slideShow): ?>carousel-slide-show<? endif; ?>"
      <? if ($contentBlock->slideShow): ?>data-interval="<? echo $contentBlock->slideShowInterval;?>"<? endif; ?>
      style="<? echo $this->renderPartial('landingPageMarkup/style/stylePadding', array('padding' => $contentBlock->padding), true); ?>
-     <? echo $this->renderPartial('landingPageMarkup/style/styleMargin', array('margin' => $contentBlock->margin), true); ?>
-     <? echo $this->renderPartial('landingPageMarkup/style/styleBorder', array('border' => $contentBlock->border), true); ?>"
+     <? echo $this->renderPartial('landingPageMarkup/style/styleMargin', array('margin' => $contentBlock->margin), true); ?>"
 >
     <ol class="carousel-indicators">
 		<? $i = 0; ?>

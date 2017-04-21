@@ -13,8 +13,14 @@
 		/** @var  \Padding */
 		public $itemsPadding;
 
-		/** @var  MasonryFilter */
+		public $enableCaptionZoom;
+		public $captionZoomScale;
+
+		/** @var  MasonryFilter[] */
 		public $filters;
+
+		/** @var  MasonryFilter */
+		public $defaultFilter;
 
 		/**
 		 * @param $parentShortcut \LandingPageShortcut
@@ -25,6 +31,8 @@
 			parent::__construct($parentShortcut, $parentBlock);
 			$this->type = 'masonry';
 			$this->itemsPadding = new \Padding(0);
+			$this->enableCaptionZoom = true;
+			$this->captionZoomScale = 1.25;
 			$this->filters = array();
 		}
 
@@ -40,12 +48,20 @@
 			if ($queryResult->length > 0)
 				$this->itemsPadding = \Padding::fromXml($xpath, $queryResult->item(0));
 
+			$queryResult = $xpath->query('./EnableCaptionZoom', $contextNode);
+			$this->enableCaptionZoom = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : $this->enableCaptionZoom;
+
+			$queryResult = $xpath->query('./CaptionZoomScale', $contextNode);
+			$this->captionZoomScale = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : $this->captionZoomScale;
+
 			$queryResult = $xpath->query('./Filter/Item', $contextNode);
 			foreach ($queryResult as $node)
 			{
 				$filter = new MasonryFilter();
 				$filter->configureFromXml($xpath, $node);
 				$this->filters[] = $filter;
+				if ($filter->isDefault)
+					$this->defaultFilter = $filter;
 			}
 
 			if ($this->isAccessGranted)
