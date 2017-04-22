@@ -7,15 +7,15 @@
 ?>
 <style>
     #masonry-container-<? echo $contentBlock->id; ?> .cbp-caption-zoom .cbp-caption:hover .cbp-caption-defaultWrap {
-        -webkit-transform: scale(<?echo $contentBlock->captionZoomScale;?>) !important;
-        transform: scale(<?echo $contentBlock->captionZoomScale;?>) !important;
+        -webkit-transform: scale(<?echo $contentBlock->viewSettings->captionZoomScale;?>) !important;
+        transform: scale(<?echo $contentBlock->viewSettings->captionZoomScale;?>) !important;
     }
 </style>
 <div id="masonry-container-<? echo $contentBlock->id; ?>" class="col-xs-12 masonry-container">
     <div class="service-data">
-        <div class="horizontal-gap"><? echo($contentBlock->itemsPadding->left + $contentBlock->itemsPadding->right); ?></div>
-        <div class="vertical-gap"><? echo($contentBlock->itemsPadding->top + $contentBlock->itemsPadding->bottom); ?></div>
-        <div class="caption"><? echo $contentBlock->enableCaptionZoom ? 'zoom' : ''; ?></div>
+        <div class="horizontal-gap"><? echo($contentBlock->viewSettings->itemsPadding->left + $contentBlock->viewSettings->itemsPadding->right); ?></div>
+        <div class="vertical-gap"><? echo($contentBlock->viewSettings->itemsPadding->top + $contentBlock->viewSettings->itemsPadding->bottom); ?></div>
+        <div class="caption"><? echo $contentBlock->viewSettings->enableCaptionZoom ? 'zoom' : ''; ?></div>
         <div class="default-filter"><? echo isset($contentBlock->defaultFilter) ? sprintf('.%s', $contentBlock->defaultFilter->tags[0]) : '*'; ?></div>
     </div>
 	<? if (count($contentBlock->filters) > 1): ?>

@@ -86,6 +86,15 @@
 					displayTypeSpeed: 100
 				});
 				$.SalesPortal.ShortcutsManager.assignShortcutItemHandlers(grid);
+				grid.find('.library-link-item').off('click').on('click', function (e)
+				{
+					e.stopPropagation();
+					var linkId = $(this).find('.service-data .link-id').text();
+					$.SalesPortal.LinkManager.requestViewDialog({
+						linkId: linkId,
+						isQuickSite: false
+					});
+				});
 			});
 
 			landingPage.find('[data-bs-hover-animate]')

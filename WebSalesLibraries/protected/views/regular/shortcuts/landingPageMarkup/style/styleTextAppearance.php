@@ -9,6 +9,9 @@
 <? if (isset($textAppearance)): ?>
     <style>
         <?echo '#'.$blockId;?> {
+            <? if($textAppearance->wrapText): ?>;
+                white-space: normal;
+            <? endif; ?>
             <? if (isset($textAppearance->color)): ?>
                 color: <? echo '#' . $textAppearance->color; ?> !important;
             <? endif; ?>

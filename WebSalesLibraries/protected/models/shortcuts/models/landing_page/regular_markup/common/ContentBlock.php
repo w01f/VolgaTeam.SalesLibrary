@@ -15,6 +15,9 @@
 	use application\models\shortcuts\models\landing_page\regular_markup\vertical_feed\TrendingBlock as VerticalTrendingBlock;
 	use application\models\shortcuts\models\landing_page\regular_markup\vertical_feed\SearchFeedBlock as VerticalSearchFeedBlock;
 	use application\models\shortcuts\models\landing_page\regular_markup\vertical_feed\SpecificLinkFeedBlock as VerticalSpecificLinkFeedBlock;
+	use application\models\shortcuts\models\landing_page\regular_markup\masonry\TrendingBlock as MasonryTrendingBlock;
+	use application\models\shortcuts\models\landing_page\regular_markup\masonry\SearchFeedBlock as MasonrySearchFeedBlock;
+	use application\models\shortcuts\models\landing_page\regular_markup\masonry\SpecificLinkFeedBlock as MasonrySpecificLinkFeedBlock;
 
 	/**
 	 * Class ContentBlock
@@ -179,8 +182,14 @@
 					return 'common/scrollStripe';
 				case 'masonry':
 					return 'masonry/masonry';
+				case 'trending-masonry':
+					return 'masonry/trending';
+				case 'search-feed-masonry':
+					return 'masonry/searchFeed';
+				case 'specific-links-feed-masonry':
+					return 'masonry/specificLinkFeed';
 				default:
-					return 'undefinedBlock';
+					return 'common/undefinedBlock';
 			}
 		}
 
@@ -263,6 +272,18 @@
 					return $searchFeedBlock;
 				case "specific-links-feed-vertical":
 					$specificLinksFeedBlock = new VerticalSpecificLinkFeedBlock($parentShortcut, $parentBlock);
+					$specificLinksFeedBlock->configureFromXml($xpath, $contextNode);
+					return $specificLinksFeedBlock;
+				case "trending-masonry":
+					$trendingBlock = new MasonryTrendingBlock($parentShortcut, $parentBlock);
+					$trendingBlock->configureFromXml($xpath, $contextNode);
+					return $trendingBlock;
+				case "search-feed-masonry":
+					$searchFeedBlock = new MasonrySearchFeedBlock($parentShortcut, $parentBlock);
+					$searchFeedBlock->configureFromXml($xpath, $contextNode);
+					return $searchFeedBlock;
+				case "specific-links-feed-masonry":
+					$specificLinksFeedBlock = new MasonrySpecificLinkFeedBlock($parentShortcut, $parentBlock);
 					$specificLinksFeedBlock->configureFromXml($xpath, $contextNode);
 					return $specificLinksFeedBlock;
 				case "news":

@@ -10,11 +10,8 @@
 	 */
 	class MasonryBlock extends BlockContainer
 	{
-		/** @var  \Padding */
-		public $itemsPadding;
-
-		public $enableCaptionZoom;
-		public $captionZoomScale;
+		/** @var  MasonrySimpleSettings */
+		public $viewSettings;
 
 		/** @var  MasonryFilter[] */
 		public $filters;
@@ -30,9 +27,6 @@
 		{
 			parent::__construct($parentShortcut, $parentBlock);
 			$this->type = 'masonry';
-			$this->itemsPadding = new \Padding(0);
-			$this->enableCaptionZoom = true;
-			$this->captionZoomScale = 1.25;
 			$this->filters = array();
 		}
 
@@ -44,15 +38,7 @@
 		{
 			ContentBlock::configureFromXml($xpath, $contextNode);
 
-			$queryResult = $xpath->query('./ImagePadding', $contextNode);
-			if ($queryResult->length > 0)
-				$this->itemsPadding = \Padding::fromXml($xpath, $queryResult->item(0));
-
-			$queryResult = $xpath->query('./EnableCaptionZoom', $contextNode);
-			$this->enableCaptionZoom = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : $this->enableCaptionZoom;
-
-			$queryResult = $xpath->query('./CaptionZoomScale', $contextNode);
-			$this->captionZoomScale = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : $this->captionZoomScale;
+			$this->viewSettings = MasonrySettings::fromXml(MasonrySettings::MasonryTypeSimple, $xpath, $contextNode);
 
 			$queryResult = $xpath->query('./Filter/Item', $contextNode);
 			foreach ($queryResult as $node)

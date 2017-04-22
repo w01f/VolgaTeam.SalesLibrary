@@ -60,3 +60,14 @@
 {
     text-align: left;
 }
+
+#content .shortcuts-page-content.landing-page .cbp-caption img
+{
+    border: solid #ededed 1px;
+}
+
+#content .shortcuts-page-content.landing-page .cbp-l-grid-masonry-projects-title
+{
+    margin-top: 5px !important;
+    margin-bottom: 6px !important;
+}
