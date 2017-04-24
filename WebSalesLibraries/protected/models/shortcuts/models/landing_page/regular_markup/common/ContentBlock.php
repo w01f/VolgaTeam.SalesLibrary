@@ -146,6 +146,8 @@
 			{
 				case 'row':
 					return 'common/row';
+				case 'auto-fit-row':
+					return 'common/autoFitRow';
 				case 'column':
 					return 'common/column';
 				case 'image':
@@ -208,6 +210,10 @@
 			{
 				case "row":
 					$row = new Row($parentShortcut, $parentBlock);
+					$row->configureFromXml($xpath, $contextNode);
+					return $row;
+				case "auto-fit-row":
+					$row = new AutoFitRow($parentShortcut, $parentBlock);
 					$row->configureFromXml($xpath, $contextNode);
 					return $row;
 				case "column":

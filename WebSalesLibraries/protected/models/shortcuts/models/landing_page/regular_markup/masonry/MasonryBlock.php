@@ -45,9 +45,12 @@
 			{
 				$filter = new MasonryFilter();
 				$filter->configureFromXml($xpath, $node);
-				$this->filters[] = $filter;
-				if ($filter->isDefault)
-					$this->defaultFilter = $filter;
+				if($filter->isAccessGranted)
+				{
+					$this->filters[] = $filter;
+					if ($filter->isDefault)
+						$this->defaultFilter = $filter;
+				}
 			}
 
 			if ($this->isAccessGranted)
