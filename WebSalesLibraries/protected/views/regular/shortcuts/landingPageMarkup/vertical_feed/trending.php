@@ -1,18 +1,38 @@
 <?
 	use application\models\data_query\link_feed\LinkFeedItem;
-	use application\models\feeds\common\FeedItemSettings;
+	use application\models\data_query\link_feed\LinkFeedQuerySettings;
+	use application\models\data_query\link_feed\TrendingFeedQuerySettings;
+	use application\models\feeds\common\FeedControlSettings;
+	use application\models\feeds\common\TrendingFeedControlSettings;
 	use application\models\feeds\vertical\LinkFeedStyle;
+	use application\models\feeds\vertical\TrendingFeedSettings;
 	use application\models\shortcuts\models\landing_page\regular_markup\vertical_feed\TrendingBlock;
 
 	/** @var $contentBlock TrendingBlock */
 
+	/** @var TrendingFeedQuerySettings $querySettings */
+	$querySettings = $contentBlock->querySettings;
+	/** @var TrendingFeedSettings $viewSettings */
+	$viewSettings = $contentBlock->viewSettings;
 	/** @var LinkFeedItem[] $feedItems */
 	$feedItems = $contentBlock->getFeedItems();
 
 	/** @var LinkFeedStyle $style */
-	$style = $contentBlock->viewSettings->style;
+	$style = $viewSettings->style;
 ?>
 <style>
+    <?if (!empty($viewSettings->controlActiveColor)):?>
+    #vertical-feed-<? echo $contentBlock->id; ?> .vertical-feed-controls-container.btn-group .btn.btn-default.active,
+    #vertical-feed-<? echo $contentBlock->id; ?> .vertical-feed-controls-container.btn-group .btn.btn-default.active:focus,
+    #vertical-feed-<? echo $contentBlock->id; ?> .vertical-feed-controls-container.btn-group .btn.btn-default.active:hover,
+    #vertical-feed-<? echo $contentBlock->id; ?> .vertical-feed-controls-container.btn-group .btn.btn-default.active:focus:hover {
+        background-color: <? echo '#'.$viewSettings->controlActiveColor;?> !important;
+        -webkit-box-shadow: none !important;
+        box-shadow: none !important;
+    }
+
+    <?endif;?>
+
     #vertical-feed-<? echo $contentBlock->id; ?> .panel-body {
         padding-top: <?echo $style->bodyPadding->top;?>px !important;
         padding-left: <?echo $style->bodyPadding->left;?>px !important;
@@ -54,124 +74,138 @@
 <div id="vertical-feed-<? echo $contentBlock->id; ?>" class="vertical-feed news-block">
     <div class="service-data">
         <div class="encoded-object">
-			<? echo CJSON::encode($contentBlock->viewSettings); ?>
+            <div class="encoded-object">
+                <div class="query-settings"><? echo CJSON::encode($querySettings); ?></div>
+                <div class="view-settings"><? echo CJSON::encode($viewSettings); ?></div>
+            </div>
         </div>
+    </div>
+    <div class="btn-group vertical-feed-controls-container hidden-xs hidden-sm" role="group">
+		<? if ($viewSettings->controlSettings->{TrendingFeedControlSettings::ControlTagDateToday}->enabled ||
+			$viewSettings->controlSettings->{TrendingFeedControlSettings::ControlTagDateWeek}->enabled ||
+			$viewSettings->controlSettings->{TrendingFeedControlSettings::ControlTagDateMonth}->enabled
+		): ?>
+			<?
+			$activeDateRangeTitle = 'Date Range';
+			switch ($querySettings->dateRangeType)
+			{
+				case TrendingFeedQuerySettings::DataRangeTypeToday:
+					$activeDateRangeTitle = $viewSettings->controlSettings->{TrendingFeedControlSettings::ControlTagDateToday}->title;
+					break;
+				case TrendingFeedQuerySettings::DataRangeTypeWeek:
+					$activeDateRangeTitle = $viewSettings->controlSettings->{TrendingFeedControlSettings::ControlTagDateWeek}->title;
+					break;
+				case TrendingFeedQuerySettings::DataRangeTypeMonth:
+					$activeDateRangeTitle = $viewSettings->controlSettings->{TrendingFeedControlSettings::ControlTagDateMonth}->title;
+					break;
+			}
+			?>
+            <div class="btn-group date-range-toggle-group" role="group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                    <span class="title"><? echo $activeDateRangeTitle; ?></span>
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+					<?
+						/** @var TrendingFeedControlSettings $control */
+						$control = $viewSettings->controlSettings->{TrendingFeedControlSettings::ControlTagDateToday};
+					?>
+					<? if ($control->enabled): ?>
+                        <li class="date-range-toggle">
+                            <a href="#"><? echo $control->title; ?></a>
+                            <span class="service-data">
+                                            <span class="date-range-tag"><? echo TrendingFeedQuerySettings::DataRangeTypeToday; ?></span>
+                                        </span>
+                        </li>
+					<? endif; ?>
+					<?
+						/** @var TrendingFeedControlSettings $control */
+						$control = $viewSettings->controlSettings->{TrendingFeedControlSettings::ControlTagDateWeek};
+					?>
+					<? if ($control->enabled): ?>
+                        <li class="date-range-toggle">
+                            <a href="#"><? echo $control->title; ?></a>
+                            <span class="service-data">
+                                            <span class="date-range-tag"><? echo TrendingFeedQuerySettings::DataRangeTypeWeek; ?></span>
+                                        </span>
+                        </li>
+					<? endif; ?>
+					<?
+						/** @var TrendingFeedControlSettings $control */
+						$control = $viewSettings->controlSettings->{TrendingFeedControlSettings::ControlTagDateMonth};
+					?>
+					<? if ($control->enabled): ?>
+                        <li class="date-range-toggle">
+                            <a href="#"><? echo $control->title; ?></a>
+                            <span class="service-data">
+                                            <span class="date-range-tag"><? echo TrendingFeedQuerySettings::DataRangeTypeMonth; ?></span>
+                                        </span>
+                        </li>
+					<? endif; ?>
+                </ul>
+            </div>
+		<? endif; ?>
+		<?
+			/** @var FeedControlSettings $control */
+			$control = $viewSettings->controlSettings->{FeedControlSettings::ControlTagLinkFormatPowerPoint};
+		?>
+		<? if ($control->enabled): ?>
+            <button type="button"
+                    class="btn btn-default link-format-toggle<? if (in_array(LinkFeedQuerySettings::LinkFormatPowerPoint, $querySettings->linkFormats)): ?> active<? endif; ?>">
+                <span class="title"><? echo $control->title; ?></span>
+                <span class="service-data">
+                                <span class="link-format-tag"><? echo LinkFeedQuerySettings::LinkFormatPowerPoint; ?></span>
+                            </span>
+            </button>
+		<? endif; ?>
+		<?
+			/** @var FeedControlSettings $control */
+			$control = $viewSettings->controlSettings->{FeedControlSettings::ControlTagLinkFormatVideo};
+		?>
+		<? if ($control->enabled): ?>
+            <button type="button"
+                    class="btn btn-default link-format-toggle<? if (in_array(LinkFeedQuerySettings::LinkFormatVideo, $querySettings->linkFormats)): ?> active<? endif; ?>">
+                <span class="title"><? echo $control->title; ?></span>
+                <span class="service-data">
+                                <span class="link-format-tag"><? echo LinkFeedQuerySettings::LinkFormatVideo; ?></span>
+                            </span>
+            </button>
+		<? endif; ?>
+		<?
+			/** @var FeedControlSettings $control */
+			$control = $viewSettings->controlSettings->{FeedControlSettings::ControlTagLinkFormatDocuments};
+		?>
+		<? if ($control->enabled): ?>
+            <button type="button"
+                    class="btn btn-default link-format-toggle<? if (in_array(LinkFeedQuerySettings::LinkFormatDocument, $querySettings->linkFormats)): ?> active<? endif; ?>">
+                <span class="title"><? echo $control->title; ?></span>
+                <span class="service-data">
+                                <span class="link-format-tag"><? echo LinkFeedQuerySettings::LinkFormatDocument; ?></span>
+                            </span>
+            </button>
+		<? endif; ?>
     </div>
     <div class="panel panel-default"
          style="<? if (!empty($style->outsideBorderColor)): ?>border-color: <? echo '#' . $style->outsideBorderColor; ?>;<? endif; ?>">
         <div class="panel-heading"
-             style="<? if ($contentBlock->viewSettings->hideHeader): ?>display: none;<? endif; ?><? if (!empty($style->headerColor)): ?>background-color: <? echo '#' . $style->headerColor; ?>;<? endif; ?>">
-			<? if (!empty($contentBlock->viewSettings->icon)): ?>
-                <i class="icomoon icomoon-lg <? echo $contentBlock->viewSettings->icon; ?>"
+             style="<? if ($viewSettings->hideHeader): ?>display: none;<? endif; ?><? if (!empty($style->headerColor)): ?>background-color: <? echo '#' . $style->headerColor; ?>;<? endif; ?>">
+			<? if (!empty($viewSettings->icon)): ?>
+                <i class="icomoon icomoon-lg <? echo $viewSettings->icon; ?>"
                    style="<? if (!empty($style->headerIconColor)): ?>color: <? echo '#' . $style->headerIconColor; ?>;<? endif; ?>"></i>
 			<? else: ?>
                 <span class="glyphicon glyphicon-list-alt"></span>
 			<? endif; ?>
-            <strong style="<? if (!empty($style->headerTextColor)): ?>color: <? echo '#' . $style->headerTextColor; ?>;<? endif; ?>"><? echo $contentBlock->viewSettings->title; ?></strong>
+            <strong style="<? if (!empty($style->headerTextColor)): ?>color: <? echo '#' . $style->headerTextColor; ?>;<? endif; ?>"><? echo $viewSettings->title; ?></strong>
         </div>
         <div class="panel-body">
             <div class="row">
-                <div class="col-xs-12">
-                    <ul class="feed-items-list">
-						<? $linkNumber = 1; ?>
-						<? foreach ($feedItems as $feedItem): ?>
-                            <li class="news-item">
-                                <a href="#" class="content library-link-block">
-									<? if ($style->showLinkCounter): ?>
-                                        <div class="link-number"><? echo $linkNumber; ?>.</div>
-									<? endif; ?>
-                                    <div class="link-info">
-										<?
-											$itemSettingsName = $contentBlock->dataItemSettings->{FeedItemSettings::DataItemTagName};
-											$itemSettingsLibrary = $contentBlock->dataItemSettings->{FeedItemSettings::DataItemTagLibrary};
-											$itemSettingsViewsCount = $contentBlock->dataItemSettings->{FeedItemSettings::DataItemTagViewsCount};
-										?>
-										<? if ($itemSettingsName->enabled && $style->linkNamePosition === LinkFeedStyle::LinkNamePositionTop): ?>
-                                            <div class="text">
-                                            <span class="feed-info link-name" style="
-                                            <? if (!empty($itemSettingsName->color)): ?>
-                                                    color: <? echo '#' . $itemSettingsName->color;?>;
-                                    <? endif; ?>
-                                            <? if (!empty($itemSettingsName->font)): ?>
-                                                    font-family: <? echo FontReplacementHelper::replaceFont($itemSettingsName->font->name); ?> !important;
-                                                    font-size: <? echo $itemSettingsName->font->size; ?>pt !important;
-                                                    font-weight: <? echo $itemSettingsName->font->isBold ? 'bold' : 'normal'; ?> !important;
-                                                    font-style: <? echo $itemSettingsName->font->isItalic ? 'italic' : 'normal'; ?> !important;
-                                                    text-decoration: <? echo $itemSettingsName->font->isUnderlined ? 'underline' : 'inherit'; ?> !important;
-                                            <? endif; ?>
-                                                    ">
-                                                <? echo $feedItem->linkName; ?>
-                                            </span>
-                                            </div>
-										<? endif; ?>
-										<? if (!empty($feedItem->thumbnail)): ?>
-                                            <div class="image library-link-thumbnail">
-                                                <img src="<? echo $feedItem->thumbnail; ?>"/>
-                                            </div>
-										<? endif; ?>
-                                        <div class="text">
-											<? if ($itemSettingsName->enabled && $style->linkNamePosition === LinkFeedStyle::LinkNamePositionBottom): ?>
-                                                <span class="feed-info link-name" style="
-												<? if (!empty($itemSettingsName->color)): ?>
-                                                        color: <? echo '#' . $itemSettingsName->color;?>;
-                                    <? endif; ?>
-												<? if (!empty($itemSettingsName->font)): ?>
-                                                        font-family: <? echo FontReplacementHelper::replaceFont($itemSettingsName->font->name); ?> !important;
-                                                        font-size: <? echo $itemSettingsName->font->size; ?>pt !important;
-                                                        font-weight: <? echo $itemSettingsName->font->isBold ? 'bold' : 'normal'; ?> !important;
-                                                        font-style: <? echo $itemSettingsName->font->isItalic ? 'italic' : 'normal'; ?> !important;
-                                                        text-decoration: <? echo $itemSettingsName->font->isUnderlined ? 'underline' : 'inherit'; ?> !important;
-												<? endif; ?>
-                                                        ">
-                                                <? echo $feedItem->linkName; ?>
-                                            </span>
-											<? endif; ?>
-											<? if ($itemSettingsLibrary->enabled): ?>
-                                                <span class="feed-info library-name" style="
-												<? if (!empty($itemSettingsLibrary->color)): ?>
-                                                        color: <? echo '#' . $itemSettingsLibrary->color;?>;
-                                        <? endif; ?>
-												<? if (!empty($itemSettingsLibrary->font)): ?>
-                                                        font-family: <? echo FontReplacementHelper::replaceFont($itemSettingsLibrary->font->name); ?> !important;
-                                                        font-size: <? echo $itemSettingsLibrary->font->size; ?>pt !important;
-                                                        font-weight: <? echo $itemSettingsLibrary->font->isBold ? 'bold' : 'normal'; ?> !important;
-                                                        font-style: <? echo $itemSettingsLibrary->font->isItalic ? 'italic' : 'normal'; ?> !important;
-                                                        text-decoration: <? echo $itemSettingsLibrary->font->isUnderlined ? 'underline' : 'inherit'; ?> !important;
-												<? endif; ?>
-                                                        ">
-                                                <? echo $feedItem->libraryName; ?>
-                                            </span>
-											<? endif; ?>
-											<? if ($itemSettingsViewsCount->enabled && $feedItem->viewsCount > 0): ?>
-                                                <span class="feed-info views-count" style="
-												<? if (!empty($itemSettingsViewsCount->color)): ?>
-                                                        color: <? echo '#' . $itemSettingsViewsCount->color;?>;
-                                        <? endif; ?>
-												<? if (!empty($itemSettingsViewsCount->font)): ?>
-                                                        font-family: <? echo FontReplacementHelper::replaceFont($itemSettingsViewsCount->font->name); ?> !important;
-                                                        font-size: <? echo $itemSettingsViewsCount->font->size; ?>pt !important;
-                                                        font-weight: <? echo $itemSettingsViewsCount->font->isBold ? 'bold' : 'normal'; ?> !important;
-                                                        font-style: <? echo $itemSettingsViewsCount->font->isItalic ? 'italic' : 'normal'; ?> !important;
-                                                        text-decoration: <? echo $itemSettingsViewsCount->font->isUnderlined ? 'underline' : 'inherit'; ?> !important;
-												<? endif; ?>
-                                                        ">
-                                                <? echo $feedItem->viewsCount; ?> views
-                                            </span>
-											<? endif; ?>
-                                        </div>
-                                    </div>
-                                    <div class="service-data">
-                                        <div class="link-id"><? echo $feedItem->linkId; ?></div>
-                                    </div>
-                                </a>
-                            </li>
-							<? $linkNumber++; ?>
-						<? endforeach; ?>
-                    </ul>
+                <div class="col-xs-12 feed-items-list-container">
+					<? echo $this->renderPartial('landingPageMarkup/vertical_feed/feedItems', array('feedId' => $contentBlock->id, 'viewSettings' => $viewSettings, 'feedItems' => $feedItems), true); ?>
                 </div>
             </div>
         </div>
         <div class="panel-footer"
-             style="<? if ($contentBlock->viewSettings->hideFooter): ?>display: none;<? endif; ?><? if (!empty($style->footerColor)): ?>background-color: <? echo '#' . $style->footerColor; ?>;<? endif; ?>"></div>
+             style="<? if ($viewSettings->hideFooter): ?>display: none;<? endif; ?><? if (!empty($style->footerColor)): ?>background-color: <? echo '#' . $style->footerColor; ?>;<? endif; ?>"></div>
     </div>
 </div>

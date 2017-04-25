@@ -5,15 +5,17 @@
 	/**
 	 * Class FeedSettings
 	 */
-	class FeedSettings
+	abstract class FeedSettings
 	{
 		const FeedTypeNews = 'news';
 		const FeedTypeTrending = 'trending';
 		const FeedTypeSearch = 'search';
-		const FeedTypeSpecificLinks = 'specific links';
+		const FeedTypeSpecificLinks = 'specific-links';
 
 		const ScrollDirectionUp = 'up';
 		const ScrollDirectionDown = 'down';
+
+		public $feedType;
 
 		public $title;
 		public $icon;
@@ -41,6 +43,37 @@
 		}
 
 		/**
+		 * @param string $feedType
+		 * @param string $encodedContent
+		 * @return FeedSettings
+		 * @throws \Exception
+		 */
+		public static function fromJson($feedType, $encodedContent)
+		{
+			switch ($feedType)
+			{
+				case self::FeedTypeTrending:
+					$instance = new TrendingFeedSettings();
+					\Utils::loadFromJson($instance, $encodedContent);
+					return $instance;
+				case self::FeedTypeSearch:
+					$instance = new SearchFeedSettings();
+					\Utils::loadFromJson($instance, $encodedContent);
+					return $instance;
+				case self::FeedTypeSpecificLinks:
+					$instance = new SpecificLinkFeedSettings();
+					\Utils::loadFromJson($instance, $encodedContent);
+					return $instance;
+				case self::FeedTypeNews:
+					$instance = new SimpleFeedSettings();
+					\Utils::loadFromJson($instance, $encodedContent);
+					return $instance;
+				default:
+					throw  new \Exception('Unknown feed type');
+			}
+		}
+
+		/**
 		 * @param $feedType string
 		 * @param $xpath \DOMXPath
 		 * @param $contextNode \DOMNode
@@ -51,14 +84,20 @@
 		{
 			switch ($feedType)
 			{
-				case self::FeedTypeNews:
-					$instance = new FeedSettings();
+				case self::FeedTypeTrending:
+					$instance = new TrendingFeedSettings();
 					$instance->configureFromXml($xpath, $contextNode);
 					return $instance;
-				case self::FeedTypeTrending:
 				case self::FeedTypeSearch:
+					$instance = new SearchFeedSettings();
+					$instance->configureFromXml($xpath, $contextNode);
+					return $instance;
 				case self::FeedTypeSpecificLinks:
-					$instance = new LinkFeedSettings();
+					$instance = new SpecificLinkFeedSettings();
+					$instance->configureFromXml($xpath, $contextNode);
+					return $instance;
+				case self::FeedTypeNews:
+					$instance = new SimpleFeedSettings();
 					$instance->configureFromXml($xpath, $contextNode);
 					return $instance;
 				default:

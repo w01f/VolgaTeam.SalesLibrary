@@ -1,11 +1,11 @@
 <?
 
-	namespace application\models\feeds\horizontal;
+	namespace application\models\feeds\common;
 
 	/**
-	 * Class SearchFeedControlSettings
+	 * Class SpecificLinkFeedControlSettings
 	 */
-	class SearchFeedControlSettings extends FeedControlSettings
+	class SpecificLinkFeedControlSettings extends FeedControlSettings
 	{
 		public static $tags = array(
 			self::ControlTagScrollButton,
@@ -16,7 +16,7 @@
 
 		/**
 		 * @param $tag
-		 * @return SearchFeedControlSettings
+		 * @return FeedControlSettings
 		 */
 		public static function createDefault($tag)
 		{

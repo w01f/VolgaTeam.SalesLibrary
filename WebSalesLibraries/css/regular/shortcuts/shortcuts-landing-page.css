@@ -66,6 +66,12 @@
     border: solid #ededed 1px;
 }
 
+#content .shortcuts-page-content.landing-page .cbp-l-grid-masonry-projects-title,
+#content .shortcuts-page-content.landing-page .cbp-l-grid-masonry-projects-desc
+{
+    line-height: 1.2;
+}
+
 #content .shortcuts-page-content.landing-page .cbp-l-grid-masonry-projects-title
 {
     margin-top: 5px !important;
@@ -112,4 +118,14 @@
     {
         float: left;
     }
+}
+
+#content .shortcuts-page-content.landing-page .vertical-feed-controls-container
+{
+    margin-bottom: 5px;
+}
+
+#content .shortcuts-page-content.landing-page .masonry-feed-controls-container
+{
+    margin-bottom: 35px;
 }

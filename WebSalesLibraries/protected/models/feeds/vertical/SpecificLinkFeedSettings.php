@@ -1,18 +1,17 @@
 <?
 
-	namespace application\models\feeds\horizontal;
+	namespace application\models\feeds\vertical;
 
 	use application\models\feeds\common\SpecificLinkFeedControlSettings;
 
 	/**
 	 * Class SpecificLinkFeedSettings
 	 */
-	class SpecificLinkFeedSettings extends FeedSettings
+	class SpecificLinkFeedSettings extends LinkFeedSettings
 	{
 		public function __construct()
 		{
 			$this->feedType = self::FeedTypeSpecificLinks;
-
 			parent::__construct();
 		}
 

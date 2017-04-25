@@ -1,18 +1,17 @@
 <?
 
-	namespace application\models\feeds\horizontal;
+	namespace application\models\feeds\vertical;
 
 	use application\models\feeds\common\TrendingFeedControlSettings;
 
 	/**
 	 * Class TrendingFeedSettings
 	 */
-	class TrendingFeedSettings extends FeedSettings
+	class TrendingFeedSettings extends LinkFeedSettings
 	{
 		public function __construct()
 		{
 			$this->feedType = self::FeedTypeTrending;
-
 			parent::__construct();
 		}
 

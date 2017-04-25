@@ -178,7 +178,7 @@
 					return 'vertical_feed/trending';
 				case 'search-feed-vertical':
 					return 'vertical_feed/searchFeed';
-				case 'specific-links-vertical':
+				case 'specific-links-feed-vertical':
 					return 'vertical_feed/specificLinkFeed';
 				case 'scroll-stripe':
 					return 'common/scrollStripe';

@@ -1,13 +1,13 @@
 <?
 
-	namespace application\models\feeds\horizontal;
+	namespace application\models\feeds\vertical;
 
 	use application\models\feeds\common\SearchFeedControlSettings;
 
 	/**
 	 * Class SearchFeedSettings
 	 */
-	class SearchFeedSettings extends FeedSettings
+	class SearchFeedSettings extends LinkFeedSettings
 	{
 		public function __construct()
 		{

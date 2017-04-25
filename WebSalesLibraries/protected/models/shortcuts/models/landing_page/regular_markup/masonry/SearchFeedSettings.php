@@ -1,17 +1,17 @@
 <?
 
-	namespace application\models\feeds\horizontal;
+	namespace application\models\shortcuts\models\landing_page\regular_markup\masonry;
 
 	use application\models\feeds\common\SearchFeedControlSettings;
 
 	/**
 	 * Class SearchFeedSettings
 	 */
-	class SearchFeedSettings extends FeedSettings
+	class SearchFeedSettings extends MasonryFeedSettings
 	{
 		public function __construct()
 		{
-			$this->feedType = self::FeedTypeSearch;
+			$this->feedType = self::MasonryTypeSearch;
 			parent::__construct();
 		}
 

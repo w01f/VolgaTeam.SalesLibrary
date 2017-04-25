@@ -1,6 +1,6 @@
 <?
 
-	namespace application\models\feeds\horizontal;
+	namespace application\models\feeds\common;
 
 	/**
 	 * Class TrendingControlSettings
@@ -23,7 +23,7 @@
 
 		/**
 		 * @param $tag
-		 * @return TrendingFeedControlSettings
+		 * @return FeedControlSettings
 		 */
 		public static function createDefault($tag)
 		{

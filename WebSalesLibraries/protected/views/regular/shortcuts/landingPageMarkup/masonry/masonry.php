@@ -1,5 +1,6 @@
 <?
 	use application\models\shortcuts\models\landing_page\regular_markup\masonry\MasonryBlock;
+	use application\models\shortcuts\models\landing_page\regular_markup\masonry\MasonryItem;
 	use application\models\shortcuts\models\landing_page\regular_markup\masonry\MasonryShortcut;
 	use application\models\shortcuts\models\landing_page\regular_markup\masonry\MasonryUrl;
 
@@ -13,14 +14,13 @@
 </style>
 <div id="masonry-container-<? echo $contentBlock->id; ?>" class="col-xs-12 masonry-container">
     <div class="service-data">
-        <div class="horizontal-gap"><? echo($contentBlock->viewSettings->itemsPadding->left + $contentBlock->viewSettings->itemsPadding->right); ?></div>
-        <div class="vertical-gap"><? echo($contentBlock->viewSettings->itemsPadding->top + $contentBlock->viewSettings->itemsPadding->bottom); ?></div>
-        <div class="caption"><? echo $contentBlock->viewSettings->enableCaptionZoom ? 'zoom' : ''; ?></div>
-        <div class="default-filter"><? echo isset($contentBlock->defaultFilter) ? sprintf('.%s', $contentBlock->defaultFilter->tags[0]) : '*'; ?></div>
+        <div class="encoded-object">
+            <div class="view-settings"><? echo CJSON::encode($contentBlock->viewSettings); ?></div>
+        </div>
     </div>
-	<? if (count($contentBlock->filters) > 1): ?>
+	<? if (count($contentBlock->viewSettings->filters) > 1): ?>
         <div id="masonry-filter-<? echo $contentBlock->id; ?>" class="cbp-l-filters-buttonCenter">
-			<? foreach ($contentBlock->filters as $filter): ?>
+			<? foreach ($contentBlock->viewSettings->filters as $filter): ?>
                 <div data-filter="<? echo '.' . implode(', .', $filter->tags) ?>"
                      class="cbp-filter-item<? if ($filter->isDefault): ?> cbp-filter-item-active<? endif; ?>">
 					<?
@@ -42,14 +42,20 @@
 	<? endif; ?>
     <div id="masonry-grid-<? echo $contentBlock->id; ?>" class="cbp cbp-l-grid-masonry-projects">
 		<? foreach ($contentBlock->items as $masonryItem): ?>
+		<?
+			/** @var MasonryItem $masonryItem */
+			$itemStyle = '';
+			if (($masonryItem->titleTextAppearance->wrapText || $masonryItem->description->wrapText) && $masonryItem->imageWidth > 0)
+				$itemStyle = sprintf('style="width: %spx;"', $masonryItem->imageWidth);
+		?>
 		<? if ($masonryItem->type === 'url'): ?>
 		<? /** @var MasonryUrl $masonryItem */ ?>
         <a href="<? echo $masonryItem->url; ?>" target="_blank"
-           class="cbp-item <? echo implode(' ', $masonryItem->filterTags); ?>">
+           class="cbp-item <? echo implode(' ', $masonryItem->filterTags); ?>" <? echo $itemStyle; ?>>
 			<? elseif ($masonryItem->type === 'shortcut'): ?>
 		<? /** @var MasonryShortcut $masonryItem */ ?>
             <a href="<? echo isset($masonryItem->shortcut) ? $masonryItem->shortcut->getSourceLink() : '#'; ?>"
-               class="cbp-item <? echo implode(' ', $masonryItem->filterTags); ?> shortcuts-link<? if (!isset($masonryItem->shortcut)): ?> disabled<? endif; ?>">
+               class="cbp-item <? echo implode(' ', $masonryItem->filterTags); ?> shortcuts-link<? if (!isset($masonryItem->shortcut)): ?> disabled<? endif; ?>" <? echo $itemStyle; ?>>
                 <div class="service-data">
 					<? echo isset($masonryItem->shortcut) ? $masonryItem->shortcut->getMenuItemData() : '<div class="same-page"></div><div class="has-custom-handler"></div>'; ?>
                 </div>
@@ -57,8 +63,7 @@
                 <div class="cbp-caption">
                     <div class="cbp-caption-defaultWrap">
                         <img src="<? echo $masonryItem->imagePath; ?>"
-						     <? if ($masonryItem->imageWidth > 0 && $masonryItem->imageHeight > 0): ?>width="<? echo $masonryItem->imageWidth; ?>"
-                             height="<? echo $masonryItem->imageHeight; ?>"<? endif; ?>>
+                             style="<? if ($masonryItem->imageWidth > 0): ?>max-width:<? echo $masonryItem->imageWidth; ?>px;<? endif; ?><? if ($masonryItem->imageHeight > 0): ?> max-height:<? echo $masonryItem->imageHeight; ?>px;<? endif; ?>">
                     </div>
                 </div>
 				<? if (!empty($masonryItem->title)): ?>

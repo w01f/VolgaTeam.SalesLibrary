@@ -10,6 +10,8 @@
 		const MasonryTypeSearch = 'search';
 		const MasonryTypeSpecificLinks = 'specific-links';
 
+		public $feedType;
+
 		/** @var  \Padding */
 		public $itemsPadding;
 
@@ -24,6 +26,37 @@
 		}
 
 		/**
+		 * @param string $feedType
+		 * @param string $encodedContent
+		 * @return MasonrySettings
+		 * @throws \Exception
+		 */
+		public static function fromJson($feedType, $encodedContent)
+		{
+			switch ($feedType)
+			{
+				case self::MasonryTypeTrending:
+					$instance = new TrendingFeedSettings();
+					\Utils::loadFromJson($instance, $encodedContent);
+					return $instance;
+				case self::MasonryTypeSearch:
+					$instance = new SearchFeedSettings();
+					\Utils::loadFromJson($instance, $encodedContent);
+					return $instance;
+				case self::MasonryTypeSpecificLinks:
+					$instance = new SpecificLinkFeedSettings();
+					\Utils::loadFromJson($instance, $encodedContent);
+					return $instance;
+				case self::MasonryTypeSimple:
+					$instance = new MasonrySimpleSettings();
+					\Utils::loadFromJson($instance, $encodedContent);
+					return $instance;
+				default:
+					throw  new \Exception('Unknown masonry type');
+			}
+		}
+
+		/**
 		 * @param $feedType string
 		 * @param $xpath \DOMXPath
 		 * @param $contextNode \DOMNode
@@ -35,9 +68,15 @@
 			switch ($feedType)
 			{
 				case self::MasonryTypeTrending:
+					$instance = new TrendingFeedSettings();
+					$instance->configureFromXml($xpath, $contextNode);
+					return $instance;
 				case self::MasonryTypeSearch:
+					$instance = new SearchFeedSettings();
+					$instance->configureFromXml($xpath, $contextNode);
+					return $instance;
 				case self::MasonryTypeSpecificLinks:
-					$instance = new MasonryFeedSettings();
+					$instance = new SpecificLinkFeedSettings();
 					$instance->configureFromXml($xpath, $contextNode);
 					return $instance;
 				case self::MasonryTypeSimple:
@@ -45,7 +84,7 @@
 					$instance->configureFromXml($xpath, $contextNode);
 					return $instance;
 				default:
-					throw  new \Exception('Unknown feed type');
+					throw  new \Exception('Unknown masonry type');
 			}
 		}
 

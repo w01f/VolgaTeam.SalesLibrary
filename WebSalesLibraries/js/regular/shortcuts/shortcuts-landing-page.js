@@ -36,9 +36,11 @@
 			{
 				var linkFeed = $(value);
 				var feedId = linkFeed.prop('id').replace('horizontal-feed-', '');
-				var querySettings = $.parseJSON(linkFeed.find('.service-data .encoded-object .query-settings').text());
-				var viewSettings = $.parseJSON(linkFeed.find('.service-data .encoded-object .view-settings').text());
-				new $.SalesPortal.HorizontalFeed({
+				var querySettingsEncoded = linkFeed.find('>.service-data .encoded-object .query-settings').text();
+				var querySettings = querySettingsEncoded !== undefined && querySettingsEncoded.length ? $.parseJSON(querySettingsEncoded) : undefined;
+				var viewSettingsEncoded = linkFeed.find('>.service-data .encoded-object .view-settings').text();
+				var viewSettings = viewSettingsEncoded !== undefined && viewSettingsEncoded.length ? $.parseJSON(viewSettingsEncoded) : undefined;
+				new $.SalesPortal.LandingPage.HorizontalFeed({
 					containerId: feedId,
 					querySettings: querySettings,
 					viewSettings: viewSettings
@@ -47,12 +49,16 @@
 
 			$.each(landingPage.find('.vertical-feed'), function (key, value)
 			{
-				var newsBlock = $(value);
-				var newsId = newsBlock.prop('id').replace('vertical-feed-', '');
-				var newsBlockSettings = $.parseJSON(newsBlock.find('>.service-data .encoded-object').text());
-				new $.SalesPortal.VerticalFeed({
-					containerId: newsId,
-					settings: newsBlockSettings
+				var linkFeed = $(value);
+				var feedId = linkFeed.prop('id').replace('vertical-feed-', '');
+				var querySettingsEncoded = linkFeed.find('>.service-data .encoded-object .query-settings').text();
+				var querySettings = querySettingsEncoded !== undefined && querySettingsEncoded.length ? $.parseJSON(querySettingsEncoded) : undefined;
+				var viewSettingsEncoded = linkFeed.find('>.service-data .encoded-object .view-settings').text();
+				var viewSettings = viewSettingsEncoded !== undefined && viewSettingsEncoded.length ? $.parseJSON(viewSettingsEncoded) : undefined;
+				new $.SalesPortal.LandingPage.VerticalFeed({
+					containerId: feedId,
+					querySettings: querySettings,
+					viewSettings: viewSettings
 				}).init();
 			});
 
@@ -67,34 +73,15 @@
 			{
 				var masonryBlock = $(value);
 				var masonryId = masonryBlock.prop('id').replace('masonry-container-', '');
-				var masonrySettings = masonryBlock.find('>.service-data');
-				var horizontalGap = parseInt(masonrySettings.find('.horizontal-gap').text());
-				var verticalGap = parseInt(masonrySettings.find('.vertical-gap').text());
-				var caption = masonrySettings.find('.caption').text();
-				var defaultFilter = masonrySettings.find('.default-filter').text();
-				var grid = $('#masonry-grid-' + masonryId);
-				grid.cubeportfolio({
-					filters: '#masonry-filter-' + masonryId,
-					layoutMode: 'grid',
-					defaultFilter: defaultFilter,
-					animationType: 'quicksand',
-					gapHorizontal: horizontalGap,
-					gapVertical: verticalGap,
-					gridAdjustment: 'responsive',
-					caption: caption,
-					displayType: 'fadeIn',
-					displayTypeSpeed: 100
-				});
-				$.SalesPortal.ShortcutsManager.assignShortcutItemHandlers(grid);
-				grid.find('.library-link-item').off('click').on('click', function (e)
-				{
-					e.stopPropagation();
-					var linkId = $(this).find('.service-data .link-id').text();
-					$.SalesPortal.LinkManager.requestViewDialog({
-						linkId: linkId,
-						isQuickSite: false
-					});
-				});
+				var querySettingsEncoded = masonryBlock.find('>.service-data .encoded-object .query-settings').text();
+				var querySettings = querySettingsEncoded !== undefined && querySettingsEncoded.length ? $.parseJSON(querySettingsEncoded) : undefined;
+				var viewSettingsEncoded = masonryBlock.find('>.service-data .encoded-object .view-settings').text();
+				var viewSettings = viewSettingsEncoded !== undefined && viewSettingsEncoded.length ? $.parseJSON(viewSettingsEncoded) : undefined;
+				new $.SalesPortal.LandingPage.Masonry({
+					containerId: masonryId,
+					querySettings: querySettings,
+					viewSettings: viewSettings
+				}).init();
 			});
 
 			landingPage.find('[data-bs-hover-animate]')

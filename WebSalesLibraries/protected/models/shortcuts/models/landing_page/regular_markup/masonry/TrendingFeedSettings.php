@@ -1,18 +1,17 @@
 <?
 
-	namespace application\models\feeds\horizontal;
+	namespace application\models\shortcuts\models\landing_page\regular_markup\masonry;
 
 	use application\models\feeds\common\TrendingFeedControlSettings;
 
 	/**
 	 * Class TrendingFeedSettings
 	 */
-	class TrendingFeedSettings extends FeedSettings
+	class TrendingFeedSettings extends MasonryFeedSettings
 	{
 		public function __construct()
 		{
-			$this->feedType = self::FeedTypeTrending;
-
+			$this->feedType = self::MasonryTypeTrending;
 			parent::__construct();
 		}
 

@@ -2,7 +2,7 @@
 	use application\models\data_query\link_feed\LinkFeedItem;
 	use application\models\data_query\link_feed\LinkFeedQuerySettings;
 	use application\models\data_query\link_feed\SearchFeedQuerySettings;
-	use application\models\feeds\horizontal\FeedControlSettings;
+	use application\models\feeds\common\FeedControlSettings;
 	use application\models\feeds\horizontal\SearchFeedSettings;
 	use application\models\shortcuts\models\landing_page\regular_markup\horizontal_feed\SearchFeedBlock;
 
@@ -19,21 +19,21 @@
 ?>
 
 <style>
-	<?if (!empty($viewSettings->controlActiveColor)):?>
-	.horizontal-feed-controls-container .btn-group .btn.btn-default.active,
-	.horizontal-feed-controls-container .btn-group .btn.btn-default.active:focus,
-	.horizontal-feed-controls-container .btn-group .btn.btn-default.active:hover,
-	.horizontal-feed-controls-container .btn-group .btn.btn-default.active:focus:hover,
-	.carousel-controls-container .btn.btn-default,
-	.carousel-controls-container .btn.btn-default:hover,
-	.carousel-controls-container .btn.btn-default:focus,
-	.carousel-controls-container .btn.btn-default:focus:hover {
-		background-color: <? echo '#'.$viewSettings->controlActiveColor;?> !important;
-		-webkit-box-shadow: none !important;
-		box-shadow: none !important;
-	}
+    <?if (!empty($viewSettings->controlActiveColor)):?>
+    #horizontal-feed-<? echo $feedId; ?> .horizontal-feed-controls-container .btn-group .btn.btn-default.active,
+    #horizontal-feed-<? echo $feedId; ?> .horizontal-feed-controls-container .btn-group .btn.btn-default.active:focus,
+    #horizontal-feed-<? echo $feedId; ?> .horizontal-feed-controls-container .btn-group .btn.btn-default.active:hover,
+    #horizontal-feed-<? echo $feedId; ?> .horizontal-feed-controls-container .btn-group .btn.btn-default.active:focus:hover,
+    #horizontal-feed-<? echo $feedId; ?> .carousel-controls-container .btn.btn-default,
+    #horizontal-feed-<? echo $feedId; ?> .carousel-controls-container .btn.btn-default:hover,
+    #horizontal-feed-<? echo $feedId; ?> .carousel-controls-container .btn.btn-default:focus,
+    #horizontal-feed-<? echo $feedId; ?> .carousel-controls-container .btn.btn-default:focus:hover {
+        background-color: <? echo '#'.$viewSettings->controlActiveColor;?> !important;
+        -webkit-box-shadow: none !important;
+        box-shadow: none !important;
+    }
 
-	<?endif;?>
+    <?endif;?>
 </style>
 <div id="horizontal-feed-<? echo $feedId; ?>" class="row horizontal-feed">
 	<div class="service-data">

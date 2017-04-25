@@ -2,16 +2,17 @@
 {
 	window.BaseUrl = window.BaseUrl || '';
 	$.SalesPortal = $.SalesPortal || {};
-	$.SalesPortal.HorizontalFeed = function (parameters)
+	$.SalesPortal.LandingPage = $.SalesPortal.LandingPage || {};
+	$.SalesPortal.LandingPage.HorizontalFeed = function (parameters)
 	{
 		var containerId = parameters.containerId;
-		var querySettings = new LinkFeedQuerySettings(parameters.querySettings);
-		var viewSettings = new HorizontalFeedViewSettings(parameters.viewSettings);
-		var linkFeedContainer = undefined;
+		var querySettings = new $.SalesPortal.LandingPage.LinkFeedQuerySettings(parameters.querySettings);
+		var viewSettings = new FeedViewSettings(parameters.viewSettings);
+		var feedContainer = undefined;
 
 		this.init = function ()
 		{
-			linkFeedContainer = $('#horizontal-feed-' + containerId);
+			feedContainer = $('#horizontal-feed-' + containerId);
 
 			initToggles();
 			initCarouselControls();
@@ -27,7 +28,7 @@
 		{
 			$.ajax({
 				type: "POST",
-				url: window.BaseUrl + "landingPage/getLinkFeedItems",
+				url: window.BaseUrl + "landingPage/getHorizontalLinkFeedItems",
 				data: {
 					feedId: containerId,
 					feedType: querySettings.feedType,
@@ -43,7 +44,7 @@
 				{
 					$.SalesPortal.Overlay.hide();
 
-					linkFeedContainer.find('.carousel-container').html(msg);
+					feedContainer.find('.carousel-container').html(msg);
 
 					initSlider();
 				},
@@ -58,16 +59,16 @@
 
 		var initToggles = function ()
 		{
-			linkFeedContainer.find('.date-range-toggle a').off('click.link-feed').on('click.link-feed', function ()
+			feedContainer.find('.date-range-toggle a').off('click.link-feed').on('click.link-feed', function ()
 			{
 				var dateRangeTitle = $(this).text();
-				linkFeedContainer.find('.date-range-toggle-group>button .title').text(dateRangeTitle);
+				feedContainer.find('.date-range-toggle-group>button .title').text(dateRangeTitle);
 				querySettings.dateRangeType = $(this).closest('.date-range-toggle').find('>.service-data .date-range-tag').text();
 
 				reloadLinks(true);
 			});
 
-			linkFeedContainer.find('.link-format-toggle').off('click').on('click', function ()
+			feedContainer.find('.link-format-toggle').off('click').on('click', function ()
 			{
 				$(this).blur();
 				if ($(this).hasClass('active'))
@@ -76,7 +77,7 @@
 					$(this).addClass('active');
 
 				querySettings.linkFormats = [];
-				$.each(linkFeedContainer.find('.link-format-toggle.active'), function ()
+				$.each(feedContainer.find('.link-format-toggle.active'), function ()
 				{
 					var button = $(this);
 					querySettings.linkFormats.push(button.find('.service-data .link-format-tag').text());
@@ -88,21 +89,21 @@
 
 		var initCarouselControls = function ()
 		{
-			linkFeedContainer.find('.portfolio_utube_carousel_control_left').off('click').on('click', function ()
+			feedContainer.find('.portfolio_utube_carousel_control_left').off('click').on('click', function ()
 			{
-				linkFeedContainer.find('.carousel').carousel('prev');
+				feedContainer.find('.carousel').carousel('prev');
 			});
-			linkFeedContainer.find('.portfolio_utube_carousel_control_right').off('click').on('click', function ()
+			feedContainer.find('.portfolio_utube_carousel_control_right').off('click').on('click', function ()
 			{
-				linkFeedContainer.find('.carousel').carousel('next');
+				feedContainer.find('.carousel').carousel('next');
 			})
 		};
 
 		var initSlider = function ()
 		{
-			linkFeedContainer.find('.carousel-slide-show').carousel();
+			feedContainer.find('.carousel-slide-show').carousel();
 
-			linkFeedContainer.find('.carousel .carousel-inner').swipe({
+			feedContainer.find('.carousel .carousel-inner').swipe({
 				swipeLeft: function ()
 				{
 					$(this).parent().carousel('next');
@@ -114,7 +115,7 @@
 				threshold: 0
 			});
 
-			var oneMoveItems = linkFeedContainer.find('.carousel.one-link-move .item');
+			var oneMoveItems = feedContainer.find('.carousel.one-link-move .item');
 			oneMoveItems.each(function ()
 			{
 				var itemToClone = $(this);
@@ -131,7 +132,7 @@
 				}
 			});
 
-			linkFeedContainer.find('.carousel .item .portfolio_utube_item').off('click').on('click', function (e)
+			feedContainer.find('.carousel .item .portfolio_utube_item').off('click').on('click', function (e)
 			{
 				e.stopPropagation();
 				var linkId = $(this).find('.service-data .link-id').text();
@@ -143,33 +144,17 @@
 		};
 	};
 
-	var LinkFeedQuerySettings = function (data)
-	{
-		this.feedType = undefined;
-		this.maxLinks = undefined;
-		this.linkFormats = undefined;
-		this.libraries = undefined;
-		this.dateRangeType = undefined;
-		this.thumbnailMode = undefined;
-		this.conditions = undefined;
-		this.linkConditions = undefined;
-		this.sortSettings = undefined;
-
-		for (var property in data)
-			if (data.hasOwnProperty(property))
-				this[property] = data[property];
-	};
-
-	var HorizontalFeedViewSettings = function (data)
+	var FeedViewSettings = function (data)
 	{
 		this.feedType = undefined;
 		this.linksPerSlide = undefined;
 		this.linksScrollMode = undefined;
 		this.slideShow = undefined;
 		this.slideShowInterval = undefined;
+		this.controlActiveColor = undefined;
+		this.maxThumbnailHeight = undefined;
 		this.dataItemSettings = undefined;
 		this.controlSettings = undefined;
-		this.controlActiveColor = undefined;
 
 		for (var property in data)
 			if (data.hasOwnProperty(property))

@@ -1,5 +1,5 @@
 <?
-	namespace application\models\feeds\horizontal;
+	namespace application\models\feeds\common;
 
 	/**
 	 * Class FeedControlSettings

@@ -6,7 +6,6 @@
 	use application\models\data_query\link_feed\LinkFeedQueryHelper;
 	use application\models\data_query\link_feed\LinkFeedQuerySettings;
 	use application\models\data_query\link_feed\SearchFeedQuerySettings;
-	use application\models\feeds\common\FeedItemSettings;
 	use application\models\shortcuts\models\landing_page\regular_markup\common\BlockContainer;
 	use application\models\shortcuts\models\landing_page\regular_markup\common\ContentBlock;
 
@@ -18,11 +17,8 @@
 		/** @var  SearchFeedQuerySettings */
 		public $querySettings;
 
-		/** @var  MasonryFeedSettings */
+		/** @var  SearchFeedSettings */
 		public $viewSettings;
-
-		/** @var  MasonryFeedItemSettings[] */
-		public $dataItemSettings;
 
 		/**
 		 * @param $parentShortcut \LandingPageShortcut
@@ -32,7 +28,6 @@
 		{
 			parent::__construct($parentShortcut, $parentBlock);
 			$this->type = 'search-feed-masonry';
-			$this->initDefaultDataItemSettings();
 		}
 
 		/**
@@ -45,31 +40,11 @@
 
 			$this->querySettings = LinkFeedQuerySettings::fromXml(LinkFeedQuerySettings::FeedTypeSearch, $xpath, $contextNode);
 			$this->viewSettings = MasonrySettings::fromXml(MasonrySettings::MasonryTypeSearch, $xpath, $contextNode);
-
-			$queryResult = $xpath->query('./DataSettings/Item', $contextNode);
-			/** @var $node \DOMElement */
-			foreach ($queryResult as $node)
-			{
-				$tag = $node->getAttribute('tag');
-				if (!empty($tag) && property_exists($this->dataItemSettings, $tag))
-				{
-					/** @var FeedItemSettings $dataItem */
-					$dataItem = $this->dataItemSettings->{$tag};
-					$dataItem->configureFromXml($xpath, $node);
-				}
-			}
 		}
 
 		/** @return LinkFeedItem[] */
 		public function getFeedItems()
 		{
 			return LinkFeedQueryHelper::queryFeedItems($this->querySettings);
-		}
-
-		private function initDefaultDataItemSettings()
-		{
-			$this->dataItemSettings = new \stdClass();
-			foreach (FeedItemSettings::$tags as $tag)
-				$this->dataItemSettings->{$tag} = new MasonryFeedItemSettings($tag);
 		}
 	}

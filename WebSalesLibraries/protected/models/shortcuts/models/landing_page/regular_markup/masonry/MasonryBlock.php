@@ -13,12 +13,6 @@
 		/** @var  MasonrySimpleSettings */
 		public $viewSettings;
 
-		/** @var  MasonryFilter[] */
-		public $filters;
-
-		/** @var  MasonryFilter */
-		public $defaultFilter;
-
 		/**
 		 * @param $parentShortcut \LandingPageShortcut
 		 * @param $parentBlock BlockContainer
@@ -27,7 +21,6 @@
 		{
 			parent::__construct($parentShortcut, $parentBlock);
 			$this->type = 'masonry';
-			$this->filters = array();
 		}
 
 		/**
@@ -39,19 +32,6 @@
 			ContentBlock::configureFromXml($xpath, $contextNode);
 
 			$this->viewSettings = MasonrySettings::fromXml(MasonrySettings::MasonryTypeSimple, $xpath, $contextNode);
-
-			$queryResult = $xpath->query('./Filter/Item', $contextNode);
-			foreach ($queryResult as $node)
-			{
-				$filter = new MasonryFilter();
-				$filter->configureFromXml($xpath, $node);
-				if($filter->isAccessGranted)
-				{
-					$this->filters[] = $filter;
-					if ($filter->isDefault)
-						$this->defaultFilter = $filter;
-				}
-			}
 
 			if ($this->isAccessGranted)
 			{
