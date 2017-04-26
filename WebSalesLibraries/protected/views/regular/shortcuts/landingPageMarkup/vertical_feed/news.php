@@ -37,7 +37,7 @@
 <div id="vertical-feed-<? echo $contentBlock->id; ?>" class="vertical-feed news-block">
     <div class="service-data">
         <div class="encoded-object">
-			<? echo CJSON::encode($contentBlock->viewSettings); ?>
+            <div class="view-settings"><? echo CJSON::encode($contentBlock->viewSettings); ?></div>
         </div>
     </div>
     <div class="panel panel-default"
