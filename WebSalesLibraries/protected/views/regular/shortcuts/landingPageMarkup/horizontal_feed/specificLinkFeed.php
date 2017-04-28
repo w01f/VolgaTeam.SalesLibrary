@@ -16,25 +16,14 @@
 	$viewSettings = $contentBlock->viewSettings;
 	/** @var LinkFeedItem[] $feedItems */
 	$feedItems = $contentBlock->getFeedItems();
+
+	echo $this->renderPartial('landingPageMarkup/style/feedControlsStyle',
+		array(
+			'feedId' => 'horizontal-feed-' . $feedId,
+			'style' => $contentBlock->viewSettings->controlsStyle
+		)
+		, true);
 ?>
-
-<style>
-    <?if (!empty($viewSettings->controlActiveColor)):?>
-    #horizontal-feed-<? echo $feedId; ?> .horizontal-feed-controls-container .btn-group .btn.btn-default.active,
-    #horizontal-feed-<? echo $feedId; ?> .horizontal-feed-controls-container .btn-group .btn.btn-default.active:focus,
-    #horizontal-feed-<? echo $feedId; ?> .horizontal-feed-controls-container .btn-group .btn.btn-default.active:hover,
-    #horizontal-feed-<? echo $feedId; ?> .horizontal-feed-controls-container .btn-group .btn.btn-default.active:focus:hover,
-    #horizontal-feed-<? echo $feedId; ?> .carousel-controls-container .btn.btn-default,
-    #horizontal-feed-<? echo $feedId; ?> .carousel-controls-container .btn.btn-default:hover,
-    #horizontal-feed-<? echo $feedId; ?> .carousel-controls-container .btn.btn-default:focus,
-    #horizontal-feed-<? echo $feedId; ?> .carousel-controls-container .btn.btn-default:focus:hover {
-        background-color: <? echo '#'.$viewSettings->controlActiveColor;?> !important;
-        -webkit-box-shadow: none !important;
-        box-shadow: none !important;
-    }
-
-    <?endif;?>
-</style>
 <div id="horizontal-feed-<? echo $feedId; ?>" class="row horizontal-feed">
 	<div class="service-data">
 		<div class="encoded-object">
@@ -44,7 +33,7 @@
 	</div>
 	<div class="col-xs-12">
 		<div class="row">
-			<div class="horizontal-feed-controls-container col-md-8 hidden-xs hidden-sm">
+			<div class="feed-controls-container col-md-8 hidden-xs hidden-sm">
 				<div class="btn-group" role="group">
 					<?
 						/** @var FeedControlSettings $control */

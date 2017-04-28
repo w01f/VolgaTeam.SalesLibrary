@@ -284,7 +284,7 @@
 			}
 
 			$excludeLinkCondition = '1=1';
-			if (count($queryConditions->excludeQueryConditions->linkConditions) > 0)
+			if (isset($queryConditions->excludeQueryConditions) && count($queryConditions->excludeQueryConditions->linkConditions) > 0)
 			{
 				$linkConditions = array();
 				foreach ($queryConditions->excludeQueryConditions->linkConditions as $linkCondition)
@@ -294,7 +294,7 @@
 			}
 
 			$excludeCategoryCondition = '1=1';
-			if (count($queryConditions->excludeQueryConditions->categories) > 0)
+			if (isset($queryConditions->excludeQueryConditions) && count($queryConditions->excludeQueryConditions->categories) > 0)
 			{
 				$categoryConditions = array();
 				foreach ($queryConditions->excludeQueryConditions->categories as $category)
@@ -307,7 +307,7 @@
 			}
 
 			$excludeLibraryCondition = '1 = 1';
-			if (count($queryConditions->excludeQueryConditions->libraries) > 0)
+			if (isset($queryConditions->excludeQueryConditions) && count($queryConditions->excludeQueryConditions->libraries) > 0)
 			{
 				$libraryIds = array();
 				foreach ($queryConditions->excludeQueryConditions->libraries as $library)

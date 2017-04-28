@@ -257,6 +257,7 @@
 				categorySettings: data.categorySettings,
 				viewCountSettings: data.viewCountSettings,
 				thumbnailSettings: data.thumbnailSettings,
+				excludeQueryConditions: data.excludeQueryConditions,
 				sortSettings: data.sortSettings,
 
 				baseDatasetKey: null
@@ -280,6 +281,7 @@
 			data.categorySettings = source.categorySettings;
 			data.viewCountSettings = source.viewCountSettings;
 			data.thumbnailSettings = source.thumbnailSettings;
+			data.excludeQueryConditions = source.excludeQueryConditions;
 			data.sortSettings = source.sortSettings;
 
 		};

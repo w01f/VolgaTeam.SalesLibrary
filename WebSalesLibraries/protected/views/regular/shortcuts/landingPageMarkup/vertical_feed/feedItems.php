@@ -13,7 +13,7 @@
 	/** @var LinkFeedStyle $style */
 	$style = $viewSettings->style;
 ?>
-<ul class="feed-items-list">
+<ul class="feed-items-list link-feed-items-list">
 	<? $linkNumber = 1; ?>
 	<? foreach ($feedItems as $feedItem): ?>
         <li class="news-item">

@@ -151,10 +151,10 @@
 		this.linksScrollMode = undefined;
 		this.slideShow = undefined;
 		this.slideShowInterval = undefined;
-		this.controlActiveColor = undefined;
 		this.maxThumbnailHeight = undefined;
 		this.dataItemSettings = undefined;
 		this.controlSettings = undefined;
+		this.controlsStyle = undefined;
 
 		for (var property in data)
 			if (data.hasOwnProperty(property))

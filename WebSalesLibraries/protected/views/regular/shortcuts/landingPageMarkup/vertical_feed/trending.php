@@ -19,20 +19,15 @@
 
 	/** @var LinkFeedStyle $style */
 	$style = $viewSettings->style;
+
+	echo $this->renderPartial('landingPageMarkup/style/feedControlsStyle',
+		array(
+			'feedId' => 'vertical-feed-' . $contentBlock->id,
+			'style' => $viewSettings->controlsStyle
+		)
+		, true);
 ?>
 <style>
-    <?if (!empty($viewSettings->controlActiveColor)):?>
-    #vertical-feed-<? echo $contentBlock->id; ?> .vertical-feed-controls-container.btn-group .btn.btn-default.active,
-    #vertical-feed-<? echo $contentBlock->id; ?> .vertical-feed-controls-container.btn-group .btn.btn-default.active:focus,
-    #vertical-feed-<? echo $contentBlock->id; ?> .vertical-feed-controls-container.btn-group .btn.btn-default.active:hover,
-    #vertical-feed-<? echo $contentBlock->id; ?> .vertical-feed-controls-container.btn-group .btn.btn-default.active:focus:hover {
-        background-color: <? echo '#'.$viewSettings->controlActiveColor;?> !important;
-        -webkit-box-shadow: none !important;
-        box-shadow: none !important;
-    }
-
-    <?endif;?>
-
     #vertical-feed-<? echo $contentBlock->id; ?> .panel-body {
         padding-top: <?echo $style->bodyPadding->top;?>px !important;
         padding-left: <?echo $style->bodyPadding->left;?>px !important;
@@ -56,10 +51,6 @@
         margin-bottom: <?echo $style->linkSpace?>px !important;
     }
 
-    #vertical-feed-<? echo $contentBlock->id; ?> .news-item .content .image {
-        min-width: <?echo $style->imageWidth;?>px !important;
-    }
-
     #vertical-feed-<? echo $contentBlock->id; ?> .news-item .content .image img {
         max-width: <?echo $style->imageWidth;?>px !important;
     }
@@ -70,6 +61,10 @@
     }
 
     <?endif;?>
+
+    #vertical-feed-<? echo $contentBlock->id; ?> .news-item .content .text {
+        max-width: <?echo $style->imageWidth;?>px !important;
+    }
 </style>
 <div id="vertical-feed-<? echo $contentBlock->id; ?>" class="vertical-feed news-block">
     <div class="service-data">
@@ -78,7 +73,7 @@
             <div class="view-settings"><? echo CJSON::encode($viewSettings); ?></div>
         </div>
     </div>
-    <div class="btn-group vertical-feed-controls-container hidden-xs hidden-sm" role="group">
+    <div class="btn-group feed-controls-container vertical-feed-controls-container hidden-xs hidden-sm" role="group">
 		<? if ($viewSettings->controlSettings->{TrendingFeedControlSettings::ControlTagDateToday}->enabled ||
 			$viewSettings->controlSettings->{TrendingFeedControlSettings::ControlTagDateWeek}->enabled ||
 			$viewSettings->controlSettings->{TrendingFeedControlSettings::ControlTagDateMonth}->enabled
@@ -185,7 +180,7 @@
 		<? endif; ?>
     </div>
     <div class="panel panel-default"
-         style="<? if (!empty($style->outsideBorderColor)): ?>border-color: <? echo '#' . $style->outsideBorderColor; ?>;<? endif; ?>">
+         style="<? if (!empty($style->outsideBorderColor)): ?>border-color: <? echo '#' . $style->outsideBorderColor; ?>; -webkit-box-shadow: 0 1px 1px <? echo '#' . $style->outsideBorderColor; ?>; box-shadow: 0 1px 1px <? echo '#' . $style->outsideBorderColor; ?>;<? endif; ?>">
         <div class="panel-heading"
              style="<? if ($viewSettings->hideHeader): ?>display: none;<? endif; ?><? if (!empty($style->headerColor)): ?>background-color: <? echo '#' . $style->headerColor; ?>;<? endif; ?>">
 			<? if (!empty($viewSettings->icon)): ?>
@@ -204,6 +199,6 @@
             </div>
         </div>
         <div class="panel-footer"
-             style="<? if ($viewSettings->hideFooter): ?>display: none;<? endif; ?><? if (!empty($style->footerColor)): ?>background-color: <? echo '#' . $style->footerColor; ?>;<? endif; ?>"></div>
+             style="<? if ($viewSettings->hideFooter): ?>display: none;<? endif; ?><? if (!empty($style->footerColor)): ?>background-color: <? echo '#' . $style->footerColor; ?>; border-top-color: <? echo '#' . $style->footerColor; ?>;<? endif; ?>"></div>
     </div>
 </div>

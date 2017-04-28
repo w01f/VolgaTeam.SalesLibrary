@@ -2,14 +2,104 @@
 	/**
 	 * @var $searchBar SearchBar
 	 */
+
 ?>
 <? if ($searchBar->configured): ?>
 	<?
 	$lastCharFromTagsName = substr(Yii::app()->params['tags']['column_name'], -1);
 	$tagsName = $lastCharFromTagsName == "y" ? substr_replace(Yii::app()->params['tags']['column_name'], "ies", -1) : (Yii::app()->params['tags']['column_name'] . "s");
 	$searchBar->categoryManager->loadCategories();
+	$searchBarId = 'search-bar-'.$searchBar->id;
+	$style =$searchBar->style;
 	?>
-    <table class="shortcuts-search-bar logger-form open" data-log-group="Shortcut Tile" data-log-action="Search Bar"
+    <style>
+        <?echo '#'.$searchBarId; ?> .search-bar-label
+        {
+        <?if(!empty($style->labelBackColor)):?>
+            background-color: <? echo '#'.$style->labelBackColor;?> !important;
+        <?endif;?>
+        <?if(!empty($style->labelTextColor)):?>
+            color: <? echo '#'.$style->labelTextColor;?> !important;
+        <?endif;?>
+        <?if(!empty($style->borderColor)):?>
+            border-color: <? echo '#'.$style->borderColor;?> !important;
+        <?endif;?>
+        }
+
+        <?echo '#'.$searchBarId; ?> .search-bar-button,
+        <?echo '#'.$searchBarId; ?> .search-bar-button:hover,
+        <?echo '#'.$searchBarId; ?> .search-bar-button:focus,
+        <?echo '#'.$searchBarId; ?> .search-bar-button:focus:hover
+        {
+        <?if(!empty($style->buttonBackColor)):?>
+            background-color: <? echo '#'.$style->buttonBackColor;?> !important;
+        <?endif;?>
+        <?if(!empty($style->buttonTextColor)):?>
+            color: <? echo '#'.$style->buttonTextColor;?> !important;
+        <?endif;?>
+        <?if(!empty($style->borderColor)):?>
+            border-color: <? echo '#'.$style->borderColor;?> !important;
+        <?endif;?>
+        }
+
+        <?echo '#'.$searchBarId; ?> .search-bar-run,
+        <?echo '#'.$searchBarId; ?> .search-bar-run:hover,
+        <?echo '#'.$searchBarId; ?> .search-bar-run:focus,
+        <?echo '#'.$searchBarId; ?> .search-bar-run:focus:hover
+        {
+        <?if(!empty($style->searchBackColor)):?>
+            background-color: <? echo '#'.$style->searchBackColor;?> !important;
+        <?endif;?>
+        <?if(!empty($style->searchTextColor)):?>
+            color: <? echo '#'.$style->searchTextColor;?> !important;
+        <?endif;?>
+        <?if(!empty($style->borderColor)):?>
+            border-color: <? echo '#'.$style->borderColor;?> !important;
+        <?endif;?>
+        }
+
+        <?echo '#'.$searchBarId; ?> input::placeholder
+        {
+        <?if(!empty($style->placeholderTextColor)):?>
+            color: <? echo '#'.$style->placeholderTextColor;?> !important;
+        <?endif;?>
+        }
+
+        <?echo '#'.$searchBarId; ?> input::-moz-placeholder
+        {
+        <?if(!empty($style->placeholderTextColor)):?>
+            color: <? echo '#'.$style->placeholderTextColor;?> !important;
+        <?endif;?>
+        }
+
+        <?echo '#'.$searchBarId; ?> input:-ms-input-placeholder
+        {
+        <?if(!empty($style->placeholderTextColor)):?>
+            color: <? echo '#'.$style->placeholderTextColor;?> !important;
+        <?endif;?>
+        }
+
+        <?echo '#'.$searchBarId; ?> input::-webkit-input-placeholder
+        {
+        <?if(!empty($style->placeholderTextColor)):?>
+            color: <? echo '#'.$style->placeholderTextColor;?> !important;
+        <?endif;?>
+        }
+
+        <?echo '#'.$searchBarId; ?> .search-bar-text
+        {
+            height: <? echo ($style->lineHeight+14);?>px !important;
+        <?if(!empty($style->borderColor)):?>
+            border-color: <? echo '#'.$style->borderColor;?> !important;
+        <?endif;?>
+        }
+
+        <?echo '#'.$searchBarId; ?> .btn
+        {
+            line-height: <? echo $style->lineHeight;?>px !important;
+        }
+    </style>
+    <table id="<?echo $searchBarId;?>" class="shortcuts-search-bar logger-form open" data-log-group="Shortcut Tile" data-log-action="Search Bar"
            style="text-align: <? echo $searchBar->alignment; ?>;">
         <tr>
             <td>
@@ -25,18 +115,17 @@
         <tr>
             <td>
                 <div class="input-group search-input-container">
-                    <span class="input-group-addon"
-                          style="<? if (!empty($searchBar->buttonColor)): ?>background-color:<? echo '#' . $searchBar->buttonColor; ?><? endif; ?>">Search:</span>
+                    <span class="input-group-addon search-bar-label">Search:</span>
                     <input class="form-control log-action search-bar-text" type="text"
                            placeholder="<? echo $searchBar->defaultLabel; ?>">
                     <span class="input-group-btn">
 						<? if ($searchBar->showTagsSelector): ?>
-                            <button class="btn btn-default log-action tags-filter-panel-switcher"
+                            <button class="btn btn-default log-action search-bar-button tags-filter-panel-switcher"
                                     type="button"><? echo $tagsName; ?></button>
 						<? endIf; ?>
-                        <button class="btn btn-default log-action search-bar-options"
+                        <button class="btn btn-default log-action search-bar-button search-bar-options"
                                 type="button">Search Options</button>
-						<button class="btn btn-default search-bar-run" type="button" style="<? if (!empty($searchBar->buttonColor)): ?>background-color:<? echo '#' . $searchBar->buttonColor; ?><? endif; ?>">
+						<button class="btn btn-default search-bar-run" type="button">
 							<img src="<? echo Yii::app()->getBaseUrl(true) . '/images/shortcuts/search-bar/search.png'; ?>">
 						</button>
 				  	</span>

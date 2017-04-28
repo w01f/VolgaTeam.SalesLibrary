@@ -2,6 +2,7 @@
 
 	namespace application\models\feeds\horizontal;
 
+	use application\models\feeds\common\ControlsStyle;
 	use application\models\feeds\common\FeedControlSettings;
 	use application\models\feeds\common\FeedItemSettings;
 
@@ -29,7 +30,6 @@
 		public $linksScrollMode;
 		public $slideShow;
 		public $slideShowInterval;
-		public $controlActiveColor;
 		public $maxThumbnailHeight;
 
 		/** @var  FeedItemSettings[] */
@@ -38,6 +38,9 @@
 		/** @var  FeedControlSettings[] */
 		public $controlSettings;
 
+		/** @var  ControlsStyle */
+		public $controlsStyle;
+
 		public function __construct()
 		{
 			$this->linksPerSlide = self::LinksPerSlide4;
@@ -45,6 +48,7 @@
 			$this->slideShow = false;
 			$this->slideShowInterval = 5000;
 			$this->maxThumbnailHeight = 0;
+			$this->controlsStyle = new ControlsStyle();
 
 			$this->initDefaultDataItemSettings();
 
@@ -130,9 +134,6 @@
 			$queryResult = $xpath->query('./SlideShowInterval', $contextNode);
 			$this->slideShowInterval = $queryResult->length > 0 ? intval(trim($queryResult->item(0)->nodeValue)) : $this->slideShowInterval;
 
-			$queryResult = $xpath->query('./ControlActiveColor', $contextNode);
-			$this->controlActiveColor = $queryResult->length > 0 ? strtolower(trim($queryResult->item(0)->nodeValue)) : null;
-
 			$queryResult = $xpath->query('./MaxThumbnailHeight', $contextNode);
 			$this->maxThumbnailHeight = $queryResult->length > 0 ? intval(trim($queryResult->item(0)->nodeValue)) : $this->maxThumbnailHeight;
 
@@ -161,6 +162,10 @@
 					$controlSettings->configureFromXml($xpath, $node);
 				}
 			}
+
+			$queryResult = $xpath->query('./ControlsStyle', $contextNode);
+			if ($queryResult->length > 0)
+				$this->controlsStyle->configureFromXml($xpath, $queryResult->item(0));
 		}
 
 		protected function initDefaultDataItemSettings()

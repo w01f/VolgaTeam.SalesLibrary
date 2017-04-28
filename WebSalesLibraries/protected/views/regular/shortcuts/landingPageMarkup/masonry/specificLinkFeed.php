@@ -14,21 +14,15 @@
 	$viewSettings = $contentBlock->viewSettings;
 	/** @var LinkFeedItem[] $feedItems */
 	$feedItems = $contentBlock->getFeedItems();
+
+	echo $this->renderPartial('landingPageMarkup/style/feedControlsStyle',
+		array(
+			'feedId' => 'masonry-container-' . $contentBlock->id,
+			'style' => $viewSettings->controlsStyle
+		)
+		, true);
 ?>
 <style>
-    <?if (!empty($viewSettings->controlActiveColor)):?>
-    #masonry-container-<? echo $contentBlock->id; ?> .masonry-feed-controls-container.btn-group .btn.btn-default.active,
-    #masonry-container-<? echo $contentBlock->id; ?> .masonry-feed-controls-container.btn-group .btn.btn-default.active:focus,
-    #masonry-container-<? echo $contentBlock->id; ?> .masonry-feed-controls-container.btn-group .btn.btn-default.active:hover,
-    #masonry-container-<? echo $contentBlock->id; ?> .masonry-feed-controls-container.btn-group .btn.btn-default.active:focus:hover
-    {
-        background-color: <? echo '#'.$viewSettings->controlActiveColor;?> !important;
-        -webkit-box-shadow: none !important;
-        box-shadow: none !important;
-    }
-
-    <?endif;?>
-    
     #masonry-container-<? echo $contentBlock->id; ?> .cbp-caption-zoom .cbp-caption:hover .cbp-caption-defaultWrap {
         -webkit-transform: scale(<?echo $viewSettings->captionZoomScale;?>) !important;
         transform: scale(<?echo $viewSettings->captionZoomScale;?>) !important;
@@ -41,7 +35,7 @@
             <div class="view-settings"><? echo CJSON::encode($viewSettings); ?></div>
         </div>
     </div>
-    <div class="btn-group masonry-feed-controls-container hidden-xs hidden-sm" role="group">
+    <div class="btn-group feed-controls-container masonry-feed-controls-container hidden-xs hidden-sm" role="group">
 		<?
 			/** @var FeedControlSettings $control */
 			$control = $viewSettings->controlSettings->{FeedControlSettings::ControlTagLinkFormatPowerPoint};

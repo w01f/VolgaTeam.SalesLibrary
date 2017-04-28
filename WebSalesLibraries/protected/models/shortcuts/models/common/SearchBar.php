@@ -6,6 +6,8 @@
 	 */
 	class SearchBar implements IShortcutSearchOptionsContainer, IShortcutActionContainer
 	{
+		public $id;
+
 		public $configured;
 
 		public $alignment;
@@ -24,7 +26,8 @@
 		public $subSearchDefaultView;
 		public $subConditions;
 
-		public $buttonColor;
+		/** @var  SearchBarStyle */
+		public $style;
 
 		/** @var  CategoryManager */
 		public $categoryManager;
@@ -32,7 +35,9 @@
 
 		public function __construct()
 		{
+			$this->id = uniqid();
 			$this->categoryManager = new CategoryManager();
+			$this->style = new SearchBarStyle();
 		}
 
 		/**
@@ -46,41 +51,47 @@
 			$xpath = new DomXPath($config);
 			$queryResult = $xpath->query('//SearchBar');
 			$this->configured = $queryResult->length > 0;
-			$queryResult = $xpath->query('//SearchBar/Alignment');
-			$this->alignment = $queryResult->length > 0 ? strtolower(trim($queryResult->item(0)->nodeValue)) : 'left';
-			$queryResult = $xpath->query('//SearchBar/Title');
-			$this->title = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : '';
-			$queryResult = $xpath->query('//SearchBar/Defaultlabel');
-			$this->defaultLabel = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : '';
-			$queryResult = $xpath->query('//SearchBar/OpenOnSamePage');
-			$this->samePage = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : true;
-			$queryResult = $xpath->query('//SearchBar/ShowTagsSelector');
-			$this->showTagsSelector = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : true;
+			if ($this->configured)
+			{
+				$rootNode = $queryResult->item(0);
 
-			$queryResult = $xpath->query('//SearchBar/SearchCondition');
-			$this->conditions = TableQueryConditions::fromXml($xpath, $queryResult->item(0));
+				$queryResult = $xpath->query('./Alignment', $rootNode);
+				$this->alignment = $queryResult->length > 0 ? strtolower(trim($queryResult->item(0)->nodeValue)) : 'left';
+				$queryResult = $xpath->query('./Title', $rootNode);
+				$this->title = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : '';
+				$queryResult = $xpath->query('./Defaultlabel', $rootNode);
+				$this->defaultLabel = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : '';
+				$queryResult = $xpath->query('./OpenOnSamePage', $rootNode);
+				$this->samePage = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : true;
+				$queryResult = $xpath->query('./ShowTagsSelector', $rootNode);
+				$this->showTagsSelector = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : true;
 
-			$queryResult = $xpath->query('//SearchBar/EnableSubSearch');
-			$this->enableSubSearch = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : false;
-			$queryResult = $xpath->query('//SearchBar/AllButtonVisible');
-			$this->showSubSearchAll = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : true;
-			$queryResult = $xpath->query('//SearchBar/SearchButtonVisible');
-			$this->showSubSearchSearch = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : true;
-			$queryResult = $xpath->query('//SearchBar/LinksButtonVisible');
-			$this->showSubSearchTemplates = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : true;
-			$queryResult = $xpath->query('//SearchBar/SubSearchDefault');
-			$this->subSearchDefaultView = $queryResult->length > 0 ? strtolower(trim($queryResult->item(0)->nodeValue)) : 'all';
+				$queryResult = $xpath->query('./SearchCondition', $rootNode);
+				$this->conditions = TableQueryConditions::fromXml($xpath, $queryResult->item(0));
 
-			$queryResult = $xpath->query('//SearchBar/ButtonColor');
-			$this->buttonColor = $queryResult->length > 0 ? strtolower(trim($queryResult->item(0)->nodeValue)) : null;
+				$queryResult = $xpath->query('./EnableSubSearch', $rootNode);
+				$this->enableSubSearch = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : false;
+				$queryResult = $xpath->query('./AllButtonVisible', $rootNode);
+				$this->showSubSearchAll = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : true;
+				$queryResult = $xpath->query('./SearchButtonVisible', $rootNode);
+				$this->showSubSearchSearch = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : true;
+				$queryResult = $xpath->query('./LinksButtonVisible', $rootNode);
+				$this->showSubSearchTemplates = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : true;
+				$queryResult = $xpath->query('./SubSearchDefault', $rootNode);
+				$this->subSearchDefaultView = $queryResult->length > 0 ? strtolower(trim($queryResult->item(0)->nodeValue)) : 'all';
 
-			$subSearchConditions = array();
-			$subSearchConditionNodes = $xpath->query('//Config/SearchBar/SubSearchCondition/Item');
-			foreach ($subSearchConditionNodes as $conditionNode)
-				$subSearchConditions[] = new SubSearchTemplate($xpath, $conditionNode, $subSearchTemplatesImagePath);
-			$sortHelper = new ObjectSortHelper('imageName', 'asc');
-			usort($subSearchConditions, array($sortHelper, 'sort'));
-			$this->subConditions = $subSearchConditions;
+				$queryResult = $xpath->query('./Style', $rootNode);
+				if ($queryResult->length > 0)
+					$this->style->configureFromXml($xpath, $queryResult->item(0));
+
+				$subSearchConditions = array();
+				$subSearchConditionNodes = $xpath->query('./SubSearchCondition/Item', $rootNode);
+				foreach ($subSearchConditionNodes as $conditionNode)
+					$subSearchConditions[] = new SubSearchTemplate($xpath, $conditionNode, $subSearchTemplatesImagePath);
+				$sortHelper = new ObjectSortHelper('imageName', 'asc');
+				usort($subSearchConditions, array($sortHelper, 'sort'));
+				$this->subConditions = $subSearchConditions;
+			}
 		}
 
 		/**

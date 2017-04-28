@@ -2,6 +2,7 @@
 
 	namespace application\models\feeds\vertical;
 
+	use application\models\feeds\common\ControlsStyle;
 	use application\models\feeds\common\FeedControlSettings;
 	use application\models\feeds\common\FeedItemSettings;
 
@@ -10,18 +11,20 @@
 	 */
 	abstract class LinkFeedSettings extends FeedSettings
 	{
-		public $controlActiveColor;
-
 		/** @var  FeedItemSettings[] */
 		public $dataItemSettings;
 
 		/** @var  FeedControlSettings[] */
 		public $controlSettings;
 
+		/** @var  ControlsStyle */
+		public $controlsStyle;
+
 		public function __construct()
 		{
 			parent::__construct();
 			$this->style = new LinkFeedStyle();
+			$this->controlsStyle = new ControlsStyle();
 			$this->initDefaultDataItemSettings();
 			$this->initDefaultControlSettings();
 		}
@@ -33,9 +36,6 @@
 		public function configureFromXml($xpath, $contextNode)
 		{
 			parent::configureFromXml($xpath, $contextNode);
-
-			$queryResult = $xpath->query('./ControlActiveColor', $contextNode);
-			$this->controlActiveColor = $queryResult->length > 0 ? strtolower(trim($queryResult->item(0)->nodeValue)) : null;
 
 			$queryResult = $xpath->query('./DataSettings/Item', $contextNode);
 			/** @var $node \DOMElement */
@@ -62,6 +62,10 @@
 					$controlSettings->configureFromXml($xpath, $node);
 				}
 			}
+
+			$queryResult = $xpath->query('./ControlsStyle', $contextNode);
+			if ($queryResult->length > 0)
+				$this->controlsStyle->configureFromXml($xpath, $queryResult->item(0));
 		}
 
 		private function initDefaultDataItemSettings()

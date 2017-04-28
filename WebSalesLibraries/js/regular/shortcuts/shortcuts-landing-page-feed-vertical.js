@@ -138,10 +138,10 @@
 		this.tickerInterval = undefined;
 		this.hideHeader = undefined;
 		this.hideFooter = undefined;
-		this.controlActiveColor = undefined;
 		this.style = undefined;
 		this.dataItemSettings = undefined;
 		this.controlSettings = undefined;
+		this.controlsStyle = undefined;
 
 		for (var property in data)
 			if (data.hasOwnProperty(property))

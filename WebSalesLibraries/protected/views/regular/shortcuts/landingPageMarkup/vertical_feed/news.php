@@ -41,7 +41,7 @@
         </div>
     </div>
     <div class="panel panel-default"
-         style="<? if (!empty($contentBlock->viewSettings->style->outsideBorderColor)): ?>border-color: <? echo '#' . $contentBlock->viewSettings->style->outsideBorderColor; ?>;<? endif; ?>">
+         style="<? if (!empty($contentBlock->viewSettings->style->outsideBorderColor)): ?>border-color: <? echo '#' . $contentBlock->viewSettings->style->outsideBorderColor; ?>; -webkit-box-shadow: 0 1px 1px <? echo '#' . $contentBlock->viewSettings->style->outsideBorderColor; ?>; box-shadow: 0 1px 1px <? echo '#' . $contentBlock->viewSettings->style->outsideBorderColor; ?>;<? endif; ?>">
         <div class="panel-heading" style="<? if ($contentBlock->viewSettings->hideHeader): ?>display: none;<? endif; ?><? if (!empty($contentBlock->viewSettings->style->headerColor)): ?>background-color: <? echo '#' . $contentBlock->viewSettings->style->headerColor; ?>;<? endif; ?>">
 	        <? if (!empty($contentBlock->viewSettings->icon)): ?>
                 <i class="icomoon icomoon-lg <? echo $contentBlock->viewSettings->icon; ?>" style="<? if (!empty($contentBlock->viewSettings->style->headerIconColor)): ?>color: <? echo '#' . $contentBlock->viewSettings->style->headerIconColor; ?>;<? endif; ?>"></i>
@@ -84,6 +84,6 @@
             </div>
         </div>
         <div class="panel-footer"
-             style="<? if ($contentBlock->viewSettings->hideFooter): ?>display: none;<? endif; ?><? if (!empty($contentBlock->viewSettings->style->footerColor)): ?>background-color: <? echo '#' . $contentBlock->viewSettings->style->footerColor; ?>;<? endif; ?>"></div>
+             style="<? if ($contentBlock->viewSettings->hideFooter): ?>display: none;<? endif; ?><? if (!empty($contentBlock->viewSettings->style->footerColor)): ?>background-color: <? echo '#' . $contentBlock->viewSettings->style->footerColor; ?>; border-top-color: <? echo '#' . $contentBlock->viewSettings->style->footerColor; ?>;<? endif; ?>"></div>
     </div>
 </div>

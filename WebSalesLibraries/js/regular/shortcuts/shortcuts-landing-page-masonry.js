@@ -135,6 +135,9 @@
 
 		this.imageWidth = undefined;
 		this.imageHeight = undefined;
+		this.controlsStyle = undefined;
+		this.dataItemSettings = undefined;
+		this.controlSettings = undefined;
 
 		this.filters = undefined;
 		this.defaultFilter = undefined;
