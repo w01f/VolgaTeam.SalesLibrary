@@ -45,7 +45,7 @@
 		<?
 			/** @var MasonryItem $masonryItem */
 			$itemStyle = '';
-			if (($masonryItem->titleTextAppearance->wrapText || $masonryItem->description->wrapText) && $masonryItem->imageWidth > 0)
+			if (((isset($masonryItem->titleTextAppearance) && $masonryItem->titleTextAppearance->wrapText) || (isset($masonryItem->descriptionTextAppearance) && $masonryItem->descriptionTextAppearance->wrapText)) && $masonryItem->imageWidth > 0)
 				$itemStyle = sprintf('style="width: %spx;"', $masonryItem->imageWidth);
 		?>
 		<? if ($masonryItem->type === 'url'): ?>

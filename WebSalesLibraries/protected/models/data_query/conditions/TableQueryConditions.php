@@ -1,20 +1,22 @@
 <?
-	use application\models\data_query\common\DataColumnSettings;
+	namespace application\models\data_query\conditions;
+
+	use application\models\data_query\data_table\DataTableColumnSettings;
 
 	/**
 	 * Class TableSearchConditions
 	 */
-	class TableSearchConditions extends BaseSearchConditions
+	class TableQueryConditions extends BaseQueryConditions
 	{
 		public function __construct()
 		{
 			parent::__construct();
-			$this->columnSettings = DataColumnSettings::createEmpty();
+			$this->columnSettings = DataTableColumnSettings::createEmpty();
 		}
 
 		/**
 		 * @param string $encodedContent
-		 * @return TableSearchConditions
+		 * @return TableQueryConditions
 		 */
 		public static function fromJson($encodedContent)
 		{
@@ -24,9 +26,9 @@
 		}
 
 		/**
-		 * @param $xpath DOMXPath
-		 * @param $contextNode DOMNode
-		 * @return TableSearchConditions
+		 * @param $xpath \DOMXPath
+		 * @param $contextNode \DOMNode
+		 * @return TableQueryConditions
 		 */
 		public static function fromXml($xpath, $contextNode)
 		{

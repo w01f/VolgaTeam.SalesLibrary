@@ -1,10 +1,17 @@
 <?
-	namespace application\models\data_query\common;
+
+	namespace application\models\data_query\data_table;
+
+	use application\models\data_query\common\QuerySortSettings;
+	use application\models\data_query\conditions\CategoryQuerySettings;
+	use application\models\data_query\conditions\DateQuerySettings;
+	use application\models\data_query\conditions\ThumbnailQuerySettings;
+	use application\models\data_query\conditions\ViewCountQuerySettings;
 
 	/**
-	 * Class QuerySettings
+	 * Class DataTableQuerySettings
 	 */
-	class QuerySettings
+	class DataTableQuerySettings
 	{
 		const DataTagCategory = 'tag';
 		const DataTagLibrary = 'library';
@@ -64,6 +71,9 @@
 
 		public function __construct()
 		{
+			$userId = \UserIdentity::getCurrentUserId();
+			$isAdmin = \UserIdentity::isUserAdmin();
+
 			$this->from = 'tbl_link link';
 
 			$this->baseQueryFields = array(
@@ -81,33 +91,61 @@
 			);
 
 			$this->customQueryFields = array();
+
 			$this->innerJoin = array(
-				'tbl_library lib' => 'lib.id = link.id_library'
+				'tbl_folder f' => 'f.id = link.id_folder',
+				'tbl_page p' => 'p.id = f.id_page',
+				'tbl_library lib' => 'lib.id = p.id_library'
 			);
+
 			$this->leftJoin = array();
-			$this->whereConditions = array();
+
+			$this->whereConditions = array('AND',
+				'link.is_preview_not_ready=0');
+			if (!$isAdmin)
+			{
+				$restrictedLinkConditions = array();
+
+				$availableLinkIds = \LinkWhiteListRecord::getAvailableLinks($userId);
+				if (count($availableLinkIds) > 0)
+					$restrictedLinkConditions[] = sprintf("link.id in ('%s')", implode("', '", $availableLinkIds));
+
+				$deniedLinkIds = \LinkBlackListRecord::getDeniedLinks($userId);
+				if (count($deniedLinkIds) > 0)
+					$restrictedLinkConditions[] = sprintf("link.id not in ('%s')", implode("', '", $deniedLinkIds));
+
+				if (count($restrictedLinkConditions) > 0)
+					$this->whereConditions[] = array('OR', 'link.is_restricted <> 1', array('AND', $restrictedLinkConditions));
+				else
+					$this->whereConditions[] = array('link.is_restricted <> 1');
+			}
+
+			$includeAppLinks = \Yii::app()->browser->getBrowser() == \Browser::BROWSER_EO;
+			if ($includeAppLinks)
+				$this->whereConditions[] = 'link.type<>15';
+
 			$this->groupFields = array('link.id');
 			$this->limit = 0;
 
-			$defaultDateSettings = new \SearchDateSettings();
+			$defaultDateSettings = new DateQuerySettings();
 			$this->dateQuerySettings = array(
-				'field' => \SearchDateSettings::getDateColumnName($defaultDateSettings->dateMode)
+				'field' => DateQuerySettings::getDateColumnName($defaultDateSettings->dateMode)
 			);
 
-			$defaultCategorySettings = new \SearchCategorySettings();
+			$defaultCategorySettings = new CategoryQuerySettings();
 			$this->categoryQuerySettings = array(
 				'field' => $defaultCategorySettings->fieldName,
 				'filter' => '1=1',
 				'maxRows' => $defaultCategorySettings->maxRows
 			);
 
-			$defaultViewCountSettings = new \SearchViewCountSettings();
+			$defaultViewCountSettings = new ViewCountQuerySettings();
 			$this->viewCountQuerySettings = array(
 				'startDate' => $defaultViewCountSettings->startDate,
 				'endDate' => $defaultViewCountSettings->endDate
 			);
 
-			$defaultThumbnailSettings = new \SearchThumbnailSettings();
+			$defaultThumbnailSettings = new ThumbnailQuerySettings();
 			$this->thumbnailQuerySettings = array(
 				'mode' => $defaultThumbnailSettings->mode
 			);
@@ -186,7 +224,7 @@
 					case self::DataTagThumbnail:
 						switch ($this->thumbnailQuerySettings['mode'])
 						{
-							case \SearchThumbnailSettings::ThumbnailModeRandom:
+							case ThumbnailQuerySettings::ThumbnailModeRandom:
 								$thumbnailCondition = 'order by rand() limit 1';
 								break;
 							default:
@@ -210,14 +248,14 @@
 
 		/**
 		 * @param array $params
-		 * @return QuerySettings
+		 * @return DataTableQuerySettings
 		 */
 		public static function prepareQuery($params)
 		{
-			/** @var QuerySettings $instance */
+			/** @var DataTableQuerySettings $instance */
 			$instance = new self();
 
-			$columnSettingsList = DataColumnSettings::createEmpty();
+			$columnSettingsList = DataTableColumnSettings::createEmpty();
 
 			foreach ($params as $key => $value)
 			{
@@ -234,10 +272,12 @@
 							$instance->innerJoin = array_merge($value, $instance->innerJoin);
 						break;
 					case self::SettingsTagLeftJoin:
-						$instance->leftJoin = $value;
+						if (isset($value) && is_array($value))
+							$instance->leftJoin = array_merge($instance->leftJoin, $value);
 						break;
 					case self::SettingsTagWhere:
-						$instance->whereConditions = $value;
+						if (isset($value) && is_array($value))
+							$instance->whereConditions = array_merge($instance->whereConditions, $value);
 						break;
 					case self::SettingsTagCategoryWhere:
 						$instance->categoryQuerySettings['filter'] = $value;
@@ -251,27 +291,27 @@
 						break;
 
 					case self::SettingsTagDate:
-						/** @var \SearchDateSettings $dateSettings */
+						/** @var DateQuerySettings $dateSettings */
 						$dateSettings = $value;
-						$instance->dateQuerySettings['field'] = \SearchDateSettings::getDateColumnName($dateSettings->dateMode);
+						$instance->dateQuerySettings['field'] = DateQuerySettings::getDateColumnName($dateSettings->dateMode);
 						break;
 
 					case self::SettingsTagCategory:
-						/** @var \SearchCategorySettings $categorySettings */
+						/** @var CategoryQuerySettings $categorySettings */
 						$categorySettings = $value;
 						$instance->categoryQuerySettings['field'] = $categorySettings->fieldName;
 						$instance->categoryQuerySettings['maxRows'] = $categorySettings->maxRows;
 						break;
 
 					case self::SettingsTagViewsCount:
-						/** @var \SearchViewCountSettings $viewCountSettings */
+						/** @var ViewCountQuerySettings $viewCountSettings */
 						$viewCountSettings = $value;
 						$instance->viewCountQuerySettings['startDate'] = $viewCountSettings->startDate;
 						$instance->viewCountQuerySettings['endDate'] = $viewCountSettings->endDate;
 						break;
 
 					case self::SettingsTagThumbnails:
-						/** @var \SearchThumbnailSettings $thumbnailSettings */
+						/** @var ThumbnailQuerySettings $thumbnailSettings */
 						$thumbnailSettings = $value;
 						$instance->thumbnailQuerySettings['mode'] = $thumbnailSettings->mode;
 						break;

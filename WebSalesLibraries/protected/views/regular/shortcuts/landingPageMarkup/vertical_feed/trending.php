@@ -74,10 +74,8 @@
 <div id="vertical-feed-<? echo $contentBlock->id; ?>" class="vertical-feed news-block">
     <div class="service-data">
         <div class="encoded-object">
-            <div class="encoded-object">
-                <div class="query-settings"><? echo CJSON::encode($querySettings); ?></div>
-                <div class="view-settings"><? echo CJSON::encode($viewSettings); ?></div>
-            </div>
+            <div class="query-settings"><? echo CJSON::encode($querySettings); ?></div>
+            <div class="view-settings"><? echo CJSON::encode($viewSettings); ?></div>
         </div>
     </div>
     <div class="btn-group vertical-feed-controls-container hidden-xs hidden-sm" role="group">

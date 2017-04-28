@@ -1,4 +1,5 @@
 <?php
+	use application\models\data_query\conditions\TableQueryConditions;
 
 	/**
 	 * Class SubSearchTemplate
@@ -10,7 +11,7 @@
 		public $imageName;
 		public $imagePath;
 
-		/** @var TableSearchConditions */
+		/** @var TableQueryConditions */
 		public $conditions;
 
 		/**
@@ -29,7 +30,7 @@
 			$this->disabled = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : false;
 			$queryResult = $xpath->query('SearchCondition', $contextNode);
 			if ($queryResult->length > 0)
-				$this->conditions = TableSearchConditions::fromXml($xpath, $queryResult->item(0));
+				$this->conditions = TableQueryConditions::fromXml($xpath, $queryResult->item(0));
 		}
 
 		public function getSearchOptions()

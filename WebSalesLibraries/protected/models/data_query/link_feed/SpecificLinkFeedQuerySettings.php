@@ -2,6 +2,7 @@
 	namespace application\models\data_query\link_feed;
 
 	use application\models\data_query\common\QuerySortSettings;
+	use application\models\data_query\conditions\SpecificLinkCondition;
 
 	/**
 	 * Class SpecificLinkFeedQuerySettings

@@ -1,12 +1,14 @@
 <?
 	namespace application\models\data_query\link_feed;
 
+	use application\models\data_query\conditions\FeedQueryConditions;
+
 	/**
 	 * Class SearchFeedQuerySettings
 	 */
 	class SearchFeedQuerySettings extends LinkFeedQuerySettings
 	{
-		/** @var  \FeedSearchConditions */
+		/** @var  FeedQueryConditions */
 		public $conditions;
 
 		public function __construct()
@@ -15,7 +17,7 @@
 
 			parent::__construct();
 
-			$this->conditions = new \FeedSearchConditions();
+			$this->conditions = new FeedQueryConditions();
 		}
 
 		/**
@@ -28,6 +30,6 @@
 
 			$queryResult = $xpath->query('./SearchCondition', $contextNode);
 			if ($queryResult->length > 0)
-				$this->conditions = \FeedSearchConditions::fromXml($xpath, $queryResult->item(0));
+				$this->conditions = FeedQueryConditions::fromXml($xpath, $queryResult->item(0));
 		}
 	}

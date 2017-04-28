@@ -1,7 +1,7 @@
 <?
-	use application\models\data_query\common\DataQueryHelper;
-	use application\models\data_query\common\QuerySettings;
-	use application\models\data_query\data_table\DataTableHelper;
+	use application\models\data_query\data_table\DataTableQueryHelper;
+	use application\models\data_query\data_table\DataTableQuerySettings;
+	use application\models\data_query\data_table\DataTableFormatHelper;
 	use application\models\wallbin\models\web\LibraryManager as LibraryManager;
 	use application\models\wallbin\models\web\LibraryPage as LibraryPage;
 	use application\models\wallbin\models\web\LibraryFolder as LibraryFolder;
@@ -119,25 +119,25 @@
 		 */
 		public function getPageLinks($columnSettings)
 		{
-			$querySettings = QuerySettings::prepareQuery(
+			$querySettings = DataTableQuerySettings::prepareQuery(
 				array(
-					QuerySettings::SettingsTagFrom => 'tbl_qpage_link qpl',
-					QuerySettings::SettingsTagQueryFields => array(
+					DataTableQuerySettings::SettingsTagFrom => 'tbl_qpage_link qpl',
+					DataTableQuerySettings::SettingsTagQueryFields => array(
 						'linkInPageId' => 'qpl.id as linkInPageId',
 						'listOrder' => 'qpl.list_order as listOrder'
 					),
-					QuerySettings::SettingsTagInnerJoin => array('tbl_link link' => 'qpl.id_link=link.id'),
-					QuerySettings::SettingsTagWhere => array(
+					DataTableQuerySettings::SettingsTagInnerJoin => array('tbl_link link' => 'qpl.id_link=link.id'),
+					DataTableQuerySettings::SettingsTagWhere => array(
 						sprintf("qpl.id_page='%s'", $this->id)
 					),
-					QuerySettings::SettingsTagGroup => array('qpl.id'),
-					QuerySettings::SettingsTagColumns => $columnSettings
+					DataTableQuerySettings::SettingsTagGroup => array('qpl.id'),
+					DataTableQuerySettings::SettingsTagColumns => $columnSettings
 				));
 			/** @var CDbCommand $dbCommand */
-			$dbCommand = DataQueryHelper::buildQuery($querySettings);
+			$dbCommand = DataTableQueryHelper::buildQuery($querySettings);
 			$dbCommand = $dbCommand->order('qpl.list_order, link.name');
 			$linkRecords = $dbCommand->queryAll();
-			$links = DataTableHelper::formatExtendedData($linkRecords, $columnSettings, array('linkInPageId', 'listOrder'));
+			$links = DataTableFormatHelper::formatExtendedData($linkRecords, $columnSettings, array('linkInPageId', 'listOrder'));
 			return $links;
 		}
 

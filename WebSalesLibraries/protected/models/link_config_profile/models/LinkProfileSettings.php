@@ -1,4 +1,6 @@
 <?
+	use application\models\data_query\conditions\ConditionalQueryHelper;
+	use application\models\data_query\conditions\TableQueryConditions;
 	use application\models\wallbin\models\web\LibraryLink as LibraryLink;
 
 	/**
@@ -121,12 +123,12 @@
 		 */
 		public function getAffectedLinks()
 		{
-			$searchConditions = new TableSearchConditions();
+			$searchConditions = new TableQueryConditions();
 			$searchConditions->text = $this->libraryLinkTags;
 			$searchConditions->textExactMatch = true;
 			$searchConditions->libraries = isset($this->libraryReferences) ? $this->libraryReferences : array();
 
-			$queryRecords = SearchHelper::getDatasetByCondition($searchConditions, uniqid());
+			$queryRecords = ConditionalQueryHelper::getDatasetByCondition($searchConditions, uniqid());
 
 			$affectedLinkReferences = array();
 			foreach ($queryRecords as $queryRecord)

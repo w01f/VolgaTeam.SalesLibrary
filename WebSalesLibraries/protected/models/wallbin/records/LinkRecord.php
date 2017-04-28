@@ -1,7 +1,4 @@
 <?
-	use application\models\wallbin\models\web\LibraryManager as LibraryManager;
-	use application\models\wallbin\models\web\Library as Library;
-
 	/**
 	 * Class LinkRecord
 	 * @property mixed id_parent_link
@@ -206,7 +203,9 @@
 		 */
 		public static function getLinksByFolder($folderId)
 		{
-			return self::model()->findAll('id_folder=? and id_parent_link is null and is_preview_not_ready=0', array($folderId));
+			/** @var LinkRecord[] $linkRecords */
+			$linkRecords = self::model()->findAll('id_folder=? and id_parent_link is null and is_preview_not_ready=0', array($folderId));
+			return $linkRecords;
 		}
 
 		/**
@@ -227,7 +226,9 @@
 		 */
 		public static function getRestrictedLinks($libraryId)
 		{
-			return self::model()->findAll('id_library=? and is_restricted = 1', array($libraryId));
+			/** @var LinkRecord[] $linkRecords */
+			$linkRecords = self::model()->findAll('id_library=? and is_restricted = 1', array($libraryId));
+			return $linkRecords;
 		}
 
 		/**

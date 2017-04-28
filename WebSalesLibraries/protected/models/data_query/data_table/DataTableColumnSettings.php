@@ -1,19 +1,19 @@
 <?
-	namespace application\models\data_query\common;
+	namespace application\models\data_query\data_table;
 	/**
-	 * Class DataColumnSettings
+	 * Class DataTableColumnSettings
 	 */
-	class DataColumnSettings
+	class DataTableColumnSettings
 	{
 		private static $columnTags = array(
-			QuerySettings::DataTagCategory,
-			QuerySettings::DataTagLibrary,
-			QuerySettings::DataTagFileType,
-			QuerySettings::DataTagFileName,
-			QuerySettings::DataTagThumbnail,
-			QuerySettings::DataTagViewsCount,
-			QuerySettings::DataTagRate,
-			QuerySettings::DataTagDate,
+			DataTableQuerySettings::DataTagCategory,
+			DataTableQuerySettings::DataTagLibrary,
+			DataTableQuerySettings::DataTagFileType,
+			DataTableQuerySettings::DataTagFileName,
+			DataTableQuerySettings::DataTagThumbnail,
+			DataTableQuerySettings::DataTagViewsCount,
+			DataTableQuerySettings::DataTagRate,
+			DataTableQuerySettings::DataTagDate,
 		);
 
 		public $enable;
@@ -31,42 +31,42 @@
 			$this->fullWidth = false;
 			switch ($tag)
 			{
-				case QuerySettings::DataTagCategory:
+				case DataTableQuerySettings::DataTagCategory:
 					$this->enable = \Yii::app()->params['search_options']['hide_tag'] != true;
 					$this->order = 1;
 					$this->title = \Yii::app()->params['tags']['column_name'];
 					break;
-				case QuerySettings::DataTagLibrary:
+				case DataTableQuerySettings::DataTagLibrary:
 					$this->enable = \Yii::app()->params['search_options']['hide_libraries'] != true;
 					$this->order = 2;
 					$this->title = \Yii::app()->params['stations']['column_name'];
 					break;
-				case QuerySettings::DataTagFileType:
+				case DataTableQuerySettings::DataTagFileType:
 					$this->enable = true;
 					$this->order = 3;
 					$this->title = 'Type';
 					break;
-				case QuerySettings::DataTagFileName:
+				case DataTableQuerySettings::DataTagFileName:
 					$this->enable = true;
 					$this->order = 4;
 					$this->title = 'Link';
 					break;
-				case QuerySettings::DataTagThumbnail:
+				case DataTableQuerySettings::DataTagThumbnail:
 					$this->enable = false;
 					$this->order = 9999;
 					$this->title = 'Thumbnail';
 					break;
-				case QuerySettings::DataTagViewsCount:
+				case DataTableQuerySettings::DataTagViewsCount:
 					$this->enable = true;
 					$this->order = 6;
 					$this->title = 'Views';
 					break;
-				case QuerySettings::DataTagRate:
+				case DataTableQuerySettings::DataTagRate:
 					$this->enable = true;
 					$this->order = 7;
 					$this->title = 'Rating';
 					break;
-				case QuerySettings::DataTagDate:
+				case DataTableQuerySettings::DataTagDate:
 					$this->enable = true;
 					$this->order = 8;
 					$this->title = 'Date';
@@ -155,16 +155,16 @@
 			{
 				switch ($key)
 				{
-					case QuerySettings::DataTagCategory:
-					case QuerySettings::DataTagLibrary:
-					case QuerySettings::DataTagViewsCount:
-					case QuerySettings::DataTagRate:
-					case QuerySettings::DataTagDate:
-					case QuerySettings::DataTagThumbnail:
+					case DataTableQuerySettings::DataTagCategory:
+					case DataTableQuerySettings::DataTagLibrary:
+					case DataTableQuerySettings::DataTagViewsCount:
+					case DataTableQuerySettings::DataTagRate:
+					case DataTableQuerySettings::DataTagDate:
+					case DataTableQuerySettings::DataTagThumbnail:
 						$value->enable = false;
 						break;
-					case QuerySettings::DataTagFileType:
-					case QuerySettings::DataTagFileName:
+					case DataTableQuerySettings::DataTagFileType:
+					case DataTableQuerySettings::DataTagFileName:
 						$value->enable = true;
 						break;
 
@@ -185,16 +185,16 @@
 			{
 				switch ($key)
 				{
-					case QuerySettings::DataTagCategory:
-					case QuerySettings::DataTagLibrary:
-					case QuerySettings::DataTagFileType:
-					case QuerySettings::DataTagFileName:
-					case QuerySettings::DataTagThumbnail:
-					case QuerySettings::DataTagViewsCount:
-					case QuerySettings::DataTagDate:
+					case DataTableQuerySettings::DataTagCategory:
+					case DataTableQuerySettings::DataTagLibrary:
+					case DataTableQuerySettings::DataTagFileType:
+					case DataTableQuerySettings::DataTagFileName:
+					case DataTableQuerySettings::DataTagThumbnail:
+					case DataTableQuerySettings::DataTagViewsCount:
+					case DataTableQuerySettings::DataTagDate:
 						$value->enable = true;
 						break;
-					case QuerySettings::DataTagRate:
+					case DataTableQuerySettings::DataTagRate:
 						$value->enable = false;
 						break;
 				}

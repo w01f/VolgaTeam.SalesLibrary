@@ -1,9 +1,10 @@
 <?
+	namespace application\models\data_query\conditions;
 
 	/**
-	 * Class SearchCategorySettings
+	 * Class CategoryQuerySettings
 	 */
-	class SearchCategorySettings
+	class CategoryQuerySettings
 	{
 		public $fieldName;
 		public $maxRows;
@@ -17,7 +18,7 @@
 		/**
 		 * @param $xpath \DOMXPath
 		 * @param $contextNode \DOMNode
-		 * @return SearchCategorySettings
+		 * @return CategoryQuerySettings
 		 */
 		public static function fromXml($xpath, $contextNode)
 		{

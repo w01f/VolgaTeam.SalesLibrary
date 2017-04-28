@@ -1,11 +1,12 @@
 <?php
+	use application\models\data_query\conditions\TableQueryConditions;
 
 	/**
 	 * Class SearchLinkShortcut
 	 */
 	class SearchLinkShortcut extends PageContentShortcut implements IShortcutSearchOptionsContainer
 	{
-		/** @var  TableSearchConditions */
+		/** @var  TableQueryConditions */
 		public $conditions;
 
 		public $enableSubSearch;
@@ -58,7 +59,7 @@
 				$this->conditionNotMatchLogoPath = $baseUrl . '/images/shortcuts/no_cats.png' . '?' . $this->linkRecord->id_group . $this->linkRecord->id;
 
 			$xpath = new DomXPath($linkConfig);
-			$this->conditions = TableSearchConditions::fromXml($xpath, $xpath->query('//Config/SearchCondition')->item(0));
+			$this->conditions = TableQueryConditions::fromXml($xpath, $xpath->query('//Config/SearchCondition')->item(0));
 
 			$subSearchConditions = array();
 			$subSearchConditionNodes = $xpath->query('//Config/SubSearchCondition/Item');

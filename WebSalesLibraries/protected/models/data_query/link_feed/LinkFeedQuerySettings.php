@@ -1,6 +1,8 @@
 <?
 	namespace application\models\data_query\link_feed;
 
+	use application\models\data_query\conditions\ThumbnailQuerySettings;
+
 	/**
 	 * Class LinkFeedQuerySettings
 	 */
@@ -9,9 +11,6 @@
 		const FeedTypeTrending = 'trending';
 		const FeedTypeSearch = 'search';
 		const FeedTypeSpecificLinks = 'specific-links';
-
-		const ThumbnailModeTop = 'top';
-		const ThumbnailModeRandom = 'random';
 
 		const LinkFormatPowerPoint = 'ppt';
 		const LinkFormatDocument = 'document';
@@ -22,13 +21,14 @@
 		public $feedType;
 
 		public $linkFormats;
-		public $thumbnailMode;
 		public $maxLinks;
+		/** @var  ThumbnailQuerySettings */
+		public $thumbnailSettings;
 
 		public function __construct()
 		{
 			$this->linkFormats = array(self::LinkFormatPowerPoint, self::LinkFormatDocument, self::LinkFormatVideo);
-			$this->thumbnailMode = self::ThumbnailModeTop;
+			$this->thumbnailSettings = new ThumbnailQuerySettings();
 			$this->maxLinks = 30;
 		}
 
@@ -117,9 +117,8 @@
 				}
 			}
 
-			$queryResult = $xpath->query('./ThumbnailMode', $contextNode);
-			$thumbnailMode = $queryResult->length > 0 ? strtolower(trim($queryResult->item(0)->nodeValue)) : $this->thumbnailMode;
-			if (in_array($thumbnailMode, array(self::ThumbnailModeTop, self::ThumbnailModeRandom)))
-				$this->thumbnailMode = $thumbnailMode;
+			$queryResult = $xpath->query('./ThumbnailSettings', $contextNode);
+			if ($queryResult->length > 0)
+				$this->thumbnailSettings = ThumbnailQuerySettings::fromXml($xpath, $queryResult->item(0));
 		}
 	}

@@ -1,7 +1,10 @@
 <?
+
 	namespace application\models\data_query\link_feed;
 
-	use application\models\data_query\common\QuerySettings;
+	use application\models\data_query\conditions\ConditionalQueryHelper;
+	use application\models\data_query\conditions\ThumbnailQuerySettings;
+	use application\models\data_query\data_table\DataTableQuerySettings;
 	use application\models\wallbin\models\web\LibraryManager;
 
 	/**
@@ -67,36 +70,151 @@
 						$queryFormats[] = $linkFormat;
 						break;
 					case LinkFeedQuerySettings::LinkFormatDocument:
-						$queryFormats[] = implode(',', array(LinkFeedQuerySettings::LinkFormatWord, LinkFeedQuerySettings::LinkFormatPdf));
+						$queryFormats[] = LinkFeedQuerySettings::LinkFormatWord;
+						$queryFormats[] = LinkFeedQuerySettings::LinkFormatPdf;
 						break;
 				}
-			$formatsCondition = sprintf("%s", implode(",", $queryFormats));
 
-			$librariesCondition = null;
+
+			/** @var \CDbCommand $dbCommand */
+			$dbCommand = \Yii::app()->db->createCommand();
+
+			$dbCommand = $dbCommand->from('tbl_link link');
+
+			$dbCommand = $dbCommand->select(array(
+				'id' => 'link.id as id',
+				'id_library' => 'link.id_library as id_library',
+				'library_name' => 'lib.name as library_name',
+				'name' => 'link.name as name',
+				'file_name' => 'link.file_name as file_name',
+				'search_format' => 'link.search_format as search_format',
+				'total_views' => 'count(s_a.id) as total_views',
+				'thumbnail' => sprintf("case when '%s' = 0
+							        then (case
+							              when link.original_format='jpeg' or link.original_format='gif' or link.original_format='png' then
+							                link.file_relative_path
+							              when link.original_format='video' then
+							                (select pv.relative_path from tbl_preview pv where pv.id_container=link.id_preview and pv.type='mp4 thumb' order by pv.relative_path limit 1)
+							              when link.original_format='ppt' or link.original_format='doc' or link.original_format='pdf' then
+							                (select pv.relative_path from tbl_preview pv where pv.id_container=link.id_preview and pv.type='png_phone' order by pv.relative_path limit 1)
+							              when link.original_format='link bundle' then
+							                (select pv.relative_path from tbl_preview pv join tbl_link child_link on child_link.id_preview=pv.id_container join tbl_link_bundle lb on lb.id_link=child_link.id where lb.id_bundle=link.id and lb.use_as_thumbnail=1 and (pv.type='png_phone' or pv.type='mp4 thumb') order by pv.relative_path limit 1)
+							              end)
+							      else (case
+							            when link.original_format='jpeg' or link.original_format='gif' or link.original_format='png' then
+							              link.file_relative_path
+							            when link.original_format='video' then
+							              (select pv.relative_path from tbl_preview pv where pv.id_container=link.id_preview and pv.type='mp4 thumb' order by rand() limit 1)
+							            when link.original_format='ppt' or link.original_format='doc' or link.original_format='pdf' then
+							              (select pv.relative_path from tbl_preview pv where pv.id_container=link.id_preview and pv.type='png_phone' order by rand() limit 1)
+							            when link.original_format='link bundle' then
+							              (select pv.relative_path from tbl_preview pv join tbl_link child_link on child_link.id_preview=pv.id_container join tbl_link_bundle lb on lb.id_link=child_link.id where lb.id_bundle=link.id and lb.use_as_thumbnail=1 and (pv.type='png_phone' or pv.type='mp4 thumb') order by rand() limit 1)
+							            end)
+							      end as thumbnail", $feedSettings->thumbnailSettings->mode)
+			));
+
+			$dbCommand = $dbCommand->join('tbl_folder f', 'f.id = link.id_folder');
+			$dbCommand = $dbCommand->join('tbl_page p', 'p.id = f.id_page');
+			$dbCommand = $dbCommand->join('tbl_library lib', 'lib.id = p.id_library');
+			$dbCommand = $dbCommand->join('tbl_statistic_link s_l', 's_l.id_link = link.id');
+			$dbCommand = $dbCommand->join('tbl_statistic_activity s_a', sprintf("s_a.id = s_l.id_activity and s_a.date_time>='%s' and s_a.date_time<='%s'", $startDate, $endDate));
+
+			$whereConditions = array(
+				'AND',
+				sprintf('link.search_format in (\'%s\')', implode("','", $queryFormats)),
+			);
+
 			if (count($feedSettings->libraries) > 0)
-				$librariesCondition = sprintf("%s", implode(",", $feedSettings->libraries));
+				$whereConditions[] = sprintf('lib.name in (\'%s\')', implode("','", $feedSettings->libraries));
 
-			$command = \Yii::app()->db->createCommand("call sp_get_trending_links(:start_date,:end_date,:formats,:libraries,:max_links,:thumbnail_mode)");
-			$command->bindValue(":start_date", $startDate, \PDO::PARAM_STR);
-			$command->bindValue(":end_date", $endDate, \PDO::PARAM_STR);
-			$command->bindValue(":formats", $formatsCondition, \PDO::PARAM_STR);
-			$command->bindValue(":libraries", $librariesCondition, \PDO::PARAM_STR);
-			$command->bindValue(":max_links", $feedSettings->maxLinks, \PDO::PARAM_INT);
-			$command->bindValue(":thumbnail_mode", $feedSettings->thumbnailMode, \PDO::PARAM_STR);
-			$resultRecords = $command->queryAll();
+			if (count($feedSettings->categories) > 0)
+			{
+				$categoriesConditions = array('OR');
+				foreach ($feedSettings->categories as $category)
+					foreach ($category->items as $categoryItem)
+						$categoriesConditions[] = sprintf('link.id in (select id_link from tbl_link_category where category = "%s" and tag = "%s")',
+							$category->name,
+							$categoryItem);
+				$whereConditions[] = $categoriesConditions;
+			}
+
+			if (count($feedSettings->excludeQueryConditions->linkConditions) > 0)
+			{
+				$linkConditions = array();
+				foreach ($feedSettings->excludeQueryConditions->linkConditions as $linkCondition)
+					$linkConditions[] = "(trim(link.file_name)='" . $linkCondition->linkName . "' or trim(link.name)='" . $linkCondition->linkName . "') and trim(f.name)='" . $linkCondition->folderName . "' and trim(p.name)='" . $linkCondition->pageName . "' and trim(lib.name)='" . $linkCondition->libraryName . "'";
+
+				$whereConditions[] = sprintf("NOT (%s)", implode(' OR ', $linkConditions));
+			}
+
+			if (count($feedSettings->excludeQueryConditions->categories) > 0)
+			{
+				$categoryConditions = array();
+				foreach ($feedSettings->excludeQueryConditions->categories as $category)
+					foreach ($category->items as $categoryItem)
+						$categoryConditions[] = sprintf('(link.id in (select id_link from tbl_link_category where category = "%s" and tag = "%s"))',
+							$category->name,
+							$categoryItem);
+				$whereConditions[] = sprintf('NOT (%s)', implode(' or ', $categoryConditions));
+			}
+
+			if (count($feedSettings->excludeQueryConditions->libraries) > 0)
+			{
+				$libraryIds = array();
+				foreach ($feedSettings->excludeQueryConditions->libraries as $library)
+					$libraryIds[] = $library->id;
+				$whereConditions[] = sprintf("link.id_library not in ('%s')", implode("','", $libraryIds));
+			}
+
+			$isAdmin = \UserIdentity::isUserAdmin();
+			if (!$isAdmin)
+			{
+				$userId = \UserIdentity::getCurrentUserId();
+
+				$restrictedLinkConditions = array();
+
+				$availableLinkIds = \LinkWhiteListRecord::getAvailableLinks($userId);
+				if (count($availableLinkIds) > 0)
+					$restrictedLinkConditions[] = sprintf("link.id in ('%s')", implode("', '", $availableLinkIds));
+
+				$deniedLinkIds = \LinkBlackListRecord::getDeniedLinks($userId);
+				if (count($deniedLinkIds) > 0)
+					$restrictedLinkConditions[] = sprintf("link.id not in ('%s')", implode("', '", $deniedLinkIds));
+
+				if (count($restrictedLinkConditions) > 0)
+					$whereConditions[] = array('OR', 'link.is_restricted <> 1', array('AND', $restrictedLinkConditions));
+				else
+					$whereConditions[] = array('link.is_restricted <> 1');
+			}
+
+			$dbCommand = $dbCommand->where($whereConditions);
+
+			$dbCommand = $dbCommand->group(array(
+				'link.id',
+				'link.name',
+				'link.file_name',
+				'link.search_format',
+				'lib.name',
+			));
+
+			$dbCommand = $dbCommand->order('total_views desc');
+
+			$dbCommand = $dbCommand->limit($feedSettings->maxLinks);
+
+			$resultRecords = $dbCommand->queryAll();
 
 			$libraryManager = new LibraryManager();
 
 			foreach ($resultRecords as $resultRecord)
 			{
 				$feedItem = new LinkFeedItem();
-				$feedItem->linkId = $resultRecord['link_id'];
-				$feedItem->linkName = $resultRecord['link_name'];
-				$feedItem->format = $resultRecord['link_format'];
-				$feedItem->libraryName = $resultRecord['lib_name'];
-				$feedItem->viewsCount = $resultRecord['link_views'];
+				$feedItem->linkId = $resultRecord['id'];
+				$feedItem->linkName = $resultRecord['name'];
+				$feedItem->format = $resultRecord['search_format'];
+				$feedItem->libraryName = $resultRecord['library_name'];
+				$feedItem->viewsCount = $resultRecord['total_views'];
 
-				$libraryId = $resultRecord['lib_id'];
+				$libraryId = $resultRecord['id_library'];
 				$library = $libraryManager->getLibraryById($libraryId);
 				$thumbnailRelativePath = $resultRecord['thumbnail'];
 				$feedItem->thumbnail = \Utils::formatUrl($library->storageLink . '//' . $thumbnailRelativePath);
@@ -134,7 +252,7 @@
 
 			$feedSettings->conditions->limit = $feedSettings->maxLinks;
 
-			$resultRecords = \SearchHelper::queryLinksByCondition($feedSettings->conditions);
+			$resultRecords = ConditionalQueryHelper::queryLinksByCondition($feedSettings->conditions);
 
 			$libraryManager = new LibraryManager();
 
@@ -170,9 +288,9 @@
 			$feedItems = array();
 
 			$thumbnailCondition = null;
-			switch ($feedSettings->thumbnailMode)
+			switch ($feedSettings->thumbnailSettings->mode)
 			{
-				case LinkFeedQuerySettings::ThumbnailModeRandom:
+				case ThumbnailQuerySettings::ThumbnailModeRandom:
 					$thumbnailCondition = 'order by rand() limit 1';
 					break;
 				default:
@@ -239,27 +357,50 @@
 						break;
 				}
 
+			$whereConditions = array(
+				'AND',
+				sprintf('link.search_format in (\'%s\')', implode("','", $queryFormats)),
+			);
+
 			$linkConditions = array();
 			$linkConditions[] = 'or';
 			foreach ($feedSettings->linkConditions as $linkCondition)
 				$linkConditions[] = "(trim(link.file_name)='" . $linkCondition->linkName . "' or trim(link.name)='" . $linkCondition->linkName . "') and trim(f.name)='" . $linkCondition->folderName . "' and trim(p.name)='" . $linkCondition->pageName . "' and trim(lib.name)='" . $linkCondition->libraryName . "'";
+			$whereConditions[] = $linkConditions;
 
-			$dbCommand = $dbCommand->where(array(
-				'and',
-				sprintf('link.search_format in (\'%s\')', implode("','", $queryFormats)),
-				$linkConditions
-			));
+			$isAdmin = \UserIdentity::isUserAdmin();
+			if (!$isAdmin)
+			{
+				$userId = \UserIdentity::getCurrentUserId();
+
+				$restrictedLinkConditions = array();
+
+				$availableLinkIds = \LinkWhiteListRecord::getAvailableLinks($userId);
+				if (count($availableLinkIds) > 0)
+					$restrictedLinkConditions[] = sprintf("link.id in ('%s')", implode("', '", $availableLinkIds));
+
+				$deniedLinkIds = \LinkBlackListRecord::getDeniedLinks($userId);
+				if (count($deniedLinkIds) > 0)
+					$restrictedLinkConditions[] = sprintf("link.id not in ('%s')", implode("', '", $deniedLinkIds));
+
+				if (count($restrictedLinkConditions) > 0)
+					$whereConditions[] = array('OR', 'link.is_restricted <> 1', array('AND', $restrictedLinkConditions));
+				else
+					$whereConditions[] = array('link.is_restricted <> 1');
+			}
+
+			$dbCommand = $dbCommand->where($whereConditions);
 
 			$sortFiled = 'link.name';
 			switch ($feedSettings->sortSettings->columnTag)
 			{
-				case QuerySettings::DataTagDate:
+				case DataTableQuerySettings::DataTagDate:
 					$sortFiled = 'link_date';
 					break;
-				case QuerySettings::DataTagFileName:
+				case DataTableQuerySettings::DataTagFileName:
 					$sortFiled = 'name';
 					break;
-				case QuerySettings::DataTagViewsCount:
+				case DataTableQuerySettings::DataTagViewsCount:
 					$sortFiled = 'total_views';
 					break;
 			}

@@ -1,4 +1,5 @@
 <?
+	use application\models\data_query\conditions\TableQueryConditions;
 
 	/**
 	 * Class ShortcutsSearchOptions
@@ -19,7 +20,7 @@
 		public $emptyResultLogo;
 
 		/**
-		 * @var $searchConditions TableSearchConditions
+		 * @var $searchConditions TableQueryConditions
 		 */
 		public $conditions;
 	}

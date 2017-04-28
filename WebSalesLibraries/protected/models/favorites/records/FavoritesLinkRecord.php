@@ -1,7 +1,7 @@
 <?php
-	use application\models\data_query\common\DataQueryHelper;
-	use application\models\data_query\common\QuerySettings;
-	use application\models\data_query\data_table\DataTableHelper;
+	use application\models\data_query\data_table\DataTableQueryHelper;
+	use application\models\data_query\data_table\DataTableQuerySettings;
+	use application\models\data_query\data_table\DataTableFormatHelper;
 
 	/**
 	 * Class FavoritesLinkRecord
@@ -69,23 +69,23 @@
 		 */
 		public static function getLinksByFolder($userId, $folderId, $columnSettings)
 		{
-			$querySettings = QuerySettings::prepareQuery(
+			$querySettings = DataTableQuerySettings::prepareQuery(
 				array(
-					QuerySettings::SettingsTagFrom => 'tbl_favorites_link flink',
-					QuerySettings::SettingsTagQueryFields => array('name' => 'flink.name as name'),
-					QuerySettings::SettingsTagInnerJoin => array('tbl_link link' => 'flink.id_link=link.id'),
-					QuerySettings::SettingsTagWhere => array(
+					DataTableQuerySettings::SettingsTagFrom => 'tbl_favorites_link flink',
+					DataTableQuerySettings::SettingsTagQueryFields => array('name' => 'flink.name as name'),
+					DataTableQuerySettings::SettingsTagInnerJoin => array('tbl_link link' => 'flink.id_link=link.id'),
+					DataTableQuerySettings::SettingsTagWhere => array(
 						sprintf('flink.id_user=%s', $userId),
 						isset($folderId) ? sprintf("flink.id_folder='%s'", $folderId) : "flink.id_folder is null"
 					),
-					QuerySettings::SettingsTagGroup => array('flink.id'),
-					QuerySettings::SettingsTagColumns => $columnSettings
+					DataTableQuerySettings::SettingsTagGroup => array('flink.id'),
+					DataTableQuerySettings::SettingsTagColumns => $columnSettings
 				));
 			/** @var CDbCommand $dbCommand */
-			$dbCommand = DataQueryHelper::buildQuery($querySettings);
+			$dbCommand = DataTableQueryHelper::buildQuery($querySettings);
 			$linkRecords = $dbCommand->queryAll();
 
-			$links = DataTableHelper::formatRegularData($linkRecords, $columnSettings);
+			$links = DataTableFormatHelper::formatRegularData($linkRecords, $columnSettings);
 			return $links;
 		}
 

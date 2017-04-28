@@ -1,16 +1,14 @@
 <?
 	namespace application\models\data_query\data_table;
 
-	use application\models\data_query\common\DataColumnSettings;
-	use application\models\data_query\common\QuerySettings;
 	use application\models\wallbin\models\web\LibraryLink;
 	use application\models\wallbin\models\web\LibraryManager as LibraryManager;
 	use application\models\wallbin\models\web\Library as Library;
 
 	/**
-	 * Class DataTableHelper
+	 * Class DataTableFormatHelper
 	 */
-	class DataTableHelper
+	class DataTableFormatHelper
 	{
 		private static $defaultThumbnailFileKeys = array(
 			'aep',
@@ -137,29 +135,29 @@
 
 					foreach ($baseColumnSettings as $key => $value)
 					{
-						/** @var DataColumnSettings $columnSettings */
+						/** @var DataTableColumnSettings $columnSettings */
 						$columnSettings = $value;
 						switch ($key)
 						{
-							case QuerySettings::DataTagCategory:
+							case DataTableQuerySettings::DataTagCategory:
 								if ($columnSettings->enable)
 									$record['tag'] = $linkRecord['tag'];
 								break;
-							case QuerySettings::DataTagRate:
+							case DataTableQuerySettings::DataTagRate:
 								if ($columnSettings->enable)
 									$record['rate'] = array(
 										'value' => $linkRecord['rate'],
 										'image' => \LinkRateRecord::getStarImage(floatval($linkRecord['rate']))
 									);
 								break;
-							case QuerySettings::DataTagViewsCount:
+							case DataTableQuerySettings::DataTagViewsCount:
 								if ($columnSettings->enable)
 									$record['views'] = array(
 										'value' => intval($linkRecord['total_views']),
 										'display' => $linkRecord['total_views'] == 0 ? '' : $linkRecord['total_views']
 									);
 								break;
-							case QuerySettings::DataTagThumbnail:
+							case DataTableQuerySettings::DataTagThumbnail:
 								if ($columnSettings->enable)
 								{
 									$imageUrl = null;

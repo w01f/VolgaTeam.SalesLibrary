@@ -1,7 +1,7 @@
 <?
-	use application\models\data_query\common\DataQueryHelper;
-	use application\models\data_query\common\QuerySettings;
-	use application\models\data_query\data_table\DataTableHelper;
+	use application\models\data_query\data_table\DataTableQueryHelper;
+	use application\models\data_query\data_table\DataTableQuerySettings;
+	use application\models\data_query\data_table\DataTableFormatHelper;
 
 	/**
 	 * Class UserLinkCartRecord
@@ -35,24 +35,24 @@
 		 */
 		public static function getLinksByUser($userId, $columnSettings)
 		{
-			$querySettings = QuerySettings::prepareQuery(
+			$querySettings = DataTableQuerySettings::prepareQuery(
 				array(
-					QuerySettings::SettingsTagFrom => 'tbl_user_link_cart lk',
-					QuerySettings::SettingsTagQueryFields => array(
+					DataTableQuerySettings::SettingsTagFrom => 'tbl_user_link_cart lk',
+					DataTableQuerySettings::SettingsTagQueryFields => array(
 						'linkInCartId' => 'lk.id as linkInCartId',
 					),
-					QuerySettings::SettingsTagInnerJoin => array('tbl_link link' => 'lk.id_link=link.id'),
-					QuerySettings::SettingsTagWhere => array(
+					DataTableQuerySettings::SettingsTagInnerJoin => array('tbl_link link' => 'lk.id_link=link.id'),
+					DataTableQuerySettings::SettingsTagWhere => array(
 						sprintf("lk.id_user=%s", $userId)
 					),
-					QuerySettings::SettingsTagGroup => array('lk.id'),
-					QuerySettings::SettingsTagColumns => $columnSettings
+					DataTableQuerySettings::SettingsTagGroup => array('lk.id'),
+					DataTableQuerySettings::SettingsTagColumns => $columnSettings
 				));
 			/** @var CDbCommand $dbCommand */
-			$dbCommand = DataQueryHelper::buildQuery($querySettings);
+			$dbCommand = DataTableQueryHelper::buildQuery($querySettings);
 			$dbCommand = $dbCommand->order('link.name');
 			$linkRecords = $dbCommand->queryAll();
-			$links = DataTableHelper::formatExtendedData($linkRecords, $columnSettings, array('linkInCartId'));
+			$links = DataTableFormatHelper::formatExtendedData($linkRecords, $columnSettings, array('linkInCartId'));
 			return $links;
 		}
 

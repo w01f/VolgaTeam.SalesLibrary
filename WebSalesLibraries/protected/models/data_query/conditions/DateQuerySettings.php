@@ -1,9 +1,10 @@
 <?
+	namespace application\models\data_query\conditions;
 
 	/**
-	 * Class SearchDateSettings
+	 * Class DateQuerySettings
 	 */
-	class SearchDateSettings
+	class DateQuerySettings
 	{
 		const DateModeLinksFileDate = 'file date';
 		const DateModeLinksAdded = 'link added';
@@ -19,7 +20,7 @@
 		/**
 		 * @param $xpath \DOMXPath
 		 * @param $contextNode \DOMNode
-		 * @return SearchDateSettings
+		 * @return DateQuerySettings
 		 */
 		public static function fromXml($xpath, $contextNode)
 		{

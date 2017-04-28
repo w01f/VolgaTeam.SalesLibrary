@@ -1,4 +1,6 @@
 <?php
+	use application\models\data_query\conditions\ConditionalQueryHelper;
+	use application\models\data_query\conditions\TableQueryConditions;
 
 	/**
 	 * Class SearchController
@@ -25,10 +27,10 @@
 			$conditionsEncoded = Yii::app()->request->getPost('conditions');
 
 			$conditions = isset($conditionsEncoded) ?
-				TableSearchConditions::fromJson($conditionsEncoded) :
-				new TableSearchConditions();
+				TableQueryConditions::fromJson($conditionsEncoded) :
+				new TableQueryConditions();
 
-			$resultDataset = SearchHelper::getDatasetByCondition($conditions, $datasetKey);
+			$resultDataset = ConditionalQueryHelper::getDatasetByCondition($conditions, $datasetKey);
 
 			$searchResultInfo = array();
 			if (isset($conditions->text) && $conditions->text != '')

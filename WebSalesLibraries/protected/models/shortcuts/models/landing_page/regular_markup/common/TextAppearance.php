@@ -55,8 +55,6 @@
 			$queryResult = $xpath->query('./TextWrap', $contextNode);
 			$textAppearance->wrapText = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : $textAppearance->wrapText;
 
-
-
 			return $textAppearance;
 		}
 	}

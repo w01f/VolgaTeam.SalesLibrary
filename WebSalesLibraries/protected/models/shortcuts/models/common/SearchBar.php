@@ -1,4 +1,5 @@
 <?php
+	use application\models\data_query\conditions\TableQueryConditions;
 
 	/**
 	 * Class SearchBar
@@ -13,7 +14,7 @@
 		public $samePage;
 		public $showTagsSelector;
 
-		/** @var  TableSearchConditions */
+		/** @var  TableQueryConditions */
 		public $conditions;
 
 		public $enableSubSearch;
@@ -57,7 +58,7 @@
 			$this->showTagsSelector = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : true;
 
 			$queryResult = $xpath->query('//SearchBar/SearchCondition');
-			$this->conditions = TableSearchConditions::fromXml($xpath, $queryResult->item(0));
+			$this->conditions = TableQueryConditions::fromXml($xpath, $queryResult->item(0));
 
 			$queryResult = $xpath->query('//SearchBar/EnableSubSearch');
 			$this->enableSubSearch = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : false;

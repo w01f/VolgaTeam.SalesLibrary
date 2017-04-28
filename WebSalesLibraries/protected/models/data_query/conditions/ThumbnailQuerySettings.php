@@ -1,9 +1,9 @@
 <?
-
+	namespace application\models\data_query\conditions;
 	/**
 	 * Class SearchThumbnailSettings
 	 */
-	class SearchThumbnailSettings
+	class ThumbnailQuerySettings
 	{
 		const ThumbnailModeTop = 0;
 		const ThumbnailModeRandom = 1;
@@ -18,7 +18,7 @@
 		/**
 		 * @param $xpath \DOMXPath
 		 * @param $contextNode \DOMNode
-		 * @return SearchThumbnailSettings
+		 * @return ThumbnailQuerySettings
 		 */
 		public static function fromXml($xpath, $contextNode)
 		{

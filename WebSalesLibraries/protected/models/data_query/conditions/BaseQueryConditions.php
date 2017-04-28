@@ -1,11 +1,13 @@
 <?
-	use application\models\data_query\common\DataColumnSettings;
+	namespace application\models\data_query\conditions;
+
+	use application\models\data_query\data_table\DataTableColumnSettings;
 	use application\models\data_query\common\QuerySortSettings;
 
 	/**
-	 * Class BaseSearchConditions
+	 * Class BaseQueryConditions
 	 */
-	abstract class BaseSearchConditions
+	abstract class BaseQueryConditions
 	{
 		public $baseDatasetKey;
 
@@ -22,16 +24,19 @@
 		public $onlyByName;
 		public $searchByContent;
 
-		/** @var  SearchDateSettings */
+		/** @var  DateQuerySettings */
 		public $dateSettings;
-		/** @var  SearchCategorySettings */
+		/** @var  CategoryQuerySettings */
 		public $categorySettings;
-		/** @var  SearchViewCountSettings */
+		/** @var  ViewCountQuerySettings */
 		public $viewCountSettings;
-		/** @var  SearchThumbnailSettings */
+		/** @var  ThumbnailQuerySettings */
 		public $thumbnailSettings;
 
-		/** @var  DataColumnSettings[] */
+		/** @var  ExcludeQueryConditions */
+		public $excludeQueryConditions;
+
+		/** @var  DataTableColumnSettings[] */
 		public $columnSettings;
 		/** @var  QuerySortSettings */
 		public $sortSettings;
@@ -45,10 +50,12 @@
 			$this->superFilters = array();
 			$this->categories = array();
 
-			$this->dateSettings = new SearchDateSettings();
-			$this->categorySettings = new SearchCategorySettings();
-			$this->viewCountSettings = new SearchViewCountSettings();
-			$this->thumbnailSettings = new SearchThumbnailSettings();
+			$this->dateSettings = new DateQuerySettings();
+			$this->categorySettings = new CategoryQuerySettings();
+			$this->viewCountSettings = new ViewCountQuerySettings();
+			$this->thumbnailSettings = new ThumbnailQuerySettings();
+
+			$this->excludeQueryConditions = new ExcludeQueryConditions();
 
 			$this->sortSettings = new QuerySortSettings();
 
@@ -64,11 +71,11 @@
 		 */
 		protected function configureFromXml($xpath, $contextNode)
 		{
-			/** @var $queryResult DOMNodeList */
+			/** @var $queryResult \DOMNodeList */
 			$queryResult = $xpath->query('./Text', $contextNode);
 			$this->text = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
 
-			$today = date(Yii::app()->params['outputDateFormat']);
+			$today = date(\Yii::app()->params['outputDateFormat']);
 			$queryResult = $xpath->query('./StartDate', $contextNode);
 			$startDateText = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
 			if (!empty($startDateText))
@@ -76,28 +83,28 @@
 				switch ($startDateText)
 				{
 					case "today":
-						$this->startDate = date(Yii::app()->params['outputDateFormat'], strtotime($today . ' + 1 days'));
+						$this->startDate = date(\Yii::app()->params['outputDateFormat'], strtotime($today . ' + 1 days'));
 						break;
 					case "yesterday":
-						$this->startDate = date(Yii::app()->params['outputDateFormat'], strtotime($today . ' - 1 days'));
+						$this->startDate = date(\Yii::app()->params['outputDateFormat'], strtotime($today . ' - 1 days'));
 						break;
 					case "current week":
-						$this->startDate = date(Yii::app()->params['outputDateFormat'], strtotime('last monday', strtotime('tomorrow')));
+						$this->startDate = date(\Yii::app()->params['outputDateFormat'], strtotime('last monday', strtotime('tomorrow')));
 						break;
 					case "last week":
-						$this->startDate = date(Yii::app()->params['outputDateFormat'], strtotime("Monday last week",strtotime('tomorrow')));
+						$this->startDate = date(\Yii::app()->params['outputDateFormat'], strtotime("Monday last week",strtotime('tomorrow')));
 						break;
 					case "current month":
-						$this->startDate = date(Yii::app()->params['outputDateFormat'], strtotime(date('Y-m-1')));
+						$this->startDate = date(\Yii::app()->params['outputDateFormat'], strtotime(date('Y-m-1')));
 						break;
 					case "last month":
-						$this->startDate =date(Yii::app()->params['outputDateFormat'], mktime(0, 0, 0, date("m")-1, 1));
+						$this->startDate =date(\Yii::app()->params['outputDateFormat'], mktime(0, 0, 0, date("m")-1, 1));
 						break;
 					default:
 						if (strstr($startDateText, ' days ago'))
 						{
 							$startDateText = str_replace(' days ago', '', $startDateText);
-							$this->startDate = date(Yii::app()->params['outputDateFormat'], strtotime($today . ' - ' . $startDateText . ' days'));
+							$this->startDate = date(\Yii::app()->params['outputDateFormat'], strtotime($today . ' - ' . $startDateText . ' days'));
 						}
 						else
 							$this->startDate = $startDateText;
@@ -113,22 +120,22 @@
 					case "today":
 					case "current week":
 					case "current month":
-						$this->endDate = date(Yii::app()->params['outputDateFormat'], strtotime($today . ' + 1 days'));
+						$this->endDate = date(\Yii::app()->params['outputDateFormat'], strtotime($today . ' + 1 days'));
 						break;
 					case "yesterday":
 						$this->endDate = $today;
 						break;
 					case "last week":
-						$this->endDate = date(Yii::app()->params['mysqlDateFormat'], strtotime('last monday', strtotime('tomorrow')));
+						$this->endDate = date(\Yii::app()->params['mysqlDateFormat'], strtotime('last monday', strtotime('tomorrow')));
 						break;
 					case "last month":
-						$this->endDate =date(Yii::app()->params['outputDateFormat'], mktime(0, 0, 0, date("m"), 0));
+						$this->endDate =date(\Yii::app()->params['outputDateFormat'], mktime(0, 0, 0, date("m"), 0));
 						break;
 					default:
 						if (strstr($endDateText, ' days ago'))
 						{
 							$endDateText = str_replace(' days ago', '', $endDateText);
-							$this->endDate = date(Yii::app()->params['outputDateFormat'], strtotime($today . ' - ' . $endDateText . ' days'));
+							$this->endDate = date(\Yii::app()->params['outputDateFormat'], strtotime($today . ' - ' . $endDateText . ' days'));
 						}
 						else
 							$this->endDate = $endDateText;
@@ -162,11 +169,11 @@
 			if ($queryResult->length > 0)
 				foreach ($queryResult as $node)
 				{
-					/** @var $libraryRecord LibraryRecord */
-					$libraryRecord = LibraryRecord::model()->find('name=?', array(trim($node->nodeValue)));
+					/** @var $libraryRecord \LibraryRecord */
+					$libraryRecord = \LibraryRecord::model()->find('name=?', array(trim($node->nodeValue)));
 					if (isset($libraryRecord))
 					{
-						$library = new stdClass();
+						$library = new \stdClass();
 						$library->id = $libraryRecord->id;
 						$library->name = $libraryRecord->name;
 						$this->libraries[] = $library;
@@ -178,11 +185,11 @@
 				$this->superFilters[] = trim($node->nodeValue);
 
 			$queryResult = $xpath->query('./Categories/Category', $contextNode);
-			/** @var $node DOMElement */
+			/** @var $node \DOMElement */
 			foreach ($queryResult as $node)
 			{
 				$groupName = $node->getAttribute('Group');
-				$category = new SearchCategory();
+				$category = new CategoryConditionItem();
 				$category->name = $groupName;
 				$tagNodes = $node->getElementsByTagName('Tag');
 				foreach ($tagNodes as $tagNode)
@@ -201,23 +208,27 @@
 
 			$queryResult = $xpath->query('./DateSettings', $contextNode);
 			if ($queryResult->length > 0)
-				$this->dateSettings = SearchDateSettings::fromXml($xpath, $queryResult->item(0));
+				$this->dateSettings = DateQuerySettings::fromXml($xpath, $queryResult->item(0));
 
 			$queryResult = $xpath->query('./CategorySettings', $contextNode);
 			if ($queryResult->length > 0)
-				$this->categorySettings = SearchCategorySettings::fromXml($xpath, $queryResult->item(0));
+				$this->categorySettings = CategoryQuerySettings::fromXml($xpath, $queryResult->item(0));
 
 			$queryResult = $xpath->query('./LinkViewsSettings', $contextNode);
 			if ($queryResult->length > 0)
-				$this->viewCountSettings = SearchViewCountSettings::fromXml($xpath, $queryResult->item(0));
+				$this->viewCountSettings = ViewCountQuerySettings::fromXml($xpath, $queryResult->item(0));
 
 			$queryResult = $xpath->query('./ThumbnailSettings', $contextNode);
 			if ($queryResult->length > 0)
-				$this->thumbnailSettings = SearchThumbnailSettings::fromXml($xpath, $queryResult->item(0));
+				$this->thumbnailSettings = ThumbnailQuerySettings::fromXml($xpath, $queryResult->item(0));
+
+			$queryResult = $xpath->query('./ExcludeConditions', $contextNode);
+			if ($queryResult->length > 0)
+				$this->excludeQueryConditions->configurefromXml($xpath, $queryResult->item(0));
 
 			$queryResult = $xpath->query('./ColumnSettings', $contextNode);
 			if ($queryResult->length > 0)
-				$this->columnSettings = DataColumnSettings::loadColumnsFromXml($xpath, $queryResult->item(0));
+				$this->columnSettings = DataTableColumnSettings::loadColumnsFromXml($xpath, $queryResult->item(0));
 
 			$queryResult = $xpath->query('./SortSettings', $contextNode);
 			if ($queryResult->length > 0)

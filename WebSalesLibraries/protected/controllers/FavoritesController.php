@@ -1,5 +1,5 @@
 <?php
-	use application\models\data_query\common\DataColumnSettings;
+	use application\models\data_query\data_table\DataTableColumnSettings;
 
 	/**
 	 * Class FavoritesController
@@ -73,7 +73,7 @@
 			if (!isset($folderId) || (isset($folderId) && ($folderId == "" || $folderId == "null")))
 				$folderId = null;
 			$userId = UserIdentity::getCurrentUserId();
-			$columnSettings = DataColumnSettings::createEmpty();
+			$columnSettings = DataTableColumnSettings::createEmpty();
 			$links = FavoritesLinkRecord::getLinksByFolder($userId, $folderId, $columnSettings);
 			echo CJSON::encode(array(
 				'links' => $links,
@@ -121,7 +121,7 @@
 				$folderId = null;
 			$userId = UserIdentity::getCurrentUserId();
 			$folders = FavoritesFolderRecord::getChildFolders($userId, $folderId);
-			$columnSettings = DataColumnSettings::createEmpty();
+			$columnSettings = DataTableColumnSettings::createEmpty();
 			$links = FavoritesLinkRecord::getLinksByFolder($userId, $folderId, $columnSettings);
 			$this->renderPartial('foldersAndLinks', array('folders' => $folders, 'links' => $links, 'topLevel' => false), false, true);
 		}

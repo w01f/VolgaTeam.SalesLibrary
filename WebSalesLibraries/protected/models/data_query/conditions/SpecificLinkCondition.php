@@ -1,5 +1,5 @@
 <?
-	namespace application\models\data_query\link_feed;
+	namespace application\models\data_query\conditions;
 
 	/**
 	 * Class SpecificLinkCondition

@@ -1,5 +1,5 @@
 <?
-	use application\models\data_query\common\DataColumnSettings;
+	use application\models\data_query\data_table\DataTableColumnSettings;
 
 	/**
 	 * Class SearchAppShortcut
@@ -14,7 +14,7 @@
 			$data = parent::getPageData();
 			$data['serviceData'] = $this->getMenuItemData();
 			$data['viewOptions'] = array(
-				'columnSettings' => DataColumnSettings::createEmpty(),
+				'columnSettings' => DataTableColumnSettings::createEmpty(),
 				'showDeleteButton' => false
 			);
 			return $data;

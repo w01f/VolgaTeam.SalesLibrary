@@ -1,6 +1,8 @@
 <?
 	namespace application\models\data_query\common;
 
+	use application\models\data_query\data_table\DataTableQuerySettings;
+
 	/**
 	 * Class TableSortSettings
 	 */
@@ -13,7 +15,7 @@
 		public function __construct()
 		{
 			$this->isConfigured = false;
-			$this->columnTag = QuerySettings::DataTagFileName;
+			$this->columnTag = DataTableQuerySettings::DataTagFileName;
 			$this->order = 'asc';
 		}
 

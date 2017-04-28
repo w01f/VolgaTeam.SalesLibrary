@@ -1,5 +1,9 @@
 <?
+
 	namespace application\models\data_query\link_feed;
+
+	use application\models\data_query\conditions\CategoryConditionItem;
+	use application\models\data_query\conditions\ExcludeQueryConditions;
 
 	/**
 	 * Class TrendingFeedQuerySettings
@@ -13,6 +17,12 @@
 		public $libraries;
 		public $dateRangeType;
 
+		/** @var CategoryConditionItem[] */
+		public $categories;
+
+		/** @var  ExcludeQueryConditions */
+		public $excludeQueryConditions;
+
 		public function __construct()
 		{
 			$this->feedType = self::FeedTypeTrending;
@@ -21,6 +31,8 @@
 
 			$this->libraries = array();
 			$this->dateRangeType = self::DataRangeTypeWeek;
+			$this->categories = array();
+			$this->excludeQueryConditions = new ExcludeQueryConditions();
 		}
 
 		/**
@@ -47,5 +59,22 @@
 			$dateRangeType = $queryResult->length > 0 ? strtolower(trim($queryResult->item(0)->nodeValue)) : $this->dateRangeType;
 			if (in_array($dateRangeType, array(self::DataRangeTypeToday, self::DataRangeTypeWeek, self::DataRangeTypeMonth)))
 				$this->dateRangeType = $dateRangeType;
+
+			$queryResult = $xpath->query('./Categories/Category', $contextNode);
+			/** @var $node \DOMElement */
+			foreach ($queryResult as $node)
+			{
+				$groupName = $node->getAttribute('Group');
+				$category = new CategoryConditionItem();
+				$category->name = $groupName;
+				$tagNodes = $node->getElementsByTagName('Tag');
+				foreach ($tagNodes as $tagNode)
+					$category->items[] = trim($tagNode->nodeValue);
+				$this->categories[] = $category;
+			}
+
+			$queryResult = $xpath->query('./ExcludeConditions', $contextNode);
+			if ($queryResult->length > 0)
+				$this->excludeQueryConditions->configurefromXml($xpath, $queryResult->item(0));
 		}
 	}

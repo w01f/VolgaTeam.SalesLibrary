@@ -1,5 +1,5 @@
 <?
-	use application\models\data_query\common\DataColumnSettings;
+	use application\models\data_query\data_table\DataTableColumnSettings;
 
 	/**
 	 * Class QBuilderController
@@ -187,7 +187,7 @@
 		public function actionGetLinkCart()
 		{
 			$userId = UserIdentity::getCurrentUserId();
-			$columnSettings = DataColumnSettings::createLinkCartColumns();
+			$columnSettings = DataTableColumnSettings::createLinkCartColumns();
 			$links = UserLinkCartRecord::getLinksByUser($userId, $columnSettings);
 			echo CJSON::encode(array(
 				'links' => $links,
@@ -317,7 +317,7 @@
 			{
 				/** @var $page QPageRecord */
 				$page = QPageRecord::model()->findByPk($selectedPageId);
-				$columnSettings = DataColumnSettings::createEmpty();
+				$columnSettings = DataTableColumnSettings::createEmpty();
 				$links = $page->getPageLinks($columnSettings);
 				echo CJSON::encode(array(
 					'links' => $links,

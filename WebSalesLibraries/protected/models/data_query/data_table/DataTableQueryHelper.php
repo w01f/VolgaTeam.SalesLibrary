@@ -1,12 +1,13 @@
 <?
-	namespace application\models\data_query\common;
+
+	namespace application\models\data_query\data_table;
 	/**
-	 * Class DataQueryHelper
+	 * Class DataTableQueryHelper
 	 */
-	class DataQueryHelper
+	class DataTableQueryHelper
 	{
 		/**
-		 * @param $querySettings QuerySettings
+		 * @param $querySettings DataTableQuerySettings
 		 * @return \CDbCommand
 		 */
 		public static function buildQuery($querySettings)
@@ -25,13 +26,7 @@
 			foreach ($querySettings->leftJoin as $table => $condition)
 				$dbCommand = $dbCommand->leftJoin($table, $condition);
 
-			$whereConditions = array('AND',
-				'link.is_preview_not_ready=0');
-			$includeAppLinks = \Yii::app()->browser->getBrowser() == \Browser::BROWSER_EO;
-			if ($includeAppLinks)
-				$whereConditions[] = 'link.type<>15';
-			$whereConditions = array_merge($whereConditions, $querySettings->whereConditions);
-			$dbCommand = $dbCommand->where($whereConditions);
+			$dbCommand = $dbCommand->where($querySettings->whereConditions);
 
 			$dbCommand = $dbCommand->group($querySettings->groupFields);
 
