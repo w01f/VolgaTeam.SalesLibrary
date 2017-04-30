@@ -17,6 +17,12 @@
 			'blockId' => $blockId
 		)
 		, true);
+	echo $this->renderPartial('landingPageMarkup/style/styleBackground',
+		array(
+			'background' => $contentBlock->background,
+			'blockId' => $blockId
+		)
+		, true);
 ?>
 <div id="<? echo $blockId; ?>" class="col-lg-<? echo $contentBlock->size->large; ?> col-md-<? echo $contentBlock->size->medium; ?> col-sm-<? echo $contentBlock->size->small; ?> col-xs-<? echo $contentBlock->size->extraSmall; ?>
     <? if ($contentBlock->hideCondition->large): ?> hidden-lg<? endif; ?>

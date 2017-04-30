@@ -35,6 +35,10 @@ if (typeof Object.create !== 'function') {
             self.animationStarted = false;
             self.isHovered = false;
 
+            self.$elem.find("img").one('load', function ()
+            {
+	            self.recalcHeight();
+            });
 
             if ( typeof options === 'string' ) {
                 //string was passed

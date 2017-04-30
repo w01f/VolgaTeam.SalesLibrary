@@ -4,7 +4,7 @@
 
 	use application\models\shortcuts\models\landing_page\regular_markup\common\BlockContainer;
 	use application\models\shortcuts\models\landing_page\regular_markup\common\ContentBlock;
-	use application\models\shortcuts\models\landing_page\regular_markup\common\TextAppearance;
+	use application\models\shortcuts\models\landing_page\regular_markup\style\TextAppearance;
 
 	/**
 	 * Class MasonryItem

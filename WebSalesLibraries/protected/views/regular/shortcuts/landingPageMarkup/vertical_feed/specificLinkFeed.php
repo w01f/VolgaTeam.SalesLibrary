@@ -27,6 +27,11 @@
 		, true);
 ?>
 <style>
+    #vertical-feed-<? echo $contentBlock->id; ?> .panel
+    {
+        background: inherit;
+    }
+
     #vertical-feed-<? echo $contentBlock->id; ?> .panel-body {
         padding-top: <?echo $style->bodyPadding->top;?>px !important;
         padding-left: <?echo $style->bodyPadding->left;?>px !important;

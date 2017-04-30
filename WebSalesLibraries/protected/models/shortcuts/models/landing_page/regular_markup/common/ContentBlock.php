@@ -10,6 +10,9 @@
 	use application\models\shortcuts\models\landing_page\regular_markup\scroll_stripe\ScrollStripeBlock;
 	use application\models\shortcuts\models\landing_page\regular_markup\slider\SlideBlock;
 	use application\models\shortcuts\models\landing_page\regular_markup\slider\SliderBlock;
+	use application\models\shortcuts\models\landing_page\regular_markup\style\BackgroundStyle;
+	use application\models\shortcuts\models\landing_page\regular_markup\style\BorderStyle;
+	use application\models\shortcuts\models\landing_page\regular_markup\style\TextAppearance;
 	use application\models\shortcuts\models\landing_page\regular_markup\vertical_feed\NewsBlock;
 	use application\models\shortcuts\models\landing_page\regular_markup\vertical_feed\NewsItem;
 	use application\models\shortcuts\models\landing_page\regular_markup\vertical_feed\TrendingBlock as VerticalTrendingBlock;
@@ -44,6 +47,8 @@
 		public $textAppearance;
 		/** @var  BorderStyle */
 		public $border;
+		/** @var  BackgroundStyle */
+		public $background;
 
 		public $isAccessGranted;
 
@@ -86,6 +91,10 @@
 			$queryResult = $xpath->query('./Border', $contextNode);
 			if ($queryResult->length > 0)
 				$this->border = BorderStyle::fromXml($xpath, $queryResult->item(0));
+
+			$queryResult = $xpath->query('./Background', $contextNode);
+			if ($queryResult->length > 0)
+				$this->background = BackgroundStyle::fromXml($xpath, $queryResult->item(0));
 
 			$user = \Yii::app()->user;
 			$userGroups = \UserIdentity::getCurrentUserGroups();

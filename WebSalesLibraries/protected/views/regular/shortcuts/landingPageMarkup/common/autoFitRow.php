@@ -17,6 +17,12 @@
 			'blockId' => $blockId
 		)
 		, true);
+	echo $this->renderPartial('landingPageMarkup/style/styleBackground',
+		array(
+			'background' => $contentBlock->background,
+			'blockId' => $blockId
+		)
+		, true);
 
 	$columnWidthLg = floor(100 / 12);
 	if ($contentBlock->itemsPerRow->large < 12)

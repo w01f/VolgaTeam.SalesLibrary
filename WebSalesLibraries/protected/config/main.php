@@ -34,6 +34,7 @@
 			'application.models.shortcuts.models.groups.*',
 			'application.models.shortcuts.models.navigation_panel.*',
 			'application.models.shortcuts.models.landing_page.regular_markup.common.*',
+			'application.models.shortcuts.models.landing_page.regular_markup.style.*',
 			'application.models.shortcuts.models.landing_page.regular_markup.list_block.*',
 			'application.models.shortcuts.models.landing_page.regular_markup.masonry.*',
 			'application.models.shortcuts.models.landing_page.regular_markup.scroll_stripe.*',

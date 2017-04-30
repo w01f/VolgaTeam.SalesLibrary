@@ -17,6 +17,12 @@
 			'blockId' => $blockId
 		)
 		, true);
+	echo $this->renderPartial('landingPageMarkup/style/styleBackground',
+		array(
+			'background' => $contentBlock->background,
+			'blockId' => $blockId
+		)
+		, true);
 ?>
 <<?echo $contentBlock->buttonize?'button':'a';?> id="<? echo $blockId; ?>" class="<? if ($contentBlock->buttonize): ?>btn btn-default<? else: ?>landing-url<? endif; ?> shortcuts-link<?if(!isset($contentBlock->shortcut)):?> disabled<?endif;?>" href="<? echo isset($contentBlock->shortcut) ? $contentBlock->shortcut->getSourceLink() : '#'; ?>" target="_blank"
         style="<? echo $this->renderPartial('landingPageMarkup/style/stylePadding', array('padding' => $contentBlock->padding), true); ?>

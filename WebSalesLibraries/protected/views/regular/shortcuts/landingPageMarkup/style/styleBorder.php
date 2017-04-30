@@ -1,5 +1,5 @@
 <?
-	use application\models\shortcuts\models\landing_page\regular_markup\common\BorderStyle;
+	use application\models\shortcuts\models\landing_page\regular_markup\style\BorderStyle;
 
 	/**
 	 * @var $blockId string

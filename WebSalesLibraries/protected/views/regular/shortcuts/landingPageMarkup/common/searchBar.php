@@ -18,6 +18,12 @@
 			'blockId' => $blockId
 		)
 		, true);
+	echo $this->renderPartial('landingPageMarkup/style/styleBackground',
+		array(
+			'background' => $contentBlock->background,
+			'blockId' => $blockId
+		)
+		, true);
 ?>
 <? if ($searchBar->configured): ?>
     <div id="<? echo $blockId; ?>" class="shortcuts-search-bar-container hidden-xs"

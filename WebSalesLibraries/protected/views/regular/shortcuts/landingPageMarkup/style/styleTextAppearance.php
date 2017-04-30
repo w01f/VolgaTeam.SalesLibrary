@@ -1,5 +1,5 @@
 <?
-	use application\models\shortcuts\models\landing_page\regular_markup\common\TextAppearance;
+	use application\models\shortcuts\models\landing_page\regular_markup\style\TextAppearance;
 
 	/**
 	 * @var $blockId string

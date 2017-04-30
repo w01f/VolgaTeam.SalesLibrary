@@ -1,5 +1,5 @@
 <?
-	namespace application\models\shortcuts\models\landing_page\regular_markup\common;
+	namespace application\models\shortcuts\models\landing_page\regular_markup\style;
 
 	/**
 	 * Class TextAppearance

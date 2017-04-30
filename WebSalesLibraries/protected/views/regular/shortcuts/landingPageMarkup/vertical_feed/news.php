@@ -10,6 +10,11 @@
 	$newsItems = $contentBlock->items;
 ?>
 <style>
+    #vertical-feed-<? echo $contentBlock->id; ?> .panel
+    {
+        background: inherit;
+    }
+
     #vertical-feed-<? echo $contentBlock->id; ?> .panel-footer .pagination a
     {
         <?if(!empty($contentBlock->viewSettings->style->buttonBackColor)):?>

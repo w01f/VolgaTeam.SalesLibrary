@@ -17,6 +17,12 @@
 			'blockId' => $blockId
 		)
 		, true);
+	echo $this->renderPartial('landingPageMarkup/style/styleBackground',
+		array(
+			'background' => $contentBlock->background,
+			'blockId' => $blockId
+		)
+		, true);
 ?>
 <div id="<? echo $blockId; ?>" class="carousel landing-carousel slide <? if ($contentBlock->slideShow): ?>carousel-slide-show<? endif; ?>"
      <? if ($contentBlock->slideShow): ?>data-interval="<? echo $contentBlock->slideShowInterval;?>"<? endif; ?>
