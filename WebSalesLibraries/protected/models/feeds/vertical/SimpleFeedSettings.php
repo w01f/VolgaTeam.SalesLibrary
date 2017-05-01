@@ -9,7 +9,7 @@
 	{
 		public function __construct()
 		{
-			$this->feedType = self::FeedTypeNews;
+			$this->feedType = self::FeedTypeSimpleSlider;
 			parent::__construct();
 		}
 	}

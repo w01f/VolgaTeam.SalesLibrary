@@ -7,7 +7,7 @@
 	/**
 	 * Class TrendingFeedSettings
 	 */
-	class TrendingFeedSettings extends FeedSettings
+	class TrendingFeedSettings extends LinkFeedSettings
 	{
 		public function __construct()
 		{

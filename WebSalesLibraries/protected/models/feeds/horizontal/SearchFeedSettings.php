@@ -7,7 +7,7 @@
 	/**
 	 * Class SearchFeedSettings
 	 */
-	class SearchFeedSettings extends FeedSettings
+	class SearchFeedSettings extends LinkFeedSettings
 	{
 		public function __construct()
 		{

@@ -11,8 +11,6 @@
 		public $imageWidth;
 		public $imageHeight;
 
-		public $controlActiveColor;
-
 		/** @var  MasonryFeedItemSettings[] */
 		public $dataItemSettings;
 

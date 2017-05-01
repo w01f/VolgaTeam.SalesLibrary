@@ -91,10 +91,12 @@
 		{
 			feedContainer.find('.portfolio_utube_carousel_control_left').off('click').on('click', function ()
 			{
+				$(this).blur();
 				feedContainer.find('.carousel').carousel('prev');
 			});
 			feedContainer.find('.portfolio_utube_carousel_control_right').off('click').on('click', function ()
 			{
+				$(this).blur();
 				feedContainer.find('.carousel').carousel('next');
 			})
 		};

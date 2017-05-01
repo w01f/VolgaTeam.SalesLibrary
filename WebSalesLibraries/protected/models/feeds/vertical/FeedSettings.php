@@ -7,7 +7,7 @@
 	 */
 	abstract class FeedSettings
 	{
-		const FeedTypeNews = 'news';
+		const FeedTypeSimpleSlider = 'news';
 		const FeedTypeTrending = 'trending';
 		const FeedTypeSearch = 'search';
 		const FeedTypeSpecificLinks = 'specific-links';
@@ -64,7 +64,7 @@
 					$instance = new SpecificLinkFeedSettings();
 					\Utils::loadFromJson($instance, $encodedContent);
 					return $instance;
-				case self::FeedTypeNews:
+				case self::FeedTypeSimpleSlider:
 					$instance = new SimpleFeedSettings();
 					\Utils::loadFromJson($instance, $encodedContent);
 					return $instance;
@@ -96,7 +96,7 @@
 					$instance = new SpecificLinkFeedSettings();
 					$instance->configureFromXml($xpath, $contextNode);
 					return $instance;
-				case self::FeedTypeNews:
+				case self::FeedTypeSimpleSlider:
 					$instance = new SimpleFeedSettings();
 					$instance->configureFromXml($xpath, $contextNode);
 					return $instance;

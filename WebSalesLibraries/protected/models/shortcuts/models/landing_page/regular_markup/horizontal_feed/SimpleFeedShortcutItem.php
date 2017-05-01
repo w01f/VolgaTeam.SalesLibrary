@@ -1,12 +1,14 @@
 <?
-	namespace application\models\shortcuts\models\landing_page\regular_markup\vertical_feed;
+
+	namespace application\models\shortcuts\models\landing_page\regular_markup\horizontal_feed;
 
 	use application\models\shortcuts\models\landing_page\regular_markup\common\BlockContainer;
 
+
 	/**
-	 * Class NewsShortcutItem
+	 * Class SimpleFeedShortcutItem
 	 */
-	class NewsShortcutItem extends NewsItem
+	class SimpleFeedShortcutItem extends SimpleFeedItem
 	{
 		/** @var  \BaseShortcut */
 		public $shortcut;

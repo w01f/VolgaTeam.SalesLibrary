@@ -11,6 +11,7 @@
 	 */
 	abstract class FeedSettings
 	{
+		const FeedTypeSimpleSlider = 'shortcut-slider';
 		const FeedTypeTrending = 'trending';
 		const FeedTypeSearch = 'search';
 		const FeedTypeSpecificLinks = 'specific-links';
@@ -30,16 +31,10 @@
 		public $linksScrollMode;
 		public $slideShow;
 		public $slideShowInterval;
-		public $maxThumbnailHeight;
-
-		/** @var  FeedItemSettings[] */
-		public $dataItemSettings;
+		public $maxImageHeight;
 
 		/** @var  FeedControlSettings[] */
 		public $controlSettings;
-
-		/** @var  ControlsStyle */
-		public $controlsStyle;
 
 		public function __construct()
 		{
@@ -47,11 +42,7 @@
 			$this->linksScrollMode = self::LinksScrollModeLink;
 			$this->slideShow = false;
 			$this->slideShowInterval = 5000;
-			$this->maxThumbnailHeight = 0;
-			$this->controlsStyle = new ControlsStyle();
-
-			$this->initDefaultDataItemSettings();
-
+			$this->maxImageHeight = 0;
 			$this->initDefaultControlSettings();
 		}
 
@@ -75,6 +66,10 @@
 					return $instance;
 				case self::FeedTypeSpecificLinks:
 					$instance = new SpecificLinkFeedSettings();
+					\Utils::loadFromJson($instance, $encodedContent);
+					return $instance;
+				case self::FeedTypeSimpleSlider:
+					$instance = new SimpleFeedSettings();
 					\Utils::loadFromJson($instance, $encodedContent);
 					return $instance;
 				default:
@@ -103,6 +98,10 @@
 					return $instance;
 				case self::FeedTypeSpecificLinks:
 					$instance = new SpecificLinkFeedSettings();
+					$instance->configureFromXml($xpath, $contextNode);
+					return $instance;
+				case self::FeedTypeSimpleSlider:
+					$instance = new SimpleFeedSettings();
 					$instance->configureFromXml($xpath, $contextNode);
 					return $instance;
 				default:
@@ -134,22 +133,6 @@
 			$queryResult = $xpath->query('./SlideShowInterval', $contextNode);
 			$this->slideShowInterval = $queryResult->length > 0 ? intval(trim($queryResult->item(0)->nodeValue)) : $this->slideShowInterval;
 
-			$queryResult = $xpath->query('./MaxThumbnailHeight', $contextNode);
-			$this->maxThumbnailHeight = $queryResult->length > 0 ? intval(trim($queryResult->item(0)->nodeValue)) : $this->maxThumbnailHeight;
-
-			$queryResult = $xpath->query('./DataSettings/Item', $contextNode);
-			/** @var $node \DOMElement */
-			foreach ($queryResult as $node)
-			{
-				$tag = $node->getAttribute('tag');
-				if (!empty($tag) && property_exists($this->dataItemSettings, $tag))
-				{
-					/** @var FeedItemSettings $dataItem */
-					$dataItem = $this->dataItemSettings->{$tag};
-					$dataItem->configureFromXml($xpath, $node);
-				}
-			}
-
 			$queryResult = $xpath->query('./ControlSettings/Item', $contextNode);
 			/** @var $node \DOMElement */
 			foreach ($queryResult as $node)
@@ -162,17 +145,6 @@
 					$controlSettings->configureFromXml($xpath, $node);
 				}
 			}
-
-			$queryResult = $xpath->query('./ControlsStyle', $contextNode);
-			if ($queryResult->length > 0)
-				$this->controlsStyle->configureFromXml($xpath, $queryResult->item(0));
-		}
-
-		protected function initDefaultDataItemSettings()
-		{
-			$this->dataItemSettings = new \stdClass();
-			foreach (FeedItemSettings::$tags as $tag)
-				$this->dataItemSettings->{$tag} = new FeedItemSettings($tag);
 		}
 
 		protected abstract function initDefaultControlSettings();

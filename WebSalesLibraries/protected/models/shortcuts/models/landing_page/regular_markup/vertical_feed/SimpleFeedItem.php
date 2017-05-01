@@ -7,9 +7,9 @@
 	use application\models\shortcuts\models\landing_page\regular_markup\common\ImageBlock;
 
 	/**
-	 * Class NewsItem
+	 * Class SimpleFeedItem
 	 */
-	class NewsItem extends BlockContainer
+	class SimpleFeedItem extends BlockContainer
 	{
 		/** @var  ImageBlock */
 		public $imageSettings;

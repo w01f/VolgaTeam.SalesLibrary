@@ -2,10 +2,11 @@
 	use application\models\data_query\link_feed\LinkFeedItem;
 	use application\models\feeds\common\FeedItemSettings;
 	use application\models\feeds\horizontal\FeedSettings;
+	use application\models\feeds\horizontal\LinkFeedSettings;
 
 	/**
 	 * @var string $feedId
-	 * @var FeedSettings $viewSettings
+	 * @var LinkFeedSettings $viewSettings
 	 * @var LinkFeedItem[] $feedItems
 	 */
 
@@ -13,42 +14,42 @@
 	$itemColumnClass = '';
 	switch ($viewSettings->linksPerSlide)
 	{
-		case \application\models\feeds\horizontal\FeedSettings::LinksPerSlide1:
+		case FeedSettings::LinksPerSlide1:
 			$itemColumnClass = 'col-xs-12 col-sm-12 col-md-12';
 			break;
-		case \application\models\feeds\horizontal\FeedSettings::LinksPerSlide2:
+		case FeedSettings::LinksPerSlide2:
 			$itemColumnClass = 'col-xs-12 col-sm-6 col-md-6';
 			$carouseOneMoveClass .= ' two_shows_one_move';
 			break;
-	    case \application\models\feeds\horizontal\FeedSettings::LinksPerSlide3:
+		case FeedSettings::LinksPerSlide3:
 			$itemColumnClass = 'col-xs-12 col-sm-4 col-md-4';
 			$carouseOneMoveClass .= ' three_shows_one_move';
 			break;
-		case \application\models\feeds\horizontal\FeedSettings::LinksPerSlide4:
+		case FeedSettings::LinksPerSlide4:
 			$itemColumnClass = 'col-xs-12 col-sm-6 col-md-3';
 			$carouseOneMoveClass .= ' four_shows_one_move';
 			break;
-		case \application\models\feeds\horizontal\FeedSettings::LinksPerSlide6:
+		case FeedSettings::LinksPerSlide6:
 			$itemColumnClass = 'col-xs-12 col-sm-4 col-md-2';
 			$carouseOneMoveClass .= ' six_shows_one_move';
 			break;
 	}
 
-	$linksPerSlide = $viewSettings->linksScrollMode === \application\models\feeds\horizontal\FeedSettings::LinksScrollModeSlide ?
+	$linksPerSlide = $viewSettings->linksScrollMode === FeedSettings::LinksScrollModeSlide ?
 		$viewSettings->linksPerSlide :
 		1;
 ?>
 <style>
-    <?if($viewSettings->maxThumbnailHeight>0):?>
-        #horizontal-feed-carousel-<? echo $feedId; ?> .portfolio_utube_item_image > img
-        {
-            max-height: <?echo $viewSettings->maxThumbnailHeight;?>px;
-        }
+    <?if($viewSettings->maxImageHeight>0):?>
+    #horizontal-feed-carousel-<? echo $feedId; ?> .portfolio_utube_item_image > img {
+        max-height: <?echo $viewSettings->maxImageHeight;?>px;
+    }
     <?endif;?>
 </style>
 <div id="horizontal-feed-carousel-<? echo $feedId; ?>"
-     class="col-xs-12 carousel slide portfolio_utube_carousel_wrapper<? echo $viewSettings->linksScrollMode === \application\models\feeds\horizontal\FeedSettings::LinksScrollModeLink ? (' ' . $carouseOneMoveClass) : ''; ?><? if ($viewSettings->slideShow == true): ?> carousel-slide-show<? endif; ?>"
-     <? if ($viewSettings->slideShow == true): ?>data-interval="<? echo $viewSettings->slideShowInterval; ?>"<? endif; ?>>
+     class="col-xs-12 carousel slide portfolio_utube_carousel_wrapper<? echo $viewSettings->linksScrollMode === FeedSettings::LinksScrollModeLink ? (' ' . $carouseOneMoveClass) : ''; ?><? if ($viewSettings->slideShow == true): ?> carousel-slide-show<? endif; ?>"
+     <? if ($viewSettings->slideShow === true): ?>data-interval="<? echo $viewSettings->slideShowInterval; ?>"
+     <? else: ?>data-interval="false"<? endif; ?>>
     <div class="carousel-inner" role="listbox">
 		<? $linksCount = count($feedItems); ?>
 		<? for ($i = 0; $i < $linksCount; $i += $linksPerSlide): ?>

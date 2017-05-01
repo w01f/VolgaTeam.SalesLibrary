@@ -35,7 +35,7 @@
 
 .portfolio_utube_carousel_wrapper {
     overflow: hidden;
-    padding: 15px 0 15px 15px;
+    padding: 15px 50px 15px 50px;
 }
 /*---------- HEADER ----------*/
 .portfolio_utube_carousel_header a,
@@ -84,40 +84,47 @@
     font-family: 'Open Sans', sans-serif;
 }
 /*---------- LEFT/RIGHT CONTROL ----------*/
-.carousel-controls-container
-{
-    padding: 0;
-}
 .portfolio_utube_carousel_control_left,
 .portfolio_utube_carousel_control_right {
-    width: 35px;
-    height: 35px;
+    top: 26%;
+    z-index: 2;
+    opacity: 0;
+    width: 30px;
+    height: 65px;
     border: none;
     text-shadow: none;
     text-align: center;
-    opacity: 1;
-    display: inline-block;
-    padding: 0;
+    transition: all ease-in-out 0.3s;
+    -webkit-transition: all ease-in-out 0.3s;
+}
+.portfolio_utube_carousel_wrapper:hover .portfolio_utube_carousel_control_left,
+.portfolio_utube_carousel_wrapper:hover .portfolio_utube_carousel_control_right {
+    opacity: 0.8;
 }
 .portfolio_utube_carousel_control_icons {
-    line-height: 32px;
+    line-height: 65px;
     font-size: 20px !important;
     font-weight: normal !important;
 }
+.portfolio_utube_carousel_control_left {
+    left: 1% !important;
+}
+.portfolio_utube_carousel_control_right {
+    right: 1% !important;
+}
+
 /*---------- CAPTION ----------*/
 /*---------- IMAGE ----------*/
 .portfolio_utube_item {
     padding-top: 10px;
-    padding-bottom: 0;
-    cursor: pointer;
+    padding-bottom: 0px;
 }
 .portfolio_utube_item_image {
     overflow: hidden;
     position: relative;
 }
 .portfolio_utube_item_image> img {
-    max-width: 100%;
-    border: solid 1px #DEDEDE;
+    width: 100%;
 }
 .portfolio_utube_item_image>a,
 .portfolio_utube_item_image>a:visited {
@@ -132,7 +139,6 @@
 /*---------- TEXT ----------*/
 .portfolio_utube_item_caption {
     padding-top: 5px;
-    font-size: 0.9em;
 }
 .portfolio_utube_item_caption>a,
 .portfolio_utube_item_caption>a:visited {
@@ -165,7 +171,7 @@
 }
 .portfolio_utube_item_caption>ul>li {
     font-size: 12px;
-    display: block;
+    display: inline-block;
     font-family: 'Open Sans', sans-serif;
 }
 .portfolio_utube_item_caption>ul>li>span {
@@ -175,6 +181,10 @@
 /*------------------------------------------------------*/
 /* COLORS (MIX)
 /*------------------------------------------------------*/
+
+.portfolio_utube_carousel_wrapper {
+    background: #ffffff;
+}
 /*---------- HEADER ----------*/
 .portfolio_utube_carousel_header>a>span {
     color: #282828;
@@ -211,7 +221,7 @@
 .portfolio_utube_carousel_control_right:active,
 .portfolio_utube_carousel_control_right:focus {
     color: #282828;
-    background: #dedede !important;
+    background: #ffffff !important;
     border: 1px solid rgba(0,0,0,0.1);
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     -webkit-box-shadow: 0 2px 4px rgba(0,0,0,0.1);

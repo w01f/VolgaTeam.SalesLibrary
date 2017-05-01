@@ -1,17 +1,18 @@
 <?
 
-	namespace application\models\shortcuts\models\landing_page\regular_markup\vertical_feed;
+	namespace application\models\shortcuts\models\landing_page\regular_markup\horizontal_feed;
 
-	use application\models\feeds\vertical\FeedSettings;
+	use application\models\feeds\horizontal\FeedSettings;
+	use application\models\feeds\horizontal\SimpleFeedSettings;
 	use application\models\shortcuts\models\landing_page\regular_markup\common\BlockContainer;
 	use application\models\shortcuts\models\landing_page\regular_markup\common\ContentBlock;
 
 	/**
-	 * Class NewsBlock
+	 * Class SimpleFeedBlock
 	 */
-	class NewsBlock extends BlockContainer
+	class SimpleFeedBlock extends BlockContainer
 	{
-		/** @var  FeedSettings */
+		/** @var  SimpleFeedSettings */
 		public $viewSettings;
 
 		/**
@@ -21,7 +22,7 @@
 		public function __construct($parentShortcut, $parentBlock)
 		{
 			parent::__construct($parentShortcut, $parentBlock);
-			$this->type = 'news';
+			$this->type = 'shortcut-slider';
 		}
 
 		/**
@@ -32,7 +33,7 @@
 		{
 			ContentBlock::configureFromXml($xpath, $contextNode);
 
-			$this->viewSettings = FeedSettings::fromXml(FeedSettings::FeedTypeNews, $xpath, $contextNode);
+			$this->viewSettings = FeedSettings::fromXml(FeedSettings::FeedTypeSimpleSlider, $xpath, $contextNode);
 
 			if ($this->isAccessGranted)
 			{
@@ -45,11 +46,11 @@
 					switch ($type)
 					{
 						case "url":
-							$contentBlock = new NewsUrlItem($this->parentShortcut, $this);
+							$contentBlock = new SimpleFeedUrlItem($this->parentShortcut, $this);
 							$contentBlock->configureFromXml($xpath, $node);
 							break;
 						case "shortcut":
-							$contentBlock = new NewsShortcutItem($this->parentShortcut, $this);
+							$contentBlock = new SimpleFeedShortcutItem($this->parentShortcut, $this);
 							$contentBlock->configureFromXml($xpath, $node);
 							break;
 						default:

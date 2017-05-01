@@ -13,8 +13,9 @@
 	use application\models\shortcuts\models\landing_page\regular_markup\style\BackgroundStyle;
 	use application\models\shortcuts\models\landing_page\regular_markup\style\BorderStyle;
 	use application\models\shortcuts\models\landing_page\regular_markup\style\TextAppearance;
-	use application\models\shortcuts\models\landing_page\regular_markup\vertical_feed\NewsBlock;
-	use application\models\shortcuts\models\landing_page\regular_markup\vertical_feed\NewsItem;
+	use application\models\shortcuts\models\landing_page\regular_markup\horizontal_feed\SimpleFeedBlock as SimpleHorizontalFeedBlock;
+	use application\models\shortcuts\models\landing_page\regular_markup\vertical_feed\SimpleFeedBlock as SimpleVerticalFeedBlock;
+	use application\models\shortcuts\models\landing_page\regular_markup\vertical_feed\SimpleFeedItem;
 	use application\models\shortcuts\models\landing_page\regular_markup\vertical_feed\TrendingBlock as VerticalTrendingBlock;
 	use application\models\shortcuts\models\landing_page\regular_markup\vertical_feed\SearchFeedBlock as VerticalSearchFeedBlock;
 	use application\models\shortcuts\models\landing_page\regular_markup\vertical_feed\SpecificLinkFeedBlock as VerticalSpecificLinkFeedBlock;
@@ -175,6 +176,8 @@
 					return 'common/searchBar';
 				case 'slider':
 					return 'common/slider';
+				case 'shortcut-slider':
+					return 'horizontal_feed/simpleFeed';
 				case 'trending':
 					return 'horizontal_feed/trending';
 				case 'search-feed':
@@ -182,7 +185,7 @@
 				case 'specific-links-feed':
 					return 'horizontal_feed/specificLinkFeed';
 				case 'news':
-					return 'vertical_feed/news';
+					return 'vertical_feed/simpleFeed';
 				case 'trending-vertical':
 					return 'vertical_feed/trending';
 				case 'search-feed-vertical':
@@ -301,12 +304,16 @@
 					$specificLinksFeedBlock = new MasonrySpecificLinkFeedBlock($parentShortcut, $parentBlock);
 					$specificLinksFeedBlock->configureFromXml($xpath, $contextNode);
 					return $specificLinksFeedBlock;
+				case "shortcut-slider":
+					$simpleFeedBlock = new SimpleHorizontalFeedBlock($parentShortcut, $parentBlock);
+					$simpleFeedBlock->configureFromXml($xpath, $contextNode);
+					return $simpleFeedBlock;
 				case "news":
-					$newsBlock = new NewsBlock($parentShortcut, $parentBlock);
-					$newsBlock->configureFromXml($xpath, $contextNode);
-					return $newsBlock;
+					$simpleFeedBlock = new SimpleVerticalFeedBlock($parentShortcut, $parentBlock);
+					$simpleFeedBlock->configureFromXml($xpath, $contextNode);
+					return $simpleFeedBlock;
 				case "news block":
-					$newsItem = new NewsItem($parentShortcut, $parentBlock);
+					$newsItem = new SimpleFeedItem($parentShortcut, $parentBlock);
 					$newsItem->configureFromXml($xpath, $contextNode);
 					return $newsItem;
 				case "scroll-tab":

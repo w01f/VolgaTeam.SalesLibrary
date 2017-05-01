@@ -24,7 +24,7 @@
 		)
 		, true);
 ?>
-<div id="horizontal-feed-<? echo $feedId; ?>" class="row horizontal-feed">
+<div id="horizontal-feed-<? echo $feedId; ?>" class="row horizontal-feed horizontal-link-feed">
 	<div class="service-data">
 		<div class="encoded-object">
 			<div class="query-settings"><? echo CJSON::encode($querySettings); ?></div>

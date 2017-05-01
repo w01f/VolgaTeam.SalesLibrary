@@ -1,12 +1,12 @@
 <?
-	use application\models\shortcuts\models\landing_page\regular_markup\vertical_feed\NewsBlock;
-	use application\models\shortcuts\models\landing_page\regular_markup\vertical_feed\NewsItem;
-	use application\models\shortcuts\models\landing_page\regular_markup\vertical_feed\NewsShortcutItem;
-	use application\models\shortcuts\models\landing_page\regular_markup\vertical_feed\NewsUrlItem;
+	use application\models\shortcuts\models\landing_page\regular_markup\vertical_feed\SimpleFeedBlock;
+	use application\models\shortcuts\models\landing_page\regular_markup\vertical_feed\SimpleFeedItem;
+	use application\models\shortcuts\models\landing_page\regular_markup\vertical_feed\SimpleFeedShortcutItem;
+	use application\models\shortcuts\models\landing_page\regular_markup\vertical_feed\SimpleFeedUrlItem;
 
-	/** @var $contentBlock NewsBlock */
+	/** @var $contentBlock SimpleFeedBlock */
 
-	/** @var NewsItem[] $newsItems */
+	/** @var SimpleFeedItem[] $newsItems */
 	$newsItems = $contentBlock->items;
 ?>
 <style>
@@ -62,10 +62,10 @@
 						<? foreach ($newsItems as $newsItem): ?>
                             <li class="news-item">
 								<? if ($newsItem->type === 'url'): ?>
-								    <? /** @var NewsUrlItem $newsItem */ ?>
+								    <? /** @var SimpleFeedUrlItem $newsItem */ ?>
                                     <a href="<? echo $newsItem->url; ?>" target="_blank" class="content">
 								<? elseif ($newsItem->type === 'shortcut'): ?>
-									<? /** @var NewsShortcutItem $newsItem */ ?>
+									<? /** @var SimpleFeedShortcutItem $newsItem */ ?>
                                     <a href="<? echo isset($newsItem->shortcut) ? $newsItem->shortcut->getSourceLink() : '#'; ?>" class="content shortcuts-link<?if(!isset($newsItem->shortcut)):?> disabled<?endif;?>">
                                         <div class="service-data">
 											<? echo isset($newsItem->shortcut) ? $newsItem->shortcut->getMenuItemData() : '<div class="same-page"></div><div class="has-custom-handler"></div>'; ?>
