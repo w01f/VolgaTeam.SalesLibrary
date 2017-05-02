@@ -50,7 +50,7 @@
      class="col-xs-12 carousel slide portfolio_utube_carousel_wrapper<? echo $viewSettings->linksScrollMode === FeedSettings::LinksScrollModeLink ? (' ' . $carouseOneMoveClass) : ''; ?><? if ($viewSettings->slideShow == true): ?> carousel-slide-show<? endif; ?>"
      <? if ($viewSettings->slideShow === true): ?>data-interval="<? echo $viewSettings->slideShowInterval; ?>"
      <? else: ?>data-interval="false"<? endif; ?>>
-    <div class="carousel-inner" role="listbox">
+    <div class="carousel-inner carousel-links" role="listbox">
 		<? $linksCount = count($feedItems); ?>
 		<? for ($i = 0; $i < $linksCount; $i += $linksPerSlide): ?>
             <div class="item<? if ($i === 0): ?> active<? endif; ?>">

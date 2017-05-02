@@ -86,10 +86,32 @@
 						{
 							/** @var $node \DomElement */
 							$target = strtolower(trim($groupName = $node->getAttribute('Target')));
-							if ($target != strtolower($conditionPart)) continue;
 							$aliasNodes = $node->getElementsByTagName('Item');
-							foreach ($aliasNodes as $aliasNode)
-								$result[] = sprintf('"%s"', str_replace($conditionPart, trim($aliasNode->nodeValue), $conditionPart));
+
+							$useAsAlias = false;
+							if($target === strtolower($conditionPart))
+							{
+								$useAsAlias = true;
+							}
+							else
+							{
+								foreach ($aliasNodes as $aliasNode)
+								{
+									$aliasValue = strtolower(trim($aliasNode->nodeValue));
+									if($aliasValue === strtolower($conditionPart))
+									{
+										$useAsAlias = true;
+										$result[] = sprintf('"%s"', $target);
+										break;
+									}
+								}
+							}
+
+							if($useAsAlias)
+							{
+								foreach ($aliasNodes as $aliasNode)
+									$result[] = sprintf('"%s"', str_replace($conditionPart, trim($aliasNode->nodeValue), $conditionPart));
+							}
 						}
 					}
 				}

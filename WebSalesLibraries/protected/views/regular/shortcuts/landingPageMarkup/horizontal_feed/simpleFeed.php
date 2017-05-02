@@ -51,6 +51,25 @@
 		max-height: <?echo $viewSettings->maxImageHeight;?>px;
 	}
 	<?endif;?>
+
+    #horizontal-feed-carousel-<? echo $feedId; ?> {
+        padding: <?echo $viewSettings->style->feedPadding->top;?>px <?echo $viewSettings->style->feedPadding->right;?>px <?echo $viewSettings->style->feedPadding->bottom;?>px <?echo $viewSettings->style->feedPadding->left;?>px !important;
+    }
+
+    #horizontal-feed-carousel-<? echo $feedId; ?> .portfolio_utube_item{
+        padding: <?echo $viewSettings->style->itemPadding->top;?>px <?echo $viewSettings->style->itemPadding->right;?>px <?echo $viewSettings->style->itemPadding->bottom;?>px <?echo $viewSettings->style->itemPadding->left;?>px !important;
+    }
+
+    #horizontal-feed-carousel-<? echo $feedId; ?> .portfolio_utube_carousel_control_left,
+    #horizontal-feed-carousel-<? echo $feedId; ?> .portfolio_utube_carousel_control_right {
+        top: <?echo $viewSettings->style->controlButtonTop;?>% !important;
+        width: <?echo $viewSettings->style->controlButtonWidth;?>px !important;
+        height: <?echo $viewSettings->style->controlButtonHeight;?>px !important;
+    }
+
+    #horizontal-feed-carousel-<? echo $feedId; ?> .portfolio_utube_carousel_control_icons {
+        line-height: <?echo $viewSettings->style->controlButtonHeight;?>px !important;
+    }
 </style>
 <div id="horizontal-feed-<? echo $feedId; ?>" class="row horizontal-feed">
 	<div class="service-data">
@@ -76,14 +95,14 @@
 										/** @var SimpleFeedUrlItem $feedItem */
 										$feedItem = $feedItems[$i];
 									?>
-									<a href="<? echo $feedItem->url; ?>" target="_blank">
+									<a href="<? echo $feedItem->url; ?>" target="_blank" <? if (!empty($feedItem->hoverText)): ?> title="<? echo $feedItem->hoverText; ?>"<? endif; ?>>
 								<? elseif ($feedItems[$i]->type === 'shortcut'): ?>
 										<?
 											/** @var SimpleFeedShortcutItem $feedItem */
 											$feedItem = $feedItems[$i];
 										?>
-									<d href="<? echo isset($feedItem->shortcut) ? $feedItem->shortcut->getSourceLink() : '#'; ?>"
-									   class="shortcuts-link<? if (!isset($feedItem->shortcut)): ?> disabled<? endif; ?>">
+									<a href="<? echo isset($feedItem->shortcut) ? $feedItem->shortcut->getSourceLink() : '#'; ?>"
+									   class="shortcuts-link<? if (!isset($feedItem->shortcut)): ?> disabled<? endif; ?>" <? if (!empty($feedItem->hoverText)): ?> title="<? echo $feedItem->hoverText; ?>"<? endif; ?>>
 										<div class="service-data">
 											<? echo isset($feedItem->shortcut) ? $feedItem->shortcut->getMenuItemData() : '<div class="same-page"></div><div class="has-custom-handler"></div>'; ?>
 										</div>
