@@ -89,12 +89,16 @@
 
 		var initCarouselControls = function ()
 		{
-			feedContainer.find('.portfolio_utube_carousel_control_left').off('click').on('click', function ()
+			var leftButton = feedContainer.find('.portfolio_utube_carousel_control_left');
+			leftButton.prop('href', '#');
+			leftButton.on('click', function ()
 			{
 				$(this).blur();
 				feedContainer.find('.carousel').carousel('prev');
 			});
-			feedContainer.find('.portfolio_utube_carousel_control_right').off('click').on('click', function ()
+			var rightButton = feedContainer.find('.portfolio_utube_carousel_control_right');
+			rightButton.prop('href', '#');
+			rightButton.off('click').on('click', function ()
 			{
 				$(this).blur();
 				feedContainer.find('.carousel').carousel('next');

@@ -25,7 +25,7 @@
 		, true);
 ?>
 <a id="<? echo $blockId; ?>" class="landing-url"
-   href="<? echo $contentBlock->url; ?>" target="_blank"
+   href="<? echo $contentBlock->url; ?>" <? if ($contentBlock->isMailTo!==false): ?>target="_self"<?else:?>target="_blank"<? endif; ?>
    style="<? echo $this->renderPartial('landingPageMarkup/style/stylePadding', array('padding' => $contentBlock->padding), true); ?>
     <? echo $this->renderPartial('landingPageMarkup/style/styleMargin', array('margin' => $contentBlock->margin), true); ?>"
 	<? if (!empty($contentBlock->hoverText)): ?> title="<? echo $contentBlock->hoverText; ?>"<? endif; ?>>

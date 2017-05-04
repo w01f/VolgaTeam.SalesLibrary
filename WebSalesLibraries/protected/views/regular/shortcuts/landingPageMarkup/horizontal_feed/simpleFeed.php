@@ -95,7 +95,8 @@
 										/** @var SimpleFeedUrlItem $feedItem */
 										$feedItem = $feedItems[$i];
 									?>
-									<a href="<? echo $feedItem->url; ?>" target="_blank" <? if (!empty($feedItem->hoverText)): ?> title="<? echo $feedItem->hoverText; ?>"<? endif; ?>>
+                                <a href="<? echo $feedItem->url; ?>"
+								   <? if ($feedItem->isMailTo!==false): ?>target="_self"<?else:?>target="_blank"<? endif; ?> <? if (!empty($feedItem->hoverText)): ?> title="<? echo $feedItem->hoverText; ?>"<? endif; ?>>
 								<? elseif ($feedItems[$i]->type === 'shortcut'): ?>
 										<?
 											/** @var SimpleFeedShortcutItem $feedItem */

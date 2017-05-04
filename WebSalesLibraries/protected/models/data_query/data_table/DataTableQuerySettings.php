@@ -104,7 +104,7 @@
 				'link.is_preview_not_ready=0');
 			if (!$isAdmin)
 			{
-				$restrictedLinkConditions = array();
+				$restrictedLinkConditions = array('AND');
 
 				$availableLinkIds = \LinkWhiteListRecord::getAvailableLinks($userId);
 				if (count($availableLinkIds) > 0)
@@ -114,10 +114,10 @@
 				if (count($deniedLinkIds) > 0)
 					$restrictedLinkConditions[] = sprintf("link.id not in ('%s')", implode("', '", $deniedLinkIds));
 
-				if (count($restrictedLinkConditions) > 0)
-					$this->whereConditions[] = array('OR', 'link.is_restricted <> 1', array('AND', $restrictedLinkConditions));
+				if (count($restrictedLinkConditions) > 1)
+					$this->whereConditions[] = array('OR', 'link.id not in (select wl.id_link from tbl_link_white_list wl)', $restrictedLinkConditions);
 				else
-					$this->whereConditions[] = array('link.is_restricted <> 1');
+					$this->whereConditions[] = 'link.id not in (select wl.id_link from tbl_link_white_list wl)';
 			}
 
 			$includeAppLinks = \Yii::app()->browser->getBrowser() == \Browser::BROWSER_EO;

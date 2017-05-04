@@ -1,4 +1,5 @@
 <?
+
 	/**
 	 * Class LinkRecord
 	 * @property mixed id_parent_link
@@ -237,21 +238,23 @@
 		 */
 		public static function applyPermissionsFilter($links)
 		{
-			$useFilterByUser = \UserIdentity::isUserAuthorized() && !\UserIdentity::isUserAdmin();
-			if ($useFilterByUser)
+			if (\UserIdentity::isUserAuthorized() && !\UserIdentity::isUserAdmin())
 			{
 				$userId = UserIdentity::getCurrentUserId();
 				$filteredLinks = array();
 				$whiteList = LinkWhiteListRecord::getWhiteListLinkIds();
 				foreach ($links as $link)
 				{
+					$linkAvailable = true;
 					if (in_array($link->id, $whiteList))
 					{
 						$availableLinkIds = LinkWhiteListRecord::getAvailableLinks($userId);
 						if (in_array($link->id, $availableLinkIds))
-							$filteredLinks[] = $link;
+							$linkAvailable = true;
+						else
+							$linkAvailable = false;
 					}
-					else
+					if($linkAvailable)
 					{
 						$deniedLinkIds = LinkBlackListRecord::getDeniedLinks($userId);
 						if (!in_array($link->id, $deniedLinkIds))
@@ -260,8 +263,9 @@
 				}
 				return $filteredLinks;
 			}
-			else
+			else if (\UserIdentity::isUserAdmin())
 				return $links;
+			return array();
 		}
 
 		/**

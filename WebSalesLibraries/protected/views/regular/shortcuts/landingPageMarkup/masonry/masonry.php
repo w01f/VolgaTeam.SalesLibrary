@@ -50,7 +50,7 @@
 		?>
 		<? if ($masonryItem->type === 'url'): ?>
 		<? /** @var MasonryUrl $masonryItem */ ?>
-        <a href="<? echo $masonryItem->url; ?>" target="_blank"
+        <a href="<? echo $masonryItem->url; ?>" <? if ($masonryItem->isMailTo!==false): ?>target="_self"<?else:?>target="_blank"<? endif; ?>
            class="cbp-item <? echo implode(' ', $masonryItem->filterTags); ?>" <? echo $itemStyle; ?>>
 			<? elseif ($masonryItem->type === 'shortcut'): ?>
 		<? /** @var MasonryShortcut $masonryItem */ ?>

@@ -63,7 +63,7 @@
                             <li class="news-item">
 								<? if ($newsItem->type === 'url'): ?>
 								    <? /** @var SimpleFeedUrlItem $newsItem */ ?>
-                                    <a href="<? echo $newsItem->url; ?>" target="_blank" class="content">
+                                    <a href="<? echo $newsItem->url; ?>" <? if ($newsItem->isMailTo!==false): ?>target="_self"<?else:?>target="_blank"<? endif; ?> class="content">
 								<? elseif ($newsItem->type === 'shortcut'): ?>
 									<? /** @var SimpleFeedShortcutItem $newsItem */ ?>
                                     <a href="<? echo isset($newsItem->shortcut) ? $newsItem->shortcut->getSourceLink() : '#'; ?>" class="content shortcuts-link<?if(!isset($newsItem->shortcut)):?> disabled<?endif;?>">

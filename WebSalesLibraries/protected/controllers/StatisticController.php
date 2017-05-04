@@ -391,7 +391,11 @@
 					$libraryFilesModel->fileName = $resultRecord['file_name'];
 					$libraryFilesModel->fileType = $resultRecord['file_type'];
 					$libraryFilesModel->fileFormat = $resultRecord['file_format'];
+					$libraryFilesModel->categories = $resultRecord['categories'];
+					$libraryFilesModel->keywords = $resultRecord['keywords'];
 					$libraryFilesModel->fileDate = $resultRecord['file_date'];
+					$libraryFilesModel->linkAddDate = $resultRecord['link_add_date'];
+					$libraryFilesModel->linkModifyDate = $resultRecord['link_modify_date'];
 					$reportRecords[] = $libraryFilesModel;
 				}
 			}

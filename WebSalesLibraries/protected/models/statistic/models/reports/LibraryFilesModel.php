@@ -36,8 +36,28 @@
 		 */
 		public $fileFormat;
 		/**
+		 * @var string categories
+		 * @soap
+		 */
+		public $categories;
+		/**
+		 * @var string keywords
+		 * @soap
+		 */
+		public $keywords;
+		/**
 		 * @var string fileDate
 		 * @soap
 		 */
 		public $fileDate;
+		/**
+		 * @var string linkAddDate
+		 * @soap
+		 */
+		public $linkAddDate;
+		/**
+		 * @var string linkModifyDate
+		 * @soap
+		 */
+		public $linkModifyDate;
 	}
