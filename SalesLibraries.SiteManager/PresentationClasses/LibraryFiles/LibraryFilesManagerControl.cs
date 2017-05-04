@@ -19,16 +19,36 @@ namespace SalesLibraries.SiteManager.PresentationClasses.LibraryFiles
 	public partial class LibraryFilesManagerControl : UserControl
 	{
 		private readonly List<LibraryFilesModel> _records = new List<LibraryFilesModel>();
-		private readonly Filter _filterControl;
+
+		private readonly TotalFilter _filterControlTotal;
+		private readonly LibraryFilter _filterControlLibrary;
 
 		public LibraryFilesManagerControl()
 		{
 			InitializeComponent();
 			Dock = DockStyle.Fill;
-			_filterControl = new Filter();
-			pnCustomFilter.Controls.Add(_filterControl);
-			_filterControl.FilterChanged += (o, e) =>
+
+			_filterControlLibrary = new LibraryFilter();
+			pnCustomFilter.Controls.Add(_filterControlLibrary);
+			_filterControlLibrary.FilterChanged += (o, e) =>
 			{
+				_filterControlTotal.EnableFilter = _filterControlLibrary.EnableFilter;
+				_filterControlTotal.SelectedGroups.Clear();
+				_filterControlTotal.SelectedGroups.AddRange(_filterControlLibrary.SelectedGroups);
+				_filterControlTotal.UpdateDataSource(_filterControlLibrary.AllGroups.ToArray(), false);
+
+				ApplyData();
+			};
+
+			_filterControlTotal = new TotalFilter();
+			pnCustomFilter.Controls.Add(_filterControlTotal);
+			_filterControlTotal.FilterChanged += (o, e) =>
+			{
+				_filterControlLibrary.EnableFilter = _filterControlTotal.EnableFilter;
+				_filterControlLibrary.SelectedGroups.Clear();
+				_filterControlLibrary.SelectedGroups.AddRange(_filterControlTotal.SelectedGroups);
+				_filterControlLibrary.UpdateDataSource(_filterControlTotal.AllGroups.ToArray(), false);
+
 				ApplyData();
 			};
 		}
@@ -70,7 +90,11 @@ namespace SalesLibraries.SiteManager.PresentationClasses.LibraryFiles
 					Application.DoEvents();
 				}
 			}
-			_filterControl.UpdateDataSource(_records.OrderBy(g => g.library).Select(x => x.library).Where(x => !String.IsNullOrEmpty(x)).Distinct().ToArray());
+
+			var filterDataSource =
+				_records.OrderBy(g => g.library).Select(x => x.library).Where(x => !String.IsNullOrEmpty(x)).Distinct().ToArray();
+			_filterControlTotal.UpdateDataSource(filterDataSource);
+			_filterControlLibrary.UpdateDataSource(filterDataSource);
 			ApplyData();
 		}
 
@@ -142,8 +166,8 @@ namespace SalesLibraries.SiteManager.PresentationClasses.LibraryFiles
 		{
 			xtraTabControlLibraries.TabPages.Clear();
 			var filteredRecords = new List<LibraryFilesModel>();
-			filteredRecords.AddRange(_filterControl.EnableFilter ?
-				_records.Where(g => _filterControl.SelectedGroups.Contains(g.library)) :
+			filteredRecords.AddRange(_filterControlTotal.EnableFilter ?
+				_records.Where(g => _filterControlTotal.SelectedGroups.Contains(g.library)) :
 				_records);
 
 			var totalRecords = filteredRecords
@@ -151,8 +175,10 @@ namespace SalesLibraries.SiteManager.PresentationClasses.LibraryFiles
 				.Select(g => new LibraryFilesTotalModel()
 				{
 					Name = g.Key,
-					FilesCount = g.Count(),
-					VideoCount = g.Count(r => new[] { "video", "mp4", "wmv" }.Any(item => item.Equals(r.fileFormat, StringComparison.OrdinalIgnoreCase))),
+					FilesTotalCount = g.Count(),
+					FilesTaggedCount = g.Count(r => r.HasCategories || r.HasKeywords),
+					VideoTotalCount = g.Count(r => new[] { "video", "mp4", "wmv" }.Any(item => item.Equals(r.fileFormat, StringComparison.OrdinalIgnoreCase))),
+					VideoTaggedCount = g.Count(r => (r.HasCategories || r.HasKeywords) && new[] { "video", "mp4", "wmv" }.Any(item => item.Equals(r.fileFormat, StringComparison.OrdinalIgnoreCase))),
 					LibraryDate = g.Select(r => r.LibraryDate).FirstOrDefault()
 				})
 				.OrderBy(r => r.Name).ToList();
@@ -161,14 +187,23 @@ namespace SalesLibraries.SiteManager.PresentationClasses.LibraryFiles
 
 			foreach (var group in filteredRecords.OrderBy(r => r.library).Select(g => g.library).Distinct())
 			{
-				var groupPage = new LibraryControl(filteredRecords.Where(r => r.library == group).OrderBy(r => r.linkName).ToList()) { GroupName = group };
-				xtraTabControlLibraries.TabPages.Add(groupPage);
-			}
-		}
+				var libraryPage = new LibraryControl(filteredRecords.Where(r => r.library == group).OrderBy(r => r.linkName).ToList()) { GroupName = group };
+				_filterControlLibrary.LinkTagFilterChanged += (o, e) => libraryPage.ApplyFilter(_filterControlLibrary);
+				libraryPage.ApplyFilter(_filterControlLibrary);
+				xtraTabControlLibraries.TabPages.Add(libraryPage);
+			}}
 
 		private void buttonXLoadData_Click(object sender, EventArgs e)
 		{
 			RefreshData(true);
+		}
+
+		private void xtraTabControlLibraries_SelectedPageChanged(object sender, DevExpress.XtraTab.TabPageChangedEventArgs e)
+		{
+			if (e.Page is TotalControl)
+				_filterControlTotal.BringToFront();
+			else
+				_filterControlLibrary.BringToFront();
 		}
 	}
 }

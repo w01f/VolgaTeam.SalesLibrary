@@ -187,7 +187,11 @@
           <xsd:element name="fileName" type="xsd:string" />
           <xsd:element name="fileType" type="xsd:string" />
           <xsd:element name="fileFormat" type="xsd:string" />
+          <xsd:element name="categories" type="xsd:string" />
+          <xsd:element name="keywords" type="xsd:string" />
           <xsd:element name="fileDate" type="xsd:string" />
+          <xsd:element name="linkAddDate" type="xsd:string" />
+          <xsd:element name="linkModifyDate" type="xsd:string" />
         </xsd:all>
       </xsd:complexType>
     </xsd:schema>

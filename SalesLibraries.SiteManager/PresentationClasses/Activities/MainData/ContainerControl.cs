@@ -33,6 +33,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.Activities.MainData
 				_active = value;
 				Visible = _active;
 				_userFilterControl.Visible = _active;
+				_groupFilterControl.Visible = _active;
 			}
 		}
 

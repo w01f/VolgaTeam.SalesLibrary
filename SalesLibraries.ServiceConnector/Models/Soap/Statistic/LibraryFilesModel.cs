@@ -26,6 +26,38 @@ namespace SalesLibraries.ServiceConnector.StatisticService
 			}
 		}
 
+		public DateTime? LinkAddDate
+		{
+			get
+			{
+				DateTime temp;
+				if (DateTime.TryParse(linkAddDate, out temp))
+					return temp;
+				return null;
+			}
+		}
+
+		public DateTime? LinkModifyDate
+		{
+			get
+			{
+				DateTime temp;
+				if (DateTime.TryParse(linkModifyDate, out temp))
+					return temp;
+				return null;
+			}
+		}
+
+		public bool HasCategories => !String.IsNullOrEmpty(categories);
+
+		public bool HasKeywords => !String.IsNullOrEmpty(keywords);
+
+		public string Details => String.Format("{0}{2}{2}{1}",
+			HasCategories ? String.Format("Tags: {0}", categories) : String.Empty,
+			HasKeywords ? String.Format("Keywords: {0}", String.Join(", ", keywords.Split(' '))) : String.Empty,
+			HasCategories && HasKeywords ? Environment.NewLine : String.Empty
+			);
+
 		public string Extension => fileType?.Replace(".", "").Replace("other", "").ToLower();
 
 		public string ExtensionGroup

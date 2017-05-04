@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing.Printing;
+using System.Linq;
 using System.Windows.Forms;
 using DevExpress.XtraPrinting;
 using DevExpress.XtraTab;
@@ -46,6 +47,18 @@ namespace SalesLibraries.SiteManager.PresentationClasses.LibraryFiles
 				Component = gridControlData
 			};
 			return printLink;
+		}
+
+		public void ApplyFilter(LibraryFilter filterControlLibrary)
+		{
+			if (!filterControlLibrary.EnableFilter || filterControlLibrary.ShowAllLinks)
+				gridControlData.DataSource = Records;
+			else if (filterControlLibrary.ShowUntaggedLinks)
+				gridControlData.DataSource = Records.Where(r => !r.HasCategories).ToList();
+			else if (filterControlLibrary.ShowNokeywordLinks)
+				gridControlData.DataSource = Records.Where(r => !r.HasKeywords).ToList();
+			advBandedGridViewData.RefreshData();
+			gridControlData.Update();
 		}
 	}
 }

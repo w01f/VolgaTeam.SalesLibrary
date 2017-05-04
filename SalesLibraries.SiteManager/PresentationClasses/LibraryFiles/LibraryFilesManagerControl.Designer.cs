@@ -33,13 +33,13 @@
 			this.splitContainerControl = new DevExpress.XtraEditors.SplitContainerControl();
 			this.pnCustomFilter = new System.Windows.Forms.Panel();
 			this.pnFilterButtons = new System.Windows.Forms.Panel();
-			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
 			this.xtraTabControlLibraries = new DevExpress.XtraTab.XtraTabControl();
+			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
 			((System.ComponentModel.ISupportInitialize)(this.splitContainerControl)).BeginInit();
 			this.splitContainerControl.SuspendLayout();
 			this.pnFilterButtons.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControlLibraries)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// buttonXLoadData
@@ -94,21 +94,6 @@
 			this.pnFilterButtons.Size = new System.Drawing.Size(240, 39);
 			this.pnFilterButtons.TabIndex = 19;
 			// 
-			// styleController
-			// 
-			this.styleController.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.styleController.Appearance.Options.UseFont = true;
-			this.styleController.AppearanceDisabled.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.styleController.AppearanceDisabled.Options.UseFont = true;
-			this.styleController.AppearanceDropDown.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.styleController.AppearanceDropDown.Options.UseFont = true;
-			this.styleController.AppearanceDropDownHeader.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.styleController.AppearanceDropDownHeader.Options.UseFont = true;
-			this.styleController.AppearanceFocused.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.styleController.AppearanceFocused.Options.UseFont = true;
-			this.styleController.AppearanceReadOnly.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.styleController.AppearanceReadOnly.Options.UseFont = true;
-			// 
 			// xtraTabControlLibraries
 			// 
 			this.xtraTabControlLibraries.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -126,8 +111,24 @@
 			this.xtraTabControlLibraries.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.xtraTabControlLibraries.Location = new System.Drawing.Point(0, 0);
 			this.xtraTabControlLibraries.Name = "xtraTabControlLibraries";
-			this.xtraTabControlLibraries.Size = new System.Drawing.Size(636, 483);
+			this.xtraTabControlLibraries.Size = new System.Drawing.Size(643, 483);
 			this.xtraTabControlLibraries.TabIndex = 3;
+			this.xtraTabControlLibraries.SelectedPageChanged += new DevExpress.XtraTab.TabPageChangedEventHandler(this.xtraTabControlLibraries_SelectedPageChanged);
+			// 
+			// styleController
+			// 
+			this.styleController.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.styleController.Appearance.Options.UseFont = true;
+			this.styleController.AppearanceDisabled.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.styleController.AppearanceDisabled.Options.UseFont = true;
+			this.styleController.AppearanceDropDown.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.styleController.AppearanceDropDown.Options.UseFont = true;
+			this.styleController.AppearanceDropDownHeader.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.styleController.AppearanceDropDownHeader.Options.UseFont = true;
+			this.styleController.AppearanceFocused.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.styleController.AppearanceFocused.Options.UseFont = true;
+			this.styleController.AppearanceReadOnly.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.styleController.AppearanceReadOnly.Options.UseFont = true;
 			// 
 			// LibraryFilesManagerControl
 			// 
@@ -141,8 +142,8 @@
 			((System.ComponentModel.ISupportInitialize)(this.splitContainerControl)).EndInit();
 			this.splitContainerControl.ResumeLayout(false);
 			this.pnFilterButtons.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControlLibraries)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
 			this.ResumeLayout(false);
 
         }

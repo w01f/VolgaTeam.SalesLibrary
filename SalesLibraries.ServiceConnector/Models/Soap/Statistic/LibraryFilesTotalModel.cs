@@ -5,8 +5,10 @@ namespace SalesLibraries.ServiceConnector.StatisticService
 	public class LibraryFilesTotalModel
 	{
 		public string Name { get; set; }
-		public int VideoCount { get; set; }
-		public int FilesCount { get; set; }
+		public int VideoTotalCount { get; set; }
+		public int VideoTaggedCount { get; set; }
+		public int FilesTotalCount { get; set; }
+		public int FilesTaggedCount { get; set; }
 		public DateTime? LibraryDate { get; set; }
 		public int? DaysFormLastUpdate
 		{

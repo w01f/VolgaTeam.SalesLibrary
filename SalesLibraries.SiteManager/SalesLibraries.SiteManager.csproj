@@ -293,11 +293,17 @@
     <Compile Include="PresentationClasses\Activities\VideoLinkData\GroupControl.Designer.cs">
       <DependentUpon>GroupControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationClasses\LibraryFiles\Filter.cs">
+    <Compile Include="PresentationClasses\LibraryFiles\LibraryFilter.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PresentationClasses\LibraryFiles\Filter.Designer.cs">
-      <DependentUpon>Filter.cs</DependentUpon>
+    <Compile Include="PresentationClasses\LibraryFiles\LibraryFilter.Designer.cs">
+      <DependentUpon>LibraryFilter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\LibraryFiles\TotalFilter.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\LibraryFiles\TotalFilter.Designer.cs">
+      <DependentUpon>TotalFilter.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationClasses\LibraryFiles\TotalControl.cs">
       <SubType>Component</SubType>
@@ -593,8 +599,11 @@
     <EmbeddedResource Include="PresentationClasses\InactiveUsers\InactiveUsersFilter.resx">
       <DependentUpon>InactiveUsersFilter.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationClasses\LibraryFiles\Filter.resx">
-      <DependentUpon>Filter.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationClasses\LibraryFiles\LibraryFilter.resx">
+      <DependentUpon>LibraryFilter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\LibraryFiles\TotalFilter.resx">
+      <DependentUpon>TotalFilter.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationClasses\LibraryFiles\TotalControl.resx">
       <DependentUpon>TotalControl.cs</DependentUpon>
