@@ -43,19 +43,19 @@
 		<?if(isset($style->verticalBorder1Color)):?>
 		<?if($style->verticalBorderStretch):?>
 		#page-<? echo $libraryPage->id; ?> .page-column.column0 {
-			border-right: 1px solid <?echo '#'.$style->verticalBorder1Color;?>;
+			border-right: 1px solid <?echo Utils::formatColor($style->verticalBorder1Color);?>;
 		}
 
 		<? else: ?>
 		<?if(!$style->column1Style->frozen):?>
 		#page-<? echo $libraryPage->id; ?> .page-column.column0 .page-column-inner {
-			border-right: 1px solid <?echo '#'.$style->verticalBorder1Color;?>;
+			border-right: 1px solid <?echo Utils::formatColor($style->verticalBorder1Color);?>;
 		}
 
 		<? endif; ?>
 
 		#page-<? echo $libraryPage->id; ?> .page-column.column1 .page-column-inner {
-			border-left: 1px solid <?echo '#'.$style->verticalBorder1Color;?>;
+			border-left: 1px solid <?echo Utils::formatColor($style->verticalBorder1Color);?>;
 			margin-left: -<? echo $pageColumnInnerMargin; ?>px;
 		}
 
@@ -66,16 +66,16 @@
 		<?if(isset($style->verticalBorder2Color)):?>
 		<?if($style->verticalBorderStretch):?>
 		#page-<? echo $libraryPage->id; ?> .page-column.column1 {
-			border-right: 1px solid <?echo '#'.$style->verticalBorder2Color;?>;
+			border-right: 1px solid <?echo Utils::formatColor($style->verticalBorder2Color);?>;
 		}
 
 		<? else: ?>
 		#page-<? echo $libraryPage->id; ?> .page-column.column1 .page-column-inner {
-			border-right: 1px solid <?echo '#'.$style->verticalBorder2Color;?>;
+			border-right: 1px solid <?echo Utils::formatColor($style->verticalBorder2Color);?>;
 		}
 
 		#page-<? echo $libraryPage->id; ?> .page-column.column2 .page-column-inner {
-			border-left: 1px solid <?echo '#'.$style->verticalBorder2Color;?>;
+			border-left: 1px solid <?echo Utils::formatColor($style->verticalBorder2Color);?>;
 			margin-left: -<? echo $pageColumnInnerMargin; ?>px;
 		}
 
@@ -106,7 +106,7 @@
 
 		#page-<? echo $libraryPage->id; ?> .page-column.column0 .folder-body {
 			margin-bottom: <? echo ($style->column1Style->padding*0.6).'px';?>;
-			border-bottom: 1px solid <?echo '#'.$style->column1Style->windowBorderColor;?> !important;
+			border-bottom: 1px solid <?echo Utils::formatColor($style->column1Style->windowBorderColor);?> !important;
 		}
 
 		<? endif; ?>
@@ -126,7 +126,7 @@
 
 		#page-<? echo $libraryPage->id; ?> .page-column.column1 .folder-body {
 			margin-bottom: <? echo ($style->column2Style->padding*0.6).'px';?>;
-			border-bottom: 1px solid <?echo '#'.$style->column2Style->windowBorderColor;?> !important;
+			border-bottom: 1px solid <?echo Utils::formatColor($style->column2Style->windowBorderColor);?> !important;
 		}
 
 		<? endif; ?>
@@ -146,7 +146,7 @@
 
 		#page-<? echo $libraryPage->id; ?> .page-column.column2 .folder-body {
 			margin-bottom: <? echo ($style->column3Style->padding*0.6).'px';?>;
-			border-bottom: 1px solid <?echo '#'.$style->column3Style->windowBorderColor;?> !important;
+			border-bottom: 1px solid <?echo Utils::formatColor($style->column3Style->windowBorderColor);?> !important;
 		}
 
 		<? endif; ?>

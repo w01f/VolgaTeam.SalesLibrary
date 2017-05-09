@@ -31,8 +31,6 @@
 				});
 			$.SalesPortal.ShortcutsManager.assignShortcutGroupHandlers(menuContainer);
 			$.SalesPortal.ShortcutsManager.assignShortcutItemHandlers(menuContainer.find('.om-itemholder .om-itemlist'));
-
-			setTimeout(checkIfShortcutsUpdated, 60000);
 		};
 
 		this.updateShortcutsMenu = function (afterUpdateCallback)
@@ -57,7 +55,7 @@
 				{
 					menuItemsContainer.html(result);
 					$.SalesPortal.ShortcutsManager.assignShortcutItemHandlers(menuContainer.find('.om-itemholder .om-itemlist'));
-					if (afterUpdateCallback != undefined)
+					if (afterUpdateCallback !== undefined)
 						afterUpdateCallback();
 				},
 				error: function ()
@@ -68,7 +66,7 @@
 			});
 		};
 
-		var checkIfShortcutsUpdated = function ()
+		this.checkIfShortcutsUpdated = function ()
 		{
 			$.ajax({
 				type: "POST",
@@ -90,7 +88,7 @@
 						that.updateShortcutsMenu();
 						$.SalesPortal.ShortcutsManager.updateCurrentShortcut();
 					}
-					setTimeout(checkIfShortcutsUpdated, 60000);
+					setTimeout(that.checkIfShortcutsUpdated, 60000);
 				},
 				error: function ()
 				{

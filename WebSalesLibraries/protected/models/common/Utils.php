@@ -56,6 +56,15 @@
 		}
 
 		/**
+		 * @param $color string
+		 * @return string
+		 */
+		public static function formatColor($color)
+		{
+			return ($color !== 'transparent' ? '#' : '') . $color;
+		}
+
+		/**
 		 * @param string $url
 		 * @return string
 		 */

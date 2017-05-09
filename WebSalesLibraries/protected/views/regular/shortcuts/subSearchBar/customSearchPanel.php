@@ -22,7 +22,7 @@
 	</div>
 	<div class="row">
 		<div class="col-xs-12">
-			<input class="form-control log-action search-bar-text" type="text" placeholder="<? echo $searchBar->defaultLabel; ?>">
+			<input class="form-control log-action search-bar-text" type="text" placeholder="<? echo $searchBar->placeholder; ?>">
 		</div>
 	</div>
 	<div class="row">

@@ -197,21 +197,8 @@
 
 		var updateSelectedCategories = function ()
 		{
-			var superFiltersStr = searchBarConditions.getSuperFiltersSettings().join(', ');
 			var categoriesStr = searchBarConditions.getCategoryDescription().join(', ');
-			var categoryStr = '';
-			if (categoriesStr !== '' || superFiltersStr !== '')
-				categoryStr = [superFiltersStr, categoriesStr].join(', ');
-			else if (categoriesStr !== '')
-				categoryStr = categoriesStr;
-			else if (superFiltersStr !== '')
-				categoryStr = superFiltersStr;
-			var selectedCategoryLabel = searchBar.find('.tag-condition-selected small');
-			if (categoryStr !== "")
-				selectedCategoryLabel.html(searchBar.find('.tags-filter-panel-switcher').html() + ': ' + categoryStr);
-			else
-				selectedCategoryLabel.html('');
-
+			searchBar.find('.tag-condition-selected small').html(categoriesStr !== "" ? (searchBar.find('.tags-filter-panel-switcher').html() + ': ' + categoriesStr) : '');
 			updateSize();
 		};
 
@@ -308,17 +295,20 @@
 		{
 			var categorySelector = searchBar.find('.tag-condition-selector-wrapper');
 			categorySelector.find('.tag-condition-selector').addClass('logger-form');
+
 			$.fancybox({
 				content: categorySelector.html(),
 				title: $('.tags-filter-panel-switcher').html(),
-				width: 550,
-				autoSize: false,
-				autoHeight: true,
+				autoSize: true,
 				openEffect: 'none',
 				closeEffect: 'none',
 				afterShow: function ()
 				{
-					var innerContent = $('.fancybox-inner');
+					var innerContent = $('.fancybox-skin');
+
+					innerContent.css({
+						'padding': 0
+					});
 
 					var formLogger = new $.SalesPortal.FormLogger();
 					formLogger.init({
@@ -329,116 +319,167 @@
 					var categoryFilters = searchBarConditions.getCategoryFilters();
 					var categoriesFiltersContent = innerContent.find(".category-filter-list");
 					var categoriesContent = innerContent.find(".category-list");
-					var categories = searchBarConditions.getCategorySettings();
+					var tagsContent = innerContent.find(".tag-list");
+					var selectedCategories = searchBarConditions.getCategorySettings();
 
 					var updateCategoryItemsAccordingFilter = function ()
 					{
-						var allFilterItems = categoriesFiltersContent.find('li');
-						$.each(allFilterItems, function ()
+						var selectedFilter = categoriesFiltersContent.find('li.selected');
+						var filterText = selectedFilter.find('a .text').text();
+
+						var allCategoryItems = categoriesContent.find('.category');
+						var underlinedCategoryItems = categoriesContent.find('.category[data-category-filter="' + filterText + '"]');
+						allCategoryItems.hide();
+						underlinedCategoryItems.show();
+
+						allCategoryItems.removeClass('selected');
+						underlinedCategoryItems.first().addClass('selected');
+
+						updateCategoryTagsAccordingCategory();
+					};
+
+					var updateCategoryTagsAccordingCategory = function ()
+					{
+						var selectedCategory = categoriesContent.find('li.selected');
+						var categoryText = selectedCategory.find('a span').text();
+
+						var allCategoryTags = tagsContent.find('.tag-group');
+						var underlinedCategoryTags = tagsContent.find('.tag-group[data-category="' + categoryText + '"]');
+						allCategoryTags.hide();
+						underlinedCategoryTags.show();
+					};
+
+					var updateCategoriesAccordingSelection = function ()
+					{
+						selectedCategories = [];
+						var tagGroups = tagsContent.find('.tag-group');
+						$.each(tagGroups, function ()
 						{
-							var filterText = $(this).find('a').text();
-							var isSelected = $(this).hasClass('active');
-							var underlinedCategoryItems = categoriesContent.find('.category-item-header[data-category="' + filterText + '"]');
-							$.each(underlinedCategoryItems, function ()
+							var tagGroup = $(this);
+							var tagSelectors = tagGroup.find('.tag-selector');
+							var checkedSelectors = tagSelectors.find('.tag:checked');
+							if (checkedSelectors.length > 0)
 							{
-								var categoryItem = $(this);
-								if (!isSelected && categoryItem.hasClass('ui-state-active'))
+								var tags = [];
+								var categoryName = tagGroup.data('category');
+								$.each(tagSelectors, function ()
 								{
-									categoryItem.siblings('.checkbox').find('input:checkbox').prop('checked', false);
-									categoryItem.click();
-								}
-								if(isSelected)
-									categoryItem.show();
-								else
-									categoryItem.hide();
-							});
+									var tagSelector = $(this);
+									var tagCheckBox = tagSelector.find('.tag');
+									if (tagCheckBox.prop('checked') === true)
+										tags.push(tagSelector.find('.name').text());
+								});
+								selectedCategories.push({
+									name: categoryName,
+									items: tags
+								})
+							}
 						});
+					};
+
+					var updateCategoriesLabel = function ()
+					{
+						var tagsTextArray = [];
+						$.each(selectedCategories, function (categoryIndex, category)
+						{
+							tagsTextArray.push(category.items.join(', '));
+						});
+						innerContent.find(".selected-category-label span").text(tagsTextArray.length > 0 ? tagsTextArray.join(', ') : 'No categories selected');
 					};
 
 					if (categoryFilters.length > 0)
 					{
 						$.each(categoryFilters, function (index, value)
 						{
-							categoriesFiltersContent.find('li:contains("' + value + '")').addClass('active');
+							categoriesFiltersContent.find('li:contains("' + value + '")').addClass('selected');
 						});
 					}
 					else
-						categoriesFiltersContent.find('li').addClass('active');
+						categoriesFiltersContent.find('li').first().addClass('selected');
+
 
 					categoriesFiltersContent.find('li').off('click').on('click', function ()
 					{
 						var listItem = $(this);
-						if (listItem.hasClass('active'))
-							listItem.removeClass('active');
-						else
-							listItem.addClass('active');
-
-						updateCategoryItemsAccordingFilter();
+						if (!listItem.hasClass('selected'))
+						{
+							categoriesFiltersContent.find('li').removeClass('selected');
+							listItem.addClass('selected');
+							updateCategoryItemsAccordingFilter();
+						}
 					});
 
-					var groupsCount = categoriesContent.find('.group-selector-container').length;
-					if (categories.length > 0)
+					categoriesContent.find('li').off('click').on('click', function ()
 					{
-						$.each(categoriesContent.find('>.checkbox'), function ()
+						var listItem = $(this);
+						if (!listItem.hasClass('selected'))
 						{
-							var groupCheckBoxContainer = $(this);
-							var groupName = groupCheckBoxContainer.find('.group-selector-container .name').text();
-							var groupCheckBoxItems = groupCheckBoxContainer.find('.checkbox');
-							$.each(categories, function (groupIndex, group)
+							categoriesContent.find('li').removeClass('selected');
+							listItem.addClass('selected');
+							updateCategoryTagsAccordingCategory();
+						}
+					});
+
+					tagsContent.find('.select-all-selector input').off('change').on('change', function ()
+					{
+						$(this).closest('.tag-group').find('.tag-selector .tag').prop('checked', $(this).is(':checked'));
+						updateCategoriesAccordingSelection();
+						updateCategoriesLabel();
+					});
+
+					tagsContent.find('.tag').off('change').on('change', function ()
+					{
+						updateCategoriesAccordingSelection();
+						updateCategoriesLabel();
+					});
+
+					innerContent.find('.tags-clear-all').off('click.search-bar').on('click.search-bar', function ()
+					{
+						tagsContent.find(":checked").prop('checked', false);
+						updateCategoriesAccordingSelection();
+						updateCategoriesLabel();
+					});
+
+					updateCategoryItemsAccordingFilter();
+
+					if (selectedCategories.length > 0)
+					{
+						$.each(tagsContent.find('.tag-group'), function ()
+						{
+							var tagGroup = $(this);
+							var categoryName = tagGroup.data('category');
+							var tagSelectors = tagGroup.find('.tag-selector');
+							var selectAllSelector = tagGroup.find('.select-all-selector');
+							$.each(selectedCategories, function (groupIndex, group)
 							{
-								if (group.name === groupName)
+								if (group.name === categoryName)
 								{
-									if (group.items.length === groupCheckBoxItems.length)
-										groupCheckBoxItems.find('.tag-selector').prop('checked', true);
+									if (group.items.length === tagSelectors.length)
+									{
+										tagSelectors.find('.tag').prop('checked', true);
+										selectAllSelector.find('input').prop('checked', true);
+									}
 									else
-										$.each(groupCheckBoxItems, function ()
+									{
+										$.each(tagSelectors, function ()
 										{
-											var tagCheckBoxContainer = $(this);
-											var tagCheckBox = tagCheckBoxContainer.find('.tag-selector');
-											var tagName = tagCheckBoxContainer.find('.name').text();
+											var tagSelector = $(this);
+											var tagCheckBox = tagSelector.find('.tag');
+											var tagName = tagSelector.find('.name').text();
 											$.each(group.items, function (itemIndex, item)
 											{
 												if (item === tagName)
 													tagCheckBox.prop('checked', true);
 											});
 										});
+										selectAllSelector.find('input').prop('checked', false);
+									}
 								}
 							});
 						});
-
-						updateCategoryItemsAccordingFilter();
 					}
-					categoriesContent.find('.group-selector').off('change').on('change', function ()
-					{
-						$(this).closest('.group-checkbox').find('.tag-selector').prop('checked', $(this).is(':checked'));
-					});
-					categoriesContent.accordion({
-						heightStyle: "content",
-						active: groupsCount > 1 ? false : 0,
-						collapsible: groupsCount > 1,
-						icons: {
-							header: "ui-icon-circle-arrow-e",
-							activeHeader: "ui-icon-circle-arrow-s"
-						}
-					});
 
-					var superFiltersContent = innerContent.find(".super-filter-list");
-					var superFilters = searchBarConditions.getSuperFiltersSettings();
-					$.each(superFilters, function (index, value)
-					{
-						superFiltersContent.find('.btn:contains("' + value + '")').button('toggle');
-					});
-					superFiltersContent.find('.btn').off('click.search-bar').on('click.search-bar', function ()
-					{
-						$(this).button('toggle').blur();
-					});
-
-
-					innerContent.find('.tags-clear-all').off('click.search-bar').on('click.search-bar', function ()
-					{
-						superFiltersContent.find('.btn').removeClass('active').blur();
-						categoriesContent.find(":checked").prop('checked', false);
-					});
+					updateCategoriesLabel();
 
 					innerContent.find('.cancel-button').on('click.search-bar', function ()
 					{
@@ -448,51 +489,13 @@
 					innerContent.find('.accept-button').on('click.search-bar', function ()
 					{
 						var selectedCategoryFilters = [];
-						var allCategoriesFilterItems = categoriesFiltersContent.find('li');
-						var selectedCategoriesFilterItems = categoriesFiltersContent.find('li.active');
-						if (allCategoriesFilterItems.length !== selectedCategoriesFilterItems.length)
-							$.each(selectedCategoriesFilterItems, function ()
-							{
-								selectedCategoryFilters.push($(this).find('a').text());
-							});
+						var selectedFilter = categoriesFiltersContent.find('li.selected');
+						var filterText = selectedFilter.find('a .text').text();
+						selectedCategoryFilters.push(filterText);
 						searchBarConditions.setCategoryFilters(selectedCategoryFilters);
 
-						var selectedCategories = [];
-						var allCategoryTagCheckBoxes = categoriesContent.find('.tag-selector');
-						var selectedCategoryTagCheckBoxes = categoriesContent.find('.tag-selector-container :checked');
-						if (allCategoryTagCheckBoxes.length !== selectedCategoryTagCheckBoxes.length)
-							$.each(categoriesContent.find('>.checkbox'), function ()
-							{
-								var groupCheckBoxContainer = $(this);
-								var groupCheckBoxItems = groupCheckBoxContainer.find('.checkbox');
-								if (groupCheckBoxItems.find('.tag-selector-container :checked').length > 0)
-								{
-									var tags = [];
-									var groupName = groupCheckBoxContainer.find('.group-selector-container .name').text();
-									$.each(groupCheckBoxItems, function ()
-									{
-										var tagCheckBoxContainer = $(this);
-										var tagCheckBox = tagCheckBoxContainer.find('.tag-selector');
-										if (tagCheckBox.prop('checked') === true)
-											tags.push(tagCheckBoxContainer.find('.name').text());
-									});
-									selectedCategories.push({
-										name: groupName,
-										items: tags
-									})
-								}
-							});
+						updateCategoriesAccordingSelection();
 						searchBarConditions.setCategorySettings(selectedCategories);
-
-						var selectedSuperFilters = [];
-						var allSuperFilterButtons = superFiltersContent.find('.btn');
-						var selectedSuperFilterButtons = superFiltersContent.find('.btn.active');
-						if (allSuperFilterButtons.length !== selectedSuperFilterButtons.length)
-							$.each(selectedSuperFilterButtons, function ()
-							{
-								selectedSuperFilters.push($(this).text());
-							});
-						searchBarConditions.setSuperFiltersSettings(selectedSuperFilters);
 
 						updateSearchButtonState();
 						updateSelectedCategories();
@@ -560,8 +563,8 @@
 				};
 			parameters.shortcutData = parameters.shortcutData !== undefined ? parameters.shortcutData : null;
 			parameters.sizeChangedCallback = parameters.sizeChangedCallback !== undefined ? parameters.sizeChangedCallback : function ()
-				{
-				};
+			{
+			};
 
 			var parentShortcutData = parameters.shortcutData;
 			var searchBarOptions = new $.SalesPortal.SearchOptions($.parseJSON(searchBar.find('.search-conditions .encoded-object').text()));

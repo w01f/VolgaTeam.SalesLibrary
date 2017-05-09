@@ -171,7 +171,7 @@
 			{
 				$userId = \UserIdentity::getCurrentUserId();
 
-				$restrictedLinkConditions = array();
+				$restrictedLinkConditions = array('AND');
 
 				$availableLinkIds = \LinkWhiteListRecord::getAvailableLinks($userId);
 				if (count($availableLinkIds) > 0)
@@ -181,10 +181,10 @@
 				if (count($deniedLinkIds) > 0)
 					$restrictedLinkConditions[] = sprintf("link.id not in ('%s')", implode("', '", $deniedLinkIds));
 
-				if (count($restrictedLinkConditions) > 0)
-					$whereConditions[] = array('OR', 'link.is_restricted <> 1', array('AND', $restrictedLinkConditions));
+				if (count($restrictedLinkConditions) > 1)
+					$whereConditions[] = array('OR', 'link.id not in (select wl.id_link from tbl_link_white_list wl)', $restrictedLinkConditions);
 				else
-					$whereConditions[] = array('link.is_restricted <> 1');
+					$whereConditions[] = 'link.id not in (select wl.id_link from tbl_link_white_list wl)';
 			}
 
 			$dbCommand = $dbCommand->where($whereConditions);

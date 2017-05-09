@@ -9,10 +9,10 @@
 <? if (isset($border)): ?>
     <style>
         <?echo '#'.$blockId;?> {
-            border-top: <? echo $border->size->top; ?>px <? echo '#' . $border->color; ?> solid;
-            border-left: <? echo $border->size->left; ?>px <? echo '#' . $border->color; ?> solid;
-            border-bottom: <? echo $border->size->bottom; ?>px <? echo '#' . $border->color; ?> solid;
-            border-right: <? echo $border->size->right; ?>px <? echo '#' . $border->color; ?> solid;
+            border-top: <? echo $border->size->top; ?>px <? echo Utils::formatColor($border->color); ?> solid;
+            border-left: <? echo $border->size->left; ?>px <? echo Utils::formatColor($border->color); ?> solid;
+            border-bottom: <? echo $border->size->bottom; ?>px <? echo Utils::formatColor($border->color); ?> solid;
+            border-right: <? echo $border->size->right; ?>px <? echo Utils::formatColor($border->color); ?> solid;
         }
         <?if($border->hideCondition->isConfigured):?>
             <?if($border->hideCondition->extraSmall):?>

@@ -51,8 +51,8 @@
                 font-style: <? echo $style->font->isItalic ? 'italic' : 'normal'; ?>;
                 text-decoration: <? echo $style->font->isUnderlined ? 'underline' : 'inherit'; ?>;
                 text-align: <? echo $style->textAlign; ?>;
-                color: <? echo (isset($style->textColor)?('#'.$style->textColor):(isset($folder->banner) && $folder->banner->isEnabled ? $folder->banner->foreColor : $folder->headerForeColor)); ?>;
-                background-color: <? echo (isset($style->backColor)?('#'.$style->backColor):$folder->headerBackColor); ?>;
+                color: <? echo (isset($style->textColor)?(Utils::formatColor($style->textColor)):(isset($folder->banner) && $folder->banner->isEnabled ? $folder->banner->foreColor : $folder->headerForeColor)); ?>;
+                background-color: <? echo (isset($style->backColor)?(Utils::formatColor($style->backColor)):$folder->headerBackColor); ?>;
                 padding-top: <? echo $style->customTitlePadding->top; ?>px;
                 padding-left: <? echo $style->customTitlePadding->left; ?>px;
                 padding-bottom: <? echo $style->customTitlePadding->bottom; ?>px;

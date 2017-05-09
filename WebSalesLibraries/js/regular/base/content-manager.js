@@ -13,7 +13,7 @@
 
 		this.fillContent = function (parameters)
 		{
-			if (parameters == undefined)
+			if (parameters === undefined)
 				parameters = {
 					content: undefined,
 					headerOptions: undefined,
@@ -22,14 +22,14 @@
 					loadCallback: undefined,
 					resizeCallback: undefined
 				};
-			parameters.content = parameters.content != undefined ? parameters.content : '';
-			parameters.headerOptions = parameters.headerOptions != undefined ? parameters.headerOptions : undefined;
-			parameters.actions = parameters.actions != undefined ? parameters.actions : undefined;
-			parameters.navigationPanel = parameters.navigationPanel != undefined ? parameters.navigationPanel : undefined;
-			parameters.loadCallback = parameters.loadCallback != undefined ? parameters.loadCallback : function ()
+			parameters.content = parameters.content !== undefined ? parameters.content : '';
+			parameters.headerOptions = parameters.headerOptions !== undefined ? parameters.headerOptions : undefined;
+			parameters.actions = parameters.actions !== undefined ? parameters.actions : undefined;
+			parameters.navigationPanel = parameters.navigationPanel !== undefined ? parameters.navigationPanel : undefined;
+			parameters.loadCallback = parameters.loadCallback !== undefined ? parameters.loadCallback : function ()
 				{
 				};
-			parameters.resizeCallback = parameters.resizeCallback != undefined ? parameters.resizeCallback : function ()
+			parameters.resizeCallback = parameters.resizeCallback !== undefined ? parameters.resizeCallback : function ()
 				{
 				};
 
@@ -112,7 +112,7 @@
 			var headerTitle = mainMenu.find('.header-text');
 			var headerIcon = mainMenu.find('.header-icon');
 
-			if (headerOptions != undefined)
+			if (headerOptions !== undefined)
 			{
 				headerTitle.html('');
 				headerIcon.removeClass(function (index, css)
@@ -120,7 +120,7 @@
 					return (css.match(/(^|\s)icon-\S+/g) || []).join(' ');
 				});
 				headerTitle.html(headerOptions.title);
-				if (headerOptions.icon != '')
+				if (headerOptions.icon !== '')
 				{
 					headerIcon.addClass(headerOptions.icon);
 				}
@@ -128,32 +128,32 @@
 				headerIcon.removeClass('hidden-xs');
 				if (headerOptions.iconHideCondition)
 				{
-					if (headerOptions.iconHideCondition.extraSmall == true)
+					if (headerOptions.iconHideCondition.extraSmall === true)
 						headerIcon.addClass('hidden-xs');
 					headerIcon.removeClass('hidden-sm');
-					if (headerOptions.iconHideCondition.small == true)
+					if (headerOptions.iconHideCondition.small === true)
 						headerIcon.addClass('hidden-sm');
 					headerIcon.removeClass('hidden-md');
-					if (headerOptions.iconHideCondition.medium == true)
+					if (headerOptions.iconHideCondition.medium === true)
 						headerIcon.addClass('hidden-md');
 					headerIcon.removeClass('hidden-lg');
-					if (headerOptions.iconHideCondition.large == true)
+					if (headerOptions.iconHideCondition.large === true)
 						headerIcon.addClass('hidden-lg');
 				}
 
 				headerTitle.removeClass('hidden-xs');
 				if (headerOptions.titleHideCondition)
 				{
-					if (headerOptions.titleHideCondition.extraSmall == true)
+					if (headerOptions.titleHideCondition.extraSmall === true)
 						headerTitle.addClass('hidden-xs');
 					headerTitle.removeClass('hidden-sm');
-					if (headerOptions.titleHideCondition.small == true)
+					if (headerOptions.titleHideCondition.small === true)
 						headerTitle.addClass('hidden-sm');
 					headerTitle.removeClass('hidden-md');
-					if (headerOptions.titleHideCondition.medium == true)
+					if (headerOptions.titleHideCondition.medium === true)
 						headerTitle.addClass('hidden-md');
 					headerTitle.removeClass('hidden-lg');
-					if (headerOptions.titleHideCondition.large == true)
+					if (headerOptions.titleHideCondition.large === true)
 						headerTitle.addClass('hidden-lg');
 				}
 			}
@@ -164,7 +164,7 @@
 			var shortcutActionsMenu = $('#shortcut-action-menu');
 			var shortcutActionsContainer = $('#shortcut-action-container');
 			shortcutActionsContainer.html('');
-			if (actionsContent != undefined)
+			if (actionsContent !== undefined)
 				shortcutActionsContainer.html(actionsContent);
 
 			var actions = shortcutActionsContainer.find('.shortcut-action');
@@ -184,7 +184,7 @@
 				{
 					var dataObject = $(this).find('.service-data');
 					var activityDataEncoded = dataObject.find('.activity-data').text();
-					if (activityDataEncoded != '')
+					if (activityDataEncoded !== '')
 					{
 						var activityData = $.parseJSON(activityDataEncoded);
 						$.SalesPortal.LogHelper.write({

@@ -17,6 +17,26 @@
 		public $buttonBorderColor;
 		public $buttonIconColor;
 
+		/** @var  \Padding */
+		public $headerPadding;
+		/** @var  \Padding */
+		public $footerPadding;
+
+		public function __construct()
+		{
+			$this->headerPadding = new \Padding(0);
+			$this->headerPadding->top = 10;
+			$this->headerPadding->right = 15;
+			$this->headerPadding->bottom = 10;
+			$this->headerPadding->left = 15;
+
+			$this->footerPadding = new \Padding(0);
+			$this->footerPadding->top = 10;
+			$this->footerPadding->right = 15;
+			$this->footerPadding->bottom = 10;
+			$this->footerPadding->left = 15;
+		}
+
 		/**
 		 * @param $xpath \DOMXPath
 		 * @param $contextNode \DOMNode
@@ -49,5 +69,13 @@
 
 			$queryResult = $xpath->query('./ButtonIconColor', $contextNode);
 			$this->buttonIconColor = $queryResult->length > 0 ? strtolower(trim($queryResult->item(0)->nodeValue)) : null;
+
+			$queryResult = $xpath->query('./HeaderPadding', $contextNode);
+			if ($queryResult->length > 0)
+				$this->headerPadding = \Padding::fromXml($xpath, $queryResult->item(0));
+
+			$queryResult = $xpath->query('./FooterPadding', $contextNode);
+			if ($queryResult->length > 0)
+				$this->footerPadding = \Padding::fromXml($xpath, $queryResult->item(0));
 		}
 	}

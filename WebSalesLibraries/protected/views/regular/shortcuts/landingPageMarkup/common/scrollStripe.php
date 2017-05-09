@@ -39,7 +39,7 @@
                             <div class="icomoon-wrap">
                         <? endif; ?>
                         <i class="icomoon<? if (!empty($stripeItem->iconSize)): ?> icomoon-<? echo $stripeItem->iconSize; ?><? endif; ?> <? echo $stripeItem->icon; ?>"
-                           style="color: <? echo '#'.$stripeItem->iconColor; ?>"></i>
+                           style="color: <? echo Utils::formatColor($stripeItem->iconColor); ?>"></i>
                         <? if ($contentBlock->iconPosition == ScrollStripeBlock::IconPositionTop): ?>
                             </div>
                         <? endif; ?>

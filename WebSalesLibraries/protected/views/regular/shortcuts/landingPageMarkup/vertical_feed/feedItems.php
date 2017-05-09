@@ -31,8 +31,8 @@
                         <div class="text">
                                             <span class="feed-info link-name" style="
                                             <? if (!empty($itemSettingsName->color)): ?>
-                                                    color: <? echo '#' . $itemSettingsName->color;?>;
-                                    <? endif; ?>
+                                                    color: <? echo Utils::formatColor($itemSettingsName->color);?>;
+                                            <? endif; ?>
                                             <? if (!empty($itemSettingsName->font)): ?>
                                                     font-family: <? echo FontReplacementHelper::replaceFont($itemSettingsName->font->name); ?> !important;
                                                     font-size: <? echo $itemSettingsName->font->size; ?>pt !important;
@@ -54,8 +54,8 @@
 						<? if ($itemSettingsName->enabled && $style->linkNamePosition === LinkFeedStyle::LinkNamePositionBottom): ?>
                             <span class="feed-info link-name" style="
 							<? if (!empty($itemSettingsName->color)): ?>
-                                    color: <? echo '#' . $itemSettingsName->color;?>;
-                                    <? endif; ?>
+                                    color: <? echo Utils::formatColor($itemSettingsName->color);?>;
+                            <? endif; ?>
 							<? if (!empty($itemSettingsName->font)): ?>
                                     font-family: <? echo FontReplacementHelper::replaceFont($itemSettingsName->font->name); ?> !important;
                                     font-size: <? echo $itemSettingsName->font->size; ?>pt !important;
@@ -70,8 +70,8 @@
 						<? if ($itemSettingsLibrary->enabled): ?>
                             <span class="feed-info library-name" style="
 							<? if (!empty($itemSettingsLibrary->color)): ?>
-                                    color: <? echo '#' . $itemSettingsLibrary->color;?>;
-                                        <? endif; ?>
+                                    color: <? echo Utils::formatColor($itemSettingsLibrary->color);?>;
+                            <? endif; ?>
 							<? if (!empty($itemSettingsLibrary->font)): ?>
                                     font-family: <? echo FontReplacementHelper::replaceFont($itemSettingsLibrary->font->name); ?> !important;
                                     font-size: <? echo $itemSettingsLibrary->font->size; ?>pt !important;
@@ -86,8 +86,8 @@
 						<? if ($itemSettingsViewsCount->enabled && $feedItem->viewsCount > 0): ?>
                             <span class="feed-info views-count" style="
 							<? if (!empty($itemSettingsViewsCount->color)): ?>
-                                    color: <? echo '#' . $itemSettingsViewsCount->color;?>;
-                                        <? endif; ?>
+                                    color: <? echo Utils::formatColor($itemSettingsViewsCount->color);?>;
+                            <? endif; ?>
 							<? if (!empty($itemSettingsViewsCount->font)): ?>
                                     font-family: <? echo FontReplacementHelper::replaceFont($itemSettingsViewsCount->font->name); ?> !important;
                                     font-size: <? echo $itemSettingsViewsCount->font->size; ?>pt !important;

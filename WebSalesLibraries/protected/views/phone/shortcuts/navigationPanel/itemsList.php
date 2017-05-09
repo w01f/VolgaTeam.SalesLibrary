@@ -6,7 +6,7 @@
     <style>
         <?echo '#'.$identifier;?>
         .title {
-            color: <?echo '#'.$navigationItem->textColor;?> !important;
+            color: <?echo Utils::formatColor($navigationItem->textColor);?> !important;
         }
     </style>
     <li data-icon="false">

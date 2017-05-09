@@ -26,15 +26,15 @@
 	<?endif;?>
 
 	#content .wallbin-header {
-		background-color: <? echo '#'.$shortcut->style->header->backColor; ?> !important;
+		background-color: <? echo Utils::formatColor($shortcut->style->header->backColor); ?> !important;
 	}
 
 	#content .wallbin-header .wallbin-header-cell {
-		border-bottom: 1px <? echo '#'.$shortcut->style->header->headerBorderColor; ?> solid !important;
+		border-bottom: 1px <? echo Utils::formatColor($shortcut->style->header->headerBorderColor); ?> solid !important;
 	}
 
 	#content .wallbin-header .single-page-header .header-text {
-		color: <? echo '#'.$shortcut->style->header->textColor; ?> !important;
+		color: <? echo Utils::formatColor($shortcut->style->header->textColor); ?> !important;
 	}
 
 	<? if ($shortcut->searchBar->configured): ?>

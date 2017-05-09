@@ -9,97 +9,78 @@
 	$lastCharFromTagsName = substr(Yii::app()->params['tags']['column_name'], -1);
 	$tagsName = $lastCharFromTagsName == "y" ? substr_replace(Yii::app()->params['tags']['column_name'], "ies", -1) : (Yii::app()->params['tags']['column_name'] . "s");
 	$searchBar->categoryManager->loadCategories();
-	$searchBarId = 'search-bar-'.$searchBar->id;
-	$style =$searchBar->style;
+	$searchBarId = 'search-bar-' . $searchBar->id;
+	$style = $searchBar->style;
 	?>
     <style>
-        <?echo '#'.$searchBarId; ?> .search-bar-label
-        {
-        <?if(!empty($style->labelBackColor)):?>
-            background-color: <? echo '#'.$style->labelBackColor;?> !important;
-        <?endif;?>
-        <?if(!empty($style->labelTextColor)):?>
-            color: <? echo '#'.$style->labelTextColor;?> !important;
-        <?endif;?>
-        <?if(!empty($style->borderColor)):?>
-            border-color: <? echo '#'.$style->borderColor;?> !important;
+        <?echo '#'.$searchBarId; ?>
+        .search-bar-label {
+        <?if(!empty($style->labelBackColor)):?> background-color: <? echo Utils::formatColor($style->labelBackColor);?> !important;
+        <?endif;?><?if(!empty($style->labelTextColor)):?> color: <? echo Utils::formatColor($style->labelTextColor);?> !important;
+        <?endif;?><?if(!empty($style->borderColor)):?> border-color: <? echo Utils::formatColor($style->borderColor);?> !important;
         <?endif;?>
         }
 
-        <?echo '#'.$searchBarId; ?> .search-bar-button,
+        <?echo '#'.$searchBarId; ?>
+        .search-bar-button,
         <?echo '#'.$searchBarId; ?> .search-bar-button:hover,
         <?echo '#'.$searchBarId; ?> .search-bar-button:focus,
-        <?echo '#'.$searchBarId; ?> .search-bar-button:focus:hover
-        {
-        <?if(!empty($style->buttonBackColor)):?>
-            background-color: <? echo '#'.$style->buttonBackColor;?> !important;
-        <?endif;?>
-        <?if(!empty($style->buttonTextColor)):?>
-            color: <? echo '#'.$style->buttonTextColor;?> !important;
-        <?endif;?>
-        <?if(!empty($style->borderColor)):?>
-            border-color: <? echo '#'.$style->borderColor;?> !important;
+        <?echo '#'.$searchBarId; ?> .search-bar-button:focus:hover {
+        <?if(!empty($style->buttonBackColor)):?> background-color: <? echo Utils::formatColor($style->buttonBackColor);?> !important;
+        <?endif;?><?if(!empty($style->buttonTextColor)):?> color: <? echo Utils::formatColor($style->buttonTextColor);?> !important;
+        <?endif;?><?if(!empty($style->borderColor)):?> border-color: <? echo Utils::formatColor($style->borderColor);?> !important;
         <?endif;?>
         }
 
-        <?echo '#'.$searchBarId; ?> .search-bar-run,
+        <?echo '#'.$searchBarId; ?>
+        .search-bar-run,
         <?echo '#'.$searchBarId; ?> .search-bar-run:hover,
         <?echo '#'.$searchBarId; ?> .search-bar-run:focus,
-        <?echo '#'.$searchBarId; ?> .search-bar-run:focus:hover
-        {
-        <?if(!empty($style->searchBackColor)):?>
-            background-color: <? echo '#'.$style->searchBackColor;?> !important;
-        <?endif;?>
-        <?if(!empty($style->searchTextColor)):?>
-            color: <? echo '#'.$style->searchTextColor;?> !important;
-        <?endif;?>
-        <?if(!empty($style->borderColor)):?>
-            border-color: <? echo '#'.$style->borderColor;?> !important;
+        <?echo '#'.$searchBarId; ?> .search-bar-run:focus:hover {
+        <?if(!empty($style->searchBackColor)):?> background-color: <? echo Utils::formatColor($style->searchBackColor);?> !important;
+        <?endif;?><?if(!empty($style->searchTextColor)):?> color: <? echo Utils::formatColor($style->searchTextColor);?> !important;
+        <?endif;?><?if(!empty($style->borderColor)):?> border-color: <? echo Utils::formatColor($style->borderColor);?> !important;
         <?endif;?>
         }
 
-        <?echo '#'.$searchBarId; ?> input::placeholder
-        {
-        <?if(!empty($style->placeholderTextColor)):?>
-            color: <? echo '#'.$style->placeholderTextColor;?> !important;
+        <?echo '#'.$searchBarId; ?>
+        input::placeholder {
+        <?if(!empty($style->placeholderTextColor)):?> color: <? echo Utils::formatColor($style->placeholderTextColor);?> !important;
         <?endif;?>
         }
 
-        <?echo '#'.$searchBarId; ?> input::-moz-placeholder
-        {
-        <?if(!empty($style->placeholderTextColor)):?>
-            color: <? echo '#'.$style->placeholderTextColor;?> !important;
+        <?echo '#'.$searchBarId; ?>
+        input::-moz-placeholder {
+        <?if(!empty($style->placeholderTextColor)):?> color: <? echo Utils::formatColor($style->placeholderTextColor);?> !important;
         <?endif;?>
         }
 
-        <?echo '#'.$searchBarId; ?> input:-ms-input-placeholder
-        {
-        <?if(!empty($style->placeholderTextColor)):?>
-            color: <? echo '#'.$style->placeholderTextColor;?> !important;
+        <?echo '#'.$searchBarId; ?>
+        input:-ms-input-placeholder {
+        <?if(!empty($style->placeholderTextColor)):?> color: <? echo Utils::formatColor($style->placeholderTextColor);?> !important;
         <?endif;?>
         }
 
-        <?echo '#'.$searchBarId; ?> input::-webkit-input-placeholder
-        {
-        <?if(!empty($style->placeholderTextColor)):?>
-            color: <? echo '#'.$style->placeholderTextColor;?> !important;
+        <?echo '#'.$searchBarId; ?>
+        input::-webkit-input-placeholder {
+        <?if(!empty($style->placeholderTextColor)):?> color: <? echo Utils::formatColor($style->placeholderTextColor);?> !important;
         <?endif;?>
         }
 
-        <?echo '#'.$searchBarId; ?> .search-bar-text
-        {
+        <?echo '#'.$searchBarId; ?>
+        .search-bar-text {
             height: <? echo ($style->lineHeight+14);?>px !important;
-        <?if(!empty($style->borderColor)):?>
-            border-color: <? echo '#'.$style->borderColor;?> !important;
+        <?if(!empty($style->borderColor)):?> border-color: <? echo Utils::formatColor($style->borderColor);?> !important;
         <?endif;?>
         }
 
-        <?echo '#'.$searchBarId; ?> .btn
-        {
+        <?echo '#'.$searchBarId; ?>
+        .btn {
             line-height: <? echo $style->lineHeight;?>px !important;
         }
     </style>
-    <table id="<?echo $searchBarId;?>" class="shortcuts-search-bar logger-form open" data-log-group="Shortcut Tile" data-log-action="Search Bar"
+    <table id="<? echo $searchBarId; ?>" class="shortcuts-search-bar logger-form open" data-log-group="Shortcut Tile"
+           data-log-action="Search Bar"
            style="text-align: <? echo $searchBar->alignment; ?>;">
         <tr>
             <td>
@@ -115,9 +96,11 @@
         <tr>
             <td>
                 <div class="input-group search-input-container">
-                    <span class="input-group-addon search-bar-label">Search:</span>
+					<? if (!empty($searchBar->label)): ?>
+                        <span class="input-group-addon search-bar-label"><? echo $searchBar->label; ?>:</span>
+					<? endif; ?>
                     <input class="form-control log-action search-bar-text" type="text"
-                           placeholder="<? echo $searchBar->defaultLabel; ?>">
+                           placeholder="<? echo $searchBar->placeholder; ?>">
                     <span class="input-group-btn">
 						<? if ($searchBar->showTagsSelector): ?>
                             <button class="btn btn-default log-action search-bar-button tags-filter-panel-switcher"

@@ -39,7 +39,7 @@
     <?endif;?>
 
     #content .wallbin-header .wallbin-header-cell {
-        border-bottom: 1px <? echo '#'.$style->header->headerBorderColor?> solid !important;
+        border-bottom: 1px <? echo Utils::formatColor($style->header->headerBorderColor);?> solid !important;
     }
 
     <? if (!($searchBar->configured && $style->header->showLogo)): ?>

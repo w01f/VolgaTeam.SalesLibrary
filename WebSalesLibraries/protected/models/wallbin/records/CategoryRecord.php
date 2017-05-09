@@ -4,6 +4,7 @@
 	 * Class CategoryRecord
 	 * @property int id
 	 * @property string group
+	 * @property string group_icon
 	 * @property string category
 	 * @property string description
 	 * @property string tag
@@ -38,6 +39,7 @@
 				$categoryRecord = new CategoryRecord();
 				$categoryRecord->id = $i;
 				$categoryRecord->group = $category->group;
+				$categoryRecord->group_icon = $category->groupIcon;
 				$categoryRecord->category = $category->category;
 				$categoryRecord->description = $category->description;
 				$categoryRecord->tag = $category->tag;

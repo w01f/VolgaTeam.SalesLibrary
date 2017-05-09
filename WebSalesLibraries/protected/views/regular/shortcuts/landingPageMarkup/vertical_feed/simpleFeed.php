@@ -18,24 +18,24 @@
     #vertical-feed-<? echo $contentBlock->id; ?> .panel-footer .pagination a
     {
         <?if(!empty($contentBlock->viewSettings->style->buttonBackColor)):?>
-            background-color: <? echo '#'.$contentBlock->viewSettings->style->buttonBackColor;?> !important;
+            background-color: <? echo Utils::formatColor($contentBlock->viewSettings->style->buttonBackColor);?> !important;
         <?endif;?>
         <?if(!empty($contentBlock->viewSettings->style->buttonBorderColor)):?>
-            border-color: <? echo '#'.$contentBlock->viewSettings->style->buttonBorderColor;?> !important;
+            border-color: <? echo Utils::formatColor($contentBlock->viewSettings->style->buttonBorderColor);?> !important;
         <?endif;?>
     }
 
     #vertical-feed-<? echo $contentBlock->id; ?> .panel-footer .pagination a .glyphicon
     {
         <?if(!empty($contentBlock->viewSettings->style->buttonIconColor)):?>
-            color: <? echo '#'.$contentBlock->viewSettings->style->buttonIconColor;?> !important;
+            color: <? echo Utils::formatColor($contentBlock->viewSettings->style->buttonIconColor);?> !important;
         <?endif;?>
     }
 
     #vertical-feed-<? echo $contentBlock->id; ?> .news-item
     {
         <?if(!empty($contentBlock->viewSettings->style->dividerColor)):?>
-            border-bottom-color: <? echo '#'.$contentBlock->viewSettings->style->dividerColor;?> !important;
+            border-bottom-color: <? echo Utils::formatColor($contentBlock->viewSettings->style->dividerColor);?> !important;
         <?endif;?>
     }
 </style>
@@ -46,14 +46,14 @@
         </div>
     </div>
     <div class="panel panel-default"
-         style="<? if (!empty($contentBlock->viewSettings->style->outsideBorderColor)): ?>border-color: <? echo '#' . $contentBlock->viewSettings->style->outsideBorderColor; ?>; -webkit-box-shadow: 0 1px 1px <? echo '#' . $contentBlock->viewSettings->style->outsideBorderColor; ?>; box-shadow: 0 1px 1px <? echo '#' . $contentBlock->viewSettings->style->outsideBorderColor; ?>;<? endif; ?>">
-        <div class="panel-heading" style="<? if ($contentBlock->viewSettings->hideHeader): ?>display: none;<? endif; ?><? if (!empty($contentBlock->viewSettings->style->headerColor)): ?>background-color: <? echo '#' . $contentBlock->viewSettings->style->headerColor; ?>;<? endif; ?>">
+         style="<? if (!empty($contentBlock->viewSettings->style->outsideBorderColor)): ?>border-color: <? echo Utils::formatColor($contentBlock->viewSettings->style->outsideBorderColor); ?>; -webkit-box-shadow: 0 0 0 <? echo Utils::formatColor($contentBlock->viewSettings->style->outsideBorderColor); ?>; box-shadow: 0 0 0 <? echo Utils::formatColor($contentBlock->viewSettings->style->outsideBorderColor); ?>;<? endif; ?>">
+        <div class="panel-heading" style="<? echo $this->renderPartial('landingPageMarkup/style/stylePadding', array('padding' => $contentBlock->viewSettings->style->headerPadding), true); ?><? if ($contentBlock->viewSettings->hideHeader): ?>display: none;<? endif; ?><? if (!empty($contentBlock->viewSettings->style->headerColor)): ?>background-color: <? echo Utils::formatColor($contentBlock->viewSettings->style->headerColor); ?>;border-color: <? echo Utils::formatColor($contentBlock->viewSettings->style->headerColor); ?>;<? endif; ?>">
 	        <? if (!empty($contentBlock->viewSettings->icon)): ?>
-                <i class="icomoon icomoon-lg <? echo $contentBlock->viewSettings->icon; ?>" style="<? if (!empty($contentBlock->viewSettings->style->headerIconColor)): ?>color: <? echo '#' . $contentBlock->viewSettings->style->headerIconColor; ?>;<? endif; ?>"></i>
+                <i class="icomoon icomoon-lg <? echo $contentBlock->viewSettings->icon; ?>" style="<? if (!empty($contentBlock->viewSettings->style->headerIconColor)): ?>color: <? echo Utils::formatColor($contentBlock->viewSettings->style->headerIconColor); ?>;border-color: <? echo Utils::formatColor($contentBlock->viewSettings->style->headerColor); ?>;<? endif; ?>"></i>
 	        <? else: ?>
                 <span class="glyphicon glyphicon-list-alt"></span>
 	        <? endif; ?>
-            <strong style="<? if (!empty($contentBlock->viewSettings->style->headerTextColor)): ?>color: <? echo '#' . $contentBlock->viewSettings->style->headerTextColor; ?>;<? endif; ?>"><? echo $contentBlock->viewSettings->title; ?></strong>
+            <strong style="<? if (!empty($contentBlock->viewSettings->style->headerTextColor)): ?>color: <? echo Utils::formatColor($contentBlock->viewSettings->style->headerTextColor); ?>;<? endif; ?>"><? echo $contentBlock->viewSettings->title; ?></strong>
         </div>
         <div class="panel-body">
             <div class="row">
@@ -89,6 +89,6 @@
             </div>
         </div>
         <div class="panel-footer"
-             style="<? if ($contentBlock->viewSettings->hideFooter): ?>display: none;<? endif; ?><? if (!empty($contentBlock->viewSettings->style->footerColor)): ?>background-color: <? echo '#' . $contentBlock->viewSettings->style->footerColor; ?>; border-top-color: <? echo '#' . $contentBlock->viewSettings->style->footerColor; ?>;<? endif; ?>"></div>
+             style="<? echo $this->renderPartial('landingPageMarkup/style/stylePadding', array('padding' => $contentBlock->viewSettings->style->footerPadding), true); ?><? if ($contentBlock->viewSettings->hideFooter): ?>display: none;<? endif; ?><? if (!empty($contentBlock->viewSettings->style->footerColor)): ?>background-color: <? echo Utils::formatColor($contentBlock->viewSettings->style->footerColor); ?>; border-top-color: <? echo Utils::formatColor($contentBlock->viewSettings->style->footerColor); ?>;<? endif; ?>"></div>
     </div>
 </div>

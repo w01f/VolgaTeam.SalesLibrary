@@ -15,30 +15,30 @@
 <style>
 	<?echo '#'.$identifier;?>
 	{
-		background-color: <?echo '#'.$menuItem->appearance->backColor;?> !important
+		background-color: <?echo Utils::formatColor($menuItem->appearance->backColor);?> !important
 	;
 	}
 	<?echo '#'.$identifier;?>
 	i {
-		color: <?echo '#'.$menuItem->appearance->iconColor;?> !important;
+		color: <?echo Utils::formatColor($menuItem->appearance->iconColor);?> !important;
 	<?if(isset($menuItem->appearance->iconSize)):?> font-size: <?echo $menuItem->appearance->iconSize.'px';?> !important;
 	<?endif;?>
 	}
 
 	<?echo '#'.$identifier;?>
 	span {
-		color: <?echo '#'.$menuItem->appearance->textColor;?> !important;
+		color: <?echo Utils::formatColor($menuItem->appearance->textColor);?> !important;
 		text-align: <?echo $menuItem->appearance->textAlign;?> !important;
 	<?if(isset($menuItem->appearance->textSize)):?> font-size: <?echo $menuItem->appearance->textSize.'px';?> !important;
 	<?endif;?>
 	}
 
 	<?echo '#'.$identifier;?>:hover {
-		box-shadow: 0 0 6px 3px <?echo '#'.$menuItem->appearance->shadowColor;?> !important;
-		-webkit-box-shadow: 0 0 6px 3px <?echo '#'.$menuItem->appearance->shadowColor;?> !important;
-		-moz-box-shadow: 0 0 6px 3px <?echo '#'.$menuItem->appearance->shadowColor;?> !important;
-		-o-box-shadow: 0 0 6px 3px <?echo '#'.$menuItem->appearance->shadowColor;?> !important;
-		-ms-box-shadow: 0 0 6px 3px <?echo '#'.$menuItem->appearance->shadowColor;?> !important;
+		box-shadow: 0 0 6px 3px <?echo Utils::formatColor($menuItem->appearance->shadowColor);?> !important;
+		-webkit-box-shadow: 0 0 6px 3px <?echo Utils::formatColor($menuItem->appearance->shadowColor);?> !important;
+		-moz-box-shadow: 0 0 6px 3px <?echo Utils::formatColor($menuItem->appearance->shadowColor);?> !important;
+		-o-box-shadow: 0 0 6px 3px <?echo Utils::formatColor($menuItem->appearance->shadowColor);?> !important;
+		-ms-box-shadow: 0 0 6px 3px <?echo Utils::formatColor($menuItem->appearance->shadowColor);?> !important;
 	}
 </style>
 <div id="<? echo $identifier; ?>" class="<? echo $itemClass ?> om-item"

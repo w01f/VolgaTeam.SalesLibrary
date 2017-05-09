@@ -113,6 +113,7 @@
 					{
 						/** @var $node DOMElement */
 						$groupName = $node->getAttribute('Group');
+						$groupIcon = $node->getAttribute('GroupIcon');
 						$categoryName = $node->getAttribute('Name');
 						$groupDescription = $node->getAttribute('Description');
 						/** @var $tagNodes DOMElement[] */
@@ -121,6 +122,7 @@
 						{
 							$categoryRecord = new Category();
 							$categoryRecord->group = $groupName;
+							$categoryRecord->groupIcon = $groupIcon;
 							$categoryRecord->category = $categoryName;
 							$categoryRecord->description = $groupDescription;
 							$categoryRecord->tag = trim($tagNode->getAttribute('Value'));

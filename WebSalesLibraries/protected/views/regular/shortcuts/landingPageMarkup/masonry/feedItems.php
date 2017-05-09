@@ -32,8 +32,8 @@
                     white-space: normal;
 			<? endif; ?>
 			<? if (!empty($itemSettingsName->color)): ?>
-                    color: <? echo '#' . $itemSettingsName->color;?>;
-                                    <? endif; ?>
+                    color: <? echo Utils::formatColor($itemSettingsName->color);?>;
+             <? endif; ?>
 			<? if (!empty($itemSettingsName->font)): ?>
                     font-family: <? echo FontReplacementHelper::replaceFont($itemSettingsName->font->name); ?> !important;
                     font-size: <? echo $itemSettingsName->font->size; ?>pt !important;
@@ -52,8 +52,8 @@
                     white-space: normal;
 			<? endif; ?>
 			<? if (!empty($itemSettingsLibrary->color)): ?>
-                    color: <? echo '#' . $itemSettingsLibrary->color;?>;
-                                        <? endif; ?>
+                    color: <? echo Utils::formatColor($itemSettingsLibrary->color);?>;
+            <? endif; ?>
 			<? if (!empty($itemSettingsLibrary->font)): ?>
                     font-family: <? echo FontReplacementHelper::replaceFont($itemSettingsLibrary->font->name); ?> !important;
                     font-size: <? echo $itemSettingsLibrary->font->size; ?>pt !important;
@@ -72,8 +72,8 @@
                     white-space: normal;
 			<? endif; ?>
 			<? if (!empty($itemSettingsViewsCount->color)): ?>
-                    color: <? echo '#' . $itemSettingsViewsCount->color;?>;
-                                        <? endif; ?>
+                    color: <? echo Utils::formatColor($itemSettingsViewsCount->color);?>;
+            <? endif; ?>
 			<? if (!empty($itemSettingsViewsCount->font)): ?>
                     font-family: <? echo FontReplacementHelper::replaceFont($itemSettingsViewsCount->font->name); ?> !important;
                     font-size: <? echo $itemSettingsViewsCount->font->size; ?>pt !important;

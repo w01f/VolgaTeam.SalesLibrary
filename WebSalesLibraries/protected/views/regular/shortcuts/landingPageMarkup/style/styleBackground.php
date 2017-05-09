@@ -11,9 +11,9 @@
         <?echo '#'.$blockId;?>
         {
         <?if($background->gradient!==BackgroundStyle::GradientTypeNone):?>
-            background: linear-gradient(<?echo $background->gradient?>, <?echo '#'.$background->color1?>, <?echo '#'.$background->color2?>);
+            background: linear-gradient(<?echo $background->gradient?>, <?echo Utils::formatColor($background->color1);?>, <?echo Utils::formatColor($background->color2);?>);
         <?else: ?>
-            background: <? echo '#' . $background->color1; ?>;
+            background: <? echo Utils::formatColor($background->color1); ?>;
         <?endif;?>
         }
     </style>

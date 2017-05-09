@@ -14,6 +14,7 @@
 
 		public $categories;
 		public $groups;
+		public $groupIcons;
 
 		public function loadCategories()
 		{
@@ -28,6 +29,7 @@
 			$this->tags = array();
 			$this->categories = array();
 			$this->groups = array();
+			$this->groupIcons = array();
 			$categoryRecords = CategoryRecord::getData();
 			if (isset($categoryRecords))
 			{
@@ -35,6 +37,7 @@
 				{
 					$category = new Category();
 					$category->group = $categoryRecord->group;
+					$category->groupIcon = $categoryRecord->group_icon;
 					$category->category = $categoryRecord->category;
 					$category->description = $categoryRecord->description;
 					$category->tag = $categoryRecord->tag;
@@ -51,7 +54,10 @@
 					if (!in_array($category->category, $this->categories))
 						$this->categories[] = $category->category;
 					if (!in_array($category->group, $this->groups))
+					{
 						$this->groups[] = $category->group;
+						$this->groupIcons[$category->group] = $category->groupIcon;
+					}
 				}
 			}
 			$cookieId = 'selectedSuperFilters' . $selectedTab;

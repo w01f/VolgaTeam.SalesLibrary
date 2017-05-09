@@ -40,13 +40,13 @@
     }
 
     #vertical-feed-<? echo $contentBlock->id; ?> .panel-footer .pagination a {
-    <?if(!empty($style->buttonBackColor)):?> background-color: <? echo '#'.$style->buttonBackColor;?> !important;
-    <?endif;?><?if(!empty($style->buttonBorderColor)):?> border-color: <? echo '#'.$style->buttonBorderColor;?> !important;
+    <?if(!empty($style->buttonBackColor)):?> background-color: <? echo Utils::formatColor($style->buttonBackColor);?> !important;
+    <?endif;?><?if(!empty($style->buttonBorderColor)):?> border-color: <? echo Utils::formatColor($style->buttonBorderColor);?> !important;
     <?endif;?>
     }
 
     #vertical-feed-<? echo $contentBlock->id; ?> .panel-footer .pagination a .glyphicon {
-    <?if(!empty($style->buttonIconColor)):?> color: <? echo '#'.$style->buttonIconColor;?> !important;
+    <?if(!empty($style->buttonIconColor)):?> color: <? echo Utils::formatColor($style->buttonIconColor);?> !important;
     <?endif;?>
     }
 
@@ -78,14 +78,17 @@
             <div class="view-settings"><? echo CJSON::encode($viewSettings); ?></div>
         </div>
     </div>
-    <div class="btn-group feed-controls-container vertical-feed-controls-container hidden-xs hidden-sm" role="group">
+    <div class="btn-group feed-controls-container vertical-feed-controls-container" role="group">
 		<?
 			/** @var FeedControlSettings $control */
 			$control = $viewSettings->controlSettings->{FeedControlSettings::ControlTagLinkFormatPowerPoint};
 		?>
 		<? if ($control->enabled): ?>
             <button type="button"
-                    class="btn btn-default link-format-toggle<? if (in_array(LinkFeedQuerySettings::LinkFormatPowerPoint, $querySettings->linkFormats)): ?> active<? endif; ?>">
+                    class="btn btn-default link-format-toggle<? if (in_array(LinkFeedQuerySettings::LinkFormatPowerPoint, $querySettings->linkFormats)): ?> active<? endif; ?><? if ($control->hideCondition->large): ?> hidden-lg<? endif; ?>
+                            <? if ($control->hideCondition->medium): ?> hidden-md<? endif; ?>
+                            <? if ($control->hideCondition->small): ?> hidden-sm<? endif; ?>
+                            <? if ($control->hideCondition->extraSmall): ?> hidden-xs<? endif; ?>">
                 <span class="title"><? echo $control->title; ?></span>
                 <span class="service-data">
                                 <span class="link-format-tag"><? echo LinkFeedQuerySettings::LinkFormatPowerPoint; ?></span>
@@ -98,7 +101,10 @@
 		?>
 		<? if ($control->enabled): ?>
             <button type="button"
-                    class="btn btn-default link-format-toggle<? if (in_array(LinkFeedQuerySettings::LinkFormatVideo, $querySettings->linkFormats)): ?> active<? endif; ?>">
+                    class="btn btn-default link-format-toggle<? if (in_array(LinkFeedQuerySettings::LinkFormatVideo, $querySettings->linkFormats)): ?> active<? endif; ?><? if ($control->hideCondition->large): ?> hidden-lg<? endif; ?>
+                            <? if ($control->hideCondition->medium): ?> hidden-md<? endif; ?>
+                            <? if ($control->hideCondition->small): ?> hidden-sm<? endif; ?>
+                            <? if ($control->hideCondition->extraSmall): ?> hidden-xs<? endif; ?>">
                 <span class="title"><? echo $control->title; ?></span>
                 <span class="service-data">
                                 <span class="link-format-tag"><? echo LinkFeedQuerySettings::LinkFormatVideo; ?></span>
@@ -111,7 +117,10 @@
 		?>
 		<? if ($control->enabled): ?>
             <button type="button"
-                    class="btn btn-default link-format-toggle<? if (in_array(LinkFeedQuerySettings::LinkFormatDocument, $querySettings->linkFormats)): ?> active<? endif; ?>">
+                    class="btn btn-default link-format-toggle<? if (in_array(LinkFeedQuerySettings::LinkFormatDocument, $querySettings->linkFormats)): ?> active<? endif; ?><? if ($control->hideCondition->large): ?> hidden-lg<? endif; ?>
+                            <? if ($control->hideCondition->medium): ?> hidden-md<? endif; ?>
+                            <? if ($control->hideCondition->small): ?> hidden-sm<? endif; ?>
+                            <? if ($control->hideCondition->extraSmall): ?> hidden-xs<? endif; ?>">
                 <span class="title"><? echo $control->title; ?></span>
                 <span class="service-data">
                                 <span class="link-format-tag"><? echo LinkFeedQuerySettings::LinkFormatDocument; ?></span>
@@ -120,16 +129,16 @@
 		<? endif; ?>
     </div>
     <div class="panel panel-default"
-         style="<? if (!empty($style->outsideBorderColor)): ?>border-color: <? echo '#' . $style->outsideBorderColor; ?>; -webkit-box-shadow: 0 1px 1px <? echo '#' . $style->outsideBorderColor; ?>; box-shadow: 0 1px 1px <? echo '#' . $style->outsideBorderColor; ?>;<? endif; ?>">
+         style="<? if (!empty($style->outsideBorderColor)): ?>border-color: <? echo Utils::formatColor($style->outsideBorderColor); ?>; -webkit-box-shadow: 0 0 0 <? echo Utils::formatColor($style->outsideBorderColor); ?>; box-shadow: 0 0 0 <? echo Utils::formatColor($style->outsideBorderColor); ?>;<? endif; ?>">
         <div class="panel-heading"
-             style="<? if ($viewSettings->hideHeader): ?>display: none;<? endif; ?><? if (!empty($style->headerColor)): ?>background-color: <? echo '#' . $style->headerColor; ?>;<? endif; ?>">
+             style="<? echo $this->renderPartial('landingPageMarkup/style/stylePadding', array('padding' => $style->headerPadding), true); ?><? if ($viewSettings->hideHeader): ?>display: none;<? endif; ?><? if (!empty($style->headerColor)): ?>background-color: <? echo Utils::formatColor($style->headerColor); ?>;border-color: <? echo Utils::formatColor($style->headerColor); ?>;<? endif; ?>">
 			<? if (!empty($viewSettings->icon)): ?>
                 <i class="icomoon icomoon-lg <? echo $viewSettings->icon; ?>"
-                   style="<? if (!empty($style->headerIconColor)): ?>color: <? echo '#' . $style->headerIconColor; ?>;<? endif; ?>"></i>
+                   style="<? if (!empty($style->headerIconColor)): ?>color: <? echo Utils::formatColor($style->headerIconColor); ?>;<? endif; ?>"></i>
 			<? else: ?>
                 <span class="glyphicon glyphicon-list-alt"></span>
 			<? endif; ?>
-            <strong style="<? if (!empty($style->headerTextColor)): ?>color: <? echo '#' . $style->headerTextColor; ?>;<? endif; ?>"><? echo $viewSettings->title; ?></strong>
+            <strong style="<? if (!empty($style->headerTextColor)): ?>color: <? echo Utils::formatColor($style->headerTextColor); ?>;<? endif; ?>"><? echo $viewSettings->title; ?></strong>
         </div>
         <div class="panel-body">
             <div class="row">
@@ -141,6 +150,6 @@
             </div>
         </div>
         <div class="panel-footer"
-             style="<? if ($viewSettings->hideFooter): ?>display: none;<? endif; ?><? if (!empty($style->footerColor)): ?>background-color: <? echo '#' . $style->footerColor; ?>; border-top-color: <? echo '#' . $style->footerColor; ?>;<? endif; ?>"></div>
+             style="<? echo $this->renderPartial('landingPageMarkup/style/stylePadding', array('padding' => $style->footerPadding), true); ?><? if ($viewSettings->hideFooter): ?>display: none;<? endif; ?><? if (!empty($style->footerColor)): ?>background-color: <? echo Utils::formatColor($style->footerColor); ?>; border-top-color: <? echo Utils::formatColor($style->footerColor); ?>;<? endif; ?>"></div>
     </div>
 </div>

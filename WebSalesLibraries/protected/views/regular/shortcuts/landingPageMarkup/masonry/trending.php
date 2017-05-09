@@ -36,7 +36,7 @@
             <div class="view-settings"><? echo CJSON::encode($viewSettings); ?></div>
         </div>
     </div>
-    <div class="btn-group feed-controls-container masonry-feed-controls-container hidden-xs hidden-sm" role="group">
+    <div class="btn-group feed-controls-container masonry-feed-controls-container" role="group">
 		<? if ($viewSettings->controlSettings->{TrendingFeedControlSettings::ControlTagDateToday}->enabled ||
 			$viewSettings->controlSettings->{TrendingFeedControlSettings::ControlTagDateWeek}->enabled ||
 			$viewSettings->controlSettings->{TrendingFeedControlSettings::ControlTagDateMonth}->enabled
@@ -56,7 +56,23 @@
 					break;
 			}
 			?>
-            <div class="btn-group date-range-toggle-group" role="group">
+			<?
+			/** @var TrendingFeedControlSettings $todayControl */
+			$todayControl = $viewSettings->controlSettings->{TrendingFeedControlSettings::ControlTagDateToday};
+			/** @var TrendingFeedControlSettings $weekControl */
+			$weekControl = $viewSettings->controlSettings->{TrendingFeedControlSettings::ControlTagDateWeek};
+			/** @var TrendingFeedControlSettings $monthControl */
+			$monthControl = $viewSettings->controlSettings->{TrendingFeedControlSettings::ControlTagDateMonth};
+
+			$dateHideLg = $todayControl->hideCondition->large || $weekControl->hideCondition->large || $monthControl->hideCondition->large;
+			$dateHideMd = $todayControl->hideCondition->medium || $weekControl->hideCondition->medium || $monthControl->hideCondition->medium;
+			$dateHideSm = $todayControl->hideCondition->small || $weekControl->hideCondition->small || $monthControl->hideCondition->small;
+			$dateHideXs = $todayControl->hideCondition->extraSmall || $weekControl->hideCondition->extraSmall || $monthControl->hideCondition->extraSmall;
+			?>
+            <div class="btn-group date-range-toggle-group<? if ($dateHideLg): ?> hidden-lg<? endif; ?>
+                            <? if ($dateHideMd): ?> hidden-md<? endif; ?>
+                            <? if ($dateHideSm): ?> hidden-sm<? endif; ?>
+                            <? if ($dateHideXs): ?> hidden-xs<? endif; ?>" role="group">
                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
                     <span class="title"><? echo $activeDateRangeTitle; ?></span>
@@ -108,7 +124,10 @@
 		?>
 		<? if ($control->enabled): ?>
             <button type="button"
-                    class="btn btn-default link-format-toggle<? if (in_array(LinkFeedQuerySettings::LinkFormatPowerPoint, $querySettings->linkFormats)): ?> active<? endif; ?>">
+                    class="btn btn-default link-format-toggle<? if (in_array(LinkFeedQuerySettings::LinkFormatPowerPoint, $querySettings->linkFormats)): ?> active<? endif; ?><? if ($control->hideCondition->large): ?> hidden-lg<? endif; ?>
+                            <? if ($control->hideCondition->medium): ?> hidden-md<? endif; ?>
+                            <? if ($control->hideCondition->small): ?> hidden-sm<? endif; ?>
+                            <? if ($control->hideCondition->extraSmall): ?> hidden-xs<? endif; ?>">
                 <span class="title"><? echo $control->title; ?></span>
                 <span class="service-data">
                                 <span class="link-format-tag"><? echo LinkFeedQuerySettings::LinkFormatPowerPoint; ?></span>
@@ -121,7 +140,10 @@
 		?>
 		<? if ($control->enabled): ?>
             <button type="button"
-                    class="btn btn-default link-format-toggle<? if (in_array(LinkFeedQuerySettings::LinkFormatVideo, $querySettings->linkFormats)): ?> active<? endif; ?>">
+                    class="btn btn-default link-format-toggle<? if (in_array(LinkFeedQuerySettings::LinkFormatVideo, $querySettings->linkFormats)): ?> active<? endif; ?><? if ($control->hideCondition->large): ?> hidden-lg<? endif; ?>
+                            <? if ($control->hideCondition->medium): ?> hidden-md<? endif; ?>
+                            <? if ($control->hideCondition->small): ?> hidden-sm<? endif; ?>
+                            <? if ($control->hideCondition->extraSmall): ?> hidden-xs<? endif; ?>">
                 <span class="title"><? echo $control->title; ?></span>
                 <span class="service-data">
                                 <span class="link-format-tag"><? echo LinkFeedQuerySettings::LinkFormatVideo; ?></span>
@@ -134,7 +156,10 @@
 		?>
 		<? if ($control->enabled): ?>
             <button type="button"
-                    class="btn btn-default link-format-toggle<? if (in_array(LinkFeedQuerySettings::LinkFormatDocument, $querySettings->linkFormats)): ?> active<? endif; ?>">
+                    class="btn btn-default link-format-toggle<? if (in_array(LinkFeedQuerySettings::LinkFormatDocument, $querySettings->linkFormats)): ?> active<? endif; ?><? if ($control->hideCondition->large): ?> hidden-lg<? endif; ?>
+                            <? if ($control->hideCondition->medium): ?> hidden-md<? endif; ?>
+                            <? if ($control->hideCondition->small): ?> hidden-sm<? endif; ?>
+                            <? if ($control->hideCondition->extraSmall): ?> hidden-xs<? endif; ?>">
                 <span class="title"><? echo $control->title; ?></span>
                 <span class="service-data">
                                 <span class="link-format-tag"><? echo LinkFeedQuerySettings::LinkFormatDocument; ?></span>

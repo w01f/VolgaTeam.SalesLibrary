@@ -146,7 +146,9 @@
 					linkId: linkId,
 					isQuickSite: false
 				});
-			})
+			});
+
+			$.SalesPortal.ShortcutsManager.assignShortcutItemHandlers(feedContainer);
 		};
 	};
 

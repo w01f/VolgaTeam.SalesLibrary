@@ -12,7 +12,8 @@
 
 		public $alignment;
 		public $title;
-		public $defaultLabel;
+		public $placeholder;
+		public $label;
 		public $samePage;
 		public $showTagsSelector;
 
@@ -59,8 +60,10 @@
 				$this->alignment = $queryResult->length > 0 ? strtolower(trim($queryResult->item(0)->nodeValue)) : 'left';
 				$queryResult = $xpath->query('./Title', $rootNode);
 				$this->title = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : '';
-				$queryResult = $xpath->query('./Defaultlabel', $rootNode);
-				$this->defaultLabel = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : '';
+				$queryResult = $xpath->query('./Placeholder', $rootNode);
+				$this->placeholder = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : 'Type category or keyword here...';
+				$queryResult = $xpath->query('./Label', $rootNode);
+				$this->label = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : '';
 				$queryResult = $xpath->query('./OpenOnSamePage', $rootNode);
 				$this->samePage = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : true;
 				$queryResult = $xpath->query('./ShowTagsSelector', $rootNode);

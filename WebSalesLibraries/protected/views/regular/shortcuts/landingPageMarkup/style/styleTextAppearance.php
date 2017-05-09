@@ -13,7 +13,7 @@
                 white-space: normal;
             <? endif; ?>
             <? if (isset($textAppearance->color)): ?>
-                color: <? echo '#' . $textAppearance->color; ?> !important;
+                color: <? echo Utils::formatColor($textAppearance->color); ?> !important;
             <? endif; ?>
             <? if (isset($textAppearance->hoverColor)): ?>
                 -moz-transition: all .2s ease-in;
@@ -37,7 +37,7 @@
         }
         <? if (isset($textAppearance->hoverColor)): ?>
             <?echo '#'.$blockId;?>:hover {
-                color: <? echo '#' . $textAppearance->hoverColor; ?> !important;
+                color: <? echo Utils::formatColor($textAppearance->hoverColor); ?> !important;
             }
         <? endif; ?>
     </style>

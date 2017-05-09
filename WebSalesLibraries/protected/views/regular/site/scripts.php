@@ -151,25 +151,34 @@
 		$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/data-table/bootstrap/js/datatables.min.js?' . Yii::app()->params['version'], CClientScript::POS_END);
 	}
 ?>
-<style>
-    .menu-back-colored {
-        background-color: <?echo '#'.Yii::app()->params['menu']['BarColor'];?> !important;
-    }
+    <style>
+        .menu-back-colored {
+            background-color: <?echo Utils::formatColor(Yii::app()->params['menu']['BarColor']);?> !important;
+        }
 
-    #shortcut-action-menu,
-    #shortcut-action-menu .main-level,
-    #shortcut-action-menu .level {
-        background-color: <? echo '#'.Yii::app()->params['menu']['BarColor'];?>;
-    }
+        #shortcut-action-menu,
+        #shortcut-action-menu .main-level,
+        #shortcut-action-menu .level {
+            background-color: <? echo Utils::formatColor(Yii::app()->params['menu']['BarColor']);?>;
+        }
 
-    #shortcut-action-menu .main-level .shortcut-menu-header:hover {
-        background-color: <? echo '#'.Yii::app()->params['menu']['BarColor'];?>;
-    }
+        #shortcut-action-menu .main-level .shortcut-menu-header:hover {
+            background-color: <? echo Utils::formatColor(Yii::app()->params['menu']['BarColor']);?>;
+        }
 
-    #main-menu .shortcut-menu-group-item {
-        margin-right: <? echo Yii::app()->params['menu']['IconSeparation'];?>px;
-    }
-</style>
-<script type="text/javascript">
-	$.Editable.DEFAULTS.key = '<?echo Yii::app()->params['froala_editor']['key'];?>';
-</script>
+        #main-menu .shortcut-menu-group-item {
+            margin-right: <? echo Yii::app()->params['menu']['IconSeparation'];?>px;
+        }
+    </style>
+    <script type="text/javascript">
+		$.Editable.DEFAULTS.key = '<?echo Yii::app()->params['froala_editor']['key'];?>';
+    </script>
+
+<? if (array_key_exists('refresh_popup', Yii::app()->params->getKeys()) && Yii::app()->params['refresh_popup']['enabled'] === true): ?>
+    <script type="text/javascript">
+		$(document).ready(function ()
+		{
+			setTimeout($.SalesPortal.MainMenu.checkIfShortcutsUpdated, 60000);
+		});
+    </script>
+<? endif; ?>

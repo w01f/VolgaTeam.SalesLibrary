@@ -7,11 +7,11 @@
 		<style>
 			<?echo '#'.$identifier;?> .logo
 			{
-				color: <?echo '#'.$group->groupAppearance->iconColor;?> !important;
+				color: <?echo Utils::formatColor($group->groupAppearance->iconColor);?> !important;
 			}
 			<?echo '#'.$identifier;?> .title
 			{
-			  	color: <?echo '#'.$group->groupAppearance->textColor;?> !important;
+			  	color: <?echo Utils::formatColor($group->groupAppearance->textColor);?> !important;
 			}
 		</style>
 		<li data-icon="false">

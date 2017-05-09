@@ -7,6 +7,7 @@
 	class Category
 	{
 		public $group;
+		public $groupIcon;
 		public $category;
 		public $description;
 		public $tag;
@@ -17,6 +18,7 @@
 		{
 			$this->id = uniqid();
 			$this->group = $categoryRecord->group;
+			$this->groupIcon = $categoryRecord->groupIcon;
 			$this->category = $categoryRecord->category;
 			$this->description = $categoryRecord->description;
 			$this->tag = $categoryRecord->tag;
