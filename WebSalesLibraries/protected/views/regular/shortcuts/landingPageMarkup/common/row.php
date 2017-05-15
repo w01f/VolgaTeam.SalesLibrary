@@ -24,7 +24,7 @@
 		)
 		, true);
 ?>
-<div id="<? echo $blockId; ?>" class="row"
+<div id="<? echo $blockId; ?>" class="row<? if ($contentBlock->centerContent): ?> center-content<? endif; ?>"
      style="<? echo $this->renderPartial('landingPageMarkup/style/stylePadding', array('padding' => $contentBlock->padding), true); ?>
      <? echo $this->renderPartial('landingPageMarkup/style/styleMargin', array('margin' => $contentBlock->margin), true); ?>"
 	<? if (!empty($contentBlock->hoverText)): ?> title="<? echo $contentBlock->hoverText; ?>"<? endif; ?>>

@@ -24,7 +24,7 @@
 		)
 		, true);
 ?>
-<div id="<? echo $blockId; ?>" class="<? if (isset($contentBlock->floatSide)): ?>pull-<? echo $contentBlock->floatSide; ?><? endif; ?>
+<div id="<? echo $blockId; ?>" class="<? if (isset($contentBlock->floatSide)): ?>pull-<? echo $contentBlock->floatSide; ?><? endif; ?><? if ($contentBlock->centerBlock): ?> center-block<? endif; ?>
         <? if ($contentBlock->hideCondition->large): ?> hidden-lg<? endif; ?>
         <? if ($contentBlock->hideCondition->medium): ?> hidden-md<? endif; ?>
         <? if ($contentBlock->hideCondition->small): ?> hidden-sm<? endif; ?>

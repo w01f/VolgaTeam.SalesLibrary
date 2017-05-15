@@ -18,6 +18,11 @@
 		/** @var  \HideCondition */
 		public $hideCondition;
 
+		public function __construct()
+		{
+			$this->hideCondition = new \HideCondition();
+		}
+
 		/**
 		 * @param $tag string
 		 */
@@ -37,7 +42,6 @@
 					$this->title = 'video';
 					break;
 			}
-			$this->hideCondition = new \HideCondition();
 		}
 
 		/**

@@ -26,7 +26,7 @@
 		, true);
 ?>
 <? if ($searchBar->configured): ?>
-    <div id="<? echo $blockId; ?>" class="shortcuts-search-bar-container hidden-xs"
+    <div id="<? echo $blockId; ?>" class="shortcuts-search-bar-container hidden-xs<? if ($contentBlock->centerBlock): ?> center-block<? endif; ?>"
          style="<? echo $this->renderPartial('landingPageMarkup/style/stylePadding', array('padding' => $contentBlock->padding), true); ?>
 	     <? echo $this->renderPartial('landingPageMarkup/style/styleMargin', array('margin' => $contentBlock->margin), true); ?>"
 		<? if (!empty($contentBlock->hoverText)): ?> title="<? echo $contentBlock->hoverText; ?>"<? endif; ?>>

@@ -1,8 +1,9 @@
 <?
+
 	namespace application\models\shortcuts\models\landing_page\regular_markup\common;
 
-	use application\models\shortcuts\models\landing_page\regular_markup\horizontal_feed\SearchFeedBlock  as HorizontalSearchFeedBlock;
-	use application\models\shortcuts\models\landing_page\regular_markup\horizontal_feed\SpecificLinkFeedBlock  as HorizontalSpecificLinkFeedBlock;
+	use application\models\shortcuts\models\landing_page\regular_markup\horizontal_feed\SearchFeedBlock as HorizontalSearchFeedBlock;
+	use application\models\shortcuts\models\landing_page\regular_markup\horizontal_feed\SpecificLinkFeedBlock as HorizontalSpecificLinkFeedBlock;
 	use application\models\shortcuts\models\landing_page\regular_markup\horizontal_feed\TrendingBlock as HorizontalTrendingBlock;
 	use application\models\shortcuts\models\landing_page\regular_markup\list_block\ListBlock;
 	use application\models\shortcuts\models\landing_page\regular_markup\list_block\ListItem;
@@ -40,6 +41,8 @@
 
 		public $hoverText;
 
+		public $centerBlock;
+
 		/** @var  \Padding */
 		public $padding;
 		/** @var  \Padding */
@@ -61,6 +64,8 @@
 		{
 			$this->id = uniqid();
 
+			$this->centerBlock = false;
+
 			$this->parentShortcut = $parentShortcut;
 			$this->parentBlock = $parentBlock;
 
@@ -76,6 +81,9 @@
 		{
 			$queryResult = $xpath->query('./HoverTip', $contextNode);
 			$this->hoverText = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
+
+			$queryResult = $xpath->query('./CenterBlock', $contextNode);
+			$this->centerBlock = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : $this->centerBlock;
 
 			$queryResult = $xpath->query('./Padding', $contextNode);
 			if ($queryResult->length > 0)

@@ -35,19 +35,33 @@
 			break;
 	}
 
-	$linksPerSlide = $viewSettings->linksScrollMode === FeedSettings::LinksScrollModeSlide ?
-		$viewSettings->linksPerSlide :
-		1;
+	$linksPerSlide = $viewSettings->linksScrollMode === FeedSettings::LinksScrollModeLink ?
+		1:
+		$viewSettings->linksPerSlide;
 ?>
 <style>
     <?if($viewSettings->maxImageHeight>0):?>
     #horizontal-feed-carousel-<? echo $feedId; ?> .portfolio_utube_item_image > img {
         max-height: <?echo $viewSettings->maxImageHeight;?>px;
     }
+
+    #horizontal-feed-carousel-<? echo $feedId; ?> .carousel-inner > .item {
+        -webkit-transition: <? echo $viewSettings->animationSpeed;?>s ease-in-out left;
+        -o-transition: <? echo $viewSettings->animationSpeed;?>s ease-in-out left;
+        transition: <? echo $viewSettings->animationSpeed;?>s ease-in-out left;
+    }
+
+    @media all and (transform-3d), (-webkit-transform-3d) {
+        #horizontal-feed-carousel-<? echo $feedId; ?> .carousel-inner > .item {
+            -webkit-transition: -webkit-transform <? echo $viewSettings->animationSpeed;?>s ease-in-out;
+            -o-transition: -o-transform <? echo $viewSettings->animationSpeed;?>s ease-in-out;
+            transition: transform <? echo $viewSettings->animationSpeed;?>s ease-in-out;
+        }
+    }
     <?endif;?>
 </style>
 <div id="horizontal-feed-carousel-<? echo $feedId; ?>"
-     class="col-xs-12 carousel slide portfolio_utube_carousel_wrapper<? echo $viewSettings->linksScrollMode === FeedSettings::LinksScrollModeLink ? (' ' . $carouseOneMoveClass) : ''; ?><? if ($viewSettings->slideShow == true): ?> carousel-slide-show<? endif; ?>"
+     class="col-xs-12 carousel slide portfolio_utube_carousel_wrapper<? echo $viewSettings->linksScrollMode === FeedSettings::LinksScrollModeLink ? (' ' . $carouseOneMoveClass) : ''; ?><? if ($viewSettings->slideShow === true): ?> carousel-slide-show<? endif; ?><? if ($viewSettings->linksScrollMode === FeedSettings::LinksScrollModeFade): ?> carousel-fade<? endif; ?>"
      <? if ($viewSettings->slideShow === true): ?>data-interval="<? echo $viewSettings->slideShowInterval; ?>"
      <? else: ?>data-interval="false"<? endif; ?>>
     <div class="carousel-inner carousel-links" role="listbox">

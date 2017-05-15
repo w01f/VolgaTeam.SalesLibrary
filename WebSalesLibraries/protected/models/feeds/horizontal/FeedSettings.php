@@ -24,6 +24,7 @@
 
 		const LinksScrollModeLink = 'link';
 		const LinksScrollModeSlide = 'slide';
+		const LinksScrollModeFade = 'fade';
 
 		public $feedType;
 
@@ -32,6 +33,7 @@
 		public $slideShow;
 		public $slideShowInterval;
 		public $maxImageHeight;
+		public $animationSpeed;
 
 		/** @var  FeedControlSettings[] */
 		public $controlSettings;
@@ -43,6 +45,7 @@
 			$this->slideShow = false;
 			$this->slideShowInterval = 5000;
 			$this->maxImageHeight = 0;
+			$this->animationSpeed = ".6";
 			$this->initDefaultControlSettings();
 		}
 
@@ -124,7 +127,7 @@
 
 			$queryResult = $xpath->query('./LinksScrollMode', $contextNode);
 			$linksScrollMode = $queryResult->length > 0 ? strtolower(trim($queryResult->item(0)->nodeValue)) : $this->linksScrollMode;
-			if (in_array($linksScrollMode, array(self::LinksScrollModeLink, self::LinksScrollModeSlide)))
+			if (in_array($linksScrollMode, array(self::LinksScrollModeLink, self::LinksScrollModeSlide, self::LinksScrollModeFade)))
 				$this->linksScrollMode = $linksScrollMode;
 
 			$queryResult = $xpath->query('./SlideShow', $contextNode);
@@ -132,6 +135,9 @@
 
 			$queryResult = $xpath->query('./SlideShowInterval', $contextNode);
 			$this->slideShowInterval = $queryResult->length > 0 ? intval(trim($queryResult->item(0)->nodeValue)) : $this->slideShowInterval;
+
+			$queryResult = $xpath->query('./FadeSpeed', $contextNode);
+			$this->animationSpeed = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : $this->animationSpeed;
 
 			$queryResult = $xpath->query('./ControlSettings/Item', $contextNode);
 			/** @var $node \DOMElement */

@@ -1,7 +1,7 @@
 <?
 	/** @var $padding Padding */
 ?>
-<? if ($padding->isConfigured): ?>
+<? if (isset($padding) && $padding->isConfigured): ?>
     padding-top: <? echo $padding->top; ?>px !important;
     padding-left: <? echo $padding->left; ?>px !important;
     padding-bottom: <? echo $padding->bottom; ?>px !important;
