@@ -276,6 +276,12 @@
 				}
 			}
 
+			if ($feedSettings->conditions->sortSettings->columnTag === DataTableQuerySettings::DataTagFileName)
+			{
+				$sortHelper = new \ObjectSortHelper('linkName', $feedSettings->conditions->sortSettings->order);
+				usort($feedItems, array($sortHelper, 'sort'));
+			}
+
 			return $feedItems;
 		}
 
