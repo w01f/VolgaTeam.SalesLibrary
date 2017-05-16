@@ -174,6 +174,17 @@ namespace SalesLibraries.FileManager.PresentationLayer.Wallbin.Links.GroupSettin
 			rbSecurityBlackList.Enabled = false;
 			gridControlSecurityUserList.DataSource = null;
 			_securityGroups.Clear();
+
+			if (!MainController.Instance.Lists.Security.IsLoaded)
+			{
+				MainController.Instance.ProcessManager.Run(
+					"Loading Site Security Data...",
+					(cancelationToken, formProgess) =>
+					{
+						MainController.Instance.Lists.Security.Load();
+					});
+			}
+
 			_securityGroups.AddRange(MainController.Instance.Lists.Security.GetGroupsByLibrary(libraryId));
 			if (_securityGroups.Any())
 			{

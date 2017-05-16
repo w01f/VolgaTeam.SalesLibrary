@@ -16,6 +16,8 @@ namespace SalesLibraries.FileManager.Configuration
 	{
 		private readonly List<LibraryGroup> _groups = new List<LibraryGroup>();
 
+		public bool IsLoaded { get; set; }
+
 		public void Load()
 		{
 			RestResponse response;
@@ -31,6 +33,7 @@ namespace SalesLibraries.FileManager.Configuration
 				var cloudLastUpdate = response.GetData<DateTime?>(); if (!cloudLastUpdate.HasValue || cloudLastUpdate <= localMetaData.LastUpdate)
 				{
 					_groups.AddRange(localMetaData.GetData<List<LibraryGroup>>());
+					IsLoaded = true;
 					return;
 				}
 			}
@@ -42,6 +45,7 @@ namespace SalesLibraries.FileManager.Configuration
 			_groups.AddRange(securityGroups.Select(LibraryGroup.LoadFromCloudData));
 			localMetaData.Content = JsonConvert.SerializeObject(_groups);
 			localMetaData.Save();
+			IsLoaded = true;
 		}
 
 		public List<LibraryGroup> GetGroupsByLibrary(Guid libraryId)

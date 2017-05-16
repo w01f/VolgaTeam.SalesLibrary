@@ -26,7 +26,8 @@ namespace SalesLibraries.Common.Configuration
 				Constants.FilesDeletedFromFolderArchiveName,
 				Constants.DatabaseConnectionStateInfoFileName,
 				Constants.DeadLinkInfoFileName,
-				Constants.LogArchiveFolderName
+				Constants.LogArchiveFolderName,
+				Constants.OfficeTempFilePrefixName
 			};
 		}
 	}

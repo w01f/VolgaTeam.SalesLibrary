@@ -34,7 +34,6 @@ namespace SalesLibraries.FileManager.Configuration
 			Banners.Load();
 			SearchTags.Load();
 			SuperFilters.Load();
-			Security.Load();
 			LinkBundleImages.Load();
 			InternalLinkTemplates.Load();
 		}
