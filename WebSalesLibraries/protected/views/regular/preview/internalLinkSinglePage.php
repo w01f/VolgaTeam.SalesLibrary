@@ -1,6 +1,7 @@
 <?
 	/**
 	 * @var $menuGroups ShortcutGroup[]
+	 * @var $linkName string
 	 * @var $linkId string
 	 */
 
@@ -33,10 +34,13 @@
 		<td class="navigation-panel">
 		</td>
 		<td class="content-inner">
-			<div class="content-scrollable-area">
-				<div class="service-data link-viewer-data">
-					<div class="link-id"><? echo $linkId; ?></div>
-				</div>
+			<div class="content-scrollable-area" style="padding: 40px">
+                <a href="#" class="single-link">
+                    <?echo $linkName?>
+                    <div class="service-data link-viewer-data">
+                        <div class="link-id"><? echo $linkId; ?></div>
+                    </div>
+                </a>
 			</div>
 		</td>
 	</tr>

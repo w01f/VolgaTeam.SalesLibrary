@@ -18,10 +18,13 @@
 			initCarouselControls();
 			initSlider();
 
-			setTimeout(function ()
+			if (viewSettings.feedType !== 'shortcut-slider')
 			{
-				reloadLinks(false);
-			}, 900000);
+				setTimeout(function ()
+				{
+					reloadLinks(false);
+				}, 900000);
+			}
 		};
 
 		var reloadLinks = function (showProgress)

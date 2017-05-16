@@ -55,7 +55,7 @@
 					$activity->date = $activityRecord->date_time;
 					$activity->type = $activityRecord->type;
 					$activity->subType = $activityRecord->sub_type;
-					if(isset($activityRecord->userActivity))
+					if (isset($activityRecord->userActivity))
 					{
 						$activity->login = isset($activityRecord->userActivity->login) && $activityRecord->userActivity->login != '' ?
 							$activityRecord->userActivity->login :
@@ -393,6 +393,12 @@
 					$libraryFilesModel->fileFormat = $resultRecord['file_format'];
 					$libraryFilesModel->categories = $resultRecord['categories'];
 					$libraryFilesModel->keywords = $resultRecord['keywords'];
+
+					$libraryFilesModel->previewUrl = Yii::app()->createAbsoluteUrl('preview/getSingleInternalLink', array('linkId' => $resultRecord['link_id']));
+
+					$libraryRelativePath = DIRECTORY_SEPARATOR . Yii::app()->params['librariesRoot'] . DIRECTORY_SEPARATOR . $resultRecord['library_path'];
+					$libraryFilesModel->downloadUrl = $resultRecord['file_path'] != '' ? Yii::app()->getBaseUrl(true) . Utils::formatUrl($libraryRelativePath . $resultRecord['file_path']) : '';
+
 					$libraryFilesModel->fileDate = $resultRecord['file_date'];
 					$libraryFilesModel->linkAddDate = $resultRecord['link_add_date'];
 					$libraryFilesModel->linkModifyDate = $resultRecord['link_modify_date'];

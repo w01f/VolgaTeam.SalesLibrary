@@ -258,6 +258,6 @@
 			$linkRecord = LinkRecord::getLinkById($linkId);
 			$this->pageTitle = sprintf('%s', $linkRecord->name);
 			$menuGroups = ShortcutsManager::getAvailableGroups($this->isPhone);
-			$this->render('internalLinkSinglePage', array('menuGroups' => $menuGroups, 'linkId' => $linkId));
+			$this->render('internalLinkSinglePage', array('menuGroups' => $menuGroups, 'linkName' => $linkRecord->name, 'linkId' => $linkId));
 		}
 	}

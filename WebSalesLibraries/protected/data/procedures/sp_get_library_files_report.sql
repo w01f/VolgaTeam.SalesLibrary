@@ -2,9 +2,12 @@ DROP PROCEDURE IF EXISTS sp_get_library_files_report;
 CREATE PROCEDURE sp_get_library_files_report()
   select
     lib.name as library,
+    lib.path as library_path,
     lib.last_update as library_date,
+    l.id as link_id,
     l.name as link_name,
     l.file_name as file_name,
+    l.file_relative_path as file_path,
     case when l.original_format='folder' or l.original_format='other' then 'other' else l.file_extension end as file_type,
     l.original_format as file_format,
     group_concat(distinct l_c.tag separator ', ') as categories,

@@ -46,6 +46,16 @@
 		 */
 		public $keywords;
 		/**
+		 * @var string previewUrl
+		 * @soap
+		 */
+		public $previewUrl;
+		/**
+		 * @var string downloadUrl
+		 * @soap
+		 */
+		public $downloadUrl;
+		/**
 		 * @var string fileDate
 		 * @soap
 		 */
