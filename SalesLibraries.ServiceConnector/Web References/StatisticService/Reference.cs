@@ -761,6 +761,10 @@ namespace SalesLibraries.ServiceConnector.StatisticService {
         
         private string keywordsField;
         
+        private string previewUrlField;
+        
+        private string downloadUrlField;
+        
         private string fileDateField;
         
         private string linkAddDateField;
@@ -844,6 +848,26 @@ namespace SalesLibraries.ServiceConnector.StatisticService {
             }
             set {
                 this.keywordsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string previewUrl {
+            get {
+                return this.previewUrlField;
+            }
+            set {
+                this.previewUrlField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string downloadUrl {
+            get {
+                return this.downloadUrlField;
+            }
+            set {
+                this.downloadUrlField = value;
             }
         }
         

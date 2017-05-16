@@ -189,6 +189,8 @@
           <xsd:element name="fileFormat" type="xsd:string" />
           <xsd:element name="categories" type="xsd:string" />
           <xsd:element name="keywords" type="xsd:string" />
+          <xsd:element name="previewUrl" type="xsd:string" />
+          <xsd:element name="downloadUrl" type="xsd:string" />
           <xsd:element name="fileDate" type="xsd:string" />
           <xsd:element name="linkAddDate" type="xsd:string" />
           <xsd:element name="linkModifyDate" type="xsd:string" />
