@@ -62,15 +62,22 @@ namespace SalesLibraries.SiteManager.PresentationClasses.LibraryFiles
 			_init = false;
 		}
 
+		public void UpdateLiksInfo(int allLinksCount, int untaggedLinksCount, int noKeywordsLinksCount)
+		{
+			checkEditAllFiles.Text = String.Format("All Links ({0})", allLinksCount);
+			checkEditUntaggedLinks.Text = String.Format("Un-Tagged Links <color=red>({0})</color>", untaggedLinksCount);
+			checkEditNoKeywordLinks.Text = String.Format("No Keyword Links <color=blue>({0})</color>", noKeywordsLinksCount);
+		}
+
 		private void checkEditFilterEnable_CheckedChanged(object sender, EventArgs e)
 		{
 			_enableFilter = checkEditEnableFilter.Checked;
 			checkedListBoxControlGroups.Enabled = _enableFilter;
 			buttonXGroupsAll.Enabled = _enableFilter;
 			buttonXGroupsNone.Enabled = _enableFilter;
-			checkEditAllFiles.Enabled = _enableFilter;
-			checkEditUntaggedLinks.Enabled = _enableFilter;
-			checkEditNoKeywordLinks.Enabled = _enableFilter;
+			checkEditAllFiles.Visible = _enableFilter;
+			checkEditUntaggedLinks.Visible = _enableFilter;
+			checkEditNoKeywordLinks.Visible = _enableFilter;
 			if (_init) return;
 			FilterChanged?.Invoke(this, new EventArgs());
 		}

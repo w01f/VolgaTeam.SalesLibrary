@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Drawing.Printing;
 using System.Linq;
 using System.Windows.Forms;
+using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraPrinting;
 using DevExpress.XtraTab;
 using SalesLibraries.ServiceConnector.StatisticService;
@@ -59,6 +61,18 @@ namespace SalesLibraries.SiteManager.PresentationClasses.LibraryFiles
 				gridControlData.DataSource = Records.Where(r => !r.HasKeywords).ToList();
 			advBandedGridViewData.RefreshData();
 			gridControlData.Update();
+		}
+
+		private void OnCustomDrawRowPreview(object sender, RowObjectCustomDrawEventArgs e)
+		{
+			if (e.RowHandle % 2 == 0)
+				e.Appearance.BackColor = SystemColors.ControlLight;
+		}
+
+		private void OnCustomDrawCell(object sender, RowCellCustomDrawEventArgs e)
+		{
+			if (e.RowHandle % 2 == 0)
+				e.Appearance.BackColor = SystemColors.ControlLight;
 		}
 	}
 }

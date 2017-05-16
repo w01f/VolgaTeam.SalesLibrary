@@ -113,7 +113,7 @@
 			this.xtraTabControlLibraries.Name = "xtraTabControlLibraries";
 			this.xtraTabControlLibraries.Size = new System.Drawing.Size(643, 483);
 			this.xtraTabControlLibraries.TabIndex = 3;
-			this.xtraTabControlLibraries.SelectedPageChanged += new DevExpress.XtraTab.TabPageChangedEventHandler(this.xtraTabControlLibraries_SelectedPageChanged);
+			this.xtraTabControlLibraries.SelectedPageChanged += new DevExpress.XtraTab.TabPageChangedEventHandler(this.OnSelectedPageChanged);
 			// 
 			// styleController
 			// 

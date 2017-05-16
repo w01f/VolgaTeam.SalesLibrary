@@ -132,24 +132,25 @@
 			this.checkEditAllFiles.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.checkEditAllFiles.EditValue = true;
-			this.checkEditAllFiles.Enabled = false;
 			this.checkEditAllFiles.Location = new System.Drawing.Point(8, 338);
 			this.checkEditAllFiles.Name = "checkEditAllFiles";
+			this.checkEditAllFiles.Properties.AllowHtmlDraw = DevExpress.Utils.DefaultBoolean.True;
 			this.checkEditAllFiles.Properties.Caption = "All Links";
 			this.checkEditAllFiles.Properties.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Radio;
 			this.checkEditAllFiles.Properties.RadioGroupIndex = 1;
 			this.checkEditAllFiles.Size = new System.Drawing.Size(222, 20);
 			this.checkEditAllFiles.StyleController = this.styleController;
 			this.checkEditAllFiles.TabIndex = 19;
+			this.checkEditAllFiles.Visible = false;
 			this.checkEditAllFiles.CheckedChanged += new System.EventHandler(this.checkEditLinkTagFilter_CheckedChanged);
 			// 
 			// checkEditUntaggedLinks
 			// 
 			this.checkEditUntaggedLinks.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.checkEditUntaggedLinks.Enabled = false;
 			this.checkEditUntaggedLinks.Location = new System.Drawing.Point(8, 372);
 			this.checkEditUntaggedLinks.Name = "checkEditUntaggedLinks";
+			this.checkEditUntaggedLinks.Properties.AllowHtmlDraw = DevExpress.Utils.DefaultBoolean.True;
 			this.checkEditUntaggedLinks.Properties.Caption = "Un-Tagged Links";
 			this.checkEditUntaggedLinks.Properties.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Radio;
 			this.checkEditUntaggedLinks.Properties.RadioGroupIndex = 1;
@@ -157,15 +158,16 @@
 			this.checkEditUntaggedLinks.StyleController = this.styleController;
 			this.checkEditUntaggedLinks.TabIndex = 20;
 			this.checkEditUntaggedLinks.TabStop = false;
+			this.checkEditUntaggedLinks.Visible = false;
 			this.checkEditUntaggedLinks.CheckedChanged += new System.EventHandler(this.checkEditLinkTagFilter_CheckedChanged);
 			// 
 			// checkEditNoKeywordLinks
 			// 
 			this.checkEditNoKeywordLinks.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.checkEditNoKeywordLinks.Enabled = false;
 			this.checkEditNoKeywordLinks.Location = new System.Drawing.Point(8, 406);
 			this.checkEditNoKeywordLinks.Name = "checkEditNoKeywordLinks";
+			this.checkEditNoKeywordLinks.Properties.AllowHtmlDraw = DevExpress.Utils.DefaultBoolean.True;
 			this.checkEditNoKeywordLinks.Properties.Caption = "No Keyword Links";
 			this.checkEditNoKeywordLinks.Properties.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Radio;
 			this.checkEditNoKeywordLinks.Properties.RadioGroupIndex = 1;
@@ -173,6 +175,7 @@
 			this.checkEditNoKeywordLinks.StyleController = this.styleController;
 			this.checkEditNoKeywordLinks.TabIndex = 21;
 			this.checkEditNoKeywordLinks.TabStop = false;
+			this.checkEditNoKeywordLinks.Visible = false;
 			this.checkEditNoKeywordLinks.CheckedChanged += new System.EventHandler(this.checkEditLinkTagFilter_CheckedChanged);
 			// 
 			// LibraryFilter

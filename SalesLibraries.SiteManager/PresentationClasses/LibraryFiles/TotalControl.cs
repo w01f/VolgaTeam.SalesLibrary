@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Drawing.Printing;
 using System.Windows.Forms;
+using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraPrinting;
 using DevExpress.XtraTab;
 using SalesLibraries.ServiceConnector.StatisticService;
@@ -37,6 +39,12 @@ namespace SalesLibraries.SiteManager.PresentationClasses.LibraryFiles
 				Component = gridControlData
 			};
 			return printLink;
+		}
+
+		private void OnCustomDrawCell(object sender, RowCellCustomDrawEventArgs e)
+		{
+			if (e.RowHandle % 2 == 0)
+				e.Appearance.BackColor = SystemColors.ControlLight;
 		}
 	}
 }

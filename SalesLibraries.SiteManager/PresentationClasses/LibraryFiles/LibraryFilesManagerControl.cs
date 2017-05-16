@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using DevExpress.XtraPrinting;
+using DevExpress.XtraTab;
 using SalesLibraries.ServiceConnector.StatisticService;
 using SalesLibraries.SiteManager.BusinessClasses;
 using SalesLibraries.SiteManager.PresentationClasses.Common;
@@ -96,6 +97,7 @@ namespace SalesLibraries.SiteManager.PresentationClasses.LibraryFiles
 			_filterControlTotal.UpdateDataSource(filterDataSource);
 			_filterControlLibrary.UpdateDataSource(filterDataSource);
 			ApplyData();
+			OnSelectedPageChanged(xtraTabControlLibraries, new TabPageChangedEventArgs(null, xtraTabControlLibraries.SelectedTabPage));
 		}
 
 		public void ClearData()
@@ -191,19 +193,28 @@ namespace SalesLibraries.SiteManager.PresentationClasses.LibraryFiles
 				_filterControlLibrary.LinkTagFilterChanged += (o, e) => libraryPage.ApplyFilter(_filterControlLibrary);
 				libraryPage.ApplyFilter(_filterControlLibrary);
 				xtraTabControlLibraries.TabPages.Add(libraryPage);
-			}}
+			}
+		}
 
 		private void buttonXLoadData_Click(object sender, EventArgs e)
 		{
 			RefreshData(true);
 		}
 
-		private void xtraTabControlLibraries_SelectedPageChanged(object sender, DevExpress.XtraTab.TabPageChangedEventArgs e)
+		private void OnSelectedPageChanged(object sender, TabPageChangedEventArgs e)
 		{
 			if (e.Page is TotalControl)
 				_filterControlTotal.BringToFront();
 			else
+			{
+				var libraryPage = e.Page as LibraryControl;
+				if (libraryPage != null)
+					_filterControlLibrary.UpdateLiksInfo(
+						libraryPage.Records.Count,
+						libraryPage.Records.Count(r => !r.HasCategories),
+						libraryPage.Records.Count(r => !r.HasKeywords)
+						);
 				_filterControlLibrary.BringToFront();
-		}
-	}
+			}
+		}}
 }

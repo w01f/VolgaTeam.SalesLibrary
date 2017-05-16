@@ -28,18 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
+			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
 			this.gridControlData = new DevExpress.XtraGrid.GridControl();
 			this.advBandedGridViewData = new DevExpress.XtraGrid.Views.BandedGrid.AdvBandedGridView();
+			this.gridBandMain = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
 			this.gridColumnName = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
 			this.gridColumnFileName = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+			this.gridColumnTaggedFilesCount = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
 			this.gridColumnVideoCount = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+			this.gridColumnTaggedVideoCount = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
 			this.gridColumnFileDate = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
 			this.griodColumnDaysFormLastUpdate = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
 			this.repositoryItemHyperLinkEdit = new DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit();
-			this.gridColumnTaggedFilesCount = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-			this.gridColumnTaggedVideoCount = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-			this.gridBandMain = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
 			((System.ComponentModel.ISupportInitialize)(this.gridControlData)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.advBandedGridViewData)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemHyperLinkEdit)).BeginInit();
@@ -130,6 +130,22 @@
 			this.advBandedGridViewData.OptionsView.ShowIndicator = false;
 			this.advBandedGridViewData.OptionsView.ShowPreview = true;
 			this.advBandedGridViewData.RowHeight = 30;
+			this.advBandedGridViewData.CustomDrawCell += new DevExpress.XtraGrid.Views.Base.RowCellCustomDrawEventHandler(this.OnCustomDrawCell);
+			// 
+			// gridBandMain
+			// 
+			this.gridBandMain.Caption = "User:";
+			this.gridBandMain.Columns.Add(this.gridColumnName);
+			this.gridBandMain.Columns.Add(this.gridColumnFileName);
+			this.gridBandMain.Columns.Add(this.gridColumnTaggedFilesCount);
+			this.gridBandMain.Columns.Add(this.gridColumnVideoCount);
+			this.gridBandMain.Columns.Add(this.gridColumnTaggedVideoCount);
+			this.gridBandMain.Columns.Add(this.gridColumnFileDate);
+			this.gridBandMain.Columns.Add(this.griodColumnDaysFormLastUpdate);
+			this.gridBandMain.MinWidth = 20;
+			this.gridBandMain.Name = "gridBandMain";
+			this.gridBandMain.VisibleIndex = 0;
+			this.gridBandMain.Width = 896;
 			// 
 			// gridColumnName
 			// 
@@ -160,6 +176,22 @@
 			this.gridColumnFileName.Visible = true;
 			this.gridColumnFileName.Width = 120;
 			// 
+			// gridColumnTaggedFilesCount
+			// 
+			this.gridColumnTaggedFilesCount.AppearanceCell.Options.UseTextOptions = true;
+			this.gridColumnTaggedFilesCount.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+			this.gridColumnTaggedFilesCount.AppearanceHeader.Options.UseTextOptions = true;
+			this.gridColumnTaggedFilesCount.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+			this.gridColumnTaggedFilesCount.AutoFillDown = true;
+			this.gridColumnTaggedFilesCount.Caption = "Tagged";
+			this.gridColumnTaggedFilesCount.FieldName = "FilesTaggedCount";
+			this.gridColumnTaggedFilesCount.Name = "gridColumnTaggedFilesCount";
+			this.gridColumnTaggedFilesCount.OptionsColumn.AllowEdit = false;
+			this.gridColumnTaggedFilesCount.OptionsColumn.FixedWidth = true;
+			this.gridColumnTaggedFilesCount.OptionsColumn.ReadOnly = true;
+			this.gridColumnTaggedFilesCount.Visible = true;
+			this.gridColumnTaggedFilesCount.Width = 120;
+			// 
 			// gridColumnVideoCount
 			// 
 			this.gridColumnVideoCount.AppearanceCell.Options.UseTextOptions = true;
@@ -174,6 +206,21 @@
 			this.gridColumnVideoCount.OptionsColumn.ReadOnly = true;
 			this.gridColumnVideoCount.Visible = true;
 			this.gridColumnVideoCount.Width = 120;
+			// 
+			// gridColumnTaggedVideoCount
+			// 
+			this.gridColumnTaggedVideoCount.AppearanceCell.Options.UseTextOptions = true;
+			this.gridColumnTaggedVideoCount.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+			this.gridColumnTaggedVideoCount.AppearanceHeader.Options.UseTextOptions = true;
+			this.gridColumnTaggedVideoCount.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+			this.gridColumnTaggedVideoCount.Caption = "Tagged";
+			this.gridColumnTaggedVideoCount.FieldName = "VideoTaggedCount";
+			this.gridColumnTaggedVideoCount.Name = "gridColumnTaggedVideoCount";
+			this.gridColumnTaggedVideoCount.OptionsColumn.AllowEdit = false;
+			this.gridColumnTaggedVideoCount.OptionsColumn.FixedWidth = true;
+			this.gridColumnTaggedVideoCount.OptionsColumn.ReadOnly = true;
+			this.gridColumnTaggedVideoCount.Visible = true;
+			this.gridColumnTaggedVideoCount.Width = 120;
 			// 
 			// gridColumnFileDate
 			// 
@@ -211,55 +258,9 @@
 			// 
 			this.repositoryItemHyperLinkEdit.AutoHeight = false;
 			this.repositoryItemHyperLinkEdit.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, true, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::SalesLibraries.SiteManager.Properties.Resources.Url, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "Copy URL to Clipboard", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, true, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::SalesLibraries.SiteManager.Properties.Resources.Url, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "Copy URL to Clipboard", null, null, true)});
 			this.repositoryItemHyperLinkEdit.Name = "repositoryItemHyperLinkEdit";
 			this.repositoryItemHyperLinkEdit.SingleClick = true;
-			// 
-			// gridColumnTaggedFilesCount
-			// 
-			this.gridColumnTaggedFilesCount.AppearanceCell.Options.UseTextOptions = true;
-			this.gridColumnTaggedFilesCount.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-			this.gridColumnTaggedFilesCount.AppearanceHeader.Options.UseTextOptions = true;
-			this.gridColumnTaggedFilesCount.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-			this.gridColumnTaggedFilesCount.AutoFillDown = true;
-			this.gridColumnTaggedFilesCount.Caption = "Tagged";
-			this.gridColumnTaggedFilesCount.FieldName = "FilesTaggedCount";
-			this.gridColumnTaggedFilesCount.Name = "gridColumnTaggedFilesCount";
-			this.gridColumnTaggedFilesCount.OptionsColumn.AllowEdit = false;
-			this.gridColumnTaggedFilesCount.OptionsColumn.FixedWidth = true;
-			this.gridColumnTaggedFilesCount.OptionsColumn.ReadOnly = true;
-			this.gridColumnTaggedFilesCount.Visible = true;
-			this.gridColumnTaggedFilesCount.Width = 120;
-			// 
-			// gridColumnTaggedVideoCount
-			// 
-			this.gridColumnTaggedVideoCount.AppearanceCell.Options.UseTextOptions = true;
-			this.gridColumnTaggedVideoCount.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-			this.gridColumnTaggedVideoCount.AppearanceHeader.Options.UseTextOptions = true;
-			this.gridColumnTaggedVideoCount.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-			this.gridColumnTaggedVideoCount.Caption = "Tagged";
-			this.gridColumnTaggedVideoCount.FieldName = "VideoTaggedCount";
-			this.gridColumnTaggedVideoCount.Name = "gridColumnTaggedVideoCount";
-			this.gridColumnTaggedVideoCount.OptionsColumn.AllowEdit = false;
-			this.gridColumnTaggedVideoCount.OptionsColumn.FixedWidth = true;
-			this.gridColumnTaggedVideoCount.OptionsColumn.ReadOnly = true;
-			this.gridColumnTaggedVideoCount.Visible = true;
-			this.gridColumnTaggedVideoCount.Width = 120;
-			// 
-			// gridBandMain
-			// 
-			this.gridBandMain.Caption = "User:";
-			this.gridBandMain.Columns.Add(this.gridColumnName);
-			this.gridBandMain.Columns.Add(this.gridColumnFileName);
-			this.gridBandMain.Columns.Add(this.gridColumnTaggedFilesCount);
-			this.gridBandMain.Columns.Add(this.gridColumnVideoCount);
-			this.gridBandMain.Columns.Add(this.gridColumnTaggedVideoCount);
-			this.gridBandMain.Columns.Add(this.gridColumnFileDate);
-			this.gridBandMain.Columns.Add(this.griodColumnDaysFormLastUpdate);
-			this.gridBandMain.MinWidth = 20;
-			this.gridBandMain.Name = "gridBandMain";
-			this.gridBandMain.VisibleIndex = 0;
-			this.gridBandMain.Width = 896;
 			// 
 			// TotalControl
 			// 
