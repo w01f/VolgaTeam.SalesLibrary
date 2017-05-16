@@ -22,13 +22,13 @@
 			$querySettingsEncoded = Yii::app()->request->getPost('querySettings');
 			$viewSettingsEncoded = Yii::app()->request->getPost('viewSettings');
 
-			if (isset($feedType) && isset($querySettingsEncoded))
+			if (!empty($feedType) && isset($querySettingsEncoded))
 			{
 				$querySettings = LinkFeedQuerySettings::fromJson($feedType, CJSON::encode($querySettingsEncoded));
 				$feedItems = LinkFeedQueryHelper::queryFeedItems($querySettings);
 			}
 
-			if (isset($viewSettingsEncoded))
+			if (!empty($viewSettingsEncoded))
 				$viewSettings = HorizontalFeedSettings::fromJson($feedType, CJSON::encode($viewSettingsEncoded));
 
 			if (isset($viewSettings) && isset($feedItems))

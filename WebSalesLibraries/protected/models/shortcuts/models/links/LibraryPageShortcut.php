@@ -40,6 +40,18 @@
 			$this->pageName = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
 			$queryResult = $xpath->query('//Config/PageViewType');
 			$this->pageViewType = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : 'columns';
+
+			$userId = \UserIdentity::getCurrentUserId();
+			$isAdmin = \UserIdentity::isUserAdmin();
+			$assignedPageIds = \UserLibraryRecord::getPageIdsByUserAngHisGroups($userId);
+			$libraryPageRecord = Yii::app()->db->createCommand()
+				->select("p.*")
+				->from('tbl_page p')
+				->join('tbl_library l', 'l.id = p.id_library')
+				->where("p.name='" . $this->pageName . "' and l.name='" . $this->libraryName . "'")
+				->queryRow();
+			$this->isAccessGranted &= isset($libraryPageRecord) && ($isAdmin || in_array($libraryPageRecord['id'], $assignedPageIds));
+
 		}
 
 		public function loadPageConfig()

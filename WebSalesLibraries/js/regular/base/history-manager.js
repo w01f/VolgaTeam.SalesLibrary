@@ -46,7 +46,7 @@
 			if (pushHistory && customParameters && customParameters.pushHistory)
 			{
 				var currentSate = window.history.state;
-				if (currentSate && currentSate.itemType == HistoryShortcutItem)
+				if (currentSate && currentSate.itemType === HistoryShortcutItem)
 				{
 					var newParameters = currentSate.customParameters;
 					newParameters.scrollPosition = $.SalesPortal.Content.getContentObject().scrollTop();
@@ -55,17 +55,17 @@
 						shortcutData: currentSate.shortcutData,
 						customParameters: newParameters
 					};
-					var prevTitle = currentSate.shortcutData != undefined ? $.parseJSON($(currentSate.shortcutData).find('.activity-data').text()) : undefined;
-					if (prevTitle != undefined)
+					var prevTitle = currentSate.shortcutData !== undefined ? $.parseJSON($(currentSate.shortcutData).find('.activity-data').text()) : undefined;
+					if (prevTitle !== undefined)
 						window.history.replaceState(newSate, prevTitle);
 				}
 
 				customParameters.pushHistory = false;
-				var title = data != undefined ? $.parseJSON(data.find('.activity-data').text()) : undefined;
+				var title = data !== undefined ? $.parseJSON(data.find('.activity-data').text()) : undefined;
 				window.history.pushState(
 					{
 						itemType: HistoryShortcutItem,
-						shortcutData: data != undefined ? ('<div class="service-data">' + data.html() + '</div>') : undefined,
+						shortcutData: data !== undefined ? ('<div class="service-data">' + data.html() + '</div>') : undefined,
 						customParameters: customParameters
 					},
 					title

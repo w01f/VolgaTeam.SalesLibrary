@@ -15,6 +15,42 @@
 		/** @var SearchBar */
 		public $searchBar;
 
+		/**
+		 * @param $linkRecord
+		 * @param $isPhone boolean
+		 */
+		public function __construct($linkRecord, $isPhone)
+		{
+			parent::__construct($linkRecord, $isPhone);
+
+			$linkConfig = new DOMDocument();
+			$linkConfig->loadXML($this->linkRecord->config);
+			$xpath = new DomXPath($linkConfig);
+
+			$queryResult = $xpath->query('//Config/Library');
+			$libraryName = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : '';
+
+			$queryResult = $xpath->query('//Config/Page');
+			$pageName = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : '';
+
+			$queryResult = $xpath->query('//Config/Window');
+			$windowName = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : '';
+
+			$userId = \UserIdentity::getCurrentUserId();
+			$isAdmin = \UserIdentity::isUserAdmin();
+			$assignedPageIds = \UserLibraryRecord::getPageIdsByUserAngHisGroups($userId);
+
+			$windowRecord = Yii::app()->db->createCommand()
+				->select("f.*")
+				->from('tbl_folder f')
+				->join('tbl_page p', 'p.id = f.id_page')
+				->join('tbl_library l', 'l.id = p.id_library')
+				->where("f.name='" . $windowName . "' and p.name='" . $pageName . "' and l.name='" . $libraryName . "'")
+				->queryRow();
+
+			$this->isAccessGranted &= isset($windowRecord) && ($isAdmin || in_array($windowRecord['id_page'], $assignedPageIds));
+		}
+
 		public function loadPageConfig()
 		{
 			if ($this->isPhone != true)

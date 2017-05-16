@@ -73,6 +73,7 @@
 		 */
 		public static function getLibraryIdsByUser($userId)
 		{
+			/** @var UserLibraryRecord[] $userLibraryRecords */
 			$userLibraryRecords = self::model()->findAll('id_user=?', array($userId));
 			if (isset($userLibraryRecords))
 				foreach ($userLibraryRecords as $userLibraryRecord)
@@ -89,11 +90,13 @@
 		public static function getLibraryIdsByUserAngHisGroups($userId)
 		{
 			$libraryIds = array();
+			/** @var UserLibraryRecord[] $userLibraryRecords */
 			$userLibraryRecords = self::model()->findAll('id_user=?', array($userId));
 			if (isset($userLibraryRecords))
 				foreach ($userLibraryRecords as $userLibraryRecord)
 					$libraryIds[] = $userLibraryRecord->id_library;
 
+			/** @var UserGroupRecord[] $userGroupRecords */
 			$userGroupRecords = UserGroupRecord::model()->findAll('id_user=?', array($userId));
 			if (isset($userGroupRecords))
 				foreach ($userGroupRecords as $userGroupRecord)
@@ -117,6 +120,7 @@
 		 */
 		public static function getPageIdsByUser($userId)
 		{
+			/** @var UserLibraryRecord[] $userLibraryRecords */
 			$userLibraryRecords = self::model()->findAll('id_user=?', array($userId));
 			if (isset($userLibraryRecords))
 				foreach ($userLibraryRecords as $userLibraryRecord)
@@ -132,11 +136,13 @@
 		 */
 		public static function getPageIdsByUserAngHisGroups($userId)
 		{
+			/** @var UserLibraryRecord[] $userLibraryRecords */
 			$userLibraryRecords = self::model()->findAll('id_user=?', array($userId));
 			if (isset($userLibraryRecords))
 				foreach ($userLibraryRecords as $userLibraryRecord)
 					$pageIds[] = $userLibraryRecord->id_page;
 
+			/** @var UserGroupRecord[] $userGroupRecords */
 			$userGroupRecords = UserGroupRecord::model()->findAll('id_user=?', array($userId));
 			if (isset($userGroupRecords))
 				foreach ($userGroupRecords as $userGroupRecord)
@@ -162,6 +168,7 @@
 		 */
 		public static function getUserIdsByPage($pageId)
 		{
+			/** @var UserLibraryRecord[] $userLibraryRecords */
 			$userLibraryRecords = self::model()->findAll('id_page=?', array($pageId));
 			if (isset($userLibraryRecords))
 				foreach ($userLibraryRecords as $userLibraryRecord)

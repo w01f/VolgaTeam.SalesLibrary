@@ -39,6 +39,16 @@
 			$this->pageViewType = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : 'columns';
 			$queryResult = $xpath->query('//Config/PageSelectorMode');
 			$this->pageSelectorMode = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : 'columns';
+
+			$userId = \UserIdentity::getCurrentUserId();
+			$isAdmin = \UserIdentity::isUserAdmin();
+			$availableLibraryIds = \UserLibraryRecord::getLibraryIdsByUserAngHisGroups($userId);
+			$libraryRecord = Yii::app()->db->createCommand()
+				->select("l.*")
+				->from('tbl_library l')
+				->where("l.name='" . $this->libraryName . "'")
+				->queryRow();
+			$this->isAccessGranted &= isset($libraryRecord) && ($isAdmin || in_array($libraryRecord['id'], $availableLibraryIds));
 		}
 
 		public function loadPageConfig()
