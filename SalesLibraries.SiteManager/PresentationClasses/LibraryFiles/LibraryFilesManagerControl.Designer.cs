@@ -111,7 +111,7 @@
 			this.xtraTabControlLibraries.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.xtraTabControlLibraries.Location = new System.Drawing.Point(0, 0);
 			this.xtraTabControlLibraries.Name = "xtraTabControlLibraries";
-			this.xtraTabControlLibraries.Size = new System.Drawing.Size(643, 483);
+			this.xtraTabControlLibraries.Size = new System.Drawing.Size(636, 483);
 			this.xtraTabControlLibraries.TabIndex = 3;
 			this.xtraTabControlLibraries.SelectedPageChanged += new DevExpress.XtraTab.TabPageChangedEventHandler(this.OnSelectedPageChanged);
 			// 

@@ -273,13 +273,13 @@ namespace SalesLibraries.FileManager.Business.Services
 					if (source is InternalWallbinLink)
 					{
 						target.extendedProperties = new InternalWallbinLinkSettings();
-						((InternalWallbinLinkSettings) target.extendedProperties).ImportData(
-							(SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings.InternalWallbinLinkSettings) source.Settings);
+						((InternalWallbinLinkSettings)target.extendedProperties).ImportData(
+							(SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings.InternalWallbinLinkSettings)source.Settings);
 					}
 					else if (source is InternalLibraryPageLink)
 					{
 						target.extendedProperties = new InternalLibraryPageLinkSettings();
-						((InternalLibraryPageLinkSettings) target.extendedProperties).ImportData(
+						((InternalLibraryPageLinkSettings)target.extendedProperties).ImportData(
 							(SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings.InternalLibraryPageLinkSettings)
 								source.Settings);
 					}
@@ -308,7 +308,7 @@ namespace SalesLibraries.FileManager.Business.Services
 				case FileTypes.LinkBundle:
 					target.extendedProperties = new LinkBundleLinkSettings();
 					target.searchFormat =
-						((SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings.LinkBundleLinkSettings) source.Settings)
+						((SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings.LinkBundleLinkSettings)source.Settings)
 							.CustomWebFormat;
 					((LinkBundleLinkSettings)target.extendedProperties).ImportData(
 						(SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings.LinkBundleLinkSettings)source.Settings);
@@ -388,7 +388,7 @@ namespace SalesLibraries.FileManager.Business.Services
 			if (fileCategories.Count > 0)
 				target.categories = fileCategories.ToArray();
 
-			var keywords = source.Tags.Keywords.Union(source.Tags.Keywords).ToList();
+			var keywords = source.Tags.Keywords.Union(source.TopLevelLink.Tags.Keywords).ToList();
 			if (keywords.Any())
 				target.tags = String.Join(" ", keywords.Select(x => x.Name).ToArray());
 			#endregion
@@ -455,7 +455,7 @@ namespace SalesLibraries.FileManager.Business.Services
 			target.forcePreview = source.ForcePreview;
 			target.qpageId = source.QuickSiteId;
 		}
-		
+
 		private static void ImportData(
 			this AppLinkSettings target,
 			SalesLibraries.Business.Entities.Wallbin.NonPersistent.LinkSettings.AppLinkSettings source)

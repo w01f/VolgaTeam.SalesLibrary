@@ -216,5 +216,6 @@ namespace SalesLibraries.SiteManager.PresentationClasses.LibraryFiles
 						);
 				_filterControlLibrary.BringToFront();
 			}
-		}}
+		}
+	}
 }

@@ -9,7 +9,7 @@ using SalesLibraries.Common.Configuration;
 
 namespace SalesLibraries.Business.Schema.Wallbin.Initialization
 {
-	abstract class WallbinInitializer<TLibraryContext> : IDatabaseInitializer<TLibraryContext>
+	public abstract class WallbinInitializer<TLibraryContext> : IDatabaseInitializer<TLibraryContext>
 		where TLibraryContext : LibraryContext
 	{
 		private const int CurrentRevision = 7;

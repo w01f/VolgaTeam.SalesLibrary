@@ -64,6 +64,7 @@
     </Compile>
     <Compile Include="Json\RestJsonSerializationStrategy.cs" />
     <Compile Include="Models\Rest\AppMetaData\MetaDataGetRequestData.cs" />
+    <Compile Include="Models\Rest\BatchTagger\BatchTaggerSetRequestData.cs" />
     <Compile Include="Models\Rest\Common\RequestBody.cs" />
     <Compile Include="Models\Rest\Connection\ConnectionGetRequestData.cs" />
     <Compile Include="Models\Rest\Common\IRequestData.cs" />

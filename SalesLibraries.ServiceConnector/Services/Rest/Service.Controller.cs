@@ -26,12 +26,13 @@ namespace SalesLibraries.ServiceConnector.Services.Rest
 			else
 				request.AddBody(new RequestBody { DataEncoded = data.Encode() });
 
-			request.AddParameter("XDEBUG_SESSION_START", "17155", ParameterType.QueryString);
-			
+			request.AddParameter("XDEBUG_SESSION_START", "12624", ParameterType.QueryString);
+
 			var response = client.Execute(request);
 			return response.Decode();
 		}
 
+		
 		public RestResponse DoRequest(IRequestData data, string exceptionText)
 		{
 			RestResponse response;

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesLibraries.FileManager", "SalesLibraries.FileManager\SalesLibraries.FileManager.csproj", "{3223EC26-E88B-4E9A-A8C0-72E49177E3FD}"
 EndProject
@@ -22,6 +22,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesLibraries.FileManager.Silent", "SalesLibraries.FileManager.Silent\SalesLibraries.FileManager.Silent.csproj", "{203DC284-E0D5-473B-AB17-186670F89C72}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesLibraries.Cloner", "SalesLibraries.Cloner\SalesLibraries.Cloner.csproj", "{872D4E03-4AF4-4CDF-BB9C-05107B74E255}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesLibraries.BatchTagger", "SalesLibraries.BatchTagger\SalesLibraries.BatchTagger.csproj", "{801A2603-B5CA-4178-AD30-0F6F2F9FC0C7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -71,6 +73,10 @@ Global
 		{872D4E03-4AF4-4CDF-BB9C-05107B74E255}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{872D4E03-4AF4-4CDF-BB9C-05107B74E255}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{872D4E03-4AF4-4CDF-BB9C-05107B74E255}.Release|Any CPU.Build.0 = Release|Any CPU
+		{801A2603-B5CA-4178-AD30-0F6F2F9FC0C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{801A2603-B5CA-4178-AD30-0F6F2F9FC0C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{801A2603-B5CA-4178-AD30-0F6F2F9FC0C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{801A2603-B5CA-4178-AD30-0F6F2F9FC0C7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

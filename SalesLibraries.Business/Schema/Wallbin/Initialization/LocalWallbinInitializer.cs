@@ -4,7 +4,7 @@ using SalesLibraries.Business.Entities.Wallbin.Persistent;
 
 namespace SalesLibraries.Business.Schema.Wallbin.Initialization
 {
-	class LocalWallbinInitializer : WallbinInitializer<LocalLibraryContext>
+	public class LocalWallbinInitializer : WallbinInitializer<LocalLibraryContext>
 	{
 		protected override void Seed()
 		{
