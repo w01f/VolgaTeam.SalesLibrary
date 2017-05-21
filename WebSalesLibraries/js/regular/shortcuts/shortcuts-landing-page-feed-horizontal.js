@@ -90,22 +90,51 @@
 			})
 		};
 
+		var time;
 		var initCarouselControls = function ()
 		{
 			var leftButton = feedContainer.find('.portfolio_utube_carousel_control_left');
+			var rightButton = feedContainer.find('.portfolio_utube_carousel_control_right');
+
 			leftButton.prop('href', '#');
 			leftButton.on('click', function ()
 			{
 				$(this).blur();
-				feedContainer.find('.carousel').carousel('prev');
+
+				var carouselFade = feedContainer.find('.carousel-fade');
+				if (carouselFade.length > 0 && rightButton.length > 0)
+				{
+					carouselFade.removeClass('carousel-fade');
+					feedContainer.find('.carousel').carousel('prev');
+					clearTimeout(time);
+					time = setTimeout(function ()
+					{
+						carouselFade.addClass('carousel-fade');
+					}, 1000);
+				}
+				else
+					feedContainer.find('.carousel').carousel('prev');
 			});
-			var rightButton = feedContainer.find('.portfolio_utube_carousel_control_right');
+
 			rightButton.prop('href', '#');
 			rightButton.off('click').on('click', function ()
 			{
 				$(this).blur();
-				feedContainer.find('.carousel').carousel('next');
-			})
+
+				var carouselFade = feedContainer.find('.carousel-fade');
+				if (carouselFade.length > 0 && leftButton.length > 0)
+				{
+					carouselFade.removeClass('carousel-fade');
+					feedContainer.find('.carousel').carousel('next');
+					clearTimeout(time);
+					time = setTimeout(function ()
+					{
+						carouselFade.addClass('carousel-fade');
+					}, 1000);
+				}
+				else
+					feedContainer.find('.carousel').carousel('next');
+			});
 		};
 
 		var initSlider = function ()
@@ -149,6 +178,29 @@
 					linkId: linkId,
 					isQuickSite: false
 				});
+			});
+
+			feedContainer.find('.carousel').hover(function ()
+			{
+				$(this).carousel('pause')
+			}, function ()
+			{
+				$(this).carousel('cycle')
+			});
+
+			feedContainer.on('mousewheel DOMMouseScroll', function (event)
+			{
+				event.stopPropagation();
+				event.preventDefault();
+
+				if (event.originalEvent.wheelDelta > 0 || event.originalEvent.detail < 0)
+				{
+					feedContainer.find('.carousel').carousel('prev');
+				}
+				else
+				{
+					feedContainer.find('.carousel').carousel('next');
+				}
 			});
 
 			$.SalesPortal.ShortcutsManager.assignShortcutItemHandlers(feedContainer);

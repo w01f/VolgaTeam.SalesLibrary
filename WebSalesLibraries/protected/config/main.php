@@ -73,6 +73,7 @@
 			'application.models.services_data.cadmin.models.connection.*',
 			'application.models.services_data.cadmin.models.library_data.*',
 			'application.models.services_data.cadmin.models.versions_management.*',
+			'application.models.services_data.batch_tagger.*',
 			'application.models.feeds.common.*',
 			'application.models.feeds.horizontal.*',
 			'application.models.feeds.vertical.*',
@@ -100,6 +101,7 @@
 				'rules' => array(
 					// REST patterns
 					array('fileManagerData/get', 'pattern' => 'FileManagerData/<model:\w+>', 'verb' => 'POST'),
+					array('fileManagerData/set', 'pattern' => 'FileManagerData/<model:\w+>', 'verb' => 'PUT'),
 					array('cloudAdmin/get', 'pattern' => 'CloudAdmin/<model:\w+>', 'verb' => 'POST'),
 					array('cloudAdmin/set', 'pattern' => 'CloudAdmin/<model:\w+>', 'verb' => 'PUT'),
 					// Other patterns

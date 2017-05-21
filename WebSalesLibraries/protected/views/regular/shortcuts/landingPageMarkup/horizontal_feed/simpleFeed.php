@@ -18,30 +18,60 @@
 
 	$carouseOneMoveClass = 'one-link-move';
 	$itemColumnClass = '';
-	switch ($viewSettings->linksPerSlide)
+	if($viewSettings->linksScrollMode === FeedSettings::LinksScrollModeLink)
 	{
-		case FeedSettings::LinksPerSlide1:
-			$itemColumnClass = 'col-xs-12 col-sm-12 col-md-12';
-			break;
-		case FeedSettings::LinksPerSlide2:
-			$itemColumnClass = 'col-xs-12 col-sm-6 col-md-6';
-			$carouseOneMoveClass .= ' two_shows_one_move';
-			break;
-		case FeedSettings::LinksPerSlide3:
-			$itemColumnClass = 'col-xs-12 col-sm-4 col-md-4';
-			$carouseOneMoveClass .= ' three_shows_one_move';
-			break;
-		case FeedSettings::LinksPerSlide4:
-			$itemColumnClass = 'col-xs-12 col-sm-6 col-md-3';
-			$carouseOneMoveClass .= ' four_shows_one_move';
-			break;
-		case FeedSettings::LinksPerSlide6:
-			$itemColumnClass = 'col-xs-12 col-sm-4 col-md-2';
-			$carouseOneMoveClass .= ' six_shows_one_move';
-			break;
+		$carouseOneMoveClass .= ' carousel-link';
+		switch ($viewSettings->linksPerSlide)
+		{
+			case FeedSettings::LinksPerSlide1:
+				$itemColumnClass = 'col-xs-12 col-sm-12 col-md-12';
+				break;
+			case FeedSettings::LinksPerSlide2:
+				$itemColumnClass = 'col-xs-12 col-sm-6 col-md-6';
+				$carouseOneMoveClass .= ' two_shows_one_move';
+				break;
+			case FeedSettings::LinksPerSlide3:
+				$itemColumnClass = 'col-xs-12 col-sm-4 col-md-4';
+				$carouseOneMoveClass .= ' three_shows_one_move';
+				break;
+			case FeedSettings::LinksPerSlide4:
+				$itemColumnClass = 'col-xs-12 col-sm-6 col-md-3';
+				$carouseOneMoveClass .= ' four_shows_one_move';
+				break;
+			case FeedSettings::LinksPerSlide6:
+				$itemColumnClass = 'col-xs-12 col-sm-4 col-md-2';
+				$carouseOneMoveClass .= ' six_shows_one_move';
+				break;
+		}
+	}
+	else if($viewSettings->linksScrollMode === FeedSettings::LinksScrollModeFade)
+	{
+		$carouseOneMoveClass .= ' carousel-slide carousel-fade';
+		switch ($viewSettings->linksPerSlide)
+		{
+			case FeedSettings::LinksPerSlide1:
+				$itemColumnClass = 'col-xs-12 col-sm-12 col-md-12';
+				break;
+			case FeedSettings::LinksPerSlide2:
+				$itemColumnClass = 'col-xs-12 col-sm-6 col-md-6 col-lg-6';
+				$carouseOneMoveClass .= ' two_shows_one_move';
+				break;
+			case FeedSettings::LinksPerSlide3:
+				$itemColumnClass = 'col-xs-12 col-sm-6 col-md-4 col-lg-4';
+				$carouseOneMoveClass .= ' three_shows_one_move';
+				break;
+			case FeedSettings::LinksPerSlide4:
+				$itemColumnClass = 'col-xs-12 col-sm-6 col-md-4 col-lg-3';
+				$carouseOneMoveClass .= ' four_shows_one_move';
+				break;
+			case FeedSettings::LinksPerSlide6:
+				$itemColumnClass = 'col-xs-12 col-sm-4 col-md-3 col-lg-2';
+				$carouseOneMoveClass .= ' six_shows_one_move';
+				break;
+		}
 	}
 
-	$linksPerSlide = $viewSettings->linksScrollMode === FeedSettings::LinksScrollModeLink ?
+	$linksPerSlide = $viewSettings->linksScrollMode !== FeedSettings::LinksScrollModeSlide ?
 		1:
 		$viewSettings->linksPerSlide;
 ?>
@@ -92,7 +122,7 @@
 		</div>
 	</div>
 	<div id="horizontal-feed-carousel-<? echo $feedId; ?>"
-	     class="col-xs-12 carousel slide portfolio_utube_carousel_wrapper<? echo $viewSettings->linksScrollMode === FeedSettings::LinksScrollModeLink ? (' ' . $carouseOneMoveClass) : ''; ?><? if ($viewSettings->slideShow == true): ?> carousel-slide-show<? endif; ?><? if ($viewSettings->linksScrollMode === FeedSettings::LinksScrollModeFade): ?> carousel-fade<? endif; ?>"
+	     class="col-xs-12 carousel slide portfolio_utube_carousel_wrapper<? echo $viewSettings->linksScrollMode !== FeedSettings::LinksScrollModeSlide ? (' ' . $carouseOneMoveClass) : ''; ?><? if ($viewSettings->slideShow == true): ?> carousel-slide-show<? endif; ?>"
 	     <? if ($viewSettings->slideShow === true): ?>data-interval="<? echo $viewSettings->slideShowInterval; ?>"
 	     <? else: ?>data-interval="false"<? endif; ?>>
 		<div class="carousel-inner" role="listbox">

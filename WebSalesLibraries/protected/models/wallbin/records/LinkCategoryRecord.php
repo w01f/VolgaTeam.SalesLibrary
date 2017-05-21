@@ -27,10 +27,13 @@
 		}
 
 		/**
-		 * @param $category
+		 * @param $category array
 		 */
 		public static function updateData($category)
 		{
+			if(!is_array($category))
+				$category = CJSON::decode(CJSON::encode($category),true);
+
 			$categoryRecord = new LinkCategoryRecord();
 			$categoryRecord->id_link = $category['linkId'];
 			$categoryRecord->id_library = $category['libraryId'];

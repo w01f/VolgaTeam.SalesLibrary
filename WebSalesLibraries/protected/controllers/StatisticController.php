@@ -384,9 +384,12 @@
 				$resultRecords = $command->queryAll();
 				foreach ($resultRecords as $resultRecord)
 				{
+					$libraryRelativePath = DIRECTORY_SEPARATOR . Yii::app()->params['librariesRoot'] . DIRECTORY_SEPARATOR . $resultRecord['library_path'];
+
 					$libraryFilesModel = new LibraryFilesModel();
 					$libraryFilesModel->library = $resultRecord['library'];
 					$libraryFilesModel->libraryDate = $resultRecord['library_date'];
+					$libraryFilesModel->linkId = $resultRecord['link_id'];
 					$libraryFilesModel->linkName = $resultRecord['link_name'];
 					$libraryFilesModel->fileName = $resultRecord['file_name'];
 					$libraryFilesModel->fileType = $resultRecord['file_type'];
@@ -394,9 +397,8 @@
 					$libraryFilesModel->categories = $resultRecord['categories'];
 					$libraryFilesModel->keywords = $resultRecord['keywords'];
 
+					$libraryFilesModel->libraryDatabaseUrl = Yii::app()->getBaseUrl(true) . Utils::formatUrl($libraryRelativePath .DIRECTORY_SEPARATOR. 'z_library_data_local.sqlite');
 					$libraryFilesModel->previewUrl = Yii::app()->createAbsoluteUrl('preview/getSingleInternalLink', array('linkId' => $resultRecord['link_id']));
-
-					$libraryRelativePath = DIRECTORY_SEPARATOR . Yii::app()->params['librariesRoot'] . DIRECTORY_SEPARATOR . $resultRecord['library_path'];
 					$libraryFilesModel->downloadUrl = $resultRecord['file_path'] != '' ? Yii::app()->getBaseUrl(true) . Utils::formatUrl($libraryRelativePath . $resultRecord['file_path']) : '';
 
 					$libraryFilesModel->fileDate = $resultRecord['file_date'];
