@@ -28,11 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormEditLinkTags));
 			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
+			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
+			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
 			this.buttonXOK = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXCancel = new DevComponents.DotNetBar.ButtonX();
-			this.styleController = new DevExpress.XtraEditors.StyleController();
+			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
 			this.labelControlTitle = new DevExpress.XtraEditors.LabelControl();
 			this.panelTopControls = new System.Windows.Forms.Panel();
 			this.panelTopControlsCategories = new System.Windows.Forms.Panel();
@@ -53,14 +56,17 @@
 			this.panelControlCategoriesInfoInner = new DevExpress.XtraEditors.PanelControl();
 			this.xtraScrollableControlCategoriesInfo = new DevExpress.XtraEditors.XtraScrollableControl();
 			this.labelControlCategoriesInfo = new DevExpress.XtraEditors.LabelControl();
-			this.imageCollectionCategories = new DevExpress.Utils.ImageCollection();
+			this.imageCollectionCategories = new DevExpress.Utils.ImageCollection(this.components);
 			this.xtraTabPageKeywords = new DevExpress.XtraTab.XtraTabPage();
 			this.buttonXAddKeyWord = new DevComponents.DotNetBar.ButtonX();
 			this.gridControlKeywords = new DevExpress.XtraGrid.GridControl();
 			this.gridViewKeywords = new DevExpress.XtraGrid.Views.Grid.GridView();
 			this.gridColumnKeywordsValue = new DevExpress.XtraGrid.Columns.GridColumn();
-			this.repositoryItemButtonEditKeyword = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
+			this.repositoryItemButtonEditKeywordShared = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
+			this.repositoryItemButtonEditKeywordPartial = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
 			this.panelMainContainer = new System.Windows.Forms.Panel();
+			this.panelFilesContainer = new System.Windows.Forms.Panel();
+			this.linksTreeSelector = new SalesLibraries.BatchTagger.PresentationLayer.LinksTreeSelectorControl();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			this.panelTopControls.SuspendLayout();
 			this.panelTopControlsCategories.SuspendLayout();
@@ -82,8 +88,10 @@
 			this.xtraTabPageKeywords.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.gridControlKeywords)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.gridViewKeywords)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditKeyword)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditKeywordShared)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditKeywordPartial)).BeginInit();
 			this.panelMainContainer.SuspendLayout();
+			this.panelFilesContainer.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// buttonXOK
@@ -92,7 +100,7 @@
 			this.buttonXOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXOK.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-			this.buttonXOK.Location = new System.Drawing.Point(737, 523);
+			this.buttonXOK.Location = new System.Drawing.Point(937, 564);
 			this.buttonXOK.Name = "buttonXOK";
 			this.buttonXOK.Size = new System.Drawing.Size(79, 34);
 			this.buttonXOK.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -106,7 +114,7 @@
 			this.buttonXCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXCancel.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.buttonXCancel.Location = new System.Drawing.Point(847, 523);
+			this.buttonXCancel.Location = new System.Drawing.Point(1047, 564);
 			this.buttonXCancel.Name = "buttonXCancel";
 			this.buttonXCancel.Size = new System.Drawing.Size(79, 34);
 			this.buttonXCancel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -147,7 +155,7 @@
 			this.labelControlTitle.ImageAlignToText = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
 			this.labelControlTitle.Location = new System.Drawing.Point(1, 0);
 			this.labelControlTitle.Name = "labelControlTitle";
-			this.labelControlTitle.Size = new System.Drawing.Size(614, 48);
+			this.labelControlTitle.Size = new System.Drawing.Size(814, 48);
 			this.labelControlTitle.StyleController = this.styleController;
 			this.labelControlTitle.TabIndex = 49;
 			this.labelControlTitle.Text = "<size=+4>{0}</size>";
@@ -160,7 +168,7 @@
 			this.panelTopControls.Controls.Add(this.panelTopControlsCategories);
 			this.panelTopControls.Controls.Add(this.panelTopControlsKeywords);
 			this.panelTopControls.ForeColor = System.Drawing.Color.Black;
-			this.panelTopControls.Location = new System.Drawing.Point(621, 0);
+			this.panelTopControls.Location = new System.Drawing.Point(821, 0);
 			this.panelTopControls.Name = "panelTopControls";
 			this.panelTopControls.Size = new System.Drawing.Size(310, 48);
 			this.panelTopControls.TabIndex = 50;
@@ -284,10 +292,10 @@
 			this.xtraTabControl.AppearancePage.PageClient.Font = new System.Drawing.Font("Arial", 9.75F);
 			this.xtraTabControl.AppearancePage.PageClient.Options.UseFont = true;
 			this.xtraTabControl.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.xtraTabControl.Location = new System.Drawing.Point(0, 0);
+			this.xtraTabControl.Location = new System.Drawing.Point(300, 0);
 			this.xtraTabControl.Name = "xtraTabControl";
 			this.xtraTabControl.SelectedTabPage = this.xtraTabPageCategories;
-			this.xtraTabControl.Size = new System.Drawing.Size(930, 458);
+			this.xtraTabControl.Size = new System.Drawing.Size(830, 504);
 			this.xtraTabControl.TabIndex = 52;
 			this.xtraTabControl.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.xtraTabPageCategories,
@@ -302,7 +310,7 @@
 			this.xtraTabPageCategories.Controls.Add(this.panelCategoriesInfo);
 			this.xtraTabPageCategories.Name = "xtraTabPageCategories";
 			this.xtraTabPageCategories.Padding = new System.Windows.Forms.Padding(5);
-			this.xtraTabPageCategories.Size = new System.Drawing.Size(928, 430);
+			this.xtraTabPageCategories.Size = new System.Drawing.Size(824, 473);
 			this.xtraTabPageCategories.Text = "Category Tags";
 			// 
 			// splitContainerCategories
@@ -325,7 +333,7 @@
 			this.splitContainerCategories.Panel2.Appearance.Options.UseBackColor = true;
 			this.splitContainerCategories.Panel2.Appearance.Options.UseForeColor = true;
 			this.splitContainerCategories.Panel2.Text = "Panel2";
-			this.splitContainerCategories.Size = new System.Drawing.Size(624, 420);
+			this.splitContainerCategories.Size = new System.Drawing.Size(520, 463);
 			this.splitContainerCategories.SplitterPosition = 250;
 			this.splitContainerCategories.TabIndex = 2;
 			this.splitContainerCategories.Text = "splitContainerControl1";
@@ -360,7 +368,7 @@
 			this.treeListCategories.OptionsView.ShowVertLines = false;
 			this.treeListCategories.RowHeight = 25;
 			this.treeListCategories.ShowButtonMode = DevExpress.XtraTreeList.ShowButtonModeEnum.ShowForFocusedRow;
-			this.treeListCategories.Size = new System.Drawing.Size(250, 382);
+			this.treeListCategories.Size = new System.Drawing.Size(250, 425);
 			this.treeListCategories.TabIndex = 3;
 			this.treeListCategories.NodeCellStyle += new DevExpress.XtraTreeList.GetCustomNodeCellStyleEventHandler(this.OnCategoriesNodeCellStyle);
 			this.treeListCategories.BeforeCollapse += new DevExpress.XtraTreeList.BeforeCollapseEventHandler(this.OnCategoriesBeforeCollapse);
@@ -424,10 +432,10 @@
 			this.panelCategoriesInfo.Controls.Add(this.panelControlCategoriesInfoInner);
 			this.panelCategoriesInfo.Dock = System.Windows.Forms.DockStyle.Right;
 			this.panelCategoriesInfo.ForeColor = System.Drawing.Color.Black;
-			this.panelCategoriesInfo.Location = new System.Drawing.Point(629, 5);
+			this.panelCategoriesInfo.Location = new System.Drawing.Point(525, 5);
 			this.panelCategoriesInfo.Name = "panelCategoriesInfo";
 			this.panelCategoriesInfo.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-			this.panelCategoriesInfo.Size = new System.Drawing.Size(294, 420);
+			this.panelCategoriesInfo.Size = new System.Drawing.Size(294, 463);
 			this.panelCategoriesInfo.TabIndex = 3;
 			// 
 			// panelControlCategoriesInfoInner
@@ -440,7 +448,7 @@
 			this.panelControlCategoriesInfoInner.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panelControlCategoriesInfoInner.Location = new System.Drawing.Point(5, 0);
 			this.panelControlCategoriesInfoInner.Name = "panelControlCategoriesInfoInner";
-			this.panelControlCategoriesInfoInner.Size = new System.Drawing.Size(289, 420);
+			this.panelControlCategoriesInfoInner.Size = new System.Drawing.Size(289, 463);
 			this.panelControlCategoriesInfoInner.TabIndex = 52;
 			// 
 			// xtraScrollableControlCategoriesInfo
@@ -454,7 +462,7 @@
 			this.xtraScrollableControlCategoriesInfo.Location = new System.Drawing.Point(2, 2);
 			this.xtraScrollableControlCategoriesInfo.Name = "xtraScrollableControlCategoriesInfo";
 			this.xtraScrollableControlCategoriesInfo.Padding = new System.Windows.Forms.Padding(5);
-			this.xtraScrollableControlCategoriesInfo.Size = new System.Drawing.Size(285, 416);
+			this.xtraScrollableControlCategoriesInfo.Size = new System.Drawing.Size(285, 459);
 			this.xtraScrollableControlCategoriesInfo.TabIndex = 0;
 			// 
 			// labelControlCategoriesInfo
@@ -491,7 +499,7 @@
 			this.xtraTabPageKeywords.Controls.Add(this.buttonXAddKeyWord);
 			this.xtraTabPageKeywords.Controls.Add(this.gridControlKeywords);
 			this.xtraTabPageKeywords.Name = "xtraTabPageKeywords";
-			this.xtraTabPageKeywords.Size = new System.Drawing.Size(928, 430);
+			this.xtraTabPageKeywords.Size = new System.Drawing.Size(824, 473);
 			this.xtraTabPageKeywords.Text = "Keyword Tags";
 			// 
 			// buttonXAddKeyWord
@@ -524,8 +532,9 @@
 			this.gridControlKeywords.MainView = this.gridViewKeywords;
 			this.gridControlKeywords.Name = "gridControlKeywords";
 			this.gridControlKeywords.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
-            this.repositoryItemButtonEditKeyword});
-			this.gridControlKeywords.Size = new System.Drawing.Size(907, 378);
+            this.repositoryItemButtonEditKeywordShared,
+            this.repositoryItemButtonEditKeywordPartial});
+			this.gridControlKeywords.Size = new System.Drawing.Size(803, 421);
 			this.gridControlKeywords.TabIndex = 7;
 			this.gridControlKeywords.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewKeywords});
@@ -562,26 +571,46 @@
 			this.gridViewKeywords.OptionsView.ShowIndicator = false;
 			this.gridViewKeywords.OptionsView.ShowPreviewRowLines = DevExpress.Utils.DefaultBoolean.False;
 			this.gridViewKeywords.RowHeight = 35;
+			this.gridViewKeywords.RowCellStyle += new DevExpress.XtraGrid.Views.Grid.RowCellStyleEventHandler(this.OnKeywordsGridRowCellStyle);
+			this.gridViewKeywords.CustomRowCellEdit += new DevExpress.XtraGrid.Views.Grid.CustomRowCellEditEventHandler(this.OnKeywordsGridCustomRowCellEdit);
 			// 
 			// gridColumnKeywordsValue
 			// 
 			this.gridColumnKeywordsValue.Caption = "Value";
-			this.gridColumnKeywordsValue.ColumnEdit = this.repositoryItemButtonEditKeyword;
+			this.gridColumnKeywordsValue.ColumnEdit = this.repositoryItemButtonEditKeywordShared;
 			this.gridColumnKeywordsValue.FieldName = "Name";
 			this.gridColumnKeywordsValue.Name = "gridColumnKeywordsValue";
 			this.gridColumnKeywordsValue.ShowButtonMode = DevExpress.XtraGrid.Views.Base.ShowButtonModeEnum.ShowAlways;
 			this.gridColumnKeywordsValue.Visible = true;
 			this.gridColumnKeywordsValue.VisibleIndex = 0;
 			// 
-			// repositoryItemButtonEditKeyword
+			// repositoryItemButtonEditKeywordShared
 			// 
-			this.repositoryItemButtonEditKeyword.AutoHeight = false;
-			this.repositoryItemButtonEditKeyword.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+			this.repositoryItemButtonEditKeywordShared.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.repositoryItemButtonEditKeywordShared.Appearance.Options.UseFont = true;
+			this.repositoryItemButtonEditKeywordShared.AppearanceDisabled.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.repositoryItemButtonEditKeywordShared.AppearanceDisabled.Options.UseFont = true;
+			this.repositoryItemButtonEditKeywordShared.AppearanceFocused.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.repositoryItemButtonEditKeywordShared.AppearanceFocused.Options.UseFont = true;
+			this.repositoryItemButtonEditKeywordShared.AppearanceReadOnly.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.repositoryItemButtonEditKeywordShared.AppearanceReadOnly.Options.UseFont = true;
+			this.repositoryItemButtonEditKeywordShared.AutoHeight = false;
+			this.repositoryItemButtonEditKeywordShared.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::SalesLibraries.BatchTagger.Properties.Resources.ButtonDelete, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "Delete", "Delete", null, true)});
-			this.repositoryItemButtonEditKeyword.Name = "repositoryItemButtonEditKeyword";
-			this.repositoryItemButtonEditKeyword.NullText = "Type Keyword...";
-			this.repositoryItemButtonEditKeyword.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-			this.repositoryItemButtonEditKeyword.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.OnKeywordsEditorButtonClick);
+			this.repositoryItemButtonEditKeywordShared.Name = "repositoryItemButtonEditKeywordShared";
+			this.repositoryItemButtonEditKeywordShared.NullText = "Type Keyword...";
+			this.repositoryItemButtonEditKeywordShared.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.OnKeywordsEditorButtonClick);
+			// 
+			// repositoryItemButtonEditKeywordPartial
+			// 
+			this.repositoryItemButtonEditKeywordPartial.AutoHeight = false;
+			this.repositoryItemButtonEditKeywordPartial.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::SalesLibraries.BatchTagger.Properties.Resources.ButtonApplyForAll, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "Apply for ALL Links and Edit", "MakeShared", null, true),
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, global::SalesLibraries.BatchTagger.Properties.Resources.ButtonDelete, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject3, "Delete", "Delete", null, true)});
+			this.repositoryItemButtonEditKeywordPartial.Name = "repositoryItemButtonEditKeywordPartial";
+			this.repositoryItemButtonEditKeywordPartial.NullText = "Type Keyword...";
+			this.repositoryItemButtonEditKeywordPartial.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+			this.repositoryItemButtonEditKeywordPartial.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.OnKeywordsEditorButtonClick);
 			// 
 			// panelMainContainer
 			// 
@@ -590,17 +619,42 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.panelMainContainer.BackColor = System.Drawing.Color.Transparent;
 			this.panelMainContainer.Controls.Add(this.xtraTabControl);
+			this.panelMainContainer.Controls.Add(this.panelFilesContainer);
 			this.panelMainContainer.ForeColor = System.Drawing.Color.Black;
 			this.panelMainContainer.Location = new System.Drawing.Point(1, 54);
 			this.panelMainContainer.Name = "panelMainContainer";
-			this.panelMainContainer.Size = new System.Drawing.Size(930, 458);
+			this.panelMainContainer.Size = new System.Drawing.Size(1130, 504);
 			this.panelMainContainer.TabIndex = 54;
+			// 
+			// panelFilesContainer
+			// 
+			this.panelFilesContainer.BackColor = System.Drawing.Color.Transparent;
+			this.panelFilesContainer.Controls.Add(this.linksTreeSelector);
+			this.panelFilesContainer.Dock = System.Windows.Forms.DockStyle.Left;
+			this.panelFilesContainer.ForeColor = System.Drawing.Color.Black;
+			this.panelFilesContainer.Location = new System.Drawing.Point(0, 0);
+			this.panelFilesContainer.Name = "panelFilesContainer";
+			this.panelFilesContainer.Padding = new System.Windows.Forms.Padding(0, 0, 4, 0);
+			this.panelFilesContainer.Size = new System.Drawing.Size(300, 504);
+			this.panelFilesContainer.TabIndex = 54;
+			// 
+			// linksTreeSelector
+			// 
+			this.linksTreeSelector.BackColor = System.Drawing.Color.Transparent;
+			this.linksTreeSelector.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.linksTreeSelector.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.linksTreeSelector.ForeColor = System.Drawing.Color.Black;
+			this.linksTreeSelector.Location = new System.Drawing.Point(0, 0);
+			this.linksTreeSelector.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+			this.linksTreeSelector.Name = "linksTreeSelector";
+			this.linksTreeSelector.Size = new System.Drawing.Size(296, 504);
+			this.linksTreeSelector.TabIndex = 0;
 			// 
 			// FormEditLinkTags
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
 			this.BackColor = System.Drawing.Color.White;
-			this.ClientSize = new System.Drawing.Size(934, 561);
+			this.ClientSize = new System.Drawing.Size(1134, 607);
 			this.Controls.Add(this.panelMainContainer);
 			this.Controls.Add(this.panelTopControls);
 			this.Controls.Add(this.labelControlTitle);
@@ -612,7 +666,7 @@
 			this.Name = "FormEditLinkTags";
 			this.ShowIcon = false;
 			this.ShowInTaskbar = false;
-			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+			this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
 			this.Text = "Search Engine Tags";
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormEditLinkSettings_FormClosing);
 			this.Click += new System.EventHandler(this.OnFormClick);
@@ -637,8 +691,10 @@
 			this.xtraTabPageKeywords.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.gridControlKeywords)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.gridViewKeywords)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditKeyword)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditKeywordShared)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditKeywordPartial)).EndInit();
 			this.panelMainContainer.ResumeLayout(false);
+			this.panelFilesContainer.ResumeLayout(false);
 			this.ResumeLayout(false);
 
         }
@@ -663,7 +719,8 @@
 		private DevExpress.XtraGrid.GridControl gridControlKeywords;
 		private DevExpress.XtraGrid.Views.Grid.GridView gridViewKeywords;
 		private DevExpress.XtraGrid.Columns.GridColumn gridColumnKeywordsValue;
-		private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repositoryItemButtonEditKeyword;
+		private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repositoryItemButtonEditKeywordShared;
+		private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repositoryItemButtonEditKeywordPartial;
 		private DevExpress.XtraEditors.SplitContainerControl splitContainerCategories;
 		private CommonGUI.CustomTreeList.EmptyImageTreeList treeListCategories;
 		private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumnName;
@@ -673,6 +730,8 @@
 		private DevExpress.XtraEditors.XtraScrollableControl xtraScrollableControlCategoriesInfo;
 		private DevExpress.Utils.ImageCollection imageCollectionCategories;
 		private System.Windows.Forms.Panel panelMainContainer;
+		private System.Windows.Forms.Panel panelFilesContainer;
+		private LinksTreeSelectorControl linksTreeSelector;
 		private System.Windows.Forms.Panel panelButtons;
 		private DevComponents.DotNetBar.ButtonX buttonXCategoriesCollapseAll;
 		private DevComponents.DotNetBar.ButtonX buttonXCategoriesExpandAll;

@@ -183,7 +183,6 @@
         <xsd:all>
           <xsd:element name="library" type="xsd:string" />
           <xsd:element name="libraryDate" type="xsd:string" />
-          <xsd:element name="libraryDatabaseUrl" type="xsd:string" />
           <xsd:element name="linkId" type="xsd:string" />
           <xsd:element name="linkName" type="xsd:string" />
           <xsd:element name="fileName" type="xsd:string" />

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraTab;
@@ -28,6 +29,8 @@ namespace SalesLibraries.BatchTagger.PresentationLayer
 
 		private void OnCustomDrawCell(object sender, RowCellCustomDrawEventArgs e)
 		{
+			var selectedRows = advBandedGridViewData.GetSelectedRows();
+			if (selectedRows.Contains(e.RowHandle)) return;
 			if (e.RowHandle % 2 == 0)
 				e.Appearance.BackColor = SystemColors.ControlLight;
 		}

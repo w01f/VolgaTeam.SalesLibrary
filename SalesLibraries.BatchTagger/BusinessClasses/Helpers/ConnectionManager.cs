@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Xml;
 using SalesLibraries.ServiceConnector.Services.Rest;
 using SalesLibraries.ServiceConnector.Services.Soap;
@@ -10,6 +11,8 @@ namespace SalesLibraries.BatchTagger.BusinessClasses.Helpers
 		public SoapServiceConnection SoapConnection { get; private set; }
 
 		public RestServiceConnection RestConnection { get; private set; }
+
+		public string WebDavSite { get; private set; }
 
 		public void Load()
 		{
@@ -24,6 +27,8 @@ namespace SalesLibraries.BatchTagger.BusinessClasses.Helpers
 
 				RestConnection = new RestServiceConnection();
 				RestConnection.Load(SoapConnection.Website, "FileManagerData");
+
+				WebDavSite = String.Format(@"{0}/remote.php/webdav", SoapConnection.Website.Replace("http://", "http://owncloud.").Replace("https://", "https://owncloud."));
 			}
 		}
 	}

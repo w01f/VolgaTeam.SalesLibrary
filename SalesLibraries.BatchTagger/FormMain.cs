@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
-using System.Windows.Forms;
 using DevComponents.DotNetBar.Metro;
 using DevExpress.XtraTab;
 using SalesLibraries.BatchTagger.PresentationLayer;
@@ -49,67 +47,28 @@ namespace SalesLibraries.BatchTagger
 
 		private void OnFormShown(object sender, EventArgs e)
 		{
-			using (var form = new FormProgress())
+			AppManager.Instance.ProcessManager.Run("Loading data...", (cancelationToken, formProgess) =>
 			{
-				form.laProgress.Text = "Loading data...";
-				form.TopMost = true;
+				AppManager.Instance.LoadData();
+			});
 
-				var thread = new Thread(() =>
-				{
-					AppManager.Instance.LoadData();
-				});
-				form.Show();
-				thread.Start();
-				while (thread.IsAlive)
-				{
-					Thread.Sleep(100);
-					Application.DoEvents();
-				}
+			Text = String.Format("{0} ({1})", Text, AppManager.Instance.Connections.SoapConnection.Website);
 
-				Text = String.Format("{0} ({1})", Text, AppManager.Instance.Connections.SoapConnection.Website);
-
-				RefreshData(false);
-
-				form.Close();
-			}
+			RefreshData();
 
 			AppManager.Instance.ActivateMainForm();
 		}
 
-		public void RefreshData(bool showMessages)
+		public void RefreshData()
 		{
 			ClearData();
 			var message = string.Empty;
-			if (showMessages)
+			AppManager.Instance.ProcessManager.Run("Loading data...", (cancelationToken, formProgess) =>
 			{
-				using (var form = new FormProgress())
-				{
-					form.laProgress.Text = "Loading data...";
-					form.TopMost = true;
-					var thread = new Thread(() => _records.AddRange(AppManager.Instance.Connections.SoapConnection.GetLibraryFiles(out message)));
-					form.Show();
-					thread.Start();
-					while (thread.IsAlive)
-					{
-						Thread.Sleep(100);
-						Application.DoEvents();
-					}
-					form.Close();
-				}
-				if (!string.IsNullOrEmpty(message))
-					AppManager.Instance.ShowWarning(message);
-			}
-			else
-			{
-				var thread = new Thread(() => _records.AddRange(AppManager.Instance.Connections.SoapConnection.GetLibraryFiles(out message)));
-				thread.Start();
-				while (thread.IsAlive)
-				{
-					Thread.Sleep(100);
-					Application.DoEvents();
-				}
-			}
-
+				_records.AddRange(AppManager.Instance.Connections.SoapConnection.GetLibraryFiles(out message));
+			});
+			if (!string.IsNullOrEmpty(message))
+				AppManager.Instance.ShowWarning(message);
 			var filterDataSource =
 				_records.OrderBy(g => g.library).Select(x => x.library).Where(x => !String.IsNullOrEmpty(x)).Distinct().ToArray();
 			_filterControlTotal.UpdateDataSource(filterDataSource);
@@ -158,7 +117,7 @@ namespace SalesLibraries.BatchTagger
 
 		private void buttonXLoadData_Click(object sender, EventArgs e)
 		{
-			RefreshData(true);
+			RefreshData();
 			AppManager.Instance.ActivateMainForm();
 		}
 

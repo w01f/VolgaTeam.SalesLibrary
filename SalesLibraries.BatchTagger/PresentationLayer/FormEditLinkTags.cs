@@ -6,9 +6,13 @@ using System.Windows.Forms;
 using DevComponents.DotNetBar.Metro;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid;
+using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraTreeList;
 using DevExpress.XtraTreeList.Nodes;
 using SalesLibraries.BatchTagger.Properties;
+using SalesLibraries.Business.Entities.Helpers;
+using SalesLibraries.Business.Entities.Interfaces;
+using SalesLibraries.Business.Entities.Wallbin.Common.Enums;
 using SalesLibraries.Business.Entities.Wallbin.Persistent.Links;
 using SalesLibraries.Common.Objects.SearchTags;
 
@@ -18,8 +22,9 @@ namespace SalesLibraries.BatchTagger.PresentationLayer
 	{
 		private const string HeaderTitleTemplate = "<size=+4>{0}</size>";
 
-		private readonly BaseLibraryLink _sourceLink;
 		private bool _allowHandleEvents;
+		private readonly ILinksGroup _linkGroup;
+		private readonly List<BaseLibraryLink> _selectedLinks = new List<BaseLibraryLink>();
 
 		public FormEditLinkTags()
 		{
@@ -42,17 +47,51 @@ namespace SalesLibraries.BatchTagger.PresentationLayer
 			}
 		}
 
-		public FormEditLinkTags(BaseLibraryLink sourceLink) : this()
+		public FormEditLinkTags(IList<BaseLibraryLink> sourceLinks) : this()
 		{
-			_sourceLink = sourceLink;
-			labelControlTitle.Text = String.Format(HeaderTitleTemplate, _sourceLink);
+			_selectedLinks.AddRange(sourceLinks);
+
+			if (_selectedLinks.Count > 1)
+			{
+				_linkGroup = sourceLinks.ToMultiLinkSet();
+				panelFilesContainer.Visible = true;
+				Width = 1150;
+			}
+			else
+			{
+				panelFilesContainer.Visible = false;
+				Width = 950;
+			}
 		}
 
-		public void LoadData()
+		public void InitForm()
 		{
-			_allowHandleEvents = false;
+			Height = 590;
+			StartPosition = FormStartPosition.CenterParent;
 
 			LoadTreeView();
+
+			if (_linkGroup != null)
+			{
+				linksTreeSelector.LinkSelected += (o, e) =>
+				{
+					if (_allowHandleEvents)
+						SaveData();
+
+					_selectedLinks.Clear();
+					_selectedLinks.AddRange(linksTreeSelector.SelectedLinks);
+
+					LoadData();
+				};
+				linksTreeSelector.LoadData(_linkGroup, new[] { FileTypes.LineBreak });
+			}
+			else
+				LoadData();
+		}
+
+		private void LoadData()
+		{
+			_allowHandleEvents = false;
 
 			UpdateCategoriesDataSource();
 			UpdateKeywordsDataSource();
@@ -67,7 +106,6 @@ namespace SalesLibraries.BatchTagger.PresentationLayer
 		{
 			SaveCategoriesDataSource();
 			SaveKeywordsDataSource();
-			_sourceLink.MarkAsModified();
 		}
 
 		private void UpdateTitle()
@@ -75,6 +113,10 @@ namespace SalesLibraries.BatchTagger.PresentationLayer
 			labelControlTitle.Appearance.Image = xtraTabControl.SelectedTabPage == xtraTabPageCategories
 				? Resources.LinkSettingsTagsLogoCategories
 				: Resources.LinkSettingsTagsLogoKeywords;
+			labelControlTitle.Text = String.Format(HeaderTitleTemplate,
+				_selectedLinks.Count > 1 ?
+					linksTreeSelector.SelectedGroup?.Title :
+					_selectedLinks.FirstOrDefault()?.ToString());
 		}
 
 		private void UpdateControlPanels()
@@ -108,17 +150,32 @@ namespace SalesLibraries.BatchTagger.PresentationLayer
 		private void UpdateCategoriesDataSource()
 		{
 			_searchGroups.ForEach(searchGroup => searchGroup.ListBox.UnCheckAll());
-			foreach (var searchGroup in _searchGroups)
+
+			var commonCategories = _selectedLinks.GetCommonCategories();
+			foreach (var link in _selectedLinks)
 			{
-				var linkCategortGroup = _sourceLink.Tags.Categories.FirstOrDefault(sg => sg.Equals(searchGroup.DataSource));
-				if (linkCategortGroup != null)
-					foreach (var item in searchGroup.ListBox.Items
-						.Where(item => linkCategortGroup.Tags
-							.Any(t => t.Equals((SearchTag)item.Value))))
-					{
-						item.CheckState = CheckState.Checked;
-						searchGroup.ListBox.BringToFront();
-					}
+				foreach (var searchGroup in _searchGroups)
+				{
+					var linkGroup = link.Tags.Categories.FirstOrDefault(sg => sg.Equals(searchGroup.DataSource));
+					if (linkGroup != null)
+						foreach (var item in searchGroup.ListBox.Items
+							.Where(item => linkGroup.Tags
+								.Any(t => t.Equals((SearchTag)item.Value))))
+						{
+							item.CheckState = CheckState.Indeterminate;
+							searchGroup.ListBox.BringToFront();
+						}
+
+					var commonGroup = commonCategories.FirstOrDefault(sg => sg.Equals(searchGroup.DataSource));
+					if (commonGroup != null)
+						foreach (var item in searchGroup.ListBox.Items
+							.Where(item => commonGroup.Tags
+								.Any(t => t.Equals((SearchTag)item.Value))))
+						{
+							item.CheckState = CheckState.Checked;
+							searchGroup.ListBox.BringToFront();
+						}
+				}
 			}
 
 			UpdateSuperGroupNodes();
@@ -127,7 +184,7 @@ namespace SalesLibraries.BatchTagger.PresentationLayer
 
 		private void SaveCategoriesDataSource()
 		{
-			var selectedCategories = _searchGroups
+			var commonCategories = _searchGroups
 				.Select(sg =>
 				{
 					var searchGroup = new SearchGroup
@@ -147,8 +204,27 @@ namespace SalesLibraries.BatchTagger.PresentationLayer
 				})
 				.Where(searchGroup => searchGroup.Tags.Any())
 				.ToArray();
-			_sourceLink.Tags.Categories.Clear();
-			_sourceLink.Tags.Categories.AddRange(selectedCategories.Select(searchGroup => searchGroup.Clone()));
+			var partialCategories = _searchGroups
+				.Select(sg =>
+				{
+					var searchGroup = new SearchGroup
+					{
+						Name = sg.DataSource.Name,
+						SuperGroup = sg.DataSource.SuperGroup
+					};
+					searchGroup.Tags.AddRange(sg.ListBox.Items
+						.Where(item => item.CheckState == CheckState.Indeterminate)
+						.Select(item =>
+						{
+							var sourceTag = (SearchTag)item.Value;
+							var searchTag = new SearchTag { Name = sourceTag.Name };
+							return searchTag;
+						}));
+					return searchGroup;
+				})
+				.Where(searchGroup => searchGroup.Tags.Any())
+				.ToArray();
+			_selectedLinks.ApplyCategories(commonCategories, partialCategories);
 		}
 
 		private void LoadTreeView()
@@ -325,9 +401,18 @@ namespace SalesLibraries.BatchTagger.PresentationLayer
 		private void UpdateKeywordsDataSource()
 		{
 			_keywords.Clear();
-			_keywords.AddRange(_sourceLink.Tags.Keywords.Select(k => new KeywordModel { Name = k.Name }));
+
+			var commonKeywords = _selectedLinks.GetCommonKeywords().ToList();
+			_keywords.AddRange(commonKeywords.Select(k => new KeywordModel { Name = k.Name, IsShared = true }));
+			foreach (var link in _selectedLinks)
+			{
+				_keywords.AddRange(link.Tags.Keywords
+					.Where(k => !commonKeywords.Any(commonKeyword => commonKeyword.Equals(k)))
+						.Select(k => new KeywordModel { Name = k.Name, IsShared = false }));
+			}
 			gridControlKeywords.DataSource = _keywords;
 			gridViewKeywords.RefreshData();
+
 			UpdateKeywordsInfo();
 		}
 
@@ -335,8 +420,7 @@ namespace SalesLibraries.BatchTagger.PresentationLayer
 		{
 			gridViewKeywords.CloseEditor();
 			_keywords.RemoveAll(tag => String.IsNullOrEmpty(tag.Name));
-			_sourceLink.Tags.Keywords.Clear();
-			_sourceLink.Tags.Keywords.AddRange(_keywords.Select(tag => new SearchTag { Name = tag.Name }));
+			_selectedLinks.ApplyKeywords(_keywords.ToArray());
 		}
 
 		private void UpdateKeywordsInfo()
@@ -357,6 +441,9 @@ namespace SalesLibraries.BatchTagger.PresentationLayer
 						DialogResult.Yes)
 						_keywords.Remove(keyword);
 					break;
+				case "MakeShared":
+					keyword.IsShared = true;
+					break;
 			}
 			gridViewKeywords.RefreshData();
 			UpdateKeywordsInfo();
@@ -371,6 +458,22 @@ namespace SalesLibraries.BatchTagger.PresentationLayer
 			gridViewKeywords.FocusedRowHandle = gridViewKeywords.RowCount - 1;
 			gridViewKeywords.MakeRowVisible(gridViewKeywords.FocusedRowHandle, true);
 			UpdateKeywordsInfo();
+		}
+
+		private void OnKeywordsGridCustomRowCellEdit(object sender, CustomRowCellEditEventArgs e)
+		{
+			var keyword = (KeywordModel)gridViewKeywords.GetRow(e.RowHandle);
+			e.RepositoryItem = keyword.IsShared ?
+				repositoryItemButtonEditKeywordShared :
+				repositoryItemButtonEditKeywordPartial;
+		}
+
+		private void OnKeywordsGridRowCellStyle(object sender, RowCellStyleEventArgs e)
+		{
+			var keyword = (KeywordModel)gridViewKeywords.GetRow(e.RowHandle);
+			e.Appearance.ForeColor = keyword.IsShared ?
+				Color.Black :
+				Color.Gray;
 		}
 
 		private void OnWipeKeywordsClick(object sender, OpenLinkEventArgs e)

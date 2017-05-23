@@ -125,6 +125,7 @@
 			this.advBandedGridViewData.OptionsPrint.PrintPreview = true;
 			this.advBandedGridViewData.OptionsSelection.EnableAppearanceFocusedCell = false;
 			this.advBandedGridViewData.OptionsSelection.EnableAppearanceHideSelection = false;
+			this.advBandedGridViewData.OptionsSelection.MultiSelect = true;
 			this.advBandedGridViewData.OptionsView.AutoCalcPreviewLineCount = true;
 			this.advBandedGridViewData.OptionsView.ColumnAutoWidth = true;
 			this.advBandedGridViewData.OptionsView.ShowBands = false;

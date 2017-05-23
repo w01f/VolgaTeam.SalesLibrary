@@ -6,6 +6,7 @@ using SalesLibraries.BatchTagger.BusinessClasses.Dictionaries;
 using SalesLibraries.BatchTagger.BusinessClasses.Helpers;
 using SalesLibraries.BatchTagger.Configuration;
 using SalesLibraries.Common.Helpers;
+using SalesLibraries.CommonGUI.BackgroundProcesses;
 
 namespace SalesLibraries.BatchTagger
 {
@@ -14,6 +15,8 @@ namespace SalesLibraries.BatchTagger
 		public ResourceManager Resources { get; private set; }
 		public ConnectionManager Connections { get;  }
 		public SearchTagList SearchTagList { get; }
+		public LibraryCredentialsList LibraryCredentials { get; }
+		public BackgroundProcessManager ProcessManager { get; }
 		public FormMain MainForm { get; private set; }
 
 		public static AppManager Instance { get; } = new AppManager();
@@ -23,6 +26,8 @@ namespace SalesLibraries.BatchTagger
 			Resources = new ResourceManager();
 			Connections = new ConnectionManager();
 			SearchTagList = new SearchTagList();
+			LibraryCredentials = new LibraryCredentialsList();
+			ProcessManager = new BackgroundProcessManager(() => MainForm); ;
 		}
 
 		public void RunForm()
@@ -35,6 +40,7 @@ namespace SalesLibraries.BatchTagger
 		{
 			Connections.Load();
 			SearchTagList.Load();
+			LibraryCredentials.Load();
 		}
 
 		public void ActivateForm(IntPtr handle, bool maximized, bool topMost)
