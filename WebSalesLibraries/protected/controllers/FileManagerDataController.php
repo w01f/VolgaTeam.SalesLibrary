@@ -70,20 +70,16 @@
 			{
 				case 'batchtagger':
 					/** @var $requestData BatchTaggerSetRequestData */
+					foreach ($requestData->linkInfo as $linkInfo)
+					{
+						$linkRecord = LinkRecord::getLinkById($linkInfo->linkId);
+						$linkRecord->tags = $linkInfo->keywords;
+						$linkRecord->save();
 
-					$linkRecord = LinkRecord::getLinkById($requestData->linkId);
-					$linkRecord->tags = $requestData->keywords;
-					$linkRecord->save();
-
-					LinkCategoryRecord::model()->deleteAll('id_link=?', array($linkRecord->id));
-					foreach ($requestData->categories as $category)
-						LinkCategoryRecord::updateData($category);
-
-					$libraryManager = new LibraryManager();
-					$library = $libraryManager->getLibraryById($requestData->libraryId);
-					$libraryPath = $library->storagePath;
-					file_put_contents($libraryPath . DIRECTORY_SEPARATOR . 'z_library_data_local.sqlite', base64_decode($requestData->encodedDatabase));
-
+						LinkCategoryRecord::model()->deleteAll('id_link=?', array($linkRecord->id));
+						foreach ($linkInfo->categories as $category)
+							LinkCategoryRecord::updateData($category);
+					}
 					$response = RestResponse::success(null);
 					break;
 				default:

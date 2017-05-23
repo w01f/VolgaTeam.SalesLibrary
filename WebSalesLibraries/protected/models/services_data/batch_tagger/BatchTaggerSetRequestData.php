@@ -1,4 +1,5 @@
 <?
+
 	namespace application\models\services_data\batch_tagger;
 
 	/**
@@ -6,9 +7,6 @@
 	 */
 	class BatchTaggerSetRequestData
 	{
-		public $libraryId;
-		public $linkId;
-		public $categories;
-		public $keywords;
-		public $encodedDatabase;
+		/** @var  LinkTagsInfo[] */
+		public $linkInfo;
 	}

@@ -16,11 +16,6 @@
 		 */
 		public $libraryDate;
 		/**
-		 * @var string libraryDatabaseUrl
-		 * @soap
-		 */
-		public $libraryDatabaseUrl;
-		/**
 		 * @var string linkName
 		 * @soap
 		 */
