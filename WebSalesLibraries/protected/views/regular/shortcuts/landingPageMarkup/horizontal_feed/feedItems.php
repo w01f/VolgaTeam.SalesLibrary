@@ -40,7 +40,7 @@
 	}
 	else if($viewSettings->linksScrollMode === FeedSettings::LinksScrollModeFade)
 	{
-		$carouseOneMoveClass .= ' carousel-slide carousel-fade';
+		$carouseOneMoveClass .= ' carousel-fade';
 		switch ($viewSettings->linksPerSlide)
 		{
 			case FeedSettings::LinksPerSlide1:

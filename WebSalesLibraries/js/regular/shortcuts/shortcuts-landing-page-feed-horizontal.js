@@ -90,7 +90,6 @@
 			})
 		};
 
-		var time;
 		var initCarouselControls = function ()
 		{
 			var leftButton = feedContainer.find('.portfolio_utube_carousel_control_left');
@@ -100,40 +99,14 @@
 			leftButton.on('click', function ()
 			{
 				$(this).blur();
-
-				var carouselFade = feedContainer.find('.carousel-fade');
-				if (carouselFade.length > 0 && rightButton.length > 0)
-				{
-					carouselFade.removeClass('carousel-fade');
-					feedContainer.find('.carousel').carousel('prev');
-					clearTimeout(time);
-					time = setTimeout(function ()
-					{
-						carouselFade.addClass('carousel-fade');
-					}, 1000);
-				}
-				else
-					feedContainer.find('.carousel').carousel('prev');
+				feedContainer.find('.carousel').carousel('prev');
 			});
 
 			rightButton.prop('href', '#');
 			rightButton.off('click').on('click', function ()
 			{
 				$(this).blur();
-
-				var carouselFade = feedContainer.find('.carousel-fade');
-				if (carouselFade.length > 0 && leftButton.length > 0)
-				{
-					carouselFade.removeClass('carousel-fade');
-					feedContainer.find('.carousel').carousel('next');
-					clearTimeout(time);
-					time = setTimeout(function ()
-					{
-						carouselFade.addClass('carousel-fade');
-					}, 1000);
-				}
-				else
-					feedContainer.find('.carousel').carousel('next');
+				feedContainer.find('.carousel').carousel('next');
 			});
 		};
 
@@ -194,13 +167,9 @@
 				event.preventDefault();
 
 				if (event.originalEvent.wheelDelta > 0 || event.originalEvent.detail < 0)
-				{
 					feedContainer.find('.carousel').carousel('prev');
-				}
 				else
-				{
 					feedContainer.find('.carousel').carousel('next');
-				}
 			});
 
 			$.SalesPortal.ShortcutsManager.assignShortcutItemHandlers(feedContainer);

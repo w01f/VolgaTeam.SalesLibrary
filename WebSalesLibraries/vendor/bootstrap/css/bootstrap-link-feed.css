@@ -353,19 +353,19 @@
 }
 
 @media all and (min-width: 768px) {
-    .six_shows_one_move.carousel-slide .carousel-inner .cloneditem-1 {
+    .six_shows_one_move.carousel-fade .carousel-inner .cloneditem-1 {
         display: block;
     }
 }
 @media all and (min-width: 992px) {
-    .six_shows_one_move.carousel-slide .carousel-inner .cloneditem-2,
-    .six_shows_one_move.carousel-slide .carousel-inner .cloneditem-3 {
+    .six_shows_one_move.carousel-fade .carousel-inner .cloneditem-2,
+    .six_shows_one_move.carousel-fade .carousel-inner .cloneditem-3 {
         display: block;
     }
 }
 @media all and (min-width: 1200px) {
-    .six_shows_one_move.carousel-slide .carousel-inner .cloneditem-4,
-    .six_shows_one_move.carousel-slide .carousel-inner .cloneditem-5 {
+    .six_shows_one_move.carousel-fade .carousel-inner .cloneditem-4,
+    .six_shows_one_move.carousel-fade .carousel-inner .cloneditem-5 {
         display: block;
     }
 }
@@ -459,17 +459,17 @@
 }
 
 @media all and (min-width: 768px) {
-    .four_shows_one_move.carousel-slide .carousel-inner .cloneditem-1  {
+    .four_shows_one_move.carousel-fade .carousel-inner .cloneditem-1  {
         display: block;
     }
 }
 @media all and (min-width: 992px) {
-    .four_shows_one_move.carousel-slide .carousel-inner .cloneditem-2 {
+    .four_shows_one_move.carousel-fade .carousel-inner .cloneditem-2 {
         display: block;
     }
 }
 @media all and (min-width: 1200px) {
-    .four_shows_one_move.carousel-slide .carousel-inner .cloneditem-3 {
+    .four_shows_one_move.carousel-fade .carousel-inner .cloneditem-3 {
         display: block;
     }
 }
@@ -562,12 +562,12 @@
 }
 
 @media all and (min-width: 768px) {
-    .three_shows_one_move.carousel-slide .carousel-inner .cloneditem-1  {
+    .three_shows_one_move.carousel-fade .carousel-inner .cloneditem-1  {
         display: block;
     }
 }
 @media all and (min-width: 992px) {
-    .three_shows_one_move.carousel-slide .carousel-inner .cloneditem-2 {
+    .three_shows_one_move.carousel-fade .carousel-inner .cloneditem-2 {
         display: block;
     }
 }
@@ -658,12 +658,12 @@
 }
 
 @media all and (min-width: 768px) {
-    .three_shows_one_move.carousel-slide .carousel-inner .cloneditem-1  {
+    .three_shows_one_move.carousel-fade .carousel-inner .cloneditem-1  {
         display: block;
     }
 }
 @media all and (min-width: 992px) {
-    .three_shows_one_move.carousel-slide .carousel-inner .cloneditem-2 {
+    .three_shows_one_move.carousel-fade .carousel-inner .cloneditem-2 {
         display: block;
     }
 }
